@@ -1,4 +1,4 @@
-/* $Id: kunit.kmt,v 1.43 2008-08-01 18:42:47 cfaucher Exp $
+/* $Id: kunit.kmt,v 1.44 2008-08-21 15:48:24 cfaucher Exp $
  * Creation date: February 19, 2007
  * License: EPL
  * Copyright:
@@ -14,7 +14,7 @@
  *
  * <img src="platform:/plugin/fr.irisa.triskell.kermeta.documentation/src/figures/kunit_package.png"/>
  */
-@uri "http://www.kermeta.org/kermeta/kunit"
+@uri "http://www.kermeta.org/kermeta/1_2_0//kermeta/kunit"
 package kermeta::kunit;
 
 require "../Standard.kmt"

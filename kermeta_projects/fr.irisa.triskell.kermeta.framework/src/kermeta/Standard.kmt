@@ -1,9 +1,9 @@
-/* $Id: Standard.kmt,v 1.19 2008-03-03 13:39:58 dvojtise Exp $ */
+/* $Id: Standard.kmt,v 1.20 2008-08-21 15:48:24 cfaucher Exp $ */
 /**
  * The root package. See the other packages if you want to browse the classes of Kermeta api.
  * <img src="platform:/plugin/fr.irisa.triskell.kermeta.documentation/src/figures/kermeta_packages.png"/>
  */
-@uri "http://www.kermeta.org/kermeta"
+@uri "http://www.kermeta.org/kermeta/1_2_0//kermeta"
 package kermeta;
 
 /*

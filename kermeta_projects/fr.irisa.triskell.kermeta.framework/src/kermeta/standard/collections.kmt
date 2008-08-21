@@ -1,5 +1,5 @@
 /* *************************************************
- * $Id: collections.kmt,v 1.57 2008-08-07 13:41:08 cfaucher Exp $
+ * $Id: collections.kmt,v 1.58 2008-08-21 15:48:23 cfaucher Exp $
  * Franck FLEUREY - 14/02/2005 
  * Triskell Research Group
  * IRISA / University of Rennes 1 (France)
@@ -12,7 +12,7 @@
  * Defines Collection types 
  * <img src="./figures/collections_view.png"/>
  */
- @uri "http://www.kermeta.org/kermeta/standard"
+ @uri "http://www.kermeta.org/kermeta/1_2_0//kermeta/standard"
 package kermeta::standard;
 
 require "value_types.kmt"
@@ -27,7 +27,7 @@ alias Object : kermeta::language::structure::Object;
 /**
  * Collection is the root abstract class for all kermeta collections
  */
- @EMF_needProperty "name=values isUnique=false isOrdered=false javaClass=java.util.ArrayList"
+ @EMF_needProperty "name=values isUnique=false isOrdered=false javaClass=org.eclipse.emf.common.util.EList"
 abstract class Collection<G> 
 {
 	/**
@@ -1045,8 +1045,8 @@ class OrderedSet<G> inherits Set<G>, OrderedCollection<G>
 			/* initial code: */
 			super(index, element)
 			
-			/* replaced by: */
-			/*if index < 0 or index > size then
+			/* replaced by: 
+			if index < 0 or index > size then
 				raise IndexOutOfBound.new
 			end
 			@compiledJavaExtern "org.kermeta.compil.runtime.helper.basetypes.OrderedCollectionUtil.addAt(this, index, element)"

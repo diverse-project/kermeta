@@ -1,4 +1,4 @@
-/* $Id: structure.kmt,v 1.67 2008-08-18 13:24:37 cfaucher Exp $
+/* $Id: structure.kmt,v 1.68 2008-08-21 15:48:23 cfaucher Exp $
  * Project : framework
  * File : structure.kmt
  * License : EPL
@@ -19,7 +19,7 @@
  * <img src="platform:/plugin/fr.irisa.triskell.kermeta.documentation/src/figures/language_structure_package.png"/>
  * <img src="platform:/plugin/fr.irisa.triskell.kermeta.documentation/src/figures/language_structure_visitor_view.png"/>
  */
-@uri "http://www.kermeta.org/kermeta/language/structure"
+@uri "http://www.kermeta.org/kermeta/1_2_0//kermeta/language/structure"
 package kermeta::language::structure; 
 
 
@@ -555,11 +555,23 @@ aspect class NamedElement
 	operation qualifiedName() : String is do
 		var elem : NamedElement init self
 		result := self.name
-		from elem ?= elem.container
-		until elem == void 
-		loop
-			result := elem.name + "::" + result
-			elem ?= elem.container
+		
+		//We must check if the container is a NamedElement, because the root is a ModelingUnit that is not a NamedElement
+		if elem.container.isInstanceOf(NamedElement) then
+		
+			from elem ?= elem.container
+			until elem == void 
+			loop
+				result := elem.name + "::" + result
+				
+				if elem.container.isInstanceOf(NamedElement) then
+					elem ?= elem.container
+				else
+					elem := void
+				end
+				
+			end
+			
 		end
 	end	
 }

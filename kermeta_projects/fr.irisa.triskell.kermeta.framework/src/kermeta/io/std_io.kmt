@@ -1,7 +1,7 @@
 /**
  * Contains standard input/output related classes. 
  */
-@uri "http://www.kermeta.org/kermeta/io"
+@uri "http://www.kermeta.org/kermeta/1_2_0//kermeta/io"
 package kermeta::io;
 
 require "../Standard.kmt"

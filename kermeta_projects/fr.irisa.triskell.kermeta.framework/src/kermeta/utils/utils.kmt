@@ -1,5 +1,5 @@
 
- @uri "http://www.kermeta.org/kermeta/utils"
+ @uri "http://www.kermeta.org/kermeta/1_2_0//kermeta/utils"
 package kermeta::utils;
 
 require "./StringBuffer.kmt"

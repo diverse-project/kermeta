@@ -3,7 +3,7 @@
  * expression written as a string.
  * <img src="platform:/plugin/fr.irisa.triskell.kermeta.documentation/src/figures/interpreter_package.png"/>
  */
-   @uri "http://www.kermeta.org/kermeta/interpreter"
+   @uri "http://www.kermeta.org/kermeta/1_2_0//kermeta/interpreter"
 package kermeta::interpreter;
 
 require "../Standard.kmt"

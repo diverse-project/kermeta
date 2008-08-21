@@ -2,7 +2,7 @@
  * Contains file input/output related classes. 
  * <img src="platform:/plugin/fr.irisa.triskell.kermeta.documentation/src/figures/io_package.png"/>
  */
-@uri "http://www.kermeta.org/kermeta/io"
+@uri "http://www.kermeta.org/kermeta/1_2_0//kermeta/io"
 package kermeta::io;
 
 require "../Standard.kmt"

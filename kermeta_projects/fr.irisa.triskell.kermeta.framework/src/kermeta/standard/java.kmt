@@ -1,10 +1,10 @@
-// $Id: java.kmt,v 1.9 2008-06-05 13:02:16 cfaucher Exp $
+// $Id: java.kmt,v 1.10 2008-08-21 15:48:23 cfaucher Exp $
  
 /**
  * Contains types dedicated to dealing with java objects
  * <img src="platform:/plugin/fr.irisa.triskell.kermeta.documentation/src/figures/java_package.png"/>
  */
- @uri "http://www.kermeta.org/kermeta/standard"
+ @uri "http://www.kermeta.org/kermeta/1_2_0//kermeta/standard"
  package kermeta::standard;
 
 require "value_types.kmt"
