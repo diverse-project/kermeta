@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ClassImpl.java,v 1.1 2008-08-19 07:04:45 edaubert Exp $
+ * $Id: ClassImpl.java,v 1.2 2008-08-21 14:47:59 edaubert Exp $
  */
 package option.impl;
 
@@ -48,10 +48,7 @@ public class ClassImpl extends EObjectImpl implements option.Class {
 	 * @generated
 	 * @ordered
 	 */
-	protected static final boolean RESOLVED_EDEFAULT = false; // TODO The
-																// default value
-																// literal "" is
-																// not valid.
+	protected static final boolean RESOLVED_EDEFAULT = false;
 
 	/**
 	 * The cached value of the '{@link #isResolved() <em>Resolved</em>}' attribute.

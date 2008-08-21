@@ -121,6 +121,8 @@ public class Translation implements Analysis {
 
 	private Map<option.Class, ExportPackage> unresolvedExportPackageInclude;
 
+	private Map<ExportPackage, Bundle> unresolvedExportPackageBundle;
+
 	private Map<option.Package, Bundle> unresolvedActivationPolicyExclude;
 
 	private Map<option.Package, Bundle> unresolvedActivationPolicyInclude;
@@ -170,6 +172,8 @@ public class Translation implements Analysis {
 		this.unresolvedExportPackageExclude = new Hashtable<option.Class, ExportPackage>();
 
 		this.unresolvedExportPackageInclude = new Hashtable<option.Class, ExportPackage>();
+
+		this.unresolvedExportPackageBundle = new Hashtable<ExportPackage, Bundle>();
 
 		this.unresolvedActivationPolicyExclude = new Hashtable<option.Package, Bundle>();
 
@@ -2905,6 +2909,8 @@ public class Translation implements Analysis {
 		option.Class _class = OptionFactory.eINSTANCE.createClass();
 		_class.setReference(value);
 		_class.setResolved(false);
+		this.unresolvedExportPackageBundle.put((ExportPackage) this.entry,
+				this.bundle);
 		if (this.excludeIncludeOrUse == this.exclude) {
 			if (directive == null) {
 				directive = OptionFactory.eINSTANCE.createExcludeClasses();
@@ -2969,50 +2975,6 @@ public class Translation implements Analysis {
 		((BundleClassPath) this.entry).addClassPath(classPath);
 		classPath.setResolved(false);
 		this.unresolvedBundleClassPath.put(classPath, this.bundle);
-		/*
-		 * if (!((StringBuffer) this.firstValue).toString().equals(".")) {
-		 * SystemEntry systemEntry = this.bundle.getFolder().getEntry(
-		 * ((StringBuffer) this.firstValue).toString()); if (systemEntry !=
-		 * null) { if (systemEntry instanceof Folder) { Package _package =
-		 * OSGiIntrospectorUtil .convertToJavaElement((Folder) systemEntry,
-		 * false); if (_package != null) {
-		 * this.bundle.getPackage().addPackage(_package); } else { // TODO c'est
-		 * seulement un dossier contenant des // ressources }
-		 * classPath.setEntry((Folder) systemEntry);
-		 * classPath.setResolved(true); } else if (systemEntry instanceof File) {
-		 * if (systemEntry.getName().endsWith(".jar")) { try {
-		 * OSGiIntrospectorUtil.addEntriesFromJar(this.bundle, (File)
-		 * systemEntry, this.bundle); classPath.setEntry((File) systemEntry);
-		 * classPath.setResolved(true); } catch (IOException e) {
-		 * util.log(Level.WARN, "Unvalid " + Constants.BUNDLE_CLASSPATH + "
-		 * entry :" + "\n" + "IOException with " + systemEntry.getFullPath() +
-		 * ".", bundle); classPath.setResolved(false);
-		 *  } } else { util.log(Level.WARN, "Unvalid " +
-		 * Constants.BUNDLE_CLASSPATH + " entry :" + "\n" +
-		 * systemEntry.getFullPath() + " is a file but is not a JAR file.",
-		 * bundle); classPath.setResolved(false);
-		 *  } } else { util.log(Level.WARN, "Unvalid " +
-		 * Constants.BUNDLE_CLASSPATH + " entry :" + "\n" + this.firstValue + "
-		 * must be a JAR file or a folder.", bundle);
-		 * classPath.setResolved(false); } } else {
-		 * this.unresolvedBundleClassPath.put(classPath, this.bundle); } } else
-		 * if (((StringBuffer) this.firstValue).toString().equals(".")) { for
-		 * (SystemEntry entry : this.bundle.getFolder().getEntries()) { if
-		 * (entry instanceof Folder) { Package _package = OSGiIntrospectorUtil
-		 * .convertToJavaElement((Folder) entry, false); if (_package != null) {
-		 * this.bundle.getPackage().addPackage(_package); } } else if
-		 * (entry.getName().endsWith(".class")) { Class clazz =
-		 * jarFactory.createClass(); clazz.setName(entry.getName().substring(0,
-		 * entry.getName().indexOf(".class"))); clazz
-		 * .setFullPath(entry.getFullPath().replace(".class", ""));
-		 * this.bundle.getPackage().addClass(clazz); } }
-		 * classPath.setEntry(this.bundle.getFolder());
-		 * classPath.setResolved(true); } else { util.log(Level.WARN, "Unvalid " +
-		 * Constants.BUNDLE_CLASSPATH + " entry :" + "\n" + this.firstValue + "
-		 * is unresolved. (must not appears).", bundle);
-		 * classPath.setResolved(false);
-		 * this.unresolvedBundleClassPath.put(classPath, this.bundle); }
-		 */
 	}
 
 	private void setTargetToNativeCode(PTarget target) {
@@ -3023,17 +2985,6 @@ public class Translation implements Analysis {
 		((BundleNativeCode) this.entry).addNativeCode(nativeCode);
 		nativeCode.setResolved(false);
 		this.unresolvedBundleNativeCode.put(nativeCode, this.bundle);
-		/*
-		 * SystemEntry systemEntry = this.bundle.getFolder().getEntry(
-		 * ((StringBuffer) this.firstValue).toString()); if (systemEntry != null &&
-		 * systemEntry instanceof File) { nativeCode.setFile((File)
-		 * systemEntry); nativeCode.setResolved(true); } else if (systemEntry ==
-		 * null) { this.unresolvedBundleNativeCode.put(nativeCode, this.bundle); }
-		 * else { util.log(Level.WARN, "The " + Constants.BUNDLE_NATIVECODE + "
-		 * value must be a file." + "\n" + systemEntry + " is not a file.",
-		 * bundle);
-		 *  }
-		 */
 	}
 
 	public Map<BundleActivator, Bundle> getUnresolvedActivator() {
@@ -3058,6 +3009,10 @@ public class Translation implements Analysis {
 
 	public Map<option.Class, ExportPackage> getUnresolvedExportPackageExclude() {
 		return unresolvedExportPackageExclude;
+	}
+
+	public Map<ExportPackage, Bundle> getUnresolvedExportPackageBundles() {
+		return unresolvedExportPackageBundle;
 	}
 
 	public Map<option.Class, ExportPackage> getUnresolvedExportPackageInclude() {

@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: PackageImpl.java,v 1.10 2008-08-19 07:04:46 edaubert Exp $
+ * $Id: PackageImpl.java,v 1.11 2008-08-21 14:47:59 edaubert Exp $
  */
 package jar.impl;
 
@@ -265,28 +265,6 @@ public class PackageImpl extends BundleEntryImpl implements jar.Package {
 		return null;
 	}
 
-	/*
-	 * public BundleEntry getSubElement(String fullPath) {
-	 * 
-	 * if (fullPath.contains(this.getFullPath())) { String[] packagesElement =
-	 * fullPath.split("\\."); String[] packages =
-	 * this.getFullPath().split("\\."); int nextPackage = packages.length; if
-	 * (nextPackage == packagesElement.length - 1) { for (Iterator<Class>
-	 * classesIterator = getClasses().iterator(); classesIterator .hasNext();) {
-	 * Class tmp = classesIterator.next(); if
-	 * (tmp.getFullPath().equals(fullPath)) { return tmp; } } for (Iterator<Package>
-	 * packagesIterator = getSubPackages() .iterator();
-	 * packagesIterator.hasNext();) { Package tmp = packagesIterator.next(); if
-	 * (tmp.getFullPath().equals(fullPath)) { return tmp; } } } else { String
-	 * _packageName = packagesElement[nextPackage]; Iterator<Package>
-	 * packagesIterator = getSubPackages() .iterator(); while
-	 * (packagesIterator.hasNext()) { Package p = packagesIterator.next(); if
-	 * (p.getFullPath().equals( getFullPath() + "." + _packageName)) { return
-	 * p.getSubElement(fullPath); } } } }
-	 * 
-	 * return null; }
-	 */
-
 	public boolean addPackage(Package _package) {
 		if (_package.getFullPath() == null || _package.getName() == null) {
 			return false;
@@ -368,6 +346,9 @@ public class PackageImpl extends BundleEntryImpl implements jar.Package {
 		if (fullPath.equals(".")) {
 			return this;
 		}
+		if (this.getFullPath().equals(fullPath)) {
+			return this;
+		}
 		if (fullPath.contains(this.getFullPath())) {
 			String[] packagesClazz = fullPath.split("\\.");
 			String[] packages = this.getFullPath().split("\\.");
@@ -428,8 +409,7 @@ public class PackageImpl extends BundleEntryImpl implements jar.Package {
 	private List<Class> getClassOnlyWithRegex(String regex, boolean recursive) {
 		List<Class> classes = new ArrayList<Class>();
 		if (recursive) {
-		// TODO When recursive is true
-		// It's not used for the moment.
+		// TODO When recursive is true. It's not used for the moment.
 		} else {
 			String[] tmpString = regex.split("\\*"); 
 			for (Class clazz : getClasses()) {

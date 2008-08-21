@@ -33,6 +33,7 @@ import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 
 import fr.irisa.triskell.osgi.introspector.OSGiIntrospectorDynamic;
 import fr.irisa.triskell.osgi.introspector.OSGiIntrospectorStatic;
+import fr.irisa.triskell.osgi.introspector.generator.resolver.Resolver;
 import framework.Bundle;
 import framework.Framework;
 
@@ -47,10 +48,13 @@ import framework.Framework;
  */
 public abstract class OSGiIntrospectorUtil {
 
+	public abstract Resolver getResolver(boolean withSystemRepresentation);
+
 	public Package convertToJavaElement(Folder folder, boolean bundleClassPath) {
 		Package _package = null;
 		for (SystemEntry entry : folder.getEntries()) {
-			if (entry.isBundleClassPath() == bundleClassPath) {
+			if ((entry.isBundleClassPath() && bundleClassPath)
+					|| (!bundleClassPath)) {
 				if (entry instanceof Folder) {
 					Package tmp = convertToJavaElement((Folder) entry,
 							bundleClassPath);
@@ -168,13 +172,12 @@ public abstract class OSGiIntrospectorUtil {
 		}
 	}
 
-
 	public void updateClassPath(Folder folder, Bundle bundle) {
 		for (SystemEntry entry : folder.getEntries()) {
 			if (entry.isBundleClassPath()) {
 				if (entry instanceof Folder) {
-					Package _package = convertToJavaElement(
-							(Folder) entry, true);
+					Package _package = convertToJavaElement((Folder) entry,
+							true);
 					if (_package != null) {
 						bundle.getPackage().addPackage(_package);
 					}
@@ -187,7 +190,7 @@ public abstract class OSGiIntrospectorUtil {
 			}
 		}
 	}
-	
+
 	Logger logger;
 	String logLocation;
 
@@ -231,8 +234,7 @@ public abstract class OSGiIntrospectorUtil {
 								return true;
 							}
 						} else {
-							// TODO log problème de BundleClassPath peut-être
-							// déjà découvert (normalement déjà découvert)
+							// must not appear
 						}
 					}
 				}
@@ -287,7 +289,7 @@ public abstract class OSGiIntrospectorUtil {
 				e.printStackTrace();
 			} catch (IOException e) {
 				System.err.println("OSGi Introspector error :");
-				System.err.println("Error during reading of a file.");
+				System.err.println("Error during reading of the file.");
 				e.printStackTrace();
 			}
 		}
@@ -336,10 +338,12 @@ public abstract class OSGiIntrospectorUtil {
 				outputStream.flush();
 				outputStream.close();
 				jarInputStream.close();
+				bundleFile.deleteOnExit();
 				return bundleFile;
 			} catch (IOException e) {
-				log(Level.ERROR, "Error during reading a file\n" + e.getMessage(), null);
-				//e.printStackTrace();
+				log(Level.ERROR, "Error during reading a file\n"
+						+ e.getMessage(), null);
+				// e.printStackTrace();
 				return null;
 			}
 		}

@@ -10,11 +10,14 @@ import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
 import org.osgi.framework.BundleContext;
 
+import fr.irisa.triskell.osgi.introspector.generator.resolver.Resolver;
+import fr.irisa.triskell.osgi.introspector.generator.resolver.ResolverDynamicWithSystemRepresentation;
+import fr.irisa.triskell.osgi.introspector.generator.resolver.ResolverDynamicWithoutSystemRepresentation;
 import framework.Bundle;
 
 public class OSGiIntrospectorUtilDynamic extends OSGiIntrospectorUtil {
 
-	BundleContext context;
+	private BundleContext context;
 
 	public OSGiIntrospectorUtilDynamic(BundleContext context) {
 		this.context = context;
@@ -103,5 +106,15 @@ public class OSGiIntrospectorUtilDynamic extends OSGiIntrospectorUtil {
 			System.out.println(message);
 			System.out.println();
 		}
+	}
+
+	@Override
+	public Resolver getResolver(boolean withSystemRepresentation) {
+		if (withSystemRepresentation) {
+			return new ResolverDynamicWithSystemRepresentation(this.context,
+					this);
+		}
+		return new ResolverDynamicWithoutSystemRepresentation(this.context,
+				this);
 	}
 }

@@ -18,8 +18,7 @@ import java.util.jar.Manifest;
 import org.apache.log4j.Level;
 
 import fr.irisa.triskell.osgi.introspector.generator.Parser;
-import fr.irisa.triskell.osgi.introspector.generator.Resolver;
-import fr.irisa.triskell.osgi.introspector.generator.ResolverStatic;
+import fr.irisa.triskell.osgi.introspector.generator.resolver.Resolver;
 import fr.irisa.triskell.osgi.introspector.util.OSGiIntrospectorUtil;
 import framework.Bundle;
 import framework.Framework;
@@ -50,7 +49,6 @@ public class OSGiIntrospectorStatic {
 	 */
 	public void generateFramework(String DirectoryFilePath, String XMIFilePath,
 			boolean systemRepresentation) {
-		// TODO gestion du log en static ????
 		util.setLoggerProperties(XMIFilePath.substring(0, XMIFilePath
 				.lastIndexOf(File.separator)));
 		this.framework = FrameworkFactory.eINSTANCE.createFramework();
@@ -93,12 +91,7 @@ public class OSGiIntrospectorStatic {
 		if (f.isDirectory()) {
 			return this.generateWithDirectory(f, systemRepresentation);
 		} else {
-			try {
-				return this.generateWithJar(f, systemRepresentation);
-			} catch (IOException e) {
-				util.log(Level.ERROR, e.getMessage(), null);
-				return false;
-			}
+			return this.generateWithJar(f, systemRepresentation);
 		}
 	}
 
@@ -214,7 +207,6 @@ public class OSGiIntrospectorStatic {
 			}
 			try {
 				String manifestContent = this.removeEOLBlank(manifestFileTmp);
-				// TODO gestion de systemRepresentation
 				boolean valid = this.parser.parse(manifestContent, bundle);
 				if (valid) {
 					framework.addBundle(bundle);
@@ -237,48 +229,59 @@ public class OSGiIntrospectorStatic {
 	 * @throws IOException
 	 */
 	private boolean generateWithJar(java.io.File jarFile,
-			boolean systemRepresentation) throws IOException {
-		JarFile jar = new JarFile(jarFile);
-		Manifest manifest = jar.getManifest();
-		if (manifest != null) {
+			boolean systemRepresentation) {
+		try {
+			JarFile jar = new JarFile(jarFile);
 
-			Bundle bundle = FrameworkFactory.eINSTANCE.createBundle();
-			bundle.setLocation(jarFile.getAbsolutePath());
+			Manifest manifest = jar.getManifest();
+			if (manifest != null) {
 
-			if (systemRepresentation) {
-				Folder rootFolder = JarFactory.eINSTANCE.createFolder();
-				rootFolder.setName("");
-				rootFolder.setFullPath("");
-				bundle.setFolder(rootFolder);
+				Bundle bundle = FrameworkFactory.eINSTANCE.createBundle();
+				bundle.setLocation(jarFile.getAbsolutePath());
 
-				Package defaultPackage = JarFactory.eINSTANCE.createPackage();
-				defaultPackage.setName("");
-				defaultPackage.setFullPath("");
-				bundle.setPackage(defaultPackage);
+				if (systemRepresentation) {
+					Folder rootFolder = JarFactory.eINSTANCE.createFolder();
+					rootFolder.setName("");
+					rootFolder.setFullPath("");
+					bundle.setFolder(rootFolder);
 
-				util.listAllEntriesIntoJarFile(jar, bundle, false);
+					Package defaultPackage = JarFactory.eINSTANCE
+							.createPackage();
+					defaultPackage.setName("");
+					defaultPackage.setFullPath("");
+					bundle.setPackage(defaultPackage);
+
+					util.listAllEntriesIntoJarFile(jar, bundle, false);
+				}
+
+				// This test is used because the Manifest function
+				// write(OutputStream) can return a valid value except if
+				// Manifest-Version entry is not define into the Manifest file.
+				if (manifest.getMainAttributes().get(
+						Attributes.Name.MANIFEST_VERSION) == null) {
+					manifest.getMainAttributes().put(
+							Attributes.Name.MANIFEST_VERSION, "1.0");
+				}
+
+				java.io.File manifestFileTmp = java.io.File.createTempFile(
+						"manifesttmp", ".mf");
+				manifest.write(new FileOutputStream(manifestFileTmp));
+				String manifestContent = this.removeEOLBlank(manifestFileTmp);
+				if (!manifestFileTmp.delete()) {
+					manifestFileTmp.deleteOnExit();
+				}
+				boolean valid = this.parser.parse(manifestContent, bundle);
+				if (valid) {
+					framework.addBundle(bundle);
+				}
+				return valid;
 			}
-
-			// This test is used because the Manifest function
-			// write(OutputStream) can return a valid value except if
-			// Manifest-Version entry is not define into the Manifest file.
-			if (manifest.getMainAttributes().get(
-					Attributes.Name.MANIFEST_VERSION) == null) {
-				manifest.getMainAttributes().put(
-						Attributes.Name.MANIFEST_VERSION, "1.0");
-			}
-
-			java.io.File manifestFileTmp = java.io.File.createTempFile(
-					"manifesttmp", ".mf");
-			manifest.write(new FileOutputStream(manifestFileTmp));
-			String manifestContent = this.removeEOLBlank(manifestFileTmp);
-			manifestFileTmp.delete();
-			// TODO gestion de systemRepresentation
-			boolean valid = this.parser.parse(manifestContent, bundle);
-			if (valid) {
-				framework.addBundle(bundle);
-			}
-			return valid;
+		} catch (IOException e) {
+			// System.out.println(jarFile.getAbsolutePath());
+			// e.printStackTrace();
+			util.log(Level.ERROR, jarFile.getAbsolutePath()
+					+ " is not a valid Jar file.", null);
+			return false;
 		}
 		return true;
 	}
@@ -293,8 +296,8 @@ public class OSGiIntrospectorStatic {
 	 * 
 	 * @return true if the resolution is OK, false else.
 	 */
-	public boolean resolve(boolean systemRepresentation) {
-		Resolver resolver = new ResolverStatic(util, systemRepresentation);
+	public void resolve(boolean systemRepresentation) {
+		Resolver resolver = util.getResolver(systemRepresentation);
 		resolver.resolveRequireBundle(this.parser.getUnresolvedRequireBundle(),
 				this.framework);
 		resolver.resolveFragmentHost(this.framework, this.parser
@@ -305,9 +308,11 @@ public class OSGiIntrospectorStatic {
 				.getUnresolvedBundleNativeCode());
 		resolver.resolveExportPackage(this.parser.getUnresolvedExportPackage());
 		resolver.resolveExportPackageExclude(this.parser
-				.getUnresolvedExportPackageExclude());
+				.getUnresolvedExportPackageExclude(), this.parser
+				.getUnresolvedExportPackageBundles());
 		resolver.resolveExportPackageInclude(this.parser
-				.getUnresolvedExportPackageInclude());
+				.getUnresolvedExportPackageInclude(), this.parser
+				.getUnresolvedExportPackageBundles());
 		resolver.resolveActivationPolicyExclude(this.parser
 				.getUnresolvedActivationPolicyExclude());
 		resolver.resolveActivationPolicyInclude(this.parser
@@ -321,7 +326,5 @@ public class OSGiIntrospectorStatic {
 				this.framework);
 		resolver.resolveImportService(this.parser.getUnresolvedImportService(),
 				this.parser.getServicesAvailable());
-		// TODO return
-		return true;
 	}
 }

@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: VersionImpl.java,v 1.5 2008-08-19 07:04:45 edaubert Exp $
+ * $Id: VersionImpl.java,v 1.6 2008-08-21 14:47:59 edaubert Exp $
  */
 package manifest.impl;
 
@@ -429,7 +429,7 @@ public class VersionImpl extends EObjectImpl implements Version {
 		return true;
 	}
 
-	public boolean containsInto(String versionRange) {
+	public boolean containsInto(String versionRange) throws BadVersionValue {
 		if (versionRange != null) {
 			boolean minNotInclude = false;
 			boolean maxNotInclude = true;
@@ -451,7 +451,7 @@ public class VersionImpl extends EObjectImpl implements Version {
 					maxVersion.setVersionValue(versionsValue[1]);
 				} catch (BadVersionValue e) {
 					maxVersion = null;
-					// TODO log erreur dans un attribut
+					throw new BadVersionValue(versionRange + " is not a valid version range.\tIt's " + versionsValue[1] + " which is unvalid.");
 				}
 			}
 			try {
@@ -459,7 +459,7 @@ public class VersionImpl extends EObjectImpl implements Version {
 				minVersion.setVersionValue(versionsValue[0]);
 			} catch (BadVersionValue e) {
 				minVersion = null;
-				// TODO log erreur dans un attribut
+				throw new BadVersionValue(versionRange + " is not a valid version range.\tIt's " + versionsValue[0] + " which is unvalid.");
 			}
 
 			return this.greaterThan(minVersion, minNotInclude)

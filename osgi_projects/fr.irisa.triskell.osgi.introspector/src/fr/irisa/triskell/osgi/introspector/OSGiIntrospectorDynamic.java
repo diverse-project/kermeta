@@ -11,7 +11,6 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Dictionary;
 import java.util.Enumeration;
-import java.util.Properties;
 
 import manifest.MANIFEST;
 
@@ -19,8 +18,7 @@ import org.osgi.framework.BundleContext;
 import org.osgi.framework.Constants;
 
 import fr.irisa.triskell.osgi.introspector.generator.Parser;
-import fr.irisa.triskell.osgi.introspector.generator.Resolver;
-import fr.irisa.triskell.osgi.introspector.generator.ResolverDynamic;
+import fr.irisa.triskell.osgi.introspector.generator.resolver.Resolver;
 import fr.irisa.triskell.osgi.introspector.util.OSGiIntrospectorUtil;
 import framework.Bundle;
 import framework.Framework;
@@ -70,7 +68,6 @@ public class OSGiIntrospectorDynamic {
 				this.generateBundle(bundle, systemRepresentation);
 			}
 		}
-		// TODO vérification du log ainsi que dans Static
 		this.resolve(systemRepresentation);
 		util.saveModel(XMIFilePath, this.framework);
 
@@ -111,7 +108,6 @@ public class OSGiIntrospectorDynamic {
 			manifestStringRepresentation.append(value);
 			manifestStringRepresentation.append("\n");
 		}
-		// TODO gestion de systemRepresentation
 		boolean valid = this.parser.parse(manifestStringRepresentation
 				.toString(), bundleRepresentation);
 
@@ -208,7 +204,7 @@ public class OSGiIntrospectorDynamic {
 
 		int idx = sb.indexOf("file:");
 		if (idx < 0) {
-			//In equinox URL is not wellformed
+			// In equinox URL is not wellformed
 			// here, the URL begin with "update@"
 			if (sb.toString().startsWith("update@")) {
 				sb.delete(0, 7);
@@ -257,9 +253,8 @@ public class OSGiIntrospectorDynamic {
 	 * 
 	 * @return true if the resolution is OK, false else.
 	 */
-	public boolean resolve(boolean systemRepresentation) {
-		Resolver resolver = new ResolverDynamic(context, util,
-				systemRepresentation);
+	public void resolve(boolean systemRepresentation) {
+		Resolver resolver = util.getResolver(systemRepresentation);
 		resolver.resolveRequireBundle(this.parser.getUnresolvedRequireBundle(),
 				this.framework);
 		resolver.resolveFragmentHost(this.framework, this.parser
@@ -270,9 +265,11 @@ public class OSGiIntrospectorDynamic {
 				.getUnresolvedBundleNativeCode());
 		resolver.resolveExportPackage(this.parser.getUnresolvedExportPackage());
 		resolver.resolveExportPackageExclude(this.parser
-				.getUnresolvedExportPackageExclude());
+				.getUnresolvedExportPackageExclude(), this.parser
+				.getUnresolvedExportPackageBundles());
 		resolver.resolveExportPackageInclude(this.parser
-				.getUnresolvedExportPackageInclude());
+				.getUnresolvedExportPackageInclude(), this.parser
+				.getUnresolvedExportPackageBundles());
 		resolver.resolveActivationPolicyExclude(this.parser
 				.getUnresolvedActivationPolicyExclude());
 		resolver.resolveActivationPolicyInclude(this.parser
@@ -286,7 +283,5 @@ public class OSGiIntrospectorDynamic {
 				.getUnresolvedExportPackageUsesBundle());
 		resolver.resolveImportService(this.parser.getUnresolvedImportService(),
 				this.parser.getServicesAvailable());
-		// TODO return
-		return true;
 	}
 }

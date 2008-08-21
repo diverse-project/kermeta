@@ -1,4 +1,4 @@
-package fr.irisa.triskell.osgi.introspector.generator;
+package fr.irisa.triskell.osgi.introspector.generator.resolver;
 
 import java.util.List;
 import java.util.Map;
@@ -75,7 +75,8 @@ public interface Resolver {
 	 * @param exportPackages
 	 */
 	public void resolveExportPackageExclude(
-			Map<option.Class, ExportPackage> exportPackages);
+			Map<option.Class, ExportPackage> exportPackages,
+			Map<ExportPackage, Bundle> bundles);
 
 	/**
 	 * This function is used to resolve the Export-Package include directive
@@ -85,7 +86,8 @@ public interface Resolver {
 	 * @param exportPackages
 	 */
 	public void resolveExportPackageInclude(
-			Map<option.Class, ExportPackage> exportPackages);
+			Map<option.Class, ExportPackage> exportPackages,
+			Map<ExportPackage, Bundle> bundles);
 
 	/**
 	 * This function is used to resolve the Export-Package uses directive entry

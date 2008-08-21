@@ -10,6 +10,9 @@ import org.apache.log4j.PropertyConfigurator;
 
 import fr.irisa.triskell.osgi.introspector.OSGiIntrospectorDynamic;
 import fr.irisa.triskell.osgi.introspector.OSGiIntrospectorStatic;
+import fr.irisa.triskell.osgi.introspector.generator.resolver.Resolver;
+import fr.irisa.triskell.osgi.introspector.generator.resolver.ResolverStaticWithSystemRepresentation;
+import fr.irisa.triskell.osgi.introspector.generator.resolver.ResolverStaticWithoutSystemRepresentation;
 import framework.Bundle;
 
 /**
@@ -86,5 +89,13 @@ public class OSGiIntrospectorUtilStatic extends OSGiIntrospectorUtil {
 			e.printStackTrace();
 		}
 
+	}
+
+	@Override
+	public Resolver getResolver(boolean withSystemRepresentation) {
+		if (withSystemRepresentation) {
+			return new ResolverStaticWithSystemRepresentation(this);
+		}
+		return new ResolverStaticWithoutSystemRepresentation(this);
 	}
 }
