@@ -5,4 +5,4 @@
 package kermeta;
 
 require "kermeta"
-//require "http://www.eclipse.org/emf/2002/Ecore"
+require "http://www.eclipse.org/emf/2002/Ecore"
