@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="ASCII"?>
+<fsm:FSM xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:fsm="http://www.kermeta.org/fsm" xmi:id="_zh5XcG-YEd2jofM6-GAPhw" initialState="_zh5XcW-YEd2jofM6-GAPhw" finalState="_zh5Xc2-YEd2jofM6-GAPhw">
+  <ownedState xmi:id="_zh5XcW-YEd2jofM6-GAPhw" name="s1">
+    <outgoingTransition xmi:id="_zh5Xcm-YEd2jofM6-GAPhw" target="_zh5Xc2-YEd2jofM6-GAPhw" input="c" output="v"/>
+  </ownedState>
+  <ownedState xmi:id="_zh5Xc2-YEd2jofM6-GAPhw" name="s2" incomingTransition="_zh5Xcm-YEd2jofM6-GAPhw _zh5XdG-YEd2jofM6-GAPhw">
+    <outgoingTransition xmi:id="_zh5XdG-YEd2jofM6-GAPhw" target="_zh5Xc2-YEd2jofM6-GAPhw" input="x" output="y"/>
+  </ownedState>
+  <ownedState xmi:id="_zh5XdW-YEd2jofM6-GAPhw" name="newState"/>
+</fsm:FSM>

@@ -1,4 +1,4 @@
-/* $Id: CreateBehavior.kmt,v 1.41 2008-08-18 12:58:35 cfaucher Exp $
+/* $Id: CreateBehavior.kmt,v 1.42 2008-08-21 15:56:56 cfaucher Exp $
  * Creation date: January 21, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -411,11 +411,13 @@ package behavior {
 			var i_stm : Integer init 0
 			self.eachOwnedElement{ stm |
 				
-				var str_statement : String init stm.createBehaviorJava(context)
+				var str_statement : String init stm.createBehaviorJava(context).replace(".equals(null)", " == null").replace(";;", ";")
 				
-				if str_statement.split(context.SEPARATOR_STATEMENT_FT).size() == 2 then
-					var s1 : String init str_statement.split(context.SEPARATOR_STATEMENT_FT).one()
-					var s2 : String init str_statement.split(context.SEPARATOR_STATEMENT_FT).last()
+				var str_statement_splitted : OrderedSet<String> init str_statement.split(context.SEPARATOR_STATEMENT_FT) 
+				
+				if str_statement_splitted.size() == 2 then
+					var s1 : String init str_statement_splitted.one()
+					var s2 : String init str_statement_splitted.last()
 					
 					if s2.contains(context.PREVIOUS_STATEMENT_FT) then
 						str_statement := s2.replace(context.PREVIOUS_STATEMENT_FT, s1)
@@ -863,17 +865,28 @@ package behavior {
 			var fromOperation : String init owningOperation.superOperation.container.asType(ClassDefinition).qualifiedName.replace("::", ".")
 			//FIXME: Perhaps, we should fix the type parameters of the class definition
 			
-			result := "//Call of the super operation\n"
-			result := result + "((" + fromOperation + ") this)." + owningOperation.name + "("
+			result := ""//"//Call of the super operation\n"
+			//result := result + "((" + fromOperation + ") this)." + owningOperation.name + "("
 			
-			self.beforeLambdaExpressionResult := ""
+			var extended_class : EClass init owningOperation.ecoreModelElement.container.asType(EClass)
+			var super_class : EClass init owningOperation.superOperation.container.asType(ClassDefinition).ecoreModelElement
+			if ModelAnalizer.new().isExtended(extended_class, super_class) then
+				result := result + "super." + owningOperation.name + "("
+				self.beforeLambdaExpressionResult := ""
 			
-			result := result + CompilerHelperJava.new.ppComaSeparatedNodes(self.parameters, context) + ")"
+				result := result + CompilerHelperJava.new.ppComaSeparatedNodes(self.parameters, context) + ")"
+				
+				context.beforeLambdaExpressionResult := self.beforeLambdaExpressionResult
+				self.beforeLambdaExpressionResult := ""
+				
+				result := result + self.endOfExpressionFixer()
+			else
+				result := result + "//Beginning of super operation inlining: "
+				result := result + owningOperation.superOperation.body.createBehaviorJava(context)
+				result := result + "//End of super operation inlining: "
+			end
 			
-			context.beforeLambdaExpressionResult := self.beforeLambdaExpressionResult
-			self.beforeLambdaExpressionResult := ""
 			
-			result := result + self.endOfExpressionFixer()
 		end
 	}
 	//**** End **** Managing of the CallExpression branch ****//

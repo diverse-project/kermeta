@@ -1,4 +1,4 @@
-/* $Id: EcoreHelper.kmt,v 1.4 2008-07-23 08:22:14 cfaucher Exp $
+/* $Id: EcoreHelper.kmt,v 1.5 2008-08-21 15:56:56 cfaucher Exp $
  * Creation date: January 29, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -11,3 +11,4 @@ package km2ecore::helper::ecore;
 require "EAnnotationHelper.kmt"
 require "EcoreModelElementHelper.kmt"
 require "ENamedElementHelper.kmt"
+require "ModelAnalizerHelper.kmt"

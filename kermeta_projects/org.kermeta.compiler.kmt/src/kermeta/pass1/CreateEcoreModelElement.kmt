@@ -1,4 +1,4 @@
-/* $Id: CreateEcoreModelElement.kmt,v 1.26 2008-07-29 09:59:54 cfaucher Exp $
+/* $Id: CreateEcoreModelElement.kmt,v 1.27 2008-08-21 15:56:56 cfaucher Exp $
  * Creation date: February 1, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -228,7 +228,7 @@ aspect class Operation {
 		if self.isAbstract then
 			var ecoreAnnotation : EAnnotation init EAnnotationHelper.new.createAbstract()
 			ecoreOperation.eAnnotations.add( ecoreAnnotation )
-			self.container.asType(ClassDefinition).ecoreModelElement.~abstract := true
+			//self.container.asType(ClassDefinition).ecoreModelElement.~abstract := true
 		end 
 		result := ecoreOperation 
 	end

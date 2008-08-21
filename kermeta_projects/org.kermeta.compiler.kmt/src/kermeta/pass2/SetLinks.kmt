@@ -1,4 +1,4 @@
-/* $Id: SetLinks.kmt,v 1.31 2008-07-29 09:59:54 cfaucher Exp $
+/* $Id: SetLinks.kmt,v 1.32 2008-08-21 15:56:56 cfaucher Exp $
  * Creation date: January 21, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -197,6 +197,12 @@ aspect class Property {
 		if not self.opposite.isVoid() then //if self.opposite.isVoid() then self is an EReference
 			self.ecoreModelElement.asType(EReference).eOpposite := self.opposite.ecoreModelElement.asType(EReference)
 		end
+		
+		//set to false the default value of Boolean
+		if self.type.getTypeQName() == "kermeta::standard::Boolean" then
+			self.ecoreModelElement.defaultValueLiteral := "false"
+		end
+		
 	end
 }
 
