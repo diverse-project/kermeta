@@ -1,4 +1,4 @@
-/* $Id: CreateBehavior.kmt,v 1.42 2008-08-21 15:56:56 cfaucher Exp $
+/* $Id: CreateBehavior.kmt,v 1.43 2008-08-22 09:57:10 cfaucher Exp $
  * Creation date: January 21, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -787,6 +787,9 @@ package behavior {
 					
 					context.ftSuffixActivation := true
 					// + "(" + type_param_ + ") "
+					stdio.writeln("--: " + "inc_param: " + inc_param.toString() + " - " + self.getContainerAsType(Operation).asType(Operation).qualifiedName)
+					stdio.writeln("self.parameters: " + theLambdaExp.toString + " - " + self.name.toString + " - " + self.parameters.toString)
+					
 					str_toInclude := str_toInclude + " = " + self.parameters.elementAt(inc_param).createBehaviorJava(context) + ";\n"
 					context.ftSuffixActivation := false
 					
@@ -868,24 +871,29 @@ package behavior {
 			result := ""//"//Call of the super operation\n"
 			//result := result + "((" + fromOperation + ") this)." + owningOperation.name + "("
 			
-			var extended_class : EClass init owningOperation.ecoreModelElement.container.asType(EClass)
+			var extended_class : EClass init self.getContainerAsType(ClassDefinition).asType(ClassDefinition).ecoreModelElement
 			var super_class : EClass init owningOperation.superOperation.container.asType(ClassDefinition).ecoreModelElement
-			if ModelAnalizer.new().isExtended(extended_class, super_class) then
-				result := result + "super." + owningOperation.name + "("
-				self.beforeLambdaExpressionResult := ""
 			
-				result := result + CompilerHelperJava.new.ppComaSeparatedNodes(self.parameters, context) + ")"
-				
-				context.beforeLambdaExpressionResult := self.beforeLambdaExpressionResult
-				self.beforeLambdaExpressionResult := ""
-				
-				result := result + self.endOfExpressionFixer()
+			stdio.writeln("extended_class: " + extended_class.name + " super_class: " + super_class.name)
+			
+			
+			if ModelAnalizer.new().isExtendedBy(extended_class, super_class) then
+				result := result + "super." + owningOperation.name + "("
 			else
-				result := result + "//Beginning of super operation inlining: "
-				result := result + owningOperation.superOperation.body.createBehaviorJava(context)
-				result := result + "//End of super operation inlining: "
+				result := result + fromOperation + ".super_" + owningOperation.name + "(this, "
+				var simk_signature : String init "super_" + owningOperation.name + "(" + fromOperation + "self, )"
+				stdio.writeln("simk_signature: " + simk_signature)
+				//var simk_body : String init owningOperation.superOperation.body.createBehaviorJava(context)
 			end
 			
+			self.beforeLambdaExpressionResult := ""
+			
+			//result := result + CompilerHelperJava.new.ppComaSeparatedNodes(self.parameters, context) + ")"
+				
+			context.beforeLambdaExpressionResult := self.beforeLambdaExpressionResult
+			self.beforeLambdaExpressionResult := ""
+				
+			result := result + self.endOfExpressionFixer()
 			
 		end
 	}

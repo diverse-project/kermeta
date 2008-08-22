@@ -1,4 +1,4 @@
-/* $Id: SetLinks.kmt,v 1.32 2008-08-21 15:56:56 cfaucher Exp $
+/* $Id: SetLinks.kmt,v 1.33 2008-08-22 09:57:10 cfaucher Exp $
  * Creation date: January 21, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -28,7 +28,7 @@ aspect class ClassDefinition {
 		self.superType.each{ t |
 			if t.isInstanceOf(Class) then
 			
-				var classDefinition : ClassDefinition init t.asType(Class).getClassDefinition()
+				var classDefinition : ClassDefinition init t.asType(Class).getClassDefinitionAsTyped()
 
 				if (not self.ecoreModelElement.isVoid()) then
 					if not classDefinition.ecoreModelElement.isVoid() then
@@ -84,7 +84,7 @@ aspect class Class {
 			var typeArgument : EGenericType init EGenericType.new
 			
 			if tpb.type.isInstanceOf(Class) then
-				var cd : ClassDefinition init tpb.type.asType(Class).getClassDefinition()
+				var cd : ClassDefinition init tpb.type.asType(Class).getClassDefinitionAsTyped()
 								
 				if cd.ecoreDataType.isVoid() then //not cd.ecoreModelElement.isVoid() then
 					typeArgument.eClassifier := cd.ecoreModelElement
@@ -103,7 +103,7 @@ aspect class Class {
 				
 					if tpb.type.isInstanceOf(PrimitiveType) then
 
-						var cd : ClassDefinition init tpb.type.getClassFromPrimitiveType().getClassDefinition()
+						var cd : ClassDefinition init tpb.type.getClassFromPrimitiveType().getClassDefinitionAsTyped()
 						
 						//We use the EDataType from the Ecore file
 						if tpb.type.isEDataType() then //cd.isValueType() and (tpb.type.getEMFInstanceClassName()!="") then
@@ -214,7 +214,7 @@ class LinkSetterForTypedElement {
 
 			if element.type.isInstanceOf(Class) then
 				var c : Class init element.type.asType(Class)
-				var classDefinition : ClassDefinition init c.getClassDefinition()
+				var classDefinition : ClassDefinition init c.getClassDefinitionAsTyped()
 				var genericType : EGenericType init EGenericType.new
 				
 				if classDefinition.ecoreDataType.isVoid() then //not classDefinition.ecoreModelElement.isVoid() then
@@ -228,7 +228,7 @@ class LinkSetterForTypedElement {
 					var typeArgument : EGenericType init EGenericType.new
 					
 					if tpb.type.isInstanceOf(Class) then
-						var cd : ClassDefinition init tpb.type.asType(Class).getClassDefinition()
+						var cd : ClassDefinition init tpb.type.asType(Class).getClassDefinitionAsTyped()
 						if cd.ecoreDataType.isVoid() then //not cd.ecoreModelElement.isVoid() then
 							typeArgument.eClassifier := cd.ecoreModelElement
 						else //we assume this Class target a subtype of ValueType => EDataType
@@ -244,7 +244,7 @@ class LinkSetterForTypedElement {
 						
 							if tpb.type.isInstanceOf(PrimitiveType) then
 							
-								var cd : ClassDefinition init tpb.type.getClassFromPrimitiveType().getClassDefinition()
+								var cd : ClassDefinition init tpb.type.getClassFromPrimitiveType().getClassDefinitionAsTyped()
 								
 								if tpb.type.isEDataType() then //cd.isValueType() and (tpb.type.getEMFInstanceClassName()!="") then
 									typeArgument.eClassifier := tpb.type.asType(PrimitiveType).ecoreModelElement
@@ -267,7 +267,7 @@ class LinkSetterForTypedElement {
 				// Case of the type is an ObjectTypeVariable
 				if element.type.isInstanceOf(PrimitiveType) then
 				
-					var cd : ClassDefinition init element.type.getClassFromPrimitiveType().getClassDefinition()
+					var cd : ClassDefinition init element.type.getClassFromPrimitiveType().getClassDefinitionAsTyped()
 					
 					if element.type.isEDataType() then //cd.isValueType() and (element.type.getEMFInstanceClassName()!="") then
 						

@@ -1,4 +1,4 @@
-/* $Id: StructureCompiler.kmt,v 1.43 2008-08-21 15:56:56 cfaucher Exp $
+/* $Id: StructureCompiler.kmt,v 1.44 2008-08-22 09:57:10 cfaucher Exp $
  * Creation date: January 21, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -61,11 +61,11 @@ class Main {
 		var traceInput : String init ""
 */
 
-/*
+
 		var modelInput : String init "platform:/resource/org.kermeta.compiler.kmt/models/StructureCompiler.km"
 		var output : String init "platform:/resource/org.kermeta.compiler.kmt/models/StructureCompiler.ecore"
 		var traceInput : String init ""
-*/
+
 
 /*
 		var modelInput : String init "platform:/resource/org.kermeta.compiler.kmt/models/ExpressionEvaluation.km"
@@ -73,11 +73,11 @@ class Main {
 		var traceInput : String init ""
 */
 
-
+/*
 		var modelInput : String init "platform:/resource/org.kermeta.compiler.kmt/models/compilertest.km"
 		var output : String init "platform:/resource/org.kermeta.compiler.kmt/models/compilertest.ecore"
 		var traceInput : String init ""
-
+*/
 
 /*
 		var modelInput : String init "platform:/resource/org.kermeta.compiler.kmt/models/fsm.km"

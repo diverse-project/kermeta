@@ -1,4 +1,4 @@
-/* $Id: TypeHelper.kmt,v 1.20 2008-07-31 08:15:03 cfaucher Exp $
+/* $Id: TypeHelper.kmt,v 1.21 2008-08-22 09:57:01 cfaucher Exp $
  * Creation date: January 28, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -76,7 +76,7 @@ aspect class Type {
 		result := void
 		
 		if self.isInstanceOf(Class) then
-			var cd : ClassDefinition init self.asType(Class).getClassDefinition()
+			var cd : ClassDefinition init self.asType(Class).getClassDefinitionAsTyped()
 			result := cd.name
 			
 		else
@@ -85,7 +85,7 @@ aspect class Type {
 				result := otv.name
 			else
 				if self.isInstanceOf(PrimitiveType) then
-					var cd : ClassDefinition init self.getClassFromPrimitiveType().getClassDefinition()
+					var cd : ClassDefinition init self.getClassFromPrimitiveType().getClassDefinitionAsTyped()
 					result := cd.name
 				else
 					if self.isInstanceOf(VoidType) then
@@ -104,7 +104,7 @@ aspect class Type {
 		result := void
 		
 		if self.isInstanceOf(Class) then
-			var cd : ClassDefinition init self.asType(Class).getClassDefinition()
+			var cd : ClassDefinition init self.asType(Class).getClassDefinitionAsTyped()
 			result := cd.qualifiedName
 		else
 			if self.isInstanceOf(ObjectTypeVariable) then
@@ -112,7 +112,7 @@ aspect class Type {
 				result := otv.qualifiedName
 			else
 				if self.isInstanceOf(PrimitiveType) then
-					var cd : ClassDefinition init self.getClassFromPrimitiveType().getClassDefinition()
+					var cd : ClassDefinition init self.getClassFromPrimitiveType().getClassDefinitionAsTyped()
 					result := cd.qualifiedName
 				else
 					if self.isInstanceOf(VoidType) then

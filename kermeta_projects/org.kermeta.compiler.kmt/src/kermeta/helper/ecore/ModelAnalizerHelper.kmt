@@ -1,4 +1,4 @@
-/* $Id: ModelAnalizerHelper.kmt,v 1.1 2008-08-21 15:56:56 cfaucher Exp $
+/* $Id: ModelAnalizerHelper.kmt,v 1.2 2008-08-22 09:57:09 cfaucher Exp $
  * Creation date: May 29, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -14,7 +14,7 @@ using kermeta::language::structure
 using ecore
 
 class ModelAnalizer {
-	operation isExtended( extended_class : EClass , super_class : EClass ) : Boolean is do
+	operation isExtendedBy( extended_class : EClass , super_class : EClass ) : Boolean is do
 		result := false
 		
 		stdio.writeln("tititititi: " + super_class.name.toString() + " - " + extended_class.eGenericSuperTypes.one().eClassifier.name.toString())
@@ -24,7 +24,7 @@ class ModelAnalizer {
 		end
 	end
 	
-	operation isInterface( extended_class : EClass , super_class : EClass ) : Boolean is do
-		result := not isExtended( extended_class, super_class )
+	operation isInterfaceBy( extended_class : EClass , super_class : EClass ) : Boolean is do
+		result := not isExtendedBy( extended_class, super_class )
 	end
 }

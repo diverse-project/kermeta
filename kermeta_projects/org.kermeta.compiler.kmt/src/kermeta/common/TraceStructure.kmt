@@ -1,4 +1,4 @@
-/* $Id: TraceStructure.kmt,v 1.4 2008-06-26 12:49:57 cfaucher Exp $
+/* $Id: TraceStructure.kmt,v 1.5 2008-08-22 09:57:09 cfaucher Exp $
  * Creation date: January 21, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -22,7 +22,7 @@ using ecore
 class Traceability<X> {
 	
 	reference ecoreModelElement : X
-	operation getEcoreModelElement() : X is do
+	operation getEcoreModelElementTrace() : X is do
 		result := ecoreModelElement
 	end
 	
