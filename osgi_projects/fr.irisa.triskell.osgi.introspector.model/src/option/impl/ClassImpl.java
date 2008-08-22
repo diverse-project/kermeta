@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ClassImpl.java,v 1.2 2008-08-21 14:47:59 edaubert Exp $
+ * $Id: ClassImpl.java,v 1.3 2008-08-22 12:43:31 edaubert Exp $
  */
 package option.impl;
 
@@ -237,15 +237,17 @@ public class ClassImpl extends EObjectImpl implements option.Class {
 	}
 
 	public void addClass(jar.Class clazz) {
-		boolean exist = false;
-		for (jar.Class tmp : getClasses()) {
-			if (tmp.getFullPath().equals(clazz.getFullPath())) {
-				exist = true;
-				break;
+		if (clazz != null && clazz.getFullPath() != null && clazz.getName() != null) {
+			boolean exist = false;
+			for (jar.Class tmp : getClasses()) {
+				if (tmp.getFullPath().equals(clazz.getFullPath())) {
+					exist = true;
+					break;
+				}
 			}
-		}
-		if (!exist) {
-			getClasses().add(clazz);
+			if (!exist) {
+				getClasses().add(clazz);
+			}
 		}
 
 	}

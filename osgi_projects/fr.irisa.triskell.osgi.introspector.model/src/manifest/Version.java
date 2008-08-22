@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: Version.java,v 1.5 2008-08-21 14:47:59 edaubert Exp $
+ * $Id: Version.java,v 1.6 2008-08-22 12:43:34 edaubert Exp $
  */
 package manifest;
 
@@ -133,14 +133,39 @@ public interface Version extends EObject {
 
 	String toString();
 
-	void setVersionValue(String value) throws BadVersionValue;
+	/**
+	 * This function is used to define a Version with a {@link String}
+	 * @param value the value which define the Version value
+	 * @throws BadVersionValue if value is not a valid version representation.
+	 */
+	void setVersionValue(String value) throws BadVersionValueException;
 
-	boolean greaterThan(Version version, boolean equals);
+	/**
+	 * This function is used to compare two version and to see if this Version is greater than version.
+	 * @param version  the Version object to compare
+	 * @param notEquals false if the equality is possible, true else
+	 * @return true && !equals if the two version is equals or version is null, 
+	 * 		true if this Version is greater than version,
+	 * 		false if this Version is lesser than version.
+	 */
+	boolean greaterThan(Version version, boolean notEquals);
 
-	boolean lesserThan(Version version, boolean equals);
+	/**
+	 * This function is used to compare two version and to see if this Version is lesser than version.
+	 * @param version  the Version object to compare
+	 * @param notEquals false if the equality is possible, true else
+	 * @return true && !equals if the two version is equals or version is null, 
+	 * 		true if this Version is lesser than version,
+	 * 		false if this Version is greater than version.
+	 */
+	boolean lesserThan(Version version, boolean notEquals);
 
-	boolean equals(Version version);
-
-	boolean containsInto(String versionRange) throws BadVersionValue;
+	/**
+	 * This function is used to check if this Version Object is contains into the two Version define with the versionRange.
+	 * @param versionRange a {@link String} which contains a range of {@link Version}. The format of this {@link String} is ['['|'(']? Version1 ',' Version2 [')' | ']']?
+	 * @return true if this {@link Version} object is lesser than Version2 and greater than Version1
+	 * @throws BadVersionValue if the versionRange is not valid.
+	 */
+	boolean containsInto(String versionRange) throws BadVersionValueException;
 
 } // Version

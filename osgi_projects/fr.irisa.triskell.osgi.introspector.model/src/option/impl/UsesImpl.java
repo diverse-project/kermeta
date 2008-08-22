@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: UsesImpl.java,v 1.5 2008-08-19 07:04:45 edaubert Exp $
+ * $Id: UsesImpl.java,v 1.6 2008-08-22 12:43:31 edaubert Exp $
  */
 package option.impl;
 
@@ -190,9 +190,7 @@ public class UsesImpl extends ExportPackageDirectiveImpl implements Uses {
 	}
 
 	public void addPackage(String _package) {
-		if (!getPackages().contains(_package)) {
-			getPackages().add(_package);
-		}
+		getPackages().add(_package);
 
 	}
 

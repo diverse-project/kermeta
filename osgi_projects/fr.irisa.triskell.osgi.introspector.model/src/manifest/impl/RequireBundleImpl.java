@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: RequireBundleImpl.java,v 1.5 2008-08-19 07:04:45 edaubert Exp $
+ * $Id: RequireBundleImpl.java,v 1.6 2008-08-22 12:43:33 edaubert Exp $
  */
 package manifest.impl;
 
@@ -315,17 +315,18 @@ public class RequireBundleImpl extends MANIFESTEntryImpl implements
 	}
 
 	public void addDirective(RequireBundleDirective directive) {
-		boolean exist = false;
-		for (RequireBundleDirective directivetmp : getDirectives()) {
-			if (directivetmp.getToken().equals(directive.getToken())) {
-				exist = true;
+		if (directive != null && directive.getToken() != null) {
+			boolean exist = false;
+			for (RequireBundleDirective directivetmp : getDirectives()) {
+				if (directivetmp.getToken().equals(directive.getToken())) {
+					exist = true;
+				}
+	
 			}
-
+			if (!exist) {
+				getDirectives().add(directive);
+			}
 		}
-		if (!exist) {
-			getDirectives().add(directive);
-		}
-
 	}
 
 } // RequireBundleImpl

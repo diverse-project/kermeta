@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: IncludeClassesImpl.java,v 1.3 2008-08-19 07:04:45 edaubert Exp $
+ * $Id: IncludeClassesImpl.java,v 1.4 2008-08-22 12:43:31 edaubert Exp $
  */
 package option.impl;
 
@@ -141,16 +141,17 @@ public class IncludeClassesImpl extends ExportPackageDirectiveImpl implements
 	}
 
 	public void addInclude(option.Class include) {
-		boolean exist = false;
-		for (option.Class tmp : getClasses()) {
-			if (tmp.getReference().equals(include.getReference())) {
-				exist = true;
-				break;
+		if (include != null && include.getReference() != null) {
+			boolean exist = false;
+			for (option.Class tmp : getClasses()) {
+				if (tmp.getReference().equals(include.getReference())) {
+					exist = true;
+					break;
+				}
+			}
+			if (!exist) {
+				getClasses().add(include);
 			}
 		}
-		if (!exist) {
-			getClasses().add(include);
-		}
-
 	}
 } // IncludeClassesImpl

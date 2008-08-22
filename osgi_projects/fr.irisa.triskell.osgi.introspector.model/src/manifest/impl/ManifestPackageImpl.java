@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ManifestPackageImpl.java,v 1.6 2008-08-19 07:04:45 edaubert Exp $
+ * $Id: ManifestPackageImpl.java,v 1.7 2008-08-22 12:43:34 edaubert Exp $
  */
 package manifest.impl;
 
@@ -1645,7 +1645,7 @@ public class ManifestPackageImpl extends EPackageImpl implements
 		initEAttribute(getMANIFEST_NativeCodeOptional(), this.getboolean(), "NativeCodeOptional", null, 0, 1, manifest.MANIFEST.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getMANIFEST_BundleManifestVersion(), this.getBundleManifestVersion(), null, "bundleManifestVersion", null, 0, 1, manifest.MANIFEST.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(manifestEntryEClass, MANIFESTEntry.class, "MANIFESTEntry", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEClass(manifestEntryEClass, MANIFESTEntry.class, "MANIFESTEntry", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getMANIFESTEntry_EntryName(), this.getString(), "entryName", null, 1, 1, MANIFESTEntry.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getMANIFESTEntry_Options(), theOptionPackage.getAttributEntry(), null, "options", null, 0, -1, MANIFESTEntry.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 

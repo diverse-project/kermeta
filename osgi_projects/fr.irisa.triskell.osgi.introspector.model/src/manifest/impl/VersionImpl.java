@@ -2,11 +2,11 @@
  * <copyright>
  * </copyright>
  *
- * $Id: VersionImpl.java,v 1.6 2008-08-21 14:47:59 edaubert Exp $
+ * $Id: VersionImpl.java,v 1.7 2008-08-22 12:43:32 edaubert Exp $
  */
 package manifest.impl;
 
-import manifest.BadVersionValue;
+import manifest.BadVersionValueException;
 import manifest.ManifestFactory;
 import manifest.ManifestPackage;
 import manifest.Version;
@@ -191,13 +191,17 @@ public class VersionImpl extends EObjectImpl implements Version {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @generated
 	 */
 	public void setQualifier(String newQualifier) {
-		String oldQualifier = qualifier;
-		qualifier = newQualifier;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ManifestPackage.VERSION__QUALIFIER, oldQualifier, qualifier));
+		// TODO tester la validité de la chaine de caractère
+		// ne doit contenir que des lettres, des chiffres '-' ou '_'
+		boolean valid = newQualifier.matches("[a-zA-Z-0-9\\-_]*");
+		if (valid) {
+			String oldQualifier = qualifier;
+			qualifier = newQualifier;
+			if (eNotificationRequired())
+				eNotify(new ENotificationImpl(this, Notification.SET, ManifestPackage.VERSION__QUALIFIER, oldQualifier, qualifier));
+		}
 	}
 
 	/**
@@ -332,9 +336,11 @@ public class VersionImpl extends EObjectImpl implements Version {
 					} else if (this.getMinor() == version.getMinor()) {
 						if (this.getMicro() > version.getMicro()) {
 							return true;
-						} else if (this.getQualifier().compareTo(
+						} else if (this.getMicro() == version.getMicro()) { 
+							if (this.getQualifier().compareTo(
 								version.getQualifier()) >= 0) {
-							return true;
+								return true;
+							}
 						}
 					}
 				}
@@ -385,7 +391,11 @@ public class VersionImpl extends EObjectImpl implements Version {
 		}
 	}
 
-	public void setVersionValue(String value) throws BadVersionValue {
+	public void setVersionValue(String value) throws BadVersionValueException {
+		this.setMajor(0);
+		this.setMinor(0);
+		this.setMicro(0);
+		this.setQualifier("");
 		String[] versionNumber = value.split("\\.");
 		if (versionNumber.length <= 4) {
 
@@ -411,15 +421,22 @@ public class VersionImpl extends EObjectImpl implements Version {
 					}
 				}
 			} catch (NumberFormatException e) {
-				e.printStackTrace();
-				throw new BadVersionValue(
+				this.setMajor(0);
+				this.setMinor(0);
+				this.setMicro(0);
+				this.setQualifier("");
+				throw new BadVersionValueException(
 						value
 								+ " is not a valid String value for a Version representation");
 			}
 		}
 	}
 
-	public boolean equals(Version version) {
+	public boolean equals(Object version_) {
+		if (!(version_ instanceof Version)) {
+			return false;
+		}
+		Version version = (Version)version_;
 		if (version != null) {
 			return this.getMajor() == version.getMajor()
 					&& this.getMinor() == version.getMinor()
@@ -429,7 +446,7 @@ public class VersionImpl extends EObjectImpl implements Version {
 		return true;
 	}
 
-	public boolean containsInto(String versionRange) throws BadVersionValue {
+	public boolean containsInto(String versionRange) throws BadVersionValueException {
 		if (versionRange != null) {
 			boolean minNotInclude = false;
 			boolean maxNotInclude = true;
@@ -449,17 +466,17 @@ public class VersionImpl extends EObjectImpl implements Version {
 				try {
 					maxVersion = ManifestFactory.eINSTANCE.createVersion();
 					maxVersion.setVersionValue(versionsValue[1]);
-				} catch (BadVersionValue e) {
+				} catch (BadVersionValueException e) {
 					maxVersion = null;
-					throw new BadVersionValue(versionRange + " is not a valid version range.\tIt's " + versionsValue[1] + " which is unvalid.");
+					throw new BadVersionValueException(versionRange + " is not a valid version range.\tIt's " + versionsValue[1] + " which is unvalid.");
 				}
 			}
 			try {
 				minVersion = ManifestFactory.eINSTANCE.createVersion();
 				minVersion.setVersionValue(versionsValue[0]);
-			} catch (BadVersionValue e) {
+			} catch (BadVersionValueException e) {
 				minVersion = null;
-				throw new BadVersionValue(versionRange + " is not a valid version range.\tIt's " + versionsValue[0] + " which is unvalid.");
+				throw new BadVersionValueException(versionRange + " is not a valid version range.\tIt's " + versionsValue[0] + " which is unvalid.");
 			}
 
 			return this.greaterThan(minVersion, minNotInclude)

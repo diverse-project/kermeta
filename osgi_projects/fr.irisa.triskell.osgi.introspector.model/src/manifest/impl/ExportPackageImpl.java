@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ExportPackageImpl.java,v 1.4 2008-08-19 07:04:45 edaubert Exp $
+ * $Id: ExportPackageImpl.java,v 1.5 2008-08-22 12:43:32 edaubert Exp $
  */
 package manifest.impl;
 
@@ -10,6 +10,7 @@ import java.util.Collection;
 
 import manifest.ExportPackage;
 import manifest.ManifestPackage;
+import manifest.Package;
 import option.ExportPackageDirective;
 
 import org.eclipse.emf.common.notify.NotificationChain;
@@ -175,24 +176,33 @@ public class ExportPackageImpl extends MANIFESTEntryImpl implements
 		return super.eIsSet(featureID);
 	}
 
-	/*
-	 * public void addExportPackage(Package _package) { if
-	 * (!getPackages().contains(_package)) { getPackages().add(_package); } }
-	 * 
-	 * public void addExportPackageReference(String reference) { if
-	 * (!getPackageReference().contains(reference)) {
-	 * getPackageReference().add(reference); } }
-	 */
-
 	public void addPackage(manifest.Package _package) {
-		if (!getPackages().contains(_package)) {
-			getPackages().add(_package);
+		if (_package != null) {
+			boolean exist = false;
+			for (Package tmp :getPackages()) {
+				if (tmp.getReference().equals(_package.getReference())) {
+					exist = true;
+					break;
+				}
+			}
+			if (!exist) {
+				getPackages().add(_package);
+			}
 		}
 	}
 
 	public void addDirective(ExportPackageDirective directive) {
-		if (!getDirectives().contains(directive)) {
-			getDirectives().add(directive);
+		if (directive != null) {
+			boolean exist = false;
+			for (ExportPackageDirective tmp :getDirectives()) {
+				if (tmp.getToken().equals(directive.getToken())) {
+					exist = true;
+					break;
+				}
+			}
+			if (!exist) {
+				getDirectives().add(directive);
+			}
 		}
 
 	}

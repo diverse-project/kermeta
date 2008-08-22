@@ -11,7 +11,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
-import manifest.BadVersionValue;
+import manifest.BadVersionValueException;
 import manifest.BundleActivator;
 import manifest.ClassPath;
 import manifest.ExportPackage;
@@ -97,7 +97,7 @@ public class ResolverDynamicWithSystemRepresentation implements Resolver {
 						try {
 							v.setVersionValue((String) bundle.getHeaders().get(
 									Constants.BUNDLE_VERSION));
-						} catch (BadVersionValue e) {
+						} catch (BadVersionValueException e) {
 							v.setMajor(0);
 							v.setMinor(0);
 							v.setMicro(0);
@@ -120,7 +120,7 @@ public class ResolverDynamicWithSystemRepresentation implements Resolver {
 									break;
 								}
 							}
-						} catch (BadVersionValue e) {
+						} catch (BadVersionValueException e) {
 							util.log(Level.WARN, e.getMessage(), requireBundles
 									.get(requirebundle));
 						}
@@ -195,7 +195,7 @@ public class ResolverDynamicWithSystemRepresentation implements Resolver {
 					try {
 						v.setVersionValue((String) hosts[0].getHeaders().get(
 								Constants.BUNDLE_VERSION));
-					} catch (BadVersionValue e) {
+					} catch (BadVersionValueException e) {
 						v.setMajor(0);
 						v.setMinor(0);
 						v.setMicro(0);
@@ -231,19 +231,6 @@ public class ResolverDynamicWithSystemRepresentation implements Resolver {
 		for (ClassPath classPath : classPaths.keySet()) {
 			Bundle bundle = classPaths.get(classPath);
 			String reference = classPath.getReference();
-
-			/*
-			 * boolean referenceFind = false; if (!reference.equals(".")) { int
-			 * find = util.entryExist(reference, bundle); if ((find == 0 &&
-			 * reference.endsWith(".jar")) || find == 1) { referenceFind = true; }
-			 * else { for (Bundle fragment : bundle.getFragments()) { find =
-			 * util.entryExist(reference, fragment); if ((find == 0 &&
-			 * reference.endsWith(".jar")) || find == 1) { referenceFind = true;
-			 * break; } } } } else { referenceFind = true; }
-			 * classPath.setResolved(referenceFind);
-			 * 
-			 * if (systemRepresentation && classPath.isResolved()) {
-			 */
 			if (!reference.equals(".")) {
 				SystemEntry systemEntry = bundle.getFolder()
 						.getEntry(reference);
@@ -282,7 +269,6 @@ public class ResolverDynamicWithSystemRepresentation implements Resolver {
 
 							}
 						} else {
-							// must not appear
 							util.log(Level.WARN, "Unvalid "
 									+ Constants.BUNDLE_CLASSPATH + " entry :"
 									+ "\n" + systemEntry.getFullPath()
@@ -292,7 +278,6 @@ public class ResolverDynamicWithSystemRepresentation implements Resolver {
 
 						}
 					} else {
-						// must not appear
 						util.log(Level.WARN, "Unvalid "
 								+ Constants.BUNDLE_CLASSPATH + " entry :"
 								+ "\n" + reference
@@ -396,23 +381,9 @@ public class ResolverDynamicWithSystemRepresentation implements Resolver {
 		for (NativeCode nativeCode : nativeCodes.keySet()) {
 			String reference = nativeCode.getReference();
 			Bundle bundle = nativeCodes.get(nativeCode);
-			/*
-			 * boolean referenceFind = false; int find =
-			 * util.entryExist(reference, bundle); if (find == 0) {
-			 * referenceFind = true; } else { for (Bundle fragment :
-			 * nativeCodes.get(nativeCode) .getFragments()) { find =
-			 * util.entryExist(nativeCode.getReference(), fragment); if (find ==
-			 * 0) { referenceFind = true; break; } }
-			 * nativeCode.setResolved(referenceFind); }
-			 * nativeCode.setResolved(referenceFind);
-			 * 
-			 * if (systemRepresentation && nativeCode.isResolved()) {
-			 */
-			// referenceFind = false;
 			SystemEntry systemEntry = bundle.getFolder().getEntry(reference);
 			if (systemEntry != null && systemEntry instanceof File) {
 				nativeCode.setFile((File) systemEntry);
-				// referenceFind = true;
 			} else {
 				for (Bundle fragment : bundle.getFragments()) {
 					systemEntry = fragment.getFolder().getEntry(reference);
@@ -422,7 +393,6 @@ public class ResolverDynamicWithSystemRepresentation implements Resolver {
 					}
 				}
 			}
-			// }
 		}
 	}
 
@@ -458,7 +428,6 @@ public class ResolverDynamicWithSystemRepresentation implements Resolver {
 						}
 					}
 					if (!find) {
-						// must not appears
 						util.log(Level.INFO, exportPackage.getReference()
 								+ " is not a valid package."
 								+ "\n"
@@ -547,7 +516,6 @@ public class ResolverDynamicWithSystemRepresentation implements Resolver {
 					}
 				}
 				if (!find) {
-					// must not appear
 					util.log(Level.WARN, reference + " is not a valid package."
 							+ "\n" + "Maybe the folder "
 							+ reference.replace(".", "/")
@@ -584,7 +552,7 @@ public class ResolverDynamicWithSystemRepresentation implements Resolver {
 													.getHeaders()
 													.get(
 															Constants.BUNDLE_VERSION));
-								} catch (BadVersionValue e) {
+								} catch (BadVersionValueException e) {
 									version.setMajor(0);
 									version.setMinor(0);
 									version.setMicro(0);
@@ -629,7 +597,7 @@ public class ResolverDynamicWithSystemRepresentation implements Resolver {
 																.getHeaders()
 																.get(
 																		Constants.BUNDLE_VERSION));
-											} catch (BadVersionValue e) {
+											} catch (BadVersionValueException e) {
 												version.setMajor(0);
 												version.setMinor(0);
 												version.setMicro(0);

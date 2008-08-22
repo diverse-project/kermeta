@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ImportPackageImpl.java,v 1.6 2008-08-19 07:04:45 edaubert Exp $
+ * $Id: ImportPackageImpl.java,v 1.7 2008-08-22 12:43:33 edaubert Exp $
  */
 package manifest.impl;
 
@@ -359,30 +359,27 @@ public class ImportPackageImpl extends MANIFESTEntryImpl implements
 		return result.toString();
 	}
 
-	/*
-	 * public void addPackageReference(String value) { if
-	 * (!getPackagesReference().contains(value)) {
-	 * getPackagesReference().add(value); }
-	 *  }
-	 */
-
 	public void addPackage(manifest.Package _package) {
-		boolean exist = false;
-		for (manifest.Package p : getPackages()) {
-			if (p.getReference().equals(_package.getReference())) {
-				exist = true;
-				break;
+		if (_package != null) {
+			boolean exist = false;
+			for (manifest.Package p : getPackages()) {
+				if (p.getReference().equals(_package.getReference())) {
+					exist = true;
+					break;
+				}
 			}
-		}
-		if (!exist) {
-			getPackages().add(_package);
+			if (!exist) {
+				getPackages().add(_package);
+			}
 		}
 
 	}
 
 	public void addPackagesReference(String reference) {
-		if (!getPackageReferences().contains(reference)) {
-			getPackageReferences().add(reference);
+		if (reference != null) {
+			if (!getPackageReferences().contains(reference)) {
+				getPackageReferences().add(reference);
+			}
 		}
 
 	}

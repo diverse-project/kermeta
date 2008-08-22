@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: BundleNativeCodeImpl.java,v 1.4 2008-08-19 07:04:45 edaubert Exp $
+ * $Id: BundleNativeCodeImpl.java,v 1.5 2008-08-22 12:43:34 edaubert Exp $
  */
 package manifest.impl;
 
@@ -11,6 +11,7 @@ import java.util.Collection;
 import manifest.BundleNativeCode;
 import manifest.ManifestPackage;
 import manifest.NativeCode;
+import option.DirectiveEntry;
 import option.NativeCodeDirective;
 
 import org.eclipse.emf.common.notify.Notification;
@@ -242,17 +243,33 @@ public class BundleNativeCodeImpl extends MANIFESTEntryImpl implements
 	}
 
 	public void addDirective(NativeCodeDirective directive) {
-		getDirectives().add(directive);
+		if (directive != null && directive.getToken() != null) {
+			boolean exist = false;
+			for (DirectiveEntry entry : getDirectives()) {
+				if (entry.getToken().equals(directive.getToken())) {
+					exist = true;
+					break;
+				}
+			}
+			if (!exist) {
+				getDirectives().add(directive);
+			}
+		}
 	}
 
 	public void addNativeCode(NativeCode nativeCode) {
-		getNativeCodes().add(nativeCode);
+		if (nativeCode != null && nativeCode.getReference() != null) {
+			boolean exist = false;
+			for (DirectiveEntry entry : getDirectives()) {
+				if (entry.getToken().equals(nativeCode.getReference())) {
+					exist = true;
+					break;
+				}
+			}
+			if (!exist) {
+				getNativeCodes().add(nativeCode);
+			}
+		}
 
 	}
-
-	/*
-	 * public void addFileReference(String fileReference) {
-	 * getFileReferences().add(fileReference);
-	 *  }
-	 */
 } // BundleNativeCodeImpl

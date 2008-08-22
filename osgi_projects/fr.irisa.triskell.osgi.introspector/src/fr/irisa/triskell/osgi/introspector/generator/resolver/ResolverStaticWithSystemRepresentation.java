@@ -261,7 +261,6 @@ public class ResolverStaticWithSystemRepresentation implements Resolver {
 				util.log(Level.WARN, "The activator reference "
 						+ value.getReference() + " is not valid.", activators
 						.get(value));
-				activators.get(value).getManifest().setBundleActivator(null);
 			}
 		}
 	}

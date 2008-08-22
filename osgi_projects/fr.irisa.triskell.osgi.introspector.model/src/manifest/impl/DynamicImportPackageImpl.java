@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: DynamicImportPackageImpl.java,v 1.4 2008-08-19 07:04:45 edaubert Exp $
+ * $Id: DynamicImportPackageImpl.java,v 1.5 2008-08-22 12:43:34 edaubert Exp $
  */
 package manifest.impl;
 
@@ -139,7 +139,7 @@ public class DynamicImportPackageImpl extends MANIFESTEntryImpl implements
 	}
 
 	public void addPackageReference(String packageName) {
-		if (!getPackages().contains(packageName)) {
+		if (packageName != null && !getPackages().contains(packageName)) {
 			getPackages().add(packageName);
 		}
 	}

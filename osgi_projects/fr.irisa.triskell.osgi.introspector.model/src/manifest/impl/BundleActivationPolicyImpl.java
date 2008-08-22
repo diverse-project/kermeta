@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: BundleActivationPolicyImpl.java,v 1.3 2008-08-19 07:04:45 edaubert Exp $
+ * $Id: BundleActivationPolicyImpl.java,v 1.4 2008-08-22 12:43:32 edaubert Exp $
  */
 package manifest.impl;
 
@@ -12,6 +12,7 @@ import manifest.BundleActivationPolicy;
 import manifest.ManifestPackage;
 import manifest.PolicyEnum;
 import option.ActivationPolicyDirective;
+import option.DirectiveEntry;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
@@ -208,12 +209,24 @@ public class BundleActivationPolicyImpl extends MANIFESTEntryImpl implements
 	}
 
 	public void addDirective(ActivationPolicyDirective directive) {
-		getDirectives().add(directive);
-
+		if (directive != null && directive.getToken() != null) {
+			boolean exist = false;
+			for (DirectiveEntry entry : getDirectives()) {
+				if (entry.getToken().equals(directive.getToken())) {
+					exist = true;
+					break;
+				}
+			}
+			if (!exist) {
+				getDirectives().add(directive);
+			}
+		}
 	}
 
 	public void removeDirective(ActivationPolicyDirective directive) {
-		getDirectives().remove(directive);
+		if (getDirectives().contains(directive)) {
+			getDirectives().remove(directive);
+		}
 
 	}
 

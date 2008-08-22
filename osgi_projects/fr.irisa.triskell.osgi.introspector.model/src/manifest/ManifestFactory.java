@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ManifestFactory.java,v 1.3 2008-08-19 07:04:45 edaubert Exp $
+ * $Id: ManifestFactory.java,v 1.4 2008-08-22 12:43:34 edaubert Exp $
  */
 package manifest;
 
@@ -49,15 +49,6 @@ public interface ManifestFactory extends EFactory {
 	 * @generated
 	 */
 	MANIFEST createMANIFEST();
-
-	/**
-	 * Returns a new object of class '<em>MANIFEST Entry</em>'. <!--
-	 * begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @return a new object of class '<em>MANIFEST Entry</em>'.
-	 * @generated
-	 */
-	MANIFESTEntry createMANIFESTEntry();
 
 	/**
 	 * Returns a new object of class '<em>Simple MANIFEST Entry</em>'. <!--

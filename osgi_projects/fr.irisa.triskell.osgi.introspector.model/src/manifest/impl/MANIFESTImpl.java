@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: MANIFESTImpl.java,v 1.5 2008-08-19 07:04:45 edaubert Exp $
+ * $Id: MANIFESTImpl.java,v 1.6 2008-08-22 12:43:34 edaubert Exp $
  */
 package manifest.impl;
 
@@ -1487,21 +1487,21 @@ public class MANIFESTImpl extends EObjectImpl implements MANIFEST {
 	}
 
 	public void addUnknownEntry(SimpleManifestEntryManyValues entry) {
-		getUnknownEntries().add(entry);
+			getUnknownEntries().add(entry);
 	}
 
 	public void addBundleClassPath(BundleClassPath entry) {
-		getBundleClassPaths().add(entry);
+			getBundleClassPaths().add(entry);
 	}
 
 	public void addBundleRequiredExecutionEnvironment(
 			BundleRequiredExecutionEnvironment entry) {
-		getBundleRequiredExecutionEnvironments().add(entry);
+			getBundleRequiredExecutionEnvironments().add(entry);
 
 	}
 
 	public void addDynamicImportPackage(DynamicImportPackage entry) {
-		getDynamicImportPackages().add(entry);
+			getDynamicImportPackages().add(entry);
 
 	}
 

@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: BundleCategoryImpl.java,v 1.2 2008-07-31 13:43:53 edaubert Exp $
+ * $Id: BundleCategoryImpl.java,v 1.3 2008-08-22 12:43:32 edaubert Exp $
  */
 package manifest.impl;
 
@@ -37,10 +37,6 @@ public class BundleCategoryImpl extends SimpleManifestEntryManyValuesImpl
 	@Override
 	protected EClass eStaticClass() {
 		return ManifestPackage.Literals.BUNDLE_CATEGORY;
-	}
-
-	public void addValue(String value) {
-		getValues().add(value);
 	}
 
 } // BundleCategoryImpl

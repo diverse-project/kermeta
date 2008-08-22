@@ -3,7 +3,7 @@ package fr.irisa.triskell.osgi.introspector.generator.resolver;
 import java.util.List;
 import java.util.Map;
 
-import manifest.BadVersionValue;
+import manifest.BadVersionValueException;
 import manifest.BundleActivator;
 import manifest.ClassPath;
 import manifest.ExportPackage;
@@ -84,7 +84,7 @@ public class ResolverDynamicWithoutSystemRepresentation implements Resolver {
 						try {
 							v.setVersionValue((String) bundle.getHeaders().get(
 									Constants.BUNDLE_VERSION));
-						} catch (BadVersionValue e) {
+						} catch (BadVersionValueException e) {
 							v.setMajor(0);
 							v.setMinor(0);
 							v.setMicro(0);
@@ -107,7 +107,7 @@ public class ResolverDynamicWithoutSystemRepresentation implements Resolver {
 									break;
 								}
 							}
-						} catch (BadVersionValue e) {
+						} catch (BadVersionValueException e) {
 							util.log(Level.WARN, e.getMessage(), requireBundles
 									.get(requirebundle));
 						}
@@ -182,13 +182,11 @@ public class ResolverDynamicWithoutSystemRepresentation implements Resolver {
 					try {
 						v.setVersionValue((String) hosts[0].getHeaders().get(
 								Constants.BUNDLE_VERSION));
-					} catch (BadVersionValue e) {
+					} catch (BadVersionValueException e) {
 						v.setMajor(0);
 						v.setMinor(0);
 						v.setMicro(0);
 					}
-					// Bundle host =
-					// framework.findBundle(hosts[0].getSymbolicName(), v);
 					Bundle host = framework.getBundle(hosts[0].getBundleId());
 					host.addFragment(fragment);
 					fragment.getManifest().getFragmentHost().setBundle(host);
@@ -335,19 +333,6 @@ public class ResolverDynamicWithoutSystemRepresentation implements Resolver {
 				nativeCode.setResolved(referenceFind);
 			}
 			nativeCode.setResolved(referenceFind);
-
-			/*
-			 * if (systemRepresentation && nativeCode.isResolved()) {
-			 * referenceFind = false; SystemEntry systemEntry =
-			 * bundle.getFolder().getEntry( nativeCode.getReference()); if
-			 * (systemEntry != null && systemEntry instanceof File) {
-			 * nativeCode.setFile((File) systemEntry); referenceFind = true; }
-			 * else { for (Bundle fragment : nativeCodes.get(nativeCode)
-			 * .getFragments()) { systemEntry = fragment.getFolder().getEntry(
-			 * nativeCode.getReference()); if (systemEntry != null &&
-			 * systemEntry instanceof File) { nativeCode.setFile((File)
-			 * systemEntry); break; } } } }
-			 */
 		}
 	}
 
@@ -359,28 +344,6 @@ public class ResolverDynamicWithoutSystemRepresentation implements Resolver {
 			if (util.javaElementExist(reference, exportPackages
 					.get(exportPackage))) {
 				exportPackage.setResolved(true);
-				/*
-				 * if (systemRepresentation) { // First research into local
-				 * class path Package _package = bundle.getPackage()
-				 * .getPackage(reference); if (_package != null) {
-				 * exportPackage.setPackage(_package);
-				 * exportPackage.setResolved(true); } else { SystemEntry folder =
-				 * bundle.getFolder().getEntry( reference.replace(".", "/") +
-				 * "/"); if (folder != null && folder instanceof Folder) {
-				 * Package p = JarFactory.eINSTANCE.createPackage();
-				 * p.setFullPath(reference); p.setName(folder.getName());
-				 * bundle.getPackage().addPackage(p);
-				 * exportPackage.setPackage(p); exportPackage.setResolved(true); }
-				 * else { // Next we search into Fragment boolean find = false;
-				 * for (Bundle fragment : bundle.getFragments()) { _package =
-				 * fragment.getPackage().getPackage( reference); if (_package !=
-				 * null) { exportPackage.setPackage(_package); find = true;
-				 * break; } } if (!find) { // must not appears util .log(
-				 * Level.INFO, exportPackage.getReference() + " is not a valid
-				 * package." + "\n" + "Maybe the folder " + exportPackage
-				 * .getReference() .replace(".", "/") + " doesn't exist.",
-				 * bundle); } exportPackage.setResolved(find); } } }
-				 */
 			} else {
 				util.log(Level.INFO, exportPackage.getReference()
 						+ " is not a valid package." + "\n"
@@ -395,15 +358,16 @@ public class ResolverDynamicWithoutSystemRepresentation implements Resolver {
 	public void resolveExportPackageExclude(
 			Map<option.Class, ExportPackage> exportPackages,
 			Map<ExportPackage, Bundle> bundles) {
-		resolverStatic.resolveExportPackageExclude(exportPackages, bundles);
+		// TODO Que faut-il faire dans le cas ou il n'y a pas la représentation
+		// des packages et des classes ainsi que des file et des folder
 
 	}
 
 	public void resolveExportPackageInclude(
 			Map<option.Class, ExportPackage> exportPackages,
 			Map<ExportPackage, Bundle> bundles) {
-		resolverStatic.resolveExportPackageInclude(exportPackages, bundles);
-
+		// TODO Que faut-il faire dans le cas ou il n'y a pas la représentation
+		// des packages et des classes ainsi que des file et des folder
 	}
 
 	public void resolveActivator(Map<BundleActivator, Bundle> activators) {
@@ -418,21 +382,6 @@ public class ResolverDynamicWithoutSystemRepresentation implements Resolver {
 			String reference = excludePackage.getReference();
 			if (util.javaElementExist(reference, bundle)) {
 				excludePackage.setResolved(true);
-
-				/*
-				 * if (systemRepresentation) { // First research into local
-				 * class path Package _package = bundle.getPackage()
-				 * .getPackage(reference); if (_package != null) {
-				 * excludePackage.setPackage(_package); } else { // Second
-				 * research into Fragment boolean find = false; for (Bundle
-				 * fragment : bundle.getFragments()) { _package =
-				 * fragment.getPackage().getPackage( reference); if (_package !=
-				 * null) { excludePackage.setPackage(_package); find = true;
-				 * break; } } if (!find) { // must not appear util .log(
-				 * Level.WARN, reference + " is not a valid package." + "\n" +
-				 * "Maybe the folder " + reference.replace(".", "/") + " don't
-				 * contain class file or doesn't exist.", bundle); } } }
-				 */
 			} else {
 				util
 						.log(
@@ -456,21 +405,6 @@ public class ResolverDynamicWithoutSystemRepresentation implements Resolver {
 			String reference = includePackage.getReference();
 			if (util.javaElementExist(reference, bundle)) {
 				includePackage.setResolved(true);
-
-				/*
-				 * if (systemRepresentation) { // First research into local
-				 * class path Package _package = bundle.getPackage()
-				 * .getPackage(reference); if (_package != null) {
-				 * includePackage.setPackage(_package); } else { // Second
-				 * research into Fragment boolean find = false; for (Bundle
-				 * fragment : bundle.getFragments()) { _package =
-				 * fragment.getPackage().getPackage( reference); if (_package !=
-				 * null) { includePackage.setPackage(_package); find = true;
-				 * break; } } if (!find) { // must not appear util .log(
-				 * Level.WARN, reference + " is not a valid package." + "\n" +
-				 * "Maybe the folder " + reference.replace(".", "/") + " don't
-				 * contain class file or doesn't exist.", bundle); } } }
-				 */
 			} else {
 				util
 						.log(
@@ -512,7 +446,7 @@ public class ResolverDynamicWithoutSystemRepresentation implements Resolver {
 													.getHeaders()
 													.get(
 															Constants.BUNDLE_VERSION));
-								} catch (BadVersionValue e) {
+								} catch (BadVersionValueException e) {
 									version.setMajor(0);
 									version.setMinor(0);
 									version.setMicro(0);
@@ -557,7 +491,7 @@ public class ResolverDynamicWithoutSystemRepresentation implements Resolver {
 																.getHeaders()
 																.get(
 																		Constants.BUNDLE_VERSION));
-											} catch (BadVersionValue e) {
+											} catch (BadVersionValueException e) {
 												version.setMajor(0);
 												version.setMinor(0);
 												version.setMicro(0);
@@ -570,7 +504,7 @@ public class ResolverDynamicWithoutSystemRepresentation implements Resolver {
 													.get(value)
 													.equals(
 															bundleImportingPackage)) {
-												// We did not check the attribut
+												// We did not check the attribute
 												// version
 												// because we use the OSGi
 												// framework

@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ExcludePackagesImpl.java,v 1.4 2008-08-19 07:04:45 edaubert Exp $
+ * $Id: ExcludePackagesImpl.java,v 1.5 2008-08-22 12:43:31 edaubert Exp $
  */
 package option.impl;
 
@@ -141,24 +141,18 @@ public class ExcludePackagesImpl extends ActivationPolicyDirectiveImpl
 	}
 
 	public void addExcludePackage(option.Package _package) {
-		boolean exist = false;
-		for (option.Package tmp : getPackages()) {
-			if (tmp.getReference().equals(_package.getReference())) {
-				exist = true;
-				break;
+		if (_package != null && _package.getReference() != null) {
+			boolean exist = false;
+			for (option.Package tmp : getPackages()) {
+				if (tmp.getReference().equals(_package.getReference())) {
+					exist = true;
+					break;
+				}
+			}
+			if (!exist) {
+				getPackages().add(_package);
 			}
 		}
-		if (!exist) {
-			getPackages().add(_package);
-		}
-
 	}
-
-	/*
-	 * public void addExcludePackageReference(String reference) { if
-	 * (!getPackagesReference().contains(reference)) {
-	 * getPackagesReference().add(reference); }
-	 *  }
-	 */
 
 } // ExcludePackagesImpl

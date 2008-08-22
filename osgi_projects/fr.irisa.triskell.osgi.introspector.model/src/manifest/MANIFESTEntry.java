@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: MANIFESTEntry.java,v 1.2 2008-07-31 13:43:52 edaubert Exp $
+ * $Id: MANIFESTEntry.java,v 1.3 2008-08-22 12:43:34 edaubert Exp $
  */
 package manifest;
 
@@ -24,7 +24,7 @@ import org.eclipse.emf.ecore.EObject;
  * </p>
  *
  * @see manifest.ManifestPackage#getMANIFESTEntry()
- * @model
+ * @model abstract="true"
  * @generated
  */
 public interface MANIFESTEntry extends EObject {

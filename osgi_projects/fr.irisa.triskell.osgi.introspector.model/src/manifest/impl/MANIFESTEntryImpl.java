@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: MANIFESTEntryImpl.java,v 1.2 2008-07-31 13:43:53 edaubert Exp $
+ * $Id: MANIFESTEntryImpl.java,v 1.3 2008-08-22 12:43:33 edaubert Exp $
  */
 package manifest.impl;
 
@@ -35,7 +35,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *
  * @generated
  */
-public class MANIFESTEntryImpl extends EObjectImpl implements MANIFESTEntry {
+public abstract class MANIFESTEntryImpl extends EObjectImpl implements MANIFESTEntry {
 	/**
 	 * The default value of the '{@link #getEntryName() <em>Entry Name</em>}' attribute.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -206,7 +206,18 @@ public class MANIFESTEntryImpl extends EObjectImpl implements MANIFESTEntry {
 	}
 
 	public void addOption(AttributEntry option) {
-		getOptions().add(option);
+		if (option != null && option.getToken() != null) {
+			boolean exist = false;
+			for (AttributEntry entry : getOptions()) {
+				if (entry.getToken().equals(option.getToken())) {
+					exist = true;
+					break;
+				}
+			}
+			if (!exist) {
+				getOptions().add(option);
+			}
+		}
 	}
 
 } // MANIFESTEntryImpl

@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: MandatoryImpl.java,v 1.2 2008-07-31 13:43:53 edaubert Exp $
+ * $Id: MandatoryImpl.java,v 1.3 2008-08-22 12:43:31 edaubert Exp $
  */
 package option.impl;
 
@@ -125,9 +125,7 @@ public class MandatoryImpl extends ExportPackageDirectiveImpl implements
 	}
 
 	public void addAttribut(AttributEntry attribut) {
-		if (!getAttributs().contains(attribut)) {
-			getAttributs().add(attribut);
-		}
+		getAttributs().add(attribut);
 
 	}
 

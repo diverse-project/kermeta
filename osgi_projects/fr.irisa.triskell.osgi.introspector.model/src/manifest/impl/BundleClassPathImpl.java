@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: BundleClassPathImpl.java,v 1.4 2008-08-19 07:04:45 edaubert Exp $
+ * $Id: BundleClassPathImpl.java,v 1.5 2008-08-22 12:43:33 edaubert Exp $
  */
 package manifest.impl;
 
@@ -142,12 +142,18 @@ public class BundleClassPathImpl extends MANIFESTEntryImpl implements
 	}
 
 	public void addClassPath(ClassPath classPath) {
-		getClassPaths().add(classPath);
+		if (classPath != null && classPath.getReference() != null) {
+			boolean exist = false;
+			for (ClassPath tmp : getClassPaths()) {
+				if (tmp.getReference().equals(classPath.getReference())) {
+					exist = true;
+					break;
+				}
+			}
+			if (!exist) {
+				getClassPaths().add(classPath);
+			}
+		}
 	}
-
-	/*
-	 * public void addEntryReference(String reference) {
-	 * getReferences().add(reference); }
-	 */
 
 } // BundleClassPathImpl

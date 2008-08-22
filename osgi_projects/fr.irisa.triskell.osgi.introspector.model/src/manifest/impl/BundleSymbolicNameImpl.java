@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: BundleSymbolicNameImpl.java,v 1.2 2008-07-31 13:43:53 edaubert Exp $
+ * $Id: BundleSymbolicNameImpl.java,v 1.3 2008-08-22 12:43:33 edaubert Exp $
  */
 package manifest.impl;
 
@@ -210,26 +210,28 @@ public class BundleSymbolicNameImpl extends MANIFESTEntryImpl implements
 	}
 
 	public void addDirective(SymbolicNameDirective directive) {
-		if (directive instanceof Singleton) {
-			for (Iterator<SymbolicNameDirective> directivesIterator = getDirectives()
-					.iterator(); directivesIterator.hasNext();) {
-				SymbolicNameDirective directivetmp = directivesIterator.next();
-				if (directivetmp instanceof Singleton) {
-					getDirectives().remove(directivetmp);
-					break;
+		if (directive != null && directive.getToken() != null) {
+			if (directive instanceof Singleton) {
+				for (Iterator<SymbolicNameDirective> directivesIterator = getDirectives()
+						.iterator(); directivesIterator.hasNext();) {
+					SymbolicNameDirective directivetmp = directivesIterator.next();
+					if (directivetmp instanceof Singleton) {
+						getDirectives().remove(directivetmp);
+						break;
+					}
+				}
+			} else if (directive instanceof FragmentAttachment) {
+				for (Iterator<SymbolicNameDirective> directivesIterator = getDirectives()
+						.iterator(); directivesIterator.hasNext();) {
+					SymbolicNameDirective directivetmp = directivesIterator.next();
+					if (directivetmp instanceof FragmentAttachment) {
+						getDirectives().remove(directivetmp);
+						break;
+					}
 				}
 			}
-		} else if (directive instanceof FragmentAttachment) {
-			for (Iterator<SymbolicNameDirective> directivesIterator = getDirectives()
-					.iterator(); directivesIterator.hasNext();) {
-				SymbolicNameDirective directivetmp = directivesIterator.next();
-				if (directivetmp instanceof FragmentAttachment) {
-					getDirectives().remove(directivetmp);
-					break;
-				}
-			}
+			getDirectives().add(directive);
 		}
-		getDirectives().add(directive);
 	}
 
 } // BundleSymbolicNameImpl

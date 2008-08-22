@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ManifestFactoryImpl.java,v 1.4 2008-08-19 07:04:45 edaubert Exp $
+ * $Id: ManifestFactoryImpl.java,v 1.5 2008-08-22 12:43:33 edaubert Exp $
  */
 package manifest.impl;
 
@@ -33,7 +33,6 @@ import manifest.FragmentHost;
 import manifest.ImportPackage;
 import manifest.ImportService;
 import manifest.MANIFEST;
-import manifest.MANIFESTEntry;
 import manifest.MANIFESTVersionEnum;
 import manifest.ManifestFactory;
 import manifest.ManifestPackage;
@@ -98,7 +97,6 @@ public class ManifestFactoryImpl extends EFactoryImpl implements
 			case ManifestPackage.SERVICE: return createService();
 			case ManifestPackage.VERSION: return createVersion();
 			case ManifestPackage.MANIFEST: return createMANIFEST();
-			case ManifestPackage.MANIFEST_ENTRY: return createMANIFESTEntry();
 			case ManifestPackage.SIMPLE_MANIFEST_ENTRY: return createSimpleMANIFESTEntry();
 			case ManifestPackage.BUNDLE_NAME: return createBundleName();
 			case ManifestPackage.BUNDLE_SYMBOLIC_NAME: return createBundleSymbolicName();
@@ -206,15 +204,6 @@ public class ManifestFactoryImpl extends EFactoryImpl implements
 	public MANIFEST createMANIFEST() {
 		MANIFESTImpl manifest = new MANIFESTImpl();
 		return manifest;
-	}
-
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @generated
-	 */
-	public MANIFESTEntry createMANIFESTEntry() {
-		MANIFESTEntryImpl manifestEntry = new MANIFESTEntryImpl();
-		return manifestEntry;
 	}
 
 	/**
