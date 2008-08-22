@@ -1,4 +1,4 @@
-/* $Id: KM2EcoreContext.kmt,v 1.27 2008-08-18 07:37:00 cfaucher Exp $
+/* $Id: KM2EcoreContext.kmt,v 1.28 2008-08-22 11:43:46 cfaucher Exp $
  * Creation date: February 14, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -13,7 +13,6 @@ package km2ecore;
 require kermeta
 require "platform:/plugin/fr.irisa.triskell.kermeta/lib/ecore.kmt"
 require "common/KeywordList.kmt"
-require "common/TypeMapping.kmt"
 require "helper/kermeta/KermetaHelper.kmt"
 require "http://www.kermeta.org/Traceability"
 require "http://www.kermeta.org/simk"
@@ -30,8 +29,8 @@ using kermeta::persistence
 using simk
 using kermeta::utils
 
-class KM2EcoreContext
-{
+class KM2EcoreContext {
+
 	/** The input model (as input of the transformation) */
 	attribute kmInput : String [1..1]
 	
@@ -81,7 +80,7 @@ class KM2EcoreContext
 	reference javaKeyWordList : JavaKeyWordList [0..1]
 	
 	/** Unique instance of the JavaTypeMapping */
-	reference javaTypeMapping : JavaTypeMapping [0..1]
+	//reference javaTypeMapping : JavaTypeMapping [0..1]
 	
 	/**  */
 	reference inputRepository : EMFRepository [1..1]
@@ -160,8 +159,8 @@ class KM2EcoreContext
 		javaKeyWordList.initialize()
 		
 		// Initializing the java type mappings.
-		javaTypeMapping := JavaTypeMapping.new
-		javaTypeMapping.initialize()
+		//javaTypeMapping := JavaTypeMapping.new
+		//javaTypeMapping.initialize()
 		
 		// Loading the km model and its possible trace model.
 		self.inputRepository := EMFRepository.new
@@ -259,7 +258,7 @@ class KM2EcoreContext
 		end
 	end
 	
-	operation getFtSuffix() : String is do
+	operation printFtSuffix() : String is do
 		if self.ftSuffixActivation and self.ftSuffix.size()>0 then
 			result := "_ft" + self.ftSuffix.peek()
 		else
