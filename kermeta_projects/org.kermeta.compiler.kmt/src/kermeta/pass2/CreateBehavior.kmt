@@ -1,4 +1,4 @@
-/* $Id: CreateBehavior.kmt,v 1.44 2008-08-22 11:44:08 cfaucher Exp $
+/* $Id: CreateBehavior.kmt,v 1.45 2008-08-22 16:05:56 cfaucher Exp $
  * Creation date: January 21, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -305,7 +305,7 @@ package structure {
 			
 				var type_from_map : Type init context.ftMapTypeStack.peek().getValue(self)
 				if not type_from_map.isVoid() then
-				stdio.writeln("++++++++++======== " + self.toString)
+					stdio.writeln("++++++++++======== " + self.toString)
 					context.ftSuffixActivation := false
 					result := type_from_map.createBehaviorJava(context)
 					context.ftSuffixActivation := true
@@ -332,7 +332,7 @@ package structure {
 	
 	aspect class Enumeration {
 		method createBehaviorJava(context : KM2EcoreContext) : String is do
-			result := self.name
+			result := self.qualifiedName.replace("::", ".")
 		end
 	}
 	
@@ -545,6 +545,42 @@ package behavior {
 	}
 	
 	aspect class CallFeature {
+	
+		operation fromUtil(context : KM2EcoreContext) : Boolean is do
+		
+			var fName : String  init IdentifierHelper.new.getMangledIdentifier(self.name, context)
+			
+			if self.staticOperation.container().asType(ClassDefinition).isValueType()
+			
+				or (self.staticOperation.container().asType(ClassDefinition).qualifiedName=="kermeta::language::structure::Object"
+					and (
+						context.frameworkOperations.contains(fName)
+							or ( (not target.isInstanceOf(CallVariable)) 
+									and (not target.isInstanceOf(CallResult))
+									and (not target.isInstanceOf(CallFeature))
+									and (not target.isInstanceOf(SelfExpression))
+								)
+						)
+					)
+				
+				or (self.staticOperation.container().asType(ClassDefinition).qualifiedName=="kermeta::language::structure::Type"
+					and (
+						context.frameworkOperations.contains(fName)
+							or ( (not target.isInstanceOf(CallVariable)) 
+									and (not target.isInstanceOf(CallResult))
+									and (not target.isInstanceOf(CallFeature))
+									and (not target.isInstanceOf(SelfExpression))
+								)
+						)
+					)
+			then
+				result := true
+			else
+				result := false
+			end
+							
+		end
+	
 		method createBehaviorJava(context : KM2EcoreContext) : String from CallExpression is do
 			super(context)
 			result := ""
@@ -575,10 +611,7 @@ package behavior {
 				
 				
 					///////Added 08-07-28 or self.staticOperation.container().asType(ClassDefinition).isMappedToJavaRawType()
-					if self.staticOperation.container().asType(ClassDefinition).isValueType()
-						or (self.staticOperation.container().asType(ClassDefinition).qualifiedName=="kermeta::language::structure::Object")
-						or (self.staticOperation.container().asType(ClassDefinition).qualifiedName=="kermeta::language::structure::Type")
-							then
+					if fromUtil(context) then
 					
 						if self.staticOperation.container().asType(ClassDefinition).isValueType() then
 							static_call := self.staticOperation.getOptimizedStaticCall(context)
@@ -694,10 +727,7 @@ package behavior {
 											if self.container.isInstanceOf(CallFeature) then
 												var cf_ : CallFeature init self.container.asType(CallFeature)
 												
-												if cf_.staticOperation.container.asType(ClassDefinition).isValueType()
-													or (cf_.staticOperation.container.asType(ClassDefinition).qualifiedName == "kermeta::language::standard::Object")
-													or (cf_.staticOperation.container.asType(ClassDefinition).qualifiedName == "kermeta::language::standard::Type")
-													or (cf_.staticOperation.getCompiledJavaExtern() != "") then
+												if cf_.fromUtil(context) or (cf_.staticOperation.getCompiledJavaExtern() != "") then
 												else
 													result := result + "."
 												end
@@ -780,15 +810,14 @@ package behavior {
 					//str_toInclude := str_toInclude + self.parameters.elementAt(inc_param).staticType.createBehaviorJava(context) + " " + p.name
 					
 					//Declare and initialize the function type parameters
-					//stdio.writeln("uuiigg " + self.toString + " " + p.name)
 					var type_param_ : String init context.ftProductTypeStack.peek().getTypeByIndex(inc_param).createBehaviorJava(context)
 					
 					str_toInclude := str_toInclude + type_param_ + " " + p.name
 					
 					context.ftSuffixActivation := true
 					// + "(" + type_param_ + ") "
-					stdio.writeln("--: " + "inc_param: " + inc_param.toString() + " - " + self.getContainerAsType(Operation).asType(Operation).qualifiedName)
-					stdio.writeln("self.parameters: " + theLambdaExp.toString + " - " + self.name.toString + " - " + self.parameters.toString)
+					//stdio.writeln("--: " + "inc_param: " + inc_param.toString() + " - " + self.getContainerAsType(Operation).asType(Operation).qualifiedName)
+					//stdio.writeln("self.parameters: " + theLambdaExp.toString + " - " + self.name.toString + " - " + self.parameters.toString)
 					
 					str_toInclude := str_toInclude + " = " + self.parameters.elementAt(inc_param).createBehaviorJava(context) + ";\n"
 					context.ftSuffixActivation := false
@@ -874,26 +903,31 @@ package behavior {
 			var extended_class : EClass init self.getContainerAsType(ClassDefinition).asType(ClassDefinition).ecoreModelElement
 			var super_class : EClass init owningOperation.superOperation.container.asType(ClassDefinition).ecoreModelElement
 			
-			stdio.writeln("extended_class: " + extended_class.name + " super_class: " + super_class.name)
+			//stdio.writeln("extended_class: " + extended_class.name + " super_class: " + super_class.name)
 			
+			if owningOperation.isFunctionType() then
+				stdio.writeln("A callSuperFunctionType has been detected: " + owningOperation.qualifiedName())
+			else
 			
 			if ModelAnalizer.new().isExtendedBy(extended_class, super_class) then
 				result := result + "super." + owningOperation.name + "("
 			else
-				result := result + fromOperation + ".super_" + owningOperation.name + "(this, "
-				var simk_signature : String init "super_" + owningOperation.name + "(" + fromOperation + "self, )"
+				result := result + fromOperation + "Super.super_" + owningOperation.name + "(this, "
+				var simk_signature : String init "super_" + owningOperation.name + "(" + fromOperation + " self, )"
 				stdio.writeln("simk_signature: " + simk_signature)
 				//var simk_body : String init owningOperation.superOperation.body.createBehaviorJava(context)
 			end
 			
 			self.beforeLambdaExpressionResult := ""
 			
-			//result := result + CompilerHelperJava.new.ppComaSeparatedNodes(self.parameters, context) + ")"
+			result := result + CompilerHelperJava.new.ppComaSeparatedNodes(self.parameters, context) + ")"
 				
 			context.beforeLambdaExpressionResult := self.beforeLambdaExpressionResult
 			self.beforeLambdaExpressionResult := ""
 				
 			result := result + self.endOfExpressionFixer()
+			
+			end
 			
 		end
 	}
