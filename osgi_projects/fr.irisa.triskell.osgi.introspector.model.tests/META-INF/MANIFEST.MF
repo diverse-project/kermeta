@@ -1,0 +1,18 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: %pluginName
+Bundle-SymbolicName: fr.irisa.triskell.osgi.introspector.model.tests; singleton:=true
+Bundle-Version: 1.0.0
+Bundle-ClassPath: .
+Bundle-Vendor: %providerName
+Bundle-Localization: plugin
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Export-Package: framework.tests,
+ jar.tests,
+ manifest.tests,
+ option.tests
+Require-Bundle: org.eclipse.core.runtime,
+ fr.irisa.triskell.osgi.introspector.model;visibility:=reexport,
+ org.eclipse.emf.ecore.xmi;visibility:=reexport,
+ org.junit4
+Eclipse-LazyStart: true
