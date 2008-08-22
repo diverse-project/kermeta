@@ -1,4 +1,4 @@
-/* $Id: ExpressionHelper.kmt,v 1.5 2008-08-18 07:37:00 cfaucher Exp $
+/* $Id: ExpressionHelper.kmt,v 1.6 2008-08-22 11:44:08 cfaucher Exp $
  * Creation date: Jul 25, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -183,7 +183,7 @@ aspect class CallFeature {
 		//Replacing the self
 		if tgt.callsFunctionType() then
 			//context.ftSuffixActivation := true
-			context.ftContextualSelf := context.SELF_EXPRESSION_TO_REPLACE// + context.getFtSuffix()
+			context.ftContextualSelf := context.SELF_EXPRESSION_TO_REPLACE// + context.printFtSuffix()
 			//context.ftSuffixActivation := false
 		else
 		//if context.ftContextualSelf=="" then
@@ -217,14 +217,14 @@ aspect class CallFeature {
 		
 		if callElement != "" then
 			ft_str := ft_str + "\n//callElement\n"
-			ft_str := ft_str + callElement + " = result" + context.getFtSuffix() + ";\n"
+			ft_str := ft_str + callElement + " = result" + context.printFtSuffix() + ";\n"
 		end
 		
 		if (callElement == "") and (not Operation.new().isVoidType(self.staticType.getTypeName())) then
-			//ft_str := ft_str + self.staticType.createBehaviorJava(context) + " res_res = result" + context.getFtSuffix() + ";\n"
-			//context.ftContextualSelf := "result" + context.getFtSuffix()
+			//ft_str := ft_str + self.staticType.createBehaviorJava(context) + " res_res = result" + context.printFtSuffix() + ";\n"
+			//context.ftContextualSelf := "result" + context.printFtSuffix()
 			
-			context.resultOfLastFt := "result" + context.getFtSuffix()
+			context.resultOfLastFt := "result" + context.printFtSuffix()
 		end
 		
 		ft_str := ft_str + "//End of the Inlining of the function type: " + self.staticOperation.name + "\n"

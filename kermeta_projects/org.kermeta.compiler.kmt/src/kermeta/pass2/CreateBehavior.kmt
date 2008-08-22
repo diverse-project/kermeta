@@ -1,4 +1,4 @@
-/* $Id: CreateBehavior.kmt,v 1.43 2008-08-22 09:57:10 cfaucher Exp $
+/* $Id: CreateBehavior.kmt,v 1.44 2008-08-22 11:44:08 cfaucher Exp $
  * Creation date: January 21, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -86,7 +86,7 @@ package structure {
 				
 				// result is initialized only if the "return type" is not Void
 				if not isVoidType(type_label) then
-					javaCode.append("\n" + type_label + " result" + context.getFtSuffix() + " = null;\n")
+					javaCode.append("\n" + type_label + " result" + context.printFtSuffix() + " = null;\n")
 				end
 
 				// The Java source code is provided by: self.body.createBehaviorJava(context)
@@ -830,7 +830,7 @@ package behavior {
 				if self.name == "stdio" then
 					result := result + "org.kermeta.compil.runtime.helper.io.StdIOUtil"
 				else
-					result := result + IdentifierHelper.new.getMangledIdentifier(self.name, context) + context.getFtSuffix()
+					result := result + IdentifierHelper.new.getMangledIdentifier(self.name, context) + context.printFtSuffix()
 				end
 				
 				result := result + self.endOfExpressionFixer()
@@ -844,7 +844,7 @@ package behavior {
 			super(context)
 			//Try to insert line number
 			//result := "begin " + self.lineNumber.toString() + " " + self.fileName + "\n" + "result" + "\nend " + self.lineNumber.toString() + " " + self.fileName + "\n"
-			result := "result" + context.getFtSuffix()
+			result := "result" + context.printFtSuffix()
 		end
 	}
 	
@@ -907,7 +907,7 @@ package behavior {
 			result := ""
 			
 			var localType : String init self.staticType.createBehaviorJava(context)
-			var var_id : String init IdentifierHelper.new.getMangledIdentifier(self.identifier, context) + context.getFtSuffix()
+			var var_id : String init IdentifierHelper.new.getMangledIdentifier(self.identifier, context) + context.printFtSuffix()
 			
 			result := result + localType + " " + var_id
 			
@@ -1095,7 +1095,7 @@ package behavior {
 			
 			var str_condition : String init ""
 			
-			if context.getFtSuffix()=="" then
+			if context.printFtSuffix()=="" then
 				str_condition := str_condition + "\n\t" + context.getIfConditionId() + " = " + self.condition.createBehaviorJava(context)
 			else
 				if self.condition.isInstanceOf(CallVariable) then
