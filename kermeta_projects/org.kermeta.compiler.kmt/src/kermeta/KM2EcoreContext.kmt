@@ -1,4 +1,4 @@
-/* $Id: KM2EcoreContext.kmt,v 1.28 2008-08-22 11:43:46 cfaucher Exp $
+/* $Id: KM2EcoreContext.kmt,v 1.29 2008-08-22 16:03:37 cfaucher Exp $
  * Creation date: February 14, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -79,6 +79,9 @@ class KM2EcoreContext {
 	/** Unique instance of the JavaKeyWordList */
 	reference javaKeyWordList : JavaKeyWordList [0..1]
 	
+	/** List of the method from the framework */
+	reference frameworkOperations : String [0..*]
+	
 	/** Unique instance of the JavaTypeMapping */
 	//reference javaTypeMapping : JavaTypeMapping [0..1]
 	
@@ -158,6 +161,8 @@ class KM2EcoreContext {
 		javaKeyWordList := JavaKeyWordList.new
 		javaKeyWordList.initialize()
 		
+		self.initializeFrameworkOperations()
+		
 		// Initializing the java type mappings.
 		//javaTypeMapping := JavaTypeMapping.new
 		//javaTypeMapping.initialize()
@@ -195,6 +200,39 @@ class KM2EcoreContext {
 		self.PREVIOUS_STATEMENT_FT := "PREVIOUS_STATEMENT_FT"
 		
 		//self.GENMODEL_ANNOTATION := "http://www.eclipse.org/emf/2002/GenModel"
+	end
+	
+	operation initializeFrameworkOperations() : Void is do
+	
+		//From Object
+		self.frameworkOperations.add("getMetaClass")
+		self.frameworkOperations.add("container")
+		self.frameworkOperations.add("checkInvariants")
+		self.frameworkOperations.add("checkAllInvariants")
+		self.frameworkOperations.add("equals")
+		self.frameworkOperations.add("isNotEqual")
+		self.frameworkOperations.add("isKindOf")
+		self.frameworkOperations.add("get")
+		self.frameworkOperations.add("set")
+		self.frameworkOperations.add("isSet")
+		self.frameworkOperations.add("unset")
+		self.frameworkOperations.add("oid")
+		self.frameworkOperations.add("toString")
+		self.frameworkOperations.add("isFrozen")
+		self.frameworkOperations.add("isVoid")
+		self.frameworkOperations.add("hashcode")
+		self.frameworkOperations.add("freeze")
+		self.frameworkOperations.add("asType")
+		self.frameworkOperations.add("isInstanceOf")
+		self.frameworkOperations.add("containingResource")
+		
+		//From Type
+		self.frameworkOperations.add("clone")
+		self.frameworkOperations.add("deepClone")
+		self.frameworkOperations.add("isInstance")
+		self.frameworkOperations.add("isSuperTypeOf")
+		self.frameworkOperations.add("isSubTypeOf")
+
 	end
 	
 	
