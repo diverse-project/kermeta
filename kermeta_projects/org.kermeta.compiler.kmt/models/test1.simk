@@ -1,0 +1,724 @@
+<?xml version="1.0" encoding="ASCII"?>
+<simk:SIMKModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:simk="http://www.kermeta.org/simk">
+  <sMContexts staticMethods="//@staticMethods.0 //@staticMethods.1 //@staticMethods.2 //@staticMethods.3 //@staticMethods.4 //@staticMethods.5 //@staticMethods.6 //@staticMethods.7 //@staticMethods.8 //@staticMethods.9 //@staticMethods.10 //@staticMethods.11 //@staticMethods.12 //@staticMethods.13 //@staticMethods.14 //@staticMethods.15 //@staticMethods.16 //@staticMethods.17 //@staticMethods.18 //@staticMethods.19 //@staticMethods.20 //@staticMethods.21 //@staticMethods.22 //@staticMethods.23 //@staticMethods.24 //@staticMethods.25">
+    <sMClass name="BooleanWrapper" usages="Wrapper"/>
+  </sMContexts>
+  <sMContexts staticMethods="//@staticMethods.26 //@staticMethods.27 //@staticMethods.28 //@staticMethods.29 //@staticMethods.30 //@staticMethods.31 //@staticMethods.32 //@staticMethods.33 //@staticMethods.34 //@staticMethods.35 //@staticMethods.36 //@staticMethods.37 //@staticMethods.38 //@staticMethods.39 //@staticMethods.40 //@staticMethods.41 //@staticMethods.42 //@staticMethods.43 //@staticMethods.44 //@staticMethods.45 //@staticMethods.46 //@staticMethods.47 //@staticMethods.48 //@staticMethods.49 //@staticMethods.50 //@staticMethods.51 //@staticMethods.52 //@staticMethods.53 //@staticMethods.54 //@staticMethods.55 //@staticMethods.56 //@staticMethods.57">
+    <sMClass name="IntegerWrapper" usages="Wrapper"/>
+  </sMContexts>
+  <sMContexts staticMethods="//@staticMethods.58 //@staticMethods.59 //@staticMethods.60 //@staticMethods.61 //@staticMethods.62 //@staticMethods.63 //@staticMethods.64 //@staticMethods.65 //@staticMethods.66 //@staticMethods.67 //@staticMethods.68 //@staticMethods.69 //@staticMethods.70 //@staticMethods.71 //@staticMethods.72 //@staticMethods.73 //@staticMethods.74 //@staticMethods.75 //@staticMethods.76 //@staticMethods.77 //@staticMethods.78 //@staticMethods.79 //@staticMethods.80 //@staticMethods.81 //@staticMethods.82 //@staticMethods.83 //@staticMethods.84 //@staticMethods.85 //@staticMethods.86 //@staticMethods.87 //@staticMethods.88">
+    <sMClass name="RealWrapper" usages="Wrapper"/>
+  </sMContexts>
+  <sMContexts staticMethods="//@staticMethods.89 //@staticMethods.90 //@staticMethods.91 //@staticMethods.92 //@staticMethods.93 //@staticMethods.94 //@staticMethods.95 //@staticMethods.96 //@staticMethods.97 //@staticMethods.98 //@staticMethods.99 //@staticMethods.100 //@staticMethods.101 //@staticMethods.102 //@staticMethods.103 //@staticMethods.104 //@staticMethods.105 //@staticMethods.106 //@staticMethods.107 //@staticMethods.108 //@staticMethods.109 //@staticMethods.110 //@staticMethods.111 //@staticMethods.112 //@staticMethods.113">
+    <sMClass name="CharacterWrapper" usages="Wrapper"/>
+  </sMContexts>
+  <sMContexts staticMethods="//@staticMethods.114 //@staticMethods.115 //@staticMethods.116 //@staticMethods.117 //@staticMethods.118 //@staticMethods.119 //@staticMethods.120 //@staticMethods.121 //@staticMethods.122 //@staticMethods.123 //@staticMethods.124 //@staticMethods.125 //@staticMethods.126 //@staticMethods.127 //@staticMethods.128 //@staticMethods.129 //@staticMethods.130 //@staticMethods.131 //@staticMethods.132 //@staticMethods.133 //@staticMethods.134 //@staticMethods.135 //@staticMethods.136 //@staticMethods.137 //@staticMethods.138 //@staticMethods.139 //@staticMethods.140 //@staticMethods.141 //@staticMethods.142 //@staticMethods.143 //@staticMethods.144 //@staticMethods.145 //@staticMethods.146 //@staticMethods.147 //@staticMethods.148 //@staticMethods.149 //@staticMethods.150 //@staticMethods.151 //@staticMethods.152">
+    <sMClass name="StringWrapper" usages="Wrapper"/>
+  </sMContexts>
+  <staticMethods name="and" sMContext="//@sMContexts.0" body="&#xA;java.lang.Boolean result = null;&#xA;&#xA;&#x9;result = (java.lang.Boolean) org.kermeta.compil.runtime.helper.basetypes.BooleanUtil.and(self, other);&#xA;&#xA;return result;&#xA;" usages="Wrapper">
+    <sMParameters name="self" type="java.lang.Boolean"/>
+    <sMParameters name="other" type="java.lang.Boolean"/>
+    <sMReturn type="java.lang.Boolean"/>
+  </staticMethods>
+  <staticMethods name="or" sMContext="//@sMContexts.0" body="&#xA;java.lang.Boolean result = null;&#xA;&#xA;&#x9;result = (java.lang.Boolean) org.kermeta.compil.runtime.helper.basetypes.BooleanUtil.or(self, other);&#xA;&#xA;return result;&#xA;" usages="Wrapper">
+    <sMParameters name="self" type="java.lang.Boolean"/>
+    <sMParameters name="other" type="java.lang.Boolean"/>
+    <sMReturn type="java.lang.Boolean"/>
+  </staticMethods>
+  <staticMethods name="implies" sMContext="//@sMContexts.0" body="&#xA;java.lang.Boolean result = null;&#xA;&#xA;&#x9;result = kermeta.standard.helper.BooleanWrapper.not(kermeta.standard.helper.BooleanWrapper.and(kermeta.standard.helper.BooleanWrapper.not(kermeta.standard.helper.BooleanWrapper.and(self, other)), self));&#xA;&#xA;return result;&#xA;" usages="Wrapper">
+    <sMParameters name="self" type="java.lang.Boolean"/>
+    <sMParameters name="other" type="java.lang.Boolean"/>
+    <sMReturn type="java.lang.Boolean"/>
+  </staticMethods>
+  <staticMethods name="toString" sMContext="//@sMContexts.0" body="&#xA;java.lang.String result = null;&#xA;&#xA;&#x9;java.lang.Boolean idIfCond_232 = false;&#xA;&#x9;idIfCond_232 = self;&#xA;&#xA;&#x9;if( idIfCond_232 ) {&#xA;&#xA;&#x9;result = &quot;true&quot;;&#xA;}&#xA; else {&#xA;&#xA;&#x9;result = &quot;false&quot;;&#xA;}&#xA;&#xA;&#xA;return result;&#xA;" usages="Wrapper">
+    <sMParameters name="self" type="java.lang.Boolean"/>
+    <sMReturn type="java.lang.String"/>
+  </staticMethods>
+  <staticMethods name="equals" sMContext="//@sMContexts.0" body="&#xA;java.lang.Boolean result = null;&#xA;&#xA;&#x9;java.lang.Boolean idIfCond_233 = false;&#xA;&#x9;idIfCond_233 = org.kermeta.compil.runtime.helper.language.ObjectUtil.isNotEqual(org.kermeta.compil.runtime.helper.language.ObjectUtil.getMetaClass(other), org.kermeta.compil.runtime.ExecutionContext.getInstance().getMetaClass(&quot;java.lang.Boolean&quot;));&#xA;&#xA;&#x9;if( idIfCond_233 ) {&#xA;&#xA;&#x9;result = false;&#xA;}&#xA; else {&#xA;&#xA;&#x9;result = (java.lang.Boolean) org.kermeta.compil.runtime.helper.basetypes.BooleanUtil.equals(self, other);&#xA;}&#xA;&#xA;&#xA;return result;&#xA;" usages="Wrapper">
+    <sMParameters name="self" type="java.lang.Boolean"/>
+    <sMParameters name="other" type="java.lang.Boolean"/>
+    <sMReturn type="java.lang.Boolean"/>
+  </staticMethods>
+  <staticMethods name="not" sMContext="//@sMContexts.0" body="&#xA;java.lang.Boolean result = null;&#xA;&#xA;&#x9;result = (java.lang.Boolean) org.kermeta.compil.runtime.helper.basetypes.BooleanUtil.not(self);&#xA;&#xA;return result;&#xA;" usages="Wrapper">
+    <sMParameters name="self" type="java.lang.Boolean"/>
+    <sMReturn type="java.lang.Boolean"/>
+  </staticMethods>
+  <staticMethods name="nand" sMContext="//@sMContexts.0" body="&#xA;java.lang.Boolean result = null;&#xA;&#xA;&#x9;result = kermeta.standard.helper.BooleanWrapper.not(kermeta.standard.helper.BooleanWrapper.and(self, other));&#xA;&#xA;return result;&#xA;" usages="Wrapper">
+    <sMParameters name="self" type="java.lang.Boolean"/>
+    <sMParameters name="other" type="java.lang.Boolean"/>
+    <sMReturn type="java.lang.Boolean"/>
+  </staticMethods>
+  <staticMethods name="xor" sMContext="//@sMContexts.0" body="&#xA;java.lang.Boolean result = null;&#xA;&#xA;&#x9;result = kermeta.standard.helper.BooleanWrapper.or(kermeta.standard.helper.BooleanWrapper.and(self, kermeta.standard.helper.BooleanWrapper.not(other)), kermeta.standard.helper.BooleanWrapper.and(kermeta.standard.helper.BooleanWrapper.not(self), other));&#xA;&#xA;return result;&#xA;" usages="Wrapper">
+    <sMParameters name="self" type="java.lang.Boolean"/>
+    <sMParameters name="other" type="java.lang.Boolean"/>
+    <sMReturn type="java.lang.Boolean"/>
+  </staticMethods>
+  <staticMethods name="isNotEqual" sMContext="//@sMContexts.0" body="&#xA;java.lang.Boolean result = null;&#xA;&#xA;&#x9;result = kermeta.standard.helper.BooleanWrapper.not(org.kermeta.compil.runtime.helper.language.ObjectUtil.equals(self, element));&#xA;&#xA;return result;&#xA;" usages="Wrapper">
+    <sMParameters name="self" type="java.lang.Boolean"/>
+    <sMParameters name="element" type="java.lang.Boolean"/>
+    <sMReturn type="java.lang.Boolean"/>
+  </staticMethods>
+  <staticMethods name="isSet" sMContext="//@sMContexts.0" body="&#xA;java.lang.Boolean result = null;&#xA;&#xA;&#x9;result = (java.lang.Boolean) org.kermeta.compil.runtime.helper.language.ObjectUtil.isSet(self, property);&#xA;&#xA;return result;&#xA;" usages="Wrapper">
+    <sMParameters name="self" type="java.lang.Boolean"/>
+    <sMParameters name="property" type="kermeta.language.structure.Property"/>
+    <sMReturn type="java.lang.Boolean"/>
+  </staticMethods>
+  <staticMethods name="asType" sMContext="//@sMContexts.0" body="&#xA;kermeta.language.structure.Object result = null;&#xA;&#xA;&#x9;java.lang.Boolean idIfCond_234 = false;&#xA;&#x9;idIfCond_234 = org.kermeta.compil.runtime.helper.language.ObjectUtil.isInstanceOf(self, org.kermeta.compil.runtime.ExecutionContext.getInstance().getMetaClass(&quot;type&quot;));&#xA;&#xA;&#x9;if( idIfCond_234 ) {&#xA;&#xA;&#x9;result = self;&#xA;}&#xA; else {&#xA;&#xA;&#x9;&#xA;if (true)&#xA;&#x9;throw new org.kermeta.compil.runtime.helper.error.KRuntimeError( ((kermeta.exceptions.TypeCastError) org.kermeta.compil.runtime.helper.language.ClassUtil.newObject(&quot;kermeta.exceptions.TypeCastError&quot;)) );&#xA;&#xA;}&#xA;&#xA;&#xA;return result;&#xA;" usages="Wrapper">
+    <sMParameters name="self" type="kermeta.language.structure.Object"/>
+    <sMParameters name="type" type="kermeta.language.structure.Class"/>
+    <sMReturn type="kermeta.language.structure.Object"/>
+  </staticMethods>
+  <staticMethods name="hashcode" sMContext="//@sMContexts.0" body="&#xA;java.lang.Integer result = null;&#xA;&#xA;&#x9;result = (java.lang.Integer) org.kermeta.compil.runtime.helper.language.ObjectUtil.hashcode(self);&#xA;&#xA;return result;&#xA;" usages="Wrapper">
+    <sMParameters name="self" type="java.lang.Boolean"/>
+    <sMReturn type="java.lang.Integer"/>
+  </staticMethods>
+  <staticMethods name="get" sMContext="//@sMContexts.0" body="&#xA;kermeta.language.structure.Object result = null;&#xA;&#xA;&#x9;result = org.kermeta.compil.runtime.helper.language.ObjectUtil.get(self, property);&#xA;&#xA;return result;&#xA;" usages="Wrapper">
+    <sMParameters name="self" type="java.lang.Boolean"/>
+    <sMParameters name="property" type="kermeta.language.structure.Property"/>
+    <sMReturn type="kermeta.language.structure.Object"/>
+  </staticMethods>
+  <staticMethods name="containingResource" sMContext="//@sMContexts.0" body="&#xA;kermeta.persistence.Resource result = null;&#xA;&#xA;&#x9;result = (kermeta.persistence.Resource) org.kermeta.compil.runtime.helper.language.ObjectUtil.getContainingResource(self);&#xA;&#xA;return result;&#xA;" usages="Wrapper">
+    <sMParameters name="self" type="java.lang.Boolean"/>
+    <sMReturn type="kermeta.persistence.Resource"/>
+  </staticMethods>
+  <staticMethods name="isKindOf" sMContext="//@sMContexts.0" body="&#xA;java.lang.Boolean result = null;&#xA;&#xA;&#x9;result = org.kermeta.compil.runtime.helper.language.ObjectUtil.getMetaClass(self).equals(org.kermeta.compil.runtime.ExecutionContext.getInstance().getMetaClass(&quot;cl&quot;));&#xA;&#xA;return result;&#xA;" usages="Wrapper">
+    <sMParameters name="self" type="java.lang.Boolean"/>
+    <sMParameters name="cl" type="kermeta.language.structure.Class"/>
+    <sMReturn type="java.lang.Boolean"/>
+  </staticMethods>
+  <staticMethods name="isInstanceOf" sMContext="//@sMContexts.0" body="&#xA;java.lang.Boolean result = null;&#xA;&#xA;&#x9;result = (java.lang.Boolean) org.kermeta.compil.runtime.helper.language.ObjectUtil.isInstanceOf(self, type.getClass().getName());&#xA;&#xA;return result;&#xA;" usages="Wrapper">
+    <sMParameters name="self" type="java.lang.Boolean"/>
+    <sMParameters name="type" type="kermeta.language.structure.Type"/>
+    <sMReturn type="java.lang.Boolean"/>
+  </staticMethods>
+  <staticMethods name="freeze" sMContext="//@sMContexts.0" body="&#xA;&#x9;org.kermeta.compil.runtime.helper.language.ObjectUtil.freeze(self);&#xA;" usages="Wrapper">
+    <sMParameters name="self" type="java.lang.Boolean"/>
+    <sMReturn type="void"/>
+  </staticMethods>
+  <staticMethods name="container" sMContext="//@sMContexts.0" body="&#xA;kermeta.language.structure.Object result = null;&#xA;&#xA;&#x9;result = org.kermeta.compil.runtime.helper.language.ObjectUtil.container(self);&#xA;&#xA;return result;&#xA;" usages="Wrapper">
+    <sMParameters name="self" type="java.lang.Boolean"/>
+    <sMReturn type="kermeta.language.structure.Object"/>
+  </staticMethods>
+  <staticMethods name="checkInvariants" sMContext="//@sMContexts.0" body="&#xA;&#x9;kermeta.language.structure.ClassDefinition cd = org.kermeta.compil.runtime.helper.language.ObjectUtil.getMetaClass(self).getClassDefinition();&#xA;&#xA;&#x9;java.lang.Boolean idIfCond_235 = false;&#xA;&#x9;idIfCond_235 = kermeta.standard.helper.BooleanWrapper.not(org.kermeta.compil.runtime.helper.language.ObjectUtil.isVoid(cd));&#xA;&#xA;&#x9;if( idIfCond_235 ) {&#xA;&#xA;&#x9;//Beginning of the Inlining of the function type: each&#xA;&#xA;&#x9;&#xA;&#x9;kermeta.standard.Iterator&lt;kermeta.language.structure.Property> it_ft69 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil.&lt;kermeta.language.structure.Property>convertAsSet(cd.getAllAttribute()).iterator();&#xA;&#x9;java.lang.Boolean idLoopCond_236 = false;&#xA;&#x9;while( !idLoopCond_236 ) {&#xA;&#x9;idLoopCond_236 = it_ft69.isOff();&#xA;&#x9;if ( idLoopCond_236 ) {&#xA;&#x9;} else {&#xA;&#xA;&#x9;//Beginning of the Inlining of the lambda expression: func&#xA;kermeta.language.structure.Property p = it_ft69.next();&#xA;&#xA;&#x9;kermeta.language.structure.Object v = org.kermeta.compil.runtime.helper.language.ObjectUtil.get(self, p);&#xA;&#xA;&#x9;java.lang.Boolean idIfCond_237 = false;&#xA;&#x9;idIfCond_237 = kermeta.standard.helper.BooleanWrapper.and(kermeta.standard.helper.BooleanWrapper.not(org.kermeta.compil.runtime.helper.language.ObjectUtil.isVoid(v)), org.kermeta.compil.runtime.helper.language.ObjectUtil.isInstanceOf(v, org.kermeta.compil.runtime.ExecutionContext.getInstance().getMetaClass(&quot;kermeta.standard.Collection&lt;kermeta.language.structure.Object>&quot;)));&#xA;&#xA;&#x9;if( idIfCond_237 ) {&#xA;&#xA;&#x9;kermeta.standard.Collection&lt;kermeta.language.structure.Object> c = ((kermeta.standard.Collection&lt;kermeta.language.structure.Object>) org.kermeta.compil.runtime.helper.language.ObjectUtil.asType(v, org.kermeta.compil.runtime.ExecutionContext.getInstance().getMetaClass(&quot;kermeta.standard.Collection&lt;kermeta.language.structure.Object>&quot;)));&#xA;&#xA;&#x9;java.lang.Boolean idIfCond_238 = false;&#xA;&#x9;idIfCond_238 = kermeta.standard.helper.BooleanWrapper.or(kermeta.standard.helper.IntegerWrapper.isLower(c.size(), p.getLower()), kermeta.standard.helper.BooleanWrapper.and(org.kermeta.compil.runtime.helper.language.ObjectUtil.isNotEqual(p.getUpper(), kermeta.standard.helper.IntegerWrapper.uminus(1)), kermeta.standard.helper.IntegerWrapper.isGreater(c.size(), p.getUpper())));&#xA;&#xA;&#x9;if( idIfCond_238 ) {&#xA;&#xA;&#x9;&#xA;if (true)&#xA;&#x9;throw new org.kermeta.compil.runtime.helper.error.KRuntimeError( ((kermeta.exceptions.ConstraintViolatedInv) org.kermeta.compil.runtime.helper.language.ClassUtil.newObject(&quot;kermeta.exceptions.ConstraintViolatedInv&quot;)) );&#xA;&#xA;}&#xA;&#xA;}&#xA; else {&#xA;&#xA;&#x9;java.lang.Boolean idIfCond_239 = false;&#xA;&#x9;idIfCond_239 = kermeta.standard.helper.BooleanWrapper.and(kermeta.standard.helper.IntegerWrapper.equals(p.getLower(), 1), org.kermeta.compil.runtime.helper.language.ObjectUtil.isVoid(v));&#xA;&#xA;&#x9;if( idIfCond_239 ) {&#xA;&#xA;&#x9;&#xA;if (true)&#xA;&#x9;throw new org.kermeta.compil.runtime.helper.error.KRuntimeError( ((kermeta.exceptions.ConstraintViolatedInv) org.kermeta.compil.runtime.helper.language.ClassUtil.newObject(&quot;kermeta.exceptions.ConstraintViolatedInv&quot;)) );&#xA;&#xA;}&#xA;&#xA;}&#xA;&#xA;//End of the Inlining of the lambda expression: func&#xA;&#xA;}&#xA;&#x9;}&#xA;//End of the Inlining of the function type: each&#xA;&#xA;}&#xA;&#xA;&#xA;&#x9;org.kermeta.compil.runtime.helper.language.ObjectUtil.checkInvariants(self);&#xA;" usages="Wrapper">
+    <sMParameters name="self" type="java.lang.Boolean"/>
+    <sMReturn type="void"/>
+  </staticMethods>
+  <staticMethods name="set" sMContext="//@sMContexts.0" body="&#xA;&#x9;java.lang.Boolean idIfCond_240 = false;&#xA;&#x9;idIfCond_240 = org.kermeta.compil.runtime.helper.language.ObjectUtil.isInstanceOf(element, org.kermeta.compil.runtime.ExecutionContext.getInstance().getMetaClass(&quot;property.getType()&quot;));&#xA;&#xA;&#x9;if( idIfCond_240 ) {&#xA;&#xA;&#x9;org.kermeta.compil.runtime.helper.language.ObjectUtil.set(self, property, element);&#xA;}&#xA; else {&#xA;&#xA;&#x9;kermeta.exceptions.IncompatibleTypeError e = ((kermeta.exceptions.IncompatibleTypeError) org.kermeta.compil.runtime.helper.language.ClassUtil.newObject(&quot;kermeta.exceptions.IncompatibleTypeError&quot;));&#xA;&#xA;&#x9;e.setMessage(kermeta.standard.helper.StringWrapper.plus(kermeta.standard.helper.StringWrapper.plus(kermeta.standard.helper.StringWrapper.plus(kermeta.standard.helper.StringWrapper.plus(kermeta.standard.helper.StringWrapper.plus(kermeta.standard.helper.StringWrapper.plus(&quot;IncompatibleTypeError : Cannot set property &quot;, property.getName()), &quot; of object &quot;), org.kermeta.compil.runtime.helper.language.ObjectUtil.toString(self)), &quot; to &quot;), org.kermeta.compil.runtime.helper.language.ObjectUtil.toString(element)), &quot;.&quot;));&#xA;&#xA;&#x9;&#xA;if (true)&#xA;&#x9;throw new org.kermeta.compil.runtime.helper.error.KRuntimeError( e );&#xA;&#xA;}&#xA;&#xA;" usages="Wrapper">
+    <sMParameters name="self" type="java.lang.Boolean"/>
+    <sMParameters name="property" type="kermeta.language.structure.Property"/>
+    <sMParameters name="element" type="java.lang.Boolean"/>
+    <sMReturn type="void"/>
+  </staticMethods>
+  <staticMethods name="oid" sMContext="//@sMContexts.0" body="&#xA;java.lang.Integer result = null;&#xA;&#xA;&#x9;result = (java.lang.Integer) org.kermeta.compil.runtime.helper.language.ObjectUtil.getOID(self);&#xA;&#xA;return result;&#xA;" usages="Wrapper">
+    <sMParameters name="self" type="java.lang.Boolean"/>
+    <sMReturn type="java.lang.Integer"/>
+  </staticMethods>
+  <staticMethods name="isVoid" sMContext="//@sMContexts.0" body="&#xA;java.lang.Boolean result = null;&#xA;&#xA;&#x9;result = false;&#xA;&#xA;return result;&#xA;" usages="Wrapper">
+    <sMParameters name="self" type="java.lang.Boolean"/>
+    <sMReturn type="java.lang.Boolean"/>
+  </staticMethods>
+  <staticMethods name="unset" sMContext="//@sMContexts.0" body="&#xA;&#x9;org.kermeta.compil.runtime.helper.language.ObjectUtil.unset(self, property);&#xA;" usages="Wrapper">
+    <sMParameters name="self" type="java.lang.Boolean"/>
+    <sMParameters name="property" type="kermeta.language.structure.Property"/>
+    <sMReturn type="void"/>
+  </staticMethods>
+  <staticMethods name="getMetaClass" sMContext="//@sMContexts.0" body="&#xA;kermeta.language.structure.Class result = null;&#xA;&#xA;&#x9;result = (kermeta.language.structure.Class) org.kermeta.compil.runtime.helper.language.ObjectUtil.getMetaClass( self );&#xA;&#xA;return result;&#xA;" usages="Wrapper">
+    <sMParameters name="self" type="java.lang.Boolean"/>
+    <sMReturn type="kermeta.language.structure.Class"/>
+  </staticMethods>
+  <staticMethods name="isFrozen" sMContext="//@sMContexts.0" body="&#xA;java.lang.Boolean result = null;&#xA;&#xA;&#x9;result = (java.lang.Boolean) org.kermeta.compil.runtime.helper.language.ObjectUtil.isFrozen(self);&#xA;&#xA;return result;&#xA;" usages="Wrapper">
+    <sMParameters name="self" type="java.lang.Boolean"/>
+    <sMReturn type="java.lang.Boolean"/>
+  </staticMethods>
+  <staticMethods name="checkAllInvariants" sMContext="//@sMContexts.0" body="&#xA;&#x9;java.lang.Boolean idIfCond_241 = false;&#xA;&#x9;idIfCond_241 = org.kermeta.compil.runtime.helper.language.ObjectUtil.isNotEqual(self, null);&#xA;&#xA;&#x9;if( idIfCond_241 ) {&#xA;&#xA;&#x9;org.kermeta.compil.runtime.helper.language.ObjectUtil.checkInvariants(self);&#xA;&#xA;&#x9;kermeta.language.structure.ClassDefinition cd = null;&#xA;&#xA;&#x9;cd = (kermeta.language.structure.ClassDefinition) org.kermeta.compil.runtime.helper.language.ObjectUtil.getMetaClass(self).getTypeDefinition();&#xA;&#xA;&#x9;//Beginning of the Inlining of the function type: each&#xA;&#xA;&#x9;&#xA;&#x9;kermeta.standard.Iterator&lt;kermeta.language.structure.Property> it_ft70 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil.&lt;kermeta.language.structure.Property>convertAsSet(cd.getAllAttribute()).iterator();&#xA;&#x9;java.lang.Boolean idLoopCond_242 = false;&#xA;&#x9;while( !idLoopCond_242 ) {&#xA;&#x9;idLoopCond_242 = it_ft70.isOff();&#xA;&#x9;if ( idLoopCond_242 ) {&#xA;&#x9;} else {&#xA;&#xA;&#x9;//Beginning of the Inlining of the lambda expression: func&#xA;kermeta.language.structure.Property subObj = it_ft70.next();&#xA;&#xA;&#x9;java.lang.Boolean idIfCond_243 = false;&#xA;&#x9;idIfCond_243 = subObj.getIsComposite();&#xA;&#xA;&#x9;if( idIfCond_243 ) {&#xA;&#xA;&#x9;java.lang.Boolean idIfCond_244 = false;&#xA;&#x9;idIfCond_244 = kermeta.standard.helper.BooleanWrapper.or(kermeta.standard.helper.StringWrapper.equals(org.kermeta.compil.runtime.helper.language.ObjectUtil.getMetaClass(org.kermeta.compil.runtime.helper.language.ObjectUtil.get(self, subObj)).getTypeDefinition().getName(), &quot;ReflectiveSequence&quot;), kermeta.standard.helper.StringWrapper.equals(org.kermeta.compil.runtime.helper.language.ObjectUtil.getMetaClass(org.kermeta.compil.runtime.helper.language.ObjectUtil.get(self, subObj)).getTypeDefinition().getName(), &quot;ReflectiveCollection&quot;));&#xA;&#xA;&#x9;if( idIfCond_244 ) {&#xA;&#xA;&#x9;kermeta.standard.Collection&lt;kermeta.language.structure.Object> subObjInstances = null;&#xA;&#xA;&#x9;subObjInstances = (kermeta.standard.Collection&lt;kermeta.language.structure.Object>) org.kermeta.compil.runtime.helper.language.ObjectUtil.get(self, subObj);&#xA;&#xA;&#x9;//Beginning of the Inlining of the function type: each&#xA;&#xA;&#x9;&#xA;&#x9;kermeta.standard.Iterator&lt;kermeta.language.structure.Object> it_ft71 = subObjInstances.iterator();&#xA;&#x9;java.lang.Boolean idLoopCond_245 = false;&#xA;&#x9;while( !idLoopCond_245 ) {&#xA;&#x9;idLoopCond_245 = it_ft71.isOff();&#xA;&#x9;if ( idLoopCond_245 ) {&#xA;&#x9;} else {&#xA;&#xA;&#x9;//Beginning of the Inlining of the lambda expression: func&#xA;kermeta.language.structure.Object aSubObjInstances = it_ft71.next();&#xA;&#xA;&#x9;org.kermeta.compil.runtime.helper.language.ObjectUtil.checkAllInvariants(aSubObjInstances);&#xA;//End of the Inlining of the lambda expression: func&#xA;&#xA;}&#xA;&#x9;}&#xA;//End of the Inlining of the function type: each&#xA;&#xA;}&#xA; else {&#xA;&#xA;&#x9;org.kermeta.compil.runtime.helper.language.ObjectUtil.checkAllInvariants(org.kermeta.compil.runtime.helper.language.ObjectUtil.get(self, subObj));&#xA;}&#xA;&#xA;}&#xA;&#xA;//End of the Inlining of the lambda expression: func&#xA;&#xA;}&#xA;&#x9;}&#xA;//End of the Inlining of the function type: each&#xA;&#xA;}&#xA;&#xA;" usages="Wrapper">
+    <sMParameters name="self" type="java.lang.Boolean"/>
+    <sMReturn type="void"/>
+  </staticMethods>
+  <staticMethods name="toReal" sMContext="//@sMContexts.1" body="&#xA;java.lang.Double result = null;&#xA;&#xA;&#x9;result = (java.lang.Double) org.kermeta.compil.runtime.helper.basetypes.IntegerUtil.toReal(self);&#xA;&#xA;return result;&#xA;" usages="Wrapper">
+    <sMParameters name="self" type="java.lang.Integer"/>
+    <sMReturn type="java.lang.Double"/>
+  </staticMethods>
+  <staticMethods name="toString" sMContext="//@sMContexts.1" body="&#xA;java.lang.String result = null;&#xA;&#xA;&#x9;result = (java.lang.String) org.kermeta.compil.runtime.helper.basetypes.IntegerUtil.toString(self);&#xA;&#xA;return result;&#xA;" usages="Wrapper">
+    <sMParameters name="self" type="java.lang.Integer"/>
+    <sMReturn type="java.lang.String"/>
+  </staticMethods>
+  <staticMethods name="isLowerOrEqual" sMContext="//@sMContexts.1" body="&#xA;java.lang.Boolean result = null;&#xA;&#xA;&#x9;java.lang.Boolean idIfCond_246 = false;&#xA;&#x9;idIfCond_246 = org.kermeta.compil.runtime.helper.language.ObjectUtil.isNotEqual(org.kermeta.compil.runtime.helper.language.ObjectUtil.getMetaClass(other), org.kermeta.compil.runtime.ExecutionContext.getInstance().getMetaClass(&quot;java.lang.Integer&quot;));&#xA;&#xA;&#x9;if( idIfCond_246 ) {&#xA;&#xA;&#x9;java.lang.Boolean idIfCond_247 = false;&#xA;&#x9;idIfCond_247 = org.kermeta.compil.runtime.helper.language.ObjectUtil.getMetaClass(other).equals(org.kermeta.compil.runtime.ExecutionContext.getInstance().getMetaClass(&quot;java.lang.Double&quot;));&#xA;&#xA;&#x9;if( idIfCond_247 ) {&#xA;&#xA;&#x9;result = org.kermeta.compil.runtime.helper.basetypes.RealUtil.isLowerOrEqual(kermeta.standard.helper.IntegerWrapper.toReal(self), other);&#xA;}&#xA; else {&#xA;&#xA;&#x9;result = false;&#xA;}&#xA;&#xA;}&#xA; else {&#xA;&#xA;&#x9;result = (java.lang.Boolean) org.kermeta.compil.runtime.helper.basetypes.IntegerUtil.isLowerOrEqual(self, other);&#xA;}&#xA;&#xA;&#xA;return result;&#xA;" usages="Wrapper">
+    <sMParameters name="self" type="java.lang.Integer"/>
+    <sMParameters name="other" type="java.lang.Integer"/>
+    <sMReturn type="java.lang.Boolean"/>
+  </staticMethods>
+  <staticMethods name="compareTo" sMContext="//@sMContexts.1" body="&#xA;java.lang.Integer result = null;&#xA;&#xA;&#x9;java.lang.Boolean idIfCond_248 = false;&#xA;&#x9;idIfCond_248 = org.kermeta.compil.runtime.helper.language.ObjectUtil.isNotEqual(org.kermeta.compil.runtime.helper.language.ObjectUtil.getMetaClass(other), org.kermeta.compil.runtime.ExecutionContext.getInstance().getMetaClass(&quot;java.lang.Integer&quot;));&#xA;&#xA;&#x9;if( idIfCond_248 ) {&#xA;&#xA;&#x9;java.lang.Boolean idIfCond_249 = false;&#xA;&#x9;idIfCond_249 = org.kermeta.compil.runtime.helper.language.ObjectUtil.getMetaClass(other).equals(org.kermeta.compil.runtime.ExecutionContext.getInstance().getMetaClass(&quot;java.lang.Double&quot;));&#xA;&#xA;&#x9;if( idIfCond_249 ) {&#xA;&#xA;&#x9;result = kermeta.standard.helper.RealWrapper.compareTo(kermeta.standard.helper.IntegerWrapper.toReal(self), other);&#xA;}&#xA; else {&#xA;&#xA;&#x9;&#xA;if (true)&#xA;&#x9;throw new org.kermeta.compil.runtime.helper.error.KRuntimeError( ((kermeta.standard.NotComparableException) org.kermeta.compil.runtime.helper.language.ClassUtil.newObject(&quot;kermeta.standard.NotComparableException&quot;)) );&#xA;&#xA;}&#xA;&#xA;}&#xA; else {&#xA;&#xA;&#x9;result = (java.lang.Integer) org.kermeta.compil.runtime.helper.basetypes.IntegerUtil.compareTo(self, other);&#xA;}&#xA;&#xA;&#xA;return result;&#xA;" usages="Wrapper">
+    <sMParameters name="self" type="java.lang.Integer"/>
+    <sMParameters name="other" type="java.lang.Integer"/>
+    <sMReturn type="java.lang.Integer"/>
+  </staticMethods>
+  <staticMethods name="uminus" sMContext="//@sMContexts.1" body="&#xA;java.lang.Integer result = null;&#xA;&#xA;&#x9;result = kermeta.standard.helper.IntegerWrapper.minus(0, self);&#xA;&#xA;return result;&#xA;" usages="Wrapper">
+    <sMParameters name="self" type="java.lang.Integer"/>
+    <sMReturn type="java.lang.Integer"/>
+  </staticMethods>
+  <staticMethods name="mult" sMContext="//@sMContexts.1" body="&#xA;java.lang.Integer result = null;&#xA;&#xA;&#x9;java.lang.Boolean idIfCond_250 = false;&#xA;&#x9;idIfCond_250 = org.kermeta.compil.runtime.helper.language.ObjectUtil.isVoid(other);&#xA;&#xA;&#x9;if( idIfCond_250 ) {&#xA;&#xA;&#x9;&#xA;if (true)&#xA;&#x9;throw new org.kermeta.compil.runtime.helper.error.KRuntimeError( ((kermeta.exceptions.VoidOperandError) org.kermeta.compil.runtime.helper.language.ClassUtil.newObject(&quot;kermeta.exceptions.VoidOperandError&quot;)) );&#xA;&#xA;}&#xA; else {&#xA;&#xA;&#x9;result = (java.lang.Integer) org.kermeta.compil.runtime.helper.basetypes.IntegerUtil.times(self, other);&#xA;}&#xA;&#xA;&#xA;return result;&#xA;" usages="Wrapper">
+    <sMParameters name="self" type="java.lang.Integer"/>
+    <sMParameters name="other" type="java.lang.Integer"/>
+    <sMReturn type="java.lang.Integer"/>
+  </staticMethods>
+  <staticMethods name="div" sMContext="//@sMContexts.1" body="&#xA;java.lang.Integer result = null;&#xA;&#xA;&#x9;java.lang.Boolean idIfCond_251 = false;&#xA;&#x9;idIfCond_251 = kermeta.standard.helper.IntegerWrapper.equals(other, 0);&#xA;&#xA;&#x9;if( idIfCond_251 ) {&#xA;&#xA;&#x9;&#xA;if (true)&#xA;&#x9;throw new org.kermeta.compil.runtime.helper.error.KRuntimeError( ((kermeta.exceptions.DivisionByZero) org.kermeta.compil.runtime.helper.language.ClassUtil.newObject(&quot;kermeta.exceptions.DivisionByZero&quot;)) );&#xA;&#xA;}&#xA;&#xA;&#xA;&#x9;java.lang.Boolean idIfCond_252 = false;&#xA;&#x9;idIfCond_252 = org.kermeta.compil.runtime.helper.language.ObjectUtil.isVoid(other);&#xA;&#xA;&#x9;if( idIfCond_252 ) {&#xA;&#xA;&#x9;&#xA;if (true)&#xA;&#x9;throw new org.kermeta.compil.runtime.helper.error.KRuntimeError( ((kermeta.exceptions.VoidOperandError) org.kermeta.compil.runtime.helper.language.ClassUtil.newObject(&quot;kermeta.exceptions.VoidOperandError&quot;)) );&#xA;&#xA;}&#xA; else {&#xA;&#xA;&#x9;result = (java.lang.Integer) org.kermeta.compil.runtime.helper.basetypes.IntegerUtil.div(self, other);&#xA;}&#xA;&#xA;&#xA;return result;&#xA;" usages="Wrapper">
+    <sMParameters name="self" type="java.lang.Integer"/>
+    <sMParameters name="other" type="java.lang.Integer"/>
+    <sMReturn type="java.lang.Integer"/>
+  </staticMethods>
+  <staticMethods name="isGreaterOrEqual" sMContext="//@sMContexts.1" body="&#xA;java.lang.Boolean result = null;&#xA;&#xA;&#x9;java.lang.Boolean idIfCond_253 = false;&#xA;&#x9;idIfCond_253 = org.kermeta.compil.runtime.helper.language.ObjectUtil.isNotEqual(org.kermeta.compil.runtime.helper.language.ObjectUtil.getMetaClass(other), org.kermeta.compil.runtime.ExecutionContext.getInstance().getMetaClass(&quot;java.lang.Integer&quot;));&#xA;&#xA;&#x9;if( idIfCond_253 ) {&#xA;&#xA;&#x9;java.lang.Boolean idIfCond_254 = false;&#xA;&#x9;idIfCond_254 = org.kermeta.compil.runtime.helper.language.ObjectUtil.getMetaClass(other).equals(org.kermeta.compil.runtime.ExecutionContext.getInstance().getMetaClass(&quot;java.lang.Double&quot;));&#xA;&#xA;&#x9;if( idIfCond_254 ) {&#xA;&#xA;&#x9;result = org.kermeta.compil.runtime.helper.basetypes.RealUtil.isGreaterOrEqual(kermeta.standard.helper.IntegerWrapper.toReal(self), other);&#xA;}&#xA; else {&#xA;&#xA;&#x9;result = false;&#xA;}&#xA;&#xA;}&#xA; else {&#xA;&#xA;&#x9;result = (java.lang.Boolean) org.kermeta.compil.runtime.helper.basetypes.IntegerUtil.isGreaterOrEqual(self, other);&#xA;}&#xA;&#xA;&#xA;return result;&#xA;" usages="Wrapper">
+    <sMParameters name="self" type="java.lang.Integer"/>
+    <sMParameters name="other" type="java.lang.Integer"/>
+    <sMReturn type="java.lang.Boolean"/>
+  </staticMethods>
+  <staticMethods name="equals" sMContext="//@sMContexts.1" body="&#xA;java.lang.Boolean result = null;&#xA;&#xA;&#x9;java.lang.Boolean idIfCond_255 = false;&#xA;&#x9;idIfCond_255 = org.kermeta.compil.runtime.helper.language.ObjectUtil.isNotEqual(org.kermeta.compil.runtime.helper.language.ObjectUtil.getMetaClass(other), org.kermeta.compil.runtime.ExecutionContext.getInstance().getMetaClass(&quot;java.lang.Integer&quot;));&#xA;&#xA;&#x9;if( idIfCond_255 ) {&#xA;&#xA;&#x9;java.lang.Boolean idIfCond_256 = false;&#xA;&#x9;idIfCond_256 = org.kermeta.compil.runtime.helper.language.ObjectUtil.getMetaClass(other).equals(org.kermeta.compil.runtime.ExecutionContext.getInstance().getMetaClass(&quot;java.lang.Double&quot;));&#xA;&#xA;&#x9;if( idIfCond_256 ) {&#xA;&#xA;&#x9;result = kermeta.standard.helper.RealWrapper.equals(kermeta.standard.helper.IntegerWrapper.toReal(self), other);&#xA;}&#xA; else {&#xA;&#xA;&#x9;result = false;&#xA;}&#xA;&#xA;}&#xA; else {&#xA;&#xA;&#x9;result = (java.lang.Boolean) org.kermeta.compil.runtime.helper.basetypes.IntegerUtil.equals(self, other);&#xA;}&#xA;&#xA;&#xA;return result;&#xA;" usages="Wrapper">
+    <sMParameters name="self" type="java.lang.Integer"/>
+    <sMParameters name="other" type="java.lang.Integer"/>
+    <sMReturn type="java.lang.Boolean"/>
+  </staticMethods>
+  <staticMethods name="plus" sMContext="//@sMContexts.1" body="&#xA;java.lang.Integer result = null;&#xA;&#xA;&#x9;java.lang.Boolean idIfCond_257 = false;&#xA;&#x9;idIfCond_257 = org.kermeta.compil.runtime.helper.language.ObjectUtil.isVoid(other);&#xA;&#xA;&#x9;if( idIfCond_257 ) {&#xA;&#xA;&#x9;&#xA;if (true)&#xA;&#x9;throw new org.kermeta.compil.runtime.helper.error.KRuntimeError( ((kermeta.exceptions.VoidOperandError) org.kermeta.compil.runtime.helper.language.ClassUtil.newObject(&quot;kermeta.exceptions.VoidOperandError&quot;)) );&#xA;&#xA;}&#xA; else {&#xA;&#xA;&#x9;result = (java.lang.Integer) org.kermeta.compil.runtime.helper.basetypes.IntegerUtil.plus(self, other);&#xA;}&#xA;&#xA;&#xA;return result;&#xA;" usages="Wrapper">
+    <sMParameters name="self" type="java.lang.Integer"/>
+    <sMParameters name="other" type="java.lang.Integer"/>
+    <sMReturn type="java.lang.Integer"/>
+  </staticMethods>
+  <staticMethods name="isLower" sMContext="//@sMContexts.1" body="&#xA;java.lang.Boolean result = null;&#xA;&#xA;&#x9;java.lang.Boolean idIfCond_258 = false;&#xA;&#x9;idIfCond_258 = org.kermeta.compil.runtime.helper.language.ObjectUtil.isNotEqual(org.kermeta.compil.runtime.helper.language.ObjectUtil.getMetaClass(other), org.kermeta.compil.runtime.ExecutionContext.getInstance().getMetaClass(&quot;java.lang.Integer&quot;));&#xA;&#xA;&#x9;if( idIfCond_258 ) {&#xA;&#xA;&#x9;java.lang.Boolean idIfCond_259 = false;&#xA;&#x9;idIfCond_259 = org.kermeta.compil.runtime.helper.language.ObjectUtil.getMetaClass(other).equals(org.kermeta.compil.runtime.ExecutionContext.getInstance().getMetaClass(&quot;java.lang.Double&quot;));&#xA;&#xA;&#x9;if( idIfCond_259 ) {&#xA;&#xA;&#x9;result = org.kermeta.compil.runtime.helper.basetypes.RealUtil.isLower(kermeta.standard.helper.IntegerWrapper.toReal(self), other);&#xA;}&#xA; else {&#xA;&#xA;&#x9;result = false;&#xA;}&#xA;&#xA;}&#xA; else {&#xA;&#xA;&#x9;result = (java.lang.Boolean) org.kermeta.compil.runtime.helper.basetypes.IntegerUtil.isLower(self, other);&#xA;}&#xA;&#xA;&#xA;return result;&#xA;" usages="Wrapper">
+    <sMParameters name="self" type="java.lang.Integer"/>
+    <sMParameters name="other" type="java.lang.Integer"/>
+    <sMReturn type="java.lang.Boolean"/>
+  </staticMethods>
+  <staticMethods name="minus" sMContext="//@sMContexts.1" body="&#xA;java.lang.Integer result = null;&#xA;&#xA;&#x9;java.lang.Boolean idIfCond_260 = false;&#xA;&#x9;idIfCond_260 = org.kermeta.compil.runtime.helper.language.ObjectUtil.isVoid(other);&#xA;&#xA;&#x9;if( idIfCond_260 ) {&#xA;&#xA;&#x9;&#xA;if (true)&#xA;&#x9;throw new org.kermeta.compil.runtime.helper.error.KRuntimeError( ((kermeta.exceptions.VoidOperandError) org.kermeta.compil.runtime.helper.language.ClassUtil.newObject(&quot;kermeta.exceptions.VoidOperandError&quot;)) );&#xA;&#xA;}&#xA; else {&#xA;&#xA;&#x9;result = (java.lang.Integer) org.kermeta.compil.runtime.helper.basetypes.IntegerUtil.minus(self, other);&#xA;}&#xA;&#xA;&#xA;return result;&#xA;" usages="Wrapper">
+    <sMParameters name="self" type="java.lang.Integer"/>
+    <sMParameters name="other" type="java.lang.Integer"/>
+    <sMReturn type="java.lang.Integer"/>
+  </staticMethods>
+  <staticMethods name="mod" sMContext="//@sMContexts.1" body="&#xA;java.lang.Integer result = null;&#xA;&#xA;&#x9;java.lang.Boolean idIfCond_261 = false;&#xA;&#x9;idIfCond_261 = kermeta.standard.helper.IntegerWrapper.equals(other, 0);&#xA;&#xA;&#x9;if( idIfCond_261 ) {&#xA;&#xA;&#x9;&#xA;if (true)&#xA;&#x9;throw new org.kermeta.compil.runtime.helper.error.KRuntimeError( ((kermeta.exceptions.DivisionByZero) org.kermeta.compil.runtime.helper.language.ClassUtil.newObject(&quot;kermeta.exceptions.DivisionByZero&quot;)) );&#xA;&#xA;}&#xA;&#xA;&#xA;&#x9;java.lang.Boolean idIfCond_262 = false;&#xA;&#x9;idIfCond_262 = org.kermeta.compil.runtime.helper.language.ObjectUtil.isVoid(other);&#xA;&#xA;&#x9;if( idIfCond_262 ) {&#xA;&#xA;&#x9;&#xA;if (true)&#xA;&#x9;throw new org.kermeta.compil.runtime.helper.error.KRuntimeError( ((kermeta.exceptions.VoidOperandError) org.kermeta.compil.runtime.helper.language.ClassUtil.newObject(&quot;kermeta.exceptions.VoidOperandError&quot;)) );&#xA;&#xA;}&#xA; else {&#xA;&#xA;&#x9;result = (java.lang.Integer) org.kermeta.compil.runtime.helper.basetypes.IntegerUtil.mod(self, other);&#xA;}&#xA;&#xA;&#xA;return result;&#xA;" usages="Wrapper">
+    <sMParameters name="self" type="java.lang.Integer"/>
+    <sMParameters name="other" type="java.lang.Integer"/>
+    <sMReturn type="java.lang.Integer"/>
+  </staticMethods>
+  <staticMethods name="isGreater" sMContext="//@sMContexts.1" body="&#xA;java.lang.Boolean result = null;&#xA;&#xA;&#x9;java.lang.Boolean idIfCond_263 = false;&#xA;&#x9;idIfCond_263 = org.kermeta.compil.runtime.helper.language.ObjectUtil.isNotEqual(org.kermeta.compil.runtime.helper.language.ObjectUtil.getMetaClass(other), org.kermeta.compil.runtime.ExecutionContext.getInstance().getMetaClass(&quot;java.lang.Integer&quot;));&#xA;&#xA;&#x9;if( idIfCond_263 ) {&#xA;&#xA;&#x9;java.lang.Boolean idIfCond_264 = false;&#xA;&#x9;idIfCond_264 = org.kermeta.compil.runtime.helper.language.ObjectUtil.getMetaClass(other).equals(org.kermeta.compil.runtime.ExecutionContext.getInstance().getMetaClass(&quot;java.lang.Double&quot;));&#xA;&#xA;&#x9;if( idIfCond_264 ) {&#xA;&#xA;&#x9;result = org.kermeta.compil.runtime.helper.basetypes.RealUtil.isGreater(kermeta.standard.helper.IntegerWrapper.toReal(self), other);&#xA;}&#xA; else {&#xA;&#xA;&#x9;result = false;&#xA;}&#xA;&#xA;}&#xA; else {&#xA;&#xA;&#x9;result = (java.lang.Boolean) org.kermeta.compil.runtime.helper.basetypes.IntegerUtil.isGreater(self, other);&#xA;}&#xA;&#xA;&#xA;return result;&#xA;" usages="Wrapper">
+    <sMParameters name="self" type="java.lang.Integer"/>
+    <sMParameters name="other" type="java.lang.Integer"/>
+    <sMReturn type="java.lang.Boolean"/>
+  </staticMethods>
+  <staticMethods name="isNotEqual" sMContext="//@sMContexts.1" body="&#xA;java.lang.Boolean result = null;&#xA;&#xA;&#x9;result = kermeta.standard.helper.BooleanWrapper.not(org.kermeta.compil.runtime.helper.language.ObjectUtil.equals(self, element));&#xA;&#xA;return result;&#xA;" usages="Wrapper">
+    <sMParameters name="self" type="java.lang.Integer"/>
+    <sMParameters name="element" type="java.lang.Integer"/>
+    <sMReturn type="java.lang.Boolean"/>
+  </staticMethods>
+  <staticMethods name="isSet" sMContext="//@sMContexts.1" body="&#xA;java.lang.Boolean result = null;&#xA;&#xA;&#x9;result = (java.lang.Boolean) org.kermeta.compil.runtime.helper.language.ObjectUtil.isSet(self, property);&#xA;&#xA;return result;&#xA;" usages="Wrapper">
+    <sMParameters name="self" type="java.lang.Integer"/>
+    <sMParameters name="property" type="kermeta.language.structure.Property"/>
+    <sMReturn type="java.lang.Boolean"/>
+  </staticMethods>
+  <staticMethods name="asType" sMContext="//@sMContexts.1" body="&#xA;kermeta.language.structure.Object result = null;&#xA;&#xA;&#x9;java.lang.Boolean idIfCond_265 = false;&#xA;&#x9;idIfCond_265 = org.kermeta.compil.runtime.helper.language.ObjectUtil.isInstanceOf(self, org.kermeta.compil.runtime.ExecutionContext.getInstance().getMetaClass(&quot;type&quot;));&#xA;&#xA;&#x9;if( idIfCond_265 ) {&#xA;&#xA;&#x9;result = self;&#xA;}&#xA; else {&#xA;&#xA;&#x9;&#xA;if (true)&#xA;&#x9;throw new org.kermeta.compil.runtime.helper.error.KRuntimeError( ((kermeta.exceptions.TypeCastError) org.kermeta.compil.runtime.helper.language.ClassUtil.newObject(&quot;kermeta.exceptions.TypeCastError&quot;)) );&#xA;&#xA;}&#xA;&#xA;&#xA;return result;&#xA;" usages="Wrapper">
+    <sMParameters name="self" type="kermeta.language.structure.Object"/>
+    <sMParameters name="type" type="kermeta.language.structure.Class"/>
+    <sMReturn type="kermeta.language.structure.Object"/>
+  </staticMethods>
+  <staticMethods name="hashcode" sMContext="//@sMContexts.1" body="&#xA;java.lang.Integer result = null;&#xA;&#xA;&#x9;result = (java.lang.Integer) org.kermeta.compil.runtime.helper.language.ObjectUtil.hashcode(self);&#xA;&#xA;return result;&#xA;" usages="Wrapper">
+    <sMParameters name="self" type="java.lang.Integer"/>
+    <sMReturn type="java.lang.Integer"/>
+  </staticMethods>
+  <staticMethods name="get" sMContext="//@sMContexts.1" body="&#xA;kermeta.language.structure.Object result = null;&#xA;&#xA;&#x9;result = org.kermeta.compil.runtime.helper.language.ObjectUtil.get(self, property);&#xA;&#xA;return result;&#xA;" usages="Wrapper">
+    <sMParameters name="self" type="java.lang.Integer"/>
+    <sMParameters name="property" type="kermeta.language.structure.Property"/>
+    <sMReturn type="kermeta.language.structure.Object"/>
+  </staticMethods>
+  <staticMethods name="containingResource" sMContext="//@sMContexts.1" body="&#xA;kermeta.persistence.Resource result = null;&#xA;&#xA;&#x9;result = (kermeta.persistence.Resource) org.kermeta.compil.runtime.helper.language.ObjectUtil.getContainingResource(self);&#xA;&#xA;return result;&#xA;" usages="Wrapper">
+    <sMParameters name="self" type="java.lang.Integer"/>
+    <sMReturn type="kermeta.persistence.Resource"/>
+  </staticMethods>
+  <staticMethods name="isKindOf" sMContext="//@sMContexts.1" body="&#xA;java.lang.Boolean result = null;&#xA;&#xA;&#x9;result = org.kermeta.compil.runtime.helper.language.ObjectUtil.getMetaClass(self).equals(org.kermeta.compil.runtime.ExecutionContext.getInstance().getMetaClass(&quot;cl&quot;));&#xA;&#xA;return result;&#xA;" usages="Wrapper">
+    <sMParameters name="self" type="java.lang.Integer"/>
+    <sMParameters name="cl" type="kermeta.language.structure.Class"/>
+    <sMReturn type="java.lang.Boolean"/>
+  </staticMethods>
+  <staticMethods name="isInstanceOf" sMContext="//@sMContexts.1" body="&#xA;java.lang.Boolean result = null;&#xA;&#xA;&#x9;result = (java.lang.Boolean) org.kermeta.compil.runtime.helper.language.ObjectUtil.isInstanceOf(self, type.getClass().getName());&#xA;&#xA;return result;&#xA;" usages="Wrapper">
+    <sMParameters name="self" type="java.lang.Integer"/>
+    <sMParameters name="type" type="kermeta.language.structure.Type"/>
+    <sMReturn type="java.lang.Boolean"/>
+  </staticMethods>
+  <staticMethods name="freeze" sMContext="//@sMContexts.1" body="&#xA;&#x9;org.kermeta.compil.runtime.helper.language.ObjectUtil.freeze(self);&#xA;" usages="Wrapper">
+    <sMParameters name="self" type="java.lang.Integer"/>
+    <sMReturn type="void"/>
+  </staticMethods>
+  <staticMethods name="container" sMContext="//@sMContexts.1" body="&#xA;kermeta.language.structure.Object result = null;&#xA;&#xA;&#x9;result = org.kermeta.compil.runtime.helper.language.ObjectUtil.container(self);&#xA;&#xA;return result;&#xA;" usages="Wrapper">
+    <sMParameters name="self" type="java.lang.Integer"/>
+    <sMReturn type="kermeta.language.structure.Object"/>
+  </staticMethods>
+  <staticMethods name="checkInvariants" sMContext="//@sMContexts.1" body="&#xA;&#x9;kermeta.language.structure.ClassDefinition cd = org.kermeta.compil.runtime.helper.language.ObjectUtil.getMetaClass(self).getClassDefinition();&#xA;&#xA;&#x9;java.lang.Boolean idIfCond_266 = false;&#xA;&#x9;idIfCond_266 = kermeta.standard.helper.BooleanWrapper.not(org.kermeta.compil.runtime.helper.language.ObjectUtil.isVoid(cd));&#xA;&#xA;&#x9;if( idIfCond_266 ) {&#xA;&#xA;&#x9;//Beginning of the Inlining of the function type: each&#xA;&#xA;&#x9;&#xA;&#x9;kermeta.standard.Iterator&lt;kermeta.language.structure.Property> it_ft72 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil.&lt;kermeta.language.structure.Property>convertAsSet(cd.getAllAttribute()).iterator();&#xA;&#x9;java.lang.Boolean idLoopCond_267 = false;&#xA;&#x9;while( !idLoopCond_267 ) {&#xA;&#x9;idLoopCond_267 = it_ft72.isOff();&#xA;&#x9;if ( idLoopCond_267 ) {&#xA;&#x9;} else {&#xA;&#xA;&#x9;//Beginning of the Inlining of the lambda expression: func&#xA;kermeta.language.structure.Property p = it_ft72.next();&#xA;&#xA;&#x9;kermeta.language.structure.Object v = org.kermeta.compil.runtime.helper.language.ObjectUtil.get(self, p);&#xA;&#xA;&#x9;java.lang.Boolean idIfCond_268 = false;&#xA;&#x9;idIfCond_268 = kermeta.standard.helper.BooleanWrapper.and(kermeta.standard.helper.BooleanWrapper.not(org.kermeta.compil.runtime.helper.language.ObjectUtil.isVoid(v)), org.kermeta.compil.runtime.helper.language.ObjectUtil.isInstanceOf(v, org.kermeta.compil.runtime.ExecutionContext.getInstance().getMetaClass(&quot;kermeta.standard.Collection&lt;kermeta.language.structure.Object>&quot;)));&#xA;&#xA;&#x9;if( idIfCond_268 ) {&#xA;&#xA;&#x9;kermeta.standard.Collection&lt;kermeta.language.structure.Object> c = ((kermeta.standard.Collection&lt;kermeta.language.structure.Object>) org.kermeta.compil.runtime.helper.language.ObjectUtil.asType(v, org.kermeta.compil.runtime.ExecutionContext.getInstance().getMetaClass(&quot;kermeta.standard.Collection&lt;kermeta.language.structure.Object>&quot;)));&#xA;&#xA;&#x9;java.lang.Boolean idIfCond_269 = false;&#xA;&#x9;idIfCond_269 = kermeta.standard.helper.BooleanWrapper.or(kermeta.standard.helper.IntegerWrapper.isLower(c.size(), p.getLower()), kermeta.standard.helper.BooleanWrapper.and(org.kermeta.compil.runtime.helper.language.ObjectUtil.isNotEqual(p.getUpper(), kermeta.standard.helper.IntegerWrapper.uminus(1)), kermeta.standard.helper.IntegerWrapper.isGreater(c.size(), p.getUpper())));&#xA;&#xA;&#x9;if( idIfCond_269 ) {&#xA;&#xA;&#x9;&#xA;if (true)&#xA;&#x9;throw new org.kermeta.compil.runtime.helper.error.KRuntimeError( ((kermeta.exceptions.ConstraintViolatedInv) org.kermeta.compil.runtime.helper.language.ClassUtil.newObject(&quot;kermeta.exceptions.ConstraintViolatedInv&quot;)) );&#xA;&#xA;}&#xA;&#xA;}&#xA; else {&#xA;&#xA;&#x9;java.lang.Boolean idIfCond_270 = false;&#xA;&#x9;idIfCond_270 = kermeta.standard.helper.BooleanWrapper.and(kermeta.standard.helper.IntegerWrapper.equals(p.getLower(), 1), org.kermeta.compil.runtime.helper.language.ObjectUtil.isVoid(v));&#xA;&#xA;&#x9;if( idIfCond_270 ) {&#xA;&#xA;&#x9;&#xA;if (true)&#xA;&#x9;throw new org.kermeta.compil.runtime.helper.error.KRuntimeError( ((kermeta.exceptions.ConstraintViolatedInv) org.kermeta.compil.runtime.helper.language.ClassUtil.newObject(&quot;kermeta.exceptions.ConstraintViolatedInv&quot;)) );&#xA;&#xA;}&#xA;&#xA;}&#xA;&#xA;//End of the Inlining of the lambda expression: func&#xA;&#xA;}&#xA;&#x9;}&#xA;//End of the Inlining of the function type: each&#xA;&#xA;}&#xA;&#xA;&#xA;&#x9;org.kermeta.compil.runtime.helper.language.ObjectUtil.checkInvariants(self);&#xA;" usages="Wrapper">
+    <sMParameters name="self" type="java.lang.Integer"/>
+    <sMReturn type="void"/>
+  </staticMethods>
+  <staticMethods name="set" sMContext="//@sMContexts.1" body="&#xA;&#x9;java.lang.Boolean idIfCond_271 = false;&#xA;&#x9;idIfCond_271 = org.kermeta.compil.runtime.helper.language.ObjectUtil.isInstanceOf(element, org.kermeta.compil.runtime.ExecutionContext.getInstance().getMetaClass(&quot;property.getType()&quot;));&#xA;&#xA;&#x9;if( idIfCond_271 ) {&#xA;&#xA;&#x9;org.kermeta.compil.runtime.helper.language.ObjectUtil.set(self, property, element);&#xA;}&#xA; else {&#xA;&#xA;&#x9;kermeta.exceptions.IncompatibleTypeError e = ((kermeta.exceptions.IncompatibleTypeError) org.kermeta.compil.runtime.helper.language.ClassUtil.newObject(&quot;kermeta.exceptions.IncompatibleTypeError&quot;));&#xA;&#xA;&#x9;e.setMessage(kermeta.standard.helper.StringWrapper.plus(kermeta.standard.helper.StringWrapper.plus(kermeta.standard.helper.StringWrapper.plus(kermeta.standard.helper.StringWrapper.plus(kermeta.standard.helper.StringWrapper.plus(kermeta.standard.helper.StringWrapper.plus(&quot;IncompatibleTypeError : Cannot set property &quot;, property.getName()), &quot; of object &quot;), org.kermeta.compil.runtime.helper.language.ObjectUtil.toString(self)), &quot; to &quot;), org.kermeta.compil.runtime.helper.language.ObjectUtil.toString(element)), &quot;.&quot;));&#xA;&#xA;&#x9;&#xA;if (true)&#xA;&#x9;throw new org.kermeta.compil.runtime.helper.error.KRuntimeError( e );&#xA;&#xA;}&#xA;&#xA;" usages="Wrapper">
+    <sMParameters name="self" type="java.lang.Integer"/>
+    <sMParameters name="property" type="kermeta.language.structure.Property"/>
+    <sMParameters name="element" type="java.lang.Integer"/>
+    <sMReturn type="void"/>
+  </staticMethods>
+  <staticMethods name="oid" sMContext="//@sMContexts.1" body="&#xA;java.lang.Integer result = null;&#xA;&#xA;&#x9;result = (java.lang.Integer) org.kermeta.compil.runtime.helper.language.ObjectUtil.getOID(self);&#xA;&#xA;return result;&#xA;" usages="Wrapper">
+    <sMParameters name="self" type="java.lang.Integer"/>
+    <sMReturn type="java.lang.Integer"/>
+  </staticMethods>
+  <staticMethods name="isVoid" sMContext="//@sMContexts.1" body="&#xA;java.lang.Boolean result = null;&#xA;&#xA;&#x9;result = false;&#xA;&#xA;return result;&#xA;" usages="Wrapper">
+    <sMParameters name="self" type="java.lang.Integer"/>
+    <sMReturn type="java.lang.Boolean"/>
+  </staticMethods>
+  <staticMethods name="unset" sMContext="//@sMContexts.1" body="&#xA;&#x9;org.kermeta.compil.runtime.helper.language.ObjectUtil.unset(self, property);&#xA;" usages="Wrapper">
+    <sMParameters name="self" type="java.lang.Integer"/>
+    <sMParameters name="property" type="kermeta.language.structure.Property"/>
+    <sMReturn type="void"/>
+  </staticMethods>
+  <staticMethods name="getMetaClass" sMContext="//@sMContexts.1" body="&#xA;kermeta.language.structure.Class result = null;&#xA;&#xA;&#x9;result = (kermeta.language.structure.Class) org.kermeta.compil.runtime.helper.language.ObjectUtil.getMetaClass( self );&#xA;&#xA;return result;&#xA;" usages="Wrapper">
+    <sMParameters name="self" type="java.lang.Integer"/>
+    <sMReturn type="kermeta.language.structure.Class"/>
+  </staticMethods>
+  <staticMethods name="isFrozen" sMContext="//@sMContexts.1" body="&#xA;java.lang.Boolean result = null;&#xA;&#xA;&#x9;result = (java.lang.Boolean) org.kermeta.compil.runtime.helper.language.ObjectUtil.isFrozen(self);&#xA;&#xA;return result;&#xA;" usages="Wrapper">
+    <sMParameters name="self" type="java.lang.Integer"/>
+    <sMReturn type="java.lang.Boolean"/>
+  </staticMethods>
+  <staticMethods name="checkAllInvariants" sMContext="//@sMContexts.1" body="&#xA;&#x9;java.lang.Boolean idIfCond_272 = false;&#xA;&#x9;idIfCond_272 = org.kermeta.compil.runtime.helper.language.ObjectUtil.isNotEqual(self, null);&#xA;&#xA;&#x9;if( idIfCond_272 ) {&#xA;&#xA;&#x9;org.kermeta.compil.runtime.helper.language.ObjectUtil.checkInvariants(self);&#xA;&#xA;&#x9;kermeta.language.structure.ClassDefinition cd = null;&#xA;&#xA;&#x9;cd = (kermeta.language.structure.ClassDefinition) org.kermeta.compil.runtime.helper.language.ObjectUtil.getMetaClass(self).getTypeDefinition();&#xA;&#xA;&#x9;//Beginning of the Inlining of the function type: each&#xA;&#xA;&#x9;&#xA;&#x9;kermeta.standard.Iterator&lt;kermeta.language.structure.Property> it_ft73 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil.&lt;kermeta.language.structure.Property>convertAsSet(cd.getAllAttribute()).iterator();&#xA;&#x9;java.lang.Boolean idLoopCond_273 = false;&#xA;&#x9;while( !idLoopCond_273 ) {&#xA;&#x9;idLoopCond_273 = it_ft73.isOff();&#xA;&#x9;if ( idLoopCond_273 ) {&#xA;&#x9;} else {&#xA;&#xA;&#x9;//Beginning of the Inlining of the lambda expression: func&#xA;kermeta.language.structure.Property subObj = it_ft73.next();&#xA;&#xA;&#x9;java.lang.Boolean idIfCond_274 = false;&#xA;&#x9;idIfCond_274 = subObj.getIsComposite();&#xA;&#xA;&#x9;if( idIfCond_274 ) {&#xA;&#xA;&#x9;java.lang.Boolean idIfCond_275 = false;&#xA;&#x9;idIfCond_275 = kermeta.standard.helper.BooleanWrapper.or(kermeta.standard.helper.StringWrapper.equals(org.kermeta.compil.runtime.helper.language.ObjectUtil.getMetaClass(org.kermeta.compil.runtime.helper.language.ObjectUtil.get(self, subObj)).getTypeDefinition().getName(), &quot;ReflectiveSequence&quot;), kermeta.standard.helper.StringWrapper.equals(org.kermeta.compil.runtime.helper.language.ObjectUtil.getMetaClass(org.kermeta.compil.runtime.helper.language.ObjectUtil.get(self, subObj)).getTypeDefinition().getName(), &quot;ReflectiveCollection&quot;));&#xA;&#xA;&#x9;if( idIfCond_275 ) {&#xA;&#xA;&#x9;kermeta.standard.Collection&lt;kermeta.language.structure.Object> subObjInstances = null;&#xA;&#xA;&#x9;subObjInstances = (kermeta.standard.Collection&lt;kermeta.language.structure.Object>) org.kermeta.compil.runtime.helper.language.ObjectUtil.get(self, subObj);&#xA;&#xA;&#x9;//Beginning of the Inlining of the function type: each&#xA;&#xA;&#x9;&#xA;&#x9;kermeta.standard.Iterator&lt;kermeta.language.structure.Object> it_ft74 = subObjInstances.iterator();&#xA;&#x9;java.lang.Boolean idLoopCond_276 = false;&#xA;&#x9;while( !idLoopCond_276 ) {&#xA;&#x9;idLoopCond_276 = it_ft74.isOff();&#xA;&#x9;if ( idLoopCond_276 ) {&#xA;&#x9;} else {&#xA;&#xA;&#x9;//Beginning of the Inlining of the lambda expression: func&#xA;kermeta.language.structure.Object aSubObjInstances = it_ft74.next();&#xA;&#xA;&#x9;org.kermeta.compil.runtime.helper.language.ObjectUtil.checkAllInvariants(aSubObjInstances);&#xA;//End of the Inlining of the lambda expression: func&#xA;&#xA;}&#xA;&#x9;}&#xA;//End of the Inlining of the function type: each&#xA;&#xA;}&#xA; else {&#xA;&#xA;&#x9;org.kermeta.compil.runtime.helper.language.ObjectUtil.checkAllInvariants(org.kermeta.compil.runtime.helper.language.ObjectUtil.get(self, subObj));&#xA;}&#xA;&#xA;}&#xA;&#xA;//End of the Inlining of the lambda expression: func&#xA;&#xA;}&#xA;&#x9;}&#xA;//End of the Inlining of the function type: each&#xA;&#xA;}&#xA;&#xA;" usages="Wrapper">
+    <sMParameters name="self" type="java.lang.Integer"/>
+    <sMReturn type="void"/>
+  </staticMethods>
+  <staticMethods name="uminus" sMContext="//@sMContexts.2" body="&#xA;java.lang.Double result = null;&#xA;&#xA;&#x9;result = kermeta.standard.helper.RealWrapper.minus(kermeta.standard.helper.IntegerWrapper.toReal(0), self);&#xA;&#xA;return result;&#xA;" usages="Wrapper">
+    <sMParameters name="self" type="java.lang.Double"/>
+    <sMReturn type="java.lang.Double"/>
+  </staticMethods>
+  <staticMethods name="compareTo" sMContext="//@sMContexts.2" body="&#xA;java.lang.Integer result = null;&#xA;&#xA;&#x9;java.lang.Boolean idIfCond_277 = false;&#xA;&#x9;idIfCond_277 = org.kermeta.compil.runtime.helper.language.ObjectUtil.isNotEqual(org.kermeta.compil.runtime.helper.language.ObjectUtil.getMetaClass(other), org.kermeta.compil.runtime.ExecutionContext.getInstance().getMetaClass(&quot;java.lang.Double&quot;));&#xA;&#xA;&#x9;if( idIfCond_277 ) {&#xA;&#xA;&#x9;java.lang.Boolean idIfCond_278 = false;&#xA;&#x9;idIfCond_278 = org.kermeta.compil.runtime.helper.language.ObjectUtil.getMetaClass(other).equals(org.kermeta.compil.runtime.ExecutionContext.getInstance().getMetaClass(&quot;java.lang.Integer&quot;));&#xA;&#xA;&#x9;if( idIfCond_278 ) {&#xA;&#xA;&#x9;result = kermeta.standard.helper.RealWrapper.compareTo(self, kermeta.standard.helper.IntegerWrapper.toReal(((java.lang.Integer) org.kermeta.compil.runtime.helper.language.ObjectUtil.asType(other, org.kermeta.compil.runtime.ExecutionContext.getInstance().getMetaClass(&quot;java.lang.Integer&quot;)))));&#xA;}&#xA; else {&#xA;&#xA;&#x9;&#xA;if (true)&#xA;&#x9;throw new org.kermeta.compil.runtime.helper.error.KRuntimeError( ((kermeta.standard.NotComparableException) org.kermeta.compil.runtime.helper.language.ClassUtil.newObject(&quot;kermeta.standard.NotComparableException&quot;)) );&#xA;&#xA;}&#xA;&#xA;}&#xA; else {&#xA;&#xA;&#x9;result = (java.lang.Integer) org.kermeta.compil.runtime.helper.basetypes.RealUtil.compareTo(self, other);&#xA;}&#xA;&#xA;&#xA;return result;&#xA;" usages="Wrapper">
+    <sMParameters name="self" type="java.lang.Double"/>
+    <sMParameters name="other" type="java.lang.Double"/>
+    <sMReturn type="java.lang.Integer"/>
+  </staticMethods>
+  <staticMethods name="mult" sMContext="//@sMContexts.2" body="&#xA;java.lang.Double result = null;&#xA;&#xA;&#x9;java.lang.Boolean idIfCond_279 = false;&#xA;&#x9;idIfCond_279 = org.kermeta.compil.runtime.helper.language.ObjectUtil.isVoid(other);&#xA;&#xA;&#x9;if( idIfCond_279 ) {&#xA;&#xA;&#x9;&#xA;if (true)&#xA;&#x9;throw new org.kermeta.compil.runtime.helper.error.KRuntimeError( ((kermeta.exceptions.VoidOperandError) org.kermeta.compil.runtime.helper.language.ClassUtil.newObject(&quot;kermeta.exceptions.VoidOperandError&quot;)) );&#xA;&#xA;}&#xA; else {&#xA;&#xA;&#x9;result = (java.lang.Double) org.kermeta.compil.runtime.helper.basetypes.RealUtil.times(self, other);&#xA;}&#xA;&#xA;&#xA;return result;&#xA;" usages="Wrapper">
+    <sMParameters name="self" type="java.lang.Double"/>
+    <sMParameters name="other" type="java.lang.Double"/>
+    <sMReturn type="java.lang.Double"/>
+  </staticMethods>
+  <staticMethods name="div" sMContext="//@sMContexts.2" body="&#xA;java.lang.Double result = null;&#xA;&#xA;&#x9;java.lang.Boolean idIfCond_280 = false;&#xA;&#x9;idIfCond_280 = kermeta.standard.helper.RealWrapper.equals(other, kermeta.standard.helper.IntegerWrapper.toReal(0));&#xA;&#xA;&#x9;if( idIfCond_280 ) {&#xA;&#xA;&#x9;&#xA;if (true)&#xA;&#x9;throw new org.kermeta.compil.runtime.helper.error.KRuntimeError( ((kermeta.exceptions.DivisionByZero) org.kermeta.compil.runtime.helper.language.ClassUtil.newObject(&quot;kermeta.exceptions.DivisionByZero&quot;)) );&#xA;&#xA;}&#xA;&#xA;&#xA;&#x9;java.lang.Boolean idIfCond_281 = false;&#xA;&#x9;idIfCond_281 = org.kermeta.compil.runtime.helper.language.ObjectUtil.isVoid(other);&#xA;&#xA;&#x9;if( idIfCond_281 ) {&#xA;&#xA;&#x9;&#xA;if (true)&#xA;&#x9;throw new org.kermeta.compil.runtime.helper.error.KRuntimeError( ((kermeta.exceptions.VoidOperandError) org.kermeta.compil.runtime.helper.language.ClassUtil.newObject(&quot;kermeta.exceptions.VoidOperandError&quot;)) );&#xA;&#xA;}&#xA; else {&#xA;&#xA;&#x9;result = (java.lang.Double) org.kermeta.compil.runtime.helper.basetypes.RealUtil.div(self, other);&#xA;}&#xA;&#xA;&#xA;return result;&#xA;" usages="Wrapper">
+    <sMParameters name="self" type="java.lang.Double"/>
+    <sMParameters name="other" type="java.lang.Double"/>
+    <sMReturn type="java.lang.Double"/>
+  </staticMethods>
+  <staticMethods name="toString" sMContext="//@sMContexts.2" body="&#xA;java.lang.String result = null;&#xA;&#xA;&#x9;result = (java.lang.String) org.kermeta.compil.runtime.helper.basetypes.RealUtil.toString(self);&#xA;&#xA;return result;&#xA;" usages="Wrapper">
+    <sMParameters name="self" type="java.lang.Double"/>
+    <sMReturn type="java.lang.String"/>
+  </staticMethods>
+  <staticMethods name="equals" sMContext="//@sMContexts.2" body="&#xA;java.lang.Boolean result = null;&#xA;&#xA;&#x9;java.lang.Boolean idIfCond_282 = false;&#xA;&#x9;idIfCond_282 = org.kermeta.compil.runtime.helper.language.ObjectUtil.isNotEqual(org.kermeta.compil.runtime.helper.language.ObjectUtil.getMetaClass(other), org.kermeta.compil.runtime.ExecutionContext.getInstance().getMetaClass(&quot;java.lang.Double&quot;));&#xA;&#xA;&#x9;if( idIfCond_282 ) {&#xA;&#xA;&#x9;java.lang.Boolean idIfCond_283 = false;&#xA;&#x9;idIfCond_283 = org.kermeta.compil.runtime.helper.language.ObjectUtil.getMetaClass(other).equals(org.kermeta.compil.runtime.ExecutionContext.getInstance().getMetaClass(&quot;java.lang.Integer&quot;));&#xA;&#xA;&#x9;if( idIfCond_283 ) {&#xA;&#xA;&#x9;result = kermeta.standard.helper.RealWrapper.equals(self, kermeta.standard.helper.IntegerWrapper.toReal(((java.lang.Integer) org.kermeta.compil.runtime.helper.language.ObjectUtil.asType(other, org.kermeta.compil.runtime.ExecutionContext.getInstance().getMetaClass(&quot;java.lang.Integer&quot;)))));&#xA;}&#xA; else {&#xA;&#xA;&#x9;result = false;&#xA;}&#xA;&#xA;}&#xA; else {&#xA;&#xA;&#x9;result = (java.lang.Boolean) org.kermeta.compil.runtime.helper.basetypes.RealUtil.equals(self, other);&#xA;}&#xA;&#xA;&#xA;return result;&#xA;" usages="Wrapper">
+    <sMParameters name="self" type="java.lang.Double"/>
+    <sMParameters name="other" type="java.lang.Double"/>
+    <sMReturn type="java.lang.Boolean"/>
+  </staticMethods>
+  <staticMethods name="plus" sMContext="//@sMContexts.2" body="&#xA;java.lang.Double result = null;&#xA;&#xA;&#x9;java.lang.Boolean idIfCond_284 = false;&#xA;&#x9;idIfCond_284 = org.kermeta.compil.runtime.helper.language.ObjectUtil.isVoid(other);&#xA;&#xA;&#x9;if( idIfCond_284 ) {&#xA;&#xA;&#x9;&#xA;if (true)&#xA;&#x9;throw new org.kermeta.compil.runtime.helper.error.KRuntimeError( ((kermeta.exceptions.VoidOperandError) org.kermeta.compil.runtime.helper.language.ClassUtil.newObject(&quot;kermeta.exceptions.VoidOperandError&quot;)) );&#xA;&#xA;}&#xA; else {&#xA;&#xA;&#x9;result = (java.lang.Double) org.kermeta.compil.runtime.helper.basetypes.RealUtil.plus(self, other);&#xA;}&#xA;&#xA;&#xA;return result;&#xA;" usages="Wrapper">
+    <sMParameters name="self" type="java.lang.Double"/>
+    <sMParameters name="other" type="java.lang.Double"/>
+    <sMReturn type="java.lang.Double"/>
+  </staticMethods>
+  <staticMethods name="minus" sMContext="//@sMContexts.2" body="&#xA;java.lang.Double result = null;&#xA;&#xA;&#x9;java.lang.Boolean idIfCond_285 = false;&#xA;&#x9;idIfCond_285 = org.kermeta.compil.runtime.helper.language.ObjectUtil.isVoid(other);&#xA;&#xA;&#x9;if( idIfCond_285 ) {&#xA;&#xA;&#x9;&#xA;if (true)&#xA;&#x9;throw new org.kermeta.compil.runtime.helper.error.KRuntimeError( ((kermeta.exceptions.VoidOperandError) org.kermeta.compil.runtime.helper.language.ClassUtil.newObject(&quot;kermeta.exceptions.VoidOperandError&quot;)) );&#xA;&#xA;}&#xA; else {&#xA;&#xA;&#x9;result = (java.lang.Double) org.kermeta.compil.runtime.helper.basetypes.RealUtil.minus(self, other);&#xA;}&#xA;&#xA;&#xA;return result;&#xA;" usages="Wrapper">
+    <sMParameters name="self" type="java.lang.Double"/>
+    <sMParameters name="other" type="java.lang.Double"/>
+    <sMReturn type="java.lang.Double"/>
+  </staticMethods>
+  <staticMethods name="toInteger" sMContext="//@sMContexts.2" body="&#xA;java.lang.Integer result = null;&#xA;&#xA;&#x9;result = (java.lang.Integer) org.kermeta.compil.runtime.helper.basetypes.RealUtil.toInteger(self);&#xA;&#xA;return result;&#xA;" usages="Wrapper">
+    <sMParameters name="self" type="java.lang.Double"/>
+    <sMReturn type="java.lang.Integer"/>
+  </staticMethods>
+  <staticMethods name="isGreaterOrEqual" sMContext="//@sMContexts.2" body="&#xA;java.lang.Boolean result = null;&#xA;&#xA;&#x9;result = kermeta.standard.helper.IntegerWrapper.isGreaterOrEqual(self.compareTo(other), 0);&#xA;&#xA;return result;&#xA;" usages="Wrapper">
+    <sMParameters name="self" type="java.lang.Double"/>
+    <sMParameters name="other" type="java.lang.Double"/>
+    <sMReturn type="java.lang.Boolean"/>
+  </staticMethods>
+  <staticMethods name="isLowerOrEqual" sMContext="//@sMContexts.2" body="&#xA;java.lang.Boolean result = null;&#xA;&#xA;&#x9;result = kermeta.standard.helper.IntegerWrapper.isLowerOrEqual(self.compareTo(other), 0);&#xA;&#xA;return result;&#xA;" usages="Wrapper">
+    <sMParameters name="self" type="java.lang.Double"/>
+    <sMParameters name="other" type="java.lang.Double"/>
+    <sMReturn type="java.lang.Boolean"/>
+  </staticMethods>
+  <staticMethods name="isLower" sMContext="//@sMContexts.2" body="&#xA;java.lang.Boolean result = null;&#xA;&#xA;&#x9;result = kermeta.standard.helper.IntegerWrapper.isLower(self.compareTo(other), 0);&#xA;&#xA;return result;&#xA;" usages="Wrapper">
+    <sMParameters name="self" type="java.lang.Double"/>
+    <sMParameters name="other" type="java.lang.Double"/>
+    <sMReturn type="java.lang.Boolean"/>
+  </staticMethods>
+  <staticMethods name="isGreater" sMContext="//@sMContexts.2" body="&#xA;java.lang.Boolean result = null;&#xA;&#xA;&#x9;result = kermeta.standard.helper.IntegerWrapper.isGreater(self.compareTo(other), 0);&#xA;&#xA;return result;&#xA;" usages="Wrapper">
+    <sMParameters name="self" type="java.lang.Double"/>
+    <sMParameters name="other" type="java.lang.Double"/>
+    <sMReturn type="java.lang.Boolean"/>
+  </staticMethods>
+  <staticMethods name="isNotEqual" sMContext="//@sMContexts.2" body="&#xA;java.lang.Boolean result = null;&#xA;&#xA;&#x9;result = kermeta.standard.helper.BooleanWrapper.not(org.kermeta.compil.runtime.helper.language.ObjectUtil.equals(self, element));&#xA;&#xA;return result;&#xA;" usages="Wrapper">
+    <sMParameters name="self" type="java.lang.Double"/>
+    <sMParameters name="element" type="java.lang.Double"/>
+    <sMReturn type="java.lang.Boolean"/>
+  </staticMethods>
+  <staticMethods name="isSet" sMContext="//@sMContexts.2" body="&#xA;java.lang.Boolean result = null;&#xA;&#xA;&#x9;result = (java.lang.Boolean) org.kermeta.compil.runtime.helper.language.ObjectUtil.isSet(self, property);&#xA;&#xA;return result;&#xA;" usages="Wrapper">
+    <sMParameters name="self" type="java.lang.Double"/>
+    <sMParameters name="property" type="kermeta.language.structure.Property"/>
+    <sMReturn type="java.lang.Boolean"/>
+  </staticMethods>
+  <staticMethods name="asType" sMContext="//@sMContexts.2" body="&#xA;kermeta.language.structure.Object result = null;&#xA;&#xA;&#x9;java.lang.Boolean idIfCond_286 = false;&#xA;&#x9;idIfCond_286 = org.kermeta.compil.runtime.helper.language.ObjectUtil.isInstanceOf(self, org.kermeta.compil.runtime.ExecutionContext.getInstance().getMetaClass(&quot;type&quot;));&#xA;&#xA;&#x9;if( idIfCond_286 ) {&#xA;&#xA;&#x9;result = self;&#xA;}&#xA; else {&#xA;&#xA;&#x9;&#xA;if (true)&#xA;&#x9;throw new org.kermeta.compil.runtime.helper.error.KRuntimeError( ((kermeta.exceptions.TypeCastError) org.kermeta.compil.runtime.helper.language.ClassUtil.newObject(&quot;kermeta.exceptions.TypeCastError&quot;)) );&#xA;&#xA;}&#xA;&#xA;&#xA;return result;&#xA;" usages="Wrapper">
+    <sMParameters name="self" type="kermeta.language.structure.Object"/>
+    <sMParameters name="type" type="kermeta.language.structure.Class"/>
+    <sMReturn type="kermeta.language.structure.Object"/>
+  </staticMethods>
+  <staticMethods name="hashcode" sMContext="//@sMContexts.2" body="&#xA;java.lang.Integer result = null;&#xA;&#xA;&#x9;result = (java.lang.Integer) org.kermeta.compil.runtime.helper.language.ObjectUtil.hashcode(self);&#xA;&#xA;return result;&#xA;" usages="Wrapper">
+    <sMParameters name="self" type="java.lang.Double"/>
+    <sMReturn type="java.lang.Integer"/>
+  </staticMethods>
+  <staticMethods name="get" sMContext="//@sMContexts.2" body="&#xA;kermeta.language.structure.Object result = null;&#xA;&#xA;&#x9;result = org.kermeta.compil.runtime.helper.language.ObjectUtil.get(self, property);&#xA;&#xA;return result;&#xA;" usages="Wrapper">
+    <sMParameters name="self" type="java.lang.Double"/>
+    <sMParameters name="property" type="kermeta.language.structure.Property"/>
+    <sMReturn type="kermeta.language.structure.Object"/>
+  </staticMethods>
+  <staticMethods name="containingResource" sMContext="//@sMContexts.2" body="&#xA;kermeta.persistence.Resource result = null;&#xA;&#xA;&#x9;result = (kermeta.persistence.Resource) org.kermeta.compil.runtime.helper.language.ObjectUtil.getContainingResource(self);&#xA;&#xA;return result;&#xA;" usages="Wrapper">
+    <sMParameters name="self" type="java.lang.Double"/>
+    <sMReturn type="kermeta.persistence.Resource"/>
+  </staticMethods>
+  <staticMethods name="isKindOf" sMContext="//@sMContexts.2" body="&#xA;java.lang.Boolean result = null;&#xA;&#xA;&#x9;result = org.kermeta.compil.runtime.helper.language.ObjectUtil.getMetaClass(self).equals(org.kermeta.compil.runtime.ExecutionContext.getInstance().getMetaClass(&quot;cl&quot;));&#xA;&#xA;return result;&#xA;" usages="Wrapper">
+    <sMParameters name="self" type="java.lang.Double"/>
+    <sMParameters name="cl" type="kermeta.language.structure.Class"/>
+    <sMReturn type="java.lang.Boolean"/>
+  </staticMethods>
+  <staticMethods name="isInstanceOf" sMContext="//@sMContexts.2" body="&#xA;java.lang.Boolean result = null;&#xA;&#xA;&#x9;result = (java.lang.Boolean) org.kermeta.compil.runtime.helper.language.ObjectUtil.isInstanceOf(self, type.getClass().getName());&#xA;&#xA;return result;&#xA;" usages="Wrapper">
+    <sMParameters name="self" type="java.lang.Double"/>
+    <sMParameters name="type" type="kermeta.language.structure.Type"/>
+    <sMReturn type="java.lang.Boolean"/>
+  </staticMethods>
+  <staticMethods name="freeze" sMContext="//@sMContexts.2" body="&#xA;&#x9;org.kermeta.compil.runtime.helper.language.ObjectUtil.freeze(self);&#xA;" usages="Wrapper">
+    <sMParameters name="self" type="java.lang.Double"/>
+    <sMReturn type="void"/>
+  </staticMethods>
+  <staticMethods name="container" sMContext="//@sMContexts.2" body="&#xA;kermeta.language.structure.Object result = null;&#xA;&#xA;&#x9;result = org.kermeta.compil.runtime.helper.language.ObjectUtil.container(self);&#xA;&#xA;return result;&#xA;" usages="Wrapper">
+    <sMParameters name="self" type="java.lang.Double"/>
+    <sMReturn type="kermeta.language.structure.Object"/>
+  </staticMethods>
+  <staticMethods name="checkInvariants" sMContext="//@sMContexts.2" body="&#xA;&#x9;kermeta.language.structure.ClassDefinition cd = org.kermeta.compil.runtime.helper.language.ObjectUtil.getMetaClass(self).getClassDefinition();&#xA;&#xA;&#x9;java.lang.Boolean idIfCond_287 = false;&#xA;&#x9;idIfCond_287 = kermeta.standard.helper.BooleanWrapper.not(org.kermeta.compil.runtime.helper.language.ObjectUtil.isVoid(cd));&#xA;&#xA;&#x9;if( idIfCond_287 ) {&#xA;&#xA;&#x9;//Beginning of the Inlining of the function type: each&#xA;&#xA;&#x9;&#xA;&#x9;kermeta.standard.Iterator&lt;kermeta.language.structure.Property> it_ft75 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil.&lt;kermeta.language.structure.Property>convertAsSet(cd.getAllAttribute()).iterator();&#xA;&#x9;java.lang.Boolean idLoopCond_288 = false;&#xA;&#x9;while( !idLoopCond_288 ) {&#xA;&#x9;idLoopCond_288 = it_ft75.isOff();&#xA;&#x9;if ( idLoopCond_288 ) {&#xA;&#x9;} else {&#xA;&#xA;&#x9;//Beginning of the Inlining of the lambda expression: func&#xA;kermeta.language.structure.Property p = it_ft75.next();&#xA;&#xA;&#x9;kermeta.language.structure.Object v = org.kermeta.compil.runtime.helper.language.ObjectUtil.get(self, p);&#xA;&#xA;&#x9;java.lang.Boolean idIfCond_289 = false;&#xA;&#x9;idIfCond_289 = kermeta.standard.helper.BooleanWrapper.and(kermeta.standard.helper.BooleanWrapper.not(org.kermeta.compil.runtime.helper.language.ObjectUtil.isVoid(v)), org.kermeta.compil.runtime.helper.language.ObjectUtil.isInstanceOf(v, org.kermeta.compil.runtime.ExecutionContext.getInstance().getMetaClass(&quot;kermeta.standard.Collection&lt;kermeta.language.structure.Object>&quot;)));&#xA;&#xA;&#x9;if( idIfCond_289 ) {&#xA;&#xA;&#x9;kermeta.standard.Collection&lt;kermeta.language.structure.Object> c = ((kermeta.standard.Collection&lt;kermeta.language.structure.Object>) org.kermeta.compil.runtime.helper.language.ObjectUtil.asType(v, org.kermeta.compil.runtime.ExecutionContext.getInstance().getMetaClass(&quot;kermeta.standard.Collection&lt;kermeta.language.structure.Object>&quot;)));&#xA;&#xA;&#x9;java.lang.Boolean idIfCond_290 = false;&#xA;&#x9;idIfCond_290 = kermeta.standard.helper.BooleanWrapper.or(kermeta.standard.helper.IntegerWrapper.isLower(c.size(), p.getLower()), kermeta.standard.helper.BooleanWrapper.and(org.kermeta.compil.runtime.helper.language.ObjectUtil.isNotEqual(p.getUpper(), kermeta.standard.helper.IntegerWrapper.uminus(1)), kermeta.standard.helper.IntegerWrapper.isGreater(c.size(), p.getUpper())));&#xA;&#xA;&#x9;if( idIfCond_290 ) {&#xA;&#xA;&#x9;&#xA;if (true)&#xA;&#x9;throw new org.kermeta.compil.runtime.helper.error.KRuntimeError( ((kermeta.exceptions.ConstraintViolatedInv) org.kermeta.compil.runtime.helper.language.ClassUtil.newObject(&quot;kermeta.exceptions.ConstraintViolatedInv&quot;)) );&#xA;&#xA;}&#xA;&#xA;}&#xA; else {&#xA;&#xA;&#x9;java.lang.Boolean idIfCond_291 = false;&#xA;&#x9;idIfCond_291 = kermeta.standard.helper.BooleanWrapper.and(kermeta.standard.helper.IntegerWrapper.equals(p.getLower(), 1), org.kermeta.compil.runtime.helper.language.ObjectUtil.isVoid(v));&#xA;&#xA;&#x9;if( idIfCond_291 ) {&#xA;&#xA;&#x9;&#xA;if (true)&#xA;&#x9;throw new org.kermeta.compil.runtime.helper.error.KRuntimeError( ((kermeta.exceptions.ConstraintViolatedInv) org.kermeta.compil.runtime.helper.language.ClassUtil.newObject(&quot;kermeta.exceptions.ConstraintViolatedInv&quot;)) );&#xA;&#xA;}&#xA;&#xA;}&#xA;&#xA;//End of the Inlining of the lambda expression: func&#xA;&#xA;}&#xA;&#x9;}&#xA;//End of the Inlining of the function type: each&#xA;&#xA;}&#xA;&#xA;&#xA;&#x9;org.kermeta.compil.runtime.helper.language.ObjectUtil.checkInvariants(self);&#xA;" usages="Wrapper">
+    <sMParameters name="self" type="java.lang.Double"/>
+    <sMReturn type="void"/>
+  </staticMethods>
+  <staticMethods name="set" sMContext="//@sMContexts.2" body="&#xA;&#x9;java.lang.Boolean idIfCond_292 = false;&#xA;&#x9;idIfCond_292 = org.kermeta.compil.runtime.helper.language.ObjectUtil.isInstanceOf(element, org.kermeta.compil.runtime.ExecutionContext.getInstance().getMetaClass(&quot;property.getType()&quot;));&#xA;&#xA;&#x9;if( idIfCond_292 ) {&#xA;&#xA;&#x9;org.kermeta.compil.runtime.helper.language.ObjectUtil.set(self, property, element);&#xA;}&#xA; else {&#xA;&#xA;&#x9;kermeta.exceptions.IncompatibleTypeError e = ((kermeta.exceptions.IncompatibleTypeError) org.kermeta.compil.runtime.helper.language.ClassUtil.newObject(&quot;kermeta.exceptions.IncompatibleTypeError&quot;));&#xA;&#xA;&#x9;e.setMessage(kermeta.standard.helper.StringWrapper.plus(kermeta.standard.helper.StringWrapper.plus(kermeta.standard.helper.StringWrapper.plus(kermeta.standard.helper.StringWrapper.plus(kermeta.standard.helper.StringWrapper.plus(kermeta.standard.helper.StringWrapper.plus(&quot;IncompatibleTypeError : Cannot set property &quot;, property.getName()), &quot; of object &quot;), org.kermeta.compil.runtime.helper.language.ObjectUtil.toString(self)), &quot; to &quot;), org.kermeta.compil.runtime.helper.language.ObjectUtil.toString(element)), &quot;.&quot;));&#xA;&#xA;&#x9;&#xA;if (true)&#xA;&#x9;throw new org.kermeta.compil.runtime.helper.error.KRuntimeError( e );&#xA;&#xA;}&#xA;&#xA;" usages="Wrapper">
+    <sMParameters name="self" type="java.lang.Double"/>
+    <sMParameters name="property" type="kermeta.language.structure.Property"/>
+    <sMParameters name="element" type="java.lang.Double"/>
+    <sMReturn type="void"/>
+  </staticMethods>
+  <staticMethods name="oid" sMContext="//@sMContexts.2" body="&#xA;java.lang.Integer result = null;&#xA;&#xA;&#x9;result = (java.lang.Integer) org.kermeta.compil.runtime.helper.language.ObjectUtil.getOID(self);&#xA;&#xA;return result;&#xA;" usages="Wrapper">
+    <sMParameters name="self" type="java.lang.Double"/>
+    <sMReturn type="java.lang.Integer"/>
+  </staticMethods>
+  <staticMethods name="isVoid" sMContext="//@sMContexts.2" body="&#xA;java.lang.Boolean result = null;&#xA;&#xA;&#x9;result = false;&#xA;&#xA;return result;&#xA;" usages="Wrapper">
+    <sMParameters name="self" type="java.lang.Double"/>
+    <sMReturn type="java.lang.Boolean"/>
+  </staticMethods>
+  <staticMethods name="unset" sMContext="//@sMContexts.2" body="&#xA;&#x9;org.kermeta.compil.runtime.helper.language.ObjectUtil.unset(self, property);&#xA;" usages="Wrapper">
+    <sMParameters name="self" type="java.lang.Double"/>
+    <sMParameters name="property" type="kermeta.language.structure.Property"/>
+    <sMReturn type="void"/>
+  </staticMethods>
+  <staticMethods name="getMetaClass" sMContext="//@sMContexts.2" body="&#xA;kermeta.language.structure.Class result = null;&#xA;&#xA;&#x9;result = (kermeta.language.structure.Class) org.kermeta.compil.runtime.helper.language.ObjectUtil.getMetaClass( self );&#xA;&#xA;return result;&#xA;" usages="Wrapper">
+    <sMParameters name="self" type="java.lang.Double"/>
+    <sMReturn type="kermeta.language.structure.Class"/>
+  </staticMethods>
+  <staticMethods name="isFrozen" sMContext="//@sMContexts.2" body="&#xA;java.lang.Boolean result = null;&#xA;&#xA;&#x9;result = (java.lang.Boolean) org.kermeta.compil.runtime.helper.language.ObjectUtil.isFrozen(self);&#xA;&#xA;return result;&#xA;" usages="Wrapper">
+    <sMParameters name="self" type="java.lang.Double"/>
+    <sMReturn type="java.lang.Boolean"/>
+  </staticMethods>
+  <staticMethods name="checkAllInvariants" sMContext="//@sMContexts.2" body="&#xA;&#x9;java.lang.Boolean idIfCond_293 = false;&#xA;&#x9;idIfCond_293 = org.kermeta.compil.runtime.helper.language.ObjectUtil.isNotEqual(self, null);&#xA;&#xA;&#x9;if( idIfCond_293 ) {&#xA;&#xA;&#x9;org.kermeta.compil.runtime.helper.language.ObjectUtil.checkInvariants(self);&#xA;&#xA;&#x9;kermeta.language.structure.ClassDefinition cd = null;&#xA;&#xA;&#x9;cd = (kermeta.language.structure.ClassDefinition) org.kermeta.compil.runtime.helper.language.ObjectUtil.getMetaClass(self).getTypeDefinition();&#xA;&#xA;&#x9;//Beginning of the Inlining of the function type: each&#xA;&#xA;&#x9;&#xA;&#x9;kermeta.standard.Iterator&lt;kermeta.language.structure.Property> it_ft76 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil.&lt;kermeta.language.structure.Property>convertAsSet(cd.getAllAttribute()).iterator();&#xA;&#x9;java.lang.Boolean idLoopCond_294 = false;&#xA;&#x9;while( !idLoopCond_294 ) {&#xA;&#x9;idLoopCond_294 = it_ft76.isOff();&#xA;&#x9;if ( idLoopCond_294 ) {&#xA;&#x9;} else {&#xA;&#xA;&#x9;//Beginning of the Inlining of the lambda expression: func&#xA;kermeta.language.structure.Property subObj = it_ft76.next();&#xA;&#xA;&#x9;java.lang.Boolean idIfCond_295 = false;&#xA;&#x9;idIfCond_295 = subObj.getIsComposite();&#xA;&#xA;&#x9;if( idIfCond_295 ) {&#xA;&#xA;&#x9;java.lang.Boolean idIfCond_296 = false;&#xA;&#x9;idIfCond_296 = kermeta.standard.helper.BooleanWrapper.or(kermeta.standard.helper.StringWrapper.equals(org.kermeta.compil.runtime.helper.language.ObjectUtil.getMetaClass(org.kermeta.compil.runtime.helper.language.ObjectUtil.get(self, subObj)).getTypeDefinition().getName(), &quot;ReflectiveSequence&quot;), kermeta.standard.helper.StringWrapper.equals(org.kermeta.compil.runtime.helper.language.ObjectUtil.getMetaClass(org.kermeta.compil.runtime.helper.language.ObjectUtil.get(self, subObj)).getTypeDefinition().getName(), &quot;ReflectiveCollection&quot;));&#xA;&#xA;&#x9;if( idIfCond_296 ) {&#xA;&#xA;&#x9;kermeta.standard.Collection&lt;kermeta.language.structure.Object> subObjInstances = null;&#xA;&#xA;&#x9;subObjInstances = (kermeta.standard.Collection&lt;kermeta.language.structure.Object>) org.kermeta.compil.runtime.helper.language.ObjectUtil.get(self, subObj);&#xA;&#xA;&#x9;//Beginning of the Inlining of the function type: each&#xA;&#xA;&#x9;&#xA;&#x9;kermeta.standard.Iterator&lt;kermeta.language.structure.Object> it_ft77 = subObjInstances.iterator();&#xA;&#x9;java.lang.Boolean idLoopCond_297 = false;&#xA;&#x9;while( !idLoopCond_297 ) {&#xA;&#x9;idLoopCond_297 = it_ft77.isOff();&#xA;&#x9;if ( idLoopCond_297 ) {&#xA;&#x9;} else {&#xA;&#xA;&#x9;//Beginning of the Inlining of the lambda expression: func&#xA;kermeta.language.structure.Object aSubObjInstances = it_ft77.next();&#xA;&#xA;&#x9;org.kermeta.compil.runtime.helper.language.ObjectUtil.checkAllInvariants(aSubObjInstances);&#xA;//End of the Inlining of the lambda expression: func&#xA;&#xA;}&#xA;&#x9;}&#xA;//End of the Inlining of the function type: each&#xA;&#xA;}&#xA; else {&#xA;&#xA;&#x9;org.kermeta.compil.runtime.helper.language.ObjectUtil.checkAllInvariants(org.kermeta.compil.runtime.helper.language.ObjectUtil.get(self, subObj));&#xA;}&#xA;&#xA;}&#xA;&#xA;//End of the Inlining of the lambda expression: func&#xA;&#xA;}&#xA;&#x9;}&#xA;//End of the Inlining of the function type: each&#xA;&#xA;}&#xA;&#xA;" usages="Wrapper">
+    <sMParameters name="self" type="java.lang.Double"/>
+    <sMReturn type="void"/>
+  </staticMethods>
+  <staticMethods name="compareTo" sMContext="//@sMContexts.3" body="&#xA;java.lang.Integer result = null;&#xA;&#xA;&#x9;java.lang.Boolean idIfCond_298 = false;&#xA;&#x9;idIfCond_298 = org.kermeta.compil.runtime.helper.language.ObjectUtil.isVoid(other);&#xA;&#xA;&#x9;if( idIfCond_298 ) {&#xA;&#xA;&#x9;&#xA;if (true)&#xA;&#x9;throw new org.kermeta.compil.runtime.helper.error.KRuntimeError( ((kermeta.exceptions.CallOnVoidTarget) org.kermeta.compil.runtime.helper.language.ClassUtil.newObject(&quot;kermeta.exceptions.CallOnVoidTarget&quot;)) );&#xA;&#xA;}&#xA; else {&#xA;&#xA;&#x9;result = (java.lang.Integer) org.kermeta.compil.runtime.helper.basetypes.CharacterUtil.compareTo(self, other);&#xA;}&#xA;&#xA;&#xA;return result;&#xA;" usages="Wrapper">
+    <sMParameters name="self" type="java.lang.Character"/>
+    <sMParameters name="other" type="java.lang.Character"/>
+    <sMReturn type="java.lang.Integer"/>
+  </staticMethods>
+  <staticMethods name="toString" sMContext="//@sMContexts.3" body="&#xA;java.lang.String result = null;&#xA;&#xA;&#x9;result = (java.lang.String) org.kermeta.compil.runtime.helper.basetypes.CharacterUtil.toString(self);&#xA;&#xA;return result;&#xA;" usages="Wrapper">
+    <sMParameters name="self" type="java.lang.Character"/>
+    <sMReturn type="java.lang.String"/>
+  </staticMethods>
+  <staticMethods name="equals" sMContext="//@sMContexts.3" body="&#xA;java.lang.Boolean result = null;&#xA;&#xA;&#x9;java.lang.Boolean idIfCond_299 = false;&#xA;&#x9;idIfCond_299 = org.kermeta.compil.runtime.helper.language.ObjectUtil.isNotEqual(org.kermeta.compil.runtime.helper.language.ObjectUtil.getMetaClass(other), org.kermeta.compil.runtime.ExecutionContext.getInstance().getMetaClass(&quot;java.lang.Character&quot;));&#xA;&#xA;&#x9;if( idIfCond_299 ) {&#xA;&#xA;&#x9;result = false;&#xA;}&#xA; else {&#xA;&#xA;&#x9;result = (java.lang.Boolean) org.kermeta.compil.runtime.helper.basetypes.CharacterUtil.equals(self, other);&#xA;}&#xA;&#xA;&#xA;return result;&#xA;" usages="Wrapper">
+    <sMParameters name="self" type="java.lang.Character"/>
+    <sMParameters name="other" type="java.lang.Character"/>
+    <sMReturn type="java.lang.Boolean"/>
+  </staticMethods>
+  <staticMethods name="isNotEqual" sMContext="//@sMContexts.3" body="&#xA;java.lang.Boolean result = null;&#xA;&#xA;&#x9;result = kermeta.standard.helper.BooleanWrapper.not(org.kermeta.compil.runtime.helper.language.ObjectUtil.equals(self, element));&#xA;&#xA;return result;&#xA;" usages="Wrapper">
+    <sMParameters name="self" type="java.lang.Character"/>
+    <sMParameters name="element" type="java.lang.Character"/>
+    <sMReturn type="java.lang.Boolean"/>
+  </staticMethods>
+  <staticMethods name="isSet" sMContext="//@sMContexts.3" body="&#xA;java.lang.Boolean result = null;&#xA;&#xA;&#x9;result = (java.lang.Boolean) org.kermeta.compil.runtime.helper.language.ObjectUtil.isSet(self, property);&#xA;&#xA;return result;&#xA;" usages="Wrapper">
+    <sMParameters name="self" type="java.lang.Character"/>
+    <sMParameters name="property" type="kermeta.language.structure.Property"/>
+    <sMReturn type="java.lang.Boolean"/>
+  </staticMethods>
+  <staticMethods name="asType" sMContext="//@sMContexts.3" body="&#xA;kermeta.language.structure.Object result = null;&#xA;&#xA;&#x9;java.lang.Boolean idIfCond_300 = false;&#xA;&#x9;idIfCond_300 = org.kermeta.compil.runtime.helper.language.ObjectUtil.isInstanceOf(self, org.kermeta.compil.runtime.ExecutionContext.getInstance().getMetaClass(&quot;type&quot;));&#xA;&#xA;&#x9;if( idIfCond_300 ) {&#xA;&#xA;&#x9;result = self;&#xA;}&#xA; else {&#xA;&#xA;&#x9;&#xA;if (true)&#xA;&#x9;throw new org.kermeta.compil.runtime.helper.error.KRuntimeError( ((kermeta.exceptions.TypeCastError) org.kermeta.compil.runtime.helper.language.ClassUtil.newObject(&quot;kermeta.exceptions.TypeCastError&quot;)) );&#xA;&#xA;}&#xA;&#xA;&#xA;return result;&#xA;" usages="Wrapper">
+    <sMParameters name="self" type="kermeta.language.structure.Object"/>
+    <sMParameters name="type" type="kermeta.language.structure.Class"/>
+    <sMReturn type="kermeta.language.structure.Object"/>
+  </staticMethods>
+  <staticMethods name="hashcode" sMContext="//@sMContexts.3" body="&#xA;java.lang.Integer result = null;&#xA;&#xA;&#x9;result = (java.lang.Integer) org.kermeta.compil.runtime.helper.language.ObjectUtil.hashcode(self);&#xA;&#xA;return result;&#xA;" usages="Wrapper">
+    <sMParameters name="self" type="java.lang.Character"/>
+    <sMReturn type="java.lang.Integer"/>
+  </staticMethods>
+  <staticMethods name="get" sMContext="//@sMContexts.3" body="&#xA;kermeta.language.structure.Object result = null;&#xA;&#xA;&#x9;result = org.kermeta.compil.runtime.helper.language.ObjectUtil.get(self, property);&#xA;&#xA;return result;&#xA;" usages="Wrapper">
+    <sMParameters name="self" type="java.lang.Character"/>
+    <sMParameters name="property" type="kermeta.language.structure.Property"/>
+    <sMReturn type="kermeta.language.structure.Object"/>
+  </staticMethods>
+  <staticMethods name="containingResource" sMContext="//@sMContexts.3" body="&#xA;kermeta.persistence.Resource result = null;&#xA;&#xA;&#x9;result = (kermeta.persistence.Resource) org.kermeta.compil.runtime.helper.language.ObjectUtil.getContainingResource(self);&#xA;&#xA;return result;&#xA;" usages="Wrapper">
+    <sMParameters name="self" type="java.lang.Character"/>
+    <sMReturn type="kermeta.persistence.Resource"/>
+  </staticMethods>
+  <staticMethods name="isKindOf" sMContext="//@sMContexts.3" body="&#xA;java.lang.Boolean result = null;&#xA;&#xA;&#x9;result = org.kermeta.compil.runtime.helper.language.ObjectUtil.getMetaClass(self).equals(org.kermeta.compil.runtime.ExecutionContext.getInstance().getMetaClass(&quot;cl&quot;));&#xA;&#xA;return result;&#xA;" usages="Wrapper">
+    <sMParameters name="self" type="java.lang.Character"/>
+    <sMParameters name="cl" type="kermeta.language.structure.Class"/>
+    <sMReturn type="java.lang.Boolean"/>
+  </staticMethods>
+  <staticMethods name="isInstanceOf" sMContext="//@sMContexts.3" body="&#xA;java.lang.Boolean result = null;&#xA;&#xA;&#x9;result = (java.lang.Boolean) org.kermeta.compil.runtime.helper.language.ObjectUtil.isInstanceOf(self, type.getClass().getName());&#xA;&#xA;return result;&#xA;" usages="Wrapper">
+    <sMParameters name="self" type="java.lang.Character"/>
+    <sMParameters name="type" type="kermeta.language.structure.Type"/>
+    <sMReturn type="java.lang.Boolean"/>
+  </staticMethods>
+  <staticMethods name="freeze" sMContext="//@sMContexts.3" body="&#xA;&#x9;org.kermeta.compil.runtime.helper.language.ObjectUtil.freeze(self);&#xA;" usages="Wrapper">
+    <sMParameters name="self" type="java.lang.Character"/>
+    <sMReturn type="void"/>
+  </staticMethods>
+  <staticMethods name="container" sMContext="//@sMContexts.3" body="&#xA;kermeta.language.structure.Object result = null;&#xA;&#xA;&#x9;result = org.kermeta.compil.runtime.helper.language.ObjectUtil.container(self);&#xA;&#xA;return result;&#xA;" usages="Wrapper">
+    <sMParameters name="self" type="java.lang.Character"/>
+    <sMReturn type="kermeta.language.structure.Object"/>
+  </staticMethods>
+  <staticMethods name="checkInvariants" sMContext="//@sMContexts.3" body="&#xA;&#x9;kermeta.language.structure.ClassDefinition cd = org.kermeta.compil.runtime.helper.language.ObjectUtil.getMetaClass(self).getClassDefinition();&#xA;&#xA;&#x9;java.lang.Boolean idIfCond_301 = false;&#xA;&#x9;idIfCond_301 = kermeta.standard.helper.BooleanWrapper.not(org.kermeta.compil.runtime.helper.language.ObjectUtil.isVoid(cd));&#xA;&#xA;&#x9;if( idIfCond_301 ) {&#xA;&#xA;&#x9;//Beginning of the Inlining of the function type: each&#xA;&#xA;&#x9;&#xA;&#x9;kermeta.standard.Iterator&lt;kermeta.language.structure.Property> it_ft78 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil.&lt;kermeta.language.structure.Property>convertAsSet(cd.getAllAttribute()).iterator();&#xA;&#x9;java.lang.Boolean idLoopCond_302 = false;&#xA;&#x9;while( !idLoopCond_302 ) {&#xA;&#x9;idLoopCond_302 = it_ft78.isOff();&#xA;&#x9;if ( idLoopCond_302 ) {&#xA;&#x9;} else {&#xA;&#xA;&#x9;//Beginning of the Inlining of the lambda expression: func&#xA;kermeta.language.structure.Property p = it_ft78.next();&#xA;&#xA;&#x9;kermeta.language.structure.Object v = org.kermeta.compil.runtime.helper.language.ObjectUtil.get(self, p);&#xA;&#xA;&#x9;java.lang.Boolean idIfCond_303 = false;&#xA;&#x9;idIfCond_303 = kermeta.standard.helper.BooleanWrapper.and(kermeta.standard.helper.BooleanWrapper.not(org.kermeta.compil.runtime.helper.language.ObjectUtil.isVoid(v)), org.kermeta.compil.runtime.helper.language.ObjectUtil.isInstanceOf(v, org.kermeta.compil.runtime.ExecutionContext.getInstance().getMetaClass(&quot;kermeta.standard.Collection&lt;kermeta.language.structure.Object>&quot;)));&#xA;&#xA;&#x9;if( idIfCond_303 ) {&#xA;&#xA;&#x9;kermeta.standard.Collection&lt;kermeta.language.structure.Object> c = ((kermeta.standard.Collection&lt;kermeta.language.structure.Object>) org.kermeta.compil.runtime.helper.language.ObjectUtil.asType(v, org.kermeta.compil.runtime.ExecutionContext.getInstance().getMetaClass(&quot;kermeta.standard.Collection&lt;kermeta.language.structure.Object>&quot;)));&#xA;&#xA;&#x9;java.lang.Boolean idIfCond_304 = false;&#xA;&#x9;idIfCond_304 = kermeta.standard.helper.BooleanWrapper.or(kermeta.standard.helper.IntegerWrapper.isLower(c.size(), p.getLower()), kermeta.standard.helper.BooleanWrapper.and(org.kermeta.compil.runtime.helper.language.ObjectUtil.isNotEqual(p.getUpper(), kermeta.standard.helper.IntegerWrapper.uminus(1)), kermeta.standard.helper.IntegerWrapper.isGreater(c.size(), p.getUpper())));&#xA;&#xA;&#x9;if( idIfCond_304 ) {&#xA;&#xA;&#x9;&#xA;if (true)&#xA;&#x9;throw new org.kermeta.compil.runtime.helper.error.KRuntimeError( ((kermeta.exceptions.ConstraintViolatedInv) org.kermeta.compil.runtime.helper.language.ClassUtil.newObject(&quot;kermeta.exceptions.ConstraintViolatedInv&quot;)) );&#xA;&#xA;}&#xA;&#xA;}&#xA; else {&#xA;&#xA;&#x9;java.lang.Boolean idIfCond_305 = false;&#xA;&#x9;idIfCond_305 = kermeta.standard.helper.BooleanWrapper.and(kermeta.standard.helper.IntegerWrapper.equals(p.getLower(), 1), org.kermeta.compil.runtime.helper.language.ObjectUtil.isVoid(v));&#xA;&#xA;&#x9;if( idIfCond_305 ) {&#xA;&#xA;&#x9;&#xA;if (true)&#xA;&#x9;throw new org.kermeta.compil.runtime.helper.error.KRuntimeError( ((kermeta.exceptions.ConstraintViolatedInv) org.kermeta.compil.runtime.helper.language.ClassUtil.newObject(&quot;kermeta.exceptions.ConstraintViolatedInv&quot;)) );&#xA;&#xA;}&#xA;&#xA;}&#xA;&#xA;//End of the Inlining of the lambda expression: func&#xA;&#xA;}&#xA;&#x9;}&#xA;//End of the Inlining of the function type: each&#xA;&#xA;}&#xA;&#xA;&#xA;&#x9;org.kermeta.compil.runtime.helper.language.ObjectUtil.checkInvariants(self);&#xA;" usages="Wrapper">
+    <sMParameters name="self" type="java.lang.Character"/>
+    <sMReturn type="void"/>
+  </staticMethods>
+  <staticMethods name="set" sMContext="//@sMContexts.3" body="&#xA;&#x9;java.lang.Boolean idIfCond_306 = false;&#xA;&#x9;idIfCond_306 = org.kermeta.compil.runtime.helper.language.ObjectUtil.isInstanceOf(element, org.kermeta.compil.runtime.ExecutionContext.getInstance().getMetaClass(&quot;property.getType()&quot;));&#xA;&#xA;&#x9;if( idIfCond_306 ) {&#xA;&#xA;&#x9;org.kermeta.compil.runtime.helper.language.ObjectUtil.set(self, property, element);&#xA;}&#xA; else {&#xA;&#xA;&#x9;kermeta.exceptions.IncompatibleTypeError e = ((kermeta.exceptions.IncompatibleTypeError) org.kermeta.compil.runtime.helper.language.ClassUtil.newObject(&quot;kermeta.exceptions.IncompatibleTypeError&quot;));&#xA;&#xA;&#x9;e.setMessage(kermeta.standard.helper.StringWrapper.plus(kermeta.standard.helper.StringWrapper.plus(kermeta.standard.helper.StringWrapper.plus(kermeta.standard.helper.StringWrapper.plus(kermeta.standard.helper.StringWrapper.plus(kermeta.standard.helper.StringWrapper.plus(&quot;IncompatibleTypeError : Cannot set property &quot;, property.getName()), &quot; of object &quot;), org.kermeta.compil.runtime.helper.language.ObjectUtil.toString(self)), &quot; to &quot;), org.kermeta.compil.runtime.helper.language.ObjectUtil.toString(element)), &quot;.&quot;));&#xA;&#xA;&#x9;&#xA;if (true)&#xA;&#x9;throw new org.kermeta.compil.runtime.helper.error.KRuntimeError( e );&#xA;&#xA;}&#xA;&#xA;" usages="Wrapper">
+    <sMParameters name="self" type="java.lang.Character"/>
+    <sMParameters name="property" type="kermeta.language.structure.Property"/>
+    <sMParameters name="element" type="java.lang.Character"/>
+    <sMReturn type="void"/>
+  </staticMethods>
+  <staticMethods name="oid" sMContext="//@sMContexts.3" body="&#xA;java.lang.Integer result = null;&#xA;&#xA;&#x9;result = (java.lang.Integer) org.kermeta.compil.runtime.helper.language.ObjectUtil.getOID(self);&#xA;&#xA;return result;&#xA;" usages="Wrapper">
+    <sMParameters name="self" type="java.lang.Character"/>
+    <sMReturn type="java.lang.Integer"/>
+  </staticMethods>
+  <staticMethods name="isVoid" sMContext="//@sMContexts.3" body="&#xA;java.lang.Boolean result = null;&#xA;&#xA;&#x9;result = false;&#xA;&#xA;return result;&#xA;" usages="Wrapper">
+    <sMParameters name="self" type="java.lang.Character"/>
+    <sMReturn type="java.lang.Boolean"/>
+  </staticMethods>
+  <staticMethods name="unset" sMContext="//@sMContexts.3" body="&#xA;&#x9;org.kermeta.compil.runtime.helper.language.ObjectUtil.unset(self, property);&#xA;" usages="Wrapper">
+    <sMParameters name="self" type="java.lang.Character"/>
+    <sMParameters name="property" type="kermeta.language.structure.Property"/>
+    <sMReturn type="void"/>
+  </staticMethods>
+  <staticMethods name="getMetaClass" sMContext="//@sMContexts.3" body="&#xA;kermeta.language.structure.Class result = null;&#xA;&#xA;&#x9;result = (kermeta.language.structure.Class) org.kermeta.compil.runtime.helper.language.ObjectUtil.getMetaClass( self );&#xA;&#xA;return result;&#xA;" usages="Wrapper">
+    <sMParameters name="self" type="java.lang.Character"/>
+    <sMReturn type="kermeta.language.structure.Class"/>
+  </staticMethods>
+  <staticMethods name="isFrozen" sMContext="//@sMContexts.3" body="&#xA;java.lang.Boolean result = null;&#xA;&#xA;&#x9;result = (java.lang.Boolean) org.kermeta.compil.runtime.helper.language.ObjectUtil.isFrozen(self);&#xA;&#xA;return result;&#xA;" usages="Wrapper">
+    <sMParameters name="self" type="java.lang.Character"/>
+    <sMReturn type="java.lang.Boolean"/>
+  </staticMethods>
+  <staticMethods name="checkAllInvariants" sMContext="//@sMContexts.3" body="&#xA;&#x9;java.lang.Boolean idIfCond_307 = false;&#xA;&#x9;idIfCond_307 = org.kermeta.compil.runtime.helper.language.ObjectUtil.isNotEqual(self, null);&#xA;&#xA;&#x9;if( idIfCond_307 ) {&#xA;&#xA;&#x9;org.kermeta.compil.runtime.helper.language.ObjectUtil.checkInvariants(self);&#xA;&#xA;&#x9;kermeta.language.structure.ClassDefinition cd = null;&#xA;&#xA;&#x9;cd = (kermeta.language.structure.ClassDefinition) org.kermeta.compil.runtime.helper.language.ObjectUtil.getMetaClass(self).getTypeDefinition();&#xA;&#xA;&#x9;//Beginning of the Inlining of the function type: each&#xA;&#xA;&#x9;&#xA;&#x9;kermeta.standard.Iterator&lt;kermeta.language.structure.Property> it_ft79 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil.&lt;kermeta.language.structure.Property>convertAsSet(cd.getAllAttribute()).iterator();&#xA;&#x9;java.lang.Boolean idLoopCond_308 = false;&#xA;&#x9;while( !idLoopCond_308 ) {&#xA;&#x9;idLoopCond_308 = it_ft79.isOff();&#xA;&#x9;if ( idLoopCond_308 ) {&#xA;&#x9;} else {&#xA;&#xA;&#x9;//Beginning of the Inlining of the lambda expression: func&#xA;kermeta.language.structure.Property subObj = it_ft79.next();&#xA;&#xA;&#x9;java.lang.Boolean idIfCond_309 = false;&#xA;&#x9;idIfCond_309 = subObj.getIsComposite();&#xA;&#xA;&#x9;if( idIfCond_309 ) {&#xA;&#xA;&#x9;java.lang.Boolean idIfCond_310 = false;&#xA;&#x9;idIfCond_310 = kermeta.standard.helper.BooleanWrapper.or(kermeta.standard.helper.StringWrapper.equals(org.kermeta.compil.runtime.helper.language.ObjectUtil.getMetaClass(org.kermeta.compil.runtime.helper.language.ObjectUtil.get(self, subObj)).getTypeDefinition().getName(), &quot;ReflectiveSequence&quot;), kermeta.standard.helper.StringWrapper.equals(org.kermeta.compil.runtime.helper.language.ObjectUtil.getMetaClass(org.kermeta.compil.runtime.helper.language.ObjectUtil.get(self, subObj)).getTypeDefinition().getName(), &quot;ReflectiveCollection&quot;));&#xA;&#xA;&#x9;if( idIfCond_310 ) {&#xA;&#xA;&#x9;kermeta.standard.Collection&lt;kermeta.language.structure.Object> subObjInstances = null;&#xA;&#xA;&#x9;subObjInstances = (kermeta.standard.Collection&lt;kermeta.language.structure.Object>) org.kermeta.compil.runtime.helper.language.ObjectUtil.get(self, subObj);&#xA;&#xA;&#x9;//Beginning of the Inlining of the function type: each&#xA;&#xA;&#x9;&#xA;&#x9;kermeta.standard.Iterator&lt;kermeta.language.structure.Object> it_ft80 = subObjInstances.iterator();&#xA;&#x9;java.lang.Boolean idLoopCond_311 = false;&#xA;&#x9;while( !idLoopCond_311 ) {&#xA;&#x9;idLoopCond_311 = it_ft80.isOff();&#xA;&#x9;if ( idLoopCond_311 ) {&#xA;&#x9;} else {&#xA;&#xA;&#x9;//Beginning of the Inlining of the lambda expression: func&#xA;kermeta.language.structure.Object aSubObjInstances = it_ft80.next();&#xA;&#xA;&#x9;org.kermeta.compil.runtime.helper.language.ObjectUtil.checkAllInvariants(aSubObjInstances);&#xA;//End of the Inlining of the lambda expression: func&#xA;&#xA;}&#xA;&#x9;}&#xA;//End of the Inlining of the function type: each&#xA;&#xA;}&#xA; else {&#xA;&#xA;&#x9;org.kermeta.compil.runtime.helper.language.ObjectUtil.checkAllInvariants(org.kermeta.compil.runtime.helper.language.ObjectUtil.get(self, subObj));&#xA;}&#xA;&#xA;}&#xA;&#xA;//End of the Inlining of the lambda expression: func&#xA;&#xA;}&#xA;&#x9;}&#xA;//End of the Inlining of the function type: each&#xA;&#xA;}&#xA;&#xA;" usages="Wrapper">
+    <sMParameters name="self" type="java.lang.Character"/>
+    <sMReturn type="void"/>
+  </staticMethods>
+  <staticMethods name="isGreaterOrEqual" sMContext="//@sMContexts.3" body="&#xA;java.lang.Boolean result = null;&#xA;&#xA;&#x9;result = kermeta.standard.helper.IntegerWrapper.isGreaterOrEqual(self.compareTo(other), 0);&#xA;&#xA;return result;&#xA;" usages="Wrapper">
+    <sMParameters name="self" type="java.lang.Character"/>
+    <sMParameters name="other" type="java.lang.Character"/>
+    <sMReturn type="java.lang.Boolean"/>
+  </staticMethods>
+  <staticMethods name="isLowerOrEqual" sMContext="//@sMContexts.3" body="&#xA;java.lang.Boolean result = null;&#xA;&#xA;&#x9;result = kermeta.standard.helper.IntegerWrapper.isLowerOrEqual(self.compareTo(other), 0);&#xA;&#xA;return result;&#xA;" usages="Wrapper">
+    <sMParameters name="self" type="java.lang.Character"/>
+    <sMParameters name="other" type="java.lang.Character"/>
+    <sMReturn type="java.lang.Boolean"/>
+  </staticMethods>
+  <staticMethods name="isLower" sMContext="//@sMContexts.3" body="&#xA;java.lang.Boolean result = null;&#xA;&#xA;&#x9;result = kermeta.standard.helper.IntegerWrapper.isLower(self.compareTo(other), 0);&#xA;&#xA;return result;&#xA;" usages="Wrapper">
+    <sMParameters name="self" type="java.lang.Character"/>
+    <sMParameters name="other" type="java.lang.Character"/>
+    <sMReturn type="java.lang.Boolean"/>
+  </staticMethods>
+  <staticMethods name="isGreater" sMContext="//@sMContexts.3" body="&#xA;java.lang.Boolean result = null;&#xA;&#xA;&#x9;result = kermeta.standard.helper.IntegerWrapper.isGreater(self.compareTo(other), 0);&#xA;&#xA;return result;&#xA;" usages="Wrapper">
+    <sMParameters name="self" type="java.lang.Character"/>
+    <sMParameters name="other" type="java.lang.Character"/>
+    <sMReturn type="java.lang.Boolean"/>
+  </staticMethods>
+  <staticMethods name="append" sMContext="//@sMContexts.4" body="&#xA;&#x9;java.lang.Boolean idIfCond_312 = false;&#xA;&#x9;idIfCond_312 = org.kermeta.compil.runtime.helper.language.ObjectUtil.isVoid(other);&#xA;&#xA;&#x9;if( idIfCond_312 ) {&#xA;&#xA;&#x9;&#xA;if (true)&#xA;&#x9;throw new org.kermeta.compil.runtime.helper.error.KRuntimeError( ((kermeta.exceptions.CallOnVoidTarget) org.kermeta.compil.runtime.helper.language.ClassUtil.newObject(&quot;kermeta.exceptions.CallOnVoidTarget&quot;)) );&#xA;&#xA;}&#xA; else {&#xA;&#xA;&#x9;org.kermeta.compil.runtime.helper.basetypes.StringUtil.append(self, other);&#xA;}&#xA;&#xA;" usages="Wrapper">
+    <sMParameters name="self" type="java.lang.String"/>
+    <sMParameters name="other" type="java.lang.String"/>
+    <sMReturn type="void"/>
+  </staticMethods>
+  <staticMethods name="toReal" sMContext="//@sMContexts.4" body="&#xA;java.lang.Double result = null;&#xA;&#xA;&#x9;result = (java.lang.Double) org.kermeta.compil.runtime.helper.basetypes.StringUtil.toReal(self);&#xA;&#xA;&#x9;java.lang.Boolean idIfCond_313 = false;&#xA;&#x9;idIfCond_313 = org.kermeta.compil.runtime.helper.language.ObjectUtil.isVoid(result);&#xA;&#xA;&#x9;if( idIfCond_313 ) {&#xA;&#xA;&#x9;&#xA;if (true)&#xA;&#x9;throw new org.kermeta.compil.runtime.helper.error.KRuntimeError( ((kermeta.exceptions.StringFormatException) org.kermeta.compil.runtime.helper.language.ClassUtil.newObject(&quot;kermeta.exceptions.StringFormatException&quot;)) );&#xA;&#xA;}&#xA;&#xA;&#xA;return result;&#xA;" usages="Wrapper">
+    <sMParameters name="self" type="java.lang.String"/>
+    <sMReturn type="java.lang.Double"/>
+  </staticMethods>
+  <staticMethods name="indexOf" sMContext="//@sMContexts.4" body="&#xA;java.lang.Integer result = null;&#xA;&#xA;&#x9;result = (java.lang.Integer) org.kermeta.compil.runtime.helper.basetypes.StringUtil.indexOf(self, str);&#xA;&#xA;return result;&#xA;" usages="Wrapper">
+    <sMParameters name="self" type="java.lang.String"/>
+    <sMParameters name="str" type="java.lang.String"/>
+    <sMReturn type="java.lang.Integer"/>
+  </staticMethods>
+  <staticMethods name="toUpperCase" sMContext="//@sMContexts.4" body="&#xA;java.lang.String result = null;&#xA;&#xA;&#x9;result = (java.lang.String) org.kermeta.compil.runtime.helper.basetypes.StringUtil.toUpperCase(self);&#xA;&#xA;return result;&#xA;" usages="Wrapper">
+    <sMParameters name="self" type="java.lang.String"/>
+    <sMReturn type="java.lang.String"/>
+  </staticMethods>
+  <staticMethods name="contains" sMContext="//@sMContexts.4" body="&#xA;java.lang.Boolean result = null;&#xA;&#xA;&#x9;result = (java.lang.Boolean) org.kermeta.compil.runtime.helper.basetypes.StringUtil.contains(self, str1);&#xA;&#xA;return result;&#xA;" usages="Wrapper">
+    <sMParameters name="self" type="java.lang.String"/>
+    <sMParameters name="str1" type="java.lang.String"/>
+    <sMReturn type="java.lang.Boolean"/>
+  </staticMethods>
+  <staticMethods name="substring" sMContext="//@sMContexts.4" body="&#xA;java.lang.String result = null;&#xA;&#xA;&#x9;java.lang.Boolean idIfCond_314 = false;&#xA;&#x9;idIfCond_314 = kermeta.standard.helper.BooleanWrapper.and(kermeta.standard.helper.BooleanWrapper.and(kermeta.standard.helper.BooleanWrapper.and(kermeta.standard.helper.IntegerWrapper.isGreaterOrEqual(startIndex, 0), kermeta.standard.helper.IntegerWrapper.isLowerOrEqual(startIndex, kermeta.standard.helper.StringWrapper.size(self))), kermeta.standard.helper.IntegerWrapper.isLowerOrEqual(subStringSize, kermeta.standard.helper.StringWrapper.size(self))), kermeta.standard.helper.IntegerWrapper.isGreaterOrEqual(subStringSize, startIndex));&#xA;&#xA;&#x9;if( idIfCond_314 ) {&#xA;&#xA;&#x9;result = (java.lang.String) org.kermeta.compil.runtime.helper.basetypes.StringUtil.substring(self, startIndex, subStringSize);&#xA;}&#xA; else {&#xA;&#xA;&#x9;&#xA;if (true)&#xA;&#x9;throw new org.kermeta.compil.runtime.helper.error.KRuntimeError( ((kermeta.exceptions.StringIndexOutOfBound) org.kermeta.compil.runtime.helper.language.ClassUtil.newObject(&quot;kermeta.exceptions.StringIndexOutOfBound&quot;)) );&#xA;&#xA;}&#xA;&#xA;&#xA;return result;&#xA;" usages="Wrapper">
+    <sMParameters name="self" type="java.lang.String"/>
+    <sMParameters name="startIndex" type="java.lang.Integer"/>
+    <sMParameters name="subStringSize" type="java.lang.Integer"/>
+    <sMReturn type="java.lang.String"/>
+  </staticMethods>
+  <staticMethods name="toString" sMContext="//@sMContexts.4" body="&#xA;java.lang.String result = null;&#xA;&#xA;&#x9;result = self;&#xA;&#xA;return result;&#xA;" usages="Wrapper">
+    <sMParameters name="self" type="java.lang.String"/>
+    <sMReturn type="java.lang.String"/>
+  </staticMethods>
+  <staticMethods name="split" sMContext="//@sMContexts.4" body="&#xA;kermeta.standard.OrderedSet&lt;java.lang.String> result = null;&#xA;&#xA;&#x9;result = (kermeta.standard.OrderedSet&lt;java.lang.String>) org.kermeta.compil.runtime.helper.basetypes.StringUtil.split(self, delimiter);&#xA;&#xA;return result;&#xA;" usages="Wrapper">
+    <sMParameters name="self" type="java.lang.String"/>
+    <sMParameters name="delimiter" type="java.lang.String"/>
+    <sMReturn type="kermeta.standard.OrderedSet&lt;java.lang.String>"/>
+  </staticMethods>
+  <staticMethods name="elementAt" sMContext="//@sMContexts.4" body="&#xA;java.lang.Character result = null;&#xA;&#xA;&#x9;java.lang.Boolean idIfCond_315 = false;&#xA;&#x9;idIfCond_315 = kermeta.standard.helper.BooleanWrapper.or(kermeta.standard.helper.IntegerWrapper.isLower(index, 0), kermeta.standard.helper.IntegerWrapper.isGreater(index, kermeta.standard.helper.IntegerWrapper.minus(kermeta.standard.helper.StringWrapper.size(self), 1)));&#xA;&#xA;&#x9;if( idIfCond_315 ) {&#xA;&#xA;&#x9;&#xA;if (true)&#xA;&#x9;throw new org.kermeta.compil.runtime.helper.error.KRuntimeError( ((kermeta.exceptions.StringIndexOutOfBound) org.kermeta.compil.runtime.helper.language.ClassUtil.newObject(&quot;kermeta.exceptions.StringIndexOutOfBound&quot;)) );&#xA;&#xA;}&#xA; else {&#xA;&#xA;&#x9;result = (java.lang.Character) org.kermeta.compil.runtime.helper.basetypes.StringUtil.elementAt(self, index);&#xA;}&#xA;&#xA;&#xA;return result;&#xA;" usages="Wrapper">
+    <sMParameters name="self" type="java.lang.String"/>
+    <sMParameters name="index" type="java.lang.Integer"/>
+    <sMReturn type="java.lang.Character"/>
+  </staticMethods>
+  <staticMethods name="toBoolean" sMContext="//@sMContexts.4" body="&#xA;java.lang.Boolean result = null;&#xA;&#xA;&#x9;result = (java.lang.Boolean) org.kermeta.compil.runtime.helper.basetypes.StringUtil.toBoolean(self);&#xA;&#xA;&#x9;java.lang.Boolean idIfCond_316 = false;&#xA;&#x9;idIfCond_316 = org.kermeta.compil.runtime.helper.language.ObjectUtil.isVoid(result);&#xA;&#xA;&#x9;if( idIfCond_316 ) {&#xA;&#xA;&#x9;&#xA;if (true)&#xA;&#x9;throw new org.kermeta.compil.runtime.helper.error.KRuntimeError( ((kermeta.exceptions.StringFormatException) org.kermeta.compil.runtime.helper.language.ClassUtil.newObject(&quot;kermeta.exceptions.StringFormatException&quot;)) );&#xA;&#xA;}&#xA;&#xA;&#xA;return result;&#xA;" usages="Wrapper">
+    <sMParameters name="self" type="java.lang.String"/>
+    <sMReturn type="java.lang.Boolean"/>
+  </staticMethods>
+  <staticMethods name="compareTo" sMContext="//@sMContexts.4" body="&#xA;java.lang.Integer result = null;&#xA;&#xA;&#x9;java.lang.Boolean idIfCond_317 = false;&#xA;&#x9;idIfCond_317 = org.kermeta.compil.runtime.helper.language.ObjectUtil.isVoid(other);&#xA;&#xA;&#x9;if( idIfCond_317 ) {&#xA;&#xA;&#x9;&#xA;if (true)&#xA;&#x9;throw new org.kermeta.compil.runtime.helper.error.KRuntimeError( ((kermeta.exceptions.CallOnVoidTarget) org.kermeta.compil.runtime.helper.language.ClassUtil.newObject(&quot;kermeta.exceptions.CallOnVoidTarget&quot;)) );&#xA;&#xA;}&#xA; else {&#xA;&#xA;&#x9;result = (java.lang.Integer) org.kermeta.compil.runtime.helper.basetypes.StringUtil.compareTo(self, other);&#xA;}&#xA;&#xA;&#xA;return result;&#xA;" usages="Wrapper">
+    <sMParameters name="self" type="java.lang.String"/>
+    <sMParameters name="other" type="java.lang.String"/>
+    <sMReturn type="java.lang.Integer"/>
+  </staticMethods>
+  <staticMethods name="toLowerCase" sMContext="//@sMContexts.4" body="&#xA;java.lang.String result = null;&#xA;&#xA;&#x9;result = (java.lang.String) org.kermeta.compil.runtime.helper.basetypes.StringUtil.toLowerCase(self);&#xA;&#xA;return result;&#xA;" usages="Wrapper">
+    <sMParameters name="self" type="java.lang.String"/>
+    <sMReturn type="java.lang.String"/>
+  </staticMethods>
+  <staticMethods name="equals" sMContext="//@sMContexts.4" body="&#xA;java.lang.Boolean result = null;&#xA;&#xA;&#x9;java.lang.Boolean idIfCond_318 = false;&#xA;&#x9;idIfCond_318 = org.kermeta.compil.runtime.helper.language.ObjectUtil.isNotEqual(org.kermeta.compil.runtime.helper.language.ObjectUtil.getMetaClass(other), org.kermeta.compil.runtime.ExecutionContext.getInstance().getMetaClass(&quot;java.lang.String&quot;));&#xA;&#xA;&#x9;if( idIfCond_318 ) {&#xA;&#xA;&#x9;result = false;&#xA;}&#xA; else {&#xA;&#xA;&#x9;result = (java.lang.Boolean) org.kermeta.compil.runtime.helper.basetypes.StringUtil.equals(self, other);&#xA;}&#xA;&#xA;&#xA;return result;&#xA;" usages="Wrapper">
+    <sMParameters name="self" type="java.lang.String"/>
+    <sMParameters name="other" type="java.lang.String"/>
+    <sMReturn type="java.lang.Boolean"/>
+  </staticMethods>
+  <staticMethods name="plus" sMContext="//@sMContexts.4" body="&#xA;java.lang.String result = null;&#xA;&#xA;&#x9;java.lang.Boolean idIfCond_319 = false;&#xA;&#x9;idIfCond_319 = org.kermeta.compil.runtime.helper.language.ObjectUtil.isVoid(other);&#xA;&#xA;&#x9;if( idIfCond_319 ) {&#xA;&#xA;&#x9;result = (java.lang.String) org.kermeta.compil.runtime.helper.basetypes.StringUtil.plus(self, kermeta.standard.helper.StringWrapper.toString(other));&#xA;}&#xA; else {&#xA;&#xA;&#x9;result = (java.lang.String) org.kermeta.compil.runtime.helper.basetypes.StringUtil.plus(self, other);&#xA;}&#xA;&#xA;&#xA;return result;&#xA;" usages="Wrapper">
+    <sMParameters name="self" type="java.lang.String"/>
+    <sMParameters name="other" type="java.lang.String"/>
+    <sMReturn type="java.lang.String"/>
+  </staticMethods>
+  <staticMethods name="size" sMContext="//@sMContexts.4" body="&#xA;java.lang.Integer result = null;&#xA;&#xA;&#x9;result = (java.lang.Integer) org.kermeta.compil.runtime.helper.basetypes.StringUtil.size(self);&#xA;&#xA;return result;&#xA;" usages="Wrapper">
+    <sMParameters name="self" type="java.lang.String"/>
+    <sMReturn type="java.lang.Integer"/>
+  </staticMethods>
+  <staticMethods name="replace" sMContext="//@sMContexts.4" body="&#xA;java.lang.String result = null;&#xA;&#xA;&#x9;result = (java.lang.String) org.kermeta.compil.runtime.helper.basetypes.StringUtil.replace(self, str1, str2);&#xA;&#xA;return result;&#xA;" usages="Wrapper">
+    <sMParameters name="self" type="java.lang.String"/>
+    <sMParameters name="str1" type="java.lang.String"/>
+    <sMParameters name="str2" type="java.lang.String"/>
+    <sMReturn type="java.lang.String"/>
+  </staticMethods>
+  <staticMethods name="toInteger" sMContext="//@sMContexts.4" body="&#xA;java.lang.Integer result = null;&#xA;&#xA;&#x9;result = (java.lang.Integer) org.kermeta.compil.runtime.helper.basetypes.StringUtil.toInteger(self);&#xA;&#xA;&#x9;java.lang.Boolean idIfCond_320 = false;&#xA;&#x9;idIfCond_320 = org.kermeta.compil.runtime.helper.language.ObjectUtil.isVoid(result);&#xA;&#xA;&#x9;if( idIfCond_320 ) {&#xA;&#xA;&#x9;&#xA;if (true)&#xA;&#x9;throw new org.kermeta.compil.runtime.helper.error.KRuntimeError( ((kermeta.exceptions.StringFormatException) org.kermeta.compil.runtime.helper.language.ClassUtil.newObject(&quot;kermeta.exceptions.StringFormatException&quot;)) );&#xA;&#xA;}&#xA;&#xA;&#xA;return result;&#xA;" usages="Wrapper">
+    <sMParameters name="self" type="java.lang.String"/>
+    <sMReturn type="java.lang.Integer"/>
+  </staticMethods>
+  <staticMethods name="isNotEqual" sMContext="//@sMContexts.4" body="&#xA;java.lang.Boolean result = null;&#xA;&#xA;&#x9;result = kermeta.standard.helper.BooleanWrapper.not(org.kermeta.compil.runtime.helper.language.ObjectUtil.equals(self, element));&#xA;&#xA;return result;&#xA;" usages="Wrapper">
+    <sMParameters name="self" type="java.lang.String"/>
+    <sMParameters name="element" type="java.lang.String"/>
+    <sMReturn type="java.lang.Boolean"/>
+  </staticMethods>
+  <staticMethods name="isSet" sMContext="//@sMContexts.4" body="&#xA;java.lang.Boolean result = null;&#xA;&#xA;&#x9;result = (java.lang.Boolean) org.kermeta.compil.runtime.helper.language.ObjectUtil.isSet(self, property);&#xA;&#xA;return result;&#xA;" usages="Wrapper">
+    <sMParameters name="self" type="java.lang.String"/>
+    <sMParameters name="property" type="kermeta.language.structure.Property"/>
+    <sMReturn type="java.lang.Boolean"/>
+  </staticMethods>
+  <staticMethods name="asType" sMContext="//@sMContexts.4" body="&#xA;kermeta.language.structure.Object result = null;&#xA;&#xA;&#x9;java.lang.Boolean idIfCond_321 = false;&#xA;&#x9;idIfCond_321 = org.kermeta.compil.runtime.helper.language.ObjectUtil.isInstanceOf(self, org.kermeta.compil.runtime.ExecutionContext.getInstance().getMetaClass(&quot;type&quot;));&#xA;&#xA;&#x9;if( idIfCond_321 ) {&#xA;&#xA;&#x9;result = self;&#xA;}&#xA; else {&#xA;&#xA;&#x9;&#xA;if (true)&#xA;&#x9;throw new org.kermeta.compil.runtime.helper.error.KRuntimeError( ((kermeta.exceptions.TypeCastError) org.kermeta.compil.runtime.helper.language.ClassUtil.newObject(&quot;kermeta.exceptions.TypeCastError&quot;)) );&#xA;&#xA;}&#xA;&#xA;&#xA;return result;&#xA;" usages="Wrapper">
+    <sMParameters name="self" type="kermeta.language.structure.Object"/>
+    <sMParameters name="type" type="kermeta.language.structure.Class"/>
+    <sMReturn type="kermeta.language.structure.Object"/>
+  </staticMethods>
+  <staticMethods name="hashcode" sMContext="//@sMContexts.4" body="&#xA;java.lang.Integer result = null;&#xA;&#xA;&#x9;result = (java.lang.Integer) org.kermeta.compil.runtime.helper.language.ObjectUtil.hashcode(self);&#xA;&#xA;return result;&#xA;" usages="Wrapper">
+    <sMParameters name="self" type="java.lang.String"/>
+    <sMReturn type="java.lang.Integer"/>
+  </staticMethods>
+  <staticMethods name="get" sMContext="//@sMContexts.4" body="&#xA;kermeta.language.structure.Object result = null;&#xA;&#xA;&#x9;result = org.kermeta.compil.runtime.helper.language.ObjectUtil.get(self, property);&#xA;&#xA;return result;&#xA;" usages="Wrapper">
+    <sMParameters name="self" type="java.lang.String"/>
+    <sMParameters name="property" type="kermeta.language.structure.Property"/>
+    <sMReturn type="kermeta.language.structure.Object"/>
+  </staticMethods>
+  <staticMethods name="containingResource" sMContext="//@sMContexts.4" body="&#xA;kermeta.persistence.Resource result = null;&#xA;&#xA;&#x9;result = (kermeta.persistence.Resource) org.kermeta.compil.runtime.helper.language.ObjectUtil.getContainingResource(self);&#xA;&#xA;return result;&#xA;" usages="Wrapper">
+    <sMParameters name="self" type="java.lang.String"/>
+    <sMReturn type="kermeta.persistence.Resource"/>
+  </staticMethods>
+  <staticMethods name="isKindOf" sMContext="//@sMContexts.4" body="&#xA;java.lang.Boolean result = null;&#xA;&#xA;&#x9;result = org.kermeta.compil.runtime.helper.language.ObjectUtil.getMetaClass(self).equals(org.kermeta.compil.runtime.ExecutionContext.getInstance().getMetaClass(&quot;cl&quot;));&#xA;&#xA;return result;&#xA;" usages="Wrapper">
+    <sMParameters name="self" type="java.lang.String"/>
+    <sMParameters name="cl" type="kermeta.language.structure.Class"/>
+    <sMReturn type="java.lang.Boolean"/>
+  </staticMethods>
+  <staticMethods name="isInstanceOf" sMContext="//@sMContexts.4" body="&#xA;java.lang.Boolean result = null;&#xA;&#xA;&#x9;result = (java.lang.Boolean) org.kermeta.compil.runtime.helper.language.ObjectUtil.isInstanceOf(self, type.getClass().getName());&#xA;&#xA;return result;&#xA;" usages="Wrapper">
+    <sMParameters name="self" type="java.lang.String"/>
+    <sMParameters name="type" type="kermeta.language.structure.Type"/>
+    <sMReturn type="java.lang.Boolean"/>
+  </staticMethods>
+  <staticMethods name="freeze" sMContext="//@sMContexts.4" body="&#xA;&#x9;org.kermeta.compil.runtime.helper.language.ObjectUtil.freeze(self);&#xA;" usages="Wrapper">
+    <sMParameters name="self" type="java.lang.String"/>
+    <sMReturn type="void"/>
+  </staticMethods>
+  <staticMethods name="container" sMContext="//@sMContexts.4" body="&#xA;kermeta.language.structure.Object result = null;&#xA;&#xA;&#x9;result = org.kermeta.compil.runtime.helper.language.ObjectUtil.container(self);&#xA;&#xA;return result;&#xA;" usages="Wrapper">
+    <sMParameters name="self" type="java.lang.String"/>
+    <sMReturn type="kermeta.language.structure.Object"/>
+  </staticMethods>
+  <staticMethods name="checkInvariants" sMContext="//@sMContexts.4" body="&#xA;&#x9;kermeta.language.structure.ClassDefinition cd = org.kermeta.compil.runtime.helper.language.ObjectUtil.getMetaClass(self).getClassDefinition();&#xA;&#xA;&#x9;java.lang.Boolean idIfCond_322 = false;&#xA;&#x9;idIfCond_322 = kermeta.standard.helper.BooleanWrapper.not(org.kermeta.compil.runtime.helper.language.ObjectUtil.isVoid(cd));&#xA;&#xA;&#x9;if( idIfCond_322 ) {&#xA;&#xA;&#x9;//Beginning of the Inlining of the function type: each&#xA;&#xA;&#x9;&#xA;&#x9;kermeta.standard.Iterator&lt;kermeta.language.structure.Property> it_ft81 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil.&lt;kermeta.language.structure.Property>convertAsSet(cd.getAllAttribute()).iterator();&#xA;&#x9;java.lang.Boolean idLoopCond_323 = false;&#xA;&#x9;while( !idLoopCond_323 ) {&#xA;&#x9;idLoopCond_323 = it_ft81.isOff();&#xA;&#x9;if ( idLoopCond_323 ) {&#xA;&#x9;} else {&#xA;&#xA;&#x9;//Beginning of the Inlining of the lambda expression: func&#xA;kermeta.language.structure.Property p = it_ft81.next();&#xA;&#xA;&#x9;kermeta.language.structure.Object v = org.kermeta.compil.runtime.helper.language.ObjectUtil.get(self, p);&#xA;&#xA;&#x9;java.lang.Boolean idIfCond_324 = false;&#xA;&#x9;idIfCond_324 = kermeta.standard.helper.BooleanWrapper.and(kermeta.standard.helper.BooleanWrapper.not(org.kermeta.compil.runtime.helper.language.ObjectUtil.isVoid(v)), org.kermeta.compil.runtime.helper.language.ObjectUtil.isInstanceOf(v, org.kermeta.compil.runtime.ExecutionContext.getInstance().getMetaClass(&quot;kermeta.standard.Collection&lt;kermeta.language.structure.Object>&quot;)));&#xA;&#xA;&#x9;if( idIfCond_324 ) {&#xA;&#xA;&#x9;kermeta.standard.Collection&lt;kermeta.language.structure.Object> c = ((kermeta.standard.Collection&lt;kermeta.language.structure.Object>) org.kermeta.compil.runtime.helper.language.ObjectUtil.asType(v, org.kermeta.compil.runtime.ExecutionContext.getInstance().getMetaClass(&quot;kermeta.standard.Collection&lt;kermeta.language.structure.Object>&quot;)));&#xA;&#xA;&#x9;java.lang.Boolean idIfCond_325 = false;&#xA;&#x9;idIfCond_325 = kermeta.standard.helper.BooleanWrapper.or(kermeta.standard.helper.IntegerWrapper.isLower(c.size(), p.getLower()), kermeta.standard.helper.BooleanWrapper.and(org.kermeta.compil.runtime.helper.language.ObjectUtil.isNotEqual(p.getUpper(), kermeta.standard.helper.IntegerWrapper.uminus(1)), kermeta.standard.helper.IntegerWrapper.isGreater(c.size(), p.getUpper())));&#xA;&#xA;&#x9;if( idIfCond_325 ) {&#xA;&#xA;&#x9;&#xA;if (true)&#xA;&#x9;throw new org.kermeta.compil.runtime.helper.error.KRuntimeError( ((kermeta.exceptions.ConstraintViolatedInv) org.kermeta.compil.runtime.helper.language.ClassUtil.newObject(&quot;kermeta.exceptions.ConstraintViolatedInv&quot;)) );&#xA;&#xA;}&#xA;&#xA;}&#xA; else {&#xA;&#xA;&#x9;java.lang.Boolean idIfCond_326 = false;&#xA;&#x9;idIfCond_326 = kermeta.standard.helper.BooleanWrapper.and(kermeta.standard.helper.IntegerWrapper.equals(p.getLower(), 1), org.kermeta.compil.runtime.helper.language.ObjectUtil.isVoid(v));&#xA;&#xA;&#x9;if( idIfCond_326 ) {&#xA;&#xA;&#x9;&#xA;if (true)&#xA;&#x9;throw new org.kermeta.compil.runtime.helper.error.KRuntimeError( ((kermeta.exceptions.ConstraintViolatedInv) org.kermeta.compil.runtime.helper.language.ClassUtil.newObject(&quot;kermeta.exceptions.ConstraintViolatedInv&quot;)) );&#xA;&#xA;}&#xA;&#xA;}&#xA;&#xA;//End of the Inlining of the lambda expression: func&#xA;&#xA;}&#xA;&#x9;}&#xA;//End of the Inlining of the function type: each&#xA;&#xA;}&#xA;&#xA;&#xA;&#x9;org.kermeta.compil.runtime.helper.language.ObjectUtil.checkInvariants(self);&#xA;" usages="Wrapper">
+    <sMParameters name="self" type="java.lang.String"/>
+    <sMReturn type="void"/>
+  </staticMethods>
+  <staticMethods name="set" sMContext="//@sMContexts.4" body="&#xA;&#x9;java.lang.Boolean idIfCond_327 = false;&#xA;&#x9;idIfCond_327 = org.kermeta.compil.runtime.helper.language.ObjectUtil.isInstanceOf(element, org.kermeta.compil.runtime.ExecutionContext.getInstance().getMetaClass(&quot;property.getType()&quot;));&#xA;&#xA;&#x9;if( idIfCond_327 ) {&#xA;&#xA;&#x9;org.kermeta.compil.runtime.helper.language.ObjectUtil.set(self, property, element);&#xA;}&#xA; else {&#xA;&#xA;&#x9;kermeta.exceptions.IncompatibleTypeError e = ((kermeta.exceptions.IncompatibleTypeError) org.kermeta.compil.runtime.helper.language.ClassUtil.newObject(&quot;kermeta.exceptions.IncompatibleTypeError&quot;));&#xA;&#xA;&#x9;e.setMessage(kermeta.standard.helper.StringWrapper.plus(kermeta.standard.helper.StringWrapper.plus(kermeta.standard.helper.StringWrapper.plus(kermeta.standard.helper.StringWrapper.plus(kermeta.standard.helper.StringWrapper.plus(kermeta.standard.helper.StringWrapper.plus(&quot;IncompatibleTypeError : Cannot set property &quot;, property.getName()), &quot; of object &quot;), org.kermeta.compil.runtime.helper.language.ObjectUtil.toString(self)), &quot; to &quot;), org.kermeta.compil.runtime.helper.language.ObjectUtil.toString(element)), &quot;.&quot;));&#xA;&#xA;&#x9;&#xA;if (true)&#xA;&#x9;throw new org.kermeta.compil.runtime.helper.error.KRuntimeError( e );&#xA;&#xA;}&#xA;&#xA;" usages="Wrapper">
+    <sMParameters name="self" type="java.lang.String"/>
+    <sMParameters name="property" type="kermeta.language.structure.Property"/>
+    <sMParameters name="element" type="java.lang.String"/>
+    <sMReturn type="void"/>
+  </staticMethods>
+  <staticMethods name="oid" sMContext="//@sMContexts.4" body="&#xA;java.lang.Integer result = null;&#xA;&#xA;&#x9;result = (java.lang.Integer) org.kermeta.compil.runtime.helper.language.ObjectUtil.getOID(self);&#xA;&#xA;return result;&#xA;" usages="Wrapper">
+    <sMParameters name="self" type="java.lang.String"/>
+    <sMReturn type="java.lang.Integer"/>
+  </staticMethods>
+  <staticMethods name="isVoid" sMContext="//@sMContexts.4" body="&#xA;java.lang.Boolean result = null;&#xA;&#xA;&#x9;result = false;&#xA;&#xA;return result;&#xA;" usages="Wrapper">
+    <sMParameters name="self" type="java.lang.String"/>
+    <sMReturn type="java.lang.Boolean"/>
+  </staticMethods>
+  <staticMethods name="unset" sMContext="//@sMContexts.4" body="&#xA;&#x9;org.kermeta.compil.runtime.helper.language.ObjectUtil.unset(self, property);&#xA;" usages="Wrapper">
+    <sMParameters name="self" type="java.lang.String"/>
+    <sMParameters name="property" type="kermeta.language.structure.Property"/>
+    <sMReturn type="void"/>
+  </staticMethods>
+  <staticMethods name="getMetaClass" sMContext="//@sMContexts.4" body="&#xA;kermeta.language.structure.Class result = null;&#xA;&#xA;&#x9;result = (kermeta.language.structure.Class) org.kermeta.compil.runtime.helper.language.ObjectUtil.getMetaClass( self );&#xA;&#xA;return result;&#xA;" usages="Wrapper">
+    <sMParameters name="self" type="java.lang.String"/>
+    <sMReturn type="kermeta.language.structure.Class"/>
+  </staticMethods>
+  <staticMethods name="isFrozen" sMContext="//@sMContexts.4" body="&#xA;java.lang.Boolean result = null;&#xA;&#xA;&#x9;result = (java.lang.Boolean) org.kermeta.compil.runtime.helper.language.ObjectUtil.isFrozen(self);&#xA;&#xA;return result;&#xA;" usages="Wrapper">
+    <sMParameters name="self" type="java.lang.String"/>
+    <sMReturn type="java.lang.Boolean"/>
+  </staticMethods>
+  <staticMethods name="checkAllInvariants" sMContext="//@sMContexts.4" body="&#xA;&#x9;java.lang.Boolean idIfCond_328 = false;&#xA;&#x9;idIfCond_328 = org.kermeta.compil.runtime.helper.language.ObjectUtil.isNotEqual(self, null);&#xA;&#xA;&#x9;if( idIfCond_328 ) {&#xA;&#xA;&#x9;org.kermeta.compil.runtime.helper.language.ObjectUtil.checkInvariants(self);&#xA;&#xA;&#x9;kermeta.language.structure.ClassDefinition cd = null;&#xA;&#xA;&#x9;cd = (kermeta.language.structure.ClassDefinition) org.kermeta.compil.runtime.helper.language.ObjectUtil.getMetaClass(self).getTypeDefinition();&#xA;&#xA;&#x9;//Beginning of the Inlining of the function type: each&#xA;&#xA;&#x9;&#xA;&#x9;kermeta.standard.Iterator&lt;kermeta.language.structure.Property> it_ft82 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil.&lt;kermeta.language.structure.Property>convertAsSet(cd.getAllAttribute()).iterator();&#xA;&#x9;java.lang.Boolean idLoopCond_329 = false;&#xA;&#x9;while( !idLoopCond_329 ) {&#xA;&#x9;idLoopCond_329 = it_ft82.isOff();&#xA;&#x9;if ( idLoopCond_329 ) {&#xA;&#x9;} else {&#xA;&#xA;&#x9;//Beginning of the Inlining of the lambda expression: func&#xA;kermeta.language.structure.Property subObj = it_ft82.next();&#xA;&#xA;&#x9;java.lang.Boolean idIfCond_330 = false;&#xA;&#x9;idIfCond_330 = subObj.getIsComposite();&#xA;&#xA;&#x9;if( idIfCond_330 ) {&#xA;&#xA;&#x9;java.lang.Boolean idIfCond_331 = false;&#xA;&#x9;idIfCond_331 = kermeta.standard.helper.BooleanWrapper.or(kermeta.standard.helper.StringWrapper.equals(org.kermeta.compil.runtime.helper.language.ObjectUtil.getMetaClass(org.kermeta.compil.runtime.helper.language.ObjectUtil.get(self, subObj)).getTypeDefinition().getName(), &quot;ReflectiveSequence&quot;), kermeta.standard.helper.StringWrapper.equals(org.kermeta.compil.runtime.helper.language.ObjectUtil.getMetaClass(org.kermeta.compil.runtime.helper.language.ObjectUtil.get(self, subObj)).getTypeDefinition().getName(), &quot;ReflectiveCollection&quot;));&#xA;&#xA;&#x9;if( idIfCond_331 ) {&#xA;&#xA;&#x9;kermeta.standard.Collection&lt;kermeta.language.structure.Object> subObjInstances = null;&#xA;&#xA;&#x9;subObjInstances = (kermeta.standard.Collection&lt;kermeta.language.structure.Object>) org.kermeta.compil.runtime.helper.language.ObjectUtil.get(self, subObj);&#xA;&#xA;&#x9;//Beginning of the Inlining of the function type: each&#xA;&#xA;&#x9;&#xA;&#x9;kermeta.standard.Iterator&lt;kermeta.language.structure.Object> it_ft83 = subObjInstances.iterator();&#xA;&#x9;java.lang.Boolean idLoopCond_332 = false;&#xA;&#x9;while( !idLoopCond_332 ) {&#xA;&#x9;idLoopCond_332 = it_ft83.isOff();&#xA;&#x9;if ( idLoopCond_332 ) {&#xA;&#x9;} else {&#xA;&#xA;&#x9;//Beginning of the Inlining of the lambda expression: func&#xA;kermeta.language.structure.Object aSubObjInstances = it_ft83.next();&#xA;&#xA;&#x9;org.kermeta.compil.runtime.helper.language.ObjectUtil.checkAllInvariants(aSubObjInstances);&#xA;//End of the Inlining of the lambda expression: func&#xA;&#xA;}&#xA;&#x9;}&#xA;//End of the Inlining of the function type: each&#xA;&#xA;}&#xA; else {&#xA;&#xA;&#x9;org.kermeta.compil.runtime.helper.language.ObjectUtil.checkAllInvariants(org.kermeta.compil.runtime.helper.language.ObjectUtil.get(self, subObj));&#xA;}&#xA;&#xA;}&#xA;&#xA;//End of the Inlining of the lambda expression: func&#xA;&#xA;}&#xA;&#x9;}&#xA;//End of the Inlining of the function type: each&#xA;&#xA;}&#xA;&#xA;" usages="Wrapper">
+    <sMParameters name="self" type="java.lang.String"/>
+    <sMReturn type="void"/>
+  </staticMethods>
+  <staticMethods name="isGreaterOrEqual" sMContext="//@sMContexts.4" body="&#xA;java.lang.Boolean result = null;&#xA;&#xA;&#x9;result = kermeta.standard.helper.IntegerWrapper.isGreaterOrEqual(self.compareTo(other), 0);&#xA;&#xA;return result;&#xA;" usages="Wrapper">
+    <sMParameters name="self" type="java.lang.String"/>
+    <sMParameters name="other" type="java.lang.String"/>
+    <sMReturn type="java.lang.Boolean"/>
+  </staticMethods>
+  <staticMethods name="isLowerOrEqual" sMContext="//@sMContexts.4" body="&#xA;java.lang.Boolean result = null;&#xA;&#xA;&#x9;result = kermeta.standard.helper.IntegerWrapper.isLowerOrEqual(self.compareTo(other), 0);&#xA;&#xA;return result;&#xA;" usages="Wrapper">
+    <sMParameters name="self" type="java.lang.String"/>
+    <sMParameters name="other" type="java.lang.String"/>
+    <sMReturn type="java.lang.Boolean"/>
+  </staticMethods>
+  <staticMethods name="isLower" sMContext="//@sMContexts.4" body="&#xA;java.lang.Boolean result = null;&#xA;&#xA;&#x9;result = kermeta.standard.helper.IntegerWrapper.isLower(self.compareTo(other), 0);&#xA;&#xA;return result;&#xA;" usages="Wrapper">
+    <sMParameters name="self" type="java.lang.String"/>
+    <sMParameters name="other" type="java.lang.String"/>
+    <sMReturn type="java.lang.Boolean"/>
+  </staticMethods>
+  <staticMethods name="isGreater" sMContext="//@sMContexts.4" body="&#xA;java.lang.Boolean result = null;&#xA;&#xA;&#x9;result = kermeta.standard.helper.IntegerWrapper.isGreater(self.compareTo(other), 0);&#xA;&#xA;return result;&#xA;" usages="Wrapper">
+    <sMParameters name="self" type="java.lang.String"/>
+    <sMParameters name="other" type="java.lang.String"/>
+    <sMReturn type="java.lang.Boolean"/>
+  </staticMethods>
+</simk:SIMKModel>
