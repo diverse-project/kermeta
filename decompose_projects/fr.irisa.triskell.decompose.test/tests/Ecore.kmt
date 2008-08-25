@@ -7,7 +7,6 @@ require "http://www.eclipse.org/emf/2002/Ecore"
 
 require "platform:/resource/fr.irisa.triskell.decompose/src/kermeta/Decomposition.kmt"
 
-
 using kermeta::standard
 using kermeta::utils
 using kermeta::persistence

@@ -1,4 +1,4 @@
-/* $Id: test1.kmt,v 1.4 2008-08-20 11:05:05 fmunoz Exp $ 
+/* $Id: test1.kmt,v 1.5 2008-08-25 11:53:22 fmunoz Exp $ 
  * Creation : August 14, 2008
  * Licence  : EPL 
  * Copyright:
@@ -18,6 +18,7 @@ require "platform:/resource/fr.irisa.triskell.decompose/src/kermeta/kompose_inpu
 require "platform:/resource/fr.irisa.triskell.decompose/src/kermeta/kompose_km_script.kmt"
 require "platform:/resource/fr.irisa.triskell.decompose/src/kermeta/OracleSupport.kmt"
 require "platform:/resource/fr.irisa.triskell.decompose/src/kermeta/kompose_km_all.kmt"
+require "platform:/resource/fr.irisa.triskell.decompose/src/kermeta/oracle_runner.kmt"
 
 using kermeta::standard
 using kompose
@@ -26,7 +27,7 @@ using decomposition
 using kermeta::utils
 using kermeta::io
 using kermeta::persistence
-using decompose::oracle
+using decomposition::oracle
 
 class Main
 {
@@ -42,13 +43,14 @@ class Main
 		var scriptGenerator:KomposeScriptBridge init KomposeScriptBridge.new
 		var oracleSupport:OSupport init OSupport.new
 		var scriptAllGen:KomposeScriptAll init KomposeScriptAll.new
-		
+		var oracleGenerator:OracleRunnerScript init OracleRunnerScript.new
 		
 		var kompose_files:String kompose_files:="platform:/resource/fr.irisa.triskell.decompose.test/tests/one/komposeComp.kompose"
 		var kompose_scripts:String kompose_scripts:="platform:/resource/fr.irisa.triskell.decompose.test/tests/one/scripts/komposelr_test"
 		var kompose_scripts_ext:String kompose_scripts_ext:=".kmt"
+		var kompose_oracle_script:String init "platform:/resource/fr.irisa.triskell.decompose.test/tests/one/scripts/oracleAll.kmt"
 		
-		var oriModel:Mergeable oriModel?=decomposer.loadModel(toLoad)
+		var oriModel:Mergeable oriModel:=decomposer.loadModel(toLoad)
 		
 		// load the dependences table
 		
@@ -128,8 +130,11 @@ class Main
 		var allScrFile:String init kompose_scripts+"all"+kompose_scripts_ext
 		fileio.writeTextFile(allScrFile,allScriptScr)
 		
-		
 		oracleSupport.resultFile:=toLoad+".ocompare"
 		oracleSupport.doSave()
+		
+		var oracleScript:String init oracleGenerator.generate(oracleSupport.resultFile)
+		var oracleScriptFile:String init 
+		fileio.writeTextFile(kompose_oracle_script,oracleScript)
 	end
 }
