@@ -1,4 +1,4 @@
-/* $Id: TagHelper.kmt,v 1.12 2008-08-07 14:59:02 cfaucher Exp $
+/* $Id: TagHelper.kmt,v 1.13 2008-08-25 08:29:27 cfaucher Exp $
  * Creation date: April 07, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -127,6 +127,13 @@ aspect class MultiplicityElement {
 	 */
 	operation getEMFRenameAs() : String is do
 		result := getUniqueTagValue("EMF_renameAs")
+	end
+	
+	/**
+	 * Get the RecopyInValueTypes reference of an Operation
+	 */
+	operation getRecopyInValueTypes() : String is do
+		result := getUniqueTagValue("RecopyInValueTypes")
 	end
 
 }
