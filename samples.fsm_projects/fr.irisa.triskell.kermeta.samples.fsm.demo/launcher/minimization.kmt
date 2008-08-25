@@ -26,7 +26,7 @@ using kermeta::standard
 
 class Minimization
 {
-	reference equivalent_pairs : set Pair[0..*]  // The initial pairSet of the equivalence relation { F \ Q }² ^ F²
+	reference equivalent_pairs : set Pair[0..*]  // The initial pairSet of the equivalence relation { F \ Q }ï¿½ ^ Fï¿½
 	reference all_input_pairs : set Pair[0..*]       // The QxQ set of possible pairs, where Q is the stateSet
 	reference helper : AutomatonHelper
 	
@@ -62,7 +62,7 @@ class Minimization
 		   		equivalent_pairs.add(helper.createPair(p, b))
 	   	    end
 	   	    } } 
-		stdio.writeln("Eo = {F-Q}²^F² is initialized")	   	     
+		stdio.writeln("Eo = Square{F-Q}^Square{F} is initialized")	   	     
 	   	// Minimalize 
     	minimalize(input, output)
     	
