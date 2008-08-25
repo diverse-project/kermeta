@@ -1,4 +1,4 @@
-/* $Id: minimization.kmt,v 1.5 2007-12-07 00:03:22 bmorin Exp $
+/* $Id: minimization.kmt,v 1.6 2008-08-25 13:04:00 vmahe Exp $
  * Project    : fr.irisa.triskell.kermeta.samples.fsm.demoAspect
  * File       : minimization.kmt
  * License    : EPL
@@ -61,7 +61,7 @@ class Minimization
 		   		equivalent_pairs.add(helper.createPair(p, b))
 	   	    end
 	   	    } } 
-		stdio.writeln("Eo = {F-Q}�^F� is initialized")	   	     
+		stdio.writeln("Eo = Square{F-Q}^Square{F} is initialized")	   	     
 	   	// Minimalize 
     	minimalize(input, output)
     	

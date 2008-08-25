@@ -2,15 +2,14 @@ package fsm;
 require kermeta
 require "http://www.kermeta.org/fsm"
 using kermeta::standard
-@aspect "true"
-class State{ 
+
+aspect class State{ 
 inv invariant1 is
 do
 self.outgoingTransition.forAll{ tr1 | self.outgoingTransition.forAll{ tr2 | tr2.input.equals(tr1.input).equals(tr1.equals(tr2))}}
 end
 }
-@aspect "true"
-class State{
+aspect class State{
 
 operation step(c : String) :String
 	pre pre2 is do

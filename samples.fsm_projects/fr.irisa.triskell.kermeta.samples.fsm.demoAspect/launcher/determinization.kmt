@@ -1,4 +1,4 @@
-/* $Id: determinization.kmt,v 1.4 2007-12-06 23:22:55 bmorin Exp $
+/* $Id: determinization.kmt,v 1.5 2008-08-25 13:04:00 vmahe Exp $
  * Project    : fr.irisa.triskell.kermeta.samples.fsm.demoAspect
  * File       : determinization.kmt
  * License    : EPL
@@ -116,10 +116,11 @@ class Determinization
     
 }
 /*
-Algorithme: on part d'un automate non-d�terministe . On construit l'automate d�terministe ayant
+Algorythme: we begin with a non deterministic automaton.
+We build the deterministic automaton which has:
 
-   1. comme �tats les parties de Q
-   2. comme �tat initial I
-   3. comme transitions: (U,a,V) si V est l'ensemble des �tats atteignables depuis U par une transition a
-   4. comme �tats terminaux les �tats dont la combinaison contient l'�tat final de l'automate de d�part
+   1. states: the parts of Q
+   2. initial state: the I state
+   3. transitions: (U,a,V) where V is the set of reachable states from U through a transition 'a'
+   4. terminal states: states which combination contains the final state of initial automaton
    */

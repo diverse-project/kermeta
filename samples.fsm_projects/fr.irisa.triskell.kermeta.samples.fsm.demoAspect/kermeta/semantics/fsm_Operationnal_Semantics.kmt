@@ -1,4 +1,4 @@
-/* $Id: fsm_Operationnal_Semantics.kmt,v 1.2 2007-12-06 23:13:38 bmorin Exp $
+/* $Id: fsm_Operationnal_Semantics.kmt,v 1.3 2008-08-25 13:04:01 vmahe Exp $
  * Project    : fr.irisa.triskell.samples.fsm
  * File       : fsmmodel.kmt
  * License    : EPL
@@ -24,8 +24,7 @@ using kermeta::exceptions
 
  
  
-@aspect "true"
-class FSM 
+aspect class FSM 
 {
 
 
@@ -101,8 +100,7 @@ attribute ownedState : oset State[0..*]#owningFSM
 }
 
 
-@aspect "true"
-class State {
+aspect class State {
 	
 		reference combination : Set<State>
 	
@@ -131,8 +129,7 @@ class State {
 
 
 
-@aspect "true"
-class Transition 
+aspect class Transition 
 {	
 	
 	// Fire the transition

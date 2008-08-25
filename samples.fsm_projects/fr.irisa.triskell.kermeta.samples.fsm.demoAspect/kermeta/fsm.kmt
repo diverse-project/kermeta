@@ -1,4 +1,4 @@
-/* $Id: fsm.kmt,v 1.1 2007-12-03 14:38:46 ftanguy Exp $
+/* $Id: fsm.kmt,v 1.2 2008-08-25 13:04:01 vmahe Exp $
  * Creation date: November 30, 2007
  * License:
  * Copyright:
@@ -10,7 +10,6 @@ package fsm;
 require "constraints/FSMConstraints.kmt"
 require "semantics/fsm_Operationnal_Semantics.kmt"
 
-@aspect "true"
-class FSM { 
+aspect class FSM { 
 
 }
