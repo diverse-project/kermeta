@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: VersionTest.java,v 1.1 2008-08-22 12:40:00 edaubert Exp $
+ * $Id: VersionTest.java,v 1.2 2008-08-25 06:58:54 edaubert Exp $
  */
 package manifest.tests;
 
@@ -281,8 +281,7 @@ public class VersionTest extends TestCase {
 
 
 		} catch (BadVersionValueException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			fail("must not appears.\n If it's appears so you change String into the try block");
 		}
 	}
 
@@ -394,8 +393,7 @@ public class VersionTest extends TestCase {
 			assertTrue(getFixture().containsInto(versionRange));
 			
 		} catch (BadVersionValueException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			fail("must not appears.\n If it's appears so you change String into the try block");
 		}
 	}
 
