@@ -5,7 +5,7 @@
  <copyright>
  </copyright>
 
- $Id: plugin.xml,v 1.1 2008-08-20 09:50:08 fmunoz Exp $
+ $Id: plugin.xml,v 1.2 2008-08-25 11:48:54 fmunoz Exp $
 -->
 
 <plugin>
@@ -15,6 +15,29 @@
             uri="http://www.kermeta.org/decompose/compare"
             class="ocompare.OcomparePackage"
             genModel="model/Ocompare.genmodel"/>
+   </extension>
+   <extension
+         point="org.eclipse.ui.popupMenus">
+      <objectContribution
+            id="fr.irisa.triskell.decompose.compare.menu1"
+            nameFilter="*.ocompare"
+            objectClass="org.eclipse.core.resources.IFile">
+         <menu
+               label="Decompose"
+               path="additions"
+               id="fr.irisa.triskell.decompose.compare.menu1">
+            <separator
+                  name="group1">
+            </separator>
+         </menu>
+         <action
+               label="GenerateComparison"
+               class="fr.irisa.triskell.decompose.compare.action.ComparisonAction"
+               menubarPath="fr.irisa.triskell.decompose.compare.menu1/group1"
+               enablesFor="1"
+               id="fr.irisa.triskell.decompose.compare.newAction">
+         </action>
+      </objectContribution>
    </extension>
 
 </plugin>
