@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<launchConfiguration type="KermetaLaunchConfiguration">
-<stringAttribute key="fr.irisa.triskell.kermeta.launching.KM_PROJECTNAME" value="fr.irisa.triskell.kermeta.samples"/>
+<launchConfiguration type="org.kermeta.debug.runConfiguration">
+<stringAttribute key="fr.irisa.triskell.kermeta.launching.KM_ARGUMENTS" value=""/>
 <stringAttribute key="fr.irisa.triskell.kermeta.launching.KM_CLASSQNAME" value="Class2RDBMS::Main"/>
 <stringAttribute key="fr.irisa.triskell.kermeta.launching.KM_FILENAME" value="/fr.irisa.triskell.kermeta.samples/class2RDBMS/transfo/Class2RDBMS.kmt"/>
-<stringAttribute key="fr.irisa.triskell.kermeta.launching.KM_ARGUMENTS" value=""/>
 <stringAttribute key="fr.irisa.triskell.kermeta.launching.KM_OPERATIONNAME" value="main"/>
+<stringAttribute key="fr.irisa.triskell.kermeta.launching.KM_PROJECTNAME" value="fr.irisa.triskell.kermeta.samples"/>
+<stringAttribute key="process_factory_id" value="org.kermeta.debug.processFactory"/>
 </launchConfiguration>

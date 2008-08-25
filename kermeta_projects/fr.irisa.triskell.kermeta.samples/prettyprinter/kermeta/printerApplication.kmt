@@ -20,9 +20,9 @@ class Main
 		var p : kermeta::language::structure::Package init kermeta::language::structure::Package.new
 
 		// Print a class definition
-		var c : kermeta::language::structure::ClassDefinition 
+		var c : kermeta::language::structure::ClassDefinition
 	    var mc : kermeta::language::structure::Class
-	    mc ?= kmlogo.getMetaClass  
+	    mc ?= kmlogo.getMetaClass
 	    c ?= mc.typeDefinition
 	    
 	    // Set the package such as it is the reference of the c's container

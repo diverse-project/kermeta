@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<launchConfiguration type="KermetaLaunchConfiguration">
-<stringAttribute key="fr.irisa.triskell.kermeta.launching.KM_ARGUMENTS" value=""/>
-<stringAttribute key="fr.irisa.triskell.kermeta.launching.KM_CLASSQNAME" value="kermeta2docbook::Main"/>
-<stringAttribute key="fr.irisa.triskell.kermeta.launching.KM_FILENAME" value="/fr.irisa.triskell.kermeta.samples/kermeta2doc/kermeta/kermeta2docbook.main.kmt"/>
-<stringAttribute key="fr.irisa.triskell.kermeta.launching.KM_OPERATIONNAME" value="main"/>
-<stringAttribute key="fr.irisa.triskell.kermeta.launching.KM_PROJECTNAME" value="fr.irisa.triskell.kermeta.samples"/>
-</launchConfiguration>

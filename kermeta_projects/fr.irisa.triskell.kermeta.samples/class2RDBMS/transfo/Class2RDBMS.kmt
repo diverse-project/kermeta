@@ -210,7 +210,7 @@ class Main
         var tranfo : Class2RDBMS init Class2RDBMS.new
         var outputModel : RDBMSModel init tranfo.transform(inputModel)
         
-        var repository : EMFRepository init EMFRepository.new    
+        var repository : EMFRepository init EMFRepository.new
         var resource : Resource init 
         	repository.createResource("platform:/resource/fr.irisa.triskell.kermeta.samples/class2RDBMS/models/out.xmi", 
         							  "platform:/resource/fr.irisa.triskell.kermeta.samples/class2RDBMS/metamodels/RDBMSMM.ecore")
@@ -218,7 +218,9 @@ class Main
 	 	resource.instances.add(outputModel)
 	 		 	
 	 	resource.save()
-        
+       
+       rescue (e : kermeta::exceptions::ResourceLoadException)
+           metamodelRegistration(e)
     end
     
     operation loadClassModel() : ClassModel is do             
@@ -237,6 +239,13 @@ class Main
            end
        end
        
+       rescue (e : kermeta::exceptions::ResourceLoadException)
+           metamodelRegistration(e)
    end
-    
+   
+   operation metamodelRegistration(e : kermeta::exceptions::ResourceLoadException) is do
+            stdio.writeln("Problem when loading the model. ENSURE YOU HAVE REGISTERED THEMETAMODELS !\n"
+                     +"You can find additional information about these samples on Kermeta web site : http://kermeta.org/examples")
+            raise e
+   end
 }
