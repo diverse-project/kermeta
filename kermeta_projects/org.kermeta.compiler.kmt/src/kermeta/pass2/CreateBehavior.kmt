@@ -1,4 +1,4 @@
-/* $Id: CreateBehavior.kmt,v 1.45 2008-08-22 16:05:56 cfaucher Exp $
+/* $Id: CreateBehavior.kmt,v 1.46 2008-08-25 16:21:41 cfaucher Exp $
  * Creation date: January 21, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -652,7 +652,11 @@ package behavior {
 			end
 			
 			
-			if fName == "_new" and (not tgt.isInstanceOf(CallVariable)) then
+			if (fName == "_new")
+					and (not tgt.isInstanceOf(CallVariable))
+					and (not tgt.isInstanceOf(CallFeature))
+					and (not tgt.isInstanceOf(SelfExpression))
+					and (not tgt.isInstanceOf(CallResult)) then
 				result := result + "((" + tgt.createBehaviorJava(context) + ") " + "org.kermeta.compil.runtime.helper.language.ClassUtil.newObject(\"" + tgt.createBehaviorJava(context) + "\"))"
 			else
 				
@@ -837,7 +841,7 @@ package behavior {
 				end
 				if type_label!="" then
 					result := result + "\n" + type_label + " result_lambda = null;"
-					context.resultLastStatementStack.push("result_lambda = " + "%%type%%" + type_label)
+					context.resultLastStatementStack.push("result_lambda = " + context.TYPE_SEPARATOR + type_label)
 				end*/
 				
 				result := result + "//Beginning of the Inlining of the lambda expression: " + self.name + "\n"
@@ -947,7 +951,7 @@ package behavior {
 			
 			if not self.initialization.isVoid() then
 				if self.initialization.isInstanceOf(Conditional) then
-					context.resultLastStatementStack.push(var_id + " = " + "%%type%%" + localType)
+					context.resultLastStatementStack.push(var_id + " = " + context.TYPE_SEPARATOR + localType)
 					result := result + " = null;\n" + self.initialization.createBehaviorJava(context)
 					context.resultLastStatementStack.pop()
 				else
@@ -975,7 +979,7 @@ package behavior {
 				ppCast := "(" + self.target.staticType.createBehaviorJava(context) + ") "
 			end
 			
-			context.resultLastStatementStack.push(left + " = " + ppCast + "%%type%%" + self.staticType.createBehaviorJava(context))
+			context.resultLastStatementStack.push(left + " = " + ppCast + context.TYPE_SEPARATOR + self.staticType.createBehaviorJava(context))
 			
 			var right : String init self.~value.createBehaviorJava(context)
 		
@@ -1004,9 +1008,6 @@ package behavior {
 				end
 
 			else
-				//stdio.writeln("ttttttttt")
-				//result := right.replace(context.leftAssign, left + " = " + ppCast)
-				
 				if self.~value.isInstanceOf(Conditional) then
 					result := right
 				else
@@ -1038,7 +1039,7 @@ package behavior {
 	aspect class TypeReference {
 		method createBehaviorJava(context : KM2EcoreContext) : String is do
 			super(context)
-			result := self.type.createBehaviorJava(context)//CompilerHelperJava.new().ppTypeFromMultiplicityElement(self, context)
+			result := self.type.createBehaviorJava(context)
 		end
 	}
 	
@@ -1140,7 +1141,7 @@ package behavior {
 						if ftParam.isBooleanFunctionType(context) then
 							//context.lastStatementStack.push(context.getIfConditionId() + " = ")
 							
-							context.resultLastStatementStack.push(context.getIfConditionId() + " = " + "%%type%%java.lang.Boolean")
+							context.resultLastStatementStack.push(context.getIfConditionId() + " = " + context.TYPE_SEPARATOR + "java.lang.Boolean")
 							
 							str_condition := str_condition + "\n" + self.condition.createBehaviorJava(context)
 							
@@ -1189,7 +1190,7 @@ package behavior {
 		end
 	}
 	
-	/** TODO */
+	/** Complete */
 	aspect class Loop {
 		method createBehaviorJava(context : KM2EcoreContext) : String from Expression is do
 			super(context)

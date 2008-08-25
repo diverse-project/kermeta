@@ -1,4 +1,4 @@
-/* $Id: Pass1.kmt,v 1.26 2008-07-29 09:59:54 cfaucher Exp $
+/* $Id: Pass1.kmt,v 1.27 2008-08-25 16:21:41 cfaucher Exp $
  * Creation date: January 21, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -30,7 +30,7 @@ aspect class Object {
 
 aspect class ModelingUnit {
 	method applyPass1(context : KM2EcoreContext) is do
-		// Creating the associated ecore package
+		// Creating the associated ecore EAnnotation
 		var ecoreAnnotation : EAnnotation init self.createEcoreModelElement(context)
 		// Setting the ecore proxy
 		self.ecoreModelElement := ecoreAnnotation
@@ -96,7 +96,7 @@ aspect class PrimitiveType {
 
 aspect class Enumeration { 
 	method applyPass1(context : KM2EcoreContext) is do
-		// Creating the associated ecore class
+		// Creating the associated ecore enumeration
 		var ecoreEnumeration : EEnum init self.createEcoreModelElement(context)
 		// Setting the container
 		var p : Package init self.container().asType(Package)
@@ -110,7 +110,7 @@ aspect class Enumeration {
   
 aspect class EnumerationLiteral {
 	method applyPass1(context : KM2EcoreContext) is do
-		// Creating the associated ecore class
+		// Creating the associated ecore EEnumLiteral
 		var ecoreEnumLiteral : EEnumLiteral init self.createEcoreModelElement(context)
 		// Setting the container
 		var e : Enumeration init self.~enumeration.asType(Enumeration)
@@ -147,7 +147,7 @@ aspect class ClassDefinition {
 			end
 		else
 					
-			// Creating the associated ecore class
+			// Creating the associated ecore EClass
 			var ecoreClass : EClass init self.createEcoreModelElement(context)		
 			// Setting the container
 			p.ecoreModelElement.eClassifiers.add(ecoreClass)
@@ -182,7 +182,7 @@ aspect class ClassDefinition {
   
 aspect class Property {
 	method applyPass1(context : KM2EcoreContext) is do
-		// Creating the associated ecore class
+		// Creating the associated ecore EStructuralFeature
 		var ecoreStructuralFeature : EStructuralFeature init self.createEcoreModelElement(context)
 		// Setting the container
 		var c : ClassDefinition
@@ -210,7 +210,7 @@ aspect class Operation {
 		
 		else*/
 			//stdio.writeln("Operation " + self.name + " " + self.container.asType(ClassDefinition).name)
-			// Creating the associated ecore class
+			// Creating the associated ecore EOperation
 			var ecoreOperation : EOperation init self.createEcoreModelElement(context)
 			// Setting the container
 			var c : ClassDefinition
@@ -241,7 +241,7 @@ aspect class Parameter {
 			stdio.writeln("Pass1 - inline")
 			//TODO inline of the FunctionType
 		else
-			// Creating the associated ecore class
+			// Creating the associated ecore parameter
 			ecoreParameter := self.createEcoreModelElement(context)
 		end
 		
@@ -255,7 +255,7 @@ aspect class Parameter {
 
 aspect class Constraint {
 	method applyPass1(context : KM2EcoreContext) is do
-		// Creating the associated ecore class
+		// Creating the associated ecore EAnnotation
 		var ecoreAnnotation : EAnnotation init self.createEcoreModelElement(context)
 		// Setting the container
 		var c : Object init self.container
@@ -271,7 +271,7 @@ aspect class Constraint {
 
 aspect class ObjectTypeVariable {
 	method applyPass1(context : KM2EcoreContext) is do
-		// Creating the associated ecore class
+		// Creating the associated ecore ETypeParameter
 		var ecoreTypeParameter : ETypeParameter init self.createEcoreModelElement(context)
 		// Setting the container
 		var container : Object init self.container
@@ -289,7 +289,7 @@ aspect class ObjectTypeVariable {
 
 aspect class Tag {
 	method applyPass1(context : KM2EcoreContext) is do
-		// Creating the associated ecore class
+		// Creating the associated ecore EAnnotation
 		var ecoreAnnotation : EAnnotation init self.createEcoreModelElement(context)
 		// Setting the container
 		var c : Object init self.container

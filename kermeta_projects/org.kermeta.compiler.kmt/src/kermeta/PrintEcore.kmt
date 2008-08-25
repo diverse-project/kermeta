@@ -1,4 +1,4 @@
-/* $Id: PrintEcore.kmt,v 1.3 2008-08-22 16:03:05 cfaucher Exp $
+/* $Id: PrintEcore.kmt,v 1.4 2008-08-25 16:21:43 cfaucher Exp $
  * Creation date: January 24, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -24,7 +24,7 @@ class Printer {
 
     operation printEcore() : Void is do
     
-    	var input : String init "platform:/resource/org.kermeta.compiler.kmt/models/StructureCompiler.ecore"
+    	var input : String init "platform:/resource/org.kermeta.compiler.kmt/models/test1.ecore"
 		var inputRepository : EMFRepository init EMFRepository.new
 		var modelResource : Resource init inputRepository.getResource(input)		
 	    

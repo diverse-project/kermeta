@@ -1,4 +1,4 @@
-/* $Id: CreateEcoreModelElement.kmt,v 1.27 2008-08-21 15:56:56 cfaucher Exp $
+/* $Id: CreateEcoreModelElement.kmt,v 1.28 2008-08-25 16:21:41 cfaucher Exp $
  * Creation date: February 1, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -243,8 +243,11 @@ aspect class Parameter {
 		ecoreParameter.name := IdentifierHelper.new.getMangledIdentifier(self.name, context)
 		//ecoreParameter.ordered
 		//ecoreParameter.unique
+		
+		// The bounds are managing in the settings of the types (setLinks pass)
 		//ecoreParameter.lowerBound
 		//ecoreParameter.upperBound
+		
 		//ecoreParameter.many
 		//ecoreParameter.required
 		result := ecoreParameter

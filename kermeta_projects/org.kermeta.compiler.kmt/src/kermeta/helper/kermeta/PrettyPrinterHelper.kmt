@@ -1,4 +1,4 @@
-/* $Id: PrettyPrinterHelper.kmt,v 1.12 2008-08-18 07:37:00 cfaucher Exp $
+/* $Id: PrettyPrinterHelper.kmt,v 1.13 2008-08-25 16:21:41 cfaucher Exp $
  * Creation date: February 27, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -122,7 +122,7 @@ class CompilerHelperJava {
 					end
 				end
 				if type_label!="" then					
-					context.resultLastStatementStack.push("result_lambda = " + "%%type%%" + type_label)
+					context.resultLastStatementStack.push("result_lambda = " + context.TYPE_SEPARATOR + type_label)
 
 					e.container.asType(Expression).beforeLambdaExpressionResult := e.container.asType(Expression).beforeLambdaExpressionResult + "\n" + type_label + " result_lambda = null;\n"
 						+ e.createBehaviorJava(context)
