@@ -18,7 +18,8 @@
 			tofile="mytemp/readme.txt"
 			filtering="true"
 			overwrite="true"/>
-		<zip destfile="fr.irisa.triskell.kermeta.samples.fsm.demo.zip" basedir="mytemp" includes="**" filesonly="false" whenempty="skip" update="false"/>
+		<delete file="../fr.irisa.triskell.kermeta.samples.fsm/zips/fr.irisa.triskell.kermeta.samples.fsm.demo.zip"/>
+		<zip destfile="../fr.irisa.triskell.kermeta.samples.fsm/zips/fr.irisa.triskell.kermeta.samples.fsm.demo.zip" basedir="mytemp" includes="**" filesonly="false" whenempty="skip" update="false"/>
 		<delete dir="mytemp"/>
 	</target>
 
