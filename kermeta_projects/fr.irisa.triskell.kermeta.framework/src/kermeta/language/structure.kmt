@@ -1,4 +1,4 @@
-/* $Id: structure.kmt,v 1.69 2008-08-25 08:30:16 cfaucher Exp $
+/* $Id: structure.kmt,v 1.70 2008-08-25 11:09:03 cfaucher Exp $
  * Project : framework
  * File : structure.kmt
  * License : EPL
@@ -539,6 +539,7 @@ aspect class Type
 	/**
 	 * Implements Type.isInstance(Object)
 	 */
+	 @RecopyInValueTypes "true"
 	operation isInstance(element : Object) : Boolean from Type is do
 		result := element.isInstanceOf(self)
 	end
@@ -548,7 +549,8 @@ aspect class Type
  	 * For technical reason, the current implementation works only with Type that comes from a kermeta declaration (ie. in a require)
  	 * it won't work with Type created programmaticaly by the user. If you need that, please ask to the kermeta developpers
  	 * to extend it.
- 	 */	
+ 	 */
+ 	 @RecopyInValueTypes "true"	
 	operation isSuperTypeOf(object : Type) : Boolean is do
 		@compiledJavaExtern "org.kermeta.compil.runtime.helper.language.TypeUtil.hasSubType(this, object)"
 		result ?= extern fr::irisa::triskell::kermeta::runtime::language::Type.hasSubType(self, object)
@@ -559,7 +561,8 @@ aspect class Type
  	 * For technical reason, the current implementation works only with Type that comes from a kermeta declaration (ie. in a require)
  	 * it won't work with Type created programmaticaly by the user. If you need that, please ask to the kermeta developpers
  	 * to extend it.
- 	 */	
+ 	 */
+ 	 @RecopyInValueTypes "true"	
 	operation isSubTypeOf(object : Type) : Boolean is do
 		result := object.isSuperTypeOf(self)
 	end

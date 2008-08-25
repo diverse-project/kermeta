@@ -1,4 +1,4 @@
-// $Id: value_types.kmt,v 1.7 2008-08-21 15:48:23 cfaucher Exp $
+// $Id: value_types.kmt,v 1.8 2008-08-25 11:09:03 cfaucher Exp $
 /* *************************************************
  * Franck FLEUREY - 11/02/2005
  * Triskell Research Group
@@ -75,11 +75,13 @@ abstract class Comparable {
 	 * returns > 0 if  self > other
 	 * returns < 0 if  self < other
 	 */
+	 @RecopyInValueTypes "true"
 	operation compareTo(other : Object) : Integer is abstract
 	
 	/**
 	 * return true if self > other
 	 */
+	 @RecopyInValueTypes "true"
 	operation isGreater(other : Object) : Boolean is do
 		result := self.compareTo(other) > 0
 	end
@@ -87,6 +89,7 @@ abstract class Comparable {
 	/**
 	 * return true if self < other
 	 */
+	 @RecopyInValueTypes "true"
 	operation isLower(other : Object) : Boolean is do
 		result := self.compareTo(other) < 0
 	end
@@ -94,6 +97,7 @@ abstract class Comparable {
 	/**
 	 * return true if self <= other
 	 */
+	 @RecopyInValueTypes "true"
 	operation isLowerOrEqual(other : Object) : Boolean is do
 		result := self.compareTo(other) <= 0
 	end
@@ -101,6 +105,7 @@ abstract class Comparable {
 	/**
 	 * return true if self >= other
 	 */
+	 @RecopyInValueTypes "true"
 	operation isGreaterOrEqual(other : Object) : Boolean is do
 		result := self.compareTo(other) >= 0
 	end
@@ -119,6 +124,7 @@ abstract class Summable<G> {
 	 * The parameter must have the same type (or one of its subtypes)
 	 *  than the current object .
 	 */
+	 @RecopyInValueTypes "true"
 	operation plus(other : G) : G is abstract
 }
 
