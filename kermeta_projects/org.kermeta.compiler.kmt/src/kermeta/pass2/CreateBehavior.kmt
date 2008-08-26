@@ -1,4 +1,4 @@
-/* $Id: CreateBehavior.kmt,v 1.49 2008-08-26 14:56:23 cfaucher Exp $
+/* $Id: CreateBehavior.kmt,v 1.50 2008-08-26 15:53:02 cfaucher Exp $
  * Creation date: January 21, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -551,6 +551,8 @@ package behavior {
 		
 			var fName : String  init IdentifierHelper.new.getMangledIdentifier(self.name, context)
 			
+			stdio.writeln(" -- " + self.toString + " - " + self.staticOperation.toString + " - " + self.staticOperation.container().toString)
+			
 			if self.staticOperation.container().asType(ClassDefinition).isValueType()
 			
 				or (self.staticOperation.container().asType(ClassDefinition).qualifiedName=="kermeta::language::structure::Object"
@@ -732,9 +734,13 @@ package behavior {
 											if self.container.isInstanceOf(CallFeature) then
 												var cf_ : CallFeature init self.container.asType(CallFeature)
 												
-												if cf_.fromUtil(context) or (cf_.staticOperation.getCompiledJavaExtern() != "") then
+												if cf_.staticOperation.isVoid() then
+													stdio.writeln("cf_.isVoid(): " + self.toString + " - " + self.name)
 												else
-													result := result + "."
+													if cf_.fromUtil(context) or (cf_.staticOperation.getCompiledJavaExtern() != "") then
+													else
+														result := result + "."
+													end
 												end
 											end
 										end
@@ -880,6 +886,8 @@ package behavior {
 			//Try to insert line number
 			//result := "begin " + self.lineNumber.toString() + " " + self.fileName + "\n" + "result" + "\nend " + self.lineNumber.toString() + " " + self.fileName + "\n"
 			result := "result" + context.printFtSuffix()
+			
+			result := result + self.endOfExpressionFixer()
 		end
 	}
 	
