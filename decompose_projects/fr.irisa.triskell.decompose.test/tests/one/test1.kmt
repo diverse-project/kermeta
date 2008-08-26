@@ -1,4 +1,4 @@
-/* $Id: test1.kmt,v 1.6 2008-08-26 08:06:37 fmunoz Exp $ 
+/* $Id: test1.kmt,v 1.7 2008-08-26 08:08:03 fmunoz Exp $ 
  * Creation : August 14, 2008
  * Licence  : EPL 
  * Copyright:
@@ -8,7 +8,7 @@
 @mainClass "tests::one::Main"
 @mainOperation "main"
 
-
+@uri "http://www.kermeta.org/decompose/test/uno"
 package tests::one;
 
 
