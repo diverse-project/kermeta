@@ -8,7 +8,7 @@
  * Technologies), Jacques Lescot (Anyware Technologies) - initial API and
  * implementation
  ******************************************************************************/
-/*$Id: CompilerHelperGenerator.java,v 1.15 2008-08-19 12:34:43 cfaucher Exp $
+/*$Id: CompilerHelperGenerator.java,v 1.16 2008-08-26 09:16:25 cfaucher Exp $
 * Project : org.kermeta.compiler.generator
 * File : 	CompilerHelperGenerator.java
 * License : EPL
@@ -345,7 +345,7 @@ public class CompilerHelperGenerator extends AbstractGenerator {
 							applyTemplate(
 									sm,
 									getTemplateURI(RUNNER_JAVA),
-									projectPath.append("/" + SOURCE_DIRECTORY + "/" + sm.getSMContext().getDeepestPackage().getQualifiedName().replace(".", "/") + "/runner/" + CodeGenUtil.capName(EcoreHelper.getQualifiedName((ENamedElement) sm.getParentMethodFromModel(), "__")) + "_Runner.java"),
+									projectPath.append("/" + SOURCE_DIRECTORY + "/" + sm.getSMContext().getQualifiedNameFinalPackage().replace(".", "/") + "/" + sm.getSMContext().getSMClass().getName() + ".java"),
 									configuration.isForceOverwrite());
 						}
 
@@ -418,7 +418,7 @@ public class CompilerHelperGenerator extends AbstractGenerator {
 			applyTemplate(
 					_context,
 					getTemplateURI(WRAPPER_JAVA),
-					projectPath.append("/" + SOURCE_DIRECTORY + "/kermeta/standard/helper/" + _context.getSMClass().getQualifiedName().replace(".", "/") + ".java"),
+					projectPath.append("/" + SOURCE_DIRECTORY + "/" + _context.getSMClass().getQualifiedName().replace(".", "/") + ".java"),
 					configuration.isForceOverwrite());
 			}
 		}
