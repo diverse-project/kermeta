@@ -1,4 +1,4 @@
-/* $Id: OperationHelper.kmt,v 1.6 2008-07-29 09:59:53 cfaucher Exp $
+/* $Id: OperationHelper.kmt,v 1.7 2008-08-26 09:10:05 cfaucher Exp $
  * Creation date: May 20, 2008
  * License:
  * Copyright:
@@ -74,6 +74,18 @@ aspect class Operation {
 		
 		if not p.isVoid() then
 		 result := true
+		end
+	end
+	
+	// isRunnable() in the sense of Kermeta: parameter as single string or none parameter
+	operation isRunnable() : Boolean is do
+		result := false
+		
+		var param : Parameter init self.ownedParameter.detect{ param |
+			not param.isRunnable()
+		}
+		if param.isVoid() then
+			result := true
 		end
 	end
 

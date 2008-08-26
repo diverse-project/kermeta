@@ -1,4 +1,4 @@
-/* $Id: SIMKModelHelper.kmt,v 1.4 2008-08-19 12:57:15 cfaucher Exp $
+/* $Id: SIMKModelHelper.kmt,v 1.5 2008-08-26 09:10:08 cfaucher Exp $
  * Creation date: Jul 21, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -18,34 +18,40 @@ using km2ecore
 
 aspect class SIMKModel {
 
-	operation retrieveOrCreateContext(class_qname : String, context : KM2EcoreContext) : SMContext is do
-		result := void
-		
-		//FIXME CF to add the management of package and the usage
+	operation retrieveOrCreateContext(class_qname : String, finalPackage_qname : String, usage : SMUsage, context : KM2EcoreContext) : SMContext is do
 		var sMContext : SMContext init self.sMContexts.detect{ c |
-			c.sMClass.name == class_qname
+			(c.qualifiedNameFinalPackage == finalPackage_qname)
+				and (c.sMClass.name == class_qname)
+				and (c.sMClass.usages == usage)
 		}
+		
 		if sMContext.isVoid() then
 			sMContext := SMContext.new()
+			sMContext.qualifiedNameFinalPackage := finalPackage_qname
 			self.sMContexts.add(sMContext)
 		end
 		
 		result := sMContext
-		
 	end
 
-	operation retrieveOrCreateContextForWrapper(op : Operation, context : KM2EcoreContext) : SMContext is do
-		result := void
-		
-		//FIXME CF to add the management of package and the usage
-		var sMContext : SMContext init retrieveOrCreateContext(context.current_valueType.name + "Wrapper", context)
+	operation retrieveOrCreateContextWithClass(class_qname : String, finalPackage_qname : String, usage : SMUsage, context : KM2EcoreContext) : SMContext is do
+		var sMContext : SMContext init retrieveOrCreateContext(class_qname, finalPackage_qname, usage, context)
 		
 		if sMContext.sMClass.isVoid() then
 			var sMClass : SMClass init SMClass.new()
 			sMContext.sMClass := sMClass
-			sMClass.name := context.current_valueType.name + "Wrapper"
-			sMClass.setWrapperUsage()
+			
+			sMClass.name := class_qname
+			sMClass.usages := usage
 		end
+		
+		result := sMContext
+	end
+	
+	operation retrieveOrCreateContextForWrapper(op : Operation, context : KM2EcoreContext) : SMContext is do
+		result := void
+		
+		var sMContext : SMContext init retrieveOrCreateContextWithClass(context.current_valueType.name + "Wrapper", "kermeta.standard.helper", SMUsage.Wrapper, context)
 		
 		var sm : StaticMethod init sMContext.staticMethods.detect{ o |
 			o.name == op.name
@@ -55,6 +61,25 @@ aspect class SIMKModel {
 		end
 	end
 	
+	operation retrieveOrCreateContextForRunner(op : Operation, context : KM2EcoreContext) : SMContext is do
+		result := void
+		
+		var sMContext : SMContext init retrieveOrCreateContextWithClass(
+			op.container.asType(ClassDefinition).name + "__" + op.name + "__" + "Runner",
+			op.container.asType(ClassDefinition).container.asType(Package).qualifiedName.replace("::", ".") + ".runner",
+			SMUsage.Runner,
+			context)
+		
+		if sMContext.isVoid() then
+			stdio.writeln(op.container.asType(ClassDefinition).name + "__" + op.name + "__" + "Runner" + " - " + op.container.asType(ClassDefinition).container.asType(Package).qualifiedName.replace("::", ".") + ".runner")
+		end
+		var sm : StaticMethod init sMContext.staticMethods.detect{ o |
+			o.name == "main"
+		}
+		if sm.isVoid() then	
+			result := sMContext
+		end
+	end
 }
 
 aspect class SMClass {

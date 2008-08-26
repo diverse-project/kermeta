@@ -1,4 +1,4 @@
-/* $Id: SetLinks.kmt,v 1.34 2008-08-25 16:21:43 cfaucher Exp $
+/* $Id: SetLinks.kmt,v 1.35 2008-08-26 09:10:08 cfaucher Exp $
  * Creation date: January 21, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -157,12 +157,7 @@ aspect class Parameter {
 		// DETERMINE if the parameter should be compiled
 		if self.type.isInstanceOf(FunctionType) then
 			stdio.writeln("setLinks FunctionType: " + self.type.toString() + " self.ecoreModelElement: " + self.ecoreModelElement.toString())
-			
-			stdio.writeln(self.container.toString() + " " + self.container.container.toString() + " " + self.container.container.container.toString() + " " + self.container.container.container.asType(Package).toString() + " end")
-			stdio.writeln(GenericTypeDefinitionHelper.new.getKermetaSpecialType(self.container.container.container.asType(Package)).toString())
-			stdio.writeln(self.container.asType(NamedElement).name + " " + self.container.container.asType(NamedElement).name + " " + self.name)
-			stdio.writeln(self.ecoreModelElement.toString())
-			
+
 			var ft : FunctionType init self.type.asType(FunctionType)
 			self.ecoreModelElement.eType := GenericTypeDefinitionHelper.new.getKermetaSpecialType(self.container.container.container.asType(Package))
 			
@@ -179,11 +174,32 @@ aspect class Parameter {
 			//Set the traceability
 			ft.ecoreModelElement := ft_annotation
 			
-			stdio.writeln("SetLinks - inline - TODO inline of the FunctionType")
+		else
+		
+			if self.upper==-1 then		
+				var eOrderedSet : EClassifier init context.mu.getEClassifierByQualifiedName("kermeta::standard::OrderedSet")
+				
+				var genericType : EGenericType init EGenericType.new				
+				genericType.eClassifier  := eOrderedSet
+				self.ecoreModelElement.eGenericType := genericType
+				
+				var type_arg_genericType : EGenericType init EGenericType.new
+				
+				if self.type.asType(Class).getClassDefinitionAsTyped().ecoreDataType.isVoid() then
+					type_arg_genericType.eClassifier := self.type.asType(Class).getClassDefinitionAsTyped().ecoreModelElement
+				else
+					type_arg_genericType.eClassifier := self.type.asType(Class).getClassDefinitionAsTyped().ecoreDataType
+				end
+				
+				self.ecoreModelElement.eGenericType.eTypeArguments.add(type_arg_genericType)
+
+			else
 			
-		else		
-			var s : LinkSetterForTypedElement init LinkSetterForTypedElement.new
-			s.setLinks(self, self.ecoreModelElement, context)
+				var s : LinkSetterForTypedElement init LinkSetterForTypedElement.new
+				s.setLinks(self, self.ecoreModelElement, context)
+			
+			end
+		
 		end
 		
 	end
@@ -213,7 +229,7 @@ class LinkSetterForTypedElement {
 		
 		if (not ecoreModelElement.isVoid()) and (not Operation.new().isVoidType(element.type.getTypeQName())) then
 
-			/*************/
+			/*
 			if element.isInstanceOf(Parameter) then
 				var param : Parameter init element.asType(Parameter)
 				if param.upper==-1 then
@@ -222,7 +238,7 @@ class LinkSetterForTypedElement {
 					stdio.writeln("param.upper==-1: " + eOrderedSet.toString)
 				end
 			end
-			/*************/
+			*/
 			
 			if element.type.isInstanceOf(Class) then
 				var c : Class init element.type.asType(Class)

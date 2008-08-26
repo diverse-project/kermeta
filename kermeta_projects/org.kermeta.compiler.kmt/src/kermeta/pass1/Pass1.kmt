@@ -1,4 +1,4 @@
-/* $Id: Pass1.kmt,v 1.27 2008-08-25 16:21:41 cfaucher Exp $
+/* $Id: Pass1.kmt,v 1.28 2008-08-26 09:10:08 cfaucher Exp $
  * Creation date: January 21, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -197,33 +197,19 @@ aspect class Property {
 
 aspect class Operation {
 	method applyPass1(context : KM2EcoreContext) is do
-	
-		//stdio.writeln("createOperation: " + self.name)
 		
-		// Compile only the method, if that are not taking directly
-		// into account by the target language like times() for an Integer
-		
-		/*if getEMFStatic()!="" then
-			stdio.writeln("An EMF_static method has been detected: " + self.name)
-			//TODO Compile with Simk
-			//o.applyPass1(context)
-		
-		else*/
-			//stdio.writeln("Operation " + self.name + " " + self.container.asType(ClassDefinition).name)
-			// Creating the associated ecore EOperation
-			var ecoreOperation : EOperation init self.createEcoreModelElement(context)
-			// Setting the container
-			var c : ClassDefinition
-			c ?= self.container()
-			c.ecoreModelElement.eOperations.add(ecoreOperation)
-			// Setting the ecore proxy
-			self.ecoreModelElement := ecoreOperation
-			// Compile the owned elements
-			self.eachOwnedElement{ o |
-				o.applyPass1(context)
-			}
-		
-		//end
+		// Creating the associated ecore EOperation
+		var ecoreOperation : EOperation init self.createEcoreModelElement(context)
+		// Setting the container
+		var c : ClassDefinition
+		c ?= self.container()
+		c.ecoreModelElement.eOperations.add(ecoreOperation)
+		// Setting the ecore proxy
+		self.ecoreModelElement := ecoreOperation
+		// Compile the owned elements
+		self.eachOwnedElement{ o |
+			o.applyPass1(context)
+		}
 		
 	end
 }
@@ -238,8 +224,6 @@ aspect class Parameter {
 		if self.type.isInstanceOf(FunctionType) then
 			ecoreParameter := EParameter.new
 			ecoreParameter.name := self.name
-			stdio.writeln("Pass1 - inline")
-			//TODO inline of the FunctionType
 		else
 			// Creating the associated ecore parameter
 			ecoreParameter := self.createEcoreModelElement(context)

@@ -1,4 +1,4 @@
-/* $Id: CreateBehavior.kmt,v 1.46 2008-08-25 16:21:41 cfaucher Exp $
+/* $Id: CreateBehavior.kmt,v 1.47 2008-08-26 09:10:07 cfaucher Exp $
  * Creation date: January 21, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -1201,6 +1201,11 @@ package behavior {
 			if self.initialization.isInstanceOf(CallVariable) then
 				//FIXME CF Maybe we should do something here
 			else
+				//open a virtual block
+				if self.initialization.isInstanceOf(VariableDecl) then
+					result := result + "\n" + "{\n"
+				end
+		
 				result := result + "\n\t" + self.initialization.createBehaviorJava(context)
 			end
 			
@@ -1214,6 +1219,12 @@ package behavior {
 			
 			//close the while
 			result := result + "\n\t}"
+			
+			//close the virtual block
+			if self.initialization.isInstanceOf(VariableDecl) then
+				result := result + "\n}\n"
+			end
+			
 		end
 	}
 	

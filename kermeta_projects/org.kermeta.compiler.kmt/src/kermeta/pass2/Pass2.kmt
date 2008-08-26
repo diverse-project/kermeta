@@ -1,4 +1,4 @@
-/* $Id: Pass2.kmt,v 1.31 2008-08-25 16:21:41 cfaucher Exp $
+/* $Id: Pass2.kmt,v 1.32 2008-08-26 09:10:07 cfaucher Exp $
  * Creation date: January 21, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -25,10 +25,12 @@ require "platform:/resource/org.kermeta.compiler.kmt/src/kermeta/KM2EcoreContext
 require "http://www.eclipse.org/emf/2002/Ecore"
 require "platform:/resource/org.kermeta.compiler.kmt/src/kermeta/helper/kermeta/KermetaHelper.kmt"
 require "platform:/resource/org.kermeta.compiler.kmt/src/kermeta/helper/ecore/EcoreHelper.kmt"
+require "platform:/resource/org.kermeta.compiler.kmt/src/kermeta/helper/simk/SimkHelper.kmt"
 
 using km2ecore
 using ecore
 using km2ecore::helper::ecore
+using simk
 
 package structure {
 	
@@ -220,7 +222,38 @@ package structure {
 							EAnnotationHelper.new.addAnnotationGenModelImpl(self.ecoreModelElement, self.type.createBehaviorJava(context) + " result = null;\nreturn result;")
 						end*/
 					//end
-				
+					
+					// Create the Simk (Static Indirection) context
+					// and the corresponding body of the Java Main Class
+					if self.isRunnable() then
+						var smContext : SMContext init context.simkModel.retrieveOrCreateContextForRunner(self, context)
+						var staticMethod : StaticMethod init StaticMethod.new()
+						
+						var cd_qn : String init self.container.asType(ClassDefinition).qualifiedName().replace("::", ".")
+						
+						staticMethod.name := "main"
+						staticMethod.body := "\n" +
+							cd_qn + " anExec = (" + cd_qn + ")" +
+							 " org.kermeta.compil.runtime.helper.language.ClassUtil.newObject(" + cd_qn + ");" +
+							"\nanExec." + self.name + "("
+						
+						var i : Integer init 0
+						self.ownedParameter.each{ params |
+							if i>0 then
+								staticMethod.body := staticMethod.body + ", "
+							end
+							staticMethod.body := staticMethod.body + " args[" + i.toString() + "]"
+							i := i+1
+						}
+						staticMethod.body := staticMethod.body + ");\n"
+						staticMethod.usages := SMUsage.Runner
+						
+						//adding to the simk model
+						context.simkModel.staticMethods.add(staticMethod)
+						//linking to the context
+						smContext.staticMethods.add(staticMethod)
+					end
+					
 				else
 					self.compilingInSimkMode(context)
 				end
