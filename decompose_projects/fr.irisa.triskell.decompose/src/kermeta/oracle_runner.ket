@@ -1,0 +1,25 @@
+<%@ket
+package="decomposition::oracle"
+require="kermeta"
+using="kermeta::standard"
+class="OracleRunnerScript"
+parameters="location:String"
+%>
+
+@mainClass "decompose::oracle::run::Main"
+@mainOperation "main"
+
+package decompose::oracle::run;
+require kermeta
+require "platform:/resource/fr.irisa.triskell.decompose/src/kermeta/Oracle.kmt"
+
+using decomposition
+
+class Main
+{
+	operation main() : Void is do 
+		var oracle:Oracle init Oracle.new
+		oracle.initialize("<%=location%>")
+		oracle.veredict()
+	end
+}

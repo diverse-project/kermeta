@@ -1,0 +1,15 @@
+package decomposition::oracle;
+require kermeta
+require "kermeta"
+using kermeta::standard
+using kermeta::utils
+using kermeta::standard
+class OracleRunnerScript{
+operation generate(location:String):String is do
+var _res: StringBuffer init StringBuffer.new
+_res.append("\n@mainClass \"decompose::oracle::run::Main\"\n@mainOperation \"main\"\n\npackage decompose::oracle::run;\nrequire kermeta\nrequire \"platform:/resource/fr.irisa.triskell.decompose/src/kermeta/Oracle.kmt\"\n\nusing decomposition\n\nclass Main\n{\n\toperation main() : Void is do \n\t\tvar oracle:Oracle init Oracle.new\n\t\toracle.initialize(\"")
+_res.append(location)
+_res.append("\")\n\t\toracle.veredict()\n\tend\n}")
+result := _res.toString
+end
+}

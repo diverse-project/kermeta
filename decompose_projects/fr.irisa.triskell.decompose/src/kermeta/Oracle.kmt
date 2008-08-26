@@ -1,4 +1,4 @@
-/* $Id: Oracle.kmt,v 1.1 2008-08-20 11:06:01 fmunoz Exp $ 
+/* $Id: Oracle.kmt,v 1.2 2008-08-26 08:09:43 fmunoz Exp $ 
  * Creation : August 19, 2008
  * Licence  : EPL 
  * Copyright:
@@ -6,10 +6,56 @@
  *            freddy
  */
 package decomposition;
-
-
+require "http://www.eclipse.org/emf/compare/diff/1.1"
+require "http://www.eclipse.org/emf/compare/match/1.1"
+require "http://www.kermeta.org/decompose/compare"
+require "platform:/resource/fr.irisa.triskell.decompose/src/kermeta/OracleSupport.kmt"
 require kermeta
+
+
+/*
+ * the oracle must provide the veridict determining whether the models are well formed or not.
+ */
+ 
+using kermeta::standard
+using kermeta::utils
+using ocompare
+using decomposition::oracle
+using diff
+
 class Oracle
 {
+
+	//attribute traceability:Traceability 
+	/*
+	*	there must be some traceability mechanism here to trace back errors in the compositin engine
+	*/
+	attribute modelComparison:Compare
 	
+	operation initialize(path:String):Void is do
+		var support:OSupport init OSupport.new
+		self.modelComparison?=support.doLoad(path)
+	end
+	
+	operation veredict(): Void is do
+		var support:OSupport init OSupport.new
+		self.modelComparison.toCompare.each{element|
+		//	stdio.writeln("analyzing corresponding to: "+element.resultURI)
+			var diffModel:DiffModel 
+			diffModel?=support.doLoad(element.diffURI)
+			var haveMod:Boolean init false
+			diffModel.ownedElements.each{diffe|
+				if diffe.subDiffElements.size() > 0  then
+					haveMod:=true
+				end
+			}
+			
+			if haveMod then
+				stdio.writeln("test generating: "+element.resultURI+"  - FAILS")
+			else
+				stdio.writeln("test generating: "+element.resultURI+"  + PASSES")
+			end
+		}
+	end
+
 }
