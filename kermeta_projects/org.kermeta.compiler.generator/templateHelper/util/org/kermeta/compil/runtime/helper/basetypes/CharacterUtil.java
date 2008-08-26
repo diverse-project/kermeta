@@ -23,6 +23,10 @@ public class CharacterUtil {
 	public static java.lang.Boolean isNotEqual(java.lang.Character self, java.lang.Character param0) {
 		return !equals(self, param0);
 	}
+	
+	public static Boolean isVoid(java.lang.Character self) {
+		return self == null;
+	}
 
 	public static Class getMetaClass(Character self) {
 		return org.kermeta.compil.runtime.ExecutionContext.getInstance().getMetaClass("java.lang.Character");

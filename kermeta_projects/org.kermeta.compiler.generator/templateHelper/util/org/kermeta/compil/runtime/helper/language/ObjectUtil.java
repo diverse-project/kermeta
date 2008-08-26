@@ -407,8 +407,15 @@ public class ObjectUtil {
 		return null;
 	}
 	
+	public static java.lang.Object containingResource(Object element) {
+		if(element instanceof kermeta.language.structure.Object) {
+			return ((kermeta.language.structure.Object) element).eResource();
+		}
+		return null;
+	}
+	
 	/**
-	 * DO NOT REMOVE PLEASE CF
+	 * DO NOT REMOVE PLEASE CF, this method is used to bypass a infinite loop
 	 * @param elem
 	 * @return
 	 */
@@ -456,4 +463,5 @@ public class ObjectUtil {
 		return result;
 
 	}
+
 }

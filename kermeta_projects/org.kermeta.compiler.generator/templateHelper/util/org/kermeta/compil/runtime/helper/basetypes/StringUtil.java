@@ -112,6 +112,10 @@ public class StringUtil {
 		}
 		return result;
 	}
+	
+	public static Boolean isVoid(String self) {
+		return self == null;
+	}
 
 	public static Class getMetaClass(String self) {
 		return org.kermeta.compil.runtime.ExecutionContext.getInstance().getMetaClass("java.lang.String");
