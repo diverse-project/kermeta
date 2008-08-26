@@ -1,4 +1,4 @@
-/* $Id: test1.kmt,v 1.5 2008-08-25 11:53:22 fmunoz Exp $ 
+/* $Id: test1.kmt,v 1.6 2008-08-26 08:06:37 fmunoz Exp $ 
  * Creation : August 14, 2008
  * Licence  : EPL 
  * Copyright:
@@ -134,7 +134,6 @@ class Main
 		oracleSupport.doSave()
 		
 		var oracleScript:String init oracleGenerator.generate(oracleSupport.resultFile)
-		var oracleScriptFile:String init 
 		fileio.writeTextFile(kompose_oracle_script,oracleScript)
 	end
 }
