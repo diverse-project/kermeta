@@ -513,6 +513,7 @@ public class ResolverDynamicWithoutSystemRepresentation implements Resolver {
 												// is
 												// already done
 												value.addPackage(_package);
+												value.setBundle(bundleExportingPackage);
 												find = true;
 												break;
 											}
@@ -521,8 +522,9 @@ public class ResolverDynamicWithoutSystemRepresentation implements Resolver {
 											value.setResolved(value
 													.isResolved() && true);
 											break;
+										} else {
+											value.setResolved(false);
 										}
-										value.setResolved(false);
 									}
 								}
 							}
@@ -532,12 +534,15 @@ public class ResolverDynamicWithoutSystemRepresentation implements Resolver {
 									"There are no valid package exported on the OSGi platform for "
 											+ _packageString, importPackages
 											.get(importPackages));
+							value.setResolved(false);
 						}
 					} else {
 						util.log(Level.WARN,
 								"There are no package exported on the OSGi platform for "
 										+ _packageString, importPackages
 										.get(importPackages));
+
+						value.setResolved(false);
 					}
 				}
 			}
@@ -575,17 +580,19 @@ public class ResolverDynamicWithoutSystemRepresentation implements Resolver {
 					// Finally we look for service into Import-Package
 					for (ImportPackage importPackage : bundle.getManifest()
 							.getImportPackages()) {
-						for (manifest.Package _package : importPackage
-								.getPackages()) {
-							String reference = _package.getReference();
-							if (serviceReference.contains(reference)) {
-								if (util.javaElementExist(serviceReference,
-										importPackage.getBundle())) {
-									service.setResolved(true);
+						if (importPackage.isResolved()) {
+							for (manifest.Package _package : importPackage
+									.getPackages()) {
+								String reference = _package.getReference();
+								if (serviceReference.contains(reference)) {
+									if (util.javaElementExist(serviceReference,
+											importPackage.getBundle())) {
+										service.setResolved(true);
+									}
 								}
-							}
-							if (service.isResolved()) {
-								break;
+								if (service.isResolved()) {
+									break;
+								}
 							}
 						}
 						if (service.isResolved()) {

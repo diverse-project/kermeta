@@ -20,7 +20,9 @@ Export-Package: framework,
  option,
  option.util,
  org.eclipse.emf.common.util,
+ org.eclipse.emf.ecore,
  org.eclipse.emf.ecore.resource,
  org.eclipse.emf.ecore.resource.impl,
+ org.eclipse.emf.ecore.util,
  org.eclipse.emf.ecore.xmi.impl
 Import-Package: org.osgi.framework

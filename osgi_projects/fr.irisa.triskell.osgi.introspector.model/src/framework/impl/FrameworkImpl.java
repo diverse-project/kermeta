@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: FrameworkImpl.java,v 1.6 2008-08-19 07:04:46 edaubert Exp $
+ * $Id: FrameworkImpl.java,v 1.7 2008-08-26 16:52:43 edaubert Exp $
  */
 package framework.impl;
 
@@ -161,9 +161,6 @@ public class FrameworkImpl extends EObjectImpl implements Framework {
 					}
 				}
 			}
-			// Attention gérer l'unicité du couple BundleVersion,
-			// BundleSymbolicName
-			// TODO Modifier FrameworkTest#testAddBundle en conséquence
 			Version version = bundle.getManifest().getBundleVersion()
 					.getVersion();
 			Bundle tmp = this.findBundle(symbolicName.getSymbolicName(),

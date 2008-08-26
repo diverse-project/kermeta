@@ -1,4 +1,4 @@
-package fr.irisa.triskell.osgi.introspector.generator;
+package fr.irisa.triskell.osgi.introspector.manifest;
 
 import java.net.MalformedURLException;
 import java.net.URL;

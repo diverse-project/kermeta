@@ -2,11 +2,10 @@
  * <copyright>
  * </copyright>
  *
- * $Id: FrameworkFactoryImpl.java,v 1.4 2008-08-19 07:04:46 edaubert Exp $
+ * $Id: FrameworkFactoryImpl.java,v 1.5 2008-08-26 16:52:43 edaubert Exp $
  */
 package framework.impl;
 
-import framework.*;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;

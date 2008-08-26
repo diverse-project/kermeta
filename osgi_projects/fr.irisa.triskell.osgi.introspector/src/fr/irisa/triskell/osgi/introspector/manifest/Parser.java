@@ -1,4 +1,4 @@
-package fr.irisa.triskell.osgi.introspector.generator;
+package fr.irisa.triskell.osgi.introspector.manifest;
 
 import java.io.IOException;
 import java.io.PushbackReader;

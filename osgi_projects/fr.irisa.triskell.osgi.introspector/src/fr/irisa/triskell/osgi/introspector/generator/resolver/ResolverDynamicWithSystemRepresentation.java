@@ -695,14 +695,16 @@ public class ResolverDynamicWithSystemRepresentation implements Resolver {
 					// Finally we look for service into Import-Package
 					for (ImportPackage importPackage : bundle.getManifest()
 							.getImportPackages()) {
-						for (manifest.Package _package : importPackage
-								.getPackages()) {
-							String reference = _package.getReference();
-							if (serviceReference.contains(reference)) {
-								element = _package.getPackage().getClass(
-										serviceReference);
-								if (element != null) {
-									service.setInterface(element);
+						if (importPackage.isResolved()) {
+							for (manifest.Package _package : importPackage
+									.getPackages()) {
+								String reference = _package.getReference();
+								if (serviceReference.contains(reference)) {
+									element = _package.getPackage().getClass(
+											serviceReference);
+									if (element != null) {
+										service.setInterface(element);
+									}
 								}
 							}
 						}

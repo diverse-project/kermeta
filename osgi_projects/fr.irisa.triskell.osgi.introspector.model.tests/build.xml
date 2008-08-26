@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ====================================================================== 
+     26 août 08 09:16:23                                                        
+
+     project    
+     description
+                   
+     edaubert                                                                
+     ====================================================================== -->
+<project name="project" default="default">
+    <description>
+            description
+    </description>
+
+	<property name="report.dir" location="reports" />
+	<property name="bin" location="bin" />
+    <!-- ================================= 
+          target: default              
+         ================================= -->
+    <target name="default" description="--> description">
+    	<mkdir dir="${report.dir}" />
+    	<mkdir dir="${report.dir}/html" />
+    	<junit printsummary="yes" haltonfailure="no" showoutput="yes" fork="yes">
+        	<classpath>
+        		<pathelement location="${bin}" />
+        		<pathelement location="../fr.irisa.triskell.osgi.introspector.model/bin" />
+        		<pathelement location="../fr.irisa.triskell.osgi.introspector.model/lib/org.eclipse.emf.common_2.4.0.v200806091234.jar" />
+        		<pathelement location="../fr.irisa.triskell.osgi.introspector.model/lib/org.eclipse.emf.ecore_2.4.0.v200806091234.jar" />
+        		<pathelement location="../fr.irisa.triskell.osgi.introspector.model/lib/org.eclipse.emf.ecore.edit_2.4.0.v200806091234.jar" />
+        		<pathelement location="../fr.irisa.triskell.osgi.introspector.model/lib/org.eclipse.emf.ecore.xmi_2.4.0.v200806091234.jar" />
+        	</classpath>
+    		<test name="framework.tests.FrameworkAllTests" haltonfailure="no" todir="${report.dir}" outfile="model_test">
+    			<formatter type="xml" />
+    		</test>
+    	</junit>
+    	<echo>Generate intermediate report</echo>
+    	<junitreport todir="${report.dir}">
+    		<fileset dir="${report.dir}">
+    			<include name="model_test.xml" />
+    		</fileset>
+    		<report format="frames" todir="${report.dir}/html" />
+    	</junitreport>
+    </target>
+
+    <!-- - - - - - - - - - - - - - - - - - 
+          target: depends                      
+         - - - - - - - - - - - - - - - - - -->
+    <target name="depends">
+    </target>
+
+</project>

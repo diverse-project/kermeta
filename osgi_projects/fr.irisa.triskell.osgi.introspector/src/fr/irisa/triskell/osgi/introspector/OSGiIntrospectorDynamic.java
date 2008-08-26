@@ -17,8 +17,8 @@ import manifest.MANIFEST;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.Constants;
 
-import fr.irisa.triskell.osgi.introspector.generator.Parser;
 import fr.irisa.triskell.osgi.introspector.generator.resolver.Resolver;
+import fr.irisa.triskell.osgi.introspector.manifest.Parser;
 import fr.irisa.triskell.osgi.introspector.util.OSGiIntrospectorUtil;
 import framework.Bundle;
 import framework.Framework;

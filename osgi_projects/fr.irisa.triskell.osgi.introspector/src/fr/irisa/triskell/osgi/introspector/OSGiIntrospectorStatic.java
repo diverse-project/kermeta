@@ -17,8 +17,8 @@ import java.util.jar.Manifest;
 
 import org.apache.log4j.Level;
 
-import fr.irisa.triskell.osgi.introspector.generator.Parser;
 import fr.irisa.triskell.osgi.introspector.generator.resolver.Resolver;
+import fr.irisa.triskell.osgi.introspector.manifest.Parser;
 import fr.irisa.triskell.osgi.introspector.util.OSGiIntrospectorUtil;
 import framework.Bundle;
 import framework.Framework;
