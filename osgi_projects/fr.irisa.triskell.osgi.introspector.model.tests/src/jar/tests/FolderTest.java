@@ -1,6 +1,8 @@
 package jar.tests;
 
 
+import org.junit.Test;
+
 import jar.Folder;
 import jar.JarFactory;
 import jar.SystemEntry;
@@ -67,8 +69,7 @@ public class FolderTest extends SystemEntryTest {
 		setFixture(null);
 	}
 	
-
-
+	@Test
 	public void testAddEntry() {
 		SystemEntry file = JarFactory.eINSTANCE.createFile();
 		file.setName("file.jar");
@@ -98,6 +99,7 @@ public class FolderTest extends SystemEntryTest {
 		assertFalse(getFixture().addEntry(folder));
 	}
 
+	@Test
 	public void testGetEntry() {
 		SystemEntry file = JarFactory.eINSTANCE.createFile();
 		file.setName("file.jar");

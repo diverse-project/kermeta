@@ -2,14 +2,12 @@
  * <copyright>
  * </copyright>
  *
- * $Id: MANIFESTEntryTest.java,v 1.1 2008-08-22 12:39:59 edaubert Exp $
+ * $Id: MANIFESTEntryTest.java,v 1.2 2008-08-26 16:52:00 edaubert Exp $
  */
 package manifest.tests;
 
 import junit.framework.TestCase;
-import junit.textui.TestRunner;
 import manifest.MANIFESTEntry;
-import manifest.ManifestFactory;
 import option.AttributEntry;
 import option.OptionFactory;
 

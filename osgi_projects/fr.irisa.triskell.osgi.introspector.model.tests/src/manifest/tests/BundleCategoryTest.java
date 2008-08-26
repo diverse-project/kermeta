@@ -2,16 +2,11 @@
  * <copyright>
  * </copyright>
  *
- * $Id: BundleCategoryTest.java,v 1.1 2008-08-22 12:40:00 edaubert Exp $
+ * $Id: BundleCategoryTest.java,v 1.2 2008-08-26 16:52:00 edaubert Exp $
  */
 package manifest.tests;
 
-import static org.junit.Assert.fail;
-
-import org.junit.Test;
-
 import junit.textui.TestRunner;
-
 import manifest.BundleCategory;
 import manifest.ManifestFactory;
 

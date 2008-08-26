@@ -83,7 +83,7 @@ public class BundleTest extends TestCase {
 		
 		getFixture().addFragment(fragment);
 		
-		assertEquals(1, getFixture().getFragments().size());
+		assertEquals(2, getFixture().getFragments().size());
 
 		getFixture().addFragment(fragment);
 		
