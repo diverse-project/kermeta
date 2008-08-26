@@ -1,4 +1,4 @@
-/* $Id: CreateEcoreModelElement.kmt,v 1.28 2008-08-25 16:21:41 cfaucher Exp $
+/* $Id: CreateEcoreModelElement.kmt,v 1.29 2008-08-26 13:04:00 cfaucher Exp $
  * Creation date: February 1, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -94,7 +94,7 @@ aspect class Using {
 aspect class Package {
 	operation createEcoreModelElement(context : KM2EcoreContext) : EPackage is do
 	
-		stdio.writeln(" + Package " + self.name + " in progress")
+		stdio.writeln(" + Package " + self.qualifiedName + " in progress")
 		
 		var ecorePackage : EPackage init EPackage.new
 		ecorePackage.name := IdentifierHelper.new.getMangledIdentifier(self.name, context)
@@ -103,7 +103,10 @@ aspect class Package {
 			ecorePackage.nsURI := self.uri + "/kermeta_temp_uri"
 			ecorePackage.eAnnotations.add(EAnnotationHelper.new().createKermetaEAnnotation("ecoreUri", self.uri))
 		else
-			raise UndefinedUriEPackageException.new()
+			var default_uri : String init "http://www.kermeta.org/" + self.qualifiedName.replace("::", "/")
+			ecorePackage.nsURI := default_uri + "/kermeta_temp_uri"
+			ecorePackage.eAnnotations.add(EAnnotationHelper.new().createKermetaEAnnotation("ecoreUri", default_uri))
+			//raise UndefinedUriEPackageException.new()
 		end
 		
 		// In order complete the EMF checking, we have to set the nsPrefix to "", void is not enough
