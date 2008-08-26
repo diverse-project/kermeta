@@ -1,5 +1,5 @@
 /**
- * $Id: SMContextItemProvider.java,v 1.3 2007-12-21 14:17:02 cfaucher Exp $
+ * $Id: SMContextItemProvider.java,v 1.4 2008-08-26 09:14:29 cfaucher Exp $
  * Project : org.kermeta.simk
  * License : EPL
  * Copyright : IRISA / INRIA / Universite de Rennes 1
@@ -7,7 +7,7 @@
  * Creation date : 30 nov. 07
  * Authors : Cyril Faucher <cfaucher@irisa.fr> (first iteration)
  *
- * $Id: SMContextItemProvider.java,v 1.3 2007-12-21 14:17:02 cfaucher Exp $
+ * $Id: SMContextItemProvider.java,v 1.4 2008-08-26 09:14:29 cfaucher Exp $
  */
 package org.kermeta.simk.provider;
 
@@ -29,6 +29,7 @@ import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
+import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ItemProviderAdapter;
 import org.eclipse.emf.edit.provider.ViewerNotification;
 
@@ -72,6 +73,7 @@ public class SMContextItemProvider
 			super.getPropertyDescriptors(object);
 
 			addStaticMethodsPropertyDescriptor(object);
+			addQualifiedNameFinalPackagePropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -99,6 +101,28 @@ public class SMContextItemProvider
 	}
 
 	/**
+	 * This adds a property descriptor for the Qualified Name Final Package feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addQualifiedNameFinalPackagePropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_SMContext_qualifiedNameFinalPackage_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_SMContext_qualifiedNameFinalPackage_feature", "_UI_SMContext_type"),
+				 SimkPackage.Literals.SM_CONTEXT__QUALIFIED_NAME_FINAL_PACKAGE,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
 	 * This specifies how to implement {@link #getChildren} and is used to deduce an appropriate feature for an
 	 * {@link org.eclipse.emf.edit.command.AddCommand}, {@link org.eclipse.emf.edit.command.RemoveCommand} or
 	 * {@link org.eclipse.emf.edit.command.MoveCommand} in {@link #createCommand}.
@@ -110,7 +134,6 @@ public class SMContextItemProvider
 	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
-			childrenFeatures.add(SimkPackage.Literals.SM_CONTEXT__SM_PACKAGE);
 			childrenFeatures.add(SimkPackage.Literals.SM_CONTEXT__SM_CLASS);
 		}
 		return childrenFeatures;
@@ -127,6 +150,16 @@ public class SMContextItemProvider
 		// adding (see {@link AddCommand}) it as a child.
 
 		return super.getChildFeature(object, child);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public boolean hasChildren(Object object) {
+		return hasChildren(object, true);
 	}
 
 	/**
@@ -148,7 +181,10 @@ public class SMContextItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		return getString("_UI_SMContext_type");
+		String label = ((SMContext)object).getQualifiedNameFinalPackage();
+		return label == null || label.length() == 0 ?
+			getString("_UI_SMContext_type") :
+			getString("_UI_SMContext_type") + " " + label;
 	}
 
 	/**
@@ -163,7 +199,9 @@ public class SMContextItemProvider
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(SMContext.class)) {
-			case SimkPackage.SM_CONTEXT__SM_PACKAGE:
+			case SimkPackage.SM_CONTEXT__QUALIFIED_NAME_FINAL_PACKAGE:
+				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
+				return;
 			case SimkPackage.SM_CONTEXT__SM_CLASS:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
@@ -181,11 +219,6 @@ public class SMContextItemProvider
 	@Override
 	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
-
-		newChildDescriptors.add
-			(createChildParameter
-				(SimkPackage.Literals.SM_CONTEXT__SM_PACKAGE,
-				 SimkFactory.eINSTANCE.createSMPackage()));
 
 		newChildDescriptors.add
 			(createChildParameter

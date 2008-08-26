@@ -1,5 +1,5 @@
 /**
- * $Id: SimkAdapterFactory.java,v 1.5 2008-08-18 09:20:24 cfaucher Exp $
+ * $Id: SimkAdapterFactory.java,v 1.6 2008-08-26 09:14:30 cfaucher Exp $
  * Project : org.kermeta.simk
  * License : EPL
  * Copyright : IRISA / INRIA / Universite de Rennes 1
@@ -7,7 +7,7 @@
  * Creation date : 30 nov. 07
  * Authors : Cyril Faucher <cfaucher@irisa.fr> (first iteration)
  *
- * $Id: SimkAdapterFactory.java,v 1.5 2008-08-18 09:20:24 cfaucher Exp $
+ * $Id: SimkAdapterFactory.java,v 1.6 2008-08-26 09:14:30 cfaucher Exp $
  */
 package org.kermeta.simk.util;
 
@@ -89,10 +89,6 @@ public class SimkAdapterFactory extends AdapterFactoryImpl {
 				return createSMContextAdapter();
 			}
 			@Override
-			public Adapter caseSMPackage(SMPackage object) {
-				return createSMPackageAdapter();
-			}
-			@Override
 			public Adapter caseSMClass(SMClass object) {
 				return createSMClassAdapter();
 			}
@@ -171,20 +167,6 @@ public class SimkAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createSMContextAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.kermeta.simk.SMPackage <em>SM Package</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.kermeta.simk.SMPackage
-	 * @generated
-	 */
-	public Adapter createSMPackageAdapter() {
 		return null;
 	}
 

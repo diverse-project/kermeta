@@ -1,5 +1,5 @@
 /**
- * $Id: SimkItemProviderAdapterFactory.java,v 1.5 2008-08-18 09:20:21 cfaucher Exp $
+ * $Id: SimkItemProviderAdapterFactory.java,v 1.6 2008-08-26 09:14:29 cfaucher Exp $
  * Project : org.kermeta.simk
  * License : EPL
  * Copyright : IRISA / INRIA / Universite de Rennes 1
@@ -7,7 +7,7 @@
  * Creation date : 30 nov. 07
  * Authors : Cyril Faucher <cfaucher@irisa.fr> (first iteration)
  *
- * $Id: SimkItemProviderAdapterFactory.java,v 1.5 2008-08-18 09:20:21 cfaucher Exp $
+ * $Id: SimkItemProviderAdapterFactory.java,v 1.6 2008-08-26 09:14:29 cfaucher Exp $
  */
 package org.kermeta.simk.provider;
 
@@ -147,29 +147,6 @@ public class SimkItemProviderAdapterFactory extends SimkAdapterFactory implement
 		}
 
 		return smContextItemProvider;
-	}
-
-	/**
-	 * This keeps track of the one adapter used for all {@link org.kermeta.simk.SMPackage} instances.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected SMPackageItemProvider smPackageItemProvider;
-
-	/**
-	 * This creates an adapter for a {@link org.kermeta.simk.SMPackage}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Adapter createSMPackageAdapter() {
-		if (smPackageItemProvider == null) {
-			smPackageItemProvider = new SMPackageItemProvider(this);
-		}
-
-		return smPackageItemProvider;
 	}
 
 	/**
@@ -343,7 +320,6 @@ public class SimkItemProviderAdapterFactory extends SimkAdapterFactory implement
 		if (simkModelItemProvider != null) simkModelItemProvider.dispose();
 		if (staticMethodItemProvider != null) staticMethodItemProvider.dispose();
 		if (smContextItemProvider != null) smContextItemProvider.dispose();
-		if (smPackageItemProvider != null) smPackageItemProvider.dispose();
 		if (smClassItemProvider != null) smClassItemProvider.dispose();
 		if (smParameterItemProvider != null) smParameterItemProvider.dispose();
 		if (smReturnItemProvider != null) smReturnItemProvider.dispose();

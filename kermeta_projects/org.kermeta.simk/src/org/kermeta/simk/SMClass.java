@@ -1,5 +1,5 @@
 /**
- * $Id: SMClass.java,v 1.5 2008-08-18 13:06:15 cfaucher Exp $
+ * $Id: SMClass.java,v 1.6 2008-08-26 09:14:28 cfaucher Exp $
  * Project : org.kermeta.simk
  * License : EPL
  * Copyright : IRISA / INRIA / Universite de Rennes 1
@@ -7,7 +7,7 @@
  * Creation date : 30 nov. 07
  * Authors : Cyril Faucher <cfaucher@irisa.fr> (first iteration)
  *
- * $Id: SMClass.java,v 1.5 2008-08-18 13:06:15 cfaucher Exp $
+ * $Id: SMClass.java,v 1.6 2008-08-26 09:14:28 cfaucher Exp $
  */
 package org.kermeta.simk;
 
@@ -22,8 +22,8 @@ import org.eclipse.emf.common.util.EList;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.kermeta.simk.SMClass#getSMPackage <em>SM Package</em>}</li>
  *   <li>{@link org.kermeta.simk.SMClass#getUsages <em>Usages</em>}</li>
+ *   <li>{@link org.kermeta.simk.SMClass#getContext <em>Context</em>}</li>
  * </ul>
  * </p>
  *
@@ -32,34 +32,6 @@ import org.eclipse.emf.common.util.EList;
  * @generated
  */
 public interface SMClass extends SMNamedElement {
-	/**
-	 * Returns the value of the '<em><b>SM Package</b></em>' reference.
-	 * It is bidirectional and its opposite is '{@link org.kermeta.simk.SMPackage#getSMClass <em>SM Class</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>SM Package</em>' reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>SM Package</em>' reference.
-	 * @see #setSMPackage(SMPackage)
-	 * @see org.kermeta.simk.SimkPackage#getSMClass_SMPackage()
-	 * @see org.kermeta.simk.SMPackage#getSMClass
-	 * @model opposite="sMClass"
-	 * @generated
-	 */
-	SMPackage getSMPackage();
-
-	/**
-	 * Sets the value of the '{@link org.kermeta.simk.SMClass#getSMPackage <em>SM Package</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>SM Package</em>' reference.
-	 * @see #getSMPackage()
-	 * @generated
-	 */
-	void setSMPackage(SMPackage value);
-
 	/**
 	 * Returns the value of the '<em><b>Usages</b></em>' attribute.
 	 * The literals are from the enumeration {@link org.kermeta.simk.SMUsage}.
@@ -90,10 +62,38 @@ public interface SMClass extends SMNamedElement {
 	void setUsages(SMUsage value);
 
 	/**
+	 * Returns the value of the '<em><b>Context</b></em>' container reference.
+	 * It is bidirectional and its opposite is '{@link org.kermeta.simk.SMContext#getSMClass <em>SM Class</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Context</em>' container reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Context</em>' container reference.
+	 * @see #setContext(SMContext)
+	 * @see org.kermeta.simk.SimkPackage#getSMClass_Context()
+	 * @see org.kermeta.simk.SMContext#getSMClass
+	 * @model opposite="sMClass" required="true" transient="false"
+	 * @generated
+	 */
+	SMContext getContext();
+
+	/**
+	 * Sets the value of the '{@link org.kermeta.simk.SMClass#getContext <em>Context</em>}' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Context</em>' container reference.
+	 * @see #getContext()
+	 * @generated
+	 */
+	void setContext(SMContext value);
+
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @model kind="operation"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='if ( getSMPackage() != null ) {\r\n\treturn getSMPackage().getQualifiedName() + \".\" + getName();\r\n}\r\nreturn getName();'"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='String qn_finalPackage = getContext().getQualifiedNameFinalPackage();\r\nif ( ! qn_finalPackage.equals(\"\") ) {\r\n\treturn qn_finalPackage + \".\" + getName();\r\n}\r\nreturn getName();'"
 	 * @generated
 	 */
 	String getQualifiedName();

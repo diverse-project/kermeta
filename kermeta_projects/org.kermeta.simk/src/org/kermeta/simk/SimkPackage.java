@@ -1,5 +1,5 @@
 /**
- * $Id: SimkPackage.java,v 1.7 2008-08-18 13:06:15 cfaucher Exp $
+ * $Id: SimkPackage.java,v 1.8 2008-08-26 09:14:28 cfaucher Exp $
  * Project : org.kermeta.simk
  * License : EPL
  * Copyright : IRISA / INRIA / Universite de Rennes 1
@@ -7,7 +7,7 @@
  * Creation date : 30 nov. 07
  * Authors : Cyril Faucher <cfaucher@irisa.fr> (first iteration)
  *
- * $Id: SimkPackage.java,v 1.7 2008-08-18 13:06:15 cfaucher Exp $
+ * $Id: SimkPackage.java,v 1.8 2008-08-26 09:14:28 cfaucher Exp $
  */
 package org.kermeta.simk;
 
@@ -73,7 +73,7 @@ public interface SimkPackage extends EPackage {
 	 * @see org.kermeta.simk.impl.SimkPackageImpl#getSMNamedElement()
 	 * @generated
 	 */
-	int SM_NAMED_ELEMENT = 5;
+	int SM_NAMED_ELEMENT = 4;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -259,22 +259,13 @@ public interface SimkPackage extends EPackage {
 	int SM_CONTEXT = 2;
 
 	/**
-	 * The feature id for the '<em><b>SM Package</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SM_CONTEXT__SM_PACKAGE = 0;
-
-	/**
 	 * The feature id for the '<em><b>Static Methods</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int SM_CONTEXT__STATIC_METHODS = 1;
+	int SM_CONTEXT__STATIC_METHODS = 0;
 
 	/**
 	 * The feature id for the '<em><b>SM Class</b></em>' containment reference.
@@ -283,7 +274,16 @@ public interface SimkPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SM_CONTEXT__SM_CLASS = 2;
+	int SM_CONTEXT__SM_CLASS = 1;
+
+	/**
+	 * The feature id for the '<em><b>Qualified Name Final Package</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SM_CONTEXT__QUALIFIED_NAME_FINAL_PACKAGE = 2;
 
 	/**
 	 * The number of structural features of the '<em>SM Context</em>' class.
@@ -295,61 +295,6 @@ public interface SimkPackage extends EPackage {
 	int SM_CONTEXT_FEATURE_COUNT = 3;
 
 	/**
-	 * The meta object id for the '{@link org.kermeta.simk.impl.SMPackageImpl <em>SM Package</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.kermeta.simk.impl.SMPackageImpl
-	 * @see org.kermeta.simk.impl.SimkPackageImpl#getSMPackage()
-	 * @generated
-	 */
-	int SM_PACKAGE = 3;
-
-	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SM_PACKAGE__NAME = SM_NAMED_ELEMENT__NAME;
-
-	/**
-	 * The feature id for the '<em><b>SM Class</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SM_PACKAGE__SM_CLASS = SM_NAMED_ELEMENT_FEATURE_COUNT + 0;
-
-	/**
-	 * The feature id for the '<em><b>Sub SM Package</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SM_PACKAGE__SUB_SM_PACKAGE = SM_NAMED_ELEMENT_FEATURE_COUNT + 1;
-
-	/**
-	 * The feature id for the '<em><b>Parent SM Package</b></em>' container reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SM_PACKAGE__PARENT_SM_PACKAGE = SM_NAMED_ELEMENT_FEATURE_COUNT + 2;
-
-	/**
-	 * The number of structural features of the '<em>SM Package</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SM_PACKAGE_FEATURE_COUNT = SM_NAMED_ELEMENT_FEATURE_COUNT + 3;
-
-	/**
 	 * The meta object id for the '{@link org.kermeta.simk.impl.SMClassImpl <em>SM Class</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -357,7 +302,7 @@ public interface SimkPackage extends EPackage {
 	 * @see org.kermeta.simk.impl.SimkPackageImpl#getSMClass()
 	 * @generated
 	 */
-	int SM_CLASS = 4;
+	int SM_CLASS = 3;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -369,22 +314,22 @@ public interface SimkPackage extends EPackage {
 	int SM_CLASS__NAME = SM_NAMED_ELEMENT__NAME;
 
 	/**
-	 * The feature id for the '<em><b>SM Package</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SM_CLASS__SM_PACKAGE = SM_NAMED_ELEMENT_FEATURE_COUNT + 0;
-
-	/**
 	 * The feature id for the '<em><b>Usages</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int SM_CLASS__USAGES = SM_NAMED_ELEMENT_FEATURE_COUNT + 1;
+	int SM_CLASS__USAGES = SM_NAMED_ELEMENT_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Context</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SM_CLASS__CONTEXT = SM_NAMED_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
 	 * The number of structural features of the '<em>SM Class</em>' class.
@@ -403,7 +348,7 @@ public interface SimkPackage extends EPackage {
 	 * @see org.kermeta.simk.impl.SimkPackageImpl#getSMParameter()
 	 * @generated
 	 */
-	int SM_PARAMETER = 6;
+	int SM_PARAMETER = 5;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -440,7 +385,7 @@ public interface SimkPackage extends EPackage {
 	 * @see org.kermeta.simk.impl.SimkPackageImpl#getSMTypedElement()
 	 * @generated
 	 */
-	int SM_TYPED_ELEMENT = 7;
+	int SM_TYPED_ELEMENT = 6;
 
 	/**
 	 * The feature id for the '<em><b>Type</b></em>' attribute.
@@ -468,7 +413,7 @@ public interface SimkPackage extends EPackage {
 	 * @see org.kermeta.simk.impl.SimkPackageImpl#getSMReturn()
 	 * @generated
 	 */
-	int SM_RETURN = 8;
+	int SM_RETURN = 7;
 
 	/**
 	 * The feature id for the '<em><b>Type</b></em>' attribute.
@@ -496,7 +441,7 @@ public interface SimkPackage extends EPackage {
 	 * @see org.kermeta.simk.impl.SimkPackageImpl#getSMUsage()
 	 * @generated
 	 */
-	int SM_USAGE = 9;
+	int SM_USAGE = 8;
 
 
 	/**
@@ -651,17 +596,6 @@ public interface SimkPackage extends EPackage {
 	EClass getSMContext();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link org.kermeta.simk.SMContext#getSMPackage <em>SM Package</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>SM Package</em>'.
-	 * @see org.kermeta.simk.SMContext#getSMPackage()
-	 * @see #getSMContext()
-	 * @generated
-	 */
-	EReference getSMContext_SMPackage();
-
-	/**
 	 * Returns the meta object for the reference list '{@link org.kermeta.simk.SMContext#getStaticMethods <em>Static Methods</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -684,47 +618,15 @@ public interface SimkPackage extends EPackage {
 	EReference getSMContext_SMClass();
 
 	/**
-	 * Returns the meta object for class '{@link org.kermeta.simk.SMPackage <em>SM Package</em>}'.
+	 * Returns the meta object for the attribute '{@link org.kermeta.simk.SMContext#getQualifiedNameFinalPackage <em>Qualified Name Final Package</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>SM Package</em>'.
-	 * @see org.kermeta.simk.SMPackage
+	 * @return the meta object for the attribute '<em>Qualified Name Final Package</em>'.
+	 * @see org.kermeta.simk.SMContext#getQualifiedNameFinalPackage()
+	 * @see #getSMContext()
 	 * @generated
 	 */
-	EClass getSMPackage();
-
-	/**
-	 * Returns the meta object for the reference '{@link org.kermeta.simk.SMPackage#getSMClass <em>SM Class</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>SM Class</em>'.
-	 * @see org.kermeta.simk.SMPackage#getSMClass()
-	 * @see #getSMPackage()
-	 * @generated
-	 */
-	EReference getSMPackage_SMClass();
-
-	/**
-	 * Returns the meta object for the containment reference '{@link org.kermeta.simk.SMPackage#getSubSMPackage <em>Sub SM Package</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Sub SM Package</em>'.
-	 * @see org.kermeta.simk.SMPackage#getSubSMPackage()
-	 * @see #getSMPackage()
-	 * @generated
-	 */
-	EReference getSMPackage_SubSMPackage();
-
-	/**
-	 * Returns the meta object for the container reference '{@link org.kermeta.simk.SMPackage#getParentSMPackage <em>Parent SM Package</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the container reference '<em>Parent SM Package</em>'.
-	 * @see org.kermeta.simk.SMPackage#getParentSMPackage()
-	 * @see #getSMPackage()
-	 * @generated
-	 */
-	EReference getSMPackage_ParentSMPackage();
+	EAttribute getSMContext_QualifiedNameFinalPackage();
 
 	/**
 	 * Returns the meta object for class '{@link org.kermeta.simk.SMClass <em>SM Class</em>}'.
@@ -737,17 +639,6 @@ public interface SimkPackage extends EPackage {
 	EClass getSMClass();
 
 	/**
-	 * Returns the meta object for the reference '{@link org.kermeta.simk.SMClass#getSMPackage <em>SM Package</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>SM Package</em>'.
-	 * @see org.kermeta.simk.SMClass#getSMPackage()
-	 * @see #getSMClass()
-	 * @generated
-	 */
-	EReference getSMClass_SMPackage();
-
-	/**
 	 * Returns the meta object for the attribute '{@link org.kermeta.simk.SMClass#getUsages <em>Usages</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -757,6 +648,17 @@ public interface SimkPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getSMClass_Usages();
+
+	/**
+	 * Returns the meta object for the container reference '{@link org.kermeta.simk.SMClass#getContext <em>Context</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the container reference '<em>Context</em>'.
+	 * @see org.kermeta.simk.SMClass#getContext()
+	 * @see #getSMClass()
+	 * @generated
+	 */
+	EReference getSMClass_Context();
 
 	/**
 	 * Returns the meta object for class '{@link org.kermeta.simk.SMNamedElement <em>SM Named Element</em>}'.
@@ -971,14 +873,6 @@ public interface SimkPackage extends EPackage {
 		EClass SM_CONTEXT = eINSTANCE.getSMContext();
 
 		/**
-		 * The meta object literal for the '<em><b>SM Package</b></em>' containment reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference SM_CONTEXT__SM_PACKAGE = eINSTANCE.getSMContext_SMPackage();
-
-		/**
 		 * The meta object literal for the '<em><b>Static Methods</b></em>' reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -995,38 +889,12 @@ public interface SimkPackage extends EPackage {
 		EReference SM_CONTEXT__SM_CLASS = eINSTANCE.getSMContext_SMClass();
 
 		/**
-		 * The meta object literal for the '{@link org.kermeta.simk.impl.SMPackageImpl <em>SM Package</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see org.kermeta.simk.impl.SMPackageImpl
-		 * @see org.kermeta.simk.impl.SimkPackageImpl#getSMPackage()
-		 * @generated
-		 */
-		EClass SM_PACKAGE = eINSTANCE.getSMPackage();
-
-		/**
-		 * The meta object literal for the '<em><b>SM Class</b></em>' reference feature.
+		 * The meta object literal for the '<em><b>Qualified Name Final Package</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference SM_PACKAGE__SM_CLASS = eINSTANCE.getSMPackage_SMClass();
-
-		/**
-		 * The meta object literal for the '<em><b>Sub SM Package</b></em>' containment reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference SM_PACKAGE__SUB_SM_PACKAGE = eINSTANCE.getSMPackage_SubSMPackage();
-
-		/**
-		 * The meta object literal for the '<em><b>Parent SM Package</b></em>' container reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference SM_PACKAGE__PARENT_SM_PACKAGE = eINSTANCE.getSMPackage_ParentSMPackage();
+		EAttribute SM_CONTEXT__QUALIFIED_NAME_FINAL_PACKAGE = eINSTANCE.getSMContext_QualifiedNameFinalPackage();
 
 		/**
 		 * The meta object literal for the '{@link org.kermeta.simk.impl.SMClassImpl <em>SM Class</em>}' class.
@@ -1039,20 +907,20 @@ public interface SimkPackage extends EPackage {
 		EClass SM_CLASS = eINSTANCE.getSMClass();
 
 		/**
-		 * The meta object literal for the '<em><b>SM Package</b></em>' reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference SM_CLASS__SM_PACKAGE = eINSTANCE.getSMClass_SMPackage();
-
-		/**
 		 * The meta object literal for the '<em><b>Usages</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
 		EAttribute SM_CLASS__USAGES = eINSTANCE.getSMClass_Usages();
+
+		/**
+		 * The meta object literal for the '<em><b>Context</b></em>' container reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference SM_CLASS__CONTEXT = eINSTANCE.getSMClass_Context();
 
 		/**
 		 * The meta object literal for the '{@link org.kermeta.simk.impl.SMNamedElementImpl <em>SM Named Element</em>}' class.

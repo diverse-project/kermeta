@@ -1,5 +1,5 @@
 /**
- * $Id: SimkFactoryImpl.java,v 1.5 2008-08-18 09:20:20 cfaucher Exp $
+ * $Id: SimkFactoryImpl.java,v 1.6 2008-08-26 09:14:29 cfaucher Exp $
  * Project : org.kermeta.simk
  * License : EPL
  * Copyright : IRISA / INRIA / Universite de Rennes 1
@@ -7,7 +7,7 @@
  * Creation date : 30 nov. 07
  * Authors : Cyril Faucher <cfaucher@irisa.fr> (first iteration)
  *
- * $Id: SimkFactoryImpl.java,v 1.5 2008-08-18 09:20:20 cfaucher Exp $
+ * $Id: SimkFactoryImpl.java,v 1.6 2008-08-26 09:14:29 cfaucher Exp $
  */
 package org.kermeta.simk.impl;
 
@@ -69,7 +69,6 @@ public class SimkFactoryImpl extends EFactoryImpl implements SimkFactory {
 			case SimkPackage.SIMK_MODEL: return createSIMKModel();
 			case SimkPackage.STATIC_METHOD: return createStaticMethod();
 			case SimkPackage.SM_CONTEXT: return createSMContext();
-			case SimkPackage.SM_PACKAGE: return createSMPackage();
 			case SimkPackage.SM_CLASS: return createSMClass();
 			case SimkPackage.SM_PARAMETER: return createSMParameter();
 			case SimkPackage.SM_RETURN: return createSMReturn();
@@ -136,16 +135,6 @@ public class SimkFactoryImpl extends EFactoryImpl implements SimkFactory {
 	public SMContext createSMContext() {
 		SMContextImpl smContext = new SMContextImpl();
 		return smContext;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public SMPackage createSMPackage() {
-		SMPackageImpl smPackage = new SMPackageImpl();
-		return smPackage;
 	}
 
 	/**

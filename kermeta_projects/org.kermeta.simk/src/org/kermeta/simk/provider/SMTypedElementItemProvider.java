@@ -1,5 +1,5 @@
 /**
- * $Id: SMTypedElementItemProvider.java,v 1.3 2007-12-21 14:17:02 cfaucher Exp $
+ * $Id: SMTypedElementItemProvider.java,v 1.4 2008-08-26 09:14:29 cfaucher Exp $
  * Project : org.kermeta.simk
  * License : EPL
  * Copyright : IRISA / INRIA / Universite de Rennes 1
@@ -7,7 +7,7 @@
  * Creation date : 30 nov. 07
  * Authors : Cyril Faucher <cfaucher@irisa.fr> (first iteration)
  *
- * $Id: SMTypedElementItemProvider.java,v 1.3 2007-12-21 14:17:02 cfaucher Exp $
+ * $Id: SMTypedElementItemProvider.java,v 1.4 2008-08-26 09:14:29 cfaucher Exp $
  */
 package org.kermeta.simk.provider;
 
@@ -94,6 +94,16 @@ public class SMTypedElementItemProvider
 				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
 				 null,
 				 null));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public boolean hasChildren(Object object) {
+		return hasChildren(object, true);
 	}
 
 	/**

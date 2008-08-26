@@ -1,5 +1,5 @@
 /**
- * $Id: SMClassItemProvider.java,v 1.4 2008-07-23 15:17:23 cfaucher Exp $
+ * $Id: SMClassItemProvider.java,v 1.5 2008-08-26 09:14:29 cfaucher Exp $
  * Project : org.kermeta.simk
  * License : EPL
  * Copyright : IRISA / INRIA / Universite de Rennes 1
@@ -7,7 +7,7 @@
  * Creation date : 30 nov. 07
  * Authors : Cyril Faucher <cfaucher@irisa.fr> (first iteration)
  *
- * $Id: SMClassItemProvider.java,v 1.4 2008-07-23 15:17:23 cfaucher Exp $
+ * $Id: SMClassItemProvider.java,v 1.5 2008-08-26 09:14:29 cfaucher Exp $
  */
 package org.kermeta.simk.provider;
 
@@ -68,32 +68,9 @@ public class SMClassItemProvider
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
-			addSMPackagePropertyDescriptor(object);
 			addUsagesPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
-	}
-
-	/**
-	 * This adds a property descriptor for the SM Package feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addSMPackagePropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_SMClass_sMPackage_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_SMClass_sMPackage_feature", "_UI_SMClass_type"),
-				 SimkPackage.Literals.SM_CLASS__SM_PACKAGE,
-				 true,
-				 false,
-				 true,
-				 null,
-				 null,
-				 null));
 	}
 
 	/**

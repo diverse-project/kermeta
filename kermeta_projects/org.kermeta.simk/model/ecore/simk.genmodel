@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <genmodel:GenModel xmi:version="2.0"
     xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
-    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" copyrightText="$Id: simk.genmodel,v 1.9 2008-08-18 09:20:23 cfaucher Exp $&#xD;&#xA;Project : org.kermeta.simk&#xD;&#xA;License : EPL&#xD;&#xA;Copyright : IRISA / INRIA / Universite de Rennes 1&#xD;&#xA;----------------------------------------------------------------------------&#xD;&#xA;Creation date : 30 nov. 07&#xD;&#xA;Authors : Cyril Faucher &lt;cfaucher@irisa.fr> (first iteration)"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" copyrightText="$Id: simk.genmodel,v 1.10 2008-08-26 09:14:28 cfaucher Exp $&#xD;&#xA;Project : org.kermeta.simk&#xD;&#xA;License : EPL&#xD;&#xA;Copyright : IRISA / INRIA / Universite de Rennes 1&#xD;&#xA;----------------------------------------------------------------------------&#xD;&#xA;Creation date : 30 nov. 07&#xD;&#xA;Authors : Cyril Faucher &lt;cfaucher@irisa.fr> (first iteration)"
     modelDirectory="/org.kermeta.simk/src" creationSubmenus="true" editDirectory="/org.kermeta.simk/src"
     editorDirectory="/org.kermeta.simk/src" modelPluginID="org.kermeta.simk" templateDirectory=""
     redirection="" forceOverwrite="true" modelName="Simk" modelPluginClass="" reflectiveDelegation="true"
     testsDirectory="" importerID="org.eclipse.emf.importer.ecore" featureDelegation="Reflective"
-    containmentProxies="true" complianceLevel="5.0" copyrightFields="false" publicConstructors="true">
+    containmentProxies="true" complianceLevel="5.0" copyrightFields="false" publicConstructors="true"
+    optimizedHasChildren="true">
   <foreignModel>simk.ecore</foreignModel>
   <genPackages prefix="Simk" basePackage="org.kermeta" disposableProviderFactory="true"
       multipleEditorPages="false" ecorePackage="simk.ecore#/">
@@ -36,23 +37,13 @@
       <genOperations ecoreOperation="simk.ecore#//StaticMethod/getParentMethodFromModel"/>
     </genClasses>
     <genClasses ecoreClass="simk.ecore#//SMContext">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference simk.ecore#//SMContext/sMPackage"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference simk.ecore#//SMContext/staticMethods"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference simk.ecore#//SMContext/sMClass"/>
-      <genOperations ecoreOperation="simk.ecore#//SMContext/getDeepestPackage"/>
-    </genClasses>
-    <genClasses ecoreClass="simk.ecore#//SMPackage">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference simk.ecore#//SMPackage/sMClass"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference simk.ecore#//SMPackage/subSMPackage"/>
-      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference simk.ecore#//SMPackage/parentSMPackage"/>
-      <genOperations ecoreOperation="simk.ecore#//SMPackage/getQualifiedNameRec">
-        <genParameters ecoreParameter="simk.ecore#//SMPackage/getQualifiedNameRec/element"/>
-      </genOperations>
-      <genOperations ecoreOperation="simk.ecore#//SMPackage/getQualifiedName"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute simk.ecore#//SMContext/qualifiedNameFinalPackage"/>
     </genClasses>
     <genClasses ecoreClass="simk.ecore#//SMClass">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference simk.ecore#//SMClass/sMPackage"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute simk.ecore#//SMClass/usages"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference simk.ecore#//SMClass/context"/>
       <genOperations ecoreOperation="simk.ecore#//SMClass/getQualifiedName"/>
     </genClasses>
     <genClasses image="false" ecoreClass="simk.ecore#//SMNamedElement">

@@ -1,5 +1,5 @@
 /**
- * $Id: SimkFactory.java,v 1.5 2008-08-18 09:20:20 cfaucher Exp $
+ * $Id: SimkFactory.java,v 1.6 2008-08-26 09:14:28 cfaucher Exp $
  * Project : org.kermeta.simk
  * License : EPL
  * Copyright : IRISA / INRIA / Universite de Rennes 1
@@ -7,7 +7,7 @@
  * Creation date : 30 nov. 07
  * Authors : Cyril Faucher <cfaucher@irisa.fr> (first iteration)
  *
- * $Id: SimkFactory.java,v 1.5 2008-08-18 09:20:20 cfaucher Exp $
+ * $Id: SimkFactory.java,v 1.6 2008-08-26 09:14:28 cfaucher Exp $
  */
 package org.kermeta.simk;
 
@@ -56,15 +56,6 @@ public interface SimkFactory extends EFactory {
 	 * @generated
 	 */
 	SMContext createSMContext();
-
-	/**
-	 * Returns a new object of class '<em>SM Package</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>SM Package</em>'.
-	 * @generated
-	 */
-	SMPackage createSMPackage();
 
 	/**
 	 * Returns a new object of class '<em>SM Class</em>'.

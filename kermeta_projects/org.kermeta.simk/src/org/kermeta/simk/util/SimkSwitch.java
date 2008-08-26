@@ -1,5 +1,5 @@
 /**
- * $Id: SimkSwitch.java,v 1.5 2008-08-18 09:20:24 cfaucher Exp $
+ * $Id: SimkSwitch.java,v 1.6 2008-08-26 09:14:30 cfaucher Exp $
  * Project : org.kermeta.simk
  * License : EPL
  * Copyright : IRISA / INRIA / Universite de Rennes 1
@@ -7,7 +7,7 @@
  * Creation date : 30 nov. 07
  * Authors : Cyril Faucher <cfaucher@irisa.fr> (first iteration)
  *
- * $Id: SimkSwitch.java,v 1.5 2008-08-18 09:20:24 cfaucher Exp $
+ * $Id: SimkSwitch.java,v 1.6 2008-08-26 09:14:30 cfaucher Exp $
  */
 package org.kermeta.simk.util;
 
@@ -112,13 +112,6 @@ public class SimkSwitch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case SimkPackage.SM_PACKAGE: {
-				SMPackage smPackage = (SMPackage)theEObject;
-				T result = caseSMPackage(smPackage);
-				if (result == null) result = caseSMNamedElement(smPackage);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
 			case SimkPackage.SM_CLASS: {
 				SMClass smClass = (SMClass)theEObject;
 				T result = caseSMClass(smClass);
@@ -199,21 +192,6 @@ public class SimkSwitch<T> {
 	 * @generated
 	 */
 	public T caseSMContext(SMContext object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>SM Package</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>SM Package</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseSMPackage(SMPackage object) {
 		return null;
 	}
 

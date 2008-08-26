@@ -1,5 +1,5 @@
 /**
- * $Id: SMContext.java,v 1.3 2007-12-21 14:17:02 cfaucher Exp $
+ * $Id: SMContext.java,v 1.4 2008-08-26 09:14:28 cfaucher Exp $
  * Project : org.kermeta.simk
  * License : EPL
  * Copyright : IRISA / INRIA / Universite de Rennes 1
@@ -7,7 +7,7 @@
  * Creation date : 30 nov. 07
  * Authors : Cyril Faucher <cfaucher@irisa.fr> (first iteration)
  *
- * $Id: SMContext.java,v 1.3 2007-12-21 14:17:02 cfaucher Exp $
+ * $Id: SMContext.java,v 1.4 2008-08-26 09:14:28 cfaucher Exp $
  */
 package org.kermeta.simk;
 
@@ -23,9 +23,9 @@ import org.eclipse.emf.ecore.EObject;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.kermeta.simk.SMContext#getSMPackage <em>SM Package</em>}</li>
  *   <li>{@link org.kermeta.simk.SMContext#getStaticMethods <em>Static Methods</em>}</li>
  *   <li>{@link org.kermeta.simk.SMContext#getSMClass <em>SM Class</em>}</li>
+ *   <li>{@link org.kermeta.simk.SMContext#getQualifiedNameFinalPackage <em>Qualified Name Final Package</em>}</li>
  * </ul>
  * </p>
  *
@@ -34,32 +34,6 @@ import org.eclipse.emf.ecore.EObject;
  * @generated
  */
 public interface SMContext extends EObject {
-	/**
-	 * Returns the value of the '<em><b>SM Package</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>SM Package</em>' containment reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>SM Package</em>' containment reference.
-	 * @see #setSMPackage(SMPackage)
-	 * @see org.kermeta.simk.SimkPackage#getSMContext_SMPackage()
-	 * @model containment="true" resolveProxies="true"
-	 * @generated
-	 */
-	SMPackage getSMPackage();
-
-	/**
-	 * Sets the value of the '{@link org.kermeta.simk.SMContext#getSMPackage <em>SM Package</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>SM Package</em>' containment reference.
-	 * @see #getSMPackage()
-	 * @generated
-	 */
-	void setSMPackage(SMPackage value);
-
 	/**
 	 * Returns the value of the '<em><b>Static Methods</b></em>' reference list.
 	 * The list contents are of type {@link org.kermeta.simk.StaticMethod}.
@@ -80,6 +54,7 @@ public interface SMContext extends EObject {
 
 	/**
 	 * Returns the value of the '<em><b>SM Class</b></em>' containment reference.
+	 * It is bidirectional and its opposite is '{@link org.kermeta.simk.SMClass#getContext <em>Context</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>SM Class</em>' containment reference isn't clear,
@@ -89,7 +64,8 @@ public interface SMContext extends EObject {
 	 * @return the value of the '<em>SM Class</em>' containment reference.
 	 * @see #setSMClass(SMClass)
 	 * @see org.kermeta.simk.SimkPackage#getSMContext_SMClass()
-	 * @model containment="true" resolveProxies="true"
+	 * @see org.kermeta.simk.SMClass#getContext
+	 * @model opposite="context" containment="true" resolveProxies="true"
 	 * @generated
 	 */
 	SMClass getSMClass();
@@ -105,12 +81,29 @@ public interface SMContext extends EObject {
 	void setSMClass(SMClass value);
 
 	/**
+	 * Returns the value of the '<em><b>Qualified Name Final Package</b></em>' attribute.
 	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Qualified Name Final Package</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
 	 * <!-- end-user-doc -->
-	 * @model kind="operation"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='if ( this.getSMPackage() != null ) {\r\n\tSMPackage smp = this.getSMPackage();\r\n\twhile( smp.getSubSMPackage() != null ) {\r\n\t\tsmp = smp.getSubSMPackage();\r\n\t}\r\n\treturn smp;\r\n} else {\r\n\treturn null;\r\n}'"
+	 * @return the value of the '<em>Qualified Name Final Package</em>' attribute.
+	 * @see #setQualifiedNameFinalPackage(String)
+	 * @see org.kermeta.simk.SimkPackage#getSMContext_QualifiedNameFinalPackage()
+	 * @model
 	 * @generated
 	 */
-	SMPackage getDeepestPackage();
+	String getQualifiedNameFinalPackage();
+
+	/**
+	 * Sets the value of the '{@link org.kermeta.simk.SMContext#getQualifiedNameFinalPackage <em>Qualified Name Final Package</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Qualified Name Final Package</em>' attribute.
+	 * @see #getQualifiedNameFinalPackage()
+	 * @generated
+	 */
+	void setQualifiedNameFinalPackage(String value);
 
 } // SMContext
