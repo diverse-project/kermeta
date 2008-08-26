@@ -1,4 +1,4 @@
-/* $Id: CreateBehavior.kmt,v 1.47 2008-08-26 09:10:07 cfaucher Exp $
+/* $Id: CreateBehavior.kmt,v 1.48 2008-08-26 13:04:14 cfaucher Exp $
  * Creation date: January 21, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -56,6 +56,7 @@ package structure {
 	/** We have to visit operation in order to print the result initialization and the return statement */
 	aspect class Operation {
 		method createBehaviorJava(context : KM2EcoreContext) : String is do
+
 			result := void
 			
 /*			var ft_parameters : Set<Parameter> init self.ownedParameter.detect{ p |
@@ -75,7 +76,7 @@ package structure {
 			
 			// The body of the operation must be filled for being compiled
 			if not self.body.isVoid() then
-			
+
 				var type_label : String init ""
 				if context.ftSuffixActivation then
 					type_label := context.ftReturnType
@@ -101,7 +102,7 @@ package structure {
 					javaCode.append(self.type.createBehaviorJava(context) + " result = null;\nreturn result;")
 				end
 			end
-			
+
 			// Finally add the EAnnotation containing the Java code in the Ecore model
 			if context.tasks_stack.peek() != "FunctionType_Compilation" and context.current_valueType.isVoid() then
 	        	EAnnotationHelper.new.addAnnotationGenModelImpl(self.ecoreModelElement, javaCode.toString)
@@ -256,12 +257,15 @@ package structure {
 	
 	aspect class ParameterizedType {
 		method createBehaviorJava(context : KM2EcoreContext) : String from Type is do
-
+stdio.writeln("tutu: " + self.toString)
 			if self.typeDefinition.getEMFInstanceClassName()!="" then
 				result := self.typeDefinition.getEMFInstanceClassName()
 			else
+			stdio.writeln("tutu2: " + self.toString)
 				result := self.getTypeQName().replace("::",".")
 			end
+			
+			stdio.writeln("tutu3: " + self.toString)
 			
 			//Look the param binding
 			var str_tpb : String init ""
@@ -273,15 +277,18 @@ package structure {
 				end
 				
 				if not context.ftSuffixActivation then
+				stdio.writeln("tutu4: " + self.toString)
 					str_tpb := str_tpb + tpb.type.createBehaviorJava(context)
 				else
-
+stdio.writeln("tutu5: " + self.toString)
 					var type_from_map : Type init context.ftMapTypeStack.peek().getValue(tpb.type)
 					if not type_from_map.isVoid() then
+					stdio.writeln("tutu6: " + self.toString)
 						context.ftSuffixActivation := false
 						str_tpb := str_tpb + type_from_map.createBehaviorJava(context)
 						context.ftSuffixActivation := true
 					else
+					stdio.writeln("tutu7: " + self.toString)
 						str_tpb := str_tpb + context.ftProductTypeStack.peek().getTypeByIndex(i).createBehaviorJava(context)
 					end
 				end
@@ -390,12 +397,6 @@ package behavior {
 			
 			var javaCode : StringBuffer init StringBuffer.new
 			
-			
-			/*self.eachOwnedElement{ stm |
-				stm.getAllContainedElementAsType(CallFeature)
-			}*/
-			
-			
 			//EMF adds automatically the first {, thus we are checking if the container of the current block
 			//is an Operation, else a { is printed
 			if (not self.container.isInstanceOf(Operation)) and (not self.container.isInstanceOf(LambdaExpression)) then
@@ -410,9 +411,9 @@ package behavior {
 			var nbrStm : Integer init self.statement.size()
 			var i_stm : Integer init 0
 			self.eachOwnedElement{ stm |
-				
+
 				var str_statement : String init stm.createBehaviorJava(context).replace(".equals(null)", " == null").replace(";;", ";")
-				
+
 				var str_statement_splitted : OrderedSet<String> init str_statement.split(context.SEPARATOR_STATEMENT_FT) 
 				
 				if str_statement_splitted.size() == 2 then
@@ -602,7 +603,7 @@ package behavior {
 			if self.isCallFeatureAsStaticOperation() then
 			
 				if self.callsFunctionType() then
-					
+				
 					var ft_str : String init self.createStringFromFunctionType(context)
 					
 					result := ft_str
@@ -860,6 +861,7 @@ package behavior {
 				context.ftSuffixActivation := true
 				
 			else
+
 				if self.name == "stdio" then
 					result := result + "org.kermeta.compil.runtime.helper.io.StdIOUtil"
 				else
@@ -941,7 +943,7 @@ package behavior {
 		method createBehaviorJava(context : KM2EcoreContext) : String from Expression is do
 		
 			super(context)
-			
+
 			result := ""
 			
 			var localType : String init self.staticType.createBehaviorJava(context)
@@ -985,6 +987,7 @@ package behavior {
 		
 			// Patch that adds the 'function' keyword in case the assigned value is a function
 			if self.~value.isInstanceOf(LambdaExpression) then
+				stdio.errorln("Alert in createBehaviorJava Assignment")
 				right := "function " + right
 			end
 			

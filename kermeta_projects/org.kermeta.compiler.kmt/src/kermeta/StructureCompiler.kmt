@@ -1,4 +1,4 @@
-/* $Id: StructureCompiler.kmt,v 1.46 2008-08-26 09:10:09 cfaucher Exp $
+/* $Id: StructureCompiler.kmt,v 1.47 2008-08-26 13:04:14 cfaucher Exp $
  * Creation date: January 21, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -73,13 +73,25 @@ class Main {
 		var traceInput : String init ""
 */
 
-
+/*
 		var modelInput : String init "platform:/resource/org.kermeta.compiler.kmt/models/test1.km"
 		var output : String init "platform:/resource/org.kermeta.compiler.kmt/models/test1.ecore"
 		var traceInput : String init ""
+*/
+
+/*		
+		var modelInput : String init "platform:/resource/org.kermeta.compiler.kmt/models/dynamicAdaptation.km"
+		var output : String init "platform:/resource/org.kermeta.compiler.kmt/models/dynamicAdaptation.ecore"
+		var traceInput : String init ""
+*/
 
 
-		main_mode(modelInput, traceInput, output, CompilingMode.behaviorJava)
+		var modelInput : String init "platform:/resource/org.kermeta.compiler.kmt/models/weavingRoles.km"
+		var output : String init "platform:/resource/org.kermeta.compiler.kmt/models/weavingRoles.ecore"
+		var traceInput : String init ""
+
+
+		main_mode3(modelInput, traceInput, output, CompilingMode.behaviorJava)
 	end
 	
     operation main(modelInput : String, traceInput : String, output : String) : Void is do
@@ -229,7 +241,7 @@ class Main {
 							or op.asType(Operation).name == "addAt"
 							or op.asType(Operation).name == "createResource"
 							or op.asType(Operation).name == "saveAndValidateWithEMF"
-							or*/ op.asType(Operation).name == "generate" then //addAt generate KomposeScriptAll
+							or*/ op.asType(Operation).name == "matchStep2" then //addAt generate KomposeScriptAll
 					
 							stdio.writeln("================= " + op.asType(Operation).qualifiedName + " =================")
 							var javaSourceCode : String init op.createBehaviorJava(context)

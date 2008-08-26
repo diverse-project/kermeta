@@ -1,4 +1,4 @@
-/* $Id: Pass2.kmt,v 1.32 2008-08-26 09:10:07 cfaucher Exp $
+/* $Id: Pass2.kmt,v 1.33 2008-08-26 13:04:14 cfaucher Exp $
  * Creation date: January 21, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -63,7 +63,6 @@ package structure {
 		method applyPass2BehaviorJava(context : KM2EcoreContext) is do
 		
 			self.setLinks(context)
-			//super(context) 
 			
 			if self.isValueType() and (self.name != "Numeric") then
 				context.current_valueType := self
@@ -94,10 +93,10 @@ package structure {
 			
 				if emfNeedProperty.getPropertyInfos().size()>0 then
 					
-					//Create a new EAttribute to store the collection
+					// Create a new EAttribute to store the collection
 					var newProperty : EStructuralFeature init EAttribute.new
 					
-					//A Java Class is specified
+					// A Java Class is specified
 					if (not emfNeedProperty.getPropertyInfos().getValue("javaClass").isVoid()) and (emfNeedProperty.getPropertyInfos().getValue("javaClass")!="") then
 					
 						newProperty := EAttribute.new
@@ -128,7 +127,7 @@ package structure {
 						end
 						
 					else
-						//A ClassDefinition is specified
+						// A ClassDefinition is specified
 						if (not emfNeedProperty.getPropertyInfos().getValue("classDefinitionQN").isVoid()) and (emfNeedProperty.getPropertyInfos().getValue("classDefinitionQN")!="") then
 						
 							newProperty := EReference.new
@@ -152,7 +151,7 @@ package structure {
 							end
 					
 						else
-							//Nothing is specified
+							// Nothing is specified
 							newProperty.transient := true
 							var retrievedTypeDef : TypeDefinition init context.mu.getTypeDefinitionByQualifiedName("ecore::EEList")
 							if retrievedTypeDef.isInstanceOf(ClassDefinition) then
@@ -210,7 +209,9 @@ package structure {
 		method applyPass2BehaviorJava(context : KM2EcoreContext) is do
 			if not self.isFunctionType() then
 				if context.current_valueType.isVoid() then
+				
 					self.setLinks(context)
+					
 					super(context)
 					
 					//DO NOT REMOVE the following commented source code

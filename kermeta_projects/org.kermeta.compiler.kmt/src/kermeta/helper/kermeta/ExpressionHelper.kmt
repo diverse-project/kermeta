@@ -1,4 +1,4 @@
-/* $Id: ExpressionHelper.kmt,v 1.6 2008-08-22 11:44:08 cfaucher Exp $
+/* $Id: ExpressionHelper.kmt,v 1.7 2008-08-26 13:04:14 cfaucher Exp $
  * Creation date: Jul 25, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -174,8 +174,6 @@ aspect class CallFeature {
 			end
 		end
 		
-		
-		
 		var ft_str : String init ""
 		
 		context.pushFtSuffix()
@@ -189,9 +187,9 @@ aspect class CallFeature {
 		//if context.ftContextualSelf=="" then
 			context.ftContextualSelf := tgt.createBehaviorJava(context)
 		end
-		
+
 		context.ftSuffixActivation := true
-		
+
 		var callElement : String init ""
 		if self.container.isInstanceOf(VariableDecl) then
 			callElement := IdentifierHelper.new.getMangledIdentifier(self.container.asType(VariableDecl).identifier, context)
