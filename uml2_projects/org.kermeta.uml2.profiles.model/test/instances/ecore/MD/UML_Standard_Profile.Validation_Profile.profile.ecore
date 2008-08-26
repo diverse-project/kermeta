@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmi:XMI xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore">
+  <ecore:EPackage name="ValidationProfile" nsURI="http://ValidationProfile" nsPrefix="ValidationProfile">
+    <eClassifiers xsi:type="ecore:EEnum" name="SeverityKind">
+      <eLiterals name="debug"/>
+      <eLiterals name="info" value="1"/>
+      <eLiterals name="warning" value="2"/>
+      <eLiterals name="error" value="3"/>
+      <eLiterals name="fatal" value="4"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="validationSuite">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="base_Package" ordered="false"
+          lowerBound="1" eType="ecore:EClass platform:/plugin/org.eclipse.uml2.uml_2.1.1/model/UML.ecore#//Package"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="validationRule" eSuperTypes="#/0/invariant">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="base_Constraint" ordered="false"
+          lowerBound="1" eType="ecore:EClass platform:/plugin/org.eclipse.uml2.uml_2.1.1/model/UML.ecore#//Constraint"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="abbreviation" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore_2.3.1/model/Ecore.ecore#//EString"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="errorMessage" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore_2.3.1/model/Ecore.ecore#//EString"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="severity" lowerBound="1"
+          eType="#/0/SeverityKind"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="imaged">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="base_EnumerationLiteral"
+          ordered="false" lowerBound="1" eType="ecore:EClass platform:/plugin/org.eclipse.uml2.uml_2.1.1/model/UML.ecore#//EnumerationLiteral"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="highlightColor" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore_2.3.1/model/Ecore.ecore#//EString"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="debugIcon" eSuperTypes="#/0/imaged"/>
+    <eClassifiers xsi:type="ecore:EClass" name="infoIcon" eSuperTypes="#/0/imaged"/>
+    <eClassifiers xsi:type="ecore:EClass" name="warningIcon" eSuperTypes="#/0/imaged"/>
+    <eClassifiers xsi:type="ecore:EClass" name="errorIcon" eSuperTypes="#/0/imaged"/>
+    <eClassifiers xsi:type="ecore:EClass" name="fatalIcon" eSuperTypes="#/0/imaged"/>
+    <eClassifiers xsi:type="ecore:EClass" name="invariant">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="base_Constraint" ordered="false"
+          lowerBound="1" eType="ecore:EClass platform:/plugin/org.eclipse.uml2.uml_2.1.1/model/UML.ecore#//Constraint"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="definition">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="base_Constraint" ordered="false"
+          lowerBound="1" eType="ecore:EClass platform:/plugin/org.eclipse.uml2.uml_2.1.1/model/UML.ecore#//Constraint"/>
+    </eClassifiers>
+    <eSubpackages name="RuleValidationSuite" nsURI="http://ValidationProfile/RuleValidationSuite"
+        nsPrefix="Rule Validation Suite"/>
+    <eSubpackages name="OCLLibrary" nsURI="http://ValidationProfile/OCLLibrary" nsPrefix="OCL Library">
+      <eClassifiers xsi:type="ecore:EEnum" name="OclState"/>
+    </eSubpackages>
+    <eSubpackages name="UMLcompletenessconstraints" nsURI="http://ValidationProfile/UMLcompletenessconstraints"
+        nsPrefix="UML completeness constraints"/>
+    <eSubpackages name="UMLcorrectnessconstraints" nsURI="http://ValidationProfile/UMLcorrectnessconstraints"
+        nsPrefix="UML correctness constraints"/>
+  </ecore:EPackage>
+  <ecore:EClass name="_ValidationRuleCustomization"/>
+  <ecore:EClass/>
+  <ecore:EClass/>
+  <ecore:EClass/>
+  <ecore:EClass/>
+  <ecore:EClass/>
+  <ecore:EClass/>
+  <ecore:EClass eSuperTypes="#/9"/>
+  <ecore:EClass/>
+  <ecore:EClass/>
+  <ecore:EClass name="TBag"/>
+  <ecore:EClass name="TCollection"/>
+  <ecore:EClass name="TSequence"/>
+  <ecore:EClass name="TSet"/>
+  <ecore:EObject/>
+</xmi:XMI>

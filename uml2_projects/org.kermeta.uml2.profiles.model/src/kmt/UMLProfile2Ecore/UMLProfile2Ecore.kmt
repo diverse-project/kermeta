@@ -1,4 +1,4 @@
-/* $Id: UMLProfile2Ecore.kmt,v 1.7 2008-07-03 07:16:17 gperroui Exp $
+/* $Id: UMLProfile2Ecore.kmt,v 1.8 2008-08-26 11:42:47 gperroui Exp $
  * Creation date: November 29, 2007
  * License: EPL
  * Copyright:
@@ -39,14 +39,16 @@ class Main
 {
  
  	operation standaloneTestMain() : Void is do
- 		//main("platform:/resource/org.kermeta.uml2.profiles.model/test/instances/uml/UML_Standard_Profile.MagicDraw_Profile.profile.uml", "platform:/resource/org.kermeta.uml2.profiles.model/test/instances/ecore/UML_Standard_Profile.MagicDraw_Profile.profile.ecore",true)
- 		//main("platform:/resource/org.kermeta.uml2.profiles.model/test/instances/uml/UML_Standard_Profile.UML_Standard_Profile.profile.uml", "platform:/resource/org.kermeta.uml2.profiles.model/test/instances/ecore/UML_Standard_Profile.UML_Standard_Profile.profile.ecore",true)
- 		//main("platform:/resource/org.kermeta.uml2.profiles.model/model/uml/BasicClock_nested.profile.uml", "platform:/resource/org.kermeta.uml2.profiles.model/test/instances/bnestedclock.profile.ecore",false)
- 		//main("platform:/resource/org.kermeta.uml2.profiles.model/test/instances/uml/UML_Standard_Profile.MagicDraw_Profile.DSL_Customization.profile.uml", "platform:/resource/org.kermeta.uml2.profiles.model/test/instances/ecore/UML_Standard_Profile.MagicDraw_Profile.DSL_Customization.profile.ecore",true)
- 		//main("platform:/resource/org.kermeta.uml2.profiles.model/test/instances/uml/UML_Standard_Profile.Validation_Profile.profile.uml", "platform:/resource/org.kermeta.uml2.profiles.model/test/instances/ecore/UML_Standard_Profile.Validation_Profile.profile.ecore",true)
+ 	
  		//main("platform:/resource/org.kermeta.uml2.profiles.model/test/instances/AProfile.uml", "platform:/resource/org.kermeta.uml2.profiles.model/test/instances/AProfile.ecore",true)
  		//main("platform:/resource/org.kermeta.uml2.profiles.model/test/instances/BProfile.uml", "platform:/resource/org.kermeta.uml2.profiles.model/test/instances/BProfile.ecore",true)
- 		main("platform:/resource/org.kermeta.uml2.profiles.model/test/instances/uml/SysML.profile.uml","platform:/resource/org.kermeta.uml2.profiles.model/test/instances/ecore/SysML.profile.ecore",true)
+ 		//main("platform:/resource/org.kermeta.uml2.profiles.model/test/instances/uml/SysML.profile.uml","platform:/resource/org.kermeta.uml2.profiles.model/test/instances/ecore/SysML.profile.ecore",true)
+ 		
+ 		// Special magic Draw conversion group...
+	 	//main("platform:/resource/org.kermeta.uml2.profiles.model/test/instances/uml/MD/UML_Standard_Profile.MagicDraw_Profile.profile.uml", "platform:/resource/org.kermeta.uml2.profiles.model/test/instances/ecore/MD/UML_Standard_Profile.MagicDraw_Profile.profile.ecore",true)
+ 		//main("platform:/resource/org.kermeta.uml2.profiles.model/test/instances/uml/MD/UML_Standard_Profile.UML_Standard_Profile.profile.uml", "platform:/resource/org.kermeta.uml2.profiles.model/test/instances/ecore/MD/UML_Standard_Profile.UML_Standard_Profile.profile.ecore",true)
+ 		//main("platform:/resource/org.kermeta.uml2.profiles.model/test/instances/uml/MD/UML_Standard_Profile.MagicDraw_Profile.DSL_Customization.profile.uml", "platform:/resource/org.kermeta.uml2.profiles.model/test/instances/ecore/MD/UML_Standard_Profile.MagicDraw_Profile.DSL_Customization.profile.ecore",true)
+ 		main("platform:/resource/org.kermeta.uml2.profiles.model/test/instances/uml/MD/UML_Standard_Profile.Validation_Profile.profile.uml", "platform:/resource/org.kermeta.uml2.profiles.model/test/instances/ecore/MD/UML_Standard_Profile.Validation_Profile.profile.ecore",true)	
  	end
  	
 	operation main(input : String, output : String, isProfiled: Boolean) : Void is do 

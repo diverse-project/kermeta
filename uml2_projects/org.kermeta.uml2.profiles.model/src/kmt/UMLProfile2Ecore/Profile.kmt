@@ -1,4 +1,4 @@
-/* $Id: Profile.kmt,v 1.6 2008-07-03 07:16:17 gperroui Exp $
+/* $Id: Profile.kmt,v 1.7 2008-08-26 11:42:47 gperroui Exp $
  * Creation date: November 30, 2007
  * License: EPL
  * Copyright:
@@ -205,10 +205,16 @@ end
 	trace.traceLog("class name " + self.name)
 	if self.container != void then
 		trace.traceLog("Container is not void, trying to retreive it....")
-		var e:EObject init trace.getEcoreFromUMLQualName(self.container.asType(uml::Package).getQualifiedName)
-		trace.traceLog("container name: "+ e.asType(ecore::EPackage).name)
-		cls.ePackage := e.asType(ecore::EPackage)
-		cls.containingResource.instances.remove(cls)	
+		if self.container.isKindOf(uml::Package) then
+			var e:EObject init trace.getEcoreFromUMLQualName(self.container.asType(uml::Package).getQualifiedName)
+			trace.traceLog("container name: "+ e.asType(ecore::EPackage).name)
+			cls.ePackage := e.asType(ecore::EPackage)
+			cls.containingResource.instances.remove(cls)	
+		else
+			trace.traceLog("Unhandled Container type, name :" + self.container.toString)
+		end
+	else
+		trace.traceLog("Container is void putting the class anywhere....")
 	end
 	trace.traceLog("Quitting Class : Pass2")
 	end
@@ -410,6 +416,7 @@ else
 		// reference having base_ in their name refers to the metaclass 
 		//their containing stereotype extends. we need to retrieve it from the trace hashtables 
 		if ref.name.indexOf("base_") != -1 then
+			// TODO :manage the issue with inherited references...
 			var c:EClass init trace.getBaseType(self.type.name)
 			var t:ecore::EObject init trace.getEcoreFromUMLQualName(self.type.getQualifiedName)
 			if c != void then

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="BasicClock"
+    nsURI="http://BasicClock" nsPrefix="BasicClock">
+  <eClassifiers xsi:type="ecore:EEnum" name="Brand">
+    <eLiterals name="Casio"/>
+    <eLiterals name="Citizen" value="1"/>
+    <eLiterals name="Rolex" value="2"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AbstractWatch">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="brand" eType="#//Brand"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="base_Class" ordered="false"
+        lowerBound="1" eType="ecore:EClass platform:/plugin/org.eclipse.uml2.uml_2.1.1/model/UML.ecore#//Class"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="int" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore_2.3.1/model/Ecore.ecore#//EInt"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ConcreteWatch">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="base_Class" ordered="false"
+        lowerBound="1" eType="ecore:EClass platform:/plugin/org.eclipse.uml2.uml_2.1.1/model/UML.ecore#//Class"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="userManual" upperBound="-1"
+        eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore_2.3.1/model/Ecore.ecore#//EString"/>
+  </eClassifiers>
+  <eSubpackages name="DidierClock" nsURI="http://BasicClock/DidierClock" nsPrefix="DidierClock">
+    <eSubpackages name="DidierProfile" nsURI="http://BasicClock/DidierClock/DidierProfile"
+        nsPrefix="DidierProfile">
+      <eClassifiers xsi:type="ecore:EClass" name="DidierWatch" eSuperTypes="#//AbstractWatch"/>
+    </eSubpackages>
+  </eSubpackages>
+</ecore:EPackage>
