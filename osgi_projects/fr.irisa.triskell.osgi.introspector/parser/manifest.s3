@@ -805,7 +805,6 @@ Productions
 	target 						= {path}path | {dot}dot;
 	url_value					= {unquoted}unquoted_url | {quoted}quoted_url;
 	
-
 	parameter =
 		semicolon attribute;
 	attribute = 
@@ -821,5 +820,3 @@ Productions
 		identifier unique_name_suffix *;
 	unique_name_suffix =
 		dot identifier ;
-		
-		

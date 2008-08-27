@@ -561,7 +561,9 @@ public class ResolverDynamicWithSystemRepresentation implements Resolver {
 								Bundle bundleExportingPackage = framework
 										.getBundle(bundleOSGiExportingPackage
 												.getBundleId());
-								if (value.getBundle() == null
+								if (bundleExportingPackage == null) {
+									util.log(Level.ERROR, "There is a bundle (" + bundleOSGiExportingPackage.getSymbolicName() + ") which is define into OSGi but it is unknown in my representation. ", importPackages.get(value));
+								} else if (value.getBundle() == null
 										|| bundleOSGiExportingPackage
 												.getSymbolicName()
 												.equals(

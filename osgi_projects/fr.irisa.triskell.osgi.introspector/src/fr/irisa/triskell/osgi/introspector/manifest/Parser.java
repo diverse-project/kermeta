@@ -86,10 +86,10 @@ public class Parser {
 							+ bundle.getLocation() + ".\n" + message, bundle);
 			return false;
 		} catch (LexerException e) {
-			int line = Integer.parseInt(e.getMessage().substring(1, 1));
-			int pos = Integer.parseInt(e.getMessage().substring(3, 3));
+			int line = Integer.parseInt(e.getMessage().substring(1, 2));
+			int pos = Integer.parseInt(e.getMessage().substring(3, 4));
 			String text = e.getMessage().substring(
-					e.getMessage().indexOf("unknown token:"));
+					e.getMessage().indexOf("Unknown token:"));
 			StringBuffer message = new StringBuffer(
 					manifestContent.split("\n")[line]);
 			message.append("\n");
@@ -101,7 +101,8 @@ public class Parser {
 			}
 			util.log(Level.ERROR,
 					"There is an error when we try to parser the MANIFEST file on the bundle "
-							+ bundle.getLocation() + ".", bundle);
+							+ bundle.getLocation() + ".\n"
+									+ message, bundle);
 			return false;
 		} catch (IOException e) {
 			// must not appear
