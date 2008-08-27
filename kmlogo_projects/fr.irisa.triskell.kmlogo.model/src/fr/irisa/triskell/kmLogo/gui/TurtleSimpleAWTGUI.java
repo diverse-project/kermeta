@@ -1,4 +1,4 @@
-/* $Id: TurtleSimpleAWTGUI.java,v 1.7 2008-05-29 12:09:43 vmahe Exp $
+/* $Id: TurtleSimpleAWTGUI.java,v 1.8 2008-08-27 15:12:13 dvojtise Exp $
  * Project    : fr.irisa.triskell.kmLogo
  * File       : TurtleSimpleAWTGUI.java
  * License    : EPL
@@ -12,6 +12,7 @@
 package fr.irisa.triskell.kmLogo.gui;
 
 import java.awt.Canvas;
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
@@ -29,6 +30,7 @@ public class TurtleSimpleAWTGUI extends JFrame  implements ITurtleGUI {
     private Image image;
     private int size;
     private TurtleCanvas turtleCanvas;
+    
 	
 	public TurtleSimpleAWTGUI (String name, int size) {
 		super("Turtle GUI : " + name);
@@ -51,6 +53,7 @@ public class TurtleSimpleAWTGUI extends JFrame  implements ITurtleGUI {
 	}
 
 	public void drawLine(int x1, int y1, int x2, int y2) {
+		image.getGraphics().setColor(Color.WHITE);
 		image.getGraphics().drawLine(size/2+x1, size/2+y1, size/2+x2, size/2+y2);
 		turtleCanvas.repaint();
 	}
@@ -71,13 +74,16 @@ public class TurtleSimpleAWTGUI extends JFrame  implements ITurtleGUI {
 		
 		xPoints[3]= (int)(size/2+x + (10*Math.cos(angle - Math.PI/1.5)));
 		yPoints[3]= (int)(size/2+y + (10*Math.sin(angle - Math.PI/1.5)));
-				
-		image.getGraphics().drawPolygon(xPoints, yPoints, nPoints);
+		
+		Graphics g = image.getGraphics();
+		g.setColor(new Color(0,255,0));
+		g.getColor();
+		g.drawPolygon(xPoints, yPoints, nPoints);
 		
 		if(!isPenUp)
-			image.getGraphics().fillPolygon(xPoints, yPoints, nPoints);
+			g.fillPolygon(xPoints, yPoints, nPoints);
 		else
-			image.getGraphics().drawPolygon(xPoints, yPoints, nPoints);
+			g.drawPolygon(xPoints, yPoints, nPoints);
 		
 		repaint();
 	}
