@@ -1,4 +1,4 @@
-/* $Id: PrettyPrinterHelper.kmt,v 1.13 2008-08-25 16:21:41 cfaucher Exp $
+/* $Id: PrettyPrinterHelper.kmt,v 1.14 2008-08-27 16:31:25 cfaucher Exp $
  * Creation date: February 27, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -103,7 +103,9 @@ class CompilerHelperJava {
 				
 				str_param := e.createBehaviorJava(context)
 				
-				if (not context.current_valueType.isVoid()) and (str_param == "this") then
+				if ( (not context.current_valueType.isVoid())
+						or context.staticOperationMode
+					) and (str_param == "this") then
 					str_param := "self"
 				end
 				

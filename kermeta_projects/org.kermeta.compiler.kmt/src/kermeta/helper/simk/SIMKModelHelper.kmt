@@ -1,4 +1,4 @@
-/* $Id: SIMKModelHelper.kmt,v 1.7 2008-08-27 13:18:06 cfaucher Exp $
+/* $Id: SIMKModelHelper.kmt,v 1.8 2008-08-27 16:31:27 cfaucher Exp $
  * Creation date: Jul 21, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -20,6 +20,7 @@ using km2ecore::helper::java
 
 aspect class SIMKModel {
 
+	/** TODO TO COMMENT*/
 	operation retrieveOrCreateContext(class_qname : String, finalPackage_qname : String, usage : SMUsage, context : KM2EcoreContext) : SMContext is do
 		var sMContext : SMContext init self.sMContexts.detect{ c |
 			(c.qualifiedNameFinalPackage == finalPackage_qname)
@@ -36,6 +37,7 @@ aspect class SIMKModel {
 		result := sMContext
 	end
 
+	/** TODO TO COMMENT*/
 	operation retrieveOrCreateContextWithClass(class_qname : String, finalPackage_qname : String, usage : SMUsage, context : KM2EcoreContext) : SMContext is do
 		var sMContext : SMContext init retrieveOrCreateContext(class_qname, finalPackage_qname, usage, context)
 		
@@ -50,6 +52,7 @@ aspect class SIMKModel {
 		result := sMContext
 	end
 	
+	/** TODO TO COMMENT*/
 	operation retrieveOrCreateContextForWrapper(op : Operation, context : KM2EcoreContext) : SMContext is do
 		result := void
 		
@@ -63,12 +66,13 @@ aspect class SIMKModel {
 		end
 	end
 	
+	/** TODO TO COMMENT*/
 	operation retrieveOrCreateContextForSuper(op : Operation, context : KM2EcoreContext) : SMContext is do
 		result := void
 		
 		var sMContext : SMContext init retrieveOrCreateContextWithClass(
 			op.container.asType(ClassDefinition).name + "Super",
-			op.container.asType(ClassDefinition).qualifiedName + ".helper",
+			op.container.asType(ClassDefinition).container.asType(Package).qualifiedName.replace("::", ".") + ".helper",
 			SMUsage.Super,
 			context)
 		
@@ -80,6 +84,7 @@ aspect class SIMKModel {
 		end
 	end
 	
+	/** TODO TO COMMENT*/
 	operation retrieveOrCreateContextForRunner(op : Operation, context : KM2EcoreContext) : SMContext is do
 		result := void
 		
@@ -102,12 +107,14 @@ aspect class SIMKModel {
 }
 
 aspect class SMClass {
+	/** TODO TO COMMENT*/
 	operation setWrapperUsage() : Void is do
 		self.usages := SMUsage.Wrapper//.add(SMUsage.Wrapper)
 	end
 }
 
 aspect class StaticMethod {
+	/** TODO TO COMMENT*/
 	operation setWrapperUsage() : Void is do
 		self.usages := SMUsage.Wrapper//.add(SMUsage.Wrapper)
 	end

@@ -1,4 +1,4 @@
-/* $Id: KM2EcoreContext.kmt,v 1.31 2008-08-27 13:18:06 cfaucher Exp $
+/* $Id: KM2EcoreContext.kmt,v 1.32 2008-08-27 16:31:27 cfaucher Exp $
  * Creation date: February 14, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -118,6 +118,8 @@ class KM2EcoreContext {
 	attribute lastStatementStack : Stack<String> [1..1]	
 	
 	attribute resultOfLastFt : String [0..1]
+	
+	attribute staticOperationMode : Boolean [0..1]
 
 	operation initialize(modelInput : String, traceInput : String) : Void is do
 	
@@ -163,6 +165,8 @@ class KM2EcoreContext {
 		javaKeyWordList.initialize()
 		
 		self.initializeFrameworkOperations()
+		
+		self.staticOperationMode := false
 		
 		// Initializing the java type mappings.
 		//javaTypeMapping := JavaTypeMapping.new

@@ -1,4 +1,4 @@
-/* $Id: CreateBehavior.kmt,v 1.51 2008-08-27 13:18:06 cfaucher Exp $
+/* $Id: CreateBehavior.kmt,v 1.52 2008-08-27 16:31:26 cfaucher Exp $
  * Creation date: January 21, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -17,6 +17,7 @@ require "platform:/resource/org.kermeta.compiler.kmt/src/kermeta/helper/kermeta/
 require "platform:/resource/org.kermeta.compiler.kmt/src/kermeta/common/ContainmentTraversable.kmt"
 require "platform:/resource/org.kermeta.compiler.kmt/src/kermeta/common/TraceSource.kmt"
 require "platform:/resource/org.kermeta.compiler.kmt/src/kermeta/helper/simk/SimkHelper.kmt"
+require "platform:/resource/org.kermeta.compiler.kmt/src/kermeta/pass2/Postprocess.kmt"
 
 using kermeta::language::structure
 using kermeta::language::behavior
@@ -167,7 +168,7 @@ package structure {
 				staticMethod.name := self.name
 				staticMethod.setWrapperUsage()
 				
-				//By default, a self parameter has been added
+				// By default, a self parameter is added
 				var self_param : SMParameter init SMParameter.new()
 				self_param.name := "self"
 				
@@ -186,7 +187,7 @@ package structure {
 				
 				staticMethod.sMParameters.add(self_param)
 				
-				//Management of the Parameters
+				// Management of the Parameters
 				self.ownedParameter.each{ p |
 					var param : SMParameter init SMParameter.new()
 					param.name := p.name
@@ -201,13 +202,13 @@ package structure {
 							end
 						end
 					else
-						//This case should never happend
+						// This case should never happend
 					end
 					
 					staticMethod.sMParameters.add(param)
 				}
 				
-				//Management of the ReturnType
+				// Management of the ReturnType
 				var sMReturn : SMReturn init SMReturn.new()
 				staticMethod.sMReturn := sMReturn
 				
@@ -373,7 +374,7 @@ package behavior {
 			if (self.getCompiledJavaExtern()!="") and (context.compiledJavaExtern=="") then
 				context.compiledJavaExtern := getCompiledJavaExtern()
 				
-				if not context.current_valueType.isVoid() then
+				if (not context.current_valueType.isVoid()) or context.staticOperationMode then
 					context.compiledJavaExtern := context.compiledJavaExtern.replace("this", "self")
 				end
 			
@@ -543,6 +544,18 @@ package behavior {
 	}
 	
 	aspect class CallFeature {
+	
+		operation isParameter() : Boolean is do
+			result := false
+			if self.container.isInstanceOf(CallFeature) then
+				var exp : Expression init self.container.asType(CallFeature).parameters.detect{ p |
+					p==self
+				}
+				if not exp.isVoid() then
+					result := true
+				end
+			end
+		end
 	
 		operation fromUtil(context : KM2EcoreContext) : Boolean is do
 		
@@ -734,9 +747,9 @@ package behavior {
 												if cf_.staticOperation.isVoid() then
 													stdio.writeln("cf_.isVoid(): " + self.toString + " - " + self.name)
 												else
-													if cf_.fromUtil(context) or self.callsFunctionType() or  (cf_.staticOperation.getCompiledJavaExtern() != "") then
+													if cf_.fromUtil(context) or self.isParameter() or  (cf_.staticOperation.getCompiledJavaExtern() != "") then
 													else
-														stdio.writeln("PASS_PASS")
+														stdio.writeln("PASS_PASS" + self.name)
 														result := result + "."
 													end
 												end
@@ -910,28 +923,38 @@ package behavior {
 			//FIXME: Perhaps, we should fix the type parameters of the class definition
 			
 			result := ""//"//Call of the super operation\n"
-			//result := result + "((" + fromOperation_cd + ") this)." + owningOperation.name + "("
 			
 			var extended_class : EClass init self.getContainerAsType(ClassDefinition).asType(ClassDefinition).ecoreModelElement
 			var super_class : EClass init owningOperation.superOperation.container.asType(ClassDefinition).ecoreModelElement
-			
-			//stdio.writeln("extended_class: " + extended_class.name + " super_class: " + super_class.name)
 			
 			if owningOperation.isFunctionType() then
 				stdio.writeln("A callSuperFunctionType has been detected: " + owningOperation.qualifiedName())
 			else
 			
-			if ModelAnalizer.new().isExtendedBy(extended_class, super_class) then
+			if ModelAnalizer.new().isExtendedBy(extended_class, super_class) and (not context.staticOperationMode) then
 				result := result + "super." + owningOperation.name + "("
 			else
-				result := result + fromOperation_cd + "Super.super_" + IdentifierHelper.new.getMangledIdentifier(owningOperation.superOperation.getFinalName(), context) + "(this"
+				result := result + owningOperation.superOperation.container.asType(ClassDefinition).container.asType(Package).qualifiedName.replace("::", ".") +
+					".helper." +
+					owningOperation.superOperation.container.asType(ClassDefinition).name + "Super.super_" +
+					IdentifierHelper.new.getMangledIdentifier(owningOperation.superOperation.getFinalName(), context) + "("
 				
-				if self.parameters.size>0 then
+				if context.staticOperationMode then
+					result := result + "self"
+				else
+					result := result + "this"
+				end
+				
+				if self.parameters.size()>0 then
 					result := result + ", "
 				end
 				
 				// The super operation is added to the context for being compiled during the postprocess step
-				context.mu.superOperationsToCompileInHelper.add(owningOperation.superOperation)	
+				if context.staticOperationMode then
+					ModelingUnit.new().compileStaticOperation(owningOperation.superOperation, context)
+				else
+					context.mu.superOperationsToCompileInHelper.add(owningOperation.superOperation)
+				end
 			end
 			
 			self.beforeLambdaExpressionResult := ""
@@ -1119,7 +1142,7 @@ package behavior {
 			
 			result := "this"
 			
-			if not context.current_valueType.isVoid() then
+			if (not context.current_valueType.isVoid()) or context.staticOperationMode then
 				result := "self"
 			end
 			
