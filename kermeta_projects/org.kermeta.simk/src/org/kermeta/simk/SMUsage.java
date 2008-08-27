@@ -1,5 +1,5 @@
 /**
- * $Id: SMUsage.java,v 1.10 2008-08-27 08:02:44 cfaucher Exp $
+ * $Id: SMUsage.java,v 1.11 2008-08-27 13:23:57 cfaucher Exp $
  * Project : org.kermeta.simk
  * License : EPL
  * Copyright : IRISA / INRIA / Universite de Rennes 1
@@ -7,7 +7,7 @@
  * Creation date : 30 nov. 07
  * Authors : Cyril Faucher <cfaucher@irisa.fr> (first iteration)
  *
- * $Id: SMUsage.java,v 1.10 2008-08-27 08:02:44 cfaucher Exp $
+ * $Id: SMUsage.java,v 1.11 2008-08-27 13:23:57 cfaucher Exp $
  */
 package org.kermeta.simk;
 
@@ -28,14 +28,14 @@ import org.eclipse.emf.common.util.Enumerator;
  */
 public enum SMUsage implements Enumerator {
 	/**
-	 * The '<em><b>Runner</b></em>' literal object.
+	 * The '<em><b>Default</b></em>' literal object.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #RUNNER_VALUE
+	 * @see #DEFAULT_VALUE
 	 * @generated
 	 * @ordered
 	 */
-	RUNNER(0, "Runner", "Runner"), /**
+	DEFAULT(0, "Default", "Default"), /**
 	 * The '<em><b>Super</b></em>' literal object.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -75,22 +75,38 @@ public enum SMUsage implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	WRAPPER(5, "Wrapper", "Wrapper");
-
-	/**
-	 * The '<em><b>Runner</b></em>' literal value.
+	WRAPPER(5, "Wrapper", "Wrapper"), /**
+	 * The '<em><b>Runner</b></em>' literal object.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of '<em><b>Runner</b></em>' literal object isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
-	 * @see #RUNNER
-	 * @model name="Runner"
+	 * @see #RUNNER_VALUE
 	 * @generated
 	 * @ordered
 	 */
-	public static final int RUNNER_VALUE = 0;
+	RUNNER(6, "Runner", "Runner"), /**
+	 * The '<em><b>Invariant</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #INVARIANT_VALUE
+	 * @generated
+	 * @ordered
+	 */
+	INVARIANT(7, "Invariant", "Invariant");
+
+	/**
+	 * The '<em><b>Default</b></em>' literal value.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of '<em><b>Default</b></em>' literal object isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @see #DEFAULT
+	 * @model name="Default"
+	 * @generated
+	 * @ordered
+	 */
+	public static final int DEFAULT_VALUE = 0;
 
 	/**
 	 * The '<em><b>Super</b></em>' literal value.
@@ -168,6 +184,36 @@ public enum SMUsage implements Enumerator {
 	public static final int WRAPPER_VALUE = 5;
 
 	/**
+	 * The '<em><b>Runner</b></em>' literal value.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of '<em><b>Runner</b></em>' literal object isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @see #RUNNER
+	 * @model name="Runner"
+	 * @generated
+	 * @ordered
+	 */
+	public static final int RUNNER_VALUE = 6;
+
+	/**
+	 * The '<em><b>Invariant</b></em>' literal value.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of '<em><b>Invariant</b></em>' literal object isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @see #INVARIANT
+	 * @model name="Invariant"
+	 * @generated
+	 * @ordered
+	 */
+	public static final int INVARIANT_VALUE = 7;
+
+	/**
 	 * An array of all the '<em><b>SM Usage</b></em>' enumerators.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -175,12 +221,14 @@ public enum SMUsage implements Enumerator {
 	 */
 	private static final SMUsage[] VALUES_ARRAY =
 		new SMUsage[] {
-			RUNNER,
+			DEFAULT,
 			SUPER,
 			DERIVED_PROPERTY,
 			PRE_CONDITION,
 			POST_CONDITION,
 			WRAPPER,
+			RUNNER,
+			INVARIANT,
 		};
 
 	/**
@@ -231,12 +279,14 @@ public enum SMUsage implements Enumerator {
 	 */
 	public static SMUsage get(int value) {
 		switch (value) {
-			case RUNNER_VALUE: return RUNNER;
+			case DEFAULT_VALUE: return DEFAULT;
 			case SUPER_VALUE: return SUPER;
 			case DERIVED_PROPERTY_VALUE: return DERIVED_PROPERTY;
 			case PRE_CONDITION_VALUE: return PRE_CONDITION;
 			case POST_CONDITION_VALUE: return POST_CONDITION;
 			case WRAPPER_VALUE: return WRAPPER;
+			case RUNNER_VALUE: return RUNNER;
+			case INVARIANT_VALUE: return INVARIANT;
 		}
 		return null;
 	}

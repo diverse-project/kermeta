@@ -1,5 +1,5 @@
 /**
- * $Id: SimkPackageImpl.java,v 1.12 2008-08-27 08:02:44 cfaucher Exp $
+ * $Id: SimkPackageImpl.java,v 1.13 2008-08-27 13:23:57 cfaucher Exp $
  * Project : org.kermeta.simk
  * License : EPL
  * Copyright : IRISA / INRIA / Universite de Rennes 1
@@ -7,7 +7,7 @@
  * Creation date : 30 nov. 07
  * Authors : Cyril Faucher <cfaucher@irisa.fr> (first iteration)
  *
- * $Id: SimkPackageImpl.java,v 1.12 2008-08-27 08:02:44 cfaucher Exp $
+ * $Id: SimkPackageImpl.java,v 1.13 2008-08-27 13:23:57 cfaucher Exp $
  */
 package org.kermeta.simk.impl;
 
@@ -558,12 +558,14 @@ public class SimkPackageImpl extends EPackageImpl implements SimkPackage {
 
 		// Initialize enums and add enum literals
 		initEEnum(smUsageEEnum, SMUsage.class, "SMUsage");
-		addEEnumLiteral(smUsageEEnum, SMUsage.RUNNER);
+		addEEnumLiteral(smUsageEEnum, SMUsage.DEFAULT);
 		addEEnumLiteral(smUsageEEnum, SMUsage.SUPER);
 		addEEnumLiteral(smUsageEEnum, SMUsage.DERIVED_PROPERTY);
 		addEEnumLiteral(smUsageEEnum, SMUsage.PRE_CONDITION);
 		addEEnumLiteral(smUsageEEnum, SMUsage.POST_CONDITION);
 		addEEnumLiteral(smUsageEEnum, SMUsage.WRAPPER);
+		addEEnumLiteral(smUsageEEnum, SMUsage.RUNNER);
+		addEEnumLiteral(smUsageEEnum, SMUsage.INVARIANT);
 
 		// Create resource
 		createResource(eNS_URI);

@@ -60,11 +60,13 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="SMReturn" eSuperTypes="#//SMTypedElement"/>
   <eClassifiers xsi:type="ecore:EEnum" name="SMUsage">
-    <eLiterals name="Runner"/>
+    <eLiterals name="Default" literal="Default"/>
     <eLiterals name="Super" value="1" literal="Super"/>
     <eLiterals name="DerivedProperty" value="2"/>
     <eLiterals name="PreCondition" value="3"/>
     <eLiterals name="PostCondition" value="4"/>
     <eLiterals name="Wrapper" value="5" literal="Wrapper"/>
+    <eLiterals name="Runner" value="6" literal="Runner"/>
+    <eLiterals name="Invariant" value="7" literal="Invariant"/>
   </eClassifiers>
 </ecore:EPackage>
