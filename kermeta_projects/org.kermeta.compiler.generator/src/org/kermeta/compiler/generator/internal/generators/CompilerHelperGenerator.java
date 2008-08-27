@@ -8,7 +8,7 @@
  * Technologies), Jacques Lescot (Anyware Technologies) - initial API and
  * implementation
  ******************************************************************************/
-/*$Id: CompilerHelperGenerator.java,v 1.17 2008-08-27 08:02:49 cfaucher Exp $
+/*$Id: CompilerHelperGenerator.java,v 1.18 2008-08-27 14:16:37 cfaucher Exp $
 * Project : org.kermeta.compiler.generator
 * File : 	CompilerHelperGenerator.java
 * License : EPL
@@ -63,11 +63,12 @@ public class CompilerHelperGenerator extends AbstractGenerator {
 	/** ******************** */
 	/** JET Template files */
 	/** ******************** */
-	private static final String TEST_HELPER_JAVA = "templateHelper/helper/Helper.javajet";
 
 	private static final String RUNNER_JAVA = "templateHelper/runner/Runner.javajet";
 	
 	private static final String WRAPPER_JAVA = "templateHelper/helper/Wrapper.javajet";
+	
+	private static final String SUPER_JAVA = "templateHelper/helper/Super.javajet";
 	
 	private static final String EXECUTION_CONTEXT_JAVA = "templateHelper/helper/ExecutionContext.javajet";
 
@@ -129,10 +130,6 @@ public class CompilerHelperGenerator extends AbstractGenerator {
 			
 			if( this.simkModel!=null ) {
 				generateHelpers(this.kmFilePath_forReflection, this.simkModel, pathProject, monitor);
-			}
-			
-			if( this.simkModel!=null ) {
-				generateHelperModel(this.simkModel, pathProject, monitor);
 			}
 					
 			generateClassPath(project, pathProject);
@@ -251,6 +248,7 @@ public class CompilerHelperGenerator extends AbstractGenerator {
 			generateRunner(simkConf, projectPath);
 			generateLauncher(simkConf, projectPath);
 			generateWrapper(simkConf, projectPath);
+			generateSuper(simkConf, projectPath);
 			generateExecutionContext(kmFilePath_forReflection, projectPath);
 
 			monitor.worked(1);
@@ -268,58 +266,6 @@ public class CompilerHelperGenerator extends AbstractGenerator {
 							null,
 							"CoreException : an error occured during helper generation. See error logs for more details.",
 							IStatus.ERROR);
-		}
-	}
-
-	// ---------------------------------------------------------
-	// Generate the classes for the helpers
-	// ---------------------------------------------------------
-	private void generateHelperModel(SIMKModel simkConf, IPath projectPath,
-			IProgressMonitor monitor) {
-		try {
-
-			monitor.subTask("Files creation");
-
-			generateTestHelperModel(simkConf, projectPath);
-
-			monitor.worked(1);
-		} catch (JETException e) {
-			GeneratorPlugin.log(e);
-			GeneratorPlugin
-					.displayDialog(
-							null,
-							"JETException : an error occured during helper generation. See error logs for more details.",
-							IStatus.ERROR);
-		} catch (CoreException e) {
-			GeneratorPlugin.log(e);
-			GeneratorPlugin
-					.displayDialog(
-							null,
-							"CoreException : an error occured during helper generation. See error logs for more details.",
-							IStatus.ERROR);
-		}
-	}
-	
-	private void generateTestHelpers(GenModel conf, IPath projectPath)
-			throws JETException, CoreException {
-		for(GenPackage genpack : conf.getAllGenPackagesWithClassifiers()) {
-			applyTemplate(genpack, getTemplateURI(TEST_HELPER_JAVA), projectPath
-					.append("/" + SOURCE_DIRECTORY + "/" + EcoreHelper.getQualifiedName(genpack.getEcorePackage(), "/") + "/helper/"
-							+ conf.getGenPackages().get(0).getPrefix()
-							+ "Helper.java"), conf.isForceOverwrite());
-		}
-	}
-	
-	private void generateTestHelperModel(SIMKModel simkConf, IPath projectPath)
-			throws JETException, CoreException {
-		for(StaticMethod sm : simkConf.getStaticMethods()) {
-			// temporarily in stand by
-			/*if(sm.getUsages().contains(SMUsage.FUNCTION_TYPE) && !sm.getSMContext().getDeepestPackage().getQualifiedName().contains("kermeta")){
-			applyTemplate(sm, getTemplateURI(TEST_HELPER_JAVA), projectPath
-					.append("/" + SOURCE_DIRECTORY + "/" + sm.getSMContext().getDeepestPackage().getQualifiedName().replace(".", "/") + "/helper/"
-							+ CodeGenUtil.capName(sm.getParentMethodFromModel().getName()) + "_" + sm.getId()
-							+ "_Helper.java"), configuration.isForceOverwrite());
-			}*/
 		}
 	}
 
@@ -419,6 +365,27 @@ public class CompilerHelperGenerator extends AbstractGenerator {
 			applyTemplate(
 					_context,
 					getTemplateURI(WRAPPER_JAVA),
+					projectPath.append("/" + SOURCE_DIRECTORY + "/" + _context.getSMClass().getQualifiedName().replace(".", "/") + ".java"),
+					configuration.isForceOverwrite());
+			}
+		}
+	}
+	
+	/**
+	 * 
+	 * @param simkConf
+	 * @param projectPath
+	 * @throws JETException
+	 * @throws CoreException
+	 */
+	private void generateSuper(SIMKModel simkConf, IPath projectPath)
+			throws JETException, CoreException {
+		
+		for (SMContext _context : simkConf.getSMContexts()) {
+			if ( _context.getSMClass().getUsages() == SMUsage.SUPER ) {
+			applyTemplate(
+					_context,
+					getTemplateURI(SUPER_JAVA),
 					projectPath.append("/" + SOURCE_DIRECTORY + "/" + _context.getSMClass().getQualifiedName().replace(".", "/") + ".java"),
 					configuration.isForceOverwrite());
 			}
