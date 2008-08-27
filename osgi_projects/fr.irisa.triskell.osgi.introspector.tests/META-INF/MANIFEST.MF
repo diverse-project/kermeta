@@ -1,0 +1,16 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: OSGi Introspector tests JUnit
+Bundle-SymbolicName: fr.irisa.triskell.osgi.introspector.tests
+Bundle-Version: 1.0.0
+Bundle-Activator: fr.irisa.triskell.osgi.introspector.tests.activator.Activator
+Bundle-Vendor: Triskell - IRISA
+Import-Package: fr.irisa.triskell.osgi.introspector,
+ framework,
+ manifest,
+ org.apache.tools.ant,
+ org.apache.tools.ant.util,
+ org.osgi.framework;version="1.3.0"
+Require-Bundle: org.junit4
+Bundle-ClassPath: .,
+ lib/ant-junit.jar
