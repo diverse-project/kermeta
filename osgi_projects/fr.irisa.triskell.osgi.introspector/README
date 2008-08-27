@@ -1,0 +1,44 @@
+INSTALLATION
+
+1.OSGi
+
+If you want install the OSGi introspector into an OSGi platform, you must installed the two bundles with the "start" command of the OSGi console.
+
+2.Eclipse
+
+Into Eclipse, it's just necessary to add these two bundles into the folder "plugins" on the Eclipse installation location.
+
+
+USE
+
+Dynamic Introspector :
+---------------------
+	ServiceReference refs = context.getServiceReference(OSGiIntrospectorDynamic.class.getName());
+	if (refs != null) {
+		OSGiIntrospectorDynamic introspector = (OSGiIntrospectorDynamic)context.getService(refs);
+		introspector.introspect(<destination>, <boolean>);
+	}
+	
+If you want modelize the resources available into the bundle, <boolean> must be true.
+<destination> is a String which define where the model.
+
+Static Introspector :
+---------------------
+There are two way to use the Static Introspector.
+
+1.Into an OSGi platform
+
+ServiceReference refs = context.getServiceReference(OSGiIntrospectorStatic.class.getName());
+	if (refs != null) {
+		OSGiIntrospectorStatic introspector = (OSGiIntrospectorStatic)context.getService(refs);
+		introspector.generateFramework(<frameworkFolder>,<destination>, <boolean>);
+	}
+
+2.Into a standard application
+
+OSGiIntrospectorStatic introspector = new OSGiIntrospectorStatic(new OSGiIntrospectorUtilStatic());
+introspector.generateFramework(<frameworkFolder>,<destination>, <boolean>);
+
+If you want modelize the resources available into the bundle, <boolean> must be true.
+<destination> is a String which define where the model.
+<frameworkFolder> is a String which is the path of a file which contains all the bundle of the framework.
