@@ -2,12 +2,12 @@
 	 package="org.kermeta.compiler.generator.templates"
 	 imports="org.eclipse.emf.codegen.util.* org.eclipse.emf.codegen.ecore.genmodel.* fr.irisa.triskell.eclipse.ecore.* org.kermeta.compiler.generator.helper.model.* org.kermeta.simk.* fr.irisa.triskell.kermeta.language.structure.NamedElement"
 	 class="Super"
-	 version="$Id: Super.javajet,v 1.1 2008-08-27 14:15:52 cfaucher Exp $" %>
+	 version="$Id: Super.javajet,v 1.2 2008-08-27 16:23:27 cfaucher Exp $" %>
 <%SMContext smContext = (SMContext) argument;%>
 
 <%SMClass superClass = smContext.getSMClass();%>
 
-package kermeta.standard.helper;
+package <%=smContext.getQualifiedNameFinalPackage()%>;
 
 
 /**
@@ -18,11 +18,13 @@ public class <%=superClass.getName()%> {
 
 	<% for(StaticMethod helperMethod : smContext.getStaticMethods()) { %>
 	
+	<% String typeParameters = "<G>";%>
+	
 	/**
 	 *
 	 * @generated
 	 */
-	public static <%=helperMethod.getSMReturn().getType()%> <%=helperMethod.getName()%>(
+	public static <%=typeParameters%> <%=helperMethod.getSMReturn().getType()%> <%=helperMethod.getName()%>(
 		<% int i=0;
 			for(SMParameter param : helperMethod.getSMParameters()) {
 				if(i==1) {%>, <%} else {i=1;}%>
