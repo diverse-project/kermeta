@@ -49,12 +49,8 @@ public class Parser {
 	 * This function is used to generate the MANIFEST representation with all
 	 * entry MANIFEST representation
 	 * 
-	 * @param manifest
-	 * @param manifestFile
+	 * @param manifestContent the String representation of the MAMNIFEST.MF
 	 * @param bundle
-	 * @throws ParserException
-	 * @throws LexerException
-	 * @throws IOException
 	 */
 	public boolean parse(String manifestContent, Bundle bundle) {
 		try {

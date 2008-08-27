@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: VersionImpl.java,v 1.7 2008-08-22 12:43:32 edaubert Exp $
+ * $Id: VersionImpl.java,v 1.8 2008-08-27 14:18:33 edaubert Exp $
  */
 package manifest.impl;
 
@@ -193,8 +193,6 @@ public class VersionImpl extends EObjectImpl implements Version {
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 */
 	public void setQualifier(String newQualifier) {
-		// TODO tester la validité de la chaine de caractère
-		// ne doit contenir que des lettres, des chiffres '-' ou '_'
 		boolean valid = newQualifier.matches("[a-zA-Z-0-9\\-_]*");
 		if (valid) {
 			String oldQualifier = qualifier;

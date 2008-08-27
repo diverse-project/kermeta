@@ -253,7 +253,7 @@ public class OSGiIntrospectorDynamic {
 	 * 
 	 * @return true if the resolution is OK, false else.
 	 */
-	public void resolve(boolean systemRepresentation) {
+	private void resolve(boolean systemRepresentation) {
 		Resolver resolver = util.getResolver(systemRepresentation);
 		resolver.resolveRequireBundle(this.parser.getUnresolvedRequireBundle(),
 				this.framework);

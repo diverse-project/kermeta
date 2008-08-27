@@ -34,6 +34,7 @@ public class OSGiIntrospectorUtilStatic extends OSGiIntrospectorUtil {
 
 	@Override
 	public void log(Level level, String message, Bundle bundle) {
+		// TODO afficher correctement les retours à la ligne dans les logs
 		if (bundle == null) {
 			defineLoggerProperties("OSGi_Introspector");
 			logger = Logger.getLogger("OSGi_Introspector");

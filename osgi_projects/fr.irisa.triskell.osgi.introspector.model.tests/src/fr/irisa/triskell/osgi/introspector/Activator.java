@@ -1,11 +1,9 @@
 package fr.irisa.triskell.osgi.introspector;
 
-import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.net.URL;
 
 import javax.xml.transform.Source;
@@ -15,7 +13,6 @@ import javax.xml.transform.stream.StreamResult;
 import javax.xml.transform.stream.StreamSource;
 
 import org.apache.tools.ant.BuildException;
-import org.apache.tools.ant.taskdefs.optional.junit.FormatterElement;
 import org.apache.tools.ant.taskdefs.optional.junit.JUnitTest;
 import org.apache.tools.ant.taskdefs.optional.junit.JUnitTestRunner;
 import org.apache.tools.ant.taskdefs.optional.junit.XMLJUnitResultFormatter;
@@ -37,7 +34,6 @@ public class Activator implements BundleActivator {
 		try {
 			(new Activator()).start(null);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -139,7 +135,7 @@ public class Activator implements BundleActivator {
         return stylesheetURL.openStream();
     }
     
-    private void printFile(URL url) {
+    /*private void printFile(URL url) {
     	try {
     		System.err.println(url.toExternalForm());
 			BufferedReader reader = new BufferedReader(new InputStreamReader(url.openStream()));
@@ -148,8 +144,7 @@ public class Activator implements BundleActivator {
 				System.out.println(line);
 			}
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-    }
+    }*/
 }

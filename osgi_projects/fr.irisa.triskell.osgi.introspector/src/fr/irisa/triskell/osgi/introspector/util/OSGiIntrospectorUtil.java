@@ -48,6 +48,9 @@ import framework.Framework;
  */
 public abstract class OSGiIntrospectorUtil {
 
+	Logger logger;
+	String logLocation;
+
 	public abstract Resolver getResolver(boolean withSystemRepresentation);
 
 	public Package convertToJavaElement(Folder folder, boolean bundleClassPath) {
@@ -191,9 +194,6 @@ public abstract class OSGiIntrospectorUtil {
 		}
 	}
 
-	Logger logger;
-	String logLocation;
-
 	/**
 	 * This function is used to check if a reference exist as a Java element
 	 * (Package or Class). This function look for into the Bundle-ClassPath and
@@ -234,7 +234,8 @@ public abstract class OSGiIntrospectorUtil {
 								return true;
 							}
 						} else {
-							// must not appear
+							// must not appear because if tmp is null, a bundle-classpath entry is unvalid
+							// and before use the bundle-classpath, we check if it is resolved.
 						}
 					}
 				}
@@ -258,7 +259,6 @@ public abstract class OSGiIntrospectorUtil {
 	public abstract int entryExist(String reference, Bundle bundle);
 
 	int entryExist(String reference, java.io.File ioFile) {
-		// java.io.File ioFile = new java.io.File(file.getAbsolutePath());
 		java.io.File bundleFile = null;
 		if (ioFile.isDirectory()) {
 			bundleFile = new java.io.File(ioFile.getAbsoluteFile()
@@ -307,7 +307,6 @@ public abstract class OSGiIntrospectorUtil {
 	 * @return a {@link File} if the file exist, null else.
 	 */
 	java.io.File getEntry(String reference, java.io.File ioFile) {
-		// java.io.File ioFile = new java.io.File(file.getAbsolutePath());
 		java.io.File bundleFile = null;
 		if (ioFile.isDirectory()) {
 			bundleFile = new java.io.File(ioFile.getAbsoluteFile()
@@ -343,7 +342,6 @@ public abstract class OSGiIntrospectorUtil {
 			} catch (IOException e) {
 				log(Level.ERROR, "Error during reading a file\n"
 						+ e.getMessage(), null);
-				// e.printStackTrace();
 				return null;
 			}
 		}
@@ -377,18 +375,9 @@ public abstract class OSGiIntrospectorUtil {
 	 * to the logs file without close the OSGi platform.
 	 */
 	public void shutdownLoggers() {
+		// FIXME the logger are not shutdowns
 		LogManager.shutdown();
 	}
-
-	/**
-	 * This function is used to set the {@link BundleContext}.
-	 * 
-	 * @param context
-	 *            the {@link BundleContext}.
-	 */
-	/*
-	 * public void setContext(BundleContext context) { this.context = context; }
-	 */
 
 	/**
 	 * This function is used to generate the XMI file which represent an OSGi

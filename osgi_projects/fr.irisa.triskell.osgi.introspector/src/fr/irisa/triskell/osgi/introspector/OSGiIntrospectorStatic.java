@@ -163,10 +163,7 @@ public class OSGiIntrospectorStatic {
 			read = reader.readLine();
 		}
 		reader.close();
-		// line = line.replace("\n ", "");
 		line.append("\n");
-
-		// System.err.println(line);
 
 		return line.toString();
 
@@ -277,8 +274,6 @@ public class OSGiIntrospectorStatic {
 				return valid;
 			}
 		} catch (IOException e) {
-			// System.out.println(jarFile.getAbsolutePath());
-			// e.printStackTrace();
 			util.log(Level.ERROR, jarFile.getAbsolutePath()
 					+ " is not a valid Jar file.", null);
 			return false;
@@ -296,7 +291,7 @@ public class OSGiIntrospectorStatic {
 	 * 
 	 * @return true if the resolution is OK, false else.
 	 */
-	public void resolve(boolean systemRepresentation) {
+	private void resolve(boolean systemRepresentation) {
 		Resolver resolver = util.getResolver(systemRepresentation);
 		resolver.resolveRequireBundle(this.parser.getUnresolvedRequireBundle(),
 				this.framework);

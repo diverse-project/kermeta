@@ -51,11 +51,16 @@ public interface Resolver {
 	 * not already resolved. It look for into Fragment Bundle to find the
 	 * Bundle-ClassPath entry element.
 	 * 
-	 * @param bundleClassPaths
-	 * @param bundles
+	 * @param bundleClassPaths a map which contains all unresolved {@link ClassPath} and the bundle which is associated
 	 */
 	public void resolveBundleClassPath(Map<ClassPath, Bundle> classPaths);
 
+	/**
+	 * This function is used to resolve the Bundle-NativeCode entry which have
+	 * not already resolved. It look for into Fragment Bundle to find the
+	 * Bundle-NativeCode entry element.
+	 * @param nativeCodes a map which contains all unresolved {@link NativeCode} and the bundle which is associated
+	 */
 	public void resolveBundleNativeCode(Map<NativeCode, Bundle> nativeCodes);
 
 	/**
@@ -63,7 +68,6 @@ public interface Resolver {
 	 * {@link MANIFEST}
 	 * 
 	 * @param exportPackages
-	 * @param bundles
 	 */
 	public void resolveExportPackage(Map<Package, Bundle> exportPackages);
 
