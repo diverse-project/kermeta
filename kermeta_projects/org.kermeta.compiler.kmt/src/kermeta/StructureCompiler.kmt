@@ -1,4 +1,4 @@
-/* $Id: StructureCompiler.kmt,v 1.48 2008-08-26 15:53:02 cfaucher Exp $
+/* $Id: StructureCompiler.kmt,v 1.49 2008-08-27 13:18:06 cfaucher Exp $
  * Creation date: January 21, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -18,6 +18,7 @@ require "http://www.eclipse.org/emf/2002/Ecore"
 require "pass1/Pass1.kmt"
 require "pass2/Pass2.kmt"
 require "pass2/Preprocess.kmt"
+require "pass2/Postprocess.kmt"
 require "KM2EcoreContext.kmt"
 require "helper/kermeta/KermetaHelper.kmt"
 
@@ -135,6 +136,7 @@ class Main {
 			context.mu.preprocess(context)
 			stdio.writeln("KermetaCompiler - Pass 2 with the mode: " + context.mode.name)
 			context.mu.applyPass2BehaviorJava(context)
+			context.mu.postprocess(context)
 		end
 		
 		stdio.writeln("KermetaCompiler - Pass 2 is finished")
@@ -246,7 +248,7 @@ class Main {
 							or op.asType(Operation).name == "addAt"
 							or op.asType(Operation).name == "createResource"
 							or op.asType(Operation).name == "saveAndValidateWithEMF"
-							or*/ op.asType(Operation).name == "matchStep2" then //addAt generate KomposeScriptAll
+							or*/ op.asType(Operation).name == "mute" then //addAt matchStep2 generate KomposeScriptAll
 					
 							stdio.writeln("================= " + op.asType(Operation).qualifiedName + " =================")
 							var javaSourceCode : String init op.createBehaviorJava(context)

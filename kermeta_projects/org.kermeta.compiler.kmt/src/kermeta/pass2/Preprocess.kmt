@@ -1,4 +1,4 @@
-/* $Id: Preprocess.kmt,v 1.4 2008-07-23 08:22:14 cfaucher Exp $ 
+/* $Id: Preprocess.kmt,v 1.5 2008-08-27 13:18:06 cfaucher Exp $ 
  * Creation : July 1, 2008
  * Licence  : EPL 
  * Copyright:
@@ -18,11 +18,15 @@ using km2ecore
 
 aspect class ModelingUnit {
 
+	operation preprocess( context : KM2EcoreContext ) : Void is do
+		self.createKRuntimeError(context)
+	end
+	
 	/**
 	 * We cannot use an Alias to define this indiretion because the concept of KRuntimeError does not exist
 	 * in framework.ecore, thus we create in this operation a new EDataType that targets the KRuntimeError Java Impl
 	 */
-	operation preprocess( context : KM2EcoreContext ) : Void is do 
+	operation createKRuntimeError( context : KM2EcoreContext ) : Void is do
 		
 		//Creation of an EDataType for the exception
 		var exception_EDataType : EDataType init EDataType.new
@@ -33,4 +37,5 @@ aspect class ModelingUnit {
 		self.retrievePackage("kermeta::exceptions").ecoreModelElement.eClassifiers().add(exception_EDataType)
 		
 	end
+	
 }

@@ -1,0 +1,72 @@
+/* $Id: Postprocess.kmt,v 1.1 2008-08-27 13:18:06 cfaucher Exp $ 
+ * Creation : August 27, 2008
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            Cyril Faucher <cfaucher@irisa.fr>
+ */
+
+package kermeta::language::structure;
+
+require kermeta
+require "http://www.eclipse.org/emf/2002/Ecore"
+require "platform:/resource/org.kermeta.compiler.kmt/src/kermeta/helper/kermeta/KermetaHelper.kmt"
+require "platform:/resource/org.kermeta.compiler.kmt/src/kermeta/KM2EcoreContext.kmt"
+require "platform:/resource/org.kermeta.compiler.kmt/src/kermeta/helper/java/JavaHelper.kmt"
+require "platform:/resource/org.kermeta.compiler.kmt/src/kermeta/helper/simk/SimkHelper.kmt"
+
+using ecore
+using km2ecore
+using km2ecore::helper::java
+using simk
+
+aspect class ModelingUnit {
+
+	reference superOperationsToCompileInHelper : Operation [0..*]
+	
+	operation postprocess( context : KM2EcoreContext ) : Void is do
+		self.compileSuperOperation(context)
+	end
+	
+	operation compileSuperOperation( context : KM2EcoreContext ) : Void is do 
+		
+		// Compile the super operation in helper in using Simk
+		self.superOperationsToCompileInHelper.each{ op |
+			compileStaticOperation(op, context)
+		}
+		
+	end
+	
+	operation compileStaticOperation( op : Operation, context : KM2EcoreContext ) : Void is do
+		
+		var smContext : SMContext init context.simkModel.retrieveOrCreateContextForSuper(op, context)
+		
+		if not smContext.isVoid() then
+		
+			var staticMethod : StaticMethod init StaticMethod.new()
+			staticMethod.name := "super_" + IdentifierHelper.new.getMangledIdentifier(op.getFinalName(), context)
+			staticMethod.body := op.body.createBehaviorJava(context)
+			
+			staticMethod.usages := SMUsage.Super
+			context.simkModel.staticMethods.add(staticMethod)
+			smContext.staticMethods.add(staticMethod)
+			
+			// Set the return type
+			var smReturn : SMReturn init SMReturn.new
+			if not Operation.new().isVoidType(op.type.createBehaviorJava(context)) then
+				smReturn.type := op.type.createBehaviorJava(context)
+			else
+				smReturn.type := "void"
+			end
+			staticMethod.sMReturn := smReturn
+			
+			// Set the parameters
+			var smParameter : SMParameter init SMParameter.new
+			smParameter.name := "self"
+			smParameter.type := op.container.asType(ClassDefinition).qualifiedName.replace("::", ".")
+			staticMethod.sMParameters.add(smParameter)
+		
+		end
+	end
+	
+}

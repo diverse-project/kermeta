@@ -1,4 +1,4 @@
-/* $Id: CreateBehavior.kmt,v 1.50 2008-08-26 15:53:02 cfaucher Exp $
+/* $Id: CreateBehavior.kmt,v 1.51 2008-08-27 13:18:06 cfaucher Exp $
  * Creation date: January 21, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -257,16 +257,13 @@ package structure {
 	
 	aspect class ParameterizedType {
 		method createBehaviorJava(context : KM2EcoreContext) : String from Type is do
-stdio.writeln("tutu: " + self.toString)
+
 			if self.typeDefinition.getEMFInstanceClassName()!="" then
 				result := self.typeDefinition.getEMFInstanceClassName()
 			else
-			stdio.writeln("tutu2: " + self.toString)
 				result := self.getTypeQName().replace("::",".")
 			end
-			
-			stdio.writeln("tutu3: " + self.toString)
-			
+
 			//Look the param binding
 			var str_tpb : String init ""
 			var i : Integer init 0
@@ -281,7 +278,6 @@ stdio.writeln("tutu: " + self.toString)
 				else
 					var type_from_map : Type init context.ftMapTypeStack.peek().getValue(tpb.type)
 					if not type_from_map.isVoid() then
-					stdio.writeln("tutu6: " + self.toString)
 						context.ftSuffixActivation := false
 						str_tpb := str_tpb + type_from_map.createBehaviorJava(context)
 						context.ftSuffixActivation := true
@@ -427,6 +423,7 @@ package behavior {
 				end
 				
 				str_statement := str_statement.replace(context.SEPARATOR_STATEMENT_FT, "")
+				str_statement := str_statement.replace(context.RETURN_EXPRESSION_TO_REPLACE, "")
 				
 				javaCode.append(context.beforeLambdaExpressionResult)
 				//javaCode.append(context.beforeFunctionTypeResult)
@@ -551,7 +548,7 @@ package behavior {
 		
 			var fName : String  init IdentifierHelper.new.getMangledIdentifier(self.name, context)
 			
-			stdio.writeln(" -- " + self.toString + " - " + self.staticOperation.toString + " - " + self.staticOperation.container().toString)
+			//stdio.writeln(" -- " + self.toString + " - " + self.staticOperation.toString + " - " + self.staticOperation.container().toString)
 			
 			if self.staticOperation.container().asType(ClassDefinition).isValueType()
 			
@@ -737,8 +734,9 @@ package behavior {
 												if cf_.staticOperation.isVoid() then
 													stdio.writeln("cf_.isVoid(): " + self.toString + " - " + self.name)
 												else
-													if cf_.fromUtil(context) or (cf_.staticOperation.getCompiledJavaExtern() != "") then
+													if cf_.fromUtil(context) or self.callsFunctionType() or  (cf_.staticOperation.getCompiledJavaExtern() != "") then
 													else
+														stdio.writeln("PASS_PASS")
 														result := result + "."
 													end
 												end
@@ -908,11 +906,11 @@ package behavior {
 			
 			var owningOperation : Operation init self.getContainerAsType(Operation).asType(Operation)
 			
-			var fromOperation : String init owningOperation.superOperation.container.asType(ClassDefinition).qualifiedName.replace("::", ".")
+			var fromOperation_cd : String init owningOperation.superOperation.container.asType(ClassDefinition).qualifiedName.replace("::", ".")
 			//FIXME: Perhaps, we should fix the type parameters of the class definition
 			
 			result := ""//"//Call of the super operation\n"
-			//result := result + "((" + fromOperation + ") this)." + owningOperation.name + "("
+			//result := result + "((" + fromOperation_cd + ") this)." + owningOperation.name + "("
 			
 			var extended_class : EClass init self.getContainerAsType(ClassDefinition).asType(ClassDefinition).ecoreModelElement
 			var super_class : EClass init owningOperation.superOperation.container.asType(ClassDefinition).ecoreModelElement
@@ -926,10 +924,14 @@ package behavior {
 			if ModelAnalizer.new().isExtendedBy(extended_class, super_class) then
 				result := result + "super." + owningOperation.name + "("
 			else
-				result := result + fromOperation + "Super.super_" + owningOperation.name + "(this, "
-				var simk_signature : String init "super_" + owningOperation.name + "(" + fromOperation + " self, )"
-				stdio.writeln("simk_signature: " + simk_signature)
-				//var simk_body : String init owningOperation.superOperation.body.createBehaviorJava(context)
+				result := result + fromOperation_cd + "Super.super_" + IdentifierHelper.new.getMangledIdentifier(owningOperation.superOperation.getFinalName(), context) + "(this"
+				
+				if self.parameters.size>0 then
+					result := result + ", "
+				end
+				
+				// The super operation is added to the context for being compiled during the postprocess step
+				context.mu.superOperationsToCompileInHelper.add(owningOperation.superOperation)	
 			end
 			
 			self.beforeLambdaExpressionResult := ""

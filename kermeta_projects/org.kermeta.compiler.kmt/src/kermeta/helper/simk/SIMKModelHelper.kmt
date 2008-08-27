@@ -1,4 +1,4 @@
-/* $Id: SIMKModelHelper.kmt,v 1.6 2008-08-26 15:53:02 cfaucher Exp $
+/* $Id: SIMKModelHelper.kmt,v 1.7 2008-08-27 13:18:06 cfaucher Exp $
  * Creation date: Jul 21, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -57,6 +57,23 @@ aspect class SIMKModel {
 		
 		var sm : StaticMethod init sMContext.staticMethods.detect{ o |
 			o.name == IdentifierHelper.new.getMangledIdentifier(op.getFinalName(), context)
+		}
+		if sm.isVoid() then	
+			result := sMContext
+		end
+	end
+	
+	operation retrieveOrCreateContextForSuper(op : Operation, context : KM2EcoreContext) : SMContext is do
+		result := void
+		
+		var sMContext : SMContext init retrieveOrCreateContextWithClass(
+			op.container.asType(ClassDefinition).name + "Super",
+			op.container.asType(ClassDefinition).qualifiedName + ".helper",
+			SMUsage.Super,
+			context)
+		
+		var sm : StaticMethod init sMContext.staticMethods.detect{ o |
+			o.name == ( "super_" + IdentifierHelper.new.getMangledIdentifier(op.getFinalName(), context) )
 		}
 		if sm.isVoid() then	
 			result := sMContext
