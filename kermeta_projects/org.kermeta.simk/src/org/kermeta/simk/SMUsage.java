@@ -1,5 +1,5 @@
 /**
- * $Id: SMUsage.java,v 1.9 2008-08-18 09:20:20 cfaucher Exp $
+ * $Id: SMUsage.java,v 1.10 2008-08-27 08:02:44 cfaucher Exp $
  * Project : org.kermeta.simk
  * License : EPL
  * Copyright : IRISA / INRIA / Universite de Rennes 1
@@ -7,7 +7,7 @@
  * Creation date : 30 nov. 07
  * Authors : Cyril Faucher <cfaucher@irisa.fr> (first iteration)
  *
- * $Id: SMUsage.java,v 1.9 2008-08-18 09:20:20 cfaucher Exp $
+ * $Id: SMUsage.java,v 1.10 2008-08-27 08:02:44 cfaucher Exp $
  */
 package org.kermeta.simk;
 
@@ -36,14 +36,14 @@ public enum SMUsage implements Enumerator {
 	 * @ordered
 	 */
 	RUNNER(0, "Runner", "Runner"), /**
-	 * The '<em><b>Launcher</b></em>' literal object.
+	 * The '<em><b>Super</b></em>' literal object.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #LAUNCHER_VALUE
+	 * @see #SUPER_VALUE
 	 * @generated
 	 * @ordered
 	 */
-	LAUNCHER(1, "Launcher", "Launcher"), /**
+	SUPER(1, "Super", "Super"), /**
 	 * The '<em><b>Derived Property</b></em>' literal object.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -93,19 +93,19 @@ public enum SMUsage implements Enumerator {
 	public static final int RUNNER_VALUE = 0;
 
 	/**
-	 * The '<em><b>Launcher</b></em>' literal value.
+	 * The '<em><b>Super</b></em>' literal value.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of '<em><b>Launcher</b></em>' literal object isn't clear,
+	 * If the meaning of '<em><b>Super</b></em>' literal object isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @see #LAUNCHER
-	 * @model name="Launcher"
+	 * @see #SUPER
+	 * @model name="Super"
 	 * @generated
 	 * @ordered
 	 */
-	public static final int LAUNCHER_VALUE = 1;
+	public static final int SUPER_VALUE = 1;
 
 	/**
 	 * The '<em><b>Derived Property</b></em>' literal value.
@@ -176,7 +176,7 @@ public enum SMUsage implements Enumerator {
 	private static final SMUsage[] VALUES_ARRAY =
 		new SMUsage[] {
 			RUNNER,
-			LAUNCHER,
+			SUPER,
 			DERIVED_PROPERTY,
 			PRE_CONDITION,
 			POST_CONDITION,
@@ -232,7 +232,7 @@ public enum SMUsage implements Enumerator {
 	public static SMUsage get(int value) {
 		switch (value) {
 			case RUNNER_VALUE: return RUNNER;
-			case LAUNCHER_VALUE: return LAUNCHER;
+			case SUPER_VALUE: return SUPER;
 			case DERIVED_PROPERTY_VALUE: return DERIVED_PROPERTY;
 			case PRE_CONDITION_VALUE: return PRE_CONDITION;
 			case POST_CONDITION_VALUE: return POST_CONDITION;

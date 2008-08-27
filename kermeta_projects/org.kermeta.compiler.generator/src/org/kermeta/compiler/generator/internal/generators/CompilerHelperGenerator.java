@@ -8,7 +8,7 @@
  * Technologies), Jacques Lescot (Anyware Technologies) - initial API and
  * implementation
  ******************************************************************************/
-/*$Id: CompilerHelperGenerator.java,v 1.16 2008-08-26 09:16:25 cfaucher Exp $
+/*$Id: CompilerHelperGenerator.java,v 1.17 2008-08-27 08:02:49 cfaucher Exp $
 * Project : org.kermeta.compiler.generator
 * File : 	CompilerHelperGenerator.java
 * License : EPL
@@ -386,8 +386,9 @@ public class CompilerHelperGenerator extends AbstractGenerator {
 			Object[] args = {conf, mainClass, mainOperation};
 			applyTemplate(args, getTemplateURI(JAVA_LAUNCHER_LAUNCH), projectPath.append("/" + tab_mainClass[0] + ".launch"), conf.isForceOverwrite());
 		}*/
-		for (StaticMethod sm : simkConf.getStaticMethods()) {
-			if ( sm.getUsages() == SMUsage.LAUNCHER /*.contains(SMUsage.LAUNCHER)*/ ) {
+		
+		/*for (StaticMethod sm : simkConf.getStaticMethods()) {
+			if ( sm.getUsages() == SMUsage.LAUNCHER ) {
 				
 				String mainClass = sm.getSMContext().getSMClass().getQualifiedName();
 				String mainOperation = sm.getParentMethod().getName();
@@ -399,8 +400,8 @@ public class CompilerHelperGenerator extends AbstractGenerator {
 						projectPath.append("/" + sm.getSMContext().getSMClass().getQualifiedName() + ".launch"),
 						configuration.isForceOverwrite());
 			}
-
-		}
+		}*/
+		
 	}
 	
 	/**

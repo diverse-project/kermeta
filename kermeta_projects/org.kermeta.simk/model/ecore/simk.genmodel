@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <genmodel:GenModel xmi:version="2.0"
     xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
-    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" copyrightText="$Id: simk.genmodel,v 1.10 2008-08-26 09:14:28 cfaucher Exp $&#xD;&#xA;Project : org.kermeta.simk&#xD;&#xA;License : EPL&#xD;&#xA;Copyright : IRISA / INRIA / Universite de Rennes 1&#xD;&#xA;----------------------------------------------------------------------------&#xD;&#xA;Creation date : 30 nov. 07&#xD;&#xA;Authors : Cyril Faucher &lt;cfaucher@irisa.fr> (first iteration)"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" copyrightText="$Id: simk.genmodel,v 1.11 2008-08-27 08:02:45 cfaucher Exp $&#xD;&#xA;Project : org.kermeta.simk&#xD;&#xA;License : EPL&#xD;&#xA;Copyright : IRISA / INRIA / Universite de Rennes 1&#xD;&#xA;----------------------------------------------------------------------------&#xD;&#xA;Creation date : 30 nov. 07&#xD;&#xA;Authors : Cyril Faucher &lt;cfaucher@irisa.fr> (first iteration)"
     modelDirectory="/org.kermeta.simk/src" creationSubmenus="true" editDirectory="/org.kermeta.simk/src"
     editorDirectory="/org.kermeta.simk/src" modelPluginID="org.kermeta.simk" templateDirectory=""
     redirection="" forceOverwrite="true" modelName="Simk" modelPluginClass="" reflectiveDelegation="true"
@@ -13,7 +13,7 @@
       multipleEditorPages="false" ecorePackage="simk.ecore#/">
     <genEnums typeSafeEnumCompatible="false" ecoreEnum="simk.ecore#//SMUsage">
       <genEnumLiterals ecoreEnumLiteral="simk.ecore#//SMUsage/Runner"/>
-      <genEnumLiterals ecoreEnumLiteral="simk.ecore#//SMUsage/Launcher"/>
+      <genEnumLiterals ecoreEnumLiteral="simk.ecore#//SMUsage/Super"/>
       <genEnumLiterals ecoreEnumLiteral="simk.ecore#//SMUsage/DerivedProperty"/>
       <genEnumLiterals ecoreEnumLiteral="simk.ecore#//SMUsage/PreCondition"/>
       <genEnumLiterals ecoreEnumLiteral="simk.ecore#//SMUsage/PostCondition"/>
