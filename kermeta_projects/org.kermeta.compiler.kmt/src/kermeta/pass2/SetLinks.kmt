@@ -1,4 +1,4 @@
-/* $Id: SetLinks.kmt,v 1.35 2008-08-26 09:10:08 cfaucher Exp $
+/* $Id: SetLinks.kmt,v 1.36 2008-08-28 13:01:11 cfaucher Exp $
  * Creation date: January 21, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -176,7 +176,7 @@ aspect class Parameter {
 			
 		else
 		
-			if self.upper==-1 then		
+			/*if self.upper==-1 then		
 				var eOrderedSet : EClassifier init context.mu.getEClassifierByQualifiedName("kermeta::standard::OrderedSet")
 				
 				var genericType : EGenericType init EGenericType.new				
@@ -193,12 +193,12 @@ aspect class Parameter {
 				
 				self.ecoreModelElement.eGenericType.eTypeArguments.add(type_arg_genericType)
 
-			else
+			else*/
 			
 				var s : LinkSetterForTypedElement init LinkSetterForTypedElement.new
 				s.setLinks(self, self.ecoreModelElement, context)
 			
-			end
+			//end
 		
 		end
 		
