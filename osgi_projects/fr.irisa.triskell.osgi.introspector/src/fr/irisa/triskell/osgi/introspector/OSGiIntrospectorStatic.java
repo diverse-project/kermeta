@@ -20,6 +20,7 @@ import org.apache.log4j.Level;
 import fr.irisa.triskell.osgi.introspector.generator.resolver.Resolver;
 import fr.irisa.triskell.osgi.introspector.manifest.Parser;
 import fr.irisa.triskell.osgi.introspector.util.OSGiIntrospectorUtil;
+import fr.irisa.triskell.osgi.introspector.util.OSGiIntrospectorUtilStatic;
 import framework.Bundle;
 import framework.Framework;
 import framework.FrameworkFactory;
@@ -39,6 +40,10 @@ public class OSGiIntrospectorStatic {
 	private Framework framework;
 	private Parser parser;
 
+	public OSGiIntrospectorStatic() {
+		this.util = new OSGiIntrospectorUtilStatic();
+	}
+	
 	public OSGiIntrospectorStatic(OSGiIntrospectorUtil util) {
 		this.util = util;
 	}

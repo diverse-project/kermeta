@@ -461,15 +461,14 @@ public class ResolverDynamicWithoutSystemRepresentation implements Resolver {
 							util.log(Level.WARN,
 									"There are no valid package exported on the OSGi platform for "
 											+ _packageString, importPackages
-											.get(importPackages));
+											.get(value));
 							value.setResolved(false);
 						}
 					} else {
 						util.log(Level.WARN,
 								"There are no package exported on the OSGi platform for "
 										+ _packageString, importPackages
-										.get(importPackages));
-
+										.get(value));
 						value.setResolved(false);
 					}
 				}

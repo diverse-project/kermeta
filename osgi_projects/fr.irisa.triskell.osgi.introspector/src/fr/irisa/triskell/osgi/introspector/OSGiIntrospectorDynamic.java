@@ -14,12 +14,14 @@ import java.util.Enumeration;
 
 import manifest.MANIFEST;
 
+import org.apache.log4j.Level;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.Constants;
 
 import fr.irisa.triskell.osgi.introspector.generator.resolver.Resolver;
 import fr.irisa.triskell.osgi.introspector.manifest.Parser;
 import fr.irisa.triskell.osgi.introspector.util.OSGiIntrospectorUtil;
+import fr.irisa.triskell.osgi.introspector.util.OSGiIntrospectorUtilDynamic;
 import framework.Bundle;
 import framework.Framework;
 import framework.FrameworkFactory;
@@ -42,6 +44,11 @@ public class OSGiIntrospectorDynamic {
 	private Parser parser;
 	private Framework framework;
 
+	public OSGiIntrospectorDynamic(BundleContext context) {
+		this.context = context;
+		this.util = new OSGiIntrospectorUtilDynamic(context);
+	}
+	
 	public OSGiIntrospectorDynamic(BundleContext context,
 			OSGiIntrospectorUtil util) {
 		this.context = context;
@@ -110,7 +117,10 @@ public class OSGiIntrospectorDynamic {
 		}
 		boolean valid = this.parser.parse(manifestStringRepresentation
 				.toString(), bundleRepresentation);
-
+		if (bundle.getState() != org.osgi.framework.Bundle.ACTIVE && bundle.getState() != org.osgi.framework.Bundle.RESOLVED) {
+			util.log(Level.ERROR, "This bundle is not resolved nor active so maybe many entry into the Manifest will be unresolved", bundleRepresentation);
+		}
+		
 		if (valid) {
 			this.framework.addBundle(bundleRepresentation);
 		}

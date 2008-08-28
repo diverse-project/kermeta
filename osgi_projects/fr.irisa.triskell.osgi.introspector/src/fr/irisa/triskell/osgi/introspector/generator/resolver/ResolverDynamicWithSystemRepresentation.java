@@ -622,6 +622,7 @@ public class ResolverDynamicWithSystemRepresentation implements Resolver {
 												// is
 												// already done
 												value.addPackage(_package);
+												value.setBundle(bundleExportingPackage);
 												find = true;
 												break;
 											}
@@ -631,7 +632,6 @@ public class ResolverDynamicWithSystemRepresentation implements Resolver {
 													.isResolved() && true);
 											break;
 										}
-										value.setResolved(false);
 									}
 								}
 							}
@@ -640,13 +640,15 @@ public class ResolverDynamicWithSystemRepresentation implements Resolver {
 							util.log(Level.WARN,
 									"There are no valid package exported on the OSGi platform for "
 											+ _packageString, importPackages
-											.get(importPackages));
+											.get(value));
+							value.setResolved(false);
 						}
 					} else {
 						util.log(Level.WARN,
 								"There are no package exported on the OSGi platform for "
 										+ _packageString, importPackages
-										.get(importPackages));
+										.get(value));
+						value.setResolved(false);
 					}
 				}
 			}
