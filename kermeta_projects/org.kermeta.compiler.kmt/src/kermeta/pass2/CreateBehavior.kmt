@@ -1,4 +1,4 @@
-/* $Id: CreateBehavior.kmt,v 1.53 2008-08-28 12:19:56 cfaucher Exp $
+/* $Id: CreateBehavior.kmt,v 1.54 2008-08-28 13:00:30 cfaucher Exp $
  * Creation date: January 21, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -786,9 +786,7 @@ package behavior {
 											if self.container.isInstanceOf(CallFeature) then
 												var cf_ : CallFeature init self.container.asType(CallFeature)
 												
-												if cf_.staticOperation.isVoid() then
-													stdio.writeln("cf_.isVoid(): " + self.toString + " - " + self.name)
-												else
+												if not cf_.staticOperation.isVoid() then
 													if cf_.fromUtil(context) or self.isParameter() or  (cf_.staticOperation.getCompiledJavaExtern() != "") then
 													else
 														result := result + "."
