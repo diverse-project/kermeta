@@ -1,4 +1,4 @@
-/* $Id: CreateBehavior.kmt,v 1.55 2008-08-28 14:09:26 cfaucher Exp $
+/* $Id: CreateBehavior.kmt,v 1.56 2008-08-28 15:24:29 cfaucher Exp $
  * Creation date: January 21, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -56,6 +56,17 @@ package structure {
 	
 	/** We have to visit operation in order to print the result initialization and the return statement */
 	aspect class Operation {
+	
+		operation ppReturnResult(context : KM2EcoreContext) : String is do
+			result := "\nreturn "
+			if self.upper==1 then
+				result := result + "result"
+			else
+				result := result + "org.kermeta.compil.runtime.helper.basetypes.CollectionUtil.convertAsEList(result)"
+			end
+			result := result + ";\n"
+		end
+		
 		method createBehaviorJava(context : KM2EcoreContext) : String is do
 
 			result := void
@@ -96,15 +107,13 @@ package structure {
 				
 				// result is returned only if the "return type" is not Void
 				if (not isVoidType(type_label)) and (not context.ftSuffixActivation) then
-					if self.upper==1 then
-						javaCode.append("\nreturn result;\n")
-					else
-						javaCode.append("\nreturn org.kermeta.compil.runtime.helper.basetypes.CollectionUtil.convertAsEList(result);\n")
-					end
+					javaCode.append(self.ppReturnResult(context))
 				end
 			else
+				// The current operation has a Void return type
 				if not Operation.new().isVoidType(self.type.getTypeQName()) then
-					javaCode.append(self.type.createBehaviorJava(context) + " result = null;\nreturn result;")
+					javaCode.append(CompilerHelperJava.new().ppTypeFromMultiplicityElement(self, context) + " result = null;\n")
+					javaCode.append(self.ppReturnResult(context))
 				end
 			end
 
@@ -925,7 +934,34 @@ package behavior {
 				if self.name == "stdio" then
 					result := result + "org.kermeta.compil.runtime.helper.io.StdIOUtil"
 				else
-					result := result + IdentifierHelper.new.getMangledIdentifier(self.name, context) + context.printFtSuffix()
+					var c_param : Parameter init self.retrieveCorrespondingParameter()
+					if c_param.isVoid() then
+						result := result + IdentifierHelper.new.getMangledIdentifier(self.name, context) + context.printFtSuffix()
+					else
+					if c_param.upper==1 then
+						result := result + IdentifierHelper.new.getMangledIdentifier(self.name, context) + context.printFtSuffix()
+					else
+						var type_binding : String init self.staticType.asType(Class).typeParamBinding.one.type.createBehaviorJava(context)
+										
+						if (not c_param.isUnique) and (not c_param.isOrdered) then
+							result := "org.kermeta.compil.runtime.helper.basetypes.CollectionUtil.<" + type_binding + ">convertAsBag(" + result
+						end
+										
+						if (c_param.isUnique) and (not c_param.isOrdered) then
+							result := "org.kermeta.compil.runtime.helper.basetypes.CollectionUtil.<" + type_binding + ">convertAsSet(" + result
+						end
+										
+						if (c_param.isUnique) and (c_param.isOrdered) then
+							result := "org.kermeta.compil.runtime.helper.basetypes.CollectionUtil.<" + type_binding + ">convertAsOrderedSet(" + result
+						end
+										
+						if (not c_param.isUnique) and (c_param.isOrdered) then
+							result := "org.kermeta.compil.runtime.helper.basetypes.CollectionUtil.<" + type_binding + ">convertAsSequence(" + result
+						end
+										
+						result := result + IdentifierHelper.new.getMangledIdentifier(self.name, context) + context.printFtSuffix() + ")"
+					end
+					end
 				end
 				
 				result := result + self.endOfExpressionFixer()
