@@ -1,4 +1,4 @@
-/* $Id: CreateBehavior.kmt,v 1.52 2008-08-27 16:31:26 cfaucher Exp $
+/* $Id: CreateBehavior.kmt,v 1.53 2008-08-28 12:19:56 cfaucher Exp $
  * Creation date: January 21, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -268,6 +268,7 @@ package structure {
 			//Look the param binding
 			var str_tpb : String init ""
 			var i : Integer init 0
+			var i_ : Integer init 0
 			self.typeParamBinding.each{ tpb |
 				
 				if i >= 1 then
@@ -283,10 +284,48 @@ package structure {
 						str_tpb := str_tpb + type_from_map.createBehaviorJava(context)
 						context.ftSuffixActivation := true
 					else
-					stdio.writeln("tutu7: " + self.toString)
-						if context.ftProductTypeStack.peek().getTypeByIndex(i)!= self then
+						//if not context.ftProductTypeStack.peek().getTypeByIndex(i).isVoid() then
+						
+						/*
+						********stdio.writeln("typeParam: " + "i:" + i.toString() + " tpb: " + tpb.type.createBehaviorJava(context))
+						stdio.writeln("typeParam: " + "i:" + i.toString() + " " + self.toString() + " -h " + self.hashcode().toString() +
+						 " - " + context.ftProductTypeStack.peek().getTypeByIndex(i).toString() + " -h " +
+						 context.ftProductTypeStack.peek().getTypeByIndex(i).hashcode().toString())
+						 **************
+						 */
+						 
+						 /* if context.ftProductTypeStack.peek().getTypeByIndex(i).isInstanceOf(ParameterizedType) then
+						 context.ftProductTypeStack.peek().getTypeByIndex(i).asType(ParameterizedType).typeParamBinding.each{ ttt |
+						 	stdio.writeln("typeParam_: " + ttt.type.createBehaviorJava(context))
+						 }
+						 end*/
+						 
+						//if context.ftProductTypeStack.peek().getTypeByIndex(i)!= self then
+							//str_tpb := str_tpb + context.ftProductTypeStack.peek().getTypeByIndex(i).createBehaviorJava(context)
+						//else
+							/*context.ftSuffixActivation := false
+							var ii : Integer init 0
+							context.ftProductTypeStack.peek().getTypeByIndex(i_).asType(ParameterizedType).typeParamBinding.each{ ttt |
+						 		if ii==1 then
+						 			str_tpb := str_tpb + ", toto"
+						 		else
+						 			ii := 1
+						 		end
+						 		str_tpb := str_tpb + ttt.type.createBehaviorJava(context)
+							}
+							context.ftSuffixActivation := true*/
+							
+							
+							context.ftSuffixActivation := false
 							str_tpb := str_tpb + context.ftProductTypeStack.peek().getTypeByIndex(i).createBehaviorJava(context)
-						end
+							//str_tpb := str_tpb + context.ftProductTypeStack.peek().getTypeByIndex(0).asType(ParameterizedType).typeParamBinding.one().createBehaviorJava(context)
+							context.ftSuffixActivation := true
+							
+							//i_ := i_ + 1
+							
+						//end
+						
+						//end
 					end
 				end
 				
@@ -296,6 +335,7 @@ package structure {
 				result := result + "<" + str_tpb + ">"
 			end
 			result := result + ""
+			//stdio.writeln("result: " + result)
 		end
 	}
 	
@@ -353,10 +393,12 @@ package structure {
 		
 			//stdio.writeln("ProductType " + self.toString + " " + index.toString)
 			result := void
-			if self.type.elementAt(index).isInstanceOf(FunctionType) then
-				result := self.type.elementAt(index).asType(FunctionType).right
-			else
-				result := self.type.elementAt(index)
+			if index < self.type.size() then
+				if self.type.elementAt(index).isInstanceOf(FunctionType) then
+					result := self.type.elementAt(index).asType(FunctionType).right
+				else
+					result := self.type.elementAt(index)
+				end
 			end
 		end
 		
@@ -749,7 +791,6 @@ package behavior {
 												else
 													if cf_.fromUtil(context) or self.isParameter() or  (cf_.staticOperation.getCompiledJavaExtern() != "") then
 													else
-														stdio.writeln("PASS_PASS" + self.name)
 														result := result + "."
 													end
 												end

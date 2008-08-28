@@ -1,4 +1,4 @@
-/* $Id: StructureCompiler.kmt,v 1.49 2008-08-27 13:18:06 cfaucher Exp $
+/* $Id: StructureCompiler.kmt,v 1.50 2008-08-28 12:19:57 cfaucher Exp $
  * Creation date: January 21, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -86,18 +86,18 @@ class Main {
 		var traceInput : String init ""
 */
 
-/*
+
 		var modelInput : String init "platform:/resource/org.kermeta.compiler.kmt/models/weavingRoles.km"
 		var output : String init "platform:/resource/org.kermeta.compiler.kmt/models/weavingRoles.ecore"
 		var traceInput : String init ""
-*/
+
 		
-		var modelInput : String init "platform:/resource/org.kermeta.compiler.kmt/models/Mutation.km"
+/*		var modelInput : String init "platform:/resource/org.kermeta.compiler.kmt/models/Mutation.km"
 		var output : String init "platform:/resource/org.kermeta.compiler.kmt/models/Mutation.ecore"
 		var traceInput : String init ""
+*/
 
-
-		main_mode(modelInput, traceInput, output, CompilingMode.behaviorJava)
+		main_mode3(modelInput, traceInput, output, CompilingMode.behaviorJava)
 	end
 	
     operation main(modelInput : String, traceInput : String, output : String) : Void is do
@@ -248,7 +248,7 @@ class Main {
 							or op.asType(Operation).name == "addAt"
 							or op.asType(Operation).name == "createResource"
 							or op.asType(Operation).name == "saveAndValidateWithEMF"
-							or*/ op.asType(Operation).name == "mute" then //addAt matchStep2 generate KomposeScriptAll
+							or*/ op.asType(Operation).name == "matchStep2" then //addAt matchStep2 mute generate KomposeScriptAll
 					
 							stdio.writeln("================= " + op.asType(Operation).qualifiedName + " =================")
 							var javaSourceCode : String init op.createBehaviorJava(context)
