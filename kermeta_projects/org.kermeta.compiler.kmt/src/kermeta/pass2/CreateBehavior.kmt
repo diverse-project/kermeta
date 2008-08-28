@@ -1,4 +1,4 @@
-/* $Id: CreateBehavior.kmt,v 1.54 2008-08-28 13:00:30 cfaucher Exp $
+/* $Id: CreateBehavior.kmt,v 1.55 2008-08-28 14:09:26 cfaucher Exp $
  * Creation date: January 21, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -83,9 +83,9 @@ package structure {
 					type_label := context.ftReturnType
 					context.ftReturnType := ""
 				else
-					type_label := self.type.createBehaviorJava(context)
+					type_label := CompilerHelperJava.new().ppTypeFromMultiplicityElement(self, context)
 				end
-				
+	
 				// result is initialized only if the "return type" is not Void
 				if not isVoidType(type_label) then
 					javaCode.append("\n" + type_label + " result" + context.printFtSuffix() + " = null;\n")
@@ -96,7 +96,11 @@ package structure {
 				
 				// result is returned only if the "return type" is not Void
 				if (not isVoidType(type_label)) and (not context.ftSuffixActivation) then
-					javaCode.append("\nreturn result;\n")
+					if self.upper==1 then
+						javaCode.append("\nreturn result;\n")
+					else
+						javaCode.append("\nreturn org.kermeta.compil.runtime.helper.basetypes.CollectionUtil.convertAsEList(result);\n")
+					end
 				end
 			else
 				if not Operation.new().isVoidType(self.type.getTypeQName()) then
