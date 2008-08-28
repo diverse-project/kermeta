@@ -1,4 +1,4 @@
-/* $Id: UMLProfile2EcoreTrace.kmt,v 1.5 2008-03-10 15:22:08 gperroui Exp $
+/* $Id: UMLProfile2EcoreTrace.kmt,v 1.6 2008-08-28 11:53:51 dvojtise Exp $
  * Creation date: December 13, 2007
  * License: EPL
  * Copyright:
@@ -85,16 +85,24 @@ end
 
 // designed to work with ecores that have only one root package... (such as uml.ecore)
 operation registerBaseType(name: String) : Void is do
-log.print("registering external base type " + name)
-var c: EClass init EClass.new
-//log.print("uml classes to search : " + resource.instances.one.asType(EPackage).eClassifiers.size.toString) 
-c := uml_resource.instances.one.asType(EPackage).eClassifiers.select{c|c.asType(EClassifier).name == name}.one.asType(EClass)
-if c != void then
+	log.print("registering external base type " + name)
+	var c: EClass 
+	log.print("uml classes to search : " + uml_resource.one.asType(EPackage).eClassifiers.size.toString) 
+	var classifier : EClassifier
+	classifier := uml_resource.one.asType(EPackage).eClassifiers.select{c|c.asType(EClassifier).name == name}.one
+	if classifier.isInstanceOf(EClass) then
+		c := classifier.asType(EClass)
+	else
+		log.print("external base type " + name + " found but is not an EClass !!!" + classifier.toString)
+	end
+	
+	if c != void then
+		log.print("external base type " + name + " found")
 		typesTable.put(name,c)
 		log.print("external base type " + name + " found and registered")
 	else
 		log.print("external base type " + name + " not found, houston we have a problem...")
-end
+	end
 end
 
 operation getBaseType(name: String): EClass is do
