@@ -1,4 +1,4 @@
-/* $Id: CheckInputModels.kmt,v 1.2 2007-09-14 13:21:26 ffleurey Exp $
+/* $Id: CheckInputModels.kmt,v 1.3 2008-08-28 09:34:45 fmunoz Exp $
  * Creation date: January 12, 2006
  * Author: Benoit Baudry
  * 
@@ -20,7 +20,8 @@ require "BuildPartitions.kmt"
 using ecore
 using kermeta::persistence
 using kermeta::standard
-using kermeta::reflection
+using kermeta::language
+using kermeta::language::structure
 
 class CheckInputModels{
  	reference setOfFragments : FragmentsMM::Fragments
@@ -92,7 +93,7 @@ class CheckInputModels{
     	modelsToCheck.each{ resource |
 //    		stdio.writeln("trying model number : "+modelNumber.toString)
     		modelNumber := modelNumber+1
- 			var objectsOfOneModel : Sequence<kermeta::reflection::Object> init Sequence<kermeta::reflection::Object>.new
+ 			var objectsOfOneModel : Sequence<Object> init Sequence<Object>.new
 	 		objectsOfOneModel := getObjectsInModel(resource)
 	 		var modelCoversFragment : Boolean init fragmentIsCoveredByModel(fragment, objectsOfOneModel)
 	 		//if one model covers the fragment fragmentIsCovered becomes true
@@ -105,7 +106,7 @@ class CheckInputModels{
     	objectOfOneModel : the set of objects contained in one model
     	The operation returns true if there is a set of objects in the model that satisfies all 
     	the object fragments of the model fragment*/
-    operation fragmentIsCoveredByModel(fragment : FragmentsMM::ModelFragment, objectsOfOneModel : Sequence<kermeta::reflection::Object>) : Boolean is do
+    operation fragmentIsCoveredByModel(fragment : FragmentsMM::ModelFragment, objectsOfOneModel : Sequence<Object>) : Boolean is do
     	result := fragment.objectFragments.forAll{ of |
 	    	existsOneObject(of, objectsOfOneModel)
     	}		
@@ -118,8 +119,8 @@ class CheckInputModels{
     	1 we collect all the objects instance of the class on which is defined the object fragment 
     	and the instances of subclasses.
     	2 we check if there one object that has its attributes values that satisfy the property constraints*/
-    operation existsOneObject(of : FragmentsMM::ObjectFragment, objectsOfOneModel : Sequence<kermeta::reflection::Object>) : Boolean is do
-    	var objs : Sequence<kermeta::reflection::Object>
+    operation existsOneObject(of : FragmentsMM::ObjectFragment, objectsOfOneModel : Sequence<Object>) : Boolean is do
+    	var objs : Sequence<Object>
 	  	var cls : Class init getMMClassFromName(of.constraints.one.className)
 	  	objs:=objectsOfOneModel.select{ obj |  
     		obj.isInstanceOf(cls)
@@ -143,8 +144,8 @@ class CheckInputModels{
      end
         
     /* Returns the set of all objects contained in the resource, including the root objects*/
-    operation getObjectsInModel(resource : EMFResource) : Sequence<kermeta::reflection::Object> is do
-    	result := Sequence<kermeta::reflection::Object>.new 
+    operation getObjectsInModel(resource : EMFResource) : Sequence<Object> is do
+    	result := Sequence<Object>.new 
     	//for all root nodes add the composite objects in the result
     	resource.instances.each{ t |
     		result.add(t)
@@ -154,8 +155,8 @@ class CheckInputModels{
     
     /* Returns all the objects that compose the object o. 
        It is recursively called on all the composed objects.*/
-    operation getObjects(o : Object) : Sequence<kermeta::reflection::Object> is do
-    	result := Sequence<kermeta::reflection::Object>.new 
+    operation getObjects(o : Object) : Sequence<Object> is do
+    	result := Sequence<Object>.new 
     	result.addAll(getChildren(o))
 //		printChildren(o, result)
     	result.each{ k |  
@@ -165,9 +166,9 @@ class CheckInputModels{
     
     /* Returns the sequence of children objects of object o
    	   A child object is an instance of a composite property of the metaclass of the object. */
-    operation getChildren(o : Object) : Sequence<kermeta::reflection::Object> is do
+    operation getChildren(o : Object) : Sequence<Object> is do
     	var children : Sequence <Property>
-    	result := Sequence<kermeta::reflection::Object>.new
+    	result := Sequence<Object>.new
 		//Among all the properties of the object select the ones that are composite
 		//and that are of type class (we only want to select composite references and not the attributes)
 		var classdef : ClassDefinition 
@@ -179,7 +180,7 @@ class CheckInputModels{
     	children.each{ k |  
     		//if the reference has a multiplicity != 1, get returns a collection of objects
     		if (k.upper != 1) then
-    			var s : Collection<kermeta::reflection::Object>
+    			var s : Collection<Object>
     			s ?= o.get(k)
     			result.addAll(s)
        		else 
@@ -195,7 +196,7 @@ class CheckInputModels{
         //add to the result the properties of all the super classes
         cd.superType.each{ t |
         	var sc : Class        
-        	sc := t
+        	sc ?= t
             //add the properties of a super class. 
             //since there might "diamonds" in the inheritance tree, we must check that the property is not already on the result
 			var classdef : ClassDefinition 
@@ -209,7 +210,7 @@ class CheckInputModels{
         result := result.select{ k | not k.isDerived }
 	end
     
-    operation printChildren(o : Object, children : Sequence<kermeta::reflection::Object>) is do
+    operation printChildren(o : Object, children : Sequence<Object>) is do
     	stdio.write("The object " + o.oid.toString + " of type "+o.getMetaClass.name)
     	stdio.writeln(" has " + children.size.toString + " children : ")
     	children.each{ o |

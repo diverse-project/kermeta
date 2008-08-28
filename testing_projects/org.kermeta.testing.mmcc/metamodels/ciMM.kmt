@@ -1,4 +1,4 @@
-/* $Id: ciMM.kmt,v 1.2 2007-12-06 20:25:16 jmottu Exp $
+/* $Id: ciMM.kmt,v 1.3 2008-08-28 09:34:45 fmunoz Exp $
  * Creation date: January 12, 2006
  * Author: Benoit Baudry
  * This package contains the metamodel for partitions, model and object fragments
@@ -18,7 +18,9 @@ package FragmentsMM;
 require kermeta
 
 using kermeta::standard 
-using kermeta::reflection
+//using kermeta::reflection
+using kermeta::language::structure
+using kermeta::language
 
 
 abstract class Range 
@@ -173,7 +175,7 @@ class Partition
         //add to the result the properties of all the super classes
         cd.superType.each{ t |
         	var sc : Class        
-        	sc := t
+        	sc ?= t
             //add the properties of a super class. 
             //since there might "diamonds" in the inheritance tree, we must check that the property is not already on the result
 			var classdef : ClassDefinition 
@@ -264,7 +266,7 @@ class MultiplicityPartition inherits Partition
 		//If the feature is a set then check if its size is included in the range
 		//else there is an error, there can not be a multiplicity part on a single object
 		if (feature.upper != 1) then
-			var setOfObjects : Collection<kermeta::reflection::Object>
+			var setOfObjects : Collection<Object>
     		setOfObjects ?= oToCheck.get(feature)
 			result := range.isContained(setOfObjects.size)
 		//if the feature is not a set but there is still a multiplicityPartition defined for it

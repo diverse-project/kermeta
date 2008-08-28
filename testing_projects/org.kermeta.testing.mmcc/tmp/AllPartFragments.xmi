@@ -14,9 +14,9 @@
     </propertyPartitions>
     <propertyPartitions featureName="val" className="ClassB">
       <valuePartition>
-        <ranges xsi:type="FragmentsMM:IntegerRange" lower="2" upper="20000"/>
-        <ranges xsi:type="FragmentsMM:IntegerRange" lower="1" upper="1"/>
         <ranges xsi:type="FragmentsMM:IntegerRange" lower="0" upper="0"/>
+        <ranges xsi:type="FragmentsMM:IntegerRange" lower="1" upper="1"/>
+        <ranges xsi:type="FragmentsMM:IntegerRange" lower="2" upper="20000"/>
       </valuePartition>
     </propertyPartitions>
     <propertyPartitions featureName="a" className="ClassB">
@@ -38,13 +38,18 @@
     </fragments>
     <fragments>
       <objectFragments>
-        <constraints range="/0/@propertyPartitions.2/@valuePartition/@ranges.2" featureName="val" className="ClassB"/>
+        <constraints range="/0/@propertyPartitions.1/@multiplicityPartition/@ranges.0" featureName="b" className="ClassA"/>
       </objectFragments>
+    </fragments>
+    <fragments>
       <objectFragments>
         <constraints range="/0/@propertyPartitions.2/@valuePartition/@ranges.0" featureName="val" className="ClassB"/>
       </objectFragments>
       <objectFragments>
         <constraints range="/0/@propertyPartitions.2/@valuePartition/@ranges.1" featureName="val" className="ClassB"/>
+      </objectFragments>
+      <objectFragments>
+        <constraints range="/0/@propertyPartitions.2/@valuePartition/@ranges.2" featureName="val" className="ClassB"/>
       </objectFragments>
     </fragments>
     <fragments>
@@ -52,15 +57,10 @@
         <constraints range="/0/@propertyPartitions.3/@multiplicityPartition/@ranges.0" featureName="a" className="ClassB"/>
       </objectFragments>
       <objectFragments>
-        <constraints range="/0/@propertyPartitions.3/@multiplicityPartition/@ranges.2" featureName="a" className="ClassB"/>
-      </objectFragments>
-      <objectFragments>
         <constraints range="/0/@propertyPartitions.3/@multiplicityPartition/@ranges.1" featureName="a" className="ClassB"/>
       </objectFragments>
-    </fragments>
-    <fragments>
       <objectFragments>
-        <constraints range="/0/@propertyPartitions.1/@multiplicityPartition/@ranges.0" featureName="b" className="ClassA"/>
+        <constraints range="/0/@propertyPartitions.3/@multiplicityPartition/@ranges.2" featureName="a" className="ClassB"/>
       </objectFragments>
     </fragments>
   </FragmentsMM:Fragments>

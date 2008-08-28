@@ -13,7 +13,8 @@ require "platform:/resource/org.kermeta.testing.mmcc/TestData/MMwCardinalityOne.
 using ecore
 using kermeta::persistence
 using kermeta::standard
-using kermeta::reflection
+using kermeta::language
+using kermeta::language::structure
  
 class TestCheckInputModels
 {
@@ -37,7 +38,7 @@ class TestCheckInputModels
     operation test1() is do
     	var resource : EMFResource 
     	resource ?= repository.createResource(testDataDir+"Statechart1.xmi", testDataDir+"statechart.ecore") 
- 		var model : Sequence<kermeta::reflection::Object>
+ 		var model : Sequence<Object>
  		resource.load
  		model:=check.getObjectsInModel(resource)
  		stdio.writeln(resource.uri.toString)
@@ -49,7 +50,7 @@ class TestCheckInputModels
     operation test2() is do
     	var resource : EMFResource    
     	resource ?= repository.createResource(testDataDir+"Statechart2.xmi", testDataDir+"statechart.ecore") 
- 		var model : Sequence<kermeta::reflection::Object>
+ 		var model : Sequence<Object>
  		resource.load
  		model:=check.getObjectsInModel(resource)
  		assertEqual(8, model.size, "test2")	  	
@@ -59,7 +60,7 @@ class TestCheckInputModels
     operation test3() is do
     	var resource : EMFResource    
     	resource ?= repository.createResource(testDataDir+"Statechart3.xmi", testDataDir+"statechart.ecore") 
- 		var model : Sequence<kermeta::reflection::Object>
+ 		var model : Sequence<Object>
  		resource.load
  		model:=check.getObjectsInModel(resource)
  		assertEqual(12, model.size, "test3")	  	
@@ -69,7 +70,7 @@ class TestCheckInputModels
     operation test4() is do
     	var resource : EMFResource    
     	resource ?= repository.createResource(testDataDir+"Statechart4.xmi", testDataDir+"statechart.ecore") 
- 		var model : Sequence<kermeta::reflection::Object>
+ 		var model : Sequence<Object>
  		resource.load
  		model:=check.getObjectsInModel(resource)
  		assertEqual(7, model.size, "test4")	  	
@@ -79,7 +80,7 @@ class TestCheckInputModels
     operation test5() is do
     	var resource : EMFResource    
     	resource ?= repository.createResource(testDataDir+"Root.xmi", testDataDir+"MMwInheritance.ecore") 
- 		var model : Sequence<kermeta::reflection::Object>
+ 		var model : Sequence<Object>
  		resource.load
  		model:=check.getObjectsInModel(resource)
  		assertEqual(3, model.size, "test5")	  	
@@ -88,7 +89,7 @@ class TestCheckInputModels
     //tests with an instance of a metamodel where a class has a composite ref with cardinality one
     operation test6() is do
     	var resource : EMFResource    resource ?= repository.createResource("./Root1.xmi", "./MMwCardinalityOne.ecore") 
- 		var model : Sequence<kermeta::reflection::Object>
+ 		var model : Sequence<Object>
  		resource.load
  		model:=check.getObjectsInModel(resource)
  		assertEqual(2, model.size, "test6")	  	
