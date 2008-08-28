@@ -1,5 +1,5 @@
 /**
- * $Id: SimkPackage.java,v 1.8 2008-08-26 09:14:28 cfaucher Exp $
+ * $Id: SimkPackage.java,v 1.9 2008-08-28 07:30:41 cfaucher Exp $
  * Project : org.kermeta.simk
  * License : EPL
  * Copyright : IRISA / INRIA / Universite de Rennes 1
@@ -7,7 +7,7 @@
  * Creation date : 30 nov. 07
  * Authors : Cyril Faucher <cfaucher@irisa.fr> (first iteration)
  *
- * $Id: SimkPackage.java,v 1.8 2008-08-26 09:14:28 cfaucher Exp $
+ * $Id: SimkPackage.java,v 1.9 2008-08-28 07:30:41 cfaucher Exp $
  */
 package org.kermeta.simk;
 
@@ -186,13 +186,13 @@ public interface SimkPackage extends EPackage {
 	int STATIC_METHOD__SM_CONTEXT = SM_NAMED_ELEMENT_FEATURE_COUNT + 2;
 
 	/**
-	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * The feature id for the '<em><b>Type Parameters</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int STATIC_METHOD__ID = SM_NAMED_ELEMENT_FEATURE_COUNT + 3;
+	int STATIC_METHOD__TYPE_PARAMETERS = SM_NAMED_ELEMENT_FEATURE_COUNT + 3;
 
 	/**
 	 * The feature id for the '<em><b>Body</b></em>' attribute.
@@ -520,15 +520,15 @@ public interface SimkPackage extends EPackage {
 	EReference getStaticMethod_SMContext();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.kermeta.simk.StaticMethod#getId <em>Id</em>}'.
+	 * Returns the meta object for the attribute '{@link org.kermeta.simk.StaticMethod#getTypeParameters <em>Type Parameters</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Id</em>'.
-	 * @see org.kermeta.simk.StaticMethod#getId()
+	 * @return the meta object for the attribute '<em>Type Parameters</em>'.
+	 * @see org.kermeta.simk.StaticMethod#getTypeParameters()
 	 * @see #getStaticMethod()
 	 * @generated
 	 */
-	EAttribute getStaticMethod_Id();
+	EAttribute getStaticMethod_TypeParameters();
 
 	/**
 	 * Returns the meta object for the attribute '{@link org.kermeta.simk.StaticMethod#getBody <em>Body</em>}'.
@@ -815,12 +815,12 @@ public interface SimkPackage extends EPackage {
 		EReference STATIC_METHOD__SM_CONTEXT = eINSTANCE.getStaticMethod_SMContext();
 
 		/**
-		 * The meta object literal for the '<em><b>Id</b></em>' attribute feature.
+		 * The meta object literal for the '<em><b>Type Parameters</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute STATIC_METHOD__ID = eINSTANCE.getStaticMethod_Id();
+		EAttribute STATIC_METHOD__TYPE_PARAMETERS = eINSTANCE.getStaticMethod_TypeParameters();
 
 		/**
 		 * The meta object literal for the '<em><b>Body</b></em>' attribute feature.

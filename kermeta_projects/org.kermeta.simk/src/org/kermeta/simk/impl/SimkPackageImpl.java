@@ -1,5 +1,5 @@
 /**
- * $Id: SimkPackageImpl.java,v 1.13 2008-08-27 13:23:57 cfaucher Exp $
+ * $Id: SimkPackageImpl.java,v 1.14 2008-08-28 07:30:40 cfaucher Exp $
  * Project : org.kermeta.simk
  * License : EPL
  * Copyright : IRISA / INRIA / Universite de Rennes 1
@@ -7,7 +7,7 @@
  * Creation date : 30 nov. 07
  * Authors : Cyril Faucher <cfaucher@irisa.fr> (first iteration)
  *
- * $Id: SimkPackageImpl.java,v 1.13 2008-08-27 13:23:57 cfaucher Exp $
+ * $Id: SimkPackageImpl.java,v 1.14 2008-08-28 07:30:40 cfaucher Exp $
  */
 package org.kermeta.simk.impl;
 
@@ -239,7 +239,7 @@ public class SimkPackageImpl extends EPackageImpl implements SimkPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getStaticMethod_Id() {
+	public EAttribute getStaticMethod_TypeParameters() {
 		return (EAttribute)staticMethodEClass.getEStructuralFeatures().get(3);
 	}
 
@@ -450,7 +450,7 @@ public class SimkPackageImpl extends EPackageImpl implements SimkPackage {
 		createEReference(staticMethodEClass, STATIC_METHOD__SM_PARAMETERS);
 		createEReference(staticMethodEClass, STATIC_METHOD__SM_RETURN);
 		createEReference(staticMethodEClass, STATIC_METHOD__SM_CONTEXT);
-		createEAttribute(staticMethodEClass, STATIC_METHOD__ID);
+		createEAttribute(staticMethodEClass, STATIC_METHOD__TYPE_PARAMETERS);
 		createEAttribute(staticMethodEClass, STATIC_METHOD__BODY);
 		createEAttribute(staticMethodEClass, STATIC_METHOD__USAGES);
 		createEReference(staticMethodEClass, STATIC_METHOD__PARENT_METHOD);
@@ -526,7 +526,7 @@ public class SimkPackageImpl extends EPackageImpl implements SimkPackage {
 		initEReference(getStaticMethod_SMParameters(), this.getSMParameter(), null, "sMParameters", null, 0, -1, StaticMethod.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getStaticMethod_SMReturn(), this.getSMReturn(), null, "sMReturn", null, 0, 1, StaticMethod.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getStaticMethod_SMContext(), this.getSMContext(), this.getSMContext_StaticMethods(), "sMContext", null, 0, 1, StaticMethod.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getStaticMethod_Id(), ecorePackage.getEString(), "id", null, 0, 1, StaticMethod.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getStaticMethod_TypeParameters(), ecorePackage.getEString(), "typeParameters", null, 0, 1, StaticMethod.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getStaticMethod_Body(), ecorePackage.getEString(), "body", null, 0, 1, StaticMethod.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getStaticMethod_Usages(), this.getSMUsage(), "usages", null, 0, 1, StaticMethod.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getStaticMethod_ParentMethod(), ecorePackage.getEOperation(), null, "parentMethod", null, 0, 1, StaticMethod.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

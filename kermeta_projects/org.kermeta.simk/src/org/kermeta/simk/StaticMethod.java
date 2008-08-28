@@ -1,5 +1,5 @@
 /**
- * $Id: StaticMethod.java,v 1.5 2008-08-18 13:06:15 cfaucher Exp $
+ * $Id: StaticMethod.java,v 1.6 2008-08-28 07:30:41 cfaucher Exp $
  * Project : org.kermeta.simk
  * License : EPL
  * Copyright : IRISA / INRIA / Universite de Rennes 1
@@ -7,7 +7,7 @@
  * Creation date : 30 nov. 07
  * Authors : Cyril Faucher <cfaucher@irisa.fr> (first iteration)
  *
- * $Id: StaticMethod.java,v 1.5 2008-08-18 13:06:15 cfaucher Exp $
+ * $Id: StaticMethod.java,v 1.6 2008-08-28 07:30:41 cfaucher Exp $
  */
 package org.kermeta.simk;
 
@@ -28,7 +28,7 @@ import org.eclipse.emf.ecore.EReference;
  *   <li>{@link org.kermeta.simk.StaticMethod#getSMParameters <em>SM Parameters</em>}</li>
  *   <li>{@link org.kermeta.simk.StaticMethod#getSMReturn <em>SM Return</em>}</li>
  *   <li>{@link org.kermeta.simk.StaticMethod#getSMContext <em>SM Context</em>}</li>
- *   <li>{@link org.kermeta.simk.StaticMethod#getId <em>Id</em>}</li>
+ *   <li>{@link org.kermeta.simk.StaticMethod#getTypeParameters <em>Type Parameters</em>}</li>
  *   <li>{@link org.kermeta.simk.StaticMethod#getBody <em>Body</em>}</li>
  *   <li>{@link org.kermeta.simk.StaticMethod#getUsages <em>Usages</em>}</li>
  *   <li>{@link org.kermeta.simk.StaticMethod#getParentMethod <em>Parent Method</em>}</li>
@@ -113,30 +113,30 @@ public interface StaticMethod extends SMNamedElement {
 	void setSMContext(SMContext value);
 
 	/**
-	 * Returns the value of the '<em><b>Id</b></em>' attribute.
+	 * Returns the value of the '<em><b>Type Parameters</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Id</em>' attribute isn't clear,
+	 * If the meaning of the '<em>Type Parameters</em>' attribute isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Id</em>' attribute.
-	 * @see #setId(String)
-	 * @see org.kermeta.simk.SimkPackage#getStaticMethod_Id()
+	 * @return the value of the '<em>Type Parameters</em>' attribute.
+	 * @see #setTypeParameters(String)
+	 * @see org.kermeta.simk.SimkPackage#getStaticMethod_TypeParameters()
 	 * @model
 	 * @generated
 	 */
-	String getId();
+	String getTypeParameters();
 
 	/**
-	 * Sets the value of the '{@link org.kermeta.simk.StaticMethod#getId <em>Id</em>}' attribute.
+	 * Sets the value of the '{@link org.kermeta.simk.StaticMethod#getTypeParameters <em>Type Parameters</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Id</em>' attribute.
-	 * @see #getId()
+	 * @param value the new value of the '<em>Type Parameters</em>' attribute.
+	 * @see #getTypeParameters()
 	 * @generated
 	 */
-	void setId(String value);
+	void setTypeParameters(String value);
 
 	/**
 	 * Returns the value of the '<em><b>Body</b></em>' attribute.

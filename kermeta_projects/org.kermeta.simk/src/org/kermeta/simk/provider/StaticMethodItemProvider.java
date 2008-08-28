@@ -1,5 +1,5 @@
 /**
- * $Id: StaticMethodItemProvider.java,v 1.5 2008-07-23 15:17:23 cfaucher Exp $
+ * $Id: StaticMethodItemProvider.java,v 1.6 2008-08-28 07:30:41 cfaucher Exp $
  * Project : org.kermeta.simk
  * License : EPL
  * Copyright : IRISA / INRIA / Universite de Rennes 1
@@ -7,7 +7,7 @@
  * Creation date : 30 nov. 07
  * Authors : Cyril Faucher <cfaucher@irisa.fr> (first iteration)
  *
- * $Id: StaticMethodItemProvider.java,v 1.5 2008-07-23 15:17:23 cfaucher Exp $
+ * $Id: StaticMethodItemProvider.java,v 1.6 2008-08-28 07:30:41 cfaucher Exp $
  */
 package org.kermeta.simk.provider;
 
@@ -72,7 +72,7 @@ public class StaticMethodItemProvider
 			super.getPropertyDescriptors(object);
 
 			addSMContextPropertyDescriptor(object);
-			addIdPropertyDescriptor(object);
+			addTypeParametersPropertyDescriptor(object);
 			addBodyPropertyDescriptor(object);
 			addUsagesPropertyDescriptor(object);
 			addParentMethodPropertyDescriptor(object);
@@ -105,19 +105,19 @@ public class StaticMethodItemProvider
 	}
 
 	/**
-	 * This adds a property descriptor for the Id feature.
+	 * This adds a property descriptor for the Type Parameters feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void addIdPropertyDescriptor(Object object) {
+	protected void addTypeParametersPropertyDescriptor(Object object) {
 		itemPropertyDescriptors.add
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_StaticMethod_id_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_StaticMethod_id_feature", "_UI_StaticMethod_type"),
-				 SimkPackage.Literals.STATIC_METHOD__ID,
+				 getString("_UI_StaticMethod_typeParameters_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_StaticMethod_typeParameters_feature", "_UI_StaticMethod_type"),
+				 SimkPackage.Literals.STATIC_METHOD__TYPE_PARAMETERS,
 				 true,
 				 false,
 				 false,
@@ -304,7 +304,7 @@ public class StaticMethodItemProvider
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(StaticMethod.class)) {
-			case SimkPackage.STATIC_METHOD__ID:
+			case SimkPackage.STATIC_METHOD__TYPE_PARAMETERS:
 			case SimkPackage.STATIC_METHOD__BODY:
 			case SimkPackage.STATIC_METHOD__USAGES:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));

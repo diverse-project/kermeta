@@ -1,5 +1,5 @@
 /**
- * $Id: StaticMethodImpl.java,v 1.6 2008-08-18 13:06:15 cfaucher Exp $
+ * $Id: StaticMethodImpl.java,v 1.7 2008-08-28 07:30:40 cfaucher Exp $
  * Project : org.kermeta.simk
  * License : EPL
  * Copyright : IRISA / INRIA / Universite de Rennes 1
@@ -7,7 +7,7 @@
  * Creation date : 30 nov. 07
  * Authors : Cyril Faucher <cfaucher@irisa.fr> (first iteration)
  *
- * $Id: StaticMethodImpl.java,v 1.6 2008-08-18 13:06:15 cfaucher Exp $
+ * $Id: StaticMethodImpl.java,v 1.7 2008-08-28 07:30:40 cfaucher Exp $
  */
 package org.kermeta.simk.impl;
 
@@ -35,7 +35,7 @@ import org.kermeta.simk.StaticMethod;
  *   <li>{@link org.kermeta.simk.impl.StaticMethodImpl#getSMParameters <em>SM Parameters</em>}</li>
  *   <li>{@link org.kermeta.simk.impl.StaticMethodImpl#getSMReturn <em>SM Return</em>}</li>
  *   <li>{@link org.kermeta.simk.impl.StaticMethodImpl#getSMContext <em>SM Context</em>}</li>
- *   <li>{@link org.kermeta.simk.impl.StaticMethodImpl#getId <em>Id</em>}</li>
+ *   <li>{@link org.kermeta.simk.impl.StaticMethodImpl#getTypeParameters <em>Type Parameters</em>}</li>
  *   <li>{@link org.kermeta.simk.impl.StaticMethodImpl#getBody <em>Body</em>}</li>
  *   <li>{@link org.kermeta.simk.impl.StaticMethodImpl#getUsages <em>Usages</em>}</li>
  *   <li>{@link org.kermeta.simk.impl.StaticMethodImpl#getParentMethod <em>Parent Method</em>}</li>
@@ -117,8 +117,8 @@ public class StaticMethodImpl extends SMNamedElementImpl implements StaticMethod
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public String getId() {
-		return (String)eGet(SimkPackage.Literals.STATIC_METHOD__ID, true);
+	public String getTypeParameters() {
+		return (String)eGet(SimkPackage.Literals.STATIC_METHOD__TYPE_PARAMETERS, true);
 	}
 
 	/**
@@ -126,8 +126,8 @@ public class StaticMethodImpl extends SMNamedElementImpl implements StaticMethod
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setId(String newId) {
-		eSet(SimkPackage.Literals.STATIC_METHOD__ID, newId);
+	public void setTypeParameters(String newTypeParameters) {
+		eSet(SimkPackage.Literals.STATIC_METHOD__TYPE_PARAMETERS, newTypeParameters);
 	}
 
 	/**
