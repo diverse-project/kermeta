@@ -1,4 +1,4 @@
-/* $Id: ModelAnalizerHelper.kmt,v 1.4 2008-08-27 13:18:06 cfaucher Exp $
+/* $Id: ModelAnalizerHelper.kmt,v 1.5 2008-08-28 13:02:14 cfaucher Exp $
  * Creation date: May 29, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -17,10 +17,10 @@ class ModelAnalizer {
 	operation isExtendedBy( extended_class : EClass , super_class : EClass ) : Boolean is do
 		result := false
 		
-		stdio.writeln("super_class: " + super_class.name + " - " + super_class.toString())
-		stdio.writeln("extended_class: " + extended_class.name + " - " + extended_class.toString())
-		stdio.writeln("extended_class: " + extended_class.eGenericSuperTypes.one().toString())
-		stdio.writeln("extended_class: " + extended_class.eGenericSuperTypes.toString() + " - " + extended_class.eGenericSuperTypes.one().toString() + " - " + extended_class.eGenericSuperTypes.one().eClassifier.toString())
+		//stdio.writeln("super_class: " + super_class.name + " - " + super_class.toString())
+		//stdio.writeln("extended_class: " + extended_class.name + " - " + extended_class.toString())
+		//stdio.writeln("extended_class: " + extended_class.eGenericSuperTypes.one().toString())
+		//stdio.writeln("extended_class: " + extended_class.eGenericSuperTypes.toString() + " - " + extended_class.eGenericSuperTypes.one().toString() + " - " + extended_class.eGenericSuperTypes.one().eClassifier.toString())
 		if super_class == extended_class.eGenericSuperTypes.one().eClassifier then
 			result := true
 		end
