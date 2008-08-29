@@ -1,4 +1,4 @@
-/* $Id: OperationCallFrame.java,v 1.18 2008-04-28 11:50:55 ftanguy Exp $
+/* $Id: OperationCallFrame.java,v 1.19 2008-08-29 14:40:16 dvojtise Exp $
 * Project : Kermeta Interpreter
 * File : OperationCallFrame.java
 * License : EPL
@@ -15,6 +15,7 @@
 package fr.irisa.triskell.kermeta.interpreter;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.List;
@@ -153,7 +154,16 @@ public class OperationCallFrame extends CallFrame {
         String name = "";
         if (operation != null) name = operation.getName();
         else				   name = property.getName();
-        return self.toString() + "." + name;
+        if(self.getJavaNativeObject() instanceof Collection){
+        	Collection<RuntimeObject> c = (Collection<RuntimeObject>) self.getJavaNativeObject();
+        	if(c.size() > 5 ){
+        		return self.toUserString()+"<Not printing the " + c.size() + " elements of the collection>" + "." + name;
+        	}
+        	else 
+        		return self.toString() + "." + name;
+        }
+        else
+        	return self.toString() + "." + name;
     }
     
     public Operation getOperation() {
