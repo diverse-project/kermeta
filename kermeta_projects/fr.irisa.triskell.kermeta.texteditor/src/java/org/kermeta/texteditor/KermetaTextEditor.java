@@ -1,6 +1,6 @@
 
 
-/*$Id: KermetaTextEditor.java,v 1.14 2008-06-24 11:50:03 ftanguy Exp $
+/*$Id: KermetaTextEditor.java,v 1.15 2008-08-29 15:01:42 dvojtise Exp $
 * Project : fr.irisa.triskell.kermeta.texteditor
 * File : 	KermetaTextEditor.java
 * License : EPL
@@ -207,8 +207,13 @@ public class KermetaTextEditor extends TextEditor implements InterestedObject {
 				updateValue( kermetaUnit );
 			} else {
 				KermetaUnitHost.getInstance().declareInterest(this, file);
-				unit.setLastTimeModified( new Date(0) );
-				EventDispatcher.sendEvent(unit, "update", null, monitor);
+				if(unit != null){									
+					unit.setLastTimeModified( new Date(0) );
+					EventDispatcher.sendEvent(unit, "update", null, monitor);
+				}
+				else{
+					TexteditorPlugin.internalLog.warn("Weird, the unit "+file.getName()+ " is still not managed by kpm, (DVK note: should we fix that ?)");
+				}
 			}
 		}
 	}
