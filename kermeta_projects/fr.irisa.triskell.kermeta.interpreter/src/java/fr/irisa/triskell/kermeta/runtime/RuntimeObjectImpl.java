@@ -1,4 +1,4 @@
-/* $Id: RuntimeObjectImpl.java,v 1.6 2008-04-28 11:50:57 ftanguy Exp $
+/* $Id: RuntimeObjectImpl.java,v 1.7 2008-08-29 14:40:50 dvojtise Exp $
  * Project : Kermeta (First iteration)
  * File : RuntimeObject.java
  * License : EPL
@@ -442,11 +442,11 @@ public class RuntimeObjectImpl implements RuntimeObject {
 	        } else if ( getJavaNativeObject() instanceof Collection ) {
 	        	String sValue = "";
 	        	Collection<RuntimeObject> c = (Collection<RuntimeObject>) getJavaNativeObject();
-	        	for ( RuntimeObject o : c ) {
-	        		sValue += c.toString();
-	        	}
+	        	sValue = c.toString();
+	        	
 	        	if(sValue != null)
 	        		return "[" + class_name + " : "+ oId +" = \"" +sValue+"\"]";
+	        	else return "[" + class_name + " : "+ oId +"]";
 	        }
 /*		    String sbValue = ((fr.irisa.triskell.kermeta.runtime.basetypes.StringBuffer)getData().get(STRING_BUFFER_VALUE)).toString();
 		    if(sbValue != null)
