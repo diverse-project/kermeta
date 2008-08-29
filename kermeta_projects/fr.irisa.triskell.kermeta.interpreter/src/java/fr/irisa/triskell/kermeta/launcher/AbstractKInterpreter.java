@@ -190,10 +190,11 @@ abstract public class AbstractKInterpreter {
             error( "\n" + e.toString() );
 		} catch (Throwable e) {
 			e.printStackTrace();
+			
 			String msg = "Kermeta internal error due to ";
 			if(e.getMessage() != null) msg += e.getMessage();
 			else msg += e.toString();
-			msg += ". Please contact the development team and send them the logs. ";
+			msg += ". Please contact the development team and send them the logs. \n" + _basicInterpreter.computeCurrentContextString();;
 			// msg for the logger
 			error( msg );
 			// msg for eclipse ui (ErrorLog view)
