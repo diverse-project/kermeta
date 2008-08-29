@@ -1,4 +1,4 @@
-/* $Id: EMF2Runtime.java,v 1.85 2008-07-29 13:33:33 dvojtise Exp $
+/* $Id: EMF2Runtime.java,v 1.86 2008-08-29 14:43:22 dvojtise Exp $
  * Project   : Kermeta (First iteration)
  * File      : EMF2Runtime.java
  * License   : EPL
@@ -83,10 +83,17 @@ public class EMF2Runtime {
      */
     public IProgressMonitor monitor = null;
     /**
-     * if true, try to ignore faulty objects while loading the resources
+     * if true, try to ignore all faulty objects while loading the resources
      */
-    protected boolean ignoreLoadErrors = false;
+    protected boolean ignoreAllLoadErrors = false;/**
+     
+     /** if true, try to ignore objects that don't have a known metaclass while loading the resources
+     */
+    protected boolean ignoreLoadErrorUnknownMetaclass = false;
     
+    /** if true, try to ignore properties that don't have an equivalent in the metaclass definition while loading the resources
+     */
+    protected boolean ignoreLoadErrorUnknownProperty = false;
     /**
      * The list of runtimeObjects that represent the EMF instances
      * it may contain EObject and RO that were loaded in a previous load
@@ -195,11 +202,25 @@ public class EMF2Runtime {
 				// Create RO for current EObject
 				EObject eObj = contentsIt.next();
 				if(!runtime_objects_map.containsKey(eObj)){
-					RuntimeObject rootRO = this.createEmptyRuntimeObjectForEObject(eObj);
-					this.runtime_objects_map.put(eObj, rootRO);
-					this.newlycreated_runtime_objects_map.put(eObj, rootRO );
-					if(eObj.eIsProxy()){
-						internalLog.debug(" this object is still a proxy  ! " + eObj);
+					try{
+						RuntimeObject rootRO = this.createEmptyRuntimeObjectForEObject(eObj);
+						this.runtime_objects_map.put(eObj, rootRO);
+						this.newlycreated_runtime_objects_map.put(eObj, rootRO );
+						if(eObj.eIsProxy()){
+							internalLog.debug(" this object is still a proxy  ! " + eObj);
+						}
+					}catch (UnknownMetaclassException e){
+						String errmsg = "could not find a class (" + e.metaclassName + ") " +
+		    			"in the required ClassDefinition. Please check your require statements.\n";
+				    	
+				    	if(ignoreAllLoadErrors || ignoreLoadErrorUnknownMetaclass ){ 
+				    		internalLog.warn("Ignoring load of an object due to : "+errmsg);
+				    	}
+				    	else{// Stop after the first error
+				    		unit.throwKermetaRaisedExceptionOnLoad("EMF loading error : " + errmsg, null);
+				    		internalLog.error("EMF loading error : " + errmsg);
+				    		
+				    	}
 					}
 				}
 				/*else{
@@ -299,10 +320,14 @@ public class EMF2Runtime {
 			for( EObject rootEObj : res.getContents()){
 					
 				RuntimeObject rootRO = (RuntimeObject) this.runtime_objects_map.get(rootEObj);
-				fr.irisa.triskell.kermeta.runtime.language.Object.setContainingResource(rootRO, crtResRO);
+				// note: it may be null if the option ignoreLoadErrorUnknownMetaclass is set to true
+				if(rootRO != null){
+					fr.irisa.triskell.kermeta.runtime.language.Object.setContainingResource(rootRO, crtResRO);
+					
+					ArrayList<RuntimeObject> resContents = fr.irisa.triskell.kermeta.runtime.basetypes.Collection.getArrayList(crtResRO);
+					resContents.add(rootRO);
+				}
 				
-				ArrayList<RuntimeObject> resContents = fr.irisa.triskell.kermeta.runtime.basetypes.Collection.getArrayList(crtResRO);
-				resContents.add(rootRO);
 			}
 		}
 	}
@@ -338,8 +363,14 @@ public class EMF2Runtime {
 			RuntimeObject roRepository = (RuntimeObject) mainResRO.getProperties().get("repository");	
 			
 			// update the ignore load error field from the RuntimeObject
-			RuntimeObject roIgnoreLoadErrors = (RuntimeObject) roRepository.getProperties().get("ignoreLoadErrors");
-			ignoreLoadErrors = roIgnoreLoadErrors != null ? fr.irisa.triskell.kermeta.runtime.basetypes.Boolean.getValue(roIgnoreLoadErrors) : false;		
+			RuntimeObject roIgnoreAllLoadErrors = (RuntimeObject) roRepository.getProperties().get("ignoreAllLoadErrors");
+			ignoreAllLoadErrors = roIgnoreAllLoadErrors != null ? fr.irisa.triskell.kermeta.runtime.basetypes.Boolean.getValue(roIgnoreAllLoadErrors) : false;		
+			// update the ignore load error field from the RuntimeObject
+			RuntimeObject roIgnoreLoadErrorUnknownMetaclass = (RuntimeObject) roRepository.getProperties().get("ignoreLoadErrorUnknownMetaclass");
+			ignoreLoadErrorUnknownMetaclass = roIgnoreLoadErrorUnknownMetaclass != null ? fr.irisa.triskell.kermeta.runtime.basetypes.Boolean.getValue(roIgnoreLoadErrorUnknownMetaclass) : false;		
+			// update the ignore load error field from the RuntimeObject
+			RuntimeObject roIgnoreLoadErrorUnknownProperty = (RuntimeObject) roRepository.getProperties().get("ignoreLoadErrorUnknownProperty");
+			ignoreLoadErrorUnknownProperty = roIgnoreLoadErrorUnknownProperty != null ? fr.irisa.triskell.kermeta.runtime.basetypes.Boolean.getValue(roIgnoreLoadErrorUnknownProperty) : false;		
 			
 
 			if(monitor!= null) monitor.subTask("Looking for pre-existing objects");
@@ -374,7 +405,7 @@ public class EMF2Runtime {
 			    processedElements++;
 			    //if(monitor!= null) monitor.worked(1);
 			    progress.worked(1);
-			    
+			    if(this.monitor.isCanceled()) throw new Exception("Model load interrupted by the user");
 				
 			}
 
@@ -450,8 +481,9 @@ public class EMF2Runtime {
 	/**
 	 * This method creates an empty runtime object for the given EObject, with an entry
 	 * { "emfObject" : EObject } in the RuntimeObject.data hashtable 
+	 * @throws UnknownMetaclassException 
 	 */
-	public RuntimeObject createEmptyRuntimeObjectForEObject(EObject eObject)
+	public RuntimeObject createEmptyRuntimeObjectForEObject(EObject eObject) throws UnknownMetaclassException
 	{
 	    // Define the RO-metaclass of the given EObject
 		RuntimeObject ro_metaclass = this.getRuntimeObjectForMetaClass(eObject.eClass());
@@ -569,16 +601,22 @@ public class EMF2Runtime {
 	    }
         if (ftype == null)
         {
-	    	String errmsg = "EMF loading error : could not find a class (" + type_name + ") " +
-	    			"in loaded libraries. Please check your require statements.\n";
+	    	String errmsg = "could not find a class (" + type_name + ") " +
+	    			"in the required ClassDefinition. Please check your require statements.\n";
 	    	if(type_name.startsWith("null::")){
 	    		errmsg += "EMF had trouble finding the package ("+ type_name +"), this typically occurs when the uri used in the model is not correctly registered. You must either : register your metamodel, or use a nsuri that correspond to a physical location ex: platform:/resource/yourproject/yourmm.ecore";
+	    		unit.throwKermetaRaisedExceptionOnLoad("EMF loading error : " + errmsg, null);
+	    		internalLog.error("EMF loading error : " + errmsg);
 	    	}
-	    	internalLog.error(errmsg);
-	    	if(!ignoreLoadErrors){ // maybe we can 
+	    	
+	    /*	if(!ignoreLoadErrors){ // maybe we can 
 	    		// Stop after the first error
-	    		unit.throwKermetaRaisedExceptionOnLoad(errmsg, null);
+	    		unit.throwKermetaRaisedExceptionOnLoad("EMF loading error : " + errmsg, null);
+	    		internalLog.error("EMF loading error : " + errmsg);
 	    	}
+	    	else{
+	    		internalLog.error("Ignoring load of some object due to : "+errmsg);
+	    	}*/
         }
         return ftype;
 	}
@@ -592,6 +630,7 @@ public class EMF2Runtime {
 	protected void populateRuntimeObject(RuntimeObject rObject)
 	{
 	    EObject eObject = (EObject)rObject.getEmfObject();
+
 	    fr.irisa.triskell.kermeta.language.structure.Class kclass = null;
 	    // Get the meta class in Ecore repr. (EClass) of the RuntimeObject to populate
 	    EClass eclass = eObject.eClass();
@@ -741,13 +780,24 @@ public class EMF2Runtime {
 			// If result is still null, send an exception
 			if (result == null)
 			{
-				String errmsg = "EMF loading error : property set failed.\n  Not able to find '"+ propName+"' property on class " + KermetaModelHelper.ClassDefinition.qualifiedName(classDef) +
-				" ; known properties are : ";
-				for ( Object prop : KermetaModelHelper.ClassDefinition.getAllProperties(classDef)) 
-				{ errmsg += ((Property)prop).getName() + ", "; }
-				errmsg += "\n in class \"" + classDef.getName() +"\"";
-				errmsg += "\nwith feature == " + feature;
-				unit.throwKermetaRaisedExceptionOnLoad(errmsg, null);
+				if(ignoreAllLoadErrors || ignoreLoadErrorUnknownProperty){
+					String errmsg = "Ignoring property due to :  Not able to find '"+ propName+"' property on class " + KermetaModelHelper.ClassDefinition.qualifiedName(classDef) +
+					" ; known properties are : ";
+					for ( Object prop : KermetaModelHelper.ClassDefinition.getAllProperties(classDef)) 
+					{ errmsg += ((Property)prop).getName() + ", "; }
+					errmsg += "\n in class \"" + classDef.getName() +"\"";
+					errmsg += "\nwith feature == " + feature;
+					internalLog.warn(errmsg);
+				}
+				else{
+					String errmsg = "EMF loading error : property set failed.\n  Not able to find '"+ propName+"' property on class " + KermetaModelHelper.ClassDefinition.qualifiedName(classDef) +
+					" ; known properties are : ";
+					for ( Object prop : KermetaModelHelper.ClassDefinition.getAllProperties(classDef)) 
+					{ errmsg += ((Property)prop).getName() + ", "; }
+					errmsg += "\n in class \"" + classDef.getName() +"\"";
+					errmsg += "\nwith feature == " + feature;
+					unit.throwKermetaRaisedExceptionOnLoad(errmsg, null);
+				}
 			}
 		}
 		
@@ -955,8 +1005,9 @@ public class EMF2Runtime {
 	 * @param metaclass The EClass to "convert" in a RuntimeObject
 	 * @param unit The runtime unit we are working with
 	 * @return the RuntimeObject embedding the Kermeta FClass equivalent to the given EClass
+	 * @throws UnknownMetaclassException 
 	 */
-	public RuntimeObject getRuntimeObjectForMetaClass(EClass metaclass)
+	public RuntimeObject getRuntimeObjectForMetaClass(EClass metaclass) throws UnknownMetaclassException
 	{
 	    RuntimeObject result = null;
 	    String metaclass_name = unit.getEQualifiedName(metaclass);
@@ -971,9 +1022,10 @@ public class EMF2Runtime {
 	    		Type ftype = this.getTypeFromName(kermeta_metaclass_name);
 	    		// fr.irisa.triskell.kermeta.language.structure.Class fclass = (fr.irisa.triskell.kermeta.language.structure.Class)ftype;
 	    		
-	    		if (this.ignoreLoadErrors && ftype == null){
-	    			// we had to ignore this kind of object return a Void Object ...
-	    			result = unit.getRuntimeMemory().getRuntimeObjectForFObject(ftype);
+	    		if ((this.ignoreAllLoadErrors ||this.ignoreLoadErrorUnknownMetaclass) && ftype == null){
+	    			// we had to ignore this kind of object return null ...
+	    			result = null; //unit.getRuntimeMemory().getRuntimeObjectForFObject(ftype);
+	    			throw new UnknownMetaclassException(metaclass_name, "Cannot retreive RuntimeObject for metaclass "+metaclass_name);
 	    		}
 	    		else{
 	    			// normal case
@@ -989,9 +1041,17 @@ public class EMF2Runtime {
 	    else
 	    {   
 	    	Type ftype = this.getTypeFromEClassifier(metaclass);
-	        fr.irisa.triskell.kermeta.language.structure.Class fclass = (fr.irisa.triskell.kermeta.language.structure.Class)ftype;
-	        result = unit.getRuntimeMemory().getROFactory().createMetaClass(fclass);
-	        this.type_cache.put(metaclass_name, result);
+	    	if ((this.ignoreAllLoadErrors ||this.ignoreLoadErrorUnknownMetaclass) && ftype == null){
+    			// we had to ignore this kind of object return null
+    			result = null; // unit.getRuntimeMemory().getRuntimeObjectForFObject(ftype);
+    			throw new UnknownMetaclassException("Cannot retreive RuntimeObject for metaclass "+metaclass_name, metaclass_name);
+    		}
+    		else{
+    			// normal case
+    			fr.irisa.triskell.kermeta.language.structure.Class fclass = (fr.irisa.triskell.kermeta.language.structure.Class)ftype;
+		        result = unit.getRuntimeMemory().getROFactory().createMetaClass(fclass);
+		        this.type_cache.put(metaclass_name, result);
+    		}
 	    }
 	    return result;
 	}
