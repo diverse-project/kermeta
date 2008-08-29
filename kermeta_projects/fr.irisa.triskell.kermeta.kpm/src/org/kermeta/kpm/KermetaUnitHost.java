@@ -1,4 +1,4 @@
-/*$Id: KermetaUnitHost.java,v 1.1 2008-05-28 09:26:14 ftanguy Exp $
+/*$Id: KermetaUnitHost.java,v 1.2 2008-08-29 14:59:55 dvojtise Exp $
 * Project : fr.irisa.triskell.kermeta.kpm
 * File : 	sdfg.java
 * License : EPL
@@ -10,6 +10,8 @@
 package org.kermeta.kpm;
 
 import org.eclipse.core.resources.IFile;
+import org.eclipse.core.runtime.Platform;
+import org.eclipse.core.runtime.jobs.ILock;
 import org.kermeta.interest.InterestedObject;
 import org.kermeta.interest.exception.IdNotFoundException;
 import org.kermeta.io.KermetaUnit;
@@ -19,6 +21,8 @@ import org.kermeta.model.interest.InterestHost;
 public class KermetaUnitHost {
 
 	private InterestHost host = InterestFactory.eINSTANCE.createInterestHost();
+	
+	private static ILock lock = Platform.getJobManager().newLock();
 	
 	private KermetaUnitHost() {}
 	
@@ -31,8 +35,15 @@ public class KermetaUnitHost {
 	}
 		
 	public void declareInterest(InterestedObject target, IFile file) {
-		if ( file != null )
-			declareInterest(target, "platform:/resource" + file.getFullPath().toString());
+		try {
+	        lock.acquire();
+	        // Access or modify data structure
+	        if ( file != null )
+				declareInterest(target, "platform:/resource" + file.getFullPath().toString());
+	     } finally {
+	        lock.release();
+	     }
+		
 	}
 	
 	private void declareInterest(InterestedObject target, String id) {
@@ -40,8 +51,14 @@ public class KermetaUnitHost {
 	}
 
 	public void updateValue(IFile file, KermetaUnit newValue) throws IdNotFoundException {
-		if ( file != null )
+		try {
+	        lock.acquire();
+	        // Access or modify data structure
+	        if ( file != null )
 			updateValue(newValue.getUri(), newValue);
+		 } finally {
+	        lock.release();
+	     }
 	}
 	
 	private void updateValue(String id, KermetaUnit newValue) throws IdNotFoundException {
@@ -49,8 +66,13 @@ public class KermetaUnitHost {
 	}
 
 	public void undeclareInterest(InterestedObject target, IFile file) {
-		if ( file != null )
+		try {
+	        lock.acquire();
+	        if ( file != null )
 			undeclareInterest(target, "platform:/resource" + file.getFullPath().toString());
+		 } finally {
+	        lock.release();
+	     }
 	}
 	
 	private void undeclareInterest(InterestedObject target, String id) {
