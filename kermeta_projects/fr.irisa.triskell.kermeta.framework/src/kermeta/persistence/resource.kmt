@@ -9,7 +9,7 @@ require "../Standard.kmt"
 using kermeta::standard
 
 /* ****************************************************************************
- * $Id: resource.kmt,v 1.61 2008-08-21 15:48:24 cfaucher Exp $
+ * $Id: resource.kmt,v 1.62 2008-08-29 14:52:51 dvojtise Exp $
  * Project : Kermeta (First iteration)
  * Creation date :  
  * File : resource.kmt
@@ -103,7 +103,7 @@ abstract class Resource inherits kermeta::standard::Set<Object>
 	 */
 	operation loadWithoutChecking() : Void is abstract
 	
-	/**
+	/**	
 	 * Returns the set of Resources the current Resource, which must have been loaded,
 	 * depends on, an empty set if current Resource has no dependency
 	 */
@@ -119,6 +119,9 @@ abstract class Resource inherits kermeta::standard::Set<Object>
 	/** 
 	 * Returns the set of all Objects directly or indirectly contained by the Resource,
 	 * or an empty set if the Resource is empty
+	 * implementation note: since this derived property  build a set, it guarantees the unicity, as a drawback,
+	 *  calling this property on large resources will be really slow due to this verification. some user may prefer
+	 * to reimplement it using a bag.
 	 */
 	property readonly contents : set Object[0..*] getter is do
 		var res : Set<kermeta::language::structure::Object> init Set<kermeta::language::structure::Object>.new
@@ -135,7 +138,7 @@ abstract class Resource inherits kermeta::standard::Set<Object>
 	/**
 	 * Search for elements referenced by one element contained by this resource that are not contained by this repository
 	 * ie. element that EMF would claim as "not contained in a resource"
-	 * checks only objects directly referenced by the elment in this resource, ignores inderecly referenced objects
+	 * checks only objects directly referenced by the element in this resource, ignores indirectly referenced objects
 	 * example of use :
 	 *  var report : Set&lt;DanglingDiagnostic&gt;
 	 *	report := resource.findDanglingModelElements()
@@ -557,10 +560,23 @@ class EMFRepository inherits Repository
 	
 	/**
 	 * When loading the Resources, 
-	 * if there are some errors while loading some objects, those objects are ignored
-	 * by default, not setting this is considered as false.
+	 * if there are some errors while loading some objects, the loader can try to ignore them
+	 * setting this attribute to true is equivalent to setting ignoreLoadErrorUnknownMetaclass and ignoreLoadErrorUnknownProperty to true
+	 * by default, not setting this attribute is considered as false.
 	 */	 
-	 attribute ignoreLoadErrors : kermeta::standard::Boolean
+	 attribute ignoreAllLoadErrors : kermeta::standard::Boolean
+	 /**
+	 * When loading the Resources, 
+	 * if there are some errors due to an unknown metaclass while loading some objects, the loader try to ignore them
+	 * by default, not setting this attribute is considered as false.
+	 */
+	 attribute ignoreLoadErrorUnknownMetaclass : kermeta::standard::Boolean/**
+	 * When loading the Resources, 
+	 * if there are some errors due to an unknown property while loading some objects (ie. the metaclass is known but it cannot retreive
+	 * the given reference or attribute in the ClassDefinition, the loader try to ignore them
+	 * by default, not setting this attribute is considered as false.
+	 */
+	 attribute ignoreLoadErrorUnknownProperty : kermeta::standard::Boolean
 }
 
 
