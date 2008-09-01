@@ -238,14 +238,11 @@ class Main
            		result ?= next
            end
        end
-       
-       rescue (e : kermeta::exceptions::ResourceLoadException)
-           metamodelRegistration(e)
    end
    
    operation metamodelRegistration(e : kermeta::exceptions::ResourceLoadException) is do
-            stdio.writeln("Problem when loading the model. ENSURE YOU HAVE REGISTERED THEMETAMODELS !\n"
-                     +"You can find additional information about these samples on Kermeta web site : http://kermeta.org/examples")
+            stdio.writeln("Problem when loading the model. ENSURE YOU HAVE REGISTERED THE METAMODELS !\n"
+                     +"You can find additional information about thise sample on Kermeta web site : http://kermeta.org/examples")
             raise e
    end
 }
