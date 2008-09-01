@@ -1,4 +1,4 @@
-/* $Id: ExpressionHelper.kmt,v 1.7 2008-08-26 13:04:14 cfaucher Exp $
+/* $Id: ExpressionHelper.kmt,v 1.8 2008-09-01 15:41:53 cfaucher Exp $
  * Creation date: Jul 25, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -85,7 +85,100 @@ aspect class Expression {
 
 
 aspect class CallVariable {
+	
+	operation isParameter() : Boolean is do
+		result := false
+		if self.container.isInstanceOf(CallFeature) then
+			var exp : Expression init self.container.asType(CallFeature).parameters.detect{ p |
+				p==self
+			}
+			if not exp.isVoid() then
+				result := true
+			end
+		end
+	end
+	
+	operation isParameterSingle() : Boolean is do
+		result := false
+		
+		if self.isParameter() then
+			var cf_ : CallFeature init self.container.asType(CallFeature)
+			var i : Integer init -1
+			var exp : Expression init cf_.parameters.detect{ p |
+				i := i+1
+				p==self
+			}
+			if cf_.staticOperation.ownedParameter.elementAt(i).asType(Parameter).upper==1 then
+				result := true
+			end
+		end
+	end
+	
+	operation isParameterMany() : Boolean is do
+		result := false
+		
+		if self.isParameter() then
+			var cf_ : CallFeature init self.container.asType(CallFeature)
+			var i : Integer init -1
+			var exp : Expression init cf_.parameters.detect{ p |
+				i := i+1
+				p==self
+			}
+			if cf_.staticOperation.ownedParameter.elementAt(i).asType(Parameter).upper==-1 then
+				result := true
+			end
+		end
+	end
+	
+	operation getCallFeatureCorrespondingParameter() : Parameter is do
+		result := void
 
+		if self.isParameter() then
+			var cf_ : CallFeature init self.container.asType(CallFeature)
+			var i : Integer init -1
+			var exp : Expression init cf_.parameters.detect{ p |
+				i := i+1
+				p==self
+			}
+			result := cf_.staticOperation.ownedParameter.elementAt(i).asType(Parameter)
+		end
+	end
+	
+	operation isParameterForOwningOperation() : Boolean is do
+		result := false
+		if self.container.isInstanceOf(CallFeature) then
+			result := not self.getContainerAsType(Operation).asType(Operation).ownedParameter.detect{ p |
+				p.name==self.name
+			}.isVoid()
+		end
+	end
+	
+	operation isParameterForOwningOperationSingle() : Boolean is do
+		result := false
+		if not self.retrieveCorrespondingParameter().isVoid() then
+			if self.retrieveCorrespondingParameter().upper==1 then
+				result := true
+			end
+		end
+	end
+	
+	operation isParameterForOwningOperationMany() : Boolean is do
+		result := false
+		if not self.retrieveCorrespondingParameter().isVoid() then
+			if self.retrieveCorrespondingParameter().upper==-1 then
+				result := true
+			end
+		end
+	end
+	
+	operation isParameterManyAndForOwningOperation() : Boolean is do
+		result := false
+		
+		if self.isParameterMany() and self.isParameterForOwningOperation() then
+			result := true
+		end
+	end
+	
 	method isFunctionTypeVariable() : Boolean is do
 		result := false
 		var ftParam : Parameter init retrieveCorrespondingParameter()

@@ -1,4 +1,4 @@
-/* $Id: CreateEcoreModelElement.kmt,v 1.30 2008-08-28 13:01:00 cfaucher Exp $
+/* $Id: CreateEcoreModelElement.kmt,v 1.31 2008-09-01 15:41:53 cfaucher Exp $
  * Creation date: February 1, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -304,7 +304,8 @@ aspect class Property {
 		ecoreStructuralFeature.transient := self.getEMFIsTransient()
 		
 		// management of read only
-		// management of default		
+		// management of default
+		
 		result := ecoreStructuralFeature
 	end
 }

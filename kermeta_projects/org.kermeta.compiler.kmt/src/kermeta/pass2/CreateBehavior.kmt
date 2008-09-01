@@ -1,4 +1,4 @@
-/* $Id: CreateBehavior.kmt,v 1.56 2008-08-28 15:24:29 cfaucher Exp $
+/* $Id: CreateBehavior.kmt,v 1.57 2008-09-01 15:41:53 cfaucher Exp $
  * Creation date: January 21, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -934,13 +934,22 @@ package behavior {
 				if self.name == "stdio" then
 					result := result + "org.kermeta.compil.runtime.helper.io.StdIOUtil"
 				else
-					var c_param : Parameter init self.retrieveCorrespondingParameter()
-					if c_param.isVoid() then
+					
+					if (not self.isParameter()) and (not self.isParameterForOwningOperation()) then
+						
 						result := result + IdentifierHelper.new.getMangledIdentifier(self.name, context) + context.printFtSuffix()
 					else
-					if c_param.upper==1 then
+					if self.isParameterSingle() or self.isParameterForOwningOperationSingle() or self.isParameterManyAndForOwningOperation() then
 						result := result + IdentifierHelper.new.getMangledIdentifier(self.name, context) + context.printFtSuffix()
 					else
+					stdio.writeln("toto: " + self.toString() + " - " + self.name)
+						var c_param : Parameter
+						if self.isParameterForOwningOperation() then
+							c_param := self.retrieveCorrespondingParameter()
+						else
+							c_param := self.getCallFeatureCorrespondingParameter()
+						end
+	
 						var type_binding : String init self.staticType.asType(Class).typeParamBinding.one.type.createBehaviorJava(context)
 										
 						if (not c_param.isUnique) and (not c_param.isOrdered) then
