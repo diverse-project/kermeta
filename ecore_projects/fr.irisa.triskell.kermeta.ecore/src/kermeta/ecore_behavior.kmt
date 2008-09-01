@@ -1,4 +1,4 @@
-/* $Id: ecore_behavior.kmt,v 1.6 2008-03-04 17:57:04 cfaucher Exp $
+/* $Id: ecore_behavior.kmt,v 1.7 2008-09-01 15:53:50 dvojtise Exp $
  * Creation date: May 2, 2006
  * License: E.P.L.
  * Copyright:
@@ -44,36 +44,20 @@ aspect class EClass
 	 		result := kermeta::standard::OrderedSet<EAttribute>.new
 			self.eAllSuperTypes.each{ t | result.addAll(t.eAttributes) }
 		end
-		setter is do
-			//TODO: implement setter for derived property eAllAttributes
-			raise kermeta::exceptions::NotImplementedException.new 
-		end
 	property eAllReferences : EReference[0..*]
 		getter is do
 	 		result := kermeta::standard::OrderedSet<EReference>.new 
 			self.eAllSuperTypes.each{ t | result.addAll(t.eReferences) }
-		end
-		setter is do
-			//TODO: implement setter for derived property eAllReferences
-			raise kermeta::exceptions::NotImplementedException.new 
 		end
 	property eReferences : EReference[0..*]
 		getter is do
 			result := kermeta::standard::OrderedSet<EReference>.new
 			self.eStructuralFeatures.each { f | if EReference.isInstance(f) then var a : EReference a ?= f result.add(a) end }
 		end
-		setter is do
-			//TODO: implement setter for derived property eReferences
-			raise kermeta::exceptions::NotImplementedException.new 
-		end
 	property eAttributes : EAttribute[0..*]
 		getter is do
 			result := kermeta::standard::OrderedSet<EAttribute>.new
 			self.eStructuralFeatures.each { f | if EAttribute.isInstance(f) then var a : EAttribute a ?= f result.add(a) end }
-		end
-		setter is do
-			//TODO: implement setter for derived property eAttributes
-			raise kermeta::exceptions::NotImplementedException.new 
 		end
 	property eAllContainments : EReference[0..*]
 		getter is do
@@ -81,19 +65,11 @@ aspect class EClass
 	 		stdio.writeln("containment : " + self.eAllReferences.one.containment.toString)
 	 		result.addAll(self.eAllReferences.select { r | r.containment == true } )
 		end
-		setter is do
-			//TODO: implement setter for derived property eAllContainments
-			raise kermeta::exceptions::NotImplementedException.new 
-		end
 	property eAllOperations : EOperation[0..*]
 		getter is do
 	 		result := kermeta::standard::OrderedSet<EOperation>.new 
 	 		result.addAll(eOperations)
 			self.eAllSuperTypes.each{ t | result.addAll(t.eOperations) }
-		end
-		setter is do
-			//TODO: implement setter for derived property eAllOperations
-			raise kermeta::exceptions::NotImplementedException.new 
 		end
 
 	
@@ -103,10 +79,6 @@ aspect class EClass
 	 		if (eStructuralFeatures != void) then result.addAll(eStructuralFeatures) end
 			self.eAllSuperTypes.each{ t | result.addAll(t.eStructuralFeatures) }
 		end
-		setter is do
-			//TODO: implement setter for derived property eAllStructuralFeatures
-			raise kermeta::exceptions::NotImplementedException.new 
-		end
 
 	
 	property eAllSuperTypes : EClass[0..*]
@@ -115,10 +87,6 @@ aspect class EClass
 			result.addAll(self.eSuperTypes)
 			self.eSuperTypes.each { t | result.addAll(t.eAllSuperTypes) }
 			
-		end
-		setter is do
-			//TODO: implement setter for derived property eAllSuperTypes
-			raise kermeta::exceptions::NotImplementedException.new 
 		end
 	property eIDAttribute : EAttribute
 		getter is do
