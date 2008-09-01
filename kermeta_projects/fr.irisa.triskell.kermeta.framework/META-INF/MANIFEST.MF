@@ -7,9 +7,7 @@ Export-Package: .
 Require-Bundle: fr.irisa.triskell.kermeta.interpreter,
  fr.irisa.triskell.kermeta.io,
  org.eclipse.core.runtime,
- org.antlr,
  org.eclipse.gymnast.runtime.core,
- org.antlr.eclipse.core,
  org.kermeta.io.loader,
  org.kermeta.merger
 Bundle-Vendor: IRISA/INRIA
