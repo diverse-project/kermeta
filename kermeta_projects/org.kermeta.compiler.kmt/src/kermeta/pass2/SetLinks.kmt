@@ -1,4 +1,4 @@
-/* $Id: SetLinks.kmt,v 1.36 2008-08-28 13:01:11 cfaucher Exp $
+/* $Id: SetLinks.kmt,v 1.37 2008-09-01 17:15:30 cfaucher Exp $
  * Creation date: January 21, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -176,7 +176,7 @@ aspect class Parameter {
 			
 		else
 		
-			/*if self.upper==-1 then		
+			/*if self.upper!=1 then		
 				var eOrderedSet : EClassifier init context.mu.getEClassifierByQualifiedName("kermeta::standard::OrderedSet")
 				
 				var genericType : EGenericType init EGenericType.new				
@@ -232,10 +232,10 @@ class LinkSetterForTypedElement {
 			/*
 			if element.isInstanceOf(Parameter) then
 				var param : Parameter init element.asType(Parameter)
-				if param.upper==-1 then
+				if param.upper!=1 then
 					stdio.writeln("param: " + param.name.toString)
 					var eOrderedSet : EClassifier init context.mu.getEClassifierByQualifiedName("kermeta::standard::OrderedSet")
-					stdio.writeln("param.upper==-1: " + eOrderedSet.toString)
+					stdio.writeln("param.upper!=1: " + eOrderedSet.toString)
 				end
 			end
 			*/

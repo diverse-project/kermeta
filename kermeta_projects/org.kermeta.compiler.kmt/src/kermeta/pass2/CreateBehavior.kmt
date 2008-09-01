@@ -1,4 +1,4 @@
-/* $Id: CreateBehavior.kmt,v 1.57 2008-09-01 15:41:53 cfaucher Exp $
+/* $Id: CreateBehavior.kmt,v 1.58 2008-09-01 17:15:30 cfaucher Exp $
  * Creation date: January 21, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -62,7 +62,7 @@ package structure {
 			if self.upper==1 then
 				result := result + "result"
 			else
-				result := result + "org.kermeta.compil.runtime.helper.basetypes.CollectionUtil.convertAsEList(result)"
+				result := result + context.COLLECTION_UTIL_CLASS + ".convertAsEList(result)"
 			end
 			result := result + ";\n"
 		end
@@ -654,6 +654,8 @@ package behavior {
 			result := ""
 			
 			var ppCast : Boolean init false
+			
+			var cf_prop_suffix : String init ""
 
 			//By default, the self expression is added to a call feature
 			if self.target.isVoid() then
@@ -765,34 +767,59 @@ package behavior {
 							else
 								if self.isCallFeatureAsStaticProperty() then
 								
-									var cf_prop_suffix : String init ""
-									
 									if self.staticProperty.upper != 1 then
 										var type_binding : String init self.staticType.asType(Class).typeParamBinding.one.type.createBehaviorJava(context)
 										
 										if (not self.staticProperty.isUnique) and (not self.staticProperty.isOrdered) then
-											result := "org.kermeta.compil.runtime.helper.basetypes.CollectionUtil.<" + type_binding + ">convertAsBag(" + result
+											result := context.COLLECTION_UTIL_CLASS + ".<" + type_binding + ">convertAsBag(" + result
 										end
 										
 										if (self.staticProperty.isUnique) and (not self.staticProperty.isOrdered) then
-											result := "org.kermeta.compil.runtime.helper.basetypes.CollectionUtil.<" + type_binding + ">convertAsSet(" + result
+											result := context.COLLECTION_UTIL_CLASS + ".<" + type_binding + ">convertAsSet(" + result
 										end
 										
 										if (self.staticProperty.isUnique) and (self.staticProperty.isOrdered) then
-											result := "org.kermeta.compil.runtime.helper.basetypes.CollectionUtil.<" + type_binding + ">convertAsOrderedSet(" + result
+											result := context.COLLECTION_UTIL_CLASS + ".<" + type_binding + ">convertAsOrderedSet(" + result
 										end
 										
 										if (not self.staticProperty.isUnique) and (self.staticProperty.isOrdered) then
-											result := "org.kermeta.compil.runtime.helper.basetypes.CollectionUtil.<" + type_binding + ">convertAsSequence(" + result
+											result := context.COLLECTION_UTIL_CLASS + ".<" + type_binding + ">convertAsSequence(" + result
 										end
 										
 										cf_prop_suffix := ")"
 									end
 									
 									result := result + "get" + self.staticProperty.getFinalName().capName() + "()" + cf_prop_suffix
+									cf_prop_suffix := ""
 								else
 									if not self.callsFunctionType() then
+									
+									
+										if self.staticOperation.upper != 1 then
+															var type_binding : String init self.staticType.asType(Class).typeParamBinding.one.type.createBehaviorJava(context)
+															
+															if (not self.staticOperation.isUnique) and (not self.staticOperation.isOrdered) then
+																result := context.COLLECTION_UTIL_CLASS + ".<" + type_binding + ">convertAsBag(" + result
+															end
+															
+															if (self.staticOperation.isUnique) and (not self.staticOperation.isOrdered) then
+																result := context.COLLECTION_UTIL_CLASS + ".<" + type_binding + ">convertAsSet(" + result
+															end
+															
+															if (self.staticOperation.isUnique) and (self.staticOperation.isOrdered) then
+																result := context.COLLECTION_UTIL_CLASS + ".<" + type_binding + ">convertAsOrderedSet(" + result
+															end
+															
+															if (not self.staticOperation.isUnique) and (self.staticOperation.isOrdered) then
+																result := context.COLLECTION_UTIL_CLASS + ".<" + type_binding + ">convertAsSequence(" + result
+															end
+															
+															cf_prop_suffix := ")"
+										end
+									
+									
 										result := result + IdentifierHelper.new.getMangledIdentifier(self.staticOperation.getFinalName(), context)
+										
 									else
 										//Fix the dot after the result of an FunctionType
 										if self.container.isInstanceOf(CallExpression) and (not self.container.callsFunctionType()) then
@@ -840,7 +867,7 @@ package behavior {
 						end
 						
 						self.beforeLambdaExpressionResult := ""
-						result := result + CompilerHelperJava.new.ppComaSeparatedNodes(self.parameters, context) + ")"
+						result := result + CompilerHelperJava.new.ppComaSeparatedNodes(self.parameters, context) + ")" + cf_prop_suffix
 						context.beforeLambdaExpressionResult := self.beforeLambdaExpressionResult
 						self.beforeLambdaExpressionResult := ""
 						
@@ -942,30 +969,36 @@ package behavior {
 					if self.isParameterSingle() or self.isParameterForOwningOperationSingle() or self.isParameterManyAndForOwningOperation() then
 						result := result + IdentifierHelper.new.getMangledIdentifier(self.name, context) + context.printFtSuffix()
 					else
-					stdio.writeln("toto: " + self.toString() + " - " + self.name)
+					
 						var c_param : Parameter
 						if self.isParameterForOwningOperation() then
 							c_param := self.retrieveCorrespondingParameter()
 						else
 							c_param := self.getCallFeatureCorrespondingParameter()
 						end
-	
+		
 						var type_binding : String init self.staticType.asType(Class).typeParamBinding.one.type.createBehaviorJava(context)
-										
-						if (not c_param.isUnique) and (not c_param.isOrdered) then
-							result := "org.kermeta.compil.runtime.helper.basetypes.CollectionUtil.<" + type_binding + ">convertAsBag(" + result
-						end
-										
-						if (c_param.isUnique) and (not c_param.isOrdered) then
-							result := "org.kermeta.compil.runtime.helper.basetypes.CollectionUtil.<" + type_binding + ">convertAsSet(" + result
-						end
-										
-						if (c_param.isUnique) and (c_param.isOrdered) then
-							result := "org.kermeta.compil.runtime.helper.basetypes.CollectionUtil.<" + type_binding + ">convertAsOrderedSet(" + result
-						end
-										
-						if (not c_param.isUnique) and (c_param.isOrdered) then
-							result := "org.kermeta.compil.runtime.helper.basetypes.CollectionUtil.<" + type_binding + ">convertAsSequence(" + result
+							
+						if self.isParameterMany() then
+							result := context.COLLECTION_UTIL_CLASS + ".<" + type_binding + ">convertAsEList(" + result
+						else
+											
+							if (not c_param.isUnique) and (not c_param.isOrdered) then
+								result := context.COLLECTION_UTIL_CLASS + ".<" + type_binding + ">convertAsBag(" + result
+							end
+											
+							if (c_param.isUnique) and (not c_param.isOrdered) then
+								result := context.COLLECTION_UTIL_CLASS + ".<" + type_binding + ">convertAsSet(" + result
+							end
+											
+							if (c_param.isUnique) and (c_param.isOrdered) then
+								result := context.COLLECTION_UTIL_CLASS + ".<" + type_binding + ">convertAsOrderedSet(" + result
+							end
+											
+							if (not c_param.isUnique) and (c_param.isOrdered) then
+								result := context.COLLECTION_UTIL_CLASS + ".<" + type_binding + ">convertAsSequence(" + result
+							end
+						
 						end
 										
 						result := result + IdentifierHelper.new.getMangledIdentifier(self.name, context) + context.printFtSuffix() + ")"
