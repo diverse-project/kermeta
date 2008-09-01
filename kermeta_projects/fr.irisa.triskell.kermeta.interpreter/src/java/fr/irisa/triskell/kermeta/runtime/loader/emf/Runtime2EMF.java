@@ -1,4 +1,4 @@
-/* $Id: Runtime2EMF.java,v 1.77 2008-08-14 09:21:24 dvojtise Exp $
+/* $Id: Runtime2EMF.java,v 1.78 2008-09-01 15:25:23 fmunoz Exp $
  * Project   : Kermeta (First iteration)
  * File      : Runtime2EMF.java
  * License   : EPL
@@ -421,7 +421,7 @@ public class Runtime2EMF {
 							eObject + "; \n\t" +
 							eObject.eClass().getName() + "."  + feature.getName() + 
 							"; num. of elts in feature : " + ((EList) eObject.eGet(feature)).size());					
-					if(feature.isOrdered()){
+					if(feature.isOrdered() && colArr.size()>1){
 						this.propertiesToSort.add(new SortPropertyCommand(colArr, eObject, feature));
 					//	internalLog.debug("We will need to make sure that collection "+ eObject.eClass().getName() + "."  + feature.getName() + " is correctly ordered");
 					}
