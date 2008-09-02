@@ -1,4 +1,4 @@
-/* $Id: CreateBehavior.kmt,v 1.59 2008-09-02 07:25:05 cfaucher Exp $
+/* $Id: CreateBehavior.kmt,v 1.60 2008-09-02 11:58:30 cfaucher Exp $
  * Creation date: January 21, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -12,11 +12,11 @@ require "http://www.eclipse.org/emf/2002/Ecore"
 require "platform:/resource/org.kermeta.compiler.kmt/src/kermeta/KM2EcoreContext.kmt"
 require "platform:/resource/org.kermeta.compiler.kmt/src/kermeta/helper/KM2EcoreHelper.kmt"
 require "platform:/resource/org.kermeta.compiler.kmt/src/kermeta/helper/kermeta/ExpressionHelper.kmt"
+require "platform:/resource/org.kermeta.compiler.kmt/src/kermeta/helper/kermeta/OperationHelper.kmt"
 require "platform:/resource/org.kermeta.compiler.kmt/src/kermeta/helper/kermeta/StringHelper.kmt"
 require "platform:/resource/org.kermeta.compiler.kmt/src/kermeta/helper/kermeta/PrettyPrinterHelper.kmt"
 require "platform:/resource/org.kermeta.compiler.kmt/src/kermeta/common/ContainmentTraversable.kmt"
 require "platform:/resource/org.kermeta.compiler.kmt/src/kermeta/common/TraceSource.kmt"
-require "platform:/resource/org.kermeta.compiler.kmt/src/kermeta/helper/simk/SimkHelper.kmt"
 require "platform:/resource/org.kermeta.compiler.kmt/src/kermeta/pass2/Postprocess.kmt"
 
 using kermeta::language::structure
@@ -28,11 +28,11 @@ using km2ecore
 using km2ecore::helper::ecore
 using km2ecore::helper::kermeta
 using km2ecore::helper::java
-using simk
 
 package structure {
 
 	aspect class Object {
+		/** Super method */
 		operation createBehaviorJava(context : KM2EcoreContext) : String is do
 			result := ""
 		end
@@ -57,6 +57,7 @@ package structure {
 	/** We have to visit operation in order to print the result initialization and the return statement */
 	aspect class Operation {
 	
+		/** Generation of the String representing the end of a method: return of the result value */
 		operation ppReturnResult(context : KM2EcoreContext) : String is do
 			result := "\nreturn "
 			if self.upper==1 then
@@ -142,112 +143,7 @@ package structure {
 				result := true
 			end
 		end
-		
-		
-		operation getOptimizedStaticCall(context : KM2EcoreContext) : String is do
-			result := ""
-			if self.body.isInstanceOf(Block) then
-				if self.body.asType(Block).statement.size==1 then
-					if self.body.asType(Block).statement.isInstanceOf(JavaStaticCall) then
-						var static_call_set_1 : OrderedSet<String> init self.body.asType(Block).statement.asType(JavaStaticCall).createBehaviorJava(context).split("(")//.getCompiledJavaExtern().split("(")
-						result := static_call_set_1.one()
-					else
-						if self.body.asType(Block).statement.isInstanceOf(Assignment) then
-							if self.body.asType(Block).statement.asType(Assignment).~value.isInstanceOf(JavaStaticCall) then
-								var static_call_set_2 : OrderedSet<String> init self.body.asType(Block).statement.asType(Assignment).~value.asType(JavaStaticCall).createBehaviorJava(context).split("(")//.getCompiledJavaExtern().split("(")
-								result := static_call_set_2.one()
-							end
-						end
-					end
-				end
-			end
-		end
-		
-		
-		/**
-		 * Compiling in Simk mode all the methods (inherited methods included) from ValueType
-		 */
-		operation compilingInSimkMode(context : KM2EcoreContext) : Void is do
-			
-			var sMContext : SMContext init context.simkModel.retrieveOrCreateContextForWrapper(self, context)
-			
-			if not sMContext.isVoid() then
-			
-				var staticMethod : StaticMethod init StaticMethod.new()
-				
-				context.simkModel.staticMethods.add(staticMethod)
-				sMContext.staticMethods.add(staticMethod)
-				
-				staticMethod.name := self.name
-				staticMethod.setWrapperUsage()
-				
-				// By default, a self parameter is added
-				var self_param : SMParameter init SMParameter.new()
-				self_param.name := "self"
-				
-				if self.getWrapperValueTypeSelfExpression()!="" then
-					var map_infos : Hashtable<String, String> init self.getWrapperValueTypeSelfExpression().getPropertyInfos()
-					var map_value : String init map_infos.getValue(context.current_valueType.getEMFInstanceClassName())
-					
-					if not map_value.isVoid() then
-						self_param.type := map_value
-					end
-				end
-				
-				if self_param.type.isVoid() then
-					self_param.type := context.current_valueType.getEMFInstanceClassName()
-				end
-				
-				staticMethod.sMParameters.add(self_param)
-				
-				// Management of the Parameters
-				self.ownedParameter.each{ p |
-					var param : SMParameter init SMParameter.new()
-					param.name := p.name
-					
-					if not p.type.isInstanceOf(FunctionType) then
-						if (p.type.getTypeQName() == self.container.asType(ClassDefinition).qualifiedName) or (p.type.getTypeQName() == "kermeta::language::structure::Object") then
-							param.type := context.current_valueType.getEMFInstanceClassName()
-						else
-							param.type := p.type.createBehaviorJava(context)
-							if Operation.new().isVoidType(param.type) then
-								param.type := "void"
-							end
-						end
-					else
-						// This case should never happend
-					end
-					
-					staticMethod.sMParameters.add(param)
-				}
-				
-				// Management of the ReturnType
-				var sMReturn : SMReturn init SMReturn.new()
-				staticMethod.sMReturn := sMReturn
-				
-				//if self.type.getTypeQName() == self.container.asType(ClassDefinition).qualifiedName then
-				if self.getWrapperValueTypeReturnType()!="" then
-					var map_infos : Hashtable<String, String> init self.getWrapperValueTypeReturnType().getPropertyInfos()
-					
-					var map_value : String init map_infos.getValue(context.current_valueType.getEMFInstanceClassName())
-					
-					if not map_value.isVoid() then
-						sMReturn.type := map_value
-					end
-				end
-				
-				if sMReturn.type.isVoid() then
-					sMReturn.type := self.type.createBehaviorJava(context)
-					if Operation.new().isVoidType(sMReturn.type) then
-						sMReturn.type := "void"
-					end
-				end
-				
-				staticMethod.body := self.createBehaviorJava(context)
-			
-			end
-			
-		end
+
 	}
 	
 	aspect class Type {
@@ -478,8 +374,8 @@ package behavior {
 
 				end
 				
-				str_statement := str_statement.replace(context.SEPARATOR_STATEMENT_FT, "")
-				str_statement := str_statement.replace(context.RETURN_EXPRESSION_TO_REPLACE, "")
+				str_statement := str_statement.replace(context.SEPARATOR_STATEMENT_FT + "//", "//")
+				str_statement := str_statement.replace(context.RETURN_EXPRESSION_TO_REPLACE + "result", "result")
 				
 				javaCode.append(context.beforeLambdaExpressionResult)
 				//javaCode.append(context.beforeFunctionTypeResult)
@@ -725,6 +621,7 @@ package behavior {
 			
 			
 			if (fName == "_new")
+					and (self.staticOperation.container.asType(ClassDefinition).qualifiedName=="kermeta::language::structure::Class")
 					and (not tgt.isInstanceOf(CallVariable))
 					and (not tgt.isInstanceOf(CallFeature))
 					and (not tgt.isInstanceOf(SelfExpression))
@@ -1434,9 +1331,17 @@ package behavior {
 	aspect class StringLiteral {
 		method createBehaviorJava(context : KM2EcoreContext) : String from Literal is do
 			super(context)
-			result := "\"" + self.~value.replace("\"", "\\\"") + "\""
-			result := result.replace("\n", "\\n")
-			result := result.replace("\t", "\\t")
+			
+			result := self.~value
+			
+			if result == "." then
+				result := "\"" + result.replace(".", "\\\\.") + "\""
+			else
+				result := "\"" + result.replace("\"", "\\\"") + "\""
+				result := result.replace("\n", "\\n")
+				result := result.replace("\t", "\\t")
+			end
+			
 			result := result + self.endOfExpressionFixer()
 		end
 	}
