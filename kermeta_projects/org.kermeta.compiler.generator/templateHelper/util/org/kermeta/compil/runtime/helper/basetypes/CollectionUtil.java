@@ -86,4 +86,29 @@ public class CollectionUtil<G> {
 		newSequence.setValues(l);
 		return newSequence;
 	}
+
+	public static <G> EList<G> convertAsEList(kermeta.standard.OrderedSet<G> col) {
+		EList<G> newEList = new BasicEList<G>(); 
+		newEList = col.getValues();
+		return newEList;
+	}
+	
+	public static <G> EList<G> convertAsEList(kermeta.standard.Set<G> col) {
+		EList<G> newEList = new BasicEList<G>(); 
+		newEList = col.getValues();
+		return newEList;
+	}
+	
+	public static <G> EList<G> convertAsEList(kermeta.standard.Sequence<G> col) {
+		EList<G> newEList = new BasicEList<G>(); 
+		newEList = col.getValues();
+		return newEList;
+	}
+	
+	public static <G> EList<G> convertAsEList(kermeta.standard.Bag<G> col) {
+		EList<G> newEList = new BasicEList<G>(); 
+		newEList = col.getValues();
+		return newEList;
+	}
+
 }
