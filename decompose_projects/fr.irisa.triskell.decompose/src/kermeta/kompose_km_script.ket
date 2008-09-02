@@ -3,7 +3,7 @@ package="decomposition"
 require="kermeta"
 using="kermeta::standard"
 class="KomposeScriptBridge"
-parameters="numeral:Integer,location:String"
+parameters="numeral:Integer,location:String,dString:String,mpackage:String"
 %>
 @mainClass "decompose::Test::n<%=numeral.toString%>::Main"
 @mainOperation "main"
@@ -11,15 +11,17 @@ parameters="numeral:Integer,location:String"
 
 package decompose::Test::n<%=numeral.toString%>;
 require kermeta
-require "platform:/resource/org.kermeta.kompose.specialization.ecore.uno/kermeta/Ecore.kmt"
-
-using ecore
+//require "platform:/resource/org.kermeta.kompose.specialization.ecore.uno/kermeta/Ecore.kmt"
+require "<%=dString%>"
+using <%=mpackage%>
 
 
 class Main
 {
 	operation main() : Void is do 
-		var ecoreMain:ecore::Main init ecore::Main.new
-		ecoreMain.main("<%=location%>")
+		//var compMain:ecore::Main init ecore::Main.new
+		var compMain:<%=mpackage%>::Main init <%=mpackage%>::Main.new
+		
+		compMain.main("<%=location%>")
 	end
 }

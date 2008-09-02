@@ -5,13 +5,21 @@ using kermeta::standard
 using kermeta::utils
 using kermeta::standard
 class KomposeScriptBridge{
-operation generate(numeral:Integer,location:String):String is do
+operation generate(numeral:Integer,location:String,dString:String,mpackage:String):String is do
 var _res: StringBuffer init StringBuffer.new
 _res.append("@mainClass \"decompose::Test::n")
 _res.append(numeral.toString)
 _res.append("::Main\"\n@mainOperation \"main\"\n\n\npackage decompose::Test::n")
 _res.append(numeral.toString)
-_res.append(";\nrequire kermeta\nrequire \"platform:/resource/org.kermeta.kompose.specialization.ecore.uno/kermeta/Ecore.kmt\"\n\nusing ecore\n\n\nclass Main\n{\n\toperation main() : Void is do \n\t\tvar ecoreMain:ecore::Main init ecore::Main.new\n\t\tecoreMain.main(\"")
+_res.append(";\nrequire kermeta\n//require \"platform:/resource/org.kermeta.kompose.specialization.ecore.uno/kermeta/Ecore.kmt\"\nrequire \"")
+_res.append(dString)
+_res.append("\"\nusing ")
+_res.append(mpackage)
+_res.append("\n\n\nclass Main\n{\n\toperation main() : Void is do \n\t\t//var compMain:ecore::Main init ecore::Main.new\n\t\tvar compMain:")
+_res.append(mpackage)
+_res.append("::Main init ")
+_res.append(mpackage)
+_res.append("::Main.new\n\t\t\n\t\tcompMain.main(\"")
 _res.append(location)
 _res.append("\")\n\tend\n}")
 result := _res.toString
