@@ -1,6 +1,6 @@
 
 
-/*$Id: KProcess.java,v 1.4 2008-06-17 14:35:46 dvojtise Exp $
+/*$Id: KProcess.java,v 1.5 2008-09-02 15:40:50 dvojtise Exp $
 * Project : org.kermeta.debugger
 * File : 	KProcess.java
 * License : EPL
@@ -14,7 +14,9 @@ package org.kermeta.runner.model;
 
 import java.util.Map;
 
+import org.eclipse.debug.core.DebugException;
 import org.eclipse.debug.core.ILaunch;
+import org.eclipse.debug.core.model.ITerminate;
 import org.eclipse.debug.core.model.RuntimeProcess;
 import org.kermeta.interpreter.api.Interpreter;
 import org.kermeta.runner.launching.KBasicProcess;
@@ -46,7 +48,23 @@ public class KProcess extends RuntimeProcess {
 		Interpreter interpreter = getInterpreter();
 		return interpreter != null ? interpreter.isTerminated() : false;		
 	}
-	
+	/**
+	 * @see ITerminate#terminate()
+	 */
+	public void terminate() throws DebugException {
+		if (!isTerminated()) {
+			// ask to the interpreter to stop
+			this.getInterpreter().interrupt();
+			
+			try { // Give time for other processes to flush their content string.
+				Thread.sleep(500);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+			// really kill all Threads of this process
+			super.terminate();
+		}
+	}	
 }
 
 

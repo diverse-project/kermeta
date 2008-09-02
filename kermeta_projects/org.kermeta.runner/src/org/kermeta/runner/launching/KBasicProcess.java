@@ -1,6 +1,6 @@
 
 
-/*$Id: KBasicProcess.java,v 1.13 2008-06-09 14:24:07 ftanguy Exp $
+/*$Id: KBasicProcess.java,v 1.14 2008-09-02 15:40:50 dvojtise Exp $
 * Project : org.kermeta.debugger
 * File : 	KBasicProcess.java
 * License : EPL
@@ -153,32 +153,34 @@ public class KBasicProcess extends Process {
 	
 	@Override
 	public void destroy() {
+		
+		
 		// Give time for other processes to flush their content string.
 		// Needed for the debug console.
-		synchronized (this) {
+	/*	synchronized (this) {
 			try {
-				Thread.sleep(100);
+				Thread.sleep(1000);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
-		}
+		}*/
 		// Closing all streams.
-		try {
-			_errorStream.close();
-			_inputStream.close();
-			_outputStream.close();
-			_interpreterErrorStream.close();
-			_interpreterInputStream.close();
-			_interpreterOutputStream.close();
-			_errorStream = null;
-			_inputStream = null;
-			_interpreterErrorStream = null;
-			_interpreterInputStream = null;
-			_interpreterOutputStream = null;
-		} catch (IOException e) {
-		} catch (NullPointerException e) {
-			// Sometimes this method is called twice and provokes a null pointer exception.
-		}
+ 		try {
+ 			if(_errorStream != null)			_errorStream.close();
+ 			if(_inputStream != null)			_inputStream.close(); 
+ 			if(_outputStream != null)			_outputStream.close();
+ 			if(_interpreterErrorStream != null)	_interpreterErrorStream.close();
+ 			if(_interpreterInputStream != null)	_interpreterInputStream.close();
+ 			if(_interpreterOutputStream != null)_interpreterOutputStream.close();
+ 		} catch (IOException e) {
+ 		}
+ 		
+ 		_errorStream = null;
+ 		_inputStream = null;
+ 		_interpreterErrorStream = null;
+ 		_interpreterInputStream = null;
+ 		_interpreterOutputStream = null;
+	
 	}
 
 	@Override
