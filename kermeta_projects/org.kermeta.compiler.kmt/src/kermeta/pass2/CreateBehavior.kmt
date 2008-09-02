@@ -1,4 +1,4 @@
-/* $Id: CreateBehavior.kmt,v 1.60 2008-09-02 11:58:30 cfaucher Exp $
+/* $Id: CreateBehavior.kmt,v 1.61 2008-09-02 18:50:25 cfaucher Exp $
  * Creation date: January 21, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -544,6 +544,15 @@ package behavior {
 			end
 							
 		end
+		
+		operation isFromClass() : Boolean is do
+			result := false
+			if not self.staticOperation.isVoid() then
+				if self.staticOperation.container.asType(ClassDefinition).qualifiedName=="kermeta::language::structure::Class" then
+					result := true
+				end
+			end
+		end
 	
 		method createBehaviorJava(context : KM2EcoreContext) : String from CallExpression is do
 			super(context)
@@ -619,9 +628,8 @@ package behavior {
 			
 			end
 			
-			
 			if (fName == "_new")
-					and (self.staticOperation.container.asType(ClassDefinition).qualifiedName=="kermeta::language::structure::Class")
+					and isFromClass()
 					and (not tgt.isInstanceOf(CallVariable))
 					and (not tgt.isInstanceOf(CallFeature))
 					and (not tgt.isInstanceOf(SelfExpression))
