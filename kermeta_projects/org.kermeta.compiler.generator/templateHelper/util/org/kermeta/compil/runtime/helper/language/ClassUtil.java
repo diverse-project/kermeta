@@ -39,12 +39,7 @@ public class ClassUtil {
 		}
 		
 		String class_name_full = seq_class_QN[seq_class_QN.length-1];
-		String[] seq_class_name_full = class_name_full.split("<");
-		/*if( seq_class_name_full.length >1 ) {
-			class_name = seq_class_name_full[0];
-		} else {*/
-			class_name = class_name_full;
-		//}
+		class_name = class_name_full;
 		
 		EObject newObject = null;
 		
