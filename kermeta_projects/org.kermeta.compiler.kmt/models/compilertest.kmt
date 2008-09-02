@@ -1,4 +1,4 @@
-/* $Id: compilertest.kmt,v 1.1 2008-08-21 15:56:56 cfaucher Exp $ 
+/* $Id: compilertest.kmt,v 1.2 2008-09-02 13:07:16 cfaucher Exp $ 
  * Creation : August 18, 2008
  * Licence  : EPL 
  * Copyright:
@@ -68,7 +68,7 @@ class Main {
 		save(theFSM, "platform:/resource/org.kermeta.compiler.kmt/fsmmodels/sample1.remove.fsm")
 		
 		stdio.writeln("\nTest of times:")
-		5.times{ i |
+		5000.times{ i |
 			stdio.writeln("times: " + i.toString() + ", " + (i*2).toString() + ", " + (i+1).toString() + ", " + (i*5-1).toString() )
 		}
 		
