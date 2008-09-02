@@ -8,7 +8,7 @@
  * Technologies), Jacques Lescot (Anyware Technologies) - initial API and
  * implementation
  ******************************************************************************/
-/*$Id: CompilerHelperGenerator.java,v 1.18 2008-08-27 14:16:37 cfaucher Exp $
+/*$Id: CompilerHelperGenerator.java,v 1.19 2008-09-02 16:23:28 cfaucher Exp $
 * Project : org.kermeta.compiler.generator
 * File : 	CompilerHelperGenerator.java
 * License : EPL
@@ -42,9 +42,7 @@ import org.eclipse.emf.codegen.ecore.genmodel.GenModel;
 import org.eclipse.emf.codegen.ecore.genmodel.GenPackage;
 import org.eclipse.emf.codegen.jet.JETEmitter;
 import org.eclipse.emf.codegen.jet.JETException;
-import org.eclipse.emf.codegen.util.CodeGenUtil;
 import org.eclipse.emf.common.util.Monitor;
-import org.eclipse.emf.ecore.ENamedElement;
 import org.kermeta.compiler.generator.internal.GeneratorPlugin;
 import org.kermeta.generator.AbstractGenerator;
 import org.kermeta.generator.jet.DefaultJETEmitter;
@@ -72,12 +70,13 @@ public class CompilerHelperGenerator extends AbstractGenerator {
 	
 	private static final String EXECUTION_CONTEXT_JAVA = "templateHelper/helper/ExecutionContext.javajet";
 
-	private static final String JAVA_LAUNCHER_LAUNCH = "templateHelper/JavaLauncher.launchjet";
+	// FIXME CF unused for the moment
+	//private static final String JAVA_LAUNCHER_LAUNCH = "templateHelper/JavaLauncher.launchjet";
 	
 	private static final String CLASS_PATH = "templateHelper/classpath.propertiesjet";
 	
 	// FIXME CF unused for the moment
-	private static final String KERMETA_LAUNCHER_LAUNCH = "templateHelper/KermetaLauncher.launchjet";
+	//private static final String KERMETA_LAUNCHER_LAUNCH = "templateHelper/KermetaLauncher.launchjet";
 
 
 	/** The GenModel object */
@@ -86,7 +85,6 @@ public class CompilerHelperGenerator extends AbstractGenerator {
 	private String kmFilePath_forReflection;
 	
 	private SIMKModel simkModel;
-	
 	
 
 	/**
@@ -129,7 +127,7 @@ public class CompilerHelperGenerator extends AbstractGenerator {
 			generateBaseTypesUtils();
 			
 			if( this.simkModel!=null ) {
-				generateHelpers(this.kmFilePath_forReflection, this.simkModel, pathProject, monitor);
+				generateHelpers(this.configuration, this.kmFilePath_forReflection, this.simkModel, pathProject, monitor);
 			}
 					
 			generateClassPath(project, pathProject);
@@ -239,13 +237,13 @@ public class CompilerHelperGenerator extends AbstractGenerator {
 	// ---------------------------------------------------------
 	// Generate the classes for the helpers
 	// ---------------------------------------------------------
-	private void generateHelpers(String kmFilePath_forReflection, SIMKModel simkConf, IPath projectPath,
+	private void generateHelpers(GenModel conf, String kmFilePath_forReflection, SIMKModel simkConf, IPath projectPath,
 			IProgressMonitor monitor) {
 		try {
 
 			monitor.subTask("Files creation");
 
-			generateRunner(simkConf, projectPath);
+			generateRunner(conf, simkConf, projectPath);
 			generateLauncher(simkConf, projectPath);
 			generateWrapper(simkConf, projectPath);
 			generateSuper(simkConf, projectPath);
@@ -277,29 +275,19 @@ public class CompilerHelperGenerator extends AbstractGenerator {
 	 * @throws JETException
 	 * @throws CoreException
 	 */
-	private void generateRunner(SIMKModel simkConf, IPath projectPath)
+	private void generateRunner(GenModel conf, SIMKModel simkConf, IPath projectPath)
 			throws JETException, CoreException {
-		//for (GenPackage genPackage : conf.getGenPackages()) {
-		//	EPackage epackage = genPackage.getEcorePackage();
+	
+		for (StaticMethod sm : simkConf.getStaticMethods()) {
+			if ( sm.getUsages() == SMUsage.RUNNER /*.contains(SMUsage.RUNNER)*/ ) {
+				applyTemplate(
+						new Object[] {conf.getModelProjectDirectory(), ResourcesPlugin.getWorkspace().getRoot().getLocationURI().toString(), sm},
+						getTemplateURI(RUNNER_JAVA),
+						projectPath.append("/" + SOURCE_DIRECTORY + "/" + sm.getSMContext().getQualifiedNameFinalPackage().replace(".", "/") + "/" + sm.getSMContext().getSMClass().getName() + ".java"),
+						configuration.isForceOverwrite());
+			}
 
-			//for (EClassifier eClassifier : epackage.getEClassifiers()) {
-				//if (eClassifier instanceof EClass) {
-				//	EClass eClass = (EClass) eClassifier;
-
-					for (StaticMethod sm : simkConf.getStaticMethods()) {
-						if ( sm.getUsages() == SMUsage.RUNNER /*.contains(SMUsage.RUNNER)*/ ) {
-							applyTemplate(
-									sm,
-									getTemplateURI(RUNNER_JAVA),
-									projectPath.append("/" + SOURCE_DIRECTORY + "/" + sm.getSMContext().getQualifiedNameFinalPackage().replace(".", "/") + "/" + sm.getSMContext().getSMClass().getName() + ".java"),
-									configuration.isForceOverwrite());
-						}
-
-					}
-
-				//}
-			//}
-		//}
+		}
 
 	}
 
