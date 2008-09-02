@@ -1,6 +1,6 @@
 
 
-/*$Id: MergeAction.java,v 1.7 2008-04-30 14:25:01 ftanguy Exp $
+/*$Id: MergeAction.java,v 1.8 2008-09-02 21:57:37 cfaucher Exp $
 * Project : org.kermeta.compiler.ui
 * File : 	MergeAction.java
 * License : EPL
@@ -12,10 +12,7 @@
 
 package org.kermeta.compiler.ui.popup.actions;
 
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Set;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IWorkspaceRunnable;
@@ -27,14 +24,11 @@ import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.TreeSelection;
 import org.eclipse.ui.IObjectActionDelegate;
 import org.eclipse.ui.IWorkbenchPart;
+import org.kermeta.compiler.KermetaCompiler;
 import org.kermeta.io.KermetaUnit;
 import org.kermeta.io.loader.plugin.LoaderPlugin;
-import org.kermeta.io.plugin.IOPlugin;
-import org.kermeta.merger.Merger;
 
-import fr.irisa.triskell.kermeta.exceptions.NotRegisteredURIException;
-import fr.irisa.triskell.kermeta.exceptions.URIMalformedException;
-import fr.irisa.triskell.kermeta.modelhelper.KermetaUnitHelper;
+import fr.irisa.triskell.eclipse.resources.ResourceHelper;
 
 public class MergeAction implements IObjectActionDelegate {
 
@@ -43,26 +37,9 @@ public class MergeAction implements IObjectActionDelegate {
 	private ArrayList<KermetaUnit> excludedKmUnit = new ArrayList<KermetaUnit>();
 	
 	public MergeAction() {
-		//initExcludedKmUnit();
 	}
 
 	public void setActivePart(IAction action, IWorkbenchPart targetPart) {
-	}
-	
-	private void initExcludedKmUnit() {
-		String kermetaMainPath = "platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/";
-		excludedKmUnit.add(IOPlugin.getDefault().findKermetaUnit(kermetaMainPath + "standard/java.km"));
-		excludedKmUnit.add(IOPlugin.getDefault().findKermetaUnit(kermetaMainPath + "ecore/ecore_compatibility.km"));
-		excludedKmUnit.add(IOPlugin.getDefault().findKermetaUnit(kermetaMainPath + "language/dynamic_expression.km"));
-		excludedKmUnit.add(IOPlugin.getDefault().findKermetaUnit(kermetaMainPath + "io/file_io.km"));
-		excludedKmUnit.add(IOPlugin.getDefault().findKermetaUnit(kermetaMainPath + "kunit/kunit.km"));
-		excludedKmUnit.add(IOPlugin.getDefault().findKermetaUnit(kermetaMainPath + "kunit/assert.km"));
-		excludedKmUnit.add(IOPlugin.getDefault().findKermetaUnit(kermetaMainPath + "utils/StringBuffer.km"));
-		excludedKmUnit.add(IOPlugin.getDefault().findKermetaUnit(kermetaMainPath + "utils/stack.km"));
-	}
-
-	private String getOutputFilePath() {
-		return "platform:/resource" + file.getFullPath().removeFileExtension().toString() + "_merged.km";
 	}
 	
 	public void run(IAction action) {
@@ -70,23 +47,13 @@ public class MergeAction implements IObjectActionDelegate {
 		IWorkspaceRunnable r = new IWorkspaceRunnable() {
 			public void run(IProgressMonitor monitor) throws CoreException {
 				try {
+					
 					String uri = "platform:/resource" + file.getFullPath().toString();
 					KermetaUnit kermetaUnit = LoaderPlugin.getDefault().load(uri, null);
-					Set<KermetaUnit> context = new HashSet<KermetaUnit>();
-					context.add(kermetaUnit);
-					for ( KermetaUnit unit : KermetaUnitHelper.getAllImportedKermetaUnits(kermetaUnit)) {
-						if( ! excludedKmUnit.contains(IOPlugin.getDefault().findKermetaUnit(unit.getUri())) ) {
-							context.add(unit);
-						}
-					}
+					KermetaCompiler kermetaCompiler = new KermetaCompiler(file);
+					kermetaCompiler.writeUnit(kermetaUnit, file);
 					
-					Merger merger = new Merger();
-					merger.process(context, getOutputFilePath(), true);
-				} catch (URIMalformedException e) {
-					e.printStackTrace();
-				} catch (NotRegisteredURIException e) {
-					e.printStackTrace();
-				} catch (IOException e) {
+				} catch (Exception e) {
 					e.printStackTrace();
 				}
 				file = null;

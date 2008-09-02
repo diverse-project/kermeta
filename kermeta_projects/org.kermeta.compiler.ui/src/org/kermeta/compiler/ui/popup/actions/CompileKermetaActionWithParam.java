@@ -1,4 +1,4 @@
-/* $Id: CompileKermetaActionWithParam.java,v 1.1 2008-01-31 13:21:17 cfaucher Exp $
+/* $Id: CompileKermetaActionWithParam.java,v 1.2 2008-09-02 21:57:37 cfaucher Exp $
  * Project   : fr.irisa.triskell.kermeta.compiler
  * File      : CompileKermetaActionWithParam.java
  * License   : EPL
@@ -10,7 +10,7 @@
 
 package org.kermeta.compiler.ui.popup.actions;
 
-
+@Deprecated
 public class CompileKermetaActionWithParam extends CompileEcoreAction {
 
 	/**

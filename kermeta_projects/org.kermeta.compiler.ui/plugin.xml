@@ -39,7 +39,7 @@
                label="Compile Kmt to EMF plugin (experimental)"
                menubarPath="org.eclipse.ui.articles.action.contribution.navigator.subMenu/kermetagroup1"/>
       </objectContribution>
-      <objectContribution
+      <!-- objectContribution
             id="org.kermeta.compiler.compilekmcontribution"
             nameFilter="*.km"
             objectClass="org.eclipse.core.resources.IFile">
@@ -57,10 +57,10 @@
                label="Compile Km to EMF plugin (experimental)"
                menubarPath="org.eclipse.ui.articles.action.contribution.navigator.subMenu/kermetagroup1">
          </action>
-      </objectContribution>
+      </objectContribution -->
       <objectContribution
             id="org.kermeta.compiler.merge"
-            nameFilter="*.km"
+            nameFilter="*.kmt"
             objectClass="org.eclipse.core.resources.IFile">
          <menu
                id="org.eclipse.ui.articles.action.contribution.navigator.subMenu"
@@ -71,7 +71,7 @@
          <action
                class="org.kermeta.compiler.ui.popup.actions.MergeAction"
                id="org.kermeta.compiler.ui.action1"
-               label="Merge with the required resources (experimental)"
+               label="Generate Kmt merged with the required resources (experimental)"
                menubarPath="org.eclipse.ui.articles.action.contribution.navigator.subMenu/kermetagroup1">
          </action>
          <enablement>
@@ -80,7 +80,7 @@
             </objectClass>
          </enablement>
       </objectContribution>
-      <objectContribution
+      <!-- objectContribution
             id="org.kermeta.compiler.ui.generateKm"
             objectClass="org.eclipse.core.resources.IFolder">
          <action
@@ -89,7 +89,7 @@
                label="Generate Km for all files"
                menubarPath="org.eclipse.ui.articles.action.contribution.navigator.subMenu/kermetagroup1">
          </action>
-      </objectContribution>
+      </objectContribution -->
       <!--objectContribution
             id="org.kermeta.compiler.compilekmtwithparamcontribution"
             nameFilter="*.kmt"

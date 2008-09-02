@@ -1,4 +1,4 @@
-/* $Id: Compiler.java,v 1.10 2008-08-19 12:35:25 cfaucher Exp $
+/* $Id: Compiler.java,v 1.11 2008-09-02 21:57:34 cfaucher Exp $
  * Project   : fr.irisa.triskell.kermeta.compiler
  * File      : Compiler.java
  * License   : EPL
@@ -63,7 +63,7 @@ public class Compiler extends Generator {
 	 * @param kmUnit
 	 * @param km2ecoreGen
 	 */
-	public Compiler(String abosluteEcorePath, KermetaUnit kmUnit, EcoreExporter km2ecoreGen) {
+	public Compiler(String abosluteEcorePath) {
 		super();
 		arguments[0] = "-ecore2GenModel";
 		arguments[1] = abosluteEcorePath;
@@ -72,8 +72,6 @@ public class Compiler extends Generator {
 		
 		// Get the IFile corresponding to the generated Ecore file
 		this.ecorefile = ResourceHelper.getIFile("file:/"+arguments[1]);
-		//this.kmUnit = kmUnit;
-		//this.km2ecoreGen = km2ecoreGen;
 	}
 
 	/**
@@ -204,8 +202,8 @@ public class Compiler extends Generator {
 		// Icons will be not generated
 		genModel.setCreationIcons(false);
 		// Use of dynamic templates like  for the implementation of the getter/setter of derived properties
-		genModel.setDynamicTemplates(true);
-		genModel.setTemplateDirectory("platform:/plugin/org.kermeta.compiler.generator.emftemplates/templates");
+		//genModel.setDynamicTemplates(true);
+		//genModel.setTemplateDirectory("platform:/plugin/org.kermeta.compiler.generator.emftemplates/templates");
 		// Use of Java generics is enabled
 		genModel.setComplianceLevel(GenJDKLevel.JDK50_LITERAL);
 		genModel.setContainmentProxies(true);

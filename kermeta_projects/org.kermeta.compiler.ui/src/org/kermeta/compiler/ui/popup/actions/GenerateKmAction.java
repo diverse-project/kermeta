@@ -1,6 +1,6 @@
 
 
-/*$Id: GenerateKmAction.java,v 1.1 2008-06-05 14:18:46 ftanguy Exp $
+/*$Id: GenerateKmAction.java,v 1.2 2008-09-02 21:57:37 cfaucher Exp $
 * Project : org.kermeta.compiler.ui
 * File : 	GenerateKmAction.java
 * License : EPL
@@ -39,6 +39,7 @@ import org.kermeta.merger.Merger;
 
 import fr.irisa.triskell.kermeta.modelhelper.KermetaUnitHelper;
 
+@Deprecated
 public class GenerateKmAction implements IActionDelegate, IResourceVisitor {
 
 	private List<IFolder> _folders = new ArrayList<IFolder>();
