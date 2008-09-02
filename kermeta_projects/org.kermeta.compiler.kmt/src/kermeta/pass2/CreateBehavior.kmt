@@ -1,4 +1,4 @@
-/* $Id: CreateBehavior.kmt,v 1.58 2008-09-01 17:15:30 cfaucher Exp $
+/* $Id: CreateBehavior.kmt,v 1.59 2008-09-02 07:25:05 cfaucher Exp $
  * Creation date: January 21, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -677,8 +677,9 @@ package behavior {
 					
 					result := ft_str
 				
-				end
-				
+				//end
+				//Patched 08-09-02
+				else
 				
 					///////Added 08-07-28 or self.staticOperation.container().asType(ClassDefinition).isMappedToJavaRawType()
 					if fromUtil(context) then
@@ -714,8 +715,9 @@ package behavior {
 							end
 						
 						end
-					
-					//end
+						
+					//Patched 08-09-02
+					end
 				
 				end
 			
@@ -831,7 +833,13 @@ package behavior {
 													else
 														result := result + "."
 													end
-												end
+													
+												else
+													if not cf_.staticProperty.isVoid() then
+														result := result + "."
+													end
+													
+												end												
 											end
 										end
 									end
@@ -1139,17 +1147,17 @@ package behavior {
 			
 			var right : String init self.~value.createBehaviorJava(context)
 		
-			// Patch that adds the 'function' keyword in case the assigned value is a function
+			// Patch that adds the 'function' keyword in case the assigned value is a function type
 			if self.~value.isInstanceOf(LambdaExpression) then
 				stdio.errorln("Alert in createBehaviorJava Assignment")
 				right := "function " + right
 			end
-			
-			
-			
+						
 			if self.target.isCallFeatureAsStaticProperty() then
+			
+				//stdio.writeln("left: " + left)
 					
-				var tabLeft : kermeta::standard::OrderedSet<String> init left.replace(".", "%").split("%")
+				var tabLeft : kermeta::standard::OrderedSet<String> init left.split("\\.")
 				
 				result := ""
 				from var i : Integer init 0

@@ -1,4 +1,4 @@
-/* $Id: PrettyPrinterHelper.kmt,v 1.14 2008-08-27 16:31:25 cfaucher Exp $
+/* $Id: PrettyPrinterHelper.kmt,v 1.15 2008-09-02 07:25:05 cfaucher Exp $
  * Creation date: February 27, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -36,17 +36,15 @@ class CompilerHelperJava {
 	 */
 	operation ppEmfLikeCreateFactory(localType : String) : String is do
 		result := ""
-		
-		var localType2 : String init localType.replace(".", "%")
 
-		var name_set : OrderedSet<String> init localType2.split("%")
+		var name_set : OrderedSet<String> init localType.split("\\.")
 			
 		var allPackages_label : String init localType.substring(0, localType.size()-name_set.elementAt(name_set.size()-1).size())
 			
 		if name_set.size()>=2 then
 			result := " = " + allPackages_label + name_set.elementAt(name_set.size-2).capName() +"Factory.eINSTANCE.create" + name_set.elementAt(name_set.size()-1) + "()"
 		else
-			result := " = " + "Factory.eINSTANCE.create" + localType2 + "()"
+			result := " = " + "Factory.eINSTANCE.create" + localType + "()"
 		end
 	end
 	

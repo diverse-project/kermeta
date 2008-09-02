@@ -1,4 +1,4 @@
-/* $Id: StringHelper.kmt,v 1.7 2008-08-26 09:10:05 cfaucher Exp $
+/* $Id: StringHelper.kmt,v 1.8 2008-09-02 07:25:05 cfaucher Exp $
  * Creation date: February 27, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -28,7 +28,7 @@ aspect class String {
 	
 		result := ""
 		
-		var set_str : OrderedSet<String> init self.replace(".", "%").split("%")
+		var set_str : OrderedSet<String> init self.split("\\.")
 		
 		var inc_seg : Integer init 0
 		set_str.each{ seg |
