@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="ASCII"?>
+<umlcd:ClassModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:umlcd="http://www.kermeta.org/rcd" name="rcd1">
+  <classifier xsi:type="umlcd:Class" name="Client">
+    <attrs type="//@classifier.1" name="name"/>
+    <attrs type="//@classifier.1" name="address"/>
+  </classifier>
+  <classifier xsi:type="umlcd:PrimitiveDataType" name="String"/>
+  <classifier xsi:type="umlcd:PrimitiveDataType" name="Integer"/>
+</umlcd:ClassModel>

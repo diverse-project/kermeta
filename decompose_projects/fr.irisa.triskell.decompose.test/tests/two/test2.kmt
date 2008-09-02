@@ -1,4 +1,4 @@
-/* $Id: test2.kmt,v 1.4 2008-08-26 08:06:37 fmunoz Exp $ 
+/* $Id: test2.kmt,v 1.5 2008-09-02 08:48:07 fmunoz Exp $ 
  * Creation : August 14, 2008
  * Licence  : EPL 
  * Copyright:
@@ -151,8 +151,8 @@ class Main
 			var thisFile:String init  kompose_files+numeral.toString
 			var scriptFile:String init kompose_scripts+numeral.toString+kompose_scripts_ext
 			var inputStr:String init inputGenerator.generate(l,r,resultFile)
-			var scriptStr:String init scriptGenerator.generate(numeral,thisFile)
-			allScripts.add(scriptFile)
+//			var scriptStr:String init scriptGenerator.generate(numeral,thisFile)
+//			allScripts.add(scriptFile)
 			
 			oracleSupport.sourceMapper.put(resultFile,toLoad)
 			
@@ -164,8 +164,8 @@ class Main
 			
 			
 			fileio.writeTextFile(thisFile,inputStr)
-			fileio.writeTextFile(scriptFile,scriptStr)
-			
+	//		fileio.writeTextFile(scriptFile,scriptStr)
+	//		
 		
 			
 			numeral:=numeral+1
@@ -178,8 +178,8 @@ class Main
 		oracleSupport.resultFile:=toLoad+".ocompare"
 		oracleSupport.doSave()
 		
-		var oracleScript:String init oracleGenerator.generate(oracleSupport.resultFile)
-		var oracleScriptFile:String init 
-		fileio.writeTextFile(kompose_oracle_script,oracleScript)
+//		var oracleScript:String init oracleGenerator.generate(oracleSupport.resultFile)
+	//	var oracleScriptFile:String init 
+	//	fileio.writeTextFile(kompose_oracle_script,oracleScript)
 	end
 }

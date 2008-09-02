@@ -1,4 +1,4 @@
-/* $Id: test1.kmt,v 1.8 2008-09-02 08:48:07 fmunoz Exp $ 
+/* $Id: test1.kmt,v 1.1 2008-09-02 08:48:07 fmunoz Exp $ 
  * Creation : August 14, 2008
  * Licence  : EPL 
  * Copyright:
@@ -8,12 +8,11 @@
 @mainClass "tests::one::Main"
 @mainOperation "main"
 
-@uri "http://www.kermeta.org/decompose/test/uno"
+@uri "http://www.kermeta.org/decompose/rcd/test/uno"
 package tests::one;
 
-
 require kermeta
-require "platform:/resource/fr.irisa.triskell.decompose.test/tests/Ecore.kmt"
+require "platform:/resource/fr.irisa.triskell.decompose.test/tests/Rcd.kmt"
 require "platform:/resource/fr.irisa.triskell.decompose/src/kermeta/kompose_input.kmt"
 require "platform:/resource/fr.irisa.triskell.decompose/src/kermeta/kompose_km_script.kmt"
 require "platform:/resource/fr.irisa.triskell.decompose/src/kermeta/OracleSupport.kmt"
@@ -22,7 +21,7 @@ require "platform:/resource/fr.irisa.triskell.decompose/src/kermeta/oracle_runne
 
 using kermeta::standard
 using kompose
-using ecore
+using rcd
 using decomposition
 using kermeta::utils
 using kermeta::io
@@ -32,12 +31,16 @@ using decomposition::oracle
 class Main
 {
 	operation main() : Void is do 
-		var toLoad:String toLoad:="platform:/resource/fr.irisa.triskell.decompose.test/tests/one/initialA.ecore"
-		var toSaveLeft:String toSaveLeft:="platform:/resource/fr.irisa.triskell.decompose.test/tests/one/left"
-		var toSaveRight:String toSaveRight:="platform:/resource/fr.irisa.triskell.decompose.test/tests/one/right"
-		var toSaveComposition:String toSaveComposition:="platform:/resource/fr.irisa.triskell.decompose.test/tests/one/result"
-		var extentionToSave:String extentionToSave:=".ecore"
+		var toLoad:String toLoad:="platform:/resource/fr.irisa.triskell.decompose.test/tests/rcd/one/ClassModel.xmi"
+		var toSaveLeft:String toSaveLeft:="platform:/resource/fr.irisa.triskell.decompose.test/tests/rcd/one/left"
+		var toSaveRight:String toSaveRight:="platform:/resource/fr.irisa.triskell.decompose.test/tests/rcd/one/right"
+		var toSaveComposition:String toSaveComposition:="platform:/resource/fr.irisa.triskell.decompose.test/tests/rcd/one/result"
+		var extentionToSave:String extentionToSave:=".xmi"
 		var decomposer:EcoreDecomposer init EcoreDecomposer.new
+		
+		var imetamodel:String init "http://www.kermeta.org/rcd"
+		
+		var planDest:String init "platform:/resource/fr.irisa.triskell.decompose.test/tests/rcd/one/plan.xmi"
 		
 		var inputGenerator:KomposeEcoreFileBridge init KomposeEcoreFileBridge.new
 		var scriptGenerator:KomposeScriptBridge init KomposeScriptBridge.new
@@ -45,10 +48,14 @@ class Main
 		var scriptAllGen:KomposeScriptAll init KomposeScriptAll.new
 		var oracleGenerator:OracleRunnerScript init OracleRunnerScript.new
 		
-		var kompose_files:String kompose_files:="platform:/resource/fr.irisa.triskell.decompose.test/tests/one/komposeComp.kompose"
-		var kompose_scripts:String kompose_scripts:="platform:/resource/fr.irisa.triskell.decompose.test/tests/one/scripts/komposelr_test"
+		var kompose_files:String kompose_files:="platform:/resource/fr.irisa.triskell.decompose.test/tests/rcd/one/komposeComp.kompose"
+		var kompose_scripts:String kompose_scripts:="platform:/resource/fr.irisa.triskell.decompose.test/tests/rcd/one/scripts/komposelr_test"
 		var kompose_scripts_ext:String kompose_scripts_ext:=".kmt"
-		var kompose_oracle_script:String init "platform:/resource/fr.irisa.triskell.decompose.test/tests/one/scripts/oracleAll.kmt"
+		var kompose_oracle_script:String init "platform:/resource/fr.irisa.triskell.decompose.test/tests/rcd/one/scripts/oracleAll.kmt"
+		
+		var kompose_cmpScript:String init "platform:/resource/org.kermeta.kompose.specialization.rcd/kermeta/Rcd.kmt"
+		
+		var kompose_cmpScriptMain:String init "rcd"
 		
 		var oriModel:Mergeable oriModel:=decomposer.loadModel(toLoad)
 		
@@ -62,8 +69,10 @@ class Main
 		//set the model of origin
 		decomposer.initialize(oriModel)
 		//decomposer.dependants.add("EStructuralFeature")
-		decomposer.dependants.add("EReference")
-		decomposer.dependants.add("EAttribute")
+		decomposer.dependants.add("Attribute")
+		decomposer.dependants.add("Association")
+	//	decomposer.dependants.add("Class")
+	//	decomposer.dependants.add("DataType")
 		
 		//start the random decomposition
 		decomposer.start()
@@ -91,6 +100,7 @@ class Main
 			}
 		end
 		
+		decomposer.savePlan(planDest)
 		stdio.writeln("generating scripts")
 		
 		var allScripts:OrderedSet<String> init OrderedSet<String>.new
@@ -106,8 +116,8 @@ class Main
 			var thisFile:String init  kompose_files+numeral.toString
 			var scriptFile:String init kompose_scripts+numeral.toString+kompose_scripts_ext
 			var inputStr:String init inputGenerator.generate(l,r,resultFile)
-		//	var scriptStr:String init scriptGenerator.generate(numeral,thisFile)
-		//	allScripts.add(scriptFile)
+			var scriptStr:String init scriptGenerator.generate(numeral,thisFile,kompose_cmpScript,kompose_cmpScriptMain)
+			allScripts.add(scriptFile)
 			
 			oracleSupport.sourceMapper.put(resultFile,toLoad)
 			
@@ -119,7 +129,7 @@ class Main
 			
 			
 			fileio.writeTextFile(thisFile,inputStr)
-	//		fileio.writeTextFile(scriptFile,scriptStr)
+			fileio.writeTextFile(scriptFile,scriptStr)
 			
 		
 			
@@ -133,7 +143,7 @@ class Main
 		oracleSupport.resultFile:=toLoad+".ocompare"
 		oracleSupport.doSave()
 		
-	//	var oracleScript:String init oracleGenerator.generate(oracleSupport.resultFile)
-	//	fileio.writeTextFile(kompose_oracle_script,oracleScript)
+		var oracleScript:String init oracleGenerator.generate(oracleSupport.resultFile,imetamodel,kompose_cmpScriptMain)
+		fileio.writeTextFile(kompose_oracle_script,oracleScript)
 	end
 }
