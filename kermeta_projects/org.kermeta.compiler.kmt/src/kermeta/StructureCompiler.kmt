@@ -1,4 +1,4 @@
-/* $Id: StructureCompiler.kmt,v 1.54 2008-09-02 07:25:05 cfaucher Exp $
+/* $Id: StructureCompiler.kmt,v 1.55 2008-09-02 11:57:40 cfaucher Exp $
  * Creation date: January 21, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -50,11 +50,11 @@ class Main {
 		var traceInput : String init ""
 */
 
-/*
+
 		var modelInput : String init "platform:/resource/org.kermeta.compiler.kmt/models/StructureCompiler.km"
 		var output : String init "platform:/resource/org.kermeta.compiler.kmt/models/StructureCompiler.ecore"
 		var traceInput : String init ""
-*/
+
 
 /*
 		var modelInput : String init "platform:/resource/org.kermeta.compiler.kmt/models/ExpressionEvaluation.km"
@@ -62,11 +62,11 @@ class Main {
 		var traceInput : String init ""
 */
 
-
+/*
 		var modelInput : String init "platform:/resource/org.kermeta.compiler.kmt/models/compilertest.km"
 		var output : String init "platform:/resource/org.kermeta.compiler.kmt/models/compilertest.ecore"
 		var traceInput : String init ""
-
+*/
 
 /*
 		var modelInput : String init "platform:/resource/org.kermeta.compiler.kmt/models/fsm.km"
@@ -240,10 +240,11 @@ class Main {
 		
 		context.mu.getAllPackages().each{ p |
 			
-			//stdio.writeln(p.asType(Package).name)
-			
 			p.asType(Package).eachOwnedElement{ cd |
 				if cd.isInstanceOf(ClassDefinition) then
+				
+				//if cd.asType(ClassDefinition).qualifiedName == "kermeta::language::structure::ClassDefinition" then
+				
 				cd.asType(ClassDefinition).eachOwnedElement{ op |
 					if op.isInstanceOf(Operation) then
 					
@@ -261,7 +262,7 @@ class Main {
 							or op.asType(Operation).name == "addAt"
 							or op.asType(Operation).name == "createResource"
 							or op.asType(Operation).name == "saveAndValidateWithEMF"
-							or*/ op.asType(Operation).name == "main" then // matchStep2
+							or*/ op.asType(Operation).name == "replaceExtension" then // getContainerValue applyPass1 matchStep2 replaceExtension getFirstTextReference saveAndValidateWithEMF main
 					
 							stdio.writeln("================= " + op.asType(Operation).qualifiedName + " =================")
 							var javaSourceCode : String init op.createBehaviorJava(context)
@@ -271,6 +272,8 @@ class Main {
 						
 					end
 					}
+				//end
+				
 				end
 			}
 			
