@@ -2,7 +2,7 @@
 	 package="org.kermeta.compiler.generator.templates"
 	 
 	 class="ExecutionContext"
-	 version="$Id: ExecutionContext.javajet,v 1.4 2008-09-02 14:41:20 cfaucher Exp $" %>
+	 version="$Id: ExecutionContext.javajet,v 1.5 2008-09-02 14:52:32 cfaucher Exp $" %>
 <%String kmFilePath_forReflection = (String) argument;%>
 
 package org.kermeta.compil.runtime;
@@ -18,9 +18,11 @@ import kermeta.language.structure.Object;
 import kermeta.language.structure.Package;
 import kermeta.language.structure.StructureFactory;
 import kermeta.language.structure.TypeDefinition;
-import kermeta.persistence.EMFRepository;
 import kermeta.persistence.PersistenceFactory;
+import kermeta.persistence.Repository;
 import kermeta.persistence.Resource;
+
+import org.kermeta.compil.runtime.helper.persistence.KmReflectionHelper;
 
 public class ExecutionContext {
 
