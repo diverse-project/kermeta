@@ -1,4 +1,4 @@
-/* $Id: fsm_Helper.kmt,v 1.5 2007-12-07 04:06:02 bmorin Exp $
+/* $Id: fsm_Helper.kmt,v 1.6 2008-09-03 15:57:58 cfaucher Exp $
  * Project    : fr.irisa.triskell.samples.fsm.demoAspect
  * File       : fsmmodel.kmt
  * License    : EPL
@@ -24,8 +24,7 @@ using kermeta::persistence
 using kermeta::exceptions
 
 
-@aspect "true"
-class FSM
+aspect class FSM
 {
 	
 	property readonly ownedTransition : OrderedSet<Transition>

@@ -1,4 +1,4 @@
-/* $Id: fsm_visitor.kmt,v 1.1 2007-12-03 14:38:45 ftanguy Exp $
+/* $Id: fsm_visitor.kmt,v 1.2 2008-09-03 15:58:37 cfaucher Exp $
  * Project    : fr.irisa.triskell.samples.fsm
  * File       : fsmmodel.kmt
  * License    : EPL
@@ -22,8 +22,7 @@ using kermeta::standard
 using kermeta::persistence
 using kermeta::exceptions
 
-@aspect "true"
-class FSM
+aspect class FSM
 {
 	
 	operation accept(v: Visitor) : Void is do
@@ -32,15 +31,13 @@ class FSM
 	
 }
 
-@aspect "true"
-class State {
+aspect class State {
 	operation accept(v: Visitor) : Void is do
 		v.visitState(self)		
 	end
 }
 
-@aspect "true" 
-class Transition 
+aspect class Transition 
 {	
 	operation accept(v: Visitor) : Void is do
 		v.visitTransition(self)
