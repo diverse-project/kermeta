@@ -1,4 +1,4 @@
-/* $Id: CreateBehavior.kmt,v 1.61 2008-09-02 18:50:25 cfaucher Exp $
+/* $Id: CreateBehavior.kmt,v 1.62 2008-09-03 14:55:38 cfaucher Exp $
  * Creation date: January 21, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -43,13 +43,19 @@ package structure {
 		method createBehaviorJava(context : KM2EcoreContext) : String is do
 			result := void
 			
+			var javaCode : String init ""
+			
 			// The current property is derived
 			if self.isDerived then
 				// The current property could have a setter
 				if not self.isReadOnly then
-					// todo compile the setter in an EAnnotation
+					// Compiling the setter in an EAnnotation
+					javaCode := self.getterBody.createBehaviorJava(context)
+					EAnnotationHelper.new.addAnnotationPropSetter(self.ecoreModelElement, javaCode.toString)
 				end
-				// todo compile the getter in an EAnnotation
+				// Compiling the getter in an EAnnotation
+				javaCode := self.getterBody.createBehaviorJava(context)
+				EAnnotationHelper.new.addAnnotationPropGetter(self.ecoreModelElement, javaCode.toString)
 			end
 		end
 	}
