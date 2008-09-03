@@ -186,8 +186,7 @@ abstract public class AbstractKInterpreter {
 			_started = true;
 			return (RuntimeObject) _basicInterpreter.invoke(entryClass, _mainOperation, _parameters);
 		} catch (KermetaRaisedException e) {
-            error( e.getMessage() );
-            error( "\n" + e.toString() );
+            error( e.getMessage()+ "\n" + e.toString() );
 		} catch (Throwable e) {
 			e.printStackTrace();
 			
@@ -200,6 +199,11 @@ abstract public class AbstractKInterpreter {
 			// msg for eclipse ui (ErrorLog view)
 			InterpreterPlugin.getDefault().getLog().log(new Status(IStatus.ERROR, "fr.irisa.triskell.kermeta.interpreter", msg,e));
 		} finally {
+			try { // Give time for other processes to flush their content string.
+				Thread.sleep(100);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
 			if ( _fakeProcess != null )
 				try {
 					_fakeProcess.terminate();
@@ -283,5 +287,10 @@ abstract public class AbstractKInterpreter {
 		_memory = null;
 		_context = null;
 		_fakeProcess = null;
+	}
+	
+
+	public void interrupt(){
+		_basicInterpreter.interrupt();
 	}
 }

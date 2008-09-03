@@ -11,6 +11,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.eclipse.core.resources.IFile;
+import org.eclipse.debug.core.DebugException;
 import org.eclipse.debug.core.model.RuntimeProcess;
 import org.kermeta.interpreter.InterpreterPlugin;
 import org.kermeta.interpreter.helper.RunnerHelper;
@@ -382,6 +383,14 @@ public class Interpreter {
 		_realInterpreter = null;
 		_process = null;
 		Runtime.getRuntime().gc();
+	}
+	
+	/**
+	 * The interpretation is forcibly terminated. 
+	 * @throws DebugException 
+	 */
+	public void interrupt() {		
+		_realInterpreter.interrupt();
 	}
 	
 }

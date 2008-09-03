@@ -1,4 +1,4 @@
-/* $Id: ExpressionInterpreter.java,v 1.71 2008-06-13 09:31:41 cfaucher Exp $
+/* $Id: ExpressionInterpreter.java,v 1.72 2008-09-03 08:28:42 dvojtise Exp $
  * Project : Kermeta (First iteration)
  * File : ExpressionInterpreter.java
  * License : EPL
@@ -109,6 +109,18 @@ public class ExpressionInterpreter extends KermetaOptimizedVisitor {
 	/**		Stating if the interpreter finished the visit.		*/
 	protected boolean _terminated = false;
     
+	
+	/**		Stating if the interpreter must stop. Ie. the user interrupted its execution	*/
+	protected boolean _mustStop = false;
+    
+	/**
+	 * Asks the interpreter to stop
+	 */
+	public void interrupt(){
+		_mustStop = true;
+	}
+	
+	
 	/**
 	 * 
 	 * @return true if the interpreter has finished, false otherwise.
@@ -395,6 +407,14 @@ public class ExpressionInterpreter extends KermetaOptimizedVisitor {
     
     
 	public Object visitCallFeature(CallFeature node) {
+		if(_mustStop){
+			throw KermetaRaisedException.createKermetaException("kermeta::exceptions::RuntimeError",
+	        		"Interpreter interrupted by the user",
+					this,
+					memory,
+					node,
+					null);
+		}
 		return CallFeatureInterpreter.doIt(node, this);
 	}
 
