@@ -1,4 +1,4 @@
-/* $Id: ExpressionHelper.kmt,v 1.9 2008-09-01 17:15:30 cfaucher Exp $
+/* $Id: ExpressionHelper.kmt,v 1.10 2008-09-03 16:12:50 cfaucher Exp $
  * Creation date: Jul 25, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -146,7 +146,8 @@ aspect class CallVariable {
 	
 	operation isParameterForOwningOperation() : Boolean is do
 		result := false
-		if self.container.isInstanceOf(CallFeature) then
+		// The container could not be an Operation, but a derived property
+		if self.container.isInstanceOf(CallFeature) and (not self.getContainerAsType(Operation).isVoid()) then
 			result := not self.getContainerAsType(Operation).asType(Operation).ownedParameter.detect{ p |
 				p.name==self.name
 			}.isVoid()
@@ -199,7 +200,11 @@ aspect class CallVariable {
 	end
 	
 	operation retrieveCorrespondingParameter() : Parameter is do
-		result := self.getContainerAsType(Operation).asType(Operation).ownedParameter.detect{ p | p.name == self.name }
+		result := void
+		// The container could not be an Operation, but a derived property
+		if not self.getContainerAsType(Operation).isVoid() then
+			result := self.getContainerAsType(Operation).asType(Operation).ownedParameter.detect{ p | p.name == self.name }
+		end
 	end
 }
 
