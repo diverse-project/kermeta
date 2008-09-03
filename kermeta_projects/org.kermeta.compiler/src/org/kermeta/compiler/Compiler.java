@@ -1,4 +1,4 @@
-/* $Id: Compiler.java,v 1.11 2008-09-02 21:57:34 cfaucher Exp $
+/* $Id: Compiler.java,v 1.12 2008-09-03 07:31:02 cfaucher Exp $
  * Project   : fr.irisa.triskell.kermeta.compiler
  * File      : Compiler.java
  * License   : EPL
@@ -202,8 +202,8 @@ public class Compiler extends Generator {
 		// Icons will be not generated
 		genModel.setCreationIcons(false);
 		// Use of dynamic templates like  for the implementation of the getter/setter of derived properties
-		//genModel.setDynamicTemplates(true);
-		//genModel.setTemplateDirectory("platform:/plugin/org.kermeta.compiler.generator.emftemplates/templates");
+		genModel.setDynamicTemplates(true);
+		genModel.setTemplateDirectory("platform:/plugin/org.kermeta.compiler.generator.emftemplates/templates");
 		// Use of Java generics is enabled
 		genModel.setComplianceLevel(GenJDKLevel.JDK50_LITERAL);
 		genModel.setContainmentProxies(true);
