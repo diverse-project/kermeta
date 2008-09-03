@@ -1,4 +1,4 @@
-/* $Id: Pass1.kmt,v 1.28 2008-08-26 09:10:08 cfaucher Exp $
+/* $Id: Pass1.kmt,v 1.29 2008-09-03 16:49:12 cfaucher Exp $
  * Creation date: January 21, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -142,7 +142,10 @@ aspect class ClassDefinition {
 				self.ecoreDataType := eDataType
 			else
 				if not self.isAbstract then
-					raise UndefinedValueTypeInstanceClassNameException.new()
+					var except : UndefinedValueTypeInstanceClassNameException init UndefinedValueTypeInstanceClassNameException.new()
+					except.message := "The class definition: " + self.qualifiedName +
+						 " is a ValueType, but the tag: @EMF_instanceClassName has not been correctly setted, please check this one in the *.km file that you try to load."
+					raise except
 				end
 			end
 		else
@@ -172,10 +175,7 @@ aspect class ClassDefinition {
 			}
 							
 		end
-		
-		rescue (e : UndefinedValueTypeInstanceClassNameException) do
-			stdio.errorln("The class definition: " + self.qualifiedName + " is a ValueType, but the tag: @EMF_instanceClassName has not been correctly setted, please check this one in the *.km file that you try to load.")
-		end
+
 	end
 	
 } 
