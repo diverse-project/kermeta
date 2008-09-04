@@ -1,0 +1,414 @@
+/**
+ * <copyright>
+ * </copyright>
+ *
+ * $Id: EnumerationLiteralImpl.java,v 1.1 2008-09-04 15:40:29 cfaucher Exp $
+ */
+package kermeta.language.structure.impl;
+
+import ecore.EEnumLiteral;
+
+import kermeta.language.structure.Enumeration;
+import kermeta.language.structure.EnumerationLiteral;
+import kermeta.language.structure.StructurePackage;
+import kermeta.language.structure.Traceability;
+
+import km2ecore.KM2EcoreContext;
+
+import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.notify.NotificationChain;
+
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.InternalEObject;
+
+import org.eclipse.emf.ecore.impl.ENotificationImpl;
+
+import org.eclipse.emf.ecore.util.EcoreUtil;
+
+/**
+ * <!-- begin-user-doc -->
+ * An implementation of the model object '<em><b>Enumeration Literal</b></em>'.
+ * <!-- end-user-doc -->
+ * <p>
+ * The following features are implemented:
+ * <ul>
+ *   <li>{@link kermeta.language.structure.impl.EnumerationLiteralImpl#getEcoreModelElement <em>Ecore Model Element</em>}</li>
+ *   <li>{@link kermeta.language.structure.impl.EnumerationLiteralImpl#getEnumeration <em>Enumeration</em>}</li>
+ * </ul>
+ * </p>
+ *
+ * @generated
+ */
+public class EnumerationLiteralImpl extends NamedElementImpl implements
+		EnumerationLiteral {
+	/**
+	 * The cached value of the '{@link #getEcoreModelElement() <em>Ecore Model Element</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getEcoreModelElement()
+	 * @generated
+	 * @ordered
+	 */
+	protected EEnumLiteral ecoreModelElement;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected EnumerationLiteralImpl() {
+		super();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	protected EClass eStaticClass() {
+		return StructurePackage.Literals.ENUMERATION_LITERAL;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EEnumLiteral getEcoreModelElement() {
+		if (ecoreModelElement != null
+				&& ((EObject) ecoreModelElement).eIsProxy()) {
+			InternalEObject oldEcoreModelElement = (InternalEObject) ecoreModelElement;
+			ecoreModelElement = (EEnumLiteral) eResolveProxy(oldEcoreModelElement);
+			if (ecoreModelElement != oldEcoreModelElement) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(
+							this,
+							Notification.RESOLVE,
+							StructurePackage.ENUMERATION_LITERAL__ECORE_MODEL_ELEMENT,
+							oldEcoreModelElement, ecoreModelElement));
+			}
+		}
+		return ecoreModelElement;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EEnumLiteral basicGetEcoreModelElement() {
+		return ecoreModelElement;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setEcoreModelElement(EEnumLiteral newEcoreModelElement) {
+		EEnumLiteral oldEcoreModelElement = ecoreModelElement;
+		ecoreModelElement = newEcoreModelElement;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET,
+					StructurePackage.ENUMERATION_LITERAL__ECORE_MODEL_ELEMENT,
+					oldEcoreModelElement, ecoreModelElement));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Enumeration getEnumeration() {
+		if (eContainerFeatureID != StructurePackage.ENUMERATION_LITERAL__ENUMERATION)
+			return null;
+		return (Enumeration) eContainer();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Enumeration basicGetEnumeration() {
+		if (eContainerFeatureID != StructurePackage.ENUMERATION_LITERAL__ENUMERATION)
+			return null;
+		return (Enumeration) eInternalContainer();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetEnumeration(Enumeration newEnumeration,
+			NotificationChain msgs) {
+		msgs = eBasicSetContainer((InternalEObject) newEnumeration,
+				StructurePackage.ENUMERATION_LITERAL__ENUMERATION, msgs);
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setEnumeration(Enumeration newEnumeration) {
+		if (newEnumeration != eInternalContainer()
+				|| (eContainerFeatureID != StructurePackage.ENUMERATION_LITERAL__ENUMERATION && newEnumeration != null)) {
+			if (EcoreUtil.isAncestor(this, newEnumeration))
+				throw new IllegalArgumentException(
+						"Recursive containment not allowed for " + toString());
+			NotificationChain msgs = null;
+			if (eInternalContainer() != null)
+				msgs = eBasicRemoveFromContainer(msgs);
+			if (newEnumeration != null)
+				msgs = ((InternalEObject) newEnumeration).eInverseAdd(this,
+						StructurePackage.ENUMERATION__OWNED_LITERAL,
+						Enumeration.class, msgs);
+			msgs = basicSetEnumeration(newEnumeration, msgs);
+			if (msgs != null)
+				msgs.dispatch();
+		} else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET,
+					StructurePackage.ENUMERATION_LITERAL__ENUMERATION,
+					newEnumeration, newEnumeration));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void applyPass1(KM2EcoreContext context) {
+
+		ecore.EEnumLiteral ecoreEnumLiteral = this
+				.createEcoreModelElement(context);
+
+		kermeta.language.structure.Enumeration e = ((kermeta.language.structure.Enumeration) org.kermeta.compil.runtime.helper.language.ObjectUtil
+				.asType(
+						this.getEnumeration(),
+						org.kermeta.compil.runtime.ExecutionContext
+								.getInstance()
+								.getMetaClass(
+										"kermeta.language.structure.Enumeration")));
+
+		org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
+				.<ecore.EEnumLiteral> convertAsOrderedSet(
+						e.getEcoreModelElement().getELiterals()).add(
+						ecoreEnumLiteral);
+
+		this.setEcoreModelElement(ecoreEnumLiteral);
+
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EEnumLiteral createEcoreModelElement(KM2EcoreContext context) {
+
+		ecore.EEnumLiteral result = null;
+
+		ecore.EEnumLiteral ecoreEnumerationLiteral = ((ecore.EEnumLiteral) org.kermeta.compil.runtime.helper.language.ClassUtil
+				.newObject("ecore.EEnumLiteral"));
+
+		ecoreEnumerationLiteral.setName(this.getName());
+
+		ecoreEnumerationLiteral.setLiteral(this.getName());
+
+		ecoreEnumerationLiteral
+				.setValue(org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
+						.<ecore.EEnumLiteral> convertAsOrderedSet(
+								((kermeta.language.structure.Enumeration) org.kermeta.compil.runtime.helper.language.ObjectUtil
+										.asType(
+												this.getEnumeration(),
+												org.kermeta.compil.runtime.ExecutionContext
+														.getInstance()
+														.getMetaClass(
+																"kermeta.language.structure.Enumeration")))
+										.getEcoreModelElement().getELiterals())
+						.size());
+
+		result = ecoreEnumerationLiteral;
+
+		return result;
+
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EEnumLiteral getEcoreModelElementTrace() {
+
+		X result = null;
+
+		result = this.getEcoreModelElement();
+
+		return result;
+
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public NotificationChain eInverseAdd(InternalEObject otherEnd,
+			int featureID, NotificationChain msgs) {
+		switch (featureID) {
+		case StructurePackage.ENUMERATION_LITERAL__ENUMERATION:
+			if (eInternalContainer() != null)
+				msgs = eBasicRemoveFromContainer(msgs);
+			return basicSetEnumeration((Enumeration) otherEnd, msgs);
+		}
+		return super.eInverseAdd(otherEnd, featureID, msgs);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public NotificationChain eInverseRemove(InternalEObject otherEnd,
+			int featureID, NotificationChain msgs) {
+		switch (featureID) {
+		case StructurePackage.ENUMERATION_LITERAL__ENUMERATION:
+			return basicSetEnumeration(null, msgs);
+		}
+		return super.eInverseRemove(otherEnd, featureID, msgs);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public NotificationChain eBasicRemoveFromContainerFeature(
+			NotificationChain msgs) {
+		switch (eContainerFeatureID) {
+		case StructurePackage.ENUMERATION_LITERAL__ENUMERATION:
+			return eInternalContainer().eInverseRemove(this,
+					StructurePackage.ENUMERATION__OWNED_LITERAL,
+					Enumeration.class, msgs);
+		}
+		return super.eBasicRemoveFromContainerFeature(msgs);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Object eGet(int featureID, boolean resolve, boolean coreType) {
+		switch (featureID) {
+		case StructurePackage.ENUMERATION_LITERAL__ECORE_MODEL_ELEMENT:
+			if (resolve)
+				return getEcoreModelElement();
+			return basicGetEcoreModelElement();
+		case StructurePackage.ENUMERATION_LITERAL__ENUMERATION:
+			if (resolve)
+				return getEnumeration();
+			return basicGetEnumeration();
+		}
+		return super.eGet(featureID, resolve, coreType);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void eSet(int featureID, Object newValue) {
+		switch (featureID) {
+		case StructurePackage.ENUMERATION_LITERAL__ECORE_MODEL_ELEMENT:
+			setEcoreModelElement((EEnumLiteral) newValue);
+			return;
+		case StructurePackage.ENUMERATION_LITERAL__ENUMERATION:
+			setEnumeration((Enumeration) newValue);
+			return;
+		}
+		super.eSet(featureID, newValue);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void eUnset(int featureID) {
+		switch (featureID) {
+		case StructurePackage.ENUMERATION_LITERAL__ECORE_MODEL_ELEMENT:
+			setEcoreModelElement((EEnumLiteral) null);
+			return;
+		case StructurePackage.ENUMERATION_LITERAL__ENUMERATION:
+			setEnumeration((Enumeration) null);
+			return;
+		}
+		super.eUnset(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public boolean eIsSet(int featureID) {
+		switch (featureID) {
+		case StructurePackage.ENUMERATION_LITERAL__ECORE_MODEL_ELEMENT:
+			return ecoreModelElement != null;
+		case StructurePackage.ENUMERATION_LITERAL__ENUMERATION:
+			return basicGetEnumeration() != null;
+		}
+		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass) {
+		if (baseClass == Traceability.class) {
+			switch (derivedFeatureID) {
+			case StructurePackage.ENUMERATION_LITERAL__ECORE_MODEL_ELEMENT:
+				return StructurePackage.TRACEABILITY__ECORE_MODEL_ELEMENT;
+			default:
+				return -1;
+			}
+		}
+		return super.eBaseStructuralFeatureID(derivedFeatureID, baseClass);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass) {
+		if (baseClass == Traceability.class) {
+			switch (baseFeatureID) {
+			case StructurePackage.TRACEABILITY__ECORE_MODEL_ELEMENT:
+				return StructurePackage.ENUMERATION_LITERAL__ECORE_MODEL_ELEMENT;
+			default:
+				return -1;
+			}
+		}
+		return super.eDerivedStructuralFeatureID(baseFeatureID, baseClass);
+	}
+
+} //EnumerationLiteralImpl
