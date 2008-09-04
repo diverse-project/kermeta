@@ -1,4 +1,4 @@
-/* $Id: Compiler.java,v 1.12 2008-09-03 07:31:02 cfaucher Exp $
+/* $Id: Compiler.java,v 1.13 2008-09-04 13:34:23 cfaucher Exp $
  * Project   : fr.irisa.triskell.kermeta.compiler
  * File      : Compiler.java
  * License   : EPL
@@ -21,7 +21,6 @@ import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.codegen.ecore.genmodel.GenJDKLevel;
 import org.eclipse.emf.codegen.ecore.genmodel.GenModel;
-import org.eclipse.emf.codegen.ecore.genmodel.GenPackage;
 import org.eclipse.emf.codegen.util.CodeGenUtil;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
@@ -30,13 +29,12 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.kermeta.compiler.common.KCompilerConstants;
 import org.kermeta.compiler.generator.internal.actions.GenerateHelperAction;
+import org.kermeta.compiler.internal.ConfigurationCreator;
 import org.kermeta.compiler.util.CompilerUtil;
-import org.kermeta.io.KermetaUnit;
 
 import fr.irisa.triskell.eclipse.resources.ResourceHelper;
-import fr.irisa.triskell.kermeta.exporter.ecore.EcoreExporter;
 
-public class Compiler extends Generator {
+public class Compiler extends org.kermeta.compiler.Generator {
 
 	// Parameters array use by the GenModel generator
 	private String[] arguments = new String[4];
@@ -129,15 +127,15 @@ public class Compiler extends Generator {
 				//genModel.getAllUsedGenPackagesWithClassifiers().addAll(genModel.getGenPackages());
 
 				
-				for( GenPackage genpack : genModel.getGenPackages() ) {
+				/*for( GenPackage genpack : genModel.getGenPackages() ) {
 					System.out.println("GenPackages: " + genpack.getNSName());
 					if(genpack.getNSName().equals("kermeta")) {
 						//genModel.getGenPackages().remove(genpack);
 					}
-				}
+				}*/
 				
 				//System.out.println("Number of GenPackages: " + genModel.getGenPackages().size());
-	
+				
 				//Step1: Saving the *.genmodel before the generation of plugins
 				genModelResource.save(Collections.EMPTY_MAP);
 			}
@@ -160,6 +158,9 @@ public class Compiler extends Generator {
 			ResourceHelper.deleteIProject(compiledPluginId, true);
 			//Step 2: Generate the plugins
 			this.run(args);
+			
+			// Create the Configuration model
+            ConfigurationCreator.createConfiguration(genModel);
 			
 			//Step 3: Generate the content of the simk file
 			compileHelpers();
