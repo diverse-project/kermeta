@@ -1,4 +1,4 @@
-/* $Id: ConstraintInterpreter.java,v 1.15 2008-04-28 11:50:55 ftanguy Exp $
+/* $Id: ConstraintInterpreter.java,v 1.16 2008-09-04 13:04:53 dvojtise Exp $
  * Project   : kermeta interpreter
  * File      : Extern2CmdCompiler.java
  * License   : EPL
@@ -24,6 +24,8 @@ import fr.irisa.triskell.kermeta.language.structure.Constraint;
 import fr.irisa.triskell.kermeta.language.structure.ConstraintType;
 import fr.irisa.triskell.kermeta.language.structure.Operation;
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
+import fr.irisa.triskell.kermeta.typechecker.CallableProperty;
+import fr.irisa.triskell.kermeta.typechecker.SimpleType;
 
 public class ConstraintInterpreter extends ExpressionInterpreter {
 	public AtPreVisitor atpreV;
@@ -152,20 +154,40 @@ public class ConstraintInterpreter extends ExpressionInterpreter {
 			+ " of operation " + ((Operation)node.eContainer()).getName()
 			+ " of class "+ ((Operation)node.eContainer()).getOwningClass().getName()
 			+ " violated";
-			if(node.getStereotype()==ConstraintType.PRE_LITERAL)
-				throw KermetaRaisedException.createKermetaException("kermeta::exceptions::ConstraintViolatedPre",
-						message,
-						this,
-						memory,
-						constraintBody,
+			if(node.getStereotype()==ConstraintType.PRE_LITERAL){
+				KermetaRaisedException kre = KermetaRaisedException.createKermetaException("kermeta::exceptions::ConstraintViolatedPre",
+	        			message,
+	        			memory.getInterpreter().getBasicInterpreter(),
+	        			memory,
+	        			constraintBody,
 						null);
-			else
-				throw KermetaRaisedException.createKermetaException("kermeta::exceptions::ConstraintViolatedPost",
-						message,
-						this,
-						memory,
-						constraintBody,
-						null);        	
+	   			// set the constraintAppliedTo reference
+	   			fr.irisa.triskell.kermeta.language.structure.Class t_target=(fr.irisa.triskell.kermeta.language.structure.Class)kre.raised_object.getMetaclass().getKCoreObject();        	
+	   	    	SimpleType target = new SimpleType(t_target);
+	   			CallableProperty cproperty = target.getPropertyByName("constraintAppliedTo");
+	   		    RuntimeObject ro_property = memory.getRuntimeObjectForFObject(cproperty.getProperty());
+	   		    RuntimeObject rovalue = getInterpreterContext().peekCallFrame().getSelf();
+	   	    	fr.irisa.triskell.kermeta.runtime.language.Object.set(kre.raised_object, ro_property, rovalue);
+	   		    
+	   			throw kre;
+			}
+			else {
+				KermetaRaisedException kre = KermetaRaisedException.createKermetaException("kermeta::exceptions::ConstraintViolatedPost",
+	        			message,
+	        			memory.getInterpreter().getBasicInterpreter(),
+	        			memory,
+	        			constraintBody,
+						null);
+	   			// set the constraintAppliedTo reference
+	   			fr.irisa.triskell.kermeta.language.structure.Class t_target=(fr.irisa.triskell.kermeta.language.structure.Class)kre.raised_object.getMetaclass().getKCoreObject();        	
+	   	    	SimpleType target = new SimpleType(t_target);
+	   			CallableProperty cproperty = target.getPropertyByName("constraintAppliedTo");
+	   		    RuntimeObject ro_property = memory.getRuntimeObjectForFObject(cproperty.getProperty());
+	   		    RuntimeObject rovalue = getInterpreterContext().peekCallFrame().getSelf();
+	   	    	fr.irisa.triskell.kermeta.runtime.language.Object.set(kre.raised_object, ro_property, rovalue);
+	   		    
+	   			throw kre;
+			}
 		}
 
 		return result;
