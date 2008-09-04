@@ -11,7 +11,7 @@ using kermeta::standard
 using kermeta::utils
 
 /* ****************************************************************************
- * $Id: exceptions.kmt,v 1.26 2008-08-21 15:48:24 cfaucher Exp $
+ * $Id: exceptions.kmt,v 1.27 2008-09-04 13:06:21 dvojtise Exp $
  * Project : Kermeta framework
  * Creation date :  
  * File : exception.kmt
@@ -146,14 +146,24 @@ class FileNotFoundException inherits IOException {}
 /* ****************************************************************************
  * 4-Constraints related errors 
  * ****************************************************************************/ 
-/** the pre-condition is not satisfied */
-class ConstraintViolatedPre inherits Exception {}
 
-/** the post-condition is not satisfied */
-class ConstraintViolatedPost inherits Exception {}
+/** Common super class for all ConstraintVioloated exceptions */
+class ConstraintViolatedException inherits Exception {
 
-/** some fixes declared in the invariant condition ave been changed */
-class ConstraintViolatedInv inherits Exception {}
+	/** Object on which the constraint was applied to
+	 * On Invariant, we can generally consider this object as the faulty Object
+	 */
+	reference constraintAppliedTo : Object
+}
+
+/** The pre-condition is not satisfied */
+class ConstraintViolatedPre inherits ConstraintViolatedException {}
+
+/** The post-condition is not satisfied */
+class ConstraintViolatedPost inherits ConstraintViolatedException {}
+
+/** An invariant isn't satisfied on a given Object */
+class ConstraintViolatedInv inherits ConstraintViolatedException {}
 
 
 /* ****************************************************************************

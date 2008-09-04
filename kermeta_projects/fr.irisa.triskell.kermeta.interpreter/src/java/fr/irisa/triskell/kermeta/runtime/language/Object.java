@@ -1,4 +1,4 @@
-/* $Id: Object.java,v 1.28 2008-04-28 11:50:57 ftanguy Exp $
+/* $Id: Object.java,v 1.29 2008-09-04 13:09:04 dvojtise Exp $
  * Project   : Kermeta interpreter
  * File      : Object.java
  * License   : EPL
@@ -21,6 +21,7 @@ import java.util.List;
 import org.kermeta.io.KermetaUnit;
 import org.kermeta.model.KermetaModelHelper;
 
+import fr.irisa.triskell.kermeta.builder.RuntimeMemory;
 import fr.irisa.triskell.kermeta.error.KermetaInterpreterError;
 import fr.irisa.triskell.kermeta.interpreter.CallFrame;
 import fr.irisa.triskell.kermeta.interpreter.ExpressionCallFrame;
@@ -47,6 +48,7 @@ import fr.irisa.triskell.kermeta.runtime.basetypes.Integer;
 import fr.irisa.triskell.kermeta.runtime.basetypes.String;
 import fr.irisa.triskell.kermeta.typechecker.CallableProperty;
 import fr.irisa.triskell.kermeta.typechecker.InheritanceSearch;
+import fr.irisa.triskell.kermeta.typechecker.SimpleType;
 import fr.irisa.triskell.kermeta.typechecker.TypeConformanceChecker;
 /**
  *  Implementation of Kermeta base type Object
@@ -108,13 +110,23 @@ public class Object {
 	     List<Constraint> invariants = KermetaModelHelper.ClassDefinition.getAllInvariants( classDef );
 	     for (Constraint c : invariants ) {
 	    	 if ( ! checkConstraint(c.getBody(), classDef, self) ) {
+	    		 RuntimeMemory memory = self.getFactory().getMemory();
 	   			 message += "Inv " + c.getName() + " of class " + classDef.getName() + " violated";
-	   			 throw KermetaRaisedException.createKermetaException("kermeta::exceptions::ConstraintViolatedInv",
-		        			message,
-							self.getFactory().getMemory().getInterpreter().getBasicInterpreter(),
-							self.getFactory().getMemory(),
-							c.getBody(),
-							null);
+	   			KermetaRaisedException kre = KermetaRaisedException.createKermetaException("kermeta::exceptions::ConstraintViolatedInv",
+	        			message,
+	        			memory.getInterpreter().getBasicInterpreter(),
+	        			memory,
+						c.getBody(),
+						null);
+	   			// set the constraintAppliedTo reference
+	   			fr.irisa.triskell.kermeta.language.structure.Class t_target=(fr.irisa.triskell.kermeta.language.structure.Class)kre.raised_object.getMetaclass().getKCoreObject();        	
+	   	    	SimpleType target = new SimpleType(t_target);
+	   			CallableProperty cproperty = target.getPropertyByName("constraintAppliedTo");
+	   		    RuntimeObject ro_property = memory.getRuntimeObjectForFObject(cproperty.getProperty());
+	   		    RuntimeObject rovalue = self;
+	   	    	fr.irisa.triskell.kermeta.runtime.language.Object.set(kre.raised_object, ro_property, rovalue);
+	   		    
+	   			 throw kre;
 	   		 }
 	     }
 	     
