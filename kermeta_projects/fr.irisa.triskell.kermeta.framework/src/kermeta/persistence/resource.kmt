@@ -9,7 +9,7 @@ require "../Standard.kmt"
 using kermeta::standard
 
 /* ****************************************************************************
- * $Id: resource.kmt,v 1.62 2008-08-29 14:52:51 dvojtise Exp $
+ * $Id: resource.kmt,v 1.63 2008-09-04 13:08:21 dvojtise Exp $
  * Project : Kermeta (First iteration)
  * Creation date :  
  * File : resource.kmt
@@ -428,9 +428,16 @@ abstract class Repository
 	 */
 	operation findDanglingModelElements() : Set<DanglingDiagnostic> is do
 		result := Set<DanglingDiagnostic>.new
-		// for all elements contained by one of the Resource of this repository
+		var fullResContents : Set<Object> 
 		self.resources.each{ res |
-			res.contents.each{containedObj |
+			if fullResContents.isVoid then
+				fullResContents := res.contents
+			else
+				fullResContents.addAll(res.contents)
+			end
+		}
+		// for all elements contained by one of the Resource of this repository
+		fullResContents.each{containedObj |
 				// for all references and attribute
 				var classDef : kermeta::language::structure::ClassDefinition
 				classDef ?= containedObj.getMetaClass().typeDefinition
@@ -446,7 +453,7 @@ abstract class Repository
 								if(not referencedObjs.isVoid) then
 									// check if this referenced objects are part of one of the resource of this repository
 									referencedObjs.each{referencedObj |
-										if(not self.resources.exists{ res2 | res2.contents.contains(referencedObj) } and 
+										if(not fullResContents.contains(referencedObj)  and 
 										   not (referencedObj.isKindOf(String) or
 											    referencedObj.isKindOf(Integer) or
 											 	referencedObj.isKindOf(Boolean))  )
@@ -464,7 +471,7 @@ abstract class Repository
 								referencedObj := containedObj.get(prop)
 								if(not referencedObj.isVoid) then
 									// check if this referenced object is part of one of the resource of this repository
-									if(not self.resources.exists{ res2 | res2.contents.contains(referencedObj) } and  
+									if(not fullResContents.contains(referencedObj)  and  
 									   not	(referencedObj.isKindOf(String) or
 										 	 referencedObj.isKindOf(Integer) or
 										     referencedObj.isKindOf(Boolean)) )
@@ -483,7 +490,7 @@ abstract class Repository
 					// not a classDefinition, should try with primitiveType and Enumetation ?					
 				end
 			}
-		}		
+				
 	end
 	/**
 	 * Return a normalized version of the Uri 
