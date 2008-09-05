@@ -1,4 +1,4 @@
-/* $Id: EcoreDocHelper.kmt,v 1.3 2007-09-28 09:57:33 jmottu Exp $
+/* $Id: EcoreDocHelper.kmt,v 1.4 2008-09-05 14:42:21 dvojtise Exp $
  * File : EcoreDocHelper.kmt
  * License : EPL
  * Copyright : IRISA / INRIA / Universite de Rennes 1
@@ -14,7 +14,7 @@ package EcoreHelpers;
 
 
 require kermeta
-require "platform:/plugin/fr.irisa.triskell.kermeta/lib/ecore.kmt"
+require "../ecore_behavior.kmt"
 
 using ecore
 using kermeta::standard

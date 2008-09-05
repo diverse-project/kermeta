@@ -1,4 +1,4 @@
-/* $Id: ReturnBuilder.kmt,v 1.2 2007-05-03 14:28:21 barais Exp $
+/* $Id: ReturnBuilder.kmt,v 1.3 2008-09-05 14:42:21 dvojtise Exp $
  * File : ReturnBuilder.kmt
  * License : EPL
  * Copyright : IRISA / INRIA / Universite de Rennes 1
@@ -32,7 +32,7 @@ class ReturnBuilderPattern inherits BuilderPattern
 	 method addCreateOperation (eClass : EClass, abstractfactory : EClass) is do
 		var builOp : EOperation init EOperation.new
 		builOp.name := "create" + eClass.name
-		builOp.eType := eClass
+		builOp.setType( eClass)
 		helper.addAnnotation(builOp,"kermeta","isAbstract","true")
 		abstractfactory.eOperations.add(builOp)
     end

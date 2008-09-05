@@ -1,4 +1,4 @@
-/* $Id: TopDownVisitor.kmt,v 1.8 2007-11-28 08:27:48 vmahe Exp $
+/* $Id: TopDownVisitor.kmt,v 1.9 2008-09-05 14:42:21 dvojtise Exp $
  * File : TopDownVisitor.kmt
  * License : EPL
  * Copyright : IRISA / INRIA / Universite de Rennes 1
@@ -70,7 +70,7 @@ class TopDownVisitorPattern inherits VisitorPattern
     operation addMainVisitor(pack : EPackage, abstractVisitor : EClass) : EClass is do
 		var superVisitor : EClass init EClass.new
 		superVisitor.name := "TopDownVisitor"
-		superVisitor.eSuperTypes.add(abstractVisitor)
+		superVisitor.addSuperType(abstractVisitor)
 		superVisitor.~abstract := true
         specPack.eClassifiers.add(superVisitor)
         result := superVisitor
@@ -108,9 +108,9 @@ class TopDownVisitorPattern inherits VisitorPattern
 	        var vParam : EParameter init EParameter.new
 			visitFoo.name := "visit" + eClass.name
 			vParam.name := "visitable"
-			vParam.eType := eClass
+			vParam.setType( eClass)
 			visitFoo.eParameters.add(vParam)
-			visitFoo.eType := visitReturnType
+			visitFoo.setType( visitReturnType)
 			if self.generateKermetaCode then
 				kermetaBody := "do\n" + kermetaBody + "end"
     			helper.addAnnotation(visitFoo, "kermeta", "body", kermetaBody)

@@ -1,4 +1,4 @@
-/* $Id: Observers.kmt,v 1.2 2007-05-03 14:28:21 barais Exp $
+/* $Id: Observers.kmt,v 1.3 2008-09-05 14:42:21 dvojtise Exp $
  * File : Visitors.kmt
  * License : EPL
  * Copyright : IRISA / INRIA / Universite de Rennes 1
@@ -17,6 +17,7 @@ package EcoreObservers;
 
 require kermeta
 require "../helpers/EcoreHelper.kmt"
+require "../helpers/EcoreGenericsHelper.kmt"
 require "Tools.kmt"
 
 using kermeta::standard
@@ -73,7 +74,7 @@ class ObserverPattern
 	
 			notify.name := "update"
 			s.name := "s"
-			s.eType := subject
+			s.setType(subject)
 			notify.eParameters.add(s)
 			observer.eOperations.add(notify)
                 		
@@ -83,14 +84,14 @@ class ObserverPattern
 			
 	        attach.name := "attach"
 	        o.name := "o" 
-	        o.eType := observer
+	        o.setType(observer)
 	        attach.eParameters.add(o)
 	        subject.eOperations.add(attach)
 	        
 			var detach : EOperation init EOperation.new
 			o := EParameter.clone(o)  
 	        o.name := "o" 
-	        o.eType := observer      
+	        o.setType(observer)      
 			detach.name := "detach"
 			detach.eParameters.add(o)
 			subject.eOperations.add(detach)
@@ -117,14 +118,14 @@ class ObserverPattern
 			// create the association: Subject --> *Observer
 			var observers : EReference init EReference.new
 			observers.name := "observers"
-			observers.eType := observer
+			observers.setType(observer)
 			observers.lowerBound := 0
 			observers.upperBound := -1
 			subject.eStructuralFeatures.add(observers)
 		end 
 		// add Subject and Observer as supertypes
-		concreteSubject.eSuperTypes.add(subject)
-		concreteObserver.eSuperTypes.add(observer)
+		concreteSubject.addSuperType(subject)
+		concreteObserver.addSuperType(observer)
 		
     end
 }

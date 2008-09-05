@@ -1,4 +1,4 @@
-/* $Id: Visitors.kmt,v 1.7 2007-11-28 08:27:48 vmahe Exp $
+/* $Id: Visitors.kmt,v 1.8 2008-09-05 14:42:21 dvojtise Exp $
  * File : Visitors.kmt
  * License : EPL
  * Copyright : IRISA / INRIA / Universite de Rennes 1
@@ -17,6 +17,7 @@ package EcoreVisitors;
 
 require kermeta
 require "../helpers/EcoreHelper.kmt"
+require "../helpers/EcoreGenericsHelper.kmt"
 require "Tools.kmt"
 
 using kermeta::standard
@@ -103,9 +104,9 @@ class VisitorPattern
         var vParam : EParameter init EParameter.new
 		acceptOp.name := "accept"
 		vParam.name := "visitor"
-		vParam.eType := abstractVisitor
+		vParam.setType( abstractVisitor)
 		acceptOp.eParameters.add(vParam)
-		acceptOp.eType := visitReturnType
+		acceptOp.setType( visitReturnType)
 		visitableClass.eOperations.add(acceptOp)
 		result := acceptOp
     end
@@ -116,9 +117,9 @@ class VisitorPattern
         var vParam : EParameter init EParameter.new
 		visitOp.name := "visit" + name
 		vParam.name := "visitable"
-		vParam.eType := visitableInterface
+		vParam.setType(visitableInterface)
 		visitOp.eParameters.add(vParam)
-		visitOp.eType := visitReturnType
+		visitOp.setType( visitReturnType)
 		visitingClass.eOperations.add(visitOp)
 		if self.generateJavaCode then
 			// add the java code for the implementation
@@ -167,7 +168,7 @@ class VisitorPattern
             	if (eClass != visitableInterface ) and (eClass != abstractVisitor ) and
             		not helper.hasParentInPackage(eClass, pack)
             	then
-            		eClass.eSuperTypes.add(visitableInterface)
+            		eClass.addSuperType(visitableInterface)
     			end
         	end
         }
