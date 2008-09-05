@@ -1,4 +1,4 @@
-/* $Id: ecore_behavior.kmt,v 1.7 2008-09-01 15:53:50 dvojtise Exp $
+/* $Id: ecore_behavior.kmt,v 1.8 2008-09-05 13:28:23 dvojtise Exp $
  * Creation date: May 2, 2006
  * License: E.P.L.
  * Copyright:
@@ -39,6 +39,19 @@ aspect class EAttribute
 
 aspect class EClass 
 {
+
+	/**
+	 * In Ecore, eGenericSuperTypes and eSuperTypes must be synchronized, 
+	 * so each eSuperTypes must have a corresponding eGenericSuperTypes and vice 
+	 * versa
+	 */
+	inv eGenericSuperTypes_Matches_eSuperTypes is do
+		// verifies that all eGenericSuperTypes have their counterpart in eSuperTypes and vice versa
+		self.eGenericSuperTypes.forAll{eGST | self.eSuperTypes.exists{eST | eST == eGST.eRawType}}
+		and
+		self.eSuperTypes.forAll{eST | self.eGenericSuperTypes.exists{eGST | eST == eGST.eRawType}}
+	end 
+	
 	property eAllAttributes : EAttribute[0..*]
 		getter is do
 	 		result := kermeta::standard::OrderedSet<EAttribute>.new
@@ -62,7 +75,7 @@ aspect class EClass
 	property eAllContainments : EReference[0..*]
 		getter is do
 	 		result := kermeta::standard::OrderedSet<EReference>.new 
-	 		stdio.writeln("containment : " + self.eAllReferences.one.containment.toString)
+	 		//stdio.writeln("containment : " + self.eAllReferences.one.containment.toString)
 	 		result.addAll(self.eAllReferences.select { r | r.containment == true } )
 		end
 	property eAllOperations : EOperation[0..*]
@@ -152,14 +165,31 @@ aspect abstract class EClassifier
 	end
 }
 
+aspect class EOperation
+{
+	/**
+	 * In Ecore, eGenericExceptions and eExceptions must be synchronized, 
+	 * so each eExceptions must have a corresponding eGenericExceptions and vice 
+	 * versa
+	 */
+	inv eGenericExceptions_Matches_eExceptions is do
+		// verifies that all eGenericSuperTypes have their counterpart in eSuperTypes and vice versa
+		self.eGenericExceptions.forAll{eGST | self.eExceptions.exists{eST | eST == eGST.eRawType}}
+		and
+		self.eExceptions.forAll{eST | self.eGenericExceptions.exists{eGST | eST == eGST.eRawType}}
+	end 
+}
+
+
 aspect class EEnum 
 {
 	/** returns the enum literal which name is name */
-/*	operation getEEnumLiteral(name : EString) : EEnumLiteral is do
+	operation op_getEEnumLiteral(name : EString) : EEnumLiteral is do
 		result := eLiterals.detect { e | e.name == name }
-	end*/
+	end
+	
 	/** returns the enum literal which value is value */
-	operation getEEnumLiteral2(~value : EInt) : EEnumLiteral is do
+	operation getEEnumLiteral(~value : EInt) : EEnumLiteral is do
 		result := eLiterals.detect { e | e.~value == ~value } 
 	end
 }
@@ -311,6 +341,26 @@ aspect abstract class EStructuralFeature
 }
 aspect abstract class ETypedElement
 {
+	/**
+	 * In Ecore, eGenericType and eType must be synchronized
+	 */
+	inv eGenericType_Matches_eType is do
+		// verifies that eGenericType has its counterpart in eType and vice versa
+		if self.eGenericType.isVoid and self.eType.isVoid then
+			true
+		else
+			if not self.eGenericType.isVoid then
+				if not self.eType.isVoid then
+					self.eGenericType.eRawType == self.eType
+				else 
+					false
+				end
+			else
+				false
+			end
+		end
+	end
+	
 	property many : EBoolean
 		getter is do
 			//TODO: implement getter for derived property many
