@@ -1,4 +1,4 @@
-/* $Id: CreateBehavior.kmt,v 1.64 2008-09-05 15:32:38 cfaucher Exp $
+/* $Id: CreateBehavior.kmt,v 1.65 2008-09-05 16:13:49 cfaucher Exp $
  * Creation date: January 21, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -587,10 +587,15 @@ package behavior {
 				//stdio.writeln("self.staticOperation: " + self.staticOperation.name)
 				
 				if self.callsFunctionType() then
+					
+					if context.tasks_stack.peek() == "Start" then
+						context.ftStack.clear()
+					end
+					
 					context.tasks_stack.push("FunctionType_Compilation")
 					stdio.writeln(" +++ +++ +++ createStringFromFunctionType: " + self.name)
 					var ft_str : String init self.createStringFromFunctionType(context)
-					//context.ftStack.pop()
+					
 					context.tasks_stack.pop()
 					result := ft_str
 				
