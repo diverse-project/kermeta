@@ -1,4 +1,4 @@
-/* $Id: StructureCompiler.kmt,v 1.55 2008-09-02 11:57:40 cfaucher Exp $
+/* $Id: StructureCompiler.kmt,v 1.56 2008-09-05 07:41:57 cfaucher Exp $
  * Creation date: January 21, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -66,6 +66,12 @@ class Main {
 		var modelInput : String init "platform:/resource/org.kermeta.compiler.kmt/models/compilertest.km"
 		var output : String init "platform:/resource/org.kermeta.compiler.kmt/models/compilertest.ecore"
 		var traceInput : String init ""
+*/		
+		
+/*		
+		var modelInput : String init "platform:/resource/org.kermeta.compiler.kmt/models/testAddSet.km"
+		var output : String init "platform:/resource/org.kermeta.compiler.kmt/models/testAddSet.ecore"
+		var traceInput : String init ""
 */
 
 /*
@@ -127,6 +133,8 @@ class Main {
     	
 	operation main_mode(modelInput : String, traceInput : String, output : String, mode : CompilingMode) : Void is do
 
+		stdio.writeln("KermetaCompiler - Starting up of the Ecore generation for the model: " + modelInput)
+
 		// Creating and initializing the context
 		context := KM2EcoreContext.new
 		context.initialize( modelInput, traceInput )
@@ -136,11 +144,12 @@ class Main {
 		// the second one consits to set the link between the created elements
 		context.mu.applyPass1(context)
 		
+		stdio.writeln("KermetaCompiler - Pass 1 is finished")
+		
 		if context.mode == CompilingMode.onlyEcore then
 			context.mu.applyPass2(context)
 		end
-		stdio.writeln("KermetaCompiler - Pass 1 is finished")
-		
+				
 		if context.mode == CompilingMode.behaviorKmt then
 			context.mu.applyPass2BehaviorKmt(context)
 		end
