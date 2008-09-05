@@ -1,6 +1,6 @@
 
 
-/*$Id: RequireResolver.java,v 1.3 2008-06-11 15:17:03 ftanguy Exp $
+/*$Id: RequireResolver.java,v 1.4 2008-09-05 09:36:57 dvojtise Exp $
 * Project : org.kermeta.io.loader
 * File : 	RequireResolver.java
 * License : EPL
@@ -17,7 +17,7 @@ import java.util.Map;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.URIConverter;
-import org.eclipse.emf.ecore.resource.impl.URIConverterImpl;
+import org.eclipse.emf.ecore.resource.impl.ExtensibleURIConverterImpl;
 import org.kermeta.io.IoFactory;
 import org.kermeta.io.KermetaUnit;
 import org.kermeta.io.KermetaUnitRequire;
@@ -38,58 +38,79 @@ public class RequireResolver implements ILoadingAction {
 		KermetaUnit kermetaUnit = datas.getKermetaUnit();
 		
 		for ( String s : kermetaUnit.getRequires() ) {
-			
-			String uri = null;	
-			if ( s.matches("http.+") )
-				uri = s;
-			else {
-				String cleanedRequire = cleanRequireValue(s);
-			
-				if ( cleanedRequire.equals("kermeta") ) {
-					uri = cleanedRequire;
-				} else {
-					/*
-					 * 
-					 * Take care about relative path.
-					 * 
-					 */
-					if ( ! cleanedRequire.startsWith("platform:/") 
-						&& ! cleanedRequire.startsWith("file:") ) {
-						int index = kermetaUnit.getUri().lastIndexOf("/");
-						String path = kermetaUnit.getUri().substring(0, index);
-						uri = path + "/" + cleanedRequire;
-					} else
-						uri = cleanedRequire;
-				}
-			}
-
 			Require require = null;
+			/*
+			 * 
+			 * Getting the require corresponfing to the URI.
+			 * 
+			 */
+			for ( Require r : kermetaUnit.getModelingUnit().getRequires() )
+				if ( r.getUri().equals(s) )
+					require = r;
 			
 			try {
+				String uri = null;	
+				if ( s.matches("http.+") )
+					uri = s;
+				else {
+					String cleanedRequire = cleanRequireValue(s);
+				
+					if ( cleanedRequire.equals("kermeta") || cleanedRequire.equals("java_rt_jar")) {
+						uri = cleanedRequire;
+					}else if (cleanedRequire.endsWith("/") || cleanedRequire.endsWith("\\")) {
+						// this is probably a malformed URI or a registered URI
+						uri = cleanedRequire;
+					}else if(cleanedRequire.endsWith(":")){
+						
+						uri = cleanedRequire;
+						if(! EMFRegistryHelper.isRegistered(uri) )
+							throw new IOException("The file " + uri + " does not exist.");
+						
+					}else if(cleanedRequire.contains(":")){
+						
+						uri = cleanedRequire;
+						//if(! EMFRegistryHelper.isRegistered(uri) )
+						//	throw new IOException("The file " + uri + " does not exist.");
+						
+					}
+					else {
+					
+						/*
+						 * 
+						 * Take care about relative path.
+						 * 
+						 */
+						if ( ! cleanedRequire.startsWith("platform:\\\\/") 
+							&& ! cleanedRequire.startsWith("file:") ) {
+							int index = kermetaUnit.getUri().lastIndexOf("/");
+							String path = kermetaUnit.getUri().substring(0, index);
+							uri = path + "/" + cleanedRequire;
+						} else
+							uri = cleanedRequire;
+					}
+				}
+	
+				
 				URI emfURI = URI.createURI( uri );
 				emfURI = EcoreHelper.getCanonicalURI(emfURI);
 				uri = emfURI.toString();
 
-				/*
-				 * 
-				 * Getting the require corresponfing to the URI.
-				 * 
-				 */
-				for ( Require r : kermetaUnit.getModelingUnit().getRequires() )
-					if ( r.getUri().equals(s) )
-						require = r;
+				
 				
 				/*
 				 * 
-				 * Checking if the required file exists. Try to create an input stream on it that launches an IOException if the file does ont exist.
+				 * Checking if the required file exists. or is registered
 				 * 
 				 */
-				if ( uri.startsWith("platform:/resource") || uri.startsWith("platform:/plugin") ) {
-					URIConverter converter = new URIConverterImpl();
-					converter.createInputStream( emfURI ).close();
-				} else if ( ! uri.equals("kermeta") && ! EMFRegistryHelper.isRegistered(uri) )
-					throw new IOException("The file " + uri + " does not exist.");
-				
+				if(! EMFRegistryHelper.isRegistered(uri)){
+					URIConverter converter = new ExtensibleURIConverterImpl();
+					if ( uri.startsWith("platform:/") ){
+						if(! converter.exists(emfURI, null) ) 
+							throw new IOException("The file " + uri + " does not exist.");						
+					} else 
+						if ( ! uri.equals("kermeta")  && ! uri.equals("java_rt_jar"))
+							throw new IOException("The file " + uri + " does not exist.");
+				}
 				/*
 				 * 
 				 * If no error, then we can create a link between the require and the kermeta unit to import.
@@ -114,7 +135,10 @@ public class RequireResolver implements ILoadingAction {
 				kermetaUnit.error(e.getMessage(), require);
 			} catch ( IOException e ) {
 				kermetaUnit.error(e.getMessage(), require );
+			} catch (Throwable t){
+				t.printStackTrace();
 			}
+			
 
 		}
 		
