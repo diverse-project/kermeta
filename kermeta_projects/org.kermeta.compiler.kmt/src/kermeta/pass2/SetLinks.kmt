@@ -1,4 +1,4 @@
-/* $Id: SetLinks.kmt,v 1.37 2008-09-01 17:15:30 cfaucher Exp $
+/* $Id: SetLinks.kmt,v 1.38 2008-09-05 07:44:17 cfaucher Exp $
  * Creation date: January 21, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -91,10 +91,16 @@ aspect class Class {
 				else //we assume this Class target a subtype of ValueType => EDataType
 					typeArgument.eClassifier := cd.ecoreDataType
 				end
-								
 				self.ecoreModelElement.eTypeArguments.add(typeArgument)
+				
+				// The current Class may have some typeParamBindings, so we have to set the links for this Class too.
+				// Before that, its ecoreModelElement property is setted
+				// Set the traceability
+				tpb.type.asType(Class).ecoreModelElement := typeArgument
+				// Continue the settings of links
+				tpb.type.asType(Class).setLinks(context)
+				
 			else
-			
 				if tpb.type.isInstanceOf(ObjectTypeVariable) then
 					var otv : ObjectTypeVariable init tpb.type.asType(ObjectTypeVariable)
 					typeArgument.eTypeParameter := otv.ecoreModelElement
@@ -105,12 +111,12 @@ aspect class Class {
 
 						var cd : ClassDefinition init tpb.type.getClassFromPrimitiveType().getClassDefinitionAsTyped()
 						
-						//We use the EDataType from the Ecore file
-						if tpb.type.isEDataType() then //cd.isValueType() and (tpb.type.getEMFInstanceClassName()!="") then
+						// We use the EDataType from the Ecore file
+						if tpb.type.isEDataType() then
 							typeArgument.eClassifier := tpb.type.asType(PrimitiveType).ecoreModelElement							
 						else
-							//We use the final type
-							if cd.ecoreDataType.isVoid() then //not cd.ecoreModelElement.isVoid() then
+							// We use the final type
+							if cd.ecoreDataType.isVoid() then
 								typeArgument.eClassifier := cd.ecoreModelElement
 							else
 								typeArgument.eClassifier := cd.ecoreDataType
@@ -130,6 +136,7 @@ aspect class Class {
 		}
 	end
 }
+
 
 aspect class Operation {
 	operation setLinks(context : KM2EcoreContext) is do
@@ -153,10 +160,14 @@ aspect class Operation {
 
 aspect class Parameter {
 	operation setLinks(context : KM2EcoreContext) is do
-	
-		// DETERMINE if the parameter should be compiled
+
 		if self.type.isInstanceOf(FunctionType) then
-			stdio.writeln("setLinks FunctionType: " + self.type.toString() + " self.ecoreModelElement: " + self.ecoreModelElement.toString())
+			
+			// Important note (CF): this case should never hapenned, because the function types are not added in the Ecore as EOperation,
+			// thus the corresponding parameters will be not visited
+			// The following source code (this then body) could be removed later
+			
+			stdio.writeln("Parameter.setLinks FunctionType: " + self.type.toString() + " self.ecoreModelElement: " + self.ecoreModelElement.toString())
 
 			var ft : FunctionType init self.type.asType(FunctionType)
 			self.ecoreModelElement.eType := GenericTypeDefinitionHelper.new.getKermetaSpecialType(self.container.container.container.asType(Package))
@@ -171,34 +182,13 @@ aspect class Parameter {
 			end
 			self.ecoreModelElement.eAnnotations.add(ft_annotation)
 			
-			//Set the traceability
+			// Set the traceability
 			ft.ecoreModelElement := ft_annotation
 			
 		else
 		
-			/*if self.upper!=1 then		
-				var eOrderedSet : EClassifier init context.mu.getEClassifierByQualifiedName("kermeta::standard::OrderedSet")
-				
-				var genericType : EGenericType init EGenericType.new				
-				genericType.eClassifier  := eOrderedSet
-				self.ecoreModelElement.eGenericType := genericType
-				
-				var type_arg_genericType : EGenericType init EGenericType.new
-				
-				if self.type.asType(Class).getClassDefinitionAsTyped().ecoreDataType.isVoid() then
-					type_arg_genericType.eClassifier := self.type.asType(Class).getClassDefinitionAsTyped().ecoreModelElement
-				else
-					type_arg_genericType.eClassifier := self.type.asType(Class).getClassDefinitionAsTyped().ecoreDataType
-				end
-				
-				self.ecoreModelElement.eGenericType.eTypeArguments.add(type_arg_genericType)
-
-			else*/
-			
-				var s : LinkSetterForTypedElement init LinkSetterForTypedElement.new
-				s.setLinks(self, self.ecoreModelElement, context)
-			
-			//end
+			var s : LinkSetterForTypedElement init LinkSetterForTypedElement.new
+			s.setLinks(self, self.ecoreModelElement, context)
 		
 		end
 		
@@ -209,13 +199,13 @@ aspect class Property {
 	operation setLinks(context : KM2EcoreContext) is do
 		LinkSetterForTypedElement.new().setLinks(self, self.ecoreModelElement, context)
 		
-		//Complete the structural phase
+		// Complete the structural phase
 		//if self.opposite.isVoid() then self is an EReference
 		if not self.opposite.isVoid() then
 			self.ecoreModelElement.asType(EReference).eOpposite := self.opposite.ecoreModelElement.asType(EReference)
 		end
 		
-		//set to false the default value of Boolean
+		// Set to false the default value of Boolean
 		if self.type.getTypeQName() == "kermeta::standard::Boolean" then
 			self.ecoreModelElement.defaultValueLiteral := "false"
 		end
@@ -228,17 +218,6 @@ class LinkSetterForTypedElement {
 	operation setLinks(element : TypedElement, ecoreModelElement : ETypedElement, context : KM2EcoreContext) is do
 		
 		if (not ecoreModelElement.isVoid()) and (not Operation.new().isVoidType(element.type.getTypeQName())) then
-
-			/*
-			if element.isInstanceOf(Parameter) then
-				var param : Parameter init element.asType(Parameter)
-				if param.upper!=1 then
-					stdio.writeln("param: " + param.name.toString)
-					var eOrderedSet : EClassifier init context.mu.getEClassifierByQualifiedName("kermeta::standard::OrderedSet")
-					stdio.writeln("param.upper!=1: " + eOrderedSet.toString)
-				end
-			end
-			*/
 			
 			if element.type.isInstanceOf(Class) then
 				var c : Class init element.type.asType(Class)
@@ -252,44 +231,10 @@ class LinkSetterForTypedElement {
 				end
 				ecoreModelElement.eGenericType := genericType
 				
-				c.typeParamBinding.each{ tpb |
-					var typeArgument : EGenericType init EGenericType.new
-					
-					if tpb.type.isInstanceOf(Class) then
-						var cd : ClassDefinition init tpb.type.asType(Class).getClassDefinitionAsTyped()
-						if cd.ecoreDataType.isVoid() then
-							typeArgument.eClassifier := cd.ecoreModelElement
-						else //we assume this Class target a subtype of ValueType => EDataType
-							typeArgument.eClassifier := cd.ecoreDataType
-						end
-						ecoreModelElement.eGenericType.eTypeArguments.add(typeArgument)
-					else
-						if tpb.type.isInstanceOf(ObjectTypeVariable) then
-							var otv : ObjectTypeVariable init tpb.type.asType(ObjectTypeVariable)
-							typeArgument.eTypeParameter := otv.ecoreModelElement
-							ecoreModelElement.eGenericType.eTypeArguments.add(typeArgument)
-						else
-						
-							if tpb.type.isInstanceOf(PrimitiveType) then
-							
-								var cd : ClassDefinition init tpb.type.getClassFromPrimitiveType().getClassDefinitionAsTyped()
-								
-								if tpb.type.isEDataType() then
-									typeArgument.eClassifier := tpb.type.asType(PrimitiveType).ecoreModelElement
-								else
-									if cd.ecoreDataType.isVoid() then
-										typeArgument.eClassifier := cd.ecoreModelElement
-									else
-										typeArgument.eClassifier := cd.ecoreDataType
-									end									
-								end
-								
-								ecoreModelElement.eGenericType.eTypeArguments.add(typeArgument)
-							end
-							
-						end
-					end
-				} //end of the each
+				// Set the traceability
+				c.ecoreModelElement := genericType
+				// Continue the settings of links
+				c.setLinks(context)
 				
 			else
 				// Case of the type is an ObjectTypeVariable
