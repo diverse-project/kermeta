@@ -1,4 +1,4 @@
-/* $Id: ContainmentTraversable.kmt,v 1.2 2008-07-11 09:43:20 cfaucher Exp $
+/* $Id: ContainmentTraversable.kmt,v 1.3 2008-09-05 07:42:29 cfaucher Exp $
  * Creation date: January 21, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -31,7 +31,11 @@ package structure {
 	
 	aspect class ModelingUnit {
 		method eachOwnedElement(func : <Object -> Object>) : Void is do
-	   		super(func)
+	   		// Remove the following each and replace by: super(func)
+			self.ownedTags.each{ o |
+				func(o)
+			}
+			
 			
 			self.requires.each{p|
 				func(p)
@@ -49,7 +53,10 @@ package structure {
 	 
 	aspect class Package {
 		method eachOwnedElement(func : <Object -> Object>) : Void is do
-	        super(func)
+	        // Remove the following each and replace by: super(func)
+			self.ownedTags.each{ o |
+				func(o)
+			}
 	        
 	        self.ownedTypeDefinition.each{ o |
 				func(o)
@@ -62,7 +69,10 @@ package structure {
 	
 	aspect class Enumeration {
 		method eachOwnedElement(func : <Object -> Object>) : Void is do
-	        super(func)
+	        // Remove the following each and replace by: super(func)
+			self.ownedTags.each{ o |
+				func(o)
+			}
 	        
 	        self.ownedLiteral.each{ l |
 	        	func(l)
@@ -72,7 +82,10 @@ package structure {
 	
 	aspect class ClassDefinition {
 		method eachOwnedElement(func : <Object -> Object>) : Void is do
-	        super(func)
+	        // Remove the following each and replace by: super(func)
+			self.ownedTags.each{ o |
+				func(o)
+			}
 	        
 	        self.ownedAttribute.each{ o |
 				func(o)
@@ -94,7 +107,10 @@ package structure {
 		
 	aspect class Operation {
 		method eachOwnedElement(func : <Object -> Object>) : Void is do
-	        super(func)
+	        // Remove the following each and replace by: super(func)
+			self.ownedTags.each{ o |
+				func(o)
+			}
 	        
 	        self.ownedParameter.each{ o |
 				func(o)
@@ -128,7 +144,10 @@ package behavior {
 
 	aspect class Block {
 		method eachOwnedElement(func : <Object -> Object>) : Void is do
-	        super(func)
+	        // Remove the following each and replace by: super(func)
+			self.ownedTags.each{ o |
+				func(o)
+			}
 	        
 	        self.statement.each{ s |
 				func(s)
@@ -138,7 +157,10 @@ package behavior {
 	
 	aspect class Rescue {
 		method eachOwnedElement(func : <Object -> Object>) : Void is do
-	        super(func)
+	        // Remove the following each and replace by: super(func)
+			self.ownedTags.each{ o |
+				func(o)
+			}
 	        
 	        self.body.each{ s |
 				func(s)
