@@ -1,4 +1,4 @@
-/* $Id: CreateBehavior.kmt,v 1.62 2008-09-03 14:55:38 cfaucher Exp $
+/* $Id: CreateBehavior.kmt,v 1.63 2008-09-05 07:46:09 cfaucher Exp $
  * Creation date: January 21, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -233,7 +233,7 @@ package structure {
 							
 							context.ftSuffixActivation := false
 							str_tpb := str_tpb + context.ftProductTypeStack.peek().getTypeByIndex(i).createBehaviorJava(context)
-							//str_tpb := str_tpb + context.ftProductTypeStack.peek().getTypeByIndex(0).asType(ParameterizedType).typeParamBinding.one().createBehaviorJava(context)
+							//str_tpb := str_tpb + context.ftProductTypeStack.peek().getTypeByIndex(0).asType(ParameterizedType).typeParamBinding.first().createBehaviorJava(context)
 							context.ftSuffixActivation := true
 							
 							//i_ := i_ + 1
@@ -371,7 +371,7 @@ package behavior {
 				var str_statement_splitted : OrderedSet<String> init str_statement.split(context.SEPARATOR_STATEMENT_FT) 
 				
 				if str_statement_splitted.size() == 2 then
-					var s1 : String init str_statement_splitted.one()
+					var s1 : String init str_statement_splitted.first()
 					var s2 : String init str_statement_splitted.last()
 					
 					if s2.contains(context.PREVIOUS_STATEMENT_FT) then
@@ -421,7 +421,11 @@ package behavior {
 						if stm.isInstanceOf(CallFeature) and (context.resultLastStatementStack.size()>0) then
 							//javaCode.append(context.getResultLastStatementType() + " " + stm.asType(Expression).staticType.createBehaviorJava(context) + " ttttt ")
 							if context.getResultLastStatementType() == stm.asType(Expression).staticType.createBehaviorJava(context) then
-								javaCode.append(context.getResultLastStatementId())
+								if stm.callsFunctionType() then
+									str_statement := str_statement + context.getResultLastStatementId() + context.resultOfLastFt + ";\n"
+								else
+									javaCode.append(context.getResultLastStatementId())
+								end
 							end
 						end
 					end
@@ -607,7 +611,7 @@ package behavior {
 							
 							if fName == "asType" then
 								ppCast := true
-								static_call := "(" + self.parameters.one.createBehaviorJava(context) + ") " + static_call
+								static_call := "(" + self.parameters.first().createBehaviorJava(context) + ") " + static_call
 							end
 						end
 					else
@@ -681,7 +685,7 @@ package behavior {
 								if self.isCallFeatureAsStaticProperty() then
 								
 									if self.staticProperty.upper != 1 then
-										var type_binding : String init self.staticType.asType(Class).typeParamBinding.one.type.createBehaviorJava(context)
+										var type_binding : String init self.staticType.asType(Class).typeParamBinding.first().type.createBehaviorJava(context)
 										
 										if (not self.staticProperty.isUnique) and (not self.staticProperty.isOrdered) then
 											result := context.COLLECTION_UTIL_CLASS + ".<" + type_binding + ">convertAsBag(" + result
@@ -709,7 +713,7 @@ package behavior {
 									
 									
 										if self.staticOperation.upper != 1 then
-															var type_binding : String init self.staticType.asType(Class).typeParamBinding.one.type.createBehaviorJava(context)
+															var type_binding : String init self.staticType.asType(Class).typeParamBinding.first().type.createBehaviorJava(context)
 															
 															if (not self.staticOperation.isUnique) and (not self.staticOperation.isOrdered) then
 																result := context.COLLECTION_UTIL_CLASS + ".<" + type_binding + ">convertAsBag(" + result
@@ -871,8 +875,6 @@ package behavior {
 				
 				result := result + "//End of the Inlining of the lambda expression: " + self.name + "\n"
 				
-				
-				
 				context.ftSuffixActivation := true
 				
 			else
@@ -896,7 +898,7 @@ package behavior {
 							c_param := self.getCallFeatureCorrespondingParameter()
 						end
 		
-						var type_binding : String init self.staticType.asType(Class).typeParamBinding.one.type.createBehaviorJava(context)
+						var type_binding : String init self.staticType.asType(Class).typeParamBinding.first().type.createBehaviorJava(context)
 							
 						if self.isParameterMany() then
 							result := context.COLLECTION_UTIL_CLASS + ".<" + type_binding + ">convertAsEList(" + result
@@ -1349,7 +1351,7 @@ package behavior {
 			result := self.~value
 			
 			if result == "." then
-				result := "\"" + result.replace(".", "\\\\.") + "\""
+				result := "\"\\\\.\""
 			else
 				result := "\"" + result.replace("\"", "\\\"") + "\""
 				result := result.replace("\n", "\\n")
