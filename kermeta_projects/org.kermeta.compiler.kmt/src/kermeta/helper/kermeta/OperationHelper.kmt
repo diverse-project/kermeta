@@ -1,4 +1,4 @@
-/* $Id: OperationHelper.kmt,v 1.8 2008-09-02 11:58:30 cfaucher Exp $
+/* $Id: OperationHelper.kmt,v 1.9 2008-09-05 07:46:39 cfaucher Exp $
  * Creation date: May 20, 2008
  * License:
  * Copyright:
@@ -102,12 +102,12 @@ aspect class Operation {
 			if self.body.asType(Block).statement.size==1 then
 				if self.body.asType(Block).statement.isInstanceOf(JavaStaticCall) then
 					var static_call_set_1 : OrderedSet<String> init self.body.asType(Block).statement.asType(JavaStaticCall).createBehaviorJava(context).split("(")//.getCompiledJavaExtern().split("(")
-					result := static_call_set_1.one()
+					result := static_call_set_1.first()
 				else
 					if self.body.asType(Block).statement.isInstanceOf(Assignment) then
 						if self.body.asType(Block).statement.asType(Assignment).~value.isInstanceOf(JavaStaticCall) then
 							var static_call_set_2 : OrderedSet<String> init self.body.asType(Block).statement.asType(Assignment).~value.asType(JavaStaticCall).createBehaviorJava(context).split("(")//.getCompiledJavaExtern().split("(")
-							result := static_call_set_2.one()
+							result := static_call_set_2.first()
 						end
 					end
 				end
