@@ -1,6 +1,6 @@
 
 
-/*$Id: RequireResolver.java,v 1.4 2008-09-05 09:36:57 dvojtise Exp $
+/*$Id: RequireResolver.java,v 1.5 2008-09-05 14:12:26 dvojtise Exp $
 * Project : org.kermeta.io.loader
 * File : 	RequireResolver.java
 * License : EPL
@@ -17,7 +17,7 @@ import java.util.Map;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.URIConverter;
-import org.eclipse.emf.ecore.resource.impl.ExtensibleURIConverterImpl;
+import org.eclipse.emf.ecore.resource.impl.URIConverterImpl; // will need to switch to ExtendibleURIConverterImpl when will we definetly switch to eclipse 3.4 or above
 import org.kermeta.io.IoFactory;
 import org.kermeta.io.KermetaUnit;
 import org.kermeta.io.KermetaUnitRequire;
@@ -103,7 +103,7 @@ public class RequireResolver implements ILoadingAction {
 				 * 
 				 */
 				if(! EMFRegistryHelper.isRegistered(uri)){
-					URIConverter converter = new ExtensibleURIConverterImpl();
+					URIConverter converter = new URIConverterImpl();
 					if ( uri.startsWith("platform:/") ){
 						if(! converter.exists(emfURI, null) ) 
 							throw new IOException("The file " + uri + " does not exist.");						
