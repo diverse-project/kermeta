@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: LoadingStepImpl.java,v 1.4 2008-04-28 11:50:47 ftanguy Exp $
+ * $Id: LoadingStepImpl.java,v 1.5 2008-09-05 09:36:02 dvojtise Exp $
  */
 package org.kermeta.io.loader.impl;
 
@@ -288,7 +288,7 @@ public class LoadingStepImpl extends AbstractStepImpl implements LoadingStep {
 		if ( ! isDone() ) {
 						
 			
-			if ( !performActionIfError && datas.getKermetaUnit().isErroneous() ) {
+			if ( !performActionIfError && datas.getKermetaUnit() != null && datas.getKermetaUnit().isErroneous() ) {
 				/*
 				 * 
 				 * Doesn't perform the action due to previous error
