@@ -1,4 +1,4 @@
-/* $Id: ecore_behavior.kmt,v 1.8 2008-09-05 13:28:23 dvojtise Exp $
+/* $Id: ecore_behavior.kmt,v 1.9 2008-09-05 13:41:06 dvojtise Exp $
  * Creation date: May 2, 2006
  * License: E.P.L.
  * Copyright:
@@ -47,9 +47,9 @@ aspect class EClass
 	 */
 	inv eGenericSuperTypes_Matches_eSuperTypes is do
 		// verifies that all eGenericSuperTypes have their counterpart in eSuperTypes and vice versa
-		self.eGenericSuperTypes.forAll{eGST | self.eSuperTypes.exists{eST | eST == eGST.eRawType}}
+		self.eGenericSuperTypes.forAll{eGST | self.eSuperTypes.exists{eST | eST == eGST.eClassifier}}
 		and
-		self.eSuperTypes.forAll{eST | self.eGenericSuperTypes.exists{eGST | eST == eGST.eRawType}}
+		self.eSuperTypes.forAll{eST | self.eGenericSuperTypes.exists{eGST | eST == eGST.eClassifier}}
 	end 
 	
 	property eAllAttributes : EAttribute[0..*]
@@ -174,9 +174,9 @@ aspect class EOperation
 	 */
 	inv eGenericExceptions_Matches_eExceptions is do
 		// verifies that all eGenericSuperTypes have their counterpart in eSuperTypes and vice versa
-		self.eGenericExceptions.forAll{eGST | self.eExceptions.exists{eST | eST == eGST.eRawType}}
+		self.eGenericExceptions.forAll{eGST | self.eExceptions.exists{eST | eST == eGST.eClassifier}}
 		and
-		self.eExceptions.forAll{eST | self.eGenericExceptions.exists{eGST | eST == eGST.eRawType}}
+		self.eExceptions.forAll{eST | self.eGenericExceptions.exists{eGST | eST == eGST.eClassifier}}
 	end 
 }
 
@@ -351,7 +351,7 @@ aspect abstract class ETypedElement
 		else
 			if not self.eGenericType.isVoid then
 				if not self.eType.isVoid then
-					self.eGenericType.eRawType == self.eType
+					self.eGenericType.eClassifier == self.eType
 				else 
 					false
 				end
