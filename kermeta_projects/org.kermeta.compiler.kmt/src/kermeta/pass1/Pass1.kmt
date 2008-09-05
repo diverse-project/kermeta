@@ -1,4 +1,4 @@
-/* $Id: Pass1.kmt,v 1.29 2008-09-03 16:49:12 cfaucher Exp $
+/* $Id: Pass1.kmt,v 1.30 2008-09-05 15:32:38 cfaucher Exp $
  * Creation date: January 21, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -134,6 +134,7 @@ aspect class ClassDefinition {
 			
 			if instanceClassName != "" then
 				var eDataType : EDataType init EDataType.new
+				// The EDataType name is prefixed by Java
 				eDataType.name := "Java" + self.name
 				eDataType.instanceClassName := instanceClassName
 				// Setting the container
@@ -148,28 +149,25 @@ aspect class ClassDefinition {
 					raise except
 				end
 			end
+			
 		else
 					
 			// Creating the associated ecore EClass
 			var ecoreClass : EClass init self.createEcoreModelElement(context)		
 			// Setting the container
 			p.ecoreModelElement.eClassifiers.add(ecoreClass)
-			// Setting the ecore proxy
+			// Setting the ecore traceability
 			self.ecoreModelElement := ecoreClass
 			
-			// Compile the owned elements
+			// Compiling the owned elements
 			self.eachOwnedElement{ o |
 				if not o.isInstanceOf(Operation) then
 					o.applyPass1(context)
 				else
 					var op : Operation init o.asType(Operation)
-					if (not op.isFunctionType()) then//vt and (o.asType(Operation).mustBeCompiled()) then
+					// The function types are not compiled, but inlined directly during their usages
+					if (not op.isFunctionType()) then
 						op.applyPass1(context)
-						
-						/*if op.mustBeDuplicated() then
-							stdio.writeln("duplicated method: " + op.name)
-						end*/
-						
 					end
 				end
 			}

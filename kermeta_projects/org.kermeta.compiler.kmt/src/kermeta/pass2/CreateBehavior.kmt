@@ -1,4 +1,4 @@
-/* $Id: CreateBehavior.kmt,v 1.63 2008-09-05 07:46:09 cfaucher Exp $
+/* $Id: CreateBehavior.kmt,v 1.64 2008-09-05 15:32:38 cfaucher Exp $
  * Creation date: January 21, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -580,16 +580,18 @@ package behavior {
 			var fName : String  init IdentifierHelper.new.getMangledIdentifier(self.name, context)
 			
 			
-			//stdio.writeln("self.staticOperation: " + self.staticOperation.toString())
-			
 			var static_call : String init ""
 			
 			if self.isCallFeatureAsStaticOperation() then
-			
-				if self.callsFunctionType() then
 				
+				//stdio.writeln("self.staticOperation: " + self.staticOperation.name)
+				
+				if self.callsFunctionType() then
+					context.tasks_stack.push("FunctionType_Compilation")
+					stdio.writeln(" +++ +++ +++ createStringFromFunctionType: " + self.name)
 					var ft_str : String init self.createStringFromFunctionType(context)
-					
+					//context.ftStack.pop()
+					context.tasks_stack.pop()
 					result := ft_str
 				
 				//end
@@ -811,13 +813,28 @@ package behavior {
 		method createBehaviorJava(context : KM2EcoreContext) : String from CallExpression is do
 			super(context)
 			result := ""
+			
+			stdio.writeln(context.tasks_stack.peek() + " - " + self.name + " | ")
 
-			if (context.tasks_stack.peek() == "FunctionType_Compilation") and (context.current_param_ft == self.name) then
-				context.tasks_stack.pop()
+			//result := result + context.tasks_stack.peek() + " - " + self.name + " | "
+
+			if (context.tasks_stack.peek() == "FunctionType_Compilation") and self.isFunctionTypeVariable() then//(context.current_param_ft.peek() == self.name) then
+				//context.tasks_stack.pop()
+				
+				stdio.writeln("context.ftStack.size.toString TUTU: " + context.ftStack.peek.toString + " - " + context.ftStack.size.toString)
 				
 				context.ftSuffixActivation := false
+				//result := result + "--toto--"
+				var theLambdaExp : LambdaExpression init context.ftStack.peek()
 				
-				var theLambdaExp : LambdaExpression init context.ftStack.pop()
+				// FIXME CF UGLY PATCH
+				if context.ftStack.size>1 then
+					context.ftStack.pop()
+				end
+				
+				
+				
+				//context.current_param_ft.pop()
 						
 				var str_toInclude : String init ""
 				
@@ -878,6 +895,7 @@ package behavior {
 				context.ftSuffixActivation := true
 				
 			else
+				//result := result + "--titi--"
 
 				if self.name == "stdio" then
 					result := result + "org.kermeta.compil.runtime.helper.io.StdIOUtil"

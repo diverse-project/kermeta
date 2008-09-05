@@ -1,4 +1,4 @@
-/* $Id: ContainmentTraversable.kmt,v 1.3 2008-09-05 07:42:29 cfaucher Exp $
+/* $Id: ContainmentTraversable.kmt,v 1.4 2008-09-05 15:32:38 cfaucher Exp $
  * Creation date: January 21, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -84,7 +84,9 @@ package structure {
 		method eachOwnedElement(func : <Object -> Object>) : Void is do
 	        // Remove the following each and replace by: super(func)
 			self.ownedTags.each{ o |
+				stdio.writeln("1")
 				func(o)
+				stdio.writeln("2")
 			}
 	        
 	        self.ownedAttribute.each{ o |

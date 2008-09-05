@@ -1,4 +1,4 @@
-/* $Id: ExpressionHelper.kmt,v 1.11 2008-09-05 07:47:00 cfaucher Exp $
+/* $Id: ExpressionHelper.kmt,v 1.12 2008-09-05 15:32:37 cfaucher Exp $
  * Creation date: Jul 25, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -235,17 +235,18 @@ aspect class CallFeature {
 	end*/
 
 	operation createStringFromFunctionType(context : KM2EcoreContext) : String is do
-		
+		stdio.writeln("toto ---------- createStringFromFunctionType: " + self.name)
 		var tgt : Expression init self.target
 		
-		context.tasks_stack.push("FunctionType_Compilation")
+		//context.tasks_stack.push("FunctionType_Compilation")
 		
 		//Retrieve the corresponding CallFeature for setting the name of the searched call variable
-		self.staticOperation.ownedParameter.each{ p |
+		/*self.staticOperation.ownedParameter.each{ p |
 			if p.type.isInstanceOf(FunctionType) then
-				context.current_param_ft := p.name
+				context.current_param_ft.push(p.name)
+				stdio.writeln("context.current_param_ft.peek(): " + context.current_param_ft.peek())
 			end
-		}
+		}*/
 		
 		var map_type : Hashtable<Type, Type> init Hashtable<Type, Type>.new()
 		var inc_tp : Integer init 0
@@ -257,11 +258,13 @@ aspect class CallFeature {
 		
 		//Lambda expression to inline
 		var ftRightType : Type init Type.new()
-		if self.parameters.first().isInstanceOf(LambdaExpression) then
-		
-			var theLambdaExp : LambdaExpression init self.parameters.first().asType(LambdaExpression)
+		if not self.parameters.detect{param | param.isInstanceOf(LambdaExpression)}.isVoid() then
+			
+			var theLambdaExp : LambdaExpression init self.parameters.detect{param | param.isInstanceOf(LambdaExpression)}.asType(LambdaExpression)
 		
 			context.ftStack.push(theLambdaExp)
+			
+			stdio.writeln("theLambdaExp: " + theLambdaExp.toString + " " + theLambdaExp.container.asType(CallFeature).name.toString + " " + context.ftStack.size.toString)
 			
 			if theLambdaExp.staticType.isInstanceOf(FunctionType) then
 				if theLambdaExp.staticType.asType(FunctionType).left.isInstanceOf(ProductType) then
@@ -330,6 +333,7 @@ aspect class CallFeature {
 		context.ftMapTypeStack.pop()
 		context.ftProductTypeStack.pop()
 		context.ftSuffix.pop()
+		//context.current_param_ft.pop()
 		
 		result := ft_str
 	end

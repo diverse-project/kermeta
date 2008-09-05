@@ -1,4 +1,4 @@
-/* $Id: StructureCompiler.kmt,v 1.56 2008-09-05 07:41:57 cfaucher Exp $
+/* $Id: StructureCompiler.kmt,v 1.57 2008-09-05 15:32:38 cfaucher Exp $
  * Creation date: January 21, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -116,7 +116,7 @@ class Main {
 		var traceInput : String init ""
 */
 
-		main_mode(modelInput, traceInput, output, CompilingMode.behaviorJava)
+		main_mode3(modelInput, traceInput, output, CompilingMode.behaviorJava)
 	end
 	
     operation main(modelInput : String, traceInput : String, output : String) : Void is do
@@ -252,7 +252,7 @@ class Main {
 			p.asType(Package).eachOwnedElement{ cd |
 				if cd.isInstanceOf(ClassDefinition) then
 				
-				//if cd.asType(ClassDefinition).qualifiedName == "kermeta::language::structure::ClassDefinition" then
+				if cd.asType(ClassDefinition).qualifiedName == "kermeta::language::structure::ClassDefinition" then
 				
 				cd.asType(ClassDefinition).eachOwnedElement{ op |
 					if op.isInstanceOf(Operation) then
@@ -271,7 +271,7 @@ class Main {
 							or op.asType(Operation).name == "addAt"
 							or op.asType(Operation).name == "createResource"
 							or op.asType(Operation).name == "saveAndValidateWithEMF"
-							or*/ op.asType(Operation).name == "replaceExtension" then // getContainerValue applyPass1 matchStep2 replaceExtension getFirstTextReference saveAndValidateWithEMF main
+							or*/ op.asType(Operation).name == "applyPass1" then // getContainerValue applyPass1 matchStep2 replaceExtension getFirstTextReference saveAndValidateWithEMF main
 					
 							stdio.writeln("================= " + op.asType(Operation).qualifiedName + " =================")
 							var javaSourceCode : String init op.createBehaviorJava(context)
@@ -281,7 +281,7 @@ class Main {
 						
 					end
 					}
-				//end
+				end
 				
 				end
 			}
