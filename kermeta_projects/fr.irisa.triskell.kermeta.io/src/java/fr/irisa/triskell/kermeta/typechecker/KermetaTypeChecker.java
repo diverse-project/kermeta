@@ -1,4 +1,4 @@
-/* $Id: KermetaTypeChecker.java,v 1.38 2008-07-08 13:32:24 ftanguy Exp $
+/* $Id: KermetaTypeChecker.java,v 1.39 2008-09-05 09:32:45 dvojtise Exp $
 * Project : Kermeta (First iteration)
 * File : KermetaTypeChecker.java
 * License : EPL
@@ -91,12 +91,16 @@ public class KermetaTypeChecker {
 
         			// Check operation signatures
         			for ( Operation op : cdef.getOwnedOperation() ) {
-        				if ( op.getType() != null )
+        				if ( op.getType() != null ){
         					ParameterizedTypeChecker.checkType(op.getType(), unit, context, op);
-
+        				}
         				//Check parameter types
-        				for ( Parameter param : op.getOwnedParameter() )
-        					ParameterizedTypeChecker.checkType( param.getType(), unit, context, param );
+        				for ( Parameter param : op.getOwnedParameter() ){
+        					if(param.getType() != null)
+        						ParameterizedTypeChecker.checkType( param.getType(), unit, context, param );
+        					else
+        						unit.error("TYPE-CHECKER : parameter " + op.getName() + "." + param.getName() + " has no type", param);
+        				}
         			}
  
         		} else if (td instanceof PrimitiveType) {
@@ -164,11 +168,13 @@ public class KermetaTypeChecker {
     		context.init((ClassDefinition)c.eContainer());
     	else
     		context.init(((Operation)c.eContainer()).getOwningClass(),(Operation) c.eContainer());
-    	
-    	ExpressionChecker.typeCheckExpression(c.getBody(), unit, context);
-        if(getTypeOfExpression(c.getBody()).isSubTypeOf(TypeCheckerContext.VoidType) || !(getTypeOfExpression(c.getBody()).isSubTypeOf(TypeCheckerContext.BooleanType))) {
-        	unit.error("TYPE-CHECKER : The type of a constraint should be Boolean", c.getBody());
-   		}
+    	if(c.getBody() != null){
+    		ExpressionChecker.typeCheckExpression(c.getBody(), unit, context);
+    		if(getTypeOfExpression(c.getBody()).isSubTypeOf(TypeCheckerContext.VoidType) || !(getTypeOfExpression(c.getBody()).isSubTypeOf(TypeCheckerContext.BooleanType))) {
+    			unit.error("TYPE-CHECKER : The type of a constraint should be Boolean", c.getBody());
+    		}
+    	}
+    	else unit.error("TYPE-CHECKER : a constraint must have a body", c);
     }
     
     /**
