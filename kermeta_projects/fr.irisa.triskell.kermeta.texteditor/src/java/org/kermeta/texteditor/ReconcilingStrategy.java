@@ -1,6 +1,6 @@
 
 
-/*$Id: ReconcilingStrategy.java,v 1.7 2008-06-24 11:49:34 ftanguy Exp $
+/*$Id: ReconcilingStrategy.java,v 1.8 2008-09-05 09:35:31 dvojtise Exp $
 * Project : fr.irisa.triskell.kermeta.texteditor
 * File : 	FoldingStrategy.java
 * License : EPL
@@ -85,7 +85,7 @@ public class ReconcilingStrategy implements IReconcilingStrategy {
 	}
 
 	private void setJobForKermetaProject() {
-		modelCheckingJob = new Job("Model Checking " + kpmUnit.getName()) {
+		modelCheckingJob = new Job("Texteditor reconciling : Model Checking " + kpmUnit.getName()) {
 			@Override
 			protected IStatus run(IProgressMonitor monitor) {
 
@@ -96,7 +96,13 @@ public class ReconcilingStrategy implements IReconcilingStrategy {
 					HashMap<String, Object> args = new HashMap<String, Object>();
 					args.put("forceTypechecking", true);
 					args.put("content", getFileContent());
-					EventDispatcher.sendEvent(kpmUnit, "update", args, monitor);
+					try{
+						EventDispatcher.sendEvent(kpmUnit, "update", args, monitor);
+					}
+					catch(java.lang.Error e){
+						// must not warn the user about this, the text is probably temporarily inconcistent, but that's normal
+						TexteditorPlugin.internalLog.debug("Texteditor reconciling failed",e);
+					}
 					break;
 
 				default:
