@@ -9,7 +9,7 @@ require "../Standard.kmt"
 using kermeta::standard
 
 /* ****************************************************************************
- * $Id: resource.kmt,v 1.63 2008-09-04 13:08:21 dvojtise Exp $
+ * $Id: resource.kmt,v 1.64 2008-09-08 09:20:00 cfaucher Exp $
  * Project : Kermeta (First iteration)
  * Creation date :  
  * File : resource.kmt
@@ -96,12 +96,6 @@ abstract class Resource inherits kermeta::standard::Set<Object>
 	 * Raises a ResourceLoadException in case loaded Resource is empty
 	 */	
 	operation load() : Void is abstract
-	
-	/**
-	 * Loads the Resource, thus making content of the Resource browsable.
-	 * Without raises a ResourceLoadException in case loaded Resource is empty
-	 */
-	operation loadWithoutChecking() : Void is abstract
 	
 	/**	
 	 * Returns the set of Resources the current Resource, which must have been loaded,
@@ -285,14 +279,6 @@ class EMFResource inherits Resource
 			e.message := "Resource load failed, no object was created in this resource from " + uri
 			raise e
 		end
-	end
-	
-	method loadWithoutChecking() : Void is do
-		self.clear
-		@compiledJavaExtern "org.kermeta.compil.runtime.helper.persistence.Loader.load(getValues(), getUri(), getMetaModelURI())"
-		extern fr::irisa::triskell::kermeta::runtime::basetypes::Resource.load(
-		    self, uri, metaModelURI, "EMF"
-		)
 	end
 	
 	/**
