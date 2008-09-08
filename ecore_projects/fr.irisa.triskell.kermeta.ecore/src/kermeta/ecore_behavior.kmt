@@ -1,4 +1,4 @@
-/* $Id: ecore_behavior.kmt,v 1.10 2008-09-08 07:36:44 ffleurey Exp $
+/* $Id: ecore_behavior.kmt,v 1.11 2008-09-08 08:12:36 ffleurey Exp $
  * Creation date: May 2, 2006
  * License: E.P.L.
  * Copyright:
@@ -294,7 +294,10 @@ aspect class EReference
 		setter is do
 			if eType.getMetaClass == EClass then				
 				//eType := value
-				setType(value)
+				var generic : EGenericType init EGenericType.new
+				generic.eClassifier := value
+				self.eType := value
+				self.eGenericType := generic
 			else
 				var exception : kermeta::exceptions::Exception init kermeta::exceptions::Exception.new
 				exception.message := "The EClassifer pointed by this EReference must be of type EClass"

@@ -28,9 +28,9 @@ class Main inherits kermeta::kunit::Assert
     	repository := EMFRepository.new
     	
     	// ask for stuff to play with (../models/needs_observer.ecore)
-    	var inputModelName : String init "../demos/inputmodels/Extended_spreadsheet.ecore"
+    	var inputModelName : String init "../inputmodels/Extended_spreadsheet.ecore"
         var patternPackageName : String init "spreadsheet"
-        var outputModelName : String init "../demos/outputmodels/spreadsheet_with_patterns.ecore"
+        var outputModelName : String init "../outputmodels/spreadsheet_with_patterns.ecore"
         
         stdio.writeln("inputModel: " + inputModelName)
         
@@ -44,23 +44,23 @@ class Main inherits kermeta::kunit::Assert
         var visitReturnType : EClassifier
         visitReturnType := patternPackage.eClassifiers.detect{c | c.name.equals("Value")}
         patternHelper.addVisitor(patternPackage, visitReturnType)
-        helper.saveEcoreModel(repository, patternPackage, "../demos/outputmodels/spreadsheet_with_visitor.ecore")
+        helper.saveEcoreModel(repository, patternPackage, "../outputmodels/spreadsheet_with_visitor.ecore")
 		stdio.writeln("------> Visitor added ()") 
 		stdio.read("Press enter:")     
         patternHelper.addObserver(patternPackage, 
 			helper.findClassByName(patternPackage, "Cell"), 
 			helper.findClassByName(patternPackage, "CellRef"))
-        helper.saveEcoreModel(repository, patternPackage, "../demos/outputmodels/spreadsheet_with_observer1.ecore")
+        helper.saveEcoreModel(repository, patternPackage, "../outputmodels/spreadsheet_with_observer1.ecore")
 		stdio.writeln("------> Observers between Cell and CellRef added")
 		stdio.read("Press enter:")     
         patternHelper.addObserver(patternPackage, 
 			helper.findClassByName(patternPackage, "Cell"), 
 			helper.findClassByName(patternPackage, "Cell"))
-        helper.saveEcoreModel(repository, patternPackage, "../demos/outputmodels/spreadsheet_with_observer2.ecore")
+        helper.saveEcoreModel(repository, patternPackage, "../outputmodels/spreadsheet_with_observer2.ecore")
 		stdio.writeln("------> Observers between Cells added")
 		stdio.read("Press enter:")     
         patternHelper.addBuilder(patternPackage)
-        helper.saveEcoreModel(repository, patternPackage, "../demos/outputmodels/spreadsheet_with_all_patterns.ecore")
+        helper.saveEcoreModel(repository, patternPackage, "../outputmodels/spreadsheet_with_all_patterns.ecore")
 		stdio.writeln("------> Builder added")
 		stdio.read("Press enter:")    
 		
