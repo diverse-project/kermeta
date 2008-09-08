@@ -1,4 +1,4 @@
-/* $Id: KM2EcoreContext.kmt,v 1.37 2008-09-08 08:09:59 cfaucher Exp $
+/* $Id: KM2EcoreContext.kmt,v 1.38 2008-09-08 19:58:26 cfaucher Exp $
  * Creation date: February 14, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -49,6 +49,9 @@ class KM2EcoreContext {
 	/** The choosen compiling mode */
 	attribute mode : CompilingMode [1..1]
 	
+	/** List of the ValueTypes filled during the pass1 */
+	attribute valueTypeMapping : String [0..*]
+	
 	reference tasks_stack : Stack<String> [0..1]
 	
 	reference condStack : Stack<String> [0..1]
@@ -63,7 +66,7 @@ class KM2EcoreContext {
 	reference ftStack : Stack<LambdaExpression> [0..1]
 	reference current_param_ft : Stack<String> [0..1]
 	
-	/*** params for FunctionType contextual ***/
+	/*** params for FunctionType contextual compiling ***/
 	reference ftSuffix : Stack<String> [0..1]
 	attribute inc_ftSuffix : Integer [0..1]
 	attribute ftSuffixActivation : Boolean [0..1]

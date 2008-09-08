@@ -1,4 +1,4 @@
-/* $Id: StringHelper.kmt,v 1.8 2008-09-02 07:25:05 cfaucher Exp $
+/* $Id: StringHelper.kmt,v 1.9 2008-09-08 19:58:26 cfaucher Exp $
  * Creation date: February 27, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -8,9 +8,11 @@
 package kermeta::standard;
 
 require kermeta
+require "platform:/resource/org.kermeta.compiler.kmt/src/kermeta/KM2EcoreContext.kmt"
 
 using kermeta::standard
 using kermeta::utils
+using km2ecore
 
 aspect class String {
 
@@ -64,5 +66,13 @@ aspect class String {
 		}
 		
 		result := map_infos
+	end
+	
+	operation isValueType(context : KM2EcoreContext) : Boolean is do
+		result := false
+		
+		if context.valueTypeMapping.contains(self) then
+			result := true
+		end
 	end
 }

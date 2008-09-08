@@ -1,4 +1,4 @@
-/* $Id: printJava.kmt,v 1.7 2008-07-16 07:06:28 cfaucher Exp $
+/* $Id: printJava.kmt,v 1.8 2008-09-08 19:58:26 cfaucher Exp $
  * Creation date: January 24, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -42,7 +42,6 @@ package structure {
 	
 	aspect class TypeDefinition {
 		method print(context : KM2EcoreContext) : Void is do
-			stdio.writeln("")
 		end
 	}
 	
@@ -60,7 +59,6 @@ package structure {
 	
 	aspect class Type {
 		method print(context : KM2EcoreContext) : Void is do
-			stdio.writeln("")
 		end
 	}
 	

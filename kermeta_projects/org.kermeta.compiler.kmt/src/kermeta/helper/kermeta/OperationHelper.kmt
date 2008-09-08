@@ -1,4 +1,4 @@
-/* $Id: OperationHelper.kmt,v 1.9 2008-09-05 07:46:39 cfaucher Exp $
+/* $Id: OperationHelper.kmt,v 1.10 2008-09-08 19:58:26 cfaucher Exp $
  * Creation date: May 20, 2008
  * License:
  * Copyright:
@@ -20,6 +20,37 @@ using km2ecore
 using simk
 
 aspect class Operation {
+
+	reference lambdaExpression : LambdaExpression [0..1]
+
+	operation isVoidType(type_label : String) : Boolean is do
+		result := false
+		if (type_label == "null")
+			or (type_label == "void")
+			or (type_label == "Void")
+			or (type_label == "VoidType")
+			or (type_label == "kermeta::standard::Void")
+			or (type_label == "kermeta::standard::VoidType")
+			or (type_label == "kermeta::language::structure::Void")
+			or (type_label == "kermeta::language::structure::VoidType")
+			or (type_label == "kermeta.standard.Void")
+			or (type_label == "kermeta.standard.VoidType")
+			or (type_label == "kermeta.language.structure.Void")
+			or (type_label == "kermeta.language.structure.VoidType") then
+			result := true
+		end
+	end
+
+	/** Generation of the String representing the end of a method: return of the result value */
+	operation ppReturnResult(context : KM2EcoreContext) : String is do
+		result := "\nreturn "
+		if self.upper==1 then
+			result := result + "result"
+		else
+			result := result + context.COLLECTION_UTIL_CLASS + ".convertAsEList(result)"
+		end
+		result := result + ";\n"
+	end
 
 	/**
 	 * Return true if the given operation is a FunctionType
@@ -61,6 +92,7 @@ aspect class Operation {
 	/**
 	 * Unused for the moment
 	 */
+	@deprecated ""
 	operation mustBeDuplicated() : Boolean is do
 		result := false
 		if self.type.isValueType() or hasAValueTypedParameter() then
@@ -167,7 +199,7 @@ aspect class Operation {
 						end
 					end
 				else
-					// This case should never happend
+					// This case should never happened
 				end
 				
 				staticMethod.sMParameters.add(param)

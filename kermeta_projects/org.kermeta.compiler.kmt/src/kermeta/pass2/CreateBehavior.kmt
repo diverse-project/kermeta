@@ -1,4 +1,4 @@
-/* $Id: CreateBehavior.kmt,v 1.65 2008-09-05 16:13:49 cfaucher Exp $
+/* $Id: CreateBehavior.kmt,v 1.66 2008-09-08 19:58:26 cfaucher Exp $
  * Creation date: January 21, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -62,17 +62,6 @@ package structure {
 	
 	/** We have to visit operation in order to print the result initialization and the return statement */
 	aspect class Operation {
-	
-		/** Generation of the String representing the end of a method: return of the result value */
-		operation ppReturnResult(context : KM2EcoreContext) : String is do
-			result := "\nreturn "
-			if self.upper==1 then
-				result := result + "result"
-			else
-				result := result + context.COLLECTION_UTIL_CLASS + ".convertAsEList(result)"
-			end
-			result := result + ";\n"
-		end
 		
 		method createBehaviorJava(context : KM2EcoreContext) : String is do
 
@@ -131,24 +120,6 @@ package structure {
 	        end
 	        result := javaCode.toString()
 		end
-		
-		operation isVoidType(type_label : String) : Boolean is do
-			result := false
-			if (type_label == "null")
-				or (type_label == "void")
-				or (type_label == "Void")
-				or (type_label == "VoidType")
-				or (type_label == "kermeta::standard::Void")
-				or (type_label == "kermeta::standard::VoidType")
-				or (type_label == "kermeta::language::structure::Void")
-				or (type_label == "kermeta::language::structure::VoidType")
-				or (type_label == "kermeta.standard.Void")
-				or (type_label == "kermeta.standard.VoidType")
-				or (type_label == "kermeta.language.structure.Void")
-				or (type_label == "kermeta.language.structure.VoidType") then
-				result := true
-			end
-		end
 
 	}
 	
@@ -167,7 +138,16 @@ package structure {
 	
 	aspect class PrimitiveType {
 		method createBehaviorJava(context : KM2EcoreContext) : String is do
-			result := self.instanceType.createBehaviorJava(context) // self.instanceType should be a ParameterizedType
+			result := ""
+			
+			if (not self.isValueType()) and self.isEDataType() then
+				result := self.getEMFEDataTypeInstanceClassName()
+				// FIXME CF: We should add the type parameters, but currently Kermeta (perhaps the loader)
+				// does not keep this information when the EDataType is mapped on kermeta::language::structure::Object
+			end
+			if result == "" then
+				result := self.instanceType.createBehaviorJava(context) // self.instanceType should be a ParameterizedType
+			end
 		end
 	}
 	
@@ -506,64 +486,6 @@ package behavior {
 	
 	aspect class CallFeature {
 	
-		operation isParameter() : Boolean is do
-			result := false
-			if self.container.isInstanceOf(CallFeature) then
-				var exp : Expression init self.container.asType(CallFeature).parameters.detect{ p |
-					p==self
-				}
-				if not exp.isVoid() then
-					result := true
-				end
-			end
-		end
-	
-		operation fromUtil(context : KM2EcoreContext) : Boolean is do
-		
-			var fName : String  init IdentifierHelper.new.getMangledIdentifier(self.name, context)
-			
-			//stdio.writeln(" -- " + self.toString + " - " + self.staticOperation.toString + " - " + self.staticOperation.container().toString)
-			
-			if self.staticOperation.container().asType(ClassDefinition).isValueType()
-			
-				or (self.staticOperation.container().asType(ClassDefinition).qualifiedName=="kermeta::language::structure::Object"
-					and (
-						context.frameworkOperations.contains(fName)
-							or ( (not target.isInstanceOf(CallVariable)) 
-									and (not target.isInstanceOf(CallResult))
-									and (not target.isInstanceOf(CallFeature))
-									and (not target.isInstanceOf(SelfExpression))
-								)
-						)
-					)
-				
-				or (self.staticOperation.container().asType(ClassDefinition).qualifiedName=="kermeta::language::structure::Type"
-					and (
-						context.frameworkOperations.contains(fName)
-							or ( (not target.isInstanceOf(CallVariable)) 
-									and (not target.isInstanceOf(CallResult))
-									and (not target.isInstanceOf(CallFeature))
-									and (not target.isInstanceOf(SelfExpression))
-								)
-						)
-					)
-			then
-				result := true
-			else
-				result := false
-			end
-							
-		end
-		
-		operation isFromClass() : Boolean is do
-			result := false
-			if not self.staticOperation.isVoid() then
-				if self.staticOperation.container.asType(ClassDefinition).qualifiedName=="kermeta::language::structure::Class" then
-					result := true
-				end
-			end
-		end
-	
 		method createBehaviorJava(context : KM2EcoreContext) : String from CallExpression is do
 			super(context)
 			result := ""
@@ -588,15 +510,10 @@ package behavior {
 				
 				if self.callsFunctionType() then
 					
-					if context.tasks_stack.peek() == "Start" then
-						context.ftStack.clear()
-					end
-					
 					context.tasks_stack.push("FunctionType_Compilation")
-					stdio.writeln(" +++ +++ +++ createStringFromFunctionType: " + self.name)
 					var ft_str : String init self.createStringFromFunctionType(context)
-					
 					context.tasks_stack.pop()
+					
 					result := ft_str
 				
 				//end
@@ -651,7 +568,11 @@ package behavior {
 					and (not tgt.isInstanceOf(CallFeature))
 					and (not tgt.isInstanceOf(SelfExpression))
 					and (not tgt.isInstanceOf(CallResult)) then
-				result := result + "((" + tgt.createBehaviorJava(context) + ") " + "org.kermeta.compil.runtime.helper.language.ClassUtil.newObject(\"" + tgt.createBehaviorJava(context) + "\"))"
+				if not tgt.createBehaviorJava(context).isValueType(context) then
+					result := result + "((" + tgt.createBehaviorJava(context) + ") " + "org.kermeta.compil.runtime.helper.language.ClassUtil.newObject(\"" + tgt.createBehaviorJava(context) + "\"))"
+				else
+					result := "null"
+				end
 			else
 				
 				if not tgt.isVoid() then
@@ -671,7 +592,7 @@ package behavior {
 							end
 						else
 							//The result identifier of the function type is printing for calling the following methods
-							//eg: self.select{...}.size() =>compilation of the FT + result_ft1.size();
+							//eg: self.select{...}.size() => compiling of the FT + result_ft1.size();
 							if self.container.isInstanceOf(CallExpression) and (not self.container.callsFunctionType()) then
 								//result := result + "self.container: " + self.container.toString + " - " + tgt.toString + " - "
 								result := result + context.PREVIOUS_STATEMENT_FT + context.RETURN_EXPRESSION_TO_REPLACE + context.resultOfLastFt
@@ -818,28 +739,12 @@ package behavior {
 		method createBehaviorJava(context : KM2EcoreContext) : String from CallExpression is do
 			super(context)
 			result := ""
-			
-			stdio.writeln(context.tasks_stack.peek() + " - " + self.name + " | ")
 
-			//result := result + context.tasks_stack.peek() + " - " + self.name + " | "
-
-			if (context.tasks_stack.peek() == "FunctionType_Compilation") and self.isFunctionTypeVariable() then//(context.current_param_ft.peek() == self.name) then
-				//context.tasks_stack.pop()
-				
-				stdio.writeln("context.ftStack.size.toString TUTU: " + context.ftStack.peek.toString + " - " + context.ftStack.size.toString)
-				
+			if (context.tasks_stack.peek() == "FunctionType_Compilation") and self.isFunctionTypeVariable() then
+								
 				context.ftSuffixActivation := false
-				//result := result + "--toto--"
-				var theLambdaExp : LambdaExpression init context.ftStack.peek()
 				
-				// FIXME CF UGLY PATCH
-				if context.ftStack.size>1 then
-					context.ftStack.pop()
-				end
-				
-				
-				
-				//context.current_param_ft.pop()
+				var theLambdaExp : LambdaExpression init self.getContainerAsType(Operation).asType(Operation).lambdaExpression
 						
 				var str_toInclude : String init ""
 				
@@ -1150,22 +1055,6 @@ package behavior {
 		method createBehaviorJava(context : KM2EcoreContext) : String from Expression is do
 			
 			super(context)
-		
-			//DO NOT REMOVE the following source code, this is used for fixing throws attribute on the EOperations
-			/*var newEGenericType : EGenericType init EGenericType.new()
-			newEGenericType.eClassifier := context.mu.getEClassifierByQualifiedName("kermeta::exceptions::KRuntimeError")
-
-			if (not newEGenericType.eClassifier.isVoid()) and (not self.getContainerAsType(Operation).isVoid()) then
-				
-				if not self.getContainerAsType(Operation).asType(Operation).ecoreModelElement.isVoid() then
-					if (self.getContainerAsType(Operation).asType(Operation).ecoreModelElement.eGenericExceptions.isVoid()) or (self.getContainerAsType(Operation).asType(Operation).ecoreModelElement.eGenericExceptions.size==0) then
-						self.getContainerAsType(Operation).asType(Operation).ecoreModelElement.eGenericExceptions.add(newEGenericType)
-					end
-				else
-					//We are in the case of a Simk method
-				end
-				
-			end*/
 			
 			result := "\nif (true)\n\tthrow new " + context.JAVA_CLASS_EXCEPTION_SWITCHER + "( " + self.expression.createBehaviorJava(context) + " );\n"
 		end

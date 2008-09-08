@@ -1,4 +1,4 @@
-/* $Id: ExpressionHelper.kmt,v 1.12 2008-09-05 15:32:37 cfaucher Exp $
+/* $Id: ExpressionHelper.kmt,v 1.13 2008-09-08 19:58:26 cfaucher Exp $
  * Creation date: Jul 25, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -35,11 +35,9 @@ aspect class Expression {
 			result := true
 		end
 		
-		
 		if self.isFunctionTypeVariable() then
 			result := false
 		end
-		
 		
 	end
 	
@@ -233,6 +231,67 @@ aspect class CallFeature {
         end
         
 	end*/
+	
+	
+	operation isParameter() : Boolean is do
+		result := false
+		if self.container.isInstanceOf(CallFeature) then
+			var exp : Expression init self.container.asType(CallFeature).parameters.detect{ p |
+				p==self
+			}
+			if not exp.isVoid() then
+				result := true
+			end
+		end
+	end
+	
+	// Determine if the callFeature is called by a static method: package util
+	operation fromUtil(context : KM2EcoreContext) : Boolean is do
+	
+		var fName : String  init IdentifierHelper.new.getMangledIdentifier(self.name, context)
+		
+		//stdio.writeln(" -- " + self.toString + " - " + self.staticOperation.toString + " - " + self.staticOperation.container().toString)
+		
+		if self.staticOperation.container().asType(ClassDefinition).isValueType()
+		
+			or (self.staticOperation.container().asType(ClassDefinition).qualifiedName=="kermeta::language::structure::Object"
+				and (
+					context.frameworkOperations.contains(fName)
+						or ( (not target.isInstanceOf(CallVariable)) 
+								and (not target.isInstanceOf(CallResult))
+								and (not target.isInstanceOf(CallFeature))
+								and (not target.isInstanceOf(SelfExpression))
+							)
+					)
+				)
+			
+			or (self.staticOperation.container().asType(ClassDefinition).qualifiedName=="kermeta::language::structure::Type"
+				and (
+					context.frameworkOperations.contains(fName)
+						or ( (not target.isInstanceOf(CallVariable)) 
+								and (not target.isInstanceOf(CallResult))
+								and (not target.isInstanceOf(CallFeature))
+								and (not target.isInstanceOf(SelfExpression))
+							)
+					)
+				)
+		then
+			result := true
+		else
+			result := false
+		end
+						
+	end
+	
+	// Determine if the callFeature refers a method owning by the class definition: "Class"
+	operation isFromClass() : Boolean is do
+		result := false
+		if not self.staticOperation.isVoid() then
+			if self.staticOperation.container.asType(ClassDefinition).qualifiedName=="kermeta::language::structure::Class" then
+				result := true
+			end
+		end
+	end
 
 	operation createStringFromFunctionType(context : KM2EcoreContext) : String is do
 		stdio.writeln("toto ---------- createStringFromFunctionType: " + self.name)
@@ -264,14 +323,17 @@ aspect class CallFeature {
 		
 			context.ftStack.push(theLambdaExp)
 			
-			stdio.writeln("theLambdaExp: " + theLambdaExp.toString + " " + theLambdaExp.container.asType(CallFeature).name.toString + " " + context.ftStack.size.toString)
+			self.staticOperation.lambdaExpression := theLambdaExp
 			
 			if theLambdaExp.staticType.isInstanceOf(FunctionType) then
-				if theLambdaExp.staticType.asType(FunctionType).left.isInstanceOf(ProductType) then
-					context.ftProductTypeStack.push(theLambdaExp.staticType.asType(FunctionType).left.asType(ProductType))
+			
+				var current_functionType : FunctionType init theLambdaExp.staticType.asType(FunctionType)
+				
+				if current_functionType.left.isInstanceOf(ProductType) then
+					context.ftProductTypeStack.push(current_functionType.left.asType(ProductType))
 				end
 				
-				ftRightType := theLambdaExp.staticType.asType(FunctionType).right
+				ftRightType := current_functionType.right
 			end
 		end
 		

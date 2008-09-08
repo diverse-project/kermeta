@@ -1,4 +1,4 @@
-/* $Id: StructureCompiler.kmt,v 1.58 2008-09-08 11:28:31 cfaucher Exp $
+/* $Id: StructureCompiler.kmt,v 1.59 2008-09-08 19:58:26 cfaucher Exp $
  * Creation date: January 21, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -86,7 +86,7 @@ class Main {
 		var traceInput : String init ""
 */
 
-/*		
+/*
 		var modelInput : String init "platform:/resource/org.kermeta.compiler.kmt/models/dynamicAdaptation.km"
 		var output : String init "platform:/resource/org.kermeta.compiler.kmt/models/dynamicAdaptation.ecore"
 		var traceInput : String init ""
@@ -113,6 +113,12 @@ class Main {
 /*
 		var modelInput : String init "platform:/resource/org.kermeta.compiler.kmt/models/complextest.km"
 		var output : String init "platform:/resource/org.kermeta.compiler.kmt/models/complextest.ecore"
+		var traceInput : String init ""
+*/
+
+/*
+		var modelInput : String init "platform:/resource/org.kermeta.compiler.kmt/models/LogoNXCCompiler.km"
+		var output : String init "platform:/resource/org.kermeta.compiler.kmt/models/LogoNXCCompiler.ecore"
 		var traceInput : String init ""
 */
 
@@ -251,14 +257,16 @@ class Main {
     	operations.add("addAllTestCasesFrom")
     	operations.add("count")
     	operations.add("createResource")
-    	operations.add("saveAndValidateWithEMF")
-    	operations.add("applyPass1")
+    	operations.add("saveAndValidateWithEMF")*/
+    	//operations.add("applyPass1")
     	operations.add("matchStep2")
-    	operations.add("replaceExtension")
-    	operations.add("getFirstTextReference")
-    	operations.add("saveAndValidateWithEMF")
-    	operations.add("main")*/
+    	//operations.add("replaceExtension")
+    	//operations.add("getFirstTextReference")
+    	//operations.add("saveAndValidateWithEMF")
+    	//operations.add("main")
     	operations.add("getContainerValue")
+    	//operations.add("getContainerClass")
+    	//operations.add("getAllSubPackages")
     	
     	main_compilingOnlyOperations(modelInput, traceInput, output, mode, operations)
     end
@@ -280,20 +288,20 @@ class Main {
 				
 					//if cd.asType(ClassDefinition).qualifiedName == "kermeta::language::structure::ClassDefinition" then
 					
-					cd.asType(ClassDefinition).eachOwnedElement{ op |
-						if op.isInstanceOf(Operation) then
+						cd.asType(ClassDefinition).eachOwnedElement{ op |
+							if op.isInstanceOf(Operation) then
+								
+								if not op.asType(Operation).isFunctionType() and operations.contains(op.asType(Operation).name) then
 							
-							if not op.asType(Operation).isFunctionType() and operations.contains(op.asType(Operation).name) then
-						
-								stdio.writeln("================= " + op.asType(Operation).qualifiedName + " =================")
-								var javaSourceCode : String init op.createBehaviorJava(context)
-								stdio.writeln(javaSourceCode)
+									stdio.writeln("================= " + op.asType(Operation).qualifiedName + " =================")
+									var javaSourceCode : String init op.createBehaviorJava(context)
+									stdio.writeln(javaSourceCode)
+								
+								/*else
+									stdio.writeln(op.asType(Operation).qualifiedName + " is a function type that is not compiled")*/
+								end
 							
-							/*else
-								stdio.writeln(op.asType(Operation).qualifiedName + " is a function type that is not compiled")*/
 							end
-						
-						end
 						}
 					//end
 				
