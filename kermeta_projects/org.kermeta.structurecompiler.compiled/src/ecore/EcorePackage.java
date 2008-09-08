@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: EcorePackage.java,v 1.1 2008-09-04 15:40:35 cfaucher Exp $
+ * $Id: EcorePackage.java,v 1.2 2008-09-08 19:28:31 cfaucher Exp $
  */
 package ecore;
 
@@ -71,7 +71,7 @@ public interface EcorePackage extends EPackage {
 	 * @see ecore.impl.EcorePackageImpl#getEObject()
 	 * @generated
 	 */
-	int EOBJECT = 6;
+	int EOBJECT = 10;
 
 	/**
 	 * The feature id for the '<em><b>Tag</b></em>' reference list.
@@ -153,7 +153,7 @@ public interface EcorePackage extends EPackage {
 	 * @see ecore.impl.EcorePackageImpl#getEModelElement()
 	 * @generated
 	 */
-	int EMODEL_ELEMENT = 5;
+	int EMODEL_ELEMENT = 8;
 
 	/**
 	 * The feature id for the '<em><b>Tag</b></em>' reference list.
@@ -244,7 +244,7 @@ public interface EcorePackage extends EPackage {
 	 * @see ecore.impl.EcorePackageImpl#getENamedElement()
 	 * @generated
 	 */
-	int ENAMED_ELEMENT = 14;
+	int ENAMED_ELEMENT = 9;
 
 	/**
 	 * The feature id for the '<em><b>Tag</b></em>' reference list.
@@ -344,7 +344,7 @@ public interface EcorePackage extends EPackage {
 	 * @see ecore.impl.EcorePackageImpl#getETypedElement()
 	 * @generated
 	 */
-	int ETYPED_ELEMENT = 10;
+	int ETYPED_ELEMENT = 16;
 
 	/**
 	 * The feature id for the '<em><b>Tag</b></em>' reference list.
@@ -516,7 +516,7 @@ public interface EcorePackage extends EPackage {
 	 * @see ecore.impl.EcorePackageImpl#getEStructuralFeature()
 	 * @generated
 	 */
-	int ESTRUCTURAL_FEATURE = 9;
+	int ESTRUCTURAL_FEATURE = 15;
 
 	/**
 	 * The feature id for the '<em><b>Tag</b></em>' reference list.
@@ -1015,6 +1015,142 @@ public interface EcorePackage extends EPackage {
 	int EATTRIBUTE_FEATURE_COUNT = ESTRUCTURAL_FEATURE_FEATURE_COUNT + 2;
 
 	/**
+	 * The meta object id for the '{@link ecore.impl.EAnnotationImpl <em>EAnnotation</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see ecore.impl.EAnnotationImpl
+	 * @see ecore.impl.EcorePackageImpl#getEAnnotation()
+	 * @generated
+	 */
+	int EANNOTATION = 1;
+
+	/**
+	 * The feature id for the '<em><b>Tag</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EANNOTATION__TAG = EMODEL_ELEMENT__TAG;
+
+	/**
+	 * The feature id for the '<em><b>File</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EANNOTATION__FILE = EMODEL_ELEMENT__FILE;
+
+	/**
+	 * The feature id for the '<em><b>File Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EANNOTATION__FILE_NAME = EMODEL_ELEMENT__FILE_NAME;
+
+	/**
+	 * The feature id for the '<em><b>Line Number</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EANNOTATION__LINE_NUMBER = EMODEL_ELEMENT__LINE_NUMBER;
+
+	/**
+	 * The feature id for the '<em><b>Owned Tags</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EANNOTATION__OWNED_TAGS = EMODEL_ELEMENT__OWNED_TAGS;
+
+	/**
+	 * The feature id for the '<em><b>Oid</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EANNOTATION__OID = EMODEL_ELEMENT__OID;
+
+	/**
+	 * The feature id for the '<em><b>Container</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EANNOTATION__CONTAINER = EMODEL_ELEMENT__CONTAINER;
+
+	/**
+	 * The feature id for the '<em><b>EAnnotations</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EANNOTATION__EANNOTATIONS = EMODEL_ELEMENT__EANNOTATIONS;
+
+	/**
+	 * The feature id for the '<em><b>References</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EANNOTATION__REFERENCES = EMODEL_ELEMENT_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Details</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EANNOTATION__DETAILS = EMODEL_ELEMENT_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Source</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EANNOTATION__SOURCE = EMODEL_ELEMENT_FEATURE_COUNT + 2;
+
+	/**
+	 * The feature id for the '<em><b>Contents</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EANNOTATION__CONTENTS = EMODEL_ELEMENT_FEATURE_COUNT + 3;
+
+	/**
+	 * The feature id for the '<em><b>EModel Element</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EANNOTATION__EMODEL_ELEMENT = EMODEL_ELEMENT_FEATURE_COUNT + 4;
+
+	/**
+	 * The number of structural features of the '<em>EAnnotation</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EANNOTATION_FEATURE_COUNT = EMODEL_ELEMENT_FEATURE_COUNT + 5;
+
+	/**
 	 * The meta object id for the '{@link ecore.impl.EClassifierImpl <em>EClassifier</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1022,7 +1158,7 @@ public interface EcorePackage extends EPackage {
 	 * @see ecore.impl.EcorePackageImpl#getEClassifier()
 	 * @generated
 	 */
-	int ECLASSIFIER = 2;
+	int ECLASSIFIER = 3;
 
 	/**
 	 * The feature id for the '<em><b>Tag</b></em>' reference list.
@@ -1133,22 +1269,22 @@ public interface EcorePackage extends EPackage {
 	int ECLASSIFIER__INSTANCE_CLASS = ENAMED_ELEMENT_FEATURE_COUNT + 2;
 
 	/**
-	 * The feature id for the '<em><b>EType Parameters</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ECLASSIFIER__ETYPE_PARAMETERS = ENAMED_ELEMENT_FEATURE_COUNT + 3;
-
-	/**
 	 * The feature id for the '<em><b>Default Value</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ECLASSIFIER__DEFAULT_VALUE = ENAMED_ELEMENT_FEATURE_COUNT + 4;
+	int ECLASSIFIER__DEFAULT_VALUE = ENAMED_ELEMENT_FEATURE_COUNT + 3;
+
+	/**
+	 * The feature id for the '<em><b>EType Parameters</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ECLASSIFIER__ETYPE_PARAMETERS = ENAMED_ELEMENT_FEATURE_COUNT + 4;
 
 	/**
 	 * The feature id for the '<em><b>Instance Type Name</b></em>' attribute.
@@ -1176,7 +1312,7 @@ public interface EcorePackage extends EPackage {
 	 * @see ecore.impl.EcorePackageImpl#getEClass()
 	 * @generated
 	 */
-	int ECLASS = 1;
+	int ECLASS = 2;
 
 	/**
 	 * The feature id for the '<em><b>Tag</b></em>' reference list.
@@ -1287,15 +1423,6 @@ public interface EcorePackage extends EPackage {
 	int ECLASS__INSTANCE_CLASS = ECLASSIFIER__INSTANCE_CLASS;
 
 	/**
-	 * The feature id for the '<em><b>EType Parameters</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ECLASS__ETYPE_PARAMETERS = ECLASSIFIER__ETYPE_PARAMETERS;
-
-	/**
 	 * The feature id for the '<em><b>Default Value</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1303,6 +1430,15 @@ public interface EcorePackage extends EPackage {
 	 * @ordered
 	 */
 	int ECLASS__DEFAULT_VALUE = ECLASSIFIER__DEFAULT_VALUE;
+
+	/**
+	 * The feature id for the '<em><b>EType Parameters</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ECLASS__ETYPE_PARAMETERS = ECLASSIFIER__ETYPE_PARAMETERS;
 
 	/**
 	 * The feature id for the '<em><b>Instance Type Name</b></em>' attribute.
@@ -1314,31 +1450,22 @@ public interface EcorePackage extends EPackage {
 	int ECLASS__INSTANCE_TYPE_NAME = ECLASSIFIER__INSTANCE_TYPE_NAME;
 
 	/**
-	 * The feature id for the '<em><b>Abstract</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ECLASS__ABSTRACT = ECLASSIFIER_FEATURE_COUNT + 0;
-
-	/**
 	 * The feature id for the '<em><b>EStructural Features</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ECLASS__ESTRUCTURAL_FEATURES = ECLASSIFIER_FEATURE_COUNT + 1;
+	int ECLASS__ESTRUCTURAL_FEATURES = ECLASSIFIER_FEATURE_COUNT + 0;
 
 	/**
-	 * The feature id for the '<em><b>EAll Attributes</b></em>' reference list.
+	 * The feature id for the '<em><b>Abstract</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ECLASS__EALL_ATTRIBUTES = ECLASSIFIER_FEATURE_COUNT + 2;
+	int ECLASS__ABSTRACT = ECLASSIFIER_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>EOperations</b></em>' containment reference list.
@@ -1347,16 +1474,16 @@ public interface EcorePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ECLASS__EOPERATIONS = ECLASSIFIER_FEATURE_COUNT + 3;
+	int ECLASS__EOPERATIONS = ECLASSIFIER_FEATURE_COUNT + 2;
 
 	/**
-	 * The feature id for the '<em><b>EReferences</b></em>' reference list.
+	 * The feature id for the '<em><b>EAll Attributes</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ECLASS__EREFERENCES = ECLASSIFIER_FEATURE_COUNT + 4;
+	int ECLASS__EALL_ATTRIBUTES = ECLASSIFIER_FEATURE_COUNT + 3;
 
 	/**
 	 * The feature id for the '<em><b>Interface</b></em>' attribute.
@@ -1365,16 +1492,16 @@ public interface EcorePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ECLASS__INTERFACE = ECLASSIFIER_FEATURE_COUNT + 5;
+	int ECLASS__INTERFACE = ECLASSIFIER_FEATURE_COUNT + 4;
 
 	/**
-	 * The feature id for the '<em><b>ESuper Types</b></em>' reference list.
+	 * The feature id for the '<em><b>EReferences</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ECLASS__ESUPER_TYPES = ECLASSIFIER_FEATURE_COUNT + 6;
+	int ECLASS__EREFERENCES = ECLASSIFIER_FEATURE_COUNT + 5;
 
 	/**
 	 * The feature id for the '<em><b>EAll References</b></em>' reference list.
@@ -1383,7 +1510,16 @@ public interface EcorePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ECLASS__EALL_REFERENCES = ECLASSIFIER_FEATURE_COUNT + 7;
+	int ECLASS__EALL_REFERENCES = ECLASSIFIER_FEATURE_COUNT + 6;
+
+	/**
+	 * The feature id for the '<em><b>ESuper Types</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ECLASS__ESUPER_TYPES = ECLASSIFIER_FEATURE_COUNT + 7;
 
 	/**
 	 * The feature id for the '<em><b>EAll Containments</b></em>' reference list.
@@ -1431,22 +1567,22 @@ public interface EcorePackage extends EPackage {
 	int ECLASS__EID_ATTRIBUTE = ECLASSIFIER_FEATURE_COUNT + 12;
 
 	/**
-	 * The feature id for the '<em><b>EAll Operations</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ECLASS__EALL_OPERATIONS = ECLASSIFIER_FEATURE_COUNT + 13;
-
-	/**
 	 * The feature id for the '<em><b>EAll Structural Features</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ECLASS__EALL_STRUCTURAL_FEATURES = ECLASSIFIER_FEATURE_COUNT + 14;
+	int ECLASS__EALL_STRUCTURAL_FEATURES = ECLASSIFIER_FEATURE_COUNT + 13;
+
+	/**
+	 * The feature id for the '<em><b>EAll Operations</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ECLASS__EALL_OPERATIONS = ECLASSIFIER_FEATURE_COUNT + 14;
 
 	/**
 	 * The feature id for the '<em><b>EAll Super Types</b></em>' reference list.
@@ -1474,7 +1610,7 @@ public interface EcorePackage extends EPackage {
 	 * @see ecore.impl.EcorePackageImpl#getEDataType()
 	 * @generated
 	 */
-	int EDATA_TYPE = 12;
+	int EDATA_TYPE = 4;
 
 	/**
 	 * The feature id for the '<em><b>Tag</b></em>' reference list.
@@ -1585,15 +1721,6 @@ public interface EcorePackage extends EPackage {
 	int EDATA_TYPE__INSTANCE_CLASS = ECLASSIFIER__INSTANCE_CLASS;
 
 	/**
-	 * The feature id for the '<em><b>EType Parameters</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EDATA_TYPE__ETYPE_PARAMETERS = ECLASSIFIER__ETYPE_PARAMETERS;
-
-	/**
 	 * The feature id for the '<em><b>Default Value</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1601,6 +1728,15 @@ public interface EcorePackage extends EPackage {
 	 * @ordered
 	 */
 	int EDATA_TYPE__DEFAULT_VALUE = ECLASSIFIER__DEFAULT_VALUE;
+
+	/**
+	 * The feature id for the '<em><b>EType Parameters</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EDATA_TYPE__ETYPE_PARAMETERS = ECLASSIFIER__ETYPE_PARAMETERS;
 
 	/**
 	 * The feature id for the '<em><b>Instance Type Name</b></em>' attribute.
@@ -1637,7 +1773,7 @@ public interface EcorePackage extends EPackage {
 	 * @see ecore.impl.EcorePackageImpl#getEEnum()
 	 * @generated
 	 */
-	int EENUM = 3;
+	int EENUM = 5;
 
 	/**
 	 * The feature id for the '<em><b>Tag</b></em>' reference list.
@@ -1748,15 +1884,6 @@ public interface EcorePackage extends EPackage {
 	int EENUM__INSTANCE_CLASS = EDATA_TYPE__INSTANCE_CLASS;
 
 	/**
-	 * The feature id for the '<em><b>EType Parameters</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EENUM__ETYPE_PARAMETERS = EDATA_TYPE__ETYPE_PARAMETERS;
-
-	/**
 	 * The feature id for the '<em><b>Default Value</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1764,6 +1891,15 @@ public interface EcorePackage extends EPackage {
 	 * @ordered
 	 */
 	int EENUM__DEFAULT_VALUE = EDATA_TYPE__DEFAULT_VALUE;
+
+	/**
+	 * The feature id for the '<em><b>EType Parameters</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EENUM__ETYPE_PARAMETERS = EDATA_TYPE__ETYPE_PARAMETERS;
 
 	/**
 	 * The feature id for the '<em><b>Instance Type Name</b></em>' attribute.
@@ -1802,6 +1938,142 @@ public interface EcorePackage extends EPackage {
 	int EENUM_FEATURE_COUNT = EDATA_TYPE_FEATURE_COUNT + 1;
 
 	/**
+	 * The meta object id for the '{@link ecore.impl.EEnumLiteralImpl <em>EEnum Literal</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see ecore.impl.EEnumLiteralImpl
+	 * @see ecore.impl.EcorePackageImpl#getEEnumLiteral()
+	 * @generated
+	 */
+	int EENUM_LITERAL = 6;
+
+	/**
+	 * The feature id for the '<em><b>Tag</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EENUM_LITERAL__TAG = ENAMED_ELEMENT__TAG;
+
+	/**
+	 * The feature id for the '<em><b>File</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EENUM_LITERAL__FILE = ENAMED_ELEMENT__FILE;
+
+	/**
+	 * The feature id for the '<em><b>File Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EENUM_LITERAL__FILE_NAME = ENAMED_ELEMENT__FILE_NAME;
+
+	/**
+	 * The feature id for the '<em><b>Line Number</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EENUM_LITERAL__LINE_NUMBER = ENAMED_ELEMENT__LINE_NUMBER;
+
+	/**
+	 * The feature id for the '<em><b>Owned Tags</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EENUM_LITERAL__OWNED_TAGS = ENAMED_ELEMENT__OWNED_TAGS;
+
+	/**
+	 * The feature id for the '<em><b>Oid</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EENUM_LITERAL__OID = ENAMED_ELEMENT__OID;
+
+	/**
+	 * The feature id for the '<em><b>Container</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EENUM_LITERAL__CONTAINER = ENAMED_ELEMENT__CONTAINER;
+
+	/**
+	 * The feature id for the '<em><b>EAnnotations</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EENUM_LITERAL__EANNOTATIONS = ENAMED_ELEMENT__EANNOTATIONS;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EENUM_LITERAL__NAME = ENAMED_ELEMENT__NAME;
+
+	/**
+	 * The feature id for the '<em><b>EEnum</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EENUM_LITERAL__EENUM = ENAMED_ELEMENT_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Value</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EENUM_LITERAL__VALUE = ENAMED_ELEMENT_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Instance</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EENUM_LITERAL__INSTANCE = ENAMED_ELEMENT_FEATURE_COUNT + 2;
+
+	/**
+	 * The feature id for the '<em><b>Literal</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EENUM_LITERAL__LITERAL = ENAMED_ELEMENT_FEATURE_COUNT + 3;
+
+	/**
+	 * The number of structural features of the '<em>EEnum Literal</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EENUM_LITERAL_FEATURE_COUNT = ENAMED_ELEMENT_FEATURE_COUNT + 4;
+
+	/**
 	 * The meta object id for the '{@link ecore.impl.EFactoryImpl <em>EFactory</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1809,7 +2081,7 @@ public interface EcorePackage extends EPackage {
 	 * @see ecore.impl.EcorePackageImpl#getEFactory()
 	 * @generated
 	 */
-	int EFACTORY = 4;
+	int EFACTORY = 7;
 
 	/**
 	 * The feature id for the '<em><b>Tag</b></em>' reference list.
@@ -1902,6 +2174,223 @@ public interface EcorePackage extends EPackage {
 	int EFACTORY_FEATURE_COUNT = EMODEL_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
+	 * The meta object id for the '{@link ecore.impl.EOperationImpl <em>EOperation</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see ecore.impl.EOperationImpl
+	 * @see ecore.impl.EcorePackageImpl#getEOperation()
+	 * @generated
+	 */
+	int EOPERATION = 11;
+
+	/**
+	 * The feature id for the '<em><b>Tag</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EOPERATION__TAG = ETYPED_ELEMENT__TAG;
+
+	/**
+	 * The feature id for the '<em><b>File</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EOPERATION__FILE = ETYPED_ELEMENT__FILE;
+
+	/**
+	 * The feature id for the '<em><b>File Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EOPERATION__FILE_NAME = ETYPED_ELEMENT__FILE_NAME;
+
+	/**
+	 * The feature id for the '<em><b>Line Number</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EOPERATION__LINE_NUMBER = ETYPED_ELEMENT__LINE_NUMBER;
+
+	/**
+	 * The feature id for the '<em><b>Owned Tags</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EOPERATION__OWNED_TAGS = ETYPED_ELEMENT__OWNED_TAGS;
+
+	/**
+	 * The feature id for the '<em><b>Oid</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EOPERATION__OID = ETYPED_ELEMENT__OID;
+
+	/**
+	 * The feature id for the '<em><b>Container</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EOPERATION__CONTAINER = ETYPED_ELEMENT__CONTAINER;
+
+	/**
+	 * The feature id for the '<em><b>EAnnotations</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EOPERATION__EANNOTATIONS = ETYPED_ELEMENT__EANNOTATIONS;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EOPERATION__NAME = ETYPED_ELEMENT__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Many</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EOPERATION__MANY = ETYPED_ELEMENT__MANY;
+
+	/**
+	 * The feature id for the '<em><b>Lower Bound</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EOPERATION__LOWER_BOUND = ETYPED_ELEMENT__LOWER_BOUND;
+
+	/**
+	 * The feature id for the '<em><b>Unique</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EOPERATION__UNIQUE = ETYPED_ELEMENT__UNIQUE;
+
+	/**
+	 * The feature id for the '<em><b>EType</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EOPERATION__ETYPE = ETYPED_ELEMENT__ETYPE;
+
+	/**
+	 * The feature id for the '<em><b>Ordered</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EOPERATION__ORDERED = ETYPED_ELEMENT__ORDERED;
+
+	/**
+	 * The feature id for the '<em><b>Required</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EOPERATION__REQUIRED = ETYPED_ELEMENT__REQUIRED;
+
+	/**
+	 * The feature id for the '<em><b>Upper Bound</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EOPERATION__UPPER_BOUND = ETYPED_ELEMENT__UPPER_BOUND;
+
+	/**
+	 * The feature id for the '<em><b>EGeneric Type</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EOPERATION__EGENERIC_TYPE = ETYPED_ELEMENT__EGENERIC_TYPE;
+
+	/**
+	 * The feature id for the '<em><b>EContaining Class</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EOPERATION__ECONTAINING_CLASS = ETYPED_ELEMENT_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>EGeneric Exceptions</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EOPERATION__EGENERIC_EXCEPTIONS = ETYPED_ELEMENT_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>EParameters</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EOPERATION__EPARAMETERS = ETYPED_ELEMENT_FEATURE_COUNT + 2;
+
+	/**
+	 * The feature id for the '<em><b>EType Parameters</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EOPERATION__ETYPE_PARAMETERS = ETYPED_ELEMENT_FEATURE_COUNT + 3;
+
+	/**
+	 * The feature id for the '<em><b>EExceptions</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EOPERATION__EEXCEPTIONS = ETYPED_ELEMENT_FEATURE_COUNT + 4;
+
+	/**
+	 * The number of structural features of the '<em>EOperation</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EOPERATION_FEATURE_COUNT = ETYPED_ELEMENT_FEATURE_COUNT + 5;
+
+	/**
 	 * The meta object id for the '{@link ecore.impl.EPackageImpl <em>EPackage</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1909,7 +2398,7 @@ public interface EcorePackage extends EPackage {
 	 * @see ecore.impl.EcorePackageImpl#getEPackage()
 	 * @generated
 	 */
-	int EPACKAGE = 7;
+	int EPACKAGE = 12;
 
 	/**
 	 * The feature id for the '<em><b>Tag</b></em>' reference list.
@@ -2029,22 +2518,22 @@ public interface EcorePackage extends EPackage {
 	int EPACKAGE__NS_PREFIX = ENAMED_ELEMENT_FEATURE_COUNT + 3;
 
 	/**
-	 * The feature id for the '<em><b>EFactory Instance</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EPACKAGE__EFACTORY_INSTANCE = ENAMED_ELEMENT_FEATURE_COUNT + 4;
-
-	/**
 	 * The feature id for the '<em><b>EClassifiers</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int EPACKAGE__ECLASSIFIERS = ENAMED_ELEMENT_FEATURE_COUNT + 5;
+	int EPACKAGE__ECLASSIFIERS = ENAMED_ELEMENT_FEATURE_COUNT + 4;
+
+	/**
+	 * The feature id for the '<em><b>EFactory Instance</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EPACKAGE__EFACTORY_INSTANCE = ENAMED_ELEMENT_FEATURE_COUNT + 5;
 
 	/**
 	 * The number of structural features of the '<em>EPackage</em>' class.
@@ -2056,6 +2545,187 @@ public interface EcorePackage extends EPackage {
 	int EPACKAGE_FEATURE_COUNT = ENAMED_ELEMENT_FEATURE_COUNT + 6;
 
 	/**
+	 * The meta object id for the '{@link ecore.impl.EParameterImpl <em>EParameter</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see ecore.impl.EParameterImpl
+	 * @see ecore.impl.EcorePackageImpl#getEParameter()
+	 * @generated
+	 */
+	int EPARAMETER = 13;
+
+	/**
+	 * The feature id for the '<em><b>Tag</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EPARAMETER__TAG = ETYPED_ELEMENT__TAG;
+
+	/**
+	 * The feature id for the '<em><b>File</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EPARAMETER__FILE = ETYPED_ELEMENT__FILE;
+
+	/**
+	 * The feature id for the '<em><b>File Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EPARAMETER__FILE_NAME = ETYPED_ELEMENT__FILE_NAME;
+
+	/**
+	 * The feature id for the '<em><b>Line Number</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EPARAMETER__LINE_NUMBER = ETYPED_ELEMENT__LINE_NUMBER;
+
+	/**
+	 * The feature id for the '<em><b>Owned Tags</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EPARAMETER__OWNED_TAGS = ETYPED_ELEMENT__OWNED_TAGS;
+
+	/**
+	 * The feature id for the '<em><b>Oid</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EPARAMETER__OID = ETYPED_ELEMENT__OID;
+
+	/**
+	 * The feature id for the '<em><b>Container</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EPARAMETER__CONTAINER = ETYPED_ELEMENT__CONTAINER;
+
+	/**
+	 * The feature id for the '<em><b>EAnnotations</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EPARAMETER__EANNOTATIONS = ETYPED_ELEMENT__EANNOTATIONS;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EPARAMETER__NAME = ETYPED_ELEMENT__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Many</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EPARAMETER__MANY = ETYPED_ELEMENT__MANY;
+
+	/**
+	 * The feature id for the '<em><b>Lower Bound</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EPARAMETER__LOWER_BOUND = ETYPED_ELEMENT__LOWER_BOUND;
+
+	/**
+	 * The feature id for the '<em><b>Unique</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EPARAMETER__UNIQUE = ETYPED_ELEMENT__UNIQUE;
+
+	/**
+	 * The feature id for the '<em><b>EType</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EPARAMETER__ETYPE = ETYPED_ELEMENT__ETYPE;
+
+	/**
+	 * The feature id for the '<em><b>Ordered</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EPARAMETER__ORDERED = ETYPED_ELEMENT__ORDERED;
+
+	/**
+	 * The feature id for the '<em><b>Required</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EPARAMETER__REQUIRED = ETYPED_ELEMENT__REQUIRED;
+
+	/**
+	 * The feature id for the '<em><b>Upper Bound</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EPARAMETER__UPPER_BOUND = ETYPED_ELEMENT__UPPER_BOUND;
+
+	/**
+	 * The feature id for the '<em><b>EGeneric Type</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EPARAMETER__EGENERIC_TYPE = ETYPED_ELEMENT__EGENERIC_TYPE;
+
+	/**
+	 * The feature id for the '<em><b>EOperation</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EPARAMETER__EOPERATION = ETYPED_ELEMENT_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>EParameter</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EPARAMETER_FEATURE_COUNT = ETYPED_ELEMENT_FEATURE_COUNT + 1;
+
+	/**
 	 * The meta object id for the '{@link ecore.impl.EReferenceImpl <em>EReference</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2063,7 +2733,7 @@ public interface EcorePackage extends EPackage {
 	 * @see ecore.impl.EcorePackageImpl#getEReference()
 	 * @generated
 	 */
-	int EREFERENCE = 8;
+	int EREFERENCE = 14;
 
 	/**
 	 * The feature id for the '<em><b>Tag</b></em>' reference list.
@@ -2345,676 +3015,6 @@ public interface EcorePackage extends EPackage {
 	int EREFERENCE_FEATURE_COUNT = ESTRUCTURAL_FEATURE_FEATURE_COUNT + 6;
 
 	/**
-	 * The meta object id for the '{@link ecore.impl.EAnnotationImpl <em>EAnnotation</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see ecore.impl.EAnnotationImpl
-	 * @see ecore.impl.EcorePackageImpl#getEAnnotation()
-	 * @generated
-	 */
-	int EANNOTATION = 11;
-
-	/**
-	 * The feature id for the '<em><b>Tag</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EANNOTATION__TAG = EMODEL_ELEMENT__TAG;
-
-	/**
-	 * The feature id for the '<em><b>File</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EANNOTATION__FILE = EMODEL_ELEMENT__FILE;
-
-	/**
-	 * The feature id for the '<em><b>File Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EANNOTATION__FILE_NAME = EMODEL_ELEMENT__FILE_NAME;
-
-	/**
-	 * The feature id for the '<em><b>Line Number</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EANNOTATION__LINE_NUMBER = EMODEL_ELEMENT__LINE_NUMBER;
-
-	/**
-	 * The feature id for the '<em><b>Owned Tags</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EANNOTATION__OWNED_TAGS = EMODEL_ELEMENT__OWNED_TAGS;
-
-	/**
-	 * The feature id for the '<em><b>Oid</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EANNOTATION__OID = EMODEL_ELEMENT__OID;
-
-	/**
-	 * The feature id for the '<em><b>Container</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EANNOTATION__CONTAINER = EMODEL_ELEMENT__CONTAINER;
-
-	/**
-	 * The feature id for the '<em><b>EAnnotations</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EANNOTATION__EANNOTATIONS = EMODEL_ELEMENT__EANNOTATIONS;
-
-	/**
-	 * The feature id for the '<em><b>References</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EANNOTATION__REFERENCES = EMODEL_ELEMENT_FEATURE_COUNT + 0;
-
-	/**
-	 * The feature id for the '<em><b>Source</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EANNOTATION__SOURCE = EMODEL_ELEMENT_FEATURE_COUNT + 1;
-
-	/**
-	 * The feature id for the '<em><b>Details</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EANNOTATION__DETAILS = EMODEL_ELEMENT_FEATURE_COUNT + 2;
-
-	/**
-	 * The feature id for the '<em><b>Contents</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EANNOTATION__CONTENTS = EMODEL_ELEMENT_FEATURE_COUNT + 3;
-
-	/**
-	 * The feature id for the '<em><b>EModel Element</b></em>' container reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EANNOTATION__EMODEL_ELEMENT = EMODEL_ELEMENT_FEATURE_COUNT + 4;
-
-	/**
-	 * The number of structural features of the '<em>EAnnotation</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EANNOTATION_FEATURE_COUNT = EMODEL_ELEMENT_FEATURE_COUNT + 5;
-
-	/**
-	 * The meta object id for the '{@link ecore.impl.EEnumLiteralImpl <em>EEnum Literal</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see ecore.impl.EEnumLiteralImpl
-	 * @see ecore.impl.EcorePackageImpl#getEEnumLiteral()
-	 * @generated
-	 */
-	int EENUM_LITERAL = 13;
-
-	/**
-	 * The feature id for the '<em><b>Tag</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EENUM_LITERAL__TAG = ENAMED_ELEMENT__TAG;
-
-	/**
-	 * The feature id for the '<em><b>File</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EENUM_LITERAL__FILE = ENAMED_ELEMENT__FILE;
-
-	/**
-	 * The feature id for the '<em><b>File Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EENUM_LITERAL__FILE_NAME = ENAMED_ELEMENT__FILE_NAME;
-
-	/**
-	 * The feature id for the '<em><b>Line Number</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EENUM_LITERAL__LINE_NUMBER = ENAMED_ELEMENT__LINE_NUMBER;
-
-	/**
-	 * The feature id for the '<em><b>Owned Tags</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EENUM_LITERAL__OWNED_TAGS = ENAMED_ELEMENT__OWNED_TAGS;
-
-	/**
-	 * The feature id for the '<em><b>Oid</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EENUM_LITERAL__OID = ENAMED_ELEMENT__OID;
-
-	/**
-	 * The feature id for the '<em><b>Container</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EENUM_LITERAL__CONTAINER = ENAMED_ELEMENT__CONTAINER;
-
-	/**
-	 * The feature id for the '<em><b>EAnnotations</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EENUM_LITERAL__EANNOTATIONS = ENAMED_ELEMENT__EANNOTATIONS;
-
-	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EENUM_LITERAL__NAME = ENAMED_ELEMENT__NAME;
-
-	/**
-	 * The feature id for the '<em><b>EEnum</b></em>' container reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EENUM_LITERAL__EENUM = ENAMED_ELEMENT_FEATURE_COUNT + 0;
-
-	/**
-	 * The feature id for the '<em><b>Value</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EENUM_LITERAL__VALUE = ENAMED_ELEMENT_FEATURE_COUNT + 1;
-
-	/**
-	 * The feature id for the '<em><b>Instance</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EENUM_LITERAL__INSTANCE = ENAMED_ELEMENT_FEATURE_COUNT + 2;
-
-	/**
-	 * The feature id for the '<em><b>Literal</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EENUM_LITERAL__LITERAL = ENAMED_ELEMENT_FEATURE_COUNT + 3;
-
-	/**
-	 * The number of structural features of the '<em>EEnum Literal</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EENUM_LITERAL_FEATURE_COUNT = ENAMED_ELEMENT_FEATURE_COUNT + 4;
-
-	/**
-	 * The meta object id for the '{@link ecore.impl.EOperationImpl <em>EOperation</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see ecore.impl.EOperationImpl
-	 * @see ecore.impl.EcorePackageImpl#getEOperation()
-	 * @generated
-	 */
-	int EOPERATION = 15;
-
-	/**
-	 * The feature id for the '<em><b>Tag</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EOPERATION__TAG = ETYPED_ELEMENT__TAG;
-
-	/**
-	 * The feature id for the '<em><b>File</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EOPERATION__FILE = ETYPED_ELEMENT__FILE;
-
-	/**
-	 * The feature id for the '<em><b>File Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EOPERATION__FILE_NAME = ETYPED_ELEMENT__FILE_NAME;
-
-	/**
-	 * The feature id for the '<em><b>Line Number</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EOPERATION__LINE_NUMBER = ETYPED_ELEMENT__LINE_NUMBER;
-
-	/**
-	 * The feature id for the '<em><b>Owned Tags</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EOPERATION__OWNED_TAGS = ETYPED_ELEMENT__OWNED_TAGS;
-
-	/**
-	 * The feature id for the '<em><b>Oid</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EOPERATION__OID = ETYPED_ELEMENT__OID;
-
-	/**
-	 * The feature id for the '<em><b>Container</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EOPERATION__CONTAINER = ETYPED_ELEMENT__CONTAINER;
-
-	/**
-	 * The feature id for the '<em><b>EAnnotations</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EOPERATION__EANNOTATIONS = ETYPED_ELEMENT__EANNOTATIONS;
-
-	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EOPERATION__NAME = ETYPED_ELEMENT__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Many</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EOPERATION__MANY = ETYPED_ELEMENT__MANY;
-
-	/**
-	 * The feature id for the '<em><b>Lower Bound</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EOPERATION__LOWER_BOUND = ETYPED_ELEMENT__LOWER_BOUND;
-
-	/**
-	 * The feature id for the '<em><b>Unique</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EOPERATION__UNIQUE = ETYPED_ELEMENT__UNIQUE;
-
-	/**
-	 * The feature id for the '<em><b>EType</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EOPERATION__ETYPE = ETYPED_ELEMENT__ETYPE;
-
-	/**
-	 * The feature id for the '<em><b>Ordered</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EOPERATION__ORDERED = ETYPED_ELEMENT__ORDERED;
-
-	/**
-	 * The feature id for the '<em><b>Required</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EOPERATION__REQUIRED = ETYPED_ELEMENT__REQUIRED;
-
-	/**
-	 * The feature id for the '<em><b>Upper Bound</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EOPERATION__UPPER_BOUND = ETYPED_ELEMENT__UPPER_BOUND;
-
-	/**
-	 * The feature id for the '<em><b>EGeneric Type</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EOPERATION__EGENERIC_TYPE = ETYPED_ELEMENT__EGENERIC_TYPE;
-
-	/**
-	 * The feature id for the '<em><b>EContaining Class</b></em>' container reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EOPERATION__ECONTAINING_CLASS = ETYPED_ELEMENT_FEATURE_COUNT + 0;
-
-	/**
-	 * The feature id for the '<em><b>EGeneric Exceptions</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EOPERATION__EGENERIC_EXCEPTIONS = ETYPED_ELEMENT_FEATURE_COUNT + 1;
-
-	/**
-	 * The feature id for the '<em><b>EParameters</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EOPERATION__EPARAMETERS = ETYPED_ELEMENT_FEATURE_COUNT + 2;
-
-	/**
-	 * The feature id for the '<em><b>EType Parameters</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EOPERATION__ETYPE_PARAMETERS = ETYPED_ELEMENT_FEATURE_COUNT + 3;
-
-	/**
-	 * The feature id for the '<em><b>EExceptions</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EOPERATION__EEXCEPTIONS = ETYPED_ELEMENT_FEATURE_COUNT + 4;
-
-	/**
-	 * The number of structural features of the '<em>EOperation</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EOPERATION_FEATURE_COUNT = ETYPED_ELEMENT_FEATURE_COUNT + 5;
-
-	/**
-	 * The meta object id for the '{@link ecore.impl.EParameterImpl <em>EParameter</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see ecore.impl.EParameterImpl
-	 * @see ecore.impl.EcorePackageImpl#getEParameter()
-	 * @generated
-	 */
-	int EPARAMETER = 16;
-
-	/**
-	 * The feature id for the '<em><b>Tag</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EPARAMETER__TAG = ETYPED_ELEMENT__TAG;
-
-	/**
-	 * The feature id for the '<em><b>File</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EPARAMETER__FILE = ETYPED_ELEMENT__FILE;
-
-	/**
-	 * The feature id for the '<em><b>File Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EPARAMETER__FILE_NAME = ETYPED_ELEMENT__FILE_NAME;
-
-	/**
-	 * The feature id for the '<em><b>Line Number</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EPARAMETER__LINE_NUMBER = ETYPED_ELEMENT__LINE_NUMBER;
-
-	/**
-	 * The feature id for the '<em><b>Owned Tags</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EPARAMETER__OWNED_TAGS = ETYPED_ELEMENT__OWNED_TAGS;
-
-	/**
-	 * The feature id for the '<em><b>Oid</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EPARAMETER__OID = ETYPED_ELEMENT__OID;
-
-	/**
-	 * The feature id for the '<em><b>Container</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EPARAMETER__CONTAINER = ETYPED_ELEMENT__CONTAINER;
-
-	/**
-	 * The feature id for the '<em><b>EAnnotations</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EPARAMETER__EANNOTATIONS = ETYPED_ELEMENT__EANNOTATIONS;
-
-	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EPARAMETER__NAME = ETYPED_ELEMENT__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Many</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EPARAMETER__MANY = ETYPED_ELEMENT__MANY;
-
-	/**
-	 * The feature id for the '<em><b>Lower Bound</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EPARAMETER__LOWER_BOUND = ETYPED_ELEMENT__LOWER_BOUND;
-
-	/**
-	 * The feature id for the '<em><b>Unique</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EPARAMETER__UNIQUE = ETYPED_ELEMENT__UNIQUE;
-
-	/**
-	 * The feature id for the '<em><b>EType</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EPARAMETER__ETYPE = ETYPED_ELEMENT__ETYPE;
-
-	/**
-	 * The feature id for the '<em><b>Ordered</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EPARAMETER__ORDERED = ETYPED_ELEMENT__ORDERED;
-
-	/**
-	 * The feature id for the '<em><b>Required</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EPARAMETER__REQUIRED = ETYPED_ELEMENT__REQUIRED;
-
-	/**
-	 * The feature id for the '<em><b>Upper Bound</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EPARAMETER__UPPER_BOUND = ETYPED_ELEMENT__UPPER_BOUND;
-
-	/**
-	 * The feature id for the '<em><b>EGeneric Type</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EPARAMETER__EGENERIC_TYPE = ETYPED_ELEMENT__EGENERIC_TYPE;
-
-	/**
-	 * The feature id for the '<em><b>EOperation</b></em>' container reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EPARAMETER__EOPERATION = ETYPED_ELEMENT_FEATURE_COUNT + 0;
-
-	/**
-	 * The number of structural features of the '<em>EParameter</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EPARAMETER_FEATURE_COUNT = ETYPED_ELEMENT_FEATURE_COUNT + 1;
-
-	/**
 	 * The meta object id for the '{@link ecore.impl.EStringToStringMapEntryImpl <em>EString To String Map Entry</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3188,22 +3188,22 @@ public interface EcorePackage extends EPackage {
 	int EGENERIC_TYPE__CONTAINER = EOBJECT__CONTAINER;
 
 	/**
-	 * The feature id for the '<em><b>EUpper Bound</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EGENERIC_TYPE__EUPPER_BOUND = EOBJECT_FEATURE_COUNT + 0;
-
-	/**
 	 * The feature id for the '<em><b>EType Arguments</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int EGENERIC_TYPE__ETYPE_ARGUMENTS = EOBJECT_FEATURE_COUNT + 1;
+	int EGENERIC_TYPE__ETYPE_ARGUMENTS = EOBJECT_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>EUpper Bound</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EGENERIC_TYPE__EUPPER_BOUND = EOBJECT_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>EClassifier</b></em>' reference.
@@ -3703,6 +3703,71 @@ public interface EcorePackage extends EPackage {
 	EAttribute getEAttribute_ID();
 
 	/**
+	 * Returns the meta object for class '{@link ecore.EAnnotation <em>EAnnotation</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>EAnnotation</em>'.
+	 * @see ecore.EAnnotation
+	 * @generated
+	 */
+	EClass getEAnnotation();
+
+	/**
+	 * Returns the meta object for the reference list '{@link ecore.EAnnotation#getReferences <em>References</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>References</em>'.
+	 * @see ecore.EAnnotation#getReferences()
+	 * @see #getEAnnotation()
+	 * @generated
+	 */
+	EReference getEAnnotation_References();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link ecore.EAnnotation#getDetails <em>Details</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Details</em>'.
+	 * @see ecore.EAnnotation#getDetails()
+	 * @see #getEAnnotation()
+	 * @generated
+	 */
+	EReference getEAnnotation_Details();
+
+	/**
+	 * Returns the meta object for the attribute '{@link ecore.EAnnotation#getSource <em>Source</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Source</em>'.
+	 * @see ecore.EAnnotation#getSource()
+	 * @see #getEAnnotation()
+	 * @generated
+	 */
+	EAttribute getEAnnotation_Source();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link ecore.EAnnotation#getContents <em>Contents</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Contents</em>'.
+	 * @see ecore.EAnnotation#getContents()
+	 * @see #getEAnnotation()
+	 * @generated
+	 */
+	EReference getEAnnotation_Contents();
+
+	/**
+	 * Returns the meta object for the container reference '{@link ecore.EAnnotation#getEModelElement <em>EModel Element</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the container reference '<em>EModel Element</em>'.
+	 * @see ecore.EAnnotation#getEModelElement()
+	 * @see #getEAnnotation()
+	 * @generated
+	 */
+	EReference getEAnnotation_EModelElement();
+
+	/**
 	 * Returns the meta object for class '{@link ecore.EClass <em>EClass</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3711,17 +3776,6 @@ public interface EcorePackage extends EPackage {
 	 * @generated
 	 */
 	EClass getEClass();
-
-	/**
-	 * Returns the meta object for the attribute '{@link ecore.EClass#isAbstract <em>Abstract</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Abstract</em>'.
-	 * @see ecore.EClass#isAbstract()
-	 * @see #getEClass()
-	 * @generated
-	 */
-	EAttribute getEClass_Abstract();
 
 	/**
 	 * Returns the meta object for the containment reference list '{@link ecore.EClass#getEStructuralFeatures <em>EStructural Features</em>}'.
@@ -3735,15 +3789,15 @@ public interface EcorePackage extends EPackage {
 	EReference getEClass_EStructuralFeatures();
 
 	/**
-	 * Returns the meta object for the reference list '{@link ecore.EClass#getEAllAttributes <em>EAll Attributes</em>}'.
+	 * Returns the meta object for the attribute '{@link ecore.EClass#isAbstract <em>Abstract</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference list '<em>EAll Attributes</em>'.
-	 * @see ecore.EClass#getEAllAttributes()
+	 * @return the meta object for the attribute '<em>Abstract</em>'.
+	 * @see ecore.EClass#isAbstract()
 	 * @see #getEClass()
 	 * @generated
 	 */
-	EReference getEClass_EAllAttributes();
+	EAttribute getEClass_Abstract();
 
 	/**
 	 * Returns the meta object for the containment reference list '{@link ecore.EClass#getEOperations <em>EOperations</em>}'.
@@ -3757,15 +3811,15 @@ public interface EcorePackage extends EPackage {
 	EReference getEClass_EOperations();
 
 	/**
-	 * Returns the meta object for the reference list '{@link ecore.EClass#getEReferences <em>EReferences</em>}'.
+	 * Returns the meta object for the reference list '{@link ecore.EClass#getEAllAttributes <em>EAll Attributes</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference list '<em>EReferences</em>'.
-	 * @see ecore.EClass#getEReferences()
+	 * @return the meta object for the reference list '<em>EAll Attributes</em>'.
+	 * @see ecore.EClass#getEAllAttributes()
 	 * @see #getEClass()
 	 * @generated
 	 */
-	EReference getEClass_EReferences();
+	EReference getEClass_EAllAttributes();
 
 	/**
 	 * Returns the meta object for the attribute '{@link ecore.EClass#isInterface <em>Interface</em>}'.
@@ -3779,15 +3833,15 @@ public interface EcorePackage extends EPackage {
 	EAttribute getEClass_Interface();
 
 	/**
-	 * Returns the meta object for the reference list '{@link ecore.EClass#getESuperTypes <em>ESuper Types</em>}'.
+	 * Returns the meta object for the reference list '{@link ecore.EClass#getEReferences <em>EReferences</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference list '<em>ESuper Types</em>'.
-	 * @see ecore.EClass#getESuperTypes()
+	 * @return the meta object for the reference list '<em>EReferences</em>'.
+	 * @see ecore.EClass#getEReferences()
 	 * @see #getEClass()
 	 * @generated
 	 */
-	EReference getEClass_ESuperTypes();
+	EReference getEClass_EReferences();
 
 	/**
 	 * Returns the meta object for the reference list '{@link ecore.EClass#getEAllReferences <em>EAll References</em>}'.
@@ -3799,6 +3853,17 @@ public interface EcorePackage extends EPackage {
 	 * @generated
 	 */
 	EReference getEClass_EAllReferences();
+
+	/**
+	 * Returns the meta object for the reference list '{@link ecore.EClass#getESuperTypes <em>ESuper Types</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>ESuper Types</em>'.
+	 * @see ecore.EClass#getESuperTypes()
+	 * @see #getEClass()
+	 * @generated
+	 */
+	EReference getEClass_ESuperTypes();
 
 	/**
 	 * Returns the meta object for the reference list '{@link ecore.EClass#getEAllContainments <em>EAll Containments</em>}'.
@@ -3856,17 +3921,6 @@ public interface EcorePackage extends EPackage {
 	EReference getEClass_EIDAttribute();
 
 	/**
-	 * Returns the meta object for the reference list '{@link ecore.EClass#getEAllOperations <em>EAll Operations</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference list '<em>EAll Operations</em>'.
-	 * @see ecore.EClass#getEAllOperations()
-	 * @see #getEClass()
-	 * @generated
-	 */
-	EReference getEClass_EAllOperations();
-
-	/**
 	 * Returns the meta object for the reference list '{@link ecore.EClass#getEAllStructuralFeatures <em>EAll Structural Features</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3876,6 +3930,17 @@ public interface EcorePackage extends EPackage {
 	 * @generated
 	 */
 	EReference getEClass_EAllStructuralFeatures();
+
+	/**
+	 * Returns the meta object for the reference list '{@link ecore.EClass#getEAllOperations <em>EAll Operations</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>EAll Operations</em>'.
+	 * @see ecore.EClass#getEAllOperations()
+	 * @see #getEClass()
+	 * @generated
+	 */
+	EReference getEClass_EAllOperations();
 
 	/**
 	 * Returns the meta object for the reference list '{@link ecore.EClass#getEAllSuperTypes <em>EAll Super Types</em>}'.
@@ -3932,17 +3997,6 @@ public interface EcorePackage extends EPackage {
 	EAttribute getEClassifier_InstanceClass();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link ecore.EClassifier#getETypeParameters <em>EType Parameters</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>EType Parameters</em>'.
-	 * @see ecore.EClassifier#getETypeParameters()
-	 * @see #getEClassifier()
-	 * @generated
-	 */
-	EReference getEClassifier_ETypeParameters();
-
-	/**
 	 * Returns the meta object for the attribute '{@link ecore.EClassifier#getDefaultValue <em>Default Value</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3954,6 +4008,17 @@ public interface EcorePackage extends EPackage {
 	EAttribute getEClassifier_DefaultValue();
 
 	/**
+	 * Returns the meta object for the containment reference list '{@link ecore.EClassifier#getETypeParameters <em>EType Parameters</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>EType Parameters</em>'.
+	 * @see ecore.EClassifier#getETypeParameters()
+	 * @see #getEClassifier()
+	 * @generated
+	 */
+	EReference getEClassifier_ETypeParameters();
+
+	/**
 	 * Returns the meta object for the attribute '{@link ecore.EClassifier#getInstanceTypeName <em>Instance Type Name</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3963,6 +4028,27 @@ public interface EcorePackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getEClassifier_InstanceTypeName();
+
+	/**
+	 * Returns the meta object for class '{@link ecore.EDataType <em>EData Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>EData Type</em>'.
+	 * @see ecore.EDataType
+	 * @generated
+	 */
+	EClass getEDataType();
+
+	/**
+	 * Returns the meta object for the attribute '{@link ecore.EDataType#isSerializable <em>Serializable</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Serializable</em>'.
+	 * @see ecore.EDataType#isSerializable()
+	 * @see #getEDataType()
+	 * @generated
+	 */
+	EAttribute getEDataType_Serializable();
 
 	/**
 	 * Returns the meta object for class '{@link ecore.EEnum <em>EEnum</em>}'.
@@ -3984,6 +4070,60 @@ public interface EcorePackage extends EPackage {
 	 * @generated
 	 */
 	EReference getEEnum_ELiterals();
+
+	/**
+	 * Returns the meta object for class '{@link ecore.EEnumLiteral <em>EEnum Literal</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>EEnum Literal</em>'.
+	 * @see ecore.EEnumLiteral
+	 * @generated
+	 */
+	EClass getEEnumLiteral();
+
+	/**
+	 * Returns the meta object for the container reference '{@link ecore.EEnumLiteral#getEEnum <em>EEnum</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the container reference '<em>EEnum</em>'.
+	 * @see ecore.EEnumLiteral#getEEnum()
+	 * @see #getEEnumLiteral()
+	 * @generated
+	 */
+	EReference getEEnumLiteral_EEnum();
+
+	/**
+	 * Returns the meta object for the attribute '{@link ecore.EEnumLiteral#getValue <em>Value</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Value</em>'.
+	 * @see ecore.EEnumLiteral#getValue()
+	 * @see #getEEnumLiteral()
+	 * @generated
+	 */
+	EAttribute getEEnumLiteral_Value();
+
+	/**
+	 * Returns the meta object for the attribute '{@link ecore.EEnumLiteral#getInstance <em>Instance</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Instance</em>'.
+	 * @see ecore.EEnumLiteral#getInstance()
+	 * @see #getEEnumLiteral()
+	 * @generated
+	 */
+	EAttribute getEEnumLiteral_Instance();
+
+	/**
+	 * Returns the meta object for the attribute '{@link ecore.EEnumLiteral#getLiteral <em>Literal</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Literal</em>'.
+	 * @see ecore.EEnumLiteral#getLiteral()
+	 * @see #getEEnumLiteral()
+	 * @generated
+	 */
+	EAttribute getEEnumLiteral_Literal();
 
 	/**
 	 * Returns the meta object for class '{@link ecore.EFactory <em>EFactory</em>}'.
@@ -4028,6 +4168,27 @@ public interface EcorePackage extends EPackage {
 	EReference getEModelElement_EAnnotations();
 
 	/**
+	 * Returns the meta object for class '{@link ecore.ENamedElement <em>ENamed Element</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>ENamed Element</em>'.
+	 * @see ecore.ENamedElement
+	 * @generated
+	 */
+	EClass getENamedElement();
+
+	/**
+	 * Returns the meta object for the attribute '{@link ecore.ENamedElement#getName <em>Name</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Name</em>'.
+	 * @see ecore.ENamedElement#getName()
+	 * @see #getENamedElement()
+	 * @generated
+	 */
+	EAttribute getENamedElement_Name();
+
+	/**
 	 * Returns the meta object for class '{@link ecore.EObject <em>EObject</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4036,6 +4197,71 @@ public interface EcorePackage extends EPackage {
 	 * @generated
 	 */
 	EClass getEObject();
+
+	/**
+	 * Returns the meta object for class '{@link ecore.EOperation <em>EOperation</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>EOperation</em>'.
+	 * @see ecore.EOperation
+	 * @generated
+	 */
+	EClass getEOperation();
+
+	/**
+	 * Returns the meta object for the container reference '{@link ecore.EOperation#getEContainingClass <em>EContaining Class</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the container reference '<em>EContaining Class</em>'.
+	 * @see ecore.EOperation#getEContainingClass()
+	 * @see #getEOperation()
+	 * @generated
+	 */
+	EReference getEOperation_EContainingClass();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link ecore.EOperation#getEGenericExceptions <em>EGeneric Exceptions</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>EGeneric Exceptions</em>'.
+	 * @see ecore.EOperation#getEGenericExceptions()
+	 * @see #getEOperation()
+	 * @generated
+	 */
+	EReference getEOperation_EGenericExceptions();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link ecore.EOperation#getEParameters <em>EParameters</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>EParameters</em>'.
+	 * @see ecore.EOperation#getEParameters()
+	 * @see #getEOperation()
+	 * @generated
+	 */
+	EReference getEOperation_EParameters();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link ecore.EOperation#getETypeParameters <em>EType Parameters</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>EType Parameters</em>'.
+	 * @see ecore.EOperation#getETypeParameters()
+	 * @see #getEOperation()
+	 * @generated
+	 */
+	EReference getEOperation_ETypeParameters();
+
+	/**
+	 * Returns the meta object for the reference list '{@link ecore.EOperation#getEExceptions <em>EExceptions</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>EExceptions</em>'.
+	 * @see ecore.EOperation#getEExceptions()
+	 * @see #getEOperation()
+	 * @generated
+	 */
+	EReference getEOperation_EExceptions();
 
 	/**
 	 * Returns the meta object for class '{@link ecore.EPackage <em>EPackage</em>}'.
@@ -4092,6 +4318,17 @@ public interface EcorePackage extends EPackage {
 	EAttribute getEPackage_NsPrefix();
 
 	/**
+	 * Returns the meta object for the containment reference list '{@link ecore.EPackage#getEClassifiers <em>EClassifiers</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>EClassifiers</em>'.
+	 * @see ecore.EPackage#getEClassifiers()
+	 * @see #getEPackage()
+	 * @generated
+	 */
+	EReference getEPackage_EClassifiers();
+
+	/**
 	 * Returns the meta object for the reference '{@link ecore.EPackage#getEFactoryInstance <em>EFactory Instance</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4103,15 +4340,25 @@ public interface EcorePackage extends EPackage {
 	EReference getEPackage_EFactoryInstance();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link ecore.EPackage#getEClassifiers <em>EClassifiers</em>}'.
+	 * Returns the meta object for class '{@link ecore.EParameter <em>EParameter</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>EClassifiers</em>'.
-	 * @see ecore.EPackage#getEClassifiers()
-	 * @see #getEPackage()
+	 * @return the meta object for class '<em>EParameter</em>'.
+	 * @see ecore.EParameter
 	 * @generated
 	 */
-	EReference getEPackage_EClassifiers();
+	EClass getEParameter();
+
+	/**
+	 * Returns the meta object for the container reference '{@link ecore.EParameter#getEOperation <em>EOperation</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the container reference '<em>EOperation</em>'.
+	 * @see ecore.EParameter#getEOperation()
+	 * @see #getEParameter()
+	 * @generated
+	 */
+	EReference getEParameter_EOperation();
 
 	/**
 	 * Returns the meta object for class '{@link ecore.EReference <em>EReference</em>}'.
@@ -4386,253 +4633,6 @@ public interface EcorePackage extends EPackage {
 	EReference getETypedElement_EGenericType();
 
 	/**
-	 * Returns the meta object for class '{@link ecore.EAnnotation <em>EAnnotation</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>EAnnotation</em>'.
-	 * @see ecore.EAnnotation
-	 * @generated
-	 */
-	EClass getEAnnotation();
-
-	/**
-	 * Returns the meta object for the reference list '{@link ecore.EAnnotation#getReferences <em>References</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference list '<em>References</em>'.
-	 * @see ecore.EAnnotation#getReferences()
-	 * @see #getEAnnotation()
-	 * @generated
-	 */
-	EReference getEAnnotation_References();
-
-	/**
-	 * Returns the meta object for the attribute '{@link ecore.EAnnotation#getSource <em>Source</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Source</em>'.
-	 * @see ecore.EAnnotation#getSource()
-	 * @see #getEAnnotation()
-	 * @generated
-	 */
-	EAttribute getEAnnotation_Source();
-
-	/**
-	 * Returns the meta object for the containment reference list '{@link ecore.EAnnotation#getDetails <em>Details</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Details</em>'.
-	 * @see ecore.EAnnotation#getDetails()
-	 * @see #getEAnnotation()
-	 * @generated
-	 */
-	EReference getEAnnotation_Details();
-
-	/**
-	 * Returns the meta object for the containment reference list '{@link ecore.EAnnotation#getContents <em>Contents</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Contents</em>'.
-	 * @see ecore.EAnnotation#getContents()
-	 * @see #getEAnnotation()
-	 * @generated
-	 */
-	EReference getEAnnotation_Contents();
-
-	/**
-	 * Returns the meta object for the container reference '{@link ecore.EAnnotation#getEModelElement <em>EModel Element</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the container reference '<em>EModel Element</em>'.
-	 * @see ecore.EAnnotation#getEModelElement()
-	 * @see #getEAnnotation()
-	 * @generated
-	 */
-	EReference getEAnnotation_EModelElement();
-
-	/**
-	 * Returns the meta object for class '{@link ecore.EDataType <em>EData Type</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>EData Type</em>'.
-	 * @see ecore.EDataType
-	 * @generated
-	 */
-	EClass getEDataType();
-
-	/**
-	 * Returns the meta object for the attribute '{@link ecore.EDataType#isSerializable <em>Serializable</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Serializable</em>'.
-	 * @see ecore.EDataType#isSerializable()
-	 * @see #getEDataType()
-	 * @generated
-	 */
-	EAttribute getEDataType_Serializable();
-
-	/**
-	 * Returns the meta object for class '{@link ecore.EEnumLiteral <em>EEnum Literal</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>EEnum Literal</em>'.
-	 * @see ecore.EEnumLiteral
-	 * @generated
-	 */
-	EClass getEEnumLiteral();
-
-	/**
-	 * Returns the meta object for the container reference '{@link ecore.EEnumLiteral#getEEnum <em>EEnum</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the container reference '<em>EEnum</em>'.
-	 * @see ecore.EEnumLiteral#getEEnum()
-	 * @see #getEEnumLiteral()
-	 * @generated
-	 */
-	EReference getEEnumLiteral_EEnum();
-
-	/**
-	 * Returns the meta object for the attribute '{@link ecore.EEnumLiteral#getValue <em>Value</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Value</em>'.
-	 * @see ecore.EEnumLiteral#getValue()
-	 * @see #getEEnumLiteral()
-	 * @generated
-	 */
-	EAttribute getEEnumLiteral_Value();
-
-	/**
-	 * Returns the meta object for the attribute '{@link ecore.EEnumLiteral#getInstance <em>Instance</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Instance</em>'.
-	 * @see ecore.EEnumLiteral#getInstance()
-	 * @see #getEEnumLiteral()
-	 * @generated
-	 */
-	EAttribute getEEnumLiteral_Instance();
-
-	/**
-	 * Returns the meta object for the attribute '{@link ecore.EEnumLiteral#getLiteral <em>Literal</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Literal</em>'.
-	 * @see ecore.EEnumLiteral#getLiteral()
-	 * @see #getEEnumLiteral()
-	 * @generated
-	 */
-	EAttribute getEEnumLiteral_Literal();
-
-	/**
-	 * Returns the meta object for class '{@link ecore.ENamedElement <em>ENamed Element</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>ENamed Element</em>'.
-	 * @see ecore.ENamedElement
-	 * @generated
-	 */
-	EClass getENamedElement();
-
-	/**
-	 * Returns the meta object for the attribute '{@link ecore.ENamedElement#getName <em>Name</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Name</em>'.
-	 * @see ecore.ENamedElement#getName()
-	 * @see #getENamedElement()
-	 * @generated
-	 */
-	EAttribute getENamedElement_Name();
-
-	/**
-	 * Returns the meta object for class '{@link ecore.EOperation <em>EOperation</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>EOperation</em>'.
-	 * @see ecore.EOperation
-	 * @generated
-	 */
-	EClass getEOperation();
-
-	/**
-	 * Returns the meta object for the container reference '{@link ecore.EOperation#getEContainingClass <em>EContaining Class</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the container reference '<em>EContaining Class</em>'.
-	 * @see ecore.EOperation#getEContainingClass()
-	 * @see #getEOperation()
-	 * @generated
-	 */
-	EReference getEOperation_EContainingClass();
-
-	/**
-	 * Returns the meta object for the containment reference list '{@link ecore.EOperation#getEGenericExceptions <em>EGeneric Exceptions</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>EGeneric Exceptions</em>'.
-	 * @see ecore.EOperation#getEGenericExceptions()
-	 * @see #getEOperation()
-	 * @generated
-	 */
-	EReference getEOperation_EGenericExceptions();
-
-	/**
-	 * Returns the meta object for the containment reference list '{@link ecore.EOperation#getEParameters <em>EParameters</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>EParameters</em>'.
-	 * @see ecore.EOperation#getEParameters()
-	 * @see #getEOperation()
-	 * @generated
-	 */
-	EReference getEOperation_EParameters();
-
-	/**
-	 * Returns the meta object for the containment reference list '{@link ecore.EOperation#getETypeParameters <em>EType Parameters</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>EType Parameters</em>'.
-	 * @see ecore.EOperation#getETypeParameters()
-	 * @see #getEOperation()
-	 * @generated
-	 */
-	EReference getEOperation_ETypeParameters();
-
-	/**
-	 * Returns the meta object for the reference list '{@link ecore.EOperation#getEExceptions <em>EExceptions</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference list '<em>EExceptions</em>'.
-	 * @see ecore.EOperation#getEExceptions()
-	 * @see #getEOperation()
-	 * @generated
-	 */
-	EReference getEOperation_EExceptions();
-
-	/**
-	 * Returns the meta object for class '{@link ecore.EParameter <em>EParameter</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>EParameter</em>'.
-	 * @see ecore.EParameter
-	 * @generated
-	 */
-	EClass getEParameter();
-
-	/**
-	 * Returns the meta object for the container reference '{@link ecore.EParameter#getEOperation <em>EOperation</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the container reference '<em>EOperation</em>'.
-	 * @see ecore.EParameter#getEOperation()
-	 * @see #getEParameter()
-	 * @generated
-	 */
-	EReference getEParameter_EOperation();
-
-	/**
 	 * Returns the meta object for class '{@link ecore.EStringToStringMapEntry <em>EString To String Map Entry</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4675,17 +4675,6 @@ public interface EcorePackage extends EPackage {
 	EClass getEGenericType();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link ecore.EGenericType#getEUpperBound <em>EUpper Bound</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>EUpper Bound</em>'.
-	 * @see ecore.EGenericType#getEUpperBound()
-	 * @see #getEGenericType()
-	 * @generated
-	 */
-	EReference getEGenericType_EUpperBound();
-
-	/**
 	 * Returns the meta object for the containment reference list '{@link ecore.EGenericType#getETypeArguments <em>EType Arguments</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4695,6 +4684,17 @@ public interface EcorePackage extends EPackage {
 	 * @generated
 	 */
 	EReference getEGenericType_ETypeArguments();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link ecore.EGenericType#getEUpperBound <em>EUpper Bound</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>EUpper Bound</em>'.
+	 * @see ecore.EGenericType#getEUpperBound()
+	 * @see #getEGenericType()
+	 * @generated
+	 */
+	EReference getEGenericType_EUpperBound();
 
 	/**
 	 * Returns the meta object for the reference '{@link ecore.EGenericType#getEClassifier <em>EClassifier</em>}'.
@@ -5245,6 +5245,58 @@ public interface EcorePackage extends EPackage {
 		EAttribute EATTRIBUTE__ID = eINSTANCE.getEAttribute_ID();
 
 		/**
+		 * The meta object literal for the '{@link ecore.impl.EAnnotationImpl <em>EAnnotation</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see ecore.impl.EAnnotationImpl
+		 * @see ecore.impl.EcorePackageImpl#getEAnnotation()
+		 * @generated
+		 */
+		EClass EANNOTATION = eINSTANCE.getEAnnotation();
+
+		/**
+		 * The meta object literal for the '<em><b>References</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference EANNOTATION__REFERENCES = eINSTANCE
+				.getEAnnotation_References();
+
+		/**
+		 * The meta object literal for the '<em><b>Details</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference EANNOTATION__DETAILS = eINSTANCE.getEAnnotation_Details();
+
+		/**
+		 * The meta object literal for the '<em><b>Source</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute EANNOTATION__SOURCE = eINSTANCE.getEAnnotation_Source();
+
+		/**
+		 * The meta object literal for the '<em><b>Contents</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference EANNOTATION__CONTENTS = eINSTANCE.getEAnnotation_Contents();
+
+		/**
+		 * The meta object literal for the '<em><b>EModel Element</b></em>' container reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference EANNOTATION__EMODEL_ELEMENT = eINSTANCE
+				.getEAnnotation_EModelElement();
+
+		/**
 		 * The meta object literal for the '{@link ecore.impl.EClassImpl <em>EClass</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -5253,14 +5305,6 @@ public interface EcorePackage extends EPackage {
 		 * @generated
 		 */
 		EClass ECLASS = eINSTANCE.getEClass();
-
-		/**
-		 * The meta object literal for the '<em><b>Abstract</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute ECLASS__ABSTRACT = eINSTANCE.getEClass_Abstract();
 
 		/**
 		 * The meta object literal for the '<em><b>EStructural Features</b></em>' containment reference list feature.
@@ -5272,13 +5316,12 @@ public interface EcorePackage extends EPackage {
 				.getEClass_EStructuralFeatures();
 
 		/**
-		 * The meta object literal for the '<em><b>EAll Attributes</b></em>' reference list feature.
+		 * The meta object literal for the '<em><b>Abstract</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference ECLASS__EALL_ATTRIBUTES = eINSTANCE
-				.getEClass_EAllAttributes();
+		EAttribute ECLASS__ABSTRACT = eINSTANCE.getEClass_Abstract();
 
 		/**
 		 * The meta object literal for the '<em><b>EOperations</b></em>' containment reference list feature.
@@ -5289,12 +5332,13 @@ public interface EcorePackage extends EPackage {
 		EReference ECLASS__EOPERATIONS = eINSTANCE.getEClass_EOperations();
 
 		/**
-		 * The meta object literal for the '<em><b>EReferences</b></em>' reference list feature.
+		 * The meta object literal for the '<em><b>EAll Attributes</b></em>' reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference ECLASS__EREFERENCES = eINSTANCE.getEClass_EReferences();
+		EReference ECLASS__EALL_ATTRIBUTES = eINSTANCE
+				.getEClass_EAllAttributes();
 
 		/**
 		 * The meta object literal for the '<em><b>Interface</b></em>' attribute feature.
@@ -5305,12 +5349,12 @@ public interface EcorePackage extends EPackage {
 		EAttribute ECLASS__INTERFACE = eINSTANCE.getEClass_Interface();
 
 		/**
-		 * The meta object literal for the '<em><b>ESuper Types</b></em>' reference list feature.
+		 * The meta object literal for the '<em><b>EReferences</b></em>' reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference ECLASS__ESUPER_TYPES = eINSTANCE.getEClass_ESuperTypes();
+		EReference ECLASS__EREFERENCES = eINSTANCE.getEClass_EReferences();
 
 		/**
 		 * The meta object literal for the '<em><b>EAll References</b></em>' reference list feature.
@@ -5320,6 +5364,14 @@ public interface EcorePackage extends EPackage {
 		 */
 		EReference ECLASS__EALL_REFERENCES = eINSTANCE
 				.getEClass_EAllReferences();
+
+		/**
+		 * The meta object literal for the '<em><b>ESuper Types</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference ECLASS__ESUPER_TYPES = eINSTANCE.getEClass_ESuperTypes();
 
 		/**
 		 * The meta object literal for the '<em><b>EAll Containments</b></em>' reference list feature.
@@ -5365,15 +5417,6 @@ public interface EcorePackage extends EPackage {
 		EReference ECLASS__EID_ATTRIBUTE = eINSTANCE.getEClass_EIDAttribute();
 
 		/**
-		 * The meta object literal for the '<em><b>EAll Operations</b></em>' reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference ECLASS__EALL_OPERATIONS = eINSTANCE
-				.getEClass_EAllOperations();
-
-		/**
 		 * The meta object literal for the '<em><b>EAll Structural Features</b></em>' reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -5381,6 +5424,15 @@ public interface EcorePackage extends EPackage {
 		 */
 		EReference ECLASS__EALL_STRUCTURAL_FEATURES = eINSTANCE
 				.getEClass_EAllStructuralFeatures();
+
+		/**
+		 * The meta object literal for the '<em><b>EAll Operations</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference ECLASS__EALL_OPERATIONS = eINSTANCE
+				.getEClass_EAllOperations();
 
 		/**
 		 * The meta object literal for the '<em><b>EAll Super Types</b></em>' reference list feature.
@@ -5428,15 +5480,6 @@ public interface EcorePackage extends EPackage {
 				.getEClassifier_InstanceClass();
 
 		/**
-		 * The meta object literal for the '<em><b>EType Parameters</b></em>' containment reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference ECLASSIFIER__ETYPE_PARAMETERS = eINSTANCE
-				.getEClassifier_ETypeParameters();
-
-		/**
 		 * The meta object literal for the '<em><b>Default Value</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -5446,6 +5489,15 @@ public interface EcorePackage extends EPackage {
 				.getEClassifier_DefaultValue();
 
 		/**
+		 * The meta object literal for the '<em><b>EType Parameters</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference ECLASSIFIER__ETYPE_PARAMETERS = eINSTANCE
+				.getEClassifier_ETypeParameters();
+
+		/**
 		 * The meta object literal for the '<em><b>Instance Type Name</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -5453,6 +5505,25 @@ public interface EcorePackage extends EPackage {
 		 */
 		EAttribute ECLASSIFIER__INSTANCE_TYPE_NAME = eINSTANCE
 				.getEClassifier_InstanceTypeName();
+
+		/**
+		 * The meta object literal for the '{@link ecore.impl.EDataTypeImpl <em>EData Type</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see ecore.impl.EDataTypeImpl
+		 * @see ecore.impl.EcorePackageImpl#getEDataType()
+		 * @generated
+		 */
+		EClass EDATA_TYPE = eINSTANCE.getEDataType();
+
+		/**
+		 * The meta object literal for the '<em><b>Serializable</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute EDATA_TYPE__SERIALIZABLE = eINSTANCE
+				.getEDataType_Serializable();
 
 		/**
 		 * The meta object literal for the '{@link ecore.impl.EEnumImpl <em>EEnum</em>}' class.
@@ -5471,6 +5542,49 @@ public interface EcorePackage extends EPackage {
 		 * @generated
 		 */
 		EReference EENUM__ELITERALS = eINSTANCE.getEEnum_ELiterals();
+
+		/**
+		 * The meta object literal for the '{@link ecore.impl.EEnumLiteralImpl <em>EEnum Literal</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see ecore.impl.EEnumLiteralImpl
+		 * @see ecore.impl.EcorePackageImpl#getEEnumLiteral()
+		 * @generated
+		 */
+		EClass EENUM_LITERAL = eINSTANCE.getEEnumLiteral();
+
+		/**
+		 * The meta object literal for the '<em><b>EEnum</b></em>' container reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference EENUM_LITERAL__EENUM = eINSTANCE.getEEnumLiteral_EEnum();
+
+		/**
+		 * The meta object literal for the '<em><b>Value</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute EENUM_LITERAL__VALUE = eINSTANCE.getEEnumLiteral_Value();
+
+		/**
+		 * The meta object literal for the '<em><b>Instance</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute EENUM_LITERAL__INSTANCE = eINSTANCE
+				.getEEnumLiteral_Instance();
+
+		/**
+		 * The meta object literal for the '<em><b>Literal</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute EENUM_LITERAL__LITERAL = eINSTANCE.getEEnumLiteral_Literal();
 
 		/**
 		 * The meta object literal for the '{@link ecore.impl.EFactoryImpl <em>EFactory</em>}' class.
@@ -5510,6 +5624,24 @@ public interface EcorePackage extends EPackage {
 				.getEModelElement_EAnnotations();
 
 		/**
+		 * The meta object literal for the '{@link ecore.impl.ENamedElementImpl <em>ENamed Element</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see ecore.impl.ENamedElementImpl
+		 * @see ecore.impl.EcorePackageImpl#getENamedElement()
+		 * @generated
+		 */
+		EClass ENAMED_ELEMENT = eINSTANCE.getENamedElement();
+
+		/**
+		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute ENAMED_ELEMENT__NAME = eINSTANCE.getENamedElement_Name();
+
+		/**
 		 * The meta object literal for the '{@link ecore.impl.EObjectImpl <em>EObject</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -5518,6 +5650,61 @@ public interface EcorePackage extends EPackage {
 		 * @generated
 		 */
 		EClass EOBJECT = eINSTANCE.getEObject();
+
+		/**
+		 * The meta object literal for the '{@link ecore.impl.EOperationImpl <em>EOperation</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see ecore.impl.EOperationImpl
+		 * @see ecore.impl.EcorePackageImpl#getEOperation()
+		 * @generated
+		 */
+		EClass EOPERATION = eINSTANCE.getEOperation();
+
+		/**
+		 * The meta object literal for the '<em><b>EContaining Class</b></em>' container reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference EOPERATION__ECONTAINING_CLASS = eINSTANCE
+				.getEOperation_EContainingClass();
+
+		/**
+		 * The meta object literal for the '<em><b>EGeneric Exceptions</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference EOPERATION__EGENERIC_EXCEPTIONS = eINSTANCE
+				.getEOperation_EGenericExceptions();
+
+		/**
+		 * The meta object literal for the '<em><b>EParameters</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference EOPERATION__EPARAMETERS = eINSTANCE
+				.getEOperation_EParameters();
+
+		/**
+		 * The meta object literal for the '<em><b>EType Parameters</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference EOPERATION__ETYPE_PARAMETERS = eINSTANCE
+				.getEOperation_ETypeParameters();
+
+		/**
+		 * The meta object literal for the '<em><b>EExceptions</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference EOPERATION__EEXCEPTIONS = eINSTANCE
+				.getEOperation_EExceptions();
 
 		/**
 		 * The meta object literal for the '{@link ecore.impl.EPackageImpl <em>EPackage</em>}' class.
@@ -5564,6 +5751,15 @@ public interface EcorePackage extends EPackage {
 		EAttribute EPACKAGE__NS_PREFIX = eINSTANCE.getEPackage_NsPrefix();
 
 		/**
+		 * The meta object literal for the '<em><b>EClassifiers</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference EPACKAGE__ECLASSIFIERS = eINSTANCE
+				.getEPackage_EClassifiers();
+
+		/**
 		 * The meta object literal for the '<em><b>EFactory Instance</b></em>' reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -5573,13 +5769,23 @@ public interface EcorePackage extends EPackage {
 				.getEPackage_EFactoryInstance();
 
 		/**
-		 * The meta object literal for the '<em><b>EClassifiers</b></em>' containment reference list feature.
+		 * The meta object literal for the '{@link ecore.impl.EParameterImpl <em>EParameter</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see ecore.impl.EParameterImpl
+		 * @see ecore.impl.EcorePackageImpl#getEParameter()
+		 * @generated
+		 */
+		EClass EPARAMETER = eINSTANCE.getEParameter();
+
+		/**
+		 * The meta object literal for the '<em><b>EOperation</b></em>' container reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference EPACKAGE__ECLASSIFIERS = eINSTANCE
-				.getEPackage_EClassifiers();
+		EReference EPARAMETER__EOPERATION = eINSTANCE
+				.getEParameter_EOperation();
 
 		/**
 		 * The meta object literal for the '{@link ecore.impl.EReferenceImpl <em>EReference</em>}' class.
@@ -5804,212 +6010,6 @@ public interface EcorePackage extends EPackage {
 				.getETypedElement_EGenericType();
 
 		/**
-		 * The meta object literal for the '{@link ecore.impl.EAnnotationImpl <em>EAnnotation</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see ecore.impl.EAnnotationImpl
-		 * @see ecore.impl.EcorePackageImpl#getEAnnotation()
-		 * @generated
-		 */
-		EClass EANNOTATION = eINSTANCE.getEAnnotation();
-
-		/**
-		 * The meta object literal for the '<em><b>References</b></em>' reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference EANNOTATION__REFERENCES = eINSTANCE
-				.getEAnnotation_References();
-
-		/**
-		 * The meta object literal for the '<em><b>Source</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute EANNOTATION__SOURCE = eINSTANCE.getEAnnotation_Source();
-
-		/**
-		 * The meta object literal for the '<em><b>Details</b></em>' containment reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference EANNOTATION__DETAILS = eINSTANCE.getEAnnotation_Details();
-
-		/**
-		 * The meta object literal for the '<em><b>Contents</b></em>' containment reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference EANNOTATION__CONTENTS = eINSTANCE.getEAnnotation_Contents();
-
-		/**
-		 * The meta object literal for the '<em><b>EModel Element</b></em>' container reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference EANNOTATION__EMODEL_ELEMENT = eINSTANCE
-				.getEAnnotation_EModelElement();
-
-		/**
-		 * The meta object literal for the '{@link ecore.impl.EDataTypeImpl <em>EData Type</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see ecore.impl.EDataTypeImpl
-		 * @see ecore.impl.EcorePackageImpl#getEDataType()
-		 * @generated
-		 */
-		EClass EDATA_TYPE = eINSTANCE.getEDataType();
-
-		/**
-		 * The meta object literal for the '<em><b>Serializable</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute EDATA_TYPE__SERIALIZABLE = eINSTANCE
-				.getEDataType_Serializable();
-
-		/**
-		 * The meta object literal for the '{@link ecore.impl.EEnumLiteralImpl <em>EEnum Literal</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see ecore.impl.EEnumLiteralImpl
-		 * @see ecore.impl.EcorePackageImpl#getEEnumLiteral()
-		 * @generated
-		 */
-		EClass EENUM_LITERAL = eINSTANCE.getEEnumLiteral();
-
-		/**
-		 * The meta object literal for the '<em><b>EEnum</b></em>' container reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference EENUM_LITERAL__EENUM = eINSTANCE.getEEnumLiteral_EEnum();
-
-		/**
-		 * The meta object literal for the '<em><b>Value</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute EENUM_LITERAL__VALUE = eINSTANCE.getEEnumLiteral_Value();
-
-		/**
-		 * The meta object literal for the '<em><b>Instance</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute EENUM_LITERAL__INSTANCE = eINSTANCE
-				.getEEnumLiteral_Instance();
-
-		/**
-		 * The meta object literal for the '<em><b>Literal</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute EENUM_LITERAL__LITERAL = eINSTANCE.getEEnumLiteral_Literal();
-
-		/**
-		 * The meta object literal for the '{@link ecore.impl.ENamedElementImpl <em>ENamed Element</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see ecore.impl.ENamedElementImpl
-		 * @see ecore.impl.EcorePackageImpl#getENamedElement()
-		 * @generated
-		 */
-		EClass ENAMED_ELEMENT = eINSTANCE.getENamedElement();
-
-		/**
-		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute ENAMED_ELEMENT__NAME = eINSTANCE.getENamedElement_Name();
-
-		/**
-		 * The meta object literal for the '{@link ecore.impl.EOperationImpl <em>EOperation</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see ecore.impl.EOperationImpl
-		 * @see ecore.impl.EcorePackageImpl#getEOperation()
-		 * @generated
-		 */
-		EClass EOPERATION = eINSTANCE.getEOperation();
-
-		/**
-		 * The meta object literal for the '<em><b>EContaining Class</b></em>' container reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference EOPERATION__ECONTAINING_CLASS = eINSTANCE
-				.getEOperation_EContainingClass();
-
-		/**
-		 * The meta object literal for the '<em><b>EGeneric Exceptions</b></em>' containment reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference EOPERATION__EGENERIC_EXCEPTIONS = eINSTANCE
-				.getEOperation_EGenericExceptions();
-
-		/**
-		 * The meta object literal for the '<em><b>EParameters</b></em>' containment reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference EOPERATION__EPARAMETERS = eINSTANCE
-				.getEOperation_EParameters();
-
-		/**
-		 * The meta object literal for the '<em><b>EType Parameters</b></em>' containment reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference EOPERATION__ETYPE_PARAMETERS = eINSTANCE
-				.getEOperation_ETypeParameters();
-
-		/**
-		 * The meta object literal for the '<em><b>EExceptions</b></em>' reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference EOPERATION__EEXCEPTIONS = eINSTANCE
-				.getEOperation_EExceptions();
-
-		/**
-		 * The meta object literal for the '{@link ecore.impl.EParameterImpl <em>EParameter</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see ecore.impl.EParameterImpl
-		 * @see ecore.impl.EcorePackageImpl#getEParameter()
-		 * @generated
-		 */
-		EClass EPARAMETER = eINSTANCE.getEParameter();
-
-		/**
-		 * The meta object literal for the '<em><b>EOperation</b></em>' container reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference EPARAMETER__EOPERATION = eINSTANCE
-				.getEParameter_EOperation();
-
-		/**
 		 * The meta object literal for the '{@link ecore.impl.EStringToStringMapEntryImpl <em>EString To String Map Entry</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -6049,15 +6049,6 @@ public interface EcorePackage extends EPackage {
 		EClass EGENERIC_TYPE = eINSTANCE.getEGenericType();
 
 		/**
-		 * The meta object literal for the '<em><b>EUpper Bound</b></em>' containment reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference EGENERIC_TYPE__EUPPER_BOUND = eINSTANCE
-				.getEGenericType_EUpperBound();
-
-		/**
 		 * The meta object literal for the '<em><b>EType Arguments</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -6065,6 +6056,15 @@ public interface EcorePackage extends EPackage {
 		 */
 		EReference EGENERIC_TYPE__ETYPE_ARGUMENTS = eINSTANCE
 				.getEGenericType_ETypeArguments();
+
+		/**
+		 * The meta object literal for the '<em><b>EUpper Bound</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference EGENERIC_TYPE__EUPPER_BOUND = eINSTANCE
+				.getEGenericType_EUpperBound();
 
 		/**
 		 * The meta object literal for the '<em><b>EClassifier</b></em>' reference feature.

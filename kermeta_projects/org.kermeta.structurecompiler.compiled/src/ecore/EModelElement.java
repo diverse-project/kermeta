@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: EModelElement.java,v 1.1 2008-09-04 15:40:35 cfaucher Exp $
+ * $Id: EModelElement.java,v 1.2 2008-09-08 19:28:31 cfaucher Exp $
  */
 package ecore;
 
@@ -48,7 +48,7 @@ public interface EModelElement extends EObject {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @model sourceDataType="ecore.EString"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='\necore.EAnnotation result = null;\n\n\tresult = null;\n//Beginning of the Inlining of the function type: detect\n\necore.EAnnotation result_ft190 = null;\n\n\tecore.EAnnotation elem_ft190 = null;\n\n\tresult_ft190 = null;\n\n\t\n{\n\n\tkermeta.standard.Iterator<ecore.EAnnotation> it_ft190 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil.<ecore.EAnnotation>convertAsOrderedSet(this.getEAnnotations()).iterator();\n\tjava.lang.Boolean idLoopCond_837 = false;\n\twhile( !idLoopCond_837 ) {\n\tidLoopCond_837 = kermeta.standard.helper.BooleanWrapper.or(it_ft190.isOff(), org.kermeta.compil.runtime.helper.language.ObjectUtil.isNotEqual(result_ft190, null));\n\tif ( idLoopCond_837 ) {\n\t} else {\n\n\telem_ft190 = it_ft190.next();\n\n\tjava.lang.Boolean idIfCond_838 = false;\n//Beginning of the Inlining of the lambda expression: detector\necore.EAnnotation a = elem_ft190;\n\n\tidIfCond_838 = kermeta.standard.helper.StringWrapper.equals(a.getSource(), source);\n//End of the Inlining of the lambda expression: detector\n\n\n\tif( idIfCond_838 ) {\n\n\tresult_ft190 = elem_ft190;\n}\n\n}\n\t}\n}\n\n//End of the Inlining of the function type: detect\n\n\nreturn result;\n'"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='\necore.EAnnotation result = null;\n\n\tresult = null;\n//Beginning of the Inlining of the function type: detect\n\necore.EAnnotation result_ft214 = null;\n\n\tecore.EAnnotation elem_ft214 = null;\n\n\tresult_ft214 = null;\n\n\t\n{\n\n\tkermeta.standard.Iterator<ecore.EAnnotation> it_ft214 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil.<ecore.EAnnotation>convertAsOrderedSet(this.getEAnnotations()).iterator();\n\tjava.lang.Boolean idLoopCond_918 = false;\n\twhile( !idLoopCond_918 ) {\n\tidLoopCond_918 = kermeta.standard.helper.BooleanWrapper.or(it_ft214.isOff(), org.kermeta.compil.runtime.helper.language.ObjectUtil.isNotEqual(result_ft214, null));\n\tif ( idLoopCond_918 ) {\n\t} else {\n\n\telem_ft214 = it_ft214.next();\n\n\tjava.lang.Boolean idIfCond_919 = false;\n//Beginning of the Inlining of the lambda expression: detector\necore.EAnnotation a = elem_ft214;\n\n\tidIfCond_919 = kermeta.standard.helper.StringWrapper.equals(a.getSource(), source);\n//End of the Inlining of the lambda expression: detector\n\n\n\tif( idIfCond_919 ) {\n\n\tresult_ft214 = elem_ft214;\n}\n\n}\n\t}\n}\n\n//End of the Inlining of the function type: detect\n\n\nreturn result;\n'"
 	 * @generated
 	 */
 	EAnnotation getEAnnotation(String source);

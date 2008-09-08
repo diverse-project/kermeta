@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: EStructuralFeatureImpl.java,v 1.1 2008-09-04 15:40:23 cfaucher Exp $
+ * $Id: EStructuralFeatureImpl.java,v 1.2 2008-09-08 19:28:31 cfaucher Exp $
  */
 package ecore.impl;
 
@@ -390,20 +390,6 @@ public abstract class EStructuralFeatureImpl extends ETypedElementImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setDefaultValue(Object newDefaultValue) {
-		Object oldDefaultValue = defaultValue;
-		defaultValue = newDefaultValue;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET,
-					EcorePackage.ESTRUCTURAL_FEATURE__DEFAULT_VALUE,
-					oldDefaultValue, defaultValue));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public boolean isChangeable() {
 		return changeable;
 	}
@@ -447,7 +433,7 @@ public abstract class EStructuralFeatureImpl extends ETypedElementImpl
 	 */
 	public Class<?> getContainerClass() {
 
-		kermeta.language.structure.Object result = null;
+		java.lang.Class result = null;
 
 		if (true)
 			throw new org.kermeta.compil.runtime.helper.error.KRuntimeError(
@@ -563,9 +549,6 @@ public abstract class EStructuralFeatureImpl extends ETypedElementImpl
 		case EcorePackage.ESTRUCTURAL_FEATURE__DERIVED:
 			setDerived(((Boolean) newValue).booleanValue());
 			return;
-		case EcorePackage.ESTRUCTURAL_FEATURE__DEFAULT_VALUE:
-			setDefaultValue(newValue);
-			return;
 		case EcorePackage.ESTRUCTURAL_FEATURE__CHANGEABLE:
 			setChangeable(((Boolean) newValue).booleanValue());
 			return;
@@ -598,9 +581,6 @@ public abstract class EStructuralFeatureImpl extends ETypedElementImpl
 			return;
 		case EcorePackage.ESTRUCTURAL_FEATURE__DERIVED:
 			setDerived(DERIVED_EDEFAULT);
-			return;
-		case EcorePackage.ESTRUCTURAL_FEATURE__DEFAULT_VALUE:
-			setDefaultValue(DEFAULT_VALUE_EDEFAULT);
 			return;
 		case EcorePackage.ESTRUCTURAL_FEATURE__CHANGEABLE:
 			setChangeable(CHANGEABLE_EDEFAULT);

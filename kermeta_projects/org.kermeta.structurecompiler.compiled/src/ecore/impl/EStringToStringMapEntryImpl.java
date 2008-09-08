@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: EStringToStringMapEntryImpl.java,v 1.1 2008-09-04 15:40:23 cfaucher Exp $
+ * $Id: EStringToStringMapEntryImpl.java,v 1.2 2008-09-08 19:28:31 cfaucher Exp $
  */
 package ecore.impl;
 

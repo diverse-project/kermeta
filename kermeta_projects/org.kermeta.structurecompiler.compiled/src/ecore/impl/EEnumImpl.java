@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: EEnumImpl.java,v 1.1 2008-09-04 15:40:23 cfaucher Exp $
+ * $Id: EEnumImpl.java,v 1.2 2008-09-08 19:28:31 cfaucher Exp $
  */
 package ecore.impl;
 
@@ -84,53 +84,8 @@ public class EEnumImpl extends EDataTypeImpl implements EEnum {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EEnumLiteral getEEnumLiteral2(int value) {
-
+	public EEnumLiteral op_getEEnumLiteral(String name) {
 		ecore.EEnumLiteral result = null;
-
-		result = null;
-		//Beginning of the Inlining of the function type: detect
-
-		ecore.EEnumLiteral result_ft189 = null;
-
-		ecore.EEnumLiteral elem_ft189 = null;
-
-		result_ft189 = null;
-
-		{
-
-			kermeta.standard.Iterator<ecore.EEnumLiteral> it_ft189 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
-					.<ecore.EEnumLiteral> convertAsOrderedSet(
-							this.getELiterals()).iterator();
-			java.lang.Boolean idLoopCond_835 = false;
-			while (!idLoopCond_835) {
-				idLoopCond_835 = kermeta.standard.helper.BooleanWrapper.or(
-						it_ft189.isOff(),
-						org.kermeta.compil.runtime.helper.language.ObjectUtil
-								.isNotEqual(result_ft189, null));
-				if (idLoopCond_835) {
-				} else {
-
-					elem_ft189 = it_ft189.next();
-
-					java.lang.Boolean idIfCond_836 = false;
-					//Beginning of the Inlining of the lambda expression: detector
-					ecore.EEnumLiteral e = elem_ft189;
-
-					idIfCond_836 = kermeta.standard.helper.IntegerWrapper
-							.equals(e.getValue(), value);
-					//End of the Inlining of the lambda expression: detector
-
-					if (idIfCond_836) {
-
-						result_ft189 = elem_ft189;
-					}
-
-				}
-			}
-		}
-
-		//End of the Inlining of the function type: detect
 
 		return result;
 
@@ -141,8 +96,53 @@ public class EEnumImpl extends EDataTypeImpl implements EEnum {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EEnumLiteral op_getEEnumLiteral(String name) {
+	public EEnumLiteral getEEnumLiteral2(int value) {
+
 		ecore.EEnumLiteral result = null;
+
+		result = null;
+		//Beginning of the Inlining of the function type: detect
+
+		ecore.EEnumLiteral result_ft213 = null;
+
+		ecore.EEnumLiteral elem_ft213 = null;
+
+		result_ft213 = null;
+
+		{
+
+			kermeta.standard.Iterator<ecore.EEnumLiteral> it_ft213 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
+					.<ecore.EEnumLiteral> convertAsOrderedSet(
+							this.getELiterals()).iterator();
+			java.lang.Boolean idLoopCond_916 = false;
+			while (!idLoopCond_916) {
+				idLoopCond_916 = kermeta.standard.helper.BooleanWrapper.or(
+						it_ft213.isOff(),
+						org.kermeta.compil.runtime.helper.language.ObjectUtil
+								.isNotEqual(result_ft213, null));
+				if (idLoopCond_916) {
+				} else {
+
+					elem_ft213 = it_ft213.next();
+
+					java.lang.Boolean idIfCond_917 = false;
+					//Beginning of the Inlining of the lambda expression: detector
+					ecore.EEnumLiteral e = elem_ft213;
+
+					idIfCond_917 = kermeta.standard.helper.IntegerWrapper
+							.equals(e.getValue(), value);
+					//End of the Inlining of the lambda expression: detector
+
+					if (idIfCond_917) {
+
+						result_ft213 = elem_ft213;
+					}
+
+				}
+			}
+		}
+
+		//End of the Inlining of the function type: detect
 
 		return result;
 

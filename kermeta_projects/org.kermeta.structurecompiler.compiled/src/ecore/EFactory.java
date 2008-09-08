@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: EFactory.java,v 1.1 2008-09-04 15:40:35 cfaucher Exp $
+ * $Id: EFactory.java,v 1.2 2008-09-08 19:28:31 cfaucher Exp $
  */
 package ecore;
 
@@ -57,7 +57,7 @@ public interface EFactory extends EModelElement {
 	 * <!-- end-user-doc -->
 	 * @model dataType="ecore.EJavaObject" literalValueDataType="ecore.EString"
 	 *        annotation="kermeta isAbstract='true'"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='kermeta.language.structure.Object result = null;\n\nreturn result;\n'"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='java.lang.Object result = null;\n\nreturn result;\n'"
 	 * @generated
 	 */
 	Object createFromString(EDataType eDataType, String literalValue);

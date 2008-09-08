@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ENamedElement.java,v 1.1 2008-09-04 15:40:35 cfaucher Exp $
+ * $Id: ENamedElement.java,v 1.2 2008-09-08 19:28:31 cfaucher Exp $
  */
 package ecore;
 

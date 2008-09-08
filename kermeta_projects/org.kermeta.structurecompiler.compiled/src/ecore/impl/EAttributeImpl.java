@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: EAttributeImpl.java,v 1.1 2008-09-04 15:40:23 cfaucher Exp $
+ * $Id: EAttributeImpl.java,v 1.2 2008-09-08 19:28:31 cfaucher Exp $
  */
 package ecore.impl;
 
@@ -115,20 +115,6 @@ public class EAttributeImpl extends EStructuralFeatureImpl implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setEAttributeType(EDataType newEAttributeType) {
-		EDataType oldEAttributeType = eAttributeType;
-		eAttributeType = newEAttributeType;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET,
-					EcorePackage.EATTRIBUTE__EATTRIBUTE_TYPE,
-					oldEAttributeType, eAttributeType));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public boolean isID() {
 		return iD;
 	}
@@ -172,9 +158,6 @@ public class EAttributeImpl extends EStructuralFeatureImpl implements
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-		case EcorePackage.EATTRIBUTE__EATTRIBUTE_TYPE:
-			setEAttributeType((EDataType) newValue);
-			return;
 		case EcorePackage.EATTRIBUTE__ID:
 			setID(((Boolean) newValue).booleanValue());
 			return;
@@ -190,9 +173,6 @@ public class EAttributeImpl extends EStructuralFeatureImpl implements
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-		case EcorePackage.EATTRIBUTE__EATTRIBUTE_TYPE:
-			setEAttributeType((EDataType) null);
-			return;
 		case EcorePackage.EATTRIBUTE__ID:
 			setID(ID_EDEFAULT);
 			return;

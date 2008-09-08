@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: EFactoryImpl.java,v 1.1 2008-09-04 15:40:23 cfaucher Exp $
+ * $Id: EFactoryImpl.java,v 1.2 2008-09-08 19:28:31 cfaucher Exp $
  */
 package ecore.impl;
 
@@ -142,7 +142,7 @@ public class EFactoryImpl extends EModelElementImpl implements EFactory {
 	 * @generated
 	 */
 	public Object createFromString(EDataType eDataType, String literalValue) {
-		kermeta.language.structure.Object result = null;
+		java.lang.Object result = null;
 
 		return result;
 

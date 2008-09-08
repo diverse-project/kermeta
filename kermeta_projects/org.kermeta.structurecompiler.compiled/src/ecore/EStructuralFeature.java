@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: EStructuralFeature.java,v 1.1 2008-09-04 15:40:35 cfaucher Exp $
+ * $Id: EStructuralFeature.java,v 1.2 2008-09-08 19:28:31 cfaucher Exp $
  */
 package ecore;
 
@@ -203,25 +203,15 @@ public interface EStructuralFeature extends ETypedElement {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Default Value</em>' attribute.
-	 * @see #setDefaultValue(Object)
 	 * @see ecore.EcorePackage#getEStructuralFeature_DefaultValue()
-	 * @model dataType="ecore.EJavaObject" derived="true"
+	 * @model dataType="ecore.EJavaObject" transient="true" changeable="false" derived="true"
 	 *        annotation="kermeta isReadOnly='false'"
+	 *        annotation="kermeta ecore.isTransient='true'"
 	 *        annotation="kompiledderivedProp.setter body='{\n\n\t\nif (true)\n\tthrow new org.kermeta.compil.runtime.helper.error.KRuntimeError( ((kermeta.exceptions.NotImplementedException) org.kermeta.compil.runtime.helper.language.ClassUtil.newObject(\"kermeta.exceptions.NotImplementedException\")) );\n\n}'"
 	 *        annotation="kompiledderivedProp.getter body='{\n\n\t\nif (true)\n\tthrow new org.kermeta.compil.runtime.helper.error.KRuntimeError( ((kermeta.exceptions.NotImplementedException) org.kermeta.compil.runtime.helper.language.ClassUtil.newObject(\"kermeta.exceptions.NotImplementedException\")) );\n\n}'"
 	 * @generated
 	 */
 	Object getDefaultValue();
-
-	/**
-	 * Sets the value of the '{@link ecore.EStructuralFeature#getDefaultValue <em>Default Value</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Default Value</em>' attribute.
-	 * @see #getDefaultValue()
-	 * @generated
-	 */
-	void setDefaultValue(Object value);
 
 	/**
 	 * Returns the value of the '<em><b>Changeable</b></em>' attribute.
@@ -263,7 +253,7 @@ public interface EStructuralFeature extends ETypedElement {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @model kind="operation" dataType="ecore.EJavaClass<?>"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='\nkermeta.language.structure.Object result = null;\n\n\t\nif (true)\n\tthrow new org.kermeta.compil.runtime.helper.error.KRuntimeError( ((kermeta.exceptions.NotImplementedException) org.kermeta.compil.runtime.helper.language.ClassUtil.newObject(\"kermeta.exceptions.NotImplementedException\")) );\n\n\nreturn result;\n'"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='\njava.lang.Class result = null;\n\n\t\nif (true)\n\tthrow new org.kermeta.compil.runtime.helper.error.KRuntimeError( ((kermeta.exceptions.NotImplementedException) org.kermeta.compil.runtime.helper.language.ClassUtil.newObject(\"kermeta.exceptions.NotImplementedException\")) );\n\n\nreturn result;\n'"
 	 * @generated
 	 */
 	Class<?> getContainerClass();

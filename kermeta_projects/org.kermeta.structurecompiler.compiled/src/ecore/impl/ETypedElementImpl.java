@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ETypedElementImpl.java,v 1.1 2008-09-04 15:40:23 cfaucher Exp $
+ * $Id: ETypedElementImpl.java,v 1.2 2008-09-08 19:28:31 cfaucher Exp $
  */
 package ecore.impl;
 
@@ -214,19 +214,6 @@ public abstract class ETypedElementImpl extends ENamedElementImpl implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setMany(boolean newMany) {
-		boolean oldMany = many;
-		many = newMany;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET,
-					EcorePackage.ETYPED_ELEMENT__MANY, oldMany, many));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public int getLowerBound() {
 		return lowerBound;
 	}
@@ -336,20 +323,6 @@ public abstract class ETypedElementImpl extends ENamedElementImpl implements
 	 */
 	public boolean isRequired() {
 		return required;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setRequired(boolean newRequired) {
-		boolean oldRequired = required;
-		required = newRequired;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET,
-					EcorePackage.ETYPED_ELEMENT__REQUIRED, oldRequired,
-					required));
 	}
 
 	/**
@@ -522,9 +495,6 @@ public abstract class ETypedElementImpl extends ENamedElementImpl implements
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-		case EcorePackage.ETYPED_ELEMENT__MANY:
-			setMany(((Boolean) newValue).booleanValue());
-			return;
 		case EcorePackage.ETYPED_ELEMENT__LOWER_BOUND:
 			setLowerBound(((Integer) newValue).intValue());
 			return;
@@ -536,9 +506,6 @@ public abstract class ETypedElementImpl extends ENamedElementImpl implements
 			return;
 		case EcorePackage.ETYPED_ELEMENT__ORDERED:
 			setOrdered(((Boolean) newValue).booleanValue());
-			return;
-		case EcorePackage.ETYPED_ELEMENT__REQUIRED:
-			setRequired(((Boolean) newValue).booleanValue());
 			return;
 		case EcorePackage.ETYPED_ELEMENT__UPPER_BOUND:
 			setUpperBound(((Integer) newValue).intValue());
@@ -558,9 +525,6 @@ public abstract class ETypedElementImpl extends ENamedElementImpl implements
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-		case EcorePackage.ETYPED_ELEMENT__MANY:
-			setMany(MANY_EDEFAULT);
-			return;
 		case EcorePackage.ETYPED_ELEMENT__LOWER_BOUND:
 			setLowerBound(LOWER_BOUND_EDEFAULT);
 			return;
@@ -572,9 +536,6 @@ public abstract class ETypedElementImpl extends ENamedElementImpl implements
 			return;
 		case EcorePackage.ETYPED_ELEMENT__ORDERED:
 			setOrdered(ORDERED_EDEFAULT);
-			return;
-		case EcorePackage.ETYPED_ELEMENT__REQUIRED:
-			setRequired(REQUIRED_EDEFAULT);
 			return;
 		case EcorePackage.ETYPED_ELEMENT__UPPER_BOUND:
 			setUpperBound(UPPER_BOUND_EDEFAULT);

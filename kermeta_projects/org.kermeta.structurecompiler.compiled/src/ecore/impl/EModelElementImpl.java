@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: EModelElementImpl.java,v 1.1 2008-09-04 15:40:23 cfaucher Exp $
+ * $Id: EModelElementImpl.java,v 1.2 2008-09-08 19:28:31 cfaucher Exp $
  */
 package ecore.impl;
 
@@ -93,39 +93,39 @@ public abstract class EModelElementImpl extends EObjectImpl implements
 		result = null;
 		//Beginning of the Inlining of the function type: detect
 
-		ecore.EAnnotation result_ft190 = null;
+		ecore.EAnnotation result_ft214 = null;
 
-		ecore.EAnnotation elem_ft190 = null;
+		ecore.EAnnotation elem_ft214 = null;
 
-		result_ft190 = null;
+		result_ft214 = null;
 
 		{
 
-			kermeta.standard.Iterator<ecore.EAnnotation> it_ft190 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
+			kermeta.standard.Iterator<ecore.EAnnotation> it_ft214 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
 					.<ecore.EAnnotation> convertAsOrderedSet(
 							this.getEAnnotations()).iterator();
-			java.lang.Boolean idLoopCond_837 = false;
-			while (!idLoopCond_837) {
-				idLoopCond_837 = kermeta.standard.helper.BooleanWrapper.or(
-						it_ft190.isOff(),
+			java.lang.Boolean idLoopCond_918 = false;
+			while (!idLoopCond_918) {
+				idLoopCond_918 = kermeta.standard.helper.BooleanWrapper.or(
+						it_ft214.isOff(),
 						org.kermeta.compil.runtime.helper.language.ObjectUtil
-								.isNotEqual(result_ft190, null));
-				if (idLoopCond_837) {
+								.isNotEqual(result_ft214, null));
+				if (idLoopCond_918) {
 				} else {
 
-					elem_ft190 = it_ft190.next();
+					elem_ft214 = it_ft214.next();
 
-					java.lang.Boolean idIfCond_838 = false;
+					java.lang.Boolean idIfCond_919 = false;
 					//Beginning of the Inlining of the lambda expression: detector
-					ecore.EAnnotation a = elem_ft190;
+					ecore.EAnnotation a = elem_ft214;
 
-					idIfCond_838 = kermeta.standard.helper.StringWrapper
+					idIfCond_919 = kermeta.standard.helper.StringWrapper
 							.equals(a.getSource(), source);
 					//End of the Inlining of the lambda expression: detector
 
-					if (idIfCond_838) {
+					if (idIfCond_919) {
 
-						result_ft190 = elem_ft190;
+						result_ft214 = elem_ft214;
 					}
 
 				}

@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: EClassifier.java,v 1.1 2008-09-04 15:40:35 cfaucher Exp $
+ * $Id: EClassifier.java,v 1.2 2008-09-08 19:28:31 cfaucher Exp $
  */
 package ecore;
 
@@ -19,8 +19,8 @@ import org.eclipse.emf.common.util.EList;
  *   <li>{@link ecore.EClassifier#getInstanceClassName <em>Instance Class Name</em>}</li>
  *   <li>{@link ecore.EClassifier#getEPackage <em>EPackage</em>}</li>
  *   <li>{@link ecore.EClassifier#getInstanceClass <em>Instance Class</em>}</li>
- *   <li>{@link ecore.EClassifier#getETypeParameters <em>EType Parameters</em>}</li>
  *   <li>{@link ecore.EClassifier#getDefaultValue <em>Default Value</em>}</li>
+ *   <li>{@link ecore.EClassifier#getETypeParameters <em>EType Parameters</em>}</li>
  *   <li>{@link ecore.EClassifier#getInstanceTypeName <em>Instance Type Name</em>}</li>
  * </ul>
  * </p>
@@ -95,10 +95,10 @@ public interface EClassifier extends ENamedElement {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Instance Class</em>' attribute.
-	 * @see #setInstanceClass(Class)
 	 * @see ecore.EcorePackage#getEClassifier_InstanceClass()
-	 * @model dataType="ecore.EJavaClass<?>" derived="true"
+	 * @model dataType="ecore.EJavaClass<?>" transient="true" changeable="false" derived="true"
 	 *        annotation="kermeta isReadOnly='false'"
+	 *        annotation="kermeta ecore.isTransient='true'"
 	 *        annotation="kompiledderivedProp.setter body='{\n\n\t\nif (true)\n\tthrow new org.kermeta.compil.runtime.helper.error.KRuntimeError( ((kermeta.exceptions.NotImplementedException) org.kermeta.compil.runtime.helper.language.ClassUtil.newObject(\"kermeta.exceptions.NotImplementedException\")) );\n\n}'"
 	 *        annotation="kompiledderivedProp.getter body='{\n\n\t\nif (true)\n\tthrow new org.kermeta.compil.runtime.helper.error.KRuntimeError( ((kermeta.exceptions.NotImplementedException) org.kermeta.compil.runtime.helper.language.ClassUtil.newObject(\"kermeta.exceptions.NotImplementedException\")) );\n\n}'"
 	 * @generated
@@ -106,14 +106,22 @@ public interface EClassifier extends ENamedElement {
 	Class<?> getInstanceClass();
 
 	/**
-	 * Sets the value of the '{@link ecore.EClassifier#getInstanceClass <em>Instance Class</em>}' attribute.
+	 * Returns the value of the '<em><b>Default Value</b></em>' attribute.
 	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Default Value</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Instance Class</em>' attribute.
-	 * @see #getInstanceClass()
+	 * @return the value of the '<em>Default Value</em>' attribute.
+	 * @see ecore.EcorePackage#getEClassifier_DefaultValue()
+	 * @model dataType="ecore.EJavaObject" changeable="false" derived="true"
+	 *        annotation="kermeta isReadOnly='false'"
+	 *        annotation="kompiledderivedProp.setter body='{\n\n\t\nif (true)\n\tthrow new org.kermeta.compil.runtime.helper.error.KRuntimeError( ((kermeta.exceptions.NotImplementedException) org.kermeta.compil.runtime.helper.language.ClassUtil.newObject(\"kermeta.exceptions.NotImplementedException\")) );\n\n}'"
+	 *        annotation="kompiledderivedProp.getter body='{\n\n\t\nif (true)\n\tthrow new org.kermeta.compil.runtime.helper.error.KRuntimeError( ((kermeta.exceptions.NotImplementedException) org.kermeta.compil.runtime.helper.language.ClassUtil.newObject(\"kermeta.exceptions.NotImplementedException\")) );\n\n}'"
 	 * @generated
 	 */
-	void setInstanceClass(Class<?> value);
+	Object getDefaultValue();
 
 	/**
 	 * Returns the value of the '<em><b>EType Parameters</b></em>' containment reference list.
@@ -130,35 +138,6 @@ public interface EClassifier extends ENamedElement {
 	 * @generated
 	 */
 	EList<ETypeParameter> getETypeParameters();
-
-	/**
-	 * Returns the value of the '<em><b>Default Value</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Default Value</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Default Value</em>' attribute.
-	 * @see #setDefaultValue(Object)
-	 * @see ecore.EcorePackage#getEClassifier_DefaultValue()
-	 * @model dataType="ecore.EJavaObject" derived="true"
-	 *        annotation="kermeta isReadOnly='false'"
-	 *        annotation="kompiledderivedProp.setter body='{\n\n\t\nif (true)\n\tthrow new org.kermeta.compil.runtime.helper.error.KRuntimeError( ((kermeta.exceptions.NotImplementedException) org.kermeta.compil.runtime.helper.language.ClassUtil.newObject(\"kermeta.exceptions.NotImplementedException\")) );\n\n}'"
-	 *        annotation="kompiledderivedProp.getter body='{\n\n\t\nif (true)\n\tthrow new org.kermeta.compil.runtime.helper.error.KRuntimeError( ((kermeta.exceptions.NotImplementedException) org.kermeta.compil.runtime.helper.language.ClassUtil.newObject(\"kermeta.exceptions.NotImplementedException\")) );\n\n}'"
-	 * @generated
-	 */
-	Object getDefaultValue();
-
-	/**
-	 * Sets the value of the '{@link ecore.EClassifier#getDefaultValue <em>Default Value</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Default Value</em>' attribute.
-	 * @see #getDefaultValue()
-	 * @generated
-	 */
-	void setDefaultValue(Object value);
 
 	/**
 	 * Returns the value of the '<em><b>Instance Type Name</b></em>' attribute.

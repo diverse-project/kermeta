@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: EAttribute.java,v 1.1 2008-09-04 15:40:35 cfaucher Exp $
+ * $Id: EAttribute.java,v 1.2 2008-09-08 19:28:31 cfaucher Exp $
  */
 package ecore;
 
@@ -34,26 +34,14 @@ public interface EAttribute extends EStructuralFeature {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>EAttribute Type</em>' reference.
-	 * @see #setEAttributeType(EDataType)
 	 * @see ecore.EcorePackage#getEAttribute_EAttributeType()
-	 * @model required="true" transient="true" derived="true"
+	 * @model required="true" changeable="false" derived="true"
 	 *        annotation="kermeta isReadOnly='false'"
-	 *        annotation="kermeta ecore.isTransient='true'"
-	 *        annotation="kompiledderivedProp.setter body='{\n\n\tjava.lang.Boolean idIfCond_803 = false;\n\tidIfCond_803 = org.kermeta.compil.runtime.helper.language.ObjectUtil.getMetaClass(this.getEType()).equals(org.kermeta.compil.runtime.ExecutionContext.getInstance().getMetaClass(\"ecore.EDataType\"));\n\n\tif( idIfCond_803 ) {\n\n\tresult = (ecore.EDataType) this.getEType();\n}\n else {\n\n\tkermeta.exceptions.Exception exception = ((kermeta.exceptions.Exception) org.kermeta.compil.runtime.helper.language.ClassUtil.newObject(\"kermeta.exceptions.Exception\"));\n\n\texception.setMessage(\"The EClassifer pointed by this EAttribute must be of type EDataType\");\n\n\t\nif (true)\n\tthrow new org.kermeta.compil.runtime.helper.error.KRuntimeError( exception );\n\n}\n\n}'"
-	 *        annotation="kompiledderivedProp.getter body='{\n\n\tjava.lang.Boolean idIfCond_804 = false;\n\tidIfCond_804 = org.kermeta.compil.runtime.helper.language.ObjectUtil.getMetaClass(this.getEType()).equals(org.kermeta.compil.runtime.ExecutionContext.getInstance().getMetaClass(\"ecore.EDataType\"));\n\n\tif( idIfCond_804 ) {\n\n\tresult = (ecore.EDataType) this.getEType();\n}\n else {\n\n\tkermeta.exceptions.Exception exception = ((kermeta.exceptions.Exception) org.kermeta.compil.runtime.helper.language.ClassUtil.newObject(\"kermeta.exceptions.Exception\"));\n\n\texception.setMessage(\"The EClassifer pointed by this EAttribute must be of type EDataType\");\n\n\t\nif (true)\n\tthrow new org.kermeta.compil.runtime.helper.error.KRuntimeError( exception );\n\n}\n\n}'"
+	 *        annotation="kompiledderivedProp.setter body='{\n\n\tjava.lang.Boolean idIfCond_884 = false;\n\tidIfCond_884 = org.kermeta.compil.runtime.helper.language.ObjectUtil.getMetaClass(this.getEType()).equals(org.kermeta.compil.runtime.ExecutionContext.getInstance().getMetaClass(\"ecore.EDataType\"));\n\n\tif( idIfCond_884 ) {\n\n\tresult = (ecore.EDataType) this.getEType();\n}\n else {\n\n\tkermeta.exceptions.Exception exception = ((kermeta.exceptions.Exception) org.kermeta.compil.runtime.helper.language.ClassUtil.newObject(\"kermeta.exceptions.Exception\"));\n\n\texception.setMessage(\"The EClassifer pointed by this EAttribute must be of type EDataType\");\n\n\t\nif (true)\n\tthrow new org.kermeta.compil.runtime.helper.error.KRuntimeError( exception );\n\n}\n\n}'"
+	 *        annotation="kompiledderivedProp.getter body='{\n\n\tjava.lang.Boolean idIfCond_885 = false;\n\tidIfCond_885 = org.kermeta.compil.runtime.helper.language.ObjectUtil.getMetaClass(this.getEType()).equals(org.kermeta.compil.runtime.ExecutionContext.getInstance().getMetaClass(\"ecore.EDataType\"));\n\n\tif( idIfCond_885 ) {\n\n\tresult = (ecore.EDataType) this.getEType();\n}\n else {\n\n\tkermeta.exceptions.Exception exception = ((kermeta.exceptions.Exception) org.kermeta.compil.runtime.helper.language.ClassUtil.newObject(\"kermeta.exceptions.Exception\"));\n\n\texception.setMessage(\"The EClassifer pointed by this EAttribute must be of type EDataType\");\n\n\t\nif (true)\n\tthrow new org.kermeta.compil.runtime.helper.error.KRuntimeError( exception );\n\n}\n\n}'"
 	 * @generated
 	 */
 	EDataType getEAttributeType();
-
-	/**
-	 * Sets the value of the '{@link ecore.EAttribute#getEAttributeType <em>EAttribute Type</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>EAttribute Type</em>' reference.
-	 * @see #getEAttributeType()
-	 * @generated
-	 */
-	void setEAttributeType(EDataType value);
 
 	/**
 	 * Returns the value of the '<em><b>ID</b></em>' attribute.

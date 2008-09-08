@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: EReferenceImpl.java,v 1.1 2008-09-04 15:40:23 cfaucher Exp $
+ * $Id: EReferenceImpl.java,v 1.2 2008-09-08 19:28:31 cfaucher Exp $
  */
 package ecore.impl;
 
@@ -226,20 +226,6 @@ public class EReferenceImpl extends EStructuralFeatureImpl implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setEReferenceType(EClass newEReferenceType) {
-		EClass oldEReferenceType = eReferenceType;
-		eReferenceType = newEReferenceType;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET,
-					EcorePackage.EREFERENCE__EREFERENCE_TYPE,
-					oldEReferenceType, eReferenceType));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public boolean isResolveProxies() {
 		return resolveProxies;
 	}
@@ -265,19 +251,6 @@ public class EReferenceImpl extends EStructuralFeatureImpl implements
 	 */
 	public boolean isContainer() {
 		return container;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setContainer(boolean newContainer) {
-		boolean oldContainer = container;
-		container = newContainer;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET,
-					EcorePackage.EREFERENCE__CONTAINER, oldContainer, container));
 	}
 
 	/**
@@ -330,39 +303,39 @@ public class EReferenceImpl extends EStructuralFeatureImpl implements
 
 		//Beginning of the Inlining of the function type: detect
 
-		kermeta.language.structure.Property result_ft192 = null;
+		kermeta.language.structure.Property result_ft216 = null;
 
-		kermeta.language.structure.Property elem_ft192 = null;
+		kermeta.language.structure.Property elem_ft216 = null;
 
-		result_ft192 = null;
+		result_ft216 = null;
 
 		{
 
-			kermeta.standard.Iterator<kermeta.language.structure.Property> it_ft192 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
+			kermeta.standard.Iterator<kermeta.language.structure.Property> it_ft216 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
 					.<kermeta.language.structure.Property> convertAsOrderedSet(
 							cls.getOwnedAttribute()).iterator();
-			java.lang.Boolean idLoopCond_843 = false;
-			while (!idLoopCond_843) {
-				idLoopCond_843 = kermeta.standard.helper.BooleanWrapper.or(
-						it_ft192.isOff(),
+			java.lang.Boolean idLoopCond_924 = false;
+			while (!idLoopCond_924) {
+				idLoopCond_924 = kermeta.standard.helper.BooleanWrapper.or(
+						it_ft216.isOff(),
 						org.kermeta.compil.runtime.helper.language.ObjectUtil
-								.isNotEqual(result_ft192, null));
-				if (idLoopCond_843) {
+								.isNotEqual(result_ft216, null));
+				if (idLoopCond_924) {
 				} else {
 
-					elem_ft192 = it_ft192.next();
+					elem_ft216 = it_ft216.next();
 
-					java.lang.Boolean idIfCond_844 = false;
+					java.lang.Boolean idIfCond_925 = false;
 					//Beginning of the Inlining of the lambda expression: detector
-					kermeta.language.structure.Property p = elem_ft192;
+					kermeta.language.structure.Property p = elem_ft216;
 
-					idIfCond_844 = kermeta.standard.helper.StringWrapper
+					idIfCond_925 = kermeta.standard.helper.StringWrapper
 							.equals(p.getName(), "container");
 					//End of the Inlining of the lambda expression: detector
 
-					if (idIfCond_844) {
+					if (idIfCond_925) {
 
-						result_ft192 = elem_ft192;
+						result_ft216 = elem_ft216;
 					}
 
 				}
@@ -371,7 +344,7 @@ public class EReferenceImpl extends EStructuralFeatureImpl implements
 
 		//End of the Inlining of the function type: detect
 		org.kermeta.compil.runtime.helper.language.ObjectUtil.set(this,
-				result_ft192, booleanValue);
+				result_ft216, booleanValue);
 
 	}
 
@@ -391,39 +364,39 @@ public class EReferenceImpl extends EStructuralFeatureImpl implements
 
 		//Beginning of the Inlining of the function type: detect
 
-		kermeta.language.structure.Property result_ft193 = null;
+		kermeta.language.structure.Property result_ft217 = null;
 
-		kermeta.language.structure.Property elem_ft193 = null;
+		kermeta.language.structure.Property elem_ft217 = null;
 
-		result_ft193 = null;
+		result_ft217 = null;
 
 		{
 
-			kermeta.standard.Iterator<kermeta.language.structure.Property> it_ft193 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
+			kermeta.standard.Iterator<kermeta.language.structure.Property> it_ft217 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
 					.<kermeta.language.structure.Property> convertAsOrderedSet(
 							cls.getOwnedAttribute()).iterator();
-			java.lang.Boolean idLoopCond_845 = false;
-			while (!idLoopCond_845) {
-				idLoopCond_845 = kermeta.standard.helper.BooleanWrapper.or(
-						it_ft193.isOff(),
+			java.lang.Boolean idLoopCond_926 = false;
+			while (!idLoopCond_926) {
+				idLoopCond_926 = kermeta.standard.helper.BooleanWrapper.or(
+						it_ft217.isOff(),
 						org.kermeta.compil.runtime.helper.language.ObjectUtil
-								.isNotEqual(result_ft193, null));
-				if (idLoopCond_845) {
+								.isNotEqual(result_ft217, null));
+				if (idLoopCond_926) {
 				} else {
 
-					elem_ft193 = it_ft193.next();
+					elem_ft217 = it_ft217.next();
 
-					java.lang.Boolean idIfCond_846 = false;
+					java.lang.Boolean idIfCond_927 = false;
 					//Beginning of the Inlining of the lambda expression: detector
-					kermeta.language.structure.Property p = elem_ft193;
+					kermeta.language.structure.Property p = elem_ft217;
 
-					idIfCond_846 = kermeta.standard.helper.StringWrapper
+					idIfCond_927 = kermeta.standard.helper.StringWrapper
 							.equals(p.getName(), "container");
 					//End of the Inlining of the lambda expression: detector
 
-					if (idIfCond_846) {
+					if (idIfCond_927) {
 
-						result_ft193 = elem_ft193;
+						result_ft217 = elem_ft217;
 					}
 
 				}
@@ -432,7 +405,7 @@ public class EReferenceImpl extends EStructuralFeatureImpl implements
 
 		//End of the Inlining of the function type: detect
 		org.kermeta.compil.runtime.helper.language.ObjectUtil.get(this,
-				result = (java.lang.Boolean) result_ft193);
+				result = (java.lang.Boolean) result_ft217);
 
 		return result;
 
@@ -478,14 +451,8 @@ public class EReferenceImpl extends EStructuralFeatureImpl implements
 		case EcorePackage.EREFERENCE__EOPPOSITE:
 			setEOpposite((EReference) newValue);
 			return;
-		case EcorePackage.EREFERENCE__EREFERENCE_TYPE:
-			setEReferenceType((EClass) newValue);
-			return;
 		case EcorePackage.EREFERENCE__RESOLVE_PROXIES:
 			setResolveProxies(((Boolean) newValue).booleanValue());
-			return;
-		case EcorePackage.EREFERENCE__CONTAINER:
-			setContainer(((Boolean) newValue).booleanValue());
 			return;
 		case EcorePackage.EREFERENCE__EKEYS:
 			getEKeys().clear();
@@ -509,14 +476,8 @@ public class EReferenceImpl extends EStructuralFeatureImpl implements
 		case EcorePackage.EREFERENCE__EOPPOSITE:
 			setEOpposite((EReference) null);
 			return;
-		case EcorePackage.EREFERENCE__EREFERENCE_TYPE:
-			setEReferenceType((EClass) null);
-			return;
 		case EcorePackage.EREFERENCE__RESOLVE_PROXIES:
 			setResolveProxies(RESOLVE_PROXIES_EDEFAULT);
-			return;
-		case EcorePackage.EREFERENCE__CONTAINER:
-			setContainer(CONTAINER_EDEFAULT);
 			return;
 		case EcorePackage.EREFERENCE__EKEYS:
 			getEKeys().clear();
