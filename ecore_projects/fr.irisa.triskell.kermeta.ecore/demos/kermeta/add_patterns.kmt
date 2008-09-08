@@ -5,7 +5,7 @@ package pattern_macros;
 
 
 require kermeta
-require "../../src/kermeta/ecore.kmt"
+
 require "../../src/kermeta/transformations/Patterns4Ecore.kmt"
 require "../../src/kermeta/helpers/EcoreDocHelper.kmt"
 

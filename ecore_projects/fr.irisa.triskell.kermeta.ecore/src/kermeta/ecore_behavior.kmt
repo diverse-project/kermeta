@@ -1,4 +1,4 @@
-/* $Id: ecore_behavior.kmt,v 1.9 2008-09-05 13:41:06 dvojtise Exp $
+/* $Id: ecore_behavior.kmt,v 1.10 2008-09-08 07:36:44 ffleurey Exp $
  * Creation date: May 2, 2006
  * License: E.P.L.
  * Copyright:
@@ -293,7 +293,8 @@ aspect class EReference
 		end
 		setter is do
 			if eType.getMetaClass == EClass then				
-				eType := value
+				//eType := value
+				setType(value)
 			else
 				var exception : kermeta::exceptions::Exception init kermeta::exceptions::Exception.new
 				exception.message := "The EClassifer pointed by this EReference must be of type EClass"
