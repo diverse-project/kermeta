@@ -1,4 +1,4 @@
-/* $Id: ecore_behavior.kmt,v 1.11 2008-09-08 08:12:36 ffleurey Exp $
+/* $Id: ecore_behavior.kmt,v 1.12 2008-09-08 11:24:38 cfaucher Exp $
  * Creation date: May 2, 2006
  * License: E.P.L.
  * Copyright:
@@ -312,6 +312,9 @@ aspect class EReference
 		cls ?= self.getMetaClass.typeDefinition
 		result ?= self.get(cls.ownedAttribute.detect{p | p.name == "container"})
 	end
+	
+	// This operation should be removed, because the attribute: "container" is declared as readonly (not changeable) in Ecore.ecore
+	@deprecated
 	operation setContainerValue(booleanValue  : EBoolean) is do
 		var cls : kermeta::language::structure::ClassDefinition
 		cls ?= self.getMetaClass.typeDefinition
