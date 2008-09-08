@@ -1,4 +1,4 @@
-/* $Id: KM2EcoreContext.kmt,v 1.36 2008-09-05 15:32:38 cfaucher Exp $
+/* $Id: KM2EcoreContext.kmt,v 1.37 2008-09-08 08:09:59 cfaucher Exp $
  * Creation date: February 14, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -203,10 +203,10 @@ class KM2EcoreContext {
 		self.VARIABLE_EXCEPTION_SWITCHER := "ex_switcher"
 		self.COLLECTION_UTIL_CLASS := "org.kermeta.compil.runtime.helper.basetypes.CollectionUtil"
 		self.NOT_EVALUATED_MESSAGE := "//FIXME This statement cannot be evaluated without an assignment: "
-		self.SELF_EXPRESSION_TO_REPLACE := "SELF_EXPRESSION_TO_REPLACE"
-		self.RETURN_EXPRESSION_TO_REPLACE := "RETURN_EXPRESSION_TO_REPLACE"
-		self.SEPARATOR_STATEMENT_FT := "SEPARATOR_STATEMENT_FT"
-		self.PREVIOUS_STATEMENT_FT := "PREVIOUS_STATEMENT_FT"
+		self.SELF_EXPRESSION_TO_REPLACE := "SELF_EXPRESSION_TO_REPLACE_STR"
+		self.RETURN_EXPRESSION_TO_REPLACE := "RETURN_EXPRESSION_TO_REPLACE_STR"
+		self.SEPARATOR_STATEMENT_FT := "SEPARATOR_STATEMENT_FT_STR"
+		self.PREVIOUS_STATEMENT_FT := "PREVIOUS_STATEMENT_FT_STR"
 		self.TYPE_SEPARATOR := "TYPE_SEPARATOR"
 		
 		//self.GENMODEL_ANNOTATION := "http://www.eclipse.org/emf/2002/GenModel"
