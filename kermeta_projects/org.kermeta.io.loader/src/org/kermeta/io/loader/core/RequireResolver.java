@@ -1,6 +1,6 @@
 
 
-/*$Id: RequireResolver.java,v 1.5 2008-09-05 14:12:26 dvojtise Exp $
+/*$Id: RequireResolver.java,v 1.6 2008-09-08 09:09:55 dvojtise Exp $
 * Project : org.kermeta.io.loader
 * File : 	RequireResolver.java
 * License : EPL
@@ -105,8 +105,16 @@ public class RequireResolver implements ILoadingAction {
 				if(! EMFRegistryHelper.isRegistered(uri)){
 					URIConverter converter = new URIConverterImpl();
 					if ( uri.startsWith("platform:/") ){
+						try{ // as we cannot use exist with previous eclipse version try to open and close the file, if an error occurs, then it probably don't exists ...
+							converter.createInputStream( emfURI ).close();
+						}
+						catch(Throwable t){
+							throw new IOException("The file " + uri + " does not exist.");
+						}
+						/* this code can work only with eclise 3.4
 						if(! converter.exists(emfURI, null) ) 
-							throw new IOException("The file " + uri + " does not exist.");						
+							throw new IOException("The file " + uri + " does not exist.");
+						*/						
 					} else 
 						if ( ! uri.equals("kermeta")  && ! uri.equals("java_rt_jar"))
 							throw new IOException("The file " + uri + " does not exist.");
