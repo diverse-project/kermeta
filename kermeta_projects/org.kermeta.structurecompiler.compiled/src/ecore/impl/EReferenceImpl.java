@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: EReferenceImpl.java,v 1.2 2008-09-08 19:28:31 cfaucher Exp $
+ * $Id: EReferenceImpl.java,v 1.3 2008-09-09 12:59:14 cfaucher Exp $
  */
 package ecore.impl;
 
@@ -404,8 +404,8 @@ public class EReferenceImpl extends EStructuralFeatureImpl implements
 		}
 
 		//End of the Inlining of the function type: detect
-		org.kermeta.compil.runtime.helper.language.ObjectUtil.get(this,
-				result = (java.lang.Boolean) result_ft217);
+		result = (java.lang.Boolean) org.kermeta.compil.runtime.helper.language.ObjectUtil.get((Object) this,
+				result_ft217);
 
 		return result;
 
