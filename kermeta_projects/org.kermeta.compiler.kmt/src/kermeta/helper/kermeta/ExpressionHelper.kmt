@@ -1,4 +1,4 @@
-/* $Id: ExpressionHelper.kmt,v 1.14 2008-09-10 13:19:52 cfaucher Exp $
+/* $Id: ExpressionHelper.kmt,v 1.15 2008-09-10 21:16:37 cfaucher Exp $
  * Creation date: Jul 25, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -414,6 +414,17 @@ aspect class CallFeature {
 			end
 		end
 	end
+	
+	operation getFunctionType() : FunctionType is do
+		result ?= self.containedType.detect{ t | t.isInstanceOf(FunctionType)}
+	end
+	
+	operation getFunctionTypeReturnType() : Type is do
+		result := void
+		if not self.getFunctionType().isVoid() then
+			result := self.getFunctionType().right
+		end
+	end
 
 	operation createStringFromFunctionType(context : KM2EcoreContext) : String is do
 		
@@ -505,7 +516,7 @@ aspect class CallFeature {
 		ft_str := ft_str + context.SEPARATOR_STATEMENT_FT + "//BIft:" + self.staticOperation.name + "\n"
 		
 		context.ftSuffixActivation := false
-		var type_ftReturnType : String init self.staticType.createBehaviorJava(context)
+		var type_ftReturnType : String init self.getFunctionTypeReturnType().createBehaviorJava(context)//staticType.createBehaviorJava(context)
 		context.ftSuffixActivation := true
 		
 		context.ftReturnType := type_ftReturnType
