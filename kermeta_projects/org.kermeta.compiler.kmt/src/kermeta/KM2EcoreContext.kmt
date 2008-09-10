@@ -1,4 +1,4 @@
-/* $Id: KM2EcoreContext.kmt,v 1.39 2008-09-10 13:19:54 cfaucher Exp $
+/* $Id: KM2EcoreContext.kmt,v 1.40 2008-09-10 15:39:20 cfaucher Exp $
  * Creation date: February 14, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -11,7 +11,6 @@ package km2ecore;
 
 
 require kermeta
-require "platform:/plugin/fr.irisa.triskell.kermeta/lib/ecore.kmt"
 require "common/KeywordList.kmt"
 require "helper/kermeta/KermetaHelper.kmt"
 require "http://www.kermeta.org/Traceability"
