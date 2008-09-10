@@ -1,4 +1,4 @@
-/* $Id: ecore_behavior.kmt,v 1.13 2008-09-08 12:07:13 cfaucher Exp $
+/* $Id: ecore_behavior.kmt,v 1.14 2008-09-10 14:44:32 cfaucher Exp $
  * Creation date: May 2, 2006
  * License: E.P.L.
  * Copyright:
@@ -310,7 +310,12 @@ aspect class EReference
 	operation getContainerValue() : EBoolean is do
 		var cls : kermeta::language::structure::ClassDefinition
 		cls ?= self.getMetaClass.typeDefinition
-		result ?= self.get(cls.ownedAttribute.detect{p | p.name == "container"})
+		
+		// FIXME CF 08-09-10, the following source code has been re-written for the compiler
+		// Initial code:
+		//result ?= self.get(cls.ownedAttribute.detect{p | p.name == "container"})
+		var attr : Attribute init cls.ownedAttribute.detect{p | p.name == "container"}
+		result ?= self.get(attr)
 	end
 
 }
