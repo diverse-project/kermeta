@@ -1,4 +1,4 @@
-/* $Id: CreateBehavior.kmt,v 1.66 2008-09-08 19:58:26 cfaucher Exp $
+/* $Id: CreateBehavior.kmt,v 1.67 2008-09-10 13:19:54 cfaucher Exp $
  * Creation date: January 21, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -50,11 +50,15 @@ package structure {
 				// The current property could have a setter
 				if not self.isReadOnly then
 					// Compiling the setter in an EAnnotation
+					//context.staticOperationMode := true
 					javaCode := self.getterBody.createBehaviorJava(context)
+					//context.staticOperationMode := false
 					EAnnotationHelper.new.addAnnotationPropSetter(self.ecoreModelElement, javaCode.toString)
 				end
 				// Compiling the getter in an EAnnotation
+				//context.staticOperationMode := true
 				javaCode := self.getterBody.createBehaviorJava(context)
+				//context.staticOperationMode := false
 				EAnnotationHelper.new.addAnnotationPropGetter(self.ecoreModelElement, javaCode.toString)
 			end
 		end
@@ -736,6 +740,29 @@ package behavior {
 	}
 	
 	aspect class CallVariable {
+	
+		reference lambdaExpression : LambdaExpression [0..1]
+		
+		operation printSuffix(context : KM2EcoreContext) : String is do
+			result := ""
+			
+			//if context.ftSuffixActivation then
+				
+				if /*not self.getContainerAsType(LambdaExpression).isVoid() and*/ self.isLambdaExpressionParameter() then
+				
+					result := "_lbdExp" + self.getCorrespondingLambdaExpressionParameter().container.asType(LambdaExpression).cuid//self.getContainerAsType(LambdaExpression).asType(LambdaExpression).cuid
+				else
+					if self.isDeclaredInAFunctionType() then
+						result := "_ft" + self.getContainerAsType(Operation).asType(Operation).cuid.toString()
+					else
+						if self.isDeclaredInLambdaExpression() then
+							result := context.printFtSuffix()
+						end
+					end
+				end
+			//end
+		end
+		
 		method createBehaviorJava(context : KM2EcoreContext) : String from CallExpression is do
 			super(context)
 			result := ""
@@ -745,6 +772,8 @@ package behavior {
 				context.ftSuffixActivation := false
 				
 				var theLambdaExp : LambdaExpression init self.getContainerAsType(Operation).asType(Operation).lambdaExpression
+				
+				self.lambdaExpression := theLambdaExp
 						
 				var str_toInclude : String init ""
 				
@@ -760,18 +789,21 @@ package behavior {
 				theLambdaExp.parameters.each{ p |
 					//str_toInclude := str_toInclude + self.parameters.elementAt(inc_param).staticType.createBehaviorJava(context) + " " + p.name
 					
+					context.ftSuffixActivation := false
+					
 					//Declare and initialize the function type parameters
 					var type_param_ : String init context.ftProductTypeStack.peek().getTypeByIndex(inc_param).createBehaviorJava(context)
 					
-					str_toInclude := str_toInclude + type_param_ + " " + p.name
+					str_toInclude := str_toInclude + type_param_ + " " + p.name + "_lbdExp" + self.getContainerAsType(Operation).asType(Operation).cuid
 					
 					context.ftSuffixActivation := true
+					
 					// + "(" + type_param_ + ") "
 					//stdio.writeln("--: " + "inc_param: " + inc_param.toString() + " - " + self.getContainerAsType(Operation).asType(Operation).qualifiedName)
 					//stdio.writeln("self.parameters: " + theLambdaExp.toString + " - " + self.name.toString + " - " + self.parameters.toString)
 					
-					str_toInclude := str_toInclude + " = " + self.parameters.elementAt(inc_param).createBehaviorJava(context) + ";\n"
-					context.ftSuffixActivation := false
+					str_toInclude := str_toInclude /*+ context.printLbdExpSuffix()*/ + " = " + self.parameters.elementAt(inc_param).createBehaviorJava(context) + ";\n"
+					//context.ftSuffixActivation := false
 					
 					inc_param := inc_param + 1
 				}
@@ -791,8 +823,10 @@ package behavior {
 					context.resultLastStatementStack.push("result_lambda = " + context.TYPE_SEPARATOR + type_label)
 				end*/
 				
-				result := result + "//Beginning of the Inlining of the lambda expression: " + self.name + "\n"
+				result := result + "//BIle:" + self.name + "\n"
+				context.ftSuffixActivation := false
 				result := result + str_toInclude + theLambdaExp.body.createBehaviorJava(context)
+				context.ftSuffixActivation := true
 				
 				//added 08-08-09
 				/*if type_label!="" then
@@ -800,58 +834,57 @@ package behavior {
 					context.resultLastStatementStack.pop()
 				end*/
 				
-				result := result + "//End of the Inlining of the lambda expression: " + self.name + "\n"
+				result := result + "//EIle:" + self.name + "\n"
 				
-				context.ftSuffixActivation := true
+				
 				
 			else
-				//result := result + "--titi--"
 
+				// Special case for the stdio variable
 				if self.name == "stdio" then
 					result := result + "org.kermeta.compil.runtime.helper.io.StdIOUtil"
 				else
 					
 					if (not self.isParameter()) and (not self.isParameterForOwningOperation()) then
-						
-						result := result + IdentifierHelper.new.getMangledIdentifier(self.name, context) + context.printFtSuffix()
+						result := result + IdentifierHelper.new.getMangledIdentifier(self.name, context) + self.printSuffix(context)
 					else
-					if self.isParameterSingle() or self.isParameterForOwningOperationSingle() or self.isParameterManyAndForOwningOperation() then
-						result := result + IdentifierHelper.new.getMangledIdentifier(self.name, context) + context.printFtSuffix()
-					else
-					
-						var c_param : Parameter
-						if self.isParameterForOwningOperation() then
-							c_param := self.retrieveCorrespondingParameter()
+						if self.isParameterSingle() or self.isParameterForOwningOperationSingle() or self.isParameterManyAndForOwningOperation() then
+							result := result + IdentifierHelper.new.getMangledIdentifier(self.name, context) + self.printSuffix(context)
 						else
-							c_param := self.getCallFeatureCorrespondingParameter()
-						end
-		
-						var type_binding : String init self.staticType.asType(Class).typeParamBinding.first().type.createBehaviorJava(context)
+						
+							var c_param : Parameter
+							if self.isParameterForOwningOperation() then
+								c_param := self.retrieveCorrespondingParameter()
+							else
+								c_param := self.getCallFeatureCorrespondingParameter()
+							end
+			
+							var type_binding : String init self.staticType.asType(Class).typeParamBinding.first().type.createBehaviorJava(context)
+								
+							if self.isParameterMany() then
+								result := context.COLLECTION_UTIL_CLASS + ".<" + type_binding + ">convertAsEList(" + result
+							else
+												
+								if (not c_param.isUnique) and (not c_param.isOrdered) then
+									result := context.COLLECTION_UTIL_CLASS + ".<" + type_binding + ">convertAsBag(" + result
+								end
+												
+								if (c_param.isUnique) and (not c_param.isOrdered) then
+									result := context.COLLECTION_UTIL_CLASS + ".<" + type_binding + ">convertAsSet(" + result
+								end
+												
+								if (c_param.isUnique) and (c_param.isOrdered) then
+									result := context.COLLECTION_UTIL_CLASS + ".<" + type_binding + ">convertAsOrderedSet(" + result
+								end
+												
+								if (not c_param.isUnique) and (c_param.isOrdered) then
+									result := context.COLLECTION_UTIL_CLASS + ".<" + type_binding + ">convertAsSequence(" + result
+								end
 							
-						if self.isParameterMany() then
-							result := context.COLLECTION_UTIL_CLASS + ".<" + type_binding + ">convertAsEList(" + result
-						else
-											
-							if (not c_param.isUnique) and (not c_param.isOrdered) then
-								result := context.COLLECTION_UTIL_CLASS + ".<" + type_binding + ">convertAsBag(" + result
 							end
 											
-							if (c_param.isUnique) and (not c_param.isOrdered) then
-								result := context.COLLECTION_UTIL_CLASS + ".<" + type_binding + ">convertAsSet(" + result
-							end
-											
-							if (c_param.isUnique) and (c_param.isOrdered) then
-								result := context.COLLECTION_UTIL_CLASS + ".<" + type_binding + ">convertAsOrderedSet(" + result
-							end
-											
-							if (not c_param.isUnique) and (c_param.isOrdered) then
-								result := context.COLLECTION_UTIL_CLASS + ".<" + type_binding + ">convertAsSequence(" + result
-							end
-						
+							result := result + IdentifierHelper.new.getMangledIdentifier(self.name, context) + self.printSuffix(context) + ")"
 						end
-										
-						result := result + IdentifierHelper.new.getMangledIdentifier(self.name, context) + context.printFtSuffix() + ")"
-					end
 					end
 				end
 				
@@ -866,7 +899,11 @@ package behavior {
 			super(context)
 			//Try to insert line number
 			//result := "begin " + self.lineNumber.toString() + " " + self.fileName + "\n" + "result" + "\nend " + self.lineNumber.toString() + " " + self.fileName + "\n"
-			result := "result" + context.printFtSuffix()
+			result := "result"
+			
+			//if not self.getContainerAsType(LambdaExpression).isVoid() then
+				result := result + context.printFtSuffix()
+			//end
 			
 			result := result + self.endOfExpressionFixer()
 		end
@@ -1029,6 +1066,9 @@ package behavior {
 	}
 	
 	aspect class LambdaExpression {
+	
+		attribute cuid : String [0..1]
+	
 		method createBehaviorJava(context : KM2EcoreContext) : String from Expression is do
 			super(context)
 			result := ""
@@ -1103,6 +1143,13 @@ package behavior {
 			if context.ftSuffixActivation then
 				result := context.ftContextualSelf
 			end
+			
+			/*if not self.getContainerAsType(Operation).isVoid() then
+				if self.getContainerAsType(Operation).asType(Operation).isFunctionType()
+					and self.getContainerAsType(LambdaExpression).isVoid() then
+					result := context.ftContextualSelf
+				end
+			end*/
 
 			result := result + self.endOfExpressionFixer()
 		end

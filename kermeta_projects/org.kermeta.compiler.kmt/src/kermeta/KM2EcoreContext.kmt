@@ -1,4 +1,4 @@
-/* $Id: KM2EcoreContext.kmt,v 1.38 2008-09-08 19:58:26 cfaucher Exp $
+/* $Id: KM2EcoreContext.kmt,v 1.39 2008-09-10 13:19:54 cfaucher Exp $
  * Creation date: February 14, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -317,9 +317,9 @@ class KM2EcoreContext {
 		end
 	end
 	
-	operation printLExpSuffix() : String is do
+	operation printLbdExpSuffix() : String is do
 		if self.ftSuffixActivation and self.ftSuffix.size()>0 then
-			result := "_lexp" + self.ftSuffix.peek()
+			result := "_lbdExp" + self.ftSuffix.peek()
 		else
 			result := ""
 		end
