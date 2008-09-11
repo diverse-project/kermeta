@@ -1,4 +1,4 @@
-/* $Id: StructureCompiler.kmt,v 1.60 2008-09-10 13:19:54 cfaucher Exp $
+/* $Id: StructureCompiler.kmt,v 1.61 2008-09-11 12:11:39 cfaucher Exp $
  * Creation date: January 21, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -122,7 +122,13 @@ class Main {
 		var traceInput : String init ""
 */
 
-		main_mode3(modelInput, traceInput, output, CompilingMode.behaviorJava)
+/*
+		var modelInput : String init "platform:/resource/org.kermeta.compiler.kmt/models/afile.km"
+		var output : String init "platform:/resource/org.kermeta.compiler.kmt/models/afile.ecore"
+		var traceInput : String init ""
+*/		
+
+		main_mode(modelInput, traceInput, output, CompilingMode.behaviorJava)
 	end
 	
     operation main(modelInput : String, traceInput : String, output : String) : Void is do
@@ -253,14 +259,14 @@ class Main {
     	operations.add("containsKey")
     	operations.add("checkInvariants")
     	operations.add("count")
-    	operations.add("flatten")
-    	operations.add("addAllTestCasesFrom")
-    	operations.add("count")
+    	operations.add("flatten")*/
+    	//operations.add("addAllTestCasesFrom")
+    	/*operations.add("count")
     	operations.add("createResource")
     	operations.add("saveAndValidateWithEMF")*/
-    	operations.add("applyPass1")
+    	//operations.add("applyPass1")
     	//operations.add("applyPass2BehaviorJava")
-    	//operations.add("matchStep2")
+    	operations.add("matchStep2")
     	//operations.add("replaceExtension")
     	//operations.add("getFirstTextReference")
     	//operations.add("saveAndValidateWithEMF")
@@ -268,12 +274,16 @@ class Main {
     	//operations.add("getContainerValue")
     	//operations.add("getContainerClass")
     	//operations.add("getAllSubPackages")
-    	operations.add("isRunnable")
+    	////////////operations.add("isRunnable")
     	//operations.add("hasAValueTypedParameter")
     	//operations.add("getVariableDeclInBlock")
     	//operations.add("removeOne")
     	//operations.add("findDanglingModelElements")
-    	operations.add("main_compilingOnlyOperations")
+    	////////////operations.add("main_compilingOnlyOperations")
+    	
+    	//operations.add("testSeqObject")
+    	operations.add("testSeqStack")
+    	//operations.add("testSeqHashtable")
     	
     	main_compilingOnlyOperations(modelInput, traceInput, output, mode, operations)
     end
@@ -293,7 +303,7 @@ class Main {
 			p.asType(Package).eachOwnedElement{ cd |
 				if cd.isInstanceOf(ClassDefinition) then
 				
-					if cd.asType(ClassDefinition).qualifiedName == "kermeta::language::structure::ClassDefinition" then
+					//if cd.asType(ClassDefinition).qualifiedName == "kermeta::language::structure::ClassDefinition" then
 					//if cd.asType(ClassDefinition).qualifiedName == "kermeta::language::behavior::Block" then
 					
 						cd.asType(ClassDefinition).eachOwnedElement{ op |
@@ -311,7 +321,7 @@ class Main {
 							
 							end
 						}
-					end
+					//end
 				
 				end
 			}

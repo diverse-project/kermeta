@@ -1,4 +1,4 @@
-/* $Id: ContainmentTraversable.kmt,v 1.5 2008-09-05 16:13:34 cfaucher Exp $
+/* $Id: ContainmentTraversable.kmt,v 1.6 2008-09-11 12:11:38 cfaucher Exp $
  * Creation date: January 21, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -54,14 +54,17 @@ package structure {
 	aspect class Package {
 		method eachOwnedElement(func : <Object -> Object>) : Void is do
 	        // Remove the following each and replace by: super(func)
-			self.ownedTags.each{ o |
+	        
+	        var pack : Package init self
+	        
+			pack.ownedTags.each{ o |
 				func(o)
 			}
 	        
-	        self.ownedTypeDefinition.each{ o |
+	        pack.ownedTypeDefinition.each{ o |
 				func(o)
 			}
-			self.nestedPackage.each{ p |
+			pack.nestedPackage.each{ p |
 				func(p)
 			} 
 		end
@@ -83,23 +86,26 @@ package structure {
 	aspect class ClassDefinition {
 		method eachOwnedElement(func : <Object -> Object>) : Void is do
 	        // Remove the following each and replace by: super(func)
-			self.ownedTags.each{ o |
+			
+			var cd : ClassDefinition init self
+			
+			cd.ownedTags.each{ o |
 				func(o)
 			}
 	        
-	        self.ownedAttribute.each{ o |
+	        cd.ownedAttribute.each{ o |
 				func(o)
 			}
 			
-			self.ownedOperation.each{ o |
+			cd.ownedOperation.each{ o |
 				func(o)
 			}
 			
-			self.~inv.each{ i |
+			cd.~inv.each{ i |
 				func(i)
 			}
 			
-			self.typeParameter.each{ t | 
+			cd.typeParameter.each{ t | 
 				func(t)
 			}
 		end	

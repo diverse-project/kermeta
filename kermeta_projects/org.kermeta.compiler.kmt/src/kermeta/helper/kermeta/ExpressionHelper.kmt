@@ -1,4 +1,4 @@
-/* $Id: ExpressionHelper.kmt,v 1.15 2008-09-10 21:16:37 cfaucher Exp $
+/* $Id: ExpressionHelper.kmt,v 1.16 2008-09-11 12:11:38 cfaucher Exp $
  * Creation date: Jul 25, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -516,7 +516,7 @@ aspect class CallFeature {
 		ft_str := ft_str + context.SEPARATOR_STATEMENT_FT + "//BIft:" + self.staticOperation.name + "\n"
 		
 		context.ftSuffixActivation := false
-		var type_ftReturnType : String init self.getFunctionTypeReturnType().createBehaviorJava(context)//staticType.createBehaviorJava(context)
+		var type_ftReturnType : String init self.staticType.createBehaviorJava(context) //self.getFunctionTypeReturnType().createBehaviorJava(context)
 		context.ftSuffixActivation := true
 		
 		context.ftReturnType := type_ftReturnType
@@ -530,9 +530,6 @@ aspect class CallFeature {
 		end
 		
 		if (callElement == "") and (not Operation.new().isVoidType(self.staticType.getTypeName())) then
-			//ft_str := ft_str + self.staticType.createBehaviorJava(context) + " res_res = result" + context.printFtSuffix() + ";\n"
-			//context.ftContextualSelf := "result" + context.printFtSuffix()
-			
 			context.resultOfLastFt := "result" + context.printFtSuffix()
 		end
 		
