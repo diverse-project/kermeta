@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: Traceability.java,v 1.1 2008-09-04 15:40:22 cfaucher Exp $
+ * $Id: Traceability.java,v 1.2 2008-09-11 12:34:36 cfaucher Exp $
  */
 package kermeta.language.structure;
 
@@ -50,14 +50,5 @@ public interface Traceability<X> extends kermeta.language.structure.Object {
 	 * @generated
 	 */
 	void setEcoreModelElement(X value);
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @model kind="operation"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='\nX result = null;\n\n\tresult = this.getEcoreModelElement();\n\nreturn result;\n'"
-	 * @generated
-	 */
-	X getEcoreModelElementTrace();
 
 } // Traceability

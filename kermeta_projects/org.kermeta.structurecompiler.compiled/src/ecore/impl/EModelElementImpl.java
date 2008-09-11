@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: EModelElementImpl.java,v 1.2 2008-09-08 19:28:31 cfaucher Exp $
+ * $Id: EModelElementImpl.java,v 1.3 2008-09-11 12:34:38 cfaucher Exp $
  */
 package ecore.impl;
 
@@ -87,52 +87,7 @@ public abstract class EModelElementImpl extends EObjectImpl implements
 	 * @generated
 	 */
 	public EAnnotation getEAnnotation(String source) {
-
 		ecore.EAnnotation result = null;
-
-		result = null;
-		//Beginning of the Inlining of the function type: detect
-
-		ecore.EAnnotation result_ft214 = null;
-
-		ecore.EAnnotation elem_ft214 = null;
-
-		result_ft214 = null;
-
-		{
-
-			kermeta.standard.Iterator<ecore.EAnnotation> it_ft214 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
-					.<ecore.EAnnotation> convertAsOrderedSet(
-							this.getEAnnotations()).iterator();
-			java.lang.Boolean idLoopCond_918 = false;
-			while (!idLoopCond_918) {
-				idLoopCond_918 = kermeta.standard.helper.BooleanWrapper.or(
-						it_ft214.isOff(),
-						org.kermeta.compil.runtime.helper.language.ObjectUtil
-								.isNotEqual(result_ft214, null));
-				if (idLoopCond_918) {
-				} else {
-
-					elem_ft214 = it_ft214.next();
-
-					java.lang.Boolean idIfCond_919 = false;
-					//Beginning of the Inlining of the lambda expression: detector
-					ecore.EAnnotation a = elem_ft214;
-
-					idIfCond_919 = kermeta.standard.helper.StringWrapper
-							.equals(a.getSource(), source);
-					//End of the Inlining of the lambda expression: detector
-
-					if (idIfCond_919) {
-
-						result_ft214 = elem_ft214;
-					}
-
-				}
-			}
-		}
-
-		//End of the Inlining of the function type: detect
 
 		return result;
 

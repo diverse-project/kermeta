@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: TagImpl.java,v 1.1 2008-09-04 15:40:29 cfaucher Exp $
+ * $Id: TagImpl.java,v 1.2 2008-09-11 12:34:48 cfaucher Exp $
  */
 package kermeta.language.structure.impl;
 
@@ -184,13 +184,13 @@ public class TagImpl extends TraceabilityImpl<EAnnotation> implements Tag {
 		kermeta.language.structure.Object c = org.kermeta.compil.runtime.helper.language.ObjectUtil
 				.container(this);
 
-		java.lang.Boolean idIfCond_215 = false;
-		idIfCond_215 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+		java.lang.Boolean idIfCond_235 = false;
+		idIfCond_235 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 				.isInstanceOf(c, org.kermeta.compil.runtime.ExecutionContext
 						.getInstance().getMetaClass(
 								"kermeta.language.structure.ModelingUnit"));
 
-		if (idIfCond_215) {
+		if (idIfCond_235) {
 
 			org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
 					.<ecore.EAnnotation> convertAsOrderedSet(
@@ -207,12 +207,12 @@ public class TagImpl extends TraceabilityImpl<EAnnotation> implements Tag {
 			kermeta.language.structure.Property p = c
 					.getPropertyValue("ecoreModelElement");
 
-			java.lang.Boolean idIfCond_216 = false;
-			idIfCond_216 = kermeta.standard.helper.BooleanWrapper
+			java.lang.Boolean idIfCond_236 = false;
+			idIfCond_236 = kermeta.standard.helper.BooleanWrapper
 					.not(org.kermeta.compil.runtime.helper.language.ObjectUtil
 							.isVoid(p));
 
-			if (idIfCond_216) {
+			if (idIfCond_236) {
 
 				ecore.EModelElement ecoreModelElement_retrieved = ((ecore.EModelElement) org.kermeta.compil.runtime.helper.language.ObjectUtil
 						.asType(
@@ -247,11 +247,11 @@ public class TagImpl extends TraceabilityImpl<EAnnotation> implements Tag {
 				.newObject("km2ecore.helper.ecore.EAnnotationHelper"))
 				.getKermetaEAnnotation(this);
 
-		java.lang.Boolean idIfCond_217 = false;
-		idIfCond_217 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+		java.lang.Boolean idIfCond_237 = false;
+		idIfCond_237 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 				.isVoid(this.getName());
 
-		if (idIfCond_217) {
+		if (idIfCond_237) {
 
 			((km2ecore.helper.ecore.EAnnotationHelper) org.kermeta.compil.runtime.helper.language.ClassUtil
 					.newObject("km2ecore.helper.ecore.EAnnotationHelper"))

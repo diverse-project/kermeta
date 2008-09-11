@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: MultiplicityElementImpl.java,v 1.1 2008-09-04 15:40:29 cfaucher Exp $
+ * $Id: MultiplicityElementImpl.java,v 1.2 2008-09-11 12:34:47 cfaucher Exp $
  */
 package kermeta.language.structure.impl;
 
@@ -250,11 +250,11 @@ public class MultiplicityElementImpl extends TypedElementImpl implements
 
 		result = this.getName();
 
-		java.lang.Boolean idIfCond_266 = false;
-		idIfCond_266 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+		java.lang.Boolean idIfCond_48 = false;
+		idIfCond_48 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 				.isNotEqual(this.getEMFRenameAs(), "");
 
-		if (idIfCond_266) {
+		if (idIfCond_48) {
 
 			result = this.getEMFRenameAs();
 		}

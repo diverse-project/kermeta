@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: EnumerationLiteralImpl.java,v 1.1 2008-09-04 15:40:29 cfaucher Exp $
+ * $Id: EnumerationLiteralImpl.java,v 1.2 2008-09-11 12:34:47 cfaucher Exp $
  */
 package kermeta.language.structure.impl;
 
@@ -234,21 +234,6 @@ public class EnumerationLiteralImpl extends NamedElementImpl implements
 						.size());
 
 		result = ecoreEnumerationLiteral;
-
-		return result;
-
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EEnumLiteral getEcoreModelElementTrace() {
-
-		X result = null;
-
-		result = this.getEcoreModelElement();
 
 		return result;
 

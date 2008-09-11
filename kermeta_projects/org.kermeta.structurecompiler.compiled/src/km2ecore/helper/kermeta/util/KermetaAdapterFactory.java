@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: KermetaAdapterFactory.java,v 1.1 2008-09-04 15:40:42 cfaucher Exp $
+ * $Id: KermetaAdapterFactory.java,v 1.2 2008-09-11 12:35:02 cfaucher Exp $
  */
 package km2ecore.helper.kermeta.util;
 
@@ -71,6 +71,11 @@ public class KermetaAdapterFactory extends AdapterFactoryImpl {
 	 */
 	protected KermetaSwitch<Adapter> modelSwitch = new KermetaSwitch<Adapter>() {
 		@Override
+		public Adapter caseCompilerHelperJava(CompilerHelperJava object) {
+			return createCompilerHelperJavaAdapter();
+		}
+
+		@Override
 		public Adapter caseGenericTypeDefinitionHelper(
 				GenericTypeDefinitionHelper object) {
 			return createGenericTypeDefinitionHelperAdapter();
@@ -79,11 +84,6 @@ public class KermetaAdapterFactory extends AdapterFactoryImpl {
 		@Override
 		public Adapter caseConstraintHelper(ConstraintHelper object) {
 			return createConstraintHelperAdapter();
-		}
-
-		@Override
-		public Adapter caseCompilerHelperJava(CompilerHelperJava object) {
-			return createCompilerHelperJavaAdapter();
 		}
 
 		@Override
@@ -111,6 +111,20 @@ public class KermetaAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
+	 * Creates a new adapter for an object of class '{@link km2ecore.helper.kermeta.CompilerHelperJava <em>Compiler Helper Java</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see km2ecore.helper.kermeta.CompilerHelperJava
+	 * @generated
+	 */
+	public Adapter createCompilerHelperJavaAdapter() {
+		return null;
+	}
+
+	/**
 	 * Creates a new adapter for an object of class '{@link km2ecore.helper.kermeta.GenericTypeDefinitionHelper <em>Generic Type Definition Helper</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -135,20 +149,6 @@ public class KermetaAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createConstraintHelperAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link km2ecore.helper.kermeta.CompilerHelperJava <em>Compiler Helper Java</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see km2ecore.helper.kermeta.CompilerHelperJava
-	 * @generated
-	 */
-	public Adapter createCompilerHelperJavaAdapter() {
 		return null;
 	}
 

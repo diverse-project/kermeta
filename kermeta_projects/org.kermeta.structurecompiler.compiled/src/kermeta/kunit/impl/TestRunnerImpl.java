@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: TestRunnerImpl.java,v 1.1 2008-09-04 15:40:24 cfaucher Exp $
+ * $Id: TestRunnerImpl.java,v 1.2 2008-09-11 12:34:39 cfaucher Exp $
  */
 package kermeta.kunit.impl;
 
@@ -172,123 +172,123 @@ public class TestRunnerImpl extends ObjectImpl implements TestRunner {
 		org.kermeta.compil.runtime.helper.io.StdIOUtil
 				.writeln("\n---------------------------------------------  TEST RESULTS-----------------------------------------------\n");
 
-		java.lang.Boolean idIfCond_744 = false;
-		idIfCond_744 = kermeta.standard.helper.BooleanWrapper
+		java.lang.Boolean idIfCond_838 = false;
+		idIfCond_838 = kermeta.standard.helper.BooleanWrapper
 				.not(org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
 						.<kermeta.kunit.Failure> convertAsOrderedSet(
 								this.getLog().getFailures()).empty());
 
-		if (idIfCond_744) {
+		if (idIfCond_838) {
 
 			org.kermeta.compil.runtime.helper.io.StdIOUtil
 					.writeln("\nFailures: ");
 
-			//Beginning of the Inlining of the function type: each
+			//BIft:each
 
 			{
 
-				kermeta.standard.Iterator<kermeta.kunit.Failure> it_ft160 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
+				kermeta.standard.Iterator<kermeta.kunit.Failure> it_ft166 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
 						.<kermeta.kunit.Failure> convertAsOrderedSet(
 								this.getLog().getFailures()).iterator();
-				java.lang.Boolean idLoopCond_745 = false;
-				while (!idLoopCond_745) {
-					idLoopCond_745 = it_ft160.isOff();
-					if (idLoopCond_745) {
+				java.lang.Boolean idLoopCond_839 = false;
+				while (!idLoopCond_839) {
+					idLoopCond_839 = it_ft166.isOff();
+					if (idLoopCond_839) {
 					} else {
 
-						//Beginning of the Inlining of the lambda expression: func
-						kermeta.kunit.Failure f = it_ft160.next();
+						//BIle:func
+						kermeta.kunit.Failure f_lbdExp166 = it_ft166.next();
 
 						org.kermeta.compil.runtime.helper.io.StdIOUtil
 								.writeln(kermeta.standard.helper.StringWrapper
-										.plus("\n   ", f.toString()));
-						//End of the Inlining of the lambda expression: func
+										.plus("\n   ", f_lbdExp166.toString()));
+						//EIle:func
 
 					}
 				}
 			}
 
-			//End of the Inlining of the function type: each
+			//EIft:each
 
 		}
 
-		java.lang.Boolean idIfCond_746 = false;
-		idIfCond_746 = kermeta.standard.helper.BooleanWrapper
+		java.lang.Boolean idIfCond_840 = false;
+		idIfCond_840 = kermeta.standard.helper.BooleanWrapper
 				.not(org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
 						.<kermeta.kunit.Error> convertAsOrderedSet(
 								this.getLog().getErrors()).empty());
 
-		if (idIfCond_746) {
+		if (idIfCond_840) {
 
 			org.kermeta.compil.runtime.helper.io.StdIOUtil
 					.writeln("\nErrors: ");
 
-			//Beginning of the Inlining of the function type: each
+			//BIft:each
 
 			{
 
-				kermeta.standard.Iterator<kermeta.kunit.Error> it_ft161 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
+				kermeta.standard.Iterator<kermeta.kunit.Error> it_ft167 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
 						.<kermeta.kunit.Error> convertAsOrderedSet(
 								this.getLog().getErrors()).iterator();
-				java.lang.Boolean idLoopCond_747 = false;
-				while (!idLoopCond_747) {
-					idLoopCond_747 = it_ft161.isOff();
-					if (idLoopCond_747) {
+				java.lang.Boolean idLoopCond_841 = false;
+				while (!idLoopCond_841) {
+					idLoopCond_841 = it_ft167.isOff();
+					if (idLoopCond_841) {
 					} else {
 
-						//Beginning of the Inlining of the lambda expression: func
-						kermeta.kunit.Error e = it_ft161.next();
+						//BIle:func
+						kermeta.kunit.Error e_lbdExp167 = it_ft167.next();
 
 						org.kermeta.compil.runtime.helper.io.StdIOUtil
 								.writeln(kermeta.standard.helper.StringWrapper
-										.plus("\n   ", e.toString()));
-						//End of the Inlining of the lambda expression: func
+										.plus("\n   ", e_lbdExp167.toString()));
+						//EIle:func
 
 					}
 				}
 			}
 
-			//End of the Inlining of the function type: each
+			//EIft:each
 
 		}
 
-		java.lang.Boolean idIfCond_748 = false;
-		idIfCond_748 = kermeta.standard.helper.BooleanWrapper
+		java.lang.Boolean idIfCond_842 = false;
+		idIfCond_842 = kermeta.standard.helper.BooleanWrapper
 				.not(org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
 						.<kermeta.kunit.Error> convertAsOrderedSet(
 								this.getLog().getHarnessErrors()).empty());
 
-		if (idIfCond_748) {
+		if (idIfCond_842) {
 
 			org.kermeta.compil.runtime.helper.io.StdIOUtil
 					.writeln("\nErrors from setUp or tearDown : ");
 
-			//Beginning of the Inlining of the function type: each
+			//BIft:each
 
 			{
 
-				kermeta.standard.Iterator<kermeta.kunit.Error> it_ft162 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
+				kermeta.standard.Iterator<kermeta.kunit.Error> it_ft168 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
 						.<kermeta.kunit.Error> convertAsOrderedSet(
 								this.getLog().getHarnessErrors()).iterator();
-				java.lang.Boolean idLoopCond_749 = false;
-				while (!idLoopCond_749) {
-					idLoopCond_749 = it_ft162.isOff();
-					if (idLoopCond_749) {
+				java.lang.Boolean idLoopCond_843 = false;
+				while (!idLoopCond_843) {
+					idLoopCond_843 = it_ft168.isOff();
+					if (idLoopCond_843) {
 					} else {
 
-						//Beginning of the Inlining of the lambda expression: func
-						kermeta.kunit.Error e = it_ft162.next();
+						//BIle:func
+						kermeta.kunit.Error e_lbdExp168 = it_ft168.next();
 
 						org.kermeta.compil.runtime.helper.io.StdIOUtil
 								.writeln(kermeta.standard.helper.StringWrapper
-										.plus("\n   ", e.toString()));
-						//End of the Inlining of the lambda expression: func
+										.plus("\n   ", e_lbdExp168.toString()));
+						//EIle:func
 
 					}
 				}
 			}
 
-			//End of the Inlining of the function type: each
+			//EIft:each
 
 		}
 

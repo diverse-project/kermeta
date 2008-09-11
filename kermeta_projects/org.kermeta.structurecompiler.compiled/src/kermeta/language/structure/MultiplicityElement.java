@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: MultiplicityElement.java,v 1.1 2008-09-04 15:40:23 cfaucher Exp $
+ * $Id: MultiplicityElement.java,v 1.2 2008-09-11 12:34:37 cfaucher Exp $
  */
 package kermeta.language.structure;
 
@@ -150,7 +150,7 @@ public interface MultiplicityElement extends TypedElement {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @model kind="operation" dataType="kermeta.standard.JavaString"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='\njava.lang.String result = null;\n\n\tresult = this.getName();\n\n\tjava.lang.Boolean idIfCond_266 = false;\n\tidIfCond_266 = org.kermeta.compil.runtime.helper.language.ObjectUtil.isNotEqual(this.getEMFRenameAs(), \"\");\n\n\tif( idIfCond_266 ) {\n\n\tresult = this.getEMFRenameAs();\n}\n\n\nreturn result;\n'"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='\njava.lang.String result = null;\n\n\tresult = this.getName();\n\n\tjava.lang.Boolean idIfCond_48 = false;\n\tidIfCond_48 = org.kermeta.compil.runtime.helper.language.ObjectUtil.isNotEqual(this.getEMFRenameAs(), \"\");\n\n\tif( idIfCond_48 ) {\n\n\tresult = this.getEMFRenameAs();\n}\n\n\nreturn result;\n'"
 	 * @generated
 	 */
 	String getFinalName();

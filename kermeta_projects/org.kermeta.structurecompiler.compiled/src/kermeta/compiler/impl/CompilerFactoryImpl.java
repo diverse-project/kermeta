@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: CompilerFactoryImpl.java,v 1.1 2008-09-04 15:40:36 cfaucher Exp $
+ * $Id: CompilerFactoryImpl.java,v 1.2 2008-09-11 12:34:55 cfaucher Exp $
  */
 package kermeta.compiler.impl;
 

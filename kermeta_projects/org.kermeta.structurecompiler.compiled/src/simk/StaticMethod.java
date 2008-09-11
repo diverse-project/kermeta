@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: StaticMethod.java,v 1.1 2008-09-04 15:40:41 cfaucher Exp $
+ * $Id: StaticMethod.java,v 1.2 2008-09-11 12:35:01 cfaucher Exp $
  */
 package simk;
 
@@ -25,9 +25,9 @@ import org.eclipse.emf.common.util.EList;
  *   <li>{@link simk.StaticMethod#getParentAttribute <em>Parent Attribute</em>}</li>
  *   <li>{@link simk.StaticMethod#getSMParameters <em>SM Parameters</em>}</li>
  *   <li>{@link simk.StaticMethod#getSMReturn <em>SM Return</em>}</li>
- *   <li>{@link simk.StaticMethod#getUsages <em>Usages</em>}</li>
- *   <li>{@link simk.StaticMethod#getParentMethod <em>Parent Method</em>}</li>
  *   <li>{@link simk.StaticMethod#getSMContext <em>SM Context</em>}</li>
+ *   <li>{@link simk.StaticMethod#getParentMethod <em>Parent Method</em>}</li>
+ *   <li>{@link simk.StaticMethod#getUsages <em>Usages</em>}</li>
  *   <li>{@link simk.StaticMethod#getParentReference <em>Parent Reference</em>}</li>
  * </ul>
  * </p>
@@ -158,33 +158,32 @@ public interface StaticMethod extends SMNamedElement {
 	void setSMReturn(SMReturn value);
 
 	/**
-	 * Returns the value of the '<em><b>Usages</b></em>' attribute.
-	 * The literals are from the enumeration {@link simk.SMUsage}.
+	 * Returns the value of the '<em><b>SM Context</b></em>' reference.
+	 * It is bidirectional and its opposite is '{@link simk.SMContext#getStaticMethods <em>Static Methods</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Usages</em>' attribute isn't clear,
+	 * If the meaning of the '<em>SM Context</em>' reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Usages</em>' attribute.
-	 * @see simk.SMUsage
-	 * @see #setUsages(SMUsage)
-	 * @see simk.SimkPackage#getStaticMethod_Usages()
-	 * @model
+	 * @return the value of the '<em>SM Context</em>' reference.
+	 * @see #setSMContext(SMContext)
+	 * @see simk.SimkPackage#getStaticMethod_SMContext()
+	 * @see simk.SMContext#getStaticMethods
+	 * @model opposite="staticMethods"
 	 * @generated
 	 */
-	SMUsage getUsages();
+	SMContext getSMContext();
 
 	/**
-	 * Sets the value of the '{@link simk.StaticMethod#getUsages <em>Usages</em>}' attribute.
+	 * Sets the value of the '{@link simk.StaticMethod#getSMContext <em>SM Context</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Usages</em>' attribute.
-	 * @see simk.SMUsage
-	 * @see #getUsages()
+	 * @param value the new value of the '<em>SM Context</em>' reference.
+	 * @see #getSMContext()
 	 * @generated
 	 */
-	void setUsages(SMUsage value);
+	void setSMContext(SMContext value);
 
 	/**
 	 * Returns the value of the '<em><b>Parent Method</b></em>' reference.
@@ -213,32 +212,33 @@ public interface StaticMethod extends SMNamedElement {
 	void setParentMethod(EOperation value);
 
 	/**
-	 * Returns the value of the '<em><b>SM Context</b></em>' reference.
-	 * It is bidirectional and its opposite is '{@link simk.SMContext#getStaticMethods <em>Static Methods</em>}'.
+	 * Returns the value of the '<em><b>Usages</b></em>' attribute.
+	 * The literals are from the enumeration {@link simk.SMUsage}.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>SM Context</em>' reference isn't clear,
+	 * If the meaning of the '<em>Usages</em>' attribute isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>SM Context</em>' reference.
-	 * @see #setSMContext(SMContext)
-	 * @see simk.SimkPackage#getStaticMethod_SMContext()
-	 * @see simk.SMContext#getStaticMethods
-	 * @model opposite="staticMethods"
+	 * @return the value of the '<em>Usages</em>' attribute.
+	 * @see simk.SMUsage
+	 * @see #setUsages(SMUsage)
+	 * @see simk.SimkPackage#getStaticMethod_Usages()
+	 * @model
 	 * @generated
 	 */
-	SMContext getSMContext();
+	SMUsage getUsages();
 
 	/**
-	 * Sets the value of the '{@link simk.StaticMethod#getSMContext <em>SM Context</em>}' reference.
+	 * Sets the value of the '{@link simk.StaticMethod#getUsages <em>Usages</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>SM Context</em>' reference.
-	 * @see #getSMContext()
+	 * @param value the new value of the '<em>Usages</em>' attribute.
+	 * @see simk.SMUsage
+	 * @see #getUsages()
 	 * @generated
 	 */
-	void setSMContext(SMContext value);
+	void setUsages(SMUsage value);
 
 	/**
 	 * Returns the value of the '<em><b>Parent Reference</b></em>' reference.
@@ -269,20 +269,20 @@ public interface StaticMethod extends SMNamedElement {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @model annotation="kermeta documentation='/** TODO TO COMMENT\052/'"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='\n\tthis.setUsages(simk.SMUsage.getByName(\"Wrapper\"));\n'"
+	 * @generated
+	 */
+	void setWrapperUsage();
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @model kind="operation"
 	 *        annotation="kermeta isAbstract='true'"
 	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='ecore.EOperation result = null;\n\nreturn result;\n'"
 	 * @generated
 	 */
 	EOperation getParentMethodFromModel();
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @model annotation="kermeta documentation='/** TODO TO COMMENT\052/'"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='\n\tthis.setUsages(simk.SMUsage.getByName(\"Wrapper\"));\n'"
-	 * @generated
-	 */
-	void setWrapperUsage();
 
 } // StaticMethod

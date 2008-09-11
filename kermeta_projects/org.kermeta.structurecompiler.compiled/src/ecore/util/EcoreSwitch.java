@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: EcoreSwitch.java,v 1.1 2008-09-04 15:40:35 cfaucher Exp $
+ * $Id: EcoreSwitch.java,v 1.2 2008-09-11 12:35:05 cfaucher Exp $
  */
 package ecore.util;
 
@@ -103,6 +103,19 @@ public class EcoreSwitch<T> {
 				result = defaultCase(theEObject);
 			return result;
 		}
+		case EcorePackage.EANNOTATION: {
+			EAnnotation eAnnotation = (EAnnotation) theEObject;
+			T result = caseEAnnotation(eAnnotation);
+			if (result == null)
+				result = caseEModelElement(eAnnotation);
+			if (result == null)
+				result = caseEObject(eAnnotation);
+			if (result == null)
+				result = caseObject(eAnnotation);
+			if (result == null)
+				result = defaultCase(theEObject);
+			return result;
+		}
 		case EcorePackage.ECLASS: {
 			ecore.EClass eClass = (ecore.EClass) theEObject;
 			T result = caseEClass(eClass);
@@ -135,6 +148,23 @@ public class EcoreSwitch<T> {
 				result = defaultCase(theEObject);
 			return result;
 		}
+		case EcorePackage.EDATA_TYPE: {
+			EDataType eDataType = (EDataType) theEObject;
+			T result = caseEDataType(eDataType);
+			if (result == null)
+				result = caseEClassifier(eDataType);
+			if (result == null)
+				result = caseENamedElement(eDataType);
+			if (result == null)
+				result = caseEModelElement(eDataType);
+			if (result == null)
+				result = caseEObject(eDataType);
+			if (result == null)
+				result = caseObject(eDataType);
+			if (result == null)
+				result = defaultCase(theEObject);
+			return result;
+		}
 		case EcorePackage.EENUM: {
 			EEnum eEnum = (EEnum) theEObject;
 			T result = caseEEnum(eEnum);
@@ -150,6 +180,21 @@ public class EcoreSwitch<T> {
 				result = caseEObject(eEnum);
 			if (result == null)
 				result = caseObject(eEnum);
+			if (result == null)
+				result = defaultCase(theEObject);
+			return result;
+		}
+		case EcorePackage.EENUM_LITERAL: {
+			EEnumLiteral eEnumLiteral = (EEnumLiteral) theEObject;
+			T result = caseEEnumLiteral(eEnumLiteral);
+			if (result == null)
+				result = caseENamedElement(eEnumLiteral);
+			if (result == null)
+				result = caseEModelElement(eEnumLiteral);
+			if (result == null)
+				result = caseEObject(eEnumLiteral);
+			if (result == null)
+				result = caseObject(eEnumLiteral);
 			if (result == null)
 				result = defaultCase(theEObject);
 			return result;
@@ -178,11 +223,41 @@ public class EcoreSwitch<T> {
 				result = defaultCase(theEObject);
 			return result;
 		}
+		case EcorePackage.ENAMED_ELEMENT: {
+			ENamedElement eNamedElement = (ENamedElement) theEObject;
+			T result = caseENamedElement(eNamedElement);
+			if (result == null)
+				result = caseEModelElement(eNamedElement);
+			if (result == null)
+				result = caseEObject(eNamedElement);
+			if (result == null)
+				result = caseObject(eNamedElement);
+			if (result == null)
+				result = defaultCase(theEObject);
+			return result;
+		}
 		case EcorePackage.EOBJECT: {
 			ecore.EObject eObject = (ecore.EObject) theEObject;
 			T result = caseEObject(eObject);
 			if (result == null)
 				result = caseObject(eObject);
+			if (result == null)
+				result = defaultCase(theEObject);
+			return result;
+		}
+		case EcorePackage.EOPERATION: {
+			EOperation eOperation = (EOperation) theEObject;
+			T result = caseEOperation(eOperation);
+			if (result == null)
+				result = caseETypedElement(eOperation);
+			if (result == null)
+				result = caseENamedElement(eOperation);
+			if (result == null)
+				result = caseEModelElement(eOperation);
+			if (result == null)
+				result = caseEObject(eOperation);
+			if (result == null)
+				result = caseObject(eOperation);
 			if (result == null)
 				result = defaultCase(theEObject);
 			return result;
@@ -198,6 +273,23 @@ public class EcoreSwitch<T> {
 				result = caseEObject(ePackage);
 			if (result == null)
 				result = caseObject(ePackage);
+			if (result == null)
+				result = defaultCase(theEObject);
+			return result;
+		}
+		case EcorePackage.EPARAMETER: {
+			EParameter eParameter = (EParameter) theEObject;
+			T result = caseEParameter(eParameter);
+			if (result == null)
+				result = caseETypedElement(eParameter);
+			if (result == null)
+				result = caseENamedElement(eParameter);
+			if (result == null)
+				result = caseEModelElement(eParameter);
+			if (result == null)
+				result = caseEObject(eParameter);
+			if (result == null)
+				result = caseObject(eParameter);
 			if (result == null)
 				result = defaultCase(theEObject);
 			return result;
@@ -249,98 +341,6 @@ public class EcoreSwitch<T> {
 				result = caseEObject(eTypedElement);
 			if (result == null)
 				result = caseObject(eTypedElement);
-			if (result == null)
-				result = defaultCase(theEObject);
-			return result;
-		}
-		case EcorePackage.EANNOTATION: {
-			EAnnotation eAnnotation = (EAnnotation) theEObject;
-			T result = caseEAnnotation(eAnnotation);
-			if (result == null)
-				result = caseEModelElement(eAnnotation);
-			if (result == null)
-				result = caseEObject(eAnnotation);
-			if (result == null)
-				result = caseObject(eAnnotation);
-			if (result == null)
-				result = defaultCase(theEObject);
-			return result;
-		}
-		case EcorePackage.EDATA_TYPE: {
-			EDataType eDataType = (EDataType) theEObject;
-			T result = caseEDataType(eDataType);
-			if (result == null)
-				result = caseEClassifier(eDataType);
-			if (result == null)
-				result = caseENamedElement(eDataType);
-			if (result == null)
-				result = caseEModelElement(eDataType);
-			if (result == null)
-				result = caseEObject(eDataType);
-			if (result == null)
-				result = caseObject(eDataType);
-			if (result == null)
-				result = defaultCase(theEObject);
-			return result;
-		}
-		case EcorePackage.EENUM_LITERAL: {
-			EEnumLiteral eEnumLiteral = (EEnumLiteral) theEObject;
-			T result = caseEEnumLiteral(eEnumLiteral);
-			if (result == null)
-				result = caseENamedElement(eEnumLiteral);
-			if (result == null)
-				result = caseEModelElement(eEnumLiteral);
-			if (result == null)
-				result = caseEObject(eEnumLiteral);
-			if (result == null)
-				result = caseObject(eEnumLiteral);
-			if (result == null)
-				result = defaultCase(theEObject);
-			return result;
-		}
-		case EcorePackage.ENAMED_ELEMENT: {
-			ENamedElement eNamedElement = (ENamedElement) theEObject;
-			T result = caseENamedElement(eNamedElement);
-			if (result == null)
-				result = caseEModelElement(eNamedElement);
-			if (result == null)
-				result = caseEObject(eNamedElement);
-			if (result == null)
-				result = caseObject(eNamedElement);
-			if (result == null)
-				result = defaultCase(theEObject);
-			return result;
-		}
-		case EcorePackage.EOPERATION: {
-			EOperation eOperation = (EOperation) theEObject;
-			T result = caseEOperation(eOperation);
-			if (result == null)
-				result = caseETypedElement(eOperation);
-			if (result == null)
-				result = caseENamedElement(eOperation);
-			if (result == null)
-				result = caseEModelElement(eOperation);
-			if (result == null)
-				result = caseEObject(eOperation);
-			if (result == null)
-				result = caseObject(eOperation);
-			if (result == null)
-				result = defaultCase(theEObject);
-			return result;
-		}
-		case EcorePackage.EPARAMETER: {
-			EParameter eParameter = (EParameter) theEObject;
-			T result = caseEParameter(eParameter);
-			if (result == null)
-				result = caseETypedElement(eParameter);
-			if (result == null)
-				result = caseENamedElement(eParameter);
-			if (result == null)
-				result = caseEModelElement(eParameter);
-			if (result == null)
-				result = caseEObject(eParameter);
-			if (result == null)
-				result = caseObject(eParameter);
 			if (result == null)
 				result = defaultCase(theEObject);
 			return result;
@@ -401,6 +401,21 @@ public class EcoreSwitch<T> {
 	}
 
 	/**
+	 * Returns the result of interpreting the object as an instance of '<em>EAnnotation</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>EAnnotation</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseEAnnotation(EAnnotation object) {
+		return null;
+	}
+
+	/**
 	 * Returns the result of interpreting the object as an instance of '<em>EClass</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
@@ -431,6 +446,21 @@ public class EcoreSwitch<T> {
 	}
 
 	/**
+	 * Returns the result of interpreting the object as an instance of '<em>EData Type</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>EData Type</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseEDataType(EDataType object) {
+		return null;
+	}
+
+	/**
 	 * Returns the result of interpreting the object as an instance of '<em>EEnum</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
@@ -442,6 +472,21 @@ public class EcoreSwitch<T> {
 	 * @generated
 	 */
 	public T caseEEnum(EEnum object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>EEnum Literal</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>EEnum Literal</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseEEnumLiteral(EEnumLiteral object) {
 		return null;
 	}
 
@@ -476,6 +521,21 @@ public class EcoreSwitch<T> {
 	}
 
 	/**
+	 * Returns the result of interpreting the object as an instance of '<em>ENamed Element</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>ENamed Element</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseENamedElement(ENamedElement object) {
+		return null;
+	}
+
+	/**
 	 * Returns the result of interpreting the object as an instance of '<em>EObject</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
@@ -491,6 +551,21 @@ public class EcoreSwitch<T> {
 	}
 
 	/**
+	 * Returns the result of interpreting the object as an instance of '<em>EOperation</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>EOperation</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseEOperation(EOperation object) {
+		return null;
+	}
+
+	/**
 	 * Returns the result of interpreting the object as an instance of '<em>EPackage</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
@@ -502,6 +577,21 @@ public class EcoreSwitch<T> {
 	 * @generated
 	 */
 	public T caseEPackage(EPackage object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>EParameter</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>EParameter</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseEParameter(EParameter object) {
 		return null;
 	}
 
@@ -547,96 +637,6 @@ public class EcoreSwitch<T> {
 	 * @generated
 	 */
 	public T caseETypedElement(ETypedElement object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>EAnnotation</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>EAnnotation</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseEAnnotation(EAnnotation object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>EData Type</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>EData Type</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseEDataType(EDataType object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>EEnum Literal</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>EEnum Literal</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseEEnumLiteral(EEnumLiteral object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>ENamed Element</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>ENamed Element</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseENamedElement(ENamedElement object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>EOperation</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>EOperation</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseEOperation(EOperation object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>EParameter</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>EParameter</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseEParameter(EParameter object) {
 		return null;
 	}
 

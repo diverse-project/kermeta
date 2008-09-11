@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: RequireImpl.java,v 1.1 2008-09-04 15:40:29 cfaucher Exp $
+ * $Id: RequireImpl.java,v 1.2 2008-09-11 12:34:47 cfaucher Exp $
  */
 package kermeta.language.structure.impl;
 
@@ -125,50 +125,50 @@ public class RequireImpl extends ObjectImpl implements Require {
 				.getEcoreModelElement();
 
 		ecore.EStringToStringMapEntry requireEntry = null;
-		//Beginning of the Inlining of the function type: detect
+		//BIft:detect
 
-		ecore.EStringToStringMapEntry result_ft76 = null;
+		ecore.EStringToStringMapEntry result_ft25 = null;
 
-		ecore.EStringToStringMapEntry elem_ft76 = null;
+		ecore.EStringToStringMapEntry elem_ft25 = null;
 
-		result_ft76 = null;
+		result_ft25 = null;
 
 		{
 
-			kermeta.standard.Iterator<ecore.EStringToStringMapEntry> it_ft76 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
+			kermeta.standard.Iterator<ecore.EStringToStringMapEntry> it_ft25 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
 					.<ecore.EStringToStringMapEntry> convertAsOrderedSet(
 							ecoreAnnotation.getDetails()).iterator();
-			java.lang.Boolean idLoopCond_235 = false;
-			while (!idLoopCond_235) {
-				idLoopCond_235 = kermeta.standard.helper.BooleanWrapper.or(
-						it_ft76.isOff(),
+			java.lang.Boolean idLoopCond_83 = false;
+			while (!idLoopCond_83) {
+				idLoopCond_83 = kermeta.standard.helper.BooleanWrapper.or(
+						it_ft25.isOff(),
 						org.kermeta.compil.runtime.helper.language.ObjectUtil
-								.isNotEqual(result_ft76, null));
-				if (idLoopCond_235) {
+								.isNotEqual(result_ft25, null));
+				if (idLoopCond_83) {
 				} else {
 
-					elem_ft76 = it_ft76.next();
+					elem_ft25 = it_ft25.next();
 
-					java.lang.Boolean idIfCond_236 = false;
-					//Beginning of the Inlining of the lambda expression: detector
-					ecore.EStringToStringMapEntry d = elem_ft76;
+					java.lang.Boolean idIfCond_84 = false;
+					//BIle:detector
+					ecore.EStringToStringMapEntry d_lbdExp25 = elem_ft25;
 
-					idIfCond_236 = kermeta.standard.helper.StringWrapper
-							.equals(d.getKey(), "require");
-					//End of the Inlining of the lambda expression: detector
+					idIfCond_84 = kermeta.standard.helper.StringWrapper.equals(
+							d_lbdExp25.getKey(), "require");
+					//EIle:detector
 
-					if (idIfCond_236) {
+					if (idIfCond_84) {
 
-						result_ft76 = elem_ft76;
+						result_ft25 = elem_ft25;
 					}
 
 				}
 			}
 		}
 
-		//callElement
-		requireEntry = result_ft76;
-		//End of the Inlining of the function type: detect
+		//CE
+		requireEntry = result_ft25;
+		//EIft:detect
 
 		requireEntry.setValue(kermeta.standard.helper.StringWrapper.plus(
 				kermeta.standard.helper.StringWrapper.plus(requireEntry

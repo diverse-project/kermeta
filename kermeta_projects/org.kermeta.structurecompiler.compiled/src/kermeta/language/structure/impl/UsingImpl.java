@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: UsingImpl.java,v 1.1 2008-09-04 15:40:29 cfaucher Exp $
+ * $Id: UsingImpl.java,v 1.2 2008-09-11 12:34:48 cfaucher Exp $
  */
 package kermeta.language.structure.impl;
 
@@ -126,50 +126,50 @@ public class UsingImpl extends ObjectImpl implements Using {
 				.getEcoreModelElement();
 
 		ecore.EStringToStringMapEntry usingEntry = null;
-		//Beginning of the Inlining of the function type: detect
+		//BIft:detect
 
-		ecore.EStringToStringMapEntry result_ft77 = null;
+		ecore.EStringToStringMapEntry result_ft26 = null;
 
-		ecore.EStringToStringMapEntry elem_ft77 = null;
+		ecore.EStringToStringMapEntry elem_ft26 = null;
 
-		result_ft77 = null;
+		result_ft26 = null;
 
 		{
 
-			kermeta.standard.Iterator<ecore.EStringToStringMapEntry> it_ft77 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
+			kermeta.standard.Iterator<ecore.EStringToStringMapEntry> it_ft26 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
 					.<ecore.EStringToStringMapEntry> convertAsOrderedSet(
 							ecoreAnnotation.getDetails()).iterator();
-			java.lang.Boolean idLoopCond_237 = false;
-			while (!idLoopCond_237) {
-				idLoopCond_237 = kermeta.standard.helper.BooleanWrapper.or(
-						it_ft77.isOff(),
+			java.lang.Boolean idLoopCond_85 = false;
+			while (!idLoopCond_85) {
+				idLoopCond_85 = kermeta.standard.helper.BooleanWrapper.or(
+						it_ft26.isOff(),
 						org.kermeta.compil.runtime.helper.language.ObjectUtil
-								.isNotEqual(result_ft77, null));
-				if (idLoopCond_237) {
+								.isNotEqual(result_ft26, null));
+				if (idLoopCond_85) {
 				} else {
 
-					elem_ft77 = it_ft77.next();
+					elem_ft26 = it_ft26.next();
 
-					java.lang.Boolean idIfCond_238 = false;
-					//Beginning of the Inlining of the lambda expression: detector
-					ecore.EStringToStringMapEntry d = elem_ft77;
+					java.lang.Boolean idIfCond_86 = false;
+					//BIle:detector
+					ecore.EStringToStringMapEntry d_lbdExp26 = elem_ft26;
 
-					idIfCond_238 = kermeta.standard.helper.StringWrapper
-							.equals(d.getKey(), "using");
-					//End of the Inlining of the lambda expression: detector
+					idIfCond_86 = kermeta.standard.helper.StringWrapper.equals(
+							d_lbdExp26.getKey(), "using");
+					//EIle:detector
 
-					if (idIfCond_238) {
+					if (idIfCond_86) {
 
-						result_ft77 = elem_ft77;
+						result_ft26 = elem_ft26;
 					}
 
 				}
 			}
 		}
 
-		//callElement
-		usingEntry = result_ft77;
-		//End of the Inlining of the function type: detect
+		//CE
+		usingEntry = result_ft26;
+		//EIft:detect
 
 		usingEntry.setValue(kermeta.standard.helper.StringWrapper.plus(
 				kermeta.standard.helper.StringWrapper.plus(usingEntry

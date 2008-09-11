@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: StandardPackage.java,v 1.1 2008-09-04 15:40:28 cfaucher Exp $
+ * $Id: StandardPackage.java,v 1.2 2008-09-11 12:34:46 cfaucher Exp $
  */
 package kermeta.standard;
 
@@ -80,15 +80,6 @@ public interface StandardPackage extends EPackage {
 	int UNKNOWN_JAVA_OBJECT = 0;
 
 	/**
-	 * The feature id for the '<em><b>Tag</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int UNKNOWN_JAVA_OBJECT__TAG = StructurePackage.OBJECT__TAG;
-
-	/**
 	 * The feature id for the '<em><b>File</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -96,6 +87,15 @@ public interface StandardPackage extends EPackage {
 	 * @ordered
 	 */
 	int UNKNOWN_JAVA_OBJECT__FILE = StructurePackage.OBJECT__FILE;
+
+	/**
+	 * The feature id for the '<em><b>Tag</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UNKNOWN_JAVA_OBJECT__TAG = StructurePackage.OBJECT__TAG;
 
 	/**
 	 * The feature id for the '<em><b>File Name</b></em>' attribute.
@@ -162,15 +162,6 @@ public interface StandardPackage extends EPackage {
 	int VOID = 1;
 
 	/**
-	 * The feature id for the '<em><b>Tag</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int VOID__TAG = StructurePackage.OBJECT__TAG;
-
-	/**
 	 * The feature id for the '<em><b>File</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -178,6 +169,15 @@ public interface StandardPackage extends EPackage {
 	 * @ordered
 	 */
 	int VOID__FILE = StructurePackage.OBJECT__FILE;
+
+	/**
+	 * The feature id for the '<em><b>Tag</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VOID__TAG = StructurePackage.OBJECT__TAG;
 
 	/**
 	 * The feature id for the '<em><b>File Name</b></em>' attribute.
@@ -244,15 +244,6 @@ public interface StandardPackage extends EPackage {
 	int VALUE_TYPE = 2;
 
 	/**
-	 * The feature id for the '<em><b>Tag</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int VALUE_TYPE__TAG = StructurePackage.OBJECT__TAG;
-
-	/**
 	 * The feature id for the '<em><b>File</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -260,6 +251,15 @@ public interface StandardPackage extends EPackage {
 	 * @ordered
 	 */
 	int VALUE_TYPE__FILE = StructurePackage.OBJECT__FILE;
+
+	/**
+	 * The feature id for the '<em><b>Tag</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VALUE_TYPE__TAG = StructurePackage.OBJECT__TAG;
 
 	/**
 	 * The feature id for the '<em><b>File Name</b></em>' attribute.
@@ -326,15 +326,6 @@ public interface StandardPackage extends EPackage {
 	int COMPARABLE = 3;
 
 	/**
-	 * The feature id for the '<em><b>Tag</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int COMPARABLE__TAG = StructurePackage.OBJECT__TAG;
-
-	/**
 	 * The feature id for the '<em><b>File</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -342,6 +333,15 @@ public interface StandardPackage extends EPackage {
 	 * @ordered
 	 */
 	int COMPARABLE__FILE = StructurePackage.OBJECT__FILE;
+
+	/**
+	 * The feature id for the '<em><b>Tag</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMPARABLE__TAG = StructurePackage.OBJECT__TAG;
 
 	/**
 	 * The feature id for the '<em><b>File Name</b></em>' attribute.
@@ -408,15 +408,6 @@ public interface StandardPackage extends EPackage {
 	int SUMMABLE = 4;
 
 	/**
-	 * The feature id for the '<em><b>Tag</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SUMMABLE__TAG = StructurePackage.OBJECT__TAG;
-
-	/**
 	 * The feature id for the '<em><b>File</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -424,6 +415,15 @@ public interface StandardPackage extends EPackage {
 	 * @ordered
 	 */
 	int SUMMABLE__FILE = StructurePackage.OBJECT__FILE;
+
+	/**
+	 * The feature id for the '<em><b>Tag</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SUMMABLE__TAG = StructurePackage.OBJECT__TAG;
 
 	/**
 	 * The feature id for the '<em><b>File Name</b></em>' attribute.
@@ -490,15 +490,6 @@ public interface StandardPackage extends EPackage {
 	int NOT_COMPARABLE_EXCEPTION = 5;
 
 	/**
-	 * The feature id for the '<em><b>Tag</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int NOT_COMPARABLE_EXCEPTION__TAG = ExceptionsPackage.EXCEPTION__TAG;
-
-	/**
 	 * The feature id for the '<em><b>File</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -506,6 +497,15 @@ public interface StandardPackage extends EPackage {
 	 * @ordered
 	 */
 	int NOT_COMPARABLE_EXCEPTION__FILE = ExceptionsPackage.EXCEPTION__FILE;
+
+	/**
+	 * The feature id for the '<em><b>Tag</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NOT_COMPARABLE_EXCEPTION__TAG = ExceptionsPackage.EXCEPTION__TAG;
 
 	/**
 	 * The feature id for the '<em><b>File Name</b></em>' attribute.
@@ -599,15 +599,6 @@ public interface StandardPackage extends EPackage {
 	int COLLECTION = 6;
 
 	/**
-	 * The feature id for the '<em><b>Tag</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int COLLECTION__TAG = StructurePackage.OBJECT__TAG;
-
-	/**
 	 * The feature id for the '<em><b>File</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -615,6 +606,15 @@ public interface StandardPackage extends EPackage {
 	 * @ordered
 	 */
 	int COLLECTION__FILE = StructurePackage.OBJECT__FILE;
+
+	/**
+	 * The feature id for the '<em><b>Tag</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COLLECTION__TAG = StructurePackage.OBJECT__TAG;
 
 	/**
 	 * The feature id for the '<em><b>File Name</b></em>' attribute.
@@ -690,15 +690,6 @@ public interface StandardPackage extends EPackage {
 	int SET = 7;
 
 	/**
-	 * The feature id for the '<em><b>Tag</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SET__TAG = COLLECTION__TAG;
-
-	/**
 	 * The feature id for the '<em><b>File</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -706,6 +697,15 @@ public interface StandardPackage extends EPackage {
 	 * @ordered
 	 */
 	int SET__FILE = COLLECTION__FILE;
+
+	/**
+	 * The feature id for the '<em><b>Tag</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SET__TAG = COLLECTION__TAG;
 
 	/**
 	 * The feature id for the '<em><b>File Name</b></em>' attribute.
@@ -781,15 +781,6 @@ public interface StandardPackage extends EPackage {
 	int BAG = 8;
 
 	/**
-	 * The feature id for the '<em><b>Tag</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BAG__TAG = COLLECTION__TAG;
-
-	/**
 	 * The feature id for the '<em><b>File</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -797,6 +788,15 @@ public interface StandardPackage extends EPackage {
 	 * @ordered
 	 */
 	int BAG__FILE = COLLECTION__FILE;
+
+	/**
+	 * The feature id for the '<em><b>Tag</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BAG__TAG = COLLECTION__TAG;
 
 	/**
 	 * The feature id for the '<em><b>File Name</b></em>' attribute.
@@ -872,15 +872,6 @@ public interface StandardPackage extends EPackage {
 	int ORDERED_COLLECTION = 9;
 
 	/**
-	 * The feature id for the '<em><b>Tag</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ORDERED_COLLECTION__TAG = COLLECTION__TAG;
-
-	/**
 	 * The feature id for the '<em><b>File</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -888,6 +879,15 @@ public interface StandardPackage extends EPackage {
 	 * @ordered
 	 */
 	int ORDERED_COLLECTION__FILE = COLLECTION__FILE;
+
+	/**
+	 * The feature id for the '<em><b>Tag</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ORDERED_COLLECTION__TAG = COLLECTION__TAG;
 
 	/**
 	 * The feature id for the '<em><b>File Name</b></em>' attribute.
@@ -963,15 +963,6 @@ public interface StandardPackage extends EPackage {
 	int ORDERED_SET = 10;
 
 	/**
-	 * The feature id for the '<em><b>Tag</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ORDERED_SET__TAG = SET__TAG;
-
-	/**
 	 * The feature id for the '<em><b>File</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -979,6 +970,15 @@ public interface StandardPackage extends EPackage {
 	 * @ordered
 	 */
 	int ORDERED_SET__FILE = SET__FILE;
+
+	/**
+	 * The feature id for the '<em><b>Tag</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ORDERED_SET__TAG = SET__TAG;
 
 	/**
 	 * The feature id for the '<em><b>File Name</b></em>' attribute.
@@ -1054,15 +1054,6 @@ public interface StandardPackage extends EPackage {
 	int SEQUENCE = 11;
 
 	/**
-	 * The feature id for the '<em><b>Tag</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SEQUENCE__TAG = BAG__TAG;
-
-	/**
 	 * The feature id for the '<em><b>File</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1070,6 +1061,15 @@ public interface StandardPackage extends EPackage {
 	 * @ordered
 	 */
 	int SEQUENCE__FILE = BAG__FILE;
+
+	/**
+	 * The feature id for the '<em><b>Tag</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SEQUENCE__TAG = BAG__TAG;
 
 	/**
 	 * The feature id for the '<em><b>File Name</b></em>' attribute.
@@ -1145,15 +1145,6 @@ public interface StandardPackage extends EPackage {
 	int ITERATOR = 12;
 
 	/**
-	 * The feature id for the '<em><b>Tag</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ITERATOR__TAG = StructurePackage.OBJECT__TAG;
-
-	/**
 	 * The feature id for the '<em><b>File</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1161,6 +1152,15 @@ public interface StandardPackage extends EPackage {
 	 * @ordered
 	 */
 	int ITERATOR__FILE = StructurePackage.OBJECT__FILE;
+
+	/**
+	 * The feature id for the '<em><b>Tag</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ITERATOR__TAG = StructurePackage.OBJECT__TAG;
 
 	/**
 	 * The feature id for the '<em><b>File Name</b></em>' attribute.
@@ -1235,16 +1235,6 @@ public interface StandardPackage extends EPackage {
 	int ITERATOR_FEATURE_COUNT = StructurePackage.OBJECT_FEATURE_COUNT + 2;
 
 	/**
-	 * The meta object id for the '<em>Java String</em>' data type.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see java.lang.String
-	 * @see kermeta.standard.impl.StandardPackageImpl#getJavaString()
-	 * @generated
-	 */
-	int JAVA_STRING = 13;
-
-	/**
 	 * The meta object id for the '<em>Java Boolean</em>' data type.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1252,7 +1242,7 @@ public interface StandardPackage extends EPackage {
 	 * @see kermeta.standard.impl.StandardPackageImpl#getJavaBoolean()
 	 * @generated
 	 */
-	int JAVA_BOOLEAN = 14;
+	int JAVA_BOOLEAN = 13;
 
 	/**
 	 * The meta object id for the '<em>Java Numeric</em>' data type.
@@ -1262,7 +1252,7 @@ public interface StandardPackage extends EPackage {
 	 * @see kermeta.standard.impl.StandardPackageImpl#getJavaNumeric()
 	 * @generated
 	 */
-	int JAVA_NUMERIC = 15;
+	int JAVA_NUMERIC = 14;
 
 	/**
 	 * The meta object id for the '<em>Java Integer</em>' data type.
@@ -1272,7 +1262,7 @@ public interface StandardPackage extends EPackage {
 	 * @see kermeta.standard.impl.StandardPackageImpl#getJavaInteger()
 	 * @generated
 	 */
-	int JAVA_INTEGER = 16;
+	int JAVA_INTEGER = 15;
 
 	/**
 	 * The meta object id for the '<em>Java Real</em>' data type.
@@ -1282,7 +1272,7 @@ public interface StandardPackage extends EPackage {
 	 * @see kermeta.standard.impl.StandardPackageImpl#getJavaReal()
 	 * @generated
 	 */
-	int JAVA_REAL = 17;
+	int JAVA_REAL = 16;
 
 	/**
 	 * The meta object id for the '<em>Java Character</em>' data type.
@@ -1292,7 +1282,17 @@ public interface StandardPackage extends EPackage {
 	 * @see kermeta.standard.impl.StandardPackageImpl#getJavaCharacter()
 	 * @generated
 	 */
-	int JAVA_CHARACTER = 18;
+	int JAVA_CHARACTER = 17;
+
+	/**
+	 * The meta object id for the '<em>Java String</em>' data type.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see java.lang.String
+	 * @see kermeta.standard.impl.StandardPackageImpl#getJavaString()
+	 * @generated
+	 */
+	int JAVA_STRING = 18;
 
 	/**
 	 * The meta object id for the '<em>Unlimited Natural</em>' data type.
@@ -1488,17 +1488,6 @@ public interface StandardPackage extends EPackage {
 	EReference getIterator_KermetaCollection();
 
 	/**
-	 * Returns the meta object for data type '{@link java.lang.String <em>Java String</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for data type '<em>Java String</em>'.
-	 * @see java.lang.String
-	 * @model instanceClass="java.lang.String"
-	 * @generated
-	 */
-	EDataType getJavaString();
-
-	/**
 	 * Returns the meta object for data type '{@link java.lang.Boolean <em>Java Boolean</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1552,6 +1541,17 @@ public interface StandardPackage extends EPackage {
 	 * @generated
 	 */
 	EDataType getJavaCharacter();
+
+	/**
+	 * Returns the meta object for data type '{@link java.lang.String <em>Java String</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for data type '<em>Java String</em>'.
+	 * @see java.lang.String
+	 * @model instanceClass="java.lang.String"
+	 * @generated
+	 */
+	EDataType getJavaString();
 
 	/**
 	 * Returns the meta object for data type '{@link java.lang.Object <em>Unlimited Natural</em>}'.
@@ -1767,16 +1767,6 @@ public interface StandardPackage extends EPackage {
 				.getIterator_KermetaCollection();
 
 		/**
-		 * The meta object literal for the '<em>Java String</em>' data type.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see java.lang.String
-		 * @see kermeta.standard.impl.StandardPackageImpl#getJavaString()
-		 * @generated
-		 */
-		EDataType JAVA_STRING = eINSTANCE.getJavaString();
-
-		/**
 		 * The meta object literal for the '<em>Java Boolean</em>' data type.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -1825,6 +1815,16 @@ public interface StandardPackage extends EPackage {
 		 * @generated
 		 */
 		EDataType JAVA_CHARACTER = eINSTANCE.getJavaCharacter();
+
+		/**
+		 * The meta object literal for the '<em>Java String</em>' data type.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see java.lang.String
+		 * @see kermeta.standard.impl.StandardPackageImpl#getJavaString()
+		 * @generated
+		 */
+		EDataType JAVA_STRING = eINSTANCE.getJavaString();
 
 		/**
 		 * The meta object literal for the '<em>Unlimited Natural</em>' data type.

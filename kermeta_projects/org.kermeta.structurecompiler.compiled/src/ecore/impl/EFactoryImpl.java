@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: EFactoryImpl.java,v 1.2 2008-09-08 19:28:31 cfaucher Exp $
+ * $Id: EFactoryImpl.java,v 1.3 2008-09-11 12:34:38 cfaucher Exp $
  */
 package ecore.impl;
 
@@ -166,13 +166,7 @@ public class EFactoryImpl extends EModelElementImpl implements EFactory {
 	 * @generated
 	 */
 	public EObject create(ecore.EClass eClass) {
-
 		ecore.EObject result = null;
-
-		if (true)
-			throw new org.kermeta.compil.runtime.helper.error.KRuntimeError(
-					((kermeta.exceptions.NotImplementedException) org.kermeta.compil.runtime.helper.language.ClassUtil
-							.newObject("kermeta.exceptions.NotImplementedException")));
 
 		return result;
 

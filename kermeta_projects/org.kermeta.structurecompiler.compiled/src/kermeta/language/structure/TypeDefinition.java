@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: TypeDefinition.java,v 1.1 2008-09-04 15:40:22 cfaucher Exp $
+ * $Id: TypeDefinition.java,v 1.2 2008-09-11 12:34:36 cfaucher Exp $
  */
 package kermeta.language.structure;
 

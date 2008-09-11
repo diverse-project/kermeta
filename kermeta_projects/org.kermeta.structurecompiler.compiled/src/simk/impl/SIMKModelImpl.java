@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: SIMKModelImpl.java,v 1.1 2008-09-04 15:40:25 cfaucher Exp $
+ * $Id: SIMKModelImpl.java,v 1.2 2008-09-11 12:34:39 cfaucher Exp $
  */
 package simk.impl;
 
@@ -114,6 +114,18 @@ public class SIMKModelImpl extends SMNamedElementImpl implements SIMKModel {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public int getNextId() {
+		java.lang.Integer result = null;
+
+		return result;
+
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public SMContext retrieveOrCreateContextForSuper(Operation op,
 			KM2EcoreContext context) {
 
@@ -158,37 +170,37 @@ public class SIMKModelImpl extends SMNamedElementImpl implements SIMKModel {
 						simk.SMUsage.getByName("Super"), context);
 
 		simk.StaticMethod sm = null;
-		//Beginning of the Inlining of the function type: detect
+		//BIft:detect
 
-		simk.StaticMethod result_ft194 = null;
+		simk.StaticMethod result_ft198 = null;
 
-		simk.StaticMethod elem_ft194 = null;
+		simk.StaticMethod elem_ft198 = null;
 
-		result_ft194 = null;
+		result_ft198 = null;
 
 		{
 
-			kermeta.standard.Iterator<simk.StaticMethod> it_ft194 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
+			kermeta.standard.Iterator<simk.StaticMethod> it_ft198 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
 					.<simk.StaticMethod> convertAsOrderedSet(
 							sMContext.getStaticMethods()).iterator();
-			java.lang.Boolean idLoopCond_849 = false;
-			while (!idLoopCond_849) {
-				idLoopCond_849 = kermeta.standard.helper.BooleanWrapper.or(
-						it_ft194.isOff(),
+			java.lang.Boolean idLoopCond_915 = false;
+			while (!idLoopCond_915) {
+				idLoopCond_915 = kermeta.standard.helper.BooleanWrapper.or(
+						it_ft198.isOff(),
 						org.kermeta.compil.runtime.helper.language.ObjectUtil
-								.isNotEqual(result_ft194, null));
-				if (idLoopCond_849) {
+								.isNotEqual(result_ft198, null));
+				if (idLoopCond_915) {
 				} else {
 
-					elem_ft194 = it_ft194.next();
+					elem_ft198 = it_ft198.next();
 
-					java.lang.Boolean idIfCond_850 = false;
-					//Beginning of the Inlining of the lambda expression: detector
-					simk.StaticMethod o = elem_ft194;
+					java.lang.Boolean idIfCond_916 = false;
+					//BIle:detector
+					simk.StaticMethod o_lbdExp198 = elem_ft198;
 
-					idIfCond_850 = kermeta.standard.helper.StringWrapper
+					idIfCond_916 = kermeta.standard.helper.StringWrapper
 							.equals(
-									o.getName(),
+									o_lbdExp198.getName(),
 									kermeta.standard.helper.StringWrapper
 											.plus(
 													"super_",
@@ -198,41 +210,29 @@ public class SIMKModelImpl extends SMNamedElementImpl implements SIMKModel {
 																	op
 																			.getFinalName(),
 																	context)));
-					//End of the Inlining of the lambda expression: detector
+					//EIle:detector
 
-					if (idIfCond_850) {
+					if (idIfCond_916) {
 
-						result_ft194 = elem_ft194;
+						result_ft198 = elem_ft198;
 					}
 
 				}
 			}
 		}
 
-		//callElement
-		sm = result_ft194;
-		//End of the Inlining of the function type: detect
+		//CE
+		sm = result_ft198;
+		//EIft:detect
 
-		java.lang.Boolean idIfCond_851 = false;
-		idIfCond_851 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+		java.lang.Boolean idIfCond_917 = false;
+		idIfCond_917 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 				.isVoid(sm);
 
-		if (idIfCond_851) {
+		if (idIfCond_917) {
 
 			result = sMContext;
 		}
-
-		return result;
-
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public int getNextId() {
-		java.lang.Integer result = null;
 
 		return result;
 
@@ -257,61 +257,61 @@ public class SIMKModelImpl extends SMNamedElementImpl implements SIMKModel {
 				context);
 
 		simk.StaticMethod sm = null;
-		//Beginning of the Inlining of the function type: detect
+		//BIft:detect
 
-		simk.StaticMethod result_ft195 = null;
+		simk.StaticMethod result_ft199 = null;
 
-		simk.StaticMethod elem_ft195 = null;
+		simk.StaticMethod elem_ft199 = null;
 
-		result_ft195 = null;
+		result_ft199 = null;
 
 		{
 
-			kermeta.standard.Iterator<simk.StaticMethod> it_ft195 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
+			kermeta.standard.Iterator<simk.StaticMethod> it_ft199 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
 					.<simk.StaticMethod> convertAsOrderedSet(
 							sMContext.getStaticMethods()).iterator();
-			java.lang.Boolean idLoopCond_852 = false;
-			while (!idLoopCond_852) {
-				idLoopCond_852 = kermeta.standard.helper.BooleanWrapper.or(
-						it_ft195.isOff(),
+			java.lang.Boolean idLoopCond_918 = false;
+			while (!idLoopCond_918) {
+				idLoopCond_918 = kermeta.standard.helper.BooleanWrapper.or(
+						it_ft199.isOff(),
 						org.kermeta.compil.runtime.helper.language.ObjectUtil
-								.isNotEqual(result_ft195, null));
-				if (idLoopCond_852) {
+								.isNotEqual(result_ft199, null));
+				if (idLoopCond_918) {
 				} else {
 
-					elem_ft195 = it_ft195.next();
+					elem_ft199 = it_ft199.next();
 
-					java.lang.Boolean idIfCond_853 = false;
-					//Beginning of the Inlining of the lambda expression: detector
-					simk.StaticMethod o = elem_ft195;
+					java.lang.Boolean idIfCond_919 = false;
+					//BIle:detector
+					simk.StaticMethod o_lbdExp199 = elem_ft199;
 
-					idIfCond_853 = kermeta.standard.helper.StringWrapper
+					idIfCond_919 = kermeta.standard.helper.StringWrapper
 							.equals(
-									o.getName(),
+									o_lbdExp199.getName(),
 									((km2ecore.helper.java.IdentifierHelper) org.kermeta.compil.runtime.helper.language.ClassUtil
 											.newObject("km2ecore.helper.java.IdentifierHelper"))
 											.getMangledIdentifier(op
 													.getFinalName(), context));
-					//End of the Inlining of the lambda expression: detector
+					//EIle:detector
 
-					if (idIfCond_853) {
+					if (idIfCond_919) {
 
-						result_ft195 = elem_ft195;
+						result_ft199 = elem_ft199;
 					}
 
 				}
 			}
 		}
 
-		//callElement
-		sm = result_ft195;
-		//End of the Inlining of the function type: detect
+		//CE
+		sm = result_ft199;
+		//EIft:detect
 
-		java.lang.Boolean idIfCond_854 = false;
-		idIfCond_854 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+		java.lang.Boolean idIfCond_920 = false;
+		idIfCond_920 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 				.isVoid(sm);
 
-		if (idIfCond_854) {
+		if (idIfCond_920) {
 
 			result = sMContext;
 		}
@@ -382,11 +382,11 @@ public class SIMKModelImpl extends SMNamedElementImpl implements SIMKModel {
 														"::", "\\."), ".runner"),
 						simk.SMUsage.getByName("Runner"), context);
 
-		java.lang.Boolean idIfCond_855 = false;
-		idIfCond_855 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+		java.lang.Boolean idIfCond_921 = false;
+		idIfCond_921 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 				.isVoid(sMContext);
 
-		if (idIfCond_855) {
+		if (idIfCond_921) {
 
 			org.kermeta.compil.runtime.helper.io.StdIOUtil
 					.writeln(kermeta.standard.helper.StringWrapper
@@ -445,56 +445,56 @@ public class SIMKModelImpl extends SMNamedElementImpl implements SIMKModel {
 		}
 
 		simk.StaticMethod sm = null;
-		//Beginning of the Inlining of the function type: detect
+		//BIft:detect
 
-		simk.StaticMethod result_ft196 = null;
+		simk.StaticMethod result_ft200 = null;
 
-		simk.StaticMethod elem_ft196 = null;
+		simk.StaticMethod elem_ft200 = null;
 
-		result_ft196 = null;
+		result_ft200 = null;
 
 		{
 
-			kermeta.standard.Iterator<simk.StaticMethod> it_ft196 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
+			kermeta.standard.Iterator<simk.StaticMethod> it_ft200 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
 					.<simk.StaticMethod> convertAsOrderedSet(
 							sMContext.getStaticMethods()).iterator();
-			java.lang.Boolean idLoopCond_856 = false;
-			while (!idLoopCond_856) {
-				idLoopCond_856 = kermeta.standard.helper.BooleanWrapper.or(
-						it_ft196.isOff(),
+			java.lang.Boolean idLoopCond_922 = false;
+			while (!idLoopCond_922) {
+				idLoopCond_922 = kermeta.standard.helper.BooleanWrapper.or(
+						it_ft200.isOff(),
 						org.kermeta.compil.runtime.helper.language.ObjectUtil
-								.isNotEqual(result_ft196, null));
-				if (idLoopCond_856) {
+								.isNotEqual(result_ft200, null));
+				if (idLoopCond_922) {
 				} else {
 
-					elem_ft196 = it_ft196.next();
+					elem_ft200 = it_ft200.next();
 
-					java.lang.Boolean idIfCond_857 = false;
-					//Beginning of the Inlining of the lambda expression: detector
-					simk.StaticMethod o = elem_ft196;
+					java.lang.Boolean idIfCond_923 = false;
+					//BIle:detector
+					simk.StaticMethod o_lbdExp200 = elem_ft200;
 
-					idIfCond_857 = kermeta.standard.helper.StringWrapper
-							.equals(o.getName(), "main");
-					//End of the Inlining of the lambda expression: detector
+					idIfCond_923 = kermeta.standard.helper.StringWrapper
+							.equals(o_lbdExp200.getName(), "main");
+					//EIle:detector
 
-					if (idIfCond_857) {
+					if (idIfCond_923) {
 
-						result_ft196 = elem_ft196;
+						result_ft200 = elem_ft200;
 					}
 
 				}
 			}
 		}
 
-		//callElement
-		sm = result_ft196;
-		//End of the Inlining of the function type: detect
+		//CE
+		sm = result_ft200;
+		//EIft:detect
 
-		java.lang.Boolean idIfCond_858 = false;
-		idIfCond_858 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+		java.lang.Boolean idIfCond_924 = false;
+		idIfCond_924 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 				.isVoid(sm);
 
-		if (idIfCond_858) {
+		if (idIfCond_924) {
 
 			result = sMContext;
 		}
@@ -516,11 +516,11 @@ public class SIMKModelImpl extends SMNamedElementImpl implements SIMKModel {
 		simk.SMContext sMContext = this.retrieveOrCreateContext(class_qname,
 				finalPackage_qname, usage, context);
 
-		java.lang.Boolean idIfCond_859 = false;
-		idIfCond_859 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+		java.lang.Boolean idIfCond_925 = false;
+		idIfCond_925 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 				.isVoid(sMContext.getSMClass());
 
-		if (idIfCond_859) {
+		if (idIfCond_925) {
 
 			simk.SMClass sMClass = ((simk.SMClass) org.kermeta.compil.runtime.helper.language.ClassUtil
 					.newObject("simk.SMClass"));
@@ -549,72 +549,72 @@ public class SIMKModelImpl extends SMNamedElementImpl implements SIMKModel {
 		simk.SMContext result = null;
 
 		simk.SMContext sMContext = null;
-		//Beginning of the Inlining of the function type: detect
+		//BIft:detect
 
-		simk.SMContext result_ft197 = null;
+		simk.SMContext result_ft201 = null;
 
-		simk.SMContext elem_ft197 = null;
+		simk.SMContext elem_ft201 = null;
 
-		result_ft197 = null;
+		result_ft201 = null;
 
 		{
 
-			kermeta.standard.Iterator<simk.SMContext> it_ft197 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
+			kermeta.standard.Iterator<simk.SMContext> it_ft201 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
 					.<simk.SMContext> convertAsOrderedSet(this.getSMContexts())
 					.iterator();
-			java.lang.Boolean idLoopCond_860 = false;
-			while (!idLoopCond_860) {
-				idLoopCond_860 = kermeta.standard.helper.BooleanWrapper.or(
-						it_ft197.isOff(),
+			java.lang.Boolean idLoopCond_926 = false;
+			while (!idLoopCond_926) {
+				idLoopCond_926 = kermeta.standard.helper.BooleanWrapper.or(
+						it_ft201.isOff(),
 						org.kermeta.compil.runtime.helper.language.ObjectUtil
-								.isNotEqual(result_ft197, null));
-				if (idLoopCond_860) {
+								.isNotEqual(result_ft201, null));
+				if (idLoopCond_926) {
 				} else {
 
-					elem_ft197 = it_ft197.next();
+					elem_ft201 = it_ft201.next();
 
-					java.lang.Boolean idIfCond_861 = false;
-					//Beginning of the Inlining of the lambda expression: detector
-					simk.SMContext c = elem_ft197;
+					java.lang.Boolean idIfCond_927 = false;
+					//BIle:detector
+					simk.SMContext c_lbdExp201 = elem_ft201;
 
-					idIfCond_861 = kermeta.standard.helper.BooleanWrapper
+					idIfCond_927 = kermeta.standard.helper.BooleanWrapper
 							.and(
 									kermeta.standard.helper.BooleanWrapper
 											.and(
 													kermeta.standard.helper.StringWrapper
 															.equals(
-																	c
+																	c_lbdExp201
 																			.getQualifiedNameFinalPackage(),
 																	finalPackage_qname),
 													kermeta.standard.helper.StringWrapper
 															.equals(
-																	c
+																	c_lbdExp201
 																			.getSMClass()
 																			.getName(),
 																	class_qname)),
 									org.kermeta.compil.runtime.helper.language.ObjectUtil
-											.equals(c.getSMClass().getUsages(),
-													usage));
-					//End of the Inlining of the lambda expression: detector
+											.equals(c_lbdExp201.getSMClass()
+													.getUsages(), usage));
+					//EIle:detector
 
-					if (idIfCond_861) {
+					if (idIfCond_927) {
 
-						result_ft197 = elem_ft197;
+						result_ft201 = elem_ft201;
 					}
 
 				}
 			}
 		}
 
-		//callElement
-		sMContext = result_ft197;
-		//End of the Inlining of the function type: detect
+		//CE
+		sMContext = result_ft201;
+		//EIft:detect
 
-		java.lang.Boolean idIfCond_862 = false;
-		idIfCond_862 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+		java.lang.Boolean idIfCond_928 = false;
+		idIfCond_928 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 				.isVoid(sMContext);
 
-		if (idIfCond_862) {
+		if (idIfCond_928) {
 
 			sMContext = ((simk.SMContext) org.kermeta.compil.runtime.helper.language.ClassUtil
 					.newObject("simk.SMContext"));

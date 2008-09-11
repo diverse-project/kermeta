@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: UtilsPackage.java,v 1.1 2008-09-04 15:40:27 cfaucher Exp $
+ * $Id: UtilsPackage.java,v 1.2 2008-09-11 12:34:42 cfaucher Exp $
  */
 package kermeta.utils;
 
@@ -75,15 +75,6 @@ public interface UtilsPackage extends EPackage {
 	int STRING_BUFFER = 0;
 
 	/**
-	 * The feature id for the '<em><b>Tag</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int STRING_BUFFER__TAG = StructurePackage.OBJECT__TAG;
-
-	/**
 	 * The feature id for the '<em><b>File</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -91,6 +82,15 @@ public interface UtilsPackage extends EPackage {
 	 * @ordered
 	 */
 	int STRING_BUFFER__FILE = StructurePackage.OBJECT__FILE;
+
+	/**
+	 * The feature id for the '<em><b>Tag</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STRING_BUFFER__TAG = StructurePackage.OBJECT__TAG;
 
 	/**
 	 * The feature id for the '<em><b>File Name</b></em>' attribute.
@@ -157,15 +157,6 @@ public interface UtilsPackage extends EPackage {
 	int STACK = 1;
 
 	/**
-	 * The feature id for the '<em><b>Tag</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int STACK__TAG = StandardPackage.SEQUENCE__TAG;
-
-	/**
 	 * The feature id for the '<em><b>File</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -173,6 +164,15 @@ public interface UtilsPackage extends EPackage {
 	 * @ordered
 	 */
 	int STACK__FILE = StandardPackage.SEQUENCE__FILE;
+
+	/**
+	 * The feature id for the '<em><b>Tag</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STACK__TAG = StandardPackage.SEQUENCE__TAG;
 
 	/**
 	 * The feature id for the '<em><b>File Name</b></em>' attribute.
@@ -248,15 +248,6 @@ public interface UtilsPackage extends EPackage {
 	int HASHTABLE = 2;
 
 	/**
-	 * The feature id for the '<em><b>Tag</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int HASHTABLE__TAG = StructurePackage.OBJECT__TAG;
-
-	/**
 	 * The feature id for the '<em><b>File</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -264,6 +255,15 @@ public interface UtilsPackage extends EPackage {
 	 * @ordered
 	 */
 	int HASHTABLE__FILE = StructurePackage.OBJECT__FILE;
+
+	/**
+	 * The feature id for the '<em><b>Tag</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int HASHTABLE__TAG = StructurePackage.OBJECT__TAG;
 
 	/**
 	 * The feature id for the '<em><b>File Name</b></em>' attribute.

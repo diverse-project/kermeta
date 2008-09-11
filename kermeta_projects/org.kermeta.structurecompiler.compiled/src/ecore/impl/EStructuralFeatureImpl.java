@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: EStructuralFeatureImpl.java,v 1.2 2008-09-08 19:28:31 cfaucher Exp $
+ * $Id: EStructuralFeatureImpl.java,v 1.3 2008-09-11 12:34:38 cfaucher Exp $
  */
 package ecore.impl;
 
@@ -27,8 +27,8 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
  * The following features are implemented:
  * <ul>
  *   <li>{@link ecore.impl.EStructuralFeatureImpl#isVolatile <em>Volatile</em>}</li>
- *   <li>{@link ecore.impl.EStructuralFeatureImpl#getDefaultValueLiteral <em>Default Value Literal</em>}</li>
  *   <li>{@link ecore.impl.EStructuralFeatureImpl#getEContainingClass <em>EContaining Class</em>}</li>
+ *   <li>{@link ecore.impl.EStructuralFeatureImpl#getDefaultValueLiteral <em>Default Value Literal</em>}</li>
  *   <li>{@link ecore.impl.EStructuralFeatureImpl#isTransient <em>Transient</em>}</li>
  *   <li>{@link ecore.impl.EStructuralFeatureImpl#isUnsettable <em>Unsettable</em>}</li>
  *   <li>{@link ecore.impl.EStructuralFeatureImpl#isDerived <em>Derived</em>}</li>
@@ -228,29 +228,6 @@ public abstract class EStructuralFeatureImpl extends ETypedElementImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public String getDefaultValueLiteral() {
-		return defaultValueLiteral;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setDefaultValueLiteral(String newDefaultValueLiteral) {
-		String oldDefaultValueLiteral = defaultValueLiteral;
-		defaultValueLiteral = newDefaultValueLiteral;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET,
-					EcorePackage.ESTRUCTURAL_FEATURE__DEFAULT_VALUE_LITERAL,
-					oldDefaultValueLiteral, defaultValueLiteral));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public ecore.EClass getEContainingClass() {
 		if (eContainerFeatureID != EcorePackage.ESTRUCTURAL_FEATURE__ECONTAINING_CLASS)
 			return null;
@@ -305,6 +282,29 @@ public abstract class EStructuralFeatureImpl extends ETypedElementImpl
 			eNotify(new ENotificationImpl(this, Notification.SET,
 					EcorePackage.ESTRUCTURAL_FEATURE__ECONTAINING_CLASS,
 					newEContainingClass, newEContainingClass));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getDefaultValueLiteral() {
+		return defaultValueLiteral;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setDefaultValueLiteral(String newDefaultValueLiteral) {
+		String oldDefaultValueLiteral = defaultValueLiteral;
+		defaultValueLiteral = newDefaultValueLiteral;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET,
+					EcorePackage.ESTRUCTURAL_FEATURE__DEFAULT_VALUE_LITERAL,
+					oldDefaultValueLiteral, defaultValueLiteral));
 	}
 
 	/**
@@ -414,13 +414,7 @@ public abstract class EStructuralFeatureImpl extends ETypedElementImpl
 	 * @generated
 	 */
 	public int getFeatureID() {
-
 		java.lang.Integer result = null;
-
-		if (true)
-			throw new org.kermeta.compil.runtime.helper.error.KRuntimeError(
-					((kermeta.exceptions.NotImplementedException) org.kermeta.compil.runtime.helper.language.ClassUtil
-							.newObject("kermeta.exceptions.NotImplementedException")));
 
 		return result;
 
@@ -432,13 +426,7 @@ public abstract class EStructuralFeatureImpl extends ETypedElementImpl
 	 * @generated
 	 */
 	public Class<?> getContainerClass() {
-
 		java.lang.Class result = null;
-
-		if (true)
-			throw new org.kermeta.compil.runtime.helper.error.KRuntimeError(
-					((kermeta.exceptions.NotImplementedException) org.kermeta.compil.runtime.helper.language.ClassUtil
-							.newObject("kermeta.exceptions.NotImplementedException")));
 
 		return result;
 
@@ -503,12 +491,12 @@ public abstract class EStructuralFeatureImpl extends ETypedElementImpl
 		switch (featureID) {
 		case EcorePackage.ESTRUCTURAL_FEATURE__VOLATILE:
 			return isVolatile() ? Boolean.TRUE : Boolean.FALSE;
-		case EcorePackage.ESTRUCTURAL_FEATURE__DEFAULT_VALUE_LITERAL:
-			return getDefaultValueLiteral();
 		case EcorePackage.ESTRUCTURAL_FEATURE__ECONTAINING_CLASS:
 			if (resolve)
 				return getEContainingClass();
 			return basicGetEContainingClass();
+		case EcorePackage.ESTRUCTURAL_FEATURE__DEFAULT_VALUE_LITERAL:
+			return getDefaultValueLiteral();
 		case EcorePackage.ESTRUCTURAL_FEATURE__TRANSIENT:
 			return isTransient() ? Boolean.TRUE : Boolean.FALSE;
 		case EcorePackage.ESTRUCTURAL_FEATURE__UNSETTABLE:
@@ -534,11 +522,11 @@ public abstract class EStructuralFeatureImpl extends ETypedElementImpl
 		case EcorePackage.ESTRUCTURAL_FEATURE__VOLATILE:
 			setVolatile(((Boolean) newValue).booleanValue());
 			return;
-		case EcorePackage.ESTRUCTURAL_FEATURE__DEFAULT_VALUE_LITERAL:
-			setDefaultValueLiteral((String) newValue);
-			return;
 		case EcorePackage.ESTRUCTURAL_FEATURE__ECONTAINING_CLASS:
 			setEContainingClass((ecore.EClass) newValue);
+			return;
+		case EcorePackage.ESTRUCTURAL_FEATURE__DEFAULT_VALUE_LITERAL:
+			setDefaultValueLiteral((String) newValue);
 			return;
 		case EcorePackage.ESTRUCTURAL_FEATURE__TRANSIENT:
 			setTransient(((Boolean) newValue).booleanValue());
@@ -567,11 +555,11 @@ public abstract class EStructuralFeatureImpl extends ETypedElementImpl
 		case EcorePackage.ESTRUCTURAL_FEATURE__VOLATILE:
 			setVolatile(VOLATILE_EDEFAULT);
 			return;
-		case EcorePackage.ESTRUCTURAL_FEATURE__DEFAULT_VALUE_LITERAL:
-			setDefaultValueLiteral(DEFAULT_VALUE_LITERAL_EDEFAULT);
-			return;
 		case EcorePackage.ESTRUCTURAL_FEATURE__ECONTAINING_CLASS:
 			setEContainingClass((ecore.EClass) null);
+			return;
+		case EcorePackage.ESTRUCTURAL_FEATURE__DEFAULT_VALUE_LITERAL:
+			setDefaultValueLiteral(DEFAULT_VALUE_LITERAL_EDEFAULT);
 			return;
 		case EcorePackage.ESTRUCTURAL_FEATURE__TRANSIENT:
 			setTransient(TRANSIENT_EDEFAULT);
@@ -599,12 +587,12 @@ public abstract class EStructuralFeatureImpl extends ETypedElementImpl
 		switch (featureID) {
 		case EcorePackage.ESTRUCTURAL_FEATURE__VOLATILE:
 			return volatile_ != VOLATILE_EDEFAULT;
+		case EcorePackage.ESTRUCTURAL_FEATURE__ECONTAINING_CLASS:
+			return basicGetEContainingClass() != null;
 		case EcorePackage.ESTRUCTURAL_FEATURE__DEFAULT_VALUE_LITERAL:
 			return DEFAULT_VALUE_LITERAL_EDEFAULT == null ? defaultValueLiteral != null
 					: !DEFAULT_VALUE_LITERAL_EDEFAULT
 							.equals(defaultValueLiteral);
-		case EcorePackage.ESTRUCTURAL_FEATURE__ECONTAINING_CLASS:
-			return basicGetEContainingClass() != null;
 		case EcorePackage.ESTRUCTURAL_FEATURE__TRANSIENT:
 			return transient_ != TRANSIENT_EDEFAULT;
 		case EcorePackage.ESTRUCTURAL_FEATURE__UNSETTABLE:

@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ETypedElementImpl.java,v 1.2 2008-09-08 19:28:31 cfaucher Exp $
+ * $Id: ETypedElementImpl.java,v 1.3 2008-09-11 12:34:38 cfaucher Exp $
  */
 package ecore.impl;
 

@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ETypedElement.java,v 1.2 2008-09-08 19:28:31 cfaucher Exp $
+ * $Id: ETypedElement.java,v 1.3 2008-09-11 12:34:55 cfaucher Exp $
  */
 package ecore;
 
@@ -27,7 +27,6 @@ package ecore;
  *
  * @see ecore.EcorePackage#getETypedElement()
  * @model abstract="true"
- *        annotation="kermeta aspect='true'"
  * @generated
  */
 public interface ETypedElement extends ENamedElement {
@@ -42,10 +41,11 @@ public interface ETypedElement extends ENamedElement {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Many</em>' attribute.
 	 * @see ecore.EcorePackage#getETypedElement_Many()
-	 * @model default="false" dataType="ecore.EBoolean" changeable="false" derived="true"
+	 * @model default="false" dataType="ecore.EBoolean" transient="true" changeable="false" derived="true"
 	 *        annotation="kermeta isReadOnly='false'"
-	 *        annotation="kompiledderivedProp.setter body='{\n\n\tjava.lang.Boolean idIfCond_928 = false;\n\tidIfCond_928 = kermeta.standard.helper.BooleanWrapper.or(kermeta.standard.helper.IntegerWrapper.isGreater(this.getUpperBound(), 1), kermeta.standard.helper.IntegerWrapper.equals(this.getUpperBound(), kermeta.standard.helper.IntegerWrapper.uminus(1)));\n\n\tif( idIfCond_928 ) {\n\n\tresult = true;\n}\n else {\n\n\tresult = false;\n}\n\n}'"
-	 *        annotation="kompiledderivedProp.getter body='{\n\n\tjava.lang.Boolean idIfCond_929 = false;\n\tidIfCond_929 = kermeta.standard.helper.BooleanWrapper.or(kermeta.standard.helper.IntegerWrapper.isGreater(this.getUpperBound(), 1), kermeta.standard.helper.IntegerWrapper.equals(this.getUpperBound(), kermeta.standard.helper.IntegerWrapper.uminus(1)));\n\n\tif( idIfCond_929 ) {\n\n\tresult = true;\n}\n else {\n\n\tresult = false;\n}\n\n}'"
+	 *        annotation="kermeta ecore.isTransient='true'"
+	 *        annotation="kompiledderivedProp.setter body=''"
+	 *        annotation="kompiledderivedProp.getter body=''"
 	 * @generated
 	 */
 	boolean isMany();
@@ -167,10 +167,11 @@ public interface ETypedElement extends ENamedElement {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Required</em>' attribute.
 	 * @see ecore.EcorePackage#getETypedElement_Required()
-	 * @model default="false" dataType="ecore.EBoolean" changeable="false" derived="true"
+	 * @model default="false" dataType="ecore.EBoolean" transient="true" changeable="false" derived="true"
 	 *        annotation="kermeta isReadOnly='false'"
-	 *        annotation="kompiledderivedProp.setter body='{\n\n\t\nif (true)\n\tthrow new org.kermeta.compil.runtime.helper.error.KRuntimeError( ((kermeta.exceptions.NotImplementedException) org.kermeta.compil.runtime.helper.language.ClassUtil.newObject(\"kermeta.exceptions.NotImplementedException\")) );\n\n}'"
-	 *        annotation="kompiledderivedProp.getter body='{\n\n\t\nif (true)\n\tthrow new org.kermeta.compil.runtime.helper.error.KRuntimeError( ((kermeta.exceptions.NotImplementedException) org.kermeta.compil.runtime.helper.language.ClassUtil.newObject(\"kermeta.exceptions.NotImplementedException\")) );\n\n}'"
+	 *        annotation="kermeta ecore.isTransient='true'"
+	 *        annotation="kompiledderivedProp.setter body=''"
+	 *        annotation="kompiledderivedProp.getter body=''"
 	 * @generated
 	 */
 	boolean isRequired();

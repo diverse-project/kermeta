@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ParameterImpl.java,v 1.1 2008-09-04 15:40:29 cfaucher Exp $
+ * $Id: ParameterImpl.java,v 1.2 2008-09-11 12:34:47 cfaucher Exp $
  */
 package kermeta.language.structure.impl;
 
@@ -185,13 +185,13 @@ public class ParameterImpl extends MultiplicityElementImpl implements Parameter 
 
 		result = false;
 
-		java.lang.Boolean idIfCond_189 = false;
-		idIfCond_189 = kermeta.standard.helper.BooleanWrapper.and(
+		java.lang.Boolean idIfCond_209 = false;
+		idIfCond_209 = kermeta.standard.helper.BooleanWrapper.and(
 				kermeta.standard.helper.IntegerWrapper.equals(this.getUpper(),
 						1), kermeta.standard.helper.StringWrapper.equals(this
 						.getType().getTypeQName(), "java.lang.String"));
 
-		if (idIfCond_189) {
+		if (idIfCond_209) {
 
 			result = true;
 		}
@@ -211,10 +211,10 @@ public class ParameterImpl extends MultiplicityElementImpl implements Parameter 
 
 		result = false;
 
-		java.lang.Boolean idIfCond_190 = false;
-		idIfCond_190 = this.isFunctionType();
+		java.lang.Boolean idIfCond_210 = false;
+		idIfCond_210 = this.isFunctionType();
 
-		if (idIfCond_190) {
+		if (idIfCond_210) {
 
 			kermeta.language.structure.FunctionType ft = ((kermeta.language.structure.FunctionType) org.kermeta.compil.runtime.helper.language.ObjectUtil
 					.asType(
@@ -224,10 +224,10 @@ public class ParameterImpl extends MultiplicityElementImpl implements Parameter 
 									.getMetaClass(
 											"kermeta.language.structure.FunctionType")));
 
-			java.lang.Boolean idIfCond_191 = false;
-			idIfCond_191 = ft.getRight().isBooleanTypeDef(context);
+			java.lang.Boolean idIfCond_211 = false;
+			idIfCond_211 = ft.getRight().isBooleanTypeDef(context);
 
-			if (idIfCond_191) {
+			if (idIfCond_211) {
 
 				result = true;
 			}
@@ -247,8 +247,8 @@ public class ParameterImpl extends MultiplicityElementImpl implements Parameter 
 
 		ecore.EParameter ecoreParameter = null;
 
-		java.lang.Boolean idIfCond_192 = false;
-		idIfCond_192 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+		java.lang.Boolean idIfCond_212 = false;
+		idIfCond_212 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 				.isInstanceOf(
 						this.getType(),
 						org.kermeta.compil.runtime.ExecutionContext
@@ -256,7 +256,7 @@ public class ParameterImpl extends MultiplicityElementImpl implements Parameter 
 								.getMetaClass(
 										"kermeta.language.structure.FunctionType"));
 
-		if (idIfCond_192) {
+		if (idIfCond_212) {
 
 			ecoreParameter = ((ecore.EParameter) org.kermeta.compil.runtime.helper.language.ClassUtil
 					.newObject("ecore.EParameter"));
@@ -280,6 +280,20 @@ public class ParameterImpl extends MultiplicityElementImpl implements Parameter 
 						ecoreParameter);
 
 		this.setEcoreModelElement(ecoreParameter);
+
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void applyPass2(KM2EcoreContext context) {
+
+		this.setLinks(context);
+
+		kermeta.language.structure.helper.ObjectSuper.super_applyPass2(this,
+				context);
 
 	}
 
@@ -319,24 +333,10 @@ public class ParameterImpl extends MultiplicityElementImpl implements Parameter 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void applyPass2(KM2EcoreContext context) {
-
-		this.setLinks(context);
-
-		kermeta.language.structure.helper.ObjectSuper.super_applyPass2(this,
-				context);
-
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public void setLinks(KM2EcoreContext context) {
 
-		java.lang.Boolean idIfCond_193 = false;
-		idIfCond_193 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+		java.lang.Boolean idIfCond_213 = false;
+		idIfCond_213 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 				.isInstanceOf(
 						this.getType(),
 						org.kermeta.compil.runtime.ExecutionContext
@@ -344,7 +344,7 @@ public class ParameterImpl extends MultiplicityElementImpl implements Parameter 
 								.getMetaClass(
 										"kermeta.language.structure.FunctionType"));
 
-		if (idIfCond_193) {
+		if (idIfCond_213) {
 
 			org.kermeta.compil.runtime.helper.io.StdIOUtil
 					.writeln(kermeta.standard.helper.StringWrapper
@@ -353,7 +353,7 @@ public class ParameterImpl extends MultiplicityElementImpl implements Parameter 
 											.plus(
 													kermeta.standard.helper.StringWrapper
 															.plus(
-																	"setLinks FunctionType: ",
+																	"Parameter.setLinks FunctionType: ",
 																	org.kermeta.compil.runtime.helper.language.ObjectUtil
 																			.toString(this
 																					.getType())),
@@ -390,12 +390,12 @@ public class ParameterImpl extends MultiplicityElementImpl implements Parameter 
 					.newObject("km2ecore.helper.ecore.EAnnotationHelper"))
 					.createEmpty("kermeta.functionType");
 
-			java.lang.Boolean idIfCond_194 = false;
-			idIfCond_194 = kermeta.standard.helper.BooleanWrapper
+			java.lang.Boolean idIfCond_214 = false;
+			idIfCond_214 = kermeta.standard.helper.BooleanWrapper
 					.not(org.kermeta.compil.runtime.helper.language.ObjectUtil
 							.isVoid(ft.getLeft()));
 
-			if (idIfCond_194) {
+			if (idIfCond_214) {
 
 				((km2ecore.helper.ecore.EAnnotationHelper) org.kermeta.compil.runtime.helper.language.ClassUtil
 						.newObject("km2ecore.helper.ecore.EAnnotationHelper"))
@@ -403,12 +403,12 @@ public class ParameterImpl extends MultiplicityElementImpl implements Parameter 
 								.getTypeQName());
 			}
 
-			java.lang.Boolean idIfCond_195 = false;
-			idIfCond_195 = kermeta.standard.helper.BooleanWrapper
+			java.lang.Boolean idIfCond_215 = false;
+			idIfCond_215 = kermeta.standard.helper.BooleanWrapper
 					.not(org.kermeta.compil.runtime.helper.language.ObjectUtil
 							.isVoid(ft.getLeft()));
 
-			if (idIfCond_195) {
+			if (idIfCond_215) {
 
 				((km2ecore.helper.ecore.EAnnotationHelper) org.kermeta.compil.runtime.helper.language.ClassUtil
 						.newObject("km2ecore.helper.ecore.EAnnotationHelper"))
@@ -462,21 +462,6 @@ public class ParameterImpl extends MultiplicityElementImpl implements Parameter 
 								.getInstance()
 								.getMetaClass(
 										"kermeta.language.structure.FunctionType"));
-
-		return result;
-
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EParameter getEcoreModelElementTrace() {
-
-		X result = null;
-
-		result = this.getEcoreModelElement();
 
 		return result;
 

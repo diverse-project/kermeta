@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: EStructuralFeature.java,v 1.2 2008-09-08 19:28:31 cfaucher Exp $
+ * $Id: EStructuralFeature.java,v 1.3 2008-09-11 12:34:55 cfaucher Exp $
  */
 package ecore;
 
@@ -15,8 +15,8 @@ package ecore;
  * The following features are supported:
  * <ul>
  *   <li>{@link ecore.EStructuralFeature#isVolatile <em>Volatile</em>}</li>
- *   <li>{@link ecore.EStructuralFeature#getDefaultValueLiteral <em>Default Value Literal</em>}</li>
  *   <li>{@link ecore.EStructuralFeature#getEContainingClass <em>EContaining Class</em>}</li>
+ *   <li>{@link ecore.EStructuralFeature#getDefaultValueLiteral <em>Default Value Literal</em>}</li>
  *   <li>{@link ecore.EStructuralFeature#isTransient <em>Transient</em>}</li>
  *   <li>{@link ecore.EStructuralFeature#isUnsettable <em>Unsettable</em>}</li>
  *   <li>{@link ecore.EStructuralFeature#isDerived <em>Derived</em>}</li>
@@ -27,7 +27,6 @@ package ecore;
  *
  * @see ecore.EcorePackage#getEStructuralFeature()
  * @model abstract="true"
- *        annotation="kermeta aspect='true'"
  * @generated
  */
 public interface EStructuralFeature extends ETypedElement {
@@ -59,32 +58,6 @@ public interface EStructuralFeature extends ETypedElement {
 	void setVolatile(boolean value);
 
 	/**
-	 * Returns the value of the '<em><b>Default Value Literal</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Default Value Literal</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Default Value Literal</em>' attribute.
-	 * @see #setDefaultValueLiteral(String)
-	 * @see ecore.EcorePackage#getEStructuralFeature_DefaultValueLiteral()
-	 * @model dataType="ecore.EString"
-	 * @generated
-	 */
-	String getDefaultValueLiteral();
-
-	/**
-	 * Sets the value of the '{@link ecore.EStructuralFeature#getDefaultValueLiteral <em>Default Value Literal</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Default Value Literal</em>' attribute.
-	 * @see #getDefaultValueLiteral()
-	 * @generated
-	 */
-	void setDefaultValueLiteral(String value);
-
-	/**
 	 * Returns the value of the '<em><b>EContaining Class</b></em>' container reference.
 	 * It is bidirectional and its opposite is '{@link ecore.EClass#getEStructuralFeatures <em>EStructural Features</em>}'.
 	 * <!-- begin-user-doc -->
@@ -112,6 +85,32 @@ public interface EStructuralFeature extends ETypedElement {
 	 * @generated
 	 */
 	void setEContainingClass(EClass value);
+
+	/**
+	 * Returns the value of the '<em><b>Default Value Literal</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Default Value Literal</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Default Value Literal</em>' attribute.
+	 * @see #setDefaultValueLiteral(String)
+	 * @see ecore.EcorePackage#getEStructuralFeature_DefaultValueLiteral()
+	 * @model dataType="ecore.EString"
+	 * @generated
+	 */
+	String getDefaultValueLiteral();
+
+	/**
+	 * Sets the value of the '{@link ecore.EStructuralFeature#getDefaultValueLiteral <em>Default Value Literal</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Default Value Literal</em>' attribute.
+	 * @see #getDefaultValueLiteral()
+	 * @generated
+	 */
+	void setDefaultValueLiteral(String value);
 
 	/**
 	 * Returns the value of the '<em><b>Transient</b></em>' attribute.
@@ -207,8 +206,8 @@ public interface EStructuralFeature extends ETypedElement {
 	 * @model dataType="ecore.EJavaObject" transient="true" changeable="false" derived="true"
 	 *        annotation="kermeta isReadOnly='false'"
 	 *        annotation="kermeta ecore.isTransient='true'"
-	 *        annotation="kompiledderivedProp.setter body='{\n\n\t\nif (true)\n\tthrow new org.kermeta.compil.runtime.helper.error.KRuntimeError( ((kermeta.exceptions.NotImplementedException) org.kermeta.compil.runtime.helper.language.ClassUtil.newObject(\"kermeta.exceptions.NotImplementedException\")) );\n\n}'"
-	 *        annotation="kompiledderivedProp.getter body='{\n\n\t\nif (true)\n\tthrow new org.kermeta.compil.runtime.helper.error.KRuntimeError( ((kermeta.exceptions.NotImplementedException) org.kermeta.compil.runtime.helper.language.ClassUtil.newObject(\"kermeta.exceptions.NotImplementedException\")) );\n\n}'"
+	 *        annotation="kompiledderivedProp.setter body=''"
+	 *        annotation="kompiledderivedProp.getter body=''"
 	 * @generated
 	 */
 	Object getDefaultValue();
@@ -244,7 +243,8 @@ public interface EStructuralFeature extends ETypedElement {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @model kind="operation" dataType="ecore.EInt"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='\njava.lang.Integer result = null;\n\n\t\nif (true)\n\tthrow new org.kermeta.compil.runtime.helper.error.KRuntimeError( ((kermeta.exceptions.NotImplementedException) org.kermeta.compil.runtime.helper.language.ClassUtil.newObject(\"kermeta.exceptions.NotImplementedException\")) );\n\n\nreturn result;\n'"
+	 *        annotation="kermeta isAbstract='true'"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='java.lang.Integer result = null;\n\nreturn result;\n'"
 	 * @generated
 	 */
 	int getFeatureID();
@@ -253,7 +253,8 @@ public interface EStructuralFeature extends ETypedElement {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @model kind="operation" dataType="ecore.EJavaClass<?>"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='\njava.lang.Class result = null;\n\n\t\nif (true)\n\tthrow new org.kermeta.compil.runtime.helper.error.KRuntimeError( ((kermeta.exceptions.NotImplementedException) org.kermeta.compil.runtime.helper.language.ClassUtil.newObject(\"kermeta.exceptions.NotImplementedException\")) );\n\n\nreturn result;\n'"
+	 *        annotation="kermeta isAbstract='true'"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='java.lang.Class result = null;\n\nreturn result;\n'"
 	 * @generated
 	 */
 	Class<?> getContainerClass();

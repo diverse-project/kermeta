@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: LambdaExpression.java,v 1.1 2008-09-04 15:40:22 cfaucher Exp $
+ * $Id: LambdaExpression.java,v 1.2 2008-09-11 12:34:36 cfaucher Exp $
  */
 package kermeta.language.behavior;
 
@@ -19,6 +19,7 @@ import org.eclipse.emf.common.util.EList;
  * The following features are supported:
  * <ul>
  *   <li>{@link kermeta.language.behavior.LambdaExpression#getBody <em>Body</em>}</li>
+ *   <li>{@link kermeta.language.behavior.LambdaExpression#getCuid <em>Cuid</em>}</li>
  *   <li>{@link kermeta.language.behavior.LambdaExpression#getParameters <em>Parameters</em>}</li>
  * </ul>
  * </p>
@@ -54,6 +55,32 @@ public interface LambdaExpression extends Expression {
 	 * @generated
 	 */
 	void setBody(Expression value);
+
+	/**
+	 * Returns the value of the '<em><b>Cuid</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Cuid</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Cuid</em>' attribute.
+	 * @see #setCuid(String)
+	 * @see kermeta.language.behavior.BehaviorPackage#getLambdaExpression_Cuid()
+	 * @model dataType="kermeta.standard.JavaString"
+	 * @generated
+	 */
+	String getCuid();
+
+	/**
+	 * Sets the value of the '{@link kermeta.language.behavior.LambdaExpression#getCuid <em>Cuid</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Cuid</em>' attribute.
+	 * @see #getCuid()
+	 * @generated
+	 */
+	void setCuid(String value);
 
 	/**
 	 * Returns the value of the '<em><b>Parameters</b></em>' containment reference list.

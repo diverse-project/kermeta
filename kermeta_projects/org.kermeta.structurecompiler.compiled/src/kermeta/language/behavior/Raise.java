@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: Raise.java,v 1.1 2008-09-04 15:40:22 cfaucher Exp $
+ * $Id: Raise.java,v 1.2 2008-09-11 12:34:36 cfaucher Exp $
  */
 package kermeta.language.behavior;
 
@@ -21,8 +21,8 @@ import km2ecore.KM2EcoreContext;
  * </p>
  *
  * @see kermeta.language.behavior.BehaviorPackage#getRaise()
- * @model annotation="kermeta documentation='/** Complete \052/'"
- *        annotation="kermeta documentation='Refers to raise exception block'"
+ * @model annotation="kermeta documentation='Refers to raise exception block'"
+ *        annotation="kermeta documentation='/** Complete \052/'"
  * @generated
  */
 public interface Raise extends Expression {

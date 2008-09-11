@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: KermetaPackage.java,v 1.1 2008-09-04 15:40:31 cfaucher Exp $
+ * $Id: KermetaPackage.java,v 1.2 2008-09-11 12:34:51 cfaucher Exp $
  */
 package kermeta;
 
@@ -72,15 +72,6 @@ public interface KermetaPackage extends EPackage {
 	int DUMMY_CLASS = 0;
 
 	/**
-	 * The feature id for the '<em><b>Tag</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DUMMY_CLASS__TAG = StructurePackage.OBJECT__TAG;
-
-	/**
 	 * The feature id for the '<em><b>File</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -88,6 +79,15 @@ public interface KermetaPackage extends EPackage {
 	 * @ordered
 	 */
 	int DUMMY_CLASS__FILE = StructurePackage.OBJECT__FILE;
+
+	/**
+	 * The feature id for the '<em><b>Tag</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DUMMY_CLASS__TAG = StructurePackage.OBJECT__TAG;
 
 	/**
 	 * The feature id for the '<em><b>File Name</b></em>' attribute.

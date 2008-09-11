@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: TraceabilityImpl.java,v 1.1 2008-09-04 15:40:29 cfaucher Exp $
+ * $Id: TraceabilityImpl.java,v 1.2 2008-09-11 12:34:47 cfaucher Exp $
  */
 package kermeta.language.structure.impl;
 
@@ -102,21 +102,6 @@ public class TraceabilityImpl<X> extends ObjectImpl implements Traceability<X> {
 			eNotify(new ENotificationImpl(this, Notification.SET,
 					StructurePackage.TRACEABILITY__ECORE_MODEL_ELEMENT,
 					oldEcoreModelElement, ecoreModelElement));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public X getEcoreModelElementTrace() {
-
-		X result = null;
-
-		result = this.getEcoreModelElement();
-
-		return result;
-
 	}
 
 	/**

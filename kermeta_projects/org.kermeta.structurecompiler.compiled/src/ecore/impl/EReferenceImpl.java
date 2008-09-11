@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: EReferenceImpl.java,v 1.3 2008-09-09 12:59:14 cfaucher Exp $
+ * $Id: EReferenceImpl.java,v 1.4 2008-09-11 12:34:38 cfaucher Exp $
  */
 package ecore.impl;
 
@@ -30,8 +30,8 @@ import org.eclipse.emf.ecore.util.EObjectResolvingEList;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link ecore.impl.EReferenceImpl#getEOpposite <em>EOpposite</em>}</li>
  *   <li>{@link ecore.impl.EReferenceImpl#getEReferenceType <em>EReference Type</em>}</li>
+ *   <li>{@link ecore.impl.EReferenceImpl#getEOpposite <em>EOpposite</em>}</li>
  *   <li>{@link ecore.impl.EReferenceImpl#isResolveProxies <em>Resolve Proxies</em>}</li>
  *   <li>{@link ecore.impl.EReferenceImpl#isContainer <em>Container</em>}</li>
  *   <li>{@link ecore.impl.EReferenceImpl#getEKeys <em>EKeys</em>}</li>
@@ -44,16 +44,6 @@ import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 public class EReferenceImpl extends EStructuralFeatureImpl implements
 		EReference {
 	/**
-	 * The cached value of the '{@link #getEOpposite() <em>EOpposite</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getEOpposite()
-	 * @generated
-	 * @ordered
-	 */
-	protected EReference eOpposite;
-
-	/**
 	 * The cached value of the '{@link #getEReferenceType() <em>EReference Type</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -62,6 +52,16 @@ public class EReferenceImpl extends EStructuralFeatureImpl implements
 	 * @ordered
 	 */
 	protected EClass eReferenceType;
+
+	/**
+	 * The cached value of the '{@link #getEOpposite() <em>EOpposite</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getEOpposite()
+	 * @generated
+	 * @ordered
+	 */
+	protected EReference eOpposite;
 
 	/**
 	 * The default value of the '{@link #isResolveProxies() <em>Resolve Proxies</em>}' attribute.
@@ -157,6 +157,34 @@ public class EReferenceImpl extends EStructuralFeatureImpl implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getEReferenceType() {
+		if (eReferenceType != null && eReferenceType.eIsProxy()) {
+			InternalEObject oldEReferenceType = (InternalEObject) eReferenceType;
+			eReferenceType = (EClass) eResolveProxy(oldEReferenceType);
+			if (eReferenceType != oldEReferenceType) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE,
+							EcorePackage.EREFERENCE__EREFERENCE_TYPE,
+							oldEReferenceType, eReferenceType));
+			}
+		}
+		return eReferenceType;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass basicGetEReferenceType() {
+		return eReferenceType;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EReference getEOpposite() {
 		if (eOpposite != null && eOpposite.eIsProxy()) {
 			InternalEObject oldEOpposite = (InternalEObject) eOpposite;
@@ -191,34 +219,6 @@ public class EReferenceImpl extends EStructuralFeatureImpl implements
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET,
 					EcorePackage.EREFERENCE__EOPPOSITE, oldEOpposite, eOpposite));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EClass getEReferenceType() {
-		if (eReferenceType != null && eReferenceType.eIsProxy()) {
-			InternalEObject oldEReferenceType = (InternalEObject) eReferenceType;
-			eReferenceType = (EClass) eResolveProxy(oldEReferenceType);
-			if (eReferenceType != oldEReferenceType) {
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE,
-							EcorePackage.EREFERENCE__EREFERENCE_TYPE,
-							oldEReferenceType, eReferenceType));
-			}
-		}
-		return eReferenceType;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EClass basicGetEReferenceType() {
-		return eReferenceType;
 	}
 
 	/**
@@ -294,139 +294,17 @@ public class EReferenceImpl extends EStructuralFeatureImpl implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setContainerValue(boolean booleanValue) {
-
-		kermeta.language.structure.ClassDefinition cls = null;
-
-		cls = (kermeta.language.structure.ClassDefinition) org.kermeta.compil.runtime.helper.language.ObjectUtil
-				.getMetaClass(this).getTypeDefinition();
-
-		//Beginning of the Inlining of the function type: detect
-
-		kermeta.language.structure.Property result_ft216 = null;
-
-		kermeta.language.structure.Property elem_ft216 = null;
-
-		result_ft216 = null;
-
-		{
-
-			kermeta.standard.Iterator<kermeta.language.structure.Property> it_ft216 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
-					.<kermeta.language.structure.Property> convertAsOrderedSet(
-							cls.getOwnedAttribute()).iterator();
-			java.lang.Boolean idLoopCond_924 = false;
-			while (!idLoopCond_924) {
-				idLoopCond_924 = kermeta.standard.helper.BooleanWrapper.or(
-						it_ft216.isOff(),
-						org.kermeta.compil.runtime.helper.language.ObjectUtil
-								.isNotEqual(result_ft216, null));
-				if (idLoopCond_924) {
-				} else {
-
-					elem_ft216 = it_ft216.next();
-
-					java.lang.Boolean idIfCond_925 = false;
-					//Beginning of the Inlining of the lambda expression: detector
-					kermeta.language.structure.Property p = elem_ft216;
-
-					idIfCond_925 = kermeta.standard.helper.StringWrapper
-							.equals(p.getName(), "container");
-					//End of the Inlining of the lambda expression: detector
-
-					if (idIfCond_925) {
-
-						result_ft216 = elem_ft216;
-					}
-
-				}
-			}
-		}
-
-		//End of the Inlining of the function type: detect
-		org.kermeta.compil.runtime.helper.language.ObjectUtil.set(this,
-				result_ft216, booleanValue);
-
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public boolean getContainerValue() {
-
-		java.lang.Boolean result = null;
-
-		kermeta.language.structure.ClassDefinition cls = null;
-
-		cls = (kermeta.language.structure.ClassDefinition) org.kermeta.compil.runtime.helper.language.ObjectUtil
-				.getMetaClass(this).getTypeDefinition();
-
-		//Beginning of the Inlining of the function type: detect
-
-		kermeta.language.structure.Property result_ft217 = null;
-
-		kermeta.language.structure.Property elem_ft217 = null;
-
-		result_ft217 = null;
-
-		{
-
-			kermeta.standard.Iterator<kermeta.language.structure.Property> it_ft217 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
-					.<kermeta.language.structure.Property> convertAsOrderedSet(
-							cls.getOwnedAttribute()).iterator();
-			java.lang.Boolean idLoopCond_926 = false;
-			while (!idLoopCond_926) {
-				idLoopCond_926 = kermeta.standard.helper.BooleanWrapper.or(
-						it_ft217.isOff(),
-						org.kermeta.compil.runtime.helper.language.ObjectUtil
-								.isNotEqual(result_ft217, null));
-				if (idLoopCond_926) {
-				} else {
-
-					elem_ft217 = it_ft217.next();
-
-					java.lang.Boolean idIfCond_927 = false;
-					//Beginning of the Inlining of the lambda expression: detector
-					kermeta.language.structure.Property p = elem_ft217;
-
-					idIfCond_927 = kermeta.standard.helper.StringWrapper
-							.equals(p.getName(), "container");
-					//End of the Inlining of the lambda expression: detector
-
-					if (idIfCond_927) {
-
-						result_ft217 = elem_ft217;
-					}
-
-				}
-			}
-		}
-
-		//End of the Inlining of the function type: detect
-		result = (java.lang.Boolean) org.kermeta.compil.runtime.helper.language.ObjectUtil.get((Object) this,
-				result_ft217);
-
-		return result;
-
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-		case EcorePackage.EREFERENCE__EOPPOSITE:
-			if (resolve)
-				return getEOpposite();
-			return basicGetEOpposite();
 		case EcorePackage.EREFERENCE__EREFERENCE_TYPE:
 			if (resolve)
 				return getEReferenceType();
 			return basicGetEReferenceType();
+		case EcorePackage.EREFERENCE__EOPPOSITE:
+			if (resolve)
+				return getEOpposite();
+			return basicGetEOpposite();
 		case EcorePackage.EREFERENCE__RESOLVE_PROXIES:
 			return isResolveProxies() ? Boolean.TRUE : Boolean.FALSE;
 		case EcorePackage.EREFERENCE__CONTAINER:
@@ -497,10 +375,10 @@ public class EReferenceImpl extends EStructuralFeatureImpl implements
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-		case EcorePackage.EREFERENCE__EOPPOSITE:
-			return eOpposite != null;
 		case EcorePackage.EREFERENCE__EREFERENCE_TYPE:
 			return eReferenceType != null;
+		case EcorePackage.EREFERENCE__EOPPOSITE:
+			return eOpposite != null;
 		case EcorePackage.EREFERENCE__RESOLVE_PROXIES:
 			return resolveProxies != RESOLVE_PROXIES_EDEFAULT;
 		case EcorePackage.EREFERENCE__CONTAINER:

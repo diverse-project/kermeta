@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: Property.java,v 1.1 2008-09-04 15:40:23 cfaucher Exp $
+ * $Id: Property.java,v 1.2 2008-09-11 12:34:37 cfaucher Exp $
  */
 package kermeta.language.structure;
 
@@ -26,9 +26,9 @@ import km2ecore.KM2EcoreContext;
  *   <li>{@link kermeta.language.structure.Property#getGetterBody <em>Getter Body</em>}</li>
  *   <li>{@link kermeta.language.structure.Property#getIsReadOnly <em>Is Read Only</em>}</li>
  *   <li>{@link kermeta.language.structure.Property#getSetterBody <em>Setter Body</em>}</li>
- *   <li>{@link kermeta.language.structure.Property#getIsSetterAbstract <em>Is Setter Abstract</em>}</li>
  *   <li>{@link kermeta.language.structure.Property#getIsID <em>Is ID</em>}</li>
  *   <li>{@link kermeta.language.structure.Property#getOwningClass <em>Owning Class</em>}</li>
+ *   <li>{@link kermeta.language.structure.Property#getIsSetterAbstract <em>Is Setter Abstract</em>}</li>
  *   <li>{@link kermeta.language.structure.Property#getIsGetterAbstract <em>Is Getter Abstract</em>}</li>
  *   <li>{@link kermeta.language.structure.Property#getIsComposite <em>Is Composite</em>}</li>
  * </ul>
@@ -36,8 +36,8 @@ import km2ecore.KM2EcoreContext;
  *
  * @see kermeta.language.structure.StructurePackage#getProperty()
  * @model annotation="kermeta documentation='/**\n *\n \052/'"
- *        annotation="kermeta documentation='/** We have to visit property in order to print the behavior of the getter and setter \052/'"
  *        annotation="kermeta documentation='Class representing the property definition. Kermeta<->Ecore equivalence:\n - Property with isComposite == true or with type is a base type (String, Integer, Boolean)  : EAttribute\n - Property with isComposite == false : EReference'"
+ *        annotation="kermeta documentation='/** We have to visit property in order to print the behavior of the getter and setter \052/'"
  * @generated
  */
 public interface Property extends MultiplicityElement,
@@ -206,34 +206,6 @@ public interface Property extends MultiplicityElement,
 	void setSetterBody(Expression value);
 
 	/**
-	 * Returns the value of the '<em><b>Is Setter Abstract</b></em>' attribute.
-	 * The default value is <code>"false"</code>.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Is Setter Abstract</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Is Setter Abstract</em>' attribute.
-	 * @see #setIsSetterAbstract(Boolean)
-	 * @see kermeta.language.structure.StructurePackage#getProperty_IsSetterAbstract()
-	 * @model default="false" dataType="kermeta.standard.JavaBoolean"
-	 *        annotation="kermeta documentation='Boolean stating wether the setter is abstract.'"
-	 * @generated
-	 */
-	Boolean getIsSetterAbstract();
-
-	/**
-	 * Sets the value of the '{@link kermeta.language.structure.Property#getIsSetterAbstract <em>Is Setter Abstract</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Is Setter Abstract</em>' attribute.
-	 * @see #getIsSetterAbstract()
-	 * @generated
-	 */
-	void setIsSetterAbstract(Boolean value);
-
-	/**
 	 * Returns the value of the '<em><b>Is ID</b></em>' attribute.
 	 * The default value is <code>"false"</code>.
 	 * <!-- begin-user-doc -->
@@ -289,6 +261,34 @@ public interface Property extends MultiplicityElement,
 	 * @generated
 	 */
 	void setOwningClass(ClassDefinition value);
+
+	/**
+	 * Returns the value of the '<em><b>Is Setter Abstract</b></em>' attribute.
+	 * The default value is <code>"false"</code>.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Is Setter Abstract</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Is Setter Abstract</em>' attribute.
+	 * @see #setIsSetterAbstract(Boolean)
+	 * @see kermeta.language.structure.StructurePackage#getProperty_IsSetterAbstract()
+	 * @model default="false" dataType="kermeta.standard.JavaBoolean"
+	 *        annotation="kermeta documentation='Boolean stating wether the setter is abstract.'"
+	 * @generated
+	 */
+	Boolean getIsSetterAbstract();
+
+	/**
+	 * Sets the value of the '{@link kermeta.language.structure.Property#getIsSetterAbstract <em>Is Setter Abstract</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Is Setter Abstract</em>' attribute.
+	 * @see #getIsSetterAbstract()
+	 * @generated
+	 */
+	void setIsSetterAbstract(Boolean value);
 
 	/**
 	 * Returns the value of the '<em><b>Is Getter Abstract</b></em>' attribute.
@@ -351,7 +351,7 @@ public interface Property extends MultiplicityElement,
 	 * <!-- end-user-doc -->
 	 * @model dataType="kermeta.standard.JavaString"
 	 *        annotation="kermeta superOperation='kermeta::language::structure::Object'"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='\njava.lang.String result = null;\n\n\tresult = null;\n\n\tjava.lang.String javaCode = \"\";\n\n\tjava.lang.Boolean idIfCond_196 = false;\n\tidIfCond_196 = this.getIsDerived();\n\n\tif( idIfCond_196 ) {\n\n\tjava.lang.Boolean idIfCond_197 = false;\n\tidIfCond_197 = kermeta.standard.helper.BooleanWrapper.not(this.getIsReadOnly());\n\n\tif( idIfCond_197 ) {\n\n\tjavaCode = this.getGetterBody().createBehaviorJava(context);\n\n\t((km2ecore.helper.ecore.EAnnotationHelper) org.kermeta.compil.runtime.helper.language.ClassUtil.newObject(\"km2ecore.helper.ecore.EAnnotationHelper\")).addAnnotationPropSetter(this.getEcoreModelElement(), kermeta.standard.helper.StringWrapper.toString(javaCode));\n}\n\n\n\tjavaCode = this.getGetterBody().createBehaviorJava(context);\n\n\t((km2ecore.helper.ecore.EAnnotationHelper) org.kermeta.compil.runtime.helper.language.ClassUtil.newObject(\"km2ecore.helper.ecore.EAnnotationHelper\")).addAnnotationPropGetter(this.getEcoreModelElement(), kermeta.standard.helper.StringWrapper.toString(javaCode));\n}\n\n\nreturn result;\n'"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='\njava.lang.String result = null;\n\n\tresult = null;\n\n\tjava.lang.String javaCode = \"\";\n\n\tjava.lang.Boolean idIfCond_219 = false;\n\tidIfCond_219 = this.getIsDerived();\n\n\tif( idIfCond_219 ) {\n\n\tjava.lang.Boolean idIfCond_220 = false;\n\tidIfCond_220 = kermeta.standard.helper.BooleanWrapper.not(this.getIsReadOnly());\n\n\tif( idIfCond_220 ) {\n\n\tjavaCode = this.getGetterBody().createBehaviorJava(context);\n\n\t((km2ecore.helper.ecore.EAnnotationHelper) org.kermeta.compil.runtime.helper.language.ClassUtil.newObject(\"km2ecore.helper.ecore.EAnnotationHelper\")).addAnnotationPropSetter(this.getEcoreModelElement(), kermeta.standard.helper.StringWrapper.toString(javaCode));\n}\n\n\n\tjavaCode = this.getGetterBody().createBehaviorJava(context);\n\n\t((km2ecore.helper.ecore.EAnnotationHelper) org.kermeta.compil.runtime.helper.language.ClassUtil.newObject(\"km2ecore.helper.ecore.EAnnotationHelper\")).addAnnotationPropGetter(this.getEcoreModelElement(), kermeta.standard.helper.StringWrapper.toString(javaCode));\n}\n\n\nreturn result;\n'"
 	 * @generated
 	 */
 	String createBehaviorJava(KM2EcoreContext context);
@@ -360,7 +360,7 @@ public interface Property extends MultiplicityElement,
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @model annotation="kermeta superOperation='kermeta::language::structure::Object'"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='\n\tecore.EStructuralFeature ecoreStructuralFeature = this.createEcoreModelElement(context);\n\n\tkermeta.language.structure.ClassDefinition c = null;\n\n\tc = (kermeta.language.structure.ClassDefinition) org.kermeta.compil.runtime.helper.language.ObjectUtil.container(this);\n\n\torg.kermeta.compil.runtime.helper.basetypes.CollectionUtil.<ecore.EStructuralFeature>convertAsOrderedSet(c.getEcoreModelElement().getEStructuralFeatures()).add(ecoreStructuralFeature);\n\n\tthis.setEcoreModelElement(ecoreStructuralFeature);\n\n\t//Beginning of the Inlining of the function type: eachOwnedElement\n\n\t//Beginning of the Inlining of the function type: each\n\n\t\n{\n\n\tkermeta.standard.Iterator<kermeta.language.structure.Tag> it_ft72 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil.<kermeta.language.structure.Tag>convertAsOrderedSet(this.getOwnedTags()).iterator();\n\tjava.lang.Boolean idLoopCond_198 = false;\n\twhile( !idLoopCond_198 ) {\n\tidLoopCond_198 = it_ft72.isOff();\n\tif ( idLoopCond_198 ) {\n\t} else {\n\n\t//Beginning of the Inlining of the lambda expression: func\nkermeta.language.structure.Tag o = it_ft72.next();\n\n\t//Beginning of the Inlining of the lambda expression: func\nkermeta.language.structure.Tag o = o_ft72;\n\n\to.applyPass1(context);\n//End of the Inlining of the lambda expression: func\n\n//End of the Inlining of the lambda expression: func\n\n}\n\t}\n}\n\n//End of the Inlining of the function type: each\n\n//End of the Inlining of the function type: eachOwnedElement\n\n'"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='\n\tecore.EStructuralFeature ecoreStructuralFeature = this.createEcoreModelElement(context);\n\n\tkermeta.language.structure.ClassDefinition c = null;\n\n\tc = (kermeta.language.structure.ClassDefinition) org.kermeta.compil.runtime.helper.language.ObjectUtil.container(this);\n\n\torg.kermeta.compil.runtime.helper.basetypes.CollectionUtil.<ecore.EStructuralFeature>convertAsOrderedSet(c.getEcoreModelElement().getEStructuralFeatures()).add(ecoreStructuralFeature);\n\n\tthis.setEcoreModelElement(ecoreStructuralFeature);\n\n\t//BIft:eachOwnedElement\n\n\t//BIft:each\n\n\t\n{\n\n\tkermeta.standard.Iterator<kermeta.language.structure.Tag> it_ft69 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil.<kermeta.language.structure.Tag>convertAsOrderedSet(this.getOwnedTags()).iterator();\n\tjava.lang.Boolean idLoopCond_221 = false;\n\twhile( !idLoopCond_221 ) {\n\tidLoopCond_221 = it_ft69.isOff();\n\tif ( idLoopCond_221 ) {\n\t} else {\n\n\t//BIle:func\nkermeta.language.structure.Tag o_lbdExp69 = it_ft69.next();\n\n\t//BIle:func\nkermeta.language.structure.Tag o_lbdExp68 = o_lbdExp69;\n\n\to_lbdExp68.applyPass1(context);\n//EIle:func\n\n//EIle:func\n\n}\n\t}\n}\n\n//EIft:each\n\n//EIft:eachOwnedElement\n\n'"
 	 * @generated
 	 */
 	void applyPass1(KM2EcoreContext context);
@@ -377,7 +377,7 @@ public interface Property extends MultiplicityElement,
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @model annotation="http://www.eclipse.org/emf/2002/GenModel body='\necore.EStructuralFeature result = null;\n\n\tecore.EStructuralFeature ecoreStructuralFeature = null;\n\n\tkermeta.language.structure.Type current_type = ((kermeta.language.structure.Type) org.kermeta.compil.runtime.helper.language.ObjectUtil.asType(this.getType(), org.kermeta.compil.runtime.ExecutionContext.getInstance().getMetaClass(\"kermeta.language.structure.Type\")));\n\n\tjava.lang.Boolean idIfCond_199 = false;\n\tidIfCond_199 = kermeta.standard.helper.BooleanWrapper.or(kermeta.standard.helper.BooleanWrapper.or(current_type.isValueType(), current_type.isEnumeration()), current_type.isEDataType());\n\n\tif( idIfCond_199 ) {\n\n\tecoreStructuralFeature = ((ecore.EAttribute) org.kermeta.compil.runtime.helper.language.ClassUtil.newObject(\"ecore.EAttribute\"));\n}\n else {\n\n\tecoreStructuralFeature = ((ecore.EReference) org.kermeta.compil.runtime.helper.language.ClassUtil.newObject(\"ecore.EReference\"));\n\n\t((ecore.EReference) org.kermeta.compil.runtime.helper.language.ObjectUtil.asType(ecoreStructuralFeature, org.kermeta.compil.runtime.ExecutionContext.getInstance().getMetaClass(\"ecore.EReference\"))).setContainment(this.getIsComposite());\n}\n\n\n\t((km2ecore.helper.ecore.EcoreModelElementHelper) org.kermeta.compil.runtime.helper.language.ClassUtil.newObject(\"km2ecore.helper.ecore.EcoreModelElementHelper\")).setEStructuralFeatureProperties(this, ecoreStructuralFeature, context);\n\n\tjava.lang.Boolean idIfCond_200 = false;\n\tidIfCond_200 = this.getIsDerived();\n\n\tif( idIfCond_200 ) {\n\n\tecore.EAnnotation annotation = ((km2ecore.helper.ecore.EAnnotationHelper) org.kermeta.compil.runtime.helper.language.ClassUtil.newObject(\"km2ecore.helper.ecore.EAnnotationHelper\")).createKermetaEAnnotation(kermeta.standard.helper.StringWrapper.toString(km2ecore.helper.ecore.KermetaEAnnotationKey.getByName(\"isReadOnly\").getName()), kermeta.standard.helper.BooleanWrapper.toString(this.getIsReadOnly()));\n\n\torg.kermeta.compil.runtime.helper.basetypes.CollectionUtil.<ecore.EAnnotation>convertAsOrderedSet(ecoreStructuralFeature.getEAnnotations()).add(annotation);\n}\n\n\n\tecoreStructuralFeature.setTransient(this.getEMFIsTransient());\n\n\tresult = ecoreStructuralFeature;\n\nreturn result;\n'"
+	 * @model annotation="http://www.eclipse.org/emf/2002/GenModel body='\necore.EStructuralFeature result = null;\n\n\tecore.EStructuralFeature ecoreStructuralFeature = null;\n\n\tkermeta.language.structure.Type current_type = ((kermeta.language.structure.Type) org.kermeta.compil.runtime.helper.language.ObjectUtil.asType(this.getType(), org.kermeta.compil.runtime.ExecutionContext.getInstance().getMetaClass(\"kermeta.language.structure.Type\")));\n\n\tjava.lang.Boolean idIfCond_222 = false;\n\tidIfCond_222 = kermeta.standard.helper.BooleanWrapper.or(kermeta.standard.helper.BooleanWrapper.or(current_type.isValueType(), current_type.isEnumeration()), current_type.isEDataType());\n\n\tif( idIfCond_222 ) {\n\n\tecoreStructuralFeature = ((ecore.EAttribute) org.kermeta.compil.runtime.helper.language.ClassUtil.newObject(\"ecore.EAttribute\"));\n}\n else {\n\n\tecoreStructuralFeature = ((ecore.EReference) org.kermeta.compil.runtime.helper.language.ClassUtil.newObject(\"ecore.EReference\"));\n\n\t((ecore.EReference) org.kermeta.compil.runtime.helper.language.ObjectUtil.asType(ecoreStructuralFeature, org.kermeta.compil.runtime.ExecutionContext.getInstance().getMetaClass(\"ecore.EReference\"))).setContainment(this.getIsComposite());\n}\n\n\n\t((km2ecore.helper.ecore.EcoreModelElementHelper) org.kermeta.compil.runtime.helper.language.ClassUtil.newObject(\"km2ecore.helper.ecore.EcoreModelElementHelper\")).setEStructuralFeatureProperties(this, ecoreStructuralFeature, context);\n\n\tjava.lang.Boolean idIfCond_223 = false;\n\tidIfCond_223 = this.getIsDerived();\n\n\tif( idIfCond_223 ) {\n\n\tecoreStructuralFeature.setChangeable(this.getIsReadOnly());\n\n\tecore.EAnnotation annotation = ((km2ecore.helper.ecore.EAnnotationHelper) org.kermeta.compil.runtime.helper.language.ClassUtil.newObject(\"km2ecore.helper.ecore.EAnnotationHelper\")).createKermetaEAnnotation(kermeta.standard.helper.StringWrapper.toString(km2ecore.helper.ecore.KermetaEAnnotationKey.getByName(\"isReadOnly\").getName()), kermeta.standard.helper.BooleanWrapper.toString(this.getIsReadOnly()));\n\n\torg.kermeta.compil.runtime.helper.basetypes.CollectionUtil.<ecore.EAnnotation>convertAsOrderedSet(ecoreStructuralFeature.getEAnnotations()).add(annotation);\n}\n\n\n\tecoreStructuralFeature.setTransient(this.getEMFIsTransient());\n\n\tresult = ecoreStructuralFeature;\n\nreturn result;\n'"
 	 * @generated
 	 */
 	EStructuralFeature createEcoreModelElement(KM2EcoreContext context);
@@ -385,7 +385,7 @@ public interface Property extends MultiplicityElement,
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @model annotation="http://www.eclipse.org/emf/2002/GenModel body='\n\t((kermeta.language.structure.LinkSetterForTypedElement) org.kermeta.compil.runtime.helper.language.ClassUtil.newObject(\"kermeta.language.structure.LinkSetterForTypedElement\")).setLinks(this, this.getEcoreModelElement(), context);\n\n\tjava.lang.Boolean idIfCond_201 = false;\n\tidIfCond_201 = kermeta.standard.helper.BooleanWrapper.not(org.kermeta.compil.runtime.helper.language.ObjectUtil.isVoid(this.getOpposite()));\n\n\tif( idIfCond_201 ) {\n\n\t((ecore.EReference) org.kermeta.compil.runtime.helper.language.ObjectUtil.asType(this.getEcoreModelElement(), org.kermeta.compil.runtime.ExecutionContext.getInstance().getMetaClass(\"ecore.EReference\"))).setEOpposite(((ecore.EReference) org.kermeta.compil.runtime.helper.language.ObjectUtil.asType(this.getOpposite().getEcoreModelElement(), org.kermeta.compil.runtime.ExecutionContext.getInstance().getMetaClass(\"ecore.EReference\"))));\n}\n\n\n\tjava.lang.Boolean idIfCond_202 = false;\n\tidIfCond_202 = kermeta.standard.helper.StringWrapper.equals(this.getType().getTypeQName(), \"kermeta::standard::Boolean\");\n\n\tif( idIfCond_202 ) {\n\n\tthis.getEcoreModelElement().setDefaultValueLiteral(\"false\");\n}\n\n'"
+	 * @model annotation="http://www.eclipse.org/emf/2002/GenModel body='\n\t((kermeta.language.structure.LinkSetterForTypedElement) org.kermeta.compil.runtime.helper.language.ClassUtil.newObject(\"kermeta.language.structure.LinkSetterForTypedElement\")).setLinks(this, this.getEcoreModelElement(), context);\n\n\tjava.lang.Boolean idIfCond_224 = false;\n\tidIfCond_224 = kermeta.standard.helper.BooleanWrapper.not(org.kermeta.compil.runtime.helper.language.ObjectUtil.isVoid(this.getOpposite()));\n\n\tif( idIfCond_224 ) {\n\n\t((ecore.EReference) org.kermeta.compil.runtime.helper.language.ObjectUtil.asType(this.getEcoreModelElement(), org.kermeta.compil.runtime.ExecutionContext.getInstance().getMetaClass(\"ecore.EReference\"))).setEOpposite(((ecore.EReference) org.kermeta.compil.runtime.helper.language.ObjectUtil.asType(this.getOpposite().getEcoreModelElement(), org.kermeta.compil.runtime.ExecutionContext.getInstance().getMetaClass(\"ecore.EReference\"))));\n}\n\n\n\tjava.lang.Boolean idIfCond_225 = false;\n\tidIfCond_225 = kermeta.standard.helper.StringWrapper.equals(this.getType().getTypeQName(), \"kermeta::standard::Boolean\");\n\n\tif( idIfCond_225 ) {\n\n\tthis.getEcoreModelElement().setDefaultValueLiteral(\"false\");\n}\n\n'"
 	 * @generated
 	 */
 	void setLinks(KM2EcoreContext context);

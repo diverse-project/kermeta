@@ -16,47 +16,48 @@ public class ObjectSuper {
 
 	) {
 
-		//Beginning of the Inlining of the function type: eachOwnedElement
+		//BIft:eachOwnedElement
 
-		//Beginning of the Inlining of the function type: each
+		//BIft:each
 
 		{
 
-			kermeta.standard.Iterator<kermeta.language.structure.Tag> it_ft202 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
+			kermeta.standard.Iterator<kermeta.language.structure.Tag> it_ft203 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
 					.<kermeta.language.structure.Tag> convertAsOrderedSet(
 							self.getOwnedTags()).iterator();
-			java.lang.Boolean idLoopCond_869 = false;
-			while (!idLoopCond_869) {
-				idLoopCond_869 = it_ft202.isOff();
-				if (idLoopCond_869) {
+			java.lang.Boolean idLoopCond_929 = false;
+			while (!idLoopCond_929) {
+				idLoopCond_929 = it_ft203.isOff();
+				if (idLoopCond_929) {
 				} else {
 
-					//Beginning of the Inlining of the lambda expression: func
-					kermeta.language.structure.Tag o = it_ft202.next();
+					//BIle:func
+					kermeta.language.structure.Tag o_lbdExp203 = it_ft203
+							.next();
 
-					//Beginning of the Inlining of the lambda expression: func
-					kermeta.language.structure.Tag p = o_ft202;
+					//BIle:func
+					kermeta.language.structure.Tag p_lbdExp202 = o_lbdExp203;
 
-					java.lang.Boolean idIfCond_870 = false;
-					idIfCond_870 = kermeta.standard.helper.StringWrapper
-							.equals(p.getDeprecated(), "");
+					java.lang.Boolean idIfCond_930 = false;
+					idIfCond_930 = kermeta.standard.helper.StringWrapper
+							.equals(p_lbdExp202.getDeprecated(), "");
 
-					if (idIfCond_870) {
+					if (idIfCond_930) {
 
-						p.applyPass2(context);
+						p_lbdExp202.applyPass2(context);
 					}
 
-					//End of the Inlining of the lambda expression: func
+					//EIle:func
 
-					//End of the Inlining of the lambda expression: func
+					//EIle:func
 
 				}
 			}
 		}
 
-		//End of the Inlining of the function type: each
+		//EIft:each
 
-		//End of the Inlining of the function type: eachOwnedElement
+		//EIft:eachOwnedElement
 
 	}
 
@@ -70,39 +71,40 @@ public class ObjectSuper {
 
 	) {
 
-		//Beginning of the Inlining of the function type: eachOwnedElement
+		//BIft:eachOwnedElement
 
-		//Beginning of the Inlining of the function type: each
+		//BIft:each
 
 		{
 
-			kermeta.standard.Iterator<kermeta.language.structure.Tag> it_ft204 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
+			kermeta.standard.Iterator<kermeta.language.structure.Tag> it_ft205 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
 					.<kermeta.language.structure.Tag> convertAsOrderedSet(
 							self.getOwnedTags()).iterator();
-			java.lang.Boolean idLoopCond_871 = false;
-			while (!idLoopCond_871) {
-				idLoopCond_871 = it_ft204.isOff();
-				if (idLoopCond_871) {
+			java.lang.Boolean idLoopCond_931 = false;
+			while (!idLoopCond_931) {
+				idLoopCond_931 = it_ft205.isOff();
+				if (idLoopCond_931) {
 				} else {
 
-					//Beginning of the Inlining of the lambda expression: func
-					kermeta.language.structure.Tag o = it_ft204.next();
+					//BIle:func
+					kermeta.language.structure.Tag o_lbdExp205 = it_ft205
+							.next();
 
-					//Beginning of the Inlining of the lambda expression: func
-					kermeta.language.structure.Tag p = o_ft204;
+					//BIle:func
+					kermeta.language.structure.Tag p_lbdExp204 = o_lbdExp205;
 
-					p.applyPass2BehaviorJava(context);
-					//End of the Inlining of the lambda expression: func
+					p_lbdExp204.applyPass2BehaviorJava(context);
+					//EIle:func
 
-					//End of the Inlining of the lambda expression: func
+					//EIle:func
 
 				}
 			}
 		}
 
-		//End of the Inlining of the function type: each
+		//EIft:each
 
-		//End of the Inlining of the function type: eachOwnedElement
+		//EIft:eachOwnedElement
 
 	}
 

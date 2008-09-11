@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: LambdaExpressionImpl.java,v 1.1 2008-09-04 15:40:25 cfaucher Exp $
+ * $Id: LambdaExpressionImpl.java,v 1.2 2008-09-11 12:34:40 cfaucher Exp $
  */
 package kermeta.language.behavior.impl;
 
@@ -36,6 +36,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * The following features are implemented:
  * <ul>
  *   <li>{@link kermeta.language.behavior.impl.LambdaExpressionImpl#getBody <em>Body</em>}</li>
+ *   <li>{@link kermeta.language.behavior.impl.LambdaExpressionImpl#getCuid <em>Cuid</em>}</li>
  *   <li>{@link kermeta.language.behavior.impl.LambdaExpressionImpl#getParameters <em>Parameters</em>}</li>
  * </ul>
  * </p>
@@ -53,6 +54,26 @@ public class LambdaExpressionImpl extends ExpressionImpl implements
 	 * @ordered
 	 */
 	protected Expression body;
+
+	/**
+	 * The default value of the '{@link #getCuid() <em>Cuid</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getCuid()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String CUID_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getCuid() <em>Cuid</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getCuid()
+	 * @generated
+	 * @ordered
+	 */
+	protected String cuid = CUID_EDEFAULT;
 
 	/**
 	 * The cached value of the '{@link #getParameters() <em>Parameters</em>}' containment reference list.
@@ -175,6 +196,28 @@ public class LambdaExpressionImpl extends ExpressionImpl implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public String getCuid() {
+		return cuid;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setCuid(String newCuid) {
+		String oldCuid = cuid;
+		cuid = newCuid;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET,
+					BehaviorPackage.LAMBDA_EXPRESSION__CUID, oldCuid, cuid));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EList<LambdaParameter> getParameters() {
 		if (parameters == null) {
 			parameters = new EObjectContainmentEList.Resolving<LambdaParameter>(
@@ -231,6 +274,8 @@ public class LambdaExpressionImpl extends ExpressionImpl implements
 			if (resolve)
 				return getBody();
 			return basicGetBody();
+		case BehaviorPackage.LAMBDA_EXPRESSION__CUID:
+			return getCuid();
 		case BehaviorPackage.LAMBDA_EXPRESSION__PARAMETERS:
 			return getParameters();
 		}
@@ -248,6 +293,9 @@ public class LambdaExpressionImpl extends ExpressionImpl implements
 		switch (featureID) {
 		case BehaviorPackage.LAMBDA_EXPRESSION__BODY:
 			setBody((Expression) newValue);
+			return;
+		case BehaviorPackage.LAMBDA_EXPRESSION__CUID:
+			setCuid((String) newValue);
 			return;
 		case BehaviorPackage.LAMBDA_EXPRESSION__PARAMETERS:
 			getParameters().clear();
@@ -269,6 +317,9 @@ public class LambdaExpressionImpl extends ExpressionImpl implements
 		case BehaviorPackage.LAMBDA_EXPRESSION__BODY:
 			setBody((Expression) null);
 			return;
+		case BehaviorPackage.LAMBDA_EXPRESSION__CUID:
+			setCuid(CUID_EDEFAULT);
+			return;
 		case BehaviorPackage.LAMBDA_EXPRESSION__PARAMETERS:
 			getParameters().clear();
 			return;
@@ -286,10 +337,30 @@ public class LambdaExpressionImpl extends ExpressionImpl implements
 		switch (featureID) {
 		case BehaviorPackage.LAMBDA_EXPRESSION__BODY:
 			return body != null;
+		case BehaviorPackage.LAMBDA_EXPRESSION__CUID:
+			return CUID_EDEFAULT == null ? cuid != null : !CUID_EDEFAULT
+					.equals(cuid);
 		case BehaviorPackage.LAMBDA_EXPRESSION__PARAMETERS:
 			return parameters != null && !parameters.isEmpty();
 		}
 		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String toString() {
+		if (eIsProxy())
+			return super.toString();
+
+		StringBuffer result = new StringBuffer(super.toString());
+		result.append(" (cuid: ");
+		result.append(cuid);
+		result.append(')');
+		return result.toString();
 	}
 
 } //LambdaExpressionImpl

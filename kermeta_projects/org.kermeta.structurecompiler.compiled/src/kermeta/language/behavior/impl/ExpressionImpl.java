@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ExpressionImpl.java,v 1.1 2008-09-04 15:40:25 cfaucher Exp $
+ * $Id: ExpressionImpl.java,v 1.2 2008-09-11 12:34:40 cfaucher Exp $
  */
 package kermeta.language.behavior.impl;
 
@@ -36,7 +36,8 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  *
  * @generated
  */
-public class ExpressionImpl extends TypeContainerImpl implements Expression {
+public abstract class ExpressionImpl extends TypeContainerImpl implements
+		Expression {
 	/**
 	 * The default value of the '{@link #getBeforeLambdaExpressionResult() <em>Before Lambda Expression Result</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -160,20 +161,65 @@ public class ExpressionImpl extends TypeContainerImpl implements Expression {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public String createBehaviorJava(KM2EcoreContext context) {
+
+		java.lang.String result = null;
+
+		java.lang.Boolean idIfCond_379 = false;
+		idIfCond_379 = kermeta.standard.helper.BooleanWrapper.and(
+				org.kermeta.compil.runtime.helper.language.ObjectUtil
+						.isNotEqual(this.getCompiledJavaExtern(), ""),
+				kermeta.standard.helper.StringWrapper.equals(context
+						.getCompiledJavaExtern(), ""));
+
+		if (idIfCond_379) {
+
+			context.setCompiledJavaExtern(this.getCompiledJavaExtern());
+
+			java.lang.Boolean idIfCond_380 = false;
+			idIfCond_380 = kermeta.standard.helper.BooleanWrapper
+					.or(
+							kermeta.standard.helper.BooleanWrapper
+									.not(org.kermeta.compil.runtime.helper.language.ObjectUtil
+											.isVoid(context
+													.getCurrent_valueType())),
+							context.getStaticOperationMode());
+
+			if (idIfCond_380) {
+
+				context
+						.setCompiledJavaExtern(kermeta.standard.helper.StringWrapper
+								.replace(context.getCompiledJavaExtern(),
+										"this", "self"));
+			}
+
+		}
+
+		result = "";
+
+		return result;
+
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public String endOfExpressionFixer() {
 
 		java.lang.String result = null;
 
 		result = "";
 
-		java.lang.Boolean idIfCond_303 = false;
-		idIfCond_303 = kermeta.standard.helper.BooleanWrapper.not(this
+		java.lang.Boolean idIfCond_381 = false;
+		idIfCond_381 = kermeta.standard.helper.BooleanWrapper.not(this
 				.callsFunctionType());
 
-		if (idIfCond_303) {
+		if (idIfCond_381) {
 
-			java.lang.Boolean idIfCond_304 = false;
-			idIfCond_304 = kermeta.standard.helper.BooleanWrapper
+			java.lang.Boolean idIfCond_382 = false;
+			idIfCond_382 = kermeta.standard.helper.BooleanWrapper
 					.or(
 							kermeta.standard.helper.BooleanWrapper
 									.or(
@@ -232,10 +278,10 @@ public class ExpressionImpl extends TypeContainerImpl implements Expression {
 													.getMetaClass(
 															"kermeta.language.behavior.VariableDecl")));
 
-			if (idIfCond_304) {
+			if (idIfCond_382) {
 
-				java.lang.Boolean idIfCond_305 = false;
-				idIfCond_305 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+				java.lang.Boolean idIfCond_383 = false;
+				idIfCond_383 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 						.isInstanceOf(
 								org.kermeta.compil.runtime.helper.language.ObjectUtil
 										.container(this),
@@ -244,10 +290,10 @@ public class ExpressionImpl extends TypeContainerImpl implements Expression {
 										.getMetaClass(
 												"kermeta.language.behavior.Assignment"));
 
-				if (idIfCond_305) {
+				if (idIfCond_383) {
 
-					java.lang.Boolean idIfCond_306 = false;
-					idIfCond_306 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+					java.lang.Boolean idIfCond_384 = false;
+					idIfCond_384 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 							.equals(
 									((kermeta.language.behavior.Assignment) org.kermeta.compil.runtime.helper.language.ObjectUtil
 											.asType(
@@ -259,13 +305,13 @@ public class ExpressionImpl extends TypeContainerImpl implements Expression {
 																	"kermeta.language.behavior.Assignment")))
 											.getTarget(), this);
 
-					if (idIfCond_306) {
+					if (idIfCond_384) {
 
 						result = "";
 					} else {
 
-						java.lang.Boolean idIfCond_307 = false;
-						idIfCond_307 = ((kermeta.language.behavior.Assignment) org.kermeta.compil.runtime.helper.language.ObjectUtil
+						java.lang.Boolean idIfCond_385 = false;
+						idIfCond_385 = ((kermeta.language.behavior.Assignment) org.kermeta.compil.runtime.helper.language.ObjectUtil
 								.asType(
 										org.kermeta.compil.runtime.helper.language.ObjectUtil
 												.container(this),
@@ -275,7 +321,7 @@ public class ExpressionImpl extends TypeContainerImpl implements Expression {
 														"kermeta.language.behavior.Assignment")))
 								.getTarget().isCallFeatureAsStaticProperty();
 
-						if (idIfCond_307) {
+						if (idIfCond_385) {
 
 							result = "";
 						} else {
@@ -303,59 +349,14 @@ public class ExpressionImpl extends TypeContainerImpl implements Expression {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public String createBehaviorJava(KM2EcoreContext context) {
-
-		java.lang.String result = null;
-
-		java.lang.Boolean idIfCond_308 = false;
-		idIfCond_308 = kermeta.standard.helper.BooleanWrapper.and(
-				org.kermeta.compil.runtime.helper.language.ObjectUtil
-						.isNotEqual(this.getCompiledJavaExtern(), ""),
-				kermeta.standard.helper.StringWrapper.equals(context
-						.getCompiledJavaExtern(), ""));
-
-		if (idIfCond_308) {
-
-			context.setCompiledJavaExtern(this.getCompiledJavaExtern());
-
-			java.lang.Boolean idIfCond_309 = false;
-			idIfCond_309 = kermeta.standard.helper.BooleanWrapper
-					.or(
-							kermeta.standard.helper.BooleanWrapper
-									.not(org.kermeta.compil.runtime.helper.language.ObjectUtil
-											.isVoid(context
-													.getCurrent_valueType())),
-							context.getStaticOperationMode());
-
-			if (idIfCond_309) {
-
-				context
-						.setCompiledJavaExtern(kermeta.standard.helper.StringWrapper
-								.replace(context.getCompiledJavaExtern(),
-										"this", "self"));
-			}
-
-		}
-
-		result = "";
-
-		return result;
-
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public Boolean mustBeAssigned() {
 
 		java.lang.Boolean result = null;
 
 		result = false;
 
-		java.lang.Boolean idIfCond_310 = false;
-		idIfCond_310 = kermeta.standard.helper.BooleanWrapper
+		java.lang.Boolean idIfCond_386 = false;
+		idIfCond_386 = kermeta.standard.helper.BooleanWrapper
 				.or(
 						kermeta.standard.helper.BooleanWrapper
 								.or(
@@ -398,15 +399,15 @@ public class ExpressionImpl extends TypeContainerImpl implements Expression {
 												.getInstance().getMetaClass(
 														"void")));
 
-		if (idIfCond_310) {
+		if (idIfCond_386) {
 
 			result = true;
 		}
 
-		java.lang.Boolean idIfCond_311 = false;
-		idIfCond_311 = this.isFunctionTypeVariable();
+		java.lang.Boolean idIfCond_387 = false;
+		idIfCond_387 = this.isFunctionTypeVariable();
 
-		if (idIfCond_311) {
+		if (idIfCond_387) {
 
 			result = false;
 		}
@@ -426,22 +427,22 @@ public class ExpressionImpl extends TypeContainerImpl implements Expression {
 
 		result = false;
 
-		java.lang.Boolean idIfCond_312 = false;
-		idIfCond_312 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+		java.lang.Boolean idIfCond_388 = false;
+		idIfCond_388 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 				.isInstanceOf(this, org.kermeta.compil.runtime.ExecutionContext
 						.getInstance().getMetaClass(
 								"kermeta.language.behavior.CallVariable"));
 
-		if (idIfCond_312) {
+		if (idIfCond_388) {
 
-			java.lang.Boolean idIfCond_313 = false;
-			idIfCond_313 = ((kermeta.language.behavior.CallVariable) org.kermeta.compil.runtime.helper.language.ObjectUtil
+			java.lang.Boolean idIfCond_389 = false;
+			idIfCond_389 = ((kermeta.language.behavior.CallVariable) org.kermeta.compil.runtime.helper.language.ObjectUtil
 					.asType(this, org.kermeta.compil.runtime.ExecutionContext
 							.getInstance().getMetaClass(
 									"kermeta.language.behavior.CallVariable")))
 					.isFunctionTypeVariable();
 
-			if (idIfCond_313) {
+			if (idIfCond_389) {
 
 				result = true;
 			}

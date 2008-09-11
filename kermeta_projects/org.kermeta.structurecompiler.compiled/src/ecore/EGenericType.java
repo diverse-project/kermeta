@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: EGenericType.java,v 1.2 2008-09-08 19:28:31 cfaucher Exp $
+ * $Id: EGenericType.java,v 1.3 2008-09-11 12:34:55 cfaucher Exp $
  */
 package ecore;
 

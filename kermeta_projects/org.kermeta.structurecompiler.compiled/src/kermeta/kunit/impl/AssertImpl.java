@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: AssertImpl.java,v 1.1 2008-09-04 15:40:25 cfaucher Exp $
+ * $Id: AssertImpl.java,v 1.2 2008-09-11 12:34:39 cfaucher Exp $
  */
 package kermeta.kunit.impl;
 
@@ -47,10 +47,10 @@ public class AssertImpl extends AbstractFallibleImpl implements Assert {
 	 */
 	public void assertTrue(Boolean condition) {
 
-		java.lang.Boolean idIfCond_710 = false;
-		idIfCond_710 = kermeta.standard.helper.BooleanWrapper.not(condition);
+		java.lang.Boolean idIfCond_804 = false;
+		idIfCond_804 = kermeta.standard.helper.BooleanWrapper.not(condition);
 
-		if (idIfCond_710) {
+		if (idIfCond_804) {
 
 			this.fail("assertTrue failed");
 		}
@@ -64,10 +64,10 @@ public class AssertImpl extends AbstractFallibleImpl implements Assert {
 	 */
 	public void assertFalseWithMsg(Boolean condition, String msg) {
 
-		java.lang.Boolean idIfCond_711 = false;
-		idIfCond_711 = condition;
+		java.lang.Boolean idIfCond_805 = false;
+		idIfCond_805 = condition;
 
-		if (idIfCond_711) {
+		if (idIfCond_805) {
 
 			this.fail(kermeta.standard.helper.StringWrapper.plus(
 					"assertTrueWithMsg failed : ", msg));
@@ -100,12 +100,12 @@ public class AssertImpl extends AbstractFallibleImpl implements Assert {
 	 */
 	public void assertEqual(String expected, String actual) {
 
-		java.lang.Boolean idIfCond_712 = false;
-		idIfCond_712 = kermeta.standard.helper.BooleanWrapper
+		java.lang.Boolean idIfCond_806 = false;
+		idIfCond_806 = kermeta.standard.helper.BooleanWrapper
 				.not(kermeta.standard.helper.StringWrapper.equals(expected,
 						actual));
 
-		if (idIfCond_712) {
+		if (idIfCond_806) {
 
 			this.fail(kermeta.standard.helper.StringWrapper.plus(
 					kermeta.standard.helper.StringWrapper.plus(
@@ -125,10 +125,10 @@ public class AssertImpl extends AbstractFallibleImpl implements Assert {
 	 */
 	public void assertFalse(Boolean condition) {
 
-		java.lang.Boolean idIfCond_713 = false;
-		idIfCond_713 = condition;
+		java.lang.Boolean idIfCond_807 = false;
+		idIfCond_807 = condition;
 
-		if (idIfCond_713) {
+		if (idIfCond_807) {
 
 			this.fail("assertTrue number failed");
 		}
@@ -142,10 +142,10 @@ public class AssertImpl extends AbstractFallibleImpl implements Assert {
 	 */
 	public void assertTrueWithMsg(Boolean condition, String msg) {
 
-		java.lang.Boolean idIfCond_714 = false;
-		idIfCond_714 = kermeta.standard.helper.BooleanWrapper.not(condition);
+		java.lang.Boolean idIfCond_808 = false;
+		idIfCond_808 = kermeta.standard.helper.BooleanWrapper.not(condition);
 
-		if (idIfCond_714) {
+		if (idIfCond_808) {
 
 			this.fail(kermeta.standard.helper.StringWrapper.plus(
 					"assertTrueWithMsg failed : ", msg));
@@ -160,10 +160,10 @@ public class AssertImpl extends AbstractFallibleImpl implements Assert {
 	 */
 	public void _assert(Boolean condition) {
 
-		java.lang.Boolean idIfCond_715 = false;
-		idIfCond_715 = kermeta.standard.helper.BooleanWrapper.not(condition);
+		java.lang.Boolean idIfCond_809 = false;
+		idIfCond_809 = kermeta.standard.helper.BooleanWrapper.not(condition);
 
-		if (idIfCond_715) {
+		if (idIfCond_809) {
 
 			this.fail("assert failed");
 		}
@@ -177,10 +177,10 @@ public class AssertImpl extends AbstractFallibleImpl implements Assert {
 	 */
 	public void assertWithMsg(Boolean condition, String msg) {
 
-		java.lang.Boolean idIfCond_716 = false;
-		idIfCond_716 = kermeta.standard.helper.BooleanWrapper.not(condition);
+		java.lang.Boolean idIfCond_810 = false;
+		idIfCond_810 = kermeta.standard.helper.BooleanWrapper.not(condition);
 
-		if (idIfCond_716) {
+		if (idIfCond_810) {
 
 			this.fail(kermeta.standard.helper.StringWrapper.plus(
 					"assertTrueWithMsg failed : ", msg));

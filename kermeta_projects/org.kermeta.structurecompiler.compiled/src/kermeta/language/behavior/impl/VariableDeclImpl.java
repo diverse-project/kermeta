@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: VariableDeclImpl.java,v 1.1 2008-09-04 15:40:25 cfaucher Exp $
+ * $Id: VariableDeclImpl.java,v 1.2 2008-09-11 12:34:40 cfaucher Exp $
  */
 package kermeta.language.behavior.impl;
 
@@ -330,15 +330,15 @@ public class VariableDeclImpl extends ExpressionImpl implements VariableDecl {
 						kermeta.standard.helper.StringWrapper.plus(result,
 								localType), " "), var_id);
 
-		java.lang.Boolean idIfCond_436 = false;
-		idIfCond_436 = kermeta.standard.helper.BooleanWrapper
+		java.lang.Boolean idIfCond_568 = false;
+		idIfCond_568 = kermeta.standard.helper.BooleanWrapper
 				.not(org.kermeta.compil.runtime.helper.language.ObjectUtil
 						.isVoid(this.getInitialization()));
 
-		if (idIfCond_436) {
+		if (idIfCond_568) {
 
-			java.lang.Boolean idIfCond_437 = false;
-			idIfCond_437 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+			java.lang.Boolean idIfCond_569 = false;
+			idIfCond_569 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 					.isInstanceOf(
 							this.getInitialization(),
 							org.kermeta.compil.runtime.ExecutionContext
@@ -346,7 +346,7 @@ public class VariableDeclImpl extends ExpressionImpl implements VariableDecl {
 									.getMetaClass(
 											"kermeta.language.behavior.Conditional"));
 
-			if (idIfCond_437) {
+			if (idIfCond_569) {
 
 				context.getResultLastStatementStack().push(
 						kermeta.standard.helper.StringWrapper.plus(

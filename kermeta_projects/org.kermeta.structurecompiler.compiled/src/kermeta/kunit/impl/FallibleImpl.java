@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: FallibleImpl.java,v 1.1 2008-09-04 15:40:25 cfaucher Exp $
+ * $Id: FallibleImpl.java,v 1.2 2008-09-11 12:34:39 cfaucher Exp $
  */
 package kermeta.kunit.impl;
 
@@ -178,10 +178,10 @@ public abstract class FallibleImpl extends AbstractFallibleImpl implements
 	 */
 	public void fail(String msg) {
 
-		java.lang.Boolean idIfCond_717 = false;
-		idIfCond_717 = this.mustStop();
+		java.lang.Boolean idIfCond_811 = false;
+		idIfCond_811 = this.mustStop();
 
-		if (idIfCond_717) {
+		if (idIfCond_811) {
 
 			kermeta.kunit.AssertionFailedError exception = ((kermeta.kunit.AssertionFailedError) org.kermeta.compil.runtime.helper.language.ClassUtil
 					.newObject("kermeta.kunit.AssertionFailedError"));
@@ -251,10 +251,10 @@ public abstract class FallibleImpl extends AbstractFallibleImpl implements
 
 		java.lang.Integer number = this.number();
 
-		java.lang.Boolean idIfCond_718 = false;
-		idIfCond_718 = kermeta.standard.helper.BooleanWrapper.not(condition);
+		java.lang.Boolean idIfCond_812 = false;
+		idIfCond_812 = kermeta.standard.helper.BooleanWrapper.not(condition);
 
-		if (idIfCond_718) {
+		if (idIfCond_812) {
 
 			java.lang.String msg = kermeta.standard.helper.StringWrapper.plus(
 					kermeta.standard.helper.StringWrapper.plus(
@@ -262,10 +262,10 @@ public abstract class FallibleImpl extends AbstractFallibleImpl implements
 							kermeta.standard.helper.IntegerWrapper
 									.toString(number)), " failed");
 
-			java.lang.Boolean idIfCond_719 = false;
-			idIfCond_719 = this.mustStop();
+			java.lang.Boolean idIfCond_813 = false;
+			idIfCond_813 = this.mustStop();
 
-			if (idIfCond_719) {
+			if (idIfCond_813) {
 
 				kermeta.kunit.AssertionFailedError exception = ((kermeta.kunit.AssertionFailedError) org.kermeta.compil.runtime.helper.language.ClassUtil
 						.newObject("kermeta.kunit.AssertionFailedError"));
@@ -294,11 +294,11 @@ public abstract class FallibleImpl extends AbstractFallibleImpl implements
 
 		java.lang.Integer result = null;
 
-		java.lang.Boolean idIfCond_720 = false;
-		idIfCond_720 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+		java.lang.Boolean idIfCond_814 = false;
+		idIfCond_814 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 				.isVoid(this.getRank());
 
-		if (idIfCond_720) {
+		if (idIfCond_814) {
 
 			this.setRank(0);
 		}
@@ -321,10 +321,10 @@ public abstract class FallibleImpl extends AbstractFallibleImpl implements
 
 		java.lang.Integer number = this.number();
 
-		java.lang.Boolean idIfCond_721 = false;
-		idIfCond_721 = kermeta.standard.helper.BooleanWrapper.not(condition);
+		java.lang.Boolean idIfCond_815 = false;
+		idIfCond_815 = kermeta.standard.helper.BooleanWrapper.not(condition);
 
-		if (idIfCond_721) {
+		if (idIfCond_815) {
 
 			java.lang.String realMsg = kermeta.standard.helper.StringWrapper
 					.plus(kermeta.standard.helper.StringWrapper.plus(
@@ -334,10 +334,10 @@ public abstract class FallibleImpl extends AbstractFallibleImpl implements
 											.toString(number)), " failed: "),
 							msg);
 
-			java.lang.Boolean idIfCond_722 = false;
-			idIfCond_722 = this.mustStop();
+			java.lang.Boolean idIfCond_816 = false;
+			idIfCond_816 = this.mustStop();
 
-			if (idIfCond_722) {
+			if (idIfCond_816) {
 
 				kermeta.kunit.AssertionFailedError exception = ((kermeta.kunit.AssertionFailedError) org.kermeta.compil.runtime.helper.language.ClassUtil
 						.newObject("kermeta.kunit.AssertionFailedError"));
@@ -366,11 +366,11 @@ public abstract class FallibleImpl extends AbstractFallibleImpl implements
 
 		java.lang.Boolean result = null;
 
-		java.lang.Boolean idIfCond_723 = false;
-		idIfCond_723 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+		java.lang.Boolean idIfCond_817 = false;
+		idIfCond_817 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 				.isVoid(this.getStopOnFailure());
 
-		if (idIfCond_723) {
+		if (idIfCond_817) {
 
 			this.setStopOnFailure(true);
 		}

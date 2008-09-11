@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: SourceTracerImpl.java,v 1.1 2008-09-04 15:40:40 cfaucher Exp $
+ * $Id: SourceTracerImpl.java,v 1.2 2008-09-11 12:34:58 cfaucher Exp $
  */
 package km2ecore.impl;
 
@@ -52,43 +52,43 @@ public class SourceTracerImpl extends ObjectImpl implements SourceTracer {
 
 		traceability.TraceModel model = context.getTraceModel();
 
-		java.lang.Boolean idIfCond_756 = false;
-		idIfCond_756 = kermeta.standard.helper.BooleanWrapper
+		java.lang.Boolean idIfCond_1 = false;
+		idIfCond_1 = kermeta.standard.helper.BooleanWrapper
 				.not(org.kermeta.compil.runtime.helper.language.ObjectUtil
 						.isVoid(model));
 
-		if (idIfCond_756) {
+		if (idIfCond_1) {
 
-			//Beginning of the Inlining of the function type: each
+			//BIft:each
 
 			{
 
-				kermeta.standard.Iterator<traceability.Reference> it_ft164 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
+				kermeta.standard.Iterator<traceability.Reference> it_ft1 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
 						.<traceability.Reference> convertAsSet(
 								model.getReferences()).iterator();
-				java.lang.Boolean idLoopCond_757 = false;
-				while (!idLoopCond_757) {
-					idLoopCond_757 = it_ft164.isOff();
-					if (idLoopCond_757) {
+				java.lang.Boolean idLoopCond_2 = false;
+				while (!idLoopCond_2) {
+					idLoopCond_2 = it_ft1.isOff();
+					if (idLoopCond_2) {
 					} else {
 
-						//Beginning of the Inlining of the lambda expression: func
-						traceability.Reference r = it_ft164.next();
+						//BIle:func
+						traceability.Reference r_lbdExp1 = it_ft1.next();
 
-						java.lang.Boolean idIfCond_758 = false;
-						idIfCond_758 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+						java.lang.Boolean idIfCond_3 = false;
+						idIfCond_3 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 								.isInstanceOf(
-										r,
+										r_lbdExp1,
 										org.kermeta.compil.runtime.ExecutionContext
 												.getInstance()
 												.getMetaClass(
 														"traceability.ModelReference"));
 
-						if (idIfCond_758) {
+						if (idIfCond_3) {
 
 							traceability.ModelReference mr = ((traceability.ModelReference) org.kermeta.compil.runtime.helper.language.ObjectUtil
 									.asType(
-											r,
+											r_lbdExp1,
 											org.kermeta.compil.runtime.ExecutionContext
 													.getInstance()
 													.getMetaClass(
@@ -98,12 +98,12 @@ public class SourceTracerImpl extends ObjectImpl implements SourceTracer {
 									.newObject("traceability.TraceabilityHelper"))
 									.getFirstTextReference(mr);
 
-							java.lang.Boolean idIfCond_759 = false;
-							idIfCond_759 = kermeta.standard.helper.BooleanWrapper
+							java.lang.Boolean idIfCond_4 = false;
+							idIfCond_4 = kermeta.standard.helper.BooleanWrapper
 									.not(org.kermeta.compil.runtime.helper.language.ObjectUtil
 											.isVoid(tr));
 
-							if (idIfCond_759) {
+							if (idIfCond_4) {
 
 								mr.getRefObject().setFileName(tr.getFileURI());
 
@@ -121,13 +121,13 @@ public class SourceTracerImpl extends ObjectImpl implements SourceTracer {
 
 						}
 
-						//End of the Inlining of the lambda expression: func
+						//EIle:func
 
 					}
 				}
 			}
 
-			//End of the Inlining of the function type: each
+			//EIft:each
 
 		}
 

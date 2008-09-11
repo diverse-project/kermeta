@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: CallResultImpl.java,v 1.1 2008-09-04 15:40:25 cfaucher Exp $
+ * $Id: CallResultImpl.java,v 1.2 2008-09-11 12:34:40 cfaucher Exp $
  */
 package kermeta.language.behavior.impl;
 
@@ -53,7 +53,9 @@ public class CallResultImpl extends CallVariableImpl implements CallResult {
 
 		super.createBehaviorJava(context);
 
-		result = kermeta.standard.helper.StringWrapper.plus("result", context
+		result = "result";
+
+		result = kermeta.standard.helper.StringWrapper.plus(result, context
 				.printFtSuffix());
 
 		result = kermeta.standard.helper.StringWrapper.plus(result, this

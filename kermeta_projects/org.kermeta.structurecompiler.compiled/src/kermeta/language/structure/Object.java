@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: Object.java,v 1.1 2008-09-04 15:40:22 cfaucher Exp $
+ * $Id: Object.java,v 1.2 2008-09-11 12:34:36 cfaucher Exp $
  */
 package kermeta.language.structure;
 
@@ -27,8 +27,8 @@ import traceability.File;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link kermeta.language.structure.Object#getTag <em>Tag</em>}</li>
  *   <li>{@link kermeta.language.structure.Object#getFile <em>File</em>}</li>
+ *   <li>{@link kermeta.language.structure.Object#getTag <em>Tag</em>}</li>
  *   <li>{@link kermeta.language.structure.Object#getFileName <em>File Name</em>}</li>
  *   <li>{@link kermeta.language.structure.Object#getLineNumber <em>Line Number</em>}</li>
  *   <li>{@link kermeta.language.structure.Object#getOwnedTags <em>Owned Tags</em>}</li>
@@ -38,32 +38,13 @@ import traceability.File;
  * </p>
  *
  * @see kermeta.language.structure.StructurePackage#getObject()
- * @model annotation="kermeta documentation='/**\n *\n * TraceSource aspect keeps track of source information like the file name \n * and the line number where objects are declared. This is used for Java generation.\n * At runtime this information can be used for debug purpose or stack printing. \n *\n \052/'"
- *        annotation="kermeta documentation='Object definition: all entities of Kermeta metamodel explicitly inherit from Object'"
+ * @model annotation="kermeta documentation='Object definition: all entities of Kermeta metamodel explicitly inherit from Object'"
  *        annotation="kermeta EMF_needProperty='name=oid javaClass=java.lang.Integer'"
  *        annotation="kermeta EMF_needProperty='name=container classDefinitionQN=kermeta::language::structure::Object'"
+ *        annotation="kermeta documentation='/**\n *\n * TraceSource aspect keeps track of source information like the file name \n * and the line number where objects are declared. This is used for Java generation.\n * At runtime this information can be used for debug purpose or stack printing. \n *\n \052/'"
  * @generated
  */
 public interface Object extends EObject {
-	/**
-	 * Returns the value of the '<em><b>Tag</b></em>' reference list.
-	 * The list contents are of type {@link kermeta.language.structure.Tag}.
-	 * It is bidirectional and its opposite is '{@link kermeta.language.structure.Tag#getObject <em>Object</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Tag</em>' reference list isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Tag</em>' reference list.
-	 * @see kermeta.language.structure.StructurePackage#getObject_Tag()
-	 * @see kermeta.language.structure.Tag#getObject
-	 * @model opposite="object"
-	 *        annotation="kermeta documentation='An Object can be tagged by a Tag. \nThey are typically used to put comments/documentation on the object'"
-	 * @generated
-	 */
-	EList<Tag> getTag();
-
 	/**
 	 * Returns the value of the '<em><b>File</b></em>' reference.
 	 * <!-- begin-user-doc -->
@@ -89,6 +70,25 @@ public interface Object extends EObject {
 	 * @generated
 	 */
 	void setFile(File value);
+
+	/**
+	 * Returns the value of the '<em><b>Tag</b></em>' reference list.
+	 * The list contents are of type {@link kermeta.language.structure.Tag}.
+	 * It is bidirectional and its opposite is '{@link kermeta.language.structure.Tag#getObject <em>Object</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Tag</em>' reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Tag</em>' reference list.
+	 * @see kermeta.language.structure.StructurePackage#getObject_Tag()
+	 * @see kermeta.language.structure.Tag#getObject
+	 * @model opposite="object"
+	 *        annotation="kermeta documentation='An Object can be tagged by a Tag. \nThey are typically used to put comments/documentation on the object'"
+	 * @generated
+	 */
+	EList<Tag> getTag();
 
 	/**
 	 * Returns the value of the '<em><b>File Name</b></em>' attribute.
@@ -216,6 +216,15 @@ public interface Object extends EObject {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @model dataType="kermeta.standard.JavaBoolean" str_tagDataType="kermeta.standard.JavaString"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='\njava.lang.Boolean result = null;\n\n\tresult = false;\n\n\tjava.lang.Boolean idIfCond_238 = false;\n\tidIfCond_238 = org.kermeta.compil.runtime.helper.language.ObjectUtil.isNotEqual(this.getUniqueTagValue(str_tag), \"\");\n\n\tif( idIfCond_238 ) {\n\n\tjava.lang.Boolean idIfCond_239 = false;\n\tidIfCond_239 = kermeta.standard.helper.StringWrapper.equals(this.getUniqueTagValue(str_tag), \"true\");\n\n\tif( idIfCond_239 ) {\n\n\tresult = true;\n}\n\n}\n\n\nreturn result;\n'"
+	 * @generated
+	 */
+	Boolean interpretBooleanTag(String str_tag);
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @model dataType="kermeta.standard.JavaString"
 	 *        annotation="kermeta documentation='/** Super method \052/'"
 	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='\njava.lang.String result = null;\n\n\tresult = \"\";\n\nreturn result;\n'"
@@ -223,15 +232,6 @@ public interface Object extends EObject {
 	 * @generated
 	 */
 	String createBehaviorJava(KM2EcoreContext context);
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @model dataType="kermeta.standard.JavaBoolean" str_tagDataType="kermeta.standard.JavaString"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='\njava.lang.Boolean result = null;\n\n\tresult = false;\n\n\tjava.lang.Boolean idIfCond_1 = false;\n\tidIfCond_1 = org.kermeta.compil.runtime.helper.language.ObjectUtil.isNotEqual(this.getUniqueTagValue(str_tag), \"\");\n\n\tif( idIfCond_1 ) {\n\n\tjava.lang.Boolean idIfCond_2 = false;\n\tidIfCond_2 = kermeta.standard.helper.StringWrapper.equals(this.getUniqueTagValue(str_tag), \"true\");\n\n\tif( idIfCond_2 ) {\n\n\tresult = true;\n}\n\n}\n\n\nreturn result;\n'"
-	 * @generated
-	 */
-	Boolean interpretBooleanTag(String str_tag);
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -260,7 +260,7 @@ public interface Object extends EObject {
 	 * <!-- end-user-doc -->
 	 * @model annotation="kermeta documentation='/**\n\t * Sets the <code>element</code> to the <code>~property</code> of the object \n\t \052/'"
 	 *        annotation="kermeta RecopyInValueTypes='true'"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='\n\tjava.lang.Boolean idIfCond_3 = false;\n\tidIfCond_3 = org.kermeta.compil.runtime.helper.language.ObjectUtil.isInstanceOf(element, org.kermeta.compil.runtime.ExecutionContext.getInstance().getMetaClass(\"property.getType()\"));\n\n\tif( idIfCond_3 ) {\n\n\torg.kermeta.compil.runtime.helper.language.ObjectUtil.set(this, property, element);\n}\n else {\n\n\tkermeta.exceptions.IncompatibleTypeError e = ((kermeta.exceptions.IncompatibleTypeError) org.kermeta.compil.runtime.helper.language.ClassUtil.newObject(\"kermeta.exceptions.IncompatibleTypeError\"));\n\n\te.setMessage(kermeta.standard.helper.StringWrapper.plus(kermeta.standard.helper.StringWrapper.plus(kermeta.standard.helper.StringWrapper.plus(kermeta.standard.helper.StringWrapper.plus(kermeta.standard.helper.StringWrapper.plus(kermeta.standard.helper.StringWrapper.plus(\"IncompatibleTypeError : Cannot set property \", property.getName()), \" of object \"), org.kermeta.compil.runtime.helper.language.ObjectUtil.toString(this)), \" to \"), org.kermeta.compil.runtime.helper.language.ObjectUtil.toString(element)), \"\\\\.\"));\n\n\t\nif (true)\n\tthrow new org.kermeta.compil.runtime.helper.error.KRuntimeError( e );\n\n}\n\n'"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='\n\tjava.lang.Boolean idIfCond_240 = false;\n\tidIfCond_240 = org.kermeta.compil.runtime.helper.language.ObjectUtil.isInstanceOf(element, org.kermeta.compil.runtime.ExecutionContext.getInstance().getMetaClass(\"property.getType()\"));\n\n\tif( idIfCond_240 ) {\n\n\torg.kermeta.compil.runtime.helper.language.ObjectUtil.set(this, property, element);\n}\n else {\n\n\tkermeta.exceptions.IncompatibleTypeError e = ((kermeta.exceptions.IncompatibleTypeError) org.kermeta.compil.runtime.helper.language.ClassUtil.newObject(\"kermeta.exceptions.IncompatibleTypeError\"));\n\n\te.setMessage(kermeta.standard.helper.StringWrapper.plus(kermeta.standard.helper.StringWrapper.plus(kermeta.standard.helper.StringWrapper.plus(kermeta.standard.helper.StringWrapper.plus(kermeta.standard.helper.StringWrapper.plus(kermeta.standard.helper.StringWrapper.plus(\"IncompatibleTypeError : Cannot set property \", property.getName()), \" of object \"), org.kermeta.compil.runtime.helper.language.ObjectUtil.toString(this)), \" to \"), org.kermeta.compil.runtime.helper.language.ObjectUtil.toString(element)), \"\\\\.\"));\n\n\t\nif (true)\n\tthrow new org.kermeta.compil.runtime.helper.error.KRuntimeError( e );\n\n}\n\n'"
 	 * @generated
 	 */
 	void set(Property property, Object element);
@@ -276,8 +276,8 @@ public interface Object extends EObject {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @model annotation="http://www.eclipse.org/emf/2002/GenModel body='\n\t//Beginning of the Inlining of the function type: eachOwnedElement\n\n\t//Beginning of the Inlining of the function type: each\n\n\t\n{\n\n\tkermeta.standard.Iterator<kermeta.language.structure.Tag> it_ft2 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil.<kermeta.language.structure.Tag>convertAsOrderedSet(this.getOwnedTags()).iterator();\n\tjava.lang.Boolean idLoopCond_4 = false;\n\twhile( !idLoopCond_4 ) {\n\tidLoopCond_4 = it_ft2.isOff();\n\tif ( idLoopCond_4 ) {\n\t} else {\n\n\t//Beginning of the Inlining of the lambda expression: func\nkermeta.language.structure.Tag o = it_ft2.next();\n\n\t//Beginning of the Inlining of the lambda expression: func\nkermeta.language.structure.Tag p = o_ft2;\n\n\tjava.lang.Boolean idIfCond_5 = false;\n\tidIfCond_5 = kermeta.standard.helper.StringWrapper.equals(p.getDeprecated(), \"\");\n\n\tif( idIfCond_5 ) {\n\n\tp.applyPass2(context);\n}\n\n//End of the Inlining of the lambda expression: func\n\n//End of the Inlining of the lambda expression: func\n\n}\n\t}\n}\n\n//End of the Inlining of the function type: each\n\n//End of the Inlining of the function type: eachOwnedElement\n\n'"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='\n\t//Beginning of the Inlining of the function type: eachOwnedElement\n\n\t//Beginning of the Inlining of the function type: each\n\n\t\n{\n\n\tkermeta.standard.Iterator<kermeta.language.structure.Tag> it_ft202 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil.<kermeta.language.structure.Tag>convertAsOrderedSet(self.getOwnedTags()).iterator();\n\tjava.lang.Boolean idLoopCond_869 = false;\n\twhile( !idLoopCond_869 ) {\n\tidLoopCond_869 = it_ft202.isOff();\n\tif ( idLoopCond_869 ) {\n\t} else {\n\n\t//Beginning of the Inlining of the lambda expression: func\nkermeta.language.structure.Tag o = it_ft202.next();\n\n\t//Beginning of the Inlining of the lambda expression: func\nkermeta.language.structure.Tag p = o_ft202;\n\n\tjava.lang.Boolean idIfCond_870 = false;\n\tidIfCond_870 = kermeta.standard.helper.StringWrapper.equals(p.getDeprecated(), \"\");\n\n\tif( idIfCond_870 ) {\n\n\tp.applyPass2(context);\n}\n\n//End of the Inlining of the lambda expression: func\n\n//End of the Inlining of the lambda expression: func\n\n}\n\t}\n}\n\n//End of the Inlining of the function type: each\n\n//End of the Inlining of the function type: eachOwnedElement\n\n'"
+	 * @model annotation="http://www.eclipse.org/emf/2002/GenModel body='\n\t//BIft:eachOwnedElement\n\n\t//BIft:each\n\n\t\n{\n\n\tkermeta.standard.Iterator<kermeta.language.structure.Tag> it_ft72 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil.<kermeta.language.structure.Tag>convertAsOrderedSet(this.getOwnedTags()).iterator();\n\tjava.lang.Boolean idLoopCond_241 = false;\n\twhile( !idLoopCond_241 ) {\n\tidLoopCond_241 = it_ft72.isOff();\n\tif ( idLoopCond_241 ) {\n\t} else {\n\n\t//BIle:func\nkermeta.language.structure.Tag o_lbdExp72 = it_ft72.next();\n\n\t//BIle:func\nkermeta.language.structure.Tag p_lbdExp71 = o_lbdExp72;\n\n\tjava.lang.Boolean idIfCond_242 = false;\n\tidIfCond_242 = kermeta.standard.helper.StringWrapper.equals(p_lbdExp71.getDeprecated(), \"\");\n\n\tif( idIfCond_242 ) {\n\n\tp_lbdExp71.applyPass2(context);\n}\n\n//EIle:func\n\n//EIle:func\n\n}\n\t}\n}\n\n//EIft:each\n\n//EIft:eachOwnedElement\n\n'"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='\n\t//BIft:eachOwnedElement\n\n\t//BIft:each\n\n\t\n{\n\n\tkermeta.standard.Iterator<kermeta.language.structure.Tag> it_ft203 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil.<kermeta.language.structure.Tag>convertAsOrderedSet(self.getOwnedTags()).iterator();\n\tjava.lang.Boolean idLoopCond_929 = false;\n\twhile( !idLoopCond_929 ) {\n\tidLoopCond_929 = it_ft203.isOff();\n\tif ( idLoopCond_929 ) {\n\t} else {\n\n\t//BIle:func\nkermeta.language.structure.Tag o_lbdExp203 = it_ft203.next();\n\n\t//BIle:func\nkermeta.language.structure.Tag p_lbdExp202 = o_lbdExp203;\n\n\tjava.lang.Boolean idIfCond_930 = false;\n\tidIfCond_930 = kermeta.standard.helper.StringWrapper.equals(p_lbdExp202.getDeprecated(), \"\");\n\n\tif( idIfCond_930 ) {\n\n\tp_lbdExp202.applyPass2(context);\n}\n\n//EIle:func\n\n//EIle:func\n\n}\n\t}\n}\n\n//EIft:each\n\n//EIft:eachOwnedElement\n\n'"
 	 * @generated
 	 */
 	void applyPass2(KM2EcoreContext context);
@@ -296,7 +296,7 @@ public interface Object extends EObject {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @model propertyNameDataType="kermeta.standard.JavaString"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='\nkermeta.language.structure.Property result = null;\n\n\tkermeta.language.structure.ClassDefinition classDefinition = ((kermeta.language.structure.ClassDefinition) org.kermeta.compil.runtime.helper.language.ObjectUtil.asType(org.kermeta.compil.runtime.helper.language.ObjectUtil.getMetaClass(this).getTypeDefinition(), org.kermeta.compil.runtime.ExecutionContext.getInstance().getMetaClass(\"kermeta.language.structure.ClassDefinition\")));\n\n\t//Beginning of the Inlining of the function type: detect\n\nkermeta.language.structure.Property result_ft3 = null;\n\n\tkermeta.language.structure.Property elem_ft3 = null;\n\n\tresult_ft3 = null;\n\n\t\n{\n\n\tkermeta.standard.Iterator<kermeta.language.structure.Property> it_ft3 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil.<kermeta.language.structure.Property>convertAsSet(classDefinition.getAllAttribute()).iterator();\n\tjava.lang.Boolean idLoopCond_6 = false;\n\twhile( !idLoopCond_6 ) {\n\tidLoopCond_6 = kermeta.standard.helper.BooleanWrapper.or(it_ft3.isOff(), org.kermeta.compil.runtime.helper.language.ObjectUtil.isNotEqual(result_ft3, null));\n\tif ( idLoopCond_6 ) {\n\t} else {\n\n\telem_ft3 = it_ft3.next();\n\n\tjava.lang.Boolean idIfCond_7 = false;\n//Beginning of the Inlining of the lambda expression: detector\nkermeta.language.structure.Property p = elem_ft3;\n\n\tidIfCond_7 = kermeta.standard.helper.StringWrapper.equals(((kermeta.language.structure.Property) org.kermeta.compil.runtime.helper.language.ObjectUtil.asType(p, org.kermeta.compil.runtime.ExecutionContext.getInstance().getMetaClass(\"kermeta.language.structure.Property\"))).getName(), propertyName);\n//End of the Inlining of the lambda expression: detector\n\n\n\tif( idIfCond_7 ) {\n\n\tresult_ft3 = elem_ft3;\n}\n\n}\n\t}\n}\n\n//End of the Inlining of the function type: detect\nresult = ((kermeta.language.structure.Property) org.kermeta.compil.runtime.helper.language.ObjectUtil.asType(result_ft3, org.kermeta.compil.runtime.ExecutionContext.getInstance().getMetaClass(\"kermeta.language.structure.Property\")));\n\nreturn result;\n'"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='\nkermeta.language.structure.Property result = null;\n\n\tkermeta.language.structure.ClassDefinition classDefinition = ((kermeta.language.structure.ClassDefinition) org.kermeta.compil.runtime.helper.language.ObjectUtil.asType(org.kermeta.compil.runtime.helper.language.ObjectUtil.getMetaClass(this).getTypeDefinition(), org.kermeta.compil.runtime.ExecutionContext.getInstance().getMetaClass(\"kermeta.language.structure.ClassDefinition\")));\n\n\t//BIft:detect\n\nkermeta.language.structure.Property result_ft73 = null;\n\n\tkermeta.language.structure.Property elem_ft73 = null;\n\n\tresult_ft73 = null;\n\n\t\n{\n\n\tkermeta.standard.Iterator<kermeta.language.structure.Property> it_ft73 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil.<kermeta.language.structure.Property>convertAsSet(classDefinition.getAllAttribute()).iterator();\n\tjava.lang.Boolean idLoopCond_243 = false;\n\twhile( !idLoopCond_243 ) {\n\tidLoopCond_243 = kermeta.standard.helper.BooleanWrapper.or(it_ft73.isOff(), org.kermeta.compil.runtime.helper.language.ObjectUtil.isNotEqual(result_ft73, null));\n\tif ( idLoopCond_243 ) {\n\t} else {\n\n\telem_ft73 = it_ft73.next();\n\n\tjava.lang.Boolean idIfCond_244 = false;\n//BIle:detector\nkermeta.language.structure.Property p_lbdExp73 = elem_ft73;\n\n\tidIfCond_244 = kermeta.standard.helper.StringWrapper.equals(((kermeta.language.structure.Property) org.kermeta.compil.runtime.helper.language.ObjectUtil.asType(p_lbdExp73, org.kermeta.compil.runtime.ExecutionContext.getInstance().getMetaClass(\"kermeta.language.structure.Property\"))).getName(), propertyName);\n//EIle:detector\n\n\n\tif( idIfCond_244 ) {\n\n\tresult_ft73 = elem_ft73;\n}\n\n}\n\t}\n}\n\n//EIft:detect\nresult = ((kermeta.language.structure.Property) org.kermeta.compil.runtime.helper.language.ObjectUtil.asType(result_ft73, org.kermeta.compil.runtime.ExecutionContext.getInstance().getMetaClass(\"kermeta.language.structure.Property\")));\n\nreturn result;\n'"
 	 * @generated
 	 */
 	Property getPropertyValue(String propertyName);
@@ -306,7 +306,7 @@ public interface Object extends EObject {
 	 * <!-- end-user-doc -->
 	 * @model annotation="kermeta documentation='/**\n\t * Runs checking of invariants defined for the metaclass of the Object\n\t \052/'"
 	 *        annotation="kermeta RecopyInValueTypes='true'"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='\n\tkermeta.language.structure.ClassDefinition cd = org.kermeta.compil.runtime.helper.language.ObjectUtil.getMetaClass(this).getClassDefinition();\n\n\tjava.lang.Boolean idIfCond_8 = false;\n\tidIfCond_8 = kermeta.standard.helper.BooleanWrapper.not(org.kermeta.compil.runtime.helper.language.ObjectUtil.isVoid(cd));\n\n\tif( idIfCond_8 ) {\n\n\t//Beginning of the Inlining of the function type: each\n\n\t\n{\n\n\tkermeta.standard.Iterator<kermeta.language.structure.Property> it_ft4 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil.<kermeta.language.structure.Property>convertAsSet(cd.getAllAttribute()).iterator();\n\tjava.lang.Boolean idLoopCond_9 = false;\n\twhile( !idLoopCond_9 ) {\n\tidLoopCond_9 = it_ft4.isOff();\n\tif ( idLoopCond_9 ) {\n\t} else {\n\n\t//Beginning of the Inlining of the lambda expression: func\nkermeta.language.structure.Property p = it_ft4.next();\n\n\tkermeta.language.structure.Object v = org.kermeta.compil.runtime.helper.language.ObjectUtil.get(this, p);\n\n\tjava.lang.Boolean idIfCond_10 = false;\n\tidIfCond_10 = kermeta.standard.helper.BooleanWrapper.and(kermeta.standard.helper.BooleanWrapper.not(org.kermeta.compil.runtime.helper.language.ObjectUtil.isVoid(v)), org.kermeta.compil.runtime.helper.language.ObjectUtil.isInstanceOf(v, org.kermeta.compil.runtime.ExecutionContext.getInstance().getMetaClass(\"kermeta.standard.Collection<kermeta.language.structure.Object>\")));\n\n\tif( idIfCond_10 ) {\n\n\tkermeta.standard.Collection<kermeta.language.structure.Object> c = ((kermeta.standard.Collection<kermeta.language.structure.Object>) org.kermeta.compil.runtime.helper.language.ObjectUtil.asType(v, org.kermeta.compil.runtime.ExecutionContext.getInstance().getMetaClass(\"kermeta.standard.Collection<kermeta.language.structure.Object>\")));\n\n\tjava.lang.Boolean idIfCond_11 = false;\n\tidIfCond_11 = kermeta.standard.helper.BooleanWrapper.or(kermeta.standard.helper.IntegerWrapper.isLower(c.size(), p.getLower()), kermeta.standard.helper.BooleanWrapper.and(org.kermeta.compil.runtime.helper.language.ObjectUtil.isNotEqual(p.getUpper(), kermeta.standard.helper.IntegerWrapper.uminus(1)), kermeta.standard.helper.IntegerWrapper.isGreater(c.size(), p.getUpper())));\n\n\tif( idIfCond_11 ) {\n\n\t\nif (true)\n\tthrow new org.kermeta.compil.runtime.helper.error.KRuntimeError( ((kermeta.exceptions.ConstraintViolatedInv) org.kermeta.compil.runtime.helper.language.ClassUtil.newObject(\"kermeta.exceptions.ConstraintViolatedInv\")) );\n\n}\n\n}\n else {\n\n\tjava.lang.Boolean idIfCond_12 = false;\n\tidIfCond_12 = kermeta.standard.helper.BooleanWrapper.and(kermeta.standard.helper.IntegerWrapper.equals(p.getLower(), 1), org.kermeta.compil.runtime.helper.language.ObjectUtil.isVoid(v));\n\n\tif( idIfCond_12 ) {\n\n\t\nif (true)\n\tthrow new org.kermeta.compil.runtime.helper.error.KRuntimeError( ((kermeta.exceptions.ConstraintViolatedInv) org.kermeta.compil.runtime.helper.language.ClassUtil.newObject(\"kermeta.exceptions.ConstraintViolatedInv\")) );\n\n}\n\n}\n\n//End of the Inlining of the lambda expression: func\n\n}\n\t}\n}\n\n//End of the Inlining of the function type: each\n\n}\n\n\n\torg.kermeta.compil.runtime.helper.language.ObjectUtil.checkInvariants(this);\n'"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='\n\tkermeta.language.structure.ClassDefinition cd = org.kermeta.compil.runtime.helper.language.ObjectUtil.getMetaClass(this).getClassDefinition();\n\n\tjava.lang.Boolean idIfCond_245 = false;\n\tidIfCond_245 = kermeta.standard.helper.BooleanWrapper.not(org.kermeta.compil.runtime.helper.language.ObjectUtil.isVoid(cd));\n\n\tif( idIfCond_245 ) {\n\n\t//BIft:each\n\n\t\n{\n\n\tkermeta.standard.Iterator<kermeta.language.structure.Property> it_ft74 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil.<kermeta.language.structure.Property>convertAsSet(cd.getAllAttribute()).iterator();\n\tjava.lang.Boolean idLoopCond_246 = false;\n\twhile( !idLoopCond_246 ) {\n\tidLoopCond_246 = it_ft74.isOff();\n\tif ( idLoopCond_246 ) {\n\t} else {\n\n\t//BIle:func\nkermeta.language.structure.Property p_lbdExp74 = it_ft74.next();\n\n\tkermeta.language.structure.Object v = org.kermeta.compil.runtime.helper.language.ObjectUtil.get(this, p_lbdExp74);\n\n\tjava.lang.Boolean idIfCond_247 = false;\n\tidIfCond_247 = kermeta.standard.helper.BooleanWrapper.and(kermeta.standard.helper.BooleanWrapper.not(org.kermeta.compil.runtime.helper.language.ObjectUtil.isVoid(v)), org.kermeta.compil.runtime.helper.language.ObjectUtil.isInstanceOf(v, org.kermeta.compil.runtime.ExecutionContext.getInstance().getMetaClass(\"kermeta.standard.Collection<kermeta.language.structure.Object>\")));\n\n\tif( idIfCond_247 ) {\n\n\tkermeta.standard.Collection<kermeta.language.structure.Object> c = ((kermeta.standard.Collection<kermeta.language.structure.Object>) org.kermeta.compil.runtime.helper.language.ObjectUtil.asType(v, org.kermeta.compil.runtime.ExecutionContext.getInstance().getMetaClass(\"kermeta.standard.Collection<kermeta.language.structure.Object>\")));\n\n\tjava.lang.Boolean idIfCond_248 = false;\n\tidIfCond_248 = kermeta.standard.helper.BooleanWrapper.or(kermeta.standard.helper.IntegerWrapper.isLower(c.size(), p_lbdExp74.getLower()), kermeta.standard.helper.BooleanWrapper.and(org.kermeta.compil.runtime.helper.language.ObjectUtil.isNotEqual(p_lbdExp74.getUpper(), kermeta.standard.helper.IntegerWrapper.uminus(1)), kermeta.standard.helper.IntegerWrapper.isGreater(c.size(), p_lbdExp74.getUpper())));\n\n\tif( idIfCond_248 ) {\n\n\t\nif (true)\n\tthrow new org.kermeta.compil.runtime.helper.error.KRuntimeError( ((kermeta.exceptions.ConstraintViolatedInv) org.kermeta.compil.runtime.helper.language.ClassUtil.newObject(\"kermeta.exceptions.ConstraintViolatedInv\")) );\n\n}\n\n}\n else {\n\n\tjava.lang.Boolean idIfCond_249 = false;\n\tidIfCond_249 = kermeta.standard.helper.BooleanWrapper.and(kermeta.standard.helper.IntegerWrapper.equals(p_lbdExp74.getLower(), 1), org.kermeta.compil.runtime.helper.language.ObjectUtil.isVoid(v));\n\n\tif( idIfCond_249 ) {\n\n\t\nif (true)\n\tthrow new org.kermeta.compil.runtime.helper.error.KRuntimeError( ((kermeta.exceptions.ConstraintViolatedInv) org.kermeta.compil.runtime.helper.language.ClassUtil.newObject(\"kermeta.exceptions.ConstraintViolatedInv\")) );\n\n}\n\n}\n\n//EIle:func\n\n}\n\t}\n}\n\n//EIft:each\n\n}\n\n\n\torg.kermeta.compil.runtime.helper.language.ObjectUtil.checkInvariants(this);\n'"
 	 * @generated
 	 */
 	void checkInvariants();
@@ -337,7 +337,7 @@ public interface Object extends EObject {
 	 * <!-- end-user-doc -->
 	 * @model kind="operation"
 	 *        annotation="kermeta documentation='/** Never used for the moment \052/'"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='\nkermeta.standard.Set<kermeta.language.structure.Object> result = null;\n\n\tresult = ((kermeta.standard.Set<kermeta.language.structure.Object>) org.kermeta.compil.runtime.helper.language.ClassUtil.newObject(\"kermeta.standard.Set<kermeta.language.structure.Object>\"));\n\n\t//Beginning of the Inlining of the function type: each\n\n\t\n{\n\n\tkermeta.standard.Iterator<kermeta.language.structure.Property> it_ft5 = org.kermeta.compil.runtime.helper.language.ObjectUtil.getMetaClass(this).allAttributes().iterator();\n\tjava.lang.Boolean idLoopCond_13 = false;\n\twhile( !idLoopCond_13 ) {\n\tidLoopCond_13 = it_ft5.isOff();\n\tif ( idLoopCond_13 ) {\n\t} else {\n\n\t//Beginning of the Inlining of the lambda expression: func\nkermeta.language.structure.Property attr = it_ft5.next();\n\n\torg.kermeta.compil.runtime.helper.io.StdIOUtil.writeln(attr.getName());\n//End of the Inlining of the lambda expression: func\n\n}\n\t}\n}\n\n//End of the Inlining of the function type: each\n\n\nreturn result;\n'"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='\nkermeta.standard.Set<kermeta.language.structure.Object> result = null;\n\n\tresult = ((kermeta.standard.Set<kermeta.language.structure.Object>) org.kermeta.compil.runtime.helper.language.ClassUtil.newObject(\"kermeta.standard.Set<kermeta.language.structure.Object>\"));\n\n\t//BIft:each\n\n\t\n{\n\n\tkermeta.standard.Iterator<kermeta.language.structure.Property> it_ft75 = org.kermeta.compil.runtime.helper.language.ObjectUtil.getMetaClass(this).allAttributes().iterator();\n\tjava.lang.Boolean idLoopCond_250 = false;\n\twhile( !idLoopCond_250 ) {\n\tidLoopCond_250 = it_ft75.isOff();\n\tif ( idLoopCond_250 ) {\n\t} else {\n\n\t//BIle:func\nkermeta.language.structure.Property attr_lbdExp75 = it_ft75.next();\n\n\torg.kermeta.compil.runtime.helper.io.StdIOUtil.writeln(attr_lbdExp75.getName());\n//EIle:func\n\n}\n\t}\n}\n\n//EIft:each\n\n\nreturn result;\n'"
 	 * @generated
 	 */
 	Set<Object> getAllContainedElementAsType();
@@ -356,16 +356,6 @@ public interface Object extends EObject {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @model type="kermeta.standard.OrderedSet<kermeta.standard.JavaString>" keyDataType="kermeta.standard.JavaString"
-	 *        annotation="kermeta documentation='/**\n\t * Get the values for the tags having as key: <key : String>\n\t \052/'"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='\nkermeta.standard.OrderedSet<java.lang.String> result = null;\n\n\tkermeta.standard.OrderedSet<java.lang.String> value_list = ((kermeta.standard.OrderedSet<java.lang.String>) org.kermeta.compil.runtime.helper.language.ClassUtil.newObject(\"kermeta.standard.OrderedSet<java.lang.String>\"));\n\n\t//Beginning of the Inlining of the function type: each\n\n\t\n{\n\n\tkermeta.standard.Iterator<kermeta.language.structure.Tag> it_ft6 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil.<kermeta.language.structure.Tag>convertAsOrderedSet(this.getOwnedTags()).iterator();\n\tjava.lang.Boolean idLoopCond_14 = false;\n\twhile( !idLoopCond_14 ) {\n\tidLoopCond_14 = it_ft6.isOff();\n\tif ( idLoopCond_14 ) {\n\t} else {\n\n\t//Beginning of the Inlining of the lambda expression: func\nkermeta.language.structure.Tag t = it_ft6.next();\n\n\tjava.lang.Boolean idIfCond_15 = false;\n\tidIfCond_15 = kermeta.standard.helper.StringWrapper.equals(t.getName(), key);\n\n\tif( idIfCond_15 ) {\n\n\tvalue_list.add(t.getValue());\n}\n\n//End of the Inlining of the lambda expression: func\n\n}\n\t}\n}\n\n//End of the Inlining of the function type: each\n\n\n\tresult = value_list;\n\nreturn result;\n'"
-	 * @generated
-	 */
-	OrderedSet<String> getTagValues(String key);
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
 	 * @model dataType="kermeta.standard.JavaBoolean"
 	 *        annotation="kermeta documentation='/**\n\t * Returns a Boolean stating whether the current Object conforms to given Type\n\t * This means: is this object an instance of this type, or is it an instance of its subtype \n\t \052/'"
 	 *        annotation="kermeta RecopyInValueTypes='true'"
@@ -377,9 +367,19 @@ public interface Object extends EObject {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @model type="kermeta.standard.OrderedSet<kermeta.standard.JavaString>" keyDataType="kermeta.standard.JavaString"
+	 *        annotation="kermeta documentation='/**\n\t * Get the values for the tags having as key: <key : String>\n\t \052/'"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='\nkermeta.standard.OrderedSet<java.lang.String> result = null;\n\n\tkermeta.standard.OrderedSet<java.lang.String> value_list = ((kermeta.standard.OrderedSet<java.lang.String>) org.kermeta.compil.runtime.helper.language.ClassUtil.newObject(\"kermeta.standard.OrderedSet<java.lang.String>\"));\n\n\t//BIft:each\n\n\t\n{\n\n\tkermeta.standard.Iterator<kermeta.language.structure.Tag> it_ft76 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil.<kermeta.language.structure.Tag>convertAsOrderedSet(this.getOwnedTags()).iterator();\n\tjava.lang.Boolean idLoopCond_251 = false;\n\twhile( !idLoopCond_251 ) {\n\tidLoopCond_251 = it_ft76.isOff();\n\tif ( idLoopCond_251 ) {\n\t} else {\n\n\t//BIle:func\nkermeta.language.structure.Tag t_lbdExp76 = it_ft76.next();\n\n\tjava.lang.Boolean idIfCond_252 = false;\n\tidIfCond_252 = kermeta.standard.helper.StringWrapper.equals(t_lbdExp76.getName(), key);\n\n\tif( idIfCond_252 ) {\n\n\tvalue_list.add(t_lbdExp76.getValue());\n}\n\n//EIle:func\n\n}\n\t}\n}\n\n//EIft:each\n\n\n\tresult = value_list;\n\nreturn result;\n'"
+	 * @generated
+	 */
+	OrderedSet<String> getTagValues(String key);
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @model annotation="kermeta documentation='/**\n\t * Recursively runs checking of invariants defined for the metaclass of the Object\n\t * and its supertypes\n\t \052/'"
 	 *        annotation="kermeta RecopyInValueTypes='true'"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='\n\tjava.lang.Boolean idIfCond_16 = false;\n\tidIfCond_16 = org.kermeta.compil.runtime.helper.language.ObjectUtil.isNotEqual(this, null);\n\n\tif( idIfCond_16 ) {\n\n\torg.kermeta.compil.runtime.helper.language.ObjectUtil.checkInvariants(this);\n\n\tkermeta.language.structure.ClassDefinition cd = null;\n\n\tcd = (kermeta.language.structure.ClassDefinition) org.kermeta.compil.runtime.helper.language.ObjectUtil.getMetaClass(this).getTypeDefinition();\n\n\t//Beginning of the Inlining of the function type: each\n\n\t\n{\n\n\tkermeta.standard.Iterator<kermeta.language.structure.Property> it_ft7 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil.<kermeta.language.structure.Property>convertAsSet(cd.getAllAttribute()).iterator();\n\tjava.lang.Boolean idLoopCond_17 = false;\n\twhile( !idLoopCond_17 ) {\n\tidLoopCond_17 = it_ft7.isOff();\n\tif ( idLoopCond_17 ) {\n\t} else {\n\n\t//Beginning of the Inlining of the lambda expression: func\nkermeta.language.structure.Property subObj = it_ft7.next();\n\n\tjava.lang.Boolean idIfCond_18 = false;\n\tidIfCond_18 = subObj.getIsComposite();\n\n\tif( idIfCond_18 ) {\n\n\tjava.lang.Boolean idIfCond_19 = false;\n\tidIfCond_19 = kermeta.standard.helper.BooleanWrapper.or(kermeta.standard.helper.StringWrapper.equals(org.kermeta.compil.runtime.helper.language.ObjectUtil.getMetaClass(org.kermeta.compil.runtime.helper.language.ObjectUtil.get(this, subObj)).getTypeDefinition().getName(), \"ReflectiveSequence\"), kermeta.standard.helper.StringWrapper.equals(org.kermeta.compil.runtime.helper.language.ObjectUtil.getMetaClass(org.kermeta.compil.runtime.helper.language.ObjectUtil.get(this, subObj)).getTypeDefinition().getName(), \"ReflectiveCollection\"));\n\n\tif( idIfCond_19 ) {\n\n\tkermeta.standard.Collection<kermeta.language.structure.Object> subObjInstances = null;\n\n\tsubObjInstances = (kermeta.standard.Collection<kermeta.language.structure.Object>) org.kermeta.compil.runtime.helper.language.ObjectUtil.get(this, subObj);\n\n\t//Beginning of the Inlining of the function type: each\n\n\t\n{\n\n\tkermeta.standard.Iterator<kermeta.language.structure.Object> it_ft8 = subObjInstances.iterator();\n\tjava.lang.Boolean idLoopCond_20 = false;\n\twhile( !idLoopCond_20 ) {\n\tidLoopCond_20 = it_ft8.isOff();\n\tif ( idLoopCond_20 ) {\n\t} else {\n\n\t//Beginning of the Inlining of the lambda expression: func\nkermeta.language.structure.Object aSubObjInstances = it_ft8.next();\n\n\torg.kermeta.compil.runtime.helper.language.ObjectUtil.checkAllInvariants(aSubObjInstances);\n//End of the Inlining of the lambda expression: func\n\n}\n\t}\n}\n\n//End of the Inlining of the function type: each\n\n}\n else {\n\n\torg.kermeta.compil.runtime.helper.language.ObjectUtil.checkAllInvariants(org.kermeta.compil.runtime.helper.language.ObjectUtil.get(this, subObj));\n}\n\n}\n\n//End of the Inlining of the lambda expression: func\n\n}\n\t}\n}\n\n//End of the Inlining of the function type: each\n\n}\n\n'"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='\n\tjava.lang.Boolean idIfCond_253 = false;\n\tidIfCond_253 = org.kermeta.compil.runtime.helper.language.ObjectUtil.isNotEqual(this, null);\n\n\tif( idIfCond_253 ) {\n\n\torg.kermeta.compil.runtime.helper.language.ObjectUtil.checkInvariants(this);\n\n\tkermeta.language.structure.ClassDefinition cd = null;\n\n\tcd = (kermeta.language.structure.ClassDefinition) org.kermeta.compil.runtime.helper.language.ObjectUtil.getMetaClass(this).getTypeDefinition();\n\n\t//BIft:each\n\n\t\n{\n\n\tkermeta.standard.Iterator<kermeta.language.structure.Property> it_ft77 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil.<kermeta.language.structure.Property>convertAsSet(cd.getAllAttribute()).iterator();\n\tjava.lang.Boolean idLoopCond_254 = false;\n\twhile( !idLoopCond_254 ) {\n\tidLoopCond_254 = it_ft77.isOff();\n\tif ( idLoopCond_254 ) {\n\t} else {\n\n\t//BIle:func\nkermeta.language.structure.Property subObj_lbdExp77 = it_ft77.next();\n\n\tjava.lang.Boolean idIfCond_255 = false;\n\tidIfCond_255 = subObj_lbdExp77.getIsComposite();\n\n\tif( idIfCond_255 ) {\n\n\tjava.lang.Boolean idIfCond_256 = false;\n\tidIfCond_256 = kermeta.standard.helper.BooleanWrapper.or(kermeta.standard.helper.StringWrapper.equals(org.kermeta.compil.runtime.helper.language.ObjectUtil.getMetaClass(org.kermeta.compil.runtime.helper.language.ObjectUtil.get(this, subObj_lbdExp77)).getTypeDefinition().getName(), \"ReflectiveSequence\"), kermeta.standard.helper.StringWrapper.equals(org.kermeta.compil.runtime.helper.language.ObjectUtil.getMetaClass(org.kermeta.compil.runtime.helper.language.ObjectUtil.get(this, subObj_lbdExp77)).getTypeDefinition().getName(), \"ReflectiveCollection\"));\n\n\tif( idIfCond_256 ) {\n\n\tkermeta.standard.Collection<kermeta.language.structure.Object> subObjInstances = null;\n\n\tsubObjInstances = (kermeta.standard.Collection<kermeta.language.structure.Object>) org.kermeta.compil.runtime.helper.language.ObjectUtil.get(this, subObj_lbdExp77);\n\n\t//BIft:each\n\n\t\n{\n\n\tkermeta.standard.Iterator<kermeta.language.structure.Object> it_ft78 = subObjInstances.iterator();\n\tjava.lang.Boolean idLoopCond_257 = false;\n\twhile( !idLoopCond_257 ) {\n\tidLoopCond_257 = it_ft78.isOff();\n\tif ( idLoopCond_257 ) {\n\t} else {\n\n\t//BIle:func\nkermeta.language.structure.Object aSubObjInstances_lbdExp78 = it_ft78.next();\n\n\torg.kermeta.compil.runtime.helper.language.ObjectUtil.checkAllInvariants(aSubObjInstances_lbdExp78);\n//EIle:func\n\n}\n\t}\n}\n\n//EIft:each\n\n}\n else {\n\n\torg.kermeta.compil.runtime.helper.language.ObjectUtil.checkAllInvariants(org.kermeta.compil.runtime.helper.language.ObjectUtil.get(this, subObj_lbdExp77));\n}\n\n}\n\n//EIle:func\n\n}\n\t}\n}\n\n//EIft:each\n\n}\n\n'"
 	 * @generated
 	 */
 	void checkAllInvariants();
@@ -407,8 +407,8 @@ public interface Object extends EObject {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @model annotation="http://www.eclipse.org/emf/2002/GenModel body='\n\t//Beginning of the Inlining of the function type: eachOwnedElement\n\n\t//Beginning of the Inlining of the function type: each\n\n\t\n{\n\n\tkermeta.standard.Iterator<kermeta.language.structure.Tag> it_ft10 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil.<kermeta.language.structure.Tag>convertAsOrderedSet(this.getOwnedTags()).iterator();\n\tjava.lang.Boolean idLoopCond_21 = false;\n\twhile( !idLoopCond_21 ) {\n\tidLoopCond_21 = it_ft10.isOff();\n\tif ( idLoopCond_21 ) {\n\t} else {\n\n\t//Beginning of the Inlining of the lambda expression: func\nkermeta.language.structure.Tag o = it_ft10.next();\n\n\t//Beginning of the Inlining of the lambda expression: func\nkermeta.language.structure.Tag p = o_ft10;\n\n\tp.applyPass2BehaviorJava(context);\n//End of the Inlining of the lambda expression: func\n\n//End of the Inlining of the lambda expression: func\n\n}\n\t}\n}\n\n//End of the Inlining of the function type: each\n\n//End of the Inlining of the function type: eachOwnedElement\n\n'"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='\n\t//Beginning of the Inlining of the function type: eachOwnedElement\n\n\t//Beginning of the Inlining of the function type: each\n\n\t\n{\n\n\tkermeta.standard.Iterator<kermeta.language.structure.Tag> it_ft204 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil.<kermeta.language.structure.Tag>convertAsOrderedSet(self.getOwnedTags()).iterator();\n\tjava.lang.Boolean idLoopCond_871 = false;\n\twhile( !idLoopCond_871 ) {\n\tidLoopCond_871 = it_ft204.isOff();\n\tif ( idLoopCond_871 ) {\n\t} else {\n\n\t//Beginning of the Inlining of the lambda expression: func\nkermeta.language.structure.Tag o = it_ft204.next();\n\n\t//Beginning of the Inlining of the lambda expression: func\nkermeta.language.structure.Tag p = o_ft204;\n\n\tp.applyPass2BehaviorJava(context);\n//End of the Inlining of the lambda expression: func\n\n//End of the Inlining of the lambda expression: func\n\n}\n\t}\n}\n\n//End of the Inlining of the function type: each\n\n//End of the Inlining of the function type: eachOwnedElement\n\n'"
+	 * @model annotation="http://www.eclipse.org/emf/2002/GenModel body='\n\t//BIft:eachOwnedElement\n\n\t//BIft:each\n\n\t\n{\n\n\tkermeta.standard.Iterator<kermeta.language.structure.Tag> it_ft80 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil.<kermeta.language.structure.Tag>convertAsOrderedSet(this.getOwnedTags()).iterator();\n\tjava.lang.Boolean idLoopCond_258 = false;\n\twhile( !idLoopCond_258 ) {\n\tidLoopCond_258 = it_ft80.isOff();\n\tif ( idLoopCond_258 ) {\n\t} else {\n\n\t//BIle:func\nkermeta.language.structure.Tag o_lbdExp80 = it_ft80.next();\n\n\t//BIle:func\nkermeta.language.structure.Tag p_lbdExp79 = o_lbdExp80;\n\n\tp_lbdExp79.applyPass2BehaviorJava(context);\n//EIle:func\n\n//EIle:func\n\n}\n\t}\n}\n\n//EIft:each\n\n//EIft:eachOwnedElement\n\n'"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='\n\t//BIft:eachOwnedElement\n\n\t//BIft:each\n\n\t\n{\n\n\tkermeta.standard.Iterator<kermeta.language.structure.Tag> it_ft205 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil.<kermeta.language.structure.Tag>convertAsOrderedSet(self.getOwnedTags()).iterator();\n\tjava.lang.Boolean idLoopCond_931 = false;\n\twhile( !idLoopCond_931 ) {\n\tidLoopCond_931 = it_ft205.isOff();\n\tif ( idLoopCond_931 ) {\n\t} else {\n\n\t//BIle:func\nkermeta.language.structure.Tag o_lbdExp205 = it_ft205.next();\n\n\t//BIle:func\nkermeta.language.structure.Tag p_lbdExp204 = o_lbdExp205;\n\n\tp_lbdExp204.applyPass2BehaviorJava(context);\n//EIle:func\n\n//EIle:func\n\n}\n\t}\n}\n\n//EIft:each\n\n//EIft:eachOwnedElement\n\n'"
 	 * @generated
 	 */
 	void applyPass2BehaviorJava(KM2EcoreContext context);
@@ -456,16 +456,6 @@ public interface Object extends EObject {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @model kind="operation" dataType="kermeta.standard.JavaString"
-	 *        annotation="kermeta documentation='/**\n\t * Get the Wrapprings of ValueType\'s ReturnType for tackle the  eplacing the current one\n\t \052/'"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='\njava.lang.String result = null;\n\n\tresult = this.getUniqueTagValue(\"WrapperValueTypeReturnType\");\n\nreturn result;\n'"
-	 * @generated
-	 */
-	String getWrapperValueTypeReturnType();
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
 	 * @model annotation="kermeta documentation='/** \n\t * Returns the instances of the given property for this Object.\n\t *\n\t * Example : \n\t * <pre>\n\t * class A { reference attr : String }\n\t * </pre>\n\t * Using A :\n\t * <pre>\n\t * operation getAProp() is do\n\t *    var a : A\n\t *    var s : String\n\t *    var the_attr : Property init self.getMetaClass.ownedAttribute.one\n\t *    s ?= a.get(the_attr)\n\t * end\n\t * </pre>\n\t * The user has to cast\n\t * the result of this method according to the type and the upper multiplicity\n\t * of this property. If upper multiplicity > 1, than the effective type of the \n\t * result is a Sequence<ThePropertyName>. Otherwise, the type corresponds to \n\t * the name of the given Property (i.e the type of the property instance).\n\t \052/'"
 	 *        annotation="kermeta WrapperValueTypeReturnType='java.lang.String=kermeta.language.structure.Object java.lang.Boolean=kermeta.language.structure.Object java.lang.Integer=kermeta.language.structure.Object java.lang.Double=kermeta.language.structure.Object java.lang.Character=kermeta.language.structure.Object java.lang.Number=kermeta.language.structure.Object'"
 	 *        annotation="kermeta RecopyInValueTypes='true'"
@@ -473,6 +463,16 @@ public interface Object extends EObject {
 	 * @generated
 	 */
 	Object get(Property property);
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model kind="operation" dataType="kermeta.standard.JavaString"
+	 *        annotation="kermeta documentation='/**\n\t * Get the Wrapprings of ValueType\'s ReturnType for tackle the  eplacing the current one\n\t \052/'"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='\njava.lang.String result = null;\n\n\tresult = this.getUniqueTagValue(\"WrapperValueTypeReturnType\");\n\nreturn result;\n'"
+	 * @generated
+	 */
+	String getWrapperValueTypeReturnType();
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -529,7 +529,7 @@ public interface Object extends EObject {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @model dataType="kermeta.standard.JavaBoolean"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='\njava.lang.Boolean result = null;\n\n\tresult = false;\n\n\tjava.lang.Boolean idIfCond_22 = false;\n\tidIfCond_22 = org.kermeta.compil.runtime.helper.language.ObjectUtil.isInstanceOf(this, org.kermeta.compil.runtime.ExecutionContext.getInstance().getMetaClass(\"kermeta.language.behavior.CallFeature\"));\n\n\tif( idIfCond_22 ) {\n\n\tjava.lang.Boolean idIfCond_23 = false;\n\tidIfCond_23 = ((kermeta.language.behavior.CallFeature) org.kermeta.compil.runtime.helper.language.ObjectUtil.asType(this, org.kermeta.compil.runtime.ExecutionContext.getInstance().getMetaClass(\"kermeta.language.behavior.CallFeature\"))).isCallFeatureAsStaticOperation();\n\n\tif( idIfCond_23 ) {\n\n\tjava.lang.Boolean idIfCond_24 = false;\n\tidIfCond_24 = ((kermeta.language.behavior.CallFeature) org.kermeta.compil.runtime.helper.language.ObjectUtil.asType(this, org.kermeta.compil.runtime.ExecutionContext.getInstance().getMetaClass(\"kermeta.language.behavior.CallFeature\"))).getStaticOperation().isFunctionType();\n\n\tif( idIfCond_24 ) {\n\n\tresult = true;\n}\n\n}\n\n}\n\n\nreturn result;\n'"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='\njava.lang.Boolean result = null;\n\n\tresult = false;\n\n\tjava.lang.Boolean idIfCond_259 = false;\n\tidIfCond_259 = org.kermeta.compil.runtime.helper.language.ObjectUtil.isInstanceOf(this, org.kermeta.compil.runtime.ExecutionContext.getInstance().getMetaClass(\"kermeta.language.behavior.CallFeature\"));\n\n\tif( idIfCond_259 ) {\n\n\tjava.lang.Boolean idIfCond_260 = false;\n\tidIfCond_260 = ((kermeta.language.behavior.CallFeature) org.kermeta.compil.runtime.helper.language.ObjectUtil.asType(this, org.kermeta.compil.runtime.ExecutionContext.getInstance().getMetaClass(\"kermeta.language.behavior.CallFeature\"))).isCallFeatureAsStaticOperation();\n\n\tif( idIfCond_260 ) {\n\n\tjava.lang.Boolean idIfCond_261 = false;\n\tidIfCond_261 = ((kermeta.language.behavior.CallFeature) org.kermeta.compil.runtime.helper.language.ObjectUtil.asType(this, org.kermeta.compil.runtime.ExecutionContext.getInstance().getMetaClass(\"kermeta.language.behavior.CallFeature\"))).getStaticOperation().isFunctionType();\n\n\tif( idIfCond_261 ) {\n\n\tresult = true;\n}\n\n}\n\n}\n\n\nreturn result;\n'"
 	 * @generated
 	 */
 	Boolean callsFunctionType();
@@ -539,7 +539,7 @@ public interface Object extends EObject {
 	 * <!-- end-user-doc -->
 	 * @model dataType="kermeta.standard.JavaString" keyDataType="kermeta.standard.JavaString"
 	 *        annotation="kermeta documentation='/**\n\t * Get the values for the tags having as key: <key : String>\n\t \052/'"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='\njava.lang.String result = null;\n\n\tresult = \"\";\n\n\tkermeta.standard.OrderedSet<java.lang.String> value_list = this.getTagValues(key);\n\n\tjava.lang.Boolean idIfCond_25 = false;\n\tidIfCond_25 = kermeta.standard.helper.BooleanWrapper.and(kermeta.standard.helper.BooleanWrapper.not(org.kermeta.compil.runtime.helper.language.ObjectUtil.isVoid(value_list)), kermeta.standard.helper.IntegerWrapper.isGreaterOrEqual(value_list.size(), 1));\n\n\tif( idIfCond_25 ) {\n\n\tresult = value_list.one();\n}\n\n\nreturn result;\n'"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='\njava.lang.String result = null;\n\n\tresult = \"\";\n\n\tkermeta.standard.OrderedSet<java.lang.String> value_list = this.getTagValues(key);\n\n\tjava.lang.Boolean idIfCond_262 = false;\n\tidIfCond_262 = kermeta.standard.helper.BooleanWrapper.and(kermeta.standard.helper.BooleanWrapper.not(org.kermeta.compil.runtime.helper.language.ObjectUtil.isVoid(value_list)), kermeta.standard.helper.IntegerWrapper.isGreaterOrEqual(value_list.size(), 1));\n\n\tif( idIfCond_262 ) {\n\n\tresult = value_list.first();\n}\n\n\nreturn result;\n'"
 	 * @generated
 	 */
 	String getUniqueTagValue(String key);
@@ -547,7 +547,7 @@ public interface Object extends EObject {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @model annotation="http://www.eclipse.org/emf/2002/GenModel body='\nkermeta.language.structure.Object result = null;\n\n\tresult = null;\n\n\tkermeta.language.structure.Object obj = this;\n\n\t\n{\n\n\tjava.lang.Integer i = 0;\n\tjava.lang.Boolean idLoopCond_26 = false;\n\twhile( !idLoopCond_26 ) {\n\tidLoopCond_26 = kermeta.standard.helper.IntegerWrapper.equals(i, 1);\n\tif ( idLoopCond_26 ) {\n\t} else {\n\n\tjava.lang.Boolean idIfCond_27 = false;\n\tidIfCond_27 = kermeta.standard.helper.BooleanWrapper.not(org.kermeta.compil.runtime.helper.language.ObjectUtil.isInstanceOf(org.kermeta.compil.runtime.helper.language.ObjectUtil.container(obj), org.kermeta.compil.runtime.ExecutionContext.getInstance().getMetaClass(\"type\")));\n\n\tif( idIfCond_27 ) {\n\n\tjava.lang.Boolean idIfCond_28 = false;\n\tidIfCond_28 = kermeta.standard.helper.BooleanWrapper.not(org.kermeta.compil.runtime.helper.language.ObjectUtil.isVoid(org.kermeta.compil.runtime.helper.language.ObjectUtil.container(obj)));\n\n\tif( idIfCond_28 ) {\n\n\tobj = org.kermeta.compil.runtime.helper.language.ObjectUtil.container(obj);\n}\n else {\n\n\ti = 1;\n}\n\n}\n else {\n\n\ti = 1;\n\n\tresult = org.kermeta.compil.runtime.helper.language.ObjectUtil.container(obj);\n}\n\n}\n\t}\n}\n\n\nreturn result;\n'"
+	 * @model annotation="http://www.eclipse.org/emf/2002/GenModel body='\nkermeta.language.structure.Object result = null;\n\n\tresult = null;\n\n\tkermeta.language.structure.Object obj = this;\n\n\t\n{\n\n\tjava.lang.Integer i = 0;\n\tjava.lang.Boolean idLoopCond_263 = false;\n\twhile( !idLoopCond_263 ) {\n\tidLoopCond_263 = kermeta.standard.helper.IntegerWrapper.equals(i, 1);\n\tif ( idLoopCond_263 ) {\n\t} else {\n\n\tjava.lang.Boolean idIfCond_264 = false;\n\tidIfCond_264 = kermeta.standard.helper.BooleanWrapper.not(org.kermeta.compil.runtime.helper.language.ObjectUtil.isInstanceOf(org.kermeta.compil.runtime.helper.language.ObjectUtil.container(obj), org.kermeta.compil.runtime.ExecutionContext.getInstance().getMetaClass(\"type\")));\n\n\tif( idIfCond_264 ) {\n\n\tjava.lang.Boolean idIfCond_265 = false;\n\tidIfCond_265 = kermeta.standard.helper.BooleanWrapper.not(org.kermeta.compil.runtime.helper.language.ObjectUtil.isVoid(org.kermeta.compil.runtime.helper.language.ObjectUtil.container(obj)));\n\n\tif( idIfCond_265 ) {\n\n\tobj = org.kermeta.compil.runtime.helper.language.ObjectUtil.container(obj);\n}\n else {\n\n\ti = 1;\n}\n\n}\n else {\n\n\ti = 1;\n\n\tresult = org.kermeta.compil.runtime.helper.language.ObjectUtil.container(obj);\n}\n\n}\n\t}\n}\n\n\nreturn result;\n'"
 	 * @generated
 	 */
 	Object getContainerAsType(Type type);
@@ -587,22 +587,22 @@ public interface Object extends EObject {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @model annotation="kermeta documentation='/**\n\t * Remove the element set as the <code>~property</code> of the object.\n\t * The <code>isSet(~property)</code> method will then return False\n\t \052/'"
-	 *        annotation="kermeta RecopyInValueTypes='true'"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='\n\torg.kermeta.compil.runtime.helper.language.ObjectUtil.unset(this, property);\n'"
-	 * @generated
-	 */
-	void unset(Property property);
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
 	 * @model annotation="kermeta documentation='/**\n\t * Freeze the Object\n\t \052/'"
 	 *        annotation="kermeta RecopyInValueTypes='true'"
 	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='\n\torg.kermeta.compil.runtime.helper.language.ObjectUtil.freeze(this);\n'"
 	 * @generated
 	 */
 	void freeze();
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model annotation="kermeta documentation='/**\n\t * Remove the element set as the <code>~property</code> of the object.\n\t * The <code>isSet(~property)</code> method will then return False\n\t \052/'"
+	 *        annotation="kermeta RecopyInValueTypes='true'"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='\n\torg.kermeta.compil.runtime.helper.language.ObjectUtil.unset(this, property);\n'"
+	 * @generated
+	 */
+	void unset(Property property);
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -621,7 +621,7 @@ public interface Object extends EObject {
 	 *        annotation="kermeta WrapperValueTypeReturnType='java.lang.String=kermeta.language.structure.Object java.lang.Boolean=kermeta.language.structure.Object java.lang.Integer=kermeta.language.structure.Object java.lang.Double=kermeta.language.structure.Object java.lang.Character=kermeta.language.structure.Object java.lang.Number=kermeta.language.structure.Object'"
 	 *        annotation="kermeta WrapperValueTypeSelfExpression='java.lang.String=kermeta.language.structure.Object java.lang.Boolean=kermeta.language.structure.Object java.lang.Integer=kermeta.language.structure.Object java.lang.Double=kermeta.language.structure.Object java.lang.Character=kermeta.language.structure.Object java.lang.Number=kermeta.language.structure.Object'"
 	 *        annotation="kermeta RecopyInValueTypes='true'"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='\nkermeta.language.structure.Object result = null;\n\n\tjava.lang.Boolean idIfCond_29 = false;\n\tidIfCond_29 = org.kermeta.compil.runtime.helper.language.ObjectUtil.isInstanceOf(this, org.kermeta.compil.runtime.ExecutionContext.getInstance().getMetaClass(\"type\"));\n\n\tif( idIfCond_29 ) {\n\n\tresult = this;\n}\n else {\n\n\t\nif (true)\n\tthrow new org.kermeta.compil.runtime.helper.error.KRuntimeError( ((kermeta.exceptions.TypeCastError) org.kermeta.compil.runtime.helper.language.ClassUtil.newObject(\"kermeta.exceptions.TypeCastError\")) );\n\n}\n\n\nreturn result;\n'"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='\nkermeta.language.structure.Object result = null;\n\n\tjava.lang.Boolean idIfCond_266 = false;\n\tidIfCond_266 = org.kermeta.compil.runtime.helper.language.ObjectUtil.isInstanceOf(this, org.kermeta.compil.runtime.ExecutionContext.getInstance().getMetaClass(\"type\"));\n\n\tif( idIfCond_266 ) {\n\n\tresult = this;\n}\n else {\n\n\t\nif (true)\n\tthrow new org.kermeta.compil.runtime.helper.error.KRuntimeError( ((kermeta.exceptions.TypeCastError) org.kermeta.compil.runtime.helper.language.ClassUtil.newObject(\"kermeta.exceptions.TypeCastError\")) );\n\n}\n\n\nreturn result;\n'"
 	 * @generated
 	 */
 	Object asType(kermeta.language.structure.Class type);

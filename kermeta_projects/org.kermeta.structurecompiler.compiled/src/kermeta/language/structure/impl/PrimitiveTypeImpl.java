@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: PrimitiveTypeImpl.java,v 1.1 2008-09-04 15:40:29 cfaucher Exp $
+ * $Id: PrimitiveTypeImpl.java,v 1.2 2008-09-11 12:34:47 cfaucher Exp $
  */
 package kermeta.language.structure.impl;
 
@@ -208,7 +208,25 @@ public class PrimitiveTypeImpl extends DataTypeImpl implements PrimitiveType {
 
 		java.lang.String result = null;
 
-		result = this.getInstanceType().createBehaviorJava(context);
+		result = "";
+
+		java.lang.Boolean idIfCond_96 = false;
+		idIfCond_96 = kermeta.standard.helper.BooleanWrapper.and(
+				kermeta.standard.helper.BooleanWrapper.not(this.isValueType()),
+				this.isEDataType());
+
+		if (idIfCond_96) {
+
+			result = this.getEMFEDataTypeInstanceClassName();
+		}
+
+		java.lang.Boolean idIfCond_97 = false;
+		idIfCond_97 = kermeta.standard.helper.StringWrapper.equals(result, "");
+
+		if (idIfCond_97) {
+
+			result = this.getInstanceType().createBehaviorJava(context);
+		}
 
 		return result;
 
@@ -237,39 +255,39 @@ public class PrimitiveTypeImpl extends DataTypeImpl implements PrimitiveType {
 
 		this.setEcoreModelElement(eModelElement);
 
-		//Beginning of the Inlining of the function type: eachOwnedElement
+		//BIft:eachOwnedElement
 
-		//Beginning of the Inlining of the function type: each
+		//BIft:each
 
 		{
 
-			kermeta.standard.Iterator<kermeta.language.structure.Tag> it_ft69 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
+			kermeta.standard.Iterator<kermeta.language.structure.Tag> it_ft33 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
 					.<kermeta.language.structure.Tag> convertAsOrderedSet(
 							this.getOwnedTags()).iterator();
-			java.lang.Boolean idLoopCond_183 = false;
-			while (!idLoopCond_183) {
-				idLoopCond_183 = it_ft69.isOff();
-				if (idLoopCond_183) {
+			java.lang.Boolean idLoopCond_98 = false;
+			while (!idLoopCond_98) {
+				idLoopCond_98 = it_ft33.isOff();
+				if (idLoopCond_98) {
 				} else {
 
-					//Beginning of the Inlining of the lambda expression: func
-					kermeta.language.structure.Tag o = it_ft69.next();
+					//BIle:func
+					kermeta.language.structure.Tag o_lbdExp33 = it_ft33.next();
 
-					//Beginning of the Inlining of the lambda expression: func
-					kermeta.language.structure.Tag cd = o_ft69;
+					//BIle:func
+					kermeta.language.structure.Tag cd_lbdExp32 = o_lbdExp33;
 
-					cd.applyPass1(context);
-					//End of the Inlining of the lambda expression: func
+					cd_lbdExp32.applyPass1(context);
+					//EIle:func
 
-					//End of the Inlining of the lambda expression: func
+					//EIle:func
 
 				}
 			}
 		}
 
-		//End of the Inlining of the function type: each
+		//EIft:each
 
-		//End of the Inlining of the function type: eachOwnedElement
+		//EIft:eachOwnedElement
 
 	}
 
@@ -295,11 +313,11 @@ public class PrimitiveTypeImpl extends DataTypeImpl implements PrimitiveType {
 		java.lang.String instanceClassName = this
 				.getEMFEDataTypeInstanceClassName();
 
-		java.lang.Boolean idIfCond_184 = false;
-		idIfCond_184 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+		java.lang.Boolean idIfCond_99 = false;
+		idIfCond_99 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 				.isNotEqual(instanceClassName, "");
 
-		if (idIfCond_184) {
+		if (idIfCond_99) {
 
 			eModelElement.setInstanceClassName(instanceClassName);
 
@@ -309,32 +327,32 @@ public class PrimitiveTypeImpl extends DataTypeImpl implements PrimitiveType {
 									.getUniqueTagValue("ecore.EDataType_eTypeParameters"),
 							" , ");
 
-			java.lang.Boolean idIfCond_185 = false;
-			idIfCond_185 = kermeta.standard.helper.IntegerWrapper.isGreater(
+			java.lang.Boolean idIfCond_100 = false;
+			idIfCond_100 = kermeta.standard.helper.IntegerWrapper.isGreater(
 					etps.size(), 0);
 
-			if (idIfCond_185) {
+			if (idIfCond_100) {
 
-				//Beginning of the Inlining of the function type: each
+				//BIft:each
 
 				{
 
-					kermeta.standard.Iterator<java.lang.String> it_ft70 = etps
+					kermeta.standard.Iterator<java.lang.String> it_ft34 = etps
 							.iterator();
-					java.lang.Boolean idLoopCond_186 = false;
-					while (!idLoopCond_186) {
-						idLoopCond_186 = it_ft70.isOff();
-						if (idLoopCond_186) {
+					java.lang.Boolean idLoopCond_101 = false;
+					while (!idLoopCond_101) {
+						idLoopCond_101 = it_ft34.isOff();
+						if (idLoopCond_101) {
 						} else {
 
-							//Beginning of the Inlining of the lambda expression: func
-							java.lang.String etp = it_ft70.next();
+							//BIle:func
+							java.lang.String etp_lbdExp34 = it_ft34.next();
 
-							java.lang.Boolean idIfCond_187 = false;
-							idIfCond_187 = org.kermeta.compil.runtime.helper.language.ObjectUtil
-									.isNotEqual(etp, "");
+							java.lang.Boolean idIfCond_102 = false;
+							idIfCond_102 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+									.isNotEqual(etp_lbdExp34, "");
 
-							if (idIfCond_187) {
+							if (idIfCond_102) {
 
 								ecore.ETypeParameter ecoreTypeParameter = ((ecore.ETypeParameter) org.kermeta.compil.runtime.helper.language.ClassUtil
 										.newObject("ecore.ETypeParameter"));
@@ -342,8 +360,8 @@ public class PrimitiveTypeImpl extends DataTypeImpl implements PrimitiveType {
 								ecoreTypeParameter
 										.setName(((km2ecore.helper.java.IdentifierHelper) org.kermeta.compil.runtime.helper.language.ClassUtil
 												.newObject("km2ecore.helper.java.IdentifierHelper"))
-												.getMangledIdentifier(etp,
-														context));
+												.getMangledIdentifier(
+														etp_lbdExp34, context));
 
 								org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
 										.<ecore.ETypeParameter> convertAsOrderedSet(
@@ -352,13 +370,13 @@ public class PrimitiveTypeImpl extends DataTypeImpl implements PrimitiveType {
 										.add(ecoreTypeParameter);
 							}
 
-							//End of the Inlining of the lambda expression: func
+							//EIle:func
 
 						}
 					}
 				}
 
-				//End of the Inlining of the function type: each
+				//EIft:each
 
 			}
 
@@ -385,11 +403,11 @@ public class PrimitiveTypeImpl extends DataTypeImpl implements PrimitiveType {
 														.getName()),
 										qualifiedName));
 
-		java.lang.Boolean idIfCond_188 = false;
-		idIfCond_188 = kermeta.standard.helper.StringWrapper.equals(
+		java.lang.Boolean idIfCond_103 = false;
+		idIfCond_103 = kermeta.standard.helper.StringWrapper.equals(
 				eModelElement.getInstanceClassName(), "");
 
-		if (idIfCond_188) {
+		if (idIfCond_103) {
 
 			eModelElement
 					.setInstanceClassName(kermeta.standard.helper.StringWrapper
@@ -397,21 +415,6 @@ public class PrimitiveTypeImpl extends DataTypeImpl implements PrimitiveType {
 		}
 
 		result = eModelElement;
-
-		return result;
-
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EDataType getEcoreModelElementTrace() {
-
-		X result = null;
-
-		result = this.getEcoreModelElement();
 
 		return result;
 

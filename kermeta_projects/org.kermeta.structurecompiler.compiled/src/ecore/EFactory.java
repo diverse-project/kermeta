@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: EFactory.java,v 1.2 2008-09-08 19:28:31 cfaucher Exp $
+ * $Id: EFactory.java,v 1.3 2008-09-11 12:34:55 cfaucher Exp $
  */
 package ecore;
 
@@ -19,7 +19,7 @@ package ecore;
  * </p>
  *
  * @see ecore.EcorePackage#getEFactory()
- * @model annotation="kermeta aspect='true'"
+ * @model
  * @generated
  */
 public interface EFactory extends EModelElement {
@@ -75,7 +75,8 @@ public interface EFactory extends EModelElement {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @model annotation="http://www.eclipse.org/emf/2002/GenModel body='\necore.EObject result = null;\n\n\t\nif (true)\n\tthrow new org.kermeta.compil.runtime.helper.error.KRuntimeError( ((kermeta.exceptions.NotImplementedException) org.kermeta.compil.runtime.helper.language.ClassUtil.newObject(\"kermeta.exceptions.NotImplementedException\")) );\n\n\nreturn result;\n'"
+	 * @model annotation="kermeta isAbstract='true'"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='ecore.EObject result = null;\n\nreturn result;\n'"
 	 * @generated
 	 */
 	EObject create(EClass eClass);

@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: StandardAdapterFactory.java,v 1.1 2008-09-04 15:40:44 cfaucher Exp $
+ * $Id: StandardAdapterFactory.java,v 1.2 2008-09-11 12:35:03 cfaucher Exp $
  */
 package kermeta.standard.util;
 

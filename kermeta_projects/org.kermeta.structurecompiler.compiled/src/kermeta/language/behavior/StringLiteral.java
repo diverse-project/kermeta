@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: StringLiteral.java,v 1.1 2008-09-04 15:40:22 cfaucher Exp $
+ * $Id: StringLiteral.java,v 1.2 2008-09-11 12:34:36 cfaucher Exp $
  */
 package kermeta.language.behavior;
 
@@ -21,8 +21,8 @@ import km2ecore.KM2EcoreContext;
  * </p>
  *
  * @see kermeta.language.behavior.BehaviorPackage#getStringLiteral()
- * @model annotation="kermeta documentation='/** Complete \052/'"
- *        annotation="kermeta documentation='This expression is a literal representing a String value, typically : \"my string\"'"
+ * @model annotation="kermeta documentation='This expression is a literal representing a String value, typically : \"my string\"'"
+ *        annotation="kermeta documentation='/** Complete \052/'"
  * @generated
  */
 public interface StringLiteral extends Literal {
@@ -58,7 +58,7 @@ public interface StringLiteral extends Literal {
 	 * <!-- end-user-doc -->
 	 * @model dataType="kermeta.standard.JavaString"
 	 *        annotation="kermeta superOperation='kermeta::language::behavior::Literal'"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='\njava.lang.String result = null;\n\n\tsuper.createBehaviorJava(context);\n\n\tresult = this.getValue();\n\n\tjava.lang.Boolean idIfCond_459 = false;\n\tidIfCond_459 = kermeta.standard.helper.StringWrapper.equals(result, \"\\\\.\");\n\n\tif( idIfCond_459 ) {\n\n\tresult = kermeta.standard.helper.StringWrapper.plus(kermeta.standard.helper.StringWrapper.plus(\"\\\"\", kermeta.standard.helper.StringWrapper.replace(result, \"\\\\.\", \"\\\\.\")), \"\\\"\");\n}\n else {\n\n\tresult = kermeta.standard.helper.StringWrapper.plus(kermeta.standard.helper.StringWrapper.plus(\"\\\"\", kermeta.standard.helper.StringWrapper.replace(result, \"\\\"\", \"\\\\\"\")), \"\\\"\");\n\n\tresult = kermeta.standard.helper.StringWrapper.replace(result, \"\\n\", \"\\n\");\n\n\tresult = kermeta.standard.helper.StringWrapper.replace(result, \"\\t\", \"\\t\");\n}\n\n\n\tresult = kermeta.standard.helper.StringWrapper.plus(result, this.endOfExpressionFixer());\n\nreturn result;\n'"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='\njava.lang.String result = null;\n\n\tsuper.createBehaviorJava(context);\n\n\tresult = this.getValue();\n\n\tjava.lang.Boolean idIfCond_562 = false;\n\tidIfCond_562 = kermeta.standard.helper.StringWrapper.equals(result, \"\\\\.\");\n\n\tif( idIfCond_562 ) {\n\n\tresult = \"\\\"\\\\.\\\"\";\n}\n else {\n\n\tresult = kermeta.standard.helper.StringWrapper.plus(kermeta.standard.helper.StringWrapper.plus(\"\\\"\", kermeta.standard.helper.StringWrapper.replace(result, \"\\\"\", \"\\\\\"\")), \"\\\"\");\n\n\tresult = kermeta.standard.helper.StringWrapper.replace(result, \"\\n\", \"\\n\");\n\n\tresult = kermeta.standard.helper.StringWrapper.replace(result, \"\\t\", \"\\t\");\n}\n\n\n\tresult = kermeta.standard.helper.StringWrapper.plus(result, this.endOfExpressionFixer());\n\nreturn result;\n'"
 	 * @generated
 	 */
 	String createBehaviorJava(KM2EcoreContext context);

@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: LiteralImpl.java,v 1.1 2008-09-04 15:40:25 cfaucher Exp $
+ * $Id: LiteralImpl.java,v 1.2 2008-09-11 12:34:40 cfaucher Exp $
  */
 package kermeta.language.behavior.impl;
 
@@ -22,7 +22,7 @@ import org.eclipse.emf.ecore.EClass;
  *
  * @generated
  */
-public class LiteralImpl extends ExpressionImpl implements Literal {
+public abstract class LiteralImpl extends ExpressionImpl implements Literal {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

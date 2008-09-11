@@ -1,5 +1,5 @@
 
-/*$Id: SaverOrLoader.java,v 1.1 2008-09-04 15:40:37 cfaucher Exp $
+/*$Id: SaverOrLoader.java,v 1.2 2008-09-11 12:34:56 cfaucher Exp $
 * Project : org.kermeta.framework.compiled.runtime.helper
 * File : 	SaverOrLoader.java
 * License : EPL

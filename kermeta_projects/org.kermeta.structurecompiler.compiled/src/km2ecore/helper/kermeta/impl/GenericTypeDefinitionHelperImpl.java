@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: GenericTypeDefinitionHelperImpl.java,v 1.1 2008-09-04 15:40:29 cfaucher Exp $
+ * $Id: GenericTypeDefinitionHelperImpl.java,v 1.2 2008-09-11 12:34:48 cfaucher Exp $
  */
 package km2ecore.helper.kermeta.impl;
 
@@ -60,66 +60,66 @@ public class GenericTypeDefinitionHelperImpl extends ObjectImpl implements
 		ecore.EClassifier retrieveSpecialType = null;
 
 		retrieveSpecialType = null;
-		//Beginning of the Inlining of the function type: detect
+		//BIft:detect
 
-		ecore.EClassifier result_ft168 = null;
+		ecore.EClassifier result_ft7 = null;
 
-		ecore.EClassifier elem_ft168 = null;
+		ecore.EClassifier elem_ft7 = null;
 
-		result_ft168 = null;
+		result_ft7 = null;
 
 		{
 
-			kermeta.standard.Iterator<ecore.EClassifier> it_ft168 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
+			kermeta.standard.Iterator<ecore.EClassifier> it_ft7 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
 					.<ecore.EClassifier> convertAsOrderedSet(
 							p.getEcoreModelElement().getEClassifiers())
 					.iterator();
-			java.lang.Boolean idLoopCond_784 = false;
-			while (!idLoopCond_784) {
-				idLoopCond_784 = kermeta.standard.helper.BooleanWrapper.or(
-						it_ft168.isOff(),
+			java.lang.Boolean idLoopCond_41 = false;
+			while (!idLoopCond_41) {
+				idLoopCond_41 = kermeta.standard.helper.BooleanWrapper.or(
+						it_ft7.isOff(),
 						org.kermeta.compil.runtime.helper.language.ObjectUtil
-								.isNotEqual(result_ft168, null));
-				if (idLoopCond_784) {
+								.isNotEqual(result_ft7, null));
+				if (idLoopCond_41) {
 				} else {
 
-					elem_ft168 = it_ft168.next();
+					elem_ft7 = it_ft7.next();
 
-					java.lang.Boolean idIfCond_785 = false;
-					//Beginning of the Inlining of the lambda expression: detector
-					ecore.EClassifier c = elem_ft168;
+					java.lang.Boolean idIfCond_42 = false;
+					//BIle:detector
+					ecore.EClassifier c_lbdExp7 = elem_ft7;
 
-					idIfCond_785 = kermeta.standard.helper.BooleanWrapper
+					idIfCond_42 = kermeta.standard.helper.BooleanWrapper
 							.and(
 									org.kermeta.compil.runtime.helper.language.ObjectUtil
 											.isInstanceOf(
-													c,
+													c_lbdExp7,
 													org.kermeta.compil.runtime.ExecutionContext
 															.getInstance()
 															.getMetaClass(
 																	"ecore.EClass")),
 									kermeta.standard.helper.StringWrapper
-											.equals(c.getName(),
+											.equals(c_lbdExp7.getName(),
 													name_KermetaSspecialType));
-					//End of the Inlining of the lambda expression: detector
+					//EIle:detector
 
-					if (idIfCond_785) {
+					if (idIfCond_42) {
 
-						result_ft168 = elem_ft168;
+						result_ft7 = elem_ft7;
 					}
 
 				}
 			}
 		}
 
-		//End of the Inlining of the function type: detect
+		//EIft:detect
 
-		java.lang.Boolean idIfCond_786 = false;
-		idIfCond_786 = kermeta.standard.helper.BooleanWrapper
+		java.lang.Boolean idIfCond_43 = false;
+		idIfCond_43 = kermeta.standard.helper.BooleanWrapper
 				.not(org.kermeta.compil.runtime.helper.language.ObjectUtil
 						.isVoid(retrieveSpecialType));
 
-		if (idIfCond_786) {
+		if (idIfCond_43) {
 
 			result = ((ecore.EClass) org.kermeta.compil.runtime.helper.language.ObjectUtil
 					.asType(retrieveSpecialType,

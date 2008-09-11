@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: FileImpl.java,v 1.1 2008-09-04 15:40:38 cfaucher Exp $
+ * $Id: FileImpl.java,v 1.2 2008-09-11 12:34:57 cfaucher Exp $
  */
 package traceability.impl;
 
@@ -146,56 +146,56 @@ public class FileImpl extends ObjectImpl implements File {
 		traceability.File result = null;
 
 		traceability.File file = null;
-		//Beginning of the Inlining of the function type: detect
+		//BIft:detect
 
-		traceability.File result_ft200 = null;
+		traceability.File result_ft197 = null;
 
-		traceability.File elem_ft200 = null;
+		traceability.File elem_ft197 = null;
 
-		result_ft200 = null;
+		result_ft197 = null;
 
 		{
 
-			kermeta.standard.Iterator<traceability.File> it_ft200 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
+			kermeta.standard.Iterator<traceability.File> it_ft197 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
 					.<traceability.File> convertAsOrderedSet(
 							traceModel.getFiles()).iterator();
-			java.lang.Boolean idLoopCond_866 = false;
-			while (!idLoopCond_866) {
-				idLoopCond_866 = kermeta.standard.helper.BooleanWrapper.or(
-						it_ft200.isOff(),
+			java.lang.Boolean idLoopCond_912 = false;
+			while (!idLoopCond_912) {
+				idLoopCond_912 = kermeta.standard.helper.BooleanWrapper.or(
+						it_ft197.isOff(),
 						org.kermeta.compil.runtime.helper.language.ObjectUtil
-								.isNotEqual(result_ft200, null));
-				if (idLoopCond_866) {
+								.isNotEqual(result_ft197, null));
+				if (idLoopCond_912) {
 				} else {
 
-					elem_ft200 = it_ft200.next();
+					elem_ft197 = it_ft197.next();
 
-					java.lang.Boolean idIfCond_867 = false;
-					//Beginning of the Inlining of the lambda expression: detector
-					traceability.File f = elem_ft200;
+					java.lang.Boolean idIfCond_913 = false;
+					//BIle:detector
+					traceability.File f_lbdExp197 = elem_ft197;
 
-					idIfCond_867 = kermeta.standard.helper.StringWrapper
-							.equals(f.getUri(), uri_toFind);
-					//End of the Inlining of the lambda expression: detector
+					idIfCond_913 = kermeta.standard.helper.StringWrapper
+							.equals(f_lbdExp197.getUri(), uri_toFind);
+					//EIle:detector
 
-					if (idIfCond_867) {
+					if (idIfCond_913) {
 
-						result_ft200 = elem_ft200;
+						result_ft197 = elem_ft197;
 					}
 
 				}
 			}
 		}
 
-		//callElement
-		file = result_ft200;
-		//End of the Inlining of the function type: detect
+		//CE
+		file = result_ft197;
+		//EIft:detect
 
-		java.lang.Boolean idIfCond_868 = false;
-		idIfCond_868 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+		java.lang.Boolean idIfCond_914 = false;
+		idIfCond_914 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 				.isVoid(file);
 
-		if (idIfCond_868) {
+		if (idIfCond_914) {
 
 			file = ((traceability.File) org.kermeta.compil.runtime.helper.language.ClassUtil
 					.newObject("traceability.File"));

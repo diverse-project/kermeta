@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: EAttribute.java,v 1.2 2008-09-08 19:28:31 cfaucher Exp $
+ * $Id: EAttribute.java,v 1.3 2008-09-11 12:34:55 cfaucher Exp $
  */
 package ecore;
 
@@ -20,8 +20,7 @@ package ecore;
  * </p>
  *
  * @see ecore.EcorePackage#getEAttribute()
- * @model annotation="kermeta documentation='/** This class refers to any EDataType feature\052/'"
- *        annotation="kermeta aspect='true'"
+ * @model
  * @generated
  */
 public interface EAttribute extends EStructuralFeature {
@@ -35,10 +34,11 @@ public interface EAttribute extends EStructuralFeature {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>EAttribute Type</em>' reference.
 	 * @see ecore.EcorePackage#getEAttribute_EAttributeType()
-	 * @model required="true" changeable="false" derived="true"
+	 * @model required="true" transient="true" changeable="false" derived="true"
 	 *        annotation="kermeta isReadOnly='false'"
-	 *        annotation="kompiledderivedProp.setter body='{\n\n\tjava.lang.Boolean idIfCond_884 = false;\n\tidIfCond_884 = org.kermeta.compil.runtime.helper.language.ObjectUtil.getMetaClass(this.getEType()).equals(org.kermeta.compil.runtime.ExecutionContext.getInstance().getMetaClass(\"ecore.EDataType\"));\n\n\tif( idIfCond_884 ) {\n\n\tresult = (ecore.EDataType) this.getEType();\n}\n else {\n\n\tkermeta.exceptions.Exception exception = ((kermeta.exceptions.Exception) org.kermeta.compil.runtime.helper.language.ClassUtil.newObject(\"kermeta.exceptions.Exception\"));\n\n\texception.setMessage(\"The EClassifer pointed by this EAttribute must be of type EDataType\");\n\n\t\nif (true)\n\tthrow new org.kermeta.compil.runtime.helper.error.KRuntimeError( exception );\n\n}\n\n}'"
-	 *        annotation="kompiledderivedProp.getter body='{\n\n\tjava.lang.Boolean idIfCond_885 = false;\n\tidIfCond_885 = org.kermeta.compil.runtime.helper.language.ObjectUtil.getMetaClass(this.getEType()).equals(org.kermeta.compil.runtime.ExecutionContext.getInstance().getMetaClass(\"ecore.EDataType\"));\n\n\tif( idIfCond_885 ) {\n\n\tresult = (ecore.EDataType) this.getEType();\n}\n else {\n\n\tkermeta.exceptions.Exception exception = ((kermeta.exceptions.Exception) org.kermeta.compil.runtime.helper.language.ClassUtil.newObject(\"kermeta.exceptions.Exception\"));\n\n\texception.setMessage(\"The EClassifer pointed by this EAttribute must be of type EDataType\");\n\n\t\nif (true)\n\tthrow new org.kermeta.compil.runtime.helper.error.KRuntimeError( exception );\n\n}\n\n}'"
+	 *        annotation="kermeta ecore.isTransient='true'"
+	 *        annotation="kompiledderivedProp.setter body=''"
+	 *        annotation="kompiledderivedProp.getter body=''"
 	 * @generated
 	 */
 	EDataType getEAttributeType();

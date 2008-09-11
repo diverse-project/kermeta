@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: UnknownJavaObjectImpl.java,v 1.1 2008-09-04 15:40:31 cfaucher Exp $
+ * $Id: UnknownJavaObjectImpl.java,v 1.2 2008-09-11 12:34:51 cfaucher Exp $
  */
 package kermeta.standard.impl;
 

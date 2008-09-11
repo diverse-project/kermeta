@@ -2,25 +2,17 @@
  * <copyright>
  * </copyright>
  *
- * $Id: PersistencePackageImpl.java,v 1.1 2008-09-04 15:40:39 cfaucher Exp $
+ * $Id: PersistencePackageImpl.java,v 1.2 2008-09-11 12:34:57 cfaucher Exp $
  */
 package kermeta.persistence.impl;
-
-import kermeta.KermetaPackage;
 
 import kermeta.compiler.CompilerPackage;
 
 import kermeta.compiler.impl.CompilerPackageImpl;
 
-import kermeta.ecore.EcorePackage;
-
-import kermeta.ecore.impl.EcorePackageImpl;
-
 import kermeta.exceptions.ExceptionsPackage;
 
 import kermeta.exceptions.impl.ExceptionsPackageImpl;
-
-import kermeta.impl.KermetaPackageImpl;
 
 import kermeta.interpreter.InterpreterPackage;
 
@@ -72,9 +64,17 @@ import km2ecore.common.exception.impl.ExceptionPackageImpl;
 
 import km2ecore.common.impl.CommonPackageImpl;
 
+import km2ecore.helper.ecore.EcorePackage;
+
+import km2ecore.helper.ecore.impl.EcorePackageImpl;
+
 import km2ecore.helper.java.JavaPackage;
 
 import km2ecore.helper.java.impl.JavaPackageImpl;
+
+import km2ecore.helper.kermeta.KermetaPackage;
+
+import km2ecore.helper.kermeta.impl.KermetaPackageImpl;
 
 import km2ecore.impl.Km2ecorePackageImpl;
 
@@ -200,10 +200,34 @@ public class PersistencePackageImpl extends EPackageImpl implements
 		isInited = true;
 
 		// Obtain or create and register interdependencies
+		Km2ecorePackageImpl theKm2ecorePackage = (Km2ecorePackageImpl) (EPackage.Registry.INSTANCE
+				.getEPackage(Km2ecorePackage.eNS_URI) instanceof Km2ecorePackageImpl ? EPackage.Registry.INSTANCE
+				.getEPackage(Km2ecorePackage.eNS_URI)
+				: Km2ecorePackage.eINSTANCE);
+		CommonPackageImpl theCommonPackage = (CommonPackageImpl) (EPackage.Registry.INSTANCE
+				.getEPackage(CommonPackage.eNS_URI) instanceof CommonPackageImpl ? EPackage.Registry.INSTANCE
+				.getEPackage(CommonPackage.eNS_URI)
+				: CommonPackage.eINSTANCE);
+		ExceptionPackageImpl theExceptionPackage = (ExceptionPackageImpl) (EPackage.Registry.INSTANCE
+				.getEPackage(ExceptionPackage.eNS_URI) instanceof ExceptionPackageImpl ? EPackage.Registry.INSTANCE
+				.getEPackage(ExceptionPackage.eNS_URI)
+				: ExceptionPackage.eINSTANCE);
+		EcorePackageImpl theEcorePackage = (EcorePackageImpl) (EPackage.Registry.INSTANCE
+				.getEPackage(EcorePackage.eNS_URI) instanceof EcorePackageImpl ? EPackage.Registry.INSTANCE
+				.getEPackage(EcorePackage.eNS_URI)
+				: EcorePackage.eINSTANCE);
 		KermetaPackageImpl theKermetaPackage = (KermetaPackageImpl) (EPackage.Registry.INSTANCE
 				.getEPackage(KermetaPackage.eNS_URI) instanceof KermetaPackageImpl ? EPackage.Registry.INSTANCE
 				.getEPackage(KermetaPackage.eNS_URI)
 				: KermetaPackage.eINSTANCE);
+		JavaPackageImpl theJavaPackage = (JavaPackageImpl) (EPackage.Registry.INSTANCE
+				.getEPackage(JavaPackage.eNS_URI) instanceof JavaPackageImpl ? EPackage.Registry.INSTANCE
+				.getEPackage(JavaPackage.eNS_URI)
+				: JavaPackage.eINSTANCE);
+		kermeta.impl.KermetaPackageImpl theKermetaPackage_1 = (kermeta.impl.KermetaPackageImpl) (EPackage.Registry.INSTANCE
+				.getEPackage(kermeta.KermetaPackage.eNS_URI) instanceof kermeta.impl.KermetaPackageImpl ? EPackage.Registry.INSTANCE
+				.getEPackage(kermeta.KermetaPackage.eNS_URI)
+				: kermeta.KermetaPackage.eINSTANCE);
 		LanguagePackageImpl theLanguagePackage = (LanguagePackageImpl) (EPackage.Registry.INSTANCE
 				.getEPackage(LanguagePackage.eNS_URI) instanceof LanguagePackageImpl ? EPackage.Registry.INSTANCE
 				.getEPackage(LanguagePackage.eNS_URI)
@@ -216,14 +240,6 @@ public class PersistencePackageImpl extends EPackageImpl implements
 				.getEPackage(BehaviorPackage.eNS_URI) instanceof BehaviorPackageImpl ? EPackage.Registry.INSTANCE
 				.getEPackage(BehaviorPackage.eNS_URI)
 				: BehaviorPackage.eINSTANCE);
-		StandardPackageImpl theStandardPackage = (StandardPackageImpl) (EPackage.Registry.INSTANCE
-				.getEPackage(StandardPackage.eNS_URI) instanceof StandardPackageImpl ? EPackage.Registry.INSTANCE
-				.getEPackage(StandardPackage.eNS_URI)
-				: StandardPackage.eINSTANCE);
-		CompilerPackageImpl theCompilerPackage = (CompilerPackageImpl) (EPackage.Registry.INSTANCE
-				.getEPackage(CompilerPackage.eNS_URI) instanceof CompilerPackageImpl ? EPackage.Registry.INSTANCE
-				.getEPackage(CompilerPackage.eNS_URI)
-				: CompilerPackage.eINSTANCE);
 		IoPackageImpl theIoPackage = (IoPackageImpl) (EPackage.Registry.INSTANCE
 				.getEPackage(IoPackage.eNS_URI) instanceof IoPackageImpl ? EPackage.Registry.INSTANCE
 				.getEPackage(IoPackage.eNS_URI)
@@ -236,102 +252,86 @@ public class PersistencePackageImpl extends EPackageImpl implements
 				.getEPackage(UtilsPackage.eNS_URI) instanceof UtilsPackageImpl ? EPackage.Registry.INSTANCE
 				.getEPackage(UtilsPackage.eNS_URI)
 				: UtilsPackage.eINSTANCE);
+		StandardPackageImpl theStandardPackage = (StandardPackageImpl) (EPackage.Registry.INSTANCE
+				.getEPackage(StandardPackage.eNS_URI) instanceof StandardPackageImpl ? EPackage.Registry.INSTANCE
+				.getEPackage(StandardPackage.eNS_URI)
+				: StandardPackage.eINSTANCE);
 		KunitPackageImpl theKunitPackage = (KunitPackageImpl) (EPackage.Registry.INSTANCE
 				.getEPackage(KunitPackage.eNS_URI) instanceof KunitPackageImpl ? EPackage.Registry.INSTANCE
 				.getEPackage(KunitPackage.eNS_URI)
 				: KunitPackage.eINSTANCE);
-		EcorePackageImpl theEcorePackage = (EcorePackageImpl) (EPackage.Registry.INSTANCE
-				.getEPackage(EcorePackage.eNS_URI) instanceof EcorePackageImpl ? EPackage.Registry.INSTANCE
-				.getEPackage(EcorePackage.eNS_URI)
-				: EcorePackage.eINSTANCE);
+		kermeta.ecore.impl.EcorePackageImpl theEcorePackage_1 = (kermeta.ecore.impl.EcorePackageImpl) (EPackage.Registry.INSTANCE
+				.getEPackage(kermeta.ecore.EcorePackage.eNS_URI) instanceof kermeta.ecore.impl.EcorePackageImpl ? EPackage.Registry.INSTANCE
+				.getEPackage(kermeta.ecore.EcorePackage.eNS_URI)
+				: kermeta.ecore.EcorePackage.eINSTANCE);
 		InterpreterPackageImpl theInterpreterPackage = (InterpreterPackageImpl) (EPackage.Registry.INSTANCE
 				.getEPackage(InterpreterPackage.eNS_URI) instanceof InterpreterPackageImpl ? EPackage.Registry.INSTANCE
 				.getEPackage(InterpreterPackage.eNS_URI)
 				: InterpreterPackage.eINSTANCE);
-		Km2ecorePackageImpl theKm2ecorePackage = (Km2ecorePackageImpl) (EPackage.Registry.INSTANCE
-				.getEPackage(Km2ecorePackage.eNS_URI) instanceof Km2ecorePackageImpl ? EPackage.Registry.INSTANCE
-				.getEPackage(Km2ecorePackage.eNS_URI)
-				: Km2ecorePackage.eINSTANCE);
-		km2ecore.helper.ecore.impl.EcorePackageImpl theEcorePackage_1 = (km2ecore.helper.ecore.impl.EcorePackageImpl) (EPackage.Registry.INSTANCE
-				.getEPackage(km2ecore.helper.ecore.EcorePackage.eNS_URI) instanceof km2ecore.helper.ecore.impl.EcorePackageImpl ? EPackage.Registry.INSTANCE
-				.getEPackage(km2ecore.helper.ecore.EcorePackage.eNS_URI)
-				: km2ecore.helper.ecore.EcorePackage.eINSTANCE);
-		JavaPackageImpl theJavaPackage = (JavaPackageImpl) (EPackage.Registry.INSTANCE
-				.getEPackage(JavaPackage.eNS_URI) instanceof JavaPackageImpl ? EPackage.Registry.INSTANCE
-				.getEPackage(JavaPackage.eNS_URI)
-				: JavaPackage.eINSTANCE);
-		km2ecore.helper.kermeta.impl.KermetaPackageImpl theKermetaPackage_1 = (km2ecore.helper.kermeta.impl.KermetaPackageImpl) (EPackage.Registry.INSTANCE
-				.getEPackage(km2ecore.helper.kermeta.KermetaPackage.eNS_URI) instanceof km2ecore.helper.kermeta.impl.KermetaPackageImpl ? EPackage.Registry.INSTANCE
-				.getEPackage(km2ecore.helper.kermeta.KermetaPackage.eNS_URI)
-				: km2ecore.helper.kermeta.KermetaPackage.eINSTANCE);
-		CommonPackageImpl theCommonPackage = (CommonPackageImpl) (EPackage.Registry.INSTANCE
-				.getEPackage(CommonPackage.eNS_URI) instanceof CommonPackageImpl ? EPackage.Registry.INSTANCE
-				.getEPackage(CommonPackage.eNS_URI)
-				: CommonPackage.eINSTANCE);
-		ExceptionPackageImpl theExceptionPackage = (ExceptionPackageImpl) (EPackage.Registry.INSTANCE
-				.getEPackage(ExceptionPackage.eNS_URI) instanceof ExceptionPackageImpl ? EPackage.Registry.INSTANCE
-				.getEPackage(ExceptionPackage.eNS_URI)
-				: ExceptionPackage.eINSTANCE);
+		CompilerPackageImpl theCompilerPackage = (CompilerPackageImpl) (EPackage.Registry.INSTANCE
+				.getEPackage(CompilerPackage.eNS_URI) instanceof CompilerPackageImpl ? EPackage.Registry.INSTANCE
+				.getEPackage(CompilerPackage.eNS_URI)
+				: CompilerPackage.eINSTANCE);
 		ecore.impl.EcorePackageImpl theEcorePackage_2 = (ecore.impl.EcorePackageImpl) (EPackage.Registry.INSTANCE
 				.getEPackage(ecore.EcorePackage.eNS_URI) instanceof ecore.impl.EcorePackageImpl ? EPackage.Registry.INSTANCE
 				.getEPackage(ecore.EcorePackage.eNS_URI)
 				: ecore.EcorePackage.eINSTANCE);
-		SimkPackageImpl theSimkPackage = (SimkPackageImpl) (EPackage.Registry.INSTANCE
-				.getEPackage(SimkPackage.eNS_URI) instanceof SimkPackageImpl ? EPackage.Registry.INSTANCE
-				.getEPackage(SimkPackage.eNS_URI)
-				: SimkPackage.eINSTANCE);
 		TraceabilityPackageImpl theTraceabilityPackage = (TraceabilityPackageImpl) (EPackage.Registry.INSTANCE
 				.getEPackage(TraceabilityPackage.eNS_URI) instanceof TraceabilityPackageImpl ? EPackage.Registry.INSTANCE
 				.getEPackage(TraceabilityPackage.eNS_URI)
 				: TraceabilityPackage.eINSTANCE);
+		SimkPackageImpl theSimkPackage = (SimkPackageImpl) (EPackage.Registry.INSTANCE
+				.getEPackage(SimkPackage.eNS_URI) instanceof SimkPackageImpl ? EPackage.Registry.INSTANCE
+				.getEPackage(SimkPackage.eNS_URI)
+				: SimkPackage.eINSTANCE);
 
 		// Create package meta-data objects
 		thePersistencePackage.createPackageContents();
+		theKm2ecorePackage.createPackageContents();
+		theCommonPackage.createPackageContents();
+		theExceptionPackage.createPackageContents();
+		theEcorePackage.createPackageContents();
 		theKermetaPackage.createPackageContents();
+		theJavaPackage.createPackageContents();
+		theKermetaPackage_1.createPackageContents();
 		theLanguagePackage.createPackageContents();
 		theStructurePackage.createPackageContents();
 		theBehaviorPackage.createPackageContents();
-		theStandardPackage.createPackageContents();
-		theCompilerPackage.createPackageContents();
 		theIoPackage.createPackageContents();
 		theExceptionsPackage.createPackageContents();
 		theUtilsPackage.createPackageContents();
+		theStandardPackage.createPackageContents();
 		theKunitPackage.createPackageContents();
-		theEcorePackage.createPackageContents();
-		theInterpreterPackage.createPackageContents();
-		theKm2ecorePackage.createPackageContents();
 		theEcorePackage_1.createPackageContents();
-		theJavaPackage.createPackageContents();
-		theKermetaPackage_1.createPackageContents();
-		theCommonPackage.createPackageContents();
-		theExceptionPackage.createPackageContents();
+		theInterpreterPackage.createPackageContents();
+		theCompilerPackage.createPackageContents();
 		theEcorePackage_2.createPackageContents();
-		theSimkPackage.createPackageContents();
 		theTraceabilityPackage.createPackageContents();
+		theSimkPackage.createPackageContents();
 
 		// Initialize created meta-data
 		thePersistencePackage.initializePackageContents();
+		theKm2ecorePackage.initializePackageContents();
+		theCommonPackage.initializePackageContents();
+		theExceptionPackage.initializePackageContents();
+		theEcorePackage.initializePackageContents();
 		theKermetaPackage.initializePackageContents();
+		theJavaPackage.initializePackageContents();
+		theKermetaPackage_1.initializePackageContents();
 		theLanguagePackage.initializePackageContents();
 		theStructurePackage.initializePackageContents();
 		theBehaviorPackage.initializePackageContents();
-		theStandardPackage.initializePackageContents();
-		theCompilerPackage.initializePackageContents();
 		theIoPackage.initializePackageContents();
 		theExceptionsPackage.initializePackageContents();
 		theUtilsPackage.initializePackageContents();
+		theStandardPackage.initializePackageContents();
 		theKunitPackage.initializePackageContents();
-		theEcorePackage.initializePackageContents();
-		theInterpreterPackage.initializePackageContents();
-		theKm2ecorePackage.initializePackageContents();
 		theEcorePackage_1.initializePackageContents();
-		theJavaPackage.initializePackageContents();
-		theKermetaPackage_1.initializePackageContents();
-		theCommonPackage.initializePackageContents();
-		theExceptionPackage.initializePackageContents();
+		theInterpreterPackage.initializePackageContents();
+		theCompilerPackage.initializePackageContents();
 		theEcorePackage_2.initializePackageContents();
-		theSimkPackage.initializePackageContents();
 		theTraceabilityPackage.initializePackageContents();
+		theSimkPackage.initializePackageContents();
 
 		// Mark meta-data to indicate it can't be changed
 		thePersistencePackage.freeze();
@@ -482,7 +482,7 @@ public class PersistencePackageImpl extends EPackageImpl implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getEMFRepository_IgnoreLoadErrorUnknownMetaclass() {
+	public EAttribute getEMFRepository_UseInterpreterInternalResources() {
 		return (EAttribute) emfRepositoryEClass.getEStructuralFeatures().get(0);
 	}
 
@@ -491,7 +491,7 @@ public class PersistencePackageImpl extends EPackageImpl implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getEMFRepository_UseInterpreterInternalResources() {
+	public EAttribute getEMFRepository_IgnoreLoadErrorUnknownMetaclass() {
 		return (EAttribute) emfRepositoryEClass.getEStructuralFeatures().get(1);
 	}
 
@@ -565,9 +565,9 @@ public class PersistencePackageImpl extends EPackageImpl implements
 
 		emfRepositoryEClass = createEClass(EMF_REPOSITORY);
 		createEAttribute(emfRepositoryEClass,
-				EMF_REPOSITORY__IGNORE_LOAD_ERROR_UNKNOWN_METACLASS);
-		createEAttribute(emfRepositoryEClass,
 				EMF_REPOSITORY__USE_INTERPRETER_INTERNAL_RESOURCES);
+		createEAttribute(emfRepositoryEClass,
+				EMF_REPOSITORY__IGNORE_LOAD_ERROR_UNKNOWN_METACLASS);
 		createEAttribute(emfRepositoryEClass,
 				EMF_REPOSITORY__IGNORE_ALL_LOAD_ERRORS);
 		createEAttribute(emfRepositoryEClass,
@@ -755,15 +755,15 @@ public class PersistencePackageImpl extends EPackageImpl implements
 
 		initEClass(emfRepositoryEClass, EMFRepository.class, "EMFRepository",
 				!IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getEMFRepository_IgnoreLoadErrorUnknownMetaclass(),
-				theStandardPackage.getJavaBoolean(),
-				"ignoreLoadErrorUnknownMetaclass", "false", 0, 1,
-				EMFRepository.class, !IS_TRANSIENT, !IS_VOLATILE,
-				IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED,
-				IS_ORDERED);
 		initEAttribute(getEMFRepository_UseInterpreterInternalResources(),
 				theStandardPackage.getJavaBoolean(),
 				"useInterpreterInternalResources", "false", 0, 1,
+				EMFRepository.class, !IS_TRANSIENT, !IS_VOLATILE,
+				IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED,
+				IS_ORDERED);
+		initEAttribute(getEMFRepository_IgnoreLoadErrorUnknownMetaclass(),
+				theStandardPackage.getJavaBoolean(),
+				"ignoreLoadErrorUnknownMetaclass", "false", 0, 1,
 				EMFRepository.class, !IS_TRANSIENT, !IS_VOLATILE,
 				IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED,
 				IS_ORDERED);
@@ -1030,17 +1030,17 @@ public class PersistencePackageImpl extends EPackageImpl implements
 				new String[] { "superOperation",
 						"kermeta::persistence::Repository" });
 		addAnnotation(
-				getEMFRepository_IgnoreLoadErrorUnknownMetaclass(),
-				source,
-				new String[] {
-						"documentation",
-						"/**\n\t * When loading the Resources, \n\t * if there are some errors due to an unknown metaclass while loading some objects, the loader try to ignore them\n\t * by default, not setting this attribute is considered as false.\n\t */" });
-		addAnnotation(
 				getEMFRepository_UseInterpreterInternalResources(),
 				source,
 				new String[] {
 						"documentation",
 						"/** \n\t * If true, tells to the save of the resources that they should also integrate the resources from Kermeta interpreter itself\n\t * this is useful for example to make a dependency to framework.km\n\t * by default, not setting this is considered as false.\n\t */" });
+		addAnnotation(
+				getEMFRepository_IgnoreLoadErrorUnknownMetaclass(),
+				source,
+				new String[] {
+						"documentation",
+						"/**\n\t * When loading the Resources, \n\t * if there are some errors due to an unknown metaclass while loading some objects, the loader try to ignore them\n\t * by default, not setting this attribute is considered as false.\n\t */" });
 		addAnnotation(
 				getEMFRepository_IgnoreAllLoadErrors(),
 				source,
@@ -1074,7 +1074,7 @@ public class PersistencePackageImpl extends EPackageImpl implements
 				source,
 				new String[] {
 						"body",
-						"{\n\n\tkermeta.standard.Set<kermeta.language.structure.Object> res = ((kermeta.standard.Set<kermeta.language.structure.Object>) org.kermeta.compil.runtime.helper.language.ClassUtil.newObject(\"kermeta.standard.Set<kermeta.language.structure.Object>\"));\n\n\tres.addAll(this);\n\n\tkermeta.standard.Set<kermeta.language.structure.Object> coll = null;\n\n\t//Beginning of the Inlining of the function type: each\n\n\t\n{\n\n\tkermeta.standard.Iterator<kermeta.language.structure.Object> it_ft136 = this.iterator();\n\tjava.lang.Boolean idLoopCond_659 = false;\n\twhile( !idLoopCond_659 ) {\n\tidLoopCond_659 = it_ft136.isOff();\n\tif ( idLoopCond_659 ) {\n\t} else {\n\n\t//Beginning of the Inlining of the lambda expression: func\nkermeta.language.structure.Object e = it_ft136.next();\n\n\tcoll = (kermeta.standard.Set<kermeta.language.structure.Object>) fr.irisa.triskell.kermeta.runtime.language.Object.getAllContainedObjects(e);\n\n\tres.addAll(coll);\n//End of the Inlining of the lambda expression: func\n\n}\n\t}\n}\n\n//End of the Inlining of the function type: each\n\n\n\tresult = res;\n}" });
+						"{\n\n\tkermeta.standard.Set<kermeta.language.structure.Object> res = ((kermeta.standard.Set<kermeta.language.structure.Object>) org.kermeta.compil.runtime.helper.language.ClassUtil.newObject(\"kermeta.standard.Set<kermeta.language.structure.Object>\"));\n\n\tres.addAll(this);\n\n\tkermeta.standard.Set<kermeta.language.structure.Object> coll = null;\n\n\t//BIft:each\n\n\t\n{\n\n\tkermeta.standard.Iterator<kermeta.language.structure.Object> it_ft115 = this.iterator();\n\tjava.lang.Boolean idLoopCond_570 = false;\n\twhile( !idLoopCond_570 ) {\n\tidLoopCond_570 = it_ft115.isOff();\n\tif ( idLoopCond_570 ) {\n\t} else {\n\n\t//BIle:func\nkermeta.language.structure.Object e_lbdExp115 = it_ft115.next();\n\n\tcoll = (kermeta.standard.Set<kermeta.language.structure.Object>) fr.irisa.triskell.kermeta.runtime.language.Object.getAllContainedObjects(e_lbdExp115);\n\n\tres.addAll(coll);\n//EIle:func\n\n}\n\t}\n}\n\n//EIft:each\n\n\n\tresult = res;\n}" });
 	}
 
 } //PersistencePackageImpl

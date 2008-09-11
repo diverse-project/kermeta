@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: EClassImpl.java,v 1.2 2008-09-08 19:28:31 cfaucher Exp $
+ * $Id: EClassImpl.java,v 1.3 2008-09-11 12:34:38 cfaucher Exp $
  */
 package ecore.impl;
 
@@ -39,8 +39,8 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * <ul>
  *   <li>{@link ecore.impl.EClassImpl#getEStructuralFeatures <em>EStructural Features</em>}</li>
  *   <li>{@link ecore.impl.EClassImpl#isAbstract <em>Abstract</em>}</li>
- *   <li>{@link ecore.impl.EClassImpl#getEOperations <em>EOperations</em>}</li>
  *   <li>{@link ecore.impl.EClassImpl#getEAllAttributes <em>EAll Attributes</em>}</li>
+ *   <li>{@link ecore.impl.EClassImpl#getEOperations <em>EOperations</em>}</li>
  *   <li>{@link ecore.impl.EClassImpl#isInterface <em>Interface</em>}</li>
  *   <li>{@link ecore.impl.EClassImpl#getEReferences <em>EReferences</em>}</li>
  *   <li>{@link ecore.impl.EClassImpl#getEAllReferences <em>EAll References</em>}</li>
@@ -90,16 +90,6 @@ public class EClassImpl extends EClassifierImpl implements EClass {
 	protected boolean abstract_ = ABSTRACT_EDEFAULT;
 
 	/**
-	 * The cached value of the '{@link #getEOperations() <em>EOperations</em>}' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getEOperations()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<EOperation> eOperations;
-
-	/**
 	 * The cached value of the '{@link #getEAllAttributes() <em>EAll Attributes</em>}' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -108,6 +98,16 @@ public class EClassImpl extends EClassifierImpl implements EClass {
 	 * @ordered
 	 */
 	protected EList<EAttribute> eAllAttributes;
+
+	/**
+	 * The cached value of the '{@link #getEOperations() <em>EOperations</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getEOperations()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<EOperation> eOperations;
 
 	/**
 	 * The default value of the '{@link #isInterface() <em>Interface</em>}' attribute.
@@ -300,20 +300,6 @@ public class EClassImpl extends EClassifierImpl implements EClass {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<EOperation> getEOperations() {
-		if (eOperations == null) {
-			eOperations = new EObjectContainmentWithInverseEList.Resolving<EOperation>(
-					EOperation.class, this, EcorePackage.ECLASS__EOPERATIONS,
-					EcorePackage.EOPERATION__ECONTAINING_CLASS);
-		}
-		return eOperations;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EList<EAttribute> getEAllAttributes() {
 		if (eAllAttributes == null) {
 			eAllAttributes = new EObjectResolvingEList<EAttribute>(
@@ -321,6 +307,20 @@ public class EClassImpl extends EClassifierImpl implements EClass {
 					EcorePackage.ECLASS__EALL_ATTRIBUTES);
 		}
 		return eAllAttributes;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<EOperation> getEOperations() {
+		if (eOperations == null) {
+			eOperations = new EObjectContainmentWithInverseEList.Resolving<EOperation>(
+					EOperation.class, this, EcorePackage.ECLASS__EOPERATIONS,
+					EcorePackage.EOPERATION__ECONTAINING_CLASS);
+		}
+		return eOperations;
 	}
 
 	/**
@@ -527,54 +527,7 @@ public class EClassImpl extends EClassifierImpl implements EClass {
 	 * @generated
 	 */
 	public int getFeatureID(EStructuralFeature feature) {
-
 		java.lang.Integer result = null;
-
-		result = kermeta.standard.helper.IntegerWrapper.uminus(1);
-
-		{
-
-			java.lang.Integer i = 0;
-			java.lang.Boolean idLoopCond_910 = false;
-			while (!idLoopCond_910) {
-				idLoopCond_910 = kermeta.standard.helper.BooleanWrapper
-						.or(
-								kermeta.standard.helper.IntegerWrapper
-										.equals(
-												i,
-												org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
-														.<ecore.EStructuralFeature> convertAsOrderedSet(
-																this
-																		.getEAllStructuralFeatures())
-														.size()),
-								org.kermeta.compil.runtime.helper.language.ObjectUtil
-										.isNotEqual(
-												result,
-												kermeta.standard.helper.IntegerWrapper
-														.uminus(1)));
-				if (idLoopCond_910) {
-				} else {
-
-					java.lang.Boolean idIfCond_911 = false;
-					idIfCond_911 = org.kermeta.compil.runtime.helper.language.ObjectUtil
-							.equals(
-									feature,
-									org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
-											.<ecore.EStructuralFeature> convertAsOrderedSet(
-													this
-															.getEAllStructuralFeatures())
-											.elementAt(i));
-
-					if (idIfCond_911) {
-
-						kermeta.standard.helper.IntegerWrapper
-								.equals(result, i);
-					}
-
-					i = kermeta.standard.helper.IntegerWrapper.plus(i, 1);
-				}
-			}
-		}
 
 		return result;
 
@@ -586,53 +539,7 @@ public class EClassImpl extends EClassifierImpl implements EClass {
 	 * @generated
 	 */
 	public boolean isSuperTypeOf(EClass someClass) {
-
 		java.lang.Boolean result = null;
-
-		//Beginning of the Inlining of the function type: detect
-
-		ecore.EClass result_ft211 = null;
-
-		ecore.EClass elem_ft211 = null;
-
-		result_ft211 = null;
-
-		{
-
-			kermeta.standard.Iterator<ecore.EClass> it_ft211 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
-					.<ecore.EClass> convertAsOrderedSet(
-							someClass.getEAllSuperTypes()).iterator();
-			java.lang.Boolean idLoopCond_912 = false;
-			while (!idLoopCond_912) {
-				idLoopCond_912 = kermeta.standard.helper.BooleanWrapper.or(
-						it_ft211.isOff(),
-						org.kermeta.compil.runtime.helper.language.ObjectUtil
-								.isNotEqual(result_ft211, null));
-				if (idLoopCond_912) {
-				} else {
-
-					elem_ft211 = it_ft211.next();
-
-					java.lang.Boolean idIfCond_913 = false;
-					//Beginning of the Inlining of the lambda expression: detector
-					ecore.EClass t = elem_ft211;
-
-					idIfCond_913 = org.kermeta.compil.runtime.helper.language.ObjectUtil
-							.equals(t, this);
-					//End of the Inlining of the lambda expression: detector
-
-					if (idIfCond_913) {
-
-						result_ft211 = elem_ft211;
-					}
-
-				}
-			}
-		}
-
-		//End of the Inlining of the function type: detect
-		result = org.kermeta.compil.runtime.helper.language.ObjectUtil
-				.isNotEqual(result_ft211, null);
 
 		return result;
 
@@ -644,69 +551,7 @@ public class EClassImpl extends EClassifierImpl implements EClass {
 	 * @generated
 	 */
 	public int getFeatureCount() {
-
 		java.lang.Integer result = null;
-
-		result = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
-				.<ecore.EStructuralFeature> convertAsOrderedSet(
-						this.getEAllStructuralFeatures()).size();
-
-		return result;
-
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EStructuralFeature getEStructuralFeature2(String featureName) {
-
-		ecore.EStructuralFeature result = null;
-
-		result = null;
-		//Beginning of the Inlining of the function type: detect
-
-		ecore.EStructuralFeature result_ft212 = null;
-
-		ecore.EStructuralFeature elem_ft212 = null;
-
-		result_ft212 = null;
-
-		{
-
-			kermeta.standard.Iterator<ecore.EStructuralFeature> it_ft212 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
-					.<ecore.EStructuralFeature> convertAsOrderedSet(
-							this.getEAllStructuralFeatures()).iterator();
-			java.lang.Boolean idLoopCond_914 = false;
-			while (!idLoopCond_914) {
-				idLoopCond_914 = kermeta.standard.helper.BooleanWrapper.or(
-						it_ft212.isOff(),
-						org.kermeta.compil.runtime.helper.language.ObjectUtil
-								.isNotEqual(result_ft212, null));
-				if (idLoopCond_914) {
-				} else {
-
-					elem_ft212 = it_ft212.next();
-
-					java.lang.Boolean idIfCond_915 = false;
-					//Beginning of the Inlining of the lambda expression: detector
-					ecore.EStructuralFeature e = elem_ft212;
-
-					idIfCond_915 = kermeta.standard.helper.StringWrapper
-							.equals(e.getName(), featureName);
-					//End of the Inlining of the lambda expression: detector
-
-					if (idIfCond_915) {
-
-						result_ft212 = elem_ft212;
-					}
-
-				}
-			}
-		}
-
-		//End of the Inlining of the function type: detect
 
 		return result;
 
@@ -778,10 +623,10 @@ public class EClassImpl extends EClassifierImpl implements EClass {
 			return getEStructuralFeatures();
 		case EcorePackage.ECLASS__ABSTRACT:
 			return isAbstract() ? Boolean.TRUE : Boolean.FALSE;
-		case EcorePackage.ECLASS__EOPERATIONS:
-			return getEOperations();
 		case EcorePackage.ECLASS__EALL_ATTRIBUTES:
 			return getEAllAttributes();
+		case EcorePackage.ECLASS__EOPERATIONS:
+			return getEOperations();
 		case EcorePackage.ECLASS__INTERFACE:
 			return isInterface() ? Boolean.TRUE : Boolean.FALSE;
 		case EcorePackage.ECLASS__EREFERENCES:
@@ -893,10 +738,10 @@ public class EClassImpl extends EClassifierImpl implements EClass {
 					&& !eStructuralFeatures.isEmpty();
 		case EcorePackage.ECLASS__ABSTRACT:
 			return abstract_ != ABSTRACT_EDEFAULT;
-		case EcorePackage.ECLASS__EOPERATIONS:
-			return eOperations != null && !eOperations.isEmpty();
 		case EcorePackage.ECLASS__EALL_ATTRIBUTES:
 			return eAllAttributes != null && !eAllAttributes.isEmpty();
+		case EcorePackage.ECLASS__EOPERATIONS:
+			return eOperations != null && !eOperations.isEmpty();
 		case EcorePackage.ECLASS__INTERFACE:
 			return interface_ != INTERFACE_EDEFAULT;
 		case EcorePackage.ECLASS__EREFERENCES:

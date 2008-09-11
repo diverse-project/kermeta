@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: EcoreAdapterFactory.java,v 1.1 2008-09-04 15:40:46 cfaucher Exp $
+ * $Id: EcoreAdapterFactory.java,v 1.2 2008-09-11 12:35:04 cfaucher Exp $
  */
 package km2ecore.helper.ecore.util;
 
@@ -71,11 +71,6 @@ public class EcoreAdapterFactory extends AdapterFactoryImpl {
 	 */
 	protected EcoreSwitch<Adapter> modelSwitch = new EcoreSwitch<Adapter>() {
 		@Override
-		public Adapter caseModelAnalizer(ModelAnalizer object) {
-			return createModelAnalizerAdapter();
-		}
-
-		@Override
 		public Adapter caseEcoreModelElementHelper(
 				EcoreModelElementHelper object) {
 			return createEcoreModelElementHelperAdapter();
@@ -89,6 +84,11 @@ public class EcoreAdapterFactory extends AdapterFactoryImpl {
 		@Override
 		public Adapter caseENamedElementHelper(ENamedElementHelper object) {
 			return createENamedElementHelperAdapter();
+		}
+
+		@Override
+		public Adapter caseModelAnalizer(ModelAnalizer object) {
+			return createModelAnalizerAdapter();
 		}
 
 		@Override
@@ -113,20 +113,6 @@ public class EcoreAdapterFactory extends AdapterFactoryImpl {
 	@Override
 	public Adapter createAdapter(Notifier target) {
 		return modelSwitch.doSwitch((EObject) target);
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link km2ecore.helper.ecore.ModelAnalizer <em>Model Analizer</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see km2ecore.helper.ecore.ModelAnalizer
-	 * @generated
-	 */
-	public Adapter createModelAnalizerAdapter() {
-		return null;
 	}
 
 	/**
@@ -168,6 +154,20 @@ public class EcoreAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createENamedElementHelperAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link km2ecore.helper.ecore.ModelAnalizer <em>Model Analizer</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see km2ecore.helper.ecore.ModelAnalizer
+	 * @generated
+	 */
+	public Adapter createModelAnalizerAdapter() {
 		return null;
 	}
 

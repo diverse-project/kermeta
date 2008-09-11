@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: StringLiteralImpl.java,v 1.1 2008-09-04 15:40:25 cfaucher Exp $
+ * $Id: StringLiteralImpl.java,v 1.2 2008-09-11 12:34:40 cfaucher Exp $
  */
 package kermeta.language.behavior.impl;
 
@@ -110,16 +110,16 @@ public class StringLiteralImpl extends LiteralImpl implements StringLiteral
     
       result = this.getValue();
     
-      java.lang.Boolean idIfCond_459 = false;
-      idIfCond_459 = kermeta.standard.helper.StringWrapper.equals(result, "\\.");
+      java.lang.Boolean idIfCond_562 = false;
+      idIfCond_562 = kermeta.standard.helper.StringWrapper.equals(result, "\\.");
     
-      if( idIfCond_459 ) {
+      if( idIfCond_562 ) {
     
-      result = kermeta.standard.helper.StringWrapper.plus(kermeta.standard.helper.StringWrapper.plus("\"", kermeta.standard.helper.StringWrapper.replace(result, "\\.", "\\.")), "\"");
+      result = "\"\\.\"";
     }
      else {
     
-      result = kermeta.standard.helper.StringWrapper.plus(kermeta.standard.helper.StringWrapper.plus("\"", kermeta.standard.helper.StringWrapper.replace(result, "\"", "\\"")), "\"");
+      result = kermeta.standard.helper.StringWrapper.plus(kermeta.standard.helper.StringWrapper.plus("\"", kermeta.standard.helper.StringWrapper.replace(result, "\"", "\\\"")), "\"");
     
       result = kermeta.standard.helper.StringWrapper.replace(result, "\n", "\n");
     

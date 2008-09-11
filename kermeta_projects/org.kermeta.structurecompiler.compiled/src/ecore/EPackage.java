@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: EPackage.java,v 1.2 2008-09-08 19:28:31 cfaucher Exp $
+ * $Id: EPackage.java,v 1.3 2008-09-11 12:34:55 cfaucher Exp $
  */
 package ecore;
 
@@ -20,13 +20,13 @@ import org.eclipse.emf.common.util.EList;
  *   <li>{@link ecore.EPackage#getESubpackages <em>ESubpackages</em>}</li>
  *   <li>{@link ecore.EPackage#getESuperPackage <em>ESuper Package</em>}</li>
  *   <li>{@link ecore.EPackage#getNsPrefix <em>Ns Prefix</em>}</li>
- *   <li>{@link ecore.EPackage#getEClassifiers <em>EClassifiers</em>}</li>
  *   <li>{@link ecore.EPackage#getEFactoryInstance <em>EFactory Instance</em>}</li>
+ *   <li>{@link ecore.EPackage#getEClassifiers <em>EClassifiers</em>}</li>
  * </ul>
  * </p>
  *
  * @see ecore.EcorePackage#getEPackage()
- * @model annotation="kermeta aspect='true'"
+ * @model
  * @generated
  */
 public interface EPackage extends ENamedElement {
@@ -130,24 +130,6 @@ public interface EPackage extends ENamedElement {
 	void setNsPrefix(String value);
 
 	/**
-	 * Returns the value of the '<em><b>EClassifiers</b></em>' containment reference list.
-	 * The list contents are of type {@link ecore.EClassifier}.
-	 * It is bidirectional and its opposite is '{@link ecore.EClassifier#getEPackage <em>EPackage</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>EClassifiers</em>' containment reference list isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>EClassifiers</em>' containment reference list.
-	 * @see ecore.EcorePackage#getEPackage_EClassifiers()
-	 * @see ecore.EClassifier#getEPackage
-	 * @model opposite="ePackage" containment="true" resolveProxies="true"
-	 * @generated
-	 */
-	EList<EClassifier> getEClassifiers();
-
-	/**
 	 * Returns the value of the '<em><b>EFactory Instance</b></em>' reference.
 	 * It is bidirectional and its opposite is '{@link ecore.EFactory#getEPackage <em>EPackage</em>}'.
 	 * <!-- begin-user-doc -->
@@ -177,10 +159,29 @@ public interface EPackage extends ENamedElement {
 	void setEFactoryInstance(EFactory value);
 
 	/**
+	 * Returns the value of the '<em><b>EClassifiers</b></em>' containment reference list.
+	 * The list contents are of type {@link ecore.EClassifier}.
+	 * It is bidirectional and its opposite is '{@link ecore.EClassifier#getEPackage <em>EPackage</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>EClassifiers</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>EClassifiers</em>' containment reference list.
+	 * @see ecore.EcorePackage#getEPackage_EClassifiers()
+	 * @see ecore.EClassifier#getEPackage
+	 * @model opposite="ePackage" containment="true" resolveProxies="true"
+	 * @generated
+	 */
+	EList<EClassifier> getEClassifiers();
+
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @model nameDataType="ecore.EString"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='\necore.EClassifier result = null;\n\n\t//Beginning of the Inlining of the function type: select\n\nkermeta.standard.Sequence<ecore.EClassifier> result_ft215 = null;\n\n\tecore.EClassifier elem_ft215 = null;\n\n\tresult_ft215 = ((kermeta.standard.Sequence<ecore.EClassifier>) org.kermeta.compil.runtime.helper.language.ClassUtil.newObject(\"kermeta.standard.Sequence<ecore.EClassifier>\"));\n\n\t\n{\n\n\tkermeta.standard.Iterator<ecore.EClassifier> it_ft215 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil.<ecore.EClassifier>convertAsOrderedSet(this.getEClassifiers()).iterator();\n\tjava.lang.Boolean idLoopCond_920 = false;\n\twhile( !idLoopCond_920 ) {\n\tidLoopCond_920 = it_ft215.isOff();\n\tif ( idLoopCond_920 ) {\n\t} else {\n\n\telem_ft215 = it_ft215.next();\n\n\tjava.lang.Boolean idIfCond_921 = false;\n//Beginning of the Inlining of the lambda expression: selector\necore.EClassifier c = elem_ft215;\n\n\tidIfCond_921 = kermeta.standard.helper.StringWrapper.equals(c.getName(), name);\n//End of the Inlining of the lambda expression: selector\n\n\n\tif( idIfCond_921 ) {\n\n\tresult_ft215.add(elem_ft215);\n}\n\n}\n\t}\n}\n\n//End of the Inlining of the function type: select\nresult = result_ft215.one();\n\nreturn result;\n'"
+	 *        annotation="kermeta isAbstract='true'"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='ecore.EClassifier result = null;\n\nreturn result;\n'"
 	 * @generated
 	 */
 	EClassifier getEClassifier(String name);

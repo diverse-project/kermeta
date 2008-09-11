@@ -1,22 +1,46 @@
 <?xml version="1.0" encoding="ASCII"?>
 <kruntimeconfiguration:Configuration xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:kruntimeconfiguration="http://www.kermeta.org/kruntimeconfiguration">
   <persistenceEntries>
+    <entries key="fileExtension" value="km2ecore"/>
+    <entries key="uri" value="http://www.kermeta.org/km2ecore/kermeta_temp_uri"/>
+    <entries key="baseClassName" value="km2ecore.impl.Km2ecorePackageImpl"/>
+    <entries key="generatedClassName" value="km2ecore.impl.Km2ecorePackageImpl"/>
+  </persistenceEntries>
+  <persistenceEntries>
+    <entries key="fileExtension" value="common"/>
+    <entries key="uri" value="http://www.kermeta.org/km2ecore/common/kermeta_temp_uri"/>
+    <entries key="baseClassName" value="km2ecore.common.impl.CommonPackageImpl"/>
+    <entries key="generatedClassName" value="km2ecore.common.impl.CommonPackageImpl"/>
+  </persistenceEntries>
+  <persistenceEntries>
+    <entries key="fileExtension" value="exception"/>
+    <entries key="uri" value="http://www.kermeta.org/km2ecore/common/exception/kermeta_temp_uri"/>
+    <entries key="baseClassName" value="km2ecore.common.exception.impl.ExceptionPackageImpl"/>
+    <entries key="generatedClassName" value="km2ecore.common.exception.impl.ExceptionPackageImpl"/>
+  </persistenceEntries>
+  <persistenceEntries>
+    <entries key="fileExtension" value="ecore"/>
+    <entries key="uri" value="http://www.kermeta.org/km2ecore/helper/ecore/kermeta_temp_uri"/>
+    <entries key="baseClassName" value="km2ecore.helper.ecore.impl.EcorePackageImpl"/>
+    <entries key="generatedClassName" value="km2ecore.helper.ecore.impl.EcorePackageImpl"/>
+  </persistenceEntries>
+  <persistenceEntries>
+    <entries key="fileExtension" value="kermeta"/>
+    <entries key="uri" value="http://www.kermeta.org/km2ecore/helper/kermeta/kermeta_temp_uri"/>
+    <entries key="baseClassName" value="km2ecore.helper.kermeta.impl.KermetaPackageImpl"/>
+    <entries key="generatedClassName" value="km2ecore.helper.kermeta.impl.KermetaPackageImpl"/>
+  </persistenceEntries>
+  <persistenceEntries>
+    <entries key="fileExtension" value="java"/>
+    <entries key="uri" value="http://www.kermeta.org/km2ecore/helper/java/kermeta_temp_uri"/>
+    <entries key="baseClassName" value="km2ecore.helper.java.impl.JavaPackageImpl"/>
+    <entries key="generatedClassName" value="km2ecore.helper.java.impl.JavaPackageImpl"/>
+  </persistenceEntries>
+  <persistenceEntries>
     <entries key="fileExtension" value="km"/>
     <entries key="uri" value="http://www.kermeta.org/kermeta/1_2_0//kermeta"/>
     <entries key="baseClassName" value="fr.irisa.triskell.kermeta.impl.KmPackageImpl"/>
     <entries key="generatedClassName" value="kermeta.impl.KermetaPackageImpl"/>
-  </persistenceEntries>
-  <persistenceEntries>
-    <entries key="fileExtension" value="standard"/>
-    <entries key="uri" value="http://www.kermeta.org/kermeta/1_2_0//kermeta/standard/kermeta_temp_uri"/>
-    <entries key="baseClassName" value="kermeta.standard.impl.StandardPackageImpl"/>
-    <entries key="generatedClassName" value="kermeta.standard.impl.StandardPackageImpl"/>
-  </persistenceEntries>
-  <persistenceEntries>
-    <entries key="fileExtension" value="compiler"/>
-    <entries key="uri" value="http://www.kermeta.org/kermeta/compiler/kermeta_temp_uri"/>
-    <entries key="baseClassName" value="kermeta.compiler.impl.CompilerPackageImpl"/>
-    <entries key="generatedClassName" value="kermeta.compiler.impl.CompilerPackageImpl"/>
   </persistenceEntries>
   <persistenceEntries>
     <entries key="fileExtension" value="persistence"/>
@@ -43,6 +67,12 @@
     <entries key="generatedClassName" value="kermeta.utils.impl.UtilsPackageImpl"/>
   </persistenceEntries>
   <persistenceEntries>
+    <entries key="fileExtension" value="standard"/>
+    <entries key="uri" value="http://www.kermeta.org/kermeta/1_2_0//kermeta/standard/kermeta_temp_uri"/>
+    <entries key="baseClassName" value="kermeta.standard.impl.StandardPackageImpl"/>
+    <entries key="generatedClassName" value="kermeta.standard.impl.StandardPackageImpl"/>
+  </persistenceEntries>
+  <persistenceEntries>
     <entries key="fileExtension" value="kunit"/>
     <entries key="uri" value="http://www.kermeta.org/kermeta/1_2_0//kermeta/kunit/kermeta_temp_uri"/>
     <entries key="baseClassName" value="kermeta.kunit.impl.KunitPackageImpl"/>
@@ -61,40 +91,10 @@
     <entries key="generatedClassName" value="kermeta.interpreter.impl.InterpreterPackageImpl"/>
   </persistenceEntries>
   <persistenceEntries>
-    <entries key="fileExtension" value="km2ecore"/>
-    <entries key="uri" value="http://www.kermeta.org/km2ecore/kermeta_temp_uri"/>
-    <entries key="baseClassName" value="km2ecore.impl.Km2ecorePackageImpl"/>
-    <entries key="generatedClassName" value="km2ecore.impl.Km2ecorePackageImpl"/>
-  </persistenceEntries>
-  <persistenceEntries>
-    <entries key="fileExtension" value="ecore"/>
-    <entries key="uri" value="http://www.kermeta.org/km2ecore/helper/ecore/kermeta_temp_uri"/>
-    <entries key="baseClassName" value="km2ecore.helper.ecore.impl.EcorePackageImpl"/>
-    <entries key="generatedClassName" value="km2ecore.helper.ecore.impl.EcorePackageImpl"/>
-  </persistenceEntries>
-  <persistenceEntries>
-    <entries key="fileExtension" value="java"/>
-    <entries key="uri" value="http://www.kermeta.org/km2ecore/helper/java/kermeta_temp_uri"/>
-    <entries key="baseClassName" value="km2ecore.helper.java.impl.JavaPackageImpl"/>
-    <entries key="generatedClassName" value="km2ecore.helper.java.impl.JavaPackageImpl"/>
-  </persistenceEntries>
-  <persistenceEntries>
-    <entries key="fileExtension" value="kermeta"/>
-    <entries key="uri" value="http://www.kermeta.org/km2ecore/helper/kermeta/kermeta_temp_uri"/>
-    <entries key="baseClassName" value="km2ecore.helper.kermeta.impl.KermetaPackageImpl"/>
-    <entries key="generatedClassName" value="km2ecore.helper.kermeta.impl.KermetaPackageImpl"/>
-  </persistenceEntries>
-  <persistenceEntries>
-    <entries key="fileExtension" value="common"/>
-    <entries key="uri" value="http://www.kermeta.org/km2ecore/common/kermeta_temp_uri"/>
-    <entries key="baseClassName" value="km2ecore.common.impl.CommonPackageImpl"/>
-    <entries key="generatedClassName" value="km2ecore.common.impl.CommonPackageImpl"/>
-  </persistenceEntries>
-  <persistenceEntries>
-    <entries key="fileExtension" value="exception"/>
-    <entries key="uri" value="http://www.kermeta.org/km2ecore/common/exception/kermeta_temp_uri"/>
-    <entries key="baseClassName" value="km2ecore.common.exception.impl.ExceptionPackageImpl"/>
-    <entries key="generatedClassName" value="km2ecore.common.exception.impl.ExceptionPackageImpl"/>
+    <entries key="fileExtension" value="compiler"/>
+    <entries key="uri" value="http://www.kermeta.org/kermeta/compiler/kermeta_temp_uri"/>
+    <entries key="baseClassName" value="kermeta.compiler.impl.CompilerPackageImpl"/>
+    <entries key="generatedClassName" value="kermeta.compiler.impl.CompilerPackageImpl"/>
   </persistenceEntries>
   <persistenceEntries>
     <entries key="factoryClassName" value="org.eclipse.emf.ecore.xmi.impl.EcoreResourceFactoryImpl"/>
@@ -104,15 +104,15 @@
     <entries key="generatedClassName" value="ecore.impl.EcorePackageImpl"/>
   </persistenceEntries>
   <persistenceEntries>
-    <entries key="fileExtension" value="simk"/>
-    <entries key="uri" value="http://www.kermeta.org/simk"/>
-    <entries key="baseClassName" value="org.kermeta.simk.impl.SimkPackageImpl"/>
-    <entries key="generatedClassName" value="simk.impl.SimkPackageImpl"/>
-  </persistenceEntries>
-  <persistenceEntries>
     <entries key="fileExtension" value="traceability"/>
     <entries key="uri" value="http://www.kermeta.org/Traceability"/>
     <entries key="baseClassName" value="fr.irisa.triskell.traceability.impl.TraceabilityPackageImpl"/>
     <entries key="generatedClassName" value="traceability.impl.TraceabilityPackageImpl"/>
+  </persistenceEntries>
+  <persistenceEntries>
+    <entries key="fileExtension" value="simk"/>
+    <entries key="uri" value="http://www.kermeta.org/simk"/>
+    <entries key="baseClassName" value="org.kermeta.simk.impl.SimkPackageImpl"/>
+    <entries key="generatedClassName" value="simk.impl.SimkPackageImpl"/>
   </persistenceEntries>
 </kruntimeconfiguration:Configuration>

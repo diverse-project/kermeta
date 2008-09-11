@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ModelImpl.java,v 1.1 2008-09-04 15:40:29 cfaucher Exp $
+ * $Id: ModelImpl.java,v 1.2 2008-09-11 12:34:47 cfaucher Exp $
  */
 package kermeta.language.structure.impl;
 
@@ -122,41 +122,42 @@ public class ModelImpl extends ObjectImpl implements Model {
 		result = ((kermeta.standard.Set<kermeta.language.structure.Object>) org.kermeta.compil.runtime.helper.language.ClassUtil
 				.newObject("kermeta.standard.Set<kermeta.language.structure.Object>"));
 
-		//Beginning of the Inlining of the function type: each
+		//BIft:each
 
 		{
 
-			kermeta.standard.Iterator<kermeta.language.structure.Object> it_ft79 = objectsToAdd
+			kermeta.standard.Iterator<kermeta.language.structure.Object> it_ft89 = objectsToAdd
 					.iterator();
-			java.lang.Boolean idLoopCond_278 = false;
-			while (!idLoopCond_278) {
-				idLoopCond_278 = it_ft79.isOff();
-				if (idLoopCond_278) {
+			java.lang.Boolean idLoopCond_323 = false;
+			while (!idLoopCond_323) {
+				idLoopCond_323 = it_ft89.isOff();
+				if (idLoopCond_323) {
 				} else {
 
-					//Beginning of the Inlining of the lambda expression: func
-					kermeta.language.structure.Object obj = it_ft79.next();
+					//BIle:func
+					kermeta.language.structure.Object obj_lbdExp89 = it_ft89
+							.next();
 
 					kermeta.language.structure.Object addedObject = this
-							.addCompatible(obj);
+							.addCompatible(obj_lbdExp89);
 
-					java.lang.Boolean idIfCond_279 = false;
-					idIfCond_279 = kermeta.standard.helper.BooleanWrapper
+					java.lang.Boolean idIfCond_324 = false;
+					idIfCond_324 = kermeta.standard.helper.BooleanWrapper
 							.not(org.kermeta.compil.runtime.helper.language.ObjectUtil
 									.isVoid(addedObject));
 
-					if (idIfCond_279) {
+					if (idIfCond_324) {
 
-						result.add(obj);
+						result.add(obj_lbdExp89);
 					}
 
-					//End of the Inlining of the lambda expression: func
+					//EIle:func
 
 				}
 			}
 		}
 
-		//End of the Inlining of the function type: each
+		//EIft:each
 
 		return result;
 
@@ -186,47 +187,47 @@ public class ModelImpl extends ObjectImpl implements Model {
 
 		kermeta.standard.Set<kermeta.language.structure.Object> result = null;
 
-		//Beginning of the Inlining of the function type: select
+		//BIft:select
 
-		kermeta.standard.Sequence<kermeta.language.structure.Object> result_ft80 = null;
+		kermeta.standard.Sequence<kermeta.language.structure.Object> result_ft90 = null;
 
-		kermeta.language.structure.Object elem_ft80 = null;
+		kermeta.language.structure.Object elem_ft90 = null;
 
-		result_ft80 = ((kermeta.standard.Sequence<kermeta.language.structure.Object>) org.kermeta.compil.runtime.helper.language.ClassUtil
+		result_ft90 = ((kermeta.standard.Sequence<kermeta.language.structure.Object>) org.kermeta.compil.runtime.helper.language.ClassUtil
 				.newObject("kermeta.standard.Sequence<kermeta.language.structure.Object>"));
 
 		{
 
-			kermeta.standard.Iterator<kermeta.language.structure.Object> it_ft80 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
+			kermeta.standard.Iterator<kermeta.language.structure.Object> it_ft90 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
 					.<kermeta.language.structure.Object> convertAsOrderedSet(
 							this.getContents()).iterator();
-			java.lang.Boolean idLoopCond_280 = false;
-			while (!idLoopCond_280) {
-				idLoopCond_280 = it_ft80.isOff();
-				if (idLoopCond_280) {
+			java.lang.Boolean idLoopCond_325 = false;
+			while (!idLoopCond_325) {
+				idLoopCond_325 = it_ft90.isOff();
+				if (idLoopCond_325) {
 				} else {
 
-					elem_ft80 = it_ft80.next();
+					elem_ft90 = it_ft90.next();
 
-					java.lang.Boolean idIfCond_281 = false;
-					//Beginning of the Inlining of the lambda expression: selector
-					kermeta.language.structure.Object o = elem_ft80;
+					java.lang.Boolean idIfCond_326 = false;
+					//BIle:selector
+					kermeta.language.structure.Object o_lbdExp90 = elem_ft90;
 
-					idIfCond_281 = org.kermeta.compil.runtime.helper.language.TypeUtil
-							.isInstance(typeName, o);
-					//End of the Inlining of the lambda expression: selector
+					idIfCond_326 = org.kermeta.compil.runtime.helper.language.TypeUtil
+							.isInstance(typeName, o_lbdExp90);
+					//EIle:selector
 
-					if (idIfCond_281) {
+					if (idIfCond_326) {
 
-						result_ft80.add(elem_ft80);
+						result_ft90.add(elem_ft90);
 					}
 
 				}
 			}
 		}
 
-		//End of the Inlining of the function type: select
-		result = result_ft80.asSet();
+		//EIft:select
+		result = result_ft90.asSet();
 
 		return result;
 

@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: StaticMethodImpl.java,v 1.1 2008-09-04 15:40:25 cfaucher Exp $
+ * $Id: StaticMethodImpl.java,v 1.2 2008-09-11 12:34:39 cfaucher Exp $
  */
 package simk.impl;
 
@@ -44,9 +44,9 @@ import simk.StaticMethod;
  *   <li>{@link simk.impl.StaticMethodImpl#getParentAttribute <em>Parent Attribute</em>}</li>
  *   <li>{@link simk.impl.StaticMethodImpl#getSMParameters <em>SM Parameters</em>}</li>
  *   <li>{@link simk.impl.StaticMethodImpl#getSMReturn <em>SM Return</em>}</li>
- *   <li>{@link simk.impl.StaticMethodImpl#getUsages <em>Usages</em>}</li>
- *   <li>{@link simk.impl.StaticMethodImpl#getParentMethod <em>Parent Method</em>}</li>
  *   <li>{@link simk.impl.StaticMethodImpl#getSMContext <em>SM Context</em>}</li>
+ *   <li>{@link simk.impl.StaticMethodImpl#getParentMethod <em>Parent Method</em>}</li>
+ *   <li>{@link simk.impl.StaticMethodImpl#getUsages <em>Usages</em>}</li>
  *   <li>{@link simk.impl.StaticMethodImpl#getParentReference <em>Parent Reference</em>}</li>
  * </ul>
  * </p>
@@ -126,6 +126,26 @@ public class StaticMethodImpl extends SMNamedElementImpl implements
 	protected SMReturn sMReturn;
 
 	/**
+	 * The cached value of the '{@link #getSMContext() <em>SM Context</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getSMContext()
+	 * @generated
+	 * @ordered
+	 */
+	protected SMContext sMContext;
+
+	/**
+	 * The cached value of the '{@link #getParentMethod() <em>Parent Method</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getParentMethod()
+	 * @generated
+	 * @ordered
+	 */
+	protected EOperation parentMethod;
+
+	/**
 	 * The default value of the '{@link #getUsages() <em>Usages</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -144,26 +164,6 @@ public class StaticMethodImpl extends SMNamedElementImpl implements
 	 * @ordered
 	 */
 	protected SMUsage usages = USAGES_EDEFAULT;
-
-	/**
-	 * The cached value of the '{@link #getParentMethod() <em>Parent Method</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getParentMethod()
-	 * @generated
-	 * @ordered
-	 */
-	protected EOperation parentMethod;
-
-	/**
-	 * The cached value of the '{@link #getSMContext() <em>SM Context</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getSMContext()
-	 * @generated
-	 * @ordered
-	 */
-	protected SMContext sMContext;
 
 	/**
 	 * The cached value of the '{@link #getParentReference() <em>Parent Reference</em>}' reference.
@@ -387,70 +387,6 @@ public class StaticMethodImpl extends SMNamedElementImpl implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public SMUsage getUsages() {
-		return usages;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setUsages(SMUsage newUsages) {
-		SMUsage oldUsages = usages;
-		usages = newUsages == null ? USAGES_EDEFAULT : newUsages;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET,
-					SimkPackage.STATIC_METHOD__USAGES, oldUsages, usages));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EOperation getParentMethod() {
-		if (parentMethod != null && parentMethod.eIsProxy()) {
-			InternalEObject oldParentMethod = (InternalEObject) parentMethod;
-			parentMethod = (EOperation) eResolveProxy(oldParentMethod);
-			if (parentMethod != oldParentMethod) {
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE,
-							SimkPackage.STATIC_METHOD__PARENT_METHOD,
-							oldParentMethod, parentMethod));
-			}
-		}
-		return parentMethod;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EOperation basicGetParentMethod() {
-		return parentMethod;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setParentMethod(EOperation newParentMethod) {
-		EOperation oldParentMethod = parentMethod;
-		parentMethod = newParentMethod;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET,
-					SimkPackage.STATIC_METHOD__PARENT_METHOD, oldParentMethod,
-					parentMethod));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public SMContext getSMContext() {
 		if (sMContext != null && sMContext.eIsProxy()) {
 			InternalEObject oldSMContext = (InternalEObject) sMContext;
@@ -525,6 +461,70 @@ public class StaticMethodImpl extends SMNamedElementImpl implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EOperation getParentMethod() {
+		if (parentMethod != null && parentMethod.eIsProxy()) {
+			InternalEObject oldParentMethod = (InternalEObject) parentMethod;
+			parentMethod = (EOperation) eResolveProxy(oldParentMethod);
+			if (parentMethod != oldParentMethod) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE,
+							SimkPackage.STATIC_METHOD__PARENT_METHOD,
+							oldParentMethod, parentMethod));
+			}
+		}
+		return parentMethod;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EOperation basicGetParentMethod() {
+		return parentMethod;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setParentMethod(EOperation newParentMethod) {
+		EOperation oldParentMethod = parentMethod;
+		parentMethod = newParentMethod;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET,
+					SimkPackage.STATIC_METHOD__PARENT_METHOD, oldParentMethod,
+					parentMethod));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public SMUsage getUsages() {
+		return usages;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setUsages(SMUsage newUsages) {
+		SMUsage oldUsages = usages;
+		usages = newUsages == null ? USAGES_EDEFAULT : newUsages;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET,
+					SimkPackage.STATIC_METHOD__USAGES, oldUsages, usages));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EReference getParentReference() {
 		if (parentReference != null && parentReference.eIsProxy()) {
 			InternalEObject oldParentReference = (InternalEObject) parentReference;
@@ -567,10 +567,9 @@ public class StaticMethodImpl extends SMNamedElementImpl implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EOperation getParentMethodFromModel() {
-		ecore.EOperation result = null;
+	public void setWrapperUsage() {
 
-		return result;
+		this.setUsages(simk.SMUsage.getByName("Wrapper"));
 
 	}
 
@@ -579,9 +578,10 @@ public class StaticMethodImpl extends SMNamedElementImpl implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setWrapperUsage() {
+	public EOperation getParentMethodFromModel() {
+		ecore.EOperation result = null;
 
-		this.setUsages(simk.SMUsage.getByName("Wrapper"));
+		return result;
 
 	}
 
@@ -646,16 +646,16 @@ public class StaticMethodImpl extends SMNamedElementImpl implements
 			if (resolve)
 				return getSMReturn();
 			return basicGetSMReturn();
-		case SimkPackage.STATIC_METHOD__USAGES:
-			return getUsages();
-		case SimkPackage.STATIC_METHOD__PARENT_METHOD:
-			if (resolve)
-				return getParentMethod();
-			return basicGetParentMethod();
 		case SimkPackage.STATIC_METHOD__SM_CONTEXT:
 			if (resolve)
 				return getSMContext();
 			return basicGetSMContext();
+		case SimkPackage.STATIC_METHOD__PARENT_METHOD:
+			if (resolve)
+				return getParentMethod();
+			return basicGetParentMethod();
+		case SimkPackage.STATIC_METHOD__USAGES:
+			return getUsages();
 		case SimkPackage.STATIC_METHOD__PARENT_REFERENCE:
 			if (resolve)
 				return getParentReference();
@@ -690,14 +690,14 @@ public class StaticMethodImpl extends SMNamedElementImpl implements
 		case SimkPackage.STATIC_METHOD__SM_RETURN:
 			setSMReturn((SMReturn) newValue);
 			return;
-		case SimkPackage.STATIC_METHOD__USAGES:
-			setUsages((SMUsage) newValue);
+		case SimkPackage.STATIC_METHOD__SM_CONTEXT:
+			setSMContext((SMContext) newValue);
 			return;
 		case SimkPackage.STATIC_METHOD__PARENT_METHOD:
 			setParentMethod((EOperation) newValue);
 			return;
-		case SimkPackage.STATIC_METHOD__SM_CONTEXT:
-			setSMContext((SMContext) newValue);
+		case SimkPackage.STATIC_METHOD__USAGES:
+			setUsages((SMUsage) newValue);
 			return;
 		case SimkPackage.STATIC_METHOD__PARENT_REFERENCE:
 			setParentReference((EReference) newValue);
@@ -729,14 +729,14 @@ public class StaticMethodImpl extends SMNamedElementImpl implements
 		case SimkPackage.STATIC_METHOD__SM_RETURN:
 			setSMReturn((SMReturn) null);
 			return;
-		case SimkPackage.STATIC_METHOD__USAGES:
-			setUsages(USAGES_EDEFAULT);
+		case SimkPackage.STATIC_METHOD__SM_CONTEXT:
+			setSMContext((SMContext) null);
 			return;
 		case SimkPackage.STATIC_METHOD__PARENT_METHOD:
 			setParentMethod((EOperation) null);
 			return;
-		case SimkPackage.STATIC_METHOD__SM_CONTEXT:
-			setSMContext((SMContext) null);
+		case SimkPackage.STATIC_METHOD__USAGES:
+			setUsages(USAGES_EDEFAULT);
 			return;
 		case SimkPackage.STATIC_METHOD__PARENT_REFERENCE:
 			setParentReference((EReference) null);
@@ -765,12 +765,12 @@ public class StaticMethodImpl extends SMNamedElementImpl implements
 			return sMParameters != null && !sMParameters.isEmpty();
 		case SimkPackage.STATIC_METHOD__SM_RETURN:
 			return sMReturn != null;
-		case SimkPackage.STATIC_METHOD__USAGES:
-			return usages != USAGES_EDEFAULT;
-		case SimkPackage.STATIC_METHOD__PARENT_METHOD:
-			return parentMethod != null;
 		case SimkPackage.STATIC_METHOD__SM_CONTEXT:
 			return sMContext != null;
+		case SimkPackage.STATIC_METHOD__PARENT_METHOD:
+			return parentMethod != null;
+		case SimkPackage.STATIC_METHOD__USAGES:
+			return usages != USAGES_EDEFAULT;
 		case SimkPackage.STATIC_METHOD__PARENT_REFERENCE:
 			return parentReference != null;
 		}

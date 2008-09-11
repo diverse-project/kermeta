@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ConstraintImpl.java,v 1.1 2008-09-04 15:40:29 cfaucher Exp $
+ * $Id: ConstraintImpl.java,v 1.2 2008-09-11 12:34:48 cfaucher Exp $
  */
 package kermeta.language.structure.impl;
 
@@ -500,11 +500,11 @@ public class ConstraintImpl extends NamedElementImpl implements Constraint {
 		kermeta.language.structure.Property p = c
 				.getPropertyValue("ecoreModelElement");
 
-		java.lang.Boolean idIfCond_203 = false;
-		idIfCond_203 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+		java.lang.Boolean idIfCond_216 = false;
+		idIfCond_216 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 				.isNotEqual(p, null);
 
-		if (idIfCond_203) {
+		if (idIfCond_216) {
 
 			ecore.EModelElement ecoreModelElement = ((ecore.EModelElement) org.kermeta.compil.runtime.helper.language.ObjectUtil
 					.asType(
@@ -535,8 +535,8 @@ public class ConstraintImpl extends NamedElementImpl implements Constraint {
 
 		java.lang.String body = "";
 
-		java.lang.Boolean idIfCond_204 = false;
-		idIfCond_204 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+		java.lang.Boolean idIfCond_217 = false;
+		idIfCond_217 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 				.isInstanceOf(
 						org.kermeta.compil.runtime.helper.language.ObjectUtil
 								.container(this),
@@ -545,19 +545,19 @@ public class ConstraintImpl extends NamedElementImpl implements Constraint {
 								.getMetaClass(
 										"kermeta.language.structure.ClassDefinition"));
 
-		if (idIfCond_204) {
+		if (idIfCond_217) {
 
 			result = ((km2ecore.helper.ecore.EAnnotationHelper) org.kermeta.compil.runtime.helper.language.ClassUtil
 					.newObject("km2ecore.helper.ecore.EAnnotationHelper"))
 					.create("kermeta.inv", this.getName(), body);
 		} else {
 
-			java.lang.Boolean idIfCond_205 = false;
-			idIfCond_205 = ((km2ecore.helper.kermeta.ConstraintHelper) org.kermeta.compil.runtime.helper.language.ClassUtil
+			java.lang.Boolean idIfCond_218 = false;
+			idIfCond_218 = ((km2ecore.helper.kermeta.ConstraintHelper) org.kermeta.compil.runtime.helper.language.ClassUtil
 					.newObject("km2ecore.helper.kermeta.ConstraintHelper"))
 					.isPre(this);
 
-			if (idIfCond_205) {
+			if (idIfCond_218) {
 
 				result = ((km2ecore.helper.ecore.EAnnotationHelper) org.kermeta.compil.runtime.helper.language.ClassUtil
 						.newObject("km2ecore.helper.ecore.EAnnotationHelper"))
@@ -570,21 +570,6 @@ public class ConstraintImpl extends NamedElementImpl implements Constraint {
 			}
 
 		}
-
-		return result;
-
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAnnotation getEcoreModelElementTrace() {
-
-		X result = null;
-
-		result = this.getEcoreModelElement();
 
 		return result;
 

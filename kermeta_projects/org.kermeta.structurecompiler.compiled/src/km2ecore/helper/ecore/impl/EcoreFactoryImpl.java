@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: EcoreFactoryImpl.java,v 1.1 2008-09-04 15:40:39 cfaucher Exp $
+ * $Id: EcoreFactoryImpl.java,v 1.2 2008-09-11 12:34:57 cfaucher Exp $
  */
 package km2ecore.helper.ecore.impl;
 
@@ -61,14 +61,14 @@ public class EcoreFactoryImpl extends EFactoryImpl implements EcoreFactory {
 	@Override
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
-		case EcorePackage.MODEL_ANALIZER:
-			return createModelAnalizer();
 		case EcorePackage.ECORE_MODEL_ELEMENT_HELPER:
 			return createEcoreModelElementHelper();
 		case EcorePackage.EANNOTATION_HELPER:
 			return createEAnnotationHelper();
 		case EcorePackage.ENAMED_ELEMENT_HELPER:
 			return createENamedElementHelper();
+		case EcorePackage.MODEL_ANALIZER:
+			return createModelAnalizer();
 		default:
 			throw new IllegalArgumentException("The class '" + eClass.getName()
 					+ "' is not a valid classifier");
@@ -120,16 +120,6 @@ public class EcoreFactoryImpl extends EFactoryImpl implements EcoreFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ModelAnalizer createModelAnalizer() {
-		ModelAnalizerImpl modelAnalizer = new ModelAnalizerImpl();
-		return modelAnalizer;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EcoreModelElementHelper createEcoreModelElementHelper() {
 		EcoreModelElementHelperImpl ecoreModelElementHelper = new EcoreModelElementHelperImpl();
 		return ecoreModelElementHelper;
@@ -153,6 +143,16 @@ public class EcoreFactoryImpl extends EFactoryImpl implements EcoreFactory {
 	public ENamedElementHelper createENamedElementHelper() {
 		ENamedElementHelperImpl eNamedElementHelper = new ENamedElementHelperImpl();
 		return eNamedElementHelper;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public ModelAnalizer createModelAnalizer() {
+		ModelAnalizerImpl modelAnalizer = new ModelAnalizerImpl();
+		return modelAnalizer;
 	}
 
 	/**

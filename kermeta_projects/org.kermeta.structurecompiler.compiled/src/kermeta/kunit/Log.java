@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: Log.java,v 1.1 2008-09-04 15:40:30 cfaucher Exp $
+ * $Id: Log.java,v 1.2 2008-09-11 12:34:48 cfaucher Exp $
  */
 package kermeta.kunit;
 
@@ -144,7 +144,7 @@ public interface Log extends kermeta.language.structure.Object {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @model annotation="kermeta documentation='/**\n\t * Increments the runtests counter\n\t \052/'"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='\n\tjava.lang.Boolean idIfCond_724 = false;\n\tidIfCond_724 = kermeta.standard.helper.IntegerWrapper.equals(this.getRuntests(), null);\n\n\tif( idIfCond_724 ) {\n\n\tthis.setRuntests(0);\n}\n\n\n\tthis.setRuntests(kermeta.standard.helper.IntegerWrapper.plus(1, this.getRuntests()));\n'"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='\n\tjava.lang.Boolean idIfCond_818 = false;\n\tidIfCond_818 = kermeta.standard.helper.IntegerWrapper.equals(this.getRuntests(), null);\n\n\tif( idIfCond_818 ) {\n\n\tthis.setRuntests(0);\n}\n\n\n\tthis.setRuntests(kermeta.standard.helper.IntegerWrapper.plus(1, this.getRuntests()));\n'"
 	 * @generated
 	 */
 	void newAttempt();

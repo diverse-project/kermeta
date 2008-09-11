@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: EcoreSwitch.java,v 1.1 2008-09-04 15:40:46 cfaucher Exp $
+ * $Id: EcoreSwitch.java,v 1.2 2008-09-11 12:35:04 cfaucher Exp $
  */
 package km2ecore.helper.ecore.util;
 
@@ -84,15 +84,6 @@ public class EcoreSwitch<T> {
 	 */
 	protected T doSwitch(int classifierID, EObject theEObject) {
 		switch (classifierID) {
-		case EcorePackage.MODEL_ANALIZER: {
-			ModelAnalizer modelAnalizer = (ModelAnalizer) theEObject;
-			T result = caseModelAnalizer(modelAnalizer);
-			if (result == null)
-				result = caseObject(modelAnalizer);
-			if (result == null)
-				result = defaultCase(theEObject);
-			return result;
-		}
 		case EcorePackage.ECORE_MODEL_ELEMENT_HELPER: {
 			EcoreModelElementHelper ecoreModelElementHelper = (EcoreModelElementHelper) theEObject;
 			T result = caseEcoreModelElementHelper(ecoreModelElementHelper);
@@ -120,24 +111,18 @@ public class EcoreSwitch<T> {
 				result = defaultCase(theEObject);
 			return result;
 		}
+		case EcorePackage.MODEL_ANALIZER: {
+			ModelAnalizer modelAnalizer = (ModelAnalizer) theEObject;
+			T result = caseModelAnalizer(modelAnalizer);
+			if (result == null)
+				result = caseObject(modelAnalizer);
+			if (result == null)
+				result = defaultCase(theEObject);
+			return result;
+		}
 		default:
 			return defaultCase(theEObject);
 		}
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Model Analizer</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Model Analizer</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseModelAnalizer(ModelAnalizer object) {
-		return null;
 	}
 
 	/**
@@ -182,6 +167,21 @@ public class EcoreSwitch<T> {
 	 * @generated
 	 */
 	public T caseENamedElementHelper(ENamedElementHelper object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Model Analizer</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Model Analizer</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseModelAnalizer(ModelAnalizer object) {
 		return null;
 	}
 

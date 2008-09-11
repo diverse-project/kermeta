@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ObjectTypeVariableImpl.java,v 1.1 2008-09-04 15:40:29 cfaucher Exp $
+ * $Id: ObjectTypeVariableImpl.java,v 1.2 2008-09-11 12:34:47 cfaucher Exp $
  */
 package kermeta.language.structure.impl;
 
@@ -122,20 +122,20 @@ public class ObjectTypeVariableImpl extends TypeVariableImpl implements
 
 		result = this.getName();
 
-		java.lang.Boolean idIfCond_206 = false;
-		idIfCond_206 = context.getFtSuffixActivation();
+		java.lang.Boolean idIfCond_226 = false;
+		idIfCond_226 = context.getFtSuffixActivation();
 
-		if (idIfCond_206) {
+		if (idIfCond_226) {
 
 			kermeta.language.structure.Type type_from_map = context
 					.getFtMapTypeStack().peek().getValue(this);
 
-			java.lang.Boolean idIfCond_207 = false;
-			idIfCond_207 = kermeta.standard.helper.BooleanWrapper
+			java.lang.Boolean idIfCond_227 = false;
+			idIfCond_227 = kermeta.standard.helper.BooleanWrapper
 					.not(org.kermeta.compil.runtime.helper.language.ObjectUtil
 							.isVoid(type_from_map));
 
-			if (idIfCond_207) {
+			if (idIfCond_227) {
 
 				org.kermeta.compil.runtime.helper.io.StdIOUtil
 						.writeln(kermeta.standard.helper.StringWrapper
@@ -155,17 +155,17 @@ public class ObjectTypeVariableImpl extends TypeVariableImpl implements
 						.uminus(1);
 
 				kermeta.language.structure.Object obj = null;
-				//Beginning of the Inlining of the function type: detect
+				//BIft:detect
 
-				kermeta.language.structure.TypeVariable result_ft73 = null;
+				kermeta.language.structure.TypeVariable result_ft70 = null;
 
-				kermeta.language.structure.TypeVariable elem_ft73 = null;
+				kermeta.language.structure.TypeVariable elem_ft70 = null;
 
-				result_ft73 = null;
+				result_ft70 = null;
 
 				{
 
-					kermeta.standard.Iterator<kermeta.language.structure.TypeVariable> it_ft73 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
+					kermeta.standard.Iterator<kermeta.language.structure.TypeVariable> it_ft70 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
 							.<kermeta.language.structure.TypeVariable> convertAsOrderedSet(
 									((kermeta.language.structure.ClassDefinition) org.kermeta.compil.runtime.helper.language.ObjectUtil
 											.asType(
@@ -176,57 +176,57 @@ public class ObjectTypeVariableImpl extends TypeVariableImpl implements
 															.getMetaClass(
 																	"kermeta.language.structure.ClassDefinition")))
 											.getTypeParameter()).iterator();
-					java.lang.Boolean idLoopCond_208 = false;
-					while (!idLoopCond_208) {
-						idLoopCond_208 = kermeta.standard.helper.BooleanWrapper
+					java.lang.Boolean idLoopCond_228 = false;
+					while (!idLoopCond_228) {
+						idLoopCond_228 = kermeta.standard.helper.BooleanWrapper
 								.or(
-										it_ft73.isOff(),
+										it_ft70.isOff(),
 										org.kermeta.compil.runtime.helper.language.ObjectUtil
-												.isNotEqual(result_ft73, null));
-						if (idLoopCond_208) {
+												.isNotEqual(result_ft70, null));
+						if (idLoopCond_228) {
 						} else {
 
-							elem_ft73 = it_ft73.next();
+							elem_ft70 = it_ft70.next();
 
-							java.lang.Boolean idIfCond_209 = false;
-							//Beginning of the Inlining of the lambda expression: detector
-							kermeta.language.structure.TypeVariable otv = elem_ft73;
+							java.lang.Boolean idIfCond_229 = false;
+							//BIle:detector
+							kermeta.language.structure.TypeVariable otv_lbdExp70 = elem_ft70;
 
-							java.lang.Boolean idIfCond_210 = false;
-							idIfCond_210 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+							java.lang.Boolean idIfCond_230 = false;
+							idIfCond_230 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 									.isInstanceOf(
-											otv,
+											otv_lbdExp70,
 											org.kermeta.compil.runtime.ExecutionContext
 													.getInstance()
 													.getMetaClass(
 															"kermeta.language.structure.ObjectTypeVariable"));
 
-							if (idIfCond_210) {
+							if (idIfCond_230) {
 
 								i = kermeta.standard.helper.IntegerWrapper
 										.plus(i, 1);
 
-								idIfCond_209 = org.kermeta.compil.runtime.helper.language.ObjectUtil
-										.equals(this, otv);
+								idIfCond_229 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+										.equals(this, otv_lbdExp70);
 							}
 
-							//End of the Inlining of the lambda expression: detector
+							//EIle:detector
 
-							if (idIfCond_209) {
+							if (idIfCond_229) {
 
-								result_ft73 = elem_ft73;
+								result_ft70 = elem_ft70;
 							}
 
 						}
 					}
 				}
 
-				//callElement
-				obj = result_ft73;
-				//End of the Inlining of the function type: detect
+				//CE
+				obj = result_ft70;
+				//EIft:detect
 
-				java.lang.Boolean idIfCond_211 = false;
-				idIfCond_211 = kermeta.standard.helper.BooleanWrapper
+				java.lang.Boolean idIfCond_231 = false;
+				idIfCond_231 = kermeta.standard.helper.BooleanWrapper
 						.and(
 								kermeta.standard.helper.BooleanWrapper
 										.not(org.kermeta.compil.runtime.helper.language.ObjectUtil
@@ -234,14 +234,14 @@ public class ObjectTypeVariableImpl extends TypeVariableImpl implements
 								kermeta.standard.helper.IntegerWrapper
 										.isGreaterOrEqual(i, 0));
 
-				if (idIfCond_211) {
+				if (idIfCond_231) {
 
-					java.lang.Boolean idIfCond_212 = false;
-					idIfCond_212 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+					java.lang.Boolean idIfCond_232 = false;
+					idIfCond_232 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 							.isNotEqual(context.getFtProductTypeStack().peek()
 									.getTypeByIndex(i), this);
 
-					if (idIfCond_212) {
+					if (idIfCond_232) {
 
 						result = context.getFtProductTypeStack().peek()
 								.getTypeByIndex(i).createBehaviorJava(context);
@@ -270,8 +270,8 @@ public class ObjectTypeVariableImpl extends TypeVariableImpl implements
 		kermeta.language.structure.Object container = org.kermeta.compil.runtime.helper.language.ObjectUtil
 				.container(this);
 
-		java.lang.Boolean idIfCond_213 = false;
-		idIfCond_213 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+		java.lang.Boolean idIfCond_233 = false;
+		idIfCond_233 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 				.isInstanceOf(
 						container,
 						org.kermeta.compil.runtime.ExecutionContext
@@ -279,7 +279,7 @@ public class ObjectTypeVariableImpl extends TypeVariableImpl implements
 								.getMetaClass(
 										"kermeta.language.structure.ClassDefinition"));
 
-		if (idIfCond_213) {
+		if (idIfCond_233) {
 
 			org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
 					.<ecore.ETypeParameter> convertAsOrderedSet(
@@ -295,8 +295,8 @@ public class ObjectTypeVariableImpl extends TypeVariableImpl implements
 							ecoreTypeParameter);
 		} else {
 
-			java.lang.Boolean idIfCond_214 = false;
-			idIfCond_214 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+			java.lang.Boolean idIfCond_234 = false;
+			idIfCond_234 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 					.isInstanceOf(
 							container,
 							org.kermeta.compil.runtime.ExecutionContext
@@ -304,7 +304,7 @@ public class ObjectTypeVariableImpl extends TypeVariableImpl implements
 									.getMetaClass(
 											"kermeta.language.structure.Operation"));
 
-			if (idIfCond_214) {
+			if (idIfCond_234) {
 
 				org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
 						.<ecore.ETypeParameter> convertAsOrderedSet(
@@ -344,21 +344,6 @@ public class ObjectTypeVariableImpl extends TypeVariableImpl implements
 						.getMangledIdentifier(this.getName(), context));
 
 		result = ecoreTypeParameter;
-
-		return result;
-
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public ETypeParameter getEcoreModelElementTrace() {
-
-		X result = null;
-
-		result = this.getEcoreModelElement();
 
 		return result;
 

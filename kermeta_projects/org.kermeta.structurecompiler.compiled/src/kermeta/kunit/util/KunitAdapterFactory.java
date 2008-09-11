@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: KunitAdapterFactory.java,v 1.1 2008-09-04 15:40:38 cfaucher Exp $
+ * $Id: KunitAdapterFactory.java,v 1.2 2008-09-11 12:34:57 cfaucher Exp $
  */
 package kermeta.kunit.util;
 
