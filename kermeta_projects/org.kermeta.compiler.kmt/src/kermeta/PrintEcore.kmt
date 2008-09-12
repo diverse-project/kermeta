@@ -1,4 +1,4 @@
-/* $Id: PrintEcore.kmt,v 1.4 2008-08-25 16:21:43 cfaucher Exp $
+/* $Id: PrintEcore.kmt,v 1.5 2008-09-12 07:06:04 cfaucher Exp $
  * Creation date: January 24, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -24,7 +24,7 @@ class Printer {
 
     operation printEcore() : Void is do
     
-    	var input : String init "platform:/resource/org.kermeta.compiler.kmt/models/test1.ecore"
+    	var input : String init "platform:/resource/org.kermeta.compiler.kmt/models/StructureCompiler.ecore"
 		var inputRepository : EMFRepository init EMFRepository.new
 		var modelResource : Resource init inputRepository.getResource(input)		
 	    
@@ -71,15 +71,23 @@ aspect class EClass {
 			sf.printEcore()
 		}
 		
-		self.eOperations.each{ o |
+		/*self.eOperations.each{ o |
 			o.printEcore()
-		}
+		}*/
 	end
 }
 
 aspect class EStructuralFeature {
 	operation printEcore() : Void is do
+		
 		stdio.writeln("\t  EStructuralFeature: " + self.name)
+		
+		if self.derived then
+			self.eAnnotations.each{ a |
+				a.printEcore()
+			}
+		end
+
 	end
 }
 
@@ -100,6 +108,26 @@ aspect class EAnnotation {
 			self.details.each{ d |
 				if d.key == "body" then
 					stdio.writeln("\t    Java: " + d.~value)
+					stdio.writeln("======================================================================")
+				end
+			}
+				
+		end
+		
+		if self.source == "kompiledderivedProp.setter" then
+			self.details.each{ d |
+				if d.key == "body" then
+					stdio.writeln("\t    Java Getter: " + d.~value)
+					stdio.writeln("======================================================================")
+				end
+			}
+				
+		end
+		
+		if self.source == "kompiledderivedProp.getter" then
+			self.details.each{ d |
+				if d.key == "body" then
+					stdio.writeln("\t    Java Getter: " + d.~value)
 					stdio.writeln("======================================================================")
 				end
 			}
