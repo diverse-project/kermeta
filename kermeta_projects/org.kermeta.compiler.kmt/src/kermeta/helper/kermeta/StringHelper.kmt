@@ -1,4 +1,4 @@
-/* $Id: StringHelper.kmt,v 1.9 2008-09-08 19:58:26 cfaucher Exp $
+/* $Id: StringHelper.kmt,v 1.10 2008-09-12 13:31:39 cfaucher Exp $
  * Creation date: February 27, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -68,11 +68,22 @@ aspect class String {
 		result := map_infos
 	end
 	
+	/**
+	 * The current String represents the qualified name of a ValueType
+	 * context.valueTypeMapping has been filled during the pass 1
+	 */
 	operation isValueType(context : KM2EcoreContext) : Boolean is do
 		result := false
 		
 		if context.valueTypeMapping.contains(self) then
 			result := true
 		end
+	end
+	
+	/** 
+	 * Ugly operation in order to patch little things after the createBehaviorJava of a statement
+	 */
+	operation normalizeStatement() : String is do
+		result := self.replace(".equals(null)", " == null").replace(";;", ";")
 	end
 }

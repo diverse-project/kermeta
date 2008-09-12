@@ -1,4 +1,4 @@
-/* $Id: CreateBehavior.kmt,v 1.68 2008-09-12 12:55:45 cfaucher Exp $
+/* $Id: CreateBehavior.kmt,v 1.69 2008-09-12 13:32:21 cfaucher Exp $
  * Creation date: January 21, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -359,7 +359,7 @@ package behavior {
 			var i_stm : Integer init 0
 			self.eachOwnedElement{ stm |
 
-				var str_statement : String init stm.createBehaviorJava(context).replace(".equals(null)", " == null").replace(";;", ";")
+				var str_statement : String init stm.createBehaviorJava(context).normalizeStatement()
 
 				var str_statement_splitted : OrderedSet<String> init str_statement.split(context.SEPARATOR_STATEMENT_FT) 
 				
