@@ -1,7 +1,5 @@
 package org.kermeta.compil.runtime.helper.language;
 
-import java.util.ArrayList;
-
 import kermeta.exceptions.ExceptionsFactory;
 import kermeta.language.structure.Class;
 import kermeta.language.structure.Object;
@@ -66,9 +64,7 @@ public class ObjectUtil {
 					o.getClass().getName().replace("impl.", "").replace("Impl", ""));
 	}
 	
-	
-	
-	static public kermeta.language.structure.Object get(kermeta.language.structure.Object o, Property p) {
+	public static kermeta.language.structure.Object get(kermeta.language.structure.Object o, Property p) {
 		EStructuralFeature feature = o.eClass().getEStructuralFeature( p.getName() );
 		if ( feature.isMany() ) {
 			EList value = (EList) o.eGet(feature);
@@ -93,27 +89,43 @@ public class ObjectUtil {
 		return (kermeta.language.structure.Object) o.eGet(feature);
 	}
 	
-	/*static public kermeta.language.structure.Object get(java.lang.Object o, Property p) {
-		return null;
-	}*/
-	
 	static public kermeta.language.structure.Object get(java.lang.Boolean o, Property p) {
+		if (true)
+			throw new org.kermeta.compil.runtime.helper.error.KRuntimeError(
+					((kermeta.exceptions.NotImplementedException) org.kermeta.compil.runtime.helper.language.ClassUtil
+							.newObject("kermeta.exceptions.NotImplementedException")));
 		return null;
 	}
 	
 	static public kermeta.language.structure.Object get(java.lang.String o, Property p) {
+		if (true)
+			throw new org.kermeta.compil.runtime.helper.error.KRuntimeError(
+					((kermeta.exceptions.NotImplementedException) org.kermeta.compil.runtime.helper.language.ClassUtil
+							.newObject("kermeta.exceptions.NotImplementedException")));
 		return null;
 	}
 	
 	static public kermeta.language.structure.Object get(java.lang.Integer o, Property p) {
+		if (true)
+			throw new org.kermeta.compil.runtime.helper.error.KRuntimeError(
+					((kermeta.exceptions.NotImplementedException) org.kermeta.compil.runtime.helper.language.ClassUtil
+							.newObject("kermeta.exceptions.NotImplementedException")));
 		return null;
 	}
 	
 	static public kermeta.language.structure.Object get(java.lang.Character o, Property p) {
+		if (true)
+			throw new org.kermeta.compil.runtime.helper.error.KRuntimeError(
+					((kermeta.exceptions.NotImplementedException) org.kermeta.compil.runtime.helper.language.ClassUtil
+							.newObject("kermeta.exceptions.NotImplementedException")));
 		return null;
 	}
 	
 	static public kermeta.language.structure.Object get(java.lang.Double o, Property p) {
+		if (true)
+			throw new org.kermeta.compil.runtime.helper.error.KRuntimeError(
+					((kermeta.exceptions.NotImplementedException) org.kermeta.compil.runtime.helper.language.ClassUtil
+							.newObject("kermeta.exceptions.NotImplementedException")));
 		return null;
 	}
 	
@@ -220,14 +232,26 @@ public class ObjectUtil {
 	
 	///////////Unused for the moment
 	static public kermeta.language.structure.Object convertFromJavaString(java.lang.String o) {
+		if (true)
+			throw new org.kermeta.compil.runtime.helper.error.KRuntimeError(
+					((kermeta.exceptions.NotImplementedException) org.kermeta.compil.runtime.helper.language.ClassUtil
+							.newObject("kermeta.exceptions.NotImplementedException")));
 		return null;
 	}
 	
 	static public kermeta.language.structure.Object convertFromJavaInteger(java.lang.Integer o) {
+		if (true)
+			throw new org.kermeta.compil.runtime.helper.error.KRuntimeError(
+					((kermeta.exceptions.NotImplementedException) org.kermeta.compil.runtime.helper.language.ClassUtil
+							.newObject("kermeta.exceptions.NotImplementedException")));
 		return null;
 	}
 	
 	static public kermeta.language.structure.Object convertFromJavaBoolean(java.lang.Boolean o) {
+		if (true)
+			throw new org.kermeta.compil.runtime.helper.error.KRuntimeError(
+					((kermeta.exceptions.NotImplementedException) org.kermeta.compil.runtime.helper.language.ClassUtil
+							.newObject("kermeta.exceptions.NotImplementedException")));
 		return null;
 	}
 	///////////end of Unused for the moment

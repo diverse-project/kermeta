@@ -1,5 +1,5 @@
 
-/*$Id: Loader.java,v 1.1 2008-07-28 16:15:48 cfaucher Exp $
+/*$Id: Loader.java,v 1.2 2008-09-12 07:06:51 cfaucher Exp $
 * Project : org.kermeta.framework.compiled.runtime.helper
 * File : 	Loader.java
 * License : EPL
@@ -131,9 +131,14 @@ public class Loader extends SaverOrLoader {
 			} else if ( value != null ) {
 				Object realValue = value;
 				// Special case for Enumerator. Need to create an instance from the good factory.
-				if ( value instanceof Enumerator )
+				if ( value instanceof Enumerator ) {
 					realValue = createInstance( (Enumerator) value);
-				targetObject.eSet(targetFeature, realValue);
+				}
+				//System.out.println("targetFeature: " + targetFeature.toString() + " - realValue: " + realValue.toString());
+				
+				if(targetFeature.isChangeable()) {
+					targetObject.eSet(targetFeature, realValue);
+				}
 			}
 		}
 	}
