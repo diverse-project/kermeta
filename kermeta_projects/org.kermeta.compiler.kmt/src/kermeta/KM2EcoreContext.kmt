@@ -1,4 +1,4 @@
-/* $Id: KM2EcoreContext.kmt,v 1.40 2008-09-10 15:39:20 cfaucher Exp $
+/* $Id: KM2EcoreContext.kmt,v 1.41 2008-09-12 07:36:11 cfaucher Exp $
  * Creation date: February 14, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -179,11 +179,13 @@ class KM2EcoreContext {
 		
 		// Loading the km model and its possible trace model.
 		self.inputRepository := EMFRepository.new
-		var modelResource : Resource init self.inputRepository.getResource(modelInput)		
+		var modelResource : Resource init self.inputRepository.createResource(modelInput, "http://www.kermeta.org/kermeta/1_2_0//kermeta")		
+	    modelResource.load()
 	    mu := modelResource.instances.one.asType(ModelingUnit)
 	    
 	    if (not traceInput.isVoid()) and (traceInput != "")  then
-			var traceResource : Resource init self.inputRepository.getResource(traceInput)
+			var traceResource : Resource init self.inputRepository.createResource(traceInput, "http://www.kermeta.org/Traceability")
+	    	traceResource.load()
 	    	traceModel := traceResource.instances.one.asType(TraceModel)
 	    	// Adding source information to km objects
 			SourceTracer.new.addSourceInformation( self )
