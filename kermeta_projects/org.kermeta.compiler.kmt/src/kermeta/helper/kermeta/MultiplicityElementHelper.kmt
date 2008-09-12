@@ -1,4 +1,4 @@
-/* $Id: MultiplicityElementHelper.kmt,v 1.1 2008-06-26 12:49:56 cfaucher Exp $
+/* $Id: MultiplicityElementHelper.kmt,v 1.2 2008-09-12 12:55:43 cfaucher Exp $
  * Creation date: May 16, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -9,10 +9,12 @@ package kermeta::language::structure;
 
 require kermeta
 
+require "platform:/resource/org.kermeta.compiler.kmt/src/kermeta/KM2EcoreContext.kmt"
 require "TagHelper.kmt"
 
 using kermeta::standard
 using kermeta::utils
+using km2ecore
 
 aspect class MultiplicityElement {
 
@@ -21,6 +23,17 @@ aspect class MultiplicityElement {
 		if self.getEMFRenameAs()!="" then
 			result := self.getEMFRenameAs()
 		end
+	end
+	
+	/** Generation of the String representing the end of a method: return of the result value */
+	operation ppReturnResult(context : KM2EcoreContext) : String is do
+		result := "\nreturn "
+		if self.upper==1 then
+			result := result + "result"
+		else
+			result := result + context.COLLECTION_UTIL_CLASS + ".convertAsEList(result)"
+		end
+		result := result + ";\n"
 	end
 	
 }

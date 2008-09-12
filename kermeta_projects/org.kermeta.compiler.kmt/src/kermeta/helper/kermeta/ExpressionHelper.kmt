@@ -1,4 +1,4 @@
-/* $Id: ExpressionHelper.kmt,v 1.16 2008-09-11 12:11:38 cfaucher Exp $
+/* $Id: ExpressionHelper.kmt,v 1.17 2008-09-12 12:55:43 cfaucher Exp $
  * Creation date: Jul 25, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -405,7 +405,7 @@ aspect class CallFeature {
 						
 	end
 	
-	// Determine if the callFeature refers a method owning by the class definition: "Class"
+	// Determine if the callFeature refers a method owned by the class definition: "Class"
 	operation isFromClass() : Boolean is do
 		result := false
 		if not self.staticOperation.isVoid() then
@@ -510,7 +510,18 @@ aspect class CallFeature {
 		end
 		
 		if (callElement != "") or self.container.isInstanceOf(Assignment) then
-			ft_str := ft_str + "null;\n"
+			
+			var mustPrintNull : Boolean init true
+			
+			if self.container.isInstanceOf(Assignment) then
+				if self.container.asType(Assignment).target.isInstanceOf(CallResult) then
+					mustPrintNull := false
+				end
+			end
+			
+			if mustPrintNull then
+				ft_str := ft_str + "null;\n"
+			end
 		end
 		
 		ft_str := ft_str + context.SEPARATOR_STATEMENT_FT + "//BIft:" + self.staticOperation.name + "\n"
@@ -523,11 +534,30 @@ aspect class CallFeature {
 		
 		ft_str := ft_str + self.staticOperation.createBehaviorJava(context)
 		
+		
+		////////////////////////////////////////////////
 		if callElement != "" then
 			//callElement
 			ft_str := ft_str + "\n//CE\n"
 			ft_str := ft_str + callElement + " = result" + context.printFtSuffix() + ";\n"
 		end
+		
+		if (callElement == "") and self.container.isInstanceOf(Assignment) then
+			if self.container.asType(Assignment).target.isInstanceOf(CallResult) then
+				//callElement
+				ft_str := ft_str + "\n//CER\n"
+				ft_str := ft_str + context.RETURN_EXPRESSION_TO_REPLACE + "result" + context.printFtSuffix() + ";\n"
+			end
+		end
+		
+		if (callElement == "") and self.container.isInstanceOf(Conditional) then
+			//if self.container.asType(Assignment).target.isInstanceOf(CallResult) then
+				//callElement
+				ft_str := ft_str + "\n//CEC\n"
+				ft_str := ft_str + context.getResultLastStatementId() + "result" + context.printFtSuffix() + ";\n"
+			//end
+		end
+		////////////////////////////////////////////////
 		
 		if (callElement == "") and (not Operation.new().isVoidType(self.staticType.getTypeName())) then
 			context.resultOfLastFt := "result" + context.printFtSuffix()

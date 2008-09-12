@@ -1,4 +1,4 @@
-/* $Id: CreateBehavior.kmt,v 1.67 2008-09-10 13:19:54 cfaucher Exp $
+/* $Id: CreateBehavior.kmt,v 1.68 2008-09-12 12:55:45 cfaucher Exp $
  * Creation date: January 21, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -12,6 +12,7 @@ require "http://www.eclipse.org/emf/2002/Ecore"
 require "platform:/resource/org.kermeta.compiler.kmt/src/kermeta/KM2EcoreContext.kmt"
 require "platform:/resource/org.kermeta.compiler.kmt/src/kermeta/helper/KM2EcoreHelper.kmt"
 require "platform:/resource/org.kermeta.compiler.kmt/src/kermeta/helper/kermeta/ExpressionHelper.kmt"
+require "platform:/resource/org.kermeta.compiler.kmt/src/kermeta/helper/kermeta/MultiplicityElementHelper.kmt"
 require "platform:/resource/org.kermeta.compiler.kmt/src/kermeta/helper/kermeta/OperationHelper.kmt"
 require "platform:/resource/org.kermeta.compiler.kmt/src/kermeta/helper/kermeta/StringHelper.kmt"
 require "platform:/resource/org.kermeta.compiler.kmt/src/kermeta/helper/kermeta/PrettyPrinterHelper.kmt"
@@ -53,13 +54,33 @@ package structure {
 					//context.staticOperationMode := true
 					javaCode := self.getterBody.createBehaviorJava(context)
 					//context.staticOperationMode := false
-					EAnnotationHelper.new.addAnnotationPropSetter(self.ecoreModelElement, javaCode.toString)
+					EAnnotationHelper.new.addAnnotationPropSetter(self.ecoreModelElement, javaCode)
 				end
+				
+				
+				// Reinit the content
+				javaCode := ""
+				
 				// Compiling the getter in an EAnnotation
 				//context.staticOperationMode := true
-				javaCode := self.getterBody.createBehaviorJava(context)
+				
+				var type_label : String init ""
+				if context.ftSuffixActivation then
+					type_label := context.ftReturnType
+					context.ftReturnType := ""
+				else
+					type_label := CompilerHelperJava.new().ppTypeFromMultiplicityElement(self, context)
+				end
+				
+				// result is initialized only if the "return type" is not Void
+				if not Operation.new().isVoidType(type_label) then
+					javaCode := javaCode + "\n" + type_label + " result" + context.printFtSuffix() + " = null;\n"
+				end
+				
+				javaCode := javaCode + self.getterBody.createBehaviorJava(context)
+				javaCode := javaCode + self.ppReturnResult(context)
 				//context.staticOperationMode := false
-				EAnnotationHelper.new.addAnnotationPropGetter(self.ecoreModelElement, javaCode.toString)
+				EAnnotationHelper.new.addAnnotationPropGetter(self.ecoreModelElement, javaCode)
 			end
 		end
 	}
@@ -70,17 +91,6 @@ package structure {
 		method createBehaviorJava(context : KM2EcoreContext) : String is do
 
 			result := void
-			
-/*			var ft_parameters : Set<Parameter> init self.ownedParameter.detect{ p |
-				if p.type.isInstanceOf(FunctionType)
-			}*/
-			/*
-			var ft : FunctionType init p.type.asType(FunctionType)
-			//ft.left
-			//ft.right*/
-			
-			//if ft_parameters.detect{ p | p.name==cv.name} then
-			//stdio.writeln("context.tasks_stack.peek(): " + context.tasks_stack.peek())
 			 
 			var javaCode : StringBuffer init StringBuffer.new
 			
@@ -120,7 +130,6 @@ package structure {
 			// Finally add the EAnnotation containing the Java code in the Ecore model
 			if context.tasks_stack.peek() != "FunctionType_Compilation" and context.current_valueType.isVoid() then
 	        	EAnnotationHelper.new.addAnnotationGenModelImpl(self.ecoreModelElement, javaCode.toString)
-	        	//stdio.writeln(javaCode.toString)
 	        end
 	        result := javaCode.toString()
 		end
@@ -794,6 +803,11 @@ package behavior {
 					//Declare and initialize the function type parameters
 					var type_param_ : String init context.ftProductTypeStack.peek().getTypeByIndex(inc_param).createBehaviorJava(context)
 					
+					// This case occurs when andThen and orElse are inlined
+					if type_param_ == "null" then
+						type_param_ := "kermeta.language.structure.Object"
+					end
+					
 					str_toInclude := str_toInclude + type_param_ + " " + p.name + "_lbdExp" + self.getContainerAsType(Operation).asType(Operation).cuid
 					
 					context.ftSuffixActivation := true
@@ -920,6 +934,35 @@ package behavior {
 	
 	/** Complete */
 	aspect class CallSuperOperation {
+	
+		operation getCallStaticSignature(owningOperation : Operation, context : KM2EcoreContext) : String is do
+			result := ""
+			
+			result := result + owningOperation.superOperation.container.asType(ClassDefinition).container.asType(Package).qualifiedName.replace("::", ".")
+						+	".helper."
+						+	owningOperation.superOperation.container.asType(ClassDefinition).name
+						+ "Super.super_"
+						+	IdentifierHelper.new.getMangledIdentifier(owningOperation.superOperation.getFinalName(), context) + "("
+			
+			// The this or self parameter is added by default
+			if context.staticOperationMode then
+				result := result + "self"
+			else
+				result := result + "this"
+			end
+			
+			if self.parameters.size()>0 then
+				result := result + ", "
+			end
+			
+			// The super operation is added to the context for being compiled during the postprocess step
+			if context.staticOperationMode then
+				ModelingUnit.new().compileStaticOperation(owningOperation.superOperation, context)
+			else
+				context.mu.superOperationsToCompileInHelper.add(owningOperation.superOperation)
+			end
+		end
+		
 		method createBehaviorJava(context : KM2EcoreContext) : String from CallExpression is do
 		
 			super(context)
@@ -934,44 +977,26 @@ package behavior {
 			var extended_class : EClass init self.getContainerAsType(ClassDefinition).asType(ClassDefinition).ecoreModelElement
 			var super_class : EClass init owningOperation.superOperation.container.asType(ClassDefinition).ecoreModelElement
 			
-			if owningOperation.isFunctionType() then
-				stdio.writeln("A callSuperFunctionType has been detected: " + owningOperation.qualifiedName())
+			if not owningOperation.isFunctionType() then
+			
+				if ModelAnalizer.new().isExtendedBy(extended_class, super_class) and (not context.staticOperationMode) then
+					result := result + "super." + owningOperation.name + "("
+				else
+					result := result + self.getCallStaticSignature(owningOperation, context)
+				end
+				
+				self.beforeLambdaExpressionResult := ""
+				
+				result := result + CompilerHelperJava.new.ppComaSeparatedNodes(self.parameters, context) + ")"
+					
+				context.beforeLambdaExpressionResult := self.beforeLambdaExpressionResult
+				self.beforeLambdaExpressionResult := ""
+					
+				result := result + self.endOfExpressionFixer()
+				
 			else
 			
-			if ModelAnalizer.new().isExtendedBy(extended_class, super_class) and (not context.staticOperationMode) then
-				result := result + "super." + owningOperation.name + "("
-			else
-				result := result + owningOperation.superOperation.container.asType(ClassDefinition).container.asType(Package).qualifiedName.replace("::", ".") +
-					".helper." +
-					owningOperation.superOperation.container.asType(ClassDefinition).name + "Super.super_" +
-					IdentifierHelper.new.getMangledIdentifier(owningOperation.superOperation.getFinalName(), context) + "("
-				
-				if context.staticOperationMode then
-					result := result + "self"
-				else
-					result := result + "this"
-				end
-				
-				if self.parameters.size()>0 then
-					result := result + ", "
-				end
-				
-				// The super operation is added to the context for being compiled during the postprocess step
-				if context.staticOperationMode then
-					ModelingUnit.new().compileStaticOperation(owningOperation.superOperation, context)
-				else
-					context.mu.superOperationsToCompileInHelper.add(owningOperation.superOperation)
-				end
-			end
-			
-			self.beforeLambdaExpressionResult := ""
-			
-			result := result + CompilerHelperJava.new.ppComaSeparatedNodes(self.parameters, context) + ")"
-				
-			context.beforeLambdaExpressionResult := self.beforeLambdaExpressionResult
-			self.beforeLambdaExpressionResult := ""
-				
-			result := result + self.endOfExpressionFixer()
+				stdio.writeln("A callSuperFunctionType has been detected: " + owningOperation.qualifiedName() + " - signature: " + getCallStaticSignature(owningOperation, context))
 			
 			end
 			
@@ -1157,6 +1182,17 @@ package behavior {
 	
 	/** Complete */
 	aspect class Conditional {
+		
+		operation conditionIsCallFeatureThatCallsFunctionType() : Boolean is do
+			result := false
+			
+			if self.condition.isInstanceOf(CallFeature) then
+				if self.condition.asType(CallFeature).callsFunctionType() then
+					result := true
+				end
+			end
+		end
+		
 		method createBehaviorJava(context : KM2EcoreContext) : String from Expression is do
 			
 			super(context)
@@ -1167,25 +1203,31 @@ package behavior {
 			
 			var str_condition : String init ""
 			
-			if context.printFtSuffix()=="" then
-				str_condition := str_condition + "\n\t" + context.getIfConditionId() + " = " + self.condition.createBehaviorJava(context)
+			
+			if self.conditionIsCallFeatureThatCallsFunctionType() then
+							
+				context.resultLastStatementStack.push(context.getIfConditionId() + " = " + context.TYPE_SEPARATOR + "java.lang.Boolean")	
+				str_condition := str_condition + "\n" + self.condition.createBehaviorJava(context)
+				context.resultLastStatementStack.pop()
+
 			else
-				if self.condition.isInstanceOf(CallVariable) then
-		
-					var ftParam : Parameter init self.condition.asType(CallVariable).getFunctionTypeParameter()
-					if not ftParam.isVoid() then
-					
-						if ftParam.isBooleanFunctionType(context) then
-							//context.lastStatementStack.push(context.getIfConditionId() + " = ")
-							
-							context.resultLastStatementStack.push(context.getIfConditionId() + " = " + context.TYPE_SEPARATOR + "java.lang.Boolean")
-							
-							str_condition := str_condition + "\n" + self.condition.createBehaviorJava(context)
-							
-							//var resultOfFt : String init context.resultLastStatementStack.pop().replace(" = ", "") + ";"
-							
-							/*str_condition := str_condition + */context.resultLastStatementStack.pop()/* + resultOfFt*/
-							
+			
+				if context.printFtSuffix()=="" then
+					str_condition := str_condition + "\n\t" + context.getIfConditionId() + " = " + self.condition.createBehaviorJava(context)
+				else
+					// The condition is a CallVariable
+					if self.condition.isInstanceOf(CallVariable) then
+			
+						var ftParam : Parameter init self.condition.asType(CallVariable).getFunctionTypeParameter()
+						if not ftParam.isVoid() then
+						
+							if ftParam.isBooleanFunctionType(context) then
+								context.resultLastStatementStack.push(context.getIfConditionId() + " = " + context.TYPE_SEPARATOR + "java.lang.Boolean")
+								str_condition := str_condition + "\n" + self.condition.createBehaviorJava(context)
+								context.resultLastStatementStack.pop()
+							else
+								str_condition := str_condition + "\n\t" + context.getIfConditionId() + " = " + self.condition.createBehaviorJava(context)
+							end
 						end
 					end
 				end				
