@@ -1,4 +1,4 @@
-/* $Id: CreateBehavior.kmt,v 1.69 2008-09-12 13:32:21 cfaucher Exp $
+/* $Id: CreateBehavior.kmt,v 1.70 2008-09-15 15:31:33 cfaucher Exp $
  * Creation date: January 21, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -19,6 +19,7 @@ require "platform:/resource/org.kermeta.compiler.kmt/src/kermeta/helper/kermeta/
 require "platform:/resource/org.kermeta.compiler.kmt/src/kermeta/common/ContainmentTraversable.kmt"
 require "platform:/resource/org.kermeta.compiler.kmt/src/kermeta/common/TraceSource.kmt"
 require "platform:/resource/org.kermeta.compiler.kmt/src/kermeta/pass2/Postprocess.kmt"
+require "SetLinks.kmt"
 
 using kermeta::language::structure
 using kermeta::language::behavior
@@ -49,12 +50,22 @@ package structure {
 			// The current property is derived
 			if self.isDerived then
 				// The current property could have a setter
-				if not self.isReadOnly then
+				if (not self.isReadOnly) and (not self.setterBody.isVoid()) then
 					// Compiling the setter in an EAnnotation
 					//context.staticOperationMode := true
-					javaCode := self.getterBody.createBehaviorJava(context)
+					javaCode := self.setterBody.createBehaviorJava(context)
 					//context.staticOperationMode := false
-					EAnnotationHelper.new.addAnnotationPropSetter(self.ecoreModelElement, javaCode)
+					//EAnnotationHelper.new().addAnnotationPropSetter(self.ecoreModelElement, javaCode)
+					
+					var setterEOp : EOperation init EOperation.new()
+					setterEOp.name := self.printSetAccessor()
+					setterEOp.upperBound := self.ecoreModelElement.upperBound
+					setterEOp.ordered := self.ecoreModelElement.ordered
+					setterEOp.unique := self.ecoreModelElement.unique
+					
+					EAnnotationHelper.new().addAnnotationGenModelImpl(setterEOp, javaCode)
+					
+					self.container.asType(ClassDefinition).ecoreModelElement.eOperations.add(setterEOp)
 				end
 				
 				
@@ -80,7 +91,26 @@ package structure {
 				javaCode := javaCode + self.getterBody.createBehaviorJava(context)
 				javaCode := javaCode + self.ppReturnResult(context)
 				//context.staticOperationMode := false
-				EAnnotationHelper.new.addAnnotationPropGetter(self.ecoreModelElement, javaCode)
+				//EAnnotationHelper.new().addAnnotationPropGetter(self.ecoreModelElement, javaCode)
+				
+				var getterEOp : EOperation init EOperation.new()
+				getterEOp.name := self.printGetAccessor()
+				getterEOp.upperBound := self.ecoreModelElement.upperBound
+				getterEOp.ordered := self.ecoreModelElement.ordered
+				getterEOp.unique := self.ecoreModelElement.unique
+				//getterEOp.eGenericType := self.ecoreModelElement.eGenericType
+				
+				var s : LinkSetterForTypedElement init LinkSetterForTypedElement.new
+				s.setLinks(self, getterEOp, context)
+				
+				
+				EAnnotationHelper.new().addAnnotationGenModelImpl(getterEOp, javaCode)
+				
+				self.container.asType(ClassDefinition).ecoreModelElement.asType(EClass).eOperations.add(getterEOp)
+				
+				// Remove the old property, only the Operations: getter and setter are remaining
+				self.container.asType(ClassDefinition).ecoreModelElement.eStructuralFeatures.remove(self.ecoreModelElement)
+				self.ecoreModelElement := void
 			end
 		end
 	}
@@ -595,6 +625,7 @@ package behavior {
 						if not self.callsFunctionType() then
 						
 							if tgt.isInstanceOf(TypeLiteral) and (tgt.staticType.toString!="Enumeration") then
+								stdio.writeln("tgt.isInstanceOf(TypeLiteral): " + tgt.toString + " - " + tgt.createBehaviorJava(context))
 								result := result + "org.kermeta.compil.runtime.ExecutionContext.getInstance().getMetaClass(\"" + tgt.createBehaviorJava(context) + "\")"
 							else
 								result := result + tgt.createBehaviorJava(context)
@@ -647,7 +678,7 @@ package behavior {
 										cf_prop_suffix := ")"
 									end
 									
-									result := result + "get" + self.staticProperty.getFinalName().capName() + "()" + cf_prop_suffix
+									result := result + self.printGetAccessor() + "()" + cf_prop_suffix
 									cf_prop_suffix := ""
 								else
 									if not self.callsFunctionType() then
@@ -1070,7 +1101,7 @@ package behavior {
 						result := result + tabLeft.elementAt(i) + "."
 					end
 					if i == (tabLeft.size()-1) then
-						result := result + "set" + self.target.asType(CallFeature).staticProperty.getFinalName().capName() + "(" + ppCast + right + ");"
+						result := result + self.target.asType(CallFeature).printSetAccessor() + "(" + ppCast + right + ");"
 					end
 					i := i+1
 				end

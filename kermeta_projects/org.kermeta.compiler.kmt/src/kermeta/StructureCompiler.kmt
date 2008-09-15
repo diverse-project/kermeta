@@ -1,4 +1,4 @@
-/* $Id: StructureCompiler.kmt,v 1.61 2008-09-11 12:11:39 cfaucher Exp $
+/* $Id: StructureCompiler.kmt,v 1.62 2008-09-15 15:31:33 cfaucher Exp $
  * Creation date: January 21, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -256,10 +256,10 @@ class Main {
     	operations.add("compareTo")
     	operations.add("toString")
     	operations.add("isSet")
-    	operations.add("containsKey")
+    	operations.add("containsKey")*/
     	operations.add("checkInvariants")
-    	operations.add("count")
-    	operations.add("flatten")*/
+    	//operations.add("count")
+    	//operations.add("flatten")
     	//operations.add("addAllTestCasesFrom")
     	/*operations.add("count")
     	operations.add("createResource")
@@ -284,6 +284,7 @@ class Main {
     	//operations.add("testSeqObject")
     	operations.add("testSeqStack")
     	//operations.add("testSeqHashtable")
+    	//operations.add("getVariableDeclInBlock")
     	
     	main_compilingOnlyOperations(modelInput, traceInput, output, mode, operations)
     end

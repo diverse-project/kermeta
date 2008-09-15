@@ -1,0 +1,60 @@
+/* $Id: PropertyHelper.kmt,v 1.1 2008-09-15 15:31:32 cfaucher Exp $
+ * Creation date: September 15, 2008
+ * License: EPL
+ * Copyright:
+ * Authors: Cyril Faucher <cfaucher@irisa.fr>
+ */
+
+
+package kermeta::language::structure;
+
+require kermeta
+require "KermetaHelper.kmt"
+require "platform:/resource/org.kermeta.compiler.kmt/src/kermeta/KM2EcoreContext.kmt"
+require "http://www.eclipse.org/emf/2002/Ecore"
+
+using kermeta::standard
+using km2ecore
+using ecore
+
+aspect class Property {
+
+	operation printGetAccessor() : String is do
+		result := ""
+		
+		if self.isDerived then
+			result := "getter"
+		else
+			var isBoolean : Boolean init false
+			
+			if self.ecoreModelElement.isInstanceOf(EAttribute) then
+				if self.ecoreModelElement.asType(EAttribute).eType.isInstanceOf(EDataType) then
+					if self.type.getEMFEDataTypeInstanceClassName() == "boolean" then
+						isBoolean := true
+					end
+				end
+			end
+				
+			if isBoolean then
+				result := "is"
+			else
+				result := "get"
+			end
+		end
+		
+		result := result + self.getFinalName().capName()
+	end
+	
+	operation printSetAccessor() : String is do
+		result := ""
+		
+		if self.isDerived then
+			result := "setter"
+		else
+			result := "set"
+		end
+		
+		result := result + self.getFinalName().capName()
+	end
+
+}

@@ -1,4 +1,4 @@
-/* $Id: CreateEcoreModelElement.kmt,v 1.34 2008-09-12 12:55:45 cfaucher Exp $
+/* $Id: CreateEcoreModelElement.kmt,v 1.35 2008-09-15 15:31:32 cfaucher Exp $
  * Creation date: February 1, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -297,10 +297,10 @@ aspect class Property {
 		EcoreModelElementHelper.new.setEStructuralFeatureProperties(self, ecoreStructuralFeature, context)
 		
 		if self.isDerived then
-			ecoreStructuralFeature.changeable := self.isReadOnly
-			// FIXME: Maybe this eAnnotation could be removed, because the "changeable" attribute is setted
-			// the Kermeta loader for Ecore could be inspected to check which property is taking into account: the "changeable" attribute
-			// or the EAnnotation
+			ecoreStructuralFeature.unsettable := self.isReadOnly
+			// FIXME: Maybe this eAnnotation could be removed, because the "unsettable" attribute is setted
+			// the Kermeta loader for Ecore could inspect for checking which property is taking into account
+			// the "unsettable" attribute or the EAnnotation
 			var annotation : EAnnotation init EAnnotationHelper.new.createKermetaEAnnotation(KermetaEAnnotationKey.isReadOnly.name.toString(), self.isReadOnly.toString())
 			ecoreStructuralFeature.eAnnotations.add(annotation)
 		end

@@ -1,8 +1,8 @@
-/* $Id: OperationHelper.kmt,v 1.12 2008-09-12 12:55:43 cfaucher Exp $
+/* $Id: OperationHelper.kmt,v 1.13 2008-09-15 15:31:32 cfaucher Exp $
  * Creation date: May 20, 2008
- * License:
+ * License: EPL
  * Copyright:
- * Authors:
+ * Authors: Cyril Faucher <cfaucher@irisa.fr>
  */
 
 

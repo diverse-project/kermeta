@@ -1,4 +1,4 @@
-/* $Id: EAnnotationHelper.kmt,v 1.13 2008-09-03 14:55:38 cfaucher Exp $
+/* $Id: EAnnotationHelper.kmt,v 1.14 2008-09-15 15:31:33 cfaucher Exp $
  * Creation date: January 29, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -58,12 +58,20 @@ class EAnnotationHelper {
 		end
 	end
 	
+	/**
+	 * Not used
+	 */
+	 @deprecated "true"
 	operation addAnnotationPropSetter( eModelElement : EModelElement , body : String) : Void is do
 		if not eModelElement.isVoid() then
 			eModelElement.eAnnotations.add(create("kompiledderivedProp.setter", "body", cleanBody(body)))
 		end
 	end
 	
+	/**
+	 * Not used
+	 */
+	 @deprecated "true"
 	operation addAnnotationPropGetter( eModelElement : EModelElement , body : String) : Void is do
 		if not eModelElement.isVoid() then
 			eModelElement.eAnnotations.add(create("kompiledderivedProp.getter", "body", cleanBody(body)))
