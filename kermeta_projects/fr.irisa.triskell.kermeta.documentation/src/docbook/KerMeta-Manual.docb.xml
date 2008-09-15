@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.4//EN"
 "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
-<!-- $Id: KerMeta-Manual.docb.xml,v 1.31 2008-05-30 14:38:20 cfaucher Exp $ -->
+<!-- $Id: KerMeta-Manual.docb.xml,v 1.32 2008-09-15 12:25:24 dvojtise Exp $ -->
 <book lang="en-US">
   <bookinfo>
     <title>Kermeta language</title>
 
     <pubdate>Build date: @BUILD.DATE@</pubdate>
 
-    <pubdate>$Date: 2008-05-30 14:38:20 $</pubdate>
+    <pubdate>$Date: 2008-09-15 12:25:24 $</pubdate>
 
     <author>
       <firstname>Zoé</firstname>
@@ -483,12 +483,7 @@ aLibrary ?= resource.one // note the conditionnal assignment using the ?=, if no
         on the notion of conformance between two metamodels. This allows to
         write behavior that is valid for a given metamodel and that will also
         work for any conformant metamodel.</para>
-
-        <para>In order to improve reuse of existing code between metamodel
-        variants, the language introduces the notion of ModelType. It is based
-        on the notion of conformance between two metamodels. This allows to
-        write behavior that is valid for a given metamodel and that will also
-        work for any conformant metamodel.</para>
+        
 
         <para>TODO write a small illustrative example of a simple printer
         based on a ModelType : a subset of class diagram of UML</para>
