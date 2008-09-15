@@ -9,7 +9,7 @@ require "../Standard.kmt"
 using kermeta::standard
 
 /* ****************************************************************************
- * $Id: resource.kmt,v 1.65 2008-09-15 11:17:49 cfaucher Exp $
+ * $Id: resource.kmt,v 1.66 2008-09-15 13:20:00 cfaucher Exp $
  * Project : Kermeta (First iteration)
  * Creation date :  
  * File : resource.kmt
@@ -123,6 +123,7 @@ abstract class Resource inherits kermeta::standard::Set<Object>
 		
 		var coll : Set<kermeta::language::structure::Object>
 		self.each{e |
+			@compiledJavaExtern "org.kermeta.compil.runtime.helper.language.ObjectUtil.getAllContainedObjects(e)"
 			coll ?= extern fr::irisa::triskell::kermeta::runtime::language::Object.getAllContainedObjects(e)
 			res.addAll(coll)
 		}
