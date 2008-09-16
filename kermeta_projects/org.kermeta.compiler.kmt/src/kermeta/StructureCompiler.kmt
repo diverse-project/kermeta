@@ -1,4 +1,4 @@
-/* $Id: StructureCompiler.kmt,v 1.63 2008-09-16 12:25:11 cfaucher Exp $
+/* $Id: StructureCompiler.kmt,v 1.64 2008-09-16 16:00:04 cfaucher Exp $
  * Creation date: January 21, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -257,7 +257,7 @@ class Main {
     	operations.add("toString")
     	operations.add("isSet")
     	operations.add("containsKey")*/
-    	operations.add("checkInvariants")
+    	//operations.add("checkInvariants")
     	//operations.add("count")
     	//operations.add("flatten")
     	//operations.add("addAllTestCasesFrom")
@@ -281,11 +281,15 @@ class Main {
     	//operations.add("findDanglingModelElements")
     	////////////operations.add("main_compilingOnlyOperations")
     	//operations.add("remove")
+    	operations.add("createEcoreModelElement")
     	
     	//operations.add("testSeqObject")
     	//operations.add("testSeqStack")
     	//operations.add("testSeqHashtable")
     	//operations.add("getVariableDeclInBlock")
+    	
+    	
+    	//operations.add("superClass")
     	
     	
     	main_compilingOnlyOperations(modelInput, traceInput, output, mode, operations)
@@ -306,7 +310,8 @@ class Main {
 			p.asType(Package).eachOwnedElement{ cd |
 				if cd.isInstanceOf(ClassDefinition) then
 				
-					if cd.asType(ClassDefinition).qualifiedName == "kermeta::language::structure::Object" then
+					if cd.asType(ClassDefinition).qualifiedName == "kermeta::language::structure::Using" then
+					//if cd.asType(ClassDefinition).qualifiedName == "kermeta::language::structure::Class" then
 					//if cd.asType(ClassDefinition).qualifiedName == "kermeta::language::behavior::Block" then
 					
 						cd.asType(ClassDefinition).eachOwnedElement{ op |
@@ -322,6 +327,14 @@ class Main {
 									stdio.writeln(op.asType(Operation).qualifiedName + " is a function type that is not compiled")*/
 								end
 							
+							else
+								if op.isInstanceOf(Property) then
+									if op.asType(Property).isDerived and operations.contains(op.asType(Property).name) then
+										stdio.writeln("================= " + op.asType(Property).qualifiedName + " =================")
+										var javaSourceCode : String init op.asType(Property).getterBody().createBehaviorJava(context)
+										stdio.writeln(javaSourceCode)
+									end
+								end
 							end
 						}
 					end
