@@ -1,4 +1,4 @@
-/* $Id: CreateBehavior.kmt,v 1.70 2008-09-15 15:31:33 cfaucher Exp $
+/* $Id: CreateBehavior.kmt,v 1.71 2008-09-16 12:25:11 cfaucher Exp $
  * Creation date: January 21, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -835,8 +835,9 @@ package behavior {
 					var type_param_ : String init context.ftProductTypeStack.peek().getTypeByIndex(inc_param).createBehaviorJava(context)
 					
 					// This case occurs when andThen and orElse are inlined
-					if type_param_ == "null" then
-						type_param_ := "kermeta.language.structure.Object"
+					// Maybe we could add 2 slashs for commenting the variable declaration 
+					if Operation.new().isVoidType(type_param_) then
+						type_param_ := "/*This variable should be never used*/ kermeta.language.structure.Object"
 					end
 					
 					str_toInclude := str_toInclude + type_param_ + " " + p.name + "_lbdExp" + self.getContainerAsType(Operation).asType(Operation).cuid
@@ -1113,7 +1114,11 @@ package behavior {
 					if right.contains(context.RETURN_EXPRESSION_TO_REPLACE) then
 						result := right.replace(context.RETURN_EXPRESSION_TO_REPLACE, left + " = " + ppCast)
 					else
-						result := left + " = " + ppCast + right
+						if ( self.target.isInstanceOf(CallVariable) or self.target.isInstanceOf(CallResult) ) and (self.~value.callsFunctionType() or self.~value.isFunctionTypeVariable()) then
+							result := right
+						else
+							result := left + " = " + ppCast + right
+						end
 					end
 				end
 			end

@@ -1,4 +1,4 @@
-/* $Id: ExpressionHelper.kmt,v 1.18 2008-09-15 15:31:32 cfaucher Exp $
+/* $Id: ExpressionHelper.kmt,v 1.19 2008-09-16 12:25:10 cfaucher Exp $
  * Creation date: Jul 25, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -505,24 +505,24 @@ aspect class CallFeature {
 			callElement := IdentifierHelper.new.getMangledIdentifier(self.container.asType(VariableDecl).identifier, context)
 		else
 			if self.container.isInstanceOf(CallVariable) then
+				stdio.writeln("Give me this case !")
 				callElement := IdentifierHelper.new.getMangledIdentifier(self.container.asType(CallVariable).name, context)
 			end
 		end
 		
-		if (callElement != "") or self.container.isInstanceOf(Assignment) then
-			
-			var mustPrintNull : Boolean init true
-			
-			if self.container.isInstanceOf(Assignment) then
-				if self.container.asType(Assignment).target.isInstanceOf(CallResult) then
-					mustPrintNull := false
-				end
+		if (callElement != "") then
+			ft_str := ft_str + "null;\n"
+		end
+		
+		if self.container.isInstanceOf(Assignment) then
+			if self.container.asType(Assignment).target.isInstanceOf(CallResult) then
+				callElement := self.container.asType(Assignment).target.createBehaviorJava(context)
 			end
-			
-			if mustPrintNull then
-				ft_str := ft_str + "null;\n"
+			if self.container.asType(Assignment).target.isInstanceOf(CallVariable) then
+				callElement := self.container.asType(Assignment).target.createBehaviorJava(context)
 			end
 		end
+		
 		
 		ft_str := ft_str + context.SEPARATOR_STATEMENT_FT + "//BIft:" + self.staticOperation.name + "\n"
 		
@@ -536,10 +536,10 @@ aspect class CallFeature {
 		
 		
 		////////////////////////////////////////////////
-		if callElement != "" then
+		if callElement != "" and context.getResultLastStatementId()!="" then
 			//callElement
 			ft_str := ft_str + "\n//CE\n"
-			ft_str := ft_str + callElement + " = result" + context.printFtSuffix() + ";\n"
+			ft_str := ft_str + context.getResultLastStatementId() + "result" + context.printFtSuffix() + ";\n"
 		end
 		
 		if (callElement == "") and self.container.isInstanceOf(Assignment) then

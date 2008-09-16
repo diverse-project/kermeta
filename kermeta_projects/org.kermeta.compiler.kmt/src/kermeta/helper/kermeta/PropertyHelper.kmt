@@ -1,4 +1,4 @@
-/* $Id: PropertyHelper.kmt,v 1.1 2008-09-15 15:31:32 cfaucher Exp $
+/* $Id: PropertyHelper.kmt,v 1.2 2008-09-16 12:25:10 cfaucher Exp $
  * Creation date: September 15, 2008
  * License: EPL
  * Copyright:
@@ -27,10 +27,12 @@ aspect class Property {
 		else
 			var isBoolean : Boolean init false
 			
-			if self.ecoreModelElement.isInstanceOf(EAttribute) then
-				if self.ecoreModelElement.asType(EAttribute).eType.isInstanceOf(EDataType) then
-					if self.type.getEMFEDataTypeInstanceClassName() == "boolean" then
-						isBoolean := true
+			if not self.ecoreModelElement.isVoid() then
+				if self.ecoreModelElement.isInstanceOf(EAttribute) then
+					if self.ecoreModelElement.asType(EAttribute).eType.isInstanceOf(EDataType) then
+						if self.type.getEMFEDataTypeInstanceClassName() == "boolean" then
+							isBoolean := true
+						end
 					end
 				end
 			end

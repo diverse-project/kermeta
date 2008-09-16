@@ -1,4 +1,4 @@
-/* $Id: TagHelper.kmt,v 1.14 2008-09-05 07:46:24 cfaucher Exp $
+/* $Id: TagHelper.kmt,v 1.15 2008-09-16 12:25:10 cfaucher Exp $
  * Creation date: April 07, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -23,8 +23,10 @@ aspect class Object {
 		var value_list : OrderedSet<String> init OrderedSet<String>.new
 		
 		self.ownedTags.each{ t |
-			if t.name == key then
-				value_list.add(t.~value)
+			if not t.name.isVoid() then
+				if t.name == key then
+					value_list.add(t.~value)
+				end
 			end
 		}
 		result := value_list
