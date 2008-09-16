@@ -1,4 +1,4 @@
-/* $Id: PrettyPrinterHelper.kmt,v 1.15 2008-09-02 07:25:05 cfaucher Exp $
+/* $Id: PrettyPrinterHelper.kmt,v 1.16 2008-09-16 16:00:17 cfaucher Exp $
  * Creation date: February 27, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -107,7 +107,15 @@ class CompilerHelperJava {
 					str_param := "self"
 				end
 				
-				if (e.staticType.getTypeQName == "kermeta::language::structure::Class") or (e.staticType.getTypeQName == "kermeta::language::structure::Type") then
+				if (
+						(not e.isInstanceOf(CallVariable))
+						and (not e.isInstanceOf(CallFeature))
+						and (not e.isInstanceOf(CallResult))
+						and (not e.isInstanceOf(SelfExpression))
+					) and ( 
+						(e.staticType.getTypeQName == "kermeta::language::structure::Class") or (e.staticType.getTypeQName == "kermeta::language::structure::Type")
+					)
+						then
 					str_param := "org.kermeta.compil.runtime.ExecutionContext.getInstance().getMetaClass(\"" + str_param + "\")"
 				end
 			

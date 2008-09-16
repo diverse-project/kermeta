@@ -1,4 +1,4 @@
-/* $Id: CreateBehavior.kmt,v 1.71 2008-09-16 12:25:11 cfaucher Exp $
+/* $Id: CreateBehavior.kmt,v 1.72 2008-09-16 16:00:17 cfaucher Exp $
  * Creation date: January 21, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -625,7 +625,6 @@ package behavior {
 						if not self.callsFunctionType() then
 						
 							if tgt.isInstanceOf(TypeLiteral) and (tgt.staticType.toString!="Enumeration") then
-								stdio.writeln("tgt.isInstanceOf(TypeLiteral): " + tgt.toString + " - " + tgt.createBehaviorJava(context))
 								result := result + "org.kermeta.compil.runtime.ExecutionContext.getInstance().getMetaClass(\"" + tgt.createBehaviorJava(context) + "\")"
 							else
 								result := result + tgt.createBehaviorJava(context)

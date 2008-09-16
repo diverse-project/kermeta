@@ -1,4 +1,4 @@
-/* $Id: ExpressionHelper.kmt,v 1.19 2008-09-16 12:25:10 cfaucher Exp $
+/* $Id: ExpressionHelper.kmt,v 1.20 2008-09-16 16:00:17 cfaucher Exp $
  * Creation date: Jul 25, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -536,10 +536,15 @@ aspect class CallFeature {
 		
 		
 		////////////////////////////////////////////////
-		if callElement != "" and context.getResultLastStatementId()!="" then
+		if callElement != "" then
 			//callElement
 			ft_str := ft_str + "\n//CE\n"
-			ft_str := ft_str + context.getResultLastStatementId() + "result" + context.printFtSuffix() + ";\n"
+			
+			if context.getResultLastStatementId()!="" then
+				ft_str := ft_str + context.getResultLastStatementId() + "result" + context.printFtSuffix() + ";\n"
+			else
+				ft_str := ft_str + callElement + " = result" + context.printFtSuffix() + ";\n"
+			end
 		end
 		
 		if (callElement == "") and self.container.isInstanceOf(Assignment) then
