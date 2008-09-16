@@ -1,4 +1,4 @@
-/* $Id: Compiler.java,v 1.13 2008-09-04 13:34:23 cfaucher Exp $
+/* $Id: Compiler.java,v 1.14 2008-09-16 15:35:06 cfaucher Exp $
  * Project   : fr.irisa.triskell.kermeta.compiler
  * File      : Compiler.java
  * License   : EPL
@@ -209,6 +209,14 @@ public class Compiler extends org.kermeta.compiler.Generator {
 		genModel.setComplianceLevel(GenJDKLevel.JDK50_LITERAL);
 		genModel.setContainmentProxies(true);
 		genModel.setCodeFormatting(true);
+		
+		// IMPORTANT NOTE: the notification system of EMF MUST BE KEPT ! If the notification is suppressed,
+		// then some references like 'container' are not updated.
+		//genModel.setSuppressNotification(true);
+		
+		genModel.setColorProviders(false);
+		genModel.setCreationIcons(false);
+		
 		//genModel.setCopyrightText("Copyright: IRISA/INRIA/Universite de Rennes 1 - License: EPL - Web site: http://www.kermeta.org");
 	}
 
