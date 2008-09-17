@@ -1,5 +1,5 @@
 /* *************************************************
- * $Id: collections.kmt,v 1.58 2008-08-21 15:48:23 cfaucher Exp $
+ * $Id: collections.kmt,v 1.59 2008-09-17 17:13:53 cfaucher Exp $
  * Franck FLEUREY - 14/02/2005 
  * Triskell Research Group
  * IRISA / University of Rennes 1 (France)
@@ -82,6 +82,8 @@ abstract class Collection<G>
 		post doesntContainsElementAnymore is not contains(element)
 	is do
 		var elem : G
+		
+		// In the case of the Collection contains several occurrences of 'element', we have to browse all the Collection to remove them
 		from elem := self.detect { e | e == element }
         until elem == void
         loop
