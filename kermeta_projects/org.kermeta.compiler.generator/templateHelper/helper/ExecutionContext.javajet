@@ -2,7 +2,7 @@
 	 package="org.kermeta.compiler.generator.templates"
 	 
 	 class="ExecutionContext"
-	 version="$Id: ExecutionContext.javajet,v 1.5 2008-09-02 14:52:32 cfaucher Exp $" %>
+	 version="$Id: ExecutionContext.javajet,v 1.6 2008-09-18 13:29:41 cfaucher Exp $" %>
 <%String kmFilePath_forReflection = (String) argument;%>
 
 package org.kermeta.compil.runtime;
@@ -28,7 +28,7 @@ public class ExecutionContext {
 
 	private String _modelKMURI = "platform:/resource<%= kmFilePath_forReflection %>";
 	
-		private List<Object> _modelKM;
+	private List<Object> _modelKM;
 
 	private ExecutionContext() {
 		initValueTypes();
@@ -68,6 +68,7 @@ public class ExecutionContext {
 	}
 
 	public Class getMetaClass(String javaQualifiedName) {
+		
 		lazyInitialize();
 
 		javaQualifiedName = javaQualifiedName.replace("impl.", "").replace(
@@ -128,5 +129,5 @@ public class ExecutionContext {
 		}
 		return null;
 	}
-	
+
 }

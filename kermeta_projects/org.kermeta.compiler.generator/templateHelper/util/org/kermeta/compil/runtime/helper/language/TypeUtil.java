@@ -1,10 +1,6 @@
 
 package org.kermeta.compil.runtime.helper.language;
 
-import kermeta.language.structure.Class;
-import kermeta.language.structure.Object;
-import kermeta.language.structure.Type;
-
 
 /**
  * Implementation of the extern of the class Type in Kermeta framework
@@ -24,32 +20,27 @@ public class TypeUtil {
 		return null;
 	}
 
-	public static Boolean isInstance(kermeta.language.structure.Class metaClass, java.lang.String string) {
-		// TODO Auto-generated method stub
-		return null;
+	public static Boolean isInstance(kermeta.language.structure.Class metaClass, java.lang.String o_string) {
+		return ObjectUtil.isInstanceOf(o_string, metaClass);
 	}
 	
-	public static Boolean isInstance(kermeta.language.structure.Class metaClass, kermeta.language.structure.Object element) {
-		// TODO Auto-generated method stub
-		return null;
+	public static Boolean isInstance(kermeta.language.structure.Class metaClass, kermeta.language.structure.Object o) {
+		return ObjectUtil.isInstanceOf(o, metaClass);
 	}
 
-	public static Boolean isInstance(kermeta.language.structure.Class metaClass, java.lang.Object element) {
-		// TODO Auto-generated method stub
-		return null;
+	public static Boolean isInstance(kermeta.language.structure.Class metaClass, java.lang.Object o) {
+		return ObjectUtil.isInstanceOf(o, metaClass);
 	}
 	
-	public static Boolean isInstance(kermeta.language.structure.Type typeName, kermeta.language.structure.Object o) {
-		// TODO Auto-generated method stub
-		return null;
+	public static Boolean isInstance(kermeta.language.structure.Type type, kermeta.language.structure.Object o) {
+		return ObjectUtil.isInstanceOf(o, type.getClass().getName());
 	}
 	
-	public static Boolean isInstance(kermeta.language.structure.Type typeName, java.lang.Object o) {
-		// TODO Auto-generated method stub
-		return null;
+	public static Boolean isInstance(kermeta.language.structure.Type type, java.lang.Object o) {
+		return ObjectUtil.isInstanceOf(o, type.getClass().getName());
 	}
 
-	public static Boolean isSuperTypeOf(kermeta.language.structure.Type object, kermeta.language.structure.Class metaClass) {
+	public static Boolean isSuperTypeOf(kermeta.language.structure.Type type, kermeta.language.structure.Type metaClass) {
 		// TODO Auto-generated method stub
 		return null;
 	}
