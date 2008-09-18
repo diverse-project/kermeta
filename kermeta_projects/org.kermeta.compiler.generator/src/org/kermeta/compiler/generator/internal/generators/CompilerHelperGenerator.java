@@ -8,7 +8,7 @@
  * Technologies), Jacques Lescot (Anyware Technologies) - initial API and
  * implementation
  ******************************************************************************/
-/*$Id: CompilerHelperGenerator.java,v 1.19 2008-09-02 16:23:28 cfaucher Exp $
+/*$Id: CompilerHelperGenerator.java,v 1.20 2008-09-18 13:28:49 cfaucher Exp $
 * Project : org.kermeta.compiler.generator
 * File : 	CompilerHelperGenerator.java
 * License : EPL
@@ -244,9 +244,18 @@ public class CompilerHelperGenerator extends AbstractGenerator {
 			monitor.subTask("Files creation");
 
 			generateRunner(conf, simkConf, projectPath);
-			generateLauncher(simkConf, projectPath);
-			generateWrapper(simkConf, projectPath);
-			generateSuper(simkConf, projectPath);
+			//generateLauncher(simkConf, projectPath);
+
+			for (SMContext _context : simkConf.getSMContexts()) {
+				if ( _context.getSMClass().getUsages() == SMUsage.WRAPPER ) {
+					generateWrapper(_context, projectPath);
+				} else {
+					if ( _context.getSMClass().getUsages() == SMUsage.SUPER ) {
+						generateSuper(_context, projectPath);
+					}
+				}
+			}
+			
 			generateExecutionContext(kmFilePath_forReflection, projectPath);
 
 			monitor.worked(1);
@@ -340,44 +349,36 @@ public class CompilerHelperGenerator extends AbstractGenerator {
 	
 	/**
 	 * 
-	 * @param simkConf
+	 * @param _context
 	 * @param projectPath
 	 * @throws JETException
 	 * @throws CoreException
 	 */
-	private void generateWrapper(SIMKModel simkConf, IPath projectPath)
+	private void generateWrapper(SMContext _context, IPath projectPath)
 			throws JETException, CoreException {
 		
-		for (SMContext _context : simkConf.getSMContexts()) {
-			if ( _context.getSMClass().getUsages() == SMUsage.WRAPPER /*.contains(SMUsage.WRAPPER)*/ ) {
 			applyTemplate(
 					_context,
 					getTemplateURI(WRAPPER_JAVA),
 					projectPath.append("/" + SOURCE_DIRECTORY + "/" + _context.getSMClass().getQualifiedName().replace(".", "/") + ".java"),
 					configuration.isForceOverwrite());
-			}
-		}
 	}
 	
 	/**
 	 * 
-	 * @param simkConf
+	 * @param _context
 	 * @param projectPath
 	 * @throws JETException
 	 * @throws CoreException
 	 */
-	private void generateSuper(SIMKModel simkConf, IPath projectPath)
+	private void generateSuper(SMContext _context, IPath projectPath)
 			throws JETException, CoreException {
 		
-		for (SMContext _context : simkConf.getSMContexts()) {
-			if ( _context.getSMClass().getUsages() == SMUsage.SUPER ) {
 			applyTemplate(
 					_context,
 					getTemplateURI(SUPER_JAVA),
 					projectPath.append("/" + SOURCE_DIRECTORY + "/" + _context.getSMClass().getQualifiedName().replace(".", "/") + ".java"),
 					configuration.isForceOverwrite());
-			}
-		}
 	}
 	
 	/**
