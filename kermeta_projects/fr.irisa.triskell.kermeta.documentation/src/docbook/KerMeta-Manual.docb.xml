@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.4//EN"
 "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
-<!-- $Id: KerMeta-Manual.docb.xml,v 1.34 2008-09-18 15:13:00 dvojtise Exp $ -->
+<!-- $Id: KerMeta-Manual.docb.xml,v 1.35 2008-09-18 15:14:20 dvojtise Exp $ -->
 <book lang="en-US">
   <bookinfo>
     <title>Kermeta language</title>
 
     <pubdate>Build date: @BUILD.DATE@</pubdate>
 
-    <pubdate>$Date: 2008-09-18 15:13:00 $</pubdate>
+    <pubdate>$Date: 2008-09-18 15:14:20 $</pubdate>
 
     <author>
       <firstname>Zoé</firstname>
@@ -1565,13 +1565,9 @@ a := A&lt;Integer&gt;.new
 
           <note><para>
              This is different of the 
-
             <literal>return</literal>
-
-             in java, since it doesn't end the block. Other instruction can be used after the 
-
+             in java, since it doesn't end the block. Other instructions can be used after the 
             <literal>result</literal>
-
              assignment. 
           </para></note>
         </section>
