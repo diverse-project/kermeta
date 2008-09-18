@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.4//EN"
 "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
-<!-- $Id: KerMeta-Manual.docb.xml,v 1.33 2008-09-18 12:26:43 dvojtise Exp $ -->
+<!-- $Id: KerMeta-Manual.docb.xml,v 1.34 2008-09-18 15:13:00 dvojtise Exp $ -->
 <book lang="en-US">
   <bookinfo>
     <title>Kermeta language</title>
 
     <pubdate>Build date: @BUILD.DATE@</pubdate>
 
-    <pubdate>$Date: 2008-09-18 12:26:43 $</pubdate>
+    <pubdate>$Date: 2008-09-18 15:13:00 $</pubdate>
 
     <author>
       <firstname>Zoé</firstname>
@@ -93,7 +93,7 @@
         role="strong">http://gforge.inria.fr/tracker/?group_id=32</emphasis>
       </ulink>
 
-       or using the developer mailing list (kermeta-developers@lists.gforge.inria.fr) Last check: v1.0.0 
+       or using the developer mailing list (kermeta-developers@lists.gforge.inria.fr) Last check: v1.2.0 
     </para></important>
 
     <tip><para>
@@ -129,8 +129,8 @@
       <para>Kermeta is intended to be used as the core language of a model
       oriented platform. It has been designed to be a common basis to
       implement Metadata languages, action languages, constraint languages or
-      transformation language.</para>
-
+      transformation language. </para>
+      
       <figure id="refIllustration0">
         <title>Kermeta positioning</title>
 
@@ -174,6 +174,12 @@
       4 give details about the object-oriented and model-oriented features of
       the language and finally section 4 provides information about some extra
       concepts in Kermeta.</para>
+      <para>With its workbench, it's goal is to provide a 
+      support for all Language Driven Engineering activities. It will be typically 
+      used to build tools useful to build software.  This includes (but is not restricted to):
+      model checkers, simulators, model transformations (any kind of transformations 
+      including model weavers or compilers), ...</para>
+      
     </section>
 
     <section>
@@ -266,7 +272,7 @@
     <section>
       <title>An object-oriented language</title>
 
-      <para>Users of modern l programming languages, like Java, would feel
+      <para>Users of modern programming languages, like Java, would feel
       easy with object-oriented features in Kermeta: classes, inheritance,
       exceptions, and even genericity.</para>
 
@@ -357,12 +363,16 @@
       linkend="preface.link" /> and in <xref
       endterm="section_architecture.title.link"
       linkend="section_architecture.link" />, Kermeta extends the MOF. It
-      intends to provide useful models manipulation tools.</para>
+      provides useful means to manipulate models. The support of model introduces 
+      the main difference with "more" traditionnal programming languages.</para>
 
-      <section>
-        <title>model means using associations : toward a first concrete
+      <section id="section_toward_a_first_concrete_example.link">
+        <title>Associations : toward a first concrete
         example of a Kermeta model</title>
 
+		<para>Association is one of the key concepts when using and defining models.
+		It is obviously part of Kermeta.
+		</para>
         <para>MOF defines the concept of "Property" which generalizes the
         notions of attributes, and associations (composite or not) that you
         can find in UML. Kermeta syntax also distinguishes these two notions
@@ -396,11 +406,11 @@
     <emphasis role="strong">attribute</emphasis> name : String
     <emphasis role="strong">attribute</emphasis> lastName : String
     
-    <emphasis role="strong">reference</emphasis> works : set Books[0..*]#authors
+    <emphasis role="strong">reference</emphasis> works : set Book[0..*]#authors
 }</programlisting>
 
         <para>If we represent our Kermeta model in a graphical syntax we
-        obtain the following diagram (<xref
+        obtain the following class diagram (<xref
         linkend="refIllustration6" />).</para>
 
         <figure id="refIllustration6">
@@ -452,8 +462,11 @@ aLibrary ?= resource.one // note the conditionnal assignment using the ?=, if no
         </caution>
 
         <caution>
-          <para>Be aware that you CANNOT load kermeta text files. Only xmi
-          files are allowed to be loaded.</para>
+          <para>Be aware that you CANNOT load kermeta text files (*.kmt). Only xmi
+          files are allowed to be loaded. Parsing and obtaining a model from a textual syntax is not part of 
+          Kermeta. This is the role of other tools (like sintaks). Technically, it is possible to create some 
+          Kermeta operation that will hide this step, however, this is not the goal of this manual to explain
+          this procedure.</para>
         </caution>
       </section>
 
@@ -471,8 +484,16 @@ aLibrary ?= resource.one // note the conditionnal assignment using the ?=, if no
         used when an <link linkend="section_properties.link">Attribute or
         Reference</link> has a multiplicity greater than 1.</para>
 
-        <para>TODO : a simple example of navigation (applying visitor pattern
-        ???)</para>
+		<para>Example (based on the library sample of <xref 
+      linkend="section_toward_a_first_concrete_example.link" />):</para>
+		<programlisting>
+var smithBooks : Set&lt;Book&gt; init Set&lt;Book&gt;.new
+smithBooks.addAll(
+	lib.books.select{aLibraryBook | 
+		aLibraryBook.authors.exists{aBookAuthor | aBookAuthor.lastName == "Smith"}})
+		</programlisting>
+        <para>In the example above, lib is an instance of Library. It searchs in the books, select the books
+        where the author last name is "Smith".</para>
       </section>
 
       <section>
@@ -585,7 +606,7 @@ names := <emphasis role="strong">self</emphasis>.getMetaClass.classDefinition.ow
         <section>
           <title>High level modeling</title>
 
-          <para>Kermeta most recent versions embed avanced concepts like <xref
+          <para>Kermeta most recent versions embed advanced concepts like <xref
           endterm="section_lambda_expression.title.link"
           linkend="section_lambda_expression.link" />, <xref
           endterm="section_dynamic_expressions.title.link"
@@ -602,8 +623,6 @@ names := <emphasis role="strong">self</emphasis>.getMetaClass.classDefinition.ow
           <para>As Kermeta language is implemented upon Eclipse and Java, you
           can call Java code inside Kermeta code.(see <xref
           linkend="section_java_code.link" />)</para>
-
-          <para>TODO : a simple sample of Java code in Kermeta</para>
 
           <para>There is some special behavior regarding object comparison or
           cloning.</para>
@@ -635,7 +654,8 @@ names := <emphasis role="strong">self</emphasis>.getMetaClass.classDefinition.ow
 
         <emphasis role="strong">or</emphasis>
 
-         @tag_name "tag value") is translated into a MOF tag linked to structures described in the Kermeta model. 
+         @tag_name "tag value") is translated into a MOF tag linked to structures described in the Kermeta model.
+         The first one, is a text decoration, the second one is part of the Kermeta model. 
       </para>
       </warning>
 
@@ -1182,6 +1202,17 @@ this line too. */</programlisting>
         url="http://www.kermeta.org/documents/ui_user_guide/">Kermeta user
         interface</ulink> provides a view that display all registered
         EPackages and their nsuri.</para>
+        
+        
+        <warning><para>A special attention must be put when requiring resources. It is not allowed
+        to get several versions of the same class that comes from several required files. 
+        Kermeta cannot know which version it must use, so you'll get an error. </para>
+        <para>A typical error, is to require both an ecore file and the registered version of it. They represent two 
+        distinct resources in memory.</para><para>
+        A more clever error, is when the two versions are hidden inside an erroneous ecore file which uses 
+        several ways to access some metaclass and actually is not consistent... (ex: you find references to both http://www.eclipse.org/emf/2002/Ecore 
+        and platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore in the ecore file or one of the dependent files)
+        </para></warning>
 
         <para>In order to use the seamless java import (still prototype in
         v0.4.2), you can require a <emphasis role="strong">jar
@@ -1327,12 +1358,17 @@ this line too. */</programlisting>
         Character, but they currently don't have a surface syntax for their
         literals. The way to get them is to use the convertion methods
         available on String (for both of them) or Integer (for Float).</para>
+        <para>For example:</para>
+<programlisting>
+var c : Character init "f".elementAt(0)
+var r : Real init "4.5".toReal
+</programlisting>        
       </section>
 
       <section>
         <title>Enumeration types</title>
 
-        <para>You can define enumeration types by using the following syntax.
+        <para>You can define enumerations using the following syntax.
         Note that each enumeration literal must end with a ";".</para>
 
         <programlisting><emphasis role="strong">enumeration</emphasis> Size { small; normal; big; huge; } </programlisting>
@@ -1347,7 +1383,7 @@ this line too. */</programlisting>
 <emphasis role="strong">end</emphasis></programlisting>
 
         <note><para>
-           Enumeration are concept of the same level as classes, they must be defined in a package. 
+           Enumeration is a concept of the same level as Class, they must both be defined in a package. 
         </para></note>
       </section>
 
@@ -1405,8 +1441,9 @@ this line too. */</programlisting>
 
         <para>As introduced in the "Hello world" example (see <xref
         linkend="section_first_program.link" />), Kermeta is an
-        object-oriented language and operations are part of classes. Kermeta
-        provides all MOF concepts like properties, attributes, package.</para>
+        object-oriented language. Kermeta
+        provides all MOF concepts like properties, attributes, package. 
+        In addition, it provides a body to operations and derived properties.</para>
 
         <para>Classes and abstract classes can be defined in a Java-like way.
         Class definition must be placed into brackets as it is in the
@@ -1445,7 +1482,7 @@ a := A&lt;Integer&gt;.new
       <section id="section_defining_operations.link">
         <title>Defining operations</title>
 
-        <para>Kermeta provides a way to add operational (==action) semantics
+        <para>Kermeta provides a way to add operational (action) semantics
         to your metamodels. For that, you can define operations with their
         body, as in a classical programming language. You can also specify
         abstract operations (they have no body). Kermeta requires that every
