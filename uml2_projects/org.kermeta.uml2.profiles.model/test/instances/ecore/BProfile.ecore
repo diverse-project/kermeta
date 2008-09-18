@@ -5,7 +5,7 @@
     nsURI="http://BProfile" nsPrefix="BProfile">
   <eClassifiers xsi:type="ecore:EClass" name="BS1">
     <eStructuralFeatures xsi:type="ecore:EReference" name="base_Class" ordered="false"
-        lowerBound="1" eType="ecore:EClass http://www.eclipse.org/uml2/2.1.0/UML#//Class"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="BS1bool" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+        lowerBound="1" eType="ecore:EClass platform:/plugin/org.eclipse.uml2.uml_2.1.1/model/UML.ecore#//Class"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="BS1bool" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore_2.3.1/model/Ecore.ecore#//EBoolean"/>
   </eClassifiers>
 </ecore:EPackage>

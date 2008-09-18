@@ -1,4 +1,4 @@
-/* $Id: Profile.kmt,v 1.7 2008-08-26 11:42:47 gperroui Exp $
+/* $Id: Profile.kmt,v 1.8 2008-09-18 21:42:41 gperroui Exp $
  * Creation date: November 30, 2007
  * License: EPL
  * Copyright:
@@ -70,7 +70,10 @@ class Profile
 		//res.contents.select{p | p.isInstanceOf(ecore::EPackage) and p.asType(ecore::EPackage).name == self.nestingPackage.name}
 		e.asType(ecore::EPackage).eSubpackages.add(prof.asType(EPackage))
 		trace.traceLog("profile qual name: " + self.container.asType(uml::Package).getQualifiedName)
-		prof.containingResource.instances.remove(prof)
+		
+		
+		//prof.containingResource.instances.remove(prof)
+		
 		// setting the good NsURI based on profile name
 		prof.asType(EPackage).nsURI :=  "http://" +  self.container.asType(uml::Package).getQualifiedName.replace(" ","").replace("::","/") 
 		+ "/" + prof.asType(EPackage).name
@@ -109,7 +112,6 @@ class Package inherits ToEcore
 	
 	result:= pack
 	
-	//trace.traceLog("Elements in a (sub)-profile: "+ self.containingResource.contents.size.toString)
 	trace.traceLog("Quitting Profile : Pass1")
 	end
 	
@@ -118,12 +120,12 @@ class Package inherits ToEcore
 	method toEcorePass2(trace: UMLProfile2EcoreTrace) : Void is do
 	trace.traceLog("Entering Profile : Pass2")
 	if self.container != void then
-	trace.traceLog("Container is not void, trying to retreive it....")
-	var e:EObject init trace.getEcoreFromUMLQualName(self.container.asType(uml::Package).getQualifiedName)
+		trace.traceLog("Container is not void, trying to retreive it....")
+		var e:EObject init trace.getEcoreFromUMLQualName(self.container.asType(uml::Package).getQualifiedName)
 		//var res : Resource init prof.eResource.asType(Resource)
 		//res.contents.select{p | p.isInstanceOf(ecore::EPackage) and p.asType(ecore::EPackage).name == self.nestingPackage.name}
 		e.asType(ecore::EPackage).eSubpackages.add(pack.asType(EPackage))
-		pack.containingResource.instances.remove(pack)
+		
 		// setting the good NsURI based on the package name
 		pack.asType(EPackage).nsURI :=   "http://" +  self.container.asType(uml::Package).getQualifiedName.replace(" ","").replace("::","/") 
 		+ "/"+  pack.asType(EPackage).name
@@ -144,10 +146,10 @@ class Stereotype {
 
 reference st : EClass
 
-/** This method deals with creation of new Ecore objects */
-method toEcorePass1(trace: UMLProfile2EcoreTrace) : EObject is do
-trace.traceLog("Entering Stereotype : Pass1")
-trace.traceLog("Stereotype name "+ self.name)
+	/** This method deals with creation of new Ecore objects */
+	method toEcorePass1(trace: UMLProfile2EcoreTrace) : EObject is do
+	trace.traceLog("Entering Stereotype : Pass1")
+	trace.traceLog("Stereotype name "+ self.name)
 	st := EClass.new
 	
 	// registering elements in the trace to keep track of them...
@@ -173,12 +175,13 @@ trace.traceLog("Stereotype name "+ self.name)
 		var e:EObject init trace.getEcoreFromUMLQualName(self.container.asType(uml::Package).getQualifiedName)
 		trace.traceLog("container name: "+ e.asType(ecore::EPackage).name)
 		st.ePackage := e.asType(ecore::EPackage)
-		// removing the element from the resource
-		st.containingResource.instances.remove(st)
+		
+		// removing the element from the bag of created objects...
+		trace.getCreatedEcoreObjectBag().remove(st)
 		
 	end
 	trace.traceLog("Quitting Stereotype : Pass2")
-	end
+end
 }
 
 @aspect "true"
@@ -186,20 +189,21 @@ class Class inherits ToEcore {
 
 reference cls : EClass
 
-/** This method deals with creation of new Ecore objects*/
-method toEcorePass1(trace: UMLProfile2EcoreTrace) : EObject is do
+	/** This method deals with creation of new Ecore objects*/
+	method toEcorePass1(trace: UMLProfile2EcoreTrace) : EObject is do
 	trace.traceLog("Entering Class : Pass1")
 	 cls := EClass.new
-// registering elements in the trace to keep track of them...
+	
+	// registering elements in the trace to keep track of them...
 	var qName: String init self.getQualifiedName
 	trace.setQualNameObj(qName,cls)
-cls.name := self.name
+	cls.name := self.name
 
-result := cls
-trace.traceLog("Quitting Class : Pass1")
+	result := cls
+	trace.traceLog("Quitting Class : Pass1")
 end
 
-/** This method deals with relationship establishment*/
+	/** This method deals with relationship establishment*/
 	method toEcorePass2(trace: UMLProfile2EcoreTrace) : Void is do
 	trace.traceLog("Entering Class : Pass2")
 	trace.traceLog("class name " + self.name)
@@ -209,7 +213,9 @@ end
 			var e:EObject init trace.getEcoreFromUMLQualName(self.container.asType(uml::Package).getQualifiedName)
 			trace.traceLog("container name: "+ e.asType(ecore::EPackage).name)
 			cls.ePackage := e.asType(ecore::EPackage)
-			cls.containingResource.instances.remove(cls)	
+			
+			// removing the element from the bag of created objects...
+			trace.getCreatedEcoreObjectBag().remove(cls)	
 		else
 			trace.traceLog("Unhandled Container type, name :" + self.container.toString)
 		end
@@ -217,205 +223,207 @@ end
 		trace.traceLog("Container is void putting the class anywhere....")
 	end
 	trace.traceLog("Quitting Class : Pass2")
-	end
+  end
 }
 
 @aspect "true"
 class Enumeration {
-reference enum : EEnum
+	reference enum : EEnum
 
-/** This method deals with creation of new Ecore objects*/
-method toEcorePass1(trace: UMLProfile2EcoreTrace) : EObject is do
-trace.traceLog("Entering Enumeration : Pass1")
-enum := EEnum.new
+	/** This method deals with creation of new Ecore objects*/
+	method toEcorePass1(trace: UMLProfile2EcoreTrace) : EObject is do
+	trace.traceLog("Entering Enumeration : Pass1")
+	enum := EEnum.new
 
-// registering elements in the trace to keep track of them...
+	// registering elements in the trace to keep track of them...
 	var qName: String init self.getQualifiedName
 	trace.setQualNameObj(qName,enum)
 
-enum.name := self.name
+	enum.name := self.name
 
-//self.ownedLiteral.each{l|enum.eLiterals.add(l.asType(uml::EnumerationLiteral).toEcorePass1.asType(EEnumLiteral))}
-result := enum
-trace.traceLog("Quitting Enumeration : Pass1")
-end
+	result := enum
+	trace.traceLog("Quitting Enumeration : Pass1")
+ end
 
-/** This method deals with relationship establishment*/
-method toEcorePass2(trace: UMLProfile2EcoreTrace) : Void is do
-trace.traceLog("Entering Enumeration : Pass2")
-if self.container != void then
+	/** This method deals with relationship establishment*/
+	method toEcorePass2(trace: UMLProfile2EcoreTrace) : Void is do
+	trace.traceLog("Entering Enumeration : Pass2")
+	if self.container != void then
 		trace.traceLog("Container is not void, trying to retreive it....")
 		var e:EObject init trace.getEcoreFromUMLQualName(self.container.asType(uml::Package).getQualifiedName)
 		trace.traceLog("container name: "+ e.asType(ecore::EPackage).name)
 		enum.ePackage := e.asType(ecore::EPackage)
-		// removing form the resource...
-		enum.containingResource.instances.remove(enum)
+		
+		// removing the element from the bag of created objects...
+		trace.getCreatedEcoreObjectBag().remove(enum)
 	end
-trace.traceLog("Quitting Enumeration : Pass2")
+	trace.traceLog("Quitting Enumeration : Pass2")
 
-end
+ end
 }
 
 @aspect "true"
 class EnumerationLiteral inherits ToEcore {
 
-reference literal : EEnumLiteral
+	reference literal : EEnumLiteral
 
-/** This method deals with creation of new Ecore objects*/
-method toEcorePass1(trace: UMLProfile2EcoreTrace) : EObject is do
-trace.traceLog("Entering EnumerationLiteral : Pass1")
+	/** This method deals with creation of new Ecore objects*/
+	method toEcorePass1(trace: UMLProfile2EcoreTrace) : EObject is do
+	trace.traceLog("Entering EnumerationLiteral : Pass1")
 
-literal := EEnumLiteral.new
+	literal := EEnumLiteral.new
 
-// registering elements in the trace to keep track of them...
+	// registering elements in the trace to keep track of them...
 	var qName: String init self.getQualifiedName
 	trace.setQualNameObj(qName,literal)
 
-literal.name := self.name
-result := literal
-trace.traceLog("Quitting EnumerationLiteral : Pass1")
-end
+	literal.name := self.name
+	result := literal
+	trace.traceLog("Quitting EnumerationLiteral : Pass1")
+ end
 
 /** This method deals with relationship establishment*/
-method toEcorePass2(trace: UMLProfile2EcoreTrace) : Void is do
-trace.traceLog("Entering EnumerationLiteral : Pass2")
-var e:ecore::EObject init trace.getEcoreFromUMLQualName(self.~enumeration.asType(uml::Enumeration).getQualifiedName)
-trace.traceLog("Owning Enumeration :" + e.asType(ecore::EEnum).name)
-// setting the integer value for the enumeration literal
-literal.~value := e.asType(ecore::EEnum).eLiterals.size
-literal.eEnum := e.asType(ecore::EEnum)
-literal.containingResource.instances.remove(literal)	
-trace.traceLog("Quitting EnumerationLiteral : Pass2")
+	method toEcorePass2(trace: UMLProfile2EcoreTrace) : Void is do
+	trace.traceLog("Entering EnumerationLiteral : Pass2")
+	var e:ecore::EObject init trace.getEcoreFromUMLQualName(self.~enumeration.asType(uml::Enumeration).getQualifiedName)
+	trace.traceLog("Owning Enumeration :" + e.asType(ecore::EEnum).name)
+	
+	// setting the integer value for the enumeration literal
+	literal.~value := e.asType(ecore::EEnum).eLiterals.size
+	literal.eEnum := e.asType(ecore::EEnum)
+
+	// removing the element from the bag of created objects...
+	trace.getCreatedEcoreObjectBag().remove(literal)	
+	trace.traceLog("Quitting EnumerationLiteral : Pass2")
 end
 }
 
 @aspect "true"
 class Property inherits ToEcore 
 {
-reference att : EAttribute
-reference ref : EReference
-reference obj: EObject
-//reference enum : EEnum
- 
+	reference att : EAttribute
+	reference ref : EReference
+	reference obj: EObject
 
 
-//reference ref : EReference
-/** This method deals with creation of new Ecore objects*/
-method toEcorePass1(trace: UMLProfile2EcoreTrace) : EObject is do
+	/** This method deals with creation of new Ecore objects*/
+	method toEcorePass1(trace: UMLProfile2EcoreTrace) : EObject is do
 
-trace.traceLog("Entering Property : Pass1")
-if self.type.isVoid 
-	then
-		trace.traceLog("UML property type is void...")
-		obj := EObject.new
-		result := obj
-	else
- 		if  self.type.isInstanceOf(uml::PrimitiveType) or self.type.isInstanceOf(uml::Enumeration)
+	trace.traceLog("Entering Property : Pass1")
+	if self.type.isVoid 
 		then
-			trace.traceLog("UML primitive property or enumeration... " + self.type.name)
-			att := EAttribute.new
-			att.name := self.name
-			// registering the primitive type even if it has not been imported (more robust...)
-			//if self.type.isInstanceOf(uml::PrimitiveType)  then
-				//trace.registerEcoreDataType(self.type.name)
-			//end
-			// managing multiplicities
-			if self.lowerValue != void then
-				if self.lowerValue.isInstanceOf(uml::LiteralInteger)  then
-					trace.traceLog("lower bound : " + self.lowerValue.asType(uml::LiteralInteger).~value.toString)
-					att.lowerBound := self.lowerValue.asType(uml::LiteralInteger).~value
-				else
-					trace.traceLog("Cannot retrveive lower bound correctly assumes '0' instead... ")
-					att.lowerBound := 0
-				end
-			end
-			if self.upperValue != void then
-				if self.upperValue.isInstanceOf(uml::LiteralUnlimitedNatural) then
-					trace.traceLog("upper bound :" + self.upperValue.asType(uml::LiteralUnlimitedNatural).~value.toString) 
-					att.upperBound := self.upperValue.asType(uml::LiteralUnlimitedNatural).~value
-				else
-					trace.traceLog("Cannot retrveive upper bound correctly assumes '*' instead... ")
-					att.upperBound := -1
-				end 
-			end
-			trace.traceLog("type qualified name "+self.type.getQualifiedName)
-			result := att
+			trace.traceLog("UML property type is void...")
+			obj := EObject.new
+			result := obj
 		else
-			if self.type.isInstanceOf(uml::Class) 
+ 			if  self.type.isInstanceOf(uml::PrimitiveType) or self.type.isInstanceOf(uml::Enumeration)
 			then
-				trace.traceLog("class reference... " + self.type.name)
-				// "Hack" for managing types that are not directly imported...
-				trace.registerBaseType(self.type.name)
-				
-				ref:= EReference.new
-				ref.name := self.name
+				trace.traceLog("UML primitive property or enumeration... " + self.type.name)
+				att := EAttribute.new
+				att.name := self.name
+			
+				// managing multiplicities
 				if self.lowerValue != void then
 					if self.lowerValue.isInstanceOf(uml::LiteralInteger)  then
 						trace.traceLog("lower bound : " + self.lowerValue.asType(uml::LiteralInteger).~value.toString)
-						ref.lowerBound := self.lowerValue.asType(uml::LiteralInteger).~value
+						att.lowerBound := self.lowerValue.asType(uml::LiteralInteger).~value
 					else
 						trace.traceLog("Cannot retrveive lower bound correctly assumes '0' instead... ")
-						ref.lowerBound := 0
+						att.lowerBound := 0
 					end
 				end
 				if self.upperValue != void then
 					if self.upperValue.isInstanceOf(uml::LiteralUnlimitedNatural) then
 						trace.traceLog("upper bound :" + self.upperValue.asType(uml::LiteralUnlimitedNatural).~value.toString) 
-						ref.upperBound := self.upperValue.asType(uml::LiteralUnlimitedNatural).~value
+						att.upperBound := self.upperValue.asType(uml::LiteralUnlimitedNatural).~value
 					else
 						trace.traceLog("Cannot retrveive upper bound correctly assumes '*' instead... ")
-						ref.upperBound := -1
-					end  	
+						att.upperBound := -1
+					end 
 				end
-				result := ref
+				trace.traceLog("type qualified name "+self.type.getQualifiedName)
+				result := att
+			else
+				if self.type.isInstanceOf(uml::Class)  then
+					trace.traceLog("class reference... " + self.type.name)
+				
+					// "Hack" for managing types that are not directly imported...
+					trace.registerBaseType(self.type.name)
+				
+					ref:= EReference.new
+					ref.name := self.name
+					if self.lowerValue != void then
+						if self.lowerValue.isInstanceOf(uml::LiteralInteger)  then
+							trace.traceLog("lower bound : " + self.lowerValue.asType(uml::LiteralInteger).~value.toString)
+							ref.lowerBound := self.lowerValue.asType(uml::LiteralInteger).~value
+						else
+							trace.traceLog("Cannot retrveive lower bound correctly assumes '0' instead... ")
+							ref.lowerBound := 0
+						end
+					end
+					if self.upperValue != void then
+						if self.upperValue.isInstanceOf(uml::LiteralUnlimitedNatural) then
+							trace.traceLog("upper bound :" + self.upperValue.asType(uml::LiteralUnlimitedNatural).~value.toString) 
+							ref.upperBound := self.upperValue.asType(uml::LiteralUnlimitedNatural).~value
+						else
+							trace.traceLog("Cannot retrveive upper bound correctly assumes '*' instead... ")
+							ref.upperBound := -1
+						end  	
+					end
+					result := ref
+				end
+			end
+	end
+	trace.traceLog("Quitting Property : Pass1")
+end
+
+
+
+	/** This method deals with relationship establishment*/
+	method toEcorePass2(trace: UMLProfile2EcoreTrace) : Void  is do
+
+	trace.traceLog("Entering Property : Pass2")
+	if att != void then
+		trace.traceLog("Dealing with EAttribute :" + self.name)
+		var e:ecore::EObject init trace.getEcoreFromUMLQualName(self.~class.asType(uml::Class).getQualifiedName)
+		trace.traceLog("Attribute qualified name " + self.~class.asType(uml::Class).getQualifiedName)
+		att.eContainingClass := e.asType(ecore::EClass)
+	
+		// if the attribute is a primitive type we try to get it from our registered 
+		//ecore types initialized by element import...
+		if self.type.isInstanceOf(uml::PrimitiveType) then
+	 		var te: ecore::EDataType init trace.getEcoreDataType(self.type.name)
+			if te != void then
+				att.eType := trace.getEcoreDataType(self.type.name)
+			else
+				trace.traceLog("ERROR primitive type not retrieved !!!" + self.type.name)
+			end	
+		else
+			var t:ecore::EObject init trace.getEcoreFromUMLQualName(self.type.getQualifiedName)
+			if t != void and t.isInstanceOf(ecore::EEnum) then
+				att.eType := t.asType(ecore::EEnum)
+			else
+				trace.traceLog("ERROR enumerated type not retrieved !!!" + self.type.name)
 			end
 		end
-end
-trace.traceLog("Quitting Property : Pass1")
-end
-
-
-
-/** This method deals with relationship establishment*/
-method toEcorePass2(trace: UMLProfile2EcoreTrace) : Void 
-
-/*pre malformedOwner is do
-self.~class != void 
-end*/
-is do
-trace.traceLog("Entering Property : Pass2")
-if att != void then
-	trace.traceLog("Dealing with EAttribute :" + self.name)
-	var e:ecore::EObject init trace.getEcoreFromUMLQualName(self.~class.asType(uml::Class).getQualifiedName)
-	att.eContainingClass := e.asType(ecore::EClass)
-	// if the attribute is a primitive type we try to get it from our registered 
-	//ecore types initialized by element import...
-	if self.type.isInstanceOf(uml::PrimitiveType) then
-	 var te: ecore::EDataType init trace.getEcoreDataType(self.type.name)
-		if te != void then
-			att.eType := trace.getEcoreDataType(self.type.name)
-		else
-			trace.traceLog("ERROR primitive type not retrieved !!!" + self.type.name)
-		end	
+			trace.getCreatedEcoreObjectBag().remove(att)
+			if trace.getCreatedEcoreObjectBag().contains(att) then
+				trace.traceLog("Element Att NOT removed !" + att.name)
+			end
+		// removing the element from the bag of created objects...
+		trace.getCreatedEcoreObjectBag().remove(att)
 	else
-		var t:ecore::EObject init trace.getEcoreFromUMLQualName(self.type.getQualifiedName)
-		if t != void and t.isInstanceOf(ecore::EEnum) then
-			att.eType := t.asType(ecore::EEnum)
-		else
-				trace.traceLog("ERROR enumerated type not retrieved !!!" + self.type.name)
-		end
-	end
-	att.containingResource.instances.remove(att)
-else
-	if ref != void then
-		trace.traceLog("Dealing with EReference :" + self.name)
-		if self.~class != void then
-		var e:ecore::EObject init trace.getEcoreFromUMLQualName(self.~class.asType(uml::Class).getQualifiedName)
-		ref.eContainingClass := e.asType(ecore::EClass)
-		end
+		if ref != void then
+			trace.traceLog("Dealing with EReference :" + self.name)
+			if self.~class != void then
+				var e:ecore::EObject init trace.getEcoreFromUMLQualName(self.~class.asType(uml::Class).getQualifiedName)
+				ref.eContainingClass := e.asType(ecore::EClass)
+			end
+		
 		// reference having base_ in their name refers to the metaclass 
 		//their containing stereotype extends. we need to retrieve it from the trace hashtables 
 		if ref.name.indexOf("base_") != -1 then
+			
 			// TODO :manage the issue with inherited references...
 			var c:EClass init trace.getBaseType(self.type.name)
 			var t:ecore::EObject init trace.getEcoreFromUMLQualName(self.type.getQualifiedName)
@@ -428,9 +436,11 @@ else
 					trace.traceLog("ERROR refered base type not retrieved !!!" + self.type.name)
 				end	
 			end
+			
 			// whatever the original multiplicity was, in ecore bass_Class have lowerBound = upperBound =1
 			ref.lowerBound := 1
 			ref.upperBound := 1
+			
 			// so that ecore validation is happy... (experimental)
 			ref.unique := true  
 			ref.ordered := false
@@ -442,45 +452,45 @@ else
 				// managing external types
 				var et:ecore::EObject init trace.getBaseType(self.type.name)
 				if et != void then
-				ref.eType := et.asType(ecore::EClass)
+					ref.eType := et.asType(ecore::EClass)
 				else
-				trace.traceLog("ERROR refered type not retrieved !!!" + self.type.name)
+					trace.traceLog("ERROR refered type not retrieved !!!" + self.type.name)
 				end
 			end
 		end
-		ref.containingResource.instances.remove(ref)
+		// removing the element from the bag of created objects...
+		trace.getCreatedEcoreObjectBag().remove(ref)
 	else
 		trace.traceLog("ERROR Dealing with an unknown property !!! :" + self.name)
 	end
-end	
-
-
-trace.traceLog("Quitting Property : Pass2")
+	end	
+	trace.traceLog("Quitting Property : Pass2")
 end
-
 }
 
 @aspect "true"
 class DataType inherits ToEcore {
 
-reference type : EClassifier
-/** This method deals with creation of new Ecore objects*/
-method toEcorePass1(trace: UMLProfile2EcoreTrace): EObject is do
-trace.traceLog("Entering DataType : Pass1")
-type := EClass.new
-// registering elements in the trace to keep track of them...
-	var qName: String init self.getQualifiedName
-	trace.setQualNameObj(qName,type)
+	reference type : EClassifier
 
-
-result := type
-trace.traceLog("Quitting DataType : Pass1")
+	/** This method deals with creation of new Ecore objects*/
+	method toEcorePass1(trace: UMLProfile2EcoreTrace): EObject is do
+		
+		trace.traceLog("Entering DataType : Pass1")
+		type := EClass.new
+		
+		// registering elements in the trace to keep track of them...
+		var qName: String init self.getQualifiedName
+		trace.setQualNameObj(qName,type)
+	
+	result := type
+	trace.traceLog("Quitting DataType : Pass1")
 end
 
 /** This method deals with relationship establishment*/
 method toEcorePass2(trace: UMLProfile2EcoreTrace) : Void is do
-trace.traceLog("Entering DataType : Pass2")
-trace.traceLog("Quitting DataType : Pass2")
+	trace.traceLog("Entering DataType : Pass2")
+	trace.traceLog("Quitting DataType : Pass2")
 end
 }
 
@@ -488,28 +498,35 @@ end
 class Extension inherits ToEcore {
 
 reference obj: EObject
+
 /** This method deals with creation of new Ecore objects*/
 method toEcorePass1(trace: UMLProfile2EcoreTrace) : EObject is do
-trace.traceLog("Entering Extension : Pass1")
-obj := EObject.new
-// registering elements in the trace to keep track of them...
-	var qName: String init self.getQualifiedName  
-	trace.setQualNameObj(qName,obj)
-	// since this is an extension we need to register the base classifier...
-	self.ownedEnd.each{p|trace.traceLog(p.asType(uml::Property).type.name)}
-	var metaclass : uml::Property init self.memberEnd.select{p| not p.isInstanceOf(uml::ExtensionEnd)}.one
-	trace.traceLog("metaclass name: " + metaclass.type.name)
-	trace.registerBaseType(metaclass.type.name) 
-result := obj
-trace.traceLog("Quitting Extension : Pass1") 
+	
+		trace.traceLog("Entering Extension : Pass1")
+		obj := EObject.new
+	
+		// registering elements in the trace to keep track of them...
+		var qName: String init self.getQualifiedName  
+		trace.setQualNameObj(qName,obj)
+		
+		// since this is an extension we need to register the base classifier...
+		self.ownedEnd.each{p|trace.traceLog(p.asType(uml::Property).type.name)}
+		var metaclass : uml::Property init self.memberEnd.select{p| not p.isInstanceOf(uml::ExtensionEnd)}.one
+		trace.traceLog("metaclass name: " + metaclass.type.name)
+		trace.registerBaseType(metaclass.type.name) 
+
+		result := obj
+		trace.traceLog("Quitting Extension : Pass1") 
 end 
 
 /** This method deals with relationship establishment*/
 method toEcorePass2(trace: UMLProfile2EcoreTrace) : Void is do
-trace.traceLog("Entering Extension : Pass2")
-// removing the element from the resource
-obj.containingResource.instances.remove(obj)
-trace.traceLog("Quitting Extension : Pass2")
+
+	trace.traceLog("Entering Extension : Pass2")
+
+	// removing the element from the bag of created objects...
+	trace.getCreatedEcoreObjectBag().remove(obj)
+	trace.traceLog("Quitting Extension : Pass2")
 end
 
 }
@@ -517,20 +534,22 @@ end
 @aspect "true"
 class ElementImport inherits ToEcore {
 
-reference obj: EObject
-/** This method deals with creation of new Ecore objects*/
-method toEcorePass1(trace: UMLProfile2EcoreTrace) : EObject is do
-trace.traceLog("Entering ElementImport : Pass1")
-trace.traceLog("ElementImport.... " + self.importedElement.getQualifiedName)
+	reference obj: EObject
 
-if self.importedElement.getQualifiedName.indexOf("UMLPrimitiveTypes") != -1
-	then
-		trace.registerEcoreDataType(self.importedElement.name)
-		obj := ecore::EObject.new
-		result := obj
-	else
-		// if the type is coming from uml we handle it the same way as for an extension
-		if self.importedElement.getQualifiedName.indexOf("uml::") != -1 then
+	/** This method deals with creation of new Ecore objects*/
+	method toEcorePass1(trace: UMLProfile2EcoreTrace) : EObject is do
+
+	trace.traceLog("Entering ElementImport : Pass1")
+	trace.traceLog("ElementImport.... " + self.importedElement.getQualifiedName)
+
+	if self.importedElement.getQualifiedName.indexOf("UMLPrimitiveTypes") != -1
+		then
+			trace.registerEcoreDataType(self.importedElement.name)
+			obj := ecore::EObject.new
+			result := obj
+		else
+			// if the type is coming from uml we handle it the same way as for an extension
+			if self.importedElement.getQualifiedName.indexOf("uml::") != -1 then
 			trace.registerBaseType(self.importedElement.name)
 			obj := ecore::EObject.new
 			result := obj 
@@ -545,75 +564,71 @@ if self.importedElement.getQualifiedName.indexOf("UMLPrimitiveTypes") != -1
 			obj := ecore::EObject.new
 			result := obj  
 		end
-end 
-trace.traceLog("Quitting ElementImport : Pass1")
+	end 
+		trace.traceLog("Quitting ElementImport : Pass1")
+	end 
 
-
-end 
-
-/** This method deals with relationship establishment*/
-method toEcorePass2(trace: UMLProfile2EcoreTrace) : Void is do
-trace.traceLog("Entering ElementImport : Pass2")
-// removing the element from the resource
-if obj != void then
-	obj.containingResource.instances.remove(obj)
-end
-trace.traceLog("Quitting ElementImport : Pass2")
+	/** This method deals with relationship establishment*/
+	method toEcorePass2(trace: UMLProfile2EcoreTrace) : Void is do
+	trace.traceLog("Entering ElementImport : Pass2")
+	
+	// removing the element from the resource
+	if obj != void then
+		// removing the element from the bag of created objects...
+		trace.getCreatedEcoreObjectBag().remove(obj)
+	end
+		trace.traceLog("Quitting ElementImport : Pass2")
 end
 
 }
 
 aspect class PackageImport inherits ToEcore {
-// TODO
-reference obj: EObject
-/** This method deals with creation of new Ecore objects*/
-method toEcorePass1(trace: UMLProfile2EcoreTrace) : EObject is do
-trace.traceLog("Entering PackageImport : Pass1")
-trace.traceLog("imported package name: " + self.importedPackage.name)
-obj := EObject.new
-if self.importedPackage.name.indexOf("UMLPrimitiveTypes") != -1 then
-	//trace.traceLog("Imported Package size: " + self.importedPackage.packagedElement.select{c|c.isInstanceOf(uml::Classifier)}.size.toString())
-	 self.importedPackage.packagedElement.each{c|trace.registerEcoreDataType(c.asType(uml::PrimitiveType).name)}
-end
-// registering elements in the trace to keep track of them...
-	//var qName: String init self.getQualifiedName
-	//trace.setQualNameObj(qName,obj)
 
-result := obj
-trace.traceLog("Quitting PackageImport : Pass1")
+
+	reference obj: EObject
+	/** This method deals with creation of new Ecore objects*/
+	method toEcorePass1(trace: UMLProfile2EcoreTrace) : EObject is do
+	trace.traceLog("Entering PackageImport : Pass1")
+	trace.traceLog("imported package name: " + self.importedPackage.name)
+	obj := EObject.new
+	if self.importedPackage.name.indexOf("UMLPrimitiveTypes") != -1 then
+		self.importedPackage.packagedElement.each{c|trace.registerEcoreDataType(c.asType(uml::PrimitiveType).name)}
+	end
+
+	result := obj
+	trace.traceLog("Quitting PackageImport : Pass1")
 end 
 
-/** This method deals with relationship establishment*/
-method toEcorePass2(trace: UMLProfile2EcoreTrace) : Void is do
-trace.traceLog("Entering PackageImport : Pass2")
-// removing the element from the resource
-obj.containingResource.instances.remove(obj)
-trace.traceLog("Quitting PackageImport : Pass2")
+	/** This method deals with relationship establishment*/
+	method toEcorePass2(trace: UMLProfile2EcoreTrace) : Void is do
+	trace.traceLog("Entering PackageImport : Pass2")
+	// removing the element from the bag of created objects...
+	trace.getCreatedEcoreObjectBag().remove(obj)
+	trace.traceLog("Quitting PackageImport : Pass2")
 end
 }
 
 @aspect "true"
 class EAnnotation inherits ToEcore {
 
-reference obj: EObject
-/** This method deals with creation of new Ecore objects*/
-method toEcorePass1(trace: UMLProfile2EcoreTrace) : EObject is do
-trace.traceLog("Entering EAnnotation : Pass1")
-obj := EObject.new
-// registering elements in the trace to keep track of them...
-	//var qName: String init self.getQualifiedName
-	//trace.setQualNameObj(qName,obj)
+	reference obj: EObject
 
-result := obj
-trace.traceLog("Quitting EAnnotation : Pass1")
+	/** This method deals with creation of new Ecore objects*/
+	method toEcorePass1(trace: UMLProfile2EcoreTrace) : EObject is do
+	trace.traceLog("Entering EAnnotation : Pass1")
+	obj := EObject.new
+	
+	result := obj
+	trace.traceLog("Quitting EAnnotation : Pass1")
 end 
 
-/** This method deals with relationship establishment*/
-method toEcorePass2(trace: UMLProfile2EcoreTrace) : Void is do
-trace.traceLog("Entering EAnnotation : Pass2")
-// removing the element from the resource
-obj.containingResource.instances.remove(obj)
-trace.traceLog("Quitting EAnnotation : Pass2")
+	/** This method deals with relationship establishment*/
+	method toEcorePass2(trace: UMLProfile2EcoreTrace) : Void is do
+	trace.traceLog("Entering EAnnotation : Pass2")
+	
+	// removing the element from the bag of created objects...
+	trace.getCreatedEcoreObjectBag().remove(obj)
+	trace.traceLog("Quitting EAnnotation : Pass2")
 end
 
 }
@@ -621,24 +636,25 @@ end
 @aspect "true"
 class LiteralString inherits ToEcore {
 
-reference obj: EObject
-/** This method deals with creation of new Ecore objects*/
-method toEcorePass1(trace: UMLProfile2EcoreTrace) : EObject is do
-trace.traceLog("Entering LiteralString : Pass1")
-obj := EObject.new
-// registering elements in the trace to keep track of them...
+	reference obj: EObject
+
+	/** This method deals with creation of new Ecore objects*/
+	method toEcorePass1(trace: UMLProfile2EcoreTrace) : EObject is do
+	trace.traceLog("Entering LiteralString : Pass1")
+	obj := EObject.new
+	// registering elements in the trace to keep track of them...
 	var qName: String init self.getQualifiedName
 	trace.setQualNameObj(qName,obj)
-result := obj
-trace.traceLog("Quitting LiteralString : Pass1")
+	result := obj
+	trace.traceLog("Quitting LiteralString : Pass1")
 end 
 
 /** This method deals with relationship establishment*/
-method toEcorePass2(trace: UMLProfile2EcoreTrace) : Void is do
-trace.traceLog("Entering LiteralString : Pass2")
-// removing the element from the resource
-obj.containingResource.instances.remove(obj)
-trace.traceLog("Quitting LiteralString : Pass2")
+	method toEcorePass2(trace: UMLProfile2EcoreTrace) : Void is do
+	trace.traceLog("Entering LiteralString : Pass2")
+	// removing the element from the bag of created objects...
+	trace.getCreatedEcoreObjectBag().remove(obj)
+	trace.traceLog("Quitting LiteralString : Pass2")
 end
 
 }
@@ -646,25 +662,25 @@ end
 @aspect "true"
 class ExtensionEnd {
 
-reference eend: EObject
-/** This method deals with creation of new Ecore objects*/
-method toEcorePass1(trace: UMLProfile2EcoreTrace) : EObject is do
-trace.traceLog("Entering ExtensionEnd : Pass1")
-eend := EObject.new
-// registering elements in the trace to keep track of them...
+	reference eend: EObject
+	/** This method deals with creation of new Ecore objects*/
+	method toEcorePass1(trace: UMLProfile2EcoreTrace) : EObject is do
+	trace.traceLog("Entering ExtensionEnd : Pass1")
+	eend := EObject.new
+	// registering elements in the trace to keep track of them...
 	var qName: String init self.getQualifiedName
 	trace.setQualNameObj(qName,eend)
 
-result := eend
-trace.traceLog("Quitting ExtensionEnd : Pass1")
+	result := eend
+	trace.traceLog("Quitting ExtensionEnd : Pass1")
 end 
 
-/** This method deals with relationship establishment*/
-method toEcorePass2(trace: UMLProfile2EcoreTrace) : Void is do
-trace.traceLog("Entering ExtensionEnd : Pass2")
-// removing the element from the resource
-eend.containingResource.instances.remove(eend)
-trace.traceLog("Quitting ExtensionEnd : Pass2")
+	/** This method deals with relationship establishment*/
+	method toEcorePass2(trace: UMLProfile2EcoreTrace) : Void is do
+	trace.traceLog("Entering ExtensionEnd : Pass2")
+	// removing the element from the bag of created objects...
+	trace.getCreatedEcoreObjectBag().remove(eend)
+	trace.traceLog("Quitting ExtensionEnd : Pass2")
 end
 
 }
@@ -672,50 +688,54 @@ end
 @aspect "true"
 class Generalization inherits ToEcore {
 
-reference gen : EObject
-method toEcorePass1(trace: UMLProfile2EcoreTrace) : EObject is do
-trace.traceLog("Entering Generalization : Pass1")
-gen := EObject.new
-trace.traceLog("Quitting Generalization : Pass1")
-result := gen
+	reference gen : EObject
+	
+	/** This method deals with creation of new Ecore objects*/
+	method toEcorePass1(trace: UMLProfile2EcoreTrace) : EObject is do
+	trace.traceLog("Entering Generalization : Pass1")
+	gen := EObject.new
+	trace.traceLog("Quitting Generalization : Pass1")
+	result := gen
 end
 
-method toEcorePass2(trace: UMLProfile2EcoreTrace) : Void is do
-trace.traceLog("Entering Generalization : Pass2")
-var spe :  ecore::EClass init trace.getEcoreFromUMLQualName(self.specific.getQualifiedName).asType(ecore::EClass)
-var general :  ecore::EClass init trace.getEcoreFromUMLQualName(self.general.getQualifiedName).asType(ecore::EClass)
-if spe != void and general != void then
-	spe.eSuperTypes.add(general)
-	var collatt : Sequence<ecore::EStructuralFeature> init  spe.eStructuralFeatures.select{att| general.eStructuralFeatures.exists{gatt|gatt.name == att.name}}
-	collatt.each{att|spe.eStructuralFeatures.remove(att)}
-else
-	trace.traceLog("ERROR Dangling Generalization !!!")
-end
-// removing the element from the resource
-gen.containingResource.instances.remove(gen)
-trace.traceLog("Quitting Generalization : Pass2")
+	/** This method deals with relationship establishment*/
+	method toEcorePass2(trace: UMLProfile2EcoreTrace) : Void is do
+	trace.traceLog("Entering Generalization : Pass2")
+	var spe :  ecore::EClass init trace.getEcoreFromUMLQualName(self.specific.getQualifiedName).asType(ecore::EClass)
+	var general :  ecore::EClass init trace.getEcoreFromUMLQualName(self.general.getQualifiedName).asType(ecore::EClass)
+	if spe != void and general != void then
+		spe.eSuperTypes.add(general)
+		var collatt : Sequence<ecore::EStructuralFeature> init  spe.eStructuralFeatures.select{att| general.eStructuralFeatures.exists{gatt|gatt.name == att.name}}
+		collatt.each{att|spe.eStructuralFeatures.remove(att)}
+	else
+		trace.traceLog("ERROR Dangling Generalization !!!")
+	end
+	// removing the element from the bag of created objects...
+	trace.getCreatedEcoreObjectBag().remove(gen)
+	trace.traceLog("Quitting Generalization : Pass2")
 end
 }
 
 
 aspect class ProfileApplication inherits ToEcore {
-reference pa : EObject
-reference stereo : Bag<uml::PackageableElement>
 
-method toEcorePass1(trace: UMLProfile2EcoreTrace) : EObject is do
-trace.traceLog("Entering ProfileApplication : Pass1")
-pa := EObject.new
-stereo := self.appliedProfile.packagedElement.select{c|c.isInstanceOf(uml::Stereotype)} 
-stereo.each{e | trace.traceLog("Applicable external stereotype " + e.asType(uml::Stereotype).name)}
-trace.traceLog("Quitting ProfileApplication : Pass1")
-result := pa
+	reference pa : EObject
+	reference stereo : Bag<uml::PackageableElement>
+	
+	/** This method deals with creation of new Ecore objects*/
+	method toEcorePass1(trace: UMLProfile2EcoreTrace) : EObject is do
+	trace.traceLog("Entering ProfileApplication : Pass1")
+	pa := EObject.new
+	stereo := self.appliedProfile.packagedElement.select{c|c.isInstanceOf(uml::Stereotype)} 
+	stereo.each{e | trace.traceLog("Applicable external stereotype " + e.asType(uml::Stereotype).name)}
+	trace.traceLog("Quitting ProfileApplication : Pass1")
+	result := pa
 end
-
-method toEcorePass2(trace: UMLProfile2EcoreTrace): Void is do
-trace.traceLog("Entering ProfileApplication : Pass2")
-pa.containingResource.instances.remove(pa)
-trace.traceLog("Entering ProfileApplication : Pass2")
+	/** This method deals with relationship establishment*/
+	method toEcorePass2(trace: UMLProfile2EcoreTrace): Void is do
+	trace.traceLog("Entering ProfileApplication : Pass2")
+	// removing the element from the bag of created objects...
+	trace.getCreatedEcoreObjectBag().remove(pa)
+	trace.traceLog("Entering ProfileApplication : Pass2")
 end 
-
-
 } 

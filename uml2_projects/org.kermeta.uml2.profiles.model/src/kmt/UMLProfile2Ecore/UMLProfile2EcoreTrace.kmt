@@ -1,4 +1,4 @@
-/* $Id: UMLProfile2EcoreTrace.kmt,v 1.6 2008-08-28 11:53:51 dvojtise Exp $
+/* $Id: UMLProfile2EcoreTrace.kmt,v 1.7 2008-09-18 21:42:41 gperroui Exp $
  * Creation date: December 13, 2007
  * License: EPL
  * Copyright:
@@ -18,6 +18,7 @@ require "../utils/KLog.kmt"
 require "platform:/resource/org.kermeta.uml2.profiles.model/src/kmt/profiledResourceHelper/ProfiledResourceHelper.kmt"
 using kermeta::utils
 using kermeta::persistence
+using kermeta::standard
 using uml
 using ecore
 
@@ -37,7 +38,8 @@ attribute ecoreDataTypesTable : Hashtable<String,ecore::EDataType>
 attribute qualNamesTable : Hashtable<String,ecore::EObject>
 // resources useful for managing external types
 attribute uml_resource: EMFResource
-attribute ecore_resource: EMFResource 
+attribute ecore_resource: EMFResource
+reference createdObjectBag : Bag<Object> 
 
 operation initTables(): Void is do
 
@@ -142,9 +144,9 @@ var e: EDataType //init EDataType.new
 		log.print("registered an UnlimitedNatural --> EInt")
 	//else
 		//e := ecore_resource.instances.one.asType(EPackage).eClassifiers.select{c|c.asType(EDataType).name == name}.one.asType(EDataType)		
-end
-end 
-end 
+			end
+		end 
+	end 
 end
 
  
@@ -158,10 +160,17 @@ end
 
 operation getEcoreDataType(name: String): EDataType is do
 result := ecoreDataTypesTable.getValue(name).asType(EDataType)
-if result.isVoid then
-	log.print("Sorry, no Ecore Primitive type for: " + name) 
+	if result.isVoid then
+		log.print("Sorry, no Ecore Primitive type for: " + name) 
 	end
 end
 
 
+operation setCreatedEcoreObjectBag (b : Bag<Object>): Void is do
+	self.createdObjectBag := b
+end
+
+operation getCreatedEcoreObjectBag (): Bag<Object> is do
+ result := self.createdObjectBag
+end
 }

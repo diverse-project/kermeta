@@ -1,0 +1,1675 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="MARTE"
+    nsURI="http:///MARTE.ecore" nsPrefix="MARTE">
+  <eSubpackages name="MARTE_Foundations" nsURI="http:///MARTE/MARTE_Foundations.ecore"
+      nsPrefix="MARTE.MARTE_Foundations">
+    <eSubpackages name="NFPs" nsURI="http:///MARTE/MARTE_Foundations/NFPs.ecore" nsPrefix="MARTE.MARTE_Foundations.NFPs">
+      <eClassifiers xsi:type="ecore:EEnum" name="ConstraintKind">
+        <eLiterals name="required"/>
+        <eLiterals name="offered" value="1"/>
+        <eLiterals name="constraint" value="2"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="NFP">
+        <eStructuralFeatures xsi:type="ecore:EReference" name="base_Property" ordered="false"
+            unique="false" lowerBound="1" eType="ecore:EClass platform:/resource/org.kermeta.uml2.profiles.model/model/ecore/uml.ecore#//Property"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="Unit">
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="convFactor" ordered="false"
+            unique="false" eType="ecore:EDataType MARTE_Library.ecore#//MARTE_PrimitivesTypes/Real"/>
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="offsetFactor" ordered="false"
+            unique="false" eType="ecore:EDataType MARTE_Library.ecore#//MARTE_PrimitivesTypes/Real"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="baseUnit" ordered="false"
+            unique="false" eType="#//MARTE_Foundations/NFPs/Unit"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="base_EnumerationLiteral"
+            ordered="false" unique="false" lowerBound="1" eType="ecore:EClass platform:/resource/org.kermeta.uml2.profiles.model/model/ecore/uml.ecore#//EnumerationLiteral"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="NfpConstraint">
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="kind" ordered="false"
+            unique="false" eType="#//MARTE_Foundations/NFPs/ConstraintKind"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="base_Constraint" ordered="false"
+            unique="false" lowerBound="1" eType="ecore:EClass platform:/resource/org.kermeta.uml2.profiles.model/model/ecore/uml.ecore#//Constraint"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="NfpType" eSuperTypes="#//MARTE_Annexes/VSL/DataTypes/TupleType">
+        <eStructuralFeatures xsi:type="ecore:EReference" name="valueAttrib" ordered="false"
+            unique="false" eType="ecore:EClass platform:/resource/org.kermeta.uml2.profiles.model/model/ecore/uml.ecore#//Property">
+          <eAnnotations source="subsets" references="#//MARTE_Annexes/VSL/DataTypes/TupleType/tupleAttrib"/>
+        </eStructuralFeatures>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="unitAttrib" ordered="false"
+            unique="false" eType="ecore:EClass platform:/resource/org.kermeta.uml2.profiles.model/model/ecore/uml.ecore#//Property">
+          <eAnnotations source="subsets" references="#//MARTE_Annexes/VSL/DataTypes/TupleType/tupleAttrib"/>
+        </eStructuralFeatures>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="exprAttrib" ordered="false"
+            unique="false" eType="ecore:EClass platform:/resource/org.kermeta.uml2.profiles.model/model/ecore/uml.ecore#//Property">
+          <eAnnotations source="subsets" references="#//MARTE_Annexes/VSL/DataTypes/TupleType/tupleAttrib"/>
+        </eStructuralFeatures>
+      </eClassifiers>
+    </eSubpackages>
+    <eSubpackages name="Alloc" nsURI="http:///MARTE/MARTE_Foundations/Alloc.ecore"
+        nsPrefix="MARTE.MARTE_Foundations.Alloc">
+      <eClassifiers xsi:type="ecore:EClass" name="Allocated">
+        <eStructuralFeatures xsi:type="ecore:EReference" name="base_NamedElement"
+            ordered="false" unique="false" lowerBound="1" eType="ecore:EClass platform:/resource/org.kermeta.uml2.profiles.model/model/ecore/uml.ecore#//NamedElement"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="ApplicationAllocationEnd" eSuperTypes="#//MARTE_Foundations/Alloc/Allocated">
+        <eStructuralFeatures xsi:type="ecore:EReference" name="allocatedTo" ordered="false"
+            unique="false" upperBound="-1" eType="#//MARTE_Foundations/Alloc/ExecutionPlatformAllocationEnd"
+            volatile="true" derived="true"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="ExecutionPlatformAllocationEnd"
+          eSuperTypes="#//MARTE_Foundations/Alloc/Allocated">
+        <eStructuralFeatures xsi:type="ecore:EReference" name="allocatedFrom" ordered="false"
+            unique="false" upperBound="-1" eType="#//MARTE_Foundations/Alloc/ApplicationAllocationEnd"
+            volatile="true" derived="true"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EEnum" name="AllocationNature">
+        <eLiterals name="spatialDistribution"/>
+        <eLiterals name="timeScheduling" value="1"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EEnum" name="AllocationKind">
+        <eLiterals name="structural"/>
+        <eLiterals name="behavioral" value="1"/>
+        <eLiterals name="hybrid" value="2"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="AllocateActivityGroup">
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="isUnique" ordered="false"
+            unique="false" eType="ecore:EDataType MARTE_Library.ecore#//MARTE_PrimitivesTypes/Boolean"
+            defaultValueLiteral="false"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="base_ActivityPartition"
+            ordered="false" unique="false" lowerBound="1" eType="ecore:EClass platform:/resource/org.kermeta.uml2.profiles.model/model/ecore/uml.ecore#//ActivityPartition"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="ClockRefine">
+        <eStructuralFeatures xsi:type="ecore:EReference" name="base_Dependency" ordered="false"
+            unique="false" lowerBound="1" eType="ecore:EClass platform:/resource/org.kermeta.uml2.profiles.model/model/ecore/uml.ecore#//Dependency"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="constraint" ordered="false"
+            unique="false" upperBound="-1" eType="#//MARTE_Foundations/Time/ClockConstraint"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="Allocate">
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="kind" ordered="false"
+            unique="false" eType="#//MARTE_Foundations/Alloc/AllocationKind"/>
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="nature" ordered="false"
+            unique="false" eType="#//MARTE_Foundations/Alloc/AllocationNature"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="base_Abstraction" ordered="false"
+            unique="false" lowerBound="1" eType="ecore:EClass platform:/resource/org.kermeta.uml2.profiles.model/model/ecore/uml.ecore#//Abstraction"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="impliedConstraint"
+            ordered="false" unique="false" upperBound="-1" eType="#//MARTE_Foundations/NFPs/NfpConstraint"/>
+      </eClassifiers>
+    </eSubpackages>
+    <eSubpackages name="Time" nsURI="http:///MARTE/MARTE_Foundations/Time.ecore" nsPrefix="MARTE.MARTE_Foundations.Time">
+      <eClassifiers xsi:type="ecore:EClass" name="TimedDomain">
+        <eStructuralFeatures xsi:type="ecore:EReference" name="base_Package" ordered="false"
+            unique="false" lowerBound="1" eType="ecore:EClass platform:/resource/org.kermeta.uml2.profiles.model/model/ecore/uml.ecore#//Package"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="Clock">
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="standard" ordered="false"
+            unique="false" eType="ecore:EEnum MARTE_Library.ecore#//TimeLibrary/TimeStandardKind"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="base_InstanceSpecification"
+            ordered="false" unique="false" lowerBound="1" eType="ecore:EClass platform:/resource/org.kermeta.uml2.profiles.model/model/ecore/uml.ecore#//InstanceSpecification"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="type" ordered="false"
+            unique="false" lowerBound="1" eType="#//MARTE_Foundations/Time/ClockType"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="unit" ordered="false"
+            unique="false" eType="#//MARTE_Foundations/NFPs/Unit"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="ClockType">
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="nature" ordered="false"
+            unique="false" lowerBound="1" eType="ecore:EEnum MARTE_Library.ecore#//TimeTypesLibrary/TimeNatureKind"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="unitType" ordered="false"
+            unique="false" eType="ecore:EClass platform:/resource/org.kermeta.uml2.profiles.model/model/ecore/uml.ecore#//Enumeration"/>
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="isLogical" ordered="false"
+            unique="false" lowerBound="1" eType="ecore:EDataType MARTE_Library.ecore#//MARTE_PrimitivesTypes/Boolean"
+            defaultValueLiteral="false"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="resolAttr" ordered="false"
+            unique="false" eType="ecore:EClass platform:/resource/org.kermeta.uml2.profiles.model/model/ecore/uml.ecore#//Property"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="maxValAttr" ordered="false"
+            unique="false" eType="ecore:EClass platform:/resource/org.kermeta.uml2.profiles.model/model/ecore/uml.ecore#//Property"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="offsetAttr" ordered="false"
+            unique="false" eType="ecore:EClass platform:/resource/org.kermeta.uml2.profiles.model/model/ecore/uml.ecore#//Property"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="getTime" ordered="false"
+            unique="false" eType="ecore:EClass platform:/resource/org.kermeta.uml2.profiles.model/model/ecore/uml.ecore#//Operation"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="setTime" ordered="false"
+            unique="false" eType="ecore:EClass platform:/resource/org.kermeta.uml2.profiles.model/model/ecore/uml.ecore#//Operation"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="indexToValue" ordered="false"
+            unique="false" eType="ecore:EClass platform:/resource/org.kermeta.uml2.profiles.model/model/ecore/uml.ecore#//Operation"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="base_Class" ordered="false"
+            unique="false" lowerBound="1" eType="ecore:EClass platform:/resource/org.kermeta.uml2.profiles.model/model/ecore/uml.ecore#//Class"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="TimedElement">
+        <eStructuralFeatures xsi:type="ecore:EReference" name="on" ordered="false"
+            unique="false" lowerBound="1" upperBound="-1" eType="#//MARTE_Foundations/Time/Clock"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="TimedValueSpecification" eSuperTypes="#//MARTE_Foundations/Time/TimedElement">
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="interpretation" ordered="false"
+            unique="false" eType="ecore:EEnum MARTE_Library.ecore#//TimeTypesLibrary/TimeInterpretationKind"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="base_ValueSpecification"
+            ordered="false" unique="false" lowerBound="1" eType="ecore:EClass platform:/resource/org.kermeta.uml2.profiles.model/model/ecore/uml.ecore#//ValueSpecification"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="TimedConstraint" eSuperTypes="#//MARTE_Foundations/NFPs/NfpConstraint #//MARTE_Foundations/Time/TimedElement">
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="interpretation" ordered="false"
+            unique="false" eType="ecore:EEnum MARTE_Library.ecore#//TimeTypesLibrary/TimeInterpretationKind"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="TimedObservation" abstract="true"
+          eSuperTypes="#//MARTE_Foundations/Time/TimedElement"/>
+      <eClassifiers xsi:type="ecore:EClass" name="TimedInstantObservation" eSuperTypes="#//MARTE_Foundations/Time/TimedObservation">
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="obsKind" ordered="false"
+            unique="false" eType="ecore:EEnum MARTE_Library.ecore#//TimeLibrary/EventKind"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="base_TimeObservation"
+            ordered="false" unique="false" lowerBound="1" eType="ecore:EClass platform:/resource/org.kermeta.uml2.profiles.model/model/ecore/uml.ecore#//TimeObservation"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="TimedDurationObservation" eSuperTypes="#//MARTE_Foundations/Time/TimedObservation">
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="obsKind" ordered="false"
+            unique="false" upperBound="2" eType="ecore:EEnum MARTE_Library.ecore#//TimeLibrary/EventKind"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="base_DurationObservation"
+            ordered="false" unique="false" lowerBound="1" eType="ecore:EClass platform:/resource/org.kermeta.uml2.profiles.model/model/ecore/uml.ecore#//DurationObservation"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="TimedEvent" eSuperTypes="#//MARTE_Foundations/Time/TimedElement">
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="repetition" ordered="false"
+            unique="false" eType="ecore:EDataType MARTE_Library.ecore#//MARTE_PrimitivesTypes/Integer"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="base_TimeEvent" ordered="false"
+            unique="false" lowerBound="1" eType="ecore:EClass platform:/resource/org.kermeta.uml2.profiles.model/model/ecore/uml.ecore#//TimeEvent"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="every" ordered="false"
+            unique="false" eType="ecore:EClass platform:/resource/org.kermeta.uml2.profiles.model/model/ecore/uml.ecore#//ValueSpecification"
+            containment="true"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="TimedProcessing" eSuperTypes="#//MARTE_Foundations/Time/TimedElement">
+        <eStructuralFeatures xsi:type="ecore:EReference" name="base_Action" ordered="false"
+            unique="false" lowerBound="1" eType="ecore:EClass platform:/resource/org.kermeta.uml2.profiles.model/model/ecore/uml.ecore#//Action"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="base_Behavior" ordered="false"
+            unique="false" lowerBound="1" eType="ecore:EClass platform:/resource/org.kermeta.uml2.profiles.model/model/ecore/uml.ecore#//Behavior"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="base_Message" ordered="false"
+            unique="false" lowerBound="1" eType="ecore:EClass platform:/resource/org.kermeta.uml2.profiles.model/model/ecore/uml.ecore#//Message"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="duration" ordered="false"
+            unique="false" eType="ecore:EClass platform:/resource/org.kermeta.uml2.profiles.model/model/ecore/uml.ecore#//ValueSpecification"
+            containment="true"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="start" ordered="false"
+            unique="false" eType="ecore:EClass platform:/resource/org.kermeta.uml2.profiles.model/model/ecore/uml.ecore#//Event"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="finish" ordered="false"
+            unique="false" eType="ecore:EClass platform:/resource/org.kermeta.uml2.profiles.model/model/ecore/uml.ecore#//Event"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="ClockConstraint" eSuperTypes="#//MARTE_Foundations/NFPs/NfpConstraint #//MARTE_Foundations/Time/TimedElement"/>
+    </eSubpackages>
+    <eSubpackages name="GRM" nsURI="http:///MARTE/MARTE_Foundations/GRM.ecore" nsPrefix="MARTE.MARTE_Foundations.GRM">
+      <eClassifiers xsi:type="ecore:EClass" name="Resource">
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="resMult" ordered="false"
+            unique="false" eType="ecore:EDataType MARTE_Library.ecore#//MARTE_PrimitivesTypes/Integer"
+            defaultValueLiteral="1"/>
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="isProtected" ordered="false"
+            unique="false" eType="ecore:EDataType MARTE_Library.ecore#//MARTE_PrimitivesTypes/Boolean"/>
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="isActive" ordered="false"
+            unique="false" eType="ecore:EDataType MARTE_Library.ecore#//MARTE_PrimitivesTypes/Boolean"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="base_Property" ordered="false"
+            unique="false" lowerBound="1" eType="ecore:EClass platform:/resource/org.kermeta.uml2.profiles.model/model/ecore/uml.ecore#//Property"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="base_InstanceSpecification"
+            ordered="false" unique="false" lowerBound="1" eType="ecore:EClass platform:/resource/org.kermeta.uml2.profiles.model/model/ecore/uml.ecore#//InstanceSpecification"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="base_Classifier" ordered="false"
+            unique="false" lowerBound="1" eType="ecore:EClass platform:/resource/org.kermeta.uml2.profiles.model/model/ecore/uml.ecore#//Classifier"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="base_Lifeline" ordered="false"
+            unique="false" lowerBound="1" eType="ecore:EClass platform:/resource/org.kermeta.uml2.profiles.model/model/ecore/uml.ecore#//Lifeline"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="base_ConnectableElement"
+            ordered="false" unique="false" lowerBound="1" eType="ecore:EClass platform:/resource/org.kermeta.uml2.profiles.model/model/ecore/uml.ecore#//ConnectableElement"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="StorageResource" eSuperTypes="#//MARTE_Foundations/GRM/Resource">
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="elementSize" ordered="false"
+            unique="false" eType="ecore:EDataType MARTE_Library.ecore#//MARTE_PrimitivesTypes/Integer"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="CommunicationEndPoint" eSuperTypes="#//MARTE_Foundations/GRM/Resource">
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="packetSize" ordered="false"
+            unique="false" eType="ecore:EDataType MARTE_Library.ecore#//MARTE_PrimitivesTypes/Integer"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="SynchronizationResource" eSuperTypes="#//MARTE_Foundations/GRM/Resource"/>
+      <eClassifiers xsi:type="ecore:EClass" name="ConcurrencyResource" eSuperTypes="#//MARTE_Foundations/GRM/Resource"/>
+      <eClassifiers xsi:type="ecore:EClass" name="Scheduler" eSuperTypes="#//MARTE_Foundations/GRM/Resource">
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="isPreemptible" ordered="false"
+            unique="false" eType="ecore:EDataType MARTE_Library.ecore#//MARTE_PrimitivesTypes/Boolean"
+            defaultValueLiteral="true"/>
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="schedPolicy" ordered="false"
+            unique="false" eType="ecore:EEnum MARTE_Library.ecore#//GRM_BasicTypes/SchedPolicyKind"
+            defaultValueLiteral="FixedPriority"/>
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="otherSchedPolicy" ordered="false"
+            unique="false" eType="ecore:EDataType MARTE_Library.ecore#//MARTE_PrimitivesTypes/String"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="schedule" ordered="false"
+            unique="false" eType="ecore:EClass platform:/resource/org.kermeta.uml2.profiles.model/model/ecore/uml.ecore#//OpaqueExpression"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="processingUnit" ordered="false"
+            unique="false" upperBound="-1" eType="#//MARTE_Foundations/GRM/ProcessingResource"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="host" ordered="false"
+            unique="false" eType="#//MARTE_Foundations/GRM/ComputingResource"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="ProcessingResource" eSuperTypes="#//MARTE_Foundations/GRM/Resource">
+        <eStructuralFeatures xsi:type="ecore:EReference" name="speedFactor" ordered="false"
+            unique="false" eType="ecore:EClass MARTE_Library.ecore#//BasicNFP_Types/NFP_Real"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="scheduler" ordered="false"
+            unique="false" eType="#//MARTE_Foundations/GRM/Scheduler"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="ComputingResource" eSuperTypes="#//MARTE_Foundations/GRM/ProcessingResource"/>
+      <eClassifiers xsi:type="ecore:EClass" name="MutualExclusionResource" eSuperTypes="#//MARTE_Foundations/GRM/Resource">
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="protectKind" ordered="false"
+            unique="false" eType="ecore:EEnum MARTE_Library.ecore#//GRM_BasicTypes/ProtectProtocolKind"
+            defaultValueLiteral="PriorityInheritance"/>
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="ceiling" ordered="false"
+            unique="false" eType="ecore:EDataType MARTE_Library.ecore#//MARTE_PrimitivesTypes/Integer"/>
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="otherProtectProtocol"
+            ordered="false" unique="false" eType="ecore:EDataType MARTE_Library.ecore#//MARTE_PrimitivesTypes/String"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="SecondaryScheduler" eSuperTypes="#//MARTE_Foundations/GRM/Scheduler"/>
+      <eClassifiers xsi:type="ecore:EClass" name="SchedulableResource" eSuperTypes="#//MARTE_Foundations/GRM/Resource">
+        <eStructuralFeatures xsi:type="ecore:EReference" name="schedParams" ordered="false"
+            unique="false" upperBound="-1" eType="ecore:EClass MARTE_Library.ecore#//GRM_BasicTypes/SchedParameters"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="CommunicationMedia" eSuperTypes="#//MARTE_Foundations/GRM/ProcessingResource">
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="elementSize" ordered="false"
+            unique="false" eType="ecore:EDataType MARTE_Library.ecore#//MARTE_PrimitivesTypes/Integer"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="base_Connector" ordered="false"
+            unique="false" lowerBound="1" eType="ecore:EClass platform:/resource/org.kermeta.uml2.profiles.model/model/ecore/uml.ecore#//Connector"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="DeviceResource" eSuperTypes="#//MARTE_Foundations/GRM/ProcessingResource"/>
+      <eClassifiers xsi:type="ecore:EClass" name="TimingResource" eSuperTypes="#//MARTE_Foundations/Time/ClockType #//MARTE_Foundations/GRM/Resource"/>
+      <eClassifiers xsi:type="ecore:EClass" name="ClockResource" eSuperTypes="#//MARTE_Foundations/GRM/TimingResource"/>
+      <eClassifiers xsi:type="ecore:EClass" name="TimerResource" eSuperTypes="#//MARTE_Foundations/GRM/TimingResource">
+        <eStructuralFeatures xsi:type="ecore:EReference" name="duration" ordered="false"
+            unique="false" eType="ecore:EClass MARTE_Library.ecore#//BasicNFP_Types/NFP_Duration"/>
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="isPeriodic" ordered="false"
+            unique="false" eType="ecore:EDataType MARTE_Library.ecore#//MARTE_PrimitivesTypes/Boolean"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="GRService">
+        <eStructuralFeatures xsi:type="ecore:EReference" name="owner" ordered="false"
+            unique="false" eType="#//MARTE_Foundations/GRM/Resource"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="base_ExecutionSpecification"
+            ordered="false" unique="false" lowerBound="1" eType="ecore:EClass platform:/resource/org.kermeta.uml2.profiles.model/model/ecore/uml.ecore#//ExecutionSpecification"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="base_BehavioralFeature"
+            ordered="false" unique="false" lowerBound="1" eType="ecore:EClass platform:/resource/org.kermeta.uml2.profiles.model/model/ecore/uml.ecore#//BehavioralFeature"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="base_Behavior" ordered="false"
+            unique="false" lowerBound="1" eType="ecore:EClass platform:/resource/org.kermeta.uml2.profiles.model/model/ecore/uml.ecore#//Behavior"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="base_Collaboration"
+            ordered="false" unique="false" lowerBound="1" eType="ecore:EClass platform:/resource/org.kermeta.uml2.profiles.model/model/ecore/uml.ecore#//Collaboration"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="base_CollaborationUse"
+            ordered="false" unique="false" lowerBound="1" eType="ecore:EClass platform:/resource/org.kermeta.uml2.profiles.model/model/ecore/uml.ecore#//CollaborationUse"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="Release" eSuperTypes="#//MARTE_Foundations/GRM/GRService"/>
+      <eClassifiers xsi:type="ecore:EClass" name="Acquire" eSuperTypes="#//MARTE_Foundations/GRM/GRService">
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="isBlocking" ordered="false"
+            unique="false" eType="ecore:EDataType MARTE_Library.ecore#//MARTE_PrimitivesTypes/Boolean"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="ResourceUsage">
+        <eStructuralFeatures xsi:type="ecore:EReference" name="execTime" unique="false"
+            upperBound="-1" eType="ecore:EClass MARTE_Library.ecore#//BasicNFP_Types/NFP_Duration"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="allocatedMemory" unique="false"
+            upperBound="-1" eType="ecore:EClass MARTE_Library.ecore#//BasicNFP_Types/NFP_DataSize"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="usedMemory" unique="false"
+            upperBound="-1" eType="ecore:EClass MARTE_Library.ecore#//BasicNFP_Types/NFP_DataSize"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="powerPeak" unique="false"
+            upperBound="-1" eType="ecore:EClass MARTE_Library.ecore#//BasicNFP_Types/NFP_Power"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="energy" unique="false"
+            upperBound="-1" eType="ecore:EClass MARTE_Library.ecore#//BasicNFP_Types/NFP_Energy"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="base_NamedElement"
+            ordered="false" unique="false" lowerBound="1" eType="ecore:EClass platform:/resource/org.kermeta.uml2.profiles.model/model/ecore/uml.ecore#//NamedElement"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="subUsage" ordered="false"
+            unique="false" upperBound="-1" eType="#//MARTE_Foundations/GRM/ResourceUsage"/>
+      </eClassifiers>
+    </eSubpackages>
+    <eSubpackages name="GCM" nsURI="http:///MARTE/MARTE_Foundations/GCM.ecore" nsPrefix="MARTE.MARTE_Foundations.GCM">
+      <eClassifiers xsi:type="ecore:EClass" name="FlowProperty">
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="direction" ordered="false"
+            unique="false" lowerBound="1" eType="#//MARTE_Foundations/GCM/DirectionKind"
+            defaultValueLiteral="in"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="base_Property" ordered="false"
+            unique="false" lowerBound="1" eType="ecore:EClass platform:/resource/org.kermeta.uml2.profiles.model/model/ecore/uml.ecore#//Property"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EEnum" name="DirectionKind">
+        <eLiterals name="in"/>
+        <eLiterals name="out" value="1"/>
+        <eLiterals name="inout" value="2"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="FlowPort">
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="isAtomic" ordered="false"
+            unique="false" lowerBound="1" eType="ecore:EDataType MARTE_Library.ecore#//MARTE_PrimitivesTypes/Boolean"
+            volatile="true" defaultValueLiteral="false" derived="true"/>
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="isConjugated" ordered="false"
+            unique="false" lowerBound="1" eType="ecore:EDataType MARTE_Library.ecore#//MARTE_PrimitivesTypes/Boolean"
+            defaultValueLiteral="false"/>
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="direction" ordered="false"
+            unique="false" eType="#//MARTE_Foundations/GCM/DirectionKind"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="base_Port" ordered="false"
+            unique="false" lowerBound="1" eType="ecore:EClass platform:/resource/org.kermeta.uml2.profiles.model/model/ecore/uml.ecore#//Port"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="MessagePort">
+        <eStructuralFeatures xsi:type="ecore:EReference" name="base_Port" ordered="false"
+            unique="false" lowerBound="1" eType="ecore:EClass platform:/resource/org.kermeta.uml2.profiles.model/model/ecore/uml.ecore#//Port"/>
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="isAtomic" ordered="false"
+            unique="false" lowerBound="1" eType="ecore:EDataType MARTE_Library.ecore#//MARTE_PrimitivesTypes/Boolean"
+            volatile="true" defaultValueLiteral="false" derived="true"/>
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="isConjugated" ordered="false"
+            unique="false" lowerBound="1" eType="ecore:EDataType MARTE_Library.ecore#//MARTE_PrimitivesTypes/Boolean"
+            defaultValueLiteral="false"/>
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="direction" ordered="false"
+            unique="false" eType="#//MARTE_Foundations/GCM/BFeatureKind"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EEnum" name="BFeatureKind">
+        <eLiterals name="in"/>
+        <eLiterals name="out" value="1"/>
+        <eLiterals name="inout" value="2"/>
+        <eLiterals name="required" value="3"/>
+        <eLiterals name="provided" value="4"/>
+        <eLiterals name="reqpro" value="5"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="SendFlowAction">
+        <eStructuralFeatures xsi:type="ecore:EReference" name="base_InvocationAction"
+            ordered="false" unique="false" lowerBound="1" eType="ecore:EClass platform:/resource/org.kermeta.uml2.profiles.model/model/ecore/uml.ecore#//InvocationAction"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="FlowSpecification">
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="direction" ordered="false"
+            unique="false" eType="#//MARTE_Foundations/GCM/DirectionKind"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="base_Interface" ordered="false"
+            unique="false" lowerBound="1" eType="ecore:EClass platform:/resource/org.kermeta.uml2.profiles.model/model/ecore/uml.ecore#//Interface"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="BFeatureSpecification">
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="kind" ordered="false"
+            unique="false" eType="#//MARTE_Foundations/GCM/BFeatureKind"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="base_Interface" ordered="false"
+            unique="false" lowerBound="1" eType="ecore:EClass platform:/resource/org.kermeta.uml2.profiles.model/model/ecore/uml.ecore#//Interface"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="FlowBFeature">
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="kind" ordered="false"
+            unique="false" lowerBound="1" eType="#//MARTE_Foundations/GCM/BFeatureKind"
+            defaultValueLiteral="in"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="base_BehavioralFeature"
+            ordered="false" unique="false" lowerBound="1" eType="ecore:EClass platform:/resource/org.kermeta.uml2.profiles.model/model/ecore/uml.ecore#//BehavioralFeature"/>
+      </eClassifiers>
+    </eSubpackages>
+  </eSubpackages>
+  <eSubpackages name="MARTE_Annexes" nsURI="http:///MARTE/MARTE_Annexes.ecore" nsPrefix="MARTE.MARTE_Annexes">
+    <eSubpackages name="RSM" nsURI="http:///MARTE/MARTE_Annexes/RSM.ecore" nsPrefix="MARTE.MARTE_Annexes.RSM">
+      <eClassifiers xsi:type="ecore:EClass" name="LinkTopology" abstract="true">
+        <eStructuralFeatures xsi:type="ecore:EReference" name="base_Connector" ordered="false"
+            unique="false" lowerBound="1" eType="ecore:EClass platform:/resource/org.kermeta.uml2.profiles.model/model/ecore/uml.ecore#//Connector"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="DefaultLink" eSuperTypes="#//MARTE_Annexes/RSM/LinkTopology"/>
+      <eClassifiers xsi:type="ecore:EClass" name="InterRepetition" eSuperTypes="#//MARTE_Annexes/RSM/LinkTopology">
+        <eStructuralFeatures xsi:type="ecore:EReference" name="repetitionShapeDependence"
+            ordered="false" unique="false" lowerBound="1" eType="ecore:EClass MARTE_Library.ecore#//MARTE_DataTypes/IntegerVector"/>
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="isModulo" ordered="false"
+            unique="false" eType="ecore:EDataType MARTE_Library.ecore#//MARTE_PrimitivesTypes/Boolean"
+            defaultValueLiteral="false"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="Distribute" eSuperTypes="#//MARTE_Foundations/Alloc/Allocate">
+        <eStructuralFeatures xsi:type="ecore:EReference" name="patternShape" ordered="false"
+            unique="false" lowerBound="1" eType="ecore:EClass MARTE_Library.ecore#//RS_Library/ShapeSpecification"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="repetitionSpace" ordered="false"
+            unique="false" lowerBound="1" eType="ecore:EClass MARTE_Library.ecore#//RS_Library/ShapeSpecification"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="fromTiler" ordered="false"
+            unique="false" lowerBound="1" eType="ecore:EClass MARTE_Library.ecore#//RS_Library/TilerSpecification"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="toTiler" ordered="false"
+            unique="false" lowerBound="1" eType="ecore:EClass MARTE_Library.ecore#//RS_Library/TilerSpecification"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="Reshape" eSuperTypes="#//MARTE_Annexes/RSM/LinkTopology">
+        <eStructuralFeatures xsi:type="ecore:EReference" name="patternShape" ordered="false"
+            unique="false" lowerBound="1" eType="ecore:EClass MARTE_Library.ecore#//RS_Library/ShapeSpecification"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="repetitonShape" ordered="false"
+            unique="false" lowerBound="1" eType="ecore:EClass MARTE_Library.ecore#//RS_Library/ShapeSpecification"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="srcTiler" ordered="false"
+            unique="false" lowerBound="1" eType="#//MARTE_Annexes/RSM/Tiler" containment="true"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="targetTiler" ordered="false"
+            unique="false" lowerBound="1" eType="#//MARTE_Annexes/RSM/Tiler" containment="true"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="Tiler" eSuperTypes="#//MARTE_Annexes/RSM/LinkTopology">
+        <eStructuralFeatures xsi:type="ecore:EReference" name="origin" ordered="false"
+            unique="false" eType="ecore:EClass MARTE_Library.ecore#//MARTE_DataTypes/IntegerVector"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="paving" ordered="false"
+            unique="false" eType="ecore:EClass MARTE_Library.ecore#//MARTE_DataTypes/IntegerMatrix"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="fitting" ordered="false"
+            unique="false" eType="ecore:EClass MARTE_Library.ecore#//MARTE_DataTypes/IntegerMatrix"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="tiler" ordered="false"
+            unique="false" eType="ecore:EClass MARTE_Library.ecore#//RS_Library/TilerSpecification"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="Shaped">
+        <eStructuralFeatures xsi:type="ecore:EReference" name="shape" ordered="false"
+            unique="false" lowerBound="1" eType="ecore:EClass MARTE_Library.ecore#//RS_Library/ShapeSpecification"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="base_MultiplicityElement"
+            ordered="false" unique="false" lowerBound="1" eType="ecore:EClass platform:/resource/org.kermeta.uml2.profiles.model/model/ecore/uml.ecore#//MultiplicityElement"/>
+      </eClassifiers>
+    </eSubpackages>
+    <eSubpackages name="VSL" nsURI="http:///MARTE/MARTE_Annexes/VSL.ecore" nsPrefix="MARTE.MARTE_Annexes.VSL">
+      <eSubpackages name="Variables" nsURI="http:///MARTE/MARTE_Annexes/VSL/Variables.ecore"
+          nsPrefix="MARTE.MARTE_Annexes.VSL.Variables">
+        <eClassifiers xsi:type="ecore:EEnum" name="VariableDirectionKind">
+          <eLiterals name="in"/>
+          <eLiterals name="out" value="1"/>
+          <eLiterals name="inout" value="2"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="Var">
+          <eStructuralFeatures xsi:type="ecore:EAttribute" name="dir" ordered="false"
+              unique="false" eType="#//MARTE_Annexes/VSL/Variables/VariableDirectionKind"
+              defaultValueLiteral="inout"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="base_Property" ordered="false"
+              unique="false" lowerBound="1" eType="ecore:EClass platform:/resource/org.kermeta.uml2.profiles.model/model/ecore/uml.ecore#//Property"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="ExpressionContext">
+          <eStructuralFeatures xsi:type="ecore:EReference" name="base_NamedElement"
+              ordered="false" unique="false" lowerBound="1" eType="ecore:EClass platform:/resource/org.kermeta.uml2.profiles.model/model/ecore/uml.ecore#//NamedElement"/>
+        </eClassifiers>
+      </eSubpackages>
+      <eSubpackages name="DataTypes" nsURI="http:///MARTE/MARTE_Annexes/VSL/DataTypes.ecore"
+          nsPrefix="MARTE.MARTE_Annexes.VSL.DataTypes">
+        <eClassifiers xsi:type="ecore:EClass" name="BoundedSubtype">
+          <eStructuralFeatures xsi:type="ecore:EReference" name="baseType" ordered="false"
+              unique="false" lowerBound="1" eType="ecore:EClass platform:/resource/org.kermeta.uml2.profiles.model/model/ecore/uml.ecore#//Property"/>
+          <eStructuralFeatures xsi:type="ecore:EAttribute" name="minValue" ordered="false"
+              unique="false" lowerBound="1" eType="ecore:EDataType MARTE_Library.ecore#//MARTE_PrimitivesTypes/String"/>
+          <eStructuralFeatures xsi:type="ecore:EAttribute" name="maxValue" ordered="false"
+              unique="false" lowerBound="1" eType="ecore:EDataType MARTE_Library.ecore#//MARTE_PrimitivesTypes/String"/>
+          <eStructuralFeatures xsi:type="ecore:EAttribute" name="isMinOpen" ordered="false"
+              unique="false" lowerBound="1" eType="ecore:EDataType MARTE_Library.ecore#//MARTE_PrimitivesTypes/Integer"/>
+          <eStructuralFeatures xsi:type="ecore:EAttribute" name="isMaxOpen" ordered="false"
+              unique="false" lowerBound="1" eType="ecore:EDataType MARTE_Library.ecore#//MARTE_PrimitivesTypes/Boolean"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="base_DataType" ordered="false"
+              unique="false" lowerBound="1" eType="ecore:EClass platform:/resource/org.kermeta.uml2.profiles.model/model/ecore/uml.ecore#//DataType"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="IntervalType">
+          <eStructuralFeatures xsi:type="ecore:EReference" name="intervalAttrib" ordered="false"
+              unique="false" lowerBound="1" eType="ecore:EClass platform:/resource/org.kermeta.uml2.profiles.model/model/ecore/uml.ecore#//Property"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="base_DataType" ordered="false"
+              unique="false" lowerBound="1" eType="ecore:EClass platform:/resource/org.kermeta.uml2.profiles.model/model/ecore/uml.ecore#//DataType"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="CollectionType">
+          <eStructuralFeatures xsi:type="ecore:EReference" name="collectionAttrib"
+              ordered="false" unique="false" lowerBound="1" eType="ecore:EClass platform:/resource/org.kermeta.uml2.profiles.model/model/ecore/uml.ecore#//Property"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="base_DataType" ordered="false"
+              unique="false" lowerBound="1" eType="ecore:EClass platform:/resource/org.kermeta.uml2.profiles.model/model/ecore/uml.ecore#//DataType"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="ChoiceType">
+          <eStructuralFeatures xsi:type="ecore:EReference" name="choiceAttrib" ordered="false"
+              unique="false" upperBound="-1" eType="ecore:EClass platform:/resource/org.kermeta.uml2.profiles.model/model/ecore/uml.ecore#//Property"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="defaultAttrib" ordered="false"
+              unique="false" eType="ecore:EClass platform:/resource/org.kermeta.uml2.profiles.model/model/ecore/uml.ecore#//Property"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="base_DataType" ordered="false"
+              unique="false" lowerBound="1" eType="ecore:EClass platform:/resource/org.kermeta.uml2.profiles.model/model/ecore/uml.ecore#//DataType"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="TupleType">
+          <eStructuralFeatures xsi:type="ecore:EReference" name="tupleAttrib" ordered="false"
+              unique="false" upperBound="-1" eType="ecore:EClass platform:/resource/org.kermeta.uml2.profiles.model/model/ecore/uml.ecore#//Property"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="base_DataType" ordered="false"
+              unique="false" lowerBound="1" eType="ecore:EClass platform:/resource/org.kermeta.uml2.profiles.model/model/ecore/uml.ecore#//DataType"/>
+        </eClassifiers>
+      </eSubpackages>
+    </eSubpackages>
+  </eSubpackages>
+  <eSubpackages name="MARTE_DesignModel" nsURI="http:///MARTE/MARTE_DesignModel.ecore"
+      nsPrefix="MARTE.MARTE_DesignModel">
+    <eSubpackages name="RTEMoCC" nsURI="http:///MARTE/MARTE_DesignModel/RTEMoCC.ecore"
+        nsPrefix="MARTE.MARTE_DesignModel.RTEMoCC">
+      <eClassifiers xsi:type="ecore:EClass" name="RtUnit">
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="isDynamic" ordered="false"
+            unique="false" lowerBound="1" eType="ecore:EDataType MARTE_Library.ecore#//MARTE_PrimitivesTypes/Boolean"
+            defaultValueLiteral="true"/>
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="isMain" ordered="false"
+            unique="false" eType="ecore:EDataType MARTE_Library.ecore#//MARTE_PrimitivesTypes/Boolean"/>
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="poolSize" ordered="false"
+            unique="false" eType="ecore:EDataType MARTE_Library.ecore#//MARTE_PrimitivesTypes/Integer"/>
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="poolPolicy" ordered="false"
+            unique="false" eType="#//MARTE_DesignModel/RTEMoCC/PoolMgtPolicyKind"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="poolWaitingTime" ordered="false"
+            unique="false" eType="ecore:EClass MARTE_Library.ecore#//BasicNFP_Types/NFP_Duration"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="operationalMode" ordered="false"
+            unique="false" eType="ecore:EClass platform:/resource/org.kermeta.uml2.profiles.model/model/ecore/uml.ecore#//Behavior"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="main" ordered="false"
+            unique="false" eType="ecore:EClass platform:/resource/org.kermeta.uml2.profiles.model/model/ecore/uml.ecore#//Operation"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="memorySize" ordered="false"
+            unique="false" eType="ecore:EClass MARTE_Library.ecore#//BasicNFP_Types/NFP_DataSize"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="base_BehavioredClassifier"
+            ordered="false" unique="false" lowerBound="1" eType="ecore:EClass platform:/resource/org.kermeta.uml2.profiles.model/model/ecore/uml.ecore#//BehavioredClassifier"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EEnum" name="PoolMgtPolicyKind">
+        <eLiterals name="infiniteWait"/>
+        <eLiterals name="timedWait" value="1"/>
+        <eLiterals name="dynamic" value="2"/>
+        <eLiterals name="exception" value="3"/>
+        <eLiterals name="other" value="4"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="PpUnit">
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="concPolicy" ordered="false"
+            unique="false" eType="#//MARTE_DesignModel/RTEMoCC/CallConcurrencyKind"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="memorySize" ordered="false"
+            unique="false" eType="ecore:EClass MARTE_Library.ecore#//BasicNFP_Types/NFP_DataSize"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="base_BehavioredClassifier"
+            ordered="false" unique="false" lowerBound="1" eType="ecore:EClass platform:/resource/org.kermeta.uml2.profiles.model/model/ecore/uml.ecore#//BehavioredClassifier"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EEnum" name="CallConcurrencyKind">
+        <eLiterals name="sequential"/>
+        <eLiterals name="guarded" value="1"/>
+        <eLiterals name="concurrent" value="2"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="RtBehavior">
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="queueSchedPolicy" ordered="false"
+            unique="false" eType="ecore:EEnum MARTE_Library.ecore#//GRM_BasicTypes/SchedPolicyKind"/>
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="queueSize" ordered="false"
+            unique="false" eType="ecore:EDataType MARTE_Library.ecore#//MARTE_PrimitivesTypes/Integer"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="msgMaxSize" ordered="false"
+            unique="false" eType="ecore:EClass MARTE_Library.ecore#//BasicNFP_Types/NFP_DataSize"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="base_Behavior" ordered="false"
+            unique="false" lowerBound="1" eType="ecore:EClass platform:/resource/org.kermeta.uml2.profiles.model/model/ecore/uml.ecore#//Behavior"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="rtf">
+        <eStructuralFeatures xsi:type="ecore:EReference" name="base_BehavioralFeature"
+            ordered="false" unique="false" lowerBound="1" eType="ecore:EClass platform:/resource/org.kermeta.uml2.profiles.model/model/ecore/uml.ecore#//BehavioralFeature"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="base_Action" ordered="false"
+            unique="false" lowerBound="1" eType="ecore:EClass platform:/resource/org.kermeta.uml2.profiles.model/model/ecore/uml.ecore#//Action"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="base_Message" ordered="false"
+            unique="false" lowerBound="1" eType="ecore:EClass platform:/resource/org.kermeta.uml2.profiles.model/model/ecore/uml.ecore#//Message"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="base_Signal" ordered="false"
+            unique="false" lowerBound="1" eType="ecore:EClass platform:/resource/org.kermeta.uml2.profiles.model/model/ecore/uml.ecore#//Signal"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="utility" ordered="false"
+            unique="false" eType="ecore:EClass MARTE_Library.ecore#//MARTE_DataTypes/UtilityType"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="occKind" ordered="false"
+            unique="false" eType="ecore:EClass MARTE_Library.ecore#//BasicNFP_Types/ArrivalPattern"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="tRef" ordered="false"
+            unique="false" eType="#//MARTE_Foundations/Time/TimedInstantObservation"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="relDl" ordered="false"
+            unique="false" eType="ecore:EClass MARTE_Library.ecore#//BasicNFP_Types/NFP_Duration"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="absDl" ordered="false"
+            unique="false" eType="ecore:EClass MARTE_Library.ecore#//BasicNFP_Types/NFP_DateTime"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="boundDl" ordered="false"
+            unique="false" eType="ecore:EClass MARTE_Library.ecore#//BasicNFP_Types/NFP_BoundedDuration"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="rdTime" ordered="false"
+            unique="false" eType="ecore:EClass MARTE_Library.ecore#//BasicNFP_Types/NFP_Duration"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="miss" ordered="false"
+            unique="false" eType="ecore:EClass MARTE_Library.ecore#//BasicNFP_Types/NFP_Percentage"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="priority" ordered="false"
+            unique="false" eType="ecore:EClass MARTE_Library.ecore#//BasicNFP_Types/NFP_Integer"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EEnum" name="SynchronizationKind">
+        <eLiterals name="synchronous"/>
+        <eLiterals name="asynchronous" value="1"/>
+        <eLiterals name="delayedSynchronous" value="2"/>
+        <eLiterals name="rendezVous" value="3"/>
+        <eLiterals name="other" value="4"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="RtAction">
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="isAtomic" ordered="false"
+            unique="false" lowerBound="1" eType="ecore:EDataType MARTE_Library.ecore#//MARTE_PrimitivesTypes/Boolean"
+            defaultValueLiteral="false"/>
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="synchKind" ordered="false"
+            unique="false" eType="#//MARTE_DesignModel/RTEMoCC/SynchronizationKind"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="msgSize" ordered="false"
+            unique="false" eType="ecore:EClass MARTE_Library.ecore#//BasicNFP_Types/NFP_DataSize"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="base_BehavioralFeature"
+            ordered="false" unique="false" lowerBound="1" eType="ecore:EClass platform:/resource/org.kermeta.uml2.profiles.model/model/ecore/uml.ecore#//BehavioralFeature"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="base_InvocationAction"
+            ordered="false" unique="false" lowerBound="1" eType="ecore:EClass platform:/resource/org.kermeta.uml2.profiles.model/model/ecore/uml.ecore#//InvocationAction"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EEnum" name="ExecutionKind">
+        <eLiterals name="deferred"/>
+        <eLiterals name="remoteImmediate" value="1"/>
+        <eLiterals name="localImmediate" value="2"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EEnum" name="ConcurrencyKind">
+        <eLiterals name="reader"/>
+        <eLiterals name="writer" value="1"/>
+        <eLiterals name="parallel" value="2"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="RtService">
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="concPolicy" ordered="false"
+            unique="false" eType="#//MARTE_DesignModel/RTEMoCC/ConcurrencyKind"/>
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="exeKind" ordered="false"
+            unique="false" eType="#//MARTE_DesignModel/RTEMoCC/ExecutionKind"/>
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="isAtomic" ordered="false"
+            unique="false" lowerBound="1" eType="ecore:EDataType MARTE_Library.ecore#//MARTE_PrimitivesTypes/Boolean"
+            defaultValueLiteral="false"/>
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="synchKind" ordered="false"
+            unique="false" eType="#//MARTE_DesignModel/RTEMoCC/SynchronizationKind"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="base_BehavioralFeature"
+            ordered="false" unique="false" lowerBound="1" eType="ecore:EClass platform:/resource/org.kermeta.uml2.profiles.model/model/ecore/uml.ecore#//BehavioralFeature"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="RteConnector">
+        <eStructuralFeatures xsi:type="ecore:EReference" name="bandwidth" ordered="false"
+            unique="false" eType="ecore:EClass MARTE_Library.ecore#//BasicNFP_Types/NFP_DataTxRate"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="packetT" ordered="false"
+            unique="false" eType="ecore:EClass MARTE_Library.ecore#//BasicNFP_Types/NFP_Duration"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="blockT" ordered="false"
+            unique="false" eType="ecore:EClass MARTE_Library.ecore#//BasicNFP_Types/NFP_Duration"/>
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="transmMode" ordered="false"
+            unique="false" eType="ecore:EEnum MARTE_Library.ecore#//MARTE_DataTypes/TransmModeKind"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="base_Connector" ordered="false"
+            unique="false" lowerBound="1" eType="ecore:EClass platform:/resource/org.kermeta.uml2.profiles.model/model/ecore/uml.ecore#//Connector"/>
+      </eClassifiers>
+    </eSubpackages>
+    <eSubpackages name="HRM" nsURI="http:///MARTE/MARTE_DesignModel/HRM.ecore" nsPrefix="MARTE.MARTE_DesignModel.HRM">
+      <eSubpackages name="HwLogical" nsURI="http:///MARTE/MARTE_DesignModel/HRM/HwLogical.ecore"
+          nsPrefix="MARTE.MARTE_DesignModel.HRM.HwLogical">
+        <eSubpackages name="HwGeneral" nsURI="http:///MARTE/MARTE_DesignModel/HRM/HwLogical/HwGeneral.ecore"
+            nsPrefix="MARTE.MARTE_DesignModel.HRM.HwLogical.HwGeneral">
+          <eClassifiers xsi:type="ecore:EClass" name="HwResource" eSuperTypes="#//MARTE_Foundations/GRM/Resource">
+            <eStructuralFeatures xsi:type="ecore:EReference" name="description" ordered="false"
+                unique="false" eType="ecore:EClass MARTE_Library.ecore#//BasicNFP_Types/NFP_String"/>
+            <eStructuralFeatures xsi:type="ecore:EReference" name="p_HW_Services"
+                ordered="false" unique="false" upperBound="-1" eType="#//MARTE_DesignModel/HRM/HwLogical/HwGeneral/HwResourceService"
+                containment="true"/>
+            <eStructuralFeatures xsi:type="ecore:EReference" name="r_HW_Services"
+                ordered="false" unique="false" upperBound="-1" eType="#//MARTE_DesignModel/HRM/HwLogical/HwGeneral/HwResourceService"/>
+            <eStructuralFeatures xsi:type="ecore:EReference" name="ownedHW" ordered="false"
+                unique="false" upperBound="-1" eType="#//MARTE_DesignModel/HRM/HwLogical/HwGeneral/HwResource"
+                containment="true"/>
+            <eStructuralFeatures xsi:type="ecore:EReference" name="endPoints" ordered="false"
+                unique="false" upperBound="-1" eType="#//MARTE_DesignModel/HRM/HwLogical/HwCommunication/HwEndPoint">
+              <eAnnotations source="subsets" references="#//MARTE_DesignModel/HRM/HwLogical/HwGeneral/HwResource/ownedHW"/>
+            </eStructuralFeatures>
+            <eStructuralFeatures xsi:type="ecore:EReference" name="frequency" ordered="false"
+                unique="false" eType="ecore:EClass MARTE_Library.ecore#//BasicNFP_Types/NFP_Frequency"/>
+          </eClassifiers>
+          <eClassifiers xsi:type="ecore:EClass" name="HwResourceService" eSuperTypes="#//MARTE_Foundations/GRM/GRService">
+            <eStructuralFeatures xsi:type="ecore:EReference" name="consumption" ordered="false"
+                unique="false" eType="ecore:EClass MARTE_Library.ecore#//BasicNFP_Types/NFP_Power"/>
+            <eStructuralFeatures xsi:type="ecore:EReference" name="dissipation" ordered="false"
+                unique="false" eType="ecore:EClass MARTE_Library.ecore#//BasicNFP_Types/NFP_Power"/>
+          </eClassifiers>
+        </eSubpackages>
+        <eSubpackages name="HwCommunication" nsURI="http:///MARTE/MARTE_DesignModel/HRM/HwLogical/HwCommunication.ecore"
+            nsPrefix="MARTE.MARTE_DesignModel.HRM.HwLogical.HwCommunication">
+          <eClassifiers xsi:type="ecore:EClass" name="HwCommunicationResource" eSuperTypes="#//MARTE_DesignModel/HRM/HwLogical/HwGeneral/HwResource"/>
+          <eClassifiers xsi:type="ecore:EClass" name="HwArbiter" eSuperTypes="#//MARTE_DesignModel/HRM/HwLogical/HwCommunication/HwCommunicationResource">
+            <eStructuralFeatures xsi:type="ecore:EReference" name="controlledMedias"
+                ordered="false" unique="false" upperBound="-1" eType="#//MARTE_DesignModel/HRM/HwLogical/HwCommunication/HwMedia"
+                eOpposite="#//MARTE_DesignModel/HRM/HwLogical/HwCommunication/HwMedia/arbiters"/>
+          </eClassifiers>
+          <eClassifiers xsi:type="ecore:EClass" name="HwMedia" eSuperTypes="#//MARTE_DesignModel/HRM/HwLogical/HwCommunication/HwCommunicationResource #//MARTE_Foundations/GRM/CommunicationMedia">
+            <eStructuralFeatures xsi:type="ecore:EReference" name="bandWidth" ordered="false"
+                unique="false" eType="ecore:EClass MARTE_Library.ecore#//BasicNFP_Types/NFP_DataTxRate"/>
+            <eStructuralFeatures xsi:type="ecore:EReference" name="base_Association"
+                ordered="false" unique="false" lowerBound="1" eType="ecore:EClass platform:/resource/org.kermeta.uml2.profiles.model/model/ecore/uml.ecore#//Association"/>
+            <eStructuralFeatures xsi:type="ecore:EReference" name="arbiters" ordered="false"
+                unique="false" upperBound="-1" eType="#//MARTE_DesignModel/HRM/HwLogical/HwCommunication/HwArbiter"
+                eOpposite="#//MARTE_DesignModel/HRM/HwLogical/HwCommunication/HwArbiter/controlledMedias"/>
+          </eClassifiers>
+          <eClassifiers xsi:type="ecore:EClass" name="HwBus" eSuperTypes="#//MARTE_DesignModel/HRM/HwLogical/HwCommunication/HwMedia">
+            <eStructuralFeatures xsi:type="ecore:EReference" name="adressWidth" ordered="false"
+                unique="false" eType="ecore:EClass MARTE_Library.ecore#//BasicNFP_Types/NFP_DataSize"/>
+            <eStructuralFeatures xsi:type="ecore:EReference" name="wordWidth" ordered="false"
+                unique="false" eType="ecore:EClass MARTE_Library.ecore#//BasicNFP_Types/NFP_DataSize"/>
+            <eStructuralFeatures xsi:type="ecore:EReference" name="isSynchronous"
+                ordered="false" unique="false" eType="ecore:EClass MARTE_Library.ecore#//BasicNFP_Types/NFP_Boolean"/>
+            <eStructuralFeatures xsi:type="ecore:EReference" name="isSerial" ordered="false"
+                unique="false" eType="ecore:EClass MARTE_Library.ecore#//BasicNFP_Types/NFP_Boolean"/>
+          </eClassifiers>
+          <eClassifiers xsi:type="ecore:EClass" name="HwBridge" eSuperTypes="#//MARTE_DesignModel/HRM/HwLogical/HwCommunication/HwMedia">
+            <eStructuralFeatures xsi:type="ecore:EReference" name="sides" ordered="false"
+                unique="false" upperBound="-1" eType="#//MARTE_DesignModel/HRM/HwLogical/HwCommunication/HwMedia"/>
+          </eClassifiers>
+          <eClassifiers xsi:type="ecore:EClass" name="HwEndPoint" eSuperTypes="#//MARTE_DesignModel/HRM/HwLogical/HwCommunication/HwCommunicationResource #//MARTE_Foundations/GRM/CommunicationEndPoint">
+            <eStructuralFeatures xsi:type="ecore:EReference" name="base_Port" ordered="false"
+                unique="false" lowerBound="1" eType="ecore:EClass platform:/resource/org.kermeta.uml2.profiles.model/model/ecore/uml.ecore#//Port"/>
+            <eStructuralFeatures xsi:type="ecore:EReference" name="connectedTo" ordered="false"
+                unique="false" upperBound="-1" eType="#//MARTE_DesignModel/HRM/HwLogical/HwCommunication/HwMedia"/>
+          </eClassifiers>
+        </eSubpackages>
+        <eSubpackages name="HwComputing" nsURI="http:///MARTE/MARTE_DesignModel/HRM/HwLogical/HwComputing.ecore"
+            nsPrefix="MARTE.MARTE_DesignModel.HRM.HwLogical.HwComputing">
+          <eClassifiers xsi:type="ecore:EEnum" name="ISA_Type">
+            <eLiterals name="RISC"/>
+            <eLiterals name="CISC" value="1"/>
+            <eLiterals name="VLIW" value="2"/>
+            <eLiterals name="SIMD" value="3"/>
+            <eLiterals name="Other" value="4"/>
+            <eLiterals name="Undefined" value="5"/>
+          </eClassifiers>
+          <eClassifiers xsi:type="ecore:EEnum" name="PLD_Technology">
+            <eLiterals name="SRAM"/>
+            <eLiterals name="Antifuse" value="1"/>
+            <eLiterals name="Flash" value="2"/>
+            <eLiterals name="Other" value="3"/>
+            <eLiterals name="Undefined" value="4"/>
+          </eClassifiers>
+          <eClassifiers xsi:type="ecore:EEnum" name="PLD_Class">
+            <eLiterals name="SymetricalArray"/>
+            <eLiterals name="RowBased" value="1"/>
+            <eLiterals name="SeaOfGates" value="2"/>
+            <eLiterals name="HierarchicalPLD" value="3"/>
+            <eLiterals name="Other" value="4"/>
+            <eLiterals name="Undefined" value="5"/>
+          </eClassifiers>
+          <eClassifiers xsi:type="ecore:EClass" name="PLD_Organization">
+            <eStructuralFeatures xsi:type="ecore:EReference" name="nbRows" ordered="false"
+                unique="false" eType="ecore:EClass MARTE_Library.ecore#//BasicNFP_Types/NFP_Integer"/>
+            <eStructuralFeatures xsi:type="ecore:EReference" name="nbColumns" ordered="false"
+                unique="false" eType="ecore:EClass MARTE_Library.ecore#//BasicNFP_Types/NFP_Natural"/>
+            <eStructuralFeatures xsi:type="ecore:EAttribute" name="class" ordered="false"
+                unique="false" eType="#//MARTE_DesignModel/HRM/HwLogical/HwComputing/PLD_Class"/>
+          </eClassifiers>
+          <eClassifiers xsi:type="ecore:EClass" name="HwProcessor" eSuperTypes="#//MARTE_DesignModel/HRM/HwLogical/HwComputing/HwComputingResource">
+            <eStructuralFeatures xsi:type="ecore:EReference" name="architecture" ordered="false"
+                unique="false" eType="ecore:EClass MARTE_Library.ecore#//BasicNFP_Types/NFP_DataSize"
+                volatile="true" derived="true"/>
+            <eStructuralFeatures xsi:type="ecore:EReference" name="mips" ordered="false"
+                unique="false" eType="ecore:EClass MARTE_Library.ecore#//BasicNFP_Types/NFP_Natural"/>
+            <eStructuralFeatures xsi:type="ecore:EReference" name="ipc" ordered="false"
+                unique="false" eType="ecore:EClass MARTE_Library.ecore#//BasicNFP_Types/NFP_Real"
+                volatile="true" derived="true"/>
+            <eStructuralFeatures xsi:type="ecore:EReference" name="nbCores" ordered="false"
+                unique="false" eType="ecore:EClass MARTE_Library.ecore#//BasicNFP_Types/NFP_Natural"/>
+            <eStructuralFeatures xsi:type="ecore:EReference" name="nbPipelines" ordered="false"
+                unique="false" eType="ecore:EClass MARTE_Library.ecore#//BasicNFP_Types/NFP_Natural"/>
+            <eStructuralFeatures xsi:type="ecore:EReference" name="nbStages" ordered="false"
+                unique="false" eType="ecore:EClass MARTE_Library.ecore#//BasicNFP_Types/NFP_Natural"/>
+            <eStructuralFeatures xsi:type="ecore:EReference" name="nbALUs" ordered="false"
+                unique="false" eType="ecore:EClass MARTE_Library.ecore#//BasicNFP_Types/NFP_Natural"/>
+            <eStructuralFeatures xsi:type="ecore:EReference" name="nbFPUs" ordered="false"
+                unique="false" eType="ecore:EClass MARTE_Library.ecore#//BasicNFP_Types/NFP_Natural"/>
+            <eStructuralFeatures xsi:type="ecore:EReference" name="ownedISAs" ordered="false"
+                unique="false" upperBound="-1" eType="#//MARTE_DesignModel/HRM/HwLogical/HwComputing/HwISA">
+              <eAnnotations source="subsets" references="#//MARTE_DesignModel/HRM/HwLogical/HwGeneral/HwResource/ownedHW"/>
+            </eStructuralFeatures>
+            <eStructuralFeatures xsi:type="ecore:EReference" name="predictors" ordered="false"
+                unique="false" upperBound="-1" eType="#//MARTE_DesignModel/HRM/HwLogical/HwComputing/HwBranchPredictor">
+              <eAnnotations source="subsets" references="#//MARTE_DesignModel/HRM/HwLogical/HwGeneral/HwResource/ownedHW"/>
+            </eStructuralFeatures>
+            <eStructuralFeatures xsi:type="ecore:EReference" name="caches" ordered="false"
+                unique="false" upperBound="-1" eType="#//MARTE_DesignModel/HRM/HwLogical/HwMemory/HwCache">
+              <eAnnotations source="subsets" references="#//MARTE_DesignModel/HRM/HwLogical/HwGeneral/HwResource/ownedHW"/>
+            </eStructuralFeatures>
+            <eStructuralFeatures xsi:type="ecore:EReference" name="ownedMMUs" ordered="false"
+                unique="false" upperBound="-1" eType="#//MARTE_DesignModel/HRM/HwLogical/HwStorageManager/HwMMU">
+              <eAnnotations source="subsets" references="#//MARTE_DesignModel/HRM/HwLogical/HwGeneral/HwResource/ownedHW"/>
+            </eStructuralFeatures>
+          </eClassifiers>
+          <eClassifiers xsi:type="ecore:EClass" name="HwComputingResource" eSuperTypes="#//MARTE_DesignModel/HRM/HwLogical/HwGeneral/HwResource #//MARTE_Foundations/GRM/ComputingResource">
+            <eStructuralFeatures xsi:type="ecore:EReference" name="op_Frequencies"
+                ordered="false" unique="false" eType="ecore:EClass MARTE_Library.ecore#//MARTE_DataTypes/NFP_FrequencyInterval"/>
+          </eClassifiers>
+          <eClassifiers xsi:type="ecore:EClass" name="HwISA" eSuperTypes="#//MARTE_DesignModel/HRM/HwLogical/HwGeneral/HwResource">
+            <eStructuralFeatures xsi:type="ecore:EReference" name="family" ordered="false"
+                unique="false" eType="ecore:EClass MARTE_Library.ecore#//BasicNFP_Types/NFP_String"/>
+            <eStructuralFeatures xsi:type="ecore:EReference" name="inst_Width" ordered="false"
+                unique="false" eType="ecore:EClass MARTE_Library.ecore#//BasicNFP_Types/NFP_DataSize"/>
+            <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" ordered="false"
+                unique="false" eType="#//MARTE_DesignModel/HRM/HwLogical/HwComputing/ISA_Type"/>
+          </eClassifiers>
+          <eClassifiers xsi:type="ecore:EClass" name="HwBranchPredictor" eSuperTypes="#//MARTE_DesignModel/HRM/HwLogical/HwGeneral/HwResource"/>
+          <eClassifiers xsi:type="ecore:EClass" name="HwASIC" eSuperTypes="#//MARTE_DesignModel/HRM/HwLogical/HwComputing/HwComputingResource"/>
+          <eClassifiers xsi:type="ecore:EClass" name="HwPLD" eSuperTypes="#//MARTE_DesignModel/HRM/HwLogical/HwComputing/HwComputingResource">
+            <eStructuralFeatures xsi:type="ecore:EAttribute" name="technology" ordered="false"
+                unique="false" eType="#//MARTE_DesignModel/HRM/HwLogical/HwComputing/PLD_Technology"/>
+            <eStructuralFeatures xsi:type="ecore:EReference" name="organization" ordered="false"
+                unique="false" eType="#//MARTE_DesignModel/HRM/HwLogical/HwComputing/PLD_Organization"/>
+            <eStructuralFeatures xsi:type="ecore:EReference" name="nbLUTs" ordered="false"
+                unique="false" eType="ecore:EClass MARTE_Library.ecore#//BasicNFP_Types/NFP_Natural"/>
+            <eStructuralFeatures xsi:type="ecore:EReference" name="ndLUT_Inputs" ordered="false"
+                unique="false" eType="ecore:EClass MARTE_Library.ecore#//BasicNFP_Types/NFP_Natural"/>
+            <eStructuralFeatures xsi:type="ecore:EReference" name="nbFlipFlops" ordered="false"
+                unique="false" eType="ecore:EClass MARTE_Library.ecore#//BasicNFP_Types/NFP_Natural"/>
+            <eStructuralFeatures xsi:type="ecore:EReference" name="blocksRAM" ordered="false"
+                unique="false" upperBound="-1" eType="#//MARTE_DesignModel/HRM/HwLogical/HwMemory/HwRAM">
+              <eAnnotations source="subsets" references="#//MARTE_DesignModel/HRM/HwLogical/HwGeneral/HwResource/ownedHW"/>
+            </eStructuralFeatures>
+            <eStructuralFeatures xsi:type="ecore:EReference" name="blocksComputing"
+                ordered="false" unique="false" upperBound="-1" eType="#//MARTE_DesignModel/HRM/HwLogical/HwComputing/HwComputingResource">
+              <eAnnotations source="subsets" references="#//MARTE_DesignModel/HRM/HwLogical/HwGeneral/HwResource/ownedHW"/>
+            </eStructuralFeatures>
+          </eClassifiers>
+        </eSubpackages>
+        <eSubpackages name="HwMemory" nsURI="http:///MARTE/MARTE_DesignModel/HRM/HwLogical/HwMemory.ecore"
+            nsPrefix="MARTE.MARTE_DesignModel.HRM.HwLogical.HwMemory">
+          <eClassifiers xsi:type="ecore:EClass" name="HwMemory" eSuperTypes="#//MARTE_DesignModel/HRM/HwLogical/HwGeneral/HwResource #//MARTE_Foundations/GRM/StorageResource">
+            <eStructuralFeatures xsi:type="ecore:EReference" name="memorySize" ordered="false"
+                unique="false" eType="ecore:EClass MARTE_Library.ecore#//BasicNFP_Types/NFP_DataSize"/>
+            <eStructuralFeatures xsi:type="ecore:EReference" name="adressSize" ordered="false"
+                unique="false" eType="ecore:EClass MARTE_Library.ecore#//BasicNFP_Types/NFP_DataSize"/>
+            <eStructuralFeatures xsi:type="ecore:EReference" name="timings" ordered="false"
+                unique="false" upperBound="-1" eType="#//MARTE_DesignModel/HRM/HwLogical/HwMemory/Timing"/>
+          </eClassifiers>
+          <eClassifiers xsi:type="ecore:EClass" name="Timing">
+            <eStructuralFeatures xsi:type="ecore:EReference" name="notation" ordered="false"
+                unique="false" eType="ecore:EClass MARTE_Library.ecore#//BasicNFP_Types/NFP_String"/>
+            <eStructuralFeatures xsi:type="ecore:EReference" name="description" ordered="false"
+                unique="false" eType="ecore:EClass MARTE_Library.ecore#//BasicNFP_Types/NFP_String"/>
+            <eStructuralFeatures xsi:type="ecore:EReference" name="value" ordered="false"
+                unique="false" eType="ecore:EClass MARTE_Library.ecore#//BasicNFP_Types/NFP_Duration"/>
+          </eClassifiers>
+          <eClassifiers xsi:type="ecore:EEnum" name="Repl_Policy">
+            <eLiterals name="LRU"/>
+            <eLiterals name="NFU" value="1"/>
+            <eLiterals name="FIFO" value="2"/>
+            <eLiterals name="Random" value="3"/>
+            <eLiterals name="Other" value="4"/>
+            <eLiterals name="Undefined" value="5"/>
+          </eClassifiers>
+          <eClassifiers xsi:type="ecore:EEnum" name="WritePolicy">
+            <eLiterals name="WriteBack"/>
+            <eLiterals name="WriteThrough" value="1"/>
+            <eLiterals name="Other" value="2"/>
+            <eLiterals name="Undefined" value="3"/>
+          </eClassifiers>
+          <eClassifiers xsi:type="ecore:EEnum" name="CacheType">
+            <eLiterals name="Data"/>
+            <eLiterals name="Instruction" value="1"/>
+            <eLiterals name="Unified" value="2"/>
+            <eLiterals name="Other" value="3"/>
+            <eLiterals name="Undefined" value="4"/>
+          </eClassifiers>
+          <eClassifiers xsi:type="ecore:EEnum" name="ROM_Type">
+            <eLiterals name="MaskedROM"/>
+            <eLiterals name="EPROM" value="1"/>
+            <eLiterals name="OTP_EPROM" value="2"/>
+            <eLiterals name="EEPROM" value="3"/>
+            <eLiterals name="Flash" value="4"/>
+            <eLiterals name="Other" value="5"/>
+            <eLiterals name="Undefined" value="6"/>
+          </eClassifiers>
+          <eClassifiers xsi:type="ecore:EClass" name="CacheStructure">
+            <eStructuralFeatures xsi:type="ecore:EReference" name="nbSets" ordered="false"
+                unique="false" eType="ecore:EClass MARTE_Library.ecore#//BasicNFP_Types/NFP_Natural"/>
+            <eStructuralFeatures xsi:type="ecore:EReference" name="blockSize" ordered="false"
+                unique="false" eType="ecore:EClass MARTE_Library.ecore#//BasicNFP_Types/NFP_DataSize"/>
+            <eStructuralFeatures xsi:type="ecore:EReference" name="associativity"
+                ordered="false" unique="false" eType="ecore:EClass MARTE_Library.ecore#//BasicNFP_Types/NFP_Natural"/>
+          </eClassifiers>
+          <eClassifiers xsi:type="ecore:EClass" name="MemoryOrganization">
+            <eStructuralFeatures xsi:type="ecore:EReference" name="nbRows" ordered="false"
+                unique="false" eType="ecore:EClass MARTE_Library.ecore#//BasicNFP_Types/NFP_Natural"/>
+            <eStructuralFeatures xsi:type="ecore:EReference" name="nbColumns" ordered="false"
+                unique="false" eType="ecore:EClass MARTE_Library.ecore#//BasicNFP_Types/NFP_Natural"/>
+            <eStructuralFeatures xsi:type="ecore:EReference" name="nbBanks" ordered="false"
+                unique="false" eType="ecore:EClass MARTE_Library.ecore#//BasicNFP_Types/NFP_Natural"/>
+            <eStructuralFeatures xsi:type="ecore:EReference" name="wordSize" ordered="false"
+                unique="false" eType="ecore:EClass MARTE_Library.ecore#//BasicNFP_Types/NFP_DataSize"/>
+          </eClassifiers>
+          <eClassifiers xsi:type="ecore:EClass" name="HwRAM" eSuperTypes="#//MARTE_DesignModel/HRM/HwLogical/HwMemory/HwMemory">
+            <eStructuralFeatures xsi:type="ecore:EReference" name="organization" ordered="false"
+                unique="false" eType="#//MARTE_DesignModel/HRM/HwLogical/HwMemory/MemoryOrganization"/>
+            <eStructuralFeatures xsi:type="ecore:EReference" name="isSynchronous"
+                ordered="false" unique="false" eType="ecore:EClass MARTE_Library.ecore#//BasicNFP_Types/NFP_Boolean"/>
+            <eStructuralFeatures xsi:type="ecore:EReference" name="isStatic" ordered="false"
+                unique="false" eType="ecore:EClass MARTE_Library.ecore#//BasicNFP_Types/NFP_Boolean"/>
+            <eStructuralFeatures xsi:type="ecore:EReference" name="isNonVolatile"
+                ordered="false" unique="false" eType="ecore:EClass MARTE_Library.ecore#//BasicNFP_Types/NFP_Boolean"/>
+            <eStructuralFeatures xsi:type="ecore:EAttribute" name="repl_Policy" ordered="false"
+                unique="false" eType="#//MARTE_DesignModel/HRM/HwLogical/HwMemory/Repl_Policy"/>
+            <eStructuralFeatures xsi:type="ecore:EAttribute" name="writePolicy" ordered="false"
+                unique="false" eType="#//MARTE_DesignModel/HRM/HwLogical/HwMemory/WritePolicy"/>
+          </eClassifiers>
+          <eClassifiers xsi:type="ecore:EClass" name="HwROM" eSuperTypes="#//MARTE_DesignModel/HRM/HwLogical/HwMemory/HwMemory">
+            <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" ordered="false"
+                unique="false" eType="#//MARTE_DesignModel/HRM/HwLogical/HwMemory/ROM_Type"/>
+            <eStructuralFeatures xsi:type="ecore:EReference" name="organization" ordered="false"
+                unique="false" eType="#//MARTE_DesignModel/HRM/HwLogical/HwMemory/MemoryOrganization"/>
+          </eClassifiers>
+          <eClassifiers xsi:type="ecore:EClass" name="HwDrive" eSuperTypes="#//MARTE_DesignModel/HRM/HwLogical/HwMemory/HwMemory">
+            <eStructuralFeatures xsi:type="ecore:EReference" name="sectorSize" ordered="false"
+                unique="false" eType="ecore:EClass MARTE_Library.ecore#//BasicNFP_Types/NFP_DataSize"/>
+            <eStructuralFeatures xsi:type="ecore:EReference" name="buffer" ordered="false"
+                unique="false" eType="#//MARTE_DesignModel/HRM/HwLogical/HwMemory/HwRAM">
+              <eAnnotations source="subsets" references="#//MARTE_DesignModel/HRM/HwLogical/HwGeneral/HwResource/ownedHW"/>
+            </eStructuralFeatures>
+          </eClassifiers>
+          <eClassifiers xsi:type="ecore:EClass" name="HwCache" eSuperTypes="#//MARTE_DesignModel/HRM/HwLogical/HwMemory/HwMemory">
+            <eStructuralFeatures xsi:type="ecore:EReference" name="level" ordered="false"
+                unique="false" eType="ecore:EClass MARTE_Library.ecore#//BasicNFP_Types/NFP_Natural"/>
+            <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" ordered="false"
+                unique="false" eType="#//MARTE_DesignModel/HRM/HwLogical/HwMemory/CacheType"/>
+            <eStructuralFeatures xsi:type="ecore:EReference" name="structure" ordered="false"
+                unique="false" eType="#//MARTE_DesignModel/HRM/HwLogical/HwMemory/CacheStructure"/>
+            <eStructuralFeatures xsi:type="ecore:EAttribute" name="repl_Policy" ordered="false"
+                unique="false" eType="#//MARTE_DesignModel/HRM/HwLogical/HwMemory/Repl_Policy"/>
+            <eStructuralFeatures xsi:type="ecore:EAttribute" name="writePolicy" ordered="false"
+                unique="false" eType="#//MARTE_DesignModel/HRM/HwLogical/HwMemory/WritePolicy"/>
+          </eClassifiers>
+        </eSubpackages>
+        <eSubpackages name="HwStorageManager" nsURI="http:///MARTE/MARTE_DesignModel/HRM/HwLogical/HwStorageManager.ecore"
+            nsPrefix="MARTE.MARTE_DesignModel.HRM.HwLogical.HwStorageManager">
+          <eClassifiers xsi:type="ecore:EClass" name="HwStorageManager" eSuperTypes="#//MARTE_DesignModel/HRM/HwLogical/HwGeneral/HwResource #//MARTE_Foundations/GRM/StorageResource">
+            <eStructuralFeatures xsi:type="ecore:EReference" name="managedMemories"
+                ordered="false" unique="false" upperBound="-1" eType="#//MARTE_DesignModel/HRM/HwLogical/HwMemory/HwMemory"/>
+          </eClassifiers>
+          <eClassifiers xsi:type="ecore:EClass" name="HwDMA" eSuperTypes="#//MARTE_DesignModel/HRM/HwLogical/HwStorageManager/HwStorageManager #//MARTE_DesignModel/HRM/HwLogical/HwCommunication/HwArbiter">
+            <eStructuralFeatures xsi:type="ecore:EReference" name="nbChannels" ordered="false"
+                unique="false" eType="ecore:EClass MARTE_Library.ecore#//BasicNFP_Types/NFP_Natural"/>
+            <eStructuralFeatures xsi:type="ecore:EReference" name="transferWidth"
+                ordered="false" unique="false" eType="ecore:EClass MARTE_Library.ecore#//BasicNFP_Types/NFP_DataSize"/>
+            <eStructuralFeatures xsi:type="ecore:EReference" name="drivenBy" ordered="false"
+                unique="false" upperBound="-1" eType="#//MARTE_DesignModel/HRM/HwLogical/HwComputing/HwProcessor"/>
+          </eClassifiers>
+          <eClassifiers xsi:type="ecore:EClass" name="HwMMU" eSuperTypes="#//MARTE_DesignModel/HRM/HwLogical/HwStorageManager/HwStorageManager">
+            <eStructuralFeatures xsi:type="ecore:EReference" name="virtualAddrSpace"
+                ordered="false" unique="false" eType="ecore:EClass MARTE_Library.ecore#//BasicNFP_Types/NFP_DataSize"/>
+            <eStructuralFeatures xsi:type="ecore:EReference" name="physicalAddrSpace"
+                ordered="false" unique="false" eType="ecore:EClass MARTE_Library.ecore#//BasicNFP_Types/NFP_DataSize"/>
+            <eStructuralFeatures xsi:type="ecore:EReference" name="memoryProtection"
+                ordered="false" unique="false" eType="ecore:EClass MARTE_Library.ecore#//BasicNFP_Types/NFP_Boolean"/>
+            <eStructuralFeatures xsi:type="ecore:EReference" name="nbEntries" ordered="false"
+                unique="false" eType="ecore:EClass MARTE_Library.ecore#//BasicNFP_Types/NFP_Natural"
+                volatile="true" derived="true"/>
+            <eStructuralFeatures xsi:type="ecore:EReference" name="ownedTLBs" ordered="false"
+                unique="false" upperBound="-1" eType="#//MARTE_DesignModel/HRM/HwLogical/HwMemory/HwCache">
+              <eAnnotations source="subsets" references="#//MARTE_DesignModel/HRM/HwLogical/HwGeneral/HwResource/ownedHW"/>
+            </eStructuralFeatures>
+          </eClassifiers>
+        </eSubpackages>
+        <eSubpackages name="HwTiming" nsURI="http:///MARTE/MARTE_DesignModel/HRM/HwLogical/HwTiming.ecore"
+            nsPrefix="MARTE.MARTE_DesignModel.HRM.HwLogical.HwTiming">
+          <eClassifiers xsi:type="ecore:EClass" name="HwTimingResource" eSuperTypes="#//MARTE_Foundations/GRM/TimingResource #//MARTE_DesignModel/HRM/HwLogical/HwGeneral/HwResource"/>
+          <eClassifiers xsi:type="ecore:EClass" name="HwClock" eSuperTypes="#//MARTE_DesignModel/HRM/HwLogical/HwTiming/HwTimingResource"/>
+          <eClassifiers xsi:type="ecore:EClass" name="HwTimer" eSuperTypes="#//MARTE_DesignModel/HRM/HwLogical/HwTiming/HwTimingResource">
+            <eStructuralFeatures xsi:type="ecore:EReference" name="nbCounters" ordered="false"
+                unique="false" eType="ecore:EClass MARTE_Library.ecore#//BasicNFP_Types/NFP_Natural"/>
+            <eStructuralFeatures xsi:type="ecore:EReference" name="counterWidth" ordered="false"
+                unique="false" eType="ecore:EClass MARTE_Library.ecore#//BasicNFP_Types/NFP_DataSize"/>
+            <eStructuralFeatures xsi:type="ecore:EReference" name="inputClock" ordered="false"
+                unique="false" eType="#//MARTE_DesignModel/HRM/HwLogical/HwTiming/HwClock"/>
+          </eClassifiers>
+        </eSubpackages>
+        <eSubpackages name="HwDevice" nsURI="http:///MARTE/MARTE_DesignModel/HRM/HwLogical/HwDevice.ecore"
+            nsPrefix="MARTE.MARTE_DesignModel.HRM.HwLogical.HwDevice">
+          <eClassifiers xsi:type="ecore:EClass" name="HwDevice" eSuperTypes="#//MARTE_DesignModel/HRM/HwLogical/HwGeneral/HwResource #//MARTE_Foundations/GRM/DeviceResource"/>
+          <eClassifiers xsi:type="ecore:EClass" name="HwI_O" eSuperTypes="#//MARTE_DesignModel/HRM/HwLogical/HwDevice/HwDevice"/>
+          <eClassifiers xsi:type="ecore:EClass" name="HwSupport" eSuperTypes="#//MARTE_DesignModel/HRM/HwLogical/HwDevice/HwDevice"/>
+        </eSubpackages>
+      </eSubpackages>
+      <eSubpackages name="HwPhysical" nsURI="http:///MARTE/MARTE_DesignModel/HRM/HwPhysical.ecore"
+          nsPrefix="MARTE.MARTE_DesignModel.HRM.HwPhysical">
+        <eSubpackages name="HwGeneral" nsURI="http:///MARTE/MARTE_DesignModel/HRM/HwPhysical/HwGeneral.ecore"
+            nsPrefix="MARTE.MARTE_DesignModel.HRM.HwPhysical.HwGeneral"/>
+        <eSubpackages name="HwLayout" nsURI="http:///MARTE/MARTE_DesignModel/HRM/HwPhysical/HwLayout.ecore"
+            nsPrefix="MARTE.MARTE_DesignModel.HRM.HwPhysical.HwLayout">
+          <eClassifiers xsi:type="ecore:EClass" name="HwComponent" eSuperTypes="#//MARTE_DesignModel/HRM/HwLogical/HwGeneral/HwResource">
+            <eStructuralFeatures xsi:type="ecore:EAttribute" name="kind" ordered="false"
+                unique="false" eType="#//MARTE_DesignModel/HRM/HwPhysical/HwLayout/ComponentKind"/>
+            <eStructuralFeatures xsi:type="ecore:EReference" name="dimensions" ordered="false"
+                unique="false" upperBound="3" eType="ecore:EClass MARTE_Library.ecore#//BasicNFP_Types/NFP_Length"/>
+            <eStructuralFeatures xsi:type="ecore:EReference" name="area" ordered="false"
+                unique="false" eType="ecore:EClass MARTE_Library.ecore#//BasicNFP_Types/NFP_Area"
+                volatile="true" derived="true"/>
+            <eStructuralFeatures xsi:type="ecore:EReference" name="position" ordered="false"
+                unique="false" upperBound="2" eType="ecore:EClass MARTE_Library.ecore#//MARTE_DataTypes/NFP_NaturalInterval"/>
+            <eStructuralFeatures xsi:type="ecore:EReference" name="grid" ordered="false"
+                unique="false" upperBound="2" eType="ecore:EClass MARTE_Library.ecore#//BasicNFP_Types/NFP_Natural"/>
+            <eStructuralFeatures xsi:type="ecore:EReference" name="nbPins" ordered="false"
+                unique="false" eType="ecore:EClass MARTE_Library.ecore#//BasicNFP_Types/NFP_Natural"/>
+            <eStructuralFeatures xsi:type="ecore:EReference" name="weight" ordered="false"
+                unique="false" eType="ecore:EClass MARTE_Library.ecore#//BasicNFP_Types/NFP_Real"/>
+            <eStructuralFeatures xsi:type="ecore:EReference" name="price" ordered="false"
+                unique="false" eType="ecore:EClass MARTE_Library.ecore#//BasicNFP_Types/NFP_String"/>
+            <eStructuralFeatures xsi:type="ecore:EReference" name="r_Conditions" ordered="false"
+                unique="false" upperBound="-1" eType="#//MARTE_DesignModel/HRM/HwPhysical/HwLayout/Env_Condition"/>
+            <eStructuralFeatures xsi:type="ecore:EReference" name="poweredServices"
+                ordered="false" unique="false" upperBound="-1" eType="#//MARTE_DesignModel/HRM/HwLogical/HwGeneral/HwResourceService"
+                containment="true">
+              <eAnnotations source="redefines" references="#//MARTE_DesignModel/HRM/HwLogical/HwGeneral/HwResource/p_HW_Services"/>
+            </eStructuralFeatures>
+            <eStructuralFeatures xsi:type="ecore:EReference" name="staticConsumption"
+                ordered="false" unique="false" eType="ecore:EClass MARTE_Library.ecore#//BasicNFP_Types/NFP_Power"/>
+            <eStructuralFeatures xsi:type="ecore:EReference" name="staticDissipation"
+                ordered="false" unique="false" eType="ecore:EClass MARTE_Library.ecore#//BasicNFP_Types/NFP_Power"/>
+            <eStructuralFeatures xsi:type="ecore:EReference" name="subComponents"
+                ordered="false" unique="false" upperBound="-1" eType="#//MARTE_DesignModel/HRM/HwPhysical/HwLayout/HwComponent">
+              <eAnnotations source="subsets" references="#//MARTE_DesignModel/HRM/HwLogical/HwGeneral/HwResource/ownedHW"/>
+            </eStructuralFeatures>
+          </eClassifiers>
+          <eClassifiers xsi:type="ecore:EEnum" name="ComponentKind">
+            <eLiterals name="Card"/>
+            <eLiterals name="Channel" value="1"/>
+            <eLiterals name="Chip" value="2"/>
+            <eLiterals name="Port" value="3"/>
+            <eLiterals name="Unit" value="4"/>
+            <eLiterals name="Other" value="5"/>
+            <eLiterals name="Undefined" value="6"/>
+          </eClassifiers>
+          <eClassifiers xsi:type="ecore:EClass" name="Env_Condition">
+            <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" ordered="false"
+                unique="false" eType="#//MARTE_DesignModel/HRM/HwPhysical/HwLayout/ConditionType"/>
+            <eStructuralFeatures xsi:type="ecore:EAttribute" name="status" ordered="false"
+                unique="false" eType="#//MARTE_DesignModel/HRM/HwPhysical/HwLayout/CompnentState"/>
+            <eStructuralFeatures xsi:type="ecore:EReference" name="description" ordered="false"
+                unique="false" eType="ecore:EClass MARTE_Library.ecore#//BasicNFP_Types/NFP_String"/>
+            <eStructuralFeatures xsi:type="ecore:EReference" name="range" ordered="false"
+                unique="false" eType="ecore:EClass MARTE_Library.ecore#//MARTE_DataTypes/Realnterval"/>
+          </eClassifiers>
+          <eClassifiers xsi:type="ecore:EEnum" name="ConditionType">
+            <eLiterals name="Temperature"/>
+            <eLiterals name="Humidity" value="1"/>
+            <eLiterals name="Altitude" value="2"/>
+            <eLiterals name="Vibration" value="3"/>
+            <eLiterals name="Shock" value="4"/>
+            <eLiterals name="Other" value="5"/>
+            <eLiterals name="Undefined" value="6"/>
+          </eClassifiers>
+          <eClassifiers xsi:type="ecore:EEnum" name="CompnentState">
+            <eLiterals name="Operating"/>
+            <eLiterals name="Storage" value="1"/>
+            <eLiterals name="Other" value="2"/>
+            <eLiterals name="Undefined" value="3"/>
+          </eClassifiers>
+        </eSubpackages>
+        <eSubpackages name="HwPower" nsURI="http:///MARTE/MARTE_DesignModel/HRM/HwPhysical/HwPower.ecore"
+            nsPrefix="MARTE.MARTE_DesignModel.HRM.HwPhysical.HwPower">
+          <eClassifiers xsi:type="ecore:EClass" name="HwPowerSupply" eSuperTypes="#//MARTE_DesignModel/HRM/HwPhysical/HwLayout/HwComponent">
+            <eStructuralFeatures xsi:type="ecore:EReference" name="suppliedPower"
+                ordered="false" unique="false" eType="ecore:EClass MARTE_Library.ecore#//BasicNFP_Types/NFP_Power"/>
+            <eStructuralFeatures xsi:type="ecore:EReference" name="capacity" ordered="false"
+                unique="false" eType="ecore:EClass MARTE_Library.ecore#//BasicNFP_Types/NFP_Energy"/>
+          </eClassifiers>
+          <eClassifiers xsi:type="ecore:EClass" name="HwCoolingSupply" eSuperTypes="#//MARTE_DesignModel/HRM/HwPhysical/HwLayout/HwComponent">
+            <eStructuralFeatures xsi:type="ecore:EReference" name="coolingPower" ordered="false"
+                unique="false" eType="ecore:EClass MARTE_Library.ecore#//BasicNFP_Types/NFP_Power"/>
+          </eClassifiers>
+        </eSubpackages>
+      </eSubpackages>
+    </eSubpackages>
+    <eSubpackages name="SRM" nsURI="http:///MARTE/MARTE_DesignModel/SRM.ecore" nsPrefix="MARTE.MARTE_DesignModel.SRM">
+      <eSubpackages name="SW_ResourceCore" nsURI="http:///MARTE/MARTE_DesignModel/SRM/SW_ResourceCore.ecore"
+          nsPrefix="MARTE.MARTE_DesignModel.SRM.SW_ResourceCore">
+        <eClassifiers xsi:type="ecore:EClass" name="SwResource" abstract="true" eSuperTypes="#//MARTE_Foundations/GRM/Resource">
+          <eStructuralFeatures xsi:type="ecore:EReference" name="identifierElements"
+              ordered="false" unique="false" upperBound="-1" eType="ecore:EClass platform:/resource/org.kermeta.uml2.profiles.model/model/ecore/uml.ecore#//TypedElement"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="stateElements" ordered="false"
+              unique="false" upperBound="-1" eType="ecore:EClass platform:/resource/org.kermeta.uml2.profiles.model/model/ecore/uml.ecore#//TypedElement"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="memorySizeFootprint"
+              ordered="false" unique="false" eType="ecore:EClass platform:/resource/org.kermeta.uml2.profiles.model/model/ecore/uml.ecore#//TypedElement"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="createServices" ordered="false"
+              unique="false" upperBound="-1" eType="ecore:EClass platform:/resource/org.kermeta.uml2.profiles.model/model/ecore/uml.ecore#//BehavioralFeature"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="deleteServices" ordered="false"
+              unique="false" upperBound="-1" eType="ecore:EClass platform:/resource/org.kermeta.uml2.profiles.model/model/ecore/uml.ecore#//BehavioralFeature"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="initializeServices"
+              ordered="false" unique="false" upperBound="-1" eType="ecore:EClass platform:/resource/org.kermeta.uml2.profiles.model/model/ecore/uml.ecore#//BehavioralFeature"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="SwAccessService" eSuperTypes="#//MARTE_Foundations/GRM/GRService">
+          <eStructuralFeatures xsi:type="ecore:EAttribute" name="isModifier" ordered="false"
+              unique="false" eType="ecore:EDataType MARTE_Library.ecore#//MARTE_PrimitivesTypes/Boolean"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="accessedElement"
+              ordered="false" unique="false" lowerBound="1" eType="ecore:EClass platform:/resource/org.kermeta.uml2.profiles.model/model/ecore/uml.ecore#//Property"/>
+        </eClassifiers>
+      </eSubpackages>
+      <eSubpackages name="SW_Concurrency" nsURI="http:///MARTE/MARTE_DesignModel/SRM/SW_Concurrency.ecore"
+          nsPrefix="MARTE.MARTE_DesignModel.SRM.SW_Concurrency">
+        <eClassifiers xsi:type="ecore:EEnum" name="InterruptKind">
+          <eLiterals name="HardwareInterruption"/>
+          <eLiterals name="ProcessorDetectedException" value="1"/>
+          <eLiterals name="ProgrammedException" value="2"/>
+          <eLiterals name="Undef" value="3"/>
+          <eLiterals name="Other" value="4"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="EntryPoint">
+          <eStructuralFeatures xsi:type="ecore:EAttribute" name="isReentrant" ordered="false"
+              unique="false" eType="ecore:EDataType MARTE_Library.ecore#//MARTE_PrimitivesTypes/Boolean"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="routine" ordered="false"
+              unique="false" lowerBound="1" eType="ecore:EClass platform:/resource/org.kermeta.uml2.profiles.model/model/ecore/uml.ecore#//BehavioralFeature"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="base_BehavioralFeature"
+              ordered="false" unique="false" lowerBound="1" eType="ecore:EClass platform:/resource/org.kermeta.uml2.profiles.model/model/ecore/uml.ecore#//BehavioralFeature"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="base_Dependency"
+              ordered="false" unique="false" lowerBound="1" eType="ecore:EClass platform:/resource/org.kermeta.uml2.profiles.model/model/ecore/uml.ecore#//Dependency"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="SwConcurrentResource" abstract="true"
+            eSuperTypes="#//MARTE_DesignModel/SRM/SW_ResourceCore/SwResource">
+          <eStructuralFeatures xsi:type="ecore:EReference" name="type" ordered="false"
+              unique="false" eType="ecore:EClass MARTE_Library.ecore#//BasicNFP_Types/ArrivalPattern"/>
+          <eStructuralFeatures xsi:type="ecore:EAttribute" name="activationCapacity"
+              ordered="false" unique="false" eType="ecore:EDataType MARTE_Library.ecore#//MARTE_PrimitivesTypes/Integer"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="entryPoints" ordered="false"
+              unique="false" upperBound="-1" eType="ecore:EClass platform:/resource/org.kermeta.uml2.profiles.model/model/ecore/uml.ecore#//Element"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="adressSpace" ordered="false"
+              unique="false" upperBound="-1" eType="ecore:EClass platform:/resource/org.kermeta.uml2.profiles.model/model/ecore/uml.ecore#//TypedElement"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="periodElements" ordered="false"
+              unique="false" upperBound="-1" eType="ecore:EClass platform:/resource/org.kermeta.uml2.profiles.model/model/ecore/uml.ecore#//TypedElement"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="priorityElements"
+              ordered="false" unique="false" upperBound="-1" eType="ecore:EClass platform:/resource/org.kermeta.uml2.profiles.model/model/ecore/uml.ecore#//TypedElement"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="stackSizeElements"
+              ordered="false" unique="false" upperBound="-1" eType="ecore:EClass platform:/resource/org.kermeta.uml2.profiles.model/model/ecore/uml.ecore#//TypedElement"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="activateServices"
+              ordered="false" unique="false" upperBound="-1" eType="ecore:EClass platform:/resource/org.kermeta.uml2.profiles.model/model/ecore/uml.ecore#//BehavioralFeature"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="enableConcurrencyServices"
+              ordered="false" unique="false" upperBound="-1" eType="ecore:EClass platform:/resource/org.kermeta.uml2.profiles.model/model/ecore/uml.ecore#//BehavioralFeature"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="resumeServices" ordered="false"
+              unique="false" upperBound="-1" eType="ecore:EClass platform:/resource/org.kermeta.uml2.profiles.model/model/ecore/uml.ecore#//BehavioralFeature"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="suspendServices"
+              ordered="false" unique="false" upperBound="-1" eType="ecore:EClass platform:/resource/org.kermeta.uml2.profiles.model/model/ecore/uml.ecore#//BehavioralFeature"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="terminateServices"
+              ordered="false" unique="false" upperBound="-1" eType="ecore:EClass platform:/resource/org.kermeta.uml2.profiles.model/model/ecore/uml.ecore#//BehavioralFeature"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="disableConcurrencyServices"
+              ordered="false" unique="false" upperBound="-1" eType="ecore:EClass platform:/resource/org.kermeta.uml2.profiles.model/model/ecore/uml.ecore#//BehavioralFeature"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="shareDataResources"
+              ordered="false" unique="false" upperBound="-1" eType="ecore:EClass platform:/resource/org.kermeta.uml2.profiles.model/model/ecore/uml.ecore#//TypedElement"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="messageResources"
+              ordered="false" unique="false" upperBound="-1" eType="ecore:EClass platform:/resource/org.kermeta.uml2.profiles.model/model/ecore/uml.ecore#//TypedElement"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="mutualExclusionResources"
+              ordered="false" unique="false" upperBound="-1" eType="ecore:EClass platform:/resource/org.kermeta.uml2.profiles.model/model/ecore/uml.ecore#//TypedElement"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="notificationResources"
+              ordered="false" unique="false" upperBound="-1" eType="ecore:EClass platform:/resource/org.kermeta.uml2.profiles.model/model/ecore/uml.ecore#//TypedElement"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="InterruptResource" eSuperTypes="#//MARTE_DesignModel/SRM/SW_Concurrency/SwConcurrentResource">
+          <eStructuralFeatures xsi:type="ecore:EAttribute" name="kind" ordered="false"
+              unique="false" eType="#//MARTE_DesignModel/SRM/SW_Concurrency/InterruptKind"/>
+          <eStructuralFeatures xsi:type="ecore:EAttribute" name="isMaskable" ordered="false"
+              unique="false" eType="ecore:EDataType MARTE_Library.ecore#//MARTE_PrimitivesTypes/Boolean"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="vectorElements" ordered="false"
+              unique="false" upperBound="-1" eType="ecore:EClass platform:/resource/org.kermeta.uml2.profiles.model/model/ecore/uml.ecore#//TypedElement"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="maskElements" ordered="false"
+              unique="false" upperBound="-1" eType="ecore:EClass platform:/resource/org.kermeta.uml2.profiles.model/model/ecore/uml.ecore#//TypedElement"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="routineConnectServices"
+              ordered="false" unique="false" upperBound="-1" eType="ecore:EClass platform:/resource/org.kermeta.uml2.profiles.model/model/ecore/uml.ecore#//BehavioralFeature"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="routineDisconnectServices"
+              ordered="false" unique="false" upperBound="-1" eType="ecore:EClass platform:/resource/org.kermeta.uml2.profiles.model/model/ecore/uml.ecore#//BehavioralFeature"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="SwSchedulableResource" eSuperTypes="#//MARTE_DesignModel/SRM/SW_Concurrency/SwConcurrentResource">
+          <eStructuralFeatures xsi:type="ecore:EAttribute" name="isStaticSchedulingFeature"
+              ordered="false" unique="false" eType="ecore:EDataType MARTE_Library.ecore#//MARTE_PrimitivesTypes/Boolean"/>
+          <eStructuralFeatures xsi:type="ecore:EAttribute" name="isPreemptable" ordered="false"
+              unique="false" eType="ecore:EDataType MARTE_Library.ecore#//MARTE_PrimitivesTypes/Boolean"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="schedulers" ordered="false"
+              unique="false" lowerBound="1" eType="ecore:EClass platform:/resource/org.kermeta.uml2.profiles.model/model/ecore/uml.ecore#//NamedElement"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="deadlineElements"
+              ordered="false" unique="false" upperBound="-1" eType="ecore:EClass platform:/resource/org.kermeta.uml2.profiles.model/model/ecore/uml.ecore#//TypedElement"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="deadlineTypeElements"
+              ordered="false" unique="false" upperBound="-1" eType="ecore:EClass platform:/resource/org.kermeta.uml2.profiles.model/model/ecore/uml.ecore#//TypedElement"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="timeSliceElements"
+              ordered="false" unique="false" upperBound="-1" eType="ecore:EClass platform:/resource/org.kermeta.uml2.profiles.model/model/ecore/uml.ecore#//TypedElement"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="delayServices" ordered="false"
+              unique="false" upperBound="-1" eType="ecore:EClass platform:/resource/org.kermeta.uml2.profiles.model/model/ecore/uml.ecore#//BehavioralFeature"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="joinServices" ordered="false"
+              unique="false" upperBound="-1" eType="ecore:EClass platform:/resource/org.kermeta.uml2.profiles.model/model/ecore/uml.ecore#//BehavioralFeature"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="yieldServices" ordered="false"
+              unique="false" upperBound="-1" eType="ecore:EClass platform:/resource/org.kermeta.uml2.profiles.model/model/ecore/uml.ecore#//BehavioralFeature"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="SwTimerResource" eSuperTypes="#//MARTE_Foundations/GRM/TimerResource">
+          <eStructuralFeatures xsi:type="ecore:EReference" name="durationElements"
+              ordered="false" unique="false" eType="ecore:EClass platform:/resource/org.kermeta.uml2.profiles.model/model/ecore/uml.ecore#//TypedElement">
+            <eAnnotations source="redefines" references="#//MARTE_Foundations/GRM/TimerResource/duration"/>
+          </eStructuralFeatures>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="MemoryPartition" eSuperTypes="#//MARTE_DesignModel/SRM/SW_ResourceCore/SwResource">
+          <eStructuralFeatures xsi:type="ecore:EReference" name="concurrentResources"
+              ordered="false" unique="false" upperBound="-1" eType="ecore:EClass platform:/resource/org.kermeta.uml2.profiles.model/model/ecore/uml.ecore#//TypedElement"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="memorySpaces" ordered="false"
+              unique="false" upperBound="-1" eType="ecore:EClass platform:/resource/org.kermeta.uml2.profiles.model/model/ecore/uml.ecore#//TypedElement"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="fork" ordered="false"
+              unique="false" upperBound="-1" eType="ecore:EClass platform:/resource/org.kermeta.uml2.profiles.model/model/ecore/uml.ecore#//BehavioralFeature"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="exit" ordered="false"
+              unique="false" upperBound="-1" eType="ecore:EClass platform:/resource/org.kermeta.uml2.profiles.model/model/ecore/uml.ecore#//BehavioralFeature"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="base_Namespace" ordered="false"
+              unique="false" lowerBound="1" eType="ecore:EClass platform:/resource/org.kermeta.uml2.profiles.model/model/ecore/uml.ecore#//Namespace"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="Alarm" eSuperTypes="#//MARTE_DesignModel/SRM/SW_Concurrency/InterruptResource">
+          <eStructuralFeatures xsi:type="ecore:EAttribute" name="isWatchdog" ordered="false"
+              unique="false" eType="ecore:EDataType MARTE_Library.ecore#//MARTE_PrimitivesTypes/Boolean"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="timers" ordered="false"
+              unique="false" upperBound="-1" eType="ecore:EClass platform:/resource/org.kermeta.uml2.profiles.model/model/ecore/uml.ecore#//TypedElement"/>
+        </eClassifiers>
+      </eSubpackages>
+      <eSubpackages name="SW_Brokering" nsURI="http:///MARTE/MARTE_DesignModel/SRM/SW_Brokering.ecore"
+          nsPrefix="MARTE.MARTE_DesignModel.SRM.SW_Brokering">
+        <eClassifiers xsi:type="ecore:EEnum" name="AccessPolicyKind">
+          <eLiterals name="Read"/>
+          <eLiterals name="Write" value="1"/>
+          <eLiterals name="ReadWrite" value="2"/>
+          <eLiterals name="Undef" value="3"/>
+          <eLiterals name="Other" value="4"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="DeviceBroker" eSuperTypes="#//MARTE_DesignModel/SRM/SW_ResourceCore/SwResource">
+          <eStructuralFeatures xsi:type="ecore:EAttribute" name="accessPolicy" ordered="false"
+              unique="false" eType="#//MARTE_DesignModel/SRM/SW_Brokering/AccessPolicyKind"/>
+          <eStructuralFeatures xsi:type="ecore:EAttribute" name="isBuffered" ordered="false"
+              unique="false" eType="ecore:EDataType MARTE_Library.ecore#//MARTE_PrimitivesTypes/Boolean"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="devices" ordered="false"
+              unique="false" upperBound="-1" eType="ecore:EClass platform:/resource/org.kermeta.uml2.profiles.model/model/ecore/uml.ecore#//TypedElement"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="closeServices" ordered="false"
+              unique="false" upperBound="-1" eType="ecore:EClass platform:/resource/org.kermeta.uml2.profiles.model/model/ecore/uml.ecore#//BehavioralFeature"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="controlServices"
+              ordered="false" unique="false" upperBound="-1" eType="ecore:EClass platform:/resource/org.kermeta.uml2.profiles.model/model/ecore/uml.ecore#//BehavioralFeature"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="openServices" ordered="false"
+              unique="false" upperBound="-1" eType="ecore:EClass platform:/resource/org.kermeta.uml2.profiles.model/model/ecore/uml.ecore#//BehavioralFeature"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="readServices" ordered="false"
+              unique="false" upperBound="-1" eType="ecore:EClass platform:/resource/org.kermeta.uml2.profiles.model/model/ecore/uml.ecore#//BehavioralFeature"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="writeServices" ordered="false"
+              unique="false" upperBound="-1" eType="ecore:EClass platform:/resource/org.kermeta.uml2.profiles.model/model/ecore/uml.ecore#//BehavioralFeature"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="MemoryBroker" eSuperTypes="#//MARTE_DesignModel/SRM/SW_ResourceCore/SwResource">
+          <eStructuralFeatures xsi:type="ecore:EAttribute" name="accessPolicy" ordered="false"
+              unique="false" eType="#//MARTE_DesignModel/SRM/SW_Brokering/AccessPolicyKind"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="memories" ordered="false"
+              unique="false" upperBound="-1" eType="ecore:EClass platform:/resource/org.kermeta.uml2.profiles.model/model/ecore/uml.ecore#//TypedElement"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="memoryBlockAdressElements"
+              ordered="false" unique="false" upperBound="-1" eType="ecore:EClass platform:/resource/org.kermeta.uml2.profiles.model/model/ecore/uml.ecore#//TypedElement"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="memoryBlockSizeElements"
+              ordered="false" unique="false" upperBound="-1" eType="ecore:EClass platform:/resource/org.kermeta.uml2.profiles.model/model/ecore/uml.ecore#//TypedElement"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="lockServices" ordered="false"
+              unique="false" upperBound="-1" eType="ecore:EClass platform:/resource/org.kermeta.uml2.profiles.model/model/ecore/uml.ecore#//BehavioralFeature"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="unlockServices" ordered="false"
+              unique="false" upperBound="-1" eType="ecore:EClass platform:/resource/org.kermeta.uml2.profiles.model/model/ecore/uml.ecore#//BehavioralFeature"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="mapServices" ordered="false"
+              unique="false" upperBound="-1" eType="ecore:EClass platform:/resource/org.kermeta.uml2.profiles.model/model/ecore/uml.ecore#//BehavioralFeature"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="unMapServices" ordered="false"
+              unique="false" upperBound="-1" eType="ecore:EClass platform:/resource/org.kermeta.uml2.profiles.model/model/ecore/uml.ecore#//BehavioralFeature"/>
+        </eClassifiers>
+      </eSubpackages>
+      <eSubpackages name="SW_Interaction" nsURI="http:///MARTE/MARTE_DesignModel/SRM/SW_Interaction.ecore"
+          nsPrefix="MARTE.MARTE_DesignModel.SRM.SW_Interaction">
+        <eClassifiers xsi:type="ecore:EEnum" name="QueuePolicyKind">
+          <eLiterals name="FIFO"/>
+          <eLiterals name="LIFO" value="1"/>
+          <eLiterals name="Priority" value="2"/>
+          <eLiterals name="Undef" value="3"/>
+          <eLiterals name="Other" value="4"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EEnum" name="MessageResourceKind">
+          <eLiterals name="MessageQueue"/>
+          <eLiterals name="Pipe" value="1"/>
+          <eLiterals name="Blackboard" value="2"/>
+          <eLiterals name="Undef" value="3"/>
+          <eLiterals name="Other" value="4"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EEnum" name="NotificationKind">
+          <eLiterals name="Memorized"/>
+          <eLiterals name="Bounded" value="1"/>
+          <eLiterals name="Memoryless" value="2"/>
+          <eLiterals name="Undef" value="3"/>
+          <eLiterals name="Other" value="4"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EEnum" name="NotificationResourceKind">
+          <eLiterals name="Event"/>
+          <eLiterals name="Barrier" value="1"/>
+          <eLiterals name="Undef" value="2"/>
+          <eLiterals name="Other" value="3"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EEnum" name="MutualExclusionResourceKind">
+          <eLiterals name="BooleanSemaphore"/>
+          <eLiterals name="CountSemaphore" value="1"/>
+          <eLiterals name="Mutex" value="2"/>
+          <eLiterals name="Undef" value="3"/>
+          <eLiterals name="Other" value="4"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EEnum" name="ConcurrentAccessProtocolKind">
+          <eLiterals name="PIP"/>
+          <eLiterals name="PCP" value="1"/>
+          <eLiterals name="NoPreemption" value="2"/>
+          <eLiterals name="Undef" value="3"/>
+          <eLiterals name="Other" value="4"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="SwInteractionResource" abstract="true"
+            eSuperTypes="#//MARTE_DesignModel/SRM/SW_ResourceCore/SwResource">
+          <eStructuralFeatures xsi:type="ecore:EAttribute" name="isIntraPartitionInteraction"
+              ordered="false" unique="false" eType="ecore:EDataType MARTE_Library.ecore#//MARTE_PrimitivesTypes/Boolean"/>
+          <eStructuralFeatures xsi:type="ecore:EAttribute" name="waitingQueuePolicy"
+              ordered="false" unique="false" eType="#//MARTE_DesignModel/SRM/SW_Interaction/QueuePolicyKind"/>
+          <eStructuralFeatures xsi:type="ecore:EAttribute" name="waitingQueueCapacity"
+              ordered="false" unique="false" eType="ecore:EDataType MARTE_Library.ecore#//MARTE_PrimitivesTypes/Integer"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="waitingPolicyElements"
+              ordered="false" unique="false" upperBound="-1" eType="ecore:EClass platform:/resource/org.kermeta.uml2.profiles.model/model/ecore/uml.ecore#//TypedElement"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="SwCommunicationResource" abstract="true"
+            eSuperTypes="#//MARTE_DesignModel/SRM/SW_Interaction/SwInteractionResource #//MARTE_Foundations/GRM/CommunicationMedia"/>
+        <eClassifiers xsi:type="ecore:EClass" name="SwSynchronizationResource" abstract="true"
+            eSuperTypes="#//MARTE_DesignModel/SRM/SW_Interaction/SwInteractionResource #//MARTE_Foundations/GRM/SynchronizationResource"/>
+        <eClassifiers xsi:type="ecore:EClass" name="SharedDataComResource" eSuperTypes="#//MARTE_DesignModel/SRM/SW_Interaction/SwCommunicationResource">
+          <eStructuralFeatures xsi:type="ecore:EReference" name="readServices" ordered="false"
+              unique="false" upperBound="-1" eType="ecore:EClass platform:/resource/org.kermeta.uml2.profiles.model/model/ecore/uml.ecore#//BehavioralFeature"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="writeServices" ordered="false"
+              unique="false" upperBound="-1" eType="ecore:EClass platform:/resource/org.kermeta.uml2.profiles.model/model/ecore/uml.ecore#//BehavioralFeature"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="MessageComResource" eSuperTypes="#//MARTE_DesignModel/SRM/SW_Interaction/SwCommunicationResource">
+          <eStructuralFeatures xsi:type="ecore:EAttribute" name="isFixedMessageSize"
+              ordered="false" unique="false" eType="ecore:EDataType MARTE_Library.ecore#//MARTE_PrimitivesTypes/Boolean"/>
+          <eStructuralFeatures xsi:type="ecore:EAttribute" name="mechanism" ordered="false"
+              unique="false" eType="#//MARTE_DesignModel/SRM/SW_Interaction/MessageResourceKind"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="messageSizeElements"
+              ordered="false" unique="false" upperBound="-1" eType="ecore:EClass platform:/resource/org.kermeta.uml2.profiles.model/model/ecore/uml.ecore#//TypedElement"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="messageQueueCapacityElements"
+              ordered="false" unique="false" upperBound="-1" eType="ecore:EClass platform:/resource/org.kermeta.uml2.profiles.model/model/ecore/uml.ecore#//TypedElement"/>
+          <eStructuralFeatures xsi:type="ecore:EAttribute" name="messageQueuePolicy"
+              ordered="false" unique="false" eType="#//MARTE_DesignModel/SRM/SW_Interaction/QueuePolicyKind"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="sendServices" ordered="false"
+              unique="false" upperBound="-1" eType="ecore:EClass platform:/resource/org.kermeta.uml2.profiles.model/model/ecore/uml.ecore#//BehavioralFeature"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="receiveServices"
+              ordered="false" unique="false" upperBound="-1" eType="ecore:EClass platform:/resource/org.kermeta.uml2.profiles.model/model/ecore/uml.ecore#//BehavioralFeature"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="NotificationResource" eSuperTypes="#//MARTE_DesignModel/SRM/SW_Interaction/SwSynchronizationResource">
+          <eStructuralFeatures xsi:type="ecore:EAttribute" name="occurence" ordered="false"
+              unique="false" eType="#//MARTE_DesignModel/SRM/SW_Interaction/NotificationKind"/>
+          <eStructuralFeatures xsi:type="ecore:EAttribute" name="mechanism" ordered="false"
+              unique="false" eType="#//MARTE_DesignModel/SRM/SW_Interaction/NotificationResourceKind"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="occurenceCountElements"
+              ordered="false" unique="false" upperBound="-1" eType="ecore:EClass platform:/resource/org.kermeta.uml2.profiles.model/model/ecore/uml.ecore#//TypedElement"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="maskElements" ordered="false"
+              unique="false" upperBound="-1" eType="ecore:EClass platform:/resource/org.kermeta.uml2.profiles.model/model/ecore/uml.ecore#//TypedElement"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="flushServices" ordered="false"
+              unique="false" upperBound="-1" eType="ecore:EClass platform:/resource/org.kermeta.uml2.profiles.model/model/ecore/uml.ecore#//BehavioralFeature"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="signalServices" ordered="false"
+              unique="false" upperBound="-1" eType="ecore:EClass platform:/resource/org.kermeta.uml2.profiles.model/model/ecore/uml.ecore#//BehavioralFeature"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="waitServices" ordered="false"
+              unique="false" upperBound="-1" eType="ecore:EClass platform:/resource/org.kermeta.uml2.profiles.model/model/ecore/uml.ecore#//BehavioralFeature"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="clearServices" ordered="false"
+              unique="false" upperBound="-1" eType="ecore:EClass platform:/resource/org.kermeta.uml2.profiles.model/model/ecore/uml.ecore#//BehavioralFeature"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="SwMutualExclusionResource" eSuperTypes="#//MARTE_DesignModel/SRM/SW_Interaction/SwSynchronizationResource">
+          <eStructuralFeatures xsi:type="ecore:EAttribute" name="mechanism" ordered="false"
+              unique="false" eType="#//MARTE_DesignModel/SRM/SW_Interaction/MutualExclusionResourceKind"/>
+          <eStructuralFeatures xsi:type="ecore:EAttribute" name="concurrentAccessProtocol"
+              ordered="false" unique="false" eType="#//MARTE_DesignModel/SRM/SW_Interaction/ConcurrentAccessProtocolKind"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="accessTokenElements"
+              ordered="false" unique="false" upperBound="-1" eType="ecore:EClass platform:/resource/org.kermeta.uml2.profiles.model/model/ecore/uml.ecore#//TypedElement"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="releaseServices"
+              ordered="false" unique="false" upperBound="-1" eType="ecore:EClass platform:/resource/org.kermeta.uml2.profiles.model/model/ecore/uml.ecore#//BehavioralFeature"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="acquireServices"
+              ordered="false" unique="false" upperBound="-1" eType="ecore:EClass platform:/resource/org.kermeta.uml2.profiles.model/model/ecore/uml.ecore#//BehavioralFeature"/>
+        </eClassifiers>
+      </eSubpackages>
+    </eSubpackages>
+  </eSubpackages>
+  <eSubpackages name="MARTE_AnalysisModel" nsURI="http:///MARTE/MARTE_AnalysisModel.ecore"
+      nsPrefix="MARTE.MARTE_AnalysisModel">
+    <eSubpackages name="GQAM" nsURI="http:///MARTE/MARTE_AnalysisModel/GQAM.ecore"
+        nsPrefix="MARTE.MARTE_AnalysisModel.GQAM">
+      <eClassifiers xsi:type="ecore:EClass" name="GaWorkloadGenerator">
+        <eStructuralFeatures xsi:type="ecore:EReference" name="pop" ordered="false"
+            unique="false" eType="ecore:EClass MARTE_Library.ecore#//BasicNFP_Types/NFP_Integer"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="base_Behavior" ordered="false"
+            unique="false" lowerBound="1" eType="ecore:EClass platform:/resource/org.kermeta.uml2.profiles.model/model/ecore/uml.ecore#//Behavior"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="GaEventTrace">
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="content" ordered="false"
+            unique="false" eType="ecore:EDataType MARTE_Library.ecore#//MARTE_PrimitivesTypes/String"/>
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="format" ordered="false"
+            unique="false" eType="ecore:EDataType MARTE_Library.ecore#//MARTE_PrimitivesTypes/String"/>
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="location" ordered="false"
+            unique="false" eType="ecore:EDataType MARTE_Library.ecore#//MARTE_PrimitivesTypes/String"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="base_NamedElement"
+            ordered="false" unique="false" lowerBound="1" eType="ecore:EClass platform:/resource/org.kermeta.uml2.profiles.model/model/ecore/uml.ecore#//NamedElement"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="GaWorkloadEvent">
+        <eStructuralFeatures xsi:type="ecore:EReference" name="pattern" ordered="false"
+            unique="false" eType="ecore:EClass MARTE_Library.ecore#//BasicNFP_Types/ArrivalPattern"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="generator" ordered="false"
+            unique="false" eType="#//MARTE_AnalysisModel/GQAM/GaWorkloadGenerator"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="trace" ordered="false"
+            unique="false" eType="#//MARTE_AnalysisModel/GQAM/GaEventTrace"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="effect" ordered="false"
+            unique="false" eType="#//MARTE_AnalysisModel/GQAM/GaScenario"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="timedEvent" ordered="false"
+            unique="false" eType="ecore:EClass platform:/resource/org.kermeta.uml2.profiles.model/model/ecore/uml.ecore#//TimeEvent"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="base_NamedElement"
+            ordered="false" unique="false" lowerBound="1" eType="ecore:EClass platform:/resource/org.kermeta.uml2.profiles.model/model/ecore/uml.ecore#//NamedElement"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="GaScenario" eSuperTypes="#//MARTE_Foundations/GRM/ResourceUsage #//MARTE_Foundations/Time/TimedProcessing">
+        <eStructuralFeatures xsi:type="ecore:EReference" name="cause" ordered="false"
+            unique="false" eType="#//MARTE_AnalysisModel/GQAM/GaWorkloadEvent"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="hostDemand" ordered="false"
+            unique="false" upperBound="-1" eType="ecore:EClass MARTE_Library.ecore#//BasicNFP_Types/NFP_Duration"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="hostDemandOps" ordered="false"
+            unique="false" upperBound="-1" eType="ecore:EClass MARTE_Library.ecore#//BasicNFP_Types/NFP_Real"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="interOccT" ordered="false"
+            unique="false" upperBound="-1" eType="ecore:EClass MARTE_Library.ecore#//BasicNFP_Types/NFP_Duration"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="throughput" ordered="false"
+            unique="false" upperBound="-1" eType="ecore:EClass MARTE_Library.ecore#//BasicNFP_Types/NFP_Frequency"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="respT" ordered="false"
+            unique="false" upperBound="-1" eType="ecore:EClass MARTE_Library.ecore#//BasicNFP_Types/NFP_Duration"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="utilization" ordered="false"
+            unique="false" upperBound="-1" eType="ecore:EClass MARTE_Library.ecore#//BasicNFP_Types/NFP_Real"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="utilizationOnHost"
+            ordered="false" unique="false" upperBound="-1" eType="ecore:EClass MARTE_Library.ecore#//BasicNFP_Types/NFP_Real"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="root" ordered="false"
+            unique="false" eType="#//MARTE_AnalysisModel/GQAM/GaStep"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="timing" ordered="false"
+            unique="false" upperBound="-1" eType="#//MARTE_AnalysisModel/GQAM/GaTimingObs"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="GaStep" eSuperTypes="#//MARTE_AnalysisModel/GQAM/GaScenario">
+        <eStructuralFeatures xsi:type="ecore:EReference" name="isAtomic" ordered="false"
+            unique="false" eType="ecore:EClass MARTE_Library.ecore#//BasicNFP_Types/NFP_Boolean"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="blockT" ordered="false"
+            unique="false" upperBound="-1" eType="ecore:EClass MARTE_Library.ecore#//BasicNFP_Types/NFP_Duration"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="rep" ordered="false"
+            unique="false" lowerBound="1" eType="ecore:EClass MARTE_Library.ecore#//BasicNFP_Types/NFP_Real"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="prob" ordered="false"
+            unique="false" eType="ecore:EClass MARTE_Library.ecore#//BasicNFP_Types/NFP_Real"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="priority" ordered="false"
+            unique="false" eType="ecore:EClass MARTE_Library.ecore#//BasicNFP_Types/NFP_Integer"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="concurRes" ordered="false"
+            unique="false" eType="#//MARTE_Foundations/GRM/SchedulableResource"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="host" ordered="false"
+            unique="false" eType="#//MARTE_AnalysisModel/GQAM/GaExecHost"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="servDemand" unique="false"
+            upperBound="-1" eType="#//MARTE_AnalysisModel/GQAM/GaRequestedService"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="servCount" unique="false"
+            upperBound="-1" eType="ecore:EClass MARTE_Library.ecore#//BasicNFP_Types/NFP_Real"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="behavior" ordered="false"
+            unique="false" eType="#//MARTE_AnalysisModel/GQAM/GaScenario"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="GaExecHost" eSuperTypes="#//MARTE_Foundations/GRM/ProcessingResource">
+        <eStructuralFeatures xsi:type="ecore:EReference" name="commTxOch" ordered="false"
+            unique="false" eType="ecore:EClass MARTE_Library.ecore#//BasicNFP_Types/NFP_Duration"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="commRcvOvh" ordered="false"
+            unique="false" eType="ecore:EClass MARTE_Library.ecore#//BasicNFP_Types/NFP_Duration"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="cntxtSwT" ordered="false"
+            unique="false" eType="ecore:EClass MARTE_Library.ecore#//BasicNFP_Types/NFP_Duration"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="clockOvh" ordered="false"
+            unique="false" eType="ecore:EClass MARTE_Library.ecore#//BasicNFP_Types/NFP_Duration"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="schedPriRange" ordered="false"
+            unique="false" eType="ecore:EClass MARTE_Library.ecore#//MARTE_DataTypes/IntegerInterval"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="memSize" ordered="false"
+            unique="false" eType="ecore:EClass MARTE_Library.ecore#//BasicNFP_Types/NFP_DataSize"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="utilization" ordered="false"
+            unique="false" upperBound="-1" eType="ecore:EClass MARTE_Library.ecore#//BasicNFP_Types/NFP_Real"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="throughput" ordered="false"
+            unique="false" upperBound="-1" eType="ecore:EClass MARTE_Library.ecore#//BasicNFP_Types/NFP_Frequency"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="GaRequestedService" eSuperTypes="#//MARTE_AnalysisModel/GQAM/GaStep">
+        <eStructuralFeatures xsi:type="ecore:EReference" name="base_Operation" ordered="false"
+            unique="false" lowerBound="1" eType="ecore:EClass platform:/resource/org.kermeta.uml2.profiles.model/model/ecore/uml.ecore#//Operation"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="GaTimingObs" eSuperTypes="#//MARTE_Foundations/NFPs/NfpConstraint">
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="laxity" ordered="false"
+            unique="false" eType="#//MARTE_AnalysisModel/GQAM/LaxityKind"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="startObs" ordered="false"
+            unique="false" eType="ecore:EClass platform:/resource/org.kermeta.uml2.profiles.model/model/ecore/uml.ecore#//TimeObservation"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="endObs" ordered="false"
+            unique="false" eType="ecore:EClass platform:/resource/org.kermeta.uml2.profiles.model/model/ecore/uml.ecore#//TimeObservation"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EEnum" name="LaxityKind">
+        <eLiterals name="hard"/>
+        <eLiterals name="soft" value="1"/>
+        <eLiterals name="other" value="2"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="GaCommStep" eSuperTypes="#//MARTE_AnalysisModel/GQAM/GaStep"/>
+      <eClassifiers xsi:type="ecore:EClass" name="GaAcqStep" eSuperTypes="#//MARTE_AnalysisModel/GQAM/GaStep">
+        <eStructuralFeatures xsi:type="ecore:EReference" name="acqRes" ordered="false"
+            unique="false" eType="#//MARTE_Foundations/GRM/Resource"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="resUnits" ordered="false"
+            unique="false" eType="ecore:EClass MARTE_Library.ecore#//BasicNFP_Types/NFP_Integer"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="GaRelStep" eSuperTypes="#//MARTE_AnalysisModel/GQAM/GaStep">
+        <eStructuralFeatures xsi:type="ecore:EReference" name="relRes" ordered="false"
+            unique="false" eType="#//MARTE_Foundations/GRM/Resource"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="resUnits" ordered="false"
+            unique="false" eType="ecore:EClass MARTE_Library.ecore#//BasicNFP_Types/NFP_Integer"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="GaLatencyObs" eSuperTypes="#//MARTE_AnalysisModel/GQAM/GaTimingObs">
+        <eStructuralFeatures xsi:type="ecore:EReference" name="latency" ordered="false"
+            unique="false" upperBound="-1" eType="ecore:EClass MARTE_Library.ecore#//BasicNFP_Types/NFP_Duration"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="miss" ordered="false"
+            unique="false" upperBound="-1" eType="ecore:EClass MARTE_Library.ecore#//BasicNFP_Types/NFP_Real"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="utility" ordered="false"
+            unique="false" upperBound="-1" eType="ecore:EClass MARTE_Library.ecore#//MARTE_DataTypes/UtilityType"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="maxJitter" ordered="false"
+            unique="false" upperBound="-1" eType="ecore:EClass MARTE_Library.ecore#//BasicNFP_Types/NFP_Duration"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="GaCommHost" eSuperTypes="#//MARTE_Foundations/GRM/ProcessingResource">
+        <eStructuralFeatures xsi:type="ecore:EReference" name="capacity" ordered="false"
+            unique="false" upperBound="-1" eType="ecore:EClass MARTE_Library.ecore#//BasicNFP_Types/NFP_DataTxRate"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="packetT" ordered="false"
+            unique="false" upperBound="-1" eType="ecore:EClass MARTE_Library.ecore#//BasicNFP_Types/NFP_Duration"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="blockT" ordered="false"
+            unique="false" upperBound="-1" eType="ecore:EClass MARTE_Library.ecore#//BasicNFP_Types/NFP_Duration"/>
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="transmMode" ordered="false"
+            unique="false" eType="ecore:EEnum MARTE_Library.ecore#//MARTE_DataTypes/TransmModeKind"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="utilization" ordered="false"
+            unique="false" upperBound="-1" eType="ecore:EClass MARTE_Library.ecore#//BasicNFP_Types/NFP_Real"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="throughput" ordered="false"
+            unique="false" upperBound="-1" eType="ecore:EClass MARTE_Library.ecore#//BasicNFP_Types/NFP_Frequency"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="GaCommChannel" eSuperTypes="#//MARTE_Foundations/GRM/SchedulableResource">
+        <eStructuralFeatures xsi:type="ecore:EReference" name="packetSize" ordered="false"
+            unique="false" eType="ecore:EClass MARTE_Library.ecore#//BasicNFP_Types/NFP_DataSize"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="utlization" ordered="false"
+            unique="false" upperBound="-1" eType="ecore:EClass MARTE_Library.ecore#//BasicNFP_Types/NFP_Real"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="GaWorkloadBehavior">
+        <eStructuralFeatures xsi:type="ecore:EReference" name="behavior" ordered="false"
+            unique="false" upperBound="-1" eType="#//MARTE_AnalysisModel/GQAM/GaScenario"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="demand" ordered="false"
+            unique="false" upperBound="-1" eType="#//MARTE_AnalysisModel/GQAM/GaWorkloadEvent"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="base_NamedElement"
+            ordered="false" unique="false" lowerBound="1" eType="ecore:EClass platform:/resource/org.kermeta.uml2.profiles.model/model/ecore/uml.ecore#//NamedElement"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="GaAnalysisContext" eSuperTypes="#//MARTE_Annexes/VSL/Variables/ExpressionContext">
+        <eStructuralFeatures xsi:type="ecore:EReference" name="context" ordered="false"
+            unique="false" upperBound="-1" eType="ecore:EClass MARTE_Library.ecore#//BasicNFP_Types/NFP_String"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="workload" ordered="false"
+            unique="false" lowerBound="1" upperBound="-1" eType="#//MARTE_AnalysisModel/GQAM/GaWorkloadBehavior"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="platform" ordered="false"
+            unique="false" lowerBound="1" upperBound="-1" eType="#//MARTE_AnalysisModel/GQAM/GaResourcesPlatform"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="GaResourcesPlatform">
+        <eStructuralFeatures xsi:type="ecore:EReference" name="resources" ordered="false"
+            unique="false" upperBound="-1" eType="#//MARTE_Foundations/GRM/Resource"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="base_Classifier" ordered="false"
+            unique="false" lowerBound="1" eType="ecore:EClass platform:/resource/org.kermeta.uml2.profiles.model/model/ecore/uml.ecore#//Classifier"/>
+      </eClassifiers>
+    </eSubpackages>
+    <eSubpackages name="SAM" nsURI="http:///MARTE/MARTE_AnalysisModel/SAM.ecore" nsPrefix="MARTE.MARTE_AnalysisModel.SAM">
+      <eClassifiers xsi:type="ecore:EEnum" name="OptimallityCriterionKind">
+        <eLiterals name="meetHardDeadlines"/>
+        <eLiterals name="minimizeMissedDeadlines" value="1"/>
+        <eLiterals name="minimizedMeanTardiness" value="2"/>
+        <eLiterals name="undef" value="3"/>
+        <eLiterals name="other" value="4"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="SaAnalysisContext" eSuperTypes="#//MARTE_AnalysisModel/GQAM/GaAnalysisContext">
+        <eStructuralFeatures xsi:type="ecore:EReference" name="isSched" ordered="false"
+            unique="false" eType="ecore:EClass MARTE_Library.ecore#//BasicNFP_Types/NFP_Boolean"/>
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="optCriterion" ordered="false"
+            unique="false" eType="#//MARTE_AnalysisModel/SAM/OptimallityCriterionKind"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="SaEnd2EndFlow">
+        <eStructuralFeatures xsi:type="ecore:EReference" name="isSched" ordered="false"
+            unique="false" eType="ecore:EClass MARTE_Library.ecore#//BasicNFP_Types/NFP_Boolean"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="schSlack" ordered="false"
+            unique="false" eType="ecore:EClass MARTE_Library.ecore#//BasicNFP_Types/NFP_Real"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="end2EndT" ordered="false"
+            unique="false" upperBound="-1" eType="ecore:EClass MARTE_Library.ecore#//BasicNFP_Types/NFP_Duration"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="end2EndD" ordered="false"
+            unique="false" upperBound="-1" eType="ecore:EClass MARTE_Library.ecore#//BasicNFP_Types/NFP_Duration"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="timing" unique="false"
+            upperBound="-1" eType="#//MARTE_AnalysisModel/GQAM/GaTimingObs"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="base_NamedElement"
+            ordered="false" unique="false" lowerBound="1" eType="ecore:EClass platform:/resource/org.kermeta.uml2.profiles.model/model/ecore/uml.ecore#//NamedElement"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="SaCommStep" eSuperTypes="#//MARTE_AnalysisModel/GQAM/GaCommStep">
+        <eStructuralFeatures xsi:type="ecore:EReference" name="deadline" ordered="false"
+            unique="false" eType="ecore:EClass MARTE_Library.ecore#//BasicNFP_Types/NFP_Duration"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="spareCap" ordered="false"
+            unique="false" eType="ecore:EClass MARTE_Library.ecore#//BasicNFP_Types/NFP_Duration"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="schSlack" ordered="false"
+            unique="false" eType="ecore:EClass MARTE_Library.ecore#//BasicNFP_Types/NFP_Real"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="base_BehavioralFeature"
+            ordered="false" unique="false" lowerBound="1" eType="ecore:EClass platform:/resource/org.kermeta.uml2.profiles.model/model/ecore/uml.ecore#//BehavioralFeature"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="SaExecStep" eSuperTypes="#//MARTE_AnalysisModel/GQAM/GaStep">
+        <eStructuralFeatures xsi:type="ecore:EReference" name="base_BehavioralFeature"
+            ordered="false" unique="false" lowerBound="1" eType="ecore:EClass platform:/resource/org.kermeta.uml2.profiles.model/model/ecore/uml.ecore#//BehavioralFeature"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="deadline" ordered="false"
+            unique="false" eType="ecore:EClass MARTE_Library.ecore#//BasicNFP_Types/NFP_Duration"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="spareCap" ordered="false"
+            unique="false" eType="ecore:EClass MARTE_Library.ecore#//BasicNFP_Types/NFP_Duration"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="schSlack" ordered="false"
+            unique="false" eType="ecore:EClass MARTE_Library.ecore#//BasicNFP_Types/NFP_Real"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="preemptT" ordered="false"
+            unique="false" eType="ecore:EClass MARTE_Library.ecore#//BasicNFP_Types/NFP_Duration"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="readyT" ordered="false"
+            unique="false" eType="ecore:EClass MARTE_Library.ecore#//BasicNFP_Types/NFP_Duration"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="delayT" ordered="false"
+            unique="false" eType="ecore:EClass MARTE_Library.ecore#//BasicNFP_Types/NFP_Duration"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="SaSchedObs" eSuperTypes="#//MARTE_AnalysisModel/GQAM/GaTimingObs">
+        <eStructuralFeatures xsi:type="ecore:EReference" name="suspentions" ordered="false"
+            unique="false" upperBound="-1" eType="ecore:EClass MARTE_Library.ecore#//BasicNFP_Types/NFP_Integer"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="blockT" ordered="false"
+            unique="false" upperBound="-1" eType="ecore:EClass MARTE_Library.ecore#//BasicNFP_Types/NFP_Duration"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="overlaps" ordered="false"
+            unique="false" upperBound="-1" eType="ecore:EClass MARTE_Library.ecore#//BasicNFP_Types/NFP_Integer"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="SaSharedResource" eSuperTypes="#//MARTE_Foundations/GRM/MutualExclusionResource">
+        <eStructuralFeatures xsi:type="ecore:EReference" name="capacity" ordered="false"
+            unique="false" eType="ecore:EClass MARTE_Library.ecore#//BasicNFP_Types/NFP_Integer"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="isPreemp" ordered="false"
+            unique="false" eType="ecore:EClass MARTE_Library.ecore#//BasicNFP_Types/NFP_Boolean"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="isConsum" ordered="false"
+            unique="false" eType="ecore:EClass MARTE_Library.ecore#//BasicNFP_Types/NFP_Boolean"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="acquisT" ordered="false"
+            unique="false" upperBound="-1" eType="ecore:EClass MARTE_Library.ecore#//BasicNFP_Types/NFP_Duration"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="releaseT" ordered="false"
+            unique="false" upperBound="-1" eType="ecore:EClass MARTE_Library.ecore#//BasicNFP_Types/NFP_Duration"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="SaCommHost" eSuperTypes="#//MARTE_AnalysisModel/GQAM/GaCommHost">
+        <eStructuralFeatures xsi:type="ecore:EReference" name="isSched" ordered="false"
+            unique="false" eType="ecore:EClass MARTE_Library.ecore#//BasicNFP_Types/NFP_Boolean"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="schSlack" ordered="false"
+            unique="false" eType="ecore:EClass MARTE_Library.ecore#//BasicNFP_Types/NFP_Real"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="SaExecHost" eSuperTypes="#//MARTE_AnalysisModel/GQAM/GaExecHost">
+        <eStructuralFeatures xsi:type="ecore:EReference" name="isSched" ordered="false"
+            unique="false" eType="ecore:EClass MARTE_Library.ecore#//BasicNFP_Types/NFP_Boolean"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="schSlack" ordered="false"
+            unique="false" eType="ecore:EClass MARTE_Library.ecore#//BasicNFP_Types/NFP_Real"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="schedUtiliz" ordered="false"
+            unique="false" eType="ecore:EClass MARTE_Library.ecore#//BasicNFP_Types/NFP_Real"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="ISRswitchT" ordered="false"
+            unique="false" eType="ecore:EClass MARTE_Library.ecore#//BasicNFP_Types/NFP_Duration"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="ISRprioRange" ordered="false"
+            unique="false" eType="ecore:EClass MARTE_Library.ecore#//MARTE_DataTypes/IntegerInterval"/>
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="schedPolicy" ordered="false"
+            unique="false" eType="ecore:EEnum MARTE_Library.ecore#//GRM_BasicTypes/SchedPolicyKind"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="isPreemptible" ordered="false"
+            unique="false" eType="ecore:EClass MARTE_Library.ecore#//BasicNFP_Types/NFP_Boolean"/>
+      </eClassifiers>
+    </eSubpackages>
+    <eSubpackages name="PAM" nsURI="http:///MARTE/MARTE_AnalysisModel/PAM.ecore" nsPrefix="MARTE.MARTE_AnalysisModel.PAM">
+      <eClassifiers xsi:type="ecore:EClass" name="PaStep" eSuperTypes="#//MARTE_AnalysisModel/GQAM/GaStep">
+        <eStructuralFeatures xsi:type="ecore:EReference" name="noSync" ordered="false"
+            unique="false" eType="ecore:EClass MARTE_Library.ecore#//BasicNFP_Types/NFP_Boolean"/>
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="extOpDemand" unique="false"
+            upperBound="-1" eType="ecore:EDataType MARTE_Library.ecore#//MARTE_PrimitivesTypes/String"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="extOpCount" unique="false"
+            upperBound="-1" eType="ecore:EClass MARTE_Library.ecore#//BasicNFP_Types/NFP_Real"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="behavDemand" unique="false"
+            upperBound="-1" eType="#//MARTE_AnalysisModel/GQAM/GaScenario"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="behavCount" unique="false"
+            upperBound="-1" eType="ecore:EClass MARTE_Library.ecore#//BasicNFP_Types/NFP_Real"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="PaRequestedStep" eSuperTypes="#//MARTE_AnalysisModel/PAM/PaStep #//MARTE_AnalysisModel/GQAM/GaRequestedService"/>
+      <eClassifiers xsi:type="ecore:EClass" name="PaCommStep" eSuperTypes="#//MARTE_AnalysisModel/PAM/PaStep #//MARTE_AnalysisModel/GQAM/GaCommStep"/>
+      <eClassifiers xsi:type="ecore:EClass" name="PaResPassStep" eSuperTypes="#//MARTE_AnalysisModel/GQAM/GaStep">
+        <eStructuralFeatures xsi:type="ecore:EReference" name="resource" ordered="false"
+            unique="false" eType="#//MARTE_Foundations/GRM/Resource"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="resUnits" ordered="false"
+            unique="false" eType="ecore:EClass MARTE_Library.ecore#//BasicNFP_Types/NFP_Integer"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="PaLogicalResource" eSuperTypes="#//MARTE_Foundations/GRM/Resource">
+        <eStructuralFeatures xsi:type="ecore:EReference" name="utilization" ordered="false"
+            unique="false" eType="ecore:EClass MARTE_Library.ecore#//BasicNFP_Types/NFP_Real"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="throughput" ordered="false"
+            unique="false" eType="ecore:EClass MARTE_Library.ecore#//BasicNFP_Types/NFP_Frequency"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="poolSize" ordered="false"
+            unique="false" lowerBound="1" eType="ecore:EClass MARTE_Library.ecore#//BasicNFP_Types/NFP_Integer"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="PaRunTInstance">
+        <eStructuralFeatures xsi:type="ecore:EReference" name="poolSize" ordered="false"
+            unique="false" eType="ecore:EClass MARTE_Library.ecore#//BasicNFP_Types/NFP_Integer"/>
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="unbddPool" ordered="false"
+            unique="false" eType="ecore:EDataType MARTE_Library.ecore#//MARTE_PrimitivesTypes/Boolean"
+            defaultValueLiteral="false"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="instance" ordered="false"
+            unique="false" eType="#//MARTE_Foundations/GRM/SchedulableResource"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="host" ordered="false"
+            unique="false" eType="#//MARTE_AnalysisModel/GQAM/GaExecHost"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="utilization" ordered="false"
+            unique="false" eType="ecore:EClass MARTE_Library.ecore#//BasicNFP_Types/NFP_Real"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="throughput" ordered="false"
+            unique="false" eType="ecore:EClass MARTE_Library.ecore#//BasicNFP_Types/NFP_Frequency"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="base_NamedElement"
+            ordered="false" unique="false" lowerBound="1" eType="ecore:EClass platform:/resource/org.kermeta.uml2.profiles.model/model/ecore/uml.ecore#//NamedElement"/>
+      </eClassifiers>
+    </eSubpackages>
+  </eSubpackages>
+</ecore:EPackage>
