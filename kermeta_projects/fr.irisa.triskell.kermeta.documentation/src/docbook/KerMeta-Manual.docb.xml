@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.4//EN"
 "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
-<!-- $Id: KerMeta-Manual.docb.xml,v 1.32 2008-09-15 12:25:24 dvojtise Exp $ -->
+<!-- $Id: KerMeta-Manual.docb.xml,v 1.33 2008-09-18 12:26:43 dvojtise Exp $ -->
 <book lang="en-US">
   <bookinfo>
     <title>Kermeta language</title>
 
     <pubdate>Build date: @BUILD.DATE@</pubdate>
 
-    <pubdate>$Date: 2008-09-15 12:25:24 $</pubdate>
+    <pubdate>$Date: 2008-09-18 12:26:43 $</pubdate>
 
     <author>
       <firstname>Zoé</firstname>
@@ -3239,9 +3239,9 @@ assert(a5c.equals(a5))</programlisting></entry>
         time.</para>
 
         <para>There is an exception for attributes which type is a primitive
-        type (String, Integer, Boolean) : since those types or particular
-        (they are not concerned by the composition, opposite concepts!), the
-        assignment does not impact any value but the assigned one.</para>
+        type (String, Integer, Boolean, Real, Char) : since those types inherit from <literal>ValueType</literal>, 
+        they are not concerned by the composition, opposite concepts.
+        In this case, the assignment doesn't impact any value but the assigned one.</para>
 
         <para><emphasis role="strong">Example 1</emphasis>: Assignment
         behavior for attribute</para>
@@ -3372,6 +3372,9 @@ class Main inherits kermeta::kunit::TestCase{
           <listitem>
             <para>Character</para>
           </listitem>
+          <listitem>
+            <para>Real</para>
+          </listitem>
         </itemizedlist>
 
         <para>We do not want two Integer objects with the same value to be
@@ -3392,7 +3395,7 @@ assert (i3 == i4)
       <section>
         <title>Collection comparison</title>
 
-        <para>Method equals exists for the collections. The generic behavior
+        <para>The method <literal>equals</literal> exists for the collections. The generic behavior
         is the following : for two collections a and b, if all elements of a
         are contained in b and vice-versa, then it returns true, false
         otherwise. This behavior is little bit different for ordered
@@ -3452,8 +3455,8 @@ end
       <title id="section_lambda_expression.title.link">Lambda Expressions and
       functions<phrase id="section_lambda_expressions"></phrase></title>
 
-      <para><phrase id="section_lambda_expression"></phrase>Kermeta proposes a
-      cheap implementation of lambda expressions, that is mainly useful for
+      <para><phrase id="section_lambda_expression"></phrase>Kermeta proposes an
+      implementation of lambda expressions, that is mainly useful for
       implementing OCL-like functions.</para>
 
       <note><para>
@@ -3541,6 +3544,20 @@ anInstance.FUNCTION_NAME ( TYPE_1, TYPE_2 | SOME_CODE )</programlisting>
 <emphasis>    var i : Integer init 5
     i := i + 132458</emphasis>
 }</emphasis></programlisting>
+
+		<para><emphasis role="strong">Example 4</emphasis>: postponing parameter evaluation in the andThen operation</para>
+		<para>The operation andThen and orElse of Boolean use the ability of functions to postpone the parameter evaluation.
+		This allows to implement the expected behavior without adding new construct to the language.
+		</para>
+        <programlisting>
+        // this kind of code allows to avoid a cast exception on the second test
+        if cl.isInstanceOf(NamedElement).andThen{f|	cl.asType(NamedElement).name == "foo"} then
+        	// do something...
+        end                
+        </programlisting>
+        <note><para>The parameter <literal>f</literal> is not used in this function. This is due to the current 
+        surface syntax of Kermeta which need at least one parameter. In this case, it's value is void.
+        </para></note>
       </section>
 
       <section>
