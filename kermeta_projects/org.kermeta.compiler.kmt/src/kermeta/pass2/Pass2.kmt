@@ -1,4 +1,4 @@
-/* $Id: Pass2.kmt,v 1.34 2008-08-26 15:53:02 cfaucher Exp $
+/* $Id: Pass2.kmt,v 1.35 2008-09-19 17:39:49 cfaucher Exp $
  * Creation date: January 21, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -48,13 +48,34 @@ package structure {
 		
 		operation applyPass2BehaviorJava(context : KM2EcoreContext) is do
 			// Compile the owned elements
-			self.eachOwnedElement{ p | p.applyPass2BehaviorJava(context) }
+			self.eachOwnedElement{ p |
+				p.applyPass2BehaviorJava(context)
+			}
 		end
 		
 		operation applyPass2BehaviorKmt(context : KM2EcoreContext) is do
 			// TODO
 		end
 	}
+	
+	//FIXME CF - Start TO REMOVE //
+	aspect class ModelingUnit {
+		method applyPass2BehaviorJava(context : KM2EcoreContext) is do
+			// Compile the owned elements
+			self.eachOwnedElement{ p |
+				p.applyPass2BehaviorJava(context)
+			}
+		end	
+	}
+	aspect class Package {
+		method applyPass2BehaviorJava(context : KM2EcoreContext) is do
+			// Compile the owned elements
+			self.eachOwnedElement{ p |
+				p.applyPass2BehaviorJava(context)
+			}
+		end	
+	}
+	// End TO REMOVE //
 	
 	aspect class ClassDefinition {
 		method applyPass2(context : KM2EcoreContext) is do			
@@ -66,12 +87,14 @@ package structure {
 		
 			self.setLinks(context)
 			
-			if self.isValueType() and (self.name != "Numeric") then
+			// Case of this ClassDefinition is a ValueType
+			if self.isValueType() and (self.name != "Numeric") then //Numeric is excluded, because this one is abstract
 				context.current_valueType := self
 				self.ownedOperation.each{ op |
 					op.applyPass2BehaviorJava(context)
 				}
 				
+				// We assume a subtype of ValueType inherits directly (not several inheritance levels)
 			    self.superType.each{ t | 
 			    	if Class.isInstance(t) then
 			    		var c : Class
@@ -79,6 +102,8 @@ package structure {
 			    		var cDef : ClassDefinition
 				    	cDef ?= c.typeDefinition
 			    		cDef.allOperation.each{ p |
+			    			// The operations having the tag: 'RecopyInValueTypes' must be recopied in each ClassDefinition
+			    			// that inherits from ValueType
 			    			if p.getRecopyInValueTypes()=="true" then 
 								p.applyPass2BehaviorJava(context)
 							end
@@ -88,9 +113,14 @@ package structure {
 				
 				context.current_valueType := void
 			else
-				super(context)
+				//FIXME CF TO REMOVE super(context)
+				self.eachOwnedElement{ p |
+					p.applyPass2BehaviorJava(context)
+				}
 			end
 			
+			// The current ClassDefinition needs a new property to implement special structure in Java like Collection, Hashtable
+			// Thus, for Collection a EReference: 'values' is added during the compilation time
 			self.getEMFNeedProperty().each{ emfNeedProperty |
 			
 				if emfNeedProperty.getPropertyInfos().size()>0 then
@@ -174,16 +204,6 @@ package structure {
 			
 			}
 					
-		end
-	}
-	
-	aspect class Class {
-		method applyPass2(context : KM2EcoreContext) is do
-			super(context)
-		end
-		
-		method applyPass2BehaviorJava(context : KM2EcoreContext) is do
-			super(context)
 		end
 	}
 	
