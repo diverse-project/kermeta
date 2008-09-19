@@ -1,4 +1,4 @@
-/* $Id: ExpressionHelper.kmt,v 1.20 2008-09-16 16:00:17 cfaucher Exp $
+/* $Id: ExpressionHelper.kmt,v 1.21 2008-09-19 17:45:23 cfaucher Exp $
  * Creation date: Jul 25, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -210,8 +210,14 @@ aspect class CallVariable {
 		result := false
 		
 		if not self.getContainerAsType(LambdaExpression).isVoid() then
-			var aStatement : Expression init getVariableDeclInBlock(self.getContainerAsType(Block).asType(Block))
-
+		
+			var tmp_block : Block
+			tmp_block ?= self.getContainerAsType(Block)
+			var aStatement : Expression
+			if not tmp_block.isVoid() then
+				aStatement := getVariableDeclInBlock(tmp_block)
+			end
+			
 			if not aStatement.isVoid() then
 				if aStatement.isInstanceOf(VariableDecl) then
 					var theVariableDecl : VariableDecl init aStatement.asType(VariableDecl)
@@ -220,8 +226,13 @@ aspect class CallVariable {
 			end
 			
 			if not result then
-				var aStatement_ : Expression init getVariableDeclInLoop(self.getContainerAsType(Loop).asType(Loop))
-
+				var tmp_loop : Loop
+				tmp_loop ?= self.getContainerAsType(Loop)
+				var aStatement_ : Expression
+				if not tmp_loop.isVoid() then
+					aStatement_ := getVariableDeclInLoop(tmp_loop)
+				end
+				
 				if not aStatement_.isVoid() then
 					if aStatement_.isInstanceOf(VariableDecl) then
 						var theVariableDecl : VariableDecl init aStatement_.asType(VariableDecl)
@@ -272,8 +283,13 @@ aspect class CallVariable {
 		if not self.getContainerAsType(Operation).isVoid() then
 			if self.getContainerAsType(Operation).asType(Operation).isFunctionType() then
 
-				var aStatement : Expression init getVariableDeclInBlock(self.getContainerAsType(Block).asType(Block))
-
+				var tmp_block : Block
+				tmp_block ?= self.getContainerAsType(Block)
+				var aStatement : Expression
+				if not tmp_block.isVoid() then
+					aStatement := getVariableDeclInBlock(tmp_block)
+				end
+				
 				if not aStatement.isVoid() then
 					if aStatement.isInstanceOf(VariableDecl) then
 						var theVariableDecl : VariableDecl init aStatement.asType(VariableDecl)
@@ -282,7 +298,12 @@ aspect class CallVariable {
 				end
 
 				if not result then
-					var aStatement_ : Expression init getVariableDeclInLoop(self.getContainerAsType(Loop).asType(Loop))
+					var tmp_loop : Loop
+					tmp_loop ? = self.getContainerAsType(Loop)
+					var aStatement_ : Expression
+					if not tmp_loop.isVoid() then
+						aStatement_ := getVariableDeclInLoop(tmp_loop)
+					end
 
 					if not aStatement_.isVoid() then
 						if aStatement_.isInstanceOf(VariableDecl) then
@@ -328,32 +349,7 @@ aspect class CallVariable {
 	end
 }
 
-aspect class CallFeature {
-
-	/*operation retrieveTopCallFeatureFunctionType() : CallFeature is do
-		
-		var return : Boolean init false
-		
-		var test : CallFeature init self
-		
-		from return
-        until return
-        loop
-        	return := true
-        	if test.target.isInstanceOf(CallFeature) then
-        		
-            	test := test.target.asType(CallFeature)
-            	
-            	if test.callsFunctionType() then
-            		result := test
-            		return := false
-            	end
-            	
-            end
-        end
-        
-	end*/
-	
+aspect class CallFeature {	
 	
 	operation isParameter() : Boolean is do
 		result := false
@@ -505,7 +501,7 @@ aspect class CallFeature {
 			callElement := IdentifierHelper.new.getMangledIdentifier(self.container.asType(VariableDecl).identifier, context)
 		else
 			if self.container.isInstanceOf(CallVariable) then
-				stdio.writeln("Give me this case !")
+				stdio.writeln("Please contact the development team if you have this case !")
 				callElement := IdentifierHelper.new.getMangledIdentifier(self.container.asType(CallVariable).name, context)
 			end
 		end
@@ -532,10 +528,22 @@ aspect class CallFeature {
 		
 		context.ftReturnType := type_ftReturnType
 		
-		ft_str := ft_str + self.staticOperation.createBehaviorJava(context)
+		/****************************/
+		/****************************/
+		/****************************/
+		/****************************/
+		/****************************/
+		/****************************/
+		//if self.target.staticType.getTypeQName() == self.staticOperation.container.asType(ClassDefinition).qualifiedName then
+			ft_str := ft_str + self.staticOperation.createBehaviorJava(context)
+		/*else
+			ft_str := ft_str + self.getMoreAppropriateOperation().createBehaviorJava(context)
+		end*/
 		
-		
-		////////////////////////////////////////////////
+				
+		// Management of the result last statement,
+		// at the end of the function type a binding between the variables of the calling operation
+		// and the variables of the given function type
 		if callElement != "" then
 			//callElement
 			ft_str := ft_str + "\n//CE\n"
@@ -562,7 +570,7 @@ aspect class CallFeature {
 				ft_str := ft_str + context.getResultLastStatementId() + "result" + context.printFtSuffix() + ";\n"
 			//end
 		end
-		////////////////////////////////////////////////
+		// End of the Management of the result last statement
 		
 		if (callElement == "") and (not Operation.new().isVoidType(self.staticType.getTypeName())) then
 			context.resultOfLastFt := "result" + context.printFtSuffix()
@@ -578,6 +586,49 @@ aspect class CallFeature {
 		//context.current_param_ft.pop()
 		
 		result := ft_str
+	end
+	
+	/** In progress */
+	operation getMoreAppropriateOperation() : Operation is do
+		result := void
+		
+		var op_name : String init self.staticOperation.name
+		
+		stdio.writeln("getMoreAppropriateOperation(): " + op_name.toString())
+		
+		var typeOfCallingCallFeature : Type init self.target.staticType
+		
+		var detectedOp : Operation init typeOfCallingCallFeature.asType(ParameterizedType).typeDefinition.asType(ClassDefinition).ownedOperation.detect{ op | op.name==op_name}
+		
+		if not detectedOp.isVoid() then
+			result := detectedOp
+		else
+			var sc : OrderedSet<Class> init typeOfCallingCallFeature.asType(Class).superClass()
+			
+			
+			/*sc.detect{ class_ |
+				class_.asType(ParameterizedType).typeDefinition.asType(ClassDefinition).ownedOperation.exists{ op | op.name==op_name}
+			}*/
+			
+	        var superClasses : OrderedSet<Class> init OrderedSet<Class>.new
+	        superClasses.addAll(sc)
+	        
+	        from  not superClasses.isEmpty
+	        until superClasses.isEmpty or (not result.isVoid())
+	        loop
+	            var ttttyp : Type init superClasses.detect{ class_ |
+					class_.asType(ParameterizedType).typeDefinition.asType(ClassDefinition).ownedOperation.exists{ op | op.name==op_name}
+				}
+				if not ttttyp.isVoid() then
+					result := ttttyp.asType(ParameterizedType).typeDefinition.asType(ClassDefinition).ownedOperation.detect{ op | op.name==op_name}
+				else
+					var tmp : OrderedSet<Class> init OrderedSet<Class>.new
+					superClasses.each{ sc | tmp.addAll(sc.superClass())}
+	            	superClasses.clear()
+	            	superClasses.addAll(tmp)
+				end
+	        end
+		end
 	end
 	
 	operation printGetAccessor() : String is do
