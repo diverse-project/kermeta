@@ -1,4 +1,4 @@
-/* $Id: KM2EcoreContext.kmt,v 1.41 2008-09-12 07:36:11 cfaucher Exp $
+/* $Id: KM2EcoreContext.kmt,v 1.42 2008-09-19 17:35:54 cfaucher Exp $
  * Creation date: February 14, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -68,7 +68,8 @@ class KM2EcoreContext {
 	/*** params for FunctionType contextual compiling ***/
 	reference ftSuffix : Stack<String> [0..1]
 	attribute inc_ftSuffix : Integer [0..1]
-	attribute ftSuffixActivation : Boolean [0..1]
+	attribute ftSuffixActivation : Boolean [1..1]
+	attribute afterLbdExpActivation : Boolean [1..1]
 	attribute ftContextualSelf : String [0..1]
 	reference ftProductTypeStack : Stack<ProductType> [0..1]
 	reference ftMapTypeStack : Stack<Hashtable<Type, Type>> [0..1]
@@ -110,6 +111,7 @@ class KM2EcoreContext {
 	attribute SEPARATOR_STATEMENT_FT : String [1..1]
 	attribute PREVIOUS_STATEMENT_FT : String [1..1]
 	attribute TYPE_SEPARATOR : String [1..1]
+	attribute FUNCTION_TYPE_COMPILATION_TASK : String [1..1]
 	/********/
 	
 	/**  */
@@ -151,6 +153,7 @@ class KM2EcoreContext {
 		self.ftSuffix := Stack<String>.new()
 		self.inc_ftSuffix := 0
 		self.ftSuffixActivation := false
+		self.afterLbdExpActivation := false
 		self.ftContextualSelf := ""
 		self.ftReturnType := ""
 		self.beforeLambdaExpressionResult := ""
@@ -212,6 +215,7 @@ class KM2EcoreContext {
 		self.SEPARATOR_STATEMENT_FT := "SEPARATOR_STATEMENT_FT_STR"
 		self.PREVIOUS_STATEMENT_FT := "PREVIOUS_STATEMENT_FT_STR"
 		self.TYPE_SEPARATOR := "TYPE_SEPARATOR"
+		self.FUNCTION_TYPE_COMPILATION_TASK := "FunctionType_Compilation"
 		
 		//self.GENMODEL_ANNOTATION := "http://www.eclipse.org/emf/2002/GenModel"
 	end
