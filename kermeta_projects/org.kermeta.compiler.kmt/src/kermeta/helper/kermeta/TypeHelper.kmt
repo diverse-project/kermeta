@@ -1,4 +1,4 @@
-/* $Id: TypeHelper.kmt,v 1.21 2008-08-22 09:57:01 cfaucher Exp $
+/* $Id: TypeHelper.kmt,v 1.22 2008-09-19 17:37:51 cfaucher Exp $
  * Creation date: January 28, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -88,15 +88,19 @@ aspect class Type {
 					var cd : ClassDefinition init self.getClassFromPrimitiveType().getClassDefinitionAsTyped()
 					result := cd.name
 				else
-					if self.isInstanceOf(VoidType) then
-						result := "void"
+					if self.isInstanceOf(Enumeration) then
+						result := self.asType(Enumeration).name
+					else
+						if self.isInstanceOf(VoidType) then
+							result := "VoidType"
+						end
 					end
 				end
 			end
 		end
 		
-		if Operation.new().isVoidType(result) then
-			result := "void"
+		if result.isVoid().orElse{ v | Operation.new().isVoidType(result) } then
+			result := "VoidType"
 		end
 	end
 	
@@ -115,15 +119,19 @@ aspect class Type {
 					var cd : ClassDefinition init self.getClassFromPrimitiveType().getClassDefinitionAsTyped()
 					result := cd.qualifiedName
 				else
-					if self.isInstanceOf(VoidType) then
-						result := "void"
+					if self.isInstanceOf(Enumeration) then
+						result := self.asType(Enumeration).qualifiedName
+					else
+						if self.isInstanceOf(VoidType) then
+							result := "kermeta::language::structure::VoidType"
+						end
 					end
 				end
 			end
 		end
 		
-		if Operation.new().isVoidType(result) then
-			result := "void"
+		if result.isVoid().orElse{ v | Operation.new().isVoidType(result) } then
+			result := "kermeta::language::structure::VoidType"
 		end
 	end
 	
