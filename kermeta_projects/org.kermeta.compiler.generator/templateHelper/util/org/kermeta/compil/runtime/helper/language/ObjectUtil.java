@@ -1,5 +1,8 @@
 package org.kermeta.compil.runtime.helper.language;
 
+import java.util.Hashtable;
+import java.util.List;
+
 import kermeta.exceptions.ExceptionsFactory;
 import kermeta.language.structure.Class;
 import kermeta.language.structure.ClassDefinition;
@@ -56,7 +59,7 @@ public class ObjectUtil {
 				qualifiedName(getMetaClass(o).getTypeDefinition())) ) {
 			return true;
 		} else {
-			for( kermeta.language.structure.Type type : CollectionUtil.convertAsEList(allSuperTypes((ClassDefinition) getMetaClass(o).getTypeDefinition())) ) {
+			for( kermeta.language.structure.Type type : allSuperTypes((ClassDefinition) getMetaClass(o).getTypeDefinition()) ) {
 				if (qualifiedName(((Class) type).getTypeDefinition()).equals(qualifiedName(metaClass.getTypeDefinition())) ) {
 					return true;
 				}
@@ -468,75 +471,48 @@ public class ObjectUtil {
 	 */
 	public static String qualifiedName(kermeta.language.structure.NamedElement elem) {
 
-		java.lang.String result = null;
+		java.lang.String result = elem.getName();
 
-		result = elem.getName();
-
-		java.lang.Boolean idIfCond_247 = false;
-		idIfCond_247 = elem.eContainer() instanceof kermeta.language.structure.NamedElement;
-
-		if (idIfCond_247) {
-
+		if ( elem.eContainer() instanceof kermeta.language.structure.NamedElement ) {
 			elem = (kermeta.language.structure.NamedElement) org.kermeta.compil.runtime.helper.language.ObjectUtil
 					.container(elem);
-			java.lang.Boolean idLoopCond_248 = false;
-			while (!idLoopCond_248) {
-				idLoopCond_248 = org.kermeta.compil.runtime.helper.language.ObjectUtil
-						.equals(elem, null);
-				;
-				if (idLoopCond_248) {
-				} else {
-
-					result = kermeta.standard.helper.StringWrapper.plus(
-							kermeta.standard.helper.StringWrapper.plus(elem
-									.getName(), "::"), result);
-
-					java.lang.Boolean idIfCond_249 = false;
-					idIfCond_249 = elem.eContainer() instanceof kermeta.language.structure.NamedElement;
-
-					if (idIfCond_249) {
-
+			while ( elem != null ) {
+				result = elem.getName() + "::" + result;
+				if ( elem.eContainer() instanceof kermeta.language.structure.NamedElement ) {
 						elem = (kermeta.language.structure.NamedElement) org.kermeta.compil.runtime.helper.language.ObjectUtil
 								.container(elem);
 					} else {
-
 						elem = null;
 					}
-
-				}
 			}
 		}
-
+		
 		return result;
-
 	}
 	
-	public static Set<Type> allSuperTypes(ClassDefinition self) {
+	private static Hashtable<String, List<kermeta.language.structure.Type>> allSuperTypes_hashtable = new Hashtable<String, List<kermeta.language.structure.Type>>();
+	
+	public static List<Type> allSuperTypes(ClassDefinition self) {
+		
+		if ( allSuperTypes_hashtable.get(qualifiedName(self))!=null ) {
+			return allSuperTypes_hashtable.get(qualifiedName(self));
+		}
+		
+		kermeta.standard.Bag<kermeta.language.structure.Type> allSuperClasses = StandardFactory.eINSTANCE.createBag();
 
-		kermeta.standard.Set<kermeta.language.structure.Type> result = null;
-
-		kermeta.standard.Set<kermeta.language.structure.Type> allSuperClasses = ((kermeta.standard.Set<kermeta.language.structure.Type>) org.kermeta.compil.runtime.helper.language.ClassUtil
-				.newObject("kermeta.standard.Set<kermeta.language.structure.Type>"));
-
-		kermeta.standard.Set<kermeta.language.structure.Type> superClasses = ((kermeta.standard.Set<kermeta.language.structure.Type>) org.kermeta.compil.runtime.helper.language.ClassUtil
-				.newObject("kermeta.standard.Set<kermeta.language.structure.Type>"));
+		kermeta.standard.Bag<kermeta.language.structure.Type> superClasses = StandardFactory.eINSTANCE.createBag();
 
 		superClasses
 				.addAll(org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
-						.<kermeta.language.structure.Type> convertAsOrderedSet(self
+						.<kermeta.language.structure.Type> convertAsBag(self
 								.getSuperType()));
 
-		kermeta.standard.helper.BooleanWrapper.not(superClasses.isEmpty());
-		java.lang.Boolean idLoopCond_138 = false;
-		while (!idLoopCond_138) {
-			idLoopCond_138 = superClasses.isEmpty();
-			if (idLoopCond_138) {
-			} else {
+		while ( !superClasses.isEmpty() ) {
+			
 
 				allSuperClasses.addAll(superClasses);
 
-				kermeta.standard.Set<kermeta.language.structure.Type> temp = ((kermeta.standard.Set<kermeta.language.structure.Type>) org.kermeta.compil.runtime.helper.language.ClassUtil
-						.newObject("kermeta.standard.Set<kermeta.language.structure.Type>"));
+				kermeta.standard.Bag<kermeta.language.structure.Type> temp = StandardFactory.eINSTANCE.createBag();
 
 				//BIft:each
 
@@ -554,13 +530,7 @@ public class ObjectUtil {
 							kermeta.language.structure.Type s_lbdExp38 = it_ft38
 									.next();
 
-							java.lang.Boolean idIfCond_140 = false;
-							idIfCond_140 = kermeta.standard.helper.BooleanWrapper
-									.and(
-											s_lbdExp38 instanceof kermeta.language.structure.ParameterizedType,
-											((kermeta.language.structure.ParameterizedType) s_lbdExp38).getTypeDefinition() instanceof kermeta.language.structure.ClassDefinition);
-
-							if (idIfCond_140) {
+							if (s_lbdExp38 instanceof kermeta.language.structure.ParameterizedType && ((kermeta.language.structure.ParameterizedType) s_lbdExp38).getTypeDefinition() instanceof kermeta.language.structure.ClassDefinition) {
 
 								temp
 										.addAll(org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
@@ -574,16 +544,13 @@ public class ObjectUtil {
 				}
 
 				//EIft:each
-
 				superClasses.clear();
-
 				superClasses.addAll(temp);
-			}
 		}
+		
+		allSuperTypes_hashtable.put(qualifiedName(self), CollectionUtil.convertAsEList(allSuperClasses));
 
-		result = allSuperClasses;
-
-		return result;
+		return CollectionUtil.convertAsEList(allSuperClasses);
 
 	}
 	/**********************************************************/

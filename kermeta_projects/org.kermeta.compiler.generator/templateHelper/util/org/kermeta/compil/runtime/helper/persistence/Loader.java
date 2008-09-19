@@ -1,5 +1,5 @@
 
-/*$Id: Loader.java,v 1.3 2008-09-18 13:29:41 cfaucher Exp $
+/*$Id: Loader.java,v 1.4 2008-09-19 17:54:00 cfaucher Exp $
 * Project : org.kermeta.framework.compiled.runtime.helper
 * File : 	Loader.java
 * License : EPL
