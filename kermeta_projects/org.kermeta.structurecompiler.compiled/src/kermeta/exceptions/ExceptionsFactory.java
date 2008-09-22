@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ExceptionsFactory.java,v 1.2 2008-09-11 12:34:45 cfaucher Exp $
+ * $Id: ExceptionsFactory.java,v 1.3 2008-09-22 14:45:17 cfaucher Exp $
  */
 package kermeta.exceptions;
 
@@ -187,6 +187,15 @@ public interface ExceptionsFactory extends EFactory {
 	 * @generated
 	 */
 	FileNotFoundException createFileNotFoundException();
+
+	/**
+	 * Returns a new object of class '<em>Constraint Violated Exception</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Constraint Violated Exception</em>'.
+	 * @generated
+	 */
+	ConstraintViolatedException createConstraintViolatedException();
 
 	/**
 	 * Returns a new object of class '<em>Constraint Violated Pre</em>'.

@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: FileNotFoundExceptionImpl.java,v 1.2 2008-09-11 12:34:38 cfaucher Exp $
+ * $Id: FileNotFoundExceptionImpl.java,v 1.3 2008-09-22 14:45:46 cfaucher Exp $
  */
 package kermeta.exceptions.impl;
 

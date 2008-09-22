@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: UtilsFactoryImpl.java,v 1.2 2008-09-11 12:34:50 cfaucher Exp $
+ * $Id: UtilsFactoryImpl.java,v 1.3 2008-09-22 14:49:06 cfaucher Exp $
  */
 package kermeta.utils.impl;
 
@@ -12,6 +12,7 @@ import kermeta.utils.UtilsFactory;
 import kermeta.utils.UtilsPackage;
 
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 
@@ -65,13 +66,53 @@ public class UtilsFactoryImpl extends EFactoryImpl implements UtilsFactory {
 		switch (eClass.getClassifierID()) {
 		case UtilsPackage.STRING_BUFFER:
 			return createStringBuffer();
-		case UtilsPackage.STACK:
-			return createStack();
 		case UtilsPackage.HASHTABLE:
 			return createHashtable();
+		case UtilsPackage.STACK:
+			return createStack();
 		default:
 			throw new IllegalArgumentException("The class '" + eClass.getName()
 					+ "' is not a valid classifier");
+		}
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Object createFromString(EDataType eDataType, String initialValue) {
+		switch (eDataType.getClassifierID()) {
+		case UtilsPackage.KERMETA_PROPERTY_STRING_BUFFER_CONTENT:
+			return createKermetaProperty_StringBuffer_contentFromString(
+					eDataType, initialValue);
+		case UtilsPackage.KERMETA_PROPERTY_HASHTABLE_WRAPPED_HASHTABLE:
+			return createKermetaProperty_Hashtable_wrappedHashtableFromString(
+					eDataType, initialValue);
+		default:
+			throw new IllegalArgumentException("The datatype '"
+					+ eDataType.getName() + "' is not a valid classifier");
+		}
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String convertToString(EDataType eDataType, Object instanceValue) {
+		switch (eDataType.getClassifierID()) {
+		case UtilsPackage.KERMETA_PROPERTY_STRING_BUFFER_CONTENT:
+			return convertKermetaProperty_StringBuffer_contentToString(
+					eDataType, instanceValue);
+		case UtilsPackage.KERMETA_PROPERTY_HASHTABLE_WRAPPED_HASHTABLE:
+			return convertKermetaProperty_Hashtable_wrappedHashtableToString(
+					eDataType, instanceValue);
+		default:
+			throw new IllegalArgumentException("The datatype '"
+					+ eDataType.getName() + "' is not a valid classifier");
 		}
 	}
 
@@ -90,6 +131,16 @@ public class UtilsFactoryImpl extends EFactoryImpl implements UtilsFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public <K, V> Hashtable<K, V> createHashtable() {
+		HashtableImpl<K, V> hashtable = new HashtableImpl<K, V>();
+		return hashtable;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public <G> Stack<G> createStack() {
 		StackImpl<G> stack = new StackImpl<G>();
 		return stack;
@@ -100,9 +151,39 @@ public class UtilsFactoryImpl extends EFactoryImpl implements UtilsFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public <K, V> Hashtable<K, V> createHashtable() {
-		HashtableImpl<K, V> hashtable = new HashtableImpl<K, V>();
-		return hashtable;
+	public StringBuffer createKermetaProperty_StringBuffer_contentFromString(
+			EDataType eDataType, String initialValue) {
+		return (StringBuffer) super.createFromString(eDataType, initialValue);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String convertKermetaProperty_StringBuffer_contentToString(
+			EDataType eDataType, Object instanceValue) {
+		return super.convertToString(eDataType, instanceValue);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public java.util.Hashtable<?, ?> createKermetaProperty_Hashtable_wrappedHashtableFromString(
+			EDataType eDataType, String initialValue) {
+		return (java.util.Hashtable<?, ?>) super.createFromString(initialValue);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String convertKermetaProperty_Hashtable_wrappedHashtableToString(
+			EDataType eDataType, Object instanceValue) {
+		return super.convertToString(instanceValue);
 	}
 
 	/**

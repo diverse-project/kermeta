@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: EPackageImpl.java,v 1.3 2008-09-11 12:34:38 cfaucher Exp $
+ * $Id: EPackageImpl.java,v 1.4 2008-09-22 14:44:20 cfaucher Exp $
  */
 package ecore.impl;
 
@@ -38,8 +38,8 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *   <li>{@link ecore.impl.EPackageImpl#getESubpackages <em>ESubpackages</em>}</li>
  *   <li>{@link ecore.impl.EPackageImpl#getESuperPackage <em>ESuper Package</em>}</li>
  *   <li>{@link ecore.impl.EPackageImpl#getNsPrefix <em>Ns Prefix</em>}</li>
- *   <li>{@link ecore.impl.EPackageImpl#getEFactoryInstance <em>EFactory Instance</em>}</li>
  *   <li>{@link ecore.impl.EPackageImpl#getEClassifiers <em>EClassifiers</em>}</li>
+ *   <li>{@link ecore.impl.EPackageImpl#getEFactoryInstance <em>EFactory Instance</em>}</li>
  * </ul>
  * </p>
  *
@@ -97,16 +97,6 @@ public class EPackageImpl extends ENamedElementImpl implements EPackage {
 	protected String nsPrefix = NS_PREFIX_EDEFAULT;
 
 	/**
-	 * The cached value of the '{@link #getEFactoryInstance() <em>EFactory Instance</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getEFactoryInstance()
-	 * @generated
-	 * @ordered
-	 */
-	protected EFactory eFactoryInstance;
-
-	/**
 	 * The cached value of the '{@link #getEClassifiers() <em>EClassifiers</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -115,6 +105,16 @@ public class EPackageImpl extends ENamedElementImpl implements EPackage {
 	 * @ordered
 	 */
 	protected EList<EClassifier> eClassifiers;
+
+	/**
+	 * The cached value of the '{@link #getEFactoryInstance() <em>EFactory Instance</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getEFactoryInstance()
+	 * @generated
+	 * @ordered
+	 */
+	protected EFactory eFactoryInstance;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -259,6 +259,21 @@ public class EPackageImpl extends ENamedElementImpl implements EPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<EClassifier> getEClassifiers() {
+		if (eClassifiers == null) {
+			eClassifiers = new EObjectContainmentWithInverseEList.Resolving<EClassifier>(
+					EClassifier.class, this,
+					EcorePackage.EPACKAGE__ECLASSIFIERS,
+					EcorePackage.ECLASSIFIER__EPACKAGE);
+		}
+		return eClassifiers;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EFactory getEFactoryInstance() {
 		if (eFactoryInstance != null && eFactoryInstance.eIsProxy()) {
 			InternalEObject oldEFactoryInstance = (InternalEObject) eFactoryInstance;
@@ -333,21 +348,6 @@ public class EPackageImpl extends ENamedElementImpl implements EPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<EClassifier> getEClassifiers() {
-		if (eClassifiers == null) {
-			eClassifiers = new EObjectContainmentWithInverseEList.Resolving<EClassifier>(
-					EClassifier.class, this,
-					EcorePackage.EPACKAGE__ECLASSIFIERS,
-					EcorePackage.ECLASSIFIER__EPACKAGE);
-		}
-		return eClassifiers;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EClassifier getEClassifier(String name) {
 		ecore.EClassifier result = null;
 
@@ -372,15 +372,15 @@ public class EPackageImpl extends ENamedElementImpl implements EPackage {
 			if (eInternalContainer() != null)
 				msgs = eBasicRemoveFromContainer(msgs);
 			return basicSetESuperPackage((EPackage) otherEnd, msgs);
+		case EcorePackage.EPACKAGE__ECLASSIFIERS:
+			return ((InternalEList<InternalEObject>) (InternalEList<?>) getEClassifiers())
+					.basicAdd(otherEnd, msgs);
 		case EcorePackage.EPACKAGE__EFACTORY_INSTANCE:
 			if (eFactoryInstance != null)
 				msgs = ((InternalEObject) eFactoryInstance).eInverseRemove(
 						this, EcorePackage.EFACTORY__EPACKAGE, EFactory.class,
 						msgs);
 			return basicSetEFactoryInstance((EFactory) otherEnd, msgs);
-		case EcorePackage.EPACKAGE__ECLASSIFIERS:
-			return ((InternalEList<InternalEObject>) (InternalEList<?>) getEClassifiers())
-					.basicAdd(otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
@@ -399,11 +399,11 @@ public class EPackageImpl extends ENamedElementImpl implements EPackage {
 					msgs);
 		case EcorePackage.EPACKAGE__ESUPER_PACKAGE:
 			return basicSetESuperPackage(null, msgs);
-		case EcorePackage.EPACKAGE__EFACTORY_INSTANCE:
-			return basicSetEFactoryInstance(null, msgs);
 		case EcorePackage.EPACKAGE__ECLASSIFIERS:
 			return ((InternalEList<?>) getEClassifiers()).basicRemove(otherEnd,
 					msgs);
+		case EcorePackage.EPACKAGE__EFACTORY_INSTANCE:
+			return basicSetEFactoryInstance(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -442,12 +442,12 @@ public class EPackageImpl extends ENamedElementImpl implements EPackage {
 			return basicGetESuperPackage();
 		case EcorePackage.EPACKAGE__NS_PREFIX:
 			return getNsPrefix();
+		case EcorePackage.EPACKAGE__ECLASSIFIERS:
+			return getEClassifiers();
 		case EcorePackage.EPACKAGE__EFACTORY_INSTANCE:
 			if (resolve)
 				return getEFactoryInstance();
 			return basicGetEFactoryInstance();
-		case EcorePackage.EPACKAGE__ECLASSIFIERS:
-			return getEClassifiers();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -474,13 +474,13 @@ public class EPackageImpl extends ENamedElementImpl implements EPackage {
 		case EcorePackage.EPACKAGE__NS_PREFIX:
 			setNsPrefix((String) newValue);
 			return;
-		case EcorePackage.EPACKAGE__EFACTORY_INSTANCE:
-			setEFactoryInstance((EFactory) newValue);
-			return;
 		case EcorePackage.EPACKAGE__ECLASSIFIERS:
 			getEClassifiers().clear();
 			getEClassifiers().addAll(
 					(Collection<? extends EClassifier>) newValue);
+			return;
+		case EcorePackage.EPACKAGE__EFACTORY_INSTANCE:
+			setEFactoryInstance((EFactory) newValue);
 			return;
 		}
 		super.eSet(featureID, newValue);
@@ -506,11 +506,11 @@ public class EPackageImpl extends ENamedElementImpl implements EPackage {
 		case EcorePackage.EPACKAGE__NS_PREFIX:
 			setNsPrefix(NS_PREFIX_EDEFAULT);
 			return;
-		case EcorePackage.EPACKAGE__EFACTORY_INSTANCE:
-			setEFactoryInstance((EFactory) null);
-			return;
 		case EcorePackage.EPACKAGE__ECLASSIFIERS:
 			getEClassifiers().clear();
+			return;
+		case EcorePackage.EPACKAGE__EFACTORY_INSTANCE:
+			setEFactoryInstance((EFactory) null);
 			return;
 		}
 		super.eUnset(featureID);
@@ -534,10 +534,10 @@ public class EPackageImpl extends ENamedElementImpl implements EPackage {
 		case EcorePackage.EPACKAGE__NS_PREFIX:
 			return NS_PREFIX_EDEFAULT == null ? nsPrefix != null
 					: !NS_PREFIX_EDEFAULT.equals(nsPrefix);
-		case EcorePackage.EPACKAGE__EFACTORY_INSTANCE:
-			return eFactoryInstance != null;
 		case EcorePackage.EPACKAGE__ECLASSIFIERS:
 			return eClassifiers != null && !eClassifiers.isEmpty();
+		case EcorePackage.EPACKAGE__EFACTORY_INSTANCE:
+			return eFactoryInstance != null;
 		}
 		return super.eIsSet(featureID);
 	}

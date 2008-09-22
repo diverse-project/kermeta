@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ETypedElement.java,v 1.3 2008-09-11 12:34:55 cfaucher Exp $
+ * $Id: ETypedElement.java,v 1.4 2008-09-22 14:44:19 cfaucher Exp $
  */
 package ecore;
 
@@ -14,12 +14,10 @@ package ecore;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link ecore.ETypedElement#isMany <em>Many</em>}</li>
  *   <li>{@link ecore.ETypedElement#getLowerBound <em>Lower Bound</em>}</li>
  *   <li>{@link ecore.ETypedElement#isUnique <em>Unique</em>}</li>
  *   <li>{@link ecore.ETypedElement#getEType <em>EType</em>}</li>
  *   <li>{@link ecore.ETypedElement#isOrdered <em>Ordered</em>}</li>
- *   <li>{@link ecore.ETypedElement#isRequired <em>Required</em>}</li>
  *   <li>{@link ecore.ETypedElement#getUpperBound <em>Upper Bound</em>}</li>
  *   <li>{@link ecore.ETypedElement#getEGenericType <em>EGeneric Type</em>}</li>
  * </ul>
@@ -30,26 +28,6 @@ package ecore;
  * @generated
  */
 public interface ETypedElement extends ENamedElement {
-	/**
-	 * Returns the value of the '<em><b>Many</b></em>' attribute.
-	 * The default value is <code>"false"</code>.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Many</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Many</em>' attribute.
-	 * @see ecore.EcorePackage#getETypedElement_Many()
-	 * @model default="false" dataType="ecore.EBoolean" transient="true" changeable="false" derived="true"
-	 *        annotation="kermeta isReadOnly='false'"
-	 *        annotation="kermeta ecore.isTransient='true'"
-	 *        annotation="kompiledderivedProp.setter body=''"
-	 *        annotation="kompiledderivedProp.getter body=''"
-	 * @generated
-	 */
-	boolean isMany();
-
 	/**
 	 * Returns the value of the '<em><b>Lower Bound</b></em>' attribute.
 	 * <!-- begin-user-doc -->
@@ -157,26 +135,6 @@ public interface ETypedElement extends ENamedElement {
 	void setOrdered(boolean value);
 
 	/**
-	 * Returns the value of the '<em><b>Required</b></em>' attribute.
-	 * The default value is <code>"false"</code>.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Required</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Required</em>' attribute.
-	 * @see ecore.EcorePackage#getETypedElement_Required()
-	 * @model default="false" dataType="ecore.EBoolean" transient="true" changeable="false" derived="true"
-	 *        annotation="kermeta isReadOnly='false'"
-	 *        annotation="kermeta ecore.isTransient='true'"
-	 *        annotation="kompiledderivedProp.setter body=''"
-	 *        annotation="kompiledderivedProp.getter body=''"
-	 * @generated
-	 */
-	boolean isRequired();
-
-	/**
 	 * Returns the value of the '<em><b>Upper Bound</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <p>
@@ -227,5 +185,23 @@ public interface ETypedElement extends ENamedElement {
 	 * @generated
 	 */
 	void setEGenericType(EGenericType value);
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model dataType="ecore.EBoolean"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='\njava.lang.Boolean result = null;\n\nreturn result;\n'"
+	 * @generated
+	 */
+	boolean getterMany();
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model dataType="ecore.EBoolean"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='\njava.lang.Boolean result = null;\n\nreturn result;\n'"
+	 * @generated
+	 */
+	boolean getterRequired();
 
 } // ETypedElement

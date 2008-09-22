@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: StandardFactory.java,v 1.2 2008-09-11 12:34:46 cfaucher Exp $
+ * $Id: StandardFactory.java,v 1.3 2008-09-22 14:48:27 cfaucher Exp $
  */
 package kermeta.standard;
 
@@ -25,33 +25,6 @@ public interface StandardFactory extends EFactory {
 	 */
 	StandardFactory eINSTANCE = kermeta.standard.impl.StandardFactoryImpl
 			.init();
-
-	/**
-	 * Returns a new object of class '<em>Unknown Java Object</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Unknown Java Object</em>'.
-	 * @generated
-	 */
-	UnknownJavaObject createUnknownJavaObject();
-
-	/**
-	 * Returns a new object of class '<em>Void</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Void</em>'.
-	 * @generated
-	 */
-	kermeta.standard.Void createVoid();
-
-	/**
-	 * Returns a new object of class '<em>Not Comparable Exception</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Not Comparable Exception</em>'.
-	 * @generated
-	 */
-	NotComparableException createNotComparableException();
 
 	/**
 	 * Returns a new object of class '<em>Set</em>'.
@@ -97,6 +70,33 @@ public interface StandardFactory extends EFactory {
 	 * @generated
 	 */
 	<G> Iterator<G> createIterator();
+
+	/**
+	 * Returns a new object of class '<em>Void</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Void</em>'.
+	 * @generated
+	 */
+	kermeta.standard.Void createVoid();
+
+	/**
+	 * Returns a new object of class '<em>Not Comparable Exception</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Not Comparable Exception</em>'.
+	 * @generated
+	 */
+	NotComparableException createNotComparableException();
+
+	/**
+	 * Returns a new object of class '<em>Unknown Java Object</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Unknown Java Object</em>'.
+	 * @generated
+	 */
+	UnknownJavaObject createUnknownJavaObject();
 
 	/**
 	 * Returns the package supported by this factory.

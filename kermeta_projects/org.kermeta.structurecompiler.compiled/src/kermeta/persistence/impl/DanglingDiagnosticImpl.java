@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: DanglingDiagnosticImpl.java,v 1.2 2008-09-11 12:34:57 cfaucher Exp $
+ * $Id: DanglingDiagnosticImpl.java,v 1.3 2008-09-22 14:48:25 cfaucher Exp $
  */
 package kermeta.persistence.impl;
 
@@ -250,7 +250,7 @@ public class DanglingDiagnosticImpl extends ObjectImpl implements
 																		org.kermeta.compil.runtime.helper.language.ObjectUtil
 																				.toString(this
 																						.getReferencingElement())),
-														"\\."), this
+														"."), this
 												.getReferencingProperty()
 												.getName()), " is dangling");
 

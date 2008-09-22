@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: PersistencePackage.java,v 1.2 2008-09-11 12:35:01 cfaucher Exp $
+ * $Id: PersistencePackage.java,v 1.3 2008-09-22 14:48:27 cfaucher Exp $
  */
 package kermeta.persistence;
 
@@ -29,7 +29,7 @@ import org.eclipse.emf.ecore.EReference;
  * @see kermeta.persistence.PersistenceFactory
  * @model kind="package"
  *        annotation="kermeta ecoreUri='http://www.kermeta.org/kermeta/1_2_0//kermeta/persistence'"
- *        annotation="kermeta documentation='/**\n * Contains the classes that handle the serialization of models, in particular\n * EMF models.\n * <img src=\"platform:/plugin/fr.irisa.triskell.kermeta.documentation/src/figures/persistence_package.png\"/>\n \052/'"
+ *        annotation="kermeta documentation='/**\r\n * Contains the classes that handle the serialization of models, in particular\r\n * EMF models.\r\n * <img src=\"platform:/plugin/fr.irisa.triskell.kermeta.documentation/src/figures/persistence_package.png\"/>\r\n \052/'"
  * @generated
  */
 public interface PersistencePackage extends EPackage {
@@ -149,40 +149,13 @@ public interface PersistencePackage extends EPackage {
 	int RESOURCE__VALUES = StandardPackage.SET__VALUES;
 
 	/**
-	 * The feature id for the '<em><b>Dependent Resources</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int RESOURCE__DEPENDENT_RESOURCES = StandardPackage.SET_FEATURE_COUNT + 0;
-
-	/**
-	 * The feature id for the '<em><b>Contents</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int RESOURCE__CONTENTS = StandardPackage.SET_FEATURE_COUNT + 1;
-
-	/**
 	 * The feature id for the '<em><b>Repository</b></em>' container reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int RESOURCE__REPOSITORY = StandardPackage.SET_FEATURE_COUNT + 2;
-
-	/**
-	 * The feature id for the '<em><b>Is Read Only</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int RESOURCE__IS_READ_ONLY = StandardPackage.SET_FEATURE_COUNT + 3;
+	int RESOURCE__REPOSITORY = StandardPackage.SET_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Meta Model URI</b></em>' attribute.
@@ -191,7 +164,16 @@ public interface PersistencePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int RESOURCE__META_MODEL_URI = StandardPackage.SET_FEATURE_COUNT + 4;
+	int RESOURCE__META_MODEL_URI = StandardPackage.SET_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Is Read Only</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RESOURCE__IS_READ_ONLY = StandardPackage.SET_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Uri</b></em>' attribute.
@@ -200,7 +182,7 @@ public interface PersistencePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int RESOURCE__URI = StandardPackage.SET_FEATURE_COUNT + 5;
+	int RESOURCE__URI = StandardPackage.SET_FEATURE_COUNT + 3;
 
 	/**
 	 * The number of structural features of the '<em>Resource</em>' class.
@@ -209,7 +191,7 @@ public interface PersistencePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int RESOURCE_FEATURE_COUNT = StandardPackage.SET_FEATURE_COUNT + 6;
+	int RESOURCE_FEATURE_COUNT = StandardPackage.SET_FEATURE_COUNT + 4;
 
 	/**
 	 * The meta object id for the '{@link kermeta.persistence.impl.EMFResourceImpl <em>EMF Resource</em>}' class.
@@ -294,24 +276,6 @@ public interface PersistencePackage extends EPackage {
 	int EMF_RESOURCE__VALUES = RESOURCE__VALUES;
 
 	/**
-	 * The feature id for the '<em><b>Dependent Resources</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EMF_RESOURCE__DEPENDENT_RESOURCES = RESOURCE__DEPENDENT_RESOURCES;
-
-	/**
-	 * The feature id for the '<em><b>Contents</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EMF_RESOURCE__CONTENTS = RESOURCE__CONTENTS;
-
-	/**
 	 * The feature id for the '<em><b>Repository</b></em>' container reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -321,15 +285,6 @@ public interface PersistencePackage extends EPackage {
 	int EMF_RESOURCE__REPOSITORY = RESOURCE__REPOSITORY;
 
 	/**
-	 * The feature id for the '<em><b>Is Read Only</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EMF_RESOURCE__IS_READ_ONLY = RESOURCE__IS_READ_ONLY;
-
-	/**
 	 * The feature id for the '<em><b>Meta Model URI</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -337,6 +292,15 @@ public interface PersistencePackage extends EPackage {
 	 * @ordered
 	 */
 	int EMF_RESOURCE__META_MODEL_URI = RESOURCE__META_MODEL_URI;
+
+	/**
+	 * The feature id for the '<em><b>Is Read Only</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EMF_RESOURCE__IS_READ_ONLY = RESOURCE__IS_READ_ONLY;
 
 	/**
 	 * The feature id for the '<em><b>Uri</b></em>' attribute.
@@ -694,28 +658,6 @@ public interface PersistencePackage extends EPackage {
 	EClass getResource();
 
 	/**
-	 * Returns the meta object for the reference list '{@link kermeta.persistence.Resource#getDependentResources <em>Dependent Resources</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference list '<em>Dependent Resources</em>'.
-	 * @see kermeta.persistence.Resource#getDependentResources()
-	 * @see #getResource()
-	 * @generated
-	 */
-	EReference getResource_DependentResources();
-
-	/**
-	 * Returns the meta object for the reference list '{@link kermeta.persistence.Resource#getContents <em>Contents</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference list '<em>Contents</em>'.
-	 * @see kermeta.persistence.Resource#getContents()
-	 * @see #getResource()
-	 * @generated
-	 */
-	EReference getResource_Contents();
-
-	/**
 	 * Returns the meta object for the container reference '{@link kermeta.persistence.Resource#getRepository <em>Repository</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -727,17 +669,6 @@ public interface PersistencePackage extends EPackage {
 	EReference getResource_Repository();
 
 	/**
-	 * Returns the meta object for the attribute '{@link kermeta.persistence.Resource#getIsReadOnly <em>Is Read Only</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Is Read Only</em>'.
-	 * @see kermeta.persistence.Resource#getIsReadOnly()
-	 * @see #getResource()
-	 * @generated
-	 */
-	EAttribute getResource_IsReadOnly();
-
-	/**
 	 * Returns the meta object for the attribute '{@link kermeta.persistence.Resource#getMetaModelURI <em>Meta Model URI</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -747,6 +678,17 @@ public interface PersistencePackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getResource_MetaModelURI();
+
+	/**
+	 * Returns the meta object for the attribute '{@link kermeta.persistence.Resource#getIsReadOnly <em>Is Read Only</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Is Read Only</em>'.
+	 * @see kermeta.persistence.Resource#getIsReadOnly()
+	 * @see #getResource()
+	 * @generated
+	 */
+	EAttribute getResource_IsReadOnly();
 
 	/**
 	 * Returns the meta object for the attribute '{@link kermeta.persistence.Resource#getUri <em>Uri</em>}'.
@@ -920,37 +862,12 @@ public interface PersistencePackage extends EPackage {
 		EClass RESOURCE = eINSTANCE.getResource();
 
 		/**
-		 * The meta object literal for the '<em><b>Dependent Resources</b></em>' reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference RESOURCE__DEPENDENT_RESOURCES = eINSTANCE
-				.getResource_DependentResources();
-
-		/**
-		 * The meta object literal for the '<em><b>Contents</b></em>' reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference RESOURCE__CONTENTS = eINSTANCE.getResource_Contents();
-
-		/**
 		 * The meta object literal for the '<em><b>Repository</b></em>' container reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
 		EReference RESOURCE__REPOSITORY = eINSTANCE.getResource_Repository();
-
-		/**
-		 * The meta object literal for the '<em><b>Is Read Only</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute RESOURCE__IS_READ_ONLY = eINSTANCE.getResource_IsReadOnly();
 
 		/**
 		 * The meta object literal for the '<em><b>Meta Model URI</b></em>' attribute feature.
@@ -960,6 +877,14 @@ public interface PersistencePackage extends EPackage {
 		 */
 		EAttribute RESOURCE__META_MODEL_URI = eINSTANCE
 				.getResource_MetaModelURI();
+
+		/**
+		 * The meta object literal for the '<em><b>Is Read Only</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute RESOURCE__IS_READ_ONLY = eINSTANCE.getResource_IsReadOnly();
 
 		/**
 		 * The meta object literal for the '<em><b>Uri</b></em>' attribute feature.

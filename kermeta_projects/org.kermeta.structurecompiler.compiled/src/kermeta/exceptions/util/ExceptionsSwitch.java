@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ExceptionsSwitch.java,v 1.2 2008-09-11 12:34:54 cfaucher Exp $
+ * $Id: ExceptionsSwitch.java,v 1.3 2008-09-22 14:45:47 cfaucher Exp $
  */
 package kermeta.exceptions.util;
 
@@ -10,6 +10,7 @@ import java.util.List;
 
 import kermeta.exceptions.AbstractClassInstantiationError;
 import kermeta.exceptions.CallOnVoidTarget;
+import kermeta.exceptions.ConstraintViolatedException;
 import kermeta.exceptions.ConstraintViolatedInv;
 import kermeta.exceptions.ConstraintViolatedPost;
 import kermeta.exceptions.ConstraintViolatedPre;
@@ -321,9 +322,22 @@ public class ExceptionsSwitch<T> {
 				result = defaultCase(theEObject);
 			return result;
 		}
+		case ExceptionsPackage.CONSTRAINT_VIOLATED_EXCEPTION: {
+			ConstraintViolatedException constraintViolatedException = (ConstraintViolatedException) theEObject;
+			T result = caseConstraintViolatedException(constraintViolatedException);
+			if (result == null)
+				result = caseException(constraintViolatedException);
+			if (result == null)
+				result = caseObject(constraintViolatedException);
+			if (result == null)
+				result = defaultCase(theEObject);
+			return result;
+		}
 		case ExceptionsPackage.CONSTRAINT_VIOLATED_PRE: {
 			ConstraintViolatedPre constraintViolatedPre = (ConstraintViolatedPre) theEObject;
 			T result = caseConstraintViolatedPre(constraintViolatedPre);
+			if (result == null)
+				result = caseConstraintViolatedException(constraintViolatedPre);
 			if (result == null)
 				result = caseException(constraintViolatedPre);
 			if (result == null)
@@ -336,6 +350,8 @@ public class ExceptionsSwitch<T> {
 			ConstraintViolatedPost constraintViolatedPost = (ConstraintViolatedPost) theEObject;
 			T result = caseConstraintViolatedPost(constraintViolatedPost);
 			if (result == null)
+				result = caseConstraintViolatedException(constraintViolatedPost);
+			if (result == null)
 				result = caseException(constraintViolatedPost);
 			if (result == null)
 				result = caseObject(constraintViolatedPost);
@@ -346,6 +362,8 @@ public class ExceptionsSwitch<T> {
 		case ExceptionsPackage.CONSTRAINT_VIOLATED_INV: {
 			ConstraintViolatedInv constraintViolatedInv = (ConstraintViolatedInv) theEObject;
 			T result = caseConstraintViolatedInv(constraintViolatedInv);
+			if (result == null)
+				result = caseConstraintViolatedException(constraintViolatedInv);
 			if (result == null)
 				result = caseException(constraintViolatedInv);
 			if (result == null)
@@ -706,6 +724,21 @@ public class ExceptionsSwitch<T> {
 	 * @generated
 	 */
 	public T caseFileNotFoundException(FileNotFoundException object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Constraint Violated Exception</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Constraint Violated Exception</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseConstraintViolatedException(ConstraintViolatedException object) {
 		return null;
 	}
 

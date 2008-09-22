@@ -2,12 +2,13 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ParameterizedTypeImpl.java,v 1.2 2008-09-11 12:34:47 cfaucher Exp $
+ * $Id: ParameterizedTypeImpl.java,v 1.3 2008-09-22 14:47:34 cfaucher Exp $
  */
 package kermeta.language.structure.impl;
 
 import java.util.Collection;
 
+import kermeta.language.structure.ClassDefinition;
 import kermeta.language.structure.GenericTypeDefinition;
 import kermeta.language.structure.ParameterizedType;
 import kermeta.language.structure.StructurePackage;
@@ -175,18 +176,18 @@ public abstract class ParameterizedTypeImpl extends TypeImpl implements
 
 		java.lang.String result = null;
 
-		java.lang.Boolean idIfCond_317 = false;
-		idIfCond_317 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+		java.lang.Boolean idIfCond_726 = false;
+		idIfCond_726 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 				.isNotEqual(this.getTypeDefinition().getEMFInstanceClassName(),
 						"");
 
-		if (idIfCond_317) {
+		if (idIfCond_726) {
 
 			result = this.getTypeDefinition().getEMFInstanceClassName();
 		} else {
 
 			result = kermeta.standard.helper.StringWrapper.replace(this
-					.getTypeQName(), "::", "\\.");
+					.getTypeQName(), "::", ".");
 		}
 
 		java.lang.String str_tpb = "";
@@ -199,55 +200,73 @@ public abstract class ParameterizedTypeImpl extends TypeImpl implements
 
 		{
 
-			kermeta.standard.Iterator<kermeta.language.structure.TypeVariableBinding> it_ft88 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
+			kermeta.standard.Iterator<kermeta.language.structure.TypeVariableBinding> it_ft153 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
 					.<kermeta.language.structure.TypeVariableBinding> convertAsOrderedSet(
 							this.getTypeParamBinding()).iterator();
-			java.lang.Boolean idLoopCond_318 = false;
-			while (!idLoopCond_318) {
-				idLoopCond_318 = it_ft88.isOff();
-				if (idLoopCond_318) {
+			java.lang.Boolean idLoopCond_727 = false;
+			while (!idLoopCond_727) {
+				idLoopCond_727 = it_ft153.isOff();
+				if (idLoopCond_727) {
 				} else {
 
 					//BIle:func
-					kermeta.language.structure.TypeVariableBinding tpb_lbdExp88 = it_ft88
+					kermeta.language.structure.TypeVariableBinding tpb_lbdExp153 = it_ft153
 							.next();
 
-					java.lang.Boolean idIfCond_319 = false;
-					idIfCond_319 = kermeta.standard.helper.IntegerWrapper
+					java.lang.Boolean idIfCond_728 = false;
+					idIfCond_728 = kermeta.standard.helper.IntegerWrapper
 							.isGreaterOrEqual(i, 1);
 
-					if (idIfCond_319) {
+					if (idIfCond_728) {
 
 						str_tpb = kermeta.standard.helper.StringWrapper.plus(
 								str_tpb, ", ");
 					}
 
-					java.lang.Boolean idIfCond_320 = false;
-					idIfCond_320 = kermeta.standard.helper.BooleanWrapper
+					java.lang.Boolean idIfCond_729 = false;
+					idIfCond_729 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+							.isVoid(tpb_lbdExp153.getType());
+
+					if (idIfCond_729) {
+
+						org.kermeta.compil.runtime.helper.io.StdIOUtil
+								.writeln(kermeta.standard.helper.StringWrapper
+										.plus(
+												"tpb.type.isVoid(): ",
+												org.kermeta.compil.runtime.helper.language.ObjectUtil
+														.toString(this)));
+					}
+
+					java.lang.Boolean idIfCond_730 = false;
+					idIfCond_730 = kermeta.standard.helper.BooleanWrapper
 							.not(context.getFtSuffixActivation());
 
-					if (idIfCond_320) {
+					if (idIfCond_730) {
 
-						str_tpb = kermeta.standard.helper.StringWrapper.plus(
-								str_tpb, tpb_lbdExp88.getType()
-										.createBehaviorJava(context));
+						java.lang.Boolean idIfCond_731 = false;
+						idIfCond_731 = kermeta.standard.helper.BooleanWrapper
+								.not(org.kermeta.compil.runtime.helper.language.ObjectUtil
+										.isVoid(tpb_lbdExp153.getType()));
+
+						if (idIfCond_731) {
+
+							str_tpb = kermeta.standard.helper.StringWrapper
+									.plus(str_tpb, tpb_lbdExp153.getType()
+											.createBehaviorJava(context));
+						}
+
 					} else {
 
 						kermeta.language.structure.Type type_from_map = context
-								.getFtMapTypeStack()
-								.peek()
-								.getValue(
-										org.kermeta.compil.runtime.ExecutionContext
-												.getInstance()
-												.getMetaClass(
-														"tpb_lbdExp88.getType()"));
+								.getFtMapTypeStack().peek().getValue(
+										tpb_lbdExp153.getType());
 
-						java.lang.Boolean idIfCond_321 = false;
-						idIfCond_321 = kermeta.standard.helper.BooleanWrapper
+						java.lang.Boolean idIfCond_732 = false;
+						idIfCond_732 = kermeta.standard.helper.BooleanWrapper
 								.not(org.kermeta.compil.runtime.helper.language.ObjectUtil
 										.isVoid(type_from_map));
 
-						if (idIfCond_321) {
+						if (idIfCond_732) {
 
 							context.setFtSuffixActivation(false);
 
@@ -280,11 +299,11 @@ public abstract class ParameterizedTypeImpl extends TypeImpl implements
 
 		//EIft:each
 
-		java.lang.Boolean idIfCond_322 = false;
-		idIfCond_322 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+		java.lang.Boolean idIfCond_733 = false;
+		idIfCond_733 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 				.isNotEqual(str_tpb, "");
 
-		if (idIfCond_322) {
+		if (idIfCond_733) {
 
 			result = kermeta.standard.helper.StringWrapper.plus(
 					kermeta.standard.helper.StringWrapper.plus(
@@ -293,6 +312,41 @@ public abstract class ParameterizedTypeImpl extends TypeImpl implements
 		}
 
 		result = kermeta.standard.helper.StringWrapper.plus(result, "");
+
+		return result;
+
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public ClassDefinition getClassDefinitionAsTyped() {
+
+		kermeta.language.structure.ClassDefinition result = null;
+
+		result = null;
+
+		java.lang.Boolean idIfCond_734 = false;
+		idIfCond_734 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+				.isInstanceOf(
+						this.getTypeDefinition(),
+						org.kermeta.compil.runtime.ExecutionContext
+								.getInstance()
+								.getMetaClass(
+										"kermeta.language.structure.ClassDefinition"));
+
+		if (idIfCond_734) {
+
+			result = ((kermeta.language.structure.ClassDefinition) org.kermeta.compil.runtime.helper.language.ObjectUtil
+					.asType(
+							this.getTypeDefinition(),
+							org.kermeta.compil.runtime.ExecutionContext
+									.getInstance()
+									.getMetaClass(
+											"kermeta.language.structure.ClassDefinition")));
+		}
 
 		return result;
 

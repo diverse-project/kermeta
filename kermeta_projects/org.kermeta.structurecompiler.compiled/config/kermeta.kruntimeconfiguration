@@ -1,6 +1,66 @@
 <?xml version="1.0" encoding="ASCII"?>
 <kruntimeconfiguration:Configuration xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:kruntimeconfiguration="http://www.kermeta.org/kruntimeconfiguration">
   <persistenceEntries>
+    <entries key="fileExtension" value="km"/>
+    <entries key="uri" value="http://www.kermeta.org/kermeta/1_2_0//kermeta"/>
+    <entries key="baseClassName" value="fr.irisa.triskell.kermeta.impl.KmPackageImpl"/>
+    <entries key="generatedClassName" value="kermeta.impl.KermetaPackageImpl"/>
+  </persistenceEntries>
+  <persistenceEntries>
+    <entries key="fileExtension" value="standard"/>
+    <entries key="uri" value="http://www.kermeta.org/kermeta/1_2_0//kermeta/standard/kermeta_temp_uri"/>
+    <entries key="baseClassName" value="kermeta.standard.impl.StandardPackageImpl"/>
+    <entries key="generatedClassName" value="kermeta.standard.impl.StandardPackageImpl"/>
+  </persistenceEntries>
+  <persistenceEntries>
+    <entries key="fileExtension" value="compiler"/>
+    <entries key="uri" value="http://www.kermeta.org/kermeta/compiler/kermeta_temp_uri"/>
+    <entries key="baseClassName" value="kermeta.compiler.impl.CompilerPackageImpl"/>
+    <entries key="generatedClassName" value="kermeta.compiler.impl.CompilerPackageImpl"/>
+  </persistenceEntries>
+  <persistenceEntries>
+    <entries key="fileExtension" value="kunit"/>
+    <entries key="uri" value="http://www.kermeta.org/kermeta/1_2_0//kermeta/kunit/kermeta_temp_uri"/>
+    <entries key="baseClassName" value="kermeta.kunit.impl.KunitPackageImpl"/>
+    <entries key="generatedClassName" value="kermeta.kunit.impl.KunitPackageImpl"/>
+  </persistenceEntries>
+  <persistenceEntries>
+    <entries key="fileExtension" value="io"/>
+    <entries key="uri" value="http://www.kermeta.org/kermeta/1_2_0//kermeta/io/kermeta_temp_uri"/>
+    <entries key="baseClassName" value="kermeta.io.impl.IoPackageImpl"/>
+    <entries key="generatedClassName" value="kermeta.io.impl.IoPackageImpl"/>
+  </persistenceEntries>
+  <persistenceEntries>
+    <entries key="fileExtension" value="interpreter"/>
+    <entries key="uri" value="http://www.kermeta.org/kermeta/1_2_0//kermeta/interpreter/kermeta_temp_uri"/>
+    <entries key="baseClassName" value="kermeta.interpreter.impl.InterpreterPackageImpl"/>
+    <entries key="generatedClassName" value="kermeta.interpreter.impl.InterpreterPackageImpl"/>
+  </persistenceEntries>
+  <persistenceEntries>
+    <entries key="fileExtension" value="persistence"/>
+    <entries key="uri" value="http://www.kermeta.org/kermeta/1_2_0//kermeta/persistence/kermeta_temp_uri"/>
+    <entries key="baseClassName" value="kermeta.persistence.impl.PersistencePackageImpl"/>
+    <entries key="generatedClassName" value="kermeta.persistence.impl.PersistencePackageImpl"/>
+  </persistenceEntries>
+  <persistenceEntries>
+    <entries key="fileExtension" value="utils"/>
+    <entries key="uri" value="http://www.kermeta.org/kermeta/1_2_0//kermeta/utils/kermeta_temp_uri"/>
+    <entries key="baseClassName" value="kermeta.utils.impl.UtilsPackageImpl"/>
+    <entries key="generatedClassName" value="kermeta.utils.impl.UtilsPackageImpl"/>
+  </persistenceEntries>
+  <persistenceEntries>
+    <entries key="fileExtension" value="ecore"/>
+    <entries key="uri" value="http://www.kermeta.org/kermeta/1_2_0//kermeta/ecore/kermeta_temp_uri"/>
+    <entries key="baseClassName" value="kermeta.ecore.impl.EcorePackageImpl"/>
+    <entries key="generatedClassName" value="kermeta.ecore.impl.EcorePackageImpl"/>
+  </persistenceEntries>
+  <persistenceEntries>
+    <entries key="fileExtension" value="exceptions"/>
+    <entries key="uri" value="http://www.kermeta.org/kermeta/1_2_0//kermeta/exceptions/kermeta_temp_uri"/>
+    <entries key="baseClassName" value="kermeta.exceptions.impl.ExceptionsPackageImpl"/>
+    <entries key="generatedClassName" value="kermeta.exceptions.impl.ExceptionsPackageImpl"/>
+  </persistenceEntries>
+  <persistenceEntries>
     <entries key="fileExtension" value="km2ecore"/>
     <entries key="uri" value="http://www.kermeta.org/km2ecore/kermeta_temp_uri"/>
     <entries key="baseClassName" value="km2ecore.impl.Km2ecorePackageImpl"/>
@@ -19,6 +79,12 @@
     <entries key="generatedClassName" value="km2ecore.common.exception.impl.ExceptionPackageImpl"/>
   </persistenceEntries>
   <persistenceEntries>
+    <entries key="fileExtension" value="java"/>
+    <entries key="uri" value="http://www.kermeta.org/km2ecore/helper/java/kermeta_temp_uri"/>
+    <entries key="baseClassName" value="km2ecore.helper.java.impl.JavaPackageImpl"/>
+    <entries key="generatedClassName" value="km2ecore.helper.java.impl.JavaPackageImpl"/>
+  </persistenceEntries>
+  <persistenceEntries>
     <entries key="fileExtension" value="ecore"/>
     <entries key="uri" value="http://www.kermeta.org/km2ecore/helper/ecore/kermeta_temp_uri"/>
     <entries key="baseClassName" value="km2ecore.helper.ecore.impl.EcorePackageImpl"/>
@@ -29,72 +95,6 @@
     <entries key="uri" value="http://www.kermeta.org/km2ecore/helper/kermeta/kermeta_temp_uri"/>
     <entries key="baseClassName" value="km2ecore.helper.kermeta.impl.KermetaPackageImpl"/>
     <entries key="generatedClassName" value="km2ecore.helper.kermeta.impl.KermetaPackageImpl"/>
-  </persistenceEntries>
-  <persistenceEntries>
-    <entries key="fileExtension" value="java"/>
-    <entries key="uri" value="http://www.kermeta.org/km2ecore/helper/java/kermeta_temp_uri"/>
-    <entries key="baseClassName" value="km2ecore.helper.java.impl.JavaPackageImpl"/>
-    <entries key="generatedClassName" value="km2ecore.helper.java.impl.JavaPackageImpl"/>
-  </persistenceEntries>
-  <persistenceEntries>
-    <entries key="fileExtension" value="km"/>
-    <entries key="uri" value="http://www.kermeta.org/kermeta/1_2_0//kermeta"/>
-    <entries key="baseClassName" value="fr.irisa.triskell.kermeta.impl.KmPackageImpl"/>
-    <entries key="generatedClassName" value="kermeta.impl.KermetaPackageImpl"/>
-  </persistenceEntries>
-  <persistenceEntries>
-    <entries key="fileExtension" value="persistence"/>
-    <entries key="uri" value="http://www.kermeta.org/kermeta/1_2_0//kermeta/persistence/kermeta_temp_uri"/>
-    <entries key="baseClassName" value="kermeta.persistence.impl.PersistencePackageImpl"/>
-    <entries key="generatedClassName" value="kermeta.persistence.impl.PersistencePackageImpl"/>
-  </persistenceEntries>
-  <persistenceEntries>
-    <entries key="fileExtension" value="io"/>
-    <entries key="uri" value="http://www.kermeta.org/kermeta/1_2_0//kermeta/io/kermeta_temp_uri"/>
-    <entries key="baseClassName" value="kermeta.io.impl.IoPackageImpl"/>
-    <entries key="generatedClassName" value="kermeta.io.impl.IoPackageImpl"/>
-  </persistenceEntries>
-  <persistenceEntries>
-    <entries key="fileExtension" value="exceptions"/>
-    <entries key="uri" value="http://www.kermeta.org/kermeta/1_2_0//kermeta/exceptions/kermeta_temp_uri"/>
-    <entries key="baseClassName" value="kermeta.exceptions.impl.ExceptionsPackageImpl"/>
-    <entries key="generatedClassName" value="kermeta.exceptions.impl.ExceptionsPackageImpl"/>
-  </persistenceEntries>
-  <persistenceEntries>
-    <entries key="fileExtension" value="utils"/>
-    <entries key="uri" value="http://www.kermeta.org/kermeta/1_2_0//kermeta/utils/kermeta_temp_uri"/>
-    <entries key="baseClassName" value="kermeta.utils.impl.UtilsPackageImpl"/>
-    <entries key="generatedClassName" value="kermeta.utils.impl.UtilsPackageImpl"/>
-  </persistenceEntries>
-  <persistenceEntries>
-    <entries key="fileExtension" value="standard"/>
-    <entries key="uri" value="http://www.kermeta.org/kermeta/1_2_0//kermeta/standard/kermeta_temp_uri"/>
-    <entries key="baseClassName" value="kermeta.standard.impl.StandardPackageImpl"/>
-    <entries key="generatedClassName" value="kermeta.standard.impl.StandardPackageImpl"/>
-  </persistenceEntries>
-  <persistenceEntries>
-    <entries key="fileExtension" value="kunit"/>
-    <entries key="uri" value="http://www.kermeta.org/kermeta/1_2_0//kermeta/kunit/kermeta_temp_uri"/>
-    <entries key="baseClassName" value="kermeta.kunit.impl.KunitPackageImpl"/>
-    <entries key="generatedClassName" value="kermeta.kunit.impl.KunitPackageImpl"/>
-  </persistenceEntries>
-  <persistenceEntries>
-    <entries key="fileExtension" value="ecore"/>
-    <entries key="uri" value="http://www.kermeta.org/kermeta/1_2_0//kermeta/ecore/kermeta_temp_uri"/>
-    <entries key="baseClassName" value="kermeta.ecore.impl.EcorePackageImpl"/>
-    <entries key="generatedClassName" value="kermeta.ecore.impl.EcorePackageImpl"/>
-  </persistenceEntries>
-  <persistenceEntries>
-    <entries key="fileExtension" value="interpreter"/>
-    <entries key="uri" value="http://www.kermeta.org/kermeta/1_2_0//kermeta/interpreter/kermeta_temp_uri"/>
-    <entries key="baseClassName" value="kermeta.interpreter.impl.InterpreterPackageImpl"/>
-    <entries key="generatedClassName" value="kermeta.interpreter.impl.InterpreterPackageImpl"/>
-  </persistenceEntries>
-  <persistenceEntries>
-    <entries key="fileExtension" value="compiler"/>
-    <entries key="uri" value="http://www.kermeta.org/kermeta/compiler/kermeta_temp_uri"/>
-    <entries key="baseClassName" value="kermeta.compiler.impl.CompilerPackageImpl"/>
-    <entries key="generatedClassName" value="kermeta.compiler.impl.CompilerPackageImpl"/>
   </persistenceEntries>
   <persistenceEntries>
     <entries key="factoryClassName" value="org.eclipse.emf.ecore.xmi.impl.EcoreResourceFactoryImpl"/>

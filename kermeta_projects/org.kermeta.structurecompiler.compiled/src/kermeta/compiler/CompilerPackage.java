@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: CompilerPackage.java,v 1.2 2008-09-11 12:35:00 cfaucher Exp $
+ * $Id: CompilerPackage.java,v 1.3 2008-09-22 14:44:56 cfaucher Exp $
  */
 package kermeta.compiler;
 

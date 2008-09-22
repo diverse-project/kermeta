@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ETypedElementImpl.java,v 1.3 2008-09-11 12:34:38 cfaucher Exp $
+ * $Id: ETypedElementImpl.java,v 1.4 2008-09-22 14:44:20 cfaucher Exp $
  */
 package ecore.impl;
 
@@ -26,12 +26,10 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link ecore.impl.ETypedElementImpl#isMany <em>Many</em>}</li>
  *   <li>{@link ecore.impl.ETypedElementImpl#getLowerBound <em>Lower Bound</em>}</li>
  *   <li>{@link ecore.impl.ETypedElementImpl#isUnique <em>Unique</em>}</li>
  *   <li>{@link ecore.impl.ETypedElementImpl#getEType <em>EType</em>}</li>
  *   <li>{@link ecore.impl.ETypedElementImpl#isOrdered <em>Ordered</em>}</li>
- *   <li>{@link ecore.impl.ETypedElementImpl#isRequired <em>Required</em>}</li>
  *   <li>{@link ecore.impl.ETypedElementImpl#getUpperBound <em>Upper Bound</em>}</li>
  *   <li>{@link ecore.impl.ETypedElementImpl#getEGenericType <em>EGeneric Type</em>}</li>
  * </ul>
@@ -41,26 +39,6 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  */
 public abstract class ETypedElementImpl extends ENamedElementImpl implements
 		ETypedElement {
-	/**
-	 * The default value of the '{@link #isMany() <em>Many</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #isMany()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final boolean MANY_EDEFAULT = false;
-
-	/**
-	 * The cached value of the '{@link #isMany() <em>Many</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #isMany()
-	 * @generated
-	 * @ordered
-	 */
-	protected boolean many = MANY_EDEFAULT;
-
 	/**
 	 * The default value of the '{@link #getLowerBound() <em>Lower Bound</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -132,26 +110,6 @@ public abstract class ETypedElementImpl extends ENamedElementImpl implements
 	protected boolean ordered = ORDERED_EDEFAULT;
 
 	/**
-	 * The default value of the '{@link #isRequired() <em>Required</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #isRequired()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final boolean REQUIRED_EDEFAULT = false;
-
-	/**
-	 * The cached value of the '{@link #isRequired() <em>Required</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #isRequired()
-	 * @generated
-	 * @ordered
-	 */
-	protected boolean required = REQUIRED_EDEFAULT;
-
-	/**
 	 * The default value of the '{@link #getUpperBound() <em>Upper Bound</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -198,15 +156,6 @@ public abstract class ETypedElementImpl extends ENamedElementImpl implements
 	@Override
 	protected EClass eStaticClass() {
 		return EcorePackage.Literals.ETYPED_ELEMENT;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public boolean isMany() {
-		return many;
 	}
 
 	/**
@@ -314,15 +263,6 @@ public abstract class ETypedElementImpl extends ENamedElementImpl implements
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET,
 					EcorePackage.ETYPED_ELEMENT__ORDERED, oldOrdered, ordered));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public boolean isRequired() {
-		return required;
 	}
 
 	/**
@@ -445,6 +385,32 @@ public abstract class ETypedElementImpl extends ENamedElementImpl implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public boolean getterMany() {
+
+		java.lang.Boolean result = null;
+
+		return result;
+
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean getterRequired() {
+
+		java.lang.Boolean result = null;
+
+		return result;
+
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd,
 			int featureID, NotificationChain msgs) {
@@ -463,8 +429,6 @@ public abstract class ETypedElementImpl extends ENamedElementImpl implements
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-		case EcorePackage.ETYPED_ELEMENT__MANY:
-			return isMany() ? Boolean.TRUE : Boolean.FALSE;
 		case EcorePackage.ETYPED_ELEMENT__LOWER_BOUND:
 			return new Integer(getLowerBound());
 		case EcorePackage.ETYPED_ELEMENT__UNIQUE:
@@ -475,8 +439,6 @@ public abstract class ETypedElementImpl extends ENamedElementImpl implements
 			return basicGetEType();
 		case EcorePackage.ETYPED_ELEMENT__ORDERED:
 			return isOrdered() ? Boolean.TRUE : Boolean.FALSE;
-		case EcorePackage.ETYPED_ELEMENT__REQUIRED:
-			return isRequired() ? Boolean.TRUE : Boolean.FALSE;
 		case EcorePackage.ETYPED_ELEMENT__UPPER_BOUND:
 			return new Integer(getUpperBound());
 		case EcorePackage.ETYPED_ELEMENT__EGENERIC_TYPE:
@@ -555,8 +517,6 @@ public abstract class ETypedElementImpl extends ENamedElementImpl implements
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-		case EcorePackage.ETYPED_ELEMENT__MANY:
-			return many != MANY_EDEFAULT;
 		case EcorePackage.ETYPED_ELEMENT__LOWER_BOUND:
 			return lowerBound != LOWER_BOUND_EDEFAULT;
 		case EcorePackage.ETYPED_ELEMENT__UNIQUE:
@@ -565,8 +525,6 @@ public abstract class ETypedElementImpl extends ENamedElementImpl implements
 			return eType != null;
 		case EcorePackage.ETYPED_ELEMENT__ORDERED:
 			return ordered != ORDERED_EDEFAULT;
-		case EcorePackage.ETYPED_ELEMENT__REQUIRED:
-			return required != REQUIRED_EDEFAULT;
 		case EcorePackage.ETYPED_ELEMENT__UPPER_BOUND:
 			return upperBound != UPPER_BOUND_EDEFAULT;
 		case EcorePackage.ETYPED_ELEMENT__EGENERIC_TYPE:
@@ -586,16 +544,12 @@ public abstract class ETypedElementImpl extends ENamedElementImpl implements
 			return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (many: ");
-		result.append(many);
-		result.append(", lowerBound: ");
+		result.append(" (lowerBound: ");
 		result.append(lowerBound);
 		result.append(", unique: ");
 		result.append(unique);
 		result.append(", ordered: ");
 		result.append(ordered);
-		result.append(", required: ");
-		result.append(required);
 		result.append(", upperBound: ");
 		result.append(upperBound);
 		result.append(')');

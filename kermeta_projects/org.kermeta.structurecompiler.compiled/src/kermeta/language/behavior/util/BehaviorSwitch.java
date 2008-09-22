@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: BehaviorSwitch.java,v 1.2 2008-09-11 12:34:56 cfaucher Exp $
+ * $Id: BehaviorSwitch.java,v 1.3 2008-09-22 14:46:53 cfaucher Exp $
  */
 package kermeta.language.behavior.util;
 
@@ -89,32 +89,6 @@ public class BehaviorSwitch<T> {
 	 */
 	protected T doSwitch(int classifierID, EObject theEObject) {
 		switch (classifierID) {
-		case BehaviorPackage.BLOCK: {
-			Block block = (Block) theEObject;
-			T result = caseBlock(block);
-			if (result == null)
-				result = caseExpression(block);
-			if (result == null)
-				result = caseTypeContainer(block);
-			if (result == null)
-				result = caseObject(block);
-			if (result == null)
-				result = defaultCase(theEObject);
-			return result;
-		}
-		case BehaviorPackage.CALL_EXPRESSION: {
-			CallExpression callExpression = (CallExpression) theEObject;
-			T result = caseCallExpression(callExpression);
-			if (result == null)
-				result = caseExpression(callExpression);
-			if (result == null)
-				result = caseTypeContainer(callExpression);
-			if (result == null)
-				result = caseObject(callExpression);
-			if (result == null)
-				result = defaultCase(theEObject);
-			return result;
-		}
 		case BehaviorPackage.EXPRESSION: {
 			Expression expression = (Expression) theEObject;
 			T result = caseExpression(expression);
@@ -152,6 +126,19 @@ public class BehaviorSwitch<T> {
 				result = caseTypeContainer(callFeature);
 			if (result == null)
 				result = caseObject(callFeature);
+			if (result == null)
+				result = defaultCase(theEObject);
+			return result;
+		}
+		case BehaviorPackage.CALL_EXPRESSION: {
+			CallExpression callExpression = (CallExpression) theEObject;
+			T result = caseCallExpression(callExpression);
+			if (result == null)
+				result = caseExpression(callExpression);
+			if (result == null)
+				result = caseTypeContainer(callExpression);
+			if (result == null)
+				result = caseObject(callExpression);
 			if (result == null)
 				result = defaultCase(theEObject);
 			return result;
@@ -212,6 +199,19 @@ public class BehaviorSwitch<T> {
 				result = caseTypeContainer(assignment);
 			if (result == null)
 				result = caseObject(assignment);
+			if (result == null)
+				result = defaultCase(theEObject);
+			return result;
+		}
+		case BehaviorPackage.BLOCK: {
+			Block block = (Block) theEObject;
+			T result = caseBlock(block);
+			if (result == null)
+				result = caseExpression(block);
+			if (result == null)
+				result = caseTypeContainer(block);
+			if (result == null)
+				result = caseObject(block);
 			if (result == null)
 				result = defaultCase(theEObject);
 			return result;
@@ -449,36 +449,6 @@ public class BehaviorSwitch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Block</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Block</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseBlock(Block object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Call Expression</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Call Expression</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseCallExpression(CallExpression object) {
-		return null;
-	}
-
-	/**
 	 * Returns the result of interpreting the object as an instance of '<em>Expression</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
@@ -520,6 +490,21 @@ public class BehaviorSwitch<T> {
 	 * @generated
 	 */
 	public T caseCallFeature(CallFeature object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Call Expression</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Call Expression</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseCallExpression(CallExpression object) {
 		return null;
 	}
 
@@ -580,6 +565,21 @@ public class BehaviorSwitch<T> {
 	 * @generated
 	 */
 	public T caseAssignment(Assignment object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Block</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Block</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseBlock(Block object) {
 		return null;
 	}
 

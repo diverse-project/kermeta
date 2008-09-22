@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: EClassifierImpl.java,v 1.3 2008-09-11 12:34:38 cfaucher Exp $
+ * $Id: EClassifierImpl.java,v 1.4 2008-09-22 14:44:20 cfaucher Exp $
  */
 package ecore.impl;
 
@@ -36,9 +36,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * <ul>
  *   <li>{@link ecore.impl.EClassifierImpl#getInstanceClassName <em>Instance Class Name</em>}</li>
  *   <li>{@link ecore.impl.EClassifierImpl#getEPackage <em>EPackage</em>}</li>
- *   <li>{@link ecore.impl.EClassifierImpl#getInstanceClass <em>Instance Class</em>}</li>
  *   <li>{@link ecore.impl.EClassifierImpl#getETypeParameters <em>EType Parameters</em>}</li>
- *   <li>{@link ecore.impl.EClassifierImpl#getDefaultValue <em>Default Value</em>}</li>
  *   <li>{@link ecore.impl.EClassifierImpl#getInstanceTypeName <em>Instance Type Name</em>}</li>
  * </ul>
  * </p>
@@ -68,16 +66,6 @@ public abstract class EClassifierImpl extends ENamedElementImpl implements
 	protected String instanceClassName = INSTANCE_CLASS_NAME_EDEFAULT;
 
 	/**
-	 * The cached value of the '{@link #getInstanceClass() <em>Instance Class</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getInstanceClass()
-	 * @generated
-	 * @ordered
-	 */
-	protected Class<?> instanceClass;
-
-	/**
 	 * The cached value of the '{@link #getETypeParameters() <em>EType Parameters</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -86,26 +74,6 @@ public abstract class EClassifierImpl extends ENamedElementImpl implements
 	 * @ordered
 	 */
 	protected EList<ETypeParameter> eTypeParameters;
-
-	/**
-	 * The default value of the '{@link #getDefaultValue() <em>Default Value</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getDefaultValue()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final Object DEFAULT_VALUE_EDEFAULT = null;
-
-	/**
-	 * The cached value of the '{@link #getDefaultValue() <em>Default Value</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getDefaultValue()
-	 * @generated
-	 * @ordered
-	 */
-	protected Object defaultValue = DEFAULT_VALUE_EDEFAULT;
 
 	/**
 	 * The default value of the '{@link #getInstanceTypeName() <em>Instance Type Name</em>}' attribute.
@@ -235,15 +203,6 @@ public abstract class EClassifierImpl extends ENamedElementImpl implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Class<?> getInstanceClass() {
-		return instanceClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EList<ETypeParameter> getETypeParameters() {
 		if (eTypeParameters == null) {
 			eTypeParameters = new EObjectContainmentEList.Resolving<ETypeParameter>(
@@ -251,15 +210,6 @@ public abstract class EClassifierImpl extends ENamedElementImpl implements
 					EcorePackage.ECLASSIFIER__ETYPE_PARAMETERS);
 		}
 		return eTypeParameters;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Object getDefaultValue() {
-		return defaultValue;
 	}
 
 	/**
@@ -304,6 +254,32 @@ public abstract class EClassifierImpl extends ENamedElementImpl implements
 	 */
 	public int getClassifierID() {
 		java.lang.Integer result = null;
+
+		return result;
+
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Class<?> getterInstanceClass() {
+
+		java.lang.Class result = null;
+
+		return result;
+
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Object getterDefaultValue() {
+
+		java.lang.Object result = null;
 
 		return result;
 
@@ -374,12 +350,8 @@ public abstract class EClassifierImpl extends ENamedElementImpl implements
 			if (resolve)
 				return getEPackage();
 			return basicGetEPackage();
-		case EcorePackage.ECLASSIFIER__INSTANCE_CLASS:
-			return getInstanceClass();
 		case EcorePackage.ECLASSIFIER__ETYPE_PARAMETERS:
 			return getETypeParameters();
-		case EcorePackage.ECLASSIFIER__DEFAULT_VALUE:
-			return getDefaultValue();
 		case EcorePackage.ECLASSIFIER__INSTANCE_TYPE_NAME:
 			return getInstanceTypeName();
 		}
@@ -450,13 +422,8 @@ public abstract class EClassifierImpl extends ENamedElementImpl implements
 					: !INSTANCE_CLASS_NAME_EDEFAULT.equals(instanceClassName);
 		case EcorePackage.ECLASSIFIER__EPACKAGE:
 			return basicGetEPackage() != null;
-		case EcorePackage.ECLASSIFIER__INSTANCE_CLASS:
-			return instanceClass != null;
 		case EcorePackage.ECLASSIFIER__ETYPE_PARAMETERS:
 			return eTypeParameters != null && !eTypeParameters.isEmpty();
-		case EcorePackage.ECLASSIFIER__DEFAULT_VALUE:
-			return DEFAULT_VALUE_EDEFAULT == null ? defaultValue != null
-					: !DEFAULT_VALUE_EDEFAULT.equals(defaultValue);
 		case EcorePackage.ECLASSIFIER__INSTANCE_TYPE_NAME:
 			return INSTANCE_TYPE_NAME_EDEFAULT == null ? instanceTypeName != null
 					: !INSTANCE_TYPE_NAME_EDEFAULT.equals(instanceTypeName);
@@ -477,10 +444,6 @@ public abstract class EClassifierImpl extends ENamedElementImpl implements
 		StringBuffer result = new StringBuffer(super.toString());
 		result.append(" (instanceClassName: ");
 		result.append(instanceClassName);
-		result.append(", instanceClass: ");
-		result.append(instanceClass);
-		result.append(", defaultValue: ");
-		result.append(defaultValue);
 		result.append(", instanceTypeName: ");
 		result.append(instanceTypeName);
 		result.append(')');

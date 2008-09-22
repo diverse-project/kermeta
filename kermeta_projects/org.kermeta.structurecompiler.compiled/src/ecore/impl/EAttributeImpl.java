@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: EAttributeImpl.java,v 1.3 2008-09-11 12:34:38 cfaucher Exp $
+ * $Id: EAttributeImpl.java,v 1.4 2008-09-22 14:44:20 cfaucher Exp $
  */
 package ecore.impl;
 
@@ -13,7 +13,6 @@ import ecore.EcorePackage;
 import org.eclipse.emf.common.notify.Notification;
 
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
@@ -24,7 +23,6 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link ecore.impl.EAttributeImpl#getEAttributeType <em>EAttribute Type</em>}</li>
  *   <li>{@link ecore.impl.EAttributeImpl#isID <em>ID</em>}</li>
  * </ul>
  * </p>
@@ -33,16 +31,6 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  */
 public class EAttributeImpl extends EStructuralFeatureImpl implements
 		EAttribute {
-	/**
-	 * The cached value of the '{@link #getEAttributeType() <em>EAttribute Type</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getEAttributeType()
-	 * @generated
-	 * @ordered
-	 */
-	protected EDataType eAttributeType;
-
 	/**
 	 * The default value of the '{@link #isID() <em>ID</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -87,34 +75,6 @@ public class EAttributeImpl extends EStructuralFeatureImpl implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EDataType getEAttributeType() {
-		if (eAttributeType != null && eAttributeType.eIsProxy()) {
-			InternalEObject oldEAttributeType = (InternalEObject) eAttributeType;
-			eAttributeType = (EDataType) eResolveProxy(oldEAttributeType);
-			if (eAttributeType != oldEAttributeType) {
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE,
-							EcorePackage.EATTRIBUTE__EATTRIBUTE_TYPE,
-							oldEAttributeType, eAttributeType));
-			}
-		}
-		return eAttributeType;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EDataType basicGetEAttributeType() {
-		return eAttributeType;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public boolean isID() {
 		return iD;
 	}
@@ -137,13 +97,22 @@ public class EAttributeImpl extends EStructuralFeatureImpl implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EDataType getterEAttributeType() {
+
+		ecore.EDataType result = null;
+
+		return result;
+
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-		case EcorePackage.EATTRIBUTE__EATTRIBUTE_TYPE:
-			if (resolve)
-				return getEAttributeType();
-			return basicGetEAttributeType();
 		case EcorePackage.EATTRIBUTE__ID:
 			return isID() ? Boolean.TRUE : Boolean.FALSE;
 		}
@@ -188,8 +157,6 @@ public class EAttributeImpl extends EStructuralFeatureImpl implements
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-		case EcorePackage.EATTRIBUTE__EATTRIBUTE_TYPE:
-			return eAttributeType != null;
 		case EcorePackage.EATTRIBUTE__ID:
 			return iD != ID_EDEFAULT;
 		}

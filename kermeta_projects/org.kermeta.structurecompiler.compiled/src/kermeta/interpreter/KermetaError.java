@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: KermetaError.java,v 1.2 2008-09-11 12:34:54 cfaucher Exp $
+ * $Id: KermetaError.java,v 1.3 2008-09-22 14:45:47 cfaucher Exp $
  */
 package kermeta.interpreter;
 
@@ -20,7 +20,7 @@ package kermeta.interpreter;
  *
  * @see kermeta.interpreter.InterpreterPackage#getKermetaError()
  * @model abstract="true"
- *        annotation="kermeta documentation='/**\n * Kermeta language error in a code written in Kermeta\n \052/'"
+ *        annotation="kermeta documentation='/**\r\n * Kermeta language error in a code written in Kermeta\r\n \052/'"
  * @generated
  */
 public interface KermetaError extends kermeta.language.structure.Object {
@@ -36,7 +36,7 @@ public interface KermetaError extends kermeta.language.structure.Object {
 	 * @see #setMessage(String)
 	 * @see kermeta.interpreter.InterpreterPackage#getKermetaError_Message()
 	 * @model dataType="kermeta.standard.JavaString"
-	 *        annotation="kermeta documentation='/**\n\t * Error message\n\t \052/'"
+	 *        annotation="kermeta documentation='/**\r\n\t * Error message\r\n\t \052/'"
 	 * @generated
 	 */
 	String getMessage();

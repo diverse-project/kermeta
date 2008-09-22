@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: InvalidParameterException.java,v 1.2 2008-09-11 12:34:48 cfaucher Exp $
+ * $Id: InvalidParameterException.java,v 1.3 2008-09-22 14:46:08 cfaucher Exp $
  */
 package kermeta.kunit;
 
@@ -13,7 +13,7 @@ package kermeta.kunit;
  *
  *
  * @see kermeta.kunit.KunitPackage#getInvalidParameterException()
- * @model annotation="kermeta documentation='/**\n * This is for when we try to build a suite from a class that isn\'t a TestCase\n \052/'"
+ * @model annotation="kermeta documentation='/**\r\n * This is for when we try to build a suite from a class that isn\'t a TestCase\r\n \052/'"
  * @generated
  */
 public interface InvalidParameterException extends kermeta.exceptions.Exception {

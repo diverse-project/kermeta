@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: SimkFactory.java,v 1.2 2008-09-11 12:35:01 cfaucher Exp $
+ * $Id: SimkFactory.java,v 1.3 2008-09-22 14:49:06 cfaucher Exp $
  */
 package simk;
 
@@ -35,6 +35,15 @@ public interface SimkFactory extends EFactory {
 	SIMKModel createSIMKModel();
 
 	/**
+	 * Returns a new object of class '<em>SM Class</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>SM Class</em>'.
+	 * @generated
+	 */
+	SMClass createSMClass();
+
+	/**
 	 * Returns a new object of class '<em>Static Method</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -51,15 +60,6 @@ public interface SimkFactory extends EFactory {
 	 * @generated
 	 */
 	SMContext createSMContext();
-
-	/**
-	 * Returns a new object of class '<em>SM Class</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>SM Class</em>'.
-	 * @generated
-	 */
-	SMClass createSMClass();
 
 	/**
 	 * Returns a new object of class '<em>SM Parameter</em>'.

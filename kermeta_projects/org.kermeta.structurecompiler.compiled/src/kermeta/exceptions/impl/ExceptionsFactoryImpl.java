@@ -2,12 +2,13 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ExceptionsFactoryImpl.java,v 1.2 2008-09-11 12:34:37 cfaucher Exp $
+ * $Id: ExceptionsFactoryImpl.java,v 1.3 2008-09-22 14:45:46 cfaucher Exp $
  */
 package kermeta.exceptions.impl;
 
 import kermeta.exceptions.AbstractClassInstantiationError;
 import kermeta.exceptions.CallOnVoidTarget;
+import kermeta.exceptions.ConstraintViolatedException;
 import kermeta.exceptions.ConstraintViolatedInv;
 import kermeta.exceptions.ConstraintViolatedPost;
 import kermeta.exceptions.ConstraintViolatedPre;
@@ -126,6 +127,8 @@ public class ExceptionsFactoryImpl extends EFactoryImpl implements
 			return createIOException();
 		case ExceptionsPackage.FILE_NOT_FOUND_EXCEPTION:
 			return createFileNotFoundException();
+		case ExceptionsPackage.CONSTRAINT_VIOLATED_EXCEPTION:
+			return createConstraintViolatedException();
 		case ExceptionsPackage.CONSTRAINT_VIOLATED_PRE:
 			return createConstraintViolatedPre();
 		case ExceptionsPackage.CONSTRAINT_VIOLATED_POST:
@@ -358,6 +361,16 @@ public class ExceptionsFactoryImpl extends EFactoryImpl implements
 	public FileNotFoundException createFileNotFoundException() {
 		FileNotFoundExceptionImpl fileNotFoundException = new FileNotFoundExceptionImpl();
 		return fileNotFoundException;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public ConstraintViolatedException createConstraintViolatedException() {
+		ConstraintViolatedExceptionImpl constraintViolatedException = new ConstraintViolatedExceptionImpl();
+		return constraintViolatedException;
 	}
 
 	/**

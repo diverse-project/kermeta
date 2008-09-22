@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ConstraintViolatedPre.java,v 1.2 2008-09-11 12:34:43 cfaucher Exp $
+ * $Id: ConstraintViolatedPre.java,v 1.3 2008-09-22 14:45:18 cfaucher Exp $
  */
 package kermeta.exceptions;
 
@@ -13,8 +13,8 @@ package kermeta.exceptions;
  *
  *
  * @see kermeta.exceptions.ExceptionsPackage#getConstraintViolatedPre()
- * @model annotation="kermeta documentation='/** the pre-condition is not satisfied \052/'"
+ * @model annotation="kermeta documentation='/** The pre-condition is not satisfied \052/'"
  * @generated
  */
-public interface ConstraintViolatedPre extends kermeta.exceptions.Exception {
+public interface ConstraintViolatedPre extends ConstraintViolatedException {
 } // ConstraintViolatedPre

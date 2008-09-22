@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ModelAnalizer.java,v 1.2 2008-09-11 12:34:55 cfaucher Exp $
+ * $Id: ModelAnalizer.java,v 1.3 2008-09-22 14:49:08 cfaucher Exp $
  */
 package km2ecore.helper.ecore;
 
@@ -32,7 +32,7 @@ public interface ModelAnalizer extends kermeta.language.structure.Object {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @model dataType="kermeta.standard.JavaBoolean"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='\njava.lang.Boolean result = null;\n\n\tresult = false;\n\n\tjava.lang.Boolean idIfCond_26 = false;\n\tidIfCond_26 = org.kermeta.compil.runtime.helper.language.ObjectUtil.equals(super_class, org.kermeta.compil.runtime.helper.basetypes.CollectionUtil.<ecore.EGenericType>convertAsOrderedSet(extended_class.getEGenericSuperTypes()).first().getEClassifier());\n\n\tif( idIfCond_26 ) {\n\n\tresult = true;\n}\n\n\nreturn result;\n'"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='\njava.lang.Boolean result = null;\n\n\tresult = false;\n\n\tjava.lang.Boolean idIfCond_1007 = false;\n\tidIfCond_1007 = org.kermeta.compil.runtime.helper.language.ObjectUtil.equals(super_class, org.kermeta.compil.runtime.helper.basetypes.CollectionUtil.<ecore.EGenericType>convertAsOrderedSet(extended_class.getEGenericSuperTypes()).first().getEClassifier());\n\n\tif( idIfCond_1007 ) {\n\n\tresult = true;\n}\n\n\nreturn result;\n'"
 	 * @generated
 	 */
 	Boolean isExtendedBy(EClass extended_class, EClass super_class);

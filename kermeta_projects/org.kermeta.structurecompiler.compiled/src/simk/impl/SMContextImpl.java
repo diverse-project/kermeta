@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: SMContextImpl.java,v 1.2 2008-09-11 12:34:39 cfaucher Exp $
+ * $Id: SMContextImpl.java,v 1.3 2008-09-22 14:48:57 cfaucher Exp $
  */
 package simk.impl;
 
@@ -36,8 +36,8 @@ import simk.StaticMethod;
  * The following features are implemented:
  * <ul>
  *   <li>{@link simk.impl.SMContextImpl#getQualifiedNameFinalPackage <em>Qualified Name Final Package</em>}</li>
- *   <li>{@link simk.impl.SMContextImpl#getSMClass <em>SM Class</em>}</li>
  *   <li>{@link simk.impl.SMContextImpl#getStaticMethods <em>Static Methods</em>}</li>
+ *   <li>{@link simk.impl.SMContextImpl#getSMClass <em>SM Class</em>}</li>
  * </ul>
  * </p>
  *
@@ -65,16 +65,6 @@ public class SMContextImpl extends ObjectImpl implements SMContext {
 	protected String qualifiedNameFinalPackage = QUALIFIED_NAME_FINAL_PACKAGE_EDEFAULT;
 
 	/**
-	 * The cached value of the '{@link #getSMClass() <em>SM Class</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getSMClass()
-	 * @generated
-	 * @ordered
-	 */
-	protected SMClass sMClass;
-
-	/**
 	 * The cached value of the '{@link #getStaticMethods() <em>Static Methods</em>}' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -83,6 +73,16 @@ public class SMContextImpl extends ObjectImpl implements SMContext {
 	 * @ordered
 	 */
 	protected EList<StaticMethod> staticMethods;
+
+	/**
+	 * The cached value of the '{@link #getSMClass() <em>SM Class</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getSMClass()
+	 * @generated
+	 * @ordered
+	 */
+	protected SMClass sMClass;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -124,6 +124,21 @@ public class SMContextImpl extends ObjectImpl implements SMContext {
 			eNotify(new ENotificationImpl(this, Notification.SET,
 					SimkPackage.SM_CONTEXT__QUALIFIED_NAME_FINAL_PACKAGE,
 					oldQualifiedNameFinalPackage, qualifiedNameFinalPackage));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<StaticMethod> getStaticMethods() {
+		if (staticMethods == null) {
+			staticMethods = new EObjectWithInverseResolvingEList<StaticMethod>(
+					StaticMethod.class, this,
+					SimkPackage.SM_CONTEXT__STATIC_METHODS,
+					SimkPackage.STATIC_METHOD__SM_CONTEXT);
+		}
+		return staticMethods;
 	}
 
 	/**
@@ -211,35 +226,20 @@ public class SMContextImpl extends ObjectImpl implements SMContext {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<StaticMethod> getStaticMethods() {
-		if (staticMethods == null) {
-			staticMethods = new EObjectWithInverseResolvingEList<StaticMethod>(
-					StaticMethod.class, this,
-					SimkPackage.SM_CONTEXT__STATIC_METHODS,
-					SimkPackage.STATIC_METHOD__SM_CONTEXT);
-		}
-		return staticMethods;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd,
 			int featureID, NotificationChain msgs) {
 		switch (featureID) {
+		case SimkPackage.SM_CONTEXT__STATIC_METHODS:
+			return ((InternalEList<InternalEObject>) (InternalEList<?>) getStaticMethods())
+					.basicAdd(otherEnd, msgs);
 		case SimkPackage.SM_CONTEXT__SM_CLASS:
 			if (sMClass != null)
 				msgs = ((InternalEObject) sMClass).eInverseRemove(this,
 						EOPPOSITE_FEATURE_BASE
 								- SimkPackage.SM_CONTEXT__SM_CLASS, null, msgs);
 			return basicSetSMClass((SMClass) otherEnd, msgs);
-		case SimkPackage.SM_CONTEXT__STATIC_METHODS:
-			return ((InternalEList<InternalEObject>) (InternalEList<?>) getStaticMethods())
-					.basicAdd(otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
@@ -253,11 +253,11 @@ public class SMContextImpl extends ObjectImpl implements SMContext {
 	public NotificationChain eInverseRemove(InternalEObject otherEnd,
 			int featureID, NotificationChain msgs) {
 		switch (featureID) {
-		case SimkPackage.SM_CONTEXT__SM_CLASS:
-			return basicSetSMClass(null, msgs);
 		case SimkPackage.SM_CONTEXT__STATIC_METHODS:
 			return ((InternalEList<?>) getStaticMethods()).basicRemove(
 					otherEnd, msgs);
+		case SimkPackage.SM_CONTEXT__SM_CLASS:
+			return basicSetSMClass(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -272,12 +272,12 @@ public class SMContextImpl extends ObjectImpl implements SMContext {
 		switch (featureID) {
 		case SimkPackage.SM_CONTEXT__QUALIFIED_NAME_FINAL_PACKAGE:
 			return getQualifiedNameFinalPackage();
+		case SimkPackage.SM_CONTEXT__STATIC_METHODS:
+			return getStaticMethods();
 		case SimkPackage.SM_CONTEXT__SM_CLASS:
 			if (resolve)
 				return getSMClass();
 			return basicGetSMClass();
-		case SimkPackage.SM_CONTEXT__STATIC_METHODS:
-			return getStaticMethods();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -294,13 +294,13 @@ public class SMContextImpl extends ObjectImpl implements SMContext {
 		case SimkPackage.SM_CONTEXT__QUALIFIED_NAME_FINAL_PACKAGE:
 			setQualifiedNameFinalPackage((String) newValue);
 			return;
-		case SimkPackage.SM_CONTEXT__SM_CLASS:
-			setSMClass((SMClass) newValue);
-			return;
 		case SimkPackage.SM_CONTEXT__STATIC_METHODS:
 			getStaticMethods().clear();
 			getStaticMethods().addAll(
 					(Collection<? extends StaticMethod>) newValue);
+			return;
+		case SimkPackage.SM_CONTEXT__SM_CLASS:
+			setSMClass((SMClass) newValue);
 			return;
 		}
 		super.eSet(featureID, newValue);
@@ -317,11 +317,11 @@ public class SMContextImpl extends ObjectImpl implements SMContext {
 		case SimkPackage.SM_CONTEXT__QUALIFIED_NAME_FINAL_PACKAGE:
 			setQualifiedNameFinalPackage(QUALIFIED_NAME_FINAL_PACKAGE_EDEFAULT);
 			return;
-		case SimkPackage.SM_CONTEXT__SM_CLASS:
-			setSMClass((SMClass) null);
-			return;
 		case SimkPackage.SM_CONTEXT__STATIC_METHODS:
 			getStaticMethods().clear();
+			return;
+		case SimkPackage.SM_CONTEXT__SM_CLASS:
+			setSMClass((SMClass) null);
 			return;
 		}
 		super.eUnset(featureID);
@@ -339,10 +339,10 @@ public class SMContextImpl extends ObjectImpl implements SMContext {
 			return QUALIFIED_NAME_FINAL_PACKAGE_EDEFAULT == null ? qualifiedNameFinalPackage != null
 					: !QUALIFIED_NAME_FINAL_PACKAGE_EDEFAULT
 							.equals(qualifiedNameFinalPackage);
-		case SimkPackage.SM_CONTEXT__SM_CLASS:
-			return sMClass != null;
 		case SimkPackage.SM_CONTEXT__STATIC_METHODS:
 			return staticMethods != null && !staticMethods.isEmpty();
+		case SimkPackage.SM_CONTEXT__SM_CLASS:
+			return sMClass != null;
 		}
 		return super.eIsSet(featureID);
 	}

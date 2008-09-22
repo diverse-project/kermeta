@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: BehaviorFactoryImpl.java,v 1.2 2008-09-11 12:34:40 cfaucher Exp $
+ * $Id: BehaviorFactoryImpl.java,v 1.3 2008-09-22 14:46:52 cfaucher Exp $
  */
 package kermeta.language.behavior.impl;
 
@@ -61,8 +61,8 @@ public class BehaviorFactoryImpl extends EFactoryImpl implements
 	@Override
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
-		case BehaviorPackage.BLOCK:
-			return createBlock();
+		case BehaviorPackage.EXPRESSION:
+			return createExpression();
 		case BehaviorPackage.CALL_VARIABLE:
 			return createCallVariable();
 		case BehaviorPackage.CALL_FEATURE:
@@ -75,6 +75,8 @@ public class BehaviorFactoryImpl extends EFactoryImpl implements
 			return createCallValue();
 		case BehaviorPackage.ASSIGNMENT:
 			return createAssignment();
+		case BehaviorPackage.BLOCK:
+			return createBlock();
 		case BehaviorPackage.CONDITIONAL:
 			return createConditional();
 		case BehaviorPackage.RAISE:
@@ -118,9 +120,9 @@ public class BehaviorFactoryImpl extends EFactoryImpl implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Block createBlock() {
-		BlockImpl block = new BlockImpl();
-		return block;
+	public Expression createExpression() {
+		ExpressionImpl expression = new ExpressionImpl();
+		return expression;
 	}
 
 	/**
@@ -181,6 +183,16 @@ public class BehaviorFactoryImpl extends EFactoryImpl implements
 	public Assignment createAssignment() {
 		AssignmentImpl assignment = new AssignmentImpl();
 		return assignment;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Block createBlock() {
+		BlockImpl block = new BlockImpl();
+		return block;
 	}
 
 	/**

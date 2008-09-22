@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: CallOnVoidTarget.java,v 1.2 2008-09-11 12:34:45 cfaucher Exp $
+ * $Id: CallOnVoidTarget.java,v 1.3 2008-09-22 14:45:18 cfaucher Exp $
  */
 package kermeta.exceptions;
 

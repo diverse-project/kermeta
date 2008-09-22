@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: EcorePackage.java,v 1.2 2008-09-11 12:35:03 cfaucher Exp $
+ * $Id: EcorePackage.java,v 1.3 2008-09-22 14:45:17 cfaucher Exp $
  */
 package kermeta.ecore;
 
@@ -27,7 +27,7 @@ import org.eclipse.emf.ecore.EReference;
  * @see kermeta.ecore.EcoreFactory
  * @model kind="package"
  *        annotation="kermeta ecoreUri='http://www.kermeta.org/kermeta/1_2_0//kermeta/ecore'"
- *        annotation="kermeta documentation='/** \n * Contains the definition of a Kermeta classes used for compatibility with Ecore \n * <img src=\"platform:/plugin/fr.irisa.triskell.kermeta.documentation/src/figures/ecore_compatibility_package.png\"/>\n \052/'"
+ *        annotation="kermeta documentation='/** \r\n * Contains the definition of a Kermeta classes used for compatibility with Ecore \r\n * <img src=\"platform:/plugin/fr.irisa.triskell.kermeta.documentation/src/figures/ecore_compatibility_package.png\"/>\r\n \052/'"
  * @generated
  */
 public interface EcorePackage extends EPackage {

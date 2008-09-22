@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: LanguageFactoryImpl.java,v 1.2 2008-09-11 12:34:49 cfaucher Exp $
+ * $Id: LanguageFactoryImpl.java,v 1.3 2008-09-22 14:46:53 cfaucher Exp $
  */
 package kermeta.language.impl;
 

@@ -2,19 +2,27 @@
  * <copyright>
  * </copyright>
  *
- * $Id: StructurePackageImpl.java,v 1.2 2008-09-11 12:34:47 cfaucher Exp $
+ * $Id: StructurePackageImpl.java,v 1.3 2008-09-22 14:47:36 cfaucher Exp $
  */
 package kermeta.language.structure.impl;
 
 import java.lang.Object;
 
+import kermeta.KermetaPackage;
+
 import kermeta.compiler.CompilerPackage;
 
 import kermeta.compiler.impl.CompilerPackageImpl;
 
+import kermeta.ecore.EcorePackage;
+
+import kermeta.ecore.impl.EcorePackageImpl;
+
 import kermeta.exceptions.ExceptionsPackage;
 
 import kermeta.exceptions.impl.ExceptionsPackageImpl;
+
+import kermeta.impl.KermetaPackageImpl;
 
 import kermeta.interpreter.InterpreterPackage;
 
@@ -98,17 +106,9 @@ import km2ecore.common.exception.impl.ExceptionPackageImpl;
 
 import km2ecore.common.impl.CommonPackageImpl;
 
-import km2ecore.helper.ecore.EcorePackage;
-
-import km2ecore.helper.ecore.impl.EcorePackageImpl;
-
 import km2ecore.helper.java.JavaPackage;
 
 import km2ecore.helper.java.impl.JavaPackageImpl;
-
-import km2ecore.helper.kermeta.KermetaPackage;
-
-import km2ecore.helper.kermeta.impl.KermetaPackageImpl;
 
 import km2ecore.impl.Km2ecorePackageImpl;
 
@@ -145,7 +145,203 @@ public class StructurePackageImpl extends EPackageImpl implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	private EClass objectEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass operationEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass parameterEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass typeEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass classDefinitionEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass modelTypeEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass classEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass modelEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass namedElementEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass enumerationEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass functionTypeEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass propertyEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass typeContainerEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass enumerationLiteralEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass typeVariableBindingEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	private EClass multiplicityElementEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass typedElementEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass typeDefinitionEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass dataTypeEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass packageEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass primitiveTypeEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass tagEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass constraintEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass genericTypeDefinitionEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass parameterizedTypeEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass typeVariableEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass objectTypeVariableEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass modelTypeVariableEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass virtualTypeEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -173,195 +369,6 @@ public class StructurePackageImpl extends EPackageImpl implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass packageEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass primitiveTypeEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass enumerationEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass enumerationLiteralEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass classDefinitionEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass operationEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass parameterEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass constraintEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass propertyEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass objectTypeVariableEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass tagEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass objectEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass classEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass genericTypeDefinitionEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass typeEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass typeContainerEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass typeVariableBindingEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass typedElementEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass typeDefinitionEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass namedElementEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass dataTypeEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass parameterizedTypeEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass typeVariableEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass modelTypeEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass modelTypeVariableEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass virtualTypeEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass modelEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	private EClass filterEClass = null;
 
 	/**
@@ -370,13 +377,6 @@ public class StructurePackageImpl extends EPackageImpl implements
 	 * @generated
 	 */
 	private EClass productTypeEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass functionTypeEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -397,14 +397,14 @@ public class StructurePackageImpl extends EPackageImpl implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass linkSetterForTypedElementEClass = null;
+	private EClass traceabilityEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass traceabilityEClass = null;
+	private EClass linkSetterForTypedElementEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -517,6 +517,54 @@ public class StructurePackageImpl extends EPackageImpl implements
 		isInited = true;
 
 		// Obtain or create and register interdependencies
+		KermetaPackageImpl theKermetaPackage = (KermetaPackageImpl) (EPackage.Registry.INSTANCE
+				.getEPackage(KermetaPackage.eNS_URI) instanceof KermetaPackageImpl ? EPackage.Registry.INSTANCE
+				.getEPackage(KermetaPackage.eNS_URI)
+				: KermetaPackage.eINSTANCE);
+		StandardPackageImpl theStandardPackage = (StandardPackageImpl) (EPackage.Registry.INSTANCE
+				.getEPackage(StandardPackage.eNS_URI) instanceof StandardPackageImpl ? EPackage.Registry.INSTANCE
+				.getEPackage(StandardPackage.eNS_URI)
+				: StandardPackage.eINSTANCE);
+		LanguagePackageImpl theLanguagePackage = (LanguagePackageImpl) (EPackage.Registry.INSTANCE
+				.getEPackage(LanguagePackage.eNS_URI) instanceof LanguagePackageImpl ? EPackage.Registry.INSTANCE
+				.getEPackage(LanguagePackage.eNS_URI)
+				: LanguagePackage.eINSTANCE);
+		BehaviorPackageImpl theBehaviorPackage = (BehaviorPackageImpl) (EPackage.Registry.INSTANCE
+				.getEPackage(BehaviorPackage.eNS_URI) instanceof BehaviorPackageImpl ? EPackage.Registry.INSTANCE
+				.getEPackage(BehaviorPackage.eNS_URI)
+				: BehaviorPackage.eINSTANCE);
+		CompilerPackageImpl theCompilerPackage = (CompilerPackageImpl) (EPackage.Registry.INSTANCE
+				.getEPackage(CompilerPackage.eNS_URI) instanceof CompilerPackageImpl ? EPackage.Registry.INSTANCE
+				.getEPackage(CompilerPackage.eNS_URI)
+				: CompilerPackage.eINSTANCE);
+		KunitPackageImpl theKunitPackage = (KunitPackageImpl) (EPackage.Registry.INSTANCE
+				.getEPackage(KunitPackage.eNS_URI) instanceof KunitPackageImpl ? EPackage.Registry.INSTANCE
+				.getEPackage(KunitPackage.eNS_URI)
+				: KunitPackage.eINSTANCE);
+		IoPackageImpl theIoPackage = (IoPackageImpl) (EPackage.Registry.INSTANCE
+				.getEPackage(IoPackage.eNS_URI) instanceof IoPackageImpl ? EPackage.Registry.INSTANCE
+				.getEPackage(IoPackage.eNS_URI)
+				: IoPackage.eINSTANCE);
+		InterpreterPackageImpl theInterpreterPackage = (InterpreterPackageImpl) (EPackage.Registry.INSTANCE
+				.getEPackage(InterpreterPackage.eNS_URI) instanceof InterpreterPackageImpl ? EPackage.Registry.INSTANCE
+				.getEPackage(InterpreterPackage.eNS_URI)
+				: InterpreterPackage.eINSTANCE);
+		PersistencePackageImpl thePersistencePackage = (PersistencePackageImpl) (EPackage.Registry.INSTANCE
+				.getEPackage(PersistencePackage.eNS_URI) instanceof PersistencePackageImpl ? EPackage.Registry.INSTANCE
+				.getEPackage(PersistencePackage.eNS_URI)
+				: PersistencePackage.eINSTANCE);
+		UtilsPackageImpl theUtilsPackage = (UtilsPackageImpl) (EPackage.Registry.INSTANCE
+				.getEPackage(UtilsPackage.eNS_URI) instanceof UtilsPackageImpl ? EPackage.Registry.INSTANCE
+				.getEPackage(UtilsPackage.eNS_URI)
+				: UtilsPackage.eINSTANCE);
+		EcorePackageImpl theEcorePackage = (EcorePackageImpl) (EPackage.Registry.INSTANCE
+				.getEPackage(EcorePackage.eNS_URI) instanceof EcorePackageImpl ? EPackage.Registry.INSTANCE
+				.getEPackage(EcorePackage.eNS_URI)
+				: EcorePackage.eINSTANCE);
+		ExceptionsPackageImpl theExceptionsPackage = (ExceptionsPackageImpl) (EPackage.Registry.INSTANCE
+				.getEPackage(ExceptionsPackage.eNS_URI) instanceof ExceptionsPackageImpl ? EPackage.Registry.INSTANCE
+				.getEPackage(ExceptionsPackage.eNS_URI)
+				: ExceptionsPackage.eINSTANCE);
 		Km2ecorePackageImpl theKm2ecorePackage = (Km2ecorePackageImpl) (EPackage.Registry.INSTANCE
 				.getEPackage(Km2ecorePackage.eNS_URI) instanceof Km2ecorePackageImpl ? EPackage.Registry.INSTANCE
 				.getEPackage(Km2ecorePackage.eNS_URI)
@@ -529,66 +577,18 @@ public class StructurePackageImpl extends EPackageImpl implements
 				.getEPackage(ExceptionPackage.eNS_URI) instanceof ExceptionPackageImpl ? EPackage.Registry.INSTANCE
 				.getEPackage(ExceptionPackage.eNS_URI)
 				: ExceptionPackage.eINSTANCE);
-		EcorePackageImpl theEcorePackage = (EcorePackageImpl) (EPackage.Registry.INSTANCE
-				.getEPackage(EcorePackage.eNS_URI) instanceof EcorePackageImpl ? EPackage.Registry.INSTANCE
-				.getEPackage(EcorePackage.eNS_URI)
-				: EcorePackage.eINSTANCE);
-		KermetaPackageImpl theKermetaPackage = (KermetaPackageImpl) (EPackage.Registry.INSTANCE
-				.getEPackage(KermetaPackage.eNS_URI) instanceof KermetaPackageImpl ? EPackage.Registry.INSTANCE
-				.getEPackage(KermetaPackage.eNS_URI)
-				: KermetaPackage.eINSTANCE);
 		JavaPackageImpl theJavaPackage = (JavaPackageImpl) (EPackage.Registry.INSTANCE
 				.getEPackage(JavaPackage.eNS_URI) instanceof JavaPackageImpl ? EPackage.Registry.INSTANCE
 				.getEPackage(JavaPackage.eNS_URI)
 				: JavaPackage.eINSTANCE);
-		kermeta.impl.KermetaPackageImpl theKermetaPackage_1 = (kermeta.impl.KermetaPackageImpl) (EPackage.Registry.INSTANCE
-				.getEPackage(kermeta.KermetaPackage.eNS_URI) instanceof kermeta.impl.KermetaPackageImpl ? EPackage.Registry.INSTANCE
-				.getEPackage(kermeta.KermetaPackage.eNS_URI)
-				: kermeta.KermetaPackage.eINSTANCE);
-		LanguagePackageImpl theLanguagePackage = (LanguagePackageImpl) (EPackage.Registry.INSTANCE
-				.getEPackage(LanguagePackage.eNS_URI) instanceof LanguagePackageImpl ? EPackage.Registry.INSTANCE
-				.getEPackage(LanguagePackage.eNS_URI)
-				: LanguagePackage.eINSTANCE);
-		BehaviorPackageImpl theBehaviorPackage = (BehaviorPackageImpl) (EPackage.Registry.INSTANCE
-				.getEPackage(BehaviorPackage.eNS_URI) instanceof BehaviorPackageImpl ? EPackage.Registry.INSTANCE
-				.getEPackage(BehaviorPackage.eNS_URI)
-				: BehaviorPackage.eINSTANCE);
-		PersistencePackageImpl thePersistencePackage = (PersistencePackageImpl) (EPackage.Registry.INSTANCE
-				.getEPackage(PersistencePackage.eNS_URI) instanceof PersistencePackageImpl ? EPackage.Registry.INSTANCE
-				.getEPackage(PersistencePackage.eNS_URI)
-				: PersistencePackage.eINSTANCE);
-		IoPackageImpl theIoPackage = (IoPackageImpl) (EPackage.Registry.INSTANCE
-				.getEPackage(IoPackage.eNS_URI) instanceof IoPackageImpl ? EPackage.Registry.INSTANCE
-				.getEPackage(IoPackage.eNS_URI)
-				: IoPackage.eINSTANCE);
-		ExceptionsPackageImpl theExceptionsPackage = (ExceptionsPackageImpl) (EPackage.Registry.INSTANCE
-				.getEPackage(ExceptionsPackage.eNS_URI) instanceof ExceptionsPackageImpl ? EPackage.Registry.INSTANCE
-				.getEPackage(ExceptionsPackage.eNS_URI)
-				: ExceptionsPackage.eINSTANCE);
-		UtilsPackageImpl theUtilsPackage = (UtilsPackageImpl) (EPackage.Registry.INSTANCE
-				.getEPackage(UtilsPackage.eNS_URI) instanceof UtilsPackageImpl ? EPackage.Registry.INSTANCE
-				.getEPackage(UtilsPackage.eNS_URI)
-				: UtilsPackage.eINSTANCE);
-		StandardPackageImpl theStandardPackage = (StandardPackageImpl) (EPackage.Registry.INSTANCE
-				.getEPackage(StandardPackage.eNS_URI) instanceof StandardPackageImpl ? EPackage.Registry.INSTANCE
-				.getEPackage(StandardPackage.eNS_URI)
-				: StandardPackage.eINSTANCE);
-		KunitPackageImpl theKunitPackage = (KunitPackageImpl) (EPackage.Registry.INSTANCE
-				.getEPackage(KunitPackage.eNS_URI) instanceof KunitPackageImpl ? EPackage.Registry.INSTANCE
-				.getEPackage(KunitPackage.eNS_URI)
-				: KunitPackage.eINSTANCE);
-		kermeta.ecore.impl.EcorePackageImpl theEcorePackage_1 = (kermeta.ecore.impl.EcorePackageImpl) (EPackage.Registry.INSTANCE
-				.getEPackage(kermeta.ecore.EcorePackage.eNS_URI) instanceof kermeta.ecore.impl.EcorePackageImpl ? EPackage.Registry.INSTANCE
-				.getEPackage(kermeta.ecore.EcorePackage.eNS_URI)
-				: kermeta.ecore.EcorePackage.eINSTANCE);
-		InterpreterPackageImpl theInterpreterPackage = (InterpreterPackageImpl) (EPackage.Registry.INSTANCE
-				.getEPackage(InterpreterPackage.eNS_URI) instanceof InterpreterPackageImpl ? EPackage.Registry.INSTANCE
-				.getEPackage(InterpreterPackage.eNS_URI)
-				: InterpreterPackage.eINSTANCE);
-		CompilerPackageImpl theCompilerPackage = (CompilerPackageImpl) (EPackage.Registry.INSTANCE
-				.getEPackage(CompilerPackage.eNS_URI) instanceof CompilerPackageImpl ? EPackage.Registry.INSTANCE
-				.getEPackage(CompilerPackage.eNS_URI)
-				: CompilerPackage.eINSTANCE);
+		km2ecore.helper.ecore.impl.EcorePackageImpl theEcorePackage_1 = (km2ecore.helper.ecore.impl.EcorePackageImpl) (EPackage.Registry.INSTANCE
+				.getEPackage(km2ecore.helper.ecore.EcorePackage.eNS_URI) instanceof km2ecore.helper.ecore.impl.EcorePackageImpl ? EPackage.Registry.INSTANCE
+				.getEPackage(km2ecore.helper.ecore.EcorePackage.eNS_URI)
+				: km2ecore.helper.ecore.EcorePackage.eINSTANCE);
+		km2ecore.helper.kermeta.impl.KermetaPackageImpl theKermetaPackage_1 = (km2ecore.helper.kermeta.impl.KermetaPackageImpl) (EPackage.Registry.INSTANCE
+				.getEPackage(km2ecore.helper.kermeta.KermetaPackage.eNS_URI) instanceof km2ecore.helper.kermeta.impl.KermetaPackageImpl ? EPackage.Registry.INSTANCE
+				.getEPackage(km2ecore.helper.kermeta.KermetaPackage.eNS_URI)
+				: km2ecore.helper.kermeta.KermetaPackage.eINSTANCE);
 		ecore.impl.EcorePackageImpl theEcorePackage_2 = (ecore.impl.EcorePackageImpl) (EPackage.Registry.INSTANCE
 				.getEPackage(ecore.EcorePackage.eNS_URI) instanceof ecore.impl.EcorePackageImpl ? EPackage.Registry.INSTANCE
 				.getEPackage(ecore.EcorePackage.eNS_URI)
@@ -604,48 +604,48 @@ public class StructurePackageImpl extends EPackageImpl implements
 
 		// Create package meta-data objects
 		theStructurePackage.createPackageContents();
+		theKermetaPackage.createPackageContents();
+		theStandardPackage.createPackageContents();
+		theLanguagePackage.createPackageContents();
+		theBehaviorPackage.createPackageContents();
+		theCompilerPackage.createPackageContents();
+		theKunitPackage.createPackageContents();
+		theIoPackage.createPackageContents();
+		theInterpreterPackage.createPackageContents();
+		thePersistencePackage.createPackageContents();
+		theUtilsPackage.createPackageContents();
+		theEcorePackage.createPackageContents();
+		theExceptionsPackage.createPackageContents();
 		theKm2ecorePackage.createPackageContents();
 		theCommonPackage.createPackageContents();
 		theExceptionPackage.createPackageContents();
-		theEcorePackage.createPackageContents();
-		theKermetaPackage.createPackageContents();
 		theJavaPackage.createPackageContents();
-		theKermetaPackage_1.createPackageContents();
-		theLanguagePackage.createPackageContents();
-		theBehaviorPackage.createPackageContents();
-		thePersistencePackage.createPackageContents();
-		theIoPackage.createPackageContents();
-		theExceptionsPackage.createPackageContents();
-		theUtilsPackage.createPackageContents();
-		theStandardPackage.createPackageContents();
-		theKunitPackage.createPackageContents();
 		theEcorePackage_1.createPackageContents();
-		theInterpreterPackage.createPackageContents();
-		theCompilerPackage.createPackageContents();
+		theKermetaPackage_1.createPackageContents();
 		theEcorePackage_2.createPackageContents();
 		theTraceabilityPackage.createPackageContents();
 		theSimkPackage.createPackageContents();
 
 		// Initialize created meta-data
 		theStructurePackage.initializePackageContents();
+		theKermetaPackage.initializePackageContents();
+		theStandardPackage.initializePackageContents();
+		theLanguagePackage.initializePackageContents();
+		theBehaviorPackage.initializePackageContents();
+		theCompilerPackage.initializePackageContents();
+		theKunitPackage.initializePackageContents();
+		theIoPackage.initializePackageContents();
+		theInterpreterPackage.initializePackageContents();
+		thePersistencePackage.initializePackageContents();
+		theUtilsPackage.initializePackageContents();
+		theEcorePackage.initializePackageContents();
+		theExceptionsPackage.initializePackageContents();
 		theKm2ecorePackage.initializePackageContents();
 		theCommonPackage.initializePackageContents();
 		theExceptionPackage.initializePackageContents();
-		theEcorePackage.initializePackageContents();
-		theKermetaPackage.initializePackageContents();
 		theJavaPackage.initializePackageContents();
-		theKermetaPackage_1.initializePackageContents();
-		theLanguagePackage.initializePackageContents();
-		theBehaviorPackage.initializePackageContents();
-		thePersistencePackage.initializePackageContents();
-		theIoPackage.initializePackageContents();
-		theExceptionsPackage.initializePackageContents();
-		theUtilsPackage.initializePackageContents();
-		theStandardPackage.initializePackageContents();
-		theKunitPackage.initializePackageContents();
 		theEcorePackage_1.initializePackageContents();
-		theInterpreterPackage.initializePackageContents();
-		theCompilerPackage.initializePackageContents();
+		theKermetaPackage_1.initializePackageContents();
 		theEcorePackage_2.initializePackageContents();
 		theTraceabilityPackage.initializePackageContents();
 		theSimkPackage.initializePackageContents();
@@ -654,6 +654,583 @@ public class StructurePackageImpl extends EPackageImpl implements
 		theStructurePackage.freeze();
 
 		return theStructurePackage;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getObject() {
+		return objectEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getObject_File() {
+		return (EReference) objectEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getObject_Tag() {
+		return (EReference) objectEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getObject_FileName() {
+		return (EAttribute) objectEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getObject_LineNumber() {
+		return (EAttribute) objectEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getObject_OwnedTags() {
+		return (EReference) objectEClass.getEStructuralFeatures().get(4);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getObject_Oid() {
+		return (EAttribute) objectEClass.getEStructuralFeatures().get(5);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getObject_Container() {
+		return (EReference) objectEClass.getEStructuralFeatures().get(6);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getOperation() {
+		return operationEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getOperation_TypeParameter() {
+		return (EReference) operationEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getOperation_Body() {
+		return (EReference) operationEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getOperation_Cuid() {
+		return (EAttribute) operationEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getOperation_Post() {
+		return (EReference) operationEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getOperation_IsAbstract() {
+		return (EAttribute) operationEClass.getEStructuralFeatures().get(4);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getOperation_OwnedParameter() {
+		return (EReference) operationEClass.getEStructuralFeatures().get(5);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getOperation_RaisedException() {
+		return (EReference) operationEClass.getEStructuralFeatures().get(6);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getOperation_Pre() {
+		return (EReference) operationEClass.getEStructuralFeatures().get(7);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getOperation_SuperOperation() {
+		return (EReference) operationEClass.getEStructuralFeatures().get(8);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getOperation_LambdaExpression() {
+		return (EReference) operationEClass.getEStructuralFeatures().get(9);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getOperation_OwningClass() {
+		return (EReference) operationEClass.getEStructuralFeatures().get(10);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getParameter() {
+		return parameterEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getParameter_Operation() {
+		return (EReference) parameterEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getType() {
+		return typeEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getType_TypeContainer() {
+		return (EReference) typeEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getClassDefinition() {
+		return classDefinitionEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getClassDefinition_OwnedOperation() {
+		return (EReference) classDefinitionEClass.getEStructuralFeatures().get(
+				0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getClassDefinition_IsAbstract() {
+		return (EAttribute) classDefinitionEClass.getEStructuralFeatures().get(
+				1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getClassDefinition_SuperType() {
+		return (EReference) classDefinitionEClass.getEStructuralFeatures().get(
+				2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getClassDefinition_Inv() {
+		return (EReference) classDefinitionEClass.getEStructuralFeatures().get(
+				3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getClassDefinition_SubClassDefinitions() {
+		return (EReference) classDefinitionEClass.getEStructuralFeatures().get(
+				4);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getClassDefinition_OwnedAttribute() {
+		return (EReference) classDefinitionEClass.getEStructuralFeatures().get(
+				5);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getClassDefinition_EcoreDataType() {
+		return (EReference) classDefinitionEClass.getEStructuralFeatures().get(
+				6);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getModelType() {
+		return modelTypeEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getModelType_IncludedTypeDefinition() {
+		return (EReference) modelTypeEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getClass_() {
+		return classEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getModel() {
+		return modelEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getModel_Contents() {
+		return (EReference) modelEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getNamedElement() {
+		return namedElementEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getNamedElement_Name() {
+		return (EAttribute) namedElementEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getEnumeration() {
+		return enumerationEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getEnumeration_OwnedLiteral() {
+		return (EReference) enumerationEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getFunctionType() {
+		return functionTypeEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getFunctionType_Left() {
+		return (EReference) functionTypeEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getFunctionType_Right() {
+		return (EReference) functionTypeEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getProperty() {
+		return propertyEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getProperty_Default() {
+		return (EAttribute) propertyEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getProperty_IsDerived() {
+		return (EAttribute) propertyEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getProperty_Opposite() {
+		return (EReference) propertyEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getProperty_GetterBody() {
+		return (EReference) propertyEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getProperty_IsReadOnly() {
+		return (EAttribute) propertyEClass.getEStructuralFeatures().get(4);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getProperty_SetterBody() {
+		return (EReference) propertyEClass.getEStructuralFeatures().get(5);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getProperty_OwningClass() {
+		return (EReference) propertyEClass.getEStructuralFeatures().get(6);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getProperty_IsSetterAbstract() {
+		return (EAttribute) propertyEClass.getEStructuralFeatures().get(7);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getProperty_IsID() {
+		return (EAttribute) propertyEClass.getEStructuralFeatures().get(8);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getProperty_IsComposite() {
+		return (EAttribute) propertyEClass.getEStructuralFeatures().get(9);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getProperty_IsGetterAbstract() {
+		return (EAttribute) propertyEClass.getEStructuralFeatures().get(10);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getTypeContainer() {
+		return typeContainerEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getTypeContainer_ContainedType() {
+		return (EReference) typeContainerEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getEnumerationLiteral() {
+		return enumerationLiteralEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getEnumerationLiteral_Enumeration() {
+		return (EReference) enumerationLiteralEClass.getEStructuralFeatures()
+				.get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getTypeVariableBinding() {
+		return typeVariableBindingEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getTypeVariableBinding_Type() {
+		return (EReference) typeVariableBindingEClass.getEStructuralFeatures()
+				.get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getTypeVariableBinding_Variable() {
+		return (EReference) typeVariableBindingEClass.getEStructuralFeatures()
+				.get(1);
 	}
 
 	/**
@@ -703,6 +1280,345 @@ public class StructurePackageImpl extends EPackageImpl implements
 	public EAttribute getMultiplicityElement_IsUnique() {
 		return (EAttribute) multiplicityElementEClass.getEStructuralFeatures()
 				.get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getTypedElement() {
+		return typedElementEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getTypedElement_Type() {
+		return (EReference) typedElementEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getTypeDefinition() {
+		return typeDefinitionEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getTypeDefinition_IsAspect() {
+		return (EAttribute) typeDefinitionEClass.getEStructuralFeatures()
+				.get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getDataType() {
+		return dataTypeEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getPackage() {
+		return packageEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getPackage_NestingPackage() {
+		return (EReference) packageEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getPackage_NestedPackage() {
+		return (EReference) packageEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getPackage_Uri() {
+		return (EAttribute) packageEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getPrimitiveType() {
+		return primitiveTypeEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getPrimitiveType_InstanceType() {
+		return (EReference) primitiveTypeEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getTag() {
+		return tagEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getTag_Name() {
+		return (EAttribute) tagEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getTag_Value() {
+		return (EAttribute) tagEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getTag_Object() {
+		return (EReference) tagEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getConstraint() {
+		return constraintEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getConstraint_Body() {
+		return (EReference) constraintEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getConstraint_PreOwner() {
+		return (EReference) constraintEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getConstraint_Stereotype() {
+		return (EAttribute) constraintEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getConstraint_PostOwner() {
+		return (EReference) constraintEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getConstraint_Language() {
+		return (EAttribute) constraintEClass.getEStructuralFeatures().get(4);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getConstraint_InvOwner() {
+		return (EReference) constraintEClass.getEStructuralFeatures().get(5);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getGenericTypeDefinition() {
+		return genericTypeDefinitionEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getGenericTypeDefinition_TypeParameter() {
+		return (EReference) genericTypeDefinitionEClass
+				.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getParameterizedType() {
+		return parameterizedTypeEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getParameterizedType_TypeParamBinding() {
+		return (EReference) parameterizedTypeEClass.getEStructuralFeatures()
+				.get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getParameterizedType_TypeDefinition() {
+		return (EReference) parameterizedTypeEClass.getEStructuralFeatures()
+				.get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getParameterizedType_VirtualTypeBinding() {
+		return (EReference) parameterizedTypeEClass.getEStructuralFeatures()
+				.get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getTypeVariable() {
+		return typeVariableEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getTypeVariable_Supertype() {
+		return (EReference) typeVariableEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getObjectTypeVariable() {
+		return objectTypeVariableEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getModelTypeVariable() {
+		return modelTypeVariableEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getModelTypeVariable_VirtualType() {
+		return (EReference) modelTypeVariableEClass.getEStructuralFeatures()
+				.get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getVirtualType() {
+		return virtualTypeEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getVirtualType_ModelType() {
+		return (EReference) virtualTypeEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getVirtualType_TypeParamBinding() {
+		return (EReference) virtualTypeEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getVirtualType_ClassDefinition() {
+		return (EReference) virtualTypeEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -836,959 +1752,6 @@ public class StructurePackageImpl extends EPackageImpl implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getPackage() {
-		return packageEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getPackage_NestingPackage() {
-		return (EReference) packageEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getPackage_NestedPackage() {
-		return (EReference) packageEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getPackage_Uri() {
-		return (EAttribute) packageEClass.getEStructuralFeatures().get(2);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EClass getPrimitiveType() {
-		return primitiveTypeEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getPrimitiveType_InstanceType() {
-		return (EReference) primitiveTypeEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EClass getEnumeration() {
-		return enumerationEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getEnumeration_OwnedLiteral() {
-		return (EReference) enumerationEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EClass getEnumerationLiteral() {
-		return enumerationLiteralEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getEnumerationLiteral_Enumeration() {
-		return (EReference) enumerationLiteralEClass.getEStructuralFeatures()
-				.get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EClass getClassDefinition() {
-		return classDefinitionEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getClassDefinition_OwnedOperation() {
-		return (EReference) classDefinitionEClass.getEStructuralFeatures().get(
-				0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getClassDefinition_IsAbstract() {
-		return (EAttribute) classDefinitionEClass.getEStructuralFeatures().get(
-				1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getClassDefinition_SuperType() {
-		return (EReference) classDefinitionEClass.getEStructuralFeatures().get(
-				2);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getClassDefinition_Inv() {
-		return (EReference) classDefinitionEClass.getEStructuralFeatures().get(
-				3);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getClassDefinition_AllOperation() {
-		return (EReference) classDefinitionEClass.getEStructuralFeatures().get(
-				4);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getClassDefinition_AllAttribute() {
-		return (EReference) classDefinitionEClass.getEStructuralFeatures().get(
-				5);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getClassDefinition_EcoreDataType() {
-		return (EReference) classDefinitionEClass.getEStructuralFeatures().get(
-				6);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getClassDefinition_OwnedAttribute() {
-		return (EReference) classDefinitionEClass.getEStructuralFeatures().get(
-				7);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EClass getOperation() {
-		return operationEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getOperation_TypeParameter() {
-		return (EReference) operationEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getOperation_Body() {
-		return (EReference) operationEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getOperation_Cuid() {
-		return (EAttribute) operationEClass.getEStructuralFeatures().get(2);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getOperation_OwnedParameter() {
-		return (EReference) operationEClass.getEStructuralFeatures().get(3);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getOperation_Post() {
-		return (EReference) operationEClass.getEStructuralFeatures().get(4);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getOperation_IsAbstract() {
-		return (EAttribute) operationEClass.getEStructuralFeatures().get(5);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getOperation_RaisedException() {
-		return (EReference) operationEClass.getEStructuralFeatures().get(6);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getOperation_Pre() {
-		return (EReference) operationEClass.getEStructuralFeatures().get(7);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getOperation_SuperOperation() {
-		return (EReference) operationEClass.getEStructuralFeatures().get(8);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getOperation_LambdaExpression() {
-		return (EReference) operationEClass.getEStructuralFeatures().get(9);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getOperation_OwningClass() {
-		return (EReference) operationEClass.getEStructuralFeatures().get(10);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EClass getParameter() {
-		return parameterEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getParameter_Operation() {
-		return (EReference) parameterEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EClass getConstraint() {
-		return constraintEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getConstraint_Body() {
-		return (EReference) constraintEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getConstraint_PreOwner() {
-		return (EReference) constraintEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getConstraint_Stereotype() {
-		return (EAttribute) constraintEClass.getEStructuralFeatures().get(2);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getConstraint_PostOwner() {
-		return (EReference) constraintEClass.getEStructuralFeatures().get(3);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getConstraint_Language() {
-		return (EAttribute) constraintEClass.getEStructuralFeatures().get(4);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getConstraint_InvOwner() {
-		return (EReference) constraintEClass.getEStructuralFeatures().get(5);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EClass getProperty() {
-		return propertyEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getProperty_Default() {
-		return (EAttribute) propertyEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getProperty_IsDerived() {
-		return (EAttribute) propertyEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getProperty_Opposite() {
-		return (EReference) propertyEClass.getEStructuralFeatures().get(2);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getProperty_GetterBody() {
-		return (EReference) propertyEClass.getEStructuralFeatures().get(3);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getProperty_IsReadOnly() {
-		return (EAttribute) propertyEClass.getEStructuralFeatures().get(4);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getProperty_SetterBody() {
-		return (EReference) propertyEClass.getEStructuralFeatures().get(5);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getProperty_IsID() {
-		return (EAttribute) propertyEClass.getEStructuralFeatures().get(6);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getProperty_OwningClass() {
-		return (EReference) propertyEClass.getEStructuralFeatures().get(7);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getProperty_IsSetterAbstract() {
-		return (EAttribute) propertyEClass.getEStructuralFeatures().get(8);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getProperty_IsGetterAbstract() {
-		return (EAttribute) propertyEClass.getEStructuralFeatures().get(9);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getProperty_IsComposite() {
-		return (EAttribute) propertyEClass.getEStructuralFeatures().get(10);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EClass getObjectTypeVariable() {
-		return objectTypeVariableEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EClass getTag() {
-		return tagEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getTag_Name() {
-		return (EAttribute) tagEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getTag_Value() {
-		return (EAttribute) tagEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getTag_Object() {
-		return (EReference) tagEClass.getEStructuralFeatures().get(2);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EClass getObject() {
-		return objectEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getObject_File() {
-		return (EReference) objectEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getObject_Tag() {
-		return (EReference) objectEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getObject_FileName() {
-		return (EAttribute) objectEClass.getEStructuralFeatures().get(2);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getObject_LineNumber() {
-		return (EAttribute) objectEClass.getEStructuralFeatures().get(3);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getObject_OwnedTags() {
-		return (EReference) objectEClass.getEStructuralFeatures().get(4);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getObject_Oid() {
-		return (EAttribute) objectEClass.getEStructuralFeatures().get(5);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getObject_Container() {
-		return (EReference) objectEClass.getEStructuralFeatures().get(6);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EClass getClass_() {
-		return classEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getClass_OwnedOperation() {
-		return (EReference) classEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getClass_SuperClass() {
-		return (EReference) classEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getClass_IsAbstract() {
-		return (EAttribute) classEClass.getEStructuralFeatures().get(2);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getClass_Name() {
-		return (EAttribute) classEClass.getEStructuralFeatures().get(3);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getClass_ClassDefinition() {
-		return (EReference) classEClass.getEStructuralFeatures().get(4);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getClass_OwnedAttribute() {
-		return (EReference) classEClass.getEStructuralFeatures().get(5);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EClass getGenericTypeDefinition() {
-		return genericTypeDefinitionEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getGenericTypeDefinition_TypeParameter() {
-		return (EReference) genericTypeDefinitionEClass
-				.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EClass getType() {
-		return typeEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getType_TypeContainer() {
-		return (EReference) typeEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EClass getTypeContainer() {
-		return typeContainerEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getTypeContainer_ContainedType() {
-		return (EReference) typeContainerEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EClass getTypeVariableBinding() {
-		return typeVariableBindingEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getTypeVariableBinding_Type() {
-		return (EReference) typeVariableBindingEClass.getEStructuralFeatures()
-				.get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getTypeVariableBinding_Variable() {
-		return (EReference) typeVariableBindingEClass.getEStructuralFeatures()
-				.get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EClass getTypedElement() {
-		return typedElementEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getTypedElement_Type() {
-		return (EReference) typedElementEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EClass getTypeDefinition() {
-		return typeDefinitionEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getTypeDefinition_IsAspect() {
-		return (EAttribute) typeDefinitionEClass.getEStructuralFeatures()
-				.get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EClass getNamedElement() {
-		return namedElementEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getNamedElement_Name() {
-		return (EAttribute) namedElementEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EClass getDataType() {
-		return dataTypeEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EClass getParameterizedType() {
-		return parameterizedTypeEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getParameterizedType_TypeParamBinding() {
-		return (EReference) parameterizedTypeEClass.getEStructuralFeatures()
-				.get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getParameterizedType_TypeDefinition() {
-		return (EReference) parameterizedTypeEClass.getEStructuralFeatures()
-				.get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getParameterizedType_VirtualTypeBinding() {
-		return (EReference) parameterizedTypeEClass.getEStructuralFeatures()
-				.get(2);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EClass getTypeVariable() {
-		return typeVariableEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getTypeVariable_Supertype() {
-		return (EReference) typeVariableEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EClass getModelType() {
-		return modelTypeEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getModelType_IncludedTypeDefinition() {
-		return (EReference) modelTypeEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EClass getModelTypeVariable() {
-		return modelTypeVariableEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getModelTypeVariable_VirtualType() {
-		return (EReference) modelTypeVariableEClass.getEStructuralFeatures()
-				.get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EClass getVirtualType() {
-		return virtualTypeEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getVirtualType_ModelType() {
-		return (EReference) virtualTypeEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getVirtualType_TypeParamBinding() {
-		return (EReference) virtualTypeEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getVirtualType_ClassDefinition() {
-		return (EReference) virtualTypeEClass.getEStructuralFeatures().get(2);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EClass getModel() {
-		return modelEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getModel_Contents() {
-		return (EReference) modelEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EClass getFilter() {
 		return filterEClass;
 	}
@@ -1825,33 +1788,6 @@ public class StructurePackageImpl extends EPackageImpl implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getFunctionType() {
-		return functionTypeEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getFunctionType_Left() {
-		return (EReference) functionTypeEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getFunctionType_Right() {
-		return (EReference) functionTypeEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EClass getVoidType() {
 		return voidTypeEClass;
 	}
@@ -1880,15 +1816,6 @@ public class StructurePackageImpl extends EPackageImpl implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getLinkSetterForTypedElement() {
-		return linkSetterForTypedElementEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EClass getTraceability() {
 		return traceabilityEClass;
 	}
@@ -1900,6 +1827,15 @@ public class StructurePackageImpl extends EPackageImpl implements
 	 */
 	public EReference getTraceability_EcoreModelElement() {
 		return (EReference) traceabilityEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getLinkSetterForTypedElement() {
+		return linkSetterForTypedElementEClass;
 	}
 
 	/**
@@ -1994,6 +1930,90 @@ public class StructurePackageImpl extends EPackageImpl implements
 		isCreated = true;
 
 		// Create classes and their features
+		objectEClass = createEClass(OBJECT);
+		createEReference(objectEClass, OBJECT__FILE);
+		createEReference(objectEClass, OBJECT__TAG);
+		createEAttribute(objectEClass, OBJECT__FILE_NAME);
+		createEAttribute(objectEClass, OBJECT__LINE_NUMBER);
+		createEReference(objectEClass, OBJECT__OWNED_TAGS);
+		createEAttribute(objectEClass, OBJECT__OID);
+		createEReference(objectEClass, OBJECT__CONTAINER);
+
+		operationEClass = createEClass(OPERATION);
+		createEReference(operationEClass, OPERATION__TYPE_PARAMETER);
+		createEReference(operationEClass, OPERATION__BODY);
+		createEAttribute(operationEClass, OPERATION__CUID);
+		createEReference(operationEClass, OPERATION__POST);
+		createEAttribute(operationEClass, OPERATION__IS_ABSTRACT);
+		createEReference(operationEClass, OPERATION__OWNED_PARAMETER);
+		createEReference(operationEClass, OPERATION__RAISED_EXCEPTION);
+		createEReference(operationEClass, OPERATION__PRE);
+		createEReference(operationEClass, OPERATION__SUPER_OPERATION);
+		createEReference(operationEClass, OPERATION__LAMBDA_EXPRESSION);
+		createEReference(operationEClass, OPERATION__OWNING_CLASS);
+
+		parameterEClass = createEClass(PARAMETER);
+		createEReference(parameterEClass, PARAMETER__OPERATION);
+
+		typeEClass = createEClass(TYPE);
+		createEReference(typeEClass, TYPE__TYPE_CONTAINER);
+
+		classDefinitionEClass = createEClass(CLASS_DEFINITION);
+		createEReference(classDefinitionEClass,
+				CLASS_DEFINITION__OWNED_OPERATION);
+		createEAttribute(classDefinitionEClass, CLASS_DEFINITION__IS_ABSTRACT);
+		createEReference(classDefinitionEClass, CLASS_DEFINITION__SUPER_TYPE);
+		createEReference(classDefinitionEClass, CLASS_DEFINITION__INV);
+		createEReference(classDefinitionEClass,
+				CLASS_DEFINITION__SUB_CLASS_DEFINITIONS);
+		createEReference(classDefinitionEClass,
+				CLASS_DEFINITION__OWNED_ATTRIBUTE);
+		createEReference(classDefinitionEClass,
+				CLASS_DEFINITION__ECORE_DATA_TYPE);
+
+		modelTypeEClass = createEClass(MODEL_TYPE);
+		createEReference(modelTypeEClass, MODEL_TYPE__INCLUDED_TYPE_DEFINITION);
+
+		classEClass = createEClass(CLASS);
+
+		modelEClass = createEClass(MODEL);
+		createEReference(modelEClass, MODEL__CONTENTS);
+
+		namedElementEClass = createEClass(NAMED_ELEMENT);
+		createEAttribute(namedElementEClass, NAMED_ELEMENT__NAME);
+
+		enumerationEClass = createEClass(ENUMERATION);
+		createEReference(enumerationEClass, ENUMERATION__OWNED_LITERAL);
+
+		functionTypeEClass = createEClass(FUNCTION_TYPE);
+		createEReference(functionTypeEClass, FUNCTION_TYPE__LEFT);
+		createEReference(functionTypeEClass, FUNCTION_TYPE__RIGHT);
+
+		propertyEClass = createEClass(PROPERTY);
+		createEAttribute(propertyEClass, PROPERTY__DEFAULT);
+		createEAttribute(propertyEClass, PROPERTY__IS_DERIVED);
+		createEReference(propertyEClass, PROPERTY__OPPOSITE);
+		createEReference(propertyEClass, PROPERTY__GETTER_BODY);
+		createEAttribute(propertyEClass, PROPERTY__IS_READ_ONLY);
+		createEReference(propertyEClass, PROPERTY__SETTER_BODY);
+		createEReference(propertyEClass, PROPERTY__OWNING_CLASS);
+		createEAttribute(propertyEClass, PROPERTY__IS_SETTER_ABSTRACT);
+		createEAttribute(propertyEClass, PROPERTY__IS_ID);
+		createEAttribute(propertyEClass, PROPERTY__IS_COMPOSITE);
+		createEAttribute(propertyEClass, PROPERTY__IS_GETTER_ABSTRACT);
+
+		typeContainerEClass = createEClass(TYPE_CONTAINER);
+		createEReference(typeContainerEClass, TYPE_CONTAINER__CONTAINED_TYPE);
+
+		enumerationLiteralEClass = createEClass(ENUMERATION_LITERAL);
+		createEReference(enumerationLiteralEClass,
+				ENUMERATION_LITERAL__ENUMERATION);
+
+		typeVariableBindingEClass = createEClass(TYPE_VARIABLE_BINDING);
+		createEReference(typeVariableBindingEClass, TYPE_VARIABLE_BINDING__TYPE);
+		createEReference(typeVariableBindingEClass,
+				TYPE_VARIABLE_BINDING__VARIABLE);
+
 		multiplicityElementEClass = createEClass(MULTIPLICITY_ELEMENT);
 		createEAttribute(multiplicityElementEClass,
 				MULTIPLICITY_ELEMENT__IS_ORDERED);
@@ -2001,6 +2021,61 @@ public class StructurePackageImpl extends EPackageImpl implements
 		createEAttribute(multiplicityElementEClass, MULTIPLICITY_ELEMENT__LOWER);
 		createEAttribute(multiplicityElementEClass,
 				MULTIPLICITY_ELEMENT__IS_UNIQUE);
+
+		typedElementEClass = createEClass(TYPED_ELEMENT);
+		createEReference(typedElementEClass, TYPED_ELEMENT__TYPE);
+
+		typeDefinitionEClass = createEClass(TYPE_DEFINITION);
+		createEAttribute(typeDefinitionEClass, TYPE_DEFINITION__IS_ASPECT);
+
+		dataTypeEClass = createEClass(DATA_TYPE);
+
+		packageEClass = createEClass(PACKAGE);
+		createEReference(packageEClass, PACKAGE__NESTING_PACKAGE);
+		createEReference(packageEClass, PACKAGE__NESTED_PACKAGE);
+		createEAttribute(packageEClass, PACKAGE__URI);
+
+		primitiveTypeEClass = createEClass(PRIMITIVE_TYPE);
+		createEReference(primitiveTypeEClass, PRIMITIVE_TYPE__INSTANCE_TYPE);
+
+		tagEClass = createEClass(TAG);
+		createEAttribute(tagEClass, TAG__NAME);
+		createEAttribute(tagEClass, TAG__VALUE);
+		createEReference(tagEClass, TAG__OBJECT);
+
+		constraintEClass = createEClass(CONSTRAINT);
+		createEReference(constraintEClass, CONSTRAINT__BODY);
+		createEReference(constraintEClass, CONSTRAINT__PRE_OWNER);
+		createEAttribute(constraintEClass, CONSTRAINT__STEREOTYPE);
+		createEReference(constraintEClass, CONSTRAINT__POST_OWNER);
+		createEAttribute(constraintEClass, CONSTRAINT__LANGUAGE);
+		createEReference(constraintEClass, CONSTRAINT__INV_OWNER);
+
+		genericTypeDefinitionEClass = createEClass(GENERIC_TYPE_DEFINITION);
+		createEReference(genericTypeDefinitionEClass,
+				GENERIC_TYPE_DEFINITION__TYPE_PARAMETER);
+
+		parameterizedTypeEClass = createEClass(PARAMETERIZED_TYPE);
+		createEReference(parameterizedTypeEClass,
+				PARAMETERIZED_TYPE__TYPE_PARAM_BINDING);
+		createEReference(parameterizedTypeEClass,
+				PARAMETERIZED_TYPE__TYPE_DEFINITION);
+		createEReference(parameterizedTypeEClass,
+				PARAMETERIZED_TYPE__VIRTUAL_TYPE_BINDING);
+
+		typeVariableEClass = createEClass(TYPE_VARIABLE);
+		createEReference(typeVariableEClass, TYPE_VARIABLE__SUPERTYPE);
+
+		objectTypeVariableEClass = createEClass(OBJECT_TYPE_VARIABLE);
+
+		modelTypeVariableEClass = createEClass(MODEL_TYPE_VARIABLE);
+		createEReference(modelTypeVariableEClass,
+				MODEL_TYPE_VARIABLE__VIRTUAL_TYPE);
+
+		virtualTypeEClass = createEClass(VIRTUAL_TYPE);
+		createEReference(virtualTypeEClass, VIRTUAL_TYPE__MODEL_TYPE);
+		createEReference(virtualTypeEClass, VIRTUAL_TYPE__TYPE_PARAM_BINDING);
+		createEReference(virtualTypeEClass, VIRTUAL_TYPE__CLASS_DEFINITION);
 
 		modelingUnitEClass = createEClass(MODELING_UNIT);
 		createEReference(modelingUnitEClass, MODELING_UNIT__ECORE_PACKAGES);
@@ -2021,156 +2096,11 @@ public class StructurePackageImpl extends EPackageImpl implements
 		usingEClass = createEClass(USING);
 		createEAttribute(usingEClass, USING__QUALIFIED_NAME);
 
-		packageEClass = createEClass(PACKAGE);
-		createEReference(packageEClass, PACKAGE__NESTING_PACKAGE);
-		createEReference(packageEClass, PACKAGE__NESTED_PACKAGE);
-		createEAttribute(packageEClass, PACKAGE__URI);
-
-		primitiveTypeEClass = createEClass(PRIMITIVE_TYPE);
-		createEReference(primitiveTypeEClass, PRIMITIVE_TYPE__INSTANCE_TYPE);
-
-		enumerationEClass = createEClass(ENUMERATION);
-		createEReference(enumerationEClass, ENUMERATION__OWNED_LITERAL);
-
-		enumerationLiteralEClass = createEClass(ENUMERATION_LITERAL);
-		createEReference(enumerationLiteralEClass,
-				ENUMERATION_LITERAL__ENUMERATION);
-
-		classDefinitionEClass = createEClass(CLASS_DEFINITION);
-		createEReference(classDefinitionEClass,
-				CLASS_DEFINITION__OWNED_OPERATION);
-		createEAttribute(classDefinitionEClass, CLASS_DEFINITION__IS_ABSTRACT);
-		createEReference(classDefinitionEClass, CLASS_DEFINITION__SUPER_TYPE);
-		createEReference(classDefinitionEClass, CLASS_DEFINITION__INV);
-		createEReference(classDefinitionEClass, CLASS_DEFINITION__ALL_OPERATION);
-		createEReference(classDefinitionEClass, CLASS_DEFINITION__ALL_ATTRIBUTE);
-		createEReference(classDefinitionEClass,
-				CLASS_DEFINITION__ECORE_DATA_TYPE);
-		createEReference(classDefinitionEClass,
-				CLASS_DEFINITION__OWNED_ATTRIBUTE);
-
-		operationEClass = createEClass(OPERATION);
-		createEReference(operationEClass, OPERATION__TYPE_PARAMETER);
-		createEReference(operationEClass, OPERATION__BODY);
-		createEAttribute(operationEClass, OPERATION__CUID);
-		createEReference(operationEClass, OPERATION__OWNED_PARAMETER);
-		createEReference(operationEClass, OPERATION__POST);
-		createEAttribute(operationEClass, OPERATION__IS_ABSTRACT);
-		createEReference(operationEClass, OPERATION__RAISED_EXCEPTION);
-		createEReference(operationEClass, OPERATION__PRE);
-		createEReference(operationEClass, OPERATION__SUPER_OPERATION);
-		createEReference(operationEClass, OPERATION__LAMBDA_EXPRESSION);
-		createEReference(operationEClass, OPERATION__OWNING_CLASS);
-
-		parameterEClass = createEClass(PARAMETER);
-		createEReference(parameterEClass, PARAMETER__OPERATION);
-
-		constraintEClass = createEClass(CONSTRAINT);
-		createEReference(constraintEClass, CONSTRAINT__BODY);
-		createEReference(constraintEClass, CONSTRAINT__PRE_OWNER);
-		createEAttribute(constraintEClass, CONSTRAINT__STEREOTYPE);
-		createEReference(constraintEClass, CONSTRAINT__POST_OWNER);
-		createEAttribute(constraintEClass, CONSTRAINT__LANGUAGE);
-		createEReference(constraintEClass, CONSTRAINT__INV_OWNER);
-
-		propertyEClass = createEClass(PROPERTY);
-		createEAttribute(propertyEClass, PROPERTY__DEFAULT);
-		createEAttribute(propertyEClass, PROPERTY__IS_DERIVED);
-		createEReference(propertyEClass, PROPERTY__OPPOSITE);
-		createEReference(propertyEClass, PROPERTY__GETTER_BODY);
-		createEAttribute(propertyEClass, PROPERTY__IS_READ_ONLY);
-		createEReference(propertyEClass, PROPERTY__SETTER_BODY);
-		createEAttribute(propertyEClass, PROPERTY__IS_ID);
-		createEReference(propertyEClass, PROPERTY__OWNING_CLASS);
-		createEAttribute(propertyEClass, PROPERTY__IS_SETTER_ABSTRACT);
-		createEAttribute(propertyEClass, PROPERTY__IS_GETTER_ABSTRACT);
-		createEAttribute(propertyEClass, PROPERTY__IS_COMPOSITE);
-
-		objectTypeVariableEClass = createEClass(OBJECT_TYPE_VARIABLE);
-
-		tagEClass = createEClass(TAG);
-		createEAttribute(tagEClass, TAG__NAME);
-		createEAttribute(tagEClass, TAG__VALUE);
-		createEReference(tagEClass, TAG__OBJECT);
-
-		objectEClass = createEClass(OBJECT);
-		createEReference(objectEClass, OBJECT__FILE);
-		createEReference(objectEClass, OBJECT__TAG);
-		createEAttribute(objectEClass, OBJECT__FILE_NAME);
-		createEAttribute(objectEClass, OBJECT__LINE_NUMBER);
-		createEReference(objectEClass, OBJECT__OWNED_TAGS);
-		createEAttribute(objectEClass, OBJECT__OID);
-		createEReference(objectEClass, OBJECT__CONTAINER);
-
-		classEClass = createEClass(CLASS);
-		createEReference(classEClass, CLASS__OWNED_OPERATION);
-		createEReference(classEClass, CLASS__SUPER_CLASS);
-		createEAttribute(classEClass, CLASS__IS_ABSTRACT);
-		createEAttribute(classEClass, CLASS__NAME);
-		createEReference(classEClass, CLASS__CLASS_DEFINITION);
-		createEReference(classEClass, CLASS__OWNED_ATTRIBUTE);
-
-		genericTypeDefinitionEClass = createEClass(GENERIC_TYPE_DEFINITION);
-		createEReference(genericTypeDefinitionEClass,
-				GENERIC_TYPE_DEFINITION__TYPE_PARAMETER);
-
-		typeEClass = createEClass(TYPE);
-		createEReference(typeEClass, TYPE__TYPE_CONTAINER);
-
-		typeContainerEClass = createEClass(TYPE_CONTAINER);
-		createEReference(typeContainerEClass, TYPE_CONTAINER__CONTAINED_TYPE);
-
-		typeVariableBindingEClass = createEClass(TYPE_VARIABLE_BINDING);
-		createEReference(typeVariableBindingEClass, TYPE_VARIABLE_BINDING__TYPE);
-		createEReference(typeVariableBindingEClass,
-				TYPE_VARIABLE_BINDING__VARIABLE);
-
-		typedElementEClass = createEClass(TYPED_ELEMENT);
-		createEReference(typedElementEClass, TYPED_ELEMENT__TYPE);
-
-		typeDefinitionEClass = createEClass(TYPE_DEFINITION);
-		createEAttribute(typeDefinitionEClass, TYPE_DEFINITION__IS_ASPECT);
-
-		namedElementEClass = createEClass(NAMED_ELEMENT);
-		createEAttribute(namedElementEClass, NAMED_ELEMENT__NAME);
-
-		dataTypeEClass = createEClass(DATA_TYPE);
-
-		parameterizedTypeEClass = createEClass(PARAMETERIZED_TYPE);
-		createEReference(parameterizedTypeEClass,
-				PARAMETERIZED_TYPE__TYPE_PARAM_BINDING);
-		createEReference(parameterizedTypeEClass,
-				PARAMETERIZED_TYPE__TYPE_DEFINITION);
-		createEReference(parameterizedTypeEClass,
-				PARAMETERIZED_TYPE__VIRTUAL_TYPE_BINDING);
-
-		typeVariableEClass = createEClass(TYPE_VARIABLE);
-		createEReference(typeVariableEClass, TYPE_VARIABLE__SUPERTYPE);
-
-		modelTypeEClass = createEClass(MODEL_TYPE);
-		createEReference(modelTypeEClass, MODEL_TYPE__INCLUDED_TYPE_DEFINITION);
-
-		modelTypeVariableEClass = createEClass(MODEL_TYPE_VARIABLE);
-		createEReference(modelTypeVariableEClass,
-				MODEL_TYPE_VARIABLE__VIRTUAL_TYPE);
-
-		virtualTypeEClass = createEClass(VIRTUAL_TYPE);
-		createEReference(virtualTypeEClass, VIRTUAL_TYPE__MODEL_TYPE);
-		createEReference(virtualTypeEClass, VIRTUAL_TYPE__TYPE_PARAM_BINDING);
-		createEReference(virtualTypeEClass, VIRTUAL_TYPE__CLASS_DEFINITION);
-
-		modelEClass = createEClass(MODEL);
-		createEReference(modelEClass, MODEL__CONTENTS);
-
 		filterEClass = createEClass(FILTER);
 		createEAttribute(filterEClass, FILTER__QUALIFIED_NAME);
 
 		productTypeEClass = createEClass(PRODUCT_TYPE);
 		createEReference(productTypeEClass, PRODUCT_TYPE__TYPE);
-
-		functionTypeEClass = createEClass(FUNCTION_TYPE);
-		createEReference(functionTypeEClass, FUNCTION_TYPE__LEFT);
-		createEReference(functionTypeEClass, FUNCTION_TYPE__RIGHT);
 
 		voidTypeEClass = createEClass(VOID_TYPE);
 
@@ -2178,10 +2108,10 @@ public class StructurePackageImpl extends EPackageImpl implements
 		createEReference(typeDefinitionContainerEClass,
 				TYPE_DEFINITION_CONTAINER__OWNED_TYPE_DEFINITION);
 
-		linkSetterForTypedElementEClass = createEClass(LINK_SETTER_FOR_TYPED_ELEMENT);
-
 		traceabilityEClass = createEClass(TRACEABILITY);
 		createEReference(traceabilityEClass, TRACEABILITY__ECORE_MODEL_ELEMENT);
+
+		linkSetterForTypedElementEClass = createEClass(LINK_SETTER_FOR_TYPED_ELEMENT);
 
 		// Create enums
 		constraintTypeEEnum = createEEnum(CONSTRAINT_TYPE);
@@ -2220,18 +2150,18 @@ public class StructurePackageImpl extends EPackageImpl implements
 		setNsURI(eNS_URI);
 
 		// Obtain other dependent packages
-		StandardPackage theStandardPackage = (StandardPackage) EPackage.Registry.INSTANCE
-				.getEPackage(StandardPackage.eNS_URI);
-		ecore.EcorePackage theEcorePackage_2 = (ecore.EcorePackage) EPackage.Registry.INSTANCE
-				.getEPackage(ecore.EcorePackage.eNS_URI);
-		Km2ecorePackage theKm2ecorePackage = (Km2ecorePackage) EPackage.Registry.INSTANCE
-				.getEPackage(Km2ecorePackage.eNS_URI);
-		BehaviorPackage theBehaviorPackage = (BehaviorPackage) EPackage.Registry.INSTANCE
-				.getEPackage(BehaviorPackage.eNS_URI);
 		TraceabilityPackage theTraceabilityPackage = (TraceabilityPackage) EPackage.Registry.INSTANCE
 				.getEPackage(TraceabilityPackage.eNS_URI);
+		StandardPackage theStandardPackage = (StandardPackage) EPackage.Registry.INSTANCE
+				.getEPackage(StandardPackage.eNS_URI);
+		Km2ecorePackage theKm2ecorePackage = (Km2ecorePackage) EPackage.Registry.INSTANCE
+				.getEPackage(Km2ecorePackage.eNS_URI);
 		PersistencePackage thePersistencePackage = (PersistencePackage) EPackage.Registry.INSTANCE
 				.getEPackage(PersistencePackage.eNS_URI);
+		ecore.EcorePackage theEcorePackage_2 = (ecore.EcorePackage) EPackage.Registry.INSTANCE
+				.getEPackage(ecore.EcorePackage.eNS_URI);
+		BehaviorPackage theBehaviorPackage = (BehaviorPackage) EPackage.Registry.INSTANCE
+				.getEPackage(BehaviorPackage.eNS_URI);
 
 		// Create type parameters
 		ETypeParameter traceabilityEClass_X = addETypeParameter(
@@ -2240,53 +2170,10 @@ public class StructurePackageImpl extends EPackageImpl implements
 		// Set bounds for type parameters
 
 		// Add supertypes to classes
-		multiplicityElementEClass.getESuperTypes().add(this.getTypedElement());
-		EGenericType g1 = createEGenericType(this.getTraceability());
-		EGenericType g2 = createEGenericType(theEcorePackage_2.getEAnnotation());
-		g1.getETypeArguments().add(g2);
-		modelingUnitEClass.getEGenericSuperTypes().add(g1);
-		requireEClass.getESuperTypes().add(this.getObject());
-		usingEClass.getESuperTypes().add(this.getObject());
-		g1 = createEGenericType(this.getNamedElement());
-		packageEClass.getEGenericSuperTypes().add(g1);
-		g1 = createEGenericType(this.getTypeDefinitionContainer());
-		packageEClass.getEGenericSuperTypes().add(g1);
-		g1 = createEGenericType(this.getTraceability());
-		g2 = createEGenericType(theEcorePackage_2.getEPackage());
-		g1.getETypeArguments().add(g2);
-		packageEClass.getEGenericSuperTypes().add(g1);
-		g1 = createEGenericType(this.getDataType());
-		primitiveTypeEClass.getEGenericSuperTypes().add(g1);
-		g1 = createEGenericType(this.getTypeContainer());
-		primitiveTypeEClass.getEGenericSuperTypes().add(g1);
-		g1 = createEGenericType(this.getTraceability());
-		g2 = createEGenericType(theEcorePackage_2.getEDataType());
-		g1.getETypeArguments().add(g2);
-		primitiveTypeEClass.getEGenericSuperTypes().add(g1);
-		g1 = createEGenericType(this.getDataType());
-		enumerationEClass.getEGenericSuperTypes().add(g1);
-		g1 = createEGenericType(this.getTraceability());
-		g2 = createEGenericType(theEcorePackage_2.getEEnum());
-		g1.getETypeArguments().add(g2);
-		enumerationEClass.getEGenericSuperTypes().add(g1);
-		g1 = createEGenericType(this.getNamedElement());
-		enumerationLiteralEClass.getEGenericSuperTypes().add(g1);
-		g1 = createEGenericType(this.getTraceability());
-		g2 = createEGenericType(theEcorePackage_2.getEEnumLiteral());
-		g1.getETypeArguments().add(g2);
-		enumerationLiteralEClass.getEGenericSuperTypes().add(g1);
-		g1 = createEGenericType(this.getGenericTypeDefinition());
-		classDefinitionEClass.getEGenericSuperTypes().add(g1);
-		g1 = createEGenericType(this.getTypeContainer());
-		classDefinitionEClass.getEGenericSuperTypes().add(g1);
-		g1 = createEGenericType(this.getTraceability());
-		g2 = createEGenericType(theEcorePackage_2.getEClass());
-		g1.getETypeArguments().add(g2);
-		classDefinitionEClass.getEGenericSuperTypes().add(g1);
-		g1 = createEGenericType(this.getMultiplicityElement());
+		EGenericType g1 = createEGenericType(this.getMultiplicityElement());
 		operationEClass.getEGenericSuperTypes().add(g1);
 		g1 = createEGenericType(this.getTraceability());
-		g2 = createEGenericType(theEcorePackage_2.getEOperation());
+		EGenericType g2 = createEGenericType(theEcorePackage_2.getEOperation());
 		g1.getETypeArguments().add(g2);
 		operationEClass.getEGenericSuperTypes().add(g1);
 		g1 = createEGenericType(this.getMultiplicityElement());
@@ -2295,57 +2182,31 @@ public class StructurePackageImpl extends EPackageImpl implements
 		g2 = createEGenericType(theEcorePackage_2.getEParameter());
 		g1.getETypeArguments().add(g2);
 		parameterEClass.getEGenericSuperTypes().add(g1);
-		g1 = createEGenericType(this.getNamedElement());
-		constraintEClass.getEGenericSuperTypes().add(g1);
+		typeEClass.getESuperTypes().add(this.getObject());
+		g1 = createEGenericType(this.getGenericTypeDefinition());
+		classDefinitionEClass.getEGenericSuperTypes().add(g1);
+		g1 = createEGenericType(this.getTypeContainer());
+		classDefinitionEClass.getEGenericSuperTypes().add(g1);
 		g1 = createEGenericType(this.getTraceability());
-		g2 = createEGenericType(theEcorePackage_2.getEAnnotation());
+		g2 = createEGenericType(theEcorePackage_2.getEClass());
 		g1.getETypeArguments().add(g2);
-		constraintEClass.getEGenericSuperTypes().add(g1);
-		g1 = createEGenericType(this.getMultiplicityElement());
-		propertyEClass.getEGenericSuperTypes().add(g1);
-		g1 = createEGenericType(this.getTraceability());
-		g2 = createEGenericType(theEcorePackage_2.getEStructuralFeature());
-		g1.getETypeArguments().add(g2);
-		propertyEClass.getEGenericSuperTypes().add(g1);
-		g1 = createEGenericType(this.getTypeVariable());
-		objectTypeVariableEClass.getEGenericSuperTypes().add(g1);
-		g1 = createEGenericType(this.getTraceability());
-		g2 = createEGenericType(theEcorePackage_2.getETypeParameter());
-		g1.getETypeArguments().add(g2);
-		objectTypeVariableEClass.getEGenericSuperTypes().add(g1);
-		g1 = createEGenericType(this.getTraceability());
-		g2 = createEGenericType(theEcorePackage_2.getEAnnotation());
-		g1.getETypeArguments().add(g2);
-		tagEClass.getEGenericSuperTypes().add(g1);
-		g1 = createEGenericType(this.getParameterizedType());
-		classEClass.getEGenericSuperTypes().add(g1);
+		classDefinitionEClass.getEGenericSuperTypes().add(g1);
+		modelTypeEClass.getESuperTypes().add(this.getType());
+		modelTypeEClass.getESuperTypes().add(this.getTypeDefinition());
 		g1 = createEGenericType(this.getTraceability());
 		g2 = createEGenericType(theEcorePackage_2.getEGenericType());
 		g1.getETypeArguments().add(g2);
 		classEClass.getEGenericSuperTypes().add(g1);
-		genericTypeDefinitionEClass.getESuperTypes().add(
-				this.getTypeDefinition());
-		typeEClass.getESuperTypes().add(this.getObject());
-		typeContainerEClass.getESuperTypes().add(this.getObject());
-		typeVariableBindingEClass.getESuperTypes().add(this.getTypeContainer());
-		typedElementEClass.getESuperTypes().add(this.getTypeContainer());
-		typedElementEClass.getESuperTypes().add(this.getNamedElement());
-		typeDefinitionEClass.getESuperTypes().add(this.getNamedElement());
-		namedElementEClass.getESuperTypes().add(this.getObject());
-		dataTypeEClass.getESuperTypes().add(this.getType());
-		dataTypeEClass.getESuperTypes().add(this.getTypeDefinition());
-		parameterizedTypeEClass.getESuperTypes().add(this.getType());
-		typeVariableEClass.getESuperTypes().add(this.getTypeContainer());
-		typeVariableEClass.getESuperTypes().add(this.getType());
-		typeVariableEClass.getESuperTypes().add(this.getNamedElement());
-		modelTypeEClass.getESuperTypes().add(this.getType());
-		modelTypeEClass.getESuperTypes().add(this.getTypeDefinition());
-		modelTypeVariableEClass.getESuperTypes().add(this.getTypeVariable());
-		virtualTypeEClass.getESuperTypes().add(this.getObjectTypeVariable());
+		g1 = createEGenericType(this.getParameterizedType());
+		classEClass.getEGenericSuperTypes().add(g1);
 		modelEClass.getESuperTypes().add(this.getObject());
-		filterEClass.getESuperTypes().add(this.getObject());
-		productTypeEClass.getESuperTypes().add(this.getTypeContainer());
-		productTypeEClass.getESuperTypes().add(this.getType());
+		namedElementEClass.getESuperTypes().add(this.getObject());
+		g1 = createEGenericType(this.getTraceability());
+		g2 = createEGenericType(theEcorePackage_2.getEEnum());
+		g1.getETypeArguments().add(g2);
+		enumerationEClass.getEGenericSuperTypes().add(g1);
+		g1 = createEGenericType(this.getDataType());
+		enumerationEClass.getEGenericSuperTypes().add(g1);
 		g1 = createEGenericType(this.getTraceability());
 		g2 = createEGenericType(theEcorePackage_2.getEAnnotation());
 		g1.getETypeArguments().add(g2);
@@ -2354,391 +2215,287 @@ public class StructurePackageImpl extends EPackageImpl implements
 		functionTypeEClass.getEGenericSuperTypes().add(g1);
 		g1 = createEGenericType(this.getType());
 		functionTypeEClass.getEGenericSuperTypes().add(g1);
+		g1 = createEGenericType(this.getTraceability());
+		g2 = createEGenericType(theEcorePackage_2.getEStructuralFeature());
+		g1.getETypeArguments().add(g2);
+		propertyEClass.getEGenericSuperTypes().add(g1);
+		g1 = createEGenericType(this.getMultiplicityElement());
+		propertyEClass.getEGenericSuperTypes().add(g1);
+		typeContainerEClass.getESuperTypes().add(this.getObject());
+		g1 = createEGenericType(this.getTraceability());
+		g2 = createEGenericType(theEcorePackage_2.getEEnumLiteral());
+		g1.getETypeArguments().add(g2);
+		enumerationLiteralEClass.getEGenericSuperTypes().add(g1);
+		g1 = createEGenericType(this.getNamedElement());
+		enumerationLiteralEClass.getEGenericSuperTypes().add(g1);
+		typeVariableBindingEClass.getESuperTypes().add(this.getTypeContainer());
+		multiplicityElementEClass.getESuperTypes().add(this.getTypedElement());
+		typedElementEClass.getESuperTypes().add(this.getTypeContainer());
+		typedElementEClass.getESuperTypes().add(this.getNamedElement());
+		typeDefinitionEClass.getESuperTypes().add(this.getNamedElement());
+		dataTypeEClass.getESuperTypes().add(this.getType());
+		dataTypeEClass.getESuperTypes().add(this.getTypeDefinition());
+		g1 = createEGenericType(this.getTraceability());
+		g2 = createEGenericType(theEcorePackage_2.getEPackage());
+		g1.getETypeArguments().add(g2);
+		packageEClass.getEGenericSuperTypes().add(g1);
+		g1 = createEGenericType(this.getNamedElement());
+		packageEClass.getEGenericSuperTypes().add(g1);
+		g1 = createEGenericType(this.getTypeDefinitionContainer());
+		packageEClass.getEGenericSuperTypes().add(g1);
+		g1 = createEGenericType(this.getTraceability());
+		g2 = createEGenericType(theEcorePackage_2.getEDataType());
+		g1.getETypeArguments().add(g2);
+		primitiveTypeEClass.getEGenericSuperTypes().add(g1);
+		g1 = createEGenericType(this.getDataType());
+		primitiveTypeEClass.getEGenericSuperTypes().add(g1);
+		g1 = createEGenericType(this.getTypeContainer());
+		primitiveTypeEClass.getEGenericSuperTypes().add(g1);
+		g1 = createEGenericType(this.getTraceability());
+		g2 = createEGenericType(theEcorePackage_2.getEAnnotation());
+		g1.getETypeArguments().add(g2);
+		tagEClass.getEGenericSuperTypes().add(g1);
+		g1 = createEGenericType(this.getTraceability());
+		g2 = createEGenericType(theEcorePackage_2.getEAnnotation());
+		g1.getETypeArguments().add(g2);
+		constraintEClass.getEGenericSuperTypes().add(g1);
+		g1 = createEGenericType(this.getNamedElement());
+		constraintEClass.getEGenericSuperTypes().add(g1);
+		genericTypeDefinitionEClass.getESuperTypes().add(
+				this.getTypeDefinition());
+		parameterizedTypeEClass.getESuperTypes().add(this.getType());
+		typeVariableEClass.getESuperTypes().add(this.getTypeContainer());
+		typeVariableEClass.getESuperTypes().add(this.getType());
+		typeVariableEClass.getESuperTypes().add(this.getNamedElement());
+		g1 = createEGenericType(this.getTraceability());
+		g2 = createEGenericType(theEcorePackage_2.getETypeParameter());
+		g1.getETypeArguments().add(g2);
+		objectTypeVariableEClass.getEGenericSuperTypes().add(g1);
+		g1 = createEGenericType(this.getTypeVariable());
+		objectTypeVariableEClass.getEGenericSuperTypes().add(g1);
+		modelTypeVariableEClass.getESuperTypes().add(this.getTypeVariable());
+		virtualTypeEClass.getESuperTypes().add(this.getObjectTypeVariable());
+		g1 = createEGenericType(this.getTraceability());
+		g2 = createEGenericType(theEcorePackage_2.getEAnnotation());
+		g1.getETypeArguments().add(g2);
+		modelingUnitEClass.getEGenericSuperTypes().add(g1);
+		requireEClass.getESuperTypes().add(this.getObject());
+		usingEClass.getESuperTypes().add(this.getObject());
+		filterEClass.getESuperTypes().add(this.getObject());
+		productTypeEClass.getESuperTypes().add(this.getTypeContainer());
+		productTypeEClass.getESuperTypes().add(this.getType());
 		voidTypeEClass.getESuperTypes().add(this.getType());
 		typeDefinitionContainerEClass.getESuperTypes().add(
 				this.getNamedElement());
-		linkSetterForTypedElementEClass.getESuperTypes().add(this.getObject());
 		traceabilityEClass.getESuperTypes().add(this.getObject());
+		linkSetterForTypedElementEClass.getESuperTypes().add(this.getObject());
 
 		// Initialize classes and features; add operations and parameters
-		initEClass(multiplicityElementEClass, MultiplicityElement.class,
-				"MultiplicityElement", !IS_ABSTRACT, !IS_INTERFACE,
+		initEClass(objectEClass, kermeta.language.structure.Object.class,
+				"Object", !IS_ABSTRACT, !IS_INTERFACE,
 				IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getMultiplicityElement_IsOrdered(), theStandardPackage
-				.getJavaBoolean(), "isOrdered", "false", 0, 1,
-				MultiplicityElement.class, !IS_TRANSIENT, !IS_VOLATILE,
-				IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED,
+		initEReference(getObject_File(), theTraceabilityPackage.getFile(),
+				null, "file", null, 0, 1,
+				kermeta.language.structure.Object.class, !IS_TRANSIENT,
+				!IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES,
+				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getObject_Tag(), this.getTag(), this.getTag_Object(),
+				"tag", null, 0, -1, kermeta.language.structure.Object.class,
+				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE,
+				IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED,
 				IS_ORDERED);
-		initEAttribute(getMultiplicityElement_Upper(), theStandardPackage
-				.getJavaInteger(), "upper", null, 0, 1,
-				MultiplicityElement.class, !IS_TRANSIENT, !IS_VOLATILE,
-				IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED,
-				IS_ORDERED);
-		initEAttribute(getMultiplicityElement_Lower(), theStandardPackage
-				.getJavaInteger(), "lower", null, 0, 1,
-				MultiplicityElement.class, !IS_TRANSIENT, !IS_VOLATILE,
-				IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED,
-				IS_ORDERED);
-		initEAttribute(getMultiplicityElement_IsUnique(), theStandardPackage
-				.getJavaBoolean(), "isUnique", "false", 0, 1,
-				MultiplicityElement.class, !IS_TRANSIENT, !IS_VOLATILE,
-				IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED,
-				IS_ORDERED);
-
-		addEOperation(multiplicityElementEClass, theStandardPackage
-				.getJavaString(), "getRecopyInValueTypes", 0, 1, IS_UNIQUE,
-				IS_ORDERED);
-
-		addEOperation(multiplicityElementEClass, theStandardPackage
-				.getJavaString(), "getFinalName", 0, 1, IS_UNIQUE, IS_ORDERED);
-
-		addEOperation(multiplicityElementEClass, theStandardPackage
-				.getJavaString(), "getEMFRenameAs", 0, 1, IS_UNIQUE, IS_ORDERED);
-
-		initEClass(modelingUnitEClass, ModelingUnit.class, "ModelingUnit",
-				!IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getModelingUnit_EcorePackages(), theEcorePackage_2
-				.getEPackage(), null, "ecorePackages", null, 0, -1,
-				ModelingUnit.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE,
-				!IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE,
+		initEAttribute(getObject_FileName(),
+				theStandardPackage.getJavaString(), "fileName", null, 0, 1,
+				kermeta.language.structure.Object.class, !IS_TRANSIENT,
+				!IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE,
 				!IS_DERIVED, IS_ORDERED);
-		initEReference(getModelingUnit_Usings(), this.getUsing(), null,
-				"usings", null, 0, -1, ModelingUnit.class, !IS_TRANSIENT,
-				!IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, IS_RESOLVE_PROXIES,
-				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getModelingUnit_Packages(), this.getPackage(), null,
-				"packages", null, 0, -1, ModelingUnit.class, !IS_TRANSIENT,
-				!IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, IS_RESOLVE_PROXIES,
-				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getModelingUnit_IncludeFilters(), this.getFilter(),
-				null, "includeFilters", null, 0, -1, ModelingUnit.class,
+		initEAttribute(getObject_LineNumber(), theStandardPackage
+				.getJavaInteger(), "lineNumber", null, 0, 1,
+				kermeta.language.structure.Object.class, !IS_TRANSIENT,
+				!IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE,
+				!IS_DERIVED, IS_ORDERED);
+		initEReference(getObject_OwnedTags(), this.getTag(), null, "ownedTags",
+				null, 0, -1, kermeta.language.structure.Object.class,
 				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE,
 				IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED,
 				IS_ORDERED);
-		initEReference(getModelingUnit_ExcludeFilters(), this.getFilter(),
-				null, "excludeFilters", null, 0, -1, ModelingUnit.class,
-				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE,
-				IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED,
-				IS_ORDERED);
-		initEReference(getModelingUnit_SuperOperationsToCompileInHelper(), this
-				.getOperation(), null, "superOperationsToCompileInHelper",
-				null, 0, -1, ModelingUnit.class, !IS_TRANSIENT, !IS_VOLATILE,
-				IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES,
-				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getModelingUnit_ReferencedModelingUnits(), this
-				.getModelingUnit(), null, "referencedModelingUnits", null, 0,
-				-1, ModelingUnit.class, !IS_TRANSIENT, !IS_VOLATILE,
-				IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES,
-				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getModelingUnit_Requires(), this.getRequire(), null,
-				"requires", null, 0, -1, ModelingUnit.class, !IS_TRANSIENT,
-				!IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, IS_RESOLVE_PROXIES,
-				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getModelingUnit_EntryPoints(), theEcorePackage_2
-				.getEAnnotation(), null, "entryPoints", null, 0, -1,
-				ModelingUnit.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE,
-				!IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE,
-				!IS_DERIVED, IS_ORDERED);
-
-		EOperation op = addEOperation(modelingUnitEClass, this.getPackage(),
-				"retrievePackage", 0, 1, IS_UNIQUE, IS_ORDERED);
-		addEParameter(op, theStandardPackage.getJavaString(), "qname", 0, 1,
-				IS_UNIQUE, IS_ORDERED);
-
-		op = addEOperation(modelingUnitEClass, null, "createKRuntimeError", 0,
-				1, IS_UNIQUE, IS_ORDERED);
-		addEParameter(op, theKm2ecorePackage.getKM2EcoreContext(), "context",
-				0, 1, IS_UNIQUE, IS_ORDERED);
-
-		op = addEOperation(modelingUnitEClass, null, "preprocess", 0, 1,
-				IS_UNIQUE, IS_ORDERED);
-		addEParameter(op, theKm2ecorePackage.getKM2EcoreContext(), "context",
-				0, 1, IS_UNIQUE, IS_ORDERED);
-
-		op = addEOperation(modelingUnitEClass, null, "compileStaticOperation",
-				0, 1, IS_UNIQUE, IS_ORDERED);
-		addEParameter(op, this.getOperation(), "op", 0, 1, IS_UNIQUE,
-				IS_ORDERED);
-		addEParameter(op, theKm2ecorePackage.getKM2EcoreContext(), "context",
-				0, 1, IS_UNIQUE, IS_ORDERED);
-
-		op = addEOperation(modelingUnitEClass, null, "applyPass1", 0, 1,
-				IS_UNIQUE, !IS_ORDERED);
-		addEParameter(op, theKm2ecorePackage.getKM2EcoreContext(), "context",
-				0, 1, IS_UNIQUE, IS_ORDERED);
-
-		op = addEOperation(modelingUnitEClass, null, "compileSuperOperation",
-				0, 1, IS_UNIQUE, IS_ORDERED);
-		addEParameter(op, theKm2ecorePackage.getKM2EcoreContext(), "context",
-				0, 1, IS_UNIQUE, IS_ORDERED);
-
-		op = addEOperation(modelingUnitEClass, theEcorePackage_2
-				.getEAnnotation(), "createEcoreModelElement", 0, 1, IS_UNIQUE,
-				IS_ORDERED);
-		addEParameter(op, theKm2ecorePackage.getKM2EcoreContext(), "context",
-				0, 1, IS_UNIQUE, IS_ORDERED);
-
-		op = addEOperation(modelingUnitEClass, null, "postprocess", 0, 1,
-				IS_UNIQUE, IS_ORDERED);
-		addEParameter(op, theKm2ecorePackage.getKM2EcoreContext(), "context",
-				0, 1, IS_UNIQUE, IS_ORDERED);
-
-		op = addEOperation(modelingUnitEClass, null, "getAllPackages", 0, 1,
-				IS_UNIQUE, IS_ORDERED);
-		g1 = createEGenericType(theStandardPackage.getOrderedSet());
-		g2 = createEGenericType(this.getPackage());
-		g1.getETypeArguments().add(g2);
-		initEOperation(op, g1);
-
-		op = addEOperation(modelingUnitEClass, this.getTypeDefinition(),
-				"getTypeDefinitionByQualifiedName", 0, 1, IS_UNIQUE, IS_ORDERED);
-		addEParameter(op, theStandardPackage.getJavaString(), "qname", 0, 1,
-				IS_UNIQUE, IS_ORDERED);
-
-		op = addEOperation(modelingUnitEClass, theEcorePackage_2
-				.getEClassifier(), "getEClassifierByQualifiedName", 0, 1,
-				IS_UNIQUE, IS_ORDERED);
-		addEParameter(op, theStandardPackage.getJavaString(), "qname", 0, 1,
-				IS_UNIQUE, IS_ORDERED);
-
-		initEClass(requireEClass, Require.class, "Require", !IS_ABSTRACT,
-				!IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getRequire_Uri(), theStandardPackage.getJavaString(),
-				"uri", null, 0, 1, Require.class, !IS_TRANSIENT, !IS_VOLATILE,
-				IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED,
-				IS_ORDERED);
-
-		op = addEOperation(requireEClass, null, "applyPass1", 0, 1, IS_UNIQUE,
-				!IS_ORDERED);
-		addEParameter(op, theKm2ecorePackage.getKM2EcoreContext(), "context",
-				0, 1, IS_UNIQUE, IS_ORDERED);
-
-		op = addEOperation(requireEClass, theEcorePackage_2.getEAnnotation(),
-				"createEcoreModelElement", 0, 1, IS_UNIQUE, IS_ORDERED);
-		addEParameter(op, theKm2ecorePackage.getKM2EcoreContext(), "context",
-				0, 1, IS_UNIQUE, IS_ORDERED);
-
-		initEClass(usingEClass, Using.class, "Using", !IS_ABSTRACT,
-				!IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getUsing_QualifiedName(), theStandardPackage
-				.getJavaString(), "qualifiedName", null, 0, 1, Using.class,
+		initEAttribute(getObject_Oid(), this.getKermetaProperty_Object_oid(),
+				"oid", null, 0, 1, kermeta.language.structure.Object.class,
 				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE,
 				!IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		op = addEOperation(usingEClass, null, "applyPass1", 0, 1, IS_UNIQUE,
-				!IS_ORDERED);
-		addEParameter(op, theKm2ecorePackage.getKM2EcoreContext(), "context",
-				0, 1, IS_UNIQUE, IS_ORDERED);
-
-		op = addEOperation(usingEClass, theEcorePackage_2.getEAnnotation(),
-				"createEcoreModelElement", 0, 1, IS_UNIQUE, IS_ORDERED);
-		addEParameter(op, theKm2ecorePackage.getKM2EcoreContext(), "context",
-				0, 1, IS_UNIQUE, IS_ORDERED);
-
-		initEClass(packageEClass, kermeta.language.structure.Package.class,
-				"Package", !IS_ABSTRACT, !IS_INTERFACE,
-				IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getPackage_NestingPackage(), this.getPackage(), this
-				.getPackage_NestedPackage(), "nestingPackage", null, 0, 1,
-				kermeta.language.structure.Package.class, IS_TRANSIENT,
+		initEReference(getObject_Container(), this.getObject(), null,
+				"container", null, 0, 1,
+				kermeta.language.structure.Object.class, !IS_TRANSIENT,
 				!IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES,
 				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getPackage_NestedPackage(), this.getPackage(), this
-				.getPackage_NestingPackage(), "nestedPackage", null, 0, -1,
-				kermeta.language.structure.Package.class, !IS_TRANSIENT,
-				!IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, IS_RESOLVE_PROXIES,
-				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getPackage_Uri(), theStandardPackage.getJavaString(),
-				"uri", null, 0, 1, kermeta.language.structure.Package.class,
-				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE,
-				!IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		op = addEOperation(packageEClass, null, "applyPass1", 0, 1, IS_UNIQUE,
+		EOperation op = addEOperation(objectEClass, theStandardPackage
+				.getJavaBoolean(), "interpretBooleanTag", 0, 1, IS_UNIQUE,
+				IS_ORDERED);
+		addEParameter(op, theStandardPackage.getJavaString(), "str_tag", 0, 1,
+				IS_UNIQUE, IS_ORDERED);
+
+		op = addEOperation(objectEClass, theStandardPackage.getJavaString(),
+				"createBehaviorJava", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, theKm2ecorePackage.getKM2EcoreContext(), "context",
+				0, 1, IS_UNIQUE, IS_ORDERED);
+
+		op = addEOperation(objectEClass, theStandardPackage.getJavaBoolean(),
+				"isKindOf", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, this.getClass_(), "cl", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		addEOperation(objectEClass, this.getClass_(), "getMetaClass", 0, 1,
+				IS_UNIQUE, IS_ORDERED);
+
+		op = addEOperation(objectEClass, null, "set", 0, 1, IS_UNIQUE,
+				IS_ORDERED);
+		addEParameter(op, this.getProperty(), "property", 0, 1, IS_UNIQUE,
+				IS_ORDERED);
+		addEParameter(op, this.getObject(), "element", 0, 1, IS_UNIQUE,
+				IS_ORDERED);
+
+		op = addEOperation(objectEClass, null, "applyPass1", 0, 1, IS_UNIQUE,
 				!IS_ORDERED);
 		addEParameter(op, theKm2ecorePackage.getKM2EcoreContext(), "context",
 				0, 1, IS_UNIQUE, IS_ORDERED);
 
-		op = addEOperation(packageEClass, theEcorePackage_2.getEPackage(),
-				"createEcoreModelElement", 0, 1, IS_UNIQUE, IS_ORDERED);
+		op = addEOperation(objectEClass, null, "applyPass2", 0, 1, IS_UNIQUE,
+				!IS_ORDERED);
 		addEParameter(op, theKm2ecorePackage.getKM2EcoreContext(), "context",
 				0, 1, IS_UNIQUE, IS_ORDERED);
 
-		op = addEOperation(packageEClass, null, "getAllSubPackages", 0, 1,
+		addEOperation(objectEClass, theStandardPackage.getJavaString(),
+				"getEMFEDataTypeInstanceClassName", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		op = addEOperation(objectEClass, this.getProperty(),
+				"getPropertyValue", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, theStandardPackage.getJavaString(), "propertyName",
+				0, 1, IS_UNIQUE, IS_ORDERED);
+
+		addEOperation(objectEClass, null, "checkInvariants", 0, 1, IS_UNIQUE,
+				IS_ORDERED);
+
+		addEOperation(objectEClass, theStandardPackage.getJavaString(),
+				"getEMFInstanceClassName", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		addEOperation(objectEClass, theStandardPackage.getJavaBoolean(),
+				"isVoid", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		addEOperation(objectEClass, theStandardPackage.getJavaInteger(), "oid",
+				0, 1, IS_UNIQUE, IS_ORDERED);
+
+		op = addEOperation(objectEClass, null, "getTagValues", 0, 1, IS_UNIQUE,
+				IS_ORDERED);
+		addEParameter(op, theStandardPackage.getJavaString(), "key", 0, 1,
 				IS_UNIQUE, IS_ORDERED);
 		g1 = createEGenericType(theStandardPackage.getOrderedSet());
-		g2 = createEGenericType(this.getPackage());
+		g2 = createEGenericType(theStandardPackage.getJavaString());
 		g1.getETypeArguments().add(g2);
 		initEOperation(op, g1);
 
-		initEClass(primitiveTypeEClass, PrimitiveType.class, "PrimitiveType",
-				!IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getPrimitiveType_InstanceType(), this.getType(), null,
-				"instanceType", null, 0, 1, PrimitiveType.class, !IS_TRANSIENT,
-				!IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES,
-				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		op = addEOperation(objectEClass, theStandardPackage.getJavaBoolean(),
+				"isInstanceOf", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, this.getType(), "type", 0, 1, IS_UNIQUE, IS_ORDERED);
 
-		op = addEOperation(primitiveTypeEClass, theStandardPackage
-				.getJavaString(), "createBehaviorJava", 0, 1, IS_UNIQUE,
-				IS_ORDERED);
-		addEParameter(op, theKm2ecorePackage.getKM2EcoreContext(), "context",
-				0, 1, IS_UNIQUE, IS_ORDERED);
-
-		op = addEOperation(primitiveTypeEClass, null, "applyPass1", 0, 1,
-				IS_UNIQUE, !IS_ORDERED);
-		addEParameter(op, theKm2ecorePackage.getKM2EcoreContext(), "context",
-				0, 1, IS_UNIQUE, IS_ORDERED);
-
-		op = addEOperation(primitiveTypeEClass, theEcorePackage_2
-				.getEDataType(), "createEcoreModelElement", 0, 1, IS_UNIQUE,
-				IS_ORDERED);
-		addEParameter(op, theKm2ecorePackage.getKM2EcoreContext(), "context",
-				0, 1, IS_UNIQUE, IS_ORDERED);
-
-		initEClass(enumerationEClass, Enumeration.class, "Enumeration",
-				!IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getEnumeration_OwnedLiteral(), this
-				.getEnumerationLiteral(), this
-				.getEnumerationLiteral_Enumeration(), "ownedLiteral", null, 0,
-				-1, Enumeration.class, !IS_TRANSIENT, !IS_VOLATILE,
-				IS_CHANGEABLE, IS_COMPOSITE, IS_RESOLVE_PROXIES,
-				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		op = addEOperation(enumerationEClass, theStandardPackage
-				.getJavaString(), "createBehaviorJava", 0, 1, IS_UNIQUE,
-				IS_ORDERED);
-		addEParameter(op, theKm2ecorePackage.getKM2EcoreContext(), "context",
-				0, 1, IS_UNIQUE, IS_ORDERED);
-
-		op = addEOperation(enumerationEClass, this.getObject(), "clone", 0, 1,
+		addEOperation(objectEClass, null, "checkAllInvariants", 0, 1,
 				IS_UNIQUE, IS_ORDERED);
-		addEParameter(op, this.getObject(), "objectToClone", 0, 1, IS_UNIQUE,
+
+		addEOperation(objectEClass, theStandardPackage.getJavaString(),
+				"getCompiledJavaExtern", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		addEOperation(objectEClass, theStandardPackage.getJavaString(),
+				"getWrapperValueTypeSelfExpression", 0, 1, IS_UNIQUE,
 				IS_ORDERED);
 
-		op = addEOperation(enumerationEClass, null, "applyPass1", 0, 1,
+		op = addEOperation(objectEClass, null, "applyPass2BehaviorJava", 0, 1,
 				IS_UNIQUE, !IS_ORDERED);
 		addEParameter(op, theKm2ecorePackage.getKM2EcoreContext(), "context",
 				0, 1, IS_UNIQUE, IS_ORDERED);
 
-		op = addEOperation(enumerationEClass, theEcorePackage_2.getEEnum(),
-				"createEcoreModelElement", 0, 1, IS_UNIQUE, IS_ORDERED);
-		addEParameter(op, theKm2ecorePackage.getKM2EcoreContext(), "context",
-				0, 1, IS_UNIQUE, IS_ORDERED);
-
-		initEClass(enumerationLiteralEClass, EnumerationLiteral.class,
-				"EnumerationLiteral", !IS_ABSTRACT, !IS_INTERFACE,
-				IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getEnumerationLiteral_Enumeration(), this
-				.getEnumeration(), this.getEnumeration_OwnedLiteral(),
-				"enumeration", null, 0, 1, EnumerationLiteral.class,
-				IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE,
-				IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED,
-				IS_ORDERED);
-
-		op = addEOperation(enumerationLiteralEClass, null, "applyPass1", 0, 1,
-				IS_UNIQUE, !IS_ORDERED);
-		addEParameter(op, theKm2ecorePackage.getKM2EcoreContext(), "context",
-				0, 1, IS_UNIQUE, IS_ORDERED);
-
-		op = addEOperation(enumerationLiteralEClass, theEcorePackage_2
-				.getEEnumLiteral(), "createEcoreModelElement", 0, 1, IS_UNIQUE,
-				IS_ORDERED);
-		addEParameter(op, theKm2ecorePackage.getKM2EcoreContext(), "context",
-				0, 1, IS_UNIQUE, IS_ORDERED);
-
-		initEClass(classDefinitionEClass, ClassDefinition.class,
-				"ClassDefinition", !IS_ABSTRACT, !IS_INTERFACE,
-				IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getClassDefinition_OwnedOperation(),
-				this.getOperation(), this.getOperation_OwningClass(),
-				"ownedOperation", null, 0, -1, ClassDefinition.class,
-				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE,
-				IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED,
-				IS_ORDERED);
-		initEAttribute(getClassDefinition_IsAbstract(), theStandardPackage
-				.getJavaBoolean(), "isAbstract", "false", 0, 1,
-				ClassDefinition.class, !IS_TRANSIENT, !IS_VOLATILE,
-				IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED,
-				IS_ORDERED);
-		initEReference(getClassDefinition_SuperType(), this.getType(), null,
-				"superType", null, 0, -1, ClassDefinition.class, !IS_TRANSIENT,
-				!IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES,
-				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getClassDefinition_Inv(), this.getConstraint(), this
-				.getConstraint_InvOwner(), "inv", null, 0, -1,
-				ClassDefinition.class, !IS_TRANSIENT, !IS_VOLATILE,
-				IS_CHANGEABLE, IS_COMPOSITE, IS_RESOLVE_PROXIES,
-				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getClassDefinition_AllOperation(), this.getOperation(),
-				null, "allOperation", null, 0, -1, ClassDefinition.class,
-				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE,
-				IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED,
-				!IS_ORDERED);
-		initEReference(getClassDefinition_AllAttribute(), this.getProperty(),
-				null, "allAttribute", null, 0, -1, ClassDefinition.class,
-				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE,
-				IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED,
-				!IS_ORDERED);
-		initEReference(getClassDefinition_EcoreDataType(), theEcorePackage_2
-				.getEDataType(), null, "ecoreDataType", null, 0, 1,
-				ClassDefinition.class, !IS_TRANSIENT, !IS_VOLATILE,
-				IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES,
-				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getClassDefinition_OwnedAttribute(), this.getProperty(),
-				this.getProperty_OwningClass(), "ownedAttribute", null, 0, -1,
-				ClassDefinition.class, !IS_TRANSIENT, !IS_VOLATILE,
-				IS_CHANGEABLE, IS_COMPOSITE, IS_RESOLVE_PROXIES,
-				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		addEOperation(classDefinitionEClass, theStandardPackage
-				.getJavaBoolean(), "isMappedToJavaRawType", 0, 1, IS_UNIQUE,
-				IS_ORDERED);
-
-		addEOperation(classDefinitionEClass, theStandardPackage
-				.getJavaBoolean(), "isIterator", 0, 1, IS_UNIQUE, IS_ORDERED);
-
-		op = addEOperation(classDefinitionEClass, null, "applyPass1", 0, 1,
-				IS_UNIQUE, !IS_ORDERED);
-		addEParameter(op, theKm2ecorePackage.getKM2EcoreContext(), "context",
-				0, 1, IS_UNIQUE, IS_ORDERED);
-
-		addEOperation(classDefinitionEClass, theStandardPackage
-				.getJavaBoolean(), "isCollection", 0, 1, IS_UNIQUE, IS_ORDERED);
-
-		op = addEOperation(classDefinitionEClass, null, "applyPass2", 0, 1,
-				IS_UNIQUE, !IS_ORDERED);
-		addEParameter(op, theKm2ecorePackage.getKM2EcoreContext(), "context",
-				0, 1, IS_UNIQUE, IS_ORDERED);
-
-		op = addEOperation(classDefinitionEClass,
-				theEcorePackage_2.getEClass(), "createEcoreModelElement", 0, 1,
+		op = addEOperation(objectEClass, null, "getEMFNeedProperty", 0, 1,
 				IS_UNIQUE, IS_ORDERED);
-		addEParameter(op, theKm2ecorePackage.getKM2EcoreContext(), "context",
-				0, 1, IS_UNIQUE, IS_ORDERED);
-
-		addEOperation(classDefinitionEClass, theStandardPackage
-				.getJavaBoolean(), "isValueType", 0, 1, IS_UNIQUE, IS_ORDERED);
-
-		op = addEOperation(classDefinitionEClass, null, "setLinks", 0, 1,
-				IS_UNIQUE, !IS_ORDERED);
-		addEParameter(op, theKm2ecorePackage.getKM2EcoreContext(), "context",
-				0, 1, IS_UNIQUE, IS_ORDERED);
-
-		op = addEOperation(classDefinitionEClass, null,
-				"applyPass2BehaviorJava", 0, 1, IS_UNIQUE, !IS_ORDERED);
-		addEParameter(op, theKm2ecorePackage.getKM2EcoreContext(), "context",
-				0, 1, IS_UNIQUE, IS_ORDERED);
-
-		op = addEOperation(classDefinitionEClass, null, "allSuperTypes", 0, 1,
-				IS_UNIQUE, IS_ORDERED);
-		g1 = createEGenericType(theStandardPackage.getSet());
-		g2 = createEGenericType(this.getType());
+		g1 = createEGenericType(theStandardPackage.getOrderedSet());
+		g2 = createEGenericType(theStandardPackage.getJavaString());
 		g1.getETypeArguments().add(g2);
 		initEOperation(op, g1);
 
-		op = addEOperation(classDefinitionEClass, theStandardPackage
-				.getJavaBoolean(), "isSubTypeOf", 0, 1, IS_UNIQUE, IS_ORDERED);
-		addEParameter(op, theStandardPackage.getJavaString(),
-				"superType_qualifiedName", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEOperation(objectEClass, theStandardPackage.getJavaString(),
+				"getDeprecated", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		addEOperation(objectEClass, theStandardPackage.getJavaBoolean(),
+				"mustBeAssigned", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		op = addEOperation(objectEClass, theStandardPackage.getJavaBoolean(),
+				"isSet", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, this.getProperty(), "property", 0, 1, IS_UNIQUE,
+				IS_ORDERED);
+
+		addEOperation(objectEClass, theStandardPackage.getJavaString(),
+				"getWrapperValueTypeReturnType", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		op = addEOperation(objectEClass, this.getObject(), "get", 0, 1,
+				IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, this.getProperty(), "property", 0, 1, IS_UNIQUE,
+				IS_ORDERED);
+
+		op = addEOperation(objectEClass, null, "applyPass2BehaviorKmt", 0, 1,
+				IS_UNIQUE, !IS_ORDERED);
+		addEParameter(op, theKm2ecorePackage.getKM2EcoreContext(), "context",
+				0, 1, IS_UNIQUE, IS_ORDERED);
+
+		op = addEOperation(objectEClass, theStandardPackage.getJavaBoolean(),
+				"equals", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, this.getObject(), "element", 0, 1, IS_UNIQUE,
+				IS_ORDERED);
+
+		addEOperation(objectEClass, theStandardPackage.getJavaBoolean(),
+				"getEMFIsTransient", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		addEOperation(objectEClass, theStandardPackage.getJavaBoolean(),
+				"isFrozen", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		addEOperation(objectEClass, theStandardPackage.getJavaInteger(),
+				"hashcode", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		addEOperation(objectEClass, theStandardPackage.getJavaBoolean(),
+				"callsFunctionType", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		op = addEOperation(objectEClass, theStandardPackage.getJavaString(),
+				"getUniqueTagValue", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, theStandardPackage.getJavaString(), "key", 0, 1,
+				IS_UNIQUE, IS_ORDERED);
+
+		op = addEOperation(objectEClass, this.getObject(),
+				"getContainerAsType", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, this.getType(), "type", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		addEOperation(objectEClass, theStandardPackage.getJavaBoolean(),
+				"getEMFEDataTypeIsSerializable", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		op = addEOperation(objectEClass, theStandardPackage.getJavaBoolean(),
+				"isNotEqual", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, this.getObject(), "element", 0, 1, IS_UNIQUE,
+				IS_ORDERED);
+
+		op = addEOperation(objectEClass, null, "unset", 0, 1, IS_UNIQUE,
+				IS_ORDERED);
+		addEParameter(op, this.getProperty(), "property", 0, 1, IS_UNIQUE,
+				IS_ORDERED);
+
+		addEOperation(objectEClass, this.getObject(), "container", 0, 1,
+				IS_UNIQUE, IS_ORDERED);
+
+		addEOperation(objectEClass, null, "freeze", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		addEOperation(objectEClass, thePersistencePackage.getResource(),
+				"containingResource", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		op = addEOperation(objectEClass, this.getObject(), "asType", 0, 1,
+				IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, this.getClass_(), "type", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		addEOperation(objectEClass, theStandardPackage.getJavaString(),
+				"toString", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(operationEClass, Operation.class, "Operation", !IS_ABSTRACT,
 				!IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -2755,11 +2512,6 @@ public class StructurePackageImpl extends EPackageImpl implements
 				"cuid", null, 0, 1, Operation.class, !IS_TRANSIENT,
 				!IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE,
 				!IS_DERIVED, IS_ORDERED);
-		initEReference(getOperation_OwnedParameter(), this.getParameter(), this
-				.getParameter_Operation(), "ownedParameter", null, 0, -1,
-				Operation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE,
-				IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE,
-				!IS_DERIVED, IS_ORDERED);
 		initEReference(getOperation_Post(), this.getConstraint(), this
 				.getConstraint_PostOwner(), "post", null, 0, -1,
 				Operation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE,
@@ -2769,6 +2521,11 @@ public class StructurePackageImpl extends EPackageImpl implements
 				.getJavaBoolean(), "isAbstract", "false", 0, 1,
 				Operation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE,
 				!IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getOperation_OwnedParameter(), this.getParameter(), this
+				.getParameter_Operation(), "ownedParameter", null, 0, -1,
+				Operation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE,
+				IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE,
+				!IS_DERIVED, IS_ORDERED);
 		initEReference(getOperation_RaisedException(), this.getType(), null,
 				"raisedException", null, 0, -1, Operation.class, !IS_TRANSIENT,
 				!IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES,
@@ -2833,11 +2590,6 @@ public class StructurePackageImpl extends EPackageImpl implements
 		addEParameter(op, theKm2ecorePackage.getKM2EcoreContext(), "context",
 				0, 1, IS_UNIQUE, IS_ORDERED);
 
-		op = addEOperation(operationEClass, theStandardPackage.getJavaString(),
-				"ppReturnResult", 0, 1, IS_UNIQUE, IS_ORDERED);
-		addEParameter(op, theKm2ecorePackage.getKM2EcoreContext(), "context",
-				0, 1, IS_UNIQUE, IS_ORDERED);
-
 		addEOperation(operationEClass, theStandardPackage.getJavaBoolean(),
 				"mustBeDuplicated", 0, 1, IS_UNIQUE, IS_ORDERED);
 
@@ -2889,13 +2641,13 @@ public class StructurePackageImpl extends EPackageImpl implements
 		addEParameter(op, theKm2ecorePackage.getKM2EcoreContext(), "context",
 				0, 1, IS_UNIQUE, IS_ORDERED);
 
-		op = addEOperation(parameterEClass, null, "applyPass2", 0, 1,
-				IS_UNIQUE, !IS_ORDERED);
+		op = addEOperation(parameterEClass, theEcorePackage_2.getEParameter(),
+				"createEcoreModelElement", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, theKm2ecorePackage.getKM2EcoreContext(), "context",
 				0, 1, IS_UNIQUE, IS_ORDERED);
 
-		op = addEOperation(parameterEClass, theEcorePackage_2.getEParameter(),
-				"createEcoreModelElement", 0, 1, IS_UNIQUE, IS_ORDERED);
+		op = addEOperation(parameterEClass, null, "applyPass2", 0, 1,
+				IS_UNIQUE, !IS_ORDERED);
 		addEParameter(op, theKm2ecorePackage.getKM2EcoreContext(), "context",
 				0, 1, IS_UNIQUE, IS_ORDERED);
 
@@ -2904,491 +2656,13 @@ public class StructurePackageImpl extends EPackageImpl implements
 		addEParameter(op, theKm2ecorePackage.getKM2EcoreContext(), "context",
 				0, 1, IS_UNIQUE, IS_ORDERED);
 
+		addEOperation(parameterEClass, theStandardPackage.getJavaBoolean(),
+				"isFunctionType", 0, 1, IS_UNIQUE, IS_ORDERED);
+
 		op = addEOperation(parameterEClass, null, "applyPass2BehaviorJava", 0,
 				1, IS_UNIQUE, !IS_ORDERED);
 		addEParameter(op, theKm2ecorePackage.getKM2EcoreContext(), "context",
 				0, 1, IS_UNIQUE, IS_ORDERED);
-
-		addEOperation(parameterEClass, theStandardPackage.getJavaBoolean(),
-				"isFunctionType", 0, 1, IS_UNIQUE, IS_ORDERED);
-
-		initEClass(constraintEClass, Constraint.class, "Constraint",
-				!IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getConstraint_Body(),
-				theBehaviorPackage.getExpression(), null, "body", null, 1, 1,
-				Constraint.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE,
-				IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE,
-				!IS_DERIVED, !IS_ORDERED);
-		initEReference(getConstraint_PreOwner(), this.getOperation(), this
-				.getOperation_Pre(), "preOwner", null, 0, 1, Constraint.class,
-				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE,
-				IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED,
-				IS_ORDERED);
-		initEAttribute(getConstraint_Stereotype(), this.getConstraintType(),
-				"stereotype", null, 0, 1, Constraint.class, !IS_TRANSIENT,
-				!IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE,
-				!IS_DERIVED, IS_ORDERED);
-		initEReference(getConstraint_PostOwner(), this.getOperation(), this
-				.getOperation_Post(), "postOwner", null, 0, 1,
-				Constraint.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE,
-				!IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE,
-				!IS_DERIVED, IS_ORDERED);
-		initEAttribute(getConstraint_Language(), this.getConstraintLanguage(),
-				"language", null, 0, 1, Constraint.class, !IS_TRANSIENT,
-				!IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE,
-				!IS_DERIVED, IS_ORDERED);
-		initEReference(getConstraint_InvOwner(), this.getClassDefinition(),
-				this.getClassDefinition_Inv(), "invOwner", null, 0, 1,
-				Constraint.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE,
-				!IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE,
-				!IS_DERIVED, IS_ORDERED);
-
-		op = addEOperation(constraintEClass, null, "applyPass1", 0, 1,
-				IS_UNIQUE, !IS_ORDERED);
-		addEParameter(op, theKm2ecorePackage.getKM2EcoreContext(), "context",
-				0, 1, IS_UNIQUE, IS_ORDERED);
-
-		op = addEOperation(constraintEClass,
-				theEcorePackage_2.getEAnnotation(), "createEcoreModelElement",
-				0, 1, IS_UNIQUE, IS_ORDERED);
-		addEParameter(op, theKm2ecorePackage.getKM2EcoreContext(), "context",
-				0, 1, IS_UNIQUE, IS_ORDERED);
-
-		initEClass(propertyEClass, Property.class, "Property", !IS_ABSTRACT,
-				!IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getProperty_Default(), theStandardPackage
-				.getJavaString(), "default", null, 0, 1, Property.class,
-				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE,
-				!IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getProperty_IsDerived(), theStandardPackage
-				.getJavaBoolean(), "isDerived", "false", 0, 1, Property.class,
-				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE,
-				!IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getProperty_Opposite(), this.getProperty(), null,
-				"opposite", null, 0, 1, Property.class, !IS_TRANSIENT,
-				!IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES,
-				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getProperty_GetterBody(), theBehaviorPackage
-				.getExpression(), null, "getterBody", null, 0, 1,
-				Property.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE,
-				IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE,
-				!IS_DERIVED, IS_ORDERED);
-		initEAttribute(getProperty_IsReadOnly(), theStandardPackage
-				.getJavaBoolean(), "isReadOnly", "false", 0, 1, Property.class,
-				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE,
-				!IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getProperty_SetterBody(), theBehaviorPackage
-				.getExpression(), null, "setterBody", null, 0, 1,
-				Property.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE,
-				IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE,
-				!IS_DERIVED, IS_ORDERED);
-		initEAttribute(getProperty_IsID(), theStandardPackage.getJavaBoolean(),
-				"isID", "false", 0, 1, Property.class, !IS_TRANSIENT,
-				!IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE,
-				!IS_DERIVED, IS_ORDERED);
-		initEReference(getProperty_OwningClass(), this.getClassDefinition(),
-				this.getClassDefinition_OwnedAttribute(), "owningClass", null,
-				0, 1, Property.class, !IS_TRANSIENT, !IS_VOLATILE,
-				IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES,
-				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getProperty_IsSetterAbstract(), theStandardPackage
-				.getJavaBoolean(), "isSetterAbstract", "false", 0, 1,
-				Property.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE,
-				!IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getProperty_IsGetterAbstract(), theStandardPackage
-				.getJavaBoolean(), "isGetterAbstract", "false", 0, 1,
-				Property.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE,
-				!IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getProperty_IsComposite(), theStandardPackage
-				.getJavaBoolean(), "isComposite", "false", 0, 1,
-				Property.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE,
-				!IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		op = addEOperation(propertyEClass, theStandardPackage.getJavaString(),
-				"createBehaviorJava", 0, 1, IS_UNIQUE, IS_ORDERED);
-		addEParameter(op, theKm2ecorePackage.getKM2EcoreContext(), "context",
-				0, 1, IS_UNIQUE, IS_ORDERED);
-
-		op = addEOperation(propertyEClass, null, "applyPass1", 0, 1, IS_UNIQUE,
-				!IS_ORDERED);
-		addEParameter(op, theKm2ecorePackage.getKM2EcoreContext(), "context",
-				0, 1, IS_UNIQUE, IS_ORDERED);
-
-		op = addEOperation(propertyEClass, null, "applyPass2", 0, 1, IS_UNIQUE,
-				!IS_ORDERED);
-		addEParameter(op, theKm2ecorePackage.getKM2EcoreContext(), "context",
-				0, 1, IS_UNIQUE, IS_ORDERED);
-
-		op = addEOperation(propertyEClass, theEcorePackage_2
-				.getEStructuralFeature(), "createEcoreModelElement", 0, 1,
-				IS_UNIQUE, IS_ORDERED);
-		addEParameter(op, theKm2ecorePackage.getKM2EcoreContext(), "context",
-				0, 1, IS_UNIQUE, IS_ORDERED);
-
-		op = addEOperation(propertyEClass, null, "setLinks", 0, 1, IS_UNIQUE,
-				!IS_ORDERED);
-		addEParameter(op, theKm2ecorePackage.getKM2EcoreContext(), "context",
-				0, 1, IS_UNIQUE, IS_ORDERED);
-
-		op = addEOperation(propertyEClass, null, "applyPass2BehaviorJava", 0,
-				1, IS_UNIQUE, !IS_ORDERED);
-		addEParameter(op, theKm2ecorePackage.getKM2EcoreContext(), "context",
-				0, 1, IS_UNIQUE, IS_ORDERED);
-
-		initEClass(objectTypeVariableEClass, ObjectTypeVariable.class,
-				"ObjectTypeVariable", !IS_ABSTRACT, !IS_INTERFACE,
-				IS_GENERATED_INSTANCE_CLASS);
-
-		op = addEOperation(objectTypeVariableEClass, theStandardPackage
-				.getJavaString(), "createBehaviorJava", 0, 1, IS_UNIQUE,
-				IS_ORDERED);
-		addEParameter(op, theKm2ecorePackage.getKM2EcoreContext(), "context",
-				0, 1, IS_UNIQUE, IS_ORDERED);
-
-		op = addEOperation(objectTypeVariableEClass, null, "applyPass1", 0, 1,
-				IS_UNIQUE, !IS_ORDERED);
-		addEParameter(op, theKm2ecorePackage.getKM2EcoreContext(), "context",
-				0, 1, IS_UNIQUE, IS_ORDERED);
-
-		op = addEOperation(objectTypeVariableEClass, theEcorePackage_2
-				.getETypeParameter(), "createEcoreModelElement", 0, 1,
-				IS_UNIQUE, IS_ORDERED);
-		addEParameter(op, theKm2ecorePackage.getKM2EcoreContext(), "context",
-				0, 1, IS_UNIQUE, IS_ORDERED);
-
-		initEClass(tagEClass, Tag.class, "Tag", !IS_ABSTRACT, !IS_INTERFACE,
-				IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getTag_Name(), theStandardPackage.getJavaString(),
-				"name", null, 0, 1, Tag.class, !IS_TRANSIENT, !IS_VOLATILE,
-				IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED,
-				IS_ORDERED);
-		initEAttribute(getTag_Value(), theStandardPackage.getJavaString(),
-				"value", null, 0, 1, Tag.class, !IS_TRANSIENT, !IS_VOLATILE,
-				IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED,
-				IS_ORDERED);
-		initEReference(getTag_Object(), this.getObject(), this.getObject_Tag(),
-				"object", null, 1, -1, Tag.class, !IS_TRANSIENT, !IS_VOLATILE,
-				IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES,
-				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		op = addEOperation(tagEClass, null, "applyPass1", 0, 1, IS_UNIQUE,
-				!IS_ORDERED);
-		addEParameter(op, theKm2ecorePackage.getKM2EcoreContext(), "context",
-				0, 1, IS_UNIQUE, IS_ORDERED);
-
-		op = addEOperation(tagEClass, theEcorePackage_2.getEAnnotation(),
-				"createEcoreModelElement", 0, 1, IS_UNIQUE, IS_ORDERED);
-		addEParameter(op, theKm2ecorePackage.getKM2EcoreContext(), "context",
-				0, 1, IS_UNIQUE, IS_ORDERED);
-
-		initEClass(objectEClass, kermeta.language.structure.Object.class,
-				"Object", !IS_ABSTRACT, !IS_INTERFACE,
-				IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getObject_File(), theTraceabilityPackage.getFile(),
-				null, "file", null, 0, 1,
-				kermeta.language.structure.Object.class, !IS_TRANSIENT,
-				!IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES,
-				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getObject_Tag(), this.getTag(), this.getTag_Object(),
-				"tag", null, 0, -1, kermeta.language.structure.Object.class,
-				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE,
-				IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED,
-				IS_ORDERED);
-		initEAttribute(getObject_FileName(),
-				theStandardPackage.getJavaString(), "fileName", null, 0, 1,
-				kermeta.language.structure.Object.class, !IS_TRANSIENT,
-				!IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE,
-				!IS_DERIVED, IS_ORDERED);
-		initEAttribute(getObject_LineNumber(), theStandardPackage
-				.getJavaInteger(), "lineNumber", null, 0, 1,
-				kermeta.language.structure.Object.class, !IS_TRANSIENT,
-				!IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE,
-				!IS_DERIVED, IS_ORDERED);
-		initEReference(getObject_OwnedTags(), this.getTag(), null, "ownedTags",
-				null, 0, -1, kermeta.language.structure.Object.class,
-				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE,
-				IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED,
-				IS_ORDERED);
-		initEAttribute(getObject_Oid(), this.getKermetaProperty_Object_oid(),
-				"oid", null, 0, 1, kermeta.language.structure.Object.class,
-				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE,
-				!IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getObject_Container(), this.getObject(), null,
-				"container", null, 0, 1,
-				kermeta.language.structure.Object.class, !IS_TRANSIENT,
-				!IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES,
-				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		op = addEOperation(objectEClass, theStandardPackage.getJavaBoolean(),
-				"interpretBooleanTag", 0, 1, IS_UNIQUE, IS_ORDERED);
-		addEParameter(op, theStandardPackage.getJavaString(), "str_tag", 0, 1,
-				IS_UNIQUE, IS_ORDERED);
-
-		op = addEOperation(objectEClass, theStandardPackage.getJavaString(),
-				"createBehaviorJava", 0, 1, IS_UNIQUE, IS_ORDERED);
-		addEParameter(op, theKm2ecorePackage.getKM2EcoreContext(), "context",
-				0, 1, IS_UNIQUE, IS_ORDERED);
-
-		op = addEOperation(objectEClass, theStandardPackage.getJavaBoolean(),
-				"isKindOf", 0, 1, IS_UNIQUE, IS_ORDERED);
-		addEParameter(op, this.getClass_(), "cl", 0, 1, IS_UNIQUE, IS_ORDERED);
-
-		addEOperation(objectEClass, this.getClass_(), "getMetaClass", 0, 1,
-				IS_UNIQUE, IS_ORDERED);
-
-		op = addEOperation(objectEClass, null, "set", 0, 1, IS_UNIQUE,
-				IS_ORDERED);
-		addEParameter(op, this.getProperty(), "property", 0, 1, IS_UNIQUE,
-				IS_ORDERED);
-		addEParameter(op, this.getObject(), "element", 0, 1, IS_UNIQUE,
-				IS_ORDERED);
-
-		op = addEOperation(objectEClass, null, "applyPass1", 0, 1, IS_UNIQUE,
-				!IS_ORDERED);
-		addEParameter(op, theKm2ecorePackage.getKM2EcoreContext(), "context",
-				0, 1, IS_UNIQUE, IS_ORDERED);
-
-		op = addEOperation(objectEClass, null, "applyPass2", 0, 1, IS_UNIQUE,
-				!IS_ORDERED);
-		addEParameter(op, theKm2ecorePackage.getKM2EcoreContext(), "context",
-				0, 1, IS_UNIQUE, IS_ORDERED);
-
-		addEOperation(objectEClass, theStandardPackage.getJavaString(),
-				"getEMFEDataTypeInstanceClassName", 0, 1, IS_UNIQUE, IS_ORDERED);
-
-		op = addEOperation(objectEClass, this.getProperty(),
-				"getPropertyValue", 0, 1, IS_UNIQUE, IS_ORDERED);
-		addEParameter(op, theStandardPackage.getJavaString(), "propertyName",
-				0, 1, IS_UNIQUE, IS_ORDERED);
-
-		addEOperation(objectEClass, null, "checkInvariants", 0, 1, IS_UNIQUE,
-				IS_ORDERED);
-
-		addEOperation(objectEClass, theStandardPackage.getJavaString(),
-				"getEMFInstanceClassName", 0, 1, IS_UNIQUE, IS_ORDERED);
-
-		addEOperation(objectEClass, theStandardPackage.getJavaBoolean(),
-				"isVoid", 0, 1, IS_UNIQUE, IS_ORDERED);
-
-		op = addEOperation(objectEClass, null, "getAllContainedElementAsType",
-				0, 1, IS_UNIQUE, IS_ORDERED);
-		g1 = createEGenericType(theStandardPackage.getSet());
-		g2 = createEGenericType(this.getObject());
-		g1.getETypeArguments().add(g2);
-		initEOperation(op, g1);
-
-		addEOperation(objectEClass, theStandardPackage.getJavaInteger(), "oid",
-				0, 1, IS_UNIQUE, IS_ORDERED);
-
-		op = addEOperation(objectEClass, theStandardPackage.getJavaBoolean(),
-				"isInstanceOf", 0, 1, IS_UNIQUE, IS_ORDERED);
-		addEParameter(op, this.getType(), "type", 0, 1, IS_UNIQUE, IS_ORDERED);
-
-		op = addEOperation(objectEClass, null, "getTagValues", 0, 1, IS_UNIQUE,
-				IS_ORDERED);
-		addEParameter(op, theStandardPackage.getJavaString(), "key", 0, 1,
-				IS_UNIQUE, IS_ORDERED);
-		g1 = createEGenericType(theStandardPackage.getOrderedSet());
-		g2 = createEGenericType(theStandardPackage.getJavaString());
-		g1.getETypeArguments().add(g2);
-		initEOperation(op, g1);
-
-		addEOperation(objectEClass, null, "checkAllInvariants", 0, 1,
-				IS_UNIQUE, IS_ORDERED);
-
-		addEOperation(objectEClass, theStandardPackage.getJavaString(),
-				"getCompiledJavaExtern", 0, 1, IS_UNIQUE, IS_ORDERED);
-
-		addEOperation(objectEClass, theStandardPackage.getJavaString(),
-				"getWrapperValueTypeSelfExpression", 0, 1, IS_UNIQUE,
-				IS_ORDERED);
-
-		op = addEOperation(objectEClass, null, "applyPass2BehaviorJava", 0, 1,
-				IS_UNIQUE, !IS_ORDERED);
-		addEParameter(op, theKm2ecorePackage.getKM2EcoreContext(), "context",
-				0, 1, IS_UNIQUE, IS_ORDERED);
-
-		op = addEOperation(objectEClass, null, "getEMFNeedProperty", 0, 1,
-				IS_UNIQUE, IS_ORDERED);
-		g1 = createEGenericType(theStandardPackage.getOrderedSet());
-		g2 = createEGenericType(theStandardPackage.getJavaString());
-		g1.getETypeArguments().add(g2);
-		initEOperation(op, g1);
-
-		addEOperation(objectEClass, theStandardPackage.getJavaString(),
-				"getDeprecated", 0, 1, IS_UNIQUE, IS_ORDERED);
-
-		addEOperation(objectEClass, theStandardPackage.getJavaBoolean(),
-				"mustBeAssigned", 0, 1, IS_UNIQUE, IS_ORDERED);
-
-		op = addEOperation(objectEClass, theStandardPackage.getJavaBoolean(),
-				"isSet", 0, 1, IS_UNIQUE, IS_ORDERED);
-		addEParameter(op, this.getProperty(), "property", 0, 1, IS_UNIQUE,
-				IS_ORDERED);
-
-		op = addEOperation(objectEClass, this.getObject(), "get", 0, 1,
-				IS_UNIQUE, IS_ORDERED);
-		addEParameter(op, this.getProperty(), "property", 0, 1, IS_UNIQUE,
-				IS_ORDERED);
-
-		addEOperation(objectEClass, theStandardPackage.getJavaString(),
-				"getWrapperValueTypeReturnType", 0, 1, IS_UNIQUE, IS_ORDERED);
-
-		op = addEOperation(objectEClass, null, "applyPass2BehaviorKmt", 0, 1,
-				IS_UNIQUE, !IS_ORDERED);
-		addEParameter(op, theKm2ecorePackage.getKM2EcoreContext(), "context",
-				0, 1, IS_UNIQUE, IS_ORDERED);
-
-		op = addEOperation(objectEClass, theStandardPackage.getJavaBoolean(),
-				"equals", 0, 1, IS_UNIQUE, IS_ORDERED);
-		addEParameter(op, this.getObject(), "element", 0, 1, IS_UNIQUE,
-				IS_ORDERED);
-
-		addEOperation(objectEClass, theStandardPackage.getJavaBoolean(),
-				"getEMFIsTransient", 0, 1, IS_UNIQUE, IS_ORDERED);
-
-		addEOperation(objectEClass, theStandardPackage.getJavaBoolean(),
-				"isFrozen", 0, 1, IS_UNIQUE, IS_ORDERED);
-
-		addEOperation(objectEClass, theStandardPackage.getJavaInteger(),
-				"hashcode", 0, 1, IS_UNIQUE, IS_ORDERED);
-
-		addEOperation(objectEClass, theStandardPackage.getJavaBoolean(),
-				"callsFunctionType", 0, 1, IS_UNIQUE, IS_ORDERED);
-
-		op = addEOperation(objectEClass, theStandardPackage.getJavaString(),
-				"getUniqueTagValue", 0, 1, IS_UNIQUE, IS_ORDERED);
-		addEParameter(op, theStandardPackage.getJavaString(), "key", 0, 1,
-				IS_UNIQUE, IS_ORDERED);
-
-		op = addEOperation(objectEClass, this.getObject(),
-				"getContainerAsType", 0, 1, IS_UNIQUE, IS_ORDERED);
-		addEParameter(op, this.getType(), "type", 0, 1, IS_UNIQUE, IS_ORDERED);
-
-		addEOperation(objectEClass, theStandardPackage.getJavaBoolean(),
-				"getEMFEDataTypeIsSerializable", 0, 1, IS_UNIQUE, IS_ORDERED);
-
-		op = addEOperation(objectEClass, theStandardPackage.getJavaBoolean(),
-				"isNotEqual", 0, 1, IS_UNIQUE, IS_ORDERED);
-		addEParameter(op, this.getObject(), "element", 0, 1, IS_UNIQUE,
-				IS_ORDERED);
-
-		addEOperation(objectEClass, this.getObject(), "container", 0, 1,
-				IS_UNIQUE, IS_ORDERED);
-
-		addEOperation(objectEClass, null, "freeze", 0, 1, IS_UNIQUE, IS_ORDERED);
-
-		op = addEOperation(objectEClass, null, "unset", 0, 1, IS_UNIQUE,
-				IS_ORDERED);
-		addEParameter(op, this.getProperty(), "property", 0, 1, IS_UNIQUE,
-				IS_ORDERED);
-
-		addEOperation(objectEClass, thePersistencePackage.getResource(),
-				"containingResource", 0, 1, IS_UNIQUE, IS_ORDERED);
-
-		op = addEOperation(objectEClass, this.getObject(), "asType", 0, 1,
-				IS_UNIQUE, IS_ORDERED);
-		addEParameter(op, this.getClass_(), "type", 0, 1, IS_UNIQUE, IS_ORDERED);
-
-		addEOperation(objectEClass, theStandardPackage.getJavaString(),
-				"toString", 0, 1, IS_UNIQUE, IS_ORDERED);
-
-		initEClass(classEClass, kermeta.language.structure.Class.class,
-				"Class", !IS_ABSTRACT, !IS_INTERFACE,
-				IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getClass_OwnedOperation(), this.getOperation(), null,
-				"ownedOperation", null, 0, -1,
-				kermeta.language.structure.Class.class, !IS_TRANSIENT,
-				!IS_VOLATILE, !IS_CHANGEABLE, !IS_COMPOSITE,
-				IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED,
-				IS_ORDERED);
-		initEReference(getClass_SuperClass(), this.getClass_(), null,
-				"superClass", null, 0, -1,
-				kermeta.language.structure.Class.class, !IS_TRANSIENT,
-				!IS_VOLATILE, !IS_CHANGEABLE, !IS_COMPOSITE,
-				IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED,
-				IS_ORDERED);
-		initEAttribute(getClass_IsAbstract(), theStandardPackage
-				.getJavaBoolean(), "isAbstract", "false", 0, 1,
-				kermeta.language.structure.Class.class, !IS_TRANSIENT,
-				!IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE,
-				IS_DERIVED, IS_ORDERED);
-		initEAttribute(getClass_Name(), theStandardPackage.getJavaString(),
-				"name", null, 0, 1, kermeta.language.structure.Class.class,
-				!IS_TRANSIENT, !IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE,
-				!IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
-		initEReference(getClass_ClassDefinition(), this.getClassDefinition(),
-				null, "classDefinition", null, 0, 1,
-				kermeta.language.structure.Class.class, !IS_TRANSIENT,
-				!IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES,
-				!IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
-		initEReference(getClass_OwnedAttribute(), this.getProperty(), null,
-				"ownedAttribute", null, 0, -1,
-				kermeta.language.structure.Class.class, !IS_TRANSIENT,
-				!IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES,
-				!IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, !IS_ORDERED);
-
-		op = addEOperation(classEClass, this.getObject(), "clone", 0, 1,
-				IS_UNIQUE, IS_ORDERED);
-		addEParameter(op, this.getObject(), "objectToClone", 0, 1, IS_UNIQUE,
-				IS_ORDERED);
-
-		addEOperation(classEClass, this.getObject(), "_new", 0, 1, IS_UNIQUE,
-				IS_ORDERED);
-
-		op = addEOperation(classEClass, this.getObject(), "deepClone", 0, 1,
-				IS_UNIQUE, IS_ORDERED);
-		addEParameter(op, this.getObject(), "objectToClone", 0, 1, IS_UNIQUE,
-				IS_ORDERED);
-
-		op = addEOperation(classEClass, null, "allAttributes", 0, 1, IS_UNIQUE,
-				IS_ORDERED);
-		g1 = createEGenericType(theStandardPackage.getSet());
-		g2 = createEGenericType(this.getProperty());
-		g1.getETypeArguments().add(g2);
-		initEOperation(op, g1);
-
-		op = addEOperation(classEClass, null, "allSuperClasses", 0, 1,
-				IS_UNIQUE, IS_ORDERED);
-		g1 = createEGenericType(theStandardPackage.getSet());
-		g2 = createEGenericType(this.getClass_());
-		g1.getETypeArguments().add(g2);
-		initEOperation(op, g1);
-
-		op = addEOperation(classEClass, theStandardPackage.getJavaBoolean(),
-				"equals", 0, 1, IS_UNIQUE, IS_ORDERED);
-		addEParameter(op, this.getObject(), "other", 0, 1, IS_UNIQUE,
-				IS_ORDERED);
-
-		op = addEOperation(classEClass, null, "applyPass2", 0, 1, IS_UNIQUE,
-				!IS_ORDERED);
-		addEParameter(op, theKm2ecorePackage.getKM2EcoreContext(), "context",
-				0, 1, IS_UNIQUE, IS_ORDERED);
-
-		addEOperation(classEClass, this.getClassDefinition(),
-				"getClassDefinitionAsTyped", 0, 1, IS_UNIQUE, IS_ORDERED);
-
-		op = addEOperation(classEClass, null, "setLinks", 0, 1, IS_UNIQUE,
-				!IS_ORDERED);
-		addEParameter(op, theKm2ecorePackage.getKM2EcoreContext(), "context",
-				0, 1, IS_UNIQUE, IS_ORDERED);
-
-		addEOperation(classEClass, theStandardPackage.getJavaString(),
-				"toString", 0, 1, IS_UNIQUE, IS_ORDERED);
-
-		op = addEOperation(classEClass, null, "applyPass2BehaviorJava", 0, 1,
-				IS_UNIQUE, !IS_ORDERED);
-		addEParameter(op, theKm2ecorePackage.getKM2EcoreContext(), "context",
-				0, 1, IS_UNIQUE, IS_ORDERED);
-
-		initEClass(genericTypeDefinitionEClass, GenericTypeDefinition.class,
-				"GenericTypeDefinition", !IS_ABSTRACT, !IS_INTERFACE,
-				IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getGenericTypeDefinition_TypeParameter(), this
-				.getTypeVariable(), null, "typeParameter", null, 0, -1,
-				GenericTypeDefinition.class, !IS_TRANSIENT, !IS_VOLATILE,
-				IS_CHANGEABLE, IS_COMPOSITE, IS_RESOLVE_PROXIES,
-				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(typeEClass, Type.class, "Type", !IS_ABSTRACT, !IS_INTERFACE,
 				IS_GENERATED_INSTANCE_CLASS);
@@ -3438,20 +2712,20 @@ public class StructurePackageImpl extends EPackageImpl implements
 		addEOperation(typeEClass, theStandardPackage.getJavaString(),
 				"getTypeQName", 0, 1, IS_UNIQUE, IS_ORDERED);
 
-		addEOperation(typeEClass, theStandardPackage.getJavaBoolean(),
-				"isPrimitiveType", 0, 1, IS_UNIQUE, IS_ORDERED);
-
 		op = addEOperation(typeEClass, theStandardPackage.getJavaBoolean(),
 				"isSubTypeOf", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, this.getType(), "object", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		addEOperation(typeEClass, theStandardPackage.getJavaBoolean(),
-				"isEDataType", 0, 1, IS_UNIQUE, IS_ORDERED);
+				"isPrimitiveType", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		op = addEOperation(typeEClass, theStandardPackage.getJavaBoolean(),
 				"isInstance", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, this.getObject(), "element", 0, 1, IS_UNIQUE,
 				IS_ORDERED);
+
+		addEOperation(typeEClass, theStandardPackage.getJavaBoolean(),
+				"isEDataType", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		op = addEOperation(typeEClass, theStandardPackage.getJavaBoolean(),
 				"isSuperTypeOf", 0, 1, IS_UNIQUE, IS_ORDERED);
@@ -3460,87 +2734,105 @@ public class StructurePackageImpl extends EPackageImpl implements
 		addEOperation(typeEClass, theStandardPackage.getJavaBoolean(),
 				"isEnumeration", 0, 1, IS_UNIQUE, IS_ORDERED);
 
-		initEClass(typeContainerEClass, TypeContainer.class, "TypeContainer",
-				IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getTypeContainer_ContainedType(), this.getType(), this
-				.getType_TypeContainer(), "containedType", null, 0, -1,
-				TypeContainer.class, !IS_TRANSIENT, !IS_VOLATILE,
-				IS_CHANGEABLE, IS_COMPOSITE, IS_RESOLVE_PROXIES,
-				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		initEClass(typeVariableBindingEClass, TypeVariableBinding.class,
-				"TypeVariableBinding", !IS_ABSTRACT, !IS_INTERFACE,
+		initEClass(classDefinitionEClass, ClassDefinition.class,
+				"ClassDefinition", !IS_ABSTRACT, !IS_INTERFACE,
 				IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getTypeVariableBinding_Type(), this.getType(), null,
-				"type", null, 1, 1, TypeVariableBinding.class, !IS_TRANSIENT,
-				!IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES,
-				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getTypeVariableBinding_Variable(), this
-				.getTypeVariable(), null, "variable", null, 1, 1,
-				TypeVariableBinding.class, !IS_TRANSIENT, !IS_VOLATILE,
-				IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES,
-				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		initEClass(typedElementEClass, TypedElement.class, "TypedElement",
-				IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getTypedElement_Type(), this.getType(), null, "type",
-				null, 0, 1, TypedElement.class, !IS_TRANSIENT, !IS_VOLATILE,
-				IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES,
-				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		initEClass(typeDefinitionEClass, TypeDefinition.class,
-				"TypeDefinition", !IS_ABSTRACT, !IS_INTERFACE,
-				IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getTypeDefinition_IsAspect(), theStandardPackage
-				.getJavaBoolean(), "isAspect", "false", 0, 1,
-				TypeDefinition.class, !IS_TRANSIENT, !IS_VOLATILE,
+		initEReference(getClassDefinition_OwnedOperation(),
+				this.getOperation(), this.getOperation_OwningClass(),
+				"ownedOperation", null, 0, -1, ClassDefinition.class,
+				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE,
+				IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED,
+				IS_ORDERED);
+		initEAttribute(getClassDefinition_IsAbstract(), theStandardPackage
+				.getJavaBoolean(), "isAbstract", "false", 0, 1,
+				ClassDefinition.class, !IS_TRANSIENT, !IS_VOLATILE,
 				IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED,
 				IS_ORDERED);
-
-		initEClass(namedElementEClass, NamedElement.class, "NamedElement",
-				IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getNamedElement_Name(), theStandardPackage
-				.getJavaString(), "name", null, 1, 1, NamedElement.class,
-				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE,
-				!IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		addEOperation(namedElementEClass, theStandardPackage.getJavaString(),
-				"qualifiedName", 0, 1, IS_UNIQUE, IS_ORDERED);
-
-		initEClass(dataTypeEClass, DataType.class, "DataType", IS_ABSTRACT,
-				!IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
-		initEClass(parameterizedTypeEClass, ParameterizedType.class,
-				"ParameterizedType", IS_ABSTRACT, !IS_INTERFACE,
-				IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getParameterizedType_TypeParamBinding(), this
-				.getTypeVariableBinding(), null, "typeParamBinding", null, 0,
-				-1, ParameterizedType.class, !IS_TRANSIENT, !IS_VOLATILE,
+		initEReference(getClassDefinition_SuperType(), this.getType(), null,
+				"superType", null, 0, -1, ClassDefinition.class, !IS_TRANSIENT,
+				!IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES,
+				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getClassDefinition_Inv(), this.getConstraint(), this
+				.getConstraint_InvOwner(), "inv", null, 0, -1,
+				ClassDefinition.class, !IS_TRANSIENT, !IS_VOLATILE,
 				IS_CHANGEABLE, IS_COMPOSITE, IS_RESOLVE_PROXIES,
 				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getParameterizedType_TypeDefinition(), this
-				.getGenericTypeDefinition(), null, "typeDefinition", null, 1,
-				1, ParameterizedType.class, !IS_TRANSIENT, !IS_VOLATILE,
+		initEReference(getClassDefinition_SubClassDefinitions(), this
+				.getClassDefinition(), null, "subClassDefinitions", null, 0,
+				-1, ClassDefinition.class, !IS_TRANSIENT, !IS_VOLATILE,
 				IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES,
 				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getParameterizedType_VirtualTypeBinding(), this
-				.getTypeVariableBinding(), null, "virtualTypeBinding", null, 0,
-				-1, ParameterizedType.class, !IS_TRANSIENT, !IS_VOLATILE,
+		initEReference(getClassDefinition_OwnedAttribute(), this.getProperty(),
+				this.getProperty_OwningClass(), "ownedAttribute", null, 0, -1,
+				ClassDefinition.class, !IS_TRANSIENT, !IS_VOLATILE,
 				IS_CHANGEABLE, IS_COMPOSITE, IS_RESOLVE_PROXIES,
 				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getClassDefinition_EcoreDataType(), theEcorePackage_2
+				.getEDataType(), null, "ecoreDataType", null, 0, 1,
+				ClassDefinition.class, !IS_TRANSIENT, !IS_VOLATILE,
+				IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES,
+				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		op = addEOperation(parameterizedTypeEClass, theStandardPackage
-				.getJavaString(), "createBehaviorJava", 0, 1, IS_UNIQUE,
+		addEOperation(classDefinitionEClass, theStandardPackage
+				.getJavaBoolean(), "isMappedToJavaRawType", 0, 1, IS_UNIQUE,
 				IS_ORDERED);
+
+		op = addEOperation(classDefinitionEClass, null, "applyPass1", 0, 1,
+				IS_UNIQUE, !IS_ORDERED);
 		addEParameter(op, theKm2ecorePackage.getKM2EcoreContext(), "context",
 				0, 1, IS_UNIQUE, IS_ORDERED);
 
-		initEClass(typeVariableEClass, TypeVariable.class, "TypeVariable",
-				IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getTypeVariable_Supertype(), this.getType(), null,
-				"supertype", null, 0, 1, TypeVariable.class, !IS_TRANSIENT,
-				!IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES,
-				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		op = addEOperation(classDefinitionEClass, null, "applyPass2", 0, 1,
+				IS_UNIQUE, !IS_ORDERED);
+		addEParameter(op, theKm2ecorePackage.getKM2EcoreContext(), "context",
+				0, 1, IS_UNIQUE, IS_ORDERED);
+
+		addEOperation(classDefinitionEClass, theStandardPackage
+				.getJavaBoolean(), "isValueType", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		op = addEOperation(classDefinitionEClass, null, "setLinks", 0, 1,
+				IS_UNIQUE, !IS_ORDERED);
+		addEParameter(op, theKm2ecorePackage.getKM2EcoreContext(), "context",
+				0, 1, IS_UNIQUE, IS_ORDERED);
+
+		addEOperation(classDefinitionEClass, null,
+				"setSubClassDefinitionToSuperTypes", 0, 1, IS_UNIQUE,
+				IS_ORDERED);
+
+		op = addEOperation(classDefinitionEClass, null, "allSuperTypes", 0, 1,
+				IS_UNIQUE, IS_ORDERED);
+		g1 = createEGenericType(theStandardPackage.getSet());
+		g2 = createEGenericType(this.getType());
+		g1.getETypeArguments().add(g2);
+		initEOperation(op, g1);
+
+		op = addEOperation(classDefinitionEClass, theStandardPackage
+				.getJavaBoolean(), "isSubTypeOf", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, theStandardPackage.getJavaString(),
+				"superType_qualifiedName", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		addEOperation(classDefinitionEClass, theStandardPackage
+				.getJavaBoolean(), "isIterator", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		addEOperation(classDefinitionEClass, theStandardPackage
+				.getJavaBoolean(), "isCollection", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		op = addEOperation(classDefinitionEClass,
+				theEcorePackage_2.getEClass(), "createEcoreModelElement", 0, 1,
+				IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, theKm2ecorePackage.getKM2EcoreContext(), "context",
+				0, 1, IS_UNIQUE, IS_ORDERED);
+
+		op = addEOperation(classDefinitionEClass, null,
+				"applyPass2BehaviorJava", 0, 1, IS_UNIQUE, !IS_ORDERED);
+		addEParameter(op, theKm2ecorePackage.getKM2EcoreContext(), "context",
+				0, 1, IS_UNIQUE, IS_ORDERED);
+
+		addEOperation(classDefinitionEClass, this.getOperation(),
+				"getterAllOperation", 0, -1, IS_UNIQUE, !IS_ORDERED);
+
+		addEOperation(classDefinitionEClass, this.getProperty(),
+				"getterAllAttribute", 0, -1, IS_UNIQUE, !IS_ORDERED);
 
 		initEClass(modelTypeEClass, ModelType.class, "ModelType", !IS_ABSTRACT,
 				!IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -3558,33 +2850,67 @@ public class StructurePackageImpl extends EPackageImpl implements
 				IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, this.getModel(), "m", 0, 1, IS_UNIQUE, IS_ORDERED);
 
-		initEClass(modelTypeVariableEClass, ModelTypeVariable.class,
-				"ModelTypeVariable", !IS_ABSTRACT, !IS_INTERFACE,
+		initEClass(classEClass, kermeta.language.structure.Class.class,
+				"Class", !IS_ABSTRACT, !IS_INTERFACE,
 				IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getModelTypeVariable_VirtualType(), this
-				.getVirtualType(), this.getVirtualType_ModelType(),
-				"virtualType", null, 0, -1, ModelTypeVariable.class,
-				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE,
-				IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED,
+
+		op = addEOperation(classEClass, this.getObject(), "clone", 0, 1,
+				IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, this.getObject(), "objectToClone", 0, 1, IS_UNIQUE,
 				IS_ORDERED);
 
-		initEClass(virtualTypeEClass, VirtualType.class, "VirtualType",
-				!IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getVirtualType_ModelType(), this.getModelTypeVariable(),
-				this.getModelTypeVariable_VirtualType(), "modelType", null, 1,
-				1, VirtualType.class, !IS_TRANSIENT, !IS_VOLATILE,
-				IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES,
-				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getVirtualType_TypeParamBinding(), this
-				.getTypeVariableBinding(), null, "typeParamBinding", null, 0,
-				-1, VirtualType.class, !IS_TRANSIENT, !IS_VOLATILE,
-				IS_CHANGEABLE, IS_COMPOSITE, IS_RESOLVE_PROXIES,
-				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getVirtualType_ClassDefinition(), this
-				.getClassDefinition(), null, "classDefinition", null, 1, 1,
-				VirtualType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE,
-				!IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE,
-				!IS_DERIVED, IS_ORDERED);
+		op = addEOperation(classEClass, this.getObject(), "deepClone", 0, 1,
+				IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, this.getObject(), "objectToClone", 0, 1, IS_UNIQUE,
+				IS_ORDERED);
+
+		addEOperation(classEClass, this.getObject(), "_new", 0, 1, IS_UNIQUE,
+				IS_ORDERED);
+
+		op = addEOperation(classEClass, null, "allAttributes", 0, 1, IS_UNIQUE,
+				IS_ORDERED);
+		g1 = createEGenericType(theStandardPackage.getSet());
+		g2 = createEGenericType(this.getProperty());
+		g1.getETypeArguments().add(g2);
+		initEOperation(op, g1);
+
+		op = addEOperation(classEClass, null, "allSuperClasses", 0, 1,
+				IS_UNIQUE, IS_ORDERED);
+		g1 = createEGenericType(theStandardPackage.getSet());
+		g2 = createEGenericType(this.getClass_());
+		g1.getETypeArguments().add(g2);
+		initEOperation(op, g1);
+
+		op = addEOperation(classEClass, theStandardPackage.getJavaBoolean(),
+				"equals", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, this.getObject(), "other", 0, 1, IS_UNIQUE,
+				IS_ORDERED);
+
+		addEOperation(classEClass, theStandardPackage.getJavaString(),
+				"toString", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		op = addEOperation(classEClass, null, "setLinks", 0, 1, IS_UNIQUE,
+				!IS_ORDERED);
+		addEParameter(op, theKm2ecorePackage.getKM2EcoreContext(), "context",
+				0, 1, IS_UNIQUE, IS_ORDERED);
+
+		addEOperation(classEClass, this.getOperation(), "getterOwnedOperation",
+				0, -1, IS_UNIQUE, !IS_ORDERED);
+
+		addEOperation(classEClass, this.getClass_(), "getterSuperClass", 0, -1,
+				IS_UNIQUE, IS_ORDERED);
+
+		addEOperation(classEClass, theStandardPackage.getJavaBoolean(),
+				"getterIsAbstract", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		addEOperation(classEClass, theStandardPackage.getJavaString(),
+				"getterName", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		addEOperation(classEClass, this.getClassDefinition(),
+				"getterClassDefinition", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		addEOperation(classEClass, this.getProperty(), "getterOwnedAttribute",
+				0, -1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(modelEClass, Model.class, "Model", !IS_ABSTRACT,
 				!IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -3626,6 +2952,619 @@ public class StructurePackageImpl extends EPackageImpl implements
 		g1.getETypeArguments().add(g2);
 		initEOperation(op, g1);
 
+		initEClass(namedElementEClass, NamedElement.class, "NamedElement",
+				!IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getNamedElement_Name(), theStandardPackage
+				.getJavaString(), "name", null, 1, 1, NamedElement.class,
+				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE,
+				!IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		addEOperation(namedElementEClass, theStandardPackage.getJavaString(),
+				"qualifiedName", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		initEClass(enumerationEClass, Enumeration.class, "Enumeration",
+				!IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getEnumeration_OwnedLiteral(), this
+				.getEnumerationLiteral(), this
+				.getEnumerationLiteral_Enumeration(), "ownedLiteral", null, 0,
+				-1, Enumeration.class, !IS_TRANSIENT, !IS_VOLATILE,
+				IS_CHANGEABLE, IS_COMPOSITE, IS_RESOLVE_PROXIES,
+				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		op = addEOperation(enumerationEClass, theStandardPackage
+				.getJavaString(), "createBehaviorJava", 0, 1, IS_UNIQUE,
+				IS_ORDERED);
+		addEParameter(op, theKm2ecorePackage.getKM2EcoreContext(), "context",
+				0, 1, IS_UNIQUE, IS_ORDERED);
+
+		op = addEOperation(enumerationEClass, this.getObject(), "clone", 0, 1,
+				IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, this.getObject(), "objectToClone", 0, 1, IS_UNIQUE,
+				IS_ORDERED);
+
+		op = addEOperation(enumerationEClass, null, "applyPass1", 0, 1,
+				IS_UNIQUE, !IS_ORDERED);
+		addEParameter(op, theKm2ecorePackage.getKM2EcoreContext(), "context",
+				0, 1, IS_UNIQUE, IS_ORDERED);
+
+		op = addEOperation(enumerationEClass, theEcorePackage_2.getEEnum(),
+				"createEcoreModelElement", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, theKm2ecorePackage.getKM2EcoreContext(), "context",
+				0, 1, IS_UNIQUE, IS_ORDERED);
+
+		initEClass(functionTypeEClass, FunctionType.class, "FunctionType",
+				!IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getFunctionType_Left(), this.getType(), null, "left",
+				null, 0, 1, FunctionType.class, !IS_TRANSIENT, !IS_VOLATILE,
+				IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES,
+				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getFunctionType_Right(), this.getType(), null, "right",
+				null, 0, 1, FunctionType.class, !IS_TRANSIENT, !IS_VOLATILE,
+				IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES,
+				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		op = addEOperation(functionTypeEClass, theStandardPackage
+				.getJavaString(), "createBehaviorJava", 0, 1, IS_UNIQUE,
+				IS_ORDERED);
+		addEParameter(op, theKm2ecorePackage.getKM2EcoreContext(), "context",
+				0, 1, IS_UNIQUE, IS_ORDERED);
+
+		initEClass(propertyEClass, Property.class, "Property", !IS_ABSTRACT,
+				!IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getProperty_Default(), theStandardPackage
+				.getJavaString(), "default", null, 0, 1, Property.class,
+				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE,
+				!IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getProperty_IsDerived(), theStandardPackage
+				.getJavaBoolean(), "isDerived", "false", 0, 1, Property.class,
+				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE,
+				!IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getProperty_Opposite(), this.getProperty(), null,
+				"opposite", null, 0, 1, Property.class, !IS_TRANSIENT,
+				!IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES,
+				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getProperty_GetterBody(), theBehaviorPackage
+				.getExpression(), null, "getterBody", null, 0, 1,
+				Property.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE,
+				IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE,
+				!IS_DERIVED, IS_ORDERED);
+		initEAttribute(getProperty_IsReadOnly(), theStandardPackage
+				.getJavaBoolean(), "isReadOnly", "false", 0, 1, Property.class,
+				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE,
+				!IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getProperty_SetterBody(), theBehaviorPackage
+				.getExpression(), null, "setterBody", null, 0, 1,
+				Property.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE,
+				IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE,
+				!IS_DERIVED, IS_ORDERED);
+		initEReference(getProperty_OwningClass(), this.getClassDefinition(),
+				this.getClassDefinition_OwnedAttribute(), "owningClass", null,
+				0, 1, Property.class, !IS_TRANSIENT, !IS_VOLATILE,
+				IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES,
+				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getProperty_IsSetterAbstract(), theStandardPackage
+				.getJavaBoolean(), "isSetterAbstract", "false", 0, 1,
+				Property.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE,
+				!IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getProperty_IsID(), theStandardPackage.getJavaBoolean(),
+				"isID", "false", 0, 1, Property.class, !IS_TRANSIENT,
+				!IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE,
+				!IS_DERIVED, IS_ORDERED);
+		initEAttribute(getProperty_IsComposite(), theStandardPackage
+				.getJavaBoolean(), "isComposite", "false", 0, 1,
+				Property.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE,
+				!IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getProperty_IsGetterAbstract(), theStandardPackage
+				.getJavaBoolean(), "isGetterAbstract", "false", 0, 1,
+				Property.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE,
+				!IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		op = addEOperation(propertyEClass, theStandardPackage.getJavaString(),
+				"createBehaviorJava", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, theKm2ecorePackage.getKM2EcoreContext(), "context",
+				0, 1, IS_UNIQUE, IS_ORDERED);
+
+		op = addEOperation(propertyEClass, null, "applyPass1", 0, 1, IS_UNIQUE,
+				!IS_ORDERED);
+		addEParameter(op, theKm2ecorePackage.getKM2EcoreContext(), "context",
+				0, 1, IS_UNIQUE, IS_ORDERED);
+
+		addEOperation(propertyEClass, theStandardPackage.getJavaString(),
+				"printGetAccessor", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		op = addEOperation(propertyEClass, null, "applyPass2", 0, 1, IS_UNIQUE,
+				!IS_ORDERED);
+		addEParameter(op, theKm2ecorePackage.getKM2EcoreContext(), "context",
+				0, 1, IS_UNIQUE, IS_ORDERED);
+
+		op = addEOperation(propertyEClass, theEcorePackage_2
+				.getEStructuralFeature(), "createEcoreModelElement", 0, 1,
+				IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, theKm2ecorePackage.getKM2EcoreContext(), "context",
+				0, 1, IS_UNIQUE, IS_ORDERED);
+
+		addEOperation(propertyEClass, theStandardPackage.getJavaString(),
+				"printSetAccessor", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		op = addEOperation(propertyEClass, null, "setLinks", 0, 1, IS_UNIQUE,
+				!IS_ORDERED);
+		addEParameter(op, theKm2ecorePackage.getKM2EcoreContext(), "context",
+				0, 1, IS_UNIQUE, IS_ORDERED);
+
+		op = addEOperation(propertyEClass, null, "applyPass2BehaviorJava", 0,
+				1, IS_UNIQUE, !IS_ORDERED);
+		addEParameter(op, theKm2ecorePackage.getKM2EcoreContext(), "context",
+				0, 1, IS_UNIQUE, IS_ORDERED);
+
+		initEClass(typeContainerEClass, TypeContainer.class, "TypeContainer",
+				IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getTypeContainer_ContainedType(), this.getType(), this
+				.getType_TypeContainer(), "containedType", null, 0, -1,
+				TypeContainer.class, !IS_TRANSIENT, !IS_VOLATILE,
+				IS_CHANGEABLE, IS_COMPOSITE, IS_RESOLVE_PROXIES,
+				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(enumerationLiteralEClass, EnumerationLiteral.class,
+				"EnumerationLiteral", !IS_ABSTRACT, !IS_INTERFACE,
+				IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getEnumerationLiteral_Enumeration(), this
+				.getEnumeration(), this.getEnumeration_OwnedLiteral(),
+				"enumeration", null, 0, 1, EnumerationLiteral.class,
+				IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE,
+				IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED,
+				IS_ORDERED);
+
+		op = addEOperation(enumerationLiteralEClass, null, "applyPass1", 0, 1,
+				IS_UNIQUE, !IS_ORDERED);
+		addEParameter(op, theKm2ecorePackage.getKM2EcoreContext(), "context",
+				0, 1, IS_UNIQUE, IS_ORDERED);
+
+		op = addEOperation(enumerationLiteralEClass, theEcorePackage_2
+				.getEEnumLiteral(), "createEcoreModelElement", 0, 1, IS_UNIQUE,
+				IS_ORDERED);
+		addEParameter(op, theKm2ecorePackage.getKM2EcoreContext(), "context",
+				0, 1, IS_UNIQUE, IS_ORDERED);
+
+		initEClass(typeVariableBindingEClass, TypeVariableBinding.class,
+				"TypeVariableBinding", !IS_ABSTRACT, !IS_INTERFACE,
+				IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getTypeVariableBinding_Type(), this.getType(), null,
+				"type", null, 1, 1, TypeVariableBinding.class, !IS_TRANSIENT,
+				!IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES,
+				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getTypeVariableBinding_Variable(), this
+				.getTypeVariable(), null, "variable", null, 1, 1,
+				TypeVariableBinding.class, !IS_TRANSIENT, !IS_VOLATILE,
+				IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES,
+				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(multiplicityElementEClass, MultiplicityElement.class,
+				"MultiplicityElement", !IS_ABSTRACT, !IS_INTERFACE,
+				IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getMultiplicityElement_IsOrdered(), theStandardPackage
+				.getJavaBoolean(), "isOrdered", "false", 0, 1,
+				MultiplicityElement.class, !IS_TRANSIENT, !IS_VOLATILE,
+				IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED,
+				IS_ORDERED);
+		initEAttribute(getMultiplicityElement_Upper(), theStandardPackage
+				.getJavaInteger(), "upper", null, 0, 1,
+				MultiplicityElement.class, !IS_TRANSIENT, !IS_VOLATILE,
+				IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED,
+				IS_ORDERED);
+		initEAttribute(getMultiplicityElement_Lower(), theStandardPackage
+				.getJavaInteger(), "lower", null, 0, 1,
+				MultiplicityElement.class, !IS_TRANSIENT, !IS_VOLATILE,
+				IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED,
+				IS_ORDERED);
+		initEAttribute(getMultiplicityElement_IsUnique(), theStandardPackage
+				.getJavaBoolean(), "isUnique", "false", 0, 1,
+				MultiplicityElement.class, !IS_TRANSIENT, !IS_VOLATILE,
+				IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED,
+				IS_ORDERED);
+
+		addEOperation(multiplicityElementEClass, theStandardPackage
+				.getJavaString(), "getRecopyInValueTypes", 0, 1, IS_UNIQUE,
+				IS_ORDERED);
+
+		addEOperation(multiplicityElementEClass, theStandardPackage
+				.getJavaString(), "getFinalName", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		addEOperation(multiplicityElementEClass, theStandardPackage
+				.getJavaString(), "getEMFRenameAs", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		op = addEOperation(multiplicityElementEClass, theStandardPackage
+				.getJavaString(), "ppReturnResult", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, theKm2ecorePackage.getKM2EcoreContext(), "context",
+				0, 1, IS_UNIQUE, IS_ORDERED);
+
+		initEClass(typedElementEClass, TypedElement.class, "TypedElement",
+				IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getTypedElement_Type(), this.getType(), null, "type",
+				null, 0, 1, TypedElement.class, !IS_TRANSIENT, !IS_VOLATILE,
+				IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES,
+				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(typeDefinitionEClass, TypeDefinition.class,
+				"TypeDefinition", !IS_ABSTRACT, !IS_INTERFACE,
+				IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getTypeDefinition_IsAspect(), theStandardPackage
+				.getJavaBoolean(), "isAspect", "false", 0, 1,
+				TypeDefinition.class, !IS_TRANSIENT, !IS_VOLATILE,
+				IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED,
+				IS_ORDERED);
+
+		initEClass(dataTypeEClass, DataType.class, "DataType", IS_ABSTRACT,
+				!IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(packageEClass, kermeta.language.structure.Package.class,
+				"Package", !IS_ABSTRACT, !IS_INTERFACE,
+				IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getPackage_NestingPackage(), this.getPackage(), this
+				.getPackage_NestedPackage(), "nestingPackage", null, 0, 1,
+				kermeta.language.structure.Package.class, IS_TRANSIENT,
+				!IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES,
+				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getPackage_NestedPackage(), this.getPackage(), this
+				.getPackage_NestingPackage(), "nestedPackage", null, 0, -1,
+				kermeta.language.structure.Package.class, !IS_TRANSIENT,
+				!IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, IS_RESOLVE_PROXIES,
+				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getPackage_Uri(), theStandardPackage.getJavaString(),
+				"uri", null, 0, 1, kermeta.language.structure.Package.class,
+				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE,
+				!IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		op = addEOperation(packageEClass, null, "applyPass1", 0, 1, IS_UNIQUE,
+				!IS_ORDERED);
+		addEParameter(op, theKm2ecorePackage.getKM2EcoreContext(), "context",
+				0, 1, IS_UNIQUE, IS_ORDERED);
+
+		op = addEOperation(packageEClass, theEcorePackage_2.getEPackage(),
+				"createEcoreModelElement", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, theKm2ecorePackage.getKM2EcoreContext(), "context",
+				0, 1, IS_UNIQUE, IS_ORDERED);
+
+		op = addEOperation(packageEClass, null, "getAllSubPackages", 0, 1,
+				IS_UNIQUE, IS_ORDERED);
+		g1 = createEGenericType(theStandardPackage.getOrderedSet());
+		g2 = createEGenericType(this.getPackage());
+		g1.getETypeArguments().add(g2);
+		initEOperation(op, g1);
+
+		op = addEOperation(packageEClass, null, "applyPass2BehaviorJava", 0, 1,
+				IS_UNIQUE, !IS_ORDERED);
+		addEParameter(op, theKm2ecorePackage.getKM2EcoreContext(), "context",
+				0, 1, IS_UNIQUE, IS_ORDERED);
+
+		initEClass(primitiveTypeEClass, PrimitiveType.class, "PrimitiveType",
+				!IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getPrimitiveType_InstanceType(), this.getType(), null,
+				"instanceType", null, 0, 1, PrimitiveType.class, !IS_TRANSIENT,
+				!IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES,
+				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		op = addEOperation(primitiveTypeEClass, theStandardPackage
+				.getJavaString(), "createBehaviorJava", 0, 1, IS_UNIQUE,
+				IS_ORDERED);
+		addEParameter(op, theKm2ecorePackage.getKM2EcoreContext(), "context",
+				0, 1, IS_UNIQUE, IS_ORDERED);
+
+		op = addEOperation(primitiveTypeEClass, null, "applyPass1", 0, 1,
+				IS_UNIQUE, !IS_ORDERED);
+		addEParameter(op, theKm2ecorePackage.getKM2EcoreContext(), "context",
+				0, 1, IS_UNIQUE, IS_ORDERED);
+
+		op = addEOperation(primitiveTypeEClass, theEcorePackage_2
+				.getEDataType(), "createEcoreModelElement", 0, 1, IS_UNIQUE,
+				IS_ORDERED);
+		addEParameter(op, theKm2ecorePackage.getKM2EcoreContext(), "context",
+				0, 1, IS_UNIQUE, IS_ORDERED);
+
+		initEClass(tagEClass, Tag.class, "Tag", !IS_ABSTRACT, !IS_INTERFACE,
+				IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getTag_Name(), theStandardPackage.getJavaString(),
+				"name", null, 0, 1, Tag.class, !IS_TRANSIENT, !IS_VOLATILE,
+				IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED,
+				IS_ORDERED);
+		initEAttribute(getTag_Value(), theStandardPackage.getJavaString(),
+				"value", null, 0, 1, Tag.class, !IS_TRANSIENT, !IS_VOLATILE,
+				IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED,
+				IS_ORDERED);
+		initEReference(getTag_Object(), this.getObject(), this.getObject_Tag(),
+				"object", null, 1, -1, Tag.class, !IS_TRANSIENT, !IS_VOLATILE,
+				IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES,
+				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		op = addEOperation(tagEClass, null, "applyPass1", 0, 1, IS_UNIQUE,
+				!IS_ORDERED);
+		addEParameter(op, theKm2ecorePackage.getKM2EcoreContext(), "context",
+				0, 1, IS_UNIQUE, IS_ORDERED);
+
+		op = addEOperation(tagEClass, theEcorePackage_2.getEAnnotation(),
+				"createEcoreModelElement", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, theKm2ecorePackage.getKM2EcoreContext(), "context",
+				0, 1, IS_UNIQUE, IS_ORDERED);
+
+		initEClass(constraintEClass, Constraint.class, "Constraint",
+				!IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getConstraint_Body(),
+				theBehaviorPackage.getExpression(), null, "body", null, 1, 1,
+				Constraint.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE,
+				IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE,
+				!IS_DERIVED, !IS_ORDERED);
+		initEReference(getConstraint_PreOwner(), this.getOperation(), this
+				.getOperation_Pre(), "preOwner", null, 0, 1, Constraint.class,
+				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE,
+				IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED,
+				IS_ORDERED);
+		initEAttribute(getConstraint_Stereotype(), this.getConstraintType(),
+				"stereotype", null, 0, 1, Constraint.class, !IS_TRANSIENT,
+				!IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE,
+				!IS_DERIVED, IS_ORDERED);
+		initEReference(getConstraint_PostOwner(), this.getOperation(), this
+				.getOperation_Post(), "postOwner", null, 0, 1,
+				Constraint.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE,
+				!IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE,
+				!IS_DERIVED, IS_ORDERED);
+		initEAttribute(getConstraint_Language(), this.getConstraintLanguage(),
+				"language", null, 0, 1, Constraint.class, !IS_TRANSIENT,
+				!IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE,
+				!IS_DERIVED, IS_ORDERED);
+		initEReference(getConstraint_InvOwner(), this.getClassDefinition(),
+				this.getClassDefinition_Inv(), "invOwner", null, 0, 1,
+				Constraint.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE,
+				!IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE,
+				!IS_DERIVED, IS_ORDERED);
+
+		op = addEOperation(constraintEClass, null, "applyPass1", 0, 1,
+				IS_UNIQUE, !IS_ORDERED);
+		addEParameter(op, theKm2ecorePackage.getKM2EcoreContext(), "context",
+				0, 1, IS_UNIQUE, IS_ORDERED);
+
+		op = addEOperation(constraintEClass,
+				theEcorePackage_2.getEAnnotation(), "createEcoreModelElement",
+				0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, theKm2ecorePackage.getKM2EcoreContext(), "context",
+				0, 1, IS_UNIQUE, IS_ORDERED);
+
+		initEClass(genericTypeDefinitionEClass, GenericTypeDefinition.class,
+				"GenericTypeDefinition", IS_ABSTRACT, !IS_INTERFACE,
+				IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getGenericTypeDefinition_TypeParameter(), this
+				.getTypeVariable(), null, "typeParameter", null, 0, -1,
+				GenericTypeDefinition.class, !IS_TRANSIENT, !IS_VOLATILE,
+				IS_CHANGEABLE, IS_COMPOSITE, IS_RESOLVE_PROXIES,
+				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(parameterizedTypeEClass, ParameterizedType.class,
+				"ParameterizedType", IS_ABSTRACT, !IS_INTERFACE,
+				IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getParameterizedType_TypeParamBinding(), this
+				.getTypeVariableBinding(), null, "typeParamBinding", null, 0,
+				-1, ParameterizedType.class, !IS_TRANSIENT, !IS_VOLATILE,
+				IS_CHANGEABLE, IS_COMPOSITE, IS_RESOLVE_PROXIES,
+				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getParameterizedType_TypeDefinition(), this
+				.getGenericTypeDefinition(), null, "typeDefinition", null, 1,
+				1, ParameterizedType.class, !IS_TRANSIENT, !IS_VOLATILE,
+				IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES,
+				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getParameterizedType_VirtualTypeBinding(), this
+				.getTypeVariableBinding(), null, "virtualTypeBinding", null, 0,
+				-1, ParameterizedType.class, !IS_TRANSIENT, !IS_VOLATILE,
+				IS_CHANGEABLE, IS_COMPOSITE, IS_RESOLVE_PROXIES,
+				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		op = addEOperation(parameterizedTypeEClass, theStandardPackage
+				.getJavaString(), "createBehaviorJava", 0, 1, IS_UNIQUE,
+				IS_ORDERED);
+		addEParameter(op, theKm2ecorePackage.getKM2EcoreContext(), "context",
+				0, 1, IS_UNIQUE, IS_ORDERED);
+
+		addEOperation(parameterizedTypeEClass, this.getClassDefinition(),
+				"getClassDefinitionAsTyped", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		initEClass(typeVariableEClass, TypeVariable.class, "TypeVariable",
+				IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getTypeVariable_Supertype(), this.getType(), null,
+				"supertype", null, 0, 1, TypeVariable.class, !IS_TRANSIENT,
+				!IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES,
+				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(objectTypeVariableEClass, ObjectTypeVariable.class,
+				"ObjectTypeVariable", !IS_ABSTRACT, !IS_INTERFACE,
+				IS_GENERATED_INSTANCE_CLASS);
+
+		op = addEOperation(objectTypeVariableEClass, theStandardPackage
+				.getJavaString(), "createBehaviorJava", 0, 1, IS_UNIQUE,
+				IS_ORDERED);
+		addEParameter(op, theKm2ecorePackage.getKM2EcoreContext(), "context",
+				0, 1, IS_UNIQUE, IS_ORDERED);
+
+		op = addEOperation(objectTypeVariableEClass, null, "applyPass1", 0, 1,
+				IS_UNIQUE, !IS_ORDERED);
+		addEParameter(op, theKm2ecorePackage.getKM2EcoreContext(), "context",
+				0, 1, IS_UNIQUE, IS_ORDERED);
+
+		op = addEOperation(objectTypeVariableEClass, theEcorePackage_2
+				.getETypeParameter(), "createEcoreModelElement", 0, 1,
+				IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, theKm2ecorePackage.getKM2EcoreContext(), "context",
+				0, 1, IS_UNIQUE, IS_ORDERED);
+
+		initEClass(modelTypeVariableEClass, ModelTypeVariable.class,
+				"ModelTypeVariable", !IS_ABSTRACT, !IS_INTERFACE,
+				IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getModelTypeVariable_VirtualType(), this
+				.getVirtualType(), this.getVirtualType_ModelType(),
+				"virtualType", null, 0, -1, ModelTypeVariable.class,
+				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE,
+				IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED,
+				IS_ORDERED);
+
+		initEClass(virtualTypeEClass, VirtualType.class, "VirtualType",
+				!IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getVirtualType_ModelType(), this.getModelTypeVariable(),
+				this.getModelTypeVariable_VirtualType(), "modelType", null, 1,
+				1, VirtualType.class, !IS_TRANSIENT, !IS_VOLATILE,
+				IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES,
+				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getVirtualType_TypeParamBinding(), this
+				.getTypeVariableBinding(), null, "typeParamBinding", null, 0,
+				-1, VirtualType.class, !IS_TRANSIENT, !IS_VOLATILE,
+				IS_CHANGEABLE, IS_COMPOSITE, IS_RESOLVE_PROXIES,
+				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getVirtualType_ClassDefinition(), this
+				.getClassDefinition(), null, "classDefinition", null, 1, 1,
+				VirtualType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE,
+				!IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE,
+				!IS_DERIVED, IS_ORDERED);
+
+		initEClass(modelingUnitEClass, ModelingUnit.class, "ModelingUnit",
+				!IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getModelingUnit_EcorePackages(), theEcorePackage_2
+				.getEPackage(), null, "ecorePackages", null, 0, -1,
+				ModelingUnit.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE,
+				!IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE,
+				!IS_DERIVED, IS_ORDERED);
+		initEReference(getModelingUnit_Usings(), this.getUsing(), null,
+				"usings", null, 0, -1, ModelingUnit.class, !IS_TRANSIENT,
+				!IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, IS_RESOLVE_PROXIES,
+				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getModelingUnit_Packages(), this.getPackage(), null,
+				"packages", null, 0, -1, ModelingUnit.class, !IS_TRANSIENT,
+				!IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, IS_RESOLVE_PROXIES,
+				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getModelingUnit_IncludeFilters(), this.getFilter(),
+				null, "includeFilters", null, 0, -1, ModelingUnit.class,
+				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE,
+				IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED,
+				IS_ORDERED);
+		initEReference(getModelingUnit_ExcludeFilters(), this.getFilter(),
+				null, "excludeFilters", null, 0, -1, ModelingUnit.class,
+				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE,
+				IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED,
+				IS_ORDERED);
+		initEReference(getModelingUnit_SuperOperationsToCompileInHelper(), this
+				.getOperation(), null, "superOperationsToCompileInHelper",
+				null, 0, -1, ModelingUnit.class, !IS_TRANSIENT, !IS_VOLATILE,
+				IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES,
+				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getModelingUnit_ReferencedModelingUnits(), this
+				.getModelingUnit(), null, "referencedModelingUnits", null, 0,
+				-1, ModelingUnit.class, !IS_TRANSIENT, !IS_VOLATILE,
+				IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES,
+				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getModelingUnit_Requires(), this.getRequire(), null,
+				"requires", null, 0, -1, ModelingUnit.class, !IS_TRANSIENT,
+				!IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, IS_RESOLVE_PROXIES,
+				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getModelingUnit_EntryPoints(), theEcorePackage_2
+				.getEAnnotation(), null, "entryPoints", null, 0, -1,
+				ModelingUnit.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE,
+				!IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE,
+				!IS_DERIVED, IS_ORDERED);
+
+		op = addEOperation(modelingUnitEClass, this.getPackage(),
+				"retrievePackage", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, theStandardPackage.getJavaString(), "qname", 0, 1,
+				IS_UNIQUE, IS_ORDERED);
+
+		op = addEOperation(modelingUnitEClass, null, "createKRuntimeError", 0,
+				1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, theKm2ecorePackage.getKM2EcoreContext(), "context",
+				0, 1, IS_UNIQUE, IS_ORDERED);
+
+		op = addEOperation(modelingUnitEClass, null, "applyPass1", 0, 1,
+				IS_UNIQUE, !IS_ORDERED);
+		addEParameter(op, theKm2ecorePackage.getKM2EcoreContext(), "context",
+				0, 1, IS_UNIQUE, IS_ORDERED);
+
+		op = addEOperation(modelingUnitEClass, null, "compileSuperOperation",
+				0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, theKm2ecorePackage.getKM2EcoreContext(), "context",
+				0, 1, IS_UNIQUE, IS_ORDERED);
+
+		op = addEOperation(modelingUnitEClass, null, "postprocess", 0, 1,
+				IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, theKm2ecorePackage.getKM2EcoreContext(), "context",
+				0, 1, IS_UNIQUE, IS_ORDERED);
+
+		op = addEOperation(modelingUnitEClass, theEcorePackage_2
+				.getEClassifier(), "getEClassifierByQualifiedName", 0, 1,
+				IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, theStandardPackage.getJavaString(), "qname", 0, 1,
+				IS_UNIQUE, IS_ORDERED);
+
+		op = addEOperation(modelingUnitEClass, null, "preprocess", 0, 1,
+				IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, theKm2ecorePackage.getKM2EcoreContext(), "context",
+				0, 1, IS_UNIQUE, IS_ORDERED);
+
+		op = addEOperation(modelingUnitEClass, null, "compileStaticOperation",
+				0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, this.getOperation(), "op", 0, 1, IS_UNIQUE,
+				IS_ORDERED);
+		addEParameter(op, theKm2ecorePackage.getKM2EcoreContext(), "context",
+				0, 1, IS_UNIQUE, IS_ORDERED);
+
+		op = addEOperation(modelingUnitEClass, theEcorePackage_2
+				.getEAnnotation(), "createEcoreModelElement", 0, 1, IS_UNIQUE,
+				IS_ORDERED);
+		addEParameter(op, theKm2ecorePackage.getKM2EcoreContext(), "context",
+				0, 1, IS_UNIQUE, IS_ORDERED);
+
+		op = addEOperation(modelingUnitEClass, null, "getAllPackages", 0, 1,
+				IS_UNIQUE, IS_ORDERED);
+		g1 = createEGenericType(theStandardPackage.getOrderedSet());
+		g2 = createEGenericType(this.getPackage());
+		g1.getETypeArguments().add(g2);
+		initEOperation(op, g1);
+
+		op = addEOperation(modelingUnitEClass, null, "applyPass2BehaviorJava",
+				0, 1, IS_UNIQUE, !IS_ORDERED);
+		addEParameter(op, theKm2ecorePackage.getKM2EcoreContext(), "context",
+				0, 1, IS_UNIQUE, IS_ORDERED);
+
+		op = addEOperation(modelingUnitEClass, this.getTypeDefinition(),
+				"getTypeDefinitionByQualifiedName", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, theStandardPackage.getJavaString(), "qname", 0, 1,
+				IS_UNIQUE, IS_ORDERED);
+
+		initEClass(requireEClass, Require.class, "Require", !IS_ABSTRACT,
+				!IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getRequire_Uri(), theStandardPackage.getJavaString(),
+				"uri", null, 0, 1, Require.class, !IS_TRANSIENT, !IS_VOLATILE,
+				IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED,
+				IS_ORDERED);
+
+		op = addEOperation(requireEClass, null, "applyPass1", 0, 1, IS_UNIQUE,
+				!IS_ORDERED);
+		addEParameter(op, theKm2ecorePackage.getKM2EcoreContext(), "context",
+				0, 1, IS_UNIQUE, IS_ORDERED);
+
+		op = addEOperation(requireEClass, theEcorePackage_2.getEAnnotation(),
+				"createEcoreModelElement", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, theKm2ecorePackage.getKM2EcoreContext(), "context",
+				0, 1, IS_UNIQUE, IS_ORDERED);
+
+		initEClass(usingEClass, Using.class, "Using", !IS_ABSTRACT,
+				!IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getUsing_QualifiedName(), theStandardPackage
+				.getJavaString(), "qualifiedName", null, 0, 1, Using.class,
+				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE,
+				!IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		op = addEOperation(usingEClass, null, "applyPass1", 0, 1, IS_UNIQUE,
+				!IS_ORDERED);
+		addEParameter(op, theKm2ecorePackage.getKM2EcoreContext(), "context",
+				0, 1, IS_UNIQUE, IS_ORDERED);
+
+		op = addEOperation(usingEClass, theEcorePackage_2.getEAnnotation(),
+				"createEcoreModelElement", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, theKm2ecorePackage.getKM2EcoreContext(), "context",
+				0, 1, IS_UNIQUE, IS_ORDERED);
+
 		initEClass(filterEClass, Filter.class, "Filter", !IS_ABSTRACT,
 				!IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getFilter_QualifiedName(), theStandardPackage
@@ -3645,23 +3584,6 @@ public class StructurePackageImpl extends EPackageImpl implements
 		addEParameter(op, theStandardPackage.getJavaInteger(), "index", 0, 1,
 				IS_UNIQUE, IS_ORDERED);
 
-		initEClass(functionTypeEClass, FunctionType.class, "FunctionType",
-				!IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getFunctionType_Left(), this.getType(), null, "left",
-				null, 0, 1, FunctionType.class, !IS_TRANSIENT, !IS_VOLATILE,
-				IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES,
-				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getFunctionType_Right(), this.getType(), null, "right",
-				null, 0, 1, FunctionType.class, !IS_TRANSIENT, !IS_VOLATILE,
-				IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES,
-				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		op = addEOperation(functionTypeEClass, theStandardPackage
-				.getJavaString(), "createBehaviorJava", 0, 1, IS_UNIQUE,
-				IS_ORDERED);
-		addEParameter(op, theKm2ecorePackage.getKM2EcoreContext(), "context",
-				0, 1, IS_UNIQUE, IS_ORDERED);
-
 		initEClass(voidTypeEClass, VoidType.class, "VoidType", !IS_ABSTRACT,
 				!IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
@@ -3679,6 +3601,15 @@ public class StructurePackageImpl extends EPackageImpl implements
 				IS_CHANGEABLE, IS_COMPOSITE, IS_RESOLVE_PROXIES,
 				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
+		initEClass(traceabilityEClass, Traceability.class, "Traceability",
+				!IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		g1 = createEGenericType(traceabilityEClass_X);
+		initEReference(getTraceability_EcoreModelElement(), g1, null,
+				"ecoreModelElement", null, 0, 1, Traceability.class,
+				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE,
+				IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED,
+				IS_ORDERED);
+
 		initEClass(linkSetterForTypedElementEClass,
 				LinkSetterForTypedElement.class, "LinkSetterForTypedElement",
 				!IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -3691,15 +3622,6 @@ public class StructurePackageImpl extends EPackageImpl implements
 				"ecoreModelElement", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, theKm2ecorePackage.getKM2EcoreContext(), "context",
 				0, 1, IS_UNIQUE, IS_ORDERED);
-
-		initEClass(traceabilityEClass, Traceability.class, "Traceability",
-				!IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		g1 = createEGenericType(traceabilityEClass_X);
-		initEReference(getTraceability_EcoreModelElement(), g1, null,
-				"ecoreModelElement", null, 0, 1, Traceability.class,
-				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE,
-				IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED,
-				IS_ORDERED);
 
 		// Initialize enums and add enum literals
 		initEEnum(constraintTypeEEnum, ConstraintType.class, "ConstraintType");
@@ -3729,10 +3651,6 @@ public class StructurePackageImpl extends EPackageImpl implements
 		// Create annotations
 		// kermeta
 		createKermetaAnnotations();
-		// kompiledderivedProp.getter
-		createKompiledderivedPropAnnotations();
-		// kompiledderivedProp.setter
-		createKompiledderivedProp_1Annotations();
 		// kermeta.inv
 		createKermeta_1Annotations();
 	}
@@ -3755,7 +3673,7 @@ public class StructurePackageImpl extends EPackageImpl implements
 				source,
 				new String[] {
 						"documentation",
-						"/**\n * Contains the concrete implementation (including the operation bodies) \n * of the classes of the <code>kermeta::reflection</code> package.\n * If you need more documentation, please take a look at the\n * <code>kermeta::reflection</code> package which is more complete.\n * <img src=\"platform:/plugin/fr.irisa.triskell.kermeta.documentation/src/figures/language_structure_package.png\"/>\n * <img src=\"platform:/plugin/fr.irisa.triskell.kermeta.documentation/src/figures/language_structure_visitor_view.png\"/>\n */" });
+						"/**\r\n * Contains the concrete implementation (including the operation bodies) \r\n * of the classes of the <code>kermeta::reflection</code> package.\r\n * If you need more documentation, please take a look at the\r\n * <code>kermeta::reflection</code> package which is more complete.\r\n * <img src=\"platform:/plugin/fr.irisa.triskell.kermeta.documentation/src/figures/language_structure_package.png\"/>\r\n * <img src=\"platform:/plugin/fr.irisa.triskell.kermeta.documentation/src/figures/language_structure_visitor_view.png\"/>\r\n */" });
 		addAnnotation(
 				this,
 				source,
@@ -3764,229 +3682,281 @@ public class StructurePackageImpl extends EPackageImpl implements
 						"/**\n * This Modeling Unit is used to define and store the traceability during the Km to Ecore process\n */" });
 		addAnnotation(this, source, new String[] { "usage", "traceability" });
 		addAnnotation(
-				multiplicityElementEClass,
+				objectEClass,
 				source,
-				new String[] { "documentation",
-						" Model elements with a multiplicity [lower..upper] inherit this class" });
+				new String[] {
+						"documentation",
+						"/**\n *\n * TraceSource aspect keeps track of source information like the file name \n * and the line number where objects are declared. This is used for Java generation.\n * At runtime this information can be used for debug purpose or stack printing. \n *\n */" });
+		addAnnotation(objectEClass, source, new String[] { "EMF_needProperty",
+				"name=oid javaClass=java.lang.Integer" });
 		addAnnotation(
-				multiplicityElementEClass.getEOperations().get(0),
+				objectEClass,
 				source,
-				new String[] { "documentation",
-						"/**\n\t * Get the RecopyInValueTypes reference of an Operation\n\t */" });
+				new String[] { "EMF_needProperty",
+						"name=container classDefinitionQN=kermeta::language::structure::Object" });
 		addAnnotation(
-				multiplicityElementEClass.getEOperations().get(2),
+				objectEClass,
+				source,
+				new String[] {
+						"documentation",
+						"Object definition: all entities of Kermeta metamodel explicitly inherit from Object" });
+		addAnnotation(objectEClass.getEOperations().get(1), source,
+				new String[] { "documentation", "/** Super method */" });
+		addAnnotation(
+				objectEClass.getEOperations().get(2),
+				source,
+				new String[] {
+						"documentation",
+						"/**\r\n\t * Returns a Boolean stating whether the current Object is an instance of the given Class\r\n\t */" });
+		addAnnotation(objectEClass.getEOperations().get(2), source,
+				new String[] { "RecopyInValueTypes", "true" });
+		addAnnotation(
+				objectEClass.getEOperations().get(3),
+				source,
+				new String[] {
+						"documentation",
+						"/**\r\n\t * Returns the Class object that is the metaclass of current Object\r\n\t */" });
+		addAnnotation(objectEClass.getEOperations().get(3), source,
+				new String[] { "RecopyInValueTypes", "true" });
+		addAnnotation(
+				objectEClass.getEOperations().get(4),
+				source,
+				new String[] {
+						"documentation",
+						"/**\r\n\t * Sets the <code>element</code> to the <code>~property</code> of the object \r\n\t */" });
+		addAnnotation(objectEClass.getEOperations().get(4), source,
+				new String[] { "RecopyInValueTypes", "true" });
+		addAnnotation(
+				objectEClass.getEOperations().get(7),
 				source,
 				new String[] { "documentation",
-						"/**\n\t * Get the EMFRenameAs reference of an Operation\n\t */" });
-		addAnnotation(getMultiplicityElement_IsOrdered(), source, new String[] {
+						"/**\n\t * Get the EDataType_instanceClassName\n\t */" });
+		addAnnotation(
+				objectEClass.getEOperations().get(9),
+				source,
+				new String[] {
+						"documentation",
+						"/**\r\n\t * Runs checking of invariants defined for the metaclass of the Object\r\n\t * Also check the multiplicity of attributes (except derived and transient attributes)\r\n\t */" });
+		addAnnotation(objectEClass.getEOperations().get(9), source,
+				new String[] { "RecopyInValueTypes", "true" });
+		addAnnotation(objectEClass.getEOperations().get(10), source,
+				new String[] { "documentation",
+						"/**\n\t * Get the instanceClassName\n\t */" });
+		addAnnotation(
+				objectEClass.getEOperations().get(11),
+				source,
+				new String[] { "documentation",
+						"/**\r\n\t * Returns a Boolean stating whether the Object is Void\r\n\t */" });
+		addAnnotation(objectEClass.getEOperations().get(11), source,
+				new String[] { "RecopyInValueTypes", "true" });
+		addAnnotation(
+				objectEClass.getEOperations().get(12),
+				source,
+				new String[] { "documentation",
+						"/**\r\n\t * Returns the unique Oid of the Object\r\n\t */" });
+		addAnnotation(objectEClass.getEOperations().get(12), source,
+				new String[] { "RecopyInValueTypes", "true" });
+		addAnnotation(
+				objectEClass.getEOperations().get(13),
+				source,
+				new String[] { "documentation",
+						"/**\n\t * Get the values for the tags having as key: <key : String>\n\t */" });
+		addAnnotation(
+				objectEClass.getEOperations().get(14),
+				source,
+				new String[] {
+						"documentation",
+						"/**\r\n\t * Returns a Boolean stating whether the current Object conforms to given Type\r\n\t * This means: is this object an instance of this type, or is it an instance of its subtype \r\n\t */" });
+		addAnnotation(objectEClass.getEOperations().get(14), source,
+				new String[] { "RecopyInValueTypes", "true" });
+		addAnnotation(
+				objectEClass.getEOperations().get(15),
+				source,
+				new String[] {
+						"documentation",
+						"/**\r\n\t * Recursively runs checking of invariants defined for the metaclass of the Object\r\n\t * and its supertypes\r\n\t * Ignores derived attributes. \r\n\t */" });
+		addAnnotation(objectEClass.getEOperations().get(15), source,
+				new String[] { "RecopyInValueTypes", "true" });
+		addAnnotation(
+				objectEClass.getEOperations().get(16),
+				source,
+				new String[] {
+						"documentation",
+						"/**\n\t * Get the compiledJavaExtern call for replacing the current one\n\t */" });
+		addAnnotation(
+				objectEClass.getEOperations().get(17),
+				source,
+				new String[] {
+						"documentation",
+						"/**\n\t * Get the Wrapprings of ValueType\'s SelfExpression for tackle the  eplacing the current one\n\t */" });
+		addAnnotation(objectEClass.getEOperations().get(19), source,
+				new String[] { "documentation",
+						"/**\n\t * Get the EMF_needProperty\n\t */" });
+		addAnnotation(
+				objectEClass.getEOperations().get(20),
+				source,
+				new String[] {
+						"documentation",
+						"/**\n\t * Get the deprecated tag\n\t * Specific method for detecting the deprecated model elements\n\t */" });
+		addAnnotation(
+				objectEClass.getEOperations().get(22),
+				source,
+				new String[] {
+						"documentation",
+						"/**\r\n\t * True if the <code>~property</code> of the object has been set\r\n\t */" });
+		addAnnotation(objectEClass.getEOperations().get(22), source,
+				new String[] { "RecopyInValueTypes", "true" });
+		addAnnotation(
+				objectEClass.getEOperations().get(23),
+				source,
+				new String[] {
+						"documentation",
+						"/**\n\t * Get the Wrapprings of ValueType\'s ReturnType for tackle the  eplacing the current one\n\t */" });
+		addAnnotation(
+				objectEClass.getEOperations().get(24),
+				source,
+				new String[] {
+						"documentation",
+						"/** \r\n\t * Returns the instances of the given property for this Object.\r\n\t *\r\n\t * Example : \r\n\t * <pre>\r\n\t * class A { reference attr : String }\r\n\t * </pre>\r\n\t * Using A :\r\n\t * <pre>\r\n\t * operation getAProp() is do\r\n\t *    var a : A\r\n\t *    var s : String\r\n\t *    var the_attr : Property init self.getMetaClass.ownedAttribute.one\r\n\t *    s ?= a.get(the_attr)\r\n\t * end\r\n\t * </pre>\r\n\t * The user has to cast\r\n\t * the result of this method according to the type and the upper multiplicity\r\n\t * of this property. If upper multiplicity > 1, than the effective type of the \r\n\t * result is a Sequence<ThePropertyName>. Otherwise, the type corresponds to \r\n\t * the name of the given Property (i.e the type of the property instance).\r\n\t */" });
+		addAnnotation(
+				objectEClass.getEOperations().get(24),
+				source,
+				new String[] {
+						"WrapperValueTypeReturnType",
+						"java.lang.String=kermeta.language.structure.Object java.lang.Boolean=kermeta.language.structure.Object java.lang.Integer=kermeta.language.structure.Object java.lang.Double=kermeta.language.structure.Object java.lang.Character=kermeta.language.structure.Object java.lang.Number=kermeta.language.structure.Object" });
+		addAnnotation(objectEClass.getEOperations().get(24), source,
+				new String[] { "RecopyInValueTypes", "true" });
+		addAnnotation(
+				objectEClass.getEOperations().get(26),
+				source,
+				new String[] {
+						"documentation",
+						"/**\r\n\t * semantic equality,\r\n\t * if you wish to test for object identity you need to use the method oid\r\n\t * ex: x.oid == y.oid\r\n\t * by default, (ie. if not overloaded), the equals method for class Object implements \r\n\t * the most discriminating possible equivalence relation on objects; that is, for any non-null \r\n\t * reference values x and y, this method returns true if and only if x and y refer to the same \r\n\t * object (x.oid == y.oid has the value true). \r\n\t *\r\n\t * note1: the operator == is mapped to this \r\n\t * note2: overloading this operation have some impact on the behavior on collection and hashtable that rely on it\r\n\t */" });
+		addAnnotation(objectEClass.getEOperations().get(26), source,
+				new String[] { "RecopyInValueTypes", "true" });
+		addAnnotation(objectEClass.getEOperations().get(27), source,
+				new String[] { "documentation",
+						"/**\n\t * Get the isTransient\n\t */" });
+		addAnnotation(
+				objectEClass.getEOperations().get(28),
+				source,
+				new String[] {
+						"documentation",
+						"/**\r\n\t * Returns a Boolean stating whether the Object is currently in a\r\n\t * frozen state\r\n\t */" });
+		addAnnotation(objectEClass.getEOperations().get(28), source,
+				new String[] { "RecopyInValueTypes", "true" });
+		addAnnotation(
+				objectEClass.getEOperations().get(29),
+				source,
+				new String[] {
+						"documentation",
+						"/**\r\n\t * code used in hashtable in order to identify an object in the hashtable keys\r\n\t * This system is similar to the hashcode used in java. Please refer to java documentation\r\n\t * for more information about hashcode\r\n\t */" });
+		addAnnotation(objectEClass.getEOperations().get(29), source,
+				new String[] { "RecopyInValueTypes", "true" });
+		addAnnotation(
+				objectEClass.getEOperations().get(31),
+				source,
+				new String[] { "documentation",
+						"/**\n\t * Get the values for the tags having as key: <key : String>\n\t */" });
+		addAnnotation(objectEClass.getEOperations().get(33), source,
+				new String[] { "documentation",
+						"/**\n\t * Get the EDataType_isSerializable\n\t */" });
+		addAnnotation(
+				objectEClass.getEOperations().get(34),
+				source,
+				new String[] { "documentation",
+						"/**\r\n\t * See kermeta::language::structure::Object.equals(Object)\r\n\t */" });
+		addAnnotation(objectEClass.getEOperations().get(34), source,
+				new String[] { "RecopyInValueTypes", "true" });
+		addAnnotation(
+				objectEClass.getEOperations().get(35),
+				source,
+				new String[] {
+						"documentation",
+						"/**\r\n\t * Remove the element set as the <code>~property</code> of the object.\r\n\t * The <code>isSet(~property)</code> method will then return False\r\n\t */" });
+		addAnnotation(objectEClass.getEOperations().get(35), source,
+				new String[] { "RecopyInValueTypes", "true" });
+		addAnnotation(
+				objectEClass.getEOperations().get(36),
+				source,
+				new String[] {
+						"documentation",
+						"/**\r\n\t * Returns the Object that contains current Object, void if the Object has\r\n\t * no container\r\n\t */" });
+		addAnnotation(
+				objectEClass.getEOperations().get(36),
+				source,
+				new String[] {
+						"WrapperValueTypeReturnType",
+						"java.lang.String=kermeta.language.structure.Object java.lang.Boolean=kermeta.language.structure.Object java.lang.Integer=kermeta.language.structure.Object java.lang.Double=kermeta.language.structure.Object java.lang.Character=kermeta.language.structure.Object java.lang.Number=kermeta.language.structure.Object" });
+		addAnnotation(objectEClass.getEOperations().get(36), source,
+				new String[] { "RecopyInValueTypes", "true" });
+		addAnnotation(objectEClass.getEOperations().get(37), source,
+				new String[] { "documentation",
+						"/**\r\n\t * Freeze the Object\r\n\t */" });
+		addAnnotation(objectEClass.getEOperations().get(37), source,
+				new String[] { "RecopyInValueTypes", "true" });
+		addAnnotation(
+				objectEClass.getEOperations().get(38),
+				source,
+				new String[] {
+						"documentation",
+						"/**\r\n\t * Returns the Resource currently containing (directly or indirectly) the Object \r\n\t * or void if the object belongs to no Resource\r\n\t */" });
+		addAnnotation(objectEClass.getEOperations().get(38), source,
+				new String[] { "RecopyInValueTypes", "true" });
+		addAnnotation(
+				objectEClass.getEOperations().get(39),
+				source,
+				new String[] {
+						"documentation",
+						"/**\r\n\t * Implementation of OCL like cast. It returns self if the object object conforms to the type given as parameter.\r\n\t */" });
+		addAnnotation(
+				objectEClass.getEOperations().get(39),
+				source,
+				new String[] {
+						"WrapperValueTypeReturnType",
+						"java.lang.String=kermeta.language.structure.Object java.lang.Boolean=kermeta.language.structure.Object java.lang.Integer=kermeta.language.structure.Object java.lang.Double=kermeta.language.structure.Object java.lang.Character=kermeta.language.structure.Object java.lang.Number=kermeta.language.structure.Object" });
+		addAnnotation(
+				objectEClass.getEOperations().get(39),
+				source,
+				new String[] {
+						"WrapperValueTypeSelfExpression",
+						"java.lang.String=kermeta.language.structure.Object java.lang.Boolean=kermeta.language.structure.Object java.lang.Integer=kermeta.language.structure.Object java.lang.Double=kermeta.language.structure.Object java.lang.Character=kermeta.language.structure.Object java.lang.Number=kermeta.language.structure.Object" });
+		addAnnotation(objectEClass.getEOperations().get(39), source,
+				new String[] { "RecopyInValueTypes", "true" });
+		addAnnotation(
+				objectEClass.getEOperations().get(40),
+				source,
+				new String[] {
+						"documentation",
+						"/**\r\n \t * Implements Object.toString()\r\n \t * Returns a String of form [qn:oid] where \'qn\' is the qualified name of\r\n \t * the object type, and oid the unique ID of the object\r\n \t */" });
+		addAnnotation(objectEClass.getEOperations().get(40), source,
+				new String[] { "RecopyInValueTypes", "true" });
+		addAnnotation(getObject_File(), source, new String[] { "documentation",
+				"/** The calculated kmt file */" });
+		addAnnotation(
+				getObject_Tag(),
+				source,
+				new String[] {
+						"documentation",
+						"An Object can be tagged by a Tag. \nThey are typically used to put comments/documentation on the object" });
+		addAnnotation(getObject_FileName(), source, new String[] {
 				"documentation",
-				"Boolean stating whether the element is ordered" });
-		addAnnotation(getMultiplicityElement_Upper(), source, new String[] {
-				"documentation",
-				"Max cardinality of the element, \'-1\' for \'*\'" });
-		addAnnotation(getMultiplicityElement_Lower(), source, new String[] {
-				"documentation", "Min cardinality of the element" });
-		addAnnotation(getMultiplicityElement_IsUnique(), source, new String[] {
-				"documentation",
-				"Boolean stating whether duplicated elements are allowed" });
-		addAnnotation(modelingUnitEClass, source, new String[] {
-				"documentation", "/**\n *\n */" });
+				"/** The kmt file that declares the object. */" });
 		addAnnotation(
-				modelingUnitEClass,
-				source,
-				new String[] {
-						"documentation",
-						"The modeling unit is the root of any kermeta model. It contains packages, requires and usings.\nIt also reference others modeling unit." });
-		addAnnotation(
-				modelingUnitEClass.getEOperations().get(1),
-				source,
-				new String[] {
-						"documentation",
-						"/**\n\t * We cannot use an Alias to define this indiretion because the concept of KRuntimeError does not exist\n\t * in framework.ecore, thus we create in this operation a new EDataType that targets the KRuntimeError Java Impl\n\t */" });
-		addAnnotation(modelingUnitEClass.getEOperations().get(4), source,
-				new String[] { "superOperation",
-						"kermeta::language::structure::Object" });
-		addAnnotation(
-				modelingUnitEClass.getEOperations().get(9),
-				source,
-				new String[] {
-						"documentation",
-						"/**\n\t * Get a TypeDefinition contained in the given Modeling Unit by qualifiedName\n\t */" });
-		addAnnotation(
-				modelingUnitEClass.getEOperations().get(10),
-				source,
-				new String[] {
-						"documentation",
-						"/**\n\t * Get a EClassifer contained in the given Modeling Unit by qualifiedName\n\t */" });
-		addAnnotation(
-				getModelingUnit_Usings(),
-				source,
-				new String[] {
-						"documentation",
-						"Set of \"using\" statement associated with this ModelingUnit. Ie. list of \"syntatic shortcut\"\nthat can be used within this unit." });
-		addAnnotation(getModelingUnit_Packages(), source,
-				new String[] { "documentation",
-						"root packages contained by this ModelingUnit" });
-		addAnnotation(
-				getModelingUnit_IncludeFilters(),
-				source,
-				new String[] {
-						"documentation",
-						"list of filters that apply to this modeling unit.\nThis means that if the same unit was loaded without this filters, it would have loaded more content\nonly element whose qualified name begins with one of these filter will be loaded in the unit" });
-		addAnnotation(
-				getModelingUnit_ExcludeFilters(),
-				source,
-				new String[] {
-						"documentation",
-						"list of filters that apply to this modeling unit.\nThis means that if the same unit was loaded without this filters, it would have loaded more content\nelement whose qualified name begins with one of these filter will NOT be loaded in the unit" });
-		addAnnotation(getModelingUnit_ReferencedModelingUnits(), source,
-				new String[] { "documentation", "To be written" });
-		addAnnotation(
-				getModelingUnit_Requires(),
-				source,
-				new String[] {
-						"documentation",
-						"Set of \"require\" statements associated with this ModelingUnit. Ie. list of the other\nfiles required to run this unit" });
-		addAnnotation(requireEClass, source, new String[] { "documentation",
-				"/**\n * \n */" });
-		addAnnotation(requireEClass, source, new String[] { "documentation",
-				"To be written" });
-		addAnnotation(requireEClass.getEOperations().get(0), source,
-				new String[] { "superOperation",
-						"kermeta::language::structure::Object" });
-		addAnnotation(getRequire_Uri(), source, new String[] { "documentation",
-				"To be written" });
-		addAnnotation(usingEClass, source, new String[] { "documentation",
-				"/**\n * \n */" });
-		addAnnotation(usingEClass, source, new String[] { "documentation",
-				"To be written" });
-		addAnnotation(usingEClass.getEOperations().get(0), source,
-				new String[] { "superOperation",
-						"kermeta::language::structure::Object" });
-		addAnnotation(getUsing_QualifiedName(), source, new String[] {
-				"documentation", "To be written" });
-		addAnnotation(packageEClass, source, new String[] { "documentation",
-				"/**\n *\n */" });
-		addAnnotation(
-				packageEClass,
+				getObject_LineNumber(),
 				source,
 				new String[] { "documentation",
-						"Package in kermeta. Each kermeta model must have a root package. " });
-		addAnnotation(packageEClass.getEOperations().get(0), source,
-				new String[] { "superOperation",
-						"kermeta::language::structure::Object" });
-		addAnnotation(getPackage_NestingPackage(), source, new String[] {
-				"ecore.isTransient", "true" });
-		addAnnotation(getPackage_NestingPackage(), source, new String[] {
-				"documentation", "Owning Package, if any" });
-		addAnnotation(getPackage_NestedPackage(), source, new String[] {
-				"documentation", "Nested Packages contained by the Package" });
-		addAnnotation(getPackage_Uri(), source, new String[] { "documentation",
-				"Uri of the Package" });
-		addAnnotation(primitiveTypeEClass, source, new String[] {
-				"documentation", "/**\n *\n */" });
+						"/** The line number where the object is declared in the source file. */" });
 		addAnnotation(
-				primitiveTypeEClass,
+				getObject_OwnedTags(),
 				source,
 				new String[] {
 						"documentation",
-						"The class definition for kermeta aliases. Above statement defines a primitive\r\ntype called MyString, which instanceType is <code>kermeta::standard::String</code>\r\n<pre>alias MyString : kermeta::standard::String</pre>. Another example could be: <code>root::apackage::AClass</code>\r\n<pre>alias MyClass : root::apackage::AClass</pre>, thus a primitive type may be not a subtype of ValueType (ValueType is a concept from the Kermeta framework)." });
-		addAnnotation(primitiveTypeEClass.getEOperations().get(0), source,
-				new String[] { "superOperation",
-						"kermeta::language::structure::Object" });
-		addAnnotation(primitiveTypeEClass.getEOperations().get(1), source,
-				new String[] { "superOperation",
-						"kermeta::language::structure::Object" });
-		addAnnotation(getPrimitiveType_InstanceType(), source, new String[] {
-				"documentation", "The type the primitive type is linked with" });
-		addAnnotation(enumerationEClass, source, new String[] {
-				"documentation", "/**\n *\n */" });
-		addAnnotation(enumerationEClass, source, new String[] {
-				"documentation", "Definition for Enumeration" });
-		addAnnotation(enumerationEClass.getEOperations().get(0), source,
-				new String[] { "superOperation",
-						"kermeta::language::structure::Object" });
-		addAnnotation(
-				enumerationEClass.getEOperations().get(1),
-				source,
-				new String[] { "documentation",
-						"/**\n\t * Implements kermeta::language::structure::Type.clone(Object)\n\t */" });
-		addAnnotation(enumerationEClass.getEOperations().get(1), source,
-				new String[] { "superOperation",
-						"kermeta::language::structure::Type" });
-		addAnnotation(enumerationEClass.getEOperations().get(2), source,
-				new String[] { "superOperation",
-						"kermeta::language::structure::Object" });
-		addAnnotation(getEnumeration_OwnedLiteral(), source, new String[] {
-				"documentation", "Owned items in an Enumeration" });
-		addAnnotation(enumerationLiteralEClass, source, new String[] {
-				"documentation", "/**\n *\n */" });
-		addAnnotation(enumerationLiteralEClass, source, new String[] {
-				"documentation", "Item definition for enumeration" });
-		addAnnotation(enumerationLiteralEClass.getEOperations().get(0), source,
-				new String[] { "superOperation",
-						"kermeta::language::structure::Object" });
-		addAnnotation(getEnumerationLiteral_Enumeration(), source,
-				new String[] { "ecore.isTransient", "true" });
-		addAnnotation(getEnumerationLiteral_Enumeration(), source,
-				new String[] { "documentation", "Owning Enumeration" });
-		addAnnotation(classDefinitionEClass, source, new String[] {
-				"documentation", "/**\n *\n */" });
-		addAnnotation(
-				classDefinitionEClass,
-				source,
-				new String[] {
-						"documentation",
-						"The definition of a class definition :)\n <pre>class A\n{ \n  attribute s : String\n}\n  </pre> is a class definition; in :\n<pre>\nmain() : A is do end\n</pre>\nA is a <b>Class</b> : it corresponds to the <b>use</b> of the class definition of A" });
-		addAnnotation(classDefinitionEClass.getEOperations().get(2), source,
-				new String[] { "superOperation",
-						"kermeta::language::structure::Object" });
-		addAnnotation(classDefinitionEClass.getEOperations().get(4), source,
-				new String[] { "superOperation",
-						"kermeta::language::structure::Object" });
-		addAnnotation(classDefinitionEClass.getEOperations().get(8), source,
-				new String[] { "superOperation",
-						"kermeta::language::structure::Object" });
-		addAnnotation(getClassDefinition_OwnedOperation(), source,
-				new String[] { "documentation",
-						"Operations owned by this ClassDefinition." });
-		addAnnotation(
-				getClassDefinition_IsAbstract(),
-				source,
-				new String[] {
-						"documentation",
-						"Boolean stating whether the ClassDefinition is abstract (which means that\nno instance can be allocated)" });
-		addAnnotation(getClassDefinition_SuperType(), source, new String[] {
-				"documentation",
-				"Classes from which this ClassDefinition inherits." });
-		addAnnotation(getClassDefinition_Inv(), source,
-				new String[] { "documentation",
-						"Invariants defined for this ClassDefinition" });
-		addAnnotation(getClassDefinition_AllOperation(), source, new String[] {
-				"isReadOnly", "true" });
-		addAnnotation(
-				getClassDefinition_AllOperation(),
-				source,
-				new String[] {
-						"documentation",
-						"/**\n\t * Returns all the Operations of this ClassDefinition\n\t * including the inherited ones\n\t */" });
-		addAnnotation(getClassDefinition_AllAttribute(), source, new String[] {
-				"isReadOnly", "true" });
-		addAnnotation(
-				getClassDefinition_AllAttribute(),
-				source,
-				new String[] {
-						"documentation",
-						"/**\n\t * Returns all the Attributes, References, derived Properties of this \n\t * ClassDefinition including the inherited ones\n\t */" });
-		addAnnotation(
-				getClassDefinition_OwnedAttribute(),
-				source,
-				new String[] { "documentation",
-						"Attributes, References, and derived Properties owned by this ClassDefinition." });
-		addAnnotation(operationEClass, source, new String[] { "documentation",
-				"/**\n *\n */" });
+						"An object can contains a Tag.  \nBe careful, owning a tag doesn\'t means that the tag applies to the Object\nTo know which Tags apply to the object use the \"tag\" reference" });
 		addAnnotation(operationEClass, source, new String[] { "documentation",
 				"Every one knows what an operation is." });
+		addAnnotation(operationEClass, source, new String[] { "documentation",
+				"/**\n *\n */" });
 		addAnnotation(
 				operationEClass,
 				source,
@@ -4019,24 +3989,18 @@ public class StructurePackageImpl extends EPackageImpl implements
 				new String[] {
 						"documentation",
 						"/**\n\t * Compiling in Simk mode all the methods (inherited methods included) from ValueType\n\t */" });
-		addAnnotation(
-				operationEClass.getEOperations().get(9),
-				source,
-				new String[] {
-						"documentation",
-						"/** Generation of the String representing the end of a method: return of the result value */" });
-		addAnnotation(operationEClass.getEOperations().get(10), source,
+		addAnnotation(operationEClass.getEOperations().get(9), source,
 				new String[] { "documentation",
 						"/**\n\t * Unused for the moment\n\t */" });
-		addAnnotation(operationEClass.getEOperations().get(10), source,
+		addAnnotation(operationEClass.getEOperations().get(9), source,
 				new String[] { "deprecated", "" });
 		addAnnotation(
-				operationEClass.getEOperations().get(14),
+				operationEClass.getEOperations().get(13),
 				source,
 				new String[] {
 						"documentation",
 						"/**\n\t * The given operation has at least a parameter having ValueType as type\n\t */" });
-		addAnnotation(operationEClass.getEOperations().get(15), source,
+		addAnnotation(operationEClass.getEOperations().get(14), source,
 				new String[] { "superOperation",
 						"kermeta::language::structure::Object" });
 		addAnnotation(getOperation_TypeParameter(), source, new String[] {
@@ -4044,13 +4008,13 @@ public class StructurePackageImpl extends EPackageImpl implements
 		addAnnotation(getOperation_Body(), source, new String[] {
 				"documentation",
 				"Body of the Operation, expressed as a KerMeta expression" });
-		addAnnotation(getOperation_OwnedParameter(), source, new String[] {
-				"documentation", "Parameters of the Operation" });
 		addAnnotation(getOperation_Post(), source, new String[] {
 				"documentation", "Post-conditions of the Operation" });
 		addAnnotation(getOperation_IsAbstract(), source, new String[] {
 				"documentation",
 				"Boolean stating whether the Operation is abstract" });
+		addAnnotation(getOperation_OwnedParameter(), source, new String[] {
+				"documentation", "Parameters of the Operation" });
 		addAnnotation(getOperation_RaisedException(), source, new String[] {
 				"documentation", "Exceptions raised by the Operation" });
 		addAnnotation(getOperation_Pre(), source, new String[] {
@@ -4060,35 +4024,474 @@ public class StructurePackageImpl extends EPackageImpl implements
 		addAnnotation(getOperation_OwningClass(), source, new String[] {
 				"documentation", "ClassDefinition owning the Operation" });
 		addAnnotation(parameterEClass, source, new String[] { "documentation",
-				"/**\n *\n */" });
-		addAnnotation(parameterEClass, source, new String[] { "documentation",
 				"Definition for operation parameter" });
+		addAnnotation(parameterEClass, source, new String[] { "documentation",
+				"/**\n *\n */" });
 		addAnnotation(parameterEClass.getEOperations().get(2), source,
 				new String[] { "superOperation",
 						"kermeta::language::structure::Object" });
-		addAnnotation(parameterEClass.getEOperations().get(3), source,
-				new String[] { "superOperation",
-						"kermeta::language::structure::Object" });
-		addAnnotation(parameterEClass.getEOperations().get(6), source,
+		addAnnotation(parameterEClass.getEOperations().get(4), source,
 				new String[] { "superOperation",
 						"kermeta::language::structure::Object" });
 		addAnnotation(
-				parameterEClass.getEOperations().get(7),
+				parameterEClass.getEOperations().get(6),
 				source,
 				new String[] { "documentation",
 						"/**\n\t * Return true if the given operation is a FunctionType\n\t */" });
+		addAnnotation(parameterEClass.getEOperations().get(7), source,
+				new String[] { "superOperation",
+						"kermeta::language::structure::Object" });
 		addAnnotation(getParameter_Operation(), source, new String[] {
 				"ecore.isTransient", "true" });
 		addAnnotation(getParameter_Operation(), source, new String[] {
 				"documentation", "Owning operation" });
-		addAnnotation(constraintEClass, source, new String[] { "documentation",
+		addAnnotation(typeEClass, source, new String[] { "documentation",
+				"Alias to kermeta::standard::Integer" });
+		addAnnotation(typeEClass, source, new String[] { "documentation",
+				"Base class definition for the <b>use</b> of a type." });
+		addAnnotation(typeEClass.getEOperations().get(1), source, new String[] {
+				"isAbstract", "true" });
+		addAnnotation(
+				typeEClass.getEOperations().get(1),
+				source,
+				new String[] {
+						"documentation",
+						"/**\r\n\t * Returns a copy of passed Object built by recursively copying attribute\r\n\t * properties, and referencing original reference properties values\r\n\t */" });
+		addAnnotation(typeEClass.getEOperations().get(2), source, new String[] {
+				"superOperation", "kermeta::language::structure::Object" });
+		addAnnotation(typeEClass.getEOperations().get(3), source, new String[] {
+				"isAbstract", "true" });
+		addAnnotation(
+				typeEClass.getEOperations().get(3),
+				source,
+				new String[] {
+						"documentation",
+						"/**\r\n\t * Returns a copy of passed Object built by recursively copying values of\r\n\t * all properties, no matter the property kind\r\n\t */" });
+		addAnnotation(
+				typeEClass.getEOperations().get(4),
+				source,
+				new String[] {
+						"documentation",
+						"/**\n\t * Tests whether the Type t corresponds to the Kermeta Boolean type, which can be encoded\n\t * either as the Boolean PrimitiveType or the Boolean class.\n\t * @param t : Type\n\t * @return true or false\n\t */" });
+		addAnnotation(
+				typeEClass.getEOperations().get(7),
+				source,
+				new String[] {
+						"documentation",
+						"/**\n\t * Tests whether the Type t corresponds to a Kermeta numerical type, which can be encoded\n\t * either as the Integer/Real PrimitiveType or the Integer/Real class.\n\t * @param t : Type\n\t * @return true or false\n\t */" });
+		addAnnotation(
+				typeEClass.getEOperations().get(10),
+				source,
+				new String[] {
+						"documentation",
+						"/**\r\n \t * Implements Type.isSubTypeOf(Type)\r\n \t * For technical reason, the current implementation works only with Type that comes from a kermeta declaration (ie. in a require)\r\n \t * it won\'t work with Type created programmaticaly by the user. If you need that, please ask to the kermeta developpers\r\n \t * to extend it.\r\n \t */" });
+		addAnnotation(typeEClass.getEOperations().get(10), source,
+				new String[] { "RecopyInValueTypes", "true" });
+		addAnnotation(
+				typeEClass.getEOperations().get(12),
+				source,
+				new String[] { "documentation",
+						"/**\r\n\t * Implements Type.isInstance(Object)\r\n\t */" });
+		addAnnotation(typeEClass.getEOperations().get(12), source,
+				new String[] { "RecopyInValueTypes", "true" });
+		addAnnotation(
+				typeEClass.getEOperations().get(14),
+				source,
+				new String[] {
+						"documentation",
+						"/**\r\n \t * Implements Type.isSuperTypeOf(Type)\r\n \t * For technical reason, the current implementation works only with Type that comes from a kermeta declaration (ie. in a require)\r\n \t * it won\'t work with Type created programmaticaly by the user. If you need that, please ask to the kermeta developpers\r\n \t * to extend it.\r\n \t */" });
+		addAnnotation(typeEClass.getEOperations().get(14), source,
+				new String[] { "RecopyInValueTypes", "true" });
+		addAnnotation(getType_TypeContainer(), source, new String[] {
+				"documentation", "Owning TypeContainer, if any" });
+		addAnnotation(
+				classDefinitionEClass,
+				source,
+				new String[] {
+						"documentation",
+						"The definition of a class definition :)\n <pre>class A\n{ \n  attribute s : String\n}\n  </pre> is a class definition; in :\n<pre>\nmain() : A is do end\n</pre>\nA is a <b>Class</b> : it corresponds to the <b>use</b> of the class definition of A" });
+		addAnnotation(classDefinitionEClass, source, new String[] {
+				"documentation", "/**\n *\n */" });
+		addAnnotation(classDefinitionEClass.getEOperations().get(1), source,
+				new String[] { "superOperation",
+						"kermeta::language::structure::Object" });
+		addAnnotation(classDefinitionEClass.getEOperations().get(2), source,
+				new String[] { "superOperation",
+						"kermeta::language::structure::Object" });
+		addAnnotation(classDefinitionEClass.getEOperations().get(11), source,
+				new String[] { "superOperation",
+						"kermeta::language::structure::Object" });
+		addAnnotation(getClassDefinition_OwnedOperation(), source,
+				new String[] { "documentation",
+						"Operations owned by this ClassDefinition." });
+		addAnnotation(
+				getClassDefinition_IsAbstract(),
+				source,
+				new String[] {
+						"documentation",
+						"Boolean stating whether the ClassDefinition is abstract (which means that\nno instance can be allocated)" });
+		addAnnotation(getClassDefinition_SuperType(), source, new String[] {
+				"documentation",
+				"Classes from which this ClassDefinition inherits." });
+		addAnnotation(getClassDefinition_Inv(), source,
+				new String[] { "documentation",
+						"Invariants defined for this ClassDefinition" });
+		addAnnotation(
+				getClassDefinition_OwnedAttribute(),
+				source,
+				new String[] { "documentation",
+						"Attributes, References, and derived Properties owned by this ClassDefinition." });
+		addAnnotation(
+				modelTypeEClass,
+				source,
+				new String[] { "documentation",
+						"Type of a model, consisting of a set of included type definitions" });
+		addAnnotation(
+				modelTypeEClass.getEOperations().get(0),
+				source,
+				new String[] { "documentation",
+						"/**\r\n\t * To be written ##########################################\r\n\t */" });
+		addAnnotation(
+				modelTypeEClass.getEOperations().get(1),
+				source,
+				new String[] { "documentation",
+						"/**\r\n\t * To be written ##########################################\r\n\t */" });
+		addAnnotation(getModelType_IncludedTypeDefinition(), source,
+				new String[] { "documentation", "To be written" });
+		addAnnotation(
+				classEClass,
+				source,
+				new String[] {
+						"documentation",
+						"Returns the Attributes, References, and derived Properties owned by\nthe ClassDefinition of this Class." });
+		addAnnotation(classEClass.getEOperations().get(0), source,
+				new String[] { "superOperation",
+						"kermeta::language::structure::Type" });
+		addAnnotation(classEClass.getEOperations().get(1), source,
+				new String[] { "superOperation",
+						"kermeta::language::structure::Type" });
+		addAnnotation(
+				classEClass.getEOperations().get(2),
+				source,
+				new String[] { "documentation",
+						"/**\r\n\t * Instantiates a new occurence for this Class\r\n\t */" });
+		addAnnotation(classEClass.getEOperations().get(3), source,
+				new String[] { "documentation",
+						"/** Never used for the moment */" });
+		addAnnotation(classEClass.getEOperations().get(4), source,
+				new String[] { "documentation",
+						"/** Never used for the moment */" });
+		addAnnotation(classEClass.getEOperations().get(5), source,
+				new String[] { "superOperation",
+						"kermeta::language::structure::Object" });
+		addAnnotation(
+				classEClass.getEOperations().get(6),
+				source,
+				new String[] {
+						"documentation",
+						"/**\r\n\t * Returns the String representation of this class. \r\n\t *  Note : throws an exception if this class has no classDefinition\r\n\t *  or if the classDefinition is not well constructed.\r\n\t */" });
+		addAnnotation(classEClass.getEOperations().get(6), source,
+				new String[] { "superOperation",
+						"kermeta::language::structure::Object" });
+		addAnnotation(
+				modelEClass,
+				source,
+				new String[] {
+						"documentation",
+						"Is the holder of a set of model elements (Object) that are compatible with the ModelType that has \ninstantiated this Model." });
+		addAnnotation(
+				modelEClass.getEOperations().get(0),
+				source,
+				new String[] {
+						"documentation",
+						"/**\r\n \t * Add the Object if it is copmpatible with the ModelDefinition. Other objects are ignored.\r\n \t * Returns the object if it has been added (One can check that some element have been ignored or not)\r\n \t * return Void if not added\r\n \t */" });
+		addAnnotation(
+				modelEClass.getEOperations().get(1),
+				source,
+				new String[] { "documentation",
+						"/**\r\n \t * Remove an object from the model\r\n \t */" });
+		addAnnotation(
+				modelEClass.getEOperations().get(2),
+				source,
+				new String[] {
+						"documentation",
+						"/**\r\n \t * Add all the Object of the collection that are copmpatible with the ModelDefinition. Other objects are ignored.\r\n \t * Returns the list of Object that have been added (One can check that some element have been ignored or not)\r\n \t */" });
+		addAnnotation(
+				modelEClass.getEOperations().get(3),
+				source,
+				new String[] {
+						"documentation",
+						"/**\r\n \t * Add an object to the model. According to the ModelType, the typechecker will statically verify if the object can be added or not\r\n \t */" });
+		addAnnotation(
+				modelEClass.getEOperations().get(4),
+				source,
+				new String[] {
+						"documentation",
+						"/**\r\n \t * Returns a set of all the elements of the model that are instance of the given Type\r\n \t */" });
+		addAnnotation(getModel_Contents(), source, new String[] {
+				"documentation", "Contents of this model..." });
+		addAnnotation(
+				namedElementEClass,
+				source,
+				new String[] {
+						"documentation",
+						"Any element that contain a  name (example : Operation, Property) inherit this\nclass." });
+		addAnnotation(
+				namedElementEClass.getEOperations().get(0),
+				source,
+				new String[] {
+						"documentation",
+						"/**\r\n\t * Returns the qualified name of this named element. Qualified name is \r\n\t * the list of the names of the packages hierarchically ordered, delimited by\r\n\t * a \"::\", followed by the name of this named element.\r\n\t */" });
+		addAnnotation(getNamedElement_Name(), source, new String[] {
+				"documentation", "Name of this named element" });
+		addAnnotation(enumerationEClass, source, new String[] {
+				"documentation", "Definition for Enumeration" });
+		addAnnotation(enumerationEClass, source, new String[] {
+				"documentation", "/**\n *\n */" });
+		addAnnotation(enumerationEClass.getEOperations().get(0), source,
+				new String[] { "superOperation",
+						"kermeta::language::structure::Object" });
+		addAnnotation(
+				enumerationEClass.getEOperations().get(1),
+				source,
+				new String[] {
+						"documentation",
+						"/**\r\n\t * Implements kermeta::language::structure::Type.clone(Object)\r\n\t */" });
+		addAnnotation(enumerationEClass.getEOperations().get(1), source,
+				new String[] { "superOperation",
+						"kermeta::language::structure::Type" });
+		addAnnotation(enumerationEClass.getEOperations().get(2), source,
+				new String[] { "superOperation",
+						"kermeta::language::structure::Object" });
+		addAnnotation(getEnumeration_OwnedLiteral(), source, new String[] {
+				"documentation", "Owned items in an Enumeration" });
+		addAnnotation(
+				functionTypeEClass,
+				source,
+				new String[] {
+						"documentation",
+						"Type used to define the use of lambda expressions.\n Uses :\n <pre>operation forAll(func : <G -> Boolean>) : Boolean is do\n     var test : Boolean init true\n     from var it : Iterator<G> init iterator\n     until it.isOff\n     loop\n        test := test and func(it.next)\n     end\n     result := test\n end\n </pre>\n *\n In the above example, &lt;G -> Boolean&gt; is a function type f(G) -&gt; \n Boolean, with a parameter of type G and a return type of type Boolean\n The operation <code>forAll</code> takes a lambda expression as parameter." });
+		addAnnotation(functionTypeEClass.getEOperations().get(0), source,
+				new String[] { "superOperation",
+						"kermeta::language::structure::Type" });
+		addAnnotation(
+				getFunctionType_Left(),
+				source,
+				new String[] { "documentation",
+						"Parameters of the function (a ProductType for multiple parameters)" });
+		addAnnotation(getFunctionType_Right(), source, new String[] {
+				"documentation", "Result type of the function" });
+		addAnnotation(stringEDataType, source, new String[] { "alias",
+				"kermeta::standard::String" });
+		addAnnotation(booleanEDataType, source, new String[] { "alias",
+				"kermeta::standard::Boolean" });
+		addAnnotation(
+				propertyEClass,
+				source,
+				new String[] {
+						"documentation",
+						"Class representing the property definition. Kermeta<->Ecore equivalence:\n - Property with isComposite == true or with type is a base type (String, Integer, Boolean)  : EAttribute\n - Property with isComposite == false : EReference" });
+		addAnnotation(propertyEClass, source, new String[] { "documentation",
 				"/**\n *\n */" });
+		addAnnotation(
+				propertyEClass,
+				source,
+				new String[] {
+						"documentation",
+						"/** We have to visit property in order to print the behavior of the getter and setter */" });
+		addAnnotation(propertyEClass.getEOperations().get(0), source,
+				new String[] { "superOperation",
+						"kermeta::language::structure::Object" });
+		addAnnotation(propertyEClass.getEOperations().get(1), source,
+				new String[] { "superOperation",
+						"kermeta::language::structure::Object" });
+		addAnnotation(propertyEClass.getEOperations().get(3), source,
+				new String[] { "superOperation",
+						"kermeta::language::structure::Object" });
+		addAnnotation(propertyEClass.getEOperations().get(7), source,
+				new String[] { "superOperation",
+						"kermeta::language::structure::Object" });
+		addAnnotation(getProperty_Default(), source, new String[] {
+				"documentation", "To be written" });
+		addAnnotation(
+				getProperty_IsDerived(),
+				source,
+				new String[] {
+						"documentation",
+						"If True, the value of the property is not stored but computed from other properties" });
+		addAnnotation(
+				getProperty_Opposite(),
+				source,
+				new String[] { "documentation",
+						"Opposite Property of the Property, void if the Property has no opposite" });
+		addAnnotation(getProperty_GetterBody(), source, new String[] {
+				"documentation", "To be written" });
+		addAnnotation(getProperty_IsReadOnly(), source, new String[] {
+				"documentation",
+				"Boolean stating whether the Property is read-only" });
+		addAnnotation(getProperty_SetterBody(), source, new String[] {
+				"documentation", "To be written" });
+		addAnnotation(getProperty_OwningClass(), source, new String[] {
+				"documentation", "ClassDefinition that owns the Property" });
+		addAnnotation(getProperty_IsSetterAbstract(), source, new String[] {
+				"documentation",
+				"Boolean stating wether the setter is abstract." });
+		addAnnotation(
+				getProperty_IsID(),
+				source,
+				new String[] { "documentation",
+						"Boolean stating whether the property allows to identify its containing Object" });
+		addAnnotation(getProperty_IsComposite(), source, new String[] {
+				"documentation",
+				"Boolean stating whether the Property has a containment role" });
+		addAnnotation(getProperty_IsGetterAbstract(), source, new String[] {
+				"documentation",
+				"Boolean stating wether the getter is abstract." });
+		addAnnotation(
+				typeContainerEClass,
+				source,
+				new String[] {
+						"documentation",
+						"Phantom class : EMF reflexive editors need that any element of a metamodel \nhas a direct or indirect containment relationship with the root model element of\nthe metamodel. This class resolves this technical requirement." });
+		addAnnotation(getTypeContainer_ContainedType(), source, new String[] {
+				"documentation", "Contained types" });
+		addAnnotation(enumerationLiteralEClass, source, new String[] {
+				"documentation", "Item definition for enumeration" });
+		addAnnotation(enumerationLiteralEClass, source, new String[] {
+				"documentation", "/**\n *\n */" });
+		addAnnotation(enumerationLiteralEClass.getEOperations().get(0), source,
+				new String[] { "superOperation",
+						"kermeta::language::structure::Object" });
+		addAnnotation(getEnumerationLiteral_Enumeration(), source,
+				new String[] { "ecore.isTransient", "true" });
+		addAnnotation(getEnumerationLiteral_Enumeration(), source,
+				new String[] { "documentation", "Owning Enumeration" });
+		addAnnotation(typeVariableBindingEClass, source, new String[] {
+				"documentation",
+				"Definition of a binding between a TypeVariable and a Type" });
+		addAnnotation(getTypeVariableBinding_Type(), source, new String[] {
+				"documentation", "Assigned Type" });
+		addAnnotation(getTypeVariableBinding_Variable(), source, new String[] {
+				"documentation", "TypeVariable" });
+		addAnnotation(integerEDataType, source, new String[] { "alias",
+				"kermeta::standard::Integer" });
+		addAnnotation(
+				multiplicityElementEClass,
+				source,
+				new String[] { "documentation",
+						" Model elements with a multiplicity [lower..upper] inherit this class" });
+		addAnnotation(
+				multiplicityElementEClass.getEOperations().get(0),
+				source,
+				new String[] { "documentation",
+						"/**\n\t * Get the RecopyInValueTypes reference of an Operation\n\t */" });
+		addAnnotation(
+				multiplicityElementEClass.getEOperations().get(2),
+				source,
+				new String[] { "documentation",
+						"/**\n\t * Get the EMFRenameAs reference of an Operation\n\t */" });
+		addAnnotation(
+				multiplicityElementEClass.getEOperations().get(3),
+				source,
+				new String[] {
+						"documentation",
+						"/** Generation of the String representing the end of a method: return of the result value */" });
+		addAnnotation(getMultiplicityElement_IsOrdered(), source, new String[] {
+				"documentation",
+				"Boolean stating whether the element is ordered" });
+		addAnnotation(getMultiplicityElement_Upper(), source, new String[] {
+				"documentation",
+				"Max cardinality of the element, \'-1\' for \'*\'" });
+		addAnnotation(getMultiplicityElement_Lower(), source, new String[] {
+				"documentation", "Min cardinality of the element" });
+		addAnnotation(getMultiplicityElement_IsUnique(), source, new String[] {
+				"documentation",
+				"Boolean stating whether duplicated elements are allowed" });
+		addAnnotation(unlimitedNaturalEDataType, source, new String[] {
+				"alias", "kermeta::standard::Integer" });
+		addAnnotation(
+				typedElementEClass,
+				source,
+				new String[] {
+						"documentation",
+						"Abstraction of the notion of typed element : each element \nthat is typed inherits this class." });
+		addAnnotation(getTypedElement_Type(), source, new String[] {
+				"documentation", "Type of the model element" });
+		addAnnotation(
+				typeDefinitionEClass,
+				source,
+				new String[] {
+						"documentation",
+						"This boolean allows to tell if this Type definition is an aspect or not\nIf it is an aspect, then at runtime, its definition will be merged with the definition of another\nTypeDefinition that has exactly the same qualified name" });
+		addAnnotation(
+				typeDefinitionEClass,
+				source,
+				new String[] {
+						"documentation",
+						"Abstraction for type definitions (ClassDefinition, ModelTypeDefinition, DataType inherit\nthis class)" });
+		addAnnotation(dataTypeEClass, source, new String[] { "documentation",
+				"Special type definition for Enumeration, PrimitiveType" });
+		addAnnotation(
+				packageEClass,
+				source,
+				new String[] { "documentation",
+						"Package in kermeta. Each kermeta model must have a root package. " });
+		addAnnotation(packageEClass, source, new String[] { "documentation",
+				"/**\n *\n */" });
+		addAnnotation(packageEClass.getEOperations().get(0), source,
+				new String[] { "superOperation",
+						"kermeta::language::structure::Object" });
+		addAnnotation(packageEClass.getEOperations().get(3), source,
+				new String[] { "superOperation",
+						"kermeta::language::structure::Object" });
+		addAnnotation(getPackage_NestingPackage(), source, new String[] {
+				"ecore.isTransient", "true" });
+		addAnnotation(getPackage_NestingPackage(), source, new String[] {
+				"documentation", "Owning Package, if any" });
+		addAnnotation(getPackage_NestedPackage(), source, new String[] {
+				"documentation", "Nested Packages contained by the Package" });
+		addAnnotation(getPackage_Uri(), source, new String[] { "documentation",
+				"Uri of the Package" });
+		addAnnotation(
+				primitiveTypeEClass,
+				source,
+				new String[] {
+						"documentation",
+						"The class definition for kermeta aliases. Above statement defines a primitive\r\ntype called MyString, which instanceType is <code>kermeta::standard::String</code>\r\n<pre>alias MyString : kermeta::standard::String</pre>. Another example could be: <code>root::apackage::AClass</code>\r\n<pre>alias MyClass : root::apackage::AClass</pre>, thus a primitive type may be not a subtype of ValueType (ValueType is a concept from the Kermeta framework)." });
+		addAnnotation(primitiveTypeEClass, source, new String[] {
+				"documentation", "/**\n *\n */" });
+		addAnnotation(primitiveTypeEClass.getEOperations().get(0), source,
+				new String[] { "superOperation",
+						"kermeta::language::structure::Object" });
+		addAnnotation(primitiveTypeEClass.getEOperations().get(1), source,
+				new String[] { "superOperation",
+						"kermeta::language::structure::Object" });
+		addAnnotation(getPrimitiveType_InstanceType(), source, new String[] {
+				"documentation", "The type the primitive type is linked with" });
+		addAnnotation(
+				tagEClass,
+				source,
+				new String[] {
+						"documentation",
+						"Tag is intended to be used to add documentation on a  model element,\nor add some textual information that cannot be expressed with any\nmodel element definition." });
+		addAnnotation(tagEClass, source, new String[] { "documentation",
+				"/**\n *\n */" });
+		addAnnotation(tagEClass.getEOperations().get(0), source, new String[] {
+				"superOperation", "kermeta::language::structure::Object" });
+		addAnnotation(getTag_Name(), source, new String[] { "documentation",
+				"Name of the Tag" });
+		addAnnotation(getTag_Value(), source, new String[] { "documentation",
+				"String value of the Tag" });
+		addAnnotation(getTag_Object(), source, new String[] { "documentation",
+				"Objects to which the Tag is attached to" });
 		addAnnotation(
 				constraintEClass,
 				source,
 				new String[] {
 						"documentation",
 						"Constraint is part of a contract implementation in a Class definition or an operation.\nThree kinds of constraints are available : pre, post, and inv (invariant constraint)" });
+		addAnnotation(constraintEClass, source, new String[] { "documentation",
+				"/**\n *\n */" });
 		addAnnotation(constraintEClass.getEOperations().get(0), source,
 				new String[] { "superOperation",
 						"kermeta::language::structure::Object" });
@@ -4114,437 +4517,6 @@ public class StructurePackageImpl extends EPackageImpl implements
 				source,
 				new String[] { "documentation",
 						"Owning ClassDefinition if Constraint corresponds to invariant" });
-		addAnnotation(propertyEClass, source, new String[] { "documentation",
-				"/**\n *\n */" });
-		addAnnotation(
-				propertyEClass,
-				source,
-				new String[] {
-						"documentation",
-						"Class representing the property definition. Kermeta<->Ecore equivalence:\n - Property with isComposite == true or with type is a base type (String, Integer, Boolean)  : EAttribute\n - Property with isComposite == false : EReference" });
-		addAnnotation(
-				propertyEClass,
-				source,
-				new String[] {
-						"documentation",
-						"/** We have to visit property in order to print the behavior of the getter and setter */" });
-		addAnnotation(propertyEClass.getEOperations().get(0), source,
-				new String[] { "superOperation",
-						"kermeta::language::structure::Object" });
-		addAnnotation(propertyEClass.getEOperations().get(1), source,
-				new String[] { "superOperation",
-						"kermeta::language::structure::Object" });
-		addAnnotation(propertyEClass.getEOperations().get(2), source,
-				new String[] { "superOperation",
-						"kermeta::language::structure::Object" });
-		addAnnotation(propertyEClass.getEOperations().get(5), source,
-				new String[] { "superOperation",
-						"kermeta::language::structure::Object" });
-		addAnnotation(getProperty_Default(), source, new String[] {
-				"documentation", "To be written" });
-		addAnnotation(
-				getProperty_IsDerived(),
-				source,
-				new String[] {
-						"documentation",
-						"If True, the value of the property is not stored but computed from other properties" });
-		addAnnotation(
-				getProperty_Opposite(),
-				source,
-				new String[] { "documentation",
-						"Opposite Property of the Property, void if the Property has no opposite" });
-		addAnnotation(getProperty_GetterBody(), source, new String[] {
-				"documentation", "To be written" });
-		addAnnotation(getProperty_IsReadOnly(), source, new String[] {
-				"documentation",
-				"Boolean stating whether the Property is read-only" });
-		addAnnotation(getProperty_SetterBody(), source, new String[] {
-				"documentation", "To be written" });
-		addAnnotation(
-				getProperty_IsID(),
-				source,
-				new String[] { "documentation",
-						"Boolean stating whether the property allows to identify its containing Object" });
-		addAnnotation(getProperty_OwningClass(), source, new String[] {
-				"documentation", "ClassDefinition that owns the Property" });
-		addAnnotation(getProperty_IsSetterAbstract(), source, new String[] {
-				"documentation",
-				"Boolean stating wether the setter is abstract." });
-		addAnnotation(getProperty_IsGetterAbstract(), source, new String[] {
-				"documentation",
-				"Boolean stating wether the getter is abstract." });
-		addAnnotation(getProperty_IsComposite(), source, new String[] {
-				"documentation",
-				"Boolean stating whether the Property has a containment role" });
-		addAnnotation(objectTypeVariableEClass, source, new String[] {
-				"documentation", "/**\n *\n */" });
-		addAnnotation(objectTypeVariableEClass, source, new String[] {
-				"documentation", "To be written" });
-		addAnnotation(objectTypeVariableEClass.getEOperations().get(0), source,
-				new String[] { "superOperation",
-						"kermeta::language::structure::Object" });
-		addAnnotation(objectTypeVariableEClass.getEOperations().get(1), source,
-				new String[] { "superOperation",
-						"kermeta::language::structure::Object" });
-		addAnnotation(tagEClass, source, new String[] { "documentation",
-				"/**\n *\n */" });
-		addAnnotation(
-				tagEClass,
-				source,
-				new String[] {
-						"documentation",
-						"Tag is intended to be used to add documentation on a  model element,\nor add some textual information that cannot be expressed with any\nmodel element definition." });
-		addAnnotation(tagEClass.getEOperations().get(0), source, new String[] {
-				"superOperation", "kermeta::language::structure::Object" });
-		addAnnotation(getTag_Name(), source, new String[] { "documentation",
-				"Name of the Tag" });
-		addAnnotation(getTag_Value(), source, new String[] { "documentation",
-				"String value of the Tag" });
-		addAnnotation(getTag_Object(), source, new String[] { "documentation",
-				"Objects to which the Tag is attached to" });
-		addAnnotation(
-				objectEClass,
-				source,
-				new String[] {
-						"documentation",
-						"Object definition: all entities of Kermeta metamodel explicitly inherit from Object" });
-		addAnnotation(objectEClass, source, new String[] { "EMF_needProperty",
-				"name=oid javaClass=java.lang.Integer" });
-		addAnnotation(
-				objectEClass,
-				source,
-				new String[] { "EMF_needProperty",
-						"name=container classDefinitionQN=kermeta::language::structure::Object" });
-		addAnnotation(
-				objectEClass,
-				source,
-				new String[] {
-						"documentation",
-						"/**\n *\n * TraceSource aspect keeps track of source information like the file name \n * and the line number where objects are declared. This is used for Java generation.\n * At runtime this information can be used for debug purpose or stack printing. \n *\n */" });
-		addAnnotation(objectEClass.getEOperations().get(1), source,
-				new String[] { "documentation", "/** Super method */" });
-		addAnnotation(
-				objectEClass.getEOperations().get(2),
-				source,
-				new String[] {
-						"documentation",
-						"/**\n\t * Returns a Boolean stating whether the current Object is an instance of the given Class\n\t */" });
-		addAnnotation(objectEClass.getEOperations().get(2), source,
-				new String[] { "RecopyInValueTypes", "true" });
-		addAnnotation(
-				objectEClass.getEOperations().get(3),
-				source,
-				new String[] {
-						"documentation",
-						"/**\n\t * Returns the Class object that is the metaclass of current Object\n\t */" });
-		addAnnotation(objectEClass.getEOperations().get(3), source,
-				new String[] { "RecopyInValueTypes", "true" });
-		addAnnotation(
-				objectEClass.getEOperations().get(4),
-				source,
-				new String[] {
-						"documentation",
-						"/**\n\t * Sets the <code>element</code> to the <code>~property</code> of the object \n\t */" });
-		addAnnotation(objectEClass.getEOperations().get(4), source,
-				new String[] { "RecopyInValueTypes", "true" });
-		addAnnotation(
-				objectEClass.getEOperations().get(7),
-				source,
-				new String[] { "documentation",
-						"/**\n\t * Get the EDataType_instanceClassName\n\t */" });
-		addAnnotation(
-				objectEClass.getEOperations().get(9),
-				source,
-				new String[] {
-						"documentation",
-						"/**\n\t * Runs checking of invariants defined for the metaclass of the Object\n\t */" });
-		addAnnotation(objectEClass.getEOperations().get(9), source,
-				new String[] { "RecopyInValueTypes", "true" });
-		addAnnotation(objectEClass.getEOperations().get(10), source,
-				new String[] { "documentation",
-						"/**\n\t * Get the instanceClassName\n\t */" });
-		addAnnotation(
-				objectEClass.getEOperations().get(11),
-				source,
-				new String[] { "documentation",
-						"/**\n\t * Returns a Boolean stating whether the Object is Void\n\t */" });
-		addAnnotation(objectEClass.getEOperations().get(11), source,
-				new String[] { "RecopyInValueTypes", "true" });
-		addAnnotation(objectEClass.getEOperations().get(12), source,
-				new String[] { "documentation",
-						"/** Never used for the moment */" });
-		addAnnotation(
-				objectEClass.getEOperations().get(13),
-				source,
-				new String[] { "documentation",
-						"/**\n\t * Returns the unique Oid of the Object\n\t */" });
-		addAnnotation(objectEClass.getEOperations().get(13), source,
-				new String[] { "RecopyInValueTypes", "true" });
-		addAnnotation(
-				objectEClass.getEOperations().get(14),
-				source,
-				new String[] {
-						"documentation",
-						"/**\n\t * Returns a Boolean stating whether the current Object conforms to given Type\n\t * This means: is this object an instance of this type, or is it an instance of its subtype \n\t */" });
-		addAnnotation(objectEClass.getEOperations().get(14), source,
-				new String[] { "RecopyInValueTypes", "true" });
-		addAnnotation(
-				objectEClass.getEOperations().get(15),
-				source,
-				new String[] { "documentation",
-						"/**\n\t * Get the values for the tags having as key: <key : String>\n\t */" });
-		addAnnotation(
-				objectEClass.getEOperations().get(16),
-				source,
-				new String[] {
-						"documentation",
-						"/**\n\t * Recursively runs checking of invariants defined for the metaclass of the Object\n\t * and its supertypes\n\t */" });
-		addAnnotation(objectEClass.getEOperations().get(16), source,
-				new String[] { "RecopyInValueTypes", "true" });
-		addAnnotation(
-				objectEClass.getEOperations().get(17),
-				source,
-				new String[] {
-						"documentation",
-						"/**\n\t * Get the compiledJavaExtern call for replacing the current one\n\t */" });
-		addAnnotation(
-				objectEClass.getEOperations().get(18),
-				source,
-				new String[] {
-						"documentation",
-						"/**\n\t * Get the Wrapprings of ValueType\'s SelfExpression for tackle the  eplacing the current one\n\t */" });
-		addAnnotation(objectEClass.getEOperations().get(20), source,
-				new String[] { "documentation",
-						"/**\n\t * Get the EMF_needProperty\n\t */" });
-		addAnnotation(
-				objectEClass.getEOperations().get(21),
-				source,
-				new String[] {
-						"documentation",
-						"/**\n\t * Get the deprecated tag\n\t * Specific method for detecting the deprecated model elements\n\t */" });
-		addAnnotation(
-				objectEClass.getEOperations().get(23),
-				source,
-				new String[] {
-						"documentation",
-						"/**\n\t * True if the <code>~property</code> of the object has been set\n\t */" });
-		addAnnotation(objectEClass.getEOperations().get(23), source,
-				new String[] { "RecopyInValueTypes", "true" });
-		addAnnotation(
-				objectEClass.getEOperations().get(24),
-				source,
-				new String[] {
-						"documentation",
-						"/** \n\t * Returns the instances of the given property for this Object.\n\t *\n\t * Example : \n\t * <pre>\n\t * class A { reference attr : String }\n\t * </pre>\n\t * Using A :\n\t * <pre>\n\t * operation getAProp() is do\n\t *    var a : A\n\t *    var s : String\n\t *    var the_attr : Property init self.getMetaClass.ownedAttribute.one\n\t *    s ?= a.get(the_attr)\n\t * end\n\t * </pre>\n\t * The user has to cast\n\t * the result of this method according to the type and the upper multiplicity\n\t * of this property. If upper multiplicity > 1, than the effective type of the \n\t * result is a Sequence<ThePropertyName>. Otherwise, the type corresponds to \n\t * the name of the given Property (i.e the type of the property instance).\n\t */" });
-		addAnnotation(
-				objectEClass.getEOperations().get(24),
-				source,
-				new String[] {
-						"WrapperValueTypeReturnType",
-						"java.lang.String=kermeta.language.structure.Object java.lang.Boolean=kermeta.language.structure.Object java.lang.Integer=kermeta.language.structure.Object java.lang.Double=kermeta.language.structure.Object java.lang.Character=kermeta.language.structure.Object java.lang.Number=kermeta.language.structure.Object" });
-		addAnnotation(objectEClass.getEOperations().get(24), source,
-				new String[] { "RecopyInValueTypes", "true" });
-		addAnnotation(
-				objectEClass.getEOperations().get(25),
-				source,
-				new String[] {
-						"documentation",
-						"/**\n\t * Get the Wrapprings of ValueType\'s ReturnType for tackle the  eplacing the current one\n\t */" });
-		addAnnotation(
-				objectEClass.getEOperations().get(27),
-				source,
-				new String[] {
-						"documentation",
-						"/**\n\t * semantic equality,\n\t * if you wish to test for object identity you need to use the method oid\n\t * ex: x.oid == y.oid\n\t * by default, (ie. if not overloaded), the equals method for class Object implements \n\t * the most discriminating possible equivalence relation on objects; that is, for any non-null \n\t * reference values x and y, this method returns true if and only if x and y refer to the same \n\t * object (x.oid == y.oid has the value true). \n\t *\n\t * note1: the operator == is mapped to this \n\t * note2: overloading this operation have some impact on the behavior on collection and hashtable that rely on it\n\t */" });
-		addAnnotation(objectEClass.getEOperations().get(27), source,
-				new String[] { "RecopyInValueTypes", "true" });
-		addAnnotation(objectEClass.getEOperations().get(28), source,
-				new String[] { "documentation",
-						"/**\n\t * Get the isTransient\n\t */" });
-		addAnnotation(
-				objectEClass.getEOperations().get(29),
-				source,
-				new String[] {
-						"documentation",
-						"/**\n\t * Returns a Boolean stating whether the Object is currently in a\n\t * frozen state\n\t */" });
-		addAnnotation(objectEClass.getEOperations().get(29), source,
-				new String[] { "RecopyInValueTypes", "true" });
-		addAnnotation(
-				objectEClass.getEOperations().get(30),
-				source,
-				new String[] {
-						"documentation",
-						"/**\n\t * code used in hashtable in order to identify an object in the hashtable keys\n\t * This system is similar to the hashcode used in java. Please refer to java documentation\n\t * for more information about hashcode\n\t */" });
-		addAnnotation(objectEClass.getEOperations().get(30), source,
-				new String[] { "RecopyInValueTypes", "true" });
-		addAnnotation(
-				objectEClass.getEOperations().get(32),
-				source,
-				new String[] { "documentation",
-						"/**\n\t * Get the values for the tags having as key: <key : String>\n\t */" });
-		addAnnotation(objectEClass.getEOperations().get(34), source,
-				new String[] { "documentation",
-						"/**\n\t * Get the EDataType_isSerializable\n\t */" });
-		addAnnotation(
-				objectEClass.getEOperations().get(35),
-				source,
-				new String[] { "documentation",
-						"/**\n\t * See kermeta::language::structure::Object.equals(Object)\n\t */" });
-		addAnnotation(objectEClass.getEOperations().get(35), source,
-				new String[] { "RecopyInValueTypes", "true" });
-		addAnnotation(
-				objectEClass.getEOperations().get(36),
-				source,
-				new String[] {
-						"documentation",
-						"/**\n\t * Returns the Object that contains current Object, void if the Object has\n\t * no container\n\t */" });
-		addAnnotation(
-				objectEClass.getEOperations().get(36),
-				source,
-				new String[] {
-						"WrapperValueTypeReturnType",
-						"java.lang.String=kermeta.language.structure.Object java.lang.Boolean=kermeta.language.structure.Object java.lang.Integer=kermeta.language.structure.Object java.lang.Double=kermeta.language.structure.Object java.lang.Character=kermeta.language.structure.Object java.lang.Number=kermeta.language.structure.Object" });
-		addAnnotation(objectEClass.getEOperations().get(36), source,
-				new String[] { "RecopyInValueTypes", "true" });
-		addAnnotation(objectEClass.getEOperations().get(37), source,
-				new String[] { "documentation",
-						"/**\n\t * Freeze the Object\n\t */" });
-		addAnnotation(objectEClass.getEOperations().get(37), source,
-				new String[] { "RecopyInValueTypes", "true" });
-		addAnnotation(
-				objectEClass.getEOperations().get(38),
-				source,
-				new String[] {
-						"documentation",
-						"/**\n\t * Remove the element set as the <code>~property</code> of the object.\n\t * The <code>isSet(~property)</code> method will then return False\n\t */" });
-		addAnnotation(objectEClass.getEOperations().get(38), source,
-				new String[] { "RecopyInValueTypes", "true" });
-		addAnnotation(
-				objectEClass.getEOperations().get(39),
-				source,
-				new String[] {
-						"documentation",
-						"/**\n\t * Returns the Resource currently containing (directly or indirectly) the Object \n\t * or void if the object belongs to no Resource\n\t */" });
-		addAnnotation(objectEClass.getEOperations().get(39), source,
-				new String[] { "RecopyInValueTypes", "true" });
-		addAnnotation(
-				objectEClass.getEOperations().get(40),
-				source,
-				new String[] {
-						"documentation",
-						"/**\n\t * Implementation of OCL like cast. It returns self if the object object conforms to the type given as parameter.\n\t */" });
-		addAnnotation(
-				objectEClass.getEOperations().get(40),
-				source,
-				new String[] {
-						"WrapperValueTypeReturnType",
-						"java.lang.String=kermeta.language.structure.Object java.lang.Boolean=kermeta.language.structure.Object java.lang.Integer=kermeta.language.structure.Object java.lang.Double=kermeta.language.structure.Object java.lang.Character=kermeta.language.structure.Object java.lang.Number=kermeta.language.structure.Object" });
-		addAnnotation(
-				objectEClass.getEOperations().get(40),
-				source,
-				new String[] {
-						"WrapperValueTypeSelfExpression",
-						"java.lang.String=kermeta.language.structure.Object java.lang.Boolean=kermeta.language.structure.Object java.lang.Integer=kermeta.language.structure.Object java.lang.Double=kermeta.language.structure.Object java.lang.Character=kermeta.language.structure.Object java.lang.Number=kermeta.language.structure.Object" });
-		addAnnotation(objectEClass.getEOperations().get(40), source,
-				new String[] { "RecopyInValueTypes", "true" });
-		addAnnotation(
-				objectEClass.getEOperations().get(41),
-				source,
-				new String[] {
-						"documentation",
-						"/**\n \t * Implements Object.toString()\n \t * Returns a String of form [qn:oid] where \'qn\' is the qualified name of\n \t * the object type, and oid the unique ID of the object\n \t */" });
-		addAnnotation(objectEClass.getEOperations().get(41), source,
-				new String[] { "RecopyInValueTypes", "true" });
-		addAnnotation(getObject_File(), source, new String[] { "documentation",
-				"/** The calculated kmt file */" });
-		addAnnotation(
-				getObject_Tag(),
-				source,
-				new String[] {
-						"documentation",
-						"An Object can be tagged by a Tag. \nThey are typically used to put comments/documentation on the object" });
-		addAnnotation(getObject_FileName(), source, new String[] {
-				"documentation",
-				"/** The kmt file that declares the object. */" });
-		addAnnotation(
-				getObject_LineNumber(),
-				source,
-				new String[] { "documentation",
-						"/** The line number where the object is declared in the source file. */" });
-		addAnnotation(
-				getObject_OwnedTags(),
-				source,
-				new String[] {
-						"documentation",
-						"An object can contains a Tag.  \nBe careful, owning a tag doesn\'t means that the tag applies to the Object\nTo know which Tags apply to the object use the \"tag\" reference" });
-		addAnnotation(
-				classEClass,
-				source,
-				new String[] {
-						"documentation",
-						"Returns the Attributes, References, and derived Properties owned by\nthe ClassDefinition of this Class." });
-		addAnnotation(classEClass.getEOperations().get(0), source,
-				new String[] { "superOperation",
-						"kermeta::language::structure::Type" });
-		addAnnotation(
-				classEClass.getEOperations().get(1),
-				source,
-				new String[] { "documentation",
-						"/**\n\t * Instantiates a new occurence for this Class\n\t */" });
-		addAnnotation(classEClass.getEOperations().get(2), source,
-				new String[] { "superOperation",
-						"kermeta::language::structure::Type" });
-		addAnnotation(classEClass.getEOperations().get(3), source,
-				new String[] { "documentation",
-						"/** Never used for the moment */" });
-		addAnnotation(classEClass.getEOperations().get(4), source,
-				new String[] { "documentation",
-						"/** Never used for the moment */" });
-		addAnnotation(classEClass.getEOperations().get(5), source,
-				new String[] { "superOperation",
-						"kermeta::language::structure::Object" });
-		addAnnotation(classEClass.getEOperations().get(6), source,
-				new String[] { "superOperation",
-						"kermeta::language::structure::Object" });
-		addAnnotation(
-				classEClass.getEOperations().get(9),
-				source,
-				new String[] {
-						"documentation",
-						"/**\n\t * Returns the String representation of this class. \n\t *  Note : throws an exception if this class has no classDefinition\n\t *  or if the classDefinition is not well constructed.\n\t */" });
-		addAnnotation(classEClass.getEOperations().get(9), source,
-				new String[] { "superOperation",
-						"kermeta::language::structure::Object" });
-		addAnnotation(classEClass.getEOperations().get(10), source,
-				new String[] { "superOperation",
-						"kermeta::language::structure::Object" });
-		addAnnotation(getClass_OwnedOperation(), source, new String[] {
-				"isReadOnly", "false" });
-		addAnnotation(
-				getClass_OwnedOperation(),
-				source,
-				new String[] { "documentation",
-						"Returns the Operations owned by the ClassDefinition of this Class." });
-		addAnnotation(getClass_SuperClass(), source, new String[] {
-				"isReadOnly", "false" });
-		addAnnotation(
-				getClass_SuperClass(),
-				source,
-				new String[] { "documentation",
-						"Returns the Classes of which the ClassDefinition of this Class inherits." });
-		addAnnotation(getClass_IsAbstract(), source, new String[] {
-				"isReadOnly", "true" });
-		addAnnotation(getClass_Name(), source, new String[] { "isReadOnly",
-				"false" });
-		addAnnotation(getClass_Name(), source, new String[] { "documentation",
-				"Returns the name of the ClassDefinition of this Class" });
-		addAnnotation(getClass_ClassDefinition(), source, new String[] {
-				"isReadOnly", "true" });
-		addAnnotation(getClass_ClassDefinition(), source, new String[] {
-				"documentation",
-				"/**\n\t * Returns the ClassDefinition for this class\n\t */" });
-		addAnnotation(getClass_OwnedAttribute(), source, new String[] {
-				"isReadOnly", "true" });
 		addAnnotation(
 				genericTypeDefinitionEClass,
 				source,
@@ -4556,122 +4528,6 @@ public class StructurePackageImpl extends EPackageImpl implements
 				source,
 				new String[] { "documentation",
 						"Type variables defined for the GenericTypeDefinition" });
-		addAnnotation(stringEDataType, source, new String[] { "alias",
-				"kermeta::standard::String" });
-		addAnnotation(booleanEDataType, source, new String[] { "alias",
-				"kermeta::standard::Boolean" });
-		addAnnotation(typeEClass, source, new String[] { "documentation",
-				"Alias to kermeta::standard::Integer" });
-		addAnnotation(typeEClass, source, new String[] { "documentation",
-				"Base class definition for the <b>use</b> of a type." });
-		addAnnotation(typeEClass.getEOperations().get(1), source, new String[] {
-				"isAbstract", "true" });
-		addAnnotation(
-				typeEClass.getEOperations().get(1),
-				source,
-				new String[] {
-						"documentation",
-						"/**\n\t * Returns a copy of passed Object built by recursively copying attribute\n\t * properties, and referencing original reference properties values\n\t */" });
-		addAnnotation(typeEClass.getEOperations().get(2), source, new String[] {
-				"superOperation", "kermeta::language::structure::Object" });
-		addAnnotation(typeEClass.getEOperations().get(3), source, new String[] {
-				"isAbstract", "true" });
-		addAnnotation(
-				typeEClass.getEOperations().get(3),
-				source,
-				new String[] {
-						"documentation",
-						"/**\n\t * Returns a copy of passed Object built by recursively copying values of\n\t * all properties, no matter the property kind\n\t */" });
-		addAnnotation(
-				typeEClass.getEOperations().get(4),
-				source,
-				new String[] {
-						"documentation",
-						"/**\n\t * Tests whether the Type t corresponds to the Kermeta Boolean type, which can be encoded\n\t * either as the Boolean PrimitiveType or the Boolean class.\n\t * @param t : Type\n\t * @return true or false\n\t */" });
-		addAnnotation(
-				typeEClass.getEOperations().get(7),
-				source,
-				new String[] {
-						"documentation",
-						"/**\n\t * Tests whether the Type t corresponds to a Kermeta numerical type, which can be encoded\n\t * either as the Integer/Real PrimitiveType or the Integer/Real class.\n\t * @param t : Type\n\t * @return true or false\n\t */" });
-		addAnnotation(
-				typeEClass.getEOperations().get(11),
-				source,
-				new String[] {
-						"documentation",
-						"/**\n \t * Implements Type.isSubTypeOf(Type)\n \t * For technical reason, the current implementation works only with Type that comes from a kermeta declaration (ie. in a require)\n \t * it won\'t work with Type created programmaticaly by the user. If you need that, please ask to the kermeta developpers\n \t * to extend it.\n \t */" });
-		addAnnotation(typeEClass.getEOperations().get(11), source,
-				new String[] { "RecopyInValueTypes", "true" });
-		addAnnotation(typeEClass.getEOperations().get(13), source,
-				new String[] { "documentation",
-						"/**\n\t * Implements Type.isInstance(Object)\n\t */" });
-		addAnnotation(typeEClass.getEOperations().get(13), source,
-				new String[] { "RecopyInValueTypes", "true" });
-		addAnnotation(
-				typeEClass.getEOperations().get(14),
-				source,
-				new String[] {
-						"documentation",
-						"/**\n \t * Implements Type.isSuperTypeOf(Type)\n \t * For technical reason, the current implementation works only with Type that comes from a kermeta declaration (ie. in a require)\n \t * it won\'t work with Type created programmaticaly by the user. If you need that, please ask to the kermeta developpers\n \t * to extend it.\n \t */" });
-		addAnnotation(typeEClass.getEOperations().get(14), source,
-				new String[] { "RecopyInValueTypes", "true" });
-		addAnnotation(getType_TypeContainer(), source, new String[] {
-				"documentation", "Owning TypeContainer, if any" });
-		addAnnotation(
-				typeContainerEClass,
-				source,
-				new String[] {
-						"documentation",
-						"Phantom class : EMF reflexive editors need that any element of a metamodel \nhas a direct or indirect containment relationship with the root model element of\nthe metamodel. This class resolves this technical requirement." });
-		addAnnotation(getTypeContainer_ContainedType(), source, new String[] {
-				"documentation", "Contained types" });
-		addAnnotation(typeVariableBindingEClass, source, new String[] {
-				"documentation",
-				"Definition of a binding between a TypeVariable and a Type" });
-		addAnnotation(getTypeVariableBinding_Type(), source, new String[] {
-				"documentation", "Assigned Type" });
-		addAnnotation(getTypeVariableBinding_Variable(), source, new String[] {
-				"documentation", "TypeVariable" });
-		addAnnotation(integerEDataType, source, new String[] { "alias",
-				"kermeta::standard::Integer" });
-		addAnnotation(unlimitedNaturalEDataType, source, new String[] {
-				"alias", "kermeta::standard::Integer" });
-		addAnnotation(
-				typedElementEClass,
-				source,
-				new String[] {
-						"documentation",
-						"Abstraction of the notion of typed element : each element \nthat is typed inherits this class." });
-		addAnnotation(getTypedElement_Type(), source, new String[] {
-				"documentation", "Type of the model element" });
-		addAnnotation(
-				typeDefinitionEClass,
-				source,
-				new String[] {
-						"documentation",
-						"This boolean allows to tell if this Type definition is an aspect or not\nIf it is an aspect, then at runtime, its definition will be merged with the definition of another\nTypeDefinition that has exactly the same qualified name" });
-		addAnnotation(
-				typeDefinitionEClass,
-				source,
-				new String[] {
-						"documentation",
-						"Abstraction for type definitions (ClassDefinition, ModelTypeDefinition, DataType inherit\nthis class)" });
-		addAnnotation(
-				namedElementEClass,
-				source,
-				new String[] {
-						"documentation",
-						"Any element that contain a  name (example : Operation, Property) inherit this\nclass." });
-		addAnnotation(
-				namedElementEClass.getEOperations().get(0),
-				source,
-				new String[] {
-						"documentation",
-						"/**\n\t * Returns the qualified name of this named element. Qualified name is \n\t * the list of the names of the packages hierarchically ordered, delimited by\n\t * a \"::\", followed by the name of this named element.\n\t */" });
-		addAnnotation(getNamedElement_Name(), source, new String[] {
-				"documentation", "Name of this named element" });
-		addAnnotation(dataTypeEClass, source, new String[] { "documentation",
-				"Special type definition for Enumeration, PrimitiveType" });
 		addAnnotation(
 				parameterizedTypeEClass,
 				source,
@@ -4695,23 +4551,16 @@ public class StructurePackageImpl extends EPackageImpl implements
 						"Definition of a type variable for generic types :  \nin class definition <pre>class AClass<X,Y> {}</pre>, X and Y are type variables." });
 		addAnnotation(getTypeVariable_Supertype(), source, new String[] {
 				"documentation", "Reference to the supertype, if any" });
-		addAnnotation(
-				modelTypeEClass,
-				source,
-				new String[] { "documentation",
-						"Type of a model, consisting of a set of included type definitions" });
-		addAnnotation(
-				modelTypeEClass.getEOperations().get(0),
-				source,
-				new String[] { "documentation",
-						"/**\n\t * To be written ##########################################\n\t */" });
-		addAnnotation(
-				modelTypeEClass.getEOperations().get(1),
-				source,
-				new String[] { "documentation",
-						"/**\n\t * To be written ##########################################\n\t */" });
-		addAnnotation(getModelType_IncludedTypeDefinition(), source,
-				new String[] { "documentation", "To be written" });
+		addAnnotation(objectTypeVariableEClass, source, new String[] {
+				"documentation", "To be written" });
+		addAnnotation(objectTypeVariableEClass, source, new String[] {
+				"documentation", "/**\n *\n */" });
+		addAnnotation(objectTypeVariableEClass.getEOperations().get(0), source,
+				new String[] { "superOperation",
+						"kermeta::language::structure::Object" });
+		addAnnotation(objectTypeVariableEClass.getEOperations().get(1), source,
+				new String[] { "superOperation",
+						"kermeta::language::structure::Object" });
 		addAnnotation(modelTypeVariableEClass, source, new String[] {
 				"documentation", "To be written" });
 		addAnnotation(getModelTypeVariable_VirtualType(), source, new String[] {
@@ -4725,40 +4574,84 @@ public class StructurePackageImpl extends EPackageImpl implements
 		addAnnotation(getVirtualType_ClassDefinition(), source, new String[] {
 				"documentation", "To be written" });
 		addAnnotation(
-				modelEClass,
+				modelingUnitEClass,
 				source,
 				new String[] {
 						"documentation",
-						"Is the holder of a set of model elements (Object) that are compatible with the ModelType that has \ninstantiated this Model." });
+						"The modeling unit is the root of any kermeta model. It contains packages, requires and usings.\nIt also reference others modeling unit." });
+		addAnnotation(modelingUnitEClass, source, new String[] {
+				"documentation", "/**\n *\n */" });
 		addAnnotation(
-				modelEClass.getEOperations().get(0),
+				modelingUnitEClass.getEOperations().get(1),
 				source,
 				new String[] {
 						"documentation",
-						"/**\n \t * Add the Object if it is copmpatible with the ModelDefinition. Other objects are ignored.\n \t * Returns the object if it has been added (One can check that some element have been ignored or not)\n \t * return Void if not added\n \t */" });
-		addAnnotation(modelEClass.getEOperations().get(1), source,
+						"/**\n\t * We cannot use an Alias to define this indiretion because the concept of KRuntimeError does not exist\n\t * in framework.ecore, thus we create in this operation a new EDataType that targets the KRuntimeError Java Impl\n\t */" });
+		addAnnotation(modelingUnitEClass.getEOperations().get(2), source,
+				new String[] { "superOperation",
+						"kermeta::language::structure::Object" });
+		addAnnotation(
+				modelingUnitEClass.getEOperations().get(5),
+				source,
+				new String[] {
+						"documentation",
+						"/**\n\t * Get a EClassifer contained in the given Modeling Unit by qualifiedName\n\t */" });
+		addAnnotation(modelingUnitEClass.getEOperations().get(10), source,
+				new String[] { "superOperation",
+						"kermeta::language::structure::Object" });
+		addAnnotation(
+				modelingUnitEClass.getEOperations().get(11),
+				source,
+				new String[] {
+						"documentation",
+						"/**\n\t * Get a TypeDefinition contained in the given Modeling Unit by qualifiedName\n\t */" });
+		addAnnotation(
+				getModelingUnit_Usings(),
+				source,
+				new String[] {
+						"documentation",
+						"Set of \"using\" statement associated with this ModelingUnit. Ie. list of \"syntatic shortcut\"\nthat can be used within this unit." });
+		addAnnotation(getModelingUnit_Packages(), source,
 				new String[] { "documentation",
-						"/**\n \t * Remove an object from the model\n \t */" });
+						"root packages contained by this ModelingUnit" });
 		addAnnotation(
-				modelEClass.getEOperations().get(2),
+				getModelingUnit_IncludeFilters(),
 				source,
 				new String[] {
 						"documentation",
-						"/**\n \t * Add all the Object of the collection that are copmpatible with the ModelDefinition. Other objects are ignored.\n \t * Returns the list of Object that have been added (One can check that some element have been ignored or not)\n \t */" });
+						"list of filters that apply to this modeling unit.\nThis means that if the same unit was loaded without this filters, it would have loaded more content\nonly element whose qualified name begins with one of these filter will be loaded in the unit" });
 		addAnnotation(
-				modelEClass.getEOperations().get(3),
+				getModelingUnit_ExcludeFilters(),
 				source,
 				new String[] {
 						"documentation",
-						"/**\n \t * Add an object to the model. According to the ModelType, the typechecker will statically verify if the object can be added or not\n \t */" });
+						"list of filters that apply to this modeling unit.\nThis means that if the same unit was loaded without this filters, it would have loaded more content\nelement whose qualified name begins with one of these filter will NOT be loaded in the unit" });
+		addAnnotation(getModelingUnit_ReferencedModelingUnits(), source,
+				new String[] { "documentation", "To be written" });
 		addAnnotation(
-				modelEClass.getEOperations().get(4),
+				getModelingUnit_Requires(),
 				source,
 				new String[] {
 						"documentation",
-						"/**\n \t * Returns a set of all the elements of the model that are instance of the given Type\n \t */" });
-		addAnnotation(getModel_Contents(), source, new String[] {
-				"documentation", "Contents of this model..." });
+						"Set of \"require\" statements associated with this ModelingUnit. Ie. list of the other\nfiles required to run this unit" });
+		addAnnotation(requireEClass, source, new String[] { "documentation",
+				"To be written" });
+		addAnnotation(requireEClass, source, new String[] { "documentation",
+				"/**\n * \n */" });
+		addAnnotation(requireEClass.getEOperations().get(0), source,
+				new String[] { "superOperation",
+						"kermeta::language::structure::Object" });
+		addAnnotation(getRequire_Uri(), source, new String[] { "documentation",
+				"To be written" });
+		addAnnotation(usingEClass, source, new String[] { "documentation",
+				"To be written" });
+		addAnnotation(usingEClass, source, new String[] { "documentation",
+				"/**\n * \n */" });
+		addAnnotation(usingEClass.getEOperations().get(0), source,
+				new String[] { "superOperation",
+						"kermeta::language::structure::Object" });
+		addAnnotation(getUsing_QualifiedName(), source, new String[] {
+				"documentation", "To be written" });
 		addAnnotation(
 				filterEClass,
 				source,
@@ -4775,22 +4668,6 @@ public class StructurePackageImpl extends EPackageImpl implements
 						"Type corresponding to a set of Types\nOnly used in the context of FunctionType" });
 		addAnnotation(getProductType_Type(), source, new String[] {
 				"documentation", "Types " });
-		addAnnotation(
-				functionTypeEClass,
-				source,
-				new String[] {
-						"documentation",
-						"Type used to define the use of lambda expressions.\n Uses :\n <pre>operation forAll(func : <G -> Boolean>) : Boolean is do\n     var test : Boolean init true\n     from var it : Iterator<G> init iterator\n     until it.isOff\n     loop\n        test := test and func(it.next)\n     end\n     result := test\n end\n </pre>\n *\n In the above example, &lt;G -> Boolean&gt; is a function type f(G) -&gt; \n Boolean, with a parameter of type G and a return type of type Boolean\n The operation <code>forAll</code> takes a lambda expression as parameter." });
-		addAnnotation(functionTypeEClass.getEOperations().get(0), source,
-				new String[] { "superOperation",
-						"kermeta::language::structure::Type" });
-		addAnnotation(
-				getFunctionType_Left(),
-				source,
-				new String[] { "documentation",
-						"Parameters of the function (a ProductType for multiple parameters)" });
-		addAnnotation(getFunctionType_Right(), source, new String[] {
-				"documentation", "Result type of the function" });
 		addAnnotation(voidTypeEClass, source, new String[] { "documentation",
 				"Class definition for the <pre>Void</pre> type" });
 		addAnnotation(voidTypeEClass, source, new String[] { "documentation",
@@ -4806,84 +4683,6 @@ public class StructurePackageImpl extends EPackageImpl implements
 						"Abstraction of the notion of containment for type definitions. Now, kermeta metamodel contains one container\nelement, that is Package. In a later release, ModelTypeDefinition will be the main container for type and\npackage definition." });
 		addAnnotation(getTypeDefinitionContainer_OwnedTypeDefinition(), source,
 				new String[] { "documentation", "Contained TypeDefinitions" });
-	}
-
-	/**
-	 * Initializes the annotations for <b>kompiledderivedProp.getter</b>.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void createKompiledderivedPropAnnotations() {
-		String source = "kompiledderivedProp.getter";
-		addAnnotation(
-				getClassDefinition_AllOperation(),
-				source,
-				new String[] {
-						"body",
-						"{\n\n\tresult = ((kermeta.standard.Set<kermeta.language.structure.Operation>) org.kermeta.compil.runtime.helper.language.ClassUtil.newObject(\"kermeta.standard.Set<kermeta.language.structure.Operation>\"));\n\n\tresult.addAll(org.kermeta.compil.runtime.helper.basetypes.CollectionUtil.<kermeta.language.structure.Operation>convertAsOrderedSet(this.getOwnedOperation()));\n\n\t//BIft:each\n\n\t\n{\n\n\tkermeta.standard.Iterator<kermeta.language.structure.Type> it_ft38 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil.<kermeta.language.structure.Type>convertAsOrderedSet(this.getSuperType()).iterator();\n\tjava.lang.Boolean idLoopCond_106 = false;\n\twhile( !idLoopCond_106 ) {\n\tidLoopCond_106 = it_ft38.isOff();\n\tif ( idLoopCond_106 ) {\n\t} else {\n\n\t//BIle:func\nkermeta.language.structure.Type t_lbdExp38 = it_ft38.next();\n\n\tjava.lang.Boolean idIfCond_107 = false;\n\tidIfCond_107 = org.kermeta.compil.runtime.helper.language.TypeUtil.isInstance(org.kermeta.compil.runtime.ExecutionContext.getInstance().getMetaClass(\"kermeta.language.structure.Class\"), org.kermeta.compil.runtime.ExecutionContext.getInstance().getMetaClass(\"t_lbdExp38\"));\n\n\tif( idIfCond_107 ) {\n\n\tkermeta.language.structure.Class c = null;\n\n\tc = (kermeta.language.structure.Class) t_lbdExp38;\n\n\tkermeta.language.structure.ClassDefinition cDef = null;\n\n\tcDef = (kermeta.language.structure.ClassDefinition) c.getTypeDefinition();\n\n\t//BIft:each\n\n\t\n{\n\n\tkermeta.standard.Iterator<kermeta.language.structure.Operation> it_ft39 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil.<kermeta.language.structure.Operation>convertAsSet(cDef.getAllOperation()).iterator();\n\tjava.lang.Boolean idLoopCond_108 = false;\n\twhile( !idLoopCond_108 ) {\n\tidLoopCond_108 = it_ft39.isOff();\n\tif ( idLoopCond_108 ) {\n\t} else {\n\n\t//BIle:func\nkermeta.language.structure.Operation p_lbdExp39 = it_ft39.next();\n\n\tresult.add(p_lbdExp39);\n//EIle:func\n\n}\n\t}\n}\n\n//EIft:each\n\n}\n\n//EIle:func\n\n}\n\t}\n}\n\n//EIft:each\n\n}" });
-		addAnnotation(
-				getClassDefinition_AllAttribute(),
-				source,
-				new String[] {
-						"body",
-						"{\n\n\tresult = ((kermeta.standard.Set<kermeta.language.structure.Property>) org.kermeta.compil.runtime.helper.language.ClassUtil.newObject(\"kermeta.standard.Set<kermeta.language.structure.Property>\"));\n\n\tresult.addAll(org.kermeta.compil.runtime.helper.basetypes.CollectionUtil.<kermeta.language.structure.Property>convertAsOrderedSet(this.getOwnedAttribute()));\n\n\t//BIft:each\n\n\t\n{\n\n\tkermeta.standard.Iterator<kermeta.language.structure.Type> it_ft40 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil.<kermeta.language.structure.Type>convertAsOrderedSet(this.getSuperType()).iterator();\n\tjava.lang.Boolean idLoopCond_109 = false;\n\twhile( !idLoopCond_109 ) {\n\tidLoopCond_109 = it_ft40.isOff();\n\tif ( idLoopCond_109 ) {\n\t} else {\n\n\t//BIle:func\nkermeta.language.structure.Type t_lbdExp40 = it_ft40.next();\n\n\tjava.lang.Boolean idIfCond_110 = false;\n\tidIfCond_110 = org.kermeta.compil.runtime.helper.language.TypeUtil.isInstance(org.kermeta.compil.runtime.ExecutionContext.getInstance().getMetaClass(\"kermeta.language.structure.Class\"), org.kermeta.compil.runtime.ExecutionContext.getInstance().getMetaClass(\"t_lbdExp40\"));\n\n\tif( idIfCond_110 ) {\n\n\tkermeta.language.structure.Class c = null;\n\n\tc = (kermeta.language.structure.Class) t_lbdExp40;\n\n\tkermeta.language.structure.ClassDefinition cDef = null;\n\n\tcDef = (kermeta.language.structure.ClassDefinition) c.getTypeDefinition();\n\n\t//BIft:each\n\n\t\n{\n\n\tkermeta.standard.Iterator<kermeta.language.structure.Property> it_ft41 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil.<kermeta.language.structure.Property>convertAsSet(cDef.getAllAttribute()).iterator();\n\tjava.lang.Boolean idLoopCond_111 = false;\n\twhile( !idLoopCond_111 ) {\n\tidLoopCond_111 = it_ft41.isOff();\n\tif ( idLoopCond_111 ) {\n\t} else {\n\n\t//BIle:func\nkermeta.language.structure.Property p_lbdExp41 = it_ft41.next();\n\n\tresult.add(p_lbdExp41);\n//EIle:func\n\n}\n\t}\n}\n\n//EIft:each\n\n}\n\n//EIle:func\n\n}\n\t}\n}\n\n//EIft:each\n\n}" });
-		addAnnotation(
-				getClass_OwnedOperation(),
-				source,
-				new String[] {
-						"body",
-						"{\n\n\tkermeta.language.structure.ClassDefinition cDef = null;\n\n\tcDef = (kermeta.language.structure.ClassDefinition) this.getTypeDefinition();\n\n\tresult = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil.<kermeta.language.structure.Operation>convertAsOrderedSet(cDef.getOwnedOperation());\n}" });
-		addAnnotation(
-				getClass_SuperClass(),
-				source,
-				new String[] {
-						"body",
-						"{\n\n\tkermeta.language.structure.ClassDefinition cDef = null;\n\n\tcDef = (kermeta.language.structure.ClassDefinition) this.getTypeDefinition();\n\n\tkermeta.standard.OrderedSet<kermeta.language.structure.Class> supertypes = ((kermeta.standard.OrderedSet<kermeta.language.structure.Class>) org.kermeta.compil.runtime.helper.language.ClassUtil.newObject(\"kermeta.standard.OrderedSet<kermeta.language.structure.Class>\"));\n\n\t//BIft:each\n\n\t\n{\n\n\tkermeta.standard.Iterator<kermeta.language.structure.Type> it_ft82 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil.<kermeta.language.structure.Type>convertAsOrderedSet(cDef.getSuperType()).iterator();\n\tjava.lang.Boolean idLoopCond_269 = false;\n\twhile( !idLoopCond_269 ) {\n\tidLoopCond_269 = it_ft82.isOff();\n\tif ( idLoopCond_269 ) {\n\t} else {\n\n\t//BIle:func\nkermeta.language.structure.Type elem_lbdExp82 = it_ft82.next();\n\n\tjava.lang.Boolean idIfCond_270 = false;\n\tidIfCond_270 = org.kermeta.compil.runtime.helper.language.TypeUtil.isInstance(org.kermeta.compil.runtime.ExecutionContext.getInstance().getMetaClass(\"kermeta.language.structure.Class\"), org.kermeta.compil.runtime.ExecutionContext.getInstance().getMetaClass(\"elem_lbdExp82\"));\n\n\tif( idIfCond_270 ) {\n\n\tkermeta.language.structure.Class c = null;\n\n\tc = (kermeta.language.structure.Class) elem_lbdExp82;\n\n\tsupertypes.add(org.kermeta.compil.runtime.ExecutionContext.getInstance().getMetaClass(\"c\"));\n}\n\n//EIle:func\n\n}\n\t}\n}\n\n//EIft:each\n\n\n\tresult = supertypes;\n}" });
-		addAnnotation(
-				getClass_IsAbstract(),
-				source,
-				new String[] {
-						"body",
-						"{\n\n\tkermeta.language.structure.ClassDefinition cDef = null;\n\n\tcDef = (kermeta.language.structure.ClassDefinition) this.getTypeDefinition();\n\n\tresult = cDef.getIsAbstract();\n}" });
-		addAnnotation(getClass_Name(), source, new String[] { "body",
-				"{\n\n\tresult = this.getTypeDefinition().getName();\n}" });
-		addAnnotation(
-				getClass_ClassDefinition(),
-				source,
-				new String[] {
-						"body",
-						"{\n\n\tresult = (kermeta.language.structure.ClassDefinition) this.getTypeDefinition();\n}" });
-		addAnnotation(
-				getClass_OwnedAttribute(),
-				source,
-				new String[] {
-						"body",
-						"{\n\n\tkermeta.language.structure.ClassDefinition cDef = null;\n\n\tcDef = (kermeta.language.structure.ClassDefinition) this.getTypeDefinition();\n\n\tresult = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil.<kermeta.language.structure.Property>convertAsOrderedSet(cDef.getOwnedAttribute());\n}" });
-	}
-
-	/**
-	 * Initializes the annotations for <b>kompiledderivedProp.setter</b>.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void createKompiledderivedProp_1Annotations() {
-		String source = "kompiledderivedProp.setter";
-		addAnnotation(
-				getClass_OwnedOperation(),
-				source,
-				new String[] {
-						"body",
-						"{\n\n\tkermeta.language.structure.ClassDefinition cDef = null;\n\n\tcDef = (kermeta.language.structure.ClassDefinition) this.getTypeDefinition();\n\n\tresult = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil.<kermeta.language.structure.Operation>convertAsOrderedSet(cDef.getOwnedOperation());\n}" });
-		addAnnotation(
-				getClass_SuperClass(),
-				source,
-				new String[] {
-						"body",
-						"{\n\n\tkermeta.language.structure.ClassDefinition cDef = null;\n\n\tcDef = (kermeta.language.structure.ClassDefinition) this.getTypeDefinition();\n\n\tkermeta.standard.OrderedSet<kermeta.language.structure.Class> supertypes = ((kermeta.standard.OrderedSet<kermeta.language.structure.Class>) org.kermeta.compil.runtime.helper.language.ClassUtil.newObject(\"kermeta.standard.OrderedSet<kermeta.language.structure.Class>\"));\n\n\t//BIft:each\n\n\t\n{\n\n\tkermeta.standard.Iterator<kermeta.language.structure.Type> it_ft81 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil.<kermeta.language.structure.Type>convertAsOrderedSet(cDef.getSuperType()).iterator();\n\tjava.lang.Boolean idLoopCond_267 = false;\n\twhile( !idLoopCond_267 ) {\n\tidLoopCond_267 = it_ft81.isOff();\n\tif ( idLoopCond_267 ) {\n\t} else {\n\n\t//BIle:func\nkermeta.language.structure.Type elem_lbdExp81 = it_ft81.next();\n\n\tjava.lang.Boolean idIfCond_268 = false;\n\tidIfCond_268 = org.kermeta.compil.runtime.helper.language.TypeUtil.isInstance(org.kermeta.compil.runtime.ExecutionContext.getInstance().getMetaClass(\"kermeta.language.structure.Class\"), org.kermeta.compil.runtime.ExecutionContext.getInstance().getMetaClass(\"elem_lbdExp81\"));\n\n\tif( idIfCond_268 ) {\n\n\tkermeta.language.structure.Class c = null;\n\n\tc = (kermeta.language.structure.Class) elem_lbdExp81;\n\n\tsupertypes.add(org.kermeta.compil.runtime.ExecutionContext.getInstance().getMetaClass(\"c\"));\n}\n\n//EIle:func\n\n}\n\t}\n}\n\n//EIft:each\n\n\n\tresult = supertypes;\n}" });
-		addAnnotation(getClass_Name(), source, new String[] { "body",
-				"{\n\n\tresult = this.getTypeDefinition().getName();\n}" });
 	}
 
 	/**

@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: EcorePackageImpl.java,v 1.1 2008-09-04 15:40:23 cfaucher Exp $
+ * $Id: EcorePackageImpl.java,v 1.2 2008-09-22 14:44:20 cfaucher Exp $
  */
 package ecore.impl;
 
@@ -139,6 +139,13 @@ public class EcorePackageImpl extends EPackageImpl implements EcorePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	private EClass eAnnotationEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	private EClass eClassEClass = null;
 
 	/**
@@ -153,7 +160,21 @@ public class EcorePackageImpl extends EPackageImpl implements EcorePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	private EClass eDataTypeEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	private EClass eEnumEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass eEnumLiteralEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -174,6 +195,13 @@ public class EcorePackageImpl extends EPackageImpl implements EcorePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	private EClass eNamedElementEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	private EClass eObjectEClass = null;
 
 	/**
@@ -181,7 +209,21 @@ public class EcorePackageImpl extends EPackageImpl implements EcorePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	private EClass eOperationEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	private EClass ePackageEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass eParameterEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -203,48 +245,6 @@ public class EcorePackageImpl extends EPackageImpl implements EcorePackage {
 	 * @generated
 	 */
 	private EClass eTypedElementEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass eAnnotationEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass eDataTypeEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass eEnumLiteralEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass eNamedElementEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass eOperationEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass eParameterEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -557,70 +557,58 @@ public class EcorePackageImpl extends EPackageImpl implements EcorePackage {
 				.getEPackage(KermetaPackage.eNS_URI) instanceof KermetaPackageImpl ? EPackage.Registry.INSTANCE
 				.getEPackage(KermetaPackage.eNS_URI)
 				: KermetaPackage.eINSTANCE);
-		LanguagePackageImpl theLanguagePackage = (LanguagePackageImpl) (EPackage.Registry.INSTANCE
-				.getEPackage(LanguagePackage.eNS_URI) instanceof LanguagePackageImpl ? EPackage.Registry.INSTANCE
-				.getEPackage(LanguagePackage.eNS_URI)
-				: LanguagePackage.eINSTANCE);
-		StructurePackageImpl theStructurePackage = (StructurePackageImpl) (EPackage.Registry.INSTANCE
-				.getEPackage(StructurePackage.eNS_URI) instanceof StructurePackageImpl ? EPackage.Registry.INSTANCE
-				.getEPackage(StructurePackage.eNS_URI)
-				: StructurePackage.eINSTANCE);
-		BehaviorPackageImpl theBehaviorPackage = (BehaviorPackageImpl) (EPackage.Registry.INSTANCE
-				.getEPackage(BehaviorPackage.eNS_URI) instanceof BehaviorPackageImpl ? EPackage.Registry.INSTANCE
-				.getEPackage(BehaviorPackage.eNS_URI)
-				: BehaviorPackage.eINSTANCE);
 		StandardPackageImpl theStandardPackage = (StandardPackageImpl) (EPackage.Registry.INSTANCE
 				.getEPackage(StandardPackage.eNS_URI) instanceof StandardPackageImpl ? EPackage.Registry.INSTANCE
 				.getEPackage(StandardPackage.eNS_URI)
 				: StandardPackage.eINSTANCE);
+		LanguagePackageImpl theLanguagePackage = (LanguagePackageImpl) (EPackage.Registry.INSTANCE
+				.getEPackage(LanguagePackage.eNS_URI) instanceof LanguagePackageImpl ? EPackage.Registry.INSTANCE
+				.getEPackage(LanguagePackage.eNS_URI)
+				: LanguagePackage.eINSTANCE);
+		BehaviorPackageImpl theBehaviorPackage = (BehaviorPackageImpl) (EPackage.Registry.INSTANCE
+				.getEPackage(BehaviorPackage.eNS_URI) instanceof BehaviorPackageImpl ? EPackage.Registry.INSTANCE
+				.getEPackage(BehaviorPackage.eNS_URI)
+				: BehaviorPackage.eINSTANCE);
+		StructurePackageImpl theStructurePackage = (StructurePackageImpl) (EPackage.Registry.INSTANCE
+				.getEPackage(StructurePackage.eNS_URI) instanceof StructurePackageImpl ? EPackage.Registry.INSTANCE
+				.getEPackage(StructurePackage.eNS_URI)
+				: StructurePackage.eINSTANCE);
 		CompilerPackageImpl theCompilerPackage = (CompilerPackageImpl) (EPackage.Registry.INSTANCE
 				.getEPackage(CompilerPackage.eNS_URI) instanceof CompilerPackageImpl ? EPackage.Registry.INSTANCE
 				.getEPackage(CompilerPackage.eNS_URI)
 				: CompilerPackage.eINSTANCE);
-		PersistencePackageImpl thePersistencePackage = (PersistencePackageImpl) (EPackage.Registry.INSTANCE
-				.getEPackage(PersistencePackage.eNS_URI) instanceof PersistencePackageImpl ? EPackage.Registry.INSTANCE
-				.getEPackage(PersistencePackage.eNS_URI)
-				: PersistencePackage.eINSTANCE);
-		IoPackageImpl theIoPackage = (IoPackageImpl) (EPackage.Registry.INSTANCE
-				.getEPackage(IoPackage.eNS_URI) instanceof IoPackageImpl ? EPackage.Registry.INSTANCE
-				.getEPackage(IoPackage.eNS_URI)
-				: IoPackage.eINSTANCE);
-		ExceptionsPackageImpl theExceptionsPackage = (ExceptionsPackageImpl) (EPackage.Registry.INSTANCE
-				.getEPackage(ExceptionsPackage.eNS_URI) instanceof ExceptionsPackageImpl ? EPackage.Registry.INSTANCE
-				.getEPackage(ExceptionsPackage.eNS_URI)
-				: ExceptionsPackage.eINSTANCE);
-		UtilsPackageImpl theUtilsPackage = (UtilsPackageImpl) (EPackage.Registry.INSTANCE
-				.getEPackage(UtilsPackage.eNS_URI) instanceof UtilsPackageImpl ? EPackage.Registry.INSTANCE
-				.getEPackage(UtilsPackage.eNS_URI)
-				: UtilsPackage.eINSTANCE);
 		KunitPackageImpl theKunitPackage = (KunitPackageImpl) (EPackage.Registry.INSTANCE
 				.getEPackage(KunitPackage.eNS_URI) instanceof KunitPackageImpl ? EPackage.Registry.INSTANCE
 				.getEPackage(KunitPackage.eNS_URI)
 				: KunitPackage.eINSTANCE);
-		kermeta.ecore.impl.EcorePackageImpl theEcorePackage_1 = (kermeta.ecore.impl.EcorePackageImpl) (EPackage.Registry.INSTANCE
-				.getEPackage(kermeta.ecore.EcorePackage.eNS_URI) instanceof kermeta.ecore.impl.EcorePackageImpl ? EPackage.Registry.INSTANCE
-				.getEPackage(kermeta.ecore.EcorePackage.eNS_URI)
-				: kermeta.ecore.EcorePackage.eINSTANCE);
+		IoPackageImpl theIoPackage = (IoPackageImpl) (EPackage.Registry.INSTANCE
+				.getEPackage(IoPackage.eNS_URI) instanceof IoPackageImpl ? EPackage.Registry.INSTANCE
+				.getEPackage(IoPackage.eNS_URI)
+				: IoPackage.eINSTANCE);
 		InterpreterPackageImpl theInterpreterPackage = (InterpreterPackageImpl) (EPackage.Registry.INSTANCE
 				.getEPackage(InterpreterPackage.eNS_URI) instanceof InterpreterPackageImpl ? EPackage.Registry.INSTANCE
 				.getEPackage(InterpreterPackage.eNS_URI)
 				: InterpreterPackage.eINSTANCE);
+		PersistencePackageImpl thePersistencePackage = (PersistencePackageImpl) (EPackage.Registry.INSTANCE
+				.getEPackage(PersistencePackage.eNS_URI) instanceof PersistencePackageImpl ? EPackage.Registry.INSTANCE
+				.getEPackage(PersistencePackage.eNS_URI)
+				: PersistencePackage.eINSTANCE);
+		UtilsPackageImpl theUtilsPackage = (UtilsPackageImpl) (EPackage.Registry.INSTANCE
+				.getEPackage(UtilsPackage.eNS_URI) instanceof UtilsPackageImpl ? EPackage.Registry.INSTANCE
+				.getEPackage(UtilsPackage.eNS_URI)
+				: UtilsPackage.eINSTANCE);
+		kermeta.ecore.impl.EcorePackageImpl theEcorePackage_1 = (kermeta.ecore.impl.EcorePackageImpl) (EPackage.Registry.INSTANCE
+				.getEPackage(kermeta.ecore.EcorePackage.eNS_URI) instanceof kermeta.ecore.impl.EcorePackageImpl ? EPackage.Registry.INSTANCE
+				.getEPackage(kermeta.ecore.EcorePackage.eNS_URI)
+				: kermeta.ecore.EcorePackage.eINSTANCE);
+		ExceptionsPackageImpl theExceptionsPackage = (ExceptionsPackageImpl) (EPackage.Registry.INSTANCE
+				.getEPackage(ExceptionsPackage.eNS_URI) instanceof ExceptionsPackageImpl ? EPackage.Registry.INSTANCE
+				.getEPackage(ExceptionsPackage.eNS_URI)
+				: ExceptionsPackage.eINSTANCE);
 		Km2ecorePackageImpl theKm2ecorePackage = (Km2ecorePackageImpl) (EPackage.Registry.INSTANCE
 				.getEPackage(Km2ecorePackage.eNS_URI) instanceof Km2ecorePackageImpl ? EPackage.Registry.INSTANCE
 				.getEPackage(Km2ecorePackage.eNS_URI)
 				: Km2ecorePackage.eINSTANCE);
-		km2ecore.helper.ecore.impl.EcorePackageImpl theEcorePackage_2 = (km2ecore.helper.ecore.impl.EcorePackageImpl) (EPackage.Registry.INSTANCE
-				.getEPackage(km2ecore.helper.ecore.EcorePackage.eNS_URI) instanceof km2ecore.helper.ecore.impl.EcorePackageImpl ? EPackage.Registry.INSTANCE
-				.getEPackage(km2ecore.helper.ecore.EcorePackage.eNS_URI)
-				: km2ecore.helper.ecore.EcorePackage.eINSTANCE);
-		JavaPackageImpl theJavaPackage = (JavaPackageImpl) (EPackage.Registry.INSTANCE
-				.getEPackage(JavaPackage.eNS_URI) instanceof JavaPackageImpl ? EPackage.Registry.INSTANCE
-				.getEPackage(JavaPackage.eNS_URI)
-				: JavaPackage.eINSTANCE);
-		km2ecore.helper.kermeta.impl.KermetaPackageImpl theKermetaPackage_1 = (km2ecore.helper.kermeta.impl.KermetaPackageImpl) (EPackage.Registry.INSTANCE
-				.getEPackage(km2ecore.helper.kermeta.KermetaPackage.eNS_URI) instanceof km2ecore.helper.kermeta.impl.KermetaPackageImpl ? EPackage.Registry.INSTANCE
-				.getEPackage(km2ecore.helper.kermeta.KermetaPackage.eNS_URI)
-				: km2ecore.helper.kermeta.KermetaPackage.eINSTANCE);
 		CommonPackageImpl theCommonPackage = (CommonPackageImpl) (EPackage.Registry.INSTANCE
 				.getEPackage(CommonPackage.eNS_URI) instanceof CommonPackageImpl ? EPackage.Registry.INSTANCE
 				.getEPackage(CommonPackage.eNS_URI)
@@ -629,62 +617,74 @@ public class EcorePackageImpl extends EPackageImpl implements EcorePackage {
 				.getEPackage(ExceptionPackage.eNS_URI) instanceof ExceptionPackageImpl ? EPackage.Registry.INSTANCE
 				.getEPackage(ExceptionPackage.eNS_URI)
 				: ExceptionPackage.eINSTANCE);
-		SimkPackageImpl theSimkPackage = (SimkPackageImpl) (EPackage.Registry.INSTANCE
-				.getEPackage(SimkPackage.eNS_URI) instanceof SimkPackageImpl ? EPackage.Registry.INSTANCE
-				.getEPackage(SimkPackage.eNS_URI)
-				: SimkPackage.eINSTANCE);
+		JavaPackageImpl theJavaPackage = (JavaPackageImpl) (EPackage.Registry.INSTANCE
+				.getEPackage(JavaPackage.eNS_URI) instanceof JavaPackageImpl ? EPackage.Registry.INSTANCE
+				.getEPackage(JavaPackage.eNS_URI)
+				: JavaPackage.eINSTANCE);
+		km2ecore.helper.ecore.impl.EcorePackageImpl theEcorePackage_2 = (km2ecore.helper.ecore.impl.EcorePackageImpl) (EPackage.Registry.INSTANCE
+				.getEPackage(km2ecore.helper.ecore.EcorePackage.eNS_URI) instanceof km2ecore.helper.ecore.impl.EcorePackageImpl ? EPackage.Registry.INSTANCE
+				.getEPackage(km2ecore.helper.ecore.EcorePackage.eNS_URI)
+				: km2ecore.helper.ecore.EcorePackage.eINSTANCE);
+		km2ecore.helper.kermeta.impl.KermetaPackageImpl theKermetaPackage_1 = (km2ecore.helper.kermeta.impl.KermetaPackageImpl) (EPackage.Registry.INSTANCE
+				.getEPackage(km2ecore.helper.kermeta.KermetaPackage.eNS_URI) instanceof km2ecore.helper.kermeta.impl.KermetaPackageImpl ? EPackage.Registry.INSTANCE
+				.getEPackage(km2ecore.helper.kermeta.KermetaPackage.eNS_URI)
+				: km2ecore.helper.kermeta.KermetaPackage.eINSTANCE);
 		TraceabilityPackageImpl theTraceabilityPackage = (TraceabilityPackageImpl) (EPackage.Registry.INSTANCE
 				.getEPackage(TraceabilityPackage.eNS_URI) instanceof TraceabilityPackageImpl ? EPackage.Registry.INSTANCE
 				.getEPackage(TraceabilityPackage.eNS_URI)
 				: TraceabilityPackage.eINSTANCE);
+		SimkPackageImpl theSimkPackage = (SimkPackageImpl) (EPackage.Registry.INSTANCE
+				.getEPackage(SimkPackage.eNS_URI) instanceof SimkPackageImpl ? EPackage.Registry.INSTANCE
+				.getEPackage(SimkPackage.eNS_URI)
+				: SimkPackage.eINSTANCE);
 
 		// Create package meta-data objects
 		theEcorePackage.createPackageContents();
 		theKermetaPackage.createPackageContents();
-		theLanguagePackage.createPackageContents();
-		theStructurePackage.createPackageContents();
-		theBehaviorPackage.createPackageContents();
 		theStandardPackage.createPackageContents();
+		theLanguagePackage.createPackageContents();
+		theBehaviorPackage.createPackageContents();
+		theStructurePackage.createPackageContents();
 		theCompilerPackage.createPackageContents();
-		thePersistencePackage.createPackageContents();
-		theIoPackage.createPackageContents();
-		theExceptionsPackage.createPackageContents();
-		theUtilsPackage.createPackageContents();
 		theKunitPackage.createPackageContents();
-		theEcorePackage_1.createPackageContents();
+		theIoPackage.createPackageContents();
 		theInterpreterPackage.createPackageContents();
+		thePersistencePackage.createPackageContents();
+		theUtilsPackage.createPackageContents();
+		theEcorePackage_1.createPackageContents();
+		theExceptionsPackage.createPackageContents();
 		theKm2ecorePackage.createPackageContents();
-		theEcorePackage_2.createPackageContents();
-		theJavaPackage.createPackageContents();
-		theKermetaPackage_1.createPackageContents();
 		theCommonPackage.createPackageContents();
 		theExceptionPackage.createPackageContents();
-		theSimkPackage.createPackageContents();
+		theJavaPackage.createPackageContents();
+		theEcorePackage_2.createPackageContents();
+		theKermetaPackage_1.createPackageContents();
 		theTraceabilityPackage.createPackageContents();
+		theSimkPackage.createPackageContents();
 
 		// Initialize created meta-data
 		theEcorePackage.initializePackageContents();
 		theKermetaPackage.initializePackageContents();
-		theLanguagePackage.initializePackageContents();
-		theStructurePackage.initializePackageContents();
-		theBehaviorPackage.initializePackageContents();
 		theStandardPackage.initializePackageContents();
+		theLanguagePackage.initializePackageContents();
+		theBehaviorPackage.initializePackageContents();
+		theStructurePackage.initializePackageContents();
 		theCompilerPackage.initializePackageContents();
-		thePersistencePackage.initializePackageContents();
-		theIoPackage.initializePackageContents();
-		theExceptionsPackage.initializePackageContents();
-		theUtilsPackage.initializePackageContents();
 		theKunitPackage.initializePackageContents();
-		theEcorePackage_1.initializePackageContents();
+		theIoPackage.initializePackageContents();
 		theInterpreterPackage.initializePackageContents();
+		thePersistencePackage.initializePackageContents();
+		theUtilsPackage.initializePackageContents();
+		theEcorePackage_1.initializePackageContents();
+		theExceptionsPackage.initializePackageContents();
 		theKm2ecorePackage.initializePackageContents();
-		theEcorePackage_2.initializePackageContents();
-		theJavaPackage.initializePackageContents();
-		theKermetaPackage_1.initializePackageContents();
 		theCommonPackage.initializePackageContents();
 		theExceptionPackage.initializePackageContents();
-		theSimkPackage.initializePackageContents();
+		theJavaPackage.initializePackageContents();
+		theEcorePackage_2.initializePackageContents();
+		theKermetaPackage_1.initializePackageContents();
 		theTraceabilityPackage.initializePackageContents();
+		theSimkPackage.initializePackageContents();
 
 		// Mark meta-data to indicate it can't be changed
 		theEcorePackage.freeze();
@@ -706,592 +706,8 @@ public class EcorePackageImpl extends EPackageImpl implements EcorePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getEAttribute_EAttributeType() {
-		return (EReference) eAttributeEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EAttribute getEAttribute_ID() {
-		return (EAttribute) eAttributeEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EClass getEClass() {
-		return eClassEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getEClass_Abstract() {
-		return (EAttribute) eClassEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getEClass_EStructuralFeatures() {
-		return (EReference) eClassEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getEClass_EAllAttributes() {
-		return (EReference) eClassEClass.getEStructuralFeatures().get(2);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getEClass_EOperations() {
-		return (EReference) eClassEClass.getEStructuralFeatures().get(3);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getEClass_EReferences() {
-		return (EReference) eClassEClass.getEStructuralFeatures().get(4);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getEClass_Interface() {
-		return (EAttribute) eClassEClass.getEStructuralFeatures().get(5);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getEClass_ESuperTypes() {
-		return (EReference) eClassEClass.getEStructuralFeatures().get(6);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getEClass_EAllReferences() {
-		return (EReference) eClassEClass.getEStructuralFeatures().get(7);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getEClass_EAllContainments() {
-		return (EReference) eClassEClass.getEStructuralFeatures().get(8);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getEClass_EGenericSuperTypes() {
-		return (EReference) eClassEClass.getEStructuralFeatures().get(9);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getEClass_EAllGenericSuperTypes() {
-		return (EReference) eClassEClass.getEStructuralFeatures().get(10);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getEClass_EAttributes() {
-		return (EReference) eClassEClass.getEStructuralFeatures().get(11);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getEClass_EIDAttribute() {
-		return (EReference) eClassEClass.getEStructuralFeatures().get(12);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getEClass_EAllOperations() {
-		return (EReference) eClassEClass.getEStructuralFeatures().get(13);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getEClass_EAllStructuralFeatures() {
-		return (EReference) eClassEClass.getEStructuralFeatures().get(14);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getEClass_EAllSuperTypes() {
-		return (EReference) eClassEClass.getEStructuralFeatures().get(15);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EClass getEClassifier() {
-		return eClassifierEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getEClassifier_InstanceClassName() {
-		return (EAttribute) eClassifierEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getEClassifier_EPackage() {
-		return (EReference) eClassifierEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getEClassifier_InstanceClass() {
-		return (EAttribute) eClassifierEClass.getEStructuralFeatures().get(2);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getEClassifier_ETypeParameters() {
-		return (EReference) eClassifierEClass.getEStructuralFeatures().get(3);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getEClassifier_DefaultValue() {
-		return (EAttribute) eClassifierEClass.getEStructuralFeatures().get(4);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getEClassifier_InstanceTypeName() {
-		return (EAttribute) eClassifierEClass.getEStructuralFeatures().get(5);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EClass getEEnum() {
-		return eEnumEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getEEnum_ELiterals() {
-		return (EReference) eEnumEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EClass getEFactory() {
-		return eFactoryEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getEFactory_EPackage() {
-		return (EReference) eFactoryEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EClass getEModelElement() {
-		return eModelElementEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getEModelElement_EAnnotations() {
-		return (EReference) eModelElementEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EClass getEObject() {
-		return eObjectEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EClass getEPackage() {
-		return ePackageEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getEPackage_NsURI() {
-		return (EAttribute) ePackageEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getEPackage_ESubpackages() {
-		return (EReference) ePackageEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getEPackage_ESuperPackage() {
-		return (EReference) ePackageEClass.getEStructuralFeatures().get(2);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getEPackage_NsPrefix() {
-		return (EAttribute) ePackageEClass.getEStructuralFeatures().get(3);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getEPackage_EFactoryInstance() {
-		return (EReference) ePackageEClass.getEStructuralFeatures().get(4);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getEPackage_EClassifiers() {
-		return (EReference) ePackageEClass.getEStructuralFeatures().get(5);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EClass getEReference() {
-		return eReferenceEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getEReference_EOpposite() {
-		return (EReference) eReferenceEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getEReference_EReferenceType() {
-		return (EReference) eReferenceEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getEReference_ResolveProxies() {
-		return (EAttribute) eReferenceEClass.getEStructuralFeatures().get(2);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getEReference_Container() {
-		return (EAttribute) eReferenceEClass.getEStructuralFeatures().get(3);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getEReference_EKeys() {
-		return (EReference) eReferenceEClass.getEStructuralFeatures().get(4);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getEReference_Containment() {
-		return (EAttribute) eReferenceEClass.getEStructuralFeatures().get(5);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EClass getEStructuralFeature() {
-		return eStructuralFeatureEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getEStructuralFeature_Volatile() {
-		return (EAttribute) eStructuralFeatureEClass.getEStructuralFeatures()
-				.get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getEStructuralFeature_DefaultValueLiteral() {
-		return (EAttribute) eStructuralFeatureEClass.getEStructuralFeatures()
-				.get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getEStructuralFeature_EContainingClass() {
-		return (EReference) eStructuralFeatureEClass.getEStructuralFeatures()
-				.get(2);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getEStructuralFeature_Transient() {
-		return (EAttribute) eStructuralFeatureEClass.getEStructuralFeatures()
-				.get(3);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getEStructuralFeature_Unsettable() {
-		return (EAttribute) eStructuralFeatureEClass.getEStructuralFeatures()
-				.get(4);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getEStructuralFeature_Derived() {
-		return (EAttribute) eStructuralFeatureEClass.getEStructuralFeatures()
-				.get(5);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getEStructuralFeature_DefaultValue() {
-		return (EAttribute) eStructuralFeatureEClass.getEStructuralFeatures()
-				.get(6);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getEStructuralFeature_Changeable() {
-		return (EAttribute) eStructuralFeatureEClass.getEStructuralFeatures()
-				.get(7);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EClass getETypedElement() {
-		return eTypedElementEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getETypedElement_Many() {
-		return (EAttribute) eTypedElementEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getETypedElement_LowerBound() {
-		return (EAttribute) eTypedElementEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getETypedElement_Unique() {
-		return (EAttribute) eTypedElementEClass.getEStructuralFeatures().get(2);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getETypedElement_EType() {
-		return (EReference) eTypedElementEClass.getEStructuralFeatures().get(3);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getETypedElement_Ordered() {
-		return (EAttribute) eTypedElementEClass.getEStructuralFeatures().get(4);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getETypedElement_Required() {
-		return (EAttribute) eTypedElementEClass.getEStructuralFeatures().get(5);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getETypedElement_UpperBound() {
-		return (EAttribute) eTypedElementEClass.getEStructuralFeatures().get(6);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getETypedElement_EGenericType() {
-		return (EReference) eTypedElementEClass.getEStructuralFeatures().get(7);
+		return (EAttribute) eAttributeEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -1353,6 +769,114 @@ public class EcorePackageImpl extends EPackageImpl implements EcorePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getEClass() {
+		return eClassEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getEClass_EStructuralFeatures() {
+		return (EReference) eClassEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getEClass_Abstract() {
+		return (EAttribute) eClassEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getEClass_EOperations() {
+		return (EReference) eClassEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getEClass_Interface() {
+		return (EAttribute) eClassEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getEClass_ESuperTypes() {
+		return (EReference) eClassEClass.getEStructuralFeatures().get(4);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getEClass_EGenericSuperTypes() {
+		return (EReference) eClassEClass.getEStructuralFeatures().get(5);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getEClassifier() {
+		return eClassifierEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getEClassifier_InstanceClassName() {
+		return (EAttribute) eClassifierEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getEClassifier_EPackage() {
+		return (EReference) eClassifierEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getEClassifier_ETypeParameters() {
+		return (EReference) eClassifierEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getEClassifier_InstanceTypeName() {
+		return (EAttribute) eClassifierEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getEDataType() {
 		return eDataTypeEClass;
 	}
@@ -1364,6 +888,24 @@ public class EcorePackageImpl extends EPackageImpl implements EcorePackage {
 	 */
 	public EAttribute getEDataType_Serializable() {
 		return (EAttribute) eDataTypeEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getEEnum() {
+		return eEnumEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getEEnum_ELiterals() {
+		return (EReference) eEnumEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -1416,6 +958,42 @@ public class EcorePackageImpl extends EPackageImpl implements EcorePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getEFactory() {
+		return eFactoryEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getEFactory_EPackage() {
+		return (EReference) eFactoryEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getEModelElement() {
+		return eModelElementEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getEModelElement_EAnnotations() {
+		return (EReference) eModelElementEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getENamedElement() {
 		return eNamedElementEClass;
 	}
@@ -1427,6 +1005,15 @@ public class EcorePackageImpl extends EPackageImpl implements EcorePackage {
 	 */
 	public EAttribute getENamedElement_Name() {
 		return (EAttribute) eNamedElementEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getEObject() {
+		return eObjectEClass;
 	}
 
 	/**
@@ -1488,6 +1075,69 @@ public class EcorePackageImpl extends EPackageImpl implements EcorePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getEPackage() {
+		return ePackageEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getEPackage_NsURI() {
+		return (EAttribute) ePackageEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getEPackage_ESubpackages() {
+		return (EReference) ePackageEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getEPackage_ESuperPackage() {
+		return (EReference) ePackageEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getEPackage_NsPrefix() {
+		return (EAttribute) ePackageEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getEPackage_EClassifiers() {
+		return (EReference) ePackageEClass.getEStructuralFeatures().get(4);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getEPackage_EFactoryInstance() {
+		return (EReference) ePackageEClass.getEStructuralFeatures().get(5);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getEParameter() {
 		return eParameterEClass;
 	}
@@ -1499,6 +1149,193 @@ public class EcorePackageImpl extends EPackageImpl implements EcorePackage {
 	 */
 	public EReference getEParameter_EOperation() {
 		return (EReference) eParameterEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getEReference() {
+		return eReferenceEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getEReference_EOpposite() {
+		return (EReference) eReferenceEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getEReference_ResolveProxies() {
+		return (EAttribute) eReferenceEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getEReference_EKeys() {
+		return (EReference) eReferenceEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getEReference_Containment() {
+		return (EAttribute) eReferenceEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getEStructuralFeature() {
+		return eStructuralFeatureEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getEStructuralFeature_Volatile() {
+		return (EAttribute) eStructuralFeatureEClass.getEStructuralFeatures()
+				.get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getEStructuralFeature_EContainingClass() {
+		return (EReference) eStructuralFeatureEClass.getEStructuralFeatures()
+				.get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getEStructuralFeature_DefaultValueLiteral() {
+		return (EAttribute) eStructuralFeatureEClass.getEStructuralFeatures()
+				.get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getEStructuralFeature_Transient() {
+		return (EAttribute) eStructuralFeatureEClass.getEStructuralFeatures()
+				.get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getEStructuralFeature_Unsettable() {
+		return (EAttribute) eStructuralFeatureEClass.getEStructuralFeatures()
+				.get(4);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getEStructuralFeature_Derived() {
+		return (EAttribute) eStructuralFeatureEClass.getEStructuralFeatures()
+				.get(5);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getEStructuralFeature_Changeable() {
+		return (EAttribute) eStructuralFeatureEClass.getEStructuralFeatures()
+				.get(6);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getETypedElement() {
+		return eTypedElementEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getETypedElement_LowerBound() {
+		return (EAttribute) eTypedElementEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getETypedElement_Unique() {
+		return (EAttribute) eTypedElementEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getETypedElement_EType() {
+		return (EReference) eTypedElementEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getETypedElement_Ordered() {
+		return (EAttribute) eTypedElementEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getETypedElement_UpperBound() {
+		return (EAttribute) eTypedElementEClass.getEStructuralFeatures().get(4);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getETypedElement_EGenericType() {
+		return (EReference) eTypedElementEClass.getEStructuralFeatures().get(5);
 	}
 
 	/**
@@ -1544,7 +1381,7 @@ public class EcorePackageImpl extends EPackageImpl implements EcorePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getEGenericType_EUpperBound() {
+	public EReference getEGenericType_ETypeArguments() {
 		return (EReference) eGenericTypeEClass.getEStructuralFeatures().get(0);
 	}
 
@@ -1553,7 +1390,7 @@ public class EcorePackageImpl extends EPackageImpl implements EcorePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getEGenericType_ETypeArguments() {
+	public EReference getEGenericType_EUpperBound() {
 		return (EReference) eGenericTypeEClass.getEStructuralFeatures().get(1);
 	}
 
@@ -1571,7 +1408,7 @@ public class EcorePackageImpl extends EPackageImpl implements EcorePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getEGenericType_ERawType() {
+	public EReference getEGenericType_ETypeParameter() {
 		return (EReference) eGenericTypeEClass.getEStructuralFeatures().get(3);
 	}
 
@@ -1580,17 +1417,8 @@ public class EcorePackageImpl extends EPackageImpl implements EcorePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getEGenericType_ETypeParameter() {
-		return (EReference) eGenericTypeEClass.getEStructuralFeatures().get(4);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EReference getEGenericType_ELowerBound() {
-		return (EReference) eGenericTypeEClass.getEStructuralFeatures().get(5);
+		return (EReference) eGenericTypeEClass.getEStructuralFeatures().get(4);
 	}
 
 	/**
@@ -1930,88 +1758,7 @@ public class EcorePackageImpl extends EPackageImpl implements EcorePackage {
 
 		// Create classes and their features
 		eAttributeEClass = createEClass(EATTRIBUTE);
-		createEReference(eAttributeEClass, EATTRIBUTE__EATTRIBUTE_TYPE);
 		createEAttribute(eAttributeEClass, EATTRIBUTE__ID);
-
-		eClassEClass = createEClass(ECLASS);
-		createEAttribute(eClassEClass, ECLASS__ABSTRACT);
-		createEReference(eClassEClass, ECLASS__ESTRUCTURAL_FEATURES);
-		createEReference(eClassEClass, ECLASS__EALL_ATTRIBUTES);
-		createEReference(eClassEClass, ECLASS__EOPERATIONS);
-		createEReference(eClassEClass, ECLASS__EREFERENCES);
-		createEAttribute(eClassEClass, ECLASS__INTERFACE);
-		createEReference(eClassEClass, ECLASS__ESUPER_TYPES);
-		createEReference(eClassEClass, ECLASS__EALL_REFERENCES);
-		createEReference(eClassEClass, ECLASS__EALL_CONTAINMENTS);
-		createEReference(eClassEClass, ECLASS__EGENERIC_SUPER_TYPES);
-		createEReference(eClassEClass, ECLASS__EALL_GENERIC_SUPER_TYPES);
-		createEReference(eClassEClass, ECLASS__EATTRIBUTES);
-		createEReference(eClassEClass, ECLASS__EID_ATTRIBUTE);
-		createEReference(eClassEClass, ECLASS__EALL_OPERATIONS);
-		createEReference(eClassEClass, ECLASS__EALL_STRUCTURAL_FEATURES);
-		createEReference(eClassEClass, ECLASS__EALL_SUPER_TYPES);
-
-		eClassifierEClass = createEClass(ECLASSIFIER);
-		createEAttribute(eClassifierEClass, ECLASSIFIER__INSTANCE_CLASS_NAME);
-		createEReference(eClassifierEClass, ECLASSIFIER__EPACKAGE);
-		createEAttribute(eClassifierEClass, ECLASSIFIER__INSTANCE_CLASS);
-		createEReference(eClassifierEClass, ECLASSIFIER__ETYPE_PARAMETERS);
-		createEAttribute(eClassifierEClass, ECLASSIFIER__DEFAULT_VALUE);
-		createEAttribute(eClassifierEClass, ECLASSIFIER__INSTANCE_TYPE_NAME);
-
-		eEnumEClass = createEClass(EENUM);
-		createEReference(eEnumEClass, EENUM__ELITERALS);
-
-		eFactoryEClass = createEClass(EFACTORY);
-		createEReference(eFactoryEClass, EFACTORY__EPACKAGE);
-
-		eModelElementEClass = createEClass(EMODEL_ELEMENT);
-		createEReference(eModelElementEClass, EMODEL_ELEMENT__EANNOTATIONS);
-
-		eObjectEClass = createEClass(EOBJECT);
-
-		ePackageEClass = createEClass(EPACKAGE);
-		createEAttribute(ePackageEClass, EPACKAGE__NS_URI);
-		createEReference(ePackageEClass, EPACKAGE__ESUBPACKAGES);
-		createEReference(ePackageEClass, EPACKAGE__ESUPER_PACKAGE);
-		createEAttribute(ePackageEClass, EPACKAGE__NS_PREFIX);
-		createEReference(ePackageEClass, EPACKAGE__EFACTORY_INSTANCE);
-		createEReference(ePackageEClass, EPACKAGE__ECLASSIFIERS);
-
-		eReferenceEClass = createEClass(EREFERENCE);
-		createEReference(eReferenceEClass, EREFERENCE__EOPPOSITE);
-		createEReference(eReferenceEClass, EREFERENCE__EREFERENCE_TYPE);
-		createEAttribute(eReferenceEClass, EREFERENCE__RESOLVE_PROXIES);
-		createEAttribute(eReferenceEClass, EREFERENCE__CONTAINER);
-		createEReference(eReferenceEClass, EREFERENCE__EKEYS);
-		createEAttribute(eReferenceEClass, EREFERENCE__CONTAINMENT);
-
-		eStructuralFeatureEClass = createEClass(ESTRUCTURAL_FEATURE);
-		createEAttribute(eStructuralFeatureEClass,
-				ESTRUCTURAL_FEATURE__VOLATILE);
-		createEAttribute(eStructuralFeatureEClass,
-				ESTRUCTURAL_FEATURE__DEFAULT_VALUE_LITERAL);
-		createEReference(eStructuralFeatureEClass,
-				ESTRUCTURAL_FEATURE__ECONTAINING_CLASS);
-		createEAttribute(eStructuralFeatureEClass,
-				ESTRUCTURAL_FEATURE__TRANSIENT);
-		createEAttribute(eStructuralFeatureEClass,
-				ESTRUCTURAL_FEATURE__UNSETTABLE);
-		createEAttribute(eStructuralFeatureEClass, ESTRUCTURAL_FEATURE__DERIVED);
-		createEAttribute(eStructuralFeatureEClass,
-				ESTRUCTURAL_FEATURE__DEFAULT_VALUE);
-		createEAttribute(eStructuralFeatureEClass,
-				ESTRUCTURAL_FEATURE__CHANGEABLE);
-
-		eTypedElementEClass = createEClass(ETYPED_ELEMENT);
-		createEAttribute(eTypedElementEClass, ETYPED_ELEMENT__MANY);
-		createEAttribute(eTypedElementEClass, ETYPED_ELEMENT__LOWER_BOUND);
-		createEAttribute(eTypedElementEClass, ETYPED_ELEMENT__UNIQUE);
-		createEReference(eTypedElementEClass, ETYPED_ELEMENT__ETYPE);
-		createEAttribute(eTypedElementEClass, ETYPED_ELEMENT__ORDERED);
-		createEAttribute(eTypedElementEClass, ETYPED_ELEMENT__REQUIRED);
-		createEAttribute(eTypedElementEClass, ETYPED_ELEMENT__UPPER_BOUND);
-		createEReference(eTypedElementEClass, ETYPED_ELEMENT__EGENERIC_TYPE);
 
 		eAnnotationEClass = createEClass(EANNOTATION);
 		createEReference(eAnnotationEClass, EANNOTATION__REFERENCES);
@@ -2020,8 +1767,25 @@ public class EcorePackageImpl extends EPackageImpl implements EcorePackage {
 		createEReference(eAnnotationEClass, EANNOTATION__CONTENTS);
 		createEReference(eAnnotationEClass, EANNOTATION__EMODEL_ELEMENT);
 
+		eClassEClass = createEClass(ECLASS);
+		createEReference(eClassEClass, ECLASS__ESTRUCTURAL_FEATURES);
+		createEAttribute(eClassEClass, ECLASS__ABSTRACT);
+		createEReference(eClassEClass, ECLASS__EOPERATIONS);
+		createEAttribute(eClassEClass, ECLASS__INTERFACE);
+		createEReference(eClassEClass, ECLASS__ESUPER_TYPES);
+		createEReference(eClassEClass, ECLASS__EGENERIC_SUPER_TYPES);
+
+		eClassifierEClass = createEClass(ECLASSIFIER);
+		createEAttribute(eClassifierEClass, ECLASSIFIER__INSTANCE_CLASS_NAME);
+		createEReference(eClassifierEClass, ECLASSIFIER__EPACKAGE);
+		createEReference(eClassifierEClass, ECLASSIFIER__ETYPE_PARAMETERS);
+		createEAttribute(eClassifierEClass, ECLASSIFIER__INSTANCE_TYPE_NAME);
+
 		eDataTypeEClass = createEClass(EDATA_TYPE);
 		createEAttribute(eDataTypeEClass, EDATA_TYPE__SERIALIZABLE);
+
+		eEnumEClass = createEClass(EENUM);
+		createEReference(eEnumEClass, EENUM__ELITERALS);
 
 		eEnumLiteralEClass = createEClass(EENUM_LITERAL);
 		createEReference(eEnumLiteralEClass, EENUM_LITERAL__EENUM);
@@ -2029,8 +1793,16 @@ public class EcorePackageImpl extends EPackageImpl implements EcorePackage {
 		createEAttribute(eEnumLiteralEClass, EENUM_LITERAL__INSTANCE);
 		createEAttribute(eEnumLiteralEClass, EENUM_LITERAL__LITERAL);
 
+		eFactoryEClass = createEClass(EFACTORY);
+		createEReference(eFactoryEClass, EFACTORY__EPACKAGE);
+
+		eModelElementEClass = createEClass(EMODEL_ELEMENT);
+		createEReference(eModelElementEClass, EMODEL_ELEMENT__EANNOTATIONS);
+
 		eNamedElementEClass = createEClass(ENAMED_ELEMENT);
 		createEAttribute(eNamedElementEClass, ENAMED_ELEMENT__NAME);
+
+		eObjectEClass = createEClass(EOBJECT);
 
 		eOperationEClass = createEClass(EOPERATION);
 		createEReference(eOperationEClass, EOPERATION__ECONTAINING_CLASS);
@@ -2039,8 +1811,45 @@ public class EcorePackageImpl extends EPackageImpl implements EcorePackage {
 		createEReference(eOperationEClass, EOPERATION__ETYPE_PARAMETERS);
 		createEReference(eOperationEClass, EOPERATION__EEXCEPTIONS);
 
+		ePackageEClass = createEClass(EPACKAGE);
+		createEAttribute(ePackageEClass, EPACKAGE__NS_URI);
+		createEReference(ePackageEClass, EPACKAGE__ESUBPACKAGES);
+		createEReference(ePackageEClass, EPACKAGE__ESUPER_PACKAGE);
+		createEAttribute(ePackageEClass, EPACKAGE__NS_PREFIX);
+		createEReference(ePackageEClass, EPACKAGE__ECLASSIFIERS);
+		createEReference(ePackageEClass, EPACKAGE__EFACTORY_INSTANCE);
+
 		eParameterEClass = createEClass(EPARAMETER);
 		createEReference(eParameterEClass, EPARAMETER__EOPERATION);
+
+		eReferenceEClass = createEClass(EREFERENCE);
+		createEReference(eReferenceEClass, EREFERENCE__EOPPOSITE);
+		createEAttribute(eReferenceEClass, EREFERENCE__RESOLVE_PROXIES);
+		createEReference(eReferenceEClass, EREFERENCE__EKEYS);
+		createEAttribute(eReferenceEClass, EREFERENCE__CONTAINMENT);
+
+		eStructuralFeatureEClass = createEClass(ESTRUCTURAL_FEATURE);
+		createEAttribute(eStructuralFeatureEClass,
+				ESTRUCTURAL_FEATURE__VOLATILE);
+		createEReference(eStructuralFeatureEClass,
+				ESTRUCTURAL_FEATURE__ECONTAINING_CLASS);
+		createEAttribute(eStructuralFeatureEClass,
+				ESTRUCTURAL_FEATURE__DEFAULT_VALUE_LITERAL);
+		createEAttribute(eStructuralFeatureEClass,
+				ESTRUCTURAL_FEATURE__TRANSIENT);
+		createEAttribute(eStructuralFeatureEClass,
+				ESTRUCTURAL_FEATURE__UNSETTABLE);
+		createEAttribute(eStructuralFeatureEClass, ESTRUCTURAL_FEATURE__DERIVED);
+		createEAttribute(eStructuralFeatureEClass,
+				ESTRUCTURAL_FEATURE__CHANGEABLE);
+
+		eTypedElementEClass = createEClass(ETYPED_ELEMENT);
+		createEAttribute(eTypedElementEClass, ETYPED_ELEMENT__LOWER_BOUND);
+		createEAttribute(eTypedElementEClass, ETYPED_ELEMENT__UNIQUE);
+		createEReference(eTypedElementEClass, ETYPED_ELEMENT__ETYPE);
+		createEAttribute(eTypedElementEClass, ETYPED_ELEMENT__ORDERED);
+		createEAttribute(eTypedElementEClass, ETYPED_ELEMENT__UPPER_BOUND);
+		createEReference(eTypedElementEClass, ETYPED_ELEMENT__EGENERIC_TYPE);
 
 		eStringToStringMapEntryEClass = createEClass(ESTRING_TO_STRING_MAP_ENTRY);
 		createEAttribute(eStringToStringMapEntryEClass,
@@ -2049,10 +1858,9 @@ public class EcorePackageImpl extends EPackageImpl implements EcorePackage {
 				ESTRING_TO_STRING_MAP_ENTRY__KEY);
 
 		eGenericTypeEClass = createEClass(EGENERIC_TYPE);
-		createEReference(eGenericTypeEClass, EGENERIC_TYPE__EUPPER_BOUND);
 		createEReference(eGenericTypeEClass, EGENERIC_TYPE__ETYPE_ARGUMENTS);
+		createEReference(eGenericTypeEClass, EGENERIC_TYPE__EUPPER_BOUND);
 		createEReference(eGenericTypeEClass, EGENERIC_TYPE__ECLASSIFIER);
-		createEReference(eGenericTypeEClass, EGENERIC_TYPE__ERAW_TYPE);
 		createEReference(eGenericTypeEClass, EGENERIC_TYPE__ETYPE_PARAMETER);
 		createEReference(eGenericTypeEClass, EGENERIC_TYPE__ELOWER_BOUND);
 
@@ -2133,22 +1941,22 @@ public class EcorePackageImpl extends EPackageImpl implements EcorePackage {
 
 		// Add supertypes to classes
 		eAttributeEClass.getESuperTypes().add(this.getEStructuralFeature());
+		eAnnotationEClass.getESuperTypes().add(this.getEModelElement());
 		eClassEClass.getESuperTypes().add(this.getEClassifier());
 		eClassifierEClass.getESuperTypes().add(this.getENamedElement());
+		eDataTypeEClass.getESuperTypes().add(this.getEClassifier());
 		eEnumEClass.getESuperTypes().add(this.getEDataType());
+		eEnumLiteralEClass.getESuperTypes().add(this.getENamedElement());
 		eFactoryEClass.getESuperTypes().add(this.getEModelElement());
 		eModelElementEClass.getESuperTypes().add(this.getEObject());
+		eNamedElementEClass.getESuperTypes().add(this.getEModelElement());
 		eObjectEClass.getESuperTypes().add(theStructurePackage.getObject());
+		eOperationEClass.getESuperTypes().add(this.getETypedElement());
 		ePackageEClass.getESuperTypes().add(this.getENamedElement());
+		eParameterEClass.getESuperTypes().add(this.getETypedElement());
 		eReferenceEClass.getESuperTypes().add(this.getEStructuralFeature());
 		eStructuralFeatureEClass.getESuperTypes().add(this.getETypedElement());
 		eTypedElementEClass.getESuperTypes().add(this.getENamedElement());
-		eAnnotationEClass.getESuperTypes().add(this.getEModelElement());
-		eDataTypeEClass.getESuperTypes().add(this.getEClassifier());
-		eEnumLiteralEClass.getESuperTypes().add(this.getENamedElement());
-		eNamedElementEClass.getESuperTypes().add(this.getEModelElement());
-		eOperationEClass.getESuperTypes().add(this.getETypedElement());
-		eParameterEClass.getESuperTypes().add(this.getETypedElement());
 		eStringToStringMapEntryEClass.getESuperTypes().add(
 				theStructurePackage.getObject());
 		eGenericTypeEClass.getESuperTypes().add(this.getEObject());
@@ -2157,22 +1965,41 @@ public class EcorePackageImpl extends EPackageImpl implements EcorePackage {
 		// Initialize classes and features; add operations and parameters
 		initEClass(eAttributeEClass, ecore.EAttribute.class, "EAttribute",
 				!IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getEAttribute_EAttributeType(), this.getEDataType(),
-				null, "eAttributeType", null, 1, 1, ecore.EAttribute.class,
-				IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE,
-				IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED,
-				IS_ORDERED);
 		initEAttribute(getEAttribute_ID(), this.getEBoolean(), "iD", "false",
 				0, 1, ecore.EAttribute.class, !IS_TRANSIENT, !IS_VOLATILE,
 				IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED,
 				IS_ORDERED);
 
-		initEClass(eClassEClass, ecore.EClass.class, "EClass", !IS_ABSTRACT,
-				!IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getEClass_Abstract(), this.getEBoolean(), "abstract",
-				"false", 0, 1, ecore.EClass.class, !IS_TRANSIENT, !IS_VOLATILE,
+		addEOperation(eAttributeEClass, this.getEDataType(),
+				"getterEAttributeType", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		initEClass(eAnnotationEClass, EAnnotation.class, "EAnnotation",
+				!IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getEAnnotation_References(), this.getEObject(), null,
+				"references", null, 0, -1, EAnnotation.class, !IS_TRANSIENT,
+				!IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES,
+				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getEAnnotation_Source(), this.getEString(), "source",
+				null, 0, 1, EAnnotation.class, !IS_TRANSIENT, !IS_VOLATILE,
 				IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED,
 				IS_ORDERED);
+		initEReference(getEAnnotation_Details(), this
+				.getEStringToStringMapEntry(), null, "details", null, 0, -1,
+				EAnnotation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE,
+				IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE,
+				!IS_DERIVED, IS_ORDERED);
+		initEReference(getEAnnotation_Contents(), this.getEObject(), null,
+				"contents", null, 0, -1, EAnnotation.class, !IS_TRANSIENT,
+				!IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, IS_RESOLVE_PROXIES,
+				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getEAnnotation_EModelElement(), this.getEModelElement(),
+				this.getEModelElement_EAnnotations(), "eModelElement", null, 0,
+				1, EAnnotation.class, IS_TRANSIENT, !IS_VOLATILE,
+				IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES,
+				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(eClassEClass, ecore.EClass.class, "EClass", !IS_ABSTRACT,
+				!IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getEClass_EStructuralFeatures(), this
 				.getEStructuralFeature(), this
 				.getEStructuralFeature_EContainingClass(),
@@ -2180,20 +2007,15 @@ public class EcorePackageImpl extends EPackageImpl implements EcorePackage {
 				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE,
 				IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED,
 				IS_ORDERED);
-		initEReference(getEClass_EAllAttributes(), this.getEAttribute(), null,
-				"eAllAttributes", null, 0, -1, ecore.EClass.class,
-				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE,
-				IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED,
+		initEAttribute(getEClass_Abstract(), this.getEBoolean(), "abstract",
+				"false", 0, 1, ecore.EClass.class, !IS_TRANSIENT, !IS_VOLATILE,
+				IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED,
 				IS_ORDERED);
 		initEReference(getEClass_EOperations(), this.getEOperation(), this
 				.getEOperation_EContainingClass(), "eOperations", null, 0, -1,
 				ecore.EClass.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE,
 				IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE,
 				!IS_DERIVED, IS_ORDERED);
-		initEReference(getEClass_EReferences(), this.getEReference(), null,
-				"eReferences", null, 0, -1, ecore.EClass.class, !IS_TRANSIENT,
-				!IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES,
-				!IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 		initEAttribute(getEClass_Interface(), this.getEBoolean(), "interface",
 				"false", 0, 1, ecore.EClass.class, !IS_TRANSIENT, !IS_VOLATILE,
 				IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED,
@@ -2202,60 +2024,21 @@ public class EcorePackageImpl extends EPackageImpl implements EcorePackage {
 				"eSuperTypes", null, 0, -1, ecore.EClass.class, !IS_TRANSIENT,
 				!IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES,
 				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getEClass_EAllReferences(), this.getEReference(), null,
-				"eAllReferences", null, 0, -1, ecore.EClass.class,
-				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE,
-				IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED,
-				IS_ORDERED);
-		initEReference(getEClass_EAllContainments(), this.getEReference(),
-				null, "eAllContainments", null, 0, -1, ecore.EClass.class,
-				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE,
-				IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED,
-				IS_ORDERED);
 		initEReference(getEClass_EGenericSuperTypes(), this.getEGenericType(),
 				null, "eGenericSuperTypes", null, 0, -1, ecore.EClass.class,
 				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE,
 				IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED,
 				IS_ORDERED);
-		initEReference(getEClass_EAllGenericSuperTypes(), this
-				.getEGenericType(), null, "eAllGenericSuperTypes", null, 0, -1,
-				ecore.EClass.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE,
-				!IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE,
-				IS_DERIVED, IS_ORDERED);
-		initEReference(getEClass_EAttributes(), this.getEAttribute(), null,
-				"eAttributes", null, 0, -1, ecore.EClass.class, IS_TRANSIENT,
-				!IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES,
-				!IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
-		initEReference(getEClass_EIDAttribute(), this.getEAttribute(), null,
-				"eIDAttribute", null, 0, 1, ecore.EClass.class, !IS_TRANSIENT,
-				!IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES,
-				!IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
-		initEReference(getEClass_EAllOperations(), this.getEOperation(), null,
-				"eAllOperations", null, 0, -1, ecore.EClass.class,
-				IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE,
-				IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED,
-				IS_ORDERED);
-		initEReference(getEClass_EAllStructuralFeatures(), this
-				.getEStructuralFeature(), null, "eAllStructuralFeatures", null,
-				0, -1, ecore.EClass.class, !IS_TRANSIENT, !IS_VOLATILE,
-				IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES,
-				!IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
-		initEReference(getEClass_EAllSuperTypes(), this.getEClass(), null,
-				"eAllSuperTypes", null, 0, -1, ecore.EClass.class,
-				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE,
-				IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED,
-				IS_ORDERED);
 
-		EOperation op = addEOperation(eClassEClass, this
-				.getEStructuralFeature(), "getEStructuralFeature", 0, 1,
-				IS_UNIQUE, IS_ORDERED);
-		addEParameter(op, this.getEString(), "featureName", 0, 1, IS_UNIQUE,
-				IS_ORDERED);
-
-		op = addEOperation(eClassEClass, this.getEInt(), "getFeatureID", 0, 1,
-				IS_UNIQUE, IS_ORDERED);
+		EOperation op = addEOperation(eClassEClass, this.getEInt(),
+				"getFeatureID", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, this.getEStructuralFeature(), "feature", 0, 1,
 				IS_UNIQUE, IS_ORDERED);
+
+		op = addEOperation(eClassEClass, this.getEStructuralFeature(),
+				"getEStructuralFeature", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, this.getEString(), "featureName", 0, 1, IS_UNIQUE,
+				IS_ORDERED);
 
 		op = addEOperation(eClassEClass, this.getEBoolean(), "isSuperTypeOf",
 				0, 1, IS_UNIQUE, IS_ORDERED);
@@ -2266,14 +2049,39 @@ public class EcorePackageImpl extends EPackageImpl implements EcorePackage {
 				IS_UNIQUE, IS_ORDERED);
 
 		op = addEOperation(eClassEClass, this.getEStructuralFeature(),
-				"getEStructuralFeature2", 0, 1, IS_UNIQUE, IS_ORDERED);
-		addEParameter(op, this.getEString(), "featureName", 0, 1, IS_UNIQUE,
-				IS_ORDERED);
-
-		op = addEOperation(eClassEClass, this.getEStructuralFeature(),
 				"op_getEStructuralFeature", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, this.getEInt(), "featureID", 0, 1, IS_UNIQUE,
 				IS_ORDERED);
+
+		addEOperation(eClassEClass, this.getEAttribute(),
+				"getterEAllAttributes", 0, -1, IS_UNIQUE, IS_ORDERED);
+
+		addEOperation(eClassEClass, this.getEReference(), "getterEReferences",
+				0, -1, IS_UNIQUE, IS_ORDERED);
+
+		addEOperation(eClassEClass, this.getEReference(),
+				"getterEAllReferences", 0, -1, IS_UNIQUE, IS_ORDERED);
+
+		addEOperation(eClassEClass, this.getEReference(),
+				"getterEAllContainments", 0, -1, IS_UNIQUE, IS_ORDERED);
+
+		addEOperation(eClassEClass, this.getEGenericType(),
+				"getterEAllGenericSuperTypes", 0, -1, IS_UNIQUE, IS_ORDERED);
+
+		addEOperation(eClassEClass, this.getEAttribute(), "getterEAttributes",
+				0, -1, IS_UNIQUE, IS_ORDERED);
+
+		addEOperation(eClassEClass, this.getEAttribute(), "getterEIDAttribute",
+				0, 1, IS_UNIQUE, IS_ORDERED);
+
+		addEOperation(eClassEClass, this.getEStructuralFeature(),
+				"getterEAllStructuralFeatures", 0, -1, IS_UNIQUE, IS_ORDERED);
+
+		addEOperation(eClassEClass, this.getEOperation(),
+				"getterEAllOperations", 0, -1, IS_UNIQUE, IS_ORDERED);
+
+		addEOperation(eClassEClass, this.getEClass(), "getterEAllSuperTypes",
+				0, -1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(eClassifierEClass, EClassifier.class, "EClassifier",
 				IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -2286,22 +2094,11 @@ public class EcorePackageImpl extends EPackageImpl implements EcorePackage {
 				EClassifier.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE,
 				!IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE,
 				!IS_DERIVED, IS_ORDERED);
-		EGenericType g1 = createEGenericType(this.getEJavaClass());
-		EGenericType g2 = createEGenericType();
-		g1.getETypeArguments().add(g2);
-		initEAttribute(getEClassifier_InstanceClass(), g1, "instanceClass",
-				null, 0, 1, EClassifier.class, !IS_TRANSIENT, !IS_VOLATILE,
-				IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED,
-				IS_ORDERED);
 		initEReference(getEClassifier_ETypeParameters(), this
 				.getETypeParameter(), null, "eTypeParameters", null, 0, -1,
 				EClassifier.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE,
 				IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE,
 				!IS_DERIVED, IS_ORDERED);
-		initEAttribute(getEClassifier_DefaultValue(), this.getEJavaObject(),
-				"defaultValue", null, 0, 1, EClassifier.class, !IS_TRANSIENT,
-				!IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE,
-				IS_DERIVED, IS_ORDERED);
 		initEAttribute(getEClassifier_InstanceTypeName(), this.getEString(),
 				"instanceTypeName", null, 0, 1, EClassifier.class,
 				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE,
@@ -2315,6 +2112,23 @@ public class EcorePackageImpl extends EPackageImpl implements EcorePackage {
 		addEOperation(eClassifierEClass, this.getEInt(), "getClassifierID", 0,
 				1, IS_UNIQUE, IS_ORDERED);
 
+		op = addEOperation(eClassifierEClass, null, "getterInstanceClass", 0,
+				1, IS_UNIQUE, IS_ORDERED);
+		EGenericType g1 = createEGenericType(this.getEJavaClass());
+		EGenericType g2 = createEGenericType();
+		g1.getETypeArguments().add(g2);
+		initEOperation(op, g1);
+
+		addEOperation(eClassifierEClass, this.getEJavaObject(),
+				"getterDefaultValue", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		initEClass(eDataTypeEClass, ecore.EDataType.class, "EDataType",
+				!IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getEDataType_Serializable(), this.getEBoolean(),
+				"serializable", "false", 0, 1, ecore.EDataType.class,
+				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE,
+				!IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
 		initEClass(eEnumEClass, EEnum.class, "EEnum", !IS_ABSTRACT,
 				!IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getEEnum_ELiterals(), this.getEEnumLiteral(), this
@@ -2322,10 +2136,6 @@ public class EcorePackageImpl extends EPackageImpl implements EcorePackage {
 				EEnum.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE,
 				IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE,
 				!IS_DERIVED, IS_ORDERED);
-
-		op = addEOperation(eEnumEClass, this.getEEnumLiteral(),
-				"getEEnumLiteral2", 0, 1, IS_UNIQUE, IS_ORDERED);
-		addEParameter(op, this.getEInt(), "value", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		op = addEOperation(eEnumEClass, this.getEEnumLiteral(),
 				"op_getEEnumLiteral", 0, 1, IS_UNIQUE, IS_ORDERED);
@@ -2339,6 +2149,26 @@ public class EcorePackageImpl extends EPackageImpl implements EcorePackage {
 		op = addEOperation(eEnumEClass, this.getEEnumLiteral(),
 				"getEEnumLiteralByLiteral", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, this.getEString(), "literal", 0, 1, IS_UNIQUE,
+				IS_ORDERED);
+
+		initEClass(eEnumLiteralEClass, EEnumLiteral.class, "EEnumLiteral",
+				!IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getEEnumLiteral_EEnum(), this.getEEnum(), this
+				.getEEnum_ELiterals(), "eEnum", null, 0, 1, EEnumLiteral.class,
+				IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE,
+				IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED,
+				IS_ORDERED);
+		initEAttribute(getEEnumLiteral_Value(), this.getEInt(), "value", null,
+				0, 1, EEnumLiteral.class, !IS_TRANSIENT, !IS_VOLATILE,
+				IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED,
+				IS_ORDERED);
+		initEAttribute(getEEnumLiteral_Instance(), this.getEEnumerator(),
+				"instance", null, 0, 1, EEnumLiteral.class, IS_TRANSIENT,
+				!IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE,
+				!IS_DERIVED, IS_ORDERED);
+		initEAttribute(getEEnumLiteral_Literal(), this.getEString(), "literal",
+				null, 0, 1, EEnumLiteral.class, !IS_TRANSIENT, !IS_VOLATILE,
+				IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED,
 				IS_ORDERED);
 
 		initEClass(eFactoryEClass, EFactory.class, "EFactory", !IS_ABSTRACT,
@@ -2381,13 +2211,15 @@ public class EcorePackageImpl extends EPackageImpl implements EcorePackage {
 		addEParameter(op, this.getEString(), "source", 0, 1, IS_UNIQUE,
 				IS_ORDERED);
 
+		initEClass(eNamedElementEClass, ENamedElement.class, "ENamedElement",
+				IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getENamedElement_Name(), this.getEString(), "name",
+				null, 0, 1, ENamedElement.class, !IS_TRANSIENT, !IS_VOLATILE,
+				IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED,
+				IS_ORDERED);
+
 		initEClass(eObjectEClass, EObject.class, "EObject", !IS_ABSTRACT,
 				!IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
-		op = addEOperation(eObjectEClass, null, "eUnset", 0, 1, IS_UNIQUE,
-				IS_ORDERED);
-		addEParameter(op, this.getEStructuralFeature(), "feature", 0, 1,
-				IS_UNIQUE, IS_ORDERED);
 
 		op = addEOperation(eObjectEClass, this.getEJavaObject(), "eGet", 0, 1,
 				IS_UNIQUE, IS_ORDERED);
@@ -2395,6 +2227,11 @@ public class EcorePackageImpl extends EPackageImpl implements EcorePackage {
 				IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, this.getEBoolean(), "resolve", 0, 1, IS_UNIQUE,
 				IS_ORDERED);
+
+		op = addEOperation(eObjectEClass, null, "eUnset", 0, 1, IS_UNIQUE,
+				IS_ORDERED);
+		addEParameter(op, this.getEStructuralFeature(), "feature", 0, 1,
+				IS_UNIQUE, IS_ORDERED);
 
 		op = addEOperation(eObjectEClass, null, "eSet", 0, 1, IS_UNIQUE,
 				IS_ORDERED);
@@ -2452,223 +2289,6 @@ public class EcorePackageImpl extends EPackageImpl implements EcorePackage {
 		addEParameter(op, this.getEStructuralFeature(), "feature", 0, 1,
 				IS_UNIQUE, IS_ORDERED);
 
-		initEClass(ePackageEClass, ecore.EPackage.class, "EPackage",
-				!IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getEPackage_NsURI(), this.getEString(), "nsURI", null,
-				0, 1, ecore.EPackage.class, !IS_TRANSIENT, !IS_VOLATILE,
-				IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED,
-				IS_ORDERED);
-		initEReference(getEPackage_ESubpackages(), this.getEPackage(), this
-				.getEPackage_ESuperPackage(), "eSubpackages", null, 0, -1,
-				ecore.EPackage.class, !IS_TRANSIENT, !IS_VOLATILE,
-				IS_CHANGEABLE, IS_COMPOSITE, IS_RESOLVE_PROXIES,
-				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getEPackage_ESuperPackage(), this.getEPackage(), this
-				.getEPackage_ESubpackages(), "eSuperPackage", null, 0, 1,
-				ecore.EPackage.class, IS_TRANSIENT, !IS_VOLATILE,
-				IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES,
-				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getEPackage_NsPrefix(), this.getEString(), "nsPrefix",
-				null, 0, 1, ecore.EPackage.class, !IS_TRANSIENT, !IS_VOLATILE,
-				IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED,
-				IS_ORDERED);
-		initEReference(getEPackage_EFactoryInstance(), this.getEFactory(), this
-				.getEFactory_EPackage(), "eFactoryInstance", null, 1, 1,
-				ecore.EPackage.class, IS_TRANSIENT, !IS_VOLATILE,
-				IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES,
-				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getEPackage_EClassifiers(), this.getEClassifier(), this
-				.getEClassifier_EPackage(), "eClassifiers", null, 0, -1,
-				ecore.EPackage.class, !IS_TRANSIENT, !IS_VOLATILE,
-				IS_CHANGEABLE, IS_COMPOSITE, IS_RESOLVE_PROXIES,
-				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		op = addEOperation(ePackageEClass, this.getEClassifier(),
-				"getEClassifier", 0, 1, IS_UNIQUE, IS_ORDERED);
-		addEParameter(op, this.getEString(), "name", 0, 1, IS_UNIQUE,
-				IS_ORDERED);
-
-		initEClass(eReferenceEClass, ecore.EReference.class, "EReference",
-				!IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getEReference_EOpposite(), this.getEReference(), null,
-				"eOpposite", null, 0, 1, ecore.EReference.class, !IS_TRANSIENT,
-				!IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES,
-				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getEReference_EReferenceType(), this.getEClass(), null,
-				"eReferenceType", null, 1, 1, ecore.EReference.class,
-				IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE,
-				IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED,
-				IS_ORDERED);
-		initEAttribute(getEReference_ResolveProxies(), this.getEBoolean(),
-				"resolveProxies", "false", 0, 1, ecore.EReference.class,
-				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE,
-				!IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getEReference_Container(), this.getEBoolean(),
-				"container", "false", 0, 1, ecore.EReference.class,
-				IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE,
-				!IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
-		initEReference(getEReference_EKeys(), this.getEAttribute(), null,
-				"eKeys", null, 0, -1, ecore.EReference.class, !IS_TRANSIENT,
-				!IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES,
-				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getEReference_Containment(), this.getEBoolean(),
-				"containment", "false", 0, 1, ecore.EReference.class,
-				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE,
-				!IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		op = addEOperation(eReferenceEClass, null, "setContainerValue", 0, 1,
-				IS_UNIQUE, !IS_ORDERED);
-		addEParameter(op, this.getEBoolean(), "booleanValue", 0, 1, IS_UNIQUE,
-				IS_ORDERED);
-
-		addEOperation(eReferenceEClass, this.getEBoolean(),
-				"getContainerValue", 0, 1, IS_UNIQUE, IS_ORDERED);
-
-		initEClass(eStructuralFeatureEClass, EStructuralFeature.class,
-				"EStructuralFeature", IS_ABSTRACT, !IS_INTERFACE,
-				IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getEStructuralFeature_Volatile(), this.getEBoolean(),
-				"volatile", "false", 0, 1, EStructuralFeature.class,
-				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE,
-				!IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getEStructuralFeature_DefaultValueLiteral(), this
-				.getEString(), "defaultValueLiteral", null, 0, 1,
-				EStructuralFeature.class, !IS_TRANSIENT, !IS_VOLATILE,
-				IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED,
-				IS_ORDERED);
-		initEReference(getEStructuralFeature_EContainingClass(), this
-				.getEClass(), this.getEClass_EStructuralFeatures(),
-				"eContainingClass", null, 0, 1, EStructuralFeature.class,
-				IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE,
-				IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED,
-				IS_ORDERED);
-		initEAttribute(getEStructuralFeature_Transient(), this.getEBoolean(),
-				"transient", "false", 0, 1, EStructuralFeature.class,
-				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE,
-				!IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getEStructuralFeature_Unsettable(), this.getEBoolean(),
-				"unsettable", "false", 0, 1, EStructuralFeature.class,
-				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE,
-				!IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getEStructuralFeature_Derived(), this.getEBoolean(),
-				"derived", "false", 0, 1, EStructuralFeature.class,
-				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE,
-				!IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getEStructuralFeature_DefaultValue(), this
-				.getEJavaObject(), "defaultValue", null, 0, 1,
-				EStructuralFeature.class, !IS_TRANSIENT, !IS_VOLATILE,
-				IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED,
-				IS_ORDERED);
-		initEAttribute(getEStructuralFeature_Changeable(), this.getEBoolean(),
-				"changeable", "false", 0, 1, EStructuralFeature.class,
-				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE,
-				!IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		addEOperation(eStructuralFeatureEClass, this.getEInt(), "getFeatureID",
-				0, 1, IS_UNIQUE, IS_ORDERED);
-
-		op = addEOperation(eStructuralFeatureEClass, null, "getContainerClass",
-				0, 1, IS_UNIQUE, IS_ORDERED);
-		g1 = createEGenericType(this.getEJavaClass());
-		g2 = createEGenericType();
-		g1.getETypeArguments().add(g2);
-		initEOperation(op, g1);
-
-		initEClass(eTypedElementEClass, ETypedElement.class, "ETypedElement",
-				IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getETypedElement_Many(), this.getEBoolean(), "many",
-				"false", 0, 1, ETypedElement.class, !IS_TRANSIENT,
-				!IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE,
-				IS_DERIVED, IS_ORDERED);
-		initEAttribute(getETypedElement_LowerBound(), this.getEInt(),
-				"lowerBound", null, 0, 1, ETypedElement.class, !IS_TRANSIENT,
-				!IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE,
-				!IS_DERIVED, IS_ORDERED);
-		initEAttribute(getETypedElement_Unique(), this.getEBoolean(), "unique",
-				"false", 0, 1, ETypedElement.class, !IS_TRANSIENT,
-				!IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE,
-				!IS_DERIVED, IS_ORDERED);
-		initEReference(getETypedElement_EType(), this.getEClassifier(), null,
-				"eType", null, 0, 1, ETypedElement.class, !IS_TRANSIENT,
-				!IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES,
-				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getETypedElement_Ordered(), this.getEBoolean(),
-				"ordered", "false", 0, 1, ETypedElement.class, !IS_TRANSIENT,
-				!IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE,
-				!IS_DERIVED, IS_ORDERED);
-		initEAttribute(getETypedElement_Required(), this.getEBoolean(),
-				"required", "false", 0, 1, ETypedElement.class, !IS_TRANSIENT,
-				!IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE,
-				IS_DERIVED, IS_ORDERED);
-		initEAttribute(getETypedElement_UpperBound(), this.getEInt(),
-				"upperBound", null, 0, 1, ETypedElement.class, !IS_TRANSIENT,
-				!IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE,
-				!IS_DERIVED, IS_ORDERED);
-		initEReference(getETypedElement_EGenericType(), this.getEGenericType(),
-				null, "eGenericType", null, 0, 1, ETypedElement.class,
-				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE,
-				IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED,
-				IS_ORDERED);
-
-		initEClass(eAnnotationEClass, EAnnotation.class, "EAnnotation",
-				!IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getEAnnotation_References(), this.getEObject(), null,
-				"references", null, 0, -1, EAnnotation.class, !IS_TRANSIENT,
-				!IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES,
-				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getEAnnotation_Source(), this.getEString(), "source",
-				null, 0, 1, EAnnotation.class, !IS_TRANSIENT, !IS_VOLATILE,
-				IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED,
-				IS_ORDERED);
-		initEReference(getEAnnotation_Details(), this
-				.getEStringToStringMapEntry(), null, "details", null, 0, -1,
-				EAnnotation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE,
-				IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE,
-				!IS_DERIVED, IS_ORDERED);
-		initEReference(getEAnnotation_Contents(), this.getEObject(), null,
-				"contents", null, 0, -1, EAnnotation.class, !IS_TRANSIENT,
-				!IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, IS_RESOLVE_PROXIES,
-				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getEAnnotation_EModelElement(), this.getEModelElement(),
-				this.getEModelElement_EAnnotations(), "eModelElement", null, 0,
-				1, EAnnotation.class, IS_TRANSIENT, !IS_VOLATILE,
-				IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES,
-				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		initEClass(eDataTypeEClass, ecore.EDataType.class, "EDataType",
-				!IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getEDataType_Serializable(), this.getEBoolean(),
-				"serializable", "false", 0, 1, ecore.EDataType.class,
-				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE,
-				!IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		initEClass(eEnumLiteralEClass, EEnumLiteral.class, "EEnumLiteral",
-				!IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getEEnumLiteral_EEnum(), this.getEEnum(), this
-				.getEEnum_ELiterals(), "eEnum", null, 0, 1, EEnumLiteral.class,
-				IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE,
-				IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED,
-				IS_ORDERED);
-		initEAttribute(getEEnumLiteral_Value(), this.getEInt(), "value", null,
-				0, 1, EEnumLiteral.class, !IS_TRANSIENT, !IS_VOLATILE,
-				IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED,
-				IS_ORDERED);
-		initEAttribute(getEEnumLiteral_Instance(), this.getEEnumerator(),
-				"instance", null, 0, 1, EEnumLiteral.class, IS_TRANSIENT,
-				!IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE,
-				!IS_DERIVED, IS_ORDERED);
-		initEAttribute(getEEnumLiteral_Literal(), this.getEString(), "literal",
-				null, 0, 1, EEnumLiteral.class, !IS_TRANSIENT, !IS_VOLATILE,
-				IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED,
-				IS_ORDERED);
-
-		initEClass(eNamedElementEClass, ENamedElement.class, "ENamedElement",
-				IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getENamedElement_Name(), this.getEString(), "name",
-				null, 0, 1, ENamedElement.class, !IS_TRANSIENT, !IS_VOLATILE,
-				IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED,
-				IS_ORDERED);
-
 		initEClass(eOperationEClass, ecore.EOperation.class, "EOperation",
 				!IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getEOperation_EContainingClass(), this.getEClass(), this
@@ -2697,6 +2317,42 @@ public class EcorePackageImpl extends EPackageImpl implements EcorePackage {
 				IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED,
 				IS_ORDERED);
 
+		initEClass(ePackageEClass, ecore.EPackage.class, "EPackage",
+				!IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getEPackage_NsURI(), this.getEString(), "nsURI", null,
+				0, 1, ecore.EPackage.class, !IS_TRANSIENT, !IS_VOLATILE,
+				IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED,
+				IS_ORDERED);
+		initEReference(getEPackage_ESubpackages(), this.getEPackage(), this
+				.getEPackage_ESuperPackage(), "eSubpackages", null, 0, -1,
+				ecore.EPackage.class, !IS_TRANSIENT, !IS_VOLATILE,
+				IS_CHANGEABLE, IS_COMPOSITE, IS_RESOLVE_PROXIES,
+				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getEPackage_ESuperPackage(), this.getEPackage(), this
+				.getEPackage_ESubpackages(), "eSuperPackage", null, 0, 1,
+				ecore.EPackage.class, IS_TRANSIENT, !IS_VOLATILE,
+				IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES,
+				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getEPackage_NsPrefix(), this.getEString(), "nsPrefix",
+				null, 0, 1, ecore.EPackage.class, !IS_TRANSIENT, !IS_VOLATILE,
+				IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED,
+				IS_ORDERED);
+		initEReference(getEPackage_EClassifiers(), this.getEClassifier(), this
+				.getEClassifier_EPackage(), "eClassifiers", null, 0, -1,
+				ecore.EPackage.class, !IS_TRANSIENT, !IS_VOLATILE,
+				IS_CHANGEABLE, IS_COMPOSITE, IS_RESOLVE_PROXIES,
+				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getEPackage_EFactoryInstance(), this.getEFactory(), this
+				.getEFactory_EPackage(), "eFactoryInstance", null, 1, 1,
+				ecore.EPackage.class, IS_TRANSIENT, !IS_VOLATILE,
+				IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES,
+				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		op = addEOperation(ePackageEClass, this.getEClassifier(),
+				"getEClassifier", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, this.getEString(), "name", 0, 1, IS_UNIQUE,
+				IS_ORDERED);
+
 		initEClass(eParameterEClass, EParameter.class, "EParameter",
 				!IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getEParameter_EOperation(), this.getEOperation(), this
@@ -2704,6 +2360,113 @@ public class EcorePackageImpl extends EPackageImpl implements EcorePackage {
 				EParameter.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE,
 				!IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE,
 				!IS_DERIVED, IS_ORDERED);
+
+		initEClass(eReferenceEClass, ecore.EReference.class, "EReference",
+				!IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getEReference_EOpposite(), this.getEReference(), null,
+				"eOpposite", null, 0, 1, ecore.EReference.class, !IS_TRANSIENT,
+				!IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES,
+				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getEReference_ResolveProxies(), this.getEBoolean(),
+				"resolveProxies", "false", 0, 1, ecore.EReference.class,
+				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE,
+				!IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getEReference_EKeys(), this.getEAttribute(), null,
+				"eKeys", null, 0, -1, ecore.EReference.class, !IS_TRANSIENT,
+				!IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES,
+				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getEReference_Containment(), this.getEBoolean(),
+				"containment", "false", 0, 1, ecore.EReference.class,
+				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE,
+				!IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		addEOperation(eReferenceEClass, this.getEClass(),
+				"getterEReferenceType", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		addEOperation(eReferenceEClass, this.getEBoolean(), "getterContainer",
+				0, 1, IS_UNIQUE, IS_ORDERED);
+
+		initEClass(eStructuralFeatureEClass, EStructuralFeature.class,
+				"EStructuralFeature", IS_ABSTRACT, !IS_INTERFACE,
+				IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getEStructuralFeature_Volatile(), this.getEBoolean(),
+				"volatile", "false", 0, 1, EStructuralFeature.class,
+				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE,
+				!IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getEStructuralFeature_EContainingClass(), this
+				.getEClass(), this.getEClass_EStructuralFeatures(),
+				"eContainingClass", null, 0, 1, EStructuralFeature.class,
+				IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE,
+				IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED,
+				IS_ORDERED);
+		initEAttribute(getEStructuralFeature_DefaultValueLiteral(), this
+				.getEString(), "defaultValueLiteral", null, 0, 1,
+				EStructuralFeature.class, !IS_TRANSIENT, !IS_VOLATILE,
+				IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED,
+				IS_ORDERED);
+		initEAttribute(getEStructuralFeature_Transient(), this.getEBoolean(),
+				"transient", "false", 0, 1, EStructuralFeature.class,
+				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE,
+				!IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getEStructuralFeature_Unsettable(), this.getEBoolean(),
+				"unsettable", "false", 0, 1, EStructuralFeature.class,
+				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE,
+				!IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getEStructuralFeature_Derived(), this.getEBoolean(),
+				"derived", "false", 0, 1, EStructuralFeature.class,
+				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE,
+				!IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getEStructuralFeature_Changeable(), this.getEBoolean(),
+				"changeable", "false", 0, 1, EStructuralFeature.class,
+				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE,
+				!IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		addEOperation(eStructuralFeatureEClass, this.getEInt(), "getFeatureID",
+				0, 1, IS_UNIQUE, IS_ORDERED);
+
+		op = addEOperation(eStructuralFeatureEClass, null, "getContainerClass",
+				0, 1, IS_UNIQUE, IS_ORDERED);
+		g1 = createEGenericType(this.getEJavaClass());
+		g2 = createEGenericType();
+		g1.getETypeArguments().add(g2);
+		initEOperation(op, g1);
+
+		addEOperation(eStructuralFeatureEClass, this.getEJavaObject(),
+				"getterDefaultValue", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		initEClass(eTypedElementEClass, ETypedElement.class, "ETypedElement",
+				IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getETypedElement_LowerBound(), this.getEInt(),
+				"lowerBound", null, 0, 1, ETypedElement.class, !IS_TRANSIENT,
+				!IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE,
+				!IS_DERIVED, IS_ORDERED);
+		initEAttribute(getETypedElement_Unique(), this.getEBoolean(), "unique",
+				"false", 0, 1, ETypedElement.class, !IS_TRANSIENT,
+				!IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE,
+				!IS_DERIVED, IS_ORDERED);
+		initEReference(getETypedElement_EType(), this.getEClassifier(), null,
+				"eType", null, 0, 1, ETypedElement.class, !IS_TRANSIENT,
+				!IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES,
+				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getETypedElement_Ordered(), this.getEBoolean(),
+				"ordered", "false", 0, 1, ETypedElement.class, !IS_TRANSIENT,
+				!IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE,
+				!IS_DERIVED, IS_ORDERED);
+		initEAttribute(getETypedElement_UpperBound(), this.getEInt(),
+				"upperBound", null, 0, 1, ETypedElement.class, !IS_TRANSIENT,
+				!IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE,
+				!IS_DERIVED, IS_ORDERED);
+		initEReference(getETypedElement_EGenericType(), this.getEGenericType(),
+				null, "eGenericType", null, 0, 1, ETypedElement.class,
+				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE,
+				IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED,
+				IS_ORDERED);
+
+		addEOperation(eTypedElementEClass, this.getEBoolean(), "getterMany", 0,
+				1, IS_UNIQUE, IS_ORDERED);
+
+		addEOperation(eTypedElementEClass, this.getEBoolean(),
+				"getterRequired", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(eStringToStringMapEntryEClass,
 				EStringToStringMapEntry.class, "EStringToStringMapEntry",
@@ -2720,25 +2483,21 @@ public class EcorePackageImpl extends EPackageImpl implements EcorePackage {
 		initEClass(eGenericTypeEClass, ecore.EGenericType.class,
 				"EGenericType", !IS_ABSTRACT, !IS_INTERFACE,
 				IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getEGenericType_EUpperBound(), this.getEGenericType(),
-				null, "eUpperBound", null, 0, 1, ecore.EGenericType.class,
-				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE,
-				IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED,
-				IS_ORDERED);
 		initEReference(getEGenericType_ETypeArguments(),
 				this.getEGenericType(), null, "eTypeArguments", null, 0, -1,
 				ecore.EGenericType.class, !IS_TRANSIENT, !IS_VOLATILE,
 				IS_CHANGEABLE, IS_COMPOSITE, IS_RESOLVE_PROXIES,
 				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getEGenericType_EUpperBound(), this.getEGenericType(),
+				null, "eUpperBound", null, 0, 1, ecore.EGenericType.class,
+				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE,
+				IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED,
+				IS_ORDERED);
 		initEReference(getEGenericType_EClassifier(), this.getEClassifier(),
 				null, "eClassifier", null, 0, 1, ecore.EGenericType.class,
 				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE,
 				IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED,
 				IS_ORDERED);
-		initEReference(getEGenericType_ERawType(), this.getEClassifier(), null,
-				"eRawType", null, 1, 1, ecore.EGenericType.class, IS_TRANSIENT,
-				!IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES,
-				!IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 		initEReference(getEGenericType_ETypeParameter(), this
 				.getETypeParameter(), null, "eTypeParameter", null, 0, 1,
 				ecore.EGenericType.class, !IS_TRANSIENT, !IS_VOLATILE,
@@ -2749,6 +2508,9 @@ public class EcorePackageImpl extends EPackageImpl implements EcorePackage {
 				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE,
 				IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED,
 				IS_ORDERED);
+
+		addEOperation(eGenericTypeEClass, this.getEClassifier(),
+				"getterERawType", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(eTypeParameterEClass, ETypeParameter.class,
 				"ETypeParameter", !IS_ABSTRACT, !IS_INTERFACE,
@@ -2834,10 +2596,6 @@ public class EcorePackageImpl extends EPackageImpl implements EcorePackage {
 		// Create annotations
 		// kermeta
 		createKermetaAnnotations();
-		// kompiledderivedProp.setter
-		createKompiledderivedPropAnnotations();
-		// kompiledderivedProp.getter
-		createKompiledderivedProp_1Annotations();
 	}
 
 	/**
@@ -2850,122 +2608,6 @@ public class EcorePackageImpl extends EPackageImpl implements EcorePackage {
 		String source = "kermeta";
 		addAnnotation(this, source, new String[] { "ecoreUri",
 				"http://www.eclipse.org/emf/2002/Ecore" });
-		addAnnotation(eAttributeEClass, source, new String[] { "documentation",
-				"/** This class refers to any EDataType feature*/" });
-		addAnnotation(eAttributeEClass, source,
-				new String[] { "aspect", "true" });
-		addAnnotation(getEAttribute_EAttributeType(), source, new String[] {
-				"isReadOnly", "false" });
-		addAnnotation(getEAttribute_EAttributeType(), source, new String[] {
-				"ecore.isTransient", "true" });
-		addAnnotation(eClassEClass, source, new String[] { "aspect", "true" });
-		addAnnotation(eClassEClass.getEOperations().get(0), source,
-				new String[] { "isAbstract", "true" });
-		addAnnotation(
-				eClassEClass.getEOperations().get(1),
-				source,
-				new String[] { "documentation",
-						"/** Get a structural feature among AllStructuralFeatures */" });
-		addAnnotation(
-				eClassEClass.getEOperations().get(1),
-				source,
-				new String[] {
-						"documentation",
-						"/** Return the position of the feature in the list of AllStructuralFeatures */" });
-		addAnnotation(eClassEClass.getEOperations().get(5), source,
-				new String[] { "isAbstract", "true" });
-		addAnnotation(getEClass_EAllAttributes(), source, new String[] {
-				"isReadOnly", "false" });
-		addAnnotation(getEClass_EReferences(), source, new String[] {
-				"isReadOnly", "false" });
-		addAnnotation(getEClass_EAllReferences(), source, new String[] {
-				"isReadOnly", "false" });
-		addAnnotation(getEClass_EAllContainments(), source, new String[] {
-				"isReadOnly", "false" });
-		addAnnotation(getEClass_EAllGenericSuperTypes(), source, new String[] {
-				"isReadOnly", "false" });
-		addAnnotation(getEClass_EAllGenericSuperTypes(), source, new String[] {
-				"ecore.isTransient", "true" });
-		addAnnotation(getEClass_EAttributes(), source, new String[] {
-				"isReadOnly", "false" });
-		addAnnotation(getEClass_EAttributes(), source, new String[] {
-				"ecore.isTransient", "true" });
-		addAnnotation(getEClass_EIDAttribute(), source, new String[] {
-				"isReadOnly", "false" });
-		addAnnotation(getEClass_EAllOperations(), source, new String[] {
-				"isReadOnly", "false" });
-		addAnnotation(getEClass_EAllOperations(), source, new String[] {
-				"ecore.isTransient", "true" });
-		addAnnotation(getEClass_EAllStructuralFeatures(), source, new String[] {
-				"isReadOnly", "false" });
-		addAnnotation(getEClass_EAllSuperTypes(), source, new String[] {
-				"isReadOnly", "false" });
-		addAnnotation(eClassifierEClass, source, new String[] { "aspect",
-				"true" });
-		addAnnotation(getEClassifier_EPackage(), source, new String[] {
-				"ecore.isTransient", "true" });
-		addAnnotation(getEClassifier_InstanceClass(), source, new String[] {
-				"isReadOnly", "false" });
-		addAnnotation(getEClassifier_DefaultValue(), source, new String[] {
-				"isReadOnly", "false" });
-		addAnnotation(eEnumEClass, source, new String[] { "aspect", "true" });
-		addAnnotation(eEnumEClass.getEOperations().get(0), source,
-				new String[] { "documentation",
-						"/** returns the enum literal which name is name */" });
-		addAnnotation(
-				eEnumEClass.getEOperations().get(0),
-				source,
-				new String[] { "documentation",
-						"/** returns the enum literal which value is value */" });
-		addAnnotation(eEnumEClass.getEOperations().get(1), source,
-				new String[] { "isAbstract", "true" });
-		addAnnotation(eEnumEClass.getEOperations().get(2), source,
-				new String[] { "isAbstract", "true" });
-		addAnnotation(eEnumEClass.getEOperations().get(3), source,
-				new String[] { "isAbstract", "true" });
-		addAnnotation(eFactoryEClass, source, new String[] { "aspect", "true" });
-		addAnnotation(eFactoryEClass.getEOperations().get(0), source,
-				new String[] { "isAbstract", "true" });
-		addAnnotation(eFactoryEClass.getEOperations().get(1), source,
-				new String[] { "isAbstract", "true" });
-		addAnnotation(getEFactory_EPackage(), source, new String[] {
-				"ecore.isTransient", "true" });
-		addAnnotation(eModelElementEClass, source, new String[] { "aspect",
-				"true" });
-		addAnnotation(eObjectEClass, source, new String[] { "aspect", "true" });
-		addAnnotation(eObjectEClass.getEOperations().get(0), source,
-				new String[] { "isAbstract", "true" });
-		addAnnotation(eObjectEClass.getEOperations().get(1), source,
-				new String[] { "isAbstract", "true" });
-		addAnnotation(eObjectEClass.getEOperations().get(2), source,
-				new String[] { "isAbstract", "true" });
-		addAnnotation(ePackageEClass, source, new String[] { "aspect", "true" });
-		addAnnotation(getEPackage_ESuperPackage(), source, new String[] {
-				"ecore.isTransient", "true" });
-		addAnnotation(getEPackage_EFactoryInstance(), source, new String[] {
-				"ecore.isTransient", "true" });
-		addAnnotation(eReferenceEClass, source,
-				new String[] { "aspect", "true" });
-		addAnnotation(getEReference_EReferenceType(), source, new String[] {
-				"isReadOnly", "false" });
-		addAnnotation(getEReference_EReferenceType(), source, new String[] {
-				"ecore.isTransient", "true" });
-		addAnnotation(getEReference_Container(), source, new String[] {
-				"isReadOnly", "false" });
-		addAnnotation(getEReference_Container(), source, new String[] {
-				"ecore.isTransient", "true" });
-		addAnnotation(eStructuralFeatureEClass, source, new String[] {
-				"aspect", "true" });
-		addAnnotation(getEStructuralFeature_EContainingClass(), source,
-				new String[] { "ecore.isTransient", "true" });
-		addAnnotation(getEStructuralFeature_DefaultValue(), source,
-				new String[] { "isReadOnly", "false" });
-		addAnnotation(eTypedElementEClass, source, new String[] { "aspect",
-				"true" });
-		addAnnotation(getETypedElement_Many(), source, new String[] {
-				"isReadOnly", "false" });
-		addAnnotation(getETypedElement_Required(), source, new String[] {
-				"isReadOnly", "false" });
 		addAnnotation(eBooleanEDataType, source, new String[] { "alias",
 				"kermeta::standard::Boolean" });
 		addAnnotation(eBooleanEDataType, source, new String[] {
@@ -2980,6 +2622,22 @@ public class EcorePackageImpl extends EPackageImpl implements EcorePackage {
 				"ecore.EDataType_instanceClassName", "java.lang.String" });
 		addAnnotation(eStringEDataType, source, new String[] {
 				"ecore.EDataType_isSerializable", "true" });
+		addAnnotation(eClassEClass.getEOperations().get(0), source,
+				new String[] { "isAbstract", "true" });
+		addAnnotation(eClassEClass.getEOperations().get(1), source,
+				new String[] { "isAbstract", "true" });
+		addAnnotation(eClassEClass.getEOperations().get(2), source,
+				new String[] { "isAbstract", "true" });
+		addAnnotation(eClassEClass.getEOperations().get(3), source,
+				new String[] { "isAbstract", "true" });
+		addAnnotation(eClassEClass.getEOperations().get(4), source,
+				new String[] { "isAbstract", "true" });
+		addAnnotation(eClassifierEClass.getEOperations().get(0), source,
+				new String[] { "isAbstract", "true" });
+		addAnnotation(eClassifierEClass.getEOperations().get(1), source,
+				new String[] { "isAbstract", "true" });
+		addAnnotation(getEClassifier_EPackage(), source, new String[] {
+				"ecore.isTransient", "true" });
 		addAnnotation(eJavaClassEDataType, source, new String[] { "alias",
 				"kermeta::language::structure::Object" });
 		addAnnotation(eJavaClassEDataType, source, new String[] {
@@ -2994,6 +2652,12 @@ public class EcorePackageImpl extends EPackageImpl implements EcorePackage {
 				"ecore.EDataType_instanceClassName", "java.lang.Object" });
 		addAnnotation(eJavaObjectEDataType, source, new String[] {
 				"ecore.EDataType_isSerializable", "true" });
+		addAnnotation(eEnumEClass.getEOperations().get(0), source,
+				new String[] { "isAbstract", "true" });
+		addAnnotation(eEnumEClass.getEOperations().get(1), source,
+				new String[] { "isAbstract", "true" });
+		addAnnotation(eEnumEClass.getEOperations().get(2), source,
+				new String[] { "isAbstract", "true" });
 		addAnnotation(getEEnumLiteral_EEnum(), source, new String[] {
 				"ecore.isTransient", "true" });
 		addAnnotation(getEEnumLiteral_Instance(), source, new String[] {
@@ -3009,14 +2673,60 @@ public class EcorePackageImpl extends EPackageImpl implements EcorePackage {
 		addAnnotation(eEnumeratorEDataType, source, new String[] {
 				"ecore.EDataType_instanceClassName",
 				"org.eclipse.emf.common.util.Enumerator" });
+		addAnnotation(eFactoryEClass.getEOperations().get(0), source,
+				new String[] { "isAbstract", "true" });
+		addAnnotation(eFactoryEClass.getEOperations().get(1), source,
+				new String[] { "isAbstract", "true" });
+		addAnnotation(eFactoryEClass.getEOperations().get(2), source,
+				new String[] { "isAbstract", "true" });
+		addAnnotation(getEFactory_EPackage(), source, new String[] {
+				"ecore.isTransient", "true" });
+		addAnnotation(eModelElementEClass.getEOperations().get(0), source,
+				new String[] { "isAbstract", "true" });
+		addAnnotation(eObjectEClass.getEOperations().get(0), source,
+				new String[] { "isAbstract", "true" });
+		addAnnotation(eObjectEClass.getEOperations().get(1), source,
+				new String[] { "isAbstract", "true" });
+		addAnnotation(eObjectEClass.getEOperations().get(2), source,
+				new String[] { "isAbstract", "true" });
+		addAnnotation(eObjectEClass.getEOperations().get(3), source,
+				new String[] { "isAbstract", "true" });
+		addAnnotation(eObjectEClass.getEOperations().get(4), source,
+				new String[] { "isAbstract", "true" });
+		addAnnotation(eObjectEClass.getEOperations().get(5), source,
+				new String[] { "isAbstract", "true" });
+		addAnnotation(eObjectEClass.getEOperations().get(6), source,
+				new String[] { "isAbstract", "true" });
+		addAnnotation(eObjectEClass.getEOperations().get(7), source,
+				new String[] { "isAbstract", "true" });
+		addAnnotation(eObjectEClass.getEOperations().get(8), source,
+				new String[] { "isAbstract", "true" });
+		addAnnotation(eObjectEClass.getEOperations().get(9), source,
+				new String[] { "isAbstract", "true" });
+		addAnnotation(eObjectEClass.getEOperations().get(10), source,
+				new String[] { "isAbstract", "true" });
+		addAnnotation(eObjectEClass.getEOperations().get(11), source,
+				new String[] { "isAbstract", "true" });
+		addAnnotation(eObjectEClass.getEOperations().get(12), source,
+				new String[] { "isAbstract", "true" });
+		addAnnotation(eObjectEClass.getEOperations().get(13), source,
+				new String[] { "isAbstract", "true" });
 		addAnnotation(getEOperation_EContainingClass(), source, new String[] {
+				"ecore.isTransient", "true" });
+		addAnnotation(ePackageEClass.getEOperations().get(0), source,
+				new String[] { "isAbstract", "true" });
+		addAnnotation(getEPackage_ESuperPackage(), source, new String[] {
+				"ecore.isTransient", "true" });
+		addAnnotation(getEPackage_EFactoryInstance(), source, new String[] {
 				"ecore.isTransient", "true" });
 		addAnnotation(getEParameter_EOperation(), source, new String[] {
 				"ecore.isTransient", "true" });
-		addAnnotation(getEGenericType_ERawType(), source, new String[] {
-				"isReadOnly", "false" });
-		addAnnotation(getEGenericType_ERawType(), source, new String[] {
-				"ecore.isTransient", "true" });
+		addAnnotation(eStructuralFeatureEClass.getEOperations().get(0), source,
+				new String[] { "isAbstract", "true" });
+		addAnnotation(eStructuralFeatureEClass.getEOperations().get(1), source,
+				new String[] { "isAbstract", "true" });
+		addAnnotation(getEStructuralFeature_EContainingClass(), source,
+				new String[] { "ecore.isTransient", "true" });
 		addAnnotation(eBigDecimalEDataType, source, new String[] { "alias",
 				"kermeta::language::structure::Object" });
 		addAnnotation(eBigDecimalEDataType, source, new String[] {
@@ -3170,230 +2880,6 @@ public class EcorePackageImpl extends EPackageImpl implements EcorePackage {
 				"org.eclipse.emf.common.util.TreeIterator" });
 		addAnnotation(eTreeIteratorEDataType, source, new String[] {
 				"ecore.EDataType_eTypeParameters", "E" });
-	}
-
-	/**
-	 * Initializes the annotations for <b>kompiledderivedProp.setter</b>.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void createKompiledderivedPropAnnotations() {
-		String source = "kompiledderivedProp.setter";
-		addAnnotation(
-				getEAttribute_EAttributeType(),
-				source,
-				new String[] {
-						"body",
-						"{\n\n\tjava.lang.Boolean idIfCond_803 = false;\n\tidIfCond_803 = org.kermeta.compil.runtime.helper.language.ObjectUtil.getMetaClass(this.getEType()).equals(org.kermeta.compil.runtime.ExecutionContext.getInstance().getMetaClass(\"ecore.EDataType\"));\n\n\tif( idIfCond_803 ) {\n\n\tresult = (ecore.EDataType) this.getEType();\n}\n else {\n\n\tkermeta.exceptions.Exception exception = ((kermeta.exceptions.Exception) org.kermeta.compil.runtime.helper.language.ClassUtil.newObject(\"kermeta.exceptions.Exception\"));\n\n\texception.setMessage(\"The EClassifer pointed by this EAttribute must be of type EDataType\");\n\n\t\nif (true)\n\tthrow new org.kermeta.compil.runtime.helper.error.KRuntimeError( exception );\n\n}\n\n}" });
-		addAnnotation(
-				getEClass_EAllAttributes(),
-				source,
-				new String[] {
-						"body",
-						"{\n\n\tresult = ((kermeta.standard.OrderedSet<ecore.EAttribute>) org.kermeta.compil.runtime.helper.language.ClassUtil.newObject(\"kermeta.standard.OrderedSet<ecore.EAttribute>\"));\n\n\t//Beginning of the Inlining of the function type: each\n\n\t\n{\n\n\tkermeta.standard.Iterator<ecore.EClass> it_ft171 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil.<ecore.EClass>convertAsOrderedSet(this.getEAllSuperTypes()).iterator();\n\tjava.lang.Boolean idLoopCond_805 = false;\n\twhile( !idLoopCond_805 ) {\n\tidLoopCond_805 = it_ft171.isOff();\n\tif ( idLoopCond_805 ) {\n\t} else {\n\n\t//Beginning of the Inlining of the lambda expression: func\necore.EClass t = it_ft171.next();\n\n\tresult.addAll(org.kermeta.compil.runtime.helper.basetypes.CollectionUtil.<ecore.EAttribute>convertAsOrderedSet(t.getEAttributes()));\n//End of the Inlining of the lambda expression: func\n\n}\n\t}\n}\n\n//End of the Inlining of the function type: each\n\n}" });
-		addAnnotation(
-				getEClass_EReferences(),
-				source,
-				new String[] {
-						"body",
-						"{\n\n\tresult = ((kermeta.standard.OrderedSet<ecore.EReference>) org.kermeta.compil.runtime.helper.language.ClassUtil.newObject(\"kermeta.standard.OrderedSet<ecore.EReference>\"));\n\n\t//Beginning of the Inlining of the function type: each\n\n\t\n{\n\n\tkermeta.standard.Iterator<ecore.EStructuralFeature> it_ft173 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil.<ecore.EStructuralFeature>convertAsOrderedSet(this.getEStructuralFeatures()).iterator();\n\tjava.lang.Boolean idLoopCond_807 = false;\n\twhile( !idLoopCond_807 ) {\n\tidLoopCond_807 = it_ft173.isOff();\n\tif ( idLoopCond_807 ) {\n\t} else {\n\n\t//Beginning of the Inlining of the lambda expression: func\necore.EStructuralFeature f = it_ft173.next();\n\n\tjava.lang.Boolean idIfCond_808 = false;\n\tidIfCond_808 = org.kermeta.compil.runtime.helper.language.TypeUtil.isInstance(org.kermeta.compil.runtime.ExecutionContext.getInstance().getMetaClass(\"ecore.EReference\"), f);\n\n\tif( idIfCond_808 ) {\n\n\tecore.EReference a = null;\n\n\ta = (ecore.EReference) f;\n\n\tresult.add(a);\n}\n\n//End of the Inlining of the lambda expression: func\n\n}\n\t}\n}\n\n//End of the Inlining of the function type: each\n\n}" });
-		addAnnotation(
-				getEClass_EAllReferences(),
-				source,
-				new String[] {
-						"body",
-						"{\n\n\tresult = ((kermeta.standard.OrderedSet<ecore.EReference>) org.kermeta.compil.runtime.helper.language.ClassUtil.newObject(\"kermeta.standard.OrderedSet<ecore.EReference>\"));\n\n\t//Beginning of the Inlining of the function type: each\n\n\t\n{\n\n\tkermeta.standard.Iterator<ecore.EClass> it_ft175 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil.<ecore.EClass>convertAsOrderedSet(this.getEAllSuperTypes()).iterator();\n\tjava.lang.Boolean idLoopCond_811 = false;\n\twhile( !idLoopCond_811 ) {\n\tidLoopCond_811 = it_ft175.isOff();\n\tif ( idLoopCond_811 ) {\n\t} else {\n\n\t//Beginning of the Inlining of the lambda expression: func\necore.EClass t = it_ft175.next();\n\n\tresult.addAll(org.kermeta.compil.runtime.helper.basetypes.CollectionUtil.<ecore.EReference>convertAsOrderedSet(t.getEReferences()));\n//End of the Inlining of the lambda expression: func\n\n}\n\t}\n}\n\n//End of the Inlining of the function type: each\n\n}" });
-		addAnnotation(
-				getEClass_EAllContainments(),
-				source,
-				new String[] {
-						"body",
-						"{\n\n\tresult = ((kermeta.standard.OrderedSet<ecore.EReference>) org.kermeta.compil.runtime.helper.language.ClassUtil.newObject(\"kermeta.standard.OrderedSet<ecore.EReference>\"));\n\n\torg.kermeta.compil.runtime.helper.io.StdIOUtil.writeln(kermeta.standard.helper.StringWrapper.plus(\"contaimnet : \", kermeta.standard.helper.BooleanWrapper.toString(org.kermeta.compil.runtime.helper.basetypes.CollectionUtil.<ecore.EReference>convertAsOrderedSet(this.getEAllReferences()).one().getContainment())));\n\n\t//Beginning of the Inlining of the function type: select\n\nkermeta.standard.Sequence<ecore.EReference> result_ft177 = null;\n\n\tecore.EReference elem_ft177 = null;\n\n\tresult_ft177 = ((kermeta.standard.Sequence<ecore.EReference>) org.kermeta.compil.runtime.helper.language.ClassUtil.newObject(\"kermeta.standard.Sequence<ecore.EReference>\"));\n\n\t\n{\n\n\tkermeta.standard.Iterator<ecore.EReference> it_ft177 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil.<ecore.EReference>convertAsOrderedSet(this.getEAllReferences()).iterator();\n\tjava.lang.Boolean idLoopCond_813 = false;\n\twhile( !idLoopCond_813 ) {\n\tidLoopCond_813 = it_ft177.isOff();\n\tif ( idLoopCond_813 ) {\n\t} else {\n\n\telem_ft177 = it_ft177.next();\n\n\tjava.lang.Boolean idIfCond_814 = false;\n//Beginning of the Inlining of the lambda expression: selector\necore.EReference r = elem_ft177;\n\n\tidIfCond_814 = kermeta.standard.helper.BooleanWrapper.equals(r.getContainment(), true);\n//End of the Inlining of the lambda expression: selector\n\n\n\tif( idIfCond_814 ) {\n\n\tresult_ft177.add(elem_ft177);\n}\n\n}\n\t}\n}\n\n//End of the Inlining of the function type: select\nresult.addAll(result_ft177);\n}" });
-		addAnnotation(getEClass_EAllGenericSuperTypes(), source, new String[] {
-				"body", "" });
-		addAnnotation(
-				getEClass_EAttributes(),
-				source,
-				new String[] {
-						"body",
-						"{\n\n\tresult = ((kermeta.standard.OrderedSet<ecore.EAttribute>) org.kermeta.compil.runtime.helper.language.ClassUtil.newObject(\"kermeta.standard.OrderedSet<ecore.EAttribute>\"));\n\n\t//Beginning of the Inlining of the function type: each\n\n\t\n{\n\n\tkermeta.standard.Iterator<ecore.EStructuralFeature> it_ft179 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil.<ecore.EStructuralFeature>convertAsOrderedSet(this.getEStructuralFeatures()).iterator();\n\tjava.lang.Boolean idLoopCond_817 = false;\n\twhile( !idLoopCond_817 ) {\n\tidLoopCond_817 = it_ft179.isOff();\n\tif ( idLoopCond_817 ) {\n\t} else {\n\n\t//Beginning of the Inlining of the lambda expression: func\necore.EStructuralFeature f = it_ft179.next();\n\n\tjava.lang.Boolean idIfCond_818 = false;\n\tidIfCond_818 = org.kermeta.compil.runtime.helper.language.TypeUtil.isInstance(org.kermeta.compil.runtime.ExecutionContext.getInstance().getMetaClass(\"ecore.EAttribute\"), f);\n\n\tif( idIfCond_818 ) {\n\n\tecore.EAttribute a = null;\n\n\ta = (ecore.EAttribute) f;\n\n\tresult.add(a);\n}\n\n//End of the Inlining of the lambda expression: func\n\n}\n\t}\n}\n\n//End of the Inlining of the function type: each\n\n}" });
-		addAnnotation(
-				getEClass_EIDAttribute(),
-				source,
-				new String[] {
-						"body",
-						"{\n\n\t\nif (true)\n\tthrow new org.kermeta.compil.runtime.helper.error.KRuntimeError( ((kermeta.exceptions.NotImplementedException) org.kermeta.compil.runtime.helper.language.ClassUtil.newObject(\"kermeta.exceptions.NotImplementedException\")) );\n\n}" });
-		addAnnotation(
-				getEClass_EAllOperations(),
-				source,
-				new String[] {
-						"body",
-						"{\n\n\tresult = ((kermeta.standard.OrderedSet<ecore.EOperation>) org.kermeta.compil.runtime.helper.language.ClassUtil.newObject(\"kermeta.standard.OrderedSet<ecore.EOperation>\"));\n\n\tresult.addAll(org.kermeta.compil.runtime.helper.basetypes.CollectionUtil.<ecore.EOperation>convertAsOrderedSet(this.getEOperations()));\n\n\t//Beginning of the Inlining of the function type: each\n\n\t\n{\n\n\tkermeta.standard.Iterator<ecore.EClass> it_ft181 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil.<ecore.EClass>convertAsOrderedSet(this.getEAllSuperTypes()).iterator();\n\tjava.lang.Boolean idLoopCond_821 = false;\n\twhile( !idLoopCond_821 ) {\n\tidLoopCond_821 = it_ft181.isOff();\n\tif ( idLoopCond_821 ) {\n\t} else {\n\n\t//Beginning of the Inlining of the lambda expression: func\necore.EClass t = it_ft181.next();\n\n\tresult.addAll(org.kermeta.compil.runtime.helper.basetypes.CollectionUtil.<ecore.EOperation>convertAsOrderedSet(t.getEOperations()));\n//End of the Inlining of the lambda expression: func\n\n}\n\t}\n}\n\n//End of the Inlining of the function type: each\n\n}" });
-		addAnnotation(
-				getEClass_EAllStructuralFeatures(),
-				source,
-				new String[] {
-						"body",
-						"{\n\n\tresult = ((kermeta.standard.OrderedSet<ecore.EStructuralFeature>) org.kermeta.compil.runtime.helper.language.ClassUtil.newObject(\"kermeta.standard.OrderedSet<ecore.EStructuralFeature>\"));\n\n\tjava.lang.Boolean idIfCond_823 = false;\n\tidIfCond_823 = org.kermeta.compil.runtime.helper.language.ObjectUtil.isNotEqual(org.kermeta.compil.runtime.helper.basetypes.CollectionUtil.<ecore.EStructuralFeature>convertAsOrderedSet(this.getEStructuralFeatures()), null);\n\n\tif( idIfCond_823 ) {\n\n\tresult.addAll(org.kermeta.compil.runtime.helper.basetypes.CollectionUtil.<ecore.EStructuralFeature>convertAsOrderedSet(this.getEStructuralFeatures()));\n}\n\n\n\t//Beginning of the Inlining of the function type: each\n\n\t\n{\n\n\tkermeta.standard.Iterator<ecore.EClass> it_ft183 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil.<ecore.EClass>convertAsOrderedSet(this.getEAllSuperTypes()).iterator();\n\tjava.lang.Boolean idLoopCond_824 = false;\n\twhile( !idLoopCond_824 ) {\n\tidLoopCond_824 = it_ft183.isOff();\n\tif ( idLoopCond_824 ) {\n\t} else {\n\n\t//Beginning of the Inlining of the lambda expression: func\necore.EClass t = it_ft183.next();\n\n\tresult.addAll(org.kermeta.compil.runtime.helper.basetypes.CollectionUtil.<ecore.EStructuralFeature>convertAsOrderedSet(t.getEStructuralFeatures()));\n//End of the Inlining of the lambda expression: func\n\n}\n\t}\n}\n\n//End of the Inlining of the function type: each\n\n}" });
-		addAnnotation(
-				getEClass_EAllSuperTypes(),
-				source,
-				new String[] {
-						"body",
-						"{\n\n\tresult = ((kermeta.standard.OrderedSet<ecore.EClass>) org.kermeta.compil.runtime.helper.language.ClassUtil.newObject(\"kermeta.standard.OrderedSet<ecore.EClass>\"));\n\n\tresult.addAll(org.kermeta.compil.runtime.helper.basetypes.CollectionUtil.<ecore.EClass>convertAsOrderedSet(this.getESuperTypes()));\n\n\t//Beginning of the Inlining of the function type: each\n\n\t\n{\n\n\tkermeta.standard.Iterator<ecore.EClass> it_ft185 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil.<ecore.EClass>convertAsOrderedSet(this.getESuperTypes()).iterator();\n\tjava.lang.Boolean idLoopCond_827 = false;\n\twhile( !idLoopCond_827 ) {\n\tidLoopCond_827 = it_ft185.isOff();\n\tif ( idLoopCond_827 ) {\n\t} else {\n\n\t//Beginning of the Inlining of the lambda expression: func\necore.EClass t = it_ft185.next();\n\n\tresult.addAll(org.kermeta.compil.runtime.helper.basetypes.CollectionUtil.<ecore.EClass>convertAsOrderedSet(t.getEAllSuperTypes()));\n//End of the Inlining of the lambda expression: func\n\n}\n\t}\n}\n\n//End of the Inlining of the function type: each\n\n}" });
-		addAnnotation(
-				getEClassifier_InstanceClass(),
-				source,
-				new String[] {
-						"body",
-						"{\n\n\t\nif (true)\n\tthrow new org.kermeta.compil.runtime.helper.error.KRuntimeError( ((kermeta.exceptions.NotImplementedException) org.kermeta.compil.runtime.helper.language.ClassUtil.newObject(\"kermeta.exceptions.NotImplementedException\")) );\n\n}" });
-		addAnnotation(
-				getEClassifier_DefaultValue(),
-				source,
-				new String[] {
-						"body",
-						"{\n\n\t\nif (true)\n\tthrow new org.kermeta.compil.runtime.helper.error.KRuntimeError( ((kermeta.exceptions.NotImplementedException) org.kermeta.compil.runtime.helper.language.ClassUtil.newObject(\"kermeta.exceptions.NotImplementedException\")) );\n\n}" });
-		addAnnotation(
-				getEReference_EReferenceType(),
-				source,
-				new String[] {
-						"body",
-						"{\n\n\tjava.lang.Boolean idIfCond_841 = false;\n\tidIfCond_841 = org.kermeta.compil.runtime.helper.language.ObjectUtil.getMetaClass(this.getEType()).equals(org.kermeta.compil.runtime.ExecutionContext.getInstance().getMetaClass(\"ecore.EClass\"));\n\n\tif( idIfCond_841 ) {\n\n\tresult = (ecore.EClass) this.getEType();\n}\n else {\n\n\tkermeta.exceptions.Exception exception = ((kermeta.exceptions.Exception) org.kermeta.compil.runtime.helper.language.ClassUtil.newObject(\"kermeta.exceptions.Exception\"));\n\n\texception.setMessage(\"The EClassifer pointed by this EReference must be of type EClass\");\n\n\t\nif (true)\n\tthrow new org.kermeta.compil.runtime.helper.error.KRuntimeError( exception );\n\n}\n\n}" });
-		addAnnotation(getEReference_Container(), source, new String[] { "body",
-				"" });
-		addAnnotation(
-				getEStructuralFeature_DefaultValue(),
-				source,
-				new String[] {
-						"body",
-						"{\n\n\t\nif (true)\n\tthrow new org.kermeta.compil.runtime.helper.error.KRuntimeError( ((kermeta.exceptions.NotImplementedException) org.kermeta.compil.runtime.helper.language.ClassUtil.newObject(\"kermeta.exceptions.NotImplementedException\")) );\n\n}" });
-		addAnnotation(
-				getETypedElement_Many(),
-				source,
-				new String[] {
-						"body",
-						"{\n\n\tjava.lang.Boolean idIfCond_847 = false;\n\tidIfCond_847 = kermeta.standard.helper.BooleanWrapper.or(kermeta.standard.helper.IntegerWrapper.isGreater(this.getUpperBound(), 1), kermeta.standard.helper.IntegerWrapper.equals(this.getUpperBound(), kermeta.standard.helper.IntegerWrapper.uminus(1)));\n\n\tif( idIfCond_847 ) {\n\n\tresult = true;\n}\n else {\n\n\tresult = false;\n}\n\n}" });
-		addAnnotation(
-				getETypedElement_Required(),
-				source,
-				new String[] {
-						"body",
-						"{\n\n\t\nif (true)\n\tthrow new org.kermeta.compil.runtime.helper.error.KRuntimeError( ((kermeta.exceptions.NotImplementedException) org.kermeta.compil.runtime.helper.language.ClassUtil.newObject(\"kermeta.exceptions.NotImplementedException\")) );\n\n}" });
-		addAnnotation(getEGenericType_ERawType(), source, new String[] {
-				"body", "" });
-	}
-
-	/**
-	 * Initializes the annotations for <b>kompiledderivedProp.getter</b>.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void createKompiledderivedProp_1Annotations() {
-		String source = "kompiledderivedProp.getter";
-		addAnnotation(
-				getEAttribute_EAttributeType(),
-				source,
-				new String[] {
-						"body",
-						"{\n\n\tjava.lang.Boolean idIfCond_804 = false;\n\tidIfCond_804 = org.kermeta.compil.runtime.helper.language.ObjectUtil.getMetaClass(this.getEType()).equals(org.kermeta.compil.runtime.ExecutionContext.getInstance().getMetaClass(\"ecore.EDataType\"));\n\n\tif( idIfCond_804 ) {\n\n\tresult = (ecore.EDataType) this.getEType();\n}\n else {\n\n\tkermeta.exceptions.Exception exception = ((kermeta.exceptions.Exception) org.kermeta.compil.runtime.helper.language.ClassUtil.newObject(\"kermeta.exceptions.Exception\"));\n\n\texception.setMessage(\"The EClassifer pointed by this EAttribute must be of type EDataType\");\n\n\t\nif (true)\n\tthrow new org.kermeta.compil.runtime.helper.error.KRuntimeError( exception );\n\n}\n\n}" });
-		addAnnotation(
-				getEClass_EAllAttributes(),
-				source,
-				new String[] {
-						"body",
-						"{\n\n\tresult = ((kermeta.standard.OrderedSet<ecore.EAttribute>) org.kermeta.compil.runtime.helper.language.ClassUtil.newObject(\"kermeta.standard.OrderedSet<ecore.EAttribute>\"));\n\n\t//Beginning of the Inlining of the function type: each\n\n\t\n{\n\n\tkermeta.standard.Iterator<ecore.EClass> it_ft172 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil.<ecore.EClass>convertAsOrderedSet(this.getEAllSuperTypes()).iterator();\n\tjava.lang.Boolean idLoopCond_806 = false;\n\twhile( !idLoopCond_806 ) {\n\tidLoopCond_806 = it_ft172.isOff();\n\tif ( idLoopCond_806 ) {\n\t} else {\n\n\t//Beginning of the Inlining of the lambda expression: func\necore.EClass t = it_ft172.next();\n\n\tresult.addAll(org.kermeta.compil.runtime.helper.basetypes.CollectionUtil.<ecore.EAttribute>convertAsOrderedSet(t.getEAttributes()));\n//End of the Inlining of the lambda expression: func\n\n}\n\t}\n}\n\n//End of the Inlining of the function type: each\n\n}" });
-		addAnnotation(
-				getEClass_EReferences(),
-				source,
-				new String[] {
-						"body",
-						"{\n\n\tresult = ((kermeta.standard.OrderedSet<ecore.EReference>) org.kermeta.compil.runtime.helper.language.ClassUtil.newObject(\"kermeta.standard.OrderedSet<ecore.EReference>\"));\n\n\t//Beginning of the Inlining of the function type: each\n\n\t\n{\n\n\tkermeta.standard.Iterator<ecore.EStructuralFeature> it_ft174 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil.<ecore.EStructuralFeature>convertAsOrderedSet(this.getEStructuralFeatures()).iterator();\n\tjava.lang.Boolean idLoopCond_809 = false;\n\twhile( !idLoopCond_809 ) {\n\tidLoopCond_809 = it_ft174.isOff();\n\tif ( idLoopCond_809 ) {\n\t} else {\n\n\t//Beginning of the Inlining of the lambda expression: func\necore.EStructuralFeature f = it_ft174.next();\n\n\tjava.lang.Boolean idIfCond_810 = false;\n\tidIfCond_810 = org.kermeta.compil.runtime.helper.language.TypeUtil.isInstance(org.kermeta.compil.runtime.ExecutionContext.getInstance().getMetaClass(\"ecore.EReference\"), f);\n\n\tif( idIfCond_810 ) {\n\n\tecore.EReference a = null;\n\n\ta = (ecore.EReference) f;\n\n\tresult.add(a);\n}\n\n//End of the Inlining of the lambda expression: func\n\n}\n\t}\n}\n\n//End of the Inlining of the function type: each\n\n}" });
-		addAnnotation(
-				getEClass_EAllReferences(),
-				source,
-				new String[] {
-						"body",
-						"{\n\n\tresult = ((kermeta.standard.OrderedSet<ecore.EReference>) org.kermeta.compil.runtime.helper.language.ClassUtil.newObject(\"kermeta.standard.OrderedSet<ecore.EReference>\"));\n\n\t//Beginning of the Inlining of the function type: each\n\n\t\n{\n\n\tkermeta.standard.Iterator<ecore.EClass> it_ft176 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil.<ecore.EClass>convertAsOrderedSet(this.getEAllSuperTypes()).iterator();\n\tjava.lang.Boolean idLoopCond_812 = false;\n\twhile( !idLoopCond_812 ) {\n\tidLoopCond_812 = it_ft176.isOff();\n\tif ( idLoopCond_812 ) {\n\t} else {\n\n\t//Beginning of the Inlining of the lambda expression: func\necore.EClass t = it_ft176.next();\n\n\tresult.addAll(org.kermeta.compil.runtime.helper.basetypes.CollectionUtil.<ecore.EReference>convertAsOrderedSet(t.getEReferences()));\n//End of the Inlining of the lambda expression: func\n\n}\n\t}\n}\n\n//End of the Inlining of the function type: each\n\n}" });
-		addAnnotation(
-				getEClass_EAllContainments(),
-				source,
-				new String[] {
-						"body",
-						"{\n\n\tresult = ((kermeta.standard.OrderedSet<ecore.EReference>) org.kermeta.compil.runtime.helper.language.ClassUtil.newObject(\"kermeta.standard.OrderedSet<ecore.EReference>\"));\n\n\torg.kermeta.compil.runtime.helper.io.StdIOUtil.writeln(kermeta.standard.helper.StringWrapper.plus(\"contaimnet : \", kermeta.standard.helper.BooleanWrapper.toString(org.kermeta.compil.runtime.helper.basetypes.CollectionUtil.<ecore.EReference>convertAsOrderedSet(this.getEAllReferences()).one().getContainment())));\n\n\t//Beginning of the Inlining of the function type: select\n\nkermeta.standard.Sequence<ecore.EReference> result_ft178 = null;\n\n\tecore.EReference elem_ft178 = null;\n\n\tresult_ft178 = ((kermeta.standard.Sequence<ecore.EReference>) org.kermeta.compil.runtime.helper.language.ClassUtil.newObject(\"kermeta.standard.Sequence<ecore.EReference>\"));\n\n\t\n{\n\n\tkermeta.standard.Iterator<ecore.EReference> it_ft178 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil.<ecore.EReference>convertAsOrderedSet(this.getEAllReferences()).iterator();\n\tjava.lang.Boolean idLoopCond_815 = false;\n\twhile( !idLoopCond_815 ) {\n\tidLoopCond_815 = it_ft178.isOff();\n\tif ( idLoopCond_815 ) {\n\t} else {\n\n\telem_ft178 = it_ft178.next();\n\n\tjava.lang.Boolean idIfCond_816 = false;\n//Beginning of the Inlining of the lambda expression: selector\necore.EReference r = elem_ft178;\n\n\tidIfCond_816 = kermeta.standard.helper.BooleanWrapper.equals(r.getContainment(), true);\n//End of the Inlining of the lambda expression: selector\n\n\n\tif( idIfCond_816 ) {\n\n\tresult_ft178.add(elem_ft178);\n}\n\n}\n\t}\n}\n\n//End of the Inlining of the function type: select\nresult.addAll(result_ft178);\n}" });
-		addAnnotation(getEClass_EAllGenericSuperTypes(), source, new String[] {
-				"body", "" });
-		addAnnotation(
-				getEClass_EAttributes(),
-				source,
-				new String[] {
-						"body",
-						"{\n\n\tresult = ((kermeta.standard.OrderedSet<ecore.EAttribute>) org.kermeta.compil.runtime.helper.language.ClassUtil.newObject(\"kermeta.standard.OrderedSet<ecore.EAttribute>\"));\n\n\t//Beginning of the Inlining of the function type: each\n\n\t\n{\n\n\tkermeta.standard.Iterator<ecore.EStructuralFeature> it_ft180 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil.<ecore.EStructuralFeature>convertAsOrderedSet(this.getEStructuralFeatures()).iterator();\n\tjava.lang.Boolean idLoopCond_819 = false;\n\twhile( !idLoopCond_819 ) {\n\tidLoopCond_819 = it_ft180.isOff();\n\tif ( idLoopCond_819 ) {\n\t} else {\n\n\t//Beginning of the Inlining of the lambda expression: func\necore.EStructuralFeature f = it_ft180.next();\n\n\tjava.lang.Boolean idIfCond_820 = false;\n\tidIfCond_820 = org.kermeta.compil.runtime.helper.language.TypeUtil.isInstance(org.kermeta.compil.runtime.ExecutionContext.getInstance().getMetaClass(\"ecore.EAttribute\"), f);\n\n\tif( idIfCond_820 ) {\n\n\tecore.EAttribute a = null;\n\n\ta = (ecore.EAttribute) f;\n\n\tresult.add(a);\n}\n\n//End of the Inlining of the lambda expression: func\n\n}\n\t}\n}\n\n//End of the Inlining of the function type: each\n\n}" });
-		addAnnotation(
-				getEClass_EIDAttribute(),
-				source,
-				new String[] {
-						"body",
-						"{\n\n\t\nif (true)\n\tthrow new org.kermeta.compil.runtime.helper.error.KRuntimeError( ((kermeta.exceptions.NotImplementedException) org.kermeta.compil.runtime.helper.language.ClassUtil.newObject(\"kermeta.exceptions.NotImplementedException\")) );\n\n}" });
-		addAnnotation(
-				getEClass_EAllOperations(),
-				source,
-				new String[] {
-						"body",
-						"{\n\n\tresult = ((kermeta.standard.OrderedSet<ecore.EOperation>) org.kermeta.compil.runtime.helper.language.ClassUtil.newObject(\"kermeta.standard.OrderedSet<ecore.EOperation>\"));\n\n\tresult.addAll(org.kermeta.compil.runtime.helper.basetypes.CollectionUtil.<ecore.EOperation>convertAsOrderedSet(this.getEOperations()));\n\n\t//Beginning of the Inlining of the function type: each\n\n\t\n{\n\n\tkermeta.standard.Iterator<ecore.EClass> it_ft182 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil.<ecore.EClass>convertAsOrderedSet(this.getEAllSuperTypes()).iterator();\n\tjava.lang.Boolean idLoopCond_822 = false;\n\twhile( !idLoopCond_822 ) {\n\tidLoopCond_822 = it_ft182.isOff();\n\tif ( idLoopCond_822 ) {\n\t} else {\n\n\t//Beginning of the Inlining of the lambda expression: func\necore.EClass t = it_ft182.next();\n\n\tresult.addAll(org.kermeta.compil.runtime.helper.basetypes.CollectionUtil.<ecore.EOperation>convertAsOrderedSet(t.getEOperations()));\n//End of the Inlining of the lambda expression: func\n\n}\n\t}\n}\n\n//End of the Inlining of the function type: each\n\n}" });
-		addAnnotation(
-				getEClass_EAllStructuralFeatures(),
-				source,
-				new String[] {
-						"body",
-						"{\n\n\tresult = ((kermeta.standard.OrderedSet<ecore.EStructuralFeature>) org.kermeta.compil.runtime.helper.language.ClassUtil.newObject(\"kermeta.standard.OrderedSet<ecore.EStructuralFeature>\"));\n\n\tjava.lang.Boolean idIfCond_825 = false;\n\tidIfCond_825 = org.kermeta.compil.runtime.helper.language.ObjectUtil.isNotEqual(org.kermeta.compil.runtime.helper.basetypes.CollectionUtil.<ecore.EStructuralFeature>convertAsOrderedSet(this.getEStructuralFeatures()), null);\n\n\tif( idIfCond_825 ) {\n\n\tresult.addAll(org.kermeta.compil.runtime.helper.basetypes.CollectionUtil.<ecore.EStructuralFeature>convertAsOrderedSet(this.getEStructuralFeatures()));\n}\n\n\n\t//Beginning of the Inlining of the function type: each\n\n\t\n{\n\n\tkermeta.standard.Iterator<ecore.EClass> it_ft184 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil.<ecore.EClass>convertAsOrderedSet(this.getEAllSuperTypes()).iterator();\n\tjava.lang.Boolean idLoopCond_826 = false;\n\twhile( !idLoopCond_826 ) {\n\tidLoopCond_826 = it_ft184.isOff();\n\tif ( idLoopCond_826 ) {\n\t} else {\n\n\t//Beginning of the Inlining of the lambda expression: func\necore.EClass t = it_ft184.next();\n\n\tresult.addAll(org.kermeta.compil.runtime.helper.basetypes.CollectionUtil.<ecore.EStructuralFeature>convertAsOrderedSet(t.getEStructuralFeatures()));\n//End of the Inlining of the lambda expression: func\n\n}\n\t}\n}\n\n//End of the Inlining of the function type: each\n\n}" });
-		addAnnotation(
-				getEClass_EAllSuperTypes(),
-				source,
-				new String[] {
-						"body",
-						"{\n\n\tresult = ((kermeta.standard.OrderedSet<ecore.EClass>) org.kermeta.compil.runtime.helper.language.ClassUtil.newObject(\"kermeta.standard.OrderedSet<ecore.EClass>\"));\n\n\tresult.addAll(org.kermeta.compil.runtime.helper.basetypes.CollectionUtil.<ecore.EClass>convertAsOrderedSet(this.getESuperTypes()));\n\n\t//Beginning of the Inlining of the function type: each\n\n\t\n{\n\n\tkermeta.standard.Iterator<ecore.EClass> it_ft186 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil.<ecore.EClass>convertAsOrderedSet(this.getESuperTypes()).iterator();\n\tjava.lang.Boolean idLoopCond_828 = false;\n\twhile( !idLoopCond_828 ) {\n\tidLoopCond_828 = it_ft186.isOff();\n\tif ( idLoopCond_828 ) {\n\t} else {\n\n\t//Beginning of the Inlining of the lambda expression: func\necore.EClass t = it_ft186.next();\n\n\tresult.addAll(org.kermeta.compil.runtime.helper.basetypes.CollectionUtil.<ecore.EClass>convertAsOrderedSet(t.getEAllSuperTypes()));\n//End of the Inlining of the lambda expression: func\n\n}\n\t}\n}\n\n//End of the Inlining of the function type: each\n\n}" });
-		addAnnotation(
-				getEClassifier_InstanceClass(),
-				source,
-				new String[] {
-						"body",
-						"{\n\n\t\nif (true)\n\tthrow new org.kermeta.compil.runtime.helper.error.KRuntimeError( ((kermeta.exceptions.NotImplementedException) org.kermeta.compil.runtime.helper.language.ClassUtil.newObject(\"kermeta.exceptions.NotImplementedException\")) );\n\n}" });
-		addAnnotation(
-				getEClassifier_DefaultValue(),
-				source,
-				new String[] {
-						"body",
-						"{\n\n\t\nif (true)\n\tthrow new org.kermeta.compil.runtime.helper.error.KRuntimeError( ((kermeta.exceptions.NotImplementedException) org.kermeta.compil.runtime.helper.language.ClassUtil.newObject(\"kermeta.exceptions.NotImplementedException\")) );\n\n}" });
-		addAnnotation(
-				getEReference_EReferenceType(),
-				source,
-				new String[] {
-						"body",
-						"{\n\n\tjava.lang.Boolean idIfCond_842 = false;\n\tidIfCond_842 = org.kermeta.compil.runtime.helper.language.ObjectUtil.getMetaClass(this.getEType()).equals(org.kermeta.compil.runtime.ExecutionContext.getInstance().getMetaClass(\"ecore.EClass\"));\n\n\tif( idIfCond_842 ) {\n\n\tresult = (ecore.EClass) this.getEType();\n}\n else {\n\n\tkermeta.exceptions.Exception exception = ((kermeta.exceptions.Exception) org.kermeta.compil.runtime.helper.language.ClassUtil.newObject(\"kermeta.exceptions.Exception\"));\n\n\texception.setMessage(\"The EClassifer pointed by this EReference must be of type EClass\");\n\n\t\nif (true)\n\tthrow new org.kermeta.compil.runtime.helper.error.KRuntimeError( exception );\n\n}\n\n}" });
-		addAnnotation(getEReference_Container(), source, new String[] { "body",
-				"" });
-		addAnnotation(
-				getEStructuralFeature_DefaultValue(),
-				source,
-				new String[] {
-						"body",
-						"{\n\n\t\nif (true)\n\tthrow new org.kermeta.compil.runtime.helper.error.KRuntimeError( ((kermeta.exceptions.NotImplementedException) org.kermeta.compil.runtime.helper.language.ClassUtil.newObject(\"kermeta.exceptions.NotImplementedException\")) );\n\n}" });
-		addAnnotation(
-				getETypedElement_Many(),
-				source,
-				new String[] {
-						"body",
-						"{\n\n\tjava.lang.Boolean idIfCond_848 = false;\n\tidIfCond_848 = kermeta.standard.helper.BooleanWrapper.or(kermeta.standard.helper.IntegerWrapper.isGreater(this.getUpperBound(), 1), kermeta.standard.helper.IntegerWrapper.equals(this.getUpperBound(), kermeta.standard.helper.IntegerWrapper.uminus(1)));\n\n\tif( idIfCond_848 ) {\n\n\tresult = true;\n}\n else {\n\n\tresult = false;\n}\n\n}" });
-		addAnnotation(
-				getETypedElement_Required(),
-				source,
-				new String[] {
-						"body",
-						"{\n\n\t\nif (true)\n\tthrow new org.kermeta.compil.runtime.helper.error.KRuntimeError( ((kermeta.exceptions.NotImplementedException) org.kermeta.compil.runtime.helper.language.ClassUtil.newObject(\"kermeta.exceptions.NotImplementedException\")) );\n\n}" });
-		addAnnotation(getEGenericType_ERawType(), source, new String[] {
-				"body", "" });
 	}
 
 } //EcorePackageImpl

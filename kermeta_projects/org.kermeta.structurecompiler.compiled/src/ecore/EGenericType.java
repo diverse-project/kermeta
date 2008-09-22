@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: EGenericType.java,v 1.3 2008-09-11 12:34:55 cfaucher Exp $
+ * $Id: EGenericType.java,v 1.4 2008-09-22 14:44:19 cfaucher Exp $
  */
 package ecore;
 
@@ -19,7 +19,6 @@ import org.eclipse.emf.common.util.EList;
  *   <li>{@link ecore.EGenericType#getETypeArguments <em>EType Arguments</em>}</li>
  *   <li>{@link ecore.EGenericType#getEUpperBound <em>EUpper Bound</em>}</li>
  *   <li>{@link ecore.EGenericType#getEClassifier <em>EClassifier</em>}</li>
- *   <li>{@link ecore.EGenericType#getERawType <em>ERaw Type</em>}</li>
  *   <li>{@link ecore.EGenericType#getETypeParameter <em>EType Parameter</em>}</li>
  *   <li>{@link ecore.EGenericType#getELowerBound <em>ELower Bound</em>}</li>
  * </ul>
@@ -99,25 +98,6 @@ public interface EGenericType extends EObject {
 	void setEClassifier(EClassifier value);
 
 	/**
-	 * Returns the value of the '<em><b>ERaw Type</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>ERaw Type</em>' reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>ERaw Type</em>' reference.
-	 * @see ecore.EcorePackage#getEGenericType_ERawType()
-	 * @model required="true" transient="true" changeable="false" derived="true"
-	 *        annotation="kermeta isReadOnly='false'"
-	 *        annotation="kermeta ecore.isTransient='true'"
-	 *        annotation="kompiledderivedProp.setter body=''"
-	 *        annotation="kompiledderivedProp.getter body=''"
-	 * @generated
-	 */
-	EClassifier getERawType();
-
-	/**
 	 * Returns the value of the '<em><b>EType Parameter</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
@@ -168,5 +148,13 @@ public interface EGenericType extends EObject {
 	 * @generated
 	 */
 	void setELowerBound(EGenericType value);
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model annotation="http://www.eclipse.org/emf/2002/GenModel body='\necore.EClassifier result = null;\n\nreturn result;\n'"
+	 * @generated
+	 */
+	EClassifier getterERawType();
 
 } // EGenericType

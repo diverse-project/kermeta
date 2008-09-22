@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ConstraintViolatedInv.java,v 1.2 2008-09-11 12:34:45 cfaucher Exp $
+ * $Id: ConstraintViolatedInv.java,v 1.3 2008-09-22 14:45:18 cfaucher Exp $
  */
 package kermeta.exceptions;
 
@@ -13,8 +13,8 @@ package kermeta.exceptions;
  *
  *
  * @see kermeta.exceptions.ExceptionsPackage#getConstraintViolatedInv()
- * @model annotation="kermeta documentation='/** some fixes declared in the invariant condition ave been changed \052/'"
+ * @model annotation="kermeta documentation='/** An invariant isn\'t satisfied on a given Object \052/'"
  * @generated
  */
-public interface ConstraintViolatedInv extends kermeta.exceptions.Exception {
+public interface ConstraintViolatedInv extends ConstraintViolatedException {
 } // ConstraintViolatedInv

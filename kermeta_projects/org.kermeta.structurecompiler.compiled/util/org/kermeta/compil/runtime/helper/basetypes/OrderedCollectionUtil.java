@@ -11,6 +11,7 @@ public class OrderedCollectionUtil {
 			c.getValues().add(index, (G) o);
 		} catch (NullPointerException e) {
 			c.setValues( new BasicEList<G>() );
+			addAt(c, index, o);
 		}
 	}
 	

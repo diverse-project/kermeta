@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: EClassifier.java,v 1.3 2008-09-11 12:34:55 cfaucher Exp $
+ * $Id: EClassifier.java,v 1.4 2008-09-22 14:44:19 cfaucher Exp $
  */
 package ecore;
 
@@ -18,9 +18,7 @@ import org.eclipse.emf.common.util.EList;
  * <ul>
  *   <li>{@link ecore.EClassifier#getInstanceClassName <em>Instance Class Name</em>}</li>
  *   <li>{@link ecore.EClassifier#getEPackage <em>EPackage</em>}</li>
- *   <li>{@link ecore.EClassifier#getInstanceClass <em>Instance Class</em>}</li>
  *   <li>{@link ecore.EClassifier#getETypeParameters <em>EType Parameters</em>}</li>
- *   <li>{@link ecore.EClassifier#getDefaultValue <em>Default Value</em>}</li>
  *   <li>{@link ecore.EClassifier#getInstanceTypeName <em>Instance Type Name</em>}</li>
  * </ul>
  * </p>
@@ -86,25 +84,6 @@ public interface EClassifier extends ENamedElement {
 	void setEPackage(EPackage value);
 
 	/**
-	 * Returns the value of the '<em><b>Instance Class</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Instance Class</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Instance Class</em>' attribute.
-	 * @see ecore.EcorePackage#getEClassifier_InstanceClass()
-	 * @model dataType="ecore.EJavaClass<?>" transient="true" changeable="false" derived="true"
-	 *        annotation="kermeta isReadOnly='false'"
-	 *        annotation="kermeta ecore.isTransient='true'"
-	 *        annotation="kompiledderivedProp.setter body=''"
-	 *        annotation="kompiledderivedProp.getter body=''"
-	 * @generated
-	 */
-	Class<?> getInstanceClass();
-
-	/**
 	 * Returns the value of the '<em><b>EType Parameters</b></em>' containment reference list.
 	 * The list contents are of type {@link ecore.ETypeParameter}.
 	 * <!-- begin-user-doc -->
@@ -119,25 +98,6 @@ public interface EClassifier extends ENamedElement {
 	 * @generated
 	 */
 	EList<ETypeParameter> getETypeParameters();
-
-	/**
-	 * Returns the value of the '<em><b>Default Value</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Default Value</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Default Value</em>' attribute.
-	 * @see ecore.EcorePackage#getEClassifier_DefaultValue()
-	 * @model dataType="ecore.EJavaObject" transient="true" changeable="false" derived="true"
-	 *        annotation="kermeta isReadOnly='false'"
-	 *        annotation="kermeta ecore.isTransient='true'"
-	 *        annotation="kompiledderivedProp.setter body=''"
-	 *        annotation="kompiledderivedProp.getter body=''"
-	 * @generated
-	 */
-	Object getDefaultValue();
 
 	/**
 	 * Returns the value of the '<em><b>Instance Type Name</b></em>' attribute.
@@ -184,5 +144,23 @@ public interface EClassifier extends ENamedElement {
 	 * @generated
 	 */
 	int getClassifierID();
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model dataType="ecore.EJavaClass<?>"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='\njava.lang.Class result = null;\n\nreturn result;\n'"
+	 * @generated
+	 */
+	Class<?> getterInstanceClass();
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model dataType="ecore.EJavaObject"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='\njava.lang.Object result = null;\n\nreturn result;\n'"
+	 * @generated
+	 */
+	Object getterDefaultValue();
 
 } // EClassifier

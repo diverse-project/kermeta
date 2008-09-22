@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: CallValueImpl.java,v 1.2 2008-09-11 12:34:40 cfaucher Exp $
+ * $Id: CallValueImpl.java,v 1.3 2008-09-22 14:46:52 cfaucher Exp $
  */
 package kermeta.language.behavior.impl;
 
@@ -53,8 +53,7 @@ public class CallValueImpl extends CallExpressionImpl implements CallValue {
 
 		super.createBehaviorJava(context);
 
-		result = org.kermeta.compil.runtime.helper.language.ObjectUtil
-				.toString(this);
+		result = "value";
 
 		return result;
 

@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: Reference.java,v 1.2 2008-09-11 12:34:41 cfaucher Exp $
+ * $Id: Reference.java,v 1.3 2008-09-22 14:48:58 cfaucher Exp $
  */
 package traceability;
 

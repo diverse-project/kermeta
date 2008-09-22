@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: UpperBoundReachedError.java,v 1.2 2008-09-11 12:34:45 cfaucher Exp $
+ * $Id: UpperBoundReachedError.java,v 1.3 2008-09-22 14:45:18 cfaucher Exp $
  */
 package kermeta.exceptions;
 
@@ -13,7 +13,7 @@ package kermeta.exceptions;
  *
  *
  * @see kermeta.exceptions.ExceptionsPackage#getUpperBoundReachedError()
- * @model annotation="kermeta documentation='/** \n * Use this exception when user tries to add an element to a property which type is collection\n * which has an upper bound != -1 ( ie *)\n \052/'"
+ * @model annotation="kermeta documentation='/** \r\n * Use this exception when user tries to add an element to a property which type is collection\r\n * which has an upper bound != -1 ( ie *)\r\n \052/'"
  * @generated
  */
 public interface UpperBoundReachedError extends RuntimeError {

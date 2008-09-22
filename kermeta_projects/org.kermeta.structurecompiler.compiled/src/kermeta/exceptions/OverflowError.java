@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: OverflowError.java,v 1.2 2008-09-11 12:34:45 cfaucher Exp $
+ * $Id: OverflowError.java,v 1.3 2008-09-22 14:45:17 cfaucher Exp $
  */
 package kermeta.exceptions;
 

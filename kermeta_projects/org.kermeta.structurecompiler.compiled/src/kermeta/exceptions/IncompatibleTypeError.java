@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: IncompatibleTypeError.java,v 1.2 2008-09-11 12:34:44 cfaucher Exp $
+ * $Id: IncompatibleTypeError.java,v 1.3 2008-09-22 14:45:17 cfaucher Exp $
  */
 package kermeta.exceptions;
 
@@ -13,7 +13,7 @@ package kermeta.exceptions;
  *
  *
  * @see kermeta.exceptions.ExceptionsPackage#getIncompatibleTypeError()
- * @model annotation="kermeta documentation='/**\n * Raised by the Object::set operation if the type of the \n * Object to set has an incompatible type.\n \052/'"
+ * @model annotation="kermeta documentation='/**\r\n * Raised by the Object::set operation if the type of the \r\n * Object to set has an incompatible type.\r\n \052/'"
  * @generated
  */
 public interface IncompatibleTypeError extends RuntimeError {

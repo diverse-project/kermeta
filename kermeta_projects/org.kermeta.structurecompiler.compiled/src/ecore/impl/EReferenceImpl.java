@@ -2,12 +2,11 @@
  * <copyright>
  * </copyright>
  *
- * $Id: EReferenceImpl.java,v 1.4 2008-09-11 12:34:38 cfaucher Exp $
+ * $Id: EReferenceImpl.java,v 1.5 2008-09-22 14:44:20 cfaucher Exp $
  */
 package ecore.impl;
 
 import ecore.EAttribute;
-import ecore.EClass;
 import ecore.EReference;
 import ecore.EcorePackage;
 
@@ -17,6 +16,7 @@ import org.eclipse.emf.common.notify.Notification;
 
 import org.eclipse.emf.common.util.EList;
 
+import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
@@ -30,10 +30,8 @@ import org.eclipse.emf.ecore.util.EObjectResolvingEList;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link ecore.impl.EReferenceImpl#getEReferenceType <em>EReference Type</em>}</li>
  *   <li>{@link ecore.impl.EReferenceImpl#getEOpposite <em>EOpposite</em>}</li>
  *   <li>{@link ecore.impl.EReferenceImpl#isResolveProxies <em>Resolve Proxies</em>}</li>
- *   <li>{@link ecore.impl.EReferenceImpl#isContainer <em>Container</em>}</li>
  *   <li>{@link ecore.impl.EReferenceImpl#getEKeys <em>EKeys</em>}</li>
  *   <li>{@link ecore.impl.EReferenceImpl#isContainment <em>Containment</em>}</li>
  * </ul>
@@ -43,16 +41,6 @@ import org.eclipse.emf.ecore.util.EObjectResolvingEList;
  */
 public class EReferenceImpl extends EStructuralFeatureImpl implements
 		EReference {
-	/**
-	 * The cached value of the '{@link #getEReferenceType() <em>EReference Type</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getEReferenceType()
-	 * @generated
-	 * @ordered
-	 */
-	protected EClass eReferenceType;
-
 	/**
 	 * The cached value of the '{@link #getEOpposite() <em>EOpposite</em>}' reference.
 	 * <!-- begin-user-doc -->
@@ -82,26 +70,6 @@ public class EReferenceImpl extends EStructuralFeatureImpl implements
 	 * @ordered
 	 */
 	protected boolean resolveProxies = RESOLVE_PROXIES_EDEFAULT;
-
-	/**
-	 * The default value of the '{@link #isContainer() <em>Container</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #isContainer()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final boolean CONTAINER_EDEFAULT = false;
-
-	/**
-	 * The cached value of the '{@link #isContainer() <em>Container</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #isContainer()
-	 * @generated
-	 * @ordered
-	 */
-	protected boolean container = CONTAINER_EDEFAULT;
 
 	/**
 	 * The cached value of the '{@link #getEKeys() <em>EKeys</em>}' reference list.
@@ -148,36 +116,8 @@ public class EReferenceImpl extends EStructuralFeatureImpl implements
 	 * @generated
 	 */
 	@Override
-	protected org.eclipse.emf.ecore.EClass eStaticClass() {
+	protected EClass eStaticClass() {
 		return EcorePackage.Literals.EREFERENCE;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EClass getEReferenceType() {
-		if (eReferenceType != null && eReferenceType.eIsProxy()) {
-			InternalEObject oldEReferenceType = (InternalEObject) eReferenceType;
-			eReferenceType = (EClass) eResolveProxy(oldEReferenceType);
-			if (eReferenceType != oldEReferenceType) {
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE,
-							EcorePackage.EREFERENCE__EREFERENCE_TYPE,
-							oldEReferenceType, eReferenceType));
-			}
-		}
-		return eReferenceType;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EClass basicGetEReferenceType() {
-		return eReferenceType;
 	}
 
 	/**
@@ -249,15 +189,6 @@ public class EReferenceImpl extends EStructuralFeatureImpl implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean isContainer() {
-		return container;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EList<EAttribute> getEKeys() {
 		if (eKeys == null) {
 			eKeys = new EObjectResolvingEList<EAttribute>(EAttribute.class,
@@ -294,21 +225,41 @@ public class EReferenceImpl extends EStructuralFeatureImpl implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public ecore.EClass getterEReferenceType() {
+
+		ecore.EClass result = null;
+
+		return result;
+
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean getterContainer() {
+
+		java.lang.Boolean result = null;
+
+		return result;
+
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-		case EcorePackage.EREFERENCE__EREFERENCE_TYPE:
-			if (resolve)
-				return getEReferenceType();
-			return basicGetEReferenceType();
 		case EcorePackage.EREFERENCE__EOPPOSITE:
 			if (resolve)
 				return getEOpposite();
 			return basicGetEOpposite();
 		case EcorePackage.EREFERENCE__RESOLVE_PROXIES:
 			return isResolveProxies() ? Boolean.TRUE : Boolean.FALSE;
-		case EcorePackage.EREFERENCE__CONTAINER:
-			return isContainer() ? Boolean.TRUE : Boolean.FALSE;
 		case EcorePackage.EREFERENCE__EKEYS:
 			return getEKeys();
 		case EcorePackage.EREFERENCE__CONTAINMENT:
@@ -375,14 +326,10 @@ public class EReferenceImpl extends EStructuralFeatureImpl implements
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-		case EcorePackage.EREFERENCE__EREFERENCE_TYPE:
-			return eReferenceType != null;
 		case EcorePackage.EREFERENCE__EOPPOSITE:
 			return eOpposite != null;
 		case EcorePackage.EREFERENCE__RESOLVE_PROXIES:
 			return resolveProxies != RESOLVE_PROXIES_EDEFAULT;
-		case EcorePackage.EREFERENCE__CONTAINER:
-			return container != CONTAINER_EDEFAULT;
 		case EcorePackage.EREFERENCE__EKEYS:
 			return eKeys != null && !eKeys.isEmpty();
 		case EcorePackage.EREFERENCE__CONTAINMENT:
@@ -404,8 +351,6 @@ public class EReferenceImpl extends EStructuralFeatureImpl implements
 		StringBuffer result = new StringBuffer(super.toString());
 		result.append(" (resolveProxies: ");
 		result.append(resolveProxies);
-		result.append(", container: ");
-		result.append(container);
 		result.append(", containment: ");
 		result.append(containment);
 		result.append(')');

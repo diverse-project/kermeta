@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ConstraintHelperImpl.java,v 1.2 2008-09-11 12:34:48 cfaucher Exp $
+ * $Id: ConstraintHelperImpl.java,v 1.3 2008-09-22 14:49:01 cfaucher Exp $
  */
 package km2ecore.helper.kermeta.impl;
 
@@ -63,11 +63,11 @@ public class ConstraintHelperImpl extends ObjectImpl implements
 								.getInstance().getMetaClass(
 										"kermeta.language.structure.Operation")));
 
-		java.lang.Boolean idIfCond_44 = false;
-		idIfCond_44 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+		java.lang.Boolean idIfCond_1014 = false;
+		idIfCond_1014 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 				.isNotEqual(op, null);
 
-		if (idIfCond_44) {
+		if (idIfCond_1014) {
 
 			result = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
 					.<kermeta.language.structure.Constraint> convertAsOrderedSet(
@@ -96,11 +96,11 @@ public class ConstraintHelperImpl extends ObjectImpl implements
 								.getInstance().getMetaClass(
 										"kermeta.language.structure.Operation")));
 
-		java.lang.Boolean idIfCond_45 = false;
-		idIfCond_45 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+		java.lang.Boolean idIfCond_1015 = false;
+		idIfCond_1015 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 				.isNotEqual(op, null);
 
-		if (idIfCond_45) {
+		if (idIfCond_1015) {
 
 			result = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
 					.<kermeta.language.structure.Constraint> convertAsOrderedSet(

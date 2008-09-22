@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: EGenericTypeImpl.java,v 1.3 2008-09-11 12:34:38 cfaucher Exp $
+ * $Id: EGenericTypeImpl.java,v 1.4 2008-09-22 14:44:20 cfaucher Exp $
  */
 package ecore.impl;
 
@@ -36,7 +36,6 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *   <li>{@link ecore.impl.EGenericTypeImpl#getETypeArguments <em>EType Arguments</em>}</li>
  *   <li>{@link ecore.impl.EGenericTypeImpl#getEUpperBound <em>EUpper Bound</em>}</li>
  *   <li>{@link ecore.impl.EGenericTypeImpl#getEClassifier <em>EClassifier</em>}</li>
- *   <li>{@link ecore.impl.EGenericTypeImpl#getERawType <em>ERaw Type</em>}</li>
  *   <li>{@link ecore.impl.EGenericTypeImpl#getETypeParameter <em>EType Parameter</em>}</li>
  *   <li>{@link ecore.impl.EGenericTypeImpl#getELowerBound <em>ELower Bound</em>}</li>
  * </ul>
@@ -74,16 +73,6 @@ public class EGenericTypeImpl extends EObjectImpl implements EGenericType {
 	 * @ordered
 	 */
 	protected EClassifier eClassifier;
-
-	/**
-	 * The cached value of the '{@link #getERawType() <em>ERaw Type</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getERawType()
-	 * @generated
-	 * @ordered
-	 */
-	protected EClassifier eRawType;
 
 	/**
 	 * The cached value of the '{@link #getETypeParameter() <em>EType Parameter</em>}' reference.
@@ -274,34 +263,6 @@ public class EGenericTypeImpl extends EObjectImpl implements EGenericType {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClassifier getERawType() {
-		if (eRawType != null && eRawType.eIsProxy()) {
-			InternalEObject oldERawType = (InternalEObject) eRawType;
-			eRawType = (EClassifier) eResolveProxy(oldERawType);
-			if (eRawType != oldERawType) {
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE,
-							EcorePackage.EGENERIC_TYPE__ERAW_TYPE, oldERawType,
-							eRawType));
-			}
-		}
-		return eRawType;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EClassifier basicGetERawType() {
-		return eRawType;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public ETypeParameter getETypeParameter() {
 		if (eTypeParameter != null && eTypeParameter.eIsProxy()) {
 			InternalEObject oldETypeParameter = (InternalEObject) eTypeParameter;
@@ -433,6 +394,19 @@ public class EGenericTypeImpl extends EObjectImpl implements EGenericType {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClassifier getterERawType() {
+
+		ecore.EClassifier result = null;
+
+		return result;
+
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd,
 			int featureID, NotificationChain msgs) {
@@ -466,10 +440,6 @@ public class EGenericTypeImpl extends EObjectImpl implements EGenericType {
 			if (resolve)
 				return getEClassifier();
 			return basicGetEClassifier();
-		case EcorePackage.EGENERIC_TYPE__ERAW_TYPE:
-			if (resolve)
-				return getERawType();
-			return basicGetERawType();
 		case EcorePackage.EGENERIC_TYPE__ETYPE_PARAMETER:
 			if (resolve)
 				return getETypeParameter();
@@ -553,8 +523,6 @@ public class EGenericTypeImpl extends EObjectImpl implements EGenericType {
 			return eUpperBound != null;
 		case EcorePackage.EGENERIC_TYPE__ECLASSIFIER:
 			return eClassifier != null;
-		case EcorePackage.EGENERIC_TYPE__ERAW_TYPE:
-			return eRawType != null;
 		case EcorePackage.EGENERIC_TYPE__ETYPE_PARAMETER:
 			return eTypeParameter != null;
 		case EcorePackage.EGENERIC_TYPE__ELOWER_BOUND:

@@ -10,6 +10,24 @@ public class ObjectSuper {
 	 *
 	 * @generated
 	 */
+	public static <G> java.lang.String super_createBehaviorJava(
+
+	kermeta.language.structure.Object self, km2ecore.KM2EcoreContext context
+
+	) {
+
+		java.lang.String result = null;
+
+		result = "";
+
+		return result;
+
+	}
+
+	/**
+	 *
+	 * @generated
+	 */
 	public static <G> void super_applyPass2(
 
 	kermeta.language.structure.Object self, km2ecore.KM2EcoreContext context
@@ -22,29 +40,29 @@ public class ObjectSuper {
 
 		{
 
-			kermeta.standard.Iterator<kermeta.language.structure.Tag> it_ft203 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
+			kermeta.standard.Iterator<kermeta.language.structure.Tag> it_ft249 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
 					.<kermeta.language.structure.Tag> convertAsOrderedSet(
 							self.getOwnedTags()).iterator();
-			java.lang.Boolean idLoopCond_929 = false;
-			while (!idLoopCond_929) {
-				idLoopCond_929 = it_ft203.isOff();
-				if (idLoopCond_929) {
+			java.lang.Boolean idLoopCond_1058 = false;
+			while (!idLoopCond_1058) {
+				idLoopCond_1058 = it_ft249.isOff();
+				if (idLoopCond_1058) {
 				} else {
 
 					//BIle:func
-					kermeta.language.structure.Tag o_lbdExp203 = it_ft203
+					kermeta.language.structure.Tag o_lbdExp249 = it_ft249
 							.next();
 
 					//BIle:func
-					kermeta.language.structure.Tag p_lbdExp202 = o_lbdExp203;
+					kermeta.language.structure.Tag p_lbdExp248 = o_lbdExp249;
 
-					java.lang.Boolean idIfCond_930 = false;
-					idIfCond_930 = kermeta.standard.helper.StringWrapper
-							.equals(p_lbdExp202.getDeprecated(), "");
+					java.lang.Boolean idIfCond_1059 = false;
+					idIfCond_1059 = kermeta.standard.helper.StringWrapper
+							.equals(p_lbdExp248.getDeprecated(), "");
 
-					if (idIfCond_930) {
+					if (idIfCond_1059) {
 
-						p_lbdExp202.applyPass2(context);
+						p_lbdExp248.applyPass2(context);
 					}
 
 					//EIle:func
@@ -58,71 +76,6 @@ public class ObjectSuper {
 		//EIft:each
 
 		//EIft:eachOwnedElement
-
-	}
-
-	/**
-	 *
-	 * @generated
-	 */
-	public static <G> void super_applyPass2BehaviorJava(
-
-	kermeta.language.structure.Object self, km2ecore.KM2EcoreContext context
-
-	) {
-
-		//BIft:eachOwnedElement
-
-		//BIft:each
-
-		{
-
-			kermeta.standard.Iterator<kermeta.language.structure.Tag> it_ft205 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
-					.<kermeta.language.structure.Tag> convertAsOrderedSet(
-							self.getOwnedTags()).iterator();
-			java.lang.Boolean idLoopCond_931 = false;
-			while (!idLoopCond_931) {
-				idLoopCond_931 = it_ft205.isOff();
-				if (idLoopCond_931) {
-				} else {
-
-					//BIle:func
-					kermeta.language.structure.Tag o_lbdExp205 = it_ft205
-							.next();
-
-					//BIle:func
-					kermeta.language.structure.Tag p_lbdExp204 = o_lbdExp205;
-
-					p_lbdExp204.applyPass2BehaviorJava(context);
-					//EIle:func
-
-					//EIle:func
-
-				}
-			}
-		}
-
-		//EIft:each
-
-		//EIft:eachOwnedElement
-
-	}
-
-	/**
-	 *
-	 * @generated
-	 */
-	public static <G> java.lang.String super_createBehaviorJava(
-
-	kermeta.language.structure.Object self, km2ecore.KM2EcoreContext context
-
-	) {
-
-		java.lang.String result = null;
-
-		result = "";
-
-		return result;
 
 	}
 

@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: MessageImpl.java,v 1.2 2008-09-11 12:34:57 cfaucher Exp $
+ * $Id: MessageImpl.java,v 1.3 2008-09-22 14:49:08 cfaucher Exp $
  */
 package traceability.impl;
 

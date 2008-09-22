@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: StringBuffer.java,v 1.2 2008-09-11 12:34:42 cfaucher Exp $
+ * $Id: StringBuffer.java,v 1.3 2008-09-22 14:48:59 cfaucher Exp $
  */
 package kermeta.utils;
 
@@ -11,12 +11,45 @@ package kermeta.utils;
  * A representation of the model object '<em><b>String Buffer</b></em>'.
  * <!-- end-user-doc -->
  *
+ * <p>
+ * The following features are supported:
+ * <ul>
+ *   <li>{@link kermeta.utils.StringBuffer#getContent <em>Content</em>}</li>
+ * </ul>
+ * </p>
  *
  * @see kermeta.utils.UtilsPackage#getStringBuffer()
  * @model annotation="kermeta documentation='/**\n * This class mimic the behavior of the java\'s StringBuffer class. This enables better performance in long\n * string concatenation.<br>\n * <b>Only work on Strings</b>\n * <img src=\"platform:/plugin/fr.irisa.triskell.kermeta.documentation/src/figures/utils_package.png\"/>\n \052/'"
+ *        annotation="kermeta EMF_needProperty='name=content isUnique=true isOrdered=false javaClass=java.lang.StringBuffer'"
  * @generated
  */
 public interface StringBuffer extends kermeta.language.structure.Object {
+	/**
+	 * Returns the value of the '<em><b>Content</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Content</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Content</em>' attribute.
+	 * @see #setContent(java.lang.StringBuffer)
+	 * @see kermeta.utils.UtilsPackage#getStringBuffer_Content()
+	 * @model dataType="kermeta.utils.KermetaProperty_StringBuffer_content"
+	 * @generated
+	 */
+	java.lang.StringBuffer getContent();
+
+	/**
+	 * Sets the value of the '{@link kermeta.utils.StringBuffer#getContent <em>Content</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Content</em>' attribute.
+	 * @see #getContent()
+	 * @generated
+	 */
+	void setContent(java.lang.StringBuffer value);
+
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

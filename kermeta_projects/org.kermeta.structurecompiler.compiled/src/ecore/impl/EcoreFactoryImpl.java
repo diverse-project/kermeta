@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: EcoreFactoryImpl.java,v 1.1 2008-09-04 15:40:23 cfaucher Exp $
+ * $Id: EcoreFactoryImpl.java,v 1.2 2008-09-22 14:44:20 cfaucher Exp $
  */
 package ecore.impl;
 
@@ -68,28 +68,28 @@ public class EcoreFactoryImpl extends EFactoryImpl implements EcoreFactory {
 		switch (eClass.getClassifierID()) {
 		case EcorePackage.EATTRIBUTE:
 			return createEAttribute();
+		case EcorePackage.EANNOTATION:
+			return createEAnnotation();
 		case EcorePackage.ECLASS:
 			return createEClass();
+		case EcorePackage.EDATA_TYPE:
+			return createEDataType();
 		case EcorePackage.EENUM:
 			return createEEnum();
+		case EcorePackage.EENUM_LITERAL:
+			return createEEnumLiteral();
 		case EcorePackage.EFACTORY:
 			return createEFactory();
 		case EcorePackage.EOBJECT:
 			return createEObject();
-		case EcorePackage.EPACKAGE:
-			return createEPackage();
-		case EcorePackage.EREFERENCE:
-			return createEReference();
-		case EcorePackage.EANNOTATION:
-			return createEAnnotation();
-		case EcorePackage.EDATA_TYPE:
-			return createEDataType();
-		case EcorePackage.EENUM_LITERAL:
-			return createEEnumLiteral();
 		case EcorePackage.EOPERATION:
 			return createEOperation();
+		case EcorePackage.EPACKAGE:
+			return createEPackage();
 		case EcorePackage.EPARAMETER:
 			return createEParameter();
+		case EcorePackage.EREFERENCE:
+			return createEReference();
 		case EcorePackage.ESTRING_TO_STRING_MAP_ENTRY:
 			return createEStringToStringMapEntry();
 		case EcorePackage.EGENERIC_TYPE:
@@ -237,6 +237,16 @@ public class EcoreFactoryImpl extends EFactoryImpl implements EcoreFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAnnotation createEAnnotation() {
+		EAnnotationImpl eAnnotation = new EAnnotationImpl();
+		return eAnnotation;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public ecore.EClass createEClass() {
 		EClassImpl eClass = new EClassImpl();
 		return eClass;
@@ -247,9 +257,29 @@ public class EcoreFactoryImpl extends EFactoryImpl implements EcoreFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public ecore.EDataType createEDataType() {
+		EDataTypeImpl eDataType = new EDataTypeImpl();
+		return eDataType;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EEnum createEEnum() {
 		EEnumImpl eEnum = new EEnumImpl();
 		return eEnum;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EEnumLiteral createEEnumLiteral() {
+		EEnumLiteralImpl eEnumLiteral = new EEnumLiteralImpl();
+		return eEnumLiteral;
 	}
 
 	/**
@@ -277,56 +307,6 @@ public class EcoreFactoryImpl extends EFactoryImpl implements EcoreFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ecore.EPackage createEPackage() {
-		EPackageImpl ePackage = new EPackageImpl();
-		return ePackage;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference createEReference() {
-		EReferenceImpl eReference = new EReferenceImpl();
-		return eReference;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAnnotation createEAnnotation() {
-		EAnnotationImpl eAnnotation = new EAnnotationImpl();
-		return eAnnotation;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public ecore.EDataType createEDataType() {
-		EDataTypeImpl eDataType = new EDataTypeImpl();
-		return eDataType;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EEnumLiteral createEEnumLiteral() {
-		EEnumLiteralImpl eEnumLiteral = new EEnumLiteralImpl();
-		return eEnumLiteral;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EOperation createEOperation() {
 		EOperationImpl eOperation = new EOperationImpl();
 		return eOperation;
@@ -337,9 +317,29 @@ public class EcoreFactoryImpl extends EFactoryImpl implements EcoreFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public ecore.EPackage createEPackage() {
+		EPackageImpl ePackage = new EPackageImpl();
+		return ePackage;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EParameter createEParameter() {
 		EParameterImpl eParameter = new EParameterImpl();
 		return eParameter;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference createEReference() {
+		EReferenceImpl eReference = new EReferenceImpl();
+		return eReference;
 	}
 
 	/**

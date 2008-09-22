@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: NamedElementImpl.java,v 1.2 2008-09-11 12:34:47 cfaucher Exp $
+ * $Id: NamedElementImpl.java,v 1.3 2008-09-22 14:47:36 cfaucher Exp $
  */
 package kermeta.language.structure.impl;
 
@@ -28,8 +28,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  *
  * @generated
  */
-public abstract class NamedElementImpl extends ObjectImpl implements
-		NamedElement {
+public class NamedElementImpl extends ObjectImpl implements NamedElement {
 	/**
 	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -104,8 +103,8 @@ public abstract class NamedElementImpl extends ObjectImpl implements
 
 		result = this.getName();
 
-		java.lang.Boolean idIfCond_314 = false;
-		idIfCond_314 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+		java.lang.Boolean idIfCond_676 = false;
+		idIfCond_676 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 				.isInstanceOf(
 						org.kermeta.compil.runtime.helper.language.ObjectUtil
 								.container(elem),
@@ -114,23 +113,23 @@ public abstract class NamedElementImpl extends ObjectImpl implements
 								.getMetaClass(
 										"kermeta.language.structure.NamedElement"));
 
-		if (idIfCond_314) {
+		if (idIfCond_676) {
 
 			elem = (kermeta.language.structure.NamedElement) org.kermeta.compil.runtime.helper.language.ObjectUtil
 					.container(elem);
-			java.lang.Boolean idLoopCond_315 = false;
-			while (!idLoopCond_315) {
-				idLoopCond_315 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+			java.lang.Boolean idLoopCond_677 = false;
+			while (!idLoopCond_677) {
+				idLoopCond_677 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 						.equals(elem, null);
-				if (idLoopCond_315) {
+				if (idLoopCond_677) {
 				} else {
 
 					result = kermeta.standard.helper.StringWrapper.plus(
 							kermeta.standard.helper.StringWrapper.plus(elem
 									.getName(), "::"), result);
 
-					java.lang.Boolean idIfCond_316 = false;
-					idIfCond_316 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+					java.lang.Boolean idIfCond_678 = false;
+					idIfCond_678 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 							.isInstanceOf(
 									org.kermeta.compil.runtime.helper.language.ObjectUtil
 											.container(elem),
@@ -139,7 +138,7 @@ public abstract class NamedElementImpl extends ObjectImpl implements
 											.getMetaClass(
 													"kermeta.language.structure.NamedElement"));
 
-					if (idIfCond_316) {
+					if (idIfCond_678) {
 
 						elem = (kermeta.language.structure.NamedElement) org.kermeta.compil.runtime.helper.language.ObjectUtil
 								.container(elem);

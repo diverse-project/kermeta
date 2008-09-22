@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: UtilsSwitch.java,v 1.2 2008-09-11 12:34:55 cfaucher Exp $
+ * $Id: UtilsSwitch.java,v 1.3 2008-09-22 14:49:07 cfaucher Exp $
  */
 package kermeta.utils.util;
 
@@ -100,6 +100,15 @@ public class UtilsSwitch<T> {
 				result = defaultCase(theEObject);
 			return result;
 		}
+		case UtilsPackage.HASHTABLE: {
+			Hashtable<?, ?> hashtable = (Hashtable<?, ?>) theEObject;
+			T result = caseHashtable(hashtable);
+			if (result == null)
+				result = caseObject(hashtable);
+			if (result == null)
+				result = defaultCase(theEObject);
+			return result;
+		}
 		case UtilsPackage.STACK: {
 			Stack<?> stack = (Stack<?>) theEObject;
 			T result = caseStack(stack);
@@ -113,15 +122,6 @@ public class UtilsSwitch<T> {
 				result = caseCollection(stack);
 			if (result == null)
 				result = caseObject(stack);
-			if (result == null)
-				result = defaultCase(theEObject);
-			return result;
-		}
-		case UtilsPackage.HASHTABLE: {
-			Hashtable<?, ?> hashtable = (Hashtable<?, ?>) theEObject;
-			T result = caseHashtable(hashtable);
-			if (result == null)
-				result = caseObject(hashtable);
 			if (result == null)
 				result = defaultCase(theEObject);
 			return result;
@@ -147,21 +147,6 @@ public class UtilsSwitch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Stack</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Stack</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public <G> T caseStack(Stack<G> object) {
-		return null;
-	}
-
-	/**
 	 * Returns the result of interpreting the object as an instance of '<em>Hashtable</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
@@ -173,6 +158,21 @@ public class UtilsSwitch<T> {
 	 * @generated
 	 */
 	public <K, V> T caseHashtable(Hashtable<K, V> object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Stack</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Stack</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public <G> T caseStack(Stack<G> object) {
 		return null;
 	}
 

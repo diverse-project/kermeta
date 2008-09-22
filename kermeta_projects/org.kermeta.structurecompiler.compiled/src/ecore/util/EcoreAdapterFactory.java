@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: EcoreAdapterFactory.java,v 1.1 2008-09-04 15:40:35 cfaucher Exp $
+ * $Id: EcoreAdapterFactory.java,v 1.2 2008-09-22 14:44:57 cfaucher Exp $
  */
 package ecore.util;
 
@@ -76,6 +76,11 @@ public class EcoreAdapterFactory extends AdapterFactoryImpl {
 		}
 
 		@Override
+		public Adapter caseEAnnotation(EAnnotation object) {
+			return createEAnnotationAdapter();
+		}
+
+		@Override
 		public Adapter caseEClass(EClass object) {
 			return createEClassAdapter();
 		}
@@ -86,8 +91,18 @@ public class EcoreAdapterFactory extends AdapterFactoryImpl {
 		}
 
 		@Override
+		public Adapter caseEDataType(EDataType object) {
+			return createEDataTypeAdapter();
+		}
+
+		@Override
 		public Adapter caseEEnum(EEnum object) {
 			return createEEnumAdapter();
+		}
+
+		@Override
+		public Adapter caseEEnumLiteral(EEnumLiteral object) {
+			return createEEnumLiteralAdapter();
 		}
 
 		@Override
@@ -101,13 +116,28 @@ public class EcoreAdapterFactory extends AdapterFactoryImpl {
 		}
 
 		@Override
+		public Adapter caseENamedElement(ENamedElement object) {
+			return createENamedElementAdapter();
+		}
+
+		@Override
 		public Adapter caseEObject(ecore.EObject object) {
 			return createEObjectAdapter();
 		}
 
 		@Override
+		public Adapter caseEOperation(EOperation object) {
+			return createEOperationAdapter();
+		}
+
+		@Override
 		public Adapter caseEPackage(EPackage object) {
 			return createEPackageAdapter();
+		}
+
+		@Override
+		public Adapter caseEParameter(EParameter object) {
+			return createEParameterAdapter();
 		}
 
 		@Override
@@ -123,36 +153,6 @@ public class EcoreAdapterFactory extends AdapterFactoryImpl {
 		@Override
 		public Adapter caseETypedElement(ETypedElement object) {
 			return createETypedElementAdapter();
-		}
-
-		@Override
-		public Adapter caseEAnnotation(EAnnotation object) {
-			return createEAnnotationAdapter();
-		}
-
-		@Override
-		public Adapter caseEDataType(EDataType object) {
-			return createEDataTypeAdapter();
-		}
-
-		@Override
-		public Adapter caseEEnumLiteral(EEnumLiteral object) {
-			return createEEnumLiteralAdapter();
-		}
-
-		@Override
-		public Adapter caseENamedElement(ENamedElement object) {
-			return createENamedElementAdapter();
-		}
-
-		@Override
-		public Adapter caseEOperation(EOperation object) {
-			return createEOperationAdapter();
-		}
-
-		@Override
-		public Adapter caseEParameter(EParameter object) {
-			return createEParameterAdapter();
 		}
 
 		@Override
@@ -210,6 +210,20 @@ public class EcoreAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
+	 * Creates a new adapter for an object of class '{@link ecore.EAnnotation <em>EAnnotation</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see ecore.EAnnotation
+	 * @generated
+	 */
+	public Adapter createEAnnotationAdapter() {
+		return null;
+	}
+
+	/**
 	 * Creates a new adapter for an object of class '{@link ecore.EClass <em>EClass</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -238,6 +252,20 @@ public class EcoreAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
+	 * Creates a new adapter for an object of class '{@link ecore.EDataType <em>EData Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see ecore.EDataType
+	 * @generated
+	 */
+	public Adapter createEDataTypeAdapter() {
+		return null;
+	}
+
+	/**
 	 * Creates a new adapter for an object of class '{@link ecore.EEnum <em>EEnum</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -248,6 +276,20 @@ public class EcoreAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createEEnumAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link ecore.EEnumLiteral <em>EEnum Literal</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see ecore.EEnumLiteral
+	 * @generated
+	 */
+	public Adapter createEEnumLiteralAdapter() {
 		return null;
 	}
 
@@ -280,6 +322,20 @@ public class EcoreAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
+	 * Creates a new adapter for an object of class '{@link ecore.ENamedElement <em>ENamed Element</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see ecore.ENamedElement
+	 * @generated
+	 */
+	public Adapter createENamedElementAdapter() {
+		return null;
+	}
+
+	/**
 	 * Creates a new adapter for an object of class '{@link ecore.EObject <em>EObject</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -294,6 +350,20 @@ public class EcoreAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
+	 * Creates a new adapter for an object of class '{@link ecore.EOperation <em>EOperation</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see ecore.EOperation
+	 * @generated
+	 */
+	public Adapter createEOperationAdapter() {
+		return null;
+	}
+
+	/**
 	 * Creates a new adapter for an object of class '{@link ecore.EPackage <em>EPackage</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -304,6 +374,20 @@ public class EcoreAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createEPackageAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link ecore.EParameter <em>EParameter</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see ecore.EParameter
+	 * @generated
+	 */
+	public Adapter createEParameterAdapter() {
 		return null;
 	}
 
@@ -346,90 +430,6 @@ public class EcoreAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createETypedElementAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link ecore.EAnnotation <em>EAnnotation</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see ecore.EAnnotation
-	 * @generated
-	 */
-	public Adapter createEAnnotationAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link ecore.EDataType <em>EData Type</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see ecore.EDataType
-	 * @generated
-	 */
-	public Adapter createEDataTypeAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link ecore.EEnumLiteral <em>EEnum Literal</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see ecore.EEnumLiteral
-	 * @generated
-	 */
-	public Adapter createEEnumLiteralAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link ecore.ENamedElement <em>ENamed Element</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see ecore.ENamedElement
-	 * @generated
-	 */
-	public Adapter createENamedElementAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link ecore.EOperation <em>EOperation</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see ecore.EOperation
-	 * @generated
-	 */
-	public Adapter createEOperationAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link ecore.EParameter <em>EParameter</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see ecore.EParameter
-	 * @generated
-	 */
-	public Adapter createEParameterAdapter() {
 		return null;
 	}
 
@@ -488,5 +488,6 @@ public class EcoreAdapterFactory extends AdapterFactoryImpl {
 	public Adapter createObjectAdapter() {
 		return null;
 	}
+
 
 } //EcoreAdapterFactory

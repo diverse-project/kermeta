@@ -2,9 +2,11 @@
  * <copyright>
  * </copyright>
  *
- * $Id: MultiplicityElement.java,v 1.2 2008-09-11 12:34:37 cfaucher Exp $
+ * $Id: MultiplicityElement.java,v 1.3 2008-09-22 14:47:40 cfaucher Exp $
  */
 package kermeta.language.structure;
+
+import km2ecore.KM2EcoreContext;
 
 /**
  * <!-- begin-user-doc -->
@@ -150,7 +152,7 @@ public interface MultiplicityElement extends TypedElement {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @model kind="operation" dataType="kermeta.standard.JavaString"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='\njava.lang.String result = null;\n\n\tresult = this.getName();\n\n\tjava.lang.Boolean idIfCond_48 = false;\n\tidIfCond_48 = org.kermeta.compil.runtime.helper.language.ObjectUtil.isNotEqual(this.getEMFRenameAs(), \"\");\n\n\tif( idIfCond_48 ) {\n\n\tresult = this.getEMFRenameAs();\n}\n\n\nreturn result;\n'"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='\njava.lang.String result = null;\n\n\tresult = this.getName();\n\n\tjava.lang.Boolean idIfCond_698 = false;\n\tidIfCond_698 = org.kermeta.compil.runtime.helper.language.ObjectUtil.isNotEqual(this.getEMFRenameAs(), \"\");\n\n\tif( idIfCond_698 ) {\n\n\tresult = this.getEMFRenameAs();\n}\n\n\nreturn result;\n'"
 	 * @generated
 	 */
 	String getFinalName();
@@ -164,5 +166,15 @@ public interface MultiplicityElement extends TypedElement {
 	 * @generated
 	 */
 	String getEMFRenameAs();
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model dataType="kermeta.standard.JavaString"
+	 *        annotation="kermeta documentation='/** Generation of the String representing the end of a method: return of the result value \052/'"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='\njava.lang.String result = null;\n\n\tresult = \"\\nreturn \";\n\n\tjava.lang.Boolean idIfCond_699 = false;\n\tidIfCond_699 = kermeta.standard.helper.IntegerWrapper.equals(this.getUpper(), 1);\n\n\tif( idIfCond_699 ) {\n\n\tresult = kermeta.standard.helper.StringWrapper.plus(result, \"result\");\n}\n else {\n\n\tresult = kermeta.standard.helper.StringWrapper.plus(kermeta.standard.helper.StringWrapper.plus(result, context.getCOLLECTION_UTIL_CLASS()), \".convertAsEList(result)\");\n}\n\n\n\tresult = kermeta.standard.helper.StringWrapper.plus(result, \";\\n\");\n\nreturn result;\n'"
+	 * @generated
+	 */
+	String ppReturnResult(KM2EcoreContext context);
 
 } // MultiplicityElement

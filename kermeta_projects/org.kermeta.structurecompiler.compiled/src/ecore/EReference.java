@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: EReference.java,v 1.3 2008-09-11 12:34:55 cfaucher Exp $
+ * $Id: EReference.java,v 1.4 2008-09-22 14:44:19 cfaucher Exp $
  */
 package ecore;
 
@@ -16,10 +16,8 @@ import org.eclipse.emf.common.util.EList;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link ecore.EReference#getEReferenceType <em>EReference Type</em>}</li>
  *   <li>{@link ecore.EReference#getEOpposite <em>EOpposite</em>}</li>
  *   <li>{@link ecore.EReference#isResolveProxies <em>Resolve Proxies</em>}</li>
- *   <li>{@link ecore.EReference#isContainer <em>Container</em>}</li>
  *   <li>{@link ecore.EReference#getEKeys <em>EKeys</em>}</li>
  *   <li>{@link ecore.EReference#isContainment <em>Containment</em>}</li>
  * </ul>
@@ -30,25 +28,6 @@ import org.eclipse.emf.common.util.EList;
  * @generated
  */
 public interface EReference extends EStructuralFeature {
-	/**
-	 * Returns the value of the '<em><b>EReference Type</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>EReference Type</em>' reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>EReference Type</em>' reference.
-	 * @see ecore.EcorePackage#getEReference_EReferenceType()
-	 * @model required="true" transient="true" changeable="false" derived="true"
-	 *        annotation="kermeta isReadOnly='false'"
-	 *        annotation="kermeta ecore.isTransient='true'"
-	 *        annotation="kompiledderivedProp.setter body=''"
-	 *        annotation="kompiledderivedProp.getter body=''"
-	 * @generated
-	 */
-	EClass getEReferenceType();
-
 	/**
 	 * Returns the value of the '<em><b>EOpposite</b></em>' reference.
 	 * <!-- begin-user-doc -->
@@ -103,26 +82,6 @@ public interface EReference extends EStructuralFeature {
 	void setResolveProxies(boolean value);
 
 	/**
-	 * Returns the value of the '<em><b>Container</b></em>' attribute.
-	 * The default value is <code>"false"</code>.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Container</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Container</em>' attribute.
-	 * @see ecore.EcorePackage#getEReference_Container()
-	 * @model default="false" dataType="ecore.EBoolean" transient="true" changeable="false" derived="true"
-	 *        annotation="kermeta isReadOnly='false'"
-	 *        annotation="kermeta ecore.isTransient='true'"
-	 *        annotation="kompiledderivedProp.setter body=''"
-	 *        annotation="kompiledderivedProp.getter body=''"
-	 * @generated
-	 */
-	boolean isContainer();
-
-	/**
 	 * Returns the value of the '<em><b>EKeys</b></em>' reference list.
 	 * The list contents are of type {@link ecore.EAttribute}.
 	 * <!-- begin-user-doc -->
@@ -164,5 +123,22 @@ public interface EReference extends EStructuralFeature {
 	 * @generated
 	 */
 	void setContainment(boolean value);
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model annotation="http://www.eclipse.org/emf/2002/GenModel body='\necore.EClass result = null;\n\nreturn result;\n'"
+	 * @generated
+	 */
+	EClass getterEReferenceType();
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model dataType="ecore.EBoolean"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='\njava.lang.Boolean result = null;\n\nreturn result;\n'"
+	 * @generated
+	 */
+	boolean getterContainer();
 
 } // EReference

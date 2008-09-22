@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: StandardFactoryImpl.java,v 1.2 2008-09-11 12:34:51 cfaucher Exp $
+ * $Id: StandardFactoryImpl.java,v 1.3 2008-09-22 14:48:28 cfaucher Exp $
  */
 package kermeta.standard.impl;
 
@@ -72,12 +72,6 @@ public class StandardFactoryImpl extends EFactoryImpl implements
 	@Override
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
-		case StandardPackage.UNKNOWN_JAVA_OBJECT:
-			return createUnknownJavaObject();
-		case StandardPackage.VOID:
-			return createVoid();
-		case StandardPackage.NOT_COMPARABLE_EXCEPTION:
-			return createNotComparableException();
 		case StandardPackage.SET:
 			return createSet();
 		case StandardPackage.BAG:
@@ -88,6 +82,12 @@ public class StandardFactoryImpl extends EFactoryImpl implements
 			return createSequence();
 		case StandardPackage.ITERATOR:
 			return createIterator();
+		case StandardPackage.VOID:
+			return createVoid();
+		case StandardPackage.NOT_COMPARABLE_EXCEPTION:
+			return createNotComparableException();
+		case StandardPackage.UNKNOWN_JAVA_OBJECT:
+			return createUnknownJavaObject();
 		default:
 			throw new IllegalArgumentException("The class '" + eClass.getName()
 					+ "' is not a valid classifier");
@@ -102,6 +102,8 @@ public class StandardFactoryImpl extends EFactoryImpl implements
 	@Override
 	public Object createFromString(EDataType eDataType, String initialValue) {
 		switch (eDataType.getClassifierID()) {
+		case StandardPackage.JAVA_STRING:
+			return createJavaStringFromString(eDataType, initialValue);
 		case StandardPackage.JAVA_BOOLEAN:
 			return createJavaBooleanFromString(eDataType, initialValue);
 		case StandardPackage.JAVA_NUMERIC:
@@ -112,8 +114,6 @@ public class StandardFactoryImpl extends EFactoryImpl implements
 			return createJavaRealFromString(eDataType, initialValue);
 		case StandardPackage.JAVA_CHARACTER:
 			return createJavaCharacterFromString(eDataType, initialValue);
-		case StandardPackage.JAVA_STRING:
-			return createJavaStringFromString(eDataType, initialValue);
 		case StandardPackage.UNLIMITED_NATURAL:
 			return createUnlimitedNaturalFromString(eDataType, initialValue);
 		case StandardPackage.KERMETA_PROPERTY_COLLECTION_VALUES:
@@ -136,6 +136,8 @@ public class StandardFactoryImpl extends EFactoryImpl implements
 	@Override
 	public String convertToString(EDataType eDataType, Object instanceValue) {
 		switch (eDataType.getClassifierID()) {
+		case StandardPackage.JAVA_STRING:
+			return convertJavaStringToString(eDataType, instanceValue);
 		case StandardPackage.JAVA_BOOLEAN:
 			return convertJavaBooleanToString(eDataType, instanceValue);
 		case StandardPackage.JAVA_NUMERIC:
@@ -146,8 +148,6 @@ public class StandardFactoryImpl extends EFactoryImpl implements
 			return convertJavaRealToString(eDataType, instanceValue);
 		case StandardPackage.JAVA_CHARACTER:
 			return convertJavaCharacterToString(eDataType, instanceValue);
-		case StandardPackage.JAVA_STRING:
-			return convertJavaStringToString(eDataType, instanceValue);
 		case StandardPackage.UNLIMITED_NATURAL:
 			return convertUnlimitedNaturalToString(eDataType, instanceValue);
 		case StandardPackage.KERMETA_PROPERTY_COLLECTION_VALUES:
@@ -160,36 +160,6 @@ public class StandardFactoryImpl extends EFactoryImpl implements
 			throw new IllegalArgumentException("The datatype '"
 					+ eDataType.getName() + "' is not a valid classifier");
 		}
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public UnknownJavaObject createUnknownJavaObject() {
-		UnknownJavaObjectImpl unknownJavaObject = new UnknownJavaObjectImpl();
-		return unknownJavaObject;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public kermeta.standard.Void createVoid() {
-		VoidImpl void_ = new VoidImpl();
-		return void_;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public NotComparableException createNotComparableException() {
-		NotComparableExceptionImpl notComparableException = new NotComparableExceptionImpl();
-		return notComparableException;
 	}
 
 	/**
@@ -240,6 +210,56 @@ public class StandardFactoryImpl extends EFactoryImpl implements
 	public <G> Iterator<G> createIterator() {
 		IteratorImpl<G> iterator = new IteratorImpl<G>();
 		return iterator;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public kermeta.standard.Void createVoid() {
+		VoidImpl void_ = new VoidImpl();
+		return void_;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotComparableException createNotComparableException() {
+		NotComparableExceptionImpl notComparableException = new NotComparableExceptionImpl();
+		return notComparableException;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public UnknownJavaObject createUnknownJavaObject() {
+		UnknownJavaObjectImpl unknownJavaObject = new UnknownJavaObjectImpl();
+		return unknownJavaObject;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String createJavaStringFromString(EDataType eDataType,
+			String initialValue) {
+		return (String) super.createFromString(eDataType, initialValue);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String convertJavaStringToString(EDataType eDataType,
+			Object instanceValue) {
+		return super.convertToString(eDataType, instanceValue);
 	}
 
 	/**
@@ -338,26 +358,6 @@ public class StandardFactoryImpl extends EFactoryImpl implements
 	 * @generated
 	 */
 	public String convertJavaCharacterToString(EDataType eDataType,
-			Object instanceValue) {
-		return super.convertToString(eDataType, instanceValue);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public String createJavaStringFromString(EDataType eDataType,
-			String initialValue) {
-		return (String) super.createFromString(eDataType, initialValue);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public String convertJavaStringToString(EDataType eDataType,
 			Object instanceValue) {
 		return super.convertToString(eDataType, instanceValue);
 	}

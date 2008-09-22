@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: TestSuiteImpl.java,v 1.2 2008-09-11 12:34:39 cfaucher Exp $
+ * $Id: TestSuiteImpl.java,v 1.3 2008-09-22 14:46:09 cfaucher Exp $
  */
 package kermeta.kunit.impl;
 
@@ -88,54 +88,54 @@ public class TestSuiteImpl extends TestImpl implements TestSuite {
 
 		//BIft:exists
 
-		java.lang.Boolean result_ft158 = null;
+		java.lang.Boolean result_ft205 = null;
 
-		java.lang.Boolean test_ft158 = false;
+		java.lang.Boolean test_ft205 = false;
 
 		{
 
-			kermeta.standard.Iterator<kermeta.language.structure.Class> it_ft158 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
+			kermeta.standard.Iterator<kermeta.language.structure.Class> it_ft205 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
 					.<kermeta.language.structure.Class> convertAsOrderedSet(
-							testCaseClass.getSuperClass()).iterator();
-			java.lang.Boolean idLoopCond_824 = false;
-			while (!idLoopCond_824) {
-				idLoopCond_824 = kermeta.standard.helper.BooleanWrapper.or(
-						it_ft158.isOff(),
+							testCaseClass.getterSuperClass()).iterator();
+			java.lang.Boolean idLoopCond_911 = false;
+			while (!idLoopCond_911) {
+				idLoopCond_911 = kermeta.standard.helper.BooleanWrapper.or(
+						it_ft205.isOff(),
 						org.kermeta.compil.runtime.helper.language.ObjectUtil
-								.isNotEqual(test_ft158, false));
-				if (idLoopCond_824) {
+								.isNotEqual(test_ft205, false));
+				if (idLoopCond_911) {
 				} else {
 
-					java.lang.Boolean result_lambda = null;
+					java.lang.Boolean result_lambda_ft205 = null;
 					//BIle:func
-					kermeta.language.structure.Class sc_lbdExp158 = it_ft158
+					kermeta.language.structure.Class sc_lbdExp205 = it_ft205
 							.next();
 
-					result_lambda = sc_lbdExp158
+					result_lambda_ft205 = sc_lbdExp205
 							.equals(org.kermeta.compil.runtime.ExecutionContext
 									.getInstance().getMetaClass(
 											"kermeta.kunit.TestCase"));
 					//EIle:func
 
-					test_ft158 = kermeta.standard.helper.BooleanWrapper.or(
-							test_ft158, result_lambda);
+					test_ft205 = kermeta.standard.helper.BooleanWrapper.or(
+							test_ft205, result_lambda_ft205);
 				}
 			}
 		}
 
-		result_ft158 = test_ft158;
+		result_ft205 = test_ft205;
 		//EIft:exists
-		java.lang.Boolean idIfCond_823 = false;
-		idIfCond_823 = kermeta.standard.helper.BooleanWrapper.not(result_ft158);
+		java.lang.Boolean idIfCond_910 = false;
+		idIfCond_910 = kermeta.standard.helper.BooleanWrapper.not(result_ft205);
 
-		if (idIfCond_823) {
+		if (idIfCond_910) {
 
 			kermeta.exceptions.Exception e = ((kermeta.kunit.InvalidParameterException) org.kermeta.compil.runtime.helper.language.ClassUtil
 					.newObject("kermeta.kunit.InvalidParameterException"));
 
 			e.setMessage(kermeta.standard.helper.StringWrapper.plus(
 					"Cannot build a suite from class: ", testCaseClass
-							.getName()));
+							.getterName()));
 
 			if (true)
 				throw new org.kermeta.compil.runtime.helper.error.KRuntimeError(
@@ -145,54 +145,54 @@ public class TestSuiteImpl extends TestImpl implements TestSuite {
 
 		//BIft:select
 
-		kermeta.standard.Sequence<kermeta.language.structure.Operation> result_ft160 = null;
+		kermeta.standard.Sequence<kermeta.language.structure.Operation> result_ft207 = null;
 
-		kermeta.language.structure.Operation elem_ft160 = null;
+		kermeta.language.structure.Operation elem_ft207 = null;
 
-		result_ft160 = ((kermeta.standard.Sequence<kermeta.language.structure.Operation>) org.kermeta.compil.runtime.helper.language.ClassUtil
+		result_ft207 = ((kermeta.standard.Sequence<kermeta.language.structure.Operation>) org.kermeta.compil.runtime.helper.language.ClassUtil
 				.newObject("kermeta.standard.Sequence<kermeta.language.structure.Operation>"));
 
 		{
 
-			kermeta.standard.Iterator<kermeta.language.structure.Operation> it_ft160 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
-					.<kermeta.language.structure.Operation> convertAsOrderedSet(
-							testCaseClass.getOwnedOperation()).iterator();
-			java.lang.Boolean idLoopCond_826 = false;
-			while (!idLoopCond_826) {
-				idLoopCond_826 = it_ft160.isOff();
-				if (idLoopCond_826) {
+			kermeta.standard.Iterator<kermeta.language.structure.Operation> it_ft207 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
+					.<kermeta.language.structure.Operation> convertAsSet(
+							testCaseClass.getterOwnedOperation()).iterator();
+			java.lang.Boolean idLoopCond_913 = false;
+			while (!idLoopCond_913) {
+				idLoopCond_913 = it_ft207.isOff();
+				if (idLoopCond_913) {
 				} else {
 
-					elem_ft160 = it_ft160.next();
+					elem_ft207 = it_ft207.next();
 
-					java.lang.Boolean idIfCond_827 = false;
+					java.lang.Boolean idIfCond_914 = false;
 					//BIle:selector
-					kermeta.language.structure.Operation o_lbdExp160 = elem_ft160;
+					kermeta.language.structure.Operation o_lbdExp207 = elem_ft207;
 
-					java.lang.Boolean idIfCond_828 = false;
-					idIfCond_828 = kermeta.standard.helper.IntegerWrapper
+					java.lang.Boolean idIfCond_915 = false;
+					idIfCond_915 = kermeta.standard.helper.IntegerWrapper
 							.isGreaterOrEqual(
 									kermeta.standard.helper.StringWrapper
-											.size(o_lbdExp160.getName()), 4);
+											.size(o_lbdExp207.getName()), 4);
 
-					if (idIfCond_828) {
+					if (idIfCond_915) {
 
-						idIfCond_827 = kermeta.standard.helper.StringWrapper
+						idIfCond_914 = kermeta.standard.helper.StringWrapper
 								.equals(
 										kermeta.standard.helper.StringWrapper
-												.substring(o_lbdExp160
+												.substring(o_lbdExp207
 														.getName(), 0, 4),
 										"test");
 					} else {
 
-						idIfCond_827 = false;
+						idIfCond_914 = false;
 					}
 
 					//EIle:selector
 
-					if (idIfCond_827) {
+					if (idIfCond_914) {
 
-						result_ft160.add(elem_ft160);
+						result_ft207.add(elem_ft207);
 					}
 
 				}
@@ -204,23 +204,23 @@ public class TestSuiteImpl extends TestImpl implements TestSuite {
 
 		{
 
-			kermeta.standard.Iterator<kermeta.language.structure.Operation> it_ft159 = result_ft160
+			kermeta.standard.Iterator<kermeta.language.structure.Operation> it_ft206 = result_ft207
 					.iterator();
-			java.lang.Boolean idLoopCond_825 = false;
-			while (!idLoopCond_825) {
-				idLoopCond_825 = it_ft159.isOff();
-				if (idLoopCond_825) {
+			java.lang.Boolean idLoopCond_912 = false;
+			while (!idLoopCond_912) {
+				idLoopCond_912 = it_ft206.isOff();
+				if (idLoopCond_912) {
 				} else {
 
 					//BIle:func
-					kermeta.language.structure.Operation o_lbdExp159 = it_ft159
+					kermeta.language.structure.Operation o_lbdExp206 = it_ft206
 							.next();
 
 					kermeta.kunit.TestCase testCase = null;
 
 					testCase = (kermeta.kunit.TestCase) testCaseClass._new();
 
-					testCase.setTestMethodName(o_lbdExp159.getName());
+					testCase.setTestMethodName(o_lbdExp206.getName());
 
 					org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
 							.<kermeta.kunit.Test> convertAsOrderedSet(
@@ -250,21 +250,21 @@ public class TestSuiteImpl extends TestImpl implements TestSuite {
 
 		{
 
-			kermeta.standard.Iterator<kermeta.kunit.Test> it_ft161 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
+			kermeta.standard.Iterator<kermeta.kunit.Test> it_ft208 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
 					.<kermeta.kunit.Test> convertAsOrderedSet(this.getTests())
 					.iterator();
-			java.lang.Boolean idLoopCond_829 = false;
-			while (!idLoopCond_829) {
-				idLoopCond_829 = it_ft161.isOff();
-				if (idLoopCond_829) {
+			java.lang.Boolean idLoopCond_916 = false;
+			while (!idLoopCond_916) {
+				idLoopCond_916 = it_ft208.isOff();
+				if (idLoopCond_916) {
 				} else {
 
 					//BIle:func
-					kermeta.kunit.Test t_lbdExp161 = it_ft161.next();
+					kermeta.kunit.Test t_lbdExp208 = it_ft208.next();
 
-					t_lbdExp161.setLogKermeta(this.getLog());
+					t_lbdExp208.setLogKermeta(this.getLog());
 
-					t_lbdExp161.run();
+					t_lbdExp208.run();
 					//EIle:func
 
 				}
@@ -286,54 +286,54 @@ public class TestSuiteImpl extends TestImpl implements TestSuite {
 
 		//BIft:select
 
-		kermeta.standard.Sequence<kermeta.language.structure.Operation> result_ft163 = null;
+		kermeta.standard.Sequence<kermeta.language.structure.Operation> result_ft210 = null;
 
-		kermeta.language.structure.Operation elem_ft163 = null;
+		kermeta.language.structure.Operation elem_ft210 = null;
 
-		result_ft163 = ((kermeta.standard.Sequence<kermeta.language.structure.Operation>) org.kermeta.compil.runtime.helper.language.ClassUtil
+		result_ft210 = ((kermeta.standard.Sequence<kermeta.language.structure.Operation>) org.kermeta.compil.runtime.helper.language.ClassUtil
 				.newObject("kermeta.standard.Sequence<kermeta.language.structure.Operation>"));
 
 		{
 
-			kermeta.standard.Iterator<kermeta.language.structure.Operation> it_ft163 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
+			kermeta.standard.Iterator<kermeta.language.structure.Operation> it_ft210 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
 					.<kermeta.language.structure.Operation> convertAsOrderedSet(
 							anAspect.getOwnedOperation()).iterator();
-			java.lang.Boolean idLoopCond_831 = false;
-			while (!idLoopCond_831) {
-				idLoopCond_831 = it_ft163.isOff();
-				if (idLoopCond_831) {
+			java.lang.Boolean idLoopCond_918 = false;
+			while (!idLoopCond_918) {
+				idLoopCond_918 = it_ft210.isOff();
+				if (idLoopCond_918) {
 				} else {
 
-					elem_ft163 = it_ft163.next();
+					elem_ft210 = it_ft210.next();
 
-					java.lang.Boolean idIfCond_832 = false;
+					java.lang.Boolean idIfCond_919 = false;
 					//BIle:selector
-					kermeta.language.structure.Operation o_lbdExp163 = elem_ft163;
+					kermeta.language.structure.Operation o_lbdExp210 = elem_ft210;
 
-					java.lang.Boolean idIfCond_833 = false;
-					idIfCond_833 = kermeta.standard.helper.IntegerWrapper
+					java.lang.Boolean idIfCond_920 = false;
+					idIfCond_920 = kermeta.standard.helper.IntegerWrapper
 							.isGreaterOrEqual(
 									kermeta.standard.helper.StringWrapper
-											.size(o_lbdExp163.getName()), 4);
+											.size(o_lbdExp210.getName()), 4);
 
-					if (idIfCond_833) {
+					if (idIfCond_920) {
 
-						idIfCond_832 = kermeta.standard.helper.StringWrapper
+						idIfCond_919 = kermeta.standard.helper.StringWrapper
 								.equals(
 										kermeta.standard.helper.StringWrapper
-												.substring(o_lbdExp163
+												.substring(o_lbdExp210
 														.getName(), 0, 4),
 										"test");
 					} else {
 
-						idIfCond_832 = false;
+						idIfCond_919 = false;
 					}
 
 					//EIle:selector
 
-					if (idIfCond_832) {
+					if (idIfCond_919) {
 
-						result_ft163.add(elem_ft163);
+						result_ft210.add(elem_ft210);
 					}
 
 				}
@@ -345,23 +345,23 @@ public class TestSuiteImpl extends TestImpl implements TestSuite {
 
 		{
 
-			kermeta.standard.Iterator<kermeta.language.structure.Operation> it_ft162 = result_ft163
+			kermeta.standard.Iterator<kermeta.language.structure.Operation> it_ft209 = result_ft210
 					.iterator();
-			java.lang.Boolean idLoopCond_830 = false;
-			while (!idLoopCond_830) {
-				idLoopCond_830 = it_ft162.isOff();
-				if (idLoopCond_830) {
+			java.lang.Boolean idLoopCond_917 = false;
+			while (!idLoopCond_917) {
+				idLoopCond_917 = it_ft209.isOff();
+				if (idLoopCond_917) {
 				} else {
 
 					//BIle:func
-					kermeta.language.structure.Operation o_lbdExp162 = it_ft162
+					kermeta.language.structure.Operation o_lbdExp209 = it_ft209
 							.next();
 
 					kermeta.kunit.TestCase testCase = null;
 
 					testCase = (kermeta.kunit.TestCase) testCaseClass._new();
 
-					testCase.setTestMethodName(o_lbdExp162.getName());
+					testCase.setTestMethodName(o_lbdExp209.getName());
 
 					org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
 							.<kermeta.kunit.Test> convertAsOrderedSet(

@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: AbstractFallible.java,v 1.2 2008-09-11 12:34:48 cfaucher Exp $
+ * $Id: AbstractFallible.java,v 1.3 2008-09-22 14:46:08 cfaucher Exp $
  */
 package kermeta.kunit;
 
@@ -14,7 +14,7 @@ package kermeta.kunit;
  *
  * @see kermeta.kunit.KunitPackage#getAbstractFallible()
  * @model abstract="true"
- *        annotation="kermeta documentation='/**\n * to be written ############################\n \052/'"
+ *        annotation="kermeta documentation='/**\r\n * to be written ############################\r\n \052/'"
  * @generated
  */
 public interface AbstractFallible extends kermeta.language.structure.Object {
@@ -33,8 +33,8 @@ public interface AbstractFallible extends kermeta.language.structure.Object {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @model dataType="kermeta.standard.JavaString" sDataType="kermeta.standard.JavaString"
-	 *        annotation="kermeta documentation='/** \n\t ** reduces all runs of white-space to a single space character\n\t *\052/'"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='\njava.lang.String result = null;\n\n\tresult = \"\";\n\n\tjava.lang.Boolean white = false;\n\n\t\n{\n\n\tjava.lang.Integer i = 0;\n\tjava.lang.Boolean idLoopCond_800 = false;\n\twhile( !idLoopCond_800 ) {\n\tidLoopCond_800 = kermeta.standard.helper.IntegerWrapper.equals(i, kermeta.standard.helper.StringWrapper.size(s));\n\tif ( idLoopCond_800 ) {\n\t} else {\n\n\tjava.lang.String c = kermeta.standard.helper.CharacterWrapper.toString(kermeta.standard.helper.StringWrapper.elementAt(s, i));\n\n\tjava.lang.Boolean idIfCond_801 = false;\n\tidIfCond_801 = kermeta.standard.helper.IntegerWrapper.isGreaterOrEqual(kermeta.standard.helper.StringWrapper.indexOf(\" \\n\\t\", c), 0);\n\n\tif( idIfCond_801 ) {\n\n\tjava.lang.Boolean idIfCond_802 = false;\n\tidIfCond_802 = kermeta.standard.helper.BooleanWrapper.not(white);\n\n\tif( idIfCond_802 ) {\n\n\twhite = true;\n\n\tresult = kermeta.standard.helper.StringWrapper.plus(result, \" \");\n}\n\n}\n else {\n\n\tresult = kermeta.standard.helper.StringWrapper.plus(result, c);\n\n\tjava.lang.Boolean idIfCond_803 = false;\n\tidIfCond_803 = white;\n\n\tif( idIfCond_803 ) {\n\n\twhite = false;\n}\n\n}\n\n\n\ti = kermeta.standard.helper.IntegerWrapper.plus(i, 1);\n}\n\t}\n}\n\n\nreturn result;\n'"
+	 *        annotation="kermeta documentation='/** \r\n\t ** reduces all runs of white-space to a single space character\r\n\t *\052/'"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='\njava.lang.String result = null;\n\n\tresult = \"\";\n\n\tjava.lang.Boolean white = false;\n\n\t\n{\n\n\tjava.lang.Integer i = 0;\n\tjava.lang.Boolean idLoopCond_887 = false;\n\twhile( !idLoopCond_887 ) {\n\tidLoopCond_887 = kermeta.standard.helper.IntegerWrapper.equals(i, kermeta.standard.helper.StringWrapper.size(s));\n\tif ( idLoopCond_887 ) {\n\t} else {\n\n\tjava.lang.String c = kermeta.standard.helper.CharacterWrapper.toString(kermeta.standard.helper.StringWrapper.elementAt(s, i));\n\n\tjava.lang.Boolean idIfCond_888 = false;\n\tidIfCond_888 = kermeta.standard.helper.IntegerWrapper.isGreaterOrEqual(kermeta.standard.helper.StringWrapper.indexOf(\" \\n\\t\", c), 0);\n\n\tif( idIfCond_888 ) {\n\n\tjava.lang.Boolean idIfCond_889 = false;\n\tidIfCond_889 = kermeta.standard.helper.BooleanWrapper.not(white);\n\n\tif( idIfCond_889 ) {\n\n\twhite = true;\n\n\tresult = kermeta.standard.helper.StringWrapper.plus(result, \" \");\n}\n\n}\n else {\n\n\tresult = kermeta.standard.helper.StringWrapper.plus(result, c);\n\n\tjava.lang.Boolean idIfCond_890 = false;\n\tidIfCond_890 = white;\n\n\tif( idIfCond_890 ) {\n\n\twhite = false;\n}\n\n}\n\n\n\ti = kermeta.standard.helper.IntegerWrapper.plus(i, 1);\n}\n\t}\n}\n\n\nreturn result;\n'"
 	 * @generated
 	 */
 	String distil(String s);
@@ -44,7 +44,7 @@ public interface AbstractFallible extends kermeta.language.structure.Object {
 	 * <!-- end-user-doc -->
 	 * @model conditionDataType="kermeta.standard.JavaBoolean" messageDataType="kermeta.standard.JavaString"
 	 *        annotation="kermeta isAbstract='true'"
-	 *        annotation="kermeta documentation='/**\n     * process the given condition and react with the given message\n     * if it is satisfied\n     \052/'"
+	 *        annotation="kermeta documentation='/**\r\n     * process the given condition and react with the given message\r\n     * if it is satisfied\r\n     \052/'"
 	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body=''"
 	 * @generated
 	 */
@@ -88,7 +88,7 @@ public interface AbstractFallible extends kermeta.language.structure.Object {
 	 * <!-- end-user-doc -->
 	 * @model conditionDataType="kermeta.standard.JavaBoolean" messageDataType="kermeta.standard.JavaString"
 	 *        annotation="kermeta isAbstract='true'"
-	 *        annotation="kermeta documentation='/**\n     * process the given condition and react with the given message\n     * if it is not satisfied\n     \052/'"
+	 *        annotation="kermeta documentation='/**\r\n     * process the given condition and react with the given message\r\n     * if it is not satisfied\r\n     \052/'"
 	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body=''"
 	 * @generated
 	 */
@@ -109,7 +109,7 @@ public interface AbstractFallible extends kermeta.language.structure.Object {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @model expectedDataType="kermeta.standard.JavaString" actualDataType="kermeta.standard.JavaString"
-	 *        annotation="kermeta documentation='/**\n   * Log a failure if the two strings are not identical modulo-white-space\n   \052/'"
+	 *        annotation="kermeta documentation='/**\r\n   * Log a failure if the two strings are not identical modulo-white-space\r\n   \052/'"
 	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='\n\texpected = this.distil(expected);\n\n\tactual = this.distil(actual);\n\n\tthis.assertWithMsg(kermeta.standard.helper.StringWrapper.equals(expected, actual), kermeta.standard.helper.StringWrapper.plus(kermeta.standard.helper.StringWrapper.plus(kermeta.standard.helper.StringWrapper.plus(kermeta.standard.helper.StringWrapper.plus(\"\\nexpected\\t:[\", expected), \"] != \\nactual  \\t:[\"), actual), \"]\"));\n'"
 	 * @generated
 	 */
@@ -120,7 +120,7 @@ public interface AbstractFallible extends kermeta.language.structure.Object {
 	 * <!-- end-user-doc -->
 	 * @model conditionDataType="kermeta.standard.JavaBoolean" msgDataType="kermeta.standard.JavaString"
 	 *        annotation="kermeta isAbstract='true'"
-	 *        annotation="kermeta documentation='/**\n     * process the given condition and react with the given message\n     * if it is not satisfied\n     \052/'"
+	 *        annotation="kermeta documentation='/**\r\n     * process the given condition and react with the given message\r\n     * if it is not satisfied\r\n     \052/'"
 	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body=''"
 	 * @generated
 	 */

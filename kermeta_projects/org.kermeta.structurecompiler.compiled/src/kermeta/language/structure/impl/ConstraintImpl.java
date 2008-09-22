@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ConstraintImpl.java,v 1.2 2008-09-11 12:34:48 cfaucher Exp $
+ * $Id: ConstraintImpl.java,v 1.3 2008-09-22 14:47:36 cfaucher Exp $
  */
 package kermeta.language.structure.impl;
 
@@ -14,9 +14,9 @@ import kermeta.language.structure.ClassDefinition;
 import kermeta.language.structure.Constraint;
 import kermeta.language.structure.ConstraintLanguage;
 import kermeta.language.structure.ConstraintType;
+import kermeta.language.structure.NamedElement;
 import kermeta.language.structure.Operation;
 import kermeta.language.structure.StructurePackage;
-import kermeta.language.structure.Traceability;
 
 import km2ecore.KM2EcoreContext;
 
@@ -24,7 +24,6 @@ import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
@@ -38,7 +37,7 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link kermeta.language.structure.impl.ConstraintImpl#getEcoreModelElement <em>Ecore Model Element</em>}</li>
+ *   <li>{@link kermeta.language.structure.impl.ConstraintImpl#getName <em>Name</em>}</li>
  *   <li>{@link kermeta.language.structure.impl.ConstraintImpl#getBody <em>Body</em>}</li>
  *   <li>{@link kermeta.language.structure.impl.ConstraintImpl#getPreOwner <em>Pre Owner</em>}</li>
  *   <li>{@link kermeta.language.structure.impl.ConstraintImpl#getStereotype <em>Stereotype</em>}</li>
@@ -50,16 +49,27 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
  *
  * @generated
  */
-public class ConstraintImpl extends NamedElementImpl implements Constraint {
+public class ConstraintImpl extends TraceabilityImpl<EAnnotation> implements
+		Constraint {
 	/**
-	 * The cached value of the '{@link #getEcoreModelElement() <em>Ecore Model Element</em>}' reference.
+	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getEcoreModelElement()
+	 * @see #getName()
 	 * @generated
 	 * @ordered
 	 */
-	protected EAnnotation ecoreModelElement;
+	protected static final String NAME_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getName()
+	 * @generated
+	 * @ordered
+	 */
+	protected String name = NAME_EDEFAULT;
 
 	/**
 	 * The cached value of the '{@link #getBody() <em>Body</em>}' containment reference.
@@ -135,19 +145,8 @@ public class ConstraintImpl extends NamedElementImpl implements Constraint {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAnnotation getEcoreModelElement() {
-		if (ecoreModelElement != null
-				&& ((EObject) ecoreModelElement).eIsProxy()) {
-			InternalEObject oldEcoreModelElement = (InternalEObject) ecoreModelElement;
-			ecoreModelElement = (EAnnotation) eResolveProxy(oldEcoreModelElement);
-			if (ecoreModelElement != oldEcoreModelElement) {
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE,
-							StructurePackage.CONSTRAINT__ECORE_MODEL_ELEMENT,
-							oldEcoreModelElement, ecoreModelElement));
-			}
-		}
-		return ecoreModelElement;
+	public String getName() {
+		return name;
 	}
 
 	/**
@@ -155,22 +154,12 @@ public class ConstraintImpl extends NamedElementImpl implements Constraint {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAnnotation basicGetEcoreModelElement() {
-		return ecoreModelElement;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setEcoreModelElement(EAnnotation newEcoreModelElement) {
-		EAnnotation oldEcoreModelElement = ecoreModelElement;
-		ecoreModelElement = newEcoreModelElement;
+	public void setName(String newName) {
+		String oldName = name;
+		name = newName;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET,
-					StructurePackage.CONSTRAINT__ECORE_MODEL_ELEMENT,
-					oldEcoreModelElement, ecoreModelElement));
+					StructurePackage.CONSTRAINT__NAME, oldName, name));
 	}
 
 	/**
@@ -500,11 +489,11 @@ public class ConstraintImpl extends NamedElementImpl implements Constraint {
 		kermeta.language.structure.Property p = c
 				.getPropertyValue("ecoreModelElement");
 
-		java.lang.Boolean idIfCond_216 = false;
-		idIfCond_216 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+		java.lang.Boolean idIfCond_723 = false;
+		idIfCond_723 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 				.isNotEqual(p, null);
 
-		if (idIfCond_216) {
+		if (idIfCond_723) {
 
 			ecore.EModelElement ecoreModelElement = ((ecore.EModelElement) org.kermeta.compil.runtime.helper.language.ObjectUtil
 					.asType(
@@ -535,8 +524,8 @@ public class ConstraintImpl extends NamedElementImpl implements Constraint {
 
 		java.lang.String body = "";
 
-		java.lang.Boolean idIfCond_217 = false;
-		idIfCond_217 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+		java.lang.Boolean idIfCond_724 = false;
+		idIfCond_724 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 				.isInstanceOf(
 						org.kermeta.compil.runtime.helper.language.ObjectUtil
 								.container(this),
@@ -545,19 +534,19 @@ public class ConstraintImpl extends NamedElementImpl implements Constraint {
 								.getMetaClass(
 										"kermeta.language.structure.ClassDefinition"));
 
-		if (idIfCond_217) {
+		if (idIfCond_724) {
 
 			result = ((km2ecore.helper.ecore.EAnnotationHelper) org.kermeta.compil.runtime.helper.language.ClassUtil
 					.newObject("km2ecore.helper.ecore.EAnnotationHelper"))
 					.create("kermeta.inv", this.getName(), body);
 		} else {
 
-			java.lang.Boolean idIfCond_218 = false;
-			idIfCond_218 = ((km2ecore.helper.kermeta.ConstraintHelper) org.kermeta.compil.runtime.helper.language.ClassUtil
+			java.lang.Boolean idIfCond_725 = false;
+			idIfCond_725 = ((km2ecore.helper.kermeta.ConstraintHelper) org.kermeta.compil.runtime.helper.language.ClassUtil
 					.newObject("km2ecore.helper.kermeta.ConstraintHelper"))
 					.isPre(this);
 
-			if (idIfCond_218) {
+			if (idIfCond_725) {
 
 				result = ((km2ecore.helper.ecore.EAnnotationHelper) org.kermeta.compil.runtime.helper.language.ClassUtil
 						.newObject("km2ecore.helper.ecore.EAnnotationHelper"))
@@ -569,6 +558,71 @@ public class ConstraintImpl extends NamedElementImpl implements Constraint {
 						.create("kermeta.post", this.getName(), body);
 			}
 
+		}
+
+		return result;
+
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String qualifiedName() {
+
+		java.lang.String result = null;
+
+		kermeta.language.structure.NamedElement elem = this;
+
+		result = this.getName();
+
+		java.lang.Boolean idIfCond_676 = false;
+		idIfCond_676 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+				.isInstanceOf(
+						org.kermeta.compil.runtime.helper.language.ObjectUtil
+								.container(elem),
+						org.kermeta.compil.runtime.ExecutionContext
+								.getInstance()
+								.getMetaClass(
+										"kermeta.language.structure.NamedElement"));
+
+		if (idIfCond_676) {
+
+			elem = (kermeta.language.structure.NamedElement) org.kermeta.compil.runtime.helper.language.ObjectUtil
+					.container(elem);
+			java.lang.Boolean idLoopCond_677 = false;
+			while (!idLoopCond_677) {
+				idLoopCond_677 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+						.equals(elem, null);
+				if (idLoopCond_677) {
+				} else {
+
+					result = kermeta.standard.helper.StringWrapper.plus(
+							kermeta.standard.helper.StringWrapper.plus(elem
+									.getName(), "::"), result);
+
+					java.lang.Boolean idIfCond_678 = false;
+					idIfCond_678 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+							.isInstanceOf(
+									org.kermeta.compil.runtime.helper.language.ObjectUtil
+											.container(elem),
+									org.kermeta.compil.runtime.ExecutionContext
+											.getInstance()
+											.getMetaClass(
+													"kermeta.language.structure.NamedElement"));
+
+					if (idIfCond_678) {
+
+						elem = (kermeta.language.structure.NamedElement) org.kermeta.compil.runtime.helper.language.ObjectUtil
+								.container(elem);
+					} else {
+
+						elem = null;
+					}
+
+				}
+			}
 		}
 
 		return result;
@@ -652,10 +706,8 @@ public class ConstraintImpl extends NamedElementImpl implements Constraint {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-		case StructurePackage.CONSTRAINT__ECORE_MODEL_ELEMENT:
-			if (resolve)
-				return getEcoreModelElement();
-			return basicGetEcoreModelElement();
+		case StructurePackage.CONSTRAINT__NAME:
+			return getName();
 		case StructurePackage.CONSTRAINT__BODY:
 			if (resolve)
 				return getBody();
@@ -688,8 +740,8 @@ public class ConstraintImpl extends NamedElementImpl implements Constraint {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-		case StructurePackage.CONSTRAINT__ECORE_MODEL_ELEMENT:
-			setEcoreModelElement((EAnnotation) newValue);
+		case StructurePackage.CONSTRAINT__NAME:
+			setName((String) newValue);
 			return;
 		case StructurePackage.CONSTRAINT__BODY:
 			setBody((Expression) newValue);
@@ -721,8 +773,8 @@ public class ConstraintImpl extends NamedElementImpl implements Constraint {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-		case StructurePackage.CONSTRAINT__ECORE_MODEL_ELEMENT:
-			setEcoreModelElement((EAnnotation) null);
+		case StructurePackage.CONSTRAINT__NAME:
+			setName(NAME_EDEFAULT);
 			return;
 		case StructurePackage.CONSTRAINT__BODY:
 			setBody((Expression) null);
@@ -754,8 +806,9 @@ public class ConstraintImpl extends NamedElementImpl implements Constraint {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-		case StructurePackage.CONSTRAINT__ECORE_MODEL_ELEMENT:
-			return ecoreModelElement != null;
+		case StructurePackage.CONSTRAINT__NAME:
+			return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT
+					.equals(name);
 		case StructurePackage.CONSTRAINT__BODY:
 			return body != null;
 		case StructurePackage.CONSTRAINT__PRE_OWNER:
@@ -779,10 +832,10 @@ public class ConstraintImpl extends NamedElementImpl implements Constraint {
 	 */
 	@Override
 	public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass) {
-		if (baseClass == Traceability.class) {
+		if (baseClass == NamedElement.class) {
 			switch (derivedFeatureID) {
-			case StructurePackage.CONSTRAINT__ECORE_MODEL_ELEMENT:
-				return StructurePackage.TRACEABILITY__ECORE_MODEL_ELEMENT;
+			case StructurePackage.CONSTRAINT__NAME:
+				return StructurePackage.NAMED_ELEMENT__NAME;
 			default:
 				return -1;
 			}
@@ -797,10 +850,10 @@ public class ConstraintImpl extends NamedElementImpl implements Constraint {
 	 */
 	@Override
 	public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass) {
-		if (baseClass == Traceability.class) {
+		if (baseClass == NamedElement.class) {
 			switch (baseFeatureID) {
-			case StructurePackage.TRACEABILITY__ECORE_MODEL_ELEMENT:
-				return StructurePackage.CONSTRAINT__ECORE_MODEL_ELEMENT;
+			case StructurePackage.NAMED_ELEMENT__NAME:
+				return StructurePackage.CONSTRAINT__NAME;
 			default:
 				return -1;
 			}
@@ -819,7 +872,9 @@ public class ConstraintImpl extends NamedElementImpl implements Constraint {
 			return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (stereotype: ");
+		result.append(" (name: ");
+		result.append(name);
+		result.append(", stereotype: ");
 		result.append(stereotype);
 		result.append(", language: ");
 		result.append(language);

@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: DummyClass.java,v 1.2 2008-09-11 12:34:51 cfaucher Exp $
+ * $Id: DummyClass.java,v 1.3 2008-09-22 14:44:56 cfaucher Exp $
  */
 package kermeta;
 

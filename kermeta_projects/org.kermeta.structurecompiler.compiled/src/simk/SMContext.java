@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: SMContext.java,v 1.2 2008-09-11 12:35:01 cfaucher Exp $
+ * $Id: SMContext.java,v 1.3 2008-09-22 14:49:06 cfaucher Exp $
  */
 package simk;
 
@@ -17,8 +17,8 @@ import org.eclipse.emf.common.util.EList;
  * The following features are supported:
  * <ul>
  *   <li>{@link simk.SMContext#getQualifiedNameFinalPackage <em>Qualified Name Final Package</em>}</li>
- *   <li>{@link simk.SMContext#getSMClass <em>SM Class</em>}</li>
  *   <li>{@link simk.SMContext#getStaticMethods <em>Static Methods</em>}</li>
+ *   <li>{@link simk.SMContext#getSMClass <em>SM Class</em>}</li>
  * </ul>
  * </p>
  *
@@ -54,6 +54,24 @@ public interface SMContext extends kermeta.language.structure.Object {
 	void setQualifiedNameFinalPackage(String value);
 
 	/**
+	 * Returns the value of the '<em><b>Static Methods</b></em>' reference list.
+	 * The list contents are of type {@link simk.StaticMethod}.
+	 * It is bidirectional and its opposite is '{@link simk.StaticMethod#getSMContext <em>SM Context</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Static Methods</em>' reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Static Methods</em>' reference list.
+	 * @see simk.SimkPackage#getSMContext_StaticMethods()
+	 * @see simk.StaticMethod#getSMContext
+	 * @model opposite="sMContext"
+	 * @generated
+	 */
+	EList<StaticMethod> getStaticMethods();
+
+	/**
 	 * Returns the value of the '<em><b>SM Class</b></em>' containment reference.
 	 * It is bidirectional and its opposite is '{@link simk.SMClass#getContext <em>Context</em>}'.
 	 * <!-- begin-user-doc -->
@@ -80,23 +98,5 @@ public interface SMContext extends kermeta.language.structure.Object {
 	 * @generated
 	 */
 	void setSMClass(SMClass value);
-
-	/**
-	 * Returns the value of the '<em><b>Static Methods</b></em>' reference list.
-	 * The list contents are of type {@link simk.StaticMethod}.
-	 * It is bidirectional and its opposite is '{@link simk.StaticMethod#getSMContext <em>SM Context</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Static Methods</em>' reference list isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Static Methods</em>' reference list.
-	 * @see simk.SimkPackage#getSMContext_StaticMethods()
-	 * @see simk.StaticMethod#getSMContext
-	 * @model opposite="sMContext"
-	 * @generated
-	 */
-	EList<StaticMethod> getStaticMethods();
 
 } // SMContext

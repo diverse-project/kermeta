@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: HashtableImpl.java,v 1.2 2008-09-11 12:34:51 cfaucher Exp $
+ * $Id: HashtableImpl.java,v 1.3 2008-09-22 14:49:06 cfaucher Exp $
  */
 package kermeta.utils.impl;
 
@@ -15,18 +15,36 @@ import kermeta.standard.Set;
 import kermeta.utils.Hashtable;
 import kermeta.utils.UtilsPackage;
 
+import org.eclipse.emf.common.notify.Notification;
+
 import org.eclipse.emf.ecore.EClass;
+
+import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 /**
  * <!-- begin-user-doc -->
  * An implementation of the model object '<em><b>Hashtable</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * The following features are implemented:
+ * <ul>
+ *   <li>{@link kermeta.utils.impl.HashtableImpl#getWrappedHashtable <em>Wrapped Hashtable</em>}</li>
+ * </ul>
  * </p>
  *
  * @generated
  */
 public class HashtableImpl<K, V> extends ObjectImpl implements Hashtable<K, V> {
+	/**
+	 * The cached value of the '{@link #getWrappedHashtable() <em>Wrapped Hashtable</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getWrappedHashtable()
+	 * @generated
+	 * @ordered
+	 */
+	protected java.util.Hashtable<K, V> wrappedHashtable;
+
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -44,6 +62,30 @@ public class HashtableImpl<K, V> extends ObjectImpl implements Hashtable<K, V> {
 	@Override
 	protected EClass eStaticClass() {
 		return UtilsPackage.Literals.HASHTABLE;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public java.util.Hashtable<K, V> getWrappedHashtable() {
+		return wrappedHashtable;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setWrappedHashtable(
+			java.util.Hashtable<K, V> newWrappedHashtable) {
+		java.util.Hashtable<K, V> oldWrappedHashtable = wrappedHashtable;
+		wrappedHashtable = newWrappedHashtable;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET,
+					UtilsPackage.HASHTABLE__WRAPPED_HASHTABLE,
+					oldWrappedHashtable, wrappedHashtable));
 	}
 
 	/**
@@ -117,17 +159,17 @@ public class HashtableImpl<K, V> extends ObjectImpl implements Hashtable<K, V> {
 
 		{
 
-			kermeta.standard.Iterator<K> it_ft130 = this.keys().iterator();
-			java.lang.Boolean idLoopCond_615 = false;
-			while (!idLoopCond_615) {
-				idLoopCond_615 = it_ft130.isOff();
-				if (idLoopCond_615) {
+			kermeta.standard.Iterator<K> it_ft230 = this.keys().iterator();
+			java.lang.Boolean idLoopCond_981 = false;
+			while (!idLoopCond_981) {
+				idLoopCond_981 = it_ft230.isOff();
+				if (idLoopCond_981) {
 				} else {
 
 					//BIle:func
-					K k_lbdExp130 = it_ft130.next();
+					K k_lbdExp230 = it_ft230.next();
 
-					result.add(this.getValue(k_lbdExp130));
+					result.add(this.getValue(k_lbdExp230));
 					//EIle:func
 
 				}
@@ -166,10 +208,10 @@ public class HashtableImpl<K, V> extends ObjectImpl implements Hashtable<K, V> {
 		{
 
 			kermeta.standard.Iterator<K> it = this.keyIterator();
-			java.lang.Boolean idLoopCond_616 = false;
-			while (!idLoopCond_616) {
-				idLoopCond_616 = it.isOff();
-				if (idLoopCond_616) {
+			java.lang.Boolean idLoopCond_982 = false;
+			while (!idLoopCond_982) {
+				idLoopCond_982 = it.isOff();
+				if (idLoopCond_982) {
 				} else {
 
 					result.add(it.next());
@@ -227,6 +269,82 @@ public class HashtableImpl<K, V> extends ObjectImpl implements Hashtable<K, V> {
 
 		return result;
 
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Object eGet(int featureID, boolean resolve, boolean coreType) {
+		switch (featureID) {
+		case UtilsPackage.HASHTABLE__WRAPPED_HASHTABLE:
+			return getWrappedHashtable();
+		}
+		return super.eGet(featureID, resolve, coreType);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public void eSet(int featureID, Object newValue) {
+		switch (featureID) {
+		case UtilsPackage.HASHTABLE__WRAPPED_HASHTABLE:
+			setWrappedHashtable((java.util.Hashtable<K, V>) newValue);
+			return;
+		}
+		super.eSet(featureID, newValue);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void eUnset(int featureID) {
+		switch (featureID) {
+		case UtilsPackage.HASHTABLE__WRAPPED_HASHTABLE:
+			setWrappedHashtable((java.util.Hashtable<K, V>) null);
+			return;
+		}
+		super.eUnset(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public boolean eIsSet(int featureID) {
+		switch (featureID) {
+		case UtilsPackage.HASHTABLE__WRAPPED_HASHTABLE:
+			return wrappedHashtable != null;
+		}
+		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String toString() {
+		if (eIsProxy())
+			return super.toString();
+
+		StringBuffer result = new StringBuffer(super.toString());
+		result.append(" (wrappedHashtable: ");
+		result.append(wrappedHashtable);
+		result.append(')');
+		return result.toString();
 	}
 
 } //HashtableImpl

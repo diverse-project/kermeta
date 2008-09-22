@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: BehaviorFactory.java,v 1.2 2008-09-11 12:34:36 cfaucher Exp $
+ * $Id: BehaviorFactory.java,v 1.3 2008-09-22 14:46:28 cfaucher Exp $
  */
 package kermeta.language.behavior;
 
@@ -27,13 +27,13 @@ public interface BehaviorFactory extends EFactory {
 			.init();
 
 	/**
-	 * Returns a new object of class '<em>Block</em>'.
+	 * Returns a new object of class '<em>Expression</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Block</em>'.
+	 * @return a new object of class '<em>Expression</em>'.
 	 * @generated
 	 */
-	Block createBlock();
+	Expression createExpression();
 
 	/**
 	 * Returns a new object of class '<em>Call Variable</em>'.
@@ -88,6 +88,15 @@ public interface BehaviorFactory extends EFactory {
 	 * @generated
 	 */
 	Assignment createAssignment();
+
+	/**
+	 * Returns a new object of class '<em>Block</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Block</em>'.
+	 * @generated
+	 */
+	Block createBlock();
 
 	/**
 	 * Returns a new object of class '<em>Conditional</em>'.

@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: StringFormatException.java,v 1.2 2008-09-11 12:34:44 cfaucher Exp $
+ * $Id: StringFormatException.java,v 1.3 2008-09-22 14:45:17 cfaucher Exp $
  */
 package kermeta.exceptions;
 
@@ -13,7 +13,7 @@ package kermeta.exceptions;
  *
  *
  * @see kermeta.exceptions.ExceptionsPackage#getStringFormatException()
- * @model annotation="kermeta documentation='/**\n * to be written #########################################\n \052/'"
+ * @model annotation="kermeta documentation='/**\r\n * to be written #########################################\r\n \052/'"
  * @generated
  */
 public interface StringFormatException extends kermeta.exceptions.Exception {

@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ResourceMixedLevelsException.java,v 1.2 2008-09-11 12:34:43 cfaucher Exp $
+ * $Id: ResourceMixedLevelsException.java,v 1.3 2008-09-22 14:45:18 cfaucher Exp $
  */
 package kermeta.exceptions;
 
@@ -13,7 +13,7 @@ package kermeta.exceptions;
  *
  *
  * @see kermeta.exceptions.ExceptionsPackage#getResourceMixedLevelsException()
- * @model annotation="kermeta documentation='/** Occurs when Resource saving fails because an object refers to an element which \n * belongs to the Definition of the currently running program \052/'"
+ * @model annotation="kermeta documentation='/** Occurs when Resource saving fails because an object refers to an element which \r\n * belongs to the Definition of the currently running program \052/'"
  * @generated
  */
 public interface ResourceMixedLevelsException extends ResourceSaveException {

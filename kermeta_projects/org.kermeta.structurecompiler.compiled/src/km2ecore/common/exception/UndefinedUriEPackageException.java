@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: UndefinedUriEPackageException.java,v 1.2 2008-09-11 12:34:41 cfaucher Exp $
+ * $Id: UndefinedUriEPackageException.java,v 1.3 2008-09-22 14:48:59 cfaucher Exp $
  */
 package km2ecore.common.exception;
 

@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: TraceabilityFactoryImpl.java,v 1.2 2008-09-11 12:34:56 cfaucher Exp $
+ * $Id: TraceabilityFactoryImpl.java,v 1.3 2008-09-22 14:49:08 cfaucher Exp $
  */
 package traceability.impl;
 
@@ -62,8 +62,12 @@ public class TraceabilityFactoryImpl extends EFactoryImpl implements
 	@Override
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
+		case TraceabilityPackage.TRACEABILITY_HELPER:
+			return createTraceabilityHelper();
 		case TraceabilityPackage.TRACE_MODEL:
 			return createTraceModel();
+		case TraceabilityPackage.FILE:
+			return createFile();
 		case TraceabilityPackage.MESSAGE:
 			return createMessage();
 		case TraceabilityPackage.TRACE:
@@ -74,10 +78,6 @@ public class TraceabilityFactoryImpl extends EFactoryImpl implements
 			return createXMLReference();
 		case TraceabilityPackage.MODEL_REFERENCE:
 			return createModelReference();
-		case TraceabilityPackage.TRACEABILITY_HELPER:
-			return createTraceabilityHelper();
-		case TraceabilityPackage.FILE:
-			return createFile();
 		default:
 			throw new IllegalArgumentException("The class '" + eClass.getName()
 					+ "' is not a valid classifier");
@@ -129,9 +129,29 @@ public class TraceabilityFactoryImpl extends EFactoryImpl implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public TraceabilityHelper createTraceabilityHelper() {
+		TraceabilityHelperImpl traceabilityHelper = new TraceabilityHelperImpl();
+		return traceabilityHelper;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public TraceModel createTraceModel() {
 		TraceModelImpl traceModel = new TraceModelImpl();
 		return traceModel;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public File createFile() {
+		FileImpl file = new FileImpl();
+		return file;
 	}
 
 	/**
@@ -182,26 +202,6 @@ public class TraceabilityFactoryImpl extends EFactoryImpl implements
 	public ModelReference createModelReference() {
 		ModelReferenceImpl modelReference = new ModelReferenceImpl();
 		return modelReference;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public TraceabilityHelper createTraceabilityHelper() {
-		TraceabilityHelperImpl traceabilityHelper = new TraceabilityHelperImpl();
-		return traceabilityHelper;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public File createFile() {
-		FileImpl file = new FileImpl();
-		return file;
 	}
 
 	/**

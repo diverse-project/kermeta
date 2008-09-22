@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ExceptionsPackage.java,v 1.2 2008-09-11 12:34:45 cfaucher Exp $
+ * $Id: ExceptionsPackage.java,v 1.3 2008-09-22 14:45:18 cfaucher Exp $
  */
 package kermeta.exceptions;
 
@@ -28,7 +28,7 @@ import org.eclipse.emf.ecore.EReference;
  * @see kermeta.exceptions.ExceptionsFactory
  * @model kind="package"
  *        annotation="kermeta ecoreUri='http://www.kermeta.org/kermeta/1_2_0//kermeta/exceptions'"
- *        annotation="kermeta documentation='/** \n * Contains the definition of a Kermeta exception and a few basic exceptions.\n * <img src=\"platform:/plugin/fr.irisa.triskell.kermeta.documentation/src/figures/exceptions_package.png\"/>\n \052/'"
+ *        annotation="kermeta documentation='/** \r\n * Contains the definition of a Kermeta exception and a few basic exceptions.\r\n * <img src=\"platform:/plugin/fr.irisa.triskell.kermeta.documentation/src/figures/exceptions_package.png\"/>\r\n \052/'"
  * @generated
  */
 public interface ExceptionsPackage extends EPackage {
@@ -2091,14 +2091,14 @@ public interface ExceptionsPackage extends EPackage {
 	int FILE_NOT_FOUND_EXCEPTION_FEATURE_COUNT = IO_EXCEPTION_FEATURE_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link kermeta.exceptions.impl.ConstraintViolatedPreImpl <em>Constraint Violated Pre</em>}' class.
+	 * The meta object id for the '{@link kermeta.exceptions.impl.ConstraintViolatedExceptionImpl <em>Constraint Violated Exception</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see kermeta.exceptions.impl.ConstraintViolatedPreImpl
-	 * @see kermeta.exceptions.impl.ExceptionsPackageImpl#getConstraintViolatedPre()
+	 * @see kermeta.exceptions.impl.ConstraintViolatedExceptionImpl
+	 * @see kermeta.exceptions.impl.ExceptionsPackageImpl#getConstraintViolatedException()
 	 * @generated
 	 */
-	int CONSTRAINT_VIOLATED_PRE = 18;
+	int CONSTRAINT_VIOLATED_EXCEPTION = 18;
 
 	/**
 	 * The feature id for the '<em><b>File</b></em>' reference.
@@ -2107,7 +2107,7 @@ public interface ExceptionsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CONSTRAINT_VIOLATED_PRE__FILE = EXCEPTION__FILE;
+	int CONSTRAINT_VIOLATED_EXCEPTION__FILE = EXCEPTION__FILE;
 
 	/**
 	 * The feature id for the '<em><b>Tag</b></em>' reference list.
@@ -2116,7 +2116,7 @@ public interface ExceptionsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CONSTRAINT_VIOLATED_PRE__TAG = EXCEPTION__TAG;
+	int CONSTRAINT_VIOLATED_EXCEPTION__TAG = EXCEPTION__TAG;
 
 	/**
 	 * The feature id for the '<em><b>File Name</b></em>' attribute.
@@ -2125,7 +2125,7 @@ public interface ExceptionsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CONSTRAINT_VIOLATED_PRE__FILE_NAME = EXCEPTION__FILE_NAME;
+	int CONSTRAINT_VIOLATED_EXCEPTION__FILE_NAME = EXCEPTION__FILE_NAME;
 
 	/**
 	 * The feature id for the '<em><b>Line Number</b></em>' attribute.
@@ -2134,7 +2134,7 @@ public interface ExceptionsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CONSTRAINT_VIOLATED_PRE__LINE_NUMBER = EXCEPTION__LINE_NUMBER;
+	int CONSTRAINT_VIOLATED_EXCEPTION__LINE_NUMBER = EXCEPTION__LINE_NUMBER;
 
 	/**
 	 * The feature id for the '<em><b>Owned Tags</b></em>' containment reference list.
@@ -2143,7 +2143,7 @@ public interface ExceptionsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CONSTRAINT_VIOLATED_PRE__OWNED_TAGS = EXCEPTION__OWNED_TAGS;
+	int CONSTRAINT_VIOLATED_EXCEPTION__OWNED_TAGS = EXCEPTION__OWNED_TAGS;
 
 	/**
 	 * The feature id for the '<em><b>Oid</b></em>' attribute.
@@ -2152,7 +2152,7 @@ public interface ExceptionsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CONSTRAINT_VIOLATED_PRE__OID = EXCEPTION__OID;
+	int CONSTRAINT_VIOLATED_EXCEPTION__OID = EXCEPTION__OID;
 
 	/**
 	 * The feature id for the '<em><b>Container</b></em>' reference.
@@ -2161,7 +2161,7 @@ public interface ExceptionsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CONSTRAINT_VIOLATED_PRE__CONTAINER = EXCEPTION__CONTAINER;
+	int CONSTRAINT_VIOLATED_EXCEPTION__CONTAINER = EXCEPTION__CONTAINER;
 
 	/**
 	 * The feature id for the '<em><b>Message</b></em>' attribute.
@@ -2170,7 +2170,7 @@ public interface ExceptionsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CONSTRAINT_VIOLATED_PRE__MESSAGE = EXCEPTION__MESSAGE;
+	int CONSTRAINT_VIOLATED_EXCEPTION__MESSAGE = EXCEPTION__MESSAGE;
 
 	/**
 	 * The feature id for the '<em><b>Nested Exception</b></em>' containment reference.
@@ -2179,7 +2179,7 @@ public interface ExceptionsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CONSTRAINT_VIOLATED_PRE__NESTED_EXCEPTION = EXCEPTION__NESTED_EXCEPTION;
+	int CONSTRAINT_VIOLATED_EXCEPTION__NESTED_EXCEPTION = EXCEPTION__NESTED_EXCEPTION;
 
 	/**
 	 * The feature id for the '<em><b>Stack Trace</b></em>' attribute.
@@ -2188,7 +2188,134 @@ public interface ExceptionsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CONSTRAINT_VIOLATED_PRE__STACK_TRACE = EXCEPTION__STACK_TRACE;
+	int CONSTRAINT_VIOLATED_EXCEPTION__STACK_TRACE = EXCEPTION__STACK_TRACE;
+
+	/**
+	 * The feature id for the '<em><b>Constraint Applied To</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONSTRAINT_VIOLATED_EXCEPTION__CONSTRAINT_APPLIED_TO = EXCEPTION_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Constraint Violated Exception</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONSTRAINT_VIOLATED_EXCEPTION_FEATURE_COUNT = EXCEPTION_FEATURE_COUNT + 1;
+
+	/**
+	 * The meta object id for the '{@link kermeta.exceptions.impl.ConstraintViolatedPreImpl <em>Constraint Violated Pre</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see kermeta.exceptions.impl.ConstraintViolatedPreImpl
+	 * @see kermeta.exceptions.impl.ExceptionsPackageImpl#getConstraintViolatedPre()
+	 * @generated
+	 */
+	int CONSTRAINT_VIOLATED_PRE = 19;
+
+	/**
+	 * The feature id for the '<em><b>File</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONSTRAINT_VIOLATED_PRE__FILE = CONSTRAINT_VIOLATED_EXCEPTION__FILE;
+
+	/**
+	 * The feature id for the '<em><b>Tag</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONSTRAINT_VIOLATED_PRE__TAG = CONSTRAINT_VIOLATED_EXCEPTION__TAG;
+
+	/**
+	 * The feature id for the '<em><b>File Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONSTRAINT_VIOLATED_PRE__FILE_NAME = CONSTRAINT_VIOLATED_EXCEPTION__FILE_NAME;
+
+	/**
+	 * The feature id for the '<em><b>Line Number</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONSTRAINT_VIOLATED_PRE__LINE_NUMBER = CONSTRAINT_VIOLATED_EXCEPTION__LINE_NUMBER;
+
+	/**
+	 * The feature id for the '<em><b>Owned Tags</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONSTRAINT_VIOLATED_PRE__OWNED_TAGS = CONSTRAINT_VIOLATED_EXCEPTION__OWNED_TAGS;
+
+	/**
+	 * The feature id for the '<em><b>Oid</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONSTRAINT_VIOLATED_PRE__OID = CONSTRAINT_VIOLATED_EXCEPTION__OID;
+
+	/**
+	 * The feature id for the '<em><b>Container</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONSTRAINT_VIOLATED_PRE__CONTAINER = CONSTRAINT_VIOLATED_EXCEPTION__CONTAINER;
+
+	/**
+	 * The feature id for the '<em><b>Message</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONSTRAINT_VIOLATED_PRE__MESSAGE = CONSTRAINT_VIOLATED_EXCEPTION__MESSAGE;
+
+	/**
+	 * The feature id for the '<em><b>Nested Exception</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONSTRAINT_VIOLATED_PRE__NESTED_EXCEPTION = CONSTRAINT_VIOLATED_EXCEPTION__NESTED_EXCEPTION;
+
+	/**
+	 * The feature id for the '<em><b>Stack Trace</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONSTRAINT_VIOLATED_PRE__STACK_TRACE = CONSTRAINT_VIOLATED_EXCEPTION__STACK_TRACE;
+
+	/**
+	 * The feature id for the '<em><b>Constraint Applied To</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONSTRAINT_VIOLATED_PRE__CONSTRAINT_APPLIED_TO = CONSTRAINT_VIOLATED_EXCEPTION__CONSTRAINT_APPLIED_TO;
 
 	/**
 	 * The number of structural features of the '<em>Constraint Violated Pre</em>' class.
@@ -2197,7 +2324,7 @@ public interface ExceptionsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CONSTRAINT_VIOLATED_PRE_FEATURE_COUNT = EXCEPTION_FEATURE_COUNT + 0;
+	int CONSTRAINT_VIOLATED_PRE_FEATURE_COUNT = CONSTRAINT_VIOLATED_EXCEPTION_FEATURE_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link kermeta.exceptions.impl.ConstraintViolatedPostImpl <em>Constraint Violated Post</em>}' class.
@@ -2207,7 +2334,7 @@ public interface ExceptionsPackage extends EPackage {
 	 * @see kermeta.exceptions.impl.ExceptionsPackageImpl#getConstraintViolatedPost()
 	 * @generated
 	 */
-	int CONSTRAINT_VIOLATED_POST = 19;
+	int CONSTRAINT_VIOLATED_POST = 20;
 
 	/**
 	 * The feature id for the '<em><b>File</b></em>' reference.
@@ -2216,7 +2343,7 @@ public interface ExceptionsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CONSTRAINT_VIOLATED_POST__FILE = EXCEPTION__FILE;
+	int CONSTRAINT_VIOLATED_POST__FILE = CONSTRAINT_VIOLATED_EXCEPTION__FILE;
 
 	/**
 	 * The feature id for the '<em><b>Tag</b></em>' reference list.
@@ -2225,7 +2352,7 @@ public interface ExceptionsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CONSTRAINT_VIOLATED_POST__TAG = EXCEPTION__TAG;
+	int CONSTRAINT_VIOLATED_POST__TAG = CONSTRAINT_VIOLATED_EXCEPTION__TAG;
 
 	/**
 	 * The feature id for the '<em><b>File Name</b></em>' attribute.
@@ -2234,7 +2361,7 @@ public interface ExceptionsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CONSTRAINT_VIOLATED_POST__FILE_NAME = EXCEPTION__FILE_NAME;
+	int CONSTRAINT_VIOLATED_POST__FILE_NAME = CONSTRAINT_VIOLATED_EXCEPTION__FILE_NAME;
 
 	/**
 	 * The feature id for the '<em><b>Line Number</b></em>' attribute.
@@ -2243,7 +2370,7 @@ public interface ExceptionsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CONSTRAINT_VIOLATED_POST__LINE_NUMBER = EXCEPTION__LINE_NUMBER;
+	int CONSTRAINT_VIOLATED_POST__LINE_NUMBER = CONSTRAINT_VIOLATED_EXCEPTION__LINE_NUMBER;
 
 	/**
 	 * The feature id for the '<em><b>Owned Tags</b></em>' containment reference list.
@@ -2252,7 +2379,7 @@ public interface ExceptionsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CONSTRAINT_VIOLATED_POST__OWNED_TAGS = EXCEPTION__OWNED_TAGS;
+	int CONSTRAINT_VIOLATED_POST__OWNED_TAGS = CONSTRAINT_VIOLATED_EXCEPTION__OWNED_TAGS;
 
 	/**
 	 * The feature id for the '<em><b>Oid</b></em>' attribute.
@@ -2261,7 +2388,7 @@ public interface ExceptionsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CONSTRAINT_VIOLATED_POST__OID = EXCEPTION__OID;
+	int CONSTRAINT_VIOLATED_POST__OID = CONSTRAINT_VIOLATED_EXCEPTION__OID;
 
 	/**
 	 * The feature id for the '<em><b>Container</b></em>' reference.
@@ -2270,7 +2397,7 @@ public interface ExceptionsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CONSTRAINT_VIOLATED_POST__CONTAINER = EXCEPTION__CONTAINER;
+	int CONSTRAINT_VIOLATED_POST__CONTAINER = CONSTRAINT_VIOLATED_EXCEPTION__CONTAINER;
 
 	/**
 	 * The feature id for the '<em><b>Message</b></em>' attribute.
@@ -2279,7 +2406,7 @@ public interface ExceptionsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CONSTRAINT_VIOLATED_POST__MESSAGE = EXCEPTION__MESSAGE;
+	int CONSTRAINT_VIOLATED_POST__MESSAGE = CONSTRAINT_VIOLATED_EXCEPTION__MESSAGE;
 
 	/**
 	 * The feature id for the '<em><b>Nested Exception</b></em>' containment reference.
@@ -2288,7 +2415,7 @@ public interface ExceptionsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CONSTRAINT_VIOLATED_POST__NESTED_EXCEPTION = EXCEPTION__NESTED_EXCEPTION;
+	int CONSTRAINT_VIOLATED_POST__NESTED_EXCEPTION = CONSTRAINT_VIOLATED_EXCEPTION__NESTED_EXCEPTION;
 
 	/**
 	 * The feature id for the '<em><b>Stack Trace</b></em>' attribute.
@@ -2297,7 +2424,16 @@ public interface ExceptionsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CONSTRAINT_VIOLATED_POST__STACK_TRACE = EXCEPTION__STACK_TRACE;
+	int CONSTRAINT_VIOLATED_POST__STACK_TRACE = CONSTRAINT_VIOLATED_EXCEPTION__STACK_TRACE;
+
+	/**
+	 * The feature id for the '<em><b>Constraint Applied To</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONSTRAINT_VIOLATED_POST__CONSTRAINT_APPLIED_TO = CONSTRAINT_VIOLATED_EXCEPTION__CONSTRAINT_APPLIED_TO;
 
 	/**
 	 * The number of structural features of the '<em>Constraint Violated Post</em>' class.
@@ -2306,7 +2442,7 @@ public interface ExceptionsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CONSTRAINT_VIOLATED_POST_FEATURE_COUNT = EXCEPTION_FEATURE_COUNT + 0;
+	int CONSTRAINT_VIOLATED_POST_FEATURE_COUNT = CONSTRAINT_VIOLATED_EXCEPTION_FEATURE_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link kermeta.exceptions.impl.ConstraintViolatedInvImpl <em>Constraint Violated Inv</em>}' class.
@@ -2316,7 +2452,7 @@ public interface ExceptionsPackage extends EPackage {
 	 * @see kermeta.exceptions.impl.ExceptionsPackageImpl#getConstraintViolatedInv()
 	 * @generated
 	 */
-	int CONSTRAINT_VIOLATED_INV = 20;
+	int CONSTRAINT_VIOLATED_INV = 21;
 
 	/**
 	 * The feature id for the '<em><b>File</b></em>' reference.
@@ -2325,7 +2461,7 @@ public interface ExceptionsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CONSTRAINT_VIOLATED_INV__FILE = EXCEPTION__FILE;
+	int CONSTRAINT_VIOLATED_INV__FILE = CONSTRAINT_VIOLATED_EXCEPTION__FILE;
 
 	/**
 	 * The feature id for the '<em><b>Tag</b></em>' reference list.
@@ -2334,7 +2470,7 @@ public interface ExceptionsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CONSTRAINT_VIOLATED_INV__TAG = EXCEPTION__TAG;
+	int CONSTRAINT_VIOLATED_INV__TAG = CONSTRAINT_VIOLATED_EXCEPTION__TAG;
 
 	/**
 	 * The feature id for the '<em><b>File Name</b></em>' attribute.
@@ -2343,7 +2479,7 @@ public interface ExceptionsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CONSTRAINT_VIOLATED_INV__FILE_NAME = EXCEPTION__FILE_NAME;
+	int CONSTRAINT_VIOLATED_INV__FILE_NAME = CONSTRAINT_VIOLATED_EXCEPTION__FILE_NAME;
 
 	/**
 	 * The feature id for the '<em><b>Line Number</b></em>' attribute.
@@ -2352,7 +2488,7 @@ public interface ExceptionsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CONSTRAINT_VIOLATED_INV__LINE_NUMBER = EXCEPTION__LINE_NUMBER;
+	int CONSTRAINT_VIOLATED_INV__LINE_NUMBER = CONSTRAINT_VIOLATED_EXCEPTION__LINE_NUMBER;
 
 	/**
 	 * The feature id for the '<em><b>Owned Tags</b></em>' containment reference list.
@@ -2361,7 +2497,7 @@ public interface ExceptionsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CONSTRAINT_VIOLATED_INV__OWNED_TAGS = EXCEPTION__OWNED_TAGS;
+	int CONSTRAINT_VIOLATED_INV__OWNED_TAGS = CONSTRAINT_VIOLATED_EXCEPTION__OWNED_TAGS;
 
 	/**
 	 * The feature id for the '<em><b>Oid</b></em>' attribute.
@@ -2370,7 +2506,7 @@ public interface ExceptionsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CONSTRAINT_VIOLATED_INV__OID = EXCEPTION__OID;
+	int CONSTRAINT_VIOLATED_INV__OID = CONSTRAINT_VIOLATED_EXCEPTION__OID;
 
 	/**
 	 * The feature id for the '<em><b>Container</b></em>' reference.
@@ -2379,7 +2515,7 @@ public interface ExceptionsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CONSTRAINT_VIOLATED_INV__CONTAINER = EXCEPTION__CONTAINER;
+	int CONSTRAINT_VIOLATED_INV__CONTAINER = CONSTRAINT_VIOLATED_EXCEPTION__CONTAINER;
 
 	/**
 	 * The feature id for the '<em><b>Message</b></em>' attribute.
@@ -2388,7 +2524,7 @@ public interface ExceptionsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CONSTRAINT_VIOLATED_INV__MESSAGE = EXCEPTION__MESSAGE;
+	int CONSTRAINT_VIOLATED_INV__MESSAGE = CONSTRAINT_VIOLATED_EXCEPTION__MESSAGE;
 
 	/**
 	 * The feature id for the '<em><b>Nested Exception</b></em>' containment reference.
@@ -2397,7 +2533,7 @@ public interface ExceptionsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CONSTRAINT_VIOLATED_INV__NESTED_EXCEPTION = EXCEPTION__NESTED_EXCEPTION;
+	int CONSTRAINT_VIOLATED_INV__NESTED_EXCEPTION = CONSTRAINT_VIOLATED_EXCEPTION__NESTED_EXCEPTION;
 
 	/**
 	 * The feature id for the '<em><b>Stack Trace</b></em>' attribute.
@@ -2406,7 +2542,16 @@ public interface ExceptionsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CONSTRAINT_VIOLATED_INV__STACK_TRACE = EXCEPTION__STACK_TRACE;
+	int CONSTRAINT_VIOLATED_INV__STACK_TRACE = CONSTRAINT_VIOLATED_EXCEPTION__STACK_TRACE;
+
+	/**
+	 * The feature id for the '<em><b>Constraint Applied To</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONSTRAINT_VIOLATED_INV__CONSTRAINT_APPLIED_TO = CONSTRAINT_VIOLATED_EXCEPTION__CONSTRAINT_APPLIED_TO;
 
 	/**
 	 * The number of structural features of the '<em>Constraint Violated Inv</em>' class.
@@ -2415,7 +2560,7 @@ public interface ExceptionsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CONSTRAINT_VIOLATED_INV_FEATURE_COUNT = EXCEPTION_FEATURE_COUNT + 0;
+	int CONSTRAINT_VIOLATED_INV_FEATURE_COUNT = CONSTRAINT_VIOLATED_EXCEPTION_FEATURE_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link kermeta.exceptions.impl.ResourceLoadExceptionImpl <em>Resource Load Exception</em>}' class.
@@ -2425,7 +2570,7 @@ public interface ExceptionsPackage extends EPackage {
 	 * @see kermeta.exceptions.impl.ExceptionsPackageImpl#getResourceLoadException()
 	 * @generated
 	 */
-	int RESOURCE_LOAD_EXCEPTION = 21;
+	int RESOURCE_LOAD_EXCEPTION = 22;
 
 	/**
 	 * The feature id for the '<em><b>File</b></em>' reference.
@@ -2534,7 +2679,7 @@ public interface ExceptionsPackage extends EPackage {
 	 * @see kermeta.exceptions.impl.ExceptionsPackageImpl#getResourceSaveException()
 	 * @generated
 	 */
-	int RESOURCE_SAVE_EXCEPTION = 22;
+	int RESOURCE_SAVE_EXCEPTION = 23;
 
 	/**
 	 * The feature id for the '<em><b>File</b></em>' reference.
@@ -2643,7 +2788,7 @@ public interface ExceptionsPackage extends EPackage {
 	 * @see kermeta.exceptions.impl.ExceptionsPackageImpl#getResourceMixedLevelsException()
 	 * @generated
 	 */
-	int RESOURCE_MIXED_LEVELS_EXCEPTION = 23;
+	int RESOURCE_MIXED_LEVELS_EXCEPTION = 24;
 
 	/**
 	 * The feature id for the '<em><b>File</b></em>' reference.
@@ -2752,7 +2897,7 @@ public interface ExceptionsPackage extends EPackage {
 	 * @see kermeta.exceptions.impl.ExceptionsPackageImpl#getResourceCreateException()
 	 * @generated
 	 */
-	int RESOURCE_CREATE_EXCEPTION = 24;
+	int RESOURCE_CREATE_EXCEPTION = 25;
 
 	/**
 	 * The feature id for the '<em><b>File</b></em>' reference.
@@ -2861,7 +3006,7 @@ public interface ExceptionsPackage extends EPackage {
 	 * @see kermeta.exceptions.impl.ExceptionsPackageImpl#getResourceUnconformityException()
 	 * @generated
 	 */
-	int RESOURCE_UNCONFORMITY_EXCEPTION = 25;
+	int RESOURCE_UNCONFORMITY_EXCEPTION = 26;
 
 	/**
 	 * The feature id for the '<em><b>File</b></em>' reference.
@@ -2970,7 +3115,7 @@ public interface ExceptionsPackage extends EPackage {
 	 * @see kermeta.exceptions.impl.ExceptionsPackageImpl#getUnregisteredMetamodelException()
 	 * @generated
 	 */
-	int UNREGISTERED_METAMODEL_EXCEPTION = 26;
+	int UNREGISTERED_METAMODEL_EXCEPTION = 27;
 
 	/**
 	 * The feature id for the '<em><b>File</b></em>' reference.
@@ -3079,7 +3224,7 @@ public interface ExceptionsPackage extends EPackage {
 	 * @see kermeta.exceptions.impl.ExceptionsPackageImpl#getDynamicExpressionException()
 	 * @generated
 	 */
-	int DYNAMIC_EXPRESSION_EXCEPTION = 27;
+	int DYNAMIC_EXPRESSION_EXCEPTION = 28;
 
 	/**
 	 * The feature id for the '<em><b>File</b></em>' reference.
@@ -3188,7 +3333,7 @@ public interface ExceptionsPackage extends EPackage {
 	 * @see kermeta.exceptions.impl.ExceptionsPackageImpl#getKRuntimeError()
 	 * @generated
 	 */
-	int KRUNTIME_ERROR = 28;
+	int KRUNTIME_ERROR = 29;
 
 	/**
 	 * Returns the meta object for class '{@link kermeta.exceptions.Exception <em>Exception</em>}'.
@@ -3413,6 +3558,27 @@ public interface ExceptionsPackage extends EPackage {
 	 * @generated
 	 */
 	EClass getFileNotFoundException();
+
+	/**
+	 * Returns the meta object for class '{@link kermeta.exceptions.ConstraintViolatedException <em>Constraint Violated Exception</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Constraint Violated Exception</em>'.
+	 * @see kermeta.exceptions.ConstraintViolatedException
+	 * @generated
+	 */
+	EClass getConstraintViolatedException();
+
+	/**
+	 * Returns the meta object for the reference '{@link kermeta.exceptions.ConstraintViolatedException#getConstraintAppliedTo <em>Constraint Applied To</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Constraint Applied To</em>'.
+	 * @see kermeta.exceptions.ConstraintViolatedException#getConstraintAppliedTo()
+	 * @see #getConstraintViolatedException()
+	 * @generated
+	 */
+	EReference getConstraintViolatedException_ConstraintAppliedTo();
 
 	/**
 	 * Returns the meta object for class '{@link kermeta.exceptions.ConstraintViolatedPre <em>Constraint Violated Pre</em>}'.
@@ -3763,6 +3929,26 @@ public interface ExceptionsPackage extends EPackage {
 		 * @generated
 		 */
 		EClass FILE_NOT_FOUND_EXCEPTION = eINSTANCE.getFileNotFoundException();
+
+		/**
+		 * The meta object literal for the '{@link kermeta.exceptions.impl.ConstraintViolatedExceptionImpl <em>Constraint Violated Exception</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see kermeta.exceptions.impl.ConstraintViolatedExceptionImpl
+		 * @see kermeta.exceptions.impl.ExceptionsPackageImpl#getConstraintViolatedException()
+		 * @generated
+		 */
+		EClass CONSTRAINT_VIOLATED_EXCEPTION = eINSTANCE
+				.getConstraintViolatedException();
+
+		/**
+		 * The meta object literal for the '<em><b>Constraint Applied To</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference CONSTRAINT_VIOLATED_EXCEPTION__CONSTRAINT_APPLIED_TO = eINSTANCE
+				.getConstraintViolatedException_ConstraintAppliedTo();
 
 		/**
 		 * The meta object literal for the '{@link kermeta.exceptions.impl.ConstraintViolatedPreImpl <em>Constraint Violated Pre</em>}' class.

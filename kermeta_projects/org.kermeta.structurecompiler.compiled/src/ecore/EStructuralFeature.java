@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: EStructuralFeature.java,v 1.3 2008-09-11 12:34:55 cfaucher Exp $
+ * $Id: EStructuralFeature.java,v 1.4 2008-09-22 14:44:19 cfaucher Exp $
  */
 package ecore;
 
@@ -20,7 +20,6 @@ package ecore;
  *   <li>{@link ecore.EStructuralFeature#isTransient <em>Transient</em>}</li>
  *   <li>{@link ecore.EStructuralFeature#isUnsettable <em>Unsettable</em>}</li>
  *   <li>{@link ecore.EStructuralFeature#isDerived <em>Derived</em>}</li>
- *   <li>{@link ecore.EStructuralFeature#getDefaultValue <em>Default Value</em>}</li>
  *   <li>{@link ecore.EStructuralFeature#isChangeable <em>Changeable</em>}</li>
  * </ul>
  * </p>
@@ -194,25 +193,6 @@ public interface EStructuralFeature extends ETypedElement {
 	void setDerived(boolean value);
 
 	/**
-	 * Returns the value of the '<em><b>Default Value</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Default Value</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Default Value</em>' attribute.
-	 * @see ecore.EcorePackage#getEStructuralFeature_DefaultValue()
-	 * @model dataType="ecore.EJavaObject" transient="true" changeable="false" derived="true"
-	 *        annotation="kermeta isReadOnly='false'"
-	 *        annotation="kermeta ecore.isTransient='true'"
-	 *        annotation="kompiledderivedProp.setter body=''"
-	 *        annotation="kompiledderivedProp.getter body=''"
-	 * @generated
-	 */
-	Object getDefaultValue();
-
-	/**
 	 * Returns the value of the '<em><b>Changeable</b></em>' attribute.
 	 * The default value is <code>"false"</code>.
 	 * <!-- begin-user-doc -->
@@ -258,5 +238,14 @@ public interface EStructuralFeature extends ETypedElement {
 	 * @generated
 	 */
 	Class<?> getContainerClass();
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model dataType="ecore.EJavaObject"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='\njava.lang.Object result = null;\n\nreturn result;\n'"
+	 * @generated
+	 */
+	Object getterDefaultValue();
 
 } // EStructuralFeature

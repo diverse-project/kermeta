@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: SimkFactoryImpl.java,v 1.2 2008-09-11 12:34:39 cfaucher Exp $
+ * $Id: SimkFactoryImpl.java,v 1.3 2008-09-22 14:48:57 cfaucher Exp $
  */
 package simk.impl;
 
@@ -63,12 +63,12 @@ public class SimkFactoryImpl extends EFactoryImpl implements SimkFactory {
 		switch (eClass.getClassifierID()) {
 		case SimkPackage.SIMK_MODEL:
 			return createSIMKModel();
+		case SimkPackage.SM_CLASS:
+			return createSMClass();
 		case SimkPackage.STATIC_METHOD:
 			return createStaticMethod();
 		case SimkPackage.SM_CONTEXT:
 			return createSMContext();
-		case SimkPackage.SM_CLASS:
-			return createSMClass();
 		case SimkPackage.SM_PARAMETER:
 			return createSMParameter();
 		case SimkPackage.SM_RETURN:
@@ -126,6 +126,16 @@ public class SimkFactoryImpl extends EFactoryImpl implements SimkFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public SMClass createSMClass() {
+		SMClassImpl smClass = new SMClassImpl();
+		return smClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public StaticMethod createStaticMethod() {
 		StaticMethodImpl staticMethod = new StaticMethodImpl();
 		return staticMethod;
@@ -139,16 +149,6 @@ public class SimkFactoryImpl extends EFactoryImpl implements SimkFactory {
 	public SMContext createSMContext() {
 		SMContextImpl smContext = new SMContextImpl();
 		return smContext;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public SMClass createSMClass() {
-		SMClassImpl smClass = new SMClassImpl();
-		return smClass;
 	}
 
 	/**

@@ -2,12 +2,13 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ExceptionsAdapterFactory.java,v 1.2 2008-09-11 12:34:54 cfaucher Exp $
+ * $Id: ExceptionsAdapterFactory.java,v 1.3 2008-09-22 14:45:47 cfaucher Exp $
  */
 package kermeta.exceptions.util;
 
 import kermeta.exceptions.AbstractClassInstantiationError;
 import kermeta.exceptions.CallOnVoidTarget;
+import kermeta.exceptions.ConstraintViolatedException;
 import kermeta.exceptions.ConstraintViolatedInv;
 import kermeta.exceptions.ConstraintViolatedPost;
 import kermeta.exceptions.ConstraintViolatedPre;
@@ -187,6 +188,12 @@ public class ExceptionsAdapterFactory extends AdapterFactoryImpl {
 		@Override
 		public Adapter caseFileNotFoundException(FileNotFoundException object) {
 			return createFileNotFoundExceptionAdapter();
+		}
+
+		@Override
+		public Adapter caseConstraintViolatedException(
+				ConstraintViolatedException object) {
+			return createConstraintViolatedExceptionAdapter();
 		}
 
 		@Override
@@ -517,6 +524,20 @@ public class ExceptionsAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createFileNotFoundExceptionAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link kermeta.exceptions.ConstraintViolatedException <em>Constraint Violated Exception</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see kermeta.exceptions.ConstraintViolatedException
+	 * @generated
+	 */
+	public Adapter createConstraintViolatedExceptionAdapter() {
 		return null;
 	}
 

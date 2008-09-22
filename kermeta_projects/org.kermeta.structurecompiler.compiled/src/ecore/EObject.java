@@ -2,10 +2,14 @@
  * <copyright>
  * </copyright>
  *
- * $Id: EObject.java,v 1.1 2008-09-04 15:40:35 cfaucher Exp $
+ * $Id: EObject.java,v 1.2 2008-09-22 14:44:19 cfaucher Exp $
  */
 package ecore;
 
+import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.common.util.TreeIterator;
+
+import org.eclipse.emf.ecore.resource.Resource;
 
 /**
  * <!-- begin-user-doc -->
@@ -14,9 +18,10 @@ package ecore;
  *
  *
  * @see ecore.EcorePackage#getEObject()
- * @model annotation="kermeta aspect='true'"
+ * @model
  * @generated
  */
 public interface EObject extends kermeta.language.structure.Object {
+	
 
 } // EObject

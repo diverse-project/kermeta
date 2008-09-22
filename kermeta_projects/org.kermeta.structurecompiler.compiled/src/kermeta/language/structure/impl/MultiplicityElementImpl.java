@@ -2,12 +2,14 @@
  * <copyright>
  * </copyright>
  *
- * $Id: MultiplicityElementImpl.java,v 1.2 2008-09-11 12:34:47 cfaucher Exp $
+ * $Id: MultiplicityElementImpl.java,v 1.3 2008-09-22 14:47:35 cfaucher Exp $
  */
 package kermeta.language.structure.impl;
 
 import kermeta.language.structure.MultiplicityElement;
 import kermeta.language.structure.StructurePackage;
+
+import km2ecore.KM2EcoreContext;
 
 import org.eclipse.emf.common.notify.Notification;
 
@@ -250,11 +252,11 @@ public class MultiplicityElementImpl extends TypedElementImpl implements
 
 		result = this.getName();
 
-		java.lang.Boolean idIfCond_48 = false;
-		idIfCond_48 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+		java.lang.Boolean idIfCond_698 = false;
+		idIfCond_698 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 				.isNotEqual(this.getEMFRenameAs(), "");
 
-		if (idIfCond_48) {
+		if (idIfCond_698) {
 
 			result = this.getEMFRenameAs();
 		}
@@ -273,6 +275,39 @@ public class MultiplicityElementImpl extends TypedElementImpl implements
 		java.lang.String result = null;
 
 		result = this.getUniqueTagValue("EMF_renameAs");
+
+		return result;
+
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String ppReturnResult(KM2EcoreContext context) {
+
+		java.lang.String result = null;
+
+		result = "\nreturn ";
+
+		java.lang.Boolean idIfCond_699 = false;
+		idIfCond_699 = kermeta.standard.helper.IntegerWrapper.equals(this
+				.getUpper(), 1);
+
+		if (idIfCond_699) {
+
+			result = kermeta.standard.helper.StringWrapper.plus(result,
+					"result");
+		} else {
+
+			result = kermeta.standard.helper.StringWrapper.plus(
+					kermeta.standard.helper.StringWrapper.plus(result, context
+							.getCOLLECTION_UTIL_CLASS()),
+					".convertAsEList(result)");
+		}
+
+		result = kermeta.standard.helper.StringWrapper.plus(result, ";\n");
 
 		return result;
 

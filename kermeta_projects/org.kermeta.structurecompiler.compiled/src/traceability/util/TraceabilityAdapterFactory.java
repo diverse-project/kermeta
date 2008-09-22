@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: TraceabilityAdapterFactory.java,v 1.2 2008-09-11 12:35:04 cfaucher Exp $
+ * $Id: TraceabilityAdapterFactory.java,v 1.3 2008-09-22 14:49:09 cfaucher Exp $
  */
 package traceability.util;
 
@@ -71,8 +71,18 @@ public class TraceabilityAdapterFactory extends AdapterFactoryImpl {
 	 */
 	protected TraceabilitySwitch<Adapter> modelSwitch = new TraceabilitySwitch<Adapter>() {
 		@Override
+		public Adapter caseTraceabilityHelper(TraceabilityHelper object) {
+			return createTraceabilityHelperAdapter();
+		}
+
+		@Override
 		public Adapter caseTraceModel(TraceModel object) {
 			return createTraceModelAdapter();
+		}
+
+		@Override
+		public Adapter caseFile(File object) {
+			return createFileAdapter();
 		}
 
 		@Override
@@ -111,16 +121,6 @@ public class TraceabilityAdapterFactory extends AdapterFactoryImpl {
 		}
 
 		@Override
-		public Adapter caseTraceabilityHelper(TraceabilityHelper object) {
-			return createTraceabilityHelperAdapter();
-		}
-
-		@Override
-		public Adapter caseFile(File object) {
-			return createFileAdapter();
-		}
-
-		@Override
 		public Adapter caseObject(kermeta.language.structure.Object object) {
 			return createObjectAdapter();
 		}
@@ -145,6 +145,20 @@ public class TraceabilityAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
+	 * Creates a new adapter for an object of class '{@link traceability.TraceabilityHelper <em>Helper</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see traceability.TraceabilityHelper
+	 * @generated
+	 */
+	public Adapter createTraceabilityHelperAdapter() {
+		return null;
+	}
+
+	/**
 	 * Creates a new adapter for an object of class '{@link traceability.TraceModel <em>Trace Model</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -155,6 +169,20 @@ public class TraceabilityAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createTraceModelAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link traceability.File <em>File</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see traceability.File
+	 * @generated
+	 */
+	public Adapter createFileAdapter() {
 		return null;
 	}
 
@@ -253,34 +281,6 @@ public class TraceabilityAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createModelReferenceAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link traceability.TraceabilityHelper <em>Helper</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see traceability.TraceabilityHelper
-	 * @generated
-	 */
-	public Adapter createTraceabilityHelperAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link traceability.File <em>File</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see traceability.File
-	 * @generated
-	 */
-	public Adapter createFileAdapter() {
 		return null;
 	}
 

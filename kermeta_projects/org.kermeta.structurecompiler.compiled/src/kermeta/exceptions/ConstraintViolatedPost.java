@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ConstraintViolatedPost.java,v 1.2 2008-09-11 12:34:44 cfaucher Exp $
+ * $Id: ConstraintViolatedPost.java,v 1.3 2008-09-22 14:45:17 cfaucher Exp $
  */
 package kermeta.exceptions;
 
@@ -13,8 +13,8 @@ package kermeta.exceptions;
  *
  *
  * @see kermeta.exceptions.ExceptionsPackage#getConstraintViolatedPost()
- * @model annotation="kermeta documentation='/** the post-condition is not satisfied \052/'"
+ * @model annotation="kermeta documentation='/** The post-condition is not satisfied \052/'"
  * @generated
  */
-public interface ConstraintViolatedPost extends kermeta.exceptions.Exception {
+public interface ConstraintViolatedPost extends ConstraintViolatedException {
 } // ConstraintViolatedPost

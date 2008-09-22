@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: NotImplementedException.java,v 1.2 2008-09-11 12:34:44 cfaucher Exp $
+ * $Id: NotImplementedException.java,v 1.3 2008-09-22 14:45:17 cfaucher Exp $
  */
 package kermeta.exceptions;
 
@@ -13,7 +13,7 @@ package kermeta.exceptions;
  *
  *
  * @see kermeta.exceptions.ExceptionsPackage#getNotImplementedException()
- * @model annotation="kermeta documentation='/**\n * Use this exception when you want to forbid the access to an unimplemented operation \n * and invite to implement it\n \052/'"
+ * @model annotation="kermeta documentation='/**\r\n * Use this exception when you want to forbid the access to an unimplemented operation \r\n * and invite to implement it\r\n \052/'"
  * @generated
  */
 public interface NotImplementedException extends RuntimeError {

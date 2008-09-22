@@ -1,6 +1,7 @@
 package org.kermeta.compil.runtime;
 
 import java.util.HashMap;
+import java.util.Hashtable;
 import java.util.List;
 import java.util.Map;
 
@@ -31,6 +32,16 @@ public class ExecutionContext
 
 	private static Map<String, String> value_types = new HashMap<String, String>();
 
+	private Hashtable<String, kermeta.language.structure.Class> hashtable_classes = new Hashtable<String, Class>();
+
+	static private ExecutionContext _instance;
+
+	static public ExecutionContext getInstance() {
+		if (_instance == null)
+			_instance = new ExecutionContext();
+		return _instance;
+	}
+
 	private static void initValueTypes() {
 		value_types.put("java.lang.String", "kermeta.standard.String");
 		value_types.put("java.lang.Integer", "kermeta.standard.Integer");
@@ -49,27 +60,36 @@ public class ExecutionContext
 					"http://www.kermeta.org/kermeta/1_2_0//kermeta");
 			KmReflectionHelper.load(resource);
 			_modelKM = resource.getValues();
+
 			System.out
 					.println("... end of the initialization of the reflection");
 		}
 	}
 
-	static private ExecutionContext _instance;
-
-	static public ExecutionContext getInstance() {
-		if (_instance == null)
-			_instance = new ExecutionContext();
-		return _instance;
-	}
-
 	public Class getMetaClass(String javaQualifiedName) {
+
 		lazyInitialize();
+
+		// Optimization
+		if (hashtable_classes.containsKey(javaQualifiedName)) {
+			return hashtable_classes.get(javaQualifiedName);
+		}
 
 		javaQualifiedName = javaQualifiedName.replace("impl.", "").replace(
 				"Impl", "");
 
+		// Optimization
+		if (hashtable_classes.containsKey(javaQualifiedName)) {
+			return hashtable_classes.get(javaQualifiedName);
+		}
+
 		if (value_types.containsKey(javaQualifiedName)) {
 			javaQualifiedName = value_types.get(javaQualifiedName);
+		}
+
+		// Optimization
+		if (hashtable_classes.containsKey(javaQualifiedName)) {
+			return hashtable_classes.get(javaQualifiedName);
 		}
 
 		String[] strings = javaQualifiedName.split("\\.");
@@ -86,9 +106,10 @@ public class ExecutionContext
 		}
 		if (currentPackage != null) {
 			ClassDefinition cd = getClassDefinition(currentPackage,
-					strings[size].replaceAll("Impl", ""));
+					strings[size]);
 			Class c = StructureFactory.eINSTANCE.createClass();
 			c.setTypeDefinition(cd);
+			hashtable_classes.put(javaQualifiedName, c);
 			return c;
 		} else
 			return null;

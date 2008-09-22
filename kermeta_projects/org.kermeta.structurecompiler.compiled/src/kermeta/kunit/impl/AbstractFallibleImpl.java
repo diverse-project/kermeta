@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: AbstractFallibleImpl.java,v 1.2 2008-09-11 12:34:39 cfaucher Exp $
+ * $Id: AbstractFallibleImpl.java,v 1.3 2008-09-22 14:46:10 cfaucher Exp $
  */
 package kermeta.kunit.impl;
 
@@ -68,30 +68,30 @@ public abstract class AbstractFallibleImpl extends ObjectImpl implements
 		{
 
 			java.lang.Integer i = 0;
-			java.lang.Boolean idLoopCond_800 = false;
-			while (!idLoopCond_800) {
-				idLoopCond_800 = kermeta.standard.helper.IntegerWrapper.equals(
+			java.lang.Boolean idLoopCond_887 = false;
+			while (!idLoopCond_887) {
+				idLoopCond_887 = kermeta.standard.helper.IntegerWrapper.equals(
 						i, kermeta.standard.helper.StringWrapper.size(s));
-				if (idLoopCond_800) {
+				if (idLoopCond_887) {
 				} else {
 
 					java.lang.String c = kermeta.standard.helper.CharacterWrapper
 							.toString(kermeta.standard.helper.StringWrapper
 									.elementAt(s, i));
 
-					java.lang.Boolean idIfCond_801 = false;
-					idIfCond_801 = kermeta.standard.helper.IntegerWrapper
+					java.lang.Boolean idIfCond_888 = false;
+					idIfCond_888 = kermeta.standard.helper.IntegerWrapper
 							.isGreaterOrEqual(
 									kermeta.standard.helper.StringWrapper
 											.indexOf(" \n\t", c), 0);
 
-					if (idIfCond_801) {
+					if (idIfCond_888) {
 
-						java.lang.Boolean idIfCond_802 = false;
-						idIfCond_802 = kermeta.standard.helper.BooleanWrapper
+						java.lang.Boolean idIfCond_889 = false;
+						idIfCond_889 = kermeta.standard.helper.BooleanWrapper
 								.not(white);
 
-						if (idIfCond_802) {
+						if (idIfCond_889) {
 
 							white = true;
 
@@ -104,10 +104,10 @@ public abstract class AbstractFallibleImpl extends ObjectImpl implements
 						result = kermeta.standard.helper.StringWrapper.plus(
 								result, c);
 
-						java.lang.Boolean idIfCond_803 = false;
-						idIfCond_803 = white;
+						java.lang.Boolean idIfCond_890 = false;
+						idIfCond_890 = white;
 
-						if (idIfCond_803) {
+						if (idIfCond_890) {
 
 							white = false;
 						}

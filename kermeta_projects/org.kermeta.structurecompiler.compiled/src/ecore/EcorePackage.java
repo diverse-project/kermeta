@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: EcorePackage.java,v 1.2 2008-09-08 19:28:31 cfaucher Exp $
+ * $Id: EcorePackage.java,v 1.3 2008-09-22 14:44:19 cfaucher Exp $
  */
 package ecore;
 
@@ -74,15 +74,6 @@ public interface EcorePackage extends EPackage {
 	int EOBJECT = 10;
 
 	/**
-	 * The feature id for the '<em><b>Tag</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EOBJECT__TAG = StructurePackage.OBJECT__TAG;
-
-	/**
 	 * The feature id for the '<em><b>File</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -90,6 +81,15 @@ public interface EcorePackage extends EPackage {
 	 * @ordered
 	 */
 	int EOBJECT__FILE = StructurePackage.OBJECT__FILE;
+
+	/**
+	 * The feature id for the '<em><b>Tag</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EOBJECT__TAG = StructurePackage.OBJECT__TAG;
 
 	/**
 	 * The feature id for the '<em><b>File Name</b></em>' attribute.
@@ -156,15 +156,6 @@ public interface EcorePackage extends EPackage {
 	int EMODEL_ELEMENT = 8;
 
 	/**
-	 * The feature id for the '<em><b>Tag</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EMODEL_ELEMENT__TAG = EOBJECT__TAG;
-
-	/**
 	 * The feature id for the '<em><b>File</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -172,6 +163,15 @@ public interface EcorePackage extends EPackage {
 	 * @ordered
 	 */
 	int EMODEL_ELEMENT__FILE = EOBJECT__FILE;
+
+	/**
+	 * The feature id for the '<em><b>Tag</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EMODEL_ELEMENT__TAG = EOBJECT__TAG;
 
 	/**
 	 * The feature id for the '<em><b>File Name</b></em>' attribute.
@@ -247,15 +247,6 @@ public interface EcorePackage extends EPackage {
 	int ENAMED_ELEMENT = 9;
 
 	/**
-	 * The feature id for the '<em><b>Tag</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ENAMED_ELEMENT__TAG = EMODEL_ELEMENT__TAG;
-
-	/**
 	 * The feature id for the '<em><b>File</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -263,6 +254,15 @@ public interface EcorePackage extends EPackage {
 	 * @ordered
 	 */
 	int ENAMED_ELEMENT__FILE = EMODEL_ELEMENT__FILE;
+
+	/**
+	 * The feature id for the '<em><b>Tag</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ENAMED_ELEMENT__TAG = EMODEL_ELEMENT__TAG;
 
 	/**
 	 * The feature id for the '<em><b>File Name</b></em>' attribute.
@@ -347,15 +347,6 @@ public interface EcorePackage extends EPackage {
 	int ETYPED_ELEMENT = 16;
 
 	/**
-	 * The feature id for the '<em><b>Tag</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ETYPED_ELEMENT__TAG = ENAMED_ELEMENT__TAG;
-
-	/**
 	 * The feature id for the '<em><b>File</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -363,6 +354,15 @@ public interface EcorePackage extends EPackage {
 	 * @ordered
 	 */
 	int ETYPED_ELEMENT__FILE = ENAMED_ELEMENT__FILE;
+
+	/**
+	 * The feature id for the '<em><b>Tag</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ETYPED_ELEMENT__TAG = ENAMED_ELEMENT__TAG;
 
 	/**
 	 * The feature id for the '<em><b>File Name</b></em>' attribute.
@@ -428,22 +428,13 @@ public interface EcorePackage extends EPackage {
 	int ETYPED_ELEMENT__NAME = ENAMED_ELEMENT__NAME;
 
 	/**
-	 * The feature id for the '<em><b>Many</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ETYPED_ELEMENT__MANY = ENAMED_ELEMENT_FEATURE_COUNT + 0;
-
-	/**
 	 * The feature id for the '<em><b>Lower Bound</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ETYPED_ELEMENT__LOWER_BOUND = ENAMED_ELEMENT_FEATURE_COUNT + 1;
+	int ETYPED_ELEMENT__LOWER_BOUND = ENAMED_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Unique</b></em>' attribute.
@@ -452,7 +443,7 @@ public interface EcorePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ETYPED_ELEMENT__UNIQUE = ENAMED_ELEMENT_FEATURE_COUNT + 2;
+	int ETYPED_ELEMENT__UNIQUE = ENAMED_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>EType</b></em>' reference.
@@ -461,7 +452,7 @@ public interface EcorePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ETYPED_ELEMENT__ETYPE = ENAMED_ELEMENT_FEATURE_COUNT + 3;
+	int ETYPED_ELEMENT__ETYPE = ENAMED_ELEMENT_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Ordered</b></em>' attribute.
@@ -470,16 +461,7 @@ public interface EcorePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ETYPED_ELEMENT__ORDERED = ENAMED_ELEMENT_FEATURE_COUNT + 4;
-
-	/**
-	 * The feature id for the '<em><b>Required</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ETYPED_ELEMENT__REQUIRED = ENAMED_ELEMENT_FEATURE_COUNT + 5;
+	int ETYPED_ELEMENT__ORDERED = ENAMED_ELEMENT_FEATURE_COUNT + 3;
 
 	/**
 	 * The feature id for the '<em><b>Upper Bound</b></em>' attribute.
@@ -488,7 +470,7 @@ public interface EcorePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ETYPED_ELEMENT__UPPER_BOUND = ENAMED_ELEMENT_FEATURE_COUNT + 6;
+	int ETYPED_ELEMENT__UPPER_BOUND = ENAMED_ELEMENT_FEATURE_COUNT + 4;
 
 	/**
 	 * The feature id for the '<em><b>EGeneric Type</b></em>' containment reference.
@@ -497,7 +479,7 @@ public interface EcorePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ETYPED_ELEMENT__EGENERIC_TYPE = ENAMED_ELEMENT_FEATURE_COUNT + 7;
+	int ETYPED_ELEMENT__EGENERIC_TYPE = ENAMED_ELEMENT_FEATURE_COUNT + 5;
 
 	/**
 	 * The number of structural features of the '<em>ETyped Element</em>' class.
@@ -506,7 +488,7 @@ public interface EcorePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ETYPED_ELEMENT_FEATURE_COUNT = ENAMED_ELEMENT_FEATURE_COUNT + 8;
+	int ETYPED_ELEMENT_FEATURE_COUNT = ENAMED_ELEMENT_FEATURE_COUNT + 6;
 
 	/**
 	 * The meta object id for the '{@link ecore.impl.EStructuralFeatureImpl <em>EStructural Feature</em>}' class.
@@ -519,15 +501,6 @@ public interface EcorePackage extends EPackage {
 	int ESTRUCTURAL_FEATURE = 15;
 
 	/**
-	 * The feature id for the '<em><b>Tag</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ESTRUCTURAL_FEATURE__TAG = ETYPED_ELEMENT__TAG;
-
-	/**
 	 * The feature id for the '<em><b>File</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -535,6 +508,15 @@ public interface EcorePackage extends EPackage {
 	 * @ordered
 	 */
 	int ESTRUCTURAL_FEATURE__FILE = ETYPED_ELEMENT__FILE;
+
+	/**
+	 * The feature id for the '<em><b>Tag</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ESTRUCTURAL_FEATURE__TAG = ETYPED_ELEMENT__TAG;
 
 	/**
 	 * The feature id for the '<em><b>File Name</b></em>' attribute.
@@ -600,15 +582,6 @@ public interface EcorePackage extends EPackage {
 	int ESTRUCTURAL_FEATURE__NAME = ETYPED_ELEMENT__NAME;
 
 	/**
-	 * The feature id for the '<em><b>Many</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ESTRUCTURAL_FEATURE__MANY = ETYPED_ELEMENT__MANY;
-
-	/**
 	 * The feature id for the '<em><b>Lower Bound</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -645,15 +618,6 @@ public interface EcorePackage extends EPackage {
 	int ESTRUCTURAL_FEATURE__ORDERED = ETYPED_ELEMENT__ORDERED;
 
 	/**
-	 * The feature id for the '<em><b>Required</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ESTRUCTURAL_FEATURE__REQUIRED = ETYPED_ELEMENT__REQUIRED;
-
-	/**
 	 * The feature id for the '<em><b>Upper Bound</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -681,22 +645,22 @@ public interface EcorePackage extends EPackage {
 	int ESTRUCTURAL_FEATURE__VOLATILE = ETYPED_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
-	 * The feature id for the '<em><b>Default Value Literal</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ESTRUCTURAL_FEATURE__DEFAULT_VALUE_LITERAL = ETYPED_ELEMENT_FEATURE_COUNT + 1;
-
-	/**
 	 * The feature id for the '<em><b>EContaining Class</b></em>' container reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ESTRUCTURAL_FEATURE__ECONTAINING_CLASS = ETYPED_ELEMENT_FEATURE_COUNT + 2;
+	int ESTRUCTURAL_FEATURE__ECONTAINING_CLASS = ETYPED_ELEMENT_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Default Value Literal</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ESTRUCTURAL_FEATURE__DEFAULT_VALUE_LITERAL = ETYPED_ELEMENT_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Transient</b></em>' attribute.
@@ -726,22 +690,13 @@ public interface EcorePackage extends EPackage {
 	int ESTRUCTURAL_FEATURE__DERIVED = ETYPED_ELEMENT_FEATURE_COUNT + 5;
 
 	/**
-	 * The feature id for the '<em><b>Default Value</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ESTRUCTURAL_FEATURE__DEFAULT_VALUE = ETYPED_ELEMENT_FEATURE_COUNT + 6;
-
-	/**
 	 * The feature id for the '<em><b>Changeable</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ESTRUCTURAL_FEATURE__CHANGEABLE = ETYPED_ELEMENT_FEATURE_COUNT + 7;
+	int ESTRUCTURAL_FEATURE__CHANGEABLE = ETYPED_ELEMENT_FEATURE_COUNT + 6;
 
 	/**
 	 * The number of structural features of the '<em>EStructural Feature</em>' class.
@@ -750,7 +705,7 @@ public interface EcorePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ESTRUCTURAL_FEATURE_FEATURE_COUNT = ETYPED_ELEMENT_FEATURE_COUNT + 8;
+	int ESTRUCTURAL_FEATURE_FEATURE_COUNT = ETYPED_ELEMENT_FEATURE_COUNT + 7;
 
 	/**
 	 * The meta object id for the '{@link ecore.impl.EAttributeImpl <em>EAttribute</em>}' class.
@@ -763,15 +718,6 @@ public interface EcorePackage extends EPackage {
 	int EATTRIBUTE = 0;
 
 	/**
-	 * The feature id for the '<em><b>Tag</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EATTRIBUTE__TAG = ESTRUCTURAL_FEATURE__TAG;
-
-	/**
 	 * The feature id for the '<em><b>File</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -779,6 +725,15 @@ public interface EcorePackage extends EPackage {
 	 * @ordered
 	 */
 	int EATTRIBUTE__FILE = ESTRUCTURAL_FEATURE__FILE;
+
+	/**
+	 * The feature id for the '<em><b>Tag</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EATTRIBUTE__TAG = ESTRUCTURAL_FEATURE__TAG;
 
 	/**
 	 * The feature id for the '<em><b>File Name</b></em>' attribute.
@@ -844,15 +799,6 @@ public interface EcorePackage extends EPackage {
 	int EATTRIBUTE__NAME = ESTRUCTURAL_FEATURE__NAME;
 
 	/**
-	 * The feature id for the '<em><b>Many</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EATTRIBUTE__MANY = ESTRUCTURAL_FEATURE__MANY;
-
-	/**
 	 * The feature id for the '<em><b>Lower Bound</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -889,15 +835,6 @@ public interface EcorePackage extends EPackage {
 	int EATTRIBUTE__ORDERED = ESTRUCTURAL_FEATURE__ORDERED;
 
 	/**
-	 * The feature id for the '<em><b>Required</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EATTRIBUTE__REQUIRED = ESTRUCTURAL_FEATURE__REQUIRED;
-
-	/**
 	 * The feature id for the '<em><b>Upper Bound</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -925,15 +862,6 @@ public interface EcorePackage extends EPackage {
 	int EATTRIBUTE__VOLATILE = ESTRUCTURAL_FEATURE__VOLATILE;
 
 	/**
-	 * The feature id for the '<em><b>Default Value Literal</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EATTRIBUTE__DEFAULT_VALUE_LITERAL = ESTRUCTURAL_FEATURE__DEFAULT_VALUE_LITERAL;
-
-	/**
 	 * The feature id for the '<em><b>EContaining Class</b></em>' container reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -941,6 +869,15 @@ public interface EcorePackage extends EPackage {
 	 * @ordered
 	 */
 	int EATTRIBUTE__ECONTAINING_CLASS = ESTRUCTURAL_FEATURE__ECONTAINING_CLASS;
+
+	/**
+	 * The feature id for the '<em><b>Default Value Literal</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EATTRIBUTE__DEFAULT_VALUE_LITERAL = ESTRUCTURAL_FEATURE__DEFAULT_VALUE_LITERAL;
 
 	/**
 	 * The feature id for the '<em><b>Transient</b></em>' attribute.
@@ -970,15 +907,6 @@ public interface EcorePackage extends EPackage {
 	int EATTRIBUTE__DERIVED = ESTRUCTURAL_FEATURE__DERIVED;
 
 	/**
-	 * The feature id for the '<em><b>Default Value</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EATTRIBUTE__DEFAULT_VALUE = ESTRUCTURAL_FEATURE__DEFAULT_VALUE;
-
-	/**
 	 * The feature id for the '<em><b>Changeable</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -988,22 +916,13 @@ public interface EcorePackage extends EPackage {
 	int EATTRIBUTE__CHANGEABLE = ESTRUCTURAL_FEATURE__CHANGEABLE;
 
 	/**
-	 * The feature id for the '<em><b>EAttribute Type</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EATTRIBUTE__EATTRIBUTE_TYPE = ESTRUCTURAL_FEATURE_FEATURE_COUNT + 0;
-
-	/**
 	 * The feature id for the '<em><b>ID</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int EATTRIBUTE__ID = ESTRUCTURAL_FEATURE_FEATURE_COUNT + 1;
+	int EATTRIBUTE__ID = ESTRUCTURAL_FEATURE_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of structural features of the '<em>EAttribute</em>' class.
@@ -1012,7 +931,7 @@ public interface EcorePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EATTRIBUTE_FEATURE_COUNT = ESTRUCTURAL_FEATURE_FEATURE_COUNT + 2;
+	int EATTRIBUTE_FEATURE_COUNT = ESTRUCTURAL_FEATURE_FEATURE_COUNT + 1;
 
 	/**
 	 * The meta object id for the '{@link ecore.impl.EAnnotationImpl <em>EAnnotation</em>}' class.
@@ -1025,15 +944,6 @@ public interface EcorePackage extends EPackage {
 	int EANNOTATION = 1;
 
 	/**
-	 * The feature id for the '<em><b>Tag</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EANNOTATION__TAG = EMODEL_ELEMENT__TAG;
-
-	/**
 	 * The feature id for the '<em><b>File</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1041,6 +951,15 @@ public interface EcorePackage extends EPackage {
 	 * @ordered
 	 */
 	int EANNOTATION__FILE = EMODEL_ELEMENT__FILE;
+
+	/**
+	 * The feature id for the '<em><b>Tag</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EANNOTATION__TAG = EMODEL_ELEMENT__TAG;
 
 	/**
 	 * The feature id for the '<em><b>File Name</b></em>' attribute.
@@ -1106,22 +1025,22 @@ public interface EcorePackage extends EPackage {
 	int EANNOTATION__REFERENCES = EMODEL_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
-	 * The feature id for the '<em><b>Details</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EANNOTATION__DETAILS = EMODEL_ELEMENT_FEATURE_COUNT + 1;
-
-	/**
 	 * The feature id for the '<em><b>Source</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int EANNOTATION__SOURCE = EMODEL_ELEMENT_FEATURE_COUNT + 2;
+	int EANNOTATION__SOURCE = EMODEL_ELEMENT_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Details</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EANNOTATION__DETAILS = EMODEL_ELEMENT_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Contents</b></em>' containment reference list.
@@ -1161,15 +1080,6 @@ public interface EcorePackage extends EPackage {
 	int ECLASSIFIER = 3;
 
 	/**
-	 * The feature id for the '<em><b>Tag</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ECLASSIFIER__TAG = ENAMED_ELEMENT__TAG;
-
-	/**
 	 * The feature id for the '<em><b>File</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1177,6 +1087,15 @@ public interface EcorePackage extends EPackage {
 	 * @ordered
 	 */
 	int ECLASSIFIER__FILE = ENAMED_ELEMENT__FILE;
+
+	/**
+	 * The feature id for the '<em><b>Tag</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ECLASSIFIER__TAG = ENAMED_ELEMENT__TAG;
 
 	/**
 	 * The feature id for the '<em><b>File Name</b></em>' attribute.
@@ -1260,31 +1179,13 @@ public interface EcorePackage extends EPackage {
 	int ECLASSIFIER__EPACKAGE = ENAMED_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
-	 * The feature id for the '<em><b>Instance Class</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ECLASSIFIER__INSTANCE_CLASS = ENAMED_ELEMENT_FEATURE_COUNT + 2;
-
-	/**
-	 * The feature id for the '<em><b>Default Value</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ECLASSIFIER__DEFAULT_VALUE = ENAMED_ELEMENT_FEATURE_COUNT + 3;
-
-	/**
 	 * The feature id for the '<em><b>EType Parameters</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ECLASSIFIER__ETYPE_PARAMETERS = ENAMED_ELEMENT_FEATURE_COUNT + 4;
+	int ECLASSIFIER__ETYPE_PARAMETERS = ENAMED_ELEMENT_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Instance Type Name</b></em>' attribute.
@@ -1293,7 +1194,7 @@ public interface EcorePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ECLASSIFIER__INSTANCE_TYPE_NAME = ENAMED_ELEMENT_FEATURE_COUNT + 5;
+	int ECLASSIFIER__INSTANCE_TYPE_NAME = ENAMED_ELEMENT_FEATURE_COUNT + 3;
 
 	/**
 	 * The number of structural features of the '<em>EClassifier</em>' class.
@@ -1302,7 +1203,7 @@ public interface EcorePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ECLASSIFIER_FEATURE_COUNT = ENAMED_ELEMENT_FEATURE_COUNT + 6;
+	int ECLASSIFIER_FEATURE_COUNT = ENAMED_ELEMENT_FEATURE_COUNT + 4;
 
 	/**
 	 * The meta object id for the '{@link ecore.impl.EClassImpl <em>EClass</em>}' class.
@@ -1315,15 +1216,6 @@ public interface EcorePackage extends EPackage {
 	int ECLASS = 2;
 
 	/**
-	 * The feature id for the '<em><b>Tag</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ECLASS__TAG = ECLASSIFIER__TAG;
-
-	/**
 	 * The feature id for the '<em><b>File</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1331,6 +1223,15 @@ public interface EcorePackage extends EPackage {
 	 * @ordered
 	 */
 	int ECLASS__FILE = ECLASSIFIER__FILE;
+
+	/**
+	 * The feature id for the '<em><b>Tag</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ECLASS__TAG = ECLASSIFIER__TAG;
 
 	/**
 	 * The feature id for the '<em><b>File Name</b></em>' attribute.
@@ -1414,24 +1315,6 @@ public interface EcorePackage extends EPackage {
 	int ECLASS__EPACKAGE = ECLASSIFIER__EPACKAGE;
 
 	/**
-	 * The feature id for the '<em><b>Instance Class</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ECLASS__INSTANCE_CLASS = ECLASSIFIER__INSTANCE_CLASS;
-
-	/**
-	 * The feature id for the '<em><b>Default Value</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ECLASS__DEFAULT_VALUE = ECLASSIFIER__DEFAULT_VALUE;
-
-	/**
 	 * The feature id for the '<em><b>EType Parameters</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1477,40 +1360,13 @@ public interface EcorePackage extends EPackage {
 	int ECLASS__EOPERATIONS = ECLASSIFIER_FEATURE_COUNT + 2;
 
 	/**
-	 * The feature id for the '<em><b>EAll Attributes</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ECLASS__EALL_ATTRIBUTES = ECLASSIFIER_FEATURE_COUNT + 3;
-
-	/**
 	 * The feature id for the '<em><b>Interface</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ECLASS__INTERFACE = ECLASSIFIER_FEATURE_COUNT + 4;
-
-	/**
-	 * The feature id for the '<em><b>EReferences</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ECLASS__EREFERENCES = ECLASSIFIER_FEATURE_COUNT + 5;
-
-	/**
-	 * The feature id for the '<em><b>EAll References</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ECLASS__EALL_REFERENCES = ECLASSIFIER_FEATURE_COUNT + 6;
+	int ECLASS__INTERFACE = ECLASSIFIER_FEATURE_COUNT + 3;
 
 	/**
 	 * The feature id for the '<em><b>ESuper Types</b></em>' reference list.
@@ -1519,16 +1375,7 @@ public interface EcorePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ECLASS__ESUPER_TYPES = ECLASSIFIER_FEATURE_COUNT + 7;
-
-	/**
-	 * The feature id for the '<em><b>EAll Containments</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ECLASS__EALL_CONTAINMENTS = ECLASSIFIER_FEATURE_COUNT + 8;
+	int ECLASS__ESUPER_TYPES = ECLASSIFIER_FEATURE_COUNT + 4;
 
 	/**
 	 * The feature id for the '<em><b>EGeneric Super Types</b></em>' containment reference list.
@@ -1537,61 +1384,7 @@ public interface EcorePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ECLASS__EGENERIC_SUPER_TYPES = ECLASSIFIER_FEATURE_COUNT + 9;
-
-	/**
-	 * The feature id for the '<em><b>EAll Generic Super Types</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ECLASS__EALL_GENERIC_SUPER_TYPES = ECLASSIFIER_FEATURE_COUNT + 10;
-
-	/**
-	 * The feature id for the '<em><b>EAttributes</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ECLASS__EATTRIBUTES = ECLASSIFIER_FEATURE_COUNT + 11;
-
-	/**
-	 * The feature id for the '<em><b>EID Attribute</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ECLASS__EID_ATTRIBUTE = ECLASSIFIER_FEATURE_COUNT + 12;
-
-	/**
-	 * The feature id for the '<em><b>EAll Structural Features</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ECLASS__EALL_STRUCTURAL_FEATURES = ECLASSIFIER_FEATURE_COUNT + 13;
-
-	/**
-	 * The feature id for the '<em><b>EAll Operations</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ECLASS__EALL_OPERATIONS = ECLASSIFIER_FEATURE_COUNT + 14;
-
-	/**
-	 * The feature id for the '<em><b>EAll Super Types</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ECLASS__EALL_SUPER_TYPES = ECLASSIFIER_FEATURE_COUNT + 15;
+	int ECLASS__EGENERIC_SUPER_TYPES = ECLASSIFIER_FEATURE_COUNT + 5;
 
 	/**
 	 * The number of structural features of the '<em>EClass</em>' class.
@@ -1600,7 +1393,7 @@ public interface EcorePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ECLASS_FEATURE_COUNT = ECLASSIFIER_FEATURE_COUNT + 16;
+	int ECLASS_FEATURE_COUNT = ECLASSIFIER_FEATURE_COUNT + 6;
 
 	/**
 	 * The meta object id for the '{@link ecore.impl.EDataTypeImpl <em>EData Type</em>}' class.
@@ -1613,15 +1406,6 @@ public interface EcorePackage extends EPackage {
 	int EDATA_TYPE = 4;
 
 	/**
-	 * The feature id for the '<em><b>Tag</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EDATA_TYPE__TAG = ECLASSIFIER__TAG;
-
-	/**
 	 * The feature id for the '<em><b>File</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1629,6 +1413,15 @@ public interface EcorePackage extends EPackage {
 	 * @ordered
 	 */
 	int EDATA_TYPE__FILE = ECLASSIFIER__FILE;
+
+	/**
+	 * The feature id for the '<em><b>Tag</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EDATA_TYPE__TAG = ECLASSIFIER__TAG;
 
 	/**
 	 * The feature id for the '<em><b>File Name</b></em>' attribute.
@@ -1712,24 +1505,6 @@ public interface EcorePackage extends EPackage {
 	int EDATA_TYPE__EPACKAGE = ECLASSIFIER__EPACKAGE;
 
 	/**
-	 * The feature id for the '<em><b>Instance Class</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EDATA_TYPE__INSTANCE_CLASS = ECLASSIFIER__INSTANCE_CLASS;
-
-	/**
-	 * The feature id for the '<em><b>Default Value</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EDATA_TYPE__DEFAULT_VALUE = ECLASSIFIER__DEFAULT_VALUE;
-
-	/**
 	 * The feature id for the '<em><b>EType Parameters</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1776,15 +1551,6 @@ public interface EcorePackage extends EPackage {
 	int EENUM = 5;
 
 	/**
-	 * The feature id for the '<em><b>Tag</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EENUM__TAG = EDATA_TYPE__TAG;
-
-	/**
 	 * The feature id for the '<em><b>File</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1792,6 +1558,15 @@ public interface EcorePackage extends EPackage {
 	 * @ordered
 	 */
 	int EENUM__FILE = EDATA_TYPE__FILE;
+
+	/**
+	 * The feature id for the '<em><b>Tag</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EENUM__TAG = EDATA_TYPE__TAG;
 
 	/**
 	 * The feature id for the '<em><b>File Name</b></em>' attribute.
@@ -1875,24 +1650,6 @@ public interface EcorePackage extends EPackage {
 	int EENUM__EPACKAGE = EDATA_TYPE__EPACKAGE;
 
 	/**
-	 * The feature id for the '<em><b>Instance Class</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EENUM__INSTANCE_CLASS = EDATA_TYPE__INSTANCE_CLASS;
-
-	/**
-	 * The feature id for the '<em><b>Default Value</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EENUM__DEFAULT_VALUE = EDATA_TYPE__DEFAULT_VALUE;
-
-	/**
 	 * The feature id for the '<em><b>EType Parameters</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1948,15 +1705,6 @@ public interface EcorePackage extends EPackage {
 	int EENUM_LITERAL = 6;
 
 	/**
-	 * The feature id for the '<em><b>Tag</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EENUM_LITERAL__TAG = ENAMED_ELEMENT__TAG;
-
-	/**
 	 * The feature id for the '<em><b>File</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1964,6 +1712,15 @@ public interface EcorePackage extends EPackage {
 	 * @ordered
 	 */
 	int EENUM_LITERAL__FILE = ENAMED_ELEMENT__FILE;
+
+	/**
+	 * The feature id for the '<em><b>Tag</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EENUM_LITERAL__TAG = ENAMED_ELEMENT__TAG;
 
 	/**
 	 * The feature id for the '<em><b>File Name</b></em>' attribute.
@@ -2084,15 +1841,6 @@ public interface EcorePackage extends EPackage {
 	int EFACTORY = 7;
 
 	/**
-	 * The feature id for the '<em><b>Tag</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EFACTORY__TAG = EMODEL_ELEMENT__TAG;
-
-	/**
 	 * The feature id for the '<em><b>File</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2100,6 +1848,15 @@ public interface EcorePackage extends EPackage {
 	 * @ordered
 	 */
 	int EFACTORY__FILE = EMODEL_ELEMENT__FILE;
+
+	/**
+	 * The feature id for the '<em><b>Tag</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EFACTORY__TAG = EMODEL_ELEMENT__TAG;
 
 	/**
 	 * The feature id for the '<em><b>File Name</b></em>' attribute.
@@ -2184,15 +1941,6 @@ public interface EcorePackage extends EPackage {
 	int EOPERATION = 11;
 
 	/**
-	 * The feature id for the '<em><b>Tag</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EOPERATION__TAG = ETYPED_ELEMENT__TAG;
-
-	/**
 	 * The feature id for the '<em><b>File</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2200,6 +1948,15 @@ public interface EcorePackage extends EPackage {
 	 * @ordered
 	 */
 	int EOPERATION__FILE = ETYPED_ELEMENT__FILE;
+
+	/**
+	 * The feature id for the '<em><b>Tag</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EOPERATION__TAG = ETYPED_ELEMENT__TAG;
 
 	/**
 	 * The feature id for the '<em><b>File Name</b></em>' attribute.
@@ -2265,15 +2022,6 @@ public interface EcorePackage extends EPackage {
 	int EOPERATION__NAME = ETYPED_ELEMENT__NAME;
 
 	/**
-	 * The feature id for the '<em><b>Many</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EOPERATION__MANY = ETYPED_ELEMENT__MANY;
-
-	/**
 	 * The feature id for the '<em><b>Lower Bound</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2308,15 +2056,6 @@ public interface EcorePackage extends EPackage {
 	 * @ordered
 	 */
 	int EOPERATION__ORDERED = ETYPED_ELEMENT__ORDERED;
-
-	/**
-	 * The feature id for the '<em><b>Required</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EOPERATION__REQUIRED = ETYPED_ELEMENT__REQUIRED;
 
 	/**
 	 * The feature id for the '<em><b>Upper Bound</b></em>' attribute.
@@ -2401,15 +2140,6 @@ public interface EcorePackage extends EPackage {
 	int EPACKAGE = 12;
 
 	/**
-	 * The feature id for the '<em><b>Tag</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EPACKAGE__TAG = ENAMED_ELEMENT__TAG;
-
-	/**
 	 * The feature id for the '<em><b>File</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2417,6 +2147,15 @@ public interface EcorePackage extends EPackage {
 	 * @ordered
 	 */
 	int EPACKAGE__FILE = ENAMED_ELEMENT__FILE;
+
+	/**
+	 * The feature id for the '<em><b>Tag</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EPACKAGE__TAG = ENAMED_ELEMENT__TAG;
 
 	/**
 	 * The feature id for the '<em><b>File Name</b></em>' attribute.
@@ -2555,15 +2294,6 @@ public interface EcorePackage extends EPackage {
 	int EPARAMETER = 13;
 
 	/**
-	 * The feature id for the '<em><b>Tag</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EPARAMETER__TAG = ETYPED_ELEMENT__TAG;
-
-	/**
 	 * The feature id for the '<em><b>File</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2571,6 +2301,15 @@ public interface EcorePackage extends EPackage {
 	 * @ordered
 	 */
 	int EPARAMETER__FILE = ETYPED_ELEMENT__FILE;
+
+	/**
+	 * The feature id for the '<em><b>Tag</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EPARAMETER__TAG = ETYPED_ELEMENT__TAG;
 
 	/**
 	 * The feature id for the '<em><b>File Name</b></em>' attribute.
@@ -2636,15 +2375,6 @@ public interface EcorePackage extends EPackage {
 	int EPARAMETER__NAME = ETYPED_ELEMENT__NAME;
 
 	/**
-	 * The feature id for the '<em><b>Many</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EPARAMETER__MANY = ETYPED_ELEMENT__MANY;
-
-	/**
 	 * The feature id for the '<em><b>Lower Bound</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2679,15 +2409,6 @@ public interface EcorePackage extends EPackage {
 	 * @ordered
 	 */
 	int EPARAMETER__ORDERED = ETYPED_ELEMENT__ORDERED;
-
-	/**
-	 * The feature id for the '<em><b>Required</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EPARAMETER__REQUIRED = ETYPED_ELEMENT__REQUIRED;
 
 	/**
 	 * The feature id for the '<em><b>Upper Bound</b></em>' attribute.
@@ -2736,15 +2457,6 @@ public interface EcorePackage extends EPackage {
 	int EREFERENCE = 14;
 
 	/**
-	 * The feature id for the '<em><b>Tag</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EREFERENCE__TAG = ESTRUCTURAL_FEATURE__TAG;
-
-	/**
 	 * The feature id for the '<em><b>File</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2752,6 +2464,15 @@ public interface EcorePackage extends EPackage {
 	 * @ordered
 	 */
 	int EREFERENCE__FILE = ESTRUCTURAL_FEATURE__FILE;
+
+	/**
+	 * The feature id for the '<em><b>Tag</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EREFERENCE__TAG = ESTRUCTURAL_FEATURE__TAG;
 
 	/**
 	 * The feature id for the '<em><b>File Name</b></em>' attribute.
@@ -2790,6 +2511,15 @@ public interface EcorePackage extends EPackage {
 	int EREFERENCE__OID = ESTRUCTURAL_FEATURE__OID;
 
 	/**
+	 * The feature id for the '<em><b>Container</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EREFERENCE__CONTAINER = ESTRUCTURAL_FEATURE__CONTAINER;
+
+	/**
 	 * The feature id for the '<em><b>EAnnotations</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2806,15 +2536,6 @@ public interface EcorePackage extends EPackage {
 	 * @ordered
 	 */
 	int EREFERENCE__NAME = ESTRUCTURAL_FEATURE__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Many</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EREFERENCE__MANY = ESTRUCTURAL_FEATURE__MANY;
 
 	/**
 	 * The feature id for the '<em><b>Lower Bound</b></em>' attribute.
@@ -2853,15 +2574,6 @@ public interface EcorePackage extends EPackage {
 	int EREFERENCE__ORDERED = ESTRUCTURAL_FEATURE__ORDERED;
 
 	/**
-	 * The feature id for the '<em><b>Required</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EREFERENCE__REQUIRED = ESTRUCTURAL_FEATURE__REQUIRED;
-
-	/**
 	 * The feature id for the '<em><b>Upper Bound</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2889,15 +2601,6 @@ public interface EcorePackage extends EPackage {
 	int EREFERENCE__VOLATILE = ESTRUCTURAL_FEATURE__VOLATILE;
 
 	/**
-	 * The feature id for the '<em><b>Default Value Literal</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EREFERENCE__DEFAULT_VALUE_LITERAL = ESTRUCTURAL_FEATURE__DEFAULT_VALUE_LITERAL;
-
-	/**
 	 * The feature id for the '<em><b>EContaining Class</b></em>' container reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2905,6 +2608,15 @@ public interface EcorePackage extends EPackage {
 	 * @ordered
 	 */
 	int EREFERENCE__ECONTAINING_CLASS = ESTRUCTURAL_FEATURE__ECONTAINING_CLASS;
+
+	/**
+	 * The feature id for the '<em><b>Default Value Literal</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EREFERENCE__DEFAULT_VALUE_LITERAL = ESTRUCTURAL_FEATURE__DEFAULT_VALUE_LITERAL;
 
 	/**
 	 * The feature id for the '<em><b>Transient</b></em>' attribute.
@@ -2934,15 +2646,6 @@ public interface EcorePackage extends EPackage {
 	int EREFERENCE__DERIVED = ESTRUCTURAL_FEATURE__DERIVED;
 
 	/**
-	 * The feature id for the '<em><b>Default Value</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EREFERENCE__DEFAULT_VALUE = ESTRUCTURAL_FEATURE__DEFAULT_VALUE;
-
-	/**
 	 * The feature id for the '<em><b>Changeable</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2961,31 +2664,13 @@ public interface EcorePackage extends EPackage {
 	int EREFERENCE__EOPPOSITE = ESTRUCTURAL_FEATURE_FEATURE_COUNT + 0;
 
 	/**
-	 * The feature id for the '<em><b>EReference Type</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EREFERENCE__EREFERENCE_TYPE = ESTRUCTURAL_FEATURE_FEATURE_COUNT + 1;
-
-	/**
 	 * The feature id for the '<em><b>Resolve Proxies</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int EREFERENCE__RESOLVE_PROXIES = ESTRUCTURAL_FEATURE_FEATURE_COUNT + 2;
-
-	/**
-	 * The feature id for the '<em><b>Container</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EREFERENCE__CONTAINER = ESTRUCTURAL_FEATURE_FEATURE_COUNT + 3;
+	int EREFERENCE__RESOLVE_PROXIES = ESTRUCTURAL_FEATURE_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>EKeys</b></em>' reference list.
@@ -2994,7 +2679,7 @@ public interface EcorePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EREFERENCE__EKEYS = ESTRUCTURAL_FEATURE_FEATURE_COUNT + 4;
+	int EREFERENCE__EKEYS = ESTRUCTURAL_FEATURE_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Containment</b></em>' attribute.
@@ -3003,7 +2688,7 @@ public interface EcorePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EREFERENCE__CONTAINMENT = ESTRUCTURAL_FEATURE_FEATURE_COUNT + 5;
+	int EREFERENCE__CONTAINMENT = ESTRUCTURAL_FEATURE_FEATURE_COUNT + 3;
 
 	/**
 	 * The number of structural features of the '<em>EReference</em>' class.
@@ -3012,7 +2697,7 @@ public interface EcorePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EREFERENCE_FEATURE_COUNT = ESTRUCTURAL_FEATURE_FEATURE_COUNT + 6;
+	int EREFERENCE_FEATURE_COUNT = ESTRUCTURAL_FEATURE_FEATURE_COUNT + 4;
 
 	/**
 	 * The meta object id for the '{@link ecore.impl.EStringToStringMapEntryImpl <em>EString To String Map Entry</em>}' class.
@@ -3025,15 +2710,6 @@ public interface EcorePackage extends EPackage {
 	int ESTRING_TO_STRING_MAP_ENTRY = 17;
 
 	/**
-	 * The feature id for the '<em><b>Tag</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ESTRING_TO_STRING_MAP_ENTRY__TAG = StructurePackage.OBJECT__TAG;
-
-	/**
 	 * The feature id for the '<em><b>File</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3041,6 +2717,15 @@ public interface EcorePackage extends EPackage {
 	 * @ordered
 	 */
 	int ESTRING_TO_STRING_MAP_ENTRY__FILE = StructurePackage.OBJECT__FILE;
+
+	/**
+	 * The feature id for the '<em><b>Tag</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ESTRING_TO_STRING_MAP_ENTRY__TAG = StructurePackage.OBJECT__TAG;
 
 	/**
 	 * The feature id for the '<em><b>File Name</b></em>' attribute.
@@ -3125,15 +2810,6 @@ public interface EcorePackage extends EPackage {
 	int EGENERIC_TYPE = 18;
 
 	/**
-	 * The feature id for the '<em><b>Tag</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EGENERIC_TYPE__TAG = EOBJECT__TAG;
-
-	/**
 	 * The feature id for the '<em><b>File</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3141,6 +2817,15 @@ public interface EcorePackage extends EPackage {
 	 * @ordered
 	 */
 	int EGENERIC_TYPE__FILE = EOBJECT__FILE;
+
+	/**
+	 * The feature id for the '<em><b>Tag</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EGENERIC_TYPE__TAG = EOBJECT__TAG;
 
 	/**
 	 * The feature id for the '<em><b>File Name</b></em>' attribute.
@@ -3215,22 +2900,13 @@ public interface EcorePackage extends EPackage {
 	int EGENERIC_TYPE__ECLASSIFIER = EOBJECT_FEATURE_COUNT + 2;
 
 	/**
-	 * The feature id for the '<em><b>ERaw Type</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EGENERIC_TYPE__ERAW_TYPE = EOBJECT_FEATURE_COUNT + 3;
-
-	/**
 	 * The feature id for the '<em><b>EType Parameter</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int EGENERIC_TYPE__ETYPE_PARAMETER = EOBJECT_FEATURE_COUNT + 4;
+	int EGENERIC_TYPE__ETYPE_PARAMETER = EOBJECT_FEATURE_COUNT + 3;
 
 	/**
 	 * The feature id for the '<em><b>ELower Bound</b></em>' containment reference.
@@ -3239,7 +2915,7 @@ public interface EcorePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EGENERIC_TYPE__ELOWER_BOUND = EOBJECT_FEATURE_COUNT + 5;
+	int EGENERIC_TYPE__ELOWER_BOUND = EOBJECT_FEATURE_COUNT + 4;
 
 	/**
 	 * The number of structural features of the '<em>EGeneric Type</em>' class.
@@ -3248,7 +2924,7 @@ public interface EcorePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EGENERIC_TYPE_FEATURE_COUNT = EOBJECT_FEATURE_COUNT + 6;
+	int EGENERIC_TYPE_FEATURE_COUNT = EOBJECT_FEATURE_COUNT + 5;
 
 	/**
 	 * The meta object id for the '{@link ecore.impl.ETypeParameterImpl <em>EType Parameter</em>}' class.
@@ -3261,15 +2937,6 @@ public interface EcorePackage extends EPackage {
 	int ETYPE_PARAMETER = 19;
 
 	/**
-	 * The feature id for the '<em><b>Tag</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ETYPE_PARAMETER__TAG = ENAMED_ELEMENT__TAG;
-
-	/**
 	 * The feature id for the '<em><b>File</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3277,6 +2944,15 @@ public interface EcorePackage extends EPackage {
 	 * @ordered
 	 */
 	int ETYPE_PARAMETER__FILE = ENAMED_ELEMENT__FILE;
+
+	/**
+	 * The feature id for the '<em><b>Tag</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ETYPE_PARAMETER__TAG = ENAMED_ELEMENT__TAG;
 
 	/**
 	 * The feature id for the '<em><b>File Name</b></em>' attribute.
@@ -3681,17 +3357,6 @@ public interface EcorePackage extends EPackage {
 	EClass getEAttribute();
 
 	/**
-	 * Returns the meta object for the reference '{@link ecore.EAttribute#getEAttributeType <em>EAttribute Type</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>EAttribute Type</em>'.
-	 * @see ecore.EAttribute#getEAttributeType()
-	 * @see #getEAttribute()
-	 * @generated
-	 */
-	EReference getEAttribute_EAttributeType();
-
-	/**
 	 * Returns the meta object for the attribute '{@link ecore.EAttribute#isID <em>ID</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3724,17 +3389,6 @@ public interface EcorePackage extends EPackage {
 	EReference getEAnnotation_References();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link ecore.EAnnotation#getDetails <em>Details</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Details</em>'.
-	 * @see ecore.EAnnotation#getDetails()
-	 * @see #getEAnnotation()
-	 * @generated
-	 */
-	EReference getEAnnotation_Details();
-
-	/**
 	 * Returns the meta object for the attribute '{@link ecore.EAnnotation#getSource <em>Source</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3744,6 +3398,17 @@ public interface EcorePackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getEAnnotation_Source();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link ecore.EAnnotation#getDetails <em>Details</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Details</em>'.
+	 * @see ecore.EAnnotation#getDetails()
+	 * @see #getEAnnotation()
+	 * @generated
+	 */
+	EReference getEAnnotation_Details();
 
 	/**
 	 * Returns the meta object for the containment reference list '{@link ecore.EAnnotation#getContents <em>Contents</em>}'.
@@ -3811,17 +3476,6 @@ public interface EcorePackage extends EPackage {
 	EReference getEClass_EOperations();
 
 	/**
-	 * Returns the meta object for the reference list '{@link ecore.EClass#getEAllAttributes <em>EAll Attributes</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference list '<em>EAll Attributes</em>'.
-	 * @see ecore.EClass#getEAllAttributes()
-	 * @see #getEClass()
-	 * @generated
-	 */
-	EReference getEClass_EAllAttributes();
-
-	/**
 	 * Returns the meta object for the attribute '{@link ecore.EClass#isInterface <em>Interface</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3831,28 +3485,6 @@ public interface EcorePackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getEClass_Interface();
-
-	/**
-	 * Returns the meta object for the reference list '{@link ecore.EClass#getEReferences <em>EReferences</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference list '<em>EReferences</em>'.
-	 * @see ecore.EClass#getEReferences()
-	 * @see #getEClass()
-	 * @generated
-	 */
-	EReference getEClass_EReferences();
-
-	/**
-	 * Returns the meta object for the reference list '{@link ecore.EClass#getEAllReferences <em>EAll References</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference list '<em>EAll References</em>'.
-	 * @see ecore.EClass#getEAllReferences()
-	 * @see #getEClass()
-	 * @generated
-	 */
-	EReference getEClass_EAllReferences();
 
 	/**
 	 * Returns the meta object for the reference list '{@link ecore.EClass#getESuperTypes <em>ESuper Types</em>}'.
@@ -3866,17 +3498,6 @@ public interface EcorePackage extends EPackage {
 	EReference getEClass_ESuperTypes();
 
 	/**
-	 * Returns the meta object for the reference list '{@link ecore.EClass#getEAllContainments <em>EAll Containments</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference list '<em>EAll Containments</em>'.
-	 * @see ecore.EClass#getEAllContainments()
-	 * @see #getEClass()
-	 * @generated
-	 */
-	EReference getEClass_EAllContainments();
-
-	/**
 	 * Returns the meta object for the containment reference list '{@link ecore.EClass#getEGenericSuperTypes <em>EGeneric Super Types</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3886,72 +3507,6 @@ public interface EcorePackage extends EPackage {
 	 * @generated
 	 */
 	EReference getEClass_EGenericSuperTypes();
-
-	/**
-	 * Returns the meta object for the reference list '{@link ecore.EClass#getEAllGenericSuperTypes <em>EAll Generic Super Types</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference list '<em>EAll Generic Super Types</em>'.
-	 * @see ecore.EClass#getEAllGenericSuperTypes()
-	 * @see #getEClass()
-	 * @generated
-	 */
-	EReference getEClass_EAllGenericSuperTypes();
-
-	/**
-	 * Returns the meta object for the reference list '{@link ecore.EClass#getEAttributes <em>EAttributes</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference list '<em>EAttributes</em>'.
-	 * @see ecore.EClass#getEAttributes()
-	 * @see #getEClass()
-	 * @generated
-	 */
-	EReference getEClass_EAttributes();
-
-	/**
-	 * Returns the meta object for the reference '{@link ecore.EClass#getEIDAttribute <em>EID Attribute</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>EID Attribute</em>'.
-	 * @see ecore.EClass#getEIDAttribute()
-	 * @see #getEClass()
-	 * @generated
-	 */
-	EReference getEClass_EIDAttribute();
-
-	/**
-	 * Returns the meta object for the reference list '{@link ecore.EClass#getEAllStructuralFeatures <em>EAll Structural Features</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference list '<em>EAll Structural Features</em>'.
-	 * @see ecore.EClass#getEAllStructuralFeatures()
-	 * @see #getEClass()
-	 * @generated
-	 */
-	EReference getEClass_EAllStructuralFeatures();
-
-	/**
-	 * Returns the meta object for the reference list '{@link ecore.EClass#getEAllOperations <em>EAll Operations</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference list '<em>EAll Operations</em>'.
-	 * @see ecore.EClass#getEAllOperations()
-	 * @see #getEClass()
-	 * @generated
-	 */
-	EReference getEClass_EAllOperations();
-
-	/**
-	 * Returns the meta object for the reference list '{@link ecore.EClass#getEAllSuperTypes <em>EAll Super Types</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference list '<em>EAll Super Types</em>'.
-	 * @see ecore.EClass#getEAllSuperTypes()
-	 * @see #getEClass()
-	 * @generated
-	 */
-	EReference getEClass_EAllSuperTypes();
 
 	/**
 	 * Returns the meta object for class '{@link ecore.EClassifier <em>EClassifier</em>}'.
@@ -3984,28 +3539,6 @@ public interface EcorePackage extends EPackage {
 	 * @generated
 	 */
 	EReference getEClassifier_EPackage();
-
-	/**
-	 * Returns the meta object for the attribute '{@link ecore.EClassifier#getInstanceClass <em>Instance Class</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Instance Class</em>'.
-	 * @see ecore.EClassifier#getInstanceClass()
-	 * @see #getEClassifier()
-	 * @generated
-	 */
-	EAttribute getEClassifier_InstanceClass();
-
-	/**
-	 * Returns the meta object for the attribute '{@link ecore.EClassifier#getDefaultValue <em>Default Value</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Default Value</em>'.
-	 * @see ecore.EClassifier#getDefaultValue()
-	 * @see #getEClassifier()
-	 * @generated
-	 */
-	EAttribute getEClassifier_DefaultValue();
 
 	/**
 	 * Returns the meta object for the containment reference list '{@link ecore.EClassifier#getETypeParameters <em>EType Parameters</em>}'.
@@ -4382,17 +3915,6 @@ public interface EcorePackage extends EPackage {
 	EReference getEReference_EOpposite();
 
 	/**
-	 * Returns the meta object for the reference '{@link ecore.EReference#getEReferenceType <em>EReference Type</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>EReference Type</em>'.
-	 * @see ecore.EReference#getEReferenceType()
-	 * @see #getEReference()
-	 * @generated
-	 */
-	EReference getEReference_EReferenceType();
-
-	/**
 	 * Returns the meta object for the attribute '{@link ecore.EReference#isResolveProxies <em>Resolve Proxies</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4402,17 +3924,6 @@ public interface EcorePackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getEReference_ResolveProxies();
-
-	/**
-	 * Returns the meta object for the attribute '{@link ecore.EReference#isContainer <em>Container</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Container</em>'.
-	 * @see ecore.EReference#isContainer()
-	 * @see #getEReference()
-	 * @generated
-	 */
-	EAttribute getEReference_Container();
 
 	/**
 	 * Returns the meta object for the reference list '{@link ecore.EReference#getEKeys <em>EKeys</em>}'.
@@ -4458,17 +3969,6 @@ public interface EcorePackage extends EPackage {
 	EAttribute getEStructuralFeature_Volatile();
 
 	/**
-	 * Returns the meta object for the attribute '{@link ecore.EStructuralFeature#getDefaultValueLiteral <em>Default Value Literal</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Default Value Literal</em>'.
-	 * @see ecore.EStructuralFeature#getDefaultValueLiteral()
-	 * @see #getEStructuralFeature()
-	 * @generated
-	 */
-	EAttribute getEStructuralFeature_DefaultValueLiteral();
-
-	/**
 	 * Returns the meta object for the container reference '{@link ecore.EStructuralFeature#getEContainingClass <em>EContaining Class</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4478,6 +3978,17 @@ public interface EcorePackage extends EPackage {
 	 * @generated
 	 */
 	EReference getEStructuralFeature_EContainingClass();
+
+	/**
+	 * Returns the meta object for the attribute '{@link ecore.EStructuralFeature#getDefaultValueLiteral <em>Default Value Literal</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Default Value Literal</em>'.
+	 * @see ecore.EStructuralFeature#getDefaultValueLiteral()
+	 * @see #getEStructuralFeature()
+	 * @generated
+	 */
+	EAttribute getEStructuralFeature_DefaultValueLiteral();
 
 	/**
 	 * Returns the meta object for the attribute '{@link ecore.EStructuralFeature#isTransient <em>Transient</em>}'.
@@ -4513,17 +4024,6 @@ public interface EcorePackage extends EPackage {
 	EAttribute getEStructuralFeature_Derived();
 
 	/**
-	 * Returns the meta object for the attribute '{@link ecore.EStructuralFeature#getDefaultValue <em>Default Value</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Default Value</em>'.
-	 * @see ecore.EStructuralFeature#getDefaultValue()
-	 * @see #getEStructuralFeature()
-	 * @generated
-	 */
-	EAttribute getEStructuralFeature_DefaultValue();
-
-	/**
 	 * Returns the meta object for the attribute '{@link ecore.EStructuralFeature#isChangeable <em>Changeable</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4543,17 +4043,6 @@ public interface EcorePackage extends EPackage {
 	 * @generated
 	 */
 	EClass getETypedElement();
-
-	/**
-	 * Returns the meta object for the attribute '{@link ecore.ETypedElement#isMany <em>Many</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Many</em>'.
-	 * @see ecore.ETypedElement#isMany()
-	 * @see #getETypedElement()
-	 * @generated
-	 */
-	EAttribute getETypedElement_Many();
 
 	/**
 	 * Returns the meta object for the attribute '{@link ecore.ETypedElement#getLowerBound <em>Lower Bound</em>}'.
@@ -4598,17 +4087,6 @@ public interface EcorePackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getETypedElement_Ordered();
-
-	/**
-	 * Returns the meta object for the attribute '{@link ecore.ETypedElement#isRequired <em>Required</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Required</em>'.
-	 * @see ecore.ETypedElement#isRequired()
-	 * @see #getETypedElement()
-	 * @generated
-	 */
-	EAttribute getETypedElement_Required();
 
 	/**
 	 * Returns the meta object for the attribute '{@link ecore.ETypedElement#getUpperBound <em>Upper Bound</em>}'.
@@ -4706,17 +4184,6 @@ public interface EcorePackage extends EPackage {
 	 * @generated
 	 */
 	EReference getEGenericType_EClassifier();
-
-	/**
-	 * Returns the meta object for the reference '{@link ecore.EGenericType#getERawType <em>ERaw Type</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>ERaw Type</em>'.
-	 * @see ecore.EGenericType#getERawType()
-	 * @see #getEGenericType()
-	 * @generated
-	 */
-	EReference getEGenericType_ERawType();
 
 	/**
 	 * Returns the meta object for the reference '{@link ecore.EGenericType#getETypeParameter <em>EType Parameter</em>}'.
@@ -5228,15 +4695,6 @@ public interface EcorePackage extends EPackage {
 		EClass EATTRIBUTE = eINSTANCE.getEAttribute();
 
 		/**
-		 * The meta object literal for the '<em><b>EAttribute Type</b></em>' reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference EATTRIBUTE__EATTRIBUTE_TYPE = eINSTANCE
-				.getEAttribute_EAttributeType();
-
-		/**
 		 * The meta object literal for the '<em><b>ID</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -5264,20 +4722,20 @@ public interface EcorePackage extends EPackage {
 				.getEAnnotation_References();
 
 		/**
-		 * The meta object literal for the '<em><b>Details</b></em>' containment reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference EANNOTATION__DETAILS = eINSTANCE.getEAnnotation_Details();
-
-		/**
 		 * The meta object literal for the '<em><b>Source</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
 		EAttribute EANNOTATION__SOURCE = eINSTANCE.getEAnnotation_Source();
+
+		/**
+		 * The meta object literal for the '<em><b>Details</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference EANNOTATION__DETAILS = eINSTANCE.getEAnnotation_Details();
 
 		/**
 		 * The meta object literal for the '<em><b>Contents</b></em>' containment reference list feature.
@@ -5332,38 +4790,12 @@ public interface EcorePackage extends EPackage {
 		EReference ECLASS__EOPERATIONS = eINSTANCE.getEClass_EOperations();
 
 		/**
-		 * The meta object literal for the '<em><b>EAll Attributes</b></em>' reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference ECLASS__EALL_ATTRIBUTES = eINSTANCE
-				.getEClass_EAllAttributes();
-
-		/**
 		 * The meta object literal for the '<em><b>Interface</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
 		EAttribute ECLASS__INTERFACE = eINSTANCE.getEClass_Interface();
-
-		/**
-		 * The meta object literal for the '<em><b>EReferences</b></em>' reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference ECLASS__EREFERENCES = eINSTANCE.getEClass_EReferences();
-
-		/**
-		 * The meta object literal for the '<em><b>EAll References</b></em>' reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference ECLASS__EALL_REFERENCES = eINSTANCE
-				.getEClass_EAllReferences();
 
 		/**
 		 * The meta object literal for the '<em><b>ESuper Types</b></em>' reference list feature.
@@ -5374,15 +4806,6 @@ public interface EcorePackage extends EPackage {
 		EReference ECLASS__ESUPER_TYPES = eINSTANCE.getEClass_ESuperTypes();
 
 		/**
-		 * The meta object literal for the '<em><b>EAll Containments</b></em>' reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference ECLASS__EALL_CONTAINMENTS = eINSTANCE
-				.getEClass_EAllContainments();
-
-		/**
 		 * The meta object literal for the '<em><b>EGeneric Super Types</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -5390,58 +4813,6 @@ public interface EcorePackage extends EPackage {
 		 */
 		EReference ECLASS__EGENERIC_SUPER_TYPES = eINSTANCE
 				.getEClass_EGenericSuperTypes();
-
-		/**
-		 * The meta object literal for the '<em><b>EAll Generic Super Types</b></em>' reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference ECLASS__EALL_GENERIC_SUPER_TYPES = eINSTANCE
-				.getEClass_EAllGenericSuperTypes();
-
-		/**
-		 * The meta object literal for the '<em><b>EAttributes</b></em>' reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference ECLASS__EATTRIBUTES = eINSTANCE.getEClass_EAttributes();
-
-		/**
-		 * The meta object literal for the '<em><b>EID Attribute</b></em>' reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference ECLASS__EID_ATTRIBUTE = eINSTANCE.getEClass_EIDAttribute();
-
-		/**
-		 * The meta object literal for the '<em><b>EAll Structural Features</b></em>' reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference ECLASS__EALL_STRUCTURAL_FEATURES = eINSTANCE
-				.getEClass_EAllStructuralFeatures();
-
-		/**
-		 * The meta object literal for the '<em><b>EAll Operations</b></em>' reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference ECLASS__EALL_OPERATIONS = eINSTANCE
-				.getEClass_EAllOperations();
-
-		/**
-		 * The meta object literal for the '<em><b>EAll Super Types</b></em>' reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference ECLASS__EALL_SUPER_TYPES = eINSTANCE
-				.getEClass_EAllSuperTypes();
 
 		/**
 		 * The meta object literal for the '{@link ecore.impl.EClassifierImpl <em>EClassifier</em>}' class.
@@ -5469,24 +4840,6 @@ public interface EcorePackage extends EPackage {
 		 * @generated
 		 */
 		EReference ECLASSIFIER__EPACKAGE = eINSTANCE.getEClassifier_EPackage();
-
-		/**
-		 * The meta object literal for the '<em><b>Instance Class</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute ECLASSIFIER__INSTANCE_CLASS = eINSTANCE
-				.getEClassifier_InstanceClass();
-
-		/**
-		 * The meta object literal for the '<em><b>Default Value</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute ECLASSIFIER__DEFAULT_VALUE = eINSTANCE
-				.getEClassifier_DefaultValue();
 
 		/**
 		 * The meta object literal for the '<em><b>EType Parameters</b></em>' containment reference list feature.
@@ -5806,15 +5159,6 @@ public interface EcorePackage extends EPackage {
 		EReference EREFERENCE__EOPPOSITE = eINSTANCE.getEReference_EOpposite();
 
 		/**
-		 * The meta object literal for the '<em><b>EReference Type</b></em>' reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference EREFERENCE__EREFERENCE_TYPE = eINSTANCE
-				.getEReference_EReferenceType();
-
-		/**
 		 * The meta object literal for the '<em><b>Resolve Proxies</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -5822,14 +5166,6 @@ public interface EcorePackage extends EPackage {
 		 */
 		EAttribute EREFERENCE__RESOLVE_PROXIES = eINSTANCE
 				.getEReference_ResolveProxies();
-
-		/**
-		 * The meta object literal for the '<em><b>Container</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute EREFERENCE__CONTAINER = eINSTANCE.getEReference_Container();
 
 		/**
 		 * The meta object literal for the '<em><b>EKeys</b></em>' reference list feature.
@@ -5868,15 +5204,6 @@ public interface EcorePackage extends EPackage {
 				.getEStructuralFeature_Volatile();
 
 		/**
-		 * The meta object literal for the '<em><b>Default Value Literal</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute ESTRUCTURAL_FEATURE__DEFAULT_VALUE_LITERAL = eINSTANCE
-				.getEStructuralFeature_DefaultValueLiteral();
-
-		/**
 		 * The meta object literal for the '<em><b>EContaining Class</b></em>' container reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -5884,6 +5211,15 @@ public interface EcorePackage extends EPackage {
 		 */
 		EReference ESTRUCTURAL_FEATURE__ECONTAINING_CLASS = eINSTANCE
 				.getEStructuralFeature_EContainingClass();
+
+		/**
+		 * The meta object literal for the '<em><b>Default Value Literal</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute ESTRUCTURAL_FEATURE__DEFAULT_VALUE_LITERAL = eINSTANCE
+				.getEStructuralFeature_DefaultValueLiteral();
 
 		/**
 		 * The meta object literal for the '<em><b>Transient</b></em>' attribute feature.
@@ -5913,15 +5249,6 @@ public interface EcorePackage extends EPackage {
 				.getEStructuralFeature_Derived();
 
 		/**
-		 * The meta object literal for the '<em><b>Default Value</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute ESTRUCTURAL_FEATURE__DEFAULT_VALUE = eINSTANCE
-				.getEStructuralFeature_DefaultValue();
-
-		/**
 		 * The meta object literal for the '<em><b>Changeable</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -5939,14 +5266,6 @@ public interface EcorePackage extends EPackage {
 		 * @generated
 		 */
 		EClass ETYPED_ELEMENT = eINSTANCE.getETypedElement();
-
-		/**
-		 * The meta object literal for the '<em><b>Many</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute ETYPED_ELEMENT__MANY = eINSTANCE.getETypedElement_Many();
 
 		/**
 		 * The meta object literal for the '<em><b>Lower Bound</b></em>' attribute feature.
@@ -5981,15 +5300,6 @@ public interface EcorePackage extends EPackage {
 		 */
 		EAttribute ETYPED_ELEMENT__ORDERED = eINSTANCE
 				.getETypedElement_Ordered();
-
-		/**
-		 * The meta object literal for the '<em><b>Required</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute ETYPED_ELEMENT__REQUIRED = eINSTANCE
-				.getETypedElement_Required();
 
 		/**
 		 * The meta object literal for the '<em><b>Upper Bound</b></em>' attribute feature.
@@ -6074,15 +5384,6 @@ public interface EcorePackage extends EPackage {
 		 */
 		EReference EGENERIC_TYPE__ECLASSIFIER = eINSTANCE
 				.getEGenericType_EClassifier();
-
-		/**
-		 * The meta object literal for the '<em><b>ERaw Type</b></em>' reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference EGENERIC_TYPE__ERAW_TYPE = eINSTANCE
-				.getEGenericType_ERawType();
 
 		/**
 		 * The meta object literal for the '<em><b>EType Parameter</b></em>' reference feature.

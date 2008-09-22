@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: NotComparableException.java,v 1.2 2008-09-11 12:34:45 cfaucher Exp $
+ * $Id: NotComparableException.java,v 1.3 2008-09-22 14:48:27 cfaucher Exp $
  */
 package kermeta.standard;
 
@@ -13,7 +13,7 @@ package kermeta.standard;
  *
  *
  * @see kermeta.standard.StandardPackage#getNotComparableException()
- * @model annotation="kermeta documentation='/**\n * raised when two objects are not comparable\n \052/'"
+ * @model annotation="kermeta documentation='/**\r\n * raised when two objects are not comparable\r\n \052/'"
  * @generated
  */
 public interface NotComparableException extends kermeta.exceptions.Exception {

@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: EStructuralFeatureImpl.java,v 1.3 2008-09-11 12:34:38 cfaucher Exp $
+ * $Id: EStructuralFeatureImpl.java,v 1.4 2008-09-22 14:44:20 cfaucher Exp $
  */
 package ecore.impl;
 
@@ -32,7 +32,6 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
  *   <li>{@link ecore.impl.EStructuralFeatureImpl#isTransient <em>Transient</em>}</li>
  *   <li>{@link ecore.impl.EStructuralFeatureImpl#isUnsettable <em>Unsettable</em>}</li>
  *   <li>{@link ecore.impl.EStructuralFeatureImpl#isDerived <em>Derived</em>}</li>
- *   <li>{@link ecore.impl.EStructuralFeatureImpl#getDefaultValue <em>Default Value</em>}</li>
  *   <li>{@link ecore.impl.EStructuralFeatureImpl#isChangeable <em>Changeable</em>}</li>
  * </ul>
  * </p>
@@ -140,26 +139,6 @@ public abstract class EStructuralFeatureImpl extends ETypedElementImpl
 	 * @ordered
 	 */
 	protected boolean derived = DERIVED_EDEFAULT;
-
-	/**
-	 * The default value of the '{@link #getDefaultValue() <em>Default Value</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getDefaultValue()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final Object DEFAULT_VALUE_EDEFAULT = null;
-
-	/**
-	 * The cached value of the '{@link #getDefaultValue() <em>Default Value</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getDefaultValue()
-	 * @generated
-	 * @ordered
-	 */
-	protected Object defaultValue = DEFAULT_VALUE_EDEFAULT;
 
 	/**
 	 * The default value of the '{@link #isChangeable() <em>Changeable</em>}' attribute.
@@ -381,15 +360,6 @@ public abstract class EStructuralFeatureImpl extends ETypedElementImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Object getDefaultValue() {
-		return defaultValue;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public boolean isChangeable() {
 		return changeable;
 	}
@@ -427,6 +397,19 @@ public abstract class EStructuralFeatureImpl extends ETypedElementImpl
 	 */
 	public Class<?> getContainerClass() {
 		java.lang.Class result = null;
+
+		return result;
+
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Object getterDefaultValue() {
+
+		java.lang.Object result = null;
 
 		return result;
 
@@ -503,8 +486,6 @@ public abstract class EStructuralFeatureImpl extends ETypedElementImpl
 			return isUnsettable() ? Boolean.TRUE : Boolean.FALSE;
 		case EcorePackage.ESTRUCTURAL_FEATURE__DERIVED:
 			return isDerived() ? Boolean.TRUE : Boolean.FALSE;
-		case EcorePackage.ESTRUCTURAL_FEATURE__DEFAULT_VALUE:
-			return getDefaultValue();
 		case EcorePackage.ESTRUCTURAL_FEATURE__CHANGEABLE:
 			return isChangeable() ? Boolean.TRUE : Boolean.FALSE;
 		}
@@ -599,9 +580,6 @@ public abstract class EStructuralFeatureImpl extends ETypedElementImpl
 			return unsettable != UNSETTABLE_EDEFAULT;
 		case EcorePackage.ESTRUCTURAL_FEATURE__DERIVED:
 			return derived != DERIVED_EDEFAULT;
-		case EcorePackage.ESTRUCTURAL_FEATURE__DEFAULT_VALUE:
-			return DEFAULT_VALUE_EDEFAULT == null ? defaultValue != null
-					: !DEFAULT_VALUE_EDEFAULT.equals(defaultValue);
 		case EcorePackage.ESTRUCTURAL_FEATURE__CHANGEABLE:
 			return changeable != CHANGEABLE_EDEFAULT;
 		}
@@ -629,8 +607,6 @@ public abstract class EStructuralFeatureImpl extends ETypedElementImpl
 		result.append(unsettable);
 		result.append(", derived: ");
 		result.append(derived);
-		result.append(", defaultValue: ");
-		result.append(defaultValue);
 		result.append(", changeable: ");
 		result.append(changeable);
 		result.append(')');

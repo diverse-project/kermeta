@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ConstraintViolatedPreImpl.java,v 1.2 2008-09-11 12:34:37 cfaucher Exp $
+ * $Id: ConstraintViolatedPreImpl.java,v 1.3 2008-09-22 14:45:46 cfaucher Exp $
  */
 package kermeta.exceptions.impl;
 
@@ -20,8 +20,8 @@ import org.eclipse.emf.ecore.EClass;
  *
  * @generated
  */
-public class ConstraintViolatedPreImpl extends ExceptionImpl implements
-		ConstraintViolatedPre {
+public class ConstraintViolatedPreImpl extends ConstraintViolatedExceptionImpl
+		implements ConstraintViolatedPre {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

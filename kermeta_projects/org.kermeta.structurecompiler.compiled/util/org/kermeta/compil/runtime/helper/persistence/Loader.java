@@ -1,5 +1,5 @@
 
-/*$Id: Loader.java,v 1.2 2008-09-11 12:34:56 cfaucher Exp $
+/*$Id: Loader.java,v 1.3 2008-09-22 14:49:13 cfaucher Exp $
 * Project : org.kermeta.framework.compiled.runtime.helper
 * File : 	Loader.java
 * License : EPL
@@ -77,64 +77,69 @@ public class Loader extends SaverOrLoader {
 		for ( EStructuralFeature sourceFeature : sourceObject.eClass().getEAllStructuralFeatures() ) {
 			Object value = sourceObject.eGet(sourceFeature);
 			EStructuralFeature targetFeature = getEStructuralFeature(targetObject.eClass(), sourceFeature.getName());
-			
-			/*
-			 * 
-			 * Simple EObject handling.
-			 * 
-			 */
-			if ( value instanceof EObject ) {
-				EObject sourceValue = (EObject) value;
-				EObject targetValue = _instanceMapping.get(sourceValue);
-				// Better set the feature before cloning the value to avoid possible recursive calls.
-				boolean clone = false;
-				if ( targetValue == null ) {
-					targetValue = createInstance(sourceValue);
-					clone = true;
-				}
-				// Setting the value.
-				targetObject.eSet(targetFeature, targetValue);
-				if ( clone )
-					// Cloning if necessary.
-					cloneEObject( (EObject) value, targetValue );
 				
-			/*
-			 * 
-			 * EList handling.
-			 * 
-			 */
-			} else if ( value instanceof EList) {
-				EList sourceList = (EList) sourceObject.eGet(sourceFeature);
-				EList targetList = (EList) targetObject.eGet(targetFeature);
-				for ( Object o : sourceList ) {
-					if ( o instanceof EObject ) {
-						EObject sourceListObject = (EObject) o;
-						EObject targetListObject = _instanceMapping.get(sourceListObject);
-						if ( targetListObject == null ) {
-							targetListObject = createInstance(sourceListObject);
-							cloneEObject(sourceListObject, targetListObject);
+				/*
+				 * Simple EObject handling.
+				 */
+				if ( value instanceof EObject ) {
+					EObject sourceValue = (EObject) value;
+					EObject targetValue = _instanceMapping.get(sourceValue);
+					// Better set the feature before cloning the value to avoid possible recursive calls.
+					boolean clone = false;
+					if ( targetValue == null ) {
+						targetValue = createInstance(sourceValue);
+						clone = true;
+					}
+					// Setting the value.
+					
+					//The values of derived property are not cloned
+					if( !sourceFeature.isDerived() && !sourceFeature.isUnsettable() ) {
+						targetObject.eSet(targetFeature, targetValue);
+					}
+					if ( clone )
+						// Cloning if necessary.
+						cloneEObject( (EObject) value, targetValue );
+					
+				/*
+				 * EList handling.
+				 */
+				} else if ( value instanceof EList) {
+					
+					if( !sourceFeature.isDerived() && !sourceFeature.isUnsettable() ) {
+					EList sourceList = (EList) sourceObject.eGet(sourceFeature);
+					EList targetList = (EList) targetObject.eGet(targetFeature);
+					for ( Object o : sourceList ) {
+						if ( o instanceof EObject ) {
+							EObject sourceListObject = (EObject) o;
+							EObject targetListObject = _instanceMapping.get(sourceListObject);
+							if ( targetListObject == null ) {
+								targetListObject = createInstance(sourceListObject);
+								cloneEObject(sourceListObject, targetListObject);
+							}
+							targetList.add(targetListObject);
+						} else if ( o instanceof Enumerator ) {
+							Object realValue = createInstance( (Enumerator) o);
+							targetList.add(realValue);
+						} else {
+							targetList.add(o);
 						}
-						targetList.add(targetListObject);
-					} else if ( o instanceof Enumerator ) {
-						Object realValue = createInstance( (Enumerator) o);
-						targetList.add(realValue);
-					} else {
-						targetList.add(o);
+					}
+					}
+					
+				/*
+				 * Datatypes handling.
+				 */
+				} else if ( value != null ) {
+					Object realValue = value;
+					// Special case for Enumerator. Need to create an instance from the good factory.
+					if ( value instanceof Enumerator ) {
+						realValue = createInstance( (Enumerator) value);
+					}
+					
+					if( !sourceFeature.isDerived() && !sourceFeature.isUnsettable() ) {
+						targetObject.eSet(targetFeature, realValue);
 					}
 				}
-				
-			/*
-			 * 
-			 * Datatypes handling.
-			 * 
-			 */
-			} else if ( value != null ) {
-				Object realValue = value;
-				// Special case for Enumerator. Need to create an instance from the good factory.
-				if ( value instanceof Enumerator )
-					realValue = createInstance( (Enumerator) value);
-				targetObject.eSet(targetFeature, realValue);
-			}
 		}
 	}
 

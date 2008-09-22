@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: UtilsPackage.java,v 1.2 2008-09-11 12:34:42 cfaucher Exp $
+ * $Id: UtilsPackage.java,v 1.3 2008-09-22 14:48:59 cfaucher Exp $
  */
 package kermeta.utils;
 
@@ -10,7 +10,9 @@ import kermeta.language.structure.StructurePackage;
 
 import kermeta.standard.StandardPackage;
 
+import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EPackage;
 
 /**
@@ -27,8 +29,8 @@ import org.eclipse.emf.ecore.EPackage;
  * @see kermeta.utils.UtilsFactory
  * @model kind="package"
  *        annotation="kermeta ecoreUri='http://www.kermeta.org/kermeta/1_2_0//kermeta/utils'"
- *        annotation="kermeta documentation='/** \n * Contains special classes (Hashtable, Stack) that are not contained in Kermeta\n * metamodel\n \052/'"
- *        annotation="kermeta documentation='/** \n * Contains special classes (Hashtable, Stack) that are not contained in Kermeta\n * metamodel\n * \n * <img src=\"./figures/utils_package.png\"/>\n \052/'"
+ *        annotation="kermeta documentation='/** \r\n * Contains special classes (Hashtable, Stack) that are not contained in Kermeta\r\n * metamodel\r\n * \r\n * <img src=\"./figures/utils_package.png\"/>\r\n \052/'"
+ *        annotation="kermeta documentation='/** \r\n * Contains special classes (Hashtable, Stack) that are not contained in Kermeta\r\n * metamodel\r\n \052/'"
  * @generated
  */
 public interface UtilsPackage extends EPackage {
@@ -138,13 +140,113 @@ public interface UtilsPackage extends EPackage {
 	int STRING_BUFFER__CONTAINER = StructurePackage.OBJECT__CONTAINER;
 
 	/**
+	 * The feature id for the '<em><b>Content</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STRING_BUFFER__CONTENT = StructurePackage.OBJECT_FEATURE_COUNT + 0;
+
+	/**
 	 * The number of structural features of the '<em>String Buffer</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int STRING_BUFFER_FEATURE_COUNT = StructurePackage.OBJECT_FEATURE_COUNT + 0;
+	int STRING_BUFFER_FEATURE_COUNT = StructurePackage.OBJECT_FEATURE_COUNT + 1;
+
+	/**
+	 * The meta object id for the '{@link kermeta.utils.impl.HashtableImpl <em>Hashtable</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see kermeta.utils.impl.HashtableImpl
+	 * @see kermeta.utils.impl.UtilsPackageImpl#getHashtable()
+	 * @generated
+	 */
+	int HASHTABLE = 1;
+
+	/**
+	 * The feature id for the '<em><b>File</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int HASHTABLE__FILE = StructurePackage.OBJECT__FILE;
+
+	/**
+	 * The feature id for the '<em><b>Tag</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int HASHTABLE__TAG = StructurePackage.OBJECT__TAG;
+
+	/**
+	 * The feature id for the '<em><b>File Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int HASHTABLE__FILE_NAME = StructurePackage.OBJECT__FILE_NAME;
+
+	/**
+	 * The feature id for the '<em><b>Line Number</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int HASHTABLE__LINE_NUMBER = StructurePackage.OBJECT__LINE_NUMBER;
+
+	/**
+	 * The feature id for the '<em><b>Owned Tags</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int HASHTABLE__OWNED_TAGS = StructurePackage.OBJECT__OWNED_TAGS;
+
+	/**
+	 * The feature id for the '<em><b>Oid</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int HASHTABLE__OID = StructurePackage.OBJECT__OID;
+
+	/**
+	 * The feature id for the '<em><b>Container</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int HASHTABLE__CONTAINER = StructurePackage.OBJECT__CONTAINER;
+
+	/**
+	 * The feature id for the '<em><b>Wrapped Hashtable</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int HASHTABLE__WRAPPED_HASHTABLE = StructurePackage.OBJECT_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Hashtable</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int HASHTABLE_FEATURE_COUNT = StructurePackage.OBJECT_FEATURE_COUNT + 1;
 
 	/**
 	 * The meta object id for the '{@link kermeta.utils.impl.StackImpl <em>Stack</em>}' class.
@@ -154,7 +256,7 @@ public interface UtilsPackage extends EPackage {
 	 * @see kermeta.utils.impl.UtilsPackageImpl#getStack()
 	 * @generated
 	 */
-	int STACK = 1;
+	int STACK = 2;
 
 	/**
 	 * The feature id for the '<em><b>File</b></em>' reference.
@@ -238,86 +340,24 @@ public interface UtilsPackage extends EPackage {
 	int STACK_FEATURE_COUNT = StandardPackage.SEQUENCE_FEATURE_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link kermeta.utils.impl.HashtableImpl <em>Hashtable</em>}' class.
+	 * The meta object id for the '<em>Kermeta Property String Buffer content</em>' data type.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see kermeta.utils.impl.HashtableImpl
-	 * @see kermeta.utils.impl.UtilsPackageImpl#getHashtable()
+	 * @see java.lang.StringBuffer
+	 * @see kermeta.utils.impl.UtilsPackageImpl#getKermetaProperty_StringBuffer_content()
 	 * @generated
 	 */
-	int HASHTABLE = 2;
+	int KERMETA_PROPERTY_STRING_BUFFER_CONTENT = 3;
 
 	/**
-	 * The feature id for the '<em><b>File</b></em>' reference.
+	 * The meta object id for the '<em>Kermeta Property Hashtable wrapped Hashtable</em>' data type.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @see java.util.Hashtable
+	 * @see kermeta.utils.impl.UtilsPackageImpl#getKermetaProperty_Hashtable_wrappedHashtable()
 	 * @generated
-	 * @ordered
 	 */
-	int HASHTABLE__FILE = StructurePackage.OBJECT__FILE;
-
-	/**
-	 * The feature id for the '<em><b>Tag</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int HASHTABLE__TAG = StructurePackage.OBJECT__TAG;
-
-	/**
-	 * The feature id for the '<em><b>File Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int HASHTABLE__FILE_NAME = StructurePackage.OBJECT__FILE_NAME;
-
-	/**
-	 * The feature id for the '<em><b>Line Number</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int HASHTABLE__LINE_NUMBER = StructurePackage.OBJECT__LINE_NUMBER;
-
-	/**
-	 * The feature id for the '<em><b>Owned Tags</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int HASHTABLE__OWNED_TAGS = StructurePackage.OBJECT__OWNED_TAGS;
-
-	/**
-	 * The feature id for the '<em><b>Oid</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int HASHTABLE__OID = StructurePackage.OBJECT__OID;
-
-	/**
-	 * The feature id for the '<em><b>Container</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int HASHTABLE__CONTAINER = StructurePackage.OBJECT__CONTAINER;
-
-	/**
-	 * The number of structural features of the '<em>Hashtable</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int HASHTABLE_FEATURE_COUNT = StructurePackage.OBJECT_FEATURE_COUNT + 0;
+	int KERMETA_PROPERTY_HASHTABLE_WRAPPED_HASHTABLE = 4;
 
 	/**
 	 * Returns the meta object for class '{@link kermeta.utils.StringBuffer <em>String Buffer</em>}'.
@@ -330,14 +370,15 @@ public interface UtilsPackage extends EPackage {
 	EClass getStringBuffer();
 
 	/**
-	 * Returns the meta object for class '{@link kermeta.utils.Stack <em>Stack</em>}'.
+	 * Returns the meta object for the attribute '{@link kermeta.utils.StringBuffer#getContent <em>Content</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Stack</em>'.
-	 * @see kermeta.utils.Stack
+	 * @return the meta object for the attribute '<em>Content</em>'.
+	 * @see kermeta.utils.StringBuffer#getContent()
+	 * @see #getStringBuffer()
 	 * @generated
 	 */
-	EClass getStack();
+	EAttribute getStringBuffer_Content();
 
 	/**
 	 * Returns the meta object for class '{@link kermeta.utils.Hashtable <em>Hashtable</em>}'.
@@ -348,6 +389,49 @@ public interface UtilsPackage extends EPackage {
 	 * @generated
 	 */
 	EClass getHashtable();
+
+	/**
+	 * Returns the meta object for the attribute '{@link kermeta.utils.Hashtable#getWrappedHashtable <em>Wrapped Hashtable</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Wrapped Hashtable</em>'.
+	 * @see kermeta.utils.Hashtable#getWrappedHashtable()
+	 * @see #getHashtable()
+	 * @generated
+	 */
+	EAttribute getHashtable_WrappedHashtable();
+
+	/**
+	 * Returns the meta object for class '{@link kermeta.utils.Stack <em>Stack</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Stack</em>'.
+	 * @see kermeta.utils.Stack
+	 * @generated
+	 */
+	EClass getStack();
+
+	/**
+	 * Returns the meta object for data type '{@link java.lang.StringBuffer <em>Kermeta Property String Buffer content</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for data type '<em>Kermeta Property String Buffer content</em>'.
+	 * @see java.lang.StringBuffer
+	 * @model instanceClass="java.lang.StringBuffer"
+	 * @generated
+	 */
+	EDataType getKermetaProperty_StringBuffer_content();
+
+	/**
+	 * Returns the meta object for data type '{@link java.util.Hashtable <em>Kermeta Property Hashtable wrapped Hashtable</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for data type '<em>Kermeta Property Hashtable wrapped Hashtable</em>'.
+	 * @see java.util.Hashtable
+	 * @model instanceClass="java.util.Hashtable" typeParameters="K V"
+	 * @generated
+	 */
+	EDataType getKermetaProperty_Hashtable_wrappedHashtable();
 
 	/**
 	 * Returns the factory that creates the instances of the model.
@@ -382,14 +466,12 @@ public interface UtilsPackage extends EPackage {
 		EClass STRING_BUFFER = eINSTANCE.getStringBuffer();
 
 		/**
-		 * The meta object literal for the '{@link kermeta.utils.impl.StackImpl <em>Stack</em>}' class.
+		 * The meta object literal for the '<em><b>Content</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see kermeta.utils.impl.StackImpl
-		 * @see kermeta.utils.impl.UtilsPackageImpl#getStack()
 		 * @generated
 		 */
-		EClass STACK = eINSTANCE.getStack();
+		EAttribute STRING_BUFFER__CONTENT = eINSTANCE.getStringBuffer_Content();
 
 		/**
 		 * The meta object literal for the '{@link kermeta.utils.impl.HashtableImpl <em>Hashtable</em>}' class.
@@ -400,6 +482,47 @@ public interface UtilsPackage extends EPackage {
 		 * @generated
 		 */
 		EClass HASHTABLE = eINSTANCE.getHashtable();
+
+		/**
+		 * The meta object literal for the '<em><b>Wrapped Hashtable</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute HASHTABLE__WRAPPED_HASHTABLE = eINSTANCE
+				.getHashtable_WrappedHashtable();
+
+		/**
+		 * The meta object literal for the '{@link kermeta.utils.impl.StackImpl <em>Stack</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see kermeta.utils.impl.StackImpl
+		 * @see kermeta.utils.impl.UtilsPackageImpl#getStack()
+		 * @generated
+		 */
+		EClass STACK = eINSTANCE.getStack();
+
+		/**
+		 * The meta object literal for the '<em>Kermeta Property String Buffer content</em>' data type.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see java.lang.StringBuffer
+		 * @see kermeta.utils.impl.UtilsPackageImpl#getKermetaProperty_StringBuffer_content()
+		 * @generated
+		 */
+		EDataType KERMETA_PROPERTY_STRING_BUFFER_CONTENT = eINSTANCE
+				.getKermetaProperty_StringBuffer_content();
+
+		/**
+		 * The meta object literal for the '<em>Kermeta Property Hashtable wrapped Hashtable</em>' data type.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see java.util.Hashtable
+		 * @see kermeta.utils.impl.UtilsPackageImpl#getKermetaProperty_Hashtable_wrappedHashtable()
+		 * @generated
+		 */
+		EDataType KERMETA_PROPERTY_HASHTABLE_WRAPPED_HASHTABLE = eINSTANCE
+				.getKermetaProperty_Hashtable_wrappedHashtable();
 
 	}
 
