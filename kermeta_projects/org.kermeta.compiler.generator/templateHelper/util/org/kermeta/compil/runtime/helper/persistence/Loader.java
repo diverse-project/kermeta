@@ -1,5 +1,5 @@
 
-/*$Id: Loader.java,v 1.5 2008-09-22 07:38:01 cfaucher Exp $
+/*$Id: Loader.java,v 1.6 2008-09-22 14:10:58 cfaucher Exp $
 * Project : org.kermeta.framework.compiled.runtime.helper
 * File : 	Loader.java
 * License : EPL
@@ -77,9 +77,6 @@ public class Loader extends SaverOrLoader {
 		for ( EStructuralFeature sourceFeature : sourceObject.eClass().getEAllStructuralFeatures() ) {
 			Object value = sourceObject.eGet(sourceFeature);
 			EStructuralFeature targetFeature = getEStructuralFeature(targetObject.eClass(), sourceFeature.getName());
-			
-			//The values of derived property are not cloned
-			if( !sourceFeature.isDerived() ) {
 				
 				/*
 				 * Simple EObject handling.
@@ -94,7 +91,11 @@ public class Loader extends SaverOrLoader {
 						clone = true;
 					}
 					// Setting the value.
-					targetObject.eSet(targetFeature, targetValue);
+					
+					//The values of derived property are not cloned
+					if( !sourceFeature.isDerived() && !sourceFeature.isUnsettable() ) {
+						targetObject.eSet(targetFeature, targetValue);
+					}
 					if ( clone )
 						// Cloning if necessary.
 						cloneEObject( (EObject) value, targetValue );
@@ -103,6 +104,8 @@ public class Loader extends SaverOrLoader {
 				 * EList handling.
 				 */
 				} else if ( value instanceof EList) {
+					
+					if( !sourceFeature.isDerived() && !sourceFeature.isUnsettable() ) {
 					EList sourceList = (EList) sourceObject.eGet(sourceFeature);
 					EList targetList = (EList) targetObject.eGet(targetFeature);
 					for ( Object o : sourceList ) {
@@ -121,6 +124,7 @@ public class Loader extends SaverOrLoader {
 							targetList.add(o);
 						}
 					}
+					}
 					
 				/*
 				 * Datatypes handling.
@@ -132,11 +136,10 @@ public class Loader extends SaverOrLoader {
 						realValue = createInstance( (Enumerator) value);
 					}
 					
-					if( targetFeature.isChangeable() ) {
+					if( !sourceFeature.isDerived() && !sourceFeature.isUnsettable() ) {
 						targetObject.eSet(targetFeature, realValue);
 					}
 				}
-			}
 		}
 	}
 

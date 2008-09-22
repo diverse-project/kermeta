@@ -1,5 +1,5 @@
 
-/*$Id: Saver.java,v 1.4 2008-09-22 07:38:01 cfaucher Exp $
+/*$Id: Saver.java,v 1.5 2008-09-22 14:10:58 cfaucher Exp $
 * Project : org.kermeta.framework.compiled.runtime.helper
 * File : 	Saver.java
 * License : EPL
@@ -83,8 +83,6 @@ public class Saver extends SaverOrLoader {
 	private void cloneEObject(EObject sourceObject, EObject targetObject) {
 		for ( EStructuralFeature sourceFeature : sourceObject.eClass().getEAllStructuralFeatures() ) {
 			
-			if( sourceFeature.isDerived() ) {
-			
 				Object value = sourceObject.eGet(sourceFeature);
 				EStructuralFeature targetFeature = getEStructuralFeature(targetObject.eClass(), sourceFeature.getName());
 				// The source feature can have been added by aspect in Kermeta.
@@ -96,7 +94,7 @@ public class Saver extends SaverOrLoader {
 					 * Simple EObject handling.
 					 * 
 					 */
-					if ( value instanceof EObject ) {
+					if ( !sourceFeature.isDerived() && targetFeature.isChangeable() /*&& !sourceFeature.isUnsettable()*/ && value instanceof EObject ) {
 						EObject sourceValue = (EObject) value;
 						EObject targetValue = _instanceMapping.get(sourceValue);
 						// Better set the feature before cloning the value to avoid possible recursive calls.
@@ -106,8 +104,10 @@ public class Saver extends SaverOrLoader {
 							targetValue = createInstance(sourceValue);
 							clone = true;
 						}
+						
 						// Setting the value.
 						targetObject.eSet(targetFeature, targetValue);
+						
 						if ( clone )
 							// Cloning if necessary.
 							cloneEObject( (EObject) value, targetValue );
@@ -151,12 +151,11 @@ public class Saver extends SaverOrLoader {
 						if ( value instanceof Enumerator )
 							realValue = createInstance( (Enumerator) value);
 						// Setting the value.
-						if( !targetFeature.isUnsettable() ) {
+						if( !sourceFeature.isDerived() && targetFeature.isChangeable() /*&& !targetFeature.isUnsettable()*/ ) {
 							targetObject.eSet(targetFeature, realValue);
 						}
 					}
 				}
-			}
 		}
 	}
 	
