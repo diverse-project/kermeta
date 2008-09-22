@@ -47,6 +47,21 @@
          </enablement>
       </decorator>
    </extension>
+   <extension
+         point="org.eclipse.core.runtime.preferences">
+      <initializer
+            class="org.kermeta.texteditor.preferences.PreferenceInitializer">
+      </initializer>
+   </extension>
+   <extension
+         point="org.eclipse.ui.preferencePages">
+      <page
+            category="fr.irisa.triskell.kermeta.ui.preferences.KermetaPreferencePage"
+            class="org.kermeta.texteditor.preferences.ModelcheckingPreferencePage"
+            id="org.kermeta.texteditor.preferences.ModelcheckingPreferencePage"
+            name="Texteditor Model checking Preferences">
+      </page>
+   </extension>
 <!--   <extension
    point="org.eclipse.ui.editors">
    <editor
