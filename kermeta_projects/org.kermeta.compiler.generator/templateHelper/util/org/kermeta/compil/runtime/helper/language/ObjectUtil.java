@@ -37,11 +37,11 @@ public class ObjectUtil {
 	
 	static public java.lang.Boolean isInstanceOf(kermeta.language.structure.Object o, String type) {
 		
-		if ( type.contains(o.getClass().getName()) ) {
+		if ( type.equals(o.getClass().getName().replace("impl.", "").replace("Impl", "")) ) {
 			return true;
 		} else {
 			for( Class clazz : getMetaClass(o).getterSuperClass() ) {
-				if (qualifiedName(clazz.getTypeDefinition()).equals(type) ) {
+				if (qualifiedNameDot(clazz.getTypeDefinition()).equals(type) ) {
 					return true;
 				}
 			}
@@ -50,17 +50,28 @@ public class ObjectUtil {
 	}
 	
 	static public java.lang.Boolean isInstanceOf(java.lang.Object o, String type) {
-		return type.equals(o.getClass().getName().replace("impl.", "").replace("Impl", ""));
+
+		if ( type.equals(o.getClass().getName().replace("impl.", "").replace("Impl", "")) ) {
+			return true;
+		} else {
+			for( Class clazz : getMetaClass(o).getterSuperClass() ) {
+				if (qualifiedNameDot(clazz.getTypeDefinition()).equals(type) ) {
+					return true;
+				}
+			}
+		}
+		return false;
 	}
 	
 	public static java.lang.Boolean isInstanceOf(kermeta.language.structure.Object o, Class metaClass) {
 		
-		if ( qualifiedName(metaClass.getTypeDefinition()).equals(
-				qualifiedName(getMetaClass(o).getTypeDefinition())) ) {
+		String metaClass_qName = qualifiedNameDot(metaClass.getTypeDefinition());
+		
+		if ( metaClass_qName.equals(qualifiedNameDot(getMetaClass(o).getTypeDefinition())) ) {
 			return true;
 		} else {
 			for( kermeta.language.structure.Type type : allSuperTypes((ClassDefinition) getMetaClass(o).getTypeDefinition()) ) {
-				if (qualifiedName(((Class) type).getTypeDefinition()).equals(qualifiedName(metaClass.getTypeDefinition())) ) {
+				if (qualifiedNameDot(((Class) type).getTypeDefinition()).equals(metaClass_qName) ) {
 					return true;
 				}
 			}
@@ -70,7 +81,7 @@ public class ObjectUtil {
 	
 	public static java.lang.Boolean isInstanceOf(java.lang.Object o, Type metaClass) {
 		if (metaClass instanceof ParameterizedType) {
-			return qualifiedName(((ParameterizedType) metaClass).getTypeDefinition()).replace("::", ".").equals(
+			return qualifiedNameDot(((ParameterizedType) metaClass).getTypeDefinition()).equals(
 					o.getClass().getName().replace("impl.", "").replace("Impl", ""));
 		}
 		return false;
@@ -358,8 +369,8 @@ public class ObjectUtil {
 		if(self==null || o==null) {
 			return self != o;
 		} else if( (self instanceof kermeta.language.structure.Class) && o instanceof kermeta.language.structure.Class ) {
-			return !qualifiedName(((kermeta.language.structure.Class) self).getTypeDefinition()).equals(
-						qualifiedName(((kermeta.language.structure.Class) o).getTypeDefinition()));
+			return !qualifiedNameDot(((kermeta.language.structure.Class) self).getTypeDefinition()).equals(
+						qualifiedNameDot(((kermeta.language.structure.Class) o).getTypeDefinition()));
 		} else {
 			return !self.equals(o);
 		}
@@ -369,8 +380,8 @@ public class ObjectUtil {
 		if(self==null || o==null) {
 			return self != o;
 		} else if( (self instanceof kermeta.language.structure.Class) && o instanceof kermeta.language.structure.Class ) {
-			return !qualifiedName(((kermeta.language.structure.Class) self).getTypeDefinition()).equals(
-						qualifiedName(((kermeta.language.structure.Class) o).getTypeDefinition()));
+			return !qualifiedNameDot(((kermeta.language.structure.Class) self).getTypeDefinition()).equals(
+						qualifiedNameDot(((kermeta.language.structure.Class) o).getTypeDefinition()));
 		} else {
 			return !self.equals(o);
 		}
@@ -469,15 +480,21 @@ public class ObjectUtil {
 	 * @param elem
 	 * @return
 	 */
-	public static String qualifiedName(kermeta.language.structure.NamedElement elem) {
+	public static String qualifiedNameDot(kermeta.language.structure.NamedElement elem) {
 
+		if( qualifiedName_hashtable.containsKey(elem) ) {
+			return qualifiedName_hashtable.get(elem);
+		}
+		
+		kermeta.language.structure.NamedElement elem_copy = elem;
+		
 		java.lang.String result = elem.getName();
 
 		if ( elem.eContainer() instanceof kermeta.language.structure.NamedElement ) {
 			elem = (kermeta.language.structure.NamedElement) org.kermeta.compil.runtime.helper.language.ObjectUtil
 					.container(elem);
 			while ( elem != null ) {
-				result = elem.getName() + "::" + result;
+				result = elem.getName() + "." + result;
 				if ( elem.eContainer() instanceof kermeta.language.structure.NamedElement ) {
 						elem = (kermeta.language.structure.NamedElement) org.kermeta.compil.runtime.helper.language.ObjectUtil
 								.container(elem);
@@ -487,15 +504,21 @@ public class ObjectUtil {
 			}
 		}
 		
+		qualifiedName_hashtable.put(elem_copy, result);
+		
 		return result;
 	}
+	
+	private static Hashtable<kermeta.language.structure.NamedElement, String> qualifiedName_hashtable = new Hashtable<kermeta.language.structure.NamedElement, String>();
 	
 	private static Hashtable<String, List<kermeta.language.structure.Type>> allSuperTypes_hashtable = new Hashtable<String, List<kermeta.language.structure.Type>>();
 	
 	public static List<Type> allSuperTypes(ClassDefinition self) {
 		
-		if ( allSuperTypes_hashtable.get(qualifiedName(self))!=null ) {
-			return allSuperTypes_hashtable.get(qualifiedName(self));
+		String self_qName = qualifiedNameDot(self);
+		
+		if ( allSuperTypes_hashtable.containsKey(self_qName) ) {
+			return allSuperTypes_hashtable.get(self_qName);
 		}
 		
 		kermeta.standard.Bag<kermeta.language.structure.Type> allSuperClasses = StandardFactory.eINSTANCE.createBag();
@@ -548,7 +571,7 @@ public class ObjectUtil {
 				superClasses.addAll(temp);
 		}
 		
-		allSuperTypes_hashtable.put(qualifiedName(self), CollectionUtil.convertAsEList(allSuperClasses));
+		allSuperTypes_hashtable.put(self_qName, CollectionUtil.convertAsEList(allSuperClasses));
 
 		return CollectionUtil.convertAsEList(allSuperClasses);
 

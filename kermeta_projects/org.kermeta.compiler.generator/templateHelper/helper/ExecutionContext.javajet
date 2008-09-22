@@ -2,7 +2,7 @@
 	 package="org.kermeta.compiler.generator.templates"
 	 
 	 class="ExecutionContext"
-	 version="$Id: ExecutionContext.javajet,v 1.7 2008-09-18 16:38:16 cfaucher Exp $" %>
+	 version="$Id: ExecutionContext.javajet,v 1.8 2008-09-22 07:38:01 cfaucher Exp $" %>
 <%String kmFilePath_forReflection = (String) argument;%>
 
 package org.kermeta.compil.runtime;
@@ -46,7 +46,7 @@ public class ExecutionContext {
 			_instance = new ExecutionContext();
 		return _instance;
 	}
-	
+
 	private static void initValueTypes() {
 		value_types.put("java.lang.String", "kermeta.standard.String");
 		value_types.put("java.lang.Integer", "kermeta.standard.Integer");
@@ -54,7 +54,7 @@ public class ExecutionContext {
 		value_types.put("java.lang.Character", "kermeta.standard.Character");
 		value_types.put("java.lang.Double", "kermeta.standard.Real");
 	}
-	
+
 	public void lazyInitialize() {
 		if (_modelKM == null) {
 			System.out
@@ -65,7 +65,7 @@ public class ExecutionContext {
 					"http://www.kermeta.org/kermeta/1_2_0//kermeta");
 			KmReflectionHelper.load(resource);
 			_modelKM = resource.getValues();
-			
+
 			System.out
 					.println("... end of the initialization of the reflection");
 		}
@@ -76,24 +76,24 @@ public class ExecutionContext {
 		lazyInitialize();
 
 		// Optimization
-		if( hashtable_classes.get(javaQualifiedName)!=null ) {
+		if ( hashtable_classes.containsKey(javaQualifiedName) ) {
 			return hashtable_classes.get(javaQualifiedName);
 		}
-		
+
 		javaQualifiedName = javaQualifiedName.replace("impl.", "").replace(
 				"Impl", "");
-		
+
 		// Optimization
-		if( hashtable_classes.get(javaQualifiedName)!=null ) {
+		if ( hashtable_classes.containsKey(javaQualifiedName) ) {
 			return hashtable_classes.get(javaQualifiedName);
 		}
-		
+
 		if (value_types.containsKey(javaQualifiedName)) {
 			javaQualifiedName = value_types.get(javaQualifiedName);
 		}
-		
+
 		// Optimization
-		if( hashtable_classes.get(javaQualifiedName)!=null ) {
+		if ( hashtable_classes.containsKey(javaQualifiedName) ) {
 			return hashtable_classes.get(javaQualifiedName);
 		}
 
