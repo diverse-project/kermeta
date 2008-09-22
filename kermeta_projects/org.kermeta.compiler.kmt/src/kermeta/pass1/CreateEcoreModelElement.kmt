@@ -1,4 +1,4 @@
-/* $Id: CreateEcoreModelElement.kmt,v 1.35 2008-09-15 15:31:32 cfaucher Exp $
+/* $Id: CreateEcoreModelElement.kmt,v 1.36 2008-09-22 14:41:35 cfaucher Exp $
  * Creation date: February 1, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -174,7 +174,7 @@ aspect class Enumeration {
 	operation createEcoreModelElement(context : KM2EcoreContext) : EEnum is do
 		var ecoreEnumeration : EEnum init EEnum.new
 		ecoreEnumeration.name := IdentifierHelper.new.getMangledIdentifier(self.name, context)
-		//ecoreEnumeration.serializable
+		ecoreEnumeration.serializable := true
 		//ecoreEnumeration.instanceClass
 		//ecoreEnumeration.instanceTypeName
 		//ecoreEnumeration.instanceClassName

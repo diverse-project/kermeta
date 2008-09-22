@@ -1,4 +1,4 @@
-/* $Id: StructureCompiler.kmt,v 1.65 2008-09-19 17:47:52 cfaucher Exp $
+/* $Id: StructureCompiler.kmt,v 1.66 2008-09-22 14:41:35 cfaucher Exp $
  * Creation date: January 21, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -277,6 +277,7 @@ class Main {
     	
     	//operations.add("createEcoreModelElement")
     	operations.add("existsAnnotationGenModelImpl")
+    	operations.add("getTypeName")
     	
     	//operations.add("testSeqObject")
     	//operations.add("testSeqStack")

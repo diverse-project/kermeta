@@ -1,4 +1,4 @@
-/* $Id: Pass1.kmt,v 1.32 2008-09-19 17:39:19 cfaucher Exp $
+/* $Id: Pass1.kmt,v 1.33 2008-09-22 14:41:35 cfaucher Exp $
  * Creation date: January 21, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -153,6 +153,7 @@ aspect class ClassDefinition {
 				// The EDataType name is prefixed by Java
 				eDataType.name := "Java" + self.name
 				eDataType.instanceClassName := instanceClassName
+				eDataType.serializable := true
 				
 				context.valueTypeMapping.add(instanceClassName)
 				

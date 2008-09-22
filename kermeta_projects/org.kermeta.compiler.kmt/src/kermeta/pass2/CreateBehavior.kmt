@@ -1,4 +1,4 @@
-/* $Id: CreateBehavior.kmt,v 1.73 2008-09-19 17:40:46 cfaucher Exp $
+/* $Id: CreateBehavior.kmt,v 1.74 2008-09-22 14:41:35 cfaucher Exp $
  * Creation date: January 21, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -220,8 +220,14 @@ package structure {
 					str_tpb := str_tpb + ", "
 				end
 				
+				if tpb.type.isVoid() then
+					stdio.writeln("tpb.type.isVoid(): " + self.toString)
+				end
+				
 				if not context.ftSuffixActivation then
-					str_tpb := str_tpb + tpb.type.createBehaviorJava(context)
+					if not tpb.type.isVoid() then
+						str_tpb := str_tpb + tpb.type.createBehaviorJava(context)
+					end
 				else
 					var type_from_map : Type init context.ftMapTypeStack.peek().getValue(tpb.type)
 					if not type_from_map.isVoid() then
@@ -1263,9 +1269,14 @@ package behavior {
 					str_condition := str_condition + "\n\t" + context.getIfConditionId() + " = " + self.condition.createBehaviorJava(context)
 				else
 					// The condition is a CallVariable
-					if self.condition.isInstanceOf(CallVariable) then
+					if self.condition.isInstanceOf(CallVariable) or self.condition.isInstanceOf(SelfExpression) or self.condition.isInstanceOf(CallResult) then
 			
-						var ftParam : Parameter init self.condition.asType(CallVariable).getFunctionTypeParameter()
+						var ftParam : Parameter init void
+						
+						if self.condition.isInstanceOf(CallVariable) then
+							ftParam := self.condition.asType(CallVariable).getFunctionTypeParameter()
+						end
+						
 						if not ftParam.isVoid() then
 						
 							if ftParam.isBooleanFunctionType(context) then
@@ -1277,6 +1288,10 @@ package behavior {
 							end
 						end
 					end
+					
+					if self.condition.isInstanceOf(SelfExpression) then
+						str_condition := str_condition + "\n\t" + context.getIfConditionId() + " = " + self.condition.createBehaviorJava(context)
+					end					
 				end				
 			end
 			
@@ -1399,7 +1414,7 @@ package behavior {
 			result := self.~value
 			
 			if result == "." then
-				result := "\"\\\\.\""
+				result := "\".\""
 			else
 				result := "\"" + result.replace("\"", "\\\"") + "\""
 				result := result.replace("\n", "\\n")
