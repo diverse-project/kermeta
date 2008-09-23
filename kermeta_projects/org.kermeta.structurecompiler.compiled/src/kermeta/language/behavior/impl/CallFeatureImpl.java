@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: CallFeatureImpl.java,v 1.3 2008-09-22 14:46:52 cfaucher Exp $
+ * $Id: CallFeatureImpl.java,v 1.4 2008-09-23 13:08:13 cfaucher Exp $
  */
 package kermeta.language.behavior.impl;
 
@@ -721,20 +721,6 @@ public class CallFeatureImpl extends CallExpressionImpl implements CallFeature {
 
 							if (idIfCond_302) {
 
-								org.kermeta.compil.runtime.helper.io.StdIOUtil
-										.writeln(kermeta.standard.helper.StringWrapper
-												.plus(
-														kermeta.standard.helper.StringWrapper
-																.plus(
-																		kermeta.standard.helper.StringWrapper
-																				.plus(
-																						"//if( instanceof ",
-																						cd_lbdExp48
-																								.getName()),
-																		" ) - "),
-														this
-																.getStaticOperation()
-																.getName()));
 							}
 
 							//EIle:func

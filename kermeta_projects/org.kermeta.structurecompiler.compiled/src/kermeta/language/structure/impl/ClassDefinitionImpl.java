@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ClassDefinitionImpl.java,v 1.3 2008-09-22 14:47:35 cfaucher Exp $
+ * $Id: ClassDefinitionImpl.java,v 1.4 2008-09-23 13:07:20 cfaucher Exp $
  */
 package kermeta.language.structure.impl;
 
@@ -1007,19 +1007,6 @@ public class ClassDefinitionImpl extends GenericTypeDefinitionImpl implements
 														"kermeta.language.structure.ClassDefinition"));
 
 						if (idIfCond_625) {
-
-							org.kermeta.compil.runtime.helper.io.StdIOUtil
-									.writeln(kermeta.standard.helper.StringWrapper
-											.plus(
-													kermeta.standard.helper.StringWrapper
-															.plus(
-																	kermeta.standard.helper.StringWrapper
-																			.plus(
-																					"sp: ",
-																					t_lbdExp111
-																							.getTypeName()),
-																	" - "),
-													this.getName()));
 
 							org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
 									.<kermeta.language.structure.ClassDefinition> convertAsOrderedSet(
