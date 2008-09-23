@@ -80,9 +80,6 @@ Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.emf.codegen;visibility:=reexport,
  fr.irisa.triskell.eclipse.util;visibility:=reexport,
  fr.irisa.triskell.kermeta.model;visibility:=reexport,
- fr.irisa.triskell.kermeta.samples.fsm.edit;bundle-version="1.1.0",
- fr.irisa.triskell.kermeta.samples.fsm.editor;bundle-version="1.1.0",
- fr.irisa.triskell.kermeta.samples.fsm.model;bundle-version="1.1.0",
  org.kermeta.simk;bundle-version="0.1.0",
  fr.irisa.triskell.traceability.model;bundle-version="1.1.99"
 Bundle-ActivationPolicy: lazy
