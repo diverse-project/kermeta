@@ -1,6 +1,6 @@
 
 
-/*$Id: KpmManager.java,v 1.3 2008-07-25 14:35:58 ftanguy Exp $
+/*$Id: KpmManager.java,v 1.4 2008-09-23 14:24:49 dvojtise Exp $
 * Project : fr.irisa.triskell.kermeta.kpm
 * File : 	KpmManager.java
 * License : EPL
@@ -17,6 +17,7 @@ import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.IConfigurationElement;
 import org.kermeta.kpm.internal.InternalKpmManager;
 
+import fr.irisa.triskell.kermeta.kpm.KPM;
 import fr.irisa.triskell.kermeta.kpm.Unit;
 
 /**
@@ -58,6 +59,7 @@ public class KpmManager {
 	 * 
 	 */
 	private void initialize() {
+		// make sure the internal manager is initialized
 		_manager = InternalKpmManager.getDefault();
 	}
 	
@@ -110,6 +112,24 @@ public class KpmManager {
 	 */
 	public void removeProject(IProject p) {
 		_manager.removeProject(p);
+	}
+	
+	/**
+	 * Re initialize KPM
+	 */
+	public void resetKPM(){
+		_manager.reset();
+		// get the new version of the manger
+		initialize();
+	}
+	
+	/**
+	 * 
+	 * @return the currently used KPM configuration
+	 */
+	public KPM getKpm(){
+		
+		return _manager.getKpm();
 	}
 }
 

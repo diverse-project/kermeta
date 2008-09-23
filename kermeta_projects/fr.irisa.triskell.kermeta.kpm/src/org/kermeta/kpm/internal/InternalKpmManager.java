@@ -1,6 +1,6 @@
 
 
-/*$Id: InternalKpmManager.java,v 1.5 2008-07-25 14:35:58 ftanguy Exp $
+/*$Id: InternalKpmManager.java,v 1.6 2008-09-23 14:24:49 dvojtise Exp $
 * Project : fr.irisa.triskell.kermeta.kpm
 * File : 	KpmManager.java
 * License : EPL
@@ -12,22 +12,26 @@
 
 package org.kermeta.kpm.internal;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IConfigurationElement;
+import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.kermeta.kpm.KPMPlugin;
 import org.kermeta.kpm.internal.builder.Initializor;
 import org.kermeta.kpm.internal.builder.KPMRules;
 import org.kermeta.kpm.internal.builder.ProjectVisitor;
@@ -239,6 +243,35 @@ public class InternalKpmManager {
 			_projectsBeingBuilt.remove(p);
 		}
 	}
+	/**
+	 * indicates weither the manager is building some projects
+	 * @return
+	 */
+	public boolean isBuilding(){
+		synchronized ( _projectsBeingBuilt ) {
+			return ! _projectsBeingBuilt.isEmpty();
+		}
+	}
+	
+	/**
+	 * Reset the current KPM manager
+	 */
+	public void reset(){
+		// clean the current manager ?
+		try {
+			// removes the kpm file
+			ResourcesPlugin.getWorkspace().getRoot().getFile(new Path(getKpmPath())).delete(false, null);
+			File f = new File(getKpmPath());
+			f.delete();
+			_instance = null;
+			InternalKpmManager.getDefault();
+		} catch (CoreException e) {
+			KPMPlugin.logErrorMessage("Failed to reset KPM", e);
+		}
+		
+	}
+	
+	
 	// TEST PURPOSE //
 }
 
