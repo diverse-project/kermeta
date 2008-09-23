@@ -1,4 +1,4 @@
-/* $Id: CreateBehavior.kmt,v 1.74 2008-09-22 14:41:35 cfaucher Exp $
+/* $Id: CreateBehavior.kmt,v 1.75 2008-09-23 13:01:34 cfaucher Exp $
  * Creation date: January 21, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -364,13 +364,19 @@ package behavior {
 	aspect class Expression {
 		method createBehaviorJava(context : KM2EcoreContext) : String is do
 		
+			// Set the context.compiledJavaExtern variable
+			// An extern may be defined on an Expression
 			if (self.getCompiledJavaExtern()!="") and (context.compiledJavaExtern=="") then
 				context.compiledJavaExtern := getCompiledJavaExtern()
+				
+				// The parameters are removing in order to recalculation in the sub-operation in the JavaStaticCall
+				if not self.getContainerAsType(FunctionType).isVoid() or not self.getContainerAsType(LambdaExpression).isVoid() then
+					context.compiledJavaExtern := context.compiledJavaExtern.replace("(", "%").split("%").first()
+				end
 				
 				if (not context.current_valueType.isVoid()) or context.staticOperationMode then
 					context.compiledJavaExtern := context.compiledJavaExtern.replace("this", "self")
 				end
-			
 			end
 			
 			//This method must be returned nothing
@@ -1372,9 +1378,16 @@ package behavior {
 	/** Complete */
 	aspect class JavaStaticCall {
 		method createBehaviorJava(context : KM2EcoreContext) : String from Expression is do
-			//stdio.writeln(self.jmethod)
 
 			super(context)
+
+			// The parameters are recalculated if they are removed in the super operation
+			if context.compiledJavaExtern!="" then
+				if context.compiledJavaExtern.replace("(", "%").split("%").size() < 2 then
+					context.compiledJavaExtern := context.compiledJavaExtern + "(" + CompilerHelperJava.new.ppComaSeparatedNodes(self.parameters, context) + ")"
+				end
+			end
+			
 			
 			if context.compiledJavaExtern!="" then
 				result := context.compiledJavaExtern
