@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.2"?>
+<plugin>
+   <extension
+         point="org.eclipse.core.runtime.preferences">
+      <initializer
+            class="org.kermeta.kpm.ui.preferences.PreferenceInitializer">
+      </initializer>
+   </extension>
+   <extension
+         point="org.eclipse.ui.preferencePages">
+      <page
+            category="fr.irisa.triskell.kermeta.ui.preferences.KermetaPreferencePage"
+            class="org.kermeta.kpm.ui.preferences.KPMPreferencePage"
+            id="org.kermeta.kpm.ui.preferences.KPMPreferencePage"
+            name="Kermeta Project Manager (KPM) Preferences">
+      </page>
+   </extension>
+
+</plugin>
