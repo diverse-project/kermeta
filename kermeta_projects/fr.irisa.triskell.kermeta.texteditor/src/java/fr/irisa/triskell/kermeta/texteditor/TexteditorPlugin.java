@@ -1,4 +1,4 @@
-/* $Id: TexteditorPlugin.java,v 1.22 2008-09-05 13:16:58 dvojtise Exp $
+/* $Id: TexteditorPlugin.java,v 1.23 2008-09-23 14:26:00 dvojtise Exp $
  * Project : fr.irisa.triskell.kermeta.texteditor
  * File : TexteditorPlugin.java
  * License : EPL
@@ -91,15 +91,14 @@ public class TexteditorPlugin extends AbstractUIPlugin {
 	 */
 	public void start(BundleContext context) throws Exception {
 		super.start(context);
-		getPreferenceStore().setDefault( ModelcheckingStrategy.INPUT_CHANGED_KEY, ModelcheckingStrategy.INPUT_CHANGED);
-		getPreferenceStore().setDefault( ModelcheckingStrategy.SAVING_TIME_KEY, ModelcheckingStrategy.SAVING_TIME);
+		
 	}
 
 	public int getModelCheckingStrategy() {
 		int value = getPreferenceStore().getInt( ModelcheckingStrategy.MODE_KEY );
 		if ( value == 0 ) {
-			value = getPreferenceStore().getDefaultInt( ModelcheckingStrategy.SAVING_TIME_KEY );
-			getPreferenceStore().setValue( ModelcheckingStrategy.MODE_KEY, value);
+			getPreferenceStore().setValue( ModelcheckingStrategy.MODE_KEY, 
+					getPreferenceStore().getDefaultInt(ModelcheckingStrategy.MODE_KEY));
 		}
 		return value;
 	}

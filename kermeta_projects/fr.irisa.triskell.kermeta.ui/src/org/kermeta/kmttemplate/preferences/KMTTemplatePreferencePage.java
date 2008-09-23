@@ -1,4 +1,4 @@
-/* $Id: KMTTemplatePreferencePage.java,v 1.2 2008-05-30 16:13:20 dvojtise Exp $
+/* $Id: KMTTemplatePreferencePage.java,v 1.3 2008-09-23 14:26:20 dvojtise Exp $
  * Project: Kermeta (First iteration)
  * File: KMTTemplatePreferencePage.java
  * License: EPL
@@ -18,7 +18,6 @@ import org.kermeta.jface.preference.HelpfulTextFieldEditor;
 
 import org.eclipse.swt.*;
 import org.eclipse.swt.graphics.*;
-import org.eclipse.swt.events.*;
 
 import fr.irisa.triskell.kermeta.ui.KermetaUIPlugin;
 
