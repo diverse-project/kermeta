@@ -1,4 +1,4 @@
-/* $Id: Runtime2EMF.java,v 1.78 2008-09-01 15:25:23 fmunoz Exp $
+/* $Id: Runtime2EMF.java,v 1.79 2008-09-24 13:51:09 dvojtise Exp $
  * Project   : Kermeta (First iteration)
  * File      : Runtime2EMF.java
  * License   : EPL
@@ -347,7 +347,7 @@ public class Runtime2EMF {
 
 	/**
 	 * Set the values previously retrieved by findEMFObject... to their owning
-	 * eobjects. rObject should never be a reference to a primitive type.
+	 * eObjects. rObject should never be a reference to a primitive type.
 	 * @param rObject
 	 */
 	protected void setEObjectPropertiesFromRuntimeObject( RuntimeObject rObject) {
@@ -422,7 +422,7 @@ public class Runtime2EMF {
 							eObject.eClass().getName() + "."  + feature.getName() + 
 							"; num. of elts in feature : " + ((EList) eObject.eGet(feature)).size());					
 					if(feature.isOrdered() && colArr.size()>1){
-						this.propertiesToSort.add(new SortPropertyCommand(colArr, eObject, feature));
+						this.propertiesToSort.add(new SortPropertyCommand(rObject, colArr, eObject, feature));
 					//	internalLog.debug("We will need to make sure that collection "+ eObject.eClass().getName() + "."  + feature.getName() + " is correctly ordered");
 					}
 				}

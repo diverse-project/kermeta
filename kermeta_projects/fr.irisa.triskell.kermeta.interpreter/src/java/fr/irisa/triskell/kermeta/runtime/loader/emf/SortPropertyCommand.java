@@ -1,4 +1,4 @@
-/*$Id: SortPropertyCommand.java,v 1.2 2008-07-29 13:34:35 dvojtise Exp $
+/*$Id: SortPropertyCommand.java,v 1.3 2008-09-24 13:51:09 dvojtise Exp $
 * Project : fr.irisa.triskell.kermeta.interpreter
 * File : 	SortPropertyCommand.java
 * License : EPL
@@ -19,17 +19,24 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 
 import fr.irisa.triskell.kermeta.interpreter.KermetaRaisedException;
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
+import fr.irisa.triskell.kermeta.runtime.RuntimeObjectHelper;
 
 /**
  * A command for sorting a property
  *
  */
 public class SortPropertyCommand {
+	/** RuntimeObject that was refering the values through the feature . this data is used to have a better error reporting */
+	RuntimeObject originRuntimeObject;
+	/** ordered values in the original model in Keremta memory*/
 	ArrayList<RuntimeObject> sourceRuntimeObjects;
+	/** eObject whose feature must be sorted*/
 	EObject eObject;
+	/** feature that must be sorted */
 	EStructuralFeature feature;
 	
-	public SortPropertyCommand(ArrayList<RuntimeObject> sourceRuntimeObjects, EObject eObject, EStructuralFeature efeature){
+	public SortPropertyCommand(RuntimeObject originRuntimeObject, ArrayList<RuntimeObject> sourceRuntimeObjects, EObject eObject, EStructuralFeature efeature){
+		this.originRuntimeObject = originRuntimeObject;
 		this.sourceRuntimeObjects = sourceRuntimeObjects;
 		this.eObject = eObject;
 		this.feature = efeature;		
@@ -39,13 +46,19 @@ public class SortPropertyCommand {
 	 */
 	public void run(){
 		if(sourceRuntimeObjects.size() != ((EList<Object>) eObject.eGet(feature)).size()){
-			String msg = "Cannot ensure order of "+ eObject.eClass().getName() + "."  + feature.getName() + " because of a mismatch in the number of elements in the EMF object and in the RuntimeObject !";
+			String originObjectInfo = RuntimeObjectHelper.getInfoString(originRuntimeObject);
+			
+			// try to 
+			
+			String msg = "Cannot ensure order of "+ eObject.eClass().getName() + "."  + feature.getName() + " (called on" + 
+			originObjectInfo + ") because of a mismatch in the number of elements in the EMF object and in the RuntimeObject !";
 			Runtime2EMF.internalLog.error(msg);
-			throw KermetaRaisedException.createKermetaException("kermeta::exceptions::ResourceSaveException",
+			KermetaRaisedException kre = KermetaRaisedException.createKermetaException("kermeta::exceptions::ResourceSaveException",
 	    			msg,
 	    			sourceRuntimeObjects.get(0).getFactory().getMemory().getInterpreter().getBasicInterpreter(),
 	    			sourceRuntimeObjects.get(0).getFactory().getMemory(),
 	    			null);
+			throw kre;
 			
 		}
 		
