@@ -1455,7 +1455,7 @@
   </packages>
   <requires uri="platform:/plugin/fr.irisa.triskell.kermeta/lib/ecore.kmt"/>
   <requires uri="../helpers/QualifiedName.kmt"/>
-  <requires uri="platform:/plugin/fr.irisa.triskell.traceability/model/kmt/Traceability.kmt"/>
+  <requires uri="platform:/plugin/fr.irisa.triskell.traceability.model/model/kmt/Traceability.kmt"/>
   <usings qualifiedName="EcoreHelpers"/>
   <usings qualifiedName="kermeta::standard"/>
   <usings qualifiedName="kermeta::exceptions"/>
