@@ -7,7 +7,7 @@ package org.kermeta.jface.preference;
 
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
-import org.eclipse.ui.help.WorkbenchHelp;
+import org.eclipse.ui.PlatformUI;
 
 
 /**
@@ -73,7 +73,7 @@ public class HelpfulTextFieldEditor extends TextFieldEditor implements
     public void setHelp(String contextId) {
         Control[] controls = getControls();
         for(int i=0; i<controls.length; i++) {
-        	WorkbenchHelp.setHelp(controls[i], contextId);
+        	PlatformUI.getWorkbench().getHelpSystem().setHelp(controls[i], contextId);
         }
     }
     
