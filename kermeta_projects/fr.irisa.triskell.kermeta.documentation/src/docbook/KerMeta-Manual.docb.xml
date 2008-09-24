@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.4//EN"
 "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
-<!-- $Id: KerMeta-Manual.docb.xml,v 1.35 2008-09-18 15:14:20 dvojtise Exp $ -->
+<!-- $Id: KerMeta-Manual.docb.xml,v 1.36 2008-09-24 15:39:30 dvojtise Exp $ -->
 <book lang="en-US">
   <bookinfo>
     <title>Kermeta language</title>
 
     <pubdate>Build date: @BUILD.DATE@</pubdate>
 
-    <pubdate>$Date: 2008-09-18 15:14:20 $</pubdate>
+    <pubdate>$Date: 2008-09-24 15:39:30 $</pubdate>
 
     <author>
       <firstname>Zoé</firstname>
@@ -2410,7 +2410,8 @@ operation main() is do
       if (o == void) then stdio.writeln("Void object!") 
       else 
          stdio.writeln("---------------------------------") 
-         stdio.writeln("Objet : " + o.getMetaClass.classDefinition.qualifiedName + " ( " +.getMetaClass.typeDefinition.ownedAttribute.size.toString+ "attr.)" ) 
+         stdio.writeln("Objet : " + o.getMetaClass.classDefinition.qualifiedName 
+            + " ( " + o.getMetaClass.typeDefinition.ownedAttribute.size.toString+ "attr.)" ) 
       end
       var template : cs::Template <emphasis>// Print instances which type is cs::Template</emphasis> 
       if (cs::Template.isInstance(o)) 
@@ -2423,7 +2424,8 @@ operation main() is do
       <emphasis>// Print instances which type is cs::Decision</emphasis> 
       if (cs::Decision.isInstance(o)) 
       then
-         decision ?= o stdio.writeln(" name : " + decision.name) 
+         decision ?= o 
+         stdio.writeln(" name : " + decision.name) 
       end
    end
 }</programlisting>
@@ -2797,7 +2799,8 @@ myCol1.add(50)
 }
 </programlisting>
 
-        <programlisting><emphasis>// return a new collection which size is the same as in the original // collection, and which element types is the type of the result of the expression.</emphasis>
+<programlisting><emphasis> // return a new collection which size is the same as in the original </emphasis>
+<emphasis> // collection, and which element type is the type of the result of the expression.</emphasis>
 aCollection2 := aCollection.<emphasis role="strong">collect</emphasis> { e | 
      <emphasis>/* put here an expression, for example e.name */</emphasis>
 } 
@@ -3528,11 +3531,11 @@ anInstance.FUNCTION_NAME ( TYPE_1, TYPE_2 | SOME_CODE )</programlisting>
             <para>Declaring and defining an "anonymous" function inside an
             operation body</para>
 
-            <programlisting><emphasis role="strong">var</emphasis> f : &lt;TYPE -&gt; RETURN_TYPE&gt;<emphasis
-                role="strong"></emphasis>f := <emphasis role="strong">function</emphasis> { VAR_NAME : TYPE | SOME_CODE_WITH_RETURN_TYPE_RESULT }
+            <programlisting><emphasis role="strong">var</emphasis> f : &lt;TYPE -&gt; RETURN_TYPE&gt;
+<emphasis role="strong"></emphasis>f := <emphasis role="strong">function</emphasis> { VAR_NAME : TYPE | SOME_CODE_WITH_RETURN_TYPE_RESULT }
 
-<emphasis role="strong">var</emphasis> f : &lt;[ TYPE_1, TYPE_2,... ] -&gt; RETURN_TYPE&gt;f := <emphasis
-                role="strong">function</emphasis> { VAR_NAME_1 : TYPE_1, VAR_NAME_2 : TYPE_2,... | SOME_CODE_WITH_RETURN_TYPE_RESULT }</programlisting>
+<emphasis role="strong">var</emphasis> f : &lt;[ TYPE_1, TYPE_2,... ] -&gt; RETURN_TYPE&gt;
+f := <emphasis role="strong">function</emphasis> { VAR_NAME_1 : TYPE_1, VAR_NAME_2 : TYPE_2,... | SOME_CODE_WITH_RETURN_TYPE_RESULT }</programlisting>
           </listitem>
         </itemizedlist>
 
@@ -4613,9 +4616,13 @@ class testRequireJava inherits kermeta::kunit::TestCase
  <emphasis role="strong">var</emphasis> family2 : Family <emphasis
           role="strong">init</emphasis> Family.new
 
-       <emphasis>// ERROR 1 : this assigns p1 to family2.father, which // is already owned by family1.father, so it unsets family1.father // family2.father := p1</emphasis>
+       <emphasis>// ERROR 1 : this assigns p1 to family2.father, which 
+       // is already owned by family1.father, so it unsets family1.father 
+       // family2.father := p1</emphasis>
 
-       <emphasis>// ERROR 2 : this assigns family1.father's value to family2.father, // , so it unsets family1.father // family2.father := family1.father</emphasis>
+       <emphasis>// ERROR 2 : this assigns family1.father's value to family2.father, 
+       // so it unsets family1.father 
+       // family2.father := family1.father</emphasis>
 
        <emphasis>// This is correct! family2.father keeps its value</emphasis>
        family2.father := Person.clone(p1)
