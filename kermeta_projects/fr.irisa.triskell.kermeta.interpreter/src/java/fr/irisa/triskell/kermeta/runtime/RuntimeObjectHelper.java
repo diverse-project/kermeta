@@ -1,4 +1,4 @@
-/* $Id: RuntimeObjectHelper.java,v 1.10 2008-06-17 13:04:54 dvojtise Exp $
+/* $Id: RuntimeObjectHelper.java,v 1.11 2008-09-24 13:50:37 dvojtise Exp $
  * Project   : Kermeta 
  * File      : RuntimeObjectHelper.java
  * License   : EPL
@@ -9,14 +9,15 @@
  */
 package fr.irisa.triskell.kermeta.runtime;
 
+import java.util.ArrayList;
+import java.util.Hashtable;
+import java.util.Map;
+
 import org.kermeta.io.KermetaUnit;
 import org.kermeta.model.KermetaModelHelper;
 
-import java.util.ArrayList;
-
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
 import fr.irisa.triskell.kermeta.language.structure.Property;
-import fr.irisa.triskell.kermeta.modelhelper.ClassDefinitionHelper;
 
 /**
  * this class contains many static operation that helps to deal with runtime object
@@ -160,5 +161,24 @@ public class RuntimeObjectHelper {
 	    ClassDefinition cDef = (ClassDefinition) cl.getTypeDefinition();
 	    
 		return l.contains(cDef);
+	}
+	
+	/**
+	 * Try to compute a string that would help to identify this RuntimeObject
+	 * @param rObj
+	 * @return
+	 */
+	public static String getInfoString(RuntimeObject rObj){
+		String result = rObj.toString()+"(";
+		// try to print data from simple properties (ie. ignore collections)
+		Hashtable<String, RuntimeObject> allProperties = rObj.getProperties();
+		for(Map.Entry<String, RuntimeObject> entry : allProperties.entrySet()){
+			Object simpleValue = getPrimitiveTypeValueFromRuntimeObject(entry.getValue());
+			if(simpleValue != null){
+				result += entry.getKey() + "=\"" + simpleValue+"\";";
+			}
+		}
+		result += ")";
+		return result;
 	}
 }
