@@ -11,7 +11,7 @@ using kermeta::standard
 using kermeta::utils
 
 /* ****************************************************************************
- * $Id: exceptions.kmt,v 1.27 2008-09-04 13:06:21 dvojtise Exp $
+ * $Id: exceptions.kmt,v 1.28 2008-09-24 12:04:45 dvojtise Exp $
  * Project : Kermeta framework
  * Creation date :  
  * File : exception.kmt
@@ -174,7 +174,13 @@ class ConstraintViolatedInv inherits ConstraintViolatedException {}
 class ResourceLoadException inherits Exception { }
 
 /** Occurs when Resource saving fails for some reasons */
-class ResourceSaveException inherits Exception { }
+class ResourceSaveException inherits Exception {
+	/** Object on which the the saved failed
+	 * One can rescue the exception and analyse the structure next to this object, 
+	 * this can give some clue about the faulty structure
+	 */
+	reference failedWhileSaving : Object 
+}
 
 /** Occurs when Resource saving fails because an object refers to an element which 
  * belongs to the Definition of the currently running program */
