@@ -1,4 +1,4 @@
-/*$Id: EscapeChars.java,v 1.1 2008-04-24 09:45:10 dvojtise Exp $
+/*$Id: EscapeChars.java,v 1.2 2008-09-24 10:00:11 dvojtise Exp $
 * Project : fr.irisa.triskell.eclipse.util
 * File : 	HTMLStringUtil.java
 * License : EPL
@@ -252,6 +252,78 @@ public class EscapeChars {
 	     }
 	     return result.toString();
 	   }
+	   
+	   /**
+	    * get some simple regex like *.foo that support only * and ?
+	    * and transform it into a regex that can be used by String.matches
+	    * @param aRegexFragment
+	    * @return
+	    */
+	   public static String forSimpleRegex(String aRegexFragment){
+		     final StringBuilder result = new StringBuilder();
+
+		     final StringCharacterIterator iterator = new StringCharacterIterator(aRegexFragment);
+		     char character =  iterator.current();
+		     while (character != CharacterIterator.DONE ){
+		       /*
+		       * All literals need to have backslashes doubled.
+		       */
+		       if (character == '.') {
+		         result.append("\\.");
+		       }
+		       else if (character == '\\') {
+		         result.append("\\\\");
+		       }
+		       // a ? means we want to match one an only one char
+		       else if (character == '?') {
+		         result.append(".");
+		       }
+		       // * means .*
+		       else if (character == '*') {
+		         result.append(".*");
+		       }
+		       else if (character == '+') {
+		         result.append("\\+");
+		       }
+		       else if (character == '&') {
+		         result.append("\\&");
+		       }
+		       else if (character == ':') {
+		         result.append("\\:");
+		       }
+		       else if (character == '{') {
+		         result.append("\\{");
+		       }
+		       else if (character == '}') {
+		         result.append("\\}");
+		       }
+		       else if (character == '[') {
+		         result.append("\\[");
+		       }
+		       else if (character == ']') {
+		         result.append("\\]");
+		       }
+		       else if (character == '(') {
+		         result.append("\\(");
+		       }
+		       else if (character == ')') {
+		         result.append("\\)");
+		       }
+		       else if (character == '^') {
+		         result.append("\\^");
+		       }
+		       else if (character == '$') {
+		         result.append("\\$");
+		       }
+		       else {
+		         //the char is not a special one
+		         //add it to the result as is
+		         result.append(character);
+		       }
+		       character = iterator.next();
+		     }
+		     return result.toString();
+		   }
 	   
 	   /**
 	    * Escape <tt>'$'</tt> and <tt>'\'</tt> characters in replacement strings. 
