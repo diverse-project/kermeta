@@ -1,4 +1,4 @@
-/*$Id: SortPropertyCommand.java,v 1.3 2008-09-24 13:51:09 dvojtise Exp $
+/*$Id: SortPropertyCommand.java,v 1.4 2008-09-24 15:18:35 dvojtise Exp $
 * Project : fr.irisa.triskell.kermeta.interpreter
 * File : 	SortPropertyCommand.java
 * License : EPL
@@ -46,9 +46,7 @@ public class SortPropertyCommand {
 	 */
 	public void run(){
 		if(sourceRuntimeObjects.size() != ((EList<Object>) eObject.eGet(feature)).size()){
-			String originObjectInfo = RuntimeObjectHelper.getInfoString(originRuntimeObject);
-			
-			// try to 
+			String originObjectInfo = RuntimeObjectHelper.getInfoString(originRuntimeObject);					
 			
 			String msg = "Cannot ensure order of "+ eObject.eClass().getName() + "."  + feature.getName() + " (called on" + 
 			originObjectInfo + ") because of a mismatch in the number of elements in the EMF object and in the RuntimeObject !";
@@ -58,6 +56,10 @@ public class SortPropertyCommand {
 	    			sourceRuntimeObjects.get(0).getFactory().getMemory().getInterpreter().getBasicInterpreter(),
 	    			sourceRuntimeObjects.get(0).getFactory().getMemory(),
 	    			null);
+			RuntimeObject ro_property = RuntimeObjectHelper.getPropertyByName(kre.raised_object,"failedWhileSaving");
+			fr.irisa.triskell.kermeta.runtime.language.Object.set(kre.raised_object,
+					ro_property,
+					originRuntimeObject);
 			throw kre;
 			
 		}
