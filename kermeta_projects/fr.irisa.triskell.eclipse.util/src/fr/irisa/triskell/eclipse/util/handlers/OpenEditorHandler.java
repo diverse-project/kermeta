@@ -1,4 +1,4 @@
-/*$Id: OpenEditorHandler.java,v 1.1 2008-04-01 09:55:43 dvojtise Exp $
+/*$Id: OpenEditorHandler.java,v 1.2 2008-09-24 11:52:46 dvojtise Exp $
 * Project : fr.irisa.triskell.eclipse.util
 * File : 	OpenEditorHandler.java
 * License : EPL
@@ -18,7 +18,6 @@ import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.ui.IEditorDescriptor;
-import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.PartInitException;
@@ -45,7 +44,9 @@ public class OpenEditorHandler extends AbstractHandler {
 	 * the command has been executed, so extract extract the needed information
 	 * from the application context.
 	 */
+	
 	public Object execute(ExecutionEvent event) throws ExecutionException {
+		@SuppressWarnings("unchecked")
 		Map params = event.getParameters();
 		IWorkbenchWindow window = HandlerUtil.getActiveWorkbenchWindowChecked(event);
 		IWorkbenchPage page = window.getActivePage();
