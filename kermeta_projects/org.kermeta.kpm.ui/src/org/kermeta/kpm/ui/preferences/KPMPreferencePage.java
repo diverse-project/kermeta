@@ -9,22 +9,14 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.jface.preference.PreferencePage;
+import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.PaintEvent;
 import org.eclipse.swt.events.PaintListener;
-/* $Id: KPMPreferencePage.java,v 1.1 2008-09-23 14:28:34 dvojtise Exp $
- * Project: KPM UI
- * File: KPMPreferencePage.java
- * License: EPL
- * Copyright: IRISA / INRIA / Universite de Rennes 1
- * ----------------------------------------------------------------------------
- * Creation date: Sep 19, 2008
- * Authors: dvojtise
- */
-
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.graphics.Font;
+import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
@@ -33,22 +25,15 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Label;
-import org.eclipse.ui.IEditorDescriptor;
-import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.IWorkbenchPreferencePage;
-import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.ide.IDE;
-import org.eclipse.ui.part.FileEditorInput;
 import org.kermeta.jface.preference.HelpfulTextFieldEditor;
 import org.kermeta.kpm.KPMPlugin;
 import org.kermeta.kpm.KpmManager;
-import org.kermeta.kpm.ui.Activator;
-
-import fr.irisa.triskell.eclipse.resources.ResourceHelper;
-import fr.irisa.triskell.kermeta.kpm.presentation.KpmEditor;
+import org.kermeta.kpm.preferences.PreferenceConstants;
 
 /**
  * This class represents a preference page that
@@ -68,10 +53,12 @@ public class KPMPreferencePage
 	extends PreferencePage implements
 	IWorkbenchPreferencePage   {
 	
+	public static Image RED_CROSS = ImageDescriptor.createFromFile(KPMPreferencePage.class, "/icons/red_cross.jpg").createImage();
+
 	
 	public KPMPreferencePage() {
 		super();
-		setPreferenceStore(Activator.getDefault().getPreferenceStore());
+		setPreferenceStore(KPMPlugin.getDefault().getPreferenceStore());
 	}
 	
 	HelpfulTextFieldEditor excludedExtensionTextField;
@@ -101,7 +88,7 @@ public class KPMPreferencePage
 		Canvas canvas = new Canvas(group, SWT.NONE);
 	    canvas.addPaintListener(new PaintListener() {
 	      public void paintControl(PaintEvent e) {
-	        e.gc.drawImage(PreferenceConstants.RED_CROSS, 0, 0);
+	        e.gc.drawImage(KPMPreferencePage.RED_CROSS, 0, 0);
 	      }
 	    });
 		
@@ -144,7 +131,7 @@ public class KPMPreferencePage
 		gridData2.heightHint = 100;
 		group2.setLayoutData(gridData2);
 		
-		excludedExtensionTextField = new HelpfulTextFieldEditor(PreferenceConstants.P_EXCLUDED_EXTENSIONS, "&Excluded extension:", group2);		
+		excludedExtensionTextField = new HelpfulTextFieldEditor(PreferenceConstants.P_EXCLUDED_EXTENSIONS, "&Excluded extension:\none line per pattern\n(* = any string, ? = any character)", group2);		
 		Font font = new Font(this.getShell().getDisplay(), "Courier", 8, SWT.NORMAL);
 		excludedExtensionTextField.getTextControl(group2).setFont(font);
 		excludedExtensionTextField.setToolTipText("Files with these extensions will be ignored by KPM");

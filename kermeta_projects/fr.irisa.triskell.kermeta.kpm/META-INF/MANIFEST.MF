@@ -25,5 +25,6 @@ Export-Package: fr.irisa.triskell.kermeta.kpm,
  fr.irisa.triskell.kermeta.kpm.validation,
  org.kermeta.kpm,
  org.kermeta.kpm.internal,
- org.kermeta.kpm.internal.builder
+ org.kermeta.kpm.internal.builder,
+ org.kermeta.kpm.preferences
 Bundle-Activator: org.kermeta.kpm.KPMPlugin

@@ -1,6 +1,6 @@
 
 
-/*$Id: UnitCreator.java,v 1.5 2008-07-17 12:12:18 ftanguy Exp $
+/*$Id: UnitCreator.java,v 1.6 2008-09-24 09:58:49 dvojtise Exp $
 * Project : fr.irisa.triskell.kermeta.kpm
 * File : 	UnitCreator.java
 * License : EPL
@@ -17,10 +17,12 @@ import java.util.Date;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IResource;
+import org.kermeta.kpm.preferences.KPMPreferenceHelper;
 
 import fr.irisa.triskell.kermeta.kpm.KPM;
 import fr.irisa.triskell.kermeta.kpm.KpmFactory;
 import fr.irisa.triskell.kermeta.kpm.Unit;
+import fr.irisa.triskell.string.EscapeChars;
 
 /**
  * This class is used to perform unit creation and to store them into a KPM model.
@@ -100,10 +102,11 @@ abstract public class UnitCreator {
 		//Code to filter the *.java and *.class files
 		if ( resource instanceof IFile ) {
 			file = (IFile) resource;
-			String file_extension = file.getFileExtension();
-			if ( file_extension != null && (file_extension.equals("java") || file_extension.equals("class")) ) {
-				return null;
-			}
+			String fileName = file.getName();
+			for(String pattern : KPMPreferenceHelper.getExcludedExtensions()){
+				if(fileName.matches(EscapeChars.forSimpleRegex(pattern)))
+					return null;
+			}			
 		}
 		
 		Unit unit = createUnit( "platform:/resource" + resource.getFullPath().toString(), false );
