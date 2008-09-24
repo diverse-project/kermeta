@@ -6,18 +6,22 @@
 
 <body>
 <!--
-$Id: history.html,v 1.35 2008-06-13 08:42:41 dvojtise Exp $
+$Id: history.html,v 1.36 2008-09-24 15:50:31 dvojtise Exp $
 -->
 <!-- please follow the template ... -->
 <h1>History of Kermeta development</h1>
 <h2 class="Heading">V1.1.99 (??/??/2008)</h2>
 <h3>New features</h3>
 <ul>
+	<li>Better support for invariants : CheckInvariant now also checks the multiplicities. An attribute has been added to the exception InvariantViolated that point to the faulty object. This allows a recovery and /or analysis of the invariant.</li>
 	<li>Added a preference page to let the user select which logger he wants to use and select the configuration file for log4j</li>
+	<li>Added a preference page to let the user configure some options of KPM. Also added a recovery button to reset KPM to its default configuration.</li>
+	<li>Improved feedback on some errors and exceptions. (For example, ResourceSaveException has now a new attribute pointing to the faulty instance)</li>
 </ul>
 <h3>Improved features</h3>
 <ul>
 	<li>Kermeta perspective displays some additional useful wizards for Metamodel engineering.</li>
+	<li>Improved KermetaDoc view.</li>
 </ul>
 <h3>Bug fixed</h3>
 <ul>
@@ -32,8 +36,8 @@ $Id: history.html,v 1.35 2008-06-13 08:42:41 dvojtise Exp $
 	<li>#5489; <a href="http://gforge.inria.fr/tracker/index.php?func=detail&aid=5489&group_id=32&atid=205">The merger fails to clone the behavior</a></li>
 	<li>#5602; <a href="http://gforge.inria.fr/tracker/index.php?func=detail&aid=5602&group_id=32&atid=205">The io file does not handle platform path (platform:/resource/**)</a></li>
 	<li>#5676; <a href="http://gforge.inria.fr/tracker/index.php?func=detail&aid=5676&group_id=32&atid=205">Bad error trace for a self assignment</a></li>
-	<li>#5676; <a href="http://gforge.inria.fr/tracker/index.php?func=detail&aid=5676&group_id=32&atid=205">Bad error trace for a self assignment</a></li>
 	<li>Content assist problem on windows. (on require and using) It was introducing unix carriage return in the file.</li>
+	<li>Fixed load and save problem of km files.</li>
 </ul>
 <h2 class="Heading">V1.1.0 (03/03/2008)</h2>
 <h3>New features</h3>
