@@ -1,4 +1,4 @@
-/* $Id: GetContainingRefAction.java,v 1.2 2008-05-13 12:01:16 cfaucher Exp $
+/* $Id: GetContainingRefAction.java,v 1.3 2008-09-25 08:28:29 cfaucher Exp $
  * Project    : org.kermeta.emfutils.models.ui
  * File       : GetContainingRefAction.java
  * License    : EPL
@@ -59,7 +59,10 @@ public class GetContainingRefAction implements IObjectActionDelegate {
 		}
 		
 		text += "\n\nIdentification of this node: \n" +
-		EcoreUtil.getIdentification(eObj);
+			EcoreUtil.getIdentification(eObj);
+		
+		text += "\n\ngetURI: \n" +
+			EcoreUtil.getURI(eObj);
 		
 		MessageDialog.openInformation(
 			shell,
