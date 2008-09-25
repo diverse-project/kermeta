@@ -1,4 +1,4 @@
-/* $Id: Postprocess.kmt,v 1.5 2008-09-25 09:10:33 cfaucher Exp $ 
+/* $Id: Postprocess.kmt,v 1.6 2008-09-25 21:49:24 cfaucher Exp $ 
  * Creation : August 27, 2008
  * Licence  : EPL 
  * Copyright:
@@ -89,6 +89,8 @@ aspect class ModelingUnit {
 	end
 	
 	operation cleanEObject() : Void is do
-		getEClassifierByQualifiedName("ecore::EObject").asType(EClass).eOperations.clear()
+		if not getEClassifierByQualifiedName("ecore::EObject").isVoid() then
+			getEClassifierByQualifiedName("ecore::EObject").asType(EClass).eOperations.clear()
+		end
 	end
 }

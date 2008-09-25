@@ -1,4 +1,4 @@
-/* $Id: ModelingUnitHelper.kmt,v 1.7 2008-09-10 13:19:52 cfaucher Exp $
+/* $Id: ModelingUnitHelper.kmt,v 1.8 2008-09-25 21:49:59 cfaucher Exp $
  * Creation date: May 19, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -57,6 +57,9 @@ aspect class ModelingUnit {
 	
 	
 	operation retrievePackage( qname : String ) : Package is do
+		
+		result := void
+		
 		var set_qname : OrderedSet<String> init qname.split("::")
 		if set_qname.size()==0 then
 			set_qname.add(qname)
@@ -66,22 +69,27 @@ aspect class ModelingUnit {
 			p.name == set_qname.at(0)
 		}
 		
-		from var i : Integer init 1
-		until i>=(set_qname.size())
-		loop
-			pack := pack.nestedPackage.detect{ p |
-				p.name == set_qname.at(i)
-			}
-			i := i + 1
+		if not pack.isVoid() then
+			from var i : Integer init 1
+			until i>=(set_qname.size())
+			loop
+				pack := pack.nestedPackage.detect{ p |
+					p.name == set_qname.at(i)
+				}
+				i := i + 1
+			end
+			
+			result := pack
 		end
 		
-		result := pack
 	end
 	
 	/**
 	 * Get a EClassifer contained in the given Modeling Unit by qualifiedName
 	 */
 	operation getEClassifierByQualifiedName( qname : String ) : EClassifier is do
+		result := void
+		
 		var set_qname : OrderedSet<String> init qname.split("::")
 		if set_qname.size()==0 then
 			set_qname.add(qname)
@@ -91,17 +99,22 @@ aspect class ModelingUnit {
 			p.name == set_qname.at(0)
 		}
 		
-		from var i : Integer init 1
-		until i>=(set_qname.size()-1)
-		loop
-			pack := pack.eSubpackages.detect{ p |
-				p.name == set_qname.at(i)
+		if not pack.isVoid() then
+		
+			from var i : Integer init 1
+			until i>=(set_qname.size()-1)
+			loop
+				pack := pack.eSubpackages.detect{ p |
+					p.name == set_qname.at(i)
+				}
+				i := i + 1
+			end
+			
+			result := pack.eClassifiers.detect{ c |
+				c.name == set_qname.at(set_qname.size()-1)
 			}
-			i := i + 1
+		
 		end
 		
-		result := pack.eClassifiers.detect{ c |
-			c.name == set_qname.at(set_qname.size()-1)
-		}
 	end
 }
