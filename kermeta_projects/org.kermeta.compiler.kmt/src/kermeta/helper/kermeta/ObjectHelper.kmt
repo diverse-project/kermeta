@@ -1,4 +1,4 @@
-/* $Id: ObjectHelper.kmt,v 1.11 2008-09-19 17:44:50 cfaucher Exp $
+/* $Id: ObjectHelper.kmt,v 1.12 2008-09-25 08:35:41 cfaucher Exp $
  * Creation date: January 29, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -29,6 +29,26 @@ aspect class Object {
 
 		from var i : Integer init 0
         until i==1
+        loop
+            if not obj.container.isVoid() then
+            	if obj.container.isInstanceOf(type) then
+            		i := 1
+            		result := obj.container
+            	else
+            		obj := obj.container
+            	end
+            else
+            	i := 1
+			end
+        end
+	end
+	
+	operation getContainerAsTypeIn(type : Type, stop_type : Type) : Object is do
+		result := void
+		var obj : Object init self
+
+		from var i : Integer init 0
+        until i==1 or obj.isInstanceOf(stop_type)
         loop
             if not obj.container.isVoid() then
             	if obj.container.isInstanceOf(type) then
