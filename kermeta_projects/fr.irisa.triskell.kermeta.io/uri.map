@@ -1,4 +1,4 @@
-# $Id: uri.map,v 1.16 2008-04-25 10:15:47 ftanguy Exp $
+# $Id: uri.map,v 1.17 2008-09-25 08:18:46 dvojtise Exp $
 #
 #"platform:/plugin/fr.irisa.triskell.kermeta/"		"file:/C:/eclipse3.1.1/eclipse/plugins/fr.irisa.triskell.kermeta_0.1.1/"
 
@@ -10,12 +10,12 @@
 # but, please do not commit them it into the CVS
 #"platform:/plugin/"		"file:/home/paco/Desktop/KermetaCVS/"
 #"platform:/resource/"		"file:/home/paco/Desktop/KermetaCVS/"
-"platform:/plugin/"		"file:/home/paco/workspace/"
-"platform:/resource/"		"file:/home/paco/workspace/"
-"kconf:/loader/"			"file:/home/paco/workspace-cvs/org.kermeta.io.loader/instances/"
+#"platform:/plugin/"		"/home/paco/Desktop/KermetaCVS/"
+#"platform:/resource/"		"/home/paco/Desktop/KermetaCVS/"
 #"platform:/plugin/"			"file://tmp/kermeta_build/src/plugins/"
 #"platform:/resource/"		"file://tmp/kermeta_build/src/plugins/"
-#"platform:/plugin/"		"file:/C:/eclipse3.3/eclipse/workspace/"
-#"platform:/resource/"		"file:/C:/eclipse3.3/eclipse/workspace/"
+"platform:/plugin/"		"file:/C:/eclipse3.3/eclipse/workspace/"
+"platform:/resource/"		"file:/C:/eclipse3.3/eclipse/workspace/"
+"kconf:/loader/"			"file:/C:/eclipse3.3/eclipse/workspace/org.kermeta.io.loader/instances/"
 
 

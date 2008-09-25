@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Ket Text Editor Plug-in
 Bundle-SymbolicName: org.kermeta.ket.texteditor;singleton:=true
-Bundle-Version: 1.1.99.qualifier
+Bundle-Version: 1.2.0
 Require-Bundle: org.eclipse.ui.ide,
  org.eclipse.core.runtime,
  fr.irisa.triskell.kermeta.model,

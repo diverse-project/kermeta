@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Ecore MDK Plug-in
 Bundle-SymbolicName: fr.irisa.triskell.kermeta.ecore; singleton:=true
-Bundle-Version: 1.1.99.qualifier
+Bundle-Version: 1.2.0
 Bundle-Vendor: IRISA/INRIA
 Require-Bundle: fr.irisa.triskell.kermeta.interpreter,
  org.eclipse.core.runtime,

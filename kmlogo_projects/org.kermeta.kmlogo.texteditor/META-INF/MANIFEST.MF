@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: KmLogo Texteditor Plug-in
 Bundle-SymbolicName: org.kermeta.kmlogo.texteditor;singleton:=true
-Bundle-Version: 1.1.1
+Bundle-Version: 1.2.0
 Bundle-Activator: org.kermeta.kmlogo.texteditor.Activator
 Bundle-Vendor: IRISA/INRIA
 Require-Bundle: org.eclipse.ui,

@@ -2,7 +2,7 @@
 <feature
       id="fr.irisa.triskell.kermeta.samples.fsm"
       label="Finite State Machine Kermeta sample"
-      version="1.1.99.qualifier"
+      version="1.2.0"
       provider-name="IRISA/INRIA">
 
    <description url="http://www.kermeta.org/examples">
