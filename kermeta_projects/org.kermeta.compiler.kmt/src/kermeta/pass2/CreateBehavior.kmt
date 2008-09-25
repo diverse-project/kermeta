@@ -1,4 +1,4 @@
-/* $Id: CreateBehavior.kmt,v 1.76 2008-09-25 08:38:01 cfaucher Exp $
+/* $Id: CreateBehavior.kmt,v 1.77 2008-09-25 21:50:31 cfaucher Exp $
  * Creation date: January 21, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -203,6 +203,8 @@ package structure {
 	
 	aspect class ParameterizedType {
 		method createBehaviorJava(context : KM2EcoreContext) : String from Type is do
+		
+			result := ""
 
 			if self.typeDefinition.getEMFInstanceClassName()!="" then
 				result := self.typeDefinition.getEMFInstanceClassName()
@@ -213,80 +215,52 @@ package structure {
 			//Look the param binding
 			var str_tpb : String init ""
 			var i : Integer init 0
-			var i_ : Integer init 0
 			self.typeParamBinding.each{ tpb |
 				
-				if i >= 1 then
-					str_tpb := str_tpb + ", "
-				end
-				
-				if tpb.type.isVoid() then
-					stdio.writeln("tpb.type.isVoid(): " + self.toString)
-				end
-				
 				if not context.ftSuffixActivation then
+					if i >= 1 then
+						str_tpb := str_tpb + ", "
+					end
+				
 					if not tpb.type.isVoid() then
 						str_tpb := str_tpb + tpb.type.createBehaviorJava(context)
+					else
+						// This case occurs because of the Kermeta bug #6260
+						//stdio.writeln("tpb.type.isVoid(): " + self.toString)
 					end
 				else
+					
 					var type_from_map : Type init context.ftMapTypeStack.peek().getValue(tpb.type)
 					if not type_from_map.isVoid() then
 						context.ftSuffixActivation := false
 						str_tpb := str_tpb + type_from_map.createBehaviorJava(context)
 						context.ftSuffixActivation := true
 					else
-						//if not context.ftProductTypeStack.peek().getTypeByIndex(i).isVoid() then
 						
-						/*
-						********stdio.writeln("typeParam: " + "i:" + i.toString() + " tpb: " + tpb.type.createBehaviorJava(context))
-						stdio.writeln("typeParam: " + "i:" + i.toString() + " " + self.toString() + " -h " + self.hashcode().toString() +
-						 " - " + context.ftProductTypeStack.peek().getTypeByIndex(i).toString() + " -h " +
-						 context.ftProductTypeStack.peek().getTypeByIndex(i).hashcode().toString())
-						 **************
-						 */
-						 
-						 /* if context.ftProductTypeStack.peek().getTypeByIndex(i).isInstanceOf(ParameterizedType) then
-						 context.ftProductTypeStack.peek().getTypeByIndex(i).asType(ParameterizedType).typeParamBinding.each{ ttt |
-						 	stdio.writeln("typeParam_: " + ttt.type.createBehaviorJava(context))
-						 }
-						 end*/
-						 
-						//if context.ftProductTypeStack.peek().getTypeByIndex(i)!= self then
-							//str_tpb := str_tpb + context.ftProductTypeStack.peek().getTypeByIndex(i).createBehaviorJava(context)
-						//else
-							/*context.ftSuffixActivation := false
-							var ii : Integer init 0
-							context.ftProductTypeStack.peek().getTypeByIndex(i_).asType(ParameterizedType).typeParamBinding.each{ ttt |
-						 		if ii==1 then
-						 			str_tpb := str_tpb + ", toto"
-						 		else
-						 			ii := 1
-						 		end
-						 		str_tpb := str_tpb + ttt.type.createBehaviorJava(context)
-							}
-							context.ftSuffixActivation := true*/
+						// If we are in the context of FunctonType binding (context.ftSuffixActivation==true) and the current Type is self
+						// then we have to reset result
+						if context.ftProductTypeStack.peek().getTypeByIndex(i) == self then
+							result := ""
+						end							
 							
+						context.ftSuffixActivation := false
+						str_tpb := str_tpb + context.ftProductTypeStack.peek().getTypeByIndex(i).createBehaviorJava(context)
+						context.ftSuffixActivation := true
 							
-							context.ftSuffixActivation := false
-							str_tpb := str_tpb + context.ftProductTypeStack.peek().getTypeByIndex(i).createBehaviorJava(context)
-							//str_tpb := str_tpb + context.ftProductTypeStack.peek().getTypeByIndex(0).asType(ParameterizedType).typeParamBinding.first().createBehaviorJava(context)
-							context.ftSuffixActivation := true
-							
-							//i_ := i_ + 1
-							
-						//end
-						
-						//end
 					end
 				end
 				
 				i := i + 1
 			}
+			
 			if str_tpb!="" then
-				result := result + "<" + str_tpb + ">"
+				if result != "" then
+					result := result + "<" + str_tpb + ">"
+				else
+					result := str_tpb
+				end
 			end
-			result := result + ""
-			//stdio.writeln("result: " + result)
+			
 		end
 	}
 	
@@ -300,7 +274,7 @@ package structure {
 			
 				var type_from_map : Type init context.ftMapTypeStack.peek().getValue(self)
 				if not type_from_map.isVoid() then
-					stdio.writeln("++++++++++======== " + self.toString)
+					stdio.writeln("Please contact the Kermeta Development team, if you are in this case [ObjectTypeVariable::createBehaviorJava - not type_from_map.isVoid()] " + self.toString)
 					context.ftSuffixActivation := false
 					result := type_from_map.createBehaviorJava(context)
 					context.ftSuffixActivation := true
@@ -342,7 +316,6 @@ package structure {
 	
 		operation getTypeByIndex(index : Integer) : Type is do
 		
-			//stdio.writeln("ProductType " + self.toString + " " + index.toString)
 			result := void
 			if index < self.type.size() then
 				if self.type.elementAt(index).isInstanceOf(FunctionType) then
@@ -427,9 +400,7 @@ package behavior {
 				str_statement := str_statement.replace(context.RETURN_EXPRESSION_TO_REPLACE + "result", "result")
 				
 				javaCode.append(context.beforeLambdaExpressionResult)
-				//javaCode.append(context.beforeFunctionTypeResult)
 				context.beforeLambdaExpressionResult := ""
-				//context.beforeFunctionTypeResult := ""
 				
 				javaCode.append("\n\t")
 				
@@ -492,15 +463,12 @@ package behavior {
 			if self.containsRescue() then
 				context.pushKRErrorStack()
 				javaCode.append("} catch( " + context.JAVA_CLASS_EXCEPTION_SWITCHER + " " + context.VARIABLE_EXCEPTION_SWITCHER + "_" + context.kRErrorStack.peek() + " ) {\n")
-				//result := result + "(" + self.exceptionType.createBehaviorJava(context) + " " + self.exceptionName + ")"
 				
 				self.rescueBlock.each{ e |
 					javaCode.append(e.createBehaviorJava(context))
 				}
 				javaCode.append("\n}\n")
 				context.kRErrorStack.pop()
-			else
-				//javaCode.append("} catch( Exception e ) {\ne.printStackTrace();\n}\n")
 			end
 
 			//end of a block 
@@ -571,8 +539,6 @@ package behavior {
 			var static_call : String init ""
 			
 			if self.isCallFeatureAsStaticOperation() then
-				
-				//stdio.writeln("self.staticOperation: " + self.staticOperation.name)
 				
 				if self.callsFunctionType() then
 					
@@ -671,7 +637,7 @@ package behavior {
 							end
 						end
 					else
-						result := tgt.createBehaviorJava(context) + result.replace(context.SELF_EXPRESSION_TO_REPLACE, context.resultOfLastFt)
+						result := tgt.createBehaviorJava(context) + result.replace(context.SELF_EXPRESSION_TO_REPLACE, tgt.asType(CallFeature).resultOfLastFt)
 					end
 				end
 				
@@ -870,31 +836,13 @@ package behavior {
 					
 					context.ftSuffixActivation := true
 					
-					// + "(" + type_param_ + ") "
-					//stdio.writeln("--: " + "inc_param: " + inc_param.toString() + " - " + self.getContainerAsType(Operation).asType(Operation).qualifiedName)
-					//stdio.writeln("self.parameters: " + theLambdaExp.toString + " - " + self.name.toString + " - " + self.parameters.toString)
-					
-					str_toInclude := str_toInclude /*+ context.printLbdExpSuffix()*/ + " = " + self.parameters.elementAt(inc_param).createBehaviorJava(context) + ";\n"
-					//context.ftSuffixActivation := false
+					str_toInclude := str_toInclude + " = " + self.parameters.elementAt(inc_param).createBehaviorJava(context) + ";\n"
 					
 					inc_param := inc_param + 1
 				}
 				
+				
 				//Add the compiled version of the body of the current LambdaExpression
-				
-				//added 08-08-09
-				/*var type_label : String init ""
-				if self.container.isInstanceOf(CallFeature) and theLambdaExp.staticType.isInstanceOf(FunctionType) then
-					var lambdaExp_returnType : String init theLambdaExp.staticType.asType(FunctionType).right.createBehaviorJava(context)
-					if not Operation.new().isVoidType(lambdaExp_returnType) then
-						type_label := lambdaExp_returnType
-					end
-				end
-				if type_label!="" then
-					result := result + "\n" + type_label + " result_lambda = null;"
-					context.resultLastStatementStack.push("result_lambda = " + context.TYPE_SEPARATOR + type_label)
-				end*/
-				
 				context.afterLbdExpActivation := false
 				
 				result := result + "//BIle:" + self.name + "\n"

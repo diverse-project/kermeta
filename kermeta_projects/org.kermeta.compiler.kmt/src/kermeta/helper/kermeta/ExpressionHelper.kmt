@@ -1,4 +1,4 @@
-/* $Id: ExpressionHelper.kmt,v 1.21 2008-09-19 17:45:23 cfaucher Exp $
+/* $Id: ExpressionHelper.kmt,v 1.22 2008-09-25 21:50:31 cfaucher Exp $
  * Creation date: Jul 25, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -351,6 +351,8 @@ aspect class CallVariable {
 
 aspect class CallFeature {	
 	
+	attribute resultOfLastFt : String [0..1]
+	
 	operation isParameter() : Boolean is do
 		result := false
 		if self.container.isInstanceOf(CallFeature) then
@@ -472,7 +474,8 @@ aspect class CallFeature {
 		if tgt.callsFunctionType() then
 			// FIXME CF 08-09-10
 			context.ftSuffixActivation := true
-			context.ftContextualSelf := context.SELF_EXPRESSION_TO_REPLACE// + context.printFtSuffix()
+			
+			context.ftContextualSelf := context.SELF_EXPRESSION_TO_REPLACE
 		else
 			/*if tgt.isInstanceOf(CallFeature) then
 				var tmp_cl : CallFeature init tgt.asType(CallFeature)
@@ -573,7 +576,8 @@ aspect class CallFeature {
 		// End of the Management of the result last statement
 		
 		if (callElement == "") and (not Operation.new().isVoidType(self.staticType.getTypeName())) then
-			context.resultOfLastFt := "result" + context.printFtSuffix()
+			self.resultOfLastFt := "result" + context.printFtSuffix()
+			context.resultOfLastFt := self.resultOfLastFt
 		end
 		
 		ft_str := ft_str + "//EIft:" + self.staticOperation.name + "\n"
