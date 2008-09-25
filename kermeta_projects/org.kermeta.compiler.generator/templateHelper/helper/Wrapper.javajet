@@ -2,12 +2,12 @@
 	 package="org.kermeta.compiler.generator.templates"
 	 imports="org.eclipse.emf.codegen.util.* org.eclipse.emf.codegen.ecore.genmodel.* fr.irisa.triskell.eclipse.ecore.* org.kermeta.compiler.generator.helper.model.* org.kermeta.simk.* fr.irisa.triskell.kermeta.language.structure.NamedElement"
 	 class="Wrapper"
-	 version="$Id: Wrapper.javajet,v 1.5 2008-08-27 16:23:27 cfaucher Exp $" %>
+	 version="$Id: Wrapper.javajet,v 1.6 2008-09-25 09:41:35 cfaucher Exp $" %>
 <%SMContext smContext = (SMContext) argument;%>
 
 <%SMClass wrapperClass = smContext.getSMClass();%>
 
-package <%=smContext.getQualifiedNameFinalPackage()%>;
+package <%=smContext.getFinalPackageQName()%>;
 
 
 /**
@@ -16,7 +16,7 @@ package <%=smContext.getQualifiedNameFinalPackage()%>;
  */
 public class <%=wrapperClass.getName()%> {
 
-	<% for(StaticMethod helperMethod : smContext.getStaticMethods()) { %>
+	<% for(SMMethod helperMethod : smContext.getSMMethods()) { %>
 	
 	<% String typeParameters = "<G>";%>
 	
