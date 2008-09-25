@@ -521,13 +521,13 @@ public class ObjectUtil {
 			return allSuperTypes_hashtable.get(self_qName);
 		}
 		
-		kermeta.standard.Bag<kermeta.language.structure.Type> allSuperClasses = StandardFactory.eINSTANCE.createBag();
+		kermeta.standard.Set<kermeta.language.structure.Type> allSuperClasses = StandardFactory.eINSTANCE.createSet();
 
-		kermeta.standard.Bag<kermeta.language.structure.Type> superClasses = StandardFactory.eINSTANCE.createBag();
+		kermeta.standard.Set<kermeta.language.structure.Type> superClasses = StandardFactory.eINSTANCE.createSet();
 
 		superClasses
 				.addAll(org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
-						.<kermeta.language.structure.Type> convertAsBag(self
+						.<kermeta.language.structure.Type> convertAsSet(self
 								.getSuperType()));
 
 		while ( !superClasses.isEmpty() ) {
@@ -557,7 +557,7 @@ public class ObjectUtil {
 
 								temp
 										.addAll(org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
-												.<kermeta.language.structure.Type> convertAsOrderedSet(((kermeta.language.structure.ClassDefinition) ((kermeta.language.structure.ParameterizedType) s_lbdExp38).getTypeDefinition()).getSuperType()));
+												.<kermeta.language.structure.Type> convertAsBag(((kermeta.language.structure.ClassDefinition) ((kermeta.language.structure.ParameterizedType) s_lbdExp38).getTypeDefinition()).getSuperType()));
 							}
 
 							//EIle:func
