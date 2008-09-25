@@ -1,4 +1,4 @@
-/* $Id: KM2EcoreContext.kmt,v 1.42 2008-09-19 17:35:54 cfaucher Exp $
+/* $Id: KM2EcoreContext.kmt,v 1.43 2008-09-25 08:34:58 cfaucher Exp $
  * Creation date: February 14, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -108,6 +108,7 @@ class KM2EcoreContext {
 	//attribute leftAssign : String [1..1]
 	attribute SELF_EXPRESSION_TO_REPLACE : String [1..1]
 	attribute RETURN_EXPRESSION_TO_REPLACE : String [1..1]
+	attribute RETURN_EXPRESSION_TO_REPLACE_SPECIAL : String [1..1]
 	attribute SEPARATOR_STATEMENT_FT : String [1..1]
 	attribute PREVIOUS_STATEMENT_FT : String [1..1]
 	attribute TYPE_SEPARATOR : String [1..1]
@@ -119,8 +120,6 @@ class KM2EcoreContext {
 	/********/
 	
 	reference current_valueType : ClassDefinition [0..1]
-
-	attribute lastStatementStack : Stack<String> [1..1]	
 	
 	attribute resultOfLastFt : String [0..1]
 	
@@ -161,8 +160,6 @@ class KM2EcoreContext {
 		self.ftProductTypeStack := Stack<ProductType>.new()
 		
 		self.ftMapTypeStack := Stack<Hashtable<Type, Type>>.new()
-		
-		self.lastStatementStack := Stack<String>.new()
 		
 		self.resultLastStatementStack := Stack<String>.new
 		self.inc_resultLastStatementStack := 0
@@ -212,6 +209,7 @@ class KM2EcoreContext {
 		self.NOT_EVALUATED_MESSAGE := "//FIXME This statement cannot be evaluated without an assignment: "
 		self.SELF_EXPRESSION_TO_REPLACE := "SELF_EXPRESSION_TO_REPLACE_STR"
 		self.RETURN_EXPRESSION_TO_REPLACE := "RETURN_EXPRESSION_TO_REPLACE_STR"
+		self.RETURN_EXPRESSION_TO_REPLACE_SPECIAL := "RETURN_EXPRESSION_TO_REPLACE_SPECIAL_STR"
 		self.SEPARATOR_STATEMENT_FT := "SEPARATOR_STATEMENT_FT_STR"
 		self.PREVIOUS_STATEMENT_FT := "PREVIOUS_STATEMENT_FT_STR"
 		self.TYPE_SEPARATOR := "TYPE_SEPARATOR"
