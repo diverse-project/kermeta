@@ -1,4 +1,4 @@
-/* $Id: CreateBehavior.kmt,v 1.75 2008-09-23 13:01:34 cfaucher Exp $
+/* $Id: CreateBehavior.kmt,v 1.76 2008-09-25 08:38:01 cfaucher Exp $
  * Creation date: January 21, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -422,6 +422,7 @@ package behavior {
 
 				end
 				
+				//FIXME CF Maybe we could find a better solution
 				str_statement := str_statement.replace(context.SEPARATOR_STATEMENT_FT + "//", "//")
 				str_statement := str_statement.replace(context.RETURN_EXPRESSION_TO_REPLACE + "result", "result")
 				
@@ -432,15 +433,8 @@ package behavior {
 				
 				javaCode.append("\n\t")
 				
-				
-				
 				//if the given statement is the last one
 				if i_stm == (nbrStm-1) then
-					
-					//FIXME The 3 following lines of code should be deprecated
-					if context.lastStatementStack.size()>0 then
-						javaCode.append(context.lastStatementStack.pop())
-					end
 					
 					if stm.mustBeAssigned() then
 						if self.container.isInstanceOf(Operation) then
@@ -452,7 +446,6 @@ package behavior {
 								if self.container.container.isInstanceOf(Block) and (context.resultLastStatementStack.size()==0) then
 									javaCode.append(context.NOT_EVALUATED_MESSAGE)
 								else
-									//javaCode.append(context.getResultLastStatementType() + " " + stm.asType(Expression).staticType.createBehaviorJava(context) + " ttttt ")
 									if context.getResultLastStatementType() == stm.asType(Expression).staticType.createBehaviorJava(context) then
 										javaCode.append(context.getResultLastStatementId())
 									end
@@ -461,12 +454,16 @@ package behavior {
 						end
 					else
 						if stm.isInstanceOf(CallFeature) and (context.resultLastStatementStack.size()>0) then
-							//javaCode.append(context.getResultLastStatementType() + " " + stm.asType(Expression).staticType.createBehaviorJava(context) + " ttttt ")
+
 							if context.getResultLastStatementType() == stm.asType(Expression).staticType.createBehaviorJava(context) then
 								if stm.callsFunctionType() then
 									str_statement := str_statement + context.getResultLastStatementId() + context.resultOfLastFt + ";\n"
 								else
-									javaCode.append(context.getResultLastStatementId())
+									if str_statement.contains(context.RETURN_EXPRESSION_TO_REPLACE_SPECIAL) then
+										str_statement := str_statement.replace(context.RETURN_EXPRESSION_TO_REPLACE_SPECIAL, context.getResultLastStatementId())
+									else
+										javaCode.append(context.getResultLastStatementId())
+									end
 								end
 							end
 						end
@@ -474,6 +471,13 @@ package behavior {
 				else
 					if stm.mustBeAssigned() then
 						javaCode.append(context.NOT_EVALUATED_MESSAGE)
+					end
+				end
+				
+				if str_statement.contains(context.RETURN_EXPRESSION_TO_REPLACE_SPECIAL) then
+					// We have to remove the context.RETURN_EXPRESSION_TO_REPLACE_SPECIAL, but not its setter in the operation KM2EcoreContext::initializeConstants
+					if not str_statement.contains( "(\"" + context.RETURN_EXPRESSION_TO_REPLACE_SPECIAL + "\")") then
+						str_statement := str_statement.replace(context.RETURN_EXPRESSION_TO_REPLACE_SPECIAL, "")
 					end
 				end
 				
@@ -659,8 +663,11 @@ package behavior {
 							//The result identifier of the function type is printing for calling the following methods
 							//eg: self.select{...}.size() => compiling of the FT + result_ft1.size();
 							if self.container.isInstanceOf(CallExpression) and (not self.container.callsFunctionType()) then
-								//result := result + "self.container: " + self.container.toString + " - " + tgt.toString + " - "
-								result := result + context.PREVIOUS_STATEMENT_FT + context.RETURN_EXPRESSION_TO_REPLACE + context.resultOfLastFt
+								var resultPrefix : String init ""
+								if self.getContainerAsTypeIn(Assignment, Block).isVoid() then
+									resultPrefix := context.RETURN_EXPRESSION_TO_REPLACE_SPECIAL
+								end
+								result := result + resultPrefix + context.PREVIOUS_STATEMENT_FT + context.RETURN_EXPRESSION_TO_REPLACE + context.resultOfLastFt
 							end
 						end
 					else
@@ -1311,20 +1318,10 @@ package behavior {
 			result := result + "\n\n\tif( " + context.getIfConditionId() + " ) "
 			
 			if not self.thenBody.isVoid() then 
-				
-				/*if not Operation.new().isVoidType(self.staticType.getTypeName()) then
-					context.lastStatementStack.push(context.getResultLastStatementId() + " = ")
-				end*/
-				
 				result := result + self.thenBody.createBehaviorJava(context) + "\n"
 			end
 			if not self.elseBody.isVoid() then
 				result := result + " else "
-				
-				/*if not Operation.new().isVoidType(self.staticType.getTypeName()) then
-					context.lastStatementStack.push(context.getResultLastStatementId() + " = ")
-				end*/
-				
 				result := result + self.elseBody.createBehaviorJava(context) + "\n"
 			end
 			
