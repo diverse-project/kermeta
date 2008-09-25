@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <genmodel:GenModel xmi:version="2.0"
     xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
-    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" copyrightText="$Id: simk.genmodel,v 1.13 2008-08-28 07:30:41 cfaucher Exp $&#xD;&#xA;Project : org.kermeta.simk&#xD;&#xA;License : EPL&#xD;&#xA;Copyright : IRISA / INRIA / Universite de Rennes 1&#xD;&#xA;----------------------------------------------------------------------------&#xD;&#xA;Creation date : 30 nov. 07&#xD;&#xA;Authors : Cyril Faucher &lt;cfaucher@irisa.fr> (first iteration)"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" copyrightText="$Id: simk.genmodel,v 1.14 2008-09-25 08:50:45 cfaucher Exp $&#xD;&#xA;Project : org.kermeta.simk&#xD;&#xA;License : EPL&#xD;&#xA;Copyright : IRISA / INRIA / Universite de Rennes 1&#xD;&#xA;----------------------------------------------------------------------------&#xD;&#xA;Creation date : 30 nov. 07&#xD;&#xA;Authors : Cyril Faucher &lt;cfaucher@irisa.fr> (first iteration)"
     modelDirectory="/org.kermeta.simk/src" creationSubmenus="true" editDirectory="/org.kermeta.simk/src"
     editorDirectory="/org.kermeta.simk/src" modelPluginID="org.kermeta.simk" templateDirectory=""
-    redirection="" forceOverwrite="true" modelName="Simk" modelPluginClass="" reflectiveDelegation="true"
+    redirection="" forceOverwrite="true" modelName="Simk" modelPluginClass="" updateClasspath="false"
+    featureMapWrapperInterface="" featureMapWrapperInternalInterface="" reflectiveDelegation="true"
     testsDirectory="" importerID="org.eclipse.emf.importer.ecore" featureDelegation="Reflective"
     containmentProxies="true" complianceLevel="5.0" copyrightFields="false" publicConstructors="true"
     optimizedHasChildren="true">
@@ -21,27 +22,34 @@
       <genEnumLiterals ecoreEnumLiteral="simk.ecore#//SMUsage/Runner"/>
       <genEnumLiterals ecoreEnumLiteral="simk.ecore#//SMUsage/Invariant"/>
     </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="simk.ecore#//SMAccess">
+      <genEnumLiterals ecoreEnumLiteral="simk.ecore#//SMAccess/private"/>
+      <genEnumLiterals ecoreEnumLiteral="simk.ecore#//SMAccess/protected"/>
+      <genEnumLiterals ecoreEnumLiteral="simk.ecore#//SMAccess/public"/>
+    </genEnums>
     <genClasses ecoreClass="simk.ecore#//SIMKModel">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference simk.ecore#//SIMKModel/sMContexts"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference simk.ecore#//SIMKModel/staticMethods"/>
-      <genOperations ecoreOperation="simk.ecore#//SIMKModel/getNextId"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference simk.ecore#//SIMKModel/sMMethods"/>
     </genClasses>
-    <genClasses ecoreClass="simk.ecore#//StaticMethod">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference simk.ecore#//StaticMethod/sMParameters"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference simk.ecore#//StaticMethod/sMReturn"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference simk.ecore#//StaticMethod/sMContext"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute simk.ecore#//StaticMethod/typeParameters"/>
-      <genFeatures createChild="false" propertyMultiLine="true" ecoreFeature="ecore:EAttribute simk.ecore#//StaticMethod/body"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute simk.ecore#//StaticMethod/usages"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference simk.ecore#//StaticMethod/parentMethod"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference simk.ecore#//StaticMethod/parentReference"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference simk.ecore#//StaticMethod/parentAttribute"/>
-      <genOperations ecoreOperation="simk.ecore#//StaticMethod/getParentMethodFromModel"/>
+    <genClasses ecoreClass="simk.ecore#//SMMethod">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference simk.ecore#//SMMethod/sMParameters"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference simk.ecore#//SMMethod/sMReturn"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference simk.ecore#//SMMethod/sMContext"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute simk.ecore#//SMMethod/typeParameters"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute simk.ecore#//SMMethod/body"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute simk.ecore#//SMMethod/usages"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference simk.ecore#//SMMethod/parentEOperation"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference simk.ecore#//SMMethod/parentEReference"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference simk.ecore#//SMMethod/parentEAttribute"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute simk.ecore#//SMMethod/access"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute simk.ecore#//SMMethod/static"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute simk.ecore#//SMMethod/abstract"/>
+      <genOperations ecoreOperation="simk.ecore#//SMMethod/getParentEOperationFromModel"/>
     </genClasses>
     <genClasses ecoreClass="simk.ecore#//SMContext">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference simk.ecore#//SMContext/staticMethods"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference simk.ecore#//SMContext/sMMethods"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference simk.ecore#//SMContext/sMClass"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute simk.ecore#//SMContext/qualifiedNameFinalPackage"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute simk.ecore#//SMContext/finalPackageQName"/>
     </genClasses>
     <genClasses ecoreClass="simk.ecore#//SMClass">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute simk.ecore#//SMClass/usages"/>

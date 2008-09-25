@@ -1,5 +1,5 @@
 /**
- * $Id: SimkFactoryImpl.java,v 1.6 2008-08-26 09:14:29 cfaucher Exp $
+ * $Id: SimkFactoryImpl.java,v 1.7 2008-09-25 08:50:46 cfaucher Exp $
  * Project : org.kermeta.simk
  * License : EPL
  * Copyright : IRISA / INRIA / Universite de Rennes 1
@@ -7,7 +7,7 @@
  * Creation date : 30 nov. 07
  * Authors : Cyril Faucher <cfaucher@irisa.fr> (first iteration)
  *
- * $Id: SimkFactoryImpl.java,v 1.6 2008-08-26 09:14:29 cfaucher Exp $
+ * $Id: SimkFactoryImpl.java,v 1.7 2008-09-25 08:50:46 cfaucher Exp $
  */
 package org.kermeta.simk.impl;
 
@@ -67,7 +67,7 @@ public class SimkFactoryImpl extends EFactoryImpl implements SimkFactory {
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
 			case SimkPackage.SIMK_MODEL: return createSIMKModel();
-			case SimkPackage.STATIC_METHOD: return createStaticMethod();
+			case SimkPackage.SM_METHOD: return createSMMethod();
 			case SimkPackage.SM_CONTEXT: return createSMContext();
 			case SimkPackage.SM_CLASS: return createSMClass();
 			case SimkPackage.SM_PARAMETER: return createSMParameter();
@@ -87,6 +87,8 @@ public class SimkFactoryImpl extends EFactoryImpl implements SimkFactory {
 		switch (eDataType.getClassifierID()) {
 			case SimkPackage.SM_USAGE:
 				return createSMUsageFromString(eDataType, initialValue);
+			case SimkPackage.SM_ACCESS:
+				return createSMAccessFromString(eDataType, initialValue);
 			default:
 				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
@@ -102,6 +104,8 @@ public class SimkFactoryImpl extends EFactoryImpl implements SimkFactory {
 		switch (eDataType.getClassifierID()) {
 			case SimkPackage.SM_USAGE:
 				return convertSMUsageToString(eDataType, instanceValue);
+			case SimkPackage.SM_ACCESS:
+				return convertSMAccessToString(eDataType, instanceValue);
 			default:
 				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
@@ -122,9 +126,9 @@ public class SimkFactoryImpl extends EFactoryImpl implements SimkFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public StaticMethod createStaticMethod() {
-		StaticMethodImpl staticMethod = new StaticMethodImpl();
-		return staticMethod;
+	public SMMethod createSMMethod() {
+		SMMethodImpl smMethod = new SMMethodImpl();
+		return smMethod;
 	}
 
 	/**
@@ -184,6 +188,26 @@ public class SimkFactoryImpl extends EFactoryImpl implements SimkFactory {
 	 * @generated
 	 */
 	public String convertSMUsageToString(EDataType eDataType, Object instanceValue) {
+		return instanceValue == null ? null : instanceValue.toString();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public SMAccess createSMAccessFromString(EDataType eDataType, String initialValue) {
+		SMAccess result = SMAccess.get(initialValue);
+		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
+		return result;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String convertSMAccessToString(EDataType eDataType, Object instanceValue) {
 		return instanceValue == null ? null : instanceValue.toString();
 	}
 

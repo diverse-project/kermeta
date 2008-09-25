@@ -1,5 +1,5 @@
 /**
- * $Id: SimkPackageImpl.java,v 1.14 2008-08-28 07:30:40 cfaucher Exp $
+ * $Id: SimkPackageImpl.java,v 1.15 2008-09-25 08:50:46 cfaucher Exp $
  * Project : org.kermeta.simk
  * License : EPL
  * Copyright : IRISA / INRIA / Universite de Rennes 1
@@ -7,7 +7,7 @@
  * Creation date : 30 nov. 07
  * Authors : Cyril Faucher <cfaucher@irisa.fr> (first iteration)
  *
- * $Id: SimkPackageImpl.java,v 1.14 2008-08-28 07:30:40 cfaucher Exp $
+ * $Id: SimkPackageImpl.java,v 1.15 2008-09-25 08:50:46 cfaucher Exp $
  */
 package org.kermeta.simk.impl;
 
@@ -22,8 +22,10 @@ import org.eclipse.emf.ecore.impl.EPackageImpl;
 
 import org.kermeta.simk.FunctionType;
 import org.kermeta.simk.SIMKModel;
+import org.kermeta.simk.SMAccess;
 import org.kermeta.simk.SMClass;
 import org.kermeta.simk.SMContext;
+import org.kermeta.simk.SMMethod;
 import org.kermeta.simk.SMNamedElement;
 import org.kermeta.simk.SMParameter;
 import org.kermeta.simk.SMReturn;
@@ -52,7 +54,7 @@ public class SimkPackageImpl extends EPackageImpl implements SimkPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass staticMethodEClass = null;
+	private EClass smMethodEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -102,6 +104,13 @@ public class SimkPackageImpl extends EPackageImpl implements SimkPackage {
 	 * @generated
 	 */
 	private EEnum smUsageEEnum = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EEnum smAccessEEnum = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -194,7 +203,7 @@ public class SimkPackageImpl extends EPackageImpl implements SimkPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getSIMKModel_StaticMethods() {
+	public EReference getSIMKModel_SMMethods() {
 		return (EReference)simkModelEClass.getEStructuralFeatures().get(1);
 	}
 
@@ -203,8 +212,8 @@ public class SimkPackageImpl extends EPackageImpl implements SimkPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getStaticMethod() {
-		return staticMethodEClass;
+	public EClass getSMMethod() {
+		return smMethodEClass;
 	}
 
 	/**
@@ -212,8 +221,8 @@ public class SimkPackageImpl extends EPackageImpl implements SimkPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getStaticMethod_SMParameters() {
-		return (EReference)staticMethodEClass.getEStructuralFeatures().get(0);
+	public EReference getSMMethod_SMParameters() {
+		return (EReference)smMethodEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -221,8 +230,8 @@ public class SimkPackageImpl extends EPackageImpl implements SimkPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getStaticMethod_SMReturn() {
-		return (EReference)staticMethodEClass.getEStructuralFeatures().get(1);
+	public EReference getSMMethod_SMReturn() {
+		return (EReference)smMethodEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -230,8 +239,8 @@ public class SimkPackageImpl extends EPackageImpl implements SimkPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getStaticMethod_SMContext() {
-		return (EReference)staticMethodEClass.getEStructuralFeatures().get(2);
+	public EReference getSMMethod_SMContext() {
+		return (EReference)smMethodEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -239,8 +248,8 @@ public class SimkPackageImpl extends EPackageImpl implements SimkPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getStaticMethod_TypeParameters() {
-		return (EAttribute)staticMethodEClass.getEStructuralFeatures().get(3);
+	public EAttribute getSMMethod_TypeParameters() {
+		return (EAttribute)smMethodEClass.getEStructuralFeatures().get(3);
 	}
 
 	/**
@@ -248,8 +257,8 @@ public class SimkPackageImpl extends EPackageImpl implements SimkPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getStaticMethod_Body() {
-		return (EAttribute)staticMethodEClass.getEStructuralFeatures().get(4);
+	public EAttribute getSMMethod_Body() {
+		return (EAttribute)smMethodEClass.getEStructuralFeatures().get(4);
 	}
 
 	/**
@@ -257,8 +266,8 @@ public class SimkPackageImpl extends EPackageImpl implements SimkPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getStaticMethod_Usages() {
-		return (EAttribute)staticMethodEClass.getEStructuralFeatures().get(5);
+	public EAttribute getSMMethod_Usages() {
+		return (EAttribute)smMethodEClass.getEStructuralFeatures().get(5);
 	}
 
 	/**
@@ -266,8 +275,8 @@ public class SimkPackageImpl extends EPackageImpl implements SimkPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getStaticMethod_ParentMethod() {
-		return (EReference)staticMethodEClass.getEStructuralFeatures().get(6);
+	public EReference getSMMethod_ParentEOperation() {
+		return (EReference)smMethodEClass.getEStructuralFeatures().get(6);
 	}
 
 	/**
@@ -275,8 +284,8 @@ public class SimkPackageImpl extends EPackageImpl implements SimkPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getStaticMethod_ParentReference() {
-		return (EReference)staticMethodEClass.getEStructuralFeatures().get(7);
+	public EReference getSMMethod_ParentEReference() {
+		return (EReference)smMethodEClass.getEStructuralFeatures().get(7);
 	}
 
 	/**
@@ -284,8 +293,35 @@ public class SimkPackageImpl extends EPackageImpl implements SimkPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getStaticMethod_ParentAttribute() {
-		return (EReference)staticMethodEClass.getEStructuralFeatures().get(8);
+	public EReference getSMMethod_ParentEAttribute() {
+		return (EReference)smMethodEClass.getEStructuralFeatures().get(8);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getSMMethod_Access() {
+		return (EAttribute)smMethodEClass.getEStructuralFeatures().get(9);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getSMMethod_Static() {
+		return (EAttribute)smMethodEClass.getEStructuralFeatures().get(10);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getSMMethod_Abstract() {
+		return (EAttribute)smMethodEClass.getEStructuralFeatures().get(11);
 	}
 
 	/**
@@ -302,7 +338,7 @@ public class SimkPackageImpl extends EPackageImpl implements SimkPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getSMContext_StaticMethods() {
+	public EReference getSMContext_SMMethods() {
 		return (EReference)smContextEClass.getEStructuralFeatures().get(0);
 	}
 
@@ -320,7 +356,7 @@ public class SimkPackageImpl extends EPackageImpl implements SimkPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getSMContext_QualifiedNameFinalPackage() {
+	public EAttribute getSMContext_FinalPackageQName() {
 		return (EAttribute)smContextEClass.getEStructuralFeatures().get(2);
 	}
 
@@ -419,6 +455,15 @@ public class SimkPackageImpl extends EPackageImpl implements SimkPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EEnum getSMAccess() {
+		return smAccessEEnum;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public SimkFactory getSimkFactory() {
 		return (SimkFactory)getEFactoryInstance();
 	}
@@ -444,23 +489,26 @@ public class SimkPackageImpl extends EPackageImpl implements SimkPackage {
 		// Create classes and their features
 		simkModelEClass = createEClass(SIMK_MODEL);
 		createEReference(simkModelEClass, SIMK_MODEL__SM_CONTEXTS);
-		createEReference(simkModelEClass, SIMK_MODEL__STATIC_METHODS);
+		createEReference(simkModelEClass, SIMK_MODEL__SM_METHODS);
 
-		staticMethodEClass = createEClass(STATIC_METHOD);
-		createEReference(staticMethodEClass, STATIC_METHOD__SM_PARAMETERS);
-		createEReference(staticMethodEClass, STATIC_METHOD__SM_RETURN);
-		createEReference(staticMethodEClass, STATIC_METHOD__SM_CONTEXT);
-		createEAttribute(staticMethodEClass, STATIC_METHOD__TYPE_PARAMETERS);
-		createEAttribute(staticMethodEClass, STATIC_METHOD__BODY);
-		createEAttribute(staticMethodEClass, STATIC_METHOD__USAGES);
-		createEReference(staticMethodEClass, STATIC_METHOD__PARENT_METHOD);
-		createEReference(staticMethodEClass, STATIC_METHOD__PARENT_REFERENCE);
-		createEReference(staticMethodEClass, STATIC_METHOD__PARENT_ATTRIBUTE);
+		smMethodEClass = createEClass(SM_METHOD);
+		createEReference(smMethodEClass, SM_METHOD__SM_PARAMETERS);
+		createEReference(smMethodEClass, SM_METHOD__SM_RETURN);
+		createEReference(smMethodEClass, SM_METHOD__SM_CONTEXT);
+		createEAttribute(smMethodEClass, SM_METHOD__TYPE_PARAMETERS);
+		createEAttribute(smMethodEClass, SM_METHOD__BODY);
+		createEAttribute(smMethodEClass, SM_METHOD__USAGES);
+		createEReference(smMethodEClass, SM_METHOD__PARENT_EOPERATION);
+		createEReference(smMethodEClass, SM_METHOD__PARENT_EREFERENCE);
+		createEReference(smMethodEClass, SM_METHOD__PARENT_EATTRIBUTE);
+		createEAttribute(smMethodEClass, SM_METHOD__ACCESS);
+		createEAttribute(smMethodEClass, SM_METHOD__STATIC);
+		createEAttribute(smMethodEClass, SM_METHOD__ABSTRACT);
 
 		smContextEClass = createEClass(SM_CONTEXT);
-		createEReference(smContextEClass, SM_CONTEXT__STATIC_METHODS);
+		createEReference(smContextEClass, SM_CONTEXT__SM_METHODS);
 		createEReference(smContextEClass, SM_CONTEXT__SM_CLASS);
-		createEAttribute(smContextEClass, SM_CONTEXT__QUALIFIED_NAME_FINAL_PACKAGE);
+		createEAttribute(smContextEClass, SM_CONTEXT__FINAL_PACKAGE_QNAME);
 
 		smClassEClass = createEClass(SM_CLASS);
 		createEAttribute(smClassEClass, SM_CLASS__USAGES);
@@ -478,6 +526,7 @@ public class SimkPackageImpl extends EPackageImpl implements SimkPackage {
 
 		// Create enums
 		smUsageEEnum = createEEnum(SM_USAGE);
+		smAccessEEnum = createEEnum(SM_ACCESS);
 	}
 
 	/**
@@ -509,7 +558,7 @@ public class SimkPackageImpl extends EPackageImpl implements SimkPackage {
 
 		// Add supertypes to classes
 		simkModelEClass.getESuperTypes().add(this.getSMNamedElement());
-		staticMethodEClass.getESuperTypes().add(this.getSMNamedElement());
+		smMethodEClass.getESuperTypes().add(this.getSMNamedElement());
 		smClassEClass.getESuperTypes().add(this.getSMNamedElement());
 		smParameterEClass.getESuperTypes().add(this.getSMNamedElement());
 		smParameterEClass.getESuperTypes().add(this.getSMTypedElement());
@@ -518,27 +567,28 @@ public class SimkPackageImpl extends EPackageImpl implements SimkPackage {
 		// Initialize classes and features; add operations and parameters
 		initEClass(simkModelEClass, SIMKModel.class, "SIMKModel", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getSIMKModel_SMContexts(), this.getSMContext(), null, "sMContexts", null, 0, -1, SIMKModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getSIMKModel_StaticMethods(), this.getStaticMethod(), null, "staticMethods", null, 0, -1, SIMKModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getSIMKModel_SMMethods(), this.getSMMethod(), null, "sMMethods", null, 0, -1, SIMKModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		addEOperation(simkModelEClass, ecorePackage.getEInt(), "getNextId", 0, 1, IS_UNIQUE, IS_ORDERED);
+		initEClass(smMethodEClass, SMMethod.class, "SMMethod", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getSMMethod_SMParameters(), this.getSMParameter(), null, "sMParameters", null, 0, -1, SMMethod.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getSMMethod_SMReturn(), this.getSMReturn(), null, "sMReturn", null, 0, 1, SMMethod.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getSMMethod_SMContext(), this.getSMContext(), this.getSMContext_SMMethods(), "sMContext", null, 0, 1, SMMethod.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getSMMethod_TypeParameters(), ecorePackage.getEString(), "typeParameters", null, 0, 1, SMMethod.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getSMMethod_Body(), ecorePackage.getEString(), "body", null, 0, 1, SMMethod.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getSMMethod_Usages(), this.getSMUsage(), "usages", null, 0, 1, SMMethod.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getSMMethod_ParentEOperation(), ecorePackage.getEOperation(), null, "parentEOperation", null, 0, 1, SMMethod.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getSMMethod_ParentEReference(), ecorePackage.getEReference(), null, "parentEReference", null, 0, 1, SMMethod.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getSMMethod_ParentEAttribute(), ecorePackage.getEAttribute(), null, "parentEAttribute", null, 0, 1, SMMethod.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getSMMethod_Access(), this.getSMAccess(), "access", "public", 0, 1, SMMethod.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getSMMethod_Static(), ecorePackage.getEBoolean(), "static", "true", 0, 1, SMMethod.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getSMMethod_Abstract(), ecorePackage.getEBoolean(), "abstract", null, 0, 1, SMMethod.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(staticMethodEClass, StaticMethod.class, "StaticMethod", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getStaticMethod_SMParameters(), this.getSMParameter(), null, "sMParameters", null, 0, -1, StaticMethod.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getStaticMethod_SMReturn(), this.getSMReturn(), null, "sMReturn", null, 0, 1, StaticMethod.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getStaticMethod_SMContext(), this.getSMContext(), this.getSMContext_StaticMethods(), "sMContext", null, 0, 1, StaticMethod.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getStaticMethod_TypeParameters(), ecorePackage.getEString(), "typeParameters", null, 0, 1, StaticMethod.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getStaticMethod_Body(), ecorePackage.getEString(), "body", null, 0, 1, StaticMethod.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getStaticMethod_Usages(), this.getSMUsage(), "usages", null, 0, 1, StaticMethod.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getStaticMethod_ParentMethod(), ecorePackage.getEOperation(), null, "parentMethod", null, 0, 1, StaticMethod.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getStaticMethod_ParentReference(), ecorePackage.getEReference(), null, "parentReference", null, 0, 1, StaticMethod.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getStaticMethod_ParentAttribute(), ecorePackage.getEAttribute(), null, "parentAttribute", null, 0, 1, StaticMethod.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		addEOperation(staticMethodEClass, ecorePackage.getEOperation(), "getParentMethodFromModel", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEOperation(smMethodEClass, ecorePackage.getEOperation(), "getParentEOperationFromModel", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(smContextEClass, SMContext.class, "SMContext", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getSMContext_StaticMethods(), this.getStaticMethod(), this.getStaticMethod_SMContext(), "staticMethods", null, 0, -1, SMContext.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getSMContext_SMMethods(), this.getSMMethod(), this.getSMMethod_SMContext(), "sMMethods", null, 0, -1, SMContext.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getSMContext_SMClass(), this.getSMClass(), this.getSMClass_Context(), "sMClass", null, 0, 1, SMContext.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getSMContext_QualifiedNameFinalPackage(), ecorePackage.getEString(), "qualifiedNameFinalPackage", null, 0, 1, SMContext.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getSMContext_FinalPackageQName(), ecorePackage.getEString(), "finalPackageQName", null, 0, 1, SMContext.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(smClassEClass, SMClass.class, "SMClass", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getSMClass_Usages(), this.getSMUsage(), "usages", null, 0, 1, SMClass.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -566,6 +616,11 @@ public class SimkPackageImpl extends EPackageImpl implements SimkPackage {
 		addEEnumLiteral(smUsageEEnum, SMUsage.WRAPPER);
 		addEEnumLiteral(smUsageEEnum, SMUsage.RUNNER);
 		addEEnumLiteral(smUsageEEnum, SMUsage.INVARIANT);
+
+		initEEnum(smAccessEEnum, SMAccess.class, "SMAccess");
+		addEEnumLiteral(smAccessEEnum, SMAccess.PRIVATE);
+		addEEnumLiteral(smAccessEEnum, SMAccess.PROTECTED);
+		addEEnumLiteral(smAccessEEnum, SMAccess.PUBLIC);
 
 		// Create resource
 		createResource(eNS_URI);

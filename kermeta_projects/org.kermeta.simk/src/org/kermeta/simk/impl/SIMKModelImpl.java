@@ -1,5 +1,5 @@
 /**
- * $Id: SIMKModelImpl.java,v 1.6 2008-08-18 09:20:20 cfaucher Exp $
+ * $Id: SIMKModelImpl.java,v 1.7 2008-09-25 08:50:46 cfaucher Exp $
  * Project : org.kermeta.simk
  * License : EPL
  * Copyright : IRISA / INRIA / Universite de Rennes 1
@@ -7,7 +7,7 @@
  * Creation date : 30 nov. 07
  * Authors : Cyril Faucher <cfaucher@irisa.fr> (first iteration)
  *
- * $Id: SIMKModelImpl.java,v 1.6 2008-08-18 09:20:20 cfaucher Exp $
+ * $Id: SIMKModelImpl.java,v 1.7 2008-09-25 08:50:46 cfaucher Exp $
  */
 package org.kermeta.simk.impl;
 
@@ -18,6 +18,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.kermeta.simk.FunctionType;
 import org.kermeta.simk.SIMKModel;
 import org.kermeta.simk.SMContext;
+import org.kermeta.simk.SMMethod;
 import org.kermeta.simk.SimkPackage;
 import org.kermeta.simk.StaticMethod;
 
@@ -29,7 +30,7 @@ import org.kermeta.simk.StaticMethod;
  * The following features are implemented:
  * <ul>
  *   <li>{@link org.kermeta.simk.impl.SIMKModelImpl#getSMContexts <em>SM Contexts</em>}</li>
- *   <li>{@link org.kermeta.simk.impl.SIMKModelImpl#getStaticMethods <em>Static Methods</em>}</li>
+ *   <li>{@link org.kermeta.simk.impl.SIMKModelImpl#getSMMethods <em>SM Methods</em>}</li>
  * </ul>
  * </p>
  *
@@ -71,17 +72,8 @@ public class SIMKModelImpl extends SMNamedElementImpl implements SIMKModel {
 	 * @generated
 	 */
 	@SuppressWarnings("unchecked")
-	public EList<StaticMethod> getStaticMethods() {
-		return (EList<StaticMethod>)eGet(SimkPackage.Literals.SIMK_MODEL__STATIC_METHODS, true);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public int getNextId() {
-		return getStaticMethods().size()+1;
+	public EList<SMMethod> getSMMethods() {
+		return (EList<SMMethod>)eGet(SimkPackage.Literals.SIMK_MODEL__SM_METHODS, true);
 	}
 
 } //SIMKModelImpl

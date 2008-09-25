@@ -1,5 +1,5 @@
 /**
- * $Id: SMContext.java,v 1.4 2008-08-26 09:14:28 cfaucher Exp $
+ * $Id: SMContext.java,v 1.5 2008-09-25 08:50:45 cfaucher Exp $
  * Project : org.kermeta.simk
  * License : EPL
  * Copyright : IRISA / INRIA / Universite de Rennes 1
@@ -7,7 +7,7 @@
  * Creation date : 30 nov. 07
  * Authors : Cyril Faucher <cfaucher@irisa.fr> (first iteration)
  *
- * $Id: SMContext.java,v 1.4 2008-08-26 09:14:28 cfaucher Exp $
+ * $Id: SMContext.java,v 1.5 2008-09-25 08:50:45 cfaucher Exp $
  */
 package org.kermeta.simk;
 
@@ -23,9 +23,9 @@ import org.eclipse.emf.ecore.EObject;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.kermeta.simk.SMContext#getStaticMethods <em>Static Methods</em>}</li>
+ *   <li>{@link org.kermeta.simk.SMContext#getSMMethods <em>SM Methods</em>}</li>
  *   <li>{@link org.kermeta.simk.SMContext#getSMClass <em>SM Class</em>}</li>
- *   <li>{@link org.kermeta.simk.SMContext#getQualifiedNameFinalPackage <em>Qualified Name Final Package</em>}</li>
+ *   <li>{@link org.kermeta.simk.SMContext#getFinalPackageQName <em>Final Package QName</em>}</li>
  * </ul>
  * </p>
  *
@@ -35,22 +35,22 @@ import org.eclipse.emf.ecore.EObject;
  */
 public interface SMContext extends EObject {
 	/**
-	 * Returns the value of the '<em><b>Static Methods</b></em>' reference list.
-	 * The list contents are of type {@link org.kermeta.simk.StaticMethod}.
-	 * It is bidirectional and its opposite is '{@link org.kermeta.simk.StaticMethod#getSMContext <em>SM Context</em>}'.
+	 * Returns the value of the '<em><b>SM Methods</b></em>' reference list.
+	 * The list contents are of type {@link org.kermeta.simk.SMMethod}.
+	 * It is bidirectional and its opposite is '{@link org.kermeta.simk.SMMethod#getSMContext <em>SM Context</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Static Methods</em>' reference list isn't clear,
+	 * If the meaning of the '<em>SM Methods</em>' reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Static Methods</em>' reference list.
-	 * @see org.kermeta.simk.SimkPackage#getSMContext_StaticMethods()
-	 * @see org.kermeta.simk.StaticMethod#getSMContext
+	 * @return the value of the '<em>SM Methods</em>' reference list.
+	 * @see org.kermeta.simk.SimkPackage#getSMContext_SMMethods()
+	 * @see org.kermeta.simk.SMMethod#getSMContext
 	 * @model opposite="sMContext"
 	 * @generated
 	 */
-	EList<StaticMethod> getStaticMethods();
+	EList<SMMethod> getSMMethods();
 
 	/**
 	 * Returns the value of the '<em><b>SM Class</b></em>' containment reference.
@@ -81,29 +81,29 @@ public interface SMContext extends EObject {
 	void setSMClass(SMClass value);
 
 	/**
-	 * Returns the value of the '<em><b>Qualified Name Final Package</b></em>' attribute.
+	 * Returns the value of the '<em><b>Final Package QName</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Qualified Name Final Package</em>' attribute isn't clear,
+	 * If the meaning of the '<em>Final Package QName</em>' attribute isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Qualified Name Final Package</em>' attribute.
-	 * @see #setQualifiedNameFinalPackage(String)
-	 * @see org.kermeta.simk.SimkPackage#getSMContext_QualifiedNameFinalPackage()
+	 * @return the value of the '<em>Final Package QName</em>' attribute.
+	 * @see #setFinalPackageQName(String)
+	 * @see org.kermeta.simk.SimkPackage#getSMContext_FinalPackageQName()
 	 * @model
 	 * @generated
 	 */
-	String getQualifiedNameFinalPackage();
+	String getFinalPackageQName();
 
 	/**
-	 * Sets the value of the '{@link org.kermeta.simk.SMContext#getQualifiedNameFinalPackage <em>Qualified Name Final Package</em>}' attribute.
+	 * Sets the value of the '{@link org.kermeta.simk.SMContext#getFinalPackageQName <em>Final Package QName</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Qualified Name Final Package</em>' attribute.
-	 * @see #getQualifiedNameFinalPackage()
+	 * @param value the new value of the '<em>Final Package QName</em>' attribute.
+	 * @see #getFinalPackageQName()
 	 * @generated
 	 */
-	void setQualifiedNameFinalPackage(String value);
+	void setFinalPackageQName(String value);
 
 } // SMContext

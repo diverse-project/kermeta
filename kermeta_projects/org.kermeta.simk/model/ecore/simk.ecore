@@ -4,20 +4,15 @@
     xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="simk"
     nsURI="http://www.kermeta.org/simk" nsPrefix="simk">
   <eClassifiers xsi:type="ecore:EClass" name="SIMKModel" eSuperTypes="#//SMNamedElement">
-    <eOperations name="getNextId" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt">
-      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="body" value="return getStaticMethods().size()+1;"/>
-      </eAnnotations>
-    </eOperations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="sMContexts" upperBound="-1"
         eType="#//SMContext" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="staticMethods" upperBound="-1"
-        eType="#//StaticMethod" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="sMMethods" upperBound="-1"
+        eType="#//SMMethod" containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="StaticMethod" eSuperTypes="#//SMNamedElement">
-    <eOperations name="getParentMethodFromModel" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EOperation">
+  <eClassifiers xsi:type="ecore:EClass" name="SMMethod" eSuperTypes="#//SMNamedElement">
+    <eOperations name="getParentEOperationFromModel" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EOperation">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="body" value="return getParentMethod();"/>
+        <details key="body" value="return getParentEOperation();"/>
       </eAnnotations>
     </eOperations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="sMParameters" upperBound="-1"
@@ -25,26 +20,30 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="sMReturn" eType="#//SMReturn"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="sMContext" eType="#//SMContext"
-        eOpposite="#//SMContext/staticMethods"/>
+        eOpposite="#//SMContext/sMMethods"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="typeParameters" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="body" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="usages" eType="#//SMUsage"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="parentMethod" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EOperation"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="parentReference" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EReference"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="parentAttribute" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EAttribute"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="parentEOperation" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EOperation"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="parentEReference" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EReference"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="parentEAttribute" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EAttribute"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="access" eType="#//SMAccess"
+        defaultValueLiteral="public"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="static" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
+        defaultValueLiteral="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="abstract" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="SMContext">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="staticMethods" upperBound="-1"
-        eType="#//StaticMethod" eOpposite="#//StaticMethod/sMContext"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="sMMethods" upperBound="-1"
+        eType="#//SMMethod" eOpposite="#//SMMethod/sMContext"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="sMClass" eType="#//SMClass"
         containment="true" eOpposite="#//SMClass/context"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="qualifiedNameFinalPackage"
-        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="finalPackageQName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="SMClass" eSuperTypes="#//SMNamedElement">
     <eOperations name="getQualifiedName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="body" value="String qn_finalPackage = getContext().getQualifiedNameFinalPackage();&#xD;&#xA;if ( ! qn_finalPackage.equals(&quot;&quot;) ) {&#xD;&#xA;&#x9;return qn_finalPackage + &quot;.&quot; + getName();&#xD;&#xA;}&#xD;&#xA;return getName();"/>
+        <details key="body" value="String qn_finalPackage = getContext().getFinalPackageQName();&#xD;&#xA;if ( ! qn_finalPackage.equals(&quot;&quot;) ) {&#xD;&#xA;&#x9;return qn_finalPackage + &quot;.&quot; + getName();&#xD;&#xA;}&#xD;&#xA;return getName();"/>
       </eAnnotations>
     </eOperations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="usages" eType="#//SMUsage"/>
@@ -68,5 +67,10 @@
     <eLiterals name="Wrapper" value="5" literal="Wrapper"/>
     <eLiterals name="Runner" value="6" literal="Runner"/>
     <eLiterals name="Invariant" value="7" literal="Invariant"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="SMAccess">
+    <eLiterals name="private"/>
+    <eLiterals name="protected" value="1"/>
+    <eLiterals name="public" value="2"/>
   </eClassifiers>
 </ecore:EPackage>

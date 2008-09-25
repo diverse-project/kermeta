@@ -1,5 +1,5 @@
 /**
- * $Id: SimkFactory.java,v 1.6 2008-08-26 09:14:28 cfaucher Exp $
+ * $Id: SimkFactory.java,v 1.7 2008-09-25 08:50:45 cfaucher Exp $
  * Project : org.kermeta.simk
  * License : EPL
  * Copyright : IRISA / INRIA / Universite de Rennes 1
@@ -7,7 +7,7 @@
  * Creation date : 30 nov. 07
  * Authors : Cyril Faucher <cfaucher@irisa.fr> (first iteration)
  *
- * $Id: SimkFactory.java,v 1.6 2008-08-26 09:14:28 cfaucher Exp $
+ * $Id: SimkFactory.java,v 1.7 2008-09-25 08:50:45 cfaucher Exp $
  */
 package org.kermeta.simk;
 
@@ -40,13 +40,13 @@ public interface SimkFactory extends EFactory {
 	SIMKModel createSIMKModel();
 
 	/**
-	 * Returns a new object of class '<em>Static Method</em>'.
+	 * Returns a new object of class '<em>SM Method</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Static Method</em>'.
+	 * @return a new object of class '<em>SM Method</em>'.
 	 * @generated
 	 */
-	StaticMethod createStaticMethod();
+	SMMethod createSMMethod();
 
 	/**
 	 * Returns a new object of class '<em>SM Context</em>'.

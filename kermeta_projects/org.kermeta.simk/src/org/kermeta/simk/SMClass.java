@@ -1,5 +1,5 @@
 /**
- * $Id: SMClass.java,v 1.6 2008-08-26 09:14:28 cfaucher Exp $
+ * $Id: SMClass.java,v 1.7 2008-09-25 08:50:45 cfaucher Exp $
  * Project : org.kermeta.simk
  * License : EPL
  * Copyright : IRISA / INRIA / Universite de Rennes 1
@@ -7,7 +7,7 @@
  * Creation date : 30 nov. 07
  * Authors : Cyril Faucher <cfaucher@irisa.fr> (first iteration)
  *
- * $Id: SMClass.java,v 1.6 2008-08-26 09:14:28 cfaucher Exp $
+ * $Id: SMClass.java,v 1.7 2008-09-25 08:50:45 cfaucher Exp $
  */
 package org.kermeta.simk;
 
@@ -93,7 +93,7 @@ public interface SMClass extends SMNamedElement {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @model kind="operation"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='String qn_finalPackage = getContext().getQualifiedNameFinalPackage();\r\nif ( ! qn_finalPackage.equals(\"\") ) {\r\n\treturn qn_finalPackage + \".\" + getName();\r\n}\r\nreturn getName();'"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='String qn_finalPackage = getContext().getFinalPackageQName();\r\nif ( ! qn_finalPackage.equals(\"\") ) {\r\n\treturn qn_finalPackage + \".\" + getName();\r\n}\r\nreturn getName();'"
 	 * @generated
 	 */
 	String getQualifiedName();
