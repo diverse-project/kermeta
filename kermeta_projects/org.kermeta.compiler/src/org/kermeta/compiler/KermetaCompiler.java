@@ -1,4 +1,4 @@
-/* $Id: KermetaCompiler.java,v 1.8 2008-09-04 13:34:23 cfaucher Exp $
+/* $Id: KermetaCompiler.java,v 1.9 2008-09-25 08:28:57 cfaucher Exp $
  * Project   : fr.irisa.triskell.kermeta.compiler
  * File      : CompileKermetaAction.java
  * License   : EPL
@@ -19,21 +19,15 @@ import java.util.Set;
 import org.apache.commons.logging.Log;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.CoreException;
-import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.core.runtime.IStatus;
-import org.eclipse.core.runtime.Status;
-import org.eclipse.core.runtime.jobs.Job;
 import org.kermeta.compiler.model.compiler.impl.AbstractCompilerImpl;
 import org.kermeta.interpreter.api.Interpreter;
 import org.kermeta.interpreter.api.InterpreterMode;
 import org.kermeta.interpreter.api.InterpreterOptions;
 import org.kermeta.io.KermetaUnit;
-import org.kermeta.io.loader.plugin.LoaderPlugin;
 import org.kermeta.log4j.util.LogConfigurationHelper;
 import org.kermeta.merger.Merger;
 
 import fr.irisa.triskell.eclipse.console.EclipseConsole;
-import fr.irisa.triskell.eclipse.resources.ResourceHelper;
 import fr.irisa.triskell.kermeta.exceptions.NotRegisteredURIException;
 import fr.irisa.triskell.kermeta.exceptions.URIMalformedException;
 import fr.irisa.triskell.kermeta.modelhelper.KermetaUnitHelper;
@@ -98,16 +92,12 @@ public class KermetaCompiler extends AbstractCompilerImpl {
 			merger.process(l, fileURI, true, true);
 			ifile.refreshLocal(1, null);
 		} catch (URIMalformedException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (NotRegisteredURIException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (CoreException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}	
 	
