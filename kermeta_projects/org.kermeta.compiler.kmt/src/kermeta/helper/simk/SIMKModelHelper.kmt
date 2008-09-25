@@ -1,4 +1,4 @@
-/* $Id: SIMKModelHelper.kmt,v 1.9 2008-09-22 07:43:20 cfaucher Exp $
+/* $Id: SIMKModelHelper.kmt,v 1.10 2008-09-25 09:10:34 cfaucher Exp $
  * Creation date: Jul 21, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -23,14 +23,14 @@ aspect class SIMKModel {
 	/** TODO TO COMMENT*/
 	operation retrieveOrCreateContext(class_qname : String, finalPackage_qname : String, usage : SMUsage, context : KM2EcoreContext) : SMContext is do
 		var sMContext : SMContext init self.sMContexts.detect{ c |
-			(c.qualifiedNameFinalPackage == finalPackage_qname)
+			(c.finalPackageQName == finalPackage_qname)
 				and (c.sMClass.name == class_qname)
 				and (c.sMClass.usages == usage)
 		}
 		
 		if sMContext.isVoid() then
 			sMContext := SMContext.new()
-			sMContext.qualifiedNameFinalPackage := finalPackage_qname
+			sMContext.finalPackageQName := finalPackage_qname
 			self.sMContexts.add(sMContext)
 		end
 		
@@ -58,7 +58,7 @@ aspect class SIMKModel {
 		
 		var sMContext : SMContext init retrieveOrCreateContextWithClass(context.current_valueType.name + "Wrapper", "kermeta.standard.helper", SMUsage.Wrapper, context)
 		
-		var sm : StaticMethod init sMContext.staticMethods.detect{ o |
+		var sm : SMMethod init sMContext.sMMethods.detect{ o |
 			o.name == IdentifierHelper.new.getMangledIdentifier(op.getFinalName(), context)
 		}
 		if sm.isVoid() then	
@@ -76,7 +76,7 @@ aspect class SIMKModel {
 			SMUsage.Super,
 			context)
 		
-		var sm : StaticMethod init sMContext.staticMethods.detect{ o |
+		var sm : SMMethod init sMContext.sMMethods.detect{ o |
 			o.name == ( "super_" + IdentifierHelper.new.getMangledIdentifier(op.getFinalName(), context) )
 		}
 		if sm.isVoid() then	
@@ -94,7 +94,7 @@ aspect class SIMKModel {
 			SMUsage.Runner,
 			context)
 		
-		var sm : StaticMethod init sMContext.staticMethods.detect{ o |
+		var sm : SMMethod init sMContext.sMMethods.detect{ o |
 			o.name == "main"
 		}
 		if sm.isVoid() then	
@@ -110,7 +110,7 @@ aspect class SMClass {
 	end
 }
 
-aspect class StaticMethod {
+aspect class SMMethod {
 	/** TODO TO COMMENT*/
 	operation setWrapperUsage() : Void is do
 		self.usages := SMUsage.Wrapper//.add(SMUsage.Wrapper)

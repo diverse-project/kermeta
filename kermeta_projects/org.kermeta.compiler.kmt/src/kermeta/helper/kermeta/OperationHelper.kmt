@@ -1,4 +1,4 @@
-/* $Id: OperationHelper.kmt,v 1.13 2008-09-15 15:31:32 cfaucher Exp $
+/* $Id: OperationHelper.kmt,v 1.14 2008-09-25 09:10:33 cfaucher Exp $
  * Creation date: May 20, 2008
  * License: EPL
  * Copyright:
@@ -148,10 +148,10 @@ aspect class Operation {
 		
 		if not sMContext.isVoid() then
 		
-			var staticMethod : StaticMethod init StaticMethod.new()
+			var staticMethod : SMMethod init SMMethod.new()
 			
-			context.simkModel.staticMethods.add(staticMethod)
-			sMContext.staticMethods.add(staticMethod)
+			context.simkModel.sMMethods.add(staticMethod)
+			sMContext.sMMethods.add(staticMethod)
 			
 			staticMethod.name := self.name
 			staticMethod.setWrapperUsage()

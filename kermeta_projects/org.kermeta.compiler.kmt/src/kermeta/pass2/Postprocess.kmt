@@ -1,4 +1,4 @@
-/* $Id: Postprocess.kmt,v 1.4 2008-09-23 13:01:48 cfaucher Exp $ 
+/* $Id: Postprocess.kmt,v 1.5 2008-09-25 09:10:33 cfaucher Exp $ 
  * Creation : August 27, 2008
  * Licence  : EPL 
  * Copyright:
@@ -46,13 +46,13 @@ aspect class ModelingUnit {
 		
 		if not smContext.isVoid() then
 		
-			var staticMethod : StaticMethod init StaticMethod.new()
+			var staticMethod : SMMethod init SMMethod.new()
 			staticMethod.name := "super_" + IdentifierHelper.new.getMangledIdentifier(op.getFinalName(), context)
 			staticMethod.body := op.createBehaviorJava(context)
 			
 			staticMethod.usages := SMUsage.Super
-			context.simkModel.staticMethods.add(staticMethod)
-			smContext.staticMethods.add(staticMethod)
+			context.simkModel.sMMethods.add(staticMethod)
+			smContext.sMMethods.add(staticMethod)
 			
 			// Set the return type
 			var smReturn : SMReturn init SMReturn.new
