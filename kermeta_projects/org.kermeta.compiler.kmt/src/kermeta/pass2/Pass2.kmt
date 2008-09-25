@@ -1,4 +1,4 @@
-/* $Id: Pass2.kmt,v 1.36 2008-09-22 14:41:35 cfaucher Exp $
+/* $Id: Pass2.kmt,v 1.37 2008-09-25 08:31:31 cfaucher Exp $
  * Creation date: January 21, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -134,13 +134,10 @@ package structure {
 						newProperty := EAttribute.new
 						newProperty.name := emfNeedProperty.getPropertyInfos().getValue("name")
 						newProperty.transient := false
-						newProperty.lowerBound := 0
-						newProperty.upperBound := 1
 						
 						var newProperty_EDataType : EDataType init EDataType.new
 						newProperty_EDataType.name := "KermetaProperty_" + self.name + "_" + emfNeedProperty.getPropertyInfos().getValue("name")
 						newProperty_EDataType.instanceClassName := emfNeedProperty.getPropertyInfos().getValue("javaClass")
-						newProperty_EDataType.serializable := true
 						
 						self.container.asType(Package).ecoreModelElement.eClassifiers.add(newProperty_EDataType)
 						
@@ -168,9 +165,6 @@ package structure {
 							newProperty := EReference.new
 							newProperty.name := emfNeedProperty.getPropertyInfos().getValue("name")
 							newProperty.transient := false
-							
-							newProperty.lowerBound := 0
-							newProperty.upperBound := 1
 							
 							var retrieved_EClassifier : EClassifier init context.mu.getEClassifierByQualifiedName(emfNeedProperty.getPropertyInfos().getValue("classDefinitionQN"))
 							

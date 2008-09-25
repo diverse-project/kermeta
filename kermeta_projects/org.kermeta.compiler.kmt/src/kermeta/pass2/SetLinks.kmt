@@ -1,4 +1,4 @@
-/* $Id: SetLinks.kmt,v 1.38 2008-09-05 07:44:17 cfaucher Exp $
+/* $Id: SetLinks.kmt,v 1.39 2008-09-25 08:33:43 cfaucher Exp $
  * Creation date: January 21, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -207,7 +207,19 @@ aspect class Property {
 		
 		// Set to false the default value of Boolean
 		if self.type.getTypeQName() == "kermeta::standard::Boolean" then
-			self.ecoreModelElement.defaultValueLiteral := "false"
+		
+			var mustSetted : Boolean init false
+			if self.ecoreModelElement.defaultValueLiteral.isVoid() then
+				mustSetted := true
+			else
+				if self.ecoreModelElement.defaultValueLiteral=="" then
+					mustSetted := true
+				end
+			end
+			
+			if mustSetted then
+				self.ecoreModelElement.defaultValueLiteral := "false"
+			end
 		end
 		
 	end
