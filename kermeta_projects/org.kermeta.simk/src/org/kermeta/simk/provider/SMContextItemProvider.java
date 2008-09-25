@@ -1,5 +1,5 @@
 /**
- * $Id: SMContextItemProvider.java,v 1.4 2008-08-26 09:14:29 cfaucher Exp $
+ * $Id: SMContextItemProvider.java,v 1.5 2008-09-25 08:50:46 cfaucher Exp $
  * Project : org.kermeta.simk
  * License : EPL
  * Copyright : IRISA / INRIA / Universite de Rennes 1
@@ -7,7 +7,7 @@
  * Creation date : 30 nov. 07
  * Authors : Cyril Faucher <cfaucher@irisa.fr> (first iteration)
  *
- * $Id: SMContextItemProvider.java,v 1.4 2008-08-26 09:14:29 cfaucher Exp $
+ * $Id: SMContextItemProvider.java,v 1.5 2008-09-25 08:50:46 cfaucher Exp $
  */
 package org.kermeta.simk.provider;
 
@@ -72,26 +72,26 @@ public class SMContextItemProvider
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
-			addStaticMethodsPropertyDescriptor(object);
-			addQualifiedNameFinalPackagePropertyDescriptor(object);
+			addSMMethodsPropertyDescriptor(object);
+			addFinalPackageQNamePropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
 
 	/**
-	 * This adds a property descriptor for the Static Methods feature.
+	 * This adds a property descriptor for the SM Methods feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void addStaticMethodsPropertyDescriptor(Object object) {
+	protected void addSMMethodsPropertyDescriptor(Object object) {
 		itemPropertyDescriptors.add
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_SMContext_staticMethods_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_SMContext_staticMethods_feature", "_UI_SMContext_type"),
-				 SimkPackage.Literals.SM_CONTEXT__STATIC_METHODS,
+				 getString("_UI_SMContext_sMMethods_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_SMContext_sMMethods_feature", "_UI_SMContext_type"),
+				 SimkPackage.Literals.SM_CONTEXT__SM_METHODS,
 				 true,
 				 false,
 				 true,
@@ -101,19 +101,19 @@ public class SMContextItemProvider
 	}
 
 	/**
-	 * This adds a property descriptor for the Qualified Name Final Package feature.
+	 * This adds a property descriptor for the Final Package QName feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void addQualifiedNameFinalPackagePropertyDescriptor(Object object) {
+	protected void addFinalPackageQNamePropertyDescriptor(Object object) {
 		itemPropertyDescriptors.add
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_SMContext_qualifiedNameFinalPackage_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_SMContext_qualifiedNameFinalPackage_feature", "_UI_SMContext_type"),
-				 SimkPackage.Literals.SM_CONTEXT__QUALIFIED_NAME_FINAL_PACKAGE,
+				 getString("_UI_SMContext_finalPackageQName_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_SMContext_finalPackageQName_feature", "_UI_SMContext_type"),
+				 SimkPackage.Literals.SM_CONTEXT__FINAL_PACKAGE_QNAME,
 				 true,
 				 false,
 				 false,
@@ -181,7 +181,7 @@ public class SMContextItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((SMContext)object).getQualifiedNameFinalPackage();
+		String label = ((SMContext)object).getFinalPackageQName();
 		return label == null || label.length() == 0 ?
 			getString("_UI_SMContext_type") :
 			getString("_UI_SMContext_type") + " " + label;
@@ -199,7 +199,7 @@ public class SMContextItemProvider
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(SMContext.class)) {
-			case SimkPackage.SM_CONTEXT__QUALIFIED_NAME_FINAL_PACKAGE:
+			case SimkPackage.SM_CONTEXT__FINAL_PACKAGE_QNAME:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 			case SimkPackage.SM_CONTEXT__SM_CLASS:

@@ -1,5 +1,5 @@
 /**
- * $Id: SimkAdapterFactory.java,v 1.6 2008-08-26 09:14:30 cfaucher Exp $
+ * $Id: SimkAdapterFactory.java,v 1.7 2008-09-25 08:50:46 cfaucher Exp $
  * Project : org.kermeta.simk
  * License : EPL
  * Copyright : IRISA / INRIA / Universite de Rennes 1
@@ -7,7 +7,7 @@
  * Creation date : 30 nov. 07
  * Authors : Cyril Faucher <cfaucher@irisa.fr> (first iteration)
  *
- * $Id: SimkAdapterFactory.java,v 1.6 2008-08-26 09:14:30 cfaucher Exp $
+ * $Id: SimkAdapterFactory.java,v 1.7 2008-09-25 08:50:46 cfaucher Exp $
  */
 package org.kermeta.simk.util;
 
@@ -81,8 +81,8 @@ public class SimkAdapterFactory extends AdapterFactoryImpl {
 				return createSIMKModelAdapter();
 			}
 			@Override
-			public Adapter caseStaticMethod(StaticMethod object) {
-				return createStaticMethodAdapter();
+			public Adapter caseSMMethod(SMMethod object) {
+				return createSMMethodAdapter();
 			}
 			@Override
 			public Adapter caseSMContext(SMContext object) {
@@ -143,16 +143,16 @@ public class SimkAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.kermeta.simk.StaticMethod <em>Static Method</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.kermeta.simk.SMMethod <em>SM Method</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.kermeta.simk.StaticMethod
+	 * @see org.kermeta.simk.SMMethod
 	 * @generated
 	 */
-	public Adapter createStaticMethodAdapter() {
+	public Adapter createSMMethodAdapter() {
 		return null;
 	}
 

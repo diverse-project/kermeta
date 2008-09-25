@@ -8,7 +8,7 @@
  * Technologies), Jacques Lescot (Anyware Technologies) - initial API and
  * implementation
  ******************************************************************************/
-/*$Id: CompilerHelperGenerator.java,v 1.20 2008-09-18 13:28:49 cfaucher Exp $
+/*$Id: CompilerHelperGenerator.java,v 1.21 2008-09-25 08:54:18 cfaucher Exp $
 * Project : org.kermeta.compiler.generator
 * File : 	CompilerHelperGenerator.java
 * License : EPL
@@ -48,8 +48,8 @@ import org.kermeta.generator.AbstractGenerator;
 import org.kermeta.generator.jet.DefaultJETEmitter;
 import org.kermeta.simk.SIMKModel;
 import org.kermeta.simk.SMContext;
+import org.kermeta.simk.SMMethod;
 import org.kermeta.simk.SMUsage;
-import org.kermeta.simk.StaticMethod;
 
 import fr.irisa.triskell.eclipse.ecore.EcoreHelper;
 
@@ -287,12 +287,12 @@ public class CompilerHelperGenerator extends AbstractGenerator {
 	private void generateRunner(GenModel conf, SIMKModel simkConf, IPath projectPath)
 			throws JETException, CoreException {
 	
-		for (StaticMethod sm : simkConf.getStaticMethods()) {
+		for (SMMethod sm : simkConf.getSMMethods()) {
 			if ( sm.getUsages() == SMUsage.RUNNER /*.contains(SMUsage.RUNNER)*/ ) {
 				applyTemplate(
 						new Object[] {conf.getModelProjectDirectory(), ResourcesPlugin.getWorkspace().getRoot().getLocationURI().toString(), sm},
 						getTemplateURI(RUNNER_JAVA),
-						projectPath.append("/" + SOURCE_DIRECTORY + "/" + sm.getSMContext().getQualifiedNameFinalPackage().replace(".", "/") + "/" + sm.getSMContext().getSMClass().getName() + ".java"),
+						projectPath.append("/" + SOURCE_DIRECTORY + "/" + sm.getSMContext().getFinalPackageQName().replace(".", "/") + "/" + sm.getSMContext().getSMClass().getName() + ".java"),
 						configuration.isForceOverwrite());
 			}
 

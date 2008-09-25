@@ -1,5 +1,5 @@
 /**
- * $Id: SIMKModelImpl.java,v 1.7 2008-09-25 08:50:46 cfaucher Exp $
+ * $Id: SIMKModelImpl.java,v 1.8 2008-09-25 08:54:15 cfaucher Exp $
  * Project : org.kermeta.simk
  * License : EPL
  * Copyright : IRISA / INRIA / Universite de Rennes 1
@@ -7,20 +7,16 @@
  * Creation date : 30 nov. 07
  * Authors : Cyril Faucher <cfaucher@irisa.fr> (first iteration)
  *
- * $Id: SIMKModelImpl.java,v 1.7 2008-09-25 08:50:46 cfaucher Exp $
+ * $Id: SIMKModelImpl.java,v 1.8 2008-09-25 08:54:15 cfaucher Exp $
  */
 package org.kermeta.simk.impl;
 
 import org.eclipse.emf.common.util.EList;
-
 import org.eclipse.emf.ecore.EClass;
-
-import org.kermeta.simk.FunctionType;
 import org.kermeta.simk.SIMKModel;
 import org.kermeta.simk.SMContext;
 import org.kermeta.simk.SMMethod;
 import org.kermeta.simk.SimkPackage;
-import org.kermeta.simk.StaticMethod;
 
 /**
  * <!-- begin-user-doc -->

@@ -1,5 +1,5 @@
 /**
- * $Id: SimkItemProviderAdapterFactory.java,v 1.6 2008-08-26 09:14:29 cfaucher Exp $
+ * $Id: SimkItemProviderAdapterFactory.java,v 1.7 2008-09-25 08:50:46 cfaucher Exp $
  * Project : org.kermeta.simk
  * License : EPL
  * Copyright : IRISA / INRIA / Universite de Rennes 1
@@ -7,7 +7,7 @@
  * Creation date : 30 nov. 07
  * Authors : Cyril Faucher <cfaucher@irisa.fr> (first iteration)
  *
- * $Id: SimkItemProviderAdapterFactory.java,v 1.6 2008-08-26 09:14:29 cfaucher Exp $
+ * $Id: SimkItemProviderAdapterFactory.java,v 1.7 2008-09-25 08:50:46 cfaucher Exp $
  */
 package org.kermeta.simk.provider;
 
@@ -104,26 +104,26 @@ public class SimkItemProviderAdapterFactory extends SimkAdapterFactory implement
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link org.kermeta.simk.StaticMethod} instances.
+	 * This keeps track of the one adapter used for all {@link org.kermeta.simk.SMMethod} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected StaticMethodItemProvider staticMethodItemProvider;
+	protected SMMethodItemProvider smMethodItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link org.kermeta.simk.StaticMethod}.
+	 * This creates an adapter for a {@link org.kermeta.simk.SMMethod}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
-	public Adapter createStaticMethodAdapter() {
-		if (staticMethodItemProvider == null) {
-			staticMethodItemProvider = new StaticMethodItemProvider(this);
+	public Adapter createSMMethodAdapter() {
+		if (smMethodItemProvider == null) {
+			smMethodItemProvider = new SMMethodItemProvider(this);
 		}
 
-		return staticMethodItemProvider;
+		return smMethodItemProvider;
 	}
 
 	/**
@@ -318,7 +318,7 @@ public class SimkItemProviderAdapterFactory extends SimkAdapterFactory implement
 	 */
 	public void dispose() {
 		if (simkModelItemProvider != null) simkModelItemProvider.dispose();
-		if (staticMethodItemProvider != null) staticMethodItemProvider.dispose();
+		if (smMethodItemProvider != null) smMethodItemProvider.dispose();
 		if (smContextItemProvider != null) smContextItemProvider.dispose();
 		if (smClassItemProvider != null) smClassItemProvider.dispose();
 		if (smParameterItemProvider != null) smParameterItemProvider.dispose();

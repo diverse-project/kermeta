@@ -1,5 +1,5 @@
 /**
- * $Id: SimkSwitch.java,v 1.6 2008-08-26 09:14:30 cfaucher Exp $
+ * $Id: SimkSwitch.java,v 1.7 2008-09-25 08:50:46 cfaucher Exp $
  * Project : org.kermeta.simk
  * License : EPL
  * Copyright : IRISA / INRIA / Universite de Rennes 1
@@ -7,7 +7,7 @@
  * Creation date : 30 nov. 07
  * Authors : Cyril Faucher <cfaucher@irisa.fr> (first iteration)
  *
- * $Id: SimkSwitch.java,v 1.6 2008-08-26 09:14:30 cfaucher Exp $
+ * $Id: SimkSwitch.java,v 1.7 2008-09-25 08:50:46 cfaucher Exp $
  */
 package org.kermeta.simk.util;
 
@@ -99,10 +99,10 @@ public class SimkSwitch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case SimkPackage.STATIC_METHOD: {
-				StaticMethod staticMethod = (StaticMethod)theEObject;
-				T result = caseStaticMethod(staticMethod);
-				if (result == null) result = caseSMNamedElement(staticMethod);
+			case SimkPackage.SM_METHOD: {
+				SMMethod smMethod = (SMMethod)theEObject;
+				T result = caseSMMethod(smMethod);
+				if (result == null) result = caseSMNamedElement(smMethod);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -166,17 +166,17 @@ public class SimkSwitch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Static Method</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>SM Method</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Static Method</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>SM Method</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseStaticMethod(StaticMethod object) {
+	public T caseSMMethod(SMMethod object) {
 		return null;
 	}
 

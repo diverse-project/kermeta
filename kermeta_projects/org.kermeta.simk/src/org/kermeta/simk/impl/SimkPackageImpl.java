@@ -1,5 +1,5 @@
 /**
- * $Id: SimkPackageImpl.java,v 1.15 2008-09-25 08:50:46 cfaucher Exp $
+ * $Id: SimkPackageImpl.java,v 1.16 2008-09-25 08:54:15 cfaucher Exp $
  * Project : org.kermeta.simk
  * License : EPL
  * Copyright : IRISA / INRIA / Universite de Rennes 1
@@ -7,20 +7,16 @@
  * Creation date : 30 nov. 07
  * Authors : Cyril Faucher <cfaucher@irisa.fr> (first iteration)
  *
- * $Id: SimkPackageImpl.java,v 1.15 2008-09-25 08:50:46 cfaucher Exp $
+ * $Id: SimkPackageImpl.java,v 1.16 2008-09-25 08:54:15 cfaucher Exp $
  */
 package org.kermeta.simk.impl;
 
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EEnum;
-import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
-
 import org.eclipse.emf.ecore.impl.EPackageImpl;
-
-import org.kermeta.simk.FunctionType;
 import org.kermeta.simk.SIMKModel;
 import org.kermeta.simk.SMAccess;
 import org.kermeta.simk.SMClass;
@@ -33,7 +29,6 @@ import org.kermeta.simk.SMTypedElement;
 import org.kermeta.simk.SMUsage;
 import org.kermeta.simk.SimkFactory;
 import org.kermeta.simk.SimkPackage;
-import org.kermeta.simk.StaticMethod;
 
 /**
  * <!-- begin-user-doc -->
