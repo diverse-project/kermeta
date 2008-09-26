@@ -8,11 +8,11 @@
   </root>
   <services xsi:type="type:FunctionalService" name="org.diva.example.servicediscovery.interfaces.INetwork"/>
   <services xsi:type="type:FunctionalService" name="org.diva.example.servicediscovery.interfaces.IRouter"/>
-  <types xsi:type="type:PrimitiveType" name="network.router.">
+  <types xsi:type="type:PrimitiveType" name="network.router">
     <port name="network" service="//@services.0" role="server"/>
     <port name="router" isOptional="false" service="//@services.1" role="client"/>
   </types>
-  <types xsi:type="type:PrimitiveType" name="router.">
+  <types xsi:type="type:PrimitiveType" name="router">
     <port name="router" isOptional="false" service="//@services.1" role="server"/>
   </types>
 </art:System>

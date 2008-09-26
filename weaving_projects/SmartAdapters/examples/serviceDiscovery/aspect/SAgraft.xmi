@@ -8,7 +8,7 @@
       <implem xsi:type="implem:FractalComponent" contentDesc="org.diva.example.servicediscovery.impl.Advertiser"/>
     </subComponent>
   </root>
-  <types xsi:type="type:PrimitiveType" name="advertiser.policy.cache.network.">
+  <types xsi:type="type:PrimitiveType" name="advertiser.policy.cache.network">
     <port name="policy" isOptional="false" role="client"/>
     <port name="cache" isOptional="false" role="client"/>
     <port name="network" isOptional="false" role="client"/>

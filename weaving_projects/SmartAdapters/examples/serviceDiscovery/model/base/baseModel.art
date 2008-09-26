@@ -1,15 +1,17 @@
 <?xml version="1.0" encoding="ASCII"?>
-<art:System xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:art="http://art" xmlns:instance="http://art/instance" xmlns:type="http://art/type">
+<art:System xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:art="http://art" xmlns:implem="http://art/implem" xmlns:instance="http://art/instance" xmlns:type="http://art/type" name="Service Discovery System">
   <root name="Service Discovery" type="//@types.2" state="ON">
-    <subComponent xsi:type="instance:PrimitiveInstance" name="Policy" type="//@types.4" state="ON"/>
-    <subComponent xsi:type="instance:PrimitiveInstance" name="Cache" type="//@types.5" state="ON">
+    <subComponent xsi:type="instance:PrimitiveInstance" name="Policy" type="//@types.3" state="ON"/>
+    <subComponent xsi:type="instance:PrimitiveInstance" name="Cache" type="//@types.4" state="ON">
       <attribute value="getSize: 50"/>
-      <binding serverInstance="//@root/@subComponent.0" id="policy" client="//@types.5/@port.1" server="//@types.4/@port.0"/>
+      <binding serverInstance="//@root/@subComponent.0" id="policy" client="//@types.4/@port.1" server="//@types.3/@port.0"/>
     </subComponent>
     <subComponent xsi:type="instance:PrimitiveInstance" name="Network" type="//@types.0" state="ON">
       <binding serverInstance="//@root/@subComponent.3" id="router0" client="//@types.0/@port.1" server="//@types.1/@port.0"/>
     </subComponent>
-    <subComponent xsi:type="instance:PrimitiveInstance" name="WiFi" type="//@types.1" state="ON"/>
+    <subComponent xsi:type="instance:PrimitiveInstance" name="WiFi" type="//@types.1" state="ON">
+      <implem xsi:type="implem:FractalComponent" controllerDesc="uiop" contentDesc="azerty"/>
+    </subComponent>
   </root>
   <services xsi:type="type:FunctionalService" name="org.diva.example.servicediscovery.interfaces.IAdvertiser">
     <operation name="advertise">
@@ -52,29 +54,21 @@
       <input name="java.lang.String arg0"/>
     </operation>
   </services>
-  <types xsi:type="type:PrimitiveType" name="network.router.">
+  <types xsi:type="type:PrimitiveType" name="network.router">
     <port name="network" lower="1" upper="-1" isOptional="false" service="//@services.4" role="server"/>
     <port name="router" lower="1" upper="-1" isOptional="false" service="//@services.6" role="client"/>
   </types>
-  <types xsi:type="type:PrimitiveType" name="router.">
+  <types xsi:type="type:PrimitiveType" name="router">
     <port name="router" lower="1" upper="1" isOptional="false" service="//@services.6" role="server"/>
   </types>
-  <types xsi:type="type:CompositeType" name="advertiser.request.">
+  <types xsi:type="type:CompositeType" name="advertiser.request">
     <port name="advertiser" lower="0" upper="1" service="//@services.0" role="server"/>
     <port name="request" lower="0" upper="1" service="//@services.5" role="server"/>
   </types>
-  <types xsi:type="type:PrimitiveType" name="request.requestReply.reply.policy.cache.network.">
-    <port name="request" lower="1" upper="1" isOptional="false" service="//@services.5" role="server"/>
-    <port name="requestReply" lower="1" upper="1" isOptional="false" role="server"/>
-    <port name="reply" lower="1" upper="1" isOptional="false" role="client"/>
-    <port name="policy" lower="1" upper="1" isOptional="false" service="//@services.2" role="client"/>
-    <port name="cache" lower="1" upper="1" isOptional="false" service="//@services.1" role="client"/>
-    <port name="network" lower="1" upper="1" isOptional="false" service="//@services.4" role="client"/>
-  </types>
-  <types xsi:type="type:PrimitiveType" name="policy.">
+  <types xsi:type="type:PrimitiveType" name="policy">
     <port name="policy" lower="1" upper="-1" isOptional="false" service="//@services.2" role="server"/>
   </types>
-  <types xsi:type="type:PrimitiveType" name="cache.policy.attribute-controller.">
+  <types xsi:type="type:PrimitiveType" name="cache.policy.attribute-controller">
     <port name="cache" lower="1" upper="-1" isOptional="false" service="//@services.1" role="server"/>
     <port name="policy" lower="1" upper="1" isOptional="false" service="//@services.2" role="client"/>
     <port name="attribute-controller" lower="1" upper="1" isOptional="false" service="//@services.3" role="server"/>

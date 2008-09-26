@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="ASCII"?>
+<core:Adapter xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:adaptations="platform:/resource/SmartAdapters/metamodel/specific/FSM_AOM_Framework.ecore#/org/smartadapters/core/adaptations" xmlns:core="platform:/resource/SmartAdapters/metamodel/generic/genericSmartAdaptersBase.ecore#/org/smartadapters/core" xsi:schemaLocation="platform:/resource/SmartAdapters/metamodel/specific/FSM_AOM_Framework.ecore#/org/smartadapters/core/adaptations ../../metamodel/specific/FSM_AOM_Framework.ecore#//smartadapters/core/adaptations platform:/resource/SmartAdapters/metamodel/generic/genericSmartAdaptersBase.ecore#/org/smartadapters/core ../../metamodel/specific/FSM_AOM_Framework.ecore#//smartadapters/core" name="Reverse state machine (version with clone/create/set/unset)">
+  <aspect>
+    <template>
+      <pattern>
+        <content href="templateFsm.xmi#/"/>
+        <content href="templateFsm.xmi#//@states.0"/>
+        <content href="templateFsm.xmi#//@states.1"/>
+        <content href="templateFsm.xmi#//@transitions.0"/>
+        <roles name="anyFSM">
+          <player href="templateFsm.xmi#/"/>
+        </roles>
+        <roles name="anyState">
+          <player href="templateFsm.xmi#//@states.0"/>
+        </roles>
+        <roles name="anotherState">
+          <player href="templateFsm.xmi#//@states.1"/>
+        </roles>
+        <roles name="anyTransition">
+          <player href="templateFsm.xmi#//@transitions.0"/>
+        </roles>
+      </pattern>
+      <featureIdentifier>name</featureIdentifier>
+    </template>
+  </aspect>
+  <adapt xsi:type="adaptations:CloneState">
+    <StateToClone href="templateFsm.xmi#//@states.0"/>
+    <clonedState name="clonedAny"/>
+  </adapt>
+  <adapt xsi:type="adaptations:CloneState">
+    <StateToClone href="templateFsm.xmi#//@states.1"/>
+    <clonedState name="clonedAnother"/>
+  </adapt>
+  <adapt xsi:type="adaptations:CreateTransition" name="" isUnique="non_unique">
+    <newTransition/>
+  </adapt>
+  <adapt xsi:type="adaptations:SetTransition" TransitionToSet="//@adapt.2/@newTransition" refsource="//@adapt.1/@clonedState" reftarget="//@adapt.0/@clonedState"/>
+  <adapt xsi:type="adaptations:SetFsm" name="" refstates="//@adapt.0/@clonedState //@adapt.1/@clonedState" reftransitions="//@adapt.2/@newTransition">
+    <FsmToSet href="templateFsm.xmi#/"/>
+  </adapt>
+</core:Adapter>

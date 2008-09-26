@@ -47,17 +47,17 @@ package instance{
 	{
 		inv completeTransmissionBindings is 
 		do
-			if self.type == void then
-				stdio.writeln(self.name)
-			else
-				if self.type.port == void then
-					stdio.writeln(self.type.name)
-				end
-			end
-			self.type.port.select{p | not p.isOptional and p.role == "client"}.forAll{p |
-				self.binding.exists{b | 
-					b.client == p
-				}
+			//stdio.errorln("Component: "+self.name)
+			self.type.port.select{p | not p.isOptional and p.role == "client"}
+				.forAll{p |
+					/*stdio.errorln("  Port: "+p.name)
+					stdio.errorln("      "+(self.binding.exists{b |
+						stdio.errorln("    b.client == p: "+(b.client == p).toString) 
+						b.client == p	
+					}).toString)*/
+					self.binding.exists{b | 
+						b.client == p
+					}
 			}
 		end
 			
@@ -90,6 +90,19 @@ package instance{
         			.select{c | c.asType(CompositeInstance).delegation.exists{d | d.serverInstance == self}}
         	end
         end
+        
+        property readonly getAllBindings : TransmissionBinding[0..*]
+        getter is
+        do
+        	var res : OrderedSet<TransmissionBinding> init OrderedSet<TransmissionBinding>.new
+        	res.addAll(self.binding)
+        	if (self.isInstanceOf(CompositeInstance)) then
+        		self.asType(CompositeInstance).subComponent.each{sub |
+        			res.addAll(sub.getAllBindings)
+        		}
+        	end
+        	result := res
+       end
 	}
 	
 	aspect class PrimitiveInstance

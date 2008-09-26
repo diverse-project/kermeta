@@ -52,6 +52,7 @@ package smartadapters
 				convert.put(pattern::art::type::ControlService,art::type::ControlService)
 				convert.put(pattern::art::type::Port,art::type::Port)
 				convert.put(pattern::art::type::Attribute,art::type::Attribute)
+				convert.put(pattern::art::implem::FractalComponent,art::implem::FractalComponent)
 				converter.initConverter(convert)
 			end
 		}
@@ -326,9 +327,13 @@ package smartadapters
 				tempComponentInstance.superComponent ?= ad.setSingleProperty(refsuperComponent, tempComponentInstance.superComponent)
 				ad.setMultipleProperty(tempComponentInstance.~attribute,refattribute)
 				ad.setMultipleProperty(tempComponentInstance.binding,refbinding)
-				tempComponentInstance.controllerDesc ?= ad.setSingleProperty(refcontrollerDesc, tempComponentInstance.controllerDesc)
-				tempComponentInstance.contentDesc ?= ad.setSingleProperty(refcontentDesc, tempComponentInstance.contentDesc)
-				tempComponentInstance.name ?= ad.setSingleProperty(refname, tempComponentInstance.name)
+				/*tempComponentInstance.controllerDesc ?= ad.setSingleProperty(refcontrollerDesc, tempComponentInstance.controllerDesc)
+				tempComponentInstance.contentDesc ?= ad.setSingleProperty(refcontentDesc, tempComponentInstance.contentDesc)*/
+				if refname == "#" then
+					tempComponentInstance.name := tempComponentInstance.name+oid.toString 
+				else
+					tempComponentInstance.name ?= ad.setSingleProperty(refname, tempComponentInstance.name)
+				end
 				
 				//Instantiating the reverse adaptation
 				if(reverse) then		
@@ -385,8 +390,8 @@ package smartadapters
 				tempComponentInstance.superComponent ?= ad.unsetSingleProperty(refsuperComponent, tempComponentInstance.superComponent)
 				ad.unsetMultipleProperty(tempComponentInstance.~attribute,refattribute)
 				ad.unsetMultipleProperty(tempComponentInstance.binding,refbinding)
-				tempComponentInstance.controllerDesc ?= ad.unsetSingleProperty(refcontrollerDesc, tempComponentInstance.controllerDesc)
-				tempComponentInstance.contentDesc ?= ad.unsetSingleProperty(refcontentDesc, tempComponentInstance.contentDesc)
+				/*tempComponentInstance.controllerDesc ?= ad.unsetSingleProperty(refcontrollerDesc, tempComponentInstance.controllerDesc)
+				tempComponentInstance.contentDesc ?= ad.unsetSingleProperty(refcontentDesc, tempComponentInstance.contentDesc)*/
 				tempComponentInstance.name ?= ad.unsetSingleProperty(refname, tempComponentInstance.name)
 				
 				//Instantiating the reverse adaptation
@@ -486,10 +491,13 @@ package smartadapters
 				tempPrimitiveInstance.superComponent ?= ad.setSingleProperty(refsuperComponent, tempPrimitiveInstance.superComponent)
 				ad.setMultipleProperty(tempPrimitiveInstance.~attribute,refattribute)
 				ad.setMultipleProperty(tempPrimitiveInstance.binding,refbinding)
-				tempPrimitiveInstance.controllerDesc ?= ad.setSingleProperty(refcontrollerDesc, tempPrimitiveInstance.controllerDesc)
-				tempPrimitiveInstance.contentDesc ?= ad.setSingleProperty(refcontentDesc, tempPrimitiveInstance.contentDesc)
-				tempPrimitiveInstance.name ?= ad.setSingleProperty(refname, tempPrimitiveInstance.name)
-				
+				/*tempPrimitiveInstance.controllerDesc ?= ad.setSingleProperty(refcontrollerDesc, tempPrimitiveInstance.controllerDesc)
+				tempPrimitiveInstance.contentDesc ?= ad.setSingleProperty(refcontentDesc, tempPrimitiveInstance.contentDesc)*/
+				if refname == "#" then
+					tempPrimitiveInstance.name := tempPrimitiveInstance.name+tempPrimitiveInstance.oid.toString 
+				else
+					tempPrimitiveInstance.name ?= ad.setSingleProperty(refname, tempPrimitiveInstance.name)
+				end
 				//Instantiating the reverse adaptation
 				if(reverse) then		
 					var unset : UnsetruntimeinstancePrimitiveInstance 
@@ -546,9 +554,13 @@ package smartadapters
 				tempPrimitiveInstance.superComponent ?= ad.unsetSingleProperty(refsuperComponent, tempPrimitiveInstance.superComponent)
 				ad.unsetMultipleProperty(tempPrimitiveInstance.~attribute,refattribute)
 				ad.unsetMultipleProperty(tempPrimitiveInstance.binding,refbinding)
-				tempPrimitiveInstance.controllerDesc ?= ad.unsetSingleProperty(refcontrollerDesc, tempPrimitiveInstance.controllerDesc)
-				tempPrimitiveInstance.contentDesc ?= ad.unsetSingleProperty(refcontentDesc, tempPrimitiveInstance.contentDesc)
-				tempPrimitiveInstance.name ?= ad.unsetSingleProperty(refname, tempPrimitiveInstance.name)
+				/*tempPrimitiveInstance.controllerDesc ?= ad.unsetSingleProperty(refcontrollerDesc, tempPrimitiveInstance.controllerDesc)
+				tempPrimitiveInstance.contentDesc ?= ad.unsetSingleProperty(refcontentDesc, tempPrimitiveInstance.contentDesc)*/
+				if refname == "#" then
+					tempPrimitiveInstance.name := tempPrimitiveInstance.name+oid.toString 
+				else
+					tempPrimitiveInstance.name ?= ad.setSingleProperty(refname, tempPrimitiveInstance.name)
+				end
 				
 				//Instantiating the reverse adaptation
 				if reverse then
@@ -651,8 +663,8 @@ package smartadapters
 				tempCompositeInstance.superComponent ?= ad.setSingleProperty(refsuperComponent, tempCompositeInstance.superComponent)
 				ad.setMultipleProperty(tempCompositeInstance.~attribute,refattribute)
 				ad.setMultipleProperty(tempCompositeInstance.binding,refbinding)
-				tempCompositeInstance.controllerDesc ?= ad.setSingleProperty(refcontrollerDesc, tempCompositeInstance.controllerDesc)
-				tempCompositeInstance.contentDesc ?= ad.setSingleProperty(refcontentDesc, tempCompositeInstance.contentDesc)
+				/*tempCompositeInstance.controllerDesc ?= ad.setSingleProperty(refcontrollerDesc, tempCompositeInstance.controllerDesc)
+				tempCompositeInstance.contentDesc ?= ad.setSingleProperty(refcontentDesc, tempCompositeInstance.contentDesc)*/
 				tempCompositeInstance.name ?= ad.setSingleProperty(refname, tempCompositeInstance.name)
 				
 				//Connection with the platform
@@ -730,8 +742,8 @@ package smartadapters
 				tempCompositeInstance.superComponent ?= ad.unsetSingleProperty(refsuperComponent, tempCompositeInstance.superComponent)
 				ad.unsetMultipleProperty(tempCompositeInstance.~attribute,refattribute)
 				ad.unsetMultipleProperty(tempCompositeInstance.binding,refbinding)
-				tempCompositeInstance.controllerDesc ?= ad.unsetSingleProperty(refcontrollerDesc, tempCompositeInstance.controllerDesc)
-				tempCompositeInstance.contentDesc ?= ad.unsetSingleProperty(refcontentDesc, tempCompositeInstance.contentDesc)
+				/*tempCompositeInstance.controllerDesc ?= ad.unsetSingleProperty(refcontrollerDesc, tempCompositeInstance.controllerDesc)
+				tempCompositeInstance.contentDesc ?= ad.unsetSingleProperty(refcontentDesc, tempCompositeInstance.contentDesc)*/
 				tempCompositeInstance.name ?= ad.unsetSingleProperty(refname, tempCompositeInstance.name)
 				
 				//Instantiating the reverse adaptation

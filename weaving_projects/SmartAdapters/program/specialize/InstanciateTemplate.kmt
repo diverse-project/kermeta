@@ -1,4 +1,4 @@
-/* $Id: InstanciateTemplate.kmt,v 1.4 2008-02-20 17:53:16 bmorin Exp $
+/* $Id: InstanciateTemplate.kmt,v 1.5 2008-09-26 12:45:30 bmorin Exp $
  * Creation date: August 27, 2007
  * License:
  * Copyright:
@@ -10,7 +10,6 @@
 
 package specialize;
 
-
 require kermeta
 require "platform:/plugin/fr.irisa.triskell.kermeta.ecore/src/kermeta/helpers/EcoreHelper.kmt"
 require "platform:/resource/SmartAdapters/program/specialize/OptimizedAdaptationTemplate.kmt"
@@ -19,40 +18,32 @@ using kermeta::standard
 using kermeta::persistence
 using kermeta::io
 using ecore
+
 class Main
 {
 	operation main() : Void is do
-		var domainMM:String init "platform:/resource/SmartAdapters/metamodel/domain/FSMMM.ecore"
-		var domainMMPattern:String init "platform:/resource/SmartAdapters/metamodel/domain/FSMMMPattern.ecore"
+		var domainMM : String init "platform:/resource/SmartAdapters/metamodel/domain/uml.ecore"
+		var domainMMPattern : String init "platform:/resource/SmartAdapters/metamodel/domain/umlPattern.ecore"
 		
-		/*var domainMM2:String init "platform:/resource/SmartAdapters/metamodel/domain/runtime/type.ecore"
-		var domainMMPattern2:String init "platform:/resource/SmartAdapters/metamodel/domain/runtime/typePattern.ecore"*/
-		
-		var shortName:String init "FSM"
-		var file:String init "C:/temp/FSM_AOM_Framework2.kmt"
+		var shortName : String init "runtime"
+		var file : String init "C:/work/dev/Kermeta/SmartAdapters/metamodel/specific/uml_AOM_Framework.kmt"
 	 
-	 	var ecore:String init "http://www.eclipse.org/emf/2002/Ecore"
-	 	var generator:AdaptationTemplate init AdaptationTemplate.new 
+	 	var ecore : String init "http://www.eclipse.org/emf/2002/Ecore"
+	 	var generator : AdaptationTemplate init AdaptationTemplate.new 
 		stdio.write("Generating framework...")
 		var handler : EcoreHelpers::EcoreHelper init EcoreHelpers::EcoreHelper.new   	  
 	    handler.initialize()
-		var repository:EMFRepository init EMFRepository.new
-		var inputMM:Set<Object> init loadModel(repository, domainMM, ecore)
+		var repository : EMFRepository init EMFRepository.new
+		var inputMM : Set<Object> init loadModel(repository, domainMM, ecore)
 		
-		/*var repository2:EMFRepository init EMFRepository.new
-		var inputMM2:Set<Object> init loadModel(repository2, domainMM2, ecore)*/
-		
-		var mm:EPackage
+		var mm : EPackage
 		mm?=inputMM.select{o | EPackage.isInstance(o)}.first
-		/*var mm2:EPackage
-		mm2?=inputMM2.select{o | EPackage.isInstance(o)}.first*/
-		if(mm!=void /*and mm2!=void*/) then
-			var classif:Set<EClassifier> init getAllNestedClassifiers(mm)
-			//classif.addAll(getAllNestedClassifiers(mm2))	
-			var content:String init generator.generate(classif, domainMM, domainMMPattern, shortName)
+		if mm != void  then
+			var classif : Set<EClassifier> init getAllNestedClassifiers(mm)	
+			var content : String init generator.generate(classif, domainMM, domainMMPattern, shortName, false)
 			stdio.writeln("OK!")
 			stdio.write("Saving...")
-			var fileWriter:FileIO init FileIO.new
+			var fileWriter : FileIO init FileIO.new
 			fileWriter.writeTextFile(file,content)
 			stdio.write("OK!")
 		else

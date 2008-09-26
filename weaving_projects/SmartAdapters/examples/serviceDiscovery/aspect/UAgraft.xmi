@@ -1,37 +1,36 @@
 <?xml version="1.0" encoding="ASCII"?>
 <art:System xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:art="http://art/pattern/art" xmlns:implem="http://art/pattern/art/implem" xmlns:instance="http://art/pattern/art/instance" xmlns:type="http://art/pattern/art/type" xsi:schemaLocation="http://art/pattern/art ../../../metamodel/domain/metamodel@runtimePattern.ecore#//art http://art/pattern/art/implem ../../../metamodel/domain/metamodel@runtimePattern.ecore#//art/implem http://art/pattern/art/instance ../../../metamodel/domain/metamodel@runtimePattern.ecore#//art/instance http://art/pattern/art/type ../../../metamodel/domain/metamodel@runtimePattern.ecore#//art/type">
   <root>
-    <subComponent xsi:type="instance:PrimitiveInstance" name="Request" type="//@types.0" state="ON">
-      <binding client="//@types.0/@port.3"/>
+    <subComponent xsi:type="instance:PrimitiveInstance" name="Request" type="//@types.1" state="ON">
       <binding client="//@types.1/@port.3"/>
       <binding client="//@types.1/@port.4"/>
-      <binding serverInstance="//@root/@subComponent.1" client="//@types.0/@port.2" server="//@types.1/@port.0"/>
+      <binding client="//@types.1/@port.5"/>
+      <binding serverInstance="//@root/@subComponent.1" client="//@types.1/@port.2" server="//@types.0/@port.0"/>
       <implem xsi:type="implem:FractalComponent" contentDesc="org.diva.example.servicediscovery.impl.Request"/>
     </subComponent>
-    <subComponent xsi:type="instance:PrimitiveInstance" name="Reply" type="//@types.1" state="ON">
+    <subComponent xsi:type="instance:PrimitiveInstance" name="Reply" type="//@types.0" state="ON">
+      <binding client="//@types.0/@port.2"/>
       <binding client="//@types.0/@port.3"/>
-      <binding client="//@types.1/@port.3"/>
-      <binding client="//@types.1/@port.4"/>
-      <binding serverInstance="//@root/@subComponent.0" client="//@types.1/@port.1" server="//@types.0/@port.1"/>
+      <binding client="//@types.0/@port.4"/>
+      <binding serverInstance="//@root/@subComponent.0" client="//@types.0/@port.1" server="//@types.1/@port.1"/>
       <implem xsi:type="implem:FractalComponent" contentDesc="org.diva.example.servicediscovery.impl.Reply"/>
     </subComponent>
   </root>
-  <services xsi:type="type:FunctionalService" name="org.diva.example.servicediscovery.interfaces.IRequest"/>
   <services xsi:type="type:FunctionalService" name="org.diva.example.servicediscovery.interfaces.IReply"/>
   <services xsi:type="type:FunctionalService" name="org.diva.example.servicediscovery.interfaces.IRequestReply"/>
-  <types xsi:type="type:PrimitiveType" name="request.requestReply.reply.policy.cache.network.">
-    <port name="request" isOptional="false" service="//@services.0" role="server"/>
-    <port name="requestReply" isOptional="false" service="//@services.2" role="server"/>
-    <port name="reply" isOptional="false" service="//@services.1" role="client"/>
+  <types xsi:type="type:PrimitiveType" name="reply.requestReply.policy.cache.network">
+    <port name="reply" isOptional="false" service="//@services.0" role="server"/>
+    <port name="requestReply" isOptional="false" service="//@services.1" role="client"/>
     <port name="policy" isOptional="false" role="client"/>
     <port name="cache" isOptional="false" role="client"/>
     <port name="network" isOptional="false" role="client"/>
   </types>
-  <types xsi:type="type:PrimitiveType" name="reply.requestReply.policy.cache.network.">
-    <port name="reply" isOptional="false" service="//@services.1" role="server"/>
-    <port name="requestReply" isOptional="false" service="//@services.2" role="client"/>
-    <port name="policy" isOptional="false" role="client"/>
-    <port name="cache" isOptional="false" role="client"/>
-    <port name="network" isOptional="false" role="client"/>
+  <types xsi:type="type:PrimitiveType" name="request.requestReply.reply.policy.cache.network">
+    <port name="request" lower="1" upper="1" isOptional="false" role="server"/>
+    <port name="requestReply" lower="1" upper="1" isOptional="false" service="//@services.1" role="server"/>
+    <port name="reply" lower="1" upper="1" isOptional="false" service="//@services.0" role="client"/>
+    <port name="policy" lower="1" upper="1" isOptional="false" role="client"/>
+    <port name="cache" lower="1" upper="1" isOptional="false" role="client"/>
+    <port name="network" lower="1" upper="1" isOptional="false" role="client"/>
   </types>
 </art:System>

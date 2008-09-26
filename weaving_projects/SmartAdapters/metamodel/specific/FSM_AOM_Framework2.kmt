@@ -22,7 +22,6 @@ using kermeta::utils
 using patternframework
 using org::smartadapters::core
 using org::smartadapters::extension
-using ecore
 using org::smartadapters::utils
 
 package smartadapters

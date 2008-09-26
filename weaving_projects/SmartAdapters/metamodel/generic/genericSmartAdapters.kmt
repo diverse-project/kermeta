@@ -1,4 +1,4 @@
-/* $Id: genericSmartAdapters.kmt,v 1.26 2008-07-04 10:03:53 bmorin Exp $
+/* $Id: genericSmartAdapters.kmt,v 1.27 2008-09-26 12:45:26 bmorin Exp $
  * Creation date: July 17, 2007
  * License:
  * Copyright: IRISA / INRIA Rennes Bretagne Atlantique
@@ -230,20 +230,12 @@ package smartadapters
 			*/
 			operation updateClones() is do
 				if(~aspect.structure != void) then
-					~aspect.persistent.each{o | 
-						stdio.errorln("1  "+o.toString)
-					}
 					~aspect.structure.content.each{o |
-						stdio.errorln("2  "+o.toString)
 						if (not(~aspect.persistent.contains(o))) then
-							//if (not(~aspect.persistent.contains(getRealObject(o,false).asType(PObject)))) then
-								stdio.errorln("3  "+o.toString)
-								converter.deleteConverted(o)
-								var temp : Object init converter.getConverted(o)
-								stdio.writeln("cloning "+temp.printObject)
-								clone.put(o, temp)
-								removable.add(temp)
-							//end
+							converter.deleteConverted(o)
+							var temp : Object init converter.getConverted(o)
+							clone.put(o, temp)
+							removable.add(temp)
 						end
 					}
 				end

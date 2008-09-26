@@ -13,14 +13,17 @@ package art;
 require kermeta
 require "platform:/resource/SmartAdapters/metamodel/domain/metamodel@runtime.kmt"
 require "platform:/resource/SmartAdapters/program/weaving/aspectizedFramework.kmt"
+require "platform:/resource/Runtime2SCA/src/kermeta/runtime2XML/Runtime2SCA.kmt"
 
-require "platform:/resource/SmartAdapters/program/weaving/weaver4Runtime.kmt"
-using weaver
+//require "platform:/resource/SmartAdapters/program/weaving/weaver4Runtime.kmt"
+//using weaver
 
 using kermeta::standard
 using kermeta::utils
 using kermeta::persistence
+using kermeta::io
 using art::type
+using SCA
 
 package display{
 	class DisplayContext
@@ -29,7 +32,12 @@ package display{
 		reference root : DisplayElement
 		reference table : StringTable
 		
-		reference weaver : Weaver
+		//reference weaver : Weaver
+		
+		reference sca : SCA
+		reference xmlFile : String
+		reference xmlContent : String
+		reference fileWriter : FileIO
 		
 		operation ~init() is
 		do
@@ -37,9 +45,19 @@ package display{
 			table := StringTable.new
 			table.~init(self)
 			
-			if weaver == void then
+			xmlFile := "C:/Documents and Settings/bmorin/workspace/SCA_example/src/test.composite"
+			
+			/*if weaver == void then
 				weaver := Weaver.new
 				weaver.initWeaver
+			end*/
+			
+			if fileWriter == void then
+				fileWriter := FileIO.new
+			end
+			
+			if sca == void then
+				sca := SCA.new
 			end
 		end
 		
@@ -81,6 +99,7 @@ package display{
 			enter(root)
 		end
 		
+		@EMF_renameAs "setRootToto"
 		operation setRoot(root : DisplayElement) is
 		do
 			self.root := root
@@ -306,7 +325,7 @@ package instance{
 			displaySubComponent(context)
 			//root element
 			if self.container.asType(System) != void then
-				weaveAspect(context)
+				//weaveAspect(context)
 				loadModel(context)
 				displayServices(context)
 			end	
@@ -364,7 +383,7 @@ package instance{
 		
 		operation weaveAspect(context : DisplayContext) is
 		do
-			var aspectURI : String init stdio.read("Enter the path (right button->Properties->Path:) of an aspect: ")
+/*			var aspectURI : String init stdio.read("Enter the path (right button->Properties->Path:) of an aspect: ")
 			if aspectURI != void and aspectURI != "" then
 				context.weaver.loadMetamodel("platform:/resource/SmartAdapters/metamodel/domain/metamodel@runtime.ecore")
 				context.weaver.loadMetamodelPattern("platform:/resource/SmartAdapters/metamodel/domain/metamodel@runtimePattern.ecore")
@@ -374,7 +393,7 @@ package instance{
 				context.weaver.saveModel("platform:/resource/SmartAdapters/examples/serviceDiscovery/model/temp/woven.art", "http://art")
 				extern org::diva::causalLink::smartadapters::fractal::SmartAdaptersToFractal.loadUpdateModel(self, "platform:/resource/SmartAdapters/examples/serviceDiscovery/model/temp/woven.art")
 			end
-		end	
+*/		end	
 		
 		operation loadModel(context : DisplayContext) is
 		do
@@ -387,7 +406,7 @@ package instance{
 					extern org::diva::causalLink::smartadapters::fractal::SmartAdaptersToFractal.loadUpdateModel(self, "platform:/resource"+model)
 					extern org::diva::causalLink::smartadapters::fractal::SmartAdaptersToFractal.saveEMFModel(self, "platform:/resource/SmartAdapters/examples/serviceDiscovery/model/fromPlatform/woven/newReferenceModel.art")
 					var rep : EMFRepository init EMFRepository.new
-					rep.ignoreLoadErrors := true
+					//rep.ignoreLoadErrors := true
 					var resource : Resource init rep.createResource("platform:/resource/SmartAdapters/examples/serviceDiscovery/model/fromPlatform/woven/newReferenceModel.art", "http://art")
 					do
 						resource.load
@@ -397,11 +416,14 @@ package instance{
 					var context : DisplayContext init DisplayContext.new 
 					context.~init
 					var root : CompositeInstance init resource.instances.one.asType(System).root
+					context.xmlContent := context.sca.generate(resource.instances.one.asType(System))
+					context.fileWriter.writeTextFile(context.xmlFile,context.xmlContent)
 					do 
 						root.checkAllInvariantsIte
 					rescue (e : kermeta::exceptions::ConstraintViolatedInv)
 						stdio.errorln(e.message)
-					end 
+					end
+					stdio.writeln("SCA model generated in "+context.xmlFile)
 					context.setRoot(root)
 					context.enter(root)
 				rescue (e : kermeta::exceptions::FileNotFoundException)

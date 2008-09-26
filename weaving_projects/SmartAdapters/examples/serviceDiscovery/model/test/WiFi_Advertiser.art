@@ -67,28 +67,28 @@
       <input name="java.lang.String arg0"/>
     </operation>
   </services>
-  <types xsi:type="type:CompositeType" name="advertiser.request.">
+  <types xsi:type="type:CompositeType" name="advertiser.request">
     <port name="advertiser" lower="0" upper="1" service="//@services.1" role="server"/>
     <port name="request" lower="0" upper="1" service="//@services.6" role="server"/>
   </types>
-  <types xsi:type="type:PrimitiveType" name="cache.policy.attribute-controller.">
+  <types xsi:type="type:PrimitiveType" name="cache.policy.attribute-controller">
     <port name="cache" lower="1" upper="-1" isOptional="false" service="//@services.2" role="server"/>
     <port name="policy" lower="1" upper="1" isOptional="false" service="//@services.3" role="client"/>
     <port name="attribute-controller" lower="1" upper="1" isOptional="false" service="//@services.4" role="server"/>
   </types>
-  <types xsi:type="type:PrimitiveType" name="router.">
+  <types xsi:type="type:PrimitiveType" name="router">
     <port name="router" lower="1" upper="1" isOptional="false" service="//@services.8" role="server"/>
   </types>
-  <types xsi:type="type:PrimitiveType" name="policy.">
+  <types xsi:type="type:PrimitiveType" name="policy">
     <port name="policy" lower="1" upper="-1" isOptional="false" service="//@services.3" role="server"/>
   </types>
-  <types xsi:type="type:PrimitiveType" name="advertiser.policy.cache.network.">
+  <types xsi:type="type:PrimitiveType" name="advertiser.policy.cache.network">
     <port name="advertiser" lower="1" upper="1" isOptional="false" service="//@services.1" role="server"/>
     <port name="policy" lower="1" upper="1" isOptional="false" service="//@services.3" role="client"/>
     <port name="cache" lower="1" upper="1" isOptional="false" service="//@services.2" role="client"/>
     <port name="network" lower="1" upper="1" isOptional="false" service="//@services.5" role="client"/>
   </types>
-  <types xsi:type="type:PrimitiveType" name="network.router.">
+  <types xsi:type="type:PrimitiveType" name="network.router">
     <port name="network" lower="1" upper="-1" isOptional="false" service="//@services.5" role="server"/>
     <port name="router" lower="1" upper="-1" isOptional="false" service="//@services.8" role="client"/>
   </types>

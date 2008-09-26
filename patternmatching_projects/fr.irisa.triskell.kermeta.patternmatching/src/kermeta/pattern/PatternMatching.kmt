@@ -1,4 +1,4 @@
-/* $Id: PatternMatching.kmt,v 1.9 2008-02-29 10:58:22 bmorin Exp $
+/* $Id: PatternMatching.kmt,v 1.10 2008-09-26 12:46:36 bmorin Exp $
  * Creation date: October 19, 2006
  * License:
  * Copyright:
@@ -48,11 +48,13 @@ class PatternMatching
    end    
 
    operation matchStep1(metamodel : Sequence<EPackage>, model : Set<Object>, 
-       template : patternframework::ModelPattern) : Sequence<Hashtable<Object, Object>> is abstract
+       template : patternframework::ModelPattern) : Sequence<Hashtable<Object, Object>> is 
+       abstract
        
    operation optimizedMatchStep1(metamodel : Sequence<EPackage>, model : Set<Object>, 
        template : patternframework::ModelPattern,
-       keepMetamodel : Boolean, keepModel : Boolean, keepTemplate : Boolean) : Sequence<Hashtable<Object, Object>> is abstract
+       keepMetamodel : Boolean, keepModel : Boolean, keepTemplate : Boolean) : Sequence<Hashtable<Object, Object>> is 
+       abstract
        
    operation matchStep2(model : Set<Object>, template : patternframework::ModelPattern, 
        bindings : Sequence<Hashtable<Object, Object>>) : Sequence<Hashtable<Object, Object>> is do
@@ -79,7 +81,7 @@ class PatternMatching
       // TODO resolve constraints in OCL
       result := true
    else  
-  	   var seqpro : Sequence<kermeta::standard::Object> init Sequence<kermeta::standard::Object>.new
+  	   /*var seqpro : Sequence<kermeta::standard::Object> init Sequence<kermeta::standard::Object>.new
 	 
        var de : DynamicExpression init DynamicExpression.new
        de.initializeDefaults
@@ -90,7 +92,8 @@ class PatternMatching
        params.put("pattern", template)
        params.put("res", bool)       
        de.execute(void, params)	
-       result := bool.one
+       result := bool.one*/
+       result := true
    end          
    end
 }

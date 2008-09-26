@@ -1,4 +1,4 @@
-/* $Id: MMPatternBuilder.kmt,v 1.8 2008-05-30 08:19:51 bmorin Exp $
+/* $Id: MMPatternBuilder.kmt,v 1.9 2008-09-26 12:45:30 bmorin Exp $
  * Creation date: October 18, 2006
  * License:
  * Copyright: IRISA / INRIA Rennes Bretagne Atlantique
@@ -21,8 +21,8 @@ using org::smartadapters::utils
 class EcorePatternMetamodelBuilder {
 
   operation main() is do 
-      var sourceMetamodelUri : String init "platform:/resource/SmartAdapters/metamodel/domain/uml.ecore"
-      var targetMetamodelUri : String init "platform:/resource/SmartAdapters/metamodel/domain/umlPattern.ecore"
+      var sourceMetamodelUri : String init "platform:/resource/PatternMatching/metamodel/FSMMM.ecore"
+      var targetMetamodelUri : String init "platform:/resource/PatternMatching/metamodel/FSMMMPattern.ecore"
       
       var builder : PatternBuilder init PatternBuilder.new
       builder.relax(sourceMetamodelUri, targetMetamodelUri) 

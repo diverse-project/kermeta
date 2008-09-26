@@ -6,7 +6,7 @@
     </subComponent>
   </root>
   <types xsi:type="type:PrimitiveType" name="Buffer">
-    <port name="router" lower="1" upper="1" role="client"/>
-    <port name="router" lower="1" upper="1" role="server"/>
+    <port name="routerClient" lower="1" upper="1" role="client"/>
+    <port name="routerServer" lower="1" upper="1" role="server"/>
   </types>
 </art:System>

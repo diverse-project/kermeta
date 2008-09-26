@@ -57,7 +57,7 @@
   </adapt>
   <adapt xsi:type="adaptations:SetruntimeinstanceTransmissionBinding">
     <TransmissionBindingToSet href="BufferInterface.xmi#//@root/@subComponent.1/@binding.0"/>
-    <refserver href="BufferInterface.xmi#//@types.1/@port.0"/>
+    <refserver href="BufferGraft.xmi#//@types.0/@port.1"/>
     <refserverInstance href="BufferGraft.xmi#//@root/@subComponent.0"/>
   </adapt>
   <adapt xsi:type="adaptations:CreateruntimeinstanceTransmissionBinding" isUnique="non_unique">
@@ -68,14 +68,14 @@
     <refserver href="BufferInterface.xmi#//@types.1/@port.0"/>
     <refserverInstance href="BufferInterface.xmi#//@root/@subComponent.0"/>
   </adapt>
-  <adapt xsi:type="adaptations:SetruntimeinstancePrimitiveInstance" refbinding="//@adapt.3/@newTransmissionBinding">
+  <adapt xsi:type="adaptations:SetruntimeinstancePrimitiveInstance" refbinding="//@adapt.3/@newTransmissionBinding" refname="#">
     <PrimitiveInstanceToSet href="BufferGraft.xmi#//@root/@subComponent.0"/>
   </adapt>
   <adapt xsi:type="adaptations:SetruntimetypePort">
-    <PortToSet href="BufferGraft.xmi#//@types.0/@port.1"/>
+    <PortToSet href="BufferGraft.xmi#//@types.0/@port.0"/>
     <refservice href="BufferInterface.xmi#//@services.1"/>
   </adapt>
-  <adapt xsi:type="adaptations:SetruntimetypePort" refrole="">
+  <adapt xsi:type="adaptations:SetruntimetypePort">
     <PortToSet href="BufferGraft.xmi#//@types.0/@port.1"/>
     <refservice href="BufferInterface.xmi#//@services.1"/>
   </adapt>

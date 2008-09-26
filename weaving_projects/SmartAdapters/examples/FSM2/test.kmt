@@ -1,4 +1,4 @@
-/* $Id: test.kmt,v 1.7 2008-06-09 06:45:36 bmorin Exp $
+/* $Id: test.kmt,v 1.8 2008-09-26 12:45:25 bmorin Exp $
  * Creation date: April 24, 2007
  * License:
  * Copyright:
@@ -27,7 +27,7 @@ class FSMTest2
 		var domainMMUri:String init "platform:/resource/SmartAdapters/metamodel/domain/FSMMM.ecore"
 		var domainMMPatternUri:String init "platform:/resource/SmartAdapters/metamodel/domain/FSMMMPattern.ecore"
 		var resultUri:String init "platform:/resource/SmartAdapters/examples/FSM2/result.xmi"
-		
+				
 		var weaver:Weaver init Weaver.new
 		weaver.initWeaver()
 		weaver.loadMetamodel(domainMMUri)

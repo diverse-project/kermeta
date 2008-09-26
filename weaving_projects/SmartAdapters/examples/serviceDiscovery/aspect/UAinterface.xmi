@@ -9,16 +9,16 @@
   <services xsi:type="type:FunctionalService" name="org.diva.example.servicediscovery.interfaces.ICache"/>
   <services xsi:type="type:FunctionalService" name="org.diva.example.servicediscovery.interfaces.INetwork"/>
   <services xsi:type="type:FunctionalService" name="org.diva.example.servicediscovery.interfaces.IRequest"/>
-  <types xsi:type="type:PrimitiveType" name="policy.">
+  <types xsi:type="type:PrimitiveType" name="policy">
     <port name="policy" service="//@services.0" role="server"/>
   </types>
-  <types xsi:type="type:PrimitiveType" name="cache.policy.attribute-controller.">
+  <types xsi:type="type:PrimitiveType" name="cache.policy.attribute-controller">
     <port name="cache" service="//@services.1" role="server"/>
   </types>
-  <types xsi:type="type:PrimitiveType" name="network.router.">
+  <types xsi:type="type:PrimitiveType" name="network.router">
     <port name="network" service="//@services.2" role="server"/>
   </types>
-  <types xsi:type="type:CompositeType" name="advertiser.request.">
+  <types xsi:type="type:CompositeType" name="advertiser.request">
     <port name="request" service="//@services.3" role="server"/>
   </types>
 </art:System>

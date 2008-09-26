@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="ASCII"?>
-<FSM:Fsm xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:FSM="platform:/resource/SmartAdapters/metamodel/domain/FSMMM.ecore#/FSM" xsi:schemaLocation="platform:/resource/SmartAdapters/metamodel/domain/FSMMM.ecore#/FSM ../../metamodel/domain/FSMMM.ecore#/1">
-  <states name="a"/>
-  <states name="b"/>
-  <transitions source="//@states.0" target="//@states.1"/>
-</FSM:Fsm>

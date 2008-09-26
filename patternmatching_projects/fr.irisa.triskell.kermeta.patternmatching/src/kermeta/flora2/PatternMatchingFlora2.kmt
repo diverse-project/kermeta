@@ -1,4 +1,4 @@
-/* $Id: PatternMatchingFlora2.kmt,v 1.11 2008-02-20 09:09:35 bmorin Exp $
+/* $Id: PatternMatchingFlora2.kmt,v 1.12 2008-09-26 12:46:40 bmorin Exp $
  * Creation date: October 19, 2006
  * License:
  * Copyright:
@@ -10,7 +10,6 @@ package kermeta::pattern::flora2;
 require kermeta
 
 require "platform:/resource/fr.irisa.triskell.kermeta.patternmatching/src/kermeta/pattern/PatternMatching.kmt"
-require "platform:/resource/fr.irisa.triskell.kermeta.patternmatching/src/kermeta/pattern/metamodel/PatternFramework.ecore"
 
 require "platform:/plugin/fr.irisa.triskell.kermeta.flora2/src/flora2/Flora2wVisitor.kmt"
 require "platform:/plugin/fr.irisa.triskell.kermeta.flora2/src/kermeta/flora2/FloraInterpreter.kmt"
@@ -19,8 +18,6 @@ require "platform:/plugin/fr.irisa.triskell.kermeta.flora2/src/kermeta/flora2/Mo
 require "platform:/plugin/fr.irisa.triskell.kermeta.flora2/src/kermeta/flora2/visitor/Flora2SerializerVisitor.kmt"
  
 require "platform:/resource/fr.irisa.triskell.kermeta.patternmatching/src/kermeta/flora2/ModelPattern2Flora.kmt"
-
-
 
  
 using ecore
@@ -31,7 +28,6 @@ using flora2
 using flora2::visitors
 using kermeta::flora2
 using kermeta::flora2::pattern
-
 
 class PatternMatchingFlora2 inherits PatternMatching
 {
@@ -45,13 +41,15 @@ class PatternMatchingFlora2 inherits PatternMatching
    attribute modelFactClauses : OrderedSet<flora2::Clause> 
    attribute queryPattern : flora2::Query
    
+   //attribute resultBindings : Sequence<Hashtable<Object, Object>>
+   
 	method optimizedMatchStep1(metamodel : Sequence<EPackage>, model : Set<Object>, 
 	       template : patternframework::ModelPattern,
 	       keepMetamodel : Boolean, keepModel : Boolean, keepTemplate : Boolean) : Sequence<Hashtable<Object, Object>> is
 	do
 		initialize
 		if debug then stdio.writeln("...PatternMatchingFlora2.Step1()") end 
-		interpreter.flush
+		//interpreter.flush
 
 		if debug then stdio.writeln("...creating facts related to the metamodel")  end
 		if metamodelFactClauses == void or not(keepMetamodel) then
@@ -66,12 +64,16 @@ class PatternMatchingFlora2 inherits PatternMatching
         insertFactsForModel()
         	
         if debug then stdio.writeln("...creating a query for the pattern ")  end
-        if queryPattern == void or not(keepTemplate) then          
-			computeQueryForTemplate(template)
+       	if queryPattern == void or not(keepTemplate) then
+       		computeQueryForTemplate(template)
 		end
 
-       if debug then stdio.writeln("...running flora2 interpreter ")  end                
-       result := search(template)	
+       if debug then stdio.writeln("...running flora2 interpreter ")  end
+      /* if keepTemplate and  resultBindings != void then
+       		result := resultBindings
+       else               
+	*/		result := search(template)
+	 //  end
 	end
    
    method matchStep1(metamodel : Sequence<EPackage>, model : Set<Object>, 
@@ -84,8 +86,9 @@ class PatternMatchingFlora2 inherits PatternMatching
 	*/
 	operation search(template : patternframework::ModelPattern): Sequence<Hashtable<Object, Object>> is
     do
-		var itBindings : Iterator<Hashtable<String, String>> init
-               interpreter.queryInDefaultModule(queryPattern, 
+		var itBindings : Iterator<Hashtable<String, String>> 
+		
+		itBindings := interpreter.queryInDefaultModule(queryPattern, 
                tranfoPattern2Flora.lastIdVariants(template))
 
         if debug then stdio.writeln("...linking bindings ")  end                      
@@ -165,7 +168,7 @@ class PatternMatchingFlora2 inherits PatternMatching
    */
    operation computeQueryForTemplate(template : patternframework::ModelPattern) is
    do	
-   		queryPattern := tranfoPattern2Flora.transformModelPattern(template)              
+ 		queryPattern := tranfoPattern2Flora.transformModelPattern(template)
    end
 
    operation initialize() is
@@ -173,6 +176,12 @@ class PatternMatchingFlora2 inherits PatternMatching
        // ### ------------------
        debug := false
        // ### ------------------
+       
+       if debug then stdio.writeln("initializing...") end
+       
+       /*if resultBindings == void then
+	       resultBindings := Sequence<Hashtable<Object, Object>>.new
+	   end*/
        
    	   if interpreter == void then 
    	   		interpreter := FloraInterpreter.new
@@ -188,6 +197,8 @@ class PatternMatchingFlora2 inherits PatternMatching
    			tranfoPattern2Flora := ModelPattern2Flora.new
    			tranfoPattern2Flora.initialize()
    		end
+   		
+   		if debug then stdio.writeln("OK!") end
    end
 
    /**

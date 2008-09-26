@@ -1,20 +1,19 @@
 <?xml version="1.0" encoding="ASCII"?>
 <FSM:Fsm xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:FSM="platform:/resource/SmartAdapters/metamodel/domain/FSMMM.ecore#/FSM">
+  <states name="a"/>
   <states name="b"/>
   <states name="c"/>
   <states name="d"/>
   <states xsi:type="FSM:State" name="a"/>
   <states xsi:type="FSM:State" name="b"/>
+  <states xsi:type="FSM:State" name="c"/>
   <states name="d"/>
-  <states name="a"/>
-  <states name="b"/>
-  <states name="a"/>
-  <transitions source="//@states.6" target="//@states.0"/>
-  <transitions source="//@states.6" target="//@states.1"/>
-  <transitions source="//@states.1" target="//@states.2"/>
-  <transitions source="//@states.0" target="//@states.6"/>
-  <transitions xsi:type="FSM:Transition" source="//@states.4" target="//@states.3"/>
-  <transitions source="//@states.5" target="//@states.1"/>
-  <transitions source="//@states.6" target="//@states.0"/>
-  <transitions source="//@states.8" target="//@states.7"/>
+  <transitions source="//@states.0" target="//@states.1"/>
+  <transitions source="//@states.0" target="//@states.2"/>
+  <transitions source="//@states.2" target="//@states.3"/>
+  <transitions source="//@states.1" target="//@states.0"/>
+  <transitions xsi:type="FSM:Transition" source="//@states.5" target="//@states.4"/>
+  <transitions source="//@states.6" target="//@states.4"/>
+  <transitions source="//@states.7" target="//@states.6"/>
+  <transitions source="//@states.4" target="//@states.5"/>
 </FSM:Fsm>

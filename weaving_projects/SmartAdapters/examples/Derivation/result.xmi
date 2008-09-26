@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="ASCII"?>
-<core:Adapter xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:adaptations="platform:/resource/SmartAdapters/metamodel/specific/FSM_AOM_Framework.ecore#/org/smartadapters/adaptations" xmlns:core="platform:/resource/SmartAdapters/metamodel/generic/genericSmartAdaptersBase.ecore#/org/smartadapters/core">
-  <adapt xsi:type="adaptations:setTransition"/>
-  <adapt xsi:type="adaptations:setState"/>
-  <adapt xsi:type="adaptations:setTransition"/>
-</core:Adapter>
