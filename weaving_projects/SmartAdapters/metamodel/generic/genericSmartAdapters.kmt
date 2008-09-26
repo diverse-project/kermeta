@@ -1,4 +1,4 @@
-/* $Id: genericSmartAdapters.kmt,v 1.27 2008-09-26 12:45:26 bmorin Exp $
+/* $Id: genericSmartAdapters.kmt,v 1.28 2008-09-26 15:56:25 bmorin Exp $
  * Creation date: July 17, 2007
  * License:
  * Copyright: IRISA / INRIA Rennes Bretagne Atlantique
@@ -67,6 +67,7 @@ package smartadapters
 			/**
 			 * Return the adapter associated to the adaptation or to the reverse adaptation
 			 */
+			@EMF_renameAs "getAdapterSpecialCyril"
 			operation getAdapter() : Adapter 
 				post notVoid is result != void
 			is do
