@@ -23,7 +23,7 @@ using kermeta::utils
 using kermeta::persistence
 using kermeta::io
 using art::type
-using SCA
+using sca
 
 package display{
 	class DisplayContext
@@ -413,16 +413,16 @@ package instance{
 					rescue (e : kermeta::exceptions::ResourceLoadException)
 						loadModel(context)
 					end
-					var context : DisplayContext init DisplayContext.new 
+					//var context : DisplayContext init DisplayContext.new 
 					context.~init
 					var root : CompositeInstance init resource.instances.one.asType(System).root
 					context.xmlContent := context.sca.generate(resource.instances.one.asType(System))
 					context.fileWriter.writeTextFile(context.xmlFile,context.xmlContent)
-					do 
+					/*do 
 						root.checkAllInvariantsIte
 					rescue (e : kermeta::exceptions::ConstraintViolatedInv)
 						stdio.errorln(e.message)
-					end
+					end*/
 					stdio.writeln("SCA model generated in "+context.xmlFile)
 					context.setRoot(root)
 					context.enter(root)

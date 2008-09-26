@@ -1,4 +1,4 @@
-/* $Id: weavingRoles.kmt,v 1.4 2008-09-26 12:45:28 bmorin Exp $
+/* $Id: weavingRoles.kmt,v 1.5 2008-09-26 16:04:31 bmorin Exp $
  * Creation date: March 19, 2008
  * License:
  * Copyright: IRISA / INRIA Rennes Bretagne Atlantique
@@ -17,7 +17,7 @@ require "platform:/resource/Runtime2SCA/src/kermeta/runtime2XML/Runtime2SCA.kmt"
 using kermeta::standard
 using kermeta::io
 using weaver
-using SCA
+using sca
 
 class ServiceDiscoveryMain
 {
