@@ -1,5 +1,5 @@
 /*******************************************************************************
- * $Id: PackageFigure.java,v 1.4 2008-02-14 15:53:41 cfaucher Exp $
+ * $Id: PackageFigure.java,v 1.5 2008-09-26 14:11:07 dvojtise Exp $
  * License: EPL
  * Copyright: IRISA / INRIA / Universite de Rennes 1
  ******************************************************************************/
@@ -34,7 +34,8 @@ public class PackageFigure extends org.topcased.draw2d.figures.PackageFigure {
 	 */
 	protected IFigure createHeader() {
 		Label mainFigure = new Label(KmImageRegistry.getImage("PACKAGE"));
-		mainFigure.setLabelAlignment(PositionConstants.CENTER);
+		//  DVK temporarily disabled in 1.2.0 
+		// mainFigure.setAlignment(PositionConstants.CENTER);
 
 		ComposedLabel label = new ComposedLabel(new Label(), mainFigure,
 				new Label(), false);

@@ -1,5 +1,5 @@
 /*******************************************************************************
- * $Id: OperationEditPart.java,v 1.8 2008-02-14 15:53:42 cfaucher Exp $
+ * $Id: OperationEditPart.java,v 1.9 2008-09-26 14:11:07 dvojtise Exp $
  * License: EPL
  * Copyright: IRISA / INRIA / Universite de Rennes 1
  ******************************************************************************/
@@ -114,7 +114,8 @@ public class OperationEditPart extends EMFGraphNodeEditPart {
 		OperationFigure fig = (OperationFigure) getFigure();
 		EditableLabel lbl = (EditableLabel) fig.getLabel();
 		lbl.setIcon(KmImageRegistry.getImage("OPERATION"));
-		lbl.setLabelAlignment(PositionConstants.LEFT);
+		//  DVK temporarily disabled in 1.2.0 
+		// lbl.setAlignment(PositionConstants.LEFT);
 		updateLabel(lbl);
 	}
 

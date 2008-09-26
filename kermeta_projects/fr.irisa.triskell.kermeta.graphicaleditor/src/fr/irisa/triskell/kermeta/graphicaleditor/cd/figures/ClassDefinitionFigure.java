@@ -1,5 +1,5 @@
 /*******************************************************************************
- * $Id: ClassDefinitionFigure.java,v 1.4 2008-02-14 15:53:41 cfaucher Exp $
+ * $Id: ClassDefinitionFigure.java,v 1.5 2008-09-26 14:11:07 dvojtise Exp $
  * License: EPL
  * Copyright: IRISA / INRIA / Universite de Rennes 1
  ******************************************************************************/
@@ -41,7 +41,8 @@ public class ClassDefinitionFigure extends
 		setOpaque(true);
 
 		EditableLabel mainFigure = new EditableLabel();
-		mainFigure.setLabelAlignment(PositionConstants.CENTER);
+		//  DVK temporarily disabled in 1.2.0 
+		// mainFigure.setAlignment(PositionConstants.CENTER);
 
 		setLabel(new ComposedLabel(new Label(), mainFigure, new Label(), false));
 		add(getLabel());

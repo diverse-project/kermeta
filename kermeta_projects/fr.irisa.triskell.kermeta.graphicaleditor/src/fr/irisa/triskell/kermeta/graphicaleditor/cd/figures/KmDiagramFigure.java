@@ -1,5 +1,5 @@
 /*******************************************************************************
- * $Id: KmDiagramFigure.java,v 1.4 2008-02-14 15:53:41 cfaucher Exp $
+ * $Id: KmDiagramFigure.java,v 1.5 2008-09-26 14:11:06 dvojtise Exp $
  * License: EPL
  * Copyright: IRISA / INRIA / Universite de Rennes 1
  ******************************************************************************/
@@ -28,7 +28,8 @@ public class KmDiagramFigure extends DiagramFigure {
 	 */
 	protected ILabel createLabel() {
 		Label header = new Label(KmImageRegistry.getImage("PACKAGE"));
-		header.setLabelAlignment(PositionConstants.LEFT);
+		//  DVK temporarily disabled in 1.2.0 
+		// header.setAlignment(PositionConstants.LEFT);
 		header.setBorder(new PackageHeaderFigureBorder());
 
 		return header;

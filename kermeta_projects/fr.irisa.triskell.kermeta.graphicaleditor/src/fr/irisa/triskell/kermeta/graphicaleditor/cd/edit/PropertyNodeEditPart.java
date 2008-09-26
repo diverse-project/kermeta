@@ -1,5 +1,5 @@
 /*******************************************************************************
- * $Id: PropertyNodeEditPart.java,v 1.5 2008-02-14 15:53:43 cfaucher Exp $
+ * $Id: PropertyNodeEditPart.java,v 1.6 2008-09-26 14:11:07 dvojtise Exp $
  * License: EPL
  * Copyright: IRISA / INRIA / Universite de Rennes 1
  ******************************************************************************/
@@ -125,7 +125,8 @@ public class PropertyNodeEditPart extends EMFGraphNodeEditPart {
 		PropertyNodeFigure fig = (PropertyNodeFigure) getFigure();
 		EditableLabel lbl = (EditableLabel) fig.getLabel();
 
-		lbl.setLabelAlignment(PositionConstants.LEFT);
+		//  DVK temporarily disabled in 1.2.0 
+		// lbl.setAlignment(PositionConstants.LEFT);
 
 		// Setting of the icon fornt of the property label
 		if (getProperty().isIsComposite()) {
