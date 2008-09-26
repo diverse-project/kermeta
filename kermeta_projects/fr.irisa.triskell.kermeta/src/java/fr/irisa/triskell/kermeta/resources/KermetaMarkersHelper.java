@@ -1,4 +1,4 @@
-/*$Id: KermetaMarkersHelper.java,v 1.15 2008-08-13 11:18:46 dvojtise Exp $
+/*$Id: KermetaMarkersHelper.java,v 1.16 2008-09-26 12:05:57 dvojtise Exp $
 * Project : fr.irisa.triskell.kermeta
 * File : 	KermetaMarkersHelper.java
 * License : EPL
@@ -88,7 +88,10 @@ public class KermetaMarkersHelper extends EclipseMarkerHelper {
      *  @param unit the kermeta unit for the given file
      */
     public static void createMarkerForKMTFile(IFile file, Message message, KermetaUnit unit) {
-    	String realMessage = formatMessage(message.getValue());
+    	// make sure the string is not too long (it is pointless to have a marker longer than 20 lines, 
+    	// and Eclipse don't really support large markers
+    	String realMessage = message.getValue().length() > LINE_MAX_SIZE*20 ? message.getValue().substring(0, (LINE_MAX_SIZE*20) - 3)+"..." : message.getValue();
+    	//String realMessage = formatMessage(trimmedMessage);
         try {
         	if (message instanceof ParsingError)
         		createParsingError(file, realMessage, (ParsingError) message);
