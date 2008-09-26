@@ -1,4 +1,4 @@
-/* $Id: KM2EcoreContext.kmt,v 1.43 2008-09-25 08:34:58 cfaucher Exp $
+/* $Id: KM2EcoreContext.kmt,v 1.44 2008-09-26 08:24:06 cfaucher Exp $
  * Creation date: February 14, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -120,8 +120,6 @@ class KM2EcoreContext {
 	/********/
 	
 	reference current_valueType : ClassDefinition [0..1]
-	
-	attribute resultOfLastFt : String [0..1]
 	
 	attribute staticOperationMode : Boolean [0..1]
 

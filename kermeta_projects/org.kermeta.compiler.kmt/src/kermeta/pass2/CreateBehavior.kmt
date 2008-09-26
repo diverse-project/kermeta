@@ -1,4 +1,4 @@
-/* $Id: CreateBehavior.kmt,v 1.77 2008-09-25 21:50:31 cfaucher Exp $
+/* $Id: CreateBehavior.kmt,v 1.78 2008-09-26 08:24:05 cfaucher Exp $
  * Creation date: January 21, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -428,7 +428,7 @@ package behavior {
 
 							if context.getResultLastStatementType() == stm.asType(Expression).staticType.createBehaviorJava(context) then
 								if stm.callsFunctionType() then
-									str_statement := str_statement + context.getResultLastStatementId() + context.resultOfLastFt + ";\n"
+									str_statement := str_statement + context.getResultLastStatementId() + stm.asType(CallFeature).resultOfLastFt + ";\n"
 								else
 									if str_statement.contains(context.RETURN_EXPRESSION_TO_REPLACE_SPECIAL) then
 										str_statement := str_statement.replace(context.RETURN_EXPRESSION_TO_REPLACE_SPECIAL, context.getResultLastStatementId())
@@ -633,7 +633,7 @@ package behavior {
 								if self.getContainerAsTypeIn(Assignment, Block).isVoid() then
 									resultPrefix := context.RETURN_EXPRESSION_TO_REPLACE_SPECIAL
 								end
-								result := result + resultPrefix + context.PREVIOUS_STATEMENT_FT + context.RETURN_EXPRESSION_TO_REPLACE + context.resultOfLastFt
+								result := result + resultPrefix + context.PREVIOUS_STATEMENT_FT + context.RETURN_EXPRESSION_TO_REPLACE + self.resultOfLastFt
 							end
 						end
 					else

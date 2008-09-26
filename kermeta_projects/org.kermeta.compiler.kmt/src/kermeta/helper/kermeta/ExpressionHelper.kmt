@@ -1,4 +1,4 @@
-/* $Id: ExpressionHelper.kmt,v 1.22 2008-09-25 21:50:31 cfaucher Exp $
+/* $Id: ExpressionHelper.kmt,v 1.23 2008-09-26 08:24:00 cfaucher Exp $
  * Creation date: Jul 25, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -577,12 +577,11 @@ aspect class CallFeature {
 		
 		if (callElement == "") and (not Operation.new().isVoidType(self.staticType.getTypeName())) then
 			self.resultOfLastFt := "result" + context.printFtSuffix()
-			context.resultOfLastFt := self.resultOfLastFt
 		end
 		
 		ft_str := ft_str + "//EIft:" + self.staticOperation.name + "\n"
 		
-		//Pop all the stacks related to the function type compilation
+		//Pop all the stacks related to the compiling of function type
 		context.ftSuffixActivation := false
 		context.ftMapTypeStack.pop()
 		context.ftProductTypeStack.pop()
