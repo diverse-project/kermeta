@@ -1,4 +1,4 @@
-/* $Id: genericSmartAdapters.kmt,v 1.28 2008-09-26 15:56:25 bmorin Exp $
+/* $Id: genericSmartAdapters.kmt,v 1.29 2008-09-26 15:57:25 bmorin Exp $
  * Creation date: July 17, 2007
  * License:
  * Copyright: IRISA / INRIA Rennes Bretagne Atlantique
@@ -201,7 +201,8 @@ package smartadapters
 					removed.clear
 				end			
 			end		
-				
+			
+			@EMF_renameAs "setDisplayInfoSpecialCyril"
 			operation setDisplayInfo(display : Boolean) is
 			do
 				displayInfo := display
