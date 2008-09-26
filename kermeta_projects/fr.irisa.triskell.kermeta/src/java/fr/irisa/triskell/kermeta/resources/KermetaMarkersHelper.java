@@ -1,4 +1,4 @@
-/*$Id: KermetaMarkersHelper.java,v 1.16 2008-09-26 12:05:57 dvojtise Exp $
+/*$Id: KermetaMarkersHelper.java,v 1.17 2008-09-26 12:15:43 dvojtise Exp $
 * Project : fr.irisa.triskell.kermeta
 * File : 	KermetaMarkersHelper.java
 * License : EPL
@@ -94,7 +94,7 @@ public class KermetaMarkersHelper extends EclipseMarkerHelper {
     	//String realMessage = formatMessage(trimmedMessage);
         try {
         	if (message instanceof ParsingError)
-        		createParsingError(file, realMessage, (ParsingError) message);
+        		createParsingError(file, formatMessage(realMessage), (ParsingError) message);
         	else if ( message.getTarget() instanceof Object )
         		createMarker(file, realMessage, message, unit);
         	else if ( message.getTarget() instanceof ASTNode )
@@ -102,11 +102,11 @@ public class KermetaMarkersHelper extends EclipseMarkerHelper {
         	else {
               	realMessage = "Cannot locate error in file, maybe one of required file is erroneous.\n" + message.getValue();
                	if(message instanceof ErrorMessage)
-               		markError(file, realMessage);
+               		markError(file, formatMessage(realMessage));
                	else if ( message instanceof WarningMessage )
-              			markWarning(file, realMessage);
+              			markWarning(file, formatMessage(realMessage));
            		else
-           			markInfo(file, realMessage);
+           			markInfo(file, formatMessage(realMessage));
         	}           
         } catch(CoreException ex) {
             ex.printStackTrace();
@@ -115,7 +115,7 @@ public class KermetaMarkersHelper extends EclipseMarkerHelper {
         
     
     /**
-     *  Create a marker for showing to the user the elements that are errored, or
+     *  Create a marker for showing to the user the elements that are erroneous, or
      *  that are subjects to warnings.
      *  @param file the file currently edited
      *  @param message contains the message/warning/error, and the node that 
