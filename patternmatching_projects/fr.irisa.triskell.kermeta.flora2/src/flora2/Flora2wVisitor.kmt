@@ -50,7 +50,7 @@ class DataAtom inherits FeatureAtom
 }
 abstract class Term inherits AtomicFormula
 {
-	attribute grounded : kermeta::standard::~Void
+	//attribute grounded : kermeta::standard::~Void
 
 	method accept(visitor : visitors::Visitor) : DTString from flora2::AtomicFormula is
 		result := visitor.visitTerm(self)
@@ -98,7 +98,7 @@ abstract class ISAAtom inherits AtomicFormula
 }
 abstract class FeatureAtom inherits AtomicFormula
 {
-	attribute inheritable : kermeta::standard::~Void
+	//attribute inheritable : kermeta::standard::~Void
 
 	reference host : Term
 
