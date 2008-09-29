@@ -1,4 +1,4 @@
-/* $Id: CreateBehavior.kmt,v 1.80 2008-09-29 12:31:37 cfaucher Exp $
+/* $Id: CreateBehavior.kmt,v 1.81 2008-09-29 15:44:42 cfaucher Exp $
  * Creation date: January 21, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -427,7 +427,7 @@ package behavior {
 
 							if context.getResultLastStatementType() == stm.asType(Expression).staticType.createBehaviorJava(context) then
 								if stm.callsFunctionType() then
-									str_statement := str_statement + context.getResultLastStatementId() + stm.asType(CallFeature).resultOfLastFt + ";\n"
+									str_statement := str_statement + context.getResultLastStatementId() + stm.asType(CallFeature).calledFtResult + ";\n"
 								else
 									if str_statement.contains(context.RETURN_EXPRESSION_TO_REPLACE_SPECIAL) then
 										str_statement := str_statement.replace(context.RETURN_EXPRESSION_TO_REPLACE_SPECIAL, context.getResultLastStatementId())
@@ -634,11 +634,16 @@ package behavior {
 								if self.getContainerAsTypeIn(Assignment, Block).isVoid() then
 									resultPrefix := context.RETURN_EXPRESSION_TO_REPLACE_SPECIAL
 								end
-								result := result + resultPrefix + context.PREVIOUS_STATEMENT_FT + context.RETURN_EXPRESSION_TO_REPLACE + self.resultOfLastFt
+								
+								if not self.isParameter() then
+									result := result + resultPrefix + context.PREVIOUS_STATEMENT_FT + context.RETURN_EXPRESSION_TO_REPLACE + self.calledFtResult
+								else
+									result := result + resultPrefix + context.PREVIOUS_STATEMENT_FT + self.calledFtResult
+								end
 							end
 						end
 					else
-						result := tgt.createBehaviorJava(context) + result.replace(context.SELF_EXPRESSION_TO_REPLACE, tgt.asType(CallFeature).resultOfLastFt)
+						result := tgt.createBehaviorJava(context) + result.replace(context.SELF_EXPRESSION_TO_REPLACE, tgt.asType(CallFeature).calledFtResult)
 					end
 				end
 				
@@ -735,7 +740,13 @@ package behavior {
 //result := ""
 					//added 08-08-10
 					else
-						result := static_call + "(" + result
+					
+						var tmp_prefix : String init ""
+						if not self.parameters.detect{ p | p.callsFunctionType() }.isVoid() then
+							tmp_prefix := context.RETURN_EXPRESSION_TO_REPLACE
+						end
+						
+						result := tmp_prefix + static_call + "(" + result
 					//added 08-08-10
 					end
 					if ppCast then
@@ -1081,7 +1092,7 @@ package behavior {
 					else
 						if i == (tabLeft.size()-1) then
 							if self.~value.callsFunctionType() then
-								result := right + result + self.target.asType(CallFeature).printSetAccessor() + "(" + ppCast + self.~value.asType(CallFeature).resultOfLastFt + ");"
+								result := right + result + self.target.asType(CallFeature).printSetAccessor() + "(" + ppCast + self.~value.asType(CallFeature).calledFtResult + ");"
 							else
 								result := result + self.target.asType(CallFeature).printSetAccessor() + "(" + ppCast + right + ");"
 							end

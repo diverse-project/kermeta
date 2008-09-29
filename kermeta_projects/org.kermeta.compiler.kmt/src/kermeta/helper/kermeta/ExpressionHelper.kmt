@@ -1,4 +1,4 @@
-/* $Id: ExpressionHelper.kmt,v 1.23 2008-09-26 08:24:00 cfaucher Exp $
+/* $Id: ExpressionHelper.kmt,v 1.24 2008-09-29 15:44:42 cfaucher Exp $
  * Creation date: Jul 25, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -319,10 +319,8 @@ aspect class CallVariable {
 	end
 	
 	operation isLambdaExpressionParameter() : Boolean is do
-		result := false
-		
+		result := false	
 		if not self.getContainerAsType(LambdaExpression).isVoid() then
-			//result := not self.getContainerAsType(LambdaExpression).asType(LambdaExpression).parameters.detect{ p | p.name == self.name }.isVoid()
 			result := not getLambdaParameter(self.getContainerAsType(LambdaExpression).asType(LambdaExpression)).isVoid()
 		end
 	end
@@ -351,21 +349,20 @@ aspect class CallVariable {
 
 aspect class CallFeature {	
 	
-	attribute resultOfLastFt : String [0..1]
+	// This attribute is on CallFeature, because the called operation
+	// may be called futher times in the same expression series
+	attribute calledFtResult : String [0..1]
 	
 	operation isParameter() : Boolean is do
 		result := false
 		if self.container.isInstanceOf(CallFeature) then
-			var exp : Expression init self.container.asType(CallFeature).parameters.detect{ p |
+			result := not self.container.asType(CallFeature).parameters.detect{ p |
 				p==self
-			}
-			if not exp.isVoid() then
-				result := true
-			end
+			}.isVoid()
 		end
 	end
 	
-	// Determine if the callFeature is called by a static method: package util
+	// Determine if the callFeature is called by a static method: Java package 'util'
 	operation fromUtil(context : KM2EcoreContext) : Boolean is do
 	
 		var fName : String  init IdentifierHelper.new.getMangledIdentifier(self.name, context)
@@ -576,7 +573,7 @@ aspect class CallFeature {
 		// End of the Management of the result last statement
 		
 		if (callElement == "") and (not Operation.new().isVoidType(self.staticType.getTypeName())) then
-			self.resultOfLastFt := "result" + context.printFtSuffix()
+			self.calledFtResult := "result" + context.printFtSuffix()
 		end
 		
 		ft_str := ft_str + "//EIft:" + self.staticOperation.name + "\n"
