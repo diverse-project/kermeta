@@ -1,4 +1,4 @@
-/* $Id: CreateBehavior.kmt,v 1.79 2008-09-26 17:06:34 cfaucher Exp $
+/* $Id: CreateBehavior.kmt,v 1.80 2008-09-29 12:31:37 cfaucher Exp $
  * Creation date: January 21, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -1061,15 +1061,14 @@ package behavior {
 			
 			var right : String init self.~value.createBehaviorJava(context)
 		
+			//FIXME CF: Definitely, this patch has no effect, it should be removed
 			// Patch that adds the 'function' keyword in case the assigned value is a function type
 			if self.~value.isInstanceOf(LambdaExpression) then
-				stdio.errorln("Alert in createBehaviorJava Assignment")
+				stdio.errorln("Please contact the Kermeta development team if you are in this case: createBehaviorJava Assignment")
 				right := "function " + right
 			end
 						
 			if self.target.isCallFeatureAsStaticProperty() then
-			
-				//stdio.writeln("left: " + left)
 					
 				var tabLeft : kermeta::standard::OrderedSet<String> init left.split("\\.")
 				
@@ -1079,9 +1078,14 @@ package behavior {
 				loop
 					if i < (tabLeft.size()-1) then
 						result := result + tabLeft.elementAt(i) + "."
-					end
-					if i == (tabLeft.size()-1) then
-						result := result + self.target.asType(CallFeature).printSetAccessor() + "(" + ppCast + right + ");"
+					else
+						if i == (tabLeft.size()-1) then
+							if self.~value.callsFunctionType() then
+								result := right + result + self.target.asType(CallFeature).printSetAccessor() + "(" + ppCast + self.~value.asType(CallFeature).resultOfLastFt + ");"
+							else
+								result := result + self.target.asType(CallFeature).printSetAccessor() + "(" + ppCast + right + ");"
+							end
+						end
 					end
 					i := i+1
 				end
