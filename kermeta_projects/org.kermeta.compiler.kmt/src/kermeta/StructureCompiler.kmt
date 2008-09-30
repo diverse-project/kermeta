@@ -1,4 +1,4 @@
-/* $Id: StructureCompiler.kmt,v 1.68 2008-09-26 17:06:45 cfaucher Exp $
+/* $Id: StructureCompiler.kmt,v 1.69 2008-09-30 11:44:27 cfaucher Exp $
  * Creation date: January 21, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -38,76 +38,23 @@ class Main {
     	var output : String
     	var traceInput : String init ""
     	
-/*
-		modelInput := "platform:/resource/org.kermeta.compiler.kmt/models/framework.km"
-		var output := "platform:/resource/org.kermeta.compiler.kmt/models/framework.ecore"
-*/
-
-
+		//modelInput := "platform:/resource/org.kermeta.compiler.kmt/models/framework.km"
 		modelInput := "platform:/resource/org.kermeta.compiler.kmt/models/StructureCompiler.km"
-		output := "platform:/resource/org.kermeta.compiler.kmt/models/StructureCompiler.ecore"
+		//modelInput := "platform:/resource/org.kermeta.compiler.kmt/models/ExpressionEvaluation.km"
+		//modelInput := "platform:/resource/org.kermeta.compiler.kmt/models/compilertest.km"
+		//modelInput := "platform:/resource/org.kermeta.compiler.kmt/models/testAddSet.km"
+		//modelInput := "platform:/resource/org.kermeta.compiler.kmt/models/dynamicAdaptation.km"
+		//modelInput := "platform:/resource/org.kermeta.compiler.kmt/models/weavingRoles.km"
+		//modelInput := "platform:/resource/org.kermeta.compiler.kmt/models/Mutation.km"
+		//modelInput := "platform:/resource/org.kermeta.compiler.kmt/models/fsmLauncher.km"
+		//modelInput := "platform:/resource/org.kermeta.compiler.kmt/models/complextest.km"
+		//modelInput := "platform:/resource/org.kermeta.compiler.kmt/models/LogoNXCCompiler.km"
+		//modelInput := "platform:/resource/org.kermeta.compiler.kmt/models/callFeatureStaticTypeCallingFunctionType.km"
+		//modelInput := "platform:/resource/org.kermeta.compiler.kmt/models/exists.km"
+		//modelInput := "platform:/resource/org.kermeta.compiler.kmt/models/EcoreH.km"
 
-
-/*
-		modelInput := "platform:/resource/org.kermeta.compiler.kmt/models/ExpressionEvaluation.km"
-		output := "platform:/resource/org.kermeta.compiler.kmt/models/ExpressionEvaluation.ecore"
-*/
-
-/*
-		modelInput := "platform:/resource/org.kermeta.compiler.kmt/models/compilertest.km"
-		output := "platform:/resource/org.kermeta.compiler.kmt/models/compilertest.ecore"
-*/		
+		output := modelInput.replaceExtension("ecore")
 		
-/*		
-		modelInput := "platform:/resource/org.kermeta.compiler.kmt/models/testAddSet.km"
-		output := "platform:/resource/org.kermeta.compiler.kmt/models/testAddSet.ecore"
-*/
-
-/*
-		modelInput := "platform:/resource/org.kermeta.compiler.kmt/models/dynamicAdaptation.km"
-		output := "platform:/resource/org.kermeta.compiler.kmt/models/dynamicAdaptation.ecore"
-*/
-
-/*
-		modelInput := "platform:/resource/org.kermeta.compiler.kmt/models/weavingRoles.km"
-		output := "platform:/resource/org.kermeta.compiler.kmt/models/weavingRoles.ecore"
-*/
-
-/*
-		modelInput := "platform:/resource/org.kermeta.compiler.kmt/models/Mutation.km"
-		output := "platform:/resource/org.kermeta.compiler.kmt/models/Mutation.ecore"
-*/
-
-/*
-		modelInput := "platform:/resource/org.kermeta.compiler.kmt/models/fsmLauncher.km"
-		output := "platform:/resource/org.kermeta.compiler.kmt/models/fsmLauncher.ecore"
-*/
-
-/*
-		modelInput := "platform:/resource/org.kermeta.compiler.kmt/models/complextest.km"
-		output := "platform:/resource/org.kermeta.compiler.kmt/models/complextest.ecore"
-*/
-
-/*
-		modelInput := "platform:/resource/org.kermeta.compiler.kmt/models/LogoNXCCompiler.km"
-		output := "platform:/resource/org.kermeta.compiler.kmt/models/LogoNXCCompiler.ecore"
-*/
-
-/*
-		modelInput := "platform:/resource/org.kermeta.compiler.kmt/models/callFeatureStaticTypeCallingFunctionType.km"
-		output := modelInput.replaceExtension("ecore")
-*/
-
-/*
-		modelInput := "platform:/resource/org.kermeta.compiler.kmt/models/exists.km"
-		output := "platform:/resource/org.kermeta.compiler.kmt/models/exists.ecore"
-*/
-
-
-		modelInput := "platform:/resource/org.kermeta.compiler.kmt/models/EcoreH.km"
-		output := modelInput.replaceExtension("ecore")
-
-
 		main_mode3(modelInput, traceInput, output, CompilingMode.behaviorJava)
 	end
 	
@@ -240,7 +187,7 @@ class Main {
     	//operations.add("checkInvariants")
     	//operations.add("count")
     	//operations.add("flatten")
-    	//operations.add("addAllTestCasesFrom")
+    	operations.add("addAllTestCasesFrom")
     	//operations.add("count")
     	//operations.add("createResource")
     	//operations.add("saveAndValidateWithEMF")
@@ -259,7 +206,7 @@ class Main {
     	//operations.add("getVariableDeclInBlock")
     	//operations.add("removeOne")
     	//operations.add("findDanglingModelElements")
-    	////////////operations.add("main_compilingOnlyOperations")
+    	//operations.add("main_compilingOnlyOperations")
     	//operations.add("remove")
     	
     	//operations.add("createEcoreModelElement")
@@ -279,8 +226,8 @@ class Main {
     	//operations.add("getPropertyValue")
     	//operations.add("initializeConstants")
     	
-    	operations.add("loadEcoreAsModel")
-    	operations.add("loadModel")
+    	//operations.add("loadEcoreAsModel")
+    	//operations.add("loadModel")
     	
     	main_compilingOnlyOperations(modelInput, traceInput, output, mode, operations)
     end
@@ -300,8 +247,8 @@ class Main {
 			p.asType(Package).eachOwnedElement{ cd |
 				if cd.isInstanceOf(ClassDefinition) then
 				
-					if cd.asType(ClassDefinition).qualifiedName == "EcoreHelpers::EcoreHelper" then
-					//if cd.asType(ClassDefinition).qualifiedName == "kermeta::language::structure::Class" then
+					//if cd.asType(ClassDefinition).qualifiedName == "EcoreHelpers::EcoreHelper" then
+					//if cd.asType(ClassDefinition).qualifiedName == "kermeta::language::structure::ClassDefinition" then
 					//if cd.asType(ClassDefinition).qualifiedName == "kermeta::language::behavior::Block" then
 					
 						cd.asType(ClassDefinition).eachOwnedElement{ op |
@@ -327,7 +274,7 @@ class Main {
 								end
 							end
 						}
-					end
+					//end
 				
 				end
 			}
