@@ -1,4 +1,4 @@
-/* $Id: EcoreModelElementHelper.kmt,v 1.10 2008-09-25 08:35:17 cfaucher Exp $
+/* $Id: EcoreModelElementHelper.kmt,v 1.11 2008-09-30 11:57:45 cfaucher Exp $
  * Creation date: January 25, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -51,12 +51,12 @@ class EcoreModelElementHelper {
 		ecoreStructuralFeature.upperBound := self_.upper
 		//ecoreStructuralFeature.many := 
 		//ecoreStructuralFeature.required := 
-		//ecoreStructuralFeature.changeable := 
+		ecoreStructuralFeature.changeable := not self_.isReadOnly
 		//ecoreStructuralFeature.volatile := 
 		//ecoreStructuralFeature.transient :=
 		ecoreStructuralFeature.defaultValueLiteral := self_.default
 		//ecoreStructuralFeature.defaultValue := 
-		ecoreStructuralFeature.unsettable := self_.isReadOnly
+		//ecoreStructuralFeature.unsettable :=
 		ecoreStructuralFeature.derived := self_.isDerived
 	end
 }
