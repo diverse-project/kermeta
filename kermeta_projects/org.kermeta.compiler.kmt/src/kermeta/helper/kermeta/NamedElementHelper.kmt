@@ -1,4 +1,4 @@
-/* $Id: NamedElementHelper.kmt,v 1.1 2008-10-02 09:44:35 cfaucher Exp $
+/* $Id: NamedElementHelper.kmt,v 1.2 2008-10-02 09:50:22 cfaucher Exp $
  * Creation date: October 02, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -16,7 +16,7 @@ using kermeta::standard
 
 aspect class NamedElement {
 	operation getGenModelQualifiedName() : String is do
-		result := self.getTopestPackage().genModelBasePackage + "::" + self.qualifiedName
+		result := self.getRootPackage().genModelBasePackage + "::" + self.qualifiedName
 	end
 	
 	operation getGenModelJavaQualifiedName() : String is do
