@@ -1,4 +1,4 @@
-/* $Id: KermetaHelper.kmt,v 1.14 2008-09-15 15:31:32 cfaucher Exp $
+/* $Id: KermetaHelper.kmt,v 1.15 2008-10-02 09:45:03 cfaucher Exp $
  * Creation date: January 28, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -22,3 +22,4 @@ require "ClassHelper.kmt"
 require "ParameterHelper.kmt"
 require "PropertyHelper.kmt"
 require "ExpressionHelper.kmt"
+require "NamedElementHelper.kmt"
