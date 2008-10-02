@@ -1,4 +1,4 @@
-/* $Id: ClassDefinitionHelper.kmt,v 1.9 2008-07-22 07:36:22 cfaucher Exp $
+/* $Id: ClassDefinitionHelper.kmt,v 1.10 2008-10-02 09:41:55 cfaucher Exp $
  * Creation date: May 16, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -38,6 +38,17 @@ aspect class ClassDefinition {
         end
         
         result := allSuperClasses
+	end
+	
+	operation setSubClassDefinitionToSuperTypes() : Void is do
+		self.superType.each{ t |
+			if t.isInstanceOf(ParameterizedType) then
+				if t.asType(ParameterizedType).typeDefinition.isInstanceOf(ClassDefinition) then
+					//stdio.writeln("sp: " + t.getTypeName() + " - " + self.name)
+					t.asType(ParameterizedType).typeDefinition.asType(ClassDefinition).subClassDefinitions.add(self)
+				end
+			end
+		}
 	end
 	
 	//Check if the ClassDefinition is a subType of ValueType => we have to consider as a EDataType, i.e.: an EAttribute
