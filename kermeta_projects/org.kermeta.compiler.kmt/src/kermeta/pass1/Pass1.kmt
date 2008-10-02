@@ -1,4 +1,4 @@
-/* $Id: Pass1.kmt,v 1.34 2008-09-25 08:34:13 cfaucher Exp $
+/* $Id: Pass1.kmt,v 1.35 2008-10-02 15:01:51 cfaucher Exp $
  * Creation date: January 21, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -17,11 +17,13 @@ require "../common/TraceStructure.kmt"
 require "../helper/KM2EcoreHelper.kmt"
 require "../common/Exception.kmt"
 require "platform:/resource/org.kermeta.compiler.kmt/src/kermeta/KM2EcoreContext.kmt"
+require "platform:/resource/org.kermeta.compiler.kmt/src/kermeta/common/TraceStructure.kmt"
 
 using ecore
 using km2ecore
 using km2ecore::helper::kermeta
 using km2ecore::common::exception
+using kermeta::standard
 
 aspect class Object {
 	operation applyPass1(context : KM2EcoreContext) is do
@@ -37,7 +39,17 @@ aspect class ModelingUnit {
 		// Compile the owned elements
 		self.eachOwnedElement{ p | p.applyPass1(context) }
 		// Getting the ecore packages
-		self.packages.each{p|
+		self.packages.each{ p |
+			
+			// If 2 root packages have the same name (in lower case), we have to add a base package in order to the EMF generation being completed
+			var eps : Sequence<EPackage> init self.ecorePackages.select{ ep | p.name.toLowerCase() == ep.name.toLowerCase() }
+			if eps.size>0 then
+				if eps.size==1 then
+					self.packages.detect{ pack | pack.name.toLowerCase() == p.name.toLowerCase() }.genModelBasePackage := p.name.toLowerCase() + "0"
+				end
+				p.genModelBasePackage := p.name.toLowerCase() + eps.size.toString()
+			end
+			
 			self.ecorePackages.add( p.ecoreModelElement )
 		}
 	end
@@ -121,19 +133,6 @@ aspect class EnumerationLiteral {
 }
   
 aspect class ClassDefinition {
-	
-	reference subClassDefinitions : ClassDefinition [0..*]
-
-	operation setSubClassDefinitionToSuperTypes() : Void is do
-		self.superType.each{ t |
-			if t.isInstanceOf(ParameterizedType) then
-				if t.asType(ParameterizedType).typeDefinition.isInstanceOf(ClassDefinition) then
-					stdio.writeln("sp: " + t.getTypeName() + " - " + self.name)
-					t.asType(ParameterizedType).typeDefinition.asType(ClassDefinition).subClassDefinitions.add(self)
-				end
-			end
-		}
-	end
 
 	method applyPass1(context : KM2EcoreContext) is do
 	
