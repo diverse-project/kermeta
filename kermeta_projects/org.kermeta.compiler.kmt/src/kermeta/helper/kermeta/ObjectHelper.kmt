@@ -1,4 +1,4 @@
-/* $Id: ObjectHelper.kmt,v 1.12 2008-09-25 08:35:41 cfaucher Exp $
+/* $Id: ObjectHelper.kmt,v 1.13 2008-10-02 09:49:00 cfaucher Exp $
  * Creation date: January 29, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -79,6 +79,20 @@ aspect class Object {
 		//FIXME CF Ok this implementation is a little bit ugly
 		// but this operation should be never called, only the overwritten
 		result := false
+	end
+	
+	operation getRootPackage() : Package is do
+		result := void
+		
+		var topPack : Package init self.getContainerAsType(Package).asType(Package)
+		
+		from not topPack.isVoid()
+		until topPack.isVoid()
+		loop
+			result := topPack
+			topPack ?= topPack.getContainerAsType(Package)
+		end
+		
 	end
 	
 }
