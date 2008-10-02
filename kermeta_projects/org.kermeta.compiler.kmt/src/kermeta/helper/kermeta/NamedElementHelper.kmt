@@ -1,0 +1,29 @@
+/* $Id: NamedElementHelper.kmt,v 1.1 2008-10-02 09:44:35 cfaucher Exp $
+ * Creation date: October 02, 2008
+ * License: EPL
+ * Copyright: IRISA / INRIA / Universite Rennes 1
+ * Authors: Cyril Faucher <cfaucher@irisa.fr>
+ */
+
+
+package kermeta::language::structure;
+
+require kermeta
+require "KermetaHelper.kmt"
+require "platform:/resource/org.kermeta.compiler.kmt/src/kermeta/common/TraceStructure.kmt"
+
+using kermeta::standard
+
+aspect class NamedElement {
+	operation getGenModelQualifiedName() : String is do
+		result := self.getTopestPackage().genModelBasePackage + "::" + self.qualifiedName
+	end
+	
+	operation getGenModelJavaQualifiedName() : String is do
+		result := self.getGenModelQualifiedName().replace("::", ".")
+	end
+	
+	operation getJavaQualifiedName() : String is do
+		result := self.qualifiedName.replace("::", ".")
+	end
+}
