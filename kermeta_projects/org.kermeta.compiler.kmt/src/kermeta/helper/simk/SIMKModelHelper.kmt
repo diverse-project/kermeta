@@ -1,4 +1,4 @@
-/* $Id: SIMKModelHelper.kmt,v 1.10 2008-09-25 09:10:34 cfaucher Exp $
+/* $Id: SIMKModelHelper.kmt,v 1.11 2008-10-02 09:48:13 cfaucher Exp $
  * Creation date: Jul 21, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -72,7 +72,7 @@ aspect class SIMKModel {
 		
 		var sMContext : SMContext init retrieveOrCreateContextWithClass(
 			op.container.asType(ClassDefinition).name + "Super",
-			op.container.asType(ClassDefinition).container.asType(Package).qualifiedName.replace("::", ".") + ".helper",
+			op.container.asType(ClassDefinition).container.asType(Package).qualifiedName().replace("::", ".") + ".helper",
 			SMUsage.Super,
 			context)
 		
@@ -90,7 +90,7 @@ aspect class SIMKModel {
 		
 		var sMContext : SMContext init retrieveOrCreateContextWithClass(
 			op.container.asType(ClassDefinition).name + "__" + IdentifierHelper.new.getMangledIdentifier(op.getFinalName(), context) + "__" + "Runner",
-			op.container.asType(ClassDefinition).container.asType(Package).qualifiedName.replace("::", ".") + ".runner",
+			op.container.asType(ClassDefinition).container.asType(Package).qualifiedName().replace("::", ".") + ".runner",
 			SMUsage.Runner,
 			context)
 		
