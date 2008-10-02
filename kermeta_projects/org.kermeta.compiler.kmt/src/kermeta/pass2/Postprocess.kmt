@@ -1,4 +1,4 @@
-/* $Id: Postprocess.kmt,v 1.6 2008-09-25 21:49:24 cfaucher Exp $ 
+/* $Id: Postprocess.kmt,v 1.7 2008-10-02 14:57:45 cfaucher Exp $ 
  * Creation : August 27, 2008
  * Licence  : EPL 
  * Copyright:
@@ -65,7 +65,7 @@ aspect class ModelingUnit {
 			// By default, a self parameter is added
 			var default_param : SMParameter init SMParameter.new
 			default_param.name := "self"
-			default_param.type := op.container.asType(ClassDefinition).qualifiedName.replace("::", ".")
+			default_param.type := op.container.asType(ClassDefinition).qualifiedName.replace(context.KERMETA_SEPARATOR, context.JAVA_SEPARATOR)
 			staticMethod.sMParameters.add(default_param)
 			
 			// Management of the Parameters
