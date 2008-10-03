@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <?eclipse version="3.0"?>
-<plugin name="Kermeta documentation" id="fr.irisa.triskell.kermeta.documentation" version="1.2.0" provider-name="IRISA/INRIA">
+<plugin name="Kermeta documentation" id="fr.irisa.triskell.kermeta.documentation" version="1.2.0.qualifier" provider-name="IRISA/INRIA">
    <requires>
       <import plugin="fr.irisa.triskell.kermeta" export="false"/>
       <import plugin="org.eclipse.core.runtime.compatibility"/>
