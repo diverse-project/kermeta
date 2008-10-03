@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Kermeta Workbench
 Bundle-SymbolicName: fr.irisa.triskell.kermeta; singleton:=true
-Bundle-Version: 1.2.0
+Bundle-Version: 1.2.0.qualifier
 Bundle-ClassPath: .
 Bundle-Activator: fr.irisa.triskell.kermeta.plugin.KermetaPlugin
 Bundle-Vendor: IRISA/INRIA
@@ -28,4 +28,5 @@ Require-Bundle: org.eclipse.core.runtime,
  org.kermeta.io.loader,
  org.kermeta.merger,
  fr.irisa.triskell.kermeta.interpreter
-Eclipse-LazyStart: true
+Bundle-ActivationPolicy: lazy
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
