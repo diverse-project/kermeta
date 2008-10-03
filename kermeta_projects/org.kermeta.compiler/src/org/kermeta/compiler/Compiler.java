@@ -1,4 +1,4 @@
-/* $Id: Compiler.java,v 1.14 2008-09-16 15:35:06 cfaucher Exp $
+/* $Id: Compiler.java,v 1.15 2008-10-03 15:46:06 cfaucher Exp $
  * Project   : fr.irisa.triskell.kermeta.compiler
  * File      : Compiler.java
  * License   : EPL
@@ -123,18 +123,6 @@ public class Compiler extends org.kermeta.compiler.Generator {
 				// Set parameters in GenModel
 				setGenModelParameters(genModel);
 				
-				// May be add the GenPackage in the list of canGenerate() Package
-				//genModel.getAllUsedGenPackagesWithClassifiers().addAll(genModel.getGenPackages());
-
-				
-				/*for( GenPackage genpack : genModel.getGenPackages() ) {
-					System.out.println("GenPackages: " + genpack.getNSName());
-					if(genpack.getNSName().equals("kermeta")) {
-						//genModel.getGenPackages().remove(genpack);
-					}
-				}*/
-				
-				//System.out.println("Number of GenPackages: " + genModel.getGenPackages().size());
 				
 				//Step1: Saving the *.genmodel before the generation of plugins
 				genModelResource.save(Collections.EMPTY_MAP);
