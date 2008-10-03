@@ -1,3 +1,0 @@
-package test_ecoreh;
-
-require "platform:/plugin/fr.irisa.triskell.kermeta.ecore/src/kermeta/helpers/EcoreHelper.kmt"

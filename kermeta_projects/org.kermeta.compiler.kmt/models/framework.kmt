@@ -1,8 +1,0 @@
-/*
- * This file is used to simulate 2 requires: Kermeta and Ecore
- */
-
-package kermeta;
-
-require "kermeta"
-require "http://www.eclipse.org/emf/2002/Ecore"

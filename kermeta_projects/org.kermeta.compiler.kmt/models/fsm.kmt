@@ -1,4 +1,0 @@
-package fsm;
-
-require kermeta
-require "http://www.kermeta.org/fsm"

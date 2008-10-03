@@ -7,146 +7,51 @@
     dynamicTemplates="true" modelName="Compilertest" codeFormatting="true" testsDirectory=""
     containmentProxies="true" complianceLevel="5.0" copyrightFields="false">
   <foreignModel>C:/eclipse3.3.2/runtime-KermetaCompiler/org.kermeta.compiler.kmt/models/compilertest.ecore</foreignModel>
-  <genPackages prefix="Fsm" disposableProviderFactory="true" ecorePackage="compilertest.ecore#/5">
-    <genDataTypes ecoreDataType="compilertest.ecore#/5/String"/>
-    <genClasses ecoreClass="compilertest.ecore#/5/FSM">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference compilertest.ecore#/5/FSM/ownedState"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference compilertest.ecore#/5/FSM/currentState"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference compilertest.ecore#/5/FSM/initialState"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference compilertest.ecore#/5/FSM/finalState"/>
-      <genOperations ecoreOperation="compilertest.ecore#/5/FSM/reset"/>
-      <genOperations ecoreOperation="compilertest.ecore#/5/FSM/run"/>
-    </genClasses>
-    <genClasses ecoreClass="compilertest.ecore#/5/State">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute compilertest.ecore#/5/State/name"/>
-      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference compilertest.ecore#/5/State/owningFSM"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference compilertest.ecore#/5/State/incomingTransition"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference compilertest.ecore#/5/State/outgoingTransition"/>
-      <genOperations ecoreOperation="compilertest.ecore#/5/State/step">
-        <genParameters ecoreParameter="compilertest.ecore#/5/State/step/c"/>
+  <genPackages prefix="Simpletest" disposableProviderFactory="true" ecorePackage="compilertest.ecore#/5">
+    <genClasses ecoreClass="compilertest.ecore#/5/Main">
+      <genOperations ecoreOperation="compilertest.ecore#/5/Main/save">
+        <genParameters ecoreParameter="compilertest.ecore#/5/Main/save/root"/>
+        <genParameters ecoreParameter="compilertest.ecore#/5/Main/save/modelInputPath"/>
       </genOperations>
+      <genOperations ecoreOperation="compilertest.ecore#/5/Main/load">
+        <genParameters ecoreParameter="compilertest.ecore#/5/Main/load/modelInputPath"/>
+      </genOperations>
+      <genOperations ecoreOperation="compilertest.ecore#/5/Main/main"/>
     </genClasses>
-    <genClasses ecoreClass="compilertest.ecore#/5/Transition">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute compilertest.ecore#/5/Transition/input"/>
-      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference compilertest.ecore#/5/Transition/source"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference compilertest.ecore#/5/Transition/target"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute compilertest.ecore#/5/Transition/output"/>
-      <genOperations ecoreOperation="compilertest.ecore#/5/Transition/fire"/>
-    </genClasses>
-    <genClasses ecoreClass="compilertest.ecore#/5/FSMException"/>
-    <genClasses ecoreClass="compilertest.ecore#/5/NonDeterminism"/>
-    <genClasses ecoreClass="compilertest.ecore#/5/NoTransition"/>
-    <genClasses ecoreClass="compilertest.ecore#/5/NoInitialStateException"/>
   </genPackages>
-  <genPackages prefix="Simpletest" disposableProviderFactory="true" ecorePackage="compilertest.ecore#/6">
-    <genClasses ecoreClass="compilertest.ecore#/6/Main">
-      <genOperations ecoreOperation="compilertest.ecore#/6/Main/save">
-        <genParameters ecoreParameter="compilertest.ecore#/6/Main/save/root"/>
-        <genParameters ecoreParameter="compilertest.ecore#/6/Main/save/modelInputPath"/>
-      </genOperations>
-      <genOperations ecoreOperation="compilertest.ecore#/6/Main/load">
-        <genParameters ecoreParameter="compilertest.ecore#/6/Main/load/modelInputPath"/>
-      </genOperations>
-      <genOperations ecoreOperation="compilertest.ecore#/6/Main/main"/>
+  <genPackages prefix="Fsm" disposableProviderFactory="true" ecorePackage="compilertest.ecore#/6">
+    <genDataTypes ecoreDataType="compilertest.ecore#/6/String"/>
+    <genClasses ecoreClass="compilertest.ecore#/6/FSM">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference compilertest.ecore#/6/FSM/ownedState"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference compilertest.ecore#/6/FSM/currentState"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference compilertest.ecore#/6/FSM/initialState"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference compilertest.ecore#/6/FSM/finalState"/>
+      <genOperations ecoreOperation="compilertest.ecore#/6/FSM/reset"/>
+      <genOperations ecoreOperation="compilertest.ecore#/6/FSM/run"/>
     </genClasses>
+    <genClasses ecoreClass="compilertest.ecore#/6/State">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute compilertest.ecore#/6/State/name"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference compilertest.ecore#/6/State/owningFSM"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference compilertest.ecore#/6/State/incomingTransition"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference compilertest.ecore#/6/State/outgoingTransition"/>
+      <genOperations ecoreOperation="compilertest.ecore#/6/State/step">
+        <genParameters ecoreParameter="compilertest.ecore#/6/State/step/c"/>
+      </genOperations>
+    </genClasses>
+    <genClasses ecoreClass="compilertest.ecore#/6/Transition">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute compilertest.ecore#/6/Transition/input"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference compilertest.ecore#/6/Transition/source"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference compilertest.ecore#/6/Transition/target"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute compilertest.ecore#/6/Transition/output"/>
+      <genOperations ecoreOperation="compilertest.ecore#/6/Transition/fire"/>
+    </genClasses>
+    <genClasses ecoreClass="compilertest.ecore#/6/FSMException"/>
+    <genClasses ecoreClass="compilertest.ecore#/6/NonDeterminism"/>
+    <genClasses ecoreClass="compilertest.ecore#/6/NoTransition"/>
+    <genClasses ecoreClass="compilertest.ecore#/6/NoInitialStateException"/>
   </genPackages>
   <genPackages prefix="Kermeta" disposableProviderFactory="true" ecorePackage="compilertest.ecore#/7">
     <genClasses image="false" ecoreClass="compilertest.ecore#/7/DummyClass"/>
-    <nestedGenPackages prefix="Io" disposableProviderFactory="true" ecorePackage="compilertest.ecore#/7/io">
-      <genClasses ecoreClass="compilertest.ecore#/7/io/FileIO">
-        <genOperations ecoreOperation="compilertest.ecore#/7/io/FileIO/writeTextFile">
-          <genParameters ecoreParameter="compilertest.ecore#/7/io/FileIO/writeTextFile/filename"/>
-          <genParameters ecoreParameter="compilertest.ecore#/7/io/FileIO/writeTextFile/text"/>
-        </genOperations>
-        <genOperations ecoreOperation="compilertest.ecore#/7/io/FileIO/readTextFile">
-          <genParameters ecoreParameter="compilertest.ecore#/7/io/FileIO/readTextFile/filename"/>
-        </genOperations>
-      </genClasses>
-      <genClasses ecoreClass="compilertest.ecore#/7/io/StdIO">
-        <genOperations ecoreOperation="compilertest.ecore#/7/io/StdIO/writeln">
-          <genParameters ecoreParameter="compilertest.ecore#/7/io/StdIO/writeln/object"/>
-        </genOperations>
-        <genOperations ecoreOperation="compilertest.ecore#/7/io/StdIO/errorln">
-          <genParameters ecoreParameter="compilertest.ecore#/7/io/StdIO/errorln/object"/>
-        </genOperations>
-        <genOperations ecoreOperation="compilertest.ecore#/7/io/StdIO/error">
-          <genParameters ecoreParameter="compilertest.ecore#/7/io/StdIO/error/object"/>
-        </genOperations>
-        <genOperations ecoreOperation="compilertest.ecore#/7/io/StdIO/write">
-          <genParameters ecoreParameter="compilertest.ecore#/7/io/StdIO/write/object"/>
-        </genOperations>
-        <genOperations ecoreOperation="compilertest.ecore#/7/io/StdIO/read">
-          <genParameters ecoreParameter="compilertest.ecore#/7/io/StdIO/read/prompt"/>
-        </genOperations>
-      </genClasses>
-    </nestedGenPackages>
-    <nestedGenPackages prefix="Persistence" disposableProviderFactory="true" ecorePackage="compilertest.ecore#/7/persistence">
-      <genClasses image="false" ecoreClass="compilertest.ecore#/7/persistence/Resource">
-        <genFeatures notify="false" createChild="false" propertySortChoices="true"
-            ecoreFeature="ecore:EReference compilertest.ecore#/7/persistence/Resource/dependentResources"/>
-        <genFeatures notify="false" createChild="false" propertySortChoices="true"
-            ecoreFeature="ecore:EReference compilertest.ecore#/7/persistence/Resource/contents"/>
-        <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference compilertest.ecore#/7/persistence/Resource/repository"/>
-        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute compilertest.ecore#/7/persistence/Resource/isReadOnly"/>
-        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute compilertest.ecore#/7/persistence/Resource/metaModelURI"/>
-        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute compilertest.ecore#/7/persistence/Resource/uri"/>
-        <genOperations ecoreOperation="compilertest.ecore#/7/persistence/Resource/loadWithoutChecking"/>
-        <genOperations ecoreOperation="compilertest.ecore#/7/persistence/Resource/save"/>
-        <genOperations ecoreOperation="compilertest.ecore#/7/persistence/Resource/saveWithNewURI">
-          <genParameters ecoreParameter="compilertest.ecore#/7/persistence/Resource/saveWithNewURI/new_uri"/>
-        </genOperations>
-        <genOperations ecoreOperation="compilertest.ecore#/7/persistence/Resource/findDanglingModelElements"/>
-        <genOperations ecoreOperation="compilertest.ecore#/7/persistence/Resource/load"/>
-        <genOperations ecoreOperation="compilertest.ecore#/7/persistence/Resource/instances"/>
-        <genOperations ecoreOperation="compilertest.ecore#/7/persistence/Resource/normalizedUri"/>
-      </genClasses>
-      <genClasses ecoreClass="compilertest.ecore#/7/persistence/EMFResource">
-        <genOperations ecoreOperation="compilertest.ecore#/7/persistence/EMFResource/loadWithoutChecking"/>
-        <genOperations ecoreOperation="compilertest.ecore#/7/persistence/EMFResource/remove">
-          <genParameters ecoreParameter="compilertest.ecore#/7/persistence/EMFResource/remove/instance"/>
-        </genOperations>
-        <genOperations ecoreOperation="compilertest.ecore#/7/persistence/EMFResource/save"/>
-        <genOperations ecoreOperation="compilertest.ecore#/7/persistence/EMFResource/saveWithNewURI">
-          <genParameters ecoreParameter="compilertest.ecore#/7/persistence/EMFResource/saveWithNewURI/new_uri"/>
-        </genOperations>
-        <genOperations ecoreOperation="compilertest.ecore#/7/persistence/EMFResource/saveAndValidateWithEMF"/>
-        <genOperations ecoreOperation="compilertest.ecore#/7/persistence/EMFResource/load"/>
-        <genOperations ecoreOperation="compilertest.ecore#/7/persistence/EMFResource/add">
-          <genParameters ecoreParameter="compilertest.ecore#/7/persistence/EMFResource/add/instance"/>
-        </genOperations>
-      </genClasses>
-      <genClasses image="false" ecoreClass="compilertest.ecore#/7/persistence/Repository">
-        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference compilertest.ecore#/7/persistence/Repository/resources"/>
-        <genOperations ecoreOperation="compilertest.ecore#/7/persistence/Repository/createResource">
-          <genParameters ecoreParameter="compilertest.ecore#/7/persistence/Repository/createResource/uri"/>
-          <genParameters ecoreParameter="compilertest.ecore#/7/persistence/Repository/createResource/mm_uri"/>
-        </genOperations>
-        <genOperations ecoreOperation="compilertest.ecore#/7/persistence/Repository/normalizeUri">
-          <genParameters ecoreParameter="compilertest.ecore#/7/persistence/Repository/normalizeUri/uri"/>
-        </genOperations>
-        <genOperations ecoreOperation="compilertest.ecore#/7/persistence/Repository/findDanglingModelElements"/>
-        <genOperations ecoreOperation="compilertest.ecore#/7/persistence/Repository/getResource">
-          <genParameters ecoreParameter="compilertest.ecore#/7/persistence/Repository/getResource/uri"/>
-        </genOperations>
-      </genClasses>
-      <genClasses ecoreClass="compilertest.ecore#/7/persistence/DanglingDiagnostic">
-        <genFeatures notify="false" createChild="false" propertySortChoices="true"
-            ecoreFeature="ecore:EReference compilertest.ecore#/7/persistence/DanglingDiagnostic/referencingElement"/>
-        <genFeatures notify="false" createChild="false" propertySortChoices="true"
-            ecoreFeature="ecore:EReference compilertest.ecore#/7/persistence/DanglingDiagnostic/danglingElement"/>
-        <genFeatures notify="false" createChild="false" propertySortChoices="true"
-            ecoreFeature="ecore:EReference compilertest.ecore#/7/persistence/DanglingDiagnostic/referencingProperty"/>
-        <genOperations ecoreOperation="compilertest.ecore#/7/persistence/DanglingDiagnostic/toString"/>
-      </genClasses>
-      <genClasses ecoreClass="compilertest.ecore#/7/persistence/EMFRepository">
-        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute compilertest.ecore#/7/persistence/EMFRepository/useInterpreterInternalResources"/>
-        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute compilertest.ecore#/7/persistence/EMFRepository/ignoreLoadErrors"/>
-        <genOperations ecoreOperation="compilertest.ecore#/7/persistence/EMFRepository/createResource">
-          <genParameters ecoreParameter="compilertest.ecore#/7/persistence/EMFRepository/createResource/uri"/>
-          <genParameters ecoreParameter="compilertest.ecore#/7/persistence/EMFRepository/createResource/mm_uri"/>
-        </genOperations>
-      </genClasses>
-    </nestedGenPackages>
     <nestedGenPackages prefix="Kunit" disposableProviderFactory="true" ecorePackage="compilertest.ecore#/7/kunit">
       <genEnums typeSafeEnumCompatible="false" ecoreEnum="compilertest.ecore#/7/kunit/ErrorKind">
         <genEnumLiterals ecoreEnumLiteral="compilertest.ecore#/7/kunit/ErrorKind/setUpError"/>
@@ -331,8 +236,8 @@
       </genClasses>
       <genClasses image="false" ecoreClass="compilertest.ecore#/7/kunit/TestCase">
         <genFeatures createChild="false" ecoreFeature="ecore:EAttribute compilertest.ecore#/7/kunit/TestCase/__testMethodName"/>
-        <genOperations ecoreOperation="compilertest.ecore#/7/kunit/TestCase/raiseIfHasFailures"/>
         <genOperations ecoreOperation="compilertest.ecore#/7/kunit/TestCase/setUp"/>
+        <genOperations ecoreOperation="compilertest.ecore#/7/kunit/TestCase/raiseIfHasFailures"/>
         <genOperations ecoreOperation="compilertest.ecore#/7/kunit/TestCase/getLog"/>
         <genOperations ecoreOperation="compilertest.ecore#/7/kunit/TestCase/setTestMethodName">
           <genParameters ecoreParameter="compilertest.ecore#/7/kunit/TestCase/setTestMethodName/name"/>
@@ -353,6 +258,581 @@
         </genOperations>
       </genClasses>
     </nestedGenPackages>
+    <nestedGenPackages prefix="Io" disposableProviderFactory="true" ecorePackage="compilertest.ecore#/7/io">
+      <genClasses ecoreClass="compilertest.ecore#/7/io/StdIO">
+        <genOperations ecoreOperation="compilertest.ecore#/7/io/StdIO/writeln">
+          <genParameters ecoreParameter="compilertest.ecore#/7/io/StdIO/writeln/object"/>
+        </genOperations>
+        <genOperations ecoreOperation="compilertest.ecore#/7/io/StdIO/errorln">
+          <genParameters ecoreParameter="compilertest.ecore#/7/io/StdIO/errorln/object"/>
+        </genOperations>
+        <genOperations ecoreOperation="compilertest.ecore#/7/io/StdIO/error">
+          <genParameters ecoreParameter="compilertest.ecore#/7/io/StdIO/error/object"/>
+        </genOperations>
+        <genOperations ecoreOperation="compilertest.ecore#/7/io/StdIO/write">
+          <genParameters ecoreParameter="compilertest.ecore#/7/io/StdIO/write/object"/>
+        </genOperations>
+        <genOperations ecoreOperation="compilertest.ecore#/7/io/StdIO/read">
+          <genParameters ecoreParameter="compilertest.ecore#/7/io/StdIO/read/prompt"/>
+        </genOperations>
+      </genClasses>
+      <genClasses ecoreClass="compilertest.ecore#/7/io/FileIO">
+        <genOperations ecoreOperation="compilertest.ecore#/7/io/FileIO/writeTextFile">
+          <genParameters ecoreParameter="compilertest.ecore#/7/io/FileIO/writeTextFile/filename"/>
+          <genParameters ecoreParameter="compilertest.ecore#/7/io/FileIO/writeTextFile/text"/>
+        </genOperations>
+        <genOperations ecoreOperation="compilertest.ecore#/7/io/FileIO/readTextFile">
+          <genParameters ecoreParameter="compilertest.ecore#/7/io/FileIO/readTextFile/filename"/>
+        </genOperations>
+      </genClasses>
+    </nestedGenPackages>
+    <nestedGenPackages prefix="Interpreter" disposableProviderFactory="true" ecorePackage="compilertest.ecore#/7/interpreter">
+      <genClasses ecoreClass="compilertest.ecore#/7/interpreter/DynamicExpression">
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference compilertest.ecore#/7/interpreter/DynamicExpression/expression"/>
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference compilertest.ecore#/7/interpreter/DynamicExpression/errors"/>
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference compilertest.ecore#/7/interpreter/DynamicExpression/formalParameters"/>
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference compilertest.ecore#/7/interpreter/DynamicExpression/selfClass"/>
+        <genOperations ecoreOperation="compilertest.ecore#/7/interpreter/DynamicExpression/initializeDefaults"/>
+        <genOperations ecoreOperation="compilertest.ecore#/7/interpreter/DynamicExpression/execute">
+          <genParameters ecoreParameter="compilertest.ecore#/7/interpreter/DynamicExpression/execute/selfObj"/>
+          <genParameters ecoreParameter="compilertest.ecore#/7/interpreter/DynamicExpression/execute/actualParams"/>
+        </genOperations>
+        <genOperations ecoreOperation="compilertest.ecore#/7/interpreter/DynamicExpression/parse">
+          <genParameters ecoreParameter="compilertest.ecore#/7/interpreter/DynamicExpression/parse/expression"/>
+        </genOperations>
+        <genOperations ecoreOperation="compilertest.ecore#/7/interpreter/DynamicExpression/evalString">
+          <genParameters ecoreParameter="compilertest.ecore#/7/interpreter/DynamicExpression/evalString/body"/>
+          <genParameters ecoreParameter="compilertest.ecore#/7/interpreter/DynamicExpression/evalString/selfObj"/>
+          <genParameters ecoreParameter="compilertest.ecore#/7/interpreter/DynamicExpression/evalString/actualParams"/>
+        </genOperations>
+      </genClasses>
+      <genClasses image="false" ecoreClass="compilertest.ecore#/7/interpreter/KermetaError">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute compilertest.ecore#/7/interpreter/KermetaError/message"/>
+      </genClasses>
+      <genClasses ecoreClass="compilertest.ecore#/7/interpreter/ParseError"/>
+      <genClasses ecoreClass="compilertest.ecore#/7/interpreter/TypeError"/>
+    </nestedGenPackages>
+    <nestedGenPackages prefix="Persistence" disposableProviderFactory="true" ecorePackage="compilertest.ecore#/7/persistence">
+      <genClasses image="false" ecoreClass="compilertest.ecore#/7/persistence/Resource">
+        <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference compilertest.ecore#/7/persistence/Resource/repository"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute compilertest.ecore#/7/persistence/Resource/metaModelURI"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute compilertest.ecore#/7/persistence/Resource/isReadOnly"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute compilertest.ecore#/7/persistence/Resource/uri"/>
+        <genOperations ecoreOperation="compilertest.ecore#/7/persistence/Resource/save"/>
+        <genOperations ecoreOperation="compilertest.ecore#/7/persistence/Resource/saveWithNewURI">
+          <genParameters ecoreParameter="compilertest.ecore#/7/persistence/Resource/saveWithNewURI/new_uri"/>
+        </genOperations>
+        <genOperations ecoreOperation="compilertest.ecore#/7/persistence/Resource/findDanglingModelElements"/>
+        <genOperations ecoreOperation="compilertest.ecore#/7/persistence/Resource/load"/>
+        <genOperations ecoreOperation="compilertest.ecore#/7/persistence/Resource/instances"/>
+        <genOperations ecoreOperation="compilertest.ecore#/7/persistence/Resource/normalizedUri"/>
+        <genOperations ecoreOperation="compilertest.ecore#/7/persistence/Resource/getterDependentResources"/>
+        <genOperations ecoreOperation="compilertest.ecore#/7/persistence/Resource/getterContents"/>
+      </genClasses>
+      <genClasses ecoreClass="compilertest.ecore#/7/persistence/EMFResource">
+        <genOperations ecoreOperation="compilertest.ecore#/7/persistence/EMFResource/remove">
+          <genParameters ecoreParameter="compilertest.ecore#/7/persistence/EMFResource/remove/instance"/>
+        </genOperations>
+        <genOperations ecoreOperation="compilertest.ecore#/7/persistence/EMFResource/save"/>
+        <genOperations ecoreOperation="compilertest.ecore#/7/persistence/EMFResource/saveWithNewURI">
+          <genParameters ecoreParameter="compilertest.ecore#/7/persistence/EMFResource/saveWithNewURI/new_uri"/>
+        </genOperations>
+        <genOperations ecoreOperation="compilertest.ecore#/7/persistence/EMFResource/saveAndValidateWithEMF"/>
+        <genOperations ecoreOperation="compilertest.ecore#/7/persistence/EMFResource/load"/>
+        <genOperations ecoreOperation="compilertest.ecore#/7/persistence/EMFResource/add">
+          <genParameters ecoreParameter="compilertest.ecore#/7/persistence/EMFResource/add/instance"/>
+        </genOperations>
+      </genClasses>
+      <genClasses image="false" ecoreClass="compilertest.ecore#/7/persistence/Repository">
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference compilertest.ecore#/7/persistence/Repository/resources"/>
+        <genOperations ecoreOperation="compilertest.ecore#/7/persistence/Repository/createResource">
+          <genParameters ecoreParameter="compilertest.ecore#/7/persistence/Repository/createResource/uri"/>
+          <genParameters ecoreParameter="compilertest.ecore#/7/persistence/Repository/createResource/mm_uri"/>
+        </genOperations>
+        <genOperations ecoreOperation="compilertest.ecore#/7/persistence/Repository/normalizeUri">
+          <genParameters ecoreParameter="compilertest.ecore#/7/persistence/Repository/normalizeUri/uri"/>
+        </genOperations>
+        <genOperations ecoreOperation="compilertest.ecore#/7/persistence/Repository/findDanglingModelElements"/>
+        <genOperations ecoreOperation="compilertest.ecore#/7/persistence/Repository/getResource">
+          <genParameters ecoreParameter="compilertest.ecore#/7/persistence/Repository/getResource/uri"/>
+        </genOperations>
+      </genClasses>
+      <genClasses ecoreClass="compilertest.ecore#/7/persistence/DanglingDiagnostic">
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference compilertest.ecore#/7/persistence/DanglingDiagnostic/referencingElement"/>
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference compilertest.ecore#/7/persistence/DanglingDiagnostic/danglingElement"/>
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference compilertest.ecore#/7/persistence/DanglingDiagnostic/referencingProperty"/>
+        <genOperations ecoreOperation="compilertest.ecore#/7/persistence/DanglingDiagnostic/toString"/>
+      </genClasses>
+      <genClasses ecoreClass="compilertest.ecore#/7/persistence/EMFRepository">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute compilertest.ecore#/7/persistence/EMFRepository/ignoreLoadErrorUnknownMetaclass"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute compilertest.ecore#/7/persistence/EMFRepository/useInterpreterInternalResources"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute compilertest.ecore#/7/persistence/EMFRepository/ignoreAllLoadErrors"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute compilertest.ecore#/7/persistence/EMFRepository/ignoreLoadErrorUnknownProperty"/>
+        <genOperations ecoreOperation="compilertest.ecore#/7/persistence/EMFRepository/createResource">
+          <genParameters ecoreParameter="compilertest.ecore#/7/persistence/EMFRepository/createResource/uri"/>
+          <genParameters ecoreParameter="compilertest.ecore#/7/persistence/EMFRepository/createResource/mm_uri"/>
+        </genOperations>
+      </genClasses>
+    </nestedGenPackages>
+    <nestedGenPackages prefix="Utils" disposableProviderFactory="true" ecorePackage="compilertest.ecore#/7/utils">
+      <genDataTypes ecoreDataType="compilertest.ecore#/7/utils/KermetaProperty_StringBuffer_content"/>
+      <genDataTypes ecoreDataType="compilertest.ecore#/7/utils/KermetaProperty_Hashtable_wrappedHashtable">
+        <genTypeParameters ecoreTypeParameter="compilertest.ecore#/7/utils/KermetaProperty_Hashtable_wrappedHashtable/K"/>
+        <genTypeParameters ecoreTypeParameter="compilertest.ecore#/7/utils/KermetaProperty_Hashtable_wrappedHashtable/V"/>
+      </genDataTypes>
+      <genClasses ecoreClass="compilertest.ecore#/7/utils/StringBuffer">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute compilertest.ecore#/7/utils/StringBuffer/content"/>
+        <genOperations ecoreOperation="compilertest.ecore#/7/utils/StringBuffer/append">
+          <genParameters ecoreParameter="compilertest.ecore#/7/utils/StringBuffer/append/arg0"/>
+        </genOperations>
+        <genOperations ecoreOperation="compilertest.ecore#/7/utils/StringBuffer/length"/>
+        <genOperations ecoreOperation="compilertest.ecore#/7/utils/StringBuffer/toString"/>
+      </genClasses>
+      <genClasses ecoreClass="compilertest.ecore#/7/utils/Hashtable">
+        <genTypeParameters ecoreTypeParameter="compilertest.ecore#/7/utils/Hashtable/K"/>
+        <genTypeParameters ecoreTypeParameter="compilertest.ecore#/7/utils/Hashtable/V"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute compilertest.ecore#/7/utils/Hashtable/wrappedHashtable"/>
+        <genOperations ecoreOperation="compilertest.ecore#/7/utils/Hashtable/clear"/>
+        <genOperations ecoreOperation="compilertest.ecore#/7/utils/Hashtable/getValue">
+          <genParameters ecoreParameter="compilertest.ecore#/7/utils/Hashtable/getValue/key"/>
+        </genOperations>
+        <genOperations ecoreOperation="compilertest.ecore#/7/utils/Hashtable/containsKey">
+          <genParameters ecoreParameter="compilertest.ecore#/7/utils/Hashtable/containsKey/key"/>
+        </genOperations>
+        <genOperations ecoreOperation="compilertest.ecore#/7/utils/Hashtable/put">
+          <genParameters ecoreParameter="compilertest.ecore#/7/utils/Hashtable/put/key"/>
+          <genParameters ecoreParameter="compilertest.ecore#/7/utils/Hashtable/put/value"/>
+        </genOperations>
+        <genOperations ecoreOperation="compilertest.ecore#/7/utils/Hashtable/values"/>
+        <genOperations ecoreOperation="compilertest.ecore#/7/utils/Hashtable/remove">
+          <genParameters ecoreParameter="compilertest.ecore#/7/utils/Hashtable/remove/key"/>
+        </genOperations>
+        <genOperations ecoreOperation="compilertest.ecore#/7/utils/Hashtable/keys"/>
+        <genOperations ecoreOperation="compilertest.ecore#/7/utils/Hashtable/keyIterator"/>
+        <genOperations ecoreOperation="compilertest.ecore#/7/utils/Hashtable/valueIterator"/>
+        <genOperations ecoreOperation="compilertest.ecore#/7/utils/Hashtable/size"/>
+      </genClasses>
+      <genClasses ecoreClass="compilertest.ecore#/7/utils/Stack">
+        <genTypeParameters ecoreTypeParameter="compilertest.ecore#/7/utils/Stack/G"/>
+        <genOperations ecoreOperation="compilertest.ecore#/7/utils/Stack/peek"/>
+        <genOperations ecoreOperation="compilertest.ecore#/7/utils/Stack/pop"/>
+        <genOperations ecoreOperation="compilertest.ecore#/7/utils/Stack/push">
+          <genParameters ecoreParameter="compilertest.ecore#/7/utils/Stack/push/element"/>
+        </genOperations>
+      </genClasses>
+    </nestedGenPackages>
+    <nestedGenPackages prefix="Language" disposableProviderFactory="true" ecorePackage="compilertest.ecore#/7/language">
+      <genClasses image="false" ecoreClass="compilertest.ecore#/7/language/DummyClass"/>
+      <genClasses ecoreClass="compilertest.ecore#/7/language/ReflectiveCollection">
+        <genTypeParameters ecoreTypeParameter="compilertest.ecore#/7/language/ReflectiveCollection/G"/>
+        <genOperations ecoreOperation="compilertest.ecore#/7/language/ReflectiveCollection/clear"/>
+        <genOperations ecoreOperation="compilertest.ecore#/7/language/ReflectiveCollection/remove">
+          <genParameters ecoreParameter="compilertest.ecore#/7/language/ReflectiveCollection/remove/element"/>
+        </genOperations>
+        <genOperations ecoreOperation="compilertest.ecore#/7/language/ReflectiveCollection/add">
+          <genParameters ecoreParameter="compilertest.ecore#/7/language/ReflectiveCollection/add/element"/>
+        </genOperations>
+      </genClasses>
+      <genClasses ecoreClass="compilertest.ecore#/7/language/ReflectiveSequence">
+        <genTypeParameters ecoreTypeParameter="compilertest.ecore#/7/language/ReflectiveSequence/G"/>
+        <genOperations ecoreOperation="compilertest.ecore#/7/language/ReflectiveSequence/clear"/>
+        <genOperations ecoreOperation="compilertest.ecore#/7/language/ReflectiveSequence/addAt">
+          <genParameters ecoreParameter="compilertest.ecore#/7/language/ReflectiveSequence/addAt/index"/>
+          <genParameters ecoreParameter="compilertest.ecore#/7/language/ReflectiveSequence/addAt/element"/>
+        </genOperations>
+        <genOperations ecoreOperation="compilertest.ecore#/7/language/ReflectiveSequence/removeAt">
+          <genParameters ecoreParameter="compilertest.ecore#/7/language/ReflectiveSequence/removeAt/index"/>
+        </genOperations>
+        <genOperations ecoreOperation="compilertest.ecore#/7/language/ReflectiveSequence/remove">
+          <genParameters ecoreParameter="compilertest.ecore#/7/language/ReflectiveSequence/remove/element"/>
+        </genOperations>
+        <genOperations ecoreOperation="compilertest.ecore#/7/language/ReflectiveSequence/equals">
+          <genParameters ecoreParameter="compilertest.ecore#/7/language/ReflectiveSequence/equals/element"/>
+        </genOperations>
+        <genOperations ecoreOperation="compilertest.ecore#/7/language/ReflectiveSequence/add">
+          <genParameters ecoreParameter="compilertest.ecore#/7/language/ReflectiveSequence/add/element"/>
+        </genOperations>
+      </genClasses>
+      <nestedGenPackages prefix="Structure" disposableProviderFactory="true" ecorePackage="compilertest.ecore#/7/language/structure">
+        <genEnums typeSafeEnumCompatible="false" ecoreEnum="compilertest.ecore#/7/language/structure/ConstraintType">
+          <genEnumLiterals ecoreEnumLiteral="compilertest.ecore#/7/language/structure/ConstraintType/inv"/>
+          <genEnumLiterals ecoreEnumLiteral="compilertest.ecore#/7/language/structure/ConstraintType/pre"/>
+          <genEnumLiterals ecoreEnumLiteral="compilertest.ecore#/7/language/structure/ConstraintType/post"/>
+        </genEnums>
+        <genEnums typeSafeEnumCompatible="false" ecoreEnum="compilertest.ecore#/7/language/structure/ConstraintLanguage">
+          <genEnumLiterals ecoreEnumLiteral="compilertest.ecore#/7/language/structure/ConstraintLanguage/kermeta"/>
+          <genEnumLiterals ecoreEnumLiteral="compilertest.ecore#/7/language/structure/ConstraintLanguage/ocl"/>
+        </genEnums>
+        <genDataTypes ecoreDataType="compilertest.ecore#/7/language/structure/String"/>
+        <genDataTypes ecoreDataType="compilertest.ecore#/7/language/structure/Boolean"/>
+        <genDataTypes ecoreDataType="compilertest.ecore#/7/language/structure/Integer"/>
+        <genDataTypes ecoreDataType="compilertest.ecore#/7/language/structure/UnlimitedNatural"/>
+        <genDataTypes ecoreDataType="compilertest.ecore#/7/language/structure/KermetaProperty_Object_oid"/>
+        <genClasses ecoreClass="compilertest.ecore#/7/language/structure/Object">
+          <genFeatures notify="false" createChild="false" propertySortChoices="true"
+              ecoreFeature="ecore:EReference compilertest.ecore#/7/language/structure/Object/tag"/>
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference compilertest.ecore#/7/language/structure/Object/ownedTags"/>
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute compilertest.ecore#/7/language/structure/Object/oid.1"/>
+          <genFeatures notify="false" createChild="false" propertySortChoices="true"
+              ecoreFeature="ecore:EReference compilertest.ecore#/7/language/structure/Object/container.1"/>
+          <genOperations ecoreOperation="compilertest.ecore#/7/language/structure/Object/isSet">
+            <genParameters ecoreParameter="compilertest.ecore#/7/language/structure/Object/isSet/property"/>
+          </genOperations>
+          <genOperations ecoreOperation="compilertest.ecore#/7/language/structure/Object/get">
+            <genParameters ecoreParameter="compilertest.ecore#/7/language/structure/Object/get/property"/>
+          </genOperations>
+          <genOperations ecoreOperation="compilertest.ecore#/7/language/structure/Object/isKindOf">
+            <genParameters ecoreParameter="compilertest.ecore#/7/language/structure/Object/isKindOf/cl"/>
+          </genOperations>
+          <genOperations ecoreOperation="compilertest.ecore#/7/language/structure/Object/equals">
+            <genParameters ecoreParameter="compilertest.ecore#/7/language/structure/Object/equals/element"/>
+          </genOperations>
+          <genOperations ecoreOperation="compilertest.ecore#/7/language/structure/Object/getMetaClass"/>
+          <genOperations ecoreOperation="compilertest.ecore#/7/language/structure/Object/set">
+            <genParameters ecoreParameter="compilertest.ecore#/7/language/structure/Object/set/property"/>
+            <genParameters ecoreParameter="compilertest.ecore#/7/language/structure/Object/set/element"/>
+          </genOperations>
+          <genOperations ecoreOperation="compilertest.ecore#/7/language/structure/Object/isFrozen"/>
+          <genOperations ecoreOperation="compilertest.ecore#/7/language/structure/Object/hashcode"/>
+          <genOperations ecoreOperation="compilertest.ecore#/7/language/structure/Object/checkInvariants"/>
+          <genOperations ecoreOperation="compilertest.ecore#/7/language/structure/Object/isVoid"/>
+          <genOperations ecoreOperation="compilertest.ecore#/7/language/structure/Object/isNotEqual">
+            <genParameters ecoreParameter="compilertest.ecore#/7/language/structure/Object/isNotEqual/element"/>
+          </genOperations>
+          <genOperations ecoreOperation="compilertest.ecore#/7/language/structure/Object/freeze"/>
+          <genOperations ecoreOperation="compilertest.ecore#/7/language/structure/Object/oid"/>
+          <genOperations ecoreOperation="compilertest.ecore#/7/language/structure/Object/container"/>
+          <genOperations ecoreOperation="compilertest.ecore#/7/language/structure/Object/unset">
+            <genParameters ecoreParameter="compilertest.ecore#/7/language/structure/Object/unset/property"/>
+          </genOperations>
+          <genOperations ecoreOperation="compilertest.ecore#/7/language/structure/Object/containingResource"/>
+          <genOperations ecoreOperation="compilertest.ecore#/7/language/structure/Object/isInstanceOf">
+            <genParameters ecoreParameter="compilertest.ecore#/7/language/structure/Object/isInstanceOf/type"/>
+          </genOperations>
+          <genOperations ecoreOperation="compilertest.ecore#/7/language/structure/Object/checkAllInvariants"/>
+          <genOperations ecoreOperation="compilertest.ecore#/7/language/structure/Object/asType">
+            <genParameters ecoreParameter="compilertest.ecore#/7/language/structure/Object/asType/type"/>
+          </genOperations>
+          <genOperations ecoreOperation="compilertest.ecore#/7/language/structure/Object/toString"/>
+        </genClasses>
+        <genClasses ecoreClass="compilertest.ecore#/7/language/structure/ModelType">
+          <genFeatures notify="false" createChild="false" propertySortChoices="true"
+              ecoreFeature="ecore:EReference compilertest.ecore#/7/language/structure/ModelType/includedTypeDefinition"/>
+          <genOperations ecoreOperation="compilertest.ecore#/7/language/structure/ModelType/_new"/>
+          <genOperations ecoreOperation="compilertest.ecore#/7/language/structure/ModelType/isModelTypeOf">
+            <genParameters ecoreParameter="compilertest.ecore#/7/language/structure/ModelType/isModelTypeOf/m"/>
+          </genOperations>
+        </genClasses>
+        <genClasses ecoreClass="compilertest.ecore#/7/language/structure/Class">
+          <genOperations ecoreOperation="compilertest.ecore#/7/language/structure/Class/clone">
+            <genParameters ecoreParameter="compilertest.ecore#/7/language/structure/Class/clone/objectToClone"/>
+          </genOperations>
+          <genOperations ecoreOperation="compilertest.ecore#/7/language/structure/Class/deepClone">
+            <genParameters ecoreParameter="compilertest.ecore#/7/language/structure/Class/deepClone/objectToClone"/>
+          </genOperations>
+          <genOperations ecoreOperation="compilertest.ecore#/7/language/structure/Class/_new"/>
+          <genOperations ecoreOperation="compilertest.ecore#/7/language/structure/Class/equals">
+            <genParameters ecoreParameter="compilertest.ecore#/7/language/structure/Class/equals/other"/>
+          </genOperations>
+          <genOperations ecoreOperation="compilertest.ecore#/7/language/structure/Class/toString"/>
+          <genOperations ecoreOperation="compilertest.ecore#/7/language/structure/Class/getterOwnedOperation"/>
+          <genOperations ecoreOperation="compilertest.ecore#/7/language/structure/Class/getterSuperClass"/>
+          <genOperations ecoreOperation="compilertest.ecore#/7/language/structure/Class/getterIsAbstract"/>
+          <genOperations ecoreOperation="compilertest.ecore#/7/language/structure/Class/getterName"/>
+          <genOperations ecoreOperation="compilertest.ecore#/7/language/structure/Class/getterClassDefinition"/>
+          <genOperations ecoreOperation="compilertest.ecore#/7/language/structure/Class/getterOwnedAttribute"/>
+        </genClasses>
+        <genClasses ecoreClass="compilertest.ecore#/7/language/structure/ClassDefinition">
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference compilertest.ecore#/7/language/structure/ClassDefinition/ownedOperation"/>
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute compilertest.ecore#/7/language/structure/ClassDefinition/isAbstract"/>
+          <genFeatures notify="false" createChild="false" propertySortChoices="true"
+              ecoreFeature="ecore:EReference compilertest.ecore#/7/language/structure/ClassDefinition/superType"/>
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference compilertest.ecore#/7/language/structure/ClassDefinition/inv"/>
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference compilertest.ecore#/7/language/structure/ClassDefinition/ownedAttribute"/>
+          <genOperations ecoreOperation="compilertest.ecore#/7/language/structure/ClassDefinition/getterAllOperation"/>
+          <genOperations ecoreOperation="compilertest.ecore#/7/language/structure/ClassDefinition/getterAllAttribute"/>
+        </genClasses>
+        <genClasses ecoreClass="compilertest.ecore#/7/language/structure/Model">
+          <genFeatures notify="false" createChild="false" propertySortChoices="true"
+              ecoreFeature="ecore:EReference compilertest.ecore#/7/language/structure/Model/contents"/>
+          <genOperations ecoreOperation="compilertest.ecore#/7/language/structure/Model/addCompatible">
+            <genParameters ecoreParameter="compilertest.ecore#/7/language/structure/Model/addCompatible/objectToAdd"/>
+          </genOperations>
+          <genOperations ecoreOperation="compilertest.ecore#/7/language/structure/Model/remove">
+            <genParameters ecoreParameter="compilertest.ecore#/7/language/structure/Model/remove/obj"/>
+          </genOperations>
+          <genOperations ecoreOperation="compilertest.ecore#/7/language/structure/Model/addAllCompatible">
+            <genParameters ecoreParameter="compilertest.ecore#/7/language/structure/Model/addAllCompatible/objectsToAdd"/>
+          </genOperations>
+          <genOperations ecoreOperation="compilertest.ecore#/7/language/structure/Model/add">
+            <genParameters ecoreParameter="compilertest.ecore#/7/language/structure/Model/add/obj"/>
+          </genOperations>
+          <genOperations ecoreOperation="compilertest.ecore#/7/language/structure/Model/filter">
+            <genParameters ecoreParameter="compilertest.ecore#/7/language/structure/Model/filter/typeName"/>
+          </genOperations>
+        </genClasses>
+        <genClasses ecoreClass="compilertest.ecore#/7/language/structure/Type">
+          <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference compilertest.ecore#/7/language/structure/Type/typeContainer"/>
+          <genOperations ecoreOperation="compilertest.ecore#/7/language/structure/Type/clone">
+            <genParameters ecoreParameter="compilertest.ecore#/7/language/structure/Type/clone/objectToClone"/>
+          </genOperations>
+          <genOperations ecoreOperation="compilertest.ecore#/7/language/structure/Type/isSuperTypeOf">
+            <genParameters ecoreParameter="compilertest.ecore#/7/language/structure/Type/isSuperTypeOf/object"/>
+          </genOperations>
+          <genOperations ecoreOperation="compilertest.ecore#/7/language/structure/Type/isInstance">
+            <genParameters ecoreParameter="compilertest.ecore#/7/language/structure/Type/isInstance/element"/>
+          </genOperations>
+          <genOperations ecoreOperation="compilertest.ecore#/7/language/structure/Type/deepClone">
+            <genParameters ecoreParameter="compilertest.ecore#/7/language/structure/Type/deepClone/objectToClone"/>
+          </genOperations>
+          <genOperations ecoreOperation="compilertest.ecore#/7/language/structure/Type/isSubTypeOf">
+            <genParameters ecoreParameter="compilertest.ecore#/7/language/structure/Type/isSubTypeOf/object"/>
+          </genOperations>
+        </genClasses>
+        <genClasses ecoreClass="compilertest.ecore#/7/language/structure/NamedElement">
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute compilertest.ecore#/7/language/structure/NamedElement/name"/>
+          <genOperations ecoreOperation="compilertest.ecore#/7/language/structure/NamedElement/qualifiedName"/>
+        </genClasses>
+        <genClasses ecoreClass="compilertest.ecore#/7/language/structure/Enumeration">
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference compilertest.ecore#/7/language/structure/Enumeration/ownedLiteral"/>
+          <genOperations ecoreOperation="compilertest.ecore#/7/language/structure/Enumeration/clone">
+            <genParameters ecoreParameter="compilertest.ecore#/7/language/structure/Enumeration/clone/objectToClone"/>
+          </genOperations>
+        </genClasses>
+        <genClasses ecoreClass="compilertest.ecore#/7/language/structure/FunctionType">
+          <genFeatures notify="false" createChild="false" propertySortChoices="true"
+              ecoreFeature="ecore:EReference compilertest.ecore#/7/language/structure/FunctionType/left"/>
+          <genFeatures notify="false" createChild="false" propertySortChoices="true"
+              ecoreFeature="ecore:EReference compilertest.ecore#/7/language/structure/FunctionType/right"/>
+        </genClasses>
+        <genClasses ecoreClass="compilertest.ecore#/7/language/structure/Operation">
+          <genFeatures notify="false" createChild="false" propertySortChoices="true"
+              ecoreFeature="ecore:EReference compilertest.ecore#/7/language/structure/Operation/typeParameter"/>
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference compilertest.ecore#/7/language/structure/Operation/body"/>
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference compilertest.ecore#/7/language/structure/Operation/post"/>
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute compilertest.ecore#/7/language/structure/Operation/isAbstract"/>
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference compilertest.ecore#/7/language/structure/Operation/ownedParameter"/>
+          <genFeatures notify="false" createChild="false" propertySortChoices="true"
+              ecoreFeature="ecore:EReference compilertest.ecore#/7/language/structure/Operation/raisedException"/>
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference compilertest.ecore#/7/language/structure/Operation/pre"/>
+          <genFeatures notify="false" createChild="false" propertySortChoices="true"
+              ecoreFeature="ecore:EReference compilertest.ecore#/7/language/structure/Operation/superOperation"/>
+          <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference compilertest.ecore#/7/language/structure/Operation/owningClass"/>
+        </genClasses>
+        <genClasses ecoreClass="compilertest.ecore#/7/language/structure/Property">
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute compilertest.ecore#/7/language/structure/Property/default"/>
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute compilertest.ecore#/7/language/structure/Property/isDerived"/>
+          <genFeatures notify="false" createChild="false" propertySortChoices="true"
+              ecoreFeature="ecore:EReference compilertest.ecore#/7/language/structure/Property/opposite"/>
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference compilertest.ecore#/7/language/structure/Property/getterBody"/>
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute compilertest.ecore#/7/language/structure/Property/isReadOnly"/>
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference compilertest.ecore#/7/language/structure/Property/setterBody"/>
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute compilertest.ecore#/7/language/structure/Property/isSetterAbstract"/>
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute compilertest.ecore#/7/language/structure/Property/isID"/>
+          <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference compilertest.ecore#/7/language/structure/Property/owningClass"/>
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute compilertest.ecore#/7/language/structure/Property/isGetterAbstract"/>
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute compilertest.ecore#/7/language/structure/Property/isComposite"/>
+        </genClasses>
+        <genClasses image="false" ecoreClass="compilertest.ecore#/7/language/structure/TypeContainer">
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference compilertest.ecore#/7/language/structure/TypeContainer/containedType"/>
+        </genClasses>
+        <genClasses ecoreClass="compilertest.ecore#/7/language/structure/EnumerationLiteral">
+          <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference compilertest.ecore#/7/language/structure/EnumerationLiteral/enumeration"/>
+        </genClasses>
+        <genClasses ecoreClass="compilertest.ecore#/7/language/structure/TypeVariableBinding">
+          <genFeatures notify="false" createChild="false" propertySortChoices="true"
+              ecoreFeature="ecore:EReference compilertest.ecore#/7/language/structure/TypeVariableBinding/type"/>
+          <genFeatures notify="false" createChild="false" propertySortChoices="true"
+              ecoreFeature="ecore:EReference compilertest.ecore#/7/language/structure/TypeVariableBinding/variable"/>
+        </genClasses>
+        <genClasses ecoreClass="compilertest.ecore#/7/language/structure/MultiplicityElement">
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute compilertest.ecore#/7/language/structure/MultiplicityElement/isOrdered"/>
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute compilertest.ecore#/7/language/structure/MultiplicityElement/upper"/>
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute compilertest.ecore#/7/language/structure/MultiplicityElement/lower"/>
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute compilertest.ecore#/7/language/structure/MultiplicityElement/isUnique"/>
+        </genClasses>
+        <genClasses image="false" ecoreClass="compilertest.ecore#/7/language/structure/TypedElement">
+          <genFeatures notify="false" createChild="false" propertySortChoices="true"
+              ecoreFeature="ecore:EReference compilertest.ecore#/7/language/structure/TypedElement/type"/>
+        </genClasses>
+        <genClasses ecoreClass="compilertest.ecore#/7/language/structure/TypeDefinition">
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute compilertest.ecore#/7/language/structure/TypeDefinition/isAspect"/>
+        </genClasses>
+        <genClasses image="false" ecoreClass="compilertest.ecore#/7/language/structure/DataType"/>
+        <genClasses ecoreClass="compilertest.ecore#/7/language/structure/Package">
+          <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference compilertest.ecore#/7/language/structure/Package/nestingPackage"/>
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference compilertest.ecore#/7/language/structure/Package/nestedPackage"/>
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute compilertest.ecore#/7/language/structure/Package/uri"/>
+        </genClasses>
+        <genClasses ecoreClass="compilertest.ecore#/7/language/structure/Parameter">
+          <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference compilertest.ecore#/7/language/structure/Parameter/operation"/>
+        </genClasses>
+        <genClasses ecoreClass="compilertest.ecore#/7/language/structure/PrimitiveType">
+          <genFeatures notify="false" createChild="false" propertySortChoices="true"
+              ecoreFeature="ecore:EReference compilertest.ecore#/7/language/structure/PrimitiveType/instanceType"/>
+        </genClasses>
+        <genClasses ecoreClass="compilertest.ecore#/7/language/structure/Tag">
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute compilertest.ecore#/7/language/structure/Tag/name"/>
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute compilertest.ecore#/7/language/structure/Tag/value"/>
+          <genFeatures notify="false" createChild="false" propertySortChoices="true"
+              ecoreFeature="ecore:EReference compilertest.ecore#/7/language/structure/Tag/object"/>
+        </genClasses>
+        <genClasses ecoreClass="compilertest.ecore#/7/language/structure/Constraint">
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference compilertest.ecore#/7/language/structure/Constraint/body"/>
+          <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference compilertest.ecore#/7/language/structure/Constraint/preOwner"/>
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute compilertest.ecore#/7/language/structure/Constraint/stereotype"/>
+          <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference compilertest.ecore#/7/language/structure/Constraint/postOwner"/>
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute compilertest.ecore#/7/language/structure/Constraint/language"/>
+          <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference compilertest.ecore#/7/language/structure/Constraint/invOwner"/>
+        </genClasses>
+        <genClasses image="false" ecoreClass="compilertest.ecore#/7/language/structure/GenericTypeDefinition">
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference compilertest.ecore#/7/language/structure/GenericTypeDefinition/typeParameter"/>
+        </genClasses>
+        <genClasses image="false" ecoreClass="compilertest.ecore#/7/language/structure/ParameterizedType">
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference compilertest.ecore#/7/language/structure/ParameterizedType/typeParamBinding"/>
+          <genFeatures notify="false" createChild="false" propertySortChoices="true"
+              ecoreFeature="ecore:EReference compilertest.ecore#/7/language/structure/ParameterizedType/typeDefinition"/>
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference compilertest.ecore#/7/language/structure/ParameterizedType/virtualTypeBinding"/>
+        </genClasses>
+        <genClasses image="false" ecoreClass="compilertest.ecore#/7/language/structure/TypeVariable">
+          <genFeatures notify="false" createChild="false" propertySortChoices="true"
+              ecoreFeature="ecore:EReference compilertest.ecore#/7/language/structure/TypeVariable/supertype"/>
+        </genClasses>
+        <genClasses ecoreClass="compilertest.ecore#/7/language/structure/ObjectTypeVariable"/>
+        <genClasses ecoreClass="compilertest.ecore#/7/language/structure/ModelTypeVariable">
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference compilertest.ecore#/7/language/structure/ModelTypeVariable/virtualType"/>
+        </genClasses>
+        <genClasses ecoreClass="compilertest.ecore#/7/language/structure/VirtualType">
+          <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference compilertest.ecore#/7/language/structure/VirtualType/modelType"/>
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference compilertest.ecore#/7/language/structure/VirtualType/typeParamBinding"/>
+          <genFeatures notify="false" createChild="false" propertySortChoices="true"
+              ecoreFeature="ecore:EReference compilertest.ecore#/7/language/structure/VirtualType/classDefinition"/>
+        </genClasses>
+        <genClasses ecoreClass="compilertest.ecore#/7/language/structure/ModelingUnit">
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference compilertest.ecore#/7/language/structure/ModelingUnit/usings"/>
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference compilertest.ecore#/7/language/structure/ModelingUnit/packages"/>
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference compilertest.ecore#/7/language/structure/ModelingUnit/includeFilters"/>
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference compilertest.ecore#/7/language/structure/ModelingUnit/excludeFilters"/>
+          <genFeatures notify="false" createChild="false" propertySortChoices="true"
+              ecoreFeature="ecore:EReference compilertest.ecore#/7/language/structure/ModelingUnit/referencedModelingUnits"/>
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference compilertest.ecore#/7/language/structure/ModelingUnit/requires"/>
+        </genClasses>
+        <genClasses ecoreClass="compilertest.ecore#/7/language/structure/Require">
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute compilertest.ecore#/7/language/structure/Require/uri"/>
+        </genClasses>
+        <genClasses ecoreClass="compilertest.ecore#/7/language/structure/Using">
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute compilertest.ecore#/7/language/structure/Using/qualifiedName"/>
+        </genClasses>
+        <genClasses ecoreClass="compilertest.ecore#/7/language/structure/Filter">
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute compilertest.ecore#/7/language/structure/Filter/qualifiedName"/>
+        </genClasses>
+        <genClasses ecoreClass="compilertest.ecore#/7/language/structure/ProductType">
+          <genFeatures notify="false" createChild="false" propertySortChoices="true"
+              ecoreFeature="ecore:EReference compilertest.ecore#/7/language/structure/ProductType/type"/>
+        </genClasses>
+        <genClasses ecoreClass="compilertest.ecore#/7/language/structure/VoidType"/>
+        <genClasses image="false" ecoreClass="compilertest.ecore#/7/language/structure/TypeDefinitionContainer">
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference compilertest.ecore#/7/language/structure/TypeDefinitionContainer/ownedTypeDefinition"/>
+        </genClasses>
+      </nestedGenPackages>
+      <nestedGenPackages prefix="Behavior" disposableProviderFactory="true" ecorePackage="compilertest.ecore#/7/language/behavior">
+        <genClasses image="false" ecoreClass="compilertest.ecore#/7/language/behavior/CallExpression">
+          <genFeatures notify="false" createChild="false" propertySortChoices="true"
+              ecoreFeature="ecore:EReference compilertest.ecore#/7/language/behavior/CallExpression/staticTypeVariableBindings"/>
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute compilertest.ecore#/7/language/behavior/CallExpression/name"/>
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference compilertest.ecore#/7/language/behavior/CallExpression/parameters"/>
+        </genClasses>
+        <genClasses image="false" ecoreClass="compilertest.ecore#/7/language/behavior/Expression">
+          <genFeatures notify="false" createChild="false" propertySortChoices="true"
+              ecoreFeature="ecore:EReference compilertest.ecore#/7/language/behavior/Expression/staticType"/>
+        </genClasses>
+        <genClasses ecoreClass="compilertest.ecore#/7/language/behavior/CallVariable">
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute compilertest.ecore#/7/language/behavior/CallVariable/isAtpre"/>
+        </genClasses>
+        <genClasses ecoreClass="compilertest.ecore#/7/language/behavior/CallFeature">
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute compilertest.ecore#/7/language/behavior/CallFeature/isAtpre"/>
+          <genFeatures notify="false" createChild="false" propertySortChoices="true"
+              ecoreFeature="ecore:EReference compilertest.ecore#/7/language/behavior/CallFeature/staticOperation"/>
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference compilertest.ecore#/7/language/behavior/CallFeature/target"/>
+          <genFeatures notify="false" createChild="false" propertySortChoices="true"
+              ecoreFeature="ecore:EReference compilertest.ecore#/7/language/behavior/CallFeature/staticEnumLiteral"/>
+          <genFeatures notify="false" createChild="false" propertySortChoices="true"
+              ecoreFeature="ecore:EReference compilertest.ecore#/7/language/behavior/CallFeature/staticProperty"/>
+        </genClasses>
+        <genClasses ecoreClass="compilertest.ecore#/7/language/behavior/CallSuperOperation"/>
+        <genClasses ecoreClass="compilertest.ecore#/7/language/behavior/CallResult"/>
+        <genClasses ecoreClass="compilertest.ecore#/7/language/behavior/CallValue"/>
+        <genClasses ecoreClass="compilertest.ecore#/7/language/behavior/Assignment">
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference compilertest.ecore#/7/language/behavior/Assignment/value"/>
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference compilertest.ecore#/7/language/behavior/Assignment/target"/>
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute compilertest.ecore#/7/language/behavior/Assignment/isCast"/>
+        </genClasses>
+        <genClasses ecoreClass="compilertest.ecore#/7/language/behavior/Block">
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference compilertest.ecore#/7/language/behavior/Block/statement"/>
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference compilertest.ecore#/7/language/behavior/Block/rescueBlock"/>
+        </genClasses>
+        <genClasses ecoreClass="compilertest.ecore#/7/language/behavior/Conditional">
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference compilertest.ecore#/7/language/behavior/Conditional/thenBody"/>
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference compilertest.ecore#/7/language/behavior/Conditional/condition"/>
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference compilertest.ecore#/7/language/behavior/Conditional/elseBody"/>
+        </genClasses>
+        <genClasses ecoreClass="compilertest.ecore#/7/language/behavior/Raise">
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference compilertest.ecore#/7/language/behavior/Raise/expression"/>
+        </genClasses>
+        <genClasses ecoreClass="compilertest.ecore#/7/language/behavior/Rescue">
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference compilertest.ecore#/7/language/behavior/Rescue/body"/>
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute compilertest.ecore#/7/language/behavior/Rescue/exceptionName"/>
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference compilertest.ecore#/7/language/behavior/Rescue/exceptionType"/>
+        </genClasses>
+        <genClasses ecoreClass="compilertest.ecore#/7/language/behavior/TypeReference"/>
+        <genClasses image="false" ecoreClass="compilertest.ecore#/7/language/behavior/Literal"/>
+        <genClasses ecoreClass="compilertest.ecore#/7/language/behavior/EmptyExpression"/>
+        <genClasses ecoreClass="compilertest.ecore#/7/language/behavior/JavaStaticCall">
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute compilertest.ecore#/7/language/behavior/JavaStaticCall/jmethod"/>
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference compilertest.ecore#/7/language/behavior/JavaStaticCall/parameters"/>
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute compilertest.ecore#/7/language/behavior/JavaStaticCall/jclass"/>
+        </genClasses>
+        <genClasses ecoreClass="compilertest.ecore#/7/language/behavior/LambdaExpression">
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference compilertest.ecore#/7/language/behavior/LambdaExpression/body"/>
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference compilertest.ecore#/7/language/behavior/LambdaExpression/parameters"/>
+        </genClasses>
+        <genClasses ecoreClass="compilertest.ecore#/7/language/behavior/LambdaParameter">
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute compilertest.ecore#/7/language/behavior/LambdaParameter/name"/>
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference compilertest.ecore#/7/language/behavior/LambdaParameter/type"/>
+        </genClasses>
+        <genClasses ecoreClass="compilertest.ecore#/7/language/behavior/IntegerLiteral">
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute compilertest.ecore#/7/language/behavior/IntegerLiteral/value"/>
+        </genClasses>
+        <genClasses ecoreClass="compilertest.ecore#/7/language/behavior/StringLiteral">
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute compilertest.ecore#/7/language/behavior/StringLiteral/value"/>
+        </genClasses>
+        <genClasses ecoreClass="compilertest.ecore#/7/language/behavior/BooleanLiteral">
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute compilertest.ecore#/7/language/behavior/BooleanLiteral/value"/>
+        </genClasses>
+        <genClasses ecoreClass="compilertest.ecore#/7/language/behavior/TypeLiteral">
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference compilertest.ecore#/7/language/behavior/TypeLiteral/typeref"/>
+        </genClasses>
+        <genClasses ecoreClass="compilertest.ecore#/7/language/behavior/VoidLiteral"/>
+        <genClasses ecoreClass="compilertest.ecore#/7/language/behavior/Loop">
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference compilertest.ecore#/7/language/behavior/Loop/initialization"/>
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference compilertest.ecore#/7/language/behavior/Loop/body"/>
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference compilertest.ecore#/7/language/behavior/Loop/stopCondition"/>
+        </genClasses>
+        <genClasses ecoreClass="compilertest.ecore#/7/language/behavior/SelfExpression"/>
+        <genClasses ecoreClass="compilertest.ecore#/7/language/behavior/VariableDecl">
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference compilertest.ecore#/7/language/behavior/VariableDecl/initialization"/>
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference compilertest.ecore#/7/language/behavior/VariableDecl/type"/>
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute compilertest.ecore#/7/language/behavior/VariableDecl/identifier"/>
+        </genClasses>
+      </nestedGenPackages>
+    </nestedGenPackages>
     <nestedGenPackages prefix="Standard" disposableProviderFactory="true" ecorePackage="compilertest.ecore#/7/standard">
       <genDataTypes ecoreDataType="compilertest.ecore#/7/standard/JavaBoolean"/>
       <genDataTypes ecoreDataType="compilertest.ecore#/7/standard/JavaNumeric"/>
@@ -367,46 +847,14 @@
       <genDataTypes ecoreDataType="compilertest.ecore#/7/standard/KermetaProperty_Iterator_javaIterator">
         <genTypeParameters ecoreTypeParameter="compilertest.ecore#/7/standard/KermetaProperty_Iterator_javaIterator/G"/>
       </genDataTypes>
-      <genClasses ecoreClass="compilertest.ecore#/7/standard/Void">
-        <genOperations ecoreOperation="compilertest.ecore#/7/standard/Void/isVoid"/>
-        <genOperations ecoreOperation="compilertest.ecore#/7/standard/Void/isInstanceOf">
-          <genParameters ecoreParameter="compilertest.ecore#/7/standard/Void/isInstanceOf/type"/>
-        </genOperations>
-        <genOperations ecoreOperation="compilertest.ecore#/7/standard/Void/toString"/>
-      </genClasses>
-      <genClasses image="false" ecoreClass="compilertest.ecore#/7/standard/ValueType"/>
-      <genClasses image="false" ecoreClass="compilertest.ecore#/7/standard/Comparable">
-        <genOperations ecoreOperation="compilertest.ecore#/7/standard/Comparable/isLower">
-          <genParameters ecoreParameter="compilertest.ecore#/7/standard/Comparable/isLower/other"/>
-        </genOperations>
-        <genOperations ecoreOperation="compilertest.ecore#/7/standard/Comparable/isGreaterOrEqual">
-          <genParameters ecoreParameter="compilertest.ecore#/7/standard/Comparable/isGreaterOrEqual/other"/>
-        </genOperations>
-        <genOperations ecoreOperation="compilertest.ecore#/7/standard/Comparable/compareTo">
-          <genParameters ecoreParameter="compilertest.ecore#/7/standard/Comparable/compareTo/other"/>
-        </genOperations>
-        <genOperations ecoreOperation="compilertest.ecore#/7/standard/Comparable/isLowerOrEqual">
-          <genParameters ecoreParameter="compilertest.ecore#/7/standard/Comparable/isLowerOrEqual/other"/>
-        </genOperations>
-        <genOperations ecoreOperation="compilertest.ecore#/7/standard/Comparable/isGreater">
-          <genParameters ecoreParameter="compilertest.ecore#/7/standard/Comparable/isGreater/other"/>
-        </genOperations>
-      </genClasses>
-      <genClasses image="false" ecoreClass="compilertest.ecore#/7/standard/Summable">
-        <genTypeParameters ecoreTypeParameter="compilertest.ecore#/7/standard/Summable/G"/>
-        <genOperations ecoreOperation="compilertest.ecore#/7/standard/Summable/plus">
-          <genParameters ecoreParameter="compilertest.ecore#/7/standard/Summable/plus/other"/>
-        </genOperations>
-      </genClasses>
-      <genClasses ecoreClass="compilertest.ecore#/7/standard/NotComparableException"/>
       <genClasses image="false" ecoreClass="compilertest.ecore#/7/standard/Collection">
         <genTypeParameters ecoreTypeParameter="compilertest.ecore#/7/standard/Collection/G"/>
         <genFeatures createChild="false" ecoreFeature="ecore:EAttribute compilertest.ecore#/7/standard/Collection/values"/>
-        <genOperations ecoreOperation="compilertest.ecore#/7/standard/Collection/count">
-          <genParameters ecoreParameter="compilertest.ecore#/7/standard/Collection/count/element"/>
-        </genOperations>
         <genOperations ecoreOperation="compilertest.ecore#/7/standard/Collection/remove">
           <genParameters ecoreParameter="compilertest.ecore#/7/standard/Collection/remove/element"/>
+        </genOperations>
+        <genOperations ecoreOperation="compilertest.ecore#/7/standard/Collection/count">
+          <genParameters ecoreParameter="compilertest.ecore#/7/standard/Collection/count/element"/>
         </genOperations>
         <genOperations ecoreOperation="compilertest.ecore#/7/standard/Collection/excludes">
           <genParameters ecoreParameter="compilertest.ecore#/7/standard/Collection/excludes/element"/>
@@ -419,13 +867,13 @@
         <genOperations ecoreOperation="compilertest.ecore#/7/standard/Collection/contains">
           <genParameters ecoreParameter="compilertest.ecore#/7/standard/Collection/contains/element"/>
         </genOperations>
-        <genOperations ecoreOperation="compilertest.ecore#/7/standard/Collection/includes">
-          <genParameters ecoreParameter="compilertest.ecore#/7/standard/Collection/includes/element"/>
-        </genOperations>
         <genOperations ecoreOperation="compilertest.ecore#/7/standard/Collection/excludesAll">
           <genParameters ecoreParameter="compilertest.ecore#/7/standard/Collection/excludesAll/elements"/>
         </genOperations>
         <genOperations ecoreOperation="compilertest.ecore#/7/standard/Collection/asSequence"/>
+        <genOperations ecoreOperation="compilertest.ecore#/7/standard/Collection/includes">
+          <genParameters ecoreParameter="compilertest.ecore#/7/standard/Collection/includes/element"/>
+        </genOperations>
         <genOperations ecoreOperation="compilertest.ecore#/7/standard/Collection/add">
           <genParameters ecoreParameter="compilertest.ecore#/7/standard/Collection/add/element"/>
         </genOperations>
@@ -464,13 +912,13 @@
           <genParameters ecoreParameter="compilertest.ecore#/7/standard/Set/add/element"/>
         </genOperations>
         <genOperations ecoreOperation="compilertest.ecore#/7/standard/Set/asSequence"/>
+        <genOperations ecoreOperation="compilertest.ecore#/7/standard/Set/symmetricDifference">
+          <genParameters ecoreParameter="compilertest.ecore#/7/standard/Set/symmetricDifference/s"/>
+        </genOperations>
         <genOperations ecoreOperation="compilertest.ecore#/7/standard/Set/concatenate">
           <genParameters ecoreParameter="compilertest.ecore#/7/standard/Set/concatenate/less"/>
           <genParameters ecoreParameter="compilertest.ecore#/7/standard/Set/concatenate/pivot"/>
           <genParameters ecoreParameter="compilertest.ecore#/7/standard/Set/concatenate/greater"/>
-        </genOperations>
-        <genOperations ecoreOperation="compilertest.ecore#/7/standard/Set/symmetricDifference">
-          <genParameters ecoreParameter="compilertest.ecore#/7/standard/Set/symmetricDifference/s"/>
         </genOperations>
         <genOperations ecoreOperation="compilertest.ecore#/7/standard/Set/flatten"/>
         <genOperations ecoreOperation="compilertest.ecore#/7/standard/Set/asOrderedSet"/>
@@ -478,10 +926,10 @@
         <genOperations ecoreOperation="compilertest.ecore#/7/standard/Set/union">
           <genParameters ecoreParameter="compilertest.ecore#/7/standard/Set/union/elements"/>
         </genOperations>
-        <genOperations ecoreOperation="compilertest.ecore#/7/standard/Set/asSet"/>
         <genOperations ecoreOperation="compilertest.ecore#/7/standard/Set/unionWithBag">
           <genParameters ecoreParameter="compilertest.ecore#/7/standard/Set/unionWithBag/elements"/>
         </genOperations>
+        <genOperations ecoreOperation="compilertest.ecore#/7/standard/Set/asSet"/>
       </genClasses>
       <genClasses ecoreClass="compilertest.ecore#/7/standard/Bag">
         <genTypeParameters ecoreTypeParameter="compilertest.ecore#/7/standard/Bag/G"/>
@@ -504,10 +952,10 @@
         <genOperations ecoreOperation="compilertest.ecore#/7/standard/Bag/intersectionWithSet">
           <genParameters ecoreParameter="compilertest.ecore#/7/standard/Bag/intersectionWithSet/elements"/>
         </genOperations>
-        <genOperations ecoreOperation="compilertest.ecore#/7/standard/Bag/asOrderedSet"/>
         <genOperations ecoreOperation="compilertest.ecore#/7/standard/Bag/including">
           <genParameters ecoreParameter="compilertest.ecore#/7/standard/Bag/including/object"/>
         </genOperations>
+        <genOperations ecoreOperation="compilertest.ecore#/7/standard/Bag/asOrderedSet"/>
         <genOperations ecoreOperation="compilertest.ecore#/7/standard/Bag/asBag"/>
         <genOperations ecoreOperation="compilertest.ecore#/7/standard/Bag/union">
           <genParameters ecoreParameter="compilertest.ecore#/7/standard/Bag/union/elements"/>
@@ -546,13 +994,13 @@
         <genOperations ecoreOperation="compilertest.ecore#/7/standard/OrderedSet/append">
           <genParameters ecoreParameter="compilertest.ecore#/7/standard/OrderedSet/append/element"/>
         </genOperations>
-        <genOperations ecoreOperation="compilertest.ecore#/7/standard/OrderedSet/insertAt">
-          <genParameters ecoreParameter="compilertest.ecore#/7/standard/OrderedSet/insertAt/index"/>
-          <genParameters ecoreParameter="compilertest.ecore#/7/standard/OrderedSet/insertAt/subject"/>
-        </genOperations>
         <genOperations ecoreOperation="compilertest.ecore#/7/standard/OrderedSet/addAt">
           <genParameters ecoreParameter="compilertest.ecore#/7/standard/OrderedSet/addAt/index"/>
           <genParameters ecoreParameter="compilertest.ecore#/7/standard/OrderedSet/addAt/element"/>
+        </genOperations>
+        <genOperations ecoreOperation="compilertest.ecore#/7/standard/OrderedSet/insertAt">
+          <genParameters ecoreParameter="compilertest.ecore#/7/standard/OrderedSet/insertAt/index"/>
+          <genParameters ecoreParameter="compilertest.ecore#/7/standard/OrderedSet/insertAt/subject"/>
         </genOperations>
         <genOperations ecoreOperation="compilertest.ecore#/7/standard/OrderedSet/equals">
           <genParameters ecoreParameter="compilertest.ecore#/7/standard/OrderedSet/equals/element"/>
@@ -584,11 +1032,11 @@
           <genParameters ecoreParameter="compilertest.ecore#/7/standard/Sequence/insertAt/index"/>
           <genParameters ecoreParameter="compilertest.ecore#/7/standard/Sequence/insertAt/element"/>
         </genOperations>
-        <genOperations ecoreOperation="compilertest.ecore#/7/standard/Sequence/equals">
-          <genParameters ecoreParameter="compilertest.ecore#/7/standard/Sequence/equals/element"/>
-        </genOperations>
         <genOperations ecoreOperation="compilertest.ecore#/7/standard/Sequence/preppend">
           <genParameters ecoreParameter="compilertest.ecore#/7/standard/Sequence/preppend/element"/>
+        </genOperations>
+        <genOperations ecoreOperation="compilertest.ecore#/7/standard/Sequence/equals">
+          <genParameters ecoreParameter="compilertest.ecore#/7/standard/Sequence/equals/element"/>
         </genOperations>
         <genOperations ecoreOperation="compilertest.ecore#/7/standard/Sequence/at">
           <genParameters ecoreParameter="compilertest.ecore#/7/standard/Sequence/at/index"/>
@@ -603,459 +1051,40 @@
         <genOperations ecoreOperation="compilertest.ecore#/7/standard/Iterator/next"/>
         <genOperations ecoreOperation="compilertest.ecore#/7/standard/Iterator/isOff"/>
       </genClasses>
+      <genClasses ecoreClass="compilertest.ecore#/7/standard/Void">
+        <genOperations ecoreOperation="compilertest.ecore#/7/standard/Void/isVoid"/>
+        <genOperations ecoreOperation="compilertest.ecore#/7/standard/Void/isInstanceOf">
+          <genParameters ecoreParameter="compilertest.ecore#/7/standard/Void/isInstanceOf/type"/>
+        </genOperations>
+        <genOperations ecoreOperation="compilertest.ecore#/7/standard/Void/toString"/>
+      </genClasses>
+      <genClasses image="false" ecoreClass="compilertest.ecore#/7/standard/ValueType"/>
+      <genClasses image="false" ecoreClass="compilertest.ecore#/7/standard/Comparable">
+        <genOperations ecoreOperation="compilertest.ecore#/7/standard/Comparable/isLower">
+          <genParameters ecoreParameter="compilertest.ecore#/7/standard/Comparable/isLower/other"/>
+        </genOperations>
+        <genOperations ecoreOperation="compilertest.ecore#/7/standard/Comparable/isGreaterOrEqual">
+          <genParameters ecoreParameter="compilertest.ecore#/7/standard/Comparable/isGreaterOrEqual/other"/>
+        </genOperations>
+        <genOperations ecoreOperation="compilertest.ecore#/7/standard/Comparable/compareTo">
+          <genParameters ecoreParameter="compilertest.ecore#/7/standard/Comparable/compareTo/other"/>
+        </genOperations>
+        <genOperations ecoreOperation="compilertest.ecore#/7/standard/Comparable/isLowerOrEqual">
+          <genParameters ecoreParameter="compilertest.ecore#/7/standard/Comparable/isLowerOrEqual/other"/>
+        </genOperations>
+        <genOperations ecoreOperation="compilertest.ecore#/7/standard/Comparable/isGreater">
+          <genParameters ecoreParameter="compilertest.ecore#/7/standard/Comparable/isGreater/other"/>
+        </genOperations>
+      </genClasses>
+      <genClasses image="false" ecoreClass="compilertest.ecore#/7/standard/Summable">
+        <genTypeParameters ecoreTypeParameter="compilertest.ecore#/7/standard/Summable/G"/>
+        <genOperations ecoreOperation="compilertest.ecore#/7/standard/Summable/plus">
+          <genParameters ecoreParameter="compilertest.ecore#/7/standard/Summable/plus/other"/>
+        </genOperations>
+      </genClasses>
+      <genClasses ecoreClass="compilertest.ecore#/7/standard/NotComparableException"/>
       <genClasses ecoreClass="compilertest.ecore#/7/standard/UnknownJavaObject">
         <genOperations ecoreOperation="compilertest.ecore#/7/standard/UnknownJavaObject/toString"/>
-      </genClasses>
-    </nestedGenPackages>
-    <nestedGenPackages prefix="Language" disposableProviderFactory="true" ecorePackage="compilertest.ecore#/7/language">
-      <genClasses image="false" ecoreClass="compilertest.ecore#/7/language/DummyClass"/>
-      <genClasses ecoreClass="compilertest.ecore#/7/language/ReflectiveCollection">
-        <genTypeParameters ecoreTypeParameter="compilertest.ecore#/7/language/ReflectiveCollection/G"/>
-        <genOperations ecoreOperation="compilertest.ecore#/7/language/ReflectiveCollection/clear"/>
-        <genOperations ecoreOperation="compilertest.ecore#/7/language/ReflectiveCollection/remove">
-          <genParameters ecoreParameter="compilertest.ecore#/7/language/ReflectiveCollection/remove/element"/>
-        </genOperations>
-        <genOperations ecoreOperation="compilertest.ecore#/7/language/ReflectiveCollection/add">
-          <genParameters ecoreParameter="compilertest.ecore#/7/language/ReflectiveCollection/add/element"/>
-        </genOperations>
-      </genClasses>
-      <genClasses ecoreClass="compilertest.ecore#/7/language/ReflectiveSequence">
-        <genTypeParameters ecoreTypeParameter="compilertest.ecore#/7/language/ReflectiveSequence/G"/>
-        <genOperations ecoreOperation="compilertest.ecore#/7/language/ReflectiveSequence/clear"/>
-        <genOperations ecoreOperation="compilertest.ecore#/7/language/ReflectiveSequence/removeAt">
-          <genParameters ecoreParameter="compilertest.ecore#/7/language/ReflectiveSequence/removeAt/index"/>
-        </genOperations>
-        <genOperations ecoreOperation="compilertest.ecore#/7/language/ReflectiveSequence/addAt">
-          <genParameters ecoreParameter="compilertest.ecore#/7/language/ReflectiveSequence/addAt/index"/>
-          <genParameters ecoreParameter="compilertest.ecore#/7/language/ReflectiveSequence/addAt/element"/>
-        </genOperations>
-        <genOperations ecoreOperation="compilertest.ecore#/7/language/ReflectiveSequence/remove">
-          <genParameters ecoreParameter="compilertest.ecore#/7/language/ReflectiveSequence/remove/element"/>
-        </genOperations>
-        <genOperations ecoreOperation="compilertest.ecore#/7/language/ReflectiveSequence/equals">
-          <genParameters ecoreParameter="compilertest.ecore#/7/language/ReflectiveSequence/equals/element"/>
-        </genOperations>
-        <genOperations ecoreOperation="compilertest.ecore#/7/language/ReflectiveSequence/add">
-          <genParameters ecoreParameter="compilertest.ecore#/7/language/ReflectiveSequence/add/element"/>
-        </genOperations>
-      </genClasses>
-      <nestedGenPackages prefix="Behavior" disposableProviderFactory="true" ecorePackage="compilertest.ecore#/7/language/behavior">
-        <genClasses image="false" ecoreClass="compilertest.ecore#/7/language/behavior/CallExpression">
-          <genFeatures notify="false" createChild="false" propertySortChoices="true"
-              ecoreFeature="ecore:EReference compilertest.ecore#/7/language/behavior/CallExpression/staticTypeVariableBindings"/>
-          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute compilertest.ecore#/7/language/behavior/CallExpression/name"/>
-          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference compilertest.ecore#/7/language/behavior/CallExpression/parameters"/>
-        </genClasses>
-        <genClasses image="false" ecoreClass="compilertest.ecore#/7/language/behavior/Expression">
-          <genFeatures notify="false" createChild="false" propertySortChoices="true"
-              ecoreFeature="ecore:EReference compilertest.ecore#/7/language/behavior/Expression/staticType"/>
-        </genClasses>
-        <genClasses ecoreClass="compilertest.ecore#/7/language/behavior/CallVariable">
-          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute compilertest.ecore#/7/language/behavior/CallVariable/isAtpre"/>
-        </genClasses>
-        <genClasses ecoreClass="compilertest.ecore#/7/language/behavior/CallFeature">
-          <genFeatures notify="false" createChild="false" propertySortChoices="true"
-              ecoreFeature="ecore:EReference compilertest.ecore#/7/language/behavior/CallFeature/staticOperation"/>
-          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute compilertest.ecore#/7/language/behavior/CallFeature/isAtpre"/>
-          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference compilertest.ecore#/7/language/behavior/CallFeature/target"/>
-          <genFeatures notify="false" createChild="false" propertySortChoices="true"
-              ecoreFeature="ecore:EReference compilertest.ecore#/7/language/behavior/CallFeature/staticEnumLiteral"/>
-          <genFeatures notify="false" createChild="false" propertySortChoices="true"
-              ecoreFeature="ecore:EReference compilertest.ecore#/7/language/behavior/CallFeature/staticProperty"/>
-        </genClasses>
-        <genClasses ecoreClass="compilertest.ecore#/7/language/behavior/CallSuperOperation"/>
-        <genClasses ecoreClass="compilertest.ecore#/7/language/behavior/CallResult"/>
-        <genClasses ecoreClass="compilertest.ecore#/7/language/behavior/CallValue"/>
-        <genClasses ecoreClass="compilertest.ecore#/7/language/behavior/Assignment">
-          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference compilertest.ecore#/7/language/behavior/Assignment/value"/>
-          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference compilertest.ecore#/7/language/behavior/Assignment/target"/>
-          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute compilertest.ecore#/7/language/behavior/Assignment/isCast"/>
-        </genClasses>
-        <genClasses ecoreClass="compilertest.ecore#/7/language/behavior/Block">
-          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference compilertest.ecore#/7/language/behavior/Block/statement"/>
-          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference compilertest.ecore#/7/language/behavior/Block/rescueBlock"/>
-        </genClasses>
-        <genClasses ecoreClass="compilertest.ecore#/7/language/behavior/Conditional">
-          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference compilertest.ecore#/7/language/behavior/Conditional/thenBody"/>
-          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference compilertest.ecore#/7/language/behavior/Conditional/condition"/>
-          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference compilertest.ecore#/7/language/behavior/Conditional/elseBody"/>
-        </genClasses>
-        <genClasses ecoreClass="compilertest.ecore#/7/language/behavior/Raise">
-          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference compilertest.ecore#/7/language/behavior/Raise/expression"/>
-        </genClasses>
-        <genClasses ecoreClass="compilertest.ecore#/7/language/behavior/Rescue">
-          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference compilertest.ecore#/7/language/behavior/Rescue/body"/>
-          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute compilertest.ecore#/7/language/behavior/Rescue/exceptionName"/>
-          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference compilertest.ecore#/7/language/behavior/Rescue/exceptionType"/>
-        </genClasses>
-        <genClasses ecoreClass="compilertest.ecore#/7/language/behavior/TypeReference"/>
-        <genClasses image="false" ecoreClass="compilertest.ecore#/7/language/behavior/Literal"/>
-        <genClasses ecoreClass="compilertest.ecore#/7/language/behavior/EmptyExpression"/>
-        <genClasses ecoreClass="compilertest.ecore#/7/language/behavior/JavaStaticCall">
-          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute compilertest.ecore#/7/language/behavior/JavaStaticCall/jmethod"/>
-          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute compilertest.ecore#/7/language/behavior/JavaStaticCall/jclass"/>
-          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference compilertest.ecore#/7/language/behavior/JavaStaticCall/parameters"/>
-        </genClasses>
-        <genClasses ecoreClass="compilertest.ecore#/7/language/behavior/LambdaExpression">
-          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference compilertest.ecore#/7/language/behavior/LambdaExpression/body"/>
-          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference compilertest.ecore#/7/language/behavior/LambdaExpression/parameters"/>
-        </genClasses>
-        <genClasses ecoreClass="compilertest.ecore#/7/language/behavior/LambdaParameter">
-          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute compilertest.ecore#/7/language/behavior/LambdaParameter/name"/>
-          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference compilertest.ecore#/7/language/behavior/LambdaParameter/type"/>
-        </genClasses>
-        <genClasses ecoreClass="compilertest.ecore#/7/language/behavior/IntegerLiteral">
-          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute compilertest.ecore#/7/language/behavior/IntegerLiteral/value"/>
-        </genClasses>
-        <genClasses ecoreClass="compilertest.ecore#/7/language/behavior/StringLiteral">
-          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute compilertest.ecore#/7/language/behavior/StringLiteral/value"/>
-        </genClasses>
-        <genClasses ecoreClass="compilertest.ecore#/7/language/behavior/BooleanLiteral">
-          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute compilertest.ecore#/7/language/behavior/BooleanLiteral/value"/>
-        </genClasses>
-        <genClasses ecoreClass="compilertest.ecore#/7/language/behavior/TypeLiteral">
-          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference compilertest.ecore#/7/language/behavior/TypeLiteral/typeref"/>
-        </genClasses>
-        <genClasses ecoreClass="compilertest.ecore#/7/language/behavior/VoidLiteral"/>
-        <genClasses ecoreClass="compilertest.ecore#/7/language/behavior/Loop">
-          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference compilertest.ecore#/7/language/behavior/Loop/initialization"/>
-          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference compilertest.ecore#/7/language/behavior/Loop/body"/>
-          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference compilertest.ecore#/7/language/behavior/Loop/stopCondition"/>
-        </genClasses>
-        <genClasses ecoreClass="compilertest.ecore#/7/language/behavior/SelfExpression"/>
-        <genClasses ecoreClass="compilertest.ecore#/7/language/behavior/VariableDecl">
-          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference compilertest.ecore#/7/language/behavior/VariableDecl/initialization"/>
-          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference compilertest.ecore#/7/language/behavior/VariableDecl/type"/>
-          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute compilertest.ecore#/7/language/behavior/VariableDecl/identifier"/>
-        </genClasses>
-      </nestedGenPackages>
-      <nestedGenPackages prefix="Structure" disposableProviderFactory="true" ecorePackage="compilertest.ecore#/7/language/structure">
-        <genEnums typeSafeEnumCompatible="false" ecoreEnum="compilertest.ecore#/7/language/structure/ConstraintType">
-          <genEnumLiterals ecoreEnumLiteral="compilertest.ecore#/7/language/structure/ConstraintType/inv"/>
-          <genEnumLiterals ecoreEnumLiteral="compilertest.ecore#/7/language/structure/ConstraintType/pre"/>
-          <genEnumLiterals ecoreEnumLiteral="compilertest.ecore#/7/language/structure/ConstraintType/post"/>
-        </genEnums>
-        <genEnums typeSafeEnumCompatible="false" ecoreEnum="compilertest.ecore#/7/language/structure/ConstraintLanguage">
-          <genEnumLiterals ecoreEnumLiteral="compilertest.ecore#/7/language/structure/ConstraintLanguage/kermeta"/>
-          <genEnumLiterals ecoreEnumLiteral="compilertest.ecore#/7/language/structure/ConstraintLanguage/ocl"/>
-        </genEnums>
-        <genDataTypes ecoreDataType="compilertest.ecore#/7/language/structure/String"/>
-        <genDataTypes ecoreDataType="compilertest.ecore#/7/language/structure/Boolean"/>
-        <genDataTypes ecoreDataType="compilertest.ecore#/7/language/structure/Integer"/>
-        <genDataTypes ecoreDataType="compilertest.ecore#/7/language/structure/UnlimitedNatural"/>
-        <genDataTypes ecoreDataType="compilertest.ecore#/7/language/structure/KermetaProperty_Object_oid"/>
-        <genClasses ecoreClass="compilertest.ecore#/7/language/structure/Operation">
-          <genFeatures notify="false" createChild="false" propertySortChoices="true"
-              ecoreFeature="ecore:EReference compilertest.ecore#/7/language/structure/Operation/typeParameter"/>
-          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference compilertest.ecore#/7/language/structure/Operation/body"/>
-          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference compilertest.ecore#/7/language/structure/Operation/ownedParameter"/>
-          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference compilertest.ecore#/7/language/structure/Operation/post"/>
-          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute compilertest.ecore#/7/language/structure/Operation/isAbstract"/>
-          <genFeatures notify="false" createChild="false" propertySortChoices="true"
-              ecoreFeature="ecore:EReference compilertest.ecore#/7/language/structure/Operation/raisedException"/>
-          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference compilertest.ecore#/7/language/structure/Operation/pre"/>
-          <genFeatures notify="false" createChild="false" propertySortChoices="true"
-              ecoreFeature="ecore:EReference compilertest.ecore#/7/language/structure/Operation/superOperation"/>
-          <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference compilertest.ecore#/7/language/structure/Operation/owningClass"/>
-        </genClasses>
-        <genClasses ecoreClass="compilertest.ecore#/7/language/structure/Property">
-          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute compilertest.ecore#/7/language/structure/Property/default"/>
-          <genFeatures notify="false" createChild="false" propertySortChoices="true"
-              ecoreFeature="ecore:EReference compilertest.ecore#/7/language/structure/Property/opposite"/>
-          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute compilertest.ecore#/7/language/structure/Property/isDerived"/>
-          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference compilertest.ecore#/7/language/structure/Property/getterBody"/>
-          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute compilertest.ecore#/7/language/structure/Property/isReadOnly"/>
-          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference compilertest.ecore#/7/language/structure/Property/setterBody"/>
-          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute compilertest.ecore#/7/language/structure/Property/isID"/>
-          <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference compilertest.ecore#/7/language/structure/Property/owningClass"/>
-          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute compilertest.ecore#/7/language/structure/Property/isSetterAbstract"/>
-          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute compilertest.ecore#/7/language/structure/Property/isComposite"/>
-          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute compilertest.ecore#/7/language/structure/Property/isGetterAbstract"/>
-        </genClasses>
-        <genClasses ecoreClass="compilertest.ecore#/7/language/structure/Type">
-          <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference compilertest.ecore#/7/language/structure/Type/typeContainer"/>
-          <genOperations ecoreOperation="compilertest.ecore#/7/language/structure/Type/clone">
-            <genParameters ecoreParameter="compilertest.ecore#/7/language/structure/Type/clone/objectToClone"/>
-          </genOperations>
-          <genOperations ecoreOperation="compilertest.ecore#/7/language/structure/Type/isSuperTypeOf">
-            <genParameters ecoreParameter="compilertest.ecore#/7/language/structure/Type/isSuperTypeOf/object"/>
-          </genOperations>
-          <genOperations ecoreOperation="compilertest.ecore#/7/language/structure/Type/isInstance">
-            <genParameters ecoreParameter="compilertest.ecore#/7/language/structure/Type/isInstance/element"/>
-          </genOperations>
-          <genOperations ecoreOperation="compilertest.ecore#/7/language/structure/Type/deepClone">
-            <genParameters ecoreParameter="compilertest.ecore#/7/language/structure/Type/deepClone/objectToClone"/>
-          </genOperations>
-          <genOperations ecoreOperation="compilertest.ecore#/7/language/structure/Type/isSubTypeOf">
-            <genParameters ecoreParameter="compilertest.ecore#/7/language/structure/Type/isSubTypeOf/object"/>
-          </genOperations>
-        </genClasses>
-        <genClasses image="false" ecoreClass="compilertest.ecore#/7/language/structure/TypeContainer">
-          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference compilertest.ecore#/7/language/structure/TypeContainer/containedType"/>
-        </genClasses>
-        <genClasses ecoreClass="compilertest.ecore#/7/language/structure/EnumerationLiteral">
-          <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference compilertest.ecore#/7/language/structure/EnumerationLiteral/enumeration"/>
-        </genClasses>
-        <genClasses ecoreClass="compilertest.ecore#/7/language/structure/TypeVariableBinding">
-          <genFeatures notify="false" createChild="false" propertySortChoices="true"
-              ecoreFeature="ecore:EReference compilertest.ecore#/7/language/structure/TypeVariableBinding/type"/>
-          <genFeatures notify="false" createChild="false" propertySortChoices="true"
-              ecoreFeature="ecore:EReference compilertest.ecore#/7/language/structure/TypeVariableBinding/variable"/>
-        </genClasses>
-        <genClasses ecoreClass="compilertest.ecore#/7/language/structure/Object">
-          <genFeatures notify="false" createChild="false" propertySortChoices="true"
-              ecoreFeature="ecore:EReference compilertest.ecore#/7/language/structure/Object/tag"/>
-          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference compilertest.ecore#/7/language/structure/Object/ownedTags"/>
-          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute compilertest.ecore#/7/language/structure/Object/oid.1"/>
-          <genFeatures notify="false" createChild="false" propertySortChoices="true"
-              ecoreFeature="ecore:EReference compilertest.ecore#/7/language/structure/Object/container.1"/>
-          <genOperations ecoreOperation="compilertest.ecore#/7/language/structure/Object/isSet">
-            <genParameters ecoreParameter="compilertest.ecore#/7/language/structure/Object/isSet/property"/>
-          </genOperations>
-          <genOperations ecoreOperation="compilertest.ecore#/7/language/structure/Object/get">
-            <genParameters ecoreParameter="compilertest.ecore#/7/language/structure/Object/get/property"/>
-          </genOperations>
-          <genOperations ecoreOperation="compilertest.ecore#/7/language/structure/Object/isKindOf">
-            <genParameters ecoreParameter="compilertest.ecore#/7/language/structure/Object/isKindOf/cl"/>
-          </genOperations>
-          <genOperations ecoreOperation="compilertest.ecore#/7/language/structure/Object/getMetaClass"/>
-          <genOperations ecoreOperation="compilertest.ecore#/7/language/structure/Object/equals">
-            <genParameters ecoreParameter="compilertest.ecore#/7/language/structure/Object/equals/element"/>
-          </genOperations>
-          <genOperations ecoreOperation="compilertest.ecore#/7/language/structure/Object/set">
-            <genParameters ecoreParameter="compilertest.ecore#/7/language/structure/Object/set/property"/>
-            <genParameters ecoreParameter="compilertest.ecore#/7/language/structure/Object/set/element"/>
-          </genOperations>
-          <genOperations ecoreOperation="compilertest.ecore#/7/language/structure/Object/isFrozen"/>
-          <genOperations ecoreOperation="compilertest.ecore#/7/language/structure/Object/checkInvariants"/>
-          <genOperations ecoreOperation="compilertest.ecore#/7/language/structure/Object/hashcode"/>
-          <genOperations ecoreOperation="compilertest.ecore#/7/language/structure/Object/isVoid"/>
-          <genOperations ecoreOperation="compilertest.ecore#/7/language/structure/Object/isNotEqual">
-            <genParameters ecoreParameter="compilertest.ecore#/7/language/structure/Object/isNotEqual/element"/>
-          </genOperations>
-          <genOperations ecoreOperation="compilertest.ecore#/7/language/structure/Object/freeze"/>
-          <genOperations ecoreOperation="compilertest.ecore#/7/language/structure/Object/unset">
-            <genParameters ecoreParameter="compilertest.ecore#/7/language/structure/Object/unset/property"/>
-          </genOperations>
-          <genOperations ecoreOperation="compilertest.ecore#/7/language/structure/Object/oid"/>
-          <genOperations ecoreOperation="compilertest.ecore#/7/language/structure/Object/container"/>
-          <genOperations ecoreOperation="compilertest.ecore#/7/language/structure/Object/isInstanceOf">
-            <genParameters ecoreParameter="compilertest.ecore#/7/language/structure/Object/isInstanceOf/type"/>
-          </genOperations>
-          <genOperations ecoreOperation="compilertest.ecore#/7/language/structure/Object/containingResource"/>
-          <genOperations ecoreOperation="compilertest.ecore#/7/language/structure/Object/asType">
-            <genParameters ecoreParameter="compilertest.ecore#/7/language/structure/Object/asType/type"/>
-          </genOperations>
-          <genOperations ecoreOperation="compilertest.ecore#/7/language/structure/Object/checkAllInvariants"/>
-          <genOperations ecoreOperation="compilertest.ecore#/7/language/structure/Object/toString"/>
-        </genClasses>
-        <genClasses ecoreClass="compilertest.ecore#/7/language/structure/MultiplicityElement">
-          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute compilertest.ecore#/7/language/structure/MultiplicityElement/isOrdered"/>
-          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute compilertest.ecore#/7/language/structure/MultiplicityElement/upper"/>
-          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute compilertest.ecore#/7/language/structure/MultiplicityElement/lower"/>
-          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute compilertest.ecore#/7/language/structure/MultiplicityElement/isUnique"/>
-        </genClasses>
-        <genClasses image="false" ecoreClass="compilertest.ecore#/7/language/structure/TypedElement">
-          <genFeatures notify="false" createChild="false" propertySortChoices="true"
-              ecoreFeature="ecore:EReference compilertest.ecore#/7/language/structure/TypedElement/type"/>
-        </genClasses>
-        <genClasses ecoreClass="compilertest.ecore#/7/language/structure/TypeDefinition">
-          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute compilertest.ecore#/7/language/structure/TypeDefinition/isAspect"/>
-        </genClasses>
-        <genClasses image="false" ecoreClass="compilertest.ecore#/7/language/structure/NamedElement">
-          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute compilertest.ecore#/7/language/structure/NamedElement/name"/>
-          <genOperations ecoreOperation="compilertest.ecore#/7/language/structure/NamedElement/qualifiedName"/>
-        </genClasses>
-        <genClasses ecoreClass="compilertest.ecore#/7/language/structure/Class">
-          <genFeatures notify="false" createChild="false" propertySortChoices="true"
-              ecoreFeature="ecore:EReference compilertest.ecore#/7/language/structure/Class/ownedOperation"/>
-          <genFeatures notify="false" createChild="false" propertySortChoices="true"
-              ecoreFeature="ecore:EReference compilertest.ecore#/7/language/structure/Class/superClass"/>
-          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute compilertest.ecore#/7/language/structure/Class/isAbstract"/>
-          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute compilertest.ecore#/7/language/structure/Class/name"/>
-          <genFeatures notify="false" createChild="false" propertySortChoices="true"
-              ecoreFeature="ecore:EReference compilertest.ecore#/7/language/structure/Class/classDefinition"/>
-          <genFeatures notify="false" createChild="false" propertySortChoices="true"
-              ecoreFeature="ecore:EReference compilertest.ecore#/7/language/structure/Class/ownedAttribute"/>
-          <genOperations ecoreOperation="compilertest.ecore#/7/language/structure/Class/clone">
-            <genParameters ecoreParameter="compilertest.ecore#/7/language/structure/Class/clone/objectToClone"/>
-          </genOperations>
-          <genOperations ecoreOperation="compilertest.ecore#/7/language/structure/Class/_new"/>
-          <genOperations ecoreOperation="compilertest.ecore#/7/language/structure/Class/deepClone">
-            <genParameters ecoreParameter="compilertest.ecore#/7/language/structure/Class/deepClone/objectToClone"/>
-          </genOperations>
-          <genOperations ecoreOperation="compilertest.ecore#/7/language/structure/Class/equals">
-            <genParameters ecoreParameter="compilertest.ecore#/7/language/structure/Class/equals/other"/>
-          </genOperations>
-          <genOperations ecoreOperation="compilertest.ecore#/7/language/structure/Class/toString"/>
-        </genClasses>
-        <genClasses image="false" ecoreClass="compilertest.ecore#/7/language/structure/DataType"/>
-        <genClasses ecoreClass="compilertest.ecore#/7/language/structure/Enumeration">
-          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference compilertest.ecore#/7/language/structure/Enumeration/ownedLiteral"/>
-          <genOperations ecoreOperation="compilertest.ecore#/7/language/structure/Enumeration/clone">
-            <genParameters ecoreParameter="compilertest.ecore#/7/language/structure/Enumeration/clone/objectToClone"/>
-          </genOperations>
-        </genClasses>
-        <genClasses ecoreClass="compilertest.ecore#/7/language/structure/Package">
-          <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference compilertest.ecore#/7/language/structure/Package/nestingPackage"/>
-          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference compilertest.ecore#/7/language/structure/Package/nestedPackage"/>
-          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute compilertest.ecore#/7/language/structure/Package/uri"/>
-        </genClasses>
-        <genClasses ecoreClass="compilertest.ecore#/7/language/structure/Parameter">
-          <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference compilertest.ecore#/7/language/structure/Parameter/operation"/>
-        </genClasses>
-        <genClasses ecoreClass="compilertest.ecore#/7/language/structure/PrimitiveType">
-          <genFeatures notify="false" createChild="false" propertySortChoices="true"
-              ecoreFeature="ecore:EReference compilertest.ecore#/7/language/structure/PrimitiveType/instanceType"/>
-        </genClasses>
-        <genClasses ecoreClass="compilertest.ecore#/7/language/structure/Tag">
-          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute compilertest.ecore#/7/language/structure/Tag/name"/>
-          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute compilertest.ecore#/7/language/structure/Tag/value"/>
-          <genFeatures notify="false" createChild="false" propertySortChoices="true"
-              ecoreFeature="ecore:EReference compilertest.ecore#/7/language/structure/Tag/object"/>
-        </genClasses>
-        <genClasses ecoreClass="compilertest.ecore#/7/language/structure/Constraint">
-          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference compilertest.ecore#/7/language/structure/Constraint/body"/>
-          <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference compilertest.ecore#/7/language/structure/Constraint/preOwner"/>
-          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute compilertest.ecore#/7/language/structure/Constraint/stereotype"/>
-          <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference compilertest.ecore#/7/language/structure/Constraint/postOwner"/>
-          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute compilertest.ecore#/7/language/structure/Constraint/language"/>
-          <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference compilertest.ecore#/7/language/structure/Constraint/invOwner"/>
-        </genClasses>
-        <genClasses ecoreClass="compilertest.ecore#/7/language/structure/ClassDefinition">
-          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference compilertest.ecore#/7/language/structure/ClassDefinition/ownedOperation"/>
-          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute compilertest.ecore#/7/language/structure/ClassDefinition/isAbstract"/>
-          <genFeatures notify="false" createChild="false" propertySortChoices="true"
-              ecoreFeature="ecore:EReference compilertest.ecore#/7/language/structure/ClassDefinition/superType"/>
-          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference compilertest.ecore#/7/language/structure/ClassDefinition/inv"/>
-          <genFeatures notify="false" createChild="false" propertySortChoices="true"
-              ecoreFeature="ecore:EReference compilertest.ecore#/7/language/structure/ClassDefinition/allOperation"/>
-          <genFeatures notify="false" createChild="false" propertySortChoices="true"
-              ecoreFeature="ecore:EReference compilertest.ecore#/7/language/structure/ClassDefinition/allAttribute"/>
-          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference compilertest.ecore#/7/language/structure/ClassDefinition/ownedAttribute"/>
-        </genClasses>
-        <genClasses image="false" ecoreClass="compilertest.ecore#/7/language/structure/GenericTypeDefinition">
-          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference compilertest.ecore#/7/language/structure/GenericTypeDefinition/typeParameter"/>
-        </genClasses>
-        <genClasses image="false" ecoreClass="compilertest.ecore#/7/language/structure/ParameterizedType">
-          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference compilertest.ecore#/7/language/structure/ParameterizedType/typeParamBinding"/>
-          <genFeatures notify="false" createChild="false" propertySortChoices="true"
-              ecoreFeature="ecore:EReference compilertest.ecore#/7/language/structure/ParameterizedType/typeDefinition"/>
-          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference compilertest.ecore#/7/language/structure/ParameterizedType/virtualTypeBinding"/>
-        </genClasses>
-        <genClasses image="false" ecoreClass="compilertest.ecore#/7/language/structure/TypeVariable">
-          <genFeatures notify="false" createChild="false" propertySortChoices="true"
-              ecoreFeature="ecore:EReference compilertest.ecore#/7/language/structure/TypeVariable/supertype"/>
-        </genClasses>
-        <genClasses ecoreClass="compilertest.ecore#/7/language/structure/ObjectTypeVariable"/>
-        <genClasses ecoreClass="compilertest.ecore#/7/language/structure/ModelType">
-          <genFeatures notify="false" createChild="false" propertySortChoices="true"
-              ecoreFeature="ecore:EReference compilertest.ecore#/7/language/structure/ModelType/includedTypeDefinition"/>
-          <genOperations ecoreOperation="compilertest.ecore#/7/language/structure/ModelType/_new"/>
-          <genOperations ecoreOperation="compilertest.ecore#/7/language/structure/ModelType/isModelTypeOf">
-            <genParameters ecoreParameter="compilertest.ecore#/7/language/structure/ModelType/isModelTypeOf/m"/>
-          </genOperations>
-        </genClasses>
-        <genClasses ecoreClass="compilertest.ecore#/7/language/structure/ModelTypeVariable">
-          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference compilertest.ecore#/7/language/structure/ModelTypeVariable/virtualType"/>
-        </genClasses>
-        <genClasses ecoreClass="compilertest.ecore#/7/language/structure/VirtualType">
-          <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference compilertest.ecore#/7/language/structure/VirtualType/modelType"/>
-          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference compilertest.ecore#/7/language/structure/VirtualType/typeParamBinding"/>
-          <genFeatures notify="false" createChild="false" propertySortChoices="true"
-              ecoreFeature="ecore:EReference compilertest.ecore#/7/language/structure/VirtualType/classDefinition"/>
-        </genClasses>
-        <genClasses ecoreClass="compilertest.ecore#/7/language/structure/Model">
-          <genFeatures notify="false" createChild="false" propertySortChoices="true"
-              ecoreFeature="ecore:EReference compilertest.ecore#/7/language/structure/Model/contents"/>
-          <genOperations ecoreOperation="compilertest.ecore#/7/language/structure/Model/addCompatible">
-            <genParameters ecoreParameter="compilertest.ecore#/7/language/structure/Model/addCompatible/objectToAdd"/>
-          </genOperations>
-          <genOperations ecoreOperation="compilertest.ecore#/7/language/structure/Model/remove">
-            <genParameters ecoreParameter="compilertest.ecore#/7/language/structure/Model/remove/obj"/>
-          </genOperations>
-          <genOperations ecoreOperation="compilertest.ecore#/7/language/structure/Model/addAllCompatible">
-            <genParameters ecoreParameter="compilertest.ecore#/7/language/structure/Model/addAllCompatible/objectsToAdd"/>
-          </genOperations>
-          <genOperations ecoreOperation="compilertest.ecore#/7/language/structure/Model/add">
-            <genParameters ecoreParameter="compilertest.ecore#/7/language/structure/Model/add/obj"/>
-          </genOperations>
-          <genOperations ecoreOperation="compilertest.ecore#/7/language/structure/Model/filter">
-            <genParameters ecoreParameter="compilertest.ecore#/7/language/structure/Model/filter/typeName"/>
-          </genOperations>
-        </genClasses>
-        <genClasses ecoreClass="compilertest.ecore#/7/language/structure/ModelingUnit">
-          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference compilertest.ecore#/7/language/structure/ModelingUnit/usings"/>
-          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference compilertest.ecore#/7/language/structure/ModelingUnit/packages"/>
-          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference compilertest.ecore#/7/language/structure/ModelingUnit/includeFilters"/>
-          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference compilertest.ecore#/7/language/structure/ModelingUnit/excludeFilters"/>
-          <genFeatures notify="false" createChild="false" propertySortChoices="true"
-              ecoreFeature="ecore:EReference compilertest.ecore#/7/language/structure/ModelingUnit/referencedModelingUnits"/>
-          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference compilertest.ecore#/7/language/structure/ModelingUnit/requires"/>
-        </genClasses>
-        <genClasses ecoreClass="compilertest.ecore#/7/language/structure/Require">
-          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute compilertest.ecore#/7/language/structure/Require/uri"/>
-        </genClasses>
-        <genClasses ecoreClass="compilertest.ecore#/7/language/structure/Using">
-          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute compilertest.ecore#/7/language/structure/Using/qualifiedName"/>
-        </genClasses>
-        <genClasses ecoreClass="compilertest.ecore#/7/language/structure/Filter">
-          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute compilertest.ecore#/7/language/structure/Filter/qualifiedName"/>
-        </genClasses>
-        <genClasses ecoreClass="compilertest.ecore#/7/language/structure/ProductType">
-          <genFeatures notify="false" createChild="false" propertySortChoices="true"
-              ecoreFeature="ecore:EReference compilertest.ecore#/7/language/structure/ProductType/type"/>
-        </genClasses>
-        <genClasses ecoreClass="compilertest.ecore#/7/language/structure/FunctionType">
-          <genFeatures notify="false" createChild="false" propertySortChoices="true"
-              ecoreFeature="ecore:EReference compilertest.ecore#/7/language/structure/FunctionType/left"/>
-          <genFeatures notify="false" createChild="false" propertySortChoices="true"
-              ecoreFeature="ecore:EReference compilertest.ecore#/7/language/structure/FunctionType/right"/>
-        </genClasses>
-        <genClasses ecoreClass="compilertest.ecore#/7/language/structure/VoidType"/>
-        <genClasses image="false" ecoreClass="compilertest.ecore#/7/language/structure/TypeDefinitionContainer">
-          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference compilertest.ecore#/7/language/structure/TypeDefinitionContainer/ownedTypeDefinition"/>
-        </genClasses>
-      </nestedGenPackages>
-    </nestedGenPackages>
-    <nestedGenPackages prefix="Utils" disposableProviderFactory="true" ecorePackage="compilertest.ecore#/7/utils">
-      <genClasses ecoreClass="compilertest.ecore#/7/utils/StringBuffer">
-        <genOperations ecoreOperation="compilertest.ecore#/7/utils/StringBuffer/append">
-          <genParameters ecoreParameter="compilertest.ecore#/7/utils/StringBuffer/append/arg0"/>
-        </genOperations>
-        <genOperations ecoreOperation="compilertest.ecore#/7/utils/StringBuffer/length"/>
-        <genOperations ecoreOperation="compilertest.ecore#/7/utils/StringBuffer/toString"/>
-      </genClasses>
-      <genClasses ecoreClass="compilertest.ecore#/7/utils/Hashtable">
-        <genTypeParameters ecoreTypeParameter="compilertest.ecore#/7/utils/Hashtable/K"/>
-        <genTypeParameters ecoreTypeParameter="compilertest.ecore#/7/utils/Hashtable/V"/>
-        <genOperations ecoreOperation="compilertest.ecore#/7/utils/Hashtable/clear"/>
-        <genOperations ecoreOperation="compilertest.ecore#/7/utils/Hashtable/getValue">
-          <genParameters ecoreParameter="compilertest.ecore#/7/utils/Hashtable/getValue/key"/>
-        </genOperations>
-        <genOperations ecoreOperation="compilertest.ecore#/7/utils/Hashtable/containsKey">
-          <genParameters ecoreParameter="compilertest.ecore#/7/utils/Hashtable/containsKey/key"/>
-        </genOperations>
-        <genOperations ecoreOperation="compilertest.ecore#/7/utils/Hashtable/put">
-          <genParameters ecoreParameter="compilertest.ecore#/7/utils/Hashtable/put/key"/>
-          <genParameters ecoreParameter="compilertest.ecore#/7/utils/Hashtable/put/value"/>
-        </genOperations>
-        <genOperations ecoreOperation="compilertest.ecore#/7/utils/Hashtable/values"/>
-        <genOperations ecoreOperation="compilertest.ecore#/7/utils/Hashtable/remove">
-          <genParameters ecoreParameter="compilertest.ecore#/7/utils/Hashtable/remove/key"/>
-        </genOperations>
-        <genOperations ecoreOperation="compilertest.ecore#/7/utils/Hashtable/keys"/>
-        <genOperations ecoreOperation="compilertest.ecore#/7/utils/Hashtable/keyIterator"/>
-        <genOperations ecoreOperation="compilertest.ecore#/7/utils/Hashtable/valueIterator"/>
-        <genOperations ecoreOperation="compilertest.ecore#/7/utils/Hashtable/size"/>
-      </genClasses>
-      <genClasses ecoreClass="compilertest.ecore#/7/utils/Stack">
-        <genTypeParameters ecoreTypeParameter="compilertest.ecore#/7/utils/Stack/G"/>
-        <genOperations ecoreOperation="compilertest.ecore#/7/utils/Stack/pop"/>
-        <genOperations ecoreOperation="compilertest.ecore#/7/utils/Stack/peek"/>
-        <genOperations ecoreOperation="compilertest.ecore#/7/utils/Stack/push">
-          <genParameters ecoreParameter="compilertest.ecore#/7/utils/Stack/push/element"/>
-        </genOperations>
       </genClasses>
     </nestedGenPackages>
     <nestedGenPackages prefix="Ecore" disposableProviderFactory="true" ecorePackage="compilertest.ecore#/7/ecore">
@@ -1090,6 +1119,10 @@
       <genClasses ecoreClass="compilertest.ecore#/7/exceptions/IteratorIsOff"/>
       <genClasses ecoreClass="compilertest.ecore#/7/exceptions/IOException"/>
       <genClasses ecoreClass="compilertest.ecore#/7/exceptions/FileNotFoundException"/>
+      <genClasses ecoreClass="compilertest.ecore#/7/exceptions/ConstraintViolatedException">
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference compilertest.ecore#/7/exceptions/ConstraintViolatedException/constraintAppliedTo"/>
+      </genClasses>
       <genClasses ecoreClass="compilertest.ecore#/7/exceptions/ConstraintViolatedPre"/>
       <genClasses ecoreClass="compilertest.ecore#/7/exceptions/ConstraintViolatedPost"/>
       <genClasses ecoreClass="compilertest.ecore#/7/exceptions/ConstraintViolatedInv"/>
@@ -1100,36 +1133,6 @@
       <genClasses ecoreClass="compilertest.ecore#/7/exceptions/ResourceUnconformityException"/>
       <genClasses ecoreClass="compilertest.ecore#/7/exceptions/UnregisteredMetamodelException"/>
       <genClasses ecoreClass="compilertest.ecore#/7/exceptions/DynamicExpressionException"/>
-    </nestedGenPackages>
-    <nestedGenPackages prefix="Interpreter" disposableProviderFactory="true" ecorePackage="compilertest.ecore#/7/interpreter">
-      <genClasses ecoreClass="compilertest.ecore#/7/interpreter/DynamicExpression">
-        <genFeatures notify="false" createChild="false" propertySortChoices="true"
-            ecoreFeature="ecore:EReference compilertest.ecore#/7/interpreter/DynamicExpression/expression"/>
-        <genFeatures notify="false" createChild="false" propertySortChoices="true"
-            ecoreFeature="ecore:EReference compilertest.ecore#/7/interpreter/DynamicExpression/errors"/>
-        <genFeatures notify="false" createChild="false" propertySortChoices="true"
-            ecoreFeature="ecore:EReference compilertest.ecore#/7/interpreter/DynamicExpression/formalParameters"/>
-        <genFeatures notify="false" createChild="false" propertySortChoices="true"
-            ecoreFeature="ecore:EReference compilertest.ecore#/7/interpreter/DynamicExpression/selfClass"/>
-        <genOperations ecoreOperation="compilertest.ecore#/7/interpreter/DynamicExpression/initializeDefaults"/>
-        <genOperations ecoreOperation="compilertest.ecore#/7/interpreter/DynamicExpression/execute">
-          <genParameters ecoreParameter="compilertest.ecore#/7/interpreter/DynamicExpression/execute/selfObj"/>
-          <genParameters ecoreParameter="compilertest.ecore#/7/interpreter/DynamicExpression/execute/actualParams"/>
-        </genOperations>
-        <genOperations ecoreOperation="compilertest.ecore#/7/interpreter/DynamicExpression/parse">
-          <genParameters ecoreParameter="compilertest.ecore#/7/interpreter/DynamicExpression/parse/expression"/>
-        </genOperations>
-        <genOperations ecoreOperation="compilertest.ecore#/7/interpreter/DynamicExpression/evalString">
-          <genParameters ecoreParameter="compilertest.ecore#/7/interpreter/DynamicExpression/evalString/body"/>
-          <genParameters ecoreParameter="compilertest.ecore#/7/interpreter/DynamicExpression/evalString/selfObj"/>
-          <genParameters ecoreParameter="compilertest.ecore#/7/interpreter/DynamicExpression/evalString/actualParams"/>
-        </genOperations>
-      </genClasses>
-      <genClasses image="false" ecoreClass="compilertest.ecore#/7/interpreter/KermetaError">
-        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute compilertest.ecore#/7/interpreter/KermetaError/message"/>
-      </genClasses>
-      <genClasses ecoreClass="compilertest.ecore#/7/interpreter/ParseError"/>
-      <genClasses ecoreClass="compilertest.ecore#/7/interpreter/TypeError"/>
     </nestedGenPackages>
   </genPackages>
 </genmodel:GenModel>
