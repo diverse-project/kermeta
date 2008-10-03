@@ -1,0 +1,115 @@
+@mainClass "comptest2::Main"
+@mainOperation "main"
+
+@uri "http://comptest2"
+package comptest2;
+
+require kermeta
+require "http://www.eclipse.org/emf/2002/Ecore"
+
+//using kermeta::language::structure
+using kermeta::standard
+using ecore
+
+class Main {
+	operation main() : Void is
+	do
+		var aPrinter : ClassWithBehavior init ClassWithBehavior.new
+		aPrinter.print
+		aPrinter.attr1.toString
+		
+		var aPrinter2 : ClassWithBehavior
+		var aPrinter3 : ClassWithBehavior init aPrinter
+	end
+}
+
+class ClassWithBehavior {
+	attribute attr1 : String[0..1]
+	
+	operation print() : Void is
+	do
+		var text1 : String init "Hello "
+		var text2 : String // mettre à null au lieu de ""
+		text2 := "World"
+		stdio.writeln(text1 + text2)
+		//text2 := void
+		
+		if 1==1 then
+			stdio.writeln("conditional")
+		end
+	end
+
+}
+
+class InheritedClassWithBehavior inherits ClassWithBehavior, EmptyClass {
+
+	attribute stringBuffer_attr : MyStringBuffer
+	
+	reference stringBuffer_ref : MyStringBuffer
+	
+	operation test() : String is do
+	
+		// Assignment from a StringLiteral
+		attr1 := "test_attr1"
+		
+		// VariableDecl
+		var return : String
+		
+		// Assignment from a CallFeature
+		return := attr1
+		
+		// Assignment from a CallVariable
+		result := return
+	end
+	
+	method print() : Void is
+	do
+		// Call of a super operation
+		super()
+	end
+}
+
+class EmptyClass {
+}
+
+class ParameterizedEmptyClass<A> {
+}
+
+class ParameterizedEmptyClass2<A> {
+}
+
+class ParameterizedClass<B> inherits ParameterizedEmptyClass<B> , ParameterizedEmptyClass2<String>
+{
+	reference attr1 : ParameterizedClass<String> [0..1]
+	
+	operation test2() : Void is do
+	end
+	
+	attribute testString : TestString
+	
+	operation eachOwnedElement(str : String, func0 : <Object -> Object> , func1 : <Boolean -> Object>) : Void is do
+		self.ownedTags.each{ o |
+			func0(o)
+		}
+		func1(true)
+	end
+}
+
+@EMF_instanceClassName "java.lang.String"
+class TestString inherits ValueType {
+}
+
+class TestAlias {
+	attribute a1 : MyStringBuffer
+	
+	attribute a2 : MyEString
+	
+	attribute a3 : MyString
+}
+
+alias MyStringBuffer : kermeta::utils::StringBuffer;
+
+alias MyEString : ecore::EString;
+
+alias MyString : kermeta::standard::String;
+

@@ -1,0 +1,42 @@
+/* $Id: testAddSet.kmt,v 1.1 2008-10-03 14:26:45 cfaucher Exp $ 
+ * Creation : August 18, 2008
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            cfaucher <cfaucher@irisa.fr>
+ */
+@mainClass "simpletest::Main"
+@mainOperation "main"
+
+@uri "http://www.kermeta.org/simpletest"
+package simpletest;
+
+require kermeta
+require "http://www.kermeta.org/fsm"
+
+using kermeta::persistence
+using fsm
+using kermeta::standard
+
+class Main {
+
+	operation main() : Void is do
+		
+		stdio.writeln("Beginning of the test")
+		
+		var theFSM : FSM init FSM.new()
+		
+		5000.times{ i |
+			var newState : State init State.new()
+			newState.name := "newState_" + i.toString()
+			theFSM.ownedState.add(newState)
+		}
+		
+		theFSM.ownedState.each{ s |
+			stdio.writeln(s.name)
+		}
+		
+		stdio.writeln("\nEnd of the test")
+	end
+	
+}

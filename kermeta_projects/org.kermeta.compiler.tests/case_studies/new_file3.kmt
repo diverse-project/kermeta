@@ -1,0 +1,23 @@
+/* $Id: new_file3.kmt,v 1.1 2008-10-03 14:26:45 cfaucher Exp $ 
+ * Creation : June 6, 2008
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            cfaucher
+ */
+@mainClass "root_package::Main"
+@mainOperation "main"
+
+package root_package;
+
+require kermeta
+
+using kermeta::standard
+
+class Main
+{
+	operation main() : Void is do 
+		var s : Set<String> init Set<String>.new
+		//var oc : OrderedCollection<String> init OrderedCollection<String>.new
+	end
+}

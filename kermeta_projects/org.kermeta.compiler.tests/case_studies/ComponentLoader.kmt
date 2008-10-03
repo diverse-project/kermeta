@@ -1,0 +1,39 @@
+/* $Id: ComponentLoader.kmt,v 1.1 2008-10-03 14:26:45 cfaucher Exp $
+ * Creation date: April 17, 2008
+ * License:
+ * Copyright:
+ * Authors:
+ */
+@mainClass "root_package::Main"
+@mainOperation "main"
+
+package root_package;
+
+require kermeta
+
+using kermeta::persistence
+using kermeta::language::structure
+
+class Main {
+	operation main() : Void is do
+		var rp : EMFRepository init EMFRepository.new
+		var resource : Resource init rp.getResource("Attempt01.km")
+	
+		var mu : ModelingUnit
+		mu ?= resource.instances().one
+	
+		/*mu.components.each{ c | 
+			c.provided.includedTypeDefinition.each{ t |
+				//stdio.writeln(t.toString())
+				if t.isInstanceOf(ClassDefinition) then
+					var cd : ClassDefinition init t.asType(ClassDefinition)
+					//stdio.writeln(cd.name)
+					cd.ownedOperation.each{ o |
+						stdio.writeln(cd.ownedOperation.size.toString() + " " + cd.name + " " + o.name)
+					}
+				end
+			}
+		}*/
+	
+	end
+}

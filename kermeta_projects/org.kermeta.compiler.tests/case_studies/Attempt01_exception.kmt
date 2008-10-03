@@ -1,0 +1,31 @@
+@mainClass "comp_exception_test001::Main"
+@mainOperation "main"
+
+@uri "http://comp_exception_test001"
+package comp_exception_test001;
+
+require kermeta
+
+using kermeta::language::structure
+using kermeta::exceptions
+
+class Main {
+	operation main() : Void is do
+		self.raise_op()
+		rescue (e : MyException) do
+			e.setMessage()
+			stdio.writeln(e.text)
+		end
+	end
+	
+	operation raise_op() : Void is do
+		raise MyException.new
+	end
+}
+
+class MyException inherits Exception {
+	attribute text : String
+	operation setMessage() : Void is do
+		text := "text from MyException"
+	end
+}
