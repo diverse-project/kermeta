@@ -17,7 +17,8 @@ Require-Bundle: org.eclipse.ui,
  org.kermeta.compiler.generator,
  org.kermeta.simk,
  fr.irisa.triskell.traceability.model,
- org.kermeta.io.loader
+ org.kermeta.io.loader,
+ org.apache.commons.logging;bundle-version="1.0.4"
 Eclipse-LazyStart: true
 Export-Package: org.kermeta.compiler.ui,
  org.kermeta.compiler.ui.popup.actions;
