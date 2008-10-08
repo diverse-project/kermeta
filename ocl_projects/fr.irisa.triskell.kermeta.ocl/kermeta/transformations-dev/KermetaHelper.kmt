@@ -1,4 +1,4 @@
-/* $Id: KermetaHelper.kmt,v 1.5 2007-12-07 01:54:43 ffleurey Exp $
+/* $Id: KermetaHelper.kmt,v 1.6 2008-10-08 21:56:54 barais Exp $
  * Creation date: July 25, 2007
  * License:
  * Copyright:
@@ -10,67 +10,76 @@ package ocl2kmt;
 require kermeta
 using kermeta::standard
 
+
 class KermetaHelper
 {
   
+  	reference keywords : Collection<String>
 	 operation isKermetaKeyword(word: String): Boolean is
           do
-          		result :=	word.equals("package") or
-							word.equals("require") or
-							word.equals("includeFilter") or
-							word.equals("excludeFilter") or
-							word.equals("using") or
-							word.equals("inherits") or
-							word.equals("class") or
-							//word.equals("@pre" ) or
-							word.equals("pre") or
-							word.equals("post") or
-							word.equals("inv") or
-							word.equals("abstract") or
-							word.equals("Self") or
-							word.equals("Void") or
-							word.equals("attribute") or
-		 					word.equals("reference") or
-							word.equals("property") or
-							word.equals("readonly") or
-							word.equals("getter") or
-							word.equals("is") or
-							word.equals("setter") or
-							word.equals("raises") or
-							word.equals("select") or
-							word.equals("operation") or
-							word.equals("method") or
-							word.equals("bag") or
-							word.equals("set") or
-							word.equals("seq") or
-							word.equals("oset") or
-							word.equals("alias") or
-							word.equals("enumeration") or
-							word.equals("and") or
-							word.equals("or") or
-							word.equals("not") or
-							//word.equals("self") or
-							word.equals("super") or
-							word.equals("do") or
-							word.equals("end") or
-							word.equals("function") or
-							word.equals("rescue") or
-							word.equals("from") or
-							word.equals("until") or
-							word.equals("loop") or
-							word.equals("if") or
-							word.equals("then") or
-							word.equals("else") or
-							word.equals("raise") or
-							word.equals("var") or
-							word.equals("init") or
-							word.equals("extern") or
-							word.equals("true") or
-							word.equals("false") or
-							word.equals("void") or
-							word.equals("result") or
-							word.equals("value") 
-          end
+				if (keywords == void) then
+						keywords := Bag<String>.new
+						keywords.add("package")
+							keywords.add("require")
+							keywords.add("includeFilter")
+							keywords.add("excludeFilter")
+							keywords.add("using")
+							keywords.add("inherits")
+							keywords.add("class")
+							//keywords.add("@pre" )
+							keywords.add("pre")
+							keywords.add("post")
+							keywords.add("inv")
+							keywords.add("abstract")
+							keywords.add("Self")
+							keywords.add("Void")
+							keywords.add("attribute")
+		 					keywords.add("reference")
+							keywords.add("property")
+							keywords.add("readonly")
+							keywords.add("getter")
+							keywords.add("is")
+							keywords.add("setter")
+							keywords.add("raises")
+							keywords.add("select")
+							keywords.add("operation")
+							keywords.add("method")
+							keywords.add("bag")
+							keywords.add("set")
+							keywords.add("seq")
+							keywords.add("oset")
+							keywords.add("alias")
+							keywords.add("enumeration")
+							keywords.add("and")
+							keywords.add("or")
+							keywords.add("not")
+							//keywords.add("self")
+							keywords.add("super")
+							keywords.add("do")
+							keywords.add("end")
+							keywords.add("function")
+							keywords.add("rescue")
+							keywords.add("from")
+							keywords.add("until")
+							keywords.add("loop")
+							keywords.add("if")
+							keywords.add("then")
+							keywords.add("else")
+							keywords.add("raise")
+							keywords.add("var")
+							keywords.add("init")
+							keywords.add("extern")
+							keywords.add("true")
+							keywords.add("false")
+							keywords.add("void") 
+							keywords.add("result") 
+							keywords.add("value") 
+					
+					
+				end	
+          		result :=keywords.contains(word)	          
+          		
+          		end
 
 	operation escape(s: String): String is
 		do

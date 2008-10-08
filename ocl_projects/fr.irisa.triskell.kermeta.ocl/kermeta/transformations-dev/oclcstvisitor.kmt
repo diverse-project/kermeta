@@ -8,39 +8,39 @@ package cst
 	abstract class CSTNode inherits visitors::Visitable
 	{
 
-		operation accept(visitor : visitors::Visitor) : kermeta::standard::~Void is
-			result := visitor.visitCSTNode(self)
+		operation accept(visitor : visitors::Visitor) : Void is
+			 visitor.visitCSTNode(self)
  
 	}
 	@aspect "true"
 	class PackageDeclarationCS 
 	{ 
 
-		method accept(visitor : visitors::Visitor) : kermeta::standard::~Void from ocl::cst::CSTNode is
-			result := visitor.visitPackageDeclarationCS(self)
+		method accept(visitor : visitors::Visitor) : Void from ocl::cst::CSTNode is
+			 visitor.visitPackageDeclarationCS(self)
   
 	}  
 	@aspect "true"
 	abstract class ContextDeclCS
 	{
-		method accept(visitor : cst::visitors::Visitor) : kermeta::standard::~Void from ocl::cst::CSTNode is
-			result := visitor.visitContextDeclCS(self)
+		method accept(visitor : cst::visitors::Visitor) : Void from ocl::cst::CSTNode is
+			 visitor.visitContextDeclCS(self)
 
 	} 
 	@aspect "true"
 	class PropertyContextCS 
 	{
 
-		method accept(visitor : cst::visitors::Visitor) : kermeta::standard::~Void from ocl::cst::ContextDeclCS is
-			result := visitor.visitPropertyContextCS(self)
+		method accept(visitor : cst::visitors::Visitor) : Void from ocl::cst::ContextDeclCS is
+			 visitor.visitPropertyContextCS(self)
 
 	}
 	@aspect "true"
 	class ClassifierContextDeclCS
 	{
 
-		method accept(visitor : cst::visitors::Visitor) : kermeta::standard::~Void from ocl::cst::ContextDeclCS is
-			result := visitor.visitClassifierContextDeclCS(self)
+		method accept(visitor : cst::visitors::Visitor) : Void from ocl::cst::ContextDeclCS is
+			 visitor.visitClassifierContextDeclCS(self)
 
 	}
 	@aspect "true"
@@ -48,16 +48,16 @@ package cst
 	{
 
 
-		method accept(visitor : cst::visitors::Visitor) : kermeta::standard::~Void from ocl::cst::ContextDeclCS is
-			result := visitor.visitOperationContextDeclCS(self)
+		method accept(visitor : cst::visitors::Visitor) : Void from ocl::cst::ContextDeclCS is
+			 visitor.visitOperationContextDeclCS(self)
 
 	}
 	@aspect "true"
 	class PrePostOrBodyDeclCS
 	{
 
-		method accept(visitor : cst::visitors::Visitor) : kermeta::standard::~Void from ocl::cst::CSTNode is
-			result := visitor.visitPrePostOrBodyDeclCS(self)
+		method accept(visitor : cst::visitors::Visitor) : Void from ocl::cst::CSTNode is
+			 visitor.visitPrePostOrBodyDeclCS(self)
 
 	}
 
@@ -66,46 +66,46 @@ package cst
 	{
 
 
-		method accept(visitor : cst::visitors::Visitor) : kermeta::standard::~Void from ocl::cst::CSTNode is
-			result := visitor.visitOperationCS(self)
+		method accept(visitor : cst::visitors::Visitor) : Void from ocl::cst::CSTNode is
+			 visitor.visitOperationCS(self)
 
 	}
 	@aspect "true"
 	abstract class InitOrDerValueCS
 {
 
-		method accept(visitor : cst::visitors::Visitor) : kermeta::standard::~Void from ocl::cst::CSTNode is
-			result := visitor.visitInitOrDerValueCS(self)
+		method accept(visitor : cst::visitors::Visitor) : Void from ocl::cst::CSTNode is
+			 visitor.visitInitOrDerValueCS(self)
 
 	}
 	@aspect "true"
 	class DerValueCS 
 	{
-		method accept(visitor : cst::visitors::Visitor) : kermeta::standard::~Void from ocl::cst::InitOrDerValueCS is
-			result := visitor.visitDerValueCS(self)
+		method accept(visitor : cst::visitors::Visitor) : Void from ocl::cst::InitOrDerValueCS is
+			 visitor.visitDerValueCS(self)
 
 	}
 	@aspect "true"
 	class InitValueCS
 	{
-		method accept(visitor : cst::visitors::Visitor) : kermeta::standard::~Void from ocl::cst::InitOrDerValueCS is
-			result := visitor.visitInitValueCS(self)
+		method accept(visitor : cst::visitors::Visitor) : Void from ocl::cst::InitOrDerValueCS is
+			 visitor.visitInitValueCS(self)
 
 	}
 	@aspect "true"
 	abstract class InvOrDefCS
 	{
 
-		method accept(visitor : cst::visitors::Visitor) : kermeta::standard::~Void from ocl::cst::CSTNode is
-			result := visitor.visitInvOrDefCS(self)
+		method accept(visitor : cst::visitors::Visitor) : Void from ocl::cst::CSTNode is
+			 visitor.visitInvOrDefCS(self)
 
 	}
 	@aspect "true"
 	class InvCS 
 	{
 
-		method accept(visitor : cst::visitors::Visitor) : kermeta::standard::~Void from ocl::cst::InvOrDefCS is
-			result := visitor.visitInvCS(self)
+		method accept(visitor : cst::visitors::Visitor) : Void from ocl::cst::InvOrDefCS is
+			 visitor.visitInvCS(self)
 
 	}
 	@aspect "true"
@@ -113,271 +113,271 @@ package cst
 	{
 
 
-		method accept(visitor : cst::visitors::Visitor) : kermeta::standard::~Void from ocl::cst::InvOrDefCS is
-			result := visitor.visitDefCS(self)
+		method accept(visitor : cst::visitors::Visitor) : Void from ocl::cst::InvOrDefCS is
+			 visitor.visitDefCS(self)
 
 	}
 	@aspect "true" class DefExpressionCS
 	{
 
-		method accept(visitor : cst::visitors::Visitor) : kermeta::standard::~Void from ocl::cst::CSTNode is
-			result := visitor.visitDefExpressionCS(self)
+		method accept(visitor : cst::visitors::Visitor) : Void from ocl::cst::CSTNode is
+			 visitor.visitDefExpressionCS(self)
 
 	}
 	@aspect "true" class PathNameCS
 	{
 	
 
-		method accept(visitor : cst::visitors::Visitor) : kermeta::standard::~Void from ocl::cst::TypeCS is
-			result := visitor.visitPathNameCS(self)
+		method accept(visitor : cst::visitors::Visitor) : Void from ocl::cst::TypeCS is
+			 visitor.visitPathNameCS(self)
 
 	}
 	@aspect "true" class VariableExpCS
 	{
 
 
-		method accept(visitor : cst::visitors::Visitor) : kermeta::standard::~Void from ocl::cst::OCLExpressionCS is
-			result := visitor.visitVariableExpCS(self)
+		method accept(visitor : cst::visitors::Visitor) : Void from ocl::cst::OCLExpressionCS is
+			 visitor.visitVariableExpCS(self)
 
 	}
 	@aspect "true" class SimpleNameCS 
 	{
 
 
-		method accept(visitor : cst::visitors::Visitor) : kermeta::standard::~Void from ocl::cst::OCLExpressionCS is
-			result := visitor.visitSimpleNameCS(self)
+		method accept(visitor : cst::visitors::Visitor) : Void from ocl::cst::OCLExpressionCS is
+			 visitor.visitSimpleNameCS(self)
 
 	}
 
 	 @aspect "true"
 	abstract class TypeCS
 	{
-		method accept(visitor : cst::visitors::Visitor) : kermeta::standard::~Void from ocl::cst::OCLExpressionCS is
-			result := visitor.visitTypeCS(self)
+		method accept(visitor : cst::visitors::Visitor) : Void from ocl::cst::OCLExpressionCS is
+			 visitor.visitTypeCS(self)
 
 	}
 	@aspect "true" class PrimitiveTypeCS 
 	{
-		method accept(visitor : cst::visitors::Visitor) : kermeta::standard::~Void from ocl::cst::SimpleNameCS is
-			result := visitor.visitPrimitiveTypeCS(self)
+		method accept(visitor : cst::visitors::Visitor) : Void from ocl::cst::SimpleNameCS is
+			 visitor.visitPrimitiveTypeCS(self)
 
 	}
 	@aspect "true" class TupleTypeCS 
 	{
 
-		method accept(visitor : cst::visitors::Visitor) : kermeta::standard::~Void from ocl::cst::TypeCS is
-			result := visitor.visitTupleTypeCS(self)
+		method accept(visitor : cst::visitors::Visitor) : Void from ocl::cst::TypeCS is
+			 visitor.visitTupleTypeCS(self)
 
 	}
 	@aspect "true" class CollectionTypeCS
 	{
 
-		method accept(visitor : cst::visitors::Visitor) : kermeta::standard::~Void from ocl::cst::TypeCS is
-			result := visitor.visitCollectionTypeCS(self)
+		method accept(visitor : cst::visitors::Visitor) : Void from ocl::cst::TypeCS is
+			 visitor.visitCollectionTypeCS(self)
 
 	}
 
 	@aspect "true"
 	abstract  class OCLExpressionCS 
 	{
-		method accept(visitor : cst::visitors::Visitor) : kermeta::standard::~Void from ocl::cst::CSTNode is
-			result := visitor.visitOCLExpressionCS(self)
+		method accept(visitor : cst::visitors::Visitor) : Void from ocl::cst::CSTNode is
+			 visitor.visitOCLExpressionCS(self)
 
 	}
 	@aspect "true" class LetExpCS
 	{
 
-		method accept(visitor : cst::visitors::Visitor) : kermeta::standard::~Void from ocl::cst::OCLExpressionCS is
-			result := visitor.visitLetExpCS(self)
+		method accept(visitor : cst::visitors::Visitor) : Void from ocl::cst::OCLExpressionCS is
+			 visitor.visitLetExpCS(self)
 
 	}
 	@aspect "true" class IfExpCS 
 	{
 
-		method accept(visitor : cst::visitors::Visitor) : kermeta::standard::~Void from ocl::cst::OCLExpressionCS is
-			result := visitor.visitIfExpCS(self)
+		method accept(visitor : cst::visitors::Visitor) : Void from ocl::cst::OCLExpressionCS is
+			 visitor.visitIfExpCS(self)
 
 	}
 	@aspect "true" class MessageExpCS
 	{
 
-		method accept(visitor : cst::visitors::Visitor) : kermeta::standard::~Void from ocl::cst::OCLExpressionCS is
-			result := visitor.visitMessageExpCS(self)
+		method accept(visitor : cst::visitors::Visitor) : Void from ocl::cst::OCLExpressionCS is
+			 visitor.visitMessageExpCS(self)
 
 	}
 	@aspect "true" class OCLMessageArgCS
 	{
 
-		method accept(visitor : cst::visitors::Visitor) : kermeta::standard::~Void from ocl::cst::CSTNode is
-			result := visitor.visitOCLMessageArgCS(self)
+		method accept(visitor : cst::visitors::Visitor) : Void from ocl::cst::CSTNode is
+			 visitor.visitOCLMessageArgCS(self)
 
 	}
 	@aspect "true" class VariableCS
 	{
 
-		method accept(visitor : cst::visitors::Visitor) : kermeta::standard::~Void from ocl::cst::CSTNode is
-			result := visitor.visitVariableCS(self)
+		method accept(visitor : cst::visitors::Visitor) : Void from ocl::cst::CSTNode is
+			 visitor.visitVariableCS(self)
 
 	}
 	@aspect "true"
 	abstract  class LiteralExpCS
 	{
-		method accept(visitor : cst::visitors::Visitor) : kermeta::standard::~Void from ocl::cst::OCLExpressionCS is
-			result := visitor.visitLiteralExpCS(self)
+		method accept(visitor : cst::visitors::Visitor) : Void from ocl::cst::OCLExpressionCS is
+			 visitor.visitLiteralExpCS(self)
 
 	} 
 	@aspect "true" class EnumLiteralExpCS 
 	{
 
 
-		method accept(visitor : cst::visitors::Visitor) : kermeta::standard::~Void from ocl::cst::LiteralExpCS is
-			result := visitor.visitEnumLiteralExpCS(self)
+		method accept(visitor : cst::visitors::Visitor) : Void from ocl::cst::LiteralExpCS is
+			 visitor.visitEnumLiteralExpCS(self)
 
 	}
 	@aspect "true" class CollectionLiteralExpCS 
 	{
 
 
-		method accept(visitor : cst::visitors::Visitor) : kermeta::standard::~Void from ocl::cst::LiteralExpCS is
-			result := visitor.visitCollectionLiteralExpCS(self)
+		method accept(visitor : cst::visitors::Visitor) : Void from ocl::cst::LiteralExpCS is
+			 visitor.visitCollectionLiteralExpCS(self)
 
 	}
 	@aspect "true" class TupleLiteralExpCS 
 	{
 
 
-		method accept(visitor : cst::visitors::Visitor) : kermeta::standard::~Void from ocl::cst::LiteralExpCS is
-			result := visitor.visitTupleLiteralExpCS(self)
+		method accept(visitor : cst::visitors::Visitor) : Void from ocl::cst::LiteralExpCS is
+			 visitor.visitTupleLiteralExpCS(self)
 
 	}
 	@aspect "true" class PrimitiveLiteralExpCS
 	{
 
 
-		method accept(visitor : cst::visitors::Visitor) : kermeta::standard::~Void from ocl::cst::LiteralExpCS is
-			result := visitor.visitPrimitiveLiteralExpCS(self)
+		method accept(visitor : cst::visitors::Visitor) : Void from ocl::cst::LiteralExpCS is
+			 visitor.visitPrimitiveLiteralExpCS(self)
 
 	}
 	@aspect "true" class IntegerLiteralExpCS
 	{
 
 
-		method accept(visitor : cst::visitors::Visitor) : kermeta::standard::~Void from ocl::cst::PrimitiveLiteralExpCS is
-			result := visitor.visitIntegerLiteralExpCS(self)
+		method accept(visitor : cst::visitors::Visitor) : Void from ocl::cst::PrimitiveLiteralExpCS is
+			 visitor.visitIntegerLiteralExpCS(self)
 
 	}
 	@aspect "true" class RealLiteralExpCS
 	{
 
 
-		method accept(visitor : cst::visitors::Visitor) : kermeta::standard::~Void from ocl::cst::PrimitiveLiteralExpCS is
-			result := visitor.visitRealLiteralExpCS(self)
+		method accept(visitor : cst::visitors::Visitor) : Void from ocl::cst::PrimitiveLiteralExpCS is
+			 visitor.visitRealLiteralExpCS(self)
 
 	}
 	@aspect "true" class StringLiteralExpCS
 	{
 
 
-		method accept(visitor : cst::visitors::Visitor) : kermeta::standard::~Void from ocl::cst::PrimitiveLiteralExpCS is
-			result := visitor.visitStringLiteralExpCS(self)
+		method accept(visitor : cst::visitors::Visitor) : Void from ocl::cst::PrimitiveLiteralExpCS is
+			 visitor.visitStringLiteralExpCS(self)
 
 	}
 	@aspect "true" class BooleanLiteralExpCS
 	{
 
 
-		method accept(visitor : cst::visitors::Visitor) : kermeta::standard::~Void from ocl::cst::PrimitiveLiteralExpCS is
-			result := visitor.visitBooleanLiteralExpCS(self)
+		method accept(visitor : cst::visitors::Visitor) : Void from ocl::cst::PrimitiveLiteralExpCS is
+			 visitor.visitBooleanLiteralExpCS(self)
 
 	}
 	@aspect "true" class NullLiteralExpCS
 	{
 
 
-		method accept(visitor : cst::visitors::Visitor) : kermeta::standard::~Void from ocl::cst::LiteralExpCS is
-			result := visitor.visitNullLiteralExpCS(self)
+		method accept(visitor : cst::visitors::Visitor) : Void from ocl::cst::LiteralExpCS is
+			 visitor.visitNullLiteralExpCS(self)
 
 	}
 	@aspect "true" class InvalidLiteralExpCS {
 
 
-		method accept(visitor : cst::visitors::Visitor) : kermeta::standard::~Void from ocl::cst::LiteralExpCS is
-			result := visitor.visitInvalidLiteralExpCS(self)
+		method accept(visitor : cst::visitors::Visitor) : Void from ocl::cst::LiteralExpCS is
+			 visitor.visitInvalidLiteralExpCS(self)
 
 	}
 	@aspect "true" class CollectionLiteralPartCS
 	{
 
 
-		method accept(visitor : cst::visitors::Visitor) : kermeta::standard::~Void from ocl::cst::CSTNode is
-			result := visitor.visitCollectionLiteralPartCS(self)
+		method accept(visitor : cst::visitors::Visitor) : Void from ocl::cst::CSTNode is
+			 visitor.visitCollectionLiteralPartCS(self)
 
 	}
 	@aspect "true" class CollectionRangeCS
 	{
 
 
-		method accept(visitor : cst::visitors::Visitor) : kermeta::standard::~Void from ocl::cst::CollectionLiteralPartCS is
-			result := visitor.visitCollectionRangeCS(self)
+		method accept(visitor : cst::visitors::Visitor) : Void from ocl::cst::CollectionLiteralPartCS is
+			 visitor.visitCollectionRangeCS(self)
 
 	}
 	@aspect "true" class CallExpCS
 	{
 
 
-		method accept(visitor : cst::visitors::Visitor) : kermeta::standard::~Void from ocl::cst::OCLExpressionCS is
-			result := visitor.visitCallExpCS(self)
+		method accept(visitor : cst::visitors::Visitor) : Void from ocl::cst::OCLExpressionCS is
+			 visitor.visitCallExpCS(self)
 
 	}
 	@aspect "true" class LoopExpCS
 	{
 
 
-		method accept(visitor : cst::visitors::Visitor) : kermeta::standard::~Void from ocl::cst::CallExpCS is
-			result := visitor.visitLoopExpCS(self)
+		method accept(visitor : cst::visitors::Visitor) : Void from ocl::cst::CallExpCS is
+			 visitor.visitLoopExpCS(self)
 
 	}
 	@aspect "true" class IteratorExpCS
 	{
-		method accept(visitor : cst::visitors::Visitor) : kermeta::standard::~Void from ocl::cst::LoopExpCS is
-			result := visitor.visitIteratorExpCS(self)
+		method accept(visitor : cst::visitors::Visitor) : Void from ocl::cst::LoopExpCS is
+			 visitor.visitIteratorExpCS(self)
 
 	}
 	@aspect "true" class IterateExpCS
 	{
-		method accept(visitor : cst::visitors::Visitor) : kermeta::standard::~Void from ocl::cst::LoopExpCS is
-			result := visitor.visitIterateExpCS(self)
+		method accept(visitor : cst::visitors::Visitor) : Void from ocl::cst::LoopExpCS is
+			 visitor.visitIterateExpCS(self)
 
 	}
 	@aspect "true" class FeatureCallExpCS
 	{
 
 
-		method accept(visitor : cst::visitors::Visitor) : kermeta::standard::~Void from ocl::cst::CallExpCS is
-			result := visitor.visitFeatureCallExpCS(self)
+		method accept(visitor : cst::visitors::Visitor) : Void from ocl::cst::CallExpCS is
+			 visitor.visitFeatureCallExpCS(self)
 
 	}
 
 	@aspect "true" class OperationCallExpCS 
 	{
-		method accept(visitor : cst::visitors::Visitor) : kermeta::standard::~Void from ocl::cst::FeatureCallExpCS is
-			result := visitor.visitOperationCallExpCS(self)
+		method accept(visitor : cst::visitors::Visitor) : Void from ocl::cst::FeatureCallExpCS is
+			 visitor.visitOperationCallExpCS(self)
 
 	}
 	@aspect "true" class IsMarkedPreCS 
 	{
 
 
-		method accept(visitor : cst::visitors::Visitor) : kermeta::standard::~Void from ocl::cst::CSTNode is
-			result := visitor.visitIsMarkedPreCS(self)
+		method accept(visitor : cst::visitors::Visitor) : Void from ocl::cst::CSTNode is
+			 visitor.visitIsMarkedPreCS(self)
 
 	}
 	@aspect "true" class StateExpCS 
 	{
 
 
-		method accept(visitor : cst::visitors::Visitor) : kermeta::standard::~Void from ocl::cst::TypeCS is
-			result := visitor.visitStateExpCS(self)
+		method accept(visitor : cst::visitors::Visitor) : Void from ocl::cst::TypeCS is
+			 visitor.visitStateExpCS(self)
 
 	}
 
@@ -390,151 +390,151 @@ package cst
 		@aspect "true"
 		abstract  class Visitor
 		{
-			operation visitCSTNode(visitable : cst::CSTNode) : kermeta::standard::~Void is
+			operation visitCSTNode(visitable : cst::CSTNode) : Void is
 				abstract
 
-			operation visitPackageDeclarationCS(visitable : cst::PackageDeclarationCS) : kermeta::standard::~Void is
+			operation visitPackageDeclarationCS(visitable : cst::PackageDeclarationCS) : Void is
 				abstract
 
-			operation visitContextDeclCS(visitable : cst::ContextDeclCS) : kermeta::standard::~Void is
+			operation visitContextDeclCS(visitable : cst::ContextDeclCS) : Void is
 				abstract
 
-			operation visitPropertyContextCS(visitable : cst::PropertyContextCS) : kermeta::standard::~Void is
+			operation visitPropertyContextCS(visitable : cst::PropertyContextCS) : Void is
 				abstract
 
-			operation visitClassifierContextDeclCS(visitable : cst::ClassifierContextDeclCS) : kermeta::standard::~Void is
+			operation visitClassifierContextDeclCS(visitable : cst::ClassifierContextDeclCS) : Void is
 				abstract
 
-			operation visitOperationContextDeclCS(visitable : cst::OperationContextDeclCS) : kermeta::standard::~Void is
+			operation visitOperationContextDeclCS(visitable : cst::OperationContextDeclCS) : Void is
 				abstract
 
-			operation visitPrePostOrBodyDeclCS(visitable : cst::PrePostOrBodyDeclCS) : kermeta::standard::~Void is
+			operation visitPrePostOrBodyDeclCS(visitable : cst::PrePostOrBodyDeclCS) : Void is
 				abstract
 
-			operation visitOperationCS(visitable : cst::OperationCS) : kermeta::standard::~Void is
+			operation visitOperationCS(visitable : cst::OperationCS) : Void is
 				abstract
 
-			operation visitInitOrDerValueCS(visitable : cst::InitOrDerValueCS) : kermeta::standard::~Void is
+			operation visitInitOrDerValueCS(visitable : cst::InitOrDerValueCS) : Void is
 				abstract
 
-			operation visitDerValueCS(visitable : cst::DerValueCS) : kermeta::standard::~Void is
+			operation visitDerValueCS(visitable : cst::DerValueCS) : Void is
 				abstract
 
-			operation visitInitValueCS(visitable : cst::InitValueCS) : kermeta::standard::~Void is
+			operation visitInitValueCS(visitable : cst::InitValueCS) : Void is
 				abstract
 
-			operation visitInvOrDefCS(visitable : cst::InvOrDefCS) : kermeta::standard::~Void is
+			operation visitInvOrDefCS(visitable : cst::InvOrDefCS) : Void is
 				abstract
 
-			operation visitInvCS(visitable : cst::InvCS) : kermeta::standard::~Void is
+			operation visitInvCS(visitable : cst::InvCS) : Void is
 				abstract
 
-			operation visitDefCS(visitable : cst::DefCS) : kermeta::standard::~Void is
+			operation visitDefCS(visitable : cst::DefCS) : Void is
 				abstract
 
-			operation visitDefExpressionCS(visitable : cst::DefExpressionCS) : kermeta::standard::~Void is
+			operation visitDefExpressionCS(visitable : cst::DefExpressionCS) : Void is
 				abstract
 
-			operation visitPathNameCS(visitable : cst::PathNameCS) : kermeta::standard::~Void is
+			operation visitPathNameCS(visitable : cst::PathNameCS) : Void is
 				abstract
 
-			operation visitVariableExpCS(visitable : cst::VariableExpCS) : kermeta::standard::~Void is
+			operation visitVariableExpCS(visitable : cst::VariableExpCS) : Void is
 				abstract
 
-			operation visitSimpleNameCS(visitable : cst::SimpleNameCS) : kermeta::standard::~Void is
+			operation visitSimpleNameCS(visitable : cst::SimpleNameCS) : Void is
 				abstract
 
-			operation visitTypeCS(visitable : cst::TypeCS) : kermeta::standard::~Void is
+			operation visitTypeCS(visitable : cst::TypeCS) : Void is
 				abstract
 
-			operation visitPrimitiveTypeCS(visitable : cst::PrimitiveTypeCS) : kermeta::standard::~Void is
+			operation visitPrimitiveTypeCS(visitable : cst::PrimitiveTypeCS) : Void is
 				abstract
 
-			operation visitTupleTypeCS(visitable : cst::TupleTypeCS) : kermeta::standard::~Void is
+			operation visitTupleTypeCS(visitable : cst::TupleTypeCS) : Void is
 				abstract
 
-			operation visitCollectionTypeCS(visitable : cst::CollectionTypeCS) : kermeta::standard::~Void is
+			operation visitCollectionTypeCS(visitable : cst::CollectionTypeCS) : Void is
 				abstract
 
-			operation visitOCLExpressionCS(visitable : cst::OCLExpressionCS) : kermeta::standard::~Void is
+			operation visitOCLExpressionCS(visitable : cst::OCLExpressionCS) : Void is
 				abstract
 
-			operation visitLetExpCS(visitable : cst::LetExpCS) : kermeta::standard::~Void is
+			operation visitLetExpCS(visitable : cst::LetExpCS) : Void is
 				abstract
 
-			operation visitIfExpCS(visitable : cst::IfExpCS) : kermeta::standard::~Void is
+			operation visitIfExpCS(visitable : cst::IfExpCS) : Void is
 				abstract
 
-			operation visitMessageExpCS(visitable : cst::MessageExpCS) : kermeta::standard::~Void is
+			operation visitMessageExpCS(visitable : cst::MessageExpCS) : Void is
 				abstract
 
-			operation visitOCLMessageArgCS(visitable : cst::OCLMessageArgCS) : kermeta::standard::~Void is
+			operation visitOCLMessageArgCS(visitable : cst::OCLMessageArgCS) : Void is
 				abstract
 
-			operation visitVariableCS(visitable : cst::VariableCS) : kermeta::standard::~Void is
+			operation visitVariableCS(visitable : cst::VariableCS) : Void is
 				abstract
 
-			operation visitLiteralExpCS(visitable : cst::LiteralExpCS) : kermeta::standard::~Void is
+			operation visitLiteralExpCS(visitable : cst::LiteralExpCS) : Void is
 				abstract
 
-			operation visitEnumLiteralExpCS(visitable : cst::EnumLiteralExpCS) : kermeta::standard::~Void is
+			operation visitEnumLiteralExpCS(visitable : cst::EnumLiteralExpCS) : Void is
 				abstract
 
-			operation visitCollectionLiteralExpCS(visitable : cst::CollectionLiteralExpCS) : kermeta::standard::~Void is
+			operation visitCollectionLiteralExpCS(visitable : cst::CollectionLiteralExpCS) : Void is
 				abstract
 
-			operation visitTupleLiteralExpCS(visitable : cst::TupleLiteralExpCS) : kermeta::standard::~Void is
+			operation visitTupleLiteralExpCS(visitable : cst::TupleLiteralExpCS) : Void is
 				abstract
 
-			operation visitPrimitiveLiteralExpCS(visitable : cst::PrimitiveLiteralExpCS) : kermeta::standard::~Void is
+			operation visitPrimitiveLiteralExpCS(visitable : cst::PrimitiveLiteralExpCS) : Void is
 				abstract
 
-			operation visitIntegerLiteralExpCS(visitable : cst::IntegerLiteralExpCS) : kermeta::standard::~Void is
+			operation visitIntegerLiteralExpCS(visitable : cst::IntegerLiteralExpCS) : Void is
 				abstract
 
-			operation visitRealLiteralExpCS(visitable : cst::RealLiteralExpCS) : kermeta::standard::~Void is
+			operation visitRealLiteralExpCS(visitable : cst::RealLiteralExpCS) : Void is
 				abstract
 
-			operation visitStringLiteralExpCS(visitable : cst::StringLiteralExpCS) : kermeta::standard::~Void is
+			operation visitStringLiteralExpCS(visitable : cst::StringLiteralExpCS) : Void is
 				abstract
 
-			operation visitBooleanLiteralExpCS(visitable : cst::BooleanLiteralExpCS) : kermeta::standard::~Void is
+			operation visitBooleanLiteralExpCS(visitable : cst::BooleanLiteralExpCS) : Void is
 				abstract
 
-			operation visitNullLiteralExpCS(visitable : cst::NullLiteralExpCS) : kermeta::standard::~Void is
+			operation visitNullLiteralExpCS(visitable : cst::NullLiteralExpCS) : Void is
 				abstract
 
-			operation visitInvalidLiteralExpCS(visitable : cst::InvalidLiteralExpCS) : kermeta::standard::~Void is
+			operation visitInvalidLiteralExpCS(visitable : cst::InvalidLiteralExpCS) : Void is
 				abstract
 
-			operation visitCollectionLiteralPartCS(visitable : cst::CollectionLiteralPartCS) : kermeta::standard::~Void is
+			operation visitCollectionLiteralPartCS(visitable : cst::CollectionLiteralPartCS) : Void is
 				abstract
 
-			operation visitCollectionRangeCS(visitable : cst::CollectionRangeCS) : kermeta::standard::~Void is
+			operation visitCollectionRangeCS(visitable : cst::CollectionRangeCS) : Void is
 				abstract
 
-			operation visitCallExpCS(visitable : cst::CallExpCS) : kermeta::standard::~Void is
+			operation visitCallExpCS(visitable : cst::CallExpCS) : Void is
 				abstract
 
-			operation visitLoopExpCS(visitable : cst::LoopExpCS) : kermeta::standard::~Void is
+			operation visitLoopExpCS(visitable : cst::LoopExpCS) : Void is
 				abstract
 
-			operation visitIteratorExpCS(visitable : cst::IteratorExpCS) : kermeta::standard::~Void is
+			operation visitIteratorExpCS(visitable : cst::IteratorExpCS) : Void is
 				abstract
 
-			operation visitIterateExpCS(visitable : cst::IterateExpCS) : kermeta::standard::~Void is
+			operation visitIterateExpCS(visitable : cst::IterateExpCS) : Void is
 				abstract
 
-			operation visitFeatureCallExpCS(visitable : cst::FeatureCallExpCS) : kermeta::standard::~Void is
+			operation visitFeatureCallExpCS(visitable : cst::FeatureCallExpCS) : Void is
 				abstract
 
-			operation visitOperationCallExpCS(visitable : cst::OperationCallExpCS) : kermeta::standard::~Void is
+			operation visitOperationCallExpCS(visitable : cst::OperationCallExpCS) : Void is
 				abstract
 
-			operation visitIsMarkedPreCS(visitable : cst::IsMarkedPreCS) : kermeta::standard::~Void is
+			operation visitIsMarkedPreCS(visitable : cst::IsMarkedPreCS) : Void is
 				abstract
 
-			operation visitStateExpCS(visitable : cst::StateExpCS) : kermeta::standard::~Void is
+			operation visitStateExpCS(visitable : cst::StateExpCS) : Void is
 				abstract
 
 		}
