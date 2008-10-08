@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: EStructuralFeature.java,v 1.4 2008-09-22 14:44:19 cfaucher Exp $
+ * $Id: EStructuralFeature.java,v 1.5 2008-10-08 14:37:50 cfaucher Exp $
  */
 package ecore;
 
@@ -194,7 +194,7 @@ public interface EStructuralFeature extends ETypedElement {
 
 	/**
 	 * Returns the value of the '<em><b>Changeable</b></em>' attribute.
-	 * The default value is <code>"false"</code>.
+	 * The default value is <code>"true"</code>.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Changeable</em>' attribute isn't clear,
@@ -204,7 +204,7 @@ public interface EStructuralFeature extends ETypedElement {
 	 * @return the value of the '<em>Changeable</em>' attribute.
 	 * @see #setChangeable(boolean)
 	 * @see ecore.EcorePackage#getEStructuralFeature_Changeable()
-	 * @model default="false" dataType="ecore.EBoolean"
+	 * @model default="true" dataType="ecore.EBoolean"
 	 * @generated
 	 */
 	boolean isChangeable();

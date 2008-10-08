@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: LanguagePackage.java,v 1.3 2008-09-22 14:46:29 cfaucher Exp $
+ * $Id: LanguagePackage.java,v 1.4 2008-10-08 14:37:49 cfaucher Exp $
  */
 package kermeta.language;
 
@@ -27,9 +27,9 @@ import org.eclipse.emf.ecore.EPackage;
  * @see kermeta.language.LanguageFactory
  * @model kind="package"
  *        annotation="kermeta ecoreUri='http://www.kermeta.org/kermeta/1_2_0//kermeta/language'"
- *        annotation="kermeta documentation='/**\r\n * Contains the implementation of Kermeta reflective collections.\r\n * <img src=\"platform:/plugin/fr.irisa.triskell.kermeta.documentation/src/figures/language_package.png\"/>\r\n \052/'"
- *        annotation="kermeta documentation='/**\n *\n * func : <Object -> Object> because we need to visit the tags.\n *\n \052/'"
+ *        annotation="kermeta documentation='/**\r\n *\r\n * func : <Object -> Object> because we need to visit the tags.\r\n *\r\n \052/'"
  *        annotation="kermeta usage='containment_traversable'"
+ *        annotation="kermeta documentation='/**\r\n * Contains the implementation of Kermeta reflective collections.\r\n * <img src=\"platform:/plugin/fr.irisa.triskell.kermeta.documentation/src/figures/language_package.png\"/>\r\n \052/'"
  * @generated
  */
 public interface LanguagePackage extends EPackage {

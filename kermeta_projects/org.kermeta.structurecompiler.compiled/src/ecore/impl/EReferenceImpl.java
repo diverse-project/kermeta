@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: EReferenceImpl.java,v 1.5 2008-09-22 14:44:20 cfaucher Exp $
+ * $Id: EReferenceImpl.java,v 1.6 2008-10-08 14:37:31 cfaucher Exp $
  */
 package ecore.impl;
 
@@ -59,7 +59,7 @@ public class EReferenceImpl extends EStructuralFeatureImpl implements
 	 * @generated
 	 * @ordered
 	 */
-	protected static final boolean RESOLVE_PROXIES_EDEFAULT = false;
+	protected static final boolean RESOLVE_PROXIES_EDEFAULT = true;
 
 	/**
 	 * The cached value of the '{@link #isResolveProxies() <em>Resolve Proxies</em>}' attribute.

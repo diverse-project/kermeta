@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: KermetaAdapterFactory.java,v 1.3 2008-09-22 14:49:01 cfaucher Exp $
+ * $Id: KermetaAdapterFactory.java,v 1.4 2008-10-08 14:37:54 cfaucher Exp $
  */
 package kermeta.util;
 

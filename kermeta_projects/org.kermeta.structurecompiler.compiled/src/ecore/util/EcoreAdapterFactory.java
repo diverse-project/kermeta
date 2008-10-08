@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: EcoreAdapterFactory.java,v 1.2 2008-09-22 14:44:57 cfaucher Exp $
+ * $Id: EcoreAdapterFactory.java,v 1.3 2008-10-08 14:38:04 cfaucher Exp $
  */
 package ecore.util;
 
@@ -488,6 +488,7 @@ public class EcoreAdapterFactory extends AdapterFactoryImpl {
 	public Adapter createObjectAdapter() {
 		return null;
 	}
+
 
 
 } //EcoreAdapterFactory

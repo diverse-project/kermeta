@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: IoSwitch.java,v 1.3 2008-09-22 14:46:11 cfaucher Exp $
+ * $Id: IoSwitch.java,v 1.4 2008-10-08 14:38:05 cfaucher Exp $
  */
 package kermeta.io.util;
 

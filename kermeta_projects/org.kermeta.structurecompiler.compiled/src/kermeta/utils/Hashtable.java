@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: Hashtable.java,v 1.3 2008-09-22 14:48:59 cfaucher Exp $
+ * $Id: Hashtable.java,v 1.4 2008-10-08 14:37:54 cfaucher Exp $
  */
 package kermeta.utils;
 
@@ -85,20 +85,20 @@ public interface Hashtable<K, V> extends kermeta.language.structure.Object {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @model annotation="kermeta documentation='/**\r\n\t * Returns a collection containing the elements of this Hashtable\r\n\t \052/'"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='\nkermeta.standard.Collection<V> result = null;\n\n\tresult = ((kermeta.standard.Bag<V>) org.kermeta.compil.runtime.helper.language.ClassUtil.newObject(\"kermeta.standard.Bag<V>\"));\n\n\t//BIft:each\n\n\t\n{\n\n\tkermeta.standard.Iterator<K> it_ft228 = this.keys().iterator();\n\tjava.lang.Boolean idLoopCond_999 = false;\n\twhile( !idLoopCond_999 ) {\n\tidLoopCond_999 = it_ft228.isOff();\n\tif ( idLoopCond_999 ) {\n\t} else {\n\n\t//BIle:func\nK k_lbdExp228 = it_ft228.next();\n\n\tresult.add(this.getValue(k_lbdExp228));\n//EIle:func\n\n}\n\t}\n}\n\n//EIft:each\n\n\nreturn result;\n'"
+	 * @generated
+	 */
+	Collection<V> values();
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @model annotation="kermeta documentation='/**\r\n\t * Adds a entry into the Hashtable\r\n\t \052/'"
 	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='\n\torg.kermeta.compil.runtime.helper.basetypes.MapUtil.put(this, key, value);\n'"
 	 * @generated
 	 */
 	void put(K key, V value);
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @model annotation="kermeta documentation='/**\r\n\t * Returns a collection containing the elements of this Hashtable\r\n\t \052/'"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='\nkermeta.standard.Collection<V> result = null;\n\n\tresult = ((kermeta.standard.Bag<V>) org.kermeta.compil.runtime.helper.language.ClassUtil.newObject(\"kermeta.standard.Bag<V>\"));\n\n\t//BIft:each\n\n\t\n{\n\n\tkermeta.standard.Iterator<K> it_ft230 = this.keys().iterator();\n\tjava.lang.Boolean idLoopCond_981 = false;\n\twhile( !idLoopCond_981 ) {\n\tidLoopCond_981 = it_ft230.isOff();\n\tif ( idLoopCond_981 ) {\n\t} else {\n\n\t//BIle:func\nK k_lbdExp230 = it_ft230.next();\n\n\tresult.add(this.getValue(k_lbdExp230));\n//EIle:func\n\n}\n\t}\n}\n\n//EIft:each\n\n\nreturn result;\n'"
-	 * @generated
-	 */
-	Collection<V> values();
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -113,7 +113,7 @@ public interface Hashtable<K, V> extends kermeta.language.structure.Object {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @model annotation="kermeta documentation='/**\r\n\t * Returns a set containing the hash keys of this Hashtable\r\n\t \052/'"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='\nkermeta.standard.Set<K> result = null;\n\n\tresult = ((kermeta.standard.Set<K>) org.kermeta.compil.runtime.helper.language.ClassUtil.newObject(\"kermeta.standard.Set<K>\"));\n\n\t\n{\n\n\tkermeta.standard.Iterator<K> it = this.keyIterator();\n\tjava.lang.Boolean idLoopCond_982 = false;\n\twhile( !idLoopCond_982 ) {\n\tidLoopCond_982 = it.isOff();\n\tif ( idLoopCond_982 ) {\n\t} else {\n\n\tresult.add(it.next());\n}\n\t}\n}\n\n\nreturn result;\n'"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='\nkermeta.standard.Set<K> result = null;\n\n\tresult = ((kermeta.standard.Set<K>) org.kermeta.compil.runtime.helper.language.ClassUtil.newObject(\"kermeta.standard.Set<K>\"));\n\n\t\n{\n\n\tkermeta.standard.Iterator<K> it = this.keyIterator();\n\tjava.lang.Boolean idLoopCond_1000 = false;\n\twhile( !idLoopCond_1000 ) {\n\tidLoopCond_1000 = it.isOff();\n\tif ( idLoopCond_1000 ) {\n\t} else {\n\n\tresult.add(it.next());\n}\n\t}\n}\n\n\nreturn result;\n'"
 	 * @generated
 	 */
 	Set<K> keys();

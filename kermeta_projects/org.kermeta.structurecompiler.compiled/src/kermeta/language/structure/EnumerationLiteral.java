@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: EnumerationLiteral.java,v 1.3 2008-09-22 14:47:40 cfaucher Exp $
+ * $Id: EnumerationLiteral.java,v 1.4 2008-10-08 14:37:43 cfaucher Exp $
  */
 package kermeta.language.structure;
 
@@ -23,8 +23,8 @@ import km2ecore.KM2EcoreContext;
  * </p>
  *
  * @see kermeta.language.structure.StructurePackage#getEnumerationLiteral()
- * @model annotation="kermeta documentation='Item definition for enumeration'"
- *        annotation="kermeta documentation='/**\n *\n \052/'"
+ * @model annotation="kermeta documentation='/**\r\n *\r\n \052/'"
+ *        annotation="kermeta documentation='Item definition for enumeration'"
  * @generated
  */
 public interface EnumerationLiteral extends Traceability<EEnumLiteral>,

@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: TypeErrorImpl.java,v 1.3 2008-09-22 14:45:47 cfaucher Exp $
+ * $Id: TypeErrorImpl.java,v 1.4 2008-10-08 14:37:42 cfaucher Exp $
  */
 package kermeta.interpreter.impl;
 

@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: EAnnotation.java,v 1.4 2008-09-22 14:44:19 cfaucher Exp $
+ * $Id: EAnnotation.java,v 1.5 2008-10-08 14:37:50 cfaucher Exp $
  */
 package ecore;
 

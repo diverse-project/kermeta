@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: SimkSwitch.java,v 1.3 2008-09-22 14:49:13 cfaucher Exp $
+ * $Id: SimkSwitch.java,v 1.4 2008-10-08 14:37:51 cfaucher Exp $
  */
 package simk.util;
 
@@ -106,13 +106,13 @@ public class SimkSwitch<T> {
 				result = defaultCase(theEObject);
 			return result;
 		}
-		case SimkPackage.STATIC_METHOD: {
-			StaticMethod staticMethod = (StaticMethod) theEObject;
-			T result = caseStaticMethod(staticMethod);
+		case SimkPackage.SM_METHOD: {
+			SMMethod smMethod = (SMMethod) theEObject;
+			T result = caseSMMethod(smMethod);
 			if (result == null)
-				result = caseSMNamedElement(staticMethod);
+				result = caseSMNamedElement(smMethod);
 			if (result == null)
-				result = caseObject(staticMethod);
+				result = caseObject(smMethod);
 			if (result == null)
 				result = defaultCase(theEObject);
 			return result;
@@ -204,17 +204,17 @@ public class SimkSwitch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Static Method</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>SM Method</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Static Method</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>SM Method</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseStaticMethod(StaticMethod object) {
+	public T caseSMMethod(SMMethod object) {
 		return null;
 	}
 

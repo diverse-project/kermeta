@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ExceptionPackage.java,v 1.3 2008-09-22 14:48:59 cfaucher Exp $
+ * $Id: ExceptionPackage.java,v 1.4 2008-10-08 14:37:37 cfaucher Exp $
  */
 package km2ecore.common.exception;
 

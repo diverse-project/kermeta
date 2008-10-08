@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: StandardFactory.java,v 1.3 2008-09-22 14:48:27 cfaucher Exp $
+ * $Id: StandardFactory.java,v 1.4 2008-10-08 14:37:38 cfaucher Exp $
  */
 package kermeta.standard;
 
@@ -25,6 +25,15 @@ public interface StandardFactory extends EFactory {
 	 */
 	StandardFactory eINSTANCE = kermeta.standard.impl.StandardFactoryImpl
 			.init();
+
+	/**
+	 * Returns a new object of class '<em>Unknown Java Object</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Unknown Java Object</em>'.
+	 * @generated
+	 */
+	UnknownJavaObject createUnknownJavaObject();
 
 	/**
 	 * Returns a new object of class '<em>Set</em>'.
@@ -88,15 +97,6 @@ public interface StandardFactory extends EFactory {
 	 * @generated
 	 */
 	NotComparableException createNotComparableException();
-
-	/**
-	 * Returns a new object of class '<em>Unknown Java Object</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Unknown Java Object</em>'.
-	 * @generated
-	 */
-	UnknownJavaObject createUnknownJavaObject();
 
 	/**
 	 * Returns the package supported by this factory.

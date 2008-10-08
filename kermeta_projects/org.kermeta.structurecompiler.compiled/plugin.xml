@@ -5,7 +5,7 @@
  <copyright>
  </copyright>
 
- $Id: plugin.xml,v 1.3 2008-09-22 14:49:01 cfaucher Exp $
+ $Id: plugin.xml,v 1.4 2008-10-08 14:37:20 cfaucher Exp $
 -->
 
 <plugin>
@@ -18,8 +18,8 @@
 
    <extension point="org.eclipse.emf.ecore.generated_package">
       <package
-            uri="http://www.kermeta.org/kermeta/1_2_0//kermeta/standard/kermeta_temp_uri"
-            class="kermeta.standard.StandardPackage"/>
+            uri="http://www.kermeta.org/kermeta/compiler/kermeta_temp_uri"
+            class="kermeta.compiler.CompilerPackage"/>
    </extension>
 
    <extension point="org.eclipse.emf.ecore.generated_package">
@@ -30,32 +30,20 @@
 
    <extension point="org.eclipse.emf.ecore.generated_package">
       <package
-            uri="http://www.kermeta.org/kermeta/1_2_0//kermeta/language/behavior/kermeta_temp_uri"
-            class="kermeta.language.behavior.BehaviorPackage"/>
-   </extension>
-
-   <extension point="org.eclipse.emf.ecore.generated_package">
-      <package
             uri="http://www.kermeta.org/kermeta/1_2_0//kermeta/language/structure/kermeta_temp_uri"
             class="kermeta.language.structure.StructurePackage"/>
    </extension>
 
    <extension point="org.eclipse.emf.ecore.generated_package">
       <package
-            uri="http://www.kermeta.org/kermeta/compiler/kermeta_temp_uri"
-            class="kermeta.compiler.CompilerPackage"/>
+            uri="http://www.kermeta.org/kermeta/1_2_0//kermeta/language/behavior/kermeta_temp_uri"
+            class="kermeta.language.behavior.BehaviorPackage"/>
    </extension>
 
    <extension point="org.eclipse.emf.ecore.generated_package">
       <package
-            uri="http://www.kermeta.org/kermeta/1_2_0//kermeta/kunit/kermeta_temp_uri"
-            class="kermeta.kunit.KunitPackage"/>
-   </extension>
-
-   <extension point="org.eclipse.emf.ecore.generated_package">
-      <package
-            uri="http://www.kermeta.org/kermeta/1_2_0//kermeta/io/kermeta_temp_uri"
-            class="kermeta.io.IoPackage"/>
+            uri="http://www.kermeta.org/kermeta/1_2_0//kermeta/standard/kermeta_temp_uri"
+            class="kermeta.standard.StandardPackage"/>
    </extension>
 
    <extension point="org.eclipse.emf.ecore.generated_package">
@@ -66,8 +54,26 @@
 
    <extension point="org.eclipse.emf.ecore.generated_package">
       <package
+            uri="http://www.kermeta.org/kermeta/1_2_0//kermeta/io/kermeta_temp_uri"
+            class="kermeta.io.IoPackage"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <package
+            uri="http://www.kermeta.org/kermeta/1_2_0//kermeta/exceptions/kermeta_temp_uri"
+            class="kermeta.exceptions.ExceptionsPackage"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <package
             uri="http://www.kermeta.org/kermeta/1_2_0//kermeta/persistence/kermeta_temp_uri"
             class="kermeta.persistence.PersistencePackage"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <package
+            uri="http://www.kermeta.org/kermeta/1_2_0//kermeta/kunit/kermeta_temp_uri"
+            class="kermeta.kunit.KunitPackage"/>
    </extension>
 
    <extension point="org.eclipse.emf.ecore.generated_package">
@@ -84,32 +90,8 @@
 
    <extension point="org.eclipse.emf.ecore.generated_package">
       <package
-            uri="http://www.kermeta.org/kermeta/1_2_0//kermeta/exceptions/kermeta_temp_uri"
-            class="kermeta.exceptions.ExceptionsPackage"/>
-   </extension>
-
-   <extension point="org.eclipse.emf.ecore.generated_package">
-      <package
             uri="http://www.kermeta.org/km2ecore/kermeta_temp_uri"
             class="km2ecore.Km2ecorePackage"/>
-   </extension>
-
-   <extension point="org.eclipse.emf.ecore.generated_package">
-      <package
-            uri="http://www.kermeta.org/km2ecore/common/kermeta_temp_uri"
-            class="km2ecore.common.CommonPackage"/>
-   </extension>
-
-   <extension point="org.eclipse.emf.ecore.generated_package">
-      <package
-            uri="http://www.kermeta.org/km2ecore/common/exception/kermeta_temp_uri"
-            class="km2ecore.common.exception.ExceptionPackage"/>
-   </extension>
-
-   <extension point="org.eclipse.emf.ecore.generated_package">
-      <package
-            uri="http://www.kermeta.org/km2ecore/helper/java/kermeta_temp_uri"
-            class="km2ecore.helper.java.JavaPackage"/>
    </extension>
 
    <extension point="org.eclipse.emf.ecore.generated_package">
@@ -126,8 +108,26 @@
 
    <extension point="org.eclipse.emf.ecore.generated_package">
       <package
-            uri="http://www.eclipse.org/emf/2002/Ecore/kermeta_temp_uri"
-            class="ecore.EcorePackage"/>
+            uri="http://www.kermeta.org/km2ecore/helper/java/kermeta_temp_uri"
+            class="km2ecore.helper.java.JavaPackage"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <package
+            uri="http://www.kermeta.org/km2ecore/common/kermeta_temp_uri"
+            class="km2ecore.common.CommonPackage"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <package
+            uri="http://www.kermeta.org/km2ecore/common/exception/kermeta_temp_uri"
+            class="km2ecore.common.exception.ExceptionPackage"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <package
+            uri="http://www.kermeta.org/simk/kermeta_temp_uri"
+            class="simk.SimkPackage"/>
    </extension>
 
    <extension point="org.eclipse.emf.ecore.generated_package">
@@ -138,8 +138,8 @@
 
    <extension point="org.eclipse.emf.ecore.generated_package">
       <package
-            uri="http://www.kermeta.org/simk/kermeta_temp_uri"
-            class="simk.SimkPackage"/>
+            uri="http://www.eclipse.org/emf/2002/Ecore/kermeta_temp_uri"
+            class="ecore.EcorePackage"/>
    </extension>
 
 </plugin>

@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: SMNamedElement.java,v 1.3 2008-09-22 14:49:06 cfaucher Exp $
+ * $Id: SMNamedElement.java,v 1.4 2008-10-08 14:37:58 cfaucher Exp $
  */
 package simk;
 

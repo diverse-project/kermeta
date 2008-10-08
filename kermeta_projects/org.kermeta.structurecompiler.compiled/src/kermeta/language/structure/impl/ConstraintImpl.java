@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ConstraintImpl.java,v 1.3 2008-09-22 14:47:36 cfaucher Exp $
+ * $Id: ConstraintImpl.java,v 1.4 2008-10-08 14:37:29 cfaucher Exp $
  */
 package kermeta.language.structure.impl;
 
@@ -489,11 +489,11 @@ public class ConstraintImpl extends TraceabilityImpl<EAnnotation> implements
 		kermeta.language.structure.Property p = c
 				.getPropertyValue("ecoreModelElement");
 
-		java.lang.Boolean idIfCond_723 = false;
-		idIfCond_723 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+		java.lang.Boolean idIfCond_393 = false;
+		idIfCond_393 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 				.isNotEqual(p, null);
 
-		if (idIfCond_723) {
+		if (idIfCond_393) {
 
 			ecore.EModelElement ecoreModelElement = ((ecore.EModelElement) org.kermeta.compil.runtime.helper.language.ObjectUtil
 					.asType(
@@ -524,8 +524,8 @@ public class ConstraintImpl extends TraceabilityImpl<EAnnotation> implements
 
 		java.lang.String body = "";
 
-		java.lang.Boolean idIfCond_724 = false;
-		idIfCond_724 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+		java.lang.Boolean idIfCond_394 = false;
+		idIfCond_394 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 				.isInstanceOf(
 						org.kermeta.compil.runtime.helper.language.ObjectUtil
 								.container(this),
@@ -534,19 +534,19 @@ public class ConstraintImpl extends TraceabilityImpl<EAnnotation> implements
 								.getMetaClass(
 										"kermeta.language.structure.ClassDefinition"));
 
-		if (idIfCond_724) {
+		if (idIfCond_394) {
 
 			result = ((km2ecore.helper.ecore.EAnnotationHelper) org.kermeta.compil.runtime.helper.language.ClassUtil
 					.newObject("km2ecore.helper.ecore.EAnnotationHelper"))
 					.create("kermeta.inv", this.getName(), body);
 		} else {
 
-			java.lang.Boolean idIfCond_725 = false;
-			idIfCond_725 = ((km2ecore.helper.kermeta.ConstraintHelper) org.kermeta.compil.runtime.helper.language.ClassUtil
+			java.lang.Boolean idIfCond_395 = false;
+			idIfCond_395 = ((km2ecore.helper.kermeta.ConstraintHelper) org.kermeta.compil.runtime.helper.language.ClassUtil
 					.newObject("km2ecore.helper.kermeta.ConstraintHelper"))
 					.isPre(this);
 
-			if (idIfCond_725) {
+			if (idIfCond_395) {
 
 				result = ((km2ecore.helper.ecore.EAnnotationHelper) org.kermeta.compil.runtime.helper.language.ClassUtil
 						.newObject("km2ecore.helper.ecore.EAnnotationHelper"))
@@ -569,6 +569,56 @@ public class ConstraintImpl extends TraceabilityImpl<EAnnotation> implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public String getGenModelQualifiedName() {
+
+		java.lang.String result = null;
+
+		result = kermeta.standard.helper.StringWrapper.plus(
+				kermeta.standard.helper.StringWrapper.plus(this
+						.getRootPackage().getGenModelBasePackage(), "::"), this
+						.qualifiedName());
+
+		return result;
+
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getJavaQualifiedName() {
+
+		java.lang.String result = null;
+
+		result = kermeta.standard.helper.StringWrapper.replace(this
+				.qualifiedName(), "::", ".");
+
+		return result;
+
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getGenModelJavaQualifiedName() {
+
+		java.lang.String result = null;
+
+		result = kermeta.standard.helper.StringWrapper.replace(this
+				.getGenModelQualifiedName(), "::", ".");
+
+		return result;
+
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public String qualifiedName() {
 
 		java.lang.String result = null;
@@ -577,8 +627,8 @@ public class ConstraintImpl extends TraceabilityImpl<EAnnotation> implements
 
 		result = this.getName();
 
-		java.lang.Boolean idIfCond_676 = false;
-		idIfCond_676 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+		java.lang.Boolean idIfCond_408 = false;
+		idIfCond_408 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 				.isInstanceOf(
 						org.kermeta.compil.runtime.helper.language.ObjectUtil
 								.container(elem),
@@ -587,23 +637,23 @@ public class ConstraintImpl extends TraceabilityImpl<EAnnotation> implements
 								.getMetaClass(
 										"kermeta.language.structure.NamedElement"));
 
-		if (idIfCond_676) {
+		if (idIfCond_408) {
 
 			elem = (kermeta.language.structure.NamedElement) org.kermeta.compil.runtime.helper.language.ObjectUtil
 					.container(elem);
-			java.lang.Boolean idLoopCond_677 = false;
-			while (!idLoopCond_677) {
-				idLoopCond_677 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+			java.lang.Boolean idLoopCond_409 = false;
+			while (!idLoopCond_409) {
+				idLoopCond_409 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 						.equals(elem, null);
-				if (idLoopCond_677) {
+				if (idLoopCond_409) {
 				} else {
 
 					result = kermeta.standard.helper.StringWrapper.plus(
 							kermeta.standard.helper.StringWrapper.plus(elem
 									.getName(), "::"), result);
 
-					java.lang.Boolean idIfCond_678 = false;
-					idIfCond_678 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+					java.lang.Boolean idIfCond_410 = false;
+					idIfCond_410 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 							.isInstanceOf(
 									org.kermeta.compil.runtime.helper.language.ObjectUtil
 											.container(elem),
@@ -612,7 +662,7 @@ public class ConstraintImpl extends TraceabilityImpl<EAnnotation> implements
 											.getMetaClass(
 													"kermeta.language.structure.NamedElement"));
 
-					if (idIfCond_678) {
+					if (idIfCond_410) {
 
 						elem = (kermeta.language.structure.NamedElement) org.kermeta.compil.runtime.helper.language.ObjectUtil
 								.container(elem);

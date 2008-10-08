@@ -152,6 +152,14 @@ public class ObjectUtil {
 		return null;
 	}
 	
+	static public java.lang.Object get(java.lang.Object o, Property p) {
+		if (true)
+			throw new org.kermeta.compil.runtime.helper.error.KRuntimeError(
+					((kermeta.exceptions.NotImplementedException) org.kermeta.compil.runtime.helper.language.ClassUtil
+							.newObject("kermeta.exceptions.NotImplementedException")));
+		return null;
+	}
+	
 	static public void set(kermeta.language.structure.Object o, Property p, kermeta.language.structure.Object element) {
 		EStructuralFeature feature = o.eClass().getEStructuralFeature( p.getName() );
 		o.eSet(feature, element);
@@ -290,11 +298,15 @@ public class ObjectUtil {
 	}
 	
 	public static Boolean equals(java.lang.Object object, java.lang.Object element) {
-		//if( object == null || element == null ) {
+		if( object == null || element == null ) {
 			return object==element;
-		/*} else {
-			return object.equals(element);
-		}*/
+		} else {
+			if( object instanceof java.lang.String || object instanceof java.lang.Integer || object instanceof java.lang.Boolean || object instanceof java.lang.Character || object instanceof java.lang.Double ) {
+				return object.equals(element);
+			} else {
+				return object==element;
+			}
+		}
 	}
 	
 	public static Boolean equals(kermeta.language.structure.Object object, java.lang.Object element) {
@@ -521,13 +533,13 @@ public class ObjectUtil {
 			return allSuperTypes_hashtable.get(self_qName);
 		}
 		
-		kermeta.standard.Bag<kermeta.language.structure.Type> allSuperClasses = StandardFactory.eINSTANCE.createBag();
+		kermeta.standard.Set<kermeta.language.structure.Type> allSuperClasses = StandardFactory.eINSTANCE.createSet();
 
-		kermeta.standard.Bag<kermeta.language.structure.Type> superClasses = StandardFactory.eINSTANCE.createBag();
+		kermeta.standard.Set<kermeta.language.structure.Type> superClasses = StandardFactory.eINSTANCE.createSet();
 
 		superClasses
 				.addAll(org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
-						.<kermeta.language.structure.Type> convertAsBag(self
+						.<kermeta.language.structure.Type> convertAsSet(self
 								.getSuperType()));
 
 		while ( !superClasses.isEmpty() ) {
@@ -557,7 +569,7 @@ public class ObjectUtil {
 
 								temp
 										.addAll(org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
-												.<kermeta.language.structure.Type> convertAsOrderedSet(((kermeta.language.structure.ClassDefinition) ((kermeta.language.structure.ParameterizedType) s_lbdExp38).getTypeDefinition()).getSuperType()));
+												.<kermeta.language.structure.Type> convertAsBag(((kermeta.language.structure.ClassDefinition) ((kermeta.language.structure.ParameterizedType) s_lbdExp38).getTypeDefinition()).getSuperType()));
 							}
 
 							//EIle:func

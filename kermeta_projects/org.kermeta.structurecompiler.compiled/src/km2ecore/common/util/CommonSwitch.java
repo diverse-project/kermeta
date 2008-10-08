@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: CommonSwitch.java,v 1.3 2008-09-22 14:49:10 cfaucher Exp $
+ * $Id: CommonSwitch.java,v 1.4 2008-10-08 14:38:07 cfaucher Exp $
  */
 package km2ecore.common.util;
 

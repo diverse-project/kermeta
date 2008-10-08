@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: Km2ecoreFactoryImpl.java,v 1.3 2008-09-22 14:49:09 cfaucher Exp $
+ * $Id: Km2ecoreFactoryImpl.java,v 1.4 2008-10-08 14:37:47 cfaucher Exp $
  */
 package km2ecore.impl;
 
@@ -62,10 +62,10 @@ public class Km2ecoreFactoryImpl extends EFactoryImpl implements
 	@Override
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
-		case Km2ecorePackage.SOURCE_TRACER:
-			return createSourceTracer();
 		case Km2ecorePackage.KM2_ECORE_CONTEXT:
 			return createKM2EcoreContext();
+		case Km2ecorePackage.SOURCE_TRACER:
+			return createSourceTracer();
 		default:
 			throw new IllegalArgumentException("The class '" + eClass.getName()
 					+ "' is not a valid classifier");
@@ -109,9 +109,9 @@ public class Km2ecoreFactoryImpl extends EFactoryImpl implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public SourceTracer createSourceTracer() {
-		SourceTracerImpl sourceTracer = new SourceTracerImpl();
-		return sourceTracer;
+	public KM2EcoreContext createKM2EcoreContext() {
+		KM2EcoreContextImpl km2EcoreContext = new KM2EcoreContextImpl();
+		return km2EcoreContext;
 	}
 
 	/**
@@ -119,9 +119,9 @@ public class Km2ecoreFactoryImpl extends EFactoryImpl implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public KM2EcoreContext createKM2EcoreContext() {
-		KM2EcoreContextImpl km2EcoreContext = new KM2EcoreContextImpl();
-		return km2EcoreContext;
+	public SourceTracer createSourceTracer() {
+		SourceTracerImpl sourceTracer = new SourceTracerImpl();
+		return sourceTracer;
 	}
 
 	/**

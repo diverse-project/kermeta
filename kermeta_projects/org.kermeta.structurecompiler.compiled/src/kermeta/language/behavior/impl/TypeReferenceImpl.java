@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: TypeReferenceImpl.java,v 1.3 2008-09-22 14:46:52 cfaucher Exp $
+ * $Id: TypeReferenceImpl.java,v 1.4 2008-10-08 14:37:39 cfaucher Exp $
  */
 package kermeta.language.behavior.impl;
 

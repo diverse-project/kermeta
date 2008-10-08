@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: CollectionImpl.java,v 1.3 2008-09-22 14:48:29 cfaucher Exp $
+ * $Id: CollectionImpl.java,v 1.4 2008-10-08 14:37:46 cfaucher Exp $
  */
 package kermeta.standard.impl;
 
@@ -101,37 +101,37 @@ public abstract class CollectionImpl<G> extends ObjectImpl implements
 
 		//BIft:detect
 
-		G result_ft8 = null;
+		G result_ft173 = null;
 
-		G elem_ft8 = null;
+		G elem_ft173 = null;
 
-		result_ft8 = null;
+		result_ft173 = null;
 
 		{
 
-			kermeta.standard.Iterator<G> it_ft8 = this.iterator();
-			java.lang.Boolean idLoopCond_34 = false;
-			while (!idLoopCond_34) {
-				idLoopCond_34 = kermeta.standard.helper.BooleanWrapper.or(
-						it_ft8.isOff(),
+			kermeta.standard.Iterator<G> it_ft173 = this.iterator();
+			java.lang.Boolean idLoopCond_735 = false;
+			while (!idLoopCond_735) {
+				idLoopCond_735 = kermeta.standard.helper.BooleanWrapper.or(
+						it_ft173.isOff(),
 						org.kermeta.compil.runtime.helper.language.ObjectUtil
-								.isNotEqual(result_ft8, null));
-				if (idLoopCond_34) {
+								.isNotEqual(result_ft173, null));
+				if (idLoopCond_735) {
 				} else {
 
-					elem_ft8 = it_ft8.next();
+					elem_ft173 = it_ft173.next();
 
-					java.lang.Boolean idIfCond_35 = false;
+					java.lang.Boolean idIfCond_736 = false;
 					//BIle:detector
-					G e_lbdExp8 = elem_ft8;
+					G e_lbdExp173 = elem_ft173;
 
-					idIfCond_35 = org.kermeta.compil.runtime.helper.language.ObjectUtil
-							.equals(e_lbdExp8, element);
+					idIfCond_736 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+							.equals(e_lbdExp173, element);
 					//EIle:detector
 
-					if (idIfCond_35) {
+					if (idIfCond_736) {
 
-						result_ft8 = elem_ft8;
+						result_ft173 = elem_ft173;
 					}
 
 				}
@@ -139,14 +139,14 @@ public abstract class CollectionImpl<G> extends ObjectImpl implements
 		}
 
 		//CE
-		elem = result_ft8;
+		elem = result_ft173;
 		//EIft:detect
 
-		java.lang.Boolean idLoopCond_33 = false;
-		while (!idLoopCond_33) {
-			idLoopCond_33 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+		java.lang.Boolean idLoopCond_734 = false;
+		while (!idLoopCond_734) {
+			idLoopCond_734 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 					.equals(elem, null);
-			if (idLoopCond_33) {
+			if (idLoopCond_734) {
 			} else {
 
 				org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
@@ -154,38 +154,38 @@ public abstract class CollectionImpl<G> extends ObjectImpl implements
 
 				//BIft:detect
 
-				G result_ft9 = null;
+				G result_ft174 = null;
 
-				G elem_ft9 = null;
+				G elem_ft174 = null;
 
-				result_ft9 = null;
+				result_ft174 = null;
 
 				{
 
-					kermeta.standard.Iterator<G> it_ft9 = this.iterator();
-					java.lang.Boolean idLoopCond_36 = false;
-					while (!idLoopCond_36) {
-						idLoopCond_36 = kermeta.standard.helper.BooleanWrapper
+					kermeta.standard.Iterator<G> it_ft174 = this.iterator();
+					java.lang.Boolean idLoopCond_737 = false;
+					while (!idLoopCond_737) {
+						idLoopCond_737 = kermeta.standard.helper.BooleanWrapper
 								.or(
-										it_ft9.isOff(),
+										it_ft174.isOff(),
 										org.kermeta.compil.runtime.helper.language.ObjectUtil
-												.isNotEqual(result_ft9, null));
-						if (idLoopCond_36) {
+												.isNotEqual(result_ft174, null));
+						if (idLoopCond_737) {
 						} else {
 
-							elem_ft9 = it_ft9.next();
+							elem_ft174 = it_ft174.next();
 
-							java.lang.Boolean idIfCond_37 = false;
+							java.lang.Boolean idIfCond_738 = false;
 							//BIle:detector
-							G e_lbdExp9 = elem_ft9;
+							G e_lbdExp174 = elem_ft174;
 
-							idIfCond_37 = org.kermeta.compil.runtime.helper.language.ObjectUtil
-									.equals(e_lbdExp9, element);
+							idIfCond_738 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+									.equals(e_lbdExp174, element);
 							//EIle:detector
 
-							if (idIfCond_37) {
+							if (idIfCond_738) {
 
-								result_ft9 = elem_ft9;
+								result_ft174 = elem_ft174;
 							}
 
 						}
@@ -193,7 +193,7 @@ public abstract class CollectionImpl<G> extends ObjectImpl implements
 				}
 
 				//CE
-				elem = result_ft9;
+				elem = result_ft174;
 				//EIft:detect
 
 			}
@@ -212,35 +212,35 @@ public abstract class CollectionImpl<G> extends ObjectImpl implements
 
 		//BIft:select
 
-		kermeta.standard.Sequence<G> result_ft10 = null;
+		kermeta.standard.Sequence<G> result_ft175 = null;
 
-		G elem_ft10 = null;
+		G elem_ft175 = null;
 
-		result_ft10 = ((kermeta.standard.Sequence<G>) org.kermeta.compil.runtime.helper.language.ClassUtil
+		result_ft175 = ((kermeta.standard.Sequence<G>) org.kermeta.compil.runtime.helper.language.ClassUtil
 				.newObject("kermeta.standard.Sequence<G>"));
 
 		{
 
-			kermeta.standard.Iterator<G> it_ft10 = this.iterator();
-			java.lang.Boolean idLoopCond_38 = false;
-			while (!idLoopCond_38) {
-				idLoopCond_38 = it_ft10.isOff();
-				if (idLoopCond_38) {
+			kermeta.standard.Iterator<G> it_ft175 = this.iterator();
+			java.lang.Boolean idLoopCond_739 = false;
+			while (!idLoopCond_739) {
+				idLoopCond_739 = it_ft175.isOff();
+				if (idLoopCond_739) {
 				} else {
 
-					elem_ft10 = it_ft10.next();
+					elem_ft175 = it_ft175.next();
 
-					java.lang.Boolean idIfCond_39 = false;
+					java.lang.Boolean idIfCond_740 = false;
 					//BIle:selector
-					G e_lbdExp10 = elem_ft10;
+					G e_lbdExp175 = elem_ft175;
 
-					idIfCond_39 = org.kermeta.compil.runtime.helper.language.ObjectUtil
-							.equals(e_lbdExp10, element);
+					idIfCond_740 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+							.equals(e_lbdExp175, element);
 					//EIle:selector
 
-					if (idIfCond_39) {
+					if (idIfCond_740) {
 
-						result_ft10.add(elem_ft10);
+						result_ft175.add(elem_ft175);
 					}
 
 				}
@@ -248,7 +248,7 @@ public abstract class CollectionImpl<G> extends ObjectImpl implements
 		}
 
 		//EIft:select
-		result = result_ft10.size();
+		result = result_ft175.size();
 
 		return result;
 
@@ -279,11 +279,11 @@ public abstract class CollectionImpl<G> extends ObjectImpl implements
 
 		G result = null;
 
-		java.lang.Boolean idIfCond_40 = false;
-		idIfCond_40 = kermeta.standard.helper.IntegerWrapper.equals(
-				this.size(), 0);
+		java.lang.Boolean idIfCond_741 = false;
+		idIfCond_741 = kermeta.standard.helper.IntegerWrapper.equals(this
+				.size(), 0);
 
-		if (idIfCond_40) {
+		if (idIfCond_741) {
 
 			result = null;
 		} else {
@@ -311,12 +311,12 @@ public abstract class CollectionImpl<G> extends ObjectImpl implements
 		{
 
 			kermeta.standard.Iterator<G> it = elements.iterator();
-			java.lang.Boolean idLoopCond_41 = false;
-			while (!idLoopCond_41) {
-				idLoopCond_41 = kermeta.standard.helper.BooleanWrapper.or(it
+			java.lang.Boolean idLoopCond_742 = false;
+			while (!idLoopCond_742) {
+				idLoopCond_742 = kermeta.standard.helper.BooleanWrapper.or(it
 						.isOff(), kermeta.standard.helper.BooleanWrapper
 						.not(result));
-				if (idLoopCond_41) {
+				if (idLoopCond_742) {
 				} else {
 
 					result = this.contains(it.next());
@@ -349,35 +349,35 @@ public abstract class CollectionImpl<G> extends ObjectImpl implements
 
 		result = null;
 
-		java.lang.Boolean idIfCond_42 = false;
-		idIfCond_42 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+		java.lang.Boolean idIfCond_743 = false;
+		idIfCond_743 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 				.isNotEqual(tmp, null);
 
-		if (idIfCond_42) {
+		if (idIfCond_743) {
 
 			//BIft:each
 
 			{
 
-				kermeta.standard.Iterator<G> it_ft11 = this.iterator();
-				java.lang.Boolean idLoopCond_43 = false;
-				while (!idLoopCond_43) {
-					idLoopCond_43 = it_ft11.isOff();
-					if (idLoopCond_43) {
+				kermeta.standard.Iterator<G> it_ft176 = this.iterator();
+				java.lang.Boolean idLoopCond_744 = false;
+				while (!idLoopCond_744) {
+					idLoopCond_744 = it_ft176.isOff();
+					if (idLoopCond_744) {
 					} else {
 
 						//BIle:func
-						G elem_lbdExp11 = it_ft11.next();
+						G elem_lbdExp176 = it_ft176.next();
 
-						o = elem_lbdExp11;
+						o = elem_lbdExp176;
 
 						tmp = (kermeta.standard.Summable<G>) o;
 
-						java.lang.Boolean idIfCond_44 = false;
-						idIfCond_44 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+						java.lang.Boolean idIfCond_745 = false;
+						idIfCond_745 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 								.isNotEqual(tmp, null);
 
-						if (idIfCond_44) {
+						if (idIfCond_745) {
 
 							res = tmp.plus(res);
 						}
@@ -412,47 +412,15 @@ public abstract class CollectionImpl<G> extends ObjectImpl implements
 		{
 
 			kermeta.standard.Iterator<G> it = this.iterator();
-			java.lang.Boolean idLoopCond_45 = false;
-			while (!idLoopCond_45) {
-				idLoopCond_45 = kermeta.standard.helper.BooleanWrapper.or(it
+			java.lang.Boolean idLoopCond_746 = false;
+			while (!idLoopCond_746) {
+				idLoopCond_746 = kermeta.standard.helper.BooleanWrapper.or(it
 						.isOff(), result);
-				if (idLoopCond_45) {
+				if (idLoopCond_746) {
 				} else {
 
 					result = org.kermeta.compil.runtime.helper.language.ObjectUtil
 							.equals(it.next(), element);
-				}
-			}
-		}
-
-		return result;
-
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Boolean excludesAll(Collection<G> elements) {
-
-		java.lang.Boolean result = null;
-
-		result = true;
-
-		{
-
-			kermeta.standard.Iterator<G> it = elements.iterator();
-			java.lang.Boolean idLoopCond_46 = false;
-			while (!idLoopCond_46) {
-				idLoopCond_46 = kermeta.standard.helper.BooleanWrapper.or(it
-						.isOff(), kermeta.standard.helper.BooleanWrapper
-						.not(result));
-				if (idLoopCond_46) {
-				} else {
-
-					result = kermeta.standard.helper.BooleanWrapper.not(this
-							.contains(it.next()));
 				}
 			}
 		}
@@ -505,6 +473,38 @@ public abstract class CollectionImpl<G> extends ObjectImpl implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public Boolean excludesAll(Collection<G> elements) {
+
+		java.lang.Boolean result = null;
+
+		result = true;
+
+		{
+
+			kermeta.standard.Iterator<G> it = elements.iterator();
+			java.lang.Boolean idLoopCond_747 = false;
+			while (!idLoopCond_747) {
+				idLoopCond_747 = kermeta.standard.helper.BooleanWrapper.or(it
+						.isOff(), kermeta.standard.helper.BooleanWrapper
+						.not(result));
+				if (idLoopCond_747) {
+				} else {
+
+					result = kermeta.standard.helper.BooleanWrapper.not(this
+							.contains(it.next()));
+				}
+			}
+		}
+
+		return result;
+
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public void clear() {
 
 		org.kermeta.compil.runtime.helper.basetypes.CollectionUtil.clear(this);
@@ -547,11 +547,11 @@ public abstract class CollectionImpl<G> extends ObjectImpl implements
 
 		G result = null;
 
-		java.lang.Boolean idIfCond_47 = false;
-		idIfCond_47 = kermeta.standard.helper.IntegerWrapper.equals(
-				this.size(), 0);
+		java.lang.Boolean idIfCond_748 = false;
+		idIfCond_748 = kermeta.standard.helper.IntegerWrapper.equals(this
+				.size(), 0);
 
-		if (idIfCond_47) {
+		if (idIfCond_748) {
 
 			if (true)
 				throw new org.kermeta.compil.runtime.helper.error.KRuntimeError(
@@ -628,17 +628,17 @@ public abstract class CollectionImpl<G> extends ObjectImpl implements
 
 		{
 
-			kermeta.standard.Iterator<G> it_ft12 = elements.iterator();
-			java.lang.Boolean idLoopCond_48 = false;
-			while (!idLoopCond_48) {
-				idLoopCond_48 = it_ft12.isOff();
-				if (idLoopCond_48) {
+			kermeta.standard.Iterator<G> it_ft177 = elements.iterator();
+			java.lang.Boolean idLoopCond_749 = false;
+			while (!idLoopCond_749) {
+				idLoopCond_749 = it_ft177.isOff();
+				if (idLoopCond_749) {
 				} else {
 
 					//BIle:func
-					G element_lbdExp12 = it_ft12.next();
+					G element_lbdExp177 = it_ft177.next();
 
-					this.add(element_lbdExp12);
+					this.add(element_lbdExp177);
 					//EIle:func
 
 				}

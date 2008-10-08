@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ETypedElement.java,v 1.4 2008-09-22 14:44:19 cfaucher Exp $
+ * $Id: ETypedElement.java,v 1.5 2008-10-08 14:37:50 cfaucher Exp $
  */
 package ecore;
 
@@ -56,7 +56,7 @@ public interface ETypedElement extends ENamedElement {
 
 	/**
 	 * Returns the value of the '<em><b>Unique</b></em>' attribute.
-	 * The default value is <code>"false"</code>.
+	 * The default value is <code>"true"</code>.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Unique</em>' attribute isn't clear,
@@ -66,7 +66,7 @@ public interface ETypedElement extends ENamedElement {
 	 * @return the value of the '<em>Unique</em>' attribute.
 	 * @see #setUnique(boolean)
 	 * @see ecore.EcorePackage#getETypedElement_Unique()
-	 * @model default="false" dataType="ecore.EBoolean"
+	 * @model default="true" dataType="ecore.EBoolean"
 	 * @generated
 	 */
 	boolean isUnique();
@@ -109,7 +109,7 @@ public interface ETypedElement extends ENamedElement {
 
 	/**
 	 * Returns the value of the '<em><b>Ordered</b></em>' attribute.
-	 * The default value is <code>"false"</code>.
+	 * The default value is <code>"true"</code>.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Ordered</em>' attribute isn't clear,
@@ -119,7 +119,7 @@ public interface ETypedElement extends ENamedElement {
 	 * @return the value of the '<em>Ordered</em>' attribute.
 	 * @see #setOrdered(boolean)
 	 * @see ecore.EcorePackage#getETypedElement_Ordered()
-	 * @model default="false" dataType="ecore.EBoolean"
+	 * @model default="true" dataType="ecore.EBoolean"
 	 * @generated
 	 */
 	boolean isOrdered();
@@ -136,6 +136,7 @@ public interface ETypedElement extends ENamedElement {
 
 	/**
 	 * Returns the value of the '<em><b>Upper Bound</b></em>' attribute.
+	 * The default value is <code>"1"</code>.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Upper Bound</em>' attribute isn't clear,
@@ -145,7 +146,7 @@ public interface ETypedElement extends ENamedElement {
 	 * @return the value of the '<em>Upper Bound</em>' attribute.
 	 * @see #setUpperBound(int)
 	 * @see ecore.EcorePackage#getETypedElement_UpperBound()
-	 * @model dataType="ecore.EInt"
+	 * @model default="1" dataType="ecore.EInt"
 	 * @generated
 	 */
 	int getUpperBound();

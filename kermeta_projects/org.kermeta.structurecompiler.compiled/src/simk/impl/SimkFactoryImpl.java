@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: SimkFactoryImpl.java,v 1.3 2008-09-22 14:48:57 cfaucher Exp $
+ * $Id: SimkFactoryImpl.java,v 1.4 2008-10-08 14:37:33 cfaucher Exp $
  */
 package simk.impl;
 
@@ -65,8 +65,8 @@ public class SimkFactoryImpl extends EFactoryImpl implements SimkFactory {
 			return createSIMKModel();
 		case SimkPackage.SM_CLASS:
 			return createSMClass();
-		case SimkPackage.STATIC_METHOD:
-			return createStaticMethod();
+		case SimkPackage.SM_METHOD:
+			return createSMMethod();
 		case SimkPackage.SM_CONTEXT:
 			return createSMContext();
 		case SimkPackage.SM_PARAMETER:
@@ -89,6 +89,8 @@ public class SimkFactoryImpl extends EFactoryImpl implements SimkFactory {
 		switch (eDataType.getClassifierID()) {
 		case SimkPackage.SM_USAGE:
 			return createSMUsageFromString(eDataType, initialValue);
+		case SimkPackage.SM_ACCESS:
+			return createSMAccessFromString(eDataType, initialValue);
 		default:
 			throw new IllegalArgumentException("The datatype '"
 					+ eDataType.getName() + "' is not a valid classifier");
@@ -105,6 +107,8 @@ public class SimkFactoryImpl extends EFactoryImpl implements SimkFactory {
 		switch (eDataType.getClassifierID()) {
 		case SimkPackage.SM_USAGE:
 			return convertSMUsageToString(eDataType, instanceValue);
+		case SimkPackage.SM_ACCESS:
+			return convertSMAccessToString(eDataType, instanceValue);
 		default:
 			throw new IllegalArgumentException("The datatype '"
 					+ eDataType.getName() + "' is not a valid classifier");
@@ -136,9 +140,9 @@ public class SimkFactoryImpl extends EFactoryImpl implements SimkFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public StaticMethod createStaticMethod() {
-		StaticMethodImpl staticMethod = new StaticMethodImpl();
-		return staticMethod;
+	public SMMethod createSMMethod() {
+		SMMethodImpl smMethod = new SMMethodImpl();
+		return smMethod;
 	}
 
 	/**
@@ -192,6 +196,31 @@ public class SimkFactoryImpl extends EFactoryImpl implements SimkFactory {
 	 * @generated
 	 */
 	public String convertSMUsageToString(EDataType eDataType,
+			Object instanceValue) {
+		return instanceValue == null ? null : instanceValue.toString();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public SMAccess createSMAccessFromString(EDataType eDataType,
+			String initialValue) {
+		SMAccess result = SMAccess.get(initialValue);
+		if (result == null)
+			throw new IllegalArgumentException("The value '" + initialValue
+					+ "' is not a valid enumerator of '" + eDataType.getName()
+					+ "'");
+		return result;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String convertSMAccessToString(EDataType eDataType,
 			Object instanceValue) {
 		return instanceValue == null ? null : instanceValue.toString();
 	}

@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: SimkAdapterFactory.java,v 1.3 2008-09-22 14:49:13 cfaucher Exp $
+ * $Id: SimkAdapterFactory.java,v 1.4 2008-10-08 14:37:51 cfaucher Exp $
  */
 package simk.util;
 
@@ -81,8 +81,8 @@ public class SimkAdapterFactory extends AdapterFactoryImpl {
 		}
 
 		@Override
-		public Adapter caseStaticMethod(StaticMethod object) {
-			return createStaticMethodAdapter();
+		public Adapter caseSMMethod(SMMethod object) {
+			return createSMMethodAdapter();
 		}
 
 		@Override
@@ -163,16 +163,16 @@ public class SimkAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link simk.StaticMethod <em>Static Method</em>}'.
+	 * Creates a new adapter for an object of class '{@link simk.SMMethod <em>SM Method</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see simk.StaticMethod
+	 * @see simk.SMMethod
 	 * @generated
 	 */
-	public Adapter createStaticMethodAdapter() {
+	public Adapter createSMMethodAdapter() {
 		return null;
 	}
 

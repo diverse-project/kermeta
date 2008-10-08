@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: JavaStaticCallImpl.java,v 1.3 2008-09-22 14:46:52 cfaucher Exp $
+ * $Id: JavaStaticCallImpl.java,v 1.4 2008-10-08 14:37:39 cfaucher Exp $
  */
 package kermeta.language.behavior.impl;
 
@@ -35,8 +35,8 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * The following features are implemented:
  * <ul>
  *   <li>{@link kermeta.language.behavior.impl.JavaStaticCallImpl#getJmethod <em>Jmethod</em>}</li>
- *   <li>{@link kermeta.language.behavior.impl.JavaStaticCallImpl#getJclass <em>Jclass</em>}</li>
  *   <li>{@link kermeta.language.behavior.impl.JavaStaticCallImpl#getParameters <em>Parameters</em>}</li>
+ *   <li>{@link kermeta.language.behavior.impl.JavaStaticCallImpl#getJclass <em>Jclass</em>}</li>
  * </ul>
  * </p>
  *
@@ -65,6 +65,16 @@ public class JavaStaticCallImpl extends ExpressionImpl implements
 	protected String jmethod = JMETHOD_EDEFAULT;
 
 	/**
+	 * The cached value of the '{@link #getParameters() <em>Parameters</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getParameters()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<Expression> parameters;
+
+	/**
 	 * The default value of the '{@link #getJclass() <em>Jclass</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -83,16 +93,6 @@ public class JavaStaticCallImpl extends ExpressionImpl implements
 	 * @ordered
 	 */
 	protected String jclass = JCLASS_EDEFAULT;
-
-	/**
-	 * The cached value of the '{@link #getParameters() <em>Parameters</em>}' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getParameters()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<Expression> parameters;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -141,6 +141,20 @@ public class JavaStaticCallImpl extends ExpressionImpl implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<Expression> getParameters() {
+		if (parameters == null) {
+			parameters = new EObjectContainmentEList.Resolving<Expression>(
+					Expression.class, this,
+					BehaviorPackage.JAVA_STATIC_CALL__PARAMETERS);
+		}
+		return parameters;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public String getJclass() {
 		return jclass;
 	}
@@ -163,39 +177,62 @@ public class JavaStaticCallImpl extends ExpressionImpl implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<Expression> getParameters() {
-		if (parameters == null) {
-			parameters = new EObjectContainmentEList.Resolving<Expression>(
-					Expression.class, this,
-					BehaviorPackage.JAVA_STATIC_CALL__PARAMETERS);
-		}
-		return parameters;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public String createBehaviorJava(KM2EcoreContext context) {
 
 		java.lang.String result = null;
 
 		super.createBehaviorJava(context);
 
-		java.lang.Boolean idIfCond_458 = false;
-		idIfCond_458 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+		java.lang.Boolean idIfCond_697 = false;
+		idIfCond_697 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 				.isNotEqual(context.getCompiledJavaExtern(), "");
 
-		if (idIfCond_458) {
+		if (idIfCond_697) {
+
+			java.lang.Boolean idIfCond_698 = false;
+			idIfCond_698 = kermeta.standard.helper.IntegerWrapper.isLower(
+					kermeta.standard.helper.StringWrapper.split(
+							kermeta.standard.helper.StringWrapper.replace(
+									context.getCompiledJavaExtern(), "(", "%"),
+							"%").size(), 2);
+
+			if (idIfCond_698) {
+
+				context
+						.setCompiledJavaExtern(kermeta.standard.helper.StringWrapper
+								.plus(
+										kermeta.standard.helper.StringWrapper
+												.plus(
+														kermeta.standard.helper.StringWrapper
+																.plus(
+																		context
+																				.getCompiledJavaExtern(),
+																		"("),
+														((km2ecore.helper.kermeta.CompilerHelperJava) org.kermeta.compil.runtime.helper.language.ClassUtil
+																.newObject("km2ecore.helper.kermeta.CompilerHelperJava"))
+																.ppComaSeparatedNodes(
+																		org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
+																				.<kermeta.language.behavior.Expression> convertAsOrderedSet(this
+																						.getParameters()),
+																		context)),
+										")"));
+			}
+
+		}
+
+		java.lang.Boolean idIfCond_699 = false;
+		idIfCond_699 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+				.isNotEqual(context.getCompiledJavaExtern(), "");
+
+		if (idIfCond_699) {
 
 			result = context.getCompiledJavaExtern();
 
 			context.setCompiledJavaExtern("");
 		} else {
 
-			java.lang.Boolean idIfCond_459 = false;
-			idIfCond_459 = ((kermeta.language.structure.ClassDefinition) org.kermeta.compil.runtime.helper.language.ObjectUtil
+			java.lang.Boolean idIfCond_700 = false;
+			idIfCond_700 = ((kermeta.language.structure.ClassDefinition) org.kermeta.compil.runtime.helper.language.ObjectUtil
 					.asType(
 							this
 									.getContainerAsType(org.kermeta.compil.runtime.ExecutionContext
@@ -208,7 +245,7 @@ public class JavaStaticCallImpl extends ExpressionImpl implements
 											"kermeta.language.structure.ClassDefinition")))
 					.isValueType();
 
-			if (idIfCond_459) {
+			if (idIfCond_700) {
 
 				result = kermeta.standard.helper.StringWrapper
 						.plus(
@@ -299,10 +336,10 @@ public class JavaStaticCallImpl extends ExpressionImpl implements
 		switch (featureID) {
 		case BehaviorPackage.JAVA_STATIC_CALL__JMETHOD:
 			return getJmethod();
-		case BehaviorPackage.JAVA_STATIC_CALL__JCLASS:
-			return getJclass();
 		case BehaviorPackage.JAVA_STATIC_CALL__PARAMETERS:
 			return getParameters();
+		case BehaviorPackage.JAVA_STATIC_CALL__JCLASS:
+			return getJclass();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -319,12 +356,12 @@ public class JavaStaticCallImpl extends ExpressionImpl implements
 		case BehaviorPackage.JAVA_STATIC_CALL__JMETHOD:
 			setJmethod((String) newValue);
 			return;
-		case BehaviorPackage.JAVA_STATIC_CALL__JCLASS:
-			setJclass((String) newValue);
-			return;
 		case BehaviorPackage.JAVA_STATIC_CALL__PARAMETERS:
 			getParameters().clear();
 			getParameters().addAll((Collection<? extends Expression>) newValue);
+			return;
+		case BehaviorPackage.JAVA_STATIC_CALL__JCLASS:
+			setJclass((String) newValue);
 			return;
 		}
 		super.eSet(featureID, newValue);
@@ -341,11 +378,11 @@ public class JavaStaticCallImpl extends ExpressionImpl implements
 		case BehaviorPackage.JAVA_STATIC_CALL__JMETHOD:
 			setJmethod(JMETHOD_EDEFAULT);
 			return;
-		case BehaviorPackage.JAVA_STATIC_CALL__JCLASS:
-			setJclass(JCLASS_EDEFAULT);
-			return;
 		case BehaviorPackage.JAVA_STATIC_CALL__PARAMETERS:
 			getParameters().clear();
+			return;
+		case BehaviorPackage.JAVA_STATIC_CALL__JCLASS:
+			setJclass(JCLASS_EDEFAULT);
 			return;
 		}
 		super.eUnset(featureID);
@@ -362,11 +399,11 @@ public class JavaStaticCallImpl extends ExpressionImpl implements
 		case BehaviorPackage.JAVA_STATIC_CALL__JMETHOD:
 			return JMETHOD_EDEFAULT == null ? jmethod != null
 					: !JMETHOD_EDEFAULT.equals(jmethod);
+		case BehaviorPackage.JAVA_STATIC_CALL__PARAMETERS:
+			return parameters != null && !parameters.isEmpty();
 		case BehaviorPackage.JAVA_STATIC_CALL__JCLASS:
 			return JCLASS_EDEFAULT == null ? jclass != null : !JCLASS_EDEFAULT
 					.equals(jclass);
-		case BehaviorPackage.JAVA_STATIC_CALL__PARAMETERS:
-			return parameters != null && !parameters.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

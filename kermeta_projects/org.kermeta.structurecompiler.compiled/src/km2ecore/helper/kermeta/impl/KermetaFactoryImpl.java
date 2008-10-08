@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: KermetaFactoryImpl.java,v 1.3 2008-09-22 14:49:02 cfaucher Exp $
+ * $Id: KermetaFactoryImpl.java,v 1.4 2008-10-08 14:37:31 cfaucher Exp $
  */
 package km2ecore.helper.kermeta.impl;
 
@@ -60,10 +60,10 @@ public class KermetaFactoryImpl extends EFactoryImpl implements KermetaFactory {
 	@Override
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
-		case KermetaPackage.CONSTRAINT_HELPER:
-			return createConstraintHelper();
 		case KermetaPackage.GENERIC_TYPE_DEFINITION_HELPER:
 			return createGenericTypeDefinitionHelper();
+		case KermetaPackage.CONSTRAINT_HELPER:
+			return createConstraintHelper();
 		case KermetaPackage.COMPILER_HELPER_JAVA:
 			return createCompilerHelperJava();
 		default:
@@ -77,9 +77,9 @@ public class KermetaFactoryImpl extends EFactoryImpl implements KermetaFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ConstraintHelper createConstraintHelper() {
-		ConstraintHelperImpl constraintHelper = new ConstraintHelperImpl();
-		return constraintHelper;
+	public GenericTypeDefinitionHelper createGenericTypeDefinitionHelper() {
+		GenericTypeDefinitionHelperImpl genericTypeDefinitionHelper = new GenericTypeDefinitionHelperImpl();
+		return genericTypeDefinitionHelper;
 	}
 
 	/**
@@ -87,9 +87,9 @@ public class KermetaFactoryImpl extends EFactoryImpl implements KermetaFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public GenericTypeDefinitionHelper createGenericTypeDefinitionHelper() {
-		GenericTypeDefinitionHelperImpl genericTypeDefinitionHelper = new GenericTypeDefinitionHelperImpl();
-		return genericTypeDefinitionHelper;
+	public ConstraintHelper createConstraintHelper() {
+		ConstraintHelperImpl constraintHelper = new ConstraintHelperImpl();
+		return constraintHelper;
 	}
 
 	/**

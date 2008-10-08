@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: IoPackage.java,v 1.3 2008-09-22 14:46:10 cfaucher Exp $
+ * $Id: IoPackage.java,v 1.4 2008-10-08 14:38:05 cfaucher Exp $
  */
 package kermeta.io;
 

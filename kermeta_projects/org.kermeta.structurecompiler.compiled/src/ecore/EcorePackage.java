@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: EcorePackage.java,v 1.3 2008-09-22 14:44:19 cfaucher Exp $
+ * $Id: EcorePackage.java,v 1.4 2008-10-08 14:37:50 cfaucher Exp $
  */
 package ecore;
 
@@ -1333,22 +1333,22 @@ public interface EcorePackage extends EPackage {
 	int ECLASS__INSTANCE_TYPE_NAME = ECLASSIFIER__INSTANCE_TYPE_NAME;
 
 	/**
-	 * The feature id for the '<em><b>EStructural Features</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ECLASS__ESTRUCTURAL_FEATURES = ECLASSIFIER_FEATURE_COUNT + 0;
-
-	/**
 	 * The feature id for the '<em><b>Abstract</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ECLASS__ABSTRACT = ECLASSIFIER_FEATURE_COUNT + 1;
+	int ECLASS__ABSTRACT = ECLASSIFIER_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>EStructural Features</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ECLASS__ESTRUCTURAL_FEATURES = ECLASSIFIER_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>EOperations</b></em>' containment reference list.
@@ -3443,17 +3443,6 @@ public interface EcorePackage extends EPackage {
 	EClass getEClass();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link ecore.EClass#getEStructuralFeatures <em>EStructural Features</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>EStructural Features</em>'.
-	 * @see ecore.EClass#getEStructuralFeatures()
-	 * @see #getEClass()
-	 * @generated
-	 */
-	EReference getEClass_EStructuralFeatures();
-
-	/**
 	 * Returns the meta object for the attribute '{@link ecore.EClass#isAbstract <em>Abstract</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3463,6 +3452,17 @@ public interface EcorePackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getEClass_Abstract();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link ecore.EClass#getEStructuralFeatures <em>EStructural Features</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>EStructural Features</em>'.
+	 * @see ecore.EClass#getEStructuralFeatures()
+	 * @see #getEClass()
+	 * @generated
+	 */
+	EReference getEClass_EStructuralFeatures();
 
 	/**
 	 * Returns the meta object for the containment reference list '{@link ecore.EClass#getEOperations <em>EOperations</em>}'.
@@ -4765,6 +4765,14 @@ public interface EcorePackage extends EPackage {
 		EClass ECLASS = eINSTANCE.getEClass();
 
 		/**
+		 * The meta object literal for the '<em><b>Abstract</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute ECLASS__ABSTRACT = eINSTANCE.getEClass_Abstract();
+
+		/**
 		 * The meta object literal for the '<em><b>EStructural Features</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -4772,14 +4780,6 @@ public interface EcorePackage extends EPackage {
 		 */
 		EReference ECLASS__ESTRUCTURAL_FEATURES = eINSTANCE
 				.getEClass_EStructuralFeatures();
-
-		/**
-		 * The meta object literal for the '<em><b>Abstract</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute ECLASS__ABSTRACT = eINSTANCE.getEClass_Abstract();
 
 		/**
 		 * The meta object literal for the '<em><b>EOperations</b></em>' containment reference list feature.

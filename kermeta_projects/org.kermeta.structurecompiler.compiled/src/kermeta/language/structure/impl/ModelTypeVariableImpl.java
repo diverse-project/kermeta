@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ModelTypeVariableImpl.java,v 1.3 2008-09-22 14:47:36 cfaucher Exp $
+ * $Id: ModelTypeVariableImpl.java,v 1.4 2008-10-08 14:37:29 cfaucher Exp $
  */
 package kermeta.language.structure.impl;
 

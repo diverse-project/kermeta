@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ParameterizedTypeImpl.java,v 1.3 2008-09-22 14:47:34 cfaucher Exp $
+ * $Id: ParameterizedTypeImpl.java,v 1.4 2008-10-08 14:37:28 cfaucher Exp $
  */
 package kermeta.language.structure.impl;
 
@@ -44,7 +44,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *
  * @generated
  */
-public abstract class ParameterizedTypeImpl extends TypeImpl implements
+public class ParameterizedTypeImpl extends TypeImpl implements
 		ParameterizedType {
 	/**
 	 * The cached value of the '{@link #getTypeParamBinding() <em>Type Param Binding</em>}' containment reference list.
@@ -176,12 +176,14 @@ public abstract class ParameterizedTypeImpl extends TypeImpl implements
 
 		java.lang.String result = null;
 
-		java.lang.Boolean idIfCond_726 = false;
-		idIfCond_726 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+		result = "";
+
+		java.lang.Boolean idIfCond_411 = false;
+		idIfCond_411 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 				.isNotEqual(this.getTypeDefinition().getEMFInstanceClassName(),
 						"");
 
-		if (idIfCond_726) {
+		if (idIfCond_411) {
 
 			result = this.getTypeDefinition().getEMFInstanceClassName();
 		} else {
@@ -194,79 +196,64 @@ public abstract class ParameterizedTypeImpl extends TypeImpl implements
 
 		java.lang.Integer i = 0;
 
-		java.lang.Integer i_ = 0;
-
 		//BIft:each
 
 		{
 
-			kermeta.standard.Iterator<kermeta.language.structure.TypeVariableBinding> it_ft153 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
+			kermeta.standard.Iterator<kermeta.language.structure.TypeVariableBinding> it_ft136 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
 					.<kermeta.language.structure.TypeVariableBinding> convertAsOrderedSet(
 							this.getTypeParamBinding()).iterator();
-			java.lang.Boolean idLoopCond_727 = false;
-			while (!idLoopCond_727) {
-				idLoopCond_727 = it_ft153.isOff();
-				if (idLoopCond_727) {
+			java.lang.Boolean idLoopCond_412 = false;
+			while (!idLoopCond_412) {
+				idLoopCond_412 = it_ft136.isOff();
+				if (idLoopCond_412) {
 				} else {
 
 					//BIle:func
-					kermeta.language.structure.TypeVariableBinding tpb_lbdExp153 = it_ft153
+					kermeta.language.structure.TypeVariableBinding tpb_lbdExp136 = it_ft136
 							.next();
 
-					java.lang.Boolean idIfCond_728 = false;
-					idIfCond_728 = kermeta.standard.helper.IntegerWrapper
-							.isGreaterOrEqual(i, 1);
-
-					if (idIfCond_728) {
-
-						str_tpb = kermeta.standard.helper.StringWrapper.plus(
-								str_tpb, ", ");
-					}
-
-					java.lang.Boolean idIfCond_729 = false;
-					idIfCond_729 = org.kermeta.compil.runtime.helper.language.ObjectUtil
-							.isVoid(tpb_lbdExp153.getType());
-
-					if (idIfCond_729) {
-
-						org.kermeta.compil.runtime.helper.io.StdIOUtil
-								.writeln(kermeta.standard.helper.StringWrapper
-										.plus(
-												"tpb.type.isVoid(): ",
-												org.kermeta.compil.runtime.helper.language.ObjectUtil
-														.toString(this)));
-					}
-
-					java.lang.Boolean idIfCond_730 = false;
-					idIfCond_730 = kermeta.standard.helper.BooleanWrapper
+					java.lang.Boolean idIfCond_413 = false;
+					idIfCond_413 = kermeta.standard.helper.BooleanWrapper
 							.not(context.getFtSuffixActivation());
 
-					if (idIfCond_730) {
+					if (idIfCond_413) {
 
-						java.lang.Boolean idIfCond_731 = false;
-						idIfCond_731 = kermeta.standard.helper.BooleanWrapper
-								.not(org.kermeta.compil.runtime.helper.language.ObjectUtil
-										.isVoid(tpb_lbdExp153.getType()));
+						java.lang.Boolean idIfCond_414 = false;
+						idIfCond_414 = kermeta.standard.helper.IntegerWrapper
+								.isGreaterOrEqual(i, 1);
 
-						if (idIfCond_731) {
+						if (idIfCond_414) {
 
 							str_tpb = kermeta.standard.helper.StringWrapper
-									.plus(str_tpb, tpb_lbdExp153.getType()
+									.plus(str_tpb, ", ");
+						}
+
+						java.lang.Boolean idIfCond_415 = false;
+						idIfCond_415 = kermeta.standard.helper.BooleanWrapper
+								.not(org.kermeta.compil.runtime.helper.language.ObjectUtil
+										.isVoid(tpb_lbdExp136.getType()));
+
+						if (idIfCond_415) {
+
+							str_tpb = kermeta.standard.helper.StringWrapper
+									.plus(str_tpb, tpb_lbdExp136.getType()
 											.createBehaviorJava(context));
+						} else {
 						}
 
 					} else {
 
 						kermeta.language.structure.Type type_from_map = context
 								.getFtMapTypeStack().peek().getValue(
-										tpb_lbdExp153.getType());
+										tpb_lbdExp136.getType());
 
-						java.lang.Boolean idIfCond_732 = false;
-						idIfCond_732 = kermeta.standard.helper.BooleanWrapper
+						java.lang.Boolean idIfCond_416 = false;
+						idIfCond_416 = kermeta.standard.helper.BooleanWrapper
 								.not(org.kermeta.compil.runtime.helper.language.ObjectUtil
 										.isVoid(type_from_map));
 
-						if (idIfCond_732) {
+						if (idIfCond_416) {
 
 							context.setFtSuffixActivation(false);
 
@@ -276,6 +263,16 @@ public abstract class ParameterizedTypeImpl extends TypeImpl implements
 
 							context.setFtSuffixActivation(true);
 						} else {
+
+							java.lang.Boolean idIfCond_417 = false;
+							idIfCond_417 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+									.equals(context.getFtProductTypeStack()
+											.peek().getTypeByIndex(i), this);
+
+							if (idIfCond_417) {
+
+								result = "";
+							}
 
 							context.setFtSuffixActivation(false);
 
@@ -299,19 +296,28 @@ public abstract class ParameterizedTypeImpl extends TypeImpl implements
 
 		//EIft:each
 
-		java.lang.Boolean idIfCond_733 = false;
-		idIfCond_733 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+		java.lang.Boolean idIfCond_418 = false;
+		idIfCond_418 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 				.isNotEqual(str_tpb, "");
 
-		if (idIfCond_733) {
+		if (idIfCond_418) {
 
-			result = kermeta.standard.helper.StringWrapper.plus(
-					kermeta.standard.helper.StringWrapper.plus(
-							kermeta.standard.helper.StringWrapper.plus(result,
-									"<"), str_tpb), ">");
+			java.lang.Boolean idIfCond_419 = false;
+			idIfCond_419 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+					.isNotEqual(result, "");
+
+			if (idIfCond_419) {
+
+				result = kermeta.standard.helper.StringWrapper.plus(
+						kermeta.standard.helper.StringWrapper.plus(
+								kermeta.standard.helper.StringWrapper.plus(
+										result, "<"), str_tpb), ">");
+			} else {
+
+				result = str_tpb;
+			}
+
 		}
-
-		result = kermeta.standard.helper.StringWrapper.plus(result, "");
 
 		return result;
 
@@ -328,8 +334,8 @@ public abstract class ParameterizedTypeImpl extends TypeImpl implements
 
 		result = null;
 
-		java.lang.Boolean idIfCond_734 = false;
-		idIfCond_734 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+		java.lang.Boolean idIfCond_420 = false;
+		idIfCond_420 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 				.isInstanceOf(
 						this.getTypeDefinition(),
 						org.kermeta.compil.runtime.ExecutionContext
@@ -337,7 +343,7 @@ public abstract class ParameterizedTypeImpl extends TypeImpl implements
 								.getMetaClass(
 										"kermeta.language.structure.ClassDefinition"));
 
-		if (idIfCond_734) {
+		if (idIfCond_420) {
 
 			result = ((kermeta.language.structure.ClassDefinition) org.kermeta.compil.runtime.helper.language.ObjectUtil
 					.asType(

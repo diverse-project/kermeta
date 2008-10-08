@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: SimkPackage.java,v 1.3 2008-09-22 14:49:06 cfaucher Exp $
+ * $Id: SimkPackage.java,v 1.4 2008-10-08 14:37:58 cfaucher Exp $
  */
 package simk;
 
@@ -246,13 +246,13 @@ public interface SimkPackage extends EPackage {
 	int SIMK_MODEL__SM_CONTEXTS = SM_NAMED_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
-	 * The feature id for the '<em><b>Static Methods</b></em>' containment reference list.
+	 * The feature id for the '<em><b>SM Methods</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int SIMK_MODEL__STATIC_METHODS = SM_NAMED_ELEMENT_FEATURE_COUNT + 1;
+	int SIMK_MODEL__SM_METHODS = SM_NAMED_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
 	 * The number of structural features of the '<em>SIMK Model</em>' class.
@@ -373,14 +373,14 @@ public interface SimkPackage extends EPackage {
 	int SM_CLASS_FEATURE_COUNT = SM_NAMED_ELEMENT_FEATURE_COUNT + 2;
 
 	/**
-	 * The meta object id for the '{@link simk.impl.StaticMethodImpl <em>Static Method</em>}' class.
+	 * The meta object id for the '{@link simk.impl.SMMethodImpl <em>SM Method</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see simk.impl.StaticMethodImpl
-	 * @see simk.impl.SimkPackageImpl#getStaticMethod()
+	 * @see simk.impl.SMMethodImpl
+	 * @see simk.impl.SimkPackageImpl#getSMMethod()
 	 * @generated
 	 */
-	int STATIC_METHOD = 2;
+	int SM_METHOD = 2;
 
 	/**
 	 * The feature id for the '<em><b>File</b></em>' reference.
@@ -389,7 +389,7 @@ public interface SimkPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int STATIC_METHOD__FILE = SM_NAMED_ELEMENT__FILE;
+	int SM_METHOD__FILE = SM_NAMED_ELEMENT__FILE;
 
 	/**
 	 * The feature id for the '<em><b>Tag</b></em>' reference list.
@@ -398,7 +398,7 @@ public interface SimkPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int STATIC_METHOD__TAG = SM_NAMED_ELEMENT__TAG;
+	int SM_METHOD__TAG = SM_NAMED_ELEMENT__TAG;
 
 	/**
 	 * The feature id for the '<em><b>File Name</b></em>' attribute.
@@ -407,7 +407,7 @@ public interface SimkPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int STATIC_METHOD__FILE_NAME = SM_NAMED_ELEMENT__FILE_NAME;
+	int SM_METHOD__FILE_NAME = SM_NAMED_ELEMENT__FILE_NAME;
 
 	/**
 	 * The feature id for the '<em><b>Line Number</b></em>' attribute.
@@ -416,7 +416,7 @@ public interface SimkPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int STATIC_METHOD__LINE_NUMBER = SM_NAMED_ELEMENT__LINE_NUMBER;
+	int SM_METHOD__LINE_NUMBER = SM_NAMED_ELEMENT__LINE_NUMBER;
 
 	/**
 	 * The feature id for the '<em><b>Owned Tags</b></em>' containment reference list.
@@ -425,7 +425,7 @@ public interface SimkPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int STATIC_METHOD__OWNED_TAGS = SM_NAMED_ELEMENT__OWNED_TAGS;
+	int SM_METHOD__OWNED_TAGS = SM_NAMED_ELEMENT__OWNED_TAGS;
 
 	/**
 	 * The feature id for the '<em><b>Oid</b></em>' attribute.
@@ -434,7 +434,7 @@ public interface SimkPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int STATIC_METHOD__OID = SM_NAMED_ELEMENT__OID;
+	int SM_METHOD__OID = SM_NAMED_ELEMENT__OID;
 
 	/**
 	 * The feature id for the '<em><b>Container</b></em>' reference.
@@ -443,7 +443,7 @@ public interface SimkPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int STATIC_METHOD__CONTAINER = SM_NAMED_ELEMENT__CONTAINER;
+	int SM_METHOD__CONTAINER = SM_NAMED_ELEMENT__CONTAINER;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -452,7 +452,16 @@ public interface SimkPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int STATIC_METHOD__NAME = SM_NAMED_ELEMENT__NAME;
+	int SM_METHOD__NAME = SM_NAMED_ELEMENT__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Abstract</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SM_METHOD__ABSTRACT = SM_NAMED_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Body</b></em>' attribute.
@@ -461,7 +470,25 @@ public interface SimkPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int STATIC_METHOD__BODY = SM_NAMED_ELEMENT_FEATURE_COUNT + 0;
+	int SM_METHOD__BODY = SM_NAMED_ELEMENT_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Parent EReference</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SM_METHOD__PARENT_EREFERENCE = SM_NAMED_ELEMENT_FEATURE_COUNT + 2;
+
+	/**
+	 * The feature id for the '<em><b>Static</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SM_METHOD__STATIC = SM_NAMED_ELEMENT_FEATURE_COUNT + 3;
 
 	/**
 	 * The feature id for the '<em><b>Type Parameters</b></em>' attribute.
@@ -470,16 +497,25 @@ public interface SimkPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int STATIC_METHOD__TYPE_PARAMETERS = SM_NAMED_ELEMENT_FEATURE_COUNT + 1;
+	int SM_METHOD__TYPE_PARAMETERS = SM_NAMED_ELEMENT_FEATURE_COUNT + 4;
 
 	/**
-	 * The feature id for the '<em><b>Parent Attribute</b></em>' reference.
+	 * The feature id for the '<em><b>Parent EOperation</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int STATIC_METHOD__PARENT_ATTRIBUTE = SM_NAMED_ELEMENT_FEATURE_COUNT + 2;
+	int SM_METHOD__PARENT_EOPERATION = SM_NAMED_ELEMENT_FEATURE_COUNT + 5;
+
+	/**
+	 * The feature id for the '<em><b>Parent EAttribute</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SM_METHOD__PARENT_EATTRIBUTE = SM_NAMED_ELEMENT_FEATURE_COUNT + 6;
 
 	/**
 	 * The feature id for the '<em><b>SM Parameters</b></em>' containment reference list.
@@ -488,7 +524,7 @@ public interface SimkPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int STATIC_METHOD__SM_PARAMETERS = SM_NAMED_ELEMENT_FEATURE_COUNT + 3;
+	int SM_METHOD__SM_PARAMETERS = SM_NAMED_ELEMENT_FEATURE_COUNT + 7;
 
 	/**
 	 * The feature id for the '<em><b>SM Return</b></em>' containment reference.
@@ -497,7 +533,7 @@ public interface SimkPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int STATIC_METHOD__SM_RETURN = SM_NAMED_ELEMENT_FEATURE_COUNT + 4;
+	int SM_METHOD__SM_RETURN = SM_NAMED_ELEMENT_FEATURE_COUNT + 8;
 
 	/**
 	 * The feature id for the '<em><b>Usages</b></em>' attribute.
@@ -506,16 +542,7 @@ public interface SimkPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int STATIC_METHOD__USAGES = SM_NAMED_ELEMENT_FEATURE_COUNT + 5;
-
-	/**
-	 * The feature id for the '<em><b>Parent Method</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int STATIC_METHOD__PARENT_METHOD = SM_NAMED_ELEMENT_FEATURE_COUNT + 6;
+	int SM_METHOD__USAGES = SM_NAMED_ELEMENT_FEATURE_COUNT + 9;
 
 	/**
 	 * The feature id for the '<em><b>SM Context</b></em>' reference.
@@ -524,25 +551,25 @@ public interface SimkPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int STATIC_METHOD__SM_CONTEXT = SM_NAMED_ELEMENT_FEATURE_COUNT + 7;
+	int SM_METHOD__SM_CONTEXT = SM_NAMED_ELEMENT_FEATURE_COUNT + 10;
 
 	/**
-	 * The feature id for the '<em><b>Parent Reference</b></em>' reference.
+	 * The feature id for the '<em><b>Access</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int STATIC_METHOD__PARENT_REFERENCE = SM_NAMED_ELEMENT_FEATURE_COUNT + 8;
+	int SM_METHOD__ACCESS = SM_NAMED_ELEMENT_FEATURE_COUNT + 11;
 
 	/**
-	 * The number of structural features of the '<em>Static Method</em>' class.
+	 * The number of structural features of the '<em>SM Method</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int STATIC_METHOD_FEATURE_COUNT = SM_NAMED_ELEMENT_FEATURE_COUNT + 9;
+	int SM_METHOD_FEATURE_COUNT = SM_NAMED_ELEMENT_FEATURE_COUNT + 12;
 
 	/**
 	 * The meta object id for the '{@link simk.impl.SMContextImpl <em>SM Context</em>}' class.
@@ -618,31 +645,31 @@ public interface SimkPackage extends EPackage {
 	int SM_CONTEXT__CONTAINER = StructurePackage.OBJECT__CONTAINER;
 
 	/**
-	 * The feature id for the '<em><b>Qualified Name Final Package</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SM_CONTEXT__QUALIFIED_NAME_FINAL_PACKAGE = StructurePackage.OBJECT_FEATURE_COUNT + 0;
-
-	/**
-	 * The feature id for the '<em><b>Static Methods</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SM_CONTEXT__STATIC_METHODS = StructurePackage.OBJECT_FEATURE_COUNT + 1;
-
-	/**
 	 * The feature id for the '<em><b>SM Class</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int SM_CONTEXT__SM_CLASS = StructurePackage.OBJECT_FEATURE_COUNT + 2;
+	int SM_CONTEXT__SM_CLASS = StructurePackage.OBJECT_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>SM Methods</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SM_CONTEXT__SM_METHODS = StructurePackage.OBJECT_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Final Package QName</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SM_CONTEXT__FINAL_PACKAGE_QNAME = StructurePackage.OBJECT_FEATURE_COUNT + 2;
 
 	/**
 	 * The number of structural features of the '<em>SM Context</em>' class.
@@ -946,6 +973,16 @@ public interface SimkPackage extends EPackage {
 	int SM_USAGE = 8;
 
 	/**
+	 * The meta object id for the '{@link simk.SMAccess <em>SM Access</em>}' enum.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see simk.SMAccess
+	 * @see simk.impl.SimkPackageImpl#getSMAccess()
+	 * @generated
+	 */
+	int SM_ACCESS = 9;
+
+	/**
 	 * Returns the meta object for class '{@link simk.SIMKModel <em>SIMK Model</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -967,15 +1004,15 @@ public interface SimkPackage extends EPackage {
 	EReference getSIMKModel_SMContexts();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link simk.SIMKModel#getStaticMethods <em>Static Methods</em>}'.
+	 * Returns the meta object for the containment reference list '{@link simk.SIMKModel#getSMMethods <em>SM Methods</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Static Methods</em>'.
-	 * @see simk.SIMKModel#getStaticMethods()
+	 * @return the meta object for the containment reference list '<em>SM Methods</em>'.
+	 * @see simk.SIMKModel#getSMMethods()
 	 * @see #getSIMKModel()
 	 * @generated
 	 */
-	EReference getSIMKModel_StaticMethods();
+	EReference getSIMKModel_SMMethods();
 
 	/**
 	 * Returns the meta object for class '{@link simk.SMClass <em>SM Class</em>}'.
@@ -1010,113 +1047,146 @@ public interface SimkPackage extends EPackage {
 	EAttribute getSMClass_Usages();
 
 	/**
-	 * Returns the meta object for class '{@link simk.StaticMethod <em>Static Method</em>}'.
+	 * Returns the meta object for class '{@link simk.SMMethod <em>SM Method</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Static Method</em>'.
-	 * @see simk.StaticMethod
+	 * @return the meta object for class '<em>SM Method</em>'.
+	 * @see simk.SMMethod
 	 * @generated
 	 */
-	EClass getStaticMethod();
+	EClass getSMMethod();
 
 	/**
-	 * Returns the meta object for the attribute '{@link simk.StaticMethod#getBody <em>Body</em>}'.
+	 * Returns the meta object for the attribute '{@link simk.SMMethod#isAbstract <em>Abstract</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Abstract</em>'.
+	 * @see simk.SMMethod#isAbstract()
+	 * @see #getSMMethod()
+	 * @generated
+	 */
+	EAttribute getSMMethod_Abstract();
+
+	/**
+	 * Returns the meta object for the attribute '{@link simk.SMMethod#getBody <em>Body</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Body</em>'.
-	 * @see simk.StaticMethod#getBody()
-	 * @see #getStaticMethod()
+	 * @see simk.SMMethod#getBody()
+	 * @see #getSMMethod()
 	 * @generated
 	 */
-	EAttribute getStaticMethod_Body();
+	EAttribute getSMMethod_Body();
 
 	/**
-	 * Returns the meta object for the attribute '{@link simk.StaticMethod#getTypeParameters <em>Type Parameters</em>}'.
+	 * Returns the meta object for the reference '{@link simk.SMMethod#getParentEReference <em>Parent EReference</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Parent EReference</em>'.
+	 * @see simk.SMMethod#getParentEReference()
+	 * @see #getSMMethod()
+	 * @generated
+	 */
+	EReference getSMMethod_ParentEReference();
+
+	/**
+	 * Returns the meta object for the attribute '{@link simk.SMMethod#isStatic <em>Static</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Static</em>'.
+	 * @see simk.SMMethod#isStatic()
+	 * @see #getSMMethod()
+	 * @generated
+	 */
+	EAttribute getSMMethod_Static();
+
+	/**
+	 * Returns the meta object for the attribute '{@link simk.SMMethod#getTypeParameters <em>Type Parameters</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Type Parameters</em>'.
-	 * @see simk.StaticMethod#getTypeParameters()
-	 * @see #getStaticMethod()
+	 * @see simk.SMMethod#getTypeParameters()
+	 * @see #getSMMethod()
 	 * @generated
 	 */
-	EAttribute getStaticMethod_TypeParameters();
+	EAttribute getSMMethod_TypeParameters();
 
 	/**
-	 * Returns the meta object for the reference '{@link simk.StaticMethod#getParentAttribute <em>Parent Attribute</em>}'.
+	 * Returns the meta object for the reference '{@link simk.SMMethod#getParentEOperation <em>Parent EOperation</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Parent Attribute</em>'.
-	 * @see simk.StaticMethod#getParentAttribute()
-	 * @see #getStaticMethod()
+	 * @return the meta object for the reference '<em>Parent EOperation</em>'.
+	 * @see simk.SMMethod#getParentEOperation()
+	 * @see #getSMMethod()
 	 * @generated
 	 */
-	EReference getStaticMethod_ParentAttribute();
+	EReference getSMMethod_ParentEOperation();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link simk.StaticMethod#getSMParameters <em>SM Parameters</em>}'.
+	 * Returns the meta object for the reference '{@link simk.SMMethod#getParentEAttribute <em>Parent EAttribute</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Parent EAttribute</em>'.
+	 * @see simk.SMMethod#getParentEAttribute()
+	 * @see #getSMMethod()
+	 * @generated
+	 */
+	EReference getSMMethod_ParentEAttribute();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link simk.SMMethod#getSMParameters <em>SM Parameters</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference list '<em>SM Parameters</em>'.
-	 * @see simk.StaticMethod#getSMParameters()
-	 * @see #getStaticMethod()
+	 * @see simk.SMMethod#getSMParameters()
+	 * @see #getSMMethod()
 	 * @generated
 	 */
-	EReference getStaticMethod_SMParameters();
+	EReference getSMMethod_SMParameters();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link simk.StaticMethod#getSMReturn <em>SM Return</em>}'.
+	 * Returns the meta object for the containment reference '{@link simk.SMMethod#getSMReturn <em>SM Return</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference '<em>SM Return</em>'.
-	 * @see simk.StaticMethod#getSMReturn()
-	 * @see #getStaticMethod()
+	 * @see simk.SMMethod#getSMReturn()
+	 * @see #getSMMethod()
 	 * @generated
 	 */
-	EReference getStaticMethod_SMReturn();
+	EReference getSMMethod_SMReturn();
 
 	/**
-	 * Returns the meta object for the attribute '{@link simk.StaticMethod#getUsages <em>Usages</em>}'.
+	 * Returns the meta object for the attribute '{@link simk.SMMethod#getUsages <em>Usages</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Usages</em>'.
-	 * @see simk.StaticMethod#getUsages()
-	 * @see #getStaticMethod()
+	 * @see simk.SMMethod#getUsages()
+	 * @see #getSMMethod()
 	 * @generated
 	 */
-	EAttribute getStaticMethod_Usages();
+	EAttribute getSMMethod_Usages();
 
 	/**
-	 * Returns the meta object for the reference '{@link simk.StaticMethod#getParentMethod <em>Parent Method</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Parent Method</em>'.
-	 * @see simk.StaticMethod#getParentMethod()
-	 * @see #getStaticMethod()
-	 * @generated
-	 */
-	EReference getStaticMethod_ParentMethod();
-
-	/**
-	 * Returns the meta object for the reference '{@link simk.StaticMethod#getSMContext <em>SM Context</em>}'.
+	 * Returns the meta object for the reference '{@link simk.SMMethod#getSMContext <em>SM Context</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the reference '<em>SM Context</em>'.
-	 * @see simk.StaticMethod#getSMContext()
-	 * @see #getStaticMethod()
+	 * @see simk.SMMethod#getSMContext()
+	 * @see #getSMMethod()
 	 * @generated
 	 */
-	EReference getStaticMethod_SMContext();
+	EReference getSMMethod_SMContext();
 
 	/**
-	 * Returns the meta object for the reference '{@link simk.StaticMethod#getParentReference <em>Parent Reference</em>}'.
+	 * Returns the meta object for the attribute '{@link simk.SMMethod#getAccess <em>Access</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Parent Reference</em>'.
-	 * @see simk.StaticMethod#getParentReference()
-	 * @see #getStaticMethod()
+	 * @return the meta object for the attribute '<em>Access</em>'.
+	 * @see simk.SMMethod#getAccess()
+	 * @see #getSMMethod()
 	 * @generated
 	 */
-	EReference getStaticMethod_ParentReference();
+	EAttribute getSMMethod_Access();
 
 	/**
 	 * Returns the meta object for class '{@link simk.SMContext <em>SM Context</em>}'.
@@ -1129,28 +1199,6 @@ public interface SimkPackage extends EPackage {
 	EClass getSMContext();
 
 	/**
-	 * Returns the meta object for the attribute '{@link simk.SMContext#getQualifiedNameFinalPackage <em>Qualified Name Final Package</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Qualified Name Final Package</em>'.
-	 * @see simk.SMContext#getQualifiedNameFinalPackage()
-	 * @see #getSMContext()
-	 * @generated
-	 */
-	EAttribute getSMContext_QualifiedNameFinalPackage();
-
-	/**
-	 * Returns the meta object for the reference list '{@link simk.SMContext#getStaticMethods <em>Static Methods</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference list '<em>Static Methods</em>'.
-	 * @see simk.SMContext#getStaticMethods()
-	 * @see #getSMContext()
-	 * @generated
-	 */
-	EReference getSMContext_StaticMethods();
-
-	/**
 	 * Returns the meta object for the containment reference '{@link simk.SMContext#getSMClass <em>SM Class</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1160,6 +1208,28 @@ public interface SimkPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getSMContext_SMClass();
+
+	/**
+	 * Returns the meta object for the reference list '{@link simk.SMContext#getSMMethods <em>SM Methods</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>SM Methods</em>'.
+	 * @see simk.SMContext#getSMMethods()
+	 * @see #getSMContext()
+	 * @generated
+	 */
+	EReference getSMContext_SMMethods();
+
+	/**
+	 * Returns the meta object for the attribute '{@link simk.SMContext#getFinalPackageQName <em>Final Package QName</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Final Package QName</em>'.
+	 * @see simk.SMContext#getFinalPackageQName()
+	 * @see #getSMContext()
+	 * @generated
+	 */
+	EAttribute getSMContext_FinalPackageQName();
 
 	/**
 	 * Returns the meta object for class '{@link simk.SMNamedElement <em>SM Named Element</em>}'.
@@ -1234,6 +1304,16 @@ public interface SimkPackage extends EPackage {
 	EEnum getSMUsage();
 
 	/**
+	 * Returns the meta object for enum '{@link simk.SMAccess <em>SM Access</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for enum '<em>SM Access</em>'.
+	 * @see simk.SMAccess
+	 * @generated
+	 */
+	EEnum getSMAccess();
+
+	/**
 	 * Returns the factory that creates the instances of the model.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1275,13 +1355,12 @@ public interface SimkPackage extends EPackage {
 				.getSIMKModel_SMContexts();
 
 		/**
-		 * The meta object literal for the '<em><b>Static Methods</b></em>' containment reference list feature.
+		 * The meta object literal for the '<em><b>SM Methods</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference SIMK_MODEL__STATIC_METHODS = eINSTANCE
-				.getSIMKModel_StaticMethods();
+		EReference SIMK_MODEL__SM_METHODS = eINSTANCE.getSIMKModel_SMMethods();
 
 		/**
 		 * The meta object literal for the '{@link simk.impl.SMClassImpl <em>SM Class</em>}' class.
@@ -1310,14 +1389,22 @@ public interface SimkPackage extends EPackage {
 		EAttribute SM_CLASS__USAGES = eINSTANCE.getSMClass_Usages();
 
 		/**
-		 * The meta object literal for the '{@link simk.impl.StaticMethodImpl <em>Static Method</em>}' class.
+		 * The meta object literal for the '{@link simk.impl.SMMethodImpl <em>SM Method</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see simk.impl.StaticMethodImpl
-		 * @see simk.impl.SimkPackageImpl#getStaticMethod()
+		 * @see simk.impl.SMMethodImpl
+		 * @see simk.impl.SimkPackageImpl#getSMMethod()
 		 * @generated
 		 */
-		EClass STATIC_METHOD = eINSTANCE.getStaticMethod();
+		EClass SM_METHOD = eINSTANCE.getSMMethod();
+
+		/**
+		 * The meta object literal for the '<em><b>Abstract</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute SM_METHOD__ABSTRACT = eINSTANCE.getSMMethod_Abstract();
 
 		/**
 		 * The meta object literal for the '<em><b>Body</b></em>' attribute feature.
@@ -1325,7 +1412,24 @@ public interface SimkPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute STATIC_METHOD__BODY = eINSTANCE.getStaticMethod_Body();
+		EAttribute SM_METHOD__BODY = eINSTANCE.getSMMethod_Body();
+
+		/**
+		 * The meta object literal for the '<em><b>Parent EReference</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference SM_METHOD__PARENT_EREFERENCE = eINSTANCE
+				.getSMMethod_ParentEReference();
+
+		/**
+		 * The meta object literal for the '<em><b>Static</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute SM_METHOD__STATIC = eINSTANCE.getSMMethod_Static();
 
 		/**
 		 * The meta object literal for the '<em><b>Type Parameters</b></em>' attribute feature.
@@ -1333,17 +1437,26 @@ public interface SimkPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute STATIC_METHOD__TYPE_PARAMETERS = eINSTANCE
-				.getStaticMethod_TypeParameters();
+		EAttribute SM_METHOD__TYPE_PARAMETERS = eINSTANCE
+				.getSMMethod_TypeParameters();
 
 		/**
-		 * The meta object literal for the '<em><b>Parent Attribute</b></em>' reference feature.
+		 * The meta object literal for the '<em><b>Parent EOperation</b></em>' reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference STATIC_METHOD__PARENT_ATTRIBUTE = eINSTANCE
-				.getStaticMethod_ParentAttribute();
+		EReference SM_METHOD__PARENT_EOPERATION = eINSTANCE
+				.getSMMethod_ParentEOperation();
+
+		/**
+		 * The meta object literal for the '<em><b>Parent EAttribute</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference SM_METHOD__PARENT_EATTRIBUTE = eINSTANCE
+				.getSMMethod_ParentEAttribute();
 
 		/**
 		 * The meta object literal for the '<em><b>SM Parameters</b></em>' containment reference list feature.
@@ -1351,8 +1464,8 @@ public interface SimkPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference STATIC_METHOD__SM_PARAMETERS = eINSTANCE
-				.getStaticMethod_SMParameters();
+		EReference SM_METHOD__SM_PARAMETERS = eINSTANCE
+				.getSMMethod_SMParameters();
 
 		/**
 		 * The meta object literal for the '<em><b>SM Return</b></em>' containment reference feature.
@@ -1360,8 +1473,7 @@ public interface SimkPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference STATIC_METHOD__SM_RETURN = eINSTANCE
-				.getStaticMethod_SMReturn();
+		EReference SM_METHOD__SM_RETURN = eINSTANCE.getSMMethod_SMReturn();
 
 		/**
 		 * The meta object literal for the '<em><b>Usages</b></em>' attribute feature.
@@ -1369,16 +1481,7 @@ public interface SimkPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute STATIC_METHOD__USAGES = eINSTANCE.getStaticMethod_Usages();
-
-		/**
-		 * The meta object literal for the '<em><b>Parent Method</b></em>' reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference STATIC_METHOD__PARENT_METHOD = eINSTANCE
-				.getStaticMethod_ParentMethod();
+		EAttribute SM_METHOD__USAGES = eINSTANCE.getSMMethod_Usages();
 
 		/**
 		 * The meta object literal for the '<em><b>SM Context</b></em>' reference feature.
@@ -1386,17 +1489,15 @@ public interface SimkPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference STATIC_METHOD__SM_CONTEXT = eINSTANCE
-				.getStaticMethod_SMContext();
+		EReference SM_METHOD__SM_CONTEXT = eINSTANCE.getSMMethod_SMContext();
 
 		/**
-		 * The meta object literal for the '<em><b>Parent Reference</b></em>' reference feature.
+		 * The meta object literal for the '<em><b>Access</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference STATIC_METHOD__PARENT_REFERENCE = eINSTANCE
-				.getStaticMethod_ParentReference();
+		EAttribute SM_METHOD__ACCESS = eINSTANCE.getSMMethod_Access();
 
 		/**
 		 * The meta object literal for the '{@link simk.impl.SMContextImpl <em>SM Context</em>}' class.
@@ -1409,30 +1510,29 @@ public interface SimkPackage extends EPackage {
 		EClass SM_CONTEXT = eINSTANCE.getSMContext();
 
 		/**
-		 * The meta object literal for the '<em><b>Qualified Name Final Package</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute SM_CONTEXT__QUALIFIED_NAME_FINAL_PACKAGE = eINSTANCE
-				.getSMContext_QualifiedNameFinalPackage();
-
-		/**
-		 * The meta object literal for the '<em><b>Static Methods</b></em>' reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference SM_CONTEXT__STATIC_METHODS = eINSTANCE
-				.getSMContext_StaticMethods();
-
-		/**
 		 * The meta object literal for the '<em><b>SM Class</b></em>' containment reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
 		EReference SM_CONTEXT__SM_CLASS = eINSTANCE.getSMContext_SMClass();
+
+		/**
+		 * The meta object literal for the '<em><b>SM Methods</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference SM_CONTEXT__SM_METHODS = eINSTANCE.getSMContext_SMMethods();
+
+		/**
+		 * The meta object literal for the '<em><b>Final Package QName</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute SM_CONTEXT__FINAL_PACKAGE_QNAME = eINSTANCE
+				.getSMContext_FinalPackageQName();
 
 		/**
 		 * The meta object literal for the '{@link simk.impl.SMNamedElementImpl <em>SM Named Element</em>}' class.
@@ -1499,6 +1599,16 @@ public interface SimkPackage extends EPackage {
 		 * @generated
 		 */
 		EEnum SM_USAGE = eINSTANCE.getSMUsage();
+
+		/**
+		 * The meta object literal for the '{@link simk.SMAccess <em>SM Access</em>}' enum.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see simk.SMAccess
+		 * @see simk.impl.SimkPackageImpl#getSMAccess()
+		 * @generated
+		 */
+		EEnum SM_ACCESS = eINSTANCE.getSMAccess();
 
 	}
 

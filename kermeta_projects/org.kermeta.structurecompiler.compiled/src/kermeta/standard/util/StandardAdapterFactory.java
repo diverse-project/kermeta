@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: StandardAdapterFactory.java,v 1.3 2008-09-22 14:49:16 cfaucher Exp $
+ * $Id: StandardAdapterFactory.java,v 1.4 2008-10-08 14:38:08 cfaucher Exp $
  */
 package kermeta.standard.util;
 
@@ -82,6 +82,11 @@ public class StandardAdapterFactory extends AdapterFactoryImpl {
 	 */
 	protected StandardSwitch<Adapter> modelSwitch = new StandardSwitch<Adapter>() {
 		@Override
+		public Adapter caseUnknownJavaObject(UnknownJavaObject object) {
+			return createUnknownJavaObjectAdapter();
+		}
+
+		@Override
 		public <G> Adapter caseCollection(Collection<G> object) {
 			return createCollectionAdapter();
 		}
@@ -142,11 +147,6 @@ public class StandardAdapterFactory extends AdapterFactoryImpl {
 		}
 
 		@Override
-		public Adapter caseUnknownJavaObject(UnknownJavaObject object) {
-			return createUnknownJavaObjectAdapter();
-		}
-
-		@Override
 		public Adapter caseObject(kermeta.language.structure.Object object) {
 			return createObjectAdapter();
 		}
@@ -173,6 +173,20 @@ public class StandardAdapterFactory extends AdapterFactoryImpl {
 	@Override
 	public Adapter createAdapter(Notifier target) {
 		return modelSwitch.doSwitch((EObject) target);
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link kermeta.standard.UnknownJavaObject <em>Unknown Java Object</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see kermeta.standard.UnknownJavaObject
+	 * @generated
+	 */
+	public Adapter createUnknownJavaObjectAdapter() {
+		return null;
 	}
 
 	/**
@@ -340,20 +354,6 @@ public class StandardAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createNotComparableExceptionAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link kermeta.standard.UnknownJavaObject <em>Unknown Java Object</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see kermeta.standard.UnknownJavaObject
-	 * @generated
-	 */
-	public Adapter createUnknownJavaObjectAdapter() {
 		return null;
 	}
 

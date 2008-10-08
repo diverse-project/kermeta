@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: StandardSwitch.java,v 1.3 2008-09-22 14:49:16 cfaucher Exp $
+ * $Id: StandardSwitch.java,v 1.4 2008-10-08 14:38:08 cfaucher Exp $
  */
 package kermeta.standard.util;
 
@@ -95,6 +95,15 @@ public class StandardSwitch<T> {
 	 */
 	protected T doSwitch(int classifierID, EObject theEObject) {
 		switch (classifierID) {
+		case StandardPackage.UNKNOWN_JAVA_OBJECT: {
+			UnknownJavaObject unknownJavaObject = (UnknownJavaObject) theEObject;
+			T result = caseUnknownJavaObject(unknownJavaObject);
+			if (result == null)
+				result = caseObject(unknownJavaObject);
+			if (result == null)
+				result = defaultCase(theEObject);
+			return result;
+		}
 		case StandardPackage.COLLECTION: {
 			Collection<?> collection = (Collection<?>) theEObject;
 			T result = caseCollection(collection);
@@ -223,18 +232,24 @@ public class StandardSwitch<T> {
 				result = defaultCase(theEObject);
 			return result;
 		}
-		case StandardPackage.UNKNOWN_JAVA_OBJECT: {
-			UnknownJavaObject unknownJavaObject = (UnknownJavaObject) theEObject;
-			T result = caseUnknownJavaObject(unknownJavaObject);
-			if (result == null)
-				result = caseObject(unknownJavaObject);
-			if (result == null)
-				result = defaultCase(theEObject);
-			return result;
-		}
 		default:
 			return defaultCase(theEObject);
 		}
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Unknown Java Object</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Unknown Java Object</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseUnknownJavaObject(UnknownJavaObject object) {
+		return null;
 	}
 
 	/**
@@ -414,21 +429,6 @@ public class StandardSwitch<T> {
 	 * @generated
 	 */
 	public T caseNotComparableException(NotComparableException object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Unknown Java Object</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Unknown Java Object</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseUnknownJavaObject(UnknownJavaObject object) {
 		return null;
 	}
 

@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ErrorKind.java,v 1.3 2008-09-22 14:46:08 cfaucher Exp $
+ * $Id: ErrorKind.java,v 1.4 2008-10-08 14:37:46 cfaucher Exp $
  */
 package kermeta.kunit;
 

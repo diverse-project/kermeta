@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: TypeContainerImpl.java,v 1.3 2008-09-22 14:47:37 cfaucher Exp $
+ * $Id: TypeContainerImpl.java,v 1.4 2008-10-08 14:37:28 cfaucher Exp $
  */
 package kermeta.language.structure.impl;
 

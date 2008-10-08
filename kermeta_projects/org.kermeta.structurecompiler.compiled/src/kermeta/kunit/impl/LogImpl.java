@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: LogImpl.java,v 1.3 2008-09-22 14:46:10 cfaucher Exp $
+ * $Id: LogImpl.java,v 1.4 2008-10-08 14:37:23 cfaucher Exp $
  */
 package kermeta.kunit.impl;
 
@@ -246,11 +246,11 @@ public class LogImpl extends ObjectImpl implements Log {
 	 */
 	public void newAttempt() {
 
-		java.lang.Boolean idIfCond_905 = false;
-		idIfCond_905 = kermeta.standard.helper.IntegerWrapper.equals(this
+		java.lang.Boolean idIfCond_973 = false;
+		idIfCond_973 = kermeta.standard.helper.IntegerWrapper.equals(this
 				.getRuntests(), null);
 
-		if (idIfCond_905) {
+		if (idIfCond_973) {
 
 			this.setRuntests(0);
 		}

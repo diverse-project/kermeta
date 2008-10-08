@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: EReference.java,v 1.4 2008-09-22 14:44:19 cfaucher Exp $
+ * $Id: EReference.java,v 1.5 2008-10-08 14:37:50 cfaucher Exp $
  */
 package ecore;
 
@@ -56,7 +56,7 @@ public interface EReference extends EStructuralFeature {
 
 	/**
 	 * Returns the value of the '<em><b>Resolve Proxies</b></em>' attribute.
-	 * The default value is <code>"false"</code>.
+	 * The default value is <code>"true"</code>.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Resolve Proxies</em>' attribute isn't clear,
@@ -66,7 +66,7 @@ public interface EReference extends EStructuralFeature {
 	 * @return the value of the '<em>Resolve Proxies</em>' attribute.
 	 * @see #setResolveProxies(boolean)
 	 * @see ecore.EcorePackage#getEReference_ResolveProxies()
-	 * @model default="false" dataType="ecore.EBoolean"
+	 * @model default="true" dataType="ecore.EBoolean"
 	 * @generated
 	 */
 	boolean isResolveProxies();

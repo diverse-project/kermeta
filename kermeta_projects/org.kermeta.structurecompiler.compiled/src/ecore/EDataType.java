@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: EDataType.java,v 1.4 2008-09-22 14:44:19 cfaucher Exp $
+ * $Id: EDataType.java,v 1.5 2008-10-08 14:37:50 cfaucher Exp $
  */
 package ecore;
 
@@ -25,7 +25,7 @@ package ecore;
 public interface EDataType extends EClassifier {
 	/**
 	 * Returns the value of the '<em><b>Serializable</b></em>' attribute.
-	 * The default value is <code>"false"</code>.
+	 * The default value is <code>"true"</code>.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Serializable</em>' attribute isn't clear,
@@ -35,7 +35,7 @@ public interface EDataType extends EClassifier {
 	 * @return the value of the '<em>Serializable</em>' attribute.
 	 * @see #setSerializable(boolean)
 	 * @see ecore.EcorePackage#getEDataType_Serializable()
-	 * @model default="false" dataType="ecore.EBoolean"
+	 * @model default="true" dataType="ecore.EBoolean"
 	 * @generated
 	 */
 	boolean isSerializable();

@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: StringFormatExceptionImpl.java,v 1.3 2008-09-22 14:45:46 cfaucher Exp $
+ * $Id: StringFormatExceptionImpl.java,v 1.4 2008-10-08 14:37:21 cfaucher Exp $
  */
 package kermeta.exceptions.impl;
 

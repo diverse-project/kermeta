@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: StandardFactoryImpl.java,v 1.3 2008-09-22 14:48:28 cfaucher Exp $
+ * $Id: StandardFactoryImpl.java,v 1.4 2008-10-08 14:37:46 cfaucher Exp $
  */
 package kermeta.standard.impl;
 
@@ -72,6 +72,8 @@ public class StandardFactoryImpl extends EFactoryImpl implements
 	@Override
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
+		case StandardPackage.UNKNOWN_JAVA_OBJECT:
+			return createUnknownJavaObject();
 		case StandardPackage.SET:
 			return createSet();
 		case StandardPackage.BAG:
@@ -86,8 +88,6 @@ public class StandardFactoryImpl extends EFactoryImpl implements
 			return createVoid();
 		case StandardPackage.NOT_COMPARABLE_EXCEPTION:
 			return createNotComparableException();
-		case StandardPackage.UNKNOWN_JAVA_OBJECT:
-			return createUnknownJavaObject();
 		default:
 			throw new IllegalArgumentException("The class '" + eClass.getName()
 					+ "' is not a valid classifier");
@@ -167,6 +167,16 @@ public class StandardFactoryImpl extends EFactoryImpl implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public UnknownJavaObject createUnknownJavaObject() {
+		UnknownJavaObjectImpl unknownJavaObject = new UnknownJavaObjectImpl();
+		return unknownJavaObject;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public <G> Set<G> createSet() {
 		SetImpl<G> set = new SetImpl<G>();
 		return set;
@@ -230,16 +240,6 @@ public class StandardFactoryImpl extends EFactoryImpl implements
 	public NotComparableException createNotComparableException() {
 		NotComparableExceptionImpl notComparableException = new NotComparableExceptionImpl();
 		return notComparableException;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public UnknownJavaObject createUnknownJavaObject() {
-		UnknownJavaObjectImpl unknownJavaObject = new UnknownJavaObjectImpl();
-		return unknownJavaObject;
 	}
 
 	/**

@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: EStructuralFeatureImpl.java,v 1.4 2008-09-22 14:44:20 cfaucher Exp $
+ * $Id: EStructuralFeatureImpl.java,v 1.5 2008-10-08 14:37:30 cfaucher Exp $
  */
 package ecore.impl;
 
@@ -148,7 +148,7 @@ public abstract class EStructuralFeatureImpl extends ETypedElementImpl
 	 * @generated
 	 * @ordered
 	 */
-	protected static final boolean CHANGEABLE_EDEFAULT = false;
+	protected static final boolean CHANGEABLE_EDEFAULT = true;
 
 	/**
 	 * The cached value of the '{@link #isChangeable() <em>Changeable</em>}' attribute.

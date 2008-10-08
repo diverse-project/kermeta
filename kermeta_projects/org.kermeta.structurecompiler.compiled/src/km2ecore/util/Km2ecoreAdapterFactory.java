@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: Km2ecoreAdapterFactory.java,v 1.3 2008-09-22 14:49:16 cfaucher Exp $
+ * $Id: Km2ecoreAdapterFactory.java,v 1.4 2008-10-08 14:38:05 cfaucher Exp $
  */
 package km2ecore.util;
 
@@ -71,13 +71,13 @@ public class Km2ecoreAdapterFactory extends AdapterFactoryImpl {
 	 */
 	protected Km2ecoreSwitch<Adapter> modelSwitch = new Km2ecoreSwitch<Adapter>() {
 		@Override
-		public Adapter caseSourceTracer(SourceTracer object) {
-			return createSourceTracerAdapter();
+		public Adapter caseKM2EcoreContext(KM2EcoreContext object) {
+			return createKM2EcoreContextAdapter();
 		}
 
 		@Override
-		public Adapter caseKM2EcoreContext(KM2EcoreContext object) {
-			return createKM2EcoreContextAdapter();
+		public Adapter caseSourceTracer(SourceTracer object) {
+			return createSourceTracerAdapter();
 		}
 
 		@Override
@@ -105,20 +105,6 @@ public class Km2ecoreAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link km2ecore.SourceTracer <em>Source Tracer</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see km2ecore.SourceTracer
-	 * @generated
-	 */
-	public Adapter createSourceTracerAdapter() {
-		return null;
-	}
-
-	/**
 	 * Creates a new adapter for an object of class '{@link km2ecore.KM2EcoreContext <em>KM2 Ecore Context</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -129,6 +115,20 @@ public class Km2ecoreAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createKM2EcoreContextAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link km2ecore.SourceTracer <em>Source Tracer</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see km2ecore.SourceTracer
+	 * @generated
+	 */
+	public Adapter createSourceTracerAdapter() {
 		return null;
 	}
 

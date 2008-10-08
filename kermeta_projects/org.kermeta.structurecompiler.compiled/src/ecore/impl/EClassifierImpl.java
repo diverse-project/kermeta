@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: EClassifierImpl.java,v 1.4 2008-09-22 14:44:20 cfaucher Exp $
+ * $Id: EClassifierImpl.java,v 1.5 2008-10-08 14:37:30 cfaucher Exp $
  */
 package ecore.impl;
 

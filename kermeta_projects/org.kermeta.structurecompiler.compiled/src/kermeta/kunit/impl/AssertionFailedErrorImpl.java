@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: AssertionFailedErrorImpl.java,v 1.3 2008-09-22 14:46:10 cfaucher Exp $
+ * $Id: AssertionFailedErrorImpl.java,v 1.4 2008-10-08 14:37:23 cfaucher Exp $
  */
 package kermeta.kunit.impl;
 

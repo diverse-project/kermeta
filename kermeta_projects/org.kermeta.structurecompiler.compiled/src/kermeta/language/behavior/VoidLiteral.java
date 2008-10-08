@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: VoidLiteral.java,v 1.3 2008-09-22 14:46:28 cfaucher Exp $
+ * $Id: VoidLiteral.java,v 1.4 2008-10-08 14:37:20 cfaucher Exp $
  */
 package kermeta.language.behavior;
 
@@ -15,8 +15,8 @@ import km2ecore.KM2EcoreContext;
  *
  *
  * @see kermeta.language.behavior.BehaviorPackage#getVoidLiteral()
- * @model annotation="kermeta documentation='This class is used to represent the special expression void'"
- *        annotation="kermeta documentation='/** Complete \052/'"
+ * @model annotation="kermeta documentation='/** Complete \052/'"
+ *        annotation="kermeta documentation='This class is used to represent the special expression void'"
  * @generated
  */
 public interface VoidLiteral extends Literal {

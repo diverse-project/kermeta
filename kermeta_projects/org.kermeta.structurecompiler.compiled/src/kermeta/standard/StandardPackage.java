@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: StandardPackage.java,v 1.3 2008-09-22 14:48:27 cfaucher Exp $
+ * $Id: StandardPackage.java,v 1.4 2008-10-08 14:37:38 cfaucher Exp $
  */
 package kermeta.standard;
 
@@ -30,9 +30,9 @@ import org.eclipse.emf.ecore.EReference;
  * @see kermeta.standard.StandardFactory
  * @model kind="package"
  *        annotation="kermeta ecoreUri='http://www.kermeta.org/kermeta/1_2_0//kermeta/standard'"
+ *        annotation="kermeta documentation='/**\r\n * Contains types dedicated to dealing with java objects\r\n * <img src=\"platform:/plugin/fr.irisa.triskell.kermeta.documentation/src/figures/java_package.png\"/>\r\n \052/'"
  *        annotation="kermeta documentation='/**\r\n * Defines Collection types \r\n * <img src=\"./figures/collections_view.png\"/>\r\n \052/'"
  *        annotation="kermeta documentation='/**\r\n * Defines value types \r\n * <img src=\"platform:/plugin/fr.irisa.triskell.kermeta.documentation/src/figures/primitive_types_view.png\"/>\r\n \052/'"
- *        annotation="kermeta documentation='/**\r\n * Contains types dedicated to dealing with java objects\r\n * <img src=\"platform:/plugin/fr.irisa.triskell.kermeta.documentation/src/figures/java_package.png\"/>\r\n \052/'"
  * @generated
  */
 public interface StandardPackage extends EPackage {
@@ -70,6 +70,88 @@ public interface StandardPackage extends EPackage {
 			.init();
 
 	/**
+	 * The meta object id for the '{@link kermeta.standard.impl.UnknownJavaObjectImpl <em>Unknown Java Object</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see kermeta.standard.impl.UnknownJavaObjectImpl
+	 * @see kermeta.standard.impl.StandardPackageImpl#getUnknownJavaObject()
+	 * @generated
+	 */
+	int UNKNOWN_JAVA_OBJECT = 0;
+
+	/**
+	 * The feature id for the '<em><b>File</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UNKNOWN_JAVA_OBJECT__FILE = StructurePackage.OBJECT__FILE;
+
+	/**
+	 * The feature id for the '<em><b>Tag</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UNKNOWN_JAVA_OBJECT__TAG = StructurePackage.OBJECT__TAG;
+
+	/**
+	 * The feature id for the '<em><b>File Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UNKNOWN_JAVA_OBJECT__FILE_NAME = StructurePackage.OBJECT__FILE_NAME;
+
+	/**
+	 * The feature id for the '<em><b>Line Number</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UNKNOWN_JAVA_OBJECT__LINE_NUMBER = StructurePackage.OBJECT__LINE_NUMBER;
+
+	/**
+	 * The feature id for the '<em><b>Owned Tags</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UNKNOWN_JAVA_OBJECT__OWNED_TAGS = StructurePackage.OBJECT__OWNED_TAGS;
+
+	/**
+	 * The feature id for the '<em><b>Oid</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UNKNOWN_JAVA_OBJECT__OID = StructurePackage.OBJECT__OID;
+
+	/**
+	 * The feature id for the '<em><b>Container</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UNKNOWN_JAVA_OBJECT__CONTAINER = StructurePackage.OBJECT__CONTAINER;
+
+	/**
+	 * The number of structural features of the '<em>Unknown Java Object</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UNKNOWN_JAVA_OBJECT_FEATURE_COUNT = StructurePackage.OBJECT_FEATURE_COUNT + 0;
+
+	/**
 	 * The meta object id for the '{@link kermeta.standard.impl.CollectionImpl <em>Collection</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -77,7 +159,7 @@ public interface StandardPackage extends EPackage {
 	 * @see kermeta.standard.impl.StandardPackageImpl#getCollection()
 	 * @generated
 	 */
-	int COLLECTION = 0;
+	int COLLECTION = 1;
 
 	/**
 	 * The feature id for the '<em><b>File</b></em>' reference.
@@ -168,7 +250,7 @@ public interface StandardPackage extends EPackage {
 	 * @see kermeta.standard.impl.StandardPackageImpl#getSet()
 	 * @generated
 	 */
-	int SET = 1;
+	int SET = 2;
 
 	/**
 	 * The feature id for the '<em><b>File</b></em>' reference.
@@ -259,7 +341,7 @@ public interface StandardPackage extends EPackage {
 	 * @see kermeta.standard.impl.StandardPackageImpl#getBag()
 	 * @generated
 	 */
-	int BAG = 2;
+	int BAG = 3;
 
 	/**
 	 * The feature id for the '<em><b>File</b></em>' reference.
@@ -350,7 +432,7 @@ public interface StandardPackage extends EPackage {
 	 * @see kermeta.standard.impl.StandardPackageImpl#getOrderedCollection()
 	 * @generated
 	 */
-	int ORDERED_COLLECTION = 3;
+	int ORDERED_COLLECTION = 4;
 
 	/**
 	 * The feature id for the '<em><b>File</b></em>' reference.
@@ -441,7 +523,7 @@ public interface StandardPackage extends EPackage {
 	 * @see kermeta.standard.impl.StandardPackageImpl#getOrderedSet()
 	 * @generated
 	 */
-	int ORDERED_SET = 4;
+	int ORDERED_SET = 5;
 
 	/**
 	 * The feature id for the '<em><b>File</b></em>' reference.
@@ -532,7 +614,7 @@ public interface StandardPackage extends EPackage {
 	 * @see kermeta.standard.impl.StandardPackageImpl#getSequence()
 	 * @generated
 	 */
-	int SEQUENCE = 5;
+	int SEQUENCE = 6;
 
 	/**
 	 * The feature id for the '<em><b>File</b></em>' reference.
@@ -623,7 +705,7 @@ public interface StandardPackage extends EPackage {
 	 * @see kermeta.standard.impl.StandardPackageImpl#getIterator()
 	 * @generated
 	 */
-	int ITERATOR = 6;
+	int ITERATOR = 7;
 
 	/**
 	 * The feature id for the '<em><b>File</b></em>' reference.
@@ -723,7 +805,7 @@ public interface StandardPackage extends EPackage {
 	 * @see kermeta.standard.impl.StandardPackageImpl#getVoid()
 	 * @generated
 	 */
-	int VOID = 7;
+	int VOID = 8;
 
 	/**
 	 * The feature id for the '<em><b>File</b></em>' reference.
@@ -805,7 +887,7 @@ public interface StandardPackage extends EPackage {
 	 * @see kermeta.standard.impl.StandardPackageImpl#getValueType()
 	 * @generated
 	 */
-	int VALUE_TYPE = 8;
+	int VALUE_TYPE = 9;
 
 	/**
 	 * The feature id for the '<em><b>File</b></em>' reference.
@@ -887,7 +969,7 @@ public interface StandardPackage extends EPackage {
 	 * @see kermeta.standard.impl.StandardPackageImpl#getComparable()
 	 * @generated
 	 */
-	int COMPARABLE = 9;
+	int COMPARABLE = 10;
 
 	/**
 	 * The feature id for the '<em><b>File</b></em>' reference.
@@ -969,7 +1051,7 @@ public interface StandardPackage extends EPackage {
 	 * @see kermeta.standard.impl.StandardPackageImpl#getSummable()
 	 * @generated
 	 */
-	int SUMMABLE = 10;
+	int SUMMABLE = 11;
 
 	/**
 	 * The feature id for the '<em><b>File</b></em>' reference.
@@ -1051,7 +1133,7 @@ public interface StandardPackage extends EPackage {
 	 * @see kermeta.standard.impl.StandardPackageImpl#getNotComparableException()
 	 * @generated
 	 */
-	int NOT_COMPARABLE_EXCEPTION = 11;
+	int NOT_COMPARABLE_EXCEPTION = 12;
 
 	/**
 	 * The feature id for the '<em><b>File</b></em>' reference.
@@ -1153,88 +1235,6 @@ public interface StandardPackage extends EPackage {
 	int NOT_COMPARABLE_EXCEPTION_FEATURE_COUNT = ExceptionsPackage.EXCEPTION_FEATURE_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link kermeta.standard.impl.UnknownJavaObjectImpl <em>Unknown Java Object</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see kermeta.standard.impl.UnknownJavaObjectImpl
-	 * @see kermeta.standard.impl.StandardPackageImpl#getUnknownJavaObject()
-	 * @generated
-	 */
-	int UNKNOWN_JAVA_OBJECT = 12;
-
-	/**
-	 * The feature id for the '<em><b>File</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int UNKNOWN_JAVA_OBJECT__FILE = StructurePackage.OBJECT__FILE;
-
-	/**
-	 * The feature id for the '<em><b>Tag</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int UNKNOWN_JAVA_OBJECT__TAG = StructurePackage.OBJECT__TAG;
-
-	/**
-	 * The feature id for the '<em><b>File Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int UNKNOWN_JAVA_OBJECT__FILE_NAME = StructurePackage.OBJECT__FILE_NAME;
-
-	/**
-	 * The feature id for the '<em><b>Line Number</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int UNKNOWN_JAVA_OBJECT__LINE_NUMBER = StructurePackage.OBJECT__LINE_NUMBER;
-
-	/**
-	 * The feature id for the '<em><b>Owned Tags</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int UNKNOWN_JAVA_OBJECT__OWNED_TAGS = StructurePackage.OBJECT__OWNED_TAGS;
-
-	/**
-	 * The feature id for the '<em><b>Oid</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int UNKNOWN_JAVA_OBJECT__OID = StructurePackage.OBJECT__OID;
-
-	/**
-	 * The feature id for the '<em><b>Container</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int UNKNOWN_JAVA_OBJECT__CONTAINER = StructurePackage.OBJECT__CONTAINER;
-
-	/**
-	 * The number of structural features of the '<em>Unknown Java Object</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int UNKNOWN_JAVA_OBJECT_FEATURE_COUNT = StructurePackage.OBJECT_FEATURE_COUNT + 0;
-
-	/**
 	 * The meta object id for the '<em>Java String</em>' data type.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1323,6 +1323,16 @@ public interface StandardPackage extends EPackage {
 	 * @generated
 	 */
 	int KERMETA_PROPERTY_ITERATOR_JAVA_ITERATOR = 21;
+
+	/**
+	 * Returns the meta object for class '{@link kermeta.standard.UnknownJavaObject <em>Unknown Java Object</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Unknown Java Object</em>'.
+	 * @see kermeta.standard.UnknownJavaObject
+	 * @generated
+	 */
+	EClass getUnknownJavaObject();
 
 	/**
 	 * Returns the meta object for class '{@link kermeta.standard.Collection <em>Collection</em>}'.
@@ -1478,16 +1488,6 @@ public interface StandardPackage extends EPackage {
 	EClass getNotComparableException();
 
 	/**
-	 * Returns the meta object for class '{@link kermeta.standard.UnknownJavaObject <em>Unknown Java Object</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Unknown Java Object</em>'.
-	 * @see kermeta.standard.UnknownJavaObject
-	 * @generated
-	 */
-	EClass getUnknownJavaObject();
-
-	/**
 	 * Returns the meta object for data type '{@link java.lang.String <em>Java String</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1610,6 +1610,16 @@ public interface StandardPackage extends EPackage {
 	 * @generated
 	 */
 	interface Literals {
+		/**
+		 * The meta object literal for the '{@link kermeta.standard.impl.UnknownJavaObjectImpl <em>Unknown Java Object</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see kermeta.standard.impl.UnknownJavaObjectImpl
+		 * @see kermeta.standard.impl.StandardPackageImpl#getUnknownJavaObject()
+		 * @generated
+		 */
+		EClass UNKNOWN_JAVA_OBJECT = eINSTANCE.getUnknownJavaObject();
+
 		/**
 		 * The meta object literal for the '{@link kermeta.standard.impl.CollectionImpl <em>Collection</em>}' class.
 		 * <!-- begin-user-doc -->
@@ -1755,16 +1765,6 @@ public interface StandardPackage extends EPackage {
 		 * @generated
 		 */
 		EClass NOT_COMPARABLE_EXCEPTION = eINSTANCE.getNotComparableException();
-
-		/**
-		 * The meta object literal for the '{@link kermeta.standard.impl.UnknownJavaObjectImpl <em>Unknown Java Object</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see kermeta.standard.impl.UnknownJavaObjectImpl
-		 * @see kermeta.standard.impl.StandardPackageImpl#getUnknownJavaObject()
-		 * @generated
-		 */
-		EClass UNKNOWN_JAVA_OBJECT = eINSTANCE.getUnknownJavaObject();
 
 		/**
 		 * The meta object literal for the '<em>Java String</em>' data type.

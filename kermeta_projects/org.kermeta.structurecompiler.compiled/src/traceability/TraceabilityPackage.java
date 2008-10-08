@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: TraceabilityPackage.java,v 1.3 2008-09-22 14:48:59 cfaucher Exp $
+ * $Id: TraceabilityPackage.java,v 1.4 2008-10-08 14:37:53 cfaucher Exp $
  */
 package traceability;
 
@@ -65,88 +65,6 @@ public interface TraceabilityPackage extends EPackage {
 			.init();
 
 	/**
-	 * The meta object id for the '{@link traceability.impl.TraceabilityHelperImpl <em>Helper</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see traceability.impl.TraceabilityHelperImpl
-	 * @see traceability.impl.TraceabilityPackageImpl#getTraceabilityHelper()
-	 * @generated
-	 */
-	int TRACEABILITY_HELPER = 0;
-
-	/**
-	 * The feature id for the '<em><b>File</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TRACEABILITY_HELPER__FILE = StructurePackage.OBJECT__FILE;
-
-	/**
-	 * The feature id for the '<em><b>Tag</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TRACEABILITY_HELPER__TAG = StructurePackage.OBJECT__TAG;
-
-	/**
-	 * The feature id for the '<em><b>File Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TRACEABILITY_HELPER__FILE_NAME = StructurePackage.OBJECT__FILE_NAME;
-
-	/**
-	 * The feature id for the '<em><b>Line Number</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TRACEABILITY_HELPER__LINE_NUMBER = StructurePackage.OBJECT__LINE_NUMBER;
-
-	/**
-	 * The feature id for the '<em><b>Owned Tags</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TRACEABILITY_HELPER__OWNED_TAGS = StructurePackage.OBJECT__OWNED_TAGS;
-
-	/**
-	 * The feature id for the '<em><b>Oid</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TRACEABILITY_HELPER__OID = StructurePackage.OBJECT__OID;
-
-	/**
-	 * The feature id for the '<em><b>Container</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TRACEABILITY_HELPER__CONTAINER = StructurePackage.OBJECT__CONTAINER;
-
-	/**
-	 * The number of structural features of the '<em>Helper</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TRACEABILITY_HELPER_FEATURE_COUNT = StructurePackage.OBJECT_FEATURE_COUNT + 0;
-
-	/**
 	 * The meta object id for the '{@link traceability.impl.TraceModelImpl <em>Trace Model</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -154,7 +72,7 @@ public interface TraceabilityPackage extends EPackage {
 	 * @see traceability.impl.TraceabilityPackageImpl#getTraceModel()
 	 * @generated
 	 */
-	int TRACE_MODEL = 1;
+	int TRACE_MODEL = 0;
 
 	/**
 	 * The feature id for the '<em><b>File</b></em>' reference.
@@ -265,106 +183,6 @@ public interface TraceabilityPackage extends EPackage {
 	int TRACE_MODEL_FEATURE_COUNT = StructurePackage.OBJECT_FEATURE_COUNT + 4;
 
 	/**
-	 * The meta object id for the '{@link traceability.impl.FileImpl <em>File</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see traceability.impl.FileImpl
-	 * @see traceability.impl.TraceabilityPackageImpl#getFile()
-	 * @generated
-	 */
-	int FILE = 2;
-
-	/**
-	 * The feature id for the '<em><b>File</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FILE__FILE = StructurePackage.OBJECT__FILE;
-
-	/**
-	 * The feature id for the '<em><b>Tag</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FILE__TAG = StructurePackage.OBJECT__TAG;
-
-	/**
-	 * The feature id for the '<em><b>File Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FILE__FILE_NAME = StructurePackage.OBJECT__FILE_NAME;
-
-	/**
-	 * The feature id for the '<em><b>Line Number</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FILE__LINE_NUMBER = StructurePackage.OBJECT__LINE_NUMBER;
-
-	/**
-	 * The feature id for the '<em><b>Owned Tags</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FILE__OWNED_TAGS = StructurePackage.OBJECT__OWNED_TAGS;
-
-	/**
-	 * The feature id for the '<em><b>Oid</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FILE__OID = StructurePackage.OBJECT__OID;
-
-	/**
-	 * The feature id for the '<em><b>Container</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FILE__CONTAINER = StructurePackage.OBJECT__CONTAINER;
-
-	/**
-	 * The feature id for the '<em><b>Id</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FILE__ID = StructurePackage.OBJECT_FEATURE_COUNT + 0;
-
-	/**
-	 * The feature id for the '<em><b>Uri</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FILE__URI = StructurePackage.OBJECT_FEATURE_COUNT + 1;
-
-	/**
-	 * The number of structural features of the '<em>File</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FILE_FEATURE_COUNT = StructurePackage.OBJECT_FEATURE_COUNT + 2;
-
-	/**
 	 * The meta object id for the '{@link traceability.impl.MessageImpl <em>Message</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -372,7 +190,7 @@ public interface TraceabilityPackage extends EPackage {
 	 * @see traceability.impl.TraceabilityPackageImpl#getMessage()
 	 * @generated
 	 */
-	int MESSAGE = 3;
+	int MESSAGE = 1;
 
 	/**
 	 * The feature id for the '<em><b>File</b></em>' reference.
@@ -499,7 +317,7 @@ public interface TraceabilityPackage extends EPackage {
 	 * @see traceability.impl.TraceabilityPackageImpl#getTrace()
 	 * @generated
 	 */
-	int TRACE = 4;
+	int TRACE = 2;
 
 	/**
 	 * The feature id for the '<em><b>File</b></em>' reference.
@@ -617,7 +435,7 @@ public interface TraceabilityPackage extends EPackage {
 	 * @see traceability.impl.TraceabilityPackageImpl#getReference()
 	 * @generated
 	 */
-	int REFERENCE = 5;
+	int REFERENCE = 3;
 
 	/**
 	 * The feature id for the '<em><b>File</b></em>' reference.
@@ -726,7 +544,7 @@ public interface TraceabilityPackage extends EPackage {
 	 * @see traceability.impl.TraceabilityPackageImpl#getFileReference()
 	 * @generated
 	 */
-	int FILE_REFERENCE = 6;
+	int FILE_REFERENCE = 4;
 
 	/**
 	 * The feature id for the '<em><b>File</b></em>' reference.
@@ -844,7 +662,7 @@ public interface TraceabilityPackage extends EPackage {
 	 * @see traceability.impl.TraceabilityPackageImpl#getTextReference()
 	 * @generated
 	 */
-	int TEXT_REFERENCE = 7;
+	int TEXT_REFERENCE = 5;
 
 	/**
 	 * The feature id for the '<em><b>File</b></em>' reference.
@@ -998,7 +816,7 @@ public interface TraceabilityPackage extends EPackage {
 	 * @see traceability.impl.TraceabilityPackageImpl#getXMLReference()
 	 * @generated
 	 */
-	int XML_REFERENCE = 8;
+	int XML_REFERENCE = 6;
 
 	/**
 	 * The feature id for the '<em><b>File</b></em>' reference.
@@ -1125,7 +943,7 @@ public interface TraceabilityPackage extends EPackage {
 	 * @see traceability.impl.TraceabilityPackageImpl#getModelReference()
 	 * @generated
 	 */
-	int MODEL_REFERENCE = 9;
+	int MODEL_REFERENCE = 7;
 
 	/**
 	 * The feature id for the '<em><b>File</b></em>' reference.
@@ -1236,6 +1054,188 @@ public interface TraceabilityPackage extends EPackage {
 	int MODEL_REFERENCE_FEATURE_COUNT = REFERENCE_FEATURE_COUNT + 1;
 
 	/**
+	 * The meta object id for the '{@link traceability.impl.TraceabilityHelperImpl <em>Helper</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see traceability.impl.TraceabilityHelperImpl
+	 * @see traceability.impl.TraceabilityPackageImpl#getTraceabilityHelper()
+	 * @generated
+	 */
+	int TRACEABILITY_HELPER = 8;
+
+	/**
+	 * The feature id for the '<em><b>File</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TRACEABILITY_HELPER__FILE = StructurePackage.OBJECT__FILE;
+
+	/**
+	 * The feature id for the '<em><b>Tag</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TRACEABILITY_HELPER__TAG = StructurePackage.OBJECT__TAG;
+
+	/**
+	 * The feature id for the '<em><b>File Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TRACEABILITY_HELPER__FILE_NAME = StructurePackage.OBJECT__FILE_NAME;
+
+	/**
+	 * The feature id for the '<em><b>Line Number</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TRACEABILITY_HELPER__LINE_NUMBER = StructurePackage.OBJECT__LINE_NUMBER;
+
+	/**
+	 * The feature id for the '<em><b>Owned Tags</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TRACEABILITY_HELPER__OWNED_TAGS = StructurePackage.OBJECT__OWNED_TAGS;
+
+	/**
+	 * The feature id for the '<em><b>Oid</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TRACEABILITY_HELPER__OID = StructurePackage.OBJECT__OID;
+
+	/**
+	 * The feature id for the '<em><b>Container</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TRACEABILITY_HELPER__CONTAINER = StructurePackage.OBJECT__CONTAINER;
+
+	/**
+	 * The number of structural features of the '<em>Helper</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TRACEABILITY_HELPER_FEATURE_COUNT = StructurePackage.OBJECT_FEATURE_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link traceability.impl.FileImpl <em>File</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see traceability.impl.FileImpl
+	 * @see traceability.impl.TraceabilityPackageImpl#getFile()
+	 * @generated
+	 */
+	int FILE = 9;
+
+	/**
+	 * The feature id for the '<em><b>File</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FILE__FILE = StructurePackage.OBJECT__FILE;
+
+	/**
+	 * The feature id for the '<em><b>Tag</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FILE__TAG = StructurePackage.OBJECT__TAG;
+
+	/**
+	 * The feature id for the '<em><b>File Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FILE__FILE_NAME = StructurePackage.OBJECT__FILE_NAME;
+
+	/**
+	 * The feature id for the '<em><b>Line Number</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FILE__LINE_NUMBER = StructurePackage.OBJECT__LINE_NUMBER;
+
+	/**
+	 * The feature id for the '<em><b>Owned Tags</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FILE__OWNED_TAGS = StructurePackage.OBJECT__OWNED_TAGS;
+
+	/**
+	 * The feature id for the '<em><b>Oid</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FILE__OID = StructurePackage.OBJECT__OID;
+
+	/**
+	 * The feature id for the '<em><b>Container</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FILE__CONTAINER = StructurePackage.OBJECT__CONTAINER;
+
+	/**
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FILE__ID = StructurePackage.OBJECT_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Uri</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FILE__URI = StructurePackage.OBJECT_FEATURE_COUNT + 1;
+
+	/**
+	 * The number of structural features of the '<em>File</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FILE_FEATURE_COUNT = StructurePackage.OBJECT_FEATURE_COUNT + 2;
+
+	/**
 	 * The meta object id for the '<em>String</em>' data type.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1264,16 +1264,6 @@ public interface TraceabilityPackage extends EPackage {
 	 * @generated
 	 */
 	int OBJECT = 12;
-
-	/**
-	 * Returns the meta object for class '{@link traceability.TraceabilityHelper <em>Helper</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Helper</em>'.
-	 * @see traceability.TraceabilityHelper
-	 * @generated
-	 */
-	EClass getTraceabilityHelper();
 
 	/**
 	 * Returns the meta object for class '{@link traceability.TraceModel <em>Trace Model</em>}'.
@@ -1328,38 +1318,6 @@ public interface TraceabilityPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getTraceModel_Messages();
-
-	/**
-	 * Returns the meta object for class '{@link traceability.File <em>File</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>File</em>'.
-	 * @see traceability.File
-	 * @generated
-	 */
-	EClass getFile();
-
-	/**
-	 * Returns the meta object for the attribute '{@link traceability.File#getId <em>Id</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Id</em>'.
-	 * @see traceability.File#getId()
-	 * @see #getFile()
-	 * @generated
-	 */
-	EAttribute getFile_Id();
-
-	/**
-	 * Returns the meta object for the attribute '{@link traceability.File#getUri <em>Uri</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Uri</em>'.
-	 * @see traceability.File#getUri()
-	 * @see #getFile()
-	 * @generated
-	 */
-	EAttribute getFile_Uri();
 
 	/**
 	 * Returns the meta object for class '{@link traceability.Message <em>Message</em>}'.
@@ -1641,6 +1599,48 @@ public interface TraceabilityPackage extends EPackage {
 	EReference getModelReference_RefObject();
 
 	/**
+	 * Returns the meta object for class '{@link traceability.TraceabilityHelper <em>Helper</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Helper</em>'.
+	 * @see traceability.TraceabilityHelper
+	 * @generated
+	 */
+	EClass getTraceabilityHelper();
+
+	/**
+	 * Returns the meta object for class '{@link traceability.File <em>File</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>File</em>'.
+	 * @see traceability.File
+	 * @generated
+	 */
+	EClass getFile();
+
+	/**
+	 * Returns the meta object for the attribute '{@link traceability.File#getId <em>Id</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Id</em>'.
+	 * @see traceability.File#getId()
+	 * @see #getFile()
+	 * @generated
+	 */
+	EAttribute getFile_Id();
+
+	/**
+	 * Returns the meta object for the attribute '{@link traceability.File#getUri <em>Uri</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Uri</em>'.
+	 * @see traceability.File#getUri()
+	 * @see #getFile()
+	 * @generated
+	 */
+	EAttribute getFile_Uri();
+
+	/**
 	 * Returns the meta object for data type '{@link java.lang.String <em>String</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1705,16 +1705,6 @@ public interface TraceabilityPackage extends EPackage {
 	 */
 	interface Literals {
 		/**
-		 * The meta object literal for the '{@link traceability.impl.TraceabilityHelperImpl <em>Helper</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see traceability.impl.TraceabilityHelperImpl
-		 * @see traceability.impl.TraceabilityPackageImpl#getTraceabilityHelper()
-		 * @generated
-		 */
-		EClass TRACEABILITY_HELPER = eINSTANCE.getTraceabilityHelper();
-
-		/**
 		 * The meta object literal for the '{@link traceability.impl.TraceModelImpl <em>Trace Model</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -1756,32 +1746,6 @@ public interface TraceabilityPackage extends EPackage {
 		 * @generated
 		 */
 		EReference TRACE_MODEL__MESSAGES = eINSTANCE.getTraceModel_Messages();
-
-		/**
-		 * The meta object literal for the '{@link traceability.impl.FileImpl <em>File</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see traceability.impl.FileImpl
-		 * @see traceability.impl.TraceabilityPackageImpl#getFile()
-		 * @generated
-		 */
-		EClass FILE = eINSTANCE.getFile();
-
-		/**
-		 * The meta object literal for the '<em><b>Id</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute FILE__ID = eINSTANCE.getFile_Id();
-
-		/**
-		 * The meta object literal for the '<em><b>Uri</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute FILE__URI = eINSTANCE.getFile_Uri();
 
 		/**
 		 * The meta object literal for the '{@link traceability.impl.MessageImpl <em>Message</em>}' class.
@@ -2015,6 +1979,42 @@ public interface TraceabilityPackage extends EPackage {
 		 */
 		EReference MODEL_REFERENCE__REF_OBJECT = eINSTANCE
 				.getModelReference_RefObject();
+
+		/**
+		 * The meta object literal for the '{@link traceability.impl.TraceabilityHelperImpl <em>Helper</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see traceability.impl.TraceabilityHelperImpl
+		 * @see traceability.impl.TraceabilityPackageImpl#getTraceabilityHelper()
+		 * @generated
+		 */
+		EClass TRACEABILITY_HELPER = eINSTANCE.getTraceabilityHelper();
+
+		/**
+		 * The meta object literal for the '{@link traceability.impl.FileImpl <em>File</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see traceability.impl.FileImpl
+		 * @see traceability.impl.TraceabilityPackageImpl#getFile()
+		 * @generated
+		 */
+		EClass FILE = eINSTANCE.getFile();
+
+		/**
+		 * The meta object literal for the '<em><b>Id</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute FILE__ID = eINSTANCE.getFile_Id();
+
+		/**
+		 * The meta object literal for the '<em><b>Uri</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute FILE__URI = eINSTANCE.getFile_Uri();
 
 		/**
 		 * The meta object literal for the '<em>String</em>' data type.

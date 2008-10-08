@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ReflectiveSequenceImpl.java,v 1.3 2008-09-22 14:46:53 cfaucher Exp $
+ * $Id: ReflectiveSequenceImpl.java,v 1.4 2008-10-08 14:37:42 cfaucher Exp $
  */
 package kermeta.language.impl;
 

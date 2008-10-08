@@ -10,24 +10,6 @@ public class ObjectSuper {
 	 *
 	 * @generated
 	 */
-	public static <G> java.lang.String super_createBehaviorJava(
-
-	kermeta.language.structure.Object self, km2ecore.KM2EcoreContext context
-
-	) {
-
-		java.lang.String result = null;
-
-		result = "";
-
-		return result;
-
-	}
-
-	/**
-	 *
-	 * @generated
-	 */
 	public static <G> void super_applyPass2(
 
 	kermeta.language.structure.Object self, km2ecore.KM2EcoreContext context
@@ -40,29 +22,29 @@ public class ObjectSuper {
 
 		{
 
-			kermeta.standard.Iterator<kermeta.language.structure.Tag> it_ft249 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
+			kermeta.standard.Iterator<kermeta.language.structure.Tag> it_ft247 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
 					.<kermeta.language.structure.Tag> convertAsOrderedSet(
 							self.getOwnedTags()).iterator();
-			java.lang.Boolean idLoopCond_1058 = false;
-			while (!idLoopCond_1058) {
-				idLoopCond_1058 = it_ft249.isOff();
-				if (idLoopCond_1058) {
+			java.lang.Boolean idLoopCond_1070 = false;
+			while (!idLoopCond_1070) {
+				idLoopCond_1070 = it_ft247.isOff();
+				if (idLoopCond_1070) {
 				} else {
 
 					//BIle:func
-					kermeta.language.structure.Tag o_lbdExp249 = it_ft249
+					kermeta.language.structure.Tag o_lbdExp247 = it_ft247
 							.next();
 
 					//BIle:func
-					kermeta.language.structure.Tag p_lbdExp248 = o_lbdExp249;
+					kermeta.language.structure.Tag p_lbdExp246 = o_lbdExp247;
 
-					java.lang.Boolean idIfCond_1059 = false;
-					idIfCond_1059 = kermeta.standard.helper.StringWrapper
-							.equals(p_lbdExp248.getDeprecated(), "");
+					java.lang.Boolean idIfCond_1071 = false;
+					idIfCond_1071 = kermeta.standard.helper.StringWrapper
+							.equals(p_lbdExp246.getDeprecated(), "");
 
-					if (idIfCond_1059) {
+					if (idIfCond_1071) {
 
-						p_lbdExp248.applyPass2(context);
+						p_lbdExp246.applyPass2(context);
 					}
 
 					//EIle:func
@@ -76,6 +58,24 @@ public class ObjectSuper {
 		//EIft:each
 
 		//EIft:eachOwnedElement
+
+	}
+
+	/**
+	 *
+	 * @generated
+	 */
+	public static <G> java.lang.String super_createBehaviorJava(
+
+	kermeta.language.structure.Object self, km2ecore.KM2EcoreContext context
+
+	) {
+
+		java.lang.String result = null;
+
+		result = "";
+
+		return result;
 
 	}
 

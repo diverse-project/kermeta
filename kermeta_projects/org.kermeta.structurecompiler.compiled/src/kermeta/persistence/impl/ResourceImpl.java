@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ResourceImpl.java,v 1.3 2008-09-22 14:48:25 cfaucher Exp $
+ * $Id: ResourceImpl.java,v 1.4 2008-10-08 14:37:48 cfaucher Exp $
  */
 package kermeta.persistence.impl;
 
@@ -35,8 +35,8 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
  * The following features are implemented:
  * <ul>
  *   <li>{@link kermeta.persistence.impl.ResourceImpl#getRepository <em>Repository</em>}</li>
- *   <li>{@link kermeta.persistence.impl.ResourceImpl#getMetaModelURI <em>Meta Model URI</em>}</li>
  *   <li>{@link kermeta.persistence.impl.ResourceImpl#getIsReadOnly <em>Is Read Only</em>}</li>
+ *   <li>{@link kermeta.persistence.impl.ResourceImpl#getMetaModelURI <em>Meta Model URI</em>}</li>
  *   <li>{@link kermeta.persistence.impl.ResourceImpl#getUri <em>Uri</em>}</li>
  * </ul>
  * </p>
@@ -45,26 +45,6 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
  */
 public abstract class ResourceImpl extends
 		SetImpl<kermeta.language.structure.Object> implements Resource {
-	/**
-	 * The default value of the '{@link #getMetaModelURI() <em>Meta Model URI</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getMetaModelURI()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final String META_MODEL_URI_EDEFAULT = null;
-
-	/**
-	 * The cached value of the '{@link #getMetaModelURI() <em>Meta Model URI</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getMetaModelURI()
-	 * @generated
-	 * @ordered
-	 */
-	protected String metaModelURI = META_MODEL_URI_EDEFAULT;
-
 	/**
 	 * The default value of the '{@link #getIsReadOnly() <em>Is Read Only</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -84,6 +64,26 @@ public abstract class ResourceImpl extends
 	 * @ordered
 	 */
 	protected Boolean isReadOnly = IS_READ_ONLY_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getMetaModelURI() <em>Meta Model URI</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getMetaModelURI()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String META_MODEL_URI_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getMetaModelURI() <em>Meta Model URI</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getMetaModelURI()
+	 * @generated
+	 * @ordered
+	 */
+	protected String metaModelURI = META_MODEL_URI_EDEFAULT;
 
 	/**
 	 * The default value of the '{@link #getUri() <em>Uri</em>}' attribute.
@@ -190,29 +190,6 @@ public abstract class ResourceImpl extends
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public String getMetaModelURI() {
-		return metaModelURI;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setMetaModelURI(String newMetaModelURI) {
-		String oldMetaModelURI = metaModelURI;
-		metaModelURI = newMetaModelURI;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET,
-					PersistencePackage.RESOURCE__META_MODEL_URI,
-					oldMetaModelURI, metaModelURI));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public Boolean getIsReadOnly() {
 		return isReadOnly;
 	}
@@ -229,6 +206,29 @@ public abstract class ResourceImpl extends
 			eNotify(new ENotificationImpl(this, Notification.SET,
 					PersistencePackage.RESOURCE__IS_READ_ONLY, oldIsReadOnly,
 					isReadOnly));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getMetaModelURI() {
+		return metaModelURI;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setMetaModelURI(String newMetaModelURI) {
+		String oldMetaModelURI = metaModelURI;
+		metaModelURI = newMetaModelURI;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET,
+					PersistencePackage.RESOURCE__META_MODEL_URI,
+					oldMetaModelURI, metaModelURI));
 	}
 
 	/**
@@ -287,159 +287,159 @@ public abstract class ResourceImpl extends
 
 		{
 
-			kermeta.standard.Iterator<kermeta.language.structure.Object> it_ft218 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
+			kermeta.standard.Iterator<kermeta.language.structure.Object> it_ft205 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
 					.<kermeta.language.structure.Object> convertAsSet(
 							this.getterContents()).iterator();
-			java.lang.Boolean idLoopCond_946 = false;
-			while (!idLoopCond_946) {
-				idLoopCond_946 = it_ft218.isOff();
-				if (idLoopCond_946) {
+			java.lang.Boolean idLoopCond_920 = false;
+			while (!idLoopCond_920) {
+				idLoopCond_920 = it_ft205.isOff();
+				if (idLoopCond_920) {
 				} else {
 
 					//BIle:func
-					kermeta.language.structure.Object containedObj_lbdExp218 = it_ft218
+					kermeta.language.structure.Object containedObj_lbdExp205 = it_ft205
 							.next();
 
 					kermeta.language.structure.ClassDefinition classDef = null;
 
 					classDef = (kermeta.language.structure.ClassDefinition) org.kermeta.compil.runtime.helper.language.ObjectUtil
-							.getMetaClass(containedObj_lbdExp218)
+							.getMetaClass(containedObj_lbdExp205)
 							.getTypeDefinition();
 
-					java.lang.Boolean idIfCond_947 = false;
-					idIfCond_947 = kermeta.standard.helper.BooleanWrapper
+					java.lang.Boolean idIfCond_921 = false;
+					idIfCond_921 = kermeta.standard.helper.BooleanWrapper
 							.not(org.kermeta.compil.runtime.helper.language.ObjectUtil
 									.isVoid(classDef));
 
-					if (idIfCond_947) {
+					if (idIfCond_921) {
 
 						//BIft:each
 
 						{
 
-							kermeta.standard.Iterator<kermeta.language.structure.Property> it_ft219 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
+							kermeta.standard.Iterator<kermeta.language.structure.Property> it_ft206 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
 									.<kermeta.language.structure.Property> convertAsSet(
 											classDef.getterAllAttribute())
 									.iterator();
-							java.lang.Boolean idLoopCond_948 = false;
-							while (!idLoopCond_948) {
-								idLoopCond_948 = it_ft219.isOff();
-								if (idLoopCond_948) {
+							java.lang.Boolean idLoopCond_922 = false;
+							while (!idLoopCond_922) {
+								idLoopCond_922 = it_ft206.isOff();
+								if (idLoopCond_922) {
 								} else {
 
 									//BIle:func
-									kermeta.language.structure.Property prop_lbdExp219 = it_ft219
+									kermeta.language.structure.Property prop_lbdExp206 = it_ft206
 											.next();
 
-									java.lang.Boolean idIfCond_949 = false;
-									idIfCond_949 = kermeta.standard.helper.BooleanWrapper
-											.not(prop_lbdExp219.getIsDerived());
+									java.lang.Boolean idIfCond_923 = false;
+									idIfCond_923 = kermeta.standard.helper.BooleanWrapper
+											.not(prop_lbdExp206.getIsDerived());
 
-									if (idIfCond_949) {
+									if (idIfCond_923) {
 
-										java.lang.Boolean idIfCond_950 = false;
-										idIfCond_950 = kermeta.standard.helper.BooleanWrapper
+										java.lang.Boolean idIfCond_924 = false;
+										idIfCond_924 = kermeta.standard.helper.BooleanWrapper
 												.or(
 														kermeta.standard.helper.IntegerWrapper
 																.isGreater(
-																		prop_lbdExp219
+																		prop_lbdExp206
 																				.getUpper(),
 																		1),
 														kermeta.standard.helper.IntegerWrapper
 																.equals(
-																		prop_lbdExp219
+																		prop_lbdExp206
 																				.getUpper(),
 																		kermeta.standard.helper.IntegerWrapper
 																				.uminus(1)));
 
-										if (idIfCond_950) {
+										if (idIfCond_924) {
 
 											kermeta.standard.Collection<kermeta.language.structure.Object> referencedObjs = null;
 
 											referencedObjs = (kermeta.standard.Collection<kermeta.language.structure.Object>) org.kermeta.compil.runtime.helper.language.ObjectUtil
 													.get(
-															containedObj_lbdExp218,
-															prop_lbdExp219);
+															containedObj_lbdExp205,
+															prop_lbdExp206);
 
-											java.lang.Boolean idIfCond_951 = false;
-											idIfCond_951 = kermeta.standard.helper.BooleanWrapper
+											java.lang.Boolean idIfCond_925 = false;
+											idIfCond_925 = kermeta.standard.helper.BooleanWrapper
 													.not(org.kermeta.compil.runtime.helper.language.ObjectUtil
 															.isVoid(referencedObjs));
 
-											if (idIfCond_951) {
+											if (idIfCond_925) {
 
 												//BIft:each
 
 												{
 
-													kermeta.standard.Iterator<kermeta.language.structure.Object> it_ft220 = referencedObjs
+													kermeta.standard.Iterator<kermeta.language.structure.Object> it_ft207 = referencedObjs
 															.iterator();
-													java.lang.Boolean idLoopCond_952 = false;
-													while (!idLoopCond_952) {
-														idLoopCond_952 = it_ft220
+													java.lang.Boolean idLoopCond_926 = false;
+													while (!idLoopCond_926) {
+														idLoopCond_926 = it_ft207
 																.isOff();
-														if (idLoopCond_952) {
+														if (idLoopCond_926) {
 														} else {
 
 															//BIle:func
-															kermeta.language.structure.Object referencedObj_lbdExp220 = it_ft220
+															kermeta.language.structure.Object referencedObj_lbdExp207 = it_ft207
 																	.next();
 
 															//BIft:exists
 
-															java.lang.Boolean result_ft221 = null;
+															java.lang.Boolean result_ft208 = null;
 
-															java.lang.Boolean test_ft221 = false;
+															java.lang.Boolean test_ft208 = false;
 
 															{
 
-																kermeta.standard.Iterator<kermeta.persistence.Resource> it_ft221 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
+																kermeta.standard.Iterator<kermeta.persistence.Resource> it_ft208 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
 																		.<kermeta.persistence.Resource> convertAsSet(
 																				this
 																						.getRepository()
 																						.getResources())
 																		.iterator();
-																java.lang.Boolean idLoopCond_954 = false;
-																while (!idLoopCond_954) {
-																	idLoopCond_954 = kermeta.standard.helper.BooleanWrapper
+																java.lang.Boolean idLoopCond_928 = false;
+																while (!idLoopCond_928) {
+																	idLoopCond_928 = kermeta.standard.helper.BooleanWrapper
 																			.or(
-																					it_ft221
+																					it_ft208
 																							.isOff(),
 																					org.kermeta.compil.runtime.helper.language.ObjectUtil
 																							.isNotEqual(
-																									test_ft221,
+																									test_ft208,
 																									false));
-																	if (idLoopCond_954) {
+																	if (idLoopCond_928) {
 																	} else {
 
-																		java.lang.Boolean result_lambda_ft221 = null;
+																		java.lang.Boolean result_lambda_ft208 = null;
 																		//BIle:func
-																		kermeta.persistence.Resource res2_lbdExp221 = it_ft221
+																		kermeta.persistence.Resource res2_lbdExp208 = it_ft208
 																				.next();
 
-																		result_lambda_ft221 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
+																		result_lambda_ft208 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
 																				.<kermeta.language.structure.Object> convertAsSet(
-																						res2_lbdExp221
+																						res2_lbdExp208
 																								.getterContents())
 																				.contains(
-																						referencedObj_lbdExp220);
+																						referencedObj_lbdExp207);
 																		//EIle:func
 
-																		test_ft221 = kermeta.standard.helper.BooleanWrapper
+																		test_ft208 = kermeta.standard.helper.BooleanWrapper
 																				.or(
-																						test_ft221,
-																						result_lambda_ft221);
+																						test_ft208,
+																						result_lambda_ft208);
 																	}
 																}
 															}
 
-															result_ft221 = test_ft221;
+															result_ft208 = test_ft208;
 															//EIft:exists
-															java.lang.Boolean idIfCond_953 = false;
-															idIfCond_953 = kermeta.standard.helper.BooleanWrapper
+															java.lang.Boolean idIfCond_927 = false;
+															idIfCond_927 = kermeta.standard.helper.BooleanWrapper
 																	.and(
 																			kermeta.standard.helper.BooleanWrapper
-																					.not(result_ft221),
+																					.not(result_ft208),
 																			kermeta.standard.helper.BooleanWrapper
 																					.not(kermeta.standard.helper.BooleanWrapper
 																							.or(
@@ -447,39 +447,39 @@ public abstract class ResourceImpl extends
 																											.or(
 																													org.kermeta.compil.runtime.helper.language.ObjectUtil
 																															.isKindOf(
-																																	referencedObj_lbdExp220,
+																																	referencedObj_lbdExp207,
 																																	org.kermeta.compil.runtime.ExecutionContext
 																																			.getInstance()
 																																			.getMetaClass(
 																																					"java.lang.String")),
 																													org.kermeta.compil.runtime.helper.language.ObjectUtil
 																															.isKindOf(
-																																	referencedObj_lbdExp220,
+																																	referencedObj_lbdExp207,
 																																	org.kermeta.compil.runtime.ExecutionContext
 																																			.getInstance()
 																																			.getMetaClass(
 																																					"java.lang.Integer"))),
 																									org.kermeta.compil.runtime.helper.language.ObjectUtil
 																											.isKindOf(
-																													referencedObj_lbdExp220,
+																													referencedObj_lbdExp207,
 																													org.kermeta.compil.runtime.ExecutionContext
 																															.getInstance()
 																															.getMetaClass(
 																																	"java.lang.Boolean")))));
 
-															if (idIfCond_953) {
+															if (idIfCond_927) {
 
 																kermeta.persistence.DanglingDiagnostic diagnostic = ((kermeta.persistence.DanglingDiagnostic) org.kermeta.compil.runtime.helper.language.ClassUtil
 																		.newObject("kermeta.persistence.DanglingDiagnostic"));
 
 																diagnostic
-																		.setDanglingElement(referencedObj_lbdExp220);
+																		.setDanglingElement(referencedObj_lbdExp207);
 
 																diagnostic
-																		.setReferencingElement(containedObj_lbdExp218);
+																		.setReferencingElement(containedObj_lbdExp205);
 
 																diagnostic
-																		.setReferencingProperty(prop_lbdExp219);
+																		.setReferencingProperty(prop_lbdExp206);
 
 																result
 																		.add(diagnostic);
@@ -501,71 +501,71 @@ public abstract class ResourceImpl extends
 
 											referencedObj = org.kermeta.compil.runtime.helper.language.ObjectUtil
 													.get(
-															containedObj_lbdExp218,
-															prop_lbdExp219);
+															containedObj_lbdExp205,
+															prop_lbdExp206);
 
-											java.lang.Boolean idIfCond_955 = false;
-											idIfCond_955 = kermeta.standard.helper.BooleanWrapper
+											java.lang.Boolean idIfCond_929 = false;
+											idIfCond_929 = kermeta.standard.helper.BooleanWrapper
 													.not(org.kermeta.compil.runtime.helper.language.ObjectUtil
 															.isVoid(referencedObj));
 
-											if (idIfCond_955) {
+											if (idIfCond_929) {
 
 												//BIft:exists
 
-												java.lang.Boolean result_ft222 = null;
+												java.lang.Boolean result_ft209 = null;
 
-												java.lang.Boolean test_ft222 = false;
+												java.lang.Boolean test_ft209 = false;
 
 												{
 
-													kermeta.standard.Iterator<kermeta.persistence.Resource> it_ft222 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
+													kermeta.standard.Iterator<kermeta.persistence.Resource> it_ft209 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
 															.<kermeta.persistence.Resource> convertAsSet(
 																	this
 																			.getRepository()
 																			.getResources())
 															.iterator();
-													java.lang.Boolean idLoopCond_957 = false;
-													while (!idLoopCond_957) {
-														idLoopCond_957 = kermeta.standard.helper.BooleanWrapper
+													java.lang.Boolean idLoopCond_931 = false;
+													while (!idLoopCond_931) {
+														idLoopCond_931 = kermeta.standard.helper.BooleanWrapper
 																.or(
-																		it_ft222
+																		it_ft209
 																				.isOff(),
 																		org.kermeta.compil.runtime.helper.language.ObjectUtil
 																				.isNotEqual(
-																						test_ft222,
+																						test_ft209,
 																						false));
-														if (idLoopCond_957) {
+														if (idLoopCond_931) {
 														} else {
 
-															java.lang.Boolean result_lambda_ft222 = null;
+															java.lang.Boolean result_lambda_ft209 = null;
 															//BIle:func
-															kermeta.persistence.Resource res2_lbdExp222 = it_ft222
+															kermeta.persistence.Resource res2_lbdExp209 = it_ft209
 																	.next();
 
-															result_lambda_ft222 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
+															result_lambda_ft209 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
 																	.<kermeta.language.structure.Object> convertAsSet(
-																			res2_lbdExp222
+																			res2_lbdExp209
 																					.getterContents())
 																	.contains(
 																			referencedObj);
 															//EIle:func
 
-															test_ft222 = kermeta.standard.helper.BooleanWrapper
+															test_ft209 = kermeta.standard.helper.BooleanWrapper
 																	.or(
-																			test_ft222,
-																			result_lambda_ft222);
+																			test_ft209,
+																			result_lambda_ft209);
 														}
 													}
 												}
 
-												result_ft222 = test_ft222;
+												result_ft209 = test_ft209;
 												//EIft:exists
-												java.lang.Boolean idIfCond_956 = false;
-												idIfCond_956 = kermeta.standard.helper.BooleanWrapper
+												java.lang.Boolean idIfCond_930 = false;
+												idIfCond_930 = kermeta.standard.helper.BooleanWrapper
 														.and(
 																kermeta.standard.helper.BooleanWrapper
-																		.not(result_ft222),
+																		.not(result_ft209),
 																kermeta.standard.helper.BooleanWrapper
 																		.not(kermeta.standard.helper.BooleanWrapper
 																				.or(
@@ -593,7 +593,7 @@ public abstract class ResourceImpl extends
 																												.getMetaClass(
 																														"java.lang.Boolean")))));
 
-												if (idIfCond_956) {
+												if (idIfCond_930) {
 
 													kermeta.persistence.DanglingDiagnostic diagnostic = ((kermeta.persistence.DanglingDiagnostic) org.kermeta.compil.runtime.helper.language.ClassUtil
 															.newObject("kermeta.persistence.DanglingDiagnostic"));
@@ -602,10 +602,10 @@ public abstract class ResourceImpl extends
 															.setDanglingElement(referencedObj);
 
 													diagnostic
-															.setReferencingElement(containedObj_lbdExp218);
+															.setReferencingElement(containedObj_lbdExp205);
 
 													diagnostic
-															.setReferencingProperty(prop_lbdExp219);
+															.setReferencingProperty(prop_lbdExp206);
 
 													result.add(diagnostic);
 												}
@@ -717,20 +717,20 @@ public abstract class ResourceImpl extends
 
 			{
 
-				kermeta.standard.Iterator<kermeta.language.structure.Object> it_ft217 = this
+				kermeta.standard.Iterator<kermeta.language.structure.Object> it_ft204 = this
 						.iterator();
-				java.lang.Boolean idLoopCond_945 = false;
-				while (!idLoopCond_945) {
-					idLoopCond_945 = it_ft217.isOff();
-					if (idLoopCond_945) {
+				java.lang.Boolean idLoopCond_919 = false;
+				while (!idLoopCond_919) {
+					idLoopCond_919 = it_ft204.isOff();
+					if (idLoopCond_919) {
 					} else {
 
 						//BIle:func
-						kermeta.language.structure.Object e_lbdExp217 = it_ft217
+						kermeta.language.structure.Object e_lbdExp204 = it_ft204
 								.next();
 
 						coll = (kermeta.standard.Set<kermeta.language.structure.Object>) org.kermeta.compil.runtime.helper.language.ObjectUtil
-								.getAllContainedObjects(e_lbdExp217);
+								.getAllContainedObjects(e_lbdExp204);
 
 						res.addAll(coll);
 						//EIle:func
@@ -809,10 +809,10 @@ public abstract class ResourceImpl extends
 			if (resolve)
 				return getRepository();
 			return basicGetRepository();
-		case PersistencePackage.RESOURCE__META_MODEL_URI:
-			return getMetaModelURI();
 		case PersistencePackage.RESOURCE__IS_READ_ONLY:
 			return getIsReadOnly();
+		case PersistencePackage.RESOURCE__META_MODEL_URI:
+			return getMetaModelURI();
 		case PersistencePackage.RESOURCE__URI:
 			return getUri();
 		}
@@ -830,11 +830,11 @@ public abstract class ResourceImpl extends
 		case PersistencePackage.RESOURCE__REPOSITORY:
 			setRepository((Repository) newValue);
 			return;
-		case PersistencePackage.RESOURCE__META_MODEL_URI:
-			setMetaModelURI((String) newValue);
-			return;
 		case PersistencePackage.RESOURCE__IS_READ_ONLY:
 			setIsReadOnly((Boolean) newValue);
+			return;
+		case PersistencePackage.RESOURCE__META_MODEL_URI:
+			setMetaModelURI((String) newValue);
 			return;
 		case PersistencePackage.RESOURCE__URI:
 			setUri((String) newValue);
@@ -854,11 +854,11 @@ public abstract class ResourceImpl extends
 		case PersistencePackage.RESOURCE__REPOSITORY:
 			setRepository((Repository) null);
 			return;
-		case PersistencePackage.RESOURCE__META_MODEL_URI:
-			setMetaModelURI(META_MODEL_URI_EDEFAULT);
-			return;
 		case PersistencePackage.RESOURCE__IS_READ_ONLY:
 			setIsReadOnly(IS_READ_ONLY_EDEFAULT);
+			return;
+		case PersistencePackage.RESOURCE__META_MODEL_URI:
+			setMetaModelURI(META_MODEL_URI_EDEFAULT);
 			return;
 		case PersistencePackage.RESOURCE__URI:
 			setUri(URI_EDEFAULT);
@@ -877,12 +877,12 @@ public abstract class ResourceImpl extends
 		switch (featureID) {
 		case PersistencePackage.RESOURCE__REPOSITORY:
 			return basicGetRepository() != null;
-		case PersistencePackage.RESOURCE__META_MODEL_URI:
-			return META_MODEL_URI_EDEFAULT == null ? metaModelURI != null
-					: !META_MODEL_URI_EDEFAULT.equals(metaModelURI);
 		case PersistencePackage.RESOURCE__IS_READ_ONLY:
 			return IS_READ_ONLY_EDEFAULT == null ? isReadOnly != null
 					: !IS_READ_ONLY_EDEFAULT.equals(isReadOnly);
+		case PersistencePackage.RESOURCE__META_MODEL_URI:
+			return META_MODEL_URI_EDEFAULT == null ? metaModelURI != null
+					: !META_MODEL_URI_EDEFAULT.equals(metaModelURI);
 		case PersistencePackage.RESOURCE__URI:
 			return URI_EDEFAULT == null ? uri != null : !URI_EDEFAULT
 					.equals(uri);
@@ -901,10 +901,10 @@ public abstract class ResourceImpl extends
 			return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (metaModelURI: ");
-		result.append(metaModelURI);
-		result.append(", isReadOnly: ");
+		result.append(" (isReadOnly: ");
 		result.append(isReadOnly);
+		result.append(", metaModelURI: ");
+		result.append(metaModelURI);
 		result.append(", uri: ");
 		result.append(uri);
 		result.append(')');

@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: EcoreFactoryImpl.java,v 1.3 2008-09-22 14:49:09 cfaucher Exp $
+ * $Id: EcoreFactoryImpl.java,v 1.4 2008-10-08 14:38:02 cfaucher Exp $
  */
 package km2ecore.helper.ecore.impl;
 
@@ -63,12 +63,12 @@ public class EcoreFactoryImpl extends EFactoryImpl implements EcoreFactory {
 		switch (eClass.getClassifierID()) {
 		case EcorePackage.EANNOTATION_HELPER:
 			return createEAnnotationHelper();
+		case EcorePackage.ECORE_MODEL_ELEMENT_HELPER:
+			return createEcoreModelElementHelper();
 		case EcorePackage.ENAMED_ELEMENT_HELPER:
 			return createENamedElementHelper();
 		case EcorePackage.MODEL_ANALIZER:
 			return createModelAnalizer();
-		case EcorePackage.ECORE_MODEL_ELEMENT_HELPER:
-			return createEcoreModelElementHelper();
 		default:
 			throw new IllegalArgumentException("The class '" + eClass.getName()
 					+ "' is not a valid classifier");
@@ -130,6 +130,16 @@ public class EcoreFactoryImpl extends EFactoryImpl implements EcoreFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EcoreModelElementHelper createEcoreModelElementHelper() {
+		EcoreModelElementHelperImpl ecoreModelElementHelper = new EcoreModelElementHelperImpl();
+		return ecoreModelElementHelper;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public ENamedElementHelper createENamedElementHelper() {
 		ENamedElementHelperImpl eNamedElementHelper = new ENamedElementHelperImpl();
 		return eNamedElementHelper;
@@ -143,16 +153,6 @@ public class EcoreFactoryImpl extends EFactoryImpl implements EcoreFactory {
 	public ModelAnalizer createModelAnalizer() {
 		ModelAnalizerImpl modelAnalizer = new ModelAnalizerImpl();
 		return modelAnalizer;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EcoreModelElementHelper createEcoreModelElementHelper() {
-		EcoreModelElementHelperImpl ecoreModelElementHelper = new EcoreModelElementHelperImpl();
-		return ecoreModelElementHelper;
 	}
 
 	/**

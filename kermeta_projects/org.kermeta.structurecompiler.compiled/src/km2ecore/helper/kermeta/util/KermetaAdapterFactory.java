@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: KermetaAdapterFactory.java,v 1.3 2008-09-22 14:49:12 cfaucher Exp $
+ * $Id: KermetaAdapterFactory.java,v 1.4 2008-10-08 14:38:02 cfaucher Exp $
  */
 package km2ecore.helper.kermeta.util;
 
@@ -71,14 +71,14 @@ public class KermetaAdapterFactory extends AdapterFactoryImpl {
 	 */
 	protected KermetaSwitch<Adapter> modelSwitch = new KermetaSwitch<Adapter>() {
 		@Override
-		public Adapter caseConstraintHelper(ConstraintHelper object) {
-			return createConstraintHelperAdapter();
-		}
-
-		@Override
 		public Adapter caseGenericTypeDefinitionHelper(
 				GenericTypeDefinitionHelper object) {
 			return createGenericTypeDefinitionHelperAdapter();
+		}
+
+		@Override
+		public Adapter caseConstraintHelper(ConstraintHelper object) {
+			return createConstraintHelperAdapter();
 		}
 
 		@Override
@@ -111,20 +111,6 @@ public class KermetaAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link km2ecore.helper.kermeta.ConstraintHelper <em>Constraint Helper</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see km2ecore.helper.kermeta.ConstraintHelper
-	 * @generated
-	 */
-	public Adapter createConstraintHelperAdapter() {
-		return null;
-	}
-
-	/**
 	 * Creates a new adapter for an object of class '{@link km2ecore.helper.kermeta.GenericTypeDefinitionHelper <em>Generic Type Definition Helper</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -135,6 +121,20 @@ public class KermetaAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createGenericTypeDefinitionHelperAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link km2ecore.helper.kermeta.ConstraintHelper <em>Constraint Helper</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see km2ecore.helper.kermeta.ConstraintHelper
+	 * @generated
+	 */
+	public Adapter createConstraintHelperAdapter() {
 		return null;
 	}
 

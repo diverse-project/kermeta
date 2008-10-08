@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ExceptionsPackage.java,v 1.3 2008-09-22 14:45:18 cfaucher Exp $
+ * $Id: ExceptionsPackage.java,v 1.4 2008-10-08 14:37:32 cfaucher Exp $
  */
 package kermeta.exceptions;
 
@@ -2772,13 +2772,22 @@ public interface ExceptionsPackage extends EPackage {
 	int RESOURCE_SAVE_EXCEPTION__STACK_TRACE = EXCEPTION__STACK_TRACE;
 
 	/**
+	 * The feature id for the '<em><b>Failed While Saving</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RESOURCE_SAVE_EXCEPTION__FAILED_WHILE_SAVING = EXCEPTION_FEATURE_COUNT + 0;
+
+	/**
 	 * The number of structural features of the '<em>Resource Save Exception</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int RESOURCE_SAVE_EXCEPTION_FEATURE_COUNT = EXCEPTION_FEATURE_COUNT + 0;
+	int RESOURCE_SAVE_EXCEPTION_FEATURE_COUNT = EXCEPTION_FEATURE_COUNT + 1;
 
 	/**
 	 * The meta object id for the '{@link kermeta.exceptions.impl.ResourceMixedLevelsExceptionImpl <em>Resource Mixed Levels Exception</em>}' class.
@@ -2879,6 +2888,15 @@ public interface ExceptionsPackage extends EPackage {
 	 * @ordered
 	 */
 	int RESOURCE_MIXED_LEVELS_EXCEPTION__STACK_TRACE = RESOURCE_SAVE_EXCEPTION__STACK_TRACE;
+
+	/**
+	 * The feature id for the '<em><b>Failed While Saving</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RESOURCE_MIXED_LEVELS_EXCEPTION__FAILED_WHILE_SAVING = RESOURCE_SAVE_EXCEPTION__FAILED_WHILE_SAVING;
 
 	/**
 	 * The number of structural features of the '<em>Resource Mixed Levels Exception</em>' class.
@@ -3631,6 +3649,17 @@ public interface ExceptionsPackage extends EPackage {
 	EClass getResourceSaveException();
 
 	/**
+	 * Returns the meta object for the reference '{@link kermeta.exceptions.ResourceSaveException#getFailedWhileSaving <em>Failed While Saving</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Failed While Saving</em>'.
+	 * @see kermeta.exceptions.ResourceSaveException#getFailedWhileSaving()
+	 * @see #getResourceSaveException()
+	 * @generated
+	 */
+	EReference getResourceSaveException_FailedWhileSaving();
+
+	/**
 	 * Returns the meta object for class '{@link kermeta.exceptions.ResourceMixedLevelsException <em>Resource Mixed Levels Exception</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3999,6 +4028,15 @@ public interface ExceptionsPackage extends EPackage {
 		 * @generated
 		 */
 		EClass RESOURCE_SAVE_EXCEPTION = eINSTANCE.getResourceSaveException();
+
+		/**
+		 * The meta object literal for the '<em><b>Failed While Saving</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference RESOURCE_SAVE_EXCEPTION__FAILED_WHILE_SAVING = eINSTANCE
+				.getResourceSaveException_FailedWhileSaving();
 
 		/**
 		 * The meta object literal for the '{@link kermeta.exceptions.impl.ResourceMixedLevelsExceptionImpl <em>Resource Mixed Levels Exception</em>}' class.

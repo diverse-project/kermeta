@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: Km2ecoreFactory.java,v 1.3 2008-09-22 14:48:57 cfaucher Exp $
+ * $Id: Km2ecoreFactory.java,v 1.4 2008-10-08 14:37:24 cfaucher Exp $
  */
 package km2ecore;
 
@@ -26,15 +26,6 @@ public interface Km2ecoreFactory extends EFactory {
 	Km2ecoreFactory eINSTANCE = km2ecore.impl.Km2ecoreFactoryImpl.init();
 
 	/**
-	 * Returns a new object of class '<em>Source Tracer</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Source Tracer</em>'.
-	 * @generated
-	 */
-	SourceTracer createSourceTracer();
-
-	/**
 	 * Returns a new object of class '<em>KM2 Ecore Context</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -42,6 +33,15 @@ public interface Km2ecoreFactory extends EFactory {
 	 * @generated
 	 */
 	KM2EcoreContext createKM2EcoreContext();
+
+	/**
+	 * Returns a new object of class '<em>Source Tracer</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Source Tracer</em>'.
+	 * @generated
+	 */
+	SourceTracer createSourceTracer();
 
 	/**
 	 * Returns the package supported by this factory.

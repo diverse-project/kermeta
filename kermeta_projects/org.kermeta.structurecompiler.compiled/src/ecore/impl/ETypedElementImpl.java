@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ETypedElementImpl.java,v 1.4 2008-09-22 14:44:20 cfaucher Exp $
+ * $Id: ETypedElementImpl.java,v 1.5 2008-10-08 14:37:31 cfaucher Exp $
  */
 package ecore.impl;
 
@@ -67,7 +67,7 @@ public abstract class ETypedElementImpl extends ENamedElementImpl implements
 	 * @generated
 	 * @ordered
 	 */
-	protected static final boolean UNIQUE_EDEFAULT = false;
+	protected static final boolean UNIQUE_EDEFAULT = true;
 
 	/**
 	 * The cached value of the '{@link #isUnique() <em>Unique</em>}' attribute.
@@ -97,7 +97,7 @@ public abstract class ETypedElementImpl extends ENamedElementImpl implements
 	 * @generated
 	 * @ordered
 	 */
-	protected static final boolean ORDERED_EDEFAULT = false;
+	protected static final boolean ORDERED_EDEFAULT = true;
 
 	/**
 	 * The cached value of the '{@link #isOrdered() <em>Ordered</em>}' attribute.
@@ -117,7 +117,7 @@ public abstract class ETypedElementImpl extends ENamedElementImpl implements
 	 * @generated
 	 * @ordered
 	 */
-	protected static final int UPPER_BOUND_EDEFAULT = 0;
+	protected static final int UPPER_BOUND_EDEFAULT = 1;
 
 	/**
 	 * The cached value of the '{@link #getUpperBound() <em>Upper Bound</em>}' attribute.
