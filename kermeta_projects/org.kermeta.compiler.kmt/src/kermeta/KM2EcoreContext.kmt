@@ -1,4 +1,4 @@
-/* $Id: KM2EcoreContext.kmt,v 1.46 2008-10-02 09:55:05 cfaucher Exp $
+/* $Id: KM2EcoreContext.kmt,v 1.47 2008-10-08 14:25:29 cfaucher Exp $
  * Creation date: February 14, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -17,7 +17,7 @@ require "http://www.kermeta.org/Traceability"
 require "http://www.kermeta.org/simk"
 require "pass0/Pass0.kmt"
 
-require "platform:/plugin/fr.irisa.triskell.kermeta.ecore/src/kermeta/helpers/EcoreHelper.kmt"
+//require "platform:/plugin/fr.irisa.triskell.kermeta.ecore/src/kermeta/helpers/EcoreHelper.kmt"
 
 using kermeta::language
 using kermeta::language::structure

@@ -1,4 +1,4 @@
-/* $Id: ExpressionHelper.kmt,v 1.24 2008-09-29 15:44:42 cfaucher Exp $
+/* $Id: ExpressionHelper.kmt,v 1.25 2008-10-08 14:25:29 cfaucher Exp $
  * Creation date: Jul 25, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -586,49 +586,6 @@ aspect class CallFeature {
 		//context.current_param_ft.pop()
 		
 		result := ft_str
-	end
-	
-	/** In progress */
-	operation getMoreAppropriateOperation() : Operation is do
-		result := void
-		
-		var op_name : String init self.staticOperation.name
-		
-		stdio.writeln("getMoreAppropriateOperation(): " + op_name.toString())
-		
-		var typeOfCallingCallFeature : Type init self.target.staticType
-		
-		var detectedOp : Operation init typeOfCallingCallFeature.asType(ParameterizedType).typeDefinition.asType(ClassDefinition).ownedOperation.detect{ op | op.name==op_name}
-		
-		if not detectedOp.isVoid() then
-			result := detectedOp
-		else
-			var sc : OrderedSet<Class> init typeOfCallingCallFeature.asType(Class).superClass()
-			
-			
-			/*sc.detect{ class_ |
-				class_.asType(ParameterizedType).typeDefinition.asType(ClassDefinition).ownedOperation.exists{ op | op.name==op_name}
-			}*/
-			
-	        var superClasses : OrderedSet<Class> init OrderedSet<Class>.new
-	        superClasses.addAll(sc)
-	        
-	        from  not superClasses.isEmpty
-	        until superClasses.isEmpty or (not result.isVoid())
-	        loop
-	            var ttttyp : Type init superClasses.detect{ class_ |
-					class_.asType(ParameterizedType).typeDefinition.asType(ClassDefinition).ownedOperation.exists{ op | op.name==op_name}
-				}
-				if not ttttyp.isVoid() then
-					result := ttttyp.asType(ParameterizedType).typeDefinition.asType(ClassDefinition).ownedOperation.detect{ op | op.name==op_name}
-				else
-					var tmp : OrderedSet<Class> init OrderedSet<Class>.new
-					superClasses.each{ sc | tmp.addAll(sc.superClass())}
-	            	superClasses.clear()
-	            	superClasses.addAll(tmp)
-				end
-	        end
-		end
 	end
 	
 	operation printGetAccessor() : String is do

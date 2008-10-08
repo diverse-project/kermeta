@@ -1,4 +1,4 @@
-/* $Id: StructureCompiler.kmt,v 1.69 2008-09-30 11:44:27 cfaucher Exp $
+/* $Id: StructureCompiler.kmt,v 1.70 2008-10-08 14:25:29 cfaucher Exp $
  * Creation date: January 21, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -55,7 +55,7 @@ class Main {
 
 		output := modelInput.replaceExtension("ecore")
 		
-		main_mode3(modelInput, traceInput, output, CompilingMode.behaviorJava)
+		main_mode(modelInput, traceInput, output, CompilingMode.behaviorJava)
 	end
 	
     operation main(modelInput : String) : Void is do
