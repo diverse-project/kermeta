@@ -1,4 +1,4 @@
-/* $Id: StructureCompiler.kmt,v 1.70 2008-10-08 14:25:29 cfaucher Exp $
+/* $Id: StructureCompiler.kmt,v 1.71 2008-10-08 14:41:18 cfaucher Exp $
  * Creation date: January 21, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -39,9 +39,9 @@ class Main {
     	var traceInput : String init ""
     	
 		//modelInput := "platform:/resource/org.kermeta.compiler.kmt/models/framework.km"
-		modelInput := "platform:/resource/org.kermeta.compiler.kmt/models/StructureCompiler.km"
+		//modelInput := "platform:/resource/org.kermeta.compiler.kmt/models/StructureCompiler.km"
 		//modelInput := "platform:/resource/org.kermeta.compiler.kmt/models/ExpressionEvaluation.km"
-		//modelInput := "platform:/resource/org.kermeta.compiler.kmt/models/compilertest.km"
+		modelInput := "platform:/resource/org.kermeta.compiler.kmt/models/compilertest.km"
 		//modelInput := "platform:/resource/org.kermeta.compiler.kmt/models/testAddSet.km"
 		//modelInput := "platform:/resource/org.kermeta.compiler.kmt/models/dynamicAdaptation.km"
 		//modelInput := "platform:/resource/org.kermeta.compiler.kmt/models/weavingRoles.km"
