@@ -1,0 +1,321 @@
+This file was created with JabRef 2.2.
+Encoding: UTF8
+
+@PHDTHESIS{,
+  author = {Kabore, Eveline Chantal},
+  title = {Contribution à l’automatisation d’un processus de construction d’abstractions
+	de communication par transformations successives de modèles},
+  school = {Université Rennes 1},
+  year = {2008},
+  abstract = {In this thesis, we show how an ordered sequence of model transformations
+	can be used to describe and automate a product design process. This
+	approach is decomposed into three steps. The first step involves
+	describing the product, the target solution and the set of ordered
+	design alternatives that will be used to implement the solution.
+	These descriptions are translated into well defined metamodels in
+	the second step. Each metamodel provides a set of model validation
+	features. The third step specifies a life cycle that respect the
+	separation and the order of the design alternatives. In this life
+	cycle, we use a specific transformation to implement each design
+	alternative according to its order in the product design process.
+	The definition of the transformations supports the control of the
+	design process and provides a set of model validation features as
+	metamodels.
+	
+	We illustrate our approach with the example of distributed communication
+	software that implement various data placement and distribution algorithms.
+	The formalization of the component design process allows the derivation
+	of different implementation strategies from the model of a component
+	and shows how design variants can be reused to build other components.
+	Transformations are implemented, tested and executed with the Kermeta
+	platform.},
+  timestamp = {2008.10.08},
+  url = {https://www.kermeta.org/documents/articles/arch/Kabore08a.pdf}
+}
+
+@INPROCEEDINGS{Altahat07a,
+  author = {Zaid Altahat and Tzilla Elrad and Didier Vojtisek},
+  title = {Using Aspect Oriented Modeling to localize implementation of executable
+	models},
+  booktitle = {Models and Aspects workshop, at ECOOP 2007},
+  year = {2007},
+  month = {July},
+  abstract = {Executable models are essential to define the behavior of models,
+	such as constraints put on model elements. However their implementation
+	crosscut multiple model elements. Model semantics will facilitate
+	Model Driven Development, without it, Design and Implementation won’t
+	necessarily represent different abstractions of the same system.
+	This paper introduces a mechanism to query executable models and
+	weave constraints in order to localize their implementation, which
+	improves code redundancy and modularity.},
+  comment = {about_kermeta, en},
+  timestamp = {2008.10.08},
+  url = {http://www.irisa.fr/triskell/publis/2007/altahat07a.pdf}
+}
+
+@INPROCEEDINGS{baudry07a,
+  author = {Baudry, Benoit and Nebut, Clémentine and Le Traon, Yves},
+  title = {Model-driven Engineering for Requirements Analysis},
+  booktitle = {EDOC'07 (Entreprise Distributed Object Computing Conference)},
+  year = {2007},
+  address = {Annapolis, MD, USA},
+  abstract = {Requirements engineering (RE) encompasses a set of activities for
+	eliciting, modelling, agreeing, communicating
+	
+	and validating requirements that precisely define the problem domain
+	for a software system. Several tools and
+	
+	methods exist to perform each of these activities, but they mainly
+	remain separate, making it difficult to capture the
+	
+	global consistency of large requirement documents. In this paper we
+	introduce model-driven engineering (MDE) as a
+	
+	possible technical solution to integrate these activities in a common
+	framework. First, we dicuss how RE can leverage
+	
+	the two main techniques for MDE: metamodelling and model transformation.
+	Then, we introduce a metamodel for
+	
+	requirements and present how we have implemented this metamodel to
+	make it executable and usable through a 
+	
+	constrained natural language for requirements definition.},
+  comment = {about_kermeta, en},
+  timestamp = {2008.10.08},
+  url = {http://www.irisa.fr/triskell/publis/2007/baudry07a.pdf}
+}
+
+@MISC{Mottu07a,
+  author = { Jean-Marie Mottu and Olivier Barais and Mark Skipper and Didier Vojtisek and Jean-Marc Jézéquel},
+  title = {Intégration du support OCL dans Kermeta. Spécifiez la sémantique
+	statique de vos méta-modèles.},
+  howpublished = {Dixième Anniversaire de la Conférence Francophone sur les Approches
+	Formelles dans l'Assistance au Développement de Logiciels (AFADL'07)},
+  month = jun,
+  year = {2007},
+  address = {Namur, Belgium},
+  comment = {Workshop,fr, about_kermeta},
+  timestamp = {2008.10.08},
+  url = {http://www.irisa.fr/triskell/publis/2007/Mottu07a.pdf}
+}
+
+@INPROCEEDINGS{Pantel07a,
+  author = {Marc Pantel and ACADIE team and OLC team and TOPCASED team},
+  title = {The TOPCASED project - a Toolkit in OPen source for Critical Applications
+	and SystEms Design},
+  booktitle = {TOOLS EUROPE / Model-Driven Development Tool Implementers Forum (MDD-TIF)},
+  year = {2007},
+  address = {Zurich, Switzerland},
+  month = {June},
+  abstract = {The TOPCASED project aims at developing an open source CASE environment
+	for critical applications and systems development. Its main benefits
+	should be to perpetuate the methods and tools for software development,
+	minimize ownership costs, ensure independence of development platform,
+	integrate, as soon as possible, methodological changes and advances
+	made in academic world, be able to adapt tools to the process instead
+	of the opposite, take into account qualification constraints. In
+	this purpose, TOPCASED relies on the Eclipse Modelling Project platform
+	(EMF, GEF, GMF, OCL, UML2, ...) and on many available tools such
+	as the AMMA tools (ATL, AMW, AM3), MDDi model bus, Kermeta executable
+	models, ... and participate in the development of extensions or additional
+	tools. One key point is that TOPCASED focuses on critical system
+	development, which means that a strong emphasis is made on system
+	validation and on traceability. This paper focuses on the proposed
+	process to help in designing correct systems by relying on DSL and
+	formal approaches. Meta-modelling principles are at the core of the
+	TOPCASED framework. We will focus on the example of SimplePDL a subset
+	of the SPEM process modelling DSL. TOPCASED currently includes its
+	own tool to automatically generate graphical editors for specific
+	languages based on their metamodel. The demonstration will go through
+	all the design of the DSL from the graphical editor, to the model
+	validation called through the model bus. The paper focus on the model
+	validation process. Until now, the only complete industrial solutions
+	that are available at the meta-model level only consider structural
+	properties such as the ones that could be expressed in OCL. There
+	are although some attempts on behavioural properties for DSL. This
+	paper addresses a method to specify and then check temporal properties
+	over models. The case study is SIMPLEPDL, a process metamodel. We
+	propose a way to use a temporal extension of OCL, TOCL, to express
+	properties. We specify a models transformation to Petri Nets and
+	LTL formulae for both the process model and its associated temporal
+	properties. We check these properties using a model checker and enrich
+	the model with the analysis results. This work is a first step towards
+	a  generic framework to specify and effectively check temporal properties
+	over arbitrary models.},
+  comment = {about_kermeta, en},
+  timestamp = {2008.10.08},
+  url = {http://www.dsmforum.org/events/MDD-TIF07/TOPCASED.pdf}
+}
+
+@ARTICLE{Steel07a,
+  author = {Steel, Jim and Jézéquel, Jean-Marc},
+  title = {On Model Typing},
+  journal = {Journal of Software and Systems Modeling ({SoSyM})},
+  year = {2007},
+  volume = {6},
+  pages = {401--414},
+  number = {4},
+  month = dec,
+  abstract = {Where object-oriented languages deal with objects as described by
+	classes, model-driven development uses models, as graphs of interconnected
+	objects, described by metamodels. A number of new languages have
+	been and continue to be developed for this modelbased paradigm, both
+	for model transformation and for general programming using models.
+	Many of these use single-object approaches to typing, derived from
+	solutions found in object-oriented systems, while others use metamodels
+	asmodel types, but without a clear notion of polymorphism. Both of
+	these approaches lead to brittle and overly restrictive reuse characteristics.
+	In this paper we propose a simple extension to object-oriented typing
+	to better cater for a model-oriented context, including a simple
+	strategy for typing models as a collection of interconnected objects.
+	We suggest extensions to existing type system formalisms to support
+	these concepts and theirmanipulation. Using a simple examplewe show
+	how this extended approach permits more flexible reuse, while preserving
+	type safety.},
+  comment = {about_kermeta, en},
+  owner = {dvojtise},
+  timestamp = {2008.10.08},
+  url = {http://www.irisa.fr/triskell/publis/2007/Steel07a.pdf}
+}
+
+@INPROCEEDINGS{Combemale06a,
+  author = {Benoît Combemale and Sylvain Rougemaille and Xavier Crégut and Frédéric Migeon and Marc Pantel and Christine Maurel and Bernard Coulette},
+  title = {Towards Rigorous Metamodeling},
+  booktitle = {ICEIS workshop on MDEIS},
+  year = {2006},
+  address = {INSTICC, Paphos, Cyprus},
+  month = {May},
+  note = {slides : http://www.combemale.net/research/phd/2006/mdeis230406-CRCMPMC-slide.pdf},
+  abstract = {MDE has provided several significant improvements in the development
+	of complex systems by focusing on more abstract issues than programming.
+	However, improvments are needed on the semantic side in order to
+	reach highlevel certification such as the one currently required
+	for critical embedded systems (which will also probably be required
+	in the near future for Information Systems as application of Basel
+	II kind of agreements). This paper presents different means to specify
+	models semantics at the metamodel level. We will focus on the definition
+	of executable SPEM-based development process models (workflow related
+	models) using an approach defined for the TOPCASED project.},
+  comment = {about_kermeta, en},
+  timestamp = {2008.10.08},
+  url = {http://www.combemale.net/research/phd/2006/mdeis230406-CRCMPMC.pdf}
+}
+
+@INPROCEEDINGS{Falleri06a,
+  author = {J.R. Falleri and M. Huchard and C. Nebut},
+  title = {Towards a Traceability Framework for Model Transformations in Kermeta},
+  booktitle = {ECMDA-TW'06: ECMDA Traceability Workshop},
+  year = {2006},
+  pages = {31-40},
+  address = {Sintef ICT, Norway},
+  abstract = {Implementing a model transformation is a very complex task and in
+	an MDA process, chains of model transformations are usually built.
+	When writing such a transformation chain, developers often need to
+	have information on the previously applied transformations. Thus,
+	disposing of a traceability framework enabling to gather information
+	on the transformation behavior is an important feature for a transformation
+	language. In this paper, we propose to implement a traceability framework
+	in the Kermeta language based on a language independent trace metamodel.},
+  comment = {about_kermeta, en},
+  timestamp = {2008.10.08},
+  url = {http://hal-lirmm.ccsd.cnrs.fr/lirmm-00102855}
+}
+
+@PHDTHESIS{Fleurey06a,
+  author = {Fleurey, Franck},
+  title = {Langage et méthode pour une ingénierie des modèles fiable},
+  school = {Université de Rennes 1},
+  year = {2006},
+  month = oct,
+  comment = {about_kermeta, fr},
+  timestamp = {2008.10.08},
+  url = {http://www.irisa.fr/triskell/publis/2006/Fleurey06a.pdf}
+}
+
+@INPROCEEDINGS{Jezequel06b,
+  author = {Jean-Marc Jézéquel},
+  title = {Model Driven Aspect Weaving},
+  booktitle = {1st European Summer School on Aspect-oriented Software Development},
+  year = {2006},
+  address = {Vrije Universiteit Brussel, Belgium},
+  month = jul,
+  comment = {about_kermeta, en},
+  owner = {dvojtise},
+  timestamp = {2008.10.08},
+  url = {http://www.irisa.fr/triskell/publis/2006/Jezequel06b.pdf}
+}
+
+@PHDTHESIS{Muller06b,
+  author = {Pierre-Alain Muller},
+  title = {De la modélisation objet des logiciels à la métamodélisation des
+	langages informatiques},
+  school = {Habilitation à diriger les recherches de l'université Rennes 1},
+  year = {2006},
+  comment = {about_kermeta, fr},
+  timestamp = {2008.10.08},
+  url = {http://www.irisa.fr/triskell/publis/2006/Muller06b.pdf}
+}
+
+@INPROCEEDINGS{Muller05a,
+  author = {Muller, Pierre-Alain and Fleurey, Franck and Jézéquel, Jean-Marc},
+  title = {Weaving Executability into Object-Oriented Meta-Languages},
+  booktitle = {Proceedings of {MODELS/UML}'2005},
+  year = {2005},
+  editor = {L. Briand, S. Kent},
+  volume = {3713},
+  series = {LNCS},
+  pages = {264-278},
+  address = {Montego Bay, Jamaica},
+  month = oct,
+  publisher = {Springer},
+  abstract = {Nowadays, object-oriented meta-languages such as MOF (Meta- Object
+	Facility) are increasingly used to specify domain-specific languages
+	in the model-driven engineering community. However, these meta-languages
+	focus on structural specifications and have no built-in support for
+	specifications of operational semantics. In this paper we explore
+	the idea of using aspectoriented modeling to add precise action specifications
+	with static type checking and genericity at the meta level, and examine
+	related issues and possible solutions. We believe that such a combination
+	would bring significant benefits to the community, such as the specification,
+	simulation and testing of operational semantics of metamodels. We
+	present requirements for such statically-typed meta-languages and
+	rationales for the aforementioned benefits.},
+  comment = {about_kermeta, en},
+  owner = {dvojtise},
+  timestamp = {2008.10.08},
+  url = {http://www.irisa.fr/triskell/publis/2005/Muller05a.pdf}
+}
+
+@INPROCEEDINGS{Muller05c,
+  author = {Muller, Pierre-Alain and Fleurey, Franck and Vojtisek, Didier and Drey, Zoé and Pollet, Damien and Fondement, Frédéric and Studer, Philippe and Jézéquel, Jean-Marc},
+  title = {On Executable Meta-Languages applied to Model Transformations},
+  booktitle = {Model Transformations In Practice Workshop},
+  year = {2005},
+  address = {Montego Bay, Jamaica},
+  month = oct,
+  abstract = {Domain specific languages for model transformation have recently generated
+	significant interest in the model-driven engineering community. The
+	adopted QVT specification has normalized some scheme of model transformation
+	language; however several different model transformation language
+	paradigms are likely to co-exist in the near future, ranging from
+	imperative to declarative (including hybrid). It remains nevertheless
+	questionable how model transformation specific languages compare
+	to more general purpose languages, in terms of applicability, scalability
+	and robustness. In this paper we report on our specific experience
+	in applying an executable meta-language to the model transformation
+	field.},
+  comment = {about_kermeta, en},
+  owner = {dvojtise},
+  timestamp = {2008.10.08},
+  url = {http://www.irisa.fr/triskell/publis/2005/Muller05c.pdf}
+}
+
+@comment{jabref-meta: selector_publisher:}
+
+@comment{jabref-meta: selector_author:}
+
+@comment{jabref-meta: selector_journal:}
+
+@comment{jabref-meta: selector_keywords:}
+
