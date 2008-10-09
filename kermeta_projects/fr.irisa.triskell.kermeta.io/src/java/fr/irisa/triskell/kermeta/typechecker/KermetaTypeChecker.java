@@ -1,4 +1,4 @@
-/* $Id: KermetaTypeChecker.java,v 1.40 2008-10-09 15:00:47 cfaucher Exp $
+/* $Id: KermetaTypeChecker.java,v 1.41 2008-10-09 15:13:13 cfaucher Exp $
 * Project : Kermeta (First iteration)
 * File : KermetaTypeChecker.java
 * License : EPL
@@ -72,7 +72,7 @@ public class KermetaTypeChecker {
     
     private void fixEMFNameForCompiler(Operation op) {
     	for (Property prop : ((ClassDefinition) op.eContainer()).getOwnedAttribute()) {
-			if(	op.getName().substring(3, op.getName().length()).toLowerCase().equals(prop.getName().toLowerCase()) &&
+			if( op.getName().length()>3 && op.getName().substring(3, op.getName().length()).toLowerCase().equals(prop.getName().toLowerCase()) &&
 					( op.getName().substring(0, 3).equals("set") || op.getName().substring(0, 3).equals("get") ) ) {
 				addRenamingTag(op);
 			}
