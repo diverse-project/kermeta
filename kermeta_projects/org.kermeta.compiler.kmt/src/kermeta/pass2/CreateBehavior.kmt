@@ -1,4 +1,4 @@
-/* $Id: CreateBehavior.kmt,v 1.81 2008-09-29 15:44:42 cfaucher Exp $
+/* $Id: CreateBehavior.kmt,v 1.82 2008-10-09 08:50:22 cfaucher Exp $
  * Creation date: January 21, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -877,7 +877,7 @@ package behavior {
 
 				// Special case for the stdio variable
 				if self.name == "stdio" then
-					result := result + "org.kermeta.compil.runtime.helper.io.StdIOUtil"
+					result := result + "org.kermeta.compil.runtime.helper.io.StdIOUtil.getInstance()"
 				else
 					
 					if (not self.isParameter()) and (not self.isParameterForOwningOperation()) then

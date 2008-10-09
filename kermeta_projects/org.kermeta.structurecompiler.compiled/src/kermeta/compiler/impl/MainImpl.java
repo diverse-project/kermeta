@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: MainImpl.java,v 1.4 2008-10-08 14:38:07 cfaucher Exp $
+ * $Id: MainImpl.java,v 1.5 2008-10-09 08:50:25 cfaucher Exp $
  */
 package kermeta.compiler.impl;
 
@@ -168,32 +168,32 @@ public class MainImpl extends ObjectImpl implements Main {
 
 		this.getContext().setMode(mode);
 
-		org.kermeta.compil.runtime.helper.io.StdIOUtil
+		org.kermeta.compil.runtime.helper.io.StdIOUtil.getInstance()
 				.writeln(this
 						.typeDefinitionToString(this
 								.getTypeDefinitionByQualifiedName("kermeta::standard::Integer")));
 
-		org.kermeta.compil.runtime.helper.io.StdIOUtil
+		org.kermeta.compil.runtime.helper.io.StdIOUtil.getInstance()
 				.writeln(this
 						.typeDefinitionToString(this
 								.getTypeDefinitionByQualifiedName("kermeta::standard::Boolean")));
 
-		org.kermeta.compil.runtime.helper.io.StdIOUtil
+		org.kermeta.compil.runtime.helper.io.StdIOUtil.getInstance()
 				.writeln(this
 						.typeDefinitionToString(this
 								.getTypeDefinitionByQualifiedName("kermeta::standard::Real")));
 
-		org.kermeta.compil.runtime.helper.io.StdIOUtil
+		org.kermeta.compil.runtime.helper.io.StdIOUtil.getInstance()
 				.writeln(this
 						.typeDefinitionToString(this
 								.getTypeDefinitionByQualifiedName("kermeta::standard::Character")));
 
-		org.kermeta.compil.runtime.helper.io.StdIOUtil
+		org.kermeta.compil.runtime.helper.io.StdIOUtil.getInstance()
 				.writeln(this
 						.typeDefinitionToString(this
 								.getTypeDefinitionByQualifiedName("kermeta::standard::String")));
 
-		org.kermeta.compil.runtime.helper.io.StdIOUtil
+		org.kermeta.compil.runtime.helper.io.StdIOUtil.getInstance()
 				.writeln(this
 						.typeDefinitionToString(this
 								.getTypeDefinitionByQualifiedName("kermeta::standard::Numeric")));
@@ -240,7 +240,7 @@ public class MainImpl extends ObjectImpl implements Main {
 
 		this.getContext().setMode(mode);
 
-		org.kermeta.compil.runtime.helper.io.StdIOUtil
+		org.kermeta.compil.runtime.helper.io.StdIOUtil.getInstance()
 				.writeln(kermeta.standard.helper.StringWrapper.plus(
 						kermeta.standard.helper.StringWrapper.plus(
 								"Input model: ", modelInput), "\n"));
@@ -368,7 +368,7 @@ public class MainImpl extends ObjectImpl implements Main {
 
 													if (idIfCond_6) {
 
-														org.kermeta.compil.runtime.helper.io.StdIOUtil
+														org.kermeta.compil.runtime.helper.io.StdIOUtil.getInstance()
 																.writeln(kermeta.standard.helper.StringWrapper
 																		.plus(
 																				kermeta.standard.helper.StringWrapper
@@ -388,7 +388,7 @@ public class MainImpl extends ObjectImpl implements Main {
 																.createBehaviorJava(this
 																		.getContext());
 
-														org.kermeta.compil.runtime.helper.io.StdIOUtil
+														org.kermeta.compil.runtime.helper.io.StdIOUtil.getInstance()
 																.writeln(javaSourceCode);
 													}
 
@@ -428,7 +428,7 @@ public class MainImpl extends ObjectImpl implements Main {
 
 														if (idIfCond_8) {
 
-															org.kermeta.compil.runtime.helper.io.StdIOUtil
+															org.kermeta.compil.runtime.helper.io.StdIOUtil.getInstance()
 																	.writeln(kermeta.standard.helper.StringWrapper
 																			.plus(
 																					kermeta.standard.helper.StringWrapper
@@ -456,7 +456,7 @@ public class MainImpl extends ObjectImpl implements Main {
 																			this
 																					.getContext());
 
-															org.kermeta.compil.runtime.helper.io.StdIOUtil
+															org.kermeta.compil.runtime.helper.io.StdIOUtil.getInstance()
 																	.writeln(javaSourceCode);
 														}
 
@@ -531,7 +531,7 @@ public class MainImpl extends ObjectImpl implements Main {
 
 													if (idIfCond_11) {
 
-														org.kermeta.compil.runtime.helper.io.StdIOUtil
+														org.kermeta.compil.runtime.helper.io.StdIOUtil.getInstance()
 																.writeln(kermeta.standard.helper.StringWrapper
 																		.plus(
 																				kermeta.standard.helper.StringWrapper
@@ -551,7 +551,7 @@ public class MainImpl extends ObjectImpl implements Main {
 																.createBehaviorJava(this
 																		.getContext());
 
-														org.kermeta.compil.runtime.helper.io.StdIOUtil
+														org.kermeta.compil.runtime.helper.io.StdIOUtil.getInstance()
 																.writeln(javaSourceCode);
 													}
 
@@ -591,7 +591,7 @@ public class MainImpl extends ObjectImpl implements Main {
 
 														if (idIfCond_13) {
 
-															org.kermeta.compil.runtime.helper.io.StdIOUtil
+															org.kermeta.compil.runtime.helper.io.StdIOUtil.getInstance()
 																	.writeln(kermeta.standard.helper.StringWrapper
 																			.plus(
 																					kermeta.standard.helper.StringWrapper
@@ -619,7 +619,7 @@ public class MainImpl extends ObjectImpl implements Main {
 																			this
 																					.getContext());
 
-															org.kermeta.compil.runtime.helper.io.StdIOUtil
+															org.kermeta.compil.runtime.helper.io.StdIOUtil.getInstance()
 																	.writeln(javaSourceCode);
 														}
 
@@ -694,7 +694,7 @@ public class MainImpl extends ObjectImpl implements Main {
 
 													if (idIfCond_16) {
 
-														org.kermeta.compil.runtime.helper.io.StdIOUtil
+														org.kermeta.compil.runtime.helper.io.StdIOUtil.getInstance()
 																.writeln(kermeta.standard.helper.StringWrapper
 																		.plus(
 																				kermeta.standard.helper.StringWrapper
@@ -714,7 +714,7 @@ public class MainImpl extends ObjectImpl implements Main {
 																.createBehaviorJava(this
 																		.getContext());
 
-														org.kermeta.compil.runtime.helper.io.StdIOUtil
+														org.kermeta.compil.runtime.helper.io.StdIOUtil.getInstance()
 																.writeln(javaSourceCode);
 													}
 
@@ -754,7 +754,7 @@ public class MainImpl extends ObjectImpl implements Main {
 
 														if (idIfCond_18) {
 
-															org.kermeta.compil.runtime.helper.io.StdIOUtil
+															org.kermeta.compil.runtime.helper.io.StdIOUtil.getInstance()
 																	.writeln(kermeta.standard.helper.StringWrapper
 																			.plus(
 																					kermeta.standard.helper.StringWrapper
@@ -782,7 +782,7 @@ public class MainImpl extends ObjectImpl implements Main {
 																			this
 																					.getContext());
 
-															org.kermeta.compil.runtime.helper.io.StdIOUtil
+															org.kermeta.compil.runtime.helper.io.StdIOUtil.getInstance()
 																	.writeln(javaSourceCode);
 														}
 
@@ -856,7 +856,7 @@ public class MainImpl extends ObjectImpl implements Main {
 
 													if (idIfCond_21) {
 
-														org.kermeta.compil.runtime.helper.io.StdIOUtil
+														org.kermeta.compil.runtime.helper.io.StdIOUtil.getInstance()
 																.writeln(kermeta.standard.helper.StringWrapper
 																		.plus(
 																				kermeta.standard.helper.StringWrapper
@@ -876,7 +876,7 @@ public class MainImpl extends ObjectImpl implements Main {
 																.createBehaviorJava(this
 																		.getContext());
 
-														org.kermeta.compil.runtime.helper.io.StdIOUtil
+														org.kermeta.compil.runtime.helper.io.StdIOUtil.getInstance()
 																.writeln(javaSourceCode);
 													}
 
@@ -916,7 +916,7 @@ public class MainImpl extends ObjectImpl implements Main {
 
 														if (idIfCond_23) {
 
-															org.kermeta.compil.runtime.helper.io.StdIOUtil
+															org.kermeta.compil.runtime.helper.io.StdIOUtil.getInstance()
 																	.writeln(kermeta.standard.helper.StringWrapper
 																			.plus(
 																					kermeta.standard.helper.StringWrapper
@@ -944,7 +944,7 @@ public class MainImpl extends ObjectImpl implements Main {
 																			this
 																					.getContext());
 
-															org.kermeta.compil.runtime.helper.io.StdIOUtil
+															org.kermeta.compil.runtime.helper.io.StdIOUtil.getInstance()
 																	.writeln(javaSourceCode);
 														}
 
@@ -1019,7 +1019,7 @@ public class MainImpl extends ObjectImpl implements Main {
 
 													if (idIfCond_26) {
 
-														org.kermeta.compil.runtime.helper.io.StdIOUtil
+														org.kermeta.compil.runtime.helper.io.StdIOUtil.getInstance()
 																.writeln(kermeta.standard.helper.StringWrapper
 																		.plus(
 																				kermeta.standard.helper.StringWrapper
@@ -1039,7 +1039,7 @@ public class MainImpl extends ObjectImpl implements Main {
 																.createBehaviorJava(this
 																		.getContext());
 
-														org.kermeta.compil.runtime.helper.io.StdIOUtil
+														org.kermeta.compil.runtime.helper.io.StdIOUtil.getInstance()
 																.writeln(javaSourceCode);
 													}
 
@@ -1079,7 +1079,7 @@ public class MainImpl extends ObjectImpl implements Main {
 
 														if (idIfCond_28) {
 
-															org.kermeta.compil.runtime.helper.io.StdIOUtil
+															org.kermeta.compil.runtime.helper.io.StdIOUtil.getInstance()
 																	.writeln(kermeta.standard.helper.StringWrapper
 																			.plus(
 																					kermeta.standard.helper.StringWrapper
@@ -1107,7 +1107,7 @@ public class MainImpl extends ObjectImpl implements Main {
 																			this
 																					.getContext());
 
-															org.kermeta.compil.runtime.helper.io.StdIOUtil
+															org.kermeta.compil.runtime.helper.io.StdIOUtil.getInstance()
 																	.writeln(javaSourceCode);
 														}
 
@@ -1237,7 +1237,7 @@ public class MainImpl extends ObjectImpl implements Main {
 
 													if (idIfCond_33) {
 
-														org.kermeta.compil.runtime.helper.io.StdIOUtil
+														org.kermeta.compil.runtime.helper.io.StdIOUtil.getInstance()
 																.writeln(kermeta.standard.helper.StringWrapper
 																		.plus(
 																				kermeta.standard.helper.StringWrapper
@@ -1257,7 +1257,7 @@ public class MainImpl extends ObjectImpl implements Main {
 																.createBehaviorJava(this
 																		.getContext());
 
-														org.kermeta.compil.runtime.helper.io.StdIOUtil
+														org.kermeta.compil.runtime.helper.io.StdIOUtil.getInstance()
 																.writeln(javaSourceCode);
 													}
 
@@ -1297,7 +1297,7 @@ public class MainImpl extends ObjectImpl implements Main {
 
 														if (idIfCond_35) {
 
-															org.kermeta.compil.runtime.helper.io.StdIOUtil
+															org.kermeta.compil.runtime.helper.io.StdIOUtil.getInstance()
 																	.writeln(kermeta.standard.helper.StringWrapper
 																			.plus(
 																					kermeta.standard.helper.StringWrapper
@@ -1325,7 +1325,7 @@ public class MainImpl extends ObjectImpl implements Main {
 																			this
 																					.getContext());
 
-															org.kermeta.compil.runtime.helper.io.StdIOUtil
+															org.kermeta.compil.runtime.helper.io.StdIOUtil.getInstance()
 																	.writeln(javaSourceCode);
 														}
 
@@ -1400,7 +1400,7 @@ public class MainImpl extends ObjectImpl implements Main {
 
 													if (idIfCond_38) {
 
-														org.kermeta.compil.runtime.helper.io.StdIOUtil
+														org.kermeta.compil.runtime.helper.io.StdIOUtil.getInstance()
 																.writeln(kermeta.standard.helper.StringWrapper
 																		.plus(
 																				kermeta.standard.helper.StringWrapper
@@ -1420,7 +1420,7 @@ public class MainImpl extends ObjectImpl implements Main {
 																.createBehaviorJava(this
 																		.getContext());
 
-														org.kermeta.compil.runtime.helper.io.StdIOUtil
+														org.kermeta.compil.runtime.helper.io.StdIOUtil.getInstance()
 																.writeln(javaSourceCode);
 													}
 
@@ -1460,7 +1460,7 @@ public class MainImpl extends ObjectImpl implements Main {
 
 														if (idIfCond_40) {
 
-															org.kermeta.compil.runtime.helper.io.StdIOUtil
+															org.kermeta.compil.runtime.helper.io.StdIOUtil.getInstance()
 																	.writeln(kermeta.standard.helper.StringWrapper
 																			.plus(
 																					kermeta.standard.helper.StringWrapper
@@ -1488,7 +1488,7 @@ public class MainImpl extends ObjectImpl implements Main {
 																			this
 																					.getContext());
 
-															org.kermeta.compil.runtime.helper.io.StdIOUtil
+															org.kermeta.compil.runtime.helper.io.StdIOUtil.getInstance()
 																	.writeln(javaSourceCode);
 														}
 
@@ -1563,7 +1563,7 @@ public class MainImpl extends ObjectImpl implements Main {
 
 													if (idIfCond_43) {
 
-														org.kermeta.compil.runtime.helper.io.StdIOUtil
+														org.kermeta.compil.runtime.helper.io.StdIOUtil.getInstance()
 																.writeln(kermeta.standard.helper.StringWrapper
 																		.plus(
 																				kermeta.standard.helper.StringWrapper
@@ -1583,7 +1583,7 @@ public class MainImpl extends ObjectImpl implements Main {
 																.createBehaviorJava(this
 																		.getContext());
 
-														org.kermeta.compil.runtime.helper.io.StdIOUtil
+														org.kermeta.compil.runtime.helper.io.StdIOUtil.getInstance()
 																.writeln(javaSourceCode);
 													}
 
@@ -1623,7 +1623,7 @@ public class MainImpl extends ObjectImpl implements Main {
 
 														if (idIfCond_45) {
 
-															org.kermeta.compil.runtime.helper.io.StdIOUtil
+															org.kermeta.compil.runtime.helper.io.StdIOUtil.getInstance()
 																	.writeln(kermeta.standard.helper.StringWrapper
 																			.plus(
 																					kermeta.standard.helper.StringWrapper
@@ -1651,7 +1651,7 @@ public class MainImpl extends ObjectImpl implements Main {
 																			this
 																					.getContext());
 
-															org.kermeta.compil.runtime.helper.io.StdIOUtil
+															org.kermeta.compil.runtime.helper.io.StdIOUtil.getInstance()
 																	.writeln(javaSourceCode);
 														}
 
@@ -1725,7 +1725,7 @@ public class MainImpl extends ObjectImpl implements Main {
 
 													if (idIfCond_48) {
 
-														org.kermeta.compil.runtime.helper.io.StdIOUtil
+														org.kermeta.compil.runtime.helper.io.StdIOUtil.getInstance()
 																.writeln(kermeta.standard.helper.StringWrapper
 																		.plus(
 																				kermeta.standard.helper.StringWrapper
@@ -1745,7 +1745,7 @@ public class MainImpl extends ObjectImpl implements Main {
 																.createBehaviorJava(this
 																		.getContext());
 
-														org.kermeta.compil.runtime.helper.io.StdIOUtil
+														org.kermeta.compil.runtime.helper.io.StdIOUtil.getInstance()
 																.writeln(javaSourceCode);
 													}
 
@@ -1785,7 +1785,7 @@ public class MainImpl extends ObjectImpl implements Main {
 
 														if (idIfCond_50) {
 
-															org.kermeta.compil.runtime.helper.io.StdIOUtil
+															org.kermeta.compil.runtime.helper.io.StdIOUtil.getInstance()
 																	.writeln(kermeta.standard.helper.StringWrapper
 																			.plus(
 																					kermeta.standard.helper.StringWrapper
@@ -1813,7 +1813,7 @@ public class MainImpl extends ObjectImpl implements Main {
 																			this
 																					.getContext());
 
-															org.kermeta.compil.runtime.helper.io.StdIOUtil
+															org.kermeta.compil.runtime.helper.io.StdIOUtil.getInstance()
 																	.writeln(javaSourceCode);
 														}
 
@@ -1888,7 +1888,7 @@ public class MainImpl extends ObjectImpl implements Main {
 
 													if (idIfCond_53) {
 
-														org.kermeta.compil.runtime.helper.io.StdIOUtil
+														org.kermeta.compil.runtime.helper.io.StdIOUtil.getInstance()
 																.writeln(kermeta.standard.helper.StringWrapper
 																		.plus(
 																				kermeta.standard.helper.StringWrapper
@@ -1908,7 +1908,7 @@ public class MainImpl extends ObjectImpl implements Main {
 																.createBehaviorJava(this
 																		.getContext());
 
-														org.kermeta.compil.runtime.helper.io.StdIOUtil
+														org.kermeta.compil.runtime.helper.io.StdIOUtil.getInstance()
 																.writeln(javaSourceCode);
 													}
 
@@ -1948,7 +1948,7 @@ public class MainImpl extends ObjectImpl implements Main {
 
 														if (idIfCond_55) {
 
-															org.kermeta.compil.runtime.helper.io.StdIOUtil
+															org.kermeta.compil.runtime.helper.io.StdIOUtil.getInstance()
 																	.writeln(kermeta.standard.helper.StringWrapper
 																			.plus(
 																					kermeta.standard.helper.StringWrapper
@@ -1976,7 +1976,7 @@ public class MainImpl extends ObjectImpl implements Main {
 																			this
 																					.getContext());
 
-															org.kermeta.compil.runtime.helper.io.StdIOUtil
+															org.kermeta.compil.runtime.helper.io.StdIOUtil.getInstance()
 																	.writeln(javaSourceCode);
 														}
 
@@ -2105,7 +2105,7 @@ public class MainImpl extends ObjectImpl implements Main {
 
 													if (idIfCond_60) {
 
-														org.kermeta.compil.runtime.helper.io.StdIOUtil
+														org.kermeta.compil.runtime.helper.io.StdIOUtil.getInstance()
 																.writeln(kermeta.standard.helper.StringWrapper
 																		.plus(
 																				kermeta.standard.helper.StringWrapper
@@ -2125,7 +2125,7 @@ public class MainImpl extends ObjectImpl implements Main {
 																.createBehaviorJava(this
 																		.getContext());
 
-														org.kermeta.compil.runtime.helper.io.StdIOUtil
+														org.kermeta.compil.runtime.helper.io.StdIOUtil.getInstance()
 																.writeln(javaSourceCode);
 													}
 
@@ -2165,7 +2165,7 @@ public class MainImpl extends ObjectImpl implements Main {
 
 														if (idIfCond_62) {
 
-															org.kermeta.compil.runtime.helper.io.StdIOUtil
+															org.kermeta.compil.runtime.helper.io.StdIOUtil.getInstance()
 																	.writeln(kermeta.standard.helper.StringWrapper
 																			.plus(
 																					kermeta.standard.helper.StringWrapper
@@ -2193,7 +2193,7 @@ public class MainImpl extends ObjectImpl implements Main {
 																			this
 																					.getContext());
 
-															org.kermeta.compil.runtime.helper.io.StdIOUtil
+															org.kermeta.compil.runtime.helper.io.StdIOUtil.getInstance()
 																	.writeln(javaSourceCode);
 														}
 
@@ -2268,7 +2268,7 @@ public class MainImpl extends ObjectImpl implements Main {
 
 													if (idIfCond_65) {
 
-														org.kermeta.compil.runtime.helper.io.StdIOUtil
+														org.kermeta.compil.runtime.helper.io.StdIOUtil.getInstance()
 																.writeln(kermeta.standard.helper.StringWrapper
 																		.plus(
 																				kermeta.standard.helper.StringWrapper
@@ -2288,7 +2288,7 @@ public class MainImpl extends ObjectImpl implements Main {
 																.createBehaviorJava(this
 																		.getContext());
 
-														org.kermeta.compil.runtime.helper.io.StdIOUtil
+														org.kermeta.compil.runtime.helper.io.StdIOUtil.getInstance()
 																.writeln(javaSourceCode);
 													}
 
@@ -2328,7 +2328,7 @@ public class MainImpl extends ObjectImpl implements Main {
 
 														if (idIfCond_67) {
 
-															org.kermeta.compil.runtime.helper.io.StdIOUtil
+															org.kermeta.compil.runtime.helper.io.StdIOUtil.getInstance()
 																	.writeln(kermeta.standard.helper.StringWrapper
 																			.plus(
 																					kermeta.standard.helper.StringWrapper
@@ -2356,7 +2356,7 @@ public class MainImpl extends ObjectImpl implements Main {
 																			this
 																					.getContext());
 
-															org.kermeta.compil.runtime.helper.io.StdIOUtil
+															org.kermeta.compil.runtime.helper.io.StdIOUtil.getInstance()
 																	.writeln(javaSourceCode);
 														}
 
@@ -2431,7 +2431,7 @@ public class MainImpl extends ObjectImpl implements Main {
 
 													if (idIfCond_70) {
 
-														org.kermeta.compil.runtime.helper.io.StdIOUtil
+														org.kermeta.compil.runtime.helper.io.StdIOUtil.getInstance()
 																.writeln(kermeta.standard.helper.StringWrapper
 																		.plus(
 																				kermeta.standard.helper.StringWrapper
@@ -2451,7 +2451,7 @@ public class MainImpl extends ObjectImpl implements Main {
 																.createBehaviorJava(this
 																		.getContext());
 
-														org.kermeta.compil.runtime.helper.io.StdIOUtil
+														org.kermeta.compil.runtime.helper.io.StdIOUtil.getInstance()
 																.writeln(javaSourceCode);
 													}
 
@@ -2491,7 +2491,7 @@ public class MainImpl extends ObjectImpl implements Main {
 
 														if (idIfCond_72) {
 
-															org.kermeta.compil.runtime.helper.io.StdIOUtil
+															org.kermeta.compil.runtime.helper.io.StdIOUtil.getInstance()
 																	.writeln(kermeta.standard.helper.StringWrapper
 																			.plus(
 																					kermeta.standard.helper.StringWrapper
@@ -2519,7 +2519,7 @@ public class MainImpl extends ObjectImpl implements Main {
 																			this
 																					.getContext());
 
-															org.kermeta.compil.runtime.helper.io.StdIOUtil
+															org.kermeta.compil.runtime.helper.io.StdIOUtil.getInstance()
 																	.writeln(javaSourceCode);
 														}
 
@@ -2593,7 +2593,7 @@ public class MainImpl extends ObjectImpl implements Main {
 
 													if (idIfCond_75) {
 
-														org.kermeta.compil.runtime.helper.io.StdIOUtil
+														org.kermeta.compil.runtime.helper.io.StdIOUtil.getInstance()
 																.writeln(kermeta.standard.helper.StringWrapper
 																		.plus(
 																				kermeta.standard.helper.StringWrapper
@@ -2613,7 +2613,7 @@ public class MainImpl extends ObjectImpl implements Main {
 																.createBehaviorJava(this
 																		.getContext());
 
-														org.kermeta.compil.runtime.helper.io.StdIOUtil
+														org.kermeta.compil.runtime.helper.io.StdIOUtil.getInstance()
 																.writeln(javaSourceCode);
 													}
 
@@ -2653,7 +2653,7 @@ public class MainImpl extends ObjectImpl implements Main {
 
 														if (idIfCond_77) {
 
-															org.kermeta.compil.runtime.helper.io.StdIOUtil
+															org.kermeta.compil.runtime.helper.io.StdIOUtil.getInstance()
 																	.writeln(kermeta.standard.helper.StringWrapper
 																			.plus(
 																					kermeta.standard.helper.StringWrapper
@@ -2681,7 +2681,7 @@ public class MainImpl extends ObjectImpl implements Main {
 																			this
 																					.getContext());
 
-															org.kermeta.compil.runtime.helper.io.StdIOUtil
+															org.kermeta.compil.runtime.helper.io.StdIOUtil.getInstance()
 																	.writeln(javaSourceCode);
 														}
 
@@ -2756,7 +2756,7 @@ public class MainImpl extends ObjectImpl implements Main {
 
 													if (idIfCond_80) {
 
-														org.kermeta.compil.runtime.helper.io.StdIOUtil
+														org.kermeta.compil.runtime.helper.io.StdIOUtil.getInstance()
 																.writeln(kermeta.standard.helper.StringWrapper
 																		.plus(
 																				kermeta.standard.helper.StringWrapper
@@ -2776,7 +2776,7 @@ public class MainImpl extends ObjectImpl implements Main {
 																.createBehaviorJava(this
 																		.getContext());
 
-														org.kermeta.compil.runtime.helper.io.StdIOUtil
+														org.kermeta.compil.runtime.helper.io.StdIOUtil.getInstance()
 																.writeln(javaSourceCode);
 													}
 
@@ -2816,7 +2816,7 @@ public class MainImpl extends ObjectImpl implements Main {
 
 														if (idIfCond_82) {
 
-															org.kermeta.compil.runtime.helper.io.StdIOUtil
+															org.kermeta.compil.runtime.helper.io.StdIOUtil.getInstance()
 																	.writeln(kermeta.standard.helper.StringWrapper
 																			.plus(
 																					kermeta.standard.helper.StringWrapper
@@ -2844,7 +2844,7 @@ public class MainImpl extends ObjectImpl implements Main {
 																			this
 																					.getContext());
 
-															org.kermeta.compil.runtime.helper.io.StdIOUtil
+															org.kermeta.compil.runtime.helper.io.StdIOUtil.getInstance()
 																	.writeln(javaSourceCode);
 														}
 
@@ -2886,7 +2886,7 @@ public class MainImpl extends ObjectImpl implements Main {
 
 		//EIft:each
 
-		org.kermeta.compil.runtime.helper.io.StdIOUtil.writeln("\nFinish");
+		org.kermeta.compil.runtime.helper.io.StdIOUtil.getInstance().writeln("\nFinish");
 
 	}
 
@@ -2985,7 +2985,7 @@ public class MainImpl extends ObjectImpl implements Main {
 	public void main_mode(String modelInput, String traceInput, String output,
 			CompilingMode mode) {
 
-		org.kermeta.compil.runtime.helper.io.StdIOUtil
+		org.kermeta.compil.runtime.helper.io.StdIOUtil.getInstance()
 				.writeln(kermeta.standard.helper.StringWrapper
 						.plus(
 								"KermetaCompiler - Starting up of the Ecore generation for the model: ",
@@ -3001,7 +3001,7 @@ public class MainImpl extends ObjectImpl implements Main {
 
 		this.getContext().getMu().applyPass1(this.getContext());
 
-		org.kermeta.compil.runtime.helper.io.StdIOUtil
+		org.kermeta.compil.runtime.helper.io.StdIOUtil.getInstance()
 				.writeln("KermetaCompiler - Pass 1 is finished");
 
 		java.lang.Boolean idIfCond_85 = false;
@@ -3033,7 +3033,7 @@ public class MainImpl extends ObjectImpl implements Main {
 
 			this.getContext().getMu().preprocess(this.getContext());
 
-			org.kermeta.compil.runtime.helper.io.StdIOUtil
+			org.kermeta.compil.runtime.helper.io.StdIOUtil.getInstance()
 					.writeln(kermeta.standard.helper.StringWrapper.plus(
 							"KermetaCompiler - Pass 2 with the mode: ", this
 									.getContext().getMode().getName()));
@@ -3043,7 +3043,7 @@ public class MainImpl extends ObjectImpl implements Main {
 			this.getContext().getMu().postprocess(this.getContext());
 		}
 
-		org.kermeta.compil.runtime.helper.io.StdIOUtil
+		org.kermeta.compil.runtime.helper.io.StdIOUtil.getInstance()
 				.writeln("KermetaCompiler - Pass 2 is finished");
 
 		org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
@@ -3109,17 +3109,17 @@ public class MainImpl extends ObjectImpl implements Main {
 
 		//EIft:each
 
-		org.kermeta.compil.runtime.helper.io.StdIOUtil
+		org.kermeta.compil.runtime.helper.io.StdIOUtil.getInstance()
 				.writeln("Save the Ecore Model");
 
 		ecore_resource.save();
 
-		org.kermeta.compil.runtime.helper.io.StdIOUtil
+		org.kermeta.compil.runtime.helper.io.StdIOUtil.getInstance()
 				.writeln("The Ecore Model has been saved");
 
 		this.getContext().save();
 
-		org.kermeta.compil.runtime.helper.io.StdIOUtil
+		org.kermeta.compil.runtime.helper.io.StdIOUtil.getInstance()
 				.writeln(kermeta.standard.helper.StringWrapper.plus(
 						kermeta.standard.helper.StringWrapper.plus(
 								kermeta.standard.helper.StringWrapper.plus(
@@ -3131,7 +3131,7 @@ public class MainImpl extends ObjectImpl implements Main {
 						kermeta.standard.helper.IntegerWrapper.toString(this
 								.getContext().getInc_ftSuffix())));
 
-		org.kermeta.compil.runtime.helper.io.StdIOUtil.writeln("Finish");
+		org.kermeta.compil.runtime.helper.io.StdIOUtil.getInstance().writeln("Finish");
 
 	}
 

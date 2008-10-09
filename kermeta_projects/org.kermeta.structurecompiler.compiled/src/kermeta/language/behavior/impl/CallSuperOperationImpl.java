@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: CallSuperOperationImpl.java,v 1.4 2008-10-08 14:37:39 cfaucher Exp $
+ * $Id: CallSuperOperationImpl.java,v 1.5 2008-10-09 08:50:26 cfaucher Exp $
  */
 package kermeta.language.behavior.impl;
 
@@ -157,7 +157,7 @@ public class CallSuperOperationImpl extends CallExpressionImpl implements
 					.endOfExpressionFixer());
 		} else {
 
-			org.kermeta.compil.runtime.helper.io.StdIOUtil
+			org.kermeta.compil.runtime.helper.io.StdIOUtil.getInstance()
 					.writeln(kermeta.standard.helper.StringWrapper
 							.plus(
 									kermeta.standard.helper.StringWrapper

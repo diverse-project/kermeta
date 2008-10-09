@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: CallFeatureImpl.java,v 1.5 2008-10-08 14:37:39 cfaucher Exp $
+ * $Id: CallFeatureImpl.java,v 1.6 2008-10-09 08:50:26 cfaucher Exp $
  */
 package kermeta.language.behavior.impl;
 
@@ -766,7 +766,7 @@ public class CallFeatureImpl extends CallExpressionImpl implements CallFeature {
 
 							/*if (idIfCond_577) {
 
-								org.kermeta.compil.runtime.helper.io.StdIOUtil
+								org.kermeta.compil.runtime.helper.io.StdIOUtil.getInstance()
 										.writeln(kermeta.standard.helper.StringWrapper
 												.plus(
 														kermeta.standard.helper.StringWrapper
@@ -2443,7 +2443,7 @@ public class CallFeatureImpl extends CallExpressionImpl implements CallFeature {
 
 			if (idIfCond_647) {
 
-				org.kermeta.compil.runtime.helper.io.StdIOUtil
+				org.kermeta.compil.runtime.helper.io.StdIOUtil.getInstance()
 						.writeln("Please contact the development team if you have this case !");
 
 				callElement = ((km2ecore.helper.java.IdentifierHelper) org.kermeta.compil.runtime.helper.language.ClassUtil

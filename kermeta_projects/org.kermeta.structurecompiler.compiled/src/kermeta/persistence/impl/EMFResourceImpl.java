@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: EMFResourceImpl.java,v 1.4 2008-10-08 14:37:48 cfaucher Exp $
+ * $Id: EMFResourceImpl.java,v 1.5 2008-10-09 08:50:25 cfaucher Exp $
  */
 package kermeta.persistence.impl;
 
@@ -141,7 +141,7 @@ public class EMFResourceImpl extends ResourceImpl implements EMFResource {
 
 		if (idIfCond_934) {
 
-			org.kermeta.compil.runtime.helper.io.StdIOUtil
+			org.kermeta.compil.runtime.helper.io.StdIOUtil.getInstance()
 					.writeln("Resource load failed!");
 
 			kermeta.exceptions.ResourceLoadException e = ((kermeta.exceptions.ResourceLoadException) org.kermeta.compil.runtime.helper.language.ClassUtil
@@ -226,7 +226,7 @@ public class EMFResourceImpl extends ResourceImpl implements EMFResource {
 					//BIle:func
 					kermeta.persistence.Resource r_lbdExp210 = it_ft210.next();
 
-					org.kermeta.compil.runtime.helper.io.StdIOUtil
+					org.kermeta.compil.runtime.helper.io.StdIOUtil.getInstance()
 							.writeln("DVK ! another resource of the same repository was containing this element");
 
 					r_lbdExp210.remove(instance);

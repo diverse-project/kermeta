@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: TestRunnerImpl.java,v 1.4 2008-10-08 14:37:23 cfaucher Exp $
+ * $Id: TestRunnerImpl.java,v 1.5 2008-10-09 08:50:26 cfaucher Exp $
  */
 package kermeta.kunit.impl;
 
@@ -169,7 +169,7 @@ public class TestRunnerImpl extends ObjectImpl implements TestRunner {
 	 */
 	public void printTestResult() {
 
-		org.kermeta.compil.runtime.helper.io.StdIOUtil
+		org.kermeta.compil.runtime.helper.io.StdIOUtil.getInstance()
 				.writeln("\n---------------------------------------------  TEST RESULTS-----------------------------------------------\n");
 
 		java.lang.Boolean idIfCond_993 = false;
@@ -180,7 +180,7 @@ public class TestRunnerImpl extends ObjectImpl implements TestRunner {
 
 		if (idIfCond_993) {
 
-			org.kermeta.compil.runtime.helper.io.StdIOUtil
+			org.kermeta.compil.runtime.helper.io.StdIOUtil.getInstance()
 					.writeln("\nFailures: ");
 
 			//BIft:each
@@ -199,7 +199,7 @@ public class TestRunnerImpl extends ObjectImpl implements TestRunner {
 						//BIle:func
 						kermeta.kunit.Failure f_lbdExp225 = it_ft225.next();
 
-						org.kermeta.compil.runtime.helper.io.StdIOUtil
+						org.kermeta.compil.runtime.helper.io.StdIOUtil.getInstance()
 								.writeln(kermeta.standard.helper.StringWrapper
 										.plus("\n   ", f_lbdExp225.toString()));
 						//EIle:func
@@ -220,7 +220,7 @@ public class TestRunnerImpl extends ObjectImpl implements TestRunner {
 
 		if (idIfCond_995) {
 
-			org.kermeta.compil.runtime.helper.io.StdIOUtil
+			org.kermeta.compil.runtime.helper.io.StdIOUtil.getInstance()
 					.writeln("\nErrors: ");
 
 			//BIft:each
@@ -239,7 +239,7 @@ public class TestRunnerImpl extends ObjectImpl implements TestRunner {
 						//BIle:func
 						kermeta.kunit.Error e_lbdExp226 = it_ft226.next();
 
-						org.kermeta.compil.runtime.helper.io.StdIOUtil
+						org.kermeta.compil.runtime.helper.io.StdIOUtil.getInstance()
 								.writeln(kermeta.standard.helper.StringWrapper
 										.plus("\n   ", e_lbdExp226.toString()));
 						//EIle:func
@@ -260,7 +260,7 @@ public class TestRunnerImpl extends ObjectImpl implements TestRunner {
 
 		if (idIfCond_997) {
 
-			org.kermeta.compil.runtime.helper.io.StdIOUtil
+			org.kermeta.compil.runtime.helper.io.StdIOUtil.getInstance()
 					.writeln("\nErrors from setUp or tearDown : ");
 
 			//BIft:each
@@ -279,7 +279,7 @@ public class TestRunnerImpl extends ObjectImpl implements TestRunner {
 						//BIle:func
 						kermeta.kunit.Error e_lbdExp227 = it_ft227.next();
 
-						org.kermeta.compil.runtime.helper.io.StdIOUtil
+						org.kermeta.compil.runtime.helper.io.StdIOUtil.getInstance()
 								.writeln(kermeta.standard.helper.StringWrapper
 										.plus("\n   ", e_lbdExp227.toString()));
 						//EIle:func
@@ -292,15 +292,15 @@ public class TestRunnerImpl extends ObjectImpl implements TestRunner {
 
 		}
 
-		org.kermeta.compil.runtime.helper.io.StdIOUtil.writeln("\n Summary: ");
+		org.kermeta.compil.runtime.helper.io.StdIOUtil.getInstance().writeln("\n Summary: ");
 
-		org.kermeta.compil.runtime.helper.io.StdIOUtil
+		org.kermeta.compil.runtime.helper.io.StdIOUtil.getInstance()
 				.writeln(kermeta.standard.helper.StringWrapper.plus(
 						"   Number of launched tests : ",
 						kermeta.standard.helper.IntegerWrapper.toString(this
 								.getLog().getRuntests())));
 
-		org.kermeta.compil.runtime.helper.io.StdIOUtil
+		org.kermeta.compil.runtime.helper.io.StdIOUtil.getInstance()
 				.writeln(kermeta.standard.helper.StringWrapper
 						.plus(
 								"   Number of failures : ",
@@ -311,7 +311,7 @@ public class TestRunnerImpl extends ObjectImpl implements TestRunner {
 																.getFailures())
 												.size())));
 
-		org.kermeta.compil.runtime.helper.io.StdIOUtil
+		org.kermeta.compil.runtime.helper.io.StdIOUtil.getInstance()
 				.writeln(kermeta.standard.helper.StringWrapper
 						.plus(
 								"   Number of errors : ",
@@ -322,7 +322,7 @@ public class TestRunnerImpl extends ObjectImpl implements TestRunner {
 																.getErrors())
 												.size())));
 
-		org.kermeta.compil.runtime.helper.io.StdIOUtil
+		org.kermeta.compil.runtime.helper.io.StdIOUtil.getInstance()
 				.writeln(kermeta.standard.helper.StringWrapper
 						.plus(
 								"   Number of errors in setUp or tearDown: ",
@@ -334,7 +334,7 @@ public class TestRunnerImpl extends ObjectImpl implements TestRunner {
 																.getHarnessErrors())
 												.size())));
 
-		org.kermeta.compil.runtime.helper.io.StdIOUtil
+		org.kermeta.compil.runtime.helper.io.StdIOUtil.getInstance()
 				.writeln("\n-------------------------------------------------------------------------------------------------------------------------------\n");
 
 	}

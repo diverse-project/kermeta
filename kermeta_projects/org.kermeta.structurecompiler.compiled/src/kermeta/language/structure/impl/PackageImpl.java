@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: PackageImpl.java,v 1.4 2008-10-08 14:37:28 cfaucher Exp $
+ * $Id: PackageImpl.java,v 1.5 2008-10-09 08:50:25 cfaucher Exp $
  */
 package kermeta.language.structure.impl;
 
@@ -470,7 +470,7 @@ public class PackageImpl extends TraceabilityImpl<EPackage> implements
 
 		ecore.EPackage result = null;
 
-		org.kermeta.compil.runtime.helper.io.StdIOUtil
+		org.kermeta.compil.runtime.helper.io.StdIOUtil.getInstance()
 				.writeln(kermeta.standard.helper.StringWrapper.plus(
 						kermeta.standard.helper.StringWrapper.plus(
 								" + Package ", this.qualifiedName()),

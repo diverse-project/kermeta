@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: AssignmentImpl.java,v 1.4 2008-10-08 14:37:39 cfaucher Exp $
+ * $Id: AssignmentImpl.java,v 1.5 2008-10-09 08:50:26 cfaucher Exp $
  */
 package kermeta.language.behavior.impl;
 
@@ -308,7 +308,7 @@ public class AssignmentImpl extends ExpressionImpl implements Assignment
     
       if( idIfCond_672 ) {
     
-      org.kermeta.compil.runtime.helper.io.StdIOUtil.errorln("Please contact the Kermeta development team if you are in this case: createBehaviorJava Assignment");
+      org.kermeta.compil.runtime.helper.io.StdIOUtil.getInstance().errorln("Please contact the Kermeta development team if you are in this case: createBehaviorJava Assignment");
     
       right = kermeta.standard.helper.StringWrapper.plus("function ", right);
     }

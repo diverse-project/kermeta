@@ -1,4 +1,4 @@
-/* $Id: StdIOUtil.java,v 1.4 2008-10-08 14:38:09 cfaucher Exp $
+/* $Id: StdIOUtil.java,v 1.5 2008-10-09 08:50:25 cfaucher Exp $
  * Project : Kermeta (First iteration)
  * File : Io.java
  * License : EPL
@@ -20,36 +20,48 @@ import java.io.InputStreamReader;
 
 /**
  * Implementation of input and output methods (see io.kmt)
+ * Warning: the following methods are not "static", because a singleton has been used
  */
 public class StdIOUtil {
+	
+	private StdIOUtil() {
+	}
+	
+	static private StdIOUtil _instance;
+
+	static public StdIOUtil getInstance() {
+		if (_instance == null)
+			_instance = new StdIOUtil();
+		return _instance;
+	}
     
 	// Implementation of method write called as :
 	// extern fr::irisa::triskell::kermeta::runtime::basetypes::Io.write(output)
-	public static void write(String output) {
+	public void write(String output) {
 		System.out.print(output);
 	}
 	
 	// Implementation of method writeln called as :
 	// extern fr::irisa::triskell::kermeta::runtime::basetypes::Io.writeln(output)
-	public static void writeln(java.lang.String output) {
+	public void writeln(java.lang.String output) {
 		System.out.println(output);
 	}
 	
 	// Implementation of method error called as :
 	// extern fr::irisa::triskell::kermeta::runtime::basetypes::Io.error(output)
-	public static void error(java.lang.String output) {
+	public void error(java.lang.String output) {
 		System.err.print(output);
 	}
 
 	// Implementation of method errorln called as :
 	// extern fr::irisa::triskell::kermeta::runtime::basetypes::Io.errorln(output)
-	public static void errorln(java.lang.String output) {
+	public void errorln(java.lang.String output) {
 		System.err.println(output);
 	}
 	
 	// Implementation of method read called as :
 	// extern fr::irisa::triskell::kermeta::runtime::basetypes::Io.read(prompt)
-	public static java.lang.String read(java.lang.String prompt) {
+	public java.lang.String read(java.lang.String prompt) {
 		System.out.println(prompt);
 		
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));

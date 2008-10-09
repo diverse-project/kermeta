@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: StdIOImpl.java,v 1.4 2008-10-08 14:37:35 cfaucher Exp $
+ * $Id: StdIOImpl.java,v 1.5 2008-10-09 08:50:26 cfaucher Exp $
  */
 package kermeta.io.impl;
 
@@ -58,7 +58,7 @@ public class StdIOImpl extends ObjectImpl implements StdIO {
 			object = "<void>";
 		}
 
-		org.kermeta.compil.runtime.helper.io.StdIOUtil.writeln(object);
+		org.kermeta.compil.runtime.helper.io.StdIOUtil.getInstance().writeln(object);
 
 	}
 
@@ -78,7 +78,7 @@ public class StdIOImpl extends ObjectImpl implements StdIO {
 			object = "<void>";
 		}
 
-		org.kermeta.compil.runtime.helper.io.StdIOUtil.errorln(object);
+		org.kermeta.compil.runtime.helper.io.StdIOUtil.getInstance().errorln(object);
 
 	}
 
@@ -98,7 +98,7 @@ public class StdIOImpl extends ObjectImpl implements StdIO {
 			object = "<void>";
 		}
 
-		org.kermeta.compil.runtime.helper.io.StdIOUtil.error(object);
+		org.kermeta.compil.runtime.helper.io.StdIOUtil.getInstance().error(object);
 
 	}
 
@@ -118,7 +118,7 @@ public class StdIOImpl extends ObjectImpl implements StdIO {
 			object = "<void>";
 		}
 
-		org.kermeta.compil.runtime.helper.io.StdIOUtil.write(object);
+		org.kermeta.compil.runtime.helper.io.StdIOUtil.getInstance().write(object);
 
 	}
 
@@ -140,7 +140,7 @@ public class StdIOImpl extends ObjectImpl implements StdIO {
 			prompt = "";
 		}
 
-		result = (java.lang.String) org.kermeta.compil.runtime.helper.io.StdIOUtil
+		result = (java.lang.String) org.kermeta.compil.runtime.helper.io.StdIOUtil.getInstance()
 				.read(prompt);
 
 		return result;

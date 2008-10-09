@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ParameterImpl.java,v 1.4 2008-10-08 14:37:28 cfaucher Exp $
+ * $Id: ParameterImpl.java,v 1.5 2008-10-09 08:50:25 cfaucher Exp $
  */
 package kermeta.language.structure.impl;
 
@@ -597,7 +597,7 @@ public class ParameterImpl extends TraceabilityImpl<EParameter> implements
 
 		if (idIfCond_325) {
 
-			org.kermeta.compil.runtime.helper.io.StdIOUtil
+			org.kermeta.compil.runtime.helper.io.StdIOUtil.getInstance()
 					.writeln(kermeta.standard.helper.StringWrapper
 							.plus(
 									kermeta.standard.helper.StringWrapper

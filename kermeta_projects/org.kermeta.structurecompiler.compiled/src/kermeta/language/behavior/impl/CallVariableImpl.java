@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: CallVariableImpl.java,v 1.4 2008-10-08 14:37:39 cfaucher Exp $
+ * $Id: CallVariableImpl.java,v 1.5 2008-10-09 08:50:26 cfaucher Exp $
  */
 package kermeta.language.behavior.impl;
 
@@ -352,7 +352,7 @@ public class CallVariableImpl extends CallExpressionImpl implements
 			if (idIfCond_495) {
 
 				result = kermeta.standard.helper.StringWrapper.plus(result,
-						"org.kermeta.compil.runtime.helper.io.StdIOUtil");
+						"org.kermeta.compil.runtime.helper.io.StdIOUtil.getInstance()");
 			} else {
 
 				java.lang.Boolean idIfCond_496 = false;

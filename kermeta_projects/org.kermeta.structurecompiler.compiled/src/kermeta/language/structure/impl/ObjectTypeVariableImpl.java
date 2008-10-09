@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ObjectTypeVariableImpl.java,v 1.4 2008-10-08 14:37:29 cfaucher Exp $
+ * $Id: ObjectTypeVariableImpl.java,v 1.5 2008-10-09 08:50:25 cfaucher Exp $
  */
 package kermeta.language.structure.impl;
 
@@ -276,7 +276,7 @@ public class ObjectTypeVariableImpl extends TraceabilityImpl<ETypeParameter>
 
 			if (idIfCond_397) {
 
-				org.kermeta.compil.runtime.helper.io.StdIOUtil
+				org.kermeta.compil.runtime.helper.io.StdIOUtil.getInstance()
 						.writeln(kermeta.standard.helper.StringWrapper
 								.plus(
 										"Please contact the Kermeta Development team, if you are in this case [ObjectTypeVariable::createBehaviorJava - not type_from_map.isVoid()] ",
