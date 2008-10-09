@@ -1,4 +1,4 @@
-/* $Id: KermetaTypeChecker.java,v 1.39 2008-09-05 09:32:45 dvojtise Exp $
+/* $Id: KermetaTypeChecker.java,v 1.40 2008-10-09 15:00:47 cfaucher Exp $
 * Project : Kermeta (First iteration)
 * File : KermetaTypeChecker.java
 * License : EPL
@@ -18,6 +18,7 @@ import java.util.List;
 
 import org.apache.commons.logging.Log;
 import org.kermeta.io.KermetaUnit;
+import org.kermeta.log4j.util.LogConfigurationHelper;
 
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
 import fr.irisa.triskell.kermeta.language.structure.Constraint;
@@ -26,10 +27,10 @@ import fr.irisa.triskell.kermeta.language.structure.Package;
 import fr.irisa.triskell.kermeta.language.structure.Parameter;
 import fr.irisa.triskell.kermeta.language.structure.PrimitiveType;
 import fr.irisa.triskell.kermeta.language.structure.Property;
+import fr.irisa.triskell.kermeta.language.structure.StructureFactory;
+import fr.irisa.triskell.kermeta.language.structure.Tag;
 import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
 import fr.irisa.triskell.kermeta.modelhelper.KermetaUnitHelper;
-
-import org.kermeta.log4j.util.LogConfigurationHelper;
 
 /**
  * @author Franck Fleurey
@@ -68,7 +69,35 @@ public class KermetaTypeChecker {
         	context = new TypeCheckerContext(unit);
         }
     }
-       
+    
+    private void fixEMFNameForCompiler(Operation op) {
+    	for (Property prop : ((ClassDefinition) op.eContainer()).getOwnedAttribute()) {
+			if(	op.getName().substring(3, op.getName().length()).toLowerCase().equals(prop.getName().toLowerCase()) &&
+					( op.getName().substring(0, 3).equals("set") || op.getName().substring(0, 3).equals("get") ) ) {
+				addRenamingTag(op);
+			}
+		}
+    }
+    
+    private void addRenamingTag(Operation op) {
+    	boolean notExists = true;
+    	
+    	final String TAG_EMF_renameAs = "EMF_renameAs";
+    	
+    	// Check if a "renameAs" tag is present
+    	for(Tag ex_tag : op.getOwnedTags()) {
+    		if( ex_tag!=null && ex_tag.getName()!=null && ex_tag.getName().equals(TAG_EMF_renameAs) ) {
+    			notExists = false;
+    		}
+    	}
+    	
+    	if( notExists ) {
+	    	Tag t = StructureFactory.eINSTANCE.createTag();
+	    	t.setName(TAG_EMF_renameAs);
+	    	t.setValue(op.getName() + TAG_EMF_renameAs);
+	    	op.getOwnedTags().add(t);
+    	}
+    }
     
     private void checkPackages(List<Package> packages) {
     	for ( Package current : packages ) {
@@ -88,7 +117,7 @@ public class KermetaTypeChecker {
         				else
         					unit.error("TYPE-CHECKER : property " + td.getName() + "." + prop.getName() + " has no type", prop);
         			}
-
+        			
         			// Check operation signatures
         			for ( Operation op : cdef.getOwnedOperation() ) {
         				if ( op.getType() != null ){
@@ -101,6 +130,8 @@ public class KermetaTypeChecker {
         					else
         						unit.error("TYPE-CHECKER : parameter " + op.getName() + "." + param.getName() + " has no type", param);
         				}
+        				//Check the naming compatibility with EMF for Compiling issue
+        				fixEMFNameForCompiler(op);
         			}
  
         		} else if (td instanceof PrimitiveType) {
