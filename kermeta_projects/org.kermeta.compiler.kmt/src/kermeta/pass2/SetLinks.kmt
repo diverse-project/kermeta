@@ -1,4 +1,4 @@
-/* $Id: SetLinks.kmt,v 1.39 2008-09-25 08:33:43 cfaucher Exp $
+/* $Id: SetLinks.kmt,v 1.40 2008-10-09 17:19:23 cfaucher Exp $
  * Creation date: January 21, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -202,7 +202,10 @@ aspect class Property {
 		// Complete the structural phase
 		//if self.opposite.isVoid() then self is an EReference
 		if not self.opposite.isVoid() then
-			self.ecoreModelElement.asType(EReference).eOpposite := self.opposite.ecoreModelElement.asType(EReference)
+			// The ecoreModelElement should be void in the case of 2 references are derived and opposite
+			if not self.opposite.ecoreModelElement.isVoid() then
+				self.ecoreModelElement.asType(EReference).eOpposite := self.opposite.ecoreModelElement.asType(EReference)
+			end
 		end
 		
 		// Set to false the default value of Boolean
