@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+
+<!--
+ <copyright>
+ </copyright>
+
+ $Id: plugin.xml,v 1.1 2008-10-13 20:03:36 fmunoz Exp $
+-->
+
+<plugin>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <package
+            uri="http://www.kermeta.org/decompose/compare"
+            class="ocompare.OcomparePackage"
+            genModel="model/Ocompare.genmodel"/>
+   </extension>
+   <extension
+         point="org.eclipse.ui.popupMenus">
+      <objectContribution
+            id="fr.irisa.triskell.decompose.compare.menu1"
+            objectClass="org.eclipse.core.resources.IFolder">
+         <menu
+               label="Decompose"
+               path="additions"
+               id="fr.irisa.triskell.decompose.compare.menu1">
+            <separator
+                  name="group1">
+            </separator>
+         </menu>
+         <action
+               label="GenerateComparison (Dir)"
+               class="fr.irisa.triskell.decompose.compare.action.ComparisonAction"
+               menubarPath="fr.irisa.triskell.decompose.compare.menu1/group1"
+               enablesFor="1"
+               id="fr.irisa.triskell.decompose.compare.newAction">
+         </action>
+      </objectContribution>
+   </extension>
+
+</plugin>
