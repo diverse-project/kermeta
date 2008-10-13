@@ -5,11 +5,13 @@ using kermeta::standard
 using kermeta::utils
 using kermeta::standard
 class KomposeScriptBridge{
-operation generate(numeral:Integer,location:String,dString:String,mpackage:String):String is do
+operation generate(numeral:Integer,location:String,dString:String,mpackage:String,idx:Integer):String is do
 var _res: StringBuffer init StringBuffer.new
 _res.append("@mainClass \"decompose::Test::n")
 _res.append(numeral.toString)
-_res.append("::Main\"\n@mainOperation \"main\"\n\n\npackage decompose::Test::n")
+_res.append("::Main\"\n@mainOperation \"main\"\n\n\npackage decompose::Test")
+_res.append(idx.toString)
+_res.append("::n")
 _res.append(numeral.toString)
 _res.append(";\nrequire kermeta\n//require \"platform:/resource/org.kermeta.kompose.specialization.ecore.uno/kermeta/Ecore.kmt\"\nrequire \"")
 _res.append(dString)

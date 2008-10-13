@@ -1,41 +1,45 @@
 <%@ket
-package="decomposition"
+package="decomposition::oracle::all"
 require="kermeta"
 using="kermeta::standard"
-class="KomposeScriptAll"
-parameters="scripts:Collection<String>,numeralTop:Integer,seriali:Integer"
+class="AllOracle"
+parameters="scripts:Collection<String>,numeralTop:Integer"
 %>
-@mainClass "decompose::Test::all<%=seriali.toString%>::Main"
+
+@mainClass "decompose::oracle::run::all::Main"
 @mainOperation "main"
 
-package decompose::Test::all<%=seriali.toString%>;
-require kermeta
+package decompose::oracle::run::all;
+
 <%scripts.each{script|%>
 require "<%=script%>"
 <%}%>
 
+require kermeta
+require "platform:/resource/fr.irisa.triskell.decompose/src/kermeta/Oracle.kmt"
 
 <%
 from var i : Integer init 0
 until i == numeralTop
 loop
 %>
-using decompose::Test<%=seriali.toString%>::n<%=i.toString%>
+using decompose::oracle::run<%=i.toString%>
 <% 
 i := i + 1
 end
 %>
 
+using decomposition
 
 class Main
 {
 	operation main() : Void is do 
-		<%
+				<%
 		from var i : Integer init 0
 		until i == numeralTop
 		loop
 		%>
-		var main<%=i.toString%>:decompose::Test<%=seriali.toString%>::n<%=i.toString%>::Main init decompose::Test<%=seriali.toString%>::n<%=i.toString%>::Main.new
+		var main<%=i.toString%>:decompose::oracle::run<%=i.toString%>::Main init decompose::oracle::run<%=i.toString%>::Main.new
 		<% 
 		i := i + 1
 		end

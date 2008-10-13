@@ -5,9 +5,13 @@ using kermeta::standard
 using kermeta::utils
 using kermeta::standard
 class OracleRunnerScript{
-operation generate(location:String,imeta:String,requ:String):String is do
+operation generate(location:String,imeta:String,requ:String,idx:Integer):String is do
 var _res: StringBuffer init StringBuffer.new
-_res.append("\n@mainClass \"decompose::oracle::run::Main\"\n@mainOperation \"main\"\n\npackage decompose::oracle::run;\nrequire kermeta\nrequire \"platform:/resource/fr.irisa.triskell.decompose/src/kermeta/Oracle.kmt\"\nrequire \"")
+_res.append("\n@mainClass \"decompose::oracle::run")
+_res.append(idx.toString)
+_res.append("::Main\"\n@mainOperation \"main\"\n\npackage decompose::oracle::run")
+_res.append(idx.toString)
+_res.append(";\nrequire kermeta\nrequire \"platform:/resource/fr.irisa.triskell.decompose/src/kermeta/Oracle.kmt\"\nrequire \"")
 _res.append(imeta)
 _res.append("\"\n\nusing decomposition\nusing ")
 _res.append(requ)

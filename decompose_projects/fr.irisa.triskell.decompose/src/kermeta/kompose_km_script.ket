@@ -3,13 +3,13 @@ package="decomposition"
 require="kermeta"
 using="kermeta::standard"
 class="KomposeScriptBridge"
-parameters="numeral:Integer,location:String,dString:String,mpackage:String"
+parameters="numeral:Integer,location:String,dString:String,mpackage:String,idx:Integer"
 %>
 @mainClass "decompose::Test::n<%=numeral.toString%>::Main"
 @mainOperation "main"
 
 
-package decompose::Test::n<%=numeral.toString%>;
+package decompose::Test<%=idx.toString%>::n<%=numeral.toString%>;
 require kermeta
 //require "platform:/resource/org.kermeta.kompose.specialization.ecore.uno/kermeta/Ecore.kmt"
 require "<%=dString%>"

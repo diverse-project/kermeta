@@ -2,13 +2,13 @@
 package="decomposition"
 require="kermeta"
 using="kermeta::standard"
-class="KomposeScriptAll"
-parameters="scripts:Collection<String>,numeralTop:Integer,seriali:Integer"
+class="GeneralKompScript"
+parameters="scripts:Collection<String>,numeralTop:Integer"
 %>
-@mainClass "decompose::Test::all<%=seriali.toString%>::Main"
+@mainClass "decompose::Test::all::Main"
 @mainOperation "main"
 
-package decompose::Test::all<%=seriali.toString%>;
+package decompose::Test::all;
 require kermeta
 <%scripts.each{script|%>
 require "<%=script%>"
@@ -20,7 +20,7 @@ from var i : Integer init 0
 until i == numeralTop
 loop
 %>
-using decompose::Test<%=seriali.toString%>::n<%=i.toString%>
+using decompose::Test::all<%=i.toString%>
 <% 
 i := i + 1
 end
@@ -35,7 +35,7 @@ class Main
 		until i == numeralTop
 		loop
 		%>
-		var main<%=i.toString%>:decompose::Test<%=seriali.toString%>::n<%=i.toString%>::Main init decompose::Test<%=seriali.toString%>::n<%=i.toString%>::Main.new
+		var main<%=i.toString%>:decompose::Test::all<%=i.toString%>::Main init decompose::Test::all<%=i.toString%>::Main.new
 		<% 
 		i := i + 1
 		end

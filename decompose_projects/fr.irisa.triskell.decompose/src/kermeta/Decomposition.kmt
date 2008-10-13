@@ -1,4 +1,4 @@
-/* $Id: Decomposition.kmt,v 1.12 2008-09-02 08:46:49 fmunoz Exp $ 
+/* $Id: Decomposition.kmt,v 1.13 2008-10-13 20:05:47 fmunoz Exp $ 
  * Creation : August 11, 2008
  * Licence  : EPL 
  * Copyright:
@@ -105,6 +105,7 @@ class Decomposer {
 			atomNew.eoid:=aplan.eoid
 			atomNew.inoid:=aplan.inoid
 			atomNew.restricted:=aplan.restricted
+			atomNew.inversion:=aplan.inversion	
 			if aplan.restricted then
 				atomNew.restriction:=aplan.restriction
 			end
@@ -117,6 +118,22 @@ class Decomposer {
 			newPlan.keys.add(k)
 		}
 		result:=newPlan
+	end
+	
+	operation insDep(atomNew:AtomicPlanPart,newPlan:DecompositionPlan,side:Boolean,rest:Restriction):Void is do
+		atomNew.dependantOn.each{dep|
+					if newPlan.atomicPlans.getValue(dep).operationType!=OperationType.ONESIDE then
+						//stablish a restriction on the related
+						newPlan.atomicPlans.getValue(dep).restricted:=side
+						newPlan.atomicPlans.getValue(dep).restriction:=rest
+						//if aleaready processed
+					//	if not newPlan.keys.contains(newPlan.atomicPlans.getValue(dep).inoid) then
+						if not newPlan.atomicPlans.getValue(dep).inversion then
+							newPlan.atomicPlans.getValue(dep).operationType:=OperationType.ONESIDE 
+							newPlan.atomicPlans.getValue(dep).side:=side
+						end
+					end
+				}
 	end
 	
 	operation recurseRight(plan:DecompositionPlan):Void is do
@@ -154,6 +171,14 @@ class Decomposer {
 						//stablish a restriction on the related
 						newPlan.atomicPlans.getValue(dep).restricted:=true
 						newPlan.atomicPlans.getValue(dep).restriction:=Restriction.RIGHT
+						//if aleaready processed
+					//	if not newPlan.keys.contains(newPlan.atomicPlans.getValue(dep).inoid) then
+						if not newPlan.atomicPlans.getValue(dep).inversion then
+							newPlan.atomicPlans.getValue(dep).operationType:=OperationType.ONESIDE 
+							newPlan.atomicPlans.getValue(dep).side:=true
+						end
+						self.insDep(newPlan.atomicPlans.getValue(dep),newPlan,true,Restriction.RIGHT)
+					//	end
 					end
 				}
 				if newPlan.atomicPlans.containsKey(atomNew.inoid) then
@@ -167,6 +192,7 @@ class Decomposer {
 						//stablish a restriction on the parent
 						newPlan.atomicPlans.getValue(atomNew.inoid).restricted:=true
 						newPlan.atomicPlans.getValue(atomNew.inoid).restriction:=Restriction.RIGHT
+					//	self.insDep(newPlan.atomicPlans.getValue(atomNew.inoid),newPlan,true,Restriction.RIGHT)
 					end
 				end
 				if onside then
@@ -180,12 +206,14 @@ class Decomposer {
 								//add a restriction, ewPlanR.atomicPlans.getValue(k) must be in the same side of atomNewR.
 								newPlan.atomicPlans.getValue(k).restricted:=true
 								newPlan.atomicPlans.getValue(k).restriction:=Restriction.RIGHT
+						//		self.insDep(newPlan.atomicPlans.getValue(k),newPlan,true,Restriction.RIGHT)
 							end
 						end
 						newPlan.atomicPlans.getValue(k).dependantOn.each{dep|
 							if dep == atomNew.eoid then
 								newPlan.atomicPlans.getValue(k).restricted:=true
 								newPlan.atomicPlans.getValue(k).restriction:=Restriction.RIGHT
+						//		self.insDep(newPlan.atomicPlans.getValue(k),newPlan,true,Restriction.RIGHT)
 								onside:=false
 							end
 						}
@@ -197,6 +225,22 @@ class Decomposer {
 					recurseRight(newPlan)
 					recurseLeft(newPlan)
 				end
+			/*else
+				var atom:AtomicPlanPart
+				atom:=plan.atomicPlans.getValue(key)
+				atom.dependantOn.each{dep|
+					if plan.atomicPlans.getValue(dep).operationType==OperationType.ONESIDE then
+						if not plan.atomicPlans.getValue(dep).side then
+							
+						else
+							
+						end
+					else
+						//stablish a restriction on the related
+						plan.atomicPlans.getValue(dep).restricted:=true
+						plan.atomicPlans.getValue(dep).restriction:=Restriction.RIGHT
+					end
+				}*/
 			end
 		}
 	end
@@ -236,6 +280,13 @@ class Decomposer {
 						//stablish a restriction on the related
 						newPlan.atomicPlans.getValue(dep).restricted:=true
 						newPlan.atomicPlans.getValue(dep).restriction:=Restriction.LEFT
+						//	if not newPlan.keys.contains(newPlan.atomicPlans.getValue(dep).inoid) then
+						if not newPlan.atomicPlans.getValue(dep).inversion then
+							newPlan.atomicPlans.getValue(dep).operationType:=OperationType.ONESIDE 
+							newPlan.atomicPlans.getValue(dep).side:=false
+						end
+						self.insDep(newPlan.atomicPlans.getValue(dep),newPlan,false,Restriction.LEFT)
+					//	end
 					end
 				}
 				if newPlan.atomicPlans.containsKey(atomNew.inoid) then
@@ -249,6 +300,7 @@ class Decomposer {
 						//stablish a restriction on the parent
 						newPlan.atomicPlans.getValue(atomNew.inoid).restricted:=true
 						newPlan.atomicPlans.getValue(atomNew.inoid).restriction:=Restriction.LEFT
+					//	self.insDep(newPlan.atomicPlans.getValue(atomNew.inoid),newPlan,false,Restriction.LEFT)
 					end
 				end
 				if onside then
@@ -262,6 +314,8 @@ class Decomposer {
 								//add a restriction, ewPlanR.atomicPlans.getValue(k) must be in the same side of atomNewR.
 								newPlan.atomicPlans.getValue(k).restricted:=true
 								newPlan.atomicPlans.getValue(k).restriction:=Restriction.LEFT
+	
+					//			self.insDep(newPlan.atomicPlans.getValue(k),newPlan,false,Restriction.LEFT)
 							end
 						end
 						
@@ -269,6 +323,8 @@ class Decomposer {
 							if dep == atomNew.eoid then
 								newPlan.atomicPlans.getValue(k).restricted:=true
 								newPlan.atomicPlans.getValue(k).restriction:=Restriction.LEFT
+
+						//		self.insDep(newPlan.atomicPlans.getValue(k),newPlan,false,Restriction.LEFT)
 								onside:=false
 							end
 						}
@@ -291,11 +347,13 @@ class Decomposer {
 		atomic.inoid:=superElement.oid().toString()
 		atomic.eoid:=element.oid().toString()
 		atomic.restricted:=false
+		atomic.inversion:=false
 		plan.atomicPlans.put(atomic.eoid,atomic)
 		plan.keys.add(atomic.eoid)
 		if odip!=void then
 			atomic.dependantOn.add(odip)
-			stdio.writeln("adding inverse dep "+odip)
+			stdio.writeln("adding inverse dep "+odip+"  in "+atomic.element)
+			atomic.inversion:=true
 		end
 		var ppts : Collection<Property> init element.getMetaClass.classDefinition.allAttribute.select{p | not p.isDerived}
 		var properties:Collection<Property> properties:=ppts.select{ p | Mergeable.isSuperTypeOf(p.type) }
@@ -312,11 +370,10 @@ class Decomposer {
 									self.initializePlans(plan,mergeable,container,OperationType.CLONE,void,void)				
 								end
 							else
+								atomic.dependantOn.add(mergeable.oid().toString())
 								if plan.keys.contains(mergeable.oid().toString()) then
-								   atomic.dependantOn.add(mergeable.oid().toString())
 								   plan.atomicPlans.getValue(mergeable.oid().toString()).dependantOn.add(atomic.eoid)
 								else
-								   atomic.dependantOn.add(mergeable.oid().toString())
 								   var container:Mergeable container?=mergeable.container					
 								   self.initializePlans(plan,mergeable,container,OperationType.CLONE,void,atomic.eoid)
 								end

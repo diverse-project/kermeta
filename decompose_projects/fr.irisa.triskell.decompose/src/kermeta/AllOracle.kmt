@@ -1,38 +1,32 @@
-package decomposition;
+package decomposition::oracle::all;
 require kermeta
 require "kermeta"
 using kermeta::standard
 using kermeta::utils
 using kermeta::standard
-class KomposeScriptAll{
-operation generate(scripts:Collection<String>,numeralTop:Integer,seriali:Integer):String is do
+class AllOracle{
+operation generate(scripts:Collection<String>,numeralTop:Integer):String is do
 var _res: StringBuffer init StringBuffer.new
-_res.append("@mainClass \"decompose::Test::all")
-_res.append(seriali.toString)
-_res.append("::Main\"\n@mainOperation \"main\"\n\npackage decompose::Test::all")
-_res.append(seriali.toString)
-_res.append(";\nrequire kermeta\n")
+_res.append("\n@mainClass \"decompose::oracle::run::all::Main\"\n@mainOperation \"main\"\n\npackage decompose::oracle::run::all;\n\n")
 scripts.each{script|
 _res.append("require \"")
 _res.append(script)
 _res.append("\"\n")
 }
-_res.append("\n\n")
+_res.append("\nrequire kermeta\nrequire \"platform:/resource/fr.irisa.triskell.decompose/src/kermeta/Oracle.kmt\"\n\n")
 
 from var i : Integer init 0
 until i == numeralTop
 loop
 
-_res.append("using decompose::Test")
-_res.append(seriali.toString)
-_res.append("::n")
+_res.append("using decompose::oracle::run")
 _res.append(i.toString)
 _res.append("\n")
  
 i := i + 1
 end
 
-_res.append("\n\nclass Main\n{\n\toperation main() : Void is do \n")
+_res.append("\nusing decomposition\n\nclass Main\n{\n\toperation main() : Void is do \n")
 
 		from var i : Integer init 0
 		until i == numeralTop
@@ -40,13 +34,9 @@ _res.append("\n\nclass Main\n{\n\toperation main() : Void is do \n")
 		
 _res.append("\t\tvar main")
 _res.append(i.toString)
-_res.append(":decompose::Test")
-_res.append(seriali.toString)
-_res.append("::n")
+_res.append(":decompose::oracle::run")
 _res.append(i.toString)
-_res.append("::Main init decompose::Test")
-_res.append(seriali.toString)
-_res.append("::n")
+_res.append("::Main init decompose::oracle::run")
 _res.append(i.toString)
 _res.append("::Main.new\n")
  

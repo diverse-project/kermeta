@@ -3,13 +3,13 @@ package="decomposition::oracle"
 require="kermeta"
 using="kermeta::standard"
 class="OracleRunnerScript"
-parameters="location:String,imeta:String,requ:String"
+parameters="location:String,imeta:String,requ:String,idx:Integer"
 %>
 
-@mainClass "decompose::oracle::run::Main"
+@mainClass "decompose::oracle::run<%=idx.toString%>::Main"
 @mainOperation "main"
 
-package decompose::oracle::run;
+package decompose::oracle::run<%=idx.toString%>;
 require kermeta
 require "platform:/resource/fr.irisa.triskell.decompose/src/kermeta/Oracle.kmt"
 require "<%=imeta%>"

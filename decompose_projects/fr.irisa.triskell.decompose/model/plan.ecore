@@ -20,6 +20,8 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="restricted" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
         defaultValueLiteral="false"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="restriction" eType="#//Restriction"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="inversion" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
+        defaultValueLiteral="false"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Planification">
     <eStructuralFeatures xsi:type="ecore:EReference" name="plans" upperBound="-1"
