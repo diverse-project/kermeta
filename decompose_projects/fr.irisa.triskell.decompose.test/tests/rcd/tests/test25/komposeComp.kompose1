@@ -1,0 +1,3 @@
+<?xml version="1.0" encoding="ASCII"?>
+<kompose:Composer xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:kompose="http://www.kermeta.org/kompose" primaryModelURI="platform:/resource/fr.irisa.triskell.decompose.test/tests/rcd/tests/test25/left1.xmi" aspectModelURI="platform:/resource/fr.irisa.triskell.decompose.test/tests/rcd/tests/test25/right1.xmi" composedModelURI="platform:/resource/fr.irisa.triskell.decompose.test/tests/rcd/tests/test25/result1.xmi">
+</kompose:Composer>

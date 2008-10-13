@@ -1,0 +1,145 @@
+@mainClass "decompose::oracle::run::all::Main"
+@mainOperation "main"
+
+package decompose::oracle::run::all;
+
+require "platform:/resource/fr.irisa.triskell.decompose.test/tests/rcd/tests/test0/scripts/oracleAll.kmt"
+require "platform:/resource/fr.irisa.triskell.decompose.test/tests/rcd/tests/test1/scripts/oracleAll.kmt"
+require "platform:/resource/fr.irisa.triskell.decompose.test/tests/rcd/tests/test2/scripts/oracleAll.kmt"
+require "platform:/resource/fr.irisa.triskell.decompose.test/tests/rcd/tests/test3/scripts/oracleAll.kmt"
+require "platform:/resource/fr.irisa.triskell.decompose.test/tests/rcd/tests/test4/scripts/oracleAll.kmt"
+require "platform:/resource/fr.irisa.triskell.decompose.test/tests/rcd/tests/test5/scripts/oracleAll.kmt"
+require "platform:/resource/fr.irisa.triskell.decompose.test/tests/rcd/tests/test6/scripts/oracleAll.kmt"
+require "platform:/resource/fr.irisa.triskell.decompose.test/tests/rcd/tests/test7/scripts/oracleAll.kmt"
+require "platform:/resource/fr.irisa.triskell.decompose.test/tests/rcd/tests/test8/scripts/oracleAll.kmt"
+require "platform:/resource/fr.irisa.triskell.decompose.test/tests/rcd/tests/test9/scripts/oracleAll.kmt"
+require "platform:/resource/fr.irisa.triskell.decompose.test/tests/rcd/tests/test10/scripts/oracleAll.kmt"
+require "platform:/resource/fr.irisa.triskell.decompose.test/tests/rcd/tests/test11/scripts/oracleAll.kmt"
+require "platform:/resource/fr.irisa.triskell.decompose.test/tests/rcd/tests/test12/scripts/oracleAll.kmt"
+require "platform:/resource/fr.irisa.triskell.decompose.test/tests/rcd/tests/test13/scripts/oracleAll.kmt"
+require "platform:/resource/fr.irisa.triskell.decompose.test/tests/rcd/tests/test14/scripts/oracleAll.kmt"
+require "platform:/resource/fr.irisa.triskell.decompose.test/tests/rcd/tests/test15/scripts/oracleAll.kmt"
+require "platform:/resource/fr.irisa.triskell.decompose.test/tests/rcd/tests/test16/scripts/oracleAll.kmt"
+require "platform:/resource/fr.irisa.triskell.decompose.test/tests/rcd/tests/test17/scripts/oracleAll.kmt"
+require "platform:/resource/fr.irisa.triskell.decompose.test/tests/rcd/tests/test18/scripts/oracleAll.kmt"
+require "platform:/resource/fr.irisa.triskell.decompose.test/tests/rcd/tests/test19/scripts/oracleAll.kmt"
+require "platform:/resource/fr.irisa.triskell.decompose.test/tests/rcd/tests/test20/scripts/oracleAll.kmt"
+require "platform:/resource/fr.irisa.triskell.decompose.test/tests/rcd/tests/test21/scripts/oracleAll.kmt"
+require "platform:/resource/fr.irisa.triskell.decompose.test/tests/rcd/tests/test22/scripts/oracleAll.kmt"
+require "platform:/resource/fr.irisa.triskell.decompose.test/tests/rcd/tests/test23/scripts/oracleAll.kmt"
+require "platform:/resource/fr.irisa.triskell.decompose.test/tests/rcd/tests/test24/scripts/oracleAll.kmt"
+require "platform:/resource/fr.irisa.triskell.decompose.test/tests/rcd/tests/test25/scripts/oracleAll.kmt"
+require "platform:/resource/fr.irisa.triskell.decompose.test/tests/rcd/tests/test26/scripts/oracleAll.kmt"
+require "platform:/resource/fr.irisa.triskell.decompose.test/tests/rcd/tests/test27/scripts/oracleAll.kmt"
+require "platform:/resource/fr.irisa.triskell.decompose.test/tests/rcd/tests/test28/scripts/oracleAll.kmt"
+require "platform:/resource/fr.irisa.triskell.decompose.test/tests/rcd/tests/test29/scripts/oracleAll.kmt"
+require "platform:/resource/fr.irisa.triskell.decompose.test/tests/rcd/tests/test30/scripts/oracleAll.kmt"
+require "platform:/resource/fr.irisa.triskell.decompose.test/tests/rcd/tests/test31/scripts/oracleAll.kmt"
+
+require kermeta
+require "platform:/resource/fr.irisa.triskell.decompose/src/kermeta/Oracle.kmt"
+
+using decompose::oracle::run0
+using decompose::oracle::run1
+using decompose::oracle::run2
+using decompose::oracle::run3
+using decompose::oracle::run4
+using decompose::oracle::run5
+using decompose::oracle::run6
+using decompose::oracle::run7
+using decompose::oracle::run8
+using decompose::oracle::run9
+using decompose::oracle::run10
+using decompose::oracle::run11
+using decompose::oracle::run12
+using decompose::oracle::run13
+using decompose::oracle::run14
+using decompose::oracle::run15
+using decompose::oracle::run16
+using decompose::oracle::run17
+using decompose::oracle::run18
+using decompose::oracle::run19
+using decompose::oracle::run20
+using decompose::oracle::run21
+using decompose::oracle::run22
+using decompose::oracle::run23
+using decompose::oracle::run24
+using decompose::oracle::run25
+using decompose::oracle::run26
+using decompose::oracle::run27
+using decompose::oracle::run28
+using decompose::oracle::run29
+using decompose::oracle::run30
+using decompose::oracle::run31
+
+using decomposition
+
+class Main
+{
+	operation main() : Void is do 
+		var main0:decompose::oracle::run0::Main init decompose::oracle::run0::Main.new
+		var main1:decompose::oracle::run1::Main init decompose::oracle::run1::Main.new
+		var main2:decompose::oracle::run2::Main init decompose::oracle::run2::Main.new
+		var main3:decompose::oracle::run3::Main init decompose::oracle::run3::Main.new
+		var main4:decompose::oracle::run4::Main init decompose::oracle::run4::Main.new
+		var main5:decompose::oracle::run5::Main init decompose::oracle::run5::Main.new
+		var main6:decompose::oracle::run6::Main init decompose::oracle::run6::Main.new
+		var main7:decompose::oracle::run7::Main init decompose::oracle::run7::Main.new
+		var main8:decompose::oracle::run8::Main init decompose::oracle::run8::Main.new
+		var main9:decompose::oracle::run9::Main init decompose::oracle::run9::Main.new
+		var main10:decompose::oracle::run10::Main init decompose::oracle::run10::Main.new
+		var main11:decompose::oracle::run11::Main init decompose::oracle::run11::Main.new
+		var main12:decompose::oracle::run12::Main init decompose::oracle::run12::Main.new
+		var main13:decompose::oracle::run13::Main init decompose::oracle::run13::Main.new
+		var main14:decompose::oracle::run14::Main init decompose::oracle::run14::Main.new
+		var main15:decompose::oracle::run15::Main init decompose::oracle::run15::Main.new
+		var main16:decompose::oracle::run16::Main init decompose::oracle::run16::Main.new
+		var main17:decompose::oracle::run17::Main init decompose::oracle::run17::Main.new
+		var main18:decompose::oracle::run18::Main init decompose::oracle::run18::Main.new
+		var main19:decompose::oracle::run19::Main init decompose::oracle::run19::Main.new
+		var main20:decompose::oracle::run20::Main init decompose::oracle::run20::Main.new
+		var main21:decompose::oracle::run21::Main init decompose::oracle::run21::Main.new
+		var main22:decompose::oracle::run22::Main init decompose::oracle::run22::Main.new
+		var main23:decompose::oracle::run23::Main init decompose::oracle::run23::Main.new
+		var main24:decompose::oracle::run24::Main init decompose::oracle::run24::Main.new
+		var main25:decompose::oracle::run25::Main init decompose::oracle::run25::Main.new
+		var main26:decompose::oracle::run26::Main init decompose::oracle::run26::Main.new
+		var main27:decompose::oracle::run27::Main init decompose::oracle::run27::Main.new
+		var main28:decompose::oracle::run28::Main init decompose::oracle::run28::Main.new
+		var main29:decompose::oracle::run29::Main init decompose::oracle::run29::Main.new
+		var main30:decompose::oracle::run30::Main init decompose::oracle::run30::Main.new
+		var main31:decompose::oracle::run31::Main init decompose::oracle::run31::Main.new
+		main0.main()
+		main1.main()
+		main2.main()
+		main3.main()
+		main4.main()
+		main5.main()
+		main6.main()
+		main7.main()
+		main8.main()
+		main9.main()
+		main10.main()
+		main11.main()
+		main12.main()
+		main13.main()
+		main14.main()
+		main15.main()
+		main16.main()
+		main17.main()
+		main18.main()
+		main19.main()
+		main20.main()
+		main21.main()
+		main22.main()
+		main23.main()
+		main24.main()
+		main25.main()
+		main26.main()
+		main27.main()
+		main28.main()
+		main29.main()
+		main30.main()
+		main31.main()
+	end
+}

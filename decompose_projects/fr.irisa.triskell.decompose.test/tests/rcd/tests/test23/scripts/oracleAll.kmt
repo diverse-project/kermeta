@@ -1,0 +1,20 @@
+
+@mainClass "decompose::oracle::run23::Main"
+@mainOperation "main"
+
+package decompose::oracle::run23;
+require kermeta
+require "platform:/resource/fr.irisa.triskell.decompose/src/kermeta/Oracle.kmt"
+require "http://www.kermeta.org/rcd"
+
+using decomposition
+using rcd
+
+class Main
+{
+	operation main() : Void is do 
+		var oracle:Oracle init Oracle.new
+		oracle.initialize("platform:/resource/fr.irisa.triskell.decompose.test/tests/rcd/tests/test23/result.ocompare")
+		oracle.veredict()
+	end
+}

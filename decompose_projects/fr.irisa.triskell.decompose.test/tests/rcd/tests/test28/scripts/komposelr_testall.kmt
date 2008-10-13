@@ -1,0 +1,142 @@
+@mainClass "decompose::Test::all28::Main"
+@mainOperation "main"
+
+package decompose::Test::all28;
+require kermeta
+require "platform:/resource/fr.irisa.triskell.decompose.test/tests/rcd/tests/test28/scripts/komposelr_test0.kmt"
+require "platform:/resource/fr.irisa.triskell.decompose.test/tests/rcd/tests/test28/scripts/komposelr_test1.kmt"
+require "platform:/resource/fr.irisa.triskell.decompose.test/tests/rcd/tests/test28/scripts/komposelr_test2.kmt"
+require "platform:/resource/fr.irisa.triskell.decompose.test/tests/rcd/tests/test28/scripts/komposelr_test3.kmt"
+require "platform:/resource/fr.irisa.triskell.decompose.test/tests/rcd/tests/test28/scripts/komposelr_test4.kmt"
+require "platform:/resource/fr.irisa.triskell.decompose.test/tests/rcd/tests/test28/scripts/komposelr_test5.kmt"
+require "platform:/resource/fr.irisa.triskell.decompose.test/tests/rcd/tests/test28/scripts/komposelr_test6.kmt"
+require "platform:/resource/fr.irisa.triskell.decompose.test/tests/rcd/tests/test28/scripts/komposelr_test7.kmt"
+require "platform:/resource/fr.irisa.triskell.decompose.test/tests/rcd/tests/test28/scripts/komposelr_test8.kmt"
+require "platform:/resource/fr.irisa.triskell.decompose.test/tests/rcd/tests/test28/scripts/komposelr_test9.kmt"
+require "platform:/resource/fr.irisa.triskell.decompose.test/tests/rcd/tests/test28/scripts/komposelr_test10.kmt"
+require "platform:/resource/fr.irisa.triskell.decompose.test/tests/rcd/tests/test28/scripts/komposelr_test11.kmt"
+require "platform:/resource/fr.irisa.triskell.decompose.test/tests/rcd/tests/test28/scripts/komposelr_test12.kmt"
+require "platform:/resource/fr.irisa.triskell.decompose.test/tests/rcd/tests/test28/scripts/komposelr_test13.kmt"
+require "platform:/resource/fr.irisa.triskell.decompose.test/tests/rcd/tests/test28/scripts/komposelr_test14.kmt"
+require "platform:/resource/fr.irisa.triskell.decompose.test/tests/rcd/tests/test28/scripts/komposelr_test15.kmt"
+require "platform:/resource/fr.irisa.triskell.decompose.test/tests/rcd/tests/test28/scripts/komposelr_test16.kmt"
+require "platform:/resource/fr.irisa.triskell.decompose.test/tests/rcd/tests/test28/scripts/komposelr_test17.kmt"
+require "platform:/resource/fr.irisa.triskell.decompose.test/tests/rcd/tests/test28/scripts/komposelr_test18.kmt"
+require "platform:/resource/fr.irisa.triskell.decompose.test/tests/rcd/tests/test28/scripts/komposelr_test19.kmt"
+require "platform:/resource/fr.irisa.triskell.decompose.test/tests/rcd/tests/test28/scripts/komposelr_test20.kmt"
+require "platform:/resource/fr.irisa.triskell.decompose.test/tests/rcd/tests/test28/scripts/komposelr_test21.kmt"
+require "platform:/resource/fr.irisa.triskell.decompose.test/tests/rcd/tests/test28/scripts/komposelr_test22.kmt"
+require "platform:/resource/fr.irisa.triskell.decompose.test/tests/rcd/tests/test28/scripts/komposelr_test23.kmt"
+require "platform:/resource/fr.irisa.triskell.decompose.test/tests/rcd/tests/test28/scripts/komposelr_test24.kmt"
+require "platform:/resource/fr.irisa.triskell.decompose.test/tests/rcd/tests/test28/scripts/komposelr_test25.kmt"
+require "platform:/resource/fr.irisa.triskell.decompose.test/tests/rcd/tests/test28/scripts/komposelr_test26.kmt"
+require "platform:/resource/fr.irisa.triskell.decompose.test/tests/rcd/tests/test28/scripts/komposelr_test27.kmt"
+require "platform:/resource/fr.irisa.triskell.decompose.test/tests/rcd/tests/test28/scripts/komposelr_test28.kmt"
+require "platform:/resource/fr.irisa.triskell.decompose.test/tests/rcd/tests/test28/scripts/komposelr_test29.kmt"
+require "platform:/resource/fr.irisa.triskell.decompose.test/tests/rcd/tests/test28/scripts/komposelr_test30.kmt"
+require "platform:/resource/fr.irisa.triskell.decompose.test/tests/rcd/tests/test28/scripts/komposelr_test31.kmt"
+
+
+using decompose::Test28::n0
+using decompose::Test28::n1
+using decompose::Test28::n2
+using decompose::Test28::n3
+using decompose::Test28::n4
+using decompose::Test28::n5
+using decompose::Test28::n6
+using decompose::Test28::n7
+using decompose::Test28::n8
+using decompose::Test28::n9
+using decompose::Test28::n10
+using decompose::Test28::n11
+using decompose::Test28::n12
+using decompose::Test28::n13
+using decompose::Test28::n14
+using decompose::Test28::n15
+using decompose::Test28::n16
+using decompose::Test28::n17
+using decompose::Test28::n18
+using decompose::Test28::n19
+using decompose::Test28::n20
+using decompose::Test28::n21
+using decompose::Test28::n22
+using decompose::Test28::n23
+using decompose::Test28::n24
+using decompose::Test28::n25
+using decompose::Test28::n26
+using decompose::Test28::n27
+using decompose::Test28::n28
+using decompose::Test28::n29
+using decompose::Test28::n30
+using decompose::Test28::n31
+
+
+class Main
+{
+	operation main() : Void is do 
+		var main0:decompose::Test28::n0::Main init decompose::Test28::n0::Main.new
+		var main1:decompose::Test28::n1::Main init decompose::Test28::n1::Main.new
+		var main2:decompose::Test28::n2::Main init decompose::Test28::n2::Main.new
+		var main3:decompose::Test28::n3::Main init decompose::Test28::n3::Main.new
+		var main4:decompose::Test28::n4::Main init decompose::Test28::n4::Main.new
+		var main5:decompose::Test28::n5::Main init decompose::Test28::n5::Main.new
+		var main6:decompose::Test28::n6::Main init decompose::Test28::n6::Main.new
+		var main7:decompose::Test28::n7::Main init decompose::Test28::n7::Main.new
+		var main8:decompose::Test28::n8::Main init decompose::Test28::n8::Main.new
+		var main9:decompose::Test28::n9::Main init decompose::Test28::n9::Main.new
+		var main10:decompose::Test28::n10::Main init decompose::Test28::n10::Main.new
+		var main11:decompose::Test28::n11::Main init decompose::Test28::n11::Main.new
+		var main12:decompose::Test28::n12::Main init decompose::Test28::n12::Main.new
+		var main13:decompose::Test28::n13::Main init decompose::Test28::n13::Main.new
+		var main14:decompose::Test28::n14::Main init decompose::Test28::n14::Main.new
+		var main15:decompose::Test28::n15::Main init decompose::Test28::n15::Main.new
+		var main16:decompose::Test28::n16::Main init decompose::Test28::n16::Main.new
+		var main17:decompose::Test28::n17::Main init decompose::Test28::n17::Main.new
+		var main18:decompose::Test28::n18::Main init decompose::Test28::n18::Main.new
+		var main19:decompose::Test28::n19::Main init decompose::Test28::n19::Main.new
+		var main20:decompose::Test28::n20::Main init decompose::Test28::n20::Main.new
+		var main21:decompose::Test28::n21::Main init decompose::Test28::n21::Main.new
+		var main22:decompose::Test28::n22::Main init decompose::Test28::n22::Main.new
+		var main23:decompose::Test28::n23::Main init decompose::Test28::n23::Main.new
+		var main24:decompose::Test28::n24::Main init decompose::Test28::n24::Main.new
+		var main25:decompose::Test28::n25::Main init decompose::Test28::n25::Main.new
+		var main26:decompose::Test28::n26::Main init decompose::Test28::n26::Main.new
+		var main27:decompose::Test28::n27::Main init decompose::Test28::n27::Main.new
+		var main28:decompose::Test28::n28::Main init decompose::Test28::n28::Main.new
+		var main29:decompose::Test28::n29::Main init decompose::Test28::n29::Main.new
+		var main30:decompose::Test28::n30::Main init decompose::Test28::n30::Main.new
+		var main31:decompose::Test28::n31::Main init decompose::Test28::n31::Main.new
+		main0.main()
+		main1.main()
+		main2.main()
+		main3.main()
+		main4.main()
+		main5.main()
+		main6.main()
+		main7.main()
+		main8.main()
+		main9.main()
+		main10.main()
+		main11.main()
+		main12.main()
+		main13.main()
+		main14.main()
+		main15.main()
+		main16.main()
+		main17.main()
+		main18.main()
+		main19.main()
+		main20.main()
+		main21.main()
+		main22.main()
+		main23.main()
+		main24.main()
+		main25.main()
+		main26.main()
+		main27.main()
+		main28.main()
+		main29.main()
+		main30.main()
+		main31.main()
+	end
+}

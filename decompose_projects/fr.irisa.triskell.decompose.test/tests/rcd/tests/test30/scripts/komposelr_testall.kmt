@@ -1,0 +1,46 @@
+@mainClass "decompose::Test::all30::Main"
+@mainOperation "main"
+
+package decompose::Test::all30;
+require kermeta
+require "platform:/resource/fr.irisa.triskell.decompose.test/tests/rcd/tests/test30/scripts/komposelr_test0.kmt"
+require "platform:/resource/fr.irisa.triskell.decompose.test/tests/rcd/tests/test30/scripts/komposelr_test1.kmt"
+require "platform:/resource/fr.irisa.triskell.decompose.test/tests/rcd/tests/test30/scripts/komposelr_test2.kmt"
+require "platform:/resource/fr.irisa.triskell.decompose.test/tests/rcd/tests/test30/scripts/komposelr_test3.kmt"
+require "platform:/resource/fr.irisa.triskell.decompose.test/tests/rcd/tests/test30/scripts/komposelr_test4.kmt"
+require "platform:/resource/fr.irisa.triskell.decompose.test/tests/rcd/tests/test30/scripts/komposelr_test5.kmt"
+require "platform:/resource/fr.irisa.triskell.decompose.test/tests/rcd/tests/test30/scripts/komposelr_test6.kmt"
+require "platform:/resource/fr.irisa.triskell.decompose.test/tests/rcd/tests/test30/scripts/komposelr_test7.kmt"
+
+
+using decompose::Test30::n0
+using decompose::Test30::n1
+using decompose::Test30::n2
+using decompose::Test30::n3
+using decompose::Test30::n4
+using decompose::Test30::n5
+using decompose::Test30::n6
+using decompose::Test30::n7
+
+
+class Main
+{
+	operation main() : Void is do 
+		var main0:decompose::Test30::n0::Main init decompose::Test30::n0::Main.new
+		var main1:decompose::Test30::n1::Main init decompose::Test30::n1::Main.new
+		var main2:decompose::Test30::n2::Main init decompose::Test30::n2::Main.new
+		var main3:decompose::Test30::n3::Main init decompose::Test30::n3::Main.new
+		var main4:decompose::Test30::n4::Main init decompose::Test30::n4::Main.new
+		var main5:decompose::Test30::n5::Main init decompose::Test30::n5::Main.new
+		var main6:decompose::Test30::n6::Main init decompose::Test30::n6::Main.new
+		var main7:decompose::Test30::n7::Main init decompose::Test30::n7::Main.new
+		main0.main()
+		main1.main()
+		main2.main()
+		main3.main()
+		main4.main()
+		main5.main()
+		main6.main()
+		main7.main()
+	end
+}

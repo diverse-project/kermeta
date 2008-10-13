@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="ASCII"?>
+<diff:DiffModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:diff="http://www.eclipse.org/emf/compare/diff/1.1" left="file:/Users/freddy/Documents/workspaces/kompose_stable/kompose/fr.irisa.triskell.decompose.test/tests/rcd/instances/instance16.xmi" right="file:/Users/freddy/Documents/workspaces/kompose_stable/kompose/fr.irisa.triskell.decompose.test/tests/rcd/tests/test16/result1.xmi">
+  <ownedElements xsi:type="diff:DiffGroup">
+    <subDiffElements xsi:type="diff:DiffGroup">
+      <subDiffElements xsi:type="diff:RemoveModelElement">
+        <rightParent href="result1.xmi#/"/>
+        <leftElement href="../../instances/instance16.xmi#//@association.0"/>
+      </subDiffElements>
+      <subDiffElements xsi:type="diff:RemoveModelElement">
+        <rightParent href="result1.xmi#/"/>
+        <leftElement href="../../instances/instance16.xmi#//@classifier.0"/>
+      </subDiffElements>
+      <subDiffElements xsi:type="diff:RemoveModelElement">
+        <rightParent href="result1.xmi#/"/>
+        <leftElement href="../../instances/instance16.xmi#//@classifier.1"/>
+      </subDiffElements>
+      <leftParent href="../../instances/instance16.xmi#/"/>
+    </subDiffElements>
+  </ownedElements>
+</diff:DiffModel>

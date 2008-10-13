@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="ASCII"?>
+<match:MatchModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:match="http://www.eclipse.org/emf/compare/match/1.1" leftModel="file:/Users/freddy/Documents/workspaces/kompose_stable/kompose/fr.irisa.triskell.decompose.test/tests/rcd/instances/instance24.xmi" rightModel="file:/Users/freddy/Documents/workspaces/kompose_stable/kompose/fr.irisa.triskell.decompose.test/tests/rcd/tests/test24/result1.xmi">
+  <matchedElements xsi:type="match:Match2Elements" similarity="0.9500000000000001">
+    <subMatchElements xsi:type="match:Match2Elements" similarity="1.0">
+      <subMatchElements xsi:type="match:Match2Elements" similarity="0.9666666666666667">
+        <leftElement href="../../instances/instance24.xmi#//@classifier.0/@attrs.0"/>
+        <rightElement href="result1.xmi#//@classifier.0/@attrs.0"/>
+      </subMatchElements>
+      <leftElement href="../../instances/instance24.xmi#//@classifier.0"/>
+      <rightElement href="result1.xmi#//@classifier.0"/>
+    </subMatchElements>
+    <leftElement href="../../instances/instance24.xmi#/"/>
+    <rightElement href="result1.xmi#/"/>
+  </matchedElements>
+  <unMatchedElements>
+    <element href="../../instances/instance24.xmi#//@classifier.2"/>
+  </unMatchedElements>
+  <unMatchedElements>
+    <element href="../../instances/instance24.xmi#//@classifier.1"/>
+  </unMatchedElements>
+</match:MatchModel>

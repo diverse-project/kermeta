@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="ASCII"?>
+<umlcd:ClassModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:umlcd="http://www.kermeta.org/rcd" name="1">
+  <classifier xsi:type="umlcd:Class" name="7" is_persistent="true">
+    <attrs type="//@classifier.1" name="5" is_primary="true" upper="0" lower="5"/>
+  </classifier>
+  <classifier xsi:type="umlcd:PrimitiveDataType" name="6"/>
+  <classifier xsi:type="umlcd:Class" name="0" is_persistent="true" parent="//@classifier.0">
+    <attrs type="//@classifier.1" name="4" is_primary="true" upper="7" lower="6"/>
+  </classifier>
+  <association name="-6" src="//@classifier.0" dest="//@classifier.2" upper="7" lower="-7"/>
+  <association name="0" src="//@classifier.0" dest="//@classifier.2" upper="7" lower="-8"/>
+  <association name="-1" src="//@classifier.2" dest="//@classifier.2" upper="7" lower="2"/>
+</umlcd:ClassModel>

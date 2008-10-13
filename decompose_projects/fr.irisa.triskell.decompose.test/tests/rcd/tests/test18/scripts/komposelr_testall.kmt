@@ -1,0 +1,22 @@
+@mainClass "decompose::Test::all18::Main"
+@mainOperation "main"
+
+package decompose::Test::all18;
+require kermeta
+require "platform:/resource/fr.irisa.triskell.decompose.test/tests/rcd/tests/test18/scripts/komposelr_test0.kmt"
+require "platform:/resource/fr.irisa.triskell.decompose.test/tests/rcd/tests/test18/scripts/komposelr_test1.kmt"
+
+
+using decompose::Test18::n0
+using decompose::Test18::n1
+
+
+class Main
+{
+	operation main() : Void is do 
+		var main0:decompose::Test18::n0::Main init decompose::Test18::n0::Main.new
+		var main1:decompose::Test18::n1::Main init decompose::Test18::n1::Main.new
+		main0.main()
+		main1.main()
+	end
+}

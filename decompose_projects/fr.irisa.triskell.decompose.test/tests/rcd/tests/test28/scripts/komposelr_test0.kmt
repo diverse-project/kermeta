@@ -1,0 +1,20 @@
+@mainClass "decompose::Test::n0::Main"
+@mainOperation "main"
+
+
+package decompose::Test28::n0;
+require kermeta
+//require "platform:/resource/org.kermeta.kompose.specialization.ecore.uno/kermeta/Ecore.kmt"
+require "platform:/resource/org.kermeta.kompose.specialization.rcd/kermeta/Rcd.kmt"
+using rcd
+
+
+class Main
+{
+	operation main() : Void is do 
+		//var compMain:ecore::Main init ecore::Main.new
+		var compMain:rcd::Main init rcd::Main.new
+		
+		compMain.main("platform:/resource/fr.irisa.triskell.decompose.test/tests/rcd/tests/test28/komposeComp.kompose0")
+	end
+}

@@ -1,0 +1,355 @@
+<?xml version="1.0" encoding="ASCII"?>
+<Planification xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns="http://www.kermeta.org/decomposer/plan">
+  <plans>
+    <atomicPlans element="Association[6]" inElement="ClassModel[6]"/>
+    <atomicPlans element="Classifier[7]" inElement="ClassModel[6]"/>
+    <atomicPlans element="Association[3]" inElement="ClassModel[6]"/>
+    <atomicPlans element="Attribute[-7]:Classifier[6]" inElement="Classifier[-7]"/>
+    <atomicPlans element="Association[7]" inElement="ClassModel[6]"/>
+    <atomicPlans element="Classifier[-7]" inElement="ClassModel[6]"/>
+    <atomicPlans element="Attribute[-7]:Classifier[7]" inElement="Classifier[6]"/>
+    <atomicPlans element="Classifier[6]" inElement="ClassModel[6]"/>
+    <atomicPlans element="ClassModel[6]" inElement="&lt;void>"/>
+  </plans>
+  <plans address="1">
+    <atomicPlans element="Association[6]" inElement="ClassModel[6]"/>
+    <atomicPlans element="Classifier[7]" side="true" inElement="ClassModel[6]" operationType="ONESIDE"/>
+    <atomicPlans element="Association[3]" inElement="ClassModel[6]"/>
+    <atomicPlans element="Attribute[-7]:Classifier[6]" inElement="Classifier[-7]"/>
+    <atomicPlans element="Association[7]" inElement="ClassModel[6]"/>
+    <atomicPlans element="Classifier[-7]" inElement="ClassModel[6]"/>
+    <atomicPlans element="Attribute[-7]:Classifier[7]" side="true" inElement="Classifier[6]" operationType="ONESIDE" restricted="true" restriction="RIGHT"/>
+    <atomicPlans element="Classifier[6]" inElement="ClassModel[6]"/>
+    <atomicPlans element="ClassModel[6]" inElement="&lt;void>" restricted="true" restriction="RIGHT"/>
+  </plans>
+  <plans address="2">
+    <atomicPlans element="Association[6]" side="true" inElement="ClassModel[6]" operationType="ONESIDE" restricted="true" restriction="RIGHT"/>
+    <atomicPlans element="Classifier[7]" side="true" inElement="ClassModel[6]" operationType="ONESIDE"/>
+    <atomicPlans element="Association[3]" inElement="ClassModel[6]"/>
+    <atomicPlans element="Attribute[-7]:Classifier[6]" side="true" inElement="Classifier[-7]" operationType="ONESIDE"/>
+    <atomicPlans element="Association[7]" side="true" inElement="ClassModel[6]" operationType="ONESIDE" restricted="true" restriction="RIGHT"/>
+    <atomicPlans element="Classifier[-7]" inElement="ClassModel[6]" restricted="true" restriction="RIGHT"/>
+    <atomicPlans element="Attribute[-7]:Classifier[7]" side="true" inElement="Classifier[6]" operationType="ONESIDE" restricted="true" restriction="RIGHT"/>
+    <atomicPlans element="Classifier[6]" side="true" inElement="ClassModel[6]" operationType="ONESIDE" restricted="true" restriction="RIGHT"/>
+    <atomicPlans element="ClassModel[6]" inElement="&lt;void>" restricted="true" restriction="RIGHT"/>
+  </plans>
+  <plans address="3">
+    <atomicPlans element="Association[6]" side="true" inElement="ClassModel[6]" operationType="ONESIDE" restricted="true" restriction="RIGHT"/>
+    <atomicPlans element="Classifier[7]" side="true" inElement="ClassModel[6]" operationType="ONESIDE"/>
+    <atomicPlans element="Association[3]" side="true" inElement="ClassModel[6]" operationType="ONESIDE" restricted="true" restriction="RIGHT"/>
+    <atomicPlans element="Attribute[-7]:Classifier[6]" side="true" inElement="Classifier[-7]" operationType="ONESIDE"/>
+    <atomicPlans element="Association[7]" side="true" inElement="ClassModel[6]" operationType="ONESIDE" restricted="true" restriction="RIGHT"/>
+    <atomicPlans element="Classifier[-7]" side="true" inElement="ClassModel[6]" operationType="ONESIDE" restricted="true" restriction="RIGHT"/>
+    <atomicPlans element="Attribute[-7]:Classifier[7]" side="true" inElement="Classifier[6]" operationType="ONESIDE" restricted="true" restriction="RIGHT"/>
+    <atomicPlans element="Classifier[6]" side="true" inElement="ClassModel[6]" operationType="ONESIDE" restricted="true" restriction="RIGHT"/>
+    <atomicPlans element="ClassModel[6]" inElement="&lt;void>" restricted="true" restriction="RIGHT"/>
+  </plans>
+  <plans address="4">
+    <atomicPlans element="Association[6]" side="true" inElement="ClassModel[6]" operationType="ONESIDE" restricted="true" restriction="RIGHT"/>
+    <atomicPlans element="Classifier[7]" side="true" inElement="ClassModel[6]" operationType="ONESIDE"/>
+    <atomicPlans element="Association[3]" side="true" inElement="ClassModel[6]" operationType="ONESIDE" restricted="true" restriction="RIGHT"/>
+    <atomicPlans element="Attribute[-7]:Classifier[6]" side="true" inElement="Classifier[-7]" operationType="ONESIDE"/>
+    <atomicPlans element="Association[7]" side="true" inElement="ClassModel[6]" operationType="ONESIDE" restricted="true" restriction="RIGHT"/>
+    <atomicPlans element="Classifier[-7]" side="true" inElement="ClassModel[6]" operationType="ONESIDE" restricted="true" restriction="RIGHT"/>
+    <atomicPlans element="Attribute[-7]:Classifier[7]" side="true" inElement="Classifier[6]" operationType="ONESIDE" restricted="true" restriction="RIGHT"/>
+    <atomicPlans element="Classifier[6]" side="true" inElement="ClassModel[6]" operationType="ONESIDE" restricted="true" restriction="RIGHT"/>
+    <atomicPlans element="ClassModel[6]" inElement="&lt;void>" restricted="true" restriction="RIGHT"/>
+  </plans>
+  <plans address="5">
+    <atomicPlans element="Association[6]" side="true" inElement="ClassModel[6]" operationType="ONESIDE" restricted="true" restriction="RIGHT"/>
+    <atomicPlans element="Classifier[7]" side="true" inElement="ClassModel[6]" operationType="ONESIDE"/>
+    <atomicPlans element="Association[3]" side="true" inElement="ClassModel[6]" operationType="ONESIDE" restricted="true" restriction="RIGHT"/>
+    <atomicPlans element="Attribute[-7]:Classifier[6]" side="true" inElement="Classifier[-7]" operationType="ONESIDE"/>
+    <atomicPlans element="Association[7]" side="true" inElement="ClassModel[6]" operationType="ONESIDE" restricted="true" restriction="RIGHT"/>
+    <atomicPlans element="Classifier[-7]" side="true" inElement="ClassModel[6]" operationType="ONESIDE" restricted="true" restriction="RIGHT"/>
+    <atomicPlans element="Attribute[-7]:Classifier[7]" side="true" inElement="Classifier[6]" operationType="ONESIDE" restricted="true" restriction="RIGHT"/>
+    <atomicPlans element="Classifier[6]" side="true" inElement="ClassModel[6]" operationType="ONESIDE" restricted="true" restriction="RIGHT"/>
+    <atomicPlans element="ClassModel[6]" inElement="&lt;void>" restricted="true" restriction="RIGHT"/>
+  </plans>
+  <plans address="6">
+    <atomicPlans element="Association[6]" side="true" inElement="ClassModel[6]" operationType="ONESIDE" restricted="true" restriction="RIGHT"/>
+    <atomicPlans element="Classifier[7]" side="true" inElement="ClassModel[6]" operationType="ONESIDE"/>
+    <atomicPlans element="Association[3]" side="true" inElement="ClassModel[6]" operationType="ONESIDE" restricted="true" restriction="RIGHT"/>
+    <atomicPlans element="Attribute[-7]:Classifier[6]" side="true" inElement="Classifier[-7]" operationType="ONESIDE"/>
+    <atomicPlans element="Association[7]" side="true" inElement="ClassModel[6]" operationType="ONESIDE" restricted="true" restriction="RIGHT"/>
+    <atomicPlans element="Classifier[-7]" side="true" inElement="ClassModel[6]" operationType="ONESIDE" restricted="true" restriction="RIGHT"/>
+    <atomicPlans element="Attribute[-7]:Classifier[7]" side="true" inElement="Classifier[6]" operationType="ONESIDE" restricted="true" restriction="RIGHT"/>
+    <atomicPlans element="Classifier[6]" side="true" inElement="ClassModel[6]" operationType="ONESIDE" restricted="true" restriction="RIGHT"/>
+    <atomicPlans element="ClassModel[6]" inElement="&lt;void>" restricted="true" restriction="RIGHT"/>
+  </plans>
+  <plans address="7">
+    <atomicPlans element="Association[6]" side="true" inElement="ClassModel[6]" operationType="ONESIDE" restricted="true" restriction="RIGHT"/>
+    <atomicPlans element="Classifier[7]" side="true" inElement="ClassModel[6]" operationType="ONESIDE"/>
+    <atomicPlans element="Association[3]" side="true" inElement="ClassModel[6]" operationType="ONESIDE"/>
+    <atomicPlans element="Attribute[-7]:Classifier[6]" side="true" inElement="Classifier[-7]" operationType="ONESIDE"/>
+    <atomicPlans element="Association[7]" side="true" inElement="ClassModel[6]" operationType="ONESIDE" restricted="true" restriction="RIGHT"/>
+    <atomicPlans element="Classifier[-7]" side="true" inElement="ClassModel[6]" operationType="ONESIDE" restricted="true" restriction="RIGHT"/>
+    <atomicPlans element="Attribute[-7]:Classifier[7]" side="true" inElement="Classifier[6]" operationType="ONESIDE" restricted="true" restriction="RIGHT"/>
+    <atomicPlans element="Classifier[6]" side="true" inElement="ClassModel[6]" operationType="ONESIDE" restricted="true" restriction="RIGHT"/>
+    <atomicPlans element="ClassModel[6]" inElement="&lt;void>" restricted="true" restriction="RIGHT"/>
+  </plans>
+  <plans address="8">
+    <atomicPlans element="Association[6]" side="true" inElement="ClassModel[6]" operationType="ONESIDE" restricted="true" restriction="RIGHT"/>
+    <atomicPlans element="Classifier[7]" side="true" inElement="ClassModel[6]" operationType="ONESIDE"/>
+    <atomicPlans element="Association[3]" side="true" inElement="ClassModel[6]" operationType="ONESIDE"/>
+    <atomicPlans element="Attribute[-7]:Classifier[6]" side="true" inElement="Classifier[-7]" operationType="ONESIDE"/>
+    <atomicPlans element="Association[7]" side="true" inElement="ClassModel[6]" operationType="ONESIDE" restricted="true" restriction="RIGHT"/>
+    <atomicPlans element="Classifier[-7]" side="true" inElement="ClassModel[6]" operationType="ONESIDE" restricted="true" restriction="RIGHT"/>
+    <atomicPlans element="Attribute[-7]:Classifier[7]" side="true" inElement="Classifier[6]" operationType="ONESIDE" restricted="true" restriction="RIGHT"/>
+    <atomicPlans element="Classifier[6]" side="true" inElement="ClassModel[6]" operationType="ONESIDE" restricted="true" restriction="RIGHT"/>
+    <atomicPlans element="ClassModel[6]" inElement="&lt;void>" restricted="true" restriction="RIGHT"/>
+  </plans>
+  <plans address="9">
+    <atomicPlans element="Association[6]" side="true" inElement="ClassModel[6]" operationType="ONESIDE" restricted="true" restriction="RIGHT"/>
+    <atomicPlans element="Classifier[7]" side="true" inElement="ClassModel[6]" operationType="ONESIDE"/>
+    <atomicPlans element="Association[3]" side="true" inElement="ClassModel[6]" operationType="ONESIDE" restricted="true" restriction="RIGHT"/>
+    <atomicPlans element="Attribute[-7]:Classifier[6]" side="true" inElement="Classifier[-7]" operationType="ONESIDE"/>
+    <atomicPlans element="Association[7]" side="true" inElement="ClassModel[6]" operationType="ONESIDE" restricted="true" restriction="RIGHT"/>
+    <atomicPlans element="Classifier[-7]" side="true" inElement="ClassModel[6]" operationType="ONESIDE" restricted="true" restriction="RIGHT"/>
+    <atomicPlans element="Attribute[-7]:Classifier[7]" side="true" inElement="Classifier[6]" operationType="ONESIDE" restricted="true" restriction="RIGHT"/>
+    <atomicPlans element="Classifier[6]" side="true" inElement="ClassModel[6]" operationType="ONESIDE" restricted="true" restriction="RIGHT"/>
+    <atomicPlans element="ClassModel[6]" inElement="&lt;void>" restricted="true" restriction="RIGHT"/>
+  </plans>
+  <plans address="10">
+    <atomicPlans element="Association[6]" side="true" inElement="ClassModel[6]" operationType="ONESIDE" restricted="true" restriction="RIGHT"/>
+    <atomicPlans element="Classifier[7]" side="true" inElement="ClassModel[6]" operationType="ONESIDE"/>
+    <atomicPlans element="Association[3]" side="true" inElement="ClassModel[6]" operationType="ONESIDE" restricted="true" restriction="RIGHT"/>
+    <atomicPlans element="Attribute[-7]:Classifier[6]" side="true" inElement="Classifier[-7]" operationType="ONESIDE" restricted="true" restriction="RIGHT"/>
+    <atomicPlans element="Association[7]" side="true" inElement="ClassModel[6]" operationType="ONESIDE"/>
+    <atomicPlans element="Classifier[-7]" side="true" inElement="ClassModel[6]" operationType="ONESIDE" restricted="true" restriction="RIGHT"/>
+    <atomicPlans element="Attribute[-7]:Classifier[7]" side="true" inElement="Classifier[6]" operationType="ONESIDE" restricted="true" restriction="RIGHT"/>
+    <atomicPlans element="Classifier[6]" side="true" inElement="ClassModel[6]" operationType="ONESIDE" restricted="true" restriction="RIGHT"/>
+    <atomicPlans element="ClassModel[6]" inElement="&lt;void>" restricted="true" restriction="RIGHT"/>
+  </plans>
+  <plans address="11">
+    <atomicPlans element="Association[6]" side="true" inElement="ClassModel[6]" operationType="ONESIDE" restricted="true" restriction="RIGHT"/>
+    <atomicPlans element="Classifier[7]" side="true" inElement="ClassModel[6]" operationType="ONESIDE"/>
+    <atomicPlans element="Association[3]" side="true" inElement="ClassModel[6]" operationType="ONESIDE" restricted="true" restriction="RIGHT"/>
+    <atomicPlans element="Attribute[-7]:Classifier[6]" side="true" inElement="Classifier[-7]" operationType="ONESIDE" restricted="true" restriction="RIGHT"/>
+    <atomicPlans element="Association[7]" side="true" inElement="ClassModel[6]" operationType="ONESIDE"/>
+    <atomicPlans element="Classifier[-7]" side="true" inElement="ClassModel[6]" operationType="ONESIDE" restricted="true" restriction="RIGHT"/>
+    <atomicPlans element="Attribute[-7]:Classifier[7]" side="true" inElement="Classifier[6]" operationType="ONESIDE" restricted="true" restriction="RIGHT"/>
+    <atomicPlans element="Classifier[6]" side="true" inElement="ClassModel[6]" operationType="ONESIDE" restricted="true" restriction="RIGHT"/>
+    <atomicPlans element="ClassModel[6]" inElement="&lt;void>" restricted="true" restriction="RIGHT"/>
+  </plans>
+  <plans address="12">
+    <atomicPlans element="Association[6]" side="true" inElement="ClassModel[6]" operationType="ONESIDE" restricted="true" restriction="RIGHT"/>
+    <atomicPlans element="Classifier[7]" side="true" inElement="ClassModel[6]" operationType="ONESIDE"/>
+    <atomicPlans element="Association[3]" side="true" inElement="ClassModel[6]" operationType="ONESIDE" restricted="true" restriction="RIGHT"/>
+    <atomicPlans element="Attribute[-7]:Classifier[6]" side="true" inElement="Classifier[-7]" operationType="ONESIDE" restricted="true" restriction="RIGHT"/>
+    <atomicPlans element="Association[7]" side="true" inElement="ClassModel[6]" operationType="ONESIDE"/>
+    <atomicPlans element="Classifier[-7]" side="true" inElement="ClassModel[6]" operationType="ONESIDE" restricted="true" restriction="RIGHT"/>
+    <atomicPlans element="Attribute[-7]:Classifier[7]" side="true" inElement="Classifier[6]" operationType="ONESIDE" restricted="true" restriction="RIGHT"/>
+    <atomicPlans element="Classifier[6]" side="true" inElement="ClassModel[6]" operationType="ONESIDE" restricted="true" restriction="RIGHT"/>
+    <atomicPlans element="ClassModel[6]" inElement="&lt;void>" restricted="true" restriction="RIGHT"/>
+  </plans>
+  <plans address="13">
+    <atomicPlans element="Association[6]" side="true" inElement="ClassModel[6]" operationType="ONESIDE" restricted="true" restriction="RIGHT"/>
+    <atomicPlans element="Classifier[7]" side="true" inElement="ClassModel[6]" operationType="ONESIDE"/>
+    <atomicPlans element="Association[3]" side="true" inElement="ClassModel[6]" operationType="ONESIDE" restricted="true" restriction="RIGHT"/>
+    <atomicPlans element="Attribute[-7]:Classifier[6]" side="true" inElement="Classifier[-7]" operationType="ONESIDE" restricted="true" restriction="RIGHT"/>
+    <atomicPlans element="Association[7]" side="true" inElement="ClassModel[6]" operationType="ONESIDE"/>
+    <atomicPlans element="Classifier[-7]" side="true" inElement="ClassModel[6]" operationType="ONESIDE" restricted="true" restriction="RIGHT"/>
+    <atomicPlans element="Attribute[-7]:Classifier[7]" side="true" inElement="Classifier[6]" operationType="ONESIDE" restricted="true" restriction="RIGHT"/>
+    <atomicPlans element="Classifier[6]" side="true" inElement="ClassModel[6]" operationType="ONESIDE" restricted="true" restriction="RIGHT"/>
+    <atomicPlans element="ClassModel[6]" inElement="&lt;void>" restricted="true" restriction="RIGHT"/>
+  </plans>
+  <plans address="14">
+    <atomicPlans element="Association[6]" side="true" inElement="ClassModel[6]" operationType="ONESIDE" restricted="true" restriction="RIGHT"/>
+    <atomicPlans element="Classifier[7]" side="true" inElement="ClassModel[6]" operationType="ONESIDE"/>
+    <atomicPlans element="Association[3]" side="true" inElement="ClassModel[6]" operationType="ONESIDE"/>
+    <atomicPlans element="Attribute[-7]:Classifier[6]" inElement="Classifier[-7]"/>
+    <atomicPlans element="Association[7]" side="true" inElement="ClassModel[6]" operationType="ONESIDE" restricted="true" restriction="RIGHT"/>
+    <atomicPlans element="Classifier[-7]" side="true" inElement="ClassModel[6]" operationType="ONESIDE" restricted="true" restriction="RIGHT"/>
+    <atomicPlans element="Attribute[-7]:Classifier[7]" side="true" inElement="Classifier[6]" operationType="ONESIDE" restricted="true" restriction="RIGHT"/>
+    <atomicPlans element="Classifier[6]" inElement="ClassModel[6]"/>
+    <atomicPlans element="ClassModel[6]" inElement="&lt;void>" restricted="true" restriction="RIGHT"/>
+  </plans>
+  <plans address="15">
+    <atomicPlans element="Association[6]" side="true" inElement="ClassModel[6]" operationType="ONESIDE" restricted="true" restriction="RIGHT"/>
+    <atomicPlans element="Classifier[7]" side="true" inElement="ClassModel[6]" operationType="ONESIDE"/>
+    <atomicPlans element="Association[3]" side="true" inElement="ClassModel[6]" operationType="ONESIDE"/>
+    <atomicPlans element="Attribute[-7]:Classifier[6]" side="true" inElement="Classifier[-7]" operationType="ONESIDE" restricted="true" restriction="RIGHT"/>
+    <atomicPlans element="Association[7]" side="true" inElement="ClassModel[6]" operationType="ONESIDE" restricted="true" restriction="RIGHT"/>
+    <atomicPlans element="Classifier[-7]" side="true" inElement="ClassModel[6]" operationType="ONESIDE" restricted="true" restriction="RIGHT"/>
+    <atomicPlans element="Attribute[-7]:Classifier[7]" side="true" inElement="Classifier[6]" operationType="ONESIDE" restricted="true" restriction="RIGHT"/>
+    <atomicPlans element="Classifier[6]" side="true" inElement="ClassModel[6]" operationType="ONESIDE" restricted="true" restriction="RIGHT"/>
+    <atomicPlans element="ClassModel[6]" inElement="&lt;void>" restricted="true" restriction="RIGHT"/>
+  </plans>
+  <plans address="16">
+    <atomicPlans element="Association[6]" side="true" inElement="ClassModel[6]" operationType="ONESIDE"/>
+    <atomicPlans element="Classifier[7]" side="true" inElement="ClassModel[6]" operationType="ONESIDE"/>
+    <atomicPlans element="Association[3]" side="true" inElement="ClassModel[6]" operationType="ONESIDE" restricted="true" restriction="RIGHT"/>
+    <atomicPlans element="Attribute[-7]:Classifier[6]" side="true" inElement="Classifier[-7]" operationType="ONESIDE" restricted="true" restriction="RIGHT"/>
+    <atomicPlans element="Association[7]" side="true" inElement="ClassModel[6]" operationType="ONESIDE" restricted="true" restriction="RIGHT"/>
+    <atomicPlans element="Classifier[-7]" side="true" inElement="ClassModel[6]" operationType="ONESIDE" restricted="true" restriction="RIGHT"/>
+    <atomicPlans element="Attribute[-7]:Classifier[7]" side="true" inElement="Classifier[6]" operationType="ONESIDE" restricted="true" restriction="RIGHT"/>
+    <atomicPlans element="Classifier[6]" side="true" inElement="ClassModel[6]" operationType="ONESIDE" restricted="true" restriction="RIGHT"/>
+    <atomicPlans element="ClassModel[6]" inElement="&lt;void>" restricted="true" restriction="RIGHT"/>
+  </plans>
+  <plans address="17">
+    <atomicPlans element="Association[6]" side="true" inElement="ClassModel[6]" operationType="ONESIDE" restricted="true" restriction="RIGHT"/>
+    <atomicPlans element="Classifier[7]" inElement="ClassModel[6]"/>
+    <atomicPlans element="Association[3]" inElement="ClassModel[6]"/>
+    <atomicPlans element="Attribute[-7]:Classifier[6]" side="true" inElement="Classifier[-7]" operationType="ONESIDE"/>
+    <atomicPlans element="Association[7]" side="true" inElement="ClassModel[6]" operationType="ONESIDE" restricted="true" restriction="RIGHT"/>
+    <atomicPlans element="Classifier[-7]" inElement="ClassModel[6]" restricted="true" restriction="RIGHT"/>
+    <atomicPlans element="Attribute[-7]:Classifier[7]" inElement="Classifier[6]"/>
+    <atomicPlans element="Classifier[6]" side="true" inElement="ClassModel[6]" operationType="ONESIDE" restricted="true" restriction="RIGHT"/>
+    <atomicPlans element="ClassModel[6]" inElement="&lt;void>"/>
+  </plans>
+  <plans address="18">
+    <atomicPlans element="Association[6]" side="true" inElement="ClassModel[6]" operationType="ONESIDE" restricted="true" restriction="RIGHT"/>
+    <atomicPlans element="Classifier[7]" inElement="ClassModel[6]"/>
+    <atomicPlans element="Association[3]" side="true" inElement="ClassModel[6]" operationType="ONESIDE" restricted="true" restriction="RIGHT"/>
+    <atomicPlans element="Attribute[-7]:Classifier[6]" side="true" inElement="Classifier[-7]" operationType="ONESIDE"/>
+    <atomicPlans element="Association[7]" side="true" inElement="ClassModel[6]" operationType="ONESIDE" restricted="true" restriction="RIGHT"/>
+    <atomicPlans element="Classifier[-7]" side="true" inElement="ClassModel[6]" operationType="ONESIDE" restricted="true" restriction="RIGHT"/>
+    <atomicPlans element="Attribute[-7]:Classifier[7]" inElement="Classifier[6]"/>
+    <atomicPlans element="Classifier[6]" side="true" inElement="ClassModel[6]" operationType="ONESIDE" restricted="true" restriction="RIGHT"/>
+    <atomicPlans element="ClassModel[6]" inElement="&lt;void>" restricted="true" restriction="RIGHT"/>
+  </plans>
+  <plans address="19">
+    <atomicPlans element="Association[6]" side="true" inElement="ClassModel[6]" operationType="ONESIDE" restricted="true" restriction="RIGHT"/>
+    <atomicPlans element="Classifier[7]" inElement="ClassModel[6]"/>
+    <atomicPlans element="Association[3]" side="true" inElement="ClassModel[6]" operationType="ONESIDE" restricted="true" restriction="RIGHT"/>
+    <atomicPlans element="Attribute[-7]:Classifier[6]" side="true" inElement="Classifier[-7]" operationType="ONESIDE"/>
+    <atomicPlans element="Association[7]" side="true" inElement="ClassModel[6]" operationType="ONESIDE" restricted="true" restriction="RIGHT"/>
+    <atomicPlans element="Classifier[-7]" side="true" inElement="ClassModel[6]" operationType="ONESIDE" restricted="true" restriction="RIGHT"/>
+    <atomicPlans element="Attribute[-7]:Classifier[7]" inElement="Classifier[6]"/>
+    <atomicPlans element="Classifier[6]" side="true" inElement="ClassModel[6]" operationType="ONESIDE" restricted="true" restriction="RIGHT"/>
+    <atomicPlans element="ClassModel[6]" inElement="&lt;void>" restricted="true" restriction="RIGHT"/>
+  </plans>
+  <plans address="20">
+    <atomicPlans element="Association[6]" side="true" inElement="ClassModel[6]" operationType="ONESIDE" restricted="true" restriction="RIGHT"/>
+    <atomicPlans element="Classifier[7]" inElement="ClassModel[6]"/>
+    <atomicPlans element="Association[3]" side="true" inElement="ClassModel[6]" operationType="ONESIDE" restricted="true" restriction="RIGHT"/>
+    <atomicPlans element="Attribute[-7]:Classifier[6]" side="true" inElement="Classifier[-7]" operationType="ONESIDE"/>
+    <atomicPlans element="Association[7]" side="true" inElement="ClassModel[6]" operationType="ONESIDE" restricted="true" restriction="RIGHT"/>
+    <atomicPlans element="Classifier[-7]" side="true" inElement="ClassModel[6]" operationType="ONESIDE" restricted="true" restriction="RIGHT"/>
+    <atomicPlans element="Attribute[-7]:Classifier[7]" inElement="Classifier[6]"/>
+    <atomicPlans element="Classifier[6]" side="true" inElement="ClassModel[6]" operationType="ONESIDE" restricted="true" restriction="RIGHT"/>
+    <atomicPlans element="ClassModel[6]" inElement="&lt;void>" restricted="true" restriction="RIGHT"/>
+  </plans>
+  <plans address="21">
+    <atomicPlans element="Association[6]" side="true" inElement="ClassModel[6]" operationType="ONESIDE" restricted="true" restriction="RIGHT"/>
+    <atomicPlans element="Classifier[7]" inElement="ClassModel[6]"/>
+    <atomicPlans element="Association[3]" side="true" inElement="ClassModel[6]" operationType="ONESIDE" restricted="true" restriction="RIGHT"/>
+    <atomicPlans element="Attribute[-7]:Classifier[6]" side="true" inElement="Classifier[-7]" operationType="ONESIDE"/>
+    <atomicPlans element="Association[7]" side="true" inElement="ClassModel[6]" operationType="ONESIDE" restricted="true" restriction="RIGHT"/>
+    <atomicPlans element="Classifier[-7]" side="true" inElement="ClassModel[6]" operationType="ONESIDE" restricted="true" restriction="RIGHT"/>
+    <atomicPlans element="Attribute[-7]:Classifier[7]" inElement="Classifier[6]"/>
+    <atomicPlans element="Classifier[6]" side="true" inElement="ClassModel[6]" operationType="ONESIDE" restricted="true" restriction="RIGHT"/>
+    <atomicPlans element="ClassModel[6]" inElement="&lt;void>" restricted="true" restriction="RIGHT"/>
+  </plans>
+  <plans address="22">
+    <atomicPlans element="Association[6]" side="true" inElement="ClassModel[6]" operationType="ONESIDE" restricted="true" restriction="RIGHT"/>
+    <atomicPlans element="Classifier[7]" inElement="ClassModel[6]"/>
+    <atomicPlans element="Association[3]" side="true" inElement="ClassModel[6]" operationType="ONESIDE"/>
+    <atomicPlans element="Attribute[-7]:Classifier[6]" side="true" inElement="Classifier[-7]" operationType="ONESIDE"/>
+    <atomicPlans element="Association[7]" side="true" inElement="ClassModel[6]" operationType="ONESIDE" restricted="true" restriction="RIGHT"/>
+    <atomicPlans element="Classifier[-7]" side="true" inElement="ClassModel[6]" operationType="ONESIDE" restricted="true" restriction="RIGHT"/>
+    <atomicPlans element="Attribute[-7]:Classifier[7]" inElement="Classifier[6]"/>
+    <atomicPlans element="Classifier[6]" side="true" inElement="ClassModel[6]" operationType="ONESIDE" restricted="true" restriction="RIGHT"/>
+    <atomicPlans element="ClassModel[6]" inElement="&lt;void>" restricted="true" restriction="RIGHT"/>
+  </plans>
+  <plans address="23">
+    <atomicPlans element="Association[6]" side="true" inElement="ClassModel[6]" operationType="ONESIDE" restricted="true" restriction="RIGHT"/>
+    <atomicPlans element="Classifier[7]" inElement="ClassModel[6]"/>
+    <atomicPlans element="Association[3]" side="true" inElement="ClassModel[6]" operationType="ONESIDE"/>
+    <atomicPlans element="Attribute[-7]:Classifier[6]" side="true" inElement="Classifier[-7]" operationType="ONESIDE"/>
+    <atomicPlans element="Association[7]" side="true" inElement="ClassModel[6]" operationType="ONESIDE" restricted="true" restriction="RIGHT"/>
+    <atomicPlans element="Classifier[-7]" side="true" inElement="ClassModel[6]" operationType="ONESIDE" restricted="true" restriction="RIGHT"/>
+    <atomicPlans element="Attribute[-7]:Classifier[7]" inElement="Classifier[6]"/>
+    <atomicPlans element="Classifier[6]" side="true" inElement="ClassModel[6]" operationType="ONESIDE" restricted="true" restriction="RIGHT"/>
+    <atomicPlans element="ClassModel[6]" inElement="&lt;void>" restricted="true" restriction="RIGHT"/>
+  </plans>
+  <plans address="24">
+    <atomicPlans element="Association[6]" side="true" inElement="ClassModel[6]" operationType="ONESIDE" restricted="true" restriction="RIGHT"/>
+    <atomicPlans element="Classifier[7]" inElement="ClassModel[6]"/>
+    <atomicPlans element="Association[3]" side="true" inElement="ClassModel[6]" operationType="ONESIDE" restricted="true" restriction="RIGHT"/>
+    <atomicPlans element="Attribute[-7]:Classifier[6]" side="true" inElement="Classifier[-7]" operationType="ONESIDE"/>
+    <atomicPlans element="Association[7]" side="true" inElement="ClassModel[6]" operationType="ONESIDE" restricted="true" restriction="RIGHT"/>
+    <atomicPlans element="Classifier[-7]" side="true" inElement="ClassModel[6]" operationType="ONESIDE" restricted="true" restriction="RIGHT"/>
+    <atomicPlans element="Attribute[-7]:Classifier[7]" inElement="Classifier[6]"/>
+    <atomicPlans element="Classifier[6]" side="true" inElement="ClassModel[6]" operationType="ONESIDE" restricted="true" restriction="RIGHT"/>
+    <atomicPlans element="ClassModel[6]" inElement="&lt;void>" restricted="true" restriction="RIGHT"/>
+  </plans>
+  <plans address="25">
+    <atomicPlans element="Association[6]" side="true" inElement="ClassModel[6]" operationType="ONESIDE" restricted="true" restriction="RIGHT"/>
+    <atomicPlans element="Classifier[7]" inElement="ClassModel[6]"/>
+    <atomicPlans element="Association[3]" side="true" inElement="ClassModel[6]" operationType="ONESIDE" restricted="true" restriction="RIGHT"/>
+    <atomicPlans element="Attribute[-7]:Classifier[6]" side="true" inElement="Classifier[-7]" operationType="ONESIDE" restricted="true" restriction="RIGHT"/>
+    <atomicPlans element="Association[7]" side="true" inElement="ClassModel[6]" operationType="ONESIDE"/>
+    <atomicPlans element="Classifier[-7]" side="true" inElement="ClassModel[6]" operationType="ONESIDE" restricted="true" restriction="RIGHT"/>
+    <atomicPlans element="Attribute[-7]:Classifier[7]" inElement="Classifier[6]"/>
+    <atomicPlans element="Classifier[6]" side="true" inElement="ClassModel[6]" operationType="ONESIDE" restricted="true" restriction="RIGHT"/>
+    <atomicPlans element="ClassModel[6]" inElement="&lt;void>" restricted="true" restriction="RIGHT"/>
+  </plans>
+  <plans address="26">
+    <atomicPlans element="Association[6]" side="true" inElement="ClassModel[6]" operationType="ONESIDE" restricted="true" restriction="RIGHT"/>
+    <atomicPlans element="Classifier[7]" inElement="ClassModel[6]"/>
+    <atomicPlans element="Association[3]" side="true" inElement="ClassModel[6]" operationType="ONESIDE" restricted="true" restriction="RIGHT"/>
+    <atomicPlans element="Attribute[-7]:Classifier[6]" side="true" inElement="Classifier[-7]" operationType="ONESIDE" restricted="true" restriction="RIGHT"/>
+    <atomicPlans element="Association[7]" side="true" inElement="ClassModel[6]" operationType="ONESIDE"/>
+    <atomicPlans element="Classifier[-7]" side="true" inElement="ClassModel[6]" operationType="ONESIDE" restricted="true" restriction="RIGHT"/>
+    <atomicPlans element="Attribute[-7]:Classifier[7]" inElement="Classifier[6]"/>
+    <atomicPlans element="Classifier[6]" side="true" inElement="ClassModel[6]" operationType="ONESIDE" restricted="true" restriction="RIGHT"/>
+    <atomicPlans element="ClassModel[6]" inElement="&lt;void>" restricted="true" restriction="RIGHT"/>
+  </plans>
+  <plans address="27">
+    <atomicPlans element="Association[6]" side="true" inElement="ClassModel[6]" operationType="ONESIDE" restricted="true" restriction="RIGHT"/>
+    <atomicPlans element="Classifier[7]" inElement="ClassModel[6]"/>
+    <atomicPlans element="Association[3]" side="true" inElement="ClassModel[6]" operationType="ONESIDE" restricted="true" restriction="RIGHT"/>
+    <atomicPlans element="Attribute[-7]:Classifier[6]" side="true" inElement="Classifier[-7]" operationType="ONESIDE" restricted="true" restriction="RIGHT"/>
+    <atomicPlans element="Association[7]" side="true" inElement="ClassModel[6]" operationType="ONESIDE"/>
+    <atomicPlans element="Classifier[-7]" side="true" inElement="ClassModel[6]" operationType="ONESIDE" restricted="true" restriction="RIGHT"/>
+    <atomicPlans element="Attribute[-7]:Classifier[7]" inElement="Classifier[6]"/>
+    <atomicPlans element="Classifier[6]" side="true" inElement="ClassModel[6]" operationType="ONESIDE" restricted="true" restriction="RIGHT"/>
+    <atomicPlans element="ClassModel[6]" inElement="&lt;void>" restricted="true" restriction="RIGHT"/>
+  </plans>
+  <plans address="28">
+    <atomicPlans element="Association[6]" side="true" inElement="ClassModel[6]" operationType="ONESIDE" restricted="true" restriction="RIGHT"/>
+    <atomicPlans element="Classifier[7]" inElement="ClassModel[6]"/>
+    <atomicPlans element="Association[3]" side="true" inElement="ClassModel[6]" operationType="ONESIDE" restricted="true" restriction="RIGHT"/>
+    <atomicPlans element="Attribute[-7]:Classifier[6]" side="true" inElement="Classifier[-7]" operationType="ONESIDE" restricted="true" restriction="RIGHT"/>
+    <atomicPlans element="Association[7]" side="true" inElement="ClassModel[6]" operationType="ONESIDE"/>
+    <atomicPlans element="Classifier[-7]" side="true" inElement="ClassModel[6]" operationType="ONESIDE" restricted="true" restriction="RIGHT"/>
+    <atomicPlans element="Attribute[-7]:Classifier[7]" inElement="Classifier[6]"/>
+    <atomicPlans element="Classifier[6]" side="true" inElement="ClassModel[6]" operationType="ONESIDE" restricted="true" restriction="RIGHT"/>
+    <atomicPlans element="ClassModel[6]" inElement="&lt;void>" restricted="true" restriction="RIGHT"/>
+  </plans>
+  <plans address="29">
+    <atomicPlans element="Association[6]" side="true" inElement="ClassModel[6]" operationType="ONESIDE" restricted="true" restriction="RIGHT"/>
+    <atomicPlans element="Classifier[7]" inElement="ClassModel[6]"/>
+    <atomicPlans element="Association[3]" side="true" inElement="ClassModel[6]" operationType="ONESIDE"/>
+    <atomicPlans element="Attribute[-7]:Classifier[6]" inElement="Classifier[-7]"/>
+    <atomicPlans element="Association[7]" side="true" inElement="ClassModel[6]" operationType="ONESIDE" restricted="true" restriction="RIGHT"/>
+    <atomicPlans element="Classifier[-7]" side="true" inElement="ClassModel[6]" operationType="ONESIDE" restricted="true" restriction="RIGHT"/>
+    <atomicPlans element="Attribute[-7]:Classifier[7]" inElement="Classifier[6]"/>
+    <atomicPlans element="Classifier[6]" inElement="ClassModel[6]"/>
+    <atomicPlans element="ClassModel[6]" inElement="&lt;void>" restricted="true" restriction="RIGHT"/>
+  </plans>
+  <plans address="30">
+    <atomicPlans element="Association[6]" side="true" inElement="ClassModel[6]" operationType="ONESIDE" restricted="true" restriction="RIGHT"/>
+    <atomicPlans element="Classifier[7]" inElement="ClassModel[6]"/>
+    <atomicPlans element="Association[3]" side="true" inElement="ClassModel[6]" operationType="ONESIDE"/>
+    <atomicPlans element="Attribute[-7]:Classifier[6]" side="true" inElement="Classifier[-7]" operationType="ONESIDE" restricted="true" restriction="RIGHT"/>
+    <atomicPlans element="Association[7]" side="true" inElement="ClassModel[6]" operationType="ONESIDE" restricted="true" restriction="RIGHT"/>
+    <atomicPlans element="Classifier[-7]" side="true" inElement="ClassModel[6]" operationType="ONESIDE" restricted="true" restriction="RIGHT"/>
+    <atomicPlans element="Attribute[-7]:Classifier[7]" inElement="Classifier[6]"/>
+    <atomicPlans element="Classifier[6]" side="true" inElement="ClassModel[6]" operationType="ONESIDE" restricted="true" restriction="RIGHT"/>
+    <atomicPlans element="ClassModel[6]" inElement="&lt;void>" restricted="true" restriction="RIGHT"/>
+  </plans>
+  <plans address="31">
+    <atomicPlans element="Association[6]" side="true" inElement="ClassModel[6]" operationType="ONESIDE"/>
+    <atomicPlans element="Classifier[7]" inElement="ClassModel[6]"/>
+    <atomicPlans element="Association[3]" side="true" inElement="ClassModel[6]" operationType="ONESIDE" restricted="true" restriction="RIGHT"/>
+    <atomicPlans element="Attribute[-7]:Classifier[6]" side="true" inElement="Classifier[-7]" operationType="ONESIDE" restricted="true" restriction="RIGHT"/>
+    <atomicPlans element="Association[7]" side="true" inElement="ClassModel[6]" operationType="ONESIDE" restricted="true" restriction="RIGHT"/>
+    <atomicPlans element="Classifier[-7]" side="true" inElement="ClassModel[6]" operationType="ONESIDE" restricted="true" restriction="RIGHT"/>
+    <atomicPlans element="Attribute[-7]:Classifier[7]" inElement="Classifier[6]"/>
+    <atomicPlans element="Classifier[6]" side="true" inElement="ClassModel[6]" operationType="ONESIDE" restricted="true" restriction="RIGHT"/>
+    <atomicPlans element="ClassModel[6]" inElement="&lt;void>" restricted="true" restriction="RIGHT"/>
+  </plans>
+</Planification>

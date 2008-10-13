@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="ASCII"?>
+<Planification xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns="http://www.kermeta.org/decomposer/plan">
+  <plans>
+    <atomicPlans element="ClassModel[7]" inElement="&lt;void>"/>
+  </plans>
+</Planification>

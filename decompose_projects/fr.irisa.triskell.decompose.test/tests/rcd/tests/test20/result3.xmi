@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="ASCII"?>
+<umlcd:ClassModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:umlcd="http://www.kermeta.org/rcd" name="-8">
+  <classifier xsi:type="umlcd:PrimitiveDataType" name="4"/>
+  <classifier xsi:type="umlcd:PrimitiveDataType" name="7"/>
+  <classifier xsi:type="umlcd:PrimitiveDataType" name="6"/>
+</umlcd:ClassModel>

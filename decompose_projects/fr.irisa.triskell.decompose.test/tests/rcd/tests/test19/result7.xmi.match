@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="ASCII"?>
+<match:MatchModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:match="http://www.eclipse.org/emf/compare/match/1.1" leftModel="file:/Users/freddy/Documents/workspaces/kompose_stable/kompose/fr.irisa.triskell.decompose.test/tests/rcd/instances/instance19.xmi" rightModel="file:/Users/freddy/Documents/workspaces/kompose_stable/kompose/fr.irisa.triskell.decompose.test/tests/rcd/tests/test19/result7.xmi">
+  <matchedElements xsi:type="match:Match2Elements" similarity="0.9">
+    <subMatchElements xsi:type="match:Match2Elements" similarity="0.9">
+      <leftElement href="../../instances/instance19.xmi#//@classifier.2"/>
+      <rightElement href="result7.xmi#//@classifier.0"/>
+    </subMatchElements>
+    <leftElement href="../../instances/instance19.xmi#/"/>
+    <rightElement href="result7.xmi#/"/>
+  </matchedElements>
+  <unMatchedElements>
+    <element href="../../instances/instance19.xmi#//@classifier.1"/>
+  </unMatchedElements>
+  <unMatchedElements>
+    <element href="../../instances/instance19.xmi#//@classifier.0"/>
+  </unMatchedElements>
+</match:MatchModel>

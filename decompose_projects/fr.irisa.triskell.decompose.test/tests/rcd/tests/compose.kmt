@@ -1,0 +1,142 @@
+@mainClass "decompose::Test::all::Main"
+@mainOperation "main"
+
+package decompose::Test::all;
+require kermeta
+require "platform:/resource/fr.irisa.triskell.decompose.test/tests/rcd/tests/test0/scripts/komposelr_testall.kmt"
+require "platform:/resource/fr.irisa.triskell.decompose.test/tests/rcd/tests/test1/scripts/komposelr_testall.kmt"
+require "platform:/resource/fr.irisa.triskell.decompose.test/tests/rcd/tests/test2/scripts/komposelr_testall.kmt"
+require "platform:/resource/fr.irisa.triskell.decompose.test/tests/rcd/tests/test3/scripts/komposelr_testall.kmt"
+require "platform:/resource/fr.irisa.triskell.decompose.test/tests/rcd/tests/test4/scripts/komposelr_testall.kmt"
+require "platform:/resource/fr.irisa.triskell.decompose.test/tests/rcd/tests/test5/scripts/komposelr_testall.kmt"
+require "platform:/resource/fr.irisa.triskell.decompose.test/tests/rcd/tests/test6/scripts/komposelr_testall.kmt"
+require "platform:/resource/fr.irisa.triskell.decompose.test/tests/rcd/tests/test7/scripts/komposelr_testall.kmt"
+require "platform:/resource/fr.irisa.triskell.decompose.test/tests/rcd/tests/test8/scripts/komposelr_testall.kmt"
+require "platform:/resource/fr.irisa.triskell.decompose.test/tests/rcd/tests/test9/scripts/komposelr_testall.kmt"
+require "platform:/resource/fr.irisa.triskell.decompose.test/tests/rcd/tests/test10/scripts/komposelr_testall.kmt"
+require "platform:/resource/fr.irisa.triskell.decompose.test/tests/rcd/tests/test11/scripts/komposelr_testall.kmt"
+require "platform:/resource/fr.irisa.triskell.decompose.test/tests/rcd/tests/test12/scripts/komposelr_testall.kmt"
+require "platform:/resource/fr.irisa.triskell.decompose.test/tests/rcd/tests/test13/scripts/komposelr_testall.kmt"
+require "platform:/resource/fr.irisa.triskell.decompose.test/tests/rcd/tests/test14/scripts/komposelr_testall.kmt"
+require "platform:/resource/fr.irisa.triskell.decompose.test/tests/rcd/tests/test15/scripts/komposelr_testall.kmt"
+require "platform:/resource/fr.irisa.triskell.decompose.test/tests/rcd/tests/test16/scripts/komposelr_testall.kmt"
+require "platform:/resource/fr.irisa.triskell.decompose.test/tests/rcd/tests/test17/scripts/komposelr_testall.kmt"
+require "platform:/resource/fr.irisa.triskell.decompose.test/tests/rcd/tests/test18/scripts/komposelr_testall.kmt"
+require "platform:/resource/fr.irisa.triskell.decompose.test/tests/rcd/tests/test19/scripts/komposelr_testall.kmt"
+require "platform:/resource/fr.irisa.triskell.decompose.test/tests/rcd/tests/test20/scripts/komposelr_testall.kmt"
+require "platform:/resource/fr.irisa.triskell.decompose.test/tests/rcd/tests/test21/scripts/komposelr_testall.kmt"
+require "platform:/resource/fr.irisa.triskell.decompose.test/tests/rcd/tests/test22/scripts/komposelr_testall.kmt"
+require "platform:/resource/fr.irisa.triskell.decompose.test/tests/rcd/tests/test23/scripts/komposelr_testall.kmt"
+require "platform:/resource/fr.irisa.triskell.decompose.test/tests/rcd/tests/test24/scripts/komposelr_testall.kmt"
+require "platform:/resource/fr.irisa.triskell.decompose.test/tests/rcd/tests/test25/scripts/komposelr_testall.kmt"
+require "platform:/resource/fr.irisa.triskell.decompose.test/tests/rcd/tests/test26/scripts/komposelr_testall.kmt"
+require "platform:/resource/fr.irisa.triskell.decompose.test/tests/rcd/tests/test27/scripts/komposelr_testall.kmt"
+require "platform:/resource/fr.irisa.triskell.decompose.test/tests/rcd/tests/test28/scripts/komposelr_testall.kmt"
+require "platform:/resource/fr.irisa.triskell.decompose.test/tests/rcd/tests/test29/scripts/komposelr_testall.kmt"
+require "platform:/resource/fr.irisa.triskell.decompose.test/tests/rcd/tests/test30/scripts/komposelr_testall.kmt"
+require "platform:/resource/fr.irisa.triskell.decompose.test/tests/rcd/tests/test31/scripts/komposelr_testall.kmt"
+
+
+using decompose::Test::all0
+using decompose::Test::all1
+using decompose::Test::all2
+using decompose::Test::all3
+using decompose::Test::all4
+using decompose::Test::all5
+using decompose::Test::all6
+using decompose::Test::all7
+using decompose::Test::all8
+using decompose::Test::all9
+using decompose::Test::all10
+using decompose::Test::all11
+using decompose::Test::all12
+using decompose::Test::all13
+using decompose::Test::all14
+using decompose::Test::all15
+using decompose::Test::all16
+using decompose::Test::all17
+using decompose::Test::all18
+using decompose::Test::all19
+using decompose::Test::all20
+using decompose::Test::all21
+using decompose::Test::all22
+using decompose::Test::all23
+using decompose::Test::all24
+using decompose::Test::all25
+using decompose::Test::all26
+using decompose::Test::all27
+using decompose::Test::all28
+using decompose::Test::all29
+using decompose::Test::all30
+using decompose::Test::all31
+
+
+class Main
+{
+	operation main() : Void is do 
+		var main0:decompose::Test::all0::Main init decompose::Test::all0::Main.new
+		var main1:decompose::Test::all1::Main init decompose::Test::all1::Main.new
+		var main2:decompose::Test::all2::Main init decompose::Test::all2::Main.new
+		var main3:decompose::Test::all3::Main init decompose::Test::all3::Main.new
+		var main4:decompose::Test::all4::Main init decompose::Test::all4::Main.new
+		var main5:decompose::Test::all5::Main init decompose::Test::all5::Main.new
+		var main6:decompose::Test::all6::Main init decompose::Test::all6::Main.new
+		var main7:decompose::Test::all7::Main init decompose::Test::all7::Main.new
+		var main8:decompose::Test::all8::Main init decompose::Test::all8::Main.new
+		var main9:decompose::Test::all9::Main init decompose::Test::all9::Main.new
+		var main10:decompose::Test::all10::Main init decompose::Test::all10::Main.new
+		var main11:decompose::Test::all11::Main init decompose::Test::all11::Main.new
+		var main12:decompose::Test::all12::Main init decompose::Test::all12::Main.new
+		var main13:decompose::Test::all13::Main init decompose::Test::all13::Main.new
+		var main14:decompose::Test::all14::Main init decompose::Test::all14::Main.new
+		var main15:decompose::Test::all15::Main init decompose::Test::all15::Main.new
+		var main16:decompose::Test::all16::Main init decompose::Test::all16::Main.new
+		var main17:decompose::Test::all17::Main init decompose::Test::all17::Main.new
+		var main18:decompose::Test::all18::Main init decompose::Test::all18::Main.new
+		var main19:decompose::Test::all19::Main init decompose::Test::all19::Main.new
+		var main20:decompose::Test::all20::Main init decompose::Test::all20::Main.new
+		var main21:decompose::Test::all21::Main init decompose::Test::all21::Main.new
+		var main22:decompose::Test::all22::Main init decompose::Test::all22::Main.new
+		var main23:decompose::Test::all23::Main init decompose::Test::all23::Main.new
+		var main24:decompose::Test::all24::Main init decompose::Test::all24::Main.new
+		var main25:decompose::Test::all25::Main init decompose::Test::all25::Main.new
+		var main26:decompose::Test::all26::Main init decompose::Test::all26::Main.new
+		var main27:decompose::Test::all27::Main init decompose::Test::all27::Main.new
+		var main28:decompose::Test::all28::Main init decompose::Test::all28::Main.new
+		var main29:decompose::Test::all29::Main init decompose::Test::all29::Main.new
+		var main30:decompose::Test::all30::Main init decompose::Test::all30::Main.new
+		var main31:decompose::Test::all31::Main init decompose::Test::all31::Main.new
+		main0.main()
+		main1.main()
+		main2.main()
+		main3.main()
+		main4.main()
+		main5.main()
+		main6.main()
+		main7.main()
+		main8.main()
+		main9.main()
+		main10.main()
+		main11.main()
+		main12.main()
+		main13.main()
+		main14.main()
+		main15.main()
+		main16.main()
+		main17.main()
+		main18.main()
+		main19.main()
+		main20.main()
+		main21.main()
+		main22.main()
+		main23.main()
+		main24.main()
+		main25.main()
+		main26.main()
+		main27.main()
+		main28.main()
+		main29.main()
+		main30.main()
+		main31.main()
+	end
+}

@@ -1,4 +1,4 @@
-/* $Id: test1.kmt,v 1.1 2008-09-02 08:48:07 fmunoz Exp $ 
+/* $Id: test1.kmt,v 1.2 2008-10-13 20:12:03 fmunoz Exp $ 
  * Creation : August 14, 2008
  * Licence  : EPL 
  * Copyright:
@@ -31,7 +31,7 @@ using decomposition::oracle
 class Main
 {
 	operation main() : Void is do 
-		var toLoad:String toLoad:="platform:/resource/fr.irisa.triskell.decompose.test/tests/rcd/one/ClassModel.xmi"
+		var toLoad:String toLoad:="platform:/resource/fr.irisa.triskell.decompose.test/tests/rcd/instances/instance0.xmi"
 		var toSaveLeft:String toSaveLeft:="platform:/resource/fr.irisa.triskell.decompose.test/tests/rcd/one/left"
 		var toSaveRight:String toSaveRight:="platform:/resource/fr.irisa.triskell.decompose.test/tests/rcd/one/right"
 		var toSaveComposition:String toSaveComposition:="platform:/resource/fr.irisa.triskell.decompose.test/tests/rcd/one/result"

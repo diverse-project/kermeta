@@ -1,0 +1,18 @@
+@mainClass "decompose::Test::all17::Main"
+@mainOperation "main"
+
+package decompose::Test::all17;
+require kermeta
+require "platform:/resource/fr.irisa.triskell.decompose.test/tests/rcd/tests/test17/scripts/komposelr_test0.kmt"
+
+
+using decompose::Test17::n0
+
+
+class Main
+{
+	operation main() : Void is do 
+		var main0:decompose::Test17::n0::Main init decompose::Test17::n0::Main.new
+		main0.main()
+	end
+}
