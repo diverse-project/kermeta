@@ -11,11 +11,13 @@ Require-Bundle: org.eclipse.ui,
  org.kermeta.io.loader,
  org.kermeta.merger,
  org.eclipse.jdt.launching,
- org.eclipse.jdt.core
-Eclipse-LazyStart: true
+ org.eclipse.jdt.core,
+ org.apache.commons.logging;bundle-version="1.0.4"
+Bundle-ActivationPolicy: lazy
 Export-Package: org.kermeta.runner,
  org.kermeta.runner.launching,
  org.kermeta.runner.model,
  org.kermeta.runner.model.variable,
  org.kermeta.runner.util
 Bundle-Vendor: IRISA/INRIA
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
