@@ -1,5 +1,5 @@
 
-/*$Id: SaverOrLoader.java,v 1.2 2008-10-16 09:04:34 cfaucher Exp $
+/*$Id: SaverOrLoader.java,v 1.3 2008-10-16 15:43:48 cfaucher Exp $
 * Project : org.kermeta.framework.compiled.runtime.helper
 * File : 	SaverOrLoader.java
 * License : EPL
@@ -54,18 +54,10 @@ abstract public class SaverOrLoader {
 	
 	/**		*/
 	private String metamodelURI;
-
-	private String metamodelURISpecialCompiler;
 	
 	/**		*/
-	//private List<EFactory> _factories;
-	
-	/**
-	 * 
-	 */
-	/*private void initialize() {
-		_factories = getFactories( getFactory(_metamodelURI).getEPackage() );
-	}*/
+	private String metamodelURISpecialCompiler;
+
 	
 	/**
 	 * 
@@ -144,10 +136,6 @@ abstract public class SaverOrLoader {
 	 */
 	protected EObject createInstance(EObject sourceObject, String metamodelURI) {
 		
-		// Getting the name of the method to call.
-		// In factory classes, it is always something like create* where * corresponds to the class name to be created.
-		String creationMethodName = "create" + sourceObject.eClass().getName();
-		
 		if( Registry.INSTANCE.getEFactory(metamodelURI) != null ) {
 			
 			if( Registry.INSTANCE.getEPackage(metamodelURI).getClass() != org.eclipse.emf.ecore.impl.EPackageImpl.class ) {
@@ -155,6 +143,10 @@ abstract public class SaverOrLoader {
 				EFactory factory = getTargetEFactory(root_pack, sourceObject.eClass().getEPackage());
 				
 				try {
+					// Getting the name of the method to call.
+					// In factory classes, it is always something like create* where * corresponds to the class name to be created.
+					String creationMethodName = "create" + sourceObject.eClass().getName();
+					
 					Method method = factory.getClass().getMethod(creationMethodName, new Class[] {});
 					EObject targetObject = (EObject) method.invoke(factory, new Object[] {});
 					// Make the mapping between the source object and the target one.
@@ -172,49 +164,9 @@ abstract public class SaverOrLoader {
 			}
 			                     
 		} else {
-		
-		/*IFile file_from_uri = ResourceHelper.getIFile(uri, true);
-		// the uri is a file
-		
-		
-		
-		if( file_from_uri!=null ) {
-
-			URIConverter c = new ExtensibleURIConverterImpl();
-    		URI u;
-    		u.resolve(c.normalize(URI.createFileURI(file_from_uri.getLocation().toString())));
-			ResourceSet resource_set = new ResourceSetImpl();
-			org.eclipse.emf.ecore.resource.Resource res = resource_set.createResource(u);
-			res.load(null);
-			
-			//Collect the uri
-			for(EObject eobj : res.getContents() ) {
-				if( eobj instanceof EPackage ) {
-					EPackage pack = (EPackage) eobj;
-					//pack
-				}
-			}
-			
-		}*/
+			return null;
 		}
 		
-		
-		
-		/*for ( EFactory factory : _factories ) {
-			// courtcircuit if possible.
-			if ( sourceObject.eClass().getEPackage().getEFactoryInstance() == factory ) {
-				System.out.println("Warning: SaverOrLoader.createInstance");
-				return sourceObject;
-			}
-			try {
-				Method method = factory.getClass().getMethod(creationMethodName, new Class[] {});
-				EObject targetObject = (EObject) method.invoke(factory, new Object[] {});
-				// Make the mapping between the source object and the target one.
-				_instanceMapping.put(sourceObject, targetObject);
-				return targetObject;
-			} catch (Exception e) {
-			}
-		}*/
 		return null;
 	}
 	
@@ -283,8 +235,6 @@ abstract public class SaverOrLoader {
 			e.printStackTrace();
 		}
 		
-		//EPackage _epack = eEnum.getEPackage();
-		
 		EFactory factory = getTargetEFactory(root_pack, _epack);
 		
 		String creationMethodName = "create" + sourceObject.getClass().getSimpleName() + "FromString";
@@ -294,7 +244,7 @@ abstract public class SaverOrLoader {
 			return targetObject;
 		} catch (Exception e) {
 		}
-		//}
+		
 		return null;
 	}
 	
@@ -310,15 +260,8 @@ abstract public class SaverOrLoader {
 		if( !Registry.INSTANCE.containsKey(_metamodelURI) ) {
 			registerTheUri(_metamodelURI);
 		}
-		Registry.INSTANCE.keySet();
-		/*if( !Registry.INSTANCE.containsKey(_metamodelURI) ) {
-			registerEcoreMetamodel(_metamodelURI);
-		}*/
-		
-//		if( Registry.INSTANCE.containsKey(_metamodelURI) ) {
-			String fileExtension = getFileExtension(_modelURI);
-			Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(fileExtension, new XMIResourceFactoryImpl());
-//		}
+		String fileExtension = getFileExtension(_modelURI);
+		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(fileExtension, new XMIResourceFactoryImpl());
 	}
 	
 	public static String getFileExtension( String modelURI ) {
@@ -328,22 +271,18 @@ abstract public class SaverOrLoader {
 	
 	public static void registerEcoreMetamodel(String uri){
 		
-		/*IFile file = IFile.
-			URI tu = URI.createURI(uri);
-		if(file.isFile()) {*/
-            // Get a Trek structure
-            Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(org.eclipse.emf.ecore.EcorePackage.eNAME, new XMIResourceFactoryImpl());
-            ResourceSet resource_set = new ResourceSetImpl();
-            URI u = URI.createURI(uri);//file.getFullPath().toString());
-            u = new ExtensibleURIConverterImpl().normalize(u);
-            Resource resource = resource_set.getResource(u, true);
+		//Get the Ecore metamodel
+        Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(org.eclipse.emf.ecore.EcorePackage.eNAME, new XMIResourceFactoryImpl());
+        ResourceSet resource_set = new ResourceSetImpl();
+        URI u = URI.createURI(uri);
+        u = new ExtensibleURIConverterImpl().normalize(u);
+        Resource resource = resource_set.getResource(u, true);
             
-            for(EObject eobj : resource.getContents()) {
-    			if( eobj instanceof EPackage) {
-    				registerPackages((EPackage) eobj);
-    			}
+        for(EObject eobj : resource.getContents()) {
+        	if( eobj instanceof EPackage) {
+    			registerPackages((EPackage) eobj);
     		}
-        //}
+    	}
 	}
 	
 	/**
