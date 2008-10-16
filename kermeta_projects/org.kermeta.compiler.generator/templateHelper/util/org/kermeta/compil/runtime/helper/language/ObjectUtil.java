@@ -27,7 +27,7 @@ import org.kermeta.compil.runtime.helper.basetypes.StringUtil;
 public class ObjectUtil {
 
 	static public kermeta.language.structure.Object container(java.lang.Object o) {
-		return ((kermeta.language.structure.Object)o ).getContainer();
+		return null;
 	}
 	
 	static public kermeta.language.structure.Object container(kermeta.language.structure.Object o) {
