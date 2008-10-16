@@ -1,4 +1,4 @@
-/* $Id: CompilerPlugin.java,v 1.1 2007-10-17 08:56:19 cfaucher Exp $
+/* $Id: CompilerPlugin.java,v 1.2 2008-10-16 09:05:32 cfaucher Exp $
  * Project   : fr.irisa.triskell.kermeta.compiler
  * File      : CompilerPlugin.java
  * License   : EPL
@@ -28,7 +28,6 @@ public class CompilerPlugin extends AbstractUIPlugin {
 	 * The constructor
 	 */
 	public CompilerPlugin() {
-		plugin = this;
 	}
 
 	/*
@@ -37,6 +36,7 @@ public class CompilerPlugin extends AbstractUIPlugin {
 	 */
 	public void start(BundleContext context) throws Exception {
 		super.start(context);
+		plugin = this;
 	}
 
 	/*
