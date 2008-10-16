@@ -67,6 +67,10 @@ public class ObjectUtil {
 		
 		String metaClass_qName = qualifiedNameDot(metaClass.getTypeDefinition());
 		
+		if (o==null) {
+			System.out.println();
+		}
+		
 		if ( metaClass_qName.equals(qualifiedNameDot(getMetaClass(o).getTypeDefinition())) ) {
 			return true;
 		} else {

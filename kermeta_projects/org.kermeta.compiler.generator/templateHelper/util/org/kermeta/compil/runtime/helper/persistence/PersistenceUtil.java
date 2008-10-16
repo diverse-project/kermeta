@@ -8,6 +8,7 @@ import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EPackage.Registry;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
@@ -29,7 +30,7 @@ import org.eclipse.emf.ecore.xmi.impl.XMLMapImpl;
  */
 public class PersistenceUtil {
 
-	static public EList<EObject> load(String modelURI, String metamodelURI) {
+	/*static public EList<EObject> load(String modelURI, String metamodelURI) {
 
 		EList<EObject> contents = new BasicEList<EObject>();
 		ResourceSet resourceSet = new ResourceSetImpl();
@@ -40,7 +41,8 @@ public class PersistenceUtil {
 		Resource basicResource = resourceSet.createResource(uri);
 
 		BasicExtendedMetaData metadata = new BasicExtendedMetaData();
-		metadata.putPackage( metamodelURI, PersistenceMapping.getEPackageForLoading(metamodelURI));
+		//FIXME To restore: metadata.putPackage( metamodelURI, PersistenceMapping.getEPackageForLoading(metamodelURI));
+		metadata.putPackage( metamodelURI, Registry.INSTANCE.getEPackage(metamodelURI));
 			
 		Map options = new HashMap();
 		options.put(XMLResource.OPTION_EXTENDED_META_DATA, metadata);
@@ -52,9 +54,9 @@ public class PersistenceUtil {
 			e.printStackTrace();
 		}
 		return contents;
-	}
+	}*/
 		
-	static public void saveWithNewURI(EList<EObject> contents, String new_uri, String metamodelURI) {
+	/*static public void saveWithNewURI(EList<EObject> contents, String new_uri, String metamodelURI) {
 		ResourceSet resourceSet = new ResourceSetImpl();
 		  
 		// Register the appropriate resource factory to handle all file extensions.
@@ -63,14 +65,14 @@ public class PersistenceUtil {
 		URI uri = URI.createURI(new_uri);
 		org.eclipse.emf.ecore.resource.Resource basicResource = resourceSet.createResource(uri);
 
-		org.eclipse.emf.ecore.EPackage realMetamodel = PersistenceMapping.getEPackageForSaving(metamodelURI);
+		//FIXME To restore: org.eclipse.emf.ecore.EPackage realMetamodel = PersistenceMapping.getEPackageForSaving(metamodelURI);
 		  
 		BasicExtendedMetaData metadata = new BasicExtendedMetaData();
-		metadata.putPackage( metamodelURI, realMetamodel );
+		//FIXME To restore: metadata.putPackage( metamodelURI, realMetamodel );
 
 		XMLMap xmlMap = new XMLMapImpl();
 		XMLInfo info = new XMLInfoImpl();
-		info.setTargetNamespace( realMetamodel.getNsURI() );
+		//FIXME To restore: info.setTargetNamespace( realMetamodel.getNsURI() );
 		xmlMap.add( contents.get(0).eClass(), info);
 		  
 		Map options = new HashMap();
@@ -83,6 +85,6 @@ public class PersistenceUtil {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-	}
+	}*/
 	
 }

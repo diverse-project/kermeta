@@ -1,6 +1,6 @@
-/*$Id: SimkModelHelper.java,v 1.3 2008-08-19 12:35:22 cfaucher Exp $
-* Project : org.kermeta.compiler
-* File : 	HelperModel.java
+/*$Id: SimkModelHelper.java,v 1.4 2008-10-16 09:04:38 cfaucher Exp $
+* Project : org.kermeta.compiler.generator
+* File : 	SimkModelHelper.java
 * License : EPL
 * Copyright : IRISA / INRIA / Universite de Rennes 1
 * ----------------------------------------------------------------------------

@@ -1,5 +1,5 @@
 
-/*$Id: Loader.java,v 1.6 2008-09-22 14:10:58 cfaucher Exp $
+/*$Id: Loader.java,v 1.7 2008-10-16 09:04:34 cfaucher Exp $
 * Project : org.kermeta.framework.compiled.runtime.helper
 * File : 	Loader.java
 * License : EPL
@@ -19,9 +19,12 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EFactory;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 
 /**
  * 
@@ -37,12 +40,38 @@ public class Loader extends SaverOrLoader {
 	 * @return The list of objects cloned.
 	 */
 	static public void load(List contents, String modelURI, String metamodelURI) {
+		
 		Loader l = new Loader(metamodelURI);
+		l.normalizeRegistry(modelURI, metamodelURI);
 		List<EObject> instances = new ArrayList<EObject>();
 		ResourceSet rs = new ResourceSetImpl();
+
+		//rs.setPackageRegistry(EPackage.Registry.INSTANCE);
+		//rs.getPackageRegistry();
+		
+		//EPackage root_pack = l.getRootEPackage(Registry.INSTANCE.getEPackage(metamodelURI));
+		//EFactory factory = root_pack.eResource().getResourceSet().set;
+		
+		
+		/*if ( fileExtension != null ) {
+			if ( factory != null ) {
+				Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(fileExtension, factory);
+			} else {
+				Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(fileExtension, new XMIResourceFactoryImpl());
+			}
+		} else {
+			if ( factory != null ) {
+				Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("*", factory);
+			}
+			else {
+				Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("*", new XMIResourceFactoryImpl());
+			}
+		}*/
+		
 		org.eclipse.emf.ecore.resource.Resource resource = rs.getResource( URI.createURI(modelURI), true );
-		for ( EObject o : resource.getContents() )
+		for ( EObject o : resource.getContents() ) {
 			instances.add( l.clone(o) );
+		}
 		contents.addAll(instances);	
 	}
 	
@@ -61,9 +90,10 @@ public class Loader extends SaverOrLoader {
 	 * @return
 	 */
 	private EObject clone(EObject o) {
-		EObject targetObject = createInstance(o);
-		if ( o == targetObject )
+		EObject targetObject = createInstance(o, this.getMetamodelURISpecialCompiler());
+		if ( o == targetObject ) {
 			return o;
+		}
 		cloneEObject(o, targetObject);
 		return targetObject;
 	}
@@ -78,34 +108,35 @@ public class Loader extends SaverOrLoader {
 			Object value = sourceObject.eGet(sourceFeature);
 			EStructuralFeature targetFeature = getEStructuralFeature(targetObject.eClass(), sourceFeature.getName());
 				
-				/*
-				 * Simple EObject handling.
-				 */
-				if ( value instanceof EObject ) {
-					EObject sourceValue = (EObject) value;
-					EObject targetValue = _instanceMapping.get(sourceValue);
-					// Better set the feature before cloning the value to avoid possible recursive calls.
-					boolean clone = false;
-					if ( targetValue == null ) {
-						targetValue = createInstance(sourceValue);
-						clone = true;
-					}
-					// Setting the value.
+			/*
+			 * Simple EObject handling.
+			 */
+			if ( value instanceof EObject ) {
+				EObject sourceValue = (EObject) value;
+				EObject targetValue = _instanceMapping.get(sourceValue);
+				// Better set the feature before cloning the value to avoid possible recursive calls.
+				boolean clone = false;
+				if ( targetValue == null ) {
+					targetValue = createInstance(sourceValue, this.getMetamodelURISpecialCompiler());
+					clone = true;
+				}
+				
+				// Setting the value.
+				//The values of derived property are not cloned
+				if( !sourceFeature.isDerived() && !sourceFeature.isUnsettable() ) {
+					targetObject.eSet(targetFeature, targetValue);
+				}
+				if ( clone ) {
+					// Cloning if necessary.
+					cloneEObject( (EObject) value, targetValue);
+				}
+				
+			/*
+			 * EList handling.
+			 */
+			} else if ( value instanceof EList) {
 					
-					//The values of derived property are not cloned
-					if( !sourceFeature.isDerived() && !sourceFeature.isUnsettable() ) {
-						targetObject.eSet(targetFeature, targetValue);
-					}
-					if ( clone )
-						// Cloning if necessary.
-						cloneEObject( (EObject) value, targetValue );
-					
-				/*
-				 * EList handling.
-				 */
-				} else if ( value instanceof EList) {
-					
-					if( !sourceFeature.isDerived() && !sourceFeature.isUnsettable() ) {
+				if( !sourceFeature.isDerived() && !sourceFeature.isUnsettable() ) {
 					EList sourceList = (EList) sourceObject.eGet(sourceFeature);
 					EList targetList = (EList) targetObject.eGet(targetFeature);
 					for ( Object o : sourceList ) {
@@ -113,33 +144,33 @@ public class Loader extends SaverOrLoader {
 							EObject sourceListObject = (EObject) o;
 							EObject targetListObject = _instanceMapping.get(sourceListObject);
 							if ( targetListObject == null ) {
-								targetListObject = createInstance(sourceListObject);
+								targetListObject = createInstance(sourceListObject, this.getMetamodelURISpecialCompiler());
 								cloneEObject(sourceListObject, targetListObject);
 							}
 							targetList.add(targetListObject);
 						} else if ( o instanceof Enumerator ) {
-							Object realValue = createInstance( (Enumerator) o);
+							Object realValue = createInstance( (Enumerator) o, this.getMetamodelURISpecialCompiler());
 							targetList.add(realValue);
 						} else {
 							targetList.add(o);
 						}
 					}
-					}
-					
-				/*
-				 * Datatypes handling.
-				 */
-				} else if ( value != null ) {
-					Object realValue = value;
-					// Special case for Enumerator. Need to create an instance from the good factory.
-					if ( value instanceof Enumerator ) {
-						realValue = createInstance( (Enumerator) value);
-					}
-					
-					if( !sourceFeature.isDerived() && !sourceFeature.isUnsettable() ) {
-						targetObject.eSet(targetFeature, realValue);
-					}
 				}
+					
+			/*
+			 * Datatypes handling.
+			 */
+			} else if ( value != null ) {
+				Object realValue = value;
+				// Special case for Enumerator. Need to create an instance from the good factory.
+				if ( value instanceof Enumerator ) {
+					realValue = createInstance( (Enumerator) value, this.getMetamodelURISpecialCompiler());
+				}
+					
+				if( !sourceFeature.isDerived() && !sourceFeature.isUnsettable() ) {
+					targetObject.eSet(targetFeature, realValue);
+				}
+			}
 		}
 	}
 
@@ -159,7 +190,8 @@ public class Loader extends SaverOrLoader {
 	
 	@Override
 	protected EFactory getFactory(String metamodelURI) {
-		return PersistenceMapping.getEPackageForLoading(metamodelURI).getEFactoryInstance();
+		//return PersistenceMapping.getEPackageForLoading(metamodelURI).getEFactoryInstance();
+		return null;
 	}
 
 }

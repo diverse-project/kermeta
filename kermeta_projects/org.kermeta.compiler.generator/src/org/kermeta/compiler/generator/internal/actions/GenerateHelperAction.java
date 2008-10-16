@@ -8,7 +8,7 @@
  * Technologies), Jacques Lescot (Anyware Technologies) - initial API and
  * implementation
  ******************************************************************************/
-/*$Id: GenerateHelperAction.java,v 1.8 2008-07-23 15:13:54 cfaucher Exp $
+/*$Id: GenerateHelperAction.java,v 1.9 2008-10-16 09:04:39 cfaucher Exp $
 * Project : org.kermeta.compiler.generator
 * File : 	GenerateHelperAction.java
 * License : EPL
@@ -58,9 +58,9 @@ import fr.irisa.triskell.kermeta.exporter.ecore.EcoreExporter;
  * @author <a href="mailto:jacques.lescot@anyware-tech.com">Jacques LESCOT</a>
  * @author <a href="mailto:david.sciamma@anyware-tech.com">David Sciamma</a>
  */
-public class GenerateHelperAction implements IActionDelegate
+public class GenerateHelperAction //implements IActionDelegate
 {
-    private ISelection selection;
+    //private ISelection selection;
 
     private IProject generatedProject;
 
@@ -68,10 +68,10 @@ public class GenerateHelperAction implements IActionDelegate
      * @see org.eclipse.ui.IActionDelegate#selectionChanged(org.eclipse.jface.action.IAction,
      *      org.eclipse.jface.viewers.ISelection)
      */
-    public void selectionChanged(IAction action, ISelection sel) {
+    /*public void selectionChanged(IAction action, ISelection sel) {
         selection = sel;
         action.setEnabled(true);
-    }
+    }*/
 
     /**
      * Try to retrieve the selected file from the given selection
@@ -79,7 +79,7 @@ public class GenerateHelperAction implements IActionDelegate
      * @param sel the selection
      * @return the selected file
      */
-    private IFile convertSelection2File(ISelection sel) {
+    /*private IFile convertSelection2File(ISelection sel) {
         // get the selected *.configuration file
         if (selection instanceof IStructuredSelection) {
             IStructuredSelection ssel = (IStructuredSelection) sel;
@@ -96,21 +96,21 @@ public class GenerateHelperAction implements IActionDelegate
             }
         }
         return null;
-    }
+    }*/
 
     /**
      * @see org.eclipse.ui.IActionDelegate#run(org.eclipse.jface.action.IAction)
      */
-    public void run(IAction action) {
+    /*public void run(IAction action) {
         // get the selected *.configuration file
         final IFile file = convertSelection2File(selection);
         
         final String kmFilePath = file.getFullPath().removeFileExtension().addFileExtension("km").toString();
         
         generate(file, kmFilePath, null);
-    }
+    }*/
     
-    public void generate(final IFile file, final String kmFilePath_forReflection, final IFile simk_file) {
+    public void generate(final IFile file, final org.kermeta.compiler.generator.helper.model.Context context, final IFile simk_file) {
     	if (file == null) {
             GeneratorPlugin.displayDialog(null, "Invalid selection : Only one file can be selected.", IStatus.ERROR);
             return;
@@ -132,7 +132,7 @@ public class GenerateHelperAction implements IActionDelegate
                         if (diagnostic.getSeverity() <= Diagnostic.INFO) {
                             monitor.worked(1);
 
-                            CompilerHelperGenerator generator = new CompilerHelperGenerator(configuration, kmFilePath_forReflection, SimkModelHelper.getSIMKModel(simk_file));
+                            CompilerHelperGenerator generator = new CompilerHelperGenerator(configuration, context, SimkModelHelper.getSIMKModel(simk_file));
                             generatedProject = generator.generate(monitor);
                         } else {
                             GeneratorPlugin.log("Validation problem : a problem occured during the genmodel validation.", IStatus.ERROR);

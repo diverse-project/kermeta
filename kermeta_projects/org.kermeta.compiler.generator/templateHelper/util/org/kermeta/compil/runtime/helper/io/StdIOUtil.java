@@ -1,4 +1,4 @@
-/* $Id: StdIOUtil.java,v 1.3 2008-10-09 08:51:35 cfaucher Exp $
+/* $Id: StdIOUtil.java,v 1.4 2008-10-16 09:04:37 cfaucher Exp $
  * Project : Kermeta (First iteration)
  * File : Io.java
  * License : EPL

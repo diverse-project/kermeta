@@ -8,7 +8,7 @@
  * Technologies), Jacques Lescot (Anyware Technologies) - initial API and
  * implementation
  ******************************************************************************/
-/*$Id: CompilerHelperGenerator.java,v 1.21 2008-09-25 08:54:18 cfaucher Exp $
+/*$Id: CompilerHelperGenerator.java,v 1.22 2008-10-16 09:04:38 cfaucher Exp $
 * Project : org.kermeta.compiler.generator
 * File : 	CompilerHelperGenerator.java
 * License : EPL
@@ -43,6 +43,7 @@ import org.eclipse.emf.codegen.ecore.genmodel.GenPackage;
 import org.eclipse.emf.codegen.jet.JETEmitter;
 import org.eclipse.emf.codegen.jet.JETException;
 import org.eclipse.emf.common.util.Monitor;
+import org.kermeta.compiler.generator.helper.model.Context;
 import org.kermeta.compiler.generator.internal.GeneratorPlugin;
 import org.kermeta.generator.AbstractGenerator;
 import org.kermeta.generator.jet.DefaultJETEmitter;
@@ -69,6 +70,8 @@ public class CompilerHelperGenerator extends AbstractGenerator {
 	private static final String SUPER_JAVA = "templateHelper/helper/Super.javajet";
 	
 	private static final String EXECUTION_CONTEXT_JAVA = "templateHelper/helper/ExecutionContext.javajet";
+	
+	private static final String PERSISTENCE_MAPPING_JAVA = "templateHelper/helper/PersistenceMapping.javajet";
 
 	// FIXME CF unused for the moment
 	//private static final String JAVA_LAUNCHER_LAUNCH = "templateHelper/JavaLauncher.launchjet";
@@ -82,7 +85,7 @@ public class CompilerHelperGenerator extends AbstractGenerator {
 	/** The GenModel object */
 	private GenModel configuration;
 
-	private String kmFilePath_forReflection;
+	private Context context;
 	
 	private SIMKModel simkModel;
 	
@@ -94,11 +97,11 @@ public class CompilerHelperGenerator extends AbstractGenerator {
 	 * @param kmFilePath_forReflection
 	 * @param helperModel
 	 */
-	public CompilerHelperGenerator(GenModel conf, String kmFilePath_forReflection, SIMKModel simkModel) {
+	public CompilerHelperGenerator(GenModel conf, Context context, SIMKModel simkModel) {
 		this.configuration = conf;
 		//this.kmUnit = kmUnit;
 		//this.km2ecoreGen = km2ecoreGen;
-		this.kmFilePath_forReflection = kmFilePath_forReflection;
+		this.context = context;
 		this.simkModel = simkModel;
 	}
 
@@ -127,7 +130,7 @@ public class CompilerHelperGenerator extends AbstractGenerator {
 			generateBaseTypesUtils();
 			
 			if( this.simkModel!=null ) {
-				generateHelpers(this.configuration, this.kmFilePath_forReflection, this.simkModel, pathProject, monitor);
+				generateHelpers(this.configuration, this.context, this.simkModel, pathProject, monitor);
 			}
 					
 			generateClassPath(project, pathProject);
@@ -237,7 +240,7 @@ public class CompilerHelperGenerator extends AbstractGenerator {
 	// ---------------------------------------------------------
 	// Generate the classes for the helpers
 	// ---------------------------------------------------------
-	private void generateHelpers(GenModel conf, String kmFilePath_forReflection, SIMKModel simkConf, IPath projectPath,
+	private void generateHelpers(GenModel conf, Context context, SIMKModel simkConf, IPath projectPath,
 			IProgressMonitor monitor) {
 		try {
 
@@ -256,7 +259,8 @@ public class CompilerHelperGenerator extends AbstractGenerator {
 				}
 			}
 			
-			generateExecutionContext(kmFilePath_forReflection, projectPath);
+			generateExecutionContext(context, projectPath);
+			generatePersistenceMapping(context, projectPath);
 
 			monitor.worked(1);
 		} catch (JETException e) {
@@ -388,14 +392,28 @@ public class CompilerHelperGenerator extends AbstractGenerator {
 	 * @throws JETException
 	 * @throws CoreException
 	 */
-	private void generateExecutionContext(String kmFilePath_forReflection, IPath projectPath)
+	private void generateExecutionContext(Context context, IPath projectPath)
 			throws JETException, CoreException {
 		
 			applyTemplate(
-					kmFilePath_forReflection,
+					context.getKmFilePathForReflection(),
 					getTemplateURI(EXECUTION_CONTEXT_JAVA),
 					projectPath.append("/" + UTIL_DIRECTORY + "/org.kermeta.compil.runtime".replace(".", "/") + "/ExecutionContext.java"),
 					configuration.isForceOverwrite());
+	}
+	
+	private void generatePersistenceMapping(Context context, IPath projectPath)
+	throws JETException, CoreException {
+		
+		Object[] args = new Object[2];
+		args[0] = context.getUriEPackageInstance();
+		args[1] = context.getUriEPackageClass();
+
+	applyTemplate(
+			args,
+			getTemplateURI(PERSISTENCE_MAPPING_JAVA),
+			projectPath.append("/" + UTIL_DIRECTORY + "/org.kermeta.compil.runtime".replace(".", "/") + "/PersistenceMapping.java"),
+			configuration.isForceOverwrite());
 	}
 	
 	private void generateClassPath(IProject project, IPath projectPath)

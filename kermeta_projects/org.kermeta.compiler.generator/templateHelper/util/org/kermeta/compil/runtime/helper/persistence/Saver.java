@@ -1,5 +1,5 @@
 
-/*$Id: Saver.java,v 1.5 2008-09-22 14:10:58 cfaucher Exp $
+/*$Id: Saver.java,v 1.6 2008-10-16 09:04:34 cfaucher Exp $
 * Project : org.kermeta.framework.compiled.runtime.helper
 * File : 	Saver.java
 * License : EPL
@@ -22,8 +22,12 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EFactory;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.emf.ecore.EPackage.Registry;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
+
 
 /**
  * 
@@ -40,12 +44,17 @@ public class Saver extends SaverOrLoader {
 	 * @throws IOException
 	 */
 	static public void save(List contents, String modelURI, String metamodelURI) {
+		
 		try {
 			Saver s = new Saver(metamodelURI);
+			s.normalizeRegistry(modelURI, metamodelURI);
 			List<EObject> instancesToSave = new ArrayList<EObject>();
-			for ( Object o : contents )
-				if ( o instanceof EObject )
-					instancesToSave.add( s.clone( (EObject) o) );
+			for ( Object o : contents ) {
+				if ( o instanceof EObject ) {
+					instancesToSave.add(s.clone((EObject) o));
+				}
+			}
+			
 			ResourceSet resourceSet = new ResourceSetImpl();
 			org.eclipse.emf.ecore.resource.Resource resource = resourceSet.createResource( URI.createURI(modelURI) );
 			resource.getContents().addAll(instancesToSave);
@@ -68,7 +77,7 @@ public class Saver extends SaverOrLoader {
 	 * @return The cloned object or null if no factory found.
 	 */
 	private EObject clone(EObject o) {
-		EObject targetObject = createInstance(o);
+		EObject targetObject = createInstance(o, this.getMetamodelURI());
 		if ( o == targetObject )
 			return o;
 		cloneEObject(o, targetObject);
@@ -101,7 +110,7 @@ public class Saver extends SaverOrLoader {
 						
 						boolean clone = false;
 						if ( targetValue == null ) {
-							targetValue = createInstance(sourceValue);
+							targetValue = createInstance(sourceValue, this.getMetamodelURI());
 							clone = true;
 						}
 						
@@ -110,7 +119,7 @@ public class Saver extends SaverOrLoader {
 						
 						if ( clone )
 							// Cloning if necessary.
-							cloneEObject( (EObject) value, targetValue );
+							cloneEObject( (EObject) value, targetValue);
 						
 					/*
 					 * 
@@ -126,13 +135,13 @@ public class Saver extends SaverOrLoader {
 								EObject sourceListObject = (EObject) o;
 								EObject targetListObject = _instanceMapping.get(sourceListObject);
 								if ( targetListObject == null ) {
-									targetListObject = createInstance(sourceListObject);
+									targetListObject = createInstance(sourceListObject, this.getMetamodelURI());
 									cloneEObject(sourceListObject, targetListObject);
 								}
 								targetList.add(targetListObject);
 							// Special case for enumerator.
 							} else if ( o instanceof Enumerator ) {
-								Object realValue = createInstance( (Enumerator) o);
+								Object realValue = createInstance( (Enumerator) o, this.getMetamodelURI());
 								targetList.add(realValue);	
 							// Default case for String, Integer...
 							} else {
@@ -149,7 +158,7 @@ public class Saver extends SaverOrLoader {
 						Object realValue = value;
 						// Special case for enumerator. Need to create an instance from the good factory.
 						if ( value instanceof Enumerator )
-							realValue = createInstance( (Enumerator) value);
+							realValue = createInstance( (Enumerator) value, this.getMetamodelURI());
 						// Setting the value.
 						if( !sourceFeature.isDerived() && targetFeature.isChangeable() /*&& !targetFeature.isUnsettable()*/ ) {
 							targetObject.eSet(targetFeature, realValue);
@@ -175,7 +184,8 @@ public class Saver extends SaverOrLoader {
 	
 	@Override
 	protected EFactory getFactory(String metamodelURI) {
-		return PersistenceMapping.getEPackageForSaving(metamodelURI).getEFactoryInstance();
+		//return PersistenceMapping.getEPackageForSaving(metamodelURI).getEFactoryInstance();
+		return null;
 	}
 
 }
