@@ -1,7 +1,7 @@
-/* $Id: Postprocess.kmt,v 1.7 2008-10-02 14:57:45 cfaucher Exp $ 
+/* $Id: Postprocess.kmt,v 1.8 2008-10-16 09:19:35 cfaucher Exp $ 
  * Creation : August 27, 2008
  * Licence  : EPL 
- * Copyright:
+ * Copyright: IRISA / INRIA / Universite Rennes 1
  * Authors  : 
  *            Cyril Faucher <cfaucher@irisa.fr>
  */
@@ -93,4 +93,5 @@ aspect class ModelingUnit {
 			getEClassifierByQualifiedName("ecore::EObject").asType(EClass).eOperations.clear()
 		end
 	end
+
 }
