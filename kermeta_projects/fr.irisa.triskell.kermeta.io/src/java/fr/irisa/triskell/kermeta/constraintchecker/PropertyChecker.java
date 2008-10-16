@@ -1,4 +1,4 @@
-/* $Id: PropertyChecker.java,v 1.21 2008-07-07 15:52:40 bmorin Exp $
+/* $Id: PropertyChecker.java,v 1.22 2008-10-16 09:35:49 cfaucher Exp $
  * Project    : fr.irisa.triskell.kermeta
  * File       : propertyChecker.java
  * License    : EPL
@@ -194,7 +194,7 @@ public class PropertyChecker extends AbstractChecker {
 		if (property.isIsDerived() && property.getSetterBody()!=null ){
 			if(property.isIsReadOnly() ){
 				result = false;
-				addProblem(ERROR, READONLY_AND_SETTER_ERROR ,property);
+				addProblem(ERROR, READONLY_AND_SETTER_ERROR + " on '" + property.getName() + "'" ,property);
 			}
 			if((property.getUpper() > 1 || property.getUpper()< 0) ){
 				result = false;
