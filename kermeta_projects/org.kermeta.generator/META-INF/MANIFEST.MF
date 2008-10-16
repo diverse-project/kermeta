@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Basic Generator for Kermeta
 Bundle-SymbolicName: org.kermeta.generator
-Bundle-Version: 1.1.0
+Bundle-Version: 1.2.0.qualifier
 Bundle-Activator: org.kermeta.generator.internal.GeneratorPlugin
 Bundle-Vendor: IRISA/INRIA
 Export-Package: org.kermeta.generator,

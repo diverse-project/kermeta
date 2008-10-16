@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Kermeta Compiler Emf Templates Plug-in
 Bundle-SymbolicName: org.kermeta.compiler.generator.emftemplates
-Bundle-Version: 0.0.99.qualifier
+Bundle-Version: 1.2.0.qualifier
 Bundle-Activator: org.kermeta.compiler.generator.emftemplates.Activator
 Require-Bundle: org.eclipse.ui,
  org.eclipse.core.runtime
