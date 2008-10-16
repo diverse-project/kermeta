@@ -1,4 +1,4 @@
-/* $Id: OperationHelper.kmt,v 1.14 2008-09-25 09:10:33 cfaucher Exp $
+/* $Id: OperationHelper.kmt,v 1.15 2008-10-16 09:18:44 cfaucher Exp $
  * Creation date: May 20, 2008
  * License: EPL
  * Copyright:
@@ -32,12 +32,12 @@ aspect class Operation {
 			or (type_label == "Void")
 			or (type_label == "VoidType")
 			or (type_label == "kermeta::standard::Void")
-			or (type_label == "kermeta::standard::VoidType")
-			or (type_label == "kermeta::language::structure::Void")
+			//or (type_label == "kermeta::standard::VoidType")
+			//or (type_label == "kermeta::language::structure::Void")
 			or (type_label == "kermeta::language::structure::VoidType")
 			or (type_label == "kermeta.standard.Void")
-			or (type_label == "kermeta.standard.VoidType")
-			or (type_label == "kermeta.language.structure.Void")
+			//or (type_label == "kermeta.standard.VoidType")
+			//or (type_label == "kermeta.language.structure.Void")
 			or (type_label == "kermeta.language.structure.VoidType") then
 			result := true
 		end
