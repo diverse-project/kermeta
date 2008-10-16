@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: EcorePackage.java,v 1.4 2008-10-08 14:37:55 cfaucher Exp $
+ * $Id: EcorePackage.java,v 1.5 2008-10-16 13:18:15 cfaucher Exp $
  */
 package km2ecore.helper.ecore;
 
@@ -126,15 +126,6 @@ public interface EcorePackage extends EPackage {
 	int EANNOTATION_HELPER__OID = StructurePackage.OBJECT__OID;
 
 	/**
-	 * The feature id for the '<em><b>Container</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EANNOTATION_HELPER__CONTAINER = StructurePackage.OBJECT__CONTAINER;
-
-	/**
 	 * The number of structural features of the '<em>EAnnotation Helper</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -144,88 +135,6 @@ public interface EcorePackage extends EPackage {
 	int EANNOTATION_HELPER_FEATURE_COUNT = StructurePackage.OBJECT_FEATURE_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link km2ecore.helper.ecore.impl.EcoreModelElementHelperImpl <em>Model Element Helper</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see km2ecore.helper.ecore.impl.EcoreModelElementHelperImpl
-	 * @see km2ecore.helper.ecore.impl.EcorePackageImpl#getEcoreModelElementHelper()
-	 * @generated
-	 */
-	int ECORE_MODEL_ELEMENT_HELPER = 1;
-
-	/**
-	 * The feature id for the '<em><b>File</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ECORE_MODEL_ELEMENT_HELPER__FILE = StructurePackage.OBJECT__FILE;
-
-	/**
-	 * The feature id for the '<em><b>Tag</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ECORE_MODEL_ELEMENT_HELPER__TAG = StructurePackage.OBJECT__TAG;
-
-	/**
-	 * The feature id for the '<em><b>File Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ECORE_MODEL_ELEMENT_HELPER__FILE_NAME = StructurePackage.OBJECT__FILE_NAME;
-
-	/**
-	 * The feature id for the '<em><b>Line Number</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ECORE_MODEL_ELEMENT_HELPER__LINE_NUMBER = StructurePackage.OBJECT__LINE_NUMBER;
-
-	/**
-	 * The feature id for the '<em><b>Owned Tags</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ECORE_MODEL_ELEMENT_HELPER__OWNED_TAGS = StructurePackage.OBJECT__OWNED_TAGS;
-
-	/**
-	 * The feature id for the '<em><b>Oid</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ECORE_MODEL_ELEMENT_HELPER__OID = StructurePackage.OBJECT__OID;
-
-	/**
-	 * The feature id for the '<em><b>Container</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ECORE_MODEL_ELEMENT_HELPER__CONTAINER = StructurePackage.OBJECT__CONTAINER;
-
-	/**
-	 * The number of structural features of the '<em>Model Element Helper</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ECORE_MODEL_ELEMENT_HELPER_FEATURE_COUNT = StructurePackage.OBJECT_FEATURE_COUNT + 0;
-
-	/**
 	 * The meta object id for the '{@link km2ecore.helper.ecore.impl.ENamedElementHelperImpl <em>ENamed Element Helper</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -233,7 +142,7 @@ public interface EcorePackage extends EPackage {
 	 * @see km2ecore.helper.ecore.impl.EcorePackageImpl#getENamedElementHelper()
 	 * @generated
 	 */
-	int ENAMED_ELEMENT_HELPER = 2;
+	int ENAMED_ELEMENT_HELPER = 1;
 
 	/**
 	 * The feature id for the '<em><b>File</b></em>' reference.
@@ -290,15 +199,6 @@ public interface EcorePackage extends EPackage {
 	int ENAMED_ELEMENT_HELPER__OID = StructurePackage.OBJECT__OID;
 
 	/**
-	 * The feature id for the '<em><b>Container</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ENAMED_ELEMENT_HELPER__CONTAINER = StructurePackage.OBJECT__CONTAINER;
-
-	/**
 	 * The number of structural features of the '<em>ENamed Element Helper</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -306,6 +206,79 @@ public interface EcorePackage extends EPackage {
 	 * @ordered
 	 */
 	int ENAMED_ELEMENT_HELPER_FEATURE_COUNT = StructurePackage.OBJECT_FEATURE_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link km2ecore.helper.ecore.impl.EcoreModelElementHelperImpl <em>Model Element Helper</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see km2ecore.helper.ecore.impl.EcoreModelElementHelperImpl
+	 * @see km2ecore.helper.ecore.impl.EcorePackageImpl#getEcoreModelElementHelper()
+	 * @generated
+	 */
+	int ECORE_MODEL_ELEMENT_HELPER = 2;
+
+	/**
+	 * The feature id for the '<em><b>File</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ECORE_MODEL_ELEMENT_HELPER__FILE = StructurePackage.OBJECT__FILE;
+
+	/**
+	 * The feature id for the '<em><b>Tag</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ECORE_MODEL_ELEMENT_HELPER__TAG = StructurePackage.OBJECT__TAG;
+
+	/**
+	 * The feature id for the '<em><b>File Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ECORE_MODEL_ELEMENT_HELPER__FILE_NAME = StructurePackage.OBJECT__FILE_NAME;
+
+	/**
+	 * The feature id for the '<em><b>Line Number</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ECORE_MODEL_ELEMENT_HELPER__LINE_NUMBER = StructurePackage.OBJECT__LINE_NUMBER;
+
+	/**
+	 * The feature id for the '<em><b>Owned Tags</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ECORE_MODEL_ELEMENT_HELPER__OWNED_TAGS = StructurePackage.OBJECT__OWNED_TAGS;
+
+	/**
+	 * The feature id for the '<em><b>Oid</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ECORE_MODEL_ELEMENT_HELPER__OID = StructurePackage.OBJECT__OID;
+
+	/**
+	 * The number of structural features of the '<em>Model Element Helper</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ECORE_MODEL_ELEMENT_HELPER_FEATURE_COUNT = StructurePackage.OBJECT_FEATURE_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link km2ecore.helper.ecore.impl.ModelAnalizerImpl <em>Model Analizer</em>}' class.
@@ -372,15 +345,6 @@ public interface EcorePackage extends EPackage {
 	int MODEL_ANALIZER__OID = StructurePackage.OBJECT__OID;
 
 	/**
-	 * The feature id for the '<em><b>Container</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int MODEL_ANALIZER__CONTAINER = StructurePackage.OBJECT__CONTAINER;
-
-	/**
 	 * The number of structural features of the '<em>Model Analizer</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -420,16 +384,6 @@ public interface EcorePackage extends EPackage {
 	EClass getEAnnotationHelper();
 
 	/**
-	 * Returns the meta object for class '{@link km2ecore.helper.ecore.EcoreModelElementHelper <em>Model Element Helper</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Model Element Helper</em>'.
-	 * @see km2ecore.helper.ecore.EcoreModelElementHelper
-	 * @generated
-	 */
-	EClass getEcoreModelElementHelper();
-
-	/**
 	 * Returns the meta object for class '{@link km2ecore.helper.ecore.ENamedElementHelper <em>ENamed Element Helper</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -438,6 +392,16 @@ public interface EcorePackage extends EPackage {
 	 * @generated
 	 */
 	EClass getENamedElementHelper();
+
+	/**
+	 * Returns the meta object for class '{@link km2ecore.helper.ecore.EcoreModelElementHelper <em>Model Element Helper</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Model Element Helper</em>'.
+	 * @see km2ecore.helper.ecore.EcoreModelElementHelper
+	 * @generated
+	 */
+	EClass getEcoreModelElementHelper();
 
 	/**
 	 * Returns the meta object for class '{@link km2ecore.helper.ecore.ModelAnalizer <em>Model Analizer</em>}'.
@@ -502,6 +466,16 @@ public interface EcorePackage extends EPackage {
 		EClass EANNOTATION_HELPER = eINSTANCE.getEAnnotationHelper();
 
 		/**
+		 * The meta object literal for the '{@link km2ecore.helper.ecore.impl.ENamedElementHelperImpl <em>ENamed Element Helper</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see km2ecore.helper.ecore.impl.ENamedElementHelperImpl
+		 * @see km2ecore.helper.ecore.impl.EcorePackageImpl#getENamedElementHelper()
+		 * @generated
+		 */
+		EClass ENAMED_ELEMENT_HELPER = eINSTANCE.getENamedElementHelper();
+
+		/**
 		 * The meta object literal for the '{@link km2ecore.helper.ecore.impl.EcoreModelElementHelperImpl <em>Model Element Helper</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -511,16 +485,6 @@ public interface EcorePackage extends EPackage {
 		 */
 		EClass ECORE_MODEL_ELEMENT_HELPER = eINSTANCE
 				.getEcoreModelElementHelper();
-
-		/**
-		 * The meta object literal for the '{@link km2ecore.helper.ecore.impl.ENamedElementHelperImpl <em>ENamed Element Helper</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see km2ecore.helper.ecore.impl.ENamedElementHelperImpl
-		 * @see km2ecore.helper.ecore.impl.EcorePackageImpl#getENamedElementHelper()
-		 * @generated
-		 */
-		EClass ENAMED_ELEMENT_HELPER = eINSTANCE.getENamedElementHelper();
 
 		/**
 		 * The meta object literal for the '{@link km2ecore.helper.ecore.impl.ModelAnalizerImpl <em>Model Analizer</em>}' class.

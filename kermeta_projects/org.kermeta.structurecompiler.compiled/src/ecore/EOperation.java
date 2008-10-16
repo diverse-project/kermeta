@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: EOperation.java,v 1.5 2008-10-08 14:37:50 cfaucher Exp $
+ * $Id: EOperation.java,v 1.6 2008-10-16 13:18:09 cfaucher Exp $
  */
 package ecore;
 
@@ -39,24 +39,13 @@ public interface EOperation extends ETypedElement {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>EContaining Class</em>' container reference.
-	 * @see #setEContainingClass(EClass)
 	 * @see ecore.EcorePackage#getEOperation_EContainingClass()
 	 * @see ecore.EClass#getEOperations
-	 * @model opposite="eOperations"
+	 * @model opposite="eOperations" changeable="false"
 	 *        annotation="kermeta ecore.isTransient='true'"
 	 * @generated
 	 */
 	EClass getEContainingClass();
-
-	/**
-	 * Sets the value of the '{@link ecore.EOperation#getEContainingClass <em>EContaining Class</em>}' container reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>EContaining Class</em>' container reference.
-	 * @see #getEContainingClass()
-	 * @generated
-	 */
-	void setEContainingClass(EClass value);
 
 	/**
 	 * Returns the value of the '<em><b>EGeneric Exceptions</b></em>' containment reference list.

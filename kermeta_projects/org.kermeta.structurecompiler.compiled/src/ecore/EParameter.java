@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: EParameter.java,v 1.5 2008-10-08 14:37:50 cfaucher Exp $
+ * $Id: EParameter.java,v 1.6 2008-10-16 13:18:10 cfaucher Exp $
  */
 package ecore;
 
@@ -33,23 +33,12 @@ public interface EParameter extends ETypedElement {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>EOperation</em>' container reference.
-	 * @see #setEOperation(EOperation)
 	 * @see ecore.EcorePackage#getEParameter_EOperation()
 	 * @see ecore.EOperation#getEParameters
-	 * @model opposite="eParameters"
+	 * @model opposite="eParameters" changeable="false"
 	 *        annotation="kermeta ecore.isTransient='true'"
 	 * @generated
 	 */
 	EOperation getEOperation();
-
-	/**
-	 * Sets the value of the '{@link ecore.EParameter#getEOperation <em>EOperation</em>}' container reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>EOperation</em>' container reference.
-	 * @see #getEOperation()
-	 * @generated
-	 */
-	void setEOperation(EOperation value);
 
 } // EParameter

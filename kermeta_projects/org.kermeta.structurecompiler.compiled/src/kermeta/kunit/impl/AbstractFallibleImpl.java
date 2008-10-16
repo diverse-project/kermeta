@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: AbstractFallibleImpl.java,v 1.4 2008-10-08 14:37:23 cfaucher Exp $
+ * $Id: AbstractFallibleImpl.java,v 1.5 2008-10-16 13:17:30 cfaucher Exp $
  */
 package kermeta.kunit.impl;
 
@@ -68,30 +68,31 @@ public abstract class AbstractFallibleImpl extends ObjectImpl implements
 		{
 
 			java.lang.Integer i = 0;
-			java.lang.Boolean idLoopCond_955 = false;
-			while (!idLoopCond_955) {
-				idLoopCond_955 = kermeta.standard.helper.IntegerWrapper.equals(
-						i, kermeta.standard.helper.StringWrapper.size(s));
-				if (idLoopCond_955) {
+			java.lang.Boolean idLoopCond_1000 = false;
+			while (!idLoopCond_1000) {
+				idLoopCond_1000 = kermeta.standard.helper.IntegerWrapper
+						.equals(i, kermeta.standard.helper.StringWrapper
+								.size(s));
+				if (idLoopCond_1000) {
 				} else {
 
 					java.lang.String c = kermeta.standard.helper.CharacterWrapper
 							.toString(kermeta.standard.helper.StringWrapper
 									.elementAt(s, i));
 
-					java.lang.Boolean idIfCond_956 = false;
-					idIfCond_956 = kermeta.standard.helper.IntegerWrapper
+					java.lang.Boolean idIfCond_1001 = false;
+					idIfCond_1001 = kermeta.standard.helper.IntegerWrapper
 							.isGreaterOrEqual(
 									kermeta.standard.helper.StringWrapper
 											.indexOf(" \n\t", c), 0);
 
-					if (idIfCond_956) {
+					if (idIfCond_1001) {
 
-						java.lang.Boolean idIfCond_957 = false;
-						idIfCond_957 = kermeta.standard.helper.BooleanWrapper
+						java.lang.Boolean idIfCond_1002 = false;
+						idIfCond_1002 = kermeta.standard.helper.BooleanWrapper
 								.not(white);
 
-						if (idIfCond_957) {
+						if (idIfCond_1002) {
 
 							white = true;
 
@@ -104,10 +105,10 @@ public abstract class AbstractFallibleImpl extends ObjectImpl implements
 						result = kermeta.standard.helper.StringWrapper.plus(
 								result, c);
 
-						java.lang.Boolean idIfCond_958 = false;
-						idIfCond_958 = white;
+						java.lang.Boolean idIfCond_1003 = false;
+						idIfCond_1003 = white;
 
-						if (idIfCond_958) {
+						if (idIfCond_1003) {
 
 							white = false;
 						}

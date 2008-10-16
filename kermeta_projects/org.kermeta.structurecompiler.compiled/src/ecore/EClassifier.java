@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: EClassifier.java,v 1.5 2008-10-08 14:37:50 cfaucher Exp $
+ * $Id: EClassifier.java,v 1.6 2008-10-16 13:18:09 cfaucher Exp $
  */
 package ecore;
 
@@ -64,24 +64,13 @@ public interface EClassifier extends ENamedElement {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>EPackage</em>' container reference.
-	 * @see #setEPackage(EPackage)
 	 * @see ecore.EcorePackage#getEClassifier_EPackage()
 	 * @see ecore.EPackage#getEClassifiers
-	 * @model opposite="eClassifiers"
+	 * @model opposite="eClassifiers" changeable="false"
 	 *        annotation="kermeta ecore.isTransient='true'"
 	 * @generated
 	 */
 	EPackage getEPackage();
-
-	/**
-	 * Sets the value of the '{@link ecore.EClassifier#getEPackage <em>EPackage</em>}' container reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>EPackage</em>' container reference.
-	 * @see #getEPackage()
-	 * @generated
-	 */
-	void setEPackage(EPackage value);
 
 	/**
 	 * Returns the value of the '<em><b>EType Parameters</b></em>' containment reference list.

@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: InterpreterSwitch.java,v 1.4 2008-10-08 14:38:03 cfaucher Exp $
+ * $Id: InterpreterSwitch.java,v 1.5 2008-10-16 13:18:20 cfaucher Exp $
  */
 package kermeta.interpreter.util;
 

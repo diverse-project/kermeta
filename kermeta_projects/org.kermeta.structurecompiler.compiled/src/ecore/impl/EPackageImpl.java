@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: EPackageImpl.java,v 1.5 2008-10-08 14:37:31 cfaucher Exp $
+ * $Id: EPackageImpl.java,v 1.6 2008-10-16 13:17:42 cfaucher Exp $
  */
 package ecore.impl;
 
@@ -24,7 +24,6 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
-import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.InternalEList;
 
 /**
@@ -198,45 +197,6 @@ public class EPackageImpl extends ENamedElementImpl implements EPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetESuperPackage(EPackage newESuperPackage,
-			NotificationChain msgs) {
-		msgs = eBasicSetContainer((InternalEObject) newESuperPackage,
-				EcorePackage.EPACKAGE__ESUPER_PACKAGE, msgs);
-		return msgs;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setESuperPackage(EPackage newESuperPackage) {
-		if (newESuperPackage != eInternalContainer()
-				|| (eContainerFeatureID != EcorePackage.EPACKAGE__ESUPER_PACKAGE && newESuperPackage != null)) {
-			if (EcoreUtil.isAncestor(this, newESuperPackage))
-				throw new IllegalArgumentException(
-						"Recursive containment not allowed for " + toString());
-			NotificationChain msgs = null;
-			if (eInternalContainer() != null)
-				msgs = eBasicRemoveFromContainer(msgs);
-			if (newESuperPackage != null)
-				msgs = ((InternalEObject) newESuperPackage).eInverseAdd(this,
-						EcorePackage.EPACKAGE__ESUBPACKAGES, EPackage.class,
-						msgs);
-			msgs = basicSetESuperPackage(newESuperPackage, msgs);
-			if (msgs != null)
-				msgs.dispatch();
-		} else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET,
-					EcorePackage.EPACKAGE__ESUPER_PACKAGE, newESuperPackage,
-					newESuperPackage));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public String getNsPrefix() {
 		return nsPrefix;
 	}
@@ -371,7 +331,8 @@ public class EPackageImpl extends ENamedElementImpl implements EPackage {
 		case EcorePackage.EPACKAGE__ESUPER_PACKAGE:
 			if (eInternalContainer() != null)
 				msgs = eBasicRemoveFromContainer(msgs);
-			return basicSetESuperPackage((EPackage) otherEnd, msgs);
+			return eBasicSetContainer(otherEnd,
+					EcorePackage.EPACKAGE__ESUPER_PACKAGE, msgs);
 		case EcorePackage.EPACKAGE__ECLASSIFIERS:
 			return ((InternalEList<InternalEObject>) (InternalEList<?>) getEClassifiers())
 					.basicAdd(otherEnd, msgs);
@@ -398,7 +359,8 @@ public class EPackageImpl extends ENamedElementImpl implements EPackage {
 			return ((InternalEList<?>) getESubpackages()).basicRemove(otherEnd,
 					msgs);
 		case EcorePackage.EPACKAGE__ESUPER_PACKAGE:
-			return basicSetESuperPackage(null, msgs);
+			return eBasicSetContainer(null,
+					EcorePackage.EPACKAGE__ESUPER_PACKAGE, msgs);
 		case EcorePackage.EPACKAGE__ECLASSIFIERS:
 			return ((InternalEList<?>) getEClassifiers()).basicRemove(otherEnd,
 					msgs);
@@ -468,9 +430,6 @@ public class EPackageImpl extends ENamedElementImpl implements EPackage {
 			getESubpackages().clear();
 			getESubpackages().addAll((Collection<? extends EPackage>) newValue);
 			return;
-		case EcorePackage.EPACKAGE__ESUPER_PACKAGE:
-			setESuperPackage((EPackage) newValue);
-			return;
 		case EcorePackage.EPACKAGE__NS_PREFIX:
 			setNsPrefix((String) newValue);
 			return;
@@ -499,9 +458,6 @@ public class EPackageImpl extends ENamedElementImpl implements EPackage {
 			return;
 		case EcorePackage.EPACKAGE__ESUBPACKAGES:
 			getESubpackages().clear();
-			return;
-		case EcorePackage.EPACKAGE__ESUPER_PACKAGE:
-			setESuperPackage((EPackage) null);
 			return;
 		case EcorePackage.EPACKAGE__NS_PREFIX:
 			setNsPrefix(NS_PREFIX_EDEFAULT);

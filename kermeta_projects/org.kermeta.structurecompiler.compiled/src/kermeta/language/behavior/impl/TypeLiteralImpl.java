@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: TypeLiteralImpl.java,v 1.4 2008-10-08 14:37:39 cfaucher Exp $
+ * $Id: TypeLiteralImpl.java,v 1.5 2008-10-16 13:17:51 cfaucher Exp $
  */
 package kermeta.language.behavior.impl;
 

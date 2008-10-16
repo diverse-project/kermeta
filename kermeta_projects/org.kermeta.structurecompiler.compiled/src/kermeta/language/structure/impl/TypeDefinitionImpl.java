@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: TypeDefinitionImpl.java,v 1.4 2008-10-08 14:37:29 cfaucher Exp $
+ * $Id: TypeDefinitionImpl.java,v 1.5 2008-10-16 13:17:41 cfaucher Exp $
  */
 package kermeta.language.structure.impl;
 

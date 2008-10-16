@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: CompilerPackage.java,v 1.4 2008-10-08 14:37:52 cfaucher Exp $
+ * $Id: CompilerPackage.java,v 1.5 2008-10-16 13:18:11 cfaucher Exp $
  */
 package kermeta.compiler;
 
@@ -126,15 +126,6 @@ public interface CompilerPackage extends EPackage {
 	 * @ordered
 	 */
 	int MAIN__OID = StructurePackage.OBJECT__OID;
-
-	/**
-	 * The feature id for the '<em><b>Container</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int MAIN__CONTAINER = StructurePackage.OBJECT__CONTAINER;
 
 	/**
 	 * The feature id for the '<em><b>Context</b></em>' reference.

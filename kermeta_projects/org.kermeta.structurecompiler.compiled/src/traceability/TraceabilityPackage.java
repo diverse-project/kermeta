@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: TraceabilityPackage.java,v 1.4 2008-10-08 14:37:53 cfaucher Exp $
+ * $Id: TraceabilityPackage.java,v 1.5 2008-10-16 13:18:12 cfaucher Exp $
  */
 package traceability;
 
@@ -129,15 +129,6 @@ public interface TraceabilityPackage extends EPackage {
 	int TRACE_MODEL__OID = StructurePackage.OBJECT__OID;
 
 	/**
-	 * The feature id for the '<em><b>Container</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TRACE_MODEL__CONTAINER = StructurePackage.OBJECT__CONTAINER;
-
-	/**
 	 * The feature id for the '<em><b>Files</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -245,15 +236,6 @@ public interface TraceabilityPackage extends EPackage {
 	 * @ordered
 	 */
 	int MESSAGE__OID = StructurePackage.OBJECT__OID;
-
-	/**
-	 * The feature id for the '<em><b>Container</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int MESSAGE__CONTAINER = StructurePackage.OBJECT__CONTAINER;
 
 	/**
 	 * The feature id for the '<em><b>Trace Mdl</b></em>' container reference.
@@ -374,15 +356,6 @@ public interface TraceabilityPackage extends EPackage {
 	int TRACE__OID = StructurePackage.OBJECT__OID;
 
 	/**
-	 * The feature id for the '<em><b>Container</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TRACE__CONTAINER = StructurePackage.OBJECT__CONTAINER;
-
-	/**
 	 * The feature id for the '<em><b>Trace Mdl</b></em>' container reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -492,15 +465,6 @@ public interface TraceabilityPackage extends EPackage {
 	int REFERENCE__OID = StructurePackage.OBJECT__OID;
 
 	/**
-	 * The feature id for the '<em><b>Container</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int REFERENCE__CONTAINER = StructurePackage.OBJECT__CONTAINER;
-
-	/**
 	 * The feature id for the '<em><b>Target Traces</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -599,15 +563,6 @@ public interface TraceabilityPackage extends EPackage {
 	 * @ordered
 	 */
 	int FILE_REFERENCE__OID = REFERENCE__OID;
-
-	/**
-	 * The feature id for the '<em><b>Container</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FILE_REFERENCE__CONTAINER = REFERENCE__CONTAINER;
 
 	/**
 	 * The feature id for the '<em><b>Target Traces</b></em>' reference list.
@@ -717,15 +672,6 @@ public interface TraceabilityPackage extends EPackage {
 	 * @ordered
 	 */
 	int TEXT_REFERENCE__OID = FILE_REFERENCE__OID;
-
-	/**
-	 * The feature id for the '<em><b>Container</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TEXT_REFERENCE__CONTAINER = FILE_REFERENCE__CONTAINER;
 
 	/**
 	 * The feature id for the '<em><b>Target Traces</b></em>' reference list.
@@ -873,15 +819,6 @@ public interface TraceabilityPackage extends EPackage {
 	int XML_REFERENCE__OID = FILE_REFERENCE__OID;
 
 	/**
-	 * The feature id for the '<em><b>Container</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int XML_REFERENCE__CONTAINER = FILE_REFERENCE__CONTAINER;
-
-	/**
 	 * The feature id for the '<em><b>Target Traces</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1000,15 +937,6 @@ public interface TraceabilityPackage extends EPackage {
 	int MODEL_REFERENCE__OID = REFERENCE__OID;
 
 	/**
-	 * The feature id for the '<em><b>Container</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int MODEL_REFERENCE__CONTAINER = REFERENCE__CONTAINER;
-
-	/**
 	 * The feature id for the '<em><b>Target Traces</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1118,15 +1046,6 @@ public interface TraceabilityPackage extends EPackage {
 	int TRACEABILITY_HELPER__OID = StructurePackage.OBJECT__OID;
 
 	/**
-	 * The feature id for the '<em><b>Container</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TRACEABILITY_HELPER__CONTAINER = StructurePackage.OBJECT__CONTAINER;
-
-	/**
 	 * The number of structural features of the '<em>Helper</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1198,15 +1117,6 @@ public interface TraceabilityPackage extends EPackage {
 	 * @ordered
 	 */
 	int FILE__OID = StructurePackage.OBJECT__OID;
-
-	/**
-	 * The feature id for the '<em><b>Container</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FILE__CONTAINER = StructurePackage.OBJECT__CONTAINER;
 
 	/**
 	 * The feature id for the '<em><b>Id</b></em>' attribute.

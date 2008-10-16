@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ClassImpl.java,v 1.4 2008-10-08 14:37:28 cfaucher Exp $
+ * $Id: ClassImpl.java,v 1.5 2008-10-16 13:17:39 cfaucher Exp $
  */
 package kermeta.language.structure.impl;
 
@@ -300,36 +300,36 @@ public class ClassImpl extends TraceabilityImpl<EGenericType> implements
 
 		//BIft:select
 
-		kermeta.standard.Sequence<kermeta.language.structure.Property> result_ft125 = null;
+		kermeta.standard.Sequence<kermeta.language.structure.Property> result_ft38 = null;
 
-		kermeta.language.structure.Property elem_ft125 = null;
+		kermeta.language.structure.Property elem_ft38 = null;
 
-		result_ft125 = ((kermeta.standard.Sequence<kermeta.language.structure.Property>) org.kermeta.compil.runtime.helper.language.ClassUtil
+		result_ft38 = ((kermeta.standard.Sequence<kermeta.language.structure.Property>) org.kermeta.compil.runtime.helper.language.ClassUtil
 				.newObject("kermeta.standard.Sequence<kermeta.language.structure.Property>"));
 
 		{
 
-			kermeta.standard.Iterator<kermeta.language.structure.Property> it_ft125 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
+			kermeta.standard.Iterator<kermeta.language.structure.Property> it_ft38 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
 					.<kermeta.language.structure.Property> convertAsOrderedSet(
 							this.getterOwnedAttribute()).iterator();
-			java.lang.Boolean idLoopCond_366 = false;
-			while (!idLoopCond_366) {
-				idLoopCond_366 = it_ft125.isOff();
-				if (idLoopCond_366) {
+			java.lang.Boolean idLoopCond_114 = false;
+			while (!idLoopCond_114) {
+				idLoopCond_114 = it_ft38.isOff();
+				if (idLoopCond_114) {
 				} else {
 
-					elem_ft125 = it_ft125.next();
+					elem_ft38 = it_ft38.next();
 
-					java.lang.Boolean idIfCond_367 = false;
+					java.lang.Boolean idIfCond_115 = false;
 					//BIle:selector
-					kermeta.language.structure.Property p_lbdExp125 = elem_ft125;
+					kermeta.language.structure.Property p_lbdExp38 = elem_ft38;
 
-					idIfCond_367 = p_lbdExp125.getIsComposite();
+					idIfCond_115 = p_lbdExp38.getIsComposite();
 					//EIle:selector
 
-					if (idIfCond_367) {
+					if (idIfCond_115) {
 
-						result_ft125.add(elem_ft125);
+						result_ft38.add(elem_ft38);
 					}
 
 				}
@@ -337,57 +337,57 @@ public class ClassImpl extends TraceabilityImpl<EGenericType> implements
 		}
 
 		//EIft:select
-		properties.addAll(result_ft125);
+		properties.addAll(result_ft38);
 
 		//BIft:each
 
 		{
 
-			kermeta.standard.Iterator<kermeta.language.structure.Class> it_ft126 = this
+			kermeta.standard.Iterator<kermeta.language.structure.Class> it_ft39 = this
 					.allSuperClasses().iterator();
-			java.lang.Boolean idLoopCond_368 = false;
-			while (!idLoopCond_368) {
-				idLoopCond_368 = it_ft126.isOff();
-				if (idLoopCond_368) {
+			java.lang.Boolean idLoopCond_116 = false;
+			while (!idLoopCond_116) {
+				idLoopCond_116 = it_ft39.isOff();
+				if (idLoopCond_116) {
 				} else {
 
 					//BIle:func
-					kermeta.language.structure.Class s_lbdExp126 = it_ft126
+					kermeta.language.structure.Class s_lbdExp39 = it_ft39
 							.next();
 
 					//BIft:select
 
-					kermeta.standard.Sequence<kermeta.language.structure.Property> result_ft127 = null;
+					kermeta.standard.Sequence<kermeta.language.structure.Property> result_ft40 = null;
 
-					kermeta.language.structure.Property elem_ft127 = null;
+					kermeta.language.structure.Property elem_ft40 = null;
 
-					result_ft127 = ((kermeta.standard.Sequence<kermeta.language.structure.Property>) org.kermeta.compil.runtime.helper.language.ClassUtil
+					result_ft40 = ((kermeta.standard.Sequence<kermeta.language.structure.Property>) org.kermeta.compil.runtime.helper.language.ClassUtil
 							.newObject("kermeta.standard.Sequence<kermeta.language.structure.Property>"));
 
 					{
 
-						kermeta.standard.Iterator<kermeta.language.structure.Property> it_ft127 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
+						kermeta.standard.Iterator<kermeta.language.structure.Property> it_ft40 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
 								.<kermeta.language.structure.Property> convertAsOrderedSet(
-										s_lbdExp126.getterOwnedAttribute())
+										s_lbdExp39.getterOwnedAttribute())
 								.iterator();
-						java.lang.Boolean idLoopCond_369 = false;
-						while (!idLoopCond_369) {
-							idLoopCond_369 = it_ft127.isOff();
-							if (idLoopCond_369) {
+						java.lang.Boolean idLoopCond_117 = false;
+						while (!idLoopCond_117) {
+							idLoopCond_117 = it_ft40.isOff();
+							if (idLoopCond_117) {
 							} else {
 
-								elem_ft127 = it_ft127.next();
+								elem_ft40 = it_ft40.next();
 
-								java.lang.Boolean idIfCond_370 = false;
+								java.lang.Boolean idIfCond_118 = false;
 								//BIle:selector
-								kermeta.language.structure.Property p_lbdExp127 = elem_ft127;
+								kermeta.language.structure.Property p_lbdExp40 = elem_ft40;
 
-								idIfCond_370 = p_lbdExp127.getIsComposite();
+								idIfCond_118 = p_lbdExp40.getIsComposite();
 								//EIle:selector
 
-								if (idIfCond_370) {
+								if (idIfCond_118) {
 
-									result_ft127.add(elem_ft127);
+									result_ft40.add(elem_ft40);
 								}
 
 							}
@@ -395,7 +395,7 @@ public class ClassImpl extends TraceabilityImpl<EGenericType> implements
 					}
 
 					//EIft:select
-					properties.addAll(result_ft127);
+					properties.addAll(result_ft40);
 					//EIle:func
 
 				}
@@ -434,10 +434,10 @@ public class ClassImpl extends TraceabilityImpl<EGenericType> implements
 				.newObject("kermeta.standard.Set<kermeta.language.structure.Class>"));
 
 		kermeta.standard.helper.BooleanWrapper.not(superClasses.isEmpty());
-		java.lang.Boolean idLoopCond_371 = false;
-		while (!idLoopCond_371) {
-			idLoopCond_371 = superClasses.isEmpty();
-			if (idLoopCond_371) {
+		java.lang.Boolean idLoopCond_119 = false;
+		while (!idLoopCond_119) {
+			idLoopCond_119 = superClasses.isEmpty();
+			if (idLoopCond_119) {
 			} else {
 
 				allSuperClasses.addAll(superClasses);
@@ -448,21 +448,21 @@ public class ClassImpl extends TraceabilityImpl<EGenericType> implements
 
 				{
 
-					kermeta.standard.Iterator<kermeta.language.structure.Class> it_ft128 = superClasses
+					kermeta.standard.Iterator<kermeta.language.structure.Class> it_ft41 = superClasses
 							.iterator();
-					java.lang.Boolean idLoopCond_372 = false;
-					while (!idLoopCond_372) {
-						idLoopCond_372 = it_ft128.isOff();
-						if (idLoopCond_372) {
+					java.lang.Boolean idLoopCond_120 = false;
+					while (!idLoopCond_120) {
+						idLoopCond_120 = it_ft41.isOff();
+						if (idLoopCond_120) {
 						} else {
 
 							//BIle:func
-							kermeta.language.structure.Class s_lbdExp128 = it_ft128
+							kermeta.language.structure.Class s_lbdExp41 = it_ft41
 									.next();
 
 							temp
 									.addAll(org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
-											.<kermeta.language.structure.Class> convertAsSet(s_lbdExp128
+											.<kermeta.language.structure.Class> convertAsSet(s_lbdExp41
 													.getterSuperClass()));
 							//EIle:func
 
@@ -505,53 +505,68 @@ public class ClassImpl extends TraceabilityImpl<EGenericType> implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public String toString() {
+
+		java.lang.String result = null;
+
+		result = this.getTypeDefinition().getName();
+
+		return result;
+
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public void setLinks(KM2EcoreContext context) {
 
 		//BIft:each
 
 		{
 
-			kermeta.standard.Iterator<kermeta.language.structure.TypeVariableBinding> it_ft129 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
+			kermeta.standard.Iterator<kermeta.language.structure.TypeVariableBinding> it_ft42 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
 					.<kermeta.language.structure.TypeVariableBinding> convertAsOrderedSet(
 							this.getTypeParamBinding()).iterator();
-			java.lang.Boolean idLoopCond_373 = false;
-			while (!idLoopCond_373) {
-				idLoopCond_373 = it_ft129.isOff();
-				if (idLoopCond_373) {
+			java.lang.Boolean idLoopCond_121 = false;
+			while (!idLoopCond_121) {
+				idLoopCond_121 = it_ft42.isOff();
+				if (idLoopCond_121) {
 				} else {
 
 					//BIle:func
-					kermeta.language.structure.TypeVariableBinding tpb_lbdExp129 = it_ft129
+					kermeta.language.structure.TypeVariableBinding tpb_lbdExp42 = it_ft42
 							.next();
 
 					ecore.EGenericType typeArgument = ((ecore.EGenericType) org.kermeta.compil.runtime.helper.language.ClassUtil
 							.newObject("ecore.EGenericType"));
 
-					java.lang.Boolean idIfCond_374 = false;
-					idIfCond_374 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+					java.lang.Boolean idIfCond_122 = false;
+					idIfCond_122 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 							.isInstanceOf(
-									tpb_lbdExp129.getType(),
+									tpb_lbdExp42.getType(),
 									org.kermeta.compil.runtime.ExecutionContext
 											.getInstance()
 											.getMetaClass(
 													"kermeta.language.structure.Class"));
 
-					if (idIfCond_374) {
+					if (idIfCond_122) {
 
 						kermeta.language.structure.ClassDefinition cd = ((kermeta.language.structure.Class) org.kermeta.compil.runtime.helper.language.ObjectUtil
 								.asType(
-										tpb_lbdExp129.getType(),
+										tpb_lbdExp42.getType(),
 										org.kermeta.compil.runtime.ExecutionContext
 												.getInstance()
 												.getMetaClass(
 														"kermeta.language.structure.Class")))
 								.getClassDefinitionAsTyped();
 
-						java.lang.Boolean idIfCond_375 = false;
-						idIfCond_375 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+						java.lang.Boolean idIfCond_123 = false;
+						idIfCond_123 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 								.isVoid(cd.getEcoreDataType());
 
-						if (idIfCond_375) {
+						if (idIfCond_123) {
 
 							typeArgument.setEClassifier(cd
 									.getEcoreModelElement());
@@ -568,7 +583,7 @@ public class ClassImpl extends TraceabilityImpl<EGenericType> implements
 
 						((kermeta.language.structure.Class) org.kermeta.compil.runtime.helper.language.ObjectUtil
 								.asType(
-										tpb_lbdExp129.getType(),
+										tpb_lbdExp42.getType(),
 										org.kermeta.compil.runtime.ExecutionContext
 												.getInstance()
 												.getMetaClass(
@@ -577,7 +592,7 @@ public class ClassImpl extends TraceabilityImpl<EGenericType> implements
 
 						((kermeta.language.structure.Class) org.kermeta.compil.runtime.helper.language.ObjectUtil
 								.asType(
-										tpb_lbdExp129.getType(),
+										tpb_lbdExp42.getType(),
 										org.kermeta.compil.runtime.ExecutionContext
 												.getInstance()
 												.getMetaClass(
@@ -585,20 +600,20 @@ public class ClassImpl extends TraceabilityImpl<EGenericType> implements
 								.setLinks(context);
 					} else {
 
-						java.lang.Boolean idIfCond_376 = false;
-						idIfCond_376 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+						java.lang.Boolean idIfCond_124 = false;
+						idIfCond_124 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 								.isInstanceOf(
-										tpb_lbdExp129.getType(),
+										tpb_lbdExp42.getType(),
 										org.kermeta.compil.runtime.ExecutionContext
 												.getInstance()
 												.getMetaClass(
 														"kermeta.language.structure.ObjectTypeVariable"));
 
-						if (idIfCond_376) {
+						if (idIfCond_124) {
 
 							kermeta.language.structure.ObjectTypeVariable otv = ((kermeta.language.structure.ObjectTypeVariable) org.kermeta.compil.runtime.helper.language.ObjectUtil
 									.asType(
-											tpb_lbdExp129.getType(),
+											tpb_lbdExp42.getType(),
 											org.kermeta.compil.runtime.ExecutionContext
 													.getInstance()
 													.getMetaClass(
@@ -614,31 +629,31 @@ public class ClassImpl extends TraceabilityImpl<EGenericType> implements
 											typeArgument);
 						} else {
 
-							java.lang.Boolean idIfCond_377 = false;
-							idIfCond_377 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+							java.lang.Boolean idIfCond_125 = false;
+							idIfCond_125 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 									.isInstanceOf(
-											tpb_lbdExp129.getType(),
+											tpb_lbdExp42.getType(),
 											org.kermeta.compil.runtime.ExecutionContext
 													.getInstance()
 													.getMetaClass(
 															"kermeta.language.structure.PrimitiveType"));
 
-							if (idIfCond_377) {
+							if (idIfCond_125) {
 
-								kermeta.language.structure.ClassDefinition cd = tpb_lbdExp129
+								kermeta.language.structure.ClassDefinition cd = tpb_lbdExp42
 										.getType().getClassFromPrimitiveType()
 										.getClassDefinitionAsTyped();
 
-								java.lang.Boolean idIfCond_378 = false;
-								idIfCond_378 = tpb_lbdExp129.getType()
+								java.lang.Boolean idIfCond_126 = false;
+								idIfCond_126 = tpb_lbdExp42.getType()
 										.isEDataType();
 
-								if (idIfCond_378) {
+								if (idIfCond_126) {
 
 									typeArgument
 											.setEClassifier(((kermeta.language.structure.PrimitiveType) org.kermeta.compil.runtime.helper.language.ObjectUtil
 													.asType(
-															tpb_lbdExp129
+															tpb_lbdExp42
 																	.getType(),
 															org.kermeta.compil.runtime.ExecutionContext
 																	.getInstance()
@@ -647,11 +662,11 @@ public class ClassImpl extends TraceabilityImpl<EGenericType> implements
 													.getEcoreModelElement());
 								} else {
 
-									java.lang.Boolean idIfCond_379 = false;
-									idIfCond_379 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+									java.lang.Boolean idIfCond_127 = false;
+									idIfCond_127 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 											.isVoid(cd.getEcoreDataType());
 
-									if (idIfCond_379) {
+									if (idIfCond_127) {
 
 										typeArgument.setEClassifier(cd
 												.getEcoreModelElement());
@@ -670,16 +685,16 @@ public class ClassImpl extends TraceabilityImpl<EGenericType> implements
 										.add(typeArgument);
 							} else {
 
-								java.lang.Boolean idIfCond_380 = false;
-								idIfCond_380 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+								java.lang.Boolean idIfCond_128 = false;
+								idIfCond_128 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 										.isInstanceOf(
-												tpb_lbdExp129.getType(),
+												tpb_lbdExp42.getType(),
 												org.kermeta.compil.runtime.ExecutionContext
 														.getInstance()
 														.getMetaClass(
 																"kermeta.language.structure.VoidType"));
 
-								if (idIfCond_380) {
+								if (idIfCond_128) {
 								}
 
 							}
@@ -703,24 +718,9 @@ public class ClassImpl extends TraceabilityImpl<EGenericType> implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public String toString() {
-
-		java.lang.String result = null;
-
-		result = this.getTypeDefinition().getName();
-
-		return result;
-
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EList<Operation> getterOwnedOperation() {
 
-		kermeta.standard.Set<kermeta.language.structure.Operation> result = null;
+		kermeta.standard.OrderedSet<kermeta.language.structure.Operation> result = null;
 		{
 
 			kermeta.language.structure.ClassDefinition cDef = null;
@@ -759,33 +759,33 @@ public class ClassImpl extends TraceabilityImpl<EGenericType> implements
 
 			{
 
-				kermeta.standard.Iterator<kermeta.language.structure.Type> it_ft124 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
+				kermeta.standard.Iterator<kermeta.language.structure.Type> it_ft37 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
 						.<kermeta.language.structure.Type> convertAsOrderedSet(
 								cDef.getSuperType()).iterator();
-				java.lang.Boolean idLoopCond_364 = false;
-				while (!idLoopCond_364) {
-					idLoopCond_364 = it_ft124.isOff();
-					if (idLoopCond_364) {
+				java.lang.Boolean idLoopCond_112 = false;
+				while (!idLoopCond_112) {
+					idLoopCond_112 = it_ft37.isOff();
+					if (idLoopCond_112) {
 					} else {
 
 						//BIle:func
-						kermeta.language.structure.Type elem_lbdExp124 = it_ft124
+						kermeta.language.structure.Type elem_lbdExp37 = it_ft37
 								.next();
 
-						java.lang.Boolean idIfCond_365 = false;
-						idIfCond_365 = org.kermeta.compil.runtime.helper.language.TypeUtil
+						java.lang.Boolean idIfCond_113 = false;
+						idIfCond_113 = org.kermeta.compil.runtime.helper.language.TypeUtil
 								.isInstance(
 										org.kermeta.compil.runtime.ExecutionContext
 												.getInstance()
 												.getMetaClass(
 														"kermeta.language.structure.Class"),
-										elem_lbdExp124);
+										elem_lbdExp37);
 
-						if (idIfCond_365) {
+						if (idIfCond_113) {
 
 							kermeta.language.structure.Class c = null;
 
-							c = (kermeta.language.structure.Class) elem_lbdExp124;
+							c = (kermeta.language.structure.Class) elem_lbdExp37;
 
 							supertypes.add(c);
 						}
@@ -894,12 +894,12 @@ public class ClassImpl extends TraceabilityImpl<EGenericType> implements
 
 		result = "";
 
-		java.lang.Boolean idIfCond_411 = false;
-		idIfCond_411 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+		java.lang.Boolean idIfCond_298 = false;
+		idIfCond_298 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 				.isNotEqual(this.getTypeDefinition().getEMFInstanceClassName(),
 						"");
 
-		if (idIfCond_411) {
+		if (idIfCond_298) {
 
 			result = this.getTypeDefinition().getEMFInstanceClassName();
 		} else {
@@ -916,44 +916,44 @@ public class ClassImpl extends TraceabilityImpl<EGenericType> implements
 
 		{
 
-			kermeta.standard.Iterator<kermeta.language.structure.TypeVariableBinding> it_ft136 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
+			kermeta.standard.Iterator<kermeta.language.structure.TypeVariableBinding> it_ft83 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
 					.<kermeta.language.structure.TypeVariableBinding> convertAsOrderedSet(
 							this.getTypeParamBinding()).iterator();
-			java.lang.Boolean idLoopCond_412 = false;
-			while (!idLoopCond_412) {
-				idLoopCond_412 = it_ft136.isOff();
-				if (idLoopCond_412) {
+			java.lang.Boolean idLoopCond_299 = false;
+			while (!idLoopCond_299) {
+				idLoopCond_299 = it_ft83.isOff();
+				if (idLoopCond_299) {
 				} else {
 
 					//BIle:func
-					kermeta.language.structure.TypeVariableBinding tpb_lbdExp136 = it_ft136
+					kermeta.language.structure.TypeVariableBinding tpb_lbdExp83 = it_ft83
 							.next();
 
-					java.lang.Boolean idIfCond_413 = false;
-					idIfCond_413 = kermeta.standard.helper.BooleanWrapper
+					java.lang.Boolean idIfCond_300 = false;
+					idIfCond_300 = kermeta.standard.helper.BooleanWrapper
 							.not(context.getFtSuffixActivation());
 
-					if (idIfCond_413) {
+					if (idIfCond_300) {
 
-						java.lang.Boolean idIfCond_414 = false;
-						idIfCond_414 = kermeta.standard.helper.IntegerWrapper
+						java.lang.Boolean idIfCond_301 = false;
+						idIfCond_301 = kermeta.standard.helper.IntegerWrapper
 								.isGreaterOrEqual(i, 1);
 
-						if (idIfCond_414) {
+						if (idIfCond_301) {
 
 							str_tpb = kermeta.standard.helper.StringWrapper
 									.plus(str_tpb, ", ");
 						}
 
-						java.lang.Boolean idIfCond_415 = false;
-						idIfCond_415 = kermeta.standard.helper.BooleanWrapper
+						java.lang.Boolean idIfCond_302 = false;
+						idIfCond_302 = kermeta.standard.helper.BooleanWrapper
 								.not(org.kermeta.compil.runtime.helper.language.ObjectUtil
-										.isVoid(tpb_lbdExp136.getType()));
+										.isVoid(tpb_lbdExp83.getType()));
 
-						if (idIfCond_415) {
+						if (idIfCond_302) {
 
 							str_tpb = kermeta.standard.helper.StringWrapper
-									.plus(str_tpb, tpb_lbdExp136.getType()
+									.plus(str_tpb, tpb_lbdExp83.getType()
 											.createBehaviorJava(context));
 						} else {
 						}
@@ -962,14 +962,14 @@ public class ClassImpl extends TraceabilityImpl<EGenericType> implements
 
 						kermeta.language.structure.Type type_from_map = context
 								.getFtMapTypeStack().peek().getValue(
-										tpb_lbdExp136.getType());
+										tpb_lbdExp83.getType());
 
-						java.lang.Boolean idIfCond_416 = false;
-						idIfCond_416 = kermeta.standard.helper.BooleanWrapper
+						java.lang.Boolean idIfCond_303 = false;
+						idIfCond_303 = kermeta.standard.helper.BooleanWrapper
 								.not(org.kermeta.compil.runtime.helper.language.ObjectUtil
 										.isVoid(type_from_map));
 
-						if (idIfCond_416) {
+						if (idIfCond_303) {
 
 							context.setFtSuffixActivation(false);
 
@@ -980,12 +980,12 @@ public class ClassImpl extends TraceabilityImpl<EGenericType> implements
 							context.setFtSuffixActivation(true);
 						} else {
 
-							java.lang.Boolean idIfCond_417 = false;
-							idIfCond_417 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+							java.lang.Boolean idIfCond_304 = false;
+							idIfCond_304 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 									.equals(context.getFtProductTypeStack()
 											.peek().getTypeByIndex(i), this);
 
-							if (idIfCond_417) {
+							if (idIfCond_304) {
 
 								result = "";
 							}
@@ -1012,17 +1012,17 @@ public class ClassImpl extends TraceabilityImpl<EGenericType> implements
 
 		//EIft:each
 
-		java.lang.Boolean idIfCond_418 = false;
-		idIfCond_418 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+		java.lang.Boolean idIfCond_305 = false;
+		idIfCond_305 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 				.isNotEqual(str_tpb, "");
 
-		if (idIfCond_418) {
+		if (idIfCond_305) {
 
-			java.lang.Boolean idIfCond_419 = false;
-			idIfCond_419 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+			java.lang.Boolean idIfCond_306 = false;
+			idIfCond_306 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 					.isNotEqual(result, "");
 
-			if (idIfCond_419) {
+			if (idIfCond_306) {
 
 				result = kermeta.standard.helper.StringWrapper.plus(
 						kermeta.standard.helper.StringWrapper.plus(
@@ -1050,8 +1050,8 @@ public class ClassImpl extends TraceabilityImpl<EGenericType> implements
 
 		result = null;
 
-		java.lang.Boolean idIfCond_420 = false;
-		idIfCond_420 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+		java.lang.Boolean idIfCond_307 = false;
+		idIfCond_307 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 				.isInstanceOf(
 						this.getTypeDefinition(),
 						org.kermeta.compil.runtime.ExecutionContext
@@ -1059,7 +1059,7 @@ public class ClassImpl extends TraceabilityImpl<EGenericType> implements
 								.getMetaClass(
 										"kermeta.language.structure.ClassDefinition"));
 
-		if (idIfCond_420) {
+		if (idIfCond_307) {
 
 			result = ((kermeta.language.structure.ClassDefinition) org.kermeta.compil.runtime.helper.language.ObjectUtil
 					.asType(
@@ -1085,16 +1085,16 @@ public class ClassImpl extends TraceabilityImpl<EGenericType> implements
 
 		result = false;
 
-		java.lang.Boolean idIfCond_331 = false;
-		idIfCond_331 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+		java.lang.Boolean idIfCond_259 = false;
+		idIfCond_259 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 				.isInstanceOf(this, org.kermeta.compil.runtime.ExecutionContext
 						.getInstance().getMetaClass(
 								"kermeta.language.structure.ParameterizedType"));
 
-		if (idIfCond_331) {
+		if (idIfCond_259) {
 
-			java.lang.Boolean idIfCond_332 = false;
-			idIfCond_332 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+			java.lang.Boolean idIfCond_260 = false;
+			idIfCond_260 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 					.isInstanceOf(
 							((kermeta.language.structure.ParameterizedType) org.kermeta.compil.runtime.helper.language.ObjectUtil
 									.asType(
@@ -1109,7 +1109,7 @@ public class ClassImpl extends TraceabilityImpl<EGenericType> implements
 									.getMetaClass(
 											"kermeta.language.structure.ClassDefinition"));
 
-			if (idIfCond_332) {
+			if (idIfCond_260) {
 
 				result = ((kermeta.language.structure.ClassDefinition) org.kermeta.compil.runtime.helper.language.ObjectUtil
 						.asType(
@@ -1145,21 +1145,21 @@ public class ClassImpl extends TraceabilityImpl<EGenericType> implements
 
 		result = false;
 
-		java.lang.Boolean idIfCond_333 = false;
-		idIfCond_333 = kermeta.standard.helper.BooleanWrapper
+		java.lang.Boolean idIfCond_261 = false;
+		idIfCond_261 = kermeta.standard.helper.BooleanWrapper
 				.not(org.kermeta.compil.runtime.helper.language.ObjectUtil
 						.isVoid(this));
 
-		if (idIfCond_333) {
+		if (idIfCond_261) {
 
-			java.lang.Boolean idIfCond_334 = false;
-			idIfCond_334 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+			java.lang.Boolean idIfCond_262 = false;
+			idIfCond_262 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 					.isInstanceOf(this,
 							org.kermeta.compil.runtime.ExecutionContext
 									.getInstance().getMetaClass(
 											"kermeta.language.structure.Class"));
 
-			if (idIfCond_334) {
+			if (idIfCond_262) {
 
 				result = kermeta.standard.helper.StringWrapper
 						.equals(
@@ -1174,8 +1174,8 @@ public class ClassImpl extends TraceabilityImpl<EGenericType> implements
 								"Boolean");
 			} else {
 
-				java.lang.Boolean idIfCond_335 = false;
-				idIfCond_335 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+				java.lang.Boolean idIfCond_263 = false;
+				idIfCond_263 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 						.isInstanceOf(
 								this,
 								org.kermeta.compil.runtime.ExecutionContext
@@ -1183,10 +1183,10 @@ public class ClassImpl extends TraceabilityImpl<EGenericType> implements
 										.getMetaClass(
 												"kermeta.language.structure.PrimitiveType"));
 
-				if (idIfCond_335) {
+				if (idIfCond_263) {
 
-					java.lang.Boolean idIfCond_336 = false;
-					idIfCond_336 = kermeta.standard.helper.BooleanWrapper
+					java.lang.Boolean idIfCond_264 = false;
+					idIfCond_264 = kermeta.standard.helper.BooleanWrapper
 							.or(
 									kermeta.standard.helper.BooleanWrapper
 											.or(
@@ -1237,7 +1237,7 @@ public class ClassImpl extends TraceabilityImpl<EGenericType> implements
 															.createBehaviorJava(context),
 													"Boolean"));
 
-					if (idIfCond_336) {
+					if (idIfCond_264) {
 
 						result = true;
 					}
@@ -1261,27 +1261,27 @@ public class ClassImpl extends TraceabilityImpl<EGenericType> implements
 
 		kermeta.language.structure.Class result = null;
 
-		java.lang.Boolean idIfCond_337 = false;
-		idIfCond_337 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+		java.lang.Boolean idIfCond_265 = false;
+		idIfCond_265 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 				.isInstanceOf(this, org.kermeta.compil.runtime.ExecutionContext
 						.getInstance().getMetaClass(
 								"kermeta.language.structure.PrimitiveType"));
 
-		if (idIfCond_337) {
+		if (idIfCond_265) {
 
 			kermeta.language.structure.PrimitiveType pt = ((kermeta.language.structure.PrimitiveType) org.kermeta.compil.runtime.helper.language.ObjectUtil
 					.asType(this, org.kermeta.compil.runtime.ExecutionContext
 							.getInstance().getMetaClass(
 									"kermeta.language.structure.PrimitiveType")));
 
-			java.lang.Boolean idIfCond_338 = false;
-			idIfCond_338 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+			java.lang.Boolean idIfCond_266 = false;
+			idIfCond_266 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 					.isInstanceOf(pt.getInstanceType(),
 							org.kermeta.compil.runtime.ExecutionContext
 									.getInstance().getMetaClass(
 											"kermeta.language.structure.Class"));
 
-			if (idIfCond_338) {
+			if (idIfCond_266) {
 
 				result = ((kermeta.language.structure.Class) org.kermeta.compil.runtime.helper.language.ObjectUtil
 						.asType(
@@ -1317,13 +1317,13 @@ public class ClassImpl extends TraceabilityImpl<EGenericType> implements
 
 		kermeta.language.structure.Type theType = null;
 
-		java.lang.Boolean idIfCond_339 = false;
-		idIfCond_339 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+		java.lang.Boolean idIfCond_267 = false;
+		idIfCond_267 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 				.isInstanceOf(this, org.kermeta.compil.runtime.ExecutionContext
 						.getInstance().getMetaClass(
 								"kermeta.language.structure.PrimitiveType"));
 
-		if (idIfCond_339) {
+		if (idIfCond_267) {
 
 			theType = ((kermeta.language.structure.Type) org.kermeta.compil.runtime.helper.language.ObjectUtil
 					.asType(this.getClassFromPrimitiveType(),
@@ -1335,8 +1335,8 @@ public class ClassImpl extends TraceabilityImpl<EGenericType> implements
 			theType = this;
 		}
 
-		java.lang.Boolean idIfCond_340 = false;
-		idIfCond_340 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+		java.lang.Boolean idIfCond_268 = false;
+		idIfCond_268 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 				.isInstanceOf(
 						theType,
 						org.kermeta.compil.runtime.ExecutionContext
@@ -1344,7 +1344,7 @@ public class ClassImpl extends TraceabilityImpl<EGenericType> implements
 								.getMetaClass(
 										"kermeta.language.structure.ParameterizedType"));
 
-		if (idIfCond_340) {
+		if (idIfCond_268) {
 
 			kermeta.language.structure.ParameterizedType pt = ((kermeta.language.structure.ParameterizedType) org.kermeta.compil.runtime.helper.language.ObjectUtil
 					.asType(
@@ -1354,8 +1354,8 @@ public class ClassImpl extends TraceabilityImpl<EGenericType> implements
 									.getMetaClass(
 											"kermeta.language.structure.ParameterizedType")));
 
-			java.lang.Boolean idIfCond_341 = false;
-			idIfCond_341 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+			java.lang.Boolean idIfCond_269 = false;
+			idIfCond_269 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 					.isInstanceOf(
 							pt.getTypeDefinition(),
 							org.kermeta.compil.runtime.ExecutionContext
@@ -1363,7 +1363,7 @@ public class ClassImpl extends TraceabilityImpl<EGenericType> implements
 									.getMetaClass(
 											"kermeta.language.structure.ClassDefinition"));
 
-			if (idIfCond_341) {
+			if (idIfCond_269) {
 
 				result = ((kermeta.language.structure.ClassDefinition) org.kermeta.compil.runtime.helper.language.ObjectUtil
 						.asType(
@@ -1392,13 +1392,13 @@ public class ClassImpl extends TraceabilityImpl<EGenericType> implements
 
 		result = null;
 
-		java.lang.Boolean idIfCond_342 = false;
-		idIfCond_342 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+		java.lang.Boolean idIfCond_270 = false;
+		idIfCond_270 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 				.isInstanceOf(this, org.kermeta.compil.runtime.ExecutionContext
 						.getInstance().getMetaClass(
 								"kermeta.language.structure.Class"));
 
-		if (idIfCond_342) {
+		if (idIfCond_270) {
 
 			kermeta.language.structure.ClassDefinition cd = ((kermeta.language.structure.Class) org.kermeta.compil.runtime.helper.language.ObjectUtil
 					.asType(this, org.kermeta.compil.runtime.ExecutionContext
@@ -1409,8 +1409,8 @@ public class ClassImpl extends TraceabilityImpl<EGenericType> implements
 			result = cd.getName();
 		} else {
 
-			java.lang.Boolean idIfCond_343 = false;
-			idIfCond_343 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+			java.lang.Boolean idIfCond_271 = false;
+			idIfCond_271 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 					.isInstanceOf(
 							this,
 							org.kermeta.compil.runtime.ExecutionContext
@@ -1418,7 +1418,7 @@ public class ClassImpl extends TraceabilityImpl<EGenericType> implements
 									.getMetaClass(
 											"kermeta.language.structure.ObjectTypeVariable"));
 
-			if (idIfCond_343) {
+			if (idIfCond_271) {
 
 				kermeta.language.structure.ObjectTypeVariable otv = ((kermeta.language.structure.ObjectTypeVariable) org.kermeta.compil.runtime.helper.language.ObjectUtil
 						.asType(
@@ -1431,8 +1431,8 @@ public class ClassImpl extends TraceabilityImpl<EGenericType> implements
 				result = otv.getName();
 			} else {
 
-				java.lang.Boolean idIfCond_344 = false;
-				idIfCond_344 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+				java.lang.Boolean idIfCond_272 = false;
+				idIfCond_272 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 						.isInstanceOf(
 								this,
 								org.kermeta.compil.runtime.ExecutionContext
@@ -1440,7 +1440,7 @@ public class ClassImpl extends TraceabilityImpl<EGenericType> implements
 										.getMetaClass(
 												"kermeta.language.structure.PrimitiveType"));
 
-				if (idIfCond_344) {
+				if (idIfCond_272) {
 
 					kermeta.language.structure.ClassDefinition cd = this
 							.getClassFromPrimitiveType()
@@ -1449,8 +1449,8 @@ public class ClassImpl extends TraceabilityImpl<EGenericType> implements
 					result = cd.getName();
 				} else {
 
-					java.lang.Boolean idIfCond_345 = false;
-					idIfCond_345 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+					java.lang.Boolean idIfCond_273 = false;
+					idIfCond_273 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 							.isInstanceOf(
 									this,
 									org.kermeta.compil.runtime.ExecutionContext
@@ -1458,7 +1458,7 @@ public class ClassImpl extends TraceabilityImpl<EGenericType> implements
 											.getMetaClass(
 													"kermeta.language.structure.Enumeration"));
 
-					if (idIfCond_345) {
+					if (idIfCond_273) {
 
 						result = ((kermeta.language.structure.Enumeration) org.kermeta.compil.runtime.helper.language.ObjectUtil
 								.asType(
@@ -1470,8 +1470,8 @@ public class ClassImpl extends TraceabilityImpl<EGenericType> implements
 								.getName();
 					} else {
 
-						java.lang.Boolean idIfCond_346 = false;
-						idIfCond_346 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+						java.lang.Boolean idIfCond_274 = false;
+						idIfCond_274 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 								.isInstanceOf(
 										this,
 										org.kermeta.compil.runtime.ExecutionContext
@@ -1479,7 +1479,7 @@ public class ClassImpl extends TraceabilityImpl<EGenericType> implements
 												.getMetaClass(
 														"kermeta.language.structure.VoidType"));
 
-						if (idIfCond_346) {
+						if (idIfCond_274) {
 
 							result = "VoidType";
 						}
@@ -1492,24 +1492,24 @@ public class ClassImpl extends TraceabilityImpl<EGenericType> implements
 
 		}
 
-		java.lang.Boolean idIfCond_347 = false;
+		java.lang.Boolean idIfCond_275 = false;
 		//BIft:orElse
 
-		java.lang.Boolean result_ft119 = null;
+		java.lang.Boolean result_ft78 = null;
 
-		java.lang.Boolean idIfCond_348 = false;
-		idIfCond_348 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+		java.lang.Boolean idIfCond_276 = false;
+		idIfCond_276 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 				.isVoid(result);
 
-		if (idIfCond_348) {
+		if (idIfCond_276) {
 
-			result_ft119 = true;
+			result_ft78 = true;
 		} else {
 
 			//BIle:right
-			/*This variable should be never used*/kermeta.language.structure.Object v_lbdExp119 = null;
+			/*This variable should be never used*/kermeta.language.structure.Object v_lbdExp78 = null;
 
-			result_ft119 = ((kermeta.language.structure.Operation) org.kermeta.compil.runtime.helper.language.ClassUtil
+			result_ft78 = ((kermeta.language.structure.Operation) org.kermeta.compil.runtime.helper.language.ClassUtil
 					.newObject("kermeta.language.structure.Operation"))
 					.isVoidType(result);
 			//EIle:right
@@ -1517,10 +1517,10 @@ public class ClassImpl extends TraceabilityImpl<EGenericType> implements
 		}
 
 		//CEC
-		idIfCond_347 = result_ft119;
+		idIfCond_275 = result_ft78;
 		//EIft:orElse
 
-		if (idIfCond_347) {
+		if (idIfCond_275) {
 
 			result = "VoidType";
 		}
@@ -1540,23 +1540,23 @@ public class ClassImpl extends TraceabilityImpl<EGenericType> implements
 
 		result = false;
 
-		java.lang.Boolean idIfCond_349 = false;
-		idIfCond_349 = kermeta.standard.helper.BooleanWrapper
+		java.lang.Boolean idIfCond_277 = false;
+		idIfCond_277 = kermeta.standard.helper.BooleanWrapper
 				.not(org.kermeta.compil.runtime.helper.language.ObjectUtil
 						.isVoid(this));
 
-		if (idIfCond_349) {
+		if (idIfCond_277) {
 
 			java.lang.String tName = null;
 
-			java.lang.Boolean idIfCond_350 = false;
-			idIfCond_350 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+			java.lang.Boolean idIfCond_278 = false;
+			idIfCond_278 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 					.isInstanceOf(this,
 							org.kermeta.compil.runtime.ExecutionContext
 									.getInstance().getMetaClass(
 											"kermeta.language.structure.Class"));
 
-			if (idIfCond_350) {
+			if (idIfCond_278) {
 
 				tName = ((kermeta.language.structure.ParameterizedType) org.kermeta.compil.runtime.helper.language.ObjectUtil
 						.asType(
@@ -1567,22 +1567,22 @@ public class ClassImpl extends TraceabilityImpl<EGenericType> implements
 												"kermeta.language.structure.ParameterizedType")))
 						.getTypeDefinition().getName();
 
-				java.lang.Boolean idIfCond_351 = false;
-				idIfCond_351 = kermeta.standard.helper.BooleanWrapper.or(
+				java.lang.Boolean idIfCond_279 = false;
+				idIfCond_279 = kermeta.standard.helper.BooleanWrapper.or(
 						kermeta.standard.helper.StringWrapper.equals(tName,
 								"Integer"),
 						kermeta.standard.helper.StringWrapper.equals(tName,
 								"Real"));
 
-				if (idIfCond_351) {
+				if (idIfCond_279) {
 
 					result = true;
 				}
 
 			} else {
 
-				java.lang.Boolean idIfCond_352 = false;
-				idIfCond_352 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+				java.lang.Boolean idIfCond_280 = false;
+				idIfCond_280 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 						.isInstanceOf(
 								this,
 								org.kermeta.compil.runtime.ExecutionContext
@@ -1590,7 +1590,7 @@ public class ClassImpl extends TraceabilityImpl<EGenericType> implements
 										.getMetaClass(
 												"kermeta.language.structure.PrimitiveType"));
 
-				if (idIfCond_352) {
+				if (idIfCond_280) {
 
 					tName = ((kermeta.language.structure.PrimitiveType) org.kermeta.compil.runtime.helper.language.ObjectUtil
 							.asType(
@@ -1601,14 +1601,14 @@ public class ClassImpl extends TraceabilityImpl<EGenericType> implements
 													"kermeta.language.structure.PrimitiveType")))
 							.createBehaviorJava(context);
 
-					java.lang.Boolean idIfCond_353 = false;
-					idIfCond_353 = kermeta.standard.helper.BooleanWrapper.or(
+					java.lang.Boolean idIfCond_281 = false;
+					idIfCond_281 = kermeta.standard.helper.BooleanWrapper.or(
 							kermeta.standard.helper.StringWrapper.equals(tName,
 									"Integer"),
 							kermeta.standard.helper.StringWrapper.equals(tName,
 									"Real"));
 
-					if (idIfCond_353) {
+					if (idIfCond_281) {
 
 						result = true;
 					}
@@ -1634,13 +1634,13 @@ public class ClassImpl extends TraceabilityImpl<EGenericType> implements
 
 		result = null;
 
-		java.lang.Boolean idIfCond_354 = false;
-		idIfCond_354 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+		java.lang.Boolean idIfCond_282 = false;
+		idIfCond_282 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 				.isInstanceOf(this, org.kermeta.compil.runtime.ExecutionContext
 						.getInstance().getMetaClass(
 								"kermeta.language.structure.Class"));
 
-		if (idIfCond_354) {
+		if (idIfCond_282) {
 
 			kermeta.language.structure.ClassDefinition cd = ((kermeta.language.structure.Class) org.kermeta.compil.runtime.helper.language.ObjectUtil
 					.asType(this, org.kermeta.compil.runtime.ExecutionContext
@@ -1651,8 +1651,8 @@ public class ClassImpl extends TraceabilityImpl<EGenericType> implements
 			result = cd.qualifiedName();
 		} else {
 
-			java.lang.Boolean idIfCond_355 = false;
-			idIfCond_355 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+			java.lang.Boolean idIfCond_283 = false;
+			idIfCond_283 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 					.isInstanceOf(
 							this,
 							org.kermeta.compil.runtime.ExecutionContext
@@ -1660,7 +1660,7 @@ public class ClassImpl extends TraceabilityImpl<EGenericType> implements
 									.getMetaClass(
 											"kermeta.language.structure.ObjectTypeVariable"));
 
-			if (idIfCond_355) {
+			if (idIfCond_283) {
 
 				kermeta.language.structure.ObjectTypeVariable otv = ((kermeta.language.structure.ObjectTypeVariable) org.kermeta.compil.runtime.helper.language.ObjectUtil
 						.asType(
@@ -1673,8 +1673,8 @@ public class ClassImpl extends TraceabilityImpl<EGenericType> implements
 				result = otv.qualifiedName();
 			} else {
 
-				java.lang.Boolean idIfCond_356 = false;
-				idIfCond_356 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+				java.lang.Boolean idIfCond_284 = false;
+				idIfCond_284 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 						.isInstanceOf(
 								this,
 								org.kermeta.compil.runtime.ExecutionContext
@@ -1682,7 +1682,7 @@ public class ClassImpl extends TraceabilityImpl<EGenericType> implements
 										.getMetaClass(
 												"kermeta.language.structure.PrimitiveType"));
 
-				if (idIfCond_356) {
+				if (idIfCond_284) {
 
 					kermeta.language.structure.ClassDefinition cd = this
 							.getClassFromPrimitiveType()
@@ -1691,8 +1691,8 @@ public class ClassImpl extends TraceabilityImpl<EGenericType> implements
 					result = cd.qualifiedName();
 				} else {
 
-					java.lang.Boolean idIfCond_357 = false;
-					idIfCond_357 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+					java.lang.Boolean idIfCond_285 = false;
+					idIfCond_285 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 							.isInstanceOf(
 									this,
 									org.kermeta.compil.runtime.ExecutionContext
@@ -1700,7 +1700,7 @@ public class ClassImpl extends TraceabilityImpl<EGenericType> implements
 											.getMetaClass(
 													"kermeta.language.structure.Enumeration"));
 
-					if (idIfCond_357) {
+					if (idIfCond_285) {
 
 						result = ((kermeta.language.structure.Enumeration) org.kermeta.compil.runtime.helper.language.ObjectUtil
 								.asType(
@@ -1712,8 +1712,8 @@ public class ClassImpl extends TraceabilityImpl<EGenericType> implements
 								.qualifiedName();
 					} else {
 
-						java.lang.Boolean idIfCond_358 = false;
-						idIfCond_358 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+						java.lang.Boolean idIfCond_286 = false;
+						idIfCond_286 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 								.isInstanceOf(
 										this,
 										org.kermeta.compil.runtime.ExecutionContext
@@ -1721,7 +1721,7 @@ public class ClassImpl extends TraceabilityImpl<EGenericType> implements
 												.getMetaClass(
 														"kermeta.language.structure.VoidType"));
 
-						if (idIfCond_358) {
+						if (idIfCond_286) {
 
 							result = "kermeta::language::structure::VoidType";
 						}
@@ -1734,24 +1734,24 @@ public class ClassImpl extends TraceabilityImpl<EGenericType> implements
 
 		}
 
-		java.lang.Boolean idIfCond_359 = false;
+		java.lang.Boolean idIfCond_287 = false;
 		//BIft:orElse
 
-		java.lang.Boolean result_ft120 = null;
+		java.lang.Boolean result_ft79 = null;
 
-		java.lang.Boolean idIfCond_360 = false;
-		idIfCond_360 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+		java.lang.Boolean idIfCond_288 = false;
+		idIfCond_288 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 				.isVoid(result);
 
-		if (idIfCond_360) {
+		if (idIfCond_288) {
 
-			result_ft120 = true;
+			result_ft79 = true;
 		} else {
 
 			//BIle:right
-			/*This variable should be never used*/kermeta.language.structure.Object v_lbdExp120 = null;
+			/*This variable should be never used*/kermeta.language.structure.Object v_lbdExp79 = null;
 
-			result_ft120 = ((kermeta.language.structure.Operation) org.kermeta.compil.runtime.helper.language.ClassUtil
+			result_ft79 = ((kermeta.language.structure.Operation) org.kermeta.compil.runtime.helper.language.ClassUtil
 					.newObject("kermeta.language.structure.Operation"))
 					.isVoidType(result);
 			//EIle:right
@@ -1759,13 +1759,29 @@ public class ClassImpl extends TraceabilityImpl<EGenericType> implements
 		}
 
 		//CEC
-		idIfCond_359 = result_ft120;
+		idIfCond_287 = result_ft79;
 		//EIft:orElse
 
-		if (idIfCond_359) {
+		if (idIfCond_287) {
 
 			result = "kermeta::language::structure::VoidType";
 		}
+
+		return result;
+
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Boolean isSubTypeOf(Type object) {
+
+		java.lang.Boolean result = null;
+
+		result = org.kermeta.compil.runtime.helper.language.TypeUtil
+				.isSuperTypeOf(object, this);
 
 		return result;
 
@@ -1794,22 +1810,6 @@ public class ClassImpl extends TraceabilityImpl<EGenericType> implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Boolean isSubTypeOf(Type object) {
-
-		java.lang.Boolean result = null;
-
-		result = org.kermeta.compil.runtime.helper.language.TypeUtil
-				.isSuperTypeOf(object, this);
-
-		return result;
-
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public Boolean isSuperTypeOf(Type object) {
 
 		java.lang.Boolean result = null;
@@ -1826,12 +1826,20 @@ public class ClassImpl extends TraceabilityImpl<EGenericType> implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Boolean isInstance(kermeta.language.structure.Object element) {
+	public Boolean isEDataType() {
 
 		java.lang.Boolean result = null;
 
-		result = org.kermeta.compil.runtime.helper.language.ObjectUtil
-				.isInstanceOf(element, this);
+		result = false;
+
+		java.lang.Boolean idIfCond_289 = false;
+		idIfCond_289 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+				.isNotEqual(this.getEMFEDataTypeInstanceClassName(), "");
+
+		if (idIfCond_289) {
+
+			result = true;
+		}
 
 		return result;
 
@@ -1842,20 +1850,12 @@ public class ClassImpl extends TraceabilityImpl<EGenericType> implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Boolean isEDataType() {
+	public Boolean isInstance(kermeta.language.structure.Object element) {
 
 		java.lang.Boolean result = null;
 
-		result = false;
-
-		java.lang.Boolean idIfCond_361 = false;
-		idIfCond_361 = org.kermeta.compil.runtime.helper.language.ObjectUtil
-				.isNotEqual(this.getEMFEDataTypeInstanceClassName(), "");
-
-		if (idIfCond_361) {
-
-			result = true;
-		}
+		result = org.kermeta.compil.runtime.helper.language.ObjectUtil
+				.isInstanceOf(element, this);
 
 		return result;
 

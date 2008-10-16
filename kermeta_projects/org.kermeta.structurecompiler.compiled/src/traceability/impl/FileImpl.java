@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: FileImpl.java,v 1.4 2008-10-08 14:37:52 cfaucher Exp $
+ * $Id: FileImpl.java,v 1.5 2008-10-16 13:18:12 cfaucher Exp $
  */
 package traceability.impl;
 
@@ -159,26 +159,26 @@ public class FileImpl extends ObjectImpl implements File {
 			kermeta.standard.Iterator<traceability.File> it_ft245 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
 					.<traceability.File> convertAsOrderedSet(
 							traceModel.getFiles()).iterator();
-			java.lang.Boolean idLoopCond_1067 = false;
-			while (!idLoopCond_1067) {
-				idLoopCond_1067 = kermeta.standard.helper.BooleanWrapper.or(
+			java.lang.Boolean idLoopCond_1068 = false;
+			while (!idLoopCond_1068) {
+				idLoopCond_1068 = kermeta.standard.helper.BooleanWrapper.or(
 						it_ft245.isOff(),
 						org.kermeta.compil.runtime.helper.language.ObjectUtil
 								.isNotEqual(result_ft245, null));
-				if (idLoopCond_1067) {
+				if (idLoopCond_1068) {
 				} else {
 
 					elem_ft245 = it_ft245.next();
 
-					java.lang.Boolean idIfCond_1068 = false;
+					java.lang.Boolean idIfCond_1069 = false;
 					//BIle:detector
 					traceability.File f_lbdExp245 = elem_ft245;
 
-					idIfCond_1068 = kermeta.standard.helper.StringWrapper
+					idIfCond_1069 = kermeta.standard.helper.StringWrapper
 							.equals(f_lbdExp245.getUri(), uri_toFind);
 					//EIle:detector
 
-					if (idIfCond_1068) {
+					if (idIfCond_1069) {
 
 						result_ft245 = elem_ft245;
 					}
@@ -191,11 +191,11 @@ public class FileImpl extends ObjectImpl implements File {
 		file = result_ft245;
 		//EIft:detect
 
-		java.lang.Boolean idIfCond_1069 = false;
-		idIfCond_1069 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+		java.lang.Boolean idIfCond_1070 = false;
+		idIfCond_1070 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 				.isVoid(file);
 
-		if (idIfCond_1069) {
+		if (idIfCond_1070) {
 
 			file = ((traceability.File) org.kermeta.compil.runtime.helper.language.ClassUtil
 					.newObject("traceability.File"));

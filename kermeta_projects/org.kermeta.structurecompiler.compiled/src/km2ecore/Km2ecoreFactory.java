@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: Km2ecoreFactory.java,v 1.4 2008-10-08 14:37:24 cfaucher Exp $
+ * $Id: Km2ecoreFactory.java,v 1.5 2008-10-16 13:17:32 cfaucher Exp $
  */
 package km2ecore;
 

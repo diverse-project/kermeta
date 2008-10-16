@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: StandardFactoryImpl.java,v 1.4 2008-10-08 14:37:46 cfaucher Exp $
+ * $Id: StandardFactoryImpl.java,v 1.5 2008-10-16 13:18:03 cfaucher Exp $
  */
 package kermeta.standard.impl;
 
@@ -74,6 +74,10 @@ public class StandardFactoryImpl extends EFactoryImpl implements
 		switch (eClass.getClassifierID()) {
 		case StandardPackage.UNKNOWN_JAVA_OBJECT:
 			return createUnknownJavaObject();
+		case StandardPackage.VOID:
+			return createVoid();
+		case StandardPackage.NOT_COMPARABLE_EXCEPTION:
+			return createNotComparableException();
 		case StandardPackage.SET:
 			return createSet();
 		case StandardPackage.BAG:
@@ -84,10 +88,6 @@ public class StandardFactoryImpl extends EFactoryImpl implements
 			return createSequence();
 		case StandardPackage.ITERATOR:
 			return createIterator();
-		case StandardPackage.VOID:
-			return createVoid();
-		case StandardPackage.NOT_COMPARABLE_EXCEPTION:
-			return createNotComparableException();
 		default:
 			throw new IllegalArgumentException("The class '" + eClass.getName()
 					+ "' is not a valid classifier");
@@ -177,6 +177,26 @@ public class StandardFactoryImpl extends EFactoryImpl implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public kermeta.standard.Void createVoid() {
+		VoidImpl void_ = new VoidImpl();
+		return void_;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotComparableException createNotComparableException() {
+		NotComparableExceptionImpl notComparableException = new NotComparableExceptionImpl();
+		return notComparableException;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public <G> Set<G> createSet() {
 		SetImpl<G> set = new SetImpl<G>();
 		return set;
@@ -220,26 +240,6 @@ public class StandardFactoryImpl extends EFactoryImpl implements
 	public <G> Iterator<G> createIterator() {
 		IteratorImpl<G> iterator = new IteratorImpl<G>();
 		return iterator;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public kermeta.standard.Void createVoid() {
-		VoidImpl void_ = new VoidImpl();
-		return void_;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public NotComparableException createNotComparableException() {
-		NotComparableExceptionImpl notComparableException = new NotComparableExceptionImpl();
-		return notComparableException;
 	}
 
 	/**

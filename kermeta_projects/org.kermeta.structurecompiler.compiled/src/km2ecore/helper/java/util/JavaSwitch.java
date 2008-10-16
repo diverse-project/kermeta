@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: JavaSwitch.java,v 1.4 2008-10-08 14:38:01 cfaucher Exp $
+ * $Id: JavaSwitch.java,v 1.5 2008-10-16 13:18:17 cfaucher Exp $
  */
 package km2ecore.helper.java.util;
 

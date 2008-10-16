@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: BehaviorPackage.java,v 1.4 2008-10-08 14:37:19 cfaucher Exp $
+ * $Id: BehaviorPackage.java,v 1.5 2008-10-16 13:17:25 cfaucher Exp $
  */
 package kermeta.language.behavior;
 
@@ -71,7 +71,7 @@ public interface BehaviorPackage extends EPackage {
 	 * @see kermeta.language.behavior.impl.BehaviorPackageImpl#getExpression()
 	 * @generated
 	 */
-	int EXPRESSION = 2;
+	int EXPRESSION = 0;
 
 	/**
 	 * The feature id for the '<em><b>File</b></em>' reference.
@@ -128,15 +128,6 @@ public interface BehaviorPackage extends EPackage {
 	int EXPRESSION__OID = StructurePackage.TYPE_CONTAINER__OID;
 
 	/**
-	 * The feature id for the '<em><b>Container</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EXPRESSION__CONTAINER = StructurePackage.TYPE_CONTAINER__CONTAINER;
-
-	/**
 	 * The feature id for the '<em><b>Contained Type</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -180,7 +171,7 @@ public interface BehaviorPackage extends EPackage {
 	 * @see kermeta.language.behavior.impl.BehaviorPackageImpl#getBlock()
 	 * @generated
 	 */
-	int BLOCK = 0;
+	int BLOCK = 1;
 
 	/**
 	 * The feature id for the '<em><b>File</b></em>' reference.
@@ -237,15 +228,6 @@ public interface BehaviorPackage extends EPackage {
 	int BLOCK__OID = EXPRESSION__OID;
 
 	/**
-	 * The feature id for the '<em><b>Container</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BLOCK__CONTAINER = EXPRESSION__CONTAINER;
-
-	/**
 	 * The feature id for the '<em><b>Contained Type</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -300,115 +282,6 @@ public interface BehaviorPackage extends EPackage {
 	int BLOCK_FEATURE_COUNT = EXPRESSION_FEATURE_COUNT + 2;
 
 	/**
-	 * The meta object id for the '{@link kermeta.language.behavior.impl.RescueImpl <em>Rescue</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see kermeta.language.behavior.impl.RescueImpl
-	 * @see kermeta.language.behavior.impl.BehaviorPackageImpl#getRescue()
-	 * @generated
-	 */
-	int RESCUE = 1;
-
-	/**
-	 * The feature id for the '<em><b>File</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int RESCUE__FILE = StructurePackage.OBJECT__FILE;
-
-	/**
-	 * The feature id for the '<em><b>Tag</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int RESCUE__TAG = StructurePackage.OBJECT__TAG;
-
-	/**
-	 * The feature id for the '<em><b>File Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int RESCUE__FILE_NAME = StructurePackage.OBJECT__FILE_NAME;
-
-	/**
-	 * The feature id for the '<em><b>Line Number</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int RESCUE__LINE_NUMBER = StructurePackage.OBJECT__LINE_NUMBER;
-
-	/**
-	 * The feature id for the '<em><b>Owned Tags</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int RESCUE__OWNED_TAGS = StructurePackage.OBJECT__OWNED_TAGS;
-
-	/**
-	 * The feature id for the '<em><b>Oid</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int RESCUE__OID = StructurePackage.OBJECT__OID;
-
-	/**
-	 * The feature id for the '<em><b>Container</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int RESCUE__CONTAINER = StructurePackage.OBJECT__CONTAINER;
-
-	/**
-	 * The feature id for the '<em><b>Exception Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int RESCUE__EXCEPTION_NAME = StructurePackage.OBJECT_FEATURE_COUNT + 0;
-
-	/**
-	 * The feature id for the '<em><b>Body</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int RESCUE__BODY = StructurePackage.OBJECT_FEATURE_COUNT + 1;
-
-	/**
-	 * The feature id for the '<em><b>Exception Type</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int RESCUE__EXCEPTION_TYPE = StructurePackage.OBJECT_FEATURE_COUNT + 2;
-
-	/**
-	 * The number of structural features of the '<em>Rescue</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int RESCUE_FEATURE_COUNT = StructurePackage.OBJECT_FEATURE_COUNT + 3;
-
-	/**
 	 * The meta object id for the '{@link kermeta.language.behavior.impl.CallExpressionImpl <em>Call Expression</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -416,7 +289,7 @@ public interface BehaviorPackage extends EPackage {
 	 * @see kermeta.language.behavior.impl.BehaviorPackageImpl#getCallExpression()
 	 * @generated
 	 */
-	int CALL_EXPRESSION = 5;
+	int CALL_EXPRESSION = 2;
 
 	/**
 	 * The feature id for the '<em><b>File</b></em>' reference.
@@ -471,15 +344,6 @@ public interface BehaviorPackage extends EPackage {
 	 * @ordered
 	 */
 	int CALL_EXPRESSION__OID = EXPRESSION__OID;
-
-	/**
-	 * The feature id for the '<em><b>Container</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CALL_EXPRESSION__CONTAINER = EXPRESSION__CONTAINER;
 
 	/**
 	 * The feature id for the '<em><b>Contained Type</b></em>' containment reference list.
@@ -545,6 +409,187 @@ public interface BehaviorPackage extends EPackage {
 	int CALL_EXPRESSION_FEATURE_COUNT = EXPRESSION_FEATURE_COUNT + 3;
 
 	/**
+	 * The meta object id for the '{@link kermeta.language.behavior.impl.CallFeatureImpl <em>Call Feature</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see kermeta.language.behavior.impl.CallFeatureImpl
+	 * @see kermeta.language.behavior.impl.BehaviorPackageImpl#getCallFeature()
+	 * @generated
+	 */
+	int CALL_FEATURE = 3;
+
+	/**
+	 * The feature id for the '<em><b>File</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CALL_FEATURE__FILE = CALL_EXPRESSION__FILE;
+
+	/**
+	 * The feature id for the '<em><b>Tag</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CALL_FEATURE__TAG = CALL_EXPRESSION__TAG;
+
+	/**
+	 * The feature id for the '<em><b>File Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CALL_FEATURE__FILE_NAME = CALL_EXPRESSION__FILE_NAME;
+
+	/**
+	 * The feature id for the '<em><b>Line Number</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CALL_FEATURE__LINE_NUMBER = CALL_EXPRESSION__LINE_NUMBER;
+
+	/**
+	 * The feature id for the '<em><b>Owned Tags</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CALL_FEATURE__OWNED_TAGS = CALL_EXPRESSION__OWNED_TAGS;
+
+	/**
+	 * The feature id for the '<em><b>Oid</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CALL_FEATURE__OID = CALL_EXPRESSION__OID;
+
+	/**
+	 * The feature id for the '<em><b>Contained Type</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CALL_FEATURE__CONTAINED_TYPE = CALL_EXPRESSION__CONTAINED_TYPE;
+
+	/**
+	 * The feature id for the '<em><b>Before Lambda Expression Result</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CALL_FEATURE__BEFORE_LAMBDA_EXPRESSION_RESULT = CALL_EXPRESSION__BEFORE_LAMBDA_EXPRESSION_RESULT;
+
+	/**
+	 * The feature id for the '<em><b>Static Type</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CALL_FEATURE__STATIC_TYPE = CALL_EXPRESSION__STATIC_TYPE;
+
+	/**
+	 * The feature id for the '<em><b>Static Type Variable Bindings</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CALL_FEATURE__STATIC_TYPE_VARIABLE_BINDINGS = CALL_EXPRESSION__STATIC_TYPE_VARIABLE_BINDINGS;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CALL_FEATURE__NAME = CALL_EXPRESSION__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Parameters</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CALL_FEATURE__PARAMETERS = CALL_EXPRESSION__PARAMETERS;
+
+	/**
+	 * The feature id for the '<em><b>Is Atpre</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CALL_FEATURE__IS_ATPRE = CALL_EXPRESSION_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Called Ft Result</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CALL_FEATURE__CALLED_FT_RESULT = CALL_EXPRESSION_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Static Operation</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CALL_FEATURE__STATIC_OPERATION = CALL_EXPRESSION_FEATURE_COUNT + 2;
+
+	/**
+	 * The feature id for the '<em><b>Target</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CALL_FEATURE__TARGET = CALL_EXPRESSION_FEATURE_COUNT + 3;
+
+	/**
+	 * The feature id for the '<em><b>Static Enum Literal</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CALL_FEATURE__STATIC_ENUM_LITERAL = CALL_EXPRESSION_FEATURE_COUNT + 4;
+
+	/**
+	 * The feature id for the '<em><b>Static Property</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CALL_FEATURE__STATIC_PROPERTY = CALL_EXPRESSION_FEATURE_COUNT + 5;
+
+	/**
+	 * The number of structural features of the '<em>Call Feature</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CALL_FEATURE_FEATURE_COUNT = CALL_EXPRESSION_FEATURE_COUNT + 6;
+
+	/**
 	 * The meta object id for the '{@link kermeta.language.behavior.impl.CallVariableImpl <em>Call Variable</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -552,7 +597,7 @@ public interface BehaviorPackage extends EPackage {
 	 * @see kermeta.language.behavior.impl.BehaviorPackageImpl#getCallVariable()
 	 * @generated
 	 */
-	int CALL_VARIABLE = 3;
+	int CALL_VARIABLE = 4;
 
 	/**
 	 * The feature id for the '<em><b>File</b></em>' reference.
@@ -607,15 +652,6 @@ public interface BehaviorPackage extends EPackage {
 	 * @ordered
 	 */
 	int CALL_VARIABLE__OID = CALL_EXPRESSION__OID;
-
-	/**
-	 * The feature id for the '<em><b>Container</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CALL_VARIABLE__CONTAINER = CALL_EXPRESSION__CONTAINER;
 
 	/**
 	 * The feature id for the '<em><b>Contained Type</b></em>' containment reference list.
@@ -699,196 +735,6 @@ public interface BehaviorPackage extends EPackage {
 	int CALL_VARIABLE_FEATURE_COUNT = CALL_EXPRESSION_FEATURE_COUNT + 2;
 
 	/**
-	 * The meta object id for the '{@link kermeta.language.behavior.impl.CallFeatureImpl <em>Call Feature</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see kermeta.language.behavior.impl.CallFeatureImpl
-	 * @see kermeta.language.behavior.impl.BehaviorPackageImpl#getCallFeature()
-	 * @generated
-	 */
-	int CALL_FEATURE = 4;
-
-	/**
-	 * The feature id for the '<em><b>File</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CALL_FEATURE__FILE = CALL_EXPRESSION__FILE;
-
-	/**
-	 * The feature id for the '<em><b>Tag</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CALL_FEATURE__TAG = CALL_EXPRESSION__TAG;
-
-	/**
-	 * The feature id for the '<em><b>File Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CALL_FEATURE__FILE_NAME = CALL_EXPRESSION__FILE_NAME;
-
-	/**
-	 * The feature id for the '<em><b>Line Number</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CALL_FEATURE__LINE_NUMBER = CALL_EXPRESSION__LINE_NUMBER;
-
-	/**
-	 * The feature id for the '<em><b>Owned Tags</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CALL_FEATURE__OWNED_TAGS = CALL_EXPRESSION__OWNED_TAGS;
-
-	/**
-	 * The feature id for the '<em><b>Oid</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CALL_FEATURE__OID = CALL_EXPRESSION__OID;
-
-	/**
-	 * The feature id for the '<em><b>Container</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CALL_FEATURE__CONTAINER = CALL_EXPRESSION__CONTAINER;
-
-	/**
-	 * The feature id for the '<em><b>Contained Type</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CALL_FEATURE__CONTAINED_TYPE = CALL_EXPRESSION__CONTAINED_TYPE;
-
-	/**
-	 * The feature id for the '<em><b>Before Lambda Expression Result</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CALL_FEATURE__BEFORE_LAMBDA_EXPRESSION_RESULT = CALL_EXPRESSION__BEFORE_LAMBDA_EXPRESSION_RESULT;
-
-	/**
-	 * The feature id for the '<em><b>Static Type</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CALL_FEATURE__STATIC_TYPE = CALL_EXPRESSION__STATIC_TYPE;
-
-	/**
-	 * The feature id for the '<em><b>Static Type Variable Bindings</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CALL_FEATURE__STATIC_TYPE_VARIABLE_BINDINGS = CALL_EXPRESSION__STATIC_TYPE_VARIABLE_BINDINGS;
-
-	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CALL_FEATURE__NAME = CALL_EXPRESSION__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Parameters</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CALL_FEATURE__PARAMETERS = CALL_EXPRESSION__PARAMETERS;
-
-	/**
-	 * The feature id for the '<em><b>Static Operation</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CALL_FEATURE__STATIC_OPERATION = CALL_EXPRESSION_FEATURE_COUNT + 0;
-
-	/**
-	 * The feature id for the '<em><b>Called Ft Result</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CALL_FEATURE__CALLED_FT_RESULT = CALL_EXPRESSION_FEATURE_COUNT + 1;
-
-	/**
-	 * The feature id for the '<em><b>Is Atpre</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CALL_FEATURE__IS_ATPRE = CALL_EXPRESSION_FEATURE_COUNT + 2;
-
-	/**
-	 * The feature id for the '<em><b>Target</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CALL_FEATURE__TARGET = CALL_EXPRESSION_FEATURE_COUNT + 3;
-
-	/**
-	 * The feature id for the '<em><b>Static Enum Literal</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CALL_FEATURE__STATIC_ENUM_LITERAL = CALL_EXPRESSION_FEATURE_COUNT + 4;
-
-	/**
-	 * The feature id for the '<em><b>Static Property</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CALL_FEATURE__STATIC_PROPERTY = CALL_EXPRESSION_FEATURE_COUNT + 5;
-
-	/**
-	 * The number of structural features of the '<em>Call Feature</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CALL_FEATURE_FEATURE_COUNT = CALL_EXPRESSION_FEATURE_COUNT + 6;
-
-	/**
 	 * The meta object id for the '{@link kermeta.language.behavior.impl.CallResultImpl <em>Call Result</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -896,7 +742,7 @@ public interface BehaviorPackage extends EPackage {
 	 * @see kermeta.language.behavior.impl.BehaviorPackageImpl#getCallResult()
 	 * @generated
 	 */
-	int CALL_RESULT = 6;
+	int CALL_RESULT = 5;
 
 	/**
 	 * The feature id for the '<em><b>File</b></em>' reference.
@@ -951,15 +797,6 @@ public interface BehaviorPackage extends EPackage {
 	 * @ordered
 	 */
 	int CALL_RESULT__OID = CALL_VARIABLE__OID;
-
-	/**
-	 * The feature id for the '<em><b>Container</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CALL_RESULT__CONTAINER = CALL_VARIABLE__CONTAINER;
 
 	/**
 	 * The feature id for the '<em><b>Contained Type</b></em>' containment reference list.
@@ -1050,7 +887,7 @@ public interface BehaviorPackage extends EPackage {
 	 * @see kermeta.language.behavior.impl.BehaviorPackageImpl#getCallValue()
 	 * @generated
 	 */
-	int CALL_VALUE = 7;
+	int CALL_VALUE = 6;
 
 	/**
 	 * The feature id for the '<em><b>File</b></em>' reference.
@@ -1105,15 +942,6 @@ public interface BehaviorPackage extends EPackage {
 	 * @ordered
 	 */
 	int CALL_VALUE__OID = CALL_EXPRESSION__OID;
-
-	/**
-	 * The feature id for the '<em><b>Container</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CALL_VALUE__CONTAINER = CALL_EXPRESSION__CONTAINER;
 
 	/**
 	 * The feature id for the '<em><b>Contained Type</b></em>' containment reference list.
@@ -1186,7 +1014,7 @@ public interface BehaviorPackage extends EPackage {
 	 * @see kermeta.language.behavior.impl.BehaviorPackageImpl#getCallSuperOperation()
 	 * @generated
 	 */
-	int CALL_SUPER_OPERATION = 8;
+	int CALL_SUPER_OPERATION = 7;
 
 	/**
 	 * The feature id for the '<em><b>File</b></em>' reference.
@@ -1241,15 +1069,6 @@ public interface BehaviorPackage extends EPackage {
 	 * @ordered
 	 */
 	int CALL_SUPER_OPERATION__OID = CALL_EXPRESSION__OID;
-
-	/**
-	 * The feature id for the '<em><b>Container</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CALL_SUPER_OPERATION__CONTAINER = CALL_EXPRESSION__CONTAINER;
 
 	/**
 	 * The feature id for the '<em><b>Contained Type</b></em>' containment reference list.
@@ -1322,7 +1141,7 @@ public interface BehaviorPackage extends EPackage {
 	 * @see kermeta.language.behavior.impl.BehaviorPackageImpl#getVariableDecl()
 	 * @generated
 	 */
-	int VARIABLE_DECL = 9;
+	int VARIABLE_DECL = 8;
 
 	/**
 	 * The feature id for the '<em><b>File</b></em>' reference.
@@ -1377,15 +1196,6 @@ public interface BehaviorPackage extends EPackage {
 	 * @ordered
 	 */
 	int VARIABLE_DECL__OID = EXPRESSION__OID;
-
-	/**
-	 * The feature id for the '<em><b>Container</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int VARIABLE_DECL__CONTAINER = EXPRESSION__CONTAINER;
 
 	/**
 	 * The feature id for the '<em><b>Contained Type</b></em>' containment reference list.
@@ -1458,7 +1268,7 @@ public interface BehaviorPackage extends EPackage {
 	 * @see kermeta.language.behavior.impl.BehaviorPackageImpl#getAssignment()
 	 * @generated
 	 */
-	int ASSIGNMENT = 10;
+	int ASSIGNMENT = 9;
 
 	/**
 	 * The feature id for the '<em><b>File</b></em>' reference.
@@ -1513,15 +1323,6 @@ public interface BehaviorPackage extends EPackage {
 	 * @ordered
 	 */
 	int ASSIGNMENT__OID = EXPRESSION__OID;
-
-	/**
-	 * The feature id for the '<em><b>Container</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ASSIGNMENT__CONTAINER = EXPRESSION__CONTAINER;
 
 	/**
 	 * The feature id for the '<em><b>Contained Type</b></em>' containment reference list.
@@ -1594,7 +1395,7 @@ public interface BehaviorPackage extends EPackage {
 	 * @see kermeta.language.behavior.impl.BehaviorPackageImpl#getLambdaExpression()
 	 * @generated
 	 */
-	int LAMBDA_EXPRESSION = 11;
+	int LAMBDA_EXPRESSION = 10;
 
 	/**
 	 * The feature id for the '<em><b>File</b></em>' reference.
@@ -1649,15 +1450,6 @@ public interface BehaviorPackage extends EPackage {
 	 * @ordered
 	 */
 	int LAMBDA_EXPRESSION__OID = EXPRESSION__OID;
-
-	/**
-	 * The feature id for the '<em><b>Container</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int LAMBDA_EXPRESSION__CONTAINER = EXPRESSION__CONTAINER;
 
 	/**
 	 * The feature id for the '<em><b>Contained Type</b></em>' containment reference list.
@@ -1730,7 +1522,7 @@ public interface BehaviorPackage extends EPackage {
 	 * @see kermeta.language.behavior.impl.BehaviorPackageImpl#getLambdaParameter()
 	 * @generated
 	 */
-	int LAMBDA_PARAMETER = 12;
+	int LAMBDA_PARAMETER = 11;
 
 	/**
 	 * The feature id for the '<em><b>File</b></em>' reference.
@@ -1787,15 +1579,6 @@ public interface BehaviorPackage extends EPackage {
 	int LAMBDA_PARAMETER__OID = StructurePackage.OBJECT__OID;
 
 	/**
-	 * The feature id for the '<em><b>Container</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int LAMBDA_PARAMETER__CONTAINER = StructurePackage.OBJECT__CONTAINER;
-
-	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1830,7 +1613,7 @@ public interface BehaviorPackage extends EPackage {
 	 * @see kermeta.language.behavior.impl.BehaviorPackageImpl#getTypeReference()
 	 * @generated
 	 */
-	int TYPE_REFERENCE = 13;
+	int TYPE_REFERENCE = 12;
 
 	/**
 	 * The feature id for the '<em><b>File</b></em>' reference.
@@ -1885,15 +1668,6 @@ public interface BehaviorPackage extends EPackage {
 	 * @ordered
 	 */
 	int TYPE_REFERENCE__OID = StructurePackage.MULTIPLICITY_ELEMENT__OID;
-
-	/**
-	 * The feature id for the '<em><b>Container</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TYPE_REFERENCE__CONTAINER = StructurePackage.MULTIPLICITY_ELEMENT__CONTAINER;
 
 	/**
 	 * The feature id for the '<em><b>Contained Type</b></em>' containment reference list.
@@ -1975,7 +1749,7 @@ public interface BehaviorPackage extends EPackage {
 	 * @see kermeta.language.behavior.impl.BehaviorPackageImpl#getRaise()
 	 * @generated
 	 */
-	int RAISE = 14;
+	int RAISE = 13;
 
 	/**
 	 * The feature id for the '<em><b>File</b></em>' reference.
@@ -2032,15 +1806,6 @@ public interface BehaviorPackage extends EPackage {
 	int RAISE__OID = EXPRESSION__OID;
 
 	/**
-	 * The feature id for the '<em><b>Container</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int RAISE__CONTAINER = EXPRESSION__CONTAINER;
-
-	/**
 	 * The feature id for the '<em><b>Contained Type</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2084,6 +1849,106 @@ public interface BehaviorPackage extends EPackage {
 	 * @ordered
 	 */
 	int RAISE_FEATURE_COUNT = EXPRESSION_FEATURE_COUNT + 1;
+
+	/**
+	 * The meta object id for the '{@link kermeta.language.behavior.impl.RescueImpl <em>Rescue</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see kermeta.language.behavior.impl.RescueImpl
+	 * @see kermeta.language.behavior.impl.BehaviorPackageImpl#getRescue()
+	 * @generated
+	 */
+	int RESCUE = 14;
+
+	/**
+	 * The feature id for the '<em><b>File</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RESCUE__FILE = StructurePackage.OBJECT__FILE;
+
+	/**
+	 * The feature id for the '<em><b>Tag</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RESCUE__TAG = StructurePackage.OBJECT__TAG;
+
+	/**
+	 * The feature id for the '<em><b>File Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RESCUE__FILE_NAME = StructurePackage.OBJECT__FILE_NAME;
+
+	/**
+	 * The feature id for the '<em><b>Line Number</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RESCUE__LINE_NUMBER = StructurePackage.OBJECT__LINE_NUMBER;
+
+	/**
+	 * The feature id for the '<em><b>Owned Tags</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RESCUE__OWNED_TAGS = StructurePackage.OBJECT__OWNED_TAGS;
+
+	/**
+	 * The feature id for the '<em><b>Oid</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RESCUE__OID = StructurePackage.OBJECT__OID;
+
+	/**
+	 * The feature id for the '<em><b>Body</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RESCUE__BODY = StructurePackage.OBJECT_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Exception Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RESCUE__EXCEPTION_NAME = StructurePackage.OBJECT_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Exception Type</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RESCUE__EXCEPTION_TYPE = StructurePackage.OBJECT_FEATURE_COUNT + 2;
+
+	/**
+	 * The number of structural features of the '<em>Rescue</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RESCUE_FEATURE_COUNT = StructurePackage.OBJECT_FEATURE_COUNT + 3;
 
 	/**
 	 * The meta object id for the '{@link kermeta.language.behavior.impl.SelfExpressionImpl <em>Self Expression</em>}' class.
@@ -2148,15 +2013,6 @@ public interface BehaviorPackage extends EPackage {
 	 * @ordered
 	 */
 	int SELF_EXPRESSION__OID = EXPRESSION__OID;
-
-	/**
-	 * The feature id for the '<em><b>Container</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SELF_EXPRESSION__CONTAINER = EXPRESSION__CONTAINER;
 
 	/**
 	 * The feature id for the '<em><b>Contained Type</b></em>' containment reference list.
@@ -2257,15 +2113,6 @@ public interface BehaviorPackage extends EPackage {
 	 * @ordered
 	 */
 	int CONDITIONAL__OID = EXPRESSION__OID;
-
-	/**
-	 * The feature id for the '<em><b>Container</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CONDITIONAL__CONTAINER = EXPRESSION__CONTAINER;
 
 	/**
 	 * The feature id for the '<em><b>Contained Type</b></em>' containment reference list.
@@ -2395,15 +2242,6 @@ public interface BehaviorPackage extends EPackage {
 	int LOOP__OID = EXPRESSION__OID;
 
 	/**
-	 * The feature id for the '<em><b>Container</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int LOOP__CONTAINER = EXPRESSION__CONTAINER;
-
-	/**
 	 * The feature id for the '<em><b>Contained Type</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2529,15 +2367,6 @@ public interface BehaviorPackage extends EPackage {
 	 * @ordered
 	 */
 	int JAVA_STATIC_CALL__OID = EXPRESSION__OID;
-
-	/**
-	 * The feature id for the '<em><b>Container</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int JAVA_STATIC_CALL__CONTAINER = EXPRESSION__CONTAINER;
 
 	/**
 	 * The feature id for the '<em><b>Contained Type</b></em>' containment reference list.
@@ -2667,15 +2496,6 @@ public interface BehaviorPackage extends EPackage {
 	int LITERAL__OID = EXPRESSION__OID;
 
 	/**
-	 * The feature id for the '<em><b>Container</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int LITERAL__CONTAINER = EXPRESSION__CONTAINER;
-
-	/**
 	 * The feature id for the '<em><b>Contained Type</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2774,15 +2594,6 @@ public interface BehaviorPackage extends EPackage {
 	 * @ordered
 	 */
 	int STRING_LITERAL__OID = LITERAL__OID;
-
-	/**
-	 * The feature id for the '<em><b>Container</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int STRING_LITERAL__CONTAINER = LITERAL__CONTAINER;
 
 	/**
 	 * The feature id for the '<em><b>Contained Type</b></em>' containment reference list.
@@ -2894,15 +2705,6 @@ public interface BehaviorPackage extends EPackage {
 	int INTEGER_LITERAL__OID = LITERAL__OID;
 
 	/**
-	 * The feature id for the '<em><b>Container</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int INTEGER_LITERAL__CONTAINER = LITERAL__CONTAINER;
-
-	/**
 	 * The feature id for the '<em><b>Contained Type</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3010,15 +2812,6 @@ public interface BehaviorPackage extends EPackage {
 	 * @ordered
 	 */
 	int BOOLEAN_LITERAL__OID = LITERAL__OID;
-
-	/**
-	 * The feature id for the '<em><b>Container</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BOOLEAN_LITERAL__CONTAINER = LITERAL__CONTAINER;
 
 	/**
 	 * The feature id for the '<em><b>Contained Type</b></em>' containment reference list.
@@ -3130,15 +2923,6 @@ public interface BehaviorPackage extends EPackage {
 	int TYPE_LITERAL__OID = LITERAL__OID;
 
 	/**
-	 * The feature id for the '<em><b>Container</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TYPE_LITERAL__CONTAINER = LITERAL__CONTAINER;
-
-	/**
 	 * The feature id for the '<em><b>Contained Type</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3248,15 +3032,6 @@ public interface BehaviorPackage extends EPackage {
 	int VOID_LITERAL__OID = LITERAL__OID;
 
 	/**
-	 * The feature id for the '<em><b>Container</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int VOID_LITERAL__CONTAINER = LITERAL__CONTAINER;
-
-	/**
 	 * The feature id for the '<em><b>Contained Type</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3357,15 +3132,6 @@ public interface BehaviorPackage extends EPackage {
 	int EMPTY_EXPRESSION__OID = EXPRESSION__OID;
 
 	/**
-	 * The feature id for the '<em><b>Container</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EMPTY_EXPRESSION__CONTAINER = EXPRESSION__CONTAINER;
-
-	/**
 	 * The feature id for the '<em><b>Contained Type</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3402,81 +3168,6 @@ public interface BehaviorPackage extends EPackage {
 	int EMPTY_EXPRESSION_FEATURE_COUNT = EXPRESSION_FEATURE_COUNT + 0;
 
 	/**
-	 * Returns the meta object for class '{@link kermeta.language.behavior.Block <em>Block</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Block</em>'.
-	 * @see kermeta.language.behavior.Block
-	 * @generated
-	 */
-	EClass getBlock();
-
-	/**
-	 * Returns the meta object for the containment reference list '{@link kermeta.language.behavior.Block#getStatement <em>Statement</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Statement</em>'.
-	 * @see kermeta.language.behavior.Block#getStatement()
-	 * @see #getBlock()
-	 * @generated
-	 */
-	EReference getBlock_Statement();
-
-	/**
-	 * Returns the meta object for the containment reference list '{@link kermeta.language.behavior.Block#getRescueBlock <em>Rescue Block</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Rescue Block</em>'.
-	 * @see kermeta.language.behavior.Block#getRescueBlock()
-	 * @see #getBlock()
-	 * @generated
-	 */
-	EReference getBlock_RescueBlock();
-
-	/**
-	 * Returns the meta object for class '{@link kermeta.language.behavior.Rescue <em>Rescue</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Rescue</em>'.
-	 * @see kermeta.language.behavior.Rescue
-	 * @generated
-	 */
-	EClass getRescue();
-
-	/**
-	 * Returns the meta object for the attribute '{@link kermeta.language.behavior.Rescue#getExceptionName <em>Exception Name</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Exception Name</em>'.
-	 * @see kermeta.language.behavior.Rescue#getExceptionName()
-	 * @see #getRescue()
-	 * @generated
-	 */
-	EAttribute getRescue_ExceptionName();
-
-	/**
-	 * Returns the meta object for the containment reference list '{@link kermeta.language.behavior.Rescue#getBody <em>Body</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Body</em>'.
-	 * @see kermeta.language.behavior.Rescue#getBody()
-	 * @see #getRescue()
-	 * @generated
-	 */
-	EReference getRescue_Body();
-
-	/**
-	 * Returns the meta object for the containment reference '{@link kermeta.language.behavior.Rescue#getExceptionType <em>Exception Type</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Exception Type</em>'.
-	 * @see kermeta.language.behavior.Rescue#getExceptionType()
-	 * @see #getRescue()
-	 * @generated
-	 */
-	EReference getRescue_ExceptionType();
-
-	/**
 	 * Returns the meta object for class '{@link kermeta.language.behavior.Expression <em>Expression</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3509,112 +3200,36 @@ public interface BehaviorPackage extends EPackage {
 	EReference getExpression_StaticType();
 
 	/**
-	 * Returns the meta object for class '{@link kermeta.language.behavior.CallVariable <em>Call Variable</em>}'.
+	 * Returns the meta object for class '{@link kermeta.language.behavior.Block <em>Block</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Call Variable</em>'.
-	 * @see kermeta.language.behavior.CallVariable
+	 * @return the meta object for class '<em>Block</em>'.
+	 * @see kermeta.language.behavior.Block
 	 * @generated
 	 */
-	EClass getCallVariable();
+	EClass getBlock();
 
 	/**
-	 * Returns the meta object for the attribute '{@link kermeta.language.behavior.CallVariable#getIsAtpre <em>Is Atpre</em>}'.
+	 * Returns the meta object for the containment reference list '{@link kermeta.language.behavior.Block#getStatement <em>Statement</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Is Atpre</em>'.
-	 * @see kermeta.language.behavior.CallVariable#getIsAtpre()
-	 * @see #getCallVariable()
+	 * @return the meta object for the containment reference list '<em>Statement</em>'.
+	 * @see kermeta.language.behavior.Block#getStatement()
+	 * @see #getBlock()
 	 * @generated
 	 */
-	EAttribute getCallVariable_IsAtpre();
+	EReference getBlock_Statement();
 
 	/**
-	 * Returns the meta object for the reference '{@link kermeta.language.behavior.CallVariable#getLambdaExpression <em>Lambda Expression</em>}'.
+	 * Returns the meta object for the containment reference list '{@link kermeta.language.behavior.Block#getRescueBlock <em>Rescue Block</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Lambda Expression</em>'.
-	 * @see kermeta.language.behavior.CallVariable#getLambdaExpression()
-	 * @see #getCallVariable()
+	 * @return the meta object for the containment reference list '<em>Rescue Block</em>'.
+	 * @see kermeta.language.behavior.Block#getRescueBlock()
+	 * @see #getBlock()
 	 * @generated
 	 */
-	EReference getCallVariable_LambdaExpression();
-
-	/**
-	 * Returns the meta object for class '{@link kermeta.language.behavior.CallFeature <em>Call Feature</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Call Feature</em>'.
-	 * @see kermeta.language.behavior.CallFeature
-	 * @generated
-	 */
-	EClass getCallFeature();
-
-	/**
-	 * Returns the meta object for the reference '{@link kermeta.language.behavior.CallFeature#getStaticOperation <em>Static Operation</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Static Operation</em>'.
-	 * @see kermeta.language.behavior.CallFeature#getStaticOperation()
-	 * @see #getCallFeature()
-	 * @generated
-	 */
-	EReference getCallFeature_StaticOperation();
-
-	/**
-	 * Returns the meta object for the attribute '{@link kermeta.language.behavior.CallFeature#getCalledFtResult <em>Called Ft Result</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Called Ft Result</em>'.
-	 * @see kermeta.language.behavior.CallFeature#getCalledFtResult()
-	 * @see #getCallFeature()
-	 * @generated
-	 */
-	EAttribute getCallFeature_CalledFtResult();
-
-	/**
-	 * Returns the meta object for the attribute '{@link kermeta.language.behavior.CallFeature#getIsAtpre <em>Is Atpre</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Is Atpre</em>'.
-	 * @see kermeta.language.behavior.CallFeature#getIsAtpre()
-	 * @see #getCallFeature()
-	 * @generated
-	 */
-	EAttribute getCallFeature_IsAtpre();
-
-	/**
-	 * Returns the meta object for the containment reference '{@link kermeta.language.behavior.CallFeature#getTarget <em>Target</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Target</em>'.
-	 * @see kermeta.language.behavior.CallFeature#getTarget()
-	 * @see #getCallFeature()
-	 * @generated
-	 */
-	EReference getCallFeature_Target();
-
-	/**
-	 * Returns the meta object for the reference '{@link kermeta.language.behavior.CallFeature#getStaticEnumLiteral <em>Static Enum Literal</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Static Enum Literal</em>'.
-	 * @see kermeta.language.behavior.CallFeature#getStaticEnumLiteral()
-	 * @see #getCallFeature()
-	 * @generated
-	 */
-	EReference getCallFeature_StaticEnumLiteral();
-
-	/**
-	 * Returns the meta object for the reference '{@link kermeta.language.behavior.CallFeature#getStaticProperty <em>Static Property</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Static Property</em>'.
-	 * @see kermeta.language.behavior.CallFeature#getStaticProperty()
-	 * @see #getCallFeature()
-	 * @generated
-	 */
-	EReference getCallFeature_StaticProperty();
+	EReference getBlock_RescueBlock();
 
 	/**
 	 * Returns the meta object for class '{@link kermeta.language.behavior.CallExpression <em>Call Expression</em>}'.
@@ -3658,6 +3273,114 @@ public interface BehaviorPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getCallExpression_Parameters();
+
+	/**
+	 * Returns the meta object for class '{@link kermeta.language.behavior.CallFeature <em>Call Feature</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Call Feature</em>'.
+	 * @see kermeta.language.behavior.CallFeature
+	 * @generated
+	 */
+	EClass getCallFeature();
+
+	/**
+	 * Returns the meta object for the attribute '{@link kermeta.language.behavior.CallFeature#getIsAtpre <em>Is Atpre</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Is Atpre</em>'.
+	 * @see kermeta.language.behavior.CallFeature#getIsAtpre()
+	 * @see #getCallFeature()
+	 * @generated
+	 */
+	EAttribute getCallFeature_IsAtpre();
+
+	/**
+	 * Returns the meta object for the attribute '{@link kermeta.language.behavior.CallFeature#getCalledFtResult <em>Called Ft Result</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Called Ft Result</em>'.
+	 * @see kermeta.language.behavior.CallFeature#getCalledFtResult()
+	 * @see #getCallFeature()
+	 * @generated
+	 */
+	EAttribute getCallFeature_CalledFtResult();
+
+	/**
+	 * Returns the meta object for the reference '{@link kermeta.language.behavior.CallFeature#getStaticOperation <em>Static Operation</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Static Operation</em>'.
+	 * @see kermeta.language.behavior.CallFeature#getStaticOperation()
+	 * @see #getCallFeature()
+	 * @generated
+	 */
+	EReference getCallFeature_StaticOperation();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link kermeta.language.behavior.CallFeature#getTarget <em>Target</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Target</em>'.
+	 * @see kermeta.language.behavior.CallFeature#getTarget()
+	 * @see #getCallFeature()
+	 * @generated
+	 */
+	EReference getCallFeature_Target();
+
+	/**
+	 * Returns the meta object for the reference '{@link kermeta.language.behavior.CallFeature#getStaticEnumLiteral <em>Static Enum Literal</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Static Enum Literal</em>'.
+	 * @see kermeta.language.behavior.CallFeature#getStaticEnumLiteral()
+	 * @see #getCallFeature()
+	 * @generated
+	 */
+	EReference getCallFeature_StaticEnumLiteral();
+
+	/**
+	 * Returns the meta object for the reference '{@link kermeta.language.behavior.CallFeature#getStaticProperty <em>Static Property</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Static Property</em>'.
+	 * @see kermeta.language.behavior.CallFeature#getStaticProperty()
+	 * @see #getCallFeature()
+	 * @generated
+	 */
+	EReference getCallFeature_StaticProperty();
+
+	/**
+	 * Returns the meta object for class '{@link kermeta.language.behavior.CallVariable <em>Call Variable</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Call Variable</em>'.
+	 * @see kermeta.language.behavior.CallVariable
+	 * @generated
+	 */
+	EClass getCallVariable();
+
+	/**
+	 * Returns the meta object for the attribute '{@link kermeta.language.behavior.CallVariable#getIsAtpre <em>Is Atpre</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Is Atpre</em>'.
+	 * @see kermeta.language.behavior.CallVariable#getIsAtpre()
+	 * @see #getCallVariable()
+	 * @generated
+	 */
+	EAttribute getCallVariable_IsAtpre();
+
+	/**
+	 * Returns the meta object for the reference '{@link kermeta.language.behavior.CallVariable#getLambdaExpression <em>Lambda Expression</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Lambda Expression</em>'.
+	 * @see kermeta.language.behavior.CallVariable#getLambdaExpression()
+	 * @see #getCallVariable()
+	 * @generated
+	 */
+	EReference getCallVariable_LambdaExpression();
 
 	/**
 	 * Returns the meta object for class '{@link kermeta.language.behavior.CallResult <em>Call Result</em>}'.
@@ -3880,6 +3603,49 @@ public interface BehaviorPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getRaise_Expression();
+
+	/**
+	 * Returns the meta object for class '{@link kermeta.language.behavior.Rescue <em>Rescue</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Rescue</em>'.
+	 * @see kermeta.language.behavior.Rescue
+	 * @generated
+	 */
+	EClass getRescue();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link kermeta.language.behavior.Rescue#getBody <em>Body</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Body</em>'.
+	 * @see kermeta.language.behavior.Rescue#getBody()
+	 * @see #getRescue()
+	 * @generated
+	 */
+	EReference getRescue_Body();
+
+	/**
+	 * Returns the meta object for the attribute '{@link kermeta.language.behavior.Rescue#getExceptionName <em>Exception Name</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Exception Name</em>'.
+	 * @see kermeta.language.behavior.Rescue#getExceptionName()
+	 * @see #getRescue()
+	 * @generated
+	 */
+	EAttribute getRescue_ExceptionName();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link kermeta.language.behavior.Rescue#getExceptionType <em>Exception Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Exception Type</em>'.
+	 * @see kermeta.language.behavior.Rescue#getExceptionType()
+	 * @see #getRescue()
+	 * @generated
+	 */
+	EReference getRescue_ExceptionType();
 
 	/**
 	 * Returns the meta object for class '{@link kermeta.language.behavior.SelfExpression <em>Self Expression</em>}'.
@@ -4157,66 +3923,6 @@ public interface BehaviorPackage extends EPackage {
 	 */
 	interface Literals {
 		/**
-		 * The meta object literal for the '{@link kermeta.language.behavior.impl.BlockImpl <em>Block</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see kermeta.language.behavior.impl.BlockImpl
-		 * @see kermeta.language.behavior.impl.BehaviorPackageImpl#getBlock()
-		 * @generated
-		 */
-		EClass BLOCK = eINSTANCE.getBlock();
-
-		/**
-		 * The meta object literal for the '<em><b>Statement</b></em>' containment reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference BLOCK__STATEMENT = eINSTANCE.getBlock_Statement();
-
-		/**
-		 * The meta object literal for the '<em><b>Rescue Block</b></em>' containment reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference BLOCK__RESCUE_BLOCK = eINSTANCE.getBlock_RescueBlock();
-
-		/**
-		 * The meta object literal for the '{@link kermeta.language.behavior.impl.RescueImpl <em>Rescue</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see kermeta.language.behavior.impl.RescueImpl
-		 * @see kermeta.language.behavior.impl.BehaviorPackageImpl#getRescue()
-		 * @generated
-		 */
-		EClass RESCUE = eINSTANCE.getRescue();
-
-		/**
-		 * The meta object literal for the '<em><b>Exception Name</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute RESCUE__EXCEPTION_NAME = eINSTANCE.getRescue_ExceptionName();
-
-		/**
-		 * The meta object literal for the '<em><b>Body</b></em>' containment reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference RESCUE__BODY = eINSTANCE.getRescue_Body();
-
-		/**
-		 * The meta object literal for the '<em><b>Exception Type</b></em>' containment reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference RESCUE__EXCEPTION_TYPE = eINSTANCE.getRescue_ExceptionType();
-
-		/**
 		 * The meta object literal for the '{@link kermeta.language.behavior.impl.ExpressionImpl <em>Expression</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -4245,94 +3951,30 @@ public interface BehaviorPackage extends EPackage {
 				.getExpression_StaticType();
 
 		/**
-		 * The meta object literal for the '{@link kermeta.language.behavior.impl.CallVariableImpl <em>Call Variable</em>}' class.
+		 * The meta object literal for the '{@link kermeta.language.behavior.impl.BlockImpl <em>Block</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see kermeta.language.behavior.impl.CallVariableImpl
-		 * @see kermeta.language.behavior.impl.BehaviorPackageImpl#getCallVariable()
+		 * @see kermeta.language.behavior.impl.BlockImpl
+		 * @see kermeta.language.behavior.impl.BehaviorPackageImpl#getBlock()
 		 * @generated
 		 */
-		EClass CALL_VARIABLE = eINSTANCE.getCallVariable();
+		EClass BLOCK = eINSTANCE.getBlock();
 
 		/**
-		 * The meta object literal for the '<em><b>Is Atpre</b></em>' attribute feature.
+		 * The meta object literal for the '<em><b>Statement</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute CALL_VARIABLE__IS_ATPRE = eINSTANCE
-				.getCallVariable_IsAtpre();
+		EReference BLOCK__STATEMENT = eINSTANCE.getBlock_Statement();
 
 		/**
-		 * The meta object literal for the '<em><b>Lambda Expression</b></em>' reference feature.
+		 * The meta object literal for the '<em><b>Rescue Block</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference CALL_VARIABLE__LAMBDA_EXPRESSION = eINSTANCE
-				.getCallVariable_LambdaExpression();
-
-		/**
-		 * The meta object literal for the '{@link kermeta.language.behavior.impl.CallFeatureImpl <em>Call Feature</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see kermeta.language.behavior.impl.CallFeatureImpl
-		 * @see kermeta.language.behavior.impl.BehaviorPackageImpl#getCallFeature()
-		 * @generated
-		 */
-		EClass CALL_FEATURE = eINSTANCE.getCallFeature();
-
-		/**
-		 * The meta object literal for the '<em><b>Static Operation</b></em>' reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference CALL_FEATURE__STATIC_OPERATION = eINSTANCE
-				.getCallFeature_StaticOperation();
-
-		/**
-		 * The meta object literal for the '<em><b>Called Ft Result</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute CALL_FEATURE__CALLED_FT_RESULT = eINSTANCE
-				.getCallFeature_CalledFtResult();
-
-		/**
-		 * The meta object literal for the '<em><b>Is Atpre</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute CALL_FEATURE__IS_ATPRE = eINSTANCE.getCallFeature_IsAtpre();
-
-		/**
-		 * The meta object literal for the '<em><b>Target</b></em>' containment reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference CALL_FEATURE__TARGET = eINSTANCE.getCallFeature_Target();
-
-		/**
-		 * The meta object literal for the '<em><b>Static Enum Literal</b></em>' reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference CALL_FEATURE__STATIC_ENUM_LITERAL = eINSTANCE
-				.getCallFeature_StaticEnumLiteral();
-
-		/**
-		 * The meta object literal for the '<em><b>Static Property</b></em>' reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference CALL_FEATURE__STATIC_PROPERTY = eINSTANCE
-				.getCallFeature_StaticProperty();
+		EReference BLOCK__RESCUE_BLOCK = eINSTANCE.getBlock_RescueBlock();
 
 		/**
 		 * The meta object literal for the '{@link kermeta.language.behavior.impl.CallExpressionImpl <em>Call Expression</em>}' class.
@@ -4369,6 +4011,96 @@ public interface BehaviorPackage extends EPackage {
 		 */
 		EReference CALL_EXPRESSION__PARAMETERS = eINSTANCE
 				.getCallExpression_Parameters();
+
+		/**
+		 * The meta object literal for the '{@link kermeta.language.behavior.impl.CallFeatureImpl <em>Call Feature</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see kermeta.language.behavior.impl.CallFeatureImpl
+		 * @see kermeta.language.behavior.impl.BehaviorPackageImpl#getCallFeature()
+		 * @generated
+		 */
+		EClass CALL_FEATURE = eINSTANCE.getCallFeature();
+
+		/**
+		 * The meta object literal for the '<em><b>Is Atpre</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute CALL_FEATURE__IS_ATPRE = eINSTANCE.getCallFeature_IsAtpre();
+
+		/**
+		 * The meta object literal for the '<em><b>Called Ft Result</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute CALL_FEATURE__CALLED_FT_RESULT = eINSTANCE
+				.getCallFeature_CalledFtResult();
+
+		/**
+		 * The meta object literal for the '<em><b>Static Operation</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference CALL_FEATURE__STATIC_OPERATION = eINSTANCE
+				.getCallFeature_StaticOperation();
+
+		/**
+		 * The meta object literal for the '<em><b>Target</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference CALL_FEATURE__TARGET = eINSTANCE.getCallFeature_Target();
+
+		/**
+		 * The meta object literal for the '<em><b>Static Enum Literal</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference CALL_FEATURE__STATIC_ENUM_LITERAL = eINSTANCE
+				.getCallFeature_StaticEnumLiteral();
+
+		/**
+		 * The meta object literal for the '<em><b>Static Property</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference CALL_FEATURE__STATIC_PROPERTY = eINSTANCE
+				.getCallFeature_StaticProperty();
+
+		/**
+		 * The meta object literal for the '{@link kermeta.language.behavior.impl.CallVariableImpl <em>Call Variable</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see kermeta.language.behavior.impl.CallVariableImpl
+		 * @see kermeta.language.behavior.impl.BehaviorPackageImpl#getCallVariable()
+		 * @generated
+		 */
+		EClass CALL_VARIABLE = eINSTANCE.getCallVariable();
+
+		/**
+		 * The meta object literal for the '<em><b>Is Atpre</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute CALL_VARIABLE__IS_ATPRE = eINSTANCE
+				.getCallVariable_IsAtpre();
+
+		/**
+		 * The meta object literal for the '<em><b>Lambda Expression</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference CALL_VARIABLE__LAMBDA_EXPRESSION = eINSTANCE
+				.getCallVariable_LambdaExpression();
 
 		/**
 		 * The meta object literal for the '{@link kermeta.language.behavior.impl.CallResultImpl <em>Call Result</em>}' class.
@@ -4560,6 +4292,40 @@ public interface BehaviorPackage extends EPackage {
 		 * @generated
 		 */
 		EReference RAISE__EXPRESSION = eINSTANCE.getRaise_Expression();
+
+		/**
+		 * The meta object literal for the '{@link kermeta.language.behavior.impl.RescueImpl <em>Rescue</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see kermeta.language.behavior.impl.RescueImpl
+		 * @see kermeta.language.behavior.impl.BehaviorPackageImpl#getRescue()
+		 * @generated
+		 */
+		EClass RESCUE = eINSTANCE.getRescue();
+
+		/**
+		 * The meta object literal for the '<em><b>Body</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference RESCUE__BODY = eINSTANCE.getRescue_Body();
+
+		/**
+		 * The meta object literal for the '<em><b>Exception Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute RESCUE__EXCEPTION_NAME = eINSTANCE.getRescue_ExceptionName();
+
+		/**
+		 * The meta object literal for the '<em><b>Exception Type</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference RESCUE__EXCEPTION_TYPE = eINSTANCE.getRescue_ExceptionType();
 
 		/**
 		 * The meta object literal for the '{@link kermeta.language.behavior.impl.SelfExpressionImpl <em>Self Expression</em>}' class.

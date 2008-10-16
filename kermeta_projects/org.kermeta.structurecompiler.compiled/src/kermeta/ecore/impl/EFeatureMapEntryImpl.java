@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: EFeatureMapEntryImpl.java,v 1.4 2008-10-08 14:37:45 cfaucher Exp $
+ * $Id: EFeatureMapEntryImpl.java,v 1.5 2008-10-16 13:18:02 cfaucher Exp $
  */
 package kermeta.ecore.impl;
 

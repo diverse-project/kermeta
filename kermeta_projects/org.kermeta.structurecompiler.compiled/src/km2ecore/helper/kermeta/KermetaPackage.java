@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: KermetaPackage.java,v 1.4 2008-10-08 14:38:02 cfaucher Exp $
+ * $Id: KermetaPackage.java,v 1.5 2008-10-16 13:18:18 cfaucher Exp $
  */
 package km2ecore.helper.kermeta;
 
@@ -62,14 +62,14 @@ public interface KermetaPackage extends EPackage {
 			.init();
 
 	/**
-	 * The meta object id for the '{@link km2ecore.helper.kermeta.impl.GenericTypeDefinitionHelperImpl <em>Generic Type Definition Helper</em>}' class.
+	 * The meta object id for the '{@link km2ecore.helper.kermeta.impl.CompilerHelperJavaImpl <em>Compiler Helper Java</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see km2ecore.helper.kermeta.impl.GenericTypeDefinitionHelperImpl
-	 * @see km2ecore.helper.kermeta.impl.KermetaPackageImpl#getGenericTypeDefinitionHelper()
+	 * @see km2ecore.helper.kermeta.impl.CompilerHelperJavaImpl
+	 * @see km2ecore.helper.kermeta.impl.KermetaPackageImpl#getCompilerHelperJava()
 	 * @generated
 	 */
-	int GENERIC_TYPE_DEFINITION_HELPER = 0;
+	int COMPILER_HELPER_JAVA = 0;
 
 	/**
 	 * The feature id for the '<em><b>File</b></em>' reference.
@@ -78,7 +78,7 @@ public interface KermetaPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int GENERIC_TYPE_DEFINITION_HELPER__FILE = StructurePackage.OBJECT__FILE;
+	int COMPILER_HELPER_JAVA__FILE = StructurePackage.OBJECT__FILE;
 
 	/**
 	 * The feature id for the '<em><b>Tag</b></em>' reference list.
@@ -87,7 +87,7 @@ public interface KermetaPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int GENERIC_TYPE_DEFINITION_HELPER__TAG = StructurePackage.OBJECT__TAG;
+	int COMPILER_HELPER_JAVA__TAG = StructurePackage.OBJECT__TAG;
 
 	/**
 	 * The feature id for the '<em><b>File Name</b></em>' attribute.
@@ -96,7 +96,7 @@ public interface KermetaPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int GENERIC_TYPE_DEFINITION_HELPER__FILE_NAME = StructurePackage.OBJECT__FILE_NAME;
+	int COMPILER_HELPER_JAVA__FILE_NAME = StructurePackage.OBJECT__FILE_NAME;
 
 	/**
 	 * The feature id for the '<em><b>Line Number</b></em>' attribute.
@@ -105,7 +105,7 @@ public interface KermetaPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int GENERIC_TYPE_DEFINITION_HELPER__LINE_NUMBER = StructurePackage.OBJECT__LINE_NUMBER;
+	int COMPILER_HELPER_JAVA__LINE_NUMBER = StructurePackage.OBJECT__LINE_NUMBER;
 
 	/**
 	 * The feature id for the '<em><b>Owned Tags</b></em>' containment reference list.
@@ -114,7 +114,7 @@ public interface KermetaPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int GENERIC_TYPE_DEFINITION_HELPER__OWNED_TAGS = StructurePackage.OBJECT__OWNED_TAGS;
+	int COMPILER_HELPER_JAVA__OWNED_TAGS = StructurePackage.OBJECT__OWNED_TAGS;
 
 	/**
 	 * The feature id for the '<em><b>Oid</b></em>' attribute.
@@ -123,25 +123,16 @@ public interface KermetaPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int GENERIC_TYPE_DEFINITION_HELPER__OID = StructurePackage.OBJECT__OID;
+	int COMPILER_HELPER_JAVA__OID = StructurePackage.OBJECT__OID;
 
 	/**
-	 * The feature id for the '<em><b>Container</b></em>' reference.
+	 * The number of structural features of the '<em>Compiler Helper Java</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int GENERIC_TYPE_DEFINITION_HELPER__CONTAINER = StructurePackage.OBJECT__CONTAINER;
-
-	/**
-	 * The number of structural features of the '<em>Generic Type Definition Helper</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int GENERIC_TYPE_DEFINITION_HELPER_FEATURE_COUNT = StructurePackage.OBJECT_FEATURE_COUNT + 0;
+	int COMPILER_HELPER_JAVA_FEATURE_COUNT = StructurePackage.OBJECT_FEATURE_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link km2ecore.helper.kermeta.impl.ConstraintHelperImpl <em>Constraint Helper</em>}' class.
@@ -208,15 +199,6 @@ public interface KermetaPackage extends EPackage {
 	int CONSTRAINT_HELPER__OID = StructurePackage.OBJECT__OID;
 
 	/**
-	 * The feature id for the '<em><b>Container</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CONSTRAINT_HELPER__CONTAINER = StructurePackage.OBJECT__CONTAINER;
-
-	/**
 	 * The number of structural features of the '<em>Constraint Helper</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -226,14 +208,14 @@ public interface KermetaPackage extends EPackage {
 	int CONSTRAINT_HELPER_FEATURE_COUNT = StructurePackage.OBJECT_FEATURE_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link km2ecore.helper.kermeta.impl.CompilerHelperJavaImpl <em>Compiler Helper Java</em>}' class.
+	 * The meta object id for the '{@link km2ecore.helper.kermeta.impl.GenericTypeDefinitionHelperImpl <em>Generic Type Definition Helper</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see km2ecore.helper.kermeta.impl.CompilerHelperJavaImpl
-	 * @see km2ecore.helper.kermeta.impl.KermetaPackageImpl#getCompilerHelperJava()
+	 * @see km2ecore.helper.kermeta.impl.GenericTypeDefinitionHelperImpl
+	 * @see km2ecore.helper.kermeta.impl.KermetaPackageImpl#getGenericTypeDefinitionHelper()
 	 * @generated
 	 */
-	int COMPILER_HELPER_JAVA = 2;
+	int GENERIC_TYPE_DEFINITION_HELPER = 2;
 
 	/**
 	 * The feature id for the '<em><b>File</b></em>' reference.
@@ -242,7 +224,7 @@ public interface KermetaPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int COMPILER_HELPER_JAVA__FILE = StructurePackage.OBJECT__FILE;
+	int GENERIC_TYPE_DEFINITION_HELPER__FILE = StructurePackage.OBJECT__FILE;
 
 	/**
 	 * The feature id for the '<em><b>Tag</b></em>' reference list.
@@ -251,7 +233,7 @@ public interface KermetaPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int COMPILER_HELPER_JAVA__TAG = StructurePackage.OBJECT__TAG;
+	int GENERIC_TYPE_DEFINITION_HELPER__TAG = StructurePackage.OBJECT__TAG;
 
 	/**
 	 * The feature id for the '<em><b>File Name</b></em>' attribute.
@@ -260,7 +242,7 @@ public interface KermetaPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int COMPILER_HELPER_JAVA__FILE_NAME = StructurePackage.OBJECT__FILE_NAME;
+	int GENERIC_TYPE_DEFINITION_HELPER__FILE_NAME = StructurePackage.OBJECT__FILE_NAME;
 
 	/**
 	 * The feature id for the '<em><b>Line Number</b></em>' attribute.
@@ -269,7 +251,7 @@ public interface KermetaPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int COMPILER_HELPER_JAVA__LINE_NUMBER = StructurePackage.OBJECT__LINE_NUMBER;
+	int GENERIC_TYPE_DEFINITION_HELPER__LINE_NUMBER = StructurePackage.OBJECT__LINE_NUMBER;
 
 	/**
 	 * The feature id for the '<em><b>Owned Tags</b></em>' containment reference list.
@@ -278,7 +260,7 @@ public interface KermetaPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int COMPILER_HELPER_JAVA__OWNED_TAGS = StructurePackage.OBJECT__OWNED_TAGS;
+	int GENERIC_TYPE_DEFINITION_HELPER__OWNED_TAGS = StructurePackage.OBJECT__OWNED_TAGS;
 
 	/**
 	 * The feature id for the '<em><b>Oid</b></em>' attribute.
@@ -287,35 +269,26 @@ public interface KermetaPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int COMPILER_HELPER_JAVA__OID = StructurePackage.OBJECT__OID;
+	int GENERIC_TYPE_DEFINITION_HELPER__OID = StructurePackage.OBJECT__OID;
 
 	/**
-	 * The feature id for the '<em><b>Container</b></em>' reference.
+	 * The number of structural features of the '<em>Generic Type Definition Helper</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int COMPILER_HELPER_JAVA__CONTAINER = StructurePackage.OBJECT__CONTAINER;
+	int GENERIC_TYPE_DEFINITION_HELPER_FEATURE_COUNT = StructurePackage.OBJECT_FEATURE_COUNT + 0;
 
 	/**
-	 * The number of structural features of the '<em>Compiler Helper Java</em>' class.
+	 * Returns the meta object for class '{@link km2ecore.helper.kermeta.CompilerHelperJava <em>Compiler Helper Java</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int COMPILER_HELPER_JAVA_FEATURE_COUNT = StructurePackage.OBJECT_FEATURE_COUNT + 0;
-
-	/**
-	 * Returns the meta object for class '{@link km2ecore.helper.kermeta.GenericTypeDefinitionHelper <em>Generic Type Definition Helper</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Generic Type Definition Helper</em>'.
-	 * @see km2ecore.helper.kermeta.GenericTypeDefinitionHelper
+	 * @return the meta object for class '<em>Compiler Helper Java</em>'.
+	 * @see km2ecore.helper.kermeta.CompilerHelperJava
 	 * @generated
 	 */
-	EClass getGenericTypeDefinitionHelper();
+	EClass getCompilerHelperJava();
 
 	/**
 	 * Returns the meta object for class '{@link km2ecore.helper.kermeta.ConstraintHelper <em>Constraint Helper</em>}'.
@@ -328,14 +301,14 @@ public interface KermetaPackage extends EPackage {
 	EClass getConstraintHelper();
 
 	/**
-	 * Returns the meta object for class '{@link km2ecore.helper.kermeta.CompilerHelperJava <em>Compiler Helper Java</em>}'.
+	 * Returns the meta object for class '{@link km2ecore.helper.kermeta.GenericTypeDefinitionHelper <em>Generic Type Definition Helper</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Compiler Helper Java</em>'.
-	 * @see km2ecore.helper.kermeta.CompilerHelperJava
+	 * @return the meta object for class '<em>Generic Type Definition Helper</em>'.
+	 * @see km2ecore.helper.kermeta.GenericTypeDefinitionHelper
 	 * @generated
 	 */
-	EClass getCompilerHelperJava();
+	EClass getGenericTypeDefinitionHelper();
 
 	/**
 	 * Returns the factory that creates the instances of the model.
@@ -360,15 +333,14 @@ public interface KermetaPackage extends EPackage {
 	 */
 	interface Literals {
 		/**
-		 * The meta object literal for the '{@link km2ecore.helper.kermeta.impl.GenericTypeDefinitionHelperImpl <em>Generic Type Definition Helper</em>}' class.
+		 * The meta object literal for the '{@link km2ecore.helper.kermeta.impl.CompilerHelperJavaImpl <em>Compiler Helper Java</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see km2ecore.helper.kermeta.impl.GenericTypeDefinitionHelperImpl
-		 * @see km2ecore.helper.kermeta.impl.KermetaPackageImpl#getGenericTypeDefinitionHelper()
+		 * @see km2ecore.helper.kermeta.impl.CompilerHelperJavaImpl
+		 * @see km2ecore.helper.kermeta.impl.KermetaPackageImpl#getCompilerHelperJava()
 		 * @generated
 		 */
-		EClass GENERIC_TYPE_DEFINITION_HELPER = eINSTANCE
-				.getGenericTypeDefinitionHelper();
+		EClass COMPILER_HELPER_JAVA = eINSTANCE.getCompilerHelperJava();
 
 		/**
 		 * The meta object literal for the '{@link km2ecore.helper.kermeta.impl.ConstraintHelperImpl <em>Constraint Helper</em>}' class.
@@ -381,14 +353,15 @@ public interface KermetaPackage extends EPackage {
 		EClass CONSTRAINT_HELPER = eINSTANCE.getConstraintHelper();
 
 		/**
-		 * The meta object literal for the '{@link km2ecore.helper.kermeta.impl.CompilerHelperJavaImpl <em>Compiler Helper Java</em>}' class.
+		 * The meta object literal for the '{@link km2ecore.helper.kermeta.impl.GenericTypeDefinitionHelperImpl <em>Generic Type Definition Helper</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see km2ecore.helper.kermeta.impl.CompilerHelperJavaImpl
-		 * @see km2ecore.helper.kermeta.impl.KermetaPackageImpl#getCompilerHelperJava()
+		 * @see km2ecore.helper.kermeta.impl.GenericTypeDefinitionHelperImpl
+		 * @see km2ecore.helper.kermeta.impl.KermetaPackageImpl#getGenericTypeDefinitionHelper()
 		 * @generated
 		 */
-		EClass COMPILER_HELPER_JAVA = eINSTANCE.getCompilerHelperJava();
+		EClass GENERIC_TYPE_DEFINITION_HELPER = eINSTANCE
+				.getGenericTypeDefinitionHelper();
 
 	}
 

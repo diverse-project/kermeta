@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: EGenericTypeImpl.java,v 1.5 2008-10-08 14:37:30 cfaucher Exp $
+ * $Id: EGenericTypeImpl.java,v 1.6 2008-10-16 13:17:42 cfaucher Exp $
  */
 package ecore.impl;
 
@@ -33,8 +33,8 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link ecore.impl.EGenericTypeImpl#getETypeArguments <em>EType Arguments</em>}</li>
  *   <li>{@link ecore.impl.EGenericTypeImpl#getEUpperBound <em>EUpper Bound</em>}</li>
+ *   <li>{@link ecore.impl.EGenericTypeImpl#getETypeArguments <em>EType Arguments</em>}</li>
  *   <li>{@link ecore.impl.EGenericTypeImpl#getEClassifier <em>EClassifier</em>}</li>
  *   <li>{@link ecore.impl.EGenericTypeImpl#getETypeParameter <em>EType Parameter</em>}</li>
  *   <li>{@link ecore.impl.EGenericTypeImpl#getELowerBound <em>ELower Bound</em>}</li>
@@ -45,16 +45,6 @@ import org.eclipse.emf.ecore.util.InternalEList;
  */
 public class EGenericTypeImpl extends EObjectImpl implements EGenericType {
 	/**
-	 * The cached value of the '{@link #getETypeArguments() <em>EType Arguments</em>}' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getETypeArguments()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<EGenericType> eTypeArguments;
-
-	/**
 	 * The cached value of the '{@link #getEUpperBound() <em>EUpper Bound</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -63,6 +53,16 @@ public class EGenericTypeImpl extends EObjectImpl implements EGenericType {
 	 * @ordered
 	 */
 	protected EGenericType eUpperBound;
+
+	/**
+	 * The cached value of the '{@link #getETypeArguments() <em>EType Arguments</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getETypeArguments()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<EGenericType> eTypeArguments;
 
 	/**
 	 * The cached value of the '{@link #getEClassifier() <em>EClassifier</em>}' reference.
@@ -111,20 +111,6 @@ public class EGenericTypeImpl extends EObjectImpl implements EGenericType {
 	@Override
 	protected EClass eStaticClass() {
 		return EcorePackage.Literals.EGENERIC_TYPE;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EList<EGenericType> getETypeArguments() {
-		if (eTypeArguments == null) {
-			eTypeArguments = new EObjectContainmentEList.Resolving<EGenericType>(
-					EGenericType.class, this,
-					EcorePackage.EGENERIC_TYPE__ETYPE_ARGUMENTS);
-		}
-		return eTypeArguments;
 	}
 
 	/**
@@ -214,6 +200,20 @@ public class EGenericTypeImpl extends EObjectImpl implements EGenericType {
 			eNotify(new ENotificationImpl(this, Notification.SET,
 					EcorePackage.EGENERIC_TYPE__EUPPER_BOUND, newEUpperBound,
 					newEUpperBound));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<EGenericType> getETypeArguments() {
+		if (eTypeArguments == null) {
+			eTypeArguments = new EObjectContainmentEList.Resolving<EGenericType>(
+					EGenericType.class, this,
+					EcorePackage.EGENERIC_TYPE__ETYPE_ARGUMENTS);
+		}
+		return eTypeArguments;
 	}
 
 	/**
@@ -411,11 +411,11 @@ public class EGenericTypeImpl extends EObjectImpl implements EGenericType {
 	public NotificationChain eInverseRemove(InternalEObject otherEnd,
 			int featureID, NotificationChain msgs) {
 		switch (featureID) {
+		case EcorePackage.EGENERIC_TYPE__EUPPER_BOUND:
+			return basicSetEUpperBound(null, msgs);
 		case EcorePackage.EGENERIC_TYPE__ETYPE_ARGUMENTS:
 			return ((InternalEList<?>) getETypeArguments()).basicRemove(
 					otherEnd, msgs);
-		case EcorePackage.EGENERIC_TYPE__EUPPER_BOUND:
-			return basicSetEUpperBound(null, msgs);
 		case EcorePackage.EGENERIC_TYPE__ELOWER_BOUND:
 			return basicSetELowerBound(null, msgs);
 		}
@@ -430,12 +430,12 @@ public class EGenericTypeImpl extends EObjectImpl implements EGenericType {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-		case EcorePackage.EGENERIC_TYPE__ETYPE_ARGUMENTS:
-			return getETypeArguments();
 		case EcorePackage.EGENERIC_TYPE__EUPPER_BOUND:
 			if (resolve)
 				return getEUpperBound();
 			return basicGetEUpperBound();
+		case EcorePackage.EGENERIC_TYPE__ETYPE_ARGUMENTS:
+			return getETypeArguments();
 		case EcorePackage.EGENERIC_TYPE__ECLASSIFIER:
 			if (resolve)
 				return getEClassifier();
@@ -461,13 +461,13 @@ public class EGenericTypeImpl extends EObjectImpl implements EGenericType {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
+		case EcorePackage.EGENERIC_TYPE__EUPPER_BOUND:
+			setEUpperBound((EGenericType) newValue);
+			return;
 		case EcorePackage.EGENERIC_TYPE__ETYPE_ARGUMENTS:
 			getETypeArguments().clear();
 			getETypeArguments().addAll(
 					(Collection<? extends EGenericType>) newValue);
-			return;
-		case EcorePackage.EGENERIC_TYPE__EUPPER_BOUND:
-			setEUpperBound((EGenericType) newValue);
 			return;
 		case EcorePackage.EGENERIC_TYPE__ECLASSIFIER:
 			setEClassifier((EClassifier) newValue);
@@ -490,11 +490,11 @@ public class EGenericTypeImpl extends EObjectImpl implements EGenericType {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-		case EcorePackage.EGENERIC_TYPE__ETYPE_ARGUMENTS:
-			getETypeArguments().clear();
-			return;
 		case EcorePackage.EGENERIC_TYPE__EUPPER_BOUND:
 			setEUpperBound((EGenericType) null);
+			return;
+		case EcorePackage.EGENERIC_TYPE__ETYPE_ARGUMENTS:
+			getETypeArguments().clear();
 			return;
 		case EcorePackage.EGENERIC_TYPE__ECLASSIFIER:
 			setEClassifier((EClassifier) null);
@@ -517,10 +517,10 @@ public class EGenericTypeImpl extends EObjectImpl implements EGenericType {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-		case EcorePackage.EGENERIC_TYPE__ETYPE_ARGUMENTS:
-			return eTypeArguments != null && !eTypeArguments.isEmpty();
 		case EcorePackage.EGENERIC_TYPE__EUPPER_BOUND:
 			return eUpperBound != null;
+		case EcorePackage.EGENERIC_TYPE__ETYPE_ARGUMENTS:
+			return eTypeArguments != null && !eTypeArguments.isEmpty();
 		case EcorePackage.EGENERIC_TYPE__ECLASSIFIER:
 			return eClassifier != null;
 		case EcorePackage.EGENERIC_TYPE__ETYPE_PARAMETER:

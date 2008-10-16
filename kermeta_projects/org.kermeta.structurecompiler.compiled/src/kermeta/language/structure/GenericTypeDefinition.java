@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: GenericTypeDefinition.java,v 1.4 2008-10-08 14:37:44 cfaucher Exp $
+ * $Id: GenericTypeDefinition.java,v 1.5 2008-10-16 13:17:59 cfaucher Exp $
  */
 package kermeta.language.structure;
 

@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ModelTypeImpl.java,v 1.4 2008-10-08 14:37:29 cfaucher Exp $
+ * $Id: ModelTypeImpl.java,v 1.5 2008-10-16 13:17:41 cfaucher Exp $
  */
 package kermeta.language.structure.impl;
 
@@ -263,8 +263,8 @@ public class ModelTypeImpl extends TypeImpl implements ModelType {
 
 		result = this.getName();
 
-		java.lang.Boolean idIfCond_408 = false;
-		idIfCond_408 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+		java.lang.Boolean idIfCond_392 = false;
+		idIfCond_392 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 				.isInstanceOf(
 						org.kermeta.compil.runtime.helper.language.ObjectUtil
 								.container(elem),
@@ -273,23 +273,23 @@ public class ModelTypeImpl extends TypeImpl implements ModelType {
 								.getMetaClass(
 										"kermeta.language.structure.NamedElement"));
 
-		if (idIfCond_408) {
+		if (idIfCond_392) {
 
 			elem = (kermeta.language.structure.NamedElement) org.kermeta.compil.runtime.helper.language.ObjectUtil
 					.container(elem);
-			java.lang.Boolean idLoopCond_409 = false;
-			while (!idLoopCond_409) {
-				idLoopCond_409 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+			java.lang.Boolean idLoopCond_393 = false;
+			while (!idLoopCond_393) {
+				idLoopCond_393 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 						.equals(elem, null);
-				if (idLoopCond_409) {
+				if (idLoopCond_393) {
 				} else {
 
 					result = kermeta.standard.helper.StringWrapper.plus(
 							kermeta.standard.helper.StringWrapper.plus(elem
 									.getName(), "::"), result);
 
-					java.lang.Boolean idIfCond_410 = false;
-					idIfCond_410 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+					java.lang.Boolean idIfCond_394 = false;
+					idIfCond_394 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 							.isInstanceOf(
 									org.kermeta.compil.runtime.helper.language.ObjectUtil
 											.container(elem),
@@ -298,7 +298,7 @@ public class ModelTypeImpl extends TypeImpl implements ModelType {
 											.getMetaClass(
 													"kermeta.language.structure.NamedElement"));
 
-					if (idIfCond_410) {
+					if (idIfCond_394) {
 
 						elem = (kermeta.language.structure.NamedElement) org.kermeta.compil.runtime.helper.language.ObjectUtil
 								.container(elem);

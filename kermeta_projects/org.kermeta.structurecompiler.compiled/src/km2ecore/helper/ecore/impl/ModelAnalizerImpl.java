@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ModelAnalizerImpl.java,v 1.4 2008-10-08 14:38:02 cfaucher Exp $
+ * $Id: ModelAnalizerImpl.java,v 1.5 2008-10-16 13:18:18 cfaucher Exp $
  */
 package km2ecore.helper.ecore.impl;
 
@@ -71,8 +71,8 @@ public class ModelAnalizerImpl extends ObjectImpl implements ModelAnalizer {
 
 		result = false;
 
-		java.lang.Boolean idIfCond_1029 = false;
-		idIfCond_1029 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+		java.lang.Boolean idIfCond_29 = false;
+		idIfCond_29 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 				.equals(
 						super_class,
 						org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
@@ -80,7 +80,7 @@ public class ModelAnalizerImpl extends ObjectImpl implements ModelAnalizer {
 										extended_class.getEGenericSuperTypes())
 								.first().getEClassifier());
 
-		if (idIfCond_1029) {
+		if (idIfCond_29) {
 
 			result = true;
 		}

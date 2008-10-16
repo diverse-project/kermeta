@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: MultiplicityElement.java,v 1.4 2008-10-08 14:37:43 cfaucher Exp $
+ * $Id: MultiplicityElement.java,v 1.5 2008-10-16 13:17:59 cfaucher Exp $
  */
 package kermeta.language.structure;
 
@@ -112,7 +112,7 @@ public interface MultiplicityElement extends TypedElement {
 
 	/**
 	 * Returns the value of the '<em><b>Is Unique</b></em>' attribute.
-	 * The default value is <code>"false"</code>.
+	 * The default value is <code>"true"</code>.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Is Unique</em>' attribute isn't clear,
@@ -122,7 +122,7 @@ public interface MultiplicityElement extends TypedElement {
 	 * @return the value of the '<em>Is Unique</em>' attribute.
 	 * @see #setIsUnique(Boolean)
 	 * @see kermeta.language.structure.StructurePackage#getMultiplicityElement_IsUnique()
-	 * @model default="false" dataType="kermeta.standard.JavaBoolean"
+	 * @model default="true" dataType="kermeta.standard.JavaBoolean"
 	 *        annotation="kermeta documentation='Boolean stating whether duplicated elements are allowed'"
 	 * @generated
 	 */
@@ -142,7 +142,7 @@ public interface MultiplicityElement extends TypedElement {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @model kind="operation" dataType="kermeta.standard.JavaString"
-	 *        annotation="kermeta documentation='/**\r\n\t * Get the RecopyInValueTypes reference of an Operation\r\n\t \052/'"
+	 *        annotation="kermeta documentation='/**\n\t * Get the RecopyInValueTypes reference of an Operation\n\t \052/'"
 	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='\njava.lang.String result = null;\n\n\tresult = this.getUniqueTagValue(\"RecopyInValueTypes\");\n\nreturn result;\n'"
 	 * @generated
 	 */
@@ -152,7 +152,7 @@ public interface MultiplicityElement extends TypedElement {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @model kind="operation" dataType="kermeta.standard.JavaString"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='\njava.lang.String result = null;\n\n\tresult = this.getName();\n\n\tjava.lang.Boolean idIfCond_329 = false;\n\tidIfCond_329 = org.kermeta.compil.runtime.helper.language.ObjectUtil.isNotEqual(this.getEMFRenameAs(), \"\");\n\n\tif( idIfCond_329 ) {\n\n\tresult = this.getEMFRenameAs();\n}\n\n\nreturn result;\n'"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='\njava.lang.String result = null;\n\n\tresult = this.getName();\n\n\tjava.lang.Boolean idIfCond_386 = false;\n\tidIfCond_386 = org.kermeta.compil.runtime.helper.language.ObjectUtil.isNotEqual(this.getEMFRenameAs(), \"\");\n\n\tif( idIfCond_386 ) {\n\n\tresult = this.getEMFRenameAs();\n}\n\n\nreturn result;\n'"
 	 * @generated
 	 */
 	String getFinalName();
@@ -161,7 +161,7 @@ public interface MultiplicityElement extends TypedElement {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @model kind="operation" dataType="kermeta.standard.JavaString"
-	 *        annotation="kermeta documentation='/**\r\n\t * Get the EMFRenameAs reference of an Operation\r\n\t \052/'"
+	 *        annotation="kermeta documentation='/**\n\t * Get the EMFRenameAs reference of an Operation\n\t \052/'"
 	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='\njava.lang.String result = null;\n\n\tresult = this.getUniqueTagValue(\"EMF_renameAs\");\n\nreturn result;\n'"
 	 * @generated
 	 */
@@ -172,7 +172,7 @@ public interface MultiplicityElement extends TypedElement {
 	 * <!-- end-user-doc -->
 	 * @model dataType="kermeta.standard.JavaString"
 	 *        annotation="kermeta documentation='/** Generation of the String representing the end of a method: return of the result value \052/'"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='\njava.lang.String result = null;\n\n\tresult = \"\\nreturn \";\n\n\tjava.lang.Boolean idIfCond_330 = false;\n\tidIfCond_330 = kermeta.standard.helper.IntegerWrapper.equals(this.getUpper(), 1);\n\n\tif( idIfCond_330 ) {\n\n\tresult = kermeta.standard.helper.StringWrapper.plus(result, \"result\");\n}\n else {\n\n\tresult = kermeta.standard.helper.StringWrapper.plus(kermeta.standard.helper.StringWrapper.plus(result, context.getCOLLECTION_UTIL_CLASS()), \".convertAsEList(result)\");\n}\n\n\n\tresult = kermeta.standard.helper.StringWrapper.plus(result, \";\\n\");\n\nreturn result;\n'"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='\njava.lang.String result = null;\n\n\tresult = \"\\nreturn \";\n\n\tjava.lang.Boolean idIfCond_387 = false;\n\tidIfCond_387 = kermeta.standard.helper.IntegerWrapper.equals(this.getUpper(), 1);\n\n\tif( idIfCond_387 ) {\n\n\tresult = kermeta.standard.helper.StringWrapper.plus(result, \"result\");\n}\n else {\n\n\tresult = kermeta.standard.helper.StringWrapper.plus(kermeta.standard.helper.StringWrapper.plus(result, context.getCOLLECTION_UTIL_CLASS()), \".convertAsEList(result)\");\n}\n\n\n\tresult = kermeta.standard.helper.StringWrapper.plus(result, \";\\n\");\n\nreturn result;\n'"
 	 * @generated
 	 */
 	String ppReturnResult(KM2EcoreContext context);

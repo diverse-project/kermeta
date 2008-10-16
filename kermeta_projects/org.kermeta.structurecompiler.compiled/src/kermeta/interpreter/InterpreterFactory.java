@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: InterpreterFactory.java,v 1.4 2008-10-08 14:37:45 cfaucher Exp $
+ * $Id: InterpreterFactory.java,v 1.5 2008-10-16 13:18:03 cfaucher Exp $
  */
 package kermeta.interpreter;
 

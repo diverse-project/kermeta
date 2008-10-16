@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: CommonPackage.java,v 1.4 2008-10-08 14:38:08 cfaucher Exp $
+ * $Id: CommonPackage.java,v 1.5 2008-10-16 13:18:26 cfaucher Exp $
  */
 package km2ecore.common;
 
@@ -124,15 +124,6 @@ public interface CommonPackage extends EPackage {
 	 * @ordered
 	 */
 	int JAVA_KEY_WORD_LIST__OID = StructurePackage.OBJECT__OID;
-
-	/**
-	 * The feature id for the '<em><b>Container</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int JAVA_KEY_WORD_LIST__CONTAINER = StructurePackage.OBJECT__CONTAINER;
 
 	/**
 	 * The feature id for the '<em><b>Keywords</b></em>' containment reference.

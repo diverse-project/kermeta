@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: AssignmentImpl.java,v 1.5 2008-10-09 08:50:26 cfaucher Exp $
+ * $Id: AssignmentImpl.java,v 1.6 2008-10-16 13:17:52 cfaucher Exp $
  */
 package kermeta.language.behavior.impl;
 
@@ -290,10 +290,10 @@ public class AssignmentImpl extends ExpressionImpl implements Assignment
     
       java.lang.String ppCast = "";
     
-      java.lang.Boolean idIfCond_671 = false;
-      idIfCond_671 = this.getIsCast();
+      java.lang.Boolean idIfCond_630 = false;
+      idIfCond_630 = this.getIsCast();
     
-      if( idIfCond_671 ) {
+      if( idIfCond_630 ) {
     
       ppCast = kermeta.standard.helper.StringWrapper.plus(kermeta.standard.helper.StringWrapper.plus("(", this.getTarget().getStaticType().createBehaviorJava(context)), ") ");
     }
@@ -303,10 +303,10 @@ public class AssignmentImpl extends ExpressionImpl implements Assignment
     
       java.lang.String right = this.getValue().createBehaviorJava(context);
     
-      java.lang.Boolean idIfCond_672 = false;
-      idIfCond_672 = org.kermeta.compil.runtime.helper.language.ObjectUtil.isInstanceOf(this.getValue(), org.kermeta.compil.runtime.ExecutionContext.getInstance().getMetaClass("kermeta.language.behavior.LambdaExpression"));
+      java.lang.Boolean idIfCond_631 = false;
+      idIfCond_631 = org.kermeta.compil.runtime.helper.language.ObjectUtil.isInstanceOf(this.getValue(), org.kermeta.compil.runtime.ExecutionContext.getInstance().getMetaClass("kermeta.language.behavior.LambdaExpression"));
     
-      if( idIfCond_672 ) {
+      if( idIfCond_631 ) {
     
       org.kermeta.compil.runtime.helper.io.StdIOUtil.getInstance().errorln("Please contact the Kermeta development team if you are in this case: createBehaviorJava Assignment");
     
@@ -314,10 +314,10 @@ public class AssignmentImpl extends ExpressionImpl implements Assignment
     }
     
     
-      java.lang.Boolean idIfCond_673 = false;
-      idIfCond_673 = this.getTarget().isCallFeatureAsStaticProperty();
+      java.lang.Boolean idIfCond_632 = false;
+      idIfCond_632 = this.getTarget().isCallFeatureAsStaticProperty();
     
-      if( idIfCond_673 ) {
+      if( idIfCond_632 ) {
     
       kermeta.standard.OrderedSet<java.lang.String> tabLeft = kermeta.standard.helper.StringWrapper.split(left, "\\.");
     
@@ -327,30 +327,30 @@ public class AssignmentImpl extends ExpressionImpl implements Assignment
     {
     
       java.lang.Integer i = 0;
-      java.lang.Boolean idLoopCond_674 = false;
-      while( !idLoopCond_674 ) {
-      idLoopCond_674 = kermeta.standard.helper.IntegerWrapper.isGreaterOrEqual(i, tabLeft.size());
-      if ( idLoopCond_674 ) {
+      java.lang.Boolean idLoopCond_633 = false;
+      while( !idLoopCond_633 ) {
+      idLoopCond_633 = kermeta.standard.helper.IntegerWrapper.isGreaterOrEqual(i, tabLeft.size());
+      if ( idLoopCond_633 ) {
       } else {
     
-      java.lang.Boolean idIfCond_675 = false;
-      idIfCond_675 = kermeta.standard.helper.IntegerWrapper.isLower(i, kermeta.standard.helper.IntegerWrapper.minus(tabLeft.size(), 1));
+      java.lang.Boolean idIfCond_634 = false;
+      idIfCond_634 = kermeta.standard.helper.IntegerWrapper.isLower(i, kermeta.standard.helper.IntegerWrapper.minus(tabLeft.size(), 1));
     
-      if( idIfCond_675 ) {
+      if( idIfCond_634 ) {
     
       result = kermeta.standard.helper.StringWrapper.plus(kermeta.standard.helper.StringWrapper.plus(result, tabLeft.elementAt(i)), ".");
     }
      else {
     
-      java.lang.Boolean idIfCond_676 = false;
-      idIfCond_676 = kermeta.standard.helper.IntegerWrapper.equals(i, kermeta.standard.helper.IntegerWrapper.minus(tabLeft.size(), 1));
+      java.lang.Boolean idIfCond_635 = false;
+      idIfCond_635 = kermeta.standard.helper.IntegerWrapper.equals(i, kermeta.standard.helper.IntegerWrapper.minus(tabLeft.size(), 1));
     
-      if( idIfCond_676 ) {
+      if( idIfCond_635 ) {
     
-      java.lang.Boolean idIfCond_677 = false;
-      idIfCond_677 = this.getValue().callsFunctionType();
+      java.lang.Boolean idIfCond_636 = false;
+      idIfCond_636 = this.getValue().callsFunctionType();
     
-      if( idIfCond_677 ) {
+      if( idIfCond_636 ) {
     
       result = kermeta.standard.helper.StringWrapper.plus(kermeta.standard.helper.StringWrapper.plus(kermeta.standard.helper.StringWrapper.plus(kermeta.standard.helper.StringWrapper.plus(kermeta.standard.helper.StringWrapper.plus(kermeta.standard.helper.StringWrapper.plus(right, result), ((kermeta.language.behavior.CallFeature) org.kermeta.compil.runtime.helper.language.ObjectUtil.asType(this.getTarget(), org.kermeta.compil.runtime.ExecutionContext.getInstance().getMetaClass("kermeta.language.behavior.CallFeature"))).printSetAccessor()), "("), ppCast), ((kermeta.language.behavior.CallFeature) org.kermeta.compil.runtime.helper.language.ObjectUtil.asType(this.getValue(), org.kermeta.compil.runtime.ExecutionContext.getInstance().getMetaClass("kermeta.language.behavior.CallFeature"))).getCalledFtResult()), ");");
     }
@@ -372,28 +372,28 @@ public class AssignmentImpl extends ExpressionImpl implements Assignment
     }
      else {
     
-      java.lang.Boolean idIfCond_678 = false;
-      idIfCond_678 = org.kermeta.compil.runtime.helper.language.ObjectUtil.isInstanceOf(this.getValue(), org.kermeta.compil.runtime.ExecutionContext.getInstance().getMetaClass("kermeta.language.behavior.Conditional"));
+      java.lang.Boolean idIfCond_637 = false;
+      idIfCond_637 = org.kermeta.compil.runtime.helper.language.ObjectUtil.isInstanceOf(this.getValue(), org.kermeta.compil.runtime.ExecutionContext.getInstance().getMetaClass("kermeta.language.behavior.Conditional"));
     
-      if( idIfCond_678 ) {
+      if( idIfCond_637 ) {
     
       result = right;
     }
      else {
     
-      java.lang.Boolean idIfCond_679 = false;
-      idIfCond_679 = kermeta.standard.helper.StringWrapper.contains(right, context.getRETURN_EXPRESSION_TO_REPLACE());
+      java.lang.Boolean idIfCond_638 = false;
+      idIfCond_638 = kermeta.standard.helper.StringWrapper.contains(right, context.getRETURN_EXPRESSION_TO_REPLACE());
     
-      if( idIfCond_679 ) {
+      if( idIfCond_638 ) {
     
       result = kermeta.standard.helper.StringWrapper.replace(right, context.getRETURN_EXPRESSION_TO_REPLACE(), kermeta.standard.helper.StringWrapper.plus(kermeta.standard.helper.StringWrapper.plus(left, " = "), ppCast));
     }
      else {
     
-      java.lang.Boolean idIfCond_680 = false;
-      idIfCond_680 = kermeta.standard.helper.BooleanWrapper.and(kermeta.standard.helper.BooleanWrapper.or(org.kermeta.compil.runtime.helper.language.ObjectUtil.isInstanceOf(this.getTarget(), org.kermeta.compil.runtime.ExecutionContext.getInstance().getMetaClass("kermeta.language.behavior.CallVariable")), org.kermeta.compil.runtime.helper.language.ObjectUtil.isInstanceOf(this.getTarget(), org.kermeta.compil.runtime.ExecutionContext.getInstance().getMetaClass("kermeta.language.behavior.CallResult"))), kermeta.standard.helper.BooleanWrapper.or(this.getValue().callsFunctionType(), this.getValue().isFunctionTypeVariable()));
+      java.lang.Boolean idIfCond_639 = false;
+      idIfCond_639 = kermeta.standard.helper.BooleanWrapper.and(kermeta.standard.helper.BooleanWrapper.or(org.kermeta.compil.runtime.helper.language.ObjectUtil.isInstanceOf(this.getTarget(), org.kermeta.compil.runtime.ExecutionContext.getInstance().getMetaClass("kermeta.language.behavior.CallVariable")), org.kermeta.compil.runtime.helper.language.ObjectUtil.isInstanceOf(this.getTarget(), org.kermeta.compil.runtime.ExecutionContext.getInstance().getMetaClass("kermeta.language.behavior.CallResult"))), kermeta.standard.helper.BooleanWrapper.or(this.getValue().callsFunctionType(), this.getValue().isFunctionTypeVariable()));
     
-      if( idIfCond_680 ) {
+      if( idIfCond_639 ) {
     
       result = right;
     }

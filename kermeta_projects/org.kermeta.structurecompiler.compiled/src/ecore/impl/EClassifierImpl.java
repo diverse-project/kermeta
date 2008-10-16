@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: EClassifierImpl.java,v 1.5 2008-10-08 14:37:30 cfaucher Exp $
+ * $Id: EClassifierImpl.java,v 1.6 2008-10-16 13:17:42 cfaucher Exp $
  */
 package ecore.impl;
 
@@ -24,7 +24,6 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
-import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.InternalEList;
 
 /**
@@ -164,45 +163,6 @@ public abstract class EClassifierImpl extends ENamedElementImpl implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetEPackage(EPackage newEPackage,
-			NotificationChain msgs) {
-		msgs = eBasicSetContainer((InternalEObject) newEPackage,
-				EcorePackage.ECLASSIFIER__EPACKAGE, msgs);
-		return msgs;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setEPackage(EPackage newEPackage) {
-		if (newEPackage != eInternalContainer()
-				|| (eContainerFeatureID != EcorePackage.ECLASSIFIER__EPACKAGE && newEPackage != null)) {
-			if (EcoreUtil.isAncestor(this, newEPackage))
-				throw new IllegalArgumentException(
-						"Recursive containment not allowed for " + toString());
-			NotificationChain msgs = null;
-			if (eInternalContainer() != null)
-				msgs = eBasicRemoveFromContainer(msgs);
-			if (newEPackage != null)
-				msgs = ((InternalEObject) newEPackage).eInverseAdd(this,
-						EcorePackage.EPACKAGE__ECLASSIFIERS, EPackage.class,
-						msgs);
-			msgs = basicSetEPackage(newEPackage, msgs);
-			if (msgs != null)
-				msgs.dispatch();
-		} else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET,
-					EcorePackage.ECLASSIFIER__EPACKAGE, newEPackage,
-					newEPackage));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EList<ETypeParameter> getETypeParameters() {
 		if (eTypeParameters == null) {
 			eTypeParameters = new EObjectContainmentEList.Resolving<ETypeParameter>(
@@ -297,7 +257,8 @@ public abstract class EClassifierImpl extends ENamedElementImpl implements
 		case EcorePackage.ECLASSIFIER__EPACKAGE:
 			if (eInternalContainer() != null)
 				msgs = eBasicRemoveFromContainer(msgs);
-			return basicSetEPackage((EPackage) otherEnd, msgs);
+			return eBasicSetContainer(otherEnd,
+					EcorePackage.ECLASSIFIER__EPACKAGE, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
@@ -312,7 +273,8 @@ public abstract class EClassifierImpl extends ENamedElementImpl implements
 			int featureID, NotificationChain msgs) {
 		switch (featureID) {
 		case EcorePackage.ECLASSIFIER__EPACKAGE:
-			return basicSetEPackage(null, msgs);
+			return eBasicSetContainer(null, EcorePackage.ECLASSIFIER__EPACKAGE,
+					msgs);
 		case EcorePackage.ECLASSIFIER__ETYPE_PARAMETERS:
 			return ((InternalEList<?>) getETypeParameters()).basicRemove(
 					otherEnd, msgs);
@@ -370,9 +332,6 @@ public abstract class EClassifierImpl extends ENamedElementImpl implements
 		case EcorePackage.ECLASSIFIER__INSTANCE_CLASS_NAME:
 			setInstanceClassName((String) newValue);
 			return;
-		case EcorePackage.ECLASSIFIER__EPACKAGE:
-			setEPackage((EPackage) newValue);
-			return;
 		case EcorePackage.ECLASSIFIER__ETYPE_PARAMETERS:
 			getETypeParameters().clear();
 			getETypeParameters().addAll(
@@ -395,9 +354,6 @@ public abstract class EClassifierImpl extends ENamedElementImpl implements
 		switch (featureID) {
 		case EcorePackage.ECLASSIFIER__INSTANCE_CLASS_NAME:
 			setInstanceClassName(INSTANCE_CLASS_NAME_EDEFAULT);
-			return;
-		case EcorePackage.ECLASSIFIER__EPACKAGE:
-			setEPackage((EPackage) null);
 			return;
 		case EcorePackage.ECLASSIFIER__ETYPE_PARAMETERS:
 			getETypeParameters().clear();

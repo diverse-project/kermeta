@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: StringLiteralImpl.java,v 1.4 2008-10-08 14:37:39 cfaucher Exp $
+ * $Id: StringLiteralImpl.java,v 1.5 2008-10-16 13:17:53 cfaucher Exp $
  */
 package kermeta.language.behavior.impl;
 
@@ -110,10 +110,10 @@ public class StringLiteralImpl extends LiteralImpl implements StringLiteral
     
       result = this.getValue();
     
-      java.lang.Boolean idIfCond_701 = false;
-      idIfCond_701 = kermeta.standard.helper.StringWrapper.equals(result, ".");
+      java.lang.Boolean idIfCond_663 = false;
+      idIfCond_663 = kermeta.standard.helper.StringWrapper.equals(result, ".");
     
-      if( idIfCond_701 ) {
+      if( idIfCond_663 ) {
     
       result = "\".\"";
     }

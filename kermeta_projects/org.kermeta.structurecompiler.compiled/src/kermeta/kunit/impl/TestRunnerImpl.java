@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: TestRunnerImpl.java,v 1.5 2008-10-09 08:50:26 cfaucher Exp $
+ * $Id: TestRunnerImpl.java,v 1.6 2008-10-16 13:17:29 cfaucher Exp $
  */
 package kermeta.kunit.impl;
 
@@ -169,16 +169,18 @@ public class TestRunnerImpl extends ObjectImpl implements TestRunner {
 	 */
 	public void printTestResult() {
 
-		org.kermeta.compil.runtime.helper.io.StdIOUtil.getInstance()
-				.writeln("\n---------------------------------------------  TEST RESULTS-----------------------------------------------\n");
+		org.kermeta.compil.runtime.helper.io.StdIOUtil
+				.getInstance()
+				.writeln(
+						"\n---------------------------------------------  TEST RESULTS-----------------------------------------------\n");
 
-		java.lang.Boolean idIfCond_993 = false;
-		idIfCond_993 = kermeta.standard.helper.BooleanWrapper
+		java.lang.Boolean idIfCond_1038 = false;
+		idIfCond_1038 = kermeta.standard.helper.BooleanWrapper
 				.not(org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
 						.<kermeta.kunit.Failure> convertAsOrderedSet(
 								this.getLog().getFailures()).empty());
 
-		if (idIfCond_993) {
+		if (idIfCond_1038) {
 
 			org.kermeta.compil.runtime.helper.io.StdIOUtil.getInstance()
 					.writeln("\nFailures: ");
@@ -187,21 +189,23 @@ public class TestRunnerImpl extends ObjectImpl implements TestRunner {
 
 			{
 
-				kermeta.standard.Iterator<kermeta.kunit.Failure> it_ft225 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
+				kermeta.standard.Iterator<kermeta.kunit.Failure> it_ft236 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
 						.<kermeta.kunit.Failure> convertAsOrderedSet(
 								this.getLog().getFailures()).iterator();
-				java.lang.Boolean idLoopCond_994 = false;
-				while (!idLoopCond_994) {
-					idLoopCond_994 = it_ft225.isOff();
-					if (idLoopCond_994) {
+				java.lang.Boolean idLoopCond_1039 = false;
+				while (!idLoopCond_1039) {
+					idLoopCond_1039 = it_ft236.isOff();
+					if (idLoopCond_1039) {
 					} else {
 
 						//BIle:func
-						kermeta.kunit.Failure f_lbdExp225 = it_ft225.next();
+						kermeta.kunit.Failure f_lbdExp236 = it_ft236.next();
 
-						org.kermeta.compil.runtime.helper.io.StdIOUtil.getInstance()
-								.writeln(kermeta.standard.helper.StringWrapper
-										.plus("\n   ", f_lbdExp225.toString()));
+						org.kermeta.compil.runtime.helper.io.StdIOUtil
+								.getInstance().writeln(
+										kermeta.standard.helper.StringWrapper
+												.plus("\n   ", f_lbdExp236
+														.toString()));
 						//EIle:func
 
 					}
@@ -212,13 +216,13 @@ public class TestRunnerImpl extends ObjectImpl implements TestRunner {
 
 		}
 
-		java.lang.Boolean idIfCond_995 = false;
-		idIfCond_995 = kermeta.standard.helper.BooleanWrapper
+		java.lang.Boolean idIfCond_1040 = false;
+		idIfCond_1040 = kermeta.standard.helper.BooleanWrapper
 				.not(org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
 						.<kermeta.kunit.Error> convertAsOrderedSet(
 								this.getLog().getErrors()).empty());
 
-		if (idIfCond_995) {
+		if (idIfCond_1040) {
 
 			org.kermeta.compil.runtime.helper.io.StdIOUtil.getInstance()
 					.writeln("\nErrors: ");
@@ -227,21 +231,23 @@ public class TestRunnerImpl extends ObjectImpl implements TestRunner {
 
 			{
 
-				kermeta.standard.Iterator<kermeta.kunit.Error> it_ft226 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
+				kermeta.standard.Iterator<kermeta.kunit.Error> it_ft237 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
 						.<kermeta.kunit.Error> convertAsOrderedSet(
 								this.getLog().getErrors()).iterator();
-				java.lang.Boolean idLoopCond_996 = false;
-				while (!idLoopCond_996) {
-					idLoopCond_996 = it_ft226.isOff();
-					if (idLoopCond_996) {
+				java.lang.Boolean idLoopCond_1041 = false;
+				while (!idLoopCond_1041) {
+					idLoopCond_1041 = it_ft237.isOff();
+					if (idLoopCond_1041) {
 					} else {
 
 						//BIle:func
-						kermeta.kunit.Error e_lbdExp226 = it_ft226.next();
+						kermeta.kunit.Error e_lbdExp237 = it_ft237.next();
 
-						org.kermeta.compil.runtime.helper.io.StdIOUtil.getInstance()
-								.writeln(kermeta.standard.helper.StringWrapper
-										.plus("\n   ", e_lbdExp226.toString()));
+						org.kermeta.compil.runtime.helper.io.StdIOUtil
+								.getInstance().writeln(
+										kermeta.standard.helper.StringWrapper
+												.plus("\n   ", e_lbdExp237
+														.toString()));
 						//EIle:func
 
 					}
@@ -252,13 +258,13 @@ public class TestRunnerImpl extends ObjectImpl implements TestRunner {
 
 		}
 
-		java.lang.Boolean idIfCond_997 = false;
-		idIfCond_997 = kermeta.standard.helper.BooleanWrapper
+		java.lang.Boolean idIfCond_1042 = false;
+		idIfCond_1042 = kermeta.standard.helper.BooleanWrapper
 				.not(org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
 						.<kermeta.kunit.Error> convertAsOrderedSet(
 								this.getLog().getHarnessErrors()).empty());
 
-		if (idIfCond_997) {
+		if (idIfCond_1042) {
 
 			org.kermeta.compil.runtime.helper.io.StdIOUtil.getInstance()
 					.writeln("\nErrors from setUp or tearDown : ");
@@ -267,21 +273,23 @@ public class TestRunnerImpl extends ObjectImpl implements TestRunner {
 
 			{
 
-				kermeta.standard.Iterator<kermeta.kunit.Error> it_ft227 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
+				kermeta.standard.Iterator<kermeta.kunit.Error> it_ft238 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
 						.<kermeta.kunit.Error> convertAsOrderedSet(
 								this.getLog().getHarnessErrors()).iterator();
-				java.lang.Boolean idLoopCond_998 = false;
-				while (!idLoopCond_998) {
-					idLoopCond_998 = it_ft227.isOff();
-					if (idLoopCond_998) {
+				java.lang.Boolean idLoopCond_1043 = false;
+				while (!idLoopCond_1043) {
+					idLoopCond_1043 = it_ft238.isOff();
+					if (idLoopCond_1043) {
 					} else {
 
 						//BIle:func
-						kermeta.kunit.Error e_lbdExp227 = it_ft227.next();
+						kermeta.kunit.Error e_lbdExp238 = it_ft238.next();
 
-						org.kermeta.compil.runtime.helper.io.StdIOUtil.getInstance()
-								.writeln(kermeta.standard.helper.StringWrapper
-										.plus("\n   ", e_lbdExp227.toString()));
+						org.kermeta.compil.runtime.helper.io.StdIOUtil
+								.getInstance().writeln(
+										kermeta.standard.helper.StringWrapper
+												.plus("\n   ", e_lbdExp238
+														.toString()));
 						//EIle:func
 
 					}
@@ -292,50 +300,61 @@ public class TestRunnerImpl extends ObjectImpl implements TestRunner {
 
 		}
 
-		org.kermeta.compil.runtime.helper.io.StdIOUtil.getInstance().writeln("\n Summary: ");
+		org.kermeta.compil.runtime.helper.io.StdIOUtil.getInstance().writeln(
+				"\n Summary: ");
 
-		org.kermeta.compil.runtime.helper.io.StdIOUtil.getInstance()
-				.writeln(kermeta.standard.helper.StringWrapper.plus(
+		org.kermeta.compil.runtime.helper.io.StdIOUtil.getInstance().writeln(
+				kermeta.standard.helper.StringWrapper.plus(
 						"   Number of launched tests : ",
 						kermeta.standard.helper.IntegerWrapper.toString(this
 								.getLog().getRuntests())));
 
-		org.kermeta.compil.runtime.helper.io.StdIOUtil.getInstance()
-				.writeln(kermeta.standard.helper.StringWrapper
-						.plus(
-								"   Number of failures : ",
-								kermeta.standard.helper.IntegerWrapper
-										.toString(org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
-												.<kermeta.kunit.Failure> convertAsOrderedSet(
-														this.getLog()
-																.getFailures())
-												.size())));
+		org.kermeta.compil.runtime.helper.io.StdIOUtil
+				.getInstance()
+				.writeln(
+						kermeta.standard.helper.StringWrapper
+								.plus(
+										"   Number of failures : ",
+										kermeta.standard.helper.IntegerWrapper
+												.toString(org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
+														.<kermeta.kunit.Failure> convertAsOrderedSet(
+																this
+																		.getLog()
+																		.getFailures())
+														.size())));
 
-		org.kermeta.compil.runtime.helper.io.StdIOUtil.getInstance()
-				.writeln(kermeta.standard.helper.StringWrapper
-						.plus(
-								"   Number of errors : ",
-								kermeta.standard.helper.IntegerWrapper
-										.toString(org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
-												.<kermeta.kunit.Error> convertAsOrderedSet(
-														this.getLog()
-																.getErrors())
-												.size())));
+		org.kermeta.compil.runtime.helper.io.StdIOUtil
+				.getInstance()
+				.writeln(
+						kermeta.standard.helper.StringWrapper
+								.plus(
+										"   Number of errors : ",
+										kermeta.standard.helper.IntegerWrapper
+												.toString(org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
+														.<kermeta.kunit.Error> convertAsOrderedSet(
+																this
+																		.getLog()
+																		.getErrors())
+														.size())));
 
-		org.kermeta.compil.runtime.helper.io.StdIOUtil.getInstance()
-				.writeln(kermeta.standard.helper.StringWrapper
-						.plus(
-								"   Number of errors in setUp or tearDown: ",
-								kermeta.standard.helper.IntegerWrapper
-										.toString(org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
-												.<kermeta.kunit.Error> convertAsOrderedSet(
-														this
-																.getLog()
-																.getHarnessErrors())
-												.size())));
+		org.kermeta.compil.runtime.helper.io.StdIOUtil
+				.getInstance()
+				.writeln(
+						kermeta.standard.helper.StringWrapper
+								.plus(
+										"   Number of errors in setUp or tearDown: ",
+										kermeta.standard.helper.IntegerWrapper
+												.toString(org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
+														.<kermeta.kunit.Error> convertAsOrderedSet(
+																this
+																		.getLog()
+																		.getHarnessErrors())
+														.size())));
 
-		org.kermeta.compil.runtime.helper.io.StdIOUtil.getInstance()
-				.writeln("\n-------------------------------------------------------------------------------------------------------------------------------\n");
+		org.kermeta.compil.runtime.helper.io.StdIOUtil
+				.getInstance()
+				.writeln(
+						"\n-------------------------------------------------------------------------------------------------------------------------------\n");
 
 	}
 

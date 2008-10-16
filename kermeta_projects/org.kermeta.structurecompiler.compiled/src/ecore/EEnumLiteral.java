@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: EEnumLiteral.java,v 1.5 2008-10-08 14:37:50 cfaucher Exp $
+ * $Id: EEnumLiteral.java,v 1.6 2008-10-16 13:18:10 cfaucher Exp $
  */
 package ecore;
 
@@ -38,24 +38,13 @@ public interface EEnumLiteral extends ENamedElement {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>EEnum</em>' container reference.
-	 * @see #setEEnum(EEnum)
 	 * @see ecore.EcorePackage#getEEnumLiteral_EEnum()
 	 * @see ecore.EEnum#getELiterals
-	 * @model opposite="eLiterals"
+	 * @model opposite="eLiterals" changeable="false"
 	 *        annotation="kermeta ecore.isTransient='true'"
 	 * @generated
 	 */
 	EEnum getEEnum();
-
-	/**
-	 * Sets the value of the '{@link ecore.EEnumLiteral#getEEnum <em>EEnum</em>}' container reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>EEnum</em>' container reference.
-	 * @see #getEEnum()
-	 * @generated
-	 */
-	void setEEnum(EEnum value);
 
 	/**
 	 * Returns the value of the '<em><b>Value</b></em>' attribute.

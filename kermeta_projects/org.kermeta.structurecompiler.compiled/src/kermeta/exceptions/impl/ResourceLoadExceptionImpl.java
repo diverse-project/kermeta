@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ResourceLoadExceptionImpl.java,v 1.4 2008-10-08 14:37:20 cfaucher Exp $
+ * $Id: ResourceLoadExceptionImpl.java,v 1.5 2008-10-16 13:17:27 cfaucher Exp $
  */
 package kermeta.exceptions.impl;
 

@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: SimkPackage.java,v 1.4 2008-10-08 14:37:58 cfaucher Exp $
+ * $Id: SimkPackage.java,v 1.5 2008-10-16 13:18:16 cfaucher Exp $
  */
 package simk;
 
@@ -128,15 +128,6 @@ public interface SimkPackage extends EPackage {
 	int SM_NAMED_ELEMENT__OID = StructurePackage.OBJECT__OID;
 
 	/**
-	 * The feature id for the '<em><b>Container</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SM_NAMED_ELEMENT__CONTAINER = StructurePackage.OBJECT__CONTAINER;
-
-	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -219,15 +210,6 @@ public interface SimkPackage extends EPackage {
 	int SIMK_MODEL__OID = SM_NAMED_ELEMENT__OID;
 
 	/**
-	 * The feature id for the '<em><b>Container</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SIMK_MODEL__CONTAINER = SM_NAMED_ELEMENT__CONTAINER;
-
-	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -264,115 +246,6 @@ public interface SimkPackage extends EPackage {
 	int SIMK_MODEL_FEATURE_COUNT = SM_NAMED_ELEMENT_FEATURE_COUNT + 2;
 
 	/**
-	 * The meta object id for the '{@link simk.impl.SMClassImpl <em>SM Class</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see simk.impl.SMClassImpl
-	 * @see simk.impl.SimkPackageImpl#getSMClass()
-	 * @generated
-	 */
-	int SM_CLASS = 1;
-
-	/**
-	 * The feature id for the '<em><b>File</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SM_CLASS__FILE = SM_NAMED_ELEMENT__FILE;
-
-	/**
-	 * The feature id for the '<em><b>Tag</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SM_CLASS__TAG = SM_NAMED_ELEMENT__TAG;
-
-	/**
-	 * The feature id for the '<em><b>File Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SM_CLASS__FILE_NAME = SM_NAMED_ELEMENT__FILE_NAME;
-
-	/**
-	 * The feature id for the '<em><b>Line Number</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SM_CLASS__LINE_NUMBER = SM_NAMED_ELEMENT__LINE_NUMBER;
-
-	/**
-	 * The feature id for the '<em><b>Owned Tags</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SM_CLASS__OWNED_TAGS = SM_NAMED_ELEMENT__OWNED_TAGS;
-
-	/**
-	 * The feature id for the '<em><b>Oid</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SM_CLASS__OID = SM_NAMED_ELEMENT__OID;
-
-	/**
-	 * The feature id for the '<em><b>Container</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SM_CLASS__CONTAINER = SM_NAMED_ELEMENT__CONTAINER;
-
-	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SM_CLASS__NAME = SM_NAMED_ELEMENT__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Context</b></em>' container reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SM_CLASS__CONTEXT = SM_NAMED_ELEMENT_FEATURE_COUNT + 0;
-
-	/**
-	 * The feature id for the '<em><b>Usages</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SM_CLASS__USAGES = SM_NAMED_ELEMENT_FEATURE_COUNT + 1;
-
-	/**
-	 * The number of structural features of the '<em>SM Class</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SM_CLASS_FEATURE_COUNT = SM_NAMED_ELEMENT_FEATURE_COUNT + 2;
-
-	/**
 	 * The meta object id for the '{@link simk.impl.SMMethodImpl <em>SM Method</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -380,7 +253,7 @@ public interface SimkPackage extends EPackage {
 	 * @see simk.impl.SimkPackageImpl#getSMMethod()
 	 * @generated
 	 */
-	int SM_METHOD = 2;
+	int SM_METHOD = 1;
 
 	/**
 	 * The feature id for the '<em><b>File</b></em>' reference.
@@ -435,15 +308,6 @@ public interface SimkPackage extends EPackage {
 	 * @ordered
 	 */
 	int SM_METHOD__OID = SM_NAMED_ELEMENT__OID;
-
-	/**
-	 * The feature id for the '<em><b>Container</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SM_METHOD__CONTAINER = SM_NAMED_ELEMENT__CONTAINER;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -536,22 +400,22 @@ public interface SimkPackage extends EPackage {
 	int SM_METHOD__SM_RETURN = SM_NAMED_ELEMENT_FEATURE_COUNT + 8;
 
 	/**
-	 * The feature id for the '<em><b>Usages</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SM_METHOD__USAGES = SM_NAMED_ELEMENT_FEATURE_COUNT + 9;
-
-	/**
 	 * The feature id for the '<em><b>SM Context</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int SM_METHOD__SM_CONTEXT = SM_NAMED_ELEMENT_FEATURE_COUNT + 10;
+	int SM_METHOD__SM_CONTEXT = SM_NAMED_ELEMENT_FEATURE_COUNT + 9;
+
+	/**
+	 * The feature id for the '<em><b>Usages</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SM_METHOD__USAGES = SM_NAMED_ELEMENT_FEATURE_COUNT + 10;
 
 	/**
 	 * The feature id for the '<em><b>Access</b></em>' attribute.
@@ -579,7 +443,7 @@ public interface SimkPackage extends EPackage {
 	 * @see simk.impl.SimkPackageImpl#getSMContext()
 	 * @generated
 	 */
-	int SM_CONTEXT = 3;
+	int SM_CONTEXT = 2;
 
 	/**
 	 * The feature id for the '<em><b>File</b></em>' reference.
@@ -636,15 +500,6 @@ public interface SimkPackage extends EPackage {
 	int SM_CONTEXT__OID = StructurePackage.OBJECT__OID;
 
 	/**
-	 * The feature id for the '<em><b>Container</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SM_CONTEXT__CONTAINER = StructurePackage.OBJECT__CONTAINER;
-
-	/**
 	 * The feature id for the '<em><b>SM Class</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -679,6 +534,106 @@ public interface SimkPackage extends EPackage {
 	 * @ordered
 	 */
 	int SM_CONTEXT_FEATURE_COUNT = StructurePackage.OBJECT_FEATURE_COUNT + 3;
+
+	/**
+	 * The meta object id for the '{@link simk.impl.SMClassImpl <em>SM Class</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see simk.impl.SMClassImpl
+	 * @see simk.impl.SimkPackageImpl#getSMClass()
+	 * @generated
+	 */
+	int SM_CLASS = 3;
+
+	/**
+	 * The feature id for the '<em><b>File</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SM_CLASS__FILE = SM_NAMED_ELEMENT__FILE;
+
+	/**
+	 * The feature id for the '<em><b>Tag</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SM_CLASS__TAG = SM_NAMED_ELEMENT__TAG;
+
+	/**
+	 * The feature id for the '<em><b>File Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SM_CLASS__FILE_NAME = SM_NAMED_ELEMENT__FILE_NAME;
+
+	/**
+	 * The feature id for the '<em><b>Line Number</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SM_CLASS__LINE_NUMBER = SM_NAMED_ELEMENT__LINE_NUMBER;
+
+	/**
+	 * The feature id for the '<em><b>Owned Tags</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SM_CLASS__OWNED_TAGS = SM_NAMED_ELEMENT__OWNED_TAGS;
+
+	/**
+	 * The feature id for the '<em><b>Oid</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SM_CLASS__OID = SM_NAMED_ELEMENT__OID;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SM_CLASS__NAME = SM_NAMED_ELEMENT__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Context</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SM_CLASS__CONTEXT = SM_NAMED_ELEMENT_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Usages</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SM_CLASS__USAGES = SM_NAMED_ELEMENT_FEATURE_COUNT + 1;
+
+	/**
+	 * The number of structural features of the '<em>SM Class</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SM_CLASS_FEATURE_COUNT = SM_NAMED_ELEMENT_FEATURE_COUNT + 2;
 
 	/**
 	 * The meta object id for the '{@link simk.impl.SMParameterImpl <em>SM Parameter</em>}' class.
@@ -743,15 +698,6 @@ public interface SimkPackage extends EPackage {
 	 * @ordered
 	 */
 	int SM_PARAMETER__OID = SM_NAMED_ELEMENT__OID;
-
-	/**
-	 * The feature id for the '<em><b>Container</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SM_PARAMETER__CONTAINER = SM_NAMED_ELEMENT__CONTAINER;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -845,15 +791,6 @@ public interface SimkPackage extends EPackage {
 	int SM_TYPED_ELEMENT__OID = StructurePackage.OBJECT__OID;
 
 	/**
-	 * The feature id for the '<em><b>Container</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SM_TYPED_ELEMENT__CONTAINER = StructurePackage.OBJECT__CONTAINER;
-
-	/**
 	 * The feature id for the '<em><b>Type</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -936,15 +873,6 @@ public interface SimkPackage extends EPackage {
 	int SM_RETURN__OID = SM_TYPED_ELEMENT__OID;
 
 	/**
-	 * The feature id for the '<em><b>Container</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SM_RETURN__CONTAINER = SM_TYPED_ELEMENT__CONTAINER;
-
-	/**
 	 * The feature id for the '<em><b>Type</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1013,38 +941,6 @@ public interface SimkPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getSIMKModel_SMMethods();
-
-	/**
-	 * Returns the meta object for class '{@link simk.SMClass <em>SM Class</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>SM Class</em>'.
-	 * @see simk.SMClass
-	 * @generated
-	 */
-	EClass getSMClass();
-
-	/**
-	 * Returns the meta object for the container reference '{@link simk.SMClass#getContext <em>Context</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the container reference '<em>Context</em>'.
-	 * @see simk.SMClass#getContext()
-	 * @see #getSMClass()
-	 * @generated
-	 */
-	EReference getSMClass_Context();
-
-	/**
-	 * Returns the meta object for the attribute '{@link simk.SMClass#getUsages <em>Usages</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Usages</em>'.
-	 * @see simk.SMClass#getUsages()
-	 * @see #getSMClass()
-	 * @generated
-	 */
-	EAttribute getSMClass_Usages();
 
 	/**
 	 * Returns the meta object for class '{@link simk.SMMethod <em>SM Method</em>}'.
@@ -1156,17 +1052,6 @@ public interface SimkPackage extends EPackage {
 	EReference getSMMethod_SMReturn();
 
 	/**
-	 * Returns the meta object for the attribute '{@link simk.SMMethod#getUsages <em>Usages</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Usages</em>'.
-	 * @see simk.SMMethod#getUsages()
-	 * @see #getSMMethod()
-	 * @generated
-	 */
-	EAttribute getSMMethod_Usages();
-
-	/**
 	 * Returns the meta object for the reference '{@link simk.SMMethod#getSMContext <em>SM Context</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1176,6 +1061,17 @@ public interface SimkPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getSMMethod_SMContext();
+
+	/**
+	 * Returns the meta object for the attribute '{@link simk.SMMethod#getUsages <em>Usages</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Usages</em>'.
+	 * @see simk.SMMethod#getUsages()
+	 * @see #getSMMethod()
+	 * @generated
+	 */
+	EAttribute getSMMethod_Usages();
 
 	/**
 	 * Returns the meta object for the attribute '{@link simk.SMMethod#getAccess <em>Access</em>}'.
@@ -1230,6 +1126,38 @@ public interface SimkPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getSMContext_FinalPackageQName();
+
+	/**
+	 * Returns the meta object for class '{@link simk.SMClass <em>SM Class</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>SM Class</em>'.
+	 * @see simk.SMClass
+	 * @generated
+	 */
+	EClass getSMClass();
+
+	/**
+	 * Returns the meta object for the container reference '{@link simk.SMClass#getContext <em>Context</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the container reference '<em>Context</em>'.
+	 * @see simk.SMClass#getContext()
+	 * @see #getSMClass()
+	 * @generated
+	 */
+	EReference getSMClass_Context();
+
+	/**
+	 * Returns the meta object for the attribute '{@link simk.SMClass#getUsages <em>Usages</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Usages</em>'.
+	 * @see simk.SMClass#getUsages()
+	 * @see #getSMClass()
+	 * @generated
+	 */
+	EAttribute getSMClass_Usages();
 
 	/**
 	 * Returns the meta object for class '{@link simk.SMNamedElement <em>SM Named Element</em>}'.
@@ -1363,32 +1291,6 @@ public interface SimkPackage extends EPackage {
 		EReference SIMK_MODEL__SM_METHODS = eINSTANCE.getSIMKModel_SMMethods();
 
 		/**
-		 * The meta object literal for the '{@link simk.impl.SMClassImpl <em>SM Class</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see simk.impl.SMClassImpl
-		 * @see simk.impl.SimkPackageImpl#getSMClass()
-		 * @generated
-		 */
-		EClass SM_CLASS = eINSTANCE.getSMClass();
-
-		/**
-		 * The meta object literal for the '<em><b>Context</b></em>' container reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference SM_CLASS__CONTEXT = eINSTANCE.getSMClass_Context();
-
-		/**
-		 * The meta object literal for the '<em><b>Usages</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute SM_CLASS__USAGES = eINSTANCE.getSMClass_Usages();
-
-		/**
 		 * The meta object literal for the '{@link simk.impl.SMMethodImpl <em>SM Method</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -1476,20 +1378,20 @@ public interface SimkPackage extends EPackage {
 		EReference SM_METHOD__SM_RETURN = eINSTANCE.getSMMethod_SMReturn();
 
 		/**
-		 * The meta object literal for the '<em><b>Usages</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute SM_METHOD__USAGES = eINSTANCE.getSMMethod_Usages();
-
-		/**
 		 * The meta object literal for the '<em><b>SM Context</b></em>' reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
 		EReference SM_METHOD__SM_CONTEXT = eINSTANCE.getSMMethod_SMContext();
+
+		/**
+		 * The meta object literal for the '<em><b>Usages</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute SM_METHOD__USAGES = eINSTANCE.getSMMethod_Usages();
 
 		/**
 		 * The meta object literal for the '<em><b>Access</b></em>' attribute feature.
@@ -1533,6 +1435,32 @@ public interface SimkPackage extends EPackage {
 		 */
 		EAttribute SM_CONTEXT__FINAL_PACKAGE_QNAME = eINSTANCE
 				.getSMContext_FinalPackageQName();
+
+		/**
+		 * The meta object literal for the '{@link simk.impl.SMClassImpl <em>SM Class</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see simk.impl.SMClassImpl
+		 * @see simk.impl.SimkPackageImpl#getSMClass()
+		 * @generated
+		 */
+		EClass SM_CLASS = eINSTANCE.getSMClass();
+
+		/**
+		 * The meta object literal for the '<em><b>Context</b></em>' container reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference SM_CLASS__CONTEXT = eINSTANCE.getSMClass_Context();
+
+		/**
+		 * The meta object literal for the '<em><b>Usages</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute SM_CLASS__USAGES = eINSTANCE.getSMClass_Usages();
 
 		/**
 		 * The meta object literal for the '{@link simk.impl.SMNamedElementImpl <em>SM Named Element</em>}' class.

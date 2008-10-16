@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: Void.java,v 1.4 2008-10-08 14:37:38 cfaucher Exp $
+ * $Id: Void.java,v 1.5 2008-10-16 13:17:50 cfaucher Exp $
  */
 package kermeta.standard;
 

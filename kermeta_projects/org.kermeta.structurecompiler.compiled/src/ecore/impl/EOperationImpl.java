@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: EOperationImpl.java,v 1.5 2008-10-08 14:37:31 cfaucher Exp $
+ * $Id: EOperationImpl.java,v 1.6 2008-10-16 13:17:43 cfaucher Exp $
  */
 package ecore.impl;
 
@@ -15,7 +15,6 @@ import ecore.EcorePackage;
 
 import java.util.Collection;
 
-import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 
 import org.eclipse.emf.common.util.EList;
@@ -23,12 +22,9 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
-import org.eclipse.emf.ecore.impl.ENotificationImpl;
-
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
-import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.InternalEList;
 
 /**
@@ -135,45 +131,6 @@ public class EOperationImpl extends ETypedElementImpl implements EOperation {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetEContainingClass(
-			ecore.EClass newEContainingClass, NotificationChain msgs) {
-		msgs = eBasicSetContainer((InternalEObject) newEContainingClass,
-				EcorePackage.EOPERATION__ECONTAINING_CLASS, msgs);
-		return msgs;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setEContainingClass(ecore.EClass newEContainingClass) {
-		if (newEContainingClass != eInternalContainer()
-				|| (eContainerFeatureID != EcorePackage.EOPERATION__ECONTAINING_CLASS && newEContainingClass != null)) {
-			if (EcoreUtil.isAncestor(this, newEContainingClass))
-				throw new IllegalArgumentException(
-						"Recursive containment not allowed for " + toString());
-			NotificationChain msgs = null;
-			if (eInternalContainer() != null)
-				msgs = eBasicRemoveFromContainer(msgs);
-			if (newEContainingClass != null)
-				msgs = ((InternalEObject) newEContainingClass).eInverseAdd(
-						this, EcorePackage.ECLASS__EOPERATIONS,
-						ecore.EClass.class, msgs);
-			msgs = basicSetEContainingClass(newEContainingClass, msgs);
-			if (msgs != null)
-				msgs.dispatch();
-		} else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET,
-					EcorePackage.EOPERATION__ECONTAINING_CLASS,
-					newEContainingClass, newEContainingClass));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EList<EGenericType> getEGenericExceptions() {
 		if (eGenericExceptions == null) {
 			eGenericExceptions = new EObjectContainmentEList.Resolving<EGenericType>(
@@ -239,7 +196,8 @@ public class EOperationImpl extends ETypedElementImpl implements EOperation {
 		case EcorePackage.EOPERATION__ECONTAINING_CLASS:
 			if (eInternalContainer() != null)
 				msgs = eBasicRemoveFromContainer(msgs);
-			return basicSetEContainingClass((ecore.EClass) otherEnd, msgs);
+			return eBasicSetContainer(otherEnd,
+					EcorePackage.EOPERATION__ECONTAINING_CLASS, msgs);
 		case EcorePackage.EOPERATION__EPARAMETERS:
 			return ((InternalEList<InternalEObject>) (InternalEList<?>) getEParameters())
 					.basicAdd(otherEnd, msgs);
@@ -257,7 +215,8 @@ public class EOperationImpl extends ETypedElementImpl implements EOperation {
 			int featureID, NotificationChain msgs) {
 		switch (featureID) {
 		case EcorePackage.EOPERATION__ECONTAINING_CLASS:
-			return basicSetEContainingClass(null, msgs);
+			return eBasicSetContainer(null,
+					EcorePackage.EOPERATION__ECONTAINING_CLASS, msgs);
 		case EcorePackage.EOPERATION__EGENERIC_EXCEPTIONS:
 			return ((InternalEList<?>) getEGenericExceptions()).basicRemove(
 					otherEnd, msgs);
@@ -320,9 +279,6 @@ public class EOperationImpl extends ETypedElementImpl implements EOperation {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-		case EcorePackage.EOPERATION__ECONTAINING_CLASS:
-			setEContainingClass((ecore.EClass) newValue);
-			return;
 		case EcorePackage.EOPERATION__EGENERIC_EXCEPTIONS:
 			getEGenericExceptions().clear();
 			getEGenericExceptions().addAll(
@@ -355,9 +311,6 @@ public class EOperationImpl extends ETypedElementImpl implements EOperation {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-		case EcorePackage.EOPERATION__ECONTAINING_CLASS:
-			setEContainingClass((ecore.EClass) null);
-			return;
 		case EcorePackage.EOPERATION__EGENERIC_EXCEPTIONS:
 			getEGenericExceptions().clear();
 			return;

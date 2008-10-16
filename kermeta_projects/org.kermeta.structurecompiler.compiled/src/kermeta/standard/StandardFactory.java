@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: StandardFactory.java,v 1.4 2008-10-08 14:37:38 cfaucher Exp $
+ * $Id: StandardFactory.java,v 1.5 2008-10-16 13:17:50 cfaucher Exp $
  */
 package kermeta.standard;
 
@@ -34,6 +34,24 @@ public interface StandardFactory extends EFactory {
 	 * @generated
 	 */
 	UnknownJavaObject createUnknownJavaObject();
+
+	/**
+	 * Returns a new object of class '<em>Void</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Void</em>'.
+	 * @generated
+	 */
+	kermeta.standard.Void createVoid();
+
+	/**
+	 * Returns a new object of class '<em>Not Comparable Exception</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Not Comparable Exception</em>'.
+	 * @generated
+	 */
+	NotComparableException createNotComparableException();
 
 	/**
 	 * Returns a new object of class '<em>Set</em>'.
@@ -79,24 +97,6 @@ public interface StandardFactory extends EFactory {
 	 * @generated
 	 */
 	<G> Iterator<G> createIterator();
-
-	/**
-	 * Returns a new object of class '<em>Void</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Void</em>'.
-	 * @generated
-	 */
-	kermeta.standard.Void createVoid();
-
-	/**
-	 * Returns a new object of class '<em>Not Comparable Exception</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Not Comparable Exception</em>'.
-	 * @generated
-	 */
-	NotComparableException createNotComparableException();
 
 	/**
 	 * Returns the package supported by this factory.

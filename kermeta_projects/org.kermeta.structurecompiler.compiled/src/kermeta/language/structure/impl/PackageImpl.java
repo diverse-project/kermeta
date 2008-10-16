@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: PackageImpl.java,v 1.5 2008-10-09 08:50:25 cfaucher Exp $
+ * $Id: PackageImpl.java,v 1.6 2008-10-16 13:17:38 cfaucher Exp $
  */
 package kermeta.language.structure.impl;
 
@@ -10,8 +10,8 @@ import ecore.EPackage;
 
 import java.util.Collection;
 
-import kermeta.language.structure.NamedElement;
 import kermeta.language.structure.StructurePackage;
+import kermeta.language.structure.Traceability;
 import kermeta.language.structure.TypeDefinition;
 import kermeta.language.structure.TypeDefinitionContainer;
 
@@ -25,6 +25,7 @@ import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
@@ -41,8 +42,8 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link kermeta.language.structure.impl.PackageImpl#getName <em>Name</em>}</li>
  *   <li>{@link kermeta.language.structure.impl.PackageImpl#getOwnedTypeDefinition <em>Owned Type Definition</em>}</li>
+ *   <li>{@link kermeta.language.structure.impl.PackageImpl#getEcoreModelElement <em>Ecore Model Element</em>}</li>
  *   <li>{@link kermeta.language.structure.impl.PackageImpl#getNestingPackage <em>Nesting Package</em>}</li>
  *   <li>{@link kermeta.language.structure.impl.PackageImpl#getGenModelBasePackage <em>Gen Model Base Package</em>}</li>
  *   <li>{@link kermeta.language.structure.impl.PackageImpl#getNestedPackage <em>Nested Package</em>}</li>
@@ -52,28 +53,8 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *
  * @generated
  */
-public class PackageImpl extends TraceabilityImpl<EPackage> implements
+public class PackageImpl extends NamedElementImpl implements
 		kermeta.language.structure.Package {
-	/**
-	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getName()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final String NAME_EDEFAULT = null;
-
-	/**
-	 * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getName()
-	 * @generated
-	 * @ordered
-	 */
-	protected String name = NAME_EDEFAULT;
-
 	/**
 	 * The cached value of the '{@link #getOwnedTypeDefinition() <em>Owned Type Definition</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
@@ -83,6 +64,16 @@ public class PackageImpl extends TraceabilityImpl<EPackage> implements
 	 * @ordered
 	 */
 	protected EList<TypeDefinition> ownedTypeDefinition;
+
+	/**
+	 * The cached value of the '{@link #getEcoreModelElement() <em>Ecore Model Element</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getEcoreModelElement()
+	 * @generated
+	 * @ordered
+	 */
+	protected EPackage ecoreModelElement;
 
 	/**
 	 * The default value of the '{@link #getGenModelBasePackage() <em>Gen Model Base Package</em>}' attribute.
@@ -158,28 +149,6 @@ public class PackageImpl extends TraceabilityImpl<EPackage> implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public String getName() {
-		return name;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setName(String newName) {
-		String oldName = name;
-		name = newName;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET,
-					StructurePackage.PACKAGE__NAME, oldName, name));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EList<TypeDefinition> getOwnedTypeDefinition() {
 		if (ownedTypeDefinition == null) {
 			ownedTypeDefinition = new EObjectContainmentEList.Resolving<TypeDefinition>(
@@ -187,6 +156,49 @@ public class PackageImpl extends TraceabilityImpl<EPackage> implements
 					StructurePackage.PACKAGE__OWNED_TYPE_DEFINITION);
 		}
 		return ownedTypeDefinition;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EPackage getEcoreModelElement() {
+		if (ecoreModelElement != null
+				&& ((EObject) ecoreModelElement).eIsProxy()) {
+			InternalEObject oldEcoreModelElement = (InternalEObject) ecoreModelElement;
+			ecoreModelElement = (EPackage) eResolveProxy(oldEcoreModelElement);
+			if (ecoreModelElement != oldEcoreModelElement) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE,
+							StructurePackage.PACKAGE__ECORE_MODEL_ELEMENT,
+							oldEcoreModelElement, ecoreModelElement));
+			}
+		}
+		return ecoreModelElement;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EPackage basicGetEcoreModelElement() {
+		return ecoreModelElement;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setEcoreModelElement(EPackage newEcoreModelElement) {
+		EPackage oldEcoreModelElement = ecoreModelElement;
+		ecoreModelElement = newEcoreModelElement;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET,
+					StructurePackage.PACKAGE__ECORE_MODEL_ELEMENT,
+					oldEcoreModelElement, ecoreModelElement));
 	}
 
 	/**
@@ -323,11 +335,11 @@ public class PackageImpl extends TraceabilityImpl<EPackage> implements
 
 		kermeta.language.structure.Package p = this.getNestingPackage();
 
-		java.lang.Boolean idIfCond_174 = false;
-		idIfCond_174 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+		java.lang.Boolean idIfCond_368 = false;
+		idIfCond_368 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 				.isNotEqual(p, null);
 
-		if (idIfCond_174) {
+		if (idIfCond_368) {
 
 			org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
 					.<ecore.EPackage> convertAsOrderedSet(
@@ -339,34 +351,35 @@ public class PackageImpl extends TraceabilityImpl<EPackage> implements
 
 		//BIft:eachOwnedElement
 
-		kermeta.language.structure.Package pack_ft61 = this;
+		kermeta.language.structure.Package pack_ft112 = this;
 
 		//BIft:each
 
 		{
 
-			kermeta.standard.Iterator<kermeta.language.structure.Tag> it_ft62 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
+			kermeta.standard.Iterator<kermeta.language.structure.Tag> it_ft113 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
 					.<kermeta.language.structure.Tag> convertAsOrderedSet(
-							pack_ft61.getOwnedTags()).iterator();
-			java.lang.Boolean idLoopCond_175 = false;
-			while (!idLoopCond_175) {
-				idLoopCond_175 = it_ft62.isOff();
-				if (idLoopCond_175) {
+							pack_ft112.getOwnedTags()).iterator();
+			java.lang.Boolean idLoopCond_369 = false;
+			while (!idLoopCond_369) {
+				idLoopCond_369 = it_ft113.isOff();
+				if (idLoopCond_369) {
 				} else {
 
 					//BIle:func
-					kermeta.language.structure.Tag o_lbdExp62 = it_ft62.next();
+					kermeta.language.structure.Tag o_lbdExp113 = it_ft113
+							.next();
 
 					//BIle:func
-					kermeta.language.structure.Tag cd_lbdExp61 = o_lbdExp62;
+					kermeta.language.structure.Tag cd_lbdExp112 = o_lbdExp113;
 
-					java.lang.Boolean idIfCond_176 = false;
-					idIfCond_176 = kermeta.standard.helper.StringWrapper
-							.equals(cd_lbdExp61.getDeprecated(), "");
+					java.lang.Boolean idIfCond_370 = false;
+					idIfCond_370 = kermeta.standard.helper.StringWrapper
+							.equals(cd_lbdExp112.getDeprecated(), "");
 
-					if (idIfCond_176) {
+					if (idIfCond_370) {
 
-						cd_lbdExp61.applyPass1(context);
+						cd_lbdExp112.applyPass1(context);
 					}
 
 					//EIle:func
@@ -383,29 +396,29 @@ public class PackageImpl extends TraceabilityImpl<EPackage> implements
 
 		{
 
-			kermeta.standard.Iterator<kermeta.language.structure.TypeDefinition> it_ft63 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
+			kermeta.standard.Iterator<kermeta.language.structure.TypeDefinition> it_ft114 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
 					.<kermeta.language.structure.TypeDefinition> convertAsOrderedSet(
-							pack_ft61.getOwnedTypeDefinition()).iterator();
-			java.lang.Boolean idLoopCond_177 = false;
-			while (!idLoopCond_177) {
-				idLoopCond_177 = it_ft63.isOff();
-				if (idLoopCond_177) {
+							pack_ft112.getOwnedTypeDefinition()).iterator();
+			java.lang.Boolean idLoopCond_371 = false;
+			while (!idLoopCond_371) {
+				idLoopCond_371 = it_ft114.isOff();
+				if (idLoopCond_371) {
 				} else {
 
 					//BIle:func
-					kermeta.language.structure.TypeDefinition o_lbdExp63 = it_ft63
+					kermeta.language.structure.TypeDefinition o_lbdExp114 = it_ft114
 							.next();
 
 					//BIle:func
-					kermeta.language.structure.TypeDefinition cd_lbdExp61 = o_lbdExp63;
+					kermeta.language.structure.TypeDefinition cd_lbdExp112 = o_lbdExp114;
 
-					java.lang.Boolean idIfCond_178 = false;
-					idIfCond_178 = kermeta.standard.helper.StringWrapper
-							.equals(cd_lbdExp61.getDeprecated(), "");
+					java.lang.Boolean idIfCond_372 = false;
+					idIfCond_372 = kermeta.standard.helper.StringWrapper
+							.equals(cd_lbdExp112.getDeprecated(), "");
 
-					if (idIfCond_178) {
+					if (idIfCond_372) {
 
-						cd_lbdExp61.applyPass1(context);
+						cd_lbdExp112.applyPass1(context);
 					}
 
 					//EIle:func
@@ -422,29 +435,29 @@ public class PackageImpl extends TraceabilityImpl<EPackage> implements
 
 		{
 
-			kermeta.standard.Iterator<kermeta.language.structure.Package> it_ft64 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
+			kermeta.standard.Iterator<kermeta.language.structure.Package> it_ft115 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
 					.<kermeta.language.structure.Package> convertAsOrderedSet(
-							pack_ft61.getNestedPackage()).iterator();
-			java.lang.Boolean idLoopCond_179 = false;
-			while (!idLoopCond_179) {
-				idLoopCond_179 = it_ft64.isOff();
-				if (idLoopCond_179) {
+							pack_ft112.getNestedPackage()).iterator();
+			java.lang.Boolean idLoopCond_373 = false;
+			while (!idLoopCond_373) {
+				idLoopCond_373 = it_ft115.isOff();
+				if (idLoopCond_373) {
 				} else {
 
 					//BIle:func
-					kermeta.language.structure.Package p_lbdExp64 = it_ft64
+					kermeta.language.structure.Package p_lbdExp115 = it_ft115
 							.next();
 
 					//BIle:func
-					kermeta.language.structure.Package cd_lbdExp61 = p_lbdExp64;
+					kermeta.language.structure.Package cd_lbdExp112 = p_lbdExp115;
 
-					java.lang.Boolean idIfCond_180 = false;
-					idIfCond_180 = kermeta.standard.helper.StringWrapper
-							.equals(cd_lbdExp61.getDeprecated(), "");
+					java.lang.Boolean idIfCond_374 = false;
+					idIfCond_374 = kermeta.standard.helper.StringWrapper
+							.equals(cd_lbdExp112.getDeprecated(), "");
 
-					if (idIfCond_180) {
+					if (idIfCond_374) {
 
-						cd_lbdExp61.applyPass1(context);
+						cd_lbdExp112.applyPass1(context);
 					}
 
 					//EIle:func
@@ -470,8 +483,8 @@ public class PackageImpl extends TraceabilityImpl<EPackage> implements
 
 		ecore.EPackage result = null;
 
-		org.kermeta.compil.runtime.helper.io.StdIOUtil.getInstance()
-				.writeln(kermeta.standard.helper.StringWrapper.plus(
+		org.kermeta.compil.runtime.helper.io.StdIOUtil.getInstance().writeln(
+				kermeta.standard.helper.StringWrapper.plus(
 						kermeta.standard.helper.StringWrapper.plus(
 								" + Package ", this.qualifiedName()),
 						" in progress"));
@@ -484,8 +497,8 @@ public class PackageImpl extends TraceabilityImpl<EPackage> implements
 						.newObject("km2ecore.helper.java.IdentifierHelper"))
 						.getMangledIdentifier(this.getName(), context));
 
-		java.lang.Boolean idIfCond_181 = false;
-		idIfCond_181 = kermeta.standard.helper.BooleanWrapper
+		java.lang.Boolean idIfCond_375 = false;
+		idIfCond_375 = kermeta.standard.helper.BooleanWrapper
 				.and(
 						kermeta.standard.helper.BooleanWrapper
 								.not(org.kermeta.compil.runtime.helper.language.ObjectUtil
@@ -493,7 +506,7 @@ public class PackageImpl extends TraceabilityImpl<EPackage> implements
 						org.kermeta.compil.runtime.helper.language.ObjectUtil
 								.isNotEqual(this.getUri(), ""));
 
-		if (idIfCond_181) {
+		if (idIfCond_375) {
 
 			ecorePackage.setNsURI(kermeta.standard.helper.StringWrapper.plus(
 					this.getUri(), "/kermeta_temp_uri"));
@@ -550,22 +563,22 @@ public class PackageImpl extends TraceabilityImpl<EPackage> implements
 
 		{
 
-			kermeta.standard.Iterator<kermeta.language.structure.Package> it_ft65 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
+			kermeta.standard.Iterator<kermeta.language.structure.Package> it_ft116 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
 					.<kermeta.language.structure.Package> convertAsOrderedSet(
 							this.getNestedPackage()).iterator();
-			java.lang.Boolean idLoopCond_182 = false;
-			while (!idLoopCond_182) {
-				idLoopCond_182 = it_ft65.isOff();
-				if (idLoopCond_182) {
+			java.lang.Boolean idLoopCond_376 = false;
+			while (!idLoopCond_376) {
+				idLoopCond_376 = it_ft116.isOff();
+				if (idLoopCond_376) {
 				} else {
 
 					//BIle:func
-					kermeta.language.structure.Package p_lbdExp65 = it_ft65
+					kermeta.language.structure.Package p_lbdExp116 = it_ft116
 							.next();
 
-					result.add(p_lbdExp65);
+					result.add(p_lbdExp116);
 
-					result.addAll(p_lbdExp65.getAllSubPackages());
+					result.addAll(p_lbdExp116.getAllSubPackages());
 					//EIle:func
 
 				}
@@ -587,28 +600,29 @@ public class PackageImpl extends TraceabilityImpl<EPackage> implements
 
 		//BIft:eachOwnedElement
 
-		kermeta.language.structure.Package pack_ft66 = this;
+		kermeta.language.structure.Package pack_ft117 = this;
 
 		//BIft:each
 
 		{
 
-			kermeta.standard.Iterator<kermeta.language.structure.Tag> it_ft67 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
+			kermeta.standard.Iterator<kermeta.language.structure.Tag> it_ft118 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
 					.<kermeta.language.structure.Tag> convertAsOrderedSet(
-							pack_ft66.getOwnedTags()).iterator();
-			java.lang.Boolean idLoopCond_183 = false;
-			while (!idLoopCond_183) {
-				idLoopCond_183 = it_ft67.isOff();
-				if (idLoopCond_183) {
+							pack_ft117.getOwnedTags()).iterator();
+			java.lang.Boolean idLoopCond_377 = false;
+			while (!idLoopCond_377) {
+				idLoopCond_377 = it_ft118.isOff();
+				if (idLoopCond_377) {
 				} else {
 
 					//BIle:func
-					kermeta.language.structure.Tag o_lbdExp67 = it_ft67.next();
+					kermeta.language.structure.Tag o_lbdExp118 = it_ft118
+							.next();
 
 					//BIle:func
-					kermeta.language.structure.Tag p_lbdExp66 = o_lbdExp67;
+					kermeta.language.structure.Tag p_lbdExp117 = o_lbdExp118;
 
-					p_lbdExp66.applyPass2BehaviorJava(context);
+					p_lbdExp117.applyPass2BehaviorJava(context);
 					//EIle:func
 
 					//EIle:func
@@ -623,23 +637,23 @@ public class PackageImpl extends TraceabilityImpl<EPackage> implements
 
 		{
 
-			kermeta.standard.Iterator<kermeta.language.structure.TypeDefinition> it_ft68 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
+			kermeta.standard.Iterator<kermeta.language.structure.TypeDefinition> it_ft119 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
 					.<kermeta.language.structure.TypeDefinition> convertAsOrderedSet(
-							pack_ft66.getOwnedTypeDefinition()).iterator();
-			java.lang.Boolean idLoopCond_184 = false;
-			while (!idLoopCond_184) {
-				idLoopCond_184 = it_ft68.isOff();
-				if (idLoopCond_184) {
+							pack_ft117.getOwnedTypeDefinition()).iterator();
+			java.lang.Boolean idLoopCond_378 = false;
+			while (!idLoopCond_378) {
+				idLoopCond_378 = it_ft119.isOff();
+				if (idLoopCond_378) {
 				} else {
 
 					//BIle:func
-					kermeta.language.structure.TypeDefinition o_lbdExp68 = it_ft68
+					kermeta.language.structure.TypeDefinition o_lbdExp119 = it_ft119
 							.next();
 
 					//BIle:func
-					kermeta.language.structure.TypeDefinition p_lbdExp66 = o_lbdExp68;
+					kermeta.language.structure.TypeDefinition p_lbdExp117 = o_lbdExp119;
 
-					p_lbdExp66.applyPass2BehaviorJava(context);
+					p_lbdExp117.applyPass2BehaviorJava(context);
 					//EIle:func
 
 					//EIle:func
@@ -654,23 +668,23 @@ public class PackageImpl extends TraceabilityImpl<EPackage> implements
 
 		{
 
-			kermeta.standard.Iterator<kermeta.language.structure.Package> it_ft69 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
+			kermeta.standard.Iterator<kermeta.language.structure.Package> it_ft120 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
 					.<kermeta.language.structure.Package> convertAsOrderedSet(
-							pack_ft66.getNestedPackage()).iterator();
-			java.lang.Boolean idLoopCond_185 = false;
-			while (!idLoopCond_185) {
-				idLoopCond_185 = it_ft69.isOff();
-				if (idLoopCond_185) {
+							pack_ft117.getNestedPackage()).iterator();
+			java.lang.Boolean idLoopCond_379 = false;
+			while (!idLoopCond_379) {
+				idLoopCond_379 = it_ft120.isOff();
+				if (idLoopCond_379) {
 				} else {
 
 					//BIle:func
-					kermeta.language.structure.Package p_lbdExp69 = it_ft69
+					kermeta.language.structure.Package p_lbdExp120 = it_ft120
 							.next();
 
 					//BIle:func
-					kermeta.language.structure.Package p_lbdExp66 = p_lbdExp69;
+					kermeta.language.structure.Package p_lbdExp117 = p_lbdExp120;
 
-					p_lbdExp66.applyPass2BehaviorJava(context);
+					p_lbdExp117.applyPass2BehaviorJava(context);
 					//EIle:func
 
 					//EIle:func
@@ -682,121 +696,6 @@ public class PackageImpl extends TraceabilityImpl<EPackage> implements
 		//EIft:each
 
 		//EIft:eachOwnedElement
-
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public String getGenModelQualifiedName() {
-
-		java.lang.String result = null;
-
-		result = kermeta.standard.helper.StringWrapper.plus(
-				kermeta.standard.helper.StringWrapper.plus(this
-						.getRootPackage().getGenModelBasePackage(), "::"), this
-						.qualifiedName());
-
-		return result;
-
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public String getJavaQualifiedName() {
-
-		java.lang.String result = null;
-
-		result = kermeta.standard.helper.StringWrapper.replace(this
-				.qualifiedName(), "::", ".");
-
-		return result;
-
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public String getGenModelJavaQualifiedName() {
-
-		java.lang.String result = null;
-
-		result = kermeta.standard.helper.StringWrapper.replace(this
-				.getGenModelQualifiedName(), "::", ".");
-
-		return result;
-
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public String qualifiedName() {
-
-		java.lang.String result = null;
-
-		kermeta.language.structure.NamedElement elem = this;
-
-		result = this.getName();
-
-		java.lang.Boolean idIfCond_408 = false;
-		idIfCond_408 = org.kermeta.compil.runtime.helper.language.ObjectUtil
-				.isInstanceOf(
-						org.kermeta.compil.runtime.helper.language.ObjectUtil
-								.container(elem),
-						org.kermeta.compil.runtime.ExecutionContext
-								.getInstance()
-								.getMetaClass(
-										"kermeta.language.structure.NamedElement"));
-
-		if (idIfCond_408) {
-
-			elem = (kermeta.language.structure.NamedElement) org.kermeta.compil.runtime.helper.language.ObjectUtil
-					.container(elem);
-			java.lang.Boolean idLoopCond_409 = false;
-			while (!idLoopCond_409) {
-				idLoopCond_409 = org.kermeta.compil.runtime.helper.language.ObjectUtil
-						.equals(elem, null);
-				if (idLoopCond_409) {
-				} else {
-
-					result = kermeta.standard.helper.StringWrapper.plus(
-							kermeta.standard.helper.StringWrapper.plus(elem
-									.getName(), "::"), result);
-
-					java.lang.Boolean idIfCond_410 = false;
-					idIfCond_410 = org.kermeta.compil.runtime.helper.language.ObjectUtil
-							.isInstanceOf(
-									org.kermeta.compil.runtime.helper.language.ObjectUtil
-											.container(elem),
-									org.kermeta.compil.runtime.ExecutionContext
-											.getInstance()
-											.getMetaClass(
-													"kermeta.language.structure.NamedElement"));
-
-					if (idIfCond_410) {
-
-						elem = (kermeta.language.structure.NamedElement) org.kermeta.compil.runtime.helper.language.ObjectUtil
-								.container(elem);
-					} else {
-
-						elem = null;
-					}
-
-				}
-			}
-		}
-
-		return result;
 
 	}
 
@@ -868,10 +767,12 @@ public class PackageImpl extends TraceabilityImpl<EPackage> implements
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-		case StructurePackage.PACKAGE__NAME:
-			return getName();
 		case StructurePackage.PACKAGE__OWNED_TYPE_DEFINITION:
 			return getOwnedTypeDefinition();
+		case StructurePackage.PACKAGE__ECORE_MODEL_ELEMENT:
+			if (resolve)
+				return getEcoreModelElement();
+			return basicGetEcoreModelElement();
 		case StructurePackage.PACKAGE__NESTING_PACKAGE:
 			if (resolve)
 				return getNestingPackage();
@@ -895,13 +796,13 @@ public class PackageImpl extends TraceabilityImpl<EPackage> implements
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-		case StructurePackage.PACKAGE__NAME:
-			setName((String) newValue);
-			return;
 		case StructurePackage.PACKAGE__OWNED_TYPE_DEFINITION:
 			getOwnedTypeDefinition().clear();
 			getOwnedTypeDefinition().addAll(
 					(Collection<? extends TypeDefinition>) newValue);
+			return;
+		case StructurePackage.PACKAGE__ECORE_MODEL_ELEMENT:
+			setEcoreModelElement((EPackage) newValue);
 			return;
 		case StructurePackage.PACKAGE__NESTING_PACKAGE:
 			setNestingPackage((kermeta.language.structure.Package) newValue);
@@ -930,11 +831,11 @@ public class PackageImpl extends TraceabilityImpl<EPackage> implements
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-		case StructurePackage.PACKAGE__NAME:
-			setName(NAME_EDEFAULT);
-			return;
 		case StructurePackage.PACKAGE__OWNED_TYPE_DEFINITION:
 			getOwnedTypeDefinition().clear();
+			return;
+		case StructurePackage.PACKAGE__ECORE_MODEL_ELEMENT:
+			setEcoreModelElement((EPackage) null);
 			return;
 		case StructurePackage.PACKAGE__NESTING_PACKAGE:
 			setNestingPackage((kermeta.language.structure.Package) null);
@@ -960,12 +861,11 @@ public class PackageImpl extends TraceabilityImpl<EPackage> implements
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-		case StructurePackage.PACKAGE__NAME:
-			return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT
-					.equals(name);
 		case StructurePackage.PACKAGE__OWNED_TYPE_DEFINITION:
 			return ownedTypeDefinition != null
 					&& !ownedTypeDefinition.isEmpty();
+		case StructurePackage.PACKAGE__ECORE_MODEL_ELEMENT:
+			return ecoreModelElement != null;
 		case StructurePackage.PACKAGE__NESTING_PACKAGE:
 			return basicGetNestingPackage() != null;
 		case StructurePackage.PACKAGE__GEN_MODEL_BASE_PACKAGE:
@@ -988,18 +888,18 @@ public class PackageImpl extends TraceabilityImpl<EPackage> implements
 	 */
 	@Override
 	public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass) {
-		if (baseClass == NamedElement.class) {
-			switch (derivedFeatureID) {
-			case StructurePackage.PACKAGE__NAME:
-				return StructurePackage.NAMED_ELEMENT__NAME;
-			default:
-				return -1;
-			}
-		}
 		if (baseClass == TypeDefinitionContainer.class) {
 			switch (derivedFeatureID) {
 			case StructurePackage.PACKAGE__OWNED_TYPE_DEFINITION:
 				return StructurePackage.TYPE_DEFINITION_CONTAINER__OWNED_TYPE_DEFINITION;
+			default:
+				return -1;
+			}
+		}
+		if (baseClass == Traceability.class) {
+			switch (derivedFeatureID) {
+			case StructurePackage.PACKAGE__ECORE_MODEL_ELEMENT:
+				return StructurePackage.TRACEABILITY__ECORE_MODEL_ELEMENT;
 			default:
 				return -1;
 			}
@@ -1014,18 +914,18 @@ public class PackageImpl extends TraceabilityImpl<EPackage> implements
 	 */
 	@Override
 	public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass) {
-		if (baseClass == NamedElement.class) {
-			switch (baseFeatureID) {
-			case StructurePackage.NAMED_ELEMENT__NAME:
-				return StructurePackage.PACKAGE__NAME;
-			default:
-				return -1;
-			}
-		}
 		if (baseClass == TypeDefinitionContainer.class) {
 			switch (baseFeatureID) {
 			case StructurePackage.TYPE_DEFINITION_CONTAINER__OWNED_TYPE_DEFINITION:
 				return StructurePackage.PACKAGE__OWNED_TYPE_DEFINITION;
+			default:
+				return -1;
+			}
+		}
+		if (baseClass == Traceability.class) {
+			switch (baseFeatureID) {
+			case StructurePackage.TRACEABILITY__ECORE_MODEL_ELEMENT:
+				return StructurePackage.PACKAGE__ECORE_MODEL_ELEMENT;
 			default:
 				return -1;
 			}
@@ -1044,9 +944,7 @@ public class PackageImpl extends TraceabilityImpl<EPackage> implements
 			return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (name: ");
-		result.append(name);
-		result.append(", genModelBasePackage: ");
+		result.append(" (genModelBasePackage: ");
 		result.append(genModelBasePackage);
 		result.append(", uri: ");
 		result.append(uri);

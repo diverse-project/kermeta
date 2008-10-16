@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: EcoreFactoryImpl.java,v 1.4 2008-10-08 14:38:02 cfaucher Exp $
+ * $Id: EcoreFactoryImpl.java,v 1.5 2008-10-16 13:18:18 cfaucher Exp $
  */
 package km2ecore.helper.ecore.impl;
 
@@ -63,10 +63,10 @@ public class EcoreFactoryImpl extends EFactoryImpl implements EcoreFactory {
 		switch (eClass.getClassifierID()) {
 		case EcorePackage.EANNOTATION_HELPER:
 			return createEAnnotationHelper();
-		case EcorePackage.ECORE_MODEL_ELEMENT_HELPER:
-			return createEcoreModelElementHelper();
 		case EcorePackage.ENAMED_ELEMENT_HELPER:
 			return createENamedElementHelper();
+		case EcorePackage.ECORE_MODEL_ELEMENT_HELPER:
+			return createEcoreModelElementHelper();
 		case EcorePackage.MODEL_ANALIZER:
 			return createModelAnalizer();
 		default:
@@ -130,9 +130,9 @@ public class EcoreFactoryImpl extends EFactoryImpl implements EcoreFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EcoreModelElementHelper createEcoreModelElementHelper() {
-		EcoreModelElementHelperImpl ecoreModelElementHelper = new EcoreModelElementHelperImpl();
-		return ecoreModelElementHelper;
+	public ENamedElementHelper createENamedElementHelper() {
+		ENamedElementHelperImpl eNamedElementHelper = new ENamedElementHelperImpl();
+		return eNamedElementHelper;
 	}
 
 	/**
@@ -140,9 +140,9 @@ public class EcoreFactoryImpl extends EFactoryImpl implements EcoreFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ENamedElementHelper createENamedElementHelper() {
-		ENamedElementHelperImpl eNamedElementHelper = new ENamedElementHelperImpl();
-		return eNamedElementHelper;
+	public EcoreModelElementHelper createEcoreModelElementHelper() {
+		EcoreModelElementHelperImpl ecoreModelElementHelper = new EcoreModelElementHelperImpl();
+		return ecoreModelElementHelper;
 	}
 
 	/**

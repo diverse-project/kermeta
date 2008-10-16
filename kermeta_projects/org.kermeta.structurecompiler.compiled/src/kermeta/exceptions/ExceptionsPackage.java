@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ExceptionsPackage.java,v 1.4 2008-10-08 14:37:32 cfaucher Exp $
+ * $Id: ExceptionsPackage.java,v 1.5 2008-10-16 13:17:44 cfaucher Exp $
  */
 package kermeta.exceptions;
 
@@ -130,15 +130,6 @@ public interface ExceptionsPackage extends EPackage {
 	int EXCEPTION__OID = StructurePackage.OBJECT__OID;
 
 	/**
-	 * The feature id for the '<em><b>Container</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EXCEPTION__CONTAINER = StructurePackage.OBJECT__CONTAINER;
-
-	/**
 	 * The feature id for the '<em><b>Message</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -237,15 +228,6 @@ public interface ExceptionsPackage extends EPackage {
 	 * @ordered
 	 */
 	int RUNTIME_ERROR__OID = EXCEPTION__OID;
-
-	/**
-	 * The feature id for the '<em><b>Container</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int RUNTIME_ERROR__CONTAINER = EXCEPTION__CONTAINER;
 
 	/**
 	 * The feature id for the '<em><b>Message</b></em>' attribute.
@@ -357,15 +339,6 @@ public interface ExceptionsPackage extends EPackage {
 	int CALL_ON_VOID_TARGET__OID = RUNTIME_ERROR__OID;
 
 	/**
-	 * The feature id for the '<em><b>Container</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CALL_ON_VOID_TARGET__CONTAINER = RUNTIME_ERROR__CONTAINER;
-
-	/**
 	 * The feature id for the '<em><b>Message</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -473,15 +446,6 @@ public interface ExceptionsPackage extends EPackage {
 	 * @ordered
 	 */
 	int TYPE_CAST_ERROR__OID = RUNTIME_ERROR__OID;
-
-	/**
-	 * The feature id for the '<em><b>Container</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TYPE_CAST_ERROR__CONTAINER = RUNTIME_ERROR__CONTAINER;
 
 	/**
 	 * The feature id for the '<em><b>Message</b></em>' attribute.
@@ -593,15 +557,6 @@ public interface ExceptionsPackage extends EPackage {
 	int NOT_IMPLEMENTED_EXCEPTION__OID = RUNTIME_ERROR__OID;
 
 	/**
-	 * The feature id for the '<em><b>Container</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int NOT_IMPLEMENTED_EXCEPTION__CONTAINER = RUNTIME_ERROR__CONTAINER;
-
-	/**
 	 * The feature id for the '<em><b>Message</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -709,15 +664,6 @@ public interface ExceptionsPackage extends EPackage {
 	 * @ordered
 	 */
 	int UPPER_BOUND_REACHED_ERROR__OID = RUNTIME_ERROR__OID;
-
-	/**
-	 * The feature id for the '<em><b>Container</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int UPPER_BOUND_REACHED_ERROR__CONTAINER = RUNTIME_ERROR__CONTAINER;
 
 	/**
 	 * The feature id for the '<em><b>Message</b></em>' attribute.
@@ -829,15 +775,6 @@ public interface ExceptionsPackage extends EPackage {
 	int ABSTRACT_CLASS_INSTANTIATION_ERROR__OID = RUNTIME_ERROR__OID;
 
 	/**
-	 * The feature id for the '<em><b>Container</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ABSTRACT_CLASS_INSTANTIATION_ERROR__CONTAINER = RUNTIME_ERROR__CONTAINER;
-
-	/**
 	 * The feature id for the '<em><b>Message</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -945,15 +882,6 @@ public interface ExceptionsPackage extends EPackage {
 	 * @ordered
 	 */
 	int INCOMPATIBLE_TYPE_ERROR__OID = RUNTIME_ERROR__OID;
-
-	/**
-	 * The feature id for the '<em><b>Container</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int INCOMPATIBLE_TYPE_ERROR__CONTAINER = RUNTIME_ERROR__CONTAINER;
 
 	/**
 	 * The feature id for the '<em><b>Message</b></em>' attribute.
@@ -1065,15 +993,6 @@ public interface ExceptionsPackage extends EPackage {
 	int DIVISION_BY_ZERO__OID = EXCEPTION__OID;
 
 	/**
-	 * The feature id for the '<em><b>Container</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DIVISION_BY_ZERO__CONTAINER = EXCEPTION__CONTAINER;
-
-	/**
 	 * The feature id for the '<em><b>Message</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1172,15 +1091,6 @@ public interface ExceptionsPackage extends EPackage {
 	 * @ordered
 	 */
 	int OVERFLOW_ERROR__OID = EXCEPTION__OID;
-
-	/**
-	 * The feature id for the '<em><b>Container</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int OVERFLOW_ERROR__CONTAINER = EXCEPTION__CONTAINER;
 
 	/**
 	 * The feature id for the '<em><b>Message</b></em>' attribute.
@@ -1283,15 +1193,6 @@ public interface ExceptionsPackage extends EPackage {
 	int VOID_OPERAND_ERROR__OID = EXCEPTION__OID;
 
 	/**
-	 * The feature id for the '<em><b>Container</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int VOID_OPERAND_ERROR__CONTAINER = EXCEPTION__CONTAINER;
-
-	/**
 	 * The feature id for the '<em><b>Message</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1390,15 +1291,6 @@ public interface ExceptionsPackage extends EPackage {
 	 * @ordered
 	 */
 	int STRING_INDEX_OUT_OF_BOUND__OID = EXCEPTION__OID;
-
-	/**
-	 * The feature id for the '<em><b>Container</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int STRING_INDEX_OUT_OF_BOUND__CONTAINER = EXCEPTION__CONTAINER;
 
 	/**
 	 * The feature id for the '<em><b>Message</b></em>' attribute.
@@ -1501,15 +1393,6 @@ public interface ExceptionsPackage extends EPackage {
 	int STRING_FORMAT_EXCEPTION__OID = EXCEPTION__OID;
 
 	/**
-	 * The feature id for the '<em><b>Container</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int STRING_FORMAT_EXCEPTION__CONTAINER = EXCEPTION__CONTAINER;
-
-	/**
 	 * The feature id for the '<em><b>Message</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1608,15 +1491,6 @@ public interface ExceptionsPackage extends EPackage {
 	 * @ordered
 	 */
 	int INDEX_OUT_OF_BOUND__OID = EXCEPTION__OID;
-
-	/**
-	 * The feature id for the '<em><b>Container</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int INDEX_OUT_OF_BOUND__CONTAINER = EXCEPTION__CONTAINER;
 
 	/**
 	 * The feature id for the '<em><b>Message</b></em>' attribute.
@@ -1719,15 +1593,6 @@ public interface ExceptionsPackage extends EPackage {
 	int EMPTY_COLLECTION__OID = EXCEPTION__OID;
 
 	/**
-	 * The feature id for the '<em><b>Container</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EMPTY_COLLECTION__CONTAINER = EXCEPTION__CONTAINER;
-
-	/**
 	 * The feature id for the '<em><b>Message</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1826,15 +1691,6 @@ public interface ExceptionsPackage extends EPackage {
 	 * @ordered
 	 */
 	int ITERATOR_IS_OFF__OID = EXCEPTION__OID;
-
-	/**
-	 * The feature id for the '<em><b>Container</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ITERATOR_IS_OFF__CONTAINER = EXCEPTION__CONTAINER;
 
 	/**
 	 * The feature id for the '<em><b>Message</b></em>' attribute.
@@ -1937,15 +1793,6 @@ public interface ExceptionsPackage extends EPackage {
 	int IO_EXCEPTION__OID = EXCEPTION__OID;
 
 	/**
-	 * The feature id for the '<em><b>Container</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int IO_EXCEPTION__CONTAINER = EXCEPTION__CONTAINER;
-
-	/**
 	 * The feature id for the '<em><b>Message</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2046,15 +1893,6 @@ public interface ExceptionsPackage extends EPackage {
 	int FILE_NOT_FOUND_EXCEPTION__OID = IO_EXCEPTION__OID;
 
 	/**
-	 * The feature id for the '<em><b>Container</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FILE_NOT_FOUND_EXCEPTION__CONTAINER = IO_EXCEPTION__CONTAINER;
-
-	/**
 	 * The feature id for the '<em><b>Message</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2153,15 +1991,6 @@ public interface ExceptionsPackage extends EPackage {
 	 * @ordered
 	 */
 	int CONSTRAINT_VIOLATED_EXCEPTION__OID = EXCEPTION__OID;
-
-	/**
-	 * The feature id for the '<em><b>Container</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CONSTRAINT_VIOLATED_EXCEPTION__CONTAINER = EXCEPTION__CONTAINER;
 
 	/**
 	 * The feature id for the '<em><b>Message</b></em>' attribute.
@@ -2273,15 +2102,6 @@ public interface ExceptionsPackage extends EPackage {
 	int CONSTRAINT_VIOLATED_PRE__OID = CONSTRAINT_VIOLATED_EXCEPTION__OID;
 
 	/**
-	 * The feature id for the '<em><b>Container</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CONSTRAINT_VIOLATED_PRE__CONTAINER = CONSTRAINT_VIOLATED_EXCEPTION__CONTAINER;
-
-	/**
 	 * The feature id for the '<em><b>Message</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2389,15 +2209,6 @@ public interface ExceptionsPackage extends EPackage {
 	 * @ordered
 	 */
 	int CONSTRAINT_VIOLATED_POST__OID = CONSTRAINT_VIOLATED_EXCEPTION__OID;
-
-	/**
-	 * The feature id for the '<em><b>Container</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CONSTRAINT_VIOLATED_POST__CONTAINER = CONSTRAINT_VIOLATED_EXCEPTION__CONTAINER;
 
 	/**
 	 * The feature id for the '<em><b>Message</b></em>' attribute.
@@ -2509,15 +2320,6 @@ public interface ExceptionsPackage extends EPackage {
 	int CONSTRAINT_VIOLATED_INV__OID = CONSTRAINT_VIOLATED_EXCEPTION__OID;
 
 	/**
-	 * The feature id for the '<em><b>Container</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CONSTRAINT_VIOLATED_INV__CONTAINER = CONSTRAINT_VIOLATED_EXCEPTION__CONTAINER;
-
-	/**
 	 * The feature id for the '<em><b>Message</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2627,15 +2429,6 @@ public interface ExceptionsPackage extends EPackage {
 	int RESOURCE_LOAD_EXCEPTION__OID = EXCEPTION__OID;
 
 	/**
-	 * The feature id for the '<em><b>Container</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int RESOURCE_LOAD_EXCEPTION__CONTAINER = EXCEPTION__CONTAINER;
-
-	/**
 	 * The feature id for the '<em><b>Message</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2734,15 +2527,6 @@ public interface ExceptionsPackage extends EPackage {
 	 * @ordered
 	 */
 	int RESOURCE_SAVE_EXCEPTION__OID = EXCEPTION__OID;
-
-	/**
-	 * The feature id for the '<em><b>Container</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int RESOURCE_SAVE_EXCEPTION__CONTAINER = EXCEPTION__CONTAINER;
 
 	/**
 	 * The feature id for the '<em><b>Message</b></em>' attribute.
@@ -2854,15 +2638,6 @@ public interface ExceptionsPackage extends EPackage {
 	int RESOURCE_MIXED_LEVELS_EXCEPTION__OID = RESOURCE_SAVE_EXCEPTION__OID;
 
 	/**
-	 * The feature id for the '<em><b>Container</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int RESOURCE_MIXED_LEVELS_EXCEPTION__CONTAINER = RESOURCE_SAVE_EXCEPTION__CONTAINER;
-
-	/**
 	 * The feature id for the '<em><b>Message</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2972,15 +2747,6 @@ public interface ExceptionsPackage extends EPackage {
 	int RESOURCE_CREATE_EXCEPTION__OID = EXCEPTION__OID;
 
 	/**
-	 * The feature id for the '<em><b>Container</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int RESOURCE_CREATE_EXCEPTION__CONTAINER = EXCEPTION__CONTAINER;
-
-	/**
 	 * The feature id for the '<em><b>Message</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3079,15 +2845,6 @@ public interface ExceptionsPackage extends EPackage {
 	 * @ordered
 	 */
 	int RESOURCE_UNCONFORMITY_EXCEPTION__OID = EXCEPTION__OID;
-
-	/**
-	 * The feature id for the '<em><b>Container</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int RESOURCE_UNCONFORMITY_EXCEPTION__CONTAINER = EXCEPTION__CONTAINER;
 
 	/**
 	 * The feature id for the '<em><b>Message</b></em>' attribute.
@@ -3190,15 +2947,6 @@ public interface ExceptionsPackage extends EPackage {
 	int UNREGISTERED_METAMODEL_EXCEPTION__OID = EXCEPTION__OID;
 
 	/**
-	 * The feature id for the '<em><b>Container</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int UNREGISTERED_METAMODEL_EXCEPTION__CONTAINER = EXCEPTION__CONTAINER;
-
-	/**
 	 * The feature id for the '<em><b>Message</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3297,15 +3045,6 @@ public interface ExceptionsPackage extends EPackage {
 	 * @ordered
 	 */
 	int DYNAMIC_EXPRESSION_EXCEPTION__OID = EXCEPTION__OID;
-
-	/**
-	 * The feature id for the '<em><b>Container</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DYNAMIC_EXPRESSION_EXCEPTION__CONTAINER = EXCEPTION__CONTAINER;
 
 	/**
 	 * The feature id for the '<em><b>Message</b></em>' attribute.

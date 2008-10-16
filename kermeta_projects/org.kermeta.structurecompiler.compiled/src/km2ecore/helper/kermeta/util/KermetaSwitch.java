@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: KermetaSwitch.java,v 1.4 2008-10-08 14:38:02 cfaucher Exp $
+ * $Id: KermetaSwitch.java,v 1.5 2008-10-16 13:18:19 cfaucher Exp $
  */
 package km2ecore.helper.kermeta.util;
 
@@ -84,11 +84,11 @@ public class KermetaSwitch<T> {
 	 */
 	protected T doSwitch(int classifierID, EObject theEObject) {
 		switch (classifierID) {
-		case KermetaPackage.GENERIC_TYPE_DEFINITION_HELPER: {
-			GenericTypeDefinitionHelper genericTypeDefinitionHelper = (GenericTypeDefinitionHelper) theEObject;
-			T result = caseGenericTypeDefinitionHelper(genericTypeDefinitionHelper);
+		case KermetaPackage.COMPILER_HELPER_JAVA: {
+			CompilerHelperJava compilerHelperJava = (CompilerHelperJava) theEObject;
+			T result = caseCompilerHelperJava(compilerHelperJava);
 			if (result == null)
-				result = caseObject(genericTypeDefinitionHelper);
+				result = caseObject(compilerHelperJava);
 			if (result == null)
 				result = defaultCase(theEObject);
 			return result;
@@ -102,11 +102,11 @@ public class KermetaSwitch<T> {
 				result = defaultCase(theEObject);
 			return result;
 		}
-		case KermetaPackage.COMPILER_HELPER_JAVA: {
-			CompilerHelperJava compilerHelperJava = (CompilerHelperJava) theEObject;
-			T result = caseCompilerHelperJava(compilerHelperJava);
+		case KermetaPackage.GENERIC_TYPE_DEFINITION_HELPER: {
+			GenericTypeDefinitionHelper genericTypeDefinitionHelper = (GenericTypeDefinitionHelper) theEObject;
+			T result = caseGenericTypeDefinitionHelper(genericTypeDefinitionHelper);
 			if (result == null)
-				result = caseObject(compilerHelperJava);
+				result = caseObject(genericTypeDefinitionHelper);
 			if (result == null)
 				result = defaultCase(theEObject);
 			return result;
@@ -117,17 +117,17 @@ public class KermetaSwitch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Generic Type Definition Helper</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Compiler Helper Java</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Generic Type Definition Helper</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Compiler Helper Java</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseGenericTypeDefinitionHelper(GenericTypeDefinitionHelper object) {
+	public T caseCompilerHelperJava(CompilerHelperJava object) {
 		return null;
 	}
 
@@ -147,17 +147,17 @@ public class KermetaSwitch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Compiler Helper Java</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Generic Type Definition Helper</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Compiler Helper Java</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Generic Type Definition Helper</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseCompilerHelperJava(CompilerHelperJava object) {
+	public T caseGenericTypeDefinitionHelper(GenericTypeDefinitionHelper object) {
 		return null;
 	}
 

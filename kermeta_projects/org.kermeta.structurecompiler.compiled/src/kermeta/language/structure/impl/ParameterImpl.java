@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ParameterImpl.java,v 1.5 2008-10-09 08:50:25 cfaucher Exp $
+ * $Id: ParameterImpl.java,v 1.6 2008-10-16 13:17:40 cfaucher Exp $
  */
 package kermeta.language.structure.impl;
 
@@ -165,7 +165,7 @@ public class ParameterImpl extends TraceabilityImpl<EParameter> implements
 	 * @generated
 	 * @ordered
 	 */
-	protected static final Boolean IS_UNIQUE_EDEFAULT = Boolean.FALSE;
+	protected static final Boolean IS_UNIQUE_EDEFAULT = Boolean.TRUE;
 
 	/**
 	 * The cached value of the '{@link #getIsUnique() <em>Is Unique</em>}' attribute.
@@ -435,14 +435,14 @@ public class ParameterImpl extends TraceabilityImpl<EParameter> implements
 
 		result = false;
 
-		java.lang.Boolean idIfCond_321 = false;
-		idIfCond_321 = kermeta.standard.helper.BooleanWrapper
+		java.lang.Boolean idIfCond_183 = false;
+		idIfCond_183 = kermeta.standard.helper.BooleanWrapper
 				.and(kermeta.standard.helper.IntegerWrapper.equals(this
 						.getUpper(), 1), kermeta.standard.helper.StringWrapper
 						.equals(this.getType().getTypeQName(),
 								"kermeta::standard::String"));
 
-		if (idIfCond_321) {
+		if (idIfCond_183) {
 
 			result = true;
 		}
@@ -462,10 +462,10 @@ public class ParameterImpl extends TraceabilityImpl<EParameter> implements
 
 		result = false;
 
-		java.lang.Boolean idIfCond_322 = false;
-		idIfCond_322 = this.isFunctionType();
+		java.lang.Boolean idIfCond_184 = false;
+		idIfCond_184 = this.isFunctionType();
 
-		if (idIfCond_322) {
+		if (idIfCond_184) {
 
 			kermeta.language.structure.FunctionType ft = ((kermeta.language.structure.FunctionType) org.kermeta.compil.runtime.helper.language.ObjectUtil
 					.asType(
@@ -475,10 +475,10 @@ public class ParameterImpl extends TraceabilityImpl<EParameter> implements
 									.getMetaClass(
 											"kermeta.language.structure.FunctionType")));
 
-			java.lang.Boolean idIfCond_323 = false;
-			idIfCond_323 = ft.getRight().isBooleanTypeDef(context);
+			java.lang.Boolean idIfCond_185 = false;
+			idIfCond_185 = ft.getRight().isBooleanTypeDef(context);
 
-			if (idIfCond_323) {
+			if (idIfCond_185) {
 
 				result = true;
 			}
@@ -498,8 +498,8 @@ public class ParameterImpl extends TraceabilityImpl<EParameter> implements
 
 		ecore.EParameter ecoreParameter = null;
 
-		java.lang.Boolean idIfCond_324 = false;
-		idIfCond_324 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+		java.lang.Boolean idIfCond_186 = false;
+		idIfCond_186 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 				.isInstanceOf(
 						this.getType(),
 						org.kermeta.compil.runtime.ExecutionContext
@@ -507,7 +507,7 @@ public class ParameterImpl extends TraceabilityImpl<EParameter> implements
 								.getMetaClass(
 										"kermeta.language.structure.FunctionType"));
 
-		if (idIfCond_324) {
+		if (idIfCond_186) {
 
 			ecoreParameter = ((ecore.EParameter) org.kermeta.compil.runtime.helper.language.ClassUtil
 					.newObject("ecore.EParameter"));
@@ -531,6 +531,20 @@ public class ParameterImpl extends TraceabilityImpl<EParameter> implements
 						ecoreParameter);
 
 		this.setEcoreModelElement(ecoreParameter);
+
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void applyPass2(KM2EcoreContext context) {
+
+		this.setLinks(context);
+
+		kermeta.language.structure.helper.ObjectSuper.super_applyPass2(this,
+				context);
 
 	}
 
@@ -570,24 +584,10 @@ public class ParameterImpl extends TraceabilityImpl<EParameter> implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void applyPass2(KM2EcoreContext context) {
-
-		this.setLinks(context);
-
-		kermeta.language.structure.helper.ObjectSuper.super_applyPass2(this,
-				context);
-
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public void setLinks(KM2EcoreContext context) {
 
-		java.lang.Boolean idIfCond_325 = false;
-		idIfCond_325 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+		java.lang.Boolean idIfCond_187 = false;
+		idIfCond_187 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 				.isInstanceOf(
 						this.getType(),
 						org.kermeta.compil.runtime.ExecutionContext
@@ -595,23 +595,25 @@ public class ParameterImpl extends TraceabilityImpl<EParameter> implements
 								.getMetaClass(
 										"kermeta.language.structure.FunctionType"));
 
-		if (idIfCond_325) {
+		if (idIfCond_187) {
 
-			org.kermeta.compil.runtime.helper.io.StdIOUtil.getInstance()
-					.writeln(kermeta.standard.helper.StringWrapper
-							.plus(
-									kermeta.standard.helper.StringWrapper
-											.plus(
-													kermeta.standard.helper.StringWrapper
-															.plus(
-																	"Parameter.setLinks FunctionType: ",
-																	org.kermeta.compil.runtime.helper.language.ObjectUtil
-																			.toString(this
-																					.getType())),
-													" self.ecoreModelElement: "),
-									org.kermeta.compil.runtime.helper.language.ObjectUtil
-											.toString(this
-													.getEcoreModelElement())));
+			org.kermeta.compil.runtime.helper.io.StdIOUtil
+					.getInstance()
+					.writeln(
+							kermeta.standard.helper.StringWrapper
+									.plus(
+											kermeta.standard.helper.StringWrapper
+													.plus(
+															kermeta.standard.helper.StringWrapper
+																	.plus(
+																			"Parameter.setLinks FunctionType: ",
+																			org.kermeta.compil.runtime.helper.language.ObjectUtil
+																					.toString(this
+																							.getType())),
+															" self.ecoreModelElement: "),
+											org.kermeta.compil.runtime.helper.language.ObjectUtil
+													.toString(this
+															.getEcoreModelElement())));
 
 			kermeta.language.structure.FunctionType ft = ((kermeta.language.structure.FunctionType) org.kermeta.compil.runtime.helper.language.ObjectUtil
 					.asType(
@@ -641,12 +643,12 @@ public class ParameterImpl extends TraceabilityImpl<EParameter> implements
 					.newObject("km2ecore.helper.ecore.EAnnotationHelper"))
 					.createEmpty("kermeta.functionType");
 
-			java.lang.Boolean idIfCond_326 = false;
-			idIfCond_326 = kermeta.standard.helper.BooleanWrapper
+			java.lang.Boolean idIfCond_188 = false;
+			idIfCond_188 = kermeta.standard.helper.BooleanWrapper
 					.not(org.kermeta.compil.runtime.helper.language.ObjectUtil
 							.isVoid(ft.getLeft()));
 
-			if (idIfCond_326) {
+			if (idIfCond_188) {
 
 				((km2ecore.helper.ecore.EAnnotationHelper) org.kermeta.compil.runtime.helper.language.ClassUtil
 						.newObject("km2ecore.helper.ecore.EAnnotationHelper"))
@@ -654,12 +656,12 @@ public class ParameterImpl extends TraceabilityImpl<EParameter> implements
 								.getTypeQName());
 			}
 
-			java.lang.Boolean idIfCond_327 = false;
-			idIfCond_327 = kermeta.standard.helper.BooleanWrapper
+			java.lang.Boolean idIfCond_189 = false;
+			idIfCond_189 = kermeta.standard.helper.BooleanWrapper
 					.not(org.kermeta.compil.runtime.helper.language.ObjectUtil
 							.isVoid(ft.getLeft()));
 
-			if (idIfCond_327) {
+			if (idIfCond_189) {
 
 				((km2ecore.helper.ecore.EAnnotationHelper) org.kermeta.compil.runtime.helper.language.ClassUtil
 						.newObject("km2ecore.helper.ecore.EAnnotationHelper"))
@@ -680,52 +682,6 @@ public class ParameterImpl extends TraceabilityImpl<EParameter> implements
 
 			s.setLinks(this, this.getEcoreModelElement(), context);
 		}
-
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void applyPass2BehaviorJava(KM2EcoreContext context) {
-
-		this.setLinks(context);
-
-		//BIft:eachOwnedElement
-
-		//BIft:each
-
-		{
-
-			kermeta.standard.Iterator<kermeta.language.structure.Tag> it_ft118 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
-					.<kermeta.language.structure.Tag> convertAsOrderedSet(
-							this.getOwnedTags()).iterator();
-			java.lang.Boolean idLoopCond_328 = false;
-			while (!idLoopCond_328) {
-				idLoopCond_328 = it_ft118.isOff();
-				if (idLoopCond_328) {
-				} else {
-
-					//BIle:func
-					kermeta.language.structure.Tag o_lbdExp118 = it_ft118
-							.next();
-
-					//BIle:func
-					kermeta.language.structure.Tag p_lbdExp117 = o_lbdExp118;
-
-					p_lbdExp117.applyPass2BehaviorJava(context);
-					//EIle:func
-
-					//EIle:func
-
-				}
-			}
-		}
-
-		//EIft:each
-
-		//EIft:eachOwnedElement
 
 	}
 
@@ -755,6 +711,51 @@ public class ParameterImpl extends TraceabilityImpl<EParameter> implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public void applyPass2BehaviorJava(KM2EcoreContext context) {
+
+		this.setLinks(context);
+
+		//BIft:eachOwnedElement
+
+		//BIft:each
+
+		{
+
+			kermeta.standard.Iterator<kermeta.language.structure.Tag> it_ft61 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
+					.<kermeta.language.structure.Tag> convertAsOrderedSet(
+							this.getOwnedTags()).iterator();
+			java.lang.Boolean idLoopCond_190 = false;
+			while (!idLoopCond_190) {
+				idLoopCond_190 = it_ft61.isOff();
+				if (idLoopCond_190) {
+				} else {
+
+					//BIle:func
+					kermeta.language.structure.Tag o_lbdExp61 = it_ft61.next();
+
+					//BIle:func
+					kermeta.language.structure.Tag p_lbdExp60 = o_lbdExp61;
+
+					p_lbdExp60.applyPass2BehaviorJava(context);
+					//EIle:func
+
+					//EIle:func
+
+				}
+			}
+		}
+
+		//EIft:each
+
+		//EIft:eachOwnedElement
+
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public String getRecopyInValueTypes() {
 
 		java.lang.String result = null;
@@ -776,11 +777,11 @@ public class ParameterImpl extends TraceabilityImpl<EParameter> implements
 
 		result = this.getName();
 
-		java.lang.Boolean idIfCond_329 = false;
-		idIfCond_329 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+		java.lang.Boolean idIfCond_386 = false;
+		idIfCond_386 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 				.isNotEqual(this.getEMFRenameAs(), "");
 
-		if (idIfCond_329) {
+		if (idIfCond_386) {
 
 			result = this.getEMFRenameAs();
 		}
@@ -815,11 +816,11 @@ public class ParameterImpl extends TraceabilityImpl<EParameter> implements
 
 		result = "\nreturn ";
 
-		java.lang.Boolean idIfCond_330 = false;
-		idIfCond_330 = kermeta.standard.helper.IntegerWrapper.equals(this
+		java.lang.Boolean idIfCond_387 = false;
+		idIfCond_387 = kermeta.standard.helper.IntegerWrapper.equals(this
 				.getUpper(), 1);
 
-		if (idIfCond_330) {
+		if (idIfCond_387) {
 
 			result = kermeta.standard.helper.StringWrapper.plus(result,
 					"result");
@@ -900,8 +901,8 @@ public class ParameterImpl extends TraceabilityImpl<EParameter> implements
 
 		result = this.getName();
 
-		java.lang.Boolean idIfCond_408 = false;
-		idIfCond_408 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+		java.lang.Boolean idIfCond_392 = false;
+		idIfCond_392 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 				.isInstanceOf(
 						org.kermeta.compil.runtime.helper.language.ObjectUtil
 								.container(elem),
@@ -910,23 +911,23 @@ public class ParameterImpl extends TraceabilityImpl<EParameter> implements
 								.getMetaClass(
 										"kermeta.language.structure.NamedElement"));
 
-		if (idIfCond_408) {
+		if (idIfCond_392) {
 
 			elem = (kermeta.language.structure.NamedElement) org.kermeta.compil.runtime.helper.language.ObjectUtil
 					.container(elem);
-			java.lang.Boolean idLoopCond_409 = false;
-			while (!idLoopCond_409) {
-				idLoopCond_409 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+			java.lang.Boolean idLoopCond_393 = false;
+			while (!idLoopCond_393) {
+				idLoopCond_393 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 						.equals(elem, null);
-				if (idLoopCond_409) {
+				if (idLoopCond_393) {
 				} else {
 
 					result = kermeta.standard.helper.StringWrapper.plus(
 							kermeta.standard.helper.StringWrapper.plus(elem
 									.getName(), "::"), result);
 
-					java.lang.Boolean idIfCond_410 = false;
-					idIfCond_410 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+					java.lang.Boolean idIfCond_394 = false;
+					idIfCond_394 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 							.isInstanceOf(
 									org.kermeta.compil.runtime.helper.language.ObjectUtil
 											.container(elem),
@@ -935,7 +936,7 @@ public class ParameterImpl extends TraceabilityImpl<EParameter> implements
 											.getMetaClass(
 													"kermeta.language.structure.NamedElement"));
 
-					if (idIfCond_410) {
+					if (idIfCond_394) {
 
 						elem = (kermeta.language.structure.NamedElement) org.kermeta.compil.runtime.helper.language.ObjectUtil
 								.container(elem);

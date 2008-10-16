@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: StructureFactory.java,v 1.4 2008-10-08 14:37:44 cfaucher Exp $
+ * $Id: StructureFactory.java,v 1.5 2008-10-16 13:17:59 cfaucher Exp $
  */
 package kermeta.language.structure;
 
@@ -27,33 +27,6 @@ public interface StructureFactory extends EFactory {
 			.init();
 
 	/**
-	 * Returns a new object of class '<em>Object</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Object</em>'.
-	 * @generated
-	 */
-	kermeta.language.structure.Object createObject();
-
-	/**
-	 * Returns a new object of class '<em>Modeling Unit</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Modeling Unit</em>'.
-	 * @generated
-	 */
-	ModelingUnit createModelingUnit();
-
-	/**
-	 * Returns a new object of class '<em>Package</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Package</em>'.
-	 * @generated
-	 */
-	kermeta.language.structure.Package createPackage();
-
-	/**
 	 * Returns a new object of class '<em>Class Definition</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -63,13 +36,13 @@ public interface StructureFactory extends EFactory {
 	ClassDefinition createClassDefinition();
 
 	/**
-	 * Returns a new object of class '<em>Property</em>'.
+	 * Returns a new object of class '<em>Class</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Property</em>'.
+	 * @return a new object of class '<em>Class</em>'.
 	 * @generated
 	 */
-	Property createProperty();
+	kermeta.language.structure.Class createClass();
 
 	/**
 	 * Returns a new object of class '<em>Operation</em>'.
@@ -90,130 +63,13 @@ public interface StructureFactory extends EFactory {
 	Parameter createParameter();
 
 	/**
-	 * Returns a new object of class '<em>Generic Type Definition</em>'.
+	 * Returns a new object of class '<em>Property</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Generic Type Definition</em>'.
+	 * @return a new object of class '<em>Property</em>'.
 	 * @generated
 	 */
-	GenericTypeDefinition createGenericTypeDefinition();
-
-	/**
-	 * Returns a new object of class '<em>Multiplicity Element</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Multiplicity Element</em>'.
-	 * @generated
-	 */
-	MultiplicityElement createMultiplicityElement();
-
-	/**
-	 * Returns a new object of class '<em>Type</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Type</em>'.
-	 * @generated
-	 */
-	Type createType();
-
-	/**
-	 * Returns a new object of class '<em>Enumeration</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Enumeration</em>'.
-	 * @generated
-	 */
-	Enumeration createEnumeration();
-
-	/**
-	 * Returns a new object of class '<em>Class</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Class</em>'.
-	 * @generated
-	 */
-	kermeta.language.structure.Class createClass();
-
-	/**
-	 * Returns a new object of class '<em>Require</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Require</em>'.
-	 * @generated
-	 */
-	Require createRequire();
-
-	/**
-	 * Returns a new object of class '<em>Using</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Using</em>'.
-	 * @generated
-	 */
-	Using createUsing();
-
-	/**
-	 * Returns a new object of class '<em>Primitive Type</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Primitive Type</em>'.
-	 * @generated
-	 */
-	PrimitiveType createPrimitiveType();
-
-	/**
-	 * Returns a new object of class '<em>Enumeration Literal</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Enumeration Literal</em>'.
-	 * @generated
-	 */
-	EnumerationLiteral createEnumerationLiteral();
-
-	/**
-	 * Returns a new object of class '<em>Constraint</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Constraint</em>'.
-	 * @generated
-	 */
-	Constraint createConstraint();
-
-	/**
-	 * Returns a new object of class '<em>Object Type Variable</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Object Type Variable</em>'.
-	 * @generated
-	 */
-	ObjectTypeVariable createObjectTypeVariable();
-
-	/**
-	 * Returns a new object of class '<em>Tag</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Tag</em>'.
-	 * @generated
-	 */
-	Tag createTag();
-
-	/**
-	 * Returns a new object of class '<em>Named Element</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Named Element</em>'.
-	 * @generated
-	 */
-	NamedElement createNamedElement();
-
-	/**
-	 * Returns a new object of class '<em>Parameterized Type</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Parameterized Type</em>'.
-	 * @generated
-	 */
-	ParameterizedType createParameterizedType();
+	Property createProperty();
 
 	/**
 	 * Returns a new object of class '<em>Link Setter For Typed Element</em>'.
@@ -225,6 +81,24 @@ public interface StructureFactory extends EFactory {
 	LinkSetterForTypedElement createLinkSetterForTypedElement();
 
 	/**
+	 * Returns a new object of class '<em>Object</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Object</em>'.
+	 * @generated
+	 */
+	kermeta.language.structure.Object createObject();
+
+	/**
+	 * Returns a new object of class '<em>Type</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Type</em>'.
+	 * @generated
+	 */
+	Type createType();
+
+	/**
 	 * Returns a new object of class '<em>Void Type</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -232,6 +106,42 @@ public interface StructureFactory extends EFactory {
 	 * @generated
 	 */
 	VoidType createVoidType();
+
+	/**
+	 * Returns a new object of class '<em>Primitive Type</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Primitive Type</em>'.
+	 * @generated
+	 */
+	PrimitiveType createPrimitiveType();
+
+	/**
+	 * Returns a new object of class '<em>Parameterized Type</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Parameterized Type</em>'.
+	 * @generated
+	 */
+	ParameterizedType createParameterizedType();
+
+	/**
+	 * Returns a new object of class '<em>Object Type Variable</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Object Type Variable</em>'.
+	 * @generated
+	 */
+	ObjectTypeVariable createObjectTypeVariable();
+
+	/**
+	 * Returns a new object of class '<em>Enumeration</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Enumeration</em>'.
+	 * @generated
+	 */
+	Enumeration createEnumeration();
 
 	/**
 	 * Returns a new object of class '<em>Function Type</em>'.
@@ -261,6 +171,96 @@ public interface StructureFactory extends EFactory {
 	<X> Traceability<X> createTraceability();
 
 	/**
+	 * Returns a new object of class '<em>Modeling Unit</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Modeling Unit</em>'.
+	 * @generated
+	 */
+	ModelingUnit createModelingUnit();
+
+	/**
+	 * Returns a new object of class '<em>Package</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Package</em>'.
+	 * @generated
+	 */
+	kermeta.language.structure.Package createPackage();
+
+	/**
+	 * Returns a new object of class '<em>Enumeration Literal</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Enumeration Literal</em>'.
+	 * @generated
+	 */
+	EnumerationLiteral createEnumerationLiteral();
+
+	/**
+	 * Returns a new object of class '<em>Constraint</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Constraint</em>'.
+	 * @generated
+	 */
+	Constraint createConstraint();
+
+	/**
+	 * Returns a new object of class '<em>Tag</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Tag</em>'.
+	 * @generated
+	 */
+	Tag createTag();
+
+	/**
+	 * Returns a new object of class '<em>Multiplicity Element</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Multiplicity Element</em>'.
+	 * @generated
+	 */
+	MultiplicityElement createMultiplicityElement();
+
+	/**
+	 * Returns a new object of class '<em>Generic Type Definition</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Generic Type Definition</em>'.
+	 * @generated
+	 */
+	GenericTypeDefinition createGenericTypeDefinition();
+
+	/**
+	 * Returns a new object of class '<em>Require</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Require</em>'.
+	 * @generated
+	 */
+	Require createRequire();
+
+	/**
+	 * Returns a new object of class '<em>Using</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Using</em>'.
+	 * @generated
+	 */
+	Using createUsing();
+
+	/**
+	 * Returns a new object of class '<em>Named Element</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Named Element</em>'.
+	 * @generated
+	 */
+	NamedElement createNamedElement();
+
+	/**
 	 * Returns a new object of class '<em>Type Variable Binding</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -277,15 +277,6 @@ public interface StructureFactory extends EFactory {
 	 * @generated
 	 */
 	TypeDefinition createTypeDefinition();
-
-	/**
-	 * Returns a new object of class '<em>Filter</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Filter</em>'.
-	 * @generated
-	 */
-	Filter createFilter();
 
 	/**
 	 * Returns a new object of class '<em>Model Type</em>'.
@@ -322,6 +313,15 @@ public interface StructureFactory extends EFactory {
 	 * @generated
 	 */
 	Model createModel();
+
+	/**
+	 * Returns a new object of class '<em>Filter</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Filter</em>'.
+	 * @generated
+	 */
+	Filter createFilter();
 
 	/**
 	 * Returns the package supported by this factory.

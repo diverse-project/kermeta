@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: BehaviorFactoryImpl.java,v 1.4 2008-10-08 14:37:39 cfaucher Exp $
+ * $Id: BehaviorFactoryImpl.java,v 1.5 2008-10-16 13:17:51 cfaucher Exp $
  */
 package kermeta.language.behavior.impl;
 
@@ -61,18 +61,16 @@ public class BehaviorFactoryImpl extends EFactoryImpl implements
 	@Override
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
-		case BehaviorPackage.BLOCK:
-			return createBlock();
-		case BehaviorPackage.RESCUE:
-			return createRescue();
 		case BehaviorPackage.EXPRESSION:
 			return createExpression();
-		case BehaviorPackage.CALL_VARIABLE:
-			return createCallVariable();
-		case BehaviorPackage.CALL_FEATURE:
-			return createCallFeature();
+		case BehaviorPackage.BLOCK:
+			return createBlock();
 		case BehaviorPackage.CALL_EXPRESSION:
 			return createCallExpression();
+		case BehaviorPackage.CALL_FEATURE:
+			return createCallFeature();
+		case BehaviorPackage.CALL_VARIABLE:
+			return createCallVariable();
 		case BehaviorPackage.CALL_RESULT:
 			return createCallResult();
 		case BehaviorPackage.CALL_VALUE:
@@ -91,6 +89,8 @@ public class BehaviorFactoryImpl extends EFactoryImpl implements
 			return createTypeReference();
 		case BehaviorPackage.RAISE:
 			return createRaise();
+		case BehaviorPackage.RESCUE:
+			return createRescue();
 		case BehaviorPackage.SELF_EXPRESSION:
 			return createSelfExpression();
 		case BehaviorPackage.CONDITIONAL:
@@ -124,26 +124,6 @@ public class BehaviorFactoryImpl extends EFactoryImpl implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Block createBlock() {
-		BlockImpl block = new BlockImpl();
-		return block;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Rescue createRescue() {
-		RescueImpl rescue = new RescueImpl();
-		return rescue;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public Expression createExpression() {
 		ExpressionImpl expression = new ExpressionImpl();
 		return expression;
@@ -154,9 +134,19 @@ public class BehaviorFactoryImpl extends EFactoryImpl implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public CallVariable createCallVariable() {
-		CallVariableImpl callVariable = new CallVariableImpl();
-		return callVariable;
+	public Block createBlock() {
+		BlockImpl block = new BlockImpl();
+		return block;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public CallExpression createCallExpression() {
+		CallExpressionImpl callExpression = new CallExpressionImpl();
+		return callExpression;
 	}
 
 	/**
@@ -174,9 +164,9 @@ public class BehaviorFactoryImpl extends EFactoryImpl implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public CallExpression createCallExpression() {
-		CallExpressionImpl callExpression = new CallExpressionImpl();
-		return callExpression;
+	public CallVariable createCallVariable() {
+		CallVariableImpl callVariable = new CallVariableImpl();
+		return callVariable;
 	}
 
 	/**
@@ -267,6 +257,16 @@ public class BehaviorFactoryImpl extends EFactoryImpl implements
 	public Raise createRaise() {
 		RaiseImpl raise = new RaiseImpl();
 		return raise;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Rescue createRescue() {
+		RescueImpl rescue = new RescueImpl();
+		return rescue;
 	}
 
 	/**

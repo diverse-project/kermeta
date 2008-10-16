@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: InvalidParameterExceptionImpl.java,v 1.4 2008-10-08 14:37:23 cfaucher Exp $
+ * $Id: InvalidParameterExceptionImpl.java,v 1.5 2008-10-16 13:17:31 cfaucher Exp $
  */
 package kermeta.kunit.impl;
 

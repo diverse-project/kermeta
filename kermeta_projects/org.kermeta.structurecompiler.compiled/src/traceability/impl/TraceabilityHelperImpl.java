@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: TraceabilityHelperImpl.java,v 1.4 2008-10-08 14:37:52 cfaucher Exp $
+ * $Id: TraceabilityHelperImpl.java,v 1.5 2008-10-16 13:18:11 cfaucher Exp $
  */
 package traceability.impl;
 
@@ -67,10 +67,10 @@ public class TraceabilityHelperImpl extends ObjectImpl implements
 			kermeta.standard.Iterator<traceability.Trace> it_ft243 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
 					.<traceability.Trace> convertAsOrderedSet(
 							mr.getSourceTraces()).iterator();
-			java.lang.Boolean idLoopCond_1064 = false;
-			while (!idLoopCond_1064) {
-				idLoopCond_1064 = it_ft243.isOff();
-				if (idLoopCond_1064) {
+			java.lang.Boolean idLoopCond_1065 = false;
+			while (!idLoopCond_1065) {
+				idLoopCond_1065 = it_ft243.isOff();
+				if (idLoopCond_1065) {
 				} else {
 
 					traceability.Reference result_lambda_ft243 = null;
@@ -91,24 +91,24 @@ public class TraceabilityHelperImpl extends ObjectImpl implements
 								.<traceability.Reference> convertAsOrderedSet(
 										t_lbdExp243.getSourceReferences())
 								.iterator();
-						java.lang.Boolean idLoopCond_1065 = false;
-						while (!idLoopCond_1065) {
-							idLoopCond_1065 = kermeta.standard.helper.BooleanWrapper
+						java.lang.Boolean idLoopCond_1066 = false;
+						while (!idLoopCond_1066) {
+							idLoopCond_1066 = kermeta.standard.helper.BooleanWrapper
 									.or(
 											it_ft244.isOff(),
 											org.kermeta.compil.runtime.helper.language.ObjectUtil
 													.isNotEqual(result_ft244,
 															null));
-							if (idLoopCond_1065) {
+							if (idLoopCond_1066) {
 							} else {
 
 								elem_ft244 = it_ft244.next();
 
-								java.lang.Boolean idIfCond_1066 = false;
+								java.lang.Boolean idIfCond_1067 = false;
 								//BIle:detector
 								traceability.Reference sr_lbdExp244 = elem_ft244;
 
-								idIfCond_1066 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+								idIfCond_1067 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 										.isInstanceOf(
 												sr_lbdExp244,
 												org.kermeta.compil.runtime.ExecutionContext
@@ -117,7 +117,7 @@ public class TraceabilityHelperImpl extends ObjectImpl implements
 																"traceability.TextReference"));
 								//EIle:detector
 
-								if (idIfCond_1066) {
+								if (idIfCond_1067) {
 
 									result_ft244 = elem_ft244;
 								}

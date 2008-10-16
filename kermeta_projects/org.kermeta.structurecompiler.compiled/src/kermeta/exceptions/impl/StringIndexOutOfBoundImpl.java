@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: StringIndexOutOfBoundImpl.java,v 1.4 2008-10-08 14:37:21 cfaucher Exp $
+ * $Id: StringIndexOutOfBoundImpl.java,v 1.5 2008-10-16 13:17:28 cfaucher Exp $
  */
 package kermeta.exceptions.impl;
 

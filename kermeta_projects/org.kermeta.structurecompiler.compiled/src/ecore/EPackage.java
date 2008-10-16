@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: EPackage.java,v 1.5 2008-10-08 14:37:50 cfaucher Exp $
+ * $Id: EPackage.java,v 1.6 2008-10-16 13:18:10 cfaucher Exp $
  */
 package ecore;
 
@@ -84,24 +84,13 @@ public interface EPackage extends ENamedElement {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>ESuper Package</em>' container reference.
-	 * @see #setESuperPackage(EPackage)
 	 * @see ecore.EcorePackage#getEPackage_ESuperPackage()
 	 * @see ecore.EPackage#getESubpackages
-	 * @model opposite="eSubpackages"
+	 * @model opposite="eSubpackages" changeable="false"
 	 *        annotation="kermeta ecore.isTransient='true'"
 	 * @generated
 	 */
 	EPackage getESuperPackage();
-
-	/**
-	 * Sets the value of the '{@link ecore.EPackage#getESuperPackage <em>ESuper Package</em>}' container reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>ESuper Package</em>' container reference.
-	 * @see #getESuperPackage()
-	 * @generated
-	 */
-	void setESuperPackage(EPackage value);
 
 	/**
 	 * Returns the value of the '<em><b>Ns Prefix</b></em>' attribute.

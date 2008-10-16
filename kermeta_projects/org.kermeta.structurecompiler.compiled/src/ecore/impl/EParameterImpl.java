@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: EParameterImpl.java,v 1.5 2008-10-08 14:37:31 cfaucher Exp $
+ * $Id: EParameterImpl.java,v 1.6 2008-10-16 13:17:43 cfaucher Exp $
  */
 package ecore.impl;
 
@@ -10,15 +10,10 @@ import ecore.EOperation;
 import ecore.EParameter;
 import ecore.EcorePackage;
 
-import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
-
-import org.eclipse.emf.ecore.impl.ENotificationImpl;
-
-import org.eclipse.emf.ecore.util.EcoreUtil;
 
 /**
  * <!-- begin-user-doc -->
@@ -80,45 +75,6 @@ public class EParameterImpl extends ETypedElementImpl implements EParameter {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetEOperation(EOperation newEOperation,
-			NotificationChain msgs) {
-		msgs = eBasicSetContainer((InternalEObject) newEOperation,
-				EcorePackage.EPARAMETER__EOPERATION, msgs);
-		return msgs;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setEOperation(EOperation newEOperation) {
-		if (newEOperation != eInternalContainer()
-				|| (eContainerFeatureID != EcorePackage.EPARAMETER__EOPERATION && newEOperation != null)) {
-			if (EcoreUtil.isAncestor(this, newEOperation))
-				throw new IllegalArgumentException(
-						"Recursive containment not allowed for " + toString());
-			NotificationChain msgs = null;
-			if (eInternalContainer() != null)
-				msgs = eBasicRemoveFromContainer(msgs);
-			if (newEOperation != null)
-				msgs = ((InternalEObject) newEOperation).eInverseAdd(this,
-						EcorePackage.EOPERATION__EPARAMETERS, EOperation.class,
-						msgs);
-			msgs = basicSetEOperation(newEOperation, msgs);
-			if (msgs != null)
-				msgs.dispatch();
-		} else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET,
-					EcorePackage.EPARAMETER__EOPERATION, newEOperation,
-					newEOperation));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd,
 			int featureID, NotificationChain msgs) {
@@ -126,7 +82,8 @@ public class EParameterImpl extends ETypedElementImpl implements EParameter {
 		case EcorePackage.EPARAMETER__EOPERATION:
 			if (eInternalContainer() != null)
 				msgs = eBasicRemoveFromContainer(msgs);
-			return basicSetEOperation((EOperation) otherEnd, msgs);
+			return eBasicSetContainer(otherEnd,
+					EcorePackage.EPARAMETER__EOPERATION, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
@@ -141,7 +98,8 @@ public class EParameterImpl extends ETypedElementImpl implements EParameter {
 			int featureID, NotificationChain msgs) {
 		switch (featureID) {
 		case EcorePackage.EPARAMETER__EOPERATION:
-			return basicSetEOperation(null, msgs);
+			return eBasicSetContainer(null,
+					EcorePackage.EPARAMETER__EOPERATION, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -177,36 +135,6 @@ public class EParameterImpl extends ETypedElementImpl implements EParameter {
 			return basicGetEOperation();
 		}
 		return super.eGet(featureID, resolve, coreType);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public void eSet(int featureID, Object newValue) {
-		switch (featureID) {
-		case EcorePackage.EPARAMETER__EOPERATION:
-			setEOperation((EOperation) newValue);
-			return;
-		}
-		super.eSet(featureID, newValue);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public void eUnset(int featureID) {
-		switch (featureID) {
-		case EcorePackage.EPARAMETER__EOPERATION:
-			setEOperation((EOperation) null);
-			return;
-		}
-		super.eUnset(featureID);
 	}
 
 	/**

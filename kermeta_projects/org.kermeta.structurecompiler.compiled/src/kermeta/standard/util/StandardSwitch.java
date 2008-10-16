@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: StandardSwitch.java,v 1.4 2008-10-08 14:38:08 cfaucher Exp $
+ * $Id: StandardSwitch.java,v 1.5 2008-10-16 13:18:26 cfaucher Exp $
  */
 package kermeta.standard.util;
 
@@ -104,6 +104,53 @@ public class StandardSwitch<T> {
 				result = defaultCase(theEObject);
 			return result;
 		}
+		case StandardPackage.VOID: {
+			kermeta.standard.Void void_ = (kermeta.standard.Void) theEObject;
+			T result = caseVoid(void_);
+			if (result == null)
+				result = caseObject(void_);
+			if (result == null)
+				result = defaultCase(theEObject);
+			return result;
+		}
+		case StandardPackage.VALUE_TYPE: {
+			ValueType valueType = (ValueType) theEObject;
+			T result = caseValueType(valueType);
+			if (result == null)
+				result = caseObject(valueType);
+			if (result == null)
+				result = defaultCase(theEObject);
+			return result;
+		}
+		case StandardPackage.COMPARABLE: {
+			kermeta.standard.Comparable comparable = (kermeta.standard.Comparable) theEObject;
+			T result = caseComparable(comparable);
+			if (result == null)
+				result = caseObject(comparable);
+			if (result == null)
+				result = defaultCase(theEObject);
+			return result;
+		}
+		case StandardPackage.SUMMABLE: {
+			Summable<?> summable = (Summable<?>) theEObject;
+			T result = caseSummable(summable);
+			if (result == null)
+				result = caseObject(summable);
+			if (result == null)
+				result = defaultCase(theEObject);
+			return result;
+		}
+		case StandardPackage.NOT_COMPARABLE_EXCEPTION: {
+			NotComparableException notComparableException = (NotComparableException) theEObject;
+			T result = caseNotComparableException(notComparableException);
+			if (result == null)
+				result = caseException(notComparableException);
+			if (result == null)
+				result = caseObject(notComparableException);
+			if (result == null)
+				result = defaultCase(theEObject);
+			return result;
+		}
 		case StandardPackage.COLLECTION: {
 			Collection<?> collection = (Collection<?>) theEObject;
 			T result = caseCollection(collection);
@@ -185,53 +232,6 @@ public class StandardSwitch<T> {
 				result = defaultCase(theEObject);
 			return result;
 		}
-		case StandardPackage.VOID: {
-			kermeta.standard.Void void_ = (kermeta.standard.Void) theEObject;
-			T result = caseVoid(void_);
-			if (result == null)
-				result = caseObject(void_);
-			if (result == null)
-				result = defaultCase(theEObject);
-			return result;
-		}
-		case StandardPackage.VALUE_TYPE: {
-			ValueType valueType = (ValueType) theEObject;
-			T result = caseValueType(valueType);
-			if (result == null)
-				result = caseObject(valueType);
-			if (result == null)
-				result = defaultCase(theEObject);
-			return result;
-		}
-		case StandardPackage.COMPARABLE: {
-			kermeta.standard.Comparable comparable = (kermeta.standard.Comparable) theEObject;
-			T result = caseComparable(comparable);
-			if (result == null)
-				result = caseObject(comparable);
-			if (result == null)
-				result = defaultCase(theEObject);
-			return result;
-		}
-		case StandardPackage.SUMMABLE: {
-			Summable<?> summable = (Summable<?>) theEObject;
-			T result = caseSummable(summable);
-			if (result == null)
-				result = caseObject(summable);
-			if (result == null)
-				result = defaultCase(theEObject);
-			return result;
-		}
-		case StandardPackage.NOT_COMPARABLE_EXCEPTION: {
-			NotComparableException notComparableException = (NotComparableException) theEObject;
-			T result = caseNotComparableException(notComparableException);
-			if (result == null)
-				result = caseException(notComparableException);
-			if (result == null)
-				result = caseObject(notComparableException);
-			if (result == null)
-				result = defaultCase(theEObject);
-			return result;
-		}
 		default:
 			return defaultCase(theEObject);
 		}
@@ -249,6 +249,81 @@ public class StandardSwitch<T> {
 	 * @generated
 	 */
 	public T caseUnknownJavaObject(UnknownJavaObject object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Void</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Void</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseVoid(kermeta.standard.Void object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Value Type</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Value Type</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseValueType(ValueType object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Comparable</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Comparable</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseComparable(kermeta.standard.Comparable object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Summable</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Summable</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public <G> T caseSummable(Summable<G> object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Not Comparable Exception</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Not Comparable Exception</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseNotComparableException(NotComparableException object) {
 		return null;
 	}
 
@@ -354,81 +429,6 @@ public class StandardSwitch<T> {
 	 * @generated
 	 */
 	public <G> T caseIterator(Iterator<G> object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Void</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Void</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseVoid(kermeta.standard.Void object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Value Type</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Value Type</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseValueType(ValueType object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Comparable</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Comparable</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseComparable(kermeta.standard.Comparable object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Summable</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Summable</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public <G> T caseSummable(Summable<G> object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Not Comparable Exception</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Not Comparable Exception</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseNotComparableException(NotComparableException object) {
 		return null;
 	}
 

@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: Failure.java,v 1.4 2008-10-08 14:37:46 cfaucher Exp $
+ * $Id: Failure.java,v 1.5 2008-10-16 13:18:05 cfaucher Exp $
  */
 package kermeta.kunit;
 

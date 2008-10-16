@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: DynamicExpressionImpl.java,v 1.4 2008-10-08 14:37:42 cfaucher Exp $
+ * $Id: DynamicExpressionImpl.java,v 1.5 2008-10-16 13:17:58 cfaucher Exp $
  */
 package kermeta.interpreter.impl;
 
@@ -282,11 +282,11 @@ public class DynamicExpressionImpl extends ObjectImpl implements
 
 		kermeta.language.structure.Object result = null;
 
-		java.lang.Boolean idIfCond_905 = false;
-		idIfCond_905 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+		java.lang.Boolean idIfCond_956 = false;
+		idIfCond_956 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 				.equals(this.getExpression(), null);
 
-		if (idIfCond_905) {
+		if (idIfCond_956) {
 
 			kermeta.exceptions.DynamicExpressionException e = ((kermeta.exceptions.DynamicExpressionException) org.kermeta.compil.runtime.helper.language.ClassUtil
 					.newObject("kermeta.exceptions.DynamicExpressionException"));
@@ -299,14 +299,14 @@ public class DynamicExpressionImpl extends ObjectImpl implements
 
 		}
 
-		java.lang.Boolean idIfCond_906 = false;
-		idIfCond_906 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+		java.lang.Boolean idIfCond_957 = false;
+		idIfCond_957 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 				.isNotEqual(
 						org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
 								.<kermeta.interpreter.KermetaError> convertAsOrderedSet(
 										this.getErrors()).size(), 0);
 
-		if (idIfCond_906) {
+		if (idIfCond_957) {
 
 			kermeta.exceptions.DynamicExpressionException e = ((kermeta.exceptions.DynamicExpressionException) org.kermeta.compil.runtime.helper.language.ClassUtil
 					.newObject("kermeta.exceptions.DynamicExpressionException"));
@@ -339,14 +339,14 @@ public class DynamicExpressionImpl extends ObjectImpl implements
 				.<kermeta.interpreter.KermetaError> convertAsOrderedSet(
 						this.getErrors()).clear();
 
-		java.lang.Boolean idIfCond_907 = false;
-		idIfCond_907 = kermeta.standard.helper.BooleanWrapper.or(
+		java.lang.Boolean idIfCond_958 = false;
+		idIfCond_958 = kermeta.standard.helper.BooleanWrapper.or(
 				org.kermeta.compil.runtime.helper.language.ObjectUtil.equals(
 						this.getFormalParameters(), null),
 				org.kermeta.compil.runtime.helper.language.ObjectUtil.equals(
 						this.getSelfClass(), null));
 
-		if (idIfCond_907) {
+		if (idIfCond_958) {
 
 			kermeta.exceptions.DynamicExpressionException e = ((kermeta.exceptions.DynamicExpressionException) org.kermeta.compil.runtime.helper.language.ClassUtil
 					.newObject("kermeta.exceptions.DynamicExpressionException"));
@@ -363,14 +363,14 @@ public class DynamicExpressionImpl extends ObjectImpl implements
 		result = (java.lang.Boolean) org.kermeta.compil.runtime.helper.language.DynamicExpressionUtil
 				.parse(this, expression);
 
-		java.lang.Boolean idIfCond_908 = false;
-		idIfCond_908 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+		java.lang.Boolean idIfCond_959 = false;
+		idIfCond_959 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 				.isNotEqual(
 						org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
 								.<kermeta.interpreter.KermetaError> convertAsOrderedSet(
 										this.getErrors()).size(), 0);
 
-		if (idIfCond_908) {
+		if (idIfCond_959) {
 
 			kermeta.exceptions.DynamicExpressionException e = ((kermeta.exceptions.DynamicExpressionException) org.kermeta.compil.runtime.helper.language.ClassUtil
 					.newObject("kermeta.exceptions.DynamicExpressionException"));
@@ -381,23 +381,23 @@ public class DynamicExpressionImpl extends ObjectImpl implements
 
 			{
 
-				kermeta.standard.Iterator<kermeta.interpreter.KermetaError> it_ft203 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
+				kermeta.standard.Iterator<kermeta.interpreter.KermetaError> it_ft213 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
 						.<kermeta.interpreter.KermetaError> convertAsOrderedSet(
 								this.getErrors()).iterator();
-				java.lang.Boolean idLoopCond_909 = false;
-				while (!idLoopCond_909) {
-					idLoopCond_909 = it_ft203.isOff();
-					if (idLoopCond_909) {
+				java.lang.Boolean idLoopCond_960 = false;
+				while (!idLoopCond_960) {
+					idLoopCond_960 = it_ft213.isOff();
+					if (idLoopCond_960) {
 					} else {
 
 						//BIle:func
-						kermeta.interpreter.KermetaError error_lbdExp203 = it_ft203
+						kermeta.interpreter.KermetaError error_lbdExp213 = it_ft213
 								.next();
 
 						kermeta.standard.helper.StringWrapper.append(e
 								.getMessage(),
 								kermeta.standard.helper.StringWrapper.plus(
-										"\n", error_lbdExp203.getMessage()));
+										"\n", error_lbdExp213.getMessage()));
 						//EIle:func
 
 					}
@@ -427,11 +427,11 @@ public class DynamicExpressionImpl extends ObjectImpl implements
 
 		kermeta.language.structure.Object result = null;
 
-		java.lang.Boolean idIfCond_910 = false;
-		idIfCond_910 = kermeta.standard.helper.BooleanWrapper.not(this
+		java.lang.Boolean idIfCond_961 = false;
+		idIfCond_961 = kermeta.standard.helper.BooleanWrapper.not(this
 				.parse(body));
 
-		if (idIfCond_910) {
+		if (idIfCond_961) {
 
 			kermeta.exceptions.DynamicExpressionException e = ((kermeta.exceptions.DynamicExpressionException) org.kermeta.compil.runtime.helper.language.ClassUtil
 					.newObject("kermeta.exceptions.DynamicExpressionException"));

@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: EStructuralFeatureImpl.java,v 1.5 2008-10-08 14:37:30 cfaucher Exp $
+ * $Id: EStructuralFeatureImpl.java,v 1.6 2008-10-16 13:17:42 cfaucher Exp $
  */
 package ecore.impl;
 
@@ -16,8 +16,6 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-
-import org.eclipse.emf.ecore.util.EcoreUtil;
 
 /**
  * <!-- begin-user-doc -->
@@ -229,45 +227,6 @@ public abstract class EStructuralFeatureImpl extends ETypedElementImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetEContainingClass(
-			ecore.EClass newEContainingClass, NotificationChain msgs) {
-		msgs = eBasicSetContainer((InternalEObject) newEContainingClass,
-				EcorePackage.ESTRUCTURAL_FEATURE__ECONTAINING_CLASS, msgs);
-		return msgs;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setEContainingClass(ecore.EClass newEContainingClass) {
-		if (newEContainingClass != eInternalContainer()
-				|| (eContainerFeatureID != EcorePackage.ESTRUCTURAL_FEATURE__ECONTAINING_CLASS && newEContainingClass != null)) {
-			if (EcoreUtil.isAncestor(this, newEContainingClass))
-				throw new IllegalArgumentException(
-						"Recursive containment not allowed for " + toString());
-			NotificationChain msgs = null;
-			if (eInternalContainer() != null)
-				msgs = eBasicRemoveFromContainer(msgs);
-			if (newEContainingClass != null)
-				msgs = ((InternalEObject) newEContainingClass).eInverseAdd(
-						this, EcorePackage.ECLASS__ESTRUCTURAL_FEATURES,
-						ecore.EClass.class, msgs);
-			msgs = basicSetEContainingClass(newEContainingClass, msgs);
-			if (msgs != null)
-				msgs.dispatch();
-		} else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET,
-					EcorePackage.ESTRUCTURAL_FEATURE__ECONTAINING_CLASS,
-					newEContainingClass, newEContainingClass));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public String getDefaultValueLiteral() {
 		return defaultValueLiteral;
 	}
@@ -427,7 +386,8 @@ public abstract class EStructuralFeatureImpl extends ETypedElementImpl
 		case EcorePackage.ESTRUCTURAL_FEATURE__ECONTAINING_CLASS:
 			if (eInternalContainer() != null)
 				msgs = eBasicRemoveFromContainer(msgs);
-			return basicSetEContainingClass((ecore.EClass) otherEnd, msgs);
+			return eBasicSetContainer(otherEnd,
+					EcorePackage.ESTRUCTURAL_FEATURE__ECONTAINING_CLASS, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
@@ -442,7 +402,8 @@ public abstract class EStructuralFeatureImpl extends ETypedElementImpl
 			int featureID, NotificationChain msgs) {
 		switch (featureID) {
 		case EcorePackage.ESTRUCTURAL_FEATURE__ECONTAINING_CLASS:
-			return basicSetEContainingClass(null, msgs);
+			return eBasicSetContainer(null,
+					EcorePackage.ESTRUCTURAL_FEATURE__ECONTAINING_CLASS, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -503,9 +464,6 @@ public abstract class EStructuralFeatureImpl extends ETypedElementImpl
 		case EcorePackage.ESTRUCTURAL_FEATURE__VOLATILE:
 			setVolatile(((Boolean) newValue).booleanValue());
 			return;
-		case EcorePackage.ESTRUCTURAL_FEATURE__ECONTAINING_CLASS:
-			setEContainingClass((ecore.EClass) newValue);
-			return;
 		case EcorePackage.ESTRUCTURAL_FEATURE__DEFAULT_VALUE_LITERAL:
 			setDefaultValueLiteral((String) newValue);
 			return;
@@ -535,9 +493,6 @@ public abstract class EStructuralFeatureImpl extends ETypedElementImpl
 		switch (featureID) {
 		case EcorePackage.ESTRUCTURAL_FEATURE__VOLATILE:
 			setVolatile(VOLATILE_EDEFAULT);
-			return;
-		case EcorePackage.ESTRUCTURAL_FEATURE__ECONTAINING_CLASS:
-			setEContainingClass((ecore.EClass) null);
 			return;
 		case EcorePackage.ESTRUCTURAL_FEATURE__DEFAULT_VALUE_LITERAL:
 			setDefaultValueLiteral(DEFAULT_VALUE_LITERAL_EDEFAULT);

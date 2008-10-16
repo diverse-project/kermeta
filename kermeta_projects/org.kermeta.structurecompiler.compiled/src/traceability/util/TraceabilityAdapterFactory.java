@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: TraceabilityAdapterFactory.java,v 1.4 2008-10-08 14:38:02 cfaucher Exp $
+ * $Id: TraceabilityAdapterFactory.java,v 1.5 2008-10-16 13:18:18 cfaucher Exp $
  */
 package traceability.util;
 

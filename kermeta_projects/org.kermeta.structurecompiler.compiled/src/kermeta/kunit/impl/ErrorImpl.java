@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ErrorImpl.java,v 1.4 2008-10-08 14:37:23 cfaucher Exp $
+ * $Id: ErrorImpl.java,v 1.5 2008-10-16 13:17:30 cfaucher Exp $
  */
 package kermeta.kunit.impl;
 
@@ -240,12 +240,12 @@ public class ErrorImpl extends ObjectImpl implements kermeta.kunit.Error {
 
 		java.lang.String result = null;
 
-		java.lang.Boolean idIfCond_974 = false;
-		idIfCond_974 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+		java.lang.Boolean idIfCond_1019 = false;
+		idIfCond_1019 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 				.equals(this.getKind(), kermeta.kunit.ErrorKind
 						.getByName("testError"));
 
-		if (idIfCond_974) {
+		if (idIfCond_1019) {
 
 			result = org.kermeta.compil.runtime.helper.language.ObjectUtil
 					.toString(this.getError());
@@ -255,12 +255,12 @@ public class ErrorImpl extends ObjectImpl implements kermeta.kunit.Error {
 					org.kermeta.compil.runtime.helper.language.ObjectUtil
 							.getMetaClass(this.getError()).getterName(), ".");
 
-			java.lang.Boolean idIfCond_975 = false;
-			idIfCond_975 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+			java.lang.Boolean idIfCond_1020 = false;
+			idIfCond_1020 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 					.equals(this.getKind(), kermeta.kunit.ErrorKind
 							.getByName("setUpError"));
 
-			if (idIfCond_975) {
+			if (idIfCond_1020) {
 
 				result = kermeta.standard.helper.StringWrapper.plus(result,
 						"setUp()");
@@ -277,11 +277,11 @@ public class ErrorImpl extends ObjectImpl implements kermeta.kunit.Error {
 				org.kermeta.compil.runtime.helper.language.ObjectUtil
 						.getMetaClass(this.getException()).getterName());
 
-		java.lang.Boolean idIfCond_976 = false;
-		idIfCond_976 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+		java.lang.Boolean idIfCond_1021 = false;
+		idIfCond_1021 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 				.isNotEqual(this.getException().getMessage(), null);
 
-		if (idIfCond_976) {
+		if (idIfCond_1021) {
 
 			result = kermeta.standard.helper.StringWrapper.plus(
 					kermeta.standard.helper.StringWrapper.plus(result,
@@ -293,11 +293,11 @@ public class ErrorImpl extends ObjectImpl implements kermeta.kunit.Error {
 					"\n    (no message)");
 		}
 
-		java.lang.Boolean idIfCond_977 = false;
-		idIfCond_977 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+		java.lang.Boolean idIfCond_1022 = false;
+		idIfCond_1022 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 				.isNotEqual(this.getException().getStackTrace(), null);
 
-		if (idIfCond_977) {
+		if (idIfCond_1022) {
 
 			result = kermeta.standard.helper.StringWrapper.plus(
 					kermeta.standard.helper.StringWrapper.plus(result,

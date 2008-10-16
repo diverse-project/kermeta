@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: BehaviorFactory.java,v 1.4 2008-10-08 14:37:20 cfaucher Exp $
+ * $Id: BehaviorFactory.java,v 1.5 2008-10-16 13:17:26 cfaucher Exp $
  */
 package kermeta.language.behavior;
 
@@ -27,24 +27,6 @@ public interface BehaviorFactory extends EFactory {
 			.init();
 
 	/**
-	 * Returns a new object of class '<em>Block</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Block</em>'.
-	 * @generated
-	 */
-	Block createBlock();
-
-	/**
-	 * Returns a new object of class '<em>Rescue</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Rescue</em>'.
-	 * @generated
-	 */
-	Rescue createRescue();
-
-	/**
 	 * Returns a new object of class '<em>Expression</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -54,13 +36,22 @@ public interface BehaviorFactory extends EFactory {
 	Expression createExpression();
 
 	/**
-	 * Returns a new object of class '<em>Call Variable</em>'.
+	 * Returns a new object of class '<em>Block</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Call Variable</em>'.
+	 * @return a new object of class '<em>Block</em>'.
 	 * @generated
 	 */
-	CallVariable createCallVariable();
+	Block createBlock();
+
+	/**
+	 * Returns a new object of class '<em>Call Expression</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Call Expression</em>'.
+	 * @generated
+	 */
+	CallExpression createCallExpression();
 
 	/**
 	 * Returns a new object of class '<em>Call Feature</em>'.
@@ -72,13 +63,13 @@ public interface BehaviorFactory extends EFactory {
 	CallFeature createCallFeature();
 
 	/**
-	 * Returns a new object of class '<em>Call Expression</em>'.
+	 * Returns a new object of class '<em>Call Variable</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Call Expression</em>'.
+	 * @return a new object of class '<em>Call Variable</em>'.
 	 * @generated
 	 */
-	CallExpression createCallExpression();
+	CallVariable createCallVariable();
 
 	/**
 	 * Returns a new object of class '<em>Call Result</em>'.
@@ -160,6 +151,15 @@ public interface BehaviorFactory extends EFactory {
 	 * @generated
 	 */
 	Raise createRaise();
+
+	/**
+	 * Returns a new object of class '<em>Rescue</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Rescue</em>'.
+	 * @generated
+	 */
+	Rescue createRescue();
 
 	/**
 	 * Returns a new object of class '<em>Self Expression</em>'.

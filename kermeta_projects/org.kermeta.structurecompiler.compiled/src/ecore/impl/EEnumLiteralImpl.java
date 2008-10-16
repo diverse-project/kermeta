@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: EEnumLiteralImpl.java,v 1.5 2008-10-08 14:37:31 cfaucher Exp $
+ * $Id: EEnumLiteralImpl.java,v 1.6 2008-10-16 13:17:42 cfaucher Exp $
  */
 package ecore.impl;
 
@@ -19,8 +19,6 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-
-import org.eclipse.emf.ecore.util.EcoreUtil;
 
 /**
  * <!-- begin-user-doc -->
@@ -145,43 +143,6 @@ public class EEnumLiteralImpl extends ENamedElementImpl implements EEnumLiteral 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetEEnum(EEnum newEEnum,
-			NotificationChain msgs) {
-		msgs = eBasicSetContainer((InternalEObject) newEEnum,
-				EcorePackage.EENUM_LITERAL__EENUM, msgs);
-		return msgs;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setEEnum(EEnum newEEnum) {
-		if (newEEnum != eInternalContainer()
-				|| (eContainerFeatureID != EcorePackage.EENUM_LITERAL__EENUM && newEEnum != null)) {
-			if (EcoreUtil.isAncestor(this, newEEnum))
-				throw new IllegalArgumentException(
-						"Recursive containment not allowed for " + toString());
-			NotificationChain msgs = null;
-			if (eInternalContainer() != null)
-				msgs = eBasicRemoveFromContainer(msgs);
-			if (newEEnum != null)
-				msgs = ((InternalEObject) newEEnum).eInverseAdd(this,
-						EcorePackage.EENUM__ELITERALS, EEnum.class, msgs);
-			msgs = basicSetEEnum(newEEnum, msgs);
-			if (msgs != null)
-				msgs.dispatch();
-		} else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET,
-					EcorePackage.EENUM_LITERAL__EENUM, newEEnum, newEEnum));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public int getValue() {
 		return value;
 	}
@@ -255,7 +216,8 @@ public class EEnumLiteralImpl extends ENamedElementImpl implements EEnumLiteral 
 		case EcorePackage.EENUM_LITERAL__EENUM:
 			if (eInternalContainer() != null)
 				msgs = eBasicRemoveFromContainer(msgs);
-			return basicSetEEnum((EEnum) otherEnd, msgs);
+			return eBasicSetContainer(otherEnd,
+					EcorePackage.EENUM_LITERAL__EENUM, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
@@ -270,7 +232,8 @@ public class EEnumLiteralImpl extends ENamedElementImpl implements EEnumLiteral 
 			int featureID, NotificationChain msgs) {
 		switch (featureID) {
 		case EcorePackage.EENUM_LITERAL__EENUM:
-			return basicSetEEnum(null, msgs);
+			return eBasicSetContainer(null, EcorePackage.EENUM_LITERAL__EENUM,
+					msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -321,9 +284,6 @@ public class EEnumLiteralImpl extends ENamedElementImpl implements EEnumLiteral 
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-		case EcorePackage.EENUM_LITERAL__EENUM:
-			setEEnum((EEnum) newValue);
-			return;
 		case EcorePackage.EENUM_LITERAL__VALUE:
 			setValue(((Integer) newValue).intValue());
 			return;
@@ -345,9 +305,6 @@ public class EEnumLiteralImpl extends ENamedElementImpl implements EEnumLiteral 
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-		case EcorePackage.EENUM_LITERAL__EENUM:
-			setEEnum((EEnum) null);
-			return;
 		case EcorePackage.EENUM_LITERAL__VALUE:
 			setValue(VALUE_EDEFAULT);
 			return;

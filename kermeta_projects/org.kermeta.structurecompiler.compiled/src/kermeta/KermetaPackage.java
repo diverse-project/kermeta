@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: KermetaPackage.java,v 1.4 2008-10-08 14:38:07 cfaucher Exp $
+ * $Id: KermetaPackage.java,v 1.5 2008-10-16 13:18:24 cfaucher Exp $
  */
 package kermeta;
 
@@ -124,15 +124,6 @@ public interface KermetaPackage extends EPackage {
 	 * @ordered
 	 */
 	int DUMMY_CLASS__OID = StructurePackage.OBJECT__OID;
-
-	/**
-	 * The feature id for the '<em><b>Container</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DUMMY_CLASS__CONTAINER = StructurePackage.OBJECT__CONTAINER;
 
 	/**
 	 * The number of structural features of the '<em>Dummy Class</em>' class.

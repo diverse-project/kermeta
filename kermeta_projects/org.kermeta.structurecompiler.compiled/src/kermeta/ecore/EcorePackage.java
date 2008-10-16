@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: EcorePackage.java,v 1.4 2008-10-08 14:38:08 cfaucher Exp $
+ * $Id: EcorePackage.java,v 1.5 2008-10-16 13:18:26 cfaucher Exp $
  */
 package kermeta.ecore;
 
@@ -126,15 +126,6 @@ public interface EcorePackage extends EPackage {
 	 * @ordered
 	 */
 	int EFEATURE_MAP_ENTRY__OID = StructurePackage.OBJECT__OID;
-
-	/**
-	 * The feature id for the '<em><b>Container</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EFEATURE_MAP_ENTRY__CONTAINER = StructurePackage.OBJECT__CONTAINER;
 
 	/**
 	 * The feature id for the '<em><b>Value</b></em>' containment reference.

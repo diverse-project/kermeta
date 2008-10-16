@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: KunitPackage.java,v 1.4 2008-10-08 14:37:46 cfaucher Exp $
+ * $Id: KunitPackage.java,v 1.5 2008-10-16 13:18:05 cfaucher Exp $
  */
 package kermeta.kunit;
 
@@ -132,15 +132,6 @@ public interface KunitPackage extends EPackage {
 	int ABSTRACT_FALLIBLE__OID = StructurePackage.OBJECT__OID;
 
 	/**
-	 * The feature id for the '<em><b>Container</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ABSTRACT_FALLIBLE__CONTAINER = StructurePackage.OBJECT__CONTAINER;
-
-	/**
 	 * The number of structural features of the '<em>Abstract Fallible</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -212,15 +203,6 @@ public interface KunitPackage extends EPackage {
 	 * @ordered
 	 */
 	int ASSERTION_FAILED_ERROR__OID = ExceptionsPackage.EXCEPTION__OID;
-
-	/**
-	 * The feature id for the '<em><b>Container</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ASSERTION_FAILED_ERROR__CONTAINER = ExceptionsPackage.EXCEPTION__CONTAINER;
 
 	/**
 	 * The feature id for the '<em><b>Message</b></em>' attribute.
@@ -323,15 +305,6 @@ public interface KunitPackage extends EPackage {
 	int ASSERT__OID = ABSTRACT_FALLIBLE__OID;
 
 	/**
-	 * The feature id for the '<em><b>Container</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ASSERT__CONTAINER = ABSTRACT_FALLIBLE__CONTAINER;
-
-	/**
 	 * The number of structural features of the '<em>Assert</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -403,15 +376,6 @@ public interface KunitPackage extends EPackage {
 	 * @ordered
 	 */
 	int INVALID_TEST_CASE_NAME_EXCEPTION__OID = ExceptionsPackage.EXCEPTION__OID;
-
-	/**
-	 * The feature id for the '<em><b>Container</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int INVALID_TEST_CASE_NAME_EXCEPTION__CONTAINER = ExceptionsPackage.EXCEPTION__CONTAINER;
 
 	/**
 	 * The feature id for the '<em><b>Message</b></em>' attribute.
@@ -514,15 +478,6 @@ public interface KunitPackage extends EPackage {
 	int INVALID_PARAMETER_EXCEPTION__OID = ExceptionsPackage.EXCEPTION__OID;
 
 	/**
-	 * The feature id for the '<em><b>Container</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int INVALID_PARAMETER_EXCEPTION__CONTAINER = ExceptionsPackage.EXCEPTION__CONTAINER;
-
-	/**
 	 * The feature id for the '<em><b>Message</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -623,15 +578,6 @@ public interface KunitPackage extends EPackage {
 	int FALLIBLE__OID = ABSTRACT_FALLIBLE__OID;
 
 	/**
-	 * The feature id for the '<em><b>Container</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FALLIBLE__CONTAINER = ABSTRACT_FALLIBLE__CONTAINER;
-
-	/**
 	 * The feature id for the '<em><b>Stop On Failure</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -721,15 +667,6 @@ public interface KunitPackage extends EPackage {
 	 * @ordered
 	 */
 	int LOG__OID = StructurePackage.OBJECT__OID;
-
-	/**
-	 * The feature id for the '<em><b>Container</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int LOG__CONTAINER = StructurePackage.OBJECT__CONTAINER;
 
 	/**
 	 * The feature id for the '<em><b>Failures</b></em>' reference list.
@@ -841,15 +778,6 @@ public interface KunitPackage extends EPackage {
 	int FAILURE__OID = StructurePackage.OBJECT__OID;
 
 	/**
-	 * The feature id for the '<em><b>Container</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FAILURE__CONTAINER = StructurePackage.OBJECT__CONTAINER;
-
-	/**
 	 * The feature id for the '<em><b>Message</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -939,15 +867,6 @@ public interface KunitPackage extends EPackage {
 	 * @ordered
 	 */
 	int ERROR__OID = StructurePackage.OBJECT__OID;
-
-	/**
-	 * The feature id for the '<em><b>Container</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ERROR__CONTAINER = StructurePackage.OBJECT__CONTAINER;
 
 	/**
 	 * The feature id for the '<em><b>Error</b></em>' reference.
@@ -1050,15 +969,6 @@ public interface KunitPackage extends EPackage {
 	int TEST__OID = StructurePackage.OBJECT__OID;
 
 	/**
-	 * The feature id for the '<em><b>Container</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TEST__CONTAINER = StructurePackage.OBJECT__CONTAINER;
-
-	/**
 	 * The feature id for the '<em><b>Log</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1139,15 +1049,6 @@ public interface KunitPackage extends EPackage {
 	 * @ordered
 	 */
 	int TEST_SUITE__OID = TEST__OID;
-
-	/**
-	 * The feature id for the '<em><b>Container</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TEST_SUITE__CONTAINER = TEST__CONTAINER;
 
 	/**
 	 * The feature id for the '<em><b>Log</b></em>' reference.
@@ -1239,15 +1140,6 @@ public interface KunitPackage extends EPackage {
 	 * @ordered
 	 */
 	int TEST_CASE__OID = TEST__OID;
-
-	/**
-	 * The feature id for the '<em><b>Container</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TEST_CASE__CONTAINER = TEST__CONTAINER;
 
 	/**
 	 * The feature id for the '<em><b>Log</b></em>' reference.
@@ -1357,15 +1249,6 @@ public interface KunitPackage extends EPackage {
 	 * @ordered
 	 */
 	int TEST_RUNNER__OID = StructurePackage.OBJECT__OID;
-
-	/**
-	 * The feature id for the '<em><b>Container</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TEST_RUNNER__CONTAINER = StructurePackage.OBJECT__CONTAINER;
 
 	/**
 	 * The feature id for the '<em><b>Log</b></em>' containment reference.

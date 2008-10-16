@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: KermetaFactoryImpl.java,v 1.4 2008-10-08 14:37:31 cfaucher Exp $
+ * $Id: KermetaFactoryImpl.java,v 1.5 2008-10-16 13:17:43 cfaucher Exp $
  */
 package km2ecore.helper.kermeta.impl;
 
@@ -60,12 +60,12 @@ public class KermetaFactoryImpl extends EFactoryImpl implements KermetaFactory {
 	@Override
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
-		case KermetaPackage.GENERIC_TYPE_DEFINITION_HELPER:
-			return createGenericTypeDefinitionHelper();
-		case KermetaPackage.CONSTRAINT_HELPER:
-			return createConstraintHelper();
 		case KermetaPackage.COMPILER_HELPER_JAVA:
 			return createCompilerHelperJava();
+		case KermetaPackage.CONSTRAINT_HELPER:
+			return createConstraintHelper();
+		case KermetaPackage.GENERIC_TYPE_DEFINITION_HELPER:
+			return createGenericTypeDefinitionHelper();
 		default:
 			throw new IllegalArgumentException("The class '" + eClass.getName()
 					+ "' is not a valid classifier");
@@ -77,9 +77,9 @@ public class KermetaFactoryImpl extends EFactoryImpl implements KermetaFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public GenericTypeDefinitionHelper createGenericTypeDefinitionHelper() {
-		GenericTypeDefinitionHelperImpl genericTypeDefinitionHelper = new GenericTypeDefinitionHelperImpl();
-		return genericTypeDefinitionHelper;
+	public CompilerHelperJava createCompilerHelperJava() {
+		CompilerHelperJavaImpl compilerHelperJava = new CompilerHelperJavaImpl();
+		return compilerHelperJava;
 	}
 
 	/**
@@ -97,9 +97,9 @@ public class KermetaFactoryImpl extends EFactoryImpl implements KermetaFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public CompilerHelperJava createCompilerHelperJava() {
-		CompilerHelperJavaImpl compilerHelperJava = new CompilerHelperJavaImpl();
-		return compilerHelperJava;
+	public GenericTypeDefinitionHelper createGenericTypeDefinitionHelper() {
+		GenericTypeDefinitionHelperImpl genericTypeDefinitionHelper = new GenericTypeDefinitionHelperImpl();
+		return genericTypeDefinitionHelper;
 	}
 
 	/**

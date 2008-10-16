@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: InterpreterPackage.java,v 1.4 2008-10-08 14:37:45 cfaucher Exp $
+ * $Id: InterpreterPackage.java,v 1.5 2008-10-16 13:18:03 cfaucher Exp $
  */
 package kermeta.interpreter;
 
@@ -129,15 +129,6 @@ public interface InterpreterPackage extends EPackage {
 	int DYNAMIC_EXPRESSION__OID = StructurePackage.OBJECT__OID;
 
 	/**
-	 * The feature id for the '<em><b>Container</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DYNAMIC_EXPRESSION__CONTAINER = StructurePackage.OBJECT__CONTAINER;
-
-	/**
 	 * The feature id for the '<em><b>Expression</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -247,15 +238,6 @@ public interface InterpreterPackage extends EPackage {
 	int KERMETA_ERROR__OID = StructurePackage.OBJECT__OID;
 
 	/**
-	 * The feature id for the '<em><b>Container</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int KERMETA_ERROR__CONTAINER = StructurePackage.OBJECT__CONTAINER;
-
-	/**
 	 * The feature id for the '<em><b>Message</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -338,15 +320,6 @@ public interface InterpreterPackage extends EPackage {
 	int PARSE_ERROR__OID = KERMETA_ERROR__OID;
 
 	/**
-	 * The feature id for the '<em><b>Container</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PARSE_ERROR__CONTAINER = KERMETA_ERROR__CONTAINER;
-
-	/**
 	 * The feature id for the '<em><b>Message</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -427,15 +400,6 @@ public interface InterpreterPackage extends EPackage {
 	 * @ordered
 	 */
 	int TYPE_ERROR__OID = KERMETA_ERROR__OID;
-
-	/**
-	 * The feature id for the '<em><b>Container</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TYPE_ERROR__CONTAINER = KERMETA_ERROR__CONTAINER;
 
 	/**
 	 * The feature id for the '<em><b>Message</b></em>' attribute.

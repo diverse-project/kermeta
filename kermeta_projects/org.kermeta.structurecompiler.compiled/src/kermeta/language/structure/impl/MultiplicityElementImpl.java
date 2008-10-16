@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: MultiplicityElementImpl.java,v 1.4 2008-10-08 14:37:28 cfaucher Exp $
+ * $Id: MultiplicityElementImpl.java,v 1.5 2008-10-16 13:17:40 cfaucher Exp $
  */
 package kermeta.language.structure.impl;
 
@@ -103,7 +103,7 @@ public class MultiplicityElementImpl extends TypedElementImpl implements
 	 * @generated
 	 * @ordered
 	 */
-	protected static final Boolean IS_UNIQUE_EDEFAULT = Boolean.FALSE;
+	protected static final Boolean IS_UNIQUE_EDEFAULT = Boolean.TRUE;
 
 	/**
 	 * The cached value of the '{@link #getIsUnique() <em>Is Unique</em>}' attribute.
@@ -252,11 +252,11 @@ public class MultiplicityElementImpl extends TypedElementImpl implements
 
 		result = this.getName();
 
-		java.lang.Boolean idIfCond_329 = false;
-		idIfCond_329 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+		java.lang.Boolean idIfCond_386 = false;
+		idIfCond_386 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 				.isNotEqual(this.getEMFRenameAs(), "");
 
-		if (idIfCond_329) {
+		if (idIfCond_386) {
 
 			result = this.getEMFRenameAs();
 		}
@@ -291,11 +291,11 @@ public class MultiplicityElementImpl extends TypedElementImpl implements
 
 		result = "\nreturn ";
 
-		java.lang.Boolean idIfCond_330 = false;
-		idIfCond_330 = kermeta.standard.helper.IntegerWrapper.equals(this
+		java.lang.Boolean idIfCond_387 = false;
+		idIfCond_387 = kermeta.standard.helper.IntegerWrapper.equals(this
 				.getUpper(), 1);
 
-		if (idIfCond_330) {
+		if (idIfCond_387) {
 
 			result = kermeta.standard.helper.StringWrapper.plus(result,
 					"result");

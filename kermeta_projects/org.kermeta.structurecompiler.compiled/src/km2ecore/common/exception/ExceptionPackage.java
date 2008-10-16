@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ExceptionPackage.java,v 1.4 2008-10-08 14:37:37 cfaucher Exp $
+ * $Id: ExceptionPackage.java,v 1.5 2008-10-16 13:17:49 cfaucher Exp $
  */
 package km2ecore.common.exception;
 
@@ -126,15 +126,6 @@ public interface ExceptionPackage extends EPackage {
 	int UNDEFINED_URI_EPACKAGE_EXCEPTION__OID = ExceptionsPackage.EXCEPTION__OID;
 
 	/**
-	 * The feature id for the '<em><b>Container</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int UNDEFINED_URI_EPACKAGE_EXCEPTION__CONTAINER = ExceptionsPackage.EXCEPTION__CONTAINER;
-
-	/**
 	 * The feature id for the '<em><b>Message</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -233,15 +224,6 @@ public interface ExceptionPackage extends EPackage {
 	 * @ordered
 	 */
 	int UNDEFINED_VALUE_TYPE_INSTANCE_CLASS_NAME_EXCEPTION__OID = ExceptionsPackage.EXCEPTION__OID;
-
-	/**
-	 * The feature id for the '<em><b>Container</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int UNDEFINED_VALUE_TYPE_INSTANCE_CLASS_NAME_EXCEPTION__CONTAINER = ExceptionsPackage.EXCEPTION__CONTAINER;
 
 	/**
 	 * The feature id for the '<em><b>Message</b></em>' attribute.

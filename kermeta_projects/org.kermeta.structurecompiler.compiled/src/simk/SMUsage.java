@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: SMUsage.java,v 1.4 2008-10-08 14:37:58 cfaucher Exp $
+ * $Id: SMUsage.java,v 1.5 2008-10-16 13:18:16 cfaucher Exp $
  */
 package simk;
 

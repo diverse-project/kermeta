@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: DummyClassImpl.java,v 1.4 2008-10-08 14:37:42 cfaucher Exp $
+ * $Id: DummyClassImpl.java,v 1.5 2008-10-16 13:17:57 cfaucher Exp $
  */
 package kermeta.language.impl;
 

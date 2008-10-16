@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: JavaPackage.java,v 1.4 2008-10-08 14:37:49 cfaucher Exp $
+ * $Id: JavaPackage.java,v 1.5 2008-10-16 13:18:08 cfaucher Exp $
  */
 package km2ecore.helper.java;
 
@@ -123,15 +123,6 @@ public interface JavaPackage extends EPackage {
 	 * @ordered
 	 */
 	int IDENTIFIER_HELPER__OID = StructurePackage.OBJECT__OID;
-
-	/**
-	 * The feature id for the '<em><b>Container</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int IDENTIFIER_HELPER__CONTAINER = StructurePackage.OBJECT__CONTAINER;
 
 	/**
 	 * The number of structural features of the '<em>Identifier Helper</em>' class.

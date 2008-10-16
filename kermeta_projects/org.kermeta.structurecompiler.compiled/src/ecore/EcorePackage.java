@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: EcorePackage.java,v 1.4 2008-10-08 14:37:50 cfaucher Exp $
+ * $Id: EcorePackage.java,v 1.5 2008-10-16 13:18:09 cfaucher Exp $
  */
 package ecore;
 
@@ -128,15 +128,6 @@ public interface EcorePackage extends EPackage {
 	int EOBJECT__OID = StructurePackage.OBJECT__OID;
 
 	/**
-	 * The feature id for the '<em><b>Container</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EOBJECT__CONTAINER = StructurePackage.OBJECT__CONTAINER;
-
-	/**
 	 * The number of structural features of the '<em>EObject</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -208,15 +199,6 @@ public interface EcorePackage extends EPackage {
 	 * @ordered
 	 */
 	int EMODEL_ELEMENT__OID = EOBJECT__OID;
-
-	/**
-	 * The feature id for the '<em><b>Container</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EMODEL_ELEMENT__CONTAINER = EOBJECT__CONTAINER;
 
 	/**
 	 * The feature id for the '<em><b>EAnnotations</b></em>' containment reference list.
@@ -299,15 +281,6 @@ public interface EcorePackage extends EPackage {
 	 * @ordered
 	 */
 	int ENAMED_ELEMENT__OID = EMODEL_ELEMENT__OID;
-
-	/**
-	 * The feature id for the '<em><b>Container</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ENAMED_ELEMENT__CONTAINER = EMODEL_ELEMENT__CONTAINER;
 
 	/**
 	 * The feature id for the '<em><b>EAnnotations</b></em>' containment reference list.
@@ -399,15 +372,6 @@ public interface EcorePackage extends EPackage {
 	 * @ordered
 	 */
 	int ETYPED_ELEMENT__OID = ENAMED_ELEMENT__OID;
-
-	/**
-	 * The feature id for the '<em><b>Container</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ETYPED_ELEMENT__CONTAINER = ENAMED_ELEMENT__CONTAINER;
 
 	/**
 	 * The feature id for the '<em><b>EAnnotations</b></em>' containment reference list.
@@ -553,15 +517,6 @@ public interface EcorePackage extends EPackage {
 	 * @ordered
 	 */
 	int ESTRUCTURAL_FEATURE__OID = ETYPED_ELEMENT__OID;
-
-	/**
-	 * The feature id for the '<em><b>Container</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ESTRUCTURAL_FEATURE__CONTAINER = ETYPED_ELEMENT__CONTAINER;
 
 	/**
 	 * The feature id for the '<em><b>EAnnotations</b></em>' containment reference list.
@@ -770,15 +725,6 @@ public interface EcorePackage extends EPackage {
 	 * @ordered
 	 */
 	int EATTRIBUTE__OID = ESTRUCTURAL_FEATURE__OID;
-
-	/**
-	 * The feature id for the '<em><b>Container</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EATTRIBUTE__CONTAINER = ESTRUCTURAL_FEATURE__CONTAINER;
 
 	/**
 	 * The feature id for the '<em><b>EAnnotations</b></em>' containment reference list.
@@ -998,15 +944,6 @@ public interface EcorePackage extends EPackage {
 	int EANNOTATION__OID = EMODEL_ELEMENT__OID;
 
 	/**
-	 * The feature id for the '<em><b>Container</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EANNOTATION__CONTAINER = EMODEL_ELEMENT__CONTAINER;
-
-	/**
 	 * The feature id for the '<em><b>EAnnotations</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1134,15 +1071,6 @@ public interface EcorePackage extends EPackage {
 	int ECLASSIFIER__OID = ENAMED_ELEMENT__OID;
 
 	/**
-	 * The feature id for the '<em><b>Container</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ECLASSIFIER__CONTAINER = ENAMED_ELEMENT__CONTAINER;
-
-	/**
 	 * The feature id for the '<em><b>EAnnotations</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1268,15 +1196,6 @@ public interface EcorePackage extends EPackage {
 	 * @ordered
 	 */
 	int ECLASS__OID = ECLASSIFIER__OID;
-
-	/**
-	 * The feature id for the '<em><b>Container</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ECLASS__CONTAINER = ECLASSIFIER__CONTAINER;
 
 	/**
 	 * The feature id for the '<em><b>EAnnotations</b></em>' containment reference list.
@@ -1460,15 +1379,6 @@ public interface EcorePackage extends EPackage {
 	int EDATA_TYPE__OID = ECLASSIFIER__OID;
 
 	/**
-	 * The feature id for the '<em><b>Container</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EDATA_TYPE__CONTAINER = ECLASSIFIER__CONTAINER;
-
-	/**
 	 * The feature id for the '<em><b>EAnnotations</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1603,15 +1513,6 @@ public interface EcorePackage extends EPackage {
 	 * @ordered
 	 */
 	int EENUM__OID = EDATA_TYPE__OID;
-
-	/**
-	 * The feature id for the '<em><b>Container</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EENUM__CONTAINER = EDATA_TYPE__CONTAINER;
 
 	/**
 	 * The feature id for the '<em><b>EAnnotations</b></em>' containment reference list.
@@ -1759,15 +1660,6 @@ public interface EcorePackage extends EPackage {
 	int EENUM_LITERAL__OID = ENAMED_ELEMENT__OID;
 
 	/**
-	 * The feature id for the '<em><b>Container</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EENUM_LITERAL__CONTAINER = ENAMED_ELEMENT__CONTAINER;
-
-	/**
 	 * The feature id for the '<em><b>EAnnotations</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1895,15 +1787,6 @@ public interface EcorePackage extends EPackage {
 	int EFACTORY__OID = EMODEL_ELEMENT__OID;
 
 	/**
-	 * The feature id for the '<em><b>Container</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EFACTORY__CONTAINER = EMODEL_ELEMENT__CONTAINER;
-
-	/**
 	 * The feature id for the '<em><b>EAnnotations</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1993,15 +1876,6 @@ public interface EcorePackage extends EPackage {
 	 * @ordered
 	 */
 	int EOPERATION__OID = ETYPED_ELEMENT__OID;
-
-	/**
-	 * The feature id for the '<em><b>Container</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EOPERATION__CONTAINER = ETYPED_ELEMENT__CONTAINER;
 
 	/**
 	 * The feature id for the '<em><b>EAnnotations</b></em>' containment reference list.
@@ -2194,15 +2068,6 @@ public interface EcorePackage extends EPackage {
 	int EPACKAGE__OID = ENAMED_ELEMENT__OID;
 
 	/**
-	 * The feature id for the '<em><b>Container</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EPACKAGE__CONTAINER = ENAMED_ELEMENT__CONTAINER;
-
-	/**
 	 * The feature id for the '<em><b>EAnnotations</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2346,15 +2211,6 @@ public interface EcorePackage extends EPackage {
 	 * @ordered
 	 */
 	int EPARAMETER__OID = ETYPED_ELEMENT__OID;
-
-	/**
-	 * The feature id for the '<em><b>Container</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EPARAMETER__CONTAINER = ETYPED_ELEMENT__CONTAINER;
 
 	/**
 	 * The feature id for the '<em><b>EAnnotations</b></em>' containment reference list.
@@ -2509,15 +2365,6 @@ public interface EcorePackage extends EPackage {
 	 * @ordered
 	 */
 	int EREFERENCE__OID = ESTRUCTURAL_FEATURE__OID;
-
-	/**
-	 * The feature id for the '<em><b>Container</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EREFERENCE__CONTAINER = ESTRUCTURAL_FEATURE__CONTAINER;
 
 	/**
 	 * The feature id for the '<em><b>EAnnotations</b></em>' containment reference list.
@@ -2764,15 +2611,6 @@ public interface EcorePackage extends EPackage {
 	int ESTRING_TO_STRING_MAP_ENTRY__OID = StructurePackage.OBJECT__OID;
 
 	/**
-	 * The feature id for the '<em><b>Container</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ESTRING_TO_STRING_MAP_ENTRY__CONTAINER = StructurePackage.OBJECT__CONTAINER;
-
-	/**
 	 * The feature id for the '<em><b>Value</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2864,13 +2702,13 @@ public interface EcorePackage extends EPackage {
 	int EGENERIC_TYPE__OID = EOBJECT__OID;
 
 	/**
-	 * The feature id for the '<em><b>Container</b></em>' reference.
+	 * The feature id for the '<em><b>EUpper Bound</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int EGENERIC_TYPE__CONTAINER = EOBJECT__CONTAINER;
+	int EGENERIC_TYPE__EUPPER_BOUND = EOBJECT_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>EType Arguments</b></em>' containment reference list.
@@ -2879,16 +2717,7 @@ public interface EcorePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EGENERIC_TYPE__ETYPE_ARGUMENTS = EOBJECT_FEATURE_COUNT + 0;
-
-	/**
-	 * The feature id for the '<em><b>EUpper Bound</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EGENERIC_TYPE__EUPPER_BOUND = EOBJECT_FEATURE_COUNT + 1;
+	int EGENERIC_TYPE__ETYPE_ARGUMENTS = EOBJECT_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>EClassifier</b></em>' reference.
@@ -2989,15 +2818,6 @@ public interface EcorePackage extends EPackage {
 	 * @ordered
 	 */
 	int ETYPE_PARAMETER__OID = ENAMED_ELEMENT__OID;
-
-	/**
-	 * The feature id for the '<em><b>Container</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ETYPE_PARAMETER__CONTAINER = ENAMED_ELEMENT__CONTAINER;
 
 	/**
 	 * The feature id for the '<em><b>EAnnotations</b></em>' containment reference list.
@@ -4153,17 +3973,6 @@ public interface EcorePackage extends EPackage {
 	EClass getEGenericType();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link ecore.EGenericType#getETypeArguments <em>EType Arguments</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>EType Arguments</em>'.
-	 * @see ecore.EGenericType#getETypeArguments()
-	 * @see #getEGenericType()
-	 * @generated
-	 */
-	EReference getEGenericType_ETypeArguments();
-
-	/**
 	 * Returns the meta object for the containment reference '{@link ecore.EGenericType#getEUpperBound <em>EUpper Bound</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4173,6 +3982,17 @@ public interface EcorePackage extends EPackage {
 	 * @generated
 	 */
 	EReference getEGenericType_EUpperBound();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link ecore.EGenericType#getETypeArguments <em>EType Arguments</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>EType Arguments</em>'.
+	 * @see ecore.EGenericType#getETypeArguments()
+	 * @see #getEGenericType()
+	 * @generated
+	 */
+	EReference getEGenericType_ETypeArguments();
 
 	/**
 	 * Returns the meta object for the reference '{@link ecore.EGenericType#getEClassifier <em>EClassifier</em>}'.
@@ -5359,15 +5179,6 @@ public interface EcorePackage extends EPackage {
 		EClass EGENERIC_TYPE = eINSTANCE.getEGenericType();
 
 		/**
-		 * The meta object literal for the '<em><b>EType Arguments</b></em>' containment reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference EGENERIC_TYPE__ETYPE_ARGUMENTS = eINSTANCE
-				.getEGenericType_ETypeArguments();
-
-		/**
 		 * The meta object literal for the '<em><b>EUpper Bound</b></em>' containment reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -5375,6 +5186,15 @@ public interface EcorePackage extends EPackage {
 		 */
 		EReference EGENERIC_TYPE__EUPPER_BOUND = eINSTANCE
 				.getEGenericType_EUpperBound();
+
+		/**
+		 * The meta object literal for the '<em><b>EType Arguments</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference EGENERIC_TYPE__ETYPE_ARGUMENTS = eINSTANCE
+				.getEGenericType_ETypeArguments();
 
 		/**
 		 * The meta object literal for the '<em><b>EClassifier</b></em>' reference feature.

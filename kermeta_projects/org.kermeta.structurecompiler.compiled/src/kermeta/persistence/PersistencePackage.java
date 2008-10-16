@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: PersistencePackage.java,v 1.4 2008-10-08 14:37:53 cfaucher Exp $
+ * $Id: PersistencePackage.java,v 1.5 2008-10-16 13:18:13 cfaucher Exp $
  */
 package kermeta.persistence;
 
@@ -131,15 +131,6 @@ public interface PersistencePackage extends EPackage {
 	int RESOURCE__OID = StandardPackage.SET__OID;
 
 	/**
-	 * The feature id for the '<em><b>Container</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int RESOURCE__CONTAINER = StandardPackage.SET__CONTAINER;
-
-	/**
 	 * The feature id for the '<em><b>Values</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -158,22 +149,22 @@ public interface PersistencePackage extends EPackage {
 	int RESOURCE__REPOSITORY = StandardPackage.SET_FEATURE_COUNT + 0;
 
 	/**
-	 * The feature id for the '<em><b>Is Read Only</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int RESOURCE__IS_READ_ONLY = StandardPackage.SET_FEATURE_COUNT + 1;
-
-	/**
 	 * The feature id for the '<em><b>Meta Model URI</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int RESOURCE__META_MODEL_URI = StandardPackage.SET_FEATURE_COUNT + 2;
+	int RESOURCE__META_MODEL_URI = StandardPackage.SET_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Is Read Only</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RESOURCE__IS_READ_ONLY = StandardPackage.SET_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Uri</b></em>' attribute.
@@ -258,15 +249,6 @@ public interface PersistencePackage extends EPackage {
 	int EMF_RESOURCE__OID = RESOURCE__OID;
 
 	/**
-	 * The feature id for the '<em><b>Container</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EMF_RESOURCE__CONTAINER = RESOURCE__CONTAINER;
-
-	/**
 	 * The feature id for the '<em><b>Values</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -285,15 +267,6 @@ public interface PersistencePackage extends EPackage {
 	int EMF_RESOURCE__REPOSITORY = RESOURCE__REPOSITORY;
 
 	/**
-	 * The feature id for the '<em><b>Is Read Only</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EMF_RESOURCE__IS_READ_ONLY = RESOURCE__IS_READ_ONLY;
-
-	/**
 	 * The feature id for the '<em><b>Meta Model URI</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -301,6 +274,15 @@ public interface PersistencePackage extends EPackage {
 	 * @ordered
 	 */
 	int EMF_RESOURCE__META_MODEL_URI = RESOURCE__META_MODEL_URI;
+
+	/**
+	 * The feature id for the '<em><b>Is Read Only</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EMF_RESOURCE__IS_READ_ONLY = RESOURCE__IS_READ_ONLY;
 
 	/**
 	 * The feature id for the '<em><b>Uri</b></em>' attribute.
@@ -385,15 +367,6 @@ public interface PersistencePackage extends EPackage {
 	int REPOSITORY__OID = StructurePackage.OBJECT__OID;
 
 	/**
-	 * The feature id for the '<em><b>Container</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int REPOSITORY__CONTAINER = StructurePackage.OBJECT__CONTAINER;
-
-	/**
 	 * The feature id for the '<em><b>Resources</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -474,15 +447,6 @@ public interface PersistencePackage extends EPackage {
 	 * @ordered
 	 */
 	int DANGLING_DIAGNOSTIC__OID = StructurePackage.OBJECT__OID;
-
-	/**
-	 * The feature id for the '<em><b>Container</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DANGLING_DIAGNOSTIC__CONTAINER = StructurePackage.OBJECT__CONTAINER;
 
 	/**
 	 * The feature id for the '<em><b>Referencing Element</b></em>' reference.
@@ -585,15 +549,6 @@ public interface PersistencePackage extends EPackage {
 	int EMF_REPOSITORY__OID = REPOSITORY__OID;
 
 	/**
-	 * The feature id for the '<em><b>Container</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EMF_REPOSITORY__CONTAINER = REPOSITORY__CONTAINER;
-
-	/**
 	 * The feature id for the '<em><b>Resources</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -603,22 +558,22 @@ public interface PersistencePackage extends EPackage {
 	int EMF_REPOSITORY__RESOURCES = REPOSITORY__RESOURCES;
 
 	/**
-	 * The feature id for the '<em><b>Ignore Load Error Unknown Metaclass</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EMF_REPOSITORY__IGNORE_LOAD_ERROR_UNKNOWN_METACLASS = REPOSITORY_FEATURE_COUNT + 0;
-
-	/**
 	 * The feature id for the '<em><b>Use Interpreter Internal Resources</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int EMF_REPOSITORY__USE_INTERPRETER_INTERNAL_RESOURCES = REPOSITORY_FEATURE_COUNT + 1;
+	int EMF_REPOSITORY__USE_INTERPRETER_INTERNAL_RESOURCES = REPOSITORY_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Ignore Load Error Unknown Metaclass</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EMF_REPOSITORY__IGNORE_LOAD_ERROR_UNKNOWN_METACLASS = REPOSITORY_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Ignore All Load Errors</b></em>' attribute.
@@ -669,17 +624,6 @@ public interface PersistencePackage extends EPackage {
 	EReference getResource_Repository();
 
 	/**
-	 * Returns the meta object for the attribute '{@link kermeta.persistence.Resource#getIsReadOnly <em>Is Read Only</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Is Read Only</em>'.
-	 * @see kermeta.persistence.Resource#getIsReadOnly()
-	 * @see #getResource()
-	 * @generated
-	 */
-	EAttribute getResource_IsReadOnly();
-
-	/**
 	 * Returns the meta object for the attribute '{@link kermeta.persistence.Resource#getMetaModelURI <em>Meta Model URI</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -689,6 +633,17 @@ public interface PersistencePackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getResource_MetaModelURI();
+
+	/**
+	 * Returns the meta object for the attribute '{@link kermeta.persistence.Resource#getIsReadOnly <em>Is Read Only</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Is Read Only</em>'.
+	 * @see kermeta.persistence.Resource#getIsReadOnly()
+	 * @see #getResource()
+	 * @generated
+	 */
+	EAttribute getResource_IsReadOnly();
 
 	/**
 	 * Returns the meta object for the attribute '{@link kermeta.persistence.Resource#getUri <em>Uri</em>}'.
@@ -786,17 +741,6 @@ public interface PersistencePackage extends EPackage {
 	EClass getEMFRepository();
 
 	/**
-	 * Returns the meta object for the attribute '{@link kermeta.persistence.EMFRepository#getIgnoreLoadErrorUnknownMetaclass <em>Ignore Load Error Unknown Metaclass</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Ignore Load Error Unknown Metaclass</em>'.
-	 * @see kermeta.persistence.EMFRepository#getIgnoreLoadErrorUnknownMetaclass()
-	 * @see #getEMFRepository()
-	 * @generated
-	 */
-	EAttribute getEMFRepository_IgnoreLoadErrorUnknownMetaclass();
-
-	/**
 	 * Returns the meta object for the attribute '{@link kermeta.persistence.EMFRepository#getUseInterpreterInternalResources <em>Use Interpreter Internal Resources</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -806,6 +750,17 @@ public interface PersistencePackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getEMFRepository_UseInterpreterInternalResources();
+
+	/**
+	 * Returns the meta object for the attribute '{@link kermeta.persistence.EMFRepository#getIgnoreLoadErrorUnknownMetaclass <em>Ignore Load Error Unknown Metaclass</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Ignore Load Error Unknown Metaclass</em>'.
+	 * @see kermeta.persistence.EMFRepository#getIgnoreLoadErrorUnknownMetaclass()
+	 * @see #getEMFRepository()
+	 * @generated
+	 */
+	EAttribute getEMFRepository_IgnoreLoadErrorUnknownMetaclass();
 
 	/**
 	 * Returns the meta object for the attribute '{@link kermeta.persistence.EMFRepository#getIgnoreAllLoadErrors <em>Ignore All Load Errors</em>}'.
@@ -870,14 +825,6 @@ public interface PersistencePackage extends EPackage {
 		EReference RESOURCE__REPOSITORY = eINSTANCE.getResource_Repository();
 
 		/**
-		 * The meta object literal for the '<em><b>Is Read Only</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute RESOURCE__IS_READ_ONLY = eINSTANCE.getResource_IsReadOnly();
-
-		/**
 		 * The meta object literal for the '<em><b>Meta Model URI</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -885,6 +832,14 @@ public interface PersistencePackage extends EPackage {
 		 */
 		EAttribute RESOURCE__META_MODEL_URI = eINSTANCE
 				.getResource_MetaModelURI();
+
+		/**
+		 * The meta object literal for the '<em><b>Is Read Only</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute RESOURCE__IS_READ_ONLY = eINSTANCE.getResource_IsReadOnly();
 
 		/**
 		 * The meta object literal for the '<em><b>Uri</b></em>' attribute feature.
@@ -970,15 +925,6 @@ public interface PersistencePackage extends EPackage {
 		EClass EMF_REPOSITORY = eINSTANCE.getEMFRepository();
 
 		/**
-		 * The meta object literal for the '<em><b>Ignore Load Error Unknown Metaclass</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute EMF_REPOSITORY__IGNORE_LOAD_ERROR_UNKNOWN_METACLASS = eINSTANCE
-				.getEMFRepository_IgnoreLoadErrorUnknownMetaclass();
-
-		/**
 		 * The meta object literal for the '<em><b>Use Interpreter Internal Resources</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -986,6 +932,15 @@ public interface PersistencePackage extends EPackage {
 		 */
 		EAttribute EMF_REPOSITORY__USE_INTERPRETER_INTERNAL_RESOURCES = eINSTANCE
 				.getEMFRepository_UseInterpreterInternalResources();
+
+		/**
+		 * The meta object literal for the '<em><b>Ignore Load Error Unknown Metaclass</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute EMF_REPOSITORY__IGNORE_LOAD_ERROR_UNKNOWN_METACLASS = eINSTANCE
+				.getEMFRepository_IgnoreLoadErrorUnknownMetaclass();
 
 		/**
 		 * The meta object literal for the '<em><b>Ignore All Load Errors</b></em>' attribute feature.

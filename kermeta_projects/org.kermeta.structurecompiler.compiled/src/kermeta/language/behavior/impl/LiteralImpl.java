@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: LiteralImpl.java,v 1.4 2008-10-08 14:37:39 cfaucher Exp $
+ * $Id: LiteralImpl.java,v 1.5 2008-10-16 13:17:52 cfaucher Exp $
  */
 package kermeta.language.behavior.impl;
 

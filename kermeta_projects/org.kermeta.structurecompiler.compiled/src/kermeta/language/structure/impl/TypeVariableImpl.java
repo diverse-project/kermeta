@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: TypeVariableImpl.java,v 1.4 2008-10-08 14:37:28 cfaucher Exp $
+ * $Id: TypeVariableImpl.java,v 1.5 2008-10-16 13:17:38 cfaucher Exp $
  */
 package kermeta.language.structure.impl;
 
@@ -278,8 +278,8 @@ public abstract class TypeVariableImpl extends TypeContainerImpl implements
 
 		result = this.getName();
 
-		java.lang.Boolean idIfCond_408 = false;
-		idIfCond_408 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+		java.lang.Boolean idIfCond_392 = false;
+		idIfCond_392 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 				.isInstanceOf(
 						org.kermeta.compil.runtime.helper.language.ObjectUtil
 								.container(elem),
@@ -288,23 +288,23 @@ public abstract class TypeVariableImpl extends TypeContainerImpl implements
 								.getMetaClass(
 										"kermeta.language.structure.NamedElement"));
 
-		if (idIfCond_408) {
+		if (idIfCond_392) {
 
 			elem = (kermeta.language.structure.NamedElement) org.kermeta.compil.runtime.helper.language.ObjectUtil
 					.container(elem);
-			java.lang.Boolean idLoopCond_409 = false;
-			while (!idLoopCond_409) {
-				idLoopCond_409 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+			java.lang.Boolean idLoopCond_393 = false;
+			while (!idLoopCond_393) {
+				idLoopCond_393 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 						.equals(elem, null);
-				if (idLoopCond_409) {
+				if (idLoopCond_393) {
 				} else {
 
 					result = kermeta.standard.helper.StringWrapper.plus(
 							kermeta.standard.helper.StringWrapper.plus(elem
 									.getName(), "::"), result);
 
-					java.lang.Boolean idIfCond_410 = false;
-					idIfCond_410 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+					java.lang.Boolean idIfCond_394 = false;
+					idIfCond_394 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 							.isInstanceOf(
 									org.kermeta.compil.runtime.helper.language.ObjectUtil
 											.container(elem),
@@ -313,7 +313,7 @@ public abstract class TypeVariableImpl extends TypeContainerImpl implements
 											.getMetaClass(
 													"kermeta.language.structure.NamedElement"));
 
-					if (idIfCond_410) {
+					if (idIfCond_394) {
 
 						elem = (kermeta.language.structure.NamedElement) org.kermeta.compil.runtime.helper.language.ObjectUtil
 								.container(elem);
@@ -341,16 +341,16 @@ public abstract class TypeVariableImpl extends TypeContainerImpl implements
 
 		result = false;
 
-		java.lang.Boolean idIfCond_331 = false;
-		idIfCond_331 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+		java.lang.Boolean idIfCond_259 = false;
+		idIfCond_259 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 				.isInstanceOf(this, org.kermeta.compil.runtime.ExecutionContext
 						.getInstance().getMetaClass(
 								"kermeta.language.structure.ParameterizedType"));
 
-		if (idIfCond_331) {
+		if (idIfCond_259) {
 
-			java.lang.Boolean idIfCond_332 = false;
-			idIfCond_332 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+			java.lang.Boolean idIfCond_260 = false;
+			idIfCond_260 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 					.isInstanceOf(
 							((kermeta.language.structure.ParameterizedType) org.kermeta.compil.runtime.helper.language.ObjectUtil
 									.asType(
@@ -365,7 +365,7 @@ public abstract class TypeVariableImpl extends TypeContainerImpl implements
 									.getMetaClass(
 											"kermeta.language.structure.ClassDefinition"));
 
-			if (idIfCond_332) {
+			if (idIfCond_260) {
 
 				result = ((kermeta.language.structure.ClassDefinition) org.kermeta.compil.runtime.helper.language.ObjectUtil
 						.asType(
@@ -395,9 +395,11 @@ public abstract class TypeVariableImpl extends TypeContainerImpl implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public kermeta.language.structure.Object clone(
-			kermeta.language.structure.Object objectToClone) {
-		kermeta.language.structure.Object result = null;
+	public String createBehaviorJava(KM2EcoreContext context) {
+
+		java.lang.String result = null;
+
+		result = "";
 
 		return result;
 
@@ -408,11 +410,9 @@ public abstract class TypeVariableImpl extends TypeContainerImpl implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public String createBehaviorJava(KM2EcoreContext context) {
-
-		java.lang.String result = null;
-
-		result = "";
+	public kermeta.language.structure.Object clone(
+			kermeta.language.structure.Object objectToClone) {
+		kermeta.language.structure.Object result = null;
 
 		return result;
 
@@ -442,21 +442,21 @@ public abstract class TypeVariableImpl extends TypeContainerImpl implements
 
 		result = false;
 
-		java.lang.Boolean idIfCond_333 = false;
-		idIfCond_333 = kermeta.standard.helper.BooleanWrapper
+		java.lang.Boolean idIfCond_261 = false;
+		idIfCond_261 = kermeta.standard.helper.BooleanWrapper
 				.not(org.kermeta.compil.runtime.helper.language.ObjectUtil
 						.isVoid(this));
 
-		if (idIfCond_333) {
+		if (idIfCond_261) {
 
-			java.lang.Boolean idIfCond_334 = false;
-			idIfCond_334 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+			java.lang.Boolean idIfCond_262 = false;
+			idIfCond_262 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 					.isInstanceOf(this,
 							org.kermeta.compil.runtime.ExecutionContext
 									.getInstance().getMetaClass(
 											"kermeta.language.structure.Class"));
 
-			if (idIfCond_334) {
+			if (idIfCond_262) {
 
 				result = kermeta.standard.helper.StringWrapper
 						.equals(
@@ -471,8 +471,8 @@ public abstract class TypeVariableImpl extends TypeContainerImpl implements
 								"Boolean");
 			} else {
 
-				java.lang.Boolean idIfCond_335 = false;
-				idIfCond_335 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+				java.lang.Boolean idIfCond_263 = false;
+				idIfCond_263 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 						.isInstanceOf(
 								this,
 								org.kermeta.compil.runtime.ExecutionContext
@@ -480,10 +480,10 @@ public abstract class TypeVariableImpl extends TypeContainerImpl implements
 										.getMetaClass(
 												"kermeta.language.structure.PrimitiveType"));
 
-				if (idIfCond_335) {
+				if (idIfCond_263) {
 
-					java.lang.Boolean idIfCond_336 = false;
-					idIfCond_336 = kermeta.standard.helper.BooleanWrapper
+					java.lang.Boolean idIfCond_264 = false;
+					idIfCond_264 = kermeta.standard.helper.BooleanWrapper
 							.or(
 									kermeta.standard.helper.BooleanWrapper
 											.or(
@@ -534,7 +534,7 @@ public abstract class TypeVariableImpl extends TypeContainerImpl implements
 															.createBehaviorJava(context),
 													"Boolean"));
 
-					if (idIfCond_336) {
+					if (idIfCond_264) {
 
 						result = true;
 					}
@@ -558,27 +558,27 @@ public abstract class TypeVariableImpl extends TypeContainerImpl implements
 
 		kermeta.language.structure.Class result = null;
 
-		java.lang.Boolean idIfCond_337 = false;
-		idIfCond_337 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+		java.lang.Boolean idIfCond_265 = false;
+		idIfCond_265 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 				.isInstanceOf(this, org.kermeta.compil.runtime.ExecutionContext
 						.getInstance().getMetaClass(
 								"kermeta.language.structure.PrimitiveType"));
 
-		if (idIfCond_337) {
+		if (idIfCond_265) {
 
 			kermeta.language.structure.PrimitiveType pt = ((kermeta.language.structure.PrimitiveType) org.kermeta.compil.runtime.helper.language.ObjectUtil
 					.asType(this, org.kermeta.compil.runtime.ExecutionContext
 							.getInstance().getMetaClass(
 									"kermeta.language.structure.PrimitiveType")));
 
-			java.lang.Boolean idIfCond_338 = false;
-			idIfCond_338 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+			java.lang.Boolean idIfCond_266 = false;
+			idIfCond_266 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 					.isInstanceOf(pt.getInstanceType(),
 							org.kermeta.compil.runtime.ExecutionContext
 									.getInstance().getMetaClass(
 											"kermeta.language.structure.Class"));
 
-			if (idIfCond_338) {
+			if (idIfCond_266) {
 
 				result = ((kermeta.language.structure.Class) org.kermeta.compil.runtime.helper.language.ObjectUtil
 						.asType(
@@ -614,13 +614,13 @@ public abstract class TypeVariableImpl extends TypeContainerImpl implements
 
 		kermeta.language.structure.Type theType = null;
 
-		java.lang.Boolean idIfCond_339 = false;
-		idIfCond_339 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+		java.lang.Boolean idIfCond_267 = false;
+		idIfCond_267 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 				.isInstanceOf(this, org.kermeta.compil.runtime.ExecutionContext
 						.getInstance().getMetaClass(
 								"kermeta.language.structure.PrimitiveType"));
 
-		if (idIfCond_339) {
+		if (idIfCond_267) {
 
 			theType = ((kermeta.language.structure.Type) org.kermeta.compil.runtime.helper.language.ObjectUtil
 					.asType(this.getClassFromPrimitiveType(),
@@ -632,8 +632,8 @@ public abstract class TypeVariableImpl extends TypeContainerImpl implements
 			theType = this;
 		}
 
-		java.lang.Boolean idIfCond_340 = false;
-		idIfCond_340 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+		java.lang.Boolean idIfCond_268 = false;
+		idIfCond_268 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 				.isInstanceOf(
 						theType,
 						org.kermeta.compil.runtime.ExecutionContext
@@ -641,7 +641,7 @@ public abstract class TypeVariableImpl extends TypeContainerImpl implements
 								.getMetaClass(
 										"kermeta.language.structure.ParameterizedType"));
 
-		if (idIfCond_340) {
+		if (idIfCond_268) {
 
 			kermeta.language.structure.ParameterizedType pt = ((kermeta.language.structure.ParameterizedType) org.kermeta.compil.runtime.helper.language.ObjectUtil
 					.asType(
@@ -651,8 +651,8 @@ public abstract class TypeVariableImpl extends TypeContainerImpl implements
 									.getMetaClass(
 											"kermeta.language.structure.ParameterizedType")));
 
-			java.lang.Boolean idIfCond_341 = false;
-			idIfCond_341 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+			java.lang.Boolean idIfCond_269 = false;
+			idIfCond_269 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 					.isInstanceOf(
 							pt.getTypeDefinition(),
 							org.kermeta.compil.runtime.ExecutionContext
@@ -660,7 +660,7 @@ public abstract class TypeVariableImpl extends TypeContainerImpl implements
 									.getMetaClass(
 											"kermeta.language.structure.ClassDefinition"));
 
-			if (idIfCond_341) {
+			if (idIfCond_269) {
 
 				result = ((kermeta.language.structure.ClassDefinition) org.kermeta.compil.runtime.helper.language.ObjectUtil
 						.asType(
@@ -689,13 +689,13 @@ public abstract class TypeVariableImpl extends TypeContainerImpl implements
 
 		result = null;
 
-		java.lang.Boolean idIfCond_342 = false;
-		idIfCond_342 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+		java.lang.Boolean idIfCond_270 = false;
+		idIfCond_270 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 				.isInstanceOf(this, org.kermeta.compil.runtime.ExecutionContext
 						.getInstance().getMetaClass(
 								"kermeta.language.structure.Class"));
 
-		if (idIfCond_342) {
+		if (idIfCond_270) {
 
 			kermeta.language.structure.ClassDefinition cd = ((kermeta.language.structure.Class) org.kermeta.compil.runtime.helper.language.ObjectUtil
 					.asType(this, org.kermeta.compil.runtime.ExecutionContext
@@ -706,8 +706,8 @@ public abstract class TypeVariableImpl extends TypeContainerImpl implements
 			result = cd.getName();
 		} else {
 
-			java.lang.Boolean idIfCond_343 = false;
-			idIfCond_343 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+			java.lang.Boolean idIfCond_271 = false;
+			idIfCond_271 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 					.isInstanceOf(
 							this,
 							org.kermeta.compil.runtime.ExecutionContext
@@ -715,7 +715,7 @@ public abstract class TypeVariableImpl extends TypeContainerImpl implements
 									.getMetaClass(
 											"kermeta.language.structure.ObjectTypeVariable"));
 
-			if (idIfCond_343) {
+			if (idIfCond_271) {
 
 				kermeta.language.structure.ObjectTypeVariable otv = ((kermeta.language.structure.ObjectTypeVariable) org.kermeta.compil.runtime.helper.language.ObjectUtil
 						.asType(
@@ -728,8 +728,8 @@ public abstract class TypeVariableImpl extends TypeContainerImpl implements
 				result = otv.getName();
 			} else {
 
-				java.lang.Boolean idIfCond_344 = false;
-				idIfCond_344 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+				java.lang.Boolean idIfCond_272 = false;
+				idIfCond_272 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 						.isInstanceOf(
 								this,
 								org.kermeta.compil.runtime.ExecutionContext
@@ -737,7 +737,7 @@ public abstract class TypeVariableImpl extends TypeContainerImpl implements
 										.getMetaClass(
 												"kermeta.language.structure.PrimitiveType"));
 
-				if (idIfCond_344) {
+				if (idIfCond_272) {
 
 					kermeta.language.structure.ClassDefinition cd = this
 							.getClassFromPrimitiveType()
@@ -746,8 +746,8 @@ public abstract class TypeVariableImpl extends TypeContainerImpl implements
 					result = cd.getName();
 				} else {
 
-					java.lang.Boolean idIfCond_345 = false;
-					idIfCond_345 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+					java.lang.Boolean idIfCond_273 = false;
+					idIfCond_273 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 							.isInstanceOf(
 									this,
 									org.kermeta.compil.runtime.ExecutionContext
@@ -755,7 +755,7 @@ public abstract class TypeVariableImpl extends TypeContainerImpl implements
 											.getMetaClass(
 													"kermeta.language.structure.Enumeration"));
 
-					if (idIfCond_345) {
+					if (idIfCond_273) {
 
 						result = ((kermeta.language.structure.Enumeration) org.kermeta.compil.runtime.helper.language.ObjectUtil
 								.asType(
@@ -767,8 +767,8 @@ public abstract class TypeVariableImpl extends TypeContainerImpl implements
 								.getName();
 					} else {
 
-						java.lang.Boolean idIfCond_346 = false;
-						idIfCond_346 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+						java.lang.Boolean idIfCond_274 = false;
+						idIfCond_274 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 								.isInstanceOf(
 										this,
 										org.kermeta.compil.runtime.ExecutionContext
@@ -776,7 +776,7 @@ public abstract class TypeVariableImpl extends TypeContainerImpl implements
 												.getMetaClass(
 														"kermeta.language.structure.VoidType"));
 
-						if (idIfCond_346) {
+						if (idIfCond_274) {
 
 							result = "VoidType";
 						}
@@ -789,24 +789,24 @@ public abstract class TypeVariableImpl extends TypeContainerImpl implements
 
 		}
 
-		java.lang.Boolean idIfCond_347 = false;
+		java.lang.Boolean idIfCond_275 = false;
 		//BIft:orElse
 
-		java.lang.Boolean result_ft119 = null;
+		java.lang.Boolean result_ft78 = null;
 
-		java.lang.Boolean idIfCond_348 = false;
-		idIfCond_348 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+		java.lang.Boolean idIfCond_276 = false;
+		idIfCond_276 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 				.isVoid(result);
 
-		if (idIfCond_348) {
+		if (idIfCond_276) {
 
-			result_ft119 = true;
+			result_ft78 = true;
 		} else {
 
 			//BIle:right
-			/*This variable should be never used*/kermeta.language.structure.Object v_lbdExp119 = null;
+			/*This variable should be never used*/kermeta.language.structure.Object v_lbdExp78 = null;
 
-			result_ft119 = ((kermeta.language.structure.Operation) org.kermeta.compil.runtime.helper.language.ClassUtil
+			result_ft78 = ((kermeta.language.structure.Operation) org.kermeta.compil.runtime.helper.language.ClassUtil
 					.newObject("kermeta.language.structure.Operation"))
 					.isVoidType(result);
 			//EIle:right
@@ -814,10 +814,10 @@ public abstract class TypeVariableImpl extends TypeContainerImpl implements
 		}
 
 		//CEC
-		idIfCond_347 = result_ft119;
+		idIfCond_275 = result_ft78;
 		//EIft:orElse
 
-		if (idIfCond_347) {
+		if (idIfCond_275) {
 
 			result = "VoidType";
 		}
@@ -837,23 +837,23 @@ public abstract class TypeVariableImpl extends TypeContainerImpl implements
 
 		result = false;
 
-		java.lang.Boolean idIfCond_349 = false;
-		idIfCond_349 = kermeta.standard.helper.BooleanWrapper
+		java.lang.Boolean idIfCond_277 = false;
+		idIfCond_277 = kermeta.standard.helper.BooleanWrapper
 				.not(org.kermeta.compil.runtime.helper.language.ObjectUtil
 						.isVoid(this));
 
-		if (idIfCond_349) {
+		if (idIfCond_277) {
 
 			java.lang.String tName = null;
 
-			java.lang.Boolean idIfCond_350 = false;
-			idIfCond_350 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+			java.lang.Boolean idIfCond_278 = false;
+			idIfCond_278 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 					.isInstanceOf(this,
 							org.kermeta.compil.runtime.ExecutionContext
 									.getInstance().getMetaClass(
 											"kermeta.language.structure.Class"));
 
-			if (idIfCond_350) {
+			if (idIfCond_278) {
 
 				tName = ((kermeta.language.structure.ParameterizedType) org.kermeta.compil.runtime.helper.language.ObjectUtil
 						.asType(
@@ -864,22 +864,22 @@ public abstract class TypeVariableImpl extends TypeContainerImpl implements
 												"kermeta.language.structure.ParameterizedType")))
 						.getTypeDefinition().getName();
 
-				java.lang.Boolean idIfCond_351 = false;
-				idIfCond_351 = kermeta.standard.helper.BooleanWrapper.or(
+				java.lang.Boolean idIfCond_279 = false;
+				idIfCond_279 = kermeta.standard.helper.BooleanWrapper.or(
 						kermeta.standard.helper.StringWrapper.equals(tName,
 								"Integer"),
 						kermeta.standard.helper.StringWrapper.equals(tName,
 								"Real"));
 
-				if (idIfCond_351) {
+				if (idIfCond_279) {
 
 					result = true;
 				}
 
 			} else {
 
-				java.lang.Boolean idIfCond_352 = false;
-				idIfCond_352 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+				java.lang.Boolean idIfCond_280 = false;
+				idIfCond_280 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 						.isInstanceOf(
 								this,
 								org.kermeta.compil.runtime.ExecutionContext
@@ -887,7 +887,7 @@ public abstract class TypeVariableImpl extends TypeContainerImpl implements
 										.getMetaClass(
 												"kermeta.language.structure.PrimitiveType"));
 
-				if (idIfCond_352) {
+				if (idIfCond_280) {
 
 					tName = ((kermeta.language.structure.PrimitiveType) org.kermeta.compil.runtime.helper.language.ObjectUtil
 							.asType(
@@ -898,14 +898,14 @@ public abstract class TypeVariableImpl extends TypeContainerImpl implements
 													"kermeta.language.structure.PrimitiveType")))
 							.createBehaviorJava(context);
 
-					java.lang.Boolean idIfCond_353 = false;
-					idIfCond_353 = kermeta.standard.helper.BooleanWrapper.or(
+					java.lang.Boolean idIfCond_281 = false;
+					idIfCond_281 = kermeta.standard.helper.BooleanWrapper.or(
 							kermeta.standard.helper.StringWrapper.equals(tName,
 									"Integer"),
 							kermeta.standard.helper.StringWrapper.equals(tName,
 									"Real"));
 
-					if (idIfCond_353) {
+					if (idIfCond_281) {
 
 						result = true;
 					}
@@ -931,13 +931,13 @@ public abstract class TypeVariableImpl extends TypeContainerImpl implements
 
 		result = null;
 
-		java.lang.Boolean idIfCond_354 = false;
-		idIfCond_354 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+		java.lang.Boolean idIfCond_282 = false;
+		idIfCond_282 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 				.isInstanceOf(this, org.kermeta.compil.runtime.ExecutionContext
 						.getInstance().getMetaClass(
 								"kermeta.language.structure.Class"));
 
-		if (idIfCond_354) {
+		if (idIfCond_282) {
 
 			kermeta.language.structure.ClassDefinition cd = ((kermeta.language.structure.Class) org.kermeta.compil.runtime.helper.language.ObjectUtil
 					.asType(this, org.kermeta.compil.runtime.ExecutionContext
@@ -948,8 +948,8 @@ public abstract class TypeVariableImpl extends TypeContainerImpl implements
 			result = cd.qualifiedName();
 		} else {
 
-			java.lang.Boolean idIfCond_355 = false;
-			idIfCond_355 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+			java.lang.Boolean idIfCond_283 = false;
+			idIfCond_283 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 					.isInstanceOf(
 							this,
 							org.kermeta.compil.runtime.ExecutionContext
@@ -957,7 +957,7 @@ public abstract class TypeVariableImpl extends TypeContainerImpl implements
 									.getMetaClass(
 											"kermeta.language.structure.ObjectTypeVariable"));
 
-			if (idIfCond_355) {
+			if (idIfCond_283) {
 
 				kermeta.language.structure.ObjectTypeVariable otv = ((kermeta.language.structure.ObjectTypeVariable) org.kermeta.compil.runtime.helper.language.ObjectUtil
 						.asType(
@@ -970,8 +970,8 @@ public abstract class TypeVariableImpl extends TypeContainerImpl implements
 				result = otv.qualifiedName();
 			} else {
 
-				java.lang.Boolean idIfCond_356 = false;
-				idIfCond_356 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+				java.lang.Boolean idIfCond_284 = false;
+				idIfCond_284 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 						.isInstanceOf(
 								this,
 								org.kermeta.compil.runtime.ExecutionContext
@@ -979,7 +979,7 @@ public abstract class TypeVariableImpl extends TypeContainerImpl implements
 										.getMetaClass(
 												"kermeta.language.structure.PrimitiveType"));
 
-				if (idIfCond_356) {
+				if (idIfCond_284) {
 
 					kermeta.language.structure.ClassDefinition cd = this
 							.getClassFromPrimitiveType()
@@ -988,8 +988,8 @@ public abstract class TypeVariableImpl extends TypeContainerImpl implements
 					result = cd.qualifiedName();
 				} else {
 
-					java.lang.Boolean idIfCond_357 = false;
-					idIfCond_357 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+					java.lang.Boolean idIfCond_285 = false;
+					idIfCond_285 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 							.isInstanceOf(
 									this,
 									org.kermeta.compil.runtime.ExecutionContext
@@ -997,7 +997,7 @@ public abstract class TypeVariableImpl extends TypeContainerImpl implements
 											.getMetaClass(
 													"kermeta.language.structure.Enumeration"));
 
-					if (idIfCond_357) {
+					if (idIfCond_285) {
 
 						result = ((kermeta.language.structure.Enumeration) org.kermeta.compil.runtime.helper.language.ObjectUtil
 								.asType(
@@ -1009,8 +1009,8 @@ public abstract class TypeVariableImpl extends TypeContainerImpl implements
 								.qualifiedName();
 					} else {
 
-						java.lang.Boolean idIfCond_358 = false;
-						idIfCond_358 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+						java.lang.Boolean idIfCond_286 = false;
+						idIfCond_286 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 								.isInstanceOf(
 										this,
 										org.kermeta.compil.runtime.ExecutionContext
@@ -1018,7 +1018,7 @@ public abstract class TypeVariableImpl extends TypeContainerImpl implements
 												.getMetaClass(
 														"kermeta.language.structure.VoidType"));
 
-						if (idIfCond_358) {
+						if (idIfCond_286) {
 
 							result = "kermeta::language::structure::VoidType";
 						}
@@ -1031,24 +1031,24 @@ public abstract class TypeVariableImpl extends TypeContainerImpl implements
 
 		}
 
-		java.lang.Boolean idIfCond_359 = false;
+		java.lang.Boolean idIfCond_287 = false;
 		//BIft:orElse
 
-		java.lang.Boolean result_ft120 = null;
+		java.lang.Boolean result_ft79 = null;
 
-		java.lang.Boolean idIfCond_360 = false;
-		idIfCond_360 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+		java.lang.Boolean idIfCond_288 = false;
+		idIfCond_288 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 				.isVoid(result);
 
-		if (idIfCond_360) {
+		if (idIfCond_288) {
 
-			result_ft120 = true;
+			result_ft79 = true;
 		} else {
 
 			//BIle:right
-			/*This variable should be never used*/kermeta.language.structure.Object v_lbdExp120 = null;
+			/*This variable should be never used*/kermeta.language.structure.Object v_lbdExp79 = null;
 
-			result_ft120 = ((kermeta.language.structure.Operation) org.kermeta.compil.runtime.helper.language.ClassUtil
+			result_ft79 = ((kermeta.language.structure.Operation) org.kermeta.compil.runtime.helper.language.ClassUtil
 					.newObject("kermeta.language.structure.Operation"))
 					.isVoidType(result);
 			//EIle:right
@@ -1056,13 +1056,29 @@ public abstract class TypeVariableImpl extends TypeContainerImpl implements
 		}
 
 		//CEC
-		idIfCond_359 = result_ft120;
+		idIfCond_287 = result_ft79;
 		//EIft:orElse
 
-		if (idIfCond_359) {
+		if (idIfCond_287) {
 
 			result = "kermeta::language::structure::VoidType";
 		}
+
+		return result;
+
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Boolean isSubTypeOf(Type object) {
+
+		java.lang.Boolean result = null;
+
+		result = org.kermeta.compil.runtime.helper.language.TypeUtil
+				.isSuperTypeOf(object, this);
 
 		return result;
 
@@ -1091,22 +1107,6 @@ public abstract class TypeVariableImpl extends TypeContainerImpl implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Boolean isSubTypeOf(Type object) {
-
-		java.lang.Boolean result = null;
-
-		result = org.kermeta.compil.runtime.helper.language.TypeUtil
-				.isSuperTypeOf(object, this);
-
-		return result;
-
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public Boolean isSuperTypeOf(Type object) {
 
 		java.lang.Boolean result = null;
@@ -1123,12 +1123,20 @@ public abstract class TypeVariableImpl extends TypeContainerImpl implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Boolean isInstance(kermeta.language.structure.Object element) {
+	public Boolean isEDataType() {
 
 		java.lang.Boolean result = null;
 
-		result = org.kermeta.compil.runtime.helper.language.ObjectUtil
-				.isInstanceOf(element, this);
+		result = false;
+
+		java.lang.Boolean idIfCond_289 = false;
+		idIfCond_289 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+				.isNotEqual(this.getEMFEDataTypeInstanceClassName(), "");
+
+		if (idIfCond_289) {
+
+			result = true;
+		}
 
 		return result;
 
@@ -1139,20 +1147,12 @@ public abstract class TypeVariableImpl extends TypeContainerImpl implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Boolean isEDataType() {
+	public Boolean isInstance(kermeta.language.structure.Object element) {
 
 		java.lang.Boolean result = null;
 
-		result = false;
-
-		java.lang.Boolean idIfCond_361 = false;
-		idIfCond_361 = org.kermeta.compil.runtime.helper.language.ObjectUtil
-				.isNotEqual(this.getEMFEDataTypeInstanceClassName(), "");
-
-		if (idIfCond_361) {
-
-			result = true;
-		}
+		result = org.kermeta.compil.runtime.helper.language.ObjectUtil
+				.isInstanceOf(element, this);
 
 		return result;
 
