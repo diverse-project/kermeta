@@ -1,6 +1,6 @@
  
 
-/*$Id: Pass4.java,v 1.7 2008-04-28 11:51:07 ftanguy Exp $
+/*$Id: Pass4.java,v 1.8 2008-10-16 09:36:51 cfaucher Exp $
 * Project : org.kermeta.merger
 * File : 	Pass4.java
 * License : EPL
@@ -171,7 +171,7 @@ public class Pass4 extends MergePass {
 		for ( Property p : properties ) {
 			if ( p.getGetterBody() != null )
 				newProperty.setGetterBody( cloneBehavior(p.getGetterBody()) );
-			if ( p.getSetterBody() != null )
+			if ( !newProperty.isIsReadOnly() && p.getSetterBody() != null )
 				newProperty.setSetterBody( cloneBehavior(p.getSetterBody()) );
 		}
 	}

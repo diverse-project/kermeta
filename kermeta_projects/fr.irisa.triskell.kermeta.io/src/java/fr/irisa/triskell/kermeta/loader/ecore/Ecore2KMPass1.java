@@ -1,6 +1,6 @@
 
 
-/*$Id: Ecore2KMPass1.java,v 1.36 2008-06-24 14:39:38 cfaucher Exp $
+/*$Id: Ecore2KMPass1.java,v 1.37 2008-10-16 09:36:48 cfaucher Exp $
 * Project : org.kermeta.io
 * File : 	Ecore2KMpass1.java
 * License : EPL
@@ -333,6 +333,7 @@ public class Ecore2KMPass1 extends Ecore2KMPass {
 		currentProperty.setLower(node.getLowerBound());
 		currentProperty.setDefault(node.getDefaultValueLiteral());
 		currentProperty.setIsDerived(node.isDerived());
+		currentProperty.setIsReadOnly(!node.isChangeable());
 		currentProperty.setOwningClass(currentClassDefinition);
 		// EAttribute specific values
 		currentProperty.setIsID(node.isID());
@@ -388,6 +389,7 @@ public class Ecore2KMPass1 extends Ecore2KMPass {
 		currentProperty.setLower(node.getLowerBound());
 		currentProperty.setDefault(node.getDefaultValueLiteral());
 		currentProperty.setIsDerived(node.isDerived());
+		currentProperty.setIsReadOnly(!node.isChangeable());
 		currentProperty.setOwningClass(currentClassDefinition);
 		// EReference specific values
 		currentProperty.setIsID(false);
