@@ -1,6 +1,6 @@
 
 
-/*$Id: RunnerHelper.java,v 1.3 2008-04-28 11:50:59 ftanguy Exp $
+/*$Id: RunnerHelper.java,v 1.4 2008-10-17 11:52:07 dvojtise Exp $
 * Project : fr.irisa.triskell.kermeta.runner
 * File : 	Runnerhelper.java
 * License : EPL
@@ -24,6 +24,7 @@ import org.kermeta.io.checker.KermetaUnitChecker;
 import org.kermeta.io.plugin.IOPlugin;
 import org.kermeta.merger.Merger;
 
+import fr.irisa.triskell.kermeta.error.KermetaInterpreterError;
 import fr.irisa.triskell.kermeta.exceptions.NotRegisteredURIException;
 import fr.irisa.triskell.kermeta.exceptions.URIMalformedException;
 import fr.irisa.triskell.kermeta.modelhelper.KermetaUnitHelper;
@@ -32,6 +33,9 @@ public class RunnerHelper {
 
 	static public KermetaUnit getKermetaUnitToExecute(String filePath, String mergedUnitUri) throws NotRegisteredURIException, URIMalformedException, IOException {
 	    KermetaUnit source = KermetaUnitChecker.check(filePath);
+   		if (KermetaUnitHelper.hasIndirectError(source) || KermetaUnitHelper.hasError(source)){
+   			throw new KermetaInterpreterError("Cannot run invalid kermeta program. First error is : "+ KermetaUnitHelper.getAllErrors(source).get(0).getValue());
+   		}
 	    LinkedHashSet<KermetaUnit> kermetaUnitsToMerge = new LinkedHashSet<KermetaUnit> ();
    		kermetaUnitsToMerge.add(source);
    		kermetaUnitsToMerge.addAll( KermetaUnitHelper.getAllImportedKermetaUnits(source) );
