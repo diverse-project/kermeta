@@ -1,6 +1,6 @@
 
 
-/*$Id: ConfigurationCreator.java,v 1.6 2008-10-16 09:05:33 cfaucher Exp $
+/*$Id: ConfigurationCreator.java,v 1.7 2008-10-17 15:17:02 cfaucher Exp $
 * Project : org.kermeta.compiler.ui
 * File : 	ConfigurationCreator.java
 * License : EPL
@@ -81,7 +81,10 @@ public class ConfigurationCreator {
 	 */
 	private String updateConfiguration(GenPackage p) {
 		
-		String result = createPersistenceForRegisteredPackage(p);
+		String result = "";
+		if( p.canGenerate() ) {
+			result = createPersistenceForRegisteredPackage(p);
+		}
 		
 		for ( GenPackage subPackage : p.getSubGenPackages() ) {
 			result += updateConfiguration(subPackage);
