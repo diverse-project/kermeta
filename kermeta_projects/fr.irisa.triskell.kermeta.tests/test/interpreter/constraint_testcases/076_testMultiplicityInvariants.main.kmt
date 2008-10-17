@@ -1,15 +1,15 @@
-/* $Id: 076_testInvariants.main.kmt,v 1.1 2008-07-21 11:30:49 ftanguy Exp $ 
+/* $Id: 076_testMultiplicityInvariants.main.kmt,v 1.1 2008-10-17 08:42:15 dvojtise Exp $ 
  * Creation : July 17, 2008
  * Licence  : EPL 
- * Copyright:
+ * Copyright: INRIA
  * Authors  : 
  *            paco
  */
-@mainClass "testInvariants::Main"
+@mainClass "testMultiplicityInvariants::Main"
 @mainOperation "main"
 
 
-package testInvariants;
+package testMultiplicityInvariants;
 
 
 require kermeta

@@ -1,4 +1,4 @@
-/* $Id: JunitTestSuite.java,v 1.10 2008-05-28 13:38:04 dvojtise Exp $
+/* $Id: JunitTestSuite.java,v 1.11 2008-10-17 08:42:11 dvojtise Exp $
  * Project : Kermeta.interpreter
  * File : JunitTestSuite.java
  * License : EPL
@@ -140,6 +140,8 @@ public class JunitTestSuite extends TestSuite {
 		testWithFile("test/interpreter/constraint_testcases","033_atpre_feature_test.main.kmt" );
 
 		testWithFile("test/interpreter/constraint_testcases","034_atpre_feature_complex_test.main.kmt" );
+
+		testWithFile("test/interpreter/constraint_testcases","076_testMultiplicityInvariants.main.kmt" );
 
 /*** END GENERATED TESTS ***/
 		// do not modify this comment
