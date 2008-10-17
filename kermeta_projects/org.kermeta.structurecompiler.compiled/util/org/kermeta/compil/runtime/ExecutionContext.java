@@ -22,7 +22,7 @@ public class ExecutionContext
 
 {
 
-	private String _modelKMURI = "platform:/resource/org.kermeta.structurecompiler.compiled/config/StructureCompiler.km";
+	private String _modelKMURI;
 
 	private List<Object> _modelKM;
 
@@ -56,6 +56,10 @@ public class ExecutionContext
 					.println("Beginning of the initialization of the reflection...");
 			Repository repository = PersistenceFactory.eINSTANCE
 					.createEMFRepository();
+			
+			String local_path = ExecutionContext.class.getProtectionDomain().getCodeSource().getLocation().toExternalForm();
+			_modelKMURI = local_path.replace("bin/", "config/StructureCompiler.km");
+			
 			Resource resource = repository.createResource(_modelKMURI,
 					"http://www.kermeta.org/kermeta/1_2_0//kermeta");
 			KmReflectionHelper.load(resource);
