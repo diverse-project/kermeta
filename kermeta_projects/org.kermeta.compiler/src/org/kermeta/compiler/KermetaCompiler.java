@@ -1,4 +1,4 @@
-/* $Id: KermetaCompiler.java,v 1.9 2008-09-25 08:28:57 cfaucher Exp $
+/* $Id: KermetaCompiler.java,v 1.10 2008-10-17 14:40:13 cfaucher Exp $
  * Project   : fr.irisa.triskell.kermeta.compiler
  * File      : CompileKermetaAction.java
  * License   : EPL
@@ -46,6 +46,7 @@ public class KermetaCompiler extends AbstractCompilerImpl {
 		this.kermetafile = kermetaFile;
 	}
 	
+	@Deprecated
 	public void generateEcore(IFile ifile) {
 				
 		Map<String, Object> options = new HashMap<String, Object>();

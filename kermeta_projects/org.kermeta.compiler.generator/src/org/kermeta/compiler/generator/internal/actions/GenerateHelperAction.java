@@ -8,7 +8,7 @@
  * Technologies), Jacques Lescot (Anyware Technologies) - initial API and
  * implementation
  ******************************************************************************/
-/*$Id: GenerateHelperAction.java,v 1.9 2008-10-16 09:04:39 cfaucher Exp $
+/*$Id: GenerateHelperAction.java,v 1.10 2008-10-17 14:40:19 cfaucher Exp $
 * Project : org.kermeta.compiler.generator
 * File : 	GenerateHelperAction.java
 * License : EPL
@@ -26,31 +26,17 @@ import java.lang.reflect.InvocationTargetException;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.CoreException;
-import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.codegen.ecore.genmodel.GenModel;
 import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.ecore.util.Diagnostician;
-import org.eclipse.jface.action.IAction;
-import org.eclipse.jface.dialogs.ProgressMonitorDialog;
-import org.eclipse.jface.viewers.ISelection;
-import org.eclipse.jface.viewers.IStructuredSelection;
-import org.eclipse.swt.widgets.Shell;
-import org.eclipse.ui.IActionDelegate;
 import org.eclipse.ui.actions.WorkspaceModifyOperation;
 import org.kermeta.compiler.generator.helper.model.SimkModelHelper;
 import org.kermeta.compiler.generator.internal.GeneratorPlugin;
 import org.kermeta.compiler.generator.internal.generators.CompilerHelperGenerator;
-import org.kermeta.generator.AbstractGenerator;
 import org.kermeta.generator.util.ConfiguratorObjectManager;
-import org.kermeta.io.KermetaUnit;
-import org.kermeta.io.loader.plugin.LoaderPlugin;
-
-import fr.irisa.triskell.kermeta.exceptions.NotRegisteredURIException;
-import fr.irisa.triskell.kermeta.exceptions.URIMalformedException;
-import fr.irisa.triskell.kermeta.exporter.ecore.EcoreExporter;
 
 /**
  * Action that generates editor classes conforming to a default JET templates.
@@ -63,6 +49,12 @@ public class GenerateHelperAction //implements IActionDelegate
     //private ISelection selection;
 
     private IProject generatedProject;
+    
+    private IProgressMonitor monitor;
+    
+    public GenerateHelperAction(IProgressMonitor monitor) {
+    	this.monitor = monitor;
+    }
 
     /**
      * @see org.eclipse.ui.IActionDelegate#selectionChanged(org.eclipse.jface.action.IAction,
@@ -148,25 +140,27 @@ public class GenerateHelperAction //implements IActionDelegate
                 }
             }
         };
-
+        
         try {
+			op.run(this.monitor);
+		} catch (InvocationTargetException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+/*        try {
             Shell shell = GeneratorPlugin.getActiveWorkbenchShell();
             ProgressMonitorDialog dialog = new ProgressMonitorDialog(shell);
             dialog.run(true, false, op);
-
-            ConfiguratorObjectManager manager = new ConfiguratorObjectManager();
-            /*manager.load(file.getFullPath());
-            // retrieve the root model object and check if it has the expected type
-            if (manager.getRootModelObject() instanceof GenModel) {
-            	GenModel configuration = (GenModel) manager.getRootModelObject();
-                if (configuration.isUpdateClasspath()) {
-                    AbstractGenerator.organizeImports(generatedProject);
-                }
-            }*/
+            
+            
         } catch (Exception e) {
             GeneratorPlugin.log(e);
             GeneratorPlugin.displayDialog(null, "An error occurred during the helper generation", IStatus.ERROR);
-        }
+        }*/
     }
 
 }

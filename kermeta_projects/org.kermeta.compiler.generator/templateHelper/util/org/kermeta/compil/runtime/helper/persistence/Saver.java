@@ -1,12 +1,14 @@
 
-/*$Id: Saver.java,v 1.6 2008-10-16 09:04:34 cfaucher Exp $
-* Project : org.kermeta.framework.compiled.runtime.helper
+/*$Id: Saver.java,v 1.7 2008-10-17 14:40:18 cfaucher Exp $
+* Project : org.kermeta.compiler.generator
 * File : 	Saver.java
 * License : EPL
 * Copyright : IRISA / INRIA / Universite de Rennes 1
 * ----------------------------------------------------------------------------
 * Creation date : 24 juin 08
-* Authors : paco
+* Authors : 
+* 			Francois TANGUY	<ftanguy@irisa.fr>
+* 			Cyril FAUCHER	<cfaucher@irisa.fr>
 */
 package org.kermeta.compil.runtime.helper.persistence;
 
@@ -22,21 +24,18 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EFactory;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
-import org.eclipse.emf.ecore.EPackage.Registry;
-import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
-import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 
 
 /**
- * 
- * @author paco
+ * @generated
  *
  */
 public class Saver extends SaverOrLoader {
 	
 	/**
+	 * @generated
 	 * This static method is the api offered to clients that may want to use saving functionality.
 	 * @param contents The list of objects to clone.
 	 * @param modelURI The uri of the model to save.
@@ -64,7 +63,7 @@ public class Saver extends SaverOrLoader {
 	}
 		
 	/**
-	 * 
+	 * @generated
 	 * @param metamodelURI
 	 */
 	public Saver(String metamodelURI) {
@@ -72,7 +71,7 @@ public class Saver extends SaverOrLoader {
 	}
 	
 	/**
-	 * 
+	 * @generated
 	 * @param o The object to clone.
 	 * @return The cloned object or null if no factory found.
 	 */
@@ -85,7 +84,7 @@ public class Saver extends SaverOrLoader {
 	}
 
 	/**
-	 * 
+	 * @generated
 	 * @param sourceObject
 	 * @param factory
 	 */
@@ -169,7 +168,7 @@ public class Saver extends SaverOrLoader {
 	}
 	
 	/**
-	 * 
+	 * @generated
 	 * @param clazz The class to be search one of its structural feature.
 	 * @param featureName The name of the structural feature to look for.
 	 * @return The structural feature which name matches the feature name argument or null if any.
@@ -182,6 +181,11 @@ public class Saver extends SaverOrLoader {
 		return null;
 	}
 	
+	/**
+	 * @generated
+	 * @param metamodelURI
+	 * @return
+	 */
 	@Override
 	protected EFactory getFactory(String metamodelURI) {
 		//return PersistenceMapping.getEPackageForSaving(metamodelURI).getEFactoryInstance();

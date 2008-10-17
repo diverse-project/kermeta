@@ -2,7 +2,7 @@
 	 package="org.kermeta.compiler.generator.templates"
 	 class="PersistenceMapping"
 	 skeleton="../../skeleton/2param.skeleton"
-	 version="$Id: PersistenceMapping.javajet,v 1.1 2008-10-16 09:04:37 cfaucher Exp $" %>
+	 version="$Id: PersistenceMapping.javajet,v 1.2 2008-10-17 14:40:18 cfaucher Exp $" %>
 <%String uriEPackageInstance = (String) argument0;%>
 <%String uriEPackageClass = (String) argument1;%>
 
@@ -16,6 +16,7 @@ import org.eclipse.emf.ecore.EPackage;
 final public class PersistenceMapping {
 	
 	/**
+	 * @generated
 	 * Initialize the EPackage registry for the generated EPackages that are not deployed 
 	 */
 	public static void initialize() {
@@ -27,8 +28,14 @@ final public class PersistenceMapping {
 			
 	}
 	
+	/**
+	 * @generated
+	 */
 	public static HashMap<String, String> uri_ePackageClass = new HashMap<String, String>();
 	
+	/**
+	 * @generated
+	 */
 	private static void initializeMap() {
 		<%=uriEPackageClass%>
 	}

@@ -1,4 +1,4 @@
-/* $Id: Compiler.java,v 1.16 2008-10-16 09:05:32 cfaucher Exp $
+/* $Id: Compiler.java,v 1.17 2008-10-17 14:40:13 cfaucher Exp $
  * Project   : fr.irisa.triskell.kermeta.compiler
  * File      : Compiler.java
  * License   : EPL
@@ -18,6 +18,7 @@ import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
+import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.codegen.ecore.genmodel.GenJDKLevel;
 import org.eclipse.emf.codegen.ecore.genmodel.GenModel;
@@ -50,6 +51,8 @@ public class Compiler extends org.kermeta.compiler.Generator {
 	
 	private Context compilationContext;
 	
+	private IProgressMonitor monitor;
+	
 	/**
 	 * @deprecated
 	 */
@@ -67,15 +70,17 @@ public class Compiler extends org.kermeta.compiler.Generator {
 	 * @param kmUnit
 	 * @param km2ecoreGen
 	 */
-	public Compiler(String abosluteEcorePath) {
+	public Compiler(String abosluteEcorePath, IProgressMonitor monitor) {
 		super();
 		arguments[0] = "-ecore2GenModel";
 		arguments[1] = abosluteEcorePath;
 		arguments[2] = "";
-		arguments[3] = "Ckm"; // it seems this assignment is deprecated
+		//arguments[3] = "Ckm"; // it seems this assignment is deprecated
 		
 		// Get the IFile corresponding to the generated Ecore file
 		this.ecorefile = ResourceHelper.getIFile("file:/"+arguments[1]);
+		
+		this.monitor = monitor;
 		
 		initContext();
 	}
@@ -84,13 +89,15 @@ public class Compiler extends org.kermeta.compiler.Generator {
 	 * Constructor
 	 * @param ecoreFile
 	 */
-	public Compiler(IFile ecoreFile) {
+	public Compiler(IFile ecoreFile, IProgressMonitor monitor) {
 		super();
 		ecorefile = ecoreFile;
 		arguments[0] = "-ecore2GenModel";
 		arguments[1] = ecorefile.getLocation().toString();
 		arguments[2] = "";
-		arguments[3] = "Ckm"; // it seems this assignment is deprecated
+		//arguments[3] = "Ckm"; // it seems this assignment is deprecated
+		
+		this.monitor = monitor;
 		
 		initContext();
 	}
@@ -222,7 +229,7 @@ public class Compiler extends org.kermeta.compiler.Generator {
 	 * Launch the generation of the Java Source from the simk file
 	 */
 	private void compileHelpers() {
-		GenerateHelperAction compileHelperAction = new GenerateHelperAction();
+		GenerateHelperAction compileHelperAction = new GenerateHelperAction(this.monitor);
 		
 		String kmFilePath = ecorefile.getFullPath().removeFileExtension().addFileExtension("km").toString();
 		
@@ -238,7 +245,7 @@ public class Compiler extends org.kermeta.compiler.Generator {
 		
 		if(genModelFile.exists()) {
 			this.kmFilePathForReflection = kmFilePath_forReflection.toString();
-			this.getCompilationContext().setKmFilePathForReflection(this.kmFilePathForReflection);
+			this.getCompilationContext().setKmFilePathForReflection("config/" + kmFile.getName());//this.kmFilePathForReflection);
 			compileHelperAction.generate(genModelFile, this.getCompilationContext(), simk_file);
 		
 			//Copying the *.km file for the reflection

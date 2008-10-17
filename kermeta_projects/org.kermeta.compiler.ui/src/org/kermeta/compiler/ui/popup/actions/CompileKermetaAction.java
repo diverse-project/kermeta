@@ -1,4 +1,4 @@
-/* $Id: CompileKermetaAction.java,v 1.6 2008-09-02 21:57:37 cfaucher Exp $
+/* $Id: CompileKermetaAction.java,v 1.7 2008-10-17 14:40:57 cfaucher Exp $
  * Project   : fr.irisa.triskell.kermeta.compiler
  * File      : CompileKermetaAction.java
  * License   : EPL
@@ -12,18 +12,15 @@ package org.kermeta.compiler.ui.popup.actions;
 
 import java.util.Iterator;
 
+import kermeta.compiler.runner.Main__main_km2ecore_behaviorJava__Runner;
+
 import org.apache.commons.logging.Log;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.Platform;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.jobs.Job;
-import org.eclipse.emf.ecore.EAnnotation;
-import org.eclipse.emf.ecore.EModelElement;
-import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EOperation;
-import org.eclipse.emf.ecore.EParameter;
-import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.jface.action.IAction;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.StructuredSelection;
@@ -35,7 +32,7 @@ import org.kermeta.compiler.KermetaCompiler;
 import org.kermeta.io.KermetaUnit;
 import org.kermeta.io.loader.plugin.LoaderPlugin;
 import org.kermeta.log4j.util.LogConfigurationHelper;
-import org.kermeta.model.KermetaModelHelper;
+import org.kermeta.simk.presentation.SimkEditor;
 
 import fr.irisa.triskell.eclipse.resources.ResourceHelper;
 import fr.irisa.triskell.kermeta.exceptions.NotRegisteredURIException;
@@ -73,6 +70,11 @@ public class CompileKermetaAction implements IObjectActionDelegate {
 				/*************/
 		
 				try {
+					
+					//The following 2 lines are required to set rightly the Simk plugin
+					Platform.getBundle("org.kermeta.simk").start();
+					SimkEditor simkEditor = new SimkEditor();
+					
 		
 					KermetaCompiler kermetaCompiler = new KermetaCompiler(file);
 					
@@ -86,13 +88,16 @@ public class CompileKermetaAction implements IObjectActionDelegate {
 					IFile km_merged_file = ResourceHelper.getIFile(file.getFullPath()
 							.removeFileExtension().addFileExtension("km")
 							.toString());
-					kermetaCompiler.generateEcore(km_merged_file);
+					
+					String[] _args = new String[1];
+					_args[0] = km_merged_file.getFullPath().toString();
+					Main__main_km2ecore_behaviorJava__Runner.main_forDeployedVersion(_args);
 					
 					// Run the generation of Java Classes and the required helpers (Simk)
 					IFile ecore_file = ResourceHelper.getIFile(file.getFullPath()
 							.removeFileExtension().addFileExtension("ecore")
 							.toString());
-					Compiler compiler = new Compiler(ecore_file);//new Compiler(ecore_file.getFullPath().toString());
+					Compiler compiler = new Compiler(ecore_file, monitor);
 					compiler.run();
 					internalLog.info("The compilation process is complete");
 								

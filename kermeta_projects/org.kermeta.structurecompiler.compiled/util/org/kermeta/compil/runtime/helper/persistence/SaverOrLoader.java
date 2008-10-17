@@ -1,5 +1,5 @@
 
-/*$Id: SaverOrLoader.java,v 1.5 2008-10-16 13:18:21 cfaucher Exp $
+/*$Id: SaverOrLoader.java,v 1.6 2008-10-17 14:40:53 cfaucher Exp $
 * Project : org.kermeta.framework.compiled.runtime.helper
 * File : 	SaverOrLoader.java
 * License : EPL
@@ -161,6 +161,7 @@ abstract public class SaverOrLoader {
 					_instanceMapping.put(sourceObject, targetObject);
 					return targetObject;
 				} catch (Exception e) {
+					System.out.println();
 				}
 			} else {
 				EPackage root_pack = getRootEPackage(Registry.INSTANCE.getEPackage(metamodelURI));
@@ -172,6 +173,7 @@ abstract public class SaverOrLoader {
 			}
 			                     
 		} else {
+			System.out.println();
 		
 		/*IFile file_from_uri = ResourceHelper.getIFile(uri, true);
 		// the uri is a file
@@ -250,7 +252,7 @@ abstract public class SaverOrLoader {
 	 * @return
 	 */
 	protected Enumerator createInstance(Enumerator sourceObject, String metamodelURI) {
-		//for ( EFactory factory : _factories ) {
+
 		EPackage root_pack = getRootEPackage(Registry.INSTANCE.getEPackage(metamodelURI));
 		String tmp_pack_qn = sourceObject.getClass().getCanonicalName().replace("." + sourceObject.getClass().getSimpleName(), "");
 		String str_pack = tmp_pack_qn;
@@ -258,7 +260,7 @@ abstract public class SaverOrLoader {
 		str_pack = str_pack + "." + tab_[tab_.length-1].substring(0, 1).toUpperCase() + tab_[tab_.length-1].substring(1, tab_[tab_.length-1].length()) + "Package";
 		
 		Class<?> str_pack_Class;
-		//EEnum eEnum = null;
+
 		EPackage _epack = null;
 		try {
 			str_pack_Class = SaverOrLoader.class.getClassLoader().loadClass(str_pack);
@@ -283,12 +285,10 @@ abstract public class SaverOrLoader {
 			e.printStackTrace();
 		}
 		
-		//EPackage _epack = eEnum.getEPackage();
-		
 		EFactory factory = getTargetEFactory(root_pack, _epack);
 		
-		String creationMethodName = "create" + sourceObject.getClass().getSimpleName() + "FromString";
 		try {
+			String creationMethodName = "create" + sourceObject.getClass().getSimpleName() + "FromString";
 			Method method = factory.getClass().getMethod(creationMethodName, new Class[] {EDataType.class, String.class});
 			Enumerator targetObject = (Enumerator) method.invoke(factory, new Object[] {null, sourceObject.getLiteral()});
 			return targetObject;
@@ -310,15 +310,9 @@ abstract public class SaverOrLoader {
 		if( !Registry.INSTANCE.containsKey(_metamodelURI) ) {
 			registerTheUri(_metamodelURI);
 		}
-		Registry.INSTANCE.keySet();
-		/*if( !Registry.INSTANCE.containsKey(_metamodelURI) ) {
-			registerEcoreMetamodel(_metamodelURI);
-		}*/
-		
-//		if( Registry.INSTANCE.containsKey(_metamodelURI) ) {
-			String fileExtension = getFileExtension(_modelURI);
-			Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(fileExtension, new XMIResourceFactoryImpl());
-//		}
+
+		String fileExtension = getFileExtension(_modelURI);
+		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(fileExtension, new XMIResourceFactoryImpl());
 	}
 	
 	public static String getFileExtension( String modelURI ) {
@@ -328,22 +322,18 @@ abstract public class SaverOrLoader {
 	
 	public static void registerEcoreMetamodel(String uri){
 		
-		/*IFile file = IFile.
-			URI tu = URI.createURI(uri);
-		if(file.isFile()) {*/
-            // Get a Trek structure
-            Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(org.eclipse.emf.ecore.EcorePackage.eNAME, new XMIResourceFactoryImpl());
-            ResourceSet resource_set = new ResourceSetImpl();
-            URI u = URI.createURI(uri);//file.getFullPath().toString());
-            u = new ExtensibleURIConverterImpl().normalize(u);
-            Resource resource = resource_set.getResource(u, true);
+		//Register the Ecore metamodel
+        Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(org.eclipse.emf.ecore.EcorePackage.eNAME, new XMIResourceFactoryImpl());
+        ResourceSet resource_set = new ResourceSetImpl();
+        URI u = URI.createURI(uri);//file.getFullPath().toString());
+        u = new ExtensibleURIConverterImpl().normalize(u);
+        Resource resource = resource_set.getResource(u, true);
             
-            for(EObject eobj : resource.getContents()) {
-    			if( eobj instanceof EPackage) {
-    				registerPackages((EPackage) eobj);
-    			}
+        for(EObject eobj : resource.getContents()) {
+        	if( eobj instanceof EPackage) {
+    			registerPackages((EPackage) eobj);
     		}
-        //}
+    	}
 	}
 	
 	/**

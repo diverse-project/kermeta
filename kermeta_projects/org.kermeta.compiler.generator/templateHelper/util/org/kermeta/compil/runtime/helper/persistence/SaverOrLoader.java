@@ -1,13 +1,16 @@
 
-/*$Id: SaverOrLoader.java,v 1.3 2008-10-16 15:43:48 cfaucher Exp $
-* Project : org.kermeta.framework.compiled.runtime.helper
+/*$Id: SaverOrLoader.java,v 1.4 2008-10-17 14:40:18 cfaucher Exp $
+* Project : org.kermeta.compiler.generator
 * File : 	SaverOrLoader.java
 * License : EPL
 * Copyright : IRISA / INRIA / Universite de Rennes 1
 * ----------------------------------------------------------------------------
 * Creation date : 24 juin 08
-* Authors : paco
+* Authors : 
+* 			Francois TANGUY	<ftanguy@irisa.fr>
+* 			Cyril FAUCHER	<cfaucher@irisa.fr>
 */
+
 package org.kermeta.compil.runtime.helper.persistence;
 
 import java.lang.reflect.Field;
@@ -35,15 +38,21 @@ import org.kermeta.compil.runtime.PersistenceMapping;
 
 import fr.irisa.triskell.eclipse.ecore.EcoreHelper;
 
+/**
+ * @generated
+ *
+ */
 abstract public class SaverOrLoader {
 
 	/**
+	 * @generated
 	 * A table to map each source object to their corresponding target object.
 	 * Note that the mapping is one to one.
 	 */
 	protected Hashtable<EObject, EObject> _instanceMapping = new Hashtable<EObject, EObject>();
 
 	/**
+	 * @generated
 	 * Get the factory to use to create target objects conforming to the generated metamodel.
 	 * To do that, the factory used to create instances coming from the package with the given uri is retrieved.
 	 * With that Factory, look for a mapping and get the corresponding factory.
@@ -52,15 +61,19 @@ abstract public class SaverOrLoader {
 	 */
 	abstract protected EFactory getFactory(String metamodelURI);
 	
-	/**		*/
+	/**
+	 * uri of the metamodel used to load or save the given resource
+	 */
 	private String metamodelURI;
 	
-	/**		*/
+	/**
+	 * uri of the metamodel used to load or save the given resource in the compiled side
+	 */
 	private String metamodelURISpecialCompiler;
 
 	
 	/**
-	 * 
+	 * @generated
 	 * @param metamodelURI
 	 */
 	protected SaverOrLoader(String metamodelURI) {
@@ -69,6 +82,11 @@ abstract public class SaverOrLoader {
 		//initialize();
 	}
 	
+	/**
+	 * @generated
+	 * @param pack
+	 * @return
+	 */
 	public EPackage getRootEPackage(EPackage pack) {
 		if( pack.eContainer()!=null && pack.eContainer() instanceof EPackage ) {
 			getRootEPackage((EPackage) pack.eContainer());
@@ -76,10 +94,22 @@ abstract public class SaverOrLoader {
 		return pack;
 	}
 	
+	/**
+	 * @generated
+	 * @param target_root_epack
+	 * @param source_epack
+	 * @return
+	 */
 	public EFactory getTargetEFactory(EPackage target_root_epack, EPackage source_epack) {
 		return getTargetEFactory(target_root_epack, EcoreHelper.getQualifiedName(source_epack, "."));
 	}
 	
+	/**
+	 * @generated
+	 * @param target_root_epack
+	 * @param source_epack_qn
+	 * @return
+	 */
 	public EFactory getTargetEFactory(EPackage target_root_epack, String source_epack_qn) {
 		String[] array_qualified_name = source_epack_qn.split("\\.");
 		
@@ -93,10 +123,22 @@ abstract public class SaverOrLoader {
 		return target_root_epack.getEFactoryInstance();
 	}
 	
+	/**
+	 * @generated
+	 * @param target_root_epack
+	 * @param source_eclass
+	 * @return
+	 */
 	public org.eclipse.emf.ecore.EClass getTargetEClass(EPackage target_root_epack, org.eclipse.emf.ecore.EClass source_eclass) {
 		return getTargetEClass(target_root_epack, EcoreHelper.getQualifiedName(source_eclass, "."));
 	}
 	
+	/**
+	 * @generated
+	 * @param target_root_epack
+	 * @param source_eclass_qn
+	 * @return
+	 */
 	public org.eclipse.emf.ecore.EClass getTargetEClass(EPackage target_root_epack, String source_eclass_qn) {
 		String[] array_qualified_name = source_eclass_qn.split("\\.");
 		
@@ -118,6 +160,12 @@ abstract public class SaverOrLoader {
 		return null;
 	}
 
+	/**
+	 * @generated
+	 * @param _epack
+	 * @param search_name
+	 * @return
+	 */
 	private EPackage getEPackageBySimpleName(EPackage _epack, String search_name) {
 		for(EPackage epack : _epack.getESubpackages()) {
 			if(epack.getName().equals(search_name)) {
@@ -128,6 +176,7 @@ abstract public class SaverOrLoader {
 	}
 	
 	/**
+	 * @generated
 	 * Create an instance which metaclass comes from the target metamodel. The metaclass is retrieved with the source metaclass and the 
 	 * instantiation is done by the factory.
 	 * @param sourceObject
@@ -171,6 +220,7 @@ abstract public class SaverOrLoader {
 	}
 	
 	/**
+	 * @generated
 	 * Get all factories used by the given package and its subpackages.
 	 * @param p
 	 * @return
@@ -185,6 +235,7 @@ abstract public class SaverOrLoader {
 	}
 	
 	/**
+	 * @generated
 	 * Getting the list of all packages contained by the given package.
 	 * @param l
 	 * @param p
@@ -196,13 +247,14 @@ abstract public class SaverOrLoader {
 	}
 	
 	/**
+	 * @generated
 	 * Create an enumerator from the factory given a source enumerator.
 	 * @param sourceObject
 	 * @param factory
 	 * @return
 	 */
 	protected Enumerator createInstance(Enumerator sourceObject, String metamodelURI) {
-		//for ( EFactory factory : _factories ) {
+		
 		EPackage root_pack = getRootEPackage(Registry.INSTANCE.getEPackage(metamodelURI));
 		String tmp_pack_qn = sourceObject.getClass().getCanonicalName().replace("." + sourceObject.getClass().getSimpleName(), "");
 		String str_pack = tmp_pack_qn;
@@ -210,7 +262,7 @@ abstract public class SaverOrLoader {
 		str_pack = str_pack + "." + tab_[tab_.length-1].substring(0, 1).toUpperCase() + tab_[tab_.length-1].substring(1, tab_[tab_.length-1].length()) + "Package";
 		
 		Class<?> str_pack_Class;
-		//EEnum eEnum = null;
+		
 		EPackage _epack = null;
 		try {
 			str_pack_Class = SaverOrLoader.class.getClassLoader().loadClass(str_pack);
@@ -237,8 +289,8 @@ abstract public class SaverOrLoader {
 		
 		EFactory factory = getTargetEFactory(root_pack, _epack);
 		
-		String creationMethodName = "create" + sourceObject.getClass().getSimpleName() + "FromString";
 		try {
+			String creationMethodName = "create" + sourceObject.getClass().getSimpleName() + "FromString";
 			Method method = factory.getClass().getMethod(creationMethodName, new Class[] {EDataType.class, String.class});
 			Enumerator targetObject = (Enumerator) method.invoke(factory, new Object[] {null, sourceObject.getLiteral()});
 			return targetObject;
@@ -248,14 +300,27 @@ abstract public class SaverOrLoader {
 		return null;
 	}
 	
+	/**
+	 * @generated
+	 * @return
+	 */
 	public String getMetamodelURI() {
 		return metamodelURI;
 	}
 
+	/**
+	 * @generated
+	 * @return
+	 */
 	public String getMetamodelURISpecialCompiler() {
 		return metamodelURISpecialCompiler;
 	}
 	
+	/**
+	 * @generated
+	 * @param _modelURI
+	 * @param _metamodelURI
+	 */
 	public void normalizeRegistry(String _modelURI, String _metamodelURI) {
 		if( !Registry.INSTANCE.containsKey(_metamodelURI) ) {
 			registerTheUri(_metamodelURI);
@@ -264,11 +329,20 @@ abstract public class SaverOrLoader {
 		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(fileExtension, new XMIResourceFactoryImpl());
 	}
 	
+	/**
+	 * @generated
+	 * @param modelURI
+	 * @return
+	 */
 	public static String getFileExtension( String modelURI ) {
 		String[] seg_modelURI = modelURI.split("\\.");
 		return seg_modelURI[seg_modelURI.length-1];
 	}
 	
+	/**
+	 * @generated
+	 * @param uri
+	 */
 	public static void registerEcoreMetamodel(String uri){
 		
 		//Get the Ecore metamodel
@@ -286,6 +360,7 @@ abstract public class SaverOrLoader {
 	}
 	
 	/**
+	 * @generated
 	 * Register the given EPackage and all its contained EPackages
 	 * @param pack
 	 */
@@ -300,6 +375,10 @@ abstract public class SaverOrLoader {
 		}
 	}
 	
+	/**
+	 * @generated
+	 * @param metamodelURI
+	 */
 	public static void registerTheUri(String metamodelURI) {
 		
 		String str_clazz = null;
@@ -339,6 +418,11 @@ abstract public class SaverOrLoader {
 		
 	}
 	
+	/**
+	 * @generated
+	 * @param metamodelURI
+	 * @return
+	 */
 	private static IConfigurationElement getIConfigurationElementByUri(String metamodelURI) {
 		IConfigurationElement[] elements = Platform.getExtensionRegistry().getConfigurationElementsFor("org.eclipse.emf.ecore.generated_package");
 		for( IConfigurationElement currentElement : elements ) {

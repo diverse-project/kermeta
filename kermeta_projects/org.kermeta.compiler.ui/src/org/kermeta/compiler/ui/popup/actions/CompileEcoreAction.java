@@ -1,4 +1,4 @@
-/* $Id: CompileEcoreAction.java,v 1.3 2008-05-30 12:19:05 cfaucher Exp $
+/* $Id: CompileEcoreAction.java,v 1.4 2008-10-17 14:40:57 cfaucher Exp $
  * Project   : fr.irisa.triskell.kermeta.compiler
  * File      : CompileEcoreAction.java
  * License   : EPL
@@ -15,6 +15,11 @@ import java.util.Iterator;
 
 import org.apache.commons.logging.Log;
 import org.eclipse.core.resources.IFile;
+import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.NullProgressMonitor;
+import org.eclipse.core.runtime.Status;
+import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.jface.action.IAction;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.StructuredSelection;
@@ -50,19 +55,33 @@ public class CompileEcoreAction implements IObjectActionDelegate {
 	 * @see IActionDelegate#run(IAction)
 	 */
 	public void run(IAction action) {
-
-		if (ecorefile != null) {
-			Compiler compiler = new Compiler(ecorefile);
-
-			try {
-				compiler.run();
-				internalLog.info("The compilation process is complete");
+		Job job = new Job("Kermeta Compiling Process") {
+			@Override
+			protected IStatus run(IProgressMonitor monitor) {
+	
+				/*************/
+			
+				try {
+					if (ecorefile != null) {
+						Compiler compiler = new Compiler(ecorefile, new NullProgressMonitor());
+			
+						compiler.run();
+						internalLog.info("The compilation process is complete");
+					}		
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+					
 				
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				/*************/
+				
+				return Status.OK_STATUS;
 			}
-		}
+		};
+	
+		job.schedule();
+
 	}
 
 	/**
