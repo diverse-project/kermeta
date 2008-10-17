@@ -1,4 +1,4 @@
-/* $Id: Compiler.java,v 1.17 2008-10-17 14:40:13 cfaucher Exp $
+/* $Id: Compiler.java,v 1.18 2008-10-17 15:24:57 cfaucher Exp $
  * Project   : fr.irisa.triskell.kermeta.compiler
  * File      : Compiler.java
  * License   : EPL
@@ -47,8 +47,6 @@ public class Compiler extends org.kermeta.compiler.Generator {
 
 	private String genModelPath = null;
 	
-	private String kmFilePathForReflection = null;
-	
 	private Context compilationContext;
 	
 	private IProgressMonitor monitor;
@@ -75,7 +73,6 @@ public class Compiler extends org.kermeta.compiler.Generator {
 		arguments[0] = "-ecore2GenModel";
 		arguments[1] = abosluteEcorePath;
 		arguments[2] = "";
-		//arguments[3] = "Ckm"; // it seems this assignment is deprecated
 		
 		// Get the IFile corresponding to the generated Ecore file
 		this.ecorefile = ResourceHelper.getIFile("file:/"+arguments[1]);
@@ -95,7 +92,6 @@ public class Compiler extends org.kermeta.compiler.Generator {
 		arguments[0] = "-ecore2GenModel";
 		arguments[1] = ecorefile.getLocation().toString();
 		arguments[2] = "";
-		//arguments[3] = "Ckm"; // it seems this assignment is deprecated
 		
 		this.monitor = monitor;
 		
@@ -244,8 +240,7 @@ public class Compiler extends org.kermeta.compiler.Generator {
 		IFile simk_file = ResourcesPlugin.getWorkspace().getRoot().getFile(genModelFile.getFullPath().removeFileExtension().addFileExtension(KCompilerConstants.SIMK_EXT));
 		
 		if(genModelFile.exists()) {
-			this.kmFilePathForReflection = kmFilePath_forReflection.toString();
-			this.getCompilationContext().setKmFilePathForReflection("config/" + kmFile.getName());//this.kmFilePathForReflection);
+			this.getCompilationContext().setKmFilePathForReflection("config/" + kmFile.getName());
 			compileHelperAction.generate(genModelFile, this.getCompilationContext(), simk_file);
 		
 			//Copying the *.km file for the reflection

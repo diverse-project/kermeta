@@ -1,6 +1,6 @@
 
 
-/*$Id: ConfigurationCreator.java,v 1.7 2008-10-17 15:17:02 cfaucher Exp $
+/*$Id: ConfigurationCreator.java,v 1.8 2008-10-17 15:24:57 cfaucher Exp $
 * Project : org.kermeta.compiler.ui
 * File : 	ConfigurationCreator.java
 * License : EPL
@@ -13,15 +13,14 @@
 
 package org.kermeta.compiler.internal;
 
+import java.io.IOException;
+
 import org.eclipse.core.runtime.IConfigurationElement;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.emf.codegen.ecore.genmodel.GenModel;
 import org.eclipse.emf.codegen.ecore.genmodel.GenPackage;
 import org.eclipse.emf.codegen.util.CodeGenUtil;
 import org.kermeta.compiler.generator.helper.model.Context;
-
-import fr.irisa.triskell.eclipse.ecore.EcoreHelper;
-//import fr.irisa.triskell.eclipse.emf.EMFRegistryHelper;
 
 /**
  * A class that offers api to create a runtime configuration for persistency mechanism.
