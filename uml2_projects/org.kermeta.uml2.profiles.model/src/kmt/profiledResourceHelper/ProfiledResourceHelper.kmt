@@ -1,9 +1,9 @@
-/* $Id: ProfiledResourceHelper.kmt,v 1.7 2008-03-10 15:22:08 gperroui Exp $
+/* $Id: ProfiledResourceHelper.kmt,v 1.8 2008-10-17 13:17:38 dvojtise Exp $
  * Creation date: June 19, 2007
  * License: EPL
  * Copyright: IRISA/INRIA
  * Authors:
- * 		Fran�ois Tanguy
+ * 		Francois Tanguy
  *		Didier Vojtisek
  */
 
@@ -69,27 +69,23 @@ class ProfilesHelper {
 		var stereotypes : Set <Object> init Set <Object>.new
 	 
 		stereotypeInstances.each { instance |
-		 		 
-		 	var prop : kermeta::language::structure::Property init getProperty( "base_Class", instance )	 
-		 
-		 	if ( prop.isVoid() ) then
-		 		var e : InvalidUMLStereotype init InvalidUMLStereotype.new
-		 		e.message := "Stereotype \"" + instance.getMetaClass().name + "\" has no base_Class property"
-		 		raise e
-		 	end
-		 	var base_Class : uml::Class
-			base_Class ?= instance.get( prop )
-			if ( base_Class.isVoid() ) then
-		 		var e : InvalidUMLStereotype init InvalidUMLStereotype.new
-		 		e.message := "Stereotype \"" + instance.getMetaClass().name + "\" base_Class is Void"
-		 		raise e
-		 	end 			 
-			if ( (base_Class != void) and (base_Class.equals(object) ) ) then
+			var prop : kermeta::language::structure::Property
+			var metaclassName : String init object.getMetaClass.name
 			
-				stereotypes.add( instance )
+			prop := getProperty( "base_" + metaclassName, instance )
 			
+			if not prop.isVoid then
+			 	var base_Object : Object
+				base_Object := instance.get( prop )
+				if ( base_Object.isVoid() ) then
+			 		var e : InvalidUMLStereotype init InvalidUMLStereotype.new
+			 		e.message := "Stereotype \"" + instance.getMetaClass().name + "\" base_"+metaclassName+" is Void"
+			 		raise e
+			 	end 			 
+				if ( (base_Object != void) and (base_Object.equals(object) ) ) then
+					stereotypes.add( instance )
+				end
 			end
-		
 		}
 		
 		result := stereotypes
@@ -105,6 +101,19 @@ class ProfilesHelper {
 		var classDefinition : kermeta::language::structure::ClassDefinition 
 		classDefinition ?= object.getMetaClass.typeDefinition
 		result := classDefinition.allAttribute.detect { o | o.name.equals( name ) }
+	
+	end
+	/**
+	 * tells weither this object has a base_ property.
+	 */	
+	operation hasBaseProperty( object : Object ) : Boolean is do
+	
+		var classDefinition : kermeta::language::structure::ClassDefinition 
+		classDefinition ?= object.getMetaClass.typeDefinition
+		result := classDefinition.allAttribute.exists { o | if o.name.size >=5 then o.name.substring(0,5).equals("base_")
+														 else false
+														 end
+													}
 	
 	end	
 			
@@ -133,8 +142,17 @@ class ProfilesHelper {
 	
 	operation getStereotypeInstances() is do
 	
-		stereotypeInstances.addAll( modelResource.instances.select{ instance | not instance.isInstanceOf(uml::Element) 
-		and getProperty( "base_Class", instance ) != void} ) 
+		stereotypeInstances.addAll( 
+			modelResource.instances.select{ instance | 										
+				not instance.isInstanceOf(uml::Element) 
+				and ( hasBaseProperty(instance)
+				
+						/* getProperty( "base_Class", instance ) != void
+					or getProperty( "base_Package", instance ) != void
+					or getProperty( "base_Property", instance ) != void */
+				)
+			} 
+		) 
 		//stdio.writeln("stereotypes to add : " + modelResource.instances.size.toString)
 		/*stereotypeInstances.addAll(modelResource.contents.select{ instance | instance.isInstanceOf(uml::Stereotype) })
 		stereotypeInstances.each{i| stdio.writeln(i.asType(uml::Stereotype).name)}
