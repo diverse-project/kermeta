@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feature
       id="org.kermeta.devsupport.feature"
-      label="Dev support for Kermeta bundle Feature"
+      label="Dev support for Kermeta Feature"
       version="0.1.0"
       provider-name="IRISA/INRIA"
       image="kermeta_logo_32.gif">
@@ -18,11 +18,31 @@
       Distributed under the terms of the Eclipse Public License
    </license>
 
-   <plugin
-         id="org.kermeta.eclipse.test"
-         download-size="0"
-         install-size="0"
+   <url>
+      <discovery label="http://www.kyrsoft.com/updates/" url="http://www.kyrsoft.com/updates/"/>
+      <discovery label="ANTLR (http://antlreclipse.sourceforge.net/updates/)" url="http://antlreclipse.sourceforge.net/updates/"/>
+   </url>
+
+   <includes
+         id="org.eclipse.emf.emfatic_feature"
          version="0.0.0"/>
+
+   <includes
+         id="org.eclipse.gymnast.generator_feature"
+         version="0.0.0"/>
+
+   <includes
+         id="org.eclipse.gymnast.runtime_feature"
+         version="0.0.0"/>
+
+   <requires>
+      <import feature="com.kyrsoft.stmemmonitorFeature" version="1.1.0"/>
+      <import feature="de.kyrsoft.memmonitorFeature" version="1.6.0" match="greaterOrEqual"/>
+      <import feature="org.antlr.ui" version="4.1.1"/>
+      <import plugin="org.apache.log4j"/>
+      <import plugin="org.apache.commons.logging"/>
+      <import feature="org.eclipse.emf" version="2.3.0.v200706262000" match="greaterOrEqual"/>
+   </requires>
 
    <plugin
          id="org.openembedd.tests"
@@ -30,12 +50,5 @@
          install-size="0"
          version="0.0.0"
          unpack="false"/>
-
-   <plugin
-         id="org.kermeta.eclipse.ant.optional.junit4"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         fragment="true"/>
 
 </feature>

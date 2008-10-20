@@ -1,0 +1,19 @@
+<!-- $Id: copy_build.xml,v 1.1 2008-10-20 13:18:57 dvojtise Exp $ -->
+<project name="Copy_2_update_site" default="copy_2_update_site" basedir=".">
+	<description>
+       
+	</description>
+	<property name="dest" location="T:\\www\\kermeta.org\\update\\devsupport"/>
+
+  	<target name="copy_2_update_site" description="copy web site files to http://www.kermeta.org/update/devsupport">
+  		<delete dir="${dest}\\features"/>
+  		<delete dir="${dest}\\plugins"/>
+  		<delete dir="${dest}\\web"/>
+  		<copy todir="${dest}">
+  			<fileset dir=".">
+  				<exclude name="copy_build.xml"/>
+  				<exclude name=".project"/>
+  			</fileset>  			
+  		</copy>
+  	</target> 
+</project>
