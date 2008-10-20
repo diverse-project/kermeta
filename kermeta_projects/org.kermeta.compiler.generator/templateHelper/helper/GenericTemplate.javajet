@@ -2,7 +2,7 @@
 	 package="org.kermeta.compiler.generator.templates"
 	 imports="org.kermeta.simk.*"
 	 class="GenericTemplate"
-	 version="$Id: GenericTemplate.javajet,v 1.1 2008-10-20 13:14:43 cfaucher Exp $" %>
+	 version="$Id: GenericTemplate.javajet,v 1.2 2008-10-20 16:44:49 cfaucher Exp $" %>
 <%SMContext smContext = (SMContext) argument;%>
 
 <%SMClass genericClass = smContext.getSMClass();%>
@@ -21,7 +21,7 @@ public class <%=genericClass.getName()%> {
 	<% String typeParameters = ""; %>
 	<% if( helperMethod.getTypeParameters()!=null && !helperMethod.getTypeParameters().equals("") ) {
 		typeParameters = "<" + helperMethod.getTypeParameters() + ">";
-	}typeParameters="<G>";%>
+	}%>
 	
 	<% String static_str = ""; %>
 	<% if( helperMethod.isStatic() ) {
