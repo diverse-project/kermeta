@@ -1,31 +1,32 @@
-/* $Id: ConstraintHelper.kmt,v 1.4 2008-03-14 14:21:08 cfaucher Exp $
+/* $Id: ConstraintHelper.kmt,v 1.5 2008-10-20 15:45:11 cfaucher Exp $
  * Creation date: January 29, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
- * Authors: Francois Tanguy <ftanguy@irisa.fr>
+ * Authors:
+ * 			Francois Tanguy <ftanguy@irisa.fr>
+ * 			Cyril Faucher <cfaucher@irisa.fr>
  */
 
-package km2ecore::helper::kermeta;
-
+package kermeta::language::structure;
 
 require kermeta
 
-using kermeta::language::structure
+using kermeta::standard
 
-class ConstraintHelper {
+aspect class Constraint {
+	
+	/**
+	 * Not used for the moment
+	 */
 	operation isPre(c : Constraint) : Boolean is do 
-		result := false
-		var op : Operation init c.container().asType(Operation)
-		if ( op != void ) then
-			result := op.~pre.contains(c)
-		end
+		result := (self.stereotype==ConstraintType.~pre)
 	end
 
+	/**
+	 * Not used for the moment
+	 */
 	operation isPost(c : Constraint) : Boolean is do 
-		result := false
-		var op : Operation init c.container().asType(Operation)
-		if ( op != void ) then
-			result := op.~post.contains(c)
-		end
+		result := (self.stereotype==ConstraintType.~post)
 	end
+
 }
