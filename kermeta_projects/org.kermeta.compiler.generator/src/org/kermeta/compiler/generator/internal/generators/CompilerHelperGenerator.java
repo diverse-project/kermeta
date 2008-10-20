@@ -8,7 +8,7 @@
  * Technologies), Jacques Lescot (Anyware Technologies) - initial API and
  * implementation
  ******************************************************************************/
-/*$Id: CompilerHelperGenerator.java,v 1.23 2008-10-20 13:15:08 cfaucher Exp $
+/*$Id: CompilerHelperGenerator.java,v 1.24 2008-10-20 13:19:31 cfaucher Exp $
 * Project : org.kermeta.compiler.generator
 * File : 	CompilerHelperGenerator.java
 * License : EPL
@@ -93,8 +93,6 @@ public class CompilerHelperGenerator extends AbstractGenerator {
 	 */
 	public CompilerHelperGenerator(GenModel conf, Context context, SIMKModel simkModel) {
 		this.configuration = conf;
-		//this.kmUnit = kmUnit;
-		//this.km2ecoreGen = km2ecoreGen;
 		this.context = context;
 		this.simkModel = simkModel;
 	}
@@ -241,7 +239,6 @@ public class CompilerHelperGenerator extends AbstractGenerator {
 			monitor.subTask("Files creation");
 
 			generateRunner(conf, simkConf, projectPath);
-			//generateLauncher(simkConf, projectPath);
 
 			for (SMContext _context : simkConf.getSMContexts()) {
 				if ( _context.getSMClass().getUsages() == SMUsage.WRAPPER ) {
@@ -300,53 +297,6 @@ public class CompilerHelperGenerator extends AbstractGenerator {
 
 		}
 
-	}
-
-	/**
-	 * Generate the .launch file corresponding to the mainClass and mainOperation that are defined into the header of a Kermeta file
-	 * 
-	 * @param simkConf
-	 * @param projectPath
-	 * @throws JETException
-	 * @throws CoreException
-	 */
-	private void generateLauncher(SIMKModel simkConf, IPath projectPath)
-			throws JETException, CoreException {
-		
-		/*String mainClass = null;
-		String mainOperation = null;
-		
-		for(Tag tag : this.kmUnit.getModelingUnit().getOwnedTags()) {
-			if(tag.getName().equals("mainClass")) {
-				mainClass = tag.getValue();
-			}
-			if(tag.getName().equals("mainOperation")) {
-				mainOperation = tag.getValue();
-			}
-		}
-		
-		if(mainClass!=null && mainOperation!=null) {
-			String[] tab_mainClass = mainClass.split("::");//mainClass.replace("::", ".")
-			
-			Object[] args = {conf, mainClass, mainOperation};
-			applyTemplate(args, getTemplateURI(JAVA_LAUNCHER_LAUNCH), projectPath.append("/" + tab_mainClass[0] + ".launch"), conf.isForceOverwrite());
-		}*/
-		
-		/*for (StaticMethod sm : simkConf.getStaticMethods()) {
-			if ( sm.getUsages() == SMUsage.LAUNCHER ) {
-				
-				String mainClass = sm.getSMContext().getSMClass().getQualifiedName();
-				String mainOperation = sm.getParentMethod().getName();
-				
-				Object[] args = {configuration, mainClass, mainOperation};
-				applyTemplate(
-						args,
-						getTemplateURI(JAVA_LAUNCHER_LAUNCH),
-						projectPath.append("/" + sm.getSMContext().getSMClass().getQualifiedName() + ".launch"),
-						configuration.isForceOverwrite());
-			}
-		}*/
-		
 	}
 	
 	/**
@@ -449,6 +399,11 @@ public class CompilerHelperGenerator extends AbstractGenerator {
 				relativePath);
 	}
 	
+	/**
+	 * Unzip the the archive baseTypesUtils.zip
+	 * this archive contains the resources corresponding to the externs in interpreted mode
+	 * these externs are dedicated to Kermeta framework then the archive does not contain the extern from the user
+	 */
 	private void generateBaseTypesUtils() {
 		URL url = GeneratorPlugin.getDefault().getBundle().getEntry( "baseTypesUtils.zip" );
 		ZipInputStream zipFileStream;
