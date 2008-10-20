@@ -1,4 +1,4 @@
-/* $Id: SIMKModelHelper.kmt,v 1.12 2008-10-02 14:58:08 cfaucher Exp $
+/* $Id: SIMKModelHelper.kmt,v 1.13 2008-10-20 16:15:53 cfaucher Exp $
  * Creation date: Jul 21, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -11,6 +11,7 @@ package simk;
 
 require kermeta
 require "platform:/resource/org.kermeta.compiler.kmt/src/kermeta/KM2EcoreContext.kmt"
+require "platform:/resource/org.kermeta.compiler.kmt/src/kermeta/helper/kermeta/KermetaHelper.kmt"
 require "platform:/resource/org.kermeta.compiler.kmt/src/kermeta/helper/java/JavaHelper.kmt"
 
 using kermeta::language::structure
@@ -78,6 +79,24 @@ aspect class SIMKModel {
 		
 		var sm : SMMethod init sMContext.sMMethods.detect{ o |
 			o.name == ( "super_" + IdentifierHelper.new.getMangledIdentifier(op.getFinalName(), context) )
+		}
+		if sm.isVoid() then	
+			result := sMContext
+		end
+	end
+	
+	/** TODO TO COMMENT*/
+	operation retrieveOrCreateContextForInvariant(constraint : Constraint, context : KM2EcoreContext) : SMContext is do
+		result := void
+		
+		var sMContext : SMContext init retrieveOrCreateContextWithClass(
+			constraint.container.asType(ClassDefinition).name + "Invariant",
+			constraint.container.asType(ClassDefinition).container.asType(Package).qualifiedName().replace(context.KERMETA_SEPARATOR, context.JAVA_SEPARATOR) + context.JAVA_SEPARATOR + "helper",
+			SMUsage.Invariant,
+			context)
+		
+		var sm : SMMethod init sMContext.sMMethods.detect{ o |
+			o.name == ( "checkInvariant_" + constraint.id )
 		}
 		if sm.isVoid() then	
 			result := sMContext

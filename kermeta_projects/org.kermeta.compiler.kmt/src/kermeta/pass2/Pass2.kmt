@@ -1,4 +1,4 @@
-/* $Id: Pass2.kmt,v 1.38 2008-09-25 09:10:33 cfaucher Exp $
+/* $Id: Pass2.kmt,v 1.39 2008-10-20 16:15:55 cfaucher Exp $
  * Creation date: January 21, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -302,6 +302,18 @@ package structure {
 			self.eachOwnedElement{ p |
 				p.applyPass2BehaviorJava(context)
 			}
+		end
+	}
+	
+	aspect class Constraint {
+		method applyPass2(context : KM2EcoreContext) is do
+			super(context)
+		end
+		
+		method applyPass2BehaviorJava(context : KM2EcoreContext) is do
+			if self.stereotype == ConstraintType.~inv then
+				self.setSimkForInvariant(context)
+			end
 		end
 	}
 	

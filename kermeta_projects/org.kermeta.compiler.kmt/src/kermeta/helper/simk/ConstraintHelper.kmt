@@ -1,0 +1,59 @@
+/* $Id: ConstraintHelper.kmt,v 1.1 2008-10-20 16:15:53 cfaucher Exp $
+ * Creation date: October 20, 2008
+ * License: EPL
+ * Copyright: IRISA / INRIA / Universite Rennes 1
+ * Authors:
+ * 			Cyril Faucher <cfaucher@irisa.fr>
+ */
+
+package kermeta::language::structure;
+
+require kermeta
+require "platform:/resource/org.kermeta.compiler.kmt/src/kermeta/KM2EcoreContext.kmt"
+
+using kermeta::standard
+using km2ecore
+using simk
+
+aspect class Constraint {
+	
+	attribute id : String
+	
+	operation setSimkForInvariant(context : KM2EcoreContext) : Void is do
+		var smContext : SMContext init context.simkModel.retrieveOrCreateContextForInvariant(self, context)
+				
+		if not smContext.isVoid() then
+		
+		var staticMethod : SMMethod init SMMethod.new()
+		staticMethod.name := "checkInvariant_" + self.id
+		
+		// Compile the body of the constraint
+		staticMethod.body := "java.lang.Boolean result = false;\n"
+		
+		var staticOperationMode_backup : Boolean init context.staticOperationMode
+		context.staticOperationMode := true
+		staticMethod.body := staticMethod.body + self.createBehaviorJava(context)
+		context.staticOperationMode := staticOperationMode_backup
+		
+		staticMethod.body := staticMethod.body + "\nreturn result;"
+		//
+		
+		staticMethod.usages := SMUsage.Invariant
+		context.simkModel.sMMethods.add(staticMethod)
+		smContext.sMMethods.add(staticMethod)
+		
+		// Set the return type
+		var smReturn : SMReturn init SMReturn.new
+		smReturn.type := "java.lang.Boolean"
+		staticMethod.sMReturn := smReturn
+		
+		// A self parameter is added
+		var default_param : SMParameter init SMParameter.new
+		default_param.name := "self"
+		default_param.type := self.container.asType(ClassDefinition).qualifiedName.replace(context.KERMETA_SEPARATOR, context.JAVA_SEPARATOR)
+		staticMethod.sMParameters.add(default_param)
+				
+		end
+	end
+
+}

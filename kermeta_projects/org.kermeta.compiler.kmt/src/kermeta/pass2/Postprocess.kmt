@@ -1,4 +1,4 @@
-/* $Id: Postprocess.kmt,v 1.9 2008-10-20 12:56:29 cfaucher Exp $ 
+/* $Id: Postprocess.kmt,v 1.10 2008-10-20 16:15:55 cfaucher Exp $ 
  * Creation : August 27, 2008
  * Licence  : EPL 
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -33,9 +33,10 @@ aspect class ModelingUnit {
 		
 		// Compile the super operation in helper in using Simk
 		self.superOperationsToCompileInHelper.each{ op |
+			var staticOperationMode_backup : Boolean init context.staticOperationMode
 			context.staticOperationMode := true
 			compileStaticOperation(op, context)
-			context.staticOperationMode := false
+			context.staticOperationMode := staticOperationMode_backup
 		}
 		
 	end
