@@ -1,0 +1,48 @@
+<%@jet
+	 package="org.kermeta.compiler.generator.templates"
+	 imports="org.kermeta.simk.*"
+	 class="GenericTemplate"
+	 version="$Id: GenericTemplate.javajet,v 1.1 2008-10-20 13:14:43 cfaucher Exp $" %>
+<%SMContext smContext = (SMContext) argument;%>
+
+<%SMClass genericClass = smContext.getSMClass();%>
+
+package <%=smContext.getFinalPackageQName()%>;
+
+
+/**
+ *
+ * @generated
+ */
+public class <%=genericClass.getName()%> {
+
+	<% for(SMMethod helperMethod : smContext.getSMMethods()) { %>
+	
+	<% String typeParameters = ""; %>
+	<% if( helperMethod.getTypeParameters()!=null && !helperMethod.getTypeParameters().equals("") ) {
+		typeParameters = "<" + helperMethod.getTypeParameters() + ">";
+	}typeParameters="<G>";%>
+	
+	<% String static_str = ""; %>
+	<% if( helperMethod.isStatic() ) {
+		static_str = "static";
+	}%>
+	
+	/**
+	 *
+	 * @generated
+	 */
+	<%=helperMethod.getAccess().getName()%> <%=static_str%> <%=typeParameters%> <%=helperMethod.getSMReturn().getType()%> <%=helperMethod.getName()%>(
+		<% int i=0;
+			for(SMParameter param : helperMethod.getSMParameters()) {
+				if(i==1) {%>, <%} else {i=1;}%>
+			<%=param.getType()%> <%=param.getName()%>
+		<% } %>
+	) {
+		<%=helperMethod.getBody()%>
+	}
+	
+	
+	<% } //end of the for %>
+
+}
