@@ -1,4 +1,4 @@
-/* $Id: ClassDefinitionHelper.java,v 1.15 2008-04-30 13:56:58 ftanguy Exp $
+/* $Id: ClassDefinitionHelper.java,v 1.16 2008-10-20 09:11:39 cfaucher Exp $
  * Project   : Kermeta 
  * File      : ClassDefinitionHelper.java
  * License   : EPL
@@ -80,8 +80,10 @@ public class ClassDefinitionHelper {
 	public static boolean isSuperClassOfByName(ClassDefinition supercls, ClassDefinition cls) {
 		for(Object stype : cls.getSuperType()) {
 			ClassDefinition scls = (ClassDefinition) ((fr.irisa.triskell.kermeta.language.structure.Class)stype).getTypeDefinition();
-			if (supercls.getName().equals(scls.getName())) return true;
-			else if( KermetaModelHelper.ClassDefinition.isSuperTypeOf(supercls, scls)) return true;
+			if( supercls!=null && scls!=null ) {
+				if (supercls.getName().equals(scls.getName())) return true;
+				else if( KermetaModelHelper.ClassDefinition.isSuperTypeOf(supercls, scls)) return true;
+			}
 		}
 		return false;
 	}
