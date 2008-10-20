@@ -8,7 +8,7 @@
  * Technologies), Jacques Lescot (Anyware Technologies) - initial API and
  * implementation
  ******************************************************************************/
-/*$Id: CompilerHelperGenerator.java,v 1.22 2008-10-16 09:04:38 cfaucher Exp $
+/*$Id: CompilerHelperGenerator.java,v 1.23 2008-10-20 13:15:08 cfaucher Exp $
 * Project : org.kermeta.compiler.generator
 * File : 	CompilerHelperGenerator.java
 * License : EPL
@@ -67,19 +67,13 @@ public class CompilerHelperGenerator extends AbstractGenerator {
 	
 	private static final String WRAPPER_JAVA = "templateHelper/helper/Wrapper.javajet";
 	
-	private static final String SUPER_JAVA = "templateHelper/helper/Super.javajet";
+	private static final String GENERIC_TEMPLATE_JAVA = "templateHelper/helper/GenericTemplate.javajet";
 	
 	private static final String EXECUTION_CONTEXT_JAVA = "templateHelper/helper/ExecutionContext.javajet";
 	
 	private static final String PERSISTENCE_MAPPING_JAVA = "templateHelper/helper/PersistenceMapping.javajet";
-
-	// FIXME CF unused for the moment
-	//private static final String JAVA_LAUNCHER_LAUNCH = "templateHelper/JavaLauncher.launchjet";
 	
 	private static final String CLASS_PATH = "templateHelper/classpath.propertiesjet";
-	
-	// FIXME CF unused for the moment
-	//private static final String KERMETA_LAUNCHER_LAUNCH = "templateHelper/KermetaLauncher.launchjet";
 
 
 	/** The GenModel object */
@@ -255,6 +249,10 @@ public class CompilerHelperGenerator extends AbstractGenerator {
 				} else {
 					if ( _context.getSMClass().getUsages() == SMUsage.SUPER ) {
 						generateSuper(_context, projectPath);
+					} else {
+						if ( _context.getSMClass().getUsages() == SMUsage.INVARIANT ) {
+							generateInvariant(_context, projectPath);
+						}
 					}
 				}
 			}
@@ -380,7 +378,24 @@ public class CompilerHelperGenerator extends AbstractGenerator {
 		
 			applyTemplate(
 					_context,
-					getTemplateURI(SUPER_JAVA),
+					getTemplateURI(GENERIC_TEMPLATE_JAVA),
+					projectPath.append("/" + SOURCE_DIRECTORY + "/" + _context.getSMClass().getQualifiedName().replace(".", "/") + ".java"),
+					configuration.isForceOverwrite());
+	}
+	
+	/**
+	 * 
+	 * @param _context
+	 * @param projectPath
+	 * @throws JETException
+	 * @throws CoreException
+	 */
+	private void generateInvariant(SMContext _context, IPath projectPath)
+			throws JETException, CoreException {
+
+			applyTemplate(
+					_context,
+					getTemplateURI(GENERIC_TEMPLATE_JAVA),
 					projectPath.append("/" + SOURCE_DIRECTORY + "/" + _context.getSMClass().getQualifiedName().replace(".", "/") + ".java"),
 					configuration.isForceOverwrite());
 	}
