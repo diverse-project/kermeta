@@ -1,8 +1,8 @@
 <%@jet
 	 package="org.kermeta.compiler.generator.templates"
-	 imports="org.eclipse.emf.codegen.util.* org.eclipse.emf.codegen.ecore.genmodel.* fr.irisa.triskell.eclipse.ecore.* org.kermeta.compiler.generator.helper.model.* org.kermeta.simk.* fr.irisa.triskell.kermeta.language.structure.NamedElement"
+	 imports="org.kermeta.simk.*"
 	 class="Wrapper"
-	 version="$Id: Wrapper.javajet,v 1.6 2008-09-25 09:41:35 cfaucher Exp $" %>
+	 version="$Id: Wrapper.javajet,v 1.7 2008-10-20 13:13:05 cfaucher Exp $" %>
 <%SMContext smContext = (SMContext) argument;%>
 
 <%SMClass wrapperClass = smContext.getSMClass();%>
