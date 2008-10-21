@@ -1,4 +1,4 @@
-/* $Id: Compiler.java,v 1.18 2008-10-17 15:24:57 cfaucher Exp $
+/* $Id: Compiler.java,v 1.19 2008-10-21 20:53:58 cfaucher Exp $
  * Project   : fr.irisa.triskell.kermeta.compiler
  * File      : Compiler.java
  * License   : EPL
@@ -129,7 +129,7 @@ public class Compiler extends org.kermeta.compiler.Generator {
 	
 			if (genModel != null) {
 				// Resolve prefix settings for each GenPackage with canGenerate()==true => with a classifier in this one
-				CompilerUtil.ePackagePrefixFixer(genModel);
+				CompilerUtil.ePackageFixerAll(genModel);
 				
 				setCompiledPluginId(genModel);
 				

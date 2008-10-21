@@ -1,4 +1,4 @@
-/* $Id: CompilerUtil.java,v 1.8 2008-09-03 12:20:38 cfaucher Exp $
+/* $Id: CompilerUtil.java,v 1.9 2008-10-21 20:53:58 cfaucher Exp $
  * Project   : fr.irisa.triskell.kermeta.compiler
  * File      : CompilerUtil.java
  * License   : EPL
@@ -9,8 +9,6 @@
  */
 
 package org.kermeta.compiler.util;
-
-import java.util.Iterator;
 
 import org.apache.commons.logging.Log;
 import org.eclipse.emf.codegen.ecore.genmodel.GenModel;
@@ -26,15 +24,60 @@ public class CompilerUtil {
 	final static public Log internalLog = LogConfigurationHelper.getLogger("KermetaCompiler");
 
 	/**
+	 * Fixer on the genModel
+	 * @param genModel
+	 */
+	public static void ePackageFixerAll(GenModel genModel) {
+		for ( GenPackage _genPackage : genModel.getAllGenPackagesWithClassifiers() ) {
+			prefixFixer(_genPackage);
+			loadInitializationFixer(_genPackage);
+			multipleEditorPagesFixer(_genPackage);
+		}
+	}
+	
+	/**
 	 * 
 	 * Fix the prefix of all the EPackages contained by a GenModel
 	 * @param genModel
 	 */
 	public static void ePackagePrefixFixer(GenModel genModel) {
-		for (Iterator<GenPackage> it_genpack = genModel.getAllGenPackagesWithClassifiers().iterator(); it_genpack.hasNext();) {
-			GenPackage _genPackage = it_genpack.next();
-			_genPackage.setPrefix(CodeGenUtil.capName(_genPackage.getEcorePackage().getName()));
+		for ( GenPackage _genPackage : genModel.getAllGenPackagesWithClassifiers() ) {
+			prefixFixer(_genPackage);
 		}
+	}
+	
+	/**
+	 * To avoid the use of 'Initialization By Loading' on all the genPackages
+	 * @param genModel
+	 */
+	public static void ePackageLoadInitializationFixer(GenModel genModel) {
+		for ( GenPackage _genPackage : genModel.getAllGenPackagesWithClassifiers() ) {
+			loadInitializationFixer(_genPackage);
+		}
+	}
+	
+	/**
+	 * Fixing the Prefix on a genPackage
+	 * @param genPackage
+	 */
+	private static void prefixFixer(GenPackage genPackage) {
+		genPackage.setPrefix(CodeGenUtil.capName(genPackage.getEcorePackage().getName()));
+	}
+	
+	/**
+	 * To avoid the use of 'Initialization By Loading' on a genPackage
+	 * @param genPackage
+	 */
+	private static void loadInitializationFixer(GenPackage genPackage) {
+		genPackage.setLoadInitialization(false);
+	}
+	
+	/**
+	 * To avoid the generation of 'Multiple Editor Pages' on a genPackage
+	 * @param genPackage
+	 */
+	private static void multipleEditorPagesFixer(GenPackage genPackage) {
+		genPackage.setMultipleEditorPages(false);
 	}
 	
 }
