@@ -2,7 +2,7 @@
 	 package="org.kermeta.compiler.generator.templates"
 	 
 	 class="ExecutionContext"
-	 version="$Id: ExecutionContext.javajet,v 1.9 2008-10-17 14:40:18 cfaucher Exp $" %>
+	 version="$Id: ExecutionContext.javajet,v 1.10 2008-10-21 11:53:49 cfaucher Exp $" %>
 <%String kmFilePath_forReflection = (String) argument;%>
 
 package org.kermeta.compil.runtime;
@@ -76,10 +76,11 @@ public class ExecutionContext {
 					.println("Beginning of the initialization of the reflection...");
 			Repository repository = PersistenceFactory.eINSTANCE
 					.createEMFRepository();
-					
-			String local_path = ExecutionContext.class.getProtectionDomain().getCodeSource().getLocation().toExternalForm();
+
+			String local_path = ExecutionContext.class.getProtectionDomain()
+					.getCodeSource().getLocation().toExternalForm();
 			local_path = local_path.replace("bin/", _modelKMURI);
-					
+
 			Resource resource = repository.createResource(local_path,
 					"http://www.kermeta.org/kermeta/1_2_0//kermeta");
 			KmReflectionHelper.load(resource);
@@ -96,9 +97,17 @@ public class ExecutionContext {
 	public Class getMetaClass(String javaQualifiedName) {
 
 		lazyInitialize();
-
+		
 		// Optimization
-		if ( hashtable_classes.containsKey(javaQualifiedName) ) {
+		if (hashtable_classes.containsKey(javaQualifiedName)) {
+			return hashtable_classes.get(javaQualifiedName);
+		}
+		
+		String [] tmp_javaQualifiedName = javaQualifiedName.split("<");
+		javaQualifiedName = tmp_javaQualifiedName[0];
+		
+		// Optimization
+		if (hashtable_classes.containsKey(javaQualifiedName)) {
 			return hashtable_classes.get(javaQualifiedName);
 		}
 
@@ -106,7 +115,7 @@ public class ExecutionContext {
 				"Impl", "");
 
 		// Optimization
-		if ( hashtable_classes.containsKey(javaQualifiedName) ) {
+		if (hashtable_classes.containsKey(javaQualifiedName)) {
 			return hashtable_classes.get(javaQualifiedName);
 		}
 
@@ -115,7 +124,7 @@ public class ExecutionContext {
 		}
 
 		// Optimization
-		if ( hashtable_classes.containsKey(javaQualifiedName) ) {
+		if (hashtable_classes.containsKey(javaQualifiedName)) {
 			return hashtable_classes.get(javaQualifiedName);
 		}
 
