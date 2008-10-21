@@ -1,4 +1,4 @@
-/* $Id: ConstraintHelper.kmt,v 1.1 2008-10-20 16:15:53 cfaucher Exp $
+/* $Id: ConstraintHelper.kmt,v 1.2 2008-10-21 11:35:24 cfaucher Exp $
  * Creation date: October 20, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -30,12 +30,16 @@ aspect class Constraint {
 		// Compile the body of the constraint
 		staticMethod.body := "java.lang.Boolean result = false;\n"
 		
+		context.resultLastStatementStack.push("result = " + context.TYPE_SEPARATOR + "java.lang.Boolean")
+		
 		var staticOperationMode_backup : Boolean init context.staticOperationMode
 		context.staticOperationMode := true
 		staticMethod.body := staticMethod.body + self.createBehaviorJava(context)
 		context.staticOperationMode := staticOperationMode_backup
 		
 		staticMethod.body := staticMethod.body + "\nreturn result;"
+		
+		context.resultLastStatementStack.pop()
 		//
 		
 		staticMethod.usages := SMUsage.Invariant

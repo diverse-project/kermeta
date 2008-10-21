@@ -1,4 +1,4 @@
-/* $Id: CreateBehavior.kmt,v 1.83 2008-10-20 16:15:55 cfaucher Exp $
+/* $Id: CreateBehavior.kmt,v 1.84 2008-10-21 11:35:25 cfaucher Exp $
  * Creation date: January 21, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -92,6 +92,9 @@ package structure {
 				end
 				
 				if not self.getterBody.isVoid() then
+					if self.getterBody.isInstanceOf(CallFeature) then
+						javaCode := javaCode + "result = "
+					end
 					javaCode := javaCode + self.getterBody.createBehaviorJava(context)
 				end
 				
@@ -146,6 +149,9 @@ package structure {
 				end
 
 				// The Java source code is provided by: self.body.createBehaviorJava(context)
+				if self.body.isInstanceOf(CallFeature) then
+					javaCode.append("result = ")
+				end
 				javaCode.append(self.body.createBehaviorJava(context))
 				
 				// result is returned only if the "return type" is not Void
@@ -326,7 +332,11 @@ package structure {
 	
 	aspect class Constraint {
 		method createBehaviorJava(context : KM2EcoreContext) : String is do
-			result := self.body.createBehaviorJava(context)
+			result := ""
+			if self.body.isInstanceOf(CallFeature) then
+				result := result + "result = "
+			end
+			result := result + self.body.createBehaviorJava(context)
 		end
 	}
 }

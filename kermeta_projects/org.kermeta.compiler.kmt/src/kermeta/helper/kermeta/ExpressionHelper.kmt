@@ -1,4 +1,4 @@
-/* $Id: ExpressionHelper.kmt,v 1.25 2008-10-08 14:25:29 cfaucher Exp $
+/* $Id: ExpressionHelper.kmt,v 1.26 2008-10-21 11:35:24 cfaucher Exp $
  * Creation date: Jul 25, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -59,22 +59,31 @@ aspect class Expression {
 		
 		if not self.callsFunctionType() then
 		
-		if self.container.isInstanceOf(Conditional) or self.container.isInstanceOf(Loop) or self.container.isInstanceOf(Block) or self.container.isInstanceOf(Rescue) or self.container.isInstanceOf(Assignment) or self.container.isInstanceOf(VariableDecl) then
-			if self.container.isInstanceOf(Assignment) then
-				if self.container.asType(Assignment).target == self then
-					result := ""
-				else
-					if self.container.asType(Assignment).target.isCallFeatureAsStaticProperty() then
+			// The cases with Operation, Property and Constraint occur when an expression is not declared in a block: single expression
+			if self.container.isInstanceOf(Conditional)
+					or self.container.isInstanceOf(Loop)
+					or self.container.isInstanceOf(Block)
+					or self.container.isInstanceOf(Rescue)
+					or self.container.isInstanceOf(Assignment)
+					or self.container.isInstanceOf(VariableDecl)
+					or self.container.isInstanceOf(Operation)
+					or self.container.isInstanceOf(Property)
+					or self.container.isInstanceOf(Constraint) then
+				if self.container.isInstanceOf(Assignment) then
+					if self.container.asType(Assignment).target == self then
 						result := ""
 					else
-						result := ";"
+						if self.container.asType(Assignment).target.isCallFeatureAsStaticProperty() then
+							result := ""
+						else
+							result := ";"
+						end
 					end
+				else
+					result := ";"
 				end
-			else
-				result := ";"
+				
 			end
-			
-		end
 		
 		end
 	end
