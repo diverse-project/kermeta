@@ -1,4 +1,4 @@
-<!-- $Id: test_ocl_build.xml,v 1.8 2008-10-21 09:27:06 dvojtise Exp $ -->
+<!-- $Id: test_ocl_build.xml,v 1.9 2008-10-21 11:47:50 dvojtise Exp $ -->
 <project name="run ocl tests" default="all" basedir=".">
 
 	<description>
@@ -31,7 +31,7 @@
 	<property name="kermeta.tests.jar" location="..\fr.irisa.triskell.kermeta.tests\${dot.or.bin}" />
 	<property name="ecoretools.registration.jar" location="..\org.eclipse.emf.ecoretools.registration\${dot.or.bin}"/>
 	<property name="kermeta.ocl.jar" location="..\fr.irisa.triskell.kermeta.ocl\${dot.or.bin}" />
-	<property name="ocl.jar" location="$..\org.kermeta.eclipse.ocl.parser\${dot.or.bin}" />
+	<property name="ocl.jar" location="..\org.kermeta.eclipse.ocl.parser\${dot.or.bin}" />
 		
 	<property name="log4j.jar" location="${eclipse.home}/plugins/org.apache.log4j_1.2.13.v200706111418.jar" />
 	<property name="antlr.jar" location="${eclipse.home}/plugins/org.antlr_2.7.6/antlr.jar"/>
