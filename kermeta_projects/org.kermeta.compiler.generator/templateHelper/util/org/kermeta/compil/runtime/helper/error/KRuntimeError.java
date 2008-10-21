@@ -1,4 +1,4 @@
-/* $Id: KRuntimeError.java,v 1.1 2008-07-28 16:15:49 cfaucher Exp $
+/* $Id: KRuntimeError.java,v 1.2 2008-10-21 11:36:32 cfaucher Exp $
 * Project : org.kermeta.compil.runtime.helper
 * File : KRuntimeException.java
 * License : EPL
@@ -31,6 +31,20 @@ public class KRuntimeError extends Error {
 
 	public KRuntimeError (EObject eobj) {
 		realException = eobj;
+		
+		if(eobj instanceof kermeta.exceptions.Exception) {
+			StackTraceElement[] ste = new StackTraceElement[this.getStackTrace().length+1];
+			
+			ste[0] = new StackTraceElement(((kermeta.exceptions.Exception) realException).getMessage(), "", "", 0);
+			
+			int i=1;
+			for(StackTraceElement tmp_ste : this.getStackTrace()) {
+				ste[i] = tmp_ste;
+				i++;
+			}
+			
+			this.setStackTrace(ste);
+		}
 	}
 	
 	public KRuntimeError (String message) {
