@@ -1,4 +1,4 @@
-/* $Id: Pass1.kmt,v 1.36 2008-10-20 16:15:55 cfaucher Exp $
+/* $Id: Pass1.kmt,v 1.37 2008-10-22 16:09:17 cfaucher Exp $
  * Creation date: January 21, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -159,6 +159,15 @@ aspect class ClassDefinition {
 				p.ecoreModelElement.eClassifiers.add(eDataType)
 				// Setting the ecore proxy
 				self.ecoreDataType := eDataType
+				
+				// In testing
+				if not self.isAbstract then
+					var eClass : EClass init EClass.new()
+					eClass.name := self.name
+					self.ecoreModelElement := eClass
+					self.container().asType(Package).ecoreModelElement.eClassifiers().add(eClass)
+				end
+
 			else
 				if not self.isAbstract then
 					var except : UndefinedValueTypeInstanceClassNameException init UndefinedValueTypeInstanceClassNameException.new()

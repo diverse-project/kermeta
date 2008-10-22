@@ -1,4 +1,4 @@
-/* $Id: Pass2.kmt,v 1.39 2008-10-20 16:15:55 cfaucher Exp $
+/* $Id: Pass2.kmt,v 1.40 2008-10-22 16:09:16 cfaucher Exp $
  * Creation date: January 21, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -85,7 +85,9 @@ package structure {
 		
 		method applyPass2BehaviorJava(context : KM2EcoreContext) is do
 		
-			self.setLinks(context)
+			if not self.isAddedValueType() then
+				self.setLinks(context)
+			end
 			
 			// Case of this ClassDefinition is a ValueType
 			if self.isValueType() and (self.name != "Numeric") then //Numeric is excluded, because this one is abstract
@@ -113,14 +115,33 @@ package structure {
 				
 				context.current_valueType := void
 			else
-				//FIXME CF TO REMOVE super(context)
-				self.eachOwnedElement{ p |
-					p.applyPass2BehaviorJava(context)
-				}
+				if not self.isAddedValueType() then
+					//FIXME CF TO REMOVE super(context)
+					self.eachOwnedElement{ p |
+						p.applyPass2BehaviorJava(context)
+					}
+				end
 			end
 			
 			// The current ClassDefinition needs a new property to implement special structure in Java like Collection, Hashtable
 			// Thus, for Collection a EReference: 'values' is added during the compilation time
+			initEmfNeedProperty(context)
+					
+		end
+		
+		operation isAddedValueType() : Boolean is do
+			result := false
+			var qName : String init self.qualifiedName()
+			if qName == "kermeta::standard::String"
+					or qName == "kermeta::standard::Integer"
+					or qName == "kermeta::standard::Boolean"
+					or qName == "kermeta::standard::Character"
+					or qName == "kermeta::standard::Real" then
+				result := true
+			end
+		end
+		
+		operation initEmfNeedProperty(context : KM2EcoreContext) : Void is do
 			self.getEMFNeedProperty().each{ emfNeedProperty |
 			
 				if emfNeedProperty.getPropertyInfos().size()>0 then
@@ -203,7 +224,6 @@ package structure {
 				end
 			
 			}
-					
 		end
 	}
 	
