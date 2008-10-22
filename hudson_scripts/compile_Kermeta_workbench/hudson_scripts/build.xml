@@ -16,10 +16,10 @@
 	</target>
 	<target name="getSources">	
 		<mkdir dir="${previousStep.dir}"/>			
-		<get src="http://pamplemousse.irisa.fr:8080/job/prepare%20Kermeta%20sources/lastSuccessfulBuild/artifact/src//*zip*/src.zip" 
+		<get src="http://pamplemousse.irisa.fr:8080/job/prepare_Kermeta_sources/lastSuccessfulBuild/artifact/src//*zip*/src.zip" 
 			dest="${previousStep.dir}/prepare_Kermeta_sources.zip"
 			usetimestamp="true"/>
-	    <get src="http://pamplemousse.irisa.fr:8080/job/prepare%20OpenEmbeDD%20sources/lastSuccessfulBuild/artifact/src//*zip*/src.zip" 
+	    <get src="http://pamplemousse.irisa.fr:8080/job/prepare_OpenEmbeDD_sources/lastSuccessfulBuild/artifact/src//*zip*/src.zip" 
 		 	dest="${previousStep.dir}/prepare_OpenEmbeDD_sources.zip"
 			usetimestamp="true"/>
 		<unzip dest="${env.WORKSPACE}">
