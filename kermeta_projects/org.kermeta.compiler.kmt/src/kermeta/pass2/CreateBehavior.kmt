@@ -1,4 +1,4 @@
-/* $Id: CreateBehavior.kmt,v 1.84 2008-10-21 11:35:25 cfaucher Exp $
+/* $Id: CreateBehavior.kmt,v 1.85 2008-10-22 16:23:16 cfaucher Exp $
  * Creation date: January 21, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -92,9 +92,6 @@ package structure {
 				end
 				
 				if not self.getterBody.isVoid() then
-					if self.getterBody.isInstanceOf(CallFeature) then
-						javaCode := javaCode + "result = "
-					end
 					javaCode := javaCode + self.getterBody.createBehaviorJava(context)
 				end
 				
@@ -147,12 +144,13 @@ package structure {
 				if not isVoidType(type_label) then
 					javaCode.append("\n" + type_label + " result" + context.printFtSuffix() + " = null;\n")
 				end
+				
+				javaCode.append(self.createBehaviorJavaFromPre(context))
 
 				// The Java source code is provided by: self.body.createBehaviorJava(context)
-				if self.body.isInstanceOf(CallFeature) then
-					javaCode.append("result = ")
-				end
 				javaCode.append(self.body.createBehaviorJava(context))
+				
+				javaCode.append(self.createBehaviorJavaFromPost(context))
 				
 				// result is returned only if the "return type" is not Void
 				if (not isVoidType(type_label)) and (not context.ftSuffixActivation) then
@@ -171,6 +169,48 @@ package structure {
 	        	EAnnotationHelper.new.addAnnotationGenModelImpl(self.ecoreModelElement, javaCode.toString)
 	        end
 	        result := javaCode.toString()
+		end
+		
+		operation createBehaviorJavaFromPre(context : KM2EcoreContext) : String is do
+			result := ""
+			self.~pre.each{ constraint |
+				context.resultLastStatementStack.push("result_pre = " + context.TYPE_SEPARATOR + "java.lang.Boolean")
+				
+				result := result + "\nif( " + context.JAVA_CLASS_EXECUTION_CONTEXT + "getInstance().mustBeChecked( \"pre__" + constraint.oid.toString() + "__" + constraint.name + "\" ) ) {\n"
+				result := result + "java.lang.Boolean result_pre = false;\n"
+				result := result + constraint.createBehaviorJava(context) + "\n"
+				result := result + "if( !result_pre ) {\n"
+				result := result + "kermeta.exceptions.ConstraintViolatedPre exp = kermeta.exceptions.ExceptionsFactory.eINSTANCE.createConstraintViolatedPre();\n"
+				result := result + "throw new KRuntimeError(exp);\n"
+				result := result + "}\n"
+				result := result + "}\n"
+				
+				context.resultLastStatementStack.pop()
+			}
+			if result != "" then
+				result := "\n//PreConditions Checking\n{" + result + "}"
+			end
+		end
+		
+		operation createBehaviorJavaFromPost(context : KM2EcoreContext) : String is do
+			result := ""
+			self.~post.each{ constraint |
+				context.resultLastStatementStack.push("result_post = " + context.TYPE_SEPARATOR + "java.lang.Boolean")
+				
+				result := result + "\nif( " + context.JAVA_CLASS_EXECUTION_CONTEXT + "getInstance().mustBeChecked( \"post__" + constraint.oid.toString() + "__" + constraint.name + "\" ) ) {\n"
+				result := result + "java.lang.Boolean result_post = false;\n"
+				result := result + constraint.createBehaviorJava(context) + "\n"
+				result := result + "if( !result_post ) {\n"
+				result := result + "kermeta.exceptions.ConstraintViolatedPost exp = kermeta.exceptions.ExceptionsFactory.eINSTANCE.createConstraintViolatedPost();\n"
+				result := result + "throw new " + context.JAVA_CLASS_EXCEPTION_SWITCHER + "(exp);\n"
+				result := result + "}\n"
+				result := result + "}\n"
+				
+				context.resultLastStatementStack.pop()
+			}
+			if result != "" then
+				result := "\n//PostConditions Checking\n{" + result + "}"
+			end
 		end
 
 	}
@@ -244,10 +284,13 @@ package structure {
 						if context.ftProductTypeStack.peek().getTypeByIndex(i) == self then
 							result := ""
 						end							
-							
-						context.ftSuffixActivation := false
-						str_tpb := str_tpb + context.ftProductTypeStack.peek().getTypeByIndex(i).createBehaviorJava(context)
-						context.ftSuffixActivation := true
+						
+						//FIXME CF should be not null
+						if not context.ftProductTypeStack.peek().getTypeByIndex(i).isVoid() then
+							context.ftSuffixActivation := false
+							str_tpb := str_tpb + context.ftProductTypeStack.peek().getTypeByIndex(i).createBehaviorJava(context)
+							context.ftSuffixActivation := true
+						end
 							
 					end
 				end
@@ -333,10 +376,11 @@ package structure {
 	aspect class Constraint {
 		method createBehaviorJava(context : KM2EcoreContext) : String is do
 			result := ""
-			if self.body.isInstanceOf(CallFeature) then
-				result := result + "result = "
+			if self.body.isInstanceOf(Block) then
+				result := result + self.body.createBehaviorJava(context)
+			else
+				result := result + self.body.createExpression(context, StringBuffer.new(), true).toString()
 			end
-			result := result + self.body.createBehaviorJava(context)
 		end
 	}
 }
@@ -365,33 +409,13 @@ package behavior {
 			
 			//This method must be returned nothing
 			result := ""
+
 		end
-
-	}
 	
-	/** Complete */
-	aspect class Block {
-		method createBehaviorJava(context : KM2EcoreContext) : String from Expression is do
+		operation createExpression(context : KM2EcoreContext, javaCode : StringBuffer, lastExpression : Boolean) : StringBuffer is do
 		
-			super(context)
+			var stm : Expression init self
 			
-			var javaCode : StringBuffer init StringBuffer.new
-			
-			//EMF adds automatically the first {, thus we are checking if the container of the current block
-			//is an Operation, else a { is printed
-			if (not self.container.isInstanceOf(Operation)) and (not self.container.isInstanceOf(LambdaExpression)) then
-				javaCode.append("{\n")
-			end
-						
-			//At the beginning of each block, the need of "try" block is checked
-			if self.containsRescue() then
-				javaCode.append("try {")
-			end
-			
-			var nbrStm : Integer init self.statement.size()
-			var i_stm : Integer init 0
-			self.eachOwnedElement{ stm |
-
 				var str_statement : String init stm.createBehaviorJava(context).normalizeStatement()
 
 				var str_statement_splitted : OrderedSet<String> init str_statement.split(context.SEPARATOR_STATEMENT_FT) 
@@ -416,7 +440,7 @@ package behavior {
 				javaCode.append("\n\t")
 				
 				//if the given statement is the last one
-				if i_stm == (nbrStm-1) then
+				if lastExpression then
 					
 					if stm.mustBeAssigned() then
 						if self.container.isInstanceOf(Operation) then
@@ -465,6 +489,118 @@ package behavior {
 				
 				javaCode.append(str_statement)
 				
+				result := javaCode
+		
+		end
+	}
+	
+	/** Complete */
+	aspect class Block {
+		method createBehaviorJava(context : KM2EcoreContext) : String from Expression is do
+		
+			super(context)
+			
+			var javaCode : StringBuffer init StringBuffer.new
+			
+			//EMF adds automatically the first {, thus we are checking if the container of the current block
+			//is an Operation, else a { is printed
+			if (not self.container.isInstanceOf(Operation))
+					and (not self.container.isInstanceOf(Property))
+					and (not self.container.isInstanceOf(Constraint))
+					and (not self.container.isInstanceOf(LambdaExpression)) then
+				javaCode.append("{\n")
+			end
+						
+			//At the beginning of each block, the need of "try" block is checked
+			if self.containsRescue() then
+				javaCode.append("try {")
+			end
+			
+			var nbrStm : Integer init self.statement.size()
+			var i_stm : Integer init 0
+			self.statement.each{ stm |
+				
+				var lastExpression : Boolean init false
+				if i_stm == (nbrStm-1) then
+					lastExpression := true
+				end
+				
+				javaCode := stm.createExpression(context, javaCode, lastExpression)
+				
+				//Put the following code in the ClassExpression
+				/*var str_statement : String init stm.createBehaviorJava(context).normalizeStatement()
+
+				var str_statement_splitted : OrderedSet<String> init str_statement.split(context.SEPARATOR_STATEMENT_FT) 
+				
+				if str_statement_splitted.size() == 2 then
+					var s1 : String init str_statement_splitted.first()
+					var s2 : String init str_statement_splitted.last()
+					
+					if s2.contains(context.PREVIOUS_STATEMENT_FT) then
+						str_statement := s2.replace(context.PREVIOUS_STATEMENT_FT, s1)
+					end
+
+				end
+				
+				//FIXME CF Maybe we could find a better solution
+				str_statement := str_statement.replace(context.SEPARATOR_STATEMENT_FT + "//", "//")
+				str_statement := str_statement.replace(context.RETURN_EXPRESSION_TO_REPLACE + "result", "result")
+				
+				javaCode.append(context.beforeLambdaExpressionResult)
+				context.beforeLambdaExpressionResult := ""
+				
+				javaCode.append("\n\t")
+				
+				//if the given statement is the last one
+				if lastExpression then
+					
+					if stm.mustBeAssigned() then
+						if self.container.isInstanceOf(Operation) then
+							javaCode.append(context.NOT_EVALUATED_MESSAGE)
+						else
+							if Operation.new().isVoidType(stm.asType(Expression).staticType.getTypeName()) then
+								javaCode.append(context.NOT_EVALUATED_MESSAGE)
+							else
+								if self.container.container.isInstanceOf(Block) and (context.resultLastStatementStack.size()==0) then
+									javaCode.append(context.NOT_EVALUATED_MESSAGE)
+								else
+									if context.getResultLastStatementType() == stm.asType(Expression).staticType.createBehaviorJava(context) then
+										javaCode.append(context.getResultLastStatementId())
+									end
+								end
+							end
+						end
+					else
+						if stm.isInstanceOf(CallFeature) and (context.resultLastStatementStack.size()>0) then
+
+							if context.getResultLastStatementType() == stm.asType(Expression).staticType.createBehaviorJava(context) then
+								if stm.callsFunctionType() then
+									str_statement := str_statement + context.getResultLastStatementId() + stm.asType(CallFeature).calledFtResult + ";\n"
+								else
+									if str_statement.contains(context.RETURN_EXPRESSION_TO_REPLACE_SPECIAL) then
+										str_statement := str_statement.replace(context.RETURN_EXPRESSION_TO_REPLACE_SPECIAL, context.getResultLastStatementId())
+									else
+										javaCode.append(context.getResultLastStatementId())
+									end
+								end
+							end
+						end
+					end
+				else
+					if stm.mustBeAssigned() then
+						javaCode.append(context.NOT_EVALUATED_MESSAGE)
+					end
+				end
+				
+				if str_statement.contains(context.RETURN_EXPRESSION_TO_REPLACE_SPECIAL) then
+					// We have to remove the context.RETURN_EXPRESSION_TO_REPLACE_SPECIAL, but not its setter in the operation KM2EcoreContext::initializeConstants
+					if not str_statement.contains( "(\"" + context.RETURN_EXPRESSION_TO_REPLACE_SPECIAL + "\")") then
+						str_statement := str_statement.replace(context.RETURN_EXPRESSION_TO_REPLACE_SPECIAL, "")
+					end
+				end
+				
+				javaCode.append(str_statement)*/
+				
 				javaCode.append("\n")
 				
 				i_stm := i_stm + 1
@@ -483,7 +619,10 @@ package behavior {
 			end
 
 			//end of a block 
-			if (not self.container.isInstanceOf(Operation)) and (not self.container.isInstanceOf(LambdaExpression)) then
+			if (not self.container.isInstanceOf(Operation))
+					and (not self.container.isInstanceOf(Property))
+					and (not self.container.isInstanceOf(Constraint))
+					and (not self.container.isInstanceOf(LambdaExpression)) then
 				javaCode.append("}")
 			end		
 			result := javaCode.toString()
@@ -559,11 +698,11 @@ package behavior {
 					context.afterLbdExpActivation := false
 					
 					// A switch should be printed: subClassDefinitions
-					self.target.staticType.asType(ParameterizedType).getClassDefinitionAsTyped().subClassDefinitions.each{ cd |
+					/*self.target.staticType.asType(ParameterizedType).getClassDefinitionAsTyped().subClassDefinitions.each{ cd |
 						if cd.ownedOperation.exists{ op | op.name == self.staticOperation.name } then
 							stdio.writeln("//if( instanceof " + cd.name + " ) - " + self.staticOperation.name)
 						end
-					}
+					}*/
 					
 					var ft_str : String init self.createStringFromFunctionType(context)
 					
@@ -666,7 +805,7 @@ package behavior {
 					
 						if self.isCallFeatureAsStaticProperty() then
 						
-							if self.staticProperty.upper != 1 then
+							if (self.staticProperty.upper != 1) and (not self.isParameterMany()) then
 								var type_binding : String init self.staticType.asType(Class).typeParamBinding.first().type.createBehaviorJava(context)
 								
 								if (not self.staticProperty.isUnique) and (not self.staticProperty.isOrdered) then
@@ -695,7 +834,7 @@ package behavior {
 						
 							if not self.callsFunctionType() then
 							
-								if self.staticOperation.upper != 1 then
+								if (self.staticOperation.upper != 1) and (not self.isParameterMany()) then
 									var type_binding : String init self.staticType.asType(Class).typeParamBinding.first().type.createBehaviorJava(context)
 									
 									if (not self.staticOperation.isUnique) and (not self.staticOperation.isOrdered) then
@@ -1013,7 +1152,7 @@ package behavior {
 			if not owningOperation.isFunctionType() then
 			
 				if ModelAnalizer.new().isExtendedBy(extended_class, super_class) and (not context.staticOperationMode) then
-					result := result + "super." + owningOperation.name + "("
+					result := result + "super." + owningOperation.getFinalName() + "("
 				else
 					result := result + self.getCallStaticSignature(owningOperation, context)
 				end
