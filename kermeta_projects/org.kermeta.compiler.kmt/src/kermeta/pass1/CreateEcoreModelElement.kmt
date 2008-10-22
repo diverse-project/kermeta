@@ -1,4 +1,4 @@
-/* $Id: CreateEcoreModelElement.kmt,v 1.40 2008-10-20 16:15:55 cfaucher Exp $
+/* $Id: CreateEcoreModelElement.kmt,v 1.41 2008-10-22 16:19:10 cfaucher Exp $
  * Creation date: February 1, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -154,8 +154,15 @@ aspect class PrimitiveType {
 			eModelElement.serializable := self.getEMFEDataTypeIsSerializable
 			
 		end				
-			
-		var qualifiedName : String init self.getClassFromPrimitiveType().asType(Class).typeDefinition.qualifiedName
+		
+		var typeDef : TypeDefinition init self.getClassFromPrimitiveType().asType(Class).typeDefinition
+		var typeDef_EMFInstanceClassName : String init typeDef.getEMFInstanceClassName()
+		
+		if (typeDef_EMFInstanceClassName != "") and (eModelElement.instanceClassName == "" or eModelElement.instanceClassName == "java.lang.Object") then
+			eModelElement.instanceClassName := typeDef_EMFInstanceClassName
+		end
+		
+		var qualifiedName : String init typeDef.qualifiedName
 		eModelElement.eAnnotations.add(EAnnotationHelper.new.createKermetaEAnnotation(KermetaEAnnotationKey.~alias.name.toString(), qualifiedName))
 			
 		if eModelElement.instanceClassName == "" then
