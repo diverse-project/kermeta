@@ -1,4 +1,4 @@
-/* $Id: ExpressionHelper.kmt,v 1.27 2008-10-22 16:12:05 cfaucher Exp $
+/* $Id: ExpressionHelper.kmt,v 1.28 2008-10-22 17:08:31 cfaucher Exp $
  * Creation date: Jul 25, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -70,13 +70,20 @@ aspect class Expression {
 					or self.container.isInstanceOf(Property)
 					or self.container.isInstanceOf(Constraint) then
 				if self.container.isInstanceOf(Assignment) then
-					if self.container.asType(Assignment).target == self then
+					var assignment : Assignment init self.container.asType(Assignment)
+					
+					if assignment.target == self then
 						result := ""
 					else
-						if self.container.asType(Assignment).target.isCallFeatureAsStaticProperty() then
+						if assignment.target.isCallFeatureAsStaticProperty() then
 							result := ""
 						else
-							result := ";"
+							// Case: self.visitVariable(t ?= visitable)
+							if assignment.container.isInstanceOf(CallFeature) then
+								result := ""
+							else
+								result := ";"
+							end
 						end
 					end
 				else
