@@ -1,4 +1,4 @@
-/* $Id: CreateBehavior.kmt,v 1.85 2008-10-22 16:23:16 cfaucher Exp $
+/* $Id: CreateBehavior.kmt,v 1.86 2008-10-23 12:39:06 cfaucher Exp $
  * Creation date: January 21, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -176,12 +176,12 @@ package structure {
 			self.~pre.each{ constraint |
 				context.resultLastStatementStack.push("result_pre = " + context.TYPE_SEPARATOR + "java.lang.Boolean")
 				
-				result := result + "\nif( " + context.JAVA_CLASS_EXECUTION_CONTEXT + "getInstance().mustBeChecked( \"pre__" + constraint.oid.toString() + "__" + constraint.name + "\" ) ) {\n"
+				result := result + "\nif( " + context.JAVA_CLASS_EXECUTION_CONTEXT + ".getInstance().mustBeChecked( \"pre__" + constraint.oid.toString() + "__" + constraint.name + "\" ) ) {\n"
 				result := result + "java.lang.Boolean result_pre = false;\n"
 				result := result + constraint.createBehaviorJava(context) + "\n"
 				result := result + "if( !result_pre ) {\n"
 				result := result + "kermeta.exceptions.ConstraintViolatedPre exp = kermeta.exceptions.ExceptionsFactory.eINSTANCE.createConstraintViolatedPre();\n"
-				result := result + "throw new KRuntimeError(exp);\n"
+				result := result + "throw new " + context.JAVA_CLASS_EXCEPTION_SWITCHER + "(exp);\n"
 				result := result + "}\n"
 				result := result + "}\n"
 				
@@ -197,7 +197,7 @@ package structure {
 			self.~post.each{ constraint |
 				context.resultLastStatementStack.push("result_post = " + context.TYPE_SEPARATOR + "java.lang.Boolean")
 				
-				result := result + "\nif( " + context.JAVA_CLASS_EXECUTION_CONTEXT + "getInstance().mustBeChecked( \"post__" + constraint.oid.toString() + "__" + constraint.name + "\" ) ) {\n"
+				result := result + "\nif( " + context.JAVA_CLASS_EXECUTION_CONTEXT + ".getInstance().mustBeChecked( \"post__" + constraint.oid.toString() + "__" + constraint.name + "\" ) ) {\n"
 				result := result + "java.lang.Boolean result_post = false;\n"
 				result := result + constraint.createBehaviorJava(context) + "\n"
 				result := result + "if( !result_post ) {\n"
@@ -721,8 +721,11 @@ package behavior {
 								static_call := self.staticOperation.container().asType(ClassDefinition).container().asType(Package).qualifiedName.replace("::", ".") + ".helper." + self.staticOperation.container().asType(ClassDefinition).name + "Wrapper." + fName
 							end
 						else
-							
-							static_call := "org.kermeta.compil.runtime.helper.language." + self.staticOperation.container().asType(ClassDefinition).name + "Util." + fName
+							// If an optimized static call has been found, we don't need use the switchers
+							static_call := self.staticOperation.getOptimizedStaticCall(context)
+							if static_call=="" then
+								static_call := "org.kermeta.compil.runtime.helper.language." + self.staticOperation.container().asType(ClassDefinition).name + "Util." + fName + "Switcher"
+							end
 							
 							if fName == "asType" then
 								ppCast := true
@@ -768,7 +771,12 @@ package behavior {
 						
 						if not self.callsFunctionType() then
 						
-							if tgt.isInstanceOf(TypeLiteral) and (tgt.staticType.toString!="Enumeration") then
+							var tgt_staticType_str : String init ""
+							if not tgt.staticType.isVoid() then
+								tgt_staticType_str := tgt.staticType.toString()
+							end
+							
+							if tgt.isInstanceOf(TypeLiteral) and (tgt_staticType_str!="Enumeration") then
 								result := result + "org.kermeta.compil.runtime.ExecutionContext.getInstance().getMetaClass(\"" + tgt.createBehaviorJava(context) + "\")"
 							else
 								result := result + tgt.createBehaviorJava(context)
@@ -1204,6 +1212,42 @@ package behavior {
 	}
 	
 	aspect class Assignment {
+	
+		operation ppCast(context : KM2EcoreContext) : String is do
+			result := ""
+			if self.isCast() then
+				result := "(" + self.getCastTypeQName(context) + ") "
+			end
+		end
+		
+		operation getCastTypeQName(context : KM2EcoreContext) : String is do
+			result := ""
+			if self.isCast() then
+				//FIXME CF 08-08-01 When the bug#6018 will be fixed, self.target.staticType could be self.staticType
+				result := self.target.staticType.createBehaviorJava(context)
+			end
+		end
+		
+		operation requireValueTypeConversion(context : KM2EcoreContext) : Boolean is do
+			result := false
+			var right_type : String init self.~value.staticType.getTypeQName()
+			
+			var value_type_list : Set<String> init Set<String>.new()
+			value_type_list.add("java.lang.String")
+			value_type_list.add("java.lang.Boolean")
+			value_type_list.add("java.lang.Integer")
+			value_type_list.add("java.lang.Character")
+			value_type_list.add("java.lang.Double")
+			
+			var castType : String init self.getCastTypeQName(context)
+			if right_type == "kermeta::language::structure::Object" then
+				if value_type_list.contains(castType) then
+					stdio.writeln("a conversion is required")
+					result := true
+				end
+			end
+		end
+		
 		method createBehaviorJava(context : KM2EcoreContext) : String from Expression is do
 		
 			super(context)
@@ -1212,11 +1256,9 @@ package behavior {
 			
 			var left : String init self.target.createBehaviorJava(context)
 			
-			var ppCast : String init ""
-			if self.isCast() then
-				//FIXME CF 08-08-01 When the bug#6018 will be fixed, self.target.staticType could be self.staticType
-				ppCast := "(" + self.target.staticType.createBehaviorJava(context) + ") "
-			end
+			var ppCast : String init self.ppCast(context)
+			
+			//requireValueTypeConversion(context)
 			
 			// We should use: self.staticType.createBehaviorJava(context), but this value is not setted rightly
 			context.resultLastStatementStack.push(left + " = " + ppCast + context.TYPE_SEPARATOR + self.target.staticType.createBehaviorJava(context))

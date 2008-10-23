@@ -1,4 +1,4 @@
-/* $Id: StructureCompiler.kmt,v 1.71 2008-10-08 14:41:18 cfaucher Exp $
+/* $Id: StructureCompiler.kmt,v 1.72 2008-10-23 12:39:06 cfaucher Exp $
  * Creation date: January 21, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -39,9 +39,9 @@ class Main {
     	var traceInput : String init ""
     	
 		//modelInput := "platform:/resource/org.kermeta.compiler.kmt/models/framework.km"
-		//modelInput := "platform:/resource/org.kermeta.compiler.kmt/models/StructureCompiler.km"
+		modelInput := "platform:/resource/org.kermeta.compiler.kmt/models/StructureCompiler.km"
 		//modelInput := "platform:/resource/org.kermeta.compiler.kmt/models/ExpressionEvaluation.km"
-		modelInput := "platform:/resource/org.kermeta.compiler.kmt/models/compilertest.km"
+		//modelInput := "platform:/resource/org.kermeta.compiler.kmt/models/compilertest.km"
 		//modelInput := "platform:/resource/org.kermeta.compiler.kmt/models/testAddSet.km"
 		//modelInput := "platform:/resource/org.kermeta.compiler.kmt/models/dynamicAdaptation.km"
 		//modelInput := "platform:/resource/org.kermeta.compiler.kmt/models/weavingRoles.km"
@@ -52,6 +52,7 @@ class Main {
 		//modelInput := "platform:/resource/org.kermeta.compiler.kmt/models/callFeatureStaticTypeCallingFunctionType.km"
 		//modelInput := "platform:/resource/org.kermeta.compiler.kmt/models/exists.km"
 		//modelInput := "platform:/resource/org.kermeta.compiler.kmt/models/EcoreH.km"
+		//modelInput := "platform:/resource/org.kermeta.compiler.kmt/models/new_file.km"
 
 		output := modelInput.replaceExtension("ecore")
 		
@@ -187,7 +188,7 @@ class Main {
     	//operations.add("checkInvariants")
     	//operations.add("count")
     	//operations.add("flatten")
-    	operations.add("addAllTestCasesFrom")
+    	//operations.add("addAllTestCasesFrom")
     	//operations.add("count")
     	//operations.add("createResource")
     	//operations.add("saveAndValidateWithEMF")
@@ -228,6 +229,13 @@ class Main {
     	
     	//operations.add("loadEcoreAsModel")
     	//operations.add("loadModel")
+    	
+    	//operations.add("removeFromOid")
+    	operations.add("transformModel")
+    	operations.add("transformModelPattern")
+    	operations.add("visit")
+    	operations.add("main2")
+    	
     	
     	main_compilingOnlyOperations(modelInput, traceInput, output, mode, operations)
     end
