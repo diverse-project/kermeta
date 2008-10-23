@@ -1,4 +1,4 @@
-/* $Id: KRuntimeError.java,v 1.2 2008-10-21 11:36:32 cfaucher Exp $
+/* $Id: KRuntimeError.java,v 1.3 2008-10-23 12:54:55 cfaucher Exp $
 * Project : org.kermeta.compil.runtime.helper
 * File : KRuntimeException.java
 * License : EPL
@@ -33,17 +33,36 @@ public class KRuntimeError extends Error {
 		realException = eobj;
 		
 		if(eobj instanceof kermeta.exceptions.Exception) {
-			StackTraceElement[] ste = new StackTraceElement[this.getStackTrace().length+1];
 			
-			ste[0] = new StackTraceElement(((kermeta.exceptions.Exception) realException).getMessage(), "", "", 0);
-			
-			int i=1;
-			for(StackTraceElement tmp_ste : this.getStackTrace()) {
-				ste[i] = tmp_ste;
-				i++;
+		
+			if(eobj instanceof kermeta.exceptions.ConstraintViolatedException) {
+					
+				if( ((kermeta.exceptions.Exception) realException).getMessage() != null ) {
+				
+					StackTraceElement[] ste = new StackTraceElement[1];
+					ste[0] = new StackTraceElement(((kermeta.exceptions.Exception) realException).getMessage(), "", "", 0);
+					this.setStackTrace(ste);
+				}
+					
+			} else {
+				StackTraceElement[] ste = new StackTraceElement[this.getStackTrace().length+1];
+					
+				String message = realException.eClass().getName() + "\n";
+				if( ((kermeta.exceptions.Exception) realException).getMessage() != null ) {
+					message += ((kermeta.exceptions.Exception) realException).getMessage();
+				}
+					
+				ste[0] = new StackTraceElement(message, "", "", 0);
+					
+				int i=1;
+				for(StackTraceElement tmp_ste : this.getStackTrace()) {
+					ste[i] = tmp_ste;
+					i++;
+				}
+					
+				this.setStackTrace(ste);
 			}
 			
-			this.setStackTrace(ste);
 		}
 	}
 	
