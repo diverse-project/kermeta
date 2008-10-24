@@ -1,0 +1,42 @@
+/* $Id: UMLElementLocatorHelper.kmt,v 1.1 2008-10-24 12:15:09 gperroui Exp $ 
+ * Creation : October 23, 2008
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            perrouin
+ */
+@mainClass "UMLUtils::UMLElementLocatorHelper"
+@mainOperation "getLocationString"
+
+
+package UMLUtils;
+
+
+require kermeta
+require "platform:/plugin/org.kermeta.uml2.profiles.model/model/ecore/Ecore.profile.ecore"
+require "platform:/plugin/org.kermeta.uml2.profiles.model/model/ecore/Standard.profile.ecore"
+require "UMLQualifiedNameAspect.kmt"
+require "../profiledResourceHelper/ProfiledResourceHelper.kmt"
+
+class UMLElementLocatorHelper
+{
+	operation getLocationString(elem : kermeta::standard::Object) : kermeta::standard::String is do 
+		var namedElem : uml::NamedElement
+		namedElem ?= elem
+		if namedElem.isVoid then
+			result := elem.toString
+			var ph : profiledResourceHelper::ProfilesHelper init profiledResourceHelper::ProfilesHelper.new
+			ph.initialize(elem.containingResource,elem.containingResource) 
+			if ph.isStereotype(elem) then
+				var base_value : uml::Element
+				base_value := ph.getBase(elem)
+				if not base_value.isVoid then
+					// complement the result string
+					result := result + " stereotype on " + getLocationString(base_value)
+				end
+			end
+		else
+			result := namedElem.getQualifiedName
+		end
+	end
+}
