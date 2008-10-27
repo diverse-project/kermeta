@@ -10,6 +10,7 @@ set path=( $ANT_HOME/bin $path )
 setenv ECLIPSE_HOME /local/daily_build/eclipse3.4_with_topcased/eclipse
 setenv BUILD_WORKSPACE $WORKSPACE/buildworkspace
 setenv EQUINOX_JAR org.eclipse.equinox.launcher_1.0.101.R34x_v20080819.jar
+setenv REPORTDIR $WORKSPACE/unittestreports
 
 
 echo "--------------------------------"
