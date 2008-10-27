@@ -31,6 +31,7 @@
 		<ant dir="${env.WORKSPACE}/src/plugins/fr.irisa.triskell.kermeta.tests/" 
 			antfile="test/junit/test_interpreter_build.xml">
 			<property name="report.dir" value="${env.WORKSPACE}/reports"/>
+			<property name="cobertura.dir" value="/udd/triskell/bin/multiplatform/cobertura-1.7/"/>
 			<property name="dot.or.bin" value="@dot"/>
 			<property name="dot.or.buildclass" value="@dot"/>
 		</ant>
