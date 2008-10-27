@@ -24,7 +24,7 @@
 		        <include name="**/*.zip"/>
 		    </fileset>
 		</unzip>
-
+		<chmod file="${env.WORKSPACE}/hudson_scripts/test_Kermeta_interpreter/hudson_scripts/test.sh" perm="a+x"/>
 	</target>
 	<target name="test" >	
 		<mkdir dir="${eclipse.workspace.dir}"/>
