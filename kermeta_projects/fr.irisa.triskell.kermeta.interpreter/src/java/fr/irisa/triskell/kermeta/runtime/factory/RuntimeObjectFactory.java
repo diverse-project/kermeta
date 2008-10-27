@@ -1,4 +1,4 @@
-/* $Id: RuntimeObjectFactory.java,v 1.35 2008-08-14 09:15:45 dvojtise Exp $
+/* $Id: RuntimeObjectFactory.java,v 1.36 2008-10-27 14:07:36 vmahe Exp $
  * Project : Kermeta (First iteration)
  * File : RuntimeObject.java
  * License : EPL
@@ -22,6 +22,7 @@ import org.kermeta.model.KermetaModelHelper;
 
 import fr.irisa.triskell.eclipse.console.IOConsole;
 import fr.irisa.triskell.kermeta.builder.RuntimeMemory;
+import fr.irisa.triskell.kermeta.interpreter.KermetaRaisedException;
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
 import fr.irisa.triskell.kermeta.language.structure.GenericTypeDefinition;
 import fr.irisa.triskell.kermeta.language.structure.ModelType;
@@ -265,7 +266,19 @@ public class RuntimeObjectFactory {
 	 */
 	public RuntimeObject createRuntimeObjectFromClass(RuntimeObject meta_class) {
 	    createRuntimeObjectFromClass_count++;
-		RuntimeObject result = new RuntimeObjectImpl(this, meta_class);
+		
+	    RuntimeObject result;
+	    if (meta_class.getKCoreObject() == null){
+	    	// deal with bug #6571 and #1678  display a clear message for the user
+	    	throw KermetaRaisedException.createKermetaException("kermeta::exceptions::RuntimeError",
+					"new called on a class that isn't frozen",
+					meta_class.getFactory().memory.getInterpreter().getBasicInterpreter(),
+					meta_class.getFactory().memory,
+					memory.getInterpreter().getBasicInterpreter().getInterpreterContext().peekCallFrame().getOperation(),
+					null);
+	    }
+	    
+	    result = new RuntimeObjectImpl(this, meta_class);
 		
 		
 		// make sure to correctly initialize the collection data structure
