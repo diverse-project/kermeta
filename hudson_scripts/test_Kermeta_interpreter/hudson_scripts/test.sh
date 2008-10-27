@@ -18,7 +18,7 @@ echo " Launch interpreter tests "
 echo "--------------------------------"
 
 echo "Enforce uri.map using the file from the test plugin"
-cp $WORKSPACE/src/plugins/fr.irisa.triskell.kermeta.tests/daily_build_scripts/uri.map $WORKSPACE/src/plugins/fr.irisa.triskell.kermeta.io
+cp $WORKSPACE/hudson_scripts/test_Kermeta_interpreter/uri.map $WORKSPACE/src/plugins/fr.irisa.triskell.kermeta.io
 
 cd $WORKSPACE/src/plugins/fr.irisa.triskell.kermeta.tests/
 pwd
