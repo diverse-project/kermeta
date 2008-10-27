@@ -1,4 +1,4 @@
-<project name="KerMeta-Manual" default="compile">
+<project name="compile_kermeta_workbench" default="compile">
 	<!-- configuration properties -->		
 	<!-- project configuration -->
 	<property environment="env"/>
