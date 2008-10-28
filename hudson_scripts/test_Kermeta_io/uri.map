@@ -1,0 +1,19 @@
+# $Id: uri.map,v 1.1 2008-10-28 00:04:01 dvojtise Exp $
+#
+"platform:/plugin/"			"file:/local/hudson/home/jobs/test_Kermeta_io/workspace/src/plugins/"
+"platform:/resource/"		"file:/local/hudson/home/jobs/test_Kermeta_io/workspace/src/plugins/"
+"kconf:/loader/"			"file:/local/hudson/home/jobs/test_Kermeta_io/workspace/src/plugins/org.kermeta.io.loader/instances/"
+
+# This is the values that are correct for daily build
+# You probably have to change it to match your configuration
+# but, please do not commit them it into the CVS
+#"platform:/plugin/"		"file:/home/paco/Desktop/KermetaCVS/"
+#"platform:/resource/"		"file:/home/paco/Desktop/KermetaCVS/"
+#"platform:/plugin/"		"/home/paco/Desktop/KermetaCVS/"
+#"platform:/resource/"		"/home/paco/Desktop/KermetaCVS/"
+#"platform:/plugin/"			"file://c:/eclipse3.3/eclipse/workspace/"
+#"platform:/resource/"		"file://c:/eclipse3.3/eclipse/workspace/"
+#"platform:/plugin/"		"file:/C:/eclipse3.3/eclipse/workspace/"
+#"platform:/resource/"		"file:/C:/eclipse3.3/eclipse/workspace/"
+
+

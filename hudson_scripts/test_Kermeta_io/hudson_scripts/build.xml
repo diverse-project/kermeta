@@ -1,0 +1,40 @@
+<project name="test_kermeta_interpreter" default="all">
+	<!-- configuration properties -->		
+	<!-- project configuration -->
+	<property environment="env"/>
+
+	<property name="env.WORKSPACE" location="."/>
+	<property name="prepare.Kermeta.sources.last.successfull.dir" location="${env.WORKSPACE}/../../prepare Kermeta sources/lastSuccessful/archive"/>
+	<property name="prepare.OpenEmbeDD.sources.last.successfull.dir" location="${env.WORKSPACE}/../../prepare OpenEmbeDD sources/lastSuccessful/archive"/>
+	<property name="previousStep.dir" location="${env.WORKSPACE}/previousStep"/>
+	<property name="eclipse.home" location="/local/daily_build/eclipse3.4_with_topcased/eclipse"/>
+	<property name="equinox.jar" location="${eclipse.home}/plugins/org.eclipse.equinox.launcher_1.0.101.R34x_v20080819.jar"/>
+	<property name="eclipse.workspace.dir" location="${env.WORKSPACE}/eclipseworkspace"/>			
+	
+	<target name="all" depends="getSources, test">
+		
+	</target>
+	<target name="getSources">	
+		<mkdir dir="${previousStep.dir}"/>			
+		<get src="http://pamplemousse.irisa.fr:8080/job/compile_Kermeta_workbench/lastSuccessfulBuild/artifact/src//*zip*/src.zip" 
+			dest="${previousStep.dir}/compile_Kermeta_workbench.zip"
+			usetimestamp="true"/>
+		<unzip dest="${env.WORKSPACE}">
+		    <fileset dir="${previousStep.dir}">
+		        <include name="**/*.zip"/>
+		    </fileset>
+		</unzip>
+		<chmod file="${env.WORKSPACE}/hudson_scripts/test_Kermeta_interpreter/hudson_scripts/test.sh" perm="a+x"/>
+	</target>
+	<target name="test" >	
+		<mkdir dir="${eclipse.workspace.dir}"/>
+		<ant dir="${env.WORKSPACE}/src/plugins/fr.irisa.triskell.kermeta.tests/test/junit/" 
+			antfile="test_interpreter_build.xml">
+			<property name="report.dir" value="${env.WORKSPACE}/reports"/>
+			<property name="cobertura.dir" value="/udd/triskell/bin/multiplatform/cobertura-1.7/"/>
+			<property name="dot.or.bin" value="@dot"/>
+			<property name="dot.or.buildclass" value="@dot"/>
+		</ant>
+
+	</target>
+</project>
