@@ -1,6 +1,6 @@
 
 
-/*$Id: ReconcilingStrategy.java,v 1.8 2008-09-05 09:35:31 dvojtise Exp $
+/*$Id: ReconcilingStrategy.java,v 1.9 2008-10-28 12:31:03 dvojtise Exp $
 * Project : fr.irisa.triskell.kermeta.texteditor
 * File : 	FoldingStrategy.java
 * License : EPL
@@ -71,10 +71,11 @@ public class ReconcilingStrategy implements IReconcilingStrategy {
 			}
 		}
 		
-		if ( kpmUnit != null )
+		if ( kpmUnit != null ){
 			setJobForKermetaProject();
 		
-		modelCheckingJob.schedule();
+			modelCheckingJob.schedule();
+		}
 		
 	}
 
