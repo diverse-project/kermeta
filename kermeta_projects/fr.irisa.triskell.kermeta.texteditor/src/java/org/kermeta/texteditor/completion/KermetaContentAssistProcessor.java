@@ -1,4 +1,4 @@
-/* $Id: KermetaContentAssistProcessor.java,v 1.16 2008-02-21 10:16:53 dvojtise Exp $
+/* $Id: KermetaContentAssistProcessor.java,v 1.17 2008-10-28 12:31:29 dvojtise Exp $
 * Project : fr.irisa.triskell.kermeta.texteditor
 * File : 	TagContentAssistProcessor.java
 * License : EPL
@@ -313,6 +313,8 @@ public class KermetaContentAssistProcessor implements IContentAssistProcessor {
 		} catch (BadLocationException e) {
 			TexteditorPlugin.logWarningMessage("cannot compute completion proposal for " + input,e);
 		}catch (PatternSyntaxException e) {
+			TexteditorPlugin.logWarningMessage("cannot compute completion proposal for " + input ,e);
+		}catch (java.lang.NullPointerException e){
 			TexteditorPlugin.logWarningMessage("cannot compute completion proposal for " + input ,e);
 		}
 		

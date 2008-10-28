@@ -1,4 +1,4 @@
-/* $Id: ModelElementOutlineItem.java,v 1.8 2008-06-10 11:41:25 ftanguy Exp $
+/* $Id: ModelElementOutlineItem.java,v 1.9 2008-10-28 12:31:47 dvojtise Exp $
 * Project : fr.irisa.triskell.kermeta.texteditor
 * File : OutlineItem.java
 * License : EPL
@@ -23,6 +23,7 @@ import fr.irisa.triskell.kermeta.language.structure.Property;
 import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
 import fr.irisa.triskell.kermeta.modelhelper.KermetaUnitHelper;
 import fr.irisa.triskell.kermeta.modelhelper.NamedElementHelper;
+import fr.irisa.triskell.kermeta.texteditor.TexteditorPlugin;
 
 /**
  * Item that represent a ModelElement in Kermeta Outline
@@ -87,7 +88,14 @@ public class ModelElementOutlineItem extends OutlineItem implements Comparable<M
         if (unit == null) return false;
         if (modelElement instanceof TypeDefinition) {
         	String qn = NamedElementHelper.getQualifiedName((TypeDefinition)modelElement);
-            TypeDefinition td = unit.getInternalTypeDefinitionByName(qn); 
+        	TypeDefinition td = null;
+        	try{
+            	td = unit.getInternalTypeDefinitionByName(qn); 
+            }
+            catch(Throwable t){
+            	TexteditorPlugin.internalLog.warn("Problem retreiving data for the outline", t);
+            	return false;
+            }
         	return  (td == null);
         }
         else return false;
