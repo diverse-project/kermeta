@@ -1,4 +1,4 @@
-/* $Id: CreateBehavior.kmt,v 1.87 2008-10-28 13:21:45 cfaucher Exp $
+/* $Id: CreateBehavior.kmt,v 1.88 2008-10-28 21:59:27 barais Exp $
  * Creation date: January 21, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -1593,6 +1593,7 @@ package behavior {
 			if result == "." then
 				result := "\".\""
 			else
+				result := result.replace("\\", "\\\\")
 				result := "\"" + result.replace("\"", "\\\"") + "\""
 				result := result.replace("\n", "\\n")
 				result := result.replace("\t", "\\t")

@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: StringLiteralImpl.java,v 1.6 2008-10-28 13:18:16 cfaucher Exp $
+ * $Id: StringLiteralImpl.java,v 1.7 2008-10-28 22:00:08 barais Exp $
  */
 package kermeta.language.behavior.impl;
 
@@ -119,10 +119,9 @@ public class StringLiteralImpl extends LiteralImpl implements StringLiteral
     }
      else {
     
+      result = kermeta.standard.helper.StringWrapper.replace(result, "\\", "\\\\");
       result = kermeta.standard.helper.StringWrapper.plus(kermeta.standard.helper.StringWrapper.plus("\"", kermeta.standard.helper.StringWrapper.replace(result, "\"", "\\\"")), "\"");
-    
       result = kermeta.standard.helper.StringWrapper.replace(result, "\n", "\\n");
-    
       result = kermeta.standard.helper.StringWrapper.replace(result, "\t", "\\t");
     }
     
