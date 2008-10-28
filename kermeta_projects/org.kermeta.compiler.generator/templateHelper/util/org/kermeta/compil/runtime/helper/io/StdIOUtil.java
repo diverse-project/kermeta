@@ -1,4 +1,4 @@
-/* $Id: StdIOUtil.java,v 1.4 2008-10-16 09:04:37 cfaucher Exp $
+/* $Id: StdIOUtil.java,v 1.5 2008-10-28 15:21:48 cfaucher Exp $
  * Project : Kermeta (First iteration)
  * File : Io.java
  * License : EPL
@@ -27,11 +27,11 @@ public class StdIOUtil {
 	private StdIOUtil() {
 	}
 	
-	static private StdIOUtil _instance;
+	private static kermeta.io.StdIO _instance;
 
-	static public StdIOUtil getInstance() {
+	public static kermeta.io.StdIO getInstance() {
 		if (_instance == null)
-			_instance = new StdIOUtil();
+			_instance = kermeta.io.IoFactory.eINSTANCE.createStdIO();
 		return _instance;
 	}
     
