@@ -1,5 +1,5 @@
-/* $Id: ocl2kmtVisitor.kmt,v 1.17 2008-04-30 14:41:02 ftanguy Exp $
-/* $Id: ocl2kmtVisitor.kmt,v 1.17 2008-04-30 14:41:02 ftanguy Exp $
+/* $Id: ocl2kmtVisitor.kmt,v 1.18 2008-10-28 15:19:46 barais Exp $
+/* $Id: ocl2kmtVisitor.kmt,v 1.18 2008-10-28 15:19:46 barais Exp $
  * Creation date: February 5, 2007
  * License: EPL
  * Copyright: IRISA/INRIA
@@ -509,7 +509,7 @@ using qualifiedNames
 					if policy != void then
 						policy.generate(visitable, self)
 					else
-						raise TypeError.new.initialize(getLocalFeatureTypeName(), operationName).setMessage("Unknown keyword")
+						raise TypeError.new.initialize(getLocalFeatureTypeName(), operationName).setMessageReflexive("Unknown keyword")
 					end
 				else
 					stdio.writeln("*** Warning: unknown iterator kind:" + operationName)

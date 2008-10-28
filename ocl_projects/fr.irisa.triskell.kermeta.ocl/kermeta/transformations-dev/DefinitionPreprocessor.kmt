@@ -1,4 +1,4 @@
- /* $Id: DefinitionPreprocessor.kmt,v 1.5 2008-01-24 14:09:59 dvojtise Exp $
+ /* $Id: DefinitionPreprocessor.kmt,v 1.6 2008-10-28 15:19:45 barais Exp $
  * Creation date: August 20, 2007
  * License: EPL
  * Copyright: IRISA/INRIA
@@ -68,7 +68,7 @@ class DefinitionPreprocessor inherits ocl::cst::visitors::Visitor
 			var fqn : qualifiedNames::QualifiedName init packageFQN.concat(classifierQN)
 			classifier ?= helper.getClassifierByFQN(fqn) 			  
 			if classifier == void then
-				raise TypeError.new.setMessage( "Cannot retreive class [" + fqn.toString+ "]. Please check that you have used the correct metamodel")
+				raise TypeError.new.setMessageReflexive( "Cannot retreive class [" + fqn.toString+ "]. Please check that you have used the correct metamodel")
 			else
     			stdio.writeln("   got classifier : "+ classifier.name)
 			end

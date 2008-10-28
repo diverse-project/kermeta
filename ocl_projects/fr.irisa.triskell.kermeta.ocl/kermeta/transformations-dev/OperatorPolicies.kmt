@@ -1,4 +1,4 @@
-/* $Id: OperatorPolicies.kmt,v 1.12 2008-01-24 14:10:13 dvojtise Exp $
+/* $Id: OperatorPolicies.kmt,v 1.13 2008-10-28 15:19:47 barais Exp $
  * 
  * License: EPL
  * Copyright: IRISA/INRIA
@@ -110,7 +110,7 @@ using qualifiedNames
 			do
 				result := collectionOperations.getValue(operationName)
 				if  result == void then
-					raise TypeError.new.setMessage("Unknown collection operation: " + operationName )
+					raise TypeError.new.setMessageReflexive("Unknown collection operation: " + operationName )
 				end
 			end
 			
@@ -129,7 +129,7 @@ using qualifiedNames
 			// require isOperator(operationName)
 				result := operators.getValue(operationName)
 				if  result == void then
-					raise TypeError.new.setMessage("Unknown operator: " + operationName )
+					raise TypeError.new.setMessageReflexive("Unknown operator: " + operationName )
 				end
 			end
  }
@@ -350,7 +350,7 @@ class CollectionFunctionCall inherits CollectionOperation {
 	method checkRequirements(operationName: String, visitor: Ocl2kmtVisitor): Void is
 	  do
 			if not visitor.getLocalFeatureIsMultiple() then 
-				raise TypeError.new.setMessage("Multiplicity error, can't call [" + operationName + "]  on non-multiple expression")
+				raise TypeError.new.setMessageReflexive("Multiplicity error, can't call [" + operationName + "]  on non-multiple expression")
 			end
 	end
 }
@@ -360,7 +360,7 @@ class functionOrderedCollectionCall inherits CollectionOperation {
 	method checkRequirements(operationName: String, visitor: Ocl2kmtVisitor): Void is
 		do
 			if not visitor.getLocalFeatureIsOrdered() then
-				raise TypeError.new.setMessage("Ordering error, can't call [" + operationName + "]  on non-ordered expression")
+				raise TypeError.new.setMessageReflexive("Ordering error, can't call [" + operationName + "]  on non-ordered expression")
 			end
 		end
 }
@@ -410,7 +410,7 @@ class TypeTest inherits FunctionCallOp {
 		do
 			stdio.writeln("Adding actual parameter for type test operation")
 			if not oclOp.arguments.size.equals(1) then
-				raise TypeError.new.setMessage("type-test ["+ name+"] must have single type as parameter, param count ["+oclOp.arguments.size.toString+"]")
+				raise TypeError.new.setMessageReflexive("type-test ["+ name+"] must have single type as parameter, param count ["+oclOp.arguments.size.toString+"]")
 			end
 			visitor.expectType
 			visitor.write( "(" )

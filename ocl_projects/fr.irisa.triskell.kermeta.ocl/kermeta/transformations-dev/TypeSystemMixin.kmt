@@ -1,4 +1,4 @@
-/* $Id: TypeSystemMixin.kmt,v 1.6 2008-07-24 08:50:56 dvojtise Exp $
+/* $Id: TypeSystemMixin.kmt,v 1.7 2008-10-28 15:19:47 barais Exp $
  * Creation date: July 25, 2007
  * License: EPL
  * Copyright: IRISA/INRIA
@@ -249,7 +249,7 @@ class TypeSystemMixin {
 				if isPrimitiveType(type.name) then
 					result := getPrimitiveOperation(type.name, name)
 				else
-    				raise TypeError.new.setMessage("Can't look for feature '"+ name+"' in type: " + type.name +  type.toString + " which is not a class")
+    				raise TypeError.new.setMessageReflexive("Can't look for feature '"+ name+"' in type: " + type.name +  type.toString + " which is not a class")
 				end
 			end
 		end
@@ -322,7 +322,7 @@ class TypeSystemMixin {
 				if result != void then
         			stdio.writeln("Type [" + typeName.toString + "] found in metamodel")
 				else
-					raise TypeError.new.setMessage("Unrecognised type: " + typeName.toString)
+					raise TypeError.new.setMessageReflexive("Unrecognised type: " + typeName.toString)
 				end
 			end
 		end
@@ -405,12 +405,13 @@ class TypeError inherits Exception {
 			result := self
 		end
 		
-	operation setMessage(s: String) :TypeError is
+	operation setMessageReflexive(s: String) :TypeError is
 		do
 			if message == void then
 				message := ""
 			end
 			message := s + message
-			result := self
+			result:=self
+			
 		end
 }
