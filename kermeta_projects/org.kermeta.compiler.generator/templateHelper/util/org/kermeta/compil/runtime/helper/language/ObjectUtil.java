@@ -55,8 +55,8 @@ public class ObjectUtil {
 		if ( type.equals(o.getClass().getName().replace("impl.", "").replace("Impl", "")) ) {
 			return true;
 		} else {
-			for( Class clazz : getMetaClass(o).getterSuperClass() ) {
-				if (qualifiedNameDot(clazz.getTypeDefinition()).equals(type) ) {
+			for( Type superTypes : allSuperTypes((ClassDefinition) getMetaClass(o).getTypeDefinition()) ) {
+				if (superTypes instanceof Class && qualifiedNameDot(((Class) superTypes).getTypeDefinition()).equals(type) ) {
 					return true;
 				}
 			}
@@ -69,8 +69,8 @@ public class ObjectUtil {
 		if ( type.equals(o.getClass().getName().replace("impl.", "").replace("Impl", "")) ) {
 			return true;
 		} else {
-			for( Class clazz : getMetaClass(o).getterSuperClass() ) {
-				if (qualifiedNameDot(clazz.getTypeDefinition()).equals(type) ) {
+			for( Type superTypes : allSuperTypes((ClassDefinition) getMetaClass(o).getTypeDefinition()) ) {			
+				if (superTypes instanceof Class && qualifiedNameDot(((Class) superTypes).getTypeDefinition()).equals(type) ) {
 					return true;
 				}
 			}
@@ -121,7 +121,7 @@ public class ObjectUtil {
 		if( self instanceof kermeta.language.structure.Object) {
 			return isInstanceOf((kermeta.language.structure.Object) self, metaClass);
 		} else {
-			return isInstanceOf(self, metaClass);
+			return isInstanceOf((java.lang.Object) self, metaClass);
 		}
 	}
 	
