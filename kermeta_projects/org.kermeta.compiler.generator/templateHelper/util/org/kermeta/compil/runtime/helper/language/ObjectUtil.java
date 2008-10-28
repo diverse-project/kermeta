@@ -183,27 +183,27 @@ public class ObjectUtil {
 			}
 //			System.out.println(instanceClassName);
 			kermeta.language.structure.Object value_type = null;
-			if( instanceClassName.equals("java.lang.String") ) {
+			if( instanceClassName.equals("java.lang.String") || instanceClassName.equals("String") ) {
 				kermeta.standard.String _String = StandardFactory.eINSTANCE.createString();
 				_String.setValue((java.lang.String) theValue);
 				value_type = (kermeta.language.structure.Object) _String;
 			} else {
-				if( instanceClassName.equals("java.lang.Integer") ) {
+				if( instanceClassName.equals("java.lang.Integer") || instanceClassName.equals("int") ) {
 					kermeta.standard.Integer _Integer = StandardFactory.eINSTANCE.createInteger();
 					_Integer.setValue(((java.lang.Integer) theValue).toString());
 					value_type = (kermeta.language.structure.Object) _Integer;
 				}else {
-					if( instanceClassName.equals("java.lang.Boolean") ) {
+					if( instanceClassName.equals("java.lang.Boolean") || instanceClassName.equals("boolean") ) {
 						kermeta.standard.Boolean _Boolean = StandardFactory.eINSTANCE.createBoolean();
 						_Boolean.setValue(((java.lang.Boolean) theValue).toString());
 						value_type = (kermeta.language.structure.Object) _Boolean;
 					} else {
-						if( instanceClassName.equals("java.lang.Character") ) {
+						if( instanceClassName.equals("java.lang.Character") || instanceClassName.equals("char") ) {
 							kermeta.standard.Character _Character = StandardFactory.eINSTANCE.createCharacter();
 							_Character.setValue(((java.lang.Character) theValue).toString());
 							value_type = (kermeta.language.structure.Object) _Character;
 						} else {
-							if( instanceClassName.equals("java.lang.Double") ) {
+							if( instanceClassName.equals("java.lang.Double") || instanceClassName.equals("double") ) {
 								kermeta.standard.Real _Real = StandardFactory.eINSTANCE.createReal();
 								_Real.setValue(((java.lang.Double) theValue).toString());
 								value_type = (kermeta.language.structure.Object) _Real;
@@ -644,10 +644,6 @@ public class ObjectUtil {
 		+ ".helper."
 		+ current_cd.getName()
 		+ "Invariant";
-	
-		/*if(current_cd.getName().equals("Connector")) {
-			System.out.println();
-		}*/
 		
 		try {
 			java.lang.Class<?> current_class = ObjectUtil.class.getClassLoader().loadClass(class_name);
