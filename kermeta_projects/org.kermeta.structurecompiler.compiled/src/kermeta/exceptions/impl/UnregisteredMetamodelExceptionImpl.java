@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: UnregisteredMetamodelExceptionImpl.java,v 1.5 2008-10-16 13:17:28 cfaucher Exp $
+ * $Id: UnregisteredMetamodelExceptionImpl.java,v 1.6 2008-10-28 13:18:09 cfaucher Exp $
  */
 package kermeta.exceptions.impl;
 

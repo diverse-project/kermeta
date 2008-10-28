@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: FilterImpl.java,v 1.5 2008-10-16 13:17:41 cfaucher Exp $
+ * $Id: FilterImpl.java,v 1.6 2008-10-28 13:18:10 cfaucher Exp $
  */
 package kermeta.language.structure.impl;
 
@@ -65,7 +65,7 @@ public class FilterImpl extends ObjectImpl implements Filter {
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return StructurePackage.Literals.FILTER;
+		return StructurePackage.eINSTANCE.getFilter();
 	}
 
 	/**

@@ -1,3 +1,16 @@
+
+/*$Id: PersistenceUtil.java,v 1.3 2008-10-28 13:18:28 cfaucher Exp $
+* Project : org.kermeta.compiler.generator
+* File : 	PersistenceUtil.java
+* License : EPL
+* Copyright : IRISA / INRIA / Universite de Rennes 1
+* ----------------------------------------------------------------------------
+* Creation date : 24 juin 08
+* Authors : 
+* 			Francois TANGUY	<ftanguy@irisa.fr>
+* 			Cyril FAUCHER	<cfaucher@irisa.fr>
+*/
+
 package org.kermeta.compil.runtime.helper.persistence;
 
 import java.io.IOException;
@@ -25,12 +38,18 @@ import org.eclipse.emf.ecore.xmi.impl.XMLMapImpl;
  * 
  * Does not work when generated code has been hacked structurally like ecore...
  * 
- * @author paco
- *
+ * @generated
  */
 public class PersistenceUtil {
 
-	/*static public EList<EObject> load(String modelURI, String metamodelURI) {
+	/**
+	 * @generated
+	 * @param modelURI
+	 * @param metamodelURI
+	 * @return
+	 */
+	@Deprecated
+	static public EList<EObject> load(String modelURI, String metamodelURI) {
 
 		EList<EObject> contents = new BasicEList<EObject>();
 		ResourceSet resourceSet = new ResourceSetImpl();
@@ -54,9 +73,16 @@ public class PersistenceUtil {
 			e.printStackTrace();
 		}
 		return contents;
-	}*/
-		
-	/*static public void saveWithNewURI(EList<EObject> contents, String new_uri, String metamodelURI) {
+	}
+	
+	/**
+	 * @generated
+	 * @param contents
+	 * @param new_uri
+	 * @param metamodelURI
+	 */
+	@Deprecated
+	static public void saveWithNewURI(EList<EObject> contents, String new_uri, String metamodelURI) {
 		ResourceSet resourceSet = new ResourceSetImpl();
 		  
 		// Register the appropriate resource factory to handle all file extensions.
@@ -85,6 +111,6 @@ public class PersistenceUtil {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-	}*/
+	}
 	
 }

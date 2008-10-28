@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: InterpreterPackage.java,v 1.5 2008-10-16 13:18:03 cfaucher Exp $
+ * $Id: InterpreterPackage.java,v 1.6 2008-10-28 13:18:20 cfaucher Exp $
  */
 package kermeta.interpreter;
 
@@ -75,15 +75,6 @@ public interface InterpreterPackage extends EPackage {
 	int DYNAMIC_EXPRESSION = 0;
 
 	/**
-	 * The feature id for the '<em><b>File</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DYNAMIC_EXPRESSION__FILE = StructurePackage.OBJECT__FILE;
-
-	/**
 	 * The feature id for the '<em><b>Tag</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -91,6 +82,15 @@ public interface InterpreterPackage extends EPackage {
 	 * @ordered
 	 */
 	int DYNAMIC_EXPRESSION__TAG = StructurePackage.OBJECT__TAG;
+
+	/**
+	 * The feature id for the '<em><b>File</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DYNAMIC_EXPRESSION__FILE = StructurePackage.OBJECT__FILE;
 
 	/**
 	 * The feature id for the '<em><b>File Name</b></em>' attribute.
@@ -184,15 +184,6 @@ public interface InterpreterPackage extends EPackage {
 	int KERMETA_ERROR = 1;
 
 	/**
-	 * The feature id for the '<em><b>File</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int KERMETA_ERROR__FILE = StructurePackage.OBJECT__FILE;
-
-	/**
 	 * The feature id for the '<em><b>Tag</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -200,6 +191,15 @@ public interface InterpreterPackage extends EPackage {
 	 * @ordered
 	 */
 	int KERMETA_ERROR__TAG = StructurePackage.OBJECT__TAG;
+
+	/**
+	 * The feature id for the '<em><b>File</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int KERMETA_ERROR__FILE = StructurePackage.OBJECT__FILE;
 
 	/**
 	 * The feature id for the '<em><b>File Name</b></em>' attribute.
@@ -266,15 +266,6 @@ public interface InterpreterPackage extends EPackage {
 	int PARSE_ERROR = 2;
 
 	/**
-	 * The feature id for the '<em><b>File</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PARSE_ERROR__FILE = KERMETA_ERROR__FILE;
-
-	/**
 	 * The feature id for the '<em><b>Tag</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -282,6 +273,15 @@ public interface InterpreterPackage extends EPackage {
 	 * @ordered
 	 */
 	int PARSE_ERROR__TAG = KERMETA_ERROR__TAG;
+
+	/**
+	 * The feature id for the '<em><b>File</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PARSE_ERROR__FILE = KERMETA_ERROR__FILE;
 
 	/**
 	 * The feature id for the '<em><b>File Name</b></em>' attribute.
@@ -348,15 +348,6 @@ public interface InterpreterPackage extends EPackage {
 	int TYPE_ERROR = 3;
 
 	/**
-	 * The feature id for the '<em><b>File</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TYPE_ERROR__FILE = KERMETA_ERROR__FILE;
-
-	/**
 	 * The feature id for the '<em><b>Tag</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -364,6 +355,15 @@ public interface InterpreterPackage extends EPackage {
 	 * @ordered
 	 */
 	int TYPE_ERROR__TAG = KERMETA_ERROR__TAG;
+
+	/**
+	 * The feature id for the '<em><b>File</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TYPE_ERROR__FILE = KERMETA_ERROR__FILE;
 
 	/**
 	 * The feature id for the '<em><b>File Name</b></em>' attribute.

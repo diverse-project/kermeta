@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: EcoreSwitch.java,v 1.5 2008-10-16 13:18:21 cfaucher Exp $
+ * $Id: EcoreSwitch.java,v 1.6 2008-10-28 13:18:34 cfaucher Exp $
  */
 package ecore.util;
 

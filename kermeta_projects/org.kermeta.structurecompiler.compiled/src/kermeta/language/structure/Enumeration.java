@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: Enumeration.java,v 1.5 2008-10-16 13:17:59 cfaucher Exp $
+ * $Id: Enumeration.java,v 1.6 2008-10-28 13:18:19 cfaucher Exp $
  */
 package kermeta.language.structure;
 
@@ -29,7 +29,7 @@ import org.eclipse.emf.common.util.EList;
  *        annotation="kermeta documentation='Definition for Enumeration'"
  * @generated
  */
-public interface Enumeration extends Traceability<EEnum>, DataType {
+public interface Enumeration extends DataType, Traceability<EEnum> {
 	/**
 	 * Returns the value of the '<em><b>Owned Literal</b></em>' containment reference list.
 	 * The list contents are of type {@link kermeta.language.structure.EnumerationLiteral}.
@@ -74,7 +74,7 @@ public interface Enumeration extends Traceability<EEnum>, DataType {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @model annotation="kermeta superOperation='kermeta::language::structure::Object'"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='\n\tecore.EEnum ecoreEnumeration = this.createEcoreModelElement(context);\n\n\tkermeta.language.structure.Package p = ((kermeta.language.structure.Package) org.kermeta.compil.runtime.helper.language.ObjectUtil.asType(org.kermeta.compil.runtime.helper.language.ObjectUtil.container(this), org.kermeta.compil.runtime.ExecutionContext.getInstance().getMetaClass(\"kermeta.language.structure.Package\")));\n\n\torg.kermeta.compil.runtime.helper.basetypes.CollectionUtil.<ecore.EClassifier>convertAsOrderedSet(p.getEcoreModelElement().getEClassifiers()).add(ecoreEnumeration);\n\n\tthis.setEcoreModelElement(ecoreEnumeration);\n\n\t//BIft:eachOwnedElement\n\n\t//BIft:each\n\n\t\n{\n\n\tkermeta.standard.Iterator<kermeta.language.structure.Tag> it_ft86 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil.<kermeta.language.structure.Tag>convertAsOrderedSet(this.getOwnedTags()).iterator();\n\tjava.lang.Boolean idLoopCond_317 = false;\n\twhile( !idLoopCond_317 ) {\n\tidLoopCond_317 = it_ft86.isOff();\n\tif ( idLoopCond_317 ) {\n\t} else {\n\n\t//BIle:func\nkermeta.language.structure.Tag o_lbdExp86 = it_ft86.next();\n\n\t//BIle:func\nkermeta.language.structure.Tag l_lbdExp85 = o_lbdExp86;\n\n\tl_lbdExp85.applyPass1(context);\n//EIle:func\n\n//EIle:func\n\n}\n\t}\n}\n\n//EIft:each\n\n\n\t//BIft:each\n\n\t\n{\n\n\tkermeta.standard.Iterator<kermeta.language.structure.EnumerationLiteral> it_ft87 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil.<kermeta.language.structure.EnumerationLiteral>convertAsOrderedSet(this.getOwnedLiteral()).iterator();\n\tjava.lang.Boolean idLoopCond_318 = false;\n\twhile( !idLoopCond_318 ) {\n\tidLoopCond_318 = it_ft87.isOff();\n\tif ( idLoopCond_318 ) {\n\t} else {\n\n\t//BIle:func\nkermeta.language.structure.EnumerationLiteral l_lbdExp87 = it_ft87.next();\n\n\t//BIle:func\nkermeta.language.structure.EnumerationLiteral l_lbdExp85 = l_lbdExp87;\n\n\tl_lbdExp85.applyPass1(context);\n//EIle:func\n\n//EIle:func\n\n}\n\t}\n}\n\n//EIft:each\n\n//EIft:eachOwnedElement\n\n'"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='\n\tecore.EEnum ecoreEnumeration = this.createEcoreModelElement(context);\n\n\tkermeta.language.structure.Package p = ((kermeta.language.structure.Package) org.kermeta.compil.runtime.helper.language.ObjectUtil.asTypeSwitcher(org.kermeta.compil.runtime.helper.language.ObjectUtil.containerSwitcher(this), org.kermeta.compil.runtime.ExecutionContext.getInstance().getMetaClass(\"kermeta.language.structure.Package\")));\n\n\torg.kermeta.compil.runtime.helper.basetypes.CollectionUtil.<ecore.EClassifier>convertAsOrderedSet(p.getEcoreModelElement().getEClassifiers()).add(ecoreEnumeration);\n\n\tthis.setEcoreModelElement(ecoreEnumeration);\n\n\t//BIft:eachOwnedElement\n\n\t//BIft:each\n\n\t\n{\n\n\tkermeta.standard.Iterator<kermeta.language.structure.Tag> it_ft47 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil.<kermeta.language.structure.Tag>convertAsOrderedSet(this.getOwnedTags()).iterator();\n\tjava.lang.Boolean idLoopCond_100 = false;\n\twhile( !idLoopCond_100 ) {\n\tidLoopCond_100 = it_ft47.isOff();\n\tif ( idLoopCond_100 ) {\n\t} else {\n\n\t//BIle:func\nkermeta.language.structure.Tag o_lbdExp47 = it_ft47.next();\n\n\t//BIle:func\nkermeta.language.structure.Tag l_lbdExp46 = o_lbdExp47;\n\n\tl_lbdExp46.applyPass1(context);\n//EIle:func\n\n//EIle:func\n\n}\n\t}\n}\n\n//EIft:each\n\n\n\t//BIft:each\n\n\t\n{\n\n\tkermeta.standard.Iterator<kermeta.language.structure.EnumerationLiteral> it_ft48 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil.<kermeta.language.structure.EnumerationLiteral>convertAsOrderedSet(this.getOwnedLiteral()).iterator();\n\tjava.lang.Boolean idLoopCond_101 = false;\n\twhile( !idLoopCond_101 ) {\n\tidLoopCond_101 = it_ft48.isOff();\n\tif ( idLoopCond_101 ) {\n\t} else {\n\n\t//BIle:func\nkermeta.language.structure.EnumerationLiteral l_lbdExp48 = it_ft48.next();\n\n\t//BIle:func\nkermeta.language.structure.EnumerationLiteral l_lbdExp46 = l_lbdExp48;\n\n\tl_lbdExp46.applyPass1(context);\n//EIle:func\n\n//EIle:func\n\n}\n\t}\n}\n\n//EIft:each\n\n//EIft:eachOwnedElement\n\n'"
 	 * @generated
 	 */
 	void applyPass1(KM2EcoreContext context);

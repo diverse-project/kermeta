@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: IdentifierHelperImpl.java,v 1.5 2008-10-16 13:18:07 cfaucher Exp $
+ * $Id: IdentifierHelperImpl.java,v 1.6 2008-10-28 13:18:23 cfaucher Exp $
  */
 package km2ecore.helper.java.impl;
 
@@ -54,19 +54,19 @@ public class IdentifierHelperImpl extends ObjectImpl implements
 
 		java.lang.String result = null;
 
-		java.lang.Boolean idIfCond_49 = false;
-		idIfCond_49 = org.kermeta.compil.runtime.helper.language.ObjectUtil
-				.isVoid(id);
+		java.lang.Boolean idIfCond_1060 = false;
+		idIfCond_1060 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+				.isVoidSwitcher(id);
 
-		if (idIfCond_49) {
+		if (idIfCond_1060) {
 
 			result = id;
 		}
 
-		java.lang.Boolean idIfCond_50 = false;
-		idIfCond_50 = context.getJavaKeyWordList().isKeyword(id);
+		java.lang.Boolean idIfCond_1061 = false;
+		idIfCond_1061 = context.getJavaKeyWordList().isKeyword(id);
 
-		if (idIfCond_50) {
+		if (idIfCond_1061) {
 
 			result = kermeta.standard.helper.StringWrapper.plus("_", id);
 		} else {

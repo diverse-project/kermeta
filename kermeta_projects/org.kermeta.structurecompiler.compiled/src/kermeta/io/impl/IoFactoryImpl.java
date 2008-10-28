@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: IoFactoryImpl.java,v 1.5 2008-10-16 13:17:48 cfaucher Exp $
+ * $Id: IoFactoryImpl.java,v 1.6 2008-10-28 13:18:14 cfaucher Exp $
  */
 package kermeta.io.impl;
 

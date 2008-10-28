@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: JavaKeyWordList.java,v 1.5 2008-10-16 13:18:26 cfaucher Exp $
+ * $Id: JavaKeyWordList.java,v 1.6 2008-10-28 13:18:40 cfaucher Exp $
  */
 package km2ecore.common;
 
@@ -55,7 +55,7 @@ public interface JavaKeyWordList extends kermeta.language.structure.Object {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @model dataType="kermeta.standard.JavaBoolean" strDataType="kermeta.standard.JavaString"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='\njava.lang.Boolean result = null;\n\n\tresult = kermeta.standard.helper.BooleanWrapper.not(org.kermeta.compil.runtime.helper.language.ObjectUtil.isVoid(this.getKeywords().getValue(str)));\n\nreturn result;\n'"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='\njava.lang.Boolean result = null;\n\n\tresult = kermeta.standard.helper.BooleanWrapper.not(org.kermeta.compil.runtime.helper.language.ObjectUtil.isVoidSwitcher(this.getKeywords().getValue(str)));\n\nreturn result;\n'"
 	 * @generated
 	 */
 	Boolean isKeyword(String str);

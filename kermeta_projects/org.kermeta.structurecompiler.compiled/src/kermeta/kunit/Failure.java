@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: Failure.java,v 1.5 2008-10-16 13:18:05 cfaucher Exp $
+ * $Id: Failure.java,v 1.6 2008-10-28 13:18:21 cfaucher Exp $
  */
 package kermeta.kunit;
 
@@ -83,7 +83,7 @@ public interface Failure extends kermeta.language.structure.Object {
 	 * @model dataType="kermeta.standard.JavaString"
 	 *        annotation="kermeta documentation='/**\r\n\t * overwrite the default method, in order to add the message\r\n\t \052/'"
 	 *        annotation="kermeta superOperation='kermeta::language::structure::Object'"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='\njava.lang.String result = null;\n\n\tresult = kermeta.standard.helper.StringWrapper.plus(kermeta.standard.helper.StringWrapper.plus(org.kermeta.compil.runtime.helper.language.ObjectUtil.toString(this.getFailure()), \" \"), this.getMessage());\n\nreturn result;\n'"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='\njava.lang.String result = null;\n\n\tresult = kermeta.standard.helper.StringWrapper.plus(kermeta.standard.helper.StringWrapper.plus(org.kermeta.compil.runtime.helper.language.ObjectUtil.toStringSwitcher(this.getFailure()), \" \"), this.getMessage());\n\nreturn result;\n'"
 	 * @generated
 	 */
 	String toString();

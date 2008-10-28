@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: KunitFactory.java,v 1.5 2008-10-16 13:18:04 cfaucher Exp $
+ * $Id: KunitFactory.java,v 1.6 2008-10-28 13:18:20 cfaucher Exp $
  */
 package kermeta.kunit;
 
@@ -24,24 +24,6 @@ public interface KunitFactory extends EFactory {
 	 * @generated
 	 */
 	KunitFactory eINSTANCE = kermeta.kunit.impl.KunitFactoryImpl.init();
-
-	/**
-	 * Returns a new object of class '<em>Assertion Failed Error</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Assertion Failed Error</em>'.
-	 * @generated
-	 */
-	AssertionFailedError createAssertionFailedError();
-
-	/**
-	 * Returns a new object of class '<em>Assert</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Assert</em>'.
-	 * @generated
-	 */
-	Assert createAssert();
 
 	/**
 	 * Returns a new object of class '<em>Invalid Test Case Name Exception</em>'.
@@ -105,6 +87,24 @@ public interface KunitFactory extends EFactory {
 	 * @generated
 	 */
 	TestRunner createTestRunner();
+
+	/**
+	 * Returns a new object of class '<em>Assertion Failed Error</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Assertion Failed Error</em>'.
+	 * @generated
+	 */
+	AssertionFailedError createAssertionFailedError();
+
+	/**
+	 * Returns a new object of class '<em>Assert</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Assert</em>'.
+	 * @generated
+	 */
+	Assert createAssert();
 
 	/**
 	 * Returns the package supported by this factory.

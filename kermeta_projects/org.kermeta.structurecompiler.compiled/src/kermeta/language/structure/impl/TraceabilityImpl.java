@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: TraceabilityImpl.java,v 1.5 2008-10-16 13:17:38 cfaucher Exp $
+ * $Id: TraceabilityImpl.java,v 1.6 2008-10-28 13:18:10 cfaucher Exp $
  */
 package kermeta.language.structure.impl;
 
@@ -57,7 +57,7 @@ public class TraceabilityImpl<X> extends ObjectImpl implements Traceability<X> {
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return StructurePackage.Literals.TRACEABILITY;
+		return StructurePackage.eINSTANCE.getTraceability();
 	}
 
 	/**

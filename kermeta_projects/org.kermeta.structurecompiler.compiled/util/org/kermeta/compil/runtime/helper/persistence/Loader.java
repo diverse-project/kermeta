@@ -1,12 +1,14 @@
 
-/*$Id: Loader.java,v 1.5 2008-10-16 13:18:21 cfaucher Exp $
-* Project : org.kermeta.framework.compiled.runtime.helper
+/*$Id: Loader.java,v 1.6 2008-10-28 13:18:28 cfaucher Exp $
+* Project : org.kermeta.compiler.generator
 * File : 	Loader.java
 * License : EPL
 * Copyright : IRISA / INRIA / Universite de Rennes 1
 * ----------------------------------------------------------------------------
 * Creation date : 24 juin 08
-* Authors : paco
+* Authors : 
+* 			Francois TANGUY	<ftanguy@irisa.fr>
+* 			Cyril FAUCHER	<cfaucher@irisa.fr>
 */
 package org.kermeta.compil.runtime.helper.persistence;
 
@@ -27,9 +29,7 @@ import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 
 /**
- * 
- * @author paco
- *
+ * @generated
  */
 public class Loader extends SaverOrLoader {
 	
@@ -38,6 +38,7 @@ public class Loader extends SaverOrLoader {
 	 * @param modelURI The uri of the model to clone.
 	 * @param metamodelURI The uri of the metamodel to use when cloning.
 	 * @return The list of objects cloned.
+	 * @generated
 	 */
 	static public void load(List contents, String modelURI, String metamodelURI) {
 		
@@ -45,28 +46,6 @@ public class Loader extends SaverOrLoader {
 		l.normalizeRegistry(modelURI, metamodelURI);
 		List<EObject> instances = new ArrayList<EObject>();
 		ResourceSet rs = new ResourceSetImpl();
-
-		//rs.setPackageRegistry(EPackage.Registry.INSTANCE);
-		//rs.getPackageRegistry();
-		
-		//EPackage root_pack = l.getRootEPackage(Registry.INSTANCE.getEPackage(metamodelURI));
-		//EFactory factory = root_pack.eResource().getResourceSet().set;
-		
-		
-		/*if ( fileExtension != null ) {
-			if ( factory != null ) {
-				Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(fileExtension, factory);
-			} else {
-				Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(fileExtension, new XMIResourceFactoryImpl());
-			}
-		} else {
-			if ( factory != null ) {
-				Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("*", factory);
-			}
-			else {
-				Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("*", new XMIResourceFactoryImpl());
-			}
-		}*/
 		
 		org.eclipse.emf.ecore.resource.Resource resource = rs.getResource( URI.createURI(modelURI), true );
 		for ( EObject o : resource.getContents() ) {
@@ -76,7 +55,7 @@ public class Loader extends SaverOrLoader {
 	}
 	
 	/**
-	 * 
+	 * @generated
 	 * @param metamodelURI
 	 */
 	public Loader(String metamodelURI) {
@@ -84,7 +63,7 @@ public class Loader extends SaverOrLoader {
 	}
 	
 	/**
-	 * 
+	 * @generated
 	 * @param o
 	 * @param metamodelURI
 	 * @return
@@ -99,7 +78,7 @@ public class Loader extends SaverOrLoader {
 	}
 
 	/**
-	 * 
+	 * @generated
 	 * @param sourceObject
 	 * @param targetObject
 	 */
@@ -175,7 +154,7 @@ public class Loader extends SaverOrLoader {
 	}
 
 	/**
-	 * 
+	 * @generated
 	 * @param clazz The class to be search one of its structural feature.
 	 * @param featureName The name of the structural feature to look for.
 	 * @return The structural feature which name matches the feature name argument or null if any.
@@ -188,6 +167,9 @@ public class Loader extends SaverOrLoader {
 		return null;
 	}
 	
+	/**
+	 * @generated
+	 */
 	@Override
 	protected EFactory getFactory(String metamodelURI) {
 		//return PersistenceMapping.getEPackageForLoading(metamodelURI).getEFactoryInstance();

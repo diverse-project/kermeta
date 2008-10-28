@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: KermetaAdapterFactory.java,v 1.5 2008-10-16 13:18:19 cfaucher Exp $
+ * $Id: KermetaAdapterFactory.java,v 1.6 2008-10-28 13:18:31 cfaucher Exp $
  */
 package km2ecore.helper.kermeta.util;
 
@@ -76,11 +76,6 @@ public class KermetaAdapterFactory extends AdapterFactoryImpl {
 		}
 
 		@Override
-		public Adapter caseConstraintHelper(ConstraintHelper object) {
-			return createConstraintHelperAdapter();
-		}
-
-		@Override
 		public Adapter caseGenericTypeDefinitionHelper(
 				GenericTypeDefinitionHelper object) {
 			return createGenericTypeDefinitionHelperAdapter();
@@ -121,20 +116,6 @@ public class KermetaAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createCompilerHelperJavaAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link km2ecore.helper.kermeta.ConstraintHelper <em>Constraint Helper</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see km2ecore.helper.kermeta.ConstraintHelper
-	 * @generated
-	 */
-	public Adapter createConstraintHelperAdapter() {
 		return null;
 	}
 

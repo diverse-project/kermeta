@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: EnumerationLiteral.java,v 1.5 2008-10-16 13:17:59 cfaucher Exp $
+ * $Id: EnumerationLiteral.java,v 1.6 2008-10-28 13:18:19 cfaucher Exp $
  */
 package kermeta.language.structure;
 
@@ -63,7 +63,7 @@ public interface EnumerationLiteral extends NamedElement,
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @model annotation="kermeta superOperation='kermeta::language::structure::Object'"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='\n\tecore.EEnumLiteral ecoreEnumLiteral = this.createEcoreModelElement(context);\n\n\tkermeta.language.structure.Enumeration e = ((kermeta.language.structure.Enumeration) org.kermeta.compil.runtime.helper.language.ObjectUtil.asType(this.getEnumeration(), org.kermeta.compil.runtime.ExecutionContext.getInstance().getMetaClass(\"kermeta.language.structure.Enumeration\")));\n\n\torg.kermeta.compil.runtime.helper.basetypes.CollectionUtil.<ecore.EEnumLiteral>convertAsOrderedSet(e.getEcoreModelElement().getELiterals()).add(ecoreEnumLiteral);\n\n\tthis.setEcoreModelElement(ecoreEnumLiteral);\n'"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='\n\tecore.EEnumLiteral ecoreEnumLiteral = this.createEcoreModelElement(context);\n\n\tkermeta.language.structure.Enumeration e = ((kermeta.language.structure.Enumeration) org.kermeta.compil.runtime.helper.language.ObjectUtil.asTypeSwitcher(this.getEnumeration(), org.kermeta.compil.runtime.ExecutionContext.getInstance().getMetaClass(\"kermeta.language.structure.Enumeration\")));\n\n\torg.kermeta.compil.runtime.helper.basetypes.CollectionUtil.<ecore.EEnumLiteral>convertAsOrderedSet(e.getEcoreModelElement().getELiterals()).add(ecoreEnumLiteral);\n\n\tthis.setEcoreModelElement(ecoreEnumLiteral);\n'"
 	 * @generated
 	 */
 	void applyPass1(KM2EcoreContext context);
@@ -71,7 +71,7 @@ public interface EnumerationLiteral extends NamedElement,
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @model annotation="http://www.eclipse.org/emf/2002/GenModel body='\necore.EEnumLiteral result = null;\n\n\tecore.EEnumLiteral ecoreEnumerationLiteral = ((ecore.EEnumLiteral) org.kermeta.compil.runtime.helper.language.ClassUtil.newObject(\"ecore.EEnumLiteral\"));\n\n\tecoreEnumerationLiteral.setName(this.getName());\n\n\tecoreEnumerationLiteral.setLiteral(this.getName());\n\n\tecoreEnumerationLiteral.setValue(org.kermeta.compil.runtime.helper.basetypes.CollectionUtil.<ecore.EEnumLiteral>convertAsOrderedSet(((kermeta.language.structure.Enumeration) org.kermeta.compil.runtime.helper.language.ObjectUtil.asType(this.getEnumeration(), org.kermeta.compil.runtime.ExecutionContext.getInstance().getMetaClass(\"kermeta.language.structure.Enumeration\"))).getEcoreModelElement().getELiterals()).size());\n\n\tresult = ecoreEnumerationLiteral;\n\nreturn result;\n'"
+	 * @model annotation="http://www.eclipse.org/emf/2002/GenModel body='\necore.EEnumLiteral result = null;\n\n\tecore.EEnumLiteral ecoreEnumerationLiteral = ((ecore.EEnumLiteral) org.kermeta.compil.runtime.helper.language.ClassUtil.newObject(\"ecore.EEnumLiteral\"));\n\n\tecoreEnumerationLiteral.setName(this.getName());\n\n\tecoreEnumerationLiteral.setLiteral(this.getName());\n\n\tecoreEnumerationLiteral.setValue(org.kermeta.compil.runtime.helper.basetypes.CollectionUtil.<ecore.EEnumLiteral>convertAsOrderedSet(((kermeta.language.structure.Enumeration) org.kermeta.compil.runtime.helper.language.ObjectUtil.asTypeSwitcher(this.getEnumeration(), org.kermeta.compil.runtime.ExecutionContext.getInstance().getMetaClass(\"kermeta.language.structure.Enumeration\"))).getEcoreModelElement().getELiterals()).size());\n\n\tresult = ecoreEnumerationLiteral;\n\nreturn result;\n'"
 	 * @generated
 	 */
 	EEnumLiteral createEcoreModelElement(KM2EcoreContext context);

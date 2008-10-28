@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: FallibleImpl.java,v 1.5 2008-10-16 13:17:31 cfaucher Exp $
+ * $Id: FallibleImpl.java,v 1.6 2008-10-28 13:18:09 cfaucher Exp $
  */
 package kermeta.kunit.impl;
 
@@ -178,10 +178,10 @@ public abstract class FallibleImpl extends AbstractFallibleImpl implements
 	 */
 	public void fail(String msg) {
 
-		java.lang.Boolean idIfCond_1011 = false;
-		idIfCond_1011 = this.mustStop();
+		java.lang.Boolean idIfCond_849 = false;
+		idIfCond_849 = this.mustStop();
 
-		if (idIfCond_1011) {
+		if (idIfCond_849) {
 
 			kermeta.kunit.AssertionFailedError exception = ((kermeta.kunit.AssertionFailedError) org.kermeta.compil.runtime.helper.language.ClassUtil
 					.newObject("kermeta.kunit.AssertionFailedError"));
@@ -251,10 +251,10 @@ public abstract class FallibleImpl extends AbstractFallibleImpl implements
 
 		java.lang.Integer number = this.number();
 
-		java.lang.Boolean idIfCond_1012 = false;
-		idIfCond_1012 = kermeta.standard.helper.BooleanWrapper.not(condition);
+		java.lang.Boolean idIfCond_850 = false;
+		idIfCond_850 = kermeta.standard.helper.BooleanWrapper.not(condition);
 
-		if (idIfCond_1012) {
+		if (idIfCond_850) {
 
 			java.lang.String msg = kermeta.standard.helper.StringWrapper.plus(
 					kermeta.standard.helper.StringWrapper.plus(
@@ -262,10 +262,10 @@ public abstract class FallibleImpl extends AbstractFallibleImpl implements
 							kermeta.standard.helper.IntegerWrapper
 									.toString(number)), " failed");
 
-			java.lang.Boolean idIfCond_1013 = false;
-			idIfCond_1013 = this.mustStop();
+			java.lang.Boolean idIfCond_851 = false;
+			idIfCond_851 = this.mustStop();
 
-			if (idIfCond_1013) {
+			if (idIfCond_851) {
 
 				kermeta.kunit.AssertionFailedError exception = ((kermeta.kunit.AssertionFailedError) org.kermeta.compil.runtime.helper.language.ClassUtil
 						.newObject("kermeta.kunit.AssertionFailedError"));
@@ -294,11 +294,11 @@ public abstract class FallibleImpl extends AbstractFallibleImpl implements
 
 		java.lang.Integer result = null;
 
-		java.lang.Boolean idIfCond_1014 = false;
-		idIfCond_1014 = org.kermeta.compil.runtime.helper.language.ObjectUtil
-				.isVoid(this.getRank());
+		java.lang.Boolean idIfCond_852 = false;
+		idIfCond_852 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+				.isVoidSwitcher(this.getRank());
 
-		if (idIfCond_1014) {
+		if (idIfCond_852) {
 
 			this.setRank(0);
 		}
@@ -321,10 +321,10 @@ public abstract class FallibleImpl extends AbstractFallibleImpl implements
 
 		java.lang.Integer number = this.number();
 
-		java.lang.Boolean idIfCond_1015 = false;
-		idIfCond_1015 = kermeta.standard.helper.BooleanWrapper.not(condition);
+		java.lang.Boolean idIfCond_853 = false;
+		idIfCond_853 = kermeta.standard.helper.BooleanWrapper.not(condition);
 
-		if (idIfCond_1015) {
+		if (idIfCond_853) {
 
 			java.lang.String realMsg = kermeta.standard.helper.StringWrapper
 					.plus(kermeta.standard.helper.StringWrapper.plus(
@@ -334,10 +334,10 @@ public abstract class FallibleImpl extends AbstractFallibleImpl implements
 											.toString(number)), " failed: "),
 							msg);
 
-			java.lang.Boolean idIfCond_1016 = false;
-			idIfCond_1016 = this.mustStop();
+			java.lang.Boolean idIfCond_854 = false;
+			idIfCond_854 = this.mustStop();
 
-			if (idIfCond_1016) {
+			if (idIfCond_854) {
 
 				kermeta.kunit.AssertionFailedError exception = ((kermeta.kunit.AssertionFailedError) org.kermeta.compil.runtime.helper.language.ClassUtil
 						.newObject("kermeta.kunit.AssertionFailedError"));
@@ -366,11 +366,11 @@ public abstract class FallibleImpl extends AbstractFallibleImpl implements
 
 		java.lang.Boolean result = null;
 
-		java.lang.Boolean idIfCond_1017 = false;
-		idIfCond_1017 = org.kermeta.compil.runtime.helper.language.ObjectUtil
-				.isVoid(this.getStopOnFailure());
+		java.lang.Boolean idIfCond_855 = false;
+		idIfCond_855 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+				.isVoidSwitcher(this.getStopOnFailure());
 
-		if (idIfCond_1017) {
+		if (idIfCond_855) {
 
 			this.setStopOnFailure(true);
 		}

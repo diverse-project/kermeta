@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: EDataType.java,v 1.6 2008-10-16 13:18:10 cfaucher Exp $
+ * $Id: EDataType.java,v 1.7 2008-10-28 13:18:24 cfaucher Exp $
  */
 package ecore;
 

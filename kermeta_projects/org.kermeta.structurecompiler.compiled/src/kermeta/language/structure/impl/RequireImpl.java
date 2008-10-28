@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: RequireImpl.java,v 1.5 2008-10-16 13:17:39 cfaucher Exp $
+ * $Id: RequireImpl.java,v 1.6 2008-10-28 13:18:10 cfaucher Exp $
  */
 package kermeta.language.structure.impl;
 
@@ -69,7 +69,7 @@ public class RequireImpl extends ObjectImpl implements Require {
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return StructurePackage.Literals.REQUIRE;
+		return StructurePackage.eINSTANCE.getRequire();
 	}
 
 	/**
@@ -115,9 +115,9 @@ public class RequireImpl extends ObjectImpl implements Require {
 		ecore.EAnnotation result = null;
 
 		ecore.EAnnotation ecoreAnnotation = ((kermeta.language.structure.ModelingUnit) org.kermeta.compil.runtime.helper.language.ObjectUtil
-				.asType(
+				.asTypeSwitcher(
 						org.kermeta.compil.runtime.helper.language.ObjectUtil
-								.container(this),
+								.containerSwitcher(this),
 						org.kermeta.compil.runtime.ExecutionContext
 								.getInstance()
 								.getMetaClass(
@@ -127,39 +127,39 @@ public class RequireImpl extends ObjectImpl implements Require {
 		ecore.EStringToStringMapEntry requireEntry = null;
 		//BIft:detect
 
-		ecore.EStringToStringMapEntry result_ft121 = null;
+		ecore.EStringToStringMapEntry result_ft100 = null;
 
-		ecore.EStringToStringMapEntry elem_ft121 = null;
+		ecore.EStringToStringMapEntry elem_ft100 = null;
 
-		result_ft121 = null;
+		result_ft100 = null;
 
 		{
 
-			kermeta.standard.Iterator<ecore.EStringToStringMapEntry> it_ft121 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
+			kermeta.standard.Iterator<ecore.EStringToStringMapEntry> it_ft100 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
 					.<ecore.EStringToStringMapEntry> convertAsOrderedSet(
 							ecoreAnnotation.getDetails()).iterator();
-			java.lang.Boolean idLoopCond_388 = false;
-			while (!idLoopCond_388) {
-				idLoopCond_388 = kermeta.standard.helper.BooleanWrapper.or(
-						it_ft121.isOff(),
+			java.lang.Boolean idLoopCond_243 = false;
+			while (!idLoopCond_243) {
+				idLoopCond_243 = kermeta.standard.helper.BooleanWrapper.or(
+						it_ft100.isOff(),
 						org.kermeta.compil.runtime.helper.language.ObjectUtil
-								.isNotEqual(result_ft121, null));
-				if (idLoopCond_388) {
+								.isNotEqualSwitcher(result_ft100, null));
+				if (idLoopCond_243) {
 				} else {
 
-					elem_ft121 = it_ft121.next();
+					elem_ft100 = it_ft100.next();
 
-					java.lang.Boolean idIfCond_389 = false;
+					java.lang.Boolean idIfCond_244 = false;
 					//BIle:detector
-					ecore.EStringToStringMapEntry d_lbdExp121 = elem_ft121;
+					ecore.EStringToStringMapEntry d_lbdExp100 = elem_ft100;
 
-					idIfCond_389 = kermeta.standard.helper.StringWrapper
-							.equals(d_lbdExp121.getKey(), "require");
+					idIfCond_244 = kermeta.standard.helper.StringWrapper
+							.equals(d_lbdExp100.getKey(), "require");
 					//EIle:detector
 
-					if (idIfCond_389) {
+					if (idIfCond_244) {
 
-						result_ft121 = elem_ft121;
+						result_ft100 = elem_ft100;
 					}
 
 				}
@@ -167,7 +167,7 @@ public class RequireImpl extends ObjectImpl implements Require {
 		}
 
 		//CE
-		requireEntry = result_ft121;
+		requireEntry = result_ft100;
 		//EIft:detect
 
 		requireEntry.setValue(kermeta.standard.helper.StringWrapper.plus(

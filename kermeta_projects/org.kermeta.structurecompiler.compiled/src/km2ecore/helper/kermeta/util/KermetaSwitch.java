@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: KermetaSwitch.java,v 1.5 2008-10-16 13:18:19 cfaucher Exp $
+ * $Id: KermetaSwitch.java,v 1.6 2008-10-28 13:18:31 cfaucher Exp $
  */
 package km2ecore.helper.kermeta.util;
 
@@ -93,15 +93,6 @@ public class KermetaSwitch<T> {
 				result = defaultCase(theEObject);
 			return result;
 		}
-		case KermetaPackage.CONSTRAINT_HELPER: {
-			ConstraintHelper constraintHelper = (ConstraintHelper) theEObject;
-			T result = caseConstraintHelper(constraintHelper);
-			if (result == null)
-				result = caseObject(constraintHelper);
-			if (result == null)
-				result = defaultCase(theEObject);
-			return result;
-		}
 		case KermetaPackage.GENERIC_TYPE_DEFINITION_HELPER: {
 			GenericTypeDefinitionHelper genericTypeDefinitionHelper = (GenericTypeDefinitionHelper) theEObject;
 			T result = caseGenericTypeDefinitionHelper(genericTypeDefinitionHelper);
@@ -128,21 +119,6 @@ public class KermetaSwitch<T> {
 	 * @generated
 	 */
 	public T caseCompilerHelperJava(CompilerHelperJava object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Constraint Helper</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Constraint Helper</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseConstraintHelper(ConstraintHelper object) {
 		return null;
 	}
 

@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: EcoreFactory.java,v 1.5 2008-10-16 13:18:10 cfaucher Exp $
+ * $Id: EcoreFactory.java,v 1.6 2008-10-28 13:18:24 cfaucher Exp $
  */
 package ecore;
 

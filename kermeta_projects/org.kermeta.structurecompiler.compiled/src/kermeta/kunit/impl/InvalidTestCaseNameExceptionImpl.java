@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: InvalidTestCaseNameExceptionImpl.java,v 1.5 2008-10-16 13:17:30 cfaucher Exp $
+ * $Id: InvalidTestCaseNameExceptionImpl.java,v 1.6 2008-10-28 13:18:09 cfaucher Exp $
  */
 package kermeta.kunit.impl;
 

@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: EnumerationLiteralImpl.java,v 1.5 2008-10-16 13:17:38 cfaucher Exp $
+ * $Id: EnumerationLiteralImpl.java,v 1.6 2008-10-28 13:18:10 cfaucher Exp $
  */
 package kermeta.language.structure.impl;
 
@@ -68,7 +68,7 @@ public class EnumerationLiteralImpl extends NamedElementImpl implements
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return StructurePackage.Literals.ENUMERATION_LITERAL;
+		return StructurePackage.eINSTANCE.getEnumerationLiteral();
 	}
 
 	/**
@@ -188,7 +188,7 @@ public class EnumerationLiteralImpl extends NamedElementImpl implements
 				.createEcoreModelElement(context);
 
 		kermeta.language.structure.Enumeration e = ((kermeta.language.structure.Enumeration) org.kermeta.compil.runtime.helper.language.ObjectUtil
-				.asType(
+				.asTypeSwitcher(
 						this.getEnumeration(),
 						org.kermeta.compil.runtime.ExecutionContext
 								.getInstance()
@@ -224,7 +224,7 @@ public class EnumerationLiteralImpl extends NamedElementImpl implements
 				.setValue(org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
 						.<ecore.EEnumLiteral> convertAsOrderedSet(
 								((kermeta.language.structure.Enumeration) org.kermeta.compil.runtime.helper.language.ObjectUtil
-										.asType(
+										.asTypeSwitcher(
 												this.getEnumeration(),
 												org.kermeta.compil.runtime.ExecutionContext
 														.getInstance()

@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: EStructuralFeature.java,v 1.6 2008-10-16 13:18:09 cfaucher Exp $
+ * $Id: EStructuralFeature.java,v 1.7 2008-10-28 13:18:24 cfaucher Exp $
  */
 package ecore;
 
@@ -14,10 +14,10 @@ package ecore;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link ecore.EStructuralFeature#isVolatile <em>Volatile</em>}</li>
- *   <li>{@link ecore.EStructuralFeature#getEContainingClass <em>EContaining Class</em>}</li>
+ *   <li>{@link ecore.EStructuralFeature#is_volatile <em>volatile</em>}</li>
  *   <li>{@link ecore.EStructuralFeature#getDefaultValueLiteral <em>Default Value Literal</em>}</li>
- *   <li>{@link ecore.EStructuralFeature#isTransient <em>Transient</em>}</li>
+ *   <li>{@link ecore.EStructuralFeature#getEContainingClass <em>EContaining Class</em>}</li>
+ *   <li>{@link ecore.EStructuralFeature#is_transient <em>transient</em>}</li>
  *   <li>{@link ecore.EStructuralFeature#isUnsettable <em>Unsettable</em>}</li>
  *   <li>{@link ecore.EStructuralFeature#isDerived <em>Derived</em>}</li>
  *   <li>{@link ecore.EStructuralFeature#isChangeable <em>Changeable</em>}</li>
@@ -30,49 +30,31 @@ package ecore;
  */
 public interface EStructuralFeature extends ETypedElement {
 	/**
-	 * Returns the value of the '<em><b>Volatile</b></em>' attribute.
+	 * Returns the value of the '<em><b>volatile</b></em>' attribute.
 	 * The default value is <code>"false"</code>.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Volatile</em>' attribute isn't clear,
+	 * If the meaning of the '<em>volatile</em>' attribute isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Volatile</em>' attribute.
-	 * @see #setVolatile(boolean)
-	 * @see ecore.EcorePackage#getEStructuralFeature_Volatile()
+	 * @return the value of the '<em>volatile</em>' attribute.
+	 * @see #set_volatile(boolean)
+	 * @see ecore.EcorePackage#getEStructuralFeature__volatile()
 	 * @model default="false" dataType="ecore.EBoolean"
 	 * @generated
 	 */
-	boolean isVolatile();
+	boolean is_volatile();
 
 	/**
-	 * Sets the value of the '{@link ecore.EStructuralFeature#isVolatile <em>Volatile</em>}' attribute.
+	 * Sets the value of the '{@link ecore.EStructuralFeature#is_volatile <em>volatile</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Volatile</em>' attribute.
-	 * @see #isVolatile()
+	 * @param value the new value of the '<em>volatile</em>' attribute.
+	 * @see #is_volatile()
 	 * @generated
 	 */
-	void setVolatile(boolean value);
-
-	/**
-	 * Returns the value of the '<em><b>EContaining Class</b></em>' container reference.
-	 * It is bidirectional and its opposite is '{@link ecore.EClass#getEStructuralFeatures <em>EStructural Features</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>EContaining Class</em>' container reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>EContaining Class</em>' container reference.
-	 * @see ecore.EcorePackage#getEStructuralFeature_EContainingClass()
-	 * @see ecore.EClass#getEStructuralFeatures
-	 * @model opposite="eStructuralFeatures" changeable="false"
-	 *        annotation="kermeta ecore.isTransient='true'"
-	 * @generated
-	 */
-	EClass getEContainingClass();
+	void set_volatile(boolean value);
 
 	/**
 	 * Returns the value of the '<em><b>Default Value Literal</b></em>' attribute.
@@ -101,31 +83,49 @@ public interface EStructuralFeature extends ETypedElement {
 	void setDefaultValueLiteral(String value);
 
 	/**
-	 * Returns the value of the '<em><b>Transient</b></em>' attribute.
-	 * The default value is <code>"false"</code>.
+	 * Returns the value of the '<em><b>EContaining Class</b></em>' container reference.
+	 * It is bidirectional and its opposite is '{@link ecore.EClass#getEStructuralFeatures <em>EStructural Features</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Transient</em>' attribute isn't clear,
+	 * If the meaning of the '<em>EContaining Class</em>' container reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Transient</em>' attribute.
-	 * @see #setTransient(boolean)
-	 * @see ecore.EcorePackage#getEStructuralFeature_Transient()
+	 * @return the value of the '<em>EContaining Class</em>' container reference.
+	 * @see ecore.EcorePackage#getEStructuralFeature_EContainingClass()
+	 * @see ecore.EClass#getEStructuralFeatures
+	 * @model opposite="eStructuralFeatures" changeable="false"
+	 *        annotation="kermeta ecore.isTransient='true'"
+	 * @generated
+	 */
+	EClass getEContainingClass();
+
+	/**
+	 * Returns the value of the '<em><b>transient</b></em>' attribute.
+	 * The default value is <code>"false"</code>.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>transient</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>transient</em>' attribute.
+	 * @see #set_transient(boolean)
+	 * @see ecore.EcorePackage#getEStructuralFeature__transient()
 	 * @model default="false" dataType="ecore.EBoolean"
 	 * @generated
 	 */
-	boolean isTransient();
+	boolean is_transient();
 
 	/**
-	 * Sets the value of the '{@link ecore.EStructuralFeature#isTransient <em>Transient</em>}' attribute.
+	 * Sets the value of the '{@link ecore.EStructuralFeature#is_transient <em>transient</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Transient</em>' attribute.
-	 * @see #isTransient()
+	 * @param value the new value of the '<em>transient</em>' attribute.
+	 * @see #is_transient()
 	 * @generated
 	 */
-	void setTransient(boolean value);
+	void set_transient(boolean value);
 
 	/**
 	 * Returns the value of the '<em><b>Unsettable</b></em>' attribute.

@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: SMMethodImpl.java,v 1.2 2008-10-16 13:17:44 cfaucher Exp $
+ * $Id: SMMethodImpl.java,v 1.3 2008-10-28 13:18:12 cfaucher Exp $
  */
 package simk.impl;
 
@@ -40,10 +40,10 @@ import simk.SimkPackage;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link simk.impl.SMMethodImpl#isAbstract <em>Abstract</em>}</li>
+ *   <li>{@link simk.impl.SMMethodImpl#is_abstract <em>abstract</em>}</li>
  *   <li>{@link simk.impl.SMMethodImpl#getBody <em>Body</em>}</li>
  *   <li>{@link simk.impl.SMMethodImpl#getParentEReference <em>Parent EReference</em>}</li>
- *   <li>{@link simk.impl.SMMethodImpl#isStatic <em>Static</em>}</li>
+ *   <li>{@link simk.impl.SMMethodImpl#is_static <em>static</em>}</li>
  *   <li>{@link simk.impl.SMMethodImpl#getTypeParameters <em>Type Parameters</em>}</li>
  *   <li>{@link simk.impl.SMMethodImpl#getParentEOperation <em>Parent EOperation</em>}</li>
  *   <li>{@link simk.impl.SMMethodImpl#getParentEAttribute <em>Parent EAttribute</em>}</li>
@@ -59,24 +59,24 @@ import simk.SimkPackage;
  */
 public class SMMethodImpl extends SMNamedElementImpl implements SMMethod {
 	/**
-	 * The default value of the '{@link #isAbstract() <em>Abstract</em>}' attribute.
+	 * The default value of the '{@link #is_abstract() <em>abstract</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #isAbstract()
+	 * @see #is_abstract()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final boolean ABSTRACT_EDEFAULT = false;
+	protected static final boolean _ABSTRACT_EDEFAULT = false;
 
 	/**
-	 * The cached value of the '{@link #isAbstract() <em>Abstract</em>}' attribute.
+	 * The cached value of the '{@link #is_abstract() <em>abstract</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #isAbstract()
+	 * @see #is_abstract()
 	 * @generated
 	 * @ordered
 	 */
-	protected boolean abstract_ = ABSTRACT_EDEFAULT;
+	protected boolean _abstract = _ABSTRACT_EDEFAULT;
 
 	/**
 	 * The default value of the '{@link #getBody() <em>Body</em>}' attribute.
@@ -109,24 +109,24 @@ public class SMMethodImpl extends SMNamedElementImpl implements SMMethod {
 	protected EReference parentEReference;
 
 	/**
-	 * The default value of the '{@link #isStatic() <em>Static</em>}' attribute.
+	 * The default value of the '{@link #is_static() <em>static</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #isStatic()
+	 * @see #is_static()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final boolean STATIC_EDEFAULT = true;
+	protected static final boolean _STATIC_EDEFAULT = true;
 
 	/**
-	 * The cached value of the '{@link #isStatic() <em>Static</em>}' attribute.
+	 * The cached value of the '{@link #is_static() <em>static</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #isStatic()
+	 * @see #is_static()
 	 * @generated
 	 * @ordered
 	 */
-	protected boolean static_ = STATIC_EDEFAULT;
+	protected boolean _static = _STATIC_EDEFAULT;
 
 	/**
 	 * The default value of the '{@link #getTypeParameters() <em>Type Parameters</em>}' attribute.
@@ -262,8 +262,8 @@ public class SMMethodImpl extends SMNamedElementImpl implements SMMethod {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean isAbstract() {
-		return abstract_;
+	public boolean is_abstract() {
+		return _abstract;
 	}
 
 	/**
@@ -271,12 +271,12 @@ public class SMMethodImpl extends SMNamedElementImpl implements SMMethod {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setAbstract(boolean newAbstract) {
-		boolean oldAbstract = abstract_;
-		abstract_ = newAbstract;
+	public void set_abstract(boolean new_abstract) {
+		boolean old_abstract = _abstract;
+		_abstract = new_abstract;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET,
-					SimkPackage.SM_METHOD__ABSTRACT, oldAbstract, abstract_));
+					SimkPackage.SM_METHOD__ABSTRACT, old_abstract, _abstract));
 	}
 
 	/**
@@ -348,8 +348,8 @@ public class SMMethodImpl extends SMNamedElementImpl implements SMMethod {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean isStatic() {
-		return static_;
+	public boolean is_static() {
+		return _static;
 	}
 
 	/**
@@ -357,12 +357,12 @@ public class SMMethodImpl extends SMNamedElementImpl implements SMMethod {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setStatic(boolean newStatic) {
-		boolean oldStatic = static_;
-		static_ = newStatic;
+	public void set_static(boolean new_static) {
+		boolean old_static = _static;
+		_static = new_static;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET,
-					SimkPackage.SM_METHOD__STATIC, oldStatic, static_));
+					SimkPackage.SM_METHOD__STATIC, old_static, _static));
 	}
 
 	/**
@@ -758,7 +758,7 @@ public class SMMethodImpl extends SMNamedElementImpl implements SMMethod {
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 		case SimkPackage.SM_METHOD__ABSTRACT:
-			return isAbstract() ? Boolean.TRUE : Boolean.FALSE;
+			return is_abstract() ? Boolean.TRUE : Boolean.FALSE;
 		case SimkPackage.SM_METHOD__BODY:
 			return getBody();
 		case SimkPackage.SM_METHOD__PARENT_EREFERENCE:
@@ -766,7 +766,7 @@ public class SMMethodImpl extends SMNamedElementImpl implements SMMethod {
 				return getParentEReference();
 			return basicGetParentEReference();
 		case SimkPackage.SM_METHOD__STATIC:
-			return isStatic() ? Boolean.TRUE : Boolean.FALSE;
+			return is_static() ? Boolean.TRUE : Boolean.FALSE;
 		case SimkPackage.SM_METHOD__TYPE_PARAMETERS:
 			return getTypeParameters();
 		case SimkPackage.SM_METHOD__PARENT_EOPERATION:
@@ -805,7 +805,7 @@ public class SMMethodImpl extends SMNamedElementImpl implements SMMethod {
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 		case SimkPackage.SM_METHOD__ABSTRACT:
-			setAbstract(((Boolean) newValue).booleanValue());
+			set_abstract(((Boolean) newValue).booleanValue());
 			return;
 		case SimkPackage.SM_METHOD__BODY:
 			setBody((String) newValue);
@@ -814,7 +814,7 @@ public class SMMethodImpl extends SMNamedElementImpl implements SMMethod {
 			setParentEReference((EReference) newValue);
 			return;
 		case SimkPackage.SM_METHOD__STATIC:
-			setStatic(((Boolean) newValue).booleanValue());
+			set_static(((Boolean) newValue).booleanValue());
 			return;
 		case SimkPackage.SM_METHOD__TYPE_PARAMETERS:
 			setTypeParameters((String) newValue);
@@ -855,7 +855,7 @@ public class SMMethodImpl extends SMNamedElementImpl implements SMMethod {
 	public void eUnset(int featureID) {
 		switch (featureID) {
 		case SimkPackage.SM_METHOD__ABSTRACT:
-			setAbstract(ABSTRACT_EDEFAULT);
+			set_abstract(_ABSTRACT_EDEFAULT);
 			return;
 		case SimkPackage.SM_METHOD__BODY:
 			setBody(BODY_EDEFAULT);
@@ -864,7 +864,7 @@ public class SMMethodImpl extends SMNamedElementImpl implements SMMethod {
 			setParentEReference((EReference) null);
 			return;
 		case SimkPackage.SM_METHOD__STATIC:
-			setStatic(STATIC_EDEFAULT);
+			set_static(_STATIC_EDEFAULT);
 			return;
 		case SimkPackage.SM_METHOD__TYPE_PARAMETERS:
 			setTypeParameters(TYPE_PARAMETERS_EDEFAULT);
@@ -903,14 +903,14 @@ public class SMMethodImpl extends SMNamedElementImpl implements SMMethod {
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
 		case SimkPackage.SM_METHOD__ABSTRACT:
-			return abstract_ != ABSTRACT_EDEFAULT;
+			return _abstract != _ABSTRACT_EDEFAULT;
 		case SimkPackage.SM_METHOD__BODY:
 			return BODY_EDEFAULT == null ? body != null : !BODY_EDEFAULT
 					.equals(body);
 		case SimkPackage.SM_METHOD__PARENT_EREFERENCE:
 			return parentEReference != null;
 		case SimkPackage.SM_METHOD__STATIC:
-			return static_ != STATIC_EDEFAULT;
+			return _static != _STATIC_EDEFAULT;
 		case SimkPackage.SM_METHOD__TYPE_PARAMETERS:
 			return TYPE_PARAMETERS_EDEFAULT == null ? typeParameters != null
 					: !TYPE_PARAMETERS_EDEFAULT.equals(typeParameters);
@@ -943,12 +943,12 @@ public class SMMethodImpl extends SMNamedElementImpl implements SMMethod {
 			return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (abstract: ");
-		result.append(abstract_);
+		result.append(" (_abstract: ");
+		result.append(_abstract);
 		result.append(", body: ");
 		result.append(body);
-		result.append(", static: ");
-		result.append(static_);
+		result.append(", _static: ");
+		result.append(_static);
 		result.append(", typeParameters: ");
 		result.append(typeParameters);
 		result.append(", usages: ");

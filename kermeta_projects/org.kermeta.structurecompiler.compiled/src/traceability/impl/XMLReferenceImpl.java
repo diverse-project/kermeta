@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: XMLReferenceImpl.java,v 1.5 2008-10-16 13:18:11 cfaucher Exp $
+ * $Id: XMLReferenceImpl.java,v 1.6 2008-10-28 13:18:26 cfaucher Exp $
  */
 package traceability.impl;
 

@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: TypedElementImpl.java,v 1.5 2008-10-16 13:17:40 cfaucher Exp $
+ * $Id: TypedElementImpl.java,v 1.6 2008-10-28 13:18:10 cfaucher Exp $
  */
 package kermeta.language.structure.impl;
 
@@ -80,7 +80,7 @@ public abstract class TypedElementImpl extends TypeContainerImpl implements
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return StructurePackage.Literals.TYPED_ELEMENT;
+		return StructurePackage.eINSTANCE.getTypedElement();
 	}
 
 	/**
@@ -184,12 +184,61 @@ public abstract class TypedElementImpl extends TypeContainerImpl implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public String getGenModelJavaQualifiedName() {
+	public String qualifiedName() {
 
 		java.lang.String result = null;
 
-		result = kermeta.standard.helper.StringWrapper.replace(this
-				.getGenModelQualifiedName(), "::", ".");
+		kermeta.language.structure.NamedElement elem = this;
+
+		result = this.getName();
+
+		java.lang.Boolean idIfCond_304 = false;
+		idIfCond_304 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+				.isInstanceOfSwitcher(
+						org.kermeta.compil.runtime.helper.language.ObjectUtil
+								.containerSwitcher(elem),
+						org.kermeta.compil.runtime.ExecutionContext
+								.getInstance()
+								.getMetaClass(
+										"kermeta.language.structure.NamedElement"));
+
+		if (idIfCond_304) {
+
+			elem = (kermeta.language.structure.NamedElement) org.kermeta.compil.runtime.helper.language.ObjectUtil
+					.containerSwitcher(elem);
+			java.lang.Boolean idLoopCond_305 = false;
+			while (!idLoopCond_305) {
+				idLoopCond_305 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+						.equalsSwitcher(elem, null);
+				if (idLoopCond_305) {
+				} else {
+
+					result = kermeta.standard.helper.StringWrapper.plus(
+							kermeta.standard.helper.StringWrapper.plus(elem
+									.getName(), "::"), result);
+
+					java.lang.Boolean idIfCond_306 = false;
+					idIfCond_306 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+							.isInstanceOfSwitcher(
+									org.kermeta.compil.runtime.helper.language.ObjectUtil
+											.containerSwitcher(elem),
+									org.kermeta.compil.runtime.ExecutionContext
+											.getInstance()
+											.getMetaClass(
+													"kermeta.language.structure.NamedElement"));
+
+					if (idIfCond_306) {
+
+						elem = (kermeta.language.structure.NamedElement) org.kermeta.compil.runtime.helper.language.ObjectUtil
+								.containerSwitcher(elem);
+					} else {
+
+						elem = null;
+					}
+
+				}
+			}
+		}
 
 		return result;
 
@@ -200,61 +249,12 @@ public abstract class TypedElementImpl extends TypeContainerImpl implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public String qualifiedName() {
+	public String getGenModelJavaQualifiedName() {
 
 		java.lang.String result = null;
 
-		kermeta.language.structure.NamedElement elem = this;
-
-		result = this.getName();
-
-		java.lang.Boolean idIfCond_392 = false;
-		idIfCond_392 = org.kermeta.compil.runtime.helper.language.ObjectUtil
-				.isInstanceOf(
-						org.kermeta.compil.runtime.helper.language.ObjectUtil
-								.container(elem),
-						org.kermeta.compil.runtime.ExecutionContext
-								.getInstance()
-								.getMetaClass(
-										"kermeta.language.structure.NamedElement"));
-
-		if (idIfCond_392) {
-
-			elem = (kermeta.language.structure.NamedElement) org.kermeta.compil.runtime.helper.language.ObjectUtil
-					.container(elem);
-			java.lang.Boolean idLoopCond_393 = false;
-			while (!idLoopCond_393) {
-				idLoopCond_393 = org.kermeta.compil.runtime.helper.language.ObjectUtil
-						.equals(elem, null);
-				if (idLoopCond_393) {
-				} else {
-
-					result = kermeta.standard.helper.StringWrapper.plus(
-							kermeta.standard.helper.StringWrapper.plus(elem
-									.getName(), "::"), result);
-
-					java.lang.Boolean idIfCond_394 = false;
-					idIfCond_394 = org.kermeta.compil.runtime.helper.language.ObjectUtil
-							.isInstanceOf(
-									org.kermeta.compil.runtime.helper.language.ObjectUtil
-											.container(elem),
-									org.kermeta.compil.runtime.ExecutionContext
-											.getInstance()
-											.getMetaClass(
-													"kermeta.language.structure.NamedElement"));
-
-					if (idIfCond_394) {
-
-						elem = (kermeta.language.structure.NamedElement) org.kermeta.compil.runtime.helper.language.ObjectUtil
-								.container(elem);
-					} else {
-
-						elem = null;
-					}
-
-				}
-			}
-		}
+		result = kermeta.standard.helper.StringWrapper.replace(this
+				.getGenModelQualifiedName(), "::", ".");
 
 		return result;
 

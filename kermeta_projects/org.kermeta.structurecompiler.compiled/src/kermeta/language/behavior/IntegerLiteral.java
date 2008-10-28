@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: IntegerLiteral.java,v 1.5 2008-10-16 13:17:26 cfaucher Exp $
+ * $Id: IntegerLiteral.java,v 1.6 2008-10-28 13:18:08 cfaucher Exp $
  */
 package kermeta.language.behavior;
 
@@ -21,8 +21,8 @@ import km2ecore.KM2EcoreContext;
  * </p>
  *
  * @see kermeta.language.behavior.BehaviorPackage#getIntegerLiteral()
- * @model annotation="kermeta documentation='/** Complete \052/'"
- *        annotation="kermeta documentation='This expression is a literal representing an Integer value'"
+ * @model annotation="kermeta documentation='This expression is a literal representing an Integer value'"
+ *        annotation="kermeta documentation='/** Complete \052/'"
  * @generated
  */
 public interface IntegerLiteral extends Literal {

@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: DanglingDiagnostic.java,v 1.5 2008-10-16 13:18:13 cfaucher Exp $
+ * $Id: DanglingDiagnostic.java,v 1.6 2008-10-28 13:18:27 cfaucher Exp $
  */
 package kermeta.persistence;
 
@@ -111,7 +111,7 @@ public interface DanglingDiagnostic extends kermeta.language.structure.Object {
 	 * @model dataType="kermeta.standard.JavaString"
 	 *        annotation="kermeta documentation='/**\r\n\t * user friendly message build with those informations\r\n\t \052/'"
 	 *        annotation="kermeta superOperation='kermeta::language::structure::Object'"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='\njava.lang.String result = null;\n\n\tresult = kermeta.standard.helper.StringWrapper.plus(kermeta.standard.helper.StringWrapper.plus(kermeta.standard.helper.StringWrapper.plus(kermeta.standard.helper.StringWrapper.plus(kermeta.standard.helper.StringWrapper.plus(org.kermeta.compil.runtime.helper.language.ObjectUtil.toString(this.getDanglingElement()), \" referenced by \"), org.kermeta.compil.runtime.helper.language.ObjectUtil.toString(this.getReferencingElement())), \".\"), this.getReferencingProperty().getName()), \" is dangling\");\n\nreturn result;\n'"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='\njava.lang.String result = null;\n\n\tresult = kermeta.standard.helper.StringWrapper.plus(kermeta.standard.helper.StringWrapper.plus(kermeta.standard.helper.StringWrapper.plus(kermeta.standard.helper.StringWrapper.plus(kermeta.standard.helper.StringWrapper.plus(org.kermeta.compil.runtime.helper.language.ObjectUtil.toStringSwitcher(this.getDanglingElement()), \" referenced by \"), org.kermeta.compil.runtime.helper.language.ObjectUtil.toStringSwitcher(this.getReferencingElement())), \".\"), this.getReferencingProperty().getName()), \" is dangling\");\n\nreturn result;\n'"
 	 * @generated
 	 */
 	String toString();

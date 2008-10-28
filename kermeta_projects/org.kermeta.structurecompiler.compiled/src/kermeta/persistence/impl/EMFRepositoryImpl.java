@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: EMFRepositoryImpl.java,v 1.5 2008-10-16 13:18:07 cfaucher Exp $
+ * $Id: EMFRepositoryImpl.java,v 1.6 2008-10-28 13:18:21 cfaucher Exp $
  */
 package kermeta.persistence.impl;
 
@@ -23,8 +23,8 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link kermeta.persistence.impl.EMFRepositoryImpl#getUseInterpreterInternalResources <em>Use Interpreter Internal Resources</em>}</li>
  *   <li>{@link kermeta.persistence.impl.EMFRepositoryImpl#getIgnoreLoadErrorUnknownMetaclass <em>Ignore Load Error Unknown Metaclass</em>}</li>
+ *   <li>{@link kermeta.persistence.impl.EMFRepositoryImpl#getUseInterpreterInternalResources <em>Use Interpreter Internal Resources</em>}</li>
  *   <li>{@link kermeta.persistence.impl.EMFRepositoryImpl#getIgnoreAllLoadErrors <em>Ignore All Load Errors</em>}</li>
  *   <li>{@link kermeta.persistence.impl.EMFRepositoryImpl#getIgnoreLoadErrorUnknownProperty <em>Ignore Load Error Unknown Property</em>}</li>
  * </ul>
@@ -33,26 +33,6 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  * @generated
  */
 public class EMFRepositoryImpl extends RepositoryImpl implements EMFRepository {
-	/**
-	 * The default value of the '{@link #getUseInterpreterInternalResources() <em>Use Interpreter Internal Resources</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getUseInterpreterInternalResources()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final Boolean USE_INTERPRETER_INTERNAL_RESOURCES_EDEFAULT = Boolean.FALSE;
-
-	/**
-	 * The cached value of the '{@link #getUseInterpreterInternalResources() <em>Use Interpreter Internal Resources</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getUseInterpreterInternalResources()
-	 * @generated
-	 * @ordered
-	 */
-	protected Boolean useInterpreterInternalResources = USE_INTERPRETER_INTERNAL_RESOURCES_EDEFAULT;
-
 	/**
 	 * The default value of the '{@link #getIgnoreLoadErrorUnknownMetaclass() <em>Ignore Load Error Unknown Metaclass</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -72,6 +52,26 @@ public class EMFRepositoryImpl extends RepositoryImpl implements EMFRepository {
 	 * @ordered
 	 */
 	protected Boolean ignoreLoadErrorUnknownMetaclass = IGNORE_LOAD_ERROR_UNKNOWN_METACLASS_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getUseInterpreterInternalResources() <em>Use Interpreter Internal Resources</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getUseInterpreterInternalResources()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final Boolean USE_INTERPRETER_INTERNAL_RESOURCES_EDEFAULT = Boolean.FALSE;
+
+	/**
+	 * The cached value of the '{@link #getUseInterpreterInternalResources() <em>Use Interpreter Internal Resources</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getUseInterpreterInternalResources()
+	 * @generated
+	 * @ordered
+	 */
+	protected Boolean useInterpreterInternalResources = USE_INTERPRETER_INTERNAL_RESOURCES_EDEFAULT;
 
 	/**
 	 * The default value of the '{@link #getIgnoreAllLoadErrors() <em>Ignore All Load Errors</em>}' attribute.
@@ -137,33 +137,6 @@ public class EMFRepositoryImpl extends RepositoryImpl implements EMFRepository {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Boolean getUseInterpreterInternalResources() {
-		return useInterpreterInternalResources;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setUseInterpreterInternalResources(
-			Boolean newUseInterpreterInternalResources) {
-		Boolean oldUseInterpreterInternalResources = useInterpreterInternalResources;
-		useInterpreterInternalResources = newUseInterpreterInternalResources;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(
-					this,
-					Notification.SET,
-					PersistencePackage.EMF_REPOSITORY__USE_INTERPRETER_INTERNAL_RESOURCES,
-					oldUseInterpreterInternalResources,
-					useInterpreterInternalResources));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public Boolean getIgnoreLoadErrorUnknownMetaclass() {
 		return ignoreLoadErrorUnknownMetaclass;
 	}
@@ -184,6 +157,33 @@ public class EMFRepositoryImpl extends RepositoryImpl implements EMFRepository {
 					PersistencePackage.EMF_REPOSITORY__IGNORE_LOAD_ERROR_UNKNOWN_METACLASS,
 					oldIgnoreLoadErrorUnknownMetaclass,
 					ignoreLoadErrorUnknownMetaclass));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Boolean getUseInterpreterInternalResources() {
+		return useInterpreterInternalResources;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setUseInterpreterInternalResources(
+			Boolean newUseInterpreterInternalResources) {
+		Boolean oldUseInterpreterInternalResources = useInterpreterInternalResources;
+		useInterpreterInternalResources = newUseInterpreterInternalResources;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(
+					this,
+					Notification.SET,
+					PersistencePackage.EMF_REPOSITORY__USE_INTERPRETER_INTERNAL_RESOURCES,
+					oldUseInterpreterInternalResources,
+					useInterpreterInternalResources));
 	}
 
 	/**
@@ -247,40 +247,40 @@ public class EMFRepositoryImpl extends RepositoryImpl implements EMFRepository {
 
 		//BIft:collect
 
-		kermeta.standard.Sequence<java.lang.String> result_ft227 = null;
+		kermeta.standard.Sequence<java.lang.String> result_ft210 = null;
 
-		result_ft227 = ((kermeta.standard.Sequence<java.lang.String>) org.kermeta.compil.runtime.helper.language.ClassUtil
+		result_ft210 = ((kermeta.standard.Sequence<java.lang.String>) org.kermeta.compil.runtime.helper.language.ClassUtil
 				.newObject("kermeta.standard.Sequence<java.lang.String>"));
 
 		{
 
-			kermeta.standard.Iterator<kermeta.persistence.Resource> it_ft227 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
+			kermeta.standard.Iterator<kermeta.persistence.Resource> it_ft210 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
 					.<kermeta.persistence.Resource> convertAsSet(
 							this.getResources()).iterator();
-			java.lang.Boolean idLoopCond_999 = false;
-			while (!idLoopCond_999) {
-				idLoopCond_999 = it_ft227.isOff();
-				if (idLoopCond_999) {
+			java.lang.Boolean idLoopCond_936 = false;
+			while (!idLoopCond_936) {
+				idLoopCond_936 = it_ft210.isOff();
+				if (idLoopCond_936) {
 				} else {
 
-					java.lang.String result_lambda_ft227 = null;
+					java.lang.String result_lambda_ft210 = null;
 					//BIle:collector
-					kermeta.persistence.Resource r_lbdExp227 = it_ft227.next();
+					kermeta.persistence.Resource r_lbdExp210 = it_ft210.next();
 
-					result_lambda_ft227 = r_lbdExp227.getUri();
+					result_lambda_ft210 = r_lbdExp210.getUri();
 					//EIle:collector
 
-					result_ft227.add(result_lambda_ft227);
+					result_ft210.add(result_lambda_ft210);
 				}
 			}
 		}
 
 		//EIft:collect
-		java.lang.Boolean idIfCond_998 = false;
-		idIfCond_998 = kermeta.standard.helper.BooleanWrapper.not(result_ft227
+		java.lang.Boolean idIfCond_935 = false;
+		idIfCond_935 = kermeta.standard.helper.BooleanWrapper.not(result_ft210
 				.contains(uri));
 
-		if (idIfCond_998) {
+		if (idIfCond_935) {
 
 			result = (kermeta.persistence.Resource) org.kermeta.compil.runtime.helper.basetypes.RepositoryUtil
 					.createResource(this, uri, mm_uri);
@@ -318,10 +318,10 @@ public class EMFRepositoryImpl extends RepositoryImpl implements EMFRepository {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-		case PersistencePackage.EMF_REPOSITORY__USE_INTERPRETER_INTERNAL_RESOURCES:
-			return getUseInterpreterInternalResources();
 		case PersistencePackage.EMF_REPOSITORY__IGNORE_LOAD_ERROR_UNKNOWN_METACLASS:
 			return getIgnoreLoadErrorUnknownMetaclass();
+		case PersistencePackage.EMF_REPOSITORY__USE_INTERPRETER_INTERNAL_RESOURCES:
+			return getUseInterpreterInternalResources();
 		case PersistencePackage.EMF_REPOSITORY__IGNORE_ALL_LOAD_ERRORS:
 			return getIgnoreAllLoadErrors();
 		case PersistencePackage.EMF_REPOSITORY__IGNORE_LOAD_ERROR_UNKNOWN_PROPERTY:
@@ -338,11 +338,11 @@ public class EMFRepositoryImpl extends RepositoryImpl implements EMFRepository {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-		case PersistencePackage.EMF_REPOSITORY__USE_INTERPRETER_INTERNAL_RESOURCES:
-			setUseInterpreterInternalResources((Boolean) newValue);
-			return;
 		case PersistencePackage.EMF_REPOSITORY__IGNORE_LOAD_ERROR_UNKNOWN_METACLASS:
 			setIgnoreLoadErrorUnknownMetaclass((Boolean) newValue);
+			return;
+		case PersistencePackage.EMF_REPOSITORY__USE_INTERPRETER_INTERNAL_RESOURCES:
+			setUseInterpreterInternalResources((Boolean) newValue);
 			return;
 		case PersistencePackage.EMF_REPOSITORY__IGNORE_ALL_LOAD_ERRORS:
 			setIgnoreAllLoadErrors((Boolean) newValue);
@@ -362,11 +362,11 @@ public class EMFRepositoryImpl extends RepositoryImpl implements EMFRepository {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-		case PersistencePackage.EMF_REPOSITORY__USE_INTERPRETER_INTERNAL_RESOURCES:
-			setUseInterpreterInternalResources(USE_INTERPRETER_INTERNAL_RESOURCES_EDEFAULT);
-			return;
 		case PersistencePackage.EMF_REPOSITORY__IGNORE_LOAD_ERROR_UNKNOWN_METACLASS:
 			setIgnoreLoadErrorUnknownMetaclass(IGNORE_LOAD_ERROR_UNKNOWN_METACLASS_EDEFAULT);
+			return;
+		case PersistencePackage.EMF_REPOSITORY__USE_INTERPRETER_INTERNAL_RESOURCES:
+			setUseInterpreterInternalResources(USE_INTERPRETER_INTERNAL_RESOURCES_EDEFAULT);
 			return;
 		case PersistencePackage.EMF_REPOSITORY__IGNORE_ALL_LOAD_ERRORS:
 			setIgnoreAllLoadErrors(IGNORE_ALL_LOAD_ERRORS_EDEFAULT);
@@ -386,14 +386,14 @@ public class EMFRepositoryImpl extends RepositoryImpl implements EMFRepository {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-		case PersistencePackage.EMF_REPOSITORY__USE_INTERPRETER_INTERNAL_RESOURCES:
-			return USE_INTERPRETER_INTERNAL_RESOURCES_EDEFAULT == null ? useInterpreterInternalResources != null
-					: !USE_INTERPRETER_INTERNAL_RESOURCES_EDEFAULT
-							.equals(useInterpreterInternalResources);
 		case PersistencePackage.EMF_REPOSITORY__IGNORE_LOAD_ERROR_UNKNOWN_METACLASS:
 			return IGNORE_LOAD_ERROR_UNKNOWN_METACLASS_EDEFAULT == null ? ignoreLoadErrorUnknownMetaclass != null
 					: !IGNORE_LOAD_ERROR_UNKNOWN_METACLASS_EDEFAULT
 							.equals(ignoreLoadErrorUnknownMetaclass);
+		case PersistencePackage.EMF_REPOSITORY__USE_INTERPRETER_INTERNAL_RESOURCES:
+			return USE_INTERPRETER_INTERNAL_RESOURCES_EDEFAULT == null ? useInterpreterInternalResources != null
+					: !USE_INTERPRETER_INTERNAL_RESOURCES_EDEFAULT
+							.equals(useInterpreterInternalResources);
 		case PersistencePackage.EMF_REPOSITORY__IGNORE_ALL_LOAD_ERRORS:
 			return IGNORE_ALL_LOAD_ERRORS_EDEFAULT == null ? ignoreAllLoadErrors != null
 					: !IGNORE_ALL_LOAD_ERRORS_EDEFAULT
@@ -417,10 +417,10 @@ public class EMFRepositoryImpl extends RepositoryImpl implements EMFRepository {
 			return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (useInterpreterInternalResources: ");
-		result.append(useInterpreterInternalResources);
-		result.append(", ignoreLoadErrorUnknownMetaclass: ");
+		result.append(" (ignoreLoadErrorUnknownMetaclass: ");
 		result.append(ignoreLoadErrorUnknownMetaclass);
+		result.append(", useInterpreterInternalResources: ");
+		result.append(useInterpreterInternalResources);
 		result.append(", ignoreAllLoadErrors: ");
 		result.append(ignoreAllLoadErrors);
 		result.append(", ignoreLoadErrorUnknownProperty: ");

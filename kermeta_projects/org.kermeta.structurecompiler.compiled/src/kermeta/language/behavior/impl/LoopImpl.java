@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: LoopImpl.java,v 1.5 2008-10-16 13:17:52 cfaucher Exp $
+ * $Id: LoopImpl.java,v 1.6 2008-10-28 13:18:15 cfaucher Exp $
  */
 package kermeta.language.behavior.impl;
 
@@ -360,28 +360,28 @@ public class LoopImpl extends ExpressionImpl implements Loop {
 
 		context.pushCondStack();
 
-		java.lang.Boolean idIfCond_656 = false;
-		idIfCond_656 = org.kermeta.compil.runtime.helper.language.ObjectUtil
-				.isInstanceOf(
+		java.lang.Boolean idIfCond_623 = false;
+		idIfCond_623 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+				.isInstanceOfSwitcher(
 						this.getInitialization(),
 						org.kermeta.compil.runtime.ExecutionContext
 								.getInstance()
 								.getMetaClass(
 										"kermeta.language.behavior.CallVariable"));
 
-		if (idIfCond_656) {
+		if (idIfCond_623) {
 		} else {
 
-			java.lang.Boolean idIfCond_657 = false;
-			idIfCond_657 = org.kermeta.compil.runtime.helper.language.ObjectUtil
-					.isInstanceOf(
+			java.lang.Boolean idIfCond_624 = false;
+			idIfCond_624 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+					.isInstanceOfSwitcher(
 							this.getInitialization(),
 							org.kermeta.compil.runtime.ExecutionContext
 									.getInstance()
 									.getMetaClass(
 											"kermeta.language.behavior.VariableDecl"));
 
-			if (idIfCond_657) {
+			if (idIfCond_624) {
 
 				result = kermeta.standard.helper.StringWrapper.plus(
 						kermeta.standard.helper.StringWrapper
@@ -431,16 +431,16 @@ public class LoopImpl extends ExpressionImpl implements Loop {
 
 		result = kermeta.standard.helper.StringWrapper.plus(result, "\n\t}");
 
-		java.lang.Boolean idIfCond_658 = false;
-		idIfCond_658 = org.kermeta.compil.runtime.helper.language.ObjectUtil
-				.isInstanceOf(
+		java.lang.Boolean idIfCond_625 = false;
+		idIfCond_625 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+				.isInstanceOfSwitcher(
 						this.getInitialization(),
 						org.kermeta.compil.runtime.ExecutionContext
 								.getInstance()
 								.getMetaClass(
 										"kermeta.language.behavior.VariableDecl"));
 
-		if (idIfCond_658) {
+		if (idIfCond_625) {
 
 			result = kermeta.standard.helper.StringWrapper
 					.plus(result, "\n}\n");

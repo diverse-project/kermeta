@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: TypeVariableBindingImpl.java,v 1.5 2008-10-16 13:17:37 cfaucher Exp $
+ * $Id: TypeVariableBindingImpl.java,v 1.6 2008-10-28 13:18:10 cfaucher Exp $
  */
 package kermeta.language.structure.impl;
 
@@ -70,7 +70,7 @@ public class TypeVariableBindingImpl extends TypeContainerImpl implements
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return StructurePackage.Literals.TYPE_VARIABLE_BINDING;
+		return StructurePackage.eINSTANCE.getTypeVariableBinding();
 	}
 
 	/**

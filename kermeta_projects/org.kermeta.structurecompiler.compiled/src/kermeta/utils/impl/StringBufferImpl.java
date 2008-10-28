@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: StringBufferImpl.java,v 1.5 2008-10-16 13:17:46 cfaucher Exp $
+ * $Id: StringBufferImpl.java,v 1.6 2008-10-28 13:18:13 cfaucher Exp $
  */
 package kermeta.utils.impl;
 

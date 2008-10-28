@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ResourceUnconformityException.java,v 1.5 2008-10-16 13:17:44 cfaucher Exp $
+ * $Id: ResourceUnconformityException.java,v 1.6 2008-10-28 13:18:12 cfaucher Exp $
  */
 package kermeta.exceptions;
 

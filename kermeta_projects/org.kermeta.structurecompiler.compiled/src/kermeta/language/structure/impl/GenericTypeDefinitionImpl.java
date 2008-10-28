@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: GenericTypeDefinitionImpl.java,v 1.5 2008-10-16 13:17:40 cfaucher Exp $
+ * $Id: GenericTypeDefinitionImpl.java,v 1.6 2008-10-28 13:18:10 cfaucher Exp $
  */
 package kermeta.language.structure.impl;
 
@@ -35,8 +35,8 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *
  * @generated
  */
-public class GenericTypeDefinitionImpl extends TypeDefinitionImpl implements
-		GenericTypeDefinition {
+public abstract class GenericTypeDefinitionImpl extends TypeDefinitionImpl
+		implements GenericTypeDefinition {
 	/**
 	 * The cached value of the '{@link #getTypeParameter() <em>Type Parameter</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
@@ -63,7 +63,7 @@ public class GenericTypeDefinitionImpl extends TypeDefinitionImpl implements
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return StructurePackage.Literals.GENERIC_TYPE_DEFINITION;
+		return StructurePackage.eINSTANCE.getGenericTypeDefinition();
 	}
 
 	/**

@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: CommonPackage.java,v 1.5 2008-10-16 13:18:26 cfaucher Exp $
+ * $Id: CommonPackage.java,v 1.6 2008-10-28 13:18:40 cfaucher Exp $
  */
 package km2ecore.common;
 
@@ -72,15 +72,6 @@ public interface CommonPackage extends EPackage {
 	int JAVA_KEY_WORD_LIST = 0;
 
 	/**
-	 * The feature id for the '<em><b>File</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int JAVA_KEY_WORD_LIST__FILE = StructurePackage.OBJECT__FILE;
-
-	/**
 	 * The feature id for the '<em><b>Tag</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -88,6 +79,15 @@ public interface CommonPackage extends EPackage {
 	 * @ordered
 	 */
 	int JAVA_KEY_WORD_LIST__TAG = StructurePackage.OBJECT__TAG;
+
+	/**
+	 * The feature id for the '<em><b>File</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int JAVA_KEY_WORD_LIST__FILE = StructurePackage.OBJECT__FILE;
 
 	/**
 	 * The feature id for the '<em><b>File Name</b></em>' attribute.

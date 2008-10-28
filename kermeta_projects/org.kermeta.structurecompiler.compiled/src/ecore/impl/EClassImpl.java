@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: EClassImpl.java,v 1.6 2008-10-16 13:17:43 cfaucher Exp $
+ * $Id: EClassImpl.java,v 1.7 2008-10-28 13:18:11 cfaucher Exp $
  */
 package ecore.impl;
 
@@ -37,10 +37,10 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link ecore.impl.EClassImpl#isAbstract <em>Abstract</em>}</li>
  *   <li>{@link ecore.impl.EClassImpl#getEStructuralFeatures <em>EStructural Features</em>}</li>
+ *   <li>{@link ecore.impl.EClassImpl#is_abstract <em>abstract</em>}</li>
  *   <li>{@link ecore.impl.EClassImpl#getEOperations <em>EOperations</em>}</li>
- *   <li>{@link ecore.impl.EClassImpl#isInterface <em>Interface</em>}</li>
+ *   <li>{@link ecore.impl.EClassImpl#is_interface <em>interface</em>}</li>
  *   <li>{@link ecore.impl.EClassImpl#getESuperTypes <em>ESuper Types</em>}</li>
  *   <li>{@link ecore.impl.EClassImpl#getEGenericSuperTypes <em>EGeneric Super Types</em>}</li>
  * </ul>
@@ -50,26 +50,6 @@ import org.eclipse.emf.ecore.util.InternalEList;
  */
 public class EClassImpl extends EClassifierImpl implements EClass {
 	/**
-	 * The default value of the '{@link #isAbstract() <em>Abstract</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #isAbstract()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final boolean ABSTRACT_EDEFAULT = false;
-
-	/**
-	 * The cached value of the '{@link #isAbstract() <em>Abstract</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #isAbstract()
-	 * @generated
-	 * @ordered
-	 */
-	protected boolean abstract_ = ABSTRACT_EDEFAULT;
-
-	/**
 	 * The cached value of the '{@link #getEStructuralFeatures() <em>EStructural Features</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -78,6 +58,26 @@ public class EClassImpl extends EClassifierImpl implements EClass {
 	 * @ordered
 	 */
 	protected EList<EStructuralFeature> eStructuralFeatures;
+
+	/**
+	 * The default value of the '{@link #is_abstract() <em>abstract</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #is_abstract()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean _ABSTRACT_EDEFAULT = false;
+
+	/**
+	 * The cached value of the '{@link #is_abstract() <em>abstract</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #is_abstract()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean _abstract = _ABSTRACT_EDEFAULT;
 
 	/**
 	 * The cached value of the '{@link #getEOperations() <em>EOperations</em>}' containment reference list.
@@ -90,24 +90,24 @@ public class EClassImpl extends EClassifierImpl implements EClass {
 	protected EList<EOperation> eOperations;
 
 	/**
-	 * The default value of the '{@link #isInterface() <em>Interface</em>}' attribute.
+	 * The default value of the '{@link #is_interface() <em>interface</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #isInterface()
+	 * @see #is_interface()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final boolean INTERFACE_EDEFAULT = false;
+	protected static final boolean _INTERFACE_EDEFAULT = false;
 
 	/**
-	 * The cached value of the '{@link #isInterface() <em>Interface</em>}' attribute.
+	 * The cached value of the '{@link #is_interface() <em>interface</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #isInterface()
+	 * @see #is_interface()
 	 * @generated
 	 * @ordered
 	 */
-	protected boolean interface_ = INTERFACE_EDEFAULT;
+	protected boolean _interface = _INTERFACE_EDEFAULT;
 
 	/**
 	 * The cached value of the '{@link #getESuperTypes() <em>ESuper Types</em>}' reference list.
@@ -153,28 +153,6 @@ public class EClassImpl extends EClassifierImpl implements EClass {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean isAbstract() {
-		return abstract_;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setAbstract(boolean newAbstract) {
-		boolean oldAbstract = abstract_;
-		abstract_ = newAbstract;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET,
-					EcorePackage.ECLASS__ABSTRACT, oldAbstract, abstract_));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EList<EStructuralFeature> getEStructuralFeatures() {
 		if (eStructuralFeatures == null) {
 			eStructuralFeatures = new EObjectContainmentWithInverseEList.Resolving<EStructuralFeature>(
@@ -183,6 +161,28 @@ public class EClassImpl extends EClassifierImpl implements EClass {
 					EcorePackage.ESTRUCTURAL_FEATURE__ECONTAINING_CLASS);
 		}
 		return eStructuralFeatures;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean is_abstract() {
+		return _abstract;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void set_abstract(boolean new_abstract) {
+		boolean old_abstract = _abstract;
+		_abstract = new_abstract;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET,
+					EcorePackage.ECLASS__ABSTRACT, old_abstract, _abstract));
 	}
 
 	/**
@@ -204,8 +204,8 @@ public class EClassImpl extends EClassifierImpl implements EClass {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean isInterface() {
-		return interface_;
+	public boolean is_interface() {
+		return _interface;
 	}
 
 	/**
@@ -213,12 +213,12 @@ public class EClassImpl extends EClassifierImpl implements EClass {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setInterface(boolean newInterface) {
-		boolean oldInterface = interface_;
-		interface_ = newInterface;
+	public void set_interface(boolean new_interface) {
+		boolean old_interface = _interface;
+		_interface = new_interface;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET,
-					EcorePackage.ECLASS__INTERFACE, oldInterface, interface_));
+					EcorePackage.ECLASS__INTERFACE, old_interface, _interface));
 	}
 
 	/**
@@ -410,9 +410,9 @@ public class EClassImpl extends EClassifierImpl implements EClass {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<EOperation> getterEAllOperations() {
+	public EList<EStructuralFeature> getterEAllStructuralFeatures() {
 
-		kermeta.standard.OrderedSet<ecore.EOperation> result = null;
+		kermeta.standard.OrderedSet<ecore.EStructuralFeature> result = null;
 
 		return org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
 				.convertAsEList(result);
@@ -424,9 +424,9 @@ public class EClassImpl extends EClassifierImpl implements EClass {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<EStructuralFeature> getterEAllStructuralFeatures() {
+	public EList<EOperation> getterEAllOperations() {
 
-		kermeta.standard.OrderedSet<ecore.EStructuralFeature> result = null;
+		kermeta.standard.OrderedSet<ecore.EOperation> result = null;
 
 		return org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
 				.convertAsEList(result);
@@ -497,14 +497,14 @@ public class EClassImpl extends EClassifierImpl implements EClass {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-		case EcorePackage.ECLASS__ABSTRACT:
-			return isAbstract() ? Boolean.TRUE : Boolean.FALSE;
 		case EcorePackage.ECLASS__ESTRUCTURAL_FEATURES:
 			return getEStructuralFeatures();
+		case EcorePackage.ECLASS__ABSTRACT:
+			return is_abstract() ? Boolean.TRUE : Boolean.FALSE;
 		case EcorePackage.ECLASS__EOPERATIONS:
 			return getEOperations();
 		case EcorePackage.ECLASS__INTERFACE:
-			return isInterface() ? Boolean.TRUE : Boolean.FALSE;
+			return is_interface() ? Boolean.TRUE : Boolean.FALSE;
 		case EcorePackage.ECLASS__ESUPER_TYPES:
 			return getESuperTypes();
 		case EcorePackage.ECLASS__EGENERIC_SUPER_TYPES:
@@ -522,13 +522,13 @@ public class EClassImpl extends EClassifierImpl implements EClass {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-		case EcorePackage.ECLASS__ABSTRACT:
-			setAbstract(((Boolean) newValue).booleanValue());
-			return;
 		case EcorePackage.ECLASS__ESTRUCTURAL_FEATURES:
 			getEStructuralFeatures().clear();
 			getEStructuralFeatures().addAll(
 					(Collection<? extends EStructuralFeature>) newValue);
+			return;
+		case EcorePackage.ECLASS__ABSTRACT:
+			set_abstract(((Boolean) newValue).booleanValue());
 			return;
 		case EcorePackage.ECLASS__EOPERATIONS:
 			getEOperations().clear();
@@ -536,7 +536,7 @@ public class EClassImpl extends EClassifierImpl implements EClass {
 					.addAll((Collection<? extends EOperation>) newValue);
 			return;
 		case EcorePackage.ECLASS__INTERFACE:
-			setInterface(((Boolean) newValue).booleanValue());
+			set_interface(((Boolean) newValue).booleanValue());
 			return;
 		case EcorePackage.ECLASS__ESUPER_TYPES:
 			getESuperTypes().clear();
@@ -559,17 +559,17 @@ public class EClassImpl extends EClassifierImpl implements EClass {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-		case EcorePackage.ECLASS__ABSTRACT:
-			setAbstract(ABSTRACT_EDEFAULT);
-			return;
 		case EcorePackage.ECLASS__ESTRUCTURAL_FEATURES:
 			getEStructuralFeatures().clear();
+			return;
+		case EcorePackage.ECLASS__ABSTRACT:
+			set_abstract(_ABSTRACT_EDEFAULT);
 			return;
 		case EcorePackage.ECLASS__EOPERATIONS:
 			getEOperations().clear();
 			return;
 		case EcorePackage.ECLASS__INTERFACE:
-			setInterface(INTERFACE_EDEFAULT);
+			set_interface(_INTERFACE_EDEFAULT);
 			return;
 		case EcorePackage.ECLASS__ESUPER_TYPES:
 			getESuperTypes().clear();
@@ -589,15 +589,15 @@ public class EClassImpl extends EClassifierImpl implements EClass {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-		case EcorePackage.ECLASS__ABSTRACT:
-			return abstract_ != ABSTRACT_EDEFAULT;
 		case EcorePackage.ECLASS__ESTRUCTURAL_FEATURES:
 			return eStructuralFeatures != null
 					&& !eStructuralFeatures.isEmpty();
+		case EcorePackage.ECLASS__ABSTRACT:
+			return _abstract != _ABSTRACT_EDEFAULT;
 		case EcorePackage.ECLASS__EOPERATIONS:
 			return eOperations != null && !eOperations.isEmpty();
 		case EcorePackage.ECLASS__INTERFACE:
-			return interface_ != INTERFACE_EDEFAULT;
+			return _interface != _INTERFACE_EDEFAULT;
 		case EcorePackage.ECLASS__ESUPER_TYPES:
 			return eSuperTypes != null && !eSuperTypes.isEmpty();
 		case EcorePackage.ECLASS__EGENERIC_SUPER_TYPES:
@@ -617,10 +617,10 @@ public class EClassImpl extends EClassifierImpl implements EClass {
 			return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (abstract: ");
-		result.append(abstract_);
-		result.append(", interface: ");
-		result.append(interface_);
+		result.append(" (_abstract: ");
+		result.append(_abstract);
+		result.append(", _interface: ");
+		result.append(_interface);
 		result.append(')');
 		return result.toString();
 	}

@@ -16,13 +16,13 @@ public class OrderedCollectionSuper {
 
 	) {
 
-		java.lang.Boolean idIfCond_1073 = false;
-		idIfCond_1073 = kermeta.standard.helper.BooleanWrapper.or(
+		java.lang.Boolean idIfCond_1106 = false;
+		idIfCond_1106 = kermeta.standard.helper.BooleanWrapper.or(
 				kermeta.standard.helper.IntegerWrapper.isLower(index, 0),
 				kermeta.standard.helper.IntegerWrapper.isGreater(index, self
 						.size()));
 
-		if (idIfCond_1073) {
+		if (idIfCond_1106) {
 
 			if (true)
 				throw new org.kermeta.compil.runtime.helper.error.KRuntimeError(
@@ -51,31 +51,33 @@ public class OrderedCollectionSuper {
 
 		java.lang.Boolean isEqual = false;
 
-		java.lang.Boolean idIfCond_1074 = false;
-		idIfCond_1074 = kermeta.standard.helper.BooleanWrapper
+		java.lang.Boolean idIfCond_1107 = false;
+		idIfCond_1107 = kermeta.standard.helper.BooleanWrapper
 				.not(org.kermeta.compil.runtime.helper.language.ObjectUtil
-						.isVoid(element));
+						.isVoidSwitcher(element));
 
-		if (idIfCond_1074) {
+		if (idIfCond_1107) {
 
-			java.lang.Boolean idIfCond_1075 = false;
-			idIfCond_1075 = org.kermeta.compil.runtime.helper.language.TypeUtil
-					.isInstance(org.kermeta.compil.runtime.ExecutionContext
-							.getInstance().getMetaClass(
-									"kermeta.standard.OrderedCollection<G>"),
+			java.lang.Boolean idIfCond_1108 = false;
+			idIfCond_1108 = org.kermeta.compil.runtime.helper.language.TypeUtil
+					.isInstanceSwitcher(
+							org.kermeta.compil.runtime.ExecutionContext
+									.getInstance()
+									.getMetaClass(
+											"kermeta.standard.OrderedCollection<G>"),
 							element);
 
-			if (idIfCond_1075) {
+			if (idIfCond_1108) {
 
 				kermeta.standard.Collection<G> collection = null;
 
 				collection = (kermeta.standard.Collection<G>) element;
 
-				java.lang.Boolean idIfCond_1076 = false;
-				idIfCond_1076 = kermeta.standard.helper.IntegerWrapper.equals(
+				java.lang.Boolean idIfCond_1109 = false;
+				idIfCond_1109 = kermeta.standard.helper.IntegerWrapper.equals(
 						self.size(), collection.size());
 
-				if (idIfCond_1076) {
+				if (idIfCond_1109) {
 
 					kermeta.standard.Iterator<G> selfIterator = self.iterator();
 
@@ -85,22 +87,23 @@ public class OrderedCollectionSuper {
 					java.lang.Boolean difference = false;
 
 					kermeta.standard.helper.IntegerWrapper.equals(1, 1);
-					java.lang.Boolean idLoopCond_1077 = false;
-					while (!idLoopCond_1077) {
-						idLoopCond_1077 = kermeta.standard.helper.BooleanWrapper
+					java.lang.Boolean idLoopCond_1110 = false;
+					while (!idLoopCond_1110) {
+						idLoopCond_1110 = kermeta.standard.helper.BooleanWrapper
 								.or(kermeta.standard.helper.BooleanWrapper.or(
 										selfIterator.isOff(),
 										collectionIterator.isOff()), difference);
-						if (idLoopCond_1077) {
+						if (idLoopCond_1110) {
 						} else {
 
-							java.lang.Boolean idIfCond_1078 = false;
-							idIfCond_1078 = kermeta.standard.helper.BooleanWrapper
+							java.lang.Boolean idIfCond_1111 = false;
+							idIfCond_1111 = kermeta.standard.helper.BooleanWrapper
 									.not(org.kermeta.compil.runtime.helper.language.ObjectUtil
-											.equals(selfIterator.next(),
+											.equalsSwitcher(
+													selfIterator.next(),
 													collectionIterator.next()));
 
-							if (idIfCond_1078) {
+							if (idIfCond_1111) {
 
 								difference = true;
 							}

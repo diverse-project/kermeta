@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: CompilingMode.java,v 1.5 2008-10-16 13:17:32 cfaucher Exp $
+ * $Id: CompilingMode.java,v 1.6 2008-10-28 13:18:09 cfaucher Exp $
  */
 package km2ecore;
 

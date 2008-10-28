@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ConstraintImpl.java,v 1.5 2008-10-16 13:17:40 cfaucher Exp $
+ * $Id: ConstraintImpl.java,v 1.6 2008-10-28 13:18:10 cfaucher Exp $
  */
 package kermeta.language.structure.impl;
 
@@ -39,6 +39,7 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
  * The following features are implemented:
  * <ul>
  *   <li>{@link kermeta.language.structure.impl.ConstraintImpl#getEcoreModelElement <em>Ecore Model Element</em>}</li>
+ *   <li>{@link kermeta.language.structure.impl.ConstraintImpl#getId <em>Id</em>}</li>
  *   <li>{@link kermeta.language.structure.impl.ConstraintImpl#getBody <em>Body</em>}</li>
  *   <li>{@link kermeta.language.structure.impl.ConstraintImpl#getPreOwner <em>Pre Owner</em>}</li>
  *   <li>{@link kermeta.language.structure.impl.ConstraintImpl#getStereotype <em>Stereotype</em>}</li>
@@ -60,6 +61,26 @@ public class ConstraintImpl extends NamedElementImpl implements Constraint {
 	 * @ordered
 	 */
 	protected EAnnotation ecoreModelElement;
+
+	/**
+	 * The default value of the '{@link #getId() <em>Id</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getId()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String ID_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getId() <em>Id</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getId()
+	 * @generated
+	 * @ordered
+	 */
+	protected String id = ID_EDEFAULT;
 
 	/**
 	 * The cached value of the '{@link #getBody() <em>Body</em>}' containment reference.
@@ -127,7 +148,7 @@ public class ConstraintImpl extends NamedElementImpl implements Constraint {
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return StructurePackage.Literals.CONSTRAINT;
+		return StructurePackage.eINSTANCE.getConstraint();
 	}
 
 	/**
@@ -171,6 +192,28 @@ public class ConstraintImpl extends NamedElementImpl implements Constraint {
 			eNotify(new ENotificationImpl(this, Notification.SET,
 					StructurePackage.CONSTRAINT__ECORE_MODEL_ELEMENT,
 					oldEcoreModelElement, ecoreModelElement));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getId() {
+		return id;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setId(String newId) {
+		String oldId = id;
+		id = newId;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET,
+					StructurePackage.CONSTRAINT__ID, oldId, id));
 	}
 
 	/**
@@ -489,27 +532,158 @@ public class ConstraintImpl extends NamedElementImpl implements Constraint {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public String createBehaviorJava(KM2EcoreContext context) {
+
+		java.lang.String result = null;
+
+		result = "";
+
+		java.lang.Boolean idIfCond_264 = false;
+		idIfCond_264 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+				.isInstanceOfSwitcher(this.getBody(),
+						org.kermeta.compil.runtime.ExecutionContext
+								.getInstance().getMetaClass(
+										"kermeta.language.behavior.Block"));
+
+		if (idIfCond_264) {
+
+			result = kermeta.standard.helper.StringWrapper.plus(result, this
+					.getBody().createBehaviorJava(context));
+		} else {
+
+			result = kermeta.standard.helper.StringWrapper
+					.plus(
+							result,
+							this
+									.getBody()
+									.createExpression(
+											context,
+											((kermeta.utils.StringBuffer) org.kermeta.compil.runtime.helper.language.ClassUtil
+													.newObject("kermeta.utils.StringBuffer")),
+											true).toString());
+		}
+
+		return result;
+
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setSimkForInvariant(KM2EcoreContext context) {
+
+		simk.SMContext smContext = context.getSimkModel()
+				.retrieveOrCreateContextForInvariant(this, context);
+
+		java.lang.Boolean idIfCond_265 = false;
+		idIfCond_265 = kermeta.standard.helper.BooleanWrapper
+				.not(org.kermeta.compil.runtime.helper.language.ObjectUtil
+						.isVoidSwitcher(smContext));
+
+		if (idIfCond_265) {
+
+			simk.SMMethod staticMethod = ((simk.SMMethod) org.kermeta.compil.runtime.helper.language.ClassUtil
+					.newObject("simk.SMMethod"));
+
+			staticMethod.setName(kermeta.standard.helper.StringWrapper.plus(
+					"checkInvariant_", this.getId()));
+
+			staticMethod.setBody("java.lang.Boolean result = false;\n");
+
+			context.getResultLastStatementStack().push(
+					kermeta.standard.helper.StringWrapper.plus(
+							kermeta.standard.helper.StringWrapper.plus(
+									"result = ", context.getTYPE_SEPARATOR()),
+							"java.lang.Boolean"));
+
+			java.lang.Boolean staticOperationMode_backup = context
+					.getStaticOperationMode();
+
+			context.setStaticOperationMode(true);
+
+			staticMethod.setBody(kermeta.standard.helper.StringWrapper.plus(
+					staticMethod.getBody(), this.createBehaviorJava(context)));
+
+			context.setStaticOperationMode(staticOperationMode_backup);
+
+			staticMethod.setBody(kermeta.standard.helper.StringWrapper.plus(
+					staticMethod.getBody(), "\nreturn result;"));
+
+			context.getResultLastStatementStack().pop();
+
+			staticMethod.setUsages(simk.SMUsage.getByName("Invariant"));
+
+			org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
+					.<simk.SMMethod> convertAsOrderedSet(
+							context.getSimkModel().getSMMethods()).add(
+							staticMethod);
+
+			org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
+					.<simk.SMMethod> convertAsOrderedSet(
+							smContext.getSMMethods()).add(staticMethod);
+
+			simk.SMReturn smReturn = ((simk.SMReturn) org.kermeta.compil.runtime.helper.language.ClassUtil
+					.newObject("simk.SMReturn"));
+
+			smReturn.setType("java.lang.Boolean");
+
+			staticMethod.setSMReturn(smReturn);
+
+			simk.SMParameter default_param = ((simk.SMParameter) org.kermeta.compil.runtime.helper.language.ClassUtil
+					.newObject("simk.SMParameter"));
+
+			default_param.setName("self");
+
+			default_param
+					.setType(kermeta.standard.helper.StringWrapper
+							.replace(
+									((kermeta.language.structure.ClassDefinition) org.kermeta.compil.runtime.helper.language.ObjectUtil
+											.asTypeSwitcher(
+													org.kermeta.compil.runtime.helper.language.ObjectUtil
+															.containerSwitcher(this),
+													org.kermeta.compil.runtime.ExecutionContext
+															.getInstance()
+															.getMetaClass(
+																	"kermeta.language.structure.ClassDefinition")))
+											.qualifiedName(), context
+											.getKERMETA_SEPARATOR(), context
+											.getJAVA_SEPARATOR()));
+
+			org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
+					.<simk.SMParameter> convertAsOrderedSet(
+							staticMethod.getSMParameters()).add(default_param);
+		}
+
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public void applyPass1(KM2EcoreContext context) {
 
 		ecore.EAnnotation ecoreAnnotation = this
 				.createEcoreModelElement(context);
 
 		kermeta.language.structure.Object c = org.kermeta.compil.runtime.helper.language.ObjectUtil
-				.container(this);
+				.containerSwitcher(this);
 
 		kermeta.language.structure.Property p = c
 				.getPropertyValue("ecoreModelElement");
 
-		java.lang.Boolean idIfCond_380 = false;
-		idIfCond_380 = org.kermeta.compil.runtime.helper.language.ObjectUtil
-				.isNotEqual(p, null);
+		java.lang.Boolean idIfCond_266 = false;
+		idIfCond_266 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+				.isNotEqualSwitcher(p, null);
 
-		if (idIfCond_380) {
+		if (idIfCond_266) {
 
 			ecore.EModelElement ecoreModelElement = ((ecore.EModelElement) org.kermeta.compil.runtime.helper.language.ObjectUtil
-					.asType(
+					.asTypeSwitcher(
 							org.kermeta.compil.runtime.helper.language.ObjectUtil
-									.get(c, p),
+									.getSwitcher(c, p),
 							org.kermeta.compil.runtime.ExecutionContext
 									.getInstance().getMetaClass(
 											"ecore.EModelElement")));
@@ -521,6 +695,28 @@ public class ConstraintImpl extends NamedElementImpl implements Constraint {
 		}
 
 		this.setEcoreModelElement(ecoreAnnotation);
+
+		this
+				.setId(kermeta.standard.helper.StringWrapper
+						.plus(
+								kermeta.standard.helper.StringWrapper
+										.plus(
+												kermeta.standard.helper.IntegerWrapper
+														.toString(org.kermeta.compil.runtime.helper.language.ObjectUtil
+																.oidSwitcher(this)),
+												"__"), this.getName()));
+
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void applyPass2(KM2EcoreContext context) {
+
+		kermeta.language.structure.helper.ObjectSuper.super_applyPass2(this,
+				context);
 
 	}
 
@@ -535,41 +731,104 @@ public class ConstraintImpl extends NamedElementImpl implements Constraint {
 
 		java.lang.String body = "";
 
-		java.lang.Boolean idIfCond_381 = false;
-		idIfCond_381 = org.kermeta.compil.runtime.helper.language.ObjectUtil
-				.isInstanceOf(
-						org.kermeta.compil.runtime.helper.language.ObjectUtil
-								.container(this),
-						org.kermeta.compil.runtime.ExecutionContext
-								.getInstance()
-								.getMetaClass(
-										"kermeta.language.structure.ClassDefinition"));
+		java.lang.Boolean idIfCond_267 = false;
+		idIfCond_267 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+				.equalsSwitcher(this.getStereotype(),
+						kermeta.language.structure.ConstraintType
+								.getByName("inv"));
 
-		if (idIfCond_381) {
+		if (idIfCond_267) {
 
 			result = ((km2ecore.helper.ecore.EAnnotationHelper) org.kermeta.compil.runtime.helper.language.ClassUtil
 					.newObject("km2ecore.helper.ecore.EAnnotationHelper"))
 					.create("kermeta.inv", this.getName(), body);
 		} else {
 
-			java.lang.Boolean idIfCond_382 = false;
-			idIfCond_382 = ((km2ecore.helper.kermeta.ConstraintHelper) org.kermeta.compil.runtime.helper.language.ClassUtil
-					.newObject("km2ecore.helper.kermeta.ConstraintHelper"))
-					.isPre(this);
+			java.lang.Boolean idIfCond_268 = false;
+			idIfCond_268 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+					.equalsSwitcher(this.getStereotype(),
+							kermeta.language.structure.ConstraintType
+									.getByName("pre"));
 
-			if (idIfCond_382) {
+			if (idIfCond_268) {
 
 				result = ((km2ecore.helper.ecore.EAnnotationHelper) org.kermeta.compil.runtime.helper.language.ClassUtil
 						.newObject("km2ecore.helper.ecore.EAnnotationHelper"))
 						.create("kermeta.pre", this.getName(), body);
 			} else {
 
-				result = ((km2ecore.helper.ecore.EAnnotationHelper) org.kermeta.compil.runtime.helper.language.ClassUtil
-						.newObject("km2ecore.helper.ecore.EAnnotationHelper"))
-						.create("kermeta.post", this.getName(), body);
+				java.lang.Boolean idIfCond_269 = false;
+				idIfCond_269 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+						.equalsSwitcher(this.getStereotype(),
+								kermeta.language.structure.ConstraintType
+										.getByName("post"));
+
+				if (idIfCond_269) {
+
+					result = ((km2ecore.helper.ecore.EAnnotationHelper) org.kermeta.compil.runtime.helper.language.ClassUtil
+							.newObject("km2ecore.helper.ecore.EAnnotationHelper"))
+							.create("kermeta.post", this.getName(), body);
+				}
+
 			}
 
 		}
+
+		return result;
+
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Boolean isPre(Constraint c) {
+
+		java.lang.Boolean result = null;
+
+		result = org.kermeta.compil.runtime.helper.language.ObjectUtil
+				.equalsSwitcher(this.getStereotype(),
+						kermeta.language.structure.ConstraintType
+								.getByName("pre"));
+
+		return result;
+
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void applyPass2BehaviorJava(KM2EcoreContext context) {
+
+		java.lang.Boolean idIfCond_270 = false;
+		idIfCond_270 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+				.equalsSwitcher(this.getStereotype(),
+						kermeta.language.structure.ConstraintType
+								.getByName("inv"));
+
+		if (idIfCond_270) {
+
+			this.setSimkForInvariant(context);
+		}
+
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Boolean isPost(Constraint c) {
+
+		java.lang.Boolean result = null;
+
+		result = org.kermeta.compil.runtime.helper.language.ObjectUtil
+				.equalsSwitcher(this.getStereotype(),
+						kermeta.language.structure.ConstraintType
+								.getByName("post"));
 
 		return result;
 
@@ -656,6 +915,8 @@ public class ConstraintImpl extends NamedElementImpl implements Constraint {
 			if (resolve)
 				return getEcoreModelElement();
 			return basicGetEcoreModelElement();
+		case StructurePackage.CONSTRAINT__ID:
+			return getId();
 		case StructurePackage.CONSTRAINT__BODY:
 			if (resolve)
 				return getBody();
@@ -691,6 +952,9 @@ public class ConstraintImpl extends NamedElementImpl implements Constraint {
 		case StructurePackage.CONSTRAINT__ECORE_MODEL_ELEMENT:
 			setEcoreModelElement((EAnnotation) newValue);
 			return;
+		case StructurePackage.CONSTRAINT__ID:
+			setId((String) newValue);
+			return;
 		case StructurePackage.CONSTRAINT__BODY:
 			setBody((Expression) newValue);
 			return;
@@ -724,6 +988,9 @@ public class ConstraintImpl extends NamedElementImpl implements Constraint {
 		case StructurePackage.CONSTRAINT__ECORE_MODEL_ELEMENT:
 			setEcoreModelElement((EAnnotation) null);
 			return;
+		case StructurePackage.CONSTRAINT__ID:
+			setId(ID_EDEFAULT);
+			return;
 		case StructurePackage.CONSTRAINT__BODY:
 			setBody((Expression) null);
 			return;
@@ -756,6 +1023,8 @@ public class ConstraintImpl extends NamedElementImpl implements Constraint {
 		switch (featureID) {
 		case StructurePackage.CONSTRAINT__ECORE_MODEL_ELEMENT:
 			return ecoreModelElement != null;
+		case StructurePackage.CONSTRAINT__ID:
+			return ID_EDEFAULT == null ? id != null : !ID_EDEFAULT.equals(id);
 		case StructurePackage.CONSTRAINT__BODY:
 			return body != null;
 		case StructurePackage.CONSTRAINT__PRE_OWNER:
@@ -819,7 +1088,9 @@ public class ConstraintImpl extends NamedElementImpl implements Constraint {
 			return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (stereotype: ");
+		result.append(" (id: ");
+		result.append(id);
+		result.append(", stereotype: ");
 		result.append(stereotype);
 		result.append(", language: ");
 		result.append(language);

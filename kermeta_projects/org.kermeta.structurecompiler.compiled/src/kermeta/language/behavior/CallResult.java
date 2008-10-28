@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: CallResult.java,v 1.5 2008-10-16 13:17:26 cfaucher Exp $
+ * $Id: CallResult.java,v 1.6 2008-10-28 13:18:08 cfaucher Exp $
  */
 package kermeta.language.behavior;
 

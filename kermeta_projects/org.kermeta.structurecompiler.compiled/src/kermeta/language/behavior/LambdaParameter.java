@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: LambdaParameter.java,v 1.5 2008-10-16 13:17:25 cfaucher Exp $
+ * $Id: LambdaParameter.java,v 1.6 2008-10-28 13:18:08 cfaucher Exp $
  */
 package kermeta.language.behavior;
 

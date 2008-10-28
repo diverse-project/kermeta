@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: TagImpl.java,v 1.5 2008-10-16 13:17:41 cfaucher Exp $
+ * $Id: TagImpl.java,v 1.6 2008-10-28 13:18:10 cfaucher Exp $
  */
 package kermeta.language.structure.impl;
 
@@ -110,7 +110,7 @@ public class TagImpl extends TraceabilityImpl<EAnnotation> implements Tag {
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return StructurePackage.Literals.TAG;
+		return StructurePackage.eINSTANCE.getTag();
 	}
 
 	/**
@@ -182,20 +182,23 @@ public class TagImpl extends TraceabilityImpl<EAnnotation> implements Tag {
 				.createEcoreModelElement(context);
 
 		kermeta.language.structure.Object c = org.kermeta.compil.runtime.helper.language.ObjectUtil
-				.container(this);
+				.containerSwitcher(this);
 
-		java.lang.Boolean idIfCond_383 = false;
-		idIfCond_383 = org.kermeta.compil.runtime.helper.language.ObjectUtil
-				.isInstanceOf(c, org.kermeta.compil.runtime.ExecutionContext
-						.getInstance().getMetaClass(
-								"kermeta.language.structure.ModelingUnit"));
+		java.lang.Boolean idIfCond_301 = false;
+		idIfCond_301 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+				.isInstanceOfSwitcher(
+						c,
+						org.kermeta.compil.runtime.ExecutionContext
+								.getInstance()
+								.getMetaClass(
+										"kermeta.language.structure.ModelingUnit"));
 
-		if (idIfCond_383) {
+		if (idIfCond_301) {
 
 			org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
 					.<ecore.EAnnotation> convertAsOrderedSet(
 							((kermeta.language.structure.ModelingUnit) org.kermeta.compil.runtime.helper.language.ObjectUtil
-									.asType(
+									.asTypeSwitcher(
 											c,
 											org.kermeta.compil.runtime.ExecutionContext
 													.getInstance()
@@ -207,17 +210,17 @@ public class TagImpl extends TraceabilityImpl<EAnnotation> implements Tag {
 			kermeta.language.structure.Property p = c
 					.getPropertyValue("ecoreModelElement");
 
-			java.lang.Boolean idIfCond_384 = false;
-			idIfCond_384 = kermeta.standard.helper.BooleanWrapper
+			java.lang.Boolean idIfCond_302 = false;
+			idIfCond_302 = kermeta.standard.helper.BooleanWrapper
 					.not(org.kermeta.compil.runtime.helper.language.ObjectUtil
-							.isVoid(p));
+							.isVoidSwitcher(p));
 
-			if (idIfCond_384) {
+			if (idIfCond_302) {
 
 				ecore.EModelElement ecoreModelElement_retrieved = ((ecore.EModelElement) org.kermeta.compil.runtime.helper.language.ObjectUtil
-						.asType(
+						.asTypeSwitcher(
 								org.kermeta.compil.runtime.helper.language.ObjectUtil
-										.get(c, p),
+										.getSwitcher(c, p),
 								org.kermeta.compil.runtime.ExecutionContext
 										.getInstance().getMetaClass(
 												"ecore.EModelElement")));
@@ -247,11 +250,11 @@ public class TagImpl extends TraceabilityImpl<EAnnotation> implements Tag {
 				.newObject("km2ecore.helper.ecore.EAnnotationHelper"))
 				.getKermetaEAnnotation(this);
 
-		java.lang.Boolean idIfCond_385 = false;
-		idIfCond_385 = org.kermeta.compil.runtime.helper.language.ObjectUtil
-				.isVoid(this.getName());
+		java.lang.Boolean idIfCond_303 = false;
+		idIfCond_303 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+				.isVoidSwitcher(this.getName());
 
-		if (idIfCond_385) {
+		if (idIfCond_303) {
 
 			((km2ecore.helper.ecore.EAnnotationHelper) org.kermeta.compil.runtime.helper.language.ClassUtil
 					.newObject("km2ecore.helper.ecore.EAnnotationHelper"))

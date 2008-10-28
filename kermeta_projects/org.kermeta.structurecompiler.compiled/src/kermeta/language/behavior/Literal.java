@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: Literal.java,v 1.5 2008-10-16 13:17:25 cfaucher Exp $
+ * $Id: Literal.java,v 1.6 2008-10-28 13:18:08 cfaucher Exp $
  */
 package kermeta.language.behavior;
 
@@ -15,7 +15,8 @@ import km2ecore.KM2EcoreContext;
  *
  *
  * @see kermeta.language.behavior.BehaviorPackage#getLiteral()
- * @model annotation="kermeta documentation='Literal refers to String values, Integer values, etc.'"
+ * @model abstract="true"
+ *        annotation="kermeta documentation='Literal refers to String values, Integer values, etc.'"
  * @generated
  */
 public interface Literal extends Expression {

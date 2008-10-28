@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ENamedElementHelperImpl.java,v 1.5 2008-10-16 13:18:18 cfaucher Exp $
+ * $Id: ENamedElementHelperImpl.java,v 1.6 2008-10-28 13:18:31 cfaucher Exp $
  */
 package km2ecore.helper.ecore.impl;
 
@@ -56,30 +56,30 @@ public class ENamedElementHelperImpl extends ObjectImpl implements
 
 		result = null;
 
-		java.lang.Boolean idIfCond_22 = false;
-		idIfCond_22 = kermeta.standard.helper.BooleanWrapper
+		java.lang.Boolean idIfCond_1073 = false;
+		idIfCond_1073 = kermeta.standard.helper.BooleanWrapper
 				.and(
 						kermeta.standard.helper.BooleanWrapper
 								.not(org.kermeta.compil.runtime.helper.language.ObjectUtil
-										.isVoid(element)),
+										.isVoidSwitcher(element)),
 						org.kermeta.compil.runtime.helper.language.ObjectUtil
-								.isInstanceOf(
+								.isInstanceOfSwitcher(
 										element,
 										org.kermeta.compil.runtime.ExecutionContext
 												.getInstance().getMetaClass(
 														"ecore.ENamedElement")));
 
-		if (idIfCond_22) {
+		if (idIfCond_1073) {
 
 			result = ((ecore.ENamedElement) org.kermeta.compil.runtime.helper.language.ObjectUtil
-					.asType(element,
+					.asTypeSwitcher(element,
 							org.kermeta.compil.runtime.ExecutionContext
 									.getInstance().getMetaClass(
 											"ecore.ENamedElement"))).getName();
 		} else {
 
 			result = org.kermeta.compil.runtime.helper.language.ObjectUtil
-					.toString(element);
+					.toStringSwitcher(element);
 		}
 
 		return result;

@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: Km2ecoreSwitch.java,v 1.5 2008-10-16 13:18:22 cfaucher Exp $
+ * $Id: Km2ecoreSwitch.java,v 1.6 2008-10-28 13:18:35 cfaucher Exp $
  */
 package km2ecore.util;
 
@@ -84,15 +84,6 @@ public class Km2ecoreSwitch<T> {
 	 */
 	protected T doSwitch(int classifierID, EObject theEObject) {
 		switch (classifierID) {
-		case Km2ecorePackage.KM2_ECORE_CONTEXT: {
-			KM2EcoreContext km2EcoreContext = (KM2EcoreContext) theEObject;
-			T result = caseKM2EcoreContext(km2EcoreContext);
-			if (result == null)
-				result = caseObject(km2EcoreContext);
-			if (result == null)
-				result = defaultCase(theEObject);
-			return result;
-		}
 		case Km2ecorePackage.SOURCE_TRACER: {
 			SourceTracer sourceTracer = (SourceTracer) theEObject;
 			T result = caseSourceTracer(sourceTracer);
@@ -102,24 +93,18 @@ public class Km2ecoreSwitch<T> {
 				result = defaultCase(theEObject);
 			return result;
 		}
+		case Km2ecorePackage.KM2_ECORE_CONTEXT: {
+			KM2EcoreContext km2EcoreContext = (KM2EcoreContext) theEObject;
+			T result = caseKM2EcoreContext(km2EcoreContext);
+			if (result == null)
+				result = caseObject(km2EcoreContext);
+			if (result == null)
+				result = defaultCase(theEObject);
+			return result;
+		}
 		default:
 			return defaultCase(theEObject);
 		}
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>KM2 Ecore Context</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>KM2 Ecore Context</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseKM2EcoreContext(KM2EcoreContext object) {
-		return null;
 	}
 
 	/**
@@ -134,6 +119,21 @@ public class Km2ecoreSwitch<T> {
 	 * @generated
 	 */
 	public T caseSourceTracer(SourceTracer object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>KM2 Ecore Context</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>KM2 Ecore Context</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseKM2EcoreContext(KM2EcoreContext object) {
 		return null;
 	}
 

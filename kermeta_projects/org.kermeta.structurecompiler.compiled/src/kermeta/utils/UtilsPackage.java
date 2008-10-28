@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: UtilsPackage.java,v 1.5 2008-10-16 13:18:13 cfaucher Exp $
+ * $Id: UtilsPackage.java,v 1.6 2008-10-28 13:18:27 cfaucher Exp $
  */
 package kermeta.utils;
 
@@ -29,8 +29,8 @@ import org.eclipse.emf.ecore.EPackage;
  * @see kermeta.utils.UtilsFactory
  * @model kind="package"
  *        annotation="kermeta ecoreUri='http://www.kermeta.org/kermeta/1_2_0//kermeta/utils'"
- *        annotation="kermeta documentation='/** \r\n * Contains special classes (Hashtable, Stack) that are not contained in Kermeta\r\n * metamodel\r\n * \r\n * <img src=\"./figures/utils_package.png\"/>\r\n \052/'"
  *        annotation="kermeta documentation='/** \r\n * Contains special classes (Hashtable, Stack) that are not contained in Kermeta\r\n * metamodel\r\n \052/'"
+ *        annotation="kermeta documentation='/** \r\n * Contains special classes (Hashtable, Stack) that are not contained in Kermeta\r\n * metamodel\r\n * \r\n * <img src=\"./figures/utils_package.png\"/>\r\n \052/'"
  * @generated
  */
 public interface UtilsPackage extends EPackage {
@@ -67,14 +67,23 @@ public interface UtilsPackage extends EPackage {
 	UtilsPackage eINSTANCE = kermeta.utils.impl.UtilsPackageImpl.init();
 
 	/**
-	 * The meta object id for the '{@link kermeta.utils.impl.HashtableImpl <em>Hashtable</em>}' class.
+	 * The meta object id for the '{@link kermeta.utils.impl.StackImpl <em>Stack</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see kermeta.utils.impl.HashtableImpl
-	 * @see kermeta.utils.impl.UtilsPackageImpl#getHashtable()
+	 * @see kermeta.utils.impl.StackImpl
+	 * @see kermeta.utils.impl.UtilsPackageImpl#getStack()
 	 * @generated
 	 */
-	int HASHTABLE = 0;
+	int STACK = 0;
+
+	/**
+	 * The feature id for the '<em><b>Tag</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STACK__TAG = StandardPackage.SEQUENCE__TAG;
 
 	/**
 	 * The feature id for the '<em><b>File</b></em>' reference.
@@ -83,7 +92,71 @@ public interface UtilsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int HASHTABLE__FILE = StructurePackage.OBJECT__FILE;
+	int STACK__FILE = StandardPackage.SEQUENCE__FILE;
+
+	/**
+	 * The feature id for the '<em><b>File Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STACK__FILE_NAME = StandardPackage.SEQUENCE__FILE_NAME;
+
+	/**
+	 * The feature id for the '<em><b>Line Number</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STACK__LINE_NUMBER = StandardPackage.SEQUENCE__LINE_NUMBER;
+
+	/**
+	 * The feature id for the '<em><b>Owned Tags</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STACK__OWNED_TAGS = StandardPackage.SEQUENCE__OWNED_TAGS;
+
+	/**
+	 * The feature id for the '<em><b>Oid</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STACK__OID = StandardPackage.SEQUENCE__OID;
+
+	/**
+	 * The feature id for the '<em><b>Values</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STACK__VALUES = StandardPackage.SEQUENCE__VALUES;
+
+	/**
+	 * The number of structural features of the '<em>Stack</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STACK_FEATURE_COUNT = StandardPackage.SEQUENCE_FEATURE_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link kermeta.utils.impl.HashtableImpl <em>Hashtable</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see kermeta.utils.impl.HashtableImpl
+	 * @see kermeta.utils.impl.UtilsPackageImpl#getHashtable()
+	 * @generated
+	 */
+	int HASHTABLE = 1;
 
 	/**
 	 * The feature id for the '<em><b>Tag</b></em>' reference list.
@@ -93,6 +166,15 @@ public interface UtilsPackage extends EPackage {
 	 * @ordered
 	 */
 	int HASHTABLE__TAG = StructurePackage.OBJECT__TAG;
+
+	/**
+	 * The feature id for the '<em><b>File</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int HASHTABLE__FILE = StructurePackage.OBJECT__FILE;
 
 	/**
 	 * The feature id for the '<em><b>File Name</b></em>' attribute.
@@ -156,16 +238,7 @@ public interface UtilsPackage extends EPackage {
 	 * @see kermeta.utils.impl.UtilsPackageImpl#getStringBuffer()
 	 * @generated
 	 */
-	int STRING_BUFFER = 1;
-
-	/**
-	 * The feature id for the '<em><b>File</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int STRING_BUFFER__FILE = StructurePackage.OBJECT__FILE;
+	int STRING_BUFFER = 2;
 
 	/**
 	 * The feature id for the '<em><b>Tag</b></em>' reference list.
@@ -175,6 +248,15 @@ public interface UtilsPackage extends EPackage {
 	 * @ordered
 	 */
 	int STRING_BUFFER__TAG = StructurePackage.OBJECT__TAG;
+
+	/**
+	 * The feature id for the '<em><b>File</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STRING_BUFFER__FILE = StructurePackage.OBJECT__FILE;
 
 	/**
 	 * The feature id for the '<em><b>File Name</b></em>' attribute.
@@ -231,88 +313,6 @@ public interface UtilsPackage extends EPackage {
 	int STRING_BUFFER_FEATURE_COUNT = StructurePackage.OBJECT_FEATURE_COUNT + 1;
 
 	/**
-	 * The meta object id for the '{@link kermeta.utils.impl.StackImpl <em>Stack</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see kermeta.utils.impl.StackImpl
-	 * @see kermeta.utils.impl.UtilsPackageImpl#getStack()
-	 * @generated
-	 */
-	int STACK = 2;
-
-	/**
-	 * The feature id for the '<em><b>File</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int STACK__FILE = StandardPackage.SEQUENCE__FILE;
-
-	/**
-	 * The feature id for the '<em><b>Tag</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int STACK__TAG = StandardPackage.SEQUENCE__TAG;
-
-	/**
-	 * The feature id for the '<em><b>File Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int STACK__FILE_NAME = StandardPackage.SEQUENCE__FILE_NAME;
-
-	/**
-	 * The feature id for the '<em><b>Line Number</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int STACK__LINE_NUMBER = StandardPackage.SEQUENCE__LINE_NUMBER;
-
-	/**
-	 * The feature id for the '<em><b>Owned Tags</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int STACK__OWNED_TAGS = StandardPackage.SEQUENCE__OWNED_TAGS;
-
-	/**
-	 * The feature id for the '<em><b>Oid</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int STACK__OID = StandardPackage.SEQUENCE__OID;
-
-	/**
-	 * The feature id for the '<em><b>Values</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int STACK__VALUES = StandardPackage.SEQUENCE__VALUES;
-
-	/**
-	 * The number of structural features of the '<em>Stack</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int STACK_FEATURE_COUNT = StandardPackage.SEQUENCE_FEATURE_COUNT + 0;
-
-	/**
 	 * The meta object id for the '<em>Kermeta Property Hashtable wrapped Hashtable</em>' data type.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -331,6 +331,16 @@ public interface UtilsPackage extends EPackage {
 	 * @generated
 	 */
 	int KERMETA_PROPERTY_STRING_BUFFER_CONTENT = 4;
+
+	/**
+	 * Returns the meta object for class '{@link kermeta.utils.Stack <em>Stack</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Stack</em>'.
+	 * @see kermeta.utils.Stack
+	 * @generated
+	 */
+	EClass getStack();
 
 	/**
 	 * Returns the meta object for class '{@link kermeta.utils.Hashtable <em>Hashtable</em>}'.
@@ -373,16 +383,6 @@ public interface UtilsPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getStringBuffer_Content();
-
-	/**
-	 * Returns the meta object for class '{@link kermeta.utils.Stack <em>Stack</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Stack</em>'.
-	 * @see kermeta.utils.Stack
-	 * @generated
-	 */
-	EClass getStack();
 
 	/**
 	 * Returns the meta object for data type '{@link java.util.Hashtable <em>Kermeta Property Hashtable wrapped Hashtable</em>}'.
@@ -429,6 +429,16 @@ public interface UtilsPackage extends EPackage {
 	 */
 	interface Literals {
 		/**
+		 * The meta object literal for the '{@link kermeta.utils.impl.StackImpl <em>Stack</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see kermeta.utils.impl.StackImpl
+		 * @see kermeta.utils.impl.UtilsPackageImpl#getStack()
+		 * @generated
+		 */
+		EClass STACK = eINSTANCE.getStack();
+
+		/**
 		 * The meta object literal for the '{@link kermeta.utils.impl.HashtableImpl <em>Hashtable</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -464,16 +474,6 @@ public interface UtilsPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute STRING_BUFFER__CONTENT = eINSTANCE.getStringBuffer_Content();
-
-		/**
-		 * The meta object literal for the '{@link kermeta.utils.impl.StackImpl <em>Stack</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see kermeta.utils.impl.StackImpl
-		 * @see kermeta.utils.impl.UtilsPackageImpl#getStack()
-		 * @generated
-		 */
-		EClass STACK = eINSTANCE.getStack();
 
 		/**
 		 * The meta object literal for the '<em>Kermeta Property Hashtable wrapped Hashtable</em>' data type.

@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: NotComparableExceptionImpl.java,v 1.5 2008-10-16 13:18:04 cfaucher Exp $
+ * $Id: NotComparableExceptionImpl.java,v 1.6 2008-10-28 13:18:17 cfaucher Exp $
  */
 package kermeta.standard.impl;
 

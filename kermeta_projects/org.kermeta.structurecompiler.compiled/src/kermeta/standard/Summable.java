@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: Summable.java,v 1.5 2008-10-16 13:17:49 cfaucher Exp $
+ * $Id: Summable.java,v 1.6 2008-10-28 13:18:15 cfaucher Exp $
  */
 package kermeta.standard;
 

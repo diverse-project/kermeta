@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: StandardFactoryImpl.java,v 1.5 2008-10-16 13:18:03 cfaucher Exp $
+ * $Id: StandardFactoryImpl.java,v 1.6 2008-10-28 13:18:17 cfaucher Exp $
  */
 package kermeta.standard.impl;
 
@@ -10,6 +10,7 @@ import kermeta.standard.Bag;
 import kermeta.standard.Iterator;
 import kermeta.standard.NotComparableException;
 import kermeta.standard.OrderedSet;
+import kermeta.standard.Real;
 import kermeta.standard.Sequence;
 import kermeta.standard.Set;
 import kermeta.standard.StandardFactory;
@@ -72,12 +73,20 @@ public class StandardFactoryImpl extends EFactoryImpl implements
 	@Override
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
-		case StandardPackage.UNKNOWN_JAVA_OBJECT:
-			return createUnknownJavaObject();
+		case StandardPackage.STRING:
+			return createString();
 		case StandardPackage.VOID:
 			return createVoid();
 		case StandardPackage.NOT_COMPARABLE_EXCEPTION:
 			return createNotComparableException();
+		case StandardPackage.BOOLEAN:
+			return createBoolean();
+		case StandardPackage.INTEGER:
+			return createInteger();
+		case StandardPackage.REAL:
+			return createReal();
+		case StandardPackage.CHARACTER:
+			return createCharacter();
 		case StandardPackage.SET:
 			return createSet();
 		case StandardPackage.BAG:
@@ -88,6 +97,8 @@ public class StandardFactoryImpl extends EFactoryImpl implements
 			return createSequence();
 		case StandardPackage.ITERATOR:
 			return createIterator();
+		case StandardPackage.UNKNOWN_JAVA_OBJECT:
+			return createUnknownJavaObject();
 		default:
 			throw new IllegalArgumentException("The class '" + eClass.getName()
 					+ "' is not a valid classifier");
@@ -116,6 +127,21 @@ public class StandardFactoryImpl extends EFactoryImpl implements
 			return createJavaCharacterFromString(eDataType, initialValue);
 		case StandardPackage.UNLIMITED_NATURAL:
 			return createUnlimitedNaturalFromString(eDataType, initialValue);
+		case StandardPackage.KERMETA_PROPERTY_STRING_VALUE:
+			return createKermetaProperty_String_valueFromString(eDataType,
+					initialValue);
+		case StandardPackage.KERMETA_PROPERTY_BOOLEAN_VALUE:
+			return createKermetaProperty_Boolean_valueFromString(eDataType,
+					initialValue);
+		case StandardPackage.KERMETA_PROPERTY_INTEGER_VALUE:
+			return createKermetaProperty_Integer_valueFromString(eDataType,
+					initialValue);
+		case StandardPackage.KERMETA_PROPERTY_REAL_VALUE:
+			return createKermetaProperty_Real_valueFromString(eDataType,
+					initialValue);
+		case StandardPackage.KERMETA_PROPERTY_CHARACTER_VALUE:
+			return createKermetaProperty_Character_valueFromString(eDataType,
+					initialValue);
 		case StandardPackage.KERMETA_PROPERTY_COLLECTION_VALUES:
 			return createKermetaProperty_Collection_valuesFromString(eDataType,
 					initialValue);
@@ -150,6 +176,21 @@ public class StandardFactoryImpl extends EFactoryImpl implements
 			return convertJavaCharacterToString(eDataType, instanceValue);
 		case StandardPackage.UNLIMITED_NATURAL:
 			return convertUnlimitedNaturalToString(eDataType, instanceValue);
+		case StandardPackage.KERMETA_PROPERTY_STRING_VALUE:
+			return convertKermetaProperty_String_valueToString(eDataType,
+					instanceValue);
+		case StandardPackage.KERMETA_PROPERTY_BOOLEAN_VALUE:
+			return convertKermetaProperty_Boolean_valueToString(eDataType,
+					instanceValue);
+		case StandardPackage.KERMETA_PROPERTY_INTEGER_VALUE:
+			return convertKermetaProperty_Integer_valueToString(eDataType,
+					instanceValue);
+		case StandardPackage.KERMETA_PROPERTY_REAL_VALUE:
+			return convertKermetaProperty_Real_valueToString(eDataType,
+					instanceValue);
+		case StandardPackage.KERMETA_PROPERTY_CHARACTER_VALUE:
+			return convertKermetaProperty_Character_valueToString(eDataType,
+					instanceValue);
 		case StandardPackage.KERMETA_PROPERTY_COLLECTION_VALUES:
 			return convertKermetaProperty_Collection_valuesToString(eDataType,
 					instanceValue);
@@ -167,9 +208,9 @@ public class StandardFactoryImpl extends EFactoryImpl implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public UnknownJavaObject createUnknownJavaObject() {
-		UnknownJavaObjectImpl unknownJavaObject = new UnknownJavaObjectImpl();
-		return unknownJavaObject;
+	public kermeta.standard.String createString() {
+		StringImpl string = new StringImpl();
+		return string;
 	}
 
 	/**
@@ -190,6 +231,46 @@ public class StandardFactoryImpl extends EFactoryImpl implements
 	public NotComparableException createNotComparableException() {
 		NotComparableExceptionImpl notComparableException = new NotComparableExceptionImpl();
 		return notComparableException;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public kermeta.standard.Boolean createBoolean() {
+		BooleanImpl boolean_ = new BooleanImpl();
+		return boolean_;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public kermeta.standard.Integer createInteger() {
+		IntegerImpl integer = new IntegerImpl();
+		return integer;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Real createReal() {
+		RealImpl real = new RealImpl();
+		return real;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public kermeta.standard.Character createCharacter() {
+		CharacterImpl character = new CharacterImpl();
+		return character;
 	}
 
 	/**
@@ -240,6 +321,16 @@ public class StandardFactoryImpl extends EFactoryImpl implements
 	public <G> Iterator<G> createIterator() {
 		IteratorImpl<G> iterator = new IteratorImpl<G>();
 		return iterator;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public UnknownJavaObject createUnknownJavaObject() {
+		UnknownJavaObjectImpl unknownJavaObject = new UnknownJavaObjectImpl();
+		return unknownJavaObject;
 	}
 
 	/**
@@ -367,9 +458,9 @@ public class StandardFactoryImpl extends EFactoryImpl implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Object createUnlimitedNaturalFromString(EDataType eDataType,
+	public Integer createUnlimitedNaturalFromString(EDataType eDataType,
 			String initialValue) {
-		return super.createFromString(eDataType, initialValue);
+		return (Integer) super.createFromString(eDataType, initialValue);
 	}
 
 	/**
@@ -379,6 +470,106 @@ public class StandardFactoryImpl extends EFactoryImpl implements
 	 */
 	public String convertUnlimitedNaturalToString(EDataType eDataType,
 			Object instanceValue) {
+		return super.convertToString(eDataType, instanceValue);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String createKermetaProperty_String_valueFromString(
+			EDataType eDataType, String initialValue) {
+		return (String) super.createFromString(eDataType, initialValue);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String convertKermetaProperty_String_valueToString(
+			EDataType eDataType, Object instanceValue) {
+		return super.convertToString(eDataType, instanceValue);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String createKermetaProperty_Boolean_valueFromString(
+			EDataType eDataType, String initialValue) {
+		return (String) super.createFromString(eDataType, initialValue);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String convertKermetaProperty_Boolean_valueToString(
+			EDataType eDataType, Object instanceValue) {
+		return super.convertToString(eDataType, instanceValue);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String createKermetaProperty_Integer_valueFromString(
+			EDataType eDataType, String initialValue) {
+		return (String) super.createFromString(eDataType, initialValue);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String convertKermetaProperty_Integer_valueToString(
+			EDataType eDataType, Object instanceValue) {
+		return super.convertToString(eDataType, instanceValue);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String createKermetaProperty_Real_valueFromString(
+			EDataType eDataType, String initialValue) {
+		return (String) super.createFromString(eDataType, initialValue);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String convertKermetaProperty_Real_valueToString(
+			EDataType eDataType, Object instanceValue) {
+		return super.convertToString(eDataType, instanceValue);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String createKermetaProperty_Character_valueFromString(
+			EDataType eDataType, String initialValue) {
+		return (String) super.createFromString(eDataType, initialValue);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String convertKermetaProperty_Character_valueToString(
+			EDataType eDataType, Object instanceValue) {
 		return super.convertToString(eDataType, instanceValue);
 	}
 

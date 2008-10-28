@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: PersistenceFactoryImpl.java,v 1.5 2008-10-16 13:18:07 cfaucher Exp $
+ * $Id: PersistenceFactoryImpl.java,v 1.6 2008-10-28 13:18:21 cfaucher Exp $
  */
 package kermeta.persistence.impl;
 

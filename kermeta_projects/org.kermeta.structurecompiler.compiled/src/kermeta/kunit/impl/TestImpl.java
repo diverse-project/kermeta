@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: TestImpl.java,v 1.5 2008-10-16 13:17:30 cfaucher Exp $
+ * $Id: TestImpl.java,v 1.6 2008-10-28 13:18:09 cfaucher Exp $
  */
 package kermeta.kunit.impl;
 
@@ -109,8 +109,40 @@ public abstract class TestImpl extends ObjectImpl implements Test {
 	 */
 	public void setLogKermeta(Log log) {
 
+		//PreConditions Checking
+		{
+			if (org.kermeta.compil.runtime.ExecutionContext.getInstance()
+					.mustBeChecked("pre__6556591__paramNotVoid")) {
+				java.lang.Boolean result_pre = false;
+
+				result_pre = org.kermeta.compil.runtime.helper.language.ObjectUtil
+						.isNotEqualSwitcher(log, null);
+				if (!result_pre) {
+					kermeta.exceptions.ConstraintViolatedPre exp = kermeta.exceptions.ExceptionsFactory.eINSTANCE
+							.createConstraintViolatedPre();
+					throw new org.kermeta.compil.runtime.helper.error.KRuntimeError(
+							exp);
+				}
+			}
+		}
 		this.setLog(log);
 
+		//PostConditions Checking
+		{
+			if (org.kermeta.compil.runtime.ExecutionContext.getInstance()
+					.mustBeChecked("post__6556597__logNotVoid")) {
+				java.lang.Boolean result_post = false;
+
+				result_post = org.kermeta.compil.runtime.helper.language.ObjectUtil
+						.isNotEqualSwitcher(this.getLog(), null);
+				if (!result_post) {
+					kermeta.exceptions.ConstraintViolatedPost exp = kermeta.exceptions.ExceptionsFactory.eINSTANCE
+							.createConstraintViolatedPost();
+					throw new org.kermeta.compil.runtime.helper.error.KRuntimeError(
+							exp);
+				}
+			}
+		}
 	}
 
 	/**

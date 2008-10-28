@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: TypeVariableBinding.java,v 1.5 2008-10-16 13:17:59 cfaucher Exp $
+ * $Id: TypeVariableBinding.java,v 1.6 2008-10-28 13:18:19 cfaucher Exp $
  */
 package kermeta.language.structure;
 

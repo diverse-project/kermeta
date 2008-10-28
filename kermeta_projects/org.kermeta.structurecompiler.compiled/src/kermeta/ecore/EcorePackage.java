@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: EcorePackage.java,v 1.5 2008-10-16 13:18:26 cfaucher Exp $
+ * $Id: EcorePackage.java,v 1.6 2008-10-28 13:18:41 cfaucher Exp $
  */
 package kermeta.ecore;
 
@@ -74,15 +74,6 @@ public interface EcorePackage extends EPackage {
 	int EFEATURE_MAP_ENTRY = 0;
 
 	/**
-	 * The feature id for the '<em><b>File</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EFEATURE_MAP_ENTRY__FILE = StructurePackage.OBJECT__FILE;
-
-	/**
 	 * The feature id for the '<em><b>Tag</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -90,6 +81,15 @@ public interface EcorePackage extends EPackage {
 	 * @ordered
 	 */
 	int EFEATURE_MAP_ENTRY__TAG = StructurePackage.OBJECT__TAG;
+
+	/**
+	 * The feature id for the '<em><b>File</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EFEATURE_MAP_ENTRY__FILE = StructurePackage.OBJECT__FILE;
 
 	/**
 	 * The feature id for the '<em><b>File Name</b></em>' attribute.

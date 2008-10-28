@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ModelImpl.java,v 1.5 2008-10-16 13:17:38 cfaucher Exp $
+ * $Id: ModelImpl.java,v 1.6 2008-10-28 13:18:10 cfaucher Exp $
  */
 package kermeta.language.structure.impl;
 
@@ -59,7 +59,7 @@ public class ModelImpl extends ObjectImpl implements Model {
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return StructurePackage.Literals.MODEL;
+		return StructurePackage.eINSTANCE.getModel();
 	}
 
 	/**
@@ -126,29 +126,29 @@ public class ModelImpl extends ObjectImpl implements Model {
 
 		{
 
-			kermeta.standard.Iterator<kermeta.language.structure.Object> it_ft123 = objectsToAdd
+			kermeta.standard.Iterator<kermeta.language.structure.Object> it_ft115 = objectsToAdd
 					.iterator();
-			java.lang.Boolean idLoopCond_395 = false;
-			while (!idLoopCond_395) {
-				idLoopCond_395 = it_ft123.isOff();
-				if (idLoopCond_395) {
+			java.lang.Boolean idLoopCond_351 = false;
+			while (!idLoopCond_351) {
+				idLoopCond_351 = it_ft115.isOff();
+				if (idLoopCond_351) {
 				} else {
 
 					//BIle:func
-					kermeta.language.structure.Object obj_lbdExp123 = it_ft123
+					kermeta.language.structure.Object obj_lbdExp115 = it_ft115
 							.next();
 
 					kermeta.language.structure.Object addedObject = this
-							.addCompatible(obj_lbdExp123);
+							.addCompatible(obj_lbdExp115);
 
-					java.lang.Boolean idIfCond_396 = false;
-					idIfCond_396 = kermeta.standard.helper.BooleanWrapper
+					java.lang.Boolean idIfCond_352 = false;
+					idIfCond_352 = kermeta.standard.helper.BooleanWrapper
 							.not(org.kermeta.compil.runtime.helper.language.ObjectUtil
-									.isVoid(addedObject));
+									.isVoidSwitcher(addedObject));
 
-					if (idIfCond_396) {
+					if (idIfCond_352) {
 
-						result.add(obj_lbdExp123);
+						result.add(obj_lbdExp115);
 					}
 
 					//EIle:func
@@ -189,37 +189,37 @@ public class ModelImpl extends ObjectImpl implements Model {
 
 		//BIft:select
 
-		kermeta.standard.Sequence<kermeta.language.structure.Object> result_ft124 = null;
+		kermeta.standard.Sequence<kermeta.language.structure.Object> result_ft116 = null;
 
-		kermeta.language.structure.Object elem_ft124 = null;
+		kermeta.language.structure.Object elem_ft116 = null;
 
-		result_ft124 = ((kermeta.standard.Sequence<kermeta.language.structure.Object>) org.kermeta.compil.runtime.helper.language.ClassUtil
+		result_ft116 = ((kermeta.standard.Sequence<kermeta.language.structure.Object>) org.kermeta.compil.runtime.helper.language.ClassUtil
 				.newObject("kermeta.standard.Sequence<kermeta.language.structure.Object>"));
 
 		{
 
-			kermeta.standard.Iterator<kermeta.language.structure.Object> it_ft124 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
+			kermeta.standard.Iterator<kermeta.language.structure.Object> it_ft116 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
 					.<kermeta.language.structure.Object> convertAsOrderedSet(
 							this.getContents()).iterator();
-			java.lang.Boolean idLoopCond_397 = false;
-			while (!idLoopCond_397) {
-				idLoopCond_397 = it_ft124.isOff();
-				if (idLoopCond_397) {
+			java.lang.Boolean idLoopCond_353 = false;
+			while (!idLoopCond_353) {
+				idLoopCond_353 = it_ft116.isOff();
+				if (idLoopCond_353) {
 				} else {
 
-					elem_ft124 = it_ft124.next();
+					elem_ft116 = it_ft116.next();
 
-					java.lang.Boolean idIfCond_398 = false;
+					java.lang.Boolean idIfCond_354 = false;
 					//BIle:selector
-					kermeta.language.structure.Object o_lbdExp124 = elem_ft124;
+					kermeta.language.structure.Object o_lbdExp116 = elem_ft116;
 
-					idIfCond_398 = org.kermeta.compil.runtime.helper.language.TypeUtil
-							.isInstance(typeName, o_lbdExp124);
+					idIfCond_354 = org.kermeta.compil.runtime.helper.language.TypeUtil
+							.isInstanceSwitcher(typeName, o_lbdExp116);
 					//EIle:selector
 
-					if (idIfCond_398) {
+					if (idIfCond_354) {
 
-						result_ft124.add(elem_ft124);
+						result_ft116.add(elem_ft116);
 					}
 
 				}
@@ -227,7 +227,7 @@ public class ModelImpl extends ObjectImpl implements Model {
 		}
 
 		//EIft:select
-		result = result_ft124.asSet();
+		result = result_ft116.asSet();
 
 		return result;
 

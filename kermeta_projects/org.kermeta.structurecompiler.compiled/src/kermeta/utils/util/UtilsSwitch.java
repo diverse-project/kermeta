@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: UtilsSwitch.java,v 1.5 2008-10-16 13:17:58 cfaucher Exp $
+ * $Id: UtilsSwitch.java,v 1.6 2008-10-28 13:18:18 cfaucher Exp $
  */
 package kermeta.utils.util;
 
@@ -91,6 +91,23 @@ public class UtilsSwitch<T> {
 	 */
 	protected T doSwitch(int classifierID, EObject theEObject) {
 		switch (classifierID) {
+		case UtilsPackage.STACK: {
+			Stack<?> stack = (Stack<?>) theEObject;
+			T result = caseStack(stack);
+			if (result == null)
+				result = caseSequence(stack);
+			if (result == null)
+				result = caseBag(stack);
+			if (result == null)
+				result = caseOrderedCollection(stack);
+			if (result == null)
+				result = caseCollection(stack);
+			if (result == null)
+				result = caseObject(stack);
+			if (result == null)
+				result = defaultCase(theEObject);
+			return result;
+		}
 		case UtilsPackage.HASHTABLE: {
 			Hashtable<?, ?> hashtable = (Hashtable<?, ?>) theEObject;
 			T result = caseHashtable(hashtable);
@@ -109,26 +126,24 @@ public class UtilsSwitch<T> {
 				result = defaultCase(theEObject);
 			return result;
 		}
-		case UtilsPackage.STACK: {
-			Stack<?> stack = (Stack<?>) theEObject;
-			T result = caseStack(stack);
-			if (result == null)
-				result = caseSequence(stack);
-			if (result == null)
-				result = caseBag(stack);
-			if (result == null)
-				result = caseOrderedCollection(stack);
-			if (result == null)
-				result = caseCollection(stack);
-			if (result == null)
-				result = caseObject(stack);
-			if (result == null)
-				result = defaultCase(theEObject);
-			return result;
-		}
 		default:
 			return defaultCase(theEObject);
 		}
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Stack</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Stack</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public <G> T caseStack(Stack<G> object) {
+		return null;
 	}
 
 	/**
@@ -158,21 +173,6 @@ public class UtilsSwitch<T> {
 	 * @generated
 	 */
 	public T caseStringBuffer(kermeta.utils.StringBuffer object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Stack</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Stack</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public <G> T caseStack(Stack<G> object) {
 		return null;
 	}
 

@@ -2,9 +2,12 @@
  * <copyright>
  * </copyright>
  *
- * $Id: VoidImpl.java,v 1.5 2008-10-16 13:18:03 cfaucher Exp $
+ * $Id: VoidImpl.java,v 1.6 2008-10-28 13:18:17 cfaucher Exp $
  */
 package kermeta.standard.impl;
+
+import java.lang.Boolean;
+import java.lang.String;
 
 import kermeta.language.structure.Type;
 

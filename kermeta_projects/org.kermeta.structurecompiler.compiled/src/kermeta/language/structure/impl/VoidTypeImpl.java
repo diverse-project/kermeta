@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: VoidTypeImpl.java,v 1.5 2008-10-16 13:17:41 cfaucher Exp $
+ * $Id: VoidTypeImpl.java,v 1.6 2008-10-28 13:18:10 cfaucher Exp $
  */
 package kermeta.language.structure.impl;
 
@@ -39,7 +39,7 @@ public class VoidTypeImpl extends TypeImpl implements VoidType {
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return StructurePackage.Literals.VOID_TYPE;
+		return StructurePackage.eINSTANCE.getVoidType();
 	}
 
 	/**

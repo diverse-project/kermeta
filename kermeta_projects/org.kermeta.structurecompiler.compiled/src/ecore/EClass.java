@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: EClass.java,v 1.6 2008-10-16 13:18:10 cfaucher Exp $
+ * $Id: EClass.java,v 1.7 2008-10-28 13:18:25 cfaucher Exp $
  */
 package ecore;
 
@@ -16,10 +16,10 @@ import org.eclipse.emf.common.util.EList;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link ecore.EClass#isAbstract <em>Abstract</em>}</li>
  *   <li>{@link ecore.EClass#getEStructuralFeatures <em>EStructural Features</em>}</li>
+ *   <li>{@link ecore.EClass#is_abstract <em>abstract</em>}</li>
  *   <li>{@link ecore.EClass#getEOperations <em>EOperations</em>}</li>
- *   <li>{@link ecore.EClass#isInterface <em>Interface</em>}</li>
+ *   <li>{@link ecore.EClass#is_interface <em>interface</em>}</li>
  *   <li>{@link ecore.EClass#getESuperTypes <em>ESuper Types</em>}</li>
  *   <li>{@link ecore.EClass#getEGenericSuperTypes <em>EGeneric Super Types</em>}</li>
  * </ul>
@@ -30,33 +30,6 @@ import org.eclipse.emf.common.util.EList;
  * @generated
  */
 public interface EClass extends EClassifier {
-	/**
-	 * Returns the value of the '<em><b>Abstract</b></em>' attribute.
-	 * The default value is <code>"false"</code>.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Abstract</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Abstract</em>' attribute.
-	 * @see #setAbstract(boolean)
-	 * @see ecore.EcorePackage#getEClass_Abstract()
-	 * @model default="false" dataType="ecore.EBoolean"
-	 * @generated
-	 */
-	boolean isAbstract();
-
-	/**
-	 * Sets the value of the '{@link ecore.EClass#isAbstract <em>Abstract</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Abstract</em>' attribute.
-	 * @see #isAbstract()
-	 * @generated
-	 */
-	void setAbstract(boolean value);
-
 	/**
 	 * Returns the value of the '<em><b>EStructural Features</b></em>' containment reference list.
 	 * The list contents are of type {@link ecore.EStructuralFeature}.
@@ -74,6 +47,33 @@ public interface EClass extends EClassifier {
 	 * @generated
 	 */
 	EList<EStructuralFeature> getEStructuralFeatures();
+
+	/**
+	 * Returns the value of the '<em><b>abstract</b></em>' attribute.
+	 * The default value is <code>"false"</code>.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>abstract</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>abstract</em>' attribute.
+	 * @see #set_abstract(boolean)
+	 * @see ecore.EcorePackage#getEClass__abstract()
+	 * @model default="false" dataType="ecore.EBoolean"
+	 * @generated
+	 */
+	boolean is_abstract();
+
+	/**
+	 * Sets the value of the '{@link ecore.EClass#is_abstract <em>abstract</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>abstract</em>' attribute.
+	 * @see #is_abstract()
+	 * @generated
+	 */
+	void set_abstract(boolean value);
 
 	/**
 	 * Returns the value of the '<em><b>EOperations</b></em>' containment reference list.
@@ -94,31 +94,31 @@ public interface EClass extends EClassifier {
 	EList<EOperation> getEOperations();
 
 	/**
-	 * Returns the value of the '<em><b>Interface</b></em>' attribute.
+	 * Returns the value of the '<em><b>interface</b></em>' attribute.
 	 * The default value is <code>"false"</code>.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Interface</em>' attribute isn't clear,
+	 * If the meaning of the '<em>interface</em>' attribute isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Interface</em>' attribute.
-	 * @see #setInterface(boolean)
-	 * @see ecore.EcorePackage#getEClass_Interface()
+	 * @return the value of the '<em>interface</em>' attribute.
+	 * @see #set_interface(boolean)
+	 * @see ecore.EcorePackage#getEClass__interface()
 	 * @model default="false" dataType="ecore.EBoolean"
 	 * @generated
 	 */
-	boolean isInterface();
+	boolean is_interface();
 
 	/**
-	 * Sets the value of the '{@link ecore.EClass#isInterface <em>Interface</em>}' attribute.
+	 * Sets the value of the '{@link ecore.EClass#is_interface <em>interface</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Interface</em>' attribute.
-	 * @see #isInterface()
+	 * @param value the new value of the '<em>interface</em>' attribute.
+	 * @see #is_interface()
 	 * @generated
 	 */
-	void setInterface(boolean value);
+	void set_interface(boolean value);
 
 	/**
 	 * Returns the value of the '<em><b>ESuper Types</b></em>' reference list.
@@ -261,18 +261,18 @@ public interface EClass extends EClassifier {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @model annotation="http://www.eclipse.org/emf/2002/GenModel body='\nkermeta.standard.OrderedSet<ecore.EOperation> result = null;\n\nreturn org.kermeta.compil.runtime.helper.basetypes.CollectionUtil.convertAsEList(result);\n'"
-	 * @generated
-	 */
-	EList<EOperation> getterEAllOperations();
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
 	 * @model annotation="http://www.eclipse.org/emf/2002/GenModel body='\nkermeta.standard.OrderedSet<ecore.EStructuralFeature> result = null;\n\nreturn org.kermeta.compil.runtime.helper.basetypes.CollectionUtil.convertAsEList(result);\n'"
 	 * @generated
 	 */
 	EList<EStructuralFeature> getterEAllStructuralFeatures();
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model annotation="http://www.eclipse.org/emf/2002/GenModel body='\nkermeta.standard.OrderedSet<ecore.EOperation> result = null;\n\nreturn org.kermeta.compil.runtime.helper.basetypes.CollectionUtil.convertAsEList(result);\n'"
+	 * @generated
+	 */
+	EList<EOperation> getterEAllOperations();
 
 	/**
 	 * <!-- begin-user-doc -->

@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: MultiplicityElementImpl.java,v 1.5 2008-10-16 13:17:40 cfaucher Exp $
+ * $Id: MultiplicityElementImpl.java,v 1.6 2008-10-28 13:18:10 cfaucher Exp $
  */
 package kermeta.language.structure.impl;
 
@@ -131,7 +131,7 @@ public class MultiplicityElementImpl extends TypedElementImpl implements
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return StructurePackage.Literals.MULTIPLICITY_ELEMENT;
+		return StructurePackage.eINSTANCE.getMultiplicityElement();
 	}
 
 	/**
@@ -246,17 +246,19 @@ public class MultiplicityElementImpl extends TypedElementImpl implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public String getFinalName() {
+	public String getFinalName(KM2EcoreContext context) {
 
 		java.lang.String result = null;
 
-		result = this.getName();
+		result = ((km2ecore.helper.java.IdentifierHelper) org.kermeta.compil.runtime.helper.language.ClassUtil
+				.newObject("km2ecore.helper.java.IdentifierHelper"))
+				.getMangledIdentifier(this.getName(), context);
 
-		java.lang.Boolean idIfCond_386 = false;
-		idIfCond_386 = org.kermeta.compil.runtime.helper.language.ObjectUtil
-				.isNotEqual(this.getEMFRenameAs(), "");
+		java.lang.Boolean idIfCond_338 = false;
+		idIfCond_338 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+				.isNotEqualSwitcher(this.getEMFRenameAs(), "");
 
-		if (idIfCond_386) {
+		if (idIfCond_338) {
 
 			result = this.getEMFRenameAs();
 		}
@@ -291,11 +293,11 @@ public class MultiplicityElementImpl extends TypedElementImpl implements
 
 		result = "\nreturn ";
 
-		java.lang.Boolean idIfCond_387 = false;
-		idIfCond_387 = kermeta.standard.helper.IntegerWrapper.equals(this
+		java.lang.Boolean idIfCond_339 = false;
+		idIfCond_339 = kermeta.standard.helper.IntegerWrapper.equals(this
 				.getUpper(), 1);
 
-		if (idIfCond_387) {
+		if (idIfCond_339) {
 
 			result = kermeta.standard.helper.StringWrapper.plus(result,
 					"result");

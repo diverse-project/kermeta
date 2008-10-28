@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ParseErrorImpl.java,v 1.5 2008-10-16 13:17:58 cfaucher Exp $
+ * $Id: ParseErrorImpl.java,v 1.6 2008-10-28 13:18:17 cfaucher Exp $
  */
 package kermeta.interpreter.impl;
 

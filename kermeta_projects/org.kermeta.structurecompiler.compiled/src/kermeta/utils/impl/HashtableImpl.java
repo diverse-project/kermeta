@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: HashtableImpl.java,v 1.5 2008-10-16 13:17:47 cfaucher Exp $
+ * $Id: HashtableImpl.java,v 1.6 2008-10-28 13:18:13 cfaucher Exp $
  */
 package kermeta.utils.impl;
 
@@ -125,9 +125,21 @@ public class HashtableImpl<K, V> extends ObjectImpl implements Hashtable<K, V> {
 		java.lang.Boolean result = null;
 
 		result = org.kermeta.compil.runtime.helper.language.ObjectUtil
-				.isNotEqual(this.getValue(key), null);
+				.isNotEqualSwitcher(this.getValue(key), null);
 
 		return result;
+
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void put(K key, V value) {
+
+		org.kermeta.compil.runtime.helper.basetypes.MapUtil.put(this, key,
+				value);
 
 	}
 
@@ -147,17 +159,17 @@ public class HashtableImpl<K, V> extends ObjectImpl implements Hashtable<K, V> {
 
 		{
 
-			kermeta.standard.Iterator<K> it_ft214 = this.keys().iterator();
-			java.lang.Boolean idLoopCond_962 = false;
-			while (!idLoopCond_962) {
-				idLoopCond_962 = it_ft214.isOff();
-				if (idLoopCond_962) {
+			kermeta.standard.Iterator<K> it_ft197 = this.keys().iterator();
+			java.lang.Boolean idLoopCond_899 = false;
+			while (!idLoopCond_899) {
+				idLoopCond_899 = it_ft197.isOff();
+				if (idLoopCond_899) {
 				} else {
 
 					//BIle:func
-					K k_lbdExp214 = it_ft214.next();
+					K k_lbdExp197 = it_ft197.next();
 
-					result.add(this.getValue(k_lbdExp214));
+					result.add(this.getValue(k_lbdExp197));
 					//EIle:func
 
 				}
@@ -167,18 +179,6 @@ public class HashtableImpl<K, V> extends ObjectImpl implements Hashtable<K, V> {
 		//EIft:each
 
 		return result;
-
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void put(K key, V value) {
-
-		org.kermeta.compil.runtime.helper.basetypes.MapUtil.put(this, key,
-				value);
 
 	}
 
@@ -208,10 +208,10 @@ public class HashtableImpl<K, V> extends ObjectImpl implements Hashtable<K, V> {
 		{
 
 			kermeta.standard.Iterator<K> it = this.keyIterator();
-			java.lang.Boolean idLoopCond_963 = false;
-			while (!idLoopCond_963) {
-				idLoopCond_963 = it.isOff();
-				if (idLoopCond_963) {
+			java.lang.Boolean idLoopCond_900 = false;
+			while (!idLoopCond_900) {
+				idLoopCond_900 = it.isOff();
+				if (idLoopCond_900) {
 				} else {
 
 					result.add(it.next());

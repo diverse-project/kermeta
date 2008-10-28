@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: VariableDeclImpl.java,v 1.5 2008-10-16 13:17:53 cfaucher Exp $
+ * $Id: VariableDeclImpl.java,v 1.6 2008-10-28 13:18:16 cfaucher Exp $
  */
 package kermeta.language.behavior.impl;
 
@@ -333,13 +333,13 @@ public class VariableDeclImpl extends ExpressionImpl implements VariableDecl {
 		java.lang.Boolean idIfCond_628 = false;
 		idIfCond_628 = kermeta.standard.helper.BooleanWrapper
 				.not(org.kermeta.compil.runtime.helper.language.ObjectUtil
-						.isVoid(this.getInitialization()));
+						.isVoidSwitcher(this.getInitialization()));
 
 		if (idIfCond_628) {
 
 			java.lang.Boolean idIfCond_629 = false;
 			idIfCond_629 = org.kermeta.compil.runtime.helper.language.ObjectUtil
-					.isInstanceOf(
+					.isInstanceOfSwitcher(
 							this.getInitialization(),
 							org.kermeta.compil.runtime.ExecutionContext
 									.getInstance()

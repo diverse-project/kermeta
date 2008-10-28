@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: TypeDefinitionContainerImpl.java,v 1.5 2008-10-16 13:17:40 cfaucher Exp $
+ * $Id: TypeDefinitionContainerImpl.java,v 1.6 2008-10-28 13:18:10 cfaucher Exp $
  */
 package kermeta.language.structure.impl;
 
@@ -63,7 +63,7 @@ public abstract class TypeDefinitionContainerImpl extends NamedElementImpl
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return StructurePackage.Literals.TYPE_DEFINITION_CONTAINER;
+		return StructurePackage.eINSTANCE.getTypeDefinitionContainer();
 	}
 
 	/**

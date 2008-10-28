@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: SimkAdapterFactory.java,v 1.5 2008-10-16 13:18:10 cfaucher Exp $
+ * $Id: SimkAdapterFactory.java,v 1.6 2008-10-28 13:18:25 cfaucher Exp $
  */
 package simk.util;
 
@@ -76,6 +76,11 @@ public class SimkAdapterFactory extends AdapterFactoryImpl {
 		}
 
 		@Override
+		public Adapter caseSMClass(SMClass object) {
+			return createSMClassAdapter();
+		}
+
+		@Override
 		public Adapter caseSMMethod(SMMethod object) {
 			return createSMMethodAdapter();
 		}
@@ -83,11 +88,6 @@ public class SimkAdapterFactory extends AdapterFactoryImpl {
 		@Override
 		public Adapter caseSMContext(SMContext object) {
 			return createSMContextAdapter();
-		}
-
-		@Override
-		public Adapter caseSMClass(SMClass object) {
-			return createSMClassAdapter();
 		}
 
 		@Override
@@ -149,6 +149,20 @@ public class SimkAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
+	 * Creates a new adapter for an object of class '{@link simk.SMClass <em>SM Class</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see simk.SMClass
+	 * @generated
+	 */
+	public Adapter createSMClassAdapter() {
+		return null;
+	}
+
+	/**
 	 * Creates a new adapter for an object of class '{@link simk.SMMethod <em>SM Method</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -173,20 +187,6 @@ public class SimkAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createSMContextAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link simk.SMClass <em>SM Class</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see simk.SMClass
-	 * @generated
-	 */
-	public Adapter createSMClassAdapter() {
 		return null;
 	}
 

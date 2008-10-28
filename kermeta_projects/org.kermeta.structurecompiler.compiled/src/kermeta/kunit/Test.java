@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: Test.java,v 1.5 2008-10-16 13:18:04 cfaucher Exp $
+ * $Id: Test.java,v 1.6 2008-10-28 13:18:20 cfaucher Exp $
  */
 package kermeta.kunit;
 
@@ -57,7 +57,7 @@ public interface Test extends kermeta.language.structure.Object {
 	 *        annotation="kermeta EMF_renameAs='setLogKermeta'"
 	 *        annotation="kermeta.pre paramNotVoid=''"
 	 *        annotation="kermeta.post logNotVoid=''"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='\n\tthis.setLog(log);\n'"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='\n//PreConditions Checking\n{\nif( org.kermeta.compil.runtime.ExecutionContext.getInstance().mustBeChecked( \"pre__6556591__paramNotVoid\" ) ) {\njava.lang.Boolean result_pre = false;\n\n\tresult_pre = org.kermeta.compil.runtime.helper.language.ObjectUtil.isNotEqualSwitcher(log, null);\nif( !result_pre ) {\nkermeta.exceptions.ConstraintViolatedPre exp = kermeta.exceptions.ExceptionsFactory.eINSTANCE.createConstraintViolatedPre();\nthrow new org.kermeta.compil.runtime.helper.error.KRuntimeError(exp);\n}\n}\n}\n\tthis.setLog(log);\n\n//PostConditions Checking\n{\nif( org.kermeta.compil.runtime.ExecutionContext.getInstance().mustBeChecked( \"post__6556597__logNotVoid\" ) ) {\njava.lang.Boolean result_post = false;\n\n\tresult_post = org.kermeta.compil.runtime.helper.language.ObjectUtil.isNotEqualSwitcher(this.getLog(), null);\nif( !result_post ) {\nkermeta.exceptions.ConstraintViolatedPost exp = kermeta.exceptions.ExceptionsFactory.eINSTANCE.createConstraintViolatedPost();\nthrow new org.kermeta.compil.runtime.helper.error.KRuntimeError(exp);\n}\n}\n}'"
 	 * @generated
 	 */
 	void setLogKermeta(Log log);

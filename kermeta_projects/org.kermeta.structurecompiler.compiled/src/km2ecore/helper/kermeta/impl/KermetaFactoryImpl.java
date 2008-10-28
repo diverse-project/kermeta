@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: KermetaFactoryImpl.java,v 1.5 2008-10-16 13:17:43 cfaucher Exp $
+ * $Id: KermetaFactoryImpl.java,v 1.6 2008-10-28 13:18:12 cfaucher Exp $
  */
 package km2ecore.helper.kermeta.impl;
 
@@ -62,8 +62,6 @@ public class KermetaFactoryImpl extends EFactoryImpl implements KermetaFactory {
 		switch (eClass.getClassifierID()) {
 		case KermetaPackage.COMPILER_HELPER_JAVA:
 			return createCompilerHelperJava();
-		case KermetaPackage.CONSTRAINT_HELPER:
-			return createConstraintHelper();
 		case KermetaPackage.GENERIC_TYPE_DEFINITION_HELPER:
 			return createGenericTypeDefinitionHelper();
 		default:
@@ -80,16 +78,6 @@ public class KermetaFactoryImpl extends EFactoryImpl implements KermetaFactory {
 	public CompilerHelperJava createCompilerHelperJava() {
 		CompilerHelperJavaImpl compilerHelperJava = new CompilerHelperJavaImpl();
 		return compilerHelperJava;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public ConstraintHelper createConstraintHelper() {
-		ConstraintHelperImpl constraintHelper = new ConstraintHelperImpl();
-		return constraintHelper;
 	}
 
 	/**

@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: JavaKeyWordListImpl.java,v 1.5 2008-10-16 13:18:07 cfaucher Exp $
+ * $Id: JavaKeyWordListImpl.java,v 1.6 2008-10-28 13:18:22 cfaucher Exp $
  */
 package km2ecore.common.impl;
 
@@ -165,7 +165,7 @@ public class JavaKeyWordListImpl extends ObjectImpl implements JavaKeyWordList {
 
 		result = kermeta.standard.helper.BooleanWrapper
 				.not(org.kermeta.compil.runtime.helper.language.ObjectUtil
-						.isVoid(this.getKeywords().getValue(str)));
+						.isVoidSwitcher(this.getKeywords().getValue(str)));
 
 		return result;
 

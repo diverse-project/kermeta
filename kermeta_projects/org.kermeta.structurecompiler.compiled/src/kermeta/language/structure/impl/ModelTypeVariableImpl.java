@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ModelTypeVariableImpl.java,v 1.5 2008-10-16 13:17:41 cfaucher Exp $
+ * $Id: ModelTypeVariableImpl.java,v 1.6 2008-10-28 13:18:10 cfaucher Exp $
  */
 package kermeta.language.structure.impl;
 
@@ -63,7 +63,7 @@ public class ModelTypeVariableImpl extends TypeVariableImpl implements
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return StructurePackage.Literals.MODEL_TYPE_VARIABLE;
+		return StructurePackage.eINSTANCE.getModelTypeVariable();
 	}
 
 	/**

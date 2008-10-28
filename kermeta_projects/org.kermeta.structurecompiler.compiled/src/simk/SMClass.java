@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: SMClass.java,v 1.5 2008-10-16 13:18:17 cfaucher Exp $
+ * $Id: SMClass.java,v 1.6 2008-10-28 13:18:29 cfaucher Exp $
  */
 package simk;
 

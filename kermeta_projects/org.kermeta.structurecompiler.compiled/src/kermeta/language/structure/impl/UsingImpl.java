@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: UsingImpl.java,v 1.5 2008-10-16 13:17:41 cfaucher Exp $
+ * $Id: UsingImpl.java,v 1.6 2008-10-28 13:18:10 cfaucher Exp $
  */
 package kermeta.language.structure.impl;
 
@@ -69,7 +69,7 @@ public class UsingImpl extends ObjectImpl implements Using {
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return StructurePackage.Literals.USING;
+		return StructurePackage.eINSTANCE.getUsing();
 	}
 
 	/**
@@ -116,9 +116,9 @@ public class UsingImpl extends ObjectImpl implements Using {
 		ecore.EAnnotation result = null;
 
 		ecore.EAnnotation ecoreAnnotation = ((kermeta.language.structure.ModelingUnit) org.kermeta.compil.runtime.helper.language.ObjectUtil
-				.asType(
+				.asTypeSwitcher(
 						org.kermeta.compil.runtime.helper.language.ObjectUtil
-								.container(this),
+								.containerSwitcher(this),
 						org.kermeta.compil.runtime.ExecutionContext
 								.getInstance()
 								.getMetaClass(
@@ -128,39 +128,39 @@ public class UsingImpl extends ObjectImpl implements Using {
 		ecore.EStringToStringMapEntry usingEntry = null;
 		//BIft:detect
 
-		ecore.EStringToStringMapEntry result_ft122 = null;
+		ecore.EStringToStringMapEntry result_ft101 = null;
 
-		ecore.EStringToStringMapEntry elem_ft122 = null;
+		ecore.EStringToStringMapEntry elem_ft101 = null;
 
-		result_ft122 = null;
+		result_ft101 = null;
 
 		{
 
-			kermeta.standard.Iterator<ecore.EStringToStringMapEntry> it_ft122 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
+			kermeta.standard.Iterator<ecore.EStringToStringMapEntry> it_ft101 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
 					.<ecore.EStringToStringMapEntry> convertAsOrderedSet(
 							ecoreAnnotation.getDetails()).iterator();
-			java.lang.Boolean idLoopCond_390 = false;
-			while (!idLoopCond_390) {
-				idLoopCond_390 = kermeta.standard.helper.BooleanWrapper.or(
-						it_ft122.isOff(),
+			java.lang.Boolean idLoopCond_245 = false;
+			while (!idLoopCond_245) {
+				idLoopCond_245 = kermeta.standard.helper.BooleanWrapper.or(
+						it_ft101.isOff(),
 						org.kermeta.compil.runtime.helper.language.ObjectUtil
-								.isNotEqual(result_ft122, null));
-				if (idLoopCond_390) {
+								.isNotEqualSwitcher(result_ft101, null));
+				if (idLoopCond_245) {
 				} else {
 
-					elem_ft122 = it_ft122.next();
+					elem_ft101 = it_ft101.next();
 
-					java.lang.Boolean idIfCond_391 = false;
+					java.lang.Boolean idIfCond_246 = false;
 					//BIle:detector
-					ecore.EStringToStringMapEntry d_lbdExp122 = elem_ft122;
+					ecore.EStringToStringMapEntry d_lbdExp101 = elem_ft101;
 
-					idIfCond_391 = kermeta.standard.helper.StringWrapper
-							.equals(d_lbdExp122.getKey(), "using");
+					idIfCond_246 = kermeta.standard.helper.StringWrapper
+							.equals(d_lbdExp101.getKey(), "using");
 					//EIle:detector
 
-					if (idIfCond_391) {
+					if (idIfCond_246) {
 
-						result_ft122 = elem_ft122;
+						result_ft101 = elem_ft101;
 					}
 
 				}
@@ -168,7 +168,7 @@ public class UsingImpl extends ObjectImpl implements Using {
 		}
 
 		//CE
-		usingEntry = result_ft122;
+		usingEntry = result_ft101;
 		//EIft:detect
 
 		usingEntry.setValue(kermeta.standard.helper.StringWrapper.plus(

@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: UtilsFactoryImpl.java,v 1.5 2008-10-16 13:17:46 cfaucher Exp $
+ * $Id: UtilsFactoryImpl.java,v 1.6 2008-10-28 13:18:13 cfaucher Exp $
  */
 package kermeta.utils.impl;
 
@@ -64,12 +64,12 @@ public class UtilsFactoryImpl extends EFactoryImpl implements UtilsFactory {
 	@Override
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
+		case UtilsPackage.STACK:
+			return createStack();
 		case UtilsPackage.HASHTABLE:
 			return createHashtable();
 		case UtilsPackage.STRING_BUFFER:
 			return createStringBuffer();
-		case UtilsPackage.STACK:
-			return createStack();
 		default:
 			throw new IllegalArgumentException("The class '" + eClass.getName()
 					+ "' is not a valid classifier");
@@ -121,6 +121,16 @@ public class UtilsFactoryImpl extends EFactoryImpl implements UtilsFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public <G> Stack<G> createStack() {
+		StackImpl<G> stack = new StackImpl<G>();
+		return stack;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public <K, V> Hashtable<K, V> createHashtable() {
 		HashtableImpl<K, V> hashtable = new HashtableImpl<K, V>();
 		return hashtable;
@@ -134,16 +144,6 @@ public class UtilsFactoryImpl extends EFactoryImpl implements UtilsFactory {
 	public kermeta.utils.StringBuffer createStringBuffer() {
 		StringBufferImpl stringBuffer = new StringBufferImpl();
 		return stringBuffer;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public <G> Stack<G> createStack() {
-		StackImpl<G> stack = new StackImpl<G>();
-		return stack;
 	}
 
 	/**

@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: SelfExpression.java,v 1.5 2008-10-16 13:17:26 cfaucher Exp $
+ * $Id: SelfExpression.java,v 1.6 2008-10-28 13:18:08 cfaucher Exp $
  */
 package kermeta.language.behavior;
 
@@ -15,8 +15,8 @@ import km2ecore.KM2EcoreContext;
  *
  *
  * @see kermeta.language.behavior.BehaviorPackage#getSelfExpression()
- * @model annotation="kermeta documentation='/** Complete \052/'"
- *        annotation="kermeta documentation='Refers to <code>self</code> use'"
+ * @model annotation="kermeta documentation='Refers to <code>self</code> use'"
+ *        annotation="kermeta documentation='/** Complete \052/'"
  * @generated
  */
 public interface SelfExpression extends Expression {
@@ -25,7 +25,7 @@ public interface SelfExpression extends Expression {
 	 * <!-- end-user-doc -->
 	 * @model dataType="kermeta.standard.JavaString"
 	 *        annotation="kermeta superOperation='kermeta::language::behavior::Expression'"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='\njava.lang.String result = null;\n\n\tsuper.createBehaviorJava(context);\n\n\tresult = \"this\";\n\n\tjava.lang.Boolean idIfCond_643 = false;\n\tidIfCond_643 = kermeta.standard.helper.BooleanWrapper.or(kermeta.standard.helper.BooleanWrapper.not(org.kermeta.compil.runtime.helper.language.ObjectUtil.isVoid(context.getCurrent_valueType())), context.getStaticOperationMode());\n\n\tif( idIfCond_643 ) {\n\n\tresult = \"self\";\n}\n\n\n\tjava.lang.Boolean idIfCond_644 = false;\n\tidIfCond_644 = context.getFtSuffixActivation();\n\n\tif( idIfCond_644 ) {\n\n\tresult = context.getFtContextualSelf();\n}\n\n\n\tresult = kermeta.standard.helper.StringWrapper.plus(result, this.endOfExpressionFixer());\n\nreturn result;\n'"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='\njava.lang.String result = null;\n\n\tsuper.createBehaviorJava(context);\n\n\tresult = \"this\";\n\n\tjava.lang.Boolean idIfCond_626 = false;\n\tidIfCond_626 = kermeta.standard.helper.BooleanWrapper.or(kermeta.standard.helper.BooleanWrapper.not(org.kermeta.compil.runtime.helper.language.ObjectUtil.isVoidSwitcher(context.getCurrent_valueType())), context.getStaticOperationMode());\n\n\tif( idIfCond_626 ) {\n\n\tresult = \"self\";\n}\n\n\n\tjava.lang.Boolean idIfCond_627 = false;\n\tidIfCond_627 = context.getFtSuffixActivation();\n\n\tif( idIfCond_627 ) {\n\n\tresult = context.getFtContextualSelf();\n}\n\n\n\tresult = kermeta.standard.helper.StringWrapper.plus(result, this.endOfExpressionFixer());\n\nreturn result;\n'"
 	 * @generated
 	 */
 	String createBehaviorJava(KM2EcoreContext context);

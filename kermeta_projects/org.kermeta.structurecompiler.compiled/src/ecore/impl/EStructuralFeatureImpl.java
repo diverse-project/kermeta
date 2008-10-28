@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: EStructuralFeatureImpl.java,v 1.6 2008-10-16 13:17:42 cfaucher Exp $
+ * $Id: EStructuralFeatureImpl.java,v 1.7 2008-10-28 13:18:11 cfaucher Exp $
  */
 package ecore.impl;
 
@@ -24,10 +24,10 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link ecore.impl.EStructuralFeatureImpl#isVolatile <em>Volatile</em>}</li>
- *   <li>{@link ecore.impl.EStructuralFeatureImpl#getEContainingClass <em>EContaining Class</em>}</li>
+ *   <li>{@link ecore.impl.EStructuralFeatureImpl#is_volatile <em>volatile</em>}</li>
  *   <li>{@link ecore.impl.EStructuralFeatureImpl#getDefaultValueLiteral <em>Default Value Literal</em>}</li>
- *   <li>{@link ecore.impl.EStructuralFeatureImpl#isTransient <em>Transient</em>}</li>
+ *   <li>{@link ecore.impl.EStructuralFeatureImpl#getEContainingClass <em>EContaining Class</em>}</li>
+ *   <li>{@link ecore.impl.EStructuralFeatureImpl#is_transient <em>transient</em>}</li>
  *   <li>{@link ecore.impl.EStructuralFeatureImpl#isUnsettable <em>Unsettable</em>}</li>
  *   <li>{@link ecore.impl.EStructuralFeatureImpl#isDerived <em>Derived</em>}</li>
  *   <li>{@link ecore.impl.EStructuralFeatureImpl#isChangeable <em>Changeable</em>}</li>
@@ -39,24 +39,24 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 public abstract class EStructuralFeatureImpl extends ETypedElementImpl
 		implements EStructuralFeature {
 	/**
-	 * The default value of the '{@link #isVolatile() <em>Volatile</em>}' attribute.
+	 * The default value of the '{@link #is_volatile() <em>volatile</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #isVolatile()
+	 * @see #is_volatile()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final boolean VOLATILE_EDEFAULT = false;
+	protected static final boolean _VOLATILE_EDEFAULT = false;
 
 	/**
-	 * The cached value of the '{@link #isVolatile() <em>Volatile</em>}' attribute.
+	 * The cached value of the '{@link #is_volatile() <em>volatile</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #isVolatile()
+	 * @see #is_volatile()
 	 * @generated
 	 * @ordered
 	 */
-	protected boolean volatile_ = VOLATILE_EDEFAULT;
+	protected boolean _volatile = _VOLATILE_EDEFAULT;
 
 	/**
 	 * The default value of the '{@link #getDefaultValueLiteral() <em>Default Value Literal</em>}' attribute.
@@ -79,24 +79,24 @@ public abstract class EStructuralFeatureImpl extends ETypedElementImpl
 	protected String defaultValueLiteral = DEFAULT_VALUE_LITERAL_EDEFAULT;
 
 	/**
-	 * The default value of the '{@link #isTransient() <em>Transient</em>}' attribute.
+	 * The default value of the '{@link #is_transient() <em>transient</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #isTransient()
+	 * @see #is_transient()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final boolean TRANSIENT_EDEFAULT = false;
+	protected static final boolean _TRANSIENT_EDEFAULT = false;
 
 	/**
-	 * The cached value of the '{@link #isTransient() <em>Transient</em>}' attribute.
+	 * The cached value of the '{@link #is_transient() <em>transient</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #isTransient()
+	 * @see #is_transient()
 	 * @generated
 	 * @ordered
 	 */
-	protected boolean transient_ = TRANSIENT_EDEFAULT;
+	protected boolean _transient = _TRANSIENT_EDEFAULT;
 
 	/**
 	 * The default value of the '{@link #isUnsettable() <em>Unsettable</em>}' attribute.
@@ -182,8 +182,8 @@ public abstract class EStructuralFeatureImpl extends ETypedElementImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean isVolatile() {
-		return volatile_;
+	public boolean is_volatile() {
+		return _volatile;
 	}
 
 	/**
@@ -191,35 +191,13 @@ public abstract class EStructuralFeatureImpl extends ETypedElementImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setVolatile(boolean newVolatile) {
-		boolean oldVolatile = volatile_;
-		volatile_ = newVolatile;
+	public void set_volatile(boolean new_volatile) {
+		boolean old_volatile = _volatile;
+		_volatile = new_volatile;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET,
-					EcorePackage.ESTRUCTURAL_FEATURE__VOLATILE, oldVolatile,
-					volatile_));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public ecore.EClass getEContainingClass() {
-		if (eContainerFeatureID != EcorePackage.ESTRUCTURAL_FEATURE__ECONTAINING_CLASS)
-			return null;
-		return (ecore.EClass) eContainer();
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public ecore.EClass basicGetEContainingClass() {
-		if (eContainerFeatureID != EcorePackage.ESTRUCTURAL_FEATURE__ECONTAINING_CLASS)
-			return null;
-		return (ecore.EClass) eInternalContainer();
+					EcorePackage.ESTRUCTURAL_FEATURE__VOLATILE, old_volatile,
+					_volatile));
 	}
 
 	/**
@@ -250,8 +228,10 @@ public abstract class EStructuralFeatureImpl extends ETypedElementImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean isTransient() {
-		return transient_;
+	public ecore.EClass getEContainingClass() {
+		if (eContainerFeatureID != EcorePackage.ESTRUCTURAL_FEATURE__ECONTAINING_CLASS)
+			return null;
+		return (ecore.EClass) eContainer();
 	}
 
 	/**
@@ -259,13 +239,33 @@ public abstract class EStructuralFeatureImpl extends ETypedElementImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setTransient(boolean newTransient) {
-		boolean oldTransient = transient_;
-		transient_ = newTransient;
+	public ecore.EClass basicGetEContainingClass() {
+		if (eContainerFeatureID != EcorePackage.ESTRUCTURAL_FEATURE__ECONTAINING_CLASS)
+			return null;
+		return (ecore.EClass) eInternalContainer();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean is_transient() {
+		return _transient;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void set_transient(boolean new_transient) {
+		boolean old_transient = _transient;
+		_transient = new_transient;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET,
-					EcorePackage.ESTRUCTURAL_FEATURE__TRANSIENT, oldTransient,
-					transient_));
+					EcorePackage.ESTRUCTURAL_FEATURE__TRANSIENT, old_transient,
+					_transient));
 	}
 
 	/**
@@ -434,15 +434,15 @@ public abstract class EStructuralFeatureImpl extends ETypedElementImpl
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 		case EcorePackage.ESTRUCTURAL_FEATURE__VOLATILE:
-			return isVolatile() ? Boolean.TRUE : Boolean.FALSE;
+			return is_volatile() ? Boolean.TRUE : Boolean.FALSE;
+		case EcorePackage.ESTRUCTURAL_FEATURE__DEFAULT_VALUE_LITERAL:
+			return getDefaultValueLiteral();
 		case EcorePackage.ESTRUCTURAL_FEATURE__ECONTAINING_CLASS:
 			if (resolve)
 				return getEContainingClass();
 			return basicGetEContainingClass();
-		case EcorePackage.ESTRUCTURAL_FEATURE__DEFAULT_VALUE_LITERAL:
-			return getDefaultValueLiteral();
 		case EcorePackage.ESTRUCTURAL_FEATURE__TRANSIENT:
-			return isTransient() ? Boolean.TRUE : Boolean.FALSE;
+			return is_transient() ? Boolean.TRUE : Boolean.FALSE;
 		case EcorePackage.ESTRUCTURAL_FEATURE__UNSETTABLE:
 			return isUnsettable() ? Boolean.TRUE : Boolean.FALSE;
 		case EcorePackage.ESTRUCTURAL_FEATURE__DERIVED:
@@ -462,13 +462,13 @@ public abstract class EStructuralFeatureImpl extends ETypedElementImpl
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 		case EcorePackage.ESTRUCTURAL_FEATURE__VOLATILE:
-			setVolatile(((Boolean) newValue).booleanValue());
+			set_volatile(((Boolean) newValue).booleanValue());
 			return;
 		case EcorePackage.ESTRUCTURAL_FEATURE__DEFAULT_VALUE_LITERAL:
 			setDefaultValueLiteral((String) newValue);
 			return;
 		case EcorePackage.ESTRUCTURAL_FEATURE__TRANSIENT:
-			setTransient(((Boolean) newValue).booleanValue());
+			set_transient(((Boolean) newValue).booleanValue());
 			return;
 		case EcorePackage.ESTRUCTURAL_FEATURE__UNSETTABLE:
 			setUnsettable(((Boolean) newValue).booleanValue());
@@ -492,13 +492,13 @@ public abstract class EStructuralFeatureImpl extends ETypedElementImpl
 	public void eUnset(int featureID) {
 		switch (featureID) {
 		case EcorePackage.ESTRUCTURAL_FEATURE__VOLATILE:
-			setVolatile(VOLATILE_EDEFAULT);
+			set_volatile(_VOLATILE_EDEFAULT);
 			return;
 		case EcorePackage.ESTRUCTURAL_FEATURE__DEFAULT_VALUE_LITERAL:
 			setDefaultValueLiteral(DEFAULT_VALUE_LITERAL_EDEFAULT);
 			return;
 		case EcorePackage.ESTRUCTURAL_FEATURE__TRANSIENT:
-			setTransient(TRANSIENT_EDEFAULT);
+			set_transient(_TRANSIENT_EDEFAULT);
 			return;
 		case EcorePackage.ESTRUCTURAL_FEATURE__UNSETTABLE:
 			setUnsettable(UNSETTABLE_EDEFAULT);
@@ -522,15 +522,15 @@ public abstract class EStructuralFeatureImpl extends ETypedElementImpl
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
 		case EcorePackage.ESTRUCTURAL_FEATURE__VOLATILE:
-			return volatile_ != VOLATILE_EDEFAULT;
-		case EcorePackage.ESTRUCTURAL_FEATURE__ECONTAINING_CLASS:
-			return basicGetEContainingClass() != null;
+			return _volatile != _VOLATILE_EDEFAULT;
 		case EcorePackage.ESTRUCTURAL_FEATURE__DEFAULT_VALUE_LITERAL:
 			return DEFAULT_VALUE_LITERAL_EDEFAULT == null ? defaultValueLiteral != null
 					: !DEFAULT_VALUE_LITERAL_EDEFAULT
 							.equals(defaultValueLiteral);
+		case EcorePackage.ESTRUCTURAL_FEATURE__ECONTAINING_CLASS:
+			return basicGetEContainingClass() != null;
 		case EcorePackage.ESTRUCTURAL_FEATURE__TRANSIENT:
-			return transient_ != TRANSIENT_EDEFAULT;
+			return _transient != _TRANSIENT_EDEFAULT;
 		case EcorePackage.ESTRUCTURAL_FEATURE__UNSETTABLE:
 			return unsettable != UNSETTABLE_EDEFAULT;
 		case EcorePackage.ESTRUCTURAL_FEATURE__DERIVED:
@@ -552,12 +552,12 @@ public abstract class EStructuralFeatureImpl extends ETypedElementImpl
 			return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (volatile: ");
-		result.append(volatile_);
+		result.append(" (_volatile: ");
+		result.append(_volatile);
 		result.append(", defaultValueLiteral: ");
 		result.append(defaultValueLiteral);
-		result.append(", transient: ");
-		result.append(transient_);
+		result.append(", _transient: ");
+		result.append(_transient);
 		result.append(", unsettable: ");
 		result.append(unsettable);
 		result.append(", derived: ");

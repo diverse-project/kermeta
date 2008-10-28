@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: KunitAdapterFactory.java,v 1.5 2008-10-16 13:18:04 cfaucher Exp $
+ * $Id: KunitAdapterFactory.java,v 1.6 2008-10-28 13:18:20 cfaucher Exp $
  */
 package kermeta.kunit.util;
 
@@ -83,21 +83,6 @@ public class KunitAdapterFactory extends AdapterFactoryImpl {
 	 */
 	protected KunitSwitch<Adapter> modelSwitch = new KunitSwitch<Adapter>() {
 		@Override
-		public Adapter caseAbstractFallible(AbstractFallible object) {
-			return createAbstractFallibleAdapter();
-		}
-
-		@Override
-		public Adapter caseAssertionFailedError(AssertionFailedError object) {
-			return createAssertionFailedErrorAdapter();
-		}
-
-		@Override
-		public Adapter caseAssert(Assert object) {
-			return createAssertAdapter();
-		}
-
-		@Override
 		public Adapter caseInvalidTestCaseNameException(
 				InvalidTestCaseNameException object) {
 			return createInvalidTestCaseNameExceptionAdapter();
@@ -150,6 +135,21 @@ public class KunitAdapterFactory extends AdapterFactoryImpl {
 		}
 
 		@Override
+		public Adapter caseAbstractFallible(AbstractFallible object) {
+			return createAbstractFallibleAdapter();
+		}
+
+		@Override
+		public Adapter caseAssertionFailedError(AssertionFailedError object) {
+			return createAssertionFailedErrorAdapter();
+		}
+
+		@Override
+		public Adapter caseAssert(Assert object) {
+			return createAssertAdapter();
+		}
+
+		@Override
 		public Adapter caseObject(kermeta.language.structure.Object object) {
 			return createObjectAdapter();
 		}
@@ -176,48 +176,6 @@ public class KunitAdapterFactory extends AdapterFactoryImpl {
 	@Override
 	public Adapter createAdapter(Notifier target) {
 		return modelSwitch.doSwitch((EObject) target);
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link kermeta.kunit.AbstractFallible <em>Abstract Fallible</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see kermeta.kunit.AbstractFallible
-	 * @generated
-	 */
-	public Adapter createAbstractFallibleAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link kermeta.kunit.AssertionFailedError <em>Assertion Failed Error</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see kermeta.kunit.AssertionFailedError
-	 * @generated
-	 */
-	public Adapter createAssertionFailedErrorAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link kermeta.kunit.Assert <em>Assert</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see kermeta.kunit.Assert
-	 * @generated
-	 */
-	public Adapter createAssertAdapter() {
-		return null;
 	}
 
 	/**
@@ -357,6 +315,48 @@ public class KunitAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createTestRunnerAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link kermeta.kunit.AbstractFallible <em>Abstract Fallible</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see kermeta.kunit.AbstractFallible
+	 * @generated
+	 */
+	public Adapter createAbstractFallibleAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link kermeta.kunit.AssertionFailedError <em>Assertion Failed Error</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see kermeta.kunit.AssertionFailedError
+	 * @generated
+	 */
+	public Adapter createAssertionFailedErrorAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link kermeta.kunit.Assert <em>Assert</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see kermeta.kunit.Assert
+	 * @generated
+	 */
+	public Adapter createAssertAdapter() {
 		return null;
 	}
 

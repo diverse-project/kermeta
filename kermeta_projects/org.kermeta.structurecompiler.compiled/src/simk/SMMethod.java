@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: SMMethod.java,v 1.2 2008-10-16 13:18:16 cfaucher Exp $
+ * $Id: SMMethod.java,v 1.3 2008-10-28 13:18:29 cfaucher Exp $
  */
 package simk;
 
@@ -20,10 +20,10 @@ import org.eclipse.emf.common.util.EList;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link simk.SMMethod#isAbstract <em>Abstract</em>}</li>
+ *   <li>{@link simk.SMMethod#is_abstract <em>abstract</em>}</li>
  *   <li>{@link simk.SMMethod#getBody <em>Body</em>}</li>
  *   <li>{@link simk.SMMethod#getParentEReference <em>Parent EReference</em>}</li>
- *   <li>{@link simk.SMMethod#isStatic <em>Static</em>}</li>
+ *   <li>{@link simk.SMMethod#is_static <em>static</em>}</li>
  *   <li>{@link simk.SMMethod#getTypeParameters <em>Type Parameters</em>}</li>
  *   <li>{@link simk.SMMethod#getParentEOperation <em>Parent EOperation</em>}</li>
  *   <li>{@link simk.SMMethod#getParentEAttribute <em>Parent EAttribute</em>}</li>
@@ -41,31 +41,31 @@ import org.eclipse.emf.common.util.EList;
  */
 public interface SMMethod extends SMNamedElement {
 	/**
-	 * Returns the value of the '<em><b>Abstract</b></em>' attribute.
+	 * Returns the value of the '<em><b>abstract</b></em>' attribute.
 	 * The default value is <code>"false"</code>.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Abstract</em>' attribute isn't clear,
+	 * If the meaning of the '<em>abstract</em>' attribute isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Abstract</em>' attribute.
-	 * @see #setAbstract(boolean)
-	 * @see simk.SimkPackage#getSMMethod_Abstract()
+	 * @return the value of the '<em>abstract</em>' attribute.
+	 * @see #set_abstract(boolean)
+	 * @see simk.SimkPackage#getSMMethod__abstract()
 	 * @model default="false" dataType="ecore.EBoolean"
 	 * @generated
 	 */
-	boolean isAbstract();
+	boolean is_abstract();
 
 	/**
-	 * Sets the value of the '{@link simk.SMMethod#isAbstract <em>Abstract</em>}' attribute.
+	 * Sets the value of the '{@link simk.SMMethod#is_abstract <em>abstract</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Abstract</em>' attribute.
-	 * @see #isAbstract()
+	 * @param value the new value of the '<em>abstract</em>' attribute.
+	 * @see #is_abstract()
 	 * @generated
 	 */
-	void setAbstract(boolean value);
+	void set_abstract(boolean value);
 
 	/**
 	 * Returns the value of the '<em><b>Body</b></em>' attribute.
@@ -120,31 +120,31 @@ public interface SMMethod extends SMNamedElement {
 	void setParentEReference(EReference value);
 
 	/**
-	 * Returns the value of the '<em><b>Static</b></em>' attribute.
+	 * Returns the value of the '<em><b>static</b></em>' attribute.
 	 * The default value is <code>"true"</code>.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Static</em>' attribute isn't clear,
+	 * If the meaning of the '<em>static</em>' attribute isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Static</em>' attribute.
-	 * @see #setStatic(boolean)
-	 * @see simk.SimkPackage#getSMMethod_Static()
+	 * @return the value of the '<em>static</em>' attribute.
+	 * @see #set_static(boolean)
+	 * @see simk.SimkPackage#getSMMethod__static()
 	 * @model default="true" dataType="ecore.EBoolean"
 	 * @generated
 	 */
-	boolean isStatic();
+	boolean is_static();
 
 	/**
-	 * Sets the value of the '{@link simk.SMMethod#isStatic <em>Static</em>}' attribute.
+	 * Sets the value of the '{@link simk.SMMethod#is_static <em>static</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Static</em>' attribute.
-	 * @see #isStatic()
+	 * @param value the new value of the '<em>static</em>' attribute.
+	 * @see #is_static()
 	 * @generated
 	 */
-	void setStatic(boolean value);
+	void set_static(boolean value);
 
 	/**
 	 * Returns the value of the '<em><b>Type Parameters</b></em>' attribute.

@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: FailureImpl.java,v 1.5 2008-10-16 13:17:31 cfaucher Exp $
+ * $Id: FailureImpl.java,v 1.6 2008-10-28 13:18:09 cfaucher Exp $
  */
 package kermeta.kunit.impl;
 
@@ -157,8 +157,8 @@ public class FailureImpl extends ObjectImpl implements Failure {
 		result = kermeta.standard.helper.StringWrapper.plus(
 				kermeta.standard.helper.StringWrapper.plus(
 						org.kermeta.compil.runtime.helper.language.ObjectUtil
-								.toString(this.getFailure()), " "), this
-						.getMessage());
+								.toStringSwitcher(this.getFailure()), " "),
+				this.getMessage());
 
 		return result;
 

@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: EOperationImpl.java,v 1.6 2008-10-16 13:17:43 cfaucher Exp $
+ * $Id: EOperationImpl.java,v 1.7 2008-10-28 13:18:11 cfaucher Exp $
  */
 package ecore.impl;
 

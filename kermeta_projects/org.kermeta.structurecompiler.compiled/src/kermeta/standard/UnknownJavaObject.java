@@ -2,9 +2,11 @@
  * <copyright>
  * </copyright>
  *
- * $Id: UnknownJavaObject.java,v 1.5 2008-10-16 13:17:51 cfaucher Exp $
+ * $Id: UnknownJavaObject.java,v 1.6 2008-10-28 13:18:15 cfaucher Exp $
  */
 package kermeta.standard;
+
+import java.lang.String;
 
 /**
  * <!-- begin-user-doc -->

@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: CompilerPackage.java,v 1.5 2008-10-16 13:18:11 cfaucher Exp $
+ * $Id: CompilerPackage.java,v 1.6 2008-10-28 13:18:26 cfaucher Exp $
  */
 package kermeta.compiler;
 
@@ -74,15 +74,6 @@ public interface CompilerPackage extends EPackage {
 	int MAIN = 0;
 
 	/**
-	 * The feature id for the '<em><b>File</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int MAIN__FILE = StructurePackage.OBJECT__FILE;
-
-	/**
 	 * The feature id for the '<em><b>Tag</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -90,6 +81,15 @@ public interface CompilerPackage extends EPackage {
 	 * @ordered
 	 */
 	int MAIN__TAG = StructurePackage.OBJECT__TAG;
+
+	/**
+	 * The feature id for the '<em><b>File</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MAIN__FILE = StructurePackage.OBJECT__FILE;
 
 	/**
 	 * The feature id for the '<em><b>File Name</b></em>' attribute.

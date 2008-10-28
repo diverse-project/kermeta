@@ -2,17 +2,25 @@
  * <copyright>
  * </copyright>
  *
- * $Id: SimkPackageImpl.java,v 1.5 2008-10-16 13:17:44 cfaucher Exp $
+ * $Id: SimkPackageImpl.java,v 1.6 2008-10-28 13:18:12 cfaucher Exp $
  */
 package simk.impl;
+
+import kermeta.KermetaPackage;
 
 import kermeta.compiler.CompilerPackage;
 
 import kermeta.compiler.impl.CompilerPackageImpl;
 
+import kermeta.ecore.EcorePackage;
+
+import kermeta.ecore.impl.EcorePackageImpl;
+
 import kermeta.exceptions.ExceptionsPackage;
 
 import kermeta.exceptions.impl.ExceptionsPackageImpl;
+
+import kermeta.impl.KermetaPackageImpl;
 
 import kermeta.interpreter.InterpreterPackage;
 
@@ -60,17 +68,9 @@ import km2ecore.common.exception.impl.ExceptionPackageImpl;
 
 import km2ecore.common.impl.CommonPackageImpl;
 
-import km2ecore.helper.ecore.EcorePackage;
-
-import km2ecore.helper.ecore.impl.EcorePackageImpl;
-
 import km2ecore.helper.java.JavaPackage;
 
 import km2ecore.helper.java.impl.JavaPackageImpl;
-
-import km2ecore.helper.kermeta.KermetaPackage;
-
-import km2ecore.helper.kermeta.impl.KermetaPackageImpl;
 
 import km2ecore.impl.Km2ecorePackageImpl;
 
@@ -119,6 +119,13 @@ public class SimkPackageImpl extends EPackageImpl implements SimkPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	private EClass smClassEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	private EClass smMethodEClass = null;
 
 	/**
@@ -127,13 +134,6 @@ public class SimkPackageImpl extends EPackageImpl implements SimkPackage {
 	 * @generated
 	 */
 	private EClass smContextEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass smClassEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -239,34 +239,10 @@ public class SimkPackageImpl extends EPackageImpl implements SimkPackage {
 		isInited = true;
 
 		// Obtain or create and register interdependencies
-		Km2ecorePackageImpl theKm2ecorePackage = (Km2ecorePackageImpl) (EPackage.Registry.INSTANCE
-				.getEPackage(Km2ecorePackage.eNS_URI) instanceof Km2ecorePackageImpl ? EPackage.Registry.INSTANCE
-				.getEPackage(Km2ecorePackage.eNS_URI)
-				: Km2ecorePackage.eINSTANCE);
-		EcorePackageImpl theEcorePackage = (EcorePackageImpl) (EPackage.Registry.INSTANCE
-				.getEPackage(EcorePackage.eNS_URI) instanceof EcorePackageImpl ? EPackage.Registry.INSTANCE
-				.getEPackage(EcorePackage.eNS_URI)
-				: EcorePackage.eINSTANCE);
 		KermetaPackageImpl theKermetaPackage = (KermetaPackageImpl) (EPackage.Registry.INSTANCE
 				.getEPackage(KermetaPackage.eNS_URI) instanceof KermetaPackageImpl ? EPackage.Registry.INSTANCE
 				.getEPackage(KermetaPackage.eNS_URI)
 				: KermetaPackage.eINSTANCE);
-		JavaPackageImpl theJavaPackage = (JavaPackageImpl) (EPackage.Registry.INSTANCE
-				.getEPackage(JavaPackage.eNS_URI) instanceof JavaPackageImpl ? EPackage.Registry.INSTANCE
-				.getEPackage(JavaPackage.eNS_URI)
-				: JavaPackage.eINSTANCE);
-		CommonPackageImpl theCommonPackage = (CommonPackageImpl) (EPackage.Registry.INSTANCE
-				.getEPackage(CommonPackage.eNS_URI) instanceof CommonPackageImpl ? EPackage.Registry.INSTANCE
-				.getEPackage(CommonPackage.eNS_URI)
-				: CommonPackage.eINSTANCE);
-		ExceptionPackageImpl theExceptionPackage = (ExceptionPackageImpl) (EPackage.Registry.INSTANCE
-				.getEPackage(ExceptionPackage.eNS_URI) instanceof ExceptionPackageImpl ? EPackage.Registry.INSTANCE
-				.getEPackage(ExceptionPackage.eNS_URI)
-				: ExceptionPackage.eINSTANCE);
-		kermeta.impl.KermetaPackageImpl theKermetaPackage_1 = (kermeta.impl.KermetaPackageImpl) (EPackage.Registry.INSTANCE
-				.getEPackage(kermeta.KermetaPackage.eNS_URI) instanceof kermeta.impl.KermetaPackageImpl ? EPackage.Registry.INSTANCE
-				.getEPackage(kermeta.KermetaPackage.eNS_URI)
-				: kermeta.KermetaPackage.eINSTANCE);
 		LanguagePackageImpl theLanguagePackage = (LanguagePackageImpl) (EPackage.Registry.INSTANCE
 				.getEPackage(LanguagePackage.eNS_URI) instanceof LanguagePackageImpl ? EPackage.Registry.INSTANCE
 				.getEPackage(LanguagePackage.eNS_URI)
@@ -279,18 +255,14 @@ public class SimkPackageImpl extends EPackageImpl implements SimkPackage {
 				.getEPackage(BehaviorPackage.eNS_URI) instanceof BehaviorPackageImpl ? EPackage.Registry.INSTANCE
 				.getEPackage(BehaviorPackage.eNS_URI)
 				: BehaviorPackage.eINSTANCE);
-		CompilerPackageImpl theCompilerPackage = (CompilerPackageImpl) (EPackage.Registry.INSTANCE
-				.getEPackage(CompilerPackage.eNS_URI) instanceof CompilerPackageImpl ? EPackage.Registry.INSTANCE
-				.getEPackage(CompilerPackage.eNS_URI)
-				: CompilerPackage.eINSTANCE);
 		StandardPackageImpl theStandardPackage = (StandardPackageImpl) (EPackage.Registry.INSTANCE
 				.getEPackage(StandardPackage.eNS_URI) instanceof StandardPackageImpl ? EPackage.Registry.INSTANCE
 				.getEPackage(StandardPackage.eNS_URI)
 				: StandardPackage.eINSTANCE);
-		kermeta.ecore.impl.EcorePackageImpl theEcorePackage_1 = (kermeta.ecore.impl.EcorePackageImpl) (EPackage.Registry.INSTANCE
-				.getEPackage(kermeta.ecore.EcorePackage.eNS_URI) instanceof kermeta.ecore.impl.EcorePackageImpl ? EPackage.Registry.INSTANCE
-				.getEPackage(kermeta.ecore.EcorePackage.eNS_URI)
-				: kermeta.ecore.EcorePackage.eINSTANCE);
+		KunitPackageImpl theKunitPackage = (KunitPackageImpl) (EPackage.Registry.INSTANCE
+				.getEPackage(KunitPackage.eNS_URI) instanceof KunitPackageImpl ? EPackage.Registry.INSTANCE
+				.getEPackage(KunitPackage.eNS_URI)
+				: KunitPackage.eINSTANCE);
 		InterpreterPackageImpl theInterpreterPackage = (InterpreterPackageImpl) (EPackage.Registry.INSTANCE
 				.getEPackage(InterpreterPackage.eNS_URI) instanceof InterpreterPackageImpl ? EPackage.Registry.INSTANCE
 				.getEPackage(InterpreterPackage.eNS_URI)
@@ -303,74 +275,102 @@ public class SimkPackageImpl extends EPackageImpl implements SimkPackage {
 				.getEPackage(PersistencePackage.eNS_URI) instanceof PersistencePackageImpl ? EPackage.Registry.INSTANCE
 				.getEPackage(PersistencePackage.eNS_URI)
 				: PersistencePackage.eINSTANCE);
-		KunitPackageImpl theKunitPackage = (KunitPackageImpl) (EPackage.Registry.INSTANCE
-				.getEPackage(KunitPackage.eNS_URI) instanceof KunitPackageImpl ? EPackage.Registry.INSTANCE
-				.getEPackage(KunitPackage.eNS_URI)
-				: KunitPackage.eINSTANCE);
-		ExceptionsPackageImpl theExceptionsPackage = (ExceptionsPackageImpl) (EPackage.Registry.INSTANCE
-				.getEPackage(ExceptionsPackage.eNS_URI) instanceof ExceptionsPackageImpl ? EPackage.Registry.INSTANCE
-				.getEPackage(ExceptionsPackage.eNS_URI)
-				: ExceptionsPackage.eINSTANCE);
 		IoPackageImpl theIoPackage = (IoPackageImpl) (EPackage.Registry.INSTANCE
 				.getEPackage(IoPackage.eNS_URI) instanceof IoPackageImpl ? EPackage.Registry.INSTANCE
 				.getEPackage(IoPackage.eNS_URI)
 				: IoPackage.eINSTANCE);
-		ecore.impl.EcorePackageImpl theEcorePackage_2 = (ecore.impl.EcorePackageImpl) (EPackage.Registry.INSTANCE
-				.getEPackage(ecore.EcorePackage.eNS_URI) instanceof ecore.impl.EcorePackageImpl ? EPackage.Registry.INSTANCE
-				.getEPackage(ecore.EcorePackage.eNS_URI)
-				: ecore.EcorePackage.eINSTANCE);
+		ExceptionsPackageImpl theExceptionsPackage = (ExceptionsPackageImpl) (EPackage.Registry.INSTANCE
+				.getEPackage(ExceptionsPackage.eNS_URI) instanceof ExceptionsPackageImpl ? EPackage.Registry.INSTANCE
+				.getEPackage(ExceptionsPackage.eNS_URI)
+				: ExceptionsPackage.eINSTANCE);
+		EcorePackageImpl theEcorePackage = (EcorePackageImpl) (EPackage.Registry.INSTANCE
+				.getEPackage(EcorePackage.eNS_URI) instanceof EcorePackageImpl ? EPackage.Registry.INSTANCE
+				.getEPackage(EcorePackage.eNS_URI)
+				: EcorePackage.eINSTANCE);
+		CompilerPackageImpl theCompilerPackage = (CompilerPackageImpl) (EPackage.Registry.INSTANCE
+				.getEPackage(CompilerPackage.eNS_URI) instanceof CompilerPackageImpl ? EPackage.Registry.INSTANCE
+				.getEPackage(CompilerPackage.eNS_URI)
+				: CompilerPackage.eINSTANCE);
+		Km2ecorePackageImpl theKm2ecorePackage = (Km2ecorePackageImpl) (EPackage.Registry.INSTANCE
+				.getEPackage(Km2ecorePackage.eNS_URI) instanceof Km2ecorePackageImpl ? EPackage.Registry.INSTANCE
+				.getEPackage(Km2ecorePackage.eNS_URI)
+				: Km2ecorePackage.eINSTANCE);
+		JavaPackageImpl theJavaPackage = (JavaPackageImpl) (EPackage.Registry.INSTANCE
+				.getEPackage(JavaPackage.eNS_URI) instanceof JavaPackageImpl ? EPackage.Registry.INSTANCE
+				.getEPackage(JavaPackage.eNS_URI)
+				: JavaPackage.eINSTANCE);
+		km2ecore.helper.ecore.impl.EcorePackageImpl theEcorePackage_1 = (km2ecore.helper.ecore.impl.EcorePackageImpl) (EPackage.Registry.INSTANCE
+				.getEPackage(km2ecore.helper.ecore.EcorePackage.eNS_URI) instanceof km2ecore.helper.ecore.impl.EcorePackageImpl ? EPackage.Registry.INSTANCE
+				.getEPackage(km2ecore.helper.ecore.EcorePackage.eNS_URI)
+				: km2ecore.helper.ecore.EcorePackage.eINSTANCE);
+		km2ecore.helper.kermeta.impl.KermetaPackageImpl theKermetaPackage_1 = (km2ecore.helper.kermeta.impl.KermetaPackageImpl) (EPackage.Registry.INSTANCE
+				.getEPackage(km2ecore.helper.kermeta.KermetaPackage.eNS_URI) instanceof km2ecore.helper.kermeta.impl.KermetaPackageImpl ? EPackage.Registry.INSTANCE
+				.getEPackage(km2ecore.helper.kermeta.KermetaPackage.eNS_URI)
+				: km2ecore.helper.kermeta.KermetaPackage.eINSTANCE);
+		CommonPackageImpl theCommonPackage = (CommonPackageImpl) (EPackage.Registry.INSTANCE
+				.getEPackage(CommonPackage.eNS_URI) instanceof CommonPackageImpl ? EPackage.Registry.INSTANCE
+				.getEPackage(CommonPackage.eNS_URI)
+				: CommonPackage.eINSTANCE);
+		ExceptionPackageImpl theExceptionPackage = (ExceptionPackageImpl) (EPackage.Registry.INSTANCE
+				.getEPackage(ExceptionPackage.eNS_URI) instanceof ExceptionPackageImpl ? EPackage.Registry.INSTANCE
+				.getEPackage(ExceptionPackage.eNS_URI)
+				: ExceptionPackage.eINSTANCE);
 		TraceabilityPackageImpl theTraceabilityPackage = (TraceabilityPackageImpl) (EPackage.Registry.INSTANCE
 				.getEPackage(TraceabilityPackage.eNS_URI) instanceof TraceabilityPackageImpl ? EPackage.Registry.INSTANCE
 				.getEPackage(TraceabilityPackage.eNS_URI)
 				: TraceabilityPackage.eINSTANCE);
+		ecore.impl.EcorePackageImpl theEcorePackage_2 = (ecore.impl.EcorePackageImpl) (EPackage.Registry.INSTANCE
+				.getEPackage(ecore.EcorePackage.eNS_URI) instanceof ecore.impl.EcorePackageImpl ? EPackage.Registry.INSTANCE
+				.getEPackage(ecore.EcorePackage.eNS_URI)
+				: ecore.EcorePackage.eINSTANCE);
 
 		// Create package meta-data objects
 		theSimkPackage.createPackageContents();
-		theKm2ecorePackage.createPackageContents();
-		theEcorePackage.createPackageContents();
 		theKermetaPackage.createPackageContents();
-		theJavaPackage.createPackageContents();
-		theCommonPackage.createPackageContents();
-		theExceptionPackage.createPackageContents();
-		theKermetaPackage_1.createPackageContents();
 		theLanguagePackage.createPackageContents();
 		theStructurePackage.createPackageContents();
 		theBehaviorPackage.createPackageContents();
-		theCompilerPackage.createPackageContents();
 		theStandardPackage.createPackageContents();
-		theEcorePackage_1.createPackageContents();
+		theKunitPackage.createPackageContents();
 		theInterpreterPackage.createPackageContents();
 		theUtilsPackage.createPackageContents();
 		thePersistencePackage.createPackageContents();
-		theKunitPackage.createPackageContents();
-		theExceptionsPackage.createPackageContents();
 		theIoPackage.createPackageContents();
-		theEcorePackage_2.createPackageContents();
+		theExceptionsPackage.createPackageContents();
+		theEcorePackage.createPackageContents();
+		theCompilerPackage.createPackageContents();
+		theKm2ecorePackage.createPackageContents();
+		theJavaPackage.createPackageContents();
+		theEcorePackage_1.createPackageContents();
+		theKermetaPackage_1.createPackageContents();
+		theCommonPackage.createPackageContents();
+		theExceptionPackage.createPackageContents();
 		theTraceabilityPackage.createPackageContents();
+		theEcorePackage_2.createPackageContents();
 
 		// Initialize created meta-data
 		theSimkPackage.initializePackageContents();
-		theKm2ecorePackage.initializePackageContents();
-		theEcorePackage.initializePackageContents();
 		theKermetaPackage.initializePackageContents();
-		theJavaPackage.initializePackageContents();
-		theCommonPackage.initializePackageContents();
-		theExceptionPackage.initializePackageContents();
-		theKermetaPackage_1.initializePackageContents();
 		theLanguagePackage.initializePackageContents();
 		theStructurePackage.initializePackageContents();
 		theBehaviorPackage.initializePackageContents();
-		theCompilerPackage.initializePackageContents();
 		theStandardPackage.initializePackageContents();
-		theEcorePackage_1.initializePackageContents();
+		theKunitPackage.initializePackageContents();
 		theInterpreterPackage.initializePackageContents();
 		theUtilsPackage.initializePackageContents();
 		thePersistencePackage.initializePackageContents();
-		theKunitPackage.initializePackageContents();
-		theExceptionsPackage.initializePackageContents();
 		theIoPackage.initializePackageContents();
-		theEcorePackage_2.initializePackageContents();
+		theExceptionsPackage.initializePackageContents();
+		theEcorePackage.initializePackageContents();
+		theCompilerPackage.initializePackageContents();
+		theKm2ecorePackage.initializePackageContents();
+		theJavaPackage.initializePackageContents();
+		theEcorePackage_1.initializePackageContents();
+		theKermetaPackage_1.initializePackageContents();
+		theCommonPackage.initializePackageContents();
+		theExceptionPackage.initializePackageContents();
 		theTraceabilityPackage.initializePackageContents();
+		theEcorePackage_2.initializePackageContents();
 
 		// Mark meta-data to indicate it can't be changed
 		theSimkPackage.freeze();
@@ -410,6 +410,33 @@ public class SimkPackageImpl extends EPackageImpl implements SimkPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getSMClass() {
+		return smClassEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getSMClass_Context() {
+		return (EReference) smClassEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getSMClass_Usages() {
+		return (EAttribute) smClassEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getSMMethod() {
 		return smMethodEClass;
 	}
@@ -419,7 +446,7 @@ public class SimkPackageImpl extends EPackageImpl implements SimkPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getSMMethod_Abstract() {
+	public EAttribute getSMMethod__abstract() {
 		return (EAttribute) smMethodEClass.getEStructuralFeatures().get(0);
 	}
 
@@ -446,7 +473,7 @@ public class SimkPackageImpl extends EPackageImpl implements SimkPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getSMMethod_Static() {
+	public EAttribute getSMMethod__static() {
 		return (EAttribute) smMethodEClass.getEStructuralFeatures().get(3);
 	}
 
@@ -563,33 +590,6 @@ public class SimkPackageImpl extends EPackageImpl implements SimkPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getSMClass() {
-		return smClassEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getSMClass_Context() {
-		return (EReference) smClassEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getSMClass_Usages() {
-		return (EAttribute) smClassEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EClass getSMNamedElement() {
 		return smNamedElementEClass;
 	}
@@ -692,6 +692,10 @@ public class SimkPackageImpl extends EPackageImpl implements SimkPackage {
 		createEReference(simkModelEClass, SIMK_MODEL__SM_CONTEXTS);
 		createEReference(simkModelEClass, SIMK_MODEL__SM_METHODS);
 
+		smClassEClass = createEClass(SM_CLASS);
+		createEReference(smClassEClass, SM_CLASS__CONTEXT);
+		createEAttribute(smClassEClass, SM_CLASS__USAGES);
+
 		smMethodEClass = createEClass(SM_METHOD);
 		createEAttribute(smMethodEClass, SM_METHOD__ABSTRACT);
 		createEAttribute(smMethodEClass, SM_METHOD__BODY);
@@ -710,10 +714,6 @@ public class SimkPackageImpl extends EPackageImpl implements SimkPackage {
 		createEReference(smContextEClass, SM_CONTEXT__SM_CLASS);
 		createEReference(smContextEClass, SM_CONTEXT__SM_METHODS);
 		createEAttribute(smContextEClass, SM_CONTEXT__FINAL_PACKAGE_QNAME);
-
-		smClassEClass = createEClass(SM_CLASS);
-		createEReference(smClassEClass, SM_CLASS__CONTEXT);
-		createEAttribute(smClassEClass, SM_CLASS__USAGES);
 
 		smNamedElementEClass = createEClass(SM_NAMED_ELEMENT);
 		createEAttribute(smNamedElementEClass, SM_NAMED_ELEMENT__NAME);
@@ -770,9 +770,9 @@ public class SimkPackageImpl extends EPackageImpl implements SimkPackage {
 
 		// Add supertypes to classes
 		simkModelEClass.getESuperTypes().add(this.getSMNamedElement());
+		smClassEClass.getESuperTypes().add(this.getSMNamedElement());
 		smMethodEClass.getESuperTypes().add(this.getSMNamedElement());
 		smContextEClass.getESuperTypes().add(theStructurePackage.getObject());
-		smClassEClass.getESuperTypes().add(this.getSMNamedElement());
 		smNamedElementEClass.getESuperTypes().add(
 				theStructurePackage.getObject());
 		smParameterEClass.getESuperTypes().add(this.getSMNamedElement());
@@ -809,6 +809,14 @@ public class SimkPackageImpl extends EPackageImpl implements SimkPackage {
 				0, 1, IS_UNIQUE, IS_ORDERED);
 
 		op = addEOperation(simkModelEClass, this.getSMContext(),
+				"retrieveOrCreateContextForInvariant", 0, 1, IS_UNIQUE,
+				IS_ORDERED);
+		addEParameter(op, theStructurePackage.getConstraint(), "constraint", 0,
+				1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, theKm2ecorePackage.getKM2EcoreContext(), "context",
+				0, 1, IS_UNIQUE, IS_ORDERED);
+
+		op = addEOperation(simkModelEClass, this.getSMContext(),
 				"retrieveOrCreateContextForRunner", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, theStructurePackage.getOperation(), "op", 0, 1,
 				IS_UNIQUE, IS_ORDERED);
@@ -837,12 +845,30 @@ public class SimkPackageImpl extends EPackageImpl implements SimkPackage {
 		addEParameter(op, theKm2ecorePackage.getKM2EcoreContext(), "context",
 				0, 1, IS_UNIQUE, IS_ORDERED);
 
+		initEClass(smClassEClass, SMClass.class, "SMClass", !IS_ABSTRACT,
+				!IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getSMClass_Context(), this.getSMContext(), this
+				.getSMContext_SMClass(), "context", null, 1, 1, SMClass.class,
+				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE,
+				IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED,
+				IS_ORDERED);
+		initEAttribute(getSMClass_Usages(), this.getSMUsage(), "usages", null,
+				0, 1, SMClass.class, !IS_TRANSIENT, !IS_VOLATILE,
+				IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED,
+				IS_ORDERED);
+
+		addEOperation(smClassEClass, null, "setWrapperUsage", 0, 1, IS_UNIQUE,
+				IS_ORDERED);
+
+		addEOperation(smClassEClass, theEcorePackage_2.getEString(),
+				"getQualifiedName", 0, 1, IS_UNIQUE, IS_ORDERED);
+
 		initEClass(smMethodEClass, SMMethod.class, "SMMethod", !IS_ABSTRACT,
 				!IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getSMMethod_Abstract(), theEcorePackage_2.getEBoolean(),
-				"abstract", "false", 0, 1, SMMethod.class, !IS_TRANSIENT,
-				!IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE,
-				!IS_DERIVED, IS_ORDERED);
+		initEAttribute(getSMMethod__abstract(),
+				theEcorePackage_2.getEBoolean(), "_abstract", "false", 0, 1,
+				SMMethod.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE,
+				!IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getSMMethod_Body(), theEcorePackage_2.getEString(),
 				"body", null, 0, 1, SMMethod.class, !IS_TRANSIENT,
 				!IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE,
@@ -852,8 +878,8 @@ public class SimkPackageImpl extends EPackageImpl implements SimkPackage {
 				SMMethod.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE,
 				!IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE,
 				!IS_DERIVED, IS_ORDERED);
-		initEAttribute(getSMMethod_Static(), theEcorePackage_2.getEBoolean(),
-				"static", "true", 0, 1, SMMethod.class, !IS_TRANSIENT,
+		initEAttribute(getSMMethod__static(), theEcorePackage_2.getEBoolean(),
+				"_static", "true", 0, 1, SMMethod.class, !IS_TRANSIENT,
 				!IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE,
 				!IS_DERIVED, IS_ORDERED);
 		initEAttribute(getSMMethod_TypeParameters(), theEcorePackage_2
@@ -914,24 +940,6 @@ public class SimkPackageImpl extends EPackageImpl implements SimkPackage {
 				.getEString(), "finalPackageQName", null, 0, 1,
 				SMContext.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE,
 				!IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		initEClass(smClassEClass, SMClass.class, "SMClass", !IS_ABSTRACT,
-				!IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getSMClass_Context(), this.getSMContext(), this
-				.getSMContext_SMClass(), "context", null, 1, 1, SMClass.class,
-				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE,
-				IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED,
-				IS_ORDERED);
-		initEAttribute(getSMClass_Usages(), this.getSMUsage(), "usages", null,
-				0, 1, SMClass.class, !IS_TRANSIENT, !IS_VOLATILE,
-				IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED,
-				IS_ORDERED);
-
-		addEOperation(smClassEClass, null, "setWrapperUsage", 0, 1, IS_UNIQUE,
-				IS_ORDERED);
-
-		addEOperation(smClassEClass, theEcorePackage_2.getEString(),
-				"getQualifiedName", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(smNamedElementEClass, SMNamedElement.class,
 				"SMNamedElement", IS_ABSTRACT, !IS_INTERFACE,
@@ -1001,13 +1009,15 @@ public class SimkPackageImpl extends EPackageImpl implements SimkPackage {
 				new String[] { "documentation", "/** TODO TO COMMENT*/" });
 		addAnnotation(simkModelEClass.getEOperations().get(4), source,
 				new String[] { "documentation", "/** TODO TO COMMENT*/" });
-		addAnnotation(smMethodEClass.getEOperations().get(0), source,
+		addAnnotation(simkModelEClass.getEOperations().get(5), source,
 				new String[] { "documentation", "/** TODO TO COMMENT*/" });
-		addAnnotation(smMethodEClass.getEOperations().get(1), source,
-				new String[] { "isAbstract", "true" });
 		addAnnotation(smClassEClass.getEOperations().get(0), source,
 				new String[] { "documentation", "/** TODO TO COMMENT*/" });
 		addAnnotation(smClassEClass.getEOperations().get(1), source,
+				new String[] { "isAbstract", "true" });
+		addAnnotation(smMethodEClass.getEOperations().get(0), source,
+				new String[] { "documentation", "/** TODO TO COMMENT*/" });
+		addAnnotation(smMethodEClass.getEOperations().get(1), source,
 				new String[] { "isAbstract", "true" });
 	}
 

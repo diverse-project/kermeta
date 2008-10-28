@@ -2,9 +2,11 @@
  * <copyright>
  * </copyright>
  *
- * $Id: IteratorImpl.java,v 1.5 2008-10-16 13:18:03 cfaucher Exp $
+ * $Id: IteratorImpl.java,v 1.6 2008-10-28 13:18:17 cfaucher Exp $
  */
 package kermeta.standard.impl;
+
+import java.lang.Boolean;
 
 import kermeta.language.structure.impl.ObjectImpl;
 
@@ -164,11 +166,11 @@ public class IteratorImpl<G> extends ObjectImpl implements Iterator<G> {
 
 		G result = null;
 
-		java.lang.Boolean idIfCond_955 = false;
-		idIfCond_955 = kermeta.standard.helper.BooleanWrapper.not(this
+		java.lang.Boolean idIfCond_848 = false;
+		idIfCond_848 = kermeta.standard.helper.BooleanWrapper.not(this
 				.hasNext());
 
-		if (idIfCond_955) {
+		if (idIfCond_848) {
 
 			if (true)
 				throw new org.kermeta.compil.runtime.helper.error.KRuntimeError(

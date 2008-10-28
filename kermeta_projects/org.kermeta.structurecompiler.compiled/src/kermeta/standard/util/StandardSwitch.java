@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: StandardSwitch.java,v 1.5 2008-10-16 13:18:26 cfaucher Exp $
+ * $Id: StandardSwitch.java,v 1.6 2008-10-28 13:18:40 cfaucher Exp $
  */
 package kermeta.standard.util;
 
@@ -14,6 +14,7 @@ import kermeta.standard.Iterator;
 import kermeta.standard.NotComparableException;
 import kermeta.standard.OrderedCollection;
 import kermeta.standard.OrderedSet;
+import kermeta.standard.Real;
 import kermeta.standard.Sequence;
 import kermeta.standard.Set;
 import kermeta.standard.StandardPackage;
@@ -95,11 +96,13 @@ public class StandardSwitch<T> {
 	 */
 	protected T doSwitch(int classifierID, EObject theEObject) {
 		switch (classifierID) {
-		case StandardPackage.UNKNOWN_JAVA_OBJECT: {
-			UnknownJavaObject unknownJavaObject = (UnknownJavaObject) theEObject;
-			T result = caseUnknownJavaObject(unknownJavaObject);
+		case StandardPackage.STRING: {
+			kermeta.standard.String string = (kermeta.standard.String) theEObject;
+			T result = caseString(string);
 			if (result == null)
-				result = caseObject(unknownJavaObject);
+				result = caseValueType(string);
+			if (result == null)
+				result = caseObject(string);
 			if (result == null)
 				result = defaultCase(theEObject);
 			return result;
@@ -147,6 +150,50 @@ public class StandardSwitch<T> {
 				result = caseException(notComparableException);
 			if (result == null)
 				result = caseObject(notComparableException);
+			if (result == null)
+				result = defaultCase(theEObject);
+			return result;
+		}
+		case StandardPackage.BOOLEAN: {
+			kermeta.standard.Boolean boolean_ = (kermeta.standard.Boolean) theEObject;
+			T result = caseBoolean(boolean_);
+			if (result == null)
+				result = caseValueType(boolean_);
+			if (result == null)
+				result = caseObject(boolean_);
+			if (result == null)
+				result = defaultCase(theEObject);
+			return result;
+		}
+		case StandardPackage.INTEGER: {
+			kermeta.standard.Integer integer = (kermeta.standard.Integer) theEObject;
+			T result = caseInteger(integer);
+			if (result == null)
+				result = caseValueType(integer);
+			if (result == null)
+				result = caseObject(integer);
+			if (result == null)
+				result = defaultCase(theEObject);
+			return result;
+		}
+		case StandardPackage.REAL: {
+			Real real = (Real) theEObject;
+			T result = caseReal(real);
+			if (result == null)
+				result = caseValueType(real);
+			if (result == null)
+				result = caseObject(real);
+			if (result == null)
+				result = defaultCase(theEObject);
+			return result;
+		}
+		case StandardPackage.CHARACTER: {
+			kermeta.standard.Character character = (kermeta.standard.Character) theEObject;
+			T result = caseCharacter(character);
+			if (result == null)
+				result = caseValueType(character);
+			if (result == null)
+				result = caseObject(character);
 			if (result == null)
 				result = defaultCase(theEObject);
 			return result;
@@ -232,23 +279,32 @@ public class StandardSwitch<T> {
 				result = defaultCase(theEObject);
 			return result;
 		}
+		case StandardPackage.UNKNOWN_JAVA_OBJECT: {
+			UnknownJavaObject unknownJavaObject = (UnknownJavaObject) theEObject;
+			T result = caseUnknownJavaObject(unknownJavaObject);
+			if (result == null)
+				result = caseObject(unknownJavaObject);
+			if (result == null)
+				result = defaultCase(theEObject);
+			return result;
+		}
 		default:
 			return defaultCase(theEObject);
 		}
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Unknown Java Object</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>String</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Unknown Java Object</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>String</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseUnknownJavaObject(UnknownJavaObject object) {
+	public T caseString(kermeta.standard.String object) {
 		return null;
 	}
 
@@ -324,6 +380,66 @@ public class StandardSwitch<T> {
 	 * @generated
 	 */
 	public T caseNotComparableException(NotComparableException object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Boolean</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Boolean</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseBoolean(kermeta.standard.Boolean object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Integer</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Integer</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseInteger(kermeta.standard.Integer object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Real</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Real</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseReal(Real object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Character</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Character</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseCharacter(kermeta.standard.Character object) {
 		return null;
 	}
 
@@ -429,6 +545,21 @@ public class StandardSwitch<T> {
 	 * @generated
 	 */
 	public <G> T caseIterator(Iterator<G> object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Unknown Java Object</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Unknown Java Object</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseUnknownJavaObject(UnknownJavaObject object) {
 		return null;
 	}
 

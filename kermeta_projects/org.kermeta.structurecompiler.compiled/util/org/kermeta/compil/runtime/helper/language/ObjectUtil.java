@@ -1,9 +1,13 @@
 package org.kermeta.compil.runtime.helper.language;
 
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.List;
 
 import kermeta.exceptions.ExceptionsFactory;
+import kermeta.exceptions.TypeCastError;
 import kermeta.language.structure.Class;
 import kermeta.language.structure.ClassDefinition;
 import kermeta.language.structure.Object;
@@ -13,24 +17,35 @@ import kermeta.language.structure.Type;
 import kermeta.standard.Collection;
 import kermeta.standard.Set;
 import kermeta.standard.StandardFactory;
+import kermeta.standard.StandardPackage;
 
 import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.common.util.Enumerator;
 import org.eclipse.emf.ecore.EStructuralFeature;
+import org.kermeta.compil.runtime.ExecutionContext;
 import org.kermeta.compil.runtime.helper.basetypes.BooleanUtil;
 import org.kermeta.compil.runtime.helper.basetypes.CharacterUtil;
 import org.kermeta.compil.runtime.helper.basetypes.CollectionUtil;
 import org.kermeta.compil.runtime.helper.basetypes.IntegerUtil;
 import org.kermeta.compil.runtime.helper.basetypes.RealUtil;
 import org.kermeta.compil.runtime.helper.basetypes.StringUtil;
+import org.kermeta.compil.runtime.helper.error.KRuntimeError;
 
 public class ObjectUtil {
 
-	static public kermeta.language.structure.Object container(java.lang.Object o) {
+	public static kermeta.language.structure.Object container(java.lang.Object self) {
 		return null;
 	}
 	
-	static public kermeta.language.structure.Object container(kermeta.language.structure.Object o) {
+	public static kermeta.language.structure.Object containerSwitcher(java.lang.Object self) {
+		if(self instanceof kermeta.language.structure.Object) {
+			return ((kermeta.language.structure.Object) self).container();
+		}
+		return container(self);
+	}
+	
+	public static kermeta.language.structure.Object container(kermeta.language.structure.Object o) {
 		//FIXME return o.getContainer();
 		return (kermeta.language.structure.Object) o.eContainer();
 	}
@@ -40,8 +55,8 @@ public class ObjectUtil {
 		if ( type.equals(o.getClass().getName().replace("impl.", "").replace("Impl", "")) ) {
 			return true;
 		} else {
-			for( Class clazz : getMetaClass(o).getterSuperClass() ) {
-				if (qualifiedNameDot(clazz.getTypeDefinition()).equals(type) ) {
+			for( Type superTypes : allSuperTypes((ClassDefinition) getMetaClass(o).getTypeDefinition()) ) {
+				if (superTypes instanceof Class && qualifiedNameDot(((Class) superTypes).getTypeDefinition()).equals(type) ) {
 					return true;
 				}
 			}
@@ -54,8 +69,8 @@ public class ObjectUtil {
 		if ( type.equals(o.getClass().getName().replace("impl.", "").replace("Impl", "")) ) {
 			return true;
 		} else {
-			for( Class clazz : getMetaClass(o).getterSuperClass() ) {
-				if (qualifiedNameDot(clazz.getTypeDefinition()).equals(type) ) {
+			for( Type superTypes : allSuperTypes((ClassDefinition) getMetaClass(o).getTypeDefinition()) ) {			
+				if (superTypes instanceof Class && qualifiedNameDot(((Class) superTypes).getTypeDefinition()).equals(type) ) {
 					return true;
 				}
 			}
@@ -63,13 +78,13 @@ public class ObjectUtil {
 		return false;
 	}
 	
+	public static java.lang.Boolean isInstanceOfSwitcher(java.lang.Object self, String type) {
+		return isInstanceOf(self, type);
+	}
+	
 	public static java.lang.Boolean isInstanceOf(kermeta.language.structure.Object o, Class metaClass) {
 		
 		String metaClass_qName = qualifiedNameDot(metaClass.getTypeDefinition());
-		
-		if (o==null) {
-			System.out.println();
-		}
 		
 		if ( metaClass_qName.equals(qualifiedNameDot(getMetaClass(o).getTypeDefinition())) ) {
 			return true;
@@ -83,16 +98,47 @@ public class ObjectUtil {
 		return false;
 	}
 	
-	public static java.lang.Boolean isInstanceOf(java.lang.Object o, Type metaClass) {
+	public static java.lang.Boolean isInstanceOf(kermeta.language.structure.Object o, Type metaClass) {
 		if (metaClass instanceof ParameterizedType) {
-			return qualifiedNameDot(((ParameterizedType) metaClass).getTypeDefinition()).equals(
-					o.getClass().getName().replace("impl.", "").replace("Impl", ""));
+			
+			/*if(qualifiedNameDot(((ParameterizedType) metaClass).getTypeDefinition()).equals("kermeta.language.structure.Type")) {
+				System.out.println();
+			}*/
+			
+			return isInstanceOf(o, qualifiedNameDot(((ParameterizedType) metaClass).getTypeDefinition()));
 		}
 		return false;
 	}
 	
+	public static java.lang.Boolean isInstanceOf(java.lang.Object o, Type metaClass) {
+		if (metaClass instanceof ParameterizedType) {
+			return isInstanceOf(o, qualifiedNameDot(((ParameterizedType) metaClass).getTypeDefinition()));
+		}
+		return false;
+	}
+	
+	public static java.lang.Boolean isInstanceOfSwitcher(java.lang.Object self, Type metaClass) {
+		if( self instanceof kermeta.language.structure.Object) {
+			return isInstanceOf((kermeta.language.structure.Object) self, metaClass);
+		} else {
+			return isInstanceOf((java.lang.Object) self, metaClass);
+		}
+	}
+	
+	public static kermeta.language.structure.Object getSwitcher(java.lang.Object self, Property p) {
+		if( self instanceof kermeta.language.structure.Object ) {
+			return (( kermeta.language.structure.Object) self).get(p);
+		} else {
+			throw new org.kermeta.compil.runtime.helper.error.KRuntimeError(
+					((kermeta.exceptions.NotImplementedException) org.kermeta.compil.runtime.helper.language.ClassUtil
+							.newObject("kermeta.exceptions.NotImplementedException")));
+		}
+	}
+	
 	public static kermeta.language.structure.Object get(kermeta.language.structure.Object o, Property p) {
+		
 		EStructuralFeature feature = o.eClass().getEStructuralFeature( p.getName() );
+		
 		if ( feature.isMany() ) {
 			EList value = (EList) o.eGet(feature);
 			Collection c = null;
@@ -113,7 +159,62 @@ public class ObjectUtil {
 			return c;
 
 		}
-		return (kermeta.language.structure.Object) o.eGet(feature);
+		
+		//if( allSuperTypes((kermeta.language.structure.ClassDefinition) ObjectUtil.getMetaClass(feature).getTypeDefinition()).contains(arg0) )
+		java.lang.Object theValue = o.eGet(feature);
+		
+		if(feature instanceof org.eclipse.emf.ecore.EAttribute) {
+			if( ((org.eclipse.emf.ecore.EAttribute) feature).getEAttributeType() instanceof org.eclipse.emf.ecore.EEnum) {
+				if( theValue instanceof Enumerator ) {
+					kermeta.standard.String _String = StandardFactory.eINSTANCE.createString();
+					_String.setValue((java.lang.String) ((Enumerator) theValue).getLiteral());
+					return (kermeta.language.structure.Object) _String;
+				}
+			}
+		}
+		
+		if( theValue instanceof kermeta.language.structure.Object ) {
+			return (kermeta.language.structure.Object) o.eGet(feature);
+		} else {
+			
+			String instanceClassName = feature.getEType().getInstanceClassName();
+			if(instanceClassName.equals("hrc.kernel.Expression")) {
+				//System.out.println();
+			}
+//			System.out.println(instanceClassName);
+			kermeta.language.structure.Object value_type = null;
+			if( instanceClassName.equals("java.lang.String") || instanceClassName.equals("String") ) {
+				kermeta.standard.String _String = StandardFactory.eINSTANCE.createString();
+				_String.setValue((java.lang.String) theValue);
+				value_type = (kermeta.language.structure.Object) _String;
+			} else {
+				if( instanceClassName.equals("java.lang.Integer") || instanceClassName.equals("int") ) {
+					kermeta.standard.Integer _Integer = StandardFactory.eINSTANCE.createInteger();
+					_Integer.setValue(((java.lang.Integer) theValue).toString());
+					value_type = (kermeta.language.structure.Object) _Integer;
+				}else {
+					if( instanceClassName.equals("java.lang.Boolean") || instanceClassName.equals("boolean") ) {
+						kermeta.standard.Boolean _Boolean = StandardFactory.eINSTANCE.createBoolean();
+						_Boolean.setValue(((java.lang.Boolean) theValue).toString());
+						value_type = (kermeta.language.structure.Object) _Boolean;
+					} else {
+						if( instanceClassName.equals("java.lang.Character") || instanceClassName.equals("char") ) {
+							kermeta.standard.Character _Character = StandardFactory.eINSTANCE.createCharacter();
+							_Character.setValue(((java.lang.Character) theValue).toString());
+							value_type = (kermeta.language.structure.Object) _Character;
+						} else {
+							if( instanceClassName.equals("java.lang.Double") || instanceClassName.equals("double") ) {
+								kermeta.standard.Real _Real = StandardFactory.eINSTANCE.createReal();
+								_Real.setValue(((java.lang.Double) theValue).toString());
+								value_type = (kermeta.language.structure.Object) _Real;
+							}
+						}
+					}
+				}
+			}
+			return value_type;
+		}
+		
 	}
 	
 	static public kermeta.language.structure.Object get(java.lang.Boolean o, Property p) {
@@ -244,7 +345,7 @@ public class ObjectUtil {
 		return o.hashCode();
 	}
 	
-	static public kermeta.language.structure.Class getMetaClass(java.lang.Object self) {
+	public static kermeta.language.structure.Class getMetaClass(java.lang.Object self) {
 		
 		if( self instanceof kermeta.language.structure.Object ) {
 			return org.kermeta.compil.runtime.ExecutionContext.getInstance().getMetaClass(self.getClass().getName());
@@ -263,7 +364,12 @@ public class ObjectUtil {
 		return null;
 	}
 	
-	
+	public static kermeta.language.structure.Class getMetaClassSwitcher(java.lang.Object self) {
+		if(self instanceof kermeta.language.structure.Object) {
+			return ((kermeta.language.structure.Object) self).getMetaClass();
+		}
+		return getMetaClass(self);
+	}
 	
 	///////////Unused for the moment
 	static public kermeta.language.structure.Object convertFromJavaString(java.lang.String o) {
@@ -292,6 +398,14 @@ public class ObjectUtil {
 	///////////end of Unused for the moment
 	
 	
+	
+	public static Boolean equalsSwitcher(java.lang.Object object, java.lang.Object element) {
+		if( object instanceof kermeta.language.structure.Object && element instanceof kermeta.language.structure.Object) {
+			return object.equals(element);
+		} else {
+			return equals(object, element);
+		}
+	}
 	
 	public static Boolean equals(kermeta.language.structure.Object object, kermeta.language.structure.Object element) {
 		//if( object == null || element == null ) {
@@ -381,6 +495,14 @@ public class ObjectUtil {
 		
 	}
 	
+	public static java.lang.Boolean isNotEqualSwitcher(java.lang.Object self, java.lang.Object o) {
+		if( self instanceof kermeta.language.structure.Object && o instanceof kermeta.language.structure.Object) {
+			return ((kermeta.language.structure.Object) self).isNotEqual((kermeta.language.structure.Object)o);
+		} else {
+			return isNotEqual(self, o);
+		}
+	}
+	
 	public static java.lang.Boolean isNotEqual(kermeta.language.structure.Object self, java.lang.Object o) {
 		if(self==null || o==null) {
 			return self != o;
@@ -411,6 +533,14 @@ public class ObjectUtil {
 		return self==null;
 	}
 	
+	public static java.lang.Boolean isVoidSwitcher(java.lang.Object self) {
+		if(self instanceof kermeta.language.structure.Object) {
+			return ((kermeta.language.structure.Object) self).isVoid();
+		} else {
+			return isVoid(self);
+		}
+	}
+	
 	public static java.lang.String toString(kermeta.language.structure.Object self) {
 		if( self==null ) {
 			return "null";
@@ -420,6 +550,18 @@ public class ObjectUtil {
 	
 	public static java.lang.String toString(java.lang.Object self) {
 		return self.toString();
+	}
+	
+	public static java.lang.String toStringSwitcher(java.lang.Object self) {
+		return self.toString();
+	}
+	
+	public static java.lang.Object asTypeSwitcher(java.lang.Object self, kermeta.language.structure.Class class_) {
+		if( self instanceof kermeta.language.structure.Object) {
+			return ((kermeta.language.structure.Object) self).asType(class_);
+		} else {
+			return asType(self, class_);
+		}
 	}
 	
 	public static java.lang.Object asType(java.lang.Object self, kermeta.language.structure.Class class_) {
@@ -435,42 +577,144 @@ public class ObjectUtil {
 		if( isInstanceOf(self, class_) ) {
 			return self;
 		} else {
-			ExceptionsFactory.eINSTANCE.createTypeCastError();
-			return null;
+			TypeCastError exp = ExceptionsFactory.eINSTANCE.createTypeCastError();
+			exp.setMessage("TypeCastError on " + self.toString() + " " + class_.toString());
+			throw new KRuntimeError(exp);
 		}
 	}
 
-	public static Integer oid(kermeta.language.structure.Object object) {
-		return object.hashCode();
+	public static Integer oid(kermeta.language.structure.Object self) {
+		return self.hashCode();
 	}
 	
-	public static Integer oid(java.lang.Object object) {
-		return object.hashCode();
+	public static Integer oid(java.lang.Object self) {
+		return self.hashCode();
 	}
 	
-	public static void checkInvariants(kermeta.language.structure.Object objectImpl) {
-		// TODO Auto-generated method stub
+	public static Integer oidSwitcher(java.lang.Object self) {
+		if(self instanceof kermeta.language.structure.Object) {
+			return ((kermeta.language.structure.Object) self).oid();
+		}
+		return oid(self);
+	}
+	
+	public static void checkInvariantsSwitcher(java.lang.Object self) {
+		if(self instanceof kermeta.language.structure.Object) {
+			((kermeta.language.structure.Object) self).checkInvariants();
+		}
+	}
+	
+	public static void checkAllInvariantsSwitcher(java.lang.Object self) {
+		if(self instanceof kermeta.language.structure.Object) {
+			((kermeta.language.structure.Object) self).checkAllInvariants();
+		}
+	}
+	
+	public static void checkInvariants(kermeta.language.structure.Object self) {
+		List<String> results = new ArrayList<String>();
 		
+		ClassDefinition self_cd = (kermeta.language.structure.ClassDefinition) ObjectUtil.getMetaClass(self).getTypeDefinition();
+		// Check invariants from the real type of self
+		results = checkInvariant(self, self_cd, results);
+		
+		// Check invariants from the inherited classes
+		for( Type current_type : allSuperTypes(self_cd) ) {
+			kermeta.language.structure.ClassDefinition current_cd = null;
+			if( current_type instanceof ParameterizedType ) {
+				current_cd = (kermeta.language.structure.ClassDefinition) ((ParameterizedType) current_type).getTypeDefinition();
+			}
+			results = checkInvariant(self, current_cd, results);
+		}
+		
+		if(results.size()>0) {
+			String message = "\n";
+			for(java.lang.String str_result : results) {
+				message += str_result + "\n";
+			}
+			kermeta.exceptions.ConstraintViolatedInv exp = kermeta.exceptions.ExceptionsFactory.eINSTANCE.createConstraintViolatedInv();
+			exp.setMessage(message);
+			throw new KRuntimeError(exp);
+		}
+		
+	}
+	
+	private static List<String> checkInvariant(kermeta.language.structure.Object self, kermeta.language.structure.ClassDefinition current_cd, List<String> results) {
+		
+		String  class_name = ((kermeta.language.structure.Package) current_cd.eContainer()).qualifiedName().replace("::", ".")
+		+ ".helper."
+		+ current_cd.getName()
+		+ "Invariant";
+		
+		try {
+			java.lang.Class<?> current_class = ObjectUtil.class.getClassLoader().loadClass(class_name);
+			
+			for(Method method : current_class.getDeclaredMethods()) {
+				if(self==null) {
+					System.out.println("NULL !!!");
+				}
+				java.lang.Boolean check_result = (java.lang.Boolean) method.invoke(current_class, new Object[] {self});
+				
+				if( !check_result ) {
+					results.add("The invariant " + method.getName().replace("checkInvariant_", "") + " on " + ObjectUtil.toString(self));
+				}
+			}
+			
+		} catch (ClassNotFoundException e) {
+			return results;
+		} catch (SecurityException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IllegalArgumentException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IllegalAccessException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (InvocationTargetException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return results;
+
 	}
 	
 	public static void checkInvariants(java.lang.Object objectImpl) {
-		// TODO Auto-generated method stub
-		
+		throw new org.kermeta.compil.runtime.helper.error.KRuntimeError(
+				((kermeta.exceptions.NotImplementedException) org.kermeta.compil.runtime.helper.language.ClassUtil
+						.newObject("kermeta.exceptions.NotImplementedException")));
 	}
 
 	public static void checkAllInvariants(kermeta.language.structure.Object object) {
-		// TODO Auto-generated method stub
-		
+		throw new org.kermeta.compil.runtime.helper.error.KRuntimeError(
+				((kermeta.exceptions.NotImplementedException) org.kermeta.compil.runtime.helper.language.ClassUtil
+						.newObject("kermeta.exceptions.NotImplementedException")));
 	}
 	
 	public static void checkAllInvariants(java.lang.Object object) {
-		// TODO Auto-generated method stub
-		
+		throw new org.kermeta.compil.runtime.helper.error.KRuntimeError(
+				((kermeta.exceptions.NotImplementedException) org.kermeta.compil.runtime.helper.language.ClassUtil
+						.newObject("kermeta.exceptions.NotImplementedException")));
 	}
 	
-	public static Boolean isKindOf(Object referencedObj, Class metaClass2) {
-		// TODO Auto-generated method stub
-		return null;
+	public static java.lang.Boolean isKindOf(kermeta.language.structure.Object self, kermeta.language.structure.Class metaClass) {
+		throw new org.kermeta.compil.runtime.helper.error.KRuntimeError(
+				((kermeta.exceptions.NotImplementedException) org.kermeta.compil.runtime.helper.language.ClassUtil
+						.newObject("kermeta.exceptions.NotImplementedException")));
+	}
+	
+	public static java.lang.Boolean isKindOf(java.lang.Object self, kermeta.language.structure.Class metaClass) {
+		throw new org.kermeta.compil.runtime.helper.error.KRuntimeError(
+				((kermeta.exceptions.NotImplementedException) org.kermeta.compil.runtime.helper.language.ClassUtil
+						.newObject("kermeta.exceptions.NotImplementedException")));
+	}
+	
+	public static java.lang.Boolean isKindOfSwitcher(java.lang.Object self, kermeta.language.structure.Class metaClass) {
+		if(self instanceof kermeta.language.structure.Object) {
+			return ((kermeta.language.structure.Object) self).isKindOf(metaClass);
+		} else {
+			return isKindOf(self, metaClass);
+		}
 	}
 	
 	public static java.lang.Object containingResource(Object element) {

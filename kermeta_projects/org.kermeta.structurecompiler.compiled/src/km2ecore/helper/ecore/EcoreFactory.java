@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: EcoreFactory.java,v 1.5 2008-10-16 13:18:15 cfaucher Exp $
+ * $Id: EcoreFactory.java,v 1.6 2008-10-28 13:18:28 cfaucher Exp $
  */
 package km2ecore.helper.ecore;
 
@@ -44,15 +44,6 @@ public interface EcoreFactory extends EFactory {
 	ENamedElementHelper createENamedElementHelper();
 
 	/**
-	 * Returns a new object of class '<em>Model Element Helper</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Model Element Helper</em>'.
-	 * @generated
-	 */
-	EcoreModelElementHelper createEcoreModelElementHelper();
-
-	/**
 	 * Returns a new object of class '<em>Model Analizer</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -60,6 +51,15 @@ public interface EcoreFactory extends EFactory {
 	 * @generated
 	 */
 	ModelAnalizer createModelAnalizer();
+
+	/**
+	 * Returns a new object of class '<em>Model Element Helper</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Model Element Helper</em>'.
+	 * @generated
+	 */
+	EcoreModelElementHelper createEcoreModelElementHelper();
 
 	/**
 	 * Returns the package supported by this factory.
