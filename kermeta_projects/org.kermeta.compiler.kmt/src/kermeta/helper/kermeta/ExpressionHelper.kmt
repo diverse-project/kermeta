@@ -1,4 +1,4 @@
-/* $Id: ExpressionHelper.kmt,v 1.29 2008-10-28 13:21:45 cfaucher Exp $
+/* $Id: ExpressionHelper.kmt,v 1.30 2008-10-28 23:19:17 cfaucher Exp $
  * Creation date: Jul 25, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -546,7 +546,8 @@ aspect class CallFeature {
 
 		var callElement : String init ""
 		if self.container.isInstanceOf(VariableDecl) then
-			callElement := IdentifierHelper.new.getMangledIdentifier(self.container.asType(VariableDecl).identifier, context)
+			//stdio.writeln(self.toString + " - " + self.name + " - " + self.container.asType(VariableDecl).identifier)
+			callElement := /*"*_91_*" +*/ IdentifierHelper.new.getMangledIdentifier(self.container.asType(VariableDecl).identifier, context) /*+ "*_92_*"*/
 		else
 			if self.container.isInstanceOf(CallVariable) then
 				stdio.writeln("Please contact the development team if you have this case !")
@@ -593,6 +594,9 @@ aspect class CallFeature {
 		// at the end of the function type a binding between the variables of the calling operation
 		// and the variables of the given function type
 		if callElement != "" then
+			
+			
+			
 			//callElement
 			ft_str := ft_str + "\n//CE\n"
 			
@@ -610,6 +614,22 @@ aspect class CallFeature {
 				ft_str := ft_str + context.RETURN_EXPRESSION_TO_REPLACE + "result" + context.printFtSuffix() + ";\n"
 			end
 		end
+		
+		
+		/**********************************/
+		/**********************************/
+		/**********************************/
+		if (callElement != "") and self.container.isInstanceOf(VariableDecl) then
+			var str_binding : String init context.getResultLastStatementId().replace(" = ", "")
+			if str_binding!="" then
+				ft_str := ft_str + "\n//CEVD\n"
+				ft_str := ft_str + callElement + " = " + str_binding + ";\n"
+			end
+		end
+		/**********************************/
+		/**********************************/
+		/**********************************/
+		
 		
 		if (callElement == "") and self.container.isInstanceOf(Conditional) then
 			//if self.container.asType(Assignment).target.isInstanceOf(CallResult) then
