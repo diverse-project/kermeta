@@ -1,4 +1,4 @@
-/* $Id: StructureCompiler.kmt,v 1.72 2008-10-23 12:39:06 cfaucher Exp $
+/* $Id: StructureCompiler.kmt,v 1.73 2008-10-28 13:21:47 cfaucher Exp $
  * Creation date: January 21, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -53,6 +53,7 @@ class Main {
 		//modelInput := "platform:/resource/org.kermeta.compiler.kmt/models/exists.km"
 		//modelInput := "platform:/resource/org.kermeta.compiler.kmt/models/EcoreH.km"
 		//modelInput := "platform:/resource/org.kermeta.compiler.kmt/models/new_file.km"
+		//modelInput := "platform:/resource/org.kermeta.compiler.kmt/models/test_staticSemantic.km"
 
 		output := modelInput.replaceExtension("ecore")
 		
@@ -231,11 +232,16 @@ class Main {
     	//operations.add("loadModel")
     	
     	//operations.add("removeFromOid")
-    	operations.add("transformModel")
-    	operations.add("transformModelPattern")
-    	operations.add("visit")
-    	operations.add("main2")
-    	
+    	//operations.add("transformModel")
+    	//operations.add("transformModelPattern")
+    	//operations.add("visit")
+    	//operations.add("main2")
+    	//operations.add("testForAll_0")
+    	//operations.add("testForAll_1")
+    	//operations.add("testForAll_2")
+    	//operations.add("testForAll_3")
+    	//operations.add("testForAll_4")
+    	operations.add("testForAll__")
     	
     	main_compilingOnlyOperations(modelInput, traceInput, output, mode, operations)
     end

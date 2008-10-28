@@ -1,4 +1,4 @@
-/* $Id: Postprocess.kmt,v 1.10 2008-10-20 16:15:55 cfaucher Exp $ 
+/* $Id: Postprocess.kmt,v 1.11 2008-10-28 13:21:45 cfaucher Exp $ 
  * Creation : August 27, 2008
  * Licence  : EPL 
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -48,7 +48,7 @@ aspect class ModelingUnit {
 		if not smContext.isVoid() then
 		
 			var staticMethod : SMMethod init SMMethod.new()
-			staticMethod.name := "super_" + IdentifierHelper.new.getMangledIdentifier(op.getFinalName(), context)
+			staticMethod.name := "super_" + op.getFinalName(context)
 			staticMethod.typeParameters := "G"
 			staticMethod.body := op.createBehaviorJava(context)
 			

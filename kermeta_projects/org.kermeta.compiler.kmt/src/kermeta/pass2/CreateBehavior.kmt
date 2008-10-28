@@ -1,4 +1,4 @@
-/* $Id: CreateBehavior.kmt,v 1.86 2008-10-23 12:39:06 cfaucher Exp $
+/* $Id: CreateBehavior.kmt,v 1.87 2008-10-28 13:21:45 cfaucher Exp $
  * Creation date: January 21, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -58,7 +58,7 @@ package structure {
 					//EAnnotationHelper.new().addAnnotationPropSetter(self.ecoreModelElement, javaCode)
 					
 					var setterEOp : EOperation init EOperation.new()
-					setterEOp.name := self.printSetAccessor()
+					setterEOp.name := self.printSetAccessor(context)
 					setterEOp.ordered := self.ecoreModelElement.ordered
 					setterEOp.unique := self.ecoreModelElement.unique
 					
@@ -98,7 +98,7 @@ package structure {
 				javaCode := javaCode + self.ppReturnResult(context)
 				
 				var getterEOp : EOperation init EOperation.new()
-				getterEOp.name := self.printGetAccessor()
+				getterEOp.name := self.printGetAccessor(context)
 				getterEOp.upperBound := self.ecoreModelElement.upperBound
 				getterEOp.ordered := self.ecoreModelElement.ordered
 				getterEOp.unique := self.ecoreModelElement.unique
@@ -449,7 +449,11 @@ package behavior {
 							if Operation.new().isVoidType(stm.asType(Expression).staticType.getTypeName()) then
 								javaCode.append(context.NOT_EVALUATED_MESSAGE)
 							else
-								if self.container.container.isInstanceOf(Block) and (context.resultLastStatementStack.size()==0) then
+								if (self.container.container.isInstanceOf(Block)
+										or self.container.container.isInstanceOf(Operation)
+										or self.container.container.isInstanceOf(Property)
+										or self.container.container.isInstanceOf(Constraint))
+									and (context.resultLastStatementStack.size()==0) then
 									javaCode.append(context.NOT_EVALUATED_MESSAGE)
 								else
 									if context.getResultLastStatementType() == stm.asType(Expression).staticType.createBehaviorJava(context) then
@@ -793,11 +797,17 @@ package behavior {
 								if self.getContainerAsTypeIn(Assignment, Block).isVoid() then
 									resultPrefix := context.RETURN_EXPRESSION_TO_REPLACE_SPECIAL
 								end
+								if self.getContainerAsTypeIn(Assignment, Constraint).isVoid() then
+									resultPrefix := context.RETURN_EXPRESSION_TO_REPLACE_SPECIAL
+								end
+								if self.getContainerAsTypeIn(Assignment, Operation).isVoid() then
+									resultPrefix := context.RETURN_EXPRESSION_TO_REPLACE_SPECIAL
+								end
 								
 								if not self.isParameter() then
-									result := result + resultPrefix + context.PREVIOUS_STATEMENT_FT + context.RETURN_EXPRESSION_TO_REPLACE + self.calledFtResult
+									result := result + resultPrefix + context.PREVIOUS_STATEMENT_FT + /*"***" + self.name + "***" +*/ context.RETURN_EXPRESSION_TO_REPLACE + /*"*_55_*" +*/ self.calledFtResult /*+ "***"*/
 								else
-									result := result + resultPrefix + context.PREVIOUS_STATEMENT_FT + self.calledFtResult
+									result := result + /*"*_*_*_*" + context.getResultLastStatementId() + "*__*__*" +*/ resultPrefix + /*"*_22_*" +*/ context.PREVIOUS_STATEMENT_FT + /*"*_44_*" +*/ self.calledFtResult
 								end
 							end
 						end
@@ -835,7 +845,7 @@ package behavior {
 								cf_prop_suffix := ")"
 							end
 							
-							result := result + self.printGetAccessor() + "()" + cf_prop_suffix
+							result := result + self.printGetAccessor(context) + "()" + cf_prop_suffix
 							cf_prop_suffix := ""
 							
 						else
@@ -865,7 +875,7 @@ package behavior {
 								end
 							
 							
-								result := result + IdentifierHelper.new.getMangledIdentifier(self.staticOperation.getFinalName(), context)
+								result := result + self.staticOperation.getFinalName(context)
 								
 							else
 								//Fix the dot after the result of an FunctionType
@@ -902,7 +912,7 @@ package behavior {
 					
 						var tmp_prefix : String init ""
 						if not self.parameters.detect{ p | p.callsFunctionType() }.isVoid() then
-							tmp_prefix := context.RETURN_EXPRESSION_TO_REPLACE
+							tmp_prefix := context.RETURN_EXPRESSION_TO_REPLACE //+ "_8_"
 						end
 						
 						result := tmp_prefix + static_call + "(" + result
@@ -1119,10 +1129,10 @@ package behavior {
 			result := ""
 			
 			result := result + owningOperation.superOperation.container.asType(ClassDefinition).container.asType(Package).qualifiedName.replace("::", ".")
-						+	".helper."
-						+	owningOperation.superOperation.container.asType(ClassDefinition).name
+						+ ".helper."
+						+ owningOperation.superOperation.container.asType(ClassDefinition).name
 						+ "Super.super_"
-						+	IdentifierHelper.new.getMangledIdentifier(owningOperation.superOperation.getFinalName(), context) + "("
+						+ owningOperation.superOperation.getFinalName(context) + "("
 			
 			// The this or self parameter is added by default
 			if context.staticOperationMode then
@@ -1160,7 +1170,7 @@ package behavior {
 			if not owningOperation.isFunctionType() then
 			
 				if ModelAnalizer.new().isExtendedBy(extended_class, super_class) and (not context.staticOperationMode) then
-					result := result + "super." + owningOperation.getFinalName() + "("
+					result := result + "super." + owningOperation.getFinalName(context) + "("
 				else
 					result := result + self.getCallStaticSignature(owningOperation, context)
 				end
@@ -1285,9 +1295,9 @@ package behavior {
 					else
 						if i == (tabLeft.size()-1) then
 							if self.~value.callsFunctionType() then
-								result := right + result + self.target.asType(CallFeature).printSetAccessor() + "(" + ppCast + self.~value.asType(CallFeature).calledFtResult + ");"
+								result := right + result + self.target.asType(CallFeature).printSetAccessor(context) + "(" + ppCast + self.~value.asType(CallFeature).calledFtResult + ");"
 							else
-								result := result + self.target.asType(CallFeature).printSetAccessor() + "(" + ppCast + right + ");"
+								result := result + self.target.asType(CallFeature).printSetAccessor(context) + "(" + ppCast + right + ");"
 							end
 						end
 					end

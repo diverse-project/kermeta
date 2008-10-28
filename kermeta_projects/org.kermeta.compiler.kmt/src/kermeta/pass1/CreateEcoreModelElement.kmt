@@ -1,4 +1,4 @@
-/* $Id: CreateEcoreModelElement.kmt,v 1.41 2008-10-22 16:19:10 cfaucher Exp $
+/* $Id: CreateEcoreModelElement.kmt,v 1.42 2008-10-28 13:21:47 cfaucher Exp $
  * Creation date: February 1, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -228,7 +228,7 @@ aspect class Operation {
 	operation createEcoreModelElement(context : KM2EcoreContext) : EOperation is do
 		var ecoreOperation : EOperation init EOperation.new
 		
-		ecoreOperation.name := IdentifierHelper.new.getMangledIdentifier(self.getFinalName(), context)
+		ecoreOperation.name := self.getFinalName(context)
 		ecoreOperation.ordered := self.isOrdered
 		ecoreOperation.unique := self.isUnique
 		ecoreOperation.lowerBound := self.lower

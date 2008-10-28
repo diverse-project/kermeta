@@ -1,4 +1,4 @@
-/* $Id: ExpressionHelper.kmt,v 1.28 2008-10-22 17:08:31 cfaucher Exp $
+/* $Id: ExpressionHelper.kmt,v 1.29 2008-10-28 13:21:45 cfaucher Exp $
  * Creation date: Jul 25, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -636,12 +636,12 @@ aspect class CallFeature {
 		result := ft_str
 	end
 	
-	operation printGetAccessor() : String is do
-		result := self.staticProperty.printGetAccessor()
+	operation printGetAccessor(context : KM2EcoreContext) : String is do
+		result := self.staticProperty.printGetAccessor(context)
 	end
 	
-	operation printSetAccessor() : String is do
-		result := self.staticProperty.printSetAccessor()
+	operation printSetAccessor(context : KM2EcoreContext) : String is do
+		result := self.staticProperty.printSetAccessor(context)
 	end
 
 	/**

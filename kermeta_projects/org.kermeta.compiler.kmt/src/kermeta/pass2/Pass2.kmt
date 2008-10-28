@@ -1,4 +1,4 @@
-/* $Id: Pass2.kmt,v 1.40 2008-10-22 16:09:16 cfaucher Exp $
+/* $Id: Pass2.kmt,v 1.41 2008-10-28 13:21:45 cfaucher Exp $
  * Creation date: January 21, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -87,6 +87,10 @@ package structure {
 		
 			if not self.isAddedValueType() then
 				self.setLinks(context)
+			else
+				var cd_valueType : ClassDefinition
+				cd_valueType ?= context.mu.getTypeDefinitionByQualifiedName("kermeta::standard::ValueType")
+				self.ecoreModelElement.eSuperTypes.add(cd_valueType.ecoreModelElement)
 			end
 			
 			// Case of this ClassDefinition is a ValueType
@@ -284,7 +288,7 @@ package structure {
 						staticMethod.body := "\n" +
 							cd_qn + " anExec = (" + cd_qn + ")" +
 							 " org.kermeta.compil.runtime.helper.language.ClassUtil.newObject(\"" + cd_qn + "\");" +
-							"\nanExec." + IdentifierHelper.new.getMangledIdentifier(self.getFinalName(), context) + "("
+							"\nanExec." + self.getFinalName(context) + "("
 						
 						var i : Integer init 0
 						self.ownedParameter.each{ params |

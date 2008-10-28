@@ -1,4 +1,4 @@
-/* $Id: SIMKModelHelper.kmt,v 1.13 2008-10-20 16:15:53 cfaucher Exp $
+/* $Id: SIMKModelHelper.kmt,v 1.14 2008-10-28 13:21:46 cfaucher Exp $
  * Creation date: Jul 21, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -60,7 +60,7 @@ aspect class SIMKModel {
 		var sMContext : SMContext init retrieveOrCreateContextWithClass(context.current_valueType.name + "Wrapper", "kermeta.standard.helper", SMUsage.Wrapper, context)
 		
 		var sm : SMMethod init sMContext.sMMethods.detect{ o |
-			o.name == IdentifierHelper.new.getMangledIdentifier(op.getFinalName(), context)
+			o.name == op.getFinalName(context)
 		}
 		if sm.isVoid() then	
 			result := sMContext
@@ -78,7 +78,7 @@ aspect class SIMKModel {
 			context)
 		
 		var sm : SMMethod init sMContext.sMMethods.detect{ o |
-			o.name == ( "super_" + IdentifierHelper.new.getMangledIdentifier(op.getFinalName(), context) )
+			o.name == ( "super_" + op.getFinalName(context) )
 		}
 		if sm.isVoid() then	
 			result := sMContext
@@ -108,7 +108,7 @@ aspect class SIMKModel {
 		result := void
 		
 		var sMContext : SMContext init retrieveOrCreateContextWithClass(
-			op.container.asType(ClassDefinition).name + "__" + IdentifierHelper.new.getMangledIdentifier(op.getFinalName(), context) + "__" + "Runner",
+			op.container.asType(ClassDefinition).name + "__" + op.getFinalName(context) + "__" + "Runner",
 			op.container.asType(ClassDefinition).container.asType(Package).qualifiedName().replace(context.KERMETA_SEPARATOR, context.JAVA_SEPARATOR) + context.JAVA_SEPARATOR + "runner",
 			SMUsage.Runner,
 			context)
