@@ -1,4 +1,4 @@
-/* $Id: structure.kmt,v 1.72 2008-10-16 09:29:18 cfaucher Exp $
+/* $Id: structure.kmt,v 1.73 2008-10-28 10:49:32 cfaucher Exp $
  * Project : framework
  * File : structure.kmt
  * License : EPL
@@ -109,14 +109,25 @@ aspect class Object
 			cd ?= self.getMetaClass.typeDefinition
 			cd.allAttribute.each { prop |
 				if ( prop.isComposite and not prop.isDerived) then
-					if ( self.get(prop).getMetaClass.typeDefinition.name.equals("ReflectiveSequence") 
-						or self.get(prop).getMetaClass.typeDefinition.name.equals("ReflectiveCollection") ) then
-
-						var subObjInstances : kermeta::standard::Collection<Object>
-						subObjInstances ?= self.get(prop)
-						subObjInstances.each { aSubObjInstances | aSubObjInstances.checkAllInvariants }
-					else
-						self.get(prop).checkAllInvariants
+					if not self.get(prop).isVoid() then
+						if self.get(prop).getMetaClass.typeDefinition.asType(ClassDefinition).allSuperTypes.exists{ t |
+							if t.isInstanceOf(ParameterizedType) then
+								t.asType(ParameterizedType).typeDefinition.qualifiedName=="kermeta::standard::Collection"
+							else
+								false
+							end } then
+						
+						/*
+						if ( self.get(prop).getMetaClass.typeDefinition.name.equals("ReflectiveSequence") 
+							or self.get(prop).getMetaClass.typeDefinition.name.equals("ReflectiveCollection") ) then
+						*/
+						
+							var subObjInstances : kermeta::standard::Collection<Object>
+							subObjInstances ?= self.get(prop)
+							subObjInstances.each { aSubObjInstances | aSubObjInstances.checkAllInvariants }
+						else
+							self.get(prop).checkAllInvariants
+						end
 					end
 				end
 			}
@@ -425,6 +436,30 @@ aspect class Class
 
 aspect class ClassDefinition
 {
+	operation allSuperTypes() : Set<Type> is do
+	 
+		var allSuperClasses : Set<Type> init Set<Type>.new
+        var superClasses : Set<Type> init Set<Type>.new
+        superClasses.addAll(self.superType)
+        
+        from  not superClasses.isEmpty
+        until superClasses.isEmpty
+        loop
+            allSuperClasses.addAll(superClasses)
+            var temp : Set<Type> init Set<Type>.new
+             superClasses.each{ s |
+             	if s.isInstanceOf(ParameterizedType) then
+					if s.asType(ParameterizedType).typeDefinition.isInstanceOf(ClassDefinition) then
+                		temp.addAll(s.asType(ParameterizedType).typeDefinition.asType(ClassDefinition).superType)
+                	end
+                end
+             }
+             superClasses.clear()
+             superClasses.addAll(temp)
+        end
+        
+        result := allSuperClasses
+	end
 		
 	/**
 	 * Returns all the Attributes, References, derived Properties of this 
