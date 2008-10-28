@@ -21,6 +21,7 @@ import kermeta.standard.StandardPackage;
 
 import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.common.util.Enumerator;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.kermeta.compil.runtime.ExecutionContext;
 import org.kermeta.compil.runtime.helper.basetypes.BooleanUtil;
@@ -97,19 +98,31 @@ public class ObjectUtil {
 		return false;
 	}
 	
+	public static java.lang.Boolean isInstanceOf(kermeta.language.structure.Object o, Type metaClass) {
+		if (metaClass instanceof ParameterizedType) {
+			
+			/*if(qualifiedNameDot(((ParameterizedType) metaClass).getTypeDefinition()).equals("kermeta.language.structure.Type")) {
+				System.out.println();
+			}*/
+			
+			return isInstanceOf(o, qualifiedNameDot(((ParameterizedType) metaClass).getTypeDefinition()));
+		}
+		return false;
+	}
+	
 	public static java.lang.Boolean isInstanceOf(java.lang.Object o, Type metaClass) {
 		if (metaClass instanceof ParameterizedType) {
-			return qualifiedNameDot(((ParameterizedType) metaClass).getTypeDefinition()).equals(
-					o.getClass().getName().replace("impl.", "").replace("Impl", ""));
+			return isInstanceOf(o, qualifiedNameDot(((ParameterizedType) metaClass).getTypeDefinition()));
 		}
 		return false;
 	}
 	
 	public static java.lang.Boolean isInstanceOfSwitcher(java.lang.Object self, Type metaClass) {
-		/*if( self instanceof kermeta.language.structure.Object) {
-			return ((kermeta.language.structure.Object) self).isInstanceOf(metaClass);
-		}*/
-		return isInstanceOf(self, metaClass);
+		if( self instanceof kermeta.language.structure.Object) {
+			return isInstanceOf((kermeta.language.structure.Object) self, metaClass);
+		} else {
+			return isInstanceOf(self, metaClass);
+		}
 	}
 	
 	public static kermeta.language.structure.Object getSwitcher(java.lang.Object self, Property p) {
@@ -149,31 +162,48 @@ public class ObjectUtil {
 		
 		//if( allSuperTypes((kermeta.language.structure.ClassDefinition) ObjectUtil.getMetaClass(feature).getTypeDefinition()).contains(arg0) )
 		java.lang.Object theValue = o.eGet(feature);
+		
+		if(feature instanceof org.eclipse.emf.ecore.EAttribute) {
+			if( ((org.eclipse.emf.ecore.EAttribute) feature).getEAttributeType() instanceof org.eclipse.emf.ecore.EEnum) {
+				if( theValue instanceof Enumerator ) {
+					kermeta.standard.String _String = StandardFactory.eINSTANCE.createString();
+					_String.setValue((java.lang.String) ((Enumerator) theValue).getLiteral());
+					return (kermeta.language.structure.Object) _String;
+				}
+			}
+		}
+		
 		if( theValue instanceof kermeta.language.structure.Object ) {
 			return (kermeta.language.structure.Object) o.eGet(feature);
 		} else {
+			
+			String instanceClassName = feature.getEType().getInstanceClassName();
+			if(instanceClassName.equals("hrc.kernel.Expression")) {
+				//System.out.println();
+			}
+//			System.out.println(instanceClassName);
 			kermeta.language.structure.Object value_type = null;
-			if( theValue instanceof java.lang.String ) {
+			if( instanceClassName.equals("java.lang.String") ) {
 				kermeta.standard.String _String = StandardFactory.eINSTANCE.createString();
 				_String.setValue((java.lang.String) theValue);
 				value_type = (kermeta.language.structure.Object) _String;
 			} else {
-				if( theValue instanceof java.lang.Integer ) {
+				if( instanceClassName.equals("java.lang.Integer") ) {
 					kermeta.standard.Integer _Integer = StandardFactory.eINSTANCE.createInteger();
 					_Integer.setValue(((java.lang.Integer) theValue).toString());
 					value_type = (kermeta.language.structure.Object) _Integer;
 				}else {
-					if( theValue instanceof java.lang.Boolean ) {
+					if( instanceClassName.equals("java.lang.Boolean") ) {
 						kermeta.standard.Boolean _Boolean = StandardFactory.eINSTANCE.createBoolean();
 						_Boolean.setValue(((java.lang.Boolean) theValue).toString());
 						value_type = (kermeta.language.structure.Object) _Boolean;
 					} else {
-						if( theValue instanceof java.lang.Character ) {
+						if( instanceClassName.equals("java.lang.Character") ) {
 							kermeta.standard.Character _Character = StandardFactory.eINSTANCE.createCharacter();
 							_Character.setValue(((java.lang.Character) theValue).toString());
 							value_type = (kermeta.language.structure.Object) _Character;
 						} else {
-							if( theValue instanceof java.lang.Double ) {
+							if( instanceClassName.equals("java.lang.Double") ) {
 								kermeta.standard.Real _Real = StandardFactory.eINSTANCE.createReal();
 								_Real.setValue(((java.lang.Double) theValue).toString());
 								value_type = (kermeta.language.structure.Object) _Real;
@@ -615,10 +645,17 @@ public class ObjectUtil {
 		+ current_cd.getName()
 		+ "Invariant";
 	
+		/*if(current_cd.getName().equals("Connector")) {
+			System.out.println();
+		}*/
+		
 		try {
 			java.lang.Class<?> current_class = ObjectUtil.class.getClassLoader().loadClass(class_name);
 			
 			for(Method method : current_class.getDeclaredMethods()) {
+				if(self==null) {
+					System.out.println("NULL !!!");
+				}
 				java.lang.Boolean check_result = (java.lang.Boolean) method.invoke(current_class, new Object[] {self});
 				
 				if( !check_result ) {
