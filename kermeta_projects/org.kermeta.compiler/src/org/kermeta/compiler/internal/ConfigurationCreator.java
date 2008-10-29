@@ -1,6 +1,6 @@
 
 
-/*$Id: ConfigurationCreator.java,v 1.9 2008-10-21 12:14:56 cfaucher Exp $
+/*$Id: ConfigurationCreator.java,v 1.10 2008-10-29 13:38:31 cfaucher Exp $
 * Project : org.kermeta.compiler.ui
 * File : 	ConfigurationCreator.java
 * License : EPL
@@ -95,7 +95,12 @@ public class ConfigurationCreator {
 	
 	private String updateConfigurationInstance(GenPackage p) {
 		
-		String result = createPersistenceForAnyPackage(p);
+		String result = "";
+		
+		// Simulate the canGenerate() method from EMF, it seems this method is not applicable/consistent at this moment in the execution process
+		if( p.getEcorePackage().getEClassifiers().size()>0 ) {
+			result = createPersistenceForAnyPackage(p);
+		}
 		
 		for ( GenPackage subPackage : p.getSubGenPackages() ) {
 			result += updateConfigurationInstance(subPackage);
