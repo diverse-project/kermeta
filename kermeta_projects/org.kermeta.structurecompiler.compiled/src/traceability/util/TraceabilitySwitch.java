@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: TraceabilitySwitch.java,v 1.6 2008-10-28 13:18:30 cfaucher Exp $
+ * $Id: TraceabilitySwitch.java,v 1.7 2008-10-29 08:29:27 cfaucher Exp $
  */
 package traceability.util;
 
@@ -84,11 +84,29 @@ public class TraceabilitySwitch<T> {
 	 */
 	protected T doSwitch(int classifierID, EObject theEObject) {
 		switch (classifierID) {
+		case TraceabilityPackage.TRACEABILITY_HELPER: {
+			TraceabilityHelper traceabilityHelper = (TraceabilityHelper) theEObject;
+			T result = caseTraceabilityHelper(traceabilityHelper);
+			if (result == null)
+				result = caseObject(traceabilityHelper);
+			if (result == null)
+				result = defaultCase(theEObject);
+			return result;
+		}
 		case TraceabilityPackage.TRACE_MODEL: {
 			TraceModel traceModel = (TraceModel) theEObject;
 			T result = caseTraceModel(traceModel);
 			if (result == null)
 				result = caseObject(traceModel);
+			if (result == null)
+				result = defaultCase(theEObject);
+			return result;
+		}
+		case TraceabilityPackage.FILE: {
+			File file = (File) theEObject;
+			T result = caseFile(file);
+			if (result == null)
+				result = caseObject(file);
 			if (result == null)
 				result = defaultCase(theEObject);
 			return result;
@@ -168,27 +186,24 @@ public class TraceabilitySwitch<T> {
 				result = defaultCase(theEObject);
 			return result;
 		}
-		case TraceabilityPackage.TRACEABILITY_HELPER: {
-			TraceabilityHelper traceabilityHelper = (TraceabilityHelper) theEObject;
-			T result = caseTraceabilityHelper(traceabilityHelper);
-			if (result == null)
-				result = caseObject(traceabilityHelper);
-			if (result == null)
-				result = defaultCase(theEObject);
-			return result;
-		}
-		case TraceabilityPackage.FILE: {
-			File file = (File) theEObject;
-			T result = caseFile(file);
-			if (result == null)
-				result = caseObject(file);
-			if (result == null)
-				result = defaultCase(theEObject);
-			return result;
-		}
 		default:
 			return defaultCase(theEObject);
 		}
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Helper</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Helper</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseTraceabilityHelper(TraceabilityHelper object) {
+		return null;
 	}
 
 	/**
@@ -203,6 +218,21 @@ public class TraceabilitySwitch<T> {
 	 * @generated
 	 */
 	public T caseTraceModel(TraceModel object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>File</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>File</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseFile(File object) {
 		return null;
 	}
 
@@ -308,36 +338,6 @@ public class TraceabilitySwitch<T> {
 	 * @generated
 	 */
 	public T caseModelReference(ModelReference object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Helper</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Helper</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseTraceabilityHelper(TraceabilityHelper object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>File</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>File</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseFile(File object) {
 		return null;
 	}
 

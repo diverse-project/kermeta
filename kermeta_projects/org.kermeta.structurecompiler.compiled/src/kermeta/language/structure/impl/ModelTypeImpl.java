@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ModelTypeImpl.java,v 1.6 2008-10-28 13:18:10 cfaucher Exp $
+ * $Id: ModelTypeImpl.java,v 1.7 2008-10-29 08:29:11 cfaucher Exp $
  */
 package kermeta.language.structure.impl;
 
@@ -239,6 +239,22 @@ public class ModelTypeImpl extends TypeImpl implements ModelType {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public String getGenModelJavaQualifiedName() {
+
+		java.lang.String result = null;
+
+		result = kermeta.standard.helper.StringWrapper.replace(this
+				.getGenModelQualifiedName(), "::", ".");
+
+		return result;
+
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public String qualifiedName() {
 
 		java.lang.String result = null;
@@ -247,8 +263,8 @@ public class ModelTypeImpl extends TypeImpl implements ModelType {
 
 		result = this.getName();
 
-		java.lang.Boolean idIfCond_304 = false;
-		idIfCond_304 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+		java.lang.Boolean idIfCond_315 = false;
+		idIfCond_315 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 				.isInstanceOfSwitcher(
 						org.kermeta.compil.runtime.helper.language.ObjectUtil
 								.containerSwitcher(elem),
@@ -257,23 +273,23 @@ public class ModelTypeImpl extends TypeImpl implements ModelType {
 								.getMetaClass(
 										"kermeta.language.structure.NamedElement"));
 
-		if (idIfCond_304) {
+		if (idIfCond_315) {
 
 			elem = (kermeta.language.structure.NamedElement) org.kermeta.compil.runtime.helper.language.ObjectUtil
 					.containerSwitcher(elem);
-			java.lang.Boolean idLoopCond_305 = false;
-			while (!idLoopCond_305) {
-				idLoopCond_305 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+			java.lang.Boolean idLoopCond_316 = false;
+			while (!idLoopCond_316) {
+				idLoopCond_316 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 						.equalsSwitcher(elem, null);
-				if (idLoopCond_305) {
+				if (idLoopCond_316) {
 				} else {
 
 					result = kermeta.standard.helper.StringWrapper.plus(
 							kermeta.standard.helper.StringWrapper.plus(elem
 									.getName(), "::"), result);
 
-					java.lang.Boolean idIfCond_306 = false;
-					idIfCond_306 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+					java.lang.Boolean idIfCond_317 = false;
+					idIfCond_317 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 							.isInstanceOfSwitcher(
 									org.kermeta.compil.runtime.helper.language.ObjectUtil
 											.containerSwitcher(elem),
@@ -282,7 +298,7 @@ public class ModelTypeImpl extends TypeImpl implements ModelType {
 											.getMetaClass(
 													"kermeta.language.structure.NamedElement"));
 
-					if (idIfCond_306) {
+					if (idIfCond_317) {
 
 						elem = (kermeta.language.structure.NamedElement) org.kermeta.compil.runtime.helper.language.ObjectUtil
 								.containerSwitcher(elem);
@@ -294,22 +310,6 @@ public class ModelTypeImpl extends TypeImpl implements ModelType {
 				}
 			}
 		}
-
-		return result;
-
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public String getGenModelJavaQualifiedName() {
-
-		java.lang.String result = null;
-
-		result = kermeta.standard.helper.StringWrapper.replace(this
-				.getGenModelQualifiedName(), "::", ".");
 
 		return result;
 

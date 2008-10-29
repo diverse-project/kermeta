@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: EObject.java,v 1.5 2008-10-28 13:18:24 cfaucher Exp $
+ * $Id: EObject.java,v 1.6 2008-10-29 08:29:20 cfaucher Exp $
  */
 package ecore;
 

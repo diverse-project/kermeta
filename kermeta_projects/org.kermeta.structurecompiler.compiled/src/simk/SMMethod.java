@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: SMMethod.java,v 1.3 2008-10-28 13:18:29 cfaucher Exp $
+ * $Id: SMMethod.java,v 1.4 2008-10-29 08:29:26 cfaucher Exp $
  */
 package simk;
 
@@ -29,8 +29,8 @@ import org.eclipse.emf.common.util.EList;
  *   <li>{@link simk.SMMethod#getParentEAttribute <em>Parent EAttribute</em>}</li>
  *   <li>{@link simk.SMMethod#getSMParameters <em>SM Parameters</em>}</li>
  *   <li>{@link simk.SMMethod#getSMReturn <em>SM Return</em>}</li>
- *   <li>{@link simk.SMMethod#getSMContext <em>SM Context</em>}</li>
  *   <li>{@link simk.SMMethod#getUsages <em>Usages</em>}</li>
+ *   <li>{@link simk.SMMethod#getSMContext <em>SM Context</em>}</li>
  *   <li>{@link simk.SMMethod#getAccess <em>Access</em>}</li>
  * </ul>
  * </p>
@@ -267,34 +267,6 @@ public interface SMMethod extends SMNamedElement {
 	void setSMReturn(SMReturn value);
 
 	/**
-	 * Returns the value of the '<em><b>SM Context</b></em>' reference.
-	 * It is bidirectional and its opposite is '{@link simk.SMContext#getSMMethods <em>SM Methods</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>SM Context</em>' reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>SM Context</em>' reference.
-	 * @see #setSMContext(SMContext)
-	 * @see simk.SimkPackage#getSMMethod_SMContext()
-	 * @see simk.SMContext#getSMMethods
-	 * @model opposite="sMMethods"
-	 * @generated
-	 */
-	SMContext getSMContext();
-
-	/**
-	 * Sets the value of the '{@link simk.SMMethod#getSMContext <em>SM Context</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>SM Context</em>' reference.
-	 * @see #getSMContext()
-	 * @generated
-	 */
-	void setSMContext(SMContext value);
-
-	/**
 	 * Returns the value of the '<em><b>Usages</b></em>' attribute.
 	 * The literals are from the enumeration {@link simk.SMUsage}.
 	 * <!-- begin-user-doc -->
@@ -322,6 +294,34 @@ public interface SMMethod extends SMNamedElement {
 	 * @generated
 	 */
 	void setUsages(SMUsage value);
+
+	/**
+	 * Returns the value of the '<em><b>SM Context</b></em>' reference.
+	 * It is bidirectional and its opposite is '{@link simk.SMContext#getSMMethods <em>SM Methods</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>SM Context</em>' reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>SM Context</em>' reference.
+	 * @see #setSMContext(SMContext)
+	 * @see simk.SimkPackage#getSMMethod_SMContext()
+	 * @see simk.SMContext#getSMMethods
+	 * @model opposite="sMMethods"
+	 * @generated
+	 */
+	SMContext getSMContext();
+
+	/**
+	 * Sets the value of the '{@link simk.SMMethod#getSMContext <em>SM Context</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>SM Context</em>' reference.
+	 * @see #getSMContext()
+	 * @generated
+	 */
+	void setSMContext(SMContext value);
 
 	/**
 	 * Returns the value of the '<em><b>Access</b></em>' attribute.

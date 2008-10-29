@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: EEnumLiteral.java,v 1.7 2008-10-28 13:18:25 cfaucher Exp $
+ * $Id: EEnumLiteral.java,v 1.8 2008-10-29 08:29:20 cfaucher Exp $
  */
 package ecore;
 

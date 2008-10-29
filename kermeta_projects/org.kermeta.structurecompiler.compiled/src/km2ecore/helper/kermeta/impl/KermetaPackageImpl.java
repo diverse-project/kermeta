@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: KermetaPackageImpl.java,v 1.6 2008-10-28 13:18:12 cfaucher Exp $
+ * $Id: KermetaPackageImpl.java,v 1.7 2008-10-29 08:29:12 cfaucher Exp $
  */
 package km2ecore.helper.kermeta.impl;
 
@@ -102,14 +102,14 @@ public class KermetaPackageImpl extends EPackageImpl implements KermetaPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass compilerHelperJavaEClass = null;
+	private EClass genericTypeDefinitionHelperEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass genericTypeDefinitionHelperEClass = null;
+	private EClass compilerHelperJavaEClass = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -189,22 +189,18 @@ public class KermetaPackageImpl extends EPackageImpl implements KermetaPackage {
 				.getEPackage(BehaviorPackage.eNS_URI) instanceof BehaviorPackageImpl ? EPackage.Registry.INSTANCE
 				.getEPackage(BehaviorPackage.eNS_URI)
 				: BehaviorPackage.eINSTANCE);
+		CompilerPackageImpl theCompilerPackage = (CompilerPackageImpl) (EPackage.Registry.INSTANCE
+				.getEPackage(CompilerPackage.eNS_URI) instanceof CompilerPackageImpl ? EPackage.Registry.INSTANCE
+				.getEPackage(CompilerPackage.eNS_URI)
+				: CompilerPackage.eINSTANCE);
+		ExceptionsPackageImpl theExceptionsPackage = (ExceptionsPackageImpl) (EPackage.Registry.INSTANCE
+				.getEPackage(ExceptionsPackage.eNS_URI) instanceof ExceptionsPackageImpl ? EPackage.Registry.INSTANCE
+				.getEPackage(ExceptionsPackage.eNS_URI)
+				: ExceptionsPackage.eINSTANCE);
 		StandardPackageImpl theStandardPackage = (StandardPackageImpl) (EPackage.Registry.INSTANCE
 				.getEPackage(StandardPackage.eNS_URI) instanceof StandardPackageImpl ? EPackage.Registry.INSTANCE
 				.getEPackage(StandardPackage.eNS_URI)
 				: StandardPackage.eINSTANCE);
-		KunitPackageImpl theKunitPackage = (KunitPackageImpl) (EPackage.Registry.INSTANCE
-				.getEPackage(KunitPackage.eNS_URI) instanceof KunitPackageImpl ? EPackage.Registry.INSTANCE
-				.getEPackage(KunitPackage.eNS_URI)
-				: KunitPackage.eINSTANCE);
-		InterpreterPackageImpl theInterpreterPackage = (InterpreterPackageImpl) (EPackage.Registry.INSTANCE
-				.getEPackage(InterpreterPackage.eNS_URI) instanceof InterpreterPackageImpl ? EPackage.Registry.INSTANCE
-				.getEPackage(InterpreterPackage.eNS_URI)
-				: InterpreterPackage.eINSTANCE);
-		UtilsPackageImpl theUtilsPackage = (UtilsPackageImpl) (EPackage.Registry.INSTANCE
-				.getEPackage(UtilsPackage.eNS_URI) instanceof UtilsPackageImpl ? EPackage.Registry.INSTANCE
-				.getEPackage(UtilsPackage.eNS_URI)
-				: UtilsPackage.eINSTANCE);
 		PersistencePackageImpl thePersistencePackage = (PersistencePackageImpl) (EPackage.Registry.INSTANCE
 				.getEPackage(PersistencePackage.eNS_URI) instanceof PersistencePackageImpl ? EPackage.Registry.INSTANCE
 				.getEPackage(PersistencePackage.eNS_URI)
@@ -213,34 +209,34 @@ public class KermetaPackageImpl extends EPackageImpl implements KermetaPackage {
 				.getEPackage(IoPackage.eNS_URI) instanceof IoPackageImpl ? EPackage.Registry.INSTANCE
 				.getEPackage(IoPackage.eNS_URI)
 				: IoPackage.eINSTANCE);
-		ExceptionsPackageImpl theExceptionsPackage = (ExceptionsPackageImpl) (EPackage.Registry.INSTANCE
-				.getEPackage(ExceptionsPackage.eNS_URI) instanceof ExceptionsPackageImpl ? EPackage.Registry.INSTANCE
-				.getEPackage(ExceptionsPackage.eNS_URI)
-				: ExceptionsPackage.eINSTANCE);
+		UtilsPackageImpl theUtilsPackage = (UtilsPackageImpl) (EPackage.Registry.INSTANCE
+				.getEPackage(UtilsPackage.eNS_URI) instanceof UtilsPackageImpl ? EPackage.Registry.INSTANCE
+				.getEPackage(UtilsPackage.eNS_URI)
+				: UtilsPackage.eINSTANCE);
 		EcorePackageImpl theEcorePackage = (EcorePackageImpl) (EPackage.Registry.INSTANCE
 				.getEPackage(EcorePackage.eNS_URI) instanceof EcorePackageImpl ? EPackage.Registry.INSTANCE
 				.getEPackage(EcorePackage.eNS_URI)
 				: EcorePackage.eINSTANCE);
-		CompilerPackageImpl theCompilerPackage = (CompilerPackageImpl) (EPackage.Registry.INSTANCE
-				.getEPackage(CompilerPackage.eNS_URI) instanceof CompilerPackageImpl ? EPackage.Registry.INSTANCE
-				.getEPackage(CompilerPackage.eNS_URI)
-				: CompilerPackage.eINSTANCE);
-		SimkPackageImpl theSimkPackage = (SimkPackageImpl) (EPackage.Registry.INSTANCE
-				.getEPackage(SimkPackage.eNS_URI) instanceof SimkPackageImpl ? EPackage.Registry.INSTANCE
-				.getEPackage(SimkPackage.eNS_URI)
-				: SimkPackage.eINSTANCE);
+		InterpreterPackageImpl theInterpreterPackage = (InterpreterPackageImpl) (EPackage.Registry.INSTANCE
+				.getEPackage(InterpreterPackage.eNS_URI) instanceof InterpreterPackageImpl ? EPackage.Registry.INSTANCE
+				.getEPackage(InterpreterPackage.eNS_URI)
+				: InterpreterPackage.eINSTANCE);
+		KunitPackageImpl theKunitPackage = (KunitPackageImpl) (EPackage.Registry.INSTANCE
+				.getEPackage(KunitPackage.eNS_URI) instanceof KunitPackageImpl ? EPackage.Registry.INSTANCE
+				.getEPackage(KunitPackage.eNS_URI)
+				: KunitPackage.eINSTANCE);
 		Km2ecorePackageImpl theKm2ecorePackage = (Km2ecorePackageImpl) (EPackage.Registry.INSTANCE
 				.getEPackage(Km2ecorePackage.eNS_URI) instanceof Km2ecorePackageImpl ? EPackage.Registry.INSTANCE
 				.getEPackage(Km2ecorePackage.eNS_URI)
 				: Km2ecorePackage.eINSTANCE);
-		JavaPackageImpl theJavaPackage = (JavaPackageImpl) (EPackage.Registry.INSTANCE
-				.getEPackage(JavaPackage.eNS_URI) instanceof JavaPackageImpl ? EPackage.Registry.INSTANCE
-				.getEPackage(JavaPackage.eNS_URI)
-				: JavaPackage.eINSTANCE);
 		km2ecore.helper.ecore.impl.EcorePackageImpl theEcorePackage_1 = (km2ecore.helper.ecore.impl.EcorePackageImpl) (EPackage.Registry.INSTANCE
 				.getEPackage(km2ecore.helper.ecore.EcorePackage.eNS_URI) instanceof km2ecore.helper.ecore.impl.EcorePackageImpl ? EPackage.Registry.INSTANCE
 				.getEPackage(km2ecore.helper.ecore.EcorePackage.eNS_URI)
 				: km2ecore.helper.ecore.EcorePackage.eINSTANCE);
+		JavaPackageImpl theJavaPackage = (JavaPackageImpl) (EPackage.Registry.INSTANCE
+				.getEPackage(JavaPackage.eNS_URI) instanceof JavaPackageImpl ? EPackage.Registry.INSTANCE
+				.getEPackage(JavaPackage.eNS_URI)
+				: JavaPackage.eINSTANCE);
 		CommonPackageImpl theCommonPackage = (CommonPackageImpl) (EPackage.Registry.INSTANCE
 				.getEPackage(CommonPackage.eNS_URI) instanceof CommonPackageImpl ? EPackage.Registry.INSTANCE
 				.getEPackage(CommonPackage.eNS_URI)
@@ -249,6 +245,10 @@ public class KermetaPackageImpl extends EPackageImpl implements KermetaPackage {
 				.getEPackage(ExceptionPackage.eNS_URI) instanceof ExceptionPackageImpl ? EPackage.Registry.INSTANCE
 				.getEPackage(ExceptionPackage.eNS_URI)
 				: ExceptionPackage.eINSTANCE);
+		SimkPackageImpl theSimkPackage = (SimkPackageImpl) (EPackage.Registry.INSTANCE
+				.getEPackage(SimkPackage.eNS_URI) instanceof SimkPackageImpl ? EPackage.Registry.INSTANCE
+				.getEPackage(SimkPackage.eNS_URI)
+				: SimkPackage.eINSTANCE);
 		TraceabilityPackageImpl theTraceabilityPackage = (TraceabilityPackageImpl) (EPackage.Registry.INSTANCE
 				.getEPackage(TraceabilityPackage.eNS_URI) instanceof TraceabilityPackageImpl ? EPackage.Registry.INSTANCE
 				.getEPackage(TraceabilityPackage.eNS_URI)
@@ -264,21 +264,21 @@ public class KermetaPackageImpl extends EPackageImpl implements KermetaPackage {
 		theLanguagePackage.createPackageContents();
 		theStructurePackage.createPackageContents();
 		theBehaviorPackage.createPackageContents();
+		theCompilerPackage.createPackageContents();
+		theExceptionsPackage.createPackageContents();
 		theStandardPackage.createPackageContents();
-		theKunitPackage.createPackageContents();
-		theInterpreterPackage.createPackageContents();
-		theUtilsPackage.createPackageContents();
 		thePersistencePackage.createPackageContents();
 		theIoPackage.createPackageContents();
-		theExceptionsPackage.createPackageContents();
+		theUtilsPackage.createPackageContents();
 		theEcorePackage.createPackageContents();
-		theCompilerPackage.createPackageContents();
-		theSimkPackage.createPackageContents();
+		theInterpreterPackage.createPackageContents();
+		theKunitPackage.createPackageContents();
 		theKm2ecorePackage.createPackageContents();
-		theJavaPackage.createPackageContents();
 		theEcorePackage_1.createPackageContents();
+		theJavaPackage.createPackageContents();
 		theCommonPackage.createPackageContents();
 		theExceptionPackage.createPackageContents();
+		theSimkPackage.createPackageContents();
 		theTraceabilityPackage.createPackageContents();
 		theEcorePackage_2.createPackageContents();
 
@@ -288,21 +288,21 @@ public class KermetaPackageImpl extends EPackageImpl implements KermetaPackage {
 		theLanguagePackage.initializePackageContents();
 		theStructurePackage.initializePackageContents();
 		theBehaviorPackage.initializePackageContents();
+		theCompilerPackage.initializePackageContents();
+		theExceptionsPackage.initializePackageContents();
 		theStandardPackage.initializePackageContents();
-		theKunitPackage.initializePackageContents();
-		theInterpreterPackage.initializePackageContents();
-		theUtilsPackage.initializePackageContents();
 		thePersistencePackage.initializePackageContents();
 		theIoPackage.initializePackageContents();
-		theExceptionsPackage.initializePackageContents();
+		theUtilsPackage.initializePackageContents();
 		theEcorePackage.initializePackageContents();
-		theCompilerPackage.initializePackageContents();
-		theSimkPackage.initializePackageContents();
+		theInterpreterPackage.initializePackageContents();
+		theKunitPackage.initializePackageContents();
 		theKm2ecorePackage.initializePackageContents();
-		theJavaPackage.initializePackageContents();
 		theEcorePackage_1.initializePackageContents();
+		theJavaPackage.initializePackageContents();
 		theCommonPackage.initializePackageContents();
 		theExceptionPackage.initializePackageContents();
+		theSimkPackage.initializePackageContents();
 		theTraceabilityPackage.initializePackageContents();
 		theEcorePackage_2.initializePackageContents();
 
@@ -317,8 +317,8 @@ public class KermetaPackageImpl extends EPackageImpl implements KermetaPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getCompilerHelperJava() {
-		return compilerHelperJavaEClass;
+	public EClass getGenericTypeDefinitionHelper() {
+		return genericTypeDefinitionHelperEClass;
 	}
 
 	/**
@@ -326,8 +326,8 @@ public class KermetaPackageImpl extends EPackageImpl implements KermetaPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getGenericTypeDefinitionHelper() {
-		return genericTypeDefinitionHelperEClass;
+	public EClass getCompilerHelperJava() {
+		return compilerHelperJavaEClass;
 	}
 
 	/**
@@ -359,9 +359,9 @@ public class KermetaPackageImpl extends EPackageImpl implements KermetaPackage {
 		isCreated = true;
 
 		// Create classes and their features
-		compilerHelperJavaEClass = createEClass(COMPILER_HELPER_JAVA);
-
 		genericTypeDefinitionHelperEClass = createEClass(GENERIC_TYPE_DEFINITION_HELPER);
+
+		compilerHelperJavaEClass = createEClass(COMPILER_HELPER_JAVA);
 	}
 
 	/**
@@ -391,33 +391,44 @@ public class KermetaPackageImpl extends EPackageImpl implements KermetaPackage {
 		// Obtain other dependent packages
 		StructurePackage theStructurePackage = (StructurePackage) EPackage.Registry.INSTANCE
 				.getEPackage(StructurePackage.eNS_URI);
+		ecore.EcorePackage theEcorePackage_2 = (ecore.EcorePackage) EPackage.Registry.INSTANCE
+				.getEPackage(ecore.EcorePackage.eNS_URI);
 		StandardPackage theStandardPackage = (StandardPackage) EPackage.Registry.INSTANCE
 				.getEPackage(StandardPackage.eNS_URI);
 		BehaviorPackage theBehaviorPackage = (BehaviorPackage) EPackage.Registry.INSTANCE
 				.getEPackage(BehaviorPackage.eNS_URI);
 		Km2ecorePackage theKm2ecorePackage = (Km2ecorePackage) EPackage.Registry.INSTANCE
 				.getEPackage(Km2ecorePackage.eNS_URI);
-		ecore.EcorePackage theEcorePackage_2 = (ecore.EcorePackage) EPackage.Registry.INSTANCE
-				.getEPackage(ecore.EcorePackage.eNS_URI);
 
 		// Create type parameters
 
 		// Set bounds for type parameters
 
 		// Add supertypes to classes
-		compilerHelperJavaEClass.getESuperTypes().add(
-				theStructurePackage.getObject());
 		genericTypeDefinitionHelperEClass.getESuperTypes().add(
+				theStructurePackage.getObject());
+		compilerHelperJavaEClass.getESuperTypes().add(
 				theStructurePackage.getObject());
 
 		// Initialize classes and features; add operations and parameters
+		initEClass(genericTypeDefinitionHelperEClass,
+				GenericTypeDefinitionHelper.class,
+				"GenericTypeDefinitionHelper", !IS_ABSTRACT, !IS_INTERFACE,
+				IS_GENERATED_INSTANCE_CLASS);
+
+		EOperation op = addEOperation(genericTypeDefinitionHelperEClass,
+				theEcorePackage_2.getEClass(), "getKermetaSpecialType", 0, 1,
+				IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, theStructurePackage.getPackage(), "p", 0, 1,
+				IS_UNIQUE, IS_ORDERED);
+
 		initEClass(compilerHelperJavaEClass, CompilerHelperJava.class,
 				"CompilerHelperJava", !IS_ABSTRACT, !IS_INTERFACE,
 				IS_GENERATED_INSTANCE_CLASS);
 
-		EOperation op = addEOperation(compilerHelperJavaEClass,
-				theStandardPackage.getJavaString(), "ppComaSeparatedNodes", 0,
-				1, IS_UNIQUE, IS_ORDERED);
+		op = addEOperation(compilerHelperJavaEClass, theStandardPackage
+				.getJavaString(), "ppComaSeparatedNodes", 0, 1, IS_UNIQUE,
+				IS_ORDERED);
 		EGenericType g1 = createEGenericType(theStandardPackage.getSet());
 		EGenericType g2 = createEGenericType(theBehaviorPackage.getExpression());
 		g1.getETypeArguments().add(g2);
@@ -449,17 +460,6 @@ public class KermetaPackageImpl extends EPackageImpl implements KermetaPackage {
 		addEParameter(op, theStandardPackage.getJavaString(), "localType", 0,
 				1, IS_UNIQUE, IS_ORDERED);
 
-		initEClass(genericTypeDefinitionHelperEClass,
-				GenericTypeDefinitionHelper.class,
-				"GenericTypeDefinitionHelper", !IS_ABSTRACT, !IS_INTERFACE,
-				IS_GENERATED_INSTANCE_CLASS);
-
-		op = addEOperation(genericTypeDefinitionHelperEClass, theEcorePackage_2
-				.getEClass(), "getKermetaSpecialType", 0, 1, IS_UNIQUE,
-				IS_ORDERED);
-		addEParameter(op, theStructurePackage.getPackage(), "p", 0, 1,
-				IS_UNIQUE, IS_ORDERED);
-
 		// Create annotations
 		// kermeta
 		createKermetaAnnotations();
@@ -475,6 +475,12 @@ public class KermetaPackageImpl extends EPackageImpl implements KermetaPackage {
 		String source = "kermeta";
 		addAnnotation(this, source, new String[] { "ecoreUri",
 				"http://www.kermeta.org/km2ecore/helper/kermeta" });
+		addAnnotation(
+				genericTypeDefinitionHelperEClass.getEOperations().get(0),
+				source,
+				new String[] {
+						"documentation",
+						"/**\n\t * FIXME CF: this method should be deprecated, because the function type are included in the resulted Ecore\n\t * or we could create only the signature of the method\n\t */" });
 		addAnnotation(
 				compilerHelperJavaEClass,
 				source,
@@ -494,12 +500,6 @@ public class KermetaPackageImpl extends EPackageImpl implements KermetaPackage {
 				new String[] {
 						"documentation",
 						"/**\n\t * Give the pp string corresponding to the CreateFactory in EMF-like of a type\n\t * @deprecated\n\t */" });
-		addAnnotation(
-				genericTypeDefinitionHelperEClass.getEOperations().get(0),
-				source,
-				new String[] {
-						"documentation",
-						"/**\n\t * FIXME CF: this method should be deprecated, because the function type are included in the resulted Ecore\n\t * or we could create only the signature of the method\n\t */" });
 	}
 
 } //KermetaPackageImpl

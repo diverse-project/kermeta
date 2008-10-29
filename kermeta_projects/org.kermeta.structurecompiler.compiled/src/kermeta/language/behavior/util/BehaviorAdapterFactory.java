@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: BehaviorAdapterFactory.java,v 1.6 2008-10-28 13:18:40 cfaucher Exp $
+ * $Id: BehaviorAdapterFactory.java,v 1.7 2008-10-29 08:29:37 cfaucher Exp $
  */
 package kermeta.language.behavior.util;
 
@@ -81,11 +81,6 @@ public class BehaviorAdapterFactory extends AdapterFactoryImpl {
 		}
 
 		@Override
-		public Adapter caseRescue(Rescue object) {
-			return createRescueAdapter();
-		}
-
-		@Override
 		public Adapter caseExpression(Expression object) {
 			return createExpressionAdapter();
 		}
@@ -133,6 +128,11 @@ public class BehaviorAdapterFactory extends AdapterFactoryImpl {
 		@Override
 		public Adapter caseRaise(Raise object) {
 			return createRaiseAdapter();
+		}
+
+		@Override
+		public Adapter caseRescue(Rescue object) {
+			return createRescueAdapter();
 		}
 
 		@Override
@@ -260,20 +260,6 @@ public class BehaviorAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createBlockAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link kermeta.language.behavior.Rescue <em>Rescue</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see kermeta.language.behavior.Rescue
-	 * @generated
-	 */
-	public Adapter createRescueAdapter() {
 		return null;
 	}
 
@@ -414,6 +400,20 @@ public class BehaviorAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createRaiseAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link kermeta.language.behavior.Rescue <em>Rescue</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see kermeta.language.behavior.Rescue
+	 * @generated
+	 */
+	public Adapter createRescueAdapter() {
 		return null;
 	}
 

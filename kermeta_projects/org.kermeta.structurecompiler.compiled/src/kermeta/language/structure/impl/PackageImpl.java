@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: PackageImpl.java,v 1.7 2008-10-28 13:18:10 cfaucher Exp $
+ * $Id: PackageImpl.java,v 1.8 2008-10-29 08:29:10 cfaucher Exp $
  */
 package kermeta.language.structure.impl;
 
@@ -10,8 +10,8 @@ import ecore.EPackage;
 
 import java.util.Collection;
 
+import kermeta.language.structure.NamedElement;
 import kermeta.language.structure.StructurePackage;
-import kermeta.language.structure.Traceability;
 import kermeta.language.structure.TypeDefinition;
 import kermeta.language.structure.TypeDefinitionContainer;
 
@@ -25,7 +25,6 @@ import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
@@ -42,8 +41,8 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * <p>
  * The following features are implemented:
  * <ul>
+ *   <li>{@link kermeta.language.structure.impl.PackageImpl#getName <em>Name</em>}</li>
  *   <li>{@link kermeta.language.structure.impl.PackageImpl#getOwnedTypeDefinition <em>Owned Type Definition</em>}</li>
- *   <li>{@link kermeta.language.structure.impl.PackageImpl#getEcoreModelElement <em>Ecore Model Element</em>}</li>
  *   <li>{@link kermeta.language.structure.impl.PackageImpl#getNestingPackage <em>Nesting Package</em>}</li>
  *   <li>{@link kermeta.language.structure.impl.PackageImpl#getGenModelBasePackage <em>Gen Model Base Package</em>}</li>
  *   <li>{@link kermeta.language.structure.impl.PackageImpl#getNestedPackage <em>Nested Package</em>}</li>
@@ -53,8 +52,28 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *
  * @generated
  */
-public class PackageImpl extends NamedElementImpl implements
+public class PackageImpl extends TraceabilityImpl<EPackage> implements
 		kermeta.language.structure.Package {
+	/**
+	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getName()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String NAME_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getName()
+	 * @generated
+	 * @ordered
+	 */
+	protected String name = NAME_EDEFAULT;
+
 	/**
 	 * The cached value of the '{@link #getOwnedTypeDefinition() <em>Owned Type Definition</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
@@ -64,16 +83,6 @@ public class PackageImpl extends NamedElementImpl implements
 	 * @ordered
 	 */
 	protected EList<TypeDefinition> ownedTypeDefinition;
-
-	/**
-	 * The cached value of the '{@link #getEcoreModelElement() <em>Ecore Model Element</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getEcoreModelElement()
-	 * @generated
-	 * @ordered
-	 */
-	protected EPackage ecoreModelElement;
 
 	/**
 	 * The default value of the '{@link #getGenModelBasePackage() <em>Gen Model Base Package</em>}' attribute.
@@ -149,6 +158,28 @@ public class PackageImpl extends NamedElementImpl implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public String getName() {
+		return name;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setName(String newName) {
+		String oldName = name;
+		name = newName;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET,
+					StructurePackage.PACKAGE__NAME, oldName, name));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EList<TypeDefinition> getOwnedTypeDefinition() {
 		if (ownedTypeDefinition == null) {
 			ownedTypeDefinition = new EObjectContainmentEList.Resolving<TypeDefinition>(
@@ -156,49 +187,6 @@ public class PackageImpl extends NamedElementImpl implements
 					StructurePackage.PACKAGE__OWNED_TYPE_DEFINITION);
 		}
 		return ownedTypeDefinition;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EPackage getEcoreModelElement() {
-		if (ecoreModelElement != null
-				&& ((EObject) ecoreModelElement).eIsProxy()) {
-			InternalEObject oldEcoreModelElement = (InternalEObject) ecoreModelElement;
-			ecoreModelElement = (EPackage) eResolveProxy(oldEcoreModelElement);
-			if (ecoreModelElement != oldEcoreModelElement) {
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE,
-							StructurePackage.PACKAGE__ECORE_MODEL_ELEMENT,
-							oldEcoreModelElement, ecoreModelElement));
-			}
-		}
-		return ecoreModelElement;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EPackage basicGetEcoreModelElement() {
-		return ecoreModelElement;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setEcoreModelElement(EPackage newEcoreModelElement) {
-		EPackage oldEcoreModelElement = ecoreModelElement;
-		ecoreModelElement = newEcoreModelElement;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET,
-					StructurePackage.PACKAGE__ECORE_MODEL_ELEMENT,
-					oldEcoreModelElement, ecoreModelElement));
 	}
 
 	/**
@@ -335,11 +323,11 @@ public class PackageImpl extends NamedElementImpl implements
 
 		kermeta.language.structure.Package p = this.getNestingPackage();
 
-		java.lang.Boolean idIfCond_88 = false;
-		idIfCond_88 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+		java.lang.Boolean idIfCond_52 = false;
+		idIfCond_52 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 				.isNotEqualSwitcher(p, null);
 
-		if (idIfCond_88) {
+		if (idIfCond_52) {
 
 			org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
 					.<ecore.EPackage> convertAsOrderedSet(
@@ -351,34 +339,34 @@ public class PackageImpl extends NamedElementImpl implements
 
 		//BIft:eachOwnedElement
 
-		kermeta.language.structure.Package pack_ft37 = this;
+		kermeta.language.structure.Package pack_ft27 = this;
 
 		//BIft:each
 
 		{
 
-			kermeta.standard.Iterator<kermeta.language.structure.Tag> it_ft38 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
+			kermeta.standard.Iterator<kermeta.language.structure.Tag> it_ft28 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
 					.<kermeta.language.structure.Tag> convertAsOrderedSet(
-							pack_ft37.getOwnedTags()).iterator();
-			java.lang.Boolean idLoopCond_89 = false;
-			while (!idLoopCond_89) {
-				idLoopCond_89 = it_ft38.isOff();
-				if (idLoopCond_89) {
+							pack_ft27.getOwnedTags()).iterator();
+			java.lang.Boolean idLoopCond_53 = false;
+			while (!idLoopCond_53) {
+				idLoopCond_53 = it_ft28.isOff();
+				if (idLoopCond_53) {
 				} else {
 
 					//BIle:func
-					kermeta.language.structure.Tag o_lbdExp38 = it_ft38.next();
+					kermeta.language.structure.Tag o_lbdExp28 = it_ft28.next();
 
 					//BIle:func
-					kermeta.language.structure.Tag cd_lbdExp37 = o_lbdExp38;
+					kermeta.language.structure.Tag cd_lbdExp27 = o_lbdExp28;
 
-					java.lang.Boolean idIfCond_90 = false;
-					idIfCond_90 = kermeta.standard.helper.StringWrapper.equals(
-							cd_lbdExp37.getDeprecated(), "");
+					java.lang.Boolean idIfCond_54 = false;
+					idIfCond_54 = kermeta.standard.helper.StringWrapper.equals(
+							cd_lbdExp27.getDeprecated(), "");
 
-					if (idIfCond_90) {
+					if (idIfCond_54) {
 
-						cd_lbdExp37.applyPass1(context);
+						cd_lbdExp27.applyPass1(context);
 					}
 
 					//EIle:func
@@ -395,29 +383,29 @@ public class PackageImpl extends NamedElementImpl implements
 
 		{
 
-			kermeta.standard.Iterator<kermeta.language.structure.TypeDefinition> it_ft39 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
+			kermeta.standard.Iterator<kermeta.language.structure.TypeDefinition> it_ft29 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
 					.<kermeta.language.structure.TypeDefinition> convertAsOrderedSet(
-							pack_ft37.getOwnedTypeDefinition()).iterator();
-			java.lang.Boolean idLoopCond_91 = false;
-			while (!idLoopCond_91) {
-				idLoopCond_91 = it_ft39.isOff();
-				if (idLoopCond_91) {
+							pack_ft27.getOwnedTypeDefinition()).iterator();
+			java.lang.Boolean idLoopCond_55 = false;
+			while (!idLoopCond_55) {
+				idLoopCond_55 = it_ft29.isOff();
+				if (idLoopCond_55) {
 				} else {
 
 					//BIle:func
-					kermeta.language.structure.TypeDefinition o_lbdExp39 = it_ft39
+					kermeta.language.structure.TypeDefinition o_lbdExp29 = it_ft29
 							.next();
 
 					//BIle:func
-					kermeta.language.structure.TypeDefinition cd_lbdExp37 = o_lbdExp39;
+					kermeta.language.structure.TypeDefinition cd_lbdExp27 = o_lbdExp29;
 
-					java.lang.Boolean idIfCond_92 = false;
-					idIfCond_92 = kermeta.standard.helper.StringWrapper.equals(
-							cd_lbdExp37.getDeprecated(), "");
+					java.lang.Boolean idIfCond_56 = false;
+					idIfCond_56 = kermeta.standard.helper.StringWrapper.equals(
+							cd_lbdExp27.getDeprecated(), "");
 
-					if (idIfCond_92) {
+					if (idIfCond_56) {
 
-						cd_lbdExp37.applyPass1(context);
+						cd_lbdExp27.applyPass1(context);
 					}
 
 					//EIle:func
@@ -434,29 +422,29 @@ public class PackageImpl extends NamedElementImpl implements
 
 		{
 
-			kermeta.standard.Iterator<kermeta.language.structure.Package> it_ft40 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
+			kermeta.standard.Iterator<kermeta.language.structure.Package> it_ft30 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
 					.<kermeta.language.structure.Package> convertAsOrderedSet(
-							pack_ft37.getNestedPackage()).iterator();
-			java.lang.Boolean idLoopCond_93 = false;
-			while (!idLoopCond_93) {
-				idLoopCond_93 = it_ft40.isOff();
-				if (idLoopCond_93) {
+							pack_ft27.getNestedPackage()).iterator();
+			java.lang.Boolean idLoopCond_57 = false;
+			while (!idLoopCond_57) {
+				idLoopCond_57 = it_ft30.isOff();
+				if (idLoopCond_57) {
 				} else {
 
 					//BIle:func
-					kermeta.language.structure.Package p_lbdExp40 = it_ft40
+					kermeta.language.structure.Package p_lbdExp30 = it_ft30
 							.next();
 
 					//BIle:func
-					kermeta.language.structure.Package cd_lbdExp37 = p_lbdExp40;
+					kermeta.language.structure.Package cd_lbdExp27 = p_lbdExp30;
 
-					java.lang.Boolean idIfCond_94 = false;
-					idIfCond_94 = kermeta.standard.helper.StringWrapper.equals(
-							cd_lbdExp37.getDeprecated(), "");
+					java.lang.Boolean idIfCond_58 = false;
+					idIfCond_58 = kermeta.standard.helper.StringWrapper.equals(
+							cd_lbdExp27.getDeprecated(), "");
 
-					if (idIfCond_94) {
+					if (idIfCond_58) {
 
-						cd_lbdExp37.applyPass1(context);
+						cd_lbdExp27.applyPass1(context);
 					}
 
 					//EIle:func
@@ -496,8 +484,8 @@ public class PackageImpl extends NamedElementImpl implements
 						.newObject("km2ecore.helper.java.IdentifierHelper"))
 						.getMangledIdentifier(this.getName(), context));
 
-		java.lang.Boolean idIfCond_95 = false;
-		idIfCond_95 = kermeta.standard.helper.BooleanWrapper
+		java.lang.Boolean idIfCond_59 = false;
+		idIfCond_59 = kermeta.standard.helper.BooleanWrapper
 				.and(
 						kermeta.standard.helper.BooleanWrapper
 								.not(org.kermeta.compil.runtime.helper.language.ObjectUtil
@@ -505,7 +493,7 @@ public class PackageImpl extends NamedElementImpl implements
 						org.kermeta.compil.runtime.helper.language.ObjectUtil
 								.isNotEqualSwitcher(this.getUri(), ""));
 
-		if (idIfCond_95) {
+		if (idIfCond_59) {
 
 			ecorePackage.setNsURI(kermeta.standard.helper.StringWrapper.plus(
 					this.getUri(), "/kermeta_temp_uri"));
@@ -562,22 +550,22 @@ public class PackageImpl extends NamedElementImpl implements
 
 		{
 
-			kermeta.standard.Iterator<kermeta.language.structure.Package> it_ft41 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
+			kermeta.standard.Iterator<kermeta.language.structure.Package> it_ft31 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
 					.<kermeta.language.structure.Package> convertAsOrderedSet(
 							this.getNestedPackage()).iterator();
-			java.lang.Boolean idLoopCond_96 = false;
-			while (!idLoopCond_96) {
-				idLoopCond_96 = it_ft41.isOff();
-				if (idLoopCond_96) {
+			java.lang.Boolean idLoopCond_60 = false;
+			while (!idLoopCond_60) {
+				idLoopCond_60 = it_ft31.isOff();
+				if (idLoopCond_60) {
 				} else {
 
 					//BIle:func
-					kermeta.language.structure.Package p_lbdExp41 = it_ft41
+					kermeta.language.structure.Package p_lbdExp31 = it_ft31
 							.next();
 
-					result.add(p_lbdExp41);
+					result.add(p_lbdExp31);
 
-					result.addAll(p_lbdExp41.getAllSubPackages());
+					result.addAll(p_lbdExp31.getAllSubPackages());
 					//EIle:func
 
 				}
@@ -599,28 +587,28 @@ public class PackageImpl extends NamedElementImpl implements
 
 		//BIft:eachOwnedElement
 
-		kermeta.language.structure.Package pack_ft42 = this;
+		kermeta.language.structure.Package pack_ft32 = this;
 
 		//BIft:each
 
 		{
 
-			kermeta.standard.Iterator<kermeta.language.structure.Tag> it_ft43 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
+			kermeta.standard.Iterator<kermeta.language.structure.Tag> it_ft33 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
 					.<kermeta.language.structure.Tag> convertAsOrderedSet(
-							pack_ft42.getOwnedTags()).iterator();
-			java.lang.Boolean idLoopCond_97 = false;
-			while (!idLoopCond_97) {
-				idLoopCond_97 = it_ft43.isOff();
-				if (idLoopCond_97) {
+							pack_ft32.getOwnedTags()).iterator();
+			java.lang.Boolean idLoopCond_61 = false;
+			while (!idLoopCond_61) {
+				idLoopCond_61 = it_ft33.isOff();
+				if (idLoopCond_61) {
 				} else {
 
 					//BIle:func
-					kermeta.language.structure.Tag o_lbdExp43 = it_ft43.next();
+					kermeta.language.structure.Tag o_lbdExp33 = it_ft33.next();
 
 					//BIle:func
-					kermeta.language.structure.Tag p_lbdExp42 = o_lbdExp43;
+					kermeta.language.structure.Tag p_lbdExp32 = o_lbdExp33;
 
-					p_lbdExp42.applyPass2BehaviorJava(context);
+					p_lbdExp32.applyPass2BehaviorJava(context);
 					//EIle:func
 
 					//EIle:func
@@ -635,23 +623,23 @@ public class PackageImpl extends NamedElementImpl implements
 
 		{
 
-			kermeta.standard.Iterator<kermeta.language.structure.TypeDefinition> it_ft44 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
+			kermeta.standard.Iterator<kermeta.language.structure.TypeDefinition> it_ft34 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
 					.<kermeta.language.structure.TypeDefinition> convertAsOrderedSet(
-							pack_ft42.getOwnedTypeDefinition()).iterator();
-			java.lang.Boolean idLoopCond_98 = false;
-			while (!idLoopCond_98) {
-				idLoopCond_98 = it_ft44.isOff();
-				if (idLoopCond_98) {
+							pack_ft32.getOwnedTypeDefinition()).iterator();
+			java.lang.Boolean idLoopCond_62 = false;
+			while (!idLoopCond_62) {
+				idLoopCond_62 = it_ft34.isOff();
+				if (idLoopCond_62) {
 				} else {
 
 					//BIle:func
-					kermeta.language.structure.TypeDefinition o_lbdExp44 = it_ft44
+					kermeta.language.structure.TypeDefinition o_lbdExp34 = it_ft34
 							.next();
 
 					//BIle:func
-					kermeta.language.structure.TypeDefinition p_lbdExp42 = o_lbdExp44;
+					kermeta.language.structure.TypeDefinition p_lbdExp32 = o_lbdExp34;
 
-					p_lbdExp42.applyPass2BehaviorJava(context);
+					p_lbdExp32.applyPass2BehaviorJava(context);
 					//EIle:func
 
 					//EIle:func
@@ -666,23 +654,23 @@ public class PackageImpl extends NamedElementImpl implements
 
 		{
 
-			kermeta.standard.Iterator<kermeta.language.structure.Package> it_ft45 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
+			kermeta.standard.Iterator<kermeta.language.structure.Package> it_ft35 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
 					.<kermeta.language.structure.Package> convertAsOrderedSet(
-							pack_ft42.getNestedPackage()).iterator();
-			java.lang.Boolean idLoopCond_99 = false;
-			while (!idLoopCond_99) {
-				idLoopCond_99 = it_ft45.isOff();
-				if (idLoopCond_99) {
+							pack_ft32.getNestedPackage()).iterator();
+			java.lang.Boolean idLoopCond_63 = false;
+			while (!idLoopCond_63) {
+				idLoopCond_63 = it_ft35.isOff();
+				if (idLoopCond_63) {
 				} else {
 
 					//BIle:func
-					kermeta.language.structure.Package p_lbdExp45 = it_ft45
+					kermeta.language.structure.Package p_lbdExp35 = it_ft35
 							.next();
 
 					//BIle:func
-					kermeta.language.structure.Package p_lbdExp42 = p_lbdExp45;
+					kermeta.language.structure.Package p_lbdExp32 = p_lbdExp35;
 
-					p_lbdExp42.applyPass2BehaviorJava(context);
+					p_lbdExp32.applyPass2BehaviorJava(context);
 					//EIle:func
 
 					//EIle:func
@@ -694,6 +682,121 @@ public class PackageImpl extends NamedElementImpl implements
 		//EIft:each
 
 		//EIft:eachOwnedElement
+
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getGenModelQualifiedName() {
+
+		java.lang.String result = null;
+
+		result = kermeta.standard.helper.StringWrapper.plus(
+				kermeta.standard.helper.StringWrapper.plus(this
+						.getRootPackage().getGenModelBasePackage(), "::"), this
+						.qualifiedName());
+
+		return result;
+
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getJavaQualifiedName() {
+
+		java.lang.String result = null;
+
+		result = kermeta.standard.helper.StringWrapper.replace(this
+				.qualifiedName(), "::", ".");
+
+		return result;
+
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getGenModelJavaQualifiedName() {
+
+		java.lang.String result = null;
+
+		result = kermeta.standard.helper.StringWrapper.replace(this
+				.getGenModelQualifiedName(), "::", ".");
+
+		return result;
+
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String qualifiedName() {
+
+		java.lang.String result = null;
+
+		kermeta.language.structure.NamedElement elem = this;
+
+		result = this.getName();
+
+		java.lang.Boolean idIfCond_315 = false;
+		idIfCond_315 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+				.isInstanceOfSwitcher(
+						org.kermeta.compil.runtime.helper.language.ObjectUtil
+								.containerSwitcher(elem),
+						org.kermeta.compil.runtime.ExecutionContext
+								.getInstance()
+								.getMetaClass(
+										"kermeta.language.structure.NamedElement"));
+
+		if (idIfCond_315) {
+
+			elem = (kermeta.language.structure.NamedElement) org.kermeta.compil.runtime.helper.language.ObjectUtil
+					.containerSwitcher(elem);
+			java.lang.Boolean idLoopCond_316 = false;
+			while (!idLoopCond_316) {
+				idLoopCond_316 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+						.equalsSwitcher(elem, null);
+				if (idLoopCond_316) {
+				} else {
+
+					result = kermeta.standard.helper.StringWrapper.plus(
+							kermeta.standard.helper.StringWrapper.plus(elem
+									.getName(), "::"), result);
+
+					java.lang.Boolean idIfCond_317 = false;
+					idIfCond_317 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+							.isInstanceOfSwitcher(
+									org.kermeta.compil.runtime.helper.language.ObjectUtil
+											.containerSwitcher(elem),
+									org.kermeta.compil.runtime.ExecutionContext
+											.getInstance()
+											.getMetaClass(
+													"kermeta.language.structure.NamedElement"));
+
+					if (idIfCond_317) {
+
+						elem = (kermeta.language.structure.NamedElement) org.kermeta.compil.runtime.helper.language.ObjectUtil
+								.containerSwitcher(elem);
+					} else {
+
+						elem = null;
+					}
+
+				}
+			}
+		}
+
+		return result;
 
 	}
 
@@ -765,12 +868,10 @@ public class PackageImpl extends NamedElementImpl implements
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
+		case StructurePackage.PACKAGE__NAME:
+			return getName();
 		case StructurePackage.PACKAGE__OWNED_TYPE_DEFINITION:
 			return getOwnedTypeDefinition();
-		case StructurePackage.PACKAGE__ECORE_MODEL_ELEMENT:
-			if (resolve)
-				return getEcoreModelElement();
-			return basicGetEcoreModelElement();
 		case StructurePackage.PACKAGE__NESTING_PACKAGE:
 			if (resolve)
 				return getNestingPackage();
@@ -794,13 +895,13 @@ public class PackageImpl extends NamedElementImpl implements
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
+		case StructurePackage.PACKAGE__NAME:
+			setName((String) newValue);
+			return;
 		case StructurePackage.PACKAGE__OWNED_TYPE_DEFINITION:
 			getOwnedTypeDefinition().clear();
 			getOwnedTypeDefinition().addAll(
 					(Collection<? extends TypeDefinition>) newValue);
-			return;
-		case StructurePackage.PACKAGE__ECORE_MODEL_ELEMENT:
-			setEcoreModelElement((EPackage) newValue);
 			return;
 		case StructurePackage.PACKAGE__NESTING_PACKAGE:
 			setNestingPackage((kermeta.language.structure.Package) newValue);
@@ -829,11 +930,11 @@ public class PackageImpl extends NamedElementImpl implements
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
+		case StructurePackage.PACKAGE__NAME:
+			setName(NAME_EDEFAULT);
+			return;
 		case StructurePackage.PACKAGE__OWNED_TYPE_DEFINITION:
 			getOwnedTypeDefinition().clear();
-			return;
-		case StructurePackage.PACKAGE__ECORE_MODEL_ELEMENT:
-			setEcoreModelElement((EPackage) null);
 			return;
 		case StructurePackage.PACKAGE__NESTING_PACKAGE:
 			setNestingPackage((kermeta.language.structure.Package) null);
@@ -859,11 +960,12 @@ public class PackageImpl extends NamedElementImpl implements
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
+		case StructurePackage.PACKAGE__NAME:
+			return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT
+					.equals(name);
 		case StructurePackage.PACKAGE__OWNED_TYPE_DEFINITION:
 			return ownedTypeDefinition != null
 					&& !ownedTypeDefinition.isEmpty();
-		case StructurePackage.PACKAGE__ECORE_MODEL_ELEMENT:
-			return ecoreModelElement != null;
 		case StructurePackage.PACKAGE__NESTING_PACKAGE:
 			return basicGetNestingPackage() != null;
 		case StructurePackage.PACKAGE__GEN_MODEL_BASE_PACKAGE:
@@ -886,18 +988,18 @@ public class PackageImpl extends NamedElementImpl implements
 	 */
 	@Override
 	public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass) {
-		if (baseClass == TypeDefinitionContainer.class) {
+		if (baseClass == NamedElement.class) {
 			switch (derivedFeatureID) {
-			case StructurePackage.PACKAGE__OWNED_TYPE_DEFINITION:
-				return StructurePackage.TYPE_DEFINITION_CONTAINER__OWNED_TYPE_DEFINITION;
+			case StructurePackage.PACKAGE__NAME:
+				return StructurePackage.NAMED_ELEMENT__NAME;
 			default:
 				return -1;
 			}
 		}
-		if (baseClass == Traceability.class) {
+		if (baseClass == TypeDefinitionContainer.class) {
 			switch (derivedFeatureID) {
-			case StructurePackage.PACKAGE__ECORE_MODEL_ELEMENT:
-				return StructurePackage.TRACEABILITY__ECORE_MODEL_ELEMENT;
+			case StructurePackage.PACKAGE__OWNED_TYPE_DEFINITION:
+				return StructurePackage.TYPE_DEFINITION_CONTAINER__OWNED_TYPE_DEFINITION;
 			default:
 				return -1;
 			}
@@ -912,18 +1014,18 @@ public class PackageImpl extends NamedElementImpl implements
 	 */
 	@Override
 	public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass) {
-		if (baseClass == TypeDefinitionContainer.class) {
+		if (baseClass == NamedElement.class) {
 			switch (baseFeatureID) {
-			case StructurePackage.TYPE_DEFINITION_CONTAINER__OWNED_TYPE_DEFINITION:
-				return StructurePackage.PACKAGE__OWNED_TYPE_DEFINITION;
+			case StructurePackage.NAMED_ELEMENT__NAME:
+				return StructurePackage.PACKAGE__NAME;
 			default:
 				return -1;
 			}
 		}
-		if (baseClass == Traceability.class) {
+		if (baseClass == TypeDefinitionContainer.class) {
 			switch (baseFeatureID) {
-			case StructurePackage.TRACEABILITY__ECORE_MODEL_ELEMENT:
-				return StructurePackage.PACKAGE__ECORE_MODEL_ELEMENT;
+			case StructurePackage.TYPE_DEFINITION_CONTAINER__OWNED_TYPE_DEFINITION:
+				return StructurePackage.PACKAGE__OWNED_TYPE_DEFINITION;
 			default:
 				return -1;
 			}
@@ -942,7 +1044,9 @@ public class PackageImpl extends NamedElementImpl implements
 			return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (genModelBasePackage: ");
+		result.append(" (name: ");
+		result.append(name);
+		result.append(", genModelBasePackage: ");
 		result.append(genModelBasePackage);
 		result.append(", uri: ");
 		result.append(uri);

@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: IncompatibleTypeErrorImpl.java,v 1.6 2008-10-28 13:18:09 cfaucher Exp $
+ * $Id: IncompatibleTypeErrorImpl.java,v 1.7 2008-10-29 08:29:09 cfaucher Exp $
  */
 package kermeta.exceptions.impl;
 

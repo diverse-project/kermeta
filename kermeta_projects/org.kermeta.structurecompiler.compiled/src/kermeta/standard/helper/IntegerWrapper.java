@@ -18,11 +18,11 @@ public class IntegerWrapper {
 
 		java.lang.Integer result = null;
 
-		java.lang.Boolean idIfCond_686 = false;
-		idIfCond_686 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+		java.lang.Boolean idIfCond_742 = false;
+		idIfCond_742 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 				.isVoidSwitcher(other);
 
-		if (idIfCond_686) {
+		if (idIfCond_742) {
 
 			if (true)
 				throw new org.kermeta.compil.runtime.helper.error.KRuntimeError(
@@ -51,8 +51,8 @@ public class IntegerWrapper {
 
 		java.lang.Boolean result = null;
 
-		java.lang.Boolean idIfCond_687 = false;
-		idIfCond_687 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+		java.lang.Boolean idIfCond_743 = false;
+		idIfCond_743 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 				.isNotEqualSwitcher(
 						org.kermeta.compil.runtime.helper.language.ObjectUtil
 								.getMetaClassSwitcher(other),
@@ -60,16 +60,16 @@ public class IntegerWrapper {
 								.getInstance()
 								.getMetaClass("java.lang.Integer"));
 
-		if (idIfCond_687) {
+		if (idIfCond_743) {
 
-			java.lang.Boolean idIfCond_688 = false;
-			idIfCond_688 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+			java.lang.Boolean idIfCond_744 = false;
+			idIfCond_744 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 					.getMetaClassSwitcher(other).equals(
 							org.kermeta.compil.runtime.ExecutionContext
 									.getInstance().getMetaClass(
 											"java.lang.Double"));
 
-			if (idIfCond_688) {
+			if (idIfCond_744) {
 
 				result = org.kermeta.compil.runtime.helper.basetypes.RealUtil
 						.isLower(kermeta.standard.helper.IntegerWrapper
@@ -101,11 +101,11 @@ public class IntegerWrapper {
 
 		java.lang.Integer result = null;
 
-		java.lang.Boolean idIfCond_689 = false;
-		idIfCond_689 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+		java.lang.Boolean idIfCond_745 = false;
+		idIfCond_745 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 				.isVoidSwitcher(other);
 
-		if (idIfCond_689) {
+		if (idIfCond_745) {
 
 			if (true)
 				throw new org.kermeta.compil.runtime.helper.error.KRuntimeError(
@@ -134,11 +134,11 @@ public class IntegerWrapper {
 
 		java.lang.Integer result = null;
 
-		java.lang.Boolean idIfCond_690 = false;
-		idIfCond_690 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+		java.lang.Boolean idIfCond_746 = false;
+		idIfCond_746 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 				.isVoidSwitcher(other);
 
-		if (idIfCond_690) {
+		if (idIfCond_746) {
 
 			if (true)
 				throw new org.kermeta.compil.runtime.helper.error.KRuntimeError(
@@ -167,8 +167,8 @@ public class IntegerWrapper {
 
 		java.lang.Boolean result = null;
 
-		java.lang.Boolean idIfCond_691 = false;
-		idIfCond_691 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+		java.lang.Boolean idIfCond_747 = false;
+		idIfCond_747 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 				.isNotEqualSwitcher(
 						org.kermeta.compil.runtime.helper.language.ObjectUtil
 								.getMetaClassSwitcher(other),
@@ -176,16 +176,16 @@ public class IntegerWrapper {
 								.getInstance()
 								.getMetaClass("java.lang.Integer"));
 
-		if (idIfCond_691) {
+		if (idIfCond_747) {
 
-			java.lang.Boolean idIfCond_692 = false;
-			idIfCond_692 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+			java.lang.Boolean idIfCond_748 = false;
+			idIfCond_748 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 					.getMetaClassSwitcher(other).equals(
 							org.kermeta.compil.runtime.ExecutionContext
 									.getInstance().getMetaClass(
 											"java.lang.Double"));
 
-			if (idIfCond_692) {
+			if (idIfCond_748) {
 
 				result = kermeta.standard.helper.RealWrapper.equals(
 						kermeta.standard.helper.IntegerWrapper.toReal(self),
@@ -217,10 +217,10 @@ public class IntegerWrapper {
 
 		java.lang.Integer result = null;
 
-		java.lang.Boolean idIfCond_693 = false;
-		idIfCond_693 = kermeta.standard.helper.IntegerWrapper.equals(other, 0);
+		java.lang.Boolean idIfCond_749 = false;
+		idIfCond_749 = kermeta.standard.helper.IntegerWrapper.equals(other, 0);
 
-		if (idIfCond_693) {
+		if (idIfCond_749) {
 
 			if (true)
 				throw new org.kermeta.compil.runtime.helper.error.KRuntimeError(
@@ -229,11 +229,11 @@ public class IntegerWrapper {
 
 		}
 
-		java.lang.Boolean idIfCond_694 = false;
-		idIfCond_694 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+		java.lang.Boolean idIfCond_750 = false;
+		idIfCond_750 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 				.isVoidSwitcher(other);
 
-		if (idIfCond_694) {
+		if (idIfCond_750) {
 
 			if (true)
 				throw new org.kermeta.compil.runtime.helper.error.KRuntimeError(
@@ -281,10 +281,10 @@ public class IntegerWrapper {
 
 		java.lang.Integer result = null;
 
-		java.lang.Boolean idIfCond_695 = false;
-		idIfCond_695 = kermeta.standard.helper.IntegerWrapper.equals(other, 0);
+		java.lang.Boolean idIfCond_751 = false;
+		idIfCond_751 = kermeta.standard.helper.IntegerWrapper.equals(other, 0);
 
-		if (idIfCond_695) {
+		if (idIfCond_751) {
 
 			if (true)
 				throw new org.kermeta.compil.runtime.helper.error.KRuntimeError(
@@ -293,11 +293,11 @@ public class IntegerWrapper {
 
 		}
 
-		java.lang.Boolean idIfCond_696 = false;
-		idIfCond_696 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+		java.lang.Boolean idIfCond_752 = false;
+		idIfCond_752 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 				.isVoidSwitcher(other);
 
-		if (idIfCond_696) {
+		if (idIfCond_752) {
 
 			if (true)
 				throw new org.kermeta.compil.runtime.helper.error.KRuntimeError(
@@ -326,8 +326,8 @@ public class IntegerWrapper {
 
 		java.lang.Integer result = null;
 
-		java.lang.Boolean idIfCond_697 = false;
-		idIfCond_697 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+		java.lang.Boolean idIfCond_753 = false;
+		idIfCond_753 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 				.isNotEqualSwitcher(
 						org.kermeta.compil.runtime.helper.language.ObjectUtil
 								.getMetaClassSwitcher(other),
@@ -335,16 +335,16 @@ public class IntegerWrapper {
 								.getInstance()
 								.getMetaClass("java.lang.Integer"));
 
-		if (idIfCond_697) {
+		if (idIfCond_753) {
 
-			java.lang.Boolean idIfCond_698 = false;
-			idIfCond_698 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+			java.lang.Boolean idIfCond_754 = false;
+			idIfCond_754 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 					.getMetaClassSwitcher(other).equals(
 							org.kermeta.compil.runtime.ExecutionContext
 									.getInstance().getMetaClass(
 											"java.lang.Double"));
 
-			if (idIfCond_698) {
+			if (idIfCond_754) {
 
 				result = kermeta.standard.helper.RealWrapper.compareTo(
 						kermeta.standard.helper.IntegerWrapper.toReal(self),
@@ -380,8 +380,8 @@ public class IntegerWrapper {
 
 		java.lang.Boolean result = null;
 
-		java.lang.Boolean idIfCond_699 = false;
-		idIfCond_699 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+		java.lang.Boolean idIfCond_755 = false;
+		idIfCond_755 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 				.isNotEqualSwitcher(
 						org.kermeta.compil.runtime.helper.language.ObjectUtil
 								.getMetaClassSwitcher(other),
@@ -389,16 +389,16 @@ public class IntegerWrapper {
 								.getInstance()
 								.getMetaClass("java.lang.Integer"));
 
-		if (idIfCond_699) {
+		if (idIfCond_755) {
 
-			java.lang.Boolean idIfCond_700 = false;
-			idIfCond_700 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+			java.lang.Boolean idIfCond_756 = false;
+			idIfCond_756 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 					.getMetaClassSwitcher(other).equals(
 							org.kermeta.compil.runtime.ExecutionContext
 									.getInstance().getMetaClass(
 											"java.lang.Double"));
 
-			if (idIfCond_700) {
+			if (idIfCond_756) {
 
 				result = org.kermeta.compil.runtime.helper.basetypes.RealUtil
 						.isGreater(kermeta.standard.helper.IntegerWrapper
@@ -430,8 +430,8 @@ public class IntegerWrapper {
 
 		java.lang.Boolean result = null;
 
-		java.lang.Boolean idIfCond_701 = false;
-		idIfCond_701 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+		java.lang.Boolean idIfCond_757 = false;
+		idIfCond_757 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 				.isNotEqualSwitcher(
 						org.kermeta.compil.runtime.helper.language.ObjectUtil
 								.getMetaClassSwitcher(other),
@@ -439,16 +439,16 @@ public class IntegerWrapper {
 								.getInstance()
 								.getMetaClass("java.lang.Integer"));
 
-		if (idIfCond_701) {
+		if (idIfCond_757) {
 
-			java.lang.Boolean idIfCond_702 = false;
-			idIfCond_702 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+			java.lang.Boolean idIfCond_758 = false;
+			idIfCond_758 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 					.getMetaClassSwitcher(other).equals(
 							org.kermeta.compil.runtime.ExecutionContext
 									.getInstance().getMetaClass(
 											"java.lang.Double"));
 
-			if (idIfCond_702) {
+			if (idIfCond_758) {
 
 				result = org.kermeta.compil.runtime.helper.basetypes.RealUtil
 						.isGreaterOrEqual(
@@ -518,8 +518,8 @@ public class IntegerWrapper {
 
 		java.lang.Boolean result = null;
 
-		java.lang.Boolean idIfCond_703 = false;
-		idIfCond_703 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+		java.lang.Boolean idIfCond_759 = false;
+		idIfCond_759 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 				.isNotEqualSwitcher(
 						org.kermeta.compil.runtime.helper.language.ObjectUtil
 								.getMetaClassSwitcher(other),
@@ -527,16 +527,16 @@ public class IntegerWrapper {
 								.getInstance()
 								.getMetaClass("java.lang.Integer"));
 
-		if (idIfCond_703) {
+		if (idIfCond_759) {
 
-			java.lang.Boolean idIfCond_704 = false;
-			idIfCond_704 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+			java.lang.Boolean idIfCond_760 = false;
+			idIfCond_760 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 					.getMetaClassSwitcher(other).equals(
 							org.kermeta.compil.runtime.ExecutionContext
 									.getInstance().getMetaClass(
 											"java.lang.Double"));
 
-			if (idIfCond_704) {
+			if (idIfCond_760) {
 
 				result = org.kermeta.compil.runtime.helper.basetypes.RealUtil
 						.isLowerOrEqual(kermeta.standard.helper.IntegerWrapper
@@ -605,11 +605,11 @@ public class IntegerWrapper {
 
 	) {
 
-		java.lang.Boolean idIfCond_705 = false;
-		idIfCond_705 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+		java.lang.Boolean idIfCond_761 = false;
+		idIfCond_761 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 				.isInstanceOfSwitcher(element, property.getType());
 
-		if (idIfCond_705) {
+		if (idIfCond_761) {
 
 			org.kermeta.compil.runtime.helper.language.ObjectUtil.set(self,
 					property, element);
@@ -663,100 +663,100 @@ public class IntegerWrapper {
 		kermeta.language.structure.ClassDefinition cd = org.kermeta.compil.runtime.helper.language.ObjectUtil
 				.getMetaClassSwitcher(self).getterClassDefinition();
 
-		java.lang.Boolean idIfCond_706 = false;
-		idIfCond_706 = kermeta.standard.helper.BooleanWrapper
+		java.lang.Boolean idIfCond_762 = false;
+		idIfCond_762 = kermeta.standard.helper.BooleanWrapper
 				.not(org.kermeta.compil.runtime.helper.language.ObjectUtil
 						.isVoidSwitcher(cd));
 
-		if (idIfCond_706) {
+		if (idIfCond_762) {
 
 			//BIft:each
 
 			{
 
-				kermeta.standard.Iterator<kermeta.language.structure.Property> it_ft156 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
+				kermeta.standard.Iterator<kermeta.language.structure.Property> it_ft173 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
 						.<kermeta.language.structure.Property> convertAsSet(
 								cd.getterAllAttribute()).iterator();
-				java.lang.Boolean idLoopCond_707 = false;
-				while (!idLoopCond_707) {
-					idLoopCond_707 = it_ft156.isOff();
-					if (idLoopCond_707) {
+				java.lang.Boolean idLoopCond_763 = false;
+				while (!idLoopCond_763) {
+					idLoopCond_763 = it_ft173.isOff();
+					if (idLoopCond_763) {
 					} else {
 
 						//BIle:func
-						kermeta.language.structure.Property p_lbdExp156 = it_ft156
+						kermeta.language.structure.Property p_lbdExp173 = it_ft173
 								.next();
 
 						//BIft:exists
 
-						java.lang.Boolean result_ft157 = null;
+						java.lang.Boolean result_ft174 = null;
 
-						java.lang.Boolean test_ft157 = false;
+						java.lang.Boolean test_ft174 = false;
 
 						{
 
-							kermeta.standard.Iterator<kermeta.language.structure.Tag> it_ft157 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
+							kermeta.standard.Iterator<kermeta.language.structure.Tag> it_ft174 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
 									.<kermeta.language.structure.Tag> convertAsOrderedSet(
-											p_lbdExp156.getTag()).iterator();
-							java.lang.Boolean idLoopCond_709 = false;
-							while (!idLoopCond_709) {
-								idLoopCond_709 = kermeta.standard.helper.BooleanWrapper
+											p_lbdExp173.getTag()).iterator();
+							java.lang.Boolean idLoopCond_765 = false;
+							while (!idLoopCond_765) {
+								idLoopCond_765 = kermeta.standard.helper.BooleanWrapper
 										.or(
-												it_ft157.isOff(),
+												it_ft174.isOff(),
 												org.kermeta.compil.runtime.helper.language.ObjectUtil
 														.isNotEqualSwitcher(
-																test_ft157,
+																test_ft174,
 																false));
-								if (idLoopCond_709) {
+								if (idLoopCond_765) {
 								} else {
 
-									java.lang.Boolean result_lambda_ft157 = null;
+									java.lang.Boolean result_lambda_ft174 = null;
 									//BIle:func
-									kermeta.language.structure.Tag t_lbdExp157 = it_ft157
+									kermeta.language.structure.Tag t_lbdExp174 = it_ft174
 											.next();
 
-									result_lambda_ft157 = kermeta.standard.helper.StringWrapper
-											.equals(t_lbdExp157.getName(),
+									result_lambda_ft174 = kermeta.standard.helper.StringWrapper
+											.equals(t_lbdExp174.getName(),
 													"ecore.isTransient");
 									//EIle:func
 
-									test_ft157 = kermeta.standard.helper.BooleanWrapper
-											.or(test_ft157, result_lambda_ft157);
+									test_ft174 = kermeta.standard.helper.BooleanWrapper
+											.or(test_ft174, result_lambda_ft174);
 								}
 							}
 						}
 
-						result_ft157 = test_ft157;
+						result_ft174 = test_ft174;
 						//EIft:exists
-						java.lang.Boolean idIfCond_708 = false;
-						idIfCond_708 = kermeta.standard.helper.BooleanWrapper
+						java.lang.Boolean idIfCond_764 = false;
+						idIfCond_764 = kermeta.standard.helper.BooleanWrapper
 								.and(
 										kermeta.standard.helper.BooleanWrapper
-												.not(result_ft157),
+												.not(result_ft174),
 										kermeta.standard.helper.BooleanWrapper
-												.not(p_lbdExp156.getIsDerived()));
+												.not(p_lbdExp173.getIsDerived()));
 
-						if (idIfCond_708) {
+						if (idIfCond_764) {
 
 							kermeta.language.structure.Object v = org.kermeta.compil.runtime.helper.language.ObjectUtil
-									.getSwitcher(self, p_lbdExp156);
+									.getSwitcher(self, p_lbdExp173);
 
-							java.lang.Boolean idIfCond_710 = false;
+							java.lang.Boolean idIfCond_766 = false;
 							//BIft:andThen
 
-							java.lang.Boolean result_ft158 = null;
+							java.lang.Boolean result_ft175 = null;
 
-							java.lang.Boolean idIfCond_711 = false;
-							idIfCond_711 = kermeta.standard.helper.BooleanWrapper
+							java.lang.Boolean idIfCond_767 = false;
+							idIfCond_767 = kermeta.standard.helper.BooleanWrapper
 									.not(org.kermeta.compil.runtime.helper.language.ObjectUtil
 											.isVoidSwitcher(v));
 
-							if (idIfCond_711) {
+							if (idIfCond_767) {
 
 								//BIle:right
-								/*This variable should be never used*/kermeta.language.structure.Object f_lbdExp158 = null;
+								/*This variable should be never used*/kermeta.language.structure.Object f_lbdExp175 = null;
 
-								result_ft158 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+								result_ft175 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 										.isInstanceOfSwitcher(
 												v,
 												org.kermeta.compil.runtime.ExecutionContext
@@ -767,14 +767,14 @@ public class IntegerWrapper {
 
 							} else {
 
-								result_ft158 = false;
+								result_ft175 = false;
 							}
 
 							//CEC
-							idIfCond_710 = result_ft158;
+							idIfCond_766 = result_ft175;
 							//EIft:andThen
 
-							if (idIfCond_710) {
+							if (idIfCond_766) {
 
 								kermeta.standard.Collection<kermeta.language.structure.Object> c = ((kermeta.standard.Collection<kermeta.language.structure.Object>) org.kermeta.compil.runtime.helper.language.ObjectUtil
 										.asTypeSwitcher(
@@ -784,22 +784,22 @@ public class IntegerWrapper {
 														.getMetaClass(
 																"kermeta.standard.Collection<kermeta.language.structure.Object>")));
 
-								java.lang.Boolean idIfCond_712 = false;
-								idIfCond_712 = kermeta.standard.helper.BooleanWrapper
+								java.lang.Boolean idIfCond_768 = false;
+								idIfCond_768 = kermeta.standard.helper.BooleanWrapper
 										.and(
 												org.kermeta.compil.runtime.helper.language.ObjectUtil
 														.isNotEqualSwitcher(
-																p_lbdExp156
+																p_lbdExp173
 																		.getUpper(),
 																kermeta.standard.helper.IntegerWrapper
 																		.uminus(1)),
 												kermeta.standard.helper.IntegerWrapper
 														.isGreater(
 																c.size(),
-																p_lbdExp156
+																p_lbdExp173
 																		.getUpper()));
 
-								if (idIfCond_712) {
+								if (idIfCond_768) {
 
 									kermeta.exceptions.ConstraintViolatedInv e = ((kermeta.exceptions.ConstraintViolatedInv) org.kermeta.compil.runtime.helper.language.ClassUtil
 											.newObject("kermeta.exceptions.ConstraintViolatedInv"));
@@ -819,7 +819,7 @@ public class IntegerWrapper {
 																															cd
 																																	.getName()),
 																											"."),
-																							p_lbdExp156
+																							p_lbdExp173
 																									.getName()),
 																			" violated on "),
 															org.kermeta.compil.runtime.helper.language.ObjectUtil
@@ -831,12 +831,12 @@ public class IntegerWrapper {
 
 								}
 
-								java.lang.Boolean idIfCond_713 = false;
-								idIfCond_713 = kermeta.standard.helper.IntegerWrapper
-										.isLower(c.size(), p_lbdExp156
+								java.lang.Boolean idIfCond_769 = false;
+								idIfCond_769 = kermeta.standard.helper.IntegerWrapper
+										.isLower(c.size(), p_lbdExp173
 												.getLower());
 
-								if (idIfCond_713) {
+								if (idIfCond_769) {
 
 									kermeta.exceptions.ConstraintViolatedInv e = ((kermeta.exceptions.ConstraintViolatedInv) org.kermeta.compil.runtime.helper.language.ClassUtil
 											.newObject("kermeta.exceptions.ConstraintViolatedInv"));
@@ -856,7 +856,7 @@ public class IntegerWrapper {
 																															cd
 																																	.getName()),
 																											"."),
-																							p_lbdExp156
+																							p_lbdExp173
 																									.getName()),
 																			" violated on "),
 															org.kermeta.compil.runtime.helper.language.ObjectUtil
@@ -870,16 +870,16 @@ public class IntegerWrapper {
 
 							} else {
 
-								java.lang.Boolean idIfCond_714 = false;
-								idIfCond_714 = kermeta.standard.helper.BooleanWrapper
+								java.lang.Boolean idIfCond_770 = false;
+								idIfCond_770 = kermeta.standard.helper.BooleanWrapper
 										.and(
 												kermeta.standard.helper.IntegerWrapper
-														.equals(p_lbdExp156
+														.equals(p_lbdExp173
 																.getLower(), 1),
 												org.kermeta.compil.runtime.helper.language.ObjectUtil
 														.isVoidSwitcher(v));
 
-								if (idIfCond_714) {
+								if (idIfCond_770) {
 
 									kermeta.exceptions.ConstraintViolatedInv e = ((kermeta.exceptions.ConstraintViolatedInv) org.kermeta.compil.runtime.helper.language.ClassUtil
 											.newObject("kermeta.exceptions.ConstraintViolatedInv"));
@@ -899,7 +899,7 @@ public class IntegerWrapper {
 																															cd
 																																	.getName()),
 																											"."),
-																							p_lbdExp156
+																							p_lbdExp173
 																									.getName()),
 																			" violated on "),
 															org.kermeta.compil.runtime.helper.language.ObjectUtil
@@ -996,11 +996,11 @@ public class IntegerWrapper {
 
 	) {
 
-		java.lang.Boolean idIfCond_715 = false;
-		idIfCond_715 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+		java.lang.Boolean idIfCond_771 = false;
+		idIfCond_771 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 				.isNotEqualSwitcher(self, null);
 
-		if (idIfCond_715) {
+		if (idIfCond_771) {
 
 			org.kermeta.compil.runtime.helper.language.ObjectUtil
 					.checkInvariantsSwitcher(self);
@@ -1014,93 +1014,93 @@ public class IntegerWrapper {
 
 			{
 
-				kermeta.standard.Iterator<kermeta.language.structure.Property> it_ft159 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
+				kermeta.standard.Iterator<kermeta.language.structure.Property> it_ft176 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
 						.<kermeta.language.structure.Property> convertAsSet(
 								cd.getterAllAttribute()).iterator();
-				java.lang.Boolean idLoopCond_716 = false;
-				while (!idLoopCond_716) {
-					idLoopCond_716 = it_ft159.isOff();
-					if (idLoopCond_716) {
+				java.lang.Boolean idLoopCond_772 = false;
+				while (!idLoopCond_772) {
+					idLoopCond_772 = it_ft176.isOff();
+					if (idLoopCond_772) {
 					} else {
 
 						//BIle:func
-						kermeta.language.structure.Property prop_lbdExp159 = it_ft159
+						kermeta.language.structure.Property prop_lbdExp176 = it_ft176
 								.next();
 
-						java.lang.Boolean idIfCond_717 = false;
-						idIfCond_717 = kermeta.standard.helper.BooleanWrapper
-								.and(prop_lbdExp159.getIsComposite(),
+						java.lang.Boolean idIfCond_773 = false;
+						idIfCond_773 = kermeta.standard.helper.BooleanWrapper
+								.and(prop_lbdExp176.getIsComposite(),
 										kermeta.standard.helper.BooleanWrapper
-												.not(prop_lbdExp159
+												.not(prop_lbdExp176
 														.getIsDerived()));
 
-						if (idIfCond_717) {
+						if (idIfCond_773) {
 
-							java.lang.Boolean idIfCond_718 = false;
-							idIfCond_718 = kermeta.standard.helper.BooleanWrapper
+							java.lang.Boolean idIfCond_774 = false;
+							idIfCond_774 = kermeta.standard.helper.BooleanWrapper
 									.not(org.kermeta.compil.runtime.helper.language.ObjectUtil
 											.isVoidSwitcher(org.kermeta.compil.runtime.helper.language.ObjectUtil
 													.getSwitcher(self,
-															prop_lbdExp159)));
+															prop_lbdExp176)));
 
-							if (idIfCond_718) {
+							if (idIfCond_774) {
 
-								java.lang.Boolean idIfCond_719 = false;
+								java.lang.Boolean idIfCond_775 = false;
 								//BIft:exists
 
-								java.lang.Boolean result_ft160 = null;
+								java.lang.Boolean result_ft177 = null;
 
-								java.lang.Boolean test_ft160 = false;
+								java.lang.Boolean test_ft177 = false;
 
 								{
 
-									kermeta.standard.Iterator<kermeta.language.structure.Type> it_ft160 = ((kermeta.language.structure.ClassDefinition) org.kermeta.compil.runtime.helper.language.ObjectUtil
+									kermeta.standard.Iterator<kermeta.language.structure.Type> it_ft177 = ((kermeta.language.structure.ClassDefinition) org.kermeta.compil.runtime.helper.language.ObjectUtil
 											.asTypeSwitcher(
 													org.kermeta.compil.runtime.helper.language.ObjectUtil
 															.getMetaClassSwitcher(
 																	org.kermeta.compil.runtime.helper.language.ObjectUtil
 																			.getSwitcher(
 																					self,
-																					prop_lbdExp159))
+																					prop_lbdExp176))
 															.getTypeDefinition(),
 													org.kermeta.compil.runtime.ExecutionContext
 															.getInstance()
 															.getMetaClass(
 																	"kermeta.language.structure.ClassDefinition")))
 											.allSuperTypes().iterator();
-									java.lang.Boolean idLoopCond_720 = false;
-									while (!idLoopCond_720) {
-										idLoopCond_720 = kermeta.standard.helper.BooleanWrapper
+									java.lang.Boolean idLoopCond_776 = false;
+									while (!idLoopCond_776) {
+										idLoopCond_776 = kermeta.standard.helper.BooleanWrapper
 												.or(
-														it_ft160.isOff(),
+														it_ft177.isOff(),
 														org.kermeta.compil.runtime.helper.language.ObjectUtil
 																.isNotEqualSwitcher(
-																		test_ft160,
+																		test_ft177,
 																		false));
-										if (idLoopCond_720) {
+										if (idLoopCond_776) {
 										} else {
 
-											java.lang.Boolean result_lambda_ft160 = null;
+											java.lang.Boolean result_lambda_ft177 = null;
 											//BIle:func
-											kermeta.language.structure.Type t_lbdExp160 = it_ft160
+											kermeta.language.structure.Type t_lbdExp177 = it_ft177
 													.next();
 
-											java.lang.Boolean idIfCond_721 = false;
-											idIfCond_721 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+											java.lang.Boolean idIfCond_777 = false;
+											idIfCond_777 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 													.isInstanceOfSwitcher(
-															t_lbdExp160,
+															t_lbdExp177,
 															org.kermeta.compil.runtime.ExecutionContext
 																	.getInstance()
 																	.getMetaClass(
 																			"kermeta.language.structure.ParameterizedType"));
 
-											if (idIfCond_721) {
+											if (idIfCond_777) {
 
-												result_lambda_ft160 = kermeta.standard.helper.StringWrapper
+												result_lambda_ft177 = kermeta.standard.helper.StringWrapper
 														.equals(
 																((kermeta.language.structure.ParameterizedType) org.kermeta.compil.runtime.helper.language.ObjectUtil
 																		.asTypeSwitcher(
-																				t_lbdExp160,
+																				t_lbdExp177,
 																				org.kermeta.compil.runtime.ExecutionContext
 																						.getInstance()
 																						.getMetaClass(
@@ -1110,49 +1110,49 @@ public class IntegerWrapper {
 																"kermeta::standard::Collection");
 											} else {
 
-												result_lambda_ft160 = false;
+												result_lambda_ft177 = false;
 											}
 
 											//EIle:func
 
-											test_ft160 = kermeta.standard.helper.BooleanWrapper
-													.or(test_ft160,
-															result_lambda_ft160);
+											test_ft177 = kermeta.standard.helper.BooleanWrapper
+													.or(test_ft177,
+															result_lambda_ft177);
 										}
 									}
 								}
 
-								result_ft160 = test_ft160;
+								result_ft177 = test_ft177;
 
 								//CEC
-								idIfCond_719 = result_ft160;
+								idIfCond_775 = result_ft177;
 								//EIft:exists
 
-								if (idIfCond_719) {
+								if (idIfCond_775) {
 
 									kermeta.standard.Collection<kermeta.language.structure.Object> subObjInstances = null;
 
 									subObjInstances = (kermeta.standard.Collection<kermeta.language.structure.Object>) org.kermeta.compil.runtime.helper.language.ObjectUtil
-											.getSwitcher(self, prop_lbdExp159);
+											.getSwitcher(self, prop_lbdExp176);
 
 									//BIft:each
 
 									{
 
-										kermeta.standard.Iterator<kermeta.language.structure.Object> it_ft161 = subObjInstances
+										kermeta.standard.Iterator<kermeta.language.structure.Object> it_ft178 = subObjInstances
 												.iterator();
-										java.lang.Boolean idLoopCond_722 = false;
-										while (!idLoopCond_722) {
-											idLoopCond_722 = it_ft161.isOff();
-											if (idLoopCond_722) {
+										java.lang.Boolean idLoopCond_778 = false;
+										while (!idLoopCond_778) {
+											idLoopCond_778 = it_ft178.isOff();
+											if (idLoopCond_778) {
 											} else {
 
 												//BIle:func
-												kermeta.language.structure.Object aSubObjInstances_lbdExp161 = it_ft161
+												kermeta.language.structure.Object aSubObjInstances_lbdExp178 = it_ft178
 														.next();
 
 												org.kermeta.compil.runtime.helper.language.ObjectUtil
-														.checkAllInvariantsSwitcher(aSubObjInstances_lbdExp161);
+														.checkAllInvariantsSwitcher(aSubObjInstances_lbdExp178);
 												//EIle:func
 
 											}
@@ -1166,7 +1166,7 @@ public class IntegerWrapper {
 									org.kermeta.compil.runtime.helper.language.ObjectUtil
 											.checkAllInvariantsSwitcher(org.kermeta.compil.runtime.helper.language.ObjectUtil
 													.getSwitcher(self,
-															prop_lbdExp159));
+															prop_lbdExp176));
 								}
 
 							}
@@ -1285,6 +1285,25 @@ public class IntegerWrapper {
 	 *
 	 * @generated
 	 */
+	public static <G> kermeta.language.structure.Object container(
+
+	java.lang.Integer self
+
+	) {
+
+		kermeta.language.structure.Object result = null;
+
+		result = org.kermeta.compil.runtime.helper.language.ObjectUtil
+				.container(self);
+
+		return result;
+
+	}
+
+	/**
+	 *
+	 * @generated
+	 */
 	public static <G> void freeze(
 
 	java.lang.Integer self
@@ -1307,25 +1326,6 @@ public class IntegerWrapper {
 
 		org.kermeta.compil.runtime.helper.language.ObjectUtil.unset(self,
 				property);
-
-	}
-
-	/**
-	 *
-	 * @generated
-	 */
-	public static <G> kermeta.language.structure.Object container(
-
-	java.lang.Integer self
-
-	) {
-
-		kermeta.language.structure.Object result = null;
-
-		result = org.kermeta.compil.runtime.helper.language.ObjectUtil
-				.container(self);
-
-		return result;
 
 	}
 
@@ -1361,11 +1361,11 @@ public class IntegerWrapper {
 
 		kermeta.language.structure.Object result = null;
 
-		java.lang.Boolean idIfCond_723 = false;
-		idIfCond_723 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+		java.lang.Boolean idIfCond_779 = false;
+		idIfCond_779 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 				.isInstanceOfSwitcher(self, type);
 
-		if (idIfCond_723) {
+		if (idIfCond_779) {
 
 			result = self;
 		} else {

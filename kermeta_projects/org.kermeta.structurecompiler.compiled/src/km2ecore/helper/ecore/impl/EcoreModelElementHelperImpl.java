@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: EcoreModelElementHelperImpl.java,v 1.6 2008-10-28 13:18:31 cfaucher Exp $
+ * $Id: EcoreModelElementHelperImpl.java,v 1.7 2008-10-29 08:29:28 cfaucher Exp $
  */
 package km2ecore.helper.ecore.impl;
 
@@ -70,47 +70,47 @@ public class EcoreModelElementHelperImpl extends ObjectImpl implements
 		ecore.EOperation eop = null;
 		//BIft:detect
 
-		ecore.EOperation result_ft246 = null;
+		ecore.EOperation result_ft237 = null;
 
-		ecore.EOperation elem_ft246 = null;
+		ecore.EOperation elem_ft237 = null;
 
-		result_ft246 = null;
+		result_ft237 = null;
 
 		{
 
-			kermeta.standard.Iterator<ecore.EOperation> it_ft246 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
+			kermeta.standard.Iterator<ecore.EOperation> it_ft237 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
 					.<ecore.EOperation> convertAsOrderedSet(
 							cd.getEcoreModelElement().getEOperations())
 					.iterator();
-			java.lang.Boolean idLoopCond_1075 = false;
-			while (!idLoopCond_1075) {
-				idLoopCond_1075 = kermeta.standard.helper.BooleanWrapper.or(
-						it_ft246.isOff(),
+			java.lang.Boolean idLoopCond_1046 = false;
+			while (!idLoopCond_1046) {
+				idLoopCond_1046 = kermeta.standard.helper.BooleanWrapper.or(
+						it_ft237.isOff(),
 						org.kermeta.compil.runtime.helper.language.ObjectUtil
-								.isNotEqualSwitcher(result_ft246, null));
-				if (idLoopCond_1075) {
+								.isNotEqualSwitcher(result_ft237, null));
+				if (idLoopCond_1046) {
 				} else {
 
-					elem_ft246 = it_ft246.next();
+					elem_ft237 = it_ft237.next();
 
-					java.lang.Boolean idIfCond_1076 = false;
+					java.lang.Boolean idIfCond_1047 = false;
 					//BIle:detector
-					ecore.EOperation c_lbdExp246 = elem_ft246;
+					ecore.EOperation c_lbdExp237 = elem_ft237;
 
-					java.lang.Boolean idIfCond_1077 = false;
-					idIfCond_1077 = org.kermeta.compil.runtime.helper.language.ObjectUtil
-							.isInstanceOfSwitcher(c_lbdExp246,
+					java.lang.Boolean idIfCond_1048 = false;
+					idIfCond_1048 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+							.isInstanceOfSwitcher(c_lbdExp237,
 									org.kermeta.compil.runtime.ExecutionContext
 											.getInstance().getMetaClass(
 													"ecore.EOperation"));
 
-					if (idIfCond_1077) {
+					if (idIfCond_1048) {
 
-						idIfCond_1076 = kermeta.standard.helper.StringWrapper
+						idIfCond_1047 = kermeta.standard.helper.StringWrapper
 								.equals(
 										((ecore.EOperation) org.kermeta.compil.runtime.helper.language.ObjectUtil
 												.asTypeSwitcher(
-														c_lbdExp246,
+														c_lbdExp237,
 														org.kermeta.compil.runtime.ExecutionContext
 																.getInstance()
 																.getMetaClass(
@@ -120,9 +120,9 @@ public class EcoreModelElementHelperImpl extends ObjectImpl implements
 
 					//EIle:detector
 
-					if (idIfCond_1076) {
+					if (idIfCond_1047) {
 
-						result_ft246 = elem_ft246;
+						result_ft237 = elem_ft237;
 					}
 
 				}
@@ -130,7 +130,7 @@ public class EcoreModelElementHelperImpl extends ObjectImpl implements
 		}
 
 		//CE
-		eop = result_ft246;
+		eop = result_ft237;
 		//EIft:detect
 
 		result = ((ecore.EOperation) org.kermeta.compil.runtime.helper.language.ObjectUtil
@@ -188,47 +188,47 @@ public class EcoreModelElementHelperImpl extends ObjectImpl implements
 		ecore.EClassifier eclassifier = null;
 		//BIft:detect
 
-		ecore.EClassifier result_ft247 = null;
+		ecore.EClassifier result_ft238 = null;
 
-		ecore.EClassifier elem_ft247 = null;
+		ecore.EClassifier elem_ft238 = null;
 
-		result_ft247 = null;
+		result_ft238 = null;
 
 		{
 
-			kermeta.standard.Iterator<ecore.EClassifier> it_ft247 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
+			kermeta.standard.Iterator<ecore.EClassifier> it_ft238 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
 					.<ecore.EClassifier> convertAsOrderedSet(
 							pack.getEcoreModelElement().getEClassifiers())
 					.iterator();
-			java.lang.Boolean idLoopCond_1078 = false;
-			while (!idLoopCond_1078) {
-				idLoopCond_1078 = kermeta.standard.helper.BooleanWrapper.or(
-						it_ft247.isOff(),
+			java.lang.Boolean idLoopCond_1049 = false;
+			while (!idLoopCond_1049) {
+				idLoopCond_1049 = kermeta.standard.helper.BooleanWrapper.or(
+						it_ft238.isOff(),
 						org.kermeta.compil.runtime.helper.language.ObjectUtil
-								.isNotEqualSwitcher(result_ft247, null));
-				if (idLoopCond_1078) {
+								.isNotEqualSwitcher(result_ft238, null));
+				if (idLoopCond_1049) {
 				} else {
 
-					elem_ft247 = it_ft247.next();
+					elem_ft238 = it_ft238.next();
 
-					java.lang.Boolean idIfCond_1079 = false;
+					java.lang.Boolean idIfCond_1050 = false;
 					//BIle:detector
-					ecore.EClassifier c_lbdExp247 = elem_ft247;
+					ecore.EClassifier c_lbdExp238 = elem_ft238;
 
-					java.lang.Boolean idIfCond_1080 = false;
-					idIfCond_1080 = org.kermeta.compil.runtime.helper.language.ObjectUtil
-							.isInstanceOfSwitcher(c_lbdExp247,
+					java.lang.Boolean idIfCond_1051 = false;
+					idIfCond_1051 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+							.isInstanceOfSwitcher(c_lbdExp238,
 									org.kermeta.compil.runtime.ExecutionContext
 											.getInstance().getMetaClass(
 													"ecore.EClass"));
 
-					if (idIfCond_1080) {
+					if (idIfCond_1051) {
 
-						idIfCond_1079 = kermeta.standard.helper.StringWrapper
+						idIfCond_1050 = kermeta.standard.helper.StringWrapper
 								.equals(
 										((ecore.EClass) org.kermeta.compil.runtime.helper.language.ObjectUtil
 												.asTypeSwitcher(
-														c_lbdExp247,
+														c_lbdExp238,
 														org.kermeta.compil.runtime.ExecutionContext
 																.getInstance()
 																.getMetaClass(
@@ -238,9 +238,9 @@ public class EcoreModelElementHelperImpl extends ObjectImpl implements
 
 					//EIle:detector
 
-					if (idIfCond_1079) {
+					if (idIfCond_1050) {
 
-						result_ft247 = elem_ft247;
+						result_ft238 = elem_ft238;
 					}
 
 				}
@@ -248,7 +248,7 @@ public class EcoreModelElementHelperImpl extends ObjectImpl implements
 		}
 
 		//CE
-		eclassifier = result_ft247;
+		eclassifier = result_ft238;
 		//EIft:detect
 
 		result = ((ecore.EClass) org.kermeta.compil.runtime.helper.language.ObjectUtil

@@ -25,10 +25,10 @@ public class ObjectSuper {
 			kermeta.standard.Iterator<kermeta.language.structure.Tag> it_ft255 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
 					.<kermeta.language.structure.Tag> convertAsOrderedSet(
 							self.getOwnedTags()).iterator();
-			java.lang.Boolean idLoopCond_1104 = false;
-			while (!idLoopCond_1104) {
-				idLoopCond_1104 = it_ft255.isOff();
-				if (idLoopCond_1104) {
+			java.lang.Boolean idLoopCond_1106 = false;
+			while (!idLoopCond_1106) {
+				idLoopCond_1106 = it_ft255.isOff();
+				if (idLoopCond_1106) {
 				} else {
 
 					//BIle:func
@@ -38,11 +38,11 @@ public class ObjectSuper {
 					//BIle:func
 					kermeta.language.structure.Tag p_lbdExp254 = o_lbdExp255;
 
-					java.lang.Boolean idIfCond_1105 = false;
-					idIfCond_1105 = kermeta.standard.helper.StringWrapper
+					java.lang.Boolean idIfCond_1107 = false;
+					idIfCond_1107 = kermeta.standard.helper.StringWrapper
 							.equals(p_lbdExp254.getDeprecated(), "");
 
-					if (idIfCond_1105) {
+					if (idIfCond_1107) {
 
 						p_lbdExp254.applyPass2(context);
 					}

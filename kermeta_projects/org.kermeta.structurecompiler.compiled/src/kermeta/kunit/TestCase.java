@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: TestCase.java,v 1.6 2008-10-28 13:18:20 cfaucher Exp $
+ * $Id: TestCase.java,v 1.7 2008-10-29 08:29:18 cfaucher Exp $
  */
 package kermeta.kunit;
 
@@ -54,20 +54,20 @@ public interface TestCase extends Test, Fallible {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @model annotation="kermeta documentation='/**\r\n\t * operation used when the TestCase is run from a java test runner, encapsulates the failures results\r\n\t * into an AssertionFailedError so the TestRunner can detect it\r\n\t \052/'"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='\n\tjava.lang.String msg = \"\";\n\n\tjava.lang.Boolean idIfCond_872 = false;\n\tidIfCond_872 = kermeta.standard.helper.BooleanWrapper.not(org.kermeta.compil.runtime.helper.basetypes.CollectionUtil.<kermeta.kunit.Failure>convertAsOrderedSet(this.getLog().getFailures()).empty());\n\n\tif( idIfCond_872 ) {\n\n\tmsg = \"Failures: \";\n\n\t//BIft:each\n\n\t\n{\n\n\tkermeta.standard.Iterator<kermeta.kunit.Failure> it_ft191 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil.<kermeta.kunit.Failure>convertAsOrderedSet(this.getLog().getFailures()).iterator();\n\tjava.lang.Boolean idLoopCond_873 = false;\n\twhile( !idLoopCond_873 ) {\n\tidLoopCond_873 = it_ft191.isOff();\n\tif ( idLoopCond_873 ) {\n\t} else {\n\n\t//BIle:func\nkermeta.kunit.Failure f_lbdExp191 = it_ft191.next();\n\n\tmsg = kermeta.standard.helper.StringWrapper.plus(kermeta.standard.helper.StringWrapper.plus(msg, \"\\n   \"), f_lbdExp191.toString());\n//EIle:func\n\n}\n\t}\n}\n\n//EIft:each\n\n\n\tkermeta.kunit.AssertionFailedError exception = ((kermeta.kunit.AssertionFailedError) org.kermeta.compil.runtime.helper.language.ClassUtil.newObject(\"kermeta.kunit.AssertionFailedError\"));\n\n\texception.setMessage(msg);\n\n\t\nif (true)\n\tthrow new org.kermeta.compil.runtime.helper.error.KRuntimeError( exception );\n\n}\n\n\n\tjava.lang.Boolean idIfCond_874 = false;\n\tidIfCond_874 = kermeta.standard.helper.BooleanWrapper.not(org.kermeta.compil.runtime.helper.basetypes.CollectionUtil.<kermeta.kunit.Error>convertAsOrderedSet(this.getLog().getErrors()).empty());\n\n\tif( idIfCond_874 ) {\n\n\t//BIft:each\n\n\t\n{\n\n\tkermeta.standard.Iterator<kermeta.kunit.Error> it_ft192 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil.<kermeta.kunit.Error>convertAsOrderedSet(this.getLog().getErrors()).iterator();\n\tjava.lang.Boolean idLoopCond_875 = false;\n\twhile( !idLoopCond_875 ) {\n\tidLoopCond_875 = it_ft192.isOff();\n\tif ( idLoopCond_875 ) {\n\t} else {\n\n\t//BIle:func\nkermeta.kunit.Error f_lbdExp192 = it_ft192.next();\n\n\tmsg = \"Errors: \";\n\n\tmsg = kermeta.standard.helper.StringWrapper.plus(kermeta.standard.helper.StringWrapper.plus(msg, \"\\n   \"), f_lbdExp192.toString());\n\n\tkermeta.exceptions.Exception exception = ((kermeta.exceptions.Exception) org.kermeta.compil.runtime.helper.language.ClassUtil.newObject(\"kermeta.exceptions.Exception\"));\n\n\texception.setMessage(msg);\n\n\t\nif (true)\n\tthrow new org.kermeta.compil.runtime.helper.error.KRuntimeError( exception );\n\n//EIle:func\n\n}\n\t}\n}\n\n//EIft:each\n\n}\n\n'"
-	 * @generated
-	 */
-	void raiseIfHasFailures();
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
 	 * @model annotation="kermeta documentation='/**\r\n\t * the things to be done before execution of the test method\r\n\t * (designed to be overwritten in real TestCase classes) \r\n\t \052/'"
 	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body=''"
 	 * @generated
 	 */
 	void setUp();
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model annotation="kermeta documentation='/**\r\n\t * operation used when the TestCase is run from a java test runner, encapsulates the failures results\r\n\t * into an AssertionFailedError so the TestRunner can detect it\r\n\t \052/'"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='\n\tjava.lang.String msg = \"\";\n\n\tjava.lang.Boolean idIfCond_1015 = false;\n\tidIfCond_1015 = kermeta.standard.helper.BooleanWrapper.not(org.kermeta.compil.runtime.helper.basetypes.CollectionUtil.<kermeta.kunit.Failure>convertAsOrderedSet(this.getLog().getFailures()).empty());\n\n\tif( idIfCond_1015 ) {\n\n\tmsg = \"Failures: \";\n\n\t//BIft:each\n\n\t\n{\n\n\tkermeta.standard.Iterator<kermeta.kunit.Failure> it_ft231 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil.<kermeta.kunit.Failure>convertAsOrderedSet(this.getLog().getFailures()).iterator();\n\tjava.lang.Boolean idLoopCond_1016 = false;\n\twhile( !idLoopCond_1016 ) {\n\tidLoopCond_1016 = it_ft231.isOff();\n\tif ( idLoopCond_1016 ) {\n\t} else {\n\n\t//BIle:func\nkermeta.kunit.Failure f_lbdExp231 = it_ft231.next();\n\n\tmsg = kermeta.standard.helper.StringWrapper.plus(kermeta.standard.helper.StringWrapper.plus(msg, \"\\n   \"), f_lbdExp231.toString());\n//EIle:func\n\n}\n\t}\n}\n\n//EIft:each\n\n\n\tkermeta.kunit.AssertionFailedError exception = ((kermeta.kunit.AssertionFailedError) org.kermeta.compil.runtime.helper.language.ClassUtil.newObject(\"kermeta.kunit.AssertionFailedError\"));\n\n\texception.setMessage(msg);\n\n\t\nif (true)\n\tthrow new org.kermeta.compil.runtime.helper.error.KRuntimeError( exception );\n\n}\n\n\n\tjava.lang.Boolean idIfCond_1017 = false;\n\tidIfCond_1017 = kermeta.standard.helper.BooleanWrapper.not(org.kermeta.compil.runtime.helper.basetypes.CollectionUtil.<kermeta.kunit.Error>convertAsOrderedSet(this.getLog().getErrors()).empty());\n\n\tif( idIfCond_1017 ) {\n\n\t//BIft:each\n\n\t\n{\n\n\tkermeta.standard.Iterator<kermeta.kunit.Error> it_ft232 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil.<kermeta.kunit.Error>convertAsOrderedSet(this.getLog().getErrors()).iterator();\n\tjava.lang.Boolean idLoopCond_1018 = false;\n\twhile( !idLoopCond_1018 ) {\n\tidLoopCond_1018 = it_ft232.isOff();\n\tif ( idLoopCond_1018 ) {\n\t} else {\n\n\t//BIle:func\nkermeta.kunit.Error f_lbdExp232 = it_ft232.next();\n\n\tmsg = \"Errors: \";\n\n\tmsg = kermeta.standard.helper.StringWrapper.plus(kermeta.standard.helper.StringWrapper.plus(msg, \"\\n   \"), f_lbdExp232.toString());\n\n\tkermeta.exceptions.Exception exception = ((kermeta.exceptions.Exception) org.kermeta.compil.runtime.helper.language.ClassUtil.newObject(\"kermeta.exceptions.Exception\"));\n\n\texception.setMessage(msg);\n\n\t\nif (true)\n\tthrow new org.kermeta.compil.runtime.helper.error.KRuntimeError( exception );\n\n//EIle:func\n\n}\n\t}\n}\n\n//EIft:each\n\n}\n\n'"
+	 * @generated
+	 */
+	void raiseIfHasFailures();
 
 	/**
 	 * <!-- begin-user-doc -->

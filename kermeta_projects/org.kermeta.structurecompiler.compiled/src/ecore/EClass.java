@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: EClass.java,v 1.7 2008-10-28 13:18:25 cfaucher Exp $
+ * $Id: EClass.java,v 1.8 2008-10-29 08:29:20 cfaucher Exp $
  */
 package ecore;
 
@@ -155,22 +155,22 @@ public interface EClass extends EClassifier {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @model featureNameDataType="ecore.EString"
-	 *        annotation="kermeta isAbstract='true'"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='ecore.EStructuralFeature result = null;\n\nreturn result;\n'"
-	 * @generated
-	 */
-	EStructuralFeature getEStructuralFeature(String featureName);
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
 	 * @model dataType="ecore.EInt"
 	 *        annotation="kermeta isAbstract='true'"
 	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='java.lang.Integer result = null;\n\nreturn result;\n'"
 	 * @generated
 	 */
 	int getFeatureID(EStructuralFeature feature);
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model featureNameDataType="ecore.EString"
+	 *        annotation="kermeta isAbstract='true'"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='ecore.EStructuralFeature result = null;\n\nreturn result;\n'"
+	 * @generated
+	 */
+	EStructuralFeature getEStructuralFeature(String featureName);
 
 	/**
 	 * <!-- begin-user-doc -->

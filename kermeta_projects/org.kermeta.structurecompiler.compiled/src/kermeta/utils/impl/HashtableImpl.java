@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: HashtableImpl.java,v 1.6 2008-10-28 13:18:13 cfaucher Exp $
+ * $Id: HashtableImpl.java,v 1.7 2008-10-29 08:29:13 cfaucher Exp $
  */
 package kermeta.utils.impl;
 
@@ -93,14 +93,9 @@ public class HashtableImpl<K, V> extends ObjectImpl implements Hashtable<K, V> {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public V getValue(K key) {
+	public void clear() {
 
-		V result = null;
-
-		result = (V) org.kermeta.compil.runtime.helper.basetypes.MapUtil.get(
-				this, key);
-
-		return result;
+		org.kermeta.compil.runtime.helper.basetypes.MapUtil.clear(this);
 
 	}
 
@@ -109,9 +104,14 @@ public class HashtableImpl<K, V> extends ObjectImpl implements Hashtable<K, V> {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void clear() {
+	public V getValue(K key) {
 
-		org.kermeta.compil.runtime.helper.basetypes.MapUtil.clear(this);
+		V result = null;
+
+		result = (V) org.kermeta.compil.runtime.helper.basetypes.MapUtil.get(
+				this, key);
+
+		return result;
 
 	}
 
@@ -159,17 +159,17 @@ public class HashtableImpl<K, V> extends ObjectImpl implements Hashtable<K, V> {
 
 		{
 
-			kermeta.standard.Iterator<K> it_ft197 = this.keys().iterator();
-			java.lang.Boolean idLoopCond_899 = false;
-			while (!idLoopCond_899) {
-				idLoopCond_899 = it_ft197.isOff();
-				if (idLoopCond_899) {
+			kermeta.standard.Iterator<K> it_ft223 = this.keys().iterator();
+			java.lang.Boolean idLoopCond_984 = false;
+			while (!idLoopCond_984) {
+				idLoopCond_984 = it_ft223.isOff();
+				if (idLoopCond_984) {
 				} else {
 
 					//BIle:func
-					K k_lbdExp197 = it_ft197.next();
+					K k_lbdExp223 = it_ft223.next();
 
-					result.add(this.getValue(k_lbdExp197));
+					result.add(this.getValue(k_lbdExp223));
 					//EIle:func
 
 				}
@@ -208,10 +208,10 @@ public class HashtableImpl<K, V> extends ObjectImpl implements Hashtable<K, V> {
 		{
 
 			kermeta.standard.Iterator<K> it = this.keyIterator();
-			java.lang.Boolean idLoopCond_900 = false;
-			while (!idLoopCond_900) {
-				idLoopCond_900 = it.isOff();
-				if (idLoopCond_900) {
+			java.lang.Boolean idLoopCond_985 = false;
+			while (!idLoopCond_985) {
+				idLoopCond_985 = it.isOff();
+				if (idLoopCond_985) {
 				} else {
 
 					result.add(it.next());

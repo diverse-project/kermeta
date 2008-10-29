@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: UtilsPackageImpl.java,v 1.6 2008-10-28 13:18:13 cfaucher Exp $
+ * $Id: UtilsPackageImpl.java,v 1.7 2008-10-29 08:29:13 cfaucher Exp $
  */
 package kermeta.utils.impl;
 
@@ -215,18 +215,18 @@ public class UtilsPackageImpl extends EPackageImpl implements UtilsPackage {
 				.getEPackage(BehaviorPackage.eNS_URI) instanceof BehaviorPackageImpl ? EPackage.Registry.INSTANCE
 				.getEPackage(BehaviorPackage.eNS_URI)
 				: BehaviorPackage.eINSTANCE);
+		CompilerPackageImpl theCompilerPackage = (CompilerPackageImpl) (EPackage.Registry.INSTANCE
+				.getEPackage(CompilerPackage.eNS_URI) instanceof CompilerPackageImpl ? EPackage.Registry.INSTANCE
+				.getEPackage(CompilerPackage.eNS_URI)
+				: CompilerPackage.eINSTANCE);
+		ExceptionsPackageImpl theExceptionsPackage = (ExceptionsPackageImpl) (EPackage.Registry.INSTANCE
+				.getEPackage(ExceptionsPackage.eNS_URI) instanceof ExceptionsPackageImpl ? EPackage.Registry.INSTANCE
+				.getEPackage(ExceptionsPackage.eNS_URI)
+				: ExceptionsPackage.eINSTANCE);
 		StandardPackageImpl theStandardPackage = (StandardPackageImpl) (EPackage.Registry.INSTANCE
 				.getEPackage(StandardPackage.eNS_URI) instanceof StandardPackageImpl ? EPackage.Registry.INSTANCE
 				.getEPackage(StandardPackage.eNS_URI)
 				: StandardPackage.eINSTANCE);
-		KunitPackageImpl theKunitPackage = (KunitPackageImpl) (EPackage.Registry.INSTANCE
-				.getEPackage(KunitPackage.eNS_URI) instanceof KunitPackageImpl ? EPackage.Registry.INSTANCE
-				.getEPackage(KunitPackage.eNS_URI)
-				: KunitPackage.eINSTANCE);
-		InterpreterPackageImpl theInterpreterPackage = (InterpreterPackageImpl) (EPackage.Registry.INSTANCE
-				.getEPackage(InterpreterPackage.eNS_URI) instanceof InterpreterPackageImpl ? EPackage.Registry.INSTANCE
-				.getEPackage(InterpreterPackage.eNS_URI)
-				: InterpreterPackage.eINSTANCE);
 		PersistencePackageImpl thePersistencePackage = (PersistencePackageImpl) (EPackage.Registry.INSTANCE
 				.getEPackage(PersistencePackage.eNS_URI) instanceof PersistencePackageImpl ? EPackage.Registry.INSTANCE
 				.getEPackage(PersistencePackage.eNS_URI)
@@ -235,30 +235,22 @@ public class UtilsPackageImpl extends EPackageImpl implements UtilsPackage {
 				.getEPackage(IoPackage.eNS_URI) instanceof IoPackageImpl ? EPackage.Registry.INSTANCE
 				.getEPackage(IoPackage.eNS_URI)
 				: IoPackage.eINSTANCE);
-		ExceptionsPackageImpl theExceptionsPackage = (ExceptionsPackageImpl) (EPackage.Registry.INSTANCE
-				.getEPackage(ExceptionsPackage.eNS_URI) instanceof ExceptionsPackageImpl ? EPackage.Registry.INSTANCE
-				.getEPackage(ExceptionsPackage.eNS_URI)
-				: ExceptionsPackage.eINSTANCE);
 		EcorePackageImpl theEcorePackage = (EcorePackageImpl) (EPackage.Registry.INSTANCE
 				.getEPackage(EcorePackage.eNS_URI) instanceof EcorePackageImpl ? EPackage.Registry.INSTANCE
 				.getEPackage(EcorePackage.eNS_URI)
 				: EcorePackage.eINSTANCE);
-		CompilerPackageImpl theCompilerPackage = (CompilerPackageImpl) (EPackage.Registry.INSTANCE
-				.getEPackage(CompilerPackage.eNS_URI) instanceof CompilerPackageImpl ? EPackage.Registry.INSTANCE
-				.getEPackage(CompilerPackage.eNS_URI)
-				: CompilerPackage.eINSTANCE);
-		SimkPackageImpl theSimkPackage = (SimkPackageImpl) (EPackage.Registry.INSTANCE
-				.getEPackage(SimkPackage.eNS_URI) instanceof SimkPackageImpl ? EPackage.Registry.INSTANCE
-				.getEPackage(SimkPackage.eNS_URI)
-				: SimkPackage.eINSTANCE);
+		InterpreterPackageImpl theInterpreterPackage = (InterpreterPackageImpl) (EPackage.Registry.INSTANCE
+				.getEPackage(InterpreterPackage.eNS_URI) instanceof InterpreterPackageImpl ? EPackage.Registry.INSTANCE
+				.getEPackage(InterpreterPackage.eNS_URI)
+				: InterpreterPackage.eINSTANCE);
+		KunitPackageImpl theKunitPackage = (KunitPackageImpl) (EPackage.Registry.INSTANCE
+				.getEPackage(KunitPackage.eNS_URI) instanceof KunitPackageImpl ? EPackage.Registry.INSTANCE
+				.getEPackage(KunitPackage.eNS_URI)
+				: KunitPackage.eINSTANCE);
 		Km2ecorePackageImpl theKm2ecorePackage = (Km2ecorePackageImpl) (EPackage.Registry.INSTANCE
 				.getEPackage(Km2ecorePackage.eNS_URI) instanceof Km2ecorePackageImpl ? EPackage.Registry.INSTANCE
 				.getEPackage(Km2ecorePackage.eNS_URI)
 				: Km2ecorePackage.eINSTANCE);
-		JavaPackageImpl theJavaPackage = (JavaPackageImpl) (EPackage.Registry.INSTANCE
-				.getEPackage(JavaPackage.eNS_URI) instanceof JavaPackageImpl ? EPackage.Registry.INSTANCE
-				.getEPackage(JavaPackage.eNS_URI)
-				: JavaPackage.eINSTANCE);
 		km2ecore.helper.ecore.impl.EcorePackageImpl theEcorePackage_1 = (km2ecore.helper.ecore.impl.EcorePackageImpl) (EPackage.Registry.INSTANCE
 				.getEPackage(km2ecore.helper.ecore.EcorePackage.eNS_URI) instanceof km2ecore.helper.ecore.impl.EcorePackageImpl ? EPackage.Registry.INSTANCE
 				.getEPackage(km2ecore.helper.ecore.EcorePackage.eNS_URI)
@@ -267,6 +259,10 @@ public class UtilsPackageImpl extends EPackageImpl implements UtilsPackage {
 				.getEPackage(km2ecore.helper.kermeta.KermetaPackage.eNS_URI) instanceof km2ecore.helper.kermeta.impl.KermetaPackageImpl ? EPackage.Registry.INSTANCE
 				.getEPackage(km2ecore.helper.kermeta.KermetaPackage.eNS_URI)
 				: km2ecore.helper.kermeta.KermetaPackage.eINSTANCE);
+		JavaPackageImpl theJavaPackage = (JavaPackageImpl) (EPackage.Registry.INSTANCE
+				.getEPackage(JavaPackage.eNS_URI) instanceof JavaPackageImpl ? EPackage.Registry.INSTANCE
+				.getEPackage(JavaPackage.eNS_URI)
+				: JavaPackage.eINSTANCE);
 		CommonPackageImpl theCommonPackage = (CommonPackageImpl) (EPackage.Registry.INSTANCE
 				.getEPackage(CommonPackage.eNS_URI) instanceof CommonPackageImpl ? EPackage.Registry.INSTANCE
 				.getEPackage(CommonPackage.eNS_URI)
@@ -275,6 +271,10 @@ public class UtilsPackageImpl extends EPackageImpl implements UtilsPackage {
 				.getEPackage(ExceptionPackage.eNS_URI) instanceof ExceptionPackageImpl ? EPackage.Registry.INSTANCE
 				.getEPackage(ExceptionPackage.eNS_URI)
 				: ExceptionPackage.eINSTANCE);
+		SimkPackageImpl theSimkPackage = (SimkPackageImpl) (EPackage.Registry.INSTANCE
+				.getEPackage(SimkPackage.eNS_URI) instanceof SimkPackageImpl ? EPackage.Registry.INSTANCE
+				.getEPackage(SimkPackage.eNS_URI)
+				: SimkPackage.eINSTANCE);
 		TraceabilityPackageImpl theTraceabilityPackage = (TraceabilityPackageImpl) (EPackage.Registry.INSTANCE
 				.getEPackage(TraceabilityPackage.eNS_URI) instanceof TraceabilityPackageImpl ? EPackage.Registry.INSTANCE
 				.getEPackage(TraceabilityPackage.eNS_URI)
@@ -290,21 +290,21 @@ public class UtilsPackageImpl extends EPackageImpl implements UtilsPackage {
 		theLanguagePackage.createPackageContents();
 		theStructurePackage.createPackageContents();
 		theBehaviorPackage.createPackageContents();
+		theCompilerPackage.createPackageContents();
+		theExceptionsPackage.createPackageContents();
 		theStandardPackage.createPackageContents();
-		theKunitPackage.createPackageContents();
-		theInterpreterPackage.createPackageContents();
 		thePersistencePackage.createPackageContents();
 		theIoPackage.createPackageContents();
-		theExceptionsPackage.createPackageContents();
 		theEcorePackage.createPackageContents();
-		theCompilerPackage.createPackageContents();
-		theSimkPackage.createPackageContents();
+		theInterpreterPackage.createPackageContents();
+		theKunitPackage.createPackageContents();
 		theKm2ecorePackage.createPackageContents();
-		theJavaPackage.createPackageContents();
 		theEcorePackage_1.createPackageContents();
 		theKermetaPackage_1.createPackageContents();
+		theJavaPackage.createPackageContents();
 		theCommonPackage.createPackageContents();
 		theExceptionPackage.createPackageContents();
+		theSimkPackage.createPackageContents();
 		theTraceabilityPackage.createPackageContents();
 		theEcorePackage_2.createPackageContents();
 
@@ -314,21 +314,21 @@ public class UtilsPackageImpl extends EPackageImpl implements UtilsPackage {
 		theLanguagePackage.initializePackageContents();
 		theStructurePackage.initializePackageContents();
 		theBehaviorPackage.initializePackageContents();
+		theCompilerPackage.initializePackageContents();
+		theExceptionsPackage.initializePackageContents();
 		theStandardPackage.initializePackageContents();
-		theKunitPackage.initializePackageContents();
-		theInterpreterPackage.initializePackageContents();
 		thePersistencePackage.initializePackageContents();
 		theIoPackage.initializePackageContents();
-		theExceptionsPackage.initializePackageContents();
 		theEcorePackage.initializePackageContents();
-		theCompilerPackage.initializePackageContents();
-		theSimkPackage.initializePackageContents();
+		theInterpreterPackage.initializePackageContents();
+		theKunitPackage.initializePackageContents();
 		theKm2ecorePackage.initializePackageContents();
-		theJavaPackage.initializePackageContents();
 		theEcorePackage_1.initializePackageContents();
 		theKermetaPackage_1.initializePackageContents();
+		theJavaPackage.initializePackageContents();
 		theCommonPackage.initializePackageContents();
 		theExceptionPackage.initializePackageContents();
+		theSimkPackage.initializePackageContents();
 		theTraceabilityPackage.initializePackageContents();
 		theEcorePackage_2.initializePackageContents();
 
@@ -527,15 +527,15 @@ public class UtilsPackageImpl extends EPackageImpl implements UtilsPackage {
 				IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED,
 				IS_ORDERED);
 
+		addEOperation(hashtableEClass, null, "clear", 0, 1, IS_UNIQUE,
+				IS_ORDERED);
+
 		op = addEOperation(hashtableEClass, null, "getValue", 0, 1, IS_UNIQUE,
 				IS_ORDERED);
 		g1 = createEGenericType(hashtableEClass_K);
 		addEParameter(op, g1, "key", 0, 1, IS_UNIQUE, IS_ORDERED);
 		g1 = createEGenericType(hashtableEClass_V);
 		initEOperation(op, g1);
-
-		addEOperation(hashtableEClass, null, "clear", 0, 1, IS_UNIQUE,
-				IS_ORDERED);
 
 		op = addEOperation(hashtableEClass,
 				theStandardPackage.getJavaBoolean(), "containsKey", 0, 1,
@@ -678,14 +678,14 @@ public class UtilsPackageImpl extends EPackageImpl implements UtilsPackage {
 		addAnnotation(
 				hashtableEClass.getEOperations().get(0),
 				source,
-				new String[] {
-						"documentation",
-						"/**\r\n\t * Returns the value for key \'key\' if it exists, otherwise returns Void\r\n\t */" });
+				new String[] { "documentation",
+						"/**\r\n\t * Removes all elements from the Hashtable\r\n\t */" });
 		addAnnotation(
 				hashtableEClass.getEOperations().get(1),
 				source,
-				new String[] { "documentation",
-						"/**\r\n\t * Removes all elements from the Hashtable\r\n\t */" });
+				new String[] {
+						"documentation",
+						"/**\r\n\t * Returns the value for key \'key\' if it exists, otherwise returns Void\r\n\t */" });
 		addAnnotation(
 				hashtableEClass.getEOperations().get(2),
 				source,

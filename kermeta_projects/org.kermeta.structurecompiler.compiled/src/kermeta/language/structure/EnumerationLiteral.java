@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: EnumerationLiteral.java,v 1.6 2008-10-28 13:18:19 cfaucher Exp $
+ * $Id: EnumerationLiteral.java,v 1.7 2008-10-29 08:29:17 cfaucher Exp $
  */
 package kermeta.language.structure;
 
@@ -27,8 +27,8 @@ import km2ecore.KM2EcoreContext;
  *        annotation="kermeta documentation='Item definition for enumeration'"
  * @generated
  */
-public interface EnumerationLiteral extends NamedElement,
-		Traceability<EEnumLiteral> {
+public interface EnumerationLiteral extends Traceability<EEnumLiteral>,
+		NamedElement {
 	/**
 	 * Returns the value of the '<em><b>Enumeration</b></em>' container reference.
 	 * It is bidirectional and its opposite is '{@link kermeta.language.structure.Enumeration#getOwnedLiteral <em>Owned Literal</em>}'.

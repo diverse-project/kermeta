@@ -1,4 +1,4 @@
-/* $Id: StdIOUtil.java,v 1.7 2008-10-28 15:20:43 cfaucher Exp $
+/* $Id: StdIOUtil.java,v 1.8 2008-10-29 08:29:38 cfaucher Exp $
  * Project : Kermeta (First iteration)
  * File : Io.java
  * License : EPL
@@ -24,9 +24,6 @@ import java.io.InputStreamReader;
  */
 public class StdIOUtil {
 	
-	private StdIOUtil() {
-	}
-	
 	private static kermeta.io.StdIO _instance;
 
 	public static kermeta.io.StdIO getInstance() {
@@ -37,31 +34,31 @@ public class StdIOUtil {
     
 	// Implementation of method write called as :
 	// extern fr::irisa::triskell::kermeta::runtime::basetypes::Io.write(output)
-	public void write(String output) {
+	public static void write(String output) {
 		System.out.print(output);
 	}
 	
 	// Implementation of method writeln called as :
 	// extern fr::irisa::triskell::kermeta::runtime::basetypes::Io.writeln(output)
-	public void writeln(java.lang.String output) {
+	public static void writeln(java.lang.String output) {
 		System.out.println(output);
 	}
 	
 	// Implementation of method error called as :
 	// extern fr::irisa::triskell::kermeta::runtime::basetypes::Io.error(output)
-	public void error(java.lang.String output) {
+	public static void error(java.lang.String output) {
 		System.err.print(output);
 	}
 
 	// Implementation of method errorln called as :
 	// extern fr::irisa::triskell::kermeta::runtime::basetypes::Io.errorln(output)
-	public void errorln(java.lang.String output) {
+	public static void errorln(java.lang.String output) {
 		System.err.println(output);
 	}
 	
 	// Implementation of method read called as :
 	// extern fr::irisa::triskell::kermeta::runtime::basetypes::Io.read(prompt)
-	public java.lang.String read(java.lang.String prompt) {
+	public static java.lang.String read(java.lang.String prompt) {
 		System.out.println(prompt);
 		
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));

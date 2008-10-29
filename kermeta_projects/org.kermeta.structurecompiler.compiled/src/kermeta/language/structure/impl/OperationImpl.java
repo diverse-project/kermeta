@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: OperationImpl.java,v 1.6 2008-10-28 13:18:10 cfaucher Exp $
+ * $Id: OperationImpl.java,v 1.7 2008-10-29 08:29:10 cfaucher Exp $
  */
 package kermeta.language.structure.impl;
 
@@ -15,12 +15,15 @@ import kermeta.language.behavior.LambdaExpression;
 
 import kermeta.language.structure.ClassDefinition;
 import kermeta.language.structure.Constraint;
+import kermeta.language.structure.MultiplicityElement;
+import kermeta.language.structure.NamedElement;
 import kermeta.language.structure.Operation;
 import kermeta.language.structure.Parameter;
 import kermeta.language.structure.StructurePackage;
-import kermeta.language.structure.Traceability;
 import kermeta.language.structure.Type;
+import kermeta.language.structure.TypeContainer;
 import kermeta.language.structure.TypeVariable;
+import kermeta.language.structure.TypedElement;
 
 import kermeta.standard.Sequence;
 
@@ -32,7 +35,6 @@ import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
@@ -49,13 +51,19 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link kermeta.language.structure.impl.OperationImpl#getEcoreModelElement <em>Ecore Model Element</em>}</li>
+ *   <li>{@link kermeta.language.structure.impl.OperationImpl#getContainedType <em>Contained Type</em>}</li>
+ *   <li>{@link kermeta.language.structure.impl.OperationImpl#getName <em>Name</em>}</li>
+ *   <li>{@link kermeta.language.structure.impl.OperationImpl#getType <em>Type</em>}</li>
+ *   <li>{@link kermeta.language.structure.impl.OperationImpl#getIsOrdered <em>Is Ordered</em>}</li>
+ *   <li>{@link kermeta.language.structure.impl.OperationImpl#getUpper <em>Upper</em>}</li>
+ *   <li>{@link kermeta.language.structure.impl.OperationImpl#getLower <em>Lower</em>}</li>
+ *   <li>{@link kermeta.language.structure.impl.OperationImpl#getIsUnique <em>Is Unique</em>}</li>
  *   <li>{@link kermeta.language.structure.impl.OperationImpl#getTypeParameter <em>Type Parameter</em>}</li>
  *   <li>{@link kermeta.language.structure.impl.OperationImpl#getBody <em>Body</em>}</li>
  *   <li>{@link kermeta.language.structure.impl.OperationImpl#getCuid <em>Cuid</em>}</li>
- *   <li>{@link kermeta.language.structure.impl.OperationImpl#getIsAbstract <em>Is Abstract</em>}</li>
- *   <li>{@link kermeta.language.structure.impl.OperationImpl#getPost <em>Post</em>}</li>
  *   <li>{@link kermeta.language.structure.impl.OperationImpl#getOwnedParameter <em>Owned Parameter</em>}</li>
+ *   <li>{@link kermeta.language.structure.impl.OperationImpl#getPost <em>Post</em>}</li>
+ *   <li>{@link kermeta.language.structure.impl.OperationImpl#getIsAbstract <em>Is Abstract</em>}</li>
  *   <li>{@link kermeta.language.structure.impl.OperationImpl#getRaisedException <em>Raised Exception</em>}</li>
  *   <li>{@link kermeta.language.structure.impl.OperationImpl#getPre <em>Pre</em>}</li>
  *   <li>{@link kermeta.language.structure.impl.OperationImpl#getSuperOperation <em>Super Operation</em>}</li>
@@ -66,16 +74,127 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *
  * @generated
  */
-public class OperationImpl extends MultiplicityElementImpl implements Operation {
+public class OperationImpl extends TraceabilityImpl<EOperation> implements
+		Operation {
 	/**
-	 * The cached value of the '{@link #getEcoreModelElement() <em>Ecore Model Element</em>}' reference.
+	 * The cached value of the '{@link #getContainedType() <em>Contained Type</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getEcoreModelElement()
+	 * @see #getContainedType()
 	 * @generated
 	 * @ordered
 	 */
-	protected EOperation ecoreModelElement;
+	protected EList<Type> containedType;
+
+	/**
+	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getName()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String NAME_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getName()
+	 * @generated
+	 * @ordered
+	 */
+	protected String name = NAME_EDEFAULT;
+
+	/**
+	 * The cached value of the '{@link #getType() <em>Type</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getType()
+	 * @generated
+	 * @ordered
+	 */
+	protected Type type;
+
+	/**
+	 * The default value of the '{@link #getIsOrdered() <em>Is Ordered</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getIsOrdered()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final Boolean IS_ORDERED_EDEFAULT = Boolean.FALSE;
+
+	/**
+	 * The cached value of the '{@link #getIsOrdered() <em>Is Ordered</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getIsOrdered()
+	 * @generated
+	 * @ordered
+	 */
+	protected Boolean isOrdered = IS_ORDERED_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getUpper() <em>Upper</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getUpper()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final Integer UPPER_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getUpper() <em>Upper</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getUpper()
+	 * @generated
+	 * @ordered
+	 */
+	protected Integer upper = UPPER_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getLower() <em>Lower</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getLower()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final Integer LOWER_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getLower() <em>Lower</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getLower()
+	 * @generated
+	 * @ordered
+	 */
+	protected Integer lower = LOWER_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getIsUnique() <em>Is Unique</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getIsUnique()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final Boolean IS_UNIQUE_EDEFAULT = Boolean.TRUE;
+
+	/**
+	 * The cached value of the '{@link #getIsUnique() <em>Is Unique</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getIsUnique()
+	 * @generated
+	 * @ordered
+	 */
+	protected Boolean isUnique = IS_UNIQUE_EDEFAULT;
 
 	/**
 	 * The cached value of the '{@link #getTypeParameter() <em>Type Parameter</em>}' reference list.
@@ -118,6 +237,26 @@ public class OperationImpl extends MultiplicityElementImpl implements Operation 
 	protected String cuid = CUID_EDEFAULT;
 
 	/**
+	 * The cached value of the '{@link #getOwnedParameter() <em>Owned Parameter</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getOwnedParameter()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<Parameter> ownedParameter;
+
+	/**
+	 * The cached value of the '{@link #getPost() <em>Post</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getPost()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<Constraint> post;
+
+	/**
 	 * The default value of the '{@link #getIsAbstract() <em>Is Abstract</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -136,26 +275,6 @@ public class OperationImpl extends MultiplicityElementImpl implements Operation 
 	 * @ordered
 	 */
 	protected Boolean isAbstract = IS_ABSTRACT_EDEFAULT;
-
-	/**
-	 * The cached value of the '{@link #getPost() <em>Post</em>}' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getPost()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<Constraint> post;
-
-	/**
-	 * The cached value of the '{@link #getOwnedParameter() <em>Owned Parameter</em>}' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getOwnedParameter()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<Parameter> ownedParameter;
 
 	/**
 	 * The cached value of the '{@link #getRaisedException() <em>Raised Exception</em>}' reference list.
@@ -221,19 +340,14 @@ public class OperationImpl extends MultiplicityElementImpl implements Operation 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EOperation getEcoreModelElement() {
-		if (ecoreModelElement != null
-				&& ((EObject) ecoreModelElement).eIsProxy()) {
-			InternalEObject oldEcoreModelElement = (InternalEObject) ecoreModelElement;
-			ecoreModelElement = (EOperation) eResolveProxy(oldEcoreModelElement);
-			if (ecoreModelElement != oldEcoreModelElement) {
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE,
-							StructurePackage.OPERATION__ECORE_MODEL_ELEMENT,
-							oldEcoreModelElement, ecoreModelElement));
-			}
+	public EList<Type> getContainedType() {
+		if (containedType == null) {
+			containedType = new EObjectContainmentWithInverseEList.Resolving<Type>(
+					Type.class, this,
+					StructurePackage.OPERATION__CONTAINED_TYPE,
+					StructurePackage.TYPE__TYPE_CONTAINER);
 		}
-		return ecoreModelElement;
+		return containedType;
 	}
 
 	/**
@@ -241,8 +355,8 @@ public class OperationImpl extends MultiplicityElementImpl implements Operation 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EOperation basicGetEcoreModelElement() {
-		return ecoreModelElement;
+	public String getName() {
+		return name;
 	}
 
 	/**
@@ -250,13 +364,142 @@ public class OperationImpl extends MultiplicityElementImpl implements Operation 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setEcoreModelElement(EOperation newEcoreModelElement) {
-		EOperation oldEcoreModelElement = ecoreModelElement;
-		ecoreModelElement = newEcoreModelElement;
+	public void setName(String newName) {
+		String oldName = name;
+		name = newName;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET,
-					StructurePackage.OPERATION__ECORE_MODEL_ELEMENT,
-					oldEcoreModelElement, ecoreModelElement));
+					StructurePackage.OPERATION__NAME, oldName, name));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Type getType() {
+		if (type != null && type.eIsProxy()) {
+			InternalEObject oldType = (InternalEObject) type;
+			type = (Type) eResolveProxy(oldType);
+			if (type != oldType) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE,
+							StructurePackage.OPERATION__TYPE, oldType, type));
+			}
+		}
+		return type;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Type basicGetType() {
+		return type;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setType(Type newType) {
+		Type oldType = type;
+		type = newType;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET,
+					StructurePackage.OPERATION__TYPE, oldType, type));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Boolean getIsOrdered() {
+		return isOrdered;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setIsOrdered(Boolean newIsOrdered) {
+		Boolean oldIsOrdered = isOrdered;
+		isOrdered = newIsOrdered;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET,
+					StructurePackage.OPERATION__IS_ORDERED, oldIsOrdered,
+					isOrdered));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Integer getUpper() {
+		return upper;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setUpper(Integer newUpper) {
+		Integer oldUpper = upper;
+		upper = newUpper;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET,
+					StructurePackage.OPERATION__UPPER, oldUpper, upper));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Integer getLower() {
+		return lower;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setLower(Integer newLower) {
+		Integer oldLower = lower;
+		lower = newLower;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET,
+					StructurePackage.OPERATION__LOWER, oldLower, lower));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Boolean getIsUnique() {
+		return isUnique;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setIsUnique(Boolean newIsUnique) {
+		Boolean oldIsUnique = isUnique;
+		isUnique = newIsUnique;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET,
+					StructurePackage.OPERATION__IS_UNIQUE, oldIsUnique,
+					isUnique));
 	}
 
 	/**
@@ -382,22 +625,14 @@ public class OperationImpl extends MultiplicityElementImpl implements Operation 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Boolean getIsAbstract() {
-		return isAbstract;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setIsAbstract(Boolean newIsAbstract) {
-		Boolean oldIsAbstract = isAbstract;
-		isAbstract = newIsAbstract;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET,
-					StructurePackage.OPERATION__IS_ABSTRACT, oldIsAbstract,
-					isAbstract));
+	public EList<Parameter> getOwnedParameter() {
+		if (ownedParameter == null) {
+			ownedParameter = new EObjectContainmentWithInverseEList.Resolving<Parameter>(
+					Parameter.class, this,
+					StructurePackage.OPERATION__OWNED_PARAMETER,
+					StructurePackage.PARAMETER__OPERATION);
+		}
+		return ownedParameter;
 	}
 
 	/**
@@ -419,14 +654,22 @@ public class OperationImpl extends MultiplicityElementImpl implements Operation 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<Parameter> getOwnedParameter() {
-		if (ownedParameter == null) {
-			ownedParameter = new EObjectContainmentWithInverseEList.Resolving<Parameter>(
-					Parameter.class, this,
-					StructurePackage.OPERATION__OWNED_PARAMETER,
-					StructurePackage.PARAMETER__OPERATION);
-		}
-		return ownedParameter;
+	public Boolean getIsAbstract() {
+		return isAbstract;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setIsAbstract(Boolean newIsAbstract) {
+		Boolean oldIsAbstract = isAbstract;
+		isAbstract = newIsAbstract;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET,
+					StructurePackage.OPERATION__IS_ABSTRACT, oldIsAbstract,
+					isAbstract));
 	}
 
 	/**
@@ -606,76 +849,6 @@ public class OperationImpl extends MultiplicityElementImpl implements Operation 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Boolean isRunnable() {
-
-		java.lang.Boolean result = null;
-
-		result = false;
-
-		kermeta.language.structure.Parameter param = null;
-		//BIft:detect
-
-		kermeta.language.structure.Parameter result_ft75 = null;
-
-		kermeta.language.structure.Parameter elem_ft75 = null;
-
-		result_ft75 = null;
-
-		{
-
-			kermeta.standard.Iterator<kermeta.language.structure.Parameter> it_ft75 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
-					.<kermeta.language.structure.Parameter> convertAsOrderedSet(
-							this.getOwnedParameter()).iterator();
-			java.lang.Boolean idLoopCond_168 = false;
-			while (!idLoopCond_168) {
-				idLoopCond_168 = kermeta.standard.helper.BooleanWrapper.or(
-						it_ft75.isOff(),
-						org.kermeta.compil.runtime.helper.language.ObjectUtil
-								.isNotEqualSwitcher(result_ft75, null));
-				if (idLoopCond_168) {
-				} else {
-
-					elem_ft75 = it_ft75.next();
-
-					java.lang.Boolean idIfCond_169 = false;
-					//BIle:detector
-					kermeta.language.structure.Parameter param_lbdExp75 = elem_ft75;
-
-					idIfCond_169 = kermeta.standard.helper.BooleanWrapper
-							.not(param_lbdExp75.isRunnable());
-					//EIle:detector
-
-					if (idIfCond_169) {
-
-						result_ft75 = elem_ft75;
-					}
-
-				}
-			}
-		}
-
-		//CE
-		param = result_ft75;
-		//EIft:detect
-
-		java.lang.Boolean idIfCond_170 = false;
-		idIfCond_170 = org.kermeta.compil.runtime.helper.language.ObjectUtil
-				.isVoidSwitcher(param);
-
-		if (idIfCond_170) {
-
-			result = true;
-		}
-
-		return result;
-
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public String createBehaviorJava(KM2EcoreContext context) {
 
 		java.lang.String result = null;
@@ -685,19 +858,19 @@ public class OperationImpl extends MultiplicityElementImpl implements Operation 
 		kermeta.utils.StringBuffer javaCode = ((kermeta.utils.StringBuffer) org.kermeta.compil.runtime.helper.language.ClassUtil
 				.newObject("kermeta.utils.StringBuffer"));
 
-		java.lang.Boolean idIfCond_171 = false;
-		idIfCond_171 = kermeta.standard.helper.BooleanWrapper
+		java.lang.Boolean idIfCond_141 = false;
+		idIfCond_141 = kermeta.standard.helper.BooleanWrapper
 				.not(org.kermeta.compil.runtime.helper.language.ObjectUtil
 						.isVoidSwitcher(this.getBody()));
 
-		if (idIfCond_171) {
+		if (idIfCond_141) {
 
 			java.lang.String type_label = "";
 
-			java.lang.Boolean idIfCond_172 = false;
-			idIfCond_172 = context.getFtSuffixActivation();
+			java.lang.Boolean idIfCond_142 = false;
+			idIfCond_142 = context.getFtSuffixActivation();
 
-			if (idIfCond_172) {
+			if (idIfCond_142) {
 
 				type_label = context.getFtReturnType();
 
@@ -709,11 +882,11 @@ public class OperationImpl extends MultiplicityElementImpl implements Operation 
 						.ppTypeFromMultiplicityElement(this, context);
 			}
 
-			java.lang.Boolean idIfCond_173 = false;
-			idIfCond_173 = kermeta.standard.helper.BooleanWrapper.not(this
+			java.lang.Boolean idIfCond_143 = false;
+			idIfCond_143 = kermeta.standard.helper.BooleanWrapper.not(this
 					.isVoidType(type_label));
 
-			if (idIfCond_173) {
+			if (idIfCond_143) {
 
 				javaCode.append(kermeta.standard.helper.StringWrapper.plus(
 						kermeta.standard.helper.StringWrapper.plus(
@@ -730,27 +903,27 @@ public class OperationImpl extends MultiplicityElementImpl implements Operation 
 
 			javaCode.append(this.createBehaviorJavaFromPost(context));
 
-			java.lang.Boolean idIfCond_174 = false;
-			idIfCond_174 = kermeta.standard.helper.BooleanWrapper.and(
+			java.lang.Boolean idIfCond_144 = false;
+			idIfCond_144 = kermeta.standard.helper.BooleanWrapper.and(
 					kermeta.standard.helper.BooleanWrapper.not(this
 							.isVoidType(type_label)),
 					kermeta.standard.helper.BooleanWrapper.not(context
 							.getFtSuffixActivation()));
 
-			if (idIfCond_174) {
+			if (idIfCond_144) {
 
 				javaCode.append(this.ppReturnResult(context));
 			}
 
 		} else {
 
-			java.lang.Boolean idIfCond_175 = false;
-			idIfCond_175 = kermeta.standard.helper.BooleanWrapper
+			java.lang.Boolean idIfCond_145 = false;
+			idIfCond_145 = kermeta.standard.helper.BooleanWrapper
 					.not(((kermeta.language.structure.Operation) org.kermeta.compil.runtime.helper.language.ClassUtil
 							.newObject("kermeta.language.structure.Operation"))
 							.isVoidType(this.getType().getTypeQName()));
 
-			if (idIfCond_175) {
+			if (idIfCond_145) {
 
 				javaCode
 						.append(kermeta.standard.helper.StringWrapper
@@ -766,15 +939,15 @@ public class OperationImpl extends MultiplicityElementImpl implements Operation 
 
 		}
 
-		java.lang.Boolean idIfCond_176 = false;
-		idIfCond_176 = kermeta.standard.helper.BooleanWrapper.and(
+		java.lang.Boolean idIfCond_146 = false;
+		idIfCond_146 = kermeta.standard.helper.BooleanWrapper.and(
 				org.kermeta.compil.runtime.helper.language.ObjectUtil
 						.isNotEqualSwitcher(context.getTasks_stack().peek(),
 								context.getFUNCTION_TYPE_COMPILATION_TASK()),
 				org.kermeta.compil.runtime.helper.language.ObjectUtil
 						.isVoidSwitcher(context.getCurrent_valueType()));
 
-		if (idIfCond_176) {
+		if (idIfCond_146) {
 
 			((km2ecore.helper.ecore.EAnnotationHelper) org.kermeta.compil.runtime.helper.language.ClassUtil
 					.newObject("km2ecore.helper.ecore.EAnnotationHelper"))
@@ -793,23 +966,134 @@ public class OperationImpl extends MultiplicityElementImpl implements Operation 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public Boolean isRunnable() {
+
+		java.lang.Boolean result = null;
+
+		result = false;
+
+		kermeta.language.structure.Parameter param = null;
+		//BIft:detect
+
+		kermeta.language.structure.Parameter result_ft68 = null;
+
+		kermeta.language.structure.Parameter elem_ft68 = null;
+
+		result_ft68 = null;
+
+		{
+
+			kermeta.standard.Iterator<kermeta.language.structure.Parameter> it_ft68 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
+					.<kermeta.language.structure.Parameter> convertAsOrderedSet(
+							this.getOwnedParameter()).iterator();
+			java.lang.Boolean idLoopCond_147 = false;
+			while (!idLoopCond_147) {
+				idLoopCond_147 = kermeta.standard.helper.BooleanWrapper.or(
+						it_ft68.isOff(),
+						org.kermeta.compil.runtime.helper.language.ObjectUtil
+								.isNotEqualSwitcher(result_ft68, null));
+				if (idLoopCond_147) {
+				} else {
+
+					elem_ft68 = it_ft68.next();
+
+					java.lang.Boolean idIfCond_148 = false;
+					//BIle:detector
+					kermeta.language.structure.Parameter param_lbdExp68 = elem_ft68;
+
+					idIfCond_148 = kermeta.standard.helper.BooleanWrapper
+							.not(param_lbdExp68.isRunnable());
+					//EIle:detector
+
+					if (idIfCond_148) {
+
+						result_ft68 = elem_ft68;
+					}
+
+				}
+			}
+		}
+
+		//CE
+		param = result_ft68;
+		//EIft:detect
+
+		java.lang.Boolean idIfCond_149 = false;
+		idIfCond_149 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+				.isVoidSwitcher(param);
+
+		if (idIfCond_149) {
+
+			result = true;
+		}
+
+		return result;
+
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Boolean mustBeCompiled() {
+
+		java.lang.Boolean result = null;
+
+		result = true;
+
+		kermeta.language.structure.ClassDefinition cd_container = ((kermeta.language.structure.ClassDefinition) org.kermeta.compil.runtime.helper.language.ObjectUtil
+				.asTypeSwitcher(
+						org.kermeta.compil.runtime.helper.language.ObjectUtil
+								.containerSwitcher(this),
+						org.kermeta.compil.runtime.ExecutionContext
+								.getInstance()
+								.getMetaClass(
+										"kermeta.language.structure.ClassDefinition")));
+
+		java.lang.Boolean idIfCond_150 = false;
+		idIfCond_150 = cd_container.isValueType();
+
+		if (idIfCond_150) {
+
+			java.lang.Boolean idIfCond_151 = false;
+			idIfCond_151 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+					.isNotEqualSwitcher(cd_container.getEMFInstanceClassName(),
+							"");
+
+			if (idIfCond_151) {
+
+				result = false;
+			}
+
+		}
+
+		return result;
+
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public String getOptimizedStaticCall(KM2EcoreContext context) {
 
 		java.lang.String result = null;
 
 		result = "";
 
-		java.lang.Boolean idIfCond_177 = false;
-		idIfCond_177 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+		java.lang.Boolean idIfCond_152 = false;
+		idIfCond_152 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 				.isInstanceOfSwitcher(this.getBody(),
 						org.kermeta.compil.runtime.ExecutionContext
 								.getInstance().getMetaClass(
 										"kermeta.language.behavior.Block"));
 
-		if (idIfCond_177) {
+		if (idIfCond_152) {
 
-			java.lang.Boolean idIfCond_178 = false;
-			idIfCond_178 = kermeta.standard.helper.IntegerWrapper
+			java.lang.Boolean idIfCond_153 = false;
+			idIfCond_153 = kermeta.standard.helper.IntegerWrapper
 					.equals(
 							org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
 									.<kermeta.language.behavior.Expression> convertAsOrderedSet(
@@ -822,10 +1106,10 @@ public class OperationImpl extends MultiplicityElementImpl implements Operation 
 																			"kermeta.language.behavior.Block")))
 													.getStatement()).size(), 1);
 
-			if (idIfCond_178) {
+			if (idIfCond_153) {
 
-				java.lang.Boolean idIfCond_179 = false;
-				idIfCond_179 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+				java.lang.Boolean idIfCond_154 = false;
+				idIfCond_154 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 						.isInstanceOfSwitcher(
 								org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
 										.<kermeta.language.behavior.Expression> convertAsOrderedSet(((kermeta.language.behavior.Block) org.kermeta.compil.runtime.helper.language.ObjectUtil
@@ -841,7 +1125,7 @@ public class OperationImpl extends MultiplicityElementImpl implements Operation 
 										.getMetaClass(
 												"kermeta.language.behavior.JavaStaticCall"));
 
-				if (idIfCond_179) {
+				if (idIfCond_154) {
 
 					kermeta.standard.OrderedSet<java.lang.String> static_call_set_1 = kermeta.standard.helper.StringWrapper
 							.split(
@@ -866,8 +1150,8 @@ public class OperationImpl extends MultiplicityElementImpl implements Operation 
 					result = static_call_set_1.first();
 				} else {
 
-					java.lang.Boolean idIfCond_180 = false;
-					idIfCond_180 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+					java.lang.Boolean idIfCond_155 = false;
+					idIfCond_155 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 							.isInstanceOfSwitcher(
 									org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
 											.<kermeta.language.behavior.Expression> convertAsOrderedSet(((kermeta.language.behavior.Block) org.kermeta.compil.runtime.helper.language.ObjectUtil
@@ -883,10 +1167,10 @@ public class OperationImpl extends MultiplicityElementImpl implements Operation 
 											.getMetaClass(
 													"kermeta.language.behavior.Assignment"));
 
-					if (idIfCond_180) {
+					if (idIfCond_155) {
 
-						java.lang.Boolean idIfCond_181 = false;
-						idIfCond_181 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+						java.lang.Boolean idIfCond_156 = false;
+						idIfCond_156 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 								.isInstanceOfSwitcher(
 										((kermeta.language.behavior.Assignment) org.kermeta.compil.runtime.helper.language.ObjectUtil
 												.asTypeSwitcher(
@@ -910,7 +1194,7 @@ public class OperationImpl extends MultiplicityElementImpl implements Operation 
 												.getMetaClass(
 														"kermeta.language.behavior.JavaStaticCall"));
 
-						if (idIfCond_181) {
+						if (idIfCond_156) {
 
 							kermeta.standard.OrderedSet<java.lang.String> static_call_set_2 = kermeta.standard.helper.StringWrapper
 									.split(
@@ -960,47 +1244,6 @@ public class OperationImpl extends MultiplicityElementImpl implements Operation 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Boolean mustBeCompiled() {
-
-		java.lang.Boolean result = null;
-
-		result = true;
-
-		kermeta.language.structure.ClassDefinition cd_container = ((kermeta.language.structure.ClassDefinition) org.kermeta.compil.runtime.helper.language.ObjectUtil
-				.asTypeSwitcher(
-						org.kermeta.compil.runtime.helper.language.ObjectUtil
-								.containerSwitcher(this),
-						org.kermeta.compil.runtime.ExecutionContext
-								.getInstance()
-								.getMetaClass(
-										"kermeta.language.structure.ClassDefinition")));
-
-		java.lang.Boolean idIfCond_182 = false;
-		idIfCond_182 = cd_container.isValueType();
-
-		if (idIfCond_182) {
-
-			java.lang.Boolean idIfCond_183 = false;
-			idIfCond_183 = org.kermeta.compil.runtime.helper.language.ObjectUtil
-					.isNotEqualSwitcher(cd_container.getEMFInstanceClassName(),
-							"");
-
-			if (idIfCond_183) {
-
-				result = false;
-			}
-
-		}
-
-		return result;
-
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public String createBehaviorJavaFromPost(KM2EcoreContext context) {
 
 		java.lang.String result = null;
@@ -1011,17 +1254,17 @@ public class OperationImpl extends MultiplicityElementImpl implements Operation 
 
 		{
 
-			kermeta.standard.Iterator<kermeta.language.structure.Constraint> it_ft76 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
+			kermeta.standard.Iterator<kermeta.language.structure.Constraint> it_ft69 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
 					.<kermeta.language.structure.Constraint> convertAsOrderedSet(
 							this.getPost()).iterator();
-			java.lang.Boolean idLoopCond_184 = false;
-			while (!idLoopCond_184) {
-				idLoopCond_184 = it_ft76.isOff();
-				if (idLoopCond_184) {
+			java.lang.Boolean idLoopCond_157 = false;
+			while (!idLoopCond_157) {
+				idLoopCond_157 = it_ft69.isOff();
+				if (idLoopCond_157) {
 				} else {
 
 					//BIle:func
-					kermeta.language.structure.Constraint constraint_lbdExp76 = it_ft76
+					kermeta.language.structure.Constraint constraint_lbdExp69 = it_ft69
 							.next();
 
 					context.getResultLastStatementStack().push(
@@ -1052,9 +1295,9 @@ public class OperationImpl extends MultiplicityElementImpl implements Operation 
 																									".getInstance().mustBeChecked( \"post__"),
 																					kermeta.standard.helper.IntegerWrapper
 																							.toString(org.kermeta.compil.runtime.helper.language.ObjectUtil
-																									.oidSwitcher(constraint_lbdExp76))),
+																									.oidSwitcher(constraint_lbdExp69))),
 																	"__"),
-													constraint_lbdExp76
+													constraint_lbdExp69
 															.getName()),
 									"\" ) ) {\n");
 
@@ -1063,7 +1306,7 @@ public class OperationImpl extends MultiplicityElementImpl implements Operation 
 
 					result = kermeta.standard.helper.StringWrapper
 							.plus(kermeta.standard.helper.StringWrapper.plus(
-									result, constraint_lbdExp76
+									result, constraint_lbdExp69
 											.createBehaviorJava(context)), "\n");
 
 					result = kermeta.standard.helper.StringWrapper.plus(result,
@@ -1100,11 +1343,11 @@ public class OperationImpl extends MultiplicityElementImpl implements Operation 
 
 		//EIft:each
 
-		java.lang.Boolean idIfCond_185 = false;
-		idIfCond_185 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+		java.lang.Boolean idIfCond_158 = false;
+		idIfCond_158 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 				.isNotEqualSwitcher(result, "");
 
-		if (idIfCond_185) {
+		if (idIfCond_158) {
 
 			result = kermeta.standard.helper.StringWrapper.plus(
 					kermeta.standard.helper.StringWrapper.plus(
@@ -1142,22 +1385,22 @@ public class OperationImpl extends MultiplicityElementImpl implements Operation 
 
 		{
 
-			kermeta.standard.Iterator<kermeta.language.structure.Tag> it_ft78 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
+			kermeta.standard.Iterator<kermeta.language.structure.Tag> it_ft71 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
 					.<kermeta.language.structure.Tag> convertAsOrderedSet(
 							this.getOwnedTags()).iterator();
-			java.lang.Boolean idLoopCond_186 = false;
-			while (!idLoopCond_186) {
-				idLoopCond_186 = it_ft78.isOff();
-				if (idLoopCond_186) {
+			java.lang.Boolean idLoopCond_159 = false;
+			while (!idLoopCond_159) {
+				idLoopCond_159 = it_ft71.isOff();
+				if (idLoopCond_159) {
 				} else {
 
 					//BIle:func
-					kermeta.language.structure.Tag o_lbdExp78 = it_ft78.next();
+					kermeta.language.structure.Tag o_lbdExp71 = it_ft71.next();
 
 					//BIle:func
-					kermeta.language.structure.Tag o_lbdExp77 = o_lbdExp78;
+					kermeta.language.structure.Tag o_lbdExp70 = o_lbdExp71;
 
-					o_lbdExp77.applyPass1(context);
+					o_lbdExp70.applyPass1(context);
 					//EIle:func
 
 					//EIle:func
@@ -1172,23 +1415,23 @@ public class OperationImpl extends MultiplicityElementImpl implements Operation 
 
 		{
 
-			kermeta.standard.Iterator<kermeta.language.structure.Parameter> it_ft79 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
+			kermeta.standard.Iterator<kermeta.language.structure.Parameter> it_ft72 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
 					.<kermeta.language.structure.Parameter> convertAsOrderedSet(
 							this.getOwnedParameter()).iterator();
-			java.lang.Boolean idLoopCond_187 = false;
-			while (!idLoopCond_187) {
-				idLoopCond_187 = it_ft79.isOff();
-				if (idLoopCond_187) {
+			java.lang.Boolean idLoopCond_160 = false;
+			while (!idLoopCond_160) {
+				idLoopCond_160 = it_ft72.isOff();
+				if (idLoopCond_160) {
 				} else {
 
 					//BIle:func
-					kermeta.language.structure.Parameter o_lbdExp79 = it_ft79
+					kermeta.language.structure.Parameter o_lbdExp72 = it_ft72
 							.next();
 
 					//BIle:func
-					kermeta.language.structure.Parameter o_lbdExp77 = o_lbdExp79;
+					kermeta.language.structure.Parameter o_lbdExp70 = o_lbdExp72;
 
-					o_lbdExp77.applyPass1(context);
+					o_lbdExp70.applyPass1(context);
 					//EIle:func
 
 					//EIle:func
@@ -1203,23 +1446,23 @@ public class OperationImpl extends MultiplicityElementImpl implements Operation 
 
 		{
 
-			kermeta.standard.Iterator<kermeta.language.structure.Constraint> it_ft80 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
+			kermeta.standard.Iterator<kermeta.language.structure.Constraint> it_ft73 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
 					.<kermeta.language.structure.Constraint> convertAsOrderedSet(
 							this.getPre()).iterator();
-			java.lang.Boolean idLoopCond_188 = false;
-			while (!idLoopCond_188) {
-				idLoopCond_188 = it_ft80.isOff();
-				if (idLoopCond_188) {
+			java.lang.Boolean idLoopCond_161 = false;
+			while (!idLoopCond_161) {
+				idLoopCond_161 = it_ft73.isOff();
+				if (idLoopCond_161) {
 				} else {
 
 					//BIle:func
-					kermeta.language.structure.Constraint o_lbdExp80 = it_ft80
+					kermeta.language.structure.Constraint o_lbdExp73 = it_ft73
 							.next();
 
 					//BIle:func
-					kermeta.language.structure.Constraint o_lbdExp77 = o_lbdExp80;
+					kermeta.language.structure.Constraint o_lbdExp70 = o_lbdExp73;
 
-					o_lbdExp77.applyPass1(context);
+					o_lbdExp70.applyPass1(context);
 					//EIle:func
 
 					//EIle:func
@@ -1234,23 +1477,23 @@ public class OperationImpl extends MultiplicityElementImpl implements Operation 
 
 		{
 
-			kermeta.standard.Iterator<kermeta.language.structure.Constraint> it_ft81 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
+			kermeta.standard.Iterator<kermeta.language.structure.Constraint> it_ft74 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
 					.<kermeta.language.structure.Constraint> convertAsOrderedSet(
 							this.getPost()).iterator();
-			java.lang.Boolean idLoopCond_189 = false;
-			while (!idLoopCond_189) {
-				idLoopCond_189 = it_ft81.isOff();
-				if (idLoopCond_189) {
+			java.lang.Boolean idLoopCond_162 = false;
+			while (!idLoopCond_162) {
+				idLoopCond_162 = it_ft74.isOff();
+				if (idLoopCond_162) {
 				} else {
 
 					//BIle:func
-					kermeta.language.structure.Constraint o_lbdExp81 = it_ft81
+					kermeta.language.structure.Constraint o_lbdExp74 = it_ft74
 							.next();
 
 					//BIle:func
-					kermeta.language.structure.Constraint o_lbdExp77 = o_lbdExp81;
+					kermeta.language.structure.Constraint o_lbdExp70 = o_lbdExp74;
 
-					o_lbdExp77.applyPass1(context);
+					o_lbdExp70.applyPass1(context);
 					//EIle:func
 
 					//EIle:func
@@ -1265,23 +1508,23 @@ public class OperationImpl extends MultiplicityElementImpl implements Operation 
 
 		{
 
-			kermeta.standard.Iterator<kermeta.language.structure.TypeVariable> it_ft82 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
+			kermeta.standard.Iterator<kermeta.language.structure.TypeVariable> it_ft75 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
 					.<kermeta.language.structure.TypeVariable> convertAsOrderedSet(
 							this.getTypeParameter()).iterator();
-			java.lang.Boolean idLoopCond_190 = false;
-			while (!idLoopCond_190) {
-				idLoopCond_190 = it_ft82.isOff();
-				if (idLoopCond_190) {
+			java.lang.Boolean idLoopCond_163 = false;
+			while (!idLoopCond_163) {
+				idLoopCond_163 = it_ft75.isOff();
+				if (idLoopCond_163) {
 				} else {
 
 					//BIle:func
-					kermeta.language.structure.TypeVariable t_lbdExp82 = it_ft82
+					kermeta.language.structure.TypeVariable t_lbdExp75 = it_ft75
 							.next();
 
 					//BIle:func
-					kermeta.language.structure.TypeVariable o_lbdExp77 = t_lbdExp82;
+					kermeta.language.structure.TypeVariable o_lbdExp70 = t_lbdExp75;
 
-					o_lbdExp77.applyPass1(context);
+					o_lbdExp70.applyPass1(context);
 					//EIle:func
 
 					//EIle:func
@@ -1303,11 +1546,11 @@ public class OperationImpl extends MultiplicityElementImpl implements Operation 
 	 */
 	public void applyPass2(KM2EcoreContext context) {
 
-		java.lang.Boolean idIfCond_191 = false;
-		idIfCond_191 = kermeta.standard.helper.BooleanWrapper.not(this
+		java.lang.Boolean idIfCond_164 = false;
+		idIfCond_164 = kermeta.standard.helper.BooleanWrapper.not(this
 				.isFunctionType());
 
-		if (idIfCond_191) {
+		if (idIfCond_164) {
 
 			this.setLinks(context);
 
@@ -1329,12 +1572,12 @@ public class OperationImpl extends MultiplicityElementImpl implements Operation 
 
 		s.setLinks(this, this.getEcoreModelElement(), context);
 
-		java.lang.Boolean idIfCond_192 = false;
-		idIfCond_192 = kermeta.standard.helper.BooleanWrapper
+		java.lang.Boolean idIfCond_165 = false;
+		idIfCond_165 = kermeta.standard.helper.BooleanWrapper
 				.not(org.kermeta.compil.runtime.helper.language.ObjectUtil
 						.isVoidSwitcher(this.getSuperOperation()));
 
-		if (idIfCond_192) {
+		if (idIfCond_165) {
 
 			java.lang.String qualifiedName = this.getSuperOperation()
 					.getOwningClass().qualifiedName();
@@ -1366,8 +1609,8 @@ public class OperationImpl extends MultiplicityElementImpl implements Operation 
 
 		result = false;
 
-		java.lang.Boolean idIfCond_193 = false;
-		idIfCond_193 = kermeta.standard.helper.BooleanWrapper
+		java.lang.Boolean idIfCond_166 = false;
+		idIfCond_166 = kermeta.standard.helper.BooleanWrapper
 				.and(
 						kermeta.standard.helper.BooleanWrapper
 								.not(org.kermeta.compil.runtime.helper.language.ObjectUtil
@@ -1376,7 +1619,7 @@ public class OperationImpl extends MultiplicityElementImpl implements Operation 
 						kermeta.standard.helper.IntegerWrapper.isGreater(this
 								.getFunctionTypeParameter().size(), 0));
 
-		if (idIfCond_193) {
+		if (idIfCond_166) {
 
 			result = true;
 		}
@@ -1395,12 +1638,12 @@ public class OperationImpl extends MultiplicityElementImpl implements Operation 
 		simk.SMContext sMContext = context.getSimkModel()
 				.retrieveOrCreateContextForWrapper(this, context);
 
-		java.lang.Boolean idIfCond_194 = false;
-		idIfCond_194 = kermeta.standard.helper.BooleanWrapper
+		java.lang.Boolean idIfCond_167 = false;
+		idIfCond_167 = kermeta.standard.helper.BooleanWrapper
 				.not(org.kermeta.compil.runtime.helper.language.ObjectUtil
 						.isVoidSwitcher(sMContext));
 
-		if (idIfCond_194) {
+		if (idIfCond_167) {
 
 			simk.SMMethod staticMethod = ((simk.SMMethod) org.kermeta.compil.runtime.helper.language.ClassUtil
 					.newObject("simk.SMMethod"));
@@ -1423,12 +1666,12 @@ public class OperationImpl extends MultiplicityElementImpl implements Operation 
 
 			self_param.setName("self");
 
-			java.lang.Boolean idIfCond_195 = false;
-			idIfCond_195 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+			java.lang.Boolean idIfCond_168 = false;
+			idIfCond_168 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 					.isNotEqualSwitcher(this
 							.getWrapperValueTypeSelfExpression(), "");
 
-			if (idIfCond_195) {
+			if (idIfCond_168) {
 
 				kermeta.utils.Hashtable<java.lang.String, java.lang.String> map_infos = kermeta.standard.helper.StringWrapper
 						.getPropertyInfos(this
@@ -1437,23 +1680,23 @@ public class OperationImpl extends MultiplicityElementImpl implements Operation 
 				java.lang.String map_value = map_infos.getValue(context
 						.getCurrent_valueType().getEMFInstanceClassName());
 
-				java.lang.Boolean idIfCond_196 = false;
-				idIfCond_196 = kermeta.standard.helper.BooleanWrapper
+				java.lang.Boolean idIfCond_169 = false;
+				idIfCond_169 = kermeta.standard.helper.BooleanWrapper
 						.not(org.kermeta.compil.runtime.helper.language.ObjectUtil
 								.isVoidSwitcher(map_value));
 
-				if (idIfCond_196) {
+				if (idIfCond_169) {
 
 					self_param.setType(map_value);
 				}
 
 			}
 
-			java.lang.Boolean idIfCond_197 = false;
-			idIfCond_197 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+			java.lang.Boolean idIfCond_170 = false;
+			idIfCond_170 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 					.isVoidSwitcher(self_param.getType());
 
-			if (idIfCond_197) {
+			if (idIfCond_170) {
 
 				self_param.setType(context.getCurrent_valueType()
 						.getEMFInstanceClassName());
@@ -1467,42 +1710,42 @@ public class OperationImpl extends MultiplicityElementImpl implements Operation 
 
 			{
 
-				kermeta.standard.Iterator<kermeta.language.structure.Parameter> it_ft83 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
+				kermeta.standard.Iterator<kermeta.language.structure.Parameter> it_ft76 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
 						.<kermeta.language.structure.Parameter> convertAsOrderedSet(
 								this.getOwnedParameter()).iterator();
-				java.lang.Boolean idLoopCond_198 = false;
-				while (!idLoopCond_198) {
-					idLoopCond_198 = it_ft83.isOff();
-					if (idLoopCond_198) {
+				java.lang.Boolean idLoopCond_171 = false;
+				while (!idLoopCond_171) {
+					idLoopCond_171 = it_ft76.isOff();
+					if (idLoopCond_171) {
 					} else {
 
 						//BIle:func
-						kermeta.language.structure.Parameter p_lbdExp83 = it_ft83
+						kermeta.language.structure.Parameter p_lbdExp76 = it_ft76
 								.next();
 
 						simk.SMParameter param = ((simk.SMParameter) org.kermeta.compil.runtime.helper.language.ClassUtil
 								.newObject("simk.SMParameter"));
 
-						param.setName(p_lbdExp83.getName());
+						param.setName(p_lbdExp76.getName());
 
-						java.lang.Boolean idIfCond_199 = false;
-						idIfCond_199 = kermeta.standard.helper.BooleanWrapper
+						java.lang.Boolean idIfCond_172 = false;
+						idIfCond_172 = kermeta.standard.helper.BooleanWrapper
 								.not(org.kermeta.compil.runtime.helper.language.ObjectUtil
 										.isInstanceOfSwitcher(
-												p_lbdExp83.getType(),
+												p_lbdExp76.getType(),
 												org.kermeta.compil.runtime.ExecutionContext
 														.getInstance()
 														.getMetaClass(
 																"kermeta.language.structure.FunctionType")));
 
-						if (idIfCond_199) {
+						if (idIfCond_172) {
 
-							java.lang.Boolean idIfCond_200 = false;
-							idIfCond_200 = kermeta.standard.helper.BooleanWrapper
+							java.lang.Boolean idIfCond_173 = false;
+							idIfCond_173 = kermeta.standard.helper.BooleanWrapper
 									.or(
 											kermeta.standard.helper.StringWrapper
 													.equals(
-															p_lbdExp83
+															p_lbdExp76
 																	.getType()
 																	.getTypeQName(),
 															((kermeta.language.structure.ClassDefinition) org.kermeta.compil.runtime.helper.language.ObjectUtil
@@ -1515,26 +1758,26 @@ public class OperationImpl extends MultiplicityElementImpl implements Operation 
 																							"kermeta.language.structure.ClassDefinition")))
 																	.qualifiedName()),
 											kermeta.standard.helper.StringWrapper
-													.equals(p_lbdExp83
+													.equals(p_lbdExp76
 															.getType()
 															.getTypeQName(),
 															"kermeta::language::structure::Object"));
 
-							if (idIfCond_200) {
+							if (idIfCond_173) {
 
 								param.setType(context.getCurrent_valueType()
 										.getEMFInstanceClassName());
 							} else {
 
-								param.setType(p_lbdExp83.getType()
+								param.setType(p_lbdExp76.getType()
 										.createBehaviorJava(context));
 
-								java.lang.Boolean idIfCond_201 = false;
-								idIfCond_201 = ((kermeta.language.structure.Operation) org.kermeta.compil.runtime.helper.language.ClassUtil
+								java.lang.Boolean idIfCond_174 = false;
+								idIfCond_174 = ((kermeta.language.structure.Operation) org.kermeta.compil.runtime.helper.language.ClassUtil
 										.newObject("kermeta.language.structure.Operation"))
 										.isVoidType(param.getType());
 
-								if (idIfCond_201) {
+								if (idIfCond_174) {
 
 									param.setType("void");
 								}
@@ -1561,12 +1804,12 @@ public class OperationImpl extends MultiplicityElementImpl implements Operation 
 
 			staticMethod.setSMReturn(sMReturn);
 
-			java.lang.Boolean idIfCond_202 = false;
-			idIfCond_202 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+			java.lang.Boolean idIfCond_175 = false;
+			idIfCond_175 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 					.isNotEqualSwitcher(this.getWrapperValueTypeReturnType(),
 							"");
 
-			if (idIfCond_202) {
+			if (idIfCond_175) {
 
 				kermeta.utils.Hashtable<java.lang.String, java.lang.String> map_infos = kermeta.standard.helper.StringWrapper
 						.getPropertyInfos(this.getWrapperValueTypeReturnType());
@@ -1574,32 +1817,32 @@ public class OperationImpl extends MultiplicityElementImpl implements Operation 
 				java.lang.String map_value = map_infos.getValue(context
 						.getCurrent_valueType().getEMFInstanceClassName());
 
-				java.lang.Boolean idIfCond_203 = false;
-				idIfCond_203 = kermeta.standard.helper.BooleanWrapper
+				java.lang.Boolean idIfCond_176 = false;
+				idIfCond_176 = kermeta.standard.helper.BooleanWrapper
 						.not(org.kermeta.compil.runtime.helper.language.ObjectUtil
 								.isVoidSwitcher(map_value));
 
-				if (idIfCond_203) {
+				if (idIfCond_176) {
 
 					sMReturn.setType(map_value);
 				}
 
 			}
 
-			java.lang.Boolean idIfCond_204 = false;
-			idIfCond_204 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+			java.lang.Boolean idIfCond_177 = false;
+			idIfCond_177 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 					.isVoidSwitcher(sMReturn.getType());
 
-			if (idIfCond_204) {
+			if (idIfCond_177) {
 
 				sMReturn.setType(this.getType().createBehaviorJava(context));
 
-				java.lang.Boolean idIfCond_205 = false;
-				idIfCond_205 = ((kermeta.language.structure.Operation) org.kermeta.compil.runtime.helper.language.ClassUtil
+				java.lang.Boolean idIfCond_178 = false;
+				idIfCond_178 = ((kermeta.language.structure.Operation) org.kermeta.compil.runtime.helper.language.ClassUtil
 						.newObject("kermeta.language.structure.Operation"))
 						.isVoidType(sMReturn.getType());
 
-				if (idIfCond_205) {
+				if (idIfCond_178) {
 
 					sMReturn.setType("void");
 				}
@@ -1622,11 +1865,11 @@ public class OperationImpl extends MultiplicityElementImpl implements Operation 
 
 		result = false;
 
-		java.lang.Boolean idIfCond_206 = false;
-		idIfCond_206 = kermeta.standard.helper.BooleanWrapper.or(this.getType()
+		java.lang.Boolean idIfCond_179 = false;
+		idIfCond_179 = kermeta.standard.helper.BooleanWrapper.or(this.getType()
 				.isValueType(), this.hasAValueTypedParameter());
 
-		if (idIfCond_206) {
+		if (idIfCond_179) {
 
 			result = true;
 		}
@@ -1650,17 +1893,17 @@ public class OperationImpl extends MultiplicityElementImpl implements Operation 
 
 		{
 
-			kermeta.standard.Iterator<kermeta.language.structure.Constraint> it_ft84 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
+			kermeta.standard.Iterator<kermeta.language.structure.Constraint> it_ft77 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
 					.<kermeta.language.structure.Constraint> convertAsOrderedSet(
 							this.getPre()).iterator();
-			java.lang.Boolean idLoopCond_207 = false;
-			while (!idLoopCond_207) {
-				idLoopCond_207 = it_ft84.isOff();
-				if (idLoopCond_207) {
+			java.lang.Boolean idLoopCond_180 = false;
+			while (!idLoopCond_180) {
+				idLoopCond_180 = it_ft77.isOff();
+				if (idLoopCond_180) {
 				} else {
 
 					//BIle:func
-					kermeta.language.structure.Constraint constraint_lbdExp84 = it_ft84
+					kermeta.language.structure.Constraint constraint_lbdExp77 = it_ft77
 							.next();
 
 					context.getResultLastStatementStack().push(
@@ -1691,9 +1934,9 @@ public class OperationImpl extends MultiplicityElementImpl implements Operation 
 																									".getInstance().mustBeChecked( \"pre__"),
 																					kermeta.standard.helper.IntegerWrapper
 																							.toString(org.kermeta.compil.runtime.helper.language.ObjectUtil
-																									.oidSwitcher(constraint_lbdExp84))),
+																									.oidSwitcher(constraint_lbdExp77))),
 																	"__"),
-													constraint_lbdExp84
+													constraint_lbdExp77
 															.getName()),
 									"\" ) ) {\n");
 
@@ -1702,7 +1945,7 @@ public class OperationImpl extends MultiplicityElementImpl implements Operation 
 
 					result = kermeta.standard.helper.StringWrapper
 							.plus(kermeta.standard.helper.StringWrapper.plus(
-									result, constraint_lbdExp84
+									result, constraint_lbdExp77
 											.createBehaviorJava(context)), "\n");
 
 					result = kermeta.standard.helper.StringWrapper.plus(result,
@@ -1739,11 +1982,11 @@ public class OperationImpl extends MultiplicityElementImpl implements Operation 
 
 		//EIft:each
 
-		java.lang.Boolean idIfCond_208 = false;
-		idIfCond_208 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+		java.lang.Boolean idIfCond_181 = false;
+		idIfCond_181 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 				.isNotEqualSwitcher(result, "");
 
-		if (idIfCond_208) {
+		if (idIfCond_181) {
 
 			result = kermeta.standard.helper.StringWrapper.plus(
 					kermeta.standard.helper.StringWrapper.plus(
@@ -1768,42 +2011,42 @@ public class OperationImpl extends MultiplicityElementImpl implements Operation 
 		kermeta.standard.Sequence<kermeta.language.structure.Parameter> ft_parameters = null;
 		//BIft:select
 
-		kermeta.standard.Sequence<kermeta.language.structure.Parameter> result_ft85 = null;
+		kermeta.standard.Sequence<kermeta.language.structure.Parameter> result_ft78 = null;
 
-		kermeta.language.structure.Parameter elem_ft85 = null;
+		kermeta.language.structure.Parameter elem_ft78 = null;
 
-		result_ft85 = ((kermeta.standard.Sequence<kermeta.language.structure.Parameter>) org.kermeta.compil.runtime.helper.language.ClassUtil
+		result_ft78 = ((kermeta.standard.Sequence<kermeta.language.structure.Parameter>) org.kermeta.compil.runtime.helper.language.ClassUtil
 				.newObject("kermeta.standard.Sequence<kermeta.language.structure.Parameter>"));
 
 		{
 
-			kermeta.standard.Iterator<kermeta.language.structure.Parameter> it_ft85 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
+			kermeta.standard.Iterator<kermeta.language.structure.Parameter> it_ft78 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
 					.<kermeta.language.structure.Parameter> convertAsOrderedSet(
 							this.getOwnedParameter()).iterator();
-			java.lang.Boolean idLoopCond_209 = false;
-			while (!idLoopCond_209) {
-				idLoopCond_209 = it_ft85.isOff();
-				if (idLoopCond_209) {
+			java.lang.Boolean idLoopCond_182 = false;
+			while (!idLoopCond_182) {
+				idLoopCond_182 = it_ft78.isOff();
+				if (idLoopCond_182) {
 				} else {
 
-					elem_ft85 = it_ft85.next();
+					elem_ft78 = it_ft78.next();
 
-					java.lang.Boolean idIfCond_210 = false;
+					java.lang.Boolean idIfCond_183 = false;
 					//BIle:selector
-					kermeta.language.structure.Parameter p_lbdExp85 = elem_ft85;
+					kermeta.language.structure.Parameter p_lbdExp78 = elem_ft78;
 
-					idIfCond_210 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+					idIfCond_183 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 							.isInstanceOfSwitcher(
-									p_lbdExp85.getType(),
+									p_lbdExp78.getType(),
 									org.kermeta.compil.runtime.ExecutionContext
 											.getInstance()
 											.getMetaClass(
 													"kermeta.language.structure.FunctionType"));
 					//EIle:selector
 
-					if (idIfCond_210) {
+					if (idIfCond_183) {
 
-						result_ft85.add(elem_ft85);
+						result_ft78.add(elem_ft78);
 					}
 
 				}
@@ -1811,7 +2054,7 @@ public class OperationImpl extends MultiplicityElementImpl implements Operation 
 		}
 
 		//CE
-		ft_parameters = result_ft85;
+		ft_parameters = result_ft78;
 		//EIft:select
 
 		result = ft_parameters;
@@ -1831,8 +2074,8 @@ public class OperationImpl extends MultiplicityElementImpl implements Operation 
 
 		result = false;
 
-		java.lang.Boolean idIfCond_211 = false;
-		idIfCond_211 = kermeta.standard.helper.BooleanWrapper
+		java.lang.Boolean idIfCond_184 = false;
+		idIfCond_184 = kermeta.standard.helper.BooleanWrapper
 				.or(
 						kermeta.standard.helper.BooleanWrapper
 								.or(
@@ -1877,7 +2120,7 @@ public class OperationImpl extends MultiplicityElementImpl implements Operation 
 								type_label,
 								"kermeta.language.structure.VoidType"));
 
-		if (idIfCond_211) {
+		if (idIfCond_184) {
 
 			result = true;
 		}
@@ -1908,10 +2151,10 @@ public class OperationImpl extends MultiplicityElementImpl implements Operation 
 
 		ecoreOperation.setUpperBound(this.getUpper());
 
-		java.lang.Boolean idIfCond_212 = false;
-		idIfCond_212 = this.getIsAbstract();
+		java.lang.Boolean idIfCond_185 = false;
+		idIfCond_185 = this.getIsAbstract();
 
-		if (idIfCond_212) {
+		if (idIfCond_185) {
 
 			ecore.EAnnotation ecoreAnnotation = ((km2ecore.helper.ecore.EAnnotationHelper) org.kermeta.compil.runtime.helper.language.ClassUtil
 					.newObject("km2ecore.helper.ecore.EAnnotationHelper"))
@@ -1943,38 +2186,38 @@ public class OperationImpl extends MultiplicityElementImpl implements Operation 
 		kermeta.language.structure.Parameter p = null;
 		//BIft:detect
 
-		kermeta.language.structure.Parameter result_ft86 = null;
+		kermeta.language.structure.Parameter result_ft79 = null;
 
-		kermeta.language.structure.Parameter elem_ft86 = null;
+		kermeta.language.structure.Parameter elem_ft79 = null;
 
-		result_ft86 = null;
+		result_ft79 = null;
 
 		{
 
-			kermeta.standard.Iterator<kermeta.language.structure.Parameter> it_ft86 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
+			kermeta.standard.Iterator<kermeta.language.structure.Parameter> it_ft79 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
 					.<kermeta.language.structure.Parameter> convertAsOrderedSet(
 							this.getOwnedParameter()).iterator();
-			java.lang.Boolean idLoopCond_213 = false;
-			while (!idLoopCond_213) {
-				idLoopCond_213 = kermeta.standard.helper.BooleanWrapper.or(
-						it_ft86.isOff(),
+			java.lang.Boolean idLoopCond_186 = false;
+			while (!idLoopCond_186) {
+				idLoopCond_186 = kermeta.standard.helper.BooleanWrapper.or(
+						it_ft79.isOff(),
 						org.kermeta.compil.runtime.helper.language.ObjectUtil
-								.isNotEqualSwitcher(result_ft86, null));
-				if (idLoopCond_213) {
+								.isNotEqualSwitcher(result_ft79, null));
+				if (idLoopCond_186) {
 				} else {
 
-					elem_ft86 = it_ft86.next();
+					elem_ft79 = it_ft79.next();
 
-					java.lang.Boolean idIfCond_214 = false;
+					java.lang.Boolean idIfCond_187 = false;
 					//BIle:detector
-					kermeta.language.structure.Parameter p_lbdExp86 = elem_ft86;
+					kermeta.language.structure.Parameter p_lbdExp79 = elem_ft79;
 
-					idIfCond_214 = p_lbdExp86.getType().isValueType();
+					idIfCond_187 = p_lbdExp79.getType().isValueType();
 					//EIle:detector
 
-					if (idIfCond_214) {
+					if (idIfCond_187) {
 
-						result_ft86 = elem_ft86;
+						result_ft79 = elem_ft79;
 					}
 
 				}
@@ -1982,15 +2225,15 @@ public class OperationImpl extends MultiplicityElementImpl implements Operation 
 		}
 
 		//CE
-		p = result_ft86;
+		p = result_ft79;
 		//EIft:detect
 
-		java.lang.Boolean idIfCond_215 = false;
-		idIfCond_215 = kermeta.standard.helper.BooleanWrapper
+		java.lang.Boolean idIfCond_188 = false;
+		idIfCond_188 = kermeta.standard.helper.BooleanWrapper
 				.not(org.kermeta.compil.runtime.helper.language.ObjectUtil
 						.isVoidSwitcher(p));
 
-		if (idIfCond_215) {
+		if (idIfCond_188) {
 
 			result = true;
 		}
@@ -2006,17 +2249,17 @@ public class OperationImpl extends MultiplicityElementImpl implements Operation 
 	 */
 	public void applyPass2BehaviorJava(KM2EcoreContext context) {
 
-		java.lang.Boolean idIfCond_216 = false;
-		idIfCond_216 = kermeta.standard.helper.BooleanWrapper.not(this
+		java.lang.Boolean idIfCond_189 = false;
+		idIfCond_189 = kermeta.standard.helper.BooleanWrapper.not(this
 				.isFunctionType());
 
-		if (idIfCond_216) {
+		if (idIfCond_189) {
 
-			java.lang.Boolean idIfCond_217 = false;
-			idIfCond_217 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+			java.lang.Boolean idIfCond_190 = false;
+			idIfCond_190 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 					.isVoidSwitcher(context.getCurrent_valueType());
 
-			if (idIfCond_217) {
+			if (idIfCond_190) {
 
 				this.setLinks(context);
 
@@ -2026,23 +2269,23 @@ public class OperationImpl extends MultiplicityElementImpl implements Operation 
 
 				{
 
-					kermeta.standard.Iterator<kermeta.language.structure.Tag> it_ft88 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
+					kermeta.standard.Iterator<kermeta.language.structure.Tag> it_ft81 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
 							.<kermeta.language.structure.Tag> convertAsOrderedSet(
 									this.getOwnedTags()).iterator();
-					java.lang.Boolean idLoopCond_218 = false;
-					while (!idLoopCond_218) {
-						idLoopCond_218 = it_ft88.isOff();
-						if (idLoopCond_218) {
+					java.lang.Boolean idLoopCond_191 = false;
+					while (!idLoopCond_191) {
+						idLoopCond_191 = it_ft81.isOff();
+						if (idLoopCond_191) {
 						} else {
 
 							//BIle:func
-							kermeta.language.structure.Tag o_lbdExp88 = it_ft88
+							kermeta.language.structure.Tag o_lbdExp81 = it_ft81
 									.next();
 
 							//BIle:func
-							kermeta.language.structure.Tag p_lbdExp87 = o_lbdExp88;
+							kermeta.language.structure.Tag p_lbdExp80 = o_lbdExp81;
 
-							p_lbdExp87.applyPass2BehaviorJava(context);
+							p_lbdExp80.applyPass2BehaviorJava(context);
 							//EIle:func
 
 							//EIle:func
@@ -2057,23 +2300,23 @@ public class OperationImpl extends MultiplicityElementImpl implements Operation 
 
 				{
 
-					kermeta.standard.Iterator<kermeta.language.structure.Parameter> it_ft89 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
+					kermeta.standard.Iterator<kermeta.language.structure.Parameter> it_ft82 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
 							.<kermeta.language.structure.Parameter> convertAsOrderedSet(
 									this.getOwnedParameter()).iterator();
-					java.lang.Boolean idLoopCond_219 = false;
-					while (!idLoopCond_219) {
-						idLoopCond_219 = it_ft89.isOff();
-						if (idLoopCond_219) {
+					java.lang.Boolean idLoopCond_192 = false;
+					while (!idLoopCond_192) {
+						idLoopCond_192 = it_ft82.isOff();
+						if (idLoopCond_192) {
 						} else {
 
 							//BIle:func
-							kermeta.language.structure.Parameter o_lbdExp89 = it_ft89
+							kermeta.language.structure.Parameter o_lbdExp82 = it_ft82
 									.next();
 
 							//BIle:func
-							kermeta.language.structure.Parameter p_lbdExp87 = o_lbdExp89;
+							kermeta.language.structure.Parameter p_lbdExp80 = o_lbdExp82;
 
-							p_lbdExp87.applyPass2BehaviorJava(context);
+							p_lbdExp80.applyPass2BehaviorJava(context);
 							//EIle:func
 
 							//EIle:func
@@ -2088,23 +2331,23 @@ public class OperationImpl extends MultiplicityElementImpl implements Operation 
 
 				{
 
-					kermeta.standard.Iterator<kermeta.language.structure.Constraint> it_ft90 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
+					kermeta.standard.Iterator<kermeta.language.structure.Constraint> it_ft83 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
 							.<kermeta.language.structure.Constraint> convertAsOrderedSet(
 									this.getPre()).iterator();
-					java.lang.Boolean idLoopCond_220 = false;
-					while (!idLoopCond_220) {
-						idLoopCond_220 = it_ft90.isOff();
-						if (idLoopCond_220) {
+					java.lang.Boolean idLoopCond_193 = false;
+					while (!idLoopCond_193) {
+						idLoopCond_193 = it_ft83.isOff();
+						if (idLoopCond_193) {
 						} else {
 
 							//BIle:func
-							kermeta.language.structure.Constraint o_lbdExp90 = it_ft90
+							kermeta.language.structure.Constraint o_lbdExp83 = it_ft83
 									.next();
 
 							//BIle:func
-							kermeta.language.structure.Constraint p_lbdExp87 = o_lbdExp90;
+							kermeta.language.structure.Constraint p_lbdExp80 = o_lbdExp83;
 
-							p_lbdExp87.applyPass2BehaviorJava(context);
+							p_lbdExp80.applyPass2BehaviorJava(context);
 							//EIle:func
 
 							//EIle:func
@@ -2119,23 +2362,23 @@ public class OperationImpl extends MultiplicityElementImpl implements Operation 
 
 				{
 
-					kermeta.standard.Iterator<kermeta.language.structure.Constraint> it_ft91 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
+					kermeta.standard.Iterator<kermeta.language.structure.Constraint> it_ft84 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
 							.<kermeta.language.structure.Constraint> convertAsOrderedSet(
 									this.getPost()).iterator();
-					java.lang.Boolean idLoopCond_221 = false;
-					while (!idLoopCond_221) {
-						idLoopCond_221 = it_ft91.isOff();
-						if (idLoopCond_221) {
+					java.lang.Boolean idLoopCond_194 = false;
+					while (!idLoopCond_194) {
+						idLoopCond_194 = it_ft84.isOff();
+						if (idLoopCond_194) {
 						} else {
 
 							//BIle:func
-							kermeta.language.structure.Constraint o_lbdExp91 = it_ft91
+							kermeta.language.structure.Constraint o_lbdExp84 = it_ft84
 									.next();
 
 							//BIle:func
-							kermeta.language.structure.Constraint p_lbdExp87 = o_lbdExp91;
+							kermeta.language.structure.Constraint p_lbdExp80 = o_lbdExp84;
 
-							p_lbdExp87.applyPass2BehaviorJava(context);
+							p_lbdExp80.applyPass2BehaviorJava(context);
 							//EIle:func
 
 							//EIle:func
@@ -2150,23 +2393,23 @@ public class OperationImpl extends MultiplicityElementImpl implements Operation 
 
 				{
 
-					kermeta.standard.Iterator<kermeta.language.structure.TypeVariable> it_ft92 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
+					kermeta.standard.Iterator<kermeta.language.structure.TypeVariable> it_ft85 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
 							.<kermeta.language.structure.TypeVariable> convertAsOrderedSet(
 									this.getTypeParameter()).iterator();
-					java.lang.Boolean idLoopCond_222 = false;
-					while (!idLoopCond_222) {
-						idLoopCond_222 = it_ft92.isOff();
-						if (idLoopCond_222) {
+					java.lang.Boolean idLoopCond_195 = false;
+					while (!idLoopCond_195) {
+						idLoopCond_195 = it_ft85.isOff();
+						if (idLoopCond_195) {
 						} else {
 
 							//BIle:func
-							kermeta.language.structure.TypeVariable t_lbdExp92 = it_ft92
+							kermeta.language.structure.TypeVariable t_lbdExp85 = it_ft85
 									.next();
 
 							//BIle:func
-							kermeta.language.structure.TypeVariable p_lbdExp87 = t_lbdExp92;
+							kermeta.language.structure.TypeVariable p_lbdExp80 = t_lbdExp85;
 
-							p_lbdExp87.applyPass2BehaviorJava(context);
+							p_lbdExp80.applyPass2BehaviorJava(context);
 							//EIle:func
 
 							//EIle:func
@@ -2181,10 +2424,10 @@ public class OperationImpl extends MultiplicityElementImpl implements Operation 
 
 				this.createBehaviorJava(context);
 
-				java.lang.Boolean idIfCond_223 = false;
-				idIfCond_223 = this.isRunnable();
+				java.lang.Boolean idIfCond_196 = false;
+				idIfCond_196 = this.isRunnable();
 
-				if (idIfCond_223) {
+				if (idIfCond_196) {
 
 					simk.SMContext smContext = context.getSimkModel()
 							.retrieveOrCreateContextForRunner(this, context);
@@ -2246,24 +2489,24 @@ public class OperationImpl extends MultiplicityElementImpl implements Operation 
 
 					{
 
-						kermeta.standard.Iterator<kermeta.language.structure.Parameter> it_ft93 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
+						kermeta.standard.Iterator<kermeta.language.structure.Parameter> it_ft86 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
 								.<kermeta.language.structure.Parameter> convertAsOrderedSet(
 										this.getOwnedParameter()).iterator();
-						java.lang.Boolean idLoopCond_224 = false;
-						while (!idLoopCond_224) {
-							idLoopCond_224 = it_ft93.isOff();
-							if (idLoopCond_224) {
+						java.lang.Boolean idLoopCond_197 = false;
+						while (!idLoopCond_197) {
+							idLoopCond_197 = it_ft86.isOff();
+							if (idLoopCond_197) {
 							} else {
 
 								//BIle:func
-								kermeta.language.structure.Parameter params_lbdExp93 = it_ft93
+								kermeta.language.structure.Parameter params_lbdExp86 = it_ft86
 										.next();
 
-								java.lang.Boolean idIfCond_225 = false;
-								idIfCond_225 = kermeta.standard.helper.IntegerWrapper
+								java.lang.Boolean idIfCond_198 = false;
+								idIfCond_198 = kermeta.standard.helper.IntegerWrapper
 										.isGreater(i, 0);
 
-								if (idIfCond_225) {
+								if (idIfCond_198) {
 
 									staticMethod
 											.setBody(kermeta.standard.helper.StringWrapper
@@ -2324,16 +2567,223 @@ public class OperationImpl extends MultiplicityElementImpl implements Operation 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public String getRecopyInValueTypes() {
+
+		java.lang.String result = null;
+
+		result = this.getUniqueTagValue("RecopyInValueTypes");
+
+		return result;
+
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getFinalName(KM2EcoreContext context) {
+
+		java.lang.String result = null;
+
+		result = ((km2ecore.helper.java.IdentifierHelper) org.kermeta.compil.runtime.helper.language.ClassUtil
+				.newObject("km2ecore.helper.java.IdentifierHelper"))
+				.getMangledIdentifier(this.getName(), context);
+
+		java.lang.Boolean idIfCond_328 = false;
+		idIfCond_328 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+				.isNotEqualSwitcher(this.getEMFRenameAs(), "");
+
+		if (idIfCond_328) {
+
+			result = this.getEMFRenameAs();
+		}
+
+		return result;
+
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getEMFRenameAs() {
+
+		java.lang.String result = null;
+
+		result = this.getUniqueTagValue("EMF_renameAs");
+
+		return result;
+
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String ppReturnResult(KM2EcoreContext context) {
+
+		java.lang.String result = null;
+
+		result = "\nreturn ";
+
+		java.lang.Boolean idIfCond_329 = false;
+		idIfCond_329 = kermeta.standard.helper.IntegerWrapper.equals(this
+				.getUpper(), 1);
+
+		if (idIfCond_329) {
+
+			result = kermeta.standard.helper.StringWrapper.plus(result,
+					"result");
+		} else {
+
+			result = kermeta.standard.helper.StringWrapper.plus(
+					kermeta.standard.helper.StringWrapper.plus(result, context
+							.getCOLLECTION_UTIL_CLASS()),
+					".convertAsEList(result)");
+		}
+
+		result = kermeta.standard.helper.StringWrapper.plus(result, ";\n");
+
+		return result;
+
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getGenModelQualifiedName() {
+
+		java.lang.String result = null;
+
+		result = kermeta.standard.helper.StringWrapper.plus(
+				kermeta.standard.helper.StringWrapper.plus(this
+						.getRootPackage().getGenModelBasePackage(), "::"), this
+						.qualifiedName());
+
+		return result;
+
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getJavaQualifiedName() {
+
+		java.lang.String result = null;
+
+		result = kermeta.standard.helper.StringWrapper.replace(this
+				.qualifiedName(), "::", ".");
+
+		return result;
+
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getGenModelJavaQualifiedName() {
+
+		java.lang.String result = null;
+
+		result = kermeta.standard.helper.StringWrapper.replace(this
+				.getGenModelQualifiedName(), "::", ".");
+
+		return result;
+
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String qualifiedName() {
+
+		java.lang.String result = null;
+
+		kermeta.language.structure.NamedElement elem = this;
+
+		result = this.getName();
+
+		java.lang.Boolean idIfCond_315 = false;
+		idIfCond_315 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+				.isInstanceOfSwitcher(
+						org.kermeta.compil.runtime.helper.language.ObjectUtil
+								.containerSwitcher(elem),
+						org.kermeta.compil.runtime.ExecutionContext
+								.getInstance()
+								.getMetaClass(
+										"kermeta.language.structure.NamedElement"));
+
+		if (idIfCond_315) {
+
+			elem = (kermeta.language.structure.NamedElement) org.kermeta.compil.runtime.helper.language.ObjectUtil
+					.containerSwitcher(elem);
+			java.lang.Boolean idLoopCond_316 = false;
+			while (!idLoopCond_316) {
+				idLoopCond_316 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+						.equalsSwitcher(elem, null);
+				if (idLoopCond_316) {
+				} else {
+
+					result = kermeta.standard.helper.StringWrapper.plus(
+							kermeta.standard.helper.StringWrapper.plus(elem
+									.getName(), "::"), result);
+
+					java.lang.Boolean idIfCond_317 = false;
+					idIfCond_317 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+							.isInstanceOfSwitcher(
+									org.kermeta.compil.runtime.helper.language.ObjectUtil
+											.containerSwitcher(elem),
+									org.kermeta.compil.runtime.ExecutionContext
+											.getInstance()
+											.getMetaClass(
+													"kermeta.language.structure.NamedElement"));
+
+					if (idIfCond_317) {
+
+						elem = (kermeta.language.structure.NamedElement) org.kermeta.compil.runtime.helper.language.ObjectUtil
+								.containerSwitcher(elem);
+					} else {
+
+						elem = null;
+					}
+
+				}
+			}
+		}
+
+		return result;
+
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd,
 			int featureID, NotificationChain msgs) {
 		switch (featureID) {
-		case StructurePackage.OPERATION__POST:
-			return ((InternalEList<InternalEObject>) (InternalEList<?>) getPost())
+		case StructurePackage.OPERATION__CONTAINED_TYPE:
+			return ((InternalEList<InternalEObject>) (InternalEList<?>) getContainedType())
 					.basicAdd(otherEnd, msgs);
 		case StructurePackage.OPERATION__OWNED_PARAMETER:
 			return ((InternalEList<InternalEObject>) (InternalEList<?>) getOwnedParameter())
+					.basicAdd(otherEnd, msgs);
+		case StructurePackage.OPERATION__POST:
+			return ((InternalEList<InternalEObject>) (InternalEList<?>) getPost())
 					.basicAdd(otherEnd, msgs);
 		case StructurePackage.OPERATION__PRE:
 			return ((InternalEList<InternalEObject>) (InternalEList<?>) getPre())
@@ -2355,13 +2805,16 @@ public class OperationImpl extends MultiplicityElementImpl implements Operation 
 	public NotificationChain eInverseRemove(InternalEObject otherEnd,
 			int featureID, NotificationChain msgs) {
 		switch (featureID) {
+		case StructurePackage.OPERATION__CONTAINED_TYPE:
+			return ((InternalEList<?>) getContainedType()).basicRemove(
+					otherEnd, msgs);
 		case StructurePackage.OPERATION__BODY:
 			return basicSetBody(null, msgs);
-		case StructurePackage.OPERATION__POST:
-			return ((InternalEList<?>) getPost()).basicRemove(otherEnd, msgs);
 		case StructurePackage.OPERATION__OWNED_PARAMETER:
 			return ((InternalEList<?>) getOwnedParameter()).basicRemove(
 					otherEnd, msgs);
+		case StructurePackage.OPERATION__POST:
+			return ((InternalEList<?>) getPost()).basicRemove(otherEnd, msgs);
 		case StructurePackage.OPERATION__PRE:
 			return ((InternalEList<?>) getPre()).basicRemove(otherEnd, msgs);
 		case StructurePackage.OPERATION__OWNING_CLASS:
@@ -2395,10 +2848,22 @@ public class OperationImpl extends MultiplicityElementImpl implements Operation 
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-		case StructurePackage.OPERATION__ECORE_MODEL_ELEMENT:
+		case StructurePackage.OPERATION__CONTAINED_TYPE:
+			return getContainedType();
+		case StructurePackage.OPERATION__NAME:
+			return getName();
+		case StructurePackage.OPERATION__TYPE:
 			if (resolve)
-				return getEcoreModelElement();
-			return basicGetEcoreModelElement();
+				return getType();
+			return basicGetType();
+		case StructurePackage.OPERATION__IS_ORDERED:
+			return getIsOrdered();
+		case StructurePackage.OPERATION__UPPER:
+			return getUpper();
+		case StructurePackage.OPERATION__LOWER:
+			return getLower();
+		case StructurePackage.OPERATION__IS_UNIQUE:
+			return getIsUnique();
 		case StructurePackage.OPERATION__TYPE_PARAMETER:
 			return getTypeParameter();
 		case StructurePackage.OPERATION__BODY:
@@ -2407,12 +2872,12 @@ public class OperationImpl extends MultiplicityElementImpl implements Operation 
 			return basicGetBody();
 		case StructurePackage.OPERATION__CUID:
 			return getCuid();
-		case StructurePackage.OPERATION__IS_ABSTRACT:
-			return getIsAbstract();
-		case StructurePackage.OPERATION__POST:
-			return getPost();
 		case StructurePackage.OPERATION__OWNED_PARAMETER:
 			return getOwnedParameter();
+		case StructurePackage.OPERATION__POST:
+			return getPost();
+		case StructurePackage.OPERATION__IS_ABSTRACT:
+			return getIsAbstract();
 		case StructurePackage.OPERATION__RAISED_EXCEPTION:
 			return getRaisedException();
 		case StructurePackage.OPERATION__PRE:
@@ -2442,8 +2907,27 @@ public class OperationImpl extends MultiplicityElementImpl implements Operation 
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-		case StructurePackage.OPERATION__ECORE_MODEL_ELEMENT:
-			setEcoreModelElement((EOperation) newValue);
+		case StructurePackage.OPERATION__CONTAINED_TYPE:
+			getContainedType().clear();
+			getContainedType().addAll((Collection<? extends Type>) newValue);
+			return;
+		case StructurePackage.OPERATION__NAME:
+			setName((String) newValue);
+			return;
+		case StructurePackage.OPERATION__TYPE:
+			setType((Type) newValue);
+			return;
+		case StructurePackage.OPERATION__IS_ORDERED:
+			setIsOrdered((Boolean) newValue);
+			return;
+		case StructurePackage.OPERATION__UPPER:
+			setUpper((Integer) newValue);
+			return;
+		case StructurePackage.OPERATION__LOWER:
+			setLower((Integer) newValue);
+			return;
+		case StructurePackage.OPERATION__IS_UNIQUE:
+			setIsUnique((Boolean) newValue);
 			return;
 		case StructurePackage.OPERATION__TYPE_PARAMETER:
 			getTypeParameter().clear();
@@ -2456,17 +2940,17 @@ public class OperationImpl extends MultiplicityElementImpl implements Operation 
 		case StructurePackage.OPERATION__CUID:
 			setCuid((String) newValue);
 			return;
-		case StructurePackage.OPERATION__IS_ABSTRACT:
-			setIsAbstract((Boolean) newValue);
+		case StructurePackage.OPERATION__OWNED_PARAMETER:
+			getOwnedParameter().clear();
+			getOwnedParameter().addAll(
+					(Collection<? extends Parameter>) newValue);
 			return;
 		case StructurePackage.OPERATION__POST:
 			getPost().clear();
 			getPost().addAll((Collection<? extends Constraint>) newValue);
 			return;
-		case StructurePackage.OPERATION__OWNED_PARAMETER:
-			getOwnedParameter().clear();
-			getOwnedParameter().addAll(
-					(Collection<? extends Parameter>) newValue);
+		case StructurePackage.OPERATION__IS_ABSTRACT:
+			setIsAbstract((Boolean) newValue);
 			return;
 		case StructurePackage.OPERATION__RAISED_EXCEPTION:
 			getRaisedException().clear();
@@ -2497,8 +2981,26 @@ public class OperationImpl extends MultiplicityElementImpl implements Operation 
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-		case StructurePackage.OPERATION__ECORE_MODEL_ELEMENT:
-			setEcoreModelElement((EOperation) null);
+		case StructurePackage.OPERATION__CONTAINED_TYPE:
+			getContainedType().clear();
+			return;
+		case StructurePackage.OPERATION__NAME:
+			setName(NAME_EDEFAULT);
+			return;
+		case StructurePackage.OPERATION__TYPE:
+			setType((Type) null);
+			return;
+		case StructurePackage.OPERATION__IS_ORDERED:
+			setIsOrdered(IS_ORDERED_EDEFAULT);
+			return;
+		case StructurePackage.OPERATION__UPPER:
+			setUpper(UPPER_EDEFAULT);
+			return;
+		case StructurePackage.OPERATION__LOWER:
+			setLower(LOWER_EDEFAULT);
+			return;
+		case StructurePackage.OPERATION__IS_UNIQUE:
+			setIsUnique(IS_UNIQUE_EDEFAULT);
 			return;
 		case StructurePackage.OPERATION__TYPE_PARAMETER:
 			getTypeParameter().clear();
@@ -2509,14 +3011,14 @@ public class OperationImpl extends MultiplicityElementImpl implements Operation 
 		case StructurePackage.OPERATION__CUID:
 			setCuid(CUID_EDEFAULT);
 			return;
-		case StructurePackage.OPERATION__IS_ABSTRACT:
-			setIsAbstract(IS_ABSTRACT_EDEFAULT);
+		case StructurePackage.OPERATION__OWNED_PARAMETER:
+			getOwnedParameter().clear();
 			return;
 		case StructurePackage.OPERATION__POST:
 			getPost().clear();
 			return;
-		case StructurePackage.OPERATION__OWNED_PARAMETER:
-			getOwnedParameter().clear();
+		case StructurePackage.OPERATION__IS_ABSTRACT:
+			setIsAbstract(IS_ABSTRACT_EDEFAULT);
 			return;
 		case StructurePackage.OPERATION__RAISED_EXCEPTION:
 			getRaisedException().clear();
@@ -2545,8 +3047,25 @@ public class OperationImpl extends MultiplicityElementImpl implements Operation 
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-		case StructurePackage.OPERATION__ECORE_MODEL_ELEMENT:
-			return ecoreModelElement != null;
+		case StructurePackage.OPERATION__CONTAINED_TYPE:
+			return containedType != null && !containedType.isEmpty();
+		case StructurePackage.OPERATION__NAME:
+			return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT
+					.equals(name);
+		case StructurePackage.OPERATION__TYPE:
+			return type != null;
+		case StructurePackage.OPERATION__IS_ORDERED:
+			return IS_ORDERED_EDEFAULT == null ? isOrdered != null
+					: !IS_ORDERED_EDEFAULT.equals(isOrdered);
+		case StructurePackage.OPERATION__UPPER:
+			return UPPER_EDEFAULT == null ? upper != null : !UPPER_EDEFAULT
+					.equals(upper);
+		case StructurePackage.OPERATION__LOWER:
+			return LOWER_EDEFAULT == null ? lower != null : !LOWER_EDEFAULT
+					.equals(lower);
+		case StructurePackage.OPERATION__IS_UNIQUE:
+			return IS_UNIQUE_EDEFAULT == null ? isUnique != null
+					: !IS_UNIQUE_EDEFAULT.equals(isUnique);
 		case StructurePackage.OPERATION__TYPE_PARAMETER:
 			return typeParameter != null && !typeParameter.isEmpty();
 		case StructurePackage.OPERATION__BODY:
@@ -2554,13 +3073,13 @@ public class OperationImpl extends MultiplicityElementImpl implements Operation 
 		case StructurePackage.OPERATION__CUID:
 			return CUID_EDEFAULT == null ? cuid != null : !CUID_EDEFAULT
 					.equals(cuid);
+		case StructurePackage.OPERATION__OWNED_PARAMETER:
+			return ownedParameter != null && !ownedParameter.isEmpty();
+		case StructurePackage.OPERATION__POST:
+			return post != null && !post.isEmpty();
 		case StructurePackage.OPERATION__IS_ABSTRACT:
 			return IS_ABSTRACT_EDEFAULT == null ? isAbstract != null
 					: !IS_ABSTRACT_EDEFAULT.equals(isAbstract);
-		case StructurePackage.OPERATION__POST:
-			return post != null && !post.isEmpty();
-		case StructurePackage.OPERATION__OWNED_PARAMETER:
-			return ownedParameter != null && !ownedParameter.isEmpty();
 		case StructurePackage.OPERATION__RAISED_EXCEPTION:
 			return raisedException != null && !raisedException.isEmpty();
 		case StructurePackage.OPERATION__PRE:
@@ -2582,10 +3101,40 @@ public class OperationImpl extends MultiplicityElementImpl implements Operation 
 	 */
 	@Override
 	public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass) {
-		if (baseClass == Traceability.class) {
+		if (baseClass == TypeContainer.class) {
 			switch (derivedFeatureID) {
-			case StructurePackage.OPERATION__ECORE_MODEL_ELEMENT:
-				return StructurePackage.TRACEABILITY__ECORE_MODEL_ELEMENT;
+			case StructurePackage.OPERATION__CONTAINED_TYPE:
+				return StructurePackage.TYPE_CONTAINER__CONTAINED_TYPE;
+			default:
+				return -1;
+			}
+		}
+		if (baseClass == NamedElement.class) {
+			switch (derivedFeatureID) {
+			case StructurePackage.OPERATION__NAME:
+				return StructurePackage.NAMED_ELEMENT__NAME;
+			default:
+				return -1;
+			}
+		}
+		if (baseClass == TypedElement.class) {
+			switch (derivedFeatureID) {
+			case StructurePackage.OPERATION__TYPE:
+				return StructurePackage.TYPED_ELEMENT__TYPE;
+			default:
+				return -1;
+			}
+		}
+		if (baseClass == MultiplicityElement.class) {
+			switch (derivedFeatureID) {
+			case StructurePackage.OPERATION__IS_ORDERED:
+				return StructurePackage.MULTIPLICITY_ELEMENT__IS_ORDERED;
+			case StructurePackage.OPERATION__UPPER:
+				return StructurePackage.MULTIPLICITY_ELEMENT__UPPER;
+			case StructurePackage.OPERATION__LOWER:
+				return StructurePackage.MULTIPLICITY_ELEMENT__LOWER;
+			case StructurePackage.OPERATION__IS_UNIQUE:
+				return StructurePackage.MULTIPLICITY_ELEMENT__IS_UNIQUE;
 			default:
 				return -1;
 			}
@@ -2600,10 +3149,40 @@ public class OperationImpl extends MultiplicityElementImpl implements Operation 
 	 */
 	@Override
 	public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass) {
-		if (baseClass == Traceability.class) {
+		if (baseClass == TypeContainer.class) {
 			switch (baseFeatureID) {
-			case StructurePackage.TRACEABILITY__ECORE_MODEL_ELEMENT:
-				return StructurePackage.OPERATION__ECORE_MODEL_ELEMENT;
+			case StructurePackage.TYPE_CONTAINER__CONTAINED_TYPE:
+				return StructurePackage.OPERATION__CONTAINED_TYPE;
+			default:
+				return -1;
+			}
+		}
+		if (baseClass == NamedElement.class) {
+			switch (baseFeatureID) {
+			case StructurePackage.NAMED_ELEMENT__NAME:
+				return StructurePackage.OPERATION__NAME;
+			default:
+				return -1;
+			}
+		}
+		if (baseClass == TypedElement.class) {
+			switch (baseFeatureID) {
+			case StructurePackage.TYPED_ELEMENT__TYPE:
+				return StructurePackage.OPERATION__TYPE;
+			default:
+				return -1;
+			}
+		}
+		if (baseClass == MultiplicityElement.class) {
+			switch (baseFeatureID) {
+			case StructurePackage.MULTIPLICITY_ELEMENT__IS_ORDERED:
+				return StructurePackage.OPERATION__IS_ORDERED;
+			case StructurePackage.MULTIPLICITY_ELEMENT__UPPER:
+				return StructurePackage.OPERATION__UPPER;
+			case StructurePackage.MULTIPLICITY_ELEMENT__LOWER:
+				return StructurePackage.OPERATION__LOWER;
+			case StructurePackage.MULTIPLICITY_ELEMENT__IS_UNIQUE:
+				return StructurePackage.OPERATION__IS_UNIQUE;
 			default:
 				return -1;
 			}
@@ -2622,7 +3201,17 @@ public class OperationImpl extends MultiplicityElementImpl implements Operation 
 			return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (cuid: ");
+		result.append(" (name: ");
+		result.append(name);
+		result.append(", isOrdered: ");
+		result.append(isOrdered);
+		result.append(", upper: ");
+		result.append(upper);
+		result.append(", lower: ");
+		result.append(lower);
+		result.append(", isUnique: ");
+		result.append(isUnique);
+		result.append(", cuid: ");
 		result.append(cuid);
 		result.append(", isAbstract: ");
 		result.append(isAbstract);

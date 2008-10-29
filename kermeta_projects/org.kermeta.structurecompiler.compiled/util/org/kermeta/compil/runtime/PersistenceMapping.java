@@ -27,46 +27,46 @@ final public class PersistenceMapping {
 				kermeta.language.behavior.BehaviorPackage.eNS_URI,
 				kermeta.language.behavior.BehaviorPackage.eINSTANCE);
 		EPackage.Registry.INSTANCE.put(
+				kermeta.compiler.CompilerPackage.eNS_URI,
+				kermeta.compiler.CompilerPackage.eINSTANCE);
+		EPackage.Registry.INSTANCE.put(
+				kermeta.exceptions.ExceptionsPackage.eNS_URI,
+				kermeta.exceptions.ExceptionsPackage.eINSTANCE);
+		EPackage.Registry.INSTANCE.put(
 				kermeta.standard.StandardPackage.eNS_URI,
 				kermeta.standard.StandardPackage.eINSTANCE);
-		EPackage.Registry.INSTANCE.put(kermeta.kunit.KunitPackage.eNS_URI,
-				kermeta.kunit.KunitPackage.eINSTANCE);
-		EPackage.Registry.INSTANCE.put(
-				kermeta.interpreter.InterpreterPackage.eNS_URI,
-				kermeta.interpreter.InterpreterPackage.eINSTANCE);
-		EPackage.Registry.INSTANCE.put(kermeta.utils.UtilsPackage.eNS_URI,
-				kermeta.utils.UtilsPackage.eINSTANCE);
 		EPackage.Registry.INSTANCE.put(
 				kermeta.persistence.PersistencePackage.eNS_URI,
 				kermeta.persistence.PersistencePackage.eINSTANCE);
 		EPackage.Registry.INSTANCE.put(kermeta.io.IoPackage.eNS_URI,
 				kermeta.io.IoPackage.eINSTANCE);
-		EPackage.Registry.INSTANCE.put(
-				kermeta.exceptions.ExceptionsPackage.eNS_URI,
-				kermeta.exceptions.ExceptionsPackage.eINSTANCE);
+		EPackage.Registry.INSTANCE.put(kermeta.utils.UtilsPackage.eNS_URI,
+				kermeta.utils.UtilsPackage.eINSTANCE);
 		EPackage.Registry.INSTANCE.put(kermeta.ecore.EcorePackage.eNS_URI,
 				kermeta.ecore.EcorePackage.eINSTANCE);
 		EPackage.Registry.INSTANCE.put(
-				kermeta.compiler.CompilerPackage.eNS_URI,
-				kermeta.compiler.CompilerPackage.eINSTANCE);
-		EPackage.Registry.INSTANCE.put(simk.SimkPackage.eNS_URI,
-				simk.SimkPackage.eINSTANCE);
+				kermeta.interpreter.InterpreterPackage.eNS_URI,
+				kermeta.interpreter.InterpreterPackage.eINSTANCE);
+		EPackage.Registry.INSTANCE.put(kermeta.kunit.KunitPackage.eNS_URI,
+				kermeta.kunit.KunitPackage.eINSTANCE);
 		EPackage.Registry.INSTANCE.put(km2ecore.Km2ecorePackage.eNS_URI,
 				km2ecore.Km2ecorePackage.eINSTANCE);
-		EPackage.Registry.INSTANCE.put(
-				km2ecore.helper.java.JavaPackage.eNS_URI,
-				km2ecore.helper.java.JavaPackage.eINSTANCE);
 		EPackage.Registry.INSTANCE.put(
 				km2ecore.helper.ecore.EcorePackage.eNS_URI,
 				km2ecore.helper.ecore.EcorePackage.eINSTANCE);
 		EPackage.Registry.INSTANCE.put(
 				km2ecore.helper.kermeta.KermetaPackage.eNS_URI,
 				km2ecore.helper.kermeta.KermetaPackage.eINSTANCE);
+		EPackage.Registry.INSTANCE.put(
+				km2ecore.helper.java.JavaPackage.eNS_URI,
+				km2ecore.helper.java.JavaPackage.eINSTANCE);
 		EPackage.Registry.INSTANCE.put(km2ecore.common.CommonPackage.eNS_URI,
 				km2ecore.common.CommonPackage.eINSTANCE);
 		EPackage.Registry.INSTANCE.put(
 				km2ecore.common.exception.ExceptionPackage.eNS_URI,
 				km2ecore.common.exception.ExceptionPackage.eINSTANCE);
+		EPackage.Registry.INSTANCE.put(simk.SimkPackage.eNS_URI,
+				simk.SimkPackage.eINSTANCE);
 		EPackage.Registry.INSTANCE.put(
 				traceability.TraceabilityPackage.eNS_URI,
 				traceability.TraceabilityPackage.eINSTANCE);

@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: KunitFactoryImpl.java,v 1.6 2008-10-28 13:18:09 cfaucher Exp $
+ * $Id: KunitFactoryImpl.java,v 1.7 2008-10-29 08:29:09 cfaucher Exp $
  */
 package kermeta.kunit.impl;
 

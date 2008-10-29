@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: BehaviorFactory.java,v 1.6 2008-10-28 13:18:08 cfaucher Exp $
+ * $Id: BehaviorFactory.java,v 1.7 2008-10-29 08:29:08 cfaucher Exp $
  */
 package kermeta.language.behavior;
 
@@ -34,15 +34,6 @@ public interface BehaviorFactory extends EFactory {
 	 * @generated
 	 */
 	Block createBlock();
-
-	/**
-	 * Returns a new object of class '<em>Rescue</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Rescue</em>'.
-	 * @generated
-	 */
-	Rescue createRescue();
 
 	/**
 	 * Returns a new object of class '<em>Expression</em>'.
@@ -124,6 +115,15 @@ public interface BehaviorFactory extends EFactory {
 	 * @generated
 	 */
 	Raise createRaise();
+
+	/**
+	 * Returns a new object of class '<em>Rescue</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Rescue</em>'.
+	 * @generated
+	 */
+	Rescue createRescue();
 
 	/**
 	 * Returns a new object of class '<em>Type Reference</em>'.

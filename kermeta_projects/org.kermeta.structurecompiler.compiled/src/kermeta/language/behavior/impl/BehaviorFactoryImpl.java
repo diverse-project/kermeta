@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: BehaviorFactoryImpl.java,v 1.6 2008-10-28 13:18:15 cfaucher Exp $
+ * $Id: BehaviorFactoryImpl.java,v 1.7 2008-10-29 08:29:14 cfaucher Exp $
  */
 package kermeta.language.behavior.impl;
 
@@ -63,8 +63,6 @@ public class BehaviorFactoryImpl extends EFactoryImpl implements
 		switch (eClass.getClassifierID()) {
 		case BehaviorPackage.BLOCK:
 			return createBlock();
-		case BehaviorPackage.RESCUE:
-			return createRescue();
 		case BehaviorPackage.EXPRESSION:
 			return createExpression();
 		case BehaviorPackage.CALL_VARIABLE:
@@ -83,6 +81,8 @@ public class BehaviorFactoryImpl extends EFactoryImpl implements
 			return createConditional();
 		case BehaviorPackage.RAISE:
 			return createRaise();
+		case BehaviorPackage.RESCUE:
+			return createRescue();
 		case BehaviorPackage.TYPE_REFERENCE:
 			return createTypeReference();
 		case BehaviorPackage.EMPTY_EXPRESSION:
@@ -123,16 +123,6 @@ public class BehaviorFactoryImpl extends EFactoryImpl implements
 	public Block createBlock() {
 		BlockImpl block = new BlockImpl();
 		return block;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Rescue createRescue() {
-		RescueImpl rescue = new RescueImpl();
-		return rescue;
 	}
 
 	/**
@@ -223,6 +213,16 @@ public class BehaviorFactoryImpl extends EFactoryImpl implements
 	public Raise createRaise() {
 		RaiseImpl raise = new RaiseImpl();
 		return raise;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Rescue createRescue() {
+		RescueImpl rescue = new RescueImpl();
+		return rescue;
 	}
 
 	/**

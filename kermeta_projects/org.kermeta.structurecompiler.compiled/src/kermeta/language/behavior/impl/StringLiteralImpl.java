@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: StringLiteralImpl.java,v 1.7 2008-10-28 22:00:08 barais Exp $
+ * $Id: StringLiteralImpl.java,v 1.8 2008-10-29 08:29:15 cfaucher Exp $
  */
 package kermeta.language.behavior.impl;
 
@@ -30,189 +30,186 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  *
  * @generated
  */
-public class StringLiteralImpl extends LiteralImpl implements StringLiteral
-{
-  /**
-   * The default value of the '{@link #getValue() <em>Value</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getValue()
-   * @generated
-   * @ordered
-   */
-  protected static final String VALUE_EDEFAULT = null;
+public class StringLiteralImpl extends LiteralImpl implements StringLiteral {
+	/**
+	 * The default value of the '{@link #getValue() <em>Value</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getValue()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String VALUE_EDEFAULT = null;
 
-  /**
-   * The cached value of the '{@link #getValue() <em>Value</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getValue()
-   * @generated
-   * @ordered
-   */
-  protected String value = VALUE_EDEFAULT;
+	/**
+	 * The cached value of the '{@link #getValue() <em>Value</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getValue()
+	 * @generated
+	 * @ordered
+	 */
+	protected String value = VALUE_EDEFAULT;
 
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  protected StringLiteralImpl()
-  {
-    super();
-  }
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected StringLiteralImpl() {
+		super();
+	}
 
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  protected EClass eStaticClass()
-  {
-    return BehaviorPackage.Literals.STRING_LITERAL;
-  }
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	protected EClass eStaticClass() {
+		return BehaviorPackage.Literals.STRING_LITERAL;
+	}
 
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public String getValue()
-  {
-    return value;
-  }
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getValue() {
+		return value;
+	}
 
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public void setValue(String newValue)
-  {
-    String oldValue = value;
-    value = newValue;
-    if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, BehaviorPackage.STRING_LITERAL__VALUE, oldValue, value));
-  }
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setValue(String newValue) {
+		String oldValue = value;
+		value = newValue;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET,
+					BehaviorPackage.STRING_LITERAL__VALUE, oldValue, value));
+	}
 
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public String createBehaviorJava(KM2EcoreContext context)
-  {
-    
-    java.lang.String result = null;
-    
-      super.createBehaviorJava(context);
-    
-      result = this.getValue();
-    
-      java.lang.Boolean idIfCond_622 = false;
-      idIfCond_622 = kermeta.standard.helper.StringWrapper.equals(result, ".");
-    
-      if( idIfCond_622 ) {
-    
-      result = "\".\"";
-    }
-     else {
-    
-      result = kermeta.standard.helper.StringWrapper.replace(result, "\\", "\\\\");
-      result = kermeta.standard.helper.StringWrapper.plus(kermeta.standard.helper.StringWrapper.plus("\"", kermeta.standard.helper.StringWrapper.replace(result, "\"", "\\\"")), "\"");
-      result = kermeta.standard.helper.StringWrapper.replace(result, "\n", "\\n");
-      result = kermeta.standard.helper.StringWrapper.replace(result, "\t", "\\t");
-    }
-    
-    
-      result = kermeta.standard.helper.StringWrapper.plus(result, this.endOfExpressionFixer());
-    
-    return result;
-    
-  }
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String createBehaviorJava(KM2EcoreContext context) {
 
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public Object eGet(int featureID, boolean resolve, boolean coreType)
-  {
-    switch (featureID)
-    {
-      case BehaviorPackage.STRING_LITERAL__VALUE:
-        return getValue();
-    }
-    return super.eGet(featureID, resolve, coreType);
-  }
+		java.lang.String result = null;
 
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public void eSet(int featureID, Object newValue)
-  {
-    switch (featureID)
-    {
-      case BehaviorPackage.STRING_LITERAL__VALUE:
-        setValue((String)newValue);
-        return;
-    }
-    super.eSet(featureID, newValue);
-  }
+		super.createBehaviorJava(context);
 
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public void eUnset(int featureID)
-  {
-    switch (featureID)
-    {
-      case BehaviorPackage.STRING_LITERAL__VALUE:
-        setValue(VALUE_EDEFAULT);
-        return;
-    }
-    super.eUnset(featureID);
-  }
+		result = this.getValue();
 
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public boolean eIsSet(int featureID)
-  {
-    switch (featureID)
-    {
-      case BehaviorPackage.STRING_LITERAL__VALUE:
-        return VALUE_EDEFAULT == null ? value != null : !VALUE_EDEFAULT.equals(value);
-    }
-    return super.eIsSet(featureID);
-  }
+		java.lang.Boolean idIfCond_624 = false;
+		idIfCond_624 = kermeta.standard.helper.StringWrapper
+				.equals(result, ".");
 
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public String toString()
-  {
-    if (eIsProxy()) return super.toString();
+		if (idIfCond_624) {
 
-    StringBuffer result = new StringBuffer(super.toString());
-    result.append(" (value: ");
-    result.append(value);
-    result.append(')');
-    return result.toString();
-  }
+			result = "\".\"";
+		} else {
+
+			result = kermeta.standard.helper.StringWrapper.replace(result,
+					"\\", "\\\\");
+
+			result = kermeta.standard.helper.StringWrapper.plus(
+					kermeta.standard.helper.StringWrapper.plus("\"",
+							kermeta.standard.helper.StringWrapper.replace(
+									result, "\"", "\\\"")), "\"");
+
+			result = kermeta.standard.helper.StringWrapper.replace(result,
+					"\n", "\\n");
+
+			result = kermeta.standard.helper.StringWrapper.replace(result,
+					"\t", "\\t");
+		}
+
+		result = kermeta.standard.helper.StringWrapper.plus(result, this
+				.endOfExpressionFixer());
+
+		return result;
+
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Object eGet(int featureID, boolean resolve, boolean coreType) {
+		switch (featureID) {
+		case BehaviorPackage.STRING_LITERAL__VALUE:
+			return getValue();
+		}
+		return super.eGet(featureID, resolve, coreType);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void eSet(int featureID, Object newValue) {
+		switch (featureID) {
+		case BehaviorPackage.STRING_LITERAL__VALUE:
+			setValue((String) newValue);
+			return;
+		}
+		super.eSet(featureID, newValue);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void eUnset(int featureID) {
+		switch (featureID) {
+		case BehaviorPackage.STRING_LITERAL__VALUE:
+			setValue(VALUE_EDEFAULT);
+			return;
+		}
+		super.eUnset(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public boolean eIsSet(int featureID) {
+		switch (featureID) {
+		case BehaviorPackage.STRING_LITERAL__VALUE:
+			return VALUE_EDEFAULT == null ? value != null : !VALUE_EDEFAULT
+					.equals(value);
+		}
+		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String toString() {
+		if (eIsProxy())
+			return super.toString();
+
+		StringBuffer result = new StringBuffer(super.toString());
+		result.append(" (value: ");
+		result.append(value);
+		result.append(')');
+		return result.toString();
+	}
 
 } //StringLiteralImpl

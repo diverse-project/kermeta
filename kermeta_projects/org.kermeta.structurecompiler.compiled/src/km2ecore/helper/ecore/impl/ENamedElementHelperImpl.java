@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ENamedElementHelperImpl.java,v 1.6 2008-10-28 13:18:31 cfaucher Exp $
+ * $Id: ENamedElementHelperImpl.java,v 1.7 2008-10-29 08:29:28 cfaucher Exp $
  */
 package km2ecore.helper.ecore.impl;
 
@@ -56,8 +56,8 @@ public class ENamedElementHelperImpl extends ObjectImpl implements
 
 		result = null;
 
-		java.lang.Boolean idIfCond_1073 = false;
-		idIfCond_1073 = kermeta.standard.helper.BooleanWrapper
+		java.lang.Boolean idIfCond_1064 = false;
+		idIfCond_1064 = kermeta.standard.helper.BooleanWrapper
 				.and(
 						kermeta.standard.helper.BooleanWrapper
 								.not(org.kermeta.compil.runtime.helper.language.ObjectUtil
@@ -69,7 +69,7 @@ public class ENamedElementHelperImpl extends ObjectImpl implements
 												.getInstance().getMetaClass(
 														"ecore.ENamedElement")));
 
-		if (idIfCond_1073) {
+		if (idIfCond_1064) {
 
 			result = ((ecore.ENamedElement) org.kermeta.compil.runtime.helper.language.ObjectUtil
 					.asTypeSwitcher(element,

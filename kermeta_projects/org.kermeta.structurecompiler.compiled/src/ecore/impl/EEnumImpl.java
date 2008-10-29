@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: EEnumImpl.java,v 1.7 2008-10-28 13:18:11 cfaucher Exp $
+ * $Id: EEnumImpl.java,v 1.8 2008-10-29 08:29:11 cfaucher Exp $
  */
 package ecore.impl;
 

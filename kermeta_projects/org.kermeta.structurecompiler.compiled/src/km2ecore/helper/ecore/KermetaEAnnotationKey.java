@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: KermetaEAnnotationKey.java,v 1.6 2008-10-28 13:18:28 cfaucher Exp $
+ * $Id: KermetaEAnnotationKey.java,v 1.7 2008-10-29 08:29:24 cfaucher Exp $
  */
 package km2ecore.helper.ecore;
 

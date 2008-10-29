@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: StdIOImpl.java,v 1.7 2008-10-28 13:18:14 cfaucher Exp $
+ * $Id: StdIOImpl.java,v 1.8 2008-10-29 08:29:13 cfaucher Exp $
  */
 package kermeta.io.impl;
 
@@ -49,17 +49,16 @@ public class StdIOImpl extends ObjectImpl implements StdIO {
 	 */
 	public void writeln(String object) {
 
-		java.lang.Boolean idIfCond_940 = false;
-		idIfCond_940 = kermeta.standard.helper.StringWrapper.equals(object,
+		java.lang.Boolean idIfCond_979 = false;
+		idIfCond_979 = kermeta.standard.helper.StringWrapper.equals(object,
 				null);
 
-		if (idIfCond_940) {
+		if (idIfCond_979) {
 
 			object = "<void>";
 		}
 
-		org.kermeta.compil.runtime.helper.io.StdIOUtil.getInstance().writeln(
-				object);
+		org.kermeta.compil.runtime.helper.io.StdIOUtil.writeln(object);
 
 	}
 
@@ -70,17 +69,16 @@ public class StdIOImpl extends ObjectImpl implements StdIO {
 	 */
 	public void errorln(String object) {
 
-		java.lang.Boolean idIfCond_941 = false;
-		idIfCond_941 = kermeta.standard.helper.StringWrapper.equals(object,
+		java.lang.Boolean idIfCond_980 = false;
+		idIfCond_980 = kermeta.standard.helper.StringWrapper.equals(object,
 				null);
 
-		if (idIfCond_941) {
+		if (idIfCond_980) {
 
 			object = "<void>";
 		}
 
-		org.kermeta.compil.runtime.helper.io.StdIOUtil.getInstance().errorln(
-				object);
+		org.kermeta.compil.runtime.helper.io.StdIOUtil.errorln(object);
 
 	}
 
@@ -91,17 +89,16 @@ public class StdIOImpl extends ObjectImpl implements StdIO {
 	 */
 	public void error(String object) {
 
-		java.lang.Boolean idIfCond_942 = false;
-		idIfCond_942 = kermeta.standard.helper.StringWrapper.equals(object,
+		java.lang.Boolean idIfCond_981 = false;
+		idIfCond_981 = kermeta.standard.helper.StringWrapper.equals(object,
 				null);
 
-		if (idIfCond_942) {
+		if (idIfCond_981) {
 
 			object = "<void>";
 		}
 
-		org.kermeta.compil.runtime.helper.io.StdIOUtil.getInstance().error(
-				object);
+		org.kermeta.compil.runtime.helper.io.StdIOUtil.error(object);
 
 	}
 
@@ -112,17 +109,16 @@ public class StdIOImpl extends ObjectImpl implements StdIO {
 	 */
 	public void write(String object) {
 
-		java.lang.Boolean idIfCond_943 = false;
-		idIfCond_943 = kermeta.standard.helper.StringWrapper.equals(object,
+		java.lang.Boolean idIfCond_982 = false;
+		idIfCond_982 = kermeta.standard.helper.StringWrapper.equals(object,
 				null);
 
-		if (idIfCond_943) {
+		if (idIfCond_982) {
 
 			object = "<void>";
 		}
 
-		org.kermeta.compil.runtime.helper.io.StdIOUtil.getInstance().write(
-				object);
+		org.kermeta.compil.runtime.helper.io.StdIOUtil.write(object);
 
 	}
 
@@ -135,17 +131,17 @@ public class StdIOImpl extends ObjectImpl implements StdIO {
 
 		java.lang.String result = null;
 
-		java.lang.Boolean idIfCond_944 = false;
-		idIfCond_944 = kermeta.standard.helper.StringWrapper.equals(prompt,
+		java.lang.Boolean idIfCond_983 = false;
+		idIfCond_983 = kermeta.standard.helper.StringWrapper.equals(prompt,
 				null);
 
-		if (idIfCond_944) {
+		if (idIfCond_983) {
 
 			prompt = "";
 		}
 
 		result = (java.lang.String) org.kermeta.compil.runtime.helper.io.StdIOUtil
-				.getInstance().read(prompt);
+				.read(prompt);
 
 		return result;
 

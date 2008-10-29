@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: FileImpl.java,v 1.6 2008-10-28 13:18:26 cfaucher Exp $
+ * $Id: FileImpl.java,v 1.7 2008-10-29 08:29:21 cfaucher Exp $
  */
 package traceability.impl;
 
@@ -159,26 +159,26 @@ public class FileImpl extends ObjectImpl implements File {
 			kermeta.standard.Iterator<traceability.File> it_ft253 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
 					.<traceability.File> convertAsOrderedSet(
 							traceModel.getFiles()).iterator();
-			java.lang.Boolean idLoopCond_1101 = false;
-			while (!idLoopCond_1101) {
-				idLoopCond_1101 = kermeta.standard.helper.BooleanWrapper.or(
+			java.lang.Boolean idLoopCond_1103 = false;
+			while (!idLoopCond_1103) {
+				idLoopCond_1103 = kermeta.standard.helper.BooleanWrapper.or(
 						it_ft253.isOff(),
 						org.kermeta.compil.runtime.helper.language.ObjectUtil
 								.isNotEqualSwitcher(result_ft253, null));
-				if (idLoopCond_1101) {
+				if (idLoopCond_1103) {
 				} else {
 
 					elem_ft253 = it_ft253.next();
 
-					java.lang.Boolean idIfCond_1102 = false;
+					java.lang.Boolean idIfCond_1104 = false;
 					//BIle:detector
 					traceability.File f_lbdExp253 = elem_ft253;
 
-					idIfCond_1102 = kermeta.standard.helper.StringWrapper
+					idIfCond_1104 = kermeta.standard.helper.StringWrapper
 							.equals(f_lbdExp253.getUri(), uri_toFind);
 					//EIle:detector
 
-					if (idIfCond_1102) {
+					if (idIfCond_1104) {
 
 						result_ft253 = elem_ft253;
 					}
@@ -191,11 +191,11 @@ public class FileImpl extends ObjectImpl implements File {
 		file = result_ft253;
 		//EIft:detect
 
-		java.lang.Boolean idIfCond_1103 = false;
-		idIfCond_1103 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+		java.lang.Boolean idIfCond_1105 = false;
+		idIfCond_1105 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 				.isVoidSwitcher(file);
 
-		if (idIfCond_1103) {
+		if (idIfCond_1105) {
 
 			file = ((traceability.File) org.kermeta.compil.runtime.helper.language.ClassUtil
 					.newObject("traceability.File"));

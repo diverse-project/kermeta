@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: CallExpressionImpl.java,v 1.6 2008-10-28 13:18:16 cfaucher Exp $
+ * $Id: CallExpressionImpl.java,v 1.7 2008-10-29 08:29:15 cfaucher Exp $
  */
 package kermeta.language.behavior.impl;
 
@@ -162,6 +162,51 @@ public abstract class CallExpressionImpl extends ExpressionImpl implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public Boolean isCallFeatureAsStaticEnumLiteral() {
+
+		java.lang.Boolean result = null;
+
+		result = false;
+
+		java.lang.Boolean idIfCond_582 = false;
+		idIfCond_582 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+				.isInstanceOfSwitcher(
+						this,
+						org.kermeta.compil.runtime.ExecutionContext
+								.getInstance()
+								.getMetaClass(
+										"kermeta.language.behavior.CallFeature"));
+
+		if (idIfCond_582) {
+
+			java.lang.Boolean idIfCond_583 = false;
+			idIfCond_583 = kermeta.standard.helper.BooleanWrapper
+					.not(org.kermeta.compil.runtime.helper.language.ObjectUtil
+							.isVoidSwitcher(((kermeta.language.behavior.CallFeature) org.kermeta.compil.runtime.helper.language.ObjectUtil
+									.asTypeSwitcher(
+											this,
+											org.kermeta.compil.runtime.ExecutionContext
+													.getInstance()
+													.getMetaClass(
+															"kermeta.language.behavior.CallFeature")))
+									.getStaticEnumLiteral()));
+
+			if (idIfCond_583) {
+
+				result = true;
+			}
+
+		}
+
+		return result;
+
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public String createBehaviorJava(KM2EcoreContext context) {
 
 		java.lang.String result = null;
@@ -179,59 +224,14 @@ public abstract class CallExpressionImpl extends ExpressionImpl implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Boolean isCallFeatureAsStaticEnumLiteral() {
-
-		java.lang.Boolean result = null;
-
-		result = false;
-
-		java.lang.Boolean idIfCond_583 = false;
-		idIfCond_583 = org.kermeta.compil.runtime.helper.language.ObjectUtil
-				.isInstanceOfSwitcher(
-						this,
-						org.kermeta.compil.runtime.ExecutionContext
-								.getInstance()
-								.getMetaClass(
-										"kermeta.language.behavior.CallFeature"));
-
-		if (idIfCond_583) {
-
-			java.lang.Boolean idIfCond_584 = false;
-			idIfCond_584 = kermeta.standard.helper.BooleanWrapper
-					.not(org.kermeta.compil.runtime.helper.language.ObjectUtil
-							.isVoidSwitcher(((kermeta.language.behavior.CallFeature) org.kermeta.compil.runtime.helper.language.ObjectUtil
-									.asTypeSwitcher(
-											this,
-											org.kermeta.compil.runtime.ExecutionContext
-													.getInstance()
-													.getMetaClass(
-															"kermeta.language.behavior.CallFeature")))
-									.getStaticEnumLiteral()));
-
-			if (idIfCond_584) {
-
-				result = true;
-			}
-
-		}
-
-		return result;
-
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public Boolean isCallFeatureAsStaticOperation() {
 
 		java.lang.Boolean result = null;
 
 		result = false;
 
-		java.lang.Boolean idIfCond_585 = false;
-		idIfCond_585 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+		java.lang.Boolean idIfCond_584 = false;
+		idIfCond_584 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 				.isInstanceOfSwitcher(
 						this,
 						org.kermeta.compil.runtime.ExecutionContext
@@ -239,10 +239,10 @@ public abstract class CallExpressionImpl extends ExpressionImpl implements
 								.getMetaClass(
 										"kermeta.language.behavior.CallFeature"));
 
-		if (idIfCond_585) {
+		if (idIfCond_584) {
 
-			java.lang.Boolean idIfCond_586 = false;
-			idIfCond_586 = kermeta.standard.helper.BooleanWrapper
+			java.lang.Boolean idIfCond_585 = false;
+			idIfCond_585 = kermeta.standard.helper.BooleanWrapper
 					.not(org.kermeta.compil.runtime.helper.language.ObjectUtil
 							.isVoidSwitcher(((kermeta.language.behavior.CallFeature) org.kermeta.compil.runtime.helper.language.ObjectUtil
 									.asTypeSwitcher(
@@ -253,7 +253,7 @@ public abstract class CallExpressionImpl extends ExpressionImpl implements
 															"kermeta.language.behavior.CallFeature")))
 									.getStaticOperation()));
 
-			if (idIfCond_586) {
+			if (idIfCond_585) {
 
 				result = true;
 			}
@@ -275,8 +275,8 @@ public abstract class CallExpressionImpl extends ExpressionImpl implements
 
 		result = false;
 
-		java.lang.Boolean idIfCond_587 = false;
-		idIfCond_587 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+		java.lang.Boolean idIfCond_586 = false;
+		idIfCond_586 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 				.isInstanceOfSwitcher(
 						this,
 						org.kermeta.compil.runtime.ExecutionContext
@@ -284,10 +284,10 @@ public abstract class CallExpressionImpl extends ExpressionImpl implements
 								.getMetaClass(
 										"kermeta.language.behavior.CallFeature"));
 
-		if (idIfCond_587) {
+		if (idIfCond_586) {
 
-			java.lang.Boolean idIfCond_588 = false;
-			idIfCond_588 = kermeta.standard.helper.BooleanWrapper
+			java.lang.Boolean idIfCond_587 = false;
+			idIfCond_587 = kermeta.standard.helper.BooleanWrapper
 					.not(org.kermeta.compil.runtime.helper.language.ObjectUtil
 							.isVoidSwitcher(((kermeta.language.behavior.CallFeature) org.kermeta.compil.runtime.helper.language.ObjectUtil
 									.asTypeSwitcher(
@@ -298,7 +298,7 @@ public abstract class CallExpressionImpl extends ExpressionImpl implements
 															"kermeta.language.behavior.CallFeature")))
 									.getStaticProperty()));
 
-			if (idIfCond_588) {
+			if (idIfCond_587) {
 
 				result = true;
 			}

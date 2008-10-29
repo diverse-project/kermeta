@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: Real.java,v 1.1 2008-10-28 13:18:15 cfaucher Exp $
+ * $Id: Real.java,v 1.2 2008-10-29 08:29:14 cfaucher Exp $
  */
 package kermeta.standard;
 

@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: EMFRepositoryImpl.java,v 1.6 2008-10-28 13:18:21 cfaucher Exp $
+ * $Id: EMFRepositoryImpl.java,v 1.7 2008-10-29 08:29:18 cfaucher Exp $
  */
 package kermeta.persistence.impl;
 
@@ -247,40 +247,40 @@ public class EMFRepositoryImpl extends RepositoryImpl implements EMFRepository {
 
 		//BIft:collect
 
-		kermeta.standard.Sequence<java.lang.String> result_ft210 = null;
+		kermeta.standard.Sequence<java.lang.String> result_ft222 = null;
 
-		result_ft210 = ((kermeta.standard.Sequence<java.lang.String>) org.kermeta.compil.runtime.helper.language.ClassUtil
+		result_ft222 = ((kermeta.standard.Sequence<java.lang.String>) org.kermeta.compil.runtime.helper.language.ClassUtil
 				.newObject("kermeta.standard.Sequence<java.lang.String>"));
 
 		{
 
-			kermeta.standard.Iterator<kermeta.persistence.Resource> it_ft210 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
+			kermeta.standard.Iterator<kermeta.persistence.Resource> it_ft222 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
 					.<kermeta.persistence.Resource> convertAsSet(
 							this.getResources()).iterator();
-			java.lang.Boolean idLoopCond_936 = false;
-			while (!idLoopCond_936) {
-				idLoopCond_936 = it_ft210.isOff();
-				if (idLoopCond_936) {
+			java.lang.Boolean idLoopCond_975 = false;
+			while (!idLoopCond_975) {
+				idLoopCond_975 = it_ft222.isOff();
+				if (idLoopCond_975) {
 				} else {
 
-					java.lang.String result_lambda_ft210 = null;
+					java.lang.String result_lambda_ft222 = null;
 					//BIle:collector
-					kermeta.persistence.Resource r_lbdExp210 = it_ft210.next();
+					kermeta.persistence.Resource r_lbdExp222 = it_ft222.next();
 
-					result_lambda_ft210 = r_lbdExp210.getUri();
+					result_lambda_ft222 = r_lbdExp222.getUri();
 					//EIle:collector
 
-					result_ft210.add(result_lambda_ft210);
+					result_ft222.add(result_lambda_ft222);
 				}
 			}
 		}
 
 		//EIft:collect
-		java.lang.Boolean idIfCond_935 = false;
-		idIfCond_935 = kermeta.standard.helper.BooleanWrapper.not(result_ft210
+		java.lang.Boolean idIfCond_974 = false;
+		idIfCond_974 = kermeta.standard.helper.BooleanWrapper.not(result_ft222
 				.contains(uri));
 
-		if (idIfCond_935) {
+		if (idIfCond_974) {
 
 			result = (kermeta.persistence.Resource) org.kermeta.compil.runtime.helper.basetypes.RepositoryUtil
 					.createResource(this, uri, mm_uri);

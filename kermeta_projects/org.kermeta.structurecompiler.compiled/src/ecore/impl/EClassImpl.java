@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: EClassImpl.java,v 1.7 2008-10-28 13:18:11 cfaucher Exp $
+ * $Id: EClassImpl.java,v 1.8 2008-10-29 08:29:11 cfaucher Exp $
  */
 package ecore.impl;
 
@@ -253,8 +253,8 @@ public class EClassImpl extends EClassifierImpl implements EClass {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EStructuralFeature getEStructuralFeature(String featureName) {
-		ecore.EStructuralFeature result = null;
+	public int getFeatureID(EStructuralFeature feature) {
+		java.lang.Integer result = null;
 
 		return result;
 
@@ -265,8 +265,8 @@ public class EClassImpl extends EClassifierImpl implements EClass {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public int getFeatureID(EStructuralFeature feature) {
-		java.lang.Integer result = null;
+	public EStructuralFeature getEStructuralFeature(String featureName) {
+		ecore.EStructuralFeature result = null;
 
 		return result;
 

@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: FunctionType.java,v 1.6 2008-10-28 13:18:19 cfaucher Exp $
+ * $Id: FunctionType.java,v 1.7 2008-10-29 08:29:16 cfaucher Exp $
  */
 package kermeta.language.structure;
 
@@ -28,8 +28,8 @@ import km2ecore.KM2EcoreContext;
  *        annotation="kermeta.inv resultType=''"
  * @generated
  */
-public interface FunctionType extends Traceability<EAnnotation>, TypeContainer,
-		Type {
+public interface FunctionType extends TypeContainer, Type,
+		Traceability<EAnnotation> {
 	/**
 	 * Returns the value of the '<em><b>Left</b></em>' reference.
 	 * <!-- begin-user-doc -->

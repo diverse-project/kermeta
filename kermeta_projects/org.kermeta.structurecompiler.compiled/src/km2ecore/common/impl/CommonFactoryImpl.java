@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: CommonFactoryImpl.java,v 1.6 2008-10-28 13:18:22 cfaucher Exp $
+ * $Id: CommonFactoryImpl.java,v 1.7 2008-10-29 08:29:18 cfaucher Exp $
  */
 package km2ecore.common.impl;
 

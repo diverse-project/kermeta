@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: VirtualTypeImpl.java,v 1.6 2008-10-28 13:18:10 cfaucher Exp $
+ * $Id: VirtualTypeImpl.java,v 1.7 2008-10-29 08:29:11 cfaucher Exp $
  */
 package kermeta.language.structure.impl;
 

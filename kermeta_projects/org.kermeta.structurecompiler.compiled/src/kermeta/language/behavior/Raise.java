@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: Raise.java,v 1.6 2008-10-28 13:18:08 cfaucher Exp $
+ * $Id: Raise.java,v 1.7 2008-10-29 08:29:08 cfaucher Exp $
  */
 package kermeta.language.behavior;
 

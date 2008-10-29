@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: KermetaFactoryImpl.java,v 1.6 2008-10-28 13:18:12 cfaucher Exp $
+ * $Id: KermetaFactoryImpl.java,v 1.7 2008-10-29 08:29:12 cfaucher Exp $
  */
 package km2ecore.helper.kermeta.impl;
 
@@ -60,10 +60,10 @@ public class KermetaFactoryImpl extends EFactoryImpl implements KermetaFactory {
 	@Override
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
-		case KermetaPackage.COMPILER_HELPER_JAVA:
-			return createCompilerHelperJava();
 		case KermetaPackage.GENERIC_TYPE_DEFINITION_HELPER:
 			return createGenericTypeDefinitionHelper();
+		case KermetaPackage.COMPILER_HELPER_JAVA:
+			return createCompilerHelperJava();
 		default:
 			throw new IllegalArgumentException("The class '" + eClass.getName()
 					+ "' is not a valid classifier");
@@ -75,9 +75,9 @@ public class KermetaFactoryImpl extends EFactoryImpl implements KermetaFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public CompilerHelperJava createCompilerHelperJava() {
-		CompilerHelperJavaImpl compilerHelperJava = new CompilerHelperJavaImpl();
-		return compilerHelperJava;
+	public GenericTypeDefinitionHelper createGenericTypeDefinitionHelper() {
+		GenericTypeDefinitionHelperImpl genericTypeDefinitionHelper = new GenericTypeDefinitionHelperImpl();
+		return genericTypeDefinitionHelper;
 	}
 
 	/**
@@ -85,9 +85,9 @@ public class KermetaFactoryImpl extends EFactoryImpl implements KermetaFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public GenericTypeDefinitionHelper createGenericTypeDefinitionHelper() {
-		GenericTypeDefinitionHelperImpl genericTypeDefinitionHelper = new GenericTypeDefinitionHelperImpl();
-		return genericTypeDefinitionHelper;
+	public CompilerHelperJava createCompilerHelperJava() {
+		CompilerHelperJavaImpl compilerHelperJava = new CompilerHelperJavaImpl();
+		return compilerHelperJava;
 	}
 
 	/**

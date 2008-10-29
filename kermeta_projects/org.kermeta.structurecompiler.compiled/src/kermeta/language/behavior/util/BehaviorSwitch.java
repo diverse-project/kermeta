@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: BehaviorSwitch.java,v 1.6 2008-10-28 13:18:40 cfaucher Exp $
+ * $Id: BehaviorSwitch.java,v 1.7 2008-10-29 08:29:37 cfaucher Exp $
  */
 package kermeta.language.behavior.util;
 
@@ -98,15 +98,6 @@ public class BehaviorSwitch<T> {
 				result = caseTypeContainer(block);
 			if (result == null)
 				result = caseObject(block);
-			if (result == null)
-				result = defaultCase(theEObject);
-			return result;
-		}
-		case BehaviorPackage.RESCUE: {
-			Rescue rescue = (Rescue) theEObject;
-			T result = caseRescue(rescue);
-			if (result == null)
-				result = caseObject(rescue);
 			if (result == null)
 				result = defaultCase(theEObject);
 			return result;
@@ -247,6 +238,15 @@ public class BehaviorSwitch<T> {
 				result = caseTypeContainer(raise);
 			if (result == null)
 				result = caseObject(raise);
+			if (result == null)
+				result = defaultCase(theEObject);
+			return result;
+		}
+		case BehaviorPackage.RESCUE: {
+			Rescue rescue = (Rescue) theEObject;
+			T result = caseRescue(rescue);
+			if (result == null)
+				result = caseObject(rescue);
 			if (result == null)
 				result = defaultCase(theEObject);
 			return result;
@@ -464,21 +464,6 @@ public class BehaviorSwitch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Rescue</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Rescue</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseRescue(Rescue object) {
-		return null;
-	}
-
-	/**
 	 * Returns the result of interpreting the object as an instance of '<em>Expression</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
@@ -625,6 +610,21 @@ public class BehaviorSwitch<T> {
 	 * @generated
 	 */
 	public T caseRaise(Raise object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Rescue</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Rescue</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseRescue(Rescue object) {
 		return null;
 	}
 

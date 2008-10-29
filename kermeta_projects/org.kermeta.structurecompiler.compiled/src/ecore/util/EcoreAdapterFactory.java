@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: EcoreAdapterFactory.java,v 1.5 2008-10-28 13:18:34 cfaucher Exp $
+ * $Id: EcoreAdapterFactory.java,v 1.6 2008-10-29 08:29:30 cfaucher Exp $
  */
 package ecore.util;
 
