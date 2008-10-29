@@ -1,6 +1,10 @@
 package org.kermeta.compiler.ui;
 
+import org.apache.commons.logging.Log;
+import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.Status;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
+import org.kermeta.log4j.util.LogConfigurationHelper;
 import org.osgi.framework.BundleContext;
 
 /**
@@ -14,6 +18,8 @@ public class Activator extends AbstractUIPlugin {
 	// The shared instance
 	private static Activator plugin;
 	
+	final static public Log internalLog = LogConfigurationHelper.getLogger("KermetaCompiler");
+
 	/**
 	 * The constructor
 	 */
@@ -47,4 +53,32 @@ public class Activator extends AbstractUIPlugin {
 		return plugin;
 	}
 
+	
+	/**
+	 * This method logs an error message and an associated exception (as a trace)
+	 * It will post the message both in the ErrorLog view in Eclipse and in the Log4J
+	 * @param message String
+	 */
+	public static void logErrorMessage(String message, Throwable e) {
+		if (message == null)
+			message= "";
+		// eclipse logger
+		getDefault().getLog().log(new Status(IStatus.ERROR, PLUGIN_ID, IStatus.ERROR, message, e));
+		// log4j message
+		internalLog.error(message, e);
+	}
+	
+	/**
+	 * This method logs a warning message and an associated exception (as a trace)
+	 * It will post the message both in the ErrorLog view in Eclipse and in the Log4J
+	 * @param message String
+	 */
+	public static void logWarningMessage(String message, Throwable e) {
+		if (message == null)
+			message= "";
+		// eclipse logger
+		getDefault().getLog().log(new Status(IStatus.WARNING, PLUGIN_ID, IStatus.WARNING, message, e));
+		// log4j message
+		internalLog.error(message, e);
+	}
 }

@@ -1,4 +1,4 @@
-/* $Id: CompileKermetaAction.java,v 1.7 2008-10-17 14:40:57 cfaucher Exp $
+/* $Id: CompileKermetaAction.java,v 1.8 2008-10-29 08:33:07 dvojtise Exp $
  * Project   : fr.irisa.triskell.kermeta.compiler
  * File      : CompileKermetaAction.java
  * License   : EPL
@@ -29,6 +29,7 @@ import org.eclipse.ui.IObjectActionDelegate;
 import org.eclipse.ui.IWorkbenchPart;
 import org.kermeta.compiler.Compiler;
 import org.kermeta.compiler.KermetaCompiler;
+import org.kermeta.compiler.ui.Activator;
 import org.kermeta.io.KermetaUnit;
 import org.kermeta.io.loader.plugin.LoaderPlugin;
 import org.kermeta.log4j.util.LogConfigurationHelper;
@@ -44,8 +45,7 @@ public class CompileKermetaAction implements IObjectActionDelegate {
 
 	protected IFile file;
 
-	final static public Log internalLog = LogConfigurationHelper.getLogger("KermetaCompiler");
-
+	
 	/**
 	 * Constructor for CompileKermetaAction.
 	 */
@@ -99,11 +99,16 @@ public class CompileKermetaAction implements IObjectActionDelegate {
 							.toString());
 					Compiler compiler = new Compiler(ecore_file, monitor);
 					compiler.run();
-					internalLog.info("The compilation process is complete");
+					Activator.internalLog.info("The compilation process is complete");
 								
 				} catch (Exception e) {
-					e.printStackTrace();
+					String message = "Compilation of " + file.getName()+" failed";
+					Activator.logErrorMessage(message, e);
+				}catch (Error e) {
+					String message = "Compilation of " + file.getName()+" failed";
+					Activator.logErrorMessage(message, e);
 				}
+			
 		
 				/*************/
 				
