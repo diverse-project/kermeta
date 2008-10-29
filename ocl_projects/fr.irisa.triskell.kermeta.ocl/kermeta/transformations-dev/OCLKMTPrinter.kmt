@@ -1,4 +1,4 @@
- /* $Id: OCLKMTPrinter.kmt,v 1.13 2008-10-28 15:19:45 barais Exp $
+ /* $Id: OCLKMTPrinter.kmt,v 1.14 2008-10-29 09:54:12 barais Exp $
  * File : Visitors.kmt
  * License : EPL
  * Copyright : IRISA / INRIA / Universite de Rennes 1
@@ -19,7 +19,7 @@ require "ocl2kmtVisitor.kmt"
 require "EcoreHelper.kmt"
 require "OCLHelper.kmt"  
 require "IOMixin.kmt"
-
+ 
 //require "Tools.kmt"    
 //require "../../../fr.irisa.triskell.kermeta.ecore/src/kermeta/helpers/EcoreHelper.kmt"
    
@@ -47,7 +47,9 @@ class OCLKMTPrinter
     operation main(): Void is
 		do
 				//self.generateOCL("../../ocl/speedsDepTest.xmi", "../../ocl/speedsL1.ecore", "speedsDepTest.kmt")
-				self.generateOCL("platform:/resource/testOCL/01.xmi", "platform:/resource/testOCL/sample.ecore", "platform:/resource/testOCL/01.kmt")
+				self.generateOCL("platform:/resource/fr.irisa.triskell.kermeta.ocl.test/tests/sample/expected_xmi/01.xmi",
+				"platform:/resource/fr.irisa.triskell.kermeta.ocl.test/tests/sample/metamodel/sample.ecore",
+				"platform:/resource/fr.irisa.triskell.kermeta.ocl.test/01.kmt")
 	    end
 	    
 	    
@@ -59,8 +61,10 @@ class OCLKMTPrinter
 	  operation generateOCL(parsedOclURI : String, metamodelURI : String,Outputfilename : String): Void is
 		do
 			repository := EMFRepository.new
-	     	parsedOcl  := repository.getResource(parsedOclURI)
-	     	metamodel := repository.getResource(metamodelURI)
+	     	parsedOcl  := repository.createResource(parsedOclURI,"platform:/resource/fr.irisa.triskell.kermeta.ocl/mmodel/OCLCST.ecore")
+	     	parsedOcl.load()
+	     	metamodel := repository.createResource(metamodelURI, "http://www.eclipse.org/emf/2002/Ecore")
+	     	metamodel.load()
 	     	ecoreHelper := EcoreHelpers::EcoreHelper.new
 	     	ecoreHelper.setModel(metamodel) 
 			oclHelper := OCLHelper.new
