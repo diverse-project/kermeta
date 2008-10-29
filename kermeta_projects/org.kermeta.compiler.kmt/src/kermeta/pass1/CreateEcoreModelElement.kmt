@@ -1,4 +1,4 @@
-/* $Id: CreateEcoreModelElement.kmt,v 1.42 2008-10-28 13:21:47 cfaucher Exp $
+/* $Id: CreateEcoreModelElement.kmt,v 1.43 2008-10-29 14:07:51 cfaucher Exp $
  * Creation date: February 1, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -314,6 +314,12 @@ aspect class Property {
 		end
 		
 		ecoreStructuralFeature.transient := self.getEMFIsTransient()
+		
+		if (not ecoreStructuralFeature.transient)
+				and ecoreStructuralFeature.isInstanceOf(EAttribute)
+				and self.type.getMetaClass().typeDefinition.qualifiedName == "kermeta::language::structure::Enumeration" then
+			ecoreStructuralFeature.asType(EAttribute).transient := true
+		end
 		
 		// management of read only
 		// management of default
