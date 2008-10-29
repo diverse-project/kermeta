@@ -1,6 +1,6 @@
 
 
-/*$Id: IOPlugin.java,v 1.42 2008-07-23 12:32:54 dvojtise Exp $
+/*$Id: IOPlugin.java,v 1.43 2008-10-29 16:02:18 dvojtise Exp $
 * Project : org.kermeta.io
 * File : 	IOPlugin.java
 * License : EPL
@@ -20,22 +20,22 @@ import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Plugin;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.resource.impl.URIConverterImpl;
+import org.eclipse.emf.ecore.resource.impl.ExtensibleURIConverterImpl;
 import org.eclipse.emf.ecore.xmi.impl.EcoreResourceFactoryImpl;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.kermeta.io.IoFactory;
 import org.kermeta.io.KermetaUnit;
 import org.kermeta.io.KermetaUnitStorer;
 import org.kermeta.loader.FrameworkMapping;
+import org.kermeta.log4j.util.LogConfigurationHelper;
 
 import fr.irisa.triskell.kermeta.exceptions.KermetaIOFileNotFoundException;
 import fr.irisa.triskell.kermeta.exceptions.NotRegisteredURIException;
 import fr.irisa.triskell.kermeta.exceptions.URIMalformedException;
 import fr.irisa.triskell.kermeta.impl.KmPackageImpl;
 import fr.irisa.triskell.kermeta.modelhelper.URIMapUtil;
-
-import org.kermeta.log4j.util.LogConfigurationHelper;
 
 public class IOPlugin extends Plugin {
 
@@ -135,10 +135,18 @@ public class IOPlugin extends Plugin {
 				File file = new File(URI_MAP);
 				if (file.exists()){
 					internalLog.info("Reading URIMap from " + file.toString());
-					URIConverterImpl.URI_MAP.putAll(URIMapUtil.readMapFile(file));
+					ExtensibleURIConverterImpl.URI_MAP.putAll(URIMapUtil.readMapFile(file));
 				}
 				else {
 					internalLog.warn("not able to read URIMap from " + file.toString());
+				}
+				
+				if(!ExtensibleURIConverterImpl.URI_MAP.containsKey(URI.createURI("platform:/plugin/"))){
+					internalLog.error("in local_use mode, ExtensibleURIConverterImpl.URI_MAP must contain a mapping  for platform:/plugin/");
+				}if(!ExtensibleURIConverterImpl.URI_MAP.containsKey(URI.createURI("platform:/resource/"))){
+					internalLog.error("in local_use mode, ExtensibleURIConverterImpl.URI_MAP must contain a mapping  for platform:/resource/");
+				}if(!ExtensibleURIConverterImpl.URI_MAP.containsKey(URI.createURI("kconf:/loader/"))){
+					internalLog.error("in local_use mode, ExtensibleURIConverterImpl.URI_MAP must contain a mapping  for kconf:/loader/");
 				}
 				Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("ecore",new XMIResourceFactoryImpl());
 				Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("traceability",new XMIResourceFactoryImpl());
