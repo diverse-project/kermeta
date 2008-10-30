@@ -1,5 +1,5 @@
 
-/*$Id: SaverOrLoader.java,v 1.9 2008-10-30 17:37:06 cfaucher Exp $
+/*$Id: SaverOrLoader.java,v 1.10 2008-10-30 17:53:35 cfaucher Exp $
 * Project : org.kermeta.compiler.generator
 * File : 	SaverOrLoader.java
 * License : EPL
@@ -21,12 +21,10 @@ import java.util.List;
 
 import org.eclipse.core.runtime.IConfigurationElement;
 import org.eclipse.core.runtime.Platform;
-import org.eclipse.emf.codegen.CodeGen;
 import org.eclipse.emf.codegen.util.CodeGenUtil;
 import org.eclipse.emf.common.util.Enumerator;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EDataType;
-import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EEnumLiteral;
 import org.eclipse.emf.ecore.EFactory;
 import org.eclipse.emf.ecore.EObject;
@@ -216,15 +214,19 @@ abstract public class SaverOrLoader {
 	 */
 	protected EObject createInstance(EObject sourceObject, String metamodelURI) {
 		
-		//System.out.println("Registry.INSTANCE.getEFactory(metamodelURI): " + Registry.INSTANCE.getEFactory(metamodelURI).toString());
-		
-		//System.out.println(sourceObject.eClass().getEPackage().getNsURI());
+		if( Registry.INSTANCE.getEFactory(metamodelURI) == null ) {
+			String tmp_ns_uri = sourceObject.eClass().getEPackage().getNsURI();
+			if( tmp_ns_uri.contains(uri_suffix) ) {
+				metamodelURI = tmp_ns_uri.replace(uri_suffix, "");
+			} else {
+				metamodelURI = tmp_ns_uri + uri_suffix;
+			}
+		}
 		
 		if( Registry.INSTANCE.getEFactory(metamodelURI) != null ) {
 			
 			if( Registry.INSTANCE.getEPackage(metamodelURI).getClass() != org.eclipse.emf.ecore.impl.EPackageImpl.class ) { //The EPackage does not come from an Ecore file
 				EPackage root_pack = getRootEPackage(Registry.INSTANCE.getEPackage(metamodelURI));
-				//System.out.println("pack: " + EcoreHelper.getQualifiedName(sourceObject.eClass().getEPackage(), "._"));
 				EFactory factory = getTargetEFactory(root_pack, sourceObject.eClass().getEPackage());
 				
 				try {
@@ -367,7 +369,6 @@ abstract public class SaverOrLoader {
 		EFactory factory = getTargetEFactory(root_pack, _epack);
 		
 		try {
-			//System.out.println("sourceObject.getClass().getSimpleName(): " + sourceObject.getClass().getSimpleName() + " - " + factory.getClass().getName());
 			String creationMethodName = "create" + sourceObject.getClass().getSimpleName() + "FromString";
 			Method method = factory.getClass().getMethod(creationMethodName, new Class[] {EDataType.class, String.class});
 			Enumerator targetObject = (Enumerator) method.invoke(factory, new Object[] {null, sourceObject.getLiteral()});

@@ -1,5 +1,5 @@
 
-/*$Id: Loader.java,v 1.9 2008-10-30 17:37:35 cfaucher Exp $
+/*$Id: Loader.java,v 1.10 2008-10-30 17:53:38 cfaucher Exp $
 * Project : org.kermeta.compiler.generator
 * File : 	Loader.java
 * License : EPL
@@ -154,6 +154,7 @@ public class Loader extends SaverOrLoader {
 								targetListObject = createInstance(sourceListObject, this.getMetamodelURISpecialCompiler());
 								cloneEObject(sourceListObject, targetListObject);
 							}
+							
 							if( targetList!=null ) {
 								targetList.add(targetListObject);
 							}

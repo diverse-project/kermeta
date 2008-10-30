@@ -1,5 +1,5 @@
 
-/*$Id: SaverOrLoader.java,v 1.5 2008-10-30 17:37:35 cfaucher Exp $
+/*$Id: SaverOrLoader.java,v 1.6 2008-10-30 17:53:38 cfaucher Exp $
 * Project : org.kermeta.compiler.generator
 * File : 	SaverOrLoader.java
 * License : EPL
@@ -21,12 +21,10 @@ import java.util.List;
 
 import org.eclipse.core.runtime.IConfigurationElement;
 import org.eclipse.core.runtime.Platform;
-import org.eclipse.emf.codegen.CodeGen;
 import org.eclipse.emf.codegen.util.CodeGenUtil;
 import org.eclipse.emf.common.util.Enumerator;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EDataType;
-import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EEnumLiteral;
 import org.eclipse.emf.ecore.EFactory;
 import org.eclipse.emf.ecore.EObject;
@@ -215,6 +213,15 @@ abstract public class SaverOrLoader {
 	 * @return
 	 */
 	protected EObject createInstance(EObject sourceObject, String metamodelURI) {
+		
+		if( Registry.INSTANCE.getEFactory(metamodelURI) == null ) {
+			String tmp_ns_uri = sourceObject.eClass().getEPackage().getNsURI();
+			if( tmp_ns_uri.contains(uri_suffix) ) {
+				metamodelURI = tmp_ns_uri.replace(uri_suffix, "");
+			} else {
+				metamodelURI = tmp_ns_uri + uri_suffix;
+			}
+		}
 		
 		if( Registry.INSTANCE.getEFactory(metamodelURI) != null ) {
 			
