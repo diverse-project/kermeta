@@ -4,13 +4,7 @@
     xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="fsm"
     nsURI="platform:/resource/fr.irisa.triskell.kermeta.samples/fsm/metamodels/fsm.ecore"
     nsPrefix="fsm">
-  <eAnnotations source="http://www.topcased.org/uuid">
-    <details key="uuid" value="11498652633810"/>
-  </eAnnotations>
   <eClassifiers xsi:type="ecore:EClass" name="FSM">
-    <eAnnotations source="http://www.topcased.org/uuid">
-      <details key="uuid" value="11498652634011"/>
-    </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="ownedState" upperBound="-1"
         eType="#//State" containment="true" eOpposite="#//State/owningFSM">
       <eAnnotations source="http://www.topcased.org/uuid">
@@ -31,9 +25,6 @@
     </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="State">
-    <eAnnotations source="http://www.topcased.org/uuid">
-      <details key="uuid" value="114986526340111"/>
-    </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="owningFSM" lowerBound="1"
         eType="#//FSM" eOpposite="#//FSM/ownedState">
       <eAnnotations source="http://www.topcased.org/uuid">
@@ -59,9 +50,6 @@
     </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Transition">
-    <eAnnotations source="http://www.topcased.org/uuid">
-      <details key="uuid" value="114986526340124"/>
-    </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="source" lowerBound="1"
         eType="#//State" eOpposite="#//State/outgoingTransition">
       <eAnnotations source="http://www.topcased.org/uuid">
@@ -85,9 +73,5 @@
       </eAnnotations>
     </eStructuralFeatures>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EDataType" name="String" instanceClassName="java.lang.String">
-    <eAnnotations source="http://www.topcased.org/uuid">
-      <details key="uuid" value="114915013384025"/>
-    </eAnnotations>
-  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EDataType" name="String" instanceClassName="java.lang.String"/>
 </ecore:EPackage>
