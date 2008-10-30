@@ -1,4 +1,4 @@
- /* $Id: OCLKMTPrinter.kmt,v 1.14 2008-10-29 09:54:12 barais Exp $
+ /* $Id: OCLKMTPrinter.kmt,v 1.15 2008-10-30 15:02:57 barais Exp $
  * File : Visitors.kmt
  * License : EPL
  * Copyright : IRISA / INRIA / Universite de Rennes 1
@@ -49,7 +49,7 @@ class OCLKMTPrinter
 				//self.generateOCL("../../ocl/speedsDepTest.xmi", "../../ocl/speedsL1.ecore", "speedsDepTest.kmt")
 				self.generateOCL("platform:/resource/fr.irisa.triskell.kermeta.ocl.test/tests/sample/expected_xmi/01.xmi",
 				"platform:/resource/fr.irisa.triskell.kermeta.ocl.test/tests/sample/metamodel/sample.ecore",
-				"platform:/resource/fr.irisa.triskell.kermeta.ocl.test/01.kmt")
+				"C:/Users/olivier/workspaces/runtime-New_configuration/fr.irisa.triskell.kermeta.ocl/test.kmt")//"platform:/resource/fr.irisa.triskell.kermeta.ocl.test/01.kmt")
 	    end
 	    
 	    
@@ -61,7 +61,7 @@ class OCLKMTPrinter
 	  operation generateOCL(parsedOclURI : String, metamodelURI : String,Outputfilename : String): Void is
 		do
 			repository := EMFRepository.new
-	     	parsedOcl  := repository.createResource(parsedOclURI,"platform:/resource/fr.irisa.triskell.kermeta.ocl/mmodel/OCLCST.ecore")
+	     	parsedOcl  := repository.createResource(parsedOclURI,"http://www.eclipse.org/ocl/1.1.0/OCLCST")//"platform:/resource/fr.irisa.triskell.kermeta.ocl/mmodel/OCLCST.ecore")
 	     	parsedOcl.load()
 	     	metamodel := repository.createResource(metamodelURI, "http://www.eclipse.org/emf/2002/Ecore")
 	     	metamodel.load()
@@ -85,6 +85,7 @@ class OCLKMTPrinter
 		     	if Outputfilename.indexOf(".kmt") == 0 then
 					Outputfilename.append(".kmt")
 		     	end 
+		     	stdio.writeln(Outputfilename)
 				f.writeTextFile(Outputfilename,io.s)
 				stdio.write("-----------------------------------------------")
 				stdio.write(io.s)

@@ -1,4 +1,4 @@
-/* $Id: EcoreHelper.kmt,v 1.12 2008-10-08 21:56:54 barais Exp $
+/* $Id: EcoreHelper.kmt,v 1.13 2008-10-30 15:02:57 barais Exp $
  * File : EcoreHelper.kmt
  * License : EPL
  * Copyright : IRISA / INRIA / Universite de Rennes 1
@@ -72,7 +72,7 @@ class EcoreHelper
 	 **/
     operation loadEcoreModel(repository : EMFRepository, modelUri : String) : Sequence<EPackage> is 
     	do
-        	model := repository.getResource(modelUri )
+        	model := repository.createResource(modelUri, "http://www.eclipse.org/emf/2002/Ecore" )
         	model.load
         	result := getPackages(model)
         end
@@ -185,7 +185,7 @@ class EcoreHelper
 	
 	/** save an ECore model */
     operation saveEcoreModel(repository : EMFRepository, m : EPackage, uri : String) is do
-	    var resource : Resource init repository.getResource(uri)// , ecoreMetamodel)
+	    var resource : Resource init repository.createResource(uri , "http://www.eclipse.org/emf/2002/Ecore")
 	    resource.instances.add(m)
 	    resource.save
     end

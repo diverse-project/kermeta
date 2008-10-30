@@ -1,6 +1,6 @@
 package ocl;
 
-require "OCLCST.kmt" 
+require "platform:/resource/fr.irisa.triskell.kermeta.ocl/mmodel/OCLCST.ecore" 
    
 package cst
 {
