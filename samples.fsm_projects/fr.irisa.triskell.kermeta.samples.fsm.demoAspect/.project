@@ -5,6 +5,15 @@
 	<projects>
 	</projects>
 	<buildSpec>
+		<buildCommand>
+			<name>fr.irisa.triskell.kermeta.kpm.kpmBuilder</name>
+			<arguments>
+				<dictionary>
+					<key>kpm</key>
+					<value>fr.irisa.triskell.kermeta.kpm.impl.KPMImpl@1ae78a2</value>
+				</dictionary>
+			</arguments>
+		</buildCommand>
 	</buildSpec>
 	<natures>
 		<nature>fr.irisa.triskell.kermeta.KermetaNature</nature>
