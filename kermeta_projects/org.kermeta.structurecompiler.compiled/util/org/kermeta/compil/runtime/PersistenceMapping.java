@@ -27,14 +27,14 @@ final public class PersistenceMapping {
 				kermeta.language.behavior.BehaviorPackage.eNS_URI,
 				kermeta.language.behavior.BehaviorPackage.eINSTANCE);
 		EPackage.Registry.INSTANCE.put(
+				kermeta.standard.StandardPackage.eNS_URI,
+				kermeta.standard.StandardPackage.eINSTANCE);
+		EPackage.Registry.INSTANCE.put(
 				kermeta.compiler.CompilerPackage.eNS_URI,
 				kermeta.compiler.CompilerPackage.eINSTANCE);
 		EPackage.Registry.INSTANCE.put(
 				kermeta.exceptions.ExceptionsPackage.eNS_URI,
 				kermeta.exceptions.ExceptionsPackage.eINSTANCE);
-		EPackage.Registry.INSTANCE.put(
-				kermeta.standard.StandardPackage.eNS_URI,
-				kermeta.standard.StandardPackage.eINSTANCE);
 		EPackage.Registry.INSTANCE.put(
 				kermeta.persistence.PersistencePackage.eNS_URI,
 				kermeta.persistence.PersistencePackage.eINSTANCE);
@@ -52,26 +52,26 @@ final public class PersistenceMapping {
 		EPackage.Registry.INSTANCE.put(km2ecore.Km2ecorePackage.eNS_URI,
 				km2ecore.Km2ecorePackage.eINSTANCE);
 		EPackage.Registry.INSTANCE.put(
-				km2ecore.helper.ecore.EcorePackage.eNS_URI,
-				km2ecore.helper.ecore.EcorePackage.eINSTANCE);
-		EPackage.Registry.INSTANCE.put(
 				km2ecore.helper.kermeta.KermetaPackage.eNS_URI,
 				km2ecore.helper.kermeta.KermetaPackage.eINSTANCE);
 		EPackage.Registry.INSTANCE.put(
 				km2ecore.helper.java.JavaPackage.eNS_URI,
 				km2ecore.helper.java.JavaPackage.eINSTANCE);
+		EPackage.Registry.INSTANCE.put(
+				km2ecore.helper.ecore.EcorePackage.eNS_URI,
+				km2ecore.helper.ecore.EcorePackage.eINSTANCE);
 		EPackage.Registry.INSTANCE.put(km2ecore.common.CommonPackage.eNS_URI,
 				km2ecore.common.CommonPackage.eINSTANCE);
 		EPackage.Registry.INSTANCE.put(
 				km2ecore.common.exception.ExceptionPackage.eNS_URI,
 				km2ecore.common.exception.ExceptionPackage.eINSTANCE);
-		EPackage.Registry.INSTANCE.put(simk.SimkPackage.eNS_URI,
-				simk.SimkPackage.eINSTANCE);
+		EPackage.Registry.INSTANCE.put(ecore.EcorePackage.eNS_URI,
+				ecore.EcorePackage.eINSTANCE);
 		EPackage.Registry.INSTANCE.put(
 				traceability.TraceabilityPackage.eNS_URI,
 				traceability.TraceabilityPackage.eINSTANCE);
-		EPackage.Registry.INSTANCE.put(ecore.EcorePackage.eNS_URI,
-				ecore.EcorePackage.eINSTANCE);
+		EPackage.Registry.INSTANCE.put(simk.SimkPackage.eNS_URI,
+				simk.SimkPackage.eINSTANCE);
 
 	}
 
@@ -97,12 +97,12 @@ final public class PersistenceMapping {
 				.put(
 						"http://www.kermeta.org/kermeta/1_2_0//kermeta/language/behavior",
 						"fr.irisa.triskell.kermeta.language.behavior.BehaviorPackage");
-		uri_ePackageClass.put("http://www.kermeta.org/simk",
-				"org.kermeta.simk.SimkPackage");
-		uri_ePackageClass.put("http://www.kermeta.org/Traceability",
-				"fr.irisa.triskell.traceability.TraceabilityPackage");
 		uri_ePackageClass.put("http://www.eclipse.org/emf/2002/Ecore",
 				"org.eclipse.emf.ecore.EcorePackage");
+		uri_ePackageClass.put("http://www.kermeta.org/Traceability",
+				"fr.irisa.triskell.traceability.TraceabilityPackage");
+		uri_ePackageClass.put("http://www.kermeta.org/simk",
+				"org.kermeta.simk.SimkPackage");
 
 	}
 

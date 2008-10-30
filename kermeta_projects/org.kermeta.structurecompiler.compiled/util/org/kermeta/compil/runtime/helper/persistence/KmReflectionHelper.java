@@ -1,5 +1,5 @@
 
-/*$Id: KmReflectionHelper.java,v 1.3 2008-10-29 08:29:25 cfaucher Exp $
+/*$Id: KmReflectionHelper.java,v 1.4 2008-10-30 17:37:06 cfaucher Exp $
 * Project : org.kermeta.compiler.generator
 * File : 	KmReflectionHelper.java
 * License : EPL

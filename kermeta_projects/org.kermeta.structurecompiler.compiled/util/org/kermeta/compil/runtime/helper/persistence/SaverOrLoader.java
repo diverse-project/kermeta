@@ -1,5 +1,5 @@
 
-/*$Id: SaverOrLoader.java,v 1.8 2008-10-29 08:29:25 cfaucher Exp $
+/*$Id: SaverOrLoader.java,v 1.9 2008-10-30 17:37:06 cfaucher Exp $
 * Project : org.kermeta.compiler.generator
 * File : 	SaverOrLoader.java
 * License : EPL
@@ -21,9 +21,13 @@ import java.util.List;
 
 import org.eclipse.core.runtime.IConfigurationElement;
 import org.eclipse.core.runtime.Platform;
+import org.eclipse.emf.codegen.CodeGen;
+import org.eclipse.emf.codegen.util.CodeGenUtil;
 import org.eclipse.emf.common.util.Enumerator;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EDataType;
+import org.eclipse.emf.ecore.EEnum;
+import org.eclipse.emf.ecore.EEnumLiteral;
 import org.eclipse.emf.ecore.EFactory;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
@@ -71,6 +75,7 @@ abstract public class SaverOrLoader {
 	 */
 	private String metamodelURISpecialCompiler;
 
+	private final String uri_suffix = "/kermeta_temp_uri";
 	
 	/**
 	 * @generated
@@ -78,7 +83,7 @@ abstract public class SaverOrLoader {
 	 */
 	protected SaverOrLoader(String metamodelURI) {
 		this.metamodelURI = metamodelURI;
-		this.metamodelURISpecialCompiler = this.metamodelURI + "/kermeta_temp_uri";
+		this.metamodelURISpecialCompiler = this.metamodelURI + this.uri_suffix;
 		//initialize();
 	}
 	
@@ -101,7 +106,19 @@ abstract public class SaverOrLoader {
 	 * @return
 	 */
 	public EFactory getTargetEFactory(EPackage target_root_epack, EPackage source_epack) {
-		return getTargetEFactory(target_root_epack, EcoreHelper.getQualifiedName(source_epack, "."));
+		
+		EFactory factory = getTargetEFactory(target_root_epack, EcoreHelper.getQualifiedName(source_epack, "."));
+		
+		if(factory==null) {
+			String tmp_ns_uri = source_epack.getNsURI();
+			if( tmp_ns_uri.contains(uri_suffix) ) {
+				factory = Registry.INSTANCE.getEFactory(tmp_ns_uri.replace(uri_suffix, ""));
+			} else {
+				factory = Registry.INSTANCE.getEFactory(tmp_ns_uri + uri_suffix);
+			}
+		}
+		
+		return factory;
 	}
 	
 	/**
@@ -111,6 +128,7 @@ abstract public class SaverOrLoader {
 	 * @return
 	 */
 	public EFactory getTargetEFactory(EPackage target_root_epack, String source_epack_qn) {
+		EcoreHelper.getQualifiedName(target_root_epack);
 		String[] array_qualified_name = source_epack_qn.split("\\.");
 		
 		for(int i=1; i<array_qualified_name.length ; i++ ) {
@@ -121,6 +139,19 @@ abstract public class SaverOrLoader {
 		}
 		
 		return target_root_epack.getEFactoryInstance();
+	}
+	
+	public EPackage getPackPack(EPackage target_root_epack, String source_epack_qn) {
+		String[] array_qualified_name = source_epack_qn.split("\\.");
+		
+		for(int i=1; i<array_qualified_name.length ; i++ ) {
+			target_root_epack = getEPackageBySimpleName(target_root_epack, array_qualified_name[i]);
+		}
+		if( target_root_epack==null ) {
+			return null;
+		}
+		
+		return target_root_epack;
 	}
 	
 	/**
@@ -185,10 +216,15 @@ abstract public class SaverOrLoader {
 	 */
 	protected EObject createInstance(EObject sourceObject, String metamodelURI) {
 		
+		//System.out.println("Registry.INSTANCE.getEFactory(metamodelURI): " + Registry.INSTANCE.getEFactory(metamodelURI).toString());
+		
+		//System.out.println(sourceObject.eClass().getEPackage().getNsURI());
+		
 		if( Registry.INSTANCE.getEFactory(metamodelURI) != null ) {
 			
-			if( Registry.INSTANCE.getEPackage(metamodelURI).getClass() != org.eclipse.emf.ecore.impl.EPackageImpl.class ) {
+			if( Registry.INSTANCE.getEPackage(metamodelURI).getClass() != org.eclipse.emf.ecore.impl.EPackageImpl.class ) { //The EPackage does not come from an Ecore file
 				EPackage root_pack = getRootEPackage(Registry.INSTANCE.getEPackage(metamodelURI));
+				//System.out.println("pack: " + EcoreHelper.getQualifiedName(sourceObject.eClass().getEPackage(), "._"));
 				EFactory factory = getTargetEFactory(root_pack, sourceObject.eClass().getEPackage());
 				
 				try {
@@ -202,6 +238,7 @@ abstract public class SaverOrLoader {
 					_instanceMapping.put(sourceObject, targetObject);
 					return targetObject;
 				} catch (Exception e) {
+					e.printStackTrace();
 				}
 			} else {
 				EPackage root_pack = getRootEPackage(Registry.INSTANCE.getEPackage(metamodelURI));
@@ -244,6 +281,46 @@ abstract public class SaverOrLoader {
 		l.add(p);
 		for ( EPackage current : p.getESubpackages() )
 			getEPackages(l, current);
+	}
+	
+	protected Enumerator createInstance(EEnumLiteral sourceObject, String metamodelURI) {
+		
+		EPackage root_pack = getRootEPackage(Registry.INSTANCE.getEPackage(metamodelURI));
+		
+		String enumQName = EcoreHelper.getQualifiedName((org.eclipse.emf.ecore.ENamedElement) sourceObject.getEEnum().eContainer(), ".");
+		EPackage epapa = getPackPack(root_pack, enumQName);
+		
+		String pppp_name = ((org.eclipse.emf.ecore.ENamedElement) sourceObject.getEEnum().eContainer()).getName();
+		
+		String toto = epapa.getClass().getName();
+		String str_enum = toto.replace(".impl." + CodeGenUtil.capName(pppp_name) + "PackageImpl", "." + sourceObject.getEEnum().getName());
+		
+		
+		Class<?> str_pack_Class = null;
+		
+		try {
+			str_pack_Class = SaverOrLoader.class.getClassLoader().loadClass(str_enum);
+		
+		} catch (ClassNotFoundException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} catch (SecurityException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IllegalArgumentException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		try {
+			String creationMethodName = "getByName";
+			Method method = str_pack_Class.getClass().getMethod(creationMethodName, new Class[] {});
+			Enumerator targetObject = (Enumerator) method.invoke(str_pack_Class, new Object[] {sourceObject.getLiteral()});
+			return targetObject;
+		} catch (Exception e) {
+		}
+		
+		return null;
 	}
 	
 	/**
@@ -290,6 +367,7 @@ abstract public class SaverOrLoader {
 		EFactory factory = getTargetEFactory(root_pack, _epack);
 		
 		try {
+			//System.out.println("sourceObject.getClass().getSimpleName(): " + sourceObject.getClass().getSimpleName() + " - " + factory.getClass().getName());
 			String creationMethodName = "create" + sourceObject.getClass().getSimpleName() + "FromString";
 			Method method = factory.getClass().getMethod(creationMethodName, new Class[] {EDataType.class, String.class});
 			Enumerator targetObject = (Enumerator) method.invoke(factory, new Object[] {null, sourceObject.getLiteral()});
