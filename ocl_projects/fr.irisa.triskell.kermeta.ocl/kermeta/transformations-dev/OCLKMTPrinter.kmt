@@ -1,4 +1,4 @@
- /* $Id: OCLKMTPrinter.kmt,v 1.15 2008-10-30 15:02:57 barais Exp $
+ /* $Id: OCLKMTPrinter.kmt,v 1.16 2008-10-30 15:05:24 barais Exp $
  * File : Visitors.kmt
  * License : EPL
  * Copyright : IRISA / INRIA / Universite de Rennes 1
@@ -52,7 +52,7 @@ class OCLKMTPrinter
 				"C:/Users/olivier/workspaces/runtime-New_configuration/fr.irisa.triskell.kermeta.ocl/test.kmt")//"platform:/resource/fr.irisa.triskell.kermeta.ocl.test/01.kmt")
 	    end
 	    
-	    
+	      
     /** generateOCL
      **  parsedOclURI: String <-- the xmi file containing the OCLCST model of the expression
      **  metamodelURI: String <-- the metamodel against which the ocl was written
