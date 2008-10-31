@@ -1,6 +1,6 @@
 
 
-/*$Id: FileHelper.java,v 1.1 2008-03-05 08:28:44 ftanguy Exp $
+/*$Id: FileHelper.java,v 1.2 2008-10-31 10:42:16 dvojtise Exp $
 * Project : org.kermeta.io
 * File : 	StringHelper.java
 * License : EPL
@@ -13,6 +13,11 @@
 package org.kermeta.core.helper;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.URIConverter;
@@ -51,6 +56,40 @@ public class FileHelper {
 		return f.exists();
 	}
 	
+	
+	/**
+	 * the origin of the code comes from http://www.java-tips.org/java-se-tips/java.io/how-to-copy-a-directory-from-one-location-to-another-loc.html
+	 * @param sourceLocation
+	 * @param targetLocation
+	 * @throws IOException
+	 * Note: not tested, but, this operation is probably also able to copy simple files
+	 */
+	public static void copyDirectory(File sourceLocation , File targetLocation) throws IOException {        
+        if (sourceLocation.isDirectory()) {
+            if (!targetLocation.exists()) {
+                targetLocation.mkdir();
+            }
+            
+            String[] children = sourceLocation.list();
+            for (int i=0; i<children.length; i++) {
+                copyDirectory(new File(sourceLocation, children[i]),
+                        new File(targetLocation, children[i]));
+            }
+        } else {
+            
+            InputStream in = new FileInputStream(sourceLocation);
+            OutputStream out = new FileOutputStream(targetLocation);
+            
+            // Copy the bits from instream to outstream
+            byte[] buf = new byte[1024];
+            int len;
+            while ((len = in.read(buf)) > 0) {
+                out.write(buf, 0, len);
+            }
+            in.close();
+            out.close();
+        }
+    }
 }
 
 
