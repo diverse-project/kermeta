@@ -2,11 +2,12 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Compiler tests Plug-in
 Bundle-SymbolicName: org.kermeta.compiler.tests
-Bundle-Version: 0.1.99.qualifier
-Eclipse-LazyStart: true
+Bundle-Version: 1.2.0.qualifier
+Bundle-ActivationPolicy: lazy
 Bundle-Activator: org.kermeta.compiler.tests.CompilerTestsPlugin
 Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.emf.ecore,
+ fr.irisa.triskell.eclipse.util,
  org.eclipse.emf.ecore.xmi,
  fr.irisa.triskell.kermeta.tests,
  fr.irisa.triskell.kermeta.interpreter,
@@ -17,7 +18,12 @@ Require-Bundle: org.eclipse.core.runtime,
  fr.irisa.triskell.kermeta.ket,
  org.eclipse.emf.ecoretools.registration,
  org.kermeta.simk,
- org.kermeta.compiler.common
+ org.kermeta.compiler.common,
+ org.apache.commons.logging,
+ org.kermeta.structurecompiler.compiled,
+ org.kermeta.compiler,
+ org.apache.log4j
 Export-Package: org.kermeta.compiler.tests,
  org.kermeta.compiler.tests.helper,
  org.kermeta.compiler.tests.structure
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
