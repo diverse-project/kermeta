@@ -1,4 +1,4 @@
-/* $Id: JunitTestSuite.java,v 1.10 2008-05-28 13:38:04 dvojtise Exp $
+/* $Id: JunitTestSuite.java,v 1.11 2008-10-31 13:57:06 dvojtise Exp $
  * Project : Kermeta.interpreter
  * File : JunitTestSuite.java
  * License : EPL
@@ -17,7 +17,8 @@ import junit.framework.TestSuite;
 import org.apache.commons.logging.Log;
 import org.kermeta.io.plugin.IOPlugin;
 
-import fr.irisa.triskell.kermeta.launcher.RunJunitFactory;
+import fr.irisa.triskell.kermeta.launcher.AbstractRunJunitFactory;
+import fr.irisa.triskell.kermeta.launcher.InterpretedRunJunitFactory;
 import fr.irisa.triskell.kermeta.tests.plugin.TestPlugin;
 
 import org.kermeta.log4j.util.LogConfigurationHelper;
@@ -29,7 +30,7 @@ import org.kermeta.log4j.util.LogConfigurationHelper;
 public class JunitTestSuite extends TestSuite {
 
 	final static public Log internalLog = LogConfigurationHelper.getLogger("JunitTestSuite");
-    RunJunitFactory runfactory = new RunJunitFactory();
+    AbstractRunJunitFactory runfactory = new InterpretedRunJunitFactory();
     
     static private IOPlugin ioPlugin;
     
@@ -96,7 +97,7 @@ public class JunitTestSuite extends TestSuite {
 	public void testWithFile(String dir, String file)  {
 	    //addTest(runfactory.addTestsForUnit(dir+"/"+file));
 		String uri = TestPlugin.PLUGIN_TESTS_PATH + dir + "/" + file;
-		addTest(new RunJunitFactory().addTestsForUnit(uri));
+		addTest(new InterpretedRunJunitFactory().addTestsForUnit(uri));
 	}
 	
 	/*public static void main(String[] args) {

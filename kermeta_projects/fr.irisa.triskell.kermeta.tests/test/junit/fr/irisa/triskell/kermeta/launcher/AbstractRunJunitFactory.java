@@ -1,4 +1,4 @@
-/* $Id: RunJunitFactory.java,v 1.11 2008-07-29 15:55:08 dvojtise Exp $
+/* $Id: AbstractRunJunitFactory.java,v 1.1 2008-10-31 13:57:06 dvojtise Exp $
  * Project    : fr.irisa.triskell.kermeta.interpreter
  * File       : RunJunit.java
  * License    : EPL
@@ -48,7 +48,7 @@ import fr.irisa.triskell.kermeta.typechecker.SimpleType;
  * @author dvojtise
  *
  */
-public class RunJunitFactory implements Test {
+public abstract class AbstractRunJunitFactory implements Test {
 
     private TestSuite theTestSuite = null;
     private TestCase theTestCase = null;
@@ -59,11 +59,21 @@ public class RunJunitFactory implements Test {
     
     private KermetaUnit unit = null;
     
-    private boolean isCompiled = false;
+    protected boolean isCompiled = false;
 
     private KermetaUnit executable = null;
     
     public String _defaultpath = null;
+    
+    /** used to store the exception of the setup of the first test of a serie
+     * this allows to make all test fail on the same exception
+     */
+    public Exception firstOfSerieSetUpFailedException = null;
+    
+    /** used to store the error of the setup of the first test of a serie
+     * this allows to make all test fail on the same error
+     */
+    public Error     firstOfSerieSetUpFailedError = null;
     
     /**
      * enabling this option will optimize the loading, so it will load it only once : one for the identification 
@@ -76,14 +86,14 @@ public class RunJunitFactory implements Test {
     /**
      * Default constructor
      */
-    public RunJunitFactory() {
+    public AbstractRunJunitFactory() {
         optimizeLoading = false;
     }
     
     /**
      * constructor allowing to set a default path (useful when using relative pathes
      */
-    public RunJunitFactory(String defaultPath) {
+    public AbstractRunJunitFactory(String defaultPath) {
         optimizeLoading = false;
         _defaultpath = defaultPath;
     }
@@ -91,7 +101,7 @@ public class RunJunitFactory implements Test {
     /**
      * constructor allowing to change some default setting
      */
-    public RunJunitFactory(boolean optimizeLoading) {
+    public AbstractRunJunitFactory(boolean optimizeLoading) {
         this.optimizeLoading = optimizeLoading;
     }
    
@@ -99,7 +109,7 @@ public class RunJunitFactory implements Test {
     	return addTestsForUnit(unit_uri, false);
     }
     
-    public String getURI() {
+    public String getUnitToExecuteURI() {
         try {
         	if ( executable == null )
         		executable = RunnerHelper.getKermetaUnitToExecute(unit_uri, "platform:/resource/interpreter.km");
@@ -112,6 +122,10 @@ public class RunJunitFactory implements Test {
 			e.printStackTrace();
 		}
 		return null;
+    }
+    
+    public String getUnitURI() {        
+		return unit_uri;
     }
     
     /**
@@ -238,11 +252,8 @@ public class RunJunitFactory implements Test {
             }
             else // it is not a test suite
             {
-            	if(isCompiled) {
-            		theTestCase = new RunCompiledTestCase(main_class, main_operation, this, constraintExecution, true);
-            	} else {
-            		theTestCase = new RunInterpretedTestCase(main_class, main_operation, this, constraintExecution, true);
-            	}
+            	theTestCase = createRunTestCase(main_class, main_operation, this, constraintExecution, true, true);
+            	
                 
             	if(!optimizeLoading)
             		resetUnit(); // reset the unit to free some memory
@@ -306,7 +317,7 @@ public class RunJunitFactory implements Test {
         
         
        Iterator<Operation> it = ((ClassDefinition)unit.getTypeDefinitionByName(main_class)).getOwnedOperation().iterator();
-
+       boolean isFirstOfSerie = true;
         // Get each operation which name begins by "test",
         // and run it.
         while (it.hasNext()) {
@@ -314,12 +325,8 @@ public class RunJunitFactory implements Test {
             // the BaseInterpreter
             Operation mainOp = it.next();
             if (mainOp.getName().startsWith("test")) {
-            	if(isCompiled) {
-            		theTestSuite.addTest(new RunCompiledTestCase(main_class, mainOp.getName(), this, constraintExecution, !it.hasNext()));
-            	} else {
-            		theTestSuite.addTest(new RunInterpretedTestCase(main_class, mainOp.getName(), this, constraintExecution, !it.hasNext()));
-            	}
-                
+            	theTestSuite.addTest(createRunTestCase(main_class, mainOp.getName(), this, constraintExecution, isFirstOfSerie, !it.hasNext()));            	
+            	isFirstOfSerie = false; 
             }
         }
     }
@@ -399,4 +406,18 @@ public class RunJunitFactory implements Test {
 		}
 		return unit;
 	}
+	
+	/**
+	 * concrete instance of the Factory should overwrite this operetion in order to create the concrete
+	 * RunTestCase
+	 * @param themainClassValue
+	 * @param themainOperationValue
+	 * @param thecontainerTestSuite
+	 * @param constraintExecution
+	 * @param isLastOfSerie
+	 * @return
+	 */
+	public abstract AbstractRunTestCase createRunTestCase(String themainClassValue, 
+			String themainOperationValue, AbstractRunJunitFactory thecontainerTestSuite, 
+			boolean constraintExecution, boolean isFirstOfSerie, boolean isLastOfSerie);
 }

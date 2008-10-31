@@ -1,4 +1,4 @@
-/* $Id: RunInterpretedTestCase.java,v 1.11 2008-07-29 15:55:08 dvojtise Exp $
+/* $Id: InterpretedRunTestCase.java,v 1.1 2008-10-31 13:57:06 dvojtise Exp $
  * Project : Kermeta.interpreter
  * File : RunTestCase.java
  * License : EPL
@@ -20,37 +20,26 @@ package fr.irisa.triskell.kermeta.launcher;
 import java.util.HashMap;
 import java.util.Map;
 
-import junit.framework.TestCase;
-
 import org.apache.commons.logging.Log;
 import org.kermeta.interpreter.api.Interpreter;
 import org.kermeta.interpreter.api.InterpreterMode;
 import org.kermeta.interpreter.api.InterpreterOptions;
+import org.kermeta.log4j.util.LogConfigurationHelper;
 
 import fr.irisa.triskell.kermeta.interpreter.KermetaRaisedException;
 import fr.irisa.triskell.kermeta.runtime.RuntimeObjectImpl;
-
-import org.kermeta.log4j.util.LogConfigurationHelper;
 
 /**
  * Launcher for Kermeta interpreter. It can be run from the command line or as a
  * test case for JUnit.
  */
-public class RunInterpretedTestCase extends TestCase {
+public class InterpretedRunTestCase extends AbstractRunTestCase {
 
     /** Logger to get the error of this launcher */
     final static public Log internalLog = LogConfigurationHelper.getLogger("KMT.launcher");
-
-    protected String mainClassValue;
-    protected String mainOperationValue;
-
-    protected RunJunitFactory containerTestSuite;
     
     protected Interpreter interpreter = null;
-
-    protected boolean constraintExecution = false;
     
-    protected boolean isLastOfSerie =  false;
     
     /**
      * 
@@ -60,14 +49,11 @@ public class RunInterpretedTestCase extends TestCase {
      * @param constraintExecution true if the interpreter much run with pre/post checking
      * @param isLastOfSerie true if this is the last of the test suite
      */
-    public RunInterpretedTestCase(String themainClassValue, String themainOperationValue, RunJunitFactory thecontainerTestSuite, boolean constraintExecution, boolean isLastOfSerie)
+    public InterpretedRunTestCase(String themainClassValue, 
+    		String themainOperationValue, AbstractRunJunitFactory thecontainerTestSuite, 
+    		boolean constraintExecution,  boolean isFirstOfSerie, boolean isLastOfSerie)
     {
-        super(themainClassValue + "." + themainOperationValue);
-        mainClassValue = themainClassValue;
-        mainOperationValue = themainOperationValue;
-        containerTestSuite = thecontainerTestSuite;
-        this.constraintExecution = constraintExecution;
-        this.isLastOfSerie = isLastOfSerie;
+        super( themainClassValue, themainOperationValue, thecontainerTestSuite, constraintExecution, isFirstOfSerie, isLastOfSerie);
     }
 
     protected void setUp() throws java.lang.Exception {
@@ -81,9 +67,9 @@ public class RunInterpretedTestCase extends TestCase {
             Map<String, Object> options = new HashMap<String, Object>();
             options.put( InterpreterOptions.MERGE, false);
             if ( constraintExecution )
-            	interpreter = new Interpreter( containerTestSuite.getURI(), InterpreterMode.TEST_CONSTRAINT_RUN, options );
+            	interpreter = new Interpreter( containerTestSuite.getUnitToExecuteURI(), InterpreterMode.TEST_CONSTRAINT_RUN, options );
             else
-            	interpreter = new Interpreter( containerTestSuite.getURI(), InterpreterMode.TEST_RUN, options );	
+            	interpreter = new Interpreter( containerTestSuite.getUnitToExecuteURI(), InterpreterMode.TEST_RUN, options );	
             interpreter.setErrorStream( System.out );
            	interpreter.setOutputStream( System.out );
            	interpreter.setInputStream( System.in );

@@ -1,4 +1,4 @@
-/* $Id: TestPlugin.java,v 1.3 2007-10-23 11:41:06 dvojtise Exp $
+/* $Id: TestPlugin.java,v 1.4 2008-10-31 13:57:06 dvojtise Exp $
  * Project    : fr.irisa.triskell.kermeta.tests
  * File       : TestPlugin.java
  * License    : EPL
@@ -34,6 +34,8 @@ public class TestPlugin extends AbstractUIPlugin {
 	private static TestPlugin plugin = null;
 	
 	public static final String PLUGIN_TESTS_PATH = "platform:/plugin/fr.irisa.triskell.kermeta.tests/";
+	
+	public static final String PLUGIN_ID = "fr.irisa.triskell.kermeta.tests";
 	
 	private static boolean INITIALIZED = false;
 	

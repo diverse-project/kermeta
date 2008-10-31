@@ -1,4 +1,4 @@
-/* $Id: JunitTestSuite.java,v 1.25 2008-07-18 07:06:36 dvojtise Exp $
+/* $Id: JunitTestSuite.java,v 1.26 2008-10-31 13:57:07 dvojtise Exp $
  * Project : Kermeta.interpreter
  * File : JunitTestSuite.java
  * License : EPL
@@ -15,12 +15,14 @@ package kermeta_interpreter.test;
 import junit.framework.TestSuite;
 
 import org.apache.commons.logging.Log;
+import org.eclipse.emf.ecore.resource.impl.ExtensibleURIConverterImpl;
+import org.kermeta.io.loader.plugin.LoaderPlugin;
 import org.kermeta.io.plugin.IOPlugin;
-
-import fr.irisa.triskell.kermeta.launcher.RunJunitFactory;
-import fr.irisa.triskell.kermeta.tests.plugin.TestPlugin;
-
 import org.kermeta.log4j.util.LogConfigurationHelper;
+
+import fr.irisa.triskell.kermeta.launcher.InterpretedRunJunitFactory;
+import fr.irisa.triskell.kermeta.modelhelper.URIMapUtil;
+import fr.irisa.triskell.kermeta.tests.plugin.TestPlugin;
 
 
 
@@ -55,10 +57,38 @@ public class JunitTestSuite extends TestSuite {
 
     private void initialize() {
 
+    	// find the log4j configuration file
+    	String modelPluginPath = fr.irisa.triskell.kermeta.model.plugin.ModelPlugin.class.getProtectionDomain()
+														.getCodeSource().getLocation().toExternalForm();
+    	modelPluginPath = modelPluginPath.replace("build/class/", "");
+    	modelPluginPath = modelPluginPath.replace("file:/", ""); // remove leading protocol that isn't supported by LogConfigurationHelper
     	System.setProperty(org.kermeta.log4j.util.LogConfigurationHelper.DefaultKermetaConfigurationFilePropertyName,
-    	"../fr.irisa.triskell.kermeta.model/kermeta_log4j_configuration.xml");
-    	// reload conf in case iwas loaded befaore with another configuration
+    			modelPluginPath + "kermeta_log4j_configuration.xml");
+    	// reload conf in case it was loaded before with another configuration
     	org.kermeta.log4j.util.LogConfigurationHelper.configureLog4JLogger(org.kermeta.log4j.util.LogConfigurationHelper.DefaultKermetaConfigurationFilePropertyName);
+    	
+    	
+    	// initialize URIMAP
+    	// platform:/plugin is were plugin IO lives
+    	String ioPluginPath = IOPlugin.class.getProtectionDomain()
+											.getCodeSource().getLocation().toExternalForm();
+    	ioPluginPath = ioPluginPath.replace("build/class/", "../");
+    	URIMapUtil.addMapEntry(ExtensibleURIConverterImpl.URI_MAP, "platform:/plugin/", ioPluginPath);
+    	internalLog.info("   " + "platform:/plugin/ => " + ioPluginPath);
+
+    	// platform:/resource is were current class lives
+    	String selfPath = this.getClass().getProtectionDomain()
+											.getCodeSource().getLocation().toExternalForm();
+    	selfPath = selfPath.replace("build/class/", "../");
+    	URIMapUtil.addMapEntry(ExtensibleURIConverterImpl.URI_MAP, "platform:/resource/", selfPath);
+    	internalLog.info("   " + "platform:/resource/ => " + selfPath);
+
+    	// kconf:/loader/ is were plugin Loader lives
+    	String loaderPluginPath = LoaderPlugin.class.getProtectionDomain()
+											.getCodeSource().getLocation().toExternalForm();
+    	loaderPluginPath = loaderPluginPath.replace("bin/", "");
+    	URIMapUtil.addMapEntry(ExtensibleURIConverterImpl.URI_MAP, "kconf:/loader/", loaderPluginPath+"instances/");
+    	internalLog.info("   " + "kconf:/loader/ => " + loaderPluginPath+"instances/");
     	
     	if ( ioPlugin == null ) {
 		
@@ -239,7 +269,7 @@ public class JunitTestSuite extends TestSuite {
 	public void testWithFile(String dir, String file)  {
 	    //addTest(runfactory.addTestsForUnit(dir+"/"+file));
 		String uri = TestPlugin.PLUGIN_TESTS_PATH + dir + "/" + file;
-		addTest( new RunJunitFactory().addTestsForUnit(uri) );
+		addTest( new InterpretedRunJunitFactory().addTestsForUnit(uri) );
 	}
 
 	/**
