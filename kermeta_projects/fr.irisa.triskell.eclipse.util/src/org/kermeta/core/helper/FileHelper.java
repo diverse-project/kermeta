@@ -1,6 +1,6 @@
 
 
-/*$Id: FileHelper.java,v 1.2 2008-10-31 10:42:16 dvojtise Exp $
+/*$Id: FileHelper.java,v 1.3 2008-10-31 10:43:55 dvojtise Exp $
 * Project : org.kermeta.io
 * File : 	StringHelper.java
 * License : EPL
@@ -21,7 +21,7 @@ import java.io.OutputStream;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.URIConverter;
-import org.eclipse.emf.ecore.resource.impl.URIConverterImpl;
+import org.eclipse.emf.ecore.resource.impl.ExtensibleURIConverterImpl;
 
 public class FileHelper {
 
@@ -50,7 +50,7 @@ public class FileHelper {
 	static public boolean exists(String filePath) {
 		URI uri = URI.createURI(filePath);
 		// Resolving the filePath
-		URIConverter converter = new URIConverterImpl();
+		URIConverter converter = new ExtensibleURIConverterImpl();
 		uri = converter.normalize(uri);
 		File f = new File(uri.toString().replace("file:", ""));
 		return f.exists();
