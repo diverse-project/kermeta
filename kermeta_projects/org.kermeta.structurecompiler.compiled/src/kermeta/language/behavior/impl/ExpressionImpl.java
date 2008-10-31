@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ExpressionImpl.java,v 1.7 2008-10-29 08:29:14 cfaucher Exp $
+ * $Id: ExpressionImpl.java,v 1.8 2008-10-31 16:22:58 cfaucher Exp $
  */
 package kermeta.language.behavior.impl;
 
@@ -498,8 +498,7 @@ public class ExpressionImpl extends TypeContainerImpl implements Expression {
 
 		kermeta.language.behavior.Expression stm = this;
 
-		java.lang.String str_statement = kermeta.standard.helper.StringWrapper
-				.normalizeStatement(stm.createBehaviorJava(context));
+		java.lang.String str_statement = stm.createBehaviorJava(context);
 
 		kermeta.standard.OrderedSet<java.lang.String> str_statement_splitted = kermeta.standard.helper.StringWrapper
 				.split(str_statement, context.getSEPARATOR_STATEMENT_FT());
@@ -798,7 +797,8 @@ public class ExpressionImpl extends TypeContainerImpl implements Expression {
 
 		}
 
-		javaCode.append(str_statement);
+		javaCode.append(kermeta.standard.helper.StringWrapper
+				.normalizeStatement(str_statement));
 
 		result = javaCode;
 
