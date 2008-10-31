@@ -1,4 +1,4 @@
-/* $Id: CompileKermetaAction.java,v 1.8 2008-10-29 08:33:07 dvojtise Exp $
+/* $Id: CompileKermetaAction.java,v 1.9 2008-10-31 11:03:40 dvojtise Exp $
  * Project   : fr.irisa.triskell.kermeta.compiler
  * File      : CompileKermetaAction.java
  * License   : EPL
@@ -68,8 +68,9 @@ public class CompileKermetaAction implements IObjectActionDelegate {
 			protected IStatus run(IProgressMonitor monitor) {
 
 				/*************/
-		
+				monitor.beginTask("Merging km", 3);
 				try {
+					
 					
 					//The following 2 lines are required to set rightly the Simk plugin
 					Platform.getBundle("org.kermeta.simk").start();
@@ -80,9 +81,10 @@ public class CompileKermetaAction implements IObjectActionDelegate {
 					
 					String uri = "platform:/resource" + file.getFullPath().toString();
 					KermetaUnit kermetaUnit = LoaderPlugin.getDefault().load(uri, null);
-					
 					// Generate the km merged and the traceability model
 					kermetaCompiler.writeUnit(kermetaUnit, file);
+					monitor.worked(1);
+					monitor.setTaskName("Generating ecore from km");
 					
 					// Generate the Ecore containing the kmt source code compiled into Java
 					IFile km_merged_file = ResourceHelper.getIFile(file.getFullPath()
@@ -92,6 +94,12 @@ public class CompileKermetaAction implements IObjectActionDelegate {
 					String[] _args = new String[1];
 					_args[0] = km_merged_file.getFullPath().toString();
 					Main__main_km2ecore_behaviorJava__Runner.main_forDeployedVersion(_args);
+					
+
+					monitor.worked(1);
+					monitor.setTaskName("Generating java plugin from ecore");
+					monitor.subTask("Generating java plugin from ecore");
+					
 					
 					// Run the generation of Java Classes and the required helpers (Simk)
 					IFile ecore_file = ResourceHelper.getIFile(file.getFullPath()
@@ -109,7 +117,7 @@ public class CompileKermetaAction implements IObjectActionDelegate {
 					Activator.logErrorMessage(message, e);
 				}
 			
-		
+				monitor.done();
 				/*************/
 				
 				return Status.OK_STATUS;
