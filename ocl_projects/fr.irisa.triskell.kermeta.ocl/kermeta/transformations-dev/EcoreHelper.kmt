@@ -1,4 +1,4 @@
-/* $Id: EcoreHelper.kmt,v 1.13 2008-10-30 15:02:57 barais Exp $
+/* $Id: EcoreHelper.kmt,v 1.14 2008-10-31 22:00:05 barais Exp $
  * File : EcoreHelper.kmt
  * License : EPL
  * Copyright : IRISA / INRIA / Universite de Rennes 1
@@ -64,7 +64,8 @@ class EcoreHelper
 	 **/
 	operation getPackages(model: Resource): Sequence<EPackage> is
 		do
-			result := model.instances.select { e | EPackage.isInstance(e) }.collect{p |  var pack : EPackage pack ?= p}
+			result := Sequence<EPackage>.new
+			model.instances.each { e | if EPackage.isInstance(e) then var v : EPackage v?= e result.add(v) end}
 		end
 		
 	/** 
