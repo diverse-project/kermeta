@@ -1,4 +1,4 @@
-/* $Id: LoadingTestSuite.java,v 1.9 2008-04-28 13:37:41 ftanguy Exp $
+/* $Id: LoadingTestSuite.java,v 1.10 2008-10-31 16:05:34 dvojtise Exp $
  * Project : Kermeta MDK UML2
  * File : LoadingTestSuite.java
  * License : EPL
@@ -14,7 +14,7 @@ import org.eclipse.core.runtime.NullProgressMonitor;
 import junit.framework.Test;
 import junit.framework.TestSuite;
 
-import fr.irisa.triskell.kermeta.launcher.RunJunitFactory;
+import fr.irisa.triskell.kermeta.launcher.InterpretedRunJunitFactory;
 
 /**
  * UML2 Loading test suite.
@@ -113,7 +113,7 @@ public class LoadingTestSuite extends TestSuite {
 		String uri = null;
 		uri = "platform:/plugin/org.kermeta.uml2.tests/" + dir + "/" + file;
 		
-		Test tests = new RunJunitFactory().addTestsForUnit(uri);
+		Test tests = new InterpretedRunJunitFactory().addTestsForUnit(uri);
 		addTest( tests );
 	}
 	

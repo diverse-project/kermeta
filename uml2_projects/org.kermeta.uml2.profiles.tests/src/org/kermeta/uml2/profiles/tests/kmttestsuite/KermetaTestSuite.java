@@ -1,4 +1,4 @@
-/* $Id: KermetaTestSuite.java,v 1.4 2008-04-28 13:37:45 ftanguy Exp $
+/* $Id: KermetaTestSuite.java,v 1.5 2008-10-31 16:06:09 dvojtise Exp $
  * Project : Kermeta.interpreter
  * File : KermetaTestSuite.java
  * License : EPL
@@ -19,7 +19,7 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.kermeta.uml2.profiles.tests.Activator;
 
-import fr.irisa.triskell.kermeta.launcher.RunJunitFactory;
+import fr.irisa.triskell.kermeta.launcher.InterpretedRunJunitFactory;
 
 /**
  * Test suite that calls some kermeta code
@@ -65,7 +65,7 @@ public class KermetaTestSuite extends TestSuite {
 	public void testWithFile(String dir, String file)  {
 		String uri = null;
 		uri = "platform:/plugin/" + Activator.PLUGIN_ID + "/" + dir + "/" + file;
-		Test tests = new RunJunitFactory().addTestsForUnit(uri);
+		Test tests = new InterpretedRunJunitFactory().addTestsForUnit(uri);
 		addTest( tests );
 	}
 	
