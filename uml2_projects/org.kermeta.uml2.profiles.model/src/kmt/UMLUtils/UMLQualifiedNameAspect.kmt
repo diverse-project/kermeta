@@ -1,4 +1,4 @@
-/* $Id: UMLQualifiedNameAspect.kmt,v 1.5 2008-10-24 12:15:09 gperroui Exp $
+/* $Id: UMLQualifiedNameAspect.kmt,v 1.6 2008-11-02 17:26:53 gperroui Exp $
  * Creation date: December 13, 2007
  * License: EPL
  * Copyright:
@@ -10,7 +10,8 @@ package uml;
 
  
 require kermeta
-// UMLMARTE.ecore contains everything needed...
+
+
 require "platform:/plugin/org.kermeta.uml2.profiles.model/model/ecore/Ecore.profile.ecore"
 require "platform:/plugin/org.kermeta.uml2.profiles.model/model/ecore/Standard.profile.ecore"
 

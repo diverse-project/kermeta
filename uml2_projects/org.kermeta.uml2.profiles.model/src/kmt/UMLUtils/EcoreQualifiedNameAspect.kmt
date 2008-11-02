@@ -1,0 +1,32 @@
+/* $Id: EcoreQualifiedNameAspect.kmt,v 1.1 2008-11-02 17:26:53 gperroui Exp $ 
+ * Creation : September 22, 2008
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            gperroui
+ */
+
+package ecore;
+
+require kermeta
+
+require "platform:/plugin/org.kermeta.uml2.profiles.model/model/ecore/Ecore.profile.ecore"
+require "platform:/plugin/org.kermeta.uml2.profiles.model/model/ecore/Standard.profile.ecore"
+
+using kermeta::standard
+using ecore
+
+aspect class ENamedElement 
+{
+operation getQualifiedName(): String[1..1] is do
+
+var elem : ENamedElement init self
+		result := self.name
+		from elem ?= elem.container
+		until elem == void 
+		loop
+			result := elem.name + "::" + result
+			elem ?= elem.container
+		end
+	end	
+}
