@@ -1,4 +1,4 @@
-/* $Id: IOMixin.kmt,v 1.4 2007-12-07 01:54:43 ffleurey Exp $
+/* $Id: IOMixin.kmt,v 1.5 2008-11-02 18:21:07 barais Exp $
  * Creation date: July 25, 2007
  * License:
  * Copyright:
@@ -20,7 +20,7 @@ class StringWriter inherits StdIO
 
 	method write(object: String) is
 		do 
-			if s == void then
+			if s.isVoid then
 				s := object
 			else
 				s := s + object
@@ -48,7 +48,7 @@ class FileWriter inherits StdIO
 	reference filename :String
 	method write(object: String) is
 		do
-			if f == void then
+			if f.isVoid then
 				f := kermeta::io::FileIO.new
 			end
 			if filename != void then
@@ -83,7 +83,7 @@ class IOMixin{
 		
 		operation getIo(): StdIO is
 			do
-				if __io == void then
+				if __io.isVoid then
 					// writes to a string by default
 					__io :=StringWriter.new
 				end
@@ -93,7 +93,7 @@ class IOMixin{
 		
 		operation getIerr(): StdIO is
 			do
-				if __io == void then
+				if __io.isVoid then
 					__io :=stdio
 				end
 				result := __io

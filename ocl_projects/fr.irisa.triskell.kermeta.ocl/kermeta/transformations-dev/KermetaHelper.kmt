@@ -1,4 +1,4 @@
-/* $Id: KermetaHelper.kmt,v 1.6 2008-10-08 21:56:54 barais Exp $
+/* $Id: KermetaHelper.kmt,v 1.7 2008-11-02 18:21:08 barais Exp $
  * Creation date: July 25, 2007
  * License:
  * Copyright:
@@ -17,7 +17,7 @@ class KermetaHelper
   	reference keywords : Collection<String>
 	 operation isKermetaKeyword(word: String): Boolean is
           do
-				if (keywords == void) then
+				if (keywords.isVoid) then
 						keywords := Bag<String>.new
 						keywords.add("package")
 							keywords.add("require")

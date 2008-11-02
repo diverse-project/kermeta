@@ -1,4 +1,4 @@
-/* $Id: IteratorPolicies.kmt,v 1.7 2008-01-24 14:10:13 dvojtise Exp $
+/* $Id: IteratorPolicies.kmt,v 1.8 2008-11-02 18:21:06 barais Exp $
  * Creation date: July 25, 2007
  * License: EPL
  * Copyright: IRISA/INRIA
@@ -32,7 +32,7 @@ class Iterators {
         property readonly iterators : Hashtable<String, IteratorPolicy>
         	getter is
         		do
-        			if __iterators == void then
+        			if __iterators.isVoid then
         				__iterators := Hashtable<String, IteratorPolicy>.new
         				var doNothing : IteratorPolicy init IteratorPolicy.new
         				var sameName: IteratorPolicy init SimpleIteratorIP.new
@@ -90,7 +90,7 @@ class SimpleIteratorIP inherits IteratorPolicy {
 	property readonly kermeta : KermetaHelper 
 		getter is
 			do
-				if __kermeta == void then
+				if __kermeta.isVoid then
 					__kermeta := KermetaHelper.new
 				end
 				result := __kermeta
@@ -123,7 +123,7 @@ class SimpleIteratorIP inherits IteratorPolicy {
 		 	visitor.pushNewStackFrame()
 			oclIterator.source.accept(visitor)
 			visitor.write(".")
-			if name == void then
+			if name.isVoid then
 				visitor.write(oclIterator.simpleNameCS.~value.toString )
 			else
 				visitor.write(name )
@@ -173,7 +173,7 @@ class FunctionIP inherits IteratorPolicy {
     
 	method generate(oclIterator: ocl::cst::IteratorExpCS, visitor: Ocl2kmtVisitor): Void is
 		 do
-		 	if name == void then
+		 	if name.isVoid then
 				visitor.write(oclIterator.simpleNameCS.~value.toString )
 			else
 				visitor.writeln(name)

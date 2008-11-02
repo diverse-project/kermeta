@@ -1,4 +1,4 @@
-/* $Id: OperatorPolicies.kmt,v 1.13 2008-10-28 15:19:47 barais Exp $
+/* $Id: OperatorPolicies.kmt,v 1.14 2008-11-02 18:21:08 barais Exp $
  * 
  * License: EPL
  * Copyright: IRISA/INRIA
@@ -36,7 +36,7 @@ using qualifiedNames
         property readonly operators: Hashtable<String, OperatorPolicy>
 			getter is 
 				do
-          			if __operators == void then
+          			if __operators.isVoid then
           				__operators := Hashtable<String, OperatorPolicy>.new
           			    var functionCall : OperatorPolicy init FunctionCallOp.new
           				__operators.put("implies", ImpliesOP.new)
@@ -67,7 +67,7 @@ using qualifiedNames
         property readonly collectionOperations: Hashtable<String, OperatorPolicy>
 			getter is 
 				do
-          			if __collectionOperations == void then
+          			if __collectionOperations.isVoid then
           			    __collectionOperations := Hashtable<String, OperatorPolicy>.new
           			    var unimplemented: OperatorPolicy init NotSupported.new
           			    var bool: String init "Boolean"
@@ -109,7 +109,7 @@ using qualifiedNames
 		operation getCollectionOperationPolicy(operationName: String): OperatorPolicy is
 			do
 				result := collectionOperations.getValue(operationName)
-				if  result == void then
+				if  result.isVoid then
 					raise TypeError.new.setMessageReflexive("Unknown collection operation: " + operationName )
 				end
 			end
@@ -128,7 +128,7 @@ using qualifiedNames
 			do
 			// require isOperator(operationName)
 				result := operators.getValue(operationName)
-				if  result == void then
+				if  result.isVoid then
 					raise TypeError.new.setMessageReflexive("Unknown operator: " + operationName )
 				end
 			end
@@ -253,7 +253,7 @@ class NotNullOp inherits OperatorPolicy {
 	method generate(oclOp: OperationCallExpCS, visitor: Ocl2kmtVisitor): Void is
 		do
 			oclOp.source.accept(visitor)
-			visitor.write (" == void")
+			visitor.write (".isVoid")
 		end
 		
 }

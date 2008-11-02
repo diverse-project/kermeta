@@ -1,5 +1,5 @@
-/* $Id: ocl2kmtVisitor.kmt,v 1.18 2008-10-28 15:19:46 barais Exp $
-/* $Id: ocl2kmtVisitor.kmt,v 1.18 2008-10-28 15:19:46 barais Exp $
+/* $Id: ocl2kmtVisitor.kmt,v 1.19 2008-11-02 18:21:06 barais Exp $
+/* $Id: ocl2kmtVisitor.kmt,v 1.19 2008-11-02 18:21:06 barais Exp $
  * Creation date: February 5, 2007
  * License: EPL
  * Copyright: IRISA/INRIA
@@ -47,7 +47,7 @@ using qualifiedNames
 		property readonly kermeta : KermetaHelper 
 			getter is
 				do
-					if __kermeta == void then
+					if __kermeta.isVoid then
 						__kermeta := KermetaHelper.new
 					end
 					result := __kermeta
@@ -58,7 +58,7 @@ using qualifiedNames
 		property readonly iteratorList: Iterators 
 			getter is
 				do
-					if __iterators == void then
+					if __iterators.isVoid then
 						__iterators := Iterators.new
 					end
 					result := __iterators
@@ -69,7 +69,7 @@ using qualifiedNames
 		property readonly operatorList: Operators 
 			getter is
 				do
-					if __operators == void then
+					if __operators.isVoid then
 						__operators := Operators.new
 					end
 					result := __operators
@@ -79,7 +79,7 @@ using qualifiedNames
   		
 		operation nextName(root: String) : String is
 			do
-				if __name == void then
+				if __name.isVoid then
 					__name := 0
 				end
 				__name := __name + 1
@@ -191,7 +191,7 @@ using qualifiedNames
 					end
 				}
 				writeln("is")
-				if body == void then
+				if body.isVoid then
     				writeln("abstract") 
     			else
     				writeln("do")
@@ -257,7 +257,7 @@ using qualifiedNames
 		method visitInvCS(visitable : InvCS) : Void is
 			do
 				var id: String 
-				if visitable.simpleNameCS == void then
+				if visitable.simpleNameCS.isVoid then
 				 	id := nextName("invariant")
 					stdio.writeln("Invariant has no identifier, will be called["+ id+"]")
 				else

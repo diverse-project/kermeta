@@ -1,4 +1,4 @@
-/* $Id: EcoreHelper.kmt,v 1.14 2008-10-31 22:00:05 barais Exp $
+/* $Id: EcoreHelper.kmt,v 1.15 2008-11-02 18:21:05 barais Exp $
  * File : EcoreHelper.kmt
  * License : EPL
  * Copyright : IRISA / INRIA / Universite de Rennes 1
@@ -39,8 +39,8 @@ class EcoreHelper
 	property packages: Sequence<EPackage> 
 		getter is
 			do
-				if __packages == void then
-					if model == void then
+				if __packages.isVoid then
+					if model.isVoid then
 						var e: Exception init Exception.new
 						e.message := "can't access packages until model is set"
 						raise e
@@ -122,7 +122,7 @@ class EcoreHelper
     	raises InvalidPathName,MetaModelNotLoaded is 
 		do
 		 	result := context.eAllStructuralFeatures.detect{e|e.name == name}
-		 	if result == void then
+		 	if result.isVoid then
 				result := context.eAllOperations.detect{e|e.name == name}
 			end
 		end
@@ -134,7 +134,7 @@ class EcoreHelper
 		do 
 			// try relative first:
 		    result := getClassifierByFQN( contextPackageName.concat(typeName))
-		    if result == void then // try absolute
+		    if result.isVoid then // try absolute
     		    result := getClassifierByFQN( typeName)
 		    end 
 		end
@@ -155,7 +155,7 @@ class EcoreHelper
     			stdio.writeln(e.name)
     			e.name == s}
     		end
-    		if (pack== void) then
+    		if (pack.isVoid) then
     		 	stdio.writeln("   can't find EClassifiers: " + name.toString)
     		 	result := void
     		else

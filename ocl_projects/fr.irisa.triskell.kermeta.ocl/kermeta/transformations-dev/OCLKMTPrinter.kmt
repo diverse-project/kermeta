@@ -1,4 +1,4 @@
- /* $Id: OCLKMTPrinter.kmt,v 1.16 2008-10-30 15:05:24 barais Exp $
+ /* $Id: OCLKMTPrinter.kmt,v 1.17 2008-11-02 18:21:04 barais Exp $
  * File : Visitors.kmt
  * License : EPL
  * Copyright : IRISA / INRIA / Universite de Rennes 1
@@ -47,7 +47,7 @@ class OCLKMTPrinter
     operation main(): Void is
 		do
 				//self.generateOCL("../../ocl/speedsDepTest.xmi", "../../ocl/speedsL1.ecore", "speedsDepTest.kmt")
-				self.generateOCL("platform:/resource/fr.irisa.triskell.kermeta.ocl.test/tests/sample/expected_xmi/01.xmi",
+				self.generateOCL("platform:/resource/fr.irisa.triskell.kermeta.ocl.test/tests/sample/expected_xmi/23.xmi",
 				"platform:/resource/fr.irisa.triskell.kermeta.ocl.test/tests/sample/metamodel/sample.ecore",
 				"C:/Users/olivier/workspaces/runtime-New_configuration/fr.irisa.triskell.kermeta.ocl/test.kmt")//"platform:/resource/fr.irisa.triskell.kermeta.ocl.test/01.kmt")
 	    end

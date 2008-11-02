@@ -1,4 +1,4 @@
-/* $Id: OCLHelper.kmt,v 1.15 2008-10-30 15:02:57 barais Exp $
+/* $Id: OCLHelper.kmt,v 1.16 2008-11-02 18:21:09 barais Exp $
  * File : EcoreHelper.kmt
  * License : EPL
  * Copyright : IRISA / INRIA / Universite de Rennes 1
@@ -35,7 +35,7 @@ class OCLHelper
 	/* Get ecore OCL metamodel URI with default value */
 	operation ecoreOCLMetamodelURI():String is
 		do
-			if __ecoreOCLMetamodel == void then
+			if __ecoreOCLMetamodel.isVoid  then
 				__ecoreOCLMetamodel := "http://www.eclipse.org/ocl/1.1.0/OCLCST"//platform:/resource/fr.irisa.triskell.kermeta.ocl/mmodel/OCLCST.ecore"
 			end
 			result := __ecoreOCLMetamodel

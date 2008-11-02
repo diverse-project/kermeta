@@ -1,4 +1,4 @@
-/* $Id: TypeSystemMixin.kmt,v 1.7 2008-10-28 15:19:47 barais Exp $
+/* $Id: TypeSystemMixin.kmt,v 1.8 2008-11-02 18:21:05 barais Exp $
  * Creation date: July 25, 2007
  * License: EPL
  * Copyright: IRISA/INRIA
@@ -36,7 +36,7 @@ class StackFrame {
 	
 	operation visibleVariable(): Hashtable<String,ecore::ETypedElement> is
 		do
-			if __visibleVariable == void then
+			if __visibleVariable.isVoid then
 				__visibleVariable := Hashtable<String,ecore::ETypedElement>.new
 			end
 			result := __visibleVariable
@@ -51,7 +51,7 @@ class StackFrame {
 	operation lookup(varName: String) : ecore::ETypedElement is
 		do
 			result := visibleVariable.getValue(varName)
-			if result == void and next != void then
+			if result.isVoid and next != void then
 				result := next.lookup(varName)
 			end
 		end
@@ -78,7 +78,7 @@ class VarStack {
 		
 	operation pop(): Void is
 		do
-			if top == void then
+			if top.isVoid then
 				stdio.writeln("Warning: pop on empty stack")
 			else
     			top := top.next
@@ -118,7 +118,7 @@ class TypeSystemMixin {
 	
 	operation context(): VarStack is
 		do
-			if __context == void then
+			if __context.isVoid then
 				__context := VarStack.new
 			end
 			result := __context
@@ -140,7 +140,7 @@ class TypeSystemMixin {
 		
 	operation ecoreHelper(): EcoreHelpers::EcoreHelper is
 		do
-			if __ecoreHelper == void then
+			if __ecoreHelper.isVoid then
 				var e : Exception init Exception.new
 				e.message := "Metamodel URI must be set before visiting"
 				raise e
@@ -152,7 +152,7 @@ class TypeSystemMixin {
     /** Mapping from primitve type names to their corresponding ETypedElement representations **/
 	operation primitiveTypes(): Hashtable<String, ecore::EDataType> is
 		do
-			if __primitiveTypes == void then
+			if __primitiveTypes.isVoid then
 				__primitiveTypes := Hashtable<String, ecore::EDataType>.new 
     			result := __primitiveTypes
     			result.put("Integer", newType("Integer"))
@@ -176,7 +176,7 @@ class TypeSystemMixin {
 	/** Lookup table mapping operations on primitive types to a corresponding ETypedElement representation **/
 	operation primitiveOperations(): Hashtable<String, ecore::ETypedElement> is
 		do
-			if __primitiveOperations == void then
+			if __primitiveOperations.isVoid then
 				__primitiveOperations :=  Hashtable<String, ecore::ETypedElement> .new
 				__primitiveOperations.put("String.size", createAttribute("String.size", lookupPrimitiveType("String"), 1,1,false))
 				__primitiveOperations.put("String.concat", createAttribute("String.size", lookupPrimitiveType("Integer"), 1,1,false))
@@ -199,7 +199,7 @@ class TypeSystemMixin {
 		
 	operation getLocalFeature() : ecore::ETypedElement is
 		do
-			if localFeature == void then
+			if localFeature.isVoid then
 				stdio.writeln("Attempt to get lcoal feature before it has been set, reurning 'self' as default value")
 				setLocalFeature(getLocalVariable("self"))
 			end
@@ -290,7 +290,7 @@ class TypeSystemMixin {
 			stdio.writeln("Looking up context classifier [" + contextClassifierFQN.toString + "]")
 			result ?= ecoreHelper.getClassifierByFQN(contextClassifierFQN)
 		//post:
-			if result == void then
+			if result.isVoid then
 				var e : Exception init Exception.new
 				e.message := "Can't find class " + contextClassifierFQN.toString + " in the ecore metamodel"
 				raise e
@@ -380,7 +380,7 @@ class TypeSystemMixin {
     		else
     			stdio.writeln("===> Warning: Trying to look for variable ["+featureName+"] in uninitialised stack frame")
 			end
-			if result == void then
+			if result.isVoid then
     			stdio.writeln("["+featureName+"] not found in local variables")
 			else
     			stdio.writeln("["+featureName+"] is local variable of type ["+result.eType.name.toString+"]")
@@ -398,7 +398,7 @@ class TypeSystemMixin {
 class TypeError inherits Exception {
 	operation initialize(typename: String, featureName: String): TypeError is
 		do
-			if message == void then
+			if message.isVoid then
 				message := ""
 			end
 			message := message + " Cant find [" + featureName + "] in [" + typename + "]"
@@ -407,7 +407,7 @@ class TypeError inherits Exception {
 		
 	operation setMessageReflexive(s: String) :TypeError is
 		do
-			if message == void then
+			if message.isVoid then
 				message := ""
 			end
 			message := s + message
