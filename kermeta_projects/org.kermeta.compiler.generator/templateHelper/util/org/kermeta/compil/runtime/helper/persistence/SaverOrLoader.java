@@ -1,5 +1,5 @@
 
-/*$Id: SaverOrLoader.java,v 1.6 2008-10-30 17:53:38 cfaucher Exp $
+/*$Id: SaverOrLoader.java,v 1.7 2008-11-02 13:12:01 cfaucher Exp $
 * Project : org.kermeta.compiler.generator
 * File : 	SaverOrLoader.java
 * License : EPL
@@ -286,11 +286,23 @@ abstract public class SaverOrLoader {
 	}
 	
 	protected Enumerator createInstance(EEnumLiteral sourceObject, String metamodelURI) {
+
+		EPackage tmp_epack = Registry.INSTANCE.getEPackage(metamodelURI);
+		EPackage epapa = null;
 		
-		EPackage root_pack = getRootEPackage(Registry.INSTANCE.getEPackage(metamodelURI));
+		if(tmp_epack==null) {
+			String tmp_ns_uri = ((EPackage) sourceObject.eContainer().eContainer()).getNsURI();
+			if( tmp_ns_uri.contains(uri_suffix) ) {
+				epapa = Registry.INSTANCE.getEPackage(tmp_ns_uri.replace(uri_suffix, ""));
+			} else {
+				epapa = Registry.INSTANCE.getEPackage(tmp_ns_uri + uri_suffix);
+			}
+		} else {
+		EPackage root_pack = getRootEPackage(tmp_epack);
 		
 		String enumQName = EcoreHelper.getQualifiedName((org.eclipse.emf.ecore.ENamedElement) sourceObject.getEEnum().eContainer(), ".");
-		EPackage epapa = getPackPack(root_pack, enumQName);
+		epapa = getPackPack(root_pack, enumQName);
+		}
 		
 		String pppp_name = ((org.eclipse.emf.ecore.ENamedElement) sourceObject.getEEnum().eContainer()).getName();
 		
