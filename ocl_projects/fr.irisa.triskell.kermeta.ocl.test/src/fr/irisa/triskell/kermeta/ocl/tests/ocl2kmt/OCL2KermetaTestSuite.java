@@ -1,4 +1,4 @@
-/* $Id: OCL2KermetaTestSuite.java,v 1.1 2008-07-25 12:38:04 dvojtise Exp $
+/* $Id: OCL2KermetaTestSuite.java,v 1.2 2008-11-03 16:32:24 dvojtise Exp $
  * Project : fr.irisa.triskell.kermeta.ocl.test
  * File : JunitTestSuite.java
  * License : EPL
@@ -17,7 +17,7 @@ import junit.framework.TestSuite;
 
 import org.kermeta.io.plugin.IOPlugin;
 
-import fr.irisa.triskell.kermeta.launcher.RunJunitFactory;
+import fr.irisa.triskell.kermeta.launcher.InterpretedRunJunitFactory;
 
 
 /**
@@ -66,7 +66,7 @@ public class OCL2KermetaTestSuite extends TestSuite {
 		String uri = null;
 		uri = "platform:/plugin/" + "fr.irisa.triskell.kermeta.ocl.test" + "/" + dir + "/" + file;
 				
-		addTest( new RunJunitFactory().addTestsForUnit(uri) );
+		addTest( new InterpretedRunJunitFactory().addTestsForUnit(uri) );
 	}
 	
 }
