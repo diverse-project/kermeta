@@ -1,6 +1,6 @@
 
 
-/*$Id: KMTLoadingStructurePass.java,v 1.6 2008-07-18 07:14:36 dvojtise Exp $
+/*$Id: KMTLoadingStructurePass.java,v 1.7 2008-11-03 15:16:56 moha Exp $
 * Project : org.kermeta.io.loader
 * File : 	KMTLoadingStructurePass.java
 * License : EPL
@@ -320,9 +320,10 @@ public class KMTLoadingStructurePass extends KermetaASTNodeVisitor implements IL
 			boolean isSetterAbstract = property.getSetterBody() != null ? false : true;
 			boolean isReadOnly = property.getReadOnlyModifier() == null ? false: true;
 			p = KermetaModelHelper.Property.createDerived(name, isReadOnly, isGetterAbstract, isSetterAbstract);
-		} else
+		} else {
 			p = KermetaModelHelper.Property.create(name);
-				
+			p.setIsReadOnly( property.getReadOnlyModifier() == null ? false: true);
+		}
 		p.setIsOrdered( KermetaASTHelper.isOrdered(property.getTypeRef()) );
 		p.setIsUnique( KermetaASTHelper.isUnique(property.getTypeRef()) );
 		p.setUpper( KermetaASTHelper.getUpper(property.getTypeRef()) );
