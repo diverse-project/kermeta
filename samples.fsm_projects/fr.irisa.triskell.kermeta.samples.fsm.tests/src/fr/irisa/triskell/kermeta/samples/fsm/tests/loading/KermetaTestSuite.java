@@ -1,4 +1,4 @@
-/* $Id: KermetaTestSuite.java,v 1.3 2008-04-28 13:39:27 ftanguy Exp $
+/* $Id: KermetaTestSuite.java,v 1.4 2008-11-03 08:05:44 dvojtise Exp $
  * Project : Kermeta.interpreter
  * File : JunitTestSuite.java
  * License : EPL
@@ -20,7 +20,7 @@ import org.eclipse.core.runtime.NullProgressMonitor;
 import junit.framework.Test;
 import junit.framework.TestSuite;
 
-import fr.irisa.triskell.kermeta.launcher.RunJunitFactory;
+import fr.irisa.triskell.kermeta.launcher.InterpretedRunJunitFactory;
 import fr.irisa.triskell.kermeta.samples.fsm.tests.Utils;
 
 /**
@@ -30,7 +30,7 @@ import fr.irisa.triskell.kermeta.samples.fsm.tests.Utils;
 public class KermetaTestSuite extends TestSuite {
 
 	static final String RUNTIMEPROJECTNAME = "kermeta_mdk.fsm.tests";
-    static RunJunitFactory runfactory = new RunJunitFactory();
+    static InterpretedRunJunitFactory runfactory = new InterpretedRunJunitFactory();
     
 //    private static TestSuite _suite;
     
