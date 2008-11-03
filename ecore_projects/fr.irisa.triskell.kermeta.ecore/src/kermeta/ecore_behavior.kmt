@@ -1,4 +1,4 @@
-/* $Id: ecore_behavior.kmt,v 1.15 2008-09-24 09:41:28 dvojtise Exp $
+/* $Id: ecore_behavior.kmt,v 1.16 2008-11-03 18:10:45 cfaucher Exp $
  * Creation date: May 2, 2006
  * License: E.P.L.
  * Copyright:
@@ -47,9 +47,17 @@ aspect class EClass
 	 */
 	inv eGenericSuperTypes_Matches_eSuperTypes is do
 		// verifies that all eGenericSuperTypes have their counterpart in eSuperTypes and vice versa
+		
+		// FIXME CF: the original source code is:
+		/*
 		self.eGenericSuperTypes.forAll{eGST | self.eSuperTypes.exists{eST | eST == eGST.eClassifier}}
 		and
 		self.eSuperTypes.forAll{eST | self.eGenericSuperTypes.exists{eGST | eST == eGST.eClassifier}}
+		*/
+		
+		var tmp1 : Boolean init self.eGenericSuperTypes.forAll{eGST | self.eSuperTypes.exists{eST | eST == eGST.eClassifier}}
+		var tmp2 : Boolean init self.eSuperTypes.forAll{eST | self.eGenericSuperTypes.exists{eGST | eST == eGST.eClassifier}}
+		tmp1 and tmp2
 	end 
 	
 	property eAllAttributes : EAttribute[0..*]
@@ -174,9 +182,17 @@ aspect class EOperation
 	 */
 	inv eGenericExceptions_Matches_eExceptions is do
 		// verifies that all eGenericSuperTypes have their counterpart in eSuperTypes and vice versa
+		
+		// FIXME CF: the original source code is:
+		/*
 		self.eGenericExceptions.forAll{eGST | self.eExceptions.exists{eST | eST == eGST.eClassifier}}
 		and
 		self.eExceptions.forAll{eST | self.eGenericExceptions.exists{eGST | eST == eGST.eClassifier}}
+		*/
+	
+		var tmp1 : Boolean init self.eGenericExceptions.forAll{eGST | self.eExceptions.exists{eST | eST == eGST.eClassifier}}
+		var tmp2 : Boolean init self.eExceptions.forAll{eST | self.eGenericExceptions.exists{eGST | eST == eGST.eClassifier}}
+		tmp1 and tmp2
 	end 
 }
 
@@ -314,8 +330,14 @@ aspect class EReference
 		// FIXME CF 08-09-10, the following source code has been re-written for the compiler
 		// Initial code:
 		//result ?= self.get(cls.ownedAttribute.detect{p | p.name == "container"})
-		var attr : kermeta::language::structure::Property init cls.ownedAttribute.detect{p | p.name == "container"}
-		result ?= self.get(attr)
+		
+		var tmp_result : String init self.get(cls.ownedAttribute.detect{p | p.name == "container"}).toString()
+		
+		if tmp_result=="true" then
+			result := true
+		else
+			result := false
+		end
 	end
 
 }
