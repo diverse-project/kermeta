@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: LoadingStepImpl.java,v 1.5 2008-09-05 09:36:02 dvojtise Exp $
+ * $Id: LoadingStepImpl.java,v 1.6 2008-11-04 12:22:40 dvojtise Exp $
  */
 package org.kermeta.io.loader.impl;
 
@@ -306,6 +306,9 @@ public class LoadingStepImpl extends AbstractStepImpl implements LoadingStep {
 				 */
 				LoaderPlugin.log.debug("Stepping " + getName() + " on " + datas.getKermetaUnit().getUri());
 				performAction(datas, options);
+				if(datas.getKermetaUnit().isErroneous()){
+					LoaderPlugin.log.warn( KermetaUnitHelper.getAllErrorsAsString(datas.getKermetaUnit()));
+				}
 			}
 			/*
 			 * 
