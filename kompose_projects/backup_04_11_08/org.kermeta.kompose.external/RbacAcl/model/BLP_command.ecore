@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="BLP"
+    nsURI="blp.ecore" nsPrefix="csu">
+  <eClassifiers xsi:type="ecore:EClass" name="User">
+    <eOperations name="CreateSubject" eType="#//Subject">
+      <eParameters name="sl" eType="#//SecurityLevel"/>
+    </eOperations>
+    <eOperations name="DeleteSubject" eType="#//Boolean">
+      <eParameters name="sb" eType="#//Subject"/>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="UserSubject" lowerBound="1"
+        upperBound="-1" eType="#//Subject" eOpposite="#//Subject/UserSubject"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="UserClearance" lowerBound="1"
+        eType="#//SecurityLevel" eOpposite="#//SecurityLevel/UserClearance"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SecurityLevel">
+    <eOperations name="GetAllDominatiees" upperBound="-1" eType="#//SecurityLevel"/>
+    <eOperations name="AddDominatee" eType="#//Boolean">
+      <eParameters name="sl" eType="#//SecurityLevel"/>
+    </eOperations>
+    <eOperations name="AddDominator" eType="#//Boolean">
+      <eParameters name="sl" eType="#//SecurityLevel"/>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="SubjectSecurityLevel" lowerBound="1"
+        upperBound="-1" eType="#//Subject" eOpposite="#//Subject/SubjectSecurityLevel"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="dominatee" upperBound="-1"
+        eType="#//SecurityLevel" eOpposite="#//SecurityLevel/dominator"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="dominator" upperBound="-1"
+        eType="#//SecurityLevel" eOpposite="#//SecurityLevel/dominatee"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="UserClearance" lowerBound="1"
+        upperBound="-1" eType="#//User" eOpposite="#//User/UserClearance"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ObjectClassification" lowerBound="1"
+        upperBound="-1" eType="#//Target" eOpposite="#//Target/ObjectClassification"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Target">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ObjectClassification" eType="#//SecurityLevel"
+        eOpposite="#//SecurityLevel/ObjectClassification"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ObjectOperation" upperBound="-1"
+        eType="#//Operation" eOpposite="#//Operation/ObjectOperation"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Operation">
+    <eOperations name="execute">
+      <eParameters name="target" upperBound="-1" eType="#//Target"/>
+      <eParameters name="operationType" eType="#//Operation"/>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="Type" eType="#//OperationTypeEnum"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ObjectOperation" upperBound="-1"
+        eType="#//Target" eOpposite="#//Target/ObjectOperation"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="SubjectOperation" lowerBound="1"
+        upperBound="-1" eType="#//Subject" eOpposite="#//Subject/SubjectOperation"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Subject">
+    <eOperations name="CheckAccess">
+      <eParameters name="t" eType="#//Target"/>
+      <eParameters name="op" eType="#//Operation"/>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="UserSubject" eType="#//User"
+        eOpposite="#//User/UserSubject"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="SubjectSecurityLevel" eType="#//SecurityLevel"
+        eOpposite="#//SecurityLevel/SubjectSecurityLevel"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="SubjectOperation" lowerBound="1"
+        upperBound="-1" eType="#//Operation" eOpposite="#//Operation/SubjectOperation"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="OperationTypeEnum">
+    <eLiterals name="READ" value="1"/>
+    <eLiterals name="WRITE" value="2"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="OperationEnum">
+    <eLiterals name="TRANSFER" value="1"/>
+    <eLiterals name="WITHDRAW" value="2"/>
+    <eLiterals name="DEPOSIT" value="3"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EDataType" name="Boolean" instanceClassName="java.lang.Boolean"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="Type" instanceClassName="java.lang.Object"/>
+</ecore:EPackage>

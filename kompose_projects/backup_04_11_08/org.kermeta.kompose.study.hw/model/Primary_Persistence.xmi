@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="ASCII"?>
+<composition:Composer xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:composition="directives.ecore" xsi:schemaLocation="directives.ecore platform:/resource/Composition/metamodel/directives.ecore" primaryModelURI="platform:/resource/HealthWatcherCaseStudy/healthwatcher.ecore" aspectModelURI="platform:/resource/HealthWatcherCaseStudy/PersistenceAspect.ecore" composedModelURI="platform:/resource/HealthWatcherCaseStudy/Primary_Security.ecore">
+  <predirectivesAM xsi:type="composition:Set" propertyName="name">
+    <target xsi:type="composition:NameRef" qname="PersistenceAspect"/>
+    <value xsi:type="composition:StringLiteral" value="healthwatcher"/>
+  </predirectivesAM>
+</composition:Composer>

@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="RBAC"
+    nsURI="rbac.ecore" nsPrefix="csu">
+  <eClassifiers xsi:type="ecore:EClass" name="User">
+    <eOperations name="CreateSession" lowerBound="1" eType="#//Session">
+      <eParameters name="roles" upperBound="-1" eType="#//Role"/>
+    </eOperations>
+    <eOperations name="DeleteSessions" eType="#//Boolean">
+      <eParameters name="session" lowerBound="1" eType="#//Session"/>
+    </eOperations>
+    <eOperations name="AssignRole" lowerBound="1" eType="#//Boolean">
+      <eParameters name="role" lowerBound="1" eType="#//Role"/>
+    </eOperations>
+    <eOperations name="DeassignRole" lowerBound="1" eType="#//Boolean">
+      <eParameters name="role" lowerBound="1" eType="#//Role"/>
+    </eOperations>
+    <eOperations name="GetAssignedRoles" upperBound="-1" eType="#//Role"/>
+    <eOperations name="GetAuthorizedRoles" upperBound="-1" eType="#//Role"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="UserSession" lowerBound="1"
+        upperBound="-1" eType="#//Session" eOpposite="#//Session/UserSession"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="UserAssignment" upperBound="-1"
+        eType="#//Role" eOpposite="#//Role/UserAssignment"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Session">
+    <eOperations name="AddActiveRole">
+      <eParameters name="role" lowerBound="1" eType="#//Role"/>
+    </eOperations>
+    <eOperations name="DropActiveRole">
+      <eParameters name="role" lowerBound="1" eType="#//Role"/>
+    </eOperations>
+    <eOperations name="CheckAccess" lowerBound="1" eType="#//Boolean">
+      <eParameters name="target" lowerBound="1" eType="#//Target"/>
+      <eParameters name="operationType" lowerBound="1" eType="#//OperationType"/>
+    </eOperations>
+    <eOperations name="Operation" eType="#//Type">
+      <eParameters name="target" lowerBound="1" upperBound="-1" eType="#//Target"/>
+      <eParameters name="params" upperBound="-1" eType="#//Type"/>
+    </eOperations>
+    <eOperations name="GetAllActiveRole" upperBound="-1" eType="#//Role"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="SessionRole" upperBound="-1"
+        eType="#//Role" eOpposite="#//Role/SessionRole"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="UserSession" eType="#//User"
+        eOpposite="#//User/UserSession"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Role">
+    <eOperations name="GrantPermission" lowerBound="1" eType="#//Boolean">
+      <eParameters name="permission" lowerBound="1" eType="#//Permission"/>
+    </eOperations>
+    <eOperations name="RevokePermission" lowerBound="1" eType="#//Boolean">
+      <eParameters name="permission" lowerBound="1" eType="#//Permission"/>
+    </eOperations>
+    <eOperations name="CheckAccess" lowerBound="1" eType="#//Boolean">
+      <eParameters name="target" lowerBound="1" eType="#//Target"/>
+      <eParameters name="operationType" lowerBound="1" eType="#//OperationType"/>
+    </eOperations>
+    <eOperations name="AddInheritance" lowerBound="1" eType="#//Boolean">
+      <eParameters name="seniorRole" lowerBound="1" eType="#//Role"/>
+    </eOperations>
+    <eOperations name="DeleteInheritance" lowerBound="1" eType="#//Boolean">
+      <eParameters name="seniorRole" lowerBound="1" eType="#//Role"/>
+    </eOperations>
+    <eOperations name="AddSSDRole" lowerBound="1" eType="#//Boolean">
+      <eParameters name="role" eType="#//Role"/>
+    </eOperations>
+    <eOperations name="DeleteSSDRole" lowerBound="1" eType="#//Boolean">
+      <eParameters name="role" eType="#//Role"/>
+    </eOperations>
+    <eOperations name="GetAllJuniors" upperBound="-1" eType="#//Role"/>
+    <eOperations name="GetAllSeniors" upperBound="-1" eType="#//Role"/>
+    <eOperations name="GetAuthorizedUsers" upperBound="-1" eType="#//User"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="UserAssignment" upperBound="-1"
+        eType="#//User" eOpposite="#//User/UserAssignment"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="SessionRole" upperBound="-1"
+        eType="#//Session" eOpposite="#//Session/SessionRole"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="junior" upperBound="-1"
+        eType="#//Role" eOpposite="#//Role/senior"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="senior" upperBound="-1"
+        eType="#//Role" eOpposite="#//Role/junior"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="PermAssignment" upperBound="-1"
+        eType="#//Permission" eOpposite="#//Permission/PermAssignment"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="SSDA" upperBound="-1" eType="#//Role"
+        eOpposite="#//Role/SSDB"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="SSDB" upperBound="-1" eType="#//Role"
+        eOpposite="#//Role/SSDA"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Permission">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="PermAssignment" upperBound="-1"
+        eType="#//Role" eOpposite="#//Role/PermAssignment"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="target" upperBound="-1"
+        eType="#//Target" eOpposite="#//Target/pemission"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="operationType" upperBound="-1"
+        eType="#//OperationType" eOpposite="#//OperationType/pemission"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Target">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="pemission" upperBound="-1"
+        eType="#//Permission" eOpposite="#//Permission/target"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="OperationType">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="pemission" upperBound="-1"
+        eType="#//Permission" eOpposite="#//Permission/operationType"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EDataType" name="Boolean" instanceClassName="java.lang.Boolean"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="Type" instanceClassName="java.lang.Object"/>
+</ecore:EPackage>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.2"?>
+<plugin>
+   <extension
+         point="org.eclipse.ui.popupMenus">
+      <objectContribution
+            objectClass="org.eclipse.core.resources.IFile"
+            nameFilter="*.kompose"
+            id="org.kermeta.kompose.specialization.ecore1.contribution1">
+         <menu
+               label="Kompose"
+               path="additions"
+               id="org.kermeta.kompose.specialization.ecore1.menu1">
+            <separator
+                  name="group1">
+            </separator>
+         </menu>
+         <action
+               label="Compose Models (Ecore)"
+               class="org.kermeta.kompose.specialization.ecore1.popup.actions.Composer"
+               menubarPath="org.kermeta.kompose.specialization.ecore1.menu1/group1"
+               enablesFor="1"
+               id="org.kermeta.kompose.specialization.ecore1.composer">
+         </action>
+      </objectContribution>
+   </extension>
+</plugin>

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+
+<!--
+ <copyright>
+ </copyright>
+
+ $Id: plugin.xml,v 1.1.1.1 2008-11-04 08:27:28 mclavreu Exp $
+-->
+
+<plugin>
+
+
+  <extension
+    point = "org.eclipse.ui.newWizards">
+    <category
+      id = "org.eclipse.emf.ecore.Wizard.category.ID"
+      name="%_UI_Wizard_category">
+    </category>
+    <wizard
+      id = "kompose.presentation.KomposeModelWizardID"
+      name = "%_UI_KomposeModelWizard_label"
+      class = "kompose.presentation.KomposeModelWizard"
+      category = "org.eclipse.emf.ecore.Wizard.category.ID"
+      icon = "icons/full/obj16/KomposeModelFile.gif">
+      <description>%_UI_KomposeModelWizard_description</description>
+      <selection class = "org.eclipse.core.resources.IResource" />
+    </wizard>
+  </extension>
+
+  <extension point = "org.eclipse.ui.editors">
+    <editor
+        id = "kompose.presentation.KomposeEditorID"
+        name = "%_UI_KomposeEditor_label"
+        icon = "icons/full/obj16/KomposeModelFile.gif"
+        extensions = "kompose"
+        class = "kompose.presentation.KomposeEditor" 
+        contributorClass="kompose.presentation.KomposeActionBarContributor" >
+    </editor>
+  </extension>    
+</plugin>

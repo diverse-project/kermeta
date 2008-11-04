@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="ASCII"?>
+<kompose:Composer xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:kompose="http://www.kermeta.org/kompose.ecore" primaryModelURI="platform:/resource/org.kermeta.kompose.ecore/test/Bank.ecore" aspectModelURI="platform:/resource/org.kermeta.kompose.ecore/test/BLP.ecore" composedModelURI="platform:/resource/org.kermeta.kompose.ecore/test/BankBLP.ecore">
+  <postdirectives xsi:type="kompose:Remove" propertyName="eOperations">
+    <target xsi:type="kompose:NameRef" qname="Bank::Controller"/>
+    <value xsi:type="kompose:NameRef" qname="Bank::Controller::transfer"/>
+  </postdirectives>
+  <postdirectives xsi:type="kompose:Remove" propertyName="eOperations">
+    <target xsi:type="kompose:NameRef" qname="Bank::Controller"/>
+    <value xsi:type="kompose:NameRef" qname="Bank::Controller::withdraw"/>
+  </postdirectives>
+  <predirectivesAM xsi:type="kompose:Set" propertyName="name">
+    <target xsi:type="kompose:NameRef" qname="BLP"/>
+    <value xsi:type="kompose:StringLiteral" value="Bank"/>
+  </predirectivesAM>
+</kompose:Composer>

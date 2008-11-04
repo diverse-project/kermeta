@@ -1,0 +1,477 @@
+package kompose;
+
+require "merge.kmt" 
+
+using kermeta::language::structure
+using kermeta::utils
+using kermeta::persistence
+
+class KomposeMain {
+	operation loadComposer(path : String, composer : kompose::Composer ) : kompose::Composer is do
+		var resource : kermeta::persistence::EMFResource             
+   		var repository : EMFRepository init EMFRepository.new             
+       	resource ?= repository.createResource(path, "http://www.kermeta.org/kompose")
+        resource.load
+        var c : kompose::Composer
+        c ?= resource.instances.one
+        // Convert the loaded composer to a custom composer
+        result := composer
+        result.predirectivesPM.addAll(c.predirectivesPM)
+        result.predirectivesAM.addAll(c.predirectivesAM)
+        result.postdirectives.addAll(c.postdirectives)
+        result.primaryModelURI := c.primaryModelURI
+        result.aspectModelURI := c.aspectModelURI
+        result.composedModelURI := c.composedModelURI
+	end
+}
+
+aspect abstract class Composer {
+
+	reference resources: kermeta::persistence::EMFResource [0..*]   
+	
+	// Has to be defined for each specific meta-model
+	operation loadModel(path : String) : kompose::Mergeable is do
+    	var resource : kermeta::persistence::EMFResource             
+   		var repository : EMFRepository init EMFRepository.new             
+       	resource ?= repository.getResource(path)
+        resource.load
+        self.resources.add(resource)
+       result ?= resource.instances.one
+   end
+   
+   operation saveModelByUri(model : kompose::Mergeable, uri : String, metamodelUri : String) is do
+   		var resource : kermeta::persistence::EMFResource             
+   		var repository : EMFRepository init EMFRepository.new
+   		resource ?= repository.createResource(uri, metamodelUri)
+        resource.instances.add(model)
+      //  repository.findDanglingModelElements().each{e|stdio.writeln(e.toString)}
+        resource.save
+   end
+   
+    // Has to be defined for each specific meta-model
+    operation saveModel(model : Mergeable, uri : String) : Void is abstract
+    
+    // Can be extended for a specific meta-model
+    // If the Create directive is to be used, the "classes" property of the context
+    // should be populated with the classes that might be instanciated using the
+    // create directive 
+    operation createContext(model : Mergeable) : Context is do
+    	result := Context.new
+    	result.initialize(model)
+    end
+	
+	operation executeDirectives(model : Mergeable, directives : oset ElementDirective[*]) is do
+		// create the context
+		var context : Context init createContext(model)
+
+		directives.each{ d | 
+			d.context := context
+			d.execute
+		}
+	end
+	
+	operation compose() : Mergeable is do
+		// load models to compose
+		stdio.write("loading models...")
+		var pm : Mergeable init loadModel(primaryModelURI)
+		var am : Mergeable init loadModel(aspectModelURI)
+		var cm : Mergeable
+		stdio.writeln("OK")
+		
+		// execute pre-directives
+		stdio.write("Executing predirectives on primary model...")
+		executeDirectives(pm, predirectivesPM)
+		stdio.writeln("OK")
+		stdio.write("Executing predirectives on aspect model...")
+		executeDirectives(am, predirectivesAM)
+		stdio.writeln("OK")
+		
+		// perform the composition
+		stdio.writeln("Composing models...")
+		var composer : ModelElementComposer init ModelElementComposer.new
+		composer.resources.addAll(self.resources)
+		cm := composer.compose(pm, am)
+		
+		// execute post-directives
+		stdio.write("Executing postdirectives on composed model...")
+		executeDirectives(cm, postdirectives)
+		stdio.writeln("OK")
+		
+		// save the result
+		stdio.write("Saving composed model...")
+		saveModel(cm, composedModelURI)
+        stdio.writeln("OK")
+        result := cm
+        
+    rescue (ex : DirectiveRuntimeException)
+   		stdio.writeln("\n" + ex.toString)
+   		stdio.writeln("composition aborded.")
+	end 
+	
+}
+
+aspect class ElementDirective {
+	operation getSymb() : String is abstract
+}
+
+aspect class Remove
+{
+	method execute() is do
+		// resolve the target object
+		var targetObj : Mergeable init resolveTarget
+		// find the property
+		var prop : Property init getProperty(targetObj)
+		// get value
+		var val : Object init resolveValue
+		
+		//TODO: check that the type of the value is correct
+		// add the value
+		var c : kermeta::standard::Collection<Object> 
+		c ?= targetObj.get(prop)
+		c.remove(val)
+	end
+	
+	method getSymb() : String is do
+		result := "-"
+	end
+}
+
+aspect class Add
+{
+	method execute() is do
+		// resolve the target object
+		var targetObj : Mergeable init resolveTarget
+		// find the property
+		var prop : Property init getProperty(targetObj)
+		// get value
+		var val : Object init resolveValue
+		
+		//TODO: check that the type of the value is correct
+		// add the value
+		var c : kermeta::standard::Collection<Object> 
+		c ?= targetObj.get(prop)
+		c.add(val)
+	end
+	
+	method getSymb() : String is do
+		result := "+"
+	end
+	
+}
+
+@aspect "true"
+class Create
+{	
+	method toString() : String is do
+		result := 	"create " + className + " as " + "$" + identifier
+	end
+	
+	method execute() is do
+		// get the class
+		var cls : Class init context.classes.getValue(className)
+		// raise an exception if the class was not found
+		if cls == void then 
+			var ex : ClassNotFoundException init ClassNotFoundException.new
+			ex.createDirective := self
+			raise ex
+		end
+		// create the object
+		var obj : Object init cls.new
+		// add the object to the context
+		context.setVariable(identifier, obj)
+	end
+} 
+
+@aspect "true"
+class Set
+{
+	method execute() is do
+		// resolve the target object
+		var targetObj : Mergeable init resolveTarget
+		// find the property
+		var prop : Property init getProperty(targetObj)
+		// get value
+		var val : Object init resolveValue
+		
+		//TODO: check that the type of the value is correct
+		//if val.isInstanceOf(prop.type.asType(Class)) then
+		// set the value
+			targetObj.~set(prop, val)
+		//else
+		//	stdio.writeln("TYPE ERROR : The type of property " + prop.name + " is " + prop.type.toString)
+		//end
+	end
+	
+	method getSymb() : String is do
+		result := "="
+	end
+}
+
+@aspect "true"
+class ElementRef
+{
+	operation getElement(c: Context) : Object is abstract
+}
+
+@aspect "true"
+class NameRef
+{
+	method toString() : String is do
+		result := qname
+	end
+	
+	method getElement(c: Context) : Object is do
+		// Split the qualified name 
+		var names : kermeta::standard::Sequence<String> init kermeta::standard::Sequence<String>.new
+		var str : String
+		from  str := qname
+		until str.indexOf("::") < 0
+		loop
+			names.add(str.substring(0, str.indexOf("::")))
+			str := str.substring(str.indexOf("::")+2, str.size)
+		end
+		names.add(str)
+		
+		// check the name of the first package
+		if names.elementAt(0) != c.model.getStringID then
+		 	var ex : ElementNotResolvedException init ElementNotResolvedException.new
+			ex.elementRef := self
+			raise ex
+		end
+		names.removeAt(0)
+		
+		// iterate on names
+		var ne : Mergeable 
+		var cur : Mergeable init c.model
+		var found : Boolean
+		
+		names.each{ n |
+			found := false
+			getContents(cur).each{ e | 
+				ne ?= e
+				if ne != void then
+					//stdio.writeln(" --found |" +  ne.getStringID + "| (looking for |"+ n +"|)" )
+					if n == ne.getStringID then 
+						cur := ne
+						found := true
+						
+					end
+				end
+			}
+			if not found then 
+				var ex : ElementNotResolvedException init ElementNotResolvedException.new
+				ex.elementRef := self
+				raise ex
+			end
+		}
+		result := cur
+	rescue 
+		result := void
+	end
+	
+	/** get all the objects containes by the object c */
+	operation getContents(c : Object) : kermeta::standard::Collection<Object> is do
+		result := kermeta::standard::Sequence<Object>.new 
+		// get the meta class
+		var mclass : ClassDefinition
+		mclass ?= c.getMetaClass.typeDefinition
+		//select composite properties
+		var props : seq Property[*] init 
+			mclass.allAttribute.select{ p | 
+		    	p.isComposite and Mergeable.isSuperTypeOf(p.type)
+			}
+		var objs : kermeta::standard::Collection<Object>
+		props.each{ p | 
+			if p.upper == 1 then 
+				result.add(c.get(p))
+			else
+				objs ?= c.get(p)
+				objs.each{ o | result.add(o) }
+			end	
+		}
+	end
+}
+
+@aspect "true"
+class IDRef
+{	
+	method toString() : String is do
+		result := "$" + identifier
+	end
+	
+	method getElement(c: Context) : Object is do
+		result := c.getVariable(identifier)
+	end
+}
+
+@aspect "true"
+abstract class Change
+{	
+	method toString() : String is do
+		result := 	target.toString+"." +propertyName+ " " + 
+					getSymb +" " + ~value.toString
+	end
+	
+	/* resolve the target models element */
+	operation resolveTarget() : Mergeable is do
+		result ?= target.getElement(context)
+		if result == void then 
+			var ex : TargetNotFoundException init TargetNotFoundException.new
+			ex.changeDirective := self
+			raise ex
+		end 
+	end
+	
+	/* resolve the value */
+	operation resolveValue() : Object is do
+		result := ~value.getElement(context)
+		if result == void then 
+			var ex : ValueNotFoundException init ValueNotFoundException.new
+			ex.changeDirective := self
+			raise ex
+		end 
+	end
+	
+	/* Get the property in the targetObject */
+	operation getProperty(targetObj : Mergeable) : Property is do
+		// get the meta class
+		var mclass : ClassDefinition
+		mclass ?= targetObj.getMetaClass.typeDefinition
+		//select the property
+		var prop : seq Property[*] init 
+			mclass.allAttribute.select{ p | 
+		    	p.name == propertyName 
+			}
+		// check that it exists
+		if prop.size == 0 then
+			var ex : PropertyNotFoundException init PropertyNotFoundException.new
+			ex.changeDirective := self 
+			raise ex
+		end
+		result := prop.one
+	end
+
+}
+
+@aspect "true"
+class StringLiteral
+{	
+	method toString() : String is do
+		result := "\"" + ~value.toString + "\""
+	end
+	
+	method getElement(c: Context) : Object is do
+		result := ~value
+	end
+}
+
+@aspect "true"
+class BooleanLiteral
+{	
+	method toString() : String is do
+		result := ~value.toString
+	end
+	
+	method getElement(c: Context) : Object is do
+		result := ~value
+	end
+}
+
+@aspect "true"
+class IntegerLiteral
+{	
+	method toString() : String is do
+		result := ~value.toString
+	end
+	
+	method getElement(c: Context) : Object is do
+		result := ~value
+	end
+}
+
+@aspect "true"
+class VoidLiteral
+{
+	method toString() : String is do
+		result := "void"
+	end
+}
+
+@aspect "true"
+class Context
+{
+	reference model : Mergeable
+	reference variables : Hashtable<String, Object>
+	reference classes : Hashtable<String, Class>
+	
+	operation initialize(model : Mergeable) is do
+		self.model := model
+		variables := Hashtable<String, Object>.new
+		classes := Hashtable<String, Class>.new
+	end
+	
+	operation getVariable(name : String) : Object is do
+		result := variables.getValue(name)
+	end
+	
+	operation setVariable(name : String, val : Object) is do
+		variables.put(name, val)
+	end
+}
+
+/* Exception that can be raised when directives are executed */
+abstract class DirectiveRuntimeException inherits kermeta::exceptions::Exception {
+	reference directive : CompositionDirective
+	
+	method toString() : String is do
+		result := "An exception was raised while executing directive " + directive.toString
+	end
+}
+
+/* Eception raised if and element cannot be resolved */
+class ElementNotResolvedException inherits DirectiveRuntimeException {
+	reference elementRef : ElementRef
+}
+
+/* The target for a Change directive was not found */
+class TargetNotFoundException inherits ElementNotResolvedException {
+	property changeDirective : Change 
+		getter is do result ?= directive end
+		setter is do directive := value elementRef := value.target end
+	
+	method toString() : String from DirectiveRuntimeException is do
+		result := super + "\nTarget object "+ elementRef.toString +" could not be resolved"
+	end
+}
+
+/* The value for a Change directive was not found */
+class ValueNotFoundException inherits ElementNotResolvedException {
+	property changeDirective : Change 
+		getter is do result ?= directive end
+		setter is do directive := value elementRef := value.~value end
+		
+	method toString() : String from DirectiveRuntimeException is do
+		result := super + "\nValue object "+ elementRef.toString +" could not be resolved"
+	end
+}
+
+/* The property could not be found */
+class PropertyNotFoundException inherits DirectiveRuntimeException {
+	property changeDirective : Change 
+		getter is do result ?= directive end
+		setter is do directive := value end
+		
+		method toString() : String from DirectiveRuntimeException is do
+			result := super + "\nProperty "+ changeDirective.propertyName +" could not be found"
+		end
+}
+
+class ClassNotFoundException inherits DirectiveRuntimeException {
+	property createDirective : Create 
+		getter is do result ?= directive end
+		setter is do directive := value end
+
+	method toString() : String from DirectiveRuntimeException is do
+		 result := super + "\nMeta-Class "+ createDirective.className +" could not be found"
+	end
+}

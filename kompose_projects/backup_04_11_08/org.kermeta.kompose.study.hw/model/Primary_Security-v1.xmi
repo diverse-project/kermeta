@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="ASCII"?>
+<composition:Composer xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:composition="directives.ecore" xsi:schemaLocation="directives.ecore platform:/resource/Composition/metamodel/directives.ecore" primaryModelURI="platform:/resource/HealthWatcherCaseStudy/healthwatcher.ecore" aspectModelURI="platform:/resource/HealthWatcherCaseStudy/SecurityAspect-v1.ecore" composedModelURI="platform:/resource/HealthWatcherCaseStudy/Primary_Security-v1.ecore">
+  <postdirectives xsi:type="composition:Create" className="Reference" identifier="sessionMgr"/>
+  <postdirectives xsi:type="composition:Set" propertyName="name">
+    <target xsi:type="composition:IDRef" identifier="sessionMgr"/>
+    <value xsi:type="composition:StringLiteral" value="sessionMgr"/>
+  </postdirectives>
+  <postdirectives xsi:type="composition:Set" propertyName="eType">
+    <target xsi:type="composition:IDRef" identifier="sessionMgr"/>
+    <value xsi:type="composition:NameRef" qname="healthwatcher::HWSessionManager"/>
+  </postdirectives>
+  <postdirectives xsi:type="composition:Set" propertyName="upperBound">
+    <target xsi:type="composition:IDRef" identifier="sessionMgr"/>
+    <value xsi:type="composition:IntegerLiteral" value="1"/>
+  </postdirectives>
+  <postdirectives xsi:type="composition:Set" propertyName="lowerBound">
+    <target xsi:type="composition:IDRef" identifier="sessionMgr"/>
+    <value xsi:type="composition:IntegerLiteral" value="1"/>
+  </postdirectives>
+  <postdirectives xsi:type="composition:Add" propertyName="eStructuralFeatures">
+    <target xsi:type="composition:NameRef" qname="healthwatcher::HealthWatcher"/>
+    <value xsi:type="composition:IDRef" identifier="sessionMgr"/>
+  </postdirectives>
+  <postdirectives xsi:type="composition:Create" className="Reference" identifier="accessMgr"/>
+  <postdirectives xsi:type="composition:Set" propertyName="name">
+    <target xsi:type="composition:IDRef" identifier="accessMgr"/>
+    <value xsi:type="composition:StringLiteral" value="accessMgr"/>
+  </postdirectives>
+  <postdirectives xsi:type="composition:Set" propertyName="eType">
+    <target xsi:type="composition:IDRef" identifier="accessMgr"/>
+    <value xsi:type="composition:NameRef" qname="healthwatcher::AccessControlManager"/>
+  </postdirectives>
+  <postdirectives xsi:type="composition:Set" propertyName="upperBound">
+    <target xsi:type="composition:IDRef" identifier="accessMgr"/>
+    <value xsi:type="composition:IntegerLiteral" value="1"/>
+  </postdirectives>
+  <postdirectives xsi:type="composition:Set" propertyName="lowerBound">
+    <target xsi:type="composition:IDRef" identifier="accessMgr"/>
+    <value xsi:type="composition:IntegerLiteral" value="1"/>
+  </postdirectives>
+  <postdirectives xsi:type="composition:Add" propertyName="eStructuralFeatures">
+    <target xsi:type="composition:NameRef" qname="healthwatcher::HealthWatcher"/>
+    <value xsi:type="composition:IDRef" identifier="accessMgr"/>
+  </postdirectives>
+  <predirectivesAM xsi:type="composition:Set" propertyName="name">
+    <target xsi:type="composition:NameRef" qname="SecurityAspect"/>
+    <value xsi:type="composition:StringLiteral" value="healthwatcher"/>
+  </predirectivesAM>
+</composition:Composer>

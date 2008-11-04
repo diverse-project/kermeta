@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="ASCII"?>
+<rdbschema:RDBMSModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:rdbschema="http://www.kermeta.org/rdbschema.ecore" xsi:schemaLocation="http://www.kermeta.org/rdbschema.ecore rdbschema.ecore">
+  <table name="User" pkey="//@table.0/@cols.0">
+    <cols name="userID" type="Varchar(10)"/>
+    <cols name="groupIDRef" type="Integer"/>
+    <cols name="password" type="Varchar(20)"/>
+    <fkeys references="//@table.1" cols="//@table.0/@cols.1"/>
+  </table>
+  <table name="Group" pkey="//@table.1/@cols.0">
+    <cols name="groupID" type="Integer"/>
+    <cols name="name" type="Varchar(20)"/>
+  </table>
+</rdbschema:RDBMSModel>

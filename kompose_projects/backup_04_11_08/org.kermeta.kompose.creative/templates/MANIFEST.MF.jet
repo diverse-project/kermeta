@@ -1,0 +1,20 @@
+<%@ jet package="org.kermeta.kompose.creative.generator.template"
+
+imports="org.kermeta.kompose.creative.wizards.SpecializerIntermediateDataContainer"
+
+class="PluginManifest"
+%>
+<% SpecializerIntermediateDataContainer data=(SpecializerIntermediateDataContainer)argument; %>
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Kompose Specialization Composition Plug-in
+Bundle-SymbolicName: <%=data.getPackage_name()%>; singleton:=true
+Bundle-Version: 0.0.1
+Bundle-Activator: <%=data.getActivatorPackage()%>.Activator
+Bundle-Vendor: Unknown
+Bundle-Localization: plugin
+Require-Bundle: org.eclipse.ui,
+ org.eclipse.core.runtime,
+ org.eclipse.core.resources,
+ fr.irisa.triskell.kermeta.interpreter,
+ org.kermeta.kompose.ui

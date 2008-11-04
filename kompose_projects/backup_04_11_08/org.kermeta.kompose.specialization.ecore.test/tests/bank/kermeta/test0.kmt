@@ -1,0 +1,25 @@
+	/* $Id: test0.kmt,v 1.1.1.1 2008-11-04 08:27:28 mclavreu Exp $ 
+ * Creation : August 11, 2008
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            freddy
+ */
+@mainClass "tests::bank::kermeta::Main"
+@mainOperation "main"
+
+
+package tests::bank::kermeta;
+require kermeta
+require "platform:/resource/org.kermeta.kompose.specialization.ecore.uno/kermeta/Ecore.kmt"
+
+using ecore
+
+
+class Main
+{
+	operation main() : Void is do 
+		var ecoreMain:ecore::Main init ecore::Main.new
+		ecoreMain.main("platform:/resource/org.kermeta.kompose.specialization.ecore.test/tests/bank/blp.kompose")
+	end
+}

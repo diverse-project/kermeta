@@ -1,0 +1,179 @@
+
+package ecore;
+
+
+require kermeta
+require "http://www.eclipse.org/emf/2002/Ecore"
+
+require "platform:/plugin/org.kermeta.kompose.model/kermeta/kompose.kmt"
+//require "../..//org.kermeta.kompose.model/kermeta/kompose.kmt"
+
+using kermeta::standard
+using kermeta::utils
+using kermeta::persistence
+
+// 1) Definition of the specific composer
+ 
+class EcoreComposer inherits kompose::Composer
+{
+	method loadModel(path : String) : kompose::Mergeable is do
+		stdio.writeln("Load Ecore Model")
+    	var resource : kermeta::persistence::EMFResource             
+   		var repository : EMFRepository init EMFRepository.new             
+       	resource ?= repository.getResource(path)
+        resource.load
+       result ?= resource.instances.one
+   end
+   
+   method saveModel(model : kompose::Mergeable, uri : String) is do
+   		var resource : kermeta::persistence::EMFResource             
+   		var repository : EMFRepository init EMFRepository.new
+   		resource ?= repository.createResource(uri, "http://www.eclipse.org/emf/2002/Ecore")
+        resource.instances.add(model)
+      //  repository.findDanglingModelElements().each{e|stdio.writeln(e.toString)}
+        resource.save
+   end
+   
+   method createContext(model : kompose::Mergeable) : kompose::Context is do
+   		result := super(model)
+   		result.classes.put("Package", EPackage)
+		result.classes.put("Class", EClass)
+		result.classes.put("Attribute", EAttribute)
+		result.classes.put("Reference", EReference)
+		result.classes.put("Operation", EOperation)
+		result.classes.put("Parameter", EParameter)
+   end
+}
+// 2) Definition of specific signature classes
+
+class OperationSignature inherits kompose::Signature
+{
+	reference op : EOperation 
+	
+	method equals(other : Object ) : Boolean is do
+		var othersign : OperationSignature
+		othersign ?= other
+		if othersign != void then
+			result := self.op.name == othersign.op.name 
+			
+			self.op.eParameters.each{ p1 | 
+				if result then
+					result := othersign.op.eParameters.select{ p2 | p1.getSignature.equals((p2.getSignature)) }.size == 1
+				end
+			}
+		else
+			result := false
+		end
+	end
+	
+}
+
+class ParameterSignature inherits kompose::Signature
+{
+	reference param : EParameter 
+	
+	method equals(other : Object ) : Boolean is do
+		var othersign : ParameterSignature
+		othersign ?= other
+		if othersign != void then
+			result := self.param.name == othersign.param.name and
+				self.param.eType.getSignature.equals(othersign.param.eType.getSignature)
+		else
+			result := false
+		end
+	end
+	
+}
+
+// 3) Extentions to the ecore metamodel
+
+@aspect "true"
+class EModelElement inherits kompose::Mergeable {}
+
+@aspect "true"
+class EGenericType inherits kompose::Mergeable {
+
+	method getSignature(): kompose::Signature is do
+		var s : kompose::StringSignature init 
+		kompose::StringSignature.new
+		s.sign := eClassifier.name
+		result := s
+	end
+}
+
+@aspect "true"
+class EAnnotation{
+	method getSignature() : kompose::Signature is do
+		var s : kompose::StringSignature init 
+		kompose::StringSignature.new
+		s.sign := source
+		result := s
+	end
+	method getStringID() : String is do
+		result := source
+
+	end
+}
+
+@aspect "true"
+class ENamedElement{
+	method getSignature() : kompose::Signature is do
+		var s : kompose::StringSignature init 
+			kompose::StringSignature.new
+		s.sign := name
+		result := s
+	end
+	
+	method getStringID() : String is do
+		result := name
+	end
+}
+
+@aspect "true"
+class EOperation
+{
+	method getSignature() : kompose::Signature is do
+		var s : OperationSignature init OperationSignature.new
+		s.op := self
+		result := s
+	end
+}
+
+@aspect "true"
+class EParameter
+{
+	method getSignature() : kompose::Signature is do
+		var s : ParameterSignature init ParameterSignature.new
+		s.param := self
+		result := s
+	end
+}
+
+// 4) the Main
+
+
+class Main
+{
+	operation main(uri : String) is do
+		var c : kompose::Composer init loadComposer(uri)
+		c.compose
+	end
+	
+	operation loadComposer(path : String) : EcoreComposer is do
+		var resource : kermeta::persistence::EMFResource             
+   		var repository : EMFRepository init EMFRepository.new             
+       	resource ?= repository.createResource(path, "http://www.kermeta.org/kompose")
+        resource.load
+        var c : kompose::Composer
+        c ?= resource.instances.one
+        // Convert the loaded composer to a custom composer
+        result := EcoreComposer.new
+        result.predirectivesPM.addAll(c.predirectivesPM)
+        result.predirectivesAM.addAll(c.predirectivesAM)
+        result.postdirectives.addAll(c.postdirectives)
+        result.primaryModelURI := c.primaryModelURI
+        result.aspectModelURI := c.aspectModelURI
+        result.composedModelURI := c.composedModelURI
+	end
+}
+

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="ASCII"?>
+<kompose:Composer xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:kompose="http://www.kermeta.org/kompose" primaryModelURI="platform:/resource/RbacAcl/model/RBAC_initial.ecore" aspectModelURI="platform:/resource/RbacAcl/model/BLP_initial.ecore" composedModelURI="platform:/resource/RbacAcl/comp_result/compositionWCD_initial.ecore">
+  <predirectivesPM xsi:type="kompose:Set" propertyName="name">
+    <target xsi:type="kompose:NameRef" qname="RBAC"/>
+    <value xsi:type="kompose:StringLiteral" value="HAC"/>
+  </predirectivesPM>
+  <predirectivesAM xsi:type="kompose:Set" propertyName="name">
+    <target xsi:type="kompose:NameRef" qname="BLP::Subject"/>
+    <value xsi:type="kompose:StringLiteral" value="Session"/>
+  </predirectivesAM>
+  <predirectivesAM xsi:type="kompose:Set" propertyName="name">
+    <target xsi:type="kompose:NameRef" qname="BLP::User::DeleteSubject"/>
+    <value xsi:type="kompose:StringLiteral" value="deleteSession"/>
+  </predirectivesAM>
+  <predirectivesAM xsi:type="kompose:Set" propertyName="name">
+    <target xsi:type="kompose:NameRef" qname="BLP::User::CreateSubject"/>
+    <value xsi:type="kompose:StringLiteral" value="createSession"/>
+  </predirectivesAM>
+  <predirectivesAM xsi:type="kompose:Set" propertyName="name">
+    <target xsi:type="kompose:NameRef" qname="BLP::User::UserSubject"/>
+    <value xsi:type="kompose:StringLiteral" value="UserSession"/>
+  </predirectivesAM>
+  <predirectivesAM xsi:type="kompose:Set" propertyName="name">
+    <target xsi:type="kompose:NameRef" qname="BLP"/>
+    <value xsi:type="kompose:StringLiteral" value="HAC"/>
+  </predirectivesAM>
+</kompose:Composer>

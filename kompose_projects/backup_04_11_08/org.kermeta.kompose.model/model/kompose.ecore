@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="kompose"
+    nsURI="http://www.kermeta.org/kompose" nsPrefix="kompose">
+  <eClassifiers xsi:type="ecore:EClass" name="ElementDirective" abstract="true" eSuperTypes="#//CompositionDirective">
+    <eOperations name="execute"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CompositionDirective" abstract="true">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="context" lowerBound="1"
+        eType="#//Context"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Remove" eSuperTypes="#//Change"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Add" eSuperTypes="#//Change"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Create" eSuperTypes="#//ElementDirective">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="className" eType="#//String"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="identifier" eType="#//String"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Set" eSuperTypes="#//Change"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ElementRef" abstract="true"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="String" instanceClassName="java.lang.String"/>
+  <eClassifiers xsi:type="ecore:EClass" name="NameRef" eSuperTypes="#//ElementRef">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="qname" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="IDRef" eSuperTypes="#//ElementRef">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="identifier" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Change" abstract="true" eSuperTypes="#//ElementDirective">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="propertyName" eType="#//String"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="target" lowerBound="1"
+        eType="#//ElementRef" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="value" lowerBound="1" eType="#//ElementRef"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Literal" eSuperTypes="#//ElementRef"/>
+  <eClassifiers xsi:type="ecore:EClass" name="StringLiteral" eSuperTypes="#//Literal">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="#//String"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="BooleanLiteral" eSuperTypes="#//Literal">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="#//Boolean"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="IntegerLiteral" eSuperTypes="#//Literal">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="#//Integer"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EDataType" name="Boolean" instanceClassName="boolean"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="Integer" instanceClassName="int"/>
+  <eClassifiers xsi:type="ecore:EClass" name="VoidLiteral" eSuperTypes="#//Literal"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Context"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Composer">
+    <eOperations name="compose" eType="#//Mergeable"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="predirectivesPM" upperBound="-1"
+        eType="#//ElementDirective" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="postdirectives" upperBound="-1"
+        eType="#//ElementDirective" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="primaryModelURI" eType="#//String"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="aspectModelURI" eType="#//String"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="composedModelURI" eType="#//String"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="predirectivesAM" upperBound="-1"
+        eType="#//ElementDirective" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Mergeable" abstract="true"/>
+</ecore:EPackage>

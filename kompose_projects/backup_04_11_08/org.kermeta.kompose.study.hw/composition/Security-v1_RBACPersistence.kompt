@@ -1,0 +1,24 @@
+// Primary Model URI
+PM "platform:/resource/org.kermeta.kompose.study.hw/model/SecurityAspect-v1.ecore" 
+
+// Aspect Model URI
+AM "platform:/resource/org.kermeta.kompose.study.hw/model/PersistenceAspectForRBAC.ecore" 
+
+// Composed Model URI
+CM "platform:/resource/org.kermeta.kompose.study.hw/result/Security-v1_RBACPersistence.ecore"
+
+// predirectives for primary model
+PMPre { 
+	
+}
+
+// predirectives for aspect model
+AMPre { 
+//	PersistenceAspect.name = "SecurityAspect"
+RBACPersistenceAspect.name = "SecurityAspect"
+}
+
+// postdirectives 
+Post {
+	// TODO : Delete compositions
+}

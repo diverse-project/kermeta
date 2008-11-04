@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="DistributionAspect"
+    nsURI="healthwatcher.ecore" nsPrefix="healthwatcher">
+  <eClassifiers xsi:type="ecore:EClass" name="User" eSuperTypes="#//Serializable"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Complaint" abstract="true" eSuperTypes="#//Serializable"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ComplaintState" abstract="true" eSuperTypes="#//Serializable"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Address" eSuperTypes="#//Serializable"/>
+  <eClassifiers xsi:type="ecore:EClass" name="HealthUnit" eSuperTypes="#//Serializable"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Specialty" eSuperTypes="#//Serializable"/>
+  <eClassifiers xsi:type="ecore:EClass" name="DiseaseType" eSuperTypes="#//Serializable"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Symptom" eSuperTypes="#//Serializable"/>
+  <eClassifiers xsi:type="ecore:EClass" name="SessionRemoteInterface" abstract="true"
+      interface="true" eSuperTypes="#//Remote">
+    <eOperations name="updateComplaint"/>
+    <eOperations name="searchSpecialitiesByHealthUnit"/>
+    <eOperations name="searchComplaint"/>
+    <eOperations name="searchDiseaseType"/>
+    <eOperations name="searchHealthUnitsBySpeciality"/>
+    <eOperations name="getSpecialityList"/>
+    <eOperations name="getDiseaseTypeList"/>
+    <eOperations name="getHealthUnitList"/>
+    <eOperations name="getPartialHealthUnitList"/>
+    <eOperations name="insertComplaint"/>
+    <eOperations name="updateHealthUnit"/>
+    <eOperations name="getComplaintList"/>
+    <eOperations name="insertEmployee"/>
+    <eOperations name="updateEmployee"/>
+    <eOperations name="searchEmployee"/>
+    <eOperations name="searchHealthUnit"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="HealthWatcherRemoteInterface" abstract="true"
+      interface="true" eSuperTypes="#//Remote">
+    <eOperations name="registerUser"/>
+    <eOperations name="createSession"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Remote" abstract="true" interface="true"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Serializable" abstract="true" interface="true"/>
+  <eClassifiers xsi:type="ecore:EClass" name="UnicastRemoteObject" instanceClassName=""/>
+  <eClassifiers xsi:type="ecore:EClass" name="Session" eSuperTypes="#//SessionRemoteInterface #//UnicastRemoteObject"/>
+  <eClassifiers xsi:type="ecore:EClass" name="HealthWatcher" eSuperTypes="#//HealthWatcherRemoteInterface #//UnicastRemoteObject"/>
+</ecore:EPackage>

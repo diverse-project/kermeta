@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="ASCII"?>
+<kompose:Composer xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:kompose="http://www.kermeta.org/kompose" primaryModelURI="platform:/resource/org.kermeta.kompose.study.hw/model/healthwatcher.ecore" aspectModelURI="platform:/resource/org.kermeta.kompose.study.hw/model/SecurityAspect-v1.ecore" composedModelURI="platform:/resource/org.kermeta.kompose.study.hw/result/Primary_Security-v1.ecore">
+  <postdirectives xsi:type="kompose:Create" className="Reference" identifier="sessionMgr"/>
+  <postdirectives xsi:type="kompose:Set" propertyName="name">
+    <target xsi:type="kompose:IDRef" identifier="sessionMgr"/>
+    <value xsi:type="kompose:StringLiteral" value="sessionMgr"/>
+  </postdirectives>
+  <postdirectives xsi:type="kompose:Set" propertyName="eType">
+    <target xsi:type="kompose:IDRef" identifier="sessionMgr"/>
+    <value xsi:type="kompose:NameRef" qname="healthwatcher::HWSessionManager"/>
+  </postdirectives>
+  <postdirectives xsi:type="kompose:Set" propertyName="upperBound">
+    <target xsi:type="kompose:IDRef" identifier="sessionMgr"/>
+    <value xsi:type="kompose:IntegerLiteral" value="1"/>
+  </postdirectives>
+  <postdirectives xsi:type="kompose:Set" propertyName="lowerBound">
+    <target xsi:type="kompose:IDRef" identifier="sessionMgr"/>
+    <value xsi:type="kompose:IntegerLiteral" value="1"/>
+  </postdirectives>
+  <postdirectives xsi:type="kompose:Add" propertyName="eStructuralFeatures">
+    <target xsi:type="kompose:NameRef" qname="healthwatcher::HealthWatcher"/>
+    <value xsi:type="kompose:IDRef" identifier="sessionMgr"/>
+  </postdirectives>
+  <postdirectives xsi:type="kompose:Create" className="Reference" identifier="accessMgr"/>
+  <postdirectives xsi:type="kompose:Set" propertyName="name">
+    <target xsi:type="kompose:IDRef" identifier="accessMgr"/>
+    <value xsi:type="kompose:StringLiteral" value="accessMgr"/>
+  </postdirectives>
+  <postdirectives xsi:type="kompose:Set" propertyName="eType">
+    <target xsi:type="kompose:IDRef" identifier="accessMgr"/>
+    <value xsi:type="kompose:NameRef" qname="healthwatcher::AccessControlManager"/>
+  </postdirectives>
+  <postdirectives xsi:type="kompose:Set" propertyName="upperBound">
+    <target xsi:type="kompose:IDRef" identifier="accessMgr"/>
+    <value xsi:type="kompose:IntegerLiteral" value="1"/>
+  </postdirectives>
+  <postdirectives xsi:type="kompose:Set" propertyName="lowerBound">
+    <target xsi:type="kompose:IDRef" identifier="accessMgr"/>
+    <value xsi:type="kompose:IntegerLiteral" value="1"/>
+  </postdirectives>
+  <postdirectives xsi:type="kompose:Add" propertyName="eStructuralFeatures">
+    <target xsi:type="kompose:NameRef" qname="healthwatcher::HealthWatcher"/>
+    <value xsi:type="kompose:IDRef" identifier="accessMgr"/>
+  </postdirectives>
+  <predirectivesAM xsi:type="kompose:Set" propertyName="name">
+    <target xsi:type="kompose:NameRef" qname="SecurityAspect"/>
+    <value xsi:type="kompose:StringLiteral" value="healthwatcher"/>
+  </predirectivesAM>
+</kompose:Composer>

@@ -1,0 +1,373 @@
+package kompose;
+
+require kermeta
+require "http://www.kermeta.org/kompose"
+
+using kermeta::language::structure
+using kermeta::standard
+using kermeta::utils 
+
+/** Any class that instances should be merged ishould inherit 
+ from this class and define operation getSignature */
+aspect abstract class Mergeable
+{
+
+
+   
+	operation getmatchingElements(elements : Collection<Mergeable>) : seq Mergeable[0..*] is do
+		var e1 : Mergeable init self
+		if e1 == void then
+			result := Sequence<Mergeable>.new
+		else
+			result := elements.select{ e2 | 
+				if e2 == void then false else e1.getSignature ==  e2.getSignature end
+			}
+		end
+		
+	end
+
+	operation merge(other : Mergeable, ctx : MergeContext) : Mergeable 
+	pre same_type is self.getMetaClass == other.getMetaClass
+	is do
+
+		var type : Class init self.getMetaClass 
+		result ?= type.new
+		ctx.addObjectComposedTrace(self, other, result)
+	
+		stdio.writeln("-> MERGE " + self.toString + " AND " + other.toString + " -- " + result.toString)
+		
+		var props : Collection<Property> init self.getMetaClass.classDefinition.allAttribute.select{p | not p.isDerived}
+		
+		props.each{ p | 
+			
+			
+			
+			if Mergeable.isSuperTypeOf(p.type)  then 
+			
+			//stdio.writeln("Process Property " + p.name + ":" +  p.type.toString + " is subtype of mergeable")
+			
+					if self.get(p) == void then
+						result.~set(p, other.get(p))
+					else
+						if other.get(p) == void then
+							result.~set(p, self.get(p))
+						else
+						
+							if p.upper != 1 then
+								var ocol1 : Collection<Object> 	ocol1 ?= self.get(p) 
+								var col1 : Collection<Mergeable> init Sequence<Mergeable>.new
+								ocol1.each{ k | 
+									var m : Mergeable	m ?= k
+									col1.add(m)
+								}
+								var ocol2 : Collection<Object> 	ocol2 ?= other.get(p) 
+								var col2 : Collection<Mergeable> init Sequence<Mergeable>.new
+								ocol2.each{ k | 
+									var m : Mergeable	m ?= k
+									col2.add(m)
+								}
+								col1.each{ me | 
+									
+									var matching : Collection<Mergeable> init me.getmatchingElements(col2)
+									var col : Collection<Object>
+									col ?= result.get(p)
+									if matching.size == 0 then
+										
+										col.add(me)
+									else
+										matching.each{ me2 | 
+											if p.isComposite then
+												col.add(me.merge(me2, ctx))
+											else
+												col.add(me)
+											end
+										}
+									end	
+								}
+								
+								col2.each{ me | 
+									
+									var matching : Collection<Mergeable> init me.getmatchingElements(col1)
+									var col : Collection<Object>
+									col ?= result.get(p)
+									if matching.size == 0 then
+										col.add(me)
+									end
+								}
+								
+							
+								
+							else // upper == 1
+								var me1 : Mergeable		me1 ?= self.get(p)
+								var me2 : Mergeable		me2 ?= other.get(p)
+								
+								if me1 == void or me2 == void then
+									//stdio.writeln("WARNING : Elements are not mergeable")
+								else
+									if me1.getSignature == me2.getSignature then
+										if p.isComposite then
+											//stdio.writeln("Recursive merge")
+											result.~set(p, me1.merge(me2, ctx))
+										else
+											result.~set(p, me1)
+										end
+									else
+										//stdio.writeln("ERROR : Elements signature do not match")
+									end
+								end
+							end
+						end
+					end
+
+			else
+				
+				if p.upper == 1 then
+				
+					//stdio.writeln(p.type.toString + " is NOT a subtype of mergeable" )
+					if self.get(p) == void then
+						result.~set(p, other.get(p))
+					else
+						if self.get(p) == void then
+							result.~set(p, self.get(p))
+						else
+							//stdio.writeln("Obj 1 = " + self.get(p).toString)
+							//stdio.writeln("Obj 2 = " + other.get(p).toString)
+							if self.get(p) == other.get(p) then
+								result.~set(p, self.get(p))
+							else
+								//stdio.writeln("WARNING : conflicting value for property " + p.name + " picking the first value")
+								result.~set(p, self.get(p))
+							end
+						end
+					end
+				
+				else // p.upper != 1
+					// TODO : Implement this
+				end
+				
+			end
+		
+		
+		}
+	end
+
+	operation getSignature() : Signature is abstract
+	operation getStringID() : String is abstract
+
+}
+
+/** this class is used to store the traceability between composed models */
+class MergeContext {
+	attribute left : Hashtable<Integer, Mergeable>
+	attribute right : Hashtable<Integer, Mergeable>
+	attribute any : Hashtable<Integer, Mergeable>
+	attribute reverse : Hashtable<Integer, Mergeable>
+	attribute processed : Hashtable<Integer, kermeta::standard::Boolean>
+	attribute comp : Hashtable<Integer, kermeta::standard::Boolean>
+	reference resources: kermeta::persistence::EMFResource[0..*]      
+	attribute objectIndex:String [0..*]
+	
+	 
+	operation initialize() is do
+		left := Hashtable<Integer, Mergeable>.new
+		right := Hashtable<Integer, Mergeable>.new
+		any := Hashtable<Integer, Mergeable>.new
+		reverse := Hashtable<Integer, Mergeable>.new
+		processed := Hashtable<Integer, kermeta::standard::Boolean>.new
+		comp := Hashtable<Integer, kermeta::standard::Boolean>.new
+	end
+	operation resouceContains(element:Object):Boolean is do
+		result:=false
+		self.resources.each{resource|
+			if element.containingResource()==resource then
+				result:=true
+			end
+		}
+	end
+	operation indexate(element:Object): Void is do
+		if self.resouceContains(element) then
+			if not self.objectIndex.contains(element.toString) then
+				self.objectIndex.add(element.toString)
+				var properties : Collection<Property> init element.getMetaClass.classDefinition.allAttribute.select{p | not p.isDerived}
+				properties.each{ p |
+					if p.upper != 1 then
+						var objects : Collection<Object> objects?=element.~get(p)
+						objects.each{obj|self.indexate(obj)}
+					else
+						self.indexate(element.~get(p))
+					end
+				}
+			end
+		end		
+	end
+	
+	operation addObjectComposedTrace(l : Mergeable, r : Mergeable, composed : Mergeable) is do
+		left.put(l.oid(), composed)
+		right.put(r.oid(), composed)
+		reverse.put(composed.oid(), l)
+		comp.put(composed.oid(), true)
+	end
+	
+	operation isComposedObject(composed : Mergeable) : kermeta::standard::Boolean is do
+		result := comp.getValue(composed.oid()) != void
+	end
+	
+	operation getComposedObject(o : Mergeable) : Mergeable is do
+		result := left.getValue(o.oid())
+		if result == void then 
+			result := right.getValue(o.oid())
+		end
+		if result == void then 
+			result := any.getValue(o.oid())
+		end
+	end
+	
+	operation addSimpleTrace(o : Mergeable, r : Mergeable) is do
+		any.put(o.oid(), r)
+		reverse.put(r.oid(), o)
+	end
+	
+	operation getAncestor(r : Mergeable) : Mergeable is do
+		result := reverse.getValue(r.oid())
+	end
+	
+	operation addProcessedElement(e : Mergeable) is do
+		processed.put(e.oid(), true)
+	end
+	
+	operation isProcessed(e : Mergeable) : kermeta::standard::Boolean is do
+		result := processed.getValue(e.oid()) != void
+	end
+}
+
+/** This class contain the "compose" operation that should be used to recusively merge two models from their roots */
+class ModelElementComposer
+{
+
+	reference resources: kermeta::persistence::EMFResource [0..*]    
+	
+	operation compose(m1 : Mergeable, m2 : Mergeable) : Mergeable is do
+		var ctx : MergeContext init MergeContext.new
+		ctx.initialize
+		ctx.resources.addAll(self.resources)
+		ctx.indexate(m1)
+		ctx.indexate(m2)
+		
+		if m1 == void or m2 == void then
+			raise "Model elements are not mergeable"
+		end
+		
+		if m1.getSignature == m2.getSignature then 
+			result := m1.merge(m2, ctx)
+			
+			result := fixReferences(result, ctx)
+			
+			
+		else
+			stdio.writeln("Models not mergeable")
+		end
+		
+	end
+	
+	
+	operation fixReferences(e: Mergeable, ctx : MergeContext) : Mergeable is do
+		//stdio.writeln("Call for " + e.toString)
+		// the object is already processed
+		if ctx.isProcessed(e) then
+			result := e
+			//stdio.write(" processed ")
+		else 
+			if ctx.isComposedObject(e) then	
+				//stdio.writeln("COMPOSED OBJECT " + e.toString)
+				result := e
+			else	
+				// Get the composed object
+				result := ctx.getComposedObject(e)
+				
+				// if no composed object the it has to be created
+				if result == void then 
+					result ?= e.getMetaClass.new
+					//stdio.writeln("NO COMPOSED OBJ FOR " + e.toString + " CREATED " + result.toString)
+					ctx.addSimpleTrace(e, result)
+				else 
+					// if it is a composed object we should process it
+					// and not only one of its ancestors
+					e := result
+				end
+			end
+			//stdio.writeln("Call for " + e.toString + "->" + result.toString)
+			if not ctx.isProcessed(result) then
+			
+				ctx.addProcessedElement(result)
+				
+				// Process the properties of the object
+				var me : Mergeable
+				var mcls : ClassDefinition 
+				var objs : Collection<Object>
+				var objres : Hashtable<Object, Object>
+				mcls ?= e.getMetaClass.typeDefinition
+				// allOwnedAttribute -> allAttribute en nouvelle version
+				mcls.allAttribute.select{ k | not k.isDerived }.each{ p | 
+					if p.upper == 1 then 
+						me ?= e.get(p)
+						//stdio.write("property " + p.name)
+						if me != void then
+							//stdio.writeln(" recurse")
+							if ctx.objectIndex.contains(me.toString()) or ctx.isProcessed(me) or ctx.isComposedObject(me) then
+								result.~set(p, fixReferences(me, ctx)) 
+							else
+								stdio.writeln(" directly on: "+me.toString+" propety:"+p.name)
+								result.~set(p, e.get(p)) 
+							end
+						else
+							result.~set(p, e.get(p)) 
+						end
+						//stdio.writeln(result.toString + "." + p.name + " = " + result.get(p).toString)
+					else
+						objs ?= e.get(p)
+						objres := Hashtable<Object, Object>.new
+						objs.each{ o | 
+							me ?= o
+							if me != void then
+								objres.put(me, fixReferences(me, ctx))
+							end
+						}
+						objs ?= result.get(p)
+						objres.keys.each{ k | 
+							objs.remove(k)
+							objs.add(objres.getValue(k))
+							//stdio.writeln(result.toString + "." + p.name + " + " + objres.getValue(k).toString)
+						}
+						
+						objs ?= result.get(p)
+						
+					end
+				}
+			end
+		end
+	end
+}
+
+/** The superclass for signature the equals operation has to be 
+    defined for each type of signature */
+abstract class Signature
+{
+}
+
+/** Example of signature based on a String */
+class StringSignature inherits Signature
+{
+	attribute sign : String
+	
+	method equals(other : Object ) : Boolean is do
+		var othersign : StringSignature
+		othersign ?= other
+		if othersign != void then
+			result := sign == othersign.sign
+		else
+			result := false
+		end
+	end
+	
+}
+

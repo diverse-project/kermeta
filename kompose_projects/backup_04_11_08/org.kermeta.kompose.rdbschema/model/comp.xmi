@@ -1,0 +1,3 @@
+<?xml version="1.0" encoding="ASCII"?>
+<kompose:Composer xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:kompose="http://www.kermeta.org/kompose.ecore" primaryModelURI="platform:/resource/org.kermeta.kompose.rdbschema/model/input1.xmi" aspectModelURI="platform:/resource/org.kermeta.kompose.rdbschema/model/input2.xmi" composedModelURI="platform:/resource/org.kermeta.kompose.rdbschema/model/output.xmi">
+</kompose:Composer>

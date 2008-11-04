@@ -1,0 +1,25 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Kompose UI Plug-in
+Bundle-SymbolicName: org.kermeta.kompose.ui; singleton:=true
+Bundle-Version: 0.0.1
+Bundle-Activator: org.kermeta.kompose.ui.Activator
+Bundle-Vendor: IRISA / CSU
+Bundle-Localization: plugin
+Require-Bundle: org.eclipse.ui,
+ org.eclipse.core.runtime,
+ org.eclipse.core.resources,
+ org.kermeta.kompose.model,
+ org.eclipse.ui.console,
+ org.eclipse.ui.forms,
+ org.eclipse.ui.ide,
+ org.eclipse.core.filesystem,
+ org.antlr,
+ org.eclipse.emf.ecore.xmi,
+ fr.irisa.triskell.eclipse.util,
+ fr.irisa.triskell.kermeta.interpreter
+Eclipse-LazyStart: true
+Export-Package: kompose.parser,
+ org.kermeta.kompose.ui.console
+Bundle-ClassPath: lib/thirdparty/antlr-2.7.7.jar,
+ .

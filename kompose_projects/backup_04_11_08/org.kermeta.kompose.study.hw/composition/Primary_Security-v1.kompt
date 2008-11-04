@@ -1,0 +1,37 @@
+// Primary Model URI
+PM "platform:/resource/org.kermeta.kompose.study.hw/model/healthwatcher.ecore" 
+
+// Aspect Model URI
+AM "platform:/resource/org.kermeta.kompose.study.hw/model/SecurityAspect-v1.ecore" 
+
+// Composed Model URI
+CM "platform:/resource/org.kermeta.kompose.study.hw/result/Primary_Security-v1.ecore"
+
+// predirectives for primary model
+PMPre { 
+	
+}
+
+// predirectives for aspect model
+AMPre { 
+	SecurityAspect.name = "healthwatcher"
+}
+
+// postdirectives 
+Post {
+	// Add a new association between HealthWatcher and HWSessionManager
+	create Reference as $sessionMgr
+	$sessionMgr.name = "sessionMgr"
+	$sessionMgr.eType = healthwatcher::HWSessionManager
+	$sessionMgr.upperBound = 1
+	$sessionMgr.lowerBound = 1
+	healthwatcher::HealthWatcher.eStructuralFeatures + $sessionMgr
+	
+	// Add a new association between HealthWatcher and AccessControlManager
+	create Reference as $accessMgr
+	$accessMgr.name = "accessMgr"
+	$accessMgr.eType = healthwatcher::AccessControlManager
+	$accessMgr.upperBound = 1
+	$accessMgr.lowerBound = 1
+	healthwatcher::HealthWatcher.eStructuralFeatures + $accessMgr
+}

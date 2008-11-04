@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="ASCII"?>
+<kpm:KPM xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:kpm="http://kpm">
+  <actions extensionPoint="fr.irisa.triskell.kermeta.kpm.actions.unloadContext"/>
+  <actions extensionPoint="fr.irisa.triskell.kermeta.kpm.actions.loadContext"/>
+  <actions extensionPoint="fr.irisa.triskell.kermeta.kpm.actions.typecheck"/>
+  <actions extensionPoint="fr.irisa.triskell.kermeta.kpm.actions.constraintcheck"/>
+  <actions extensionPoint="fr.irisa.triskell.kermeta.kpm.actions.removeDependentDependencies"/>
+  <actions extensionPoint="fr.irisa.triskell.kermeta.kpm.actions.createDependentDependencies"/>
+  <actions extensionPoint="fr.irisa.triskell.kermeta.kpm.actions.finalizeUpdate"/>
+  <actions extensionPoint="fr.irisa.triskell.kermeta.kpm.actions.openProject"/>
+  <actions extensionPoint="fr.irisa.triskell.kermeta.kpm.actions.kmt2km"/>
+  <actions extensionPoint="fr.irisa.triskell.kermeta.kpm.actions.ecore2kmt"/>
+  <filters xsi:type="kpm:NameFilter" regex="*.kmt"/>
+  <filters xsi:type="kpm:NameFilter" regex="*.km"/>
+  <filters xsi:type="kpm:NameFilter" regex="*.ecore"/>
+  <rules event="//@events.0" name="Open Project" type="//@ruleTypes.1">
+    <in>
+      <expression xsi:type="kpm:NullExpression"/>
+    </in>
+    <outs action="//@actions.7">
+      <expression xsi:type="kpm:NullExpression"/>
+    </outs>
+  </rules>
+  <rules event="//@events.1" name="Update KMT File" type="//@ruleTypes.1">
+    <in>
+      <expression xsi:type="kpm:FilterExpression" filter="//@filters.0"/>
+    </in>
+    <outs action="//@actions.0">
+      <expression xsi:type="kpm:NullExpression"/>
+    </outs>
+    <outs action="//@actions.1">
+      <expression xsi:type="kpm:NullExpression"/>
+    </outs>
+    <outs action="//@actions.2">
+      <expression xsi:type="kpm:NullExpression"/>
+    </outs>
+    <outs action="//@actions.3">
+      <expression xsi:type="kpm:NullExpression"/>
+    </outs>
+    <outs action="//@actions.4">
+      <expression xsi:type="kpm:NullExpression"/>
+    </outs>
+    <outs action="//@actions.5">
+      <expression xsi:type="kpm:NullExpression"/>
+    </outs>
+    <outs action="//@actions.6">
+      <expression xsi:type="kpm:NullExpression"/>
+    </outs>
+  </rules>
+  <rules event="//@events.1" name="Update KM File" type="//@ruleTypes.1">
+    <in>
+      <expression xsi:type="kpm:FilterExpression" filter="//@filters.1"/>
+    </in>
+    <outs action="//@actions.0">
+      <expression xsi:type="kpm:NullExpression"/>
+    </outs>
+    <outs action="//@actions.1">
+      <expression xsi:type="kpm:NullExpression"/>
+    </outs>
+    <outs action="//@actions.2">
+      <expression xsi:type="kpm:NullExpression"/>
+    </outs>
+    <outs action="//@actions.3">
+      <expression xsi:type="kpm:NullExpression"/>
+    </outs>
+    <outs action="//@actions.4">
+      <expression xsi:type="kpm:NullExpression"/>
+    </outs>
+    <outs action="//@actions.5">
+      <expression xsi:type="kpm:NullExpression"/>
+    </outs>
+    <outs action="//@actions.6">
+      <expression xsi:type="kpm:NullExpression"/>
+    </outs>
+  </rules>
+  <rules event="//@events.1" name="Update Ecore File" type="//@ruleTypes.1">
+    <in>
+      <expression xsi:type="kpm:FilterExpression" filter="//@filters.2"/>
+    </in>
+    <outs action="//@actions.0">
+      <expression xsi:type="kpm:NullExpression"/>
+    </outs>
+    <outs action="//@actions.1">
+      <expression xsi:type="kpm:NullExpression"/>
+    </outs>
+    <outs action="//@actions.2">
+      <expression xsi:type="kpm:NullExpression"/>
+    </outs>
+    <outs action="//@actions.3">
+      <expression xsi:type="kpm:NullExpression"/>
+    </outs>
+    <outs action="//@actions.4">
+      <expression xsi:type="kpm:NullExpression"/>
+    </outs>
+    <outs action="//@actions.5">
+      <expression xsi:type="kpm:NullExpression"/>
+    </outs>
+    <outs action="//@actions.6">
+      <expression xsi:type="kpm:NullExpression"/>
+    </outs>
+  </rules>
+  <events name="open"/>
+  <events name="update"/>
+  <events name="close"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/RbacAcl"/>
+  <units rules="//@rules.0 //@rules.3" lastTimeModified="2008-03-21T16:27:46.000+0100" value="/RbacAcl/model/RBAC.ecore"/>
+  <units rules="//@rules.0 //@rules.3" lastTimeModified="2008-03-21T16:20:49.000+0100" value="/RbacAcl/model/BLP.ecore"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/RbacAcl/composition/compose.kompt"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/RbacAcl/META-INF/MANIFEST.MF"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/RbacAcl/.project"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/RbacAcl/.classpath"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/RbacAcl/composition/compose.kompose"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/RbacAcl/composition/composeWCD.kompt"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/RbacAcl/composition/composeWCD.kompose"/>
+  <units rules="//@rules.0 //@rules.3" lastTimeModified="2008-03-21T16:53:25.000+0100" value="/RbacAcl/composition/resultWCD.ecore"/>
+  <units rules="//@rules.0 //@rules.3" lastTimeModified="2008-03-21T16:39:58.000+0100" value="/RbacAcl/composition/result.ecore"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/RbacAcl/composition/result.ecoredi"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/RbacAcl/composition/resultWCD.ecoredi"/>
+  <units rules="//@rules.0 //@rules.3" lastTimeModified="2008-03-18T22:10:37.000+0100" value="/RbacAcl/model/BLP_v1.ecore"/>
+  <units rules="//@rules.0 //@rules.3" lastTimeModified="2008-03-19T01:37:59.000+0100" value="/RbacAcl/model/RBAC_v1.ecore"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/RbacAcl/model/BLP.ecoredi"/>
+  <units rules="//@rules.0" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/RbacAcl/model/RBAC.ecoredi"/>
+  <ruleTypes name="require"/>
+  <ruleTypes name="normal"/>
+</kpm:KPM>

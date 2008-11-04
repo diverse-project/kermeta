@@ -1,0 +1,34 @@
+// Primary Model URI
+PM "platform:/resource/HealthWatcherCaseStudy/Primary_Security-v1.ecore" 
+
+// Aspect Model URI
+AM "platform:/resource/HealthWatcherCaseStudy/Persistence_RBACPersistence.ecore" 
+
+// Composed Model URI
+CM "platform:/resource/HealthWatcherCaseStudy/Primary_Security-v1_Persistence_RBACPersistence.ecore"
+
+// predirectives for primary model
+PMPre { 
+	
+}
+
+// predirectives for aspect model
+AMPre { 
+	PersistenceAspect.name = "healthwatcher"
+}
+
+// postdirectives 
+Post {
+	// Remove compositions on DataManager
+	healthwatcher::DataManager.eStructuralFeatures - healthwatcher::DataManager::units
+	healthwatcher::DataManager.eStructuralFeatures - healthwatcher::DataManager::diseases
+	healthwatcher::DataManager.eStructuralFeatures - healthwatcher::DataManager::symptoms
+	healthwatcher::DataManager.eStructuralFeatures - healthwatcher::DataManager::speciatlties
+	healthwatcher::DataManager.eStructuralFeatures - healthwatcher::DataManager::users
+	healthwatcher::DataManager.eStructuralFeatures - healthwatcher::DataManager::complaints
+	
+	// Remove compositions on AccessControlManager
+	healthwatcher::AccessControlManager.eStructuralFeatures - healthwatcher::AccessControlManager::users
+	healthwatcher::AccessControlManager.eStructuralFeatures - healthwatcher::AccessControlManager::permissions
+	healthwatcher::AccessControlManager.eStructuralFeatures - healthwatcher::AccessControlManager::roles
+}

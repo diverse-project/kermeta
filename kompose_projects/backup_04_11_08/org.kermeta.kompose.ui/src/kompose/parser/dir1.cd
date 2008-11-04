@@ -1,0 +1,34 @@
+// predirectives
+pre {
+
+	Package::A::ab.upperBound = 5 
+
+	Package::A.name = "MyClass"
+	
+	create Class as $c
+	$c.name = "C"
+	Package.eClassifiers + $c
+	
+	create Class as $d
+	$d.name  = "D"
+	$d.abstract = true
+	Package.eClassifiers + $d
+	
+	create Operation as $op1
+	$op1.name = "myOperation"
+	$op1.eType = Package::C
+	$d.eOperations + $op1
+	
+	//Package::D::myOperation.name = "renamed"
+	
+	//Package.eClassifiers - Package::B
+	
+	Package::C.eSuperTypes + Package::B
+	
+	
+}
+
+// postdirectives
+post {
+
+}

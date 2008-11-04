@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="ASCII"?>
+<ecore:EPackage xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="healthwatcher"
+    nsURI="healthwatcher.ecore" nsPrefix="healthwatcher">
+  <eClassifiers xsi:type="ecore:EClass" name="Target">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="object" lowerBound="1"
+        eType="#//SecurityTargetObject" defaultValueLiteral="" eOpposite="#//SecurityTargetObject/target"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SecurityTargetObject" abstract="true">
+    <eOperations name="contructor"/>
+    <eOperations name="createPermissions"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="target" lowerBound="1"
+        eType="#//Target" defaultValueLiteral="" eOpposite="#//Target/object"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EDataType" name="Boolean" instanceClassName="java.lang.Boolean"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Address">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="#//String"
+        defaultValueLiteral=""/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="street" eType="#//String"
+        defaultValueLiteral=""/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="city" eType="#//String"
+        defaultValueLiteral=""/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="email" eType="#//String"
+        defaultValueLiteral=""/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ComplaintState" abstract="true"/>
+  <eClassifiers xsi:type="ecore:EClass" name="AnimalComplaint" eSuperTypes="#//Complaint">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="animalType" lowerBound="1"
+        eType="#//String" defaultValueLiteral=""/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="FoodComplaint" eSuperTypes="#//Complaint">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="victimName" lowerBound="1"
+        eType="#//String" defaultValueLiteral=""/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="victim" eType="#//Address"
+        defaultValueLiteral=""/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SpecialComplaint" eSuperTypes="#//Complaint"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Opened" eSuperTypes="#//ComplaintState"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Suspended" eSuperTypes="#//ComplaintState"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Closed" eSuperTypes="#//ComplaintState"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Specialty" eSuperTypes="#//SecurityTargetObject">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="code" eType="#//String"
+        defaultValueLiteral=""/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="description" eType="#//String"
+        defaultValueLiteral=""/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="units" upperBound="-1"
+        eType="#//HealthUnit" defaultValueLiteral="" eOpposite="#//HealthUnit/specialties"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="RoleType"/>
+  <eClassifiers xsi:type="ecore:EEnum" name="OperationType"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Permission">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="operations" upperBound="-1"
+        eType="#//OperationType" defaultValueLiteral=""/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="targets" lowerBound="1"
+        upperBound="-1" eType="#//Target" defaultValueLiteral=""/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="HWRole">
+    <eOperations name="grantPermission"/>
+    <eOperations name="revokePermission"/>
+    <eOperations name="getAllJuniors"/>
+    <eOperations name="getAllSeniors"/>
+    <eOperations name="getAuthorizedUsers"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="roleType" eType="#//RoleType"
+        defaultValueLiteral=""/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="permissions" upperBound="-1"
+        eType="#//Permission" defaultValueLiteral=""/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="#//String"
+        defaultValueLiteral=""/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="seniors" upperBound="-1"
+        eType="#//HWRole" defaultValueLiteral="" eOpposite="#//HWRole/juniors"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="juniors" upperBound="-1"
+        eType="#//HWRole" defaultValueLiteral="" eOpposite="#//HWRole/seniors"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="HealthUnit" eSuperTypes="#//SecurityTargetObject">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="code" eType="#//String"
+        defaultValueLiteral=""/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="description" eType="#//String"
+        defaultValueLiteral=""/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="specialties" upperBound="-1"
+        eType="#//Specialty" defaultValueLiteral="" eOpposite="#//Specialty/units"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DiseaseType" eSuperTypes="#//SecurityTargetObject">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="code" eType="#//String"
+        defaultValueLiteral=""/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="#//String"
+        defaultValueLiteral=""/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="description" eType="#//String"
+        defaultValueLiteral=""/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="duration" eType="#//String"
+        defaultValueLiteral=""/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="symptoms" lowerBound="1"
+        upperBound="-1" eType="#//Symptom" defaultValueLiteral="" eOpposite="#//Symptom/diseases"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="User" abstract="true" eSuperTypes="#//SecurityTargetObject">
+    <eOperations name="checkPassword" lowerBound="1" eType="#//Boolean">
+      <eParameters name="pwd" eType="#//String"/>
+    </eOperations>
+    <eOperations name="changepassword">
+      <eParameters name="pwd" eType="#//String"/>
+    </eOperations>
+    <eOperations name="createSession"/>
+    <eOperations name="deleteSession"/>
+    <eOperations name="assignRole"/>
+    <eOperations name="deassignRole"/>
+    <eOperations name="getAuthorizedRoles"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="#//String"
+        defaultValueLiteral=""/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="loginID" lowerBound="1"
+        eType="#//String" defaultValueLiteral=""/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="address" eType="#//Address"
+        defaultValueLiteral="" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="address" lowerBound="1"
+        eType="#//Address" defaultValueLiteral=""/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="complaints" upperBound="-1"
+        eType="#//Complaint" defaultValueLiteral="" eOpposite="#//Complaint/complainer"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Symptom" eSuperTypes="#//SecurityTargetObject">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="code" eType="#//String"
+        defaultValueLiteral=""/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="description" eType="#//String"
+        defaultValueLiteral=""/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="diseases" upperBound="-1"
+        eType="#//DiseaseType" defaultValueLiteral="" eOpposite="#//DiseaseType/symptoms"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EDataType" name="String" instanceClassName="java.lang.String"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Facade">
+    <eOperations name="updateComplaint"/>
+    <eOperations name="searchSpecialitiesByHealthUnit"/>
+    <eOperations name="searchComplaint"/>
+    <eOperations name="searchDiseaseType"/>
+    <eOperations name="searchHealthUnitsBySpeciality"/>
+    <eOperations name="getSpecialityList"/>
+    <eOperations name="getDiseaseTypeList"/>
+    <eOperations name="getHealthUnitList"/>
+    <eOperations name="getPartialHealthUnitList"/>
+    <eOperations name="insertComplaint"/>
+    <eOperations name="updateHealthUnit"/>
+    <eOperations name="getComplaintList"/>
+    <eOperations name="insertEmployee"/>
+    <eOperations name="updateEmployee"/>
+    <eOperations name="searchEmployee"/>
+    <eOperations name="searchHealthUnit"/>
+    <eOperations name="addAccess"/>
+    <eOperations name="dropAccess"/>
+    <eOperations name="checkAccess"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="roles" lowerBound="1" upperBound="-1"
+        eType="#//HWRole" defaultValueLiteral=""/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="user" lowerBound="1" eType="#//User"
+        defaultValueLiteral=""/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Complaint" abstract="true" eSuperTypes="#//SecurityTargetObject">
+    <eOperations name="update"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="description" lowerBound="1"
+        eType="#//String" defaultValueLiteral=""/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="observations" eType="#//String"
+        defaultValueLiteral=""/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="state" lowerBound="1" eType="#//ComplaintState"
+        defaultValueLiteral=""/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="date" lowerBound="1" eType="#//String"
+        defaultValueLiteral=""/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="location" eType="#//Address"
+        defaultValueLiteral="" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="complainer" lowerBound="1"
+        eType="#//User" defaultValueLiteral="" eOpposite="#//User/complaints"/>
+  </eClassifiers>
+</ecore:EPackage>

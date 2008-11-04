@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.2"?>
+<plugin>
+   <extension
+         id="org.kermeta.kompose.newWizard"
+         name="Kompose Samples Wizard"
+         point="org.eclipse.ui.newWizards">
+      <category
+            id="org.kermeta.kompose.samplesCategory"
+            name="Kompose Samples"
+            parentCategory="org.eclipse.ui.Examples"/>
+      <wizard
+      		canFinishEarly="true"
+      		hasPages="false"
+            category="org.eclipse.ui.Examples/org.kermeta.kompose.samplesCategory"
+            class="org.kermeta.kompose.samples.KomposeSamplesWizard"
+            id="org.kermeta.kompose.samples.KomposeSampleWizard"
+            name="Kompose Samples Wizard"/>
+   </extension>
+
+</plugin>

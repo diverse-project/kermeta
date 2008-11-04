@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.2"?>
+<plugin>
+
+   <extension
+         point="org.eclipse.ui.newWizards">
+      <category
+            name="Kompose specialization Wizards"
+            id="org.kermeta.kompose.creative">
+      </category>
+      <wizard
+            category="org.kermeta.kompose.creative"
+            class="org.kermeta.kompose.creative.wizards.SpecializeWizard"
+            icon="icons/sample.gif"
+            id="org.kermeta.kompose.creative.wizards.SpecializationWizard"
+            name="Kompose specialization">
+      </wizard>
+   </extension>
+
+</plugin>

@@ -1,0 +1,266 @@
+<?xml version="1.0" encoding="ASCII"?>
+<ecore:EPackage xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="healthwatcher"
+    nsURI="healthwatcher.ecore" nsPrefix="healthwatcher">
+  <eClassifiers xsi:type="ecore:EEnum" name="OperationType"/>
+  <eClassifiers xsi:type="ecore:EEnum" name="RoleType"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Target">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="permissions" upperBound="-1"
+        eType="#//Permission" eOpposite="#//Permission/targets"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="object" lowerBound="1"
+        eType="#//ProtectedTarget" eOpposite="#//ProtectedTarget/target"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ProtectedTarget" abstract="true">
+    <eOperations name="contructor"/>
+    <eOperations name="createPermissions"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="target" lowerBound="1"
+        eType="#//Target" eOpposite="#//Target/object"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EDataType" name="Boolean" instanceClassName="java.lang.Boolean"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Address">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="#//String"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="street" eType="#//String"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="city" eType="#//String"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="email" eType="#//String"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ComplaintState" abstract="true"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ComplaintPM">
+    <eOperations name="getAllComplaint"/>
+    <eOperations name="getComplaintByID"/>
+    <eOperations name="insertComplaint"/>
+    <eOperations name="updateComplaint"/>
+    <eOperations name="deleteComplaint"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="HealthUnitPM">
+    <eOperations name="getAllHealthUnit"/>
+    <eOperations name="getHealthUnitByID"/>
+    <eOperations name="insertHealthUnit"/>
+    <eOperations name="updateHealthUnit"/>
+    <eOperations name="deleteHealthUnit"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SpecialtyPM">
+    <eOperations name="getAllSpecialty"/>
+    <eOperations name="getSpecialtyByID"/>
+    <eOperations name="insertSpecialty"/>
+    <eOperations name="updateSpecialty"/>
+    <eOperations name="deleteSpecialty"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DiseaseTypePM">
+    <eOperations name="getAllDiseaseType"/>
+    <eOperations name="getDiseaseTypeByID"/>
+    <eOperations name="insertDiseaseType"/>
+    <eOperations name="updateDiseaseType"/>
+    <eOperations name="deleteDiseaseType"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SymptomPM">
+    <eOperations name="getAllSymptom"/>
+    <eOperations name="getSymptomByID"/>
+    <eOperations name="insertSymptom"/>
+    <eOperations name="updateSymptom"/>
+    <eOperations name="deleteSymptom"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="HWRolePM">
+    <eOperations name="getAllRoles"/>
+    <eOperations name="getRoleByID"/>
+    <eOperations name="insertRole"/>
+    <eOperations name="updateRole"/>
+    <eOperations name="deleteRole"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="PermissionPM">
+    <eOperations name="getAllPermissions"/>
+    <eOperations name="getPermissionByID"/>
+    <eOperations name="insertPermission"/>
+    <eOperations name="updatePermission"/>
+    <eOperations name="deletePermission"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="HWUserPM">
+    <eOperations name="insertUser"/>
+    <eOperations name="deleteUser"/>
+    <eOperations name="updateUser"/>
+    <eOperations name="getUserByID"/>
+    <eOperations name="getAllUsers"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AccessControlManager">
+    <eOperations name="createUser"/>
+    <eOperations name="createRole"/>
+    <eOperations name="createPermission"/>
+    <eOperations name="assignPermission"/>
+    <eOperations name="deleteUser"/>
+    <eOperations name="deassignUserRole"/>
+    <eOperations name="assignUserRole"/>
+    <eOperations name="deletePermission"/>
+    <eOperations name="deleteRole"/>
+    <eOperations name="deassignPermission"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="HealthWatcher">
+    <eOperations name="registerUser"/>
+    <eOperations name="createSession"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="datamanager" lowerBound="1"
+        eType="#//DataManager"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="sessionMgr" lowerBound="1"
+        eType="#//HWSessionManager"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="accessMgr" lowerBound="1"
+        eType="#//AccessControlManager"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="HWSession">
+    <eOperations name="updateComplaint"/>
+    <eOperations name="searchSpecialitiesByHealthUnit"/>
+    <eOperations name="searchComplaint"/>
+    <eOperations name="searchDiseaseType"/>
+    <eOperations name="searchHealthUnitsBySpeciality"/>
+    <eOperations name="getSpecialityList"/>
+    <eOperations name="getDiseaseTypeList"/>
+    <eOperations name="getHealthUnitList"/>
+    <eOperations name="getPartialHealthUnitList"/>
+    <eOperations name="insertComplaint"/>
+    <eOperations name="updateHealthUnit"/>
+    <eOperations name="getComplaintList"/>
+    <eOperations name="insertEmployee"/>
+    <eOperations name="updateEmployee"/>
+    <eOperations name="searchEmployee"/>
+    <eOperations name="searchHealthUnit"/>
+    <eOperations name="addActiveRole"/>
+    <eOperations name="dropActiveRole"/>
+    <eOperations name="checkAccess"/>
+    <eOperations name="assignUser"/>
+    <eOperations name="getAllActiveRoles"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="user" lowerBound="1" eType="#//HWUser"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="roles" lowerBound="1" upperBound="-1"
+        eType="#//HWRole" eOpposite="#//HWRole/sessions"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="mgr" lowerBound="1" eType="#//HWSessionManager"
+        eOpposite="#//HWSessionManager/sessions"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="HWSessionManager">
+    <eOperations name="createSession"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="sessions" upperBound="-1"
+        eType="#//HWSession" eOpposite="#//HWSession/mgr"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AnimalComplaint" eSuperTypes="#//Complaint">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="animalType" lowerBound="1"
+        eType="#//String"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="FoodComplaint" eSuperTypes="#//Complaint">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="victimName" lowerBound="1"
+        eType="#//String"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="victim" eType="#//Address"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SpecialComplaint" eSuperTypes="#//Complaint"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Opened" eSuperTypes="#//ComplaintState"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Suspended" eSuperTypes="#//ComplaintState"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Closed" eSuperTypes="#//ComplaintState"/>
+  <eClassifiers xsi:type="ecore:EClass" name="HealthUnit" eSuperTypes="#//ProtectedTarget">
+    <eOperations name="getSpecialties"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="description" eType="#//String"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="specialties" upperBound="-1"
+        eType="#//Specialty" eOpposite="#//Specialty/units"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="code" eType="#//String"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DataManager">
+    <eOperations name="getUserByID"/>
+    <eOperations name="updateUser"/>
+    <eOperations name="insertUser"/>
+    <eOperations name="getComplaintByID"/>
+    <eOperations name="updateComplaint"/>
+    <eOperations name="insertComplaint"/>
+    <eOperations name="etc"/>
+    <eOperations name="rollbackTransaction"/>
+    <eOperations name="getConnexion"/>
+    <eOperations name="commitTransaction"/>
+    <eOperations name="beginTransaction"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="complaintPM" lowerBound="1"
+        eType="#//ComplaintPM" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="healthUnitPM" lowerBound="1"
+        eType="#//HealthUnitPM" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="specialtyPM" lowerBound="1"
+        eType="#//SpecialtyPM" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="diseaseTypePM" lowerBound="1"
+        eType="#//DiseaseTypePM" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="symptomPM" lowerBound="1"
+        eType="#//SymptomPM" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="rolePM" lowerBound="1"
+        eType="#//HWRolePM" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="permissionPM" lowerBound="1"
+        eType="#//PermissionPM" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="userPM" lowerBound="1"
+        eType="#//HWUserPM" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DiseaseType" eSuperTypes="#//ProtectedTarget">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="#//String"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="description" eType="#//String"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="duration" eType="#//String"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="symptoms" lowerBound="1"
+        upperBound="-1" eType="#//Symptom" eOpposite="#//Symptom/diseases"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="code" eType="#//String"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EDataType" name="String" instanceClassName="java.lang.String"/>
+  <eClassifiers xsi:type="ecore:EClass" name="HWRole">
+    <eOperations name="grantPermission"/>
+    <eOperations name="revokePermission"/>
+    <eOperations name="checkAccess"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="roleType" eType="#//RoleType"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="#//String"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="sessions" upperBound="-1"
+        eType="#//HWSession" eOpposite="#//HWSession/roles"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="assignedUsers" upperBound="-1"
+        eType="#//HWUser" eOpposite="#//HWUser/authroles"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="code" lowerBound="1" eType="#//String"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="permissions" upperBound="-1"
+        eType="#//Permission" eOpposite="#//Permission/roles"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Permission">
+    <eOperations name="checkAccess"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="operations" upperBound="-1"
+        eType="#//OperationType"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="roles" upperBound="-1"
+        eType="#//HWRole" eOpposite="#//HWRole/permissions"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="code" lowerBound="1" eType="#//String"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="targets" lowerBound="1"
+        upperBound="-1" eType="#//Target" eOpposite="#//Target/permissions"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Specialty" eSuperTypes="#//ProtectedTarget">
+    <eOperations name="getUnits"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="description" eType="#//String"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="code" eType="#//String"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="units" upperBound="-1"
+        eType="#//HealthUnit" eOpposite="#//HealthUnit/specialties"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="HWUser" eSuperTypes="#//ProtectedTarget">
+    <eOperations name="checkPassword" lowerBound="1" eType="#//Boolean">
+      <eParameters name="pwd" eType="#//String"/>
+    </eOperations>
+    <eOperations name="changepassword">
+      <eParameters name="pwd" eType="#//String"/>
+    </eOperations>
+    <eOperations name="getAuthorizedRoles"/>
+    <eOperations name="getAssignedRoles"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="#//String"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="address" eType="#//Address"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="complaints" upperBound="-1"
+        eType="#//Complaint"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="healthwatcher" lowerBound="1"
+        eType="#//HealthWatcher"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="authroles" upperBound="-1"
+        eType="#//HWRole" eOpposite="#//HWRole/assignedUsers"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="loginID" lowerBound="1"
+        eType="#//String"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Symptom" eSuperTypes="#//ProtectedTarget">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="description" eType="#//String"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="code" eType="#//String"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="diseases" upperBound="-1"
+        eType="#//DiseaseType" eOpposite="#//DiseaseType/symptoms"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Complaint" abstract="true" eSuperTypes="#//ProtectedTarget">
+    <eOperations name="update"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="description" lowerBound="1"
+        eType="#//String"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="observations" eType="#//String"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="state" lowerBound="1" eType="#//ComplaintState"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="date" lowerBound="1" eType="#//String"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="location" eType="#//Address"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="code" lowerBound="1" eType="#//String"/>
+  </eClassifiers>
+</ecore:EPackage>

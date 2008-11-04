@@ -1,0 +1,15 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Samples Plug-in
+Bundle-SymbolicName: org.kermeta.kompose.specialization.samples;singleton:=true
+Bundle-Version: 1.0.0
+Bundle-Activator: org.kermeta.kompose.specialization.samples.Activator
+Bundle-Localization: plugin
+Require-Bundle: org.eclipse.ui,
+ org.eclipse.core.runtime,
+ org.eclipse.core.resources,
+ org.eclipse.pde,
+ org.eclipse.jdt.core,
+ org.eclipse.jdt,
+ org.eclipse.pde.core
+Eclipse-LazyStart: true

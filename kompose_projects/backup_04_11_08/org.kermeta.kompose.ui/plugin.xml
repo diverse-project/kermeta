@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.2"?>
+<plugin>
+
+   <extension
+         point="org.eclipse.ui.popupMenus">
+      <objectContribution
+            objectClass="org.eclipse.core.resources.IFile"
+            nameFilter="*.kompt"
+            id="org.kermeta.kompose.ui.contribution1">
+         <menu
+               label="Kompose"
+               path="additions"
+               id="org.kermeta.kompose.ui.menu1">
+            <separator
+                  name="group1">
+            </separator>
+         </menu>
+         <action
+               label="Parse Kompose File"
+               class="org.kermeta.kompose.ui.popup.actions.ParseKompose"
+               menubarPath="org.kermeta.kompose.ui.menu1/group1"
+               enablesFor="1"
+               id="org.kermeta.kompose.ui.newAction">
+         </action>
+      </objectContribution>
+      <objectContribution
+            adaptable="true"
+            id="org.kermeta.kompose.ui.ecore.mergecontribution"
+            nameFilter="*.ecore"
+            objectClass="org.eclipse.core.resources.IFile">
+         <menu
+               id="org.kermeta.experimental"
+               label="Kermeta Experimental"
+               path="additions">
+            <groupMarker
+                  name="org.kermeta.ecore">
+            </groupMarker>
+         </menu>
+         <action
+               class="org.kermeta.kompose.ecore.ui.MergeEcoreAction"
+               enablesFor="2+"
+               id="org.kermeta.kompose.ui.ecore.merge.action"
+               label="Merge Ecore"
+               menubarPath="org.kermeta.experimental/org.kermeta.ecore">
+         </action>
+      </objectContribution>
+   </extension>
+
+</plugin>

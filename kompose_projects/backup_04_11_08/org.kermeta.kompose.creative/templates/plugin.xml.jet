@@ -1,0 +1,38 @@
+<%@ jet package="org.kermeta.kompose.creative.generator.template"
+
+imports="org.kermeta.kompose.creative.wizards.SpecializerIntermediateDataContainer"
+
+class="PluginXMLGenerator"
+%>
+<% SpecializerIntermediateDataContainer data=(SpecializerIntermediateDataContainer)argument; %>
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.2"?>
+<plugin>
+   <extension
+         point="org.eclipse.ui.popupMenus">
+      <objectContribution
+            objectClass="org.eclipse.core.resources.IFile"
+            nameFilter="*.kompose"
+            id="<%=data.getPackage_name()%>.contribution1">
+         <menu
+               label="Kompose"
+               path="additions"
+               id="<%=data.getPackage_name()%>.menu1">
+            <separator
+                  name="group1">
+            </separator>
+         </menu>
+         <action
+               label="Compose Models (<%=data.getModel_name()%>)"
+               class="<%=data.getPopupPackage()%>.Composer"
+               menubarPath="<%=data.getPackage_name()%>.menu1/group1"
+               enablesFor="1"
+               id="<%=data.getPackage_name()%>.newAction">
+         </action>
+      </objectContribution>
+   </extension>
+   <extension
+         point="org.eclipse.ui.startup">
+      <startup class="<%=data.getStartupPackage()%>.RegisterStartup"/>
+   </extension>
+</plugin>

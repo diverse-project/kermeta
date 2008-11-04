@@ -1,0 +1,133 @@
+package rdbschema;
+
+require kermeta
+require "rdbschema.kmt"
+require "../../org.kermeta.kompose.model/kermeta/kompose.kmt"
+
+using kermeta::reflection
+using kermeta::standard
+using kermeta::utils
+using kermeta::persistence
+
+// 1) Definition of the specific composer
+
+class RDBSchemaComposer inherits kompose::Composer
+{
+
+	operation allContents() : Set<Object> is do
+		result := Set<Object>.new
+		self.getMetaClass.typeDefinition.asType(ClassDefinition).allCompositeAttribute.each{ p |
+			if p.upper == 1 then 
+				result.add(self.get(p))
+			else
+				self.get(p).asType(Collection<kermeta::reflection::Object>).each{o | result.add(o) }
+			end
+		}
+	end
+
+	method loadModel(path : String) : kompose::Mergeable is do
+		stdio.writeln("\nLoad rdbschema Model : " )
+    	var resource : kermeta::persistence::EMFResource             
+   		var repository : EMFRepository init EMFRepository.new             
+       	resource ?= repository.createResource(path, "http://www.kermeta.org/rdbschema.ecore")
+        resource.load
+       result ?= resource.instances.one
+       result.asType(RDBMSModel).print
+   end
+   
+   method saveModel(model : kompose::Mergeable, uri : String) is do
+   		var resource : kermeta::persistence::EMFResource             
+   		var repository : EMFRepository init EMFRepository.new
+   		resource ?= repository.createResource(uri, "http://www.kermeta.org/rdbschema.ecore")
+        resource.instances.add(model)
+        resource.save
+   end
+   
+   method createContext(model : kompose::Mergeable) : kompose::Context is do
+   		result := super(model)
+   		result.classes.put("Table", Table)
+		result.classes.put("Column", Column)
+		result.classes.put("FKey", FKey)
+   end
+}
+
+// 2) Definition of specific signature classes
+
+// NONE
+
+// 3) Extentions to the ecore metamodel
+
+@aspect "true"
+class NamedElement inherits kompose::Mergeable
+{
+	method getSignature() : kompose::Signature is do
+		var s : kompose::StringSignature init 
+			kompose::StringSignature.new
+		s.sign := name
+		result := s
+	end
+	
+	method getStringID() : String is do
+		result := name
+	end
+}
+
+@aspect "true"
+class FKey inherits kompose::Mergeable
+{
+	method getSignature() : kompose::Signature is do
+		var s : kompose::StringSignature init 
+			kompose::StringSignature.new
+		s.sign := oid.toString
+		result := s
+	end
+	
+	method getStringID() : String is do
+		result := oid.toString
+	end
+}
+
+@aspect "true"
+class RDBMSModel inherits kompose::Mergeable
+{
+	method getSignature() : kompose::Signature is do
+		var s : kompose::StringSignature init 
+			kompose::StringSignature.new
+		s.sign := ""
+		result := s
+	end
+	
+	method getStringID() : String is do
+		result := ""
+	end
+}
+
+// 4) the Main
+
+class Main
+{
+	operation main(uri : String) : kompose::Mergeable is do
+		var c : kompose::Composer init loadComposer(uri)
+		result := c.compose
+	end
+	
+	operation loadComposer(path : String) : RDBSchemaComposer is do
+		var resource : kermeta::persistence::EMFResource             
+   		var repository : EMFRepository init EMFRepository.new             
+       	resource ?= repository.createResource(path, "http://www.kermeta.org/kompose.ecore")
+        resource.load
+        var c : kompose::Composer
+        c ?= resource.instances.one
+        // Convert the loaded composer to an ecore composer
+        // This is not nice, we should find some other design
+        
+        result := RDBSchemaComposer.new
+        result.predirectivesPM.addAll(c.predirectivesPM)
+        result.predirectivesAM.addAll(c.predirectivesAM)
+        result.postdirectives.addAll(c.postdirectives)
+        result.primaryModelURI := c.primaryModelURI
+        result.aspectModelURI := c.aspectModelURI
+        result.composedModelURI := c.composedModelURI
+	end
+}
+

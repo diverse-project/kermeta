@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="ASCII"?>
+<rdbschema:RDBMSModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:rdbschema="http://www.kermeta.org/rdbschema.ecore">
+  <table name="Order" pkey="//@table.0/@cols.1">
+    <cols name="userIDx" type="Varchar(10)"/>
+    <cols name="orderID" type="Integer"/>
+    <fkeys references="//@table.1" cols="//@table.0/@cols.0"/>
+  </table>
+  <table name="User" pkey="//@table.1/@cols.1">
+    <cols name="firstName" type="VarChar(20)"/>
+    <cols name="userID" type="Varchar(10)"/>
+    <cols name="lastName" type="VarChar(20)"/>
+    <cols name="password" type="Varchar(20)"/>
+    <cols name="groupIDRef" type="Integer"/>
+    <fkeys references="//@table.4" cols="//@table.1/@cols.4"/>
+  </table>
+  <table name="Product" pkey="//@table.2/@cols.0">
+    <cols name="productID" type="Integer"/>
+  </table>
+  <table name="OrderProduct" pkey="//@table.3/@cols.1 //@table.3/@cols.2">
+    <cols name="quantity" type="Integer"/>
+    <cols name="productIDx" type="Integer"/>
+    <cols name="orderIDx" type="Integer"/>
+    <fkeys references="//@table.2" cols="//@table.3/@cols.1"/>
+    <fkeys references="//@table.0" cols="//@table.3/@cols.2"/>
+  </table>
+  <table name="Group" pkey="//@table.4/@cols.0">
+    <cols name="groupID" type="Integer"/>
+    <cols name="name" type="Varchar(20)"/>
+  </table>
+</rdbschema:RDBMSModel>

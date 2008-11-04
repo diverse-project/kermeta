@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<ecore:EPackage xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="RBACPersistenceAspect"
+    nsURI="http://PersistenceAspect" nsPrefix="PersistenceAspect">
+  <eClassifiers xsi:type="ecore:EClass" name="DataManager">
+    <eOperations name="getConnexion"/>
+    <eOperations name="beginTransaction"/>
+    <eOperations name="commitTransaction"/>
+    <eOperations name="rollbackTransaction"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="userPM" lowerBound="1"
+        eType="#//HWUserPM" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="rolePM" lowerBound="1"
+        eType="#//HWRolePM" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="permissionPM" lowerBound="1"
+        eType="#//PermissionPM" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="HWUserPM">
+    <eOperations name="getAllUsers"/>
+    <eOperations name="getUserByID"/>
+    <eOperations name="insertUser"/>
+    <eOperations name="updateUser"/>
+    <eOperations name="deleteUser"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="HWUser">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="loginID" lowerBound="1"
+        eType="#//String"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EDataType" name="String" instanceClassName="java.lang.String"/>
+  <eClassifiers xsi:type="ecore:EClass" name="HWRole">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="code" lowerBound="1" eType="#//String"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="HWRolePM">
+    <eOperations name="getAllRoles"/>
+    <eOperations name="getRoleByID"/>
+    <eOperations name="insertRole"/>
+    <eOperations name="updateRole"/>
+    <eOperations name="deleteRole"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Permission">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="code" lowerBound="1" eType="#//String"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="PermissionPM">
+    <eOperations name="getAllPermissions"/>
+    <eOperations name="getPermissionByID"/>
+    <eOperations name="insertPermission"/>
+    <eOperations name="updatePermission"/>
+    <eOperations name="deletePermission"/>
+  </eClassifiers>
+</ecore:EPackage>

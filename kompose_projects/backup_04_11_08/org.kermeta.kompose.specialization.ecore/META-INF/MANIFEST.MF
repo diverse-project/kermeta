@@ -1,0 +1,18 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Kompose Specialization Composition Plug-in (Ecore Example)
+Bundle-SymbolicName: org.kermeta.kompose.specialization.ecore; singleton:=true
+Bundle-Version: 0.0.1
+Bundle-Activator: org.kermeta.kompose.specialization.ecore.Activator
+Bundle-Vendor: kermeta.org
+Require-Bundle: org.eclipse.ui,
+ org.eclipse.core.runtime,
+ org.eclipse.core.resources,
+ org.kermeta.kompose.ui,
+ org.kermeta.kompose.model,
+ fr.irisa.triskell.kermeta.io,
+ fr.irisa.triskell.kermeta.interpreter,
+ org.kermeta.io.loader
+Eclipse-LazyStart: false
+Export-Package: org.kermeta.kompose.specialization.ecore,
+ org.kermeta.kompose.specialization.ecore.popup.actions

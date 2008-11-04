@@ -1,0 +1,27 @@
+@mainClass "rdbschema::SimpleTest"
+@mainOperation "main"
+
+
+package rdbschema;
+
+require "../kermeta/rdbschema_composition.kmt"
+require kermeta
+
+using kermeta::reflection
+using kermeta::standard
+using kermeta::utils
+using kermeta::persistence
+
+class SimpleTest
+{
+	operation main() : Void is do 
+		var composer : Main init Main.new
+		var out : RDBMSModel init
+			composer.main("platform:/resource/org.kermeta.kompose.rdbschema/model/comp.xmi").asType(RDBMSModel)
+		
+		stdio.writeln("\nHere is the model to be saved :")
+		
+		out.print
+        
+	end
+}

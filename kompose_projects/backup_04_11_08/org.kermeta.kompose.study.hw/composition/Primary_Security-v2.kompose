@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="ASCII"?>
+<kompose:Composer xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:kompose="http://www.kermeta.org/kompose" primaryModelURI="platform:/resource/org.kermeta.kompose.study.hw/model/healthwatcher.ecore" aspectModelURI="platform:/resource/org.kermeta.kompose.study.hw/model/SecurityAspect-v1.ecore" composedModelURI="platform:/resource/org.kermeta.kompose.study.hw/result/Primary_Security-v2.ecore">
+  <predirectivesAM xsi:type="kompose:Set" propertyName="name">
+    <target xsi:type="kompose:NameRef" qname="SecurityAspect::HWSessionManager"/>
+    <value xsi:type="kompose:StringLiteral" value="HealthWatcher"/>
+  </predirectivesAM>
+  <predirectivesAM xsi:type="kompose:Set" propertyName="name">
+    <target xsi:type="kompose:NameRef" qname="SecurityAspect"/>
+    <value xsi:type="kompose:StringLiteral" value="healthwatcher"/>
+  </predirectivesAM>
+</kompose:Composer>

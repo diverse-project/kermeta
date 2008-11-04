@@ -1,0 +1,23 @@
+// Primary Model URI
+PM "platform:/resource/org.kermeta.kompose.study.hw/model/healthwatcher.ecore" 
+
+// Aspect Model URI
+AM "platform:/resource/org.kermeta.kompose.study.hw/model/PersistenceAspect.ecore" 
+
+// Composed Model URI
+CM "platform:/resource/org.kermeta.kompose.study.hw/result/Primary_Security.ecore"
+
+// predirectives for primary model
+PMPre { 
+	
+}
+
+// predirectives for aspect model
+AMPre { 
+	PersistenceAspect.name = "healthwatcher"
+}
+
+// postdirectives 
+Post {
+	// TODO : Delete compositions
+}

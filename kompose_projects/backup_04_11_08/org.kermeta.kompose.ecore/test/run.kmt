@@ -1,0 +1,79 @@
+/* $Id: run.kmt,v 1.1.1.1 2008-11-04 08:27:28 mclavreu Exp $
+ * Creation date: December 12, 2007
+ * License:
+ * Copyright:
+ * Authors:
+ */
+@mainClass "test_kompose::Main"
+@mainOperation "main"
+
+package test_kompose;
+
+require kermeta
+require "../kermeta/ecore_composition.kmt"
+
+using kermeta::reflection
+using kermeta::standard
+using kermeta::utils
+using kermeta::persistence
+using ecore
+
+class Main
+{
+	operation main() is do 
+		var	res : EPackage
+		var loader : ecore::Main init ecore::Main.new
+		var c : kompose::Composer init loader.loadComposer("platform:/resource/org.kermeta.kompose.ecore/test/blp.xmi")
+		res ?= c.compose
+		stdio.writeln("Composed model : ")
+		printModel(res)
+	end
+	
+	operation printModel(p : EPackage) is do
+    	
+    	// Print the package
+    	stdio.writeln("package " + p.name)
+    	// Print the classes
+    	p.eClassifiers.each{ e | 
+    		var c : EClass		c ?= e
+    		var d : EDataType	d ?= e
+    		if c != void then
+    			stdio.writeln("  class " + c.name.toString + " (oid=" + c.oid.toString + ")")
+    			// Print Attributes and References
+    			c.eStructuralFeatures.each{ p | 
+    				var s : EAttribute		s ?= p
+    				var r : EReference		r ?= p
+    				if r != void then 
+    					stdio.write("    ref  " + r.name.toString)
+    					stdio.write(" : " + r.eType.name + "[" + r.lowerBound.toString + ".." + r.upperBound.toString +"] oid=" + r.eType.oid.toString)
+    					if r.eOpposite != void then 
+    						stdio.write(" opposite of " + r.eOpposite.name)
+    					end
+    					stdio.writeln("")
+    				else
+    					stdio.write("    attr " + s.name.toString)
+    					stdio.writeln(" : " + s.eType.name)
+    				end
+    			}
+    			//Print Operations
+    			c.eOperations.each{ o | 
+    				stdio.write("    op   " + o.name + "(")
+    				o.eParameters.each{ p | 
+    					stdio.write(p.name + " : " + p.eType.name + " ")
+    				}
+    				stdio.write(")")
+    				if o.eType != void then
+    					stdio.write(" : " + o.eType.name +"(oid=" + o.eType.oid.toString + ") [eGenericType.eClassifier.oid="+ o.eGenericType.eClassifier.oid.toString + "]")
+    				end
+    				stdio.writeln("")
+    			}
+    			
+    			
+    		else
+    			stdio.writeln("  datatype " + d.name)
+    		end
+    	
+    	}
+    
+    end
+}
