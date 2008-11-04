@@ -1,4 +1,4 @@
-/*$Id: KPMPreferenceHelper.java,v 1.1 2008-09-24 09:58:49 dvojtise Exp $
+/*$Id: KPMPreferenceHelper.java,v 1.2 2008-11-04 12:24:32 dvojtise Exp $
 * Project : fr.irisa.triskell.kermeta.kpm
 * File : 	KPMPreferenceHelper.java
 * License : EPL
@@ -16,7 +16,11 @@ import org.eclipse.emf.common.util.EList;
 import org.kermeta.kpm.KPMPlugin;
 
 public class KPMPreferenceHelper {
-	public static EList<String> getExcludedExtensions(){
+	/**
+	 * Returns the list of patterns that should be excluded that are stored in the preference string
+	 * @return
+	 */
+	public static EList<String> getExcludedFilePatterns(){
 		EList<String> excludedExtensions = new BasicEList<String>();
 		String allExtensions = KPMPlugin.getDefault().getPreferenceStore().getString(PreferenceConstants.P_EXCLUDED_EXTENSIONS);
 		String[] sArray = allExtensions.split(" |\n");

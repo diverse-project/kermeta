@@ -1,4 +1,4 @@
-/* $Id: PreferenceInitializer.java,v 1.1 2008-09-24 09:58:49 dvojtise Exp $
+/* $Id: PreferenceInitializer.java,v 1.2 2008-11-04 12:24:32 dvojtise Exp $
  * Project: KPM UI
  * File: KPMPreferenceInitializer.java
  * License: EPL
@@ -27,7 +27,7 @@ public class PreferenceInitializer extends AbstractPreferenceInitializer {
 	public void initializeDefaultPreferences() {
 		IPreferenceStore store = KPMPlugin.getDefault().getPreferenceStore();
 		store.setDefault(PreferenceConstants.P_EXCLUDED_EXTENSIONS,
-				"*.class\n*.java\n\n\n");
+				"*.class\n*.java\n/.JETEmitters/*\n\n");
 	}
 
 }

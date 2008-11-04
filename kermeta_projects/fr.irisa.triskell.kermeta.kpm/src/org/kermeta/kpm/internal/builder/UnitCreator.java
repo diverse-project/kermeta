@@ -1,6 +1,6 @@
 
 
-/*$Id: UnitCreator.java,v 1.6 2008-09-24 09:58:49 dvojtise Exp $
+/*$Id: UnitCreator.java,v 1.7 2008-11-04 12:24:32 dvojtise Exp $
 * Project : fr.irisa.triskell.kermeta.kpm
 * File : 	UnitCreator.java
 * License : EPL
@@ -102,8 +102,8 @@ abstract public class UnitCreator {
 		//Code to filter the *.java and *.class files
 		if ( resource instanceof IFile ) {
 			file = (IFile) resource;
-			String fileName = file.getName();
-			for(String pattern : KPMPreferenceHelper.getExcludedExtensions()){
+			String fileName = file.getFullPath().toString();
+			for(String pattern : KPMPreferenceHelper.getExcludedFilePatterns()){
 				if(fileName.matches(EscapeChars.forSimpleRegex(pattern)))
 					return null;
 			}			
