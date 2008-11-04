@@ -1,6 +1,13 @@
 package org.kermeta.compil.runtime.helper.basetypes;
 
+import kermeta.exceptions.CallOnVoidTarget;
+import kermeta.exceptions.ExceptionsFactory;
 import kermeta.language.structure.Class;
+import kermeta.standard.helper.IntegerWrapper;
+import kermeta.standard.helper.RealWrapper;
+
+import org.kermeta.compil.runtime.helper.error.KRuntimeError;
+import org.kermeta.compil.runtime.helper.language.ObjectUtil;
 
 public class RealUtil {
 
@@ -86,5 +93,48 @@ public class RealUtil {
 	}
 	
 
+	/**************************************/
+	/************** SWITCHER **************/
+	/**************************************/
+	public static java.lang.Double plusSwitcher(java.lang.Object self, java.lang.Object other) {
+		if (self == null || other == null) {
+			CallOnVoidTarget exp = ExceptionsFactory.eINSTANCE.createCallOnVoidTarget();
+			exp.setMessage("Initialize the Real expression");
+			throw new KRuntimeError(exp);
+		} else {
+			return RealWrapper.plus((java.lang.Double) self, (java.lang.Double) other);
+		}
+	}
+	
+	public static java.lang.Double minusSwitcher(java.lang.Object self, java.lang.Object other) {
+		if (self == null || other == null) {
+			CallOnVoidTarget exp = ExceptionsFactory.eINSTANCE.createCallOnVoidTarget();
+			exp.setMessage("Initialize the Real expression");
+			throw new KRuntimeError(exp);
+		} else {
+			return RealWrapper.minus((java.lang.Double) self, (java.lang.Double) other);
+		}
+	}
+	
+	public static java.lang.Integer compareToSwitcher(java.lang.Object self, java.lang.Object other) {
+		if (self == null || other == null) {
+			CallOnVoidTarget exp = ExceptionsFactory.eINSTANCE.createCallOnVoidTarget();
+			exp.setMessage("Initialize the Real expression");
+			throw new KRuntimeError(exp);
+		} else {
+			return RealWrapper.compareTo((java.lang.Double) self, (java.lang.Double) other);
+		}
+	}
+	
+	public static java.lang.Boolean equalsSwitcher(java.lang.Object self, java.lang.Object other) {
+		if (self == null || self instanceof kermeta.language.structure.Object) {
+			return ObjectUtil.equals(self, other);
+		} else {
+			return RealWrapper.equals((java.lang.Double) self, (java.lang.Double) other);
+		}
+	}
+	/**************************************/
+	/************** SWITCHER **************/
+	/**************************************/
 }
 /* END OF FILE */

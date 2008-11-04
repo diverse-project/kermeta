@@ -201,7 +201,7 @@ public class StringWrapper {
 		java.lang.String result = null;
 
 		result = kermeta.standard.helper.StringWrapper.replace(
-				kermeta.standard.helper.StringWrapper.replace(self, " == null",
+				kermeta.standard.helper.StringWrapper.replace(self, ".equals(null)",
 						" == null"), ";", ";");
 
 		return result;

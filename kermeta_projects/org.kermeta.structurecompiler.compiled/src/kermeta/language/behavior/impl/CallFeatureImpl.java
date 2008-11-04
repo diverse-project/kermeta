@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: CallFeatureImpl.java,v 1.9 2008-10-29 08:29:15 cfaucher Exp $
+ * $Id: CallFeatureImpl.java,v 1.10 2008-11-04 14:32:01 cfaucher Exp $
  */
 package kermeta.language.behavior.impl;
 
@@ -720,48 +720,26 @@ public class CallFeatureImpl extends CallExpressionImpl implements CallFeature {
 								.equals(static_call, "");
 
 						if (idIfCond_491) {
-
+							
 							static_call = kermeta.standard.helper.StringWrapper
-									.plus(
-											kermeta.standard.helper.StringWrapper
-													.plus(
-															kermeta.standard.helper.StringWrapper
-																	.plus(
-																			kermeta.standard.helper.StringWrapper
-																					.plus(
-																							kermeta.standard.helper.StringWrapper
-																									.replace(
-																											((kermeta.language.structure.Package) org.kermeta.compil.runtime.helper.language.ObjectUtil
-																													.asTypeSwitcher(
-																															org.kermeta.compil.runtime.helper.language.ObjectUtil
-																																	.containerSwitcher(((kermeta.language.structure.ClassDefinition) org.kermeta.compil.runtime.helper.language.ObjectUtil
-																																			.asTypeSwitcher(
-																																					org.kermeta.compil.runtime.helper.language.ObjectUtil
-																																							.containerSwitcher(this
-																																									.getStaticOperation()),
-																																					org.kermeta.compil.runtime.ExecutionContext
-																																							.getInstance()
-																																							.getMetaClass(
-																																									"kermeta.language.structure.ClassDefinition")))),
-																															org.kermeta.compil.runtime.ExecutionContext
-																																	.getInstance()
-																																	.getMetaClass(
-																																			"kermeta.language.structure.Package")))
-																													.qualifiedName(),
-																											"::",
-																											"."),
-																							".helper."),
-																			((kermeta.language.structure.ClassDefinition) org.kermeta.compil.runtime.helper.language.ObjectUtil
-																					.asTypeSwitcher(
-																							org.kermeta.compil.runtime.helper.language.ObjectUtil
-																									.containerSwitcher(this
-																											.getStaticOperation()),
-																							org.kermeta.compil.runtime.ExecutionContext
-																									.getInstance()
-																									.getMetaClass(
-																											"kermeta.language.structure.ClassDefinition")))
-																					.getName()),
-															"Wrapper."), fName);
+                            .plus(
+                                    kermeta.standard.helper.StringWrapper
+                                            .plus(
+                                                    kermeta.standard.helper.StringWrapper
+                                                            .plus(
+                                                                    "org.kermeta.compil.runtime.helper.basetypes.",
+                                                                    ((kermeta.language.structure.ClassDefinition) org.kermeta.compil.runtime.helper.language.ObjectUtil
+                                                                            .asTypeSwitcher(
+                                                                                    org.kermeta.compil.runtime.helper.language.ObjectUtil
+                                                                                            .containerSwitcher(this
+                                                                                                    .getStaticOperation()),
+                                                                                    org.kermeta.compil.runtime.ExecutionContext
+                                                                                            .getInstance()
+                                                                                            .getMetaClass(
+                                                                                                    "kermeta.language.structure.ClassDefinition")))
+                                                                            .getName()),
+                                                    "Util."), fName + "Switcher");
+
 						}
 
 					} else {
