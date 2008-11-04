@@ -1,4 +1,4 @@
-/* $Id: SimpleFileIOUtil.java,v 1.2 2008-08-18 08:49:06 cfaucher Exp $
+/* $Id: SimpleFileIOUtil.java,v 1.3 2008-11-04 17:17:39 cfaucher Exp $
  * Project: Kermeta (First iteration)
  * File: SimpleFileIO.java
  * License: EPL
@@ -24,14 +24,11 @@ import java.io.IOException;
 
 import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.ResourcesPlugin;
-import org.eclipse.core.runtime.CoreException;
-import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.Path;
+import org.eclipse.core.runtime.Platform;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.emf.ecore.resource.impl.ExtensibleURIConverterImpl;
-
-import fr.irisa.triskell.eclipse.resources.ResourceHelper;
 
 
 public class SimpleFileIOUtil {
@@ -55,16 +52,26 @@ public class SimpleFileIOUtil {
         	/*
         	 * Getting the directory        	 
         	 */
-        	java.lang.String filePath = getOSFileLocation(filename);
+        	java.lang.String filePath = filename;
         	
         	int i = filePath.lastIndexOf("/");
         	java.lang.String folderPath = filePath.substring(0, i);
         	
         	if ( folderPath.startsWith("platform:/resource") ) {
         		java.lang.String platformFolderPath = folderPath.replace("platform:/resource", "");
-        		IFolder folder = ResourcesPlugin.getWorkspace().getRoot().getFolder( new Path(platformFolderPath) );
-        		folderPath = folder.getLocation().toString();
-        		filePath = folderPath + filePath.substring(i);
+        		
+        		if(Platform.isRunning()) {
+        			IFolder folder = ResourcesPlugin.getWorkspace().getRoot().getFolder( new Path(platformFolderPath) );
+        			folderPath = folder.getLocation().toString();
+            		filePath = folderPath + filePath.substring(i);
+        		} else {
+        			String local_path = SimpleFileIOUtil.class.getProtectionDomain().getCodeSource().getLocation().toExternalForm();
+        			local_path = local_path.replace("/bin/", "");
+        			int i_1 = local_path.lastIndexOf("/");
+                	local_path = local_path.substring(0, i_1);
+        			folderPath = local_path + platformFolderPath;
+        			filePath = folderPath + filePath.substring(i).replace("file:/", "");
+        		}
         	}
         	       	
         	/*
@@ -85,10 +92,7 @@ public class SimpleFileIOUtil {
             		// maybe this is a windows like path
             		i_folder = filename.lastIndexOf("\\");
             	}
-				IFolder result_folder = ResourceHelper.getIFolder(filename.substring(0, i_folder));
-				if(result_folder != null)
-					result_folder.refreshLocal(1, new NullProgressMonitor());
-			} catch (CoreException e) {
+			} catch (Exception e) {
 				e.printStackTrace();
 			}
         }
