@@ -1,4 +1,4 @@
-/* $Id: CompiledRunJunitFactory.java,v 1.1 2008-10-31 14:03:13 dvojtise Exp $
+/* $Id: CompiledRunJunitFactory.java,v 1.2 2008-11-04 15:37:34 dvojtise Exp $
  * Project    : fr.irisa.triskell.kermeta.interpreter
  * File       : RunJunit.java
  * License    : EPL
@@ -11,6 +11,8 @@
  *        <desription.text> 
  */
 package fr.irisa.triskell.kermeta.launcher;
+
+import org.eclipse.core.resources.IProject;
 
 
 /**
@@ -25,6 +27,7 @@ package fr.irisa.triskell.kermeta.launcher;
 public class CompiledRunJunitFactory extends AbstractRunJunitFactory {
 
 	public String test_container_plugin_id; 
+	public IProject generatedPluginProject; 
     
     /**
      * Default constructor

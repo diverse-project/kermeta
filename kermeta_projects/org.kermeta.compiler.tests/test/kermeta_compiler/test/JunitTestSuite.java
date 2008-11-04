@@ -1,4 +1,4 @@
-/* $Id: JunitTestSuite.java,v 1.1 2008-10-31 14:03:32 dvojtise Exp $
+/* $Id: JunitTestSuite.java,v 1.2 2008-11-04 15:37:34 dvojtise Exp $
  * Project : Kermeta.interpreter
  * File : JunitTestSuite.java
  * License : EPL
@@ -71,7 +71,7 @@ public class JunitTestSuite extends TestSuite {
     	
     	// initialize URIMAP
     	// platform:/plugin is were plugin IO lives
-    	String ioPluginPath = IOPlugin.class.getProtectionDomain()
+  /*  	String ioPluginPath = IOPlugin.class.getProtectionDomain()
 											.getCodeSource().getLocation().toExternalForm();
     	ioPluginPath = ioPluginPath.replace("build/class/", "../");
     	URIMapUtil.addMapEntry(ExtensibleURIConverterImpl.URI_MAP, "platform:/plugin/", ioPluginPath);
@@ -90,10 +90,10 @@ public class JunitTestSuite extends TestSuite {
     	loaderPluginPath = loaderPluginPath.replace("bin/", "");
     	URIMapUtil.addMapEntry(ExtensibleURIConverterImpl.URI_MAP, "kconf:/loader/", loaderPluginPath+"instances/");
     	internalLog.info("   " + "kconf:/loader/ => " + loaderPluginPath+"instances/");
-    	
+   */ 	
     	if ( ioPlugin == null ) {
 		
-    		IOPlugin.LOCAL_USE = true;
+    	//	IOPlugin.LOCAL_USE = true;
     		ioPlugin = IOPlugin.getDefault();
 	
     	}
@@ -109,10 +109,10 @@ public class JunitTestSuite extends TestSuite {
 		
 		// do not modify this comment
 /*** BEGIN GENERATED TESTS ***/
-		testWithFile("test/interpreter/kmt_testcases","001_testAssignment.main.kmt" );
-/*
-		testWithFile("test/interpreter/kmt_testcases","002_testArithm.main.kmt" );
+//		testWithFile("test/interpreter/kmt_testcases","001_testAssignment.main.kmt" );
 
+		testWithFile("test/interpreter/kmt_testcases","002_testArithm.main.kmt" );
+/*
 		testWithFile("test/interpreter/kmt_testcases","003_testOpCall.main.kmt" );
 
 		testWithFile("test/interpreter/kmt_testcases","004_testOpOpCall.main.kmt" );

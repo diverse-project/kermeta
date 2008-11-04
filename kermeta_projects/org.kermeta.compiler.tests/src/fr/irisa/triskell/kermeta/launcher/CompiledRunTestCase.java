@@ -1,4 +1,4 @@
-/* $Id: CompiledRunTestCase.java,v 1.1 2008-10-31 14:03:13 dvojtise Exp $
+/* $Id: CompiledRunTestCase.java,v 1.2 2008-11-04 15:37:34 dvojtise Exp $
  * Project    : fr.irisa.triskell.kermeta.test
  * File       : CompiledRunTestCase.java
  * License    : EPL
@@ -13,35 +13,38 @@ package fr.irisa.triskell.kermeta.launcher;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
 
 import kermeta.compiler.runner.Main__main_km2ecore_behaviorJava__Runner;
 
 import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.IMarker;
 import org.eclipse.core.resources.IProject;
+import org.eclipse.core.resources.IResource;
+import org.eclipse.core.resources.IncrementalProjectBuilder;
 import org.eclipse.core.resources.ResourcesPlugin;
+import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.FileLocator;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.NullProgressMonitor;
-import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.Platform;
-import org.eclipse.emf.common.util.ResourceLocator;
+import org.eclipse.debug.core.ILaunch;
+import org.eclipse.debug.core.ILaunchManager;
+import org.eclipse.debug.core.Launch;
+import org.eclipse.jdt.core.IJavaProject;
+import org.eclipse.jdt.core.JavaCore;
+import org.eclipse.jdt.launching.IVMInstall;
+import org.eclipse.jdt.launching.IVMRunner;
+import org.eclipse.jdt.launching.JavaRuntime;
+import org.eclipse.jdt.launching.VMRunnerConfiguration;
 import org.kermeta.compiler.KermetaCompiler;
 import org.kermeta.core.helper.FileHelper;
-import org.kermeta.core.helper.ZipHelper;
-import org.kermeta.interpreter.api.Interpreter;
-import org.kermeta.interpreter.api.InterpreterMode;
-import org.kermeta.interpreter.api.InterpreterOptions;
 import org.kermeta.io.KermetaUnit;
 import org.kermeta.io.loader.plugin.LoaderPlugin;
 import org.kermeta.simk.presentation.SimkEditor;
 import org.osgi.framework.Bundle;
-import org.osgi.framework.BundleException;
 
 import fr.irisa.triskell.eclipse.resources.ResourceHelper;
 import fr.irisa.triskell.kermeta.interpreter.KermetaRaisedException;
-import fr.irisa.triskell.kermeta.runtime.RuntimeObjectImpl;
 
 //import javax.tools.JavaCompiler;
 
@@ -64,28 +67,40 @@ public class CompiledRunTestCase extends AbstractRunTestCase {
         if(isFirstOfSerie){
         	// need to compile everything
         	try {
+
+        		CompiledRunJunitFactory crjf =(CompiledRunJunitFactory) this.containerTestSuite;
         		
         		prepareRuntimeWorkbenchSourceProject();
         		
         		// make sure to use the workbench version
-        		String sourceFileName = this.containerTestSuite.getUnitURI().replaceAll("platform:/plugin", "platform:/resource");
+        		String sourceFileName = crjf.getUnitURI().replaceAll("platform:/plugin", "platform:/resource");
         		IFile source_file = ResourceHelper.getIFile(sourceFileName);
-        		IFile km_merged_file = ResourceHelper.getIFile(source_file.getFullPath()
-    					.removeFileExtension().addFileExtension("km")
-    					.toString());
+        		        		        		
+        		if(!source_file.isAccessible()){
+        			throw new Exception("prepareRuntimeWorkbench failed : file not accessible : " + source_file.getFullPath());
+        		}
+        		//  cannot use the ResourceHelper here because the file doesn't exist yet
+        		IFile km_merged_file = ResourcesPlugin.getWorkspace().getRoot().getFile(source_file.getFullPath()
+    					.removeFileExtension().addFileExtension("km"));
         		
         		mergeKm(source_file, km_merged_file);
         		
-        		IFile ecore_file = ResourceHelper.getIFile(source_file.getFullPath()
-    					.removeFileExtension().addFileExtension("ecore")
-    					.toString());
+        		if(!km_merged_file.exists()){
+        			throw new Exception("MergeKm failed : no file was generated : " + km_merged_file.getFullPath());
+        		}
+        		
+        		IFile ecore_file = ResourcesPlugin.getWorkspace().getRoot().getFile(source_file.getFullPath()
+    					.removeFileExtension().addFileExtension("ecore"));
         		
         		kmToEcore(km_merged_file);
         		
+        		if(!ecore_file.exists()){
+        			throw new Exception("KmToEcore failed : no file was generated : " + ecore_file.getFullPath());
+        		}
         		
-        		ecoreToJavaPlugin(ecore_file);
+        		crjf.generatedPluginProject = ecoreToJavaPlugin(ecore_file);
         		
-        		compileJavaPlugin();
+        		compileJavaPlugin(crjf.generatedPluginProject);
     			internalLog.info("The compilation process is complete");
     						
     		} catch (Error e) {
@@ -153,6 +168,7 @@ public class CompiledRunTestCase extends AbstractRunTestCase {
     protected void mergeKm(IFile source_file, IFile km_merged_file) throws Exception{
     	//The following 2 lines are required to set rightly the Simk plugin
 		Platform.getBundle("org.kermeta.simk").start();
+		@SuppressWarnings("unused")
 		SimkEditor simkEditor = new SimkEditor();
 		
 
@@ -160,7 +176,7 @@ public class CompiledRunTestCase extends AbstractRunTestCase {
 		
 		String uri = "platform:/resource" + source_file.getFullPath().toString();
 		KermetaUnit kermetaUnit = LoaderPlugin.getDefault().load(uri, null);
-		
+		if(kermetaUnit.isErroneous()) throw new Exception(kermetaUnit.getMessages().get(0).getValue());
 		// Generate the km merged and the traceability model
 		kermetaCompiler.writeUnit(kermetaUnit, km_merged_file);
     }
@@ -177,22 +193,33 @@ public class CompiledRunTestCase extends AbstractRunTestCase {
     /**
      * Create the Java Plugin from the ecore
      */
-    protected void ecoreToJavaPlugin(IFile source_ecore_file) throws Exception{
+    protected IProject ecoreToJavaPlugin(IFile source_ecore_file) throws Exception{
     	// Run the generation of Java Classes and the required helpers (Simk)
 		
 		IProgressMonitor monitor = new NullProgressMonitor();
 		org.kermeta.compiler.Compiler ecore2javacompiler = new org.kermeta.compiler.Compiler(source_ecore_file, monitor);
 		ecore2javacompiler.run();
+		IProject project = ResourceHelper.getIProject(ecore2javacompiler.getCompiledPluginId());
+		if ( ! project.exists()) {
+			throw new Exception("ecoreToJavaPlugin failed : no project was generated : " + project.getFullPath());   		
+		}
+		return project;
     }
 
     /**
      * Compile the generated java code
+     * @throws CoreException 
      */
-    protected void compileJavaPlugin(){
+    protected void compileJavaPlugin(IProject generatedProject) throws Exception{
+    	try {
+			generatedProject.build(IncrementalProjectBuilder.INCREMENTAL_BUILD, new NullProgressMonitor());
+			if(generatedProject.findMaxProblemSeverity(IMarker.PROBLEM, true, IResource.DEPTH_INFINITE) == IMarker.SEVERITY_ERROR){
+				throw new Exception("compileJavaPlugin failed :  generated project has error(s) : " + generatedProject.getFullPath());
+			}
+		} catch (CoreException e) {
+			throw new Exception("compileJavaPlugin failed :  generated project didn't compile successfuly : " + generatedProject.getFullPath(),e);
+		}
 
-		// compile the java code into .class
-//		internalLog.debug("compiling java into bytecode...");
-//		JavaCompiler compiler = ToolProvider.getSystemJavaCompiler(); 
     }
     
     
@@ -216,10 +243,32 @@ public class CompiledRunTestCase extends AbstractRunTestCase {
      * launch (which name is defined in the <code>mainOperation</code> tag
      * @throws Exception 
      */
-    public void runTest() throws KermetaRaisedException {
-    	//does the set up correctly ended ?
-    	// if not, fail 
-    	
+    public void runTest() throws Exception {
+    	CompiledRunJunitFactory crjf =(CompiledRunJunitFactory) this.containerTestSuite;
+		IJavaProject javaProject = JavaCore.create(crjf.generatedPluginProject);
+        if (javaProject == null)
+        	throw new Exception("test failed : project isn't a java project : " + crjf.generatedPluginProject.getFullPath());;
+
+    	IVMInstall vmInstall = JavaRuntime.getVMInstall(javaProject);
+    	   if (vmInstall == null)
+    	      vmInstall = JavaRuntime.getDefaultVMInstall();
+    	   if (vmInstall != null) {
+    	      IVMRunner vmRunner = 
+    	    	  vmInstall.getVMRunner(ILaunchManager.RUN_MODE);
+    	      if (vmRunner != null) {
+    	         String[] classPath = null;
+    	         try {
+    	            classPath = JavaRuntime.computeDefaultRuntimeClassPath(javaProject);
+    	         } catch (CoreException e) { }
+    	         if (classPath != null) {
+    	            VMRunnerConfiguration vmConfig = 
+    	               new VMRunnerConfiguration("MyClass", classPath);
+    	            ILaunch launch = new Launch(null, ILaunchManager.RUN_MODE, null);
+    	            vmRunner.run(vmConfig, launch, null);
+    	         }
+    	      }
+    	   }
+
     	
     /*	try {    		 			
     		interpreter.setEntryPoint(mainClassValue, mainOperationValue);
