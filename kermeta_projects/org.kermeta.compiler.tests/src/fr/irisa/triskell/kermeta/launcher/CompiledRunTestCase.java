@@ -1,4 +1,4 @@
-/* $Id: CompiledRunTestCase.java,v 1.2 2008-11-04 15:37:34 dvojtise Exp $
+/* $Id: CompiledRunTestCase.java,v 1.3 2008-11-05 16:26:15 dvojtise Exp $
  * Project    : fr.irisa.triskell.kermeta.test
  * File       : CompiledRunTestCase.java
  * License    : EPL
@@ -27,15 +27,12 @@ import org.eclipse.core.runtime.FileLocator;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.Platform;
-import org.eclipse.debug.core.ILaunch;
 import org.eclipse.debug.core.ILaunchManager;
-import org.eclipse.debug.core.Launch;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.jdt.launching.IVMInstall;
 import org.eclipse.jdt.launching.IVMRunner;
 import org.eclipse.jdt.launching.JavaRuntime;
-import org.eclipse.jdt.launching.VMRunnerConfiguration;
 import org.kermeta.compiler.KermetaCompiler;
 import org.kermeta.core.helper.FileHelper;
 import org.kermeta.io.KermetaUnit;
@@ -44,7 +41,6 @@ import org.kermeta.simk.presentation.SimkEditor;
 import org.osgi.framework.Bundle;
 
 import fr.irisa.triskell.eclipse.resources.ResourceHelper;
-import fr.irisa.triskell.kermeta.interpreter.KermetaRaisedException;
 
 //import javax.tools.JavaCompiler;
 
@@ -102,7 +98,8 @@ public class CompiledRunTestCase extends AbstractRunTestCase {
         		
         		compileJavaPlugin(crjf.generatedPluginProject);
     			internalLog.info("The compilation process is complete");
-    						
+    			
+        		//crjf.generatedPluginProject = ResourceHelper.getIProject("org.kermeta.002_testarithm.main.compiled");
     		} catch (Error e) {
     			// if the first of Serie SetUp failed, all the serie must fail too
     			this.containerTestSuite.firstOfSerieSetUpFailedError = e;
@@ -245,6 +242,9 @@ public class CompiledRunTestCase extends AbstractRunTestCase {
      */
     public void runTest() throws Exception {
     	CompiledRunJunitFactory crjf =(CompiledRunJunitFactory) this.containerTestSuite;
+    	
+    	String javaMainClass = getJavaMainClass();
+    	
 		IJavaProject javaProject = JavaCore.create(crjf.generatedPluginProject);
         if (javaProject == null)
         	throw new Exception("test failed : project isn't a java project : " + crjf.generatedPluginProject.getFullPath());;
@@ -261,29 +261,60 @@ public class CompiledRunTestCase extends AbstractRunTestCase {
     	            classPath = JavaRuntime.computeDefaultRuntimeClassPath(javaProject);
     	         } catch (CoreException e) { }
     	         if (classPath != null) {
-    	            VMRunnerConfiguration vmConfig = 
-    	               new VMRunnerConfiguration("MyClass", classPath);
+    	        	/*URL[] urls = new URL[classPath.length];
+    	     		for (int i=0; i<classPath.length; i++ ) {
+    	     			urls[i] = new URL("file:///" +classPath[i]);
+    	     		}*/
+    	     		
+    	     		//_interpreter.addToClasspath(urls);		
+    	     		
+    	     		// URLClassLoader cl = new URLClassLoader(urls,
+    	     		// this.getContextClassLoader());
+    	     		// use this object class loader as parent (instead of the default thread
+    	     		// class loader)
+    	     		// because it also contains the plugin classloader rules
+    	     		//URLClassLoader cl = new URLClassLoader(urls, this.getClass()
+    	     		//		.getClassLoader());
+    	     		
+    	     		//_interpreter.setContextClassLoader(cl);
+    	            /*VMRunnerConfiguration vmConfig = 
+    	               new VMRunnerConfiguration(javaMainClass, classPath);
     	            ILaunch launch = new Launch(null, ILaunchManager.RUN_MODE, null);
     	            vmRunner.run(vmConfig, launch, null);
+    	            */
+    	     		
+    	     		InvokeCompiledCodeJob job = new InvokeCompiledCodeJob(javaMainClass, classPath);
+    	     		job.schedule();
+    	     		job.join();
+    	     		if(job.catchedError != null){
+    	     			throw job.catchedError;
+    	     		}
+    	     		if(job.catchedException != null){
+    	     			throw job.catchedException;
+    	     		}
+    	     		
+    	         }
+    	         else{
+    	        	 throw new Exception("test failed : cannot get classpath for java project : " + crjf.generatedPluginProject.getFullPath());
     	         }
     	      }
     	   }
-
-    	
-    /*	try {    		 			
-    		interpreter.setEntryPoint(mainClassValue, mainOperationValue);
-    		interpreter.launch();
-    	} catch(KermetaRaisedException e){
-    		// If this is a kermeta assertion that failed, then the Test must fail
-    		Class t_target=(Class)e.raised_object.getMetaclass().getKCoreObject();        	
-    		String exceptionTypeName = t_target.getTypeDefinition().getName();
-    		if(exceptionTypeName.compareTo("AssertionFailedError") == 0){
-    			fail(e.toString());
-    		}
-    		//	 otherwise it must be an error, so just forward the exception
-    		else throw e;
-    		
-    	} */
     }
 
+    /**
+     * Returns the name of the java class that must be launched
+     * @return
+     */
+    protected String getJavaMainClass(){
+    	String javaMainClass = mainClassValue; //.replaceAll("::", ".");
+    	// trim the class name
+    	javaMainClass = mainClassValue.substring(0, mainClassValue.lastIndexOf("::")+2);
+    	javaMainClass = javaMainClass.replaceAll("::", ".");
+    	javaMainClass += "runner.";
+    	javaMainClass += mainClassValue.substring(mainClassValue.lastIndexOf("::")+2, mainClassValue.length());    	
+    	javaMainClass += "__" + mainOperationValue+"__Runner";
+    	return javaMainClass;
+    	
+    }
+    
 }
