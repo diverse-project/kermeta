@@ -1,6 +1,6 @@
 
 
-/*$Id: ProjectVisitor.java,v 1.5 2008-08-07 09:40:15 dvojtise Exp $
+/*$Id: ProjectVisitor.java,v 1.6 2008-11-05 16:52:40 dvojtise Exp $
 * Project : fr.irisa.triskell.kermeta.kpm
 * File : 	ProjectVisitor.java
 * License : EPL
@@ -20,6 +20,9 @@ import org.eclipse.core.resources.IResourceVisitor;
 import org.eclipse.core.resources.IncrementalProjectBuilder;
 import org.eclipse.core.runtime.CoreException;
 import org.kermeta.kpm.KPMPlugin;
+import org.kermeta.kpm.preferences.KPMPreferenceHelper;
+
+import fr.irisa.triskell.string.EscapeChars;
 
 /**
  * Handle the creation of a new project into the workspace.
@@ -58,6 +61,14 @@ public class ProjectVisitor implements IResourceVisitor {
 	 * @throws CoreException
 	 */
 	private void addBuilderIfNecessary(IProject project) throws CoreException {
+		// do not add builder if the project is in the exclude patterns.
+		String fileName = project.getFullPath().toString();
+		for(String pattern : KPMPreferenceHelper.getExcludedFilePatterns()){
+			if(fileName.matches(EscapeChars.forSimpleRegex(pattern))){
+				KPMPlugin.internalLog.debug("Ignored add KMPBuilder to the buildCommand of project " + project.getName());
+				return;
+			}
+		}
 		IProjectDescription desc = project.getDescription();
 		ICommand[] commands = desc.getBuildSpec();
 		for (int i = 0; i < commands.length; ++i)
