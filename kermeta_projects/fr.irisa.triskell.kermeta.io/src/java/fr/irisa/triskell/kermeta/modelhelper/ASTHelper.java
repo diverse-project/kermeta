@@ -1,6 +1,6 @@
 
 
-/*$Id: ASTHelper.java,v 1.6 2008-04-28 11:50:17 ftanguy Exp $
+/*$Id: ASTHelper.java,v 1.7 2008-11-06 16:43:11 dvojtise Exp $
 * Project : fr.irisa.triskell.kermeta.io2
 * File : 	ASTHelper.java
 * License : EPL
@@ -19,8 +19,7 @@ import java.io.StringReader;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.URIConverter;
-import org.eclipse.emf.ecore.resource.impl.URIConverterImpl;
-
+import org.eclipse.emf.ecore.resource.impl.ExtensibleURIConverterImpl;
 import antlr.RecognitionException;
 import antlr.TokenStreamException;
 import fr.irisa.triskell.kermeta.parser.gen.ast.CompUnit;
@@ -51,7 +50,7 @@ public class ASTHelper {
 	
 	private static KermetaLexer createLexerForFile(String file) throws IOException {
 		URI uri = URI.createURI( file );
-		URIConverter converter = new URIConverterImpl();
+		URIConverter converter = new ExtensibleURIConverterImpl();
 		InputStream stream = converter.createInputStream( uri );
 		KermetaLexer lexer = new KermetaLexer( stream );
 		return lexer;
