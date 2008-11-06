@@ -1,4 +1,4 @@
-/* $Id: CompiledRunTestCase.java,v 1.3 2008-11-05 16:26:15 dvojtise Exp $
+/* $Id: CompiledRunTestCase.java,v 1.4 2008-11-06 11:13:52 dvojtise Exp $
  * Project    : fr.irisa.triskell.kermeta.test
  * File       : CompiledRunTestCase.java
  * License    : EPL
@@ -22,11 +22,16 @@ import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IncrementalProjectBuilder;
 import org.eclipse.core.resources.ResourcesPlugin;
+import org.eclipse.core.resources.WorkspaceJob;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.FileLocator;
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.Platform;
+import org.eclipse.core.runtime.Status;
+import org.eclipse.core.runtime.jobs.Job;
+import org.eclipse.core.runtime.jobs.MultiRule;
 import org.eclipse.debug.core.ILaunchManager;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.JavaCore;
@@ -34,6 +39,7 @@ import org.eclipse.jdt.launching.IVMInstall;
 import org.eclipse.jdt.launching.IVMRunner;
 import org.eclipse.jdt.launching.JavaRuntime;
 import org.kermeta.compiler.KermetaCompiler;
+import org.kermeta.compiler.tests.CompilerTestsPlugin;
 import org.kermeta.core.helper.FileHelper;
 import org.kermeta.io.KermetaUnit;
 import org.kermeta.io.loader.plugin.LoaderPlugin;
@@ -65,7 +71,20 @@ public class CompiledRunTestCase extends AbstractRunTestCase {
         	try {
 
         		CompiledRunJunitFactory crjf =(CompiledRunJunitFactory) this.containerTestSuite;
-        		
+        		GeneratePluginCodeJob job = new GeneratePluginCodeJob("Generate plugin code", crjf);
+        		// reserves exclusive write access to the resource we are updating by associating a scheduling rule with the job        		 
+        		String sourceFileName = crjf.getUnitURI().replaceAll("platform:/plugin", "platform:/resource");
+        		IFile source_file = ResourceHelper.getIFile(sourceFileName);
+        		//job.setRule(source_file.getProject()); 
+        		job.schedule();
+        		job.join();
+        		if(job.catchedError != null){
+	     			throw job.catchedError;
+	     		}
+	     		if(job.catchedException != null){
+	     			throw job.catchedException;
+	     		}
+        		/*
         		prepareRuntimeWorkbenchSourceProject();
         		
         		// make sure to use the workbench version
@@ -95,7 +114,7 @@ public class CompiledRunTestCase extends AbstractRunTestCase {
         		}
         		
         		crjf.generatedPluginProject = ecoreToJavaPlugin(ecore_file);
-        		
+        		*/
         		compileJavaPlugin(crjf.generatedPluginProject);
     			internalLog.info("The compilation process is complete");
     			
@@ -176,15 +195,20 @@ public class CompiledRunTestCase extends AbstractRunTestCase {
 		if(kermetaUnit.isErroneous()) throw new Exception(kermetaUnit.getMessages().get(0).getValue());
 		// Generate the km merged and the traceability model
 		kermetaCompiler.writeUnit(kermetaUnit, km_merged_file);
+
+		km_merged_file.getProject().refreshLocal(IFile.DEPTH_INFINITE, new NullProgressMonitor());
     }
     
     /**
      * Create the ecore from the km merged
+     * @throws CoreException 
      */
-    protected void kmToEcore(IFile source_km_file){
+    protected void kmToEcore(IFile source_km_file) throws CoreException{
     	String[] _args = new String[1];
 		_args[0] = source_km_file.getFullPath().toString();
 		Main__main_km2ecore_behaviorJava__Runner.main_forDeployedVersion(_args);
+
+		source_km_file.getProject().refreshLocal(IFile.DEPTH_INFINITE, new NullProgressMonitor());
     }
     
     /**
@@ -200,6 +224,7 @@ public class CompiledRunTestCase extends AbstractRunTestCase {
 		if ( ! project.exists()) {
 			throw new Exception("ecoreToJavaPlugin failed : no project was generated : " + project.getFullPath());   		
 		}
+		//project.refreshLocal(IFile.DEPTH_INFINITE, new NullProgressMonitor());
 		return project;
     }
 
@@ -317,4 +342,62 @@ public class CompiledRunTestCase extends AbstractRunTestCase {
     	
     }
     
+    
+    public class GeneratePluginCodeJob extends WorkspaceJob{
+
+    	public Exception catchedException;
+    	public Error catchedError;
+    	
+    	CompiledRunJunitFactory crjf;
+    	
+		public GeneratePluginCodeJob(String name, CompiledRunJunitFactory _crjf) {
+			super(name);
+			crjf = _crjf;
+		}
+
+		@Override
+		public IStatus runInWorkspace(IProgressMonitor monitor) {
+			try{
+	    		
+	    		prepareRuntimeWorkbenchSourceProject();
+	    		
+	    		// make sure to use the workbench version
+	    		String sourceFileName = crjf.getUnitURI().replaceAll("platform:/plugin", "platform:/resource");
+	    		IFile source_file = ResourceHelper.getIFile(sourceFileName);
+	    		        		        		
+	    		if(!source_file.isAccessible()){
+	    			throw new Exception("prepareRuntimeWorkbench failed : file not accessible : " + source_file.getFullPath());
+	    		}
+	    		//  cannot use the ResourceHelper here because the file doesn't exist yet
+	    		IFile km_merged_file = ResourcesPlugin.getWorkspace().getRoot().getFile(source_file.getFullPath()
+						.removeFileExtension().addFileExtension("km"));
+	    		
+	    		mergeKm(source_file, km_merged_file);
+	    		
+	    		if(!km_merged_file.exists()){
+	    			throw new Exception("MergeKm failed : no file was generated : " + km_merged_file.getFullPath());
+	    		}
+	    		
+	    		IFile ecore_file = ResourcesPlugin.getWorkspace().getRoot().getFile(source_file.getFullPath()
+						.removeFileExtension().addFileExtension("ecore"));
+	    		
+	    		kmToEcore(km_merged_file);
+	    		if(!ecore_file.exists()){
+	    			throw new Exception("KmToEcore failed : no file was generated : " + ecore_file.getFullPath());
+	    		}
+	    		
+	    		crjf.generatedPluginProject = ecoreToJavaPlugin(ecore_file);
+			}
+			catch (Exception e){
+				catchedException = e;
+				return new Status(IStatus.OK, CompilerTestsPlugin.PLUGIN_ID, "Exception received ", e);
+			}
+			catch (Error ome){
+				catchedError = ome;
+				return new Status(IStatus.OK, CompilerTestsPlugin.PLUGIN_ID, "Error received ", ome);
+			}
+			return new Status(IStatus.OK,"End", null);
+		}
+    	
+    }
 }
