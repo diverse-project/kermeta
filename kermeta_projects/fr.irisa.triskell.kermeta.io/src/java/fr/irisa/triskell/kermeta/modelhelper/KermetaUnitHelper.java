@@ -1,6 +1,6 @@
 
 
-/*$Id: KermetaUnitHelper.java,v 1.14 2008-06-11 14:57:41 dvojtise Exp $
+/*$Id: KermetaUnitHelper.java,v 1.15 2008-11-06 16:42:46 dvojtise Exp $
 * Project : io
 * File : 	KermetaUnitHelper.java
 * License : EPL
@@ -19,6 +19,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
+import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.kermeta.io.ErrorMessage;
@@ -222,7 +223,7 @@ public class KermetaUnitHelper {
 	}
 	
 	static public KermetaUnit getKermetaUnitFromObject(EObject o) {
-		EList<KermetaUnit> s = IOPlugin.getDefault().getKermetaUnits();
+		EList<KermetaUnit> s = new BasicEList<KermetaUnit>(IOPlugin.getDefault().getKermetaUnits());
 		ModelingUnit cu = getModelingUnit(o);
 		for ( KermetaUnit unit : s ) {
 			if ( unit.getModelingUnit() == cu )
