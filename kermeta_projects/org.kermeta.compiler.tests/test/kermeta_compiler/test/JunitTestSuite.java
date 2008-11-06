@@ -1,4 +1,4 @@
-/* $Id: JunitTestSuite.java,v 1.2 2008-11-04 15:37:34 dvojtise Exp $
+/* $Id: JunitTestSuite.java,v 1.3 2008-11-06 16:03:34 dvojtise Exp $
  * Project : Kermeta.interpreter
  * File : JunitTestSuite.java
  * License : EPL
@@ -109,10 +109,10 @@ public class JunitTestSuite extends TestSuite {
 		
 		// do not modify this comment
 /*** BEGIN GENERATED TESTS ***/
-//		testWithFile("test/interpreter/kmt_testcases","001_testAssignment.main.kmt" );
+		testWithFile("test/interpreter/kmt_testcases","001_testAssignment.main.kmt" );
 
 		testWithFile("test/interpreter/kmt_testcases","002_testArithm.main.kmt" );
-/*
+
 		testWithFile("test/interpreter/kmt_testcases","003_testOpCall.main.kmt" );
 
 		testWithFile("test/interpreter/kmt_testcases","004_testOpOpCall.main.kmt" );
@@ -252,7 +252,7 @@ public class JunitTestSuite extends TestSuite {
 		testWithFile("test/interpreter/kmt_testcases","075_PropertyEqualityUsingEnum.main.kmt" );
 
 		testWithFile("test/interpreter/kmt_testcases","076_testMultipleInheritance.main.kmt" );
-*/
+
 /*** END GENERATED TESTS ***/
 		// do not modify this comment
 		//IOPlugin.getDefault().unloadAll();
