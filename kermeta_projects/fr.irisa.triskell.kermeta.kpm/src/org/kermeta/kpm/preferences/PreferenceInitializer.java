@@ -1,4 +1,4 @@
-/* $Id: PreferenceInitializer.java,v 1.3 2008-11-05 16:52:40 dvojtise Exp $
+/* $Id: PreferenceInitializer.java,v 1.4 2008-11-06 11:11:20 dvojtise Exp $
  * Project: KPM UI
  * File: KPMPreferenceInitializer.java
  * License: EPL
@@ -24,10 +24,13 @@ public class PreferenceInitializer extends AbstractPreferenceInitializer {
 	 * 
 	 * @see org.eclipse.core.runtime.preferences.AbstractPreferenceInitializer#initializeDefaultPreferences()
 	 */
+	/**
+	 * By default KPM should ignore : *.class *.java and all projects whose name start with .
+	 */
 	public void initializeDefaultPreferences() {
 		IPreferenceStore store = KPMPlugin.getDefault().getPreferenceStore();
 		store.setDefault(PreferenceConstants.P_EXCLUDED_EXTENSIONS,
-				"*.class\n*.java\n/.JETEmitters*\n\n");
+				"*.class\n*.java\n/.*\n\n");
 	}
 
 }
