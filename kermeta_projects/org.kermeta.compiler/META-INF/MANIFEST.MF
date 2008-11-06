@@ -30,7 +30,7 @@ Require-Bundle: org.eclipse.core.runtime,
  org.kermeta.merger,
  org.kermeta.compiler.generator.emftemplates,
  org.kermeta.io.loader,
- org.kermeta.compiler.common;bundle-version="1.0.0",
+ org.kermeta.compiler.common,
  org.apache.commons.logging;bundle-version="1.0.4",
- org.kermeta.compiler.generator;bundle-version="0.1.99"
+ org.kermeta.compiler.generator
 Eclipse-LazyStart: true

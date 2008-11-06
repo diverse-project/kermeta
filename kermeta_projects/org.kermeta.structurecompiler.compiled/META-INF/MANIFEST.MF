@@ -102,10 +102,10 @@ Export-Package: ecore,
  traceability.util
 Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.emf.ecore;visibility:=reexport,
- org.kermeta.compiler.common;bundle-version="1.2.0",
+ org.kermeta.compiler.common,
  org.eclipse.emf.codegen;visibility:=reexport,
  fr.irisa.triskell.eclipse.util;visibility:=reexport,
  fr.irisa.triskell.kermeta.model;visibility:=reexport,
- org.kermeta.simk;bundle-version="1.2.0",
- fr.irisa.triskell.traceability.model;bundle-version="1.1.99"
+ org.kermeta.simk,
+ fr.irisa.triskell.traceability.model
 Bundle-ActivationPolicy: lazy

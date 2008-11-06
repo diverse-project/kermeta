@@ -22,5 +22,5 @@ Require-Bundle: org.eclipse.core.runtime,
  org.kermeta.io.loader,
  fr.irisa.triskell.kermeta.io,
  org.kermeta.generator,
- org.kermeta.compiler.common;bundle-version="1.0.0"
+ org.kermeta.compiler.common
 Eclipse-LazyStart: true
