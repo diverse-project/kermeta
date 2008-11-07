@@ -1,13 +1,6 @@
 package org.kermeta.compil.runtime.helper.basetypes;
 
-import kermeta.exceptions.CallOnVoidTarget;
-import kermeta.exceptions.ExceptionsFactory;
 import kermeta.language.structure.Class;
-import kermeta.standard.helper.IntegerWrapper;
-import kermeta.standard.helper.RealWrapper;
-
-import org.kermeta.compil.runtime.helper.error.KRuntimeError;
-import org.kermeta.compil.runtime.helper.language.ObjectUtil;
 
 public class RealUtil {
 

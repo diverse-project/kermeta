@@ -1,15 +1,7 @@
 package org.kermeta.compil.runtime.helper.basetypes;
 
-import org.kermeta.compil.runtime.helper.error.KRuntimeError;
-import org.kermeta.compil.runtime.helper.language.ObjectUtil;
-
-import kermeta.exceptions.CallOnVoidTarget;
-import kermeta.exceptions.ExceptionsFactory;
-import kermeta.exceptions.ExceptionsPackage;
 import kermeta.language.structure.Class;
 import kermeta.language.structure.Property;
-import kermeta.standard.helper.BooleanWrapper;
-import kermeta.util.KermetaAdapterFactory;
 
 public class BooleanUtil {
 	
