@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: JavaKeyWordList.java,v 1.7 2008-10-29 08:29:38 cfaucher Exp $
+ * $Id: JavaKeyWordList.java,v 1.8 2008-11-07 08:54:22 cfaucher Exp $
  */
 package km2ecore.common;
 

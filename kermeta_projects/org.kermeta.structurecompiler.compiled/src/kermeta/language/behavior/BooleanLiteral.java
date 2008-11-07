@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: BooleanLiteral.java,v 1.7 2008-10-29 08:29:08 cfaucher Exp $
+ * $Id: BooleanLiteral.java,v 1.8 2008-11-07 08:52:23 cfaucher Exp $
  */
 package kermeta.language.behavior;
 
@@ -21,8 +21,8 @@ import km2ecore.KM2EcoreContext;
  * </p>
  *
  * @see kermeta.language.behavior.BehaviorPackage#getBooleanLiteral()
- * @model annotation="kermeta documentation='This expression is a literal representing a Boolean value, typically : true or false keyword'"
- *        annotation="kermeta documentation='/** Complete \052/'"
+ * @model annotation="kermeta documentation='/** Complete \052/'"
+ *        annotation="kermeta documentation='This expression is a literal representing a Boolean value, typically : true or false keyword'"
  * @generated
  */
 public interface BooleanLiteral extends Literal {

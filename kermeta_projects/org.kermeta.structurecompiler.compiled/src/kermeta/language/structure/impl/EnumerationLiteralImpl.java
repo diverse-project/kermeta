@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: EnumerationLiteralImpl.java,v 1.7 2008-10-29 08:29:10 cfaucher Exp $
+ * $Id: EnumerationLiteralImpl.java,v 1.8 2008-11-07 08:52:51 cfaucher Exp $
  */
 package kermeta.language.structure.impl;
 
@@ -288,8 +288,8 @@ public class EnumerationLiteralImpl extends TraceabilityImpl<EEnumLiteral>
 
 		result = this.getName();
 
-		java.lang.Boolean idIfCond_315 = false;
-		idIfCond_315 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+		java.lang.Boolean idIfCond_402 = false;
+		idIfCond_402 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 				.isInstanceOfSwitcher(
 						org.kermeta.compil.runtime.helper.language.ObjectUtil
 								.containerSwitcher(elem),
@@ -298,23 +298,26 @@ public class EnumerationLiteralImpl extends TraceabilityImpl<EEnumLiteral>
 								.getMetaClass(
 										"kermeta.language.structure.NamedElement"));
 
-		if (idIfCond_315) {
+		if (idIfCond_402) {
 
-			elem = (kermeta.language.structure.NamedElement) org.kermeta.compil.runtime.helper.language.ObjectUtil
-					.containerSwitcher(elem);
-			java.lang.Boolean idLoopCond_316 = false;
-			while (!idLoopCond_316) {
-				idLoopCond_316 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+			elem = (kermeta.language.structure.NamedElement) org.kermeta.compil.runtime.ExecutionContext
+					.getInstance()
+					.<kermeta.language.structure.NamedElement> asTypeOrVoid(
+							org.kermeta.compil.runtime.helper.language.ObjectUtil
+									.containerSwitcher(elem));
+			java.lang.Boolean idLoopCond_403 = false;
+			while (!idLoopCond_403) {
+				idLoopCond_403 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 						.equalsSwitcher(elem, null);
-				if (idLoopCond_316) {
+				if (idLoopCond_403) {
 				} else {
 
 					result = kermeta.standard.helper.StringWrapper.plus(
 							kermeta.standard.helper.StringWrapper.plus(elem
 									.getName(), "::"), result);
 
-					java.lang.Boolean idIfCond_317 = false;
-					idIfCond_317 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+					java.lang.Boolean idIfCond_404 = false;
+					idIfCond_404 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 							.isInstanceOfSwitcher(
 									org.kermeta.compil.runtime.helper.language.ObjectUtil
 											.containerSwitcher(elem),
@@ -323,10 +326,13 @@ public class EnumerationLiteralImpl extends TraceabilityImpl<EEnumLiteral>
 											.getMetaClass(
 													"kermeta.language.structure.NamedElement"));
 
-					if (idIfCond_317) {
+					if (idIfCond_404) {
 
-						elem = (kermeta.language.structure.NamedElement) org.kermeta.compil.runtime.helper.language.ObjectUtil
-								.containerSwitcher(elem);
+						elem = (kermeta.language.structure.NamedElement) org.kermeta.compil.runtime.ExecutionContext
+								.getInstance()
+								.<kermeta.language.structure.NamedElement> asTypeOrVoid(
+										org.kermeta.compil.runtime.helper.language.ObjectUtil
+												.containerSwitcher(elem));
 					} else {
 
 						elem = null;

@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: EAnnotationImpl.java,v 1.8 2008-10-29 08:29:11 cfaucher Exp $
+ * $Id: EAnnotationImpl.java,v 1.9 2008-11-07 08:53:03 cfaucher Exp $
  */
 package ecore.impl;
 
@@ -37,8 +37,8 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * The following features are implemented:
  * <ul>
  *   <li>{@link ecore.impl.EAnnotationImpl#getReferences <em>References</em>}</li>
- *   <li>{@link ecore.impl.EAnnotationImpl#getDetails <em>Details</em>}</li>
  *   <li>{@link ecore.impl.EAnnotationImpl#getSource <em>Source</em>}</li>
+ *   <li>{@link ecore.impl.EAnnotationImpl#getDetails <em>Details</em>}</li>
  *   <li>{@link ecore.impl.EAnnotationImpl#getContents <em>Contents</em>}</li>
  *   <li>{@link ecore.impl.EAnnotationImpl#getEModelElement <em>EModel Element</em>}</li>
  * </ul>
@@ -56,16 +56,6 @@ public class EAnnotationImpl extends EModelElementImpl implements EAnnotation {
 	 * @ordered
 	 */
 	protected EList<EObject> references;
-
-	/**
-	 * The cached value of the '{@link #getDetails() <em>Details</em>}' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getDetails()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<EStringToStringMapEntry> details;
 
 	/**
 	 * The default value of the '{@link #getSource() <em>Source</em>}' attribute.
@@ -86,6 +76,16 @@ public class EAnnotationImpl extends EModelElementImpl implements EAnnotation {
 	 * @ordered
 	 */
 	protected String source = SOURCE_EDEFAULT;
+
+	/**
+	 * The cached value of the '{@link #getDetails() <em>Details</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getDetails()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<EStringToStringMapEntry> details;
 
 	/**
 	 * The cached value of the '{@link #getContents() <em>Contents</em>}' containment reference list.
@@ -134,20 +134,6 @@ public class EAnnotationImpl extends EModelElementImpl implements EAnnotation {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<EStringToStringMapEntry> getDetails() {
-		if (details == null) {
-			details = new EObjectContainmentEList.Resolving<EStringToStringMapEntry>(
-					EStringToStringMapEntry.class, this,
-					EcorePackage.EANNOTATION__DETAILS);
-		}
-		return details;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public String getSource() {
 		return source;
 	}
@@ -163,6 +149,20 @@ public class EAnnotationImpl extends EModelElementImpl implements EAnnotation {
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET,
 					EcorePackage.EANNOTATION__SOURCE, oldSource, source));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<EStringToStringMapEntry> getDetails() {
+		if (details == null) {
+			details = new EObjectContainmentEList.Resolving<EStringToStringMapEntry>(
+					EStringToStringMapEntry.class, this,
+					EcorePackage.EANNOTATION__DETAILS);
+		}
+		return details;
 	}
 
 	/**
@@ -304,10 +304,10 @@ public class EAnnotationImpl extends EModelElementImpl implements EAnnotation {
 		switch (featureID) {
 		case EcorePackage.EANNOTATION__REFERENCES:
 			return getReferences();
-		case EcorePackage.EANNOTATION__DETAILS:
-			return getDetails();
 		case EcorePackage.EANNOTATION__SOURCE:
 			return getSource();
+		case EcorePackage.EANNOTATION__DETAILS:
+			return getDetails();
 		case EcorePackage.EANNOTATION__CONTENTS:
 			return getContents();
 		case EcorePackage.EANNOTATION__EMODEL_ELEMENT:
@@ -331,13 +331,13 @@ public class EAnnotationImpl extends EModelElementImpl implements EAnnotation {
 			getReferences().clear();
 			getReferences().addAll((Collection<? extends EObject>) newValue);
 			return;
+		case EcorePackage.EANNOTATION__SOURCE:
+			setSource((String) newValue);
+			return;
 		case EcorePackage.EANNOTATION__DETAILS:
 			getDetails().clear();
 			getDetails().addAll(
 					(Collection<? extends EStringToStringMapEntry>) newValue);
-			return;
-		case EcorePackage.EANNOTATION__SOURCE:
-			setSource((String) newValue);
 			return;
 		case EcorePackage.EANNOTATION__CONTENTS:
 			getContents().clear();
@@ -361,11 +361,11 @@ public class EAnnotationImpl extends EModelElementImpl implements EAnnotation {
 		case EcorePackage.EANNOTATION__REFERENCES:
 			getReferences().clear();
 			return;
-		case EcorePackage.EANNOTATION__DETAILS:
-			getDetails().clear();
-			return;
 		case EcorePackage.EANNOTATION__SOURCE:
 			setSource(SOURCE_EDEFAULT);
+			return;
+		case EcorePackage.EANNOTATION__DETAILS:
+			getDetails().clear();
 			return;
 		case EcorePackage.EANNOTATION__CONTENTS:
 			getContents().clear();
@@ -387,11 +387,11 @@ public class EAnnotationImpl extends EModelElementImpl implements EAnnotation {
 		switch (featureID) {
 		case EcorePackage.EANNOTATION__REFERENCES:
 			return references != null && !references.isEmpty();
-		case EcorePackage.EANNOTATION__DETAILS:
-			return details != null && !details.isEmpty();
 		case EcorePackage.EANNOTATION__SOURCE:
 			return SOURCE_EDEFAULT == null ? source != null : !SOURCE_EDEFAULT
 					.equals(source);
+		case EcorePackage.EANNOTATION__DETAILS:
+			return details != null && !details.isEmpty();
 		case EcorePackage.EANNOTATION__CONTENTS:
 			return contents != null && !contents.isEmpty();
 		case EcorePackage.EANNOTATION__EMODEL_ELEMENT:

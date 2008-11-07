@@ -15,12 +15,20 @@ public class StringWrapper {
 	java.lang.String self, java.lang.String other
 
 	) {
+		//Protection of the following code
+		if (self == null) {
+			kermeta.exceptions.CallOnVoidTarget exp = kermeta.exceptions.ExceptionsFactory.eINSTANCE
+					.createCallOnVoidTarget();
+			exp.setMessage("Initialize the String expression");
+			throw new org.kermeta.compil.runtime.helper.error.KRuntimeError(exp);
+		}
+		//End of the protection
 
-		java.lang.Boolean idIfCond_829 = false;
-		idIfCond_829 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+		java.lang.Boolean idIfCond_686 = false;
+		idIfCond_686 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 				.isVoidSwitcher(other);
 
-		if (idIfCond_829) {
+		if (idIfCond_686) {
 
 			if (true)
 				throw new org.kermeta.compil.runtime.helper.error.KRuntimeError(
@@ -44,22 +52,38 @@ public class StringWrapper {
 	java.lang.String self, java.lang.String other
 
 	) {
+		//Protection of the following code
+		if (self == null) {
+			kermeta.exceptions.CallOnVoidTarget exp = kermeta.exceptions.ExceptionsFactory.eINSTANCE
+					.createCallOnVoidTarget();
+			exp.setMessage("Initialize the String expression");
+			throw new org.kermeta.compil.runtime.helper.error.KRuntimeError(exp);
+		}
+		//End of the protection
 
 		java.lang.String result = null;
 
-		java.lang.Boolean idIfCond_830 = false;
-		idIfCond_830 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+		java.lang.Boolean idIfCond_687 = false;
+		idIfCond_687 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 				.isVoidSwitcher(other);
 
-		if (idIfCond_830) {
+		if (idIfCond_687) {
 
-			result = (java.lang.String) org.kermeta.compil.runtime.helper.basetypes.StringUtil
-					.plus(self, kermeta.standard.helper.StringWrapper
-							.toString(other));
+			result = (java.lang.String) org.kermeta.compil.runtime.ExecutionContext
+					.getInstance()
+					.<java.lang.String> asTypeOrVoid(
+							org.kermeta.compil.runtime.helper.basetypes.StringUtil
+									.plus(
+											self,
+											kermeta.standard.helper.StringWrapper
+													.toString(other)));
 		} else {
 
-			result = (java.lang.String) org.kermeta.compil.runtime.helper.basetypes.StringUtil
-					.plus(self, other);
+			result = (java.lang.String) org.kermeta.compil.runtime.ExecutionContext
+					.getInstance()
+					.<java.lang.String> asTypeOrVoid(
+							org.kermeta.compil.runtime.helper.basetypes.StringUtil
+									.plus(self, other));
 		}
 
 		return result;
@@ -75,24 +99,36 @@ public class StringWrapper {
 	java.lang.String self, java.lang.String other
 
 	) {
+		//Protection of the following code
+		if (self == null
+				|| ((java.lang.Object) self) instanceof kermeta.language.structure.Object) {
+			return (java.lang.Boolean) org.kermeta.compil.runtime.helper.language.ObjectUtil
+					.equals(
+							(kermeta.language.structure.Object) ((java.lang.Object) self),
+							other);
+		}
+		//End of the protection
 
 		java.lang.Boolean result = null;
 
-		java.lang.Boolean idIfCond_831 = false;
-		idIfCond_831 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+		java.lang.Boolean idIfCond_688 = false;
+		idIfCond_688 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 				.isNotEqualSwitcher(
 						org.kermeta.compil.runtime.helper.language.ObjectUtil
 								.getMetaClassSwitcher(other),
 						org.kermeta.compil.runtime.ExecutionContext
 								.getInstance().getMetaClass("java.lang.String"));
 
-		if (idIfCond_831) {
+		if (idIfCond_688) {
 
 			result = false;
 		} else {
 
-			result = (java.lang.Boolean) org.kermeta.compil.runtime.helper.basetypes.StringUtil
-					.equals(self, other);
+			result = (java.lang.Boolean) org.kermeta.compil.runtime.ExecutionContext
+					.getInstance()
+					.<java.lang.Boolean> asTypeOrVoid(
+							org.kermeta.compil.runtime.helper.basetypes.StringUtil
+									.equals(self, other));
 		}
 
 		return result;
@@ -108,6 +144,14 @@ public class StringWrapper {
 	java.lang.String self
 
 	) {
+		//Protection of the following code
+		if (self == null) {
+			kermeta.exceptions.CallOnVoidTarget exp = kermeta.exceptions.ExceptionsFactory.eINSTANCE
+					.createCallOnVoidTarget();
+			exp.setMessage("Initialize the String expression");
+			throw new org.kermeta.compil.runtime.helper.error.KRuntimeError(exp);
+		}
+		//End of the protection
 
 		kermeta.utils.Hashtable<java.lang.String, java.lang.String> result = null;
 
@@ -123,36 +167,36 @@ public class StringWrapper {
 
 		{
 
-			kermeta.standard.Iterator<java.lang.String> it_ft191 = set_infos
+			kermeta.standard.Iterator<java.lang.String> it_ft153 = set_infos
 					.iterator();
-			java.lang.Boolean idLoopCond_832 = false;
-			while (!idLoopCond_832) {
-				idLoopCond_832 = it_ft191.isOff();
-				if (idLoopCond_832) {
+			java.lang.Boolean idLoopCond_689 = false;
+			while (!idLoopCond_689) {
+				idLoopCond_689 = it_ft153.isOff();
+				if (idLoopCond_689) {
 				} else {
 
 					//BIle:func
-					java.lang.String i_lbdExp191 = it_ft191.next();
+					java.lang.String i_lbdExp153 = it_ft153.next();
 
 					kermeta.standard.OrderedSet<java.lang.String> tmp_set_infos = kermeta.standard.helper.StringWrapper
-							.split(i_lbdExp191, "=");
+							.split(i_lbdExp153, "=");
 
-					java.lang.Boolean idIfCond_833 = false;
-					idIfCond_833 = kermeta.standard.helper.IntegerWrapper
+					java.lang.Boolean idIfCond_690 = false;
+					idIfCond_690 = kermeta.standard.helper.IntegerWrapper
 							.isGreaterOrEqual(tmp_set_infos.size(), 2);
 
-					if (idIfCond_833) {
+					if (idIfCond_690) {
 
-						java.lang.Boolean idIfCond_834 = false;
-						idIfCond_834 = kermeta.standard.helper.BooleanWrapper
+						java.lang.Boolean idIfCond_691 = false;
+						idIfCond_691 = kermeta.standard.helper.BooleanWrapper
 								.not(org.kermeta.compil.runtime.helper.language.ObjectUtil
 										.isVoidSwitcher(tmp_set_infos
 												.elementAt(0)));
 
-						if (idIfCond_834) {
+						if (idIfCond_691) {
 
-							java.lang.Boolean idIfCond_835 = false;
-							idIfCond_835 = kermeta.standard.helper.BooleanWrapper
+							java.lang.Boolean idIfCond_692 = false;
+							idIfCond_692 = kermeta.standard.helper.BooleanWrapper
 									.and(
 											kermeta.standard.helper.BooleanWrapper
 													.not(org.kermeta.compil.runtime.helper.language.ObjectUtil
@@ -164,7 +208,7 @@ public class StringWrapper {
 																	.elementAt(1),
 															""));
 
-							if (idIfCond_835) {
+							if (idIfCond_692) {
 
 								map_infos.put(tmp_set_infos.elementAt(0),
 										tmp_set_infos.elementAt(1));
@@ -197,6 +241,14 @@ public class StringWrapper {
 	java.lang.String self
 
 	) {
+		//Protection of the following code
+		if (self == null) {
+			kermeta.exceptions.CallOnVoidTarget exp = kermeta.exceptions.ExceptionsFactory.eINSTANCE
+					.createCallOnVoidTarget();
+			exp.setMessage("Initialize the String expression");
+			throw new org.kermeta.compil.runtime.helper.error.KRuntimeError(exp);
+		}
+		//End of the protection
 
 		java.lang.String result = null;
 
@@ -217,49 +269,27 @@ public class StringWrapper {
 	java.lang.String self
 
 	) {
+		//Protection of the following code
+		if (self == null) {
+			kermeta.exceptions.CallOnVoidTarget exp = kermeta.exceptions.ExceptionsFactory.eINSTANCE
+					.createCallOnVoidTarget();
+			exp.setMessage("Initialize the String expression");
+			throw new org.kermeta.compil.runtime.helper.error.KRuntimeError(exp);
+		}
+		//End of the protection
 
 		java.lang.Double result = null;
 
-		result = (java.lang.Double) org.kermeta.compil.runtime.helper.basetypes.StringUtil
-				.toReal(self);
+		result = (java.lang.Double) org.kermeta.compil.runtime.ExecutionContext
+				.getInstance().<java.lang.Double> asTypeOrVoid(
+						org.kermeta.compil.runtime.helper.basetypes.StringUtil
+								.toReal(self));
 
-		java.lang.Boolean idIfCond_836 = false;
-		idIfCond_836 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+		java.lang.Boolean idIfCond_693 = false;
+		idIfCond_693 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 				.isVoidSwitcher(result);
 
-		if (idIfCond_836) {
-
-			if (true)
-				throw new org.kermeta.compil.runtime.helper.error.KRuntimeError(
-						((kermeta.exceptions.StringFormatException) org.kermeta.compil.runtime.helper.language.ClassUtil
-								.newObject("kermeta.exceptions.StringFormatException")));
-
-		}
-
-		return result;
-
-	}
-
-	/**
-	 *
-	 * @generated
-	 */
-	public static <G> java.lang.Boolean toBoolean(
-
-	java.lang.String self
-
-	) {
-
-		java.lang.Boolean result = null;
-
-		result = (java.lang.Boolean) org.kermeta.compil.runtime.helper.basetypes.StringUtil
-				.toBoolean(self);
-
-		java.lang.Boolean idIfCond_837 = false;
-		idIfCond_837 = org.kermeta.compil.runtime.helper.language.ObjectUtil
-				.isVoidSwitcher(result);
-
-		if (idIfCond_837) {
+		if (idIfCond_693) {
 
 			if (true)
 				throw new org.kermeta.compil.runtime.helper.error.KRuntimeError(
@@ -281,6 +311,14 @@ public class StringWrapper {
 	java.lang.String self, java.lang.String new_extension
 
 	) {
+		//Protection of the following code
+		if (self == null) {
+			kermeta.exceptions.CallOnVoidTarget exp = kermeta.exceptions.ExceptionsFactory.eINSTANCE
+					.createCallOnVoidTarget();
+			exp.setMessage("Initialize the String expression");
+			throw new org.kermeta.compil.runtime.helper.error.KRuntimeError(exp);
+		}
+		//End of the protection
 
 		java.lang.String result = null;
 
@@ -295,28 +333,28 @@ public class StringWrapper {
 
 		{
 
-			kermeta.standard.Iterator<java.lang.String> it_ft192 = set_str
+			kermeta.standard.Iterator<java.lang.String> it_ft154 = set_str
 					.iterator();
-			java.lang.Boolean idLoopCond_838 = false;
-			while (!idLoopCond_838) {
-				idLoopCond_838 = it_ft192.isOff();
-				if (idLoopCond_838) {
+			java.lang.Boolean idLoopCond_694 = false;
+			while (!idLoopCond_694) {
+				idLoopCond_694 = it_ft154.isOff();
+				if (idLoopCond_694) {
 				} else {
 
 					//BIle:func
-					java.lang.String seg_lbdExp192 = it_ft192.next();
+					java.lang.String seg_lbdExp154 = it_ft154.next();
 
-					java.lang.Boolean idIfCond_839 = false;
-					idIfCond_839 = kermeta.standard.helper.IntegerWrapper
+					java.lang.Boolean idIfCond_695 = false;
+					idIfCond_695 = kermeta.standard.helper.IntegerWrapper
 							.isLower(inc_seg,
 									kermeta.standard.helper.IntegerWrapper
 											.minus(set_str.size(), 1));
 
-					if (idIfCond_839) {
+					if (idIfCond_695) {
 
 						result = kermeta.standard.helper.StringWrapper.plus(
 								kermeta.standard.helper.StringWrapper.plus(
-										result, seg_lbdExp192), ".");
+										result, seg_lbdExp154), ".");
 					}
 
 					inc_seg = kermeta.standard.helper.IntegerWrapper.plus(
@@ -340,43 +378,38 @@ public class StringWrapper {
 	 *
 	 * @generated
 	 */
-	public static <G> java.lang.Boolean contains(
+	public static <G> java.lang.Boolean toBoolean(
 
-	java.lang.String self, java.lang.String str1
+	java.lang.String self
 
 	) {
+		//Protection of the following code
+		if (self == null) {
+			kermeta.exceptions.CallOnVoidTarget exp = kermeta.exceptions.ExceptionsFactory.eINSTANCE
+					.createCallOnVoidTarget();
+			exp.setMessage("Initialize the String expression");
+			throw new org.kermeta.compil.runtime.helper.error.KRuntimeError(exp);
+		}
+		//End of the protection
 
 		java.lang.Boolean result = null;
 
-		result = (java.lang.Boolean) org.kermeta.compil.runtime.helper.basetypes.StringUtil
-				.contains(self, str1);
+		result = (java.lang.Boolean) org.kermeta.compil.runtime.ExecutionContext
+				.getInstance().<java.lang.Boolean> asTypeOrVoid(
+						org.kermeta.compil.runtime.helper.basetypes.StringUtil
+								.toBoolean(self));
 
-		return result;
+		java.lang.Boolean idIfCond_696 = false;
+		idIfCond_696 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+				.isVoidSwitcher(result);
 
-	}
+		if (idIfCond_696) {
 
-	/**
-	 *
-	 * @generated
-	 */
-	public static <G> java.lang.Boolean isValueType(
+			if (true)
+				throw new org.kermeta.compil.runtime.helper.error.KRuntimeError(
+						((kermeta.exceptions.StringFormatException) org.kermeta.compil.runtime.helper.language.ClassUtil
+								.newObject("kermeta.exceptions.StringFormatException")));
 
-	java.lang.String self, km2ecore.KM2EcoreContext context
-
-	) {
-
-		java.lang.Boolean result = null;
-
-		result = false;
-
-		java.lang.Boolean idIfCond_840 = false;
-		idIfCond_840 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
-				.<java.lang.String> convertAsOrderedSet(
-						context.getValueTypeMapping()).contains(self);
-
-		if (idIfCond_840) {
-
-			result = true;
 		}
 
 		return result;
@@ -392,14 +425,22 @@ public class StringWrapper {
 	java.lang.String self, java.lang.String other
 
 	) {
+		//Protection of the following code
+		if (self == null) {
+			kermeta.exceptions.CallOnVoidTarget exp = kermeta.exceptions.ExceptionsFactory.eINSTANCE
+					.createCallOnVoidTarget();
+			exp.setMessage("Initialize the String expression");
+			throw new org.kermeta.compil.runtime.helper.error.KRuntimeError(exp);
+		}
+		//End of the protection
 
 		java.lang.Integer result = null;
 
-		java.lang.Boolean idIfCond_841 = false;
-		idIfCond_841 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+		java.lang.Boolean idIfCond_697 = false;
+		idIfCond_697 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 				.isVoidSwitcher(other);
 
-		if (idIfCond_841) {
+		if (idIfCond_697) {
 
 			if (true)
 				throw new org.kermeta.compil.runtime.helper.error.KRuntimeError(
@@ -408,9 +449,77 @@ public class StringWrapper {
 
 		} else {
 
-			result = (java.lang.Integer) org.kermeta.compil.runtime.helper.basetypes.StringUtil
-					.compareTo(self, other);
+			result = (java.lang.Integer) org.kermeta.compil.runtime.ExecutionContext
+					.getInstance()
+					.<java.lang.Integer> asTypeOrVoid(
+							org.kermeta.compil.runtime.helper.basetypes.StringUtil
+									.compareTo(self, other));
 		}
+
+		return result;
+
+	}
+
+	/**
+	 *
+	 * @generated
+	 */
+	public static <G> java.lang.Boolean isValueType(
+
+	java.lang.String self, km2ecore.KM2EcoreContext context
+
+	) {
+		//Protection of the following code
+		if (self == null) {
+			kermeta.exceptions.CallOnVoidTarget exp = kermeta.exceptions.ExceptionsFactory.eINSTANCE
+					.createCallOnVoidTarget();
+			exp.setMessage("Initialize the String expression");
+			throw new org.kermeta.compil.runtime.helper.error.KRuntimeError(exp);
+		}
+		//End of the protection
+
+		java.lang.Boolean result = null;
+
+		result = false;
+
+		java.lang.Boolean idIfCond_698 = false;
+		idIfCond_698 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
+				.<java.lang.String> convertAsOrderedSet(
+						context.getValueTypeMapping()).contains(self);
+
+		if (idIfCond_698) {
+
+			result = true;
+		}
+
+		return result;
+
+	}
+
+	/**
+	 *
+	 * @generated
+	 */
+	public static <G> java.lang.Boolean contains(
+
+	java.lang.String self, java.lang.String str1
+
+	) {
+		//Protection of the following code
+		if (self == null) {
+			kermeta.exceptions.CallOnVoidTarget exp = kermeta.exceptions.ExceptionsFactory.eINSTANCE
+					.createCallOnVoidTarget();
+			exp.setMessage("Initialize the String expression");
+			throw new org.kermeta.compil.runtime.helper.error.KRuntimeError(exp);
+		}
+		//End of the protection
+
+		java.lang.Boolean result = null;
+
+		result = (java.lang.Boolean) org.kermeta.compil.runtime.ExecutionContext
+				.getInstance().<java.lang.Boolean> asTypeOrVoid(
+						org.kermeta.compil.runtime.helper.basetypes.StringUtil
+								.contains(self, str1));
 
 		return result;
 
@@ -425,11 +534,21 @@ public class StringWrapper {
 	java.lang.String self, java.lang.String str
 
 	) {
+		//Protection of the following code
+		if (self == null) {
+			kermeta.exceptions.CallOnVoidTarget exp = kermeta.exceptions.ExceptionsFactory.eINSTANCE
+					.createCallOnVoidTarget();
+			exp.setMessage("Initialize the String expression");
+			throw new org.kermeta.compil.runtime.helper.error.KRuntimeError(exp);
+		}
+		//End of the protection
 
 		java.lang.Integer result = null;
 
-		result = (java.lang.Integer) org.kermeta.compil.runtime.helper.basetypes.StringUtil
-				.indexOf(self, str);
+		result = (java.lang.Integer) org.kermeta.compil.runtime.ExecutionContext
+				.getInstance().<java.lang.Integer> asTypeOrVoid(
+						org.kermeta.compil.runtime.helper.basetypes.StringUtil
+								.indexOf(self, str));
 
 		return result;
 
@@ -444,18 +563,26 @@ public class StringWrapper {
 	java.lang.String self, java.lang.Integer index
 
 	) {
+		//Protection of the following code
+		if (self == null) {
+			kermeta.exceptions.CallOnVoidTarget exp = kermeta.exceptions.ExceptionsFactory.eINSTANCE
+					.createCallOnVoidTarget();
+			exp.setMessage("Initialize the String expression");
+			throw new org.kermeta.compil.runtime.helper.error.KRuntimeError(exp);
+		}
+		//End of the protection
 
 		java.lang.Character result = null;
 
-		java.lang.Boolean idIfCond_842 = false;
-		idIfCond_842 = kermeta.standard.helper.BooleanWrapper.or(
+		java.lang.Boolean idIfCond_699 = false;
+		idIfCond_699 = kermeta.standard.helper.BooleanWrapper.or(
 				kermeta.standard.helper.IntegerWrapper.isLower(index, 0),
 				kermeta.standard.helper.IntegerWrapper.isGreater(index,
 						kermeta.standard.helper.IntegerWrapper.minus(
 								kermeta.standard.helper.StringWrapper
 										.size(self), 1)));
 
-		if (idIfCond_842) {
+		if (idIfCond_699) {
 
 			if (true)
 				throw new org.kermeta.compil.runtime.helper.error.KRuntimeError(
@@ -464,8 +591,11 @@ public class StringWrapper {
 
 		} else {
 
-			result = (java.lang.Character) org.kermeta.compil.runtime.helper.basetypes.StringUtil
-					.elementAt(self, index);
+			result = (java.lang.Character) org.kermeta.compil.runtime.ExecutionContext
+					.getInstance()
+					.<java.lang.Character> asTypeOrVoid(
+							org.kermeta.compil.runtime.helper.basetypes.StringUtil
+									.elementAt(self, index));
 		}
 
 		return result;
@@ -481,6 +611,14 @@ public class StringWrapper {
 	java.lang.String self
 
 	) {
+		//Protection of the following code
+		if (self == null) {
+			kermeta.exceptions.CallOnVoidTarget exp = kermeta.exceptions.ExceptionsFactory.eINSTANCE
+					.createCallOnVoidTarget();
+			exp.setMessage("Initialize the String expression");
+			throw new org.kermeta.compil.runtime.helper.error.KRuntimeError(exp);
+		}
+		//End of the protection
 
 		java.lang.String result = null;
 
@@ -504,11 +642,21 @@ public class StringWrapper {
 	java.lang.String self
 
 	) {
+		//Protection of the following code
+		if (self == null) {
+			kermeta.exceptions.CallOnVoidTarget exp = kermeta.exceptions.ExceptionsFactory.eINSTANCE
+					.createCallOnVoidTarget();
+			exp.setMessage("Initialize the String expression");
+			throw new org.kermeta.compil.runtime.helper.error.KRuntimeError(exp);
+		}
+		//End of the protection
 
 		java.lang.Integer result = null;
 
-		result = (java.lang.Integer) org.kermeta.compil.runtime.helper.basetypes.StringUtil
-				.size(self);
+		result = (java.lang.Integer) org.kermeta.compil.runtime.ExecutionContext
+				.getInstance().<java.lang.Integer> asTypeOrVoid(
+						org.kermeta.compil.runtime.helper.basetypes.StringUtil
+								.size(self));
 
 		return result;
 
@@ -523,11 +671,21 @@ public class StringWrapper {
 	java.lang.String self, java.lang.String str1, java.lang.String str2
 
 	) {
+		//Protection of the following code
+		if (self == null) {
+			kermeta.exceptions.CallOnVoidTarget exp = kermeta.exceptions.ExceptionsFactory.eINSTANCE
+					.createCallOnVoidTarget();
+			exp.setMessage("Initialize the String expression");
+			throw new org.kermeta.compil.runtime.helper.error.KRuntimeError(exp);
+		}
+		//End of the protection
 
 		java.lang.String result = null;
 
-		result = (java.lang.String) org.kermeta.compil.runtime.helper.basetypes.StringUtil
-				.replace(self, str1, str2);
+		result = (java.lang.String) org.kermeta.compil.runtime.ExecutionContext
+				.getInstance().<java.lang.String> asTypeOrVoid(
+						org.kermeta.compil.runtime.helper.basetypes.StringUtil
+								.replace(self, str1, str2));
 
 		return result;
 
@@ -542,11 +700,21 @@ public class StringWrapper {
 	java.lang.String self
 
 	) {
+		//Protection of the following code
+		if (self == null) {
+			kermeta.exceptions.CallOnVoidTarget exp = kermeta.exceptions.ExceptionsFactory.eINSTANCE
+					.createCallOnVoidTarget();
+			exp.setMessage("Initialize the String expression");
+			throw new org.kermeta.compil.runtime.helper.error.KRuntimeError(exp);
+		}
+		//End of the protection
 
 		java.lang.String result = null;
 
-		result = (java.lang.String) org.kermeta.compil.runtime.helper.basetypes.StringUtil
-				.toUpperCase(self);
+		result = (java.lang.String) org.kermeta.compil.runtime.ExecutionContext
+				.getInstance().<java.lang.String> asTypeOrVoid(
+						org.kermeta.compil.runtime.helper.basetypes.StringUtil
+								.toUpperCase(self));
 
 		return result;
 
@@ -561,17 +729,27 @@ public class StringWrapper {
 	java.lang.String self
 
 	) {
+		//Protection of the following code
+		if (self == null) {
+			kermeta.exceptions.CallOnVoidTarget exp = kermeta.exceptions.ExceptionsFactory.eINSTANCE
+					.createCallOnVoidTarget();
+			exp.setMessage("Initialize the String expression");
+			throw new org.kermeta.compil.runtime.helper.error.KRuntimeError(exp);
+		}
+		//End of the protection
 
 		java.lang.Integer result = null;
 
-		result = (java.lang.Integer) org.kermeta.compil.runtime.helper.basetypes.StringUtil
-				.toInteger(self);
+		result = (java.lang.Integer) org.kermeta.compil.runtime.ExecutionContext
+				.getInstance().<java.lang.Integer> asTypeOrVoid(
+						org.kermeta.compil.runtime.helper.basetypes.StringUtil
+								.toInteger(self));
 
-		java.lang.Boolean idIfCond_843 = false;
-		idIfCond_843 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+		java.lang.Boolean idIfCond_700 = false;
+		idIfCond_700 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 				.isVoidSwitcher(result);
 
-		if (idIfCond_843) {
+		if (idIfCond_700) {
 
 			if (true)
 				throw new org.kermeta.compil.runtime.helper.error.KRuntimeError(
@@ -593,11 +771,21 @@ public class StringWrapper {
 	java.lang.String self
 
 	) {
+		//Protection of the following code
+		if (self == null) {
+			kermeta.exceptions.CallOnVoidTarget exp = kermeta.exceptions.ExceptionsFactory.eINSTANCE
+					.createCallOnVoidTarget();
+			exp.setMessage("Initialize the String expression");
+			throw new org.kermeta.compil.runtime.helper.error.KRuntimeError(exp);
+		}
+		//End of the protection
 
 		java.lang.String result = null;
 
-		result = (java.lang.String) org.kermeta.compil.runtime.helper.basetypes.StringUtil
-				.toLowerCase(self);
+		result = (java.lang.String) org.kermeta.compil.runtime.ExecutionContext
+				.getInstance().<java.lang.String> asTypeOrVoid(
+						org.kermeta.compil.runtime.helper.basetypes.StringUtil
+								.toLowerCase(self));
 
 		return result;
 
@@ -613,11 +801,19 @@ public class StringWrapper {
 			java.lang.Integer subStringSize
 
 	) {
+		//Protection of the following code
+		if (self == null) {
+			kermeta.exceptions.CallOnVoidTarget exp = kermeta.exceptions.ExceptionsFactory.eINSTANCE
+					.createCallOnVoidTarget();
+			exp.setMessage("Initialize the String expression");
+			throw new org.kermeta.compil.runtime.helper.error.KRuntimeError(exp);
+		}
+		//End of the protection
 
 		java.lang.String result = null;
 
-		java.lang.Boolean idIfCond_844 = false;
-		idIfCond_844 = kermeta.standard.helper.BooleanWrapper
+		java.lang.Boolean idIfCond_701 = false;
+		idIfCond_701 = kermeta.standard.helper.BooleanWrapper
 				.and(
 						kermeta.standard.helper.BooleanWrapper
 								.and(
@@ -640,10 +836,13 @@ public class StringWrapper {
 						kermeta.standard.helper.IntegerWrapper
 								.isGreaterOrEqual(subStringSize, startIndex));
 
-		if (idIfCond_844) {
+		if (idIfCond_701) {
 
-			result = (java.lang.String) org.kermeta.compil.runtime.helper.basetypes.StringUtil
-					.substring(self, startIndex, subStringSize);
+			result = (java.lang.String) org.kermeta.compil.runtime.ExecutionContext
+					.getInstance()
+					.<java.lang.String> asTypeOrVoid(
+							org.kermeta.compil.runtime.helper.basetypes.StringUtil
+									.substring(self, startIndex, subStringSize));
 		} else {
 
 			if (true)
@@ -666,6 +865,13 @@ public class StringWrapper {
 	java.lang.String self
 
 	) {
+		//Protection of the following code
+		if (self == null
+				|| ((java.lang.Object) self) instanceof kermeta.language.structure.Object) {
+			return (java.lang.String) org.kermeta.compil.runtime.helper.language.ObjectUtil
+					.toString((kermeta.language.structure.Object) ((java.lang.Object) self));
+		}
+		//End of the protection
 
 		java.lang.String result = null;
 
@@ -684,11 +890,22 @@ public class StringWrapper {
 	java.lang.String self, java.lang.String delimiter
 
 	) {
+		//Protection of the following code
+		if (self == null) {
+			kermeta.exceptions.CallOnVoidTarget exp = kermeta.exceptions.ExceptionsFactory.eINSTANCE
+					.createCallOnVoidTarget();
+			exp.setMessage("Initialize the String expression");
+			throw new org.kermeta.compil.runtime.helper.error.KRuntimeError(exp);
+		}
+		//End of the protection
 
 		kermeta.standard.OrderedSet<java.lang.String> result = null;
 
-		result = (kermeta.standard.OrderedSet<java.lang.String>) org.kermeta.compil.runtime.helper.basetypes.StringUtil
-				.split(self, delimiter);
+		result = (kermeta.standard.OrderedSet<java.lang.String>) org.kermeta.compil.runtime.ExecutionContext
+				.getInstance()
+				.<kermeta.standard.OrderedSet<java.lang.String>> asTypeOrVoid(
+						org.kermeta.compil.runtime.helper.basetypes.StringUtil
+								.split(self, delimiter));
 
 		return result;
 
@@ -703,6 +920,15 @@ public class StringWrapper {
 	java.lang.String self, kermeta.language.structure.Class cl
 
 	) {
+		//Protection of the following code
+		if (self == null
+				|| ((java.lang.Object) self) instanceof kermeta.language.structure.Object) {
+			return (java.lang.Boolean) org.kermeta.compil.runtime.helper.language.ObjectUtil
+					.isKindOf(
+							(kermeta.language.structure.Object) ((java.lang.Object) self),
+							cl);
+		}
+		//End of the protection
 
 		java.lang.Boolean result = null;
 
@@ -722,11 +948,20 @@ public class StringWrapper {
 	java.lang.String self
 
 	) {
+		//Protection of the following code
+		if (self == null
+				|| ((java.lang.Object) self) instanceof kermeta.language.structure.Object) {
+			return (kermeta.language.structure.Class) org.kermeta.compil.runtime.helper.language.ObjectUtil
+					.getMetaClass((kermeta.language.structure.Object) ((java.lang.Object) self));
+		}
+		//End of the protection
 
 		kermeta.language.structure.Class result = null;
 
-		result = (kermeta.language.structure.Class) org.kermeta.compil.runtime.helper.language.ObjectUtil
-				.getMetaClass(self);
+		result = (kermeta.language.structure.Class) org.kermeta.compil.runtime.ExecutionContext
+				.getInstance().<kermeta.language.structure.Class> asTypeOrVoid(
+						org.kermeta.compil.runtime.helper.language.ObjectUtil
+								.getMetaClass(self));
 
 		return result;
 
@@ -742,12 +977,21 @@ public class StringWrapper {
 			java.lang.String element
 
 	) {
+		//Protection of the following code
+		if (self == null
+				|| ((java.lang.Object) self) instanceof kermeta.language.structure.Object) {
+			org.kermeta.compil.runtime.helper.language.ObjectUtil
+					.set(
+							(kermeta.language.structure.Object) ((java.lang.Object) self),
+							property, element);
+		}
+		//End of the protection
 
-		java.lang.Boolean idIfCond_845 = false;
-		idIfCond_845 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+		java.lang.Boolean idIfCond_702 = false;
+		idIfCond_702 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 				.isInstanceOfSwitcher(element, property.getType());
 
-		if (idIfCond_845) {
+		if (idIfCond_702) {
 
 			org.kermeta.compil.runtime.helper.language.ObjectUtil.set(self,
 					property, element);
@@ -797,104 +1041,111 @@ public class StringWrapper {
 	java.lang.String self
 
 	) {
+		//Protection of the following code
+		if (self == null
+				|| ((java.lang.Object) self) instanceof kermeta.language.structure.Object) {
+			org.kermeta.compil.runtime.helper.language.ObjectUtil
+					.checkInvariants((kermeta.language.structure.Object) ((java.lang.Object) self));
+		}
+		//End of the protection
 
 		kermeta.language.structure.ClassDefinition cd = org.kermeta.compil.runtime.helper.language.ObjectUtil
 				.getMetaClassSwitcher(self).getterClassDefinition();
 
-		java.lang.Boolean idIfCond_846 = false;
-		idIfCond_846 = kermeta.standard.helper.BooleanWrapper
+		java.lang.Boolean idIfCond_703 = false;
+		idIfCond_703 = kermeta.standard.helper.BooleanWrapper
 				.not(org.kermeta.compil.runtime.helper.language.ObjectUtil
 						.isVoidSwitcher(cd));
 
-		if (idIfCond_846) {
+		if (idIfCond_703) {
 
 			//BIft:each
 
 			{
 
-				kermeta.standard.Iterator<kermeta.language.structure.Property> it_ft193 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
+				kermeta.standard.Iterator<kermeta.language.structure.Property> it_ft155 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
 						.<kermeta.language.structure.Property> convertAsSet(
 								cd.getterAllAttribute()).iterator();
-				java.lang.Boolean idLoopCond_847 = false;
-				while (!idLoopCond_847) {
-					idLoopCond_847 = it_ft193.isOff();
-					if (idLoopCond_847) {
+				java.lang.Boolean idLoopCond_704 = false;
+				while (!idLoopCond_704) {
+					idLoopCond_704 = it_ft155.isOff();
+					if (idLoopCond_704) {
 					} else {
 
 						//BIle:func
-						kermeta.language.structure.Property p_lbdExp193 = it_ft193
+						kermeta.language.structure.Property p_lbdExp155 = it_ft155
 								.next();
 
 						//BIft:exists
 
-						java.lang.Boolean result_ft194 = null;
+						java.lang.Boolean result_ft156 = null;
 
-						java.lang.Boolean test_ft194 = false;
+						java.lang.Boolean test_ft156 = false;
 
 						{
 
-							kermeta.standard.Iterator<kermeta.language.structure.Tag> it_ft194 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
+							kermeta.standard.Iterator<kermeta.language.structure.Tag> it_ft156 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
 									.<kermeta.language.structure.Tag> convertAsOrderedSet(
-											p_lbdExp193.getTag()).iterator();
-							java.lang.Boolean idLoopCond_849 = false;
-							while (!idLoopCond_849) {
-								idLoopCond_849 = kermeta.standard.helper.BooleanWrapper
+											p_lbdExp155.getTag()).iterator();
+							java.lang.Boolean idLoopCond_706 = false;
+							while (!idLoopCond_706) {
+								idLoopCond_706 = kermeta.standard.helper.BooleanWrapper
 										.or(
-												it_ft194.isOff(),
+												it_ft156.isOff(),
 												org.kermeta.compil.runtime.helper.language.ObjectUtil
 														.isNotEqualSwitcher(
-																test_ft194,
+																test_ft156,
 																false));
-								if (idLoopCond_849) {
+								if (idLoopCond_706) {
 								} else {
 
-									java.lang.Boolean result_lambda_ft194 = null;
+									java.lang.Boolean result_lambda_ft156 = null;
 									//BIle:func
-									kermeta.language.structure.Tag t_lbdExp194 = it_ft194
+									kermeta.language.structure.Tag t_lbdExp156 = it_ft156
 											.next();
 
-									result_lambda_ft194 = kermeta.standard.helper.StringWrapper
-											.equals(t_lbdExp194.getName(),
+									result_lambda_ft156 = kermeta.standard.helper.StringWrapper
+											.equals(t_lbdExp156.getName(),
 													"ecore.isTransient");
 									//EIle:func
 
-									test_ft194 = kermeta.standard.helper.BooleanWrapper
-											.or(test_ft194, result_lambda_ft194);
+									test_ft156 = kermeta.standard.helper.BooleanWrapper
+											.or(test_ft156, result_lambda_ft156);
 								}
 							}
 						}
 
-						result_ft194 = test_ft194;
+						result_ft156 = test_ft156;
 						//EIft:exists
-						java.lang.Boolean idIfCond_848 = false;
-						idIfCond_848 = kermeta.standard.helper.BooleanWrapper
+						java.lang.Boolean idIfCond_705 = false;
+						idIfCond_705 = kermeta.standard.helper.BooleanWrapper
 								.and(
 										kermeta.standard.helper.BooleanWrapper
-												.not(result_ft194),
+												.not(result_ft156),
 										kermeta.standard.helper.BooleanWrapper
-												.not(p_lbdExp193.getIsDerived()));
+												.not(p_lbdExp155.getIsDerived()));
 
-						if (idIfCond_848) {
+						if (idIfCond_705) {
 
 							kermeta.language.structure.Object v = org.kermeta.compil.runtime.helper.language.ObjectUtil
-									.getSwitcher(self, p_lbdExp193);
+									.getSwitcher(self, p_lbdExp155);
 
-							java.lang.Boolean idIfCond_850 = false;
+							java.lang.Boolean idIfCond_707 = false;
 							//BIft:andThen
 
-							java.lang.Boolean result_ft195 = null;
+							java.lang.Boolean result_ft157 = null;
 
-							java.lang.Boolean idIfCond_851 = false;
-							idIfCond_851 = kermeta.standard.helper.BooleanWrapper
+							java.lang.Boolean idIfCond_708 = false;
+							idIfCond_708 = kermeta.standard.helper.BooleanWrapper
 									.not(org.kermeta.compil.runtime.helper.language.ObjectUtil
 											.isVoidSwitcher(v));
 
-							if (idIfCond_851) {
+							if (idIfCond_708) {
 
 								//BIle:right
-								/*This variable should be never used*/kermeta.language.structure.Object f_lbdExp195 = null;
+								/*This variable should be never used*/kermeta.language.structure.Object f_lbdExp157 = null;
 
-								result_ft195 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+								result_ft157 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 										.isInstanceOfSwitcher(
 												v,
 												org.kermeta.compil.runtime.ExecutionContext
@@ -905,14 +1156,14 @@ public class StringWrapper {
 
 							} else {
 
-								result_ft195 = false;
+								result_ft157 = false;
 							}
 
 							//CEC
-							idIfCond_850 = result_ft195;
+							idIfCond_707 = result_ft157;
 							//EIft:andThen
 
-							if (idIfCond_850) {
+							if (idIfCond_707) {
 
 								kermeta.standard.Collection<kermeta.language.structure.Object> c = ((kermeta.standard.Collection<kermeta.language.structure.Object>) org.kermeta.compil.runtime.helper.language.ObjectUtil
 										.asTypeSwitcher(
@@ -922,22 +1173,22 @@ public class StringWrapper {
 														.getMetaClass(
 																"kermeta.standard.Collection<kermeta.language.structure.Object>")));
 
-								java.lang.Boolean idIfCond_852 = false;
-								idIfCond_852 = kermeta.standard.helper.BooleanWrapper
+								java.lang.Boolean idIfCond_709 = false;
+								idIfCond_709 = kermeta.standard.helper.BooleanWrapper
 										.and(
 												org.kermeta.compil.runtime.helper.language.ObjectUtil
 														.isNotEqualSwitcher(
-																p_lbdExp193
+																p_lbdExp155
 																		.getUpper(),
 																kermeta.standard.helper.IntegerWrapper
 																		.uminus(1)),
 												kermeta.standard.helper.IntegerWrapper
 														.isGreater(
 																c.size(),
-																p_lbdExp193
+																p_lbdExp155
 																		.getUpper()));
 
-								if (idIfCond_852) {
+								if (idIfCond_709) {
 
 									kermeta.exceptions.ConstraintViolatedInv e = ((kermeta.exceptions.ConstraintViolatedInv) org.kermeta.compil.runtime.helper.language.ClassUtil
 											.newObject("kermeta.exceptions.ConstraintViolatedInv"));
@@ -957,7 +1208,7 @@ public class StringWrapper {
 																															cd
 																																	.getName()),
 																											"."),
-																							p_lbdExp193
+																							p_lbdExp155
 																									.getName()),
 																			" violated on "),
 															org.kermeta.compil.runtime.helper.language.ObjectUtil
@@ -969,12 +1220,12 @@ public class StringWrapper {
 
 								}
 
-								java.lang.Boolean idIfCond_853 = false;
-								idIfCond_853 = kermeta.standard.helper.IntegerWrapper
-										.isLower(c.size(), p_lbdExp193
+								java.lang.Boolean idIfCond_710 = false;
+								idIfCond_710 = kermeta.standard.helper.IntegerWrapper
+										.isLower(c.size(), p_lbdExp155
 												.getLower());
 
-								if (idIfCond_853) {
+								if (idIfCond_710) {
 
 									kermeta.exceptions.ConstraintViolatedInv e = ((kermeta.exceptions.ConstraintViolatedInv) org.kermeta.compil.runtime.helper.language.ClassUtil
 											.newObject("kermeta.exceptions.ConstraintViolatedInv"));
@@ -994,7 +1245,7 @@ public class StringWrapper {
 																															cd
 																																	.getName()),
 																											"."),
-																							p_lbdExp193
+																							p_lbdExp155
 																									.getName()),
 																			" violated on "),
 															org.kermeta.compil.runtime.helper.language.ObjectUtil
@@ -1008,16 +1259,16 @@ public class StringWrapper {
 
 							} else {
 
-								java.lang.Boolean idIfCond_854 = false;
-								idIfCond_854 = kermeta.standard.helper.BooleanWrapper
+								java.lang.Boolean idIfCond_711 = false;
+								idIfCond_711 = kermeta.standard.helper.BooleanWrapper
 										.and(
 												kermeta.standard.helper.IntegerWrapper
-														.equals(p_lbdExp193
+														.equals(p_lbdExp155
 																.getLower(), 1),
 												org.kermeta.compil.runtime.helper.language.ObjectUtil
 														.isVoidSwitcher(v));
 
-								if (idIfCond_854) {
+								if (idIfCond_711) {
 
 									kermeta.exceptions.ConstraintViolatedInv e = ((kermeta.exceptions.ConstraintViolatedInv) org.kermeta.compil.runtime.helper.language.ClassUtil
 											.newObject("kermeta.exceptions.ConstraintViolatedInv"));
@@ -1037,7 +1288,7 @@ public class StringWrapper {
 																															cd
 																																	.getName()),
 																											"."),
-																							p_lbdExp193
+																							p_lbdExp155
 																									.getName()),
 																			" violated on "),
 															org.kermeta.compil.runtime.helper.language.ObjectUtil
@@ -1077,6 +1328,13 @@ public class StringWrapper {
 	java.lang.String self
 
 	) {
+		//Protection of the following code
+		if (self == null
+				|| ((java.lang.Object) self) instanceof kermeta.language.structure.Object) {
+			return (java.lang.Boolean) org.kermeta.compil.runtime.helper.language.ObjectUtil
+					.isVoid((kermeta.language.structure.Object) ((java.lang.Object) self));
+		}
+		//End of the protection
 
 		java.lang.Boolean result = null;
 
@@ -1095,11 +1353,20 @@ public class StringWrapper {
 	java.lang.String self
 
 	) {
+		//Protection of the following code
+		if (self == null
+				|| ((java.lang.Object) self) instanceof kermeta.language.structure.Object) {
+			return (java.lang.Integer) org.kermeta.compil.runtime.helper.language.ObjectUtil
+					.oid((kermeta.language.structure.Object) ((java.lang.Object) self));
+		}
+		//End of the protection
 
 		java.lang.Integer result = null;
 
-		result = (java.lang.Integer) org.kermeta.compil.runtime.helper.language.ObjectUtil
-				.getOID(self);
+		result = (java.lang.Integer) org.kermeta.compil.runtime.ExecutionContext
+				.getInstance().<java.lang.Integer> asTypeOrVoid(
+						org.kermeta.compil.runtime.helper.language.ObjectUtil
+								.getOID(self));
 
 		return result;
 
@@ -1114,11 +1381,22 @@ public class StringWrapper {
 	java.lang.String self, kermeta.language.structure.Type type
 
 	) {
+		//Protection of the following code
+		if (self == null
+				|| ((java.lang.Object) self) instanceof kermeta.language.structure.Object) {
+			return (java.lang.Boolean) org.kermeta.compil.runtime.helper.language.ObjectUtil
+					.isInstanceOf(
+							(kermeta.language.structure.Object) ((java.lang.Object) self),
+							type);
+		}
+		//End of the protection
 
 		java.lang.Boolean result = null;
 
-		result = (java.lang.Boolean) org.kermeta.compil.runtime.helper.language.ObjectUtil
-				.isInstanceOf(self, type.getClass().getName());
+		result = (java.lang.Boolean) org.kermeta.compil.runtime.ExecutionContext
+				.getInstance().<java.lang.Boolean> asTypeOrVoid(
+						org.kermeta.compil.runtime.helper.language.ObjectUtil
+								.isInstanceOf(self, type.getClass().getName()));
 
 		return result;
 
@@ -1133,112 +1411,123 @@ public class StringWrapper {
 	java.lang.String self
 
 	) {
+		//Protection of the following code
+		if (self == null
+				|| ((java.lang.Object) self) instanceof kermeta.language.structure.Object) {
+			org.kermeta.compil.runtime.helper.language.ObjectUtil
+					.checkAllInvariants((kermeta.language.structure.Object) ((java.lang.Object) self));
+		}
+		//End of the protection
 
-		java.lang.Boolean idIfCond_855 = false;
-		idIfCond_855 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+		java.lang.Boolean idIfCond_712 = false;
+		idIfCond_712 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 				.isNotEqualSwitcher(self, null);
 
-		if (idIfCond_855) {
+		if (idIfCond_712) {
 
 			org.kermeta.compil.runtime.helper.language.ObjectUtil
 					.checkInvariantsSwitcher(self);
 
 			kermeta.language.structure.ClassDefinition cd = null;
 
-			cd = (kermeta.language.structure.ClassDefinition) org.kermeta.compil.runtime.helper.language.ObjectUtil
-					.getMetaClassSwitcher(self).getTypeDefinition();
+			cd = (kermeta.language.structure.ClassDefinition) org.kermeta.compil.runtime.ExecutionContext
+					.getInstance()
+					.<kermeta.language.structure.ClassDefinition> asTypeOrVoid(
+							org.kermeta.compil.runtime.helper.language.ObjectUtil
+									.getMetaClassSwitcher(self)
+									.getTypeDefinition());
 
 			//BIft:each
 
 			{
 
-				kermeta.standard.Iterator<kermeta.language.structure.Property> it_ft196 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
+				kermeta.standard.Iterator<kermeta.language.structure.Property> it_ft158 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
 						.<kermeta.language.structure.Property> convertAsSet(
 								cd.getterAllAttribute()).iterator();
-				java.lang.Boolean idLoopCond_856 = false;
-				while (!idLoopCond_856) {
-					idLoopCond_856 = it_ft196.isOff();
-					if (idLoopCond_856) {
+				java.lang.Boolean idLoopCond_713 = false;
+				while (!idLoopCond_713) {
+					idLoopCond_713 = it_ft158.isOff();
+					if (idLoopCond_713) {
 					} else {
 
 						//BIle:func
-						kermeta.language.structure.Property prop_lbdExp196 = it_ft196
+						kermeta.language.structure.Property prop_lbdExp158 = it_ft158
 								.next();
 
-						java.lang.Boolean idIfCond_857 = false;
-						idIfCond_857 = kermeta.standard.helper.BooleanWrapper
-								.and(prop_lbdExp196.getIsComposite(),
+						java.lang.Boolean idIfCond_714 = false;
+						idIfCond_714 = kermeta.standard.helper.BooleanWrapper
+								.and(prop_lbdExp158.getIsComposite(),
 										kermeta.standard.helper.BooleanWrapper
-												.not(prop_lbdExp196
+												.not(prop_lbdExp158
 														.getIsDerived()));
 
-						if (idIfCond_857) {
+						if (idIfCond_714) {
 
-							java.lang.Boolean idIfCond_858 = false;
-							idIfCond_858 = kermeta.standard.helper.BooleanWrapper
+							java.lang.Boolean idIfCond_715 = false;
+							idIfCond_715 = kermeta.standard.helper.BooleanWrapper
 									.not(org.kermeta.compil.runtime.helper.language.ObjectUtil
 											.isVoidSwitcher(org.kermeta.compil.runtime.helper.language.ObjectUtil
 													.getSwitcher(self,
-															prop_lbdExp196)));
+															prop_lbdExp158)));
 
-							if (idIfCond_858) {
+							if (idIfCond_715) {
 
-								java.lang.Boolean idIfCond_859 = false;
+								java.lang.Boolean idIfCond_716 = false;
 								//BIft:exists
 
-								java.lang.Boolean result_ft197 = null;
+								java.lang.Boolean result_ft159 = null;
 
-								java.lang.Boolean test_ft197 = false;
+								java.lang.Boolean test_ft159 = false;
 
 								{
 
-									kermeta.standard.Iterator<kermeta.language.structure.Type> it_ft197 = ((kermeta.language.structure.ClassDefinition) org.kermeta.compil.runtime.helper.language.ObjectUtil
+									kermeta.standard.Iterator<kermeta.language.structure.Type> it_ft159 = ((kermeta.language.structure.ClassDefinition) org.kermeta.compil.runtime.helper.language.ObjectUtil
 											.asTypeSwitcher(
 													org.kermeta.compil.runtime.helper.language.ObjectUtil
 															.getMetaClassSwitcher(
 																	org.kermeta.compil.runtime.helper.language.ObjectUtil
 																			.getSwitcher(
 																					self,
-																					prop_lbdExp196))
+																					prop_lbdExp158))
 															.getTypeDefinition(),
 													org.kermeta.compil.runtime.ExecutionContext
 															.getInstance()
 															.getMetaClass(
 																	"kermeta.language.structure.ClassDefinition")))
 											.allSuperTypes().iterator();
-									java.lang.Boolean idLoopCond_860 = false;
-									while (!idLoopCond_860) {
-										idLoopCond_860 = kermeta.standard.helper.BooleanWrapper
+									java.lang.Boolean idLoopCond_717 = false;
+									while (!idLoopCond_717) {
+										idLoopCond_717 = kermeta.standard.helper.BooleanWrapper
 												.or(
-														it_ft197.isOff(),
+														it_ft159.isOff(),
 														org.kermeta.compil.runtime.helper.language.ObjectUtil
 																.isNotEqualSwitcher(
-																		test_ft197,
+																		test_ft159,
 																		false));
-										if (idLoopCond_860) {
+										if (idLoopCond_717) {
 										} else {
 
-											java.lang.Boolean result_lambda_ft197 = null;
+											java.lang.Boolean result_lambda_ft159 = null;
 											//BIle:func
-											kermeta.language.structure.Type t_lbdExp197 = it_ft197
+											kermeta.language.structure.Type t_lbdExp159 = it_ft159
 													.next();
 
-											java.lang.Boolean idIfCond_861 = false;
-											idIfCond_861 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+											java.lang.Boolean idIfCond_718 = false;
+											idIfCond_718 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 													.isInstanceOfSwitcher(
-															t_lbdExp197,
+															t_lbdExp159,
 															org.kermeta.compil.runtime.ExecutionContext
 																	.getInstance()
 																	.getMetaClass(
 																			"kermeta.language.structure.ParameterizedType"));
 
-											if (idIfCond_861) {
+											if (idIfCond_718) {
 
-												result_lambda_ft197 = kermeta.standard.helper.StringWrapper
+												result_lambda_ft159 = kermeta.standard.helper.StringWrapper
 														.equals(
 																((kermeta.language.structure.ParameterizedType) org.kermeta.compil.runtime.helper.language.ObjectUtil
 																		.asTypeSwitcher(
-																				t_lbdExp197,
+																				t_lbdExp159,
 																				org.kermeta.compil.runtime.ExecutionContext
 																						.getInstance()
 																						.getMetaClass(
@@ -1248,49 +1537,53 @@ public class StringWrapper {
 																"kermeta::standard::Collection");
 											} else {
 
-												result_lambda_ft197 = false;
+												result_lambda_ft159 = false;
 											}
 
 											//EIle:func
 
-											test_ft197 = kermeta.standard.helper.BooleanWrapper
-													.or(test_ft197,
-															result_lambda_ft197);
+											test_ft159 = kermeta.standard.helper.BooleanWrapper
+													.or(test_ft159,
+															result_lambda_ft159);
 										}
 									}
 								}
 
-								result_ft197 = test_ft197;
+								result_ft159 = test_ft159;
 
 								//CEC
-								idIfCond_859 = result_ft197;
+								idIfCond_716 = result_ft159;
 								//EIft:exists
 
-								if (idIfCond_859) {
+								if (idIfCond_716) {
 
 									kermeta.standard.Collection<kermeta.language.structure.Object> subObjInstances = null;
 
-									subObjInstances = (kermeta.standard.Collection<kermeta.language.structure.Object>) org.kermeta.compil.runtime.helper.language.ObjectUtil
-											.getSwitcher(self, prop_lbdExp196);
+									subObjInstances = (kermeta.standard.Collection<kermeta.language.structure.Object>) org.kermeta.compil.runtime.ExecutionContext
+											.getInstance()
+											.<kermeta.standard.Collection<kermeta.language.structure.Object>> asTypeOrVoid(
+													org.kermeta.compil.runtime.helper.language.ObjectUtil
+															.getSwitcher(self,
+																	prop_lbdExp158));
 
 									//BIft:each
 
 									{
 
-										kermeta.standard.Iterator<kermeta.language.structure.Object> it_ft198 = subObjInstances
+										kermeta.standard.Iterator<kermeta.language.structure.Object> it_ft160 = subObjInstances
 												.iterator();
-										java.lang.Boolean idLoopCond_862 = false;
-										while (!idLoopCond_862) {
-											idLoopCond_862 = it_ft198.isOff();
-											if (idLoopCond_862) {
+										java.lang.Boolean idLoopCond_719 = false;
+										while (!idLoopCond_719) {
+											idLoopCond_719 = it_ft160.isOff();
+											if (idLoopCond_719) {
 											} else {
 
 												//BIle:func
-												kermeta.language.structure.Object aSubObjInstances_lbdExp198 = it_ft198
+												kermeta.language.structure.Object aSubObjInstances_lbdExp160 = it_ft160
 														.next();
 
 												org.kermeta.compil.runtime.helper.language.ObjectUtil
-														.checkAllInvariantsSwitcher(aSubObjInstances_lbdExp198);
+														.checkAllInvariantsSwitcher(aSubObjInstances_lbdExp160);
 												//EIle:func
 
 											}
@@ -1304,7 +1597,7 @@ public class StringWrapper {
 									org.kermeta.compil.runtime.helper.language.ObjectUtil
 											.checkAllInvariantsSwitcher(org.kermeta.compil.runtime.helper.language.ObjectUtil
 													.getSwitcher(self,
-															prop_lbdExp196));
+															prop_lbdExp158));
 								}
 
 							}
@@ -1332,11 +1625,22 @@ public class StringWrapper {
 	java.lang.String self, kermeta.language.structure.Property property
 
 	) {
+		//Protection of the following code
+		if (self == null
+				|| ((java.lang.Object) self) instanceof kermeta.language.structure.Object) {
+			return (java.lang.Boolean) org.kermeta.compil.runtime.helper.language.ObjectUtil
+					.isSet(
+							(kermeta.language.structure.Object) ((java.lang.Object) self),
+							property);
+		}
+		//End of the protection
 
 		java.lang.Boolean result = null;
 
-		result = (java.lang.Boolean) org.kermeta.compil.runtime.helper.language.ObjectUtil
-				.isSet(self, property);
+		result = (java.lang.Boolean) org.kermeta.compil.runtime.ExecutionContext
+				.getInstance().<java.lang.Boolean> asTypeOrVoid(
+						org.kermeta.compil.runtime.helper.language.ObjectUtil
+								.isSet(self, property));
 
 		return result;
 
@@ -1351,6 +1655,15 @@ public class StringWrapper {
 	java.lang.String self, kermeta.language.structure.Property property
 
 	) {
+		//Protection of the following code
+		if (self == null
+				|| ((java.lang.Object) self) instanceof kermeta.language.structure.Object) {
+			return (kermeta.language.structure.Object) org.kermeta.compil.runtime.helper.language.ObjectUtil
+					.get(
+							(kermeta.language.structure.Object) ((java.lang.Object) self),
+							property);
+		}
+		//End of the protection
 
 		kermeta.language.structure.Object result = null;
 
@@ -1370,11 +1683,20 @@ public class StringWrapper {
 	java.lang.String self
 
 	) {
+		//Protection of the following code
+		if (self == null
+				|| ((java.lang.Object) self) instanceof kermeta.language.structure.Object) {
+			return (java.lang.Boolean) org.kermeta.compil.runtime.helper.language.ObjectUtil
+					.isFrozen((kermeta.language.structure.Object) ((java.lang.Object) self));
+		}
+		//End of the protection
 
 		java.lang.Boolean result = null;
 
-		result = (java.lang.Boolean) org.kermeta.compil.runtime.helper.language.ObjectUtil
-				.isFrozen(self);
+		result = (java.lang.Boolean) org.kermeta.compil.runtime.ExecutionContext
+				.getInstance().<java.lang.Boolean> asTypeOrVoid(
+						org.kermeta.compil.runtime.helper.language.ObjectUtil
+								.isFrozen(self));
 
 		return result;
 
@@ -1389,11 +1711,20 @@ public class StringWrapper {
 	java.lang.String self
 
 	) {
+		//Protection of the following code
+		if (self == null
+				|| ((java.lang.Object) self) instanceof kermeta.language.structure.Object) {
+			return (java.lang.Integer) org.kermeta.compil.runtime.helper.language.ObjectUtil
+					.hashcode((kermeta.language.structure.Object) ((java.lang.Object) self));
+		}
+		//End of the protection
 
 		java.lang.Integer result = null;
 
-		result = (java.lang.Integer) org.kermeta.compil.runtime.helper.language.ObjectUtil
-				.hashcode(self);
+		result = (java.lang.Integer) org.kermeta.compil.runtime.ExecutionContext
+				.getInstance().<java.lang.Integer> asTypeOrVoid(
+						org.kermeta.compil.runtime.helper.language.ObjectUtil
+								.hashcode(self));
 
 		return result;
 
@@ -1408,6 +1739,15 @@ public class StringWrapper {
 	java.lang.String self, java.lang.String element
 
 	) {
+		//Protection of the following code
+		if (self == null
+				|| ((java.lang.Object) self) instanceof kermeta.language.structure.Object) {
+			return (java.lang.Boolean) org.kermeta.compil.runtime.helper.language.ObjectUtil
+					.isNotEqual(
+							(kermeta.language.structure.Object) ((java.lang.Object) self),
+							element);
+		}
+		//End of the protection
 
 		java.lang.Boolean result = null;
 
@@ -1423,30 +1763,18 @@ public class StringWrapper {
 	 *
 	 * @generated
 	 */
-	public static <G> kermeta.language.structure.Object container(
-
-	java.lang.String self
-
-	) {
-
-		kermeta.language.structure.Object result = null;
-
-		result = org.kermeta.compil.runtime.helper.language.ObjectUtil
-				.container(self);
-
-		return result;
-
-	}
-
-	/**
-	 *
-	 * @generated
-	 */
 	public static <G> void freeze(
 
 	java.lang.String self
 
 	) {
+		//Protection of the following code
+		if (self == null
+				|| ((java.lang.Object) self) instanceof kermeta.language.structure.Object) {
+			org.kermeta.compil.runtime.helper.language.ObjectUtil
+					.freeze((kermeta.language.structure.Object) ((java.lang.Object) self));
+		}
+		//End of the protection
 
 		org.kermeta.compil.runtime.helper.language.ObjectUtil.freeze(self);
 
@@ -1461,9 +1789,44 @@ public class StringWrapper {
 	java.lang.String self, kermeta.language.structure.Property property
 
 	) {
+		//Protection of the following code
+		if (self == null
+				|| ((java.lang.Object) self) instanceof kermeta.language.structure.Object) {
+			org.kermeta.compil.runtime.helper.language.ObjectUtil
+					.unset(
+							(kermeta.language.structure.Object) ((java.lang.Object) self),
+							property);
+		}
+		//End of the protection
 
 		org.kermeta.compil.runtime.helper.language.ObjectUtil.unset(self,
 				property);
+
+	}
+
+	/**
+	 *
+	 * @generated
+	 */
+	public static <G> kermeta.language.structure.Object container(
+
+	java.lang.String self
+
+	) {
+		//Protection of the following code
+		if (self == null
+				|| ((java.lang.Object) self) instanceof kermeta.language.structure.Object) {
+			return (kermeta.language.structure.Object) org.kermeta.compil.runtime.helper.language.ObjectUtil
+					.container((kermeta.language.structure.Object) ((java.lang.Object) self));
+		}
+		//End of the protection
+
+		kermeta.language.structure.Object result = null;
+
+		result = org.kermeta.compil.runtime.helper.language.ObjectUtil
+				.container(self);
+
+		return result;
 
 	}
 
@@ -1476,11 +1839,20 @@ public class StringWrapper {
 	java.lang.String self
 
 	) {
+		//Protection of the following code
+		if (self == null
+				|| ((java.lang.Object) self) instanceof kermeta.language.structure.Object) {
+			return (kermeta.persistence.Resource) org.kermeta.compil.runtime.helper.language.ObjectUtil
+					.containingResource((kermeta.language.structure.Object) ((java.lang.Object) self));
+		}
+		//End of the protection
 
 		kermeta.persistence.Resource result = null;
 
-		result = (kermeta.persistence.Resource) org.kermeta.compil.runtime.helper.language.ObjectUtil
-				.getContainingResource(self);
+		result = (kermeta.persistence.Resource) org.kermeta.compil.runtime.ExecutionContext
+				.getInstance().<kermeta.persistence.Resource> asTypeOrVoid(
+						org.kermeta.compil.runtime.helper.language.ObjectUtil
+								.getContainingResource(self));
 
 		return result;
 
@@ -1496,14 +1868,23 @@ public class StringWrapper {
 			kermeta.language.structure.Class type
 
 	) {
+		//Protection of the following code
+		if (self == null
+				|| ((java.lang.Object) self) instanceof kermeta.language.structure.Object) {
+			return (kermeta.language.structure.Object) org.kermeta.compil.runtime.helper.language.ObjectUtil
+					.asType(
+							(kermeta.language.structure.Object) ((java.lang.Object) self),
+							type);
+		}
+		//End of the protection
 
 		kermeta.language.structure.Object result = null;
 
-		java.lang.Boolean idIfCond_863 = false;
-		idIfCond_863 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+		java.lang.Boolean idIfCond_720 = false;
+		idIfCond_720 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 				.isInstanceOfSwitcher(self, type);
 
-		if (idIfCond_863) {
+		if (idIfCond_720) {
 
 			result = self;
 		} else {
@@ -1528,6 +1909,14 @@ public class StringWrapper {
 	java.lang.String self, java.lang.String other
 
 	) {
+		//Protection of the following code
+		if (self == null) {
+			kermeta.exceptions.CallOnVoidTarget exp = kermeta.exceptions.ExceptionsFactory.eINSTANCE
+					.createCallOnVoidTarget();
+			exp.setMessage("Initialize the String expression");
+			throw new org.kermeta.compil.runtime.helper.error.KRuntimeError(exp);
+		}
+		//End of the protection
 
 		java.lang.Boolean result = null;
 
@@ -1547,6 +1936,14 @@ public class StringWrapper {
 	java.lang.String self, java.lang.String other
 
 	) {
+		//Protection of the following code
+		if (self == null) {
+			kermeta.exceptions.CallOnVoidTarget exp = kermeta.exceptions.ExceptionsFactory.eINSTANCE
+					.createCallOnVoidTarget();
+			exp.setMessage("Initialize the String expression");
+			throw new org.kermeta.compil.runtime.helper.error.KRuntimeError(exp);
+		}
+		//End of the protection
 
 		java.lang.Boolean result = null;
 
@@ -1566,6 +1963,14 @@ public class StringWrapper {
 	java.lang.String self, java.lang.String other
 
 	) {
+		//Protection of the following code
+		if (self == null) {
+			kermeta.exceptions.CallOnVoidTarget exp = kermeta.exceptions.ExceptionsFactory.eINSTANCE
+					.createCallOnVoidTarget();
+			exp.setMessage("Initialize the String expression");
+			throw new org.kermeta.compil.runtime.helper.error.KRuntimeError(exp);
+		}
+		//End of the protection
 
 		java.lang.Boolean result = null;
 
@@ -1585,6 +1990,14 @@ public class StringWrapper {
 	java.lang.String self, java.lang.String other
 
 	) {
+		//Protection of the following code
+		if (self == null) {
+			kermeta.exceptions.CallOnVoidTarget exp = kermeta.exceptions.ExceptionsFactory.eINSTANCE
+					.createCallOnVoidTarget();
+			exp.setMessage("Initialize the String expression");
+			throw new org.kermeta.compil.runtime.helper.error.KRuntimeError(exp);
+		}
+		//End of the protection
 
 		java.lang.Boolean result = null;
 

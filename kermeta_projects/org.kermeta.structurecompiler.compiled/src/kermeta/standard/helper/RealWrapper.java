@@ -15,6 +15,14 @@ public class RealWrapper {
 	java.lang.Double self, java.lang.Double other
 
 	) {
+		//Protection of the following code
+		if (self == null) {
+			kermeta.exceptions.CallOnVoidTarget exp = kermeta.exceptions.ExceptionsFactory.eINSTANCE
+					.createCallOnVoidTarget();
+			exp.setMessage("Initialize the Real expression");
+			throw new org.kermeta.compil.runtime.helper.error.KRuntimeError(exp);
+		}
+		//End of the protection
 
 		java.lang.Double result = null;
 
@@ -31,8 +39,11 @@ public class RealWrapper {
 
 		} else {
 
-			result = (java.lang.Double) org.kermeta.compil.runtime.helper.basetypes.RealUtil
-					.plus(self, other);
+			result = (java.lang.Double) org.kermeta.compil.runtime.ExecutionContext
+					.getInstance()
+					.<java.lang.Double> asTypeOrVoid(
+							org.kermeta.compil.runtime.helper.basetypes.RealUtil
+									.plus(self, other));
 		}
 
 		return result;
@@ -48,6 +59,14 @@ public class RealWrapper {
 	java.lang.Double self, java.lang.Double other
 
 	) {
+		//Protection of the following code
+		if (self == null) {
+			kermeta.exceptions.CallOnVoidTarget exp = kermeta.exceptions.ExceptionsFactory.eINSTANCE
+					.createCallOnVoidTarget();
+			exp.setMessage("Initialize the Real expression");
+			throw new org.kermeta.compil.runtime.helper.error.KRuntimeError(exp);
+		}
+		//End of the protection
 
 		java.lang.Double result = null;
 
@@ -64,8 +83,11 @@ public class RealWrapper {
 
 		} else {
 
-			result = (java.lang.Double) org.kermeta.compil.runtime.helper.basetypes.RealUtil
-					.times(self, other);
+			result = (java.lang.Double) org.kermeta.compil.runtime.ExecutionContext
+					.getInstance()
+					.<java.lang.Double> asTypeOrVoid(
+							org.kermeta.compil.runtime.helper.basetypes.RealUtil
+									.times(self, other));
 		}
 
 		return result;
@@ -81,6 +103,14 @@ public class RealWrapper {
 	java.lang.Double self, java.lang.Double other
 
 	) {
+		//Protection of the following code
+		if (self == null) {
+			kermeta.exceptions.CallOnVoidTarget exp = kermeta.exceptions.ExceptionsFactory.eINSTANCE
+					.createCallOnVoidTarget();
+			exp.setMessage("Initialize the Real expression");
+			throw new org.kermeta.compil.runtime.helper.error.KRuntimeError(exp);
+		}
+		//End of the protection
 
 		java.lang.Double result = null;
 
@@ -97,8 +127,11 @@ public class RealWrapper {
 
 		} else {
 
-			result = (java.lang.Double) org.kermeta.compil.runtime.helper.basetypes.RealUtil
-					.minus(self, other);
+			result = (java.lang.Double) org.kermeta.compil.runtime.ExecutionContext
+					.getInstance()
+					.<java.lang.Double> asTypeOrVoid(
+							org.kermeta.compil.runtime.helper.basetypes.RealUtil
+									.minus(self, other));
 		}
 
 		return result;
@@ -114,11 +147,21 @@ public class RealWrapper {
 	java.lang.Double self
 
 	) {
+		//Protection of the following code
+		if (self == null) {
+			kermeta.exceptions.CallOnVoidTarget exp = kermeta.exceptions.ExceptionsFactory.eINSTANCE
+					.createCallOnVoidTarget();
+			exp.setMessage("Initialize the Real expression");
+			throw new org.kermeta.compil.runtime.helper.error.KRuntimeError(exp);
+		}
+		//End of the protection
 
 		java.lang.Integer result = null;
 
-		result = (java.lang.Integer) org.kermeta.compil.runtime.helper.basetypes.RealUtil
-				.toInteger(self);
+		result = (java.lang.Integer) org.kermeta.compil.runtime.ExecutionContext
+				.getInstance().<java.lang.Integer> asTypeOrVoid(
+						org.kermeta.compil.runtime.helper.basetypes.RealUtil
+								.toInteger(self));
 
 		return result;
 
@@ -133,6 +176,14 @@ public class RealWrapper {
 	java.lang.Double self
 
 	) {
+		//Protection of the following code
+		if (self == null) {
+			kermeta.exceptions.CallOnVoidTarget exp = kermeta.exceptions.ExceptionsFactory.eINSTANCE
+					.createCallOnVoidTarget();
+			exp.setMessage("Initialize the Real expression");
+			throw new org.kermeta.compil.runtime.helper.error.KRuntimeError(exp);
+		}
+		//End of the protection
 
 		java.lang.Double result = null;
 
@@ -152,6 +203,15 @@ public class RealWrapper {
 	java.lang.Double self, java.lang.Double other
 
 	) {
+		//Protection of the following code
+		if (self == null
+				|| ((java.lang.Object) self) instanceof kermeta.language.structure.Object) {
+			return (java.lang.Boolean) org.kermeta.compil.runtime.helper.language.ObjectUtil
+					.equals(
+							(kermeta.language.structure.Object) ((java.lang.Object) self),
+							other);
+		}
+		//End of the protection
 
 		java.lang.Boolean result = null;
 
@@ -192,8 +252,11 @@ public class RealWrapper {
 
 		} else {
 
-			result = (java.lang.Boolean) org.kermeta.compil.runtime.helper.basetypes.RealUtil
-					.equals(self, other);
+			result = (java.lang.Boolean) org.kermeta.compil.runtime.ExecutionContext
+					.getInstance()
+					.<java.lang.Boolean> asTypeOrVoid(
+							org.kermeta.compil.runtime.helper.basetypes.RealUtil
+									.equals(self, other));
 		}
 
 		return result;
@@ -209,6 +272,14 @@ public class RealWrapper {
 	java.lang.Double self, java.lang.Double other
 
 	) {
+		//Protection of the following code
+		if (self == null) {
+			kermeta.exceptions.CallOnVoidTarget exp = kermeta.exceptions.ExceptionsFactory.eINSTANCE
+					.createCallOnVoidTarget();
+			exp.setMessage("Initialize the Real expression");
+			throw new org.kermeta.compil.runtime.helper.error.KRuntimeError(exp);
+		}
+		//End of the protection
 
 		java.lang.Double result = null;
 
@@ -238,9 +309,40 @@ public class RealWrapper {
 
 		} else {
 
-			result = (java.lang.Double) org.kermeta.compil.runtime.helper.basetypes.RealUtil
-					.div(self, other);
+			result = (java.lang.Double) org.kermeta.compil.runtime.ExecutionContext
+					.getInstance()
+					.<java.lang.Double> asTypeOrVoid(
+							org.kermeta.compil.runtime.helper.basetypes.RealUtil
+									.div(self, other));
 		}
+
+		return result;
+
+	}
+
+	/**
+	 *
+	 * @generated
+	 */
+	public static <G> java.lang.String toString(
+
+	java.lang.Double self
+
+	) {
+		//Protection of the following code
+		if (self == null
+				|| ((java.lang.Object) self) instanceof kermeta.language.structure.Object) {
+			return (java.lang.String) org.kermeta.compil.runtime.helper.language.ObjectUtil
+					.toString((kermeta.language.structure.Object) ((java.lang.Object) self));
+		}
+		//End of the protection
+
+		java.lang.String result = null;
+
+		result = (java.lang.String) org.kermeta.compil.runtime.ExecutionContext
+				.getInstance().<java.lang.String> asTypeOrVoid(
+						org.kermeta.compil.runtime.helper.basetypes.RealUtil
+								.toString(self));
 
 		return result;
 
@@ -255,6 +357,14 @@ public class RealWrapper {
 	java.lang.Double self, java.lang.Double other
 
 	) {
+		//Protection of the following code
+		if (self == null) {
+			kermeta.exceptions.CallOnVoidTarget exp = kermeta.exceptions.ExceptionsFactory.eINSTANCE
+					.createCallOnVoidTarget();
+			exp.setMessage("Initialize the Real expression");
+			throw new org.kermeta.compil.runtime.helper.error.KRuntimeError(exp);
+		}
+		//End of the protection
 
 		java.lang.Integer result = null;
 
@@ -299,28 +409,12 @@ public class RealWrapper {
 
 		} else {
 
-			result = (java.lang.Integer) org.kermeta.compil.runtime.helper.basetypes.RealUtil
-					.compareTo(self, other);
+			result = (java.lang.Integer) org.kermeta.compil.runtime.ExecutionContext
+					.getInstance()
+					.<java.lang.Integer> asTypeOrVoid(
+							org.kermeta.compil.runtime.helper.basetypes.RealUtil
+									.compareTo(self, other));
 		}
-
-		return result;
-
-	}
-
-	/**
-	 *
-	 * @generated
-	 */
-	public static <G> java.lang.String toString(
-
-	java.lang.Double self
-
-	) {
-
-		java.lang.String result = null;
-
-		result = (java.lang.String) org.kermeta.compil.runtime.helper.basetypes.RealUtil
-				.toString(self);
 
 		return result;
 
@@ -335,6 +429,14 @@ public class RealWrapper {
 	java.lang.Double self, java.lang.Double other
 
 	) {
+		//Protection of the following code
+		if (self == null) {
+			kermeta.exceptions.CallOnVoidTarget exp = kermeta.exceptions.ExceptionsFactory.eINSTANCE
+					.createCallOnVoidTarget();
+			exp.setMessage("Initialize the Real expression");
+			throw new org.kermeta.compil.runtime.helper.error.KRuntimeError(exp);
+		}
+		//End of the protection
 
 		java.lang.Boolean result = null;
 
@@ -354,6 +456,14 @@ public class RealWrapper {
 	java.lang.Double self, java.lang.Double other
 
 	) {
+		//Protection of the following code
+		if (self == null) {
+			kermeta.exceptions.CallOnVoidTarget exp = kermeta.exceptions.ExceptionsFactory.eINSTANCE
+					.createCallOnVoidTarget();
+			exp.setMessage("Initialize the Real expression");
+			throw new org.kermeta.compil.runtime.helper.error.KRuntimeError(exp);
+		}
+		//End of the protection
 
 		java.lang.Boolean result = null;
 
@@ -373,6 +483,14 @@ public class RealWrapper {
 	java.lang.Double self, java.lang.Double other
 
 	) {
+		//Protection of the following code
+		if (self == null) {
+			kermeta.exceptions.CallOnVoidTarget exp = kermeta.exceptions.ExceptionsFactory.eINSTANCE
+					.createCallOnVoidTarget();
+			exp.setMessage("Initialize the Real expression");
+			throw new org.kermeta.compil.runtime.helper.error.KRuntimeError(exp);
+		}
+		//End of the protection
 
 		java.lang.Boolean result = null;
 
@@ -392,6 +510,14 @@ public class RealWrapper {
 	java.lang.Double self, java.lang.Double other
 
 	) {
+		//Protection of the following code
+		if (self == null) {
+			kermeta.exceptions.CallOnVoidTarget exp = kermeta.exceptions.ExceptionsFactory.eINSTANCE
+					.createCallOnVoidTarget();
+			exp.setMessage("Initialize the Real expression");
+			throw new org.kermeta.compil.runtime.helper.error.KRuntimeError(exp);
+		}
+		//End of the protection
 
 		java.lang.Boolean result = null;
 
@@ -411,6 +537,15 @@ public class RealWrapper {
 	java.lang.Double self, kermeta.language.structure.Class cl
 
 	) {
+		//Protection of the following code
+		if (self == null
+				|| ((java.lang.Object) self) instanceof kermeta.language.structure.Object) {
+			return (java.lang.Boolean) org.kermeta.compil.runtime.helper.language.ObjectUtil
+					.isKindOf(
+							(kermeta.language.structure.Object) ((java.lang.Object) self),
+							cl);
+		}
+		//End of the protection
 
 		java.lang.Boolean result = null;
 
@@ -430,11 +565,20 @@ public class RealWrapper {
 	java.lang.Double self
 
 	) {
+		//Protection of the following code
+		if (self == null
+				|| ((java.lang.Object) self) instanceof kermeta.language.structure.Object) {
+			return (kermeta.language.structure.Class) org.kermeta.compil.runtime.helper.language.ObjectUtil
+					.getMetaClass((kermeta.language.structure.Object) ((java.lang.Object) self));
+		}
+		//End of the protection
 
 		kermeta.language.structure.Class result = null;
 
-		result = (kermeta.language.structure.Class) org.kermeta.compil.runtime.helper.language.ObjectUtil
-				.getMetaClass(self);
+		result = (kermeta.language.structure.Class) org.kermeta.compil.runtime.ExecutionContext
+				.getInstance().<kermeta.language.structure.Class> asTypeOrVoid(
+						org.kermeta.compil.runtime.helper.language.ObjectUtil
+								.getMetaClass(self));
 
 		return result;
 
@@ -450,6 +594,15 @@ public class RealWrapper {
 			java.lang.Double element
 
 	) {
+		//Protection of the following code
+		if (self == null
+				|| ((java.lang.Object) self) instanceof kermeta.language.structure.Object) {
+			org.kermeta.compil.runtime.helper.language.ObjectUtil
+					.set(
+							(kermeta.language.structure.Object) ((java.lang.Object) self),
+							property, element);
+		}
+		//End of the protection
 
 		java.lang.Boolean idIfCond_789 = false;
 		idIfCond_789 = org.kermeta.compil.runtime.helper.language.ObjectUtil
@@ -505,6 +658,13 @@ public class RealWrapper {
 	java.lang.Double self
 
 	) {
+		//Protection of the following code
+		if (self == null
+				|| ((java.lang.Object) self) instanceof kermeta.language.structure.Object) {
+			org.kermeta.compil.runtime.helper.language.ObjectUtil
+					.checkInvariants((kermeta.language.structure.Object) ((java.lang.Object) self));
+		}
+		//End of the protection
 
 		kermeta.language.structure.ClassDefinition cd = org.kermeta.compil.runtime.helper.language.ObjectUtil
 				.getMetaClassSwitcher(self).getterClassDefinition();
@@ -520,77 +680,77 @@ public class RealWrapper {
 
 			{
 
-				kermeta.standard.Iterator<kermeta.language.structure.Property> it_ft179 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
+				kermeta.standard.Iterator<kermeta.language.structure.Property> it_ft173 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
 						.<kermeta.language.structure.Property> convertAsSet(
 								cd.getterAllAttribute()).iterator();
 				java.lang.Boolean idLoopCond_791 = false;
 				while (!idLoopCond_791) {
-					idLoopCond_791 = it_ft179.isOff();
+					idLoopCond_791 = it_ft173.isOff();
 					if (idLoopCond_791) {
 					} else {
 
 						//BIle:func
-						kermeta.language.structure.Property p_lbdExp179 = it_ft179
+						kermeta.language.structure.Property p_lbdExp173 = it_ft173
 								.next();
 
 						//BIft:exists
 
-						java.lang.Boolean result_ft180 = null;
+						java.lang.Boolean result_ft174 = null;
 
-						java.lang.Boolean test_ft180 = false;
+						java.lang.Boolean test_ft174 = false;
 
 						{
 
-							kermeta.standard.Iterator<kermeta.language.structure.Tag> it_ft180 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
+							kermeta.standard.Iterator<kermeta.language.structure.Tag> it_ft174 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
 									.<kermeta.language.structure.Tag> convertAsOrderedSet(
-											p_lbdExp179.getTag()).iterator();
+											p_lbdExp173.getTag()).iterator();
 							java.lang.Boolean idLoopCond_793 = false;
 							while (!idLoopCond_793) {
 								idLoopCond_793 = kermeta.standard.helper.BooleanWrapper
 										.or(
-												it_ft180.isOff(),
+												it_ft174.isOff(),
 												org.kermeta.compil.runtime.helper.language.ObjectUtil
 														.isNotEqualSwitcher(
-																test_ft180,
+																test_ft174,
 																false));
 								if (idLoopCond_793) {
 								} else {
 
-									java.lang.Boolean result_lambda_ft180 = null;
+									java.lang.Boolean result_lambda_ft174 = null;
 									//BIle:func
-									kermeta.language.structure.Tag t_lbdExp180 = it_ft180
+									kermeta.language.structure.Tag t_lbdExp174 = it_ft174
 											.next();
 
-									result_lambda_ft180 = kermeta.standard.helper.StringWrapper
-											.equals(t_lbdExp180.getName(),
+									result_lambda_ft174 = kermeta.standard.helper.StringWrapper
+											.equals(t_lbdExp174.getName(),
 													"ecore.isTransient");
 									//EIle:func
 
-									test_ft180 = kermeta.standard.helper.BooleanWrapper
-											.or(test_ft180, result_lambda_ft180);
+									test_ft174 = kermeta.standard.helper.BooleanWrapper
+											.or(test_ft174, result_lambda_ft174);
 								}
 							}
 						}
 
-						result_ft180 = test_ft180;
+						result_ft174 = test_ft174;
 						//EIft:exists
 						java.lang.Boolean idIfCond_792 = false;
 						idIfCond_792 = kermeta.standard.helper.BooleanWrapper
 								.and(
 										kermeta.standard.helper.BooleanWrapper
-												.not(result_ft180),
+												.not(result_ft174),
 										kermeta.standard.helper.BooleanWrapper
-												.not(p_lbdExp179.getIsDerived()));
+												.not(p_lbdExp173.getIsDerived()));
 
 						if (idIfCond_792) {
 
 							kermeta.language.structure.Object v = org.kermeta.compil.runtime.helper.language.ObjectUtil
-									.getSwitcher(self, p_lbdExp179);
+									.getSwitcher(self, p_lbdExp173);
 
 							java.lang.Boolean idIfCond_794 = false;
 							//BIft:andThen
 
-							java.lang.Boolean result_ft181 = null;
+							java.lang.Boolean result_ft175 = null;
 
 							java.lang.Boolean idIfCond_795 = false;
 							idIfCond_795 = kermeta.standard.helper.BooleanWrapper
@@ -600,9 +760,9 @@ public class RealWrapper {
 							if (idIfCond_795) {
 
 								//BIle:right
-								/*This variable should be never used*/kermeta.language.structure.Object f_lbdExp181 = null;
+								/*This variable should be never used*/kermeta.language.structure.Object f_lbdExp175 = null;
 
-								result_ft181 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+								result_ft175 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 										.isInstanceOfSwitcher(
 												v,
 												org.kermeta.compil.runtime.ExecutionContext
@@ -613,11 +773,11 @@ public class RealWrapper {
 
 							} else {
 
-								result_ft181 = false;
+								result_ft175 = false;
 							}
 
 							//CEC
-							idIfCond_794 = result_ft181;
+							idIfCond_794 = result_ft175;
 							//EIft:andThen
 
 							if (idIfCond_794) {
@@ -635,14 +795,14 @@ public class RealWrapper {
 										.and(
 												org.kermeta.compil.runtime.helper.language.ObjectUtil
 														.isNotEqualSwitcher(
-																p_lbdExp179
+																p_lbdExp173
 																		.getUpper(),
 																kermeta.standard.helper.IntegerWrapper
 																		.uminus(1)),
 												kermeta.standard.helper.IntegerWrapper
 														.isGreater(
 																c.size(),
-																p_lbdExp179
+																p_lbdExp173
 																		.getUpper()));
 
 								if (idIfCond_796) {
@@ -665,7 +825,7 @@ public class RealWrapper {
 																															cd
 																																	.getName()),
 																											"."),
-																							p_lbdExp179
+																							p_lbdExp173
 																									.getName()),
 																			" violated on "),
 															org.kermeta.compil.runtime.helper.language.ObjectUtil
@@ -679,7 +839,7 @@ public class RealWrapper {
 
 								java.lang.Boolean idIfCond_797 = false;
 								idIfCond_797 = kermeta.standard.helper.IntegerWrapper
-										.isLower(c.size(), p_lbdExp179
+										.isLower(c.size(), p_lbdExp173
 												.getLower());
 
 								if (idIfCond_797) {
@@ -702,7 +862,7 @@ public class RealWrapper {
 																															cd
 																																	.getName()),
 																											"."),
-																							p_lbdExp179
+																							p_lbdExp173
 																									.getName()),
 																			" violated on "),
 															org.kermeta.compil.runtime.helper.language.ObjectUtil
@@ -720,7 +880,7 @@ public class RealWrapper {
 								idIfCond_798 = kermeta.standard.helper.BooleanWrapper
 										.and(
 												kermeta.standard.helper.IntegerWrapper
-														.equals(p_lbdExp179
+														.equals(p_lbdExp173
 																.getLower(), 1),
 												org.kermeta.compil.runtime.helper.language.ObjectUtil
 														.isVoidSwitcher(v));
@@ -745,7 +905,7 @@ public class RealWrapper {
 																															cd
 																																	.getName()),
 																											"."),
-																							p_lbdExp179
+																							p_lbdExp173
 																									.getName()),
 																			" violated on "),
 															org.kermeta.compil.runtime.helper.language.ObjectUtil
@@ -785,6 +945,13 @@ public class RealWrapper {
 	java.lang.Double self
 
 	) {
+		//Protection of the following code
+		if (self == null
+				|| ((java.lang.Object) self) instanceof kermeta.language.structure.Object) {
+			return (java.lang.Boolean) org.kermeta.compil.runtime.helper.language.ObjectUtil
+					.isVoid((kermeta.language.structure.Object) ((java.lang.Object) self));
+		}
+		//End of the protection
 
 		java.lang.Boolean result = null;
 
@@ -803,11 +970,20 @@ public class RealWrapper {
 	java.lang.Double self
 
 	) {
+		//Protection of the following code
+		if (self == null
+				|| ((java.lang.Object) self) instanceof kermeta.language.structure.Object) {
+			return (java.lang.Integer) org.kermeta.compil.runtime.helper.language.ObjectUtil
+					.oid((kermeta.language.structure.Object) ((java.lang.Object) self));
+		}
+		//End of the protection
 
 		java.lang.Integer result = null;
 
-		result = (java.lang.Integer) org.kermeta.compil.runtime.helper.language.ObjectUtil
-				.getOID(self);
+		result = (java.lang.Integer) org.kermeta.compil.runtime.ExecutionContext
+				.getInstance().<java.lang.Integer> asTypeOrVoid(
+						org.kermeta.compil.runtime.helper.language.ObjectUtil
+								.getOID(self));
 
 		return result;
 
@@ -822,11 +998,22 @@ public class RealWrapper {
 	java.lang.Double self, kermeta.language.structure.Type type
 
 	) {
+		//Protection of the following code
+		if (self == null
+				|| ((java.lang.Object) self) instanceof kermeta.language.structure.Object) {
+			return (java.lang.Boolean) org.kermeta.compil.runtime.helper.language.ObjectUtil
+					.isInstanceOf(
+							(kermeta.language.structure.Object) ((java.lang.Object) self),
+							type);
+		}
+		//End of the protection
 
 		java.lang.Boolean result = null;
 
-		result = (java.lang.Boolean) org.kermeta.compil.runtime.helper.language.ObjectUtil
-				.isInstanceOf(self, type.getClass().getName());
+		result = (java.lang.Boolean) org.kermeta.compil.runtime.ExecutionContext
+				.getInstance().<java.lang.Boolean> asTypeOrVoid(
+						org.kermeta.compil.runtime.helper.language.ObjectUtil
+								.isInstanceOf(self, type.getClass().getName()));
 
 		return result;
 
@@ -841,6 +1028,13 @@ public class RealWrapper {
 	java.lang.Double self
 
 	) {
+		//Protection of the following code
+		if (self == null
+				|| ((java.lang.Object) self) instanceof kermeta.language.structure.Object) {
+			org.kermeta.compil.runtime.helper.language.ObjectUtil
+					.checkAllInvariants((kermeta.language.structure.Object) ((java.lang.Object) self));
+		}
+		//End of the protection
 
 		java.lang.Boolean idIfCond_799 = false;
 		idIfCond_799 = org.kermeta.compil.runtime.helper.language.ObjectUtil
@@ -853,31 +1047,35 @@ public class RealWrapper {
 
 			kermeta.language.structure.ClassDefinition cd = null;
 
-			cd = (kermeta.language.structure.ClassDefinition) org.kermeta.compil.runtime.helper.language.ObjectUtil
-					.getMetaClassSwitcher(self).getTypeDefinition();
+			cd = (kermeta.language.structure.ClassDefinition) org.kermeta.compil.runtime.ExecutionContext
+					.getInstance()
+					.<kermeta.language.structure.ClassDefinition> asTypeOrVoid(
+							org.kermeta.compil.runtime.helper.language.ObjectUtil
+									.getMetaClassSwitcher(self)
+									.getTypeDefinition());
 
 			//BIft:each
 
 			{
 
-				kermeta.standard.Iterator<kermeta.language.structure.Property> it_ft182 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
+				kermeta.standard.Iterator<kermeta.language.structure.Property> it_ft176 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
 						.<kermeta.language.structure.Property> convertAsSet(
 								cd.getterAllAttribute()).iterator();
 				java.lang.Boolean idLoopCond_800 = false;
 				while (!idLoopCond_800) {
-					idLoopCond_800 = it_ft182.isOff();
+					idLoopCond_800 = it_ft176.isOff();
 					if (idLoopCond_800) {
 					} else {
 
 						//BIle:func
-						kermeta.language.structure.Property prop_lbdExp182 = it_ft182
+						kermeta.language.structure.Property prop_lbdExp176 = it_ft176
 								.next();
 
 						java.lang.Boolean idIfCond_801 = false;
 						idIfCond_801 = kermeta.standard.helper.BooleanWrapper
-								.and(prop_lbdExp182.getIsComposite(),
+								.and(prop_lbdExp176.getIsComposite(),
 										kermeta.standard.helper.BooleanWrapper
-												.not(prop_lbdExp182
+												.not(prop_lbdExp176
 														.getIsDerived()));
 
 						if (idIfCond_801) {
@@ -887,27 +1085,27 @@ public class RealWrapper {
 									.not(org.kermeta.compil.runtime.helper.language.ObjectUtil
 											.isVoidSwitcher(org.kermeta.compil.runtime.helper.language.ObjectUtil
 													.getSwitcher(self,
-															prop_lbdExp182)));
+															prop_lbdExp176)));
 
 							if (idIfCond_802) {
 
 								java.lang.Boolean idIfCond_803 = false;
 								//BIft:exists
 
-								java.lang.Boolean result_ft183 = null;
+								java.lang.Boolean result_ft177 = null;
 
-								java.lang.Boolean test_ft183 = false;
+								java.lang.Boolean test_ft177 = false;
 
 								{
 
-									kermeta.standard.Iterator<kermeta.language.structure.Type> it_ft183 = ((kermeta.language.structure.ClassDefinition) org.kermeta.compil.runtime.helper.language.ObjectUtil
+									kermeta.standard.Iterator<kermeta.language.structure.Type> it_ft177 = ((kermeta.language.structure.ClassDefinition) org.kermeta.compil.runtime.helper.language.ObjectUtil
 											.asTypeSwitcher(
 													org.kermeta.compil.runtime.helper.language.ObjectUtil
 															.getMetaClassSwitcher(
 																	org.kermeta.compil.runtime.helper.language.ObjectUtil
 																			.getSwitcher(
 																					self,
-																					prop_lbdExp182))
+																					prop_lbdExp176))
 															.getTypeDefinition(),
 													org.kermeta.compil.runtime.ExecutionContext
 															.getInstance()
@@ -918,23 +1116,23 @@ public class RealWrapper {
 									while (!idLoopCond_804) {
 										idLoopCond_804 = kermeta.standard.helper.BooleanWrapper
 												.or(
-														it_ft183.isOff(),
+														it_ft177.isOff(),
 														org.kermeta.compil.runtime.helper.language.ObjectUtil
 																.isNotEqualSwitcher(
-																		test_ft183,
+																		test_ft177,
 																		false));
 										if (idLoopCond_804) {
 										} else {
 
-											java.lang.Boolean result_lambda_ft183 = null;
+											java.lang.Boolean result_lambda_ft177 = null;
 											//BIle:func
-											kermeta.language.structure.Type t_lbdExp183 = it_ft183
+											kermeta.language.structure.Type t_lbdExp177 = it_ft177
 													.next();
 
 											java.lang.Boolean idIfCond_805 = false;
 											idIfCond_805 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 													.isInstanceOfSwitcher(
-															t_lbdExp183,
+															t_lbdExp177,
 															org.kermeta.compil.runtime.ExecutionContext
 																	.getInstance()
 																	.getMetaClass(
@@ -942,11 +1140,11 @@ public class RealWrapper {
 
 											if (idIfCond_805) {
 
-												result_lambda_ft183 = kermeta.standard.helper.StringWrapper
+												result_lambda_ft177 = kermeta.standard.helper.StringWrapper
 														.equals(
 																((kermeta.language.structure.ParameterizedType) org.kermeta.compil.runtime.helper.language.ObjectUtil
 																		.asTypeSwitcher(
-																				t_lbdExp183,
+																				t_lbdExp177,
 																				org.kermeta.compil.runtime.ExecutionContext
 																						.getInstance()
 																						.getMetaClass(
@@ -956,49 +1154,53 @@ public class RealWrapper {
 																"kermeta::standard::Collection");
 											} else {
 
-												result_lambda_ft183 = false;
+												result_lambda_ft177 = false;
 											}
 
 											//EIle:func
 
-											test_ft183 = kermeta.standard.helper.BooleanWrapper
-													.or(test_ft183,
-															result_lambda_ft183);
+											test_ft177 = kermeta.standard.helper.BooleanWrapper
+													.or(test_ft177,
+															result_lambda_ft177);
 										}
 									}
 								}
 
-								result_ft183 = test_ft183;
+								result_ft177 = test_ft177;
 
 								//CEC
-								idIfCond_803 = result_ft183;
+								idIfCond_803 = result_ft177;
 								//EIft:exists
 
 								if (idIfCond_803) {
 
 									kermeta.standard.Collection<kermeta.language.structure.Object> subObjInstances = null;
 
-									subObjInstances = (kermeta.standard.Collection<kermeta.language.structure.Object>) org.kermeta.compil.runtime.helper.language.ObjectUtil
-											.getSwitcher(self, prop_lbdExp182);
+									subObjInstances = (kermeta.standard.Collection<kermeta.language.structure.Object>) org.kermeta.compil.runtime.ExecutionContext
+											.getInstance()
+											.<kermeta.standard.Collection<kermeta.language.structure.Object>> asTypeOrVoid(
+													org.kermeta.compil.runtime.helper.language.ObjectUtil
+															.getSwitcher(self,
+																	prop_lbdExp176));
 
 									//BIft:each
 
 									{
 
-										kermeta.standard.Iterator<kermeta.language.structure.Object> it_ft184 = subObjInstances
+										kermeta.standard.Iterator<kermeta.language.structure.Object> it_ft178 = subObjInstances
 												.iterator();
 										java.lang.Boolean idLoopCond_806 = false;
 										while (!idLoopCond_806) {
-											idLoopCond_806 = it_ft184.isOff();
+											idLoopCond_806 = it_ft178.isOff();
 											if (idLoopCond_806) {
 											} else {
 
 												//BIle:func
-												kermeta.language.structure.Object aSubObjInstances_lbdExp184 = it_ft184
+												kermeta.language.structure.Object aSubObjInstances_lbdExp178 = it_ft178
 														.next();
 
 												org.kermeta.compil.runtime.helper.language.ObjectUtil
-														.checkAllInvariantsSwitcher(aSubObjInstances_lbdExp184);
+														.checkAllInvariantsSwitcher(aSubObjInstances_lbdExp178);
 												//EIle:func
 
 											}
@@ -1012,7 +1214,7 @@ public class RealWrapper {
 									org.kermeta.compil.runtime.helper.language.ObjectUtil
 											.checkAllInvariantsSwitcher(org.kermeta.compil.runtime.helper.language.ObjectUtil
 													.getSwitcher(self,
-															prop_lbdExp182));
+															prop_lbdExp176));
 								}
 
 							}
@@ -1040,11 +1242,22 @@ public class RealWrapper {
 	java.lang.Double self, kermeta.language.structure.Property property
 
 	) {
+		//Protection of the following code
+		if (self == null
+				|| ((java.lang.Object) self) instanceof kermeta.language.structure.Object) {
+			return (java.lang.Boolean) org.kermeta.compil.runtime.helper.language.ObjectUtil
+					.isSet(
+							(kermeta.language.structure.Object) ((java.lang.Object) self),
+							property);
+		}
+		//End of the protection
 
 		java.lang.Boolean result = null;
 
-		result = (java.lang.Boolean) org.kermeta.compil.runtime.helper.language.ObjectUtil
-				.isSet(self, property);
+		result = (java.lang.Boolean) org.kermeta.compil.runtime.ExecutionContext
+				.getInstance().<java.lang.Boolean> asTypeOrVoid(
+						org.kermeta.compil.runtime.helper.language.ObjectUtil
+								.isSet(self, property));
 
 		return result;
 
@@ -1059,6 +1272,15 @@ public class RealWrapper {
 	java.lang.Double self, kermeta.language.structure.Property property
 
 	) {
+		//Protection of the following code
+		if (self == null
+				|| ((java.lang.Object) self) instanceof kermeta.language.structure.Object) {
+			return (kermeta.language.structure.Object) org.kermeta.compil.runtime.helper.language.ObjectUtil
+					.get(
+							(kermeta.language.structure.Object) ((java.lang.Object) self),
+							property);
+		}
+		//End of the protection
 
 		kermeta.language.structure.Object result = null;
 
@@ -1078,11 +1300,20 @@ public class RealWrapper {
 	java.lang.Double self
 
 	) {
+		//Protection of the following code
+		if (self == null
+				|| ((java.lang.Object) self) instanceof kermeta.language.structure.Object) {
+			return (java.lang.Boolean) org.kermeta.compil.runtime.helper.language.ObjectUtil
+					.isFrozen((kermeta.language.structure.Object) ((java.lang.Object) self));
+		}
+		//End of the protection
 
 		java.lang.Boolean result = null;
 
-		result = (java.lang.Boolean) org.kermeta.compil.runtime.helper.language.ObjectUtil
-				.isFrozen(self);
+		result = (java.lang.Boolean) org.kermeta.compil.runtime.ExecutionContext
+				.getInstance().<java.lang.Boolean> asTypeOrVoid(
+						org.kermeta.compil.runtime.helper.language.ObjectUtil
+								.isFrozen(self));
 
 		return result;
 
@@ -1097,11 +1328,20 @@ public class RealWrapper {
 	java.lang.Double self
 
 	) {
+		//Protection of the following code
+		if (self == null
+				|| ((java.lang.Object) self) instanceof kermeta.language.structure.Object) {
+			return (java.lang.Integer) org.kermeta.compil.runtime.helper.language.ObjectUtil
+					.hashcode((kermeta.language.structure.Object) ((java.lang.Object) self));
+		}
+		//End of the protection
 
 		java.lang.Integer result = null;
 
-		result = (java.lang.Integer) org.kermeta.compil.runtime.helper.language.ObjectUtil
-				.hashcode(self);
+		result = (java.lang.Integer) org.kermeta.compil.runtime.ExecutionContext
+				.getInstance().<java.lang.Integer> asTypeOrVoid(
+						org.kermeta.compil.runtime.helper.language.ObjectUtil
+								.hashcode(self));
 
 		return result;
 
@@ -1116,6 +1356,15 @@ public class RealWrapper {
 	java.lang.Double self, java.lang.Double element
 
 	) {
+		//Protection of the following code
+		if (self == null
+				|| ((java.lang.Object) self) instanceof kermeta.language.structure.Object) {
+			return (java.lang.Boolean) org.kermeta.compil.runtime.helper.language.ObjectUtil
+					.isNotEqual(
+							(kermeta.language.structure.Object) ((java.lang.Object) self),
+							element);
+		}
+		//End of the protection
 
 		java.lang.Boolean result = null;
 
@@ -1131,30 +1380,18 @@ public class RealWrapper {
 	 *
 	 * @generated
 	 */
-	public static <G> kermeta.language.structure.Object container(
-
-	java.lang.Double self
-
-	) {
-
-		kermeta.language.structure.Object result = null;
-
-		result = org.kermeta.compil.runtime.helper.language.ObjectUtil
-				.container(self);
-
-		return result;
-
-	}
-
-	/**
-	 *
-	 * @generated
-	 */
 	public static <G> void freeze(
 
 	java.lang.Double self
 
 	) {
+		//Protection of the following code
+		if (self == null
+				|| ((java.lang.Object) self) instanceof kermeta.language.structure.Object) {
+			org.kermeta.compil.runtime.helper.language.ObjectUtil
+					.freeze((kermeta.language.structure.Object) ((java.lang.Object) self));
+		}
+		//End of the protection
 
 		org.kermeta.compil.runtime.helper.language.ObjectUtil.freeze(self);
 
@@ -1169,9 +1406,44 @@ public class RealWrapper {
 	java.lang.Double self, kermeta.language.structure.Property property
 
 	) {
+		//Protection of the following code
+		if (self == null
+				|| ((java.lang.Object) self) instanceof kermeta.language.structure.Object) {
+			org.kermeta.compil.runtime.helper.language.ObjectUtil
+					.unset(
+							(kermeta.language.structure.Object) ((java.lang.Object) self),
+							property);
+		}
+		//End of the protection
 
 		org.kermeta.compil.runtime.helper.language.ObjectUtil.unset(self,
 				property);
+
+	}
+
+	/**
+	 *
+	 * @generated
+	 */
+	public static <G> kermeta.language.structure.Object container(
+
+	java.lang.Double self
+
+	) {
+		//Protection of the following code
+		if (self == null
+				|| ((java.lang.Object) self) instanceof kermeta.language.structure.Object) {
+			return (kermeta.language.structure.Object) org.kermeta.compil.runtime.helper.language.ObjectUtil
+					.container((kermeta.language.structure.Object) ((java.lang.Object) self));
+		}
+		//End of the protection
+
+		kermeta.language.structure.Object result = null;
+
+		result = org.kermeta.compil.runtime.helper.language.ObjectUtil
+				.container(self);
+
+		return result;
 
 	}
 
@@ -1184,11 +1456,20 @@ public class RealWrapper {
 	java.lang.Double self
 
 	) {
+		//Protection of the following code
+		if (self == null
+				|| ((java.lang.Object) self) instanceof kermeta.language.structure.Object) {
+			return (kermeta.persistence.Resource) org.kermeta.compil.runtime.helper.language.ObjectUtil
+					.containingResource((kermeta.language.structure.Object) ((java.lang.Object) self));
+		}
+		//End of the protection
 
 		kermeta.persistence.Resource result = null;
 
-		result = (kermeta.persistence.Resource) org.kermeta.compil.runtime.helper.language.ObjectUtil
-				.getContainingResource(self);
+		result = (kermeta.persistence.Resource) org.kermeta.compil.runtime.ExecutionContext
+				.getInstance().<kermeta.persistence.Resource> asTypeOrVoid(
+						org.kermeta.compil.runtime.helper.language.ObjectUtil
+								.getContainingResource(self));
 
 		return result;
 
@@ -1204,6 +1485,15 @@ public class RealWrapper {
 			kermeta.language.structure.Class type
 
 	) {
+		//Protection of the following code
+		if (self == null
+				|| ((java.lang.Object) self) instanceof kermeta.language.structure.Object) {
+			return (kermeta.language.structure.Object) org.kermeta.compil.runtime.helper.language.ObjectUtil
+					.asType(
+							(kermeta.language.structure.Object) ((java.lang.Object) self),
+							type);
+		}
+		//End of the protection
 
 		kermeta.language.structure.Object result = null;
 

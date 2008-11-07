@@ -1,5 +1,5 @@
 
-/*$Id: Loader.java,v 1.9 2008-10-30 17:53:34 cfaucher Exp $
+/*$Id: Loader.java,v 1.10 2008-11-07 08:54:01 cfaucher Exp $
 * Project : org.kermeta.compiler.generator
 * File : 	Loader.java
 * License : EPL
@@ -22,12 +22,9 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EEnumLiteral;
 import org.eclipse.emf.ecore.EFactory;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EStructuralFeature;
-import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
-import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 
 /**
  * @generated
@@ -114,7 +111,7 @@ public class Loader extends SaverOrLoader {
 					
 					// Setting the value.
 					//The values of derived property are not cloned
-					if( !sourceFeature.isDerived() && !sourceFeature.isUnsettable() ) {
+					if( !sourceFeature.isDerived() && sourceFeature.isChangeable() ) {
 						targetObject.eSet(targetFeature, targetValue);
 					}
 				} else {
@@ -129,7 +126,7 @@ public class Loader extends SaverOrLoader {
 					
 					// Setting the value.
 					//The values of derived property are not cloned
-					if( !sourceFeature.isDerived() && !sourceFeature.isUnsettable() && sourceFeature.isChangeable() ) {
+					if( !sourceFeature.isDerived() && sourceFeature.isChangeable() ) {
 						targetObject.eSet(targetFeature, targetValue);
 					}
 					if ( clone ) {
@@ -143,7 +140,7 @@ public class Loader extends SaverOrLoader {
 			 */
 			} else if ( value instanceof EList) {
 					
-				if( !sourceFeature.isDerived() && !sourceFeature.isUnsettable() ) {
+				if( !sourceFeature.isDerived() && sourceFeature.isChangeable() ) {
 					EList sourceList = (EList) sourceObject.eGet(sourceFeature);
 					EList targetList = (EList) targetObject.eGet(targetFeature);
 					for ( Object o : sourceList ) {
@@ -184,7 +181,7 @@ public class Loader extends SaverOrLoader {
 					}
 				}
 					
-				if( !sourceFeature.isDerived() && !sourceFeature.isUnsettable() ) {
+				if( !sourceFeature.isDerived() && sourceFeature.isChangeable() ) {
 					targetObject.eSet(targetFeature, realValue);
 				}
 			}

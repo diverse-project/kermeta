@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: StructureSwitch.java,v 1.7 2008-10-29 08:29:25 cfaucher Exp $
+ * $Id: StructureSwitch.java,v 1.8 2008-11-07 08:54:03 cfaucher Exp $
  */
 package kermeta.language.structure.util;
 
@@ -368,20 +368,17 @@ public class StructureSwitch<T> {
 				result = defaultCase(theEObject);
 			return result;
 		}
-		case StructurePackage.NAMED_ELEMENT: {
-			NamedElement namedElement = (NamedElement) theEObject;
-			T result = caseNamedElement(namedElement);
+		case StructurePackage.MULTIPLICITY_ELEMENT: {
+			MultiplicityElement multiplicityElement = (MultiplicityElement) theEObject;
+			T result = caseMultiplicityElement(multiplicityElement);
 			if (result == null)
-				result = caseObject(namedElement);
+				result = caseTypedElement(multiplicityElement);
 			if (result == null)
-				result = defaultCase(theEObject);
-			return result;
-		}
-		case StructurePackage.LINK_SETTER_FOR_TYPED_ELEMENT: {
-			LinkSetterForTypedElement linkSetterForTypedElement = (LinkSetterForTypedElement) theEObject;
-			T result = caseLinkSetterForTypedElement(linkSetterForTypedElement);
+				result = caseTypeContainer(multiplicityElement);
 			if (result == null)
-				result = caseObject(linkSetterForTypedElement);
+				result = caseNamedElement(multiplicityElement);
+			if (result == null)
+				result = caseObject(multiplicityElement);
 			if (result == null)
 				result = defaultCase(theEObject);
 			return result;
@@ -410,26 +407,35 @@ public class StructureSwitch<T> {
 				result = defaultCase(theEObject);
 			return result;
 		}
-		case StructurePackage.MULTIPLICITY_ELEMENT: {
-			MultiplicityElement multiplicityElement = (MultiplicityElement) theEObject;
-			T result = caseMultiplicityElement(multiplicityElement);
-			if (result == null)
-				result = caseTypedElement(multiplicityElement);
-			if (result == null)
-				result = caseTypeContainer(multiplicityElement);
-			if (result == null)
-				result = caseNamedElement(multiplicityElement);
-			if (result == null)
-				result = caseObject(multiplicityElement);
-			if (result == null)
-				result = defaultCase(theEObject);
-			return result;
-		}
 		case StructurePackage.TYPE: {
 			Type type = (Type) theEObject;
 			T result = caseType(type);
 			if (result == null)
 				result = caseObject(type);
+			if (result == null)
+				result = defaultCase(theEObject);
+			return result;
+		}
+		case StructurePackage.VOID_TYPE: {
+			VoidType voidType = (VoidType) theEObject;
+			T result = caseVoidType(voidType);
+			if (result == null)
+				result = caseType(voidType);
+			if (result == null)
+				result = caseObject(voidType);
+			if (result == null)
+				result = defaultCase(theEObject);
+			return result;
+		}
+		case StructurePackage.PRODUCT_TYPE: {
+			ProductType productType = (ProductType) theEObject;
+			T result = caseProductType(productType);
+			if (result == null)
+				result = caseTypeContainer(productType);
+			if (result == null)
+				result = caseType(productType);
+			if (result == null)
+				result = caseObject(productType);
 			if (result == null)
 				result = defaultCase(theEObject);
 			return result;
@@ -474,6 +480,15 @@ public class StructureSwitch<T> {
 				result = caseNamedElement(typeDefinition);
 			if (result == null)
 				result = caseObject(typeDefinition);
+			if (result == null)
+				result = defaultCase(theEObject);
+			return result;
+		}
+		case StructurePackage.NAMED_ELEMENT: {
+			NamedElement namedElement = (NamedElement) theEObject;
+			T result = caseNamedElement(namedElement);
+			if (result == null)
+				result = caseObject(namedElement);
 			if (result == null)
 				result = defaultCase(theEObject);
 			return result;
@@ -592,30 +607,6 @@ public class StructureSwitch<T> {
 				result = defaultCase(theEObject);
 			return result;
 		}
-		case StructurePackage.PRODUCT_TYPE: {
-			ProductType productType = (ProductType) theEObject;
-			T result = caseProductType(productType);
-			if (result == null)
-				result = caseTypeContainer(productType);
-			if (result == null)
-				result = caseType(productType);
-			if (result == null)
-				result = caseObject(productType);
-			if (result == null)
-				result = defaultCase(theEObject);
-			return result;
-		}
-		case StructurePackage.VOID_TYPE: {
-			VoidType voidType = (VoidType) theEObject;
-			T result = caseVoidType(voidType);
-			if (result == null)
-				result = caseType(voidType);
-			if (result == null)
-				result = caseObject(voidType);
-			if (result == null)
-				result = defaultCase(theEObject);
-			return result;
-		}
 		case StructurePackage.TYPE_DEFINITION_CONTAINER: {
 			TypeDefinitionContainer typeDefinitionContainer = (TypeDefinitionContainer) theEObject;
 			T result = caseTypeDefinitionContainer(typeDefinitionContainer);
@@ -623,6 +614,15 @@ public class StructureSwitch<T> {
 				result = caseNamedElement(typeDefinitionContainer);
 			if (result == null)
 				result = caseObject(typeDefinitionContainer);
+			if (result == null)
+				result = defaultCase(theEObject);
+			return result;
+		}
+		case StructurePackage.LINK_SETTER_FOR_TYPED_ELEMENT: {
+			LinkSetterForTypedElement linkSetterForTypedElement = (LinkSetterForTypedElement) theEObject;
+			T result = caseLinkSetterForTypedElement(linkSetterForTypedElement);
+			if (result == null)
+				result = caseObject(linkSetterForTypedElement);
 			if (result == null)
 				result = defaultCase(theEObject);
 			return result;
@@ -888,32 +888,17 @@ public class StructureSwitch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Named Element</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Multiplicity Element</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Named Element</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Multiplicity Element</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseNamedElement(NamedElement object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Link Setter For Typed Element</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Link Setter For Typed Element</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseLinkSetterForTypedElement(LinkSetterForTypedElement object) {
+	public T caseMultiplicityElement(MultiplicityElement object) {
 		return null;
 	}
 
@@ -948,21 +933,6 @@ public class StructureSwitch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Multiplicity Element</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Multiplicity Element</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseMultiplicityElement(MultiplicityElement object) {
-		return null;
-	}
-
-	/**
 	 * Returns the result of interpreting the object as an instance of '<em>Type</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
@@ -974,6 +944,36 @@ public class StructureSwitch<T> {
 	 * @generated
 	 */
 	public T caseType(Type object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Void Type</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Void Type</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseVoidType(VoidType object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Product Type</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Product Type</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseProductType(ProductType object) {
 		return null;
 	}
 
@@ -1034,6 +1034,21 @@ public class StructureSwitch<T> {
 	 * @generated
 	 */
 	public T caseTypeDefinition(TypeDefinition object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Named Element</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Named Element</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseNamedElement(NamedElement object) {
 		return null;
 	}
 
@@ -1158,36 +1173,6 @@ public class StructureSwitch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Product Type</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Product Type</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseProductType(ProductType object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Void Type</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Void Type</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseVoidType(VoidType object) {
-		return null;
-	}
-
-	/**
 	 * Returns the result of interpreting the object as an instance of '<em>Type Definition Container</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
@@ -1199,6 +1184,21 @@ public class StructureSwitch<T> {
 	 * @generated
 	 */
 	public T caseTypeDefinitionContainer(TypeDefinitionContainer object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Link Setter For Typed Element</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Link Setter For Typed Element</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseLinkSetterForTypedElement(LinkSetterForTypedElement object) {
 		return null;
 	}
 

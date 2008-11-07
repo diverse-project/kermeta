@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: SMMethod.java,v 1.4 2008-10-29 08:29:26 cfaucher Exp $
+ * $Id: SMMethod.java,v 1.5 2008-11-07 08:54:03 cfaucher Exp $
  */
 package simk;
 
@@ -29,8 +29,8 @@ import org.eclipse.emf.common.util.EList;
  *   <li>{@link simk.SMMethod#getParentEAttribute <em>Parent EAttribute</em>}</li>
  *   <li>{@link simk.SMMethod#getSMParameters <em>SM Parameters</em>}</li>
  *   <li>{@link simk.SMMethod#getSMReturn <em>SM Return</em>}</li>
- *   <li>{@link simk.SMMethod#getUsages <em>Usages</em>}</li>
  *   <li>{@link simk.SMMethod#getSMContext <em>SM Context</em>}</li>
+ *   <li>{@link simk.SMMethod#getUsages <em>Usages</em>}</li>
  *   <li>{@link simk.SMMethod#getAccess <em>Access</em>}</li>
  * </ul>
  * </p>
@@ -267,35 +267,6 @@ public interface SMMethod extends SMNamedElement {
 	void setSMReturn(SMReturn value);
 
 	/**
-	 * Returns the value of the '<em><b>Usages</b></em>' attribute.
-	 * The literals are from the enumeration {@link simk.SMUsage}.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Usages</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Usages</em>' attribute.
-	 * @see simk.SMUsage
-	 * @see #setUsages(SMUsage)
-	 * @see simk.SimkPackage#getSMMethod_Usages()
-	 * @model
-	 * @generated
-	 */
-	SMUsage getUsages();
-
-	/**
-	 * Sets the value of the '{@link simk.SMMethod#getUsages <em>Usages</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Usages</em>' attribute.
-	 * @see simk.SMUsage
-	 * @see #getUsages()
-	 * @generated
-	 */
-	void setUsages(SMUsage value);
-
-	/**
 	 * Returns the value of the '<em><b>SM Context</b></em>' reference.
 	 * It is bidirectional and its opposite is '{@link simk.SMContext#getSMMethods <em>SM Methods</em>}'.
 	 * <!-- begin-user-doc -->
@@ -324,6 +295,35 @@ public interface SMMethod extends SMNamedElement {
 	void setSMContext(SMContext value);
 
 	/**
+	 * Returns the value of the '<em><b>Usages</b></em>' attribute.
+	 * The literals are from the enumeration {@link simk.SMUsage}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Usages</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Usages</em>' attribute.
+	 * @see simk.SMUsage
+	 * @see #setUsages(SMUsage)
+	 * @see simk.SimkPackage#getSMMethod_Usages()
+	 * @model transient="true"
+	 * @generated
+	 */
+	SMUsage getUsages();
+
+	/**
+	 * Sets the value of the '{@link simk.SMMethod#getUsages <em>Usages</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Usages</em>' attribute.
+	 * @see simk.SMUsage
+	 * @see #getUsages()
+	 * @generated
+	 */
+	void setUsages(SMUsage value);
+
+	/**
 	 * Returns the value of the '<em><b>Access</b></em>' attribute.
 	 * The default value is <code>"public"</code>.
 	 * The literals are from the enumeration {@link simk.SMAccess}.
@@ -337,7 +337,7 @@ public interface SMMethod extends SMNamedElement {
 	 * @see simk.SMAccess
 	 * @see #setAccess(SMAccess)
 	 * @see simk.SimkPackage#getSMMethod_Access()
-	 * @model default="public"
+	 * @model default="public" transient="true"
 	 * @generated
 	 */
 	SMAccess getAccess();

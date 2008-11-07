@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ModelType.java,v 1.7 2008-10-29 08:29:17 cfaucher Exp $
+ * $Id: ModelType.java,v 1.8 2008-11-07 08:53:37 cfaucher Exp $
  */
 package kermeta.language.structure;
 
@@ -45,7 +45,7 @@ public interface ModelType extends Type, TypeDefinition {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @model annotation="kermeta documentation='/**\r\n\t * To be written ##########################################\r\n\t \052/'"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='\nkermeta.language.structure.Model result = null;\n\n\tresult = (kermeta.language.structure.Model) org.kermeta.compil.runtime.helper.language.ModelTypeUtil.newObject(this);\n\nreturn result;\n'"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='\nkermeta.language.structure.Model result = null;\n\n\tresult = (kermeta.language.structure.Model) org.kermeta.compil.runtime.ExecutionContext.getInstance().<kermeta.language.structure.Model>asTypeOrVoid(org.kermeta.compil.runtime.helper.language.ModelTypeUtil.newObject(this));\n\nreturn result;\n'"
 	 * @generated
 	 */
 	Model _new();
@@ -55,7 +55,7 @@ public interface ModelType extends Type, TypeDefinition {
 	 * <!-- end-user-doc -->
 	 * @model dataType="kermeta.standard.JavaBoolean"
 	 *        annotation="kermeta documentation='/**\r\n\t * To be written ##########################################\r\n\t \052/'"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='\njava.lang.Boolean result = null;\n\n\tresult = (java.lang.Boolean) org.kermeta.compil.runtime.helper.language.ModelTypeUtil.isModelTypeOf(this, m);\n\nreturn result;\n'"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='\njava.lang.Boolean result = null;\n\n\tresult = (java.lang.Boolean) org.kermeta.compil.runtime.ExecutionContext.getInstance().<java.lang.Boolean>asTypeOrVoid(org.kermeta.compil.runtime.helper.language.ModelTypeUtil.isModelTypeOf(this, m));\n\nreturn result;\n'"
 	 * @generated
 	 */
 	Boolean isModelTypeOf(Model m);

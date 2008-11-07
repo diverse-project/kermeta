@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: StructureFactoryImpl.java,v 1.7 2008-10-29 08:29:11 cfaucher Exp $
+ * $Id: StructureFactoryImpl.java,v 1.8 2008-11-07 08:52:55 cfaucher Exp $
  */
 package kermeta.language.structure.impl;
 
@@ -20,7 +20,6 @@ import kermeta.language.structure.ModelType;
 import kermeta.language.structure.ModelTypeVariable;
 import kermeta.language.structure.ModelingUnit;
 import kermeta.language.structure.MultiplicityElement;
-import kermeta.language.structure.NamedElement;
 import kermeta.language.structure.ObjectTypeVariable;
 import kermeta.language.structure.Operation;
 import kermeta.language.structure.Parameter;
@@ -128,18 +127,18 @@ public class StructureFactoryImpl extends EFactoryImpl implements
 			return createParameterizedType();
 		case StructurePackage.CLASS:
 			return createClass();
-		case StructurePackage.NAMED_ELEMENT:
-			return createNamedElement();
-		case StructurePackage.LINK_SETTER_FOR_TYPED_ELEMENT:
-			return createLinkSetterForTypedElement();
+		case StructurePackage.MULTIPLICITY_ELEMENT:
+			return createMultiplicityElement();
 		case StructurePackage.TRACEABILITY:
 			return createTraceability();
 		case StructurePackage.FUNCTION_TYPE:
 			return createFunctionType();
-		case StructurePackage.MULTIPLICITY_ELEMENT:
-			return createMultiplicityElement();
 		case StructurePackage.TYPE:
 			return createType();
+		case StructurePackage.VOID_TYPE:
+			return createVoidType();
+		case StructurePackage.PRODUCT_TYPE:
+			return createProductType();
 		case StructurePackage.TYPE_VARIABLE_BINDING:
 			return createTypeVariableBinding();
 		case StructurePackage.TYPE_DEFINITION:
@@ -154,10 +153,8 @@ public class StructureFactoryImpl extends EFactoryImpl implements
 			return createModel();
 		case StructurePackage.FILTER:
 			return createFilter();
-		case StructurePackage.PRODUCT_TYPE:
-			return createProductType();
-		case StructurePackage.VOID_TYPE:
-			return createVoidType();
+		case StructurePackage.LINK_SETTER_FOR_TYPED_ELEMENT:
+			return createLinkSetterForTypedElement();
 		default:
 			throw new IllegalArgumentException("The class '" + eClass.getName()
 					+ "' is not a valid classifier");
@@ -397,19 +394,9 @@ public class StructureFactoryImpl extends EFactoryImpl implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NamedElement createNamedElement() {
-		NamedElementImpl namedElement = new NamedElementImpl();
-		return namedElement;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public LinkSetterForTypedElement createLinkSetterForTypedElement() {
-		LinkSetterForTypedElementImpl linkSetterForTypedElement = new LinkSetterForTypedElementImpl();
-		return linkSetterForTypedElement;
+	public MultiplicityElement createMultiplicityElement() {
+		MultiplicityElementImpl multiplicityElement = new MultiplicityElementImpl();
+		return multiplicityElement;
 	}
 
 	/**
@@ -437,9 +424,9 @@ public class StructureFactoryImpl extends EFactoryImpl implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public MultiplicityElement createMultiplicityElement() {
-		MultiplicityElementImpl multiplicityElement = new MultiplicityElementImpl();
-		return multiplicityElement;
+	public Type createType() {
+		TypeImpl type = new TypeImpl();
+		return type;
 	}
 
 	/**
@@ -447,9 +434,19 @@ public class StructureFactoryImpl extends EFactoryImpl implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Type createType() {
-		TypeImpl type = new TypeImpl();
-		return type;
+	public VoidType createVoidType() {
+		VoidTypeImpl voidType = new VoidTypeImpl();
+		return voidType;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public ProductType createProductType() {
+		ProductTypeImpl productType = new ProductTypeImpl();
+		return productType;
 	}
 
 	/**
@@ -527,19 +524,9 @@ public class StructureFactoryImpl extends EFactoryImpl implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ProductType createProductType() {
-		ProductTypeImpl productType = new ProductTypeImpl();
-		return productType;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public VoidType createVoidType() {
-		VoidTypeImpl voidType = new VoidTypeImpl();
-		return voidType;
+	public LinkSetterForTypedElement createLinkSetterForTypedElement() {
+		LinkSetterForTypedElementImpl linkSetterForTypedElement = new LinkSetterForTypedElementImpl();
+		return linkSetterForTypedElement;
 	}
 
 	/**

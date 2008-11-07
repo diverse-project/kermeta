@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: StandardSwitch.java,v 1.7 2008-10-29 08:29:38 cfaucher Exp $
+ * $Id: StandardSwitch.java,v 1.8 2008-11-07 08:54:22 cfaucher Exp $
  */
 package kermeta.standard.util;
 
@@ -96,6 +96,17 @@ public class StandardSwitch<T> {
 	 */
 	protected T doSwitch(int classifierID, EObject theEObject) {
 		switch (classifierID) {
+		case StandardPackage.STRING: {
+			kermeta.standard.String string = (kermeta.standard.String) theEObject;
+			T result = caseString(string);
+			if (result == null)
+				result = caseValueType(string);
+			if (result == null)
+				result = caseObject(string);
+			if (result == null)
+				result = defaultCase(theEObject);
+			return result;
+		}
 		case StandardPackage.VOID: {
 			kermeta.standard.Void void_ = (kermeta.standard.Void) theEObject;
 			T result = caseVoid(void_);
@@ -183,17 +194,6 @@ public class StandardSwitch<T> {
 				result = caseValueType(character);
 			if (result == null)
 				result = caseObject(character);
-			if (result == null)
-				result = defaultCase(theEObject);
-			return result;
-		}
-		case StandardPackage.STRING: {
-			kermeta.standard.String string = (kermeta.standard.String) theEObject;
-			T result = caseString(string);
-			if (result == null)
-				result = caseValueType(string);
-			if (result == null)
-				result = caseObject(string);
 			if (result == null)
 				result = defaultCase(theEObject);
 			return result;
@@ -291,6 +291,21 @@ public class StandardSwitch<T> {
 		default:
 			return defaultCase(theEObject);
 		}
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>String</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>String</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseString(kermeta.standard.String object) {
+		return null;
 	}
 
 	/**
@@ -425,21 +440,6 @@ public class StandardSwitch<T> {
 	 * @generated
 	 */
 	public T caseCharacter(kermeta.standard.Character object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>String</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>String</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseString(kermeta.standard.String object) {
 		return null;
 	}
 

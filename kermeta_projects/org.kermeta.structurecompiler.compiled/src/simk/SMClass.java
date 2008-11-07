@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: SMClass.java,v 1.7 2008-10-29 08:29:26 cfaucher Exp $
+ * $Id: SMClass.java,v 1.8 2008-11-07 08:54:03 cfaucher Exp $
  */
 package simk;
 
@@ -65,7 +65,7 @@ public interface SMClass extends SMNamedElement {
 	 * @see simk.SMUsage
 	 * @see #setUsages(SMUsage)
 	 * @see simk.SimkPackage#getSMClass_Usages()
-	 * @model
+	 * @model transient="true"
 	 * @generated
 	 */
 	SMUsage getUsages();

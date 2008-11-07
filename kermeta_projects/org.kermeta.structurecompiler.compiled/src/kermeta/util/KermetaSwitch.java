@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: KermetaSwitch.java,v 1.7 2008-10-29 08:29:22 cfaucher Exp $
+ * $Id: KermetaSwitch.java,v 1.8 2008-11-07 08:53:58 cfaucher Exp $
  */
 package kermeta.util;
 

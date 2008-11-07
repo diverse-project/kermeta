@@ -1,5 +1,5 @@
 
-/*$Id: PersistenceUtil.java,v 1.5 2008-10-30 17:37:05 cfaucher Exp $
+/*$Id: PersistenceUtil.java,v 1.6 2008-11-07 08:54:01 cfaucher Exp $
 * Project : org.kermeta.compiler.generator
 * File : 	PersistenceUtil.java
 * License : EPL

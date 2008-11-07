@@ -1,5 +1,5 @@
 
-/*$Id: SaverOrLoader.java,v 1.10 2008-10-30 17:53:35 cfaucher Exp $
+/*$Id: SaverOrLoader.java,v 1.11 2008-11-07 08:54:01 cfaucher Exp $
 * Project : org.kermeta.compiler.generator
 * File : 	SaverOrLoader.java
 * License : EPL
@@ -25,6 +25,7 @@ import org.eclipse.emf.codegen.util.CodeGenUtil;
 import org.eclipse.emf.common.util.Enumerator;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EDataType;
+import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EEnumLiteral;
 import org.eclipse.emf.ecore.EFactory;
 import org.eclipse.emf.ecore.EObject;
@@ -240,7 +241,7 @@ abstract public class SaverOrLoader {
 					_instanceMapping.put(sourceObject, targetObject);
 					return targetObject;
 				} catch (Exception e) {
-					e.printStackTrace();
+					System.err.println("createInstance(EObject sourceObject, String metamodelURI): " + sourceObject.toString());
 				}
 			} else {
 				EPackage root_pack = getRootEPackage(Registry.INSTANCE.getEPackage(metamodelURI));
@@ -286,17 +287,34 @@ abstract public class SaverOrLoader {
 	}
 	
 	protected Enumerator createInstance(EEnumLiteral sourceObject, String metamodelURI) {
+
+		EPackage tmp_epack = Registry.INSTANCE.getEPackage(metamodelURI);
+		EPackage epapa = null;
 		
-		EPackage root_pack = getRootEPackage(Registry.INSTANCE.getEPackage(metamodelURI));
+		if(tmp_epack==null) {
+			String tmp_ns_uri = ((EPackage) sourceObject.eContainer().eContainer()).getNsURI();
+			if( tmp_ns_uri.contains(uri_suffix) ) {
+				epapa = Registry.INSTANCE.getEPackage(tmp_ns_uri.replace(uri_suffix, ""));
+			} else {
+				epapa = Registry.INSTANCE.getEPackage(tmp_ns_uri + uri_suffix);
+			}
+		} else {
+			EPackage root_pack = getRootEPackage(tmp_epack);
 		
-		String enumQName = EcoreHelper.getQualifiedName((org.eclipse.emf.ecore.ENamedElement) sourceObject.getEEnum().eContainer(), ".");
-		EPackage epapa = getPackPack(root_pack, enumQName);
+			String enumQName = EcoreHelper.getQualifiedName((org.eclipse.emf.ecore.ENamedElement) sourceObject.getEEnum().eContainer(), ".");
+			epapa = getPackPack(root_pack, enumQName);
+		}
 		
 		String pppp_name = ((org.eclipse.emf.ecore.ENamedElement) sourceObject.getEEnum().eContainer()).getName();
 		
 		String toto = epapa.getClass().getName();
 		String str_enum = toto.replace(".impl." + CodeGenUtil.capName(pppp_name) + "PackageImpl", "." + sourceObject.getEEnum().getName());
 		
+		if(str_enum.equals("ecore.impl.EcorePackageImpl") && metamodelURI.equals(org.eclipse.emf.ecore.EcorePackage.eNS_URI + this.uri_suffix)) {
+			if(sourceObject.eContainer().eContainer().getClass() == org.eclipse.emf.ecore.impl.EPackageImpl.class) {
+				return (Enumerator) EcoreUtil.createFromString((EEnum) sourceObject.eContainer(), sourceObject.getLiteral());
+			}
+		}
 		
 		Class<?> str_pack_Class = null;
 		
@@ -316,10 +334,13 @@ abstract public class SaverOrLoader {
 		
 		try {
 			String creationMethodName = "getByName";
-			Method method = str_pack_Class.getClass().getMethod(creationMethodName, new Class[] {});
+			//Method method = str_pack_Class.getClass().getMethod(creationMethodName, new Class[] {});
+			Method method = str_pack_Class.getMethod(creationMethodName, java.lang.String.class);
 			Enumerator targetObject = (Enumerator) method.invoke(str_pack_Class, new Object[] {sourceObject.getLiteral()});
 			return targetObject;
 		} catch (Exception e) {
+			e.printStackTrace();
+			System.err.println("createInstance(EEnumLiteral sourceObject, String metamodelURI): " + sourceObject.eContainer() + " - "+ sourceObject.getLiteral() + " - " + str_enum);
 		}
 		
 		return null;
@@ -374,6 +395,7 @@ abstract public class SaverOrLoader {
 			Enumerator targetObject = (Enumerator) method.invoke(factory, new Object[] {null, sourceObject.getLiteral()});
 			return targetObject;
 		} catch (Exception e) {
+			System.err.println("createInstance(Enumerator sourceObject, String metamodelURI): " + sourceObject.toString());
 		}
 		
 		return null;

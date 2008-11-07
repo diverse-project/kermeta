@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: VoidType.java,v 1.7 2008-10-29 08:29:17 cfaucher Exp $
+ * $Id: VoidType.java,v 1.8 2008-11-07 08:53:36 cfaucher Exp $
  */
 package kermeta.language.structure;
 
@@ -15,8 +15,8 @@ import km2ecore.KM2EcoreContext;
  *
  *
  * @see kermeta.language.structure.StructurePackage#getVoidType()
- * @model annotation="kermeta documentation='Class definition for the <pre>Void</pre> type'"
- *        annotation="kermeta documentation='/** Complete \052/'"
+ * @model annotation="kermeta documentation='/** Complete \052/'"
+ *        annotation="kermeta documentation='Class definition for the <pre>Void</pre> type'"
  * @generated
  */
 public interface VoidType extends Type {

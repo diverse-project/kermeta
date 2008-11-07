@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: SMMethodImpl.java,v 1.4 2008-10-29 08:29:12 cfaucher Exp $
+ * $Id: SMMethodImpl.java,v 1.5 2008-11-07 08:53:07 cfaucher Exp $
  */
 package simk.impl;
 
@@ -49,8 +49,8 @@ import simk.SimkPackage;
  *   <li>{@link simk.impl.SMMethodImpl#getParentEAttribute <em>Parent EAttribute</em>}</li>
  *   <li>{@link simk.impl.SMMethodImpl#getSMParameters <em>SM Parameters</em>}</li>
  *   <li>{@link simk.impl.SMMethodImpl#getSMReturn <em>SM Return</em>}</li>
- *   <li>{@link simk.impl.SMMethodImpl#getUsages <em>Usages</em>}</li>
  *   <li>{@link simk.impl.SMMethodImpl#getSMContext <em>SM Context</em>}</li>
+ *   <li>{@link simk.impl.SMMethodImpl#getUsages <em>Usages</em>}</li>
  *   <li>{@link simk.impl.SMMethodImpl#getAccess <em>Access</em>}</li>
  * </ul>
  * </p>
@@ -189,6 +189,16 @@ public class SMMethodImpl extends SMNamedElementImpl implements SMMethod {
 	protected SMReturn sMReturn;
 
 	/**
+	 * The cached value of the '{@link #getSMContext() <em>SM Context</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getSMContext()
+	 * @generated
+	 * @ordered
+	 */
+	protected SMContext sMContext;
+
+	/**
 	 * The default value of the '{@link #getUsages() <em>Usages</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -207,16 +217,6 @@ public class SMMethodImpl extends SMNamedElementImpl implements SMMethod {
 	 * @ordered
 	 */
 	protected SMUsage usages = USAGES_EDEFAULT;
-
-	/**
-	 * The cached value of the '{@link #getSMContext() <em>SM Context</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getSMContext()
-	 * @generated
-	 * @ordered
-	 */
-	protected SMContext sMContext;
 
 	/**
 	 * The default value of the '{@link #getAccess() <em>Access</em>}' attribute.
@@ -574,28 +574,6 @@ public class SMMethodImpl extends SMNamedElementImpl implements SMMethod {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public SMUsage getUsages() {
-		return usages;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setUsages(SMUsage newUsages) {
-		SMUsage oldUsages = usages;
-		usages = newUsages == null ? USAGES_EDEFAULT : newUsages;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET,
-					SimkPackage.SM_METHOD__USAGES, oldUsages, usages));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public SMContext getSMContext() {
 		if (sMContext != null && sMContext.eIsProxy()) {
 			InternalEObject oldSMContext = (InternalEObject) sMContext;
@@ -663,6 +641,28 @@ public class SMMethodImpl extends SMNamedElementImpl implements SMMethod {
 			eNotify(new ENotificationImpl(this, Notification.SET,
 					SimkPackage.SM_METHOD__SM_CONTEXT, newSMContext,
 					newSMContext));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public SMUsage getUsages() {
+		return usages;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setUsages(SMUsage newUsages) {
+		SMUsage oldUsages = usages;
+		usages = newUsages == null ? USAGES_EDEFAULT : newUsages;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET,
+					SimkPackage.SM_METHOD__USAGES, oldUsages, usages));
 	}
 
 	/**
@@ -783,12 +783,12 @@ public class SMMethodImpl extends SMNamedElementImpl implements SMMethod {
 			if (resolve)
 				return getSMReturn();
 			return basicGetSMReturn();
-		case SimkPackage.SM_METHOD__USAGES:
-			return getUsages();
 		case SimkPackage.SM_METHOD__SM_CONTEXT:
 			if (resolve)
 				return getSMContext();
 			return basicGetSMContext();
+		case SimkPackage.SM_METHOD__USAGES:
+			return getUsages();
 		case SimkPackage.SM_METHOD__ACCESS:
 			return getAccess();
 		}
@@ -833,11 +833,11 @@ public class SMMethodImpl extends SMNamedElementImpl implements SMMethod {
 		case SimkPackage.SM_METHOD__SM_RETURN:
 			setSMReturn((SMReturn) newValue);
 			return;
-		case SimkPackage.SM_METHOD__USAGES:
-			setUsages((SMUsage) newValue);
-			return;
 		case SimkPackage.SM_METHOD__SM_CONTEXT:
 			setSMContext((SMContext) newValue);
+			return;
+		case SimkPackage.SM_METHOD__USAGES:
+			setUsages((SMUsage) newValue);
 			return;
 		case SimkPackage.SM_METHOD__ACCESS:
 			setAccess((SMAccess) newValue);
@@ -881,11 +881,11 @@ public class SMMethodImpl extends SMNamedElementImpl implements SMMethod {
 		case SimkPackage.SM_METHOD__SM_RETURN:
 			setSMReturn((SMReturn) null);
 			return;
-		case SimkPackage.SM_METHOD__USAGES:
-			setUsages(USAGES_EDEFAULT);
-			return;
 		case SimkPackage.SM_METHOD__SM_CONTEXT:
 			setSMContext((SMContext) null);
+			return;
+		case SimkPackage.SM_METHOD__USAGES:
+			setUsages(USAGES_EDEFAULT);
 			return;
 		case SimkPackage.SM_METHOD__ACCESS:
 			setAccess(ACCESS_EDEFAULT);
@@ -922,10 +922,10 @@ public class SMMethodImpl extends SMNamedElementImpl implements SMMethod {
 			return sMParameters != null && !sMParameters.isEmpty();
 		case SimkPackage.SM_METHOD__SM_RETURN:
 			return sMReturn != null;
-		case SimkPackage.SM_METHOD__USAGES:
-			return usages != USAGES_EDEFAULT;
 		case SimkPackage.SM_METHOD__SM_CONTEXT:
 			return sMContext != null;
+		case SimkPackage.SM_METHOD__USAGES:
+			return usages != USAGES_EDEFAULT;
 		case SimkPackage.SM_METHOD__ACCESS:
 			return access != ACCESS_EDEFAULT;
 		}

@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: StringBuffer.java,v 1.7 2008-10-29 08:29:22 cfaucher Exp $
+ * $Id: StringBuffer.java,v 1.8 2008-11-07 08:53:58 cfaucher Exp $
  */
 package kermeta.utils;
 
@@ -55,7 +55,7 @@ public interface StringBuffer extends kermeta.language.structure.Object {
 	 * <!-- end-user-doc -->
 	 * @model arg0DataType="kermeta.standard.JavaString"
 	 *        annotation="kermeta documentation='/**\n\t * Append a given string at the end of this StringBuffer\n\t * @param arg0 A string to append at the end of this StringBuffer\n\t * @return A reference to this object\n\t \052/'"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='\nkermeta.utils.StringBuffer result = null;\n\n\tresult = (kermeta.utils.StringBuffer) org.kermeta.compil.runtime.helper.basetypes.StringBufferUtil.append(this, arg0);\n\nreturn result;\n'"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='\nkermeta.utils.StringBuffer result = null;\n\n\tresult = (kermeta.utils.StringBuffer) org.kermeta.compil.runtime.ExecutionContext.getInstance().<kermeta.utils.StringBuffer>asTypeOrVoid(org.kermeta.compil.runtime.helper.basetypes.StringBufferUtil.append(this, arg0));\n\nreturn result;\n'"
 	 * @generated
 	 */
 	StringBuffer append(String arg0);
@@ -65,7 +65,7 @@ public interface StringBuffer extends kermeta.language.structure.Object {
 	 * <!-- end-user-doc -->
 	 * @model dataType="kermeta.standard.JavaInteger"
 	 *        annotation="kermeta documentation='/**\n\t * Return the length of the StringBuffer\n\t * @return length of the StringBuffer\n\t \052/'"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='\njava.lang.Integer result = null;\n\n\tresult = (java.lang.Integer) org.kermeta.compil.runtime.helper.basetypes.StringBufferUtil.length(this);\n\nreturn result;\n'"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='\njava.lang.Integer result = null;\n\n\tresult = (java.lang.Integer) org.kermeta.compil.runtime.ExecutionContext.getInstance().<java.lang.Integer>asTypeOrVoid(org.kermeta.compil.runtime.helper.basetypes.StringBufferUtil.length(this));\n\nreturn result;\n'"
 	 * @generated
 	 */
 	Integer length();
@@ -76,7 +76,7 @@ public interface StringBuffer extends kermeta.language.structure.Object {
 	 * @model dataType="kermeta.standard.JavaString"
 	 *        annotation="kermeta documentation='/**\n\t *Convert this StringBuffer to String and return its value\n\t *@return The string value of this StringBuffer\n\t \052/'"
 	 *        annotation="kermeta superOperation='kermeta::language::structure::Object'"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='\njava.lang.String result = null;\n\n\tjava.lang.String stringValue = null;\n\n\tstringValue = (java.lang.String) org.kermeta.compil.runtime.helper.basetypes.StringBufferUtil.toString(this);\n\n\tresult = stringValue;\n\nreturn result;\n'"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='\njava.lang.String result = null;\n\n\tjava.lang.String stringValue = null;\n\n\tstringValue = (java.lang.String) org.kermeta.compil.runtime.ExecutionContext.getInstance().<java.lang.String>asTypeOrVoid(org.kermeta.compil.runtime.helper.basetypes.StringBufferUtil.toString(this));\n\n\tresult = stringValue;\n\nreturn result;\n'"
 	 * @generated
 	 */
 	String toString();

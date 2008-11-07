@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: StackImpl.java,v 1.7 2008-10-29 08:29:13 cfaucher Exp $
+ * $Id: StackImpl.java,v 1.8 2008-11-07 08:53:12 cfaucher Exp $
  */
 package kermeta.utils.impl;
 
@@ -47,13 +47,11 @@ public class StackImpl<G> extends SequenceImpl<G> implements Stack<G> {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public G pop() {
+	public G peek() {
 
 		G result = null;
 
-		result = this.peek();
-
-		this.removeAt(0);
+		result = this.first();
 
 		return result;
 
@@ -64,11 +62,13 @@ public class StackImpl<G> extends SequenceImpl<G> implements Stack<G> {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public G peek() {
+	public G pop() {
 
 		G result = null;
 
-		result = this.first();
+		result = this.peek();
+
+		this.removeAt(0);
 
 		return result;
 

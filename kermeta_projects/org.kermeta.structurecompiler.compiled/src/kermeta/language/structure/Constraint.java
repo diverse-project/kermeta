@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: Constraint.java,v 1.7 2008-10-29 08:29:17 cfaucher Exp $
+ * $Id: Constraint.java,v 1.8 2008-11-07 08:53:38 cfaucher Exp $
  */
 package kermeta.language.structure;
 
@@ -131,7 +131,8 @@ public interface Constraint extends Traceability<EAnnotation>, NamedElement {
 	 * @see kermeta.language.structure.ConstraintType
 	 * @see #setStereotype(ConstraintType)
 	 * @see kermeta.language.structure.StructurePackage#getConstraint_Stereotype()
-	 * @model annotation="kermeta documentation='Type of the Constraint (precond/postcond/inv)'"
+	 * @model transient="true"
+	 *        annotation="kermeta documentation='Type of the Constraint (precond/postcond/inv)'"
 	 * @generated
 	 */
 	ConstraintType getStereotype();
@@ -189,7 +190,8 @@ public interface Constraint extends Traceability<EAnnotation>, NamedElement {
 	 * @see kermeta.language.structure.ConstraintLanguage
 	 * @see #setLanguage(ConstraintLanguage)
 	 * @see kermeta.language.structure.StructurePackage#getConstraint_Language()
-	 * @model annotation="kermeta documentation='Language in which the constraint is expressed'"
+	 * @model transient="true"
+	 *        annotation="kermeta documentation='Language in which the constraint is expressed'"
 	 * @generated
 	 */
 	ConstraintLanguage getLanguage();
@@ -239,7 +241,7 @@ public interface Constraint extends Traceability<EAnnotation>, NamedElement {
 	 * <!-- end-user-doc -->
 	 * @model dataType="kermeta.standard.JavaString"
 	 *        annotation="kermeta superOperation='kermeta::language::structure::Object'"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='\njava.lang.String result = null;\n\n\tresult = \"\";\n\n\tjava.lang.Boolean idIfCond_207 = false;\n\tidIfCond_207 = org.kermeta.compil.runtime.helper.language.ObjectUtil.isInstanceOfSwitcher(this.getBody(), org.kermeta.compil.runtime.ExecutionContext.getInstance().getMetaClass(\"kermeta.language.behavior.Block\"));\n\n\tif( idIfCond_207 ) {\n\n\tresult = kermeta.standard.helper.StringWrapper.plus(result, this.getBody().createBehaviorJava(context));\n}\n else {\n\n\tresult = kermeta.standard.helper.StringWrapper.plus(result, this.getBody().createExpression(context, ((kermeta.utils.StringBuffer) org.kermeta.compil.runtime.helper.language.ClassUtil.newObject(\"kermeta.utils.StringBuffer\")), true).toString());\n}\n\n\nreturn result;\n'"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='\njava.lang.String result = null;\n\n\tresult = \"\";\n\n\tjava.lang.Boolean idIfCond_258 = false;\n\tidIfCond_258 = org.kermeta.compil.runtime.helper.language.ObjectUtil.isInstanceOfSwitcher(this.getBody(), org.kermeta.compil.runtime.ExecutionContext.getInstance().getMetaClass(\"kermeta.language.behavior.Block\"));\n\n\tif( idIfCond_258 ) {\n\n\tresult = kermeta.standard.helper.StringWrapper.plus(result, this.getBody().createBehaviorJava(context));\n}\n else {\n\n\tresult = kermeta.standard.helper.StringWrapper.plus(result, this.getBody().createExpression(context, ((kermeta.utils.StringBuffer) org.kermeta.compil.runtime.helper.language.ClassUtil.newObject(\"kermeta.utils.StringBuffer\")), true).toString());\n}\n\n\nreturn result;\n'"
 	 * @generated
 	 */
 	String createBehaviorJava(KM2EcoreContext context);
@@ -247,7 +249,7 @@ public interface Constraint extends Traceability<EAnnotation>, NamedElement {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @model annotation="http://www.eclipse.org/emf/2002/GenModel body='\n\tsimk.SMContext smContext = context.getSimkModel().retrieveOrCreateContextForInvariant(this, context);\n\n\tjava.lang.Boolean idIfCond_208 = false;\n\tidIfCond_208 = kermeta.standard.helper.BooleanWrapper.not(org.kermeta.compil.runtime.helper.language.ObjectUtil.isVoidSwitcher(smContext));\n\n\tif( idIfCond_208 ) {\n\n\tsimk.SMMethod staticMethod = ((simk.SMMethod) org.kermeta.compil.runtime.helper.language.ClassUtil.newObject(\"simk.SMMethod\"));\n\n\tstaticMethod.setName(kermeta.standard.helper.StringWrapper.plus(\"checkInvariant_\", this.getId()));\n\n\tstaticMethod.setBody(\"java.lang.Boolean result = false;\\n\");\n\n\tcontext.getResultLastStatementStack().push(kermeta.standard.helper.StringWrapper.plus(kermeta.standard.helper.StringWrapper.plus(\"result = \", context.getTYPE_SEPARATOR()), \"java.lang.Boolean\"));\n\n\tjava.lang.Boolean staticOperationMode_backup = context.getStaticOperationMode();\n\n\tcontext.setStaticOperationMode(true);\n\n\tstaticMethod.setBody(kermeta.standard.helper.StringWrapper.plus(staticMethod.getBody(), this.createBehaviorJava(context)));\n\n\tcontext.setStaticOperationMode(staticOperationMode_backup);\n\n\tstaticMethod.setBody(kermeta.standard.helper.StringWrapper.plus(staticMethod.getBody(), \"\\nreturn result;\"));\n\n\tcontext.getResultLastStatementStack().pop();\n\n\tstaticMethod.setUsages(simk.SMUsage.getByName(\"Invariant\"));\n\n\torg.kermeta.compil.runtime.helper.basetypes.CollectionUtil.<simk.SMMethod>convertAsOrderedSet(context.getSimkModel().getSMMethods()).add(staticMethod);\n\n\torg.kermeta.compil.runtime.helper.basetypes.CollectionUtil.<simk.SMMethod>convertAsOrderedSet(smContext.getSMMethods()).add(staticMethod);\n\n\tsimk.SMReturn smReturn = ((simk.SMReturn) org.kermeta.compil.runtime.helper.language.ClassUtil.newObject(\"simk.SMReturn\"));\n\n\tsmReturn.setType(\"java.lang.Boolean\");\n\n\tstaticMethod.setSMReturn(smReturn);\n\n\tsimk.SMParameter default_param = ((simk.SMParameter) org.kermeta.compil.runtime.helper.language.ClassUtil.newObject(\"simk.SMParameter\"));\n\n\tdefault_param.setName(\"self\");\n\n\tdefault_param.setType(kermeta.standard.helper.StringWrapper.replace(((kermeta.language.structure.ClassDefinition) org.kermeta.compil.runtime.helper.language.ObjectUtil.asTypeSwitcher(org.kermeta.compil.runtime.helper.language.ObjectUtil.containerSwitcher(this), org.kermeta.compil.runtime.ExecutionContext.getInstance().getMetaClass(\"kermeta.language.structure.ClassDefinition\"))).qualifiedName(), context.getKERMETA_SEPARATOR(), context.getJAVA_SEPARATOR()));\n\n\torg.kermeta.compil.runtime.helper.basetypes.CollectionUtil.<simk.SMParameter>convertAsOrderedSet(staticMethod.getSMParameters()).add(default_param);\n}\n\n'"
+	 * @model annotation="http://www.eclipse.org/emf/2002/GenModel body='\n\tsimk.SMContext smContext = context.getSimkModel().retrieveOrCreateContextForInvariant(this, context);\n\n\tjava.lang.Boolean idIfCond_259 = false;\n\tidIfCond_259 = kermeta.standard.helper.BooleanWrapper.not(org.kermeta.compil.runtime.helper.language.ObjectUtil.isVoidSwitcher(smContext));\n\n\tif( idIfCond_259 ) {\n\n\tsimk.SMMethod staticMethod = ((simk.SMMethod) org.kermeta.compil.runtime.helper.language.ClassUtil.newObject(\"simk.SMMethod\"));\n\n\tstaticMethod.setName(kermeta.standard.helper.StringWrapper.plus(\"checkInvariant_\", this.getId()));\n\n\tstaticMethod.setBody(\"java.lang.Boolean result = false;\\n\");\n\n\tcontext.getResultLastStatementStack().push(kermeta.standard.helper.StringWrapper.plus(kermeta.standard.helper.StringWrapper.plus(\"result = \", context.getTYPE_SEPARATOR()), \"java.lang.Boolean\"));\n\n\tjava.lang.Boolean staticOperationMode_backup = context.getStaticOperationMode();\n\n\tcontext.setStaticOperationMode(true);\n\n\tstaticMethod.setBody(kermeta.standard.helper.StringWrapper.plus(staticMethod.getBody(), this.createBehaviorJava(context)));\n\n\tcontext.setStaticOperationMode(staticOperationMode_backup);\n\n\tstaticMethod.setBody(kermeta.standard.helper.StringWrapper.plus(staticMethod.getBody(), \"\\nreturn result;\"));\n\n\tcontext.getResultLastStatementStack().pop();\n\n\tstaticMethod.setUsages(simk.SMUsage.getByName(\"Invariant\"));\n\n\torg.kermeta.compil.runtime.helper.basetypes.CollectionUtil.<simk.SMMethod>convertAsOrderedSet(context.getSimkModel().getSMMethods()).add(staticMethod);\n\n\torg.kermeta.compil.runtime.helper.basetypes.CollectionUtil.<simk.SMMethod>convertAsOrderedSet(smContext.getSMMethods()).add(staticMethod);\n\n\tsimk.SMReturn smReturn = ((simk.SMReturn) org.kermeta.compil.runtime.helper.language.ClassUtil.newObject(\"simk.SMReturn\"));\n\n\tsmReturn.setType(\"java.lang.Boolean\");\n\n\tstaticMethod.setSMReturn(smReturn);\n\n\tsimk.SMParameter default_param = ((simk.SMParameter) org.kermeta.compil.runtime.helper.language.ClassUtil.newObject(\"simk.SMParameter\"));\n\n\tdefault_param.setName(\"self\");\n\n\tdefault_param.setType(kermeta.standard.helper.StringWrapper.replace(((kermeta.language.structure.ClassDefinition) org.kermeta.compil.runtime.helper.language.ObjectUtil.asTypeSwitcher(org.kermeta.compil.runtime.helper.language.ObjectUtil.containerSwitcher(this), org.kermeta.compil.runtime.ExecutionContext.getInstance().getMetaClass(\"kermeta.language.structure.ClassDefinition\"))).qualifiedName(), context.getKERMETA_SEPARATOR(), context.getJAVA_SEPARATOR()));\n\n\torg.kermeta.compil.runtime.helper.basetypes.CollectionUtil.<simk.SMParameter>convertAsOrderedSet(staticMethod.getSMParameters()).add(default_param);\n}\n\n'"
 	 * @generated
 	 */
 	void setSimkForInvariant(KM2EcoreContext context);
@@ -256,18 +258,10 @@ public interface Constraint extends Traceability<EAnnotation>, NamedElement {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @model annotation="kermeta superOperation='kermeta::language::structure::Object'"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='\n\tecore.EAnnotation ecoreAnnotation = this.createEcoreModelElement(context);\n\n\tkermeta.language.structure.Object c = org.kermeta.compil.runtime.helper.language.ObjectUtil.containerSwitcher(this);\n\n\tkermeta.language.structure.Property p = c.getPropertyValue(\"ecoreModelElement\");\n\n\tjava.lang.Boolean idIfCond_209 = false;\n\tidIfCond_209 = org.kermeta.compil.runtime.helper.language.ObjectUtil.isNotEqualSwitcher(p, null);\n\n\tif( idIfCond_209 ) {\n\n\tecore.EModelElement ecoreModelElement = ((ecore.EModelElement) org.kermeta.compil.runtime.helper.language.ObjectUtil.asTypeSwitcher(org.kermeta.compil.runtime.helper.language.ObjectUtil.getSwitcher(c, p), org.kermeta.compil.runtime.ExecutionContext.getInstance().getMetaClass(\"ecore.EModelElement\")));\n\n\torg.kermeta.compil.runtime.helper.basetypes.CollectionUtil.<ecore.EAnnotation>convertAsOrderedSet(ecoreModelElement.getEAnnotations()).add(ecoreAnnotation);\n}\n\n\n\tthis.setEcoreModelElement(ecoreAnnotation);\n\n\tthis.setId(kermeta.standard.helper.StringWrapper.plus(kermeta.standard.helper.StringWrapper.plus(kermeta.standard.helper.IntegerWrapper.toString(org.kermeta.compil.runtime.helper.language.ObjectUtil.oidSwitcher(this)), \"__\"), this.getName()));\n'"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='\n\tecore.EAnnotation ecoreAnnotation = this.createEcoreModelElement(context);\n\n\tkermeta.language.structure.Object c = org.kermeta.compil.runtime.helper.language.ObjectUtil.containerSwitcher(this);\n\n\tkermeta.language.structure.Property p = c.getPropertyValue(\"ecoreModelElement\");\n\n\tjava.lang.Boolean idIfCond_260 = false;\n\tidIfCond_260 = org.kermeta.compil.runtime.helper.language.ObjectUtil.isNotEqualSwitcher(p, null);\n\n\tif( idIfCond_260 ) {\n\n\tecore.EModelElement ecoreModelElement = ((ecore.EModelElement) org.kermeta.compil.runtime.helper.language.ObjectUtil.asTypeSwitcher(org.kermeta.compil.runtime.helper.language.ObjectUtil.getSwitcher(c, p), org.kermeta.compil.runtime.ExecutionContext.getInstance().getMetaClass(\"ecore.EModelElement\")));\n\n\torg.kermeta.compil.runtime.helper.basetypes.CollectionUtil.<ecore.EAnnotation>convertAsOrderedSet(ecoreModelElement.getEAnnotations()).add(ecoreAnnotation);\n}\n\n\n\tthis.setEcoreModelElement(ecoreAnnotation);\n\n\tthis.setId(kermeta.standard.helper.StringWrapper.plus(kermeta.standard.helper.StringWrapper.plus(kermeta.standard.helper.IntegerWrapper.toString(org.kermeta.compil.runtime.helper.language.ObjectUtil.oidSwitcher(this)), \"__\"), this.getName()));\n'"
 	 * @generated
 	 */
 	void applyPass1(KM2EcoreContext context);
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @model annotation="http://www.eclipse.org/emf/2002/GenModel body='\necore.EAnnotation result = null;\n\n\tjava.lang.String body = \"\";\n\n\tjava.lang.Boolean idIfCond_210 = false;\n\tidIfCond_210 = org.kermeta.compil.runtime.helper.language.ObjectUtil.equalsSwitcher(this.getStereotype(), kermeta.language.structure.ConstraintType.getByName(\"inv\"));\n\n\tif( idIfCond_210 ) {\n\n\tresult = ((km2ecore.helper.ecore.EAnnotationHelper) org.kermeta.compil.runtime.helper.language.ClassUtil.newObject(\"km2ecore.helper.ecore.EAnnotationHelper\")).create(\"kermeta.inv\", this.getName(), body);\n}\n else {\n\n\tjava.lang.Boolean idIfCond_211 = false;\n\tidIfCond_211 = org.kermeta.compil.runtime.helper.language.ObjectUtil.equalsSwitcher(this.getStereotype(), kermeta.language.structure.ConstraintType.getByName(\"pre\"));\n\n\tif( idIfCond_211 ) {\n\n\tresult = ((km2ecore.helper.ecore.EAnnotationHelper) org.kermeta.compil.runtime.helper.language.ClassUtil.newObject(\"km2ecore.helper.ecore.EAnnotationHelper\")).create(\"kermeta.pre\", this.getName(), body);\n}\n else {\n\n\tjava.lang.Boolean idIfCond_212 = false;\n\tidIfCond_212 = org.kermeta.compil.runtime.helper.language.ObjectUtil.equalsSwitcher(this.getStereotype(), kermeta.language.structure.ConstraintType.getByName(\"post\"));\n\n\tif( idIfCond_212 ) {\n\n\tresult = ((km2ecore.helper.ecore.EAnnotationHelper) org.kermeta.compil.runtime.helper.language.ClassUtil.newObject(\"km2ecore.helper.ecore.EAnnotationHelper\")).create(\"kermeta.post\", this.getName(), body);\n}\n\n}\n\n}\n\n\nreturn result;\n'"
-	 * @generated
-	 */
-	EAnnotation createEcoreModelElement(KM2EcoreContext context);
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -277,6 +271,14 @@ public interface Constraint extends Traceability<EAnnotation>, NamedElement {
 	 * @generated
 	 */
 	void applyPass2(KM2EcoreContext context);
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model annotation="http://www.eclipse.org/emf/2002/GenModel body='\necore.EAnnotation result = null;\n\n\tjava.lang.String body = \"\";\n\n\tjava.lang.Boolean idIfCond_261 = false;\n\tidIfCond_261 = org.kermeta.compil.runtime.helper.language.ObjectUtil.equalsSwitcher(this.getStereotype(), kermeta.language.structure.ConstraintType.getByName(\"inv\"));\n\n\tif( idIfCond_261 ) {\n\n\tresult = ((km2ecore.helper.ecore.EAnnotationHelper) org.kermeta.compil.runtime.helper.language.ClassUtil.newObject(\"km2ecore.helper.ecore.EAnnotationHelper\")).create(\"kermeta.inv\", this.getName(), body);\n}\n else {\n\n\tjava.lang.Boolean idIfCond_262 = false;\n\tidIfCond_262 = org.kermeta.compil.runtime.helper.language.ObjectUtil.equalsSwitcher(this.getStereotype(), kermeta.language.structure.ConstraintType.getByName(\"pre\"));\n\n\tif( idIfCond_262 ) {\n\n\tresult = ((km2ecore.helper.ecore.EAnnotationHelper) org.kermeta.compil.runtime.helper.language.ClassUtil.newObject(\"km2ecore.helper.ecore.EAnnotationHelper\")).create(\"kermeta.pre\", this.getName(), body);\n}\n else {\n\n\tjava.lang.Boolean idIfCond_263 = false;\n\tidIfCond_263 = org.kermeta.compil.runtime.helper.language.ObjectUtil.equalsSwitcher(this.getStereotype(), kermeta.language.structure.ConstraintType.getByName(\"post\"));\n\n\tif( idIfCond_263 ) {\n\n\tresult = ((km2ecore.helper.ecore.EAnnotationHelper) org.kermeta.compil.runtime.helper.language.ClassUtil.newObject(\"km2ecore.helper.ecore.EAnnotationHelper\")).create(\"kermeta.post\", this.getName(), body);\n}\n\n}\n\n}\n\n\nreturn result;\n'"
+	 * @generated
+	 */
+	EAnnotation createEcoreModelElement(KM2EcoreContext context);
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -292,7 +294,7 @@ public interface Constraint extends Traceability<EAnnotation>, NamedElement {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @model annotation="kermeta superOperation='kermeta::language::structure::Object'"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='\n\tjava.lang.Boolean idIfCond_213 = false;\n\tidIfCond_213 = org.kermeta.compil.runtime.helper.language.ObjectUtil.equalsSwitcher(this.getStereotype(), kermeta.language.structure.ConstraintType.getByName(\"inv\"));\n\n\tif( idIfCond_213 ) {\n\n\tthis.setSimkForInvariant(context);\n}\n\n'"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='\n\tjava.lang.Boolean idIfCond_264 = false;\n\tidIfCond_264 = org.kermeta.compil.runtime.helper.language.ObjectUtil.equalsSwitcher(this.getStereotype(), kermeta.language.structure.ConstraintType.getByName(\"inv\"));\n\n\tif( idIfCond_264 ) {\n\n\tthis.setSimkForInvariant(context);\n}\n\n'"
 	 * @generated
 	 */
 	void applyPass2BehaviorJava(KM2EcoreContext context);

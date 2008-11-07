@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: KM2EcoreContext.java,v 1.7 2008-10-29 08:29:09 cfaucher Exp $
+ * $Id: KM2EcoreContext.java,v 1.8 2008-11-07 08:52:31 cfaucher Exp $
  */
 package km2ecore;
 
@@ -34,6 +34,7 @@ import traceability.TraceModel;
  * <p>
  * The following features are supported:
  * <ul>
+ *   <li>{@link km2ecore.KM2EcoreContext#getJAVA_INSTANCE_EXECUTION_CONTEXT <em>JAVA INSTANCE EXECUTION CONTEXT</em>}</li>
  *   <li>{@link km2ecore.KM2EcoreContext#getJavaKeyWordList <em>Java Key Word List</em>}</li>
  *   <li>{@link km2ecore.KM2EcoreContext#getTraceModel <em>Trace Model</em>}</li>
  *   <li>{@link km2ecore.KM2EcoreContext#getTYPE_SEPARATOR <em>TYPE SEPARATOR</em>}</li>
@@ -47,10 +48,10 @@ import traceability.TraceModel;
  *   <li>{@link km2ecore.KM2EcoreContext#getCompiledJavaExtern <em>Compiled Java Extern</em>}</li>
  *   <li>{@link km2ecore.KM2EcoreContext#getCurrent_valueType <em>Current value Type</em>}</li>
  *   <li>{@link km2ecore.KM2EcoreContext#getFtSuffix <em>Ft Suffix</em>}</li>
- *   <li>{@link km2ecore.KM2EcoreContext#getInc_condStack <em>Inc cond Stack</em>}</li>
  *   <li>{@link km2ecore.KM2EcoreContext#getBeforeFunctionTypeResult <em>Before Function Type Result</em>}</li>
- *   <li>{@link km2ecore.KM2EcoreContext#getJAVA_SEPARATOR <em>JAVA SEPARATOR</em>}</li>
+ *   <li>{@link km2ecore.KM2EcoreContext#getInc_condStack <em>Inc cond Stack</em>}</li>
  *   <li>{@link km2ecore.KM2EcoreContext#getFtMapTypeStack <em>Ft Map Type Stack</em>}</li>
+ *   <li>{@link km2ecore.KM2EcoreContext#getJAVA_SEPARATOR <em>JAVA SEPARATOR</em>}</li>
  *   <li>{@link km2ecore.KM2EcoreContext#getSimkModel <em>Simk Model</em>}</li>
  *   <li>{@link km2ecore.KM2EcoreContext#getFtProductTypeStack <em>Ft Product Type Stack</em>}</li>
  *   <li>{@link km2ecore.KM2EcoreContext#getCurrent_param_ft <em>Current param ft</em>}</li>
@@ -59,24 +60,25 @@ import traceability.TraceModel;
  *   <li>{@link km2ecore.KM2EcoreContext#getBeforeLambdaExpressionResult <em>Before Lambda Expression Result</em>}</li>
  *   <li>{@link km2ecore.KM2EcoreContext#getJAVA_CLASS_EXECUTION_CONTEXT <em>JAVA CLASS EXECUTION CONTEXT</em>}</li>
  *   <li>{@link km2ecore.KM2EcoreContext#getFtReturnType <em>Ft Return Type</em>}</li>
+ *   <li>{@link km2ecore.KM2EcoreContext#getOBJECT_UTIL_CLASS <em>OBJECT UTIL CLASS</em>}</li>
  *   <li>{@link km2ecore.KM2EcoreContext#getVARIABLE_EXCEPTION_SWITCHER <em>VARIABLE EXCEPTION SWITCHER</em>}</li>
  *   <li>{@link km2ecore.KM2EcoreContext#getFtSuffixActivation <em>Ft Suffix Activation</em>}</li>
  *   <li>{@link km2ecore.KM2EcoreContext#getKRErrorStack <em>KR Error Stack</em>}</li>
  *   <li>{@link km2ecore.KM2EcoreContext#getRETURN_EXPRESSION_TO_REPLACE_SPECIAL <em>RETURN EXPRESSION TO REPLACE SPECIAL</em>}</li>
  *   <li>{@link km2ecore.KM2EcoreContext#getInc_resultLastStatementStack <em>Inc result Last Statement Stack</em>}</li>
- *   <li>{@link km2ecore.KM2EcoreContext#getRETURN_EXPRESSION_TO_REPLACE <em>RETURN EXPRESSION TO REPLACE</em>}</li>
  *   <li>{@link km2ecore.KM2EcoreContext#getValueTypeMapping <em>Value Type Mapping</em>}</li>
+ *   <li>{@link km2ecore.KM2EcoreContext#getRETURN_EXPRESSION_TO_REPLACE <em>RETURN EXPRESSION TO REPLACE</em>}</li>
  *   <li>{@link km2ecore.KM2EcoreContext#getMode <em>Mode</em>}</li>
  *   <li>{@link km2ecore.KM2EcoreContext#getStaticOperationMode <em>Static Operation Mode</em>}</li>
  *   <li>{@link km2ecore.KM2EcoreContext#getKmInput <em>Km Input</em>}</li>
- *   <li>{@link km2ecore.KM2EcoreContext#getFtStack <em>Ft Stack</em>}</li>
  *   <li>{@link km2ecore.KM2EcoreContext#getCondStack <em>Cond Stack</em>}</li>
+ *   <li>{@link km2ecore.KM2EcoreContext#getFtStack <em>Ft Stack</em>}</li>
  *   <li>{@link km2ecore.KM2EcoreContext#getEcoreOutputs <em>Ecore Outputs</em>}</li>
  *   <li>{@link km2ecore.KM2EcoreContext#getSimkOutput <em>Simk Output</em>}</li>
  *   <li>{@link km2ecore.KM2EcoreContext#getJAVA_CLASS_EXCEPTION_SWITCHER <em>JAVA CLASS EXCEPTION SWITCHER</em>}</li>
  *   <li>{@link km2ecore.KM2EcoreContext#getAfterLbdExpActivation <em>After Lbd Exp Activation</em>}</li>
- *   <li>{@link km2ecore.KM2EcoreContext#getInc_kRErrorStack <em>Inc kR Error Stack</em>}</li>
  *   <li>{@link km2ecore.KM2EcoreContext#getFUNCTION_TYPE_COMPILATION_TASK <em>FUNCTION TYPE COMPILATION TASK</em>}</li>
+ *   <li>{@link km2ecore.KM2EcoreContext#getInc_kRErrorStack <em>Inc kR Error Stack</em>}</li>
  *   <li>{@link km2ecore.KM2EcoreContext#getTraceabilityInput <em>Traceability Input</em>}</li>
  *   <li>{@link km2ecore.KM2EcoreContext#getTasks_stack <em>Tasks stack</em>}</li>
  *   <li>{@link km2ecore.KM2EcoreContext#getMu <em>Mu</em>}</li>
@@ -91,6 +93,32 @@ import traceability.TraceModel;
  * @generated
  */
 public interface KM2EcoreContext extends kermeta.language.structure.Object {
+	/**
+	 * Returns the value of the '<em><b>JAVA INSTANCE EXECUTION CONTEXT</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>JAVA INSTANCE EXECUTION CONTEXT</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>JAVA INSTANCE EXECUTION CONTEXT</em>' attribute.
+	 * @see #setJAVA_INSTANCE_EXECUTION_CONTEXT(String)
+	 * @see km2ecore.Km2ecorePackage#getKM2EcoreContext_JAVA_INSTANCE_EXECUTION_CONTEXT()
+	 * @model dataType="kermeta.standard.JavaString" required="true"
+	 * @generated
+	 */
+	String getJAVA_INSTANCE_EXECUTION_CONTEXT();
+
+	/**
+	 * Sets the value of the '{@link km2ecore.KM2EcoreContext#getJAVA_INSTANCE_EXECUTION_CONTEXT <em>JAVA INSTANCE EXECUTION CONTEXT</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>JAVA INSTANCE EXECUTION CONTEXT</em>' attribute.
+	 * @see #getJAVA_INSTANCE_EXECUTION_CONTEXT()
+	 * @generated
+	 */
+	void setJAVA_INSTANCE_EXECUTION_CONTEXT(String value);
+
 	/**
 	 * Returns the value of the '<em><b>Java Key Word List</b></em>' reference.
 	 * <!-- begin-user-doc -->
@@ -429,32 +457,6 @@ public interface KM2EcoreContext extends kermeta.language.structure.Object {
 	void setFtSuffix(Stack<String> value);
 
 	/**
-	 * Returns the value of the '<em><b>Inc cond Stack</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Inc cond Stack</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Inc cond Stack</em>' attribute.
-	 * @see #setInc_condStack(Integer)
-	 * @see km2ecore.Km2ecorePackage#getKM2EcoreContext_Inc_condStack()
-	 * @model dataType="kermeta.standard.JavaInteger"
-	 * @generated
-	 */
-	Integer getInc_condStack();
-
-	/**
-	 * Sets the value of the '{@link km2ecore.KM2EcoreContext#getInc_condStack <em>Inc cond Stack</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Inc cond Stack</em>' attribute.
-	 * @see #getInc_condStack()
-	 * @generated
-	 */
-	void setInc_condStack(Integer value);
-
-	/**
 	 * Returns the value of the '<em><b>Before Function Type Result</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <p>
@@ -481,30 +483,30 @@ public interface KM2EcoreContext extends kermeta.language.structure.Object {
 	void setBeforeFunctionTypeResult(String value);
 
 	/**
-	 * Returns the value of the '<em><b>JAVA SEPARATOR</b></em>' attribute.
+	 * Returns the value of the '<em><b>Inc cond Stack</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>JAVA SEPARATOR</em>' attribute isn't clear,
+	 * If the meaning of the '<em>Inc cond Stack</em>' attribute isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>JAVA SEPARATOR</em>' attribute.
-	 * @see #setJAVA_SEPARATOR(String)
-	 * @see km2ecore.Km2ecorePackage#getKM2EcoreContext_JAVA_SEPARATOR()
-	 * @model dataType="kermeta.standard.JavaString" required="true"
+	 * @return the value of the '<em>Inc cond Stack</em>' attribute.
+	 * @see #setInc_condStack(Integer)
+	 * @see km2ecore.Km2ecorePackage#getKM2EcoreContext_Inc_condStack()
+	 * @model dataType="kermeta.standard.JavaInteger"
 	 * @generated
 	 */
-	String getJAVA_SEPARATOR();
+	Integer getInc_condStack();
 
 	/**
-	 * Sets the value of the '{@link km2ecore.KM2EcoreContext#getJAVA_SEPARATOR <em>JAVA SEPARATOR</em>}' attribute.
+	 * Sets the value of the '{@link km2ecore.KM2EcoreContext#getInc_condStack <em>Inc cond Stack</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>JAVA SEPARATOR</em>' attribute.
-	 * @see #getJAVA_SEPARATOR()
+	 * @param value the new value of the '<em>Inc cond Stack</em>' attribute.
+	 * @see #getInc_condStack()
 	 * @generated
 	 */
-	void setJAVA_SEPARATOR(String value);
+	void setInc_condStack(Integer value);
 
 	/**
 	 * Returns the value of the '<em><b>Ft Map Type Stack</b></em>' reference.
@@ -531,6 +533,32 @@ public interface KM2EcoreContext extends kermeta.language.structure.Object {
 	 * @generated
 	 */
 	void setFtMapTypeStack(Stack<Hashtable<Type, Type>> value);
+
+	/**
+	 * Returns the value of the '<em><b>JAVA SEPARATOR</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>JAVA SEPARATOR</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>JAVA SEPARATOR</em>' attribute.
+	 * @see #setJAVA_SEPARATOR(String)
+	 * @see km2ecore.Km2ecorePackage#getKM2EcoreContext_JAVA_SEPARATOR()
+	 * @model dataType="kermeta.standard.JavaString" required="true"
+	 * @generated
+	 */
+	String getJAVA_SEPARATOR();
+
+	/**
+	 * Sets the value of the '{@link km2ecore.KM2EcoreContext#getJAVA_SEPARATOR <em>JAVA SEPARATOR</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>JAVA SEPARATOR</em>' attribute.
+	 * @see #getJAVA_SEPARATOR()
+	 * @generated
+	 */
+	void setJAVA_SEPARATOR(String value);
 
 	/**
 	 * Returns the value of the '<em><b>Simk Model</b></em>' reference.
@@ -741,6 +769,32 @@ public interface KM2EcoreContext extends kermeta.language.structure.Object {
 	void setFtReturnType(String value);
 
 	/**
+	 * Returns the value of the '<em><b>OBJECT UTIL CLASS</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>OBJECT UTIL CLASS</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>OBJECT UTIL CLASS</em>' attribute.
+	 * @see #setOBJECT_UTIL_CLASS(String)
+	 * @see km2ecore.Km2ecorePackage#getKM2EcoreContext_OBJECT_UTIL_CLASS()
+	 * @model dataType="kermeta.standard.JavaString" required="true"
+	 * @generated
+	 */
+	String getOBJECT_UTIL_CLASS();
+
+	/**
+	 * Sets the value of the '{@link km2ecore.KM2EcoreContext#getOBJECT_UTIL_CLASS <em>OBJECT UTIL CLASS</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>OBJECT UTIL CLASS</em>' attribute.
+	 * @see #getOBJECT_UTIL_CLASS()
+	 * @generated
+	 */
+	void setOBJECT_UTIL_CLASS(String value);
+
+	/**
 	 * Returns the value of the '<em><b>VARIABLE EXCEPTION SWITCHER</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <p>
@@ -872,6 +926,23 @@ public interface KM2EcoreContext extends kermeta.language.structure.Object {
 	void setInc_resultLastStatementStack(Integer value);
 
 	/**
+	 * Returns the value of the '<em><b>Value Type Mapping</b></em>' attribute list.
+	 * The list contents are of type {@link java.lang.String}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Value Type Mapping</em>' attribute list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Value Type Mapping</em>' attribute list.
+	 * @see km2ecore.Km2ecorePackage#getKM2EcoreContext_ValueTypeMapping()
+	 * @model dataType="kermeta.standard.JavaString"
+	 *        annotation="kermeta documentation='/** List of the ValueTypes filled during the pass1 \052/'"
+	 * @generated
+	 */
+	EList<String> getValueTypeMapping();
+
+	/**
 	 * Returns the value of the '<em><b>RETURN EXPRESSION TO REPLACE</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <p>
@@ -898,23 +969,6 @@ public interface KM2EcoreContext extends kermeta.language.structure.Object {
 	void setRETURN_EXPRESSION_TO_REPLACE(String value);
 
 	/**
-	 * Returns the value of the '<em><b>Value Type Mapping</b></em>' attribute list.
-	 * The list contents are of type {@link java.lang.String}.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Value Type Mapping</em>' attribute list isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Value Type Mapping</em>' attribute list.
-	 * @see km2ecore.Km2ecorePackage#getKM2EcoreContext_ValueTypeMapping()
-	 * @model dataType="kermeta.standard.JavaString"
-	 *        annotation="kermeta documentation='/** List of the ValueTypes filled during the pass1 \052/'"
-	 * @generated
-	 */
-	EList<String> getValueTypeMapping();
-
-	/**
 	 * Returns the value of the '<em><b>Mode</b></em>' attribute.
 	 * The literals are from the enumeration {@link km2ecore.CompilingMode}.
 	 * <!-- begin-user-doc -->
@@ -927,7 +981,7 @@ public interface KM2EcoreContext extends kermeta.language.structure.Object {
 	 * @see km2ecore.CompilingMode
 	 * @see #setMode(CompilingMode)
 	 * @see km2ecore.Km2ecorePackage#getKM2EcoreContext_Mode()
-	 * @model required="true"
+	 * @model required="true" transient="true"
 	 *        annotation="kermeta documentation='/** The choosen compiling mode \052/'"
 	 * @generated
 	 */
@@ -999,32 +1053,6 @@ public interface KM2EcoreContext extends kermeta.language.structure.Object {
 	void setKmInput(String value);
 
 	/**
-	 * Returns the value of the '<em><b>Ft Stack</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Ft Stack</em>' reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Ft Stack</em>' reference.
-	 * @see #setFtStack(Stack)
-	 * @see km2ecore.Km2ecorePackage#getKM2EcoreContext_FtStack()
-	 * @model
-	 * @generated
-	 */
-	Stack<LambdaExpression> getFtStack();
-
-	/**
-	 * Sets the value of the '{@link km2ecore.KM2EcoreContext#getFtStack <em>Ft Stack</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Ft Stack</em>' reference.
-	 * @see #getFtStack()
-	 * @generated
-	 */
-	void setFtStack(Stack<LambdaExpression> value);
-
-	/**
 	 * Returns the value of the '<em><b>Cond Stack</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
@@ -1049,6 +1077,32 @@ public interface KM2EcoreContext extends kermeta.language.structure.Object {
 	 * @generated
 	 */
 	void setCondStack(Stack<String> value);
+
+	/**
+	 * Returns the value of the '<em><b>Ft Stack</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Ft Stack</em>' reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Ft Stack</em>' reference.
+	 * @see #setFtStack(Stack)
+	 * @see km2ecore.Km2ecorePackage#getKM2EcoreContext_FtStack()
+	 * @model
+	 * @generated
+	 */
+	Stack<LambdaExpression> getFtStack();
+
+	/**
+	 * Sets the value of the '{@link km2ecore.KM2EcoreContext#getFtStack <em>Ft Stack</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Ft Stack</em>' reference.
+	 * @see #getFtStack()
+	 * @generated
+	 */
+	void setFtStack(Stack<LambdaExpression> value);
 
 	/**
 	 * Returns the value of the '<em><b>Ecore Outputs</b></em>' attribute list.
@@ -1149,32 +1203,6 @@ public interface KM2EcoreContext extends kermeta.language.structure.Object {
 	void setAfterLbdExpActivation(Boolean value);
 
 	/**
-	 * Returns the value of the '<em><b>Inc kR Error Stack</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Inc kR Error Stack</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Inc kR Error Stack</em>' attribute.
-	 * @see #setInc_kRErrorStack(Integer)
-	 * @see km2ecore.Km2ecorePackage#getKM2EcoreContext_Inc_kRErrorStack()
-	 * @model dataType="kermeta.standard.JavaInteger"
-	 * @generated
-	 */
-	Integer getInc_kRErrorStack();
-
-	/**
-	 * Sets the value of the '{@link km2ecore.KM2EcoreContext#getInc_kRErrorStack <em>Inc kR Error Stack</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Inc kR Error Stack</em>' attribute.
-	 * @see #getInc_kRErrorStack()
-	 * @generated
-	 */
-	void setInc_kRErrorStack(Integer value);
-
-	/**
 	 * Returns the value of the '<em><b>FUNCTION TYPE COMPILATION TASK</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <p>
@@ -1199,6 +1227,32 @@ public interface KM2EcoreContext extends kermeta.language.structure.Object {
 	 * @generated
 	 */
 	void setFUNCTION_TYPE_COMPILATION_TASK(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Inc kR Error Stack</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Inc kR Error Stack</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Inc kR Error Stack</em>' attribute.
+	 * @see #setInc_kRErrorStack(Integer)
+	 * @see km2ecore.Km2ecorePackage#getKM2EcoreContext_Inc_kRErrorStack()
+	 * @model dataType="kermeta.standard.JavaInteger"
+	 * @generated
+	 */
+	Integer getInc_kRErrorStack();
+
+	/**
+	 * Sets the value of the '{@link km2ecore.KM2EcoreContext#getInc_kRErrorStack <em>Inc kR Error Stack</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Inc kR Error Stack</em>' attribute.
+	 * @see #getInc_kRErrorStack()
+	 * @generated
+	 */
+	void setInc_kRErrorStack(Integer value);
 
 	/**
 	 * Returns the value of the '<em><b>Traceability Input</b></em>' attribute.
@@ -1398,7 +1452,7 @@ public interface KM2EcoreContext extends kermeta.language.structure.Object {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @model dataType="kermeta.standard.JavaString"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='\njava.lang.String result = null;\n\n\tjava.lang.Boolean idIfCond_1040 = false;\n\tidIfCond_1040 = kermeta.standard.helper.BooleanWrapper.and(this.getFtSuffixActivation(), kermeta.standard.helper.IntegerWrapper.isGreater(this.getFtSuffix().size(), 0));\n\n\tif( idIfCond_1040 ) {\n\n\tresult = kermeta.standard.helper.StringWrapper.plus(\"_lbdExp\", this.getFtSuffix().peek());\n}\n else {\n\n\tresult = \"\";\n}\n\n\nreturn result;\n'"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='\njava.lang.String result = null;\n\n\tjava.lang.Boolean idIfCond_5 = false;\n\tidIfCond_5 = kermeta.standard.helper.BooleanWrapper.and(this.getFtSuffixActivation(), kermeta.standard.helper.IntegerWrapper.isGreater(this.getFtSuffix().size(), 0));\n\n\tif( idIfCond_5 ) {\n\n\tresult = kermeta.standard.helper.StringWrapper.plus(\"_lbdExp\", this.getFtSuffix().peek());\n}\n else {\n\n\tresult = \"\";\n}\n\n\nreturn result;\n'"
 	 * @generated
 	 */
 	String printLbdExpSuffix();
@@ -1407,19 +1461,10 @@ public interface KM2EcoreContext extends kermeta.language.structure.Object {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @model kind="operation" dataType="kermeta.standard.JavaString"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='\njava.lang.String result = null;\n\n\tresult = \"\";\n\n\tjava.lang.Boolean idIfCond_1041 = false;\n\tidIfCond_1041 = kermeta.standard.helper.IntegerWrapper.isGreater(this.getResultLastStatementStack().size(), 0);\n\n\tif( idIfCond_1041 ) {\n\n\tkermeta.standard.OrderedSet<java.lang.String> str_set = kermeta.standard.helper.StringWrapper.split(this.getResultLastStatementStack().peek(), this.getTYPE_SEPARATOR());\n\n\tresult = str_set.last();\n}\n\n\nreturn result;\n'"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='\njava.lang.String result = null;\n\n\tresult = \"\";\n\n\tjava.lang.Boolean idIfCond_6 = false;\n\tidIfCond_6 = kermeta.standard.helper.IntegerWrapper.isGreater(this.getResultLastStatementStack().size(), 0);\n\n\tif( idIfCond_6 ) {\n\n\tkermeta.standard.OrderedSet<java.lang.String> str_set = kermeta.standard.helper.StringWrapper.split(this.getResultLastStatementStack().peek(), this.getTYPE_SEPARATOR());\n\n\tresult = str_set.last();\n}\n\n\nreturn result;\n'"
 	 * @generated
 	 */
 	String getResultLastStatementType();
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @model annotation="kermeta documentation='/**\n\t * Initialize the constants\n\t \052/'"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='\n\tthis.setJAVA_CLASS_EXCEPTION_SWITCHER(\"org.kermeta.compil.runtime.helper.error.KRuntimeError\");\n\n\tthis.setVARIABLE_EXCEPTION_SWITCHER(\"ex_switcher\");\n\n\tthis.setCOLLECTION_UTIL_CLASS(\"org.kermeta.compil.runtime.helper.basetypes.CollectionUtil\");\n\n\tthis.setJAVA_CLASS_EXECUTION_CONTEXT(\"org.kermeta.compil.runtime.ExecutionContext\");\n\n\tthis.setNOT_EVALUATED_MESSAGE(\"//FIXME This statement cannot be evaluated without an assignment: \");\n\n\tthis.setSELF_EXPRESSION_TO_REPLACE(\"SELF_EXPRESSION_TO_REPLACE_STR\");\n\n\tthis.setRETURN_EXPRESSION_TO_REPLACE(\"RETURN_EXPRESSION_TO_REPLACE_STR\");\n\n\tthis.setRETURN_EXPRESSION_TO_REPLACE_SPECIAL(\"RETURN_EXPRESSION_TO_REPLACE_SPECIAL_STR\");\n\n\tthis.setSEPARATOR_STATEMENT_FT(\"SEPARATOR_STATEMENT_FT_STR\");\n\n\tthis.setPREVIOUS_STATEMENT_FT(\"PREVIOUS_STATEMENT_FT_STR\");\n\n\tthis.setTYPE_SEPARATOR(\"TYPE_SEPARATOR\");\n\n\tthis.setFUNCTION_TYPE_COMPILATION_TASK(\"FunctionType_Compilation\");\n\n\tthis.setKERMETA_SEPARATOR(\"::\");\n\n\tthis.setJAVA_SEPARATOR(\".\");\n'"
-	 * @generated
-	 */
-	void initializeConstants();
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -1432,7 +1477,16 @@ public interface KM2EcoreContext extends kermeta.language.structure.Object {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @model annotation="http://www.eclipse.org/emf/2002/GenModel body='\n\tjava.lang.Boolean idIfCond_1042 = false;\n\tidIfCond_1042 = kermeta.standard.helper.IntegerWrapper.isGreater(this.getResultLastStatementStack().size(), 0);\n\n\tif( idIfCond_1042 ) {\n\n\tthis.setInc_resultLastStatementStack(this.getInc_resultLastStatementStack());\n\n\tthis.getResultLastStatementStack().pop();\n}\n\n'"
+	 * @model annotation="kermeta documentation='/**\n\t * Initialize the constants\n\t \052/'"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='\n\tthis.setJAVA_CLASS_EXCEPTION_SWITCHER(\"org.kermeta.compil.runtime.helper.error.KRuntimeError\");\n\n\tthis.setVARIABLE_EXCEPTION_SWITCHER(\"ex_switcher\");\n\n\tthis.setCOLLECTION_UTIL_CLASS(\"org.kermeta.compil.runtime.helper.basetypes.CollectionUtil\");\n\n\tthis.setOBJECT_UTIL_CLASS(\"org.kermeta.compil.runtime.helper.language.ObjectUtil\");\n\n\tthis.setJAVA_CLASS_EXECUTION_CONTEXT(\"org.kermeta.compil.runtime.ExecutionContext\");\n\n\tthis.setJAVA_INSTANCE_EXECUTION_CONTEXT(kermeta.standard.helper.StringWrapper.plus(this.getJAVA_CLASS_EXECUTION_CONTEXT(), \".getInstance()\"));\n\n\tthis.setNOT_EVALUATED_MESSAGE(\"//FIXME This statement cannot be evaluated without an assignment: \");\n\n\tthis.setSELF_EXPRESSION_TO_REPLACE(\"SELF_EXPRESSION_TO_REPLACE_STR\");\n\n\tthis.setRETURN_EXPRESSION_TO_REPLACE(\"RETURN_EXPRESSION_TO_REPLACE_STR\");\n\n\tthis.setRETURN_EXPRESSION_TO_REPLACE_SPECIAL(\"RETURN_EXPRESSION_TO_REPLACE_SPECIAL_STR\");\n\n\tthis.setSEPARATOR_STATEMENT_FT(\"SEPARATOR_STATEMENT_FT_STR\");\n\n\tthis.setPREVIOUS_STATEMENT_FT(\"PREVIOUS_STATEMENT_FT_STR\");\n\n\tthis.setTYPE_SEPARATOR(\"TYPE_SEPARATOR\");\n\n\tthis.setFUNCTION_TYPE_COMPILATION_TASK(\"FunctionType_Compilation\");\n\n\tthis.setKERMETA_SEPARATOR(\"::\");\n\n\tthis.setJAVA_SEPARATOR(\".\");\n'"
+	 * @generated
+	 */
+	void initializeConstants();
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model annotation="http://www.eclipse.org/emf/2002/GenModel body='\n\tjava.lang.Boolean idIfCond_7 = false;\n\tidIfCond_7 = kermeta.standard.helper.IntegerWrapper.isGreater(this.getResultLastStatementStack().size(), 0);\n\n\tif( idIfCond_7 ) {\n\n\tthis.setInc_resultLastStatementStack(this.getInc_resultLastStatementStack());\n\n\tthis.getResultLastStatementStack().pop();\n}\n\n'"
 	 * @generated
 	 */
 	void popResultLastStatementStack();
@@ -1449,7 +1503,7 @@ public interface KM2EcoreContext extends kermeta.language.structure.Object {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @model dataType="kermeta.standard.JavaString"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='\njava.lang.String result = null;\n\n\tjava.lang.Boolean idIfCond_1043 = false;\n\tidIfCond_1043 = kermeta.standard.helper.BooleanWrapper.and(this.getFtSuffixActivation(), kermeta.standard.helper.IntegerWrapper.isGreater(this.getFtSuffix().size(), 0));\n\n\tif( idIfCond_1043 ) {\n\n\tresult = kermeta.standard.helper.StringWrapper.plus(\"_ft\", this.getFtSuffix().peek());\n}\n else {\n\n\tresult = \"\";\n}\n\n\nreturn result;\n'"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='\njava.lang.String result = null;\n\n\tjava.lang.Boolean idIfCond_8 = false;\n\tidIfCond_8 = kermeta.standard.helper.BooleanWrapper.and(this.getFtSuffixActivation(), kermeta.standard.helper.IntegerWrapper.isGreater(this.getFtSuffix().size(), 0));\n\n\tif( idIfCond_8 ) {\n\n\tresult = kermeta.standard.helper.StringWrapper.plus(\"_ft\", this.getFtSuffix().peek());\n}\n else {\n\n\tresult = \"\";\n}\n\n\nreturn result;\n'"
 	 * @generated
 	 */
 	String printFtSuffix();
@@ -1466,7 +1520,7 @@ public interface KM2EcoreContext extends kermeta.language.structure.Object {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @model modelInputDataType="kermeta.standard.JavaString" traceInputDataType="kermeta.standard.JavaString"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='\n\tthis.setKmInput(modelInput);\n\n\tthis.setTraceabilityInput(traceInput);\n\n\tthis.setTasks_stack(((kermeta.utils.Stack<java.lang.String>) org.kermeta.compil.runtime.helper.language.ClassUtil.newObject(\"kermeta.utils.Stack<java.lang.String>\")));\n\n\tthis.getTasks_stack().push(\"Start\");\n\n\tthis.setCondStack(((kermeta.utils.Stack<java.lang.String>) org.kermeta.compil.runtime.helper.language.ClassUtil.newObject(\"kermeta.utils.Stack<java.lang.String>\")));\n\n\tthis.setInc_condStack(0);\n\n\tthis.setKRErrorStack(((kermeta.utils.Stack<java.lang.String>) org.kermeta.compil.runtime.helper.language.ClassUtil.newObject(\"kermeta.utils.Stack<java.lang.String>\")));\n\n\tthis.setInc_kRErrorStack(0);\n\n\tthis.initializeConstants();\n\n\tthis.setCompiledJavaExtern(\"\");\n\n\tthis.setCurrent_valueType(null);\n\n\tthis.setFtStack(((kermeta.utils.Stack<kermeta.language.behavior.LambdaExpression>) org.kermeta.compil.runtime.helper.language.ClassUtil.newObject(\"kermeta.utils.Stack<kermeta.language.behavior.LambdaExpression>\")));\n\n\tthis.setCurrent_param_ft(((kermeta.utils.Stack<java.lang.String>) org.kermeta.compil.runtime.helper.language.ClassUtil.newObject(\"kermeta.utils.Stack<java.lang.String>\")));\n\n\tthis.getCurrent_param_ft().push(\"\");\n\n\tthis.setFtSuffix(((kermeta.utils.Stack<java.lang.String>) org.kermeta.compil.runtime.helper.language.ClassUtil.newObject(\"kermeta.utils.Stack<java.lang.String>\")));\n\n\tthis.setInc_ftSuffix(0);\n\n\tthis.setFtSuffixActivation(false);\n\n\tthis.setAfterLbdExpActivation(false);\n\n\tthis.setFtContextualSelf(\"\");\n\n\tthis.setFtReturnType(\"\");\n\n\tthis.setBeforeLambdaExpressionResult(\"\");\n\n\tthis.setFtProductTypeStack(((kermeta.utils.Stack<kermeta.language.structure.ProductType>) org.kermeta.compil.runtime.helper.language.ClassUtil.newObject(\"kermeta.utils.Stack<kermeta.language.structure.ProductType>\")));\n\n\tthis.setFtMapTypeStack(((kermeta.utils.Stack<kermeta.utils.Hashtable<kermeta.language.structure.Type, kermeta.language.structure.Type>>) org.kermeta.compil.runtime.helper.language.ClassUtil.newObject(\"kermeta.utils.Stack<kermeta.utils.Hashtable<kermeta.language.structure.Type, kermeta.language.structure.Type>>\")));\n\n\tthis.setResultLastStatementStack(((kermeta.utils.Stack<java.lang.String>) org.kermeta.compil.runtime.helper.language.ClassUtil.newObject(\"kermeta.utils.Stack<java.lang.String>\")));\n\n\tthis.setInc_resultLastStatementStack(0);\n\n\tthis.setJavaKeyWordList(((km2ecore.common.JavaKeyWordList) org.kermeta.compil.runtime.helper.language.ClassUtil.newObject(\"km2ecore.common.JavaKeyWordList\")));\n\n\tthis.getJavaKeyWordList().initialize();\n\n\tthis.initializeFrameworkOperations();\n\n\tthis.setStaticOperationMode(false);\n\n\tthis.setInputRepository(((kermeta.persistence.EMFRepository) org.kermeta.compil.runtime.helper.language.ClassUtil.newObject(\"kermeta.persistence.EMFRepository\")));\n\n\tkermeta.persistence.Resource modelResource = this.getInputRepository().createResource(modelInput, \"http://www.kermeta.org/kermeta/1_2_0//kermeta\");\n\n\tmodelResource.load();\n\n\tthis.setMu(((kermeta.language.structure.ModelingUnit) org.kermeta.compil.runtime.helper.language.ObjectUtil.asTypeSwitcher(modelResource.instances().one(), org.kermeta.compil.runtime.ExecutionContext.getInstance().getMetaClass(\"kermeta.language.structure.ModelingUnit\"))));\n\n\tjava.lang.Boolean idIfCond_1044 = false;\n\tidIfCond_1044 = kermeta.standard.helper.BooleanWrapper.and(kermeta.standard.helper.BooleanWrapper.not(org.kermeta.compil.runtime.helper.language.ObjectUtil.isVoidSwitcher(traceInput)), org.kermeta.compil.runtime.helper.language.ObjectUtil.isNotEqualSwitcher(traceInput, \"\"));\n\n\tif( idIfCond_1044 ) {\n\n\tkermeta.persistence.Resource traceResource = this.getInputRepository().createResource(traceInput, \"http://www.kermeta.org/Traceability\");\n\n\ttraceResource.load();\n\n\tthis.setTraceModel(((traceability.TraceModel) org.kermeta.compil.runtime.helper.language.ObjectUtil.asTypeSwitcher(traceResource.instances().one(), org.kermeta.compil.runtime.ExecutionContext.getInstance().getMetaClass(\"traceability.TraceModel\"))));\n\n\t((km2ecore.SourceTracer) org.kermeta.compil.runtime.helper.language.ClassUtil.newObject(\"km2ecore.SourceTracer\")).addSourceInformation(this);\n}\n\n\n\tthis.setOutputRepository(((kermeta.persistence.EMFRepository) org.kermeta.compil.runtime.helper.language.ClassUtil.newObject(\"kermeta.persistence.EMFRepository\")));\n\n\tthis.setSimkModel(((simk.SIMKModel) org.kermeta.compil.runtime.helper.language.ClassUtil.newObject(\"simk.SIMKModel\")));\n'"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='\n\tthis.setKmInput(modelInput);\n\n\tthis.setTraceabilityInput(traceInput);\n\n\tthis.setTasks_stack(((kermeta.utils.Stack<java.lang.String>) org.kermeta.compil.runtime.helper.language.ClassUtil.newObject(\"kermeta.utils.Stack<java.lang.String>\")));\n\n\tthis.getTasks_stack().push(\"Start\");\n\n\tthis.setCondStack(((kermeta.utils.Stack<java.lang.String>) org.kermeta.compil.runtime.helper.language.ClassUtil.newObject(\"kermeta.utils.Stack<java.lang.String>\")));\n\n\tthis.setInc_condStack(0);\n\n\tthis.setKRErrorStack(((kermeta.utils.Stack<java.lang.String>) org.kermeta.compil.runtime.helper.language.ClassUtil.newObject(\"kermeta.utils.Stack<java.lang.String>\")));\n\n\tthis.setInc_kRErrorStack(0);\n\n\tthis.initializeConstants();\n\n\tthis.setCompiledJavaExtern(\"\");\n\n\tthis.setCurrent_valueType(null);\n\n\tthis.setFtStack(((kermeta.utils.Stack<kermeta.language.behavior.LambdaExpression>) org.kermeta.compil.runtime.helper.language.ClassUtil.newObject(\"kermeta.utils.Stack<kermeta.language.behavior.LambdaExpression>\")));\n\n\tthis.setCurrent_param_ft(((kermeta.utils.Stack<java.lang.String>) org.kermeta.compil.runtime.helper.language.ClassUtil.newObject(\"kermeta.utils.Stack<java.lang.String>\")));\n\n\tthis.getCurrent_param_ft().push(\"\");\n\n\tthis.setFtSuffix(((kermeta.utils.Stack<java.lang.String>) org.kermeta.compil.runtime.helper.language.ClassUtil.newObject(\"kermeta.utils.Stack<java.lang.String>\")));\n\n\tthis.setInc_ftSuffix(0);\n\n\tthis.setFtSuffixActivation(false);\n\n\tthis.setAfterLbdExpActivation(false);\n\n\tthis.setFtContextualSelf(\"\");\n\n\tthis.setFtReturnType(\"\");\n\n\tthis.setBeforeLambdaExpressionResult(\"\");\n\n\tthis.setFtProductTypeStack(((kermeta.utils.Stack<kermeta.language.structure.ProductType>) org.kermeta.compil.runtime.helper.language.ClassUtil.newObject(\"kermeta.utils.Stack<kermeta.language.structure.ProductType>\")));\n\n\tthis.setFtMapTypeStack(((kermeta.utils.Stack<kermeta.utils.Hashtable<kermeta.language.structure.Type, kermeta.language.structure.Type>>) org.kermeta.compil.runtime.helper.language.ClassUtil.newObject(\"kermeta.utils.Stack<kermeta.utils.Hashtable<kermeta.language.structure.Type, kermeta.language.structure.Type>>\")));\n\n\tthis.setResultLastStatementStack(((kermeta.utils.Stack<java.lang.String>) org.kermeta.compil.runtime.helper.language.ClassUtil.newObject(\"kermeta.utils.Stack<java.lang.String>\")));\n\n\tthis.setInc_resultLastStatementStack(0);\n\n\tthis.setJavaKeyWordList(((km2ecore.common.JavaKeyWordList) org.kermeta.compil.runtime.helper.language.ClassUtil.newObject(\"km2ecore.common.JavaKeyWordList\")));\n\n\tthis.getJavaKeyWordList().initialize();\n\n\tthis.initializeFrameworkOperations();\n\n\tthis.setStaticOperationMode(false);\n\n\tthis.setInputRepository(((kermeta.persistence.EMFRepository) org.kermeta.compil.runtime.helper.language.ClassUtil.newObject(\"kermeta.persistence.EMFRepository\")));\n\n\tkermeta.persistence.Resource modelResource = this.getInputRepository().createResource(modelInput, \"http://www.kermeta.org/kermeta/1_2_0//kermeta\");\n\n\tmodelResource.load();\n\n\tthis.setMu(((kermeta.language.structure.ModelingUnit) org.kermeta.compil.runtime.helper.language.ObjectUtil.asTypeSwitcher(modelResource.instances().one(), org.kermeta.compil.runtime.ExecutionContext.getInstance().getMetaClass(\"kermeta.language.structure.ModelingUnit\"))));\n\n\tjava.lang.Boolean idIfCond_9 = false;\n\tidIfCond_9 = kermeta.standard.helper.BooleanWrapper.and(kermeta.standard.helper.BooleanWrapper.not(org.kermeta.compil.runtime.helper.language.ObjectUtil.isVoidSwitcher(traceInput)), org.kermeta.compil.runtime.helper.language.ObjectUtil.isNotEqualSwitcher(traceInput, \"\"));\n\n\tif( idIfCond_9 ) {\n\n\tkermeta.persistence.Resource traceResource = this.getInputRepository().createResource(traceInput, \"http://www.kermeta.org/Traceability\");\n\n\ttraceResource.load();\n\n\tthis.setTraceModel(((traceability.TraceModel) org.kermeta.compil.runtime.helper.language.ObjectUtil.asTypeSwitcher(traceResource.instances().one(), org.kermeta.compil.runtime.ExecutionContext.getInstance().getMetaClass(\"traceability.TraceModel\"))));\n\n\t((km2ecore.SourceTracer) org.kermeta.compil.runtime.helper.language.ClassUtil.newObject(\"km2ecore.SourceTracer\")).addSourceInformation(this);\n}\n\n\n\tthis.setOutputRepository(((kermeta.persistence.EMFRepository) org.kermeta.compil.runtime.helper.language.ClassUtil.newObject(\"kermeta.persistence.EMFRepository\")));\n\n\tthis.setSimkModel(((simk.SIMKModel) org.kermeta.compil.runtime.helper.language.ClassUtil.newObject(\"simk.SIMKModel\")));\n'"
 	 * @generated
 	 */
 	void initialize(String modelInput, String traceInput);
@@ -1476,7 +1530,7 @@ public interface KM2EcoreContext extends kermeta.language.structure.Object {
 	 * <!-- end-user-doc -->
 	 * @model kind="operation" dataType="kermeta.standard.JavaString"
 	 *        annotation="kermeta documentation='/**\n\t * Get the identifier\n\t \052/'"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='\njava.lang.String result = null;\n\n\tresult = \"\";\n\n\tjava.lang.Boolean idIfCond_1045 = false;\n\tidIfCond_1045 = kermeta.standard.helper.IntegerWrapper.isGreater(this.getResultLastStatementStack().size(), 0);\n\n\tif( idIfCond_1045 ) {\n\n\tkermeta.standard.OrderedSet<java.lang.String> str_set = kermeta.standard.helper.StringWrapper.split(this.getResultLastStatementStack().peek(), this.getTYPE_SEPARATOR());\n\n\tresult = str_set.first();\n}\n\n\nreturn result;\n'"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='\njava.lang.String result = null;\n\n\tresult = \"\";\n\n\tjava.lang.Boolean idIfCond_10 = false;\n\tidIfCond_10 = kermeta.standard.helper.IntegerWrapper.isGreater(this.getResultLastStatementStack().size(), 0);\n\n\tif( idIfCond_10 ) {\n\n\tkermeta.standard.OrderedSet<java.lang.String> str_set = kermeta.standard.helper.StringWrapper.split(this.getResultLastStatementStack().peek(), this.getTYPE_SEPARATOR());\n\n\tresult = str_set.first();\n}\n\n\nreturn result;\n'"
 	 * @generated
 	 */
 	String getResultLastStatementId();

@@ -17,13 +17,11 @@ import kermeta.language.structure.Type;
 import kermeta.standard.Collection;
 import kermeta.standard.Set;
 import kermeta.standard.StandardFactory;
-import kermeta.standard.StandardPackage;
 
 import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.Enumerator;
 import org.eclipse.emf.ecore.EStructuralFeature;
-import org.kermeta.compil.runtime.ExecutionContext;
 import org.kermeta.compil.runtime.helper.basetypes.BooleanUtil;
 import org.kermeta.compil.runtime.helper.basetypes.CharacterUtil;
 import org.kermeta.compil.runtime.helper.basetypes.CollectionUtil;
@@ -178,10 +176,7 @@ public class ObjectUtil {
 		} else {
 			
 			String instanceClassName = feature.getEType().getInstanceClassName();
-			if(instanceClassName.equals("hrc.kernel.Expression")) {
-				//System.out.println();
-			}
-//			System.out.println(instanceClassName);
+			
 			kermeta.language.structure.Object value_type = null;
 			if( instanceClassName.equals("java.lang.String") || instanceClassName.equals("String") ) {
 				kermeta.standard.String _String = StandardFactory.eINSTANCE.createString();
@@ -543,7 +538,7 @@ public class ObjectUtil {
 	
 	public static java.lang.String toString(kermeta.language.structure.Object self) {
 		if( self==null ) {
-			return "null";
+			return "<void>";
 		}
 		return self.toString();
 	}

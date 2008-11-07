@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: HashtableImpl.java,v 1.7 2008-10-29 08:29:13 cfaucher Exp $
+ * $Id: HashtableImpl.java,v 1.8 2008-11-07 08:53:12 cfaucher Exp $
  */
 package kermeta.utils.impl;
 
@@ -108,8 +108,10 @@ public class HashtableImpl<K, V> extends ObjectImpl implements Hashtable<K, V> {
 
 		V result = null;
 
-		result = (V) org.kermeta.compil.runtime.helper.basetypes.MapUtil.get(
-				this, key);
+		result = (V) org.kermeta.compil.runtime.ExecutionContext.getInstance()
+				.<V> asTypeOrVoid(
+						org.kermeta.compil.runtime.helper.basetypes.MapUtil
+								.get(this, key));
 
 		return result;
 
@@ -136,18 +138,6 @@ public class HashtableImpl<K, V> extends ObjectImpl implements Hashtable<K, V> {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void put(K key, V value) {
-
-		org.kermeta.compil.runtime.helper.basetypes.MapUtil.put(this, key,
-				value);
-
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public Collection<V> values() {
 
 		kermeta.standard.Collection<V> result = null;
@@ -159,17 +149,17 @@ public class HashtableImpl<K, V> extends ObjectImpl implements Hashtable<K, V> {
 
 		{
 
-			kermeta.standard.Iterator<K> it_ft223 = this.keys().iterator();
-			java.lang.Boolean idLoopCond_984 = false;
-			while (!idLoopCond_984) {
-				idLoopCond_984 = it_ft223.isOff();
-				if (idLoopCond_984) {
+			kermeta.standard.Iterator<K> it_ft209 = this.keys().iterator();
+			java.lang.Boolean idLoopCond_949 = false;
+			while (!idLoopCond_949) {
+				idLoopCond_949 = it_ft209.isOff();
+				if (idLoopCond_949) {
 				} else {
 
 					//BIle:func
-					K k_lbdExp223 = it_ft223.next();
+					K k_lbdExp209 = it_ft209.next();
 
-					result.add(this.getValue(k_lbdExp223));
+					result.add(this.getValue(k_lbdExp209));
 					//EIle:func
 
 				}
@@ -179,6 +169,18 @@ public class HashtableImpl<K, V> extends ObjectImpl implements Hashtable<K, V> {
 		//EIft:each
 
 		return result;
+
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void put(K key, V value) {
+
+		org.kermeta.compil.runtime.helper.basetypes.MapUtil.put(this, key,
+				value);
 
 	}
 
@@ -208,10 +210,10 @@ public class HashtableImpl<K, V> extends ObjectImpl implements Hashtable<K, V> {
 		{
 
 			kermeta.standard.Iterator<K> it = this.keyIterator();
-			java.lang.Boolean idLoopCond_985 = false;
-			while (!idLoopCond_985) {
-				idLoopCond_985 = it.isOff();
-				if (idLoopCond_985) {
+			java.lang.Boolean idLoopCond_950 = false;
+			while (!idLoopCond_950) {
+				idLoopCond_950 = it.isOff();
+				if (idLoopCond_950) {
 				} else {
 
 					result.add(it.next());
@@ -232,8 +234,10 @@ public class HashtableImpl<K, V> extends ObjectImpl implements Hashtable<K, V> {
 
 		kermeta.standard.Iterator<K> result = null;
 
-		result = (kermeta.standard.Iterator<K>) org.kermeta.compil.runtime.helper.basetypes.MapUtil
-				.keysIterator(this);
+		result = (kermeta.standard.Iterator<K>) org.kermeta.compil.runtime.ExecutionContext
+				.getInstance().<kermeta.standard.Iterator<K>> asTypeOrVoid(
+						org.kermeta.compil.runtime.helper.basetypes.MapUtil
+								.keysIterator(this));
 
 		return result;
 
@@ -248,8 +252,10 @@ public class HashtableImpl<K, V> extends ObjectImpl implements Hashtable<K, V> {
 
 		kermeta.standard.Iterator<V> result = null;
 
-		result = (kermeta.standard.Iterator<V>) org.kermeta.compil.runtime.helper.basetypes.MapUtil
-				.valueIterator(this);
+		result = (kermeta.standard.Iterator<V>) org.kermeta.compil.runtime.ExecutionContext
+				.getInstance().<kermeta.standard.Iterator<V>> asTypeOrVoid(
+						org.kermeta.compil.runtime.helper.basetypes.MapUtil
+								.valueIterator(this));
 
 		return result;
 
@@ -264,8 +270,10 @@ public class HashtableImpl<K, V> extends ObjectImpl implements Hashtable<K, V> {
 
 		java.lang.Integer result = null;
 
-		result = (java.lang.Integer) org.kermeta.compil.runtime.helper.basetypes.MapUtil
-				.size(this);
+		result = (java.lang.Integer) org.kermeta.compil.runtime.ExecutionContext
+				.getInstance().<java.lang.Integer> asTypeOrVoid(
+						org.kermeta.compil.runtime.helper.basetypes.MapUtil
+								.size(this));
 
 		return result;
 

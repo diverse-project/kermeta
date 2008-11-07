@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: EClass.java,v 1.8 2008-10-29 08:29:20 cfaucher Exp $
+ * $Id: EClass.java,v 1.9 2008-11-07 08:53:53 cfaucher Exp $
  */
 package ecore;
 
@@ -16,8 +16,8 @@ import org.eclipse.emf.common.util.EList;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link ecore.EClass#getEStructuralFeatures <em>EStructural Features</em>}</li>
  *   <li>{@link ecore.EClass#is_abstract <em>abstract</em>}</li>
+ *   <li>{@link ecore.EClass#getEStructuralFeatures <em>EStructural Features</em>}</li>
  *   <li>{@link ecore.EClass#getEOperations <em>EOperations</em>}</li>
  *   <li>{@link ecore.EClass#is_interface <em>interface</em>}</li>
  *   <li>{@link ecore.EClass#getESuperTypes <em>ESuper Types</em>}</li>
@@ -30,24 +30,6 @@ import org.eclipse.emf.common.util.EList;
  * @generated
  */
 public interface EClass extends EClassifier {
-	/**
-	 * Returns the value of the '<em><b>EStructural Features</b></em>' containment reference list.
-	 * The list contents are of type {@link ecore.EStructuralFeature}.
-	 * It is bidirectional and its opposite is '{@link ecore.EStructuralFeature#getEContainingClass <em>EContaining Class</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>EStructural Features</em>' containment reference list isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>EStructural Features</em>' containment reference list.
-	 * @see ecore.EcorePackage#getEClass_EStructuralFeatures()
-	 * @see ecore.EStructuralFeature#getEContainingClass
-	 * @model opposite="eContainingClass" containment="true" resolveProxies="true"
-	 * @generated
-	 */
-	EList<EStructuralFeature> getEStructuralFeatures();
-
 	/**
 	 * Returns the value of the '<em><b>abstract</b></em>' attribute.
 	 * The default value is <code>"false"</code>.
@@ -74,6 +56,24 @@ public interface EClass extends EClassifier {
 	 * @generated
 	 */
 	void set_abstract(boolean value);
+
+	/**
+	 * Returns the value of the '<em><b>EStructural Features</b></em>' containment reference list.
+	 * The list contents are of type {@link ecore.EStructuralFeature}.
+	 * It is bidirectional and its opposite is '{@link ecore.EStructuralFeature#getEContainingClass <em>EContaining Class</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>EStructural Features</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>EStructural Features</em>' containment reference list.
+	 * @see ecore.EcorePackage#getEClass_EStructuralFeatures()
+	 * @see ecore.EStructuralFeature#getEContainingClass
+	 * @model opposite="eContainingClass" containment="true" resolveProxies="true"
+	 * @generated
+	 */
+	EList<EStructuralFeature> getEStructuralFeatures();
 
 	/**
 	 * Returns the value of the '<em><b>EOperations</b></em>' containment reference list.
@@ -261,18 +261,18 @@ public interface EClass extends EClassifier {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @model annotation="http://www.eclipse.org/emf/2002/GenModel body='\nkermeta.standard.OrderedSet<ecore.EStructuralFeature> result = null;\n\nreturn org.kermeta.compil.runtime.helper.basetypes.CollectionUtil.convertAsEList(result);\n'"
-	 * @generated
-	 */
-	EList<EStructuralFeature> getterEAllStructuralFeatures();
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
 	 * @model annotation="http://www.eclipse.org/emf/2002/GenModel body='\nkermeta.standard.OrderedSet<ecore.EOperation> result = null;\n\nreturn org.kermeta.compil.runtime.helper.basetypes.CollectionUtil.convertAsEList(result);\n'"
 	 * @generated
 	 */
 	EList<EOperation> getterEAllOperations();
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model annotation="http://www.eclipse.org/emf/2002/GenModel body='\nkermeta.standard.OrderedSet<ecore.EStructuralFeature> result = null;\n\nreturn org.kermeta.compil.runtime.helper.basetypes.CollectionUtil.convertAsEList(result);\n'"
+	 * @generated
+	 */
+	EList<EStructuralFeature> getterEAllStructuralFeatures();
 
 	/**
 	 * <!-- begin-user-doc -->

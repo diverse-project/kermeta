@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: FileIO.java,v 1.7 2008-10-29 08:29:30 cfaucher Exp $
+ * $Id: FileIO.java,v 1.8 2008-11-07 08:54:13 cfaucher Exp $
  */
 package kermeta.io;
 
@@ -22,7 +22,7 @@ public interface FileIO extends kermeta.language.structure.Object {
 	 * <!-- end-user-doc -->
 	 * @model filenameDataType="kermeta.standard.JavaString" textDataType="kermeta.standard.JavaString"
 	 *        annotation="kermeta documentation='/**\r\n\t * Writes a String in a text file\r\n\t \052/'"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='\n\tjava.lang.Boolean idIfCond_976 = false;\n\tidIfCond_976 = kermeta.standard.helper.StringWrapper.equals(filename, null);\n\n\tif( idIfCond_976 ) {\n\n\t\nif (true)\n\tthrow new org.kermeta.compil.runtime.helper.error.KRuntimeError( ((kermeta.exceptions.FileNotFoundException) org.kermeta.compil.runtime.helper.language.ClassUtil.newObject(\"kermeta.exceptions.FileNotFoundException\")) );\n\n}\n\n\n\torg.kermeta.compil.runtime.helper.io.SimpleFileIOUtil.writeTextFile(filename, text);\n'"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='\n\tjava.lang.Boolean idIfCond_941 = false;\n\tidIfCond_941 = kermeta.standard.helper.StringWrapper.equals(filename, null);\n\n\tif( idIfCond_941 ) {\n\n\t\nif (true)\n\tthrow new org.kermeta.compil.runtime.helper.error.KRuntimeError( ((kermeta.exceptions.FileNotFoundException) org.kermeta.compil.runtime.helper.language.ClassUtil.newObject(\"kermeta.exceptions.FileNotFoundException\")) );\n\n}\n\n\n\torg.kermeta.compil.runtime.helper.io.SimpleFileIOUtil.writeTextFile(filename, text);\n'"
 	 * @generated
 	 */
 	void writeTextFile(String filename, String text);
@@ -32,7 +32,7 @@ public interface FileIO extends kermeta.language.structure.Object {
 	 * <!-- end-user-doc -->
 	 * @model dataType="kermeta.standard.JavaString" filenameDataType="kermeta.standard.JavaString"
 	 *        annotation="kermeta documentation='/**\r\n\t * Reads a text file\r\n\t \052/'"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='\njava.lang.String result = null;\n\n\tjava.lang.Boolean idIfCond_977 = false;\n\tidIfCond_977 = kermeta.standard.helper.StringWrapper.equals(filename, null);\n\n\tif( idIfCond_977 ) {\n\n\t\nif (true)\n\tthrow new org.kermeta.compil.runtime.helper.error.KRuntimeError( ((kermeta.exceptions.FileNotFoundException) org.kermeta.compil.runtime.helper.language.ClassUtil.newObject(\"kermeta.exceptions.FileNotFoundException\")) );\n\n}\n\n\n\tjava.lang.Boolean exists = null;\n\n\tjava.lang.Boolean isdirectory = null;\n\n\texists = (java.lang.Boolean) org.kermeta.compil.runtime.helper.io.SimpleFileIOUtil.fileExists(filename);\n\n\tisdirectory = (java.lang.Boolean) org.kermeta.compil.runtime.helper.io.SimpleFileIOUtil.fileIsDirectory(filename);\n\n\tjava.lang.Boolean idIfCond_978 = false;\n\tidIfCond_978 = kermeta.standard.helper.BooleanWrapper.or(kermeta.standard.helper.BooleanWrapper.not(exists), isdirectory);\n\n\tif( idIfCond_978 ) {\n\n\t\nif (true)\n\tthrow new org.kermeta.compil.runtime.helper.error.KRuntimeError( ((kermeta.exceptions.FileNotFoundException) org.kermeta.compil.runtime.helper.language.ClassUtil.newObject(\"kermeta.exceptions.FileNotFoundException\")) );\n\n}\n\n\n\tresult = (java.lang.String) org.kermeta.compil.runtime.helper.io.SimpleFileIOUtil.readTextFile(filename);\n\nreturn result;\n'"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='\njava.lang.String result = null;\n\n\tjava.lang.Boolean idIfCond_942 = false;\n\tidIfCond_942 = kermeta.standard.helper.StringWrapper.equals(filename, null);\n\n\tif( idIfCond_942 ) {\n\n\t\nif (true)\n\tthrow new org.kermeta.compil.runtime.helper.error.KRuntimeError( ((kermeta.exceptions.FileNotFoundException) org.kermeta.compil.runtime.helper.language.ClassUtil.newObject(\"kermeta.exceptions.FileNotFoundException\")) );\n\n}\n\n\n\tjava.lang.Boolean exists = null;\n\n\tjava.lang.Boolean isdirectory = null;\n\n\texists = (java.lang.Boolean) org.kermeta.compil.runtime.ExecutionContext.getInstance().<java.lang.Boolean>asTypeOrVoid(org.kermeta.compil.runtime.helper.io.SimpleFileIOUtil.fileExists(filename));\n\n\tisdirectory = (java.lang.Boolean) org.kermeta.compil.runtime.ExecutionContext.getInstance().<java.lang.Boolean>asTypeOrVoid(org.kermeta.compil.runtime.helper.io.SimpleFileIOUtil.fileIsDirectory(filename));\n\n\tjava.lang.Boolean idIfCond_943 = false;\n\tidIfCond_943 = kermeta.standard.helper.BooleanWrapper.or(kermeta.standard.helper.BooleanWrapper.not(exists), isdirectory);\n\n\tif( idIfCond_943 ) {\n\n\t\nif (true)\n\tthrow new org.kermeta.compil.runtime.helper.error.KRuntimeError( ((kermeta.exceptions.FileNotFoundException) org.kermeta.compil.runtime.helper.language.ClassUtil.newObject(\"kermeta.exceptions.FileNotFoundException\")) );\n\n}\n\n\n\tresult = (java.lang.String) org.kermeta.compil.runtime.ExecutionContext.getInstance().<java.lang.String>asTypeOrVoid(org.kermeta.compil.runtime.helper.io.SimpleFileIOUtil.readTextFile(filename));\n\nreturn result;\n'"
 	 * @generated
 	 */
 	String readTextFile(String filename);

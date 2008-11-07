@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: JavaStaticCallImpl.java,v 1.7 2008-10-29 08:29:15 cfaucher Exp $
+ * $Id: JavaStaticCallImpl.java,v 1.8 2008-11-07 08:53:27 cfaucher Exp $
  */
 package kermeta.language.behavior.impl;
 
@@ -183,20 +183,20 @@ public class JavaStaticCallImpl extends ExpressionImpl implements
 
 		super.createBehaviorJava(context);
 
-		java.lang.Boolean idIfCond_620 = false;
-		idIfCond_620 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+		java.lang.Boolean idIfCond_681 = false;
+		idIfCond_681 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 				.isNotEqualSwitcher(context.getCompiledJavaExtern(), "");
 
-		if (idIfCond_620) {
+		if (idIfCond_681) {
 
-			java.lang.Boolean idIfCond_621 = false;
-			idIfCond_621 = kermeta.standard.helper.IntegerWrapper.isLower(
+			java.lang.Boolean idIfCond_682 = false;
+			idIfCond_682 = kermeta.standard.helper.IntegerWrapper.isLower(
 					kermeta.standard.helper.StringWrapper.split(
 							kermeta.standard.helper.StringWrapper.replace(
 									context.getCompiledJavaExtern(), "(", "%"),
 							"%").size(), 2);
 
-			if (idIfCond_621) {
+			if (idIfCond_682) {
 
 				context
 						.setCompiledJavaExtern(kermeta.standard.helper.StringWrapper
@@ -220,19 +220,19 @@ public class JavaStaticCallImpl extends ExpressionImpl implements
 
 		}
 
-		java.lang.Boolean idIfCond_622 = false;
-		idIfCond_622 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+		java.lang.Boolean idIfCond_683 = false;
+		idIfCond_683 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 				.isNotEqualSwitcher(context.getCompiledJavaExtern(), "");
 
-		if (idIfCond_622) {
+		if (idIfCond_683) {
 
 			result = context.getCompiledJavaExtern();
 
 			context.setCompiledJavaExtern("");
 		} else {
 
-			java.lang.Boolean idIfCond_623 = false;
-			idIfCond_623 = ((kermeta.language.structure.ClassDefinition) org.kermeta.compil.runtime.helper.language.ObjectUtil
+			java.lang.Boolean idIfCond_684 = false;
+			idIfCond_684 = ((kermeta.language.structure.ClassDefinition) org.kermeta.compil.runtime.helper.language.ObjectUtil
 					.asTypeSwitcher(
 							this
 									.getContainerAsType(org.kermeta.compil.runtime.ExecutionContext
@@ -245,7 +245,7 @@ public class JavaStaticCallImpl extends ExpressionImpl implements
 											"kermeta.language.structure.ClassDefinition")))
 					.isValueType();
 
-			if (idIfCond_623) {
+			if (idIfCond_684) {
 
 				result = kermeta.standard.helper.StringWrapper
 						.plus(

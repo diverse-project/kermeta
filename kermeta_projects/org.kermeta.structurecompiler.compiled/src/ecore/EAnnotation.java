@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: EAnnotation.java,v 1.8 2008-10-29 08:29:20 cfaucher Exp $
+ * $Id: EAnnotation.java,v 1.9 2008-11-07 08:53:52 cfaucher Exp $
  */
 package ecore;
 
@@ -17,8 +17,8 @@ import org.eclipse.emf.common.util.EList;
  * The following features are supported:
  * <ul>
  *   <li>{@link ecore.EAnnotation#getReferences <em>References</em>}</li>
- *   <li>{@link ecore.EAnnotation#getDetails <em>Details</em>}</li>
  *   <li>{@link ecore.EAnnotation#getSource <em>Source</em>}</li>
+ *   <li>{@link ecore.EAnnotation#getDetails <em>Details</em>}</li>
  *   <li>{@link ecore.EAnnotation#getContents <em>Contents</em>}</li>
  *   <li>{@link ecore.EAnnotation#getEModelElement <em>EModel Element</em>}</li>
  * </ul>
@@ -46,22 +46,6 @@ public interface EAnnotation extends EModelElement {
 	EList<EObject> getReferences();
 
 	/**
-	 * Returns the value of the '<em><b>Details</b></em>' containment reference list.
-	 * The list contents are of type {@link ecore.EStringToStringMapEntry}.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Details</em>' containment reference list isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Details</em>' containment reference list.
-	 * @see ecore.EcorePackage#getEAnnotation_Details()
-	 * @model containment="true" resolveProxies="true"
-	 * @generated
-	 */
-	EList<EStringToStringMapEntry> getDetails();
-
-	/**
 	 * Returns the value of the '<em><b>Source</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <p>
@@ -86,6 +70,22 @@ public interface EAnnotation extends EModelElement {
 	 * @generated
 	 */
 	void setSource(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Details</b></em>' containment reference list.
+	 * The list contents are of type {@link ecore.EStringToStringMapEntry}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Details</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Details</em>' containment reference list.
+	 * @see ecore.EcorePackage#getEAnnotation_Details()
+	 * @model containment="true" resolveProxies="true"
+	 * @generated
+	 */
+	EList<EStringToStringMapEntry> getDetails();
 
 	/**
 	 * Returns the value of the '<em><b>Contents</b></em>' containment reference list.

@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ConditionalImpl.java,v 1.7 2008-10-29 08:29:14 cfaucher Exp $
+ * $Id: ConditionalImpl.java,v 1.8 2008-11-07 08:53:27 cfaucher Exp $
  */
 package kermeta.language.behavior.impl;
 
@@ -370,10 +370,10 @@ public class ConditionalImpl extends ExpressionImpl implements Conditional {
 
 		java.lang.String str_condition = "";
 
-		java.lang.Boolean idIfCond_606 = false;
-		idIfCond_606 = this.conditionIsCallFeatureThatCallsFunctionType();
+		java.lang.Boolean idIfCond_667 = false;
+		idIfCond_667 = this.conditionIsCallFeatureThatCallsFunctionType();
 
-		if (idIfCond_606) {
+		if (idIfCond_667) {
 
 			context.getResultLastStatementStack().push(
 					kermeta.standard.helper.StringWrapper.plus(
@@ -391,11 +391,11 @@ public class ConditionalImpl extends ExpressionImpl implements Conditional {
 			context.getResultLastStatementStack().pop();
 		} else {
 
-			java.lang.Boolean idIfCond_607 = false;
-			idIfCond_607 = kermeta.standard.helper.StringWrapper.equals(context
+			java.lang.Boolean idIfCond_668 = false;
+			idIfCond_668 = kermeta.standard.helper.StringWrapper.equals(context
 					.printFtSuffix(), "");
 
-			if (idIfCond_607) {
+			if (idIfCond_668) {
 
 				str_condition = kermeta.standard.helper.StringWrapper.plus(
 						kermeta.standard.helper.StringWrapper.plus(
@@ -406,8 +406,8 @@ public class ConditionalImpl extends ExpressionImpl implements Conditional {
 						this.getCondition().createBehaviorJava(context));
 			} else {
 
-				java.lang.Boolean idIfCond_608 = false;
-				idIfCond_608 = kermeta.standard.helper.BooleanWrapper
+				java.lang.Boolean idIfCond_669 = false;
+				idIfCond_669 = kermeta.standard.helper.BooleanWrapper
 						.or(
 								kermeta.standard.helper.BooleanWrapper
 										.or(
@@ -435,12 +435,12 @@ public class ConditionalImpl extends ExpressionImpl implements Conditional {
 														.getMetaClass(
 																"kermeta.language.behavior.CallResult")));
 
-				if (idIfCond_608) {
+				if (idIfCond_669) {
 
 					kermeta.language.structure.Parameter ftParam = null;
 
-					java.lang.Boolean idIfCond_609 = false;
-					idIfCond_609 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+					java.lang.Boolean idIfCond_670 = false;
+					idIfCond_670 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 							.isInstanceOfSwitcher(
 									this.getCondition(),
 									org.kermeta.compil.runtime.ExecutionContext
@@ -448,7 +448,7 @@ public class ConditionalImpl extends ExpressionImpl implements Conditional {
 											.getMetaClass(
 													"kermeta.language.behavior.CallVariable"));
 
-					if (idIfCond_609) {
+					if (idIfCond_670) {
 
 						ftParam = ((kermeta.language.behavior.CallVariable) org.kermeta.compil.runtime.helper.language.ObjectUtil
 								.asTypeSwitcher(
@@ -460,17 +460,17 @@ public class ConditionalImpl extends ExpressionImpl implements Conditional {
 								.getFunctionTypeParameter();
 					}
 
-					java.lang.Boolean idIfCond_610 = false;
-					idIfCond_610 = kermeta.standard.helper.BooleanWrapper
+					java.lang.Boolean idIfCond_671 = false;
+					idIfCond_671 = kermeta.standard.helper.BooleanWrapper
 							.not(org.kermeta.compil.runtime.helper.language.ObjectUtil
 									.isVoidSwitcher(ftParam));
 
-					if (idIfCond_610) {
+					if (idIfCond_671) {
 
-						java.lang.Boolean idIfCond_611 = false;
-						idIfCond_611 = ftParam.isBooleanFunctionType(context);
+						java.lang.Boolean idIfCond_672 = false;
+						idIfCond_672 = ftParam.isBooleanFunctionType(context);
 
-						if (idIfCond_611) {
+						if (idIfCond_672) {
 
 							context
 									.getResultLastStatementStack()
@@ -519,8 +519,8 @@ public class ConditionalImpl extends ExpressionImpl implements Conditional {
 
 				}
 
-				java.lang.Boolean idIfCond_612 = false;
-				idIfCond_612 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+				java.lang.Boolean idIfCond_673 = false;
+				idIfCond_673 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 						.isInstanceOfSwitcher(
 								this.getCondition(),
 								org.kermeta.compil.runtime.ExecutionContext
@@ -528,7 +528,7 @@ public class ConditionalImpl extends ExpressionImpl implements Conditional {
 										.getMetaClass(
 												"kermeta.language.behavior.SelfExpression"));
 
-				if (idIfCond_612) {
+				if (idIfCond_673) {
 
 					str_condition = kermeta.standard.helper.StringWrapper
 							.plus(
@@ -559,24 +559,24 @@ public class ConditionalImpl extends ExpressionImpl implements Conditional {
 								"\n\n\tif( "), context.getIfConditionId()),
 				" ) ");
 
-		java.lang.Boolean idIfCond_613 = false;
-		idIfCond_613 = kermeta.standard.helper.BooleanWrapper
+		java.lang.Boolean idIfCond_674 = false;
+		idIfCond_674 = kermeta.standard.helper.BooleanWrapper
 				.not(org.kermeta.compil.runtime.helper.language.ObjectUtil
 						.isVoidSwitcher(this.getThenBody()));
 
-		if (idIfCond_613) {
+		if (idIfCond_674) {
 
 			result = kermeta.standard.helper.StringWrapper.plus(
 					kermeta.standard.helper.StringWrapper.plus(result, this
 							.getThenBody().createBehaviorJava(context)), "\n");
 		}
 
-		java.lang.Boolean idIfCond_614 = false;
-		idIfCond_614 = kermeta.standard.helper.BooleanWrapper
+		java.lang.Boolean idIfCond_675 = false;
+		idIfCond_675 = kermeta.standard.helper.BooleanWrapper
 				.not(org.kermeta.compil.runtime.helper.language.ObjectUtil
 						.isVoidSwitcher(this.getElseBody()));
 
-		if (idIfCond_614) {
+		if (idIfCond_675) {
 
 			result = kermeta.standard.helper.StringWrapper.plus(result,
 					" else ");
@@ -603,8 +603,8 @@ public class ConditionalImpl extends ExpressionImpl implements Conditional {
 
 		result = false;
 
-		java.lang.Boolean idIfCond_615 = false;
-		idIfCond_615 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+		java.lang.Boolean idIfCond_676 = false;
+		idIfCond_676 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 				.isInstanceOfSwitcher(
 						this.getCondition(),
 						org.kermeta.compil.runtime.ExecutionContext
@@ -612,10 +612,10 @@ public class ConditionalImpl extends ExpressionImpl implements Conditional {
 								.getMetaClass(
 										"kermeta.language.behavior.CallFeature"));
 
-		if (idIfCond_615) {
+		if (idIfCond_676) {
 
-			java.lang.Boolean idIfCond_616 = false;
-			idIfCond_616 = ((kermeta.language.behavior.CallFeature) org.kermeta.compil.runtime.helper.language.ObjectUtil
+			java.lang.Boolean idIfCond_677 = false;
+			idIfCond_677 = ((kermeta.language.behavior.CallFeature) org.kermeta.compil.runtime.helper.language.ObjectUtil
 					.asTypeSwitcher(
 							this.getCondition(),
 							org.kermeta.compil.runtime.ExecutionContext
@@ -624,7 +624,7 @@ public class ConditionalImpl extends ExpressionImpl implements Conditional {
 											"kermeta.language.behavior.CallFeature")))
 					.callsFunctionType();
 
-			if (idIfCond_616) {
+			if (idIfCond_677) {
 
 				result = true;
 			}

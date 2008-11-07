@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: BooleanLiteralImpl.java,v 1.7 2008-10-29 08:29:15 cfaucher Exp $
+ * $Id: BooleanLiteralImpl.java,v 1.8 2008-11-07 08:53:28 cfaucher Exp $
  */
 package kermeta.language.behavior.impl;
 

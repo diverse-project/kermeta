@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: StringBufferImpl.java,v 1.7 2008-10-29 08:29:13 cfaucher Exp $
+ * $Id: StringBufferImpl.java,v 1.8 2008-11-07 08:53:12 cfaucher Exp $
  */
 package kermeta.utils.impl;
 
@@ -103,8 +103,11 @@ public class StringBufferImpl extends ObjectImpl implements
 
 		kermeta.utils.StringBuffer result = null;
 
-		result = (kermeta.utils.StringBuffer) org.kermeta.compil.runtime.helper.basetypes.StringBufferUtil
-				.append(this, arg0);
+		result = (kermeta.utils.StringBuffer) org.kermeta.compil.runtime.ExecutionContext
+				.getInstance()
+				.<kermeta.utils.StringBuffer> asTypeOrVoid(
+						org.kermeta.compil.runtime.helper.basetypes.StringBufferUtil
+								.append(this, arg0));
 
 		return result;
 
@@ -119,8 +122,11 @@ public class StringBufferImpl extends ObjectImpl implements
 
 		java.lang.Integer result = null;
 
-		result = (java.lang.Integer) org.kermeta.compil.runtime.helper.basetypes.StringBufferUtil
-				.length(this);
+		result = (java.lang.Integer) org.kermeta.compil.runtime.ExecutionContext
+				.getInstance()
+				.<java.lang.Integer> asTypeOrVoid(
+						org.kermeta.compil.runtime.helper.basetypes.StringBufferUtil
+								.length(this));
 
 		return result;
 
@@ -137,8 +143,11 @@ public class StringBufferImpl extends ObjectImpl implements
 
 		java.lang.String stringValue = null;
 
-		stringValue = (java.lang.String) org.kermeta.compil.runtime.helper.basetypes.StringBufferUtil
-				.toString(this);
+		stringValue = (java.lang.String) org.kermeta.compil.runtime.ExecutionContext
+				.getInstance()
+				.<java.lang.String> asTypeOrVoid(
+						org.kermeta.compil.runtime.helper.basetypes.StringBufferUtil
+								.toString(this));
 
 		result = stringValue;
 

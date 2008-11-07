@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: StructurePackage.java,v 1.7 2008-10-29 08:29:16 cfaucher Exp $
+ * $Id: StructurePackage.java,v 1.8 2008-11-07 08:53:35 cfaucher Exp $
  */
 package kermeta.language.structure;
 
@@ -147,7 +147,7 @@ public interface StructurePackage extends EPackage {
 	 * @see kermeta.language.structure.impl.StructurePackageImpl#getTraceability()
 	 * @generated
 	 */
-	int TRACEABILITY = 19;
+	int TRACEABILITY = 18;
 
 	/**
 	 * The feature id for the '<em><b>Tag</b></em>' reference list.
@@ -1383,22 +1383,22 @@ public interface StructurePackage extends EPackage {
 	int OPERATION__OWNED_PARAMETER = TRACEABILITY_FEATURE_COUNT + 10;
 
 	/**
-	 * The feature id for the '<em><b>Post</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int OPERATION__POST = TRACEABILITY_FEATURE_COUNT + 11;
-
-	/**
 	 * The feature id for the '<em><b>Is Abstract</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int OPERATION__IS_ABSTRACT = TRACEABILITY_FEATURE_COUNT + 12;
+	int OPERATION__IS_ABSTRACT = TRACEABILITY_FEATURE_COUNT + 11;
+
+	/**
+	 * The feature id for the '<em><b>Post</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OPERATION__POST = TRACEABILITY_FEATURE_COUNT + 12;
 
 	/**
 	 * The feature id for the '<em><b>Raised Exception</b></em>' reference list.
@@ -1908,22 +1908,22 @@ public interface StructurePackage extends EPackage {
 	int PROPERTY__DEFAULT = TRACEABILITY_FEATURE_COUNT + 7;
 
 	/**
-	 * The feature id for the '<em><b>Is Derived</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PROPERTY__IS_DERIVED = TRACEABILITY_FEATURE_COUNT + 8;
-
-	/**
 	 * The feature id for the '<em><b>Opposite</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PROPERTY__OPPOSITE = TRACEABILITY_FEATURE_COUNT + 9;
+	int PROPERTY__OPPOSITE = TRACEABILITY_FEATURE_COUNT + 8;
+
+	/**
+	 * The feature id for the '<em><b>Is Derived</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PROPERTY__IS_DERIVED = TRACEABILITY_FEATURE_COUNT + 9;
 
 	/**
 	 * The feature id for the '<em><b>Getter Body</b></em>' containment reference.
@@ -1953,13 +1953,13 @@ public interface StructurePackage extends EPackage {
 	int PROPERTY__SETTER_BODY = TRACEABILITY_FEATURE_COUNT + 12;
 
 	/**
-	 * The feature id for the '<em><b>Is Setter Abstract</b></em>' attribute.
+	 * The feature id for the '<em><b>Owning Class</b></em>' container reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PROPERTY__IS_SETTER_ABSTRACT = TRACEABILITY_FEATURE_COUNT + 13;
+	int PROPERTY__OWNING_CLASS = TRACEABILITY_FEATURE_COUNT + 13;
 
 	/**
 	 * The feature id for the '<em><b>Is ID</b></em>' attribute.
@@ -1971,13 +1971,13 @@ public interface StructurePackage extends EPackage {
 	int PROPERTY__IS_ID = TRACEABILITY_FEATURE_COUNT + 14;
 
 	/**
-	 * The feature id for the '<em><b>Owning Class</b></em>' container reference.
+	 * The feature id for the '<em><b>Is Setter Abstract</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PROPERTY__OWNING_CLASS = TRACEABILITY_FEATURE_COUNT + 15;
+	int PROPERTY__IS_SETTER_ABSTRACT = TRACEABILITY_FEATURE_COUNT + 15;
 
 	/**
 	 * The feature id for the '<em><b>Is Getter Abstract</b></em>' attribute.
@@ -2241,7 +2241,7 @@ public interface StructurePackage extends EPackage {
 	 * @see kermeta.language.structure.impl.StructurePackageImpl#getType()
 	 * @generated
 	 */
-	int TYPE = 22;
+	int TYPE = 20;
 
 	/**
 	 * The feature id for the '<em><b>Tag</b></em>' reference list.
@@ -2543,161 +2543,6 @@ public interface StructurePackage extends EPackage {
 	int CLASS_FEATURE_COUNT = TRACEABILITY_FEATURE_COUNT + 4;
 
 	/**
-	 * The meta object id for the '{@link kermeta.language.structure.impl.NamedElementImpl <em>Named Element</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see kermeta.language.structure.impl.NamedElementImpl
-	 * @see kermeta.language.structure.impl.StructurePackageImpl#getNamedElement()
-	 * @generated
-	 */
-	int NAMED_ELEMENT = 17;
-
-	/**
-	 * The feature id for the '<em><b>Tag</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int NAMED_ELEMENT__TAG = OBJECT__TAG;
-
-	/**
-	 * The feature id for the '<em><b>File</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int NAMED_ELEMENT__FILE = OBJECT__FILE;
-
-	/**
-	 * The feature id for the '<em><b>File Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int NAMED_ELEMENT__FILE_NAME = OBJECT__FILE_NAME;
-
-	/**
-	 * The feature id for the '<em><b>Line Number</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int NAMED_ELEMENT__LINE_NUMBER = OBJECT__LINE_NUMBER;
-
-	/**
-	 * The feature id for the '<em><b>Owned Tags</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int NAMED_ELEMENT__OWNED_TAGS = OBJECT__OWNED_TAGS;
-
-	/**
-	 * The feature id for the '<em><b>Oid</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int NAMED_ELEMENT__OID = OBJECT__OID;
-
-	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int NAMED_ELEMENT__NAME = OBJECT_FEATURE_COUNT + 0;
-
-	/**
-	 * The number of structural features of the '<em>Named Element</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int NAMED_ELEMENT_FEATURE_COUNT = OBJECT_FEATURE_COUNT + 1;
-
-	/**
-	 * The meta object id for the '{@link kermeta.language.structure.impl.LinkSetterForTypedElementImpl <em>Link Setter For Typed Element</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see kermeta.language.structure.impl.LinkSetterForTypedElementImpl
-	 * @see kermeta.language.structure.impl.StructurePackageImpl#getLinkSetterForTypedElement()
-	 * @generated
-	 */
-	int LINK_SETTER_FOR_TYPED_ELEMENT = 18;
-
-	/**
-	 * The feature id for the '<em><b>Tag</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int LINK_SETTER_FOR_TYPED_ELEMENT__TAG = OBJECT__TAG;
-
-	/**
-	 * The feature id for the '<em><b>File</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int LINK_SETTER_FOR_TYPED_ELEMENT__FILE = OBJECT__FILE;
-
-	/**
-	 * The feature id for the '<em><b>File Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int LINK_SETTER_FOR_TYPED_ELEMENT__FILE_NAME = OBJECT__FILE_NAME;
-
-	/**
-	 * The feature id for the '<em><b>Line Number</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int LINK_SETTER_FOR_TYPED_ELEMENT__LINE_NUMBER = OBJECT__LINE_NUMBER;
-
-	/**
-	 * The feature id for the '<em><b>Owned Tags</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int LINK_SETTER_FOR_TYPED_ELEMENT__OWNED_TAGS = OBJECT__OWNED_TAGS;
-
-	/**
-	 * The feature id for the '<em><b>Oid</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int LINK_SETTER_FOR_TYPED_ELEMENT__OID = OBJECT__OID;
-
-	/**
-	 * The number of structural features of the '<em>Link Setter For Typed Element</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int LINK_SETTER_FOR_TYPED_ELEMENT_FEATURE_COUNT = OBJECT_FEATURE_COUNT + 0;
-
-	/**
 	 * The meta object id for the '{@link kermeta.language.structure.impl.TypeContainerImpl <em>Type Container</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2778,124 +2623,6 @@ public interface StructurePackage extends EPackage {
 	 * @ordered
 	 */
 	int TYPE_CONTAINER_FEATURE_COUNT = OBJECT_FEATURE_COUNT + 1;
-
-	/**
-	 * The meta object id for the '{@link kermeta.language.structure.impl.FunctionTypeImpl <em>Function Type</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see kermeta.language.structure.impl.FunctionTypeImpl
-	 * @see kermeta.language.structure.impl.StructurePackageImpl#getFunctionType()
-	 * @generated
-	 */
-	int FUNCTION_TYPE = 20;
-
-	/**
-	 * The feature id for the '<em><b>Tag</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FUNCTION_TYPE__TAG = TYPE_CONTAINER__TAG;
-
-	/**
-	 * The feature id for the '<em><b>File</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FUNCTION_TYPE__FILE = TYPE_CONTAINER__FILE;
-
-	/**
-	 * The feature id for the '<em><b>File Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FUNCTION_TYPE__FILE_NAME = TYPE_CONTAINER__FILE_NAME;
-
-	/**
-	 * The feature id for the '<em><b>Line Number</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FUNCTION_TYPE__LINE_NUMBER = TYPE_CONTAINER__LINE_NUMBER;
-
-	/**
-	 * The feature id for the '<em><b>Owned Tags</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FUNCTION_TYPE__OWNED_TAGS = TYPE_CONTAINER__OWNED_TAGS;
-
-	/**
-	 * The feature id for the '<em><b>Oid</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FUNCTION_TYPE__OID = TYPE_CONTAINER__OID;
-
-	/**
-	 * The feature id for the '<em><b>Contained Type</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FUNCTION_TYPE__CONTAINED_TYPE = TYPE_CONTAINER__CONTAINED_TYPE;
-
-	/**
-	 * The feature id for the '<em><b>Type Container</b></em>' container reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FUNCTION_TYPE__TYPE_CONTAINER = TYPE_CONTAINER_FEATURE_COUNT + 0;
-
-	/**
-	 * The feature id for the '<em><b>Ecore Model Element</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FUNCTION_TYPE__ECORE_MODEL_ELEMENT = TYPE_CONTAINER_FEATURE_COUNT + 1;
-
-	/**
-	 * The feature id for the '<em><b>Left</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FUNCTION_TYPE__LEFT = TYPE_CONTAINER_FEATURE_COUNT + 2;
-
-	/**
-	 * The feature id for the '<em><b>Right</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FUNCTION_TYPE__RIGHT = TYPE_CONTAINER_FEATURE_COUNT + 3;
-
-	/**
-	 * The number of structural features of the '<em>Function Type</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FUNCTION_TYPE_FEATURE_COUNT = TYPE_CONTAINER_FEATURE_COUNT + 4;
 
 	/**
 	 * The meta object id for the '{@link kermeta.language.structure.impl.TypedElementImpl <em>Typed Element</em>}' class.
@@ -3005,7 +2732,7 @@ public interface StructurePackage extends EPackage {
 	 * @see kermeta.language.structure.impl.StructurePackageImpl#getMultiplicityElement()
 	 * @generated
 	 */
-	int MULTIPLICITY_ELEMENT = 21;
+	int MULTIPLICITY_ELEMENT = 17;
 
 	/**
 	 * The feature id for the '<em><b>Tag</b></em>' reference list.
@@ -3134,6 +2861,306 @@ public interface StructurePackage extends EPackage {
 	int MULTIPLICITY_ELEMENT_FEATURE_COUNT = TYPED_ELEMENT_FEATURE_COUNT + 4;
 
 	/**
+	 * The meta object id for the '{@link kermeta.language.structure.impl.FunctionTypeImpl <em>Function Type</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see kermeta.language.structure.impl.FunctionTypeImpl
+	 * @see kermeta.language.structure.impl.StructurePackageImpl#getFunctionType()
+	 * @generated
+	 */
+	int FUNCTION_TYPE = 19;
+
+	/**
+	 * The feature id for the '<em><b>Tag</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FUNCTION_TYPE__TAG = TYPE_CONTAINER__TAG;
+
+	/**
+	 * The feature id for the '<em><b>File</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FUNCTION_TYPE__FILE = TYPE_CONTAINER__FILE;
+
+	/**
+	 * The feature id for the '<em><b>File Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FUNCTION_TYPE__FILE_NAME = TYPE_CONTAINER__FILE_NAME;
+
+	/**
+	 * The feature id for the '<em><b>Line Number</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FUNCTION_TYPE__LINE_NUMBER = TYPE_CONTAINER__LINE_NUMBER;
+
+	/**
+	 * The feature id for the '<em><b>Owned Tags</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FUNCTION_TYPE__OWNED_TAGS = TYPE_CONTAINER__OWNED_TAGS;
+
+	/**
+	 * The feature id for the '<em><b>Oid</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FUNCTION_TYPE__OID = TYPE_CONTAINER__OID;
+
+	/**
+	 * The feature id for the '<em><b>Contained Type</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FUNCTION_TYPE__CONTAINED_TYPE = TYPE_CONTAINER__CONTAINED_TYPE;
+
+	/**
+	 * The feature id for the '<em><b>Type Container</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FUNCTION_TYPE__TYPE_CONTAINER = TYPE_CONTAINER_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Ecore Model Element</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FUNCTION_TYPE__ECORE_MODEL_ELEMENT = TYPE_CONTAINER_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Left</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FUNCTION_TYPE__LEFT = TYPE_CONTAINER_FEATURE_COUNT + 2;
+
+	/**
+	 * The feature id for the '<em><b>Right</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FUNCTION_TYPE__RIGHT = TYPE_CONTAINER_FEATURE_COUNT + 3;
+
+	/**
+	 * The number of structural features of the '<em>Function Type</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FUNCTION_TYPE_FEATURE_COUNT = TYPE_CONTAINER_FEATURE_COUNT + 4;
+
+	/**
+	 * The meta object id for the '{@link kermeta.language.structure.impl.VoidTypeImpl <em>Void Type</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see kermeta.language.structure.impl.VoidTypeImpl
+	 * @see kermeta.language.structure.impl.StructurePackageImpl#getVoidType()
+	 * @generated
+	 */
+	int VOID_TYPE = 21;
+
+	/**
+	 * The feature id for the '<em><b>Tag</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VOID_TYPE__TAG = TYPE__TAG;
+
+	/**
+	 * The feature id for the '<em><b>File</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VOID_TYPE__FILE = TYPE__FILE;
+
+	/**
+	 * The feature id for the '<em><b>File Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VOID_TYPE__FILE_NAME = TYPE__FILE_NAME;
+
+	/**
+	 * The feature id for the '<em><b>Line Number</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VOID_TYPE__LINE_NUMBER = TYPE__LINE_NUMBER;
+
+	/**
+	 * The feature id for the '<em><b>Owned Tags</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VOID_TYPE__OWNED_TAGS = TYPE__OWNED_TAGS;
+
+	/**
+	 * The feature id for the '<em><b>Oid</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VOID_TYPE__OID = TYPE__OID;
+
+	/**
+	 * The feature id for the '<em><b>Type Container</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VOID_TYPE__TYPE_CONTAINER = TYPE__TYPE_CONTAINER;
+
+	/**
+	 * The number of structural features of the '<em>Void Type</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VOID_TYPE_FEATURE_COUNT = TYPE_FEATURE_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link kermeta.language.structure.impl.ProductTypeImpl <em>Product Type</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see kermeta.language.structure.impl.ProductTypeImpl
+	 * @see kermeta.language.structure.impl.StructurePackageImpl#getProductType()
+	 * @generated
+	 */
+	int PRODUCT_TYPE = 22;
+
+	/**
+	 * The feature id for the '<em><b>Tag</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PRODUCT_TYPE__TAG = TYPE_CONTAINER__TAG;
+
+	/**
+	 * The feature id for the '<em><b>File</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PRODUCT_TYPE__FILE = TYPE_CONTAINER__FILE;
+
+	/**
+	 * The feature id for the '<em><b>File Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PRODUCT_TYPE__FILE_NAME = TYPE_CONTAINER__FILE_NAME;
+
+	/**
+	 * The feature id for the '<em><b>Line Number</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PRODUCT_TYPE__LINE_NUMBER = TYPE_CONTAINER__LINE_NUMBER;
+
+	/**
+	 * The feature id for the '<em><b>Owned Tags</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PRODUCT_TYPE__OWNED_TAGS = TYPE_CONTAINER__OWNED_TAGS;
+
+	/**
+	 * The feature id for the '<em><b>Oid</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PRODUCT_TYPE__OID = TYPE_CONTAINER__OID;
+
+	/**
+	 * The feature id for the '<em><b>Contained Type</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PRODUCT_TYPE__CONTAINED_TYPE = TYPE_CONTAINER__CONTAINED_TYPE;
+
+	/**
+	 * The feature id for the '<em><b>Type Container</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PRODUCT_TYPE__TYPE_CONTAINER = TYPE_CONTAINER_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Type</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PRODUCT_TYPE__TYPE = TYPE_CONTAINER_FEATURE_COUNT + 1;
+
+	/**
+	 * The number of structural features of the '<em>Product Type</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PRODUCT_TYPE_FEATURE_COUNT = TYPE_CONTAINER_FEATURE_COUNT + 2;
+
+	/**
 	 * The meta object id for the '{@link kermeta.language.structure.impl.TypeVariableBindingImpl <em>Type Variable Binding</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3234,6 +3261,88 @@ public interface StructurePackage extends EPackage {
 	int TYPE_VARIABLE_BINDING_FEATURE_COUNT = TYPE_CONTAINER_FEATURE_COUNT + 2;
 
 	/**
+	 * The meta object id for the '{@link kermeta.language.structure.impl.NamedElementImpl <em>Named Element</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see kermeta.language.structure.impl.NamedElementImpl
+	 * @see kermeta.language.structure.impl.StructurePackageImpl#getNamedElement()
+	 * @generated
+	 */
+	int NAMED_ELEMENT = 27;
+
+	/**
+	 * The feature id for the '<em><b>Tag</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NAMED_ELEMENT__TAG = OBJECT__TAG;
+
+	/**
+	 * The feature id for the '<em><b>File</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NAMED_ELEMENT__FILE = OBJECT__FILE;
+
+	/**
+	 * The feature id for the '<em><b>File Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NAMED_ELEMENT__FILE_NAME = OBJECT__FILE_NAME;
+
+	/**
+	 * The feature id for the '<em><b>Line Number</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NAMED_ELEMENT__LINE_NUMBER = OBJECT__LINE_NUMBER;
+
+	/**
+	 * The feature id for the '<em><b>Owned Tags</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NAMED_ELEMENT__OWNED_TAGS = OBJECT__OWNED_TAGS;
+
+	/**
+	 * The feature id for the '<em><b>Oid</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NAMED_ELEMENT__OID = OBJECT__OID;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NAMED_ELEMENT__NAME = OBJECT_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Named Element</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NAMED_ELEMENT_FEATURE_COUNT = OBJECT_FEATURE_COUNT + 1;
+
+	/**
 	 * The meta object id for the '{@link kermeta.language.structure.impl.TypeDefinitionImpl <em>Type Definition</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3332,7 +3441,7 @@ public interface StructurePackage extends EPackage {
 	 * @see kermeta.language.structure.impl.StructurePackageImpl#getDataType()
 	 * @generated
 	 */
-	int DATA_TYPE = 27;
+	int DATA_TYPE = 28;
 
 	/**
 	 * The feature id for the '<em><b>Tag</b></em>' reference list.
@@ -3432,7 +3541,7 @@ public interface StructurePackage extends EPackage {
 	 * @see kermeta.language.structure.impl.StructurePackageImpl#getGenericTypeDefinition()
 	 * @generated
 	 */
-	int GENERIC_TYPE_DEFINITION = 28;
+	int GENERIC_TYPE_DEFINITION = 29;
 
 	/**
 	 * The feature id for the '<em><b>Tag</b></em>' reference list.
@@ -3532,7 +3641,7 @@ public interface StructurePackage extends EPackage {
 	 * @see kermeta.language.structure.impl.StructurePackageImpl#getTypeVariable()
 	 * @generated
 	 */
-	int TYPE_VARIABLE = 29;
+	int TYPE_VARIABLE = 30;
 
 	/**
 	 * The feature id for the '<em><b>Tag</b></em>' reference list.
@@ -3641,7 +3750,7 @@ public interface StructurePackage extends EPackage {
 	 * @see kermeta.language.structure.impl.StructurePackageImpl#getModelType()
 	 * @generated
 	 */
-	int MODEL_TYPE = 30;
+	int MODEL_TYPE = 31;
 
 	/**
 	 * The feature id for the '<em><b>Tag</b></em>' reference list.
@@ -3750,7 +3859,7 @@ public interface StructurePackage extends EPackage {
 	 * @see kermeta.language.structure.impl.StructurePackageImpl#getModelTypeVariable()
 	 * @generated
 	 */
-	int MODEL_TYPE_VARIABLE = 31;
+	int MODEL_TYPE_VARIABLE = 32;
 
 	/**
 	 * The feature id for the '<em><b>Tag</b></em>' reference list.
@@ -3868,7 +3977,7 @@ public interface StructurePackage extends EPackage {
 	 * @see kermeta.language.structure.impl.StructurePackageImpl#getVirtualType()
 	 * @generated
 	 */
-	int VIRTUAL_TYPE = 32;
+	int VIRTUAL_TYPE = 33;
 
 	/**
 	 * The feature id for the '<em><b>Tag</b></em>' reference list.
@@ -4013,7 +4122,7 @@ public interface StructurePackage extends EPackage {
 	 * @see kermeta.language.structure.impl.StructurePackageImpl#getModel()
 	 * @generated
 	 */
-	int MODEL = 33;
+	int MODEL = 34;
 
 	/**
 	 * The feature id for the '<em><b>Tag</b></em>' reference list.
@@ -4095,7 +4204,7 @@ public interface StructurePackage extends EPackage {
 	 * @see kermeta.language.structure.impl.StructurePackageImpl#getFilter()
 	 * @generated
 	 */
-	int FILTER = 34;
+	int FILTER = 35;
 
 	/**
 	 * The feature id for the '<em><b>Tag</b></em>' reference list.
@@ -4170,188 +4279,6 @@ public interface StructurePackage extends EPackage {
 	int FILTER_FEATURE_COUNT = OBJECT_FEATURE_COUNT + 1;
 
 	/**
-	 * The meta object id for the '{@link kermeta.language.structure.impl.ProductTypeImpl <em>Product Type</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see kermeta.language.structure.impl.ProductTypeImpl
-	 * @see kermeta.language.structure.impl.StructurePackageImpl#getProductType()
-	 * @generated
-	 */
-	int PRODUCT_TYPE = 35;
-
-	/**
-	 * The feature id for the '<em><b>Tag</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PRODUCT_TYPE__TAG = TYPE_CONTAINER__TAG;
-
-	/**
-	 * The feature id for the '<em><b>File</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PRODUCT_TYPE__FILE = TYPE_CONTAINER__FILE;
-
-	/**
-	 * The feature id for the '<em><b>File Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PRODUCT_TYPE__FILE_NAME = TYPE_CONTAINER__FILE_NAME;
-
-	/**
-	 * The feature id for the '<em><b>Line Number</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PRODUCT_TYPE__LINE_NUMBER = TYPE_CONTAINER__LINE_NUMBER;
-
-	/**
-	 * The feature id for the '<em><b>Owned Tags</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PRODUCT_TYPE__OWNED_TAGS = TYPE_CONTAINER__OWNED_TAGS;
-
-	/**
-	 * The feature id for the '<em><b>Oid</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PRODUCT_TYPE__OID = TYPE_CONTAINER__OID;
-
-	/**
-	 * The feature id for the '<em><b>Contained Type</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PRODUCT_TYPE__CONTAINED_TYPE = TYPE_CONTAINER__CONTAINED_TYPE;
-
-	/**
-	 * The feature id for the '<em><b>Type Container</b></em>' container reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PRODUCT_TYPE__TYPE_CONTAINER = TYPE_CONTAINER_FEATURE_COUNT + 0;
-
-	/**
-	 * The feature id for the '<em><b>Type</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PRODUCT_TYPE__TYPE = TYPE_CONTAINER_FEATURE_COUNT + 1;
-
-	/**
-	 * The number of structural features of the '<em>Product Type</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PRODUCT_TYPE_FEATURE_COUNT = TYPE_CONTAINER_FEATURE_COUNT + 2;
-
-	/**
-	 * The meta object id for the '{@link kermeta.language.structure.impl.VoidTypeImpl <em>Void Type</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see kermeta.language.structure.impl.VoidTypeImpl
-	 * @see kermeta.language.structure.impl.StructurePackageImpl#getVoidType()
-	 * @generated
-	 */
-	int VOID_TYPE = 36;
-
-	/**
-	 * The feature id for the '<em><b>Tag</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int VOID_TYPE__TAG = TYPE__TAG;
-
-	/**
-	 * The feature id for the '<em><b>File</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int VOID_TYPE__FILE = TYPE__FILE;
-
-	/**
-	 * The feature id for the '<em><b>File Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int VOID_TYPE__FILE_NAME = TYPE__FILE_NAME;
-
-	/**
-	 * The feature id for the '<em><b>Line Number</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int VOID_TYPE__LINE_NUMBER = TYPE__LINE_NUMBER;
-
-	/**
-	 * The feature id for the '<em><b>Owned Tags</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int VOID_TYPE__OWNED_TAGS = TYPE__OWNED_TAGS;
-
-	/**
-	 * The feature id for the '<em><b>Oid</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int VOID_TYPE__OID = TYPE__OID;
-
-	/**
-	 * The feature id for the '<em><b>Type Container</b></em>' container reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int VOID_TYPE__TYPE_CONTAINER = TYPE__TYPE_CONTAINER;
-
-	/**
-	 * The number of structural features of the '<em>Void Type</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int VOID_TYPE_FEATURE_COUNT = TYPE_FEATURE_COUNT + 0;
-
-	/**
 	 * The meta object id for the '{@link kermeta.language.structure.impl.TypeDefinitionContainerImpl <em>Type Definition Container</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4359,7 +4286,7 @@ public interface StructurePackage extends EPackage {
 	 * @see kermeta.language.structure.impl.StructurePackageImpl#getTypeDefinitionContainer()
 	 * @generated
 	 */
-	int TYPE_DEFINITION_CONTAINER = 37;
+	int TYPE_DEFINITION_CONTAINER = 36;
 
 	/**
 	 * The feature id for the '<em><b>Tag</b></em>' reference list.
@@ -4441,6 +4368,79 @@ public interface StructurePackage extends EPackage {
 	 * @ordered
 	 */
 	int TYPE_DEFINITION_CONTAINER_FEATURE_COUNT = NAMED_ELEMENT_FEATURE_COUNT + 1;
+
+	/**
+	 * The meta object id for the '{@link kermeta.language.structure.impl.LinkSetterForTypedElementImpl <em>Link Setter For Typed Element</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see kermeta.language.structure.impl.LinkSetterForTypedElementImpl
+	 * @see kermeta.language.structure.impl.StructurePackageImpl#getLinkSetterForTypedElement()
+	 * @generated
+	 */
+	int LINK_SETTER_FOR_TYPED_ELEMENT = 37;
+
+	/**
+	 * The feature id for the '<em><b>Tag</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LINK_SETTER_FOR_TYPED_ELEMENT__TAG = OBJECT__TAG;
+
+	/**
+	 * The feature id for the '<em><b>File</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LINK_SETTER_FOR_TYPED_ELEMENT__FILE = OBJECT__FILE;
+
+	/**
+	 * The feature id for the '<em><b>File Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LINK_SETTER_FOR_TYPED_ELEMENT__FILE_NAME = OBJECT__FILE_NAME;
+
+	/**
+	 * The feature id for the '<em><b>Line Number</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LINK_SETTER_FOR_TYPED_ELEMENT__LINE_NUMBER = OBJECT__LINE_NUMBER;
+
+	/**
+	 * The feature id for the '<em><b>Owned Tags</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LINK_SETTER_FOR_TYPED_ELEMENT__OWNED_TAGS = OBJECT__OWNED_TAGS;
+
+	/**
+	 * The feature id for the '<em><b>Oid</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LINK_SETTER_FOR_TYPED_ELEMENT__OID = OBJECT__OID;
+
+	/**
+	 * The number of structural features of the '<em>Link Setter For Typed Element</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LINK_SETTER_FOR_TYPED_ELEMENT_FEATURE_COUNT = OBJECT_FEATURE_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link kermeta.language.structure.ConstraintType <em>Constraint Type</em>}' enum.
@@ -4922,17 +4922,6 @@ public interface StructurePackage extends EPackage {
 	EReference getOperation_OwnedParameter();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link kermeta.language.structure.Operation#getPost <em>Post</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Post</em>'.
-	 * @see kermeta.language.structure.Operation#getPost()
-	 * @see #getOperation()
-	 * @generated
-	 */
-	EReference getOperation_Post();
-
-	/**
 	 * Returns the meta object for the attribute '{@link kermeta.language.structure.Operation#getIsAbstract <em>Is Abstract</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4942,6 +4931,17 @@ public interface StructurePackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getOperation_IsAbstract();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link kermeta.language.structure.Operation#getPost <em>Post</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Post</em>'.
+	 * @see kermeta.language.structure.Operation#getPost()
+	 * @see #getOperation()
+	 * @generated
+	 */
+	EReference getOperation_Post();
 
 	/**
 	 * Returns the meta object for the reference list '{@link kermeta.language.structure.Operation#getRaisedException <em>Raised Exception</em>}'.
@@ -5128,17 +5128,6 @@ public interface StructurePackage extends EPackage {
 	EAttribute getProperty__default();
 
 	/**
-	 * Returns the meta object for the attribute '{@link kermeta.language.structure.Property#getIsDerived <em>Is Derived</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Is Derived</em>'.
-	 * @see kermeta.language.structure.Property#getIsDerived()
-	 * @see #getProperty()
-	 * @generated
-	 */
-	EAttribute getProperty_IsDerived();
-
-	/**
 	 * Returns the meta object for the reference '{@link kermeta.language.structure.Property#getOpposite <em>Opposite</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -5148,6 +5137,17 @@ public interface StructurePackage extends EPackage {
 	 * @generated
 	 */
 	EReference getProperty_Opposite();
+
+	/**
+	 * Returns the meta object for the attribute '{@link kermeta.language.structure.Property#getIsDerived <em>Is Derived</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Is Derived</em>'.
+	 * @see kermeta.language.structure.Property#getIsDerived()
+	 * @see #getProperty()
+	 * @generated
+	 */
+	EAttribute getProperty_IsDerived();
 
 	/**
 	 * Returns the meta object for the containment reference '{@link kermeta.language.structure.Property#getGetterBody <em>Getter Body</em>}'.
@@ -5183,15 +5183,15 @@ public interface StructurePackage extends EPackage {
 	EReference getProperty_SetterBody();
 
 	/**
-	 * Returns the meta object for the attribute '{@link kermeta.language.structure.Property#getIsSetterAbstract <em>Is Setter Abstract</em>}'.
+	 * Returns the meta object for the container reference '{@link kermeta.language.structure.Property#getOwningClass <em>Owning Class</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Is Setter Abstract</em>'.
-	 * @see kermeta.language.structure.Property#getIsSetterAbstract()
+	 * @return the meta object for the container reference '<em>Owning Class</em>'.
+	 * @see kermeta.language.structure.Property#getOwningClass()
 	 * @see #getProperty()
 	 * @generated
 	 */
-	EAttribute getProperty_IsSetterAbstract();
+	EReference getProperty_OwningClass();
 
 	/**
 	 * Returns the meta object for the attribute '{@link kermeta.language.structure.Property#getIsID <em>Is ID</em>}'.
@@ -5205,15 +5205,15 @@ public interface StructurePackage extends EPackage {
 	EAttribute getProperty_IsID();
 
 	/**
-	 * Returns the meta object for the container reference '{@link kermeta.language.structure.Property#getOwningClass <em>Owning Class</em>}'.
+	 * Returns the meta object for the attribute '{@link kermeta.language.structure.Property#getIsSetterAbstract <em>Is Setter Abstract</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the container reference '<em>Owning Class</em>'.
-	 * @see kermeta.language.structure.Property#getOwningClass()
+	 * @return the meta object for the attribute '<em>Is Setter Abstract</em>'.
+	 * @see kermeta.language.structure.Property#getIsSetterAbstract()
 	 * @see #getProperty()
 	 * @generated
 	 */
-	EReference getProperty_OwningClass();
+	EAttribute getProperty_IsSetterAbstract();
 
 	/**
 	 * Returns the meta object for the attribute '{@link kermeta.language.structure.Property#getIsGetterAbstract <em>Is Getter Abstract</em>}'.
@@ -5420,35 +5420,58 @@ public interface StructurePackage extends EPackage {
 	EClass getClass_();
 
 	/**
-	 * Returns the meta object for class '{@link kermeta.language.structure.NamedElement <em>Named Element</em>}'.
+	 * Returns the meta object for class '{@link kermeta.language.structure.MultiplicityElement <em>Multiplicity Element</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Named Element</em>'.
-	 * @see kermeta.language.structure.NamedElement
+	 * @return the meta object for class '<em>Multiplicity Element</em>'.
+	 * @see kermeta.language.structure.MultiplicityElement
 	 * @generated
 	 */
-	EClass getNamedElement();
+	EClass getMultiplicityElement();
 
 	/**
-	 * Returns the meta object for the attribute '{@link kermeta.language.structure.NamedElement#getName <em>Name</em>}'.
+	 * Returns the meta object for the attribute '{@link kermeta.language.structure.MultiplicityElement#getIsOrdered <em>Is Ordered</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Name</em>'.
-	 * @see kermeta.language.structure.NamedElement#getName()
-	 * @see #getNamedElement()
+	 * @return the meta object for the attribute '<em>Is Ordered</em>'.
+	 * @see kermeta.language.structure.MultiplicityElement#getIsOrdered()
+	 * @see #getMultiplicityElement()
 	 * @generated
 	 */
-	EAttribute getNamedElement_Name();
+	EAttribute getMultiplicityElement_IsOrdered();
 
 	/**
-	 * Returns the meta object for class '{@link kermeta.language.structure.LinkSetterForTypedElement <em>Link Setter For Typed Element</em>}'.
+	 * Returns the meta object for the attribute '{@link kermeta.language.structure.MultiplicityElement#getUpper <em>Upper</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Link Setter For Typed Element</em>'.
-	 * @see kermeta.language.structure.LinkSetterForTypedElement
+	 * @return the meta object for the attribute '<em>Upper</em>'.
+	 * @see kermeta.language.structure.MultiplicityElement#getUpper()
+	 * @see #getMultiplicityElement()
 	 * @generated
 	 */
-	EClass getLinkSetterForTypedElement();
+	EAttribute getMultiplicityElement_Upper();
+
+	/**
+	 * Returns the meta object for the attribute '{@link kermeta.language.structure.MultiplicityElement#getLower <em>Lower</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Lower</em>'.
+	 * @see kermeta.language.structure.MultiplicityElement#getLower()
+	 * @see #getMultiplicityElement()
+	 * @generated
+	 */
+	EAttribute getMultiplicityElement_Lower();
+
+	/**
+	 * Returns the meta object for the attribute '{@link kermeta.language.structure.MultiplicityElement#getIsUnique <em>Is Unique</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Is Unique</em>'.
+	 * @see kermeta.language.structure.MultiplicityElement#getIsUnique()
+	 * @see #getMultiplicityElement()
+	 * @generated
+	 */
+	EAttribute getMultiplicityElement_IsUnique();
 
 	/**
 	 * Returns the meta object for class '{@link kermeta.language.structure.Traceability <em>Traceability</em>}'.
@@ -5504,60 +5527,6 @@ public interface StructurePackage extends EPackage {
 	EReference getFunctionType_Right();
 
 	/**
-	 * Returns the meta object for class '{@link kermeta.language.structure.MultiplicityElement <em>Multiplicity Element</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Multiplicity Element</em>'.
-	 * @see kermeta.language.structure.MultiplicityElement
-	 * @generated
-	 */
-	EClass getMultiplicityElement();
-
-	/**
-	 * Returns the meta object for the attribute '{@link kermeta.language.structure.MultiplicityElement#getIsOrdered <em>Is Ordered</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Is Ordered</em>'.
-	 * @see kermeta.language.structure.MultiplicityElement#getIsOrdered()
-	 * @see #getMultiplicityElement()
-	 * @generated
-	 */
-	EAttribute getMultiplicityElement_IsOrdered();
-
-	/**
-	 * Returns the meta object for the attribute '{@link kermeta.language.structure.MultiplicityElement#getUpper <em>Upper</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Upper</em>'.
-	 * @see kermeta.language.structure.MultiplicityElement#getUpper()
-	 * @see #getMultiplicityElement()
-	 * @generated
-	 */
-	EAttribute getMultiplicityElement_Upper();
-
-	/**
-	 * Returns the meta object for the attribute '{@link kermeta.language.structure.MultiplicityElement#getLower <em>Lower</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Lower</em>'.
-	 * @see kermeta.language.structure.MultiplicityElement#getLower()
-	 * @see #getMultiplicityElement()
-	 * @generated
-	 */
-	EAttribute getMultiplicityElement_Lower();
-
-	/**
-	 * Returns the meta object for the attribute '{@link kermeta.language.structure.MultiplicityElement#getIsUnique <em>Is Unique</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Is Unique</em>'.
-	 * @see kermeta.language.structure.MultiplicityElement#getIsUnique()
-	 * @see #getMultiplicityElement()
-	 * @generated
-	 */
-	EAttribute getMultiplicityElement_IsUnique();
-
-	/**
 	 * Returns the meta object for class '{@link kermeta.language.structure.Type <em>Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -5577,6 +5546,37 @@ public interface StructurePackage extends EPackage {
 	 * @generated
 	 */
 	EReference getType_TypeContainer();
+
+	/**
+	 * Returns the meta object for class '{@link kermeta.language.structure.VoidType <em>Void Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Void Type</em>'.
+	 * @see kermeta.language.structure.VoidType
+	 * @generated
+	 */
+	EClass getVoidType();
+
+	/**
+	 * Returns the meta object for class '{@link kermeta.language.structure.ProductType <em>Product Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Product Type</em>'.
+	 * @see kermeta.language.structure.ProductType
+	 * @generated
+	 */
+	EClass getProductType();
+
+	/**
+	 * Returns the meta object for the reference list '{@link kermeta.language.structure.ProductType#getType <em>Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>Type</em>'.
+	 * @see kermeta.language.structure.ProductType#getType()
+	 * @see #getProductType()
+	 * @generated
+	 */
+	EReference getProductType_Type();
 
 	/**
 	 * Returns the meta object for class '{@link kermeta.language.structure.TypeContainer <em>Type Container</em>}'.
@@ -5672,6 +5672,27 @@ public interface StructurePackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getTypeDefinition_IsAspect();
+
+	/**
+	 * Returns the meta object for class '{@link kermeta.language.structure.NamedElement <em>Named Element</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Named Element</em>'.
+	 * @see kermeta.language.structure.NamedElement
+	 * @generated
+	 */
+	EClass getNamedElement();
+
+	/**
+	 * Returns the meta object for the attribute '{@link kermeta.language.structure.NamedElement#getName <em>Name</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Name</em>'.
+	 * @see kermeta.language.structure.NamedElement#getName()
+	 * @see #getNamedElement()
+	 * @generated
+	 */
+	EAttribute getNamedElement_Name();
 
 	/**
 	 * Returns the meta object for class '{@link kermeta.language.structure.DataType <em>Data Type</em>}'.
@@ -5853,37 +5874,6 @@ public interface StructurePackage extends EPackage {
 	EAttribute getFilter_QualifiedName();
 
 	/**
-	 * Returns the meta object for class '{@link kermeta.language.structure.ProductType <em>Product Type</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Product Type</em>'.
-	 * @see kermeta.language.structure.ProductType
-	 * @generated
-	 */
-	EClass getProductType();
-
-	/**
-	 * Returns the meta object for the reference list '{@link kermeta.language.structure.ProductType#getType <em>Type</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference list '<em>Type</em>'.
-	 * @see kermeta.language.structure.ProductType#getType()
-	 * @see #getProductType()
-	 * @generated
-	 */
-	EReference getProductType_Type();
-
-	/**
-	 * Returns the meta object for class '{@link kermeta.language.structure.VoidType <em>Void Type</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Void Type</em>'.
-	 * @see kermeta.language.structure.VoidType
-	 * @generated
-	 */
-	EClass getVoidType();
-
-	/**
 	 * Returns the meta object for class '{@link kermeta.language.structure.TypeDefinitionContainer <em>Type Definition Container</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -5903,6 +5893,16 @@ public interface StructurePackage extends EPackage {
 	 * @generated
 	 */
 	EReference getTypeDefinitionContainer_OwnedTypeDefinition();
+
+	/**
+	 * Returns the meta object for class '{@link kermeta.language.structure.LinkSetterForTypedElement <em>Link Setter For Typed Element</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Link Setter For Typed Element</em>'.
+	 * @see kermeta.language.structure.LinkSetterForTypedElement
+	 * @generated
+	 */
+	EClass getLinkSetterForTypedElement();
 
 	/**
 	 * Returns the meta object for enum '{@link kermeta.language.structure.ConstraintType <em>Constraint Type</em>}'.

@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: LanguageAdapterFactory.java,v 1.7 2008-10-29 08:29:23 cfaucher Exp $
+ * $Id: LanguageAdapterFactory.java,v 1.8 2008-11-07 08:53:59 cfaucher Exp $
  */
 package kermeta.language.util;
 

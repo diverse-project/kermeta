@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: StructureFactory.java,v 1.7 2008-10-29 08:29:17 cfaucher Exp $
+ * $Id: StructureFactory.java,v 1.8 2008-11-07 08:53:40 cfaucher Exp $
  */
 package kermeta.language.structure;
 
@@ -180,22 +180,13 @@ public interface StructureFactory extends EFactory {
 	kermeta.language.structure.Class createClass();
 
 	/**
-	 * Returns a new object of class '<em>Named Element</em>'.
+	 * Returns a new object of class '<em>Multiplicity Element</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Named Element</em>'.
+	 * @return a new object of class '<em>Multiplicity Element</em>'.
 	 * @generated
 	 */
-	NamedElement createNamedElement();
-
-	/**
-	 * Returns a new object of class '<em>Link Setter For Typed Element</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Link Setter For Typed Element</em>'.
-	 * @generated
-	 */
-	LinkSetterForTypedElement createLinkSetterForTypedElement();
+	MultiplicityElement createMultiplicityElement();
 
 	/**
 	 * Returns a new object of class '<em>Traceability</em>'.
@@ -216,15 +207,6 @@ public interface StructureFactory extends EFactory {
 	FunctionType createFunctionType();
 
 	/**
-	 * Returns a new object of class '<em>Multiplicity Element</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Multiplicity Element</em>'.
-	 * @generated
-	 */
-	MultiplicityElement createMultiplicityElement();
-
-	/**
 	 * Returns a new object of class '<em>Type</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -232,6 +214,24 @@ public interface StructureFactory extends EFactory {
 	 * @generated
 	 */
 	Type createType();
+
+	/**
+	 * Returns a new object of class '<em>Void Type</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Void Type</em>'.
+	 * @generated
+	 */
+	VoidType createVoidType();
+
+	/**
+	 * Returns a new object of class '<em>Product Type</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Product Type</em>'.
+	 * @generated
+	 */
+	ProductType createProductType();
 
 	/**
 	 * Returns a new object of class '<em>Type Variable Binding</em>'.
@@ -297,22 +297,13 @@ public interface StructureFactory extends EFactory {
 	Filter createFilter();
 
 	/**
-	 * Returns a new object of class '<em>Product Type</em>'.
+	 * Returns a new object of class '<em>Link Setter For Typed Element</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Product Type</em>'.
+	 * @return a new object of class '<em>Link Setter For Typed Element</em>'.
 	 * @generated
 	 */
-	ProductType createProductType();
-
-	/**
-	 * Returns a new object of class '<em>Void Type</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Void Type</em>'.
-	 * @generated
-	 */
-	VoidType createVoidType();
+	LinkSetterForTypedElement createLinkSetterForTypedElement();
 
 	/**
 	 * Returns the package supported by this factory.

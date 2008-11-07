@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: FileImpl.java,v 1.7 2008-10-29 08:29:21 cfaucher Exp $
+ * $Id: FileImpl.java,v 1.8 2008-11-07 08:53:54 cfaucher Exp $
  */
 package traceability.impl;
 
@@ -148,39 +148,39 @@ public class FileImpl extends ObjectImpl implements File {
 		traceability.File file = null;
 		//BIft:detect
 
-		traceability.File result_ft253 = null;
+		traceability.File result_ft254 = null;
 
-		traceability.File elem_ft253 = null;
+		traceability.File elem_ft254 = null;
 
-		result_ft253 = null;
+		result_ft254 = null;
 
 		{
 
-			kermeta.standard.Iterator<traceability.File> it_ft253 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
+			kermeta.standard.Iterator<traceability.File> it_ft254 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
 					.<traceability.File> convertAsOrderedSet(
 							traceModel.getFiles()).iterator();
-			java.lang.Boolean idLoopCond_1103 = false;
-			while (!idLoopCond_1103) {
-				idLoopCond_1103 = kermeta.standard.helper.BooleanWrapper.or(
-						it_ft253.isOff(),
+			java.lang.Boolean idLoopCond_1112 = false;
+			while (!idLoopCond_1112) {
+				idLoopCond_1112 = kermeta.standard.helper.BooleanWrapper.or(
+						it_ft254.isOff(),
 						org.kermeta.compil.runtime.helper.language.ObjectUtil
-								.isNotEqualSwitcher(result_ft253, null));
-				if (idLoopCond_1103) {
+								.isNotEqualSwitcher(result_ft254, null));
+				if (idLoopCond_1112) {
 				} else {
 
-					elem_ft253 = it_ft253.next();
+					elem_ft254 = it_ft254.next();
 
-					java.lang.Boolean idIfCond_1104 = false;
+					java.lang.Boolean idIfCond_1113 = false;
 					//BIle:detector
-					traceability.File f_lbdExp253 = elem_ft253;
+					traceability.File f_lbdExp254 = elem_ft254;
 
-					idIfCond_1104 = kermeta.standard.helper.StringWrapper
-							.equals(f_lbdExp253.getUri(), uri_toFind);
+					idIfCond_1113 = kermeta.standard.helper.StringWrapper
+							.equals(f_lbdExp254.getUri(), uri_toFind);
 					//EIle:detector
 
-					if (idIfCond_1104) {
+					if (idIfCond_1113) {
 
-						result_ft253 = elem_ft253;
+						result_ft254 = elem_ft254;
 					}
 
 				}
@@ -188,14 +188,14 @@ public class FileImpl extends ObjectImpl implements File {
 		}
 
 		//CE
-		file = result_ft253;
+		file = result_ft254;
 		//EIft:detect
 
-		java.lang.Boolean idIfCond_1105 = false;
-		idIfCond_1105 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+		java.lang.Boolean idIfCond_1114 = false;
+		idIfCond_1114 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 				.isVoidSwitcher(file);
 
-		if (idIfCond_1105) {
+		if (idIfCond_1114) {
 
 			file = ((traceability.File) org.kermeta.compil.runtime.helper.language.ClassUtil
 					.newObject("traceability.File"));

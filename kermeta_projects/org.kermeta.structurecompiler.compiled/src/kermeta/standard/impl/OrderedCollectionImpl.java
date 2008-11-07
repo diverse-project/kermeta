@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: OrderedCollectionImpl.java,v 1.7 2008-10-29 08:29:15 cfaucher Exp $
+ * $Id: OrderedCollectionImpl.java,v 1.8 2008-11-07 08:53:32 cfaucher Exp $
  */
 package kermeta.standard.impl;
 
@@ -49,43 +49,16 @@ public abstract class OrderedCollectionImpl<G> extends CollectionImpl<G>
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void addAt(Integer index, G element) {
-
-		java.lang.Boolean idIfCond_914 = false;
-		idIfCond_914 = kermeta.standard.helper.BooleanWrapper.or(
-				kermeta.standard.helper.IntegerWrapper.isLower(index, 0),
-				kermeta.standard.helper.IntegerWrapper.isGreater(index, this
-						.size()));
-
-		if (idIfCond_914) {
-
-			if (true)
-				throw new org.kermeta.compil.runtime.helper.error.KRuntimeError(
-						((kermeta.exceptions.IndexOutOfBound) org.kermeta.compil.runtime.helper.language.ClassUtil
-								.newObject("kermeta.exceptions.IndexOutOfBound")));
-
-		}
-
-		org.kermeta.compil.runtime.helper.basetypes.OrderedCollectionUtil
-				.addAt(this, index, element);
-
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public void removeAt(Integer index) {
 
-		java.lang.Boolean idIfCond_915 = false;
-		idIfCond_915 = kermeta.standard.helper.BooleanWrapper.or(
+		java.lang.Boolean idIfCond_879 = false;
+		idIfCond_879 = kermeta.standard.helper.BooleanWrapper.or(
 				kermeta.standard.helper.IntegerWrapper.isLower(index, 0),
 				kermeta.standard.helper.IntegerWrapper.isGreater(index,
 						kermeta.standard.helper.IntegerWrapper.minus(this
 								.size(), 1)));
 
-		if (idIfCond_915) {
+		if (idIfCond_879) {
 
 			if (true)
 				throw new org.kermeta.compil.runtime.helper.error.KRuntimeError(
@@ -104,15 +77,42 @@ public abstract class OrderedCollectionImpl<G> extends CollectionImpl<G>
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public void addAt(Integer index, G element) {
+
+		java.lang.Boolean idIfCond_880 = false;
+		idIfCond_880 = kermeta.standard.helper.BooleanWrapper.or(
+				kermeta.standard.helper.IntegerWrapper.isLower(index, 0),
+				kermeta.standard.helper.IntegerWrapper.isGreater(index, this
+						.size()));
+
+		if (idIfCond_880) {
+
+			if (true)
+				throw new org.kermeta.compil.runtime.helper.error.KRuntimeError(
+						((kermeta.exceptions.IndexOutOfBound) org.kermeta.compil.runtime.helper.language.ClassUtil
+								.newObject("kermeta.exceptions.IndexOutOfBound")));
+
+		}
+
+		org.kermeta.compil.runtime.helper.basetypes.OrderedCollectionUtil
+				.addAt(this, index, element);
+
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public G last() {
 
 		G result = null;
 
-		java.lang.Boolean idIfCond_916 = false;
-		idIfCond_916 = kermeta.standard.helper.IntegerWrapper.equals(this
+		java.lang.Boolean idIfCond_881 = false;
+		idIfCond_881 = kermeta.standard.helper.IntegerWrapper.equals(this
 				.size(), 0);
 
-		if (idIfCond_916) {
+		if (idIfCond_881) {
 
 			if (true)
 				throw new org.kermeta.compil.runtime.helper.error.KRuntimeError(
@@ -139,15 +139,15 @@ public abstract class OrderedCollectionImpl<G> extends CollectionImpl<G>
 
 		java.lang.Boolean isEqual = false;
 
-		java.lang.Boolean idIfCond_917 = false;
-		idIfCond_917 = kermeta.standard.helper.BooleanWrapper
+		java.lang.Boolean idIfCond_882 = false;
+		idIfCond_882 = kermeta.standard.helper.BooleanWrapper
 				.not(org.kermeta.compil.runtime.helper.language.ObjectUtil
 						.isVoidSwitcher(element));
 
-		if (idIfCond_917) {
+		if (idIfCond_882) {
 
-			java.lang.Boolean idIfCond_918 = false;
-			idIfCond_918 = org.kermeta.compil.runtime.helper.language.TypeUtil
+			java.lang.Boolean idIfCond_883 = false;
+			idIfCond_883 = org.kermeta.compil.runtime.helper.language.TypeUtil
 					.isInstanceSwitcher(
 							org.kermeta.compil.runtime.ExecutionContext
 									.getInstance()
@@ -155,17 +155,19 @@ public abstract class OrderedCollectionImpl<G> extends CollectionImpl<G>
 											"kermeta.standard.OrderedCollection<G>"),
 							element);
 
-			if (idIfCond_918) {
+			if (idIfCond_883) {
 
 				kermeta.standard.Collection<G> collection = null;
 
-				collection = (kermeta.standard.Collection<G>) element;
+				collection = (kermeta.standard.Collection<G>) org.kermeta.compil.runtime.ExecutionContext
+						.getInstance()
+						.<kermeta.standard.Collection<G>> asTypeOrVoid(element);
 
-				java.lang.Boolean idIfCond_919 = false;
-				idIfCond_919 = kermeta.standard.helper.IntegerWrapper.equals(
+				java.lang.Boolean idIfCond_884 = false;
+				idIfCond_884 = kermeta.standard.helper.IntegerWrapper.equals(
 						this.size(), collection.size());
 
-				if (idIfCond_919) {
+				if (idIfCond_884) {
 
 					kermeta.standard.Iterator<G> selfIterator = this.iterator();
 
@@ -175,23 +177,23 @@ public abstract class OrderedCollectionImpl<G> extends CollectionImpl<G>
 					java.lang.Boolean difference = false;
 
 					kermeta.standard.helper.IntegerWrapper.equals(1, 1);
-					java.lang.Boolean idLoopCond_920 = false;
-					while (!idLoopCond_920) {
-						idLoopCond_920 = kermeta.standard.helper.BooleanWrapper
+					java.lang.Boolean idLoopCond_885 = false;
+					while (!idLoopCond_885) {
+						idLoopCond_885 = kermeta.standard.helper.BooleanWrapper
 								.or(kermeta.standard.helper.BooleanWrapper.or(
 										selfIterator.isOff(),
 										collectionIterator.isOff()), difference);
-						if (idLoopCond_920) {
+						if (idLoopCond_885) {
 						} else {
 
-							java.lang.Boolean idIfCond_921 = false;
-							idIfCond_921 = kermeta.standard.helper.BooleanWrapper
+							java.lang.Boolean idIfCond_886 = false;
+							idIfCond_886 = kermeta.standard.helper.BooleanWrapper
 									.not(org.kermeta.compil.runtime.helper.language.ObjectUtil
 											.equalsSwitcher(
 													selfIterator.next(),
 													collectionIterator.next()));
 
-							if (idIfCond_921) {
+							if (idIfCond_886) {
 
 								difference = true;
 							}
@@ -222,11 +224,11 @@ public abstract class OrderedCollectionImpl<G> extends CollectionImpl<G>
 
 		java.lang.Integer result = null;
 
-		java.lang.Boolean idIfCond_922 = false;
-		idIfCond_922 = kermeta.standard.helper.IntegerWrapper.equals(this
+		java.lang.Boolean idIfCond_887 = false;
+		idIfCond_887 = kermeta.standard.helper.IntegerWrapper.equals(this
 				.size(), 0);
 
-		if (idIfCond_922) {
+		if (idIfCond_887) {
 
 			if (true)
 				throw new org.kermeta.compil.runtime.helper.error.KRuntimeError(
@@ -241,18 +243,18 @@ public abstract class OrderedCollectionImpl<G> extends CollectionImpl<G>
 
 		java.lang.Boolean found = false;
 
-		java.lang.Boolean idLoopCond_923 = false;
-		while (!idLoopCond_923) {
-			idLoopCond_923 = kermeta.standard.helper.BooleanWrapper.or(found,
+		java.lang.Boolean idLoopCond_888 = false;
+		while (!idLoopCond_888) {
+			idLoopCond_888 = kermeta.standard.helper.BooleanWrapper.or(found,
 					it.isOff());
-			if (idLoopCond_923) {
+			if (idLoopCond_888) {
 			} else {
 
-				java.lang.Boolean idIfCond_924 = false;
-				idIfCond_924 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+				java.lang.Boolean idIfCond_889 = false;
+				idIfCond_889 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 						.equalsSwitcher(element, it.next());
 
-				if (idIfCond_924) {
+				if (idIfCond_889) {
 
 					found = true;
 				} else {
@@ -263,10 +265,10 @@ public abstract class OrderedCollectionImpl<G> extends CollectionImpl<G>
 			}
 		}
 
-		java.lang.Boolean idIfCond_925 = false;
-		idIfCond_925 = found;
+		java.lang.Boolean idIfCond_890 = false;
+		idIfCond_890 = found;
 
-		if (idIfCond_925) {
+		if (idIfCond_890) {
 
 			result = i;
 		} else {
@@ -287,14 +289,14 @@ public abstract class OrderedCollectionImpl<G> extends CollectionImpl<G>
 
 		G result = null;
 
-		java.lang.Boolean idIfCond_926 = false;
-		idIfCond_926 = kermeta.standard.helper.BooleanWrapper.or(
+		java.lang.Boolean idIfCond_891 = false;
+		idIfCond_891 = kermeta.standard.helper.BooleanWrapper.or(
 				kermeta.standard.helper.IntegerWrapper.isLower(index, 0),
 				kermeta.standard.helper.IntegerWrapper.isGreater(index,
 						kermeta.standard.helper.IntegerWrapper.minus(this
 								.size(), 1)));
 
-		if (idIfCond_926) {
+		if (idIfCond_891) {
 
 			if (true)
 				throw new org.kermeta.compil.runtime.helper.error.KRuntimeError(
@@ -303,8 +305,11 @@ public abstract class OrderedCollectionImpl<G> extends CollectionImpl<G>
 
 		}
 
-		result = (G) org.kermeta.compil.runtime.helper.basetypes.OrderedCollectionUtil
-				.elementAt(this, index);
+		result = (G) org.kermeta.compil.runtime.ExecutionContext
+				.getInstance()
+				.<G> asTypeOrVoid(
+						org.kermeta.compil.runtime.helper.basetypes.OrderedCollectionUtil
+								.elementAt(this, index));
 
 		return result;
 
@@ -319,11 +324,11 @@ public abstract class OrderedCollectionImpl<G> extends CollectionImpl<G>
 
 		G result = null;
 
-		java.lang.Boolean idIfCond_927 = false;
-		idIfCond_927 = kermeta.standard.helper.IntegerWrapper.equals(this
+		java.lang.Boolean idIfCond_892 = false;
+		idIfCond_892 = kermeta.standard.helper.IntegerWrapper.equals(this
 				.size(), 0);
 
-		if (idIfCond_927) {
+		if (idIfCond_892) {
 
 			if (true)
 				throw new org.kermeta.compil.runtime.helper.error.KRuntimeError(

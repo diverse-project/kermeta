@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: UtilsFactoryImpl.java,v 1.7 2008-10-29 08:29:13 cfaucher Exp $
+ * $Id: UtilsFactoryImpl.java,v 1.8 2008-11-07 08:53:12 cfaucher Exp $
  */
 package kermeta.utils.impl;
 

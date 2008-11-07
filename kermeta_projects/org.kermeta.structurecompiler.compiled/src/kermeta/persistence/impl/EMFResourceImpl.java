@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: EMFResourceImpl.java,v 1.8 2008-10-29 08:29:18 cfaucher Exp $
+ * $Id: EMFResourceImpl.java,v 1.9 2008-11-07 08:53:48 cfaucher Exp $
  */
 package kermeta.persistence.impl;
 
@@ -47,10 +47,10 @@ public class EMFResourceImpl extends ResourceImpl implements EMFResource {
 	 */
 	public void save() {
 
-		java.lang.Boolean idIfCond_953 = false;
-		idIfCond_953 = this.getIsReadOnly();
+		java.lang.Boolean idIfCond_918 = false;
+		idIfCond_918 = this.getIsReadOnly();
 
-		if (idIfCond_953) {
+		if (idIfCond_918) {
 
 			kermeta.exceptions.ResourceSaveException e = ((kermeta.exceptions.ResourceSaveException) org.kermeta.compil.runtime.helper.language.ClassUtil
 					.newObject("kermeta.exceptions.ResourceSaveException"));
@@ -82,10 +82,10 @@ public class EMFResourceImpl extends ResourceImpl implements EMFResource {
 	 */
 	public void remove(kermeta.language.structure.Object instance) {
 
-		java.lang.Boolean idIfCond_954 = false;
-		idIfCond_954 = this.contains(instance);
+		java.lang.Boolean idIfCond_919 = false;
+		idIfCond_919 = this.contains(instance);
 
-		if (idIfCond_954) {
+		if (idIfCond_919) {
 
 			org.kermeta.compil.runtime.helper.language.ObjectUtil
 					.unSetContainingResource(instance);
@@ -116,8 +116,12 @@ public class EMFResourceImpl extends ResourceImpl implements EMFResource {
 
 		java.lang.Boolean result = null;
 
-		result = (java.lang.Boolean) org.kermeta.compil.runtime.helper.basetypes.ResourceUtil
-				.save(this, this.uri, metaModelURI, "EMF", this, true);
+		result = (java.lang.Boolean) org.kermeta.compil.runtime.ExecutionContext
+				.getInstance()
+				.<java.lang.Boolean> asTypeOrVoid(
+						org.kermeta.compil.runtime.helper.basetypes.ResourceUtil
+								.save(this, this.uri, metaModelURI, "EMF",
+										this, true));
 
 		return result;
 
@@ -135,11 +139,11 @@ public class EMFResourceImpl extends ResourceImpl implements EMFResource {
 		org.kermeta.compil.runtime.helper.persistence.Loader.load(getValues(),
 				getUri(), getMetaModelURI());
 
-		java.lang.Boolean idIfCond_955 = false;
-		idIfCond_955 = kermeta.standard.helper.IntegerWrapper.equals(this
+		java.lang.Boolean idIfCond_920 = false;
+		idIfCond_920 = kermeta.standard.helper.IntegerWrapper.equals(this
 				.size(), 0);
 
-		if (idIfCond_955) {
+		if (idIfCond_920) {
 
 			org.kermeta.compil.runtime.helper.io.StdIOUtil.getInstance()
 					.writeln("Resource load failed!");
@@ -170,41 +174,41 @@ public class EMFResourceImpl extends ResourceImpl implements EMFResource {
 
 		//BIft:select
 
-		kermeta.standard.Sequence<kermeta.persistence.Resource> result_ft217 = null;
+		kermeta.standard.Sequence<kermeta.persistence.Resource> result_ft203 = null;
 
-		kermeta.persistence.Resource elem_ft217 = null;
+		kermeta.persistence.Resource elem_ft203 = null;
 
-		result_ft217 = ((kermeta.standard.Sequence<kermeta.persistence.Resource>) org.kermeta.compil.runtime.helper.language.ClassUtil
+		result_ft203 = ((kermeta.standard.Sequence<kermeta.persistence.Resource>) org.kermeta.compil.runtime.helper.language.ClassUtil
 				.newObject("kermeta.standard.Sequence<kermeta.persistence.Resource>"));
 
 		{
 
-			kermeta.standard.Iterator<kermeta.persistence.Resource> it_ft217 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
+			kermeta.standard.Iterator<kermeta.persistence.Resource> it_ft203 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
 					.<kermeta.persistence.Resource> convertAsSet(
 							this.getRepository().getResources()).iterator();
-			java.lang.Boolean idLoopCond_957 = false;
-			while (!idLoopCond_957) {
-				idLoopCond_957 = it_ft217.isOff();
-				if (idLoopCond_957) {
+			java.lang.Boolean idLoopCond_922 = false;
+			while (!idLoopCond_922) {
+				idLoopCond_922 = it_ft203.isOff();
+				if (idLoopCond_922) {
 				} else {
 
-					elem_ft217 = it_ft217.next();
+					elem_ft203 = it_ft203.next();
 
-					java.lang.Boolean idIfCond_958 = false;
+					java.lang.Boolean idIfCond_923 = false;
 					//BIle:selector
-					kermeta.persistence.Resource r_lbdExp217 = elem_ft217;
+					kermeta.persistence.Resource r_lbdExp203 = elem_ft203;
 
-					idIfCond_958 = kermeta.standard.helper.BooleanWrapper
+					idIfCond_923 = kermeta.standard.helper.BooleanWrapper
 							.and(
 									org.kermeta.compil.runtime.helper.language.ObjectUtil
-											.isNotEqualSwitcher(r_lbdExp217,
-													this), r_lbdExp217
+											.isNotEqualSwitcher(r_lbdExp203,
+													this), r_lbdExp203
 											.contains(instance));
 					//EIle:selector
 
-					if (idIfCond_958) {
+					if (idIfCond_923) {
 
-						result_ft217.add(elem_ft217);
+						result_ft203.add(elem_ft203);
 					}
 
 				}
@@ -216,23 +220,23 @@ public class EMFResourceImpl extends ResourceImpl implements EMFResource {
 
 		{
 
-			kermeta.standard.Iterator<kermeta.persistence.Resource> it_ft216 = result_ft217
+			kermeta.standard.Iterator<kermeta.persistence.Resource> it_ft202 = result_ft203
 					.iterator();
-			java.lang.Boolean idLoopCond_956 = false;
-			while (!idLoopCond_956) {
-				idLoopCond_956 = it_ft216.isOff();
-				if (idLoopCond_956) {
+			java.lang.Boolean idLoopCond_921 = false;
+			while (!idLoopCond_921) {
+				idLoopCond_921 = it_ft202.isOff();
+				if (idLoopCond_921) {
 				} else {
 
 					//BIle:func
-					kermeta.persistence.Resource r_lbdExp216 = it_ft216.next();
+					kermeta.persistence.Resource r_lbdExp202 = it_ft202.next();
 
 					org.kermeta.compil.runtime.helper.io.StdIOUtil
 							.getInstance()
 							.writeln(
 									"DVK ! another resource of the same repository was containing this element");
 
-					r_lbdExp216.remove(instance);
+					r_lbdExp202.remove(instance);
 					//EIle:func
 
 				}

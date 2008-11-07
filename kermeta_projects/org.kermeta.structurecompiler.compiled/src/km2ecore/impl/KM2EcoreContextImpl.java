@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: KM2EcoreContextImpl.java,v 1.7 2008-10-29 08:29:18 cfaucher Exp $
+ * $Id: KM2EcoreContextImpl.java,v 1.8 2008-11-07 08:53:47 cfaucher Exp $
  */
 package km2ecore.impl;
 
@@ -50,6 +50,7 @@ import traceability.TraceModel;
  * <p>
  * The following features are implemented:
  * <ul>
+ *   <li>{@link km2ecore.impl.KM2EcoreContextImpl#getJAVA_INSTANCE_EXECUTION_CONTEXT <em>JAVA INSTANCE EXECUTION CONTEXT</em>}</li>
  *   <li>{@link km2ecore.impl.KM2EcoreContextImpl#getJavaKeyWordList <em>Java Key Word List</em>}</li>
  *   <li>{@link km2ecore.impl.KM2EcoreContextImpl#getTraceModel <em>Trace Model</em>}</li>
  *   <li>{@link km2ecore.impl.KM2EcoreContextImpl#getTYPE_SEPARATOR <em>TYPE SEPARATOR</em>}</li>
@@ -63,10 +64,10 @@ import traceability.TraceModel;
  *   <li>{@link km2ecore.impl.KM2EcoreContextImpl#getCompiledJavaExtern <em>Compiled Java Extern</em>}</li>
  *   <li>{@link km2ecore.impl.KM2EcoreContextImpl#getCurrent_valueType <em>Current value Type</em>}</li>
  *   <li>{@link km2ecore.impl.KM2EcoreContextImpl#getFtSuffix <em>Ft Suffix</em>}</li>
- *   <li>{@link km2ecore.impl.KM2EcoreContextImpl#getInc_condStack <em>Inc cond Stack</em>}</li>
  *   <li>{@link km2ecore.impl.KM2EcoreContextImpl#getBeforeFunctionTypeResult <em>Before Function Type Result</em>}</li>
- *   <li>{@link km2ecore.impl.KM2EcoreContextImpl#getJAVA_SEPARATOR <em>JAVA SEPARATOR</em>}</li>
+ *   <li>{@link km2ecore.impl.KM2EcoreContextImpl#getInc_condStack <em>Inc cond Stack</em>}</li>
  *   <li>{@link km2ecore.impl.KM2EcoreContextImpl#getFtMapTypeStack <em>Ft Map Type Stack</em>}</li>
+ *   <li>{@link km2ecore.impl.KM2EcoreContextImpl#getJAVA_SEPARATOR <em>JAVA SEPARATOR</em>}</li>
  *   <li>{@link km2ecore.impl.KM2EcoreContextImpl#getSimkModel <em>Simk Model</em>}</li>
  *   <li>{@link km2ecore.impl.KM2EcoreContextImpl#getFtProductTypeStack <em>Ft Product Type Stack</em>}</li>
  *   <li>{@link km2ecore.impl.KM2EcoreContextImpl#getCurrent_param_ft <em>Current param ft</em>}</li>
@@ -75,24 +76,25 @@ import traceability.TraceModel;
  *   <li>{@link km2ecore.impl.KM2EcoreContextImpl#getBeforeLambdaExpressionResult <em>Before Lambda Expression Result</em>}</li>
  *   <li>{@link km2ecore.impl.KM2EcoreContextImpl#getJAVA_CLASS_EXECUTION_CONTEXT <em>JAVA CLASS EXECUTION CONTEXT</em>}</li>
  *   <li>{@link km2ecore.impl.KM2EcoreContextImpl#getFtReturnType <em>Ft Return Type</em>}</li>
+ *   <li>{@link km2ecore.impl.KM2EcoreContextImpl#getOBJECT_UTIL_CLASS <em>OBJECT UTIL CLASS</em>}</li>
  *   <li>{@link km2ecore.impl.KM2EcoreContextImpl#getVARIABLE_EXCEPTION_SWITCHER <em>VARIABLE EXCEPTION SWITCHER</em>}</li>
  *   <li>{@link km2ecore.impl.KM2EcoreContextImpl#getFtSuffixActivation <em>Ft Suffix Activation</em>}</li>
  *   <li>{@link km2ecore.impl.KM2EcoreContextImpl#getKRErrorStack <em>KR Error Stack</em>}</li>
  *   <li>{@link km2ecore.impl.KM2EcoreContextImpl#getRETURN_EXPRESSION_TO_REPLACE_SPECIAL <em>RETURN EXPRESSION TO REPLACE SPECIAL</em>}</li>
  *   <li>{@link km2ecore.impl.KM2EcoreContextImpl#getInc_resultLastStatementStack <em>Inc result Last Statement Stack</em>}</li>
- *   <li>{@link km2ecore.impl.KM2EcoreContextImpl#getRETURN_EXPRESSION_TO_REPLACE <em>RETURN EXPRESSION TO REPLACE</em>}</li>
  *   <li>{@link km2ecore.impl.KM2EcoreContextImpl#getValueTypeMapping <em>Value Type Mapping</em>}</li>
+ *   <li>{@link km2ecore.impl.KM2EcoreContextImpl#getRETURN_EXPRESSION_TO_REPLACE <em>RETURN EXPRESSION TO REPLACE</em>}</li>
  *   <li>{@link km2ecore.impl.KM2EcoreContextImpl#getMode <em>Mode</em>}</li>
  *   <li>{@link km2ecore.impl.KM2EcoreContextImpl#getStaticOperationMode <em>Static Operation Mode</em>}</li>
  *   <li>{@link km2ecore.impl.KM2EcoreContextImpl#getKmInput <em>Km Input</em>}</li>
- *   <li>{@link km2ecore.impl.KM2EcoreContextImpl#getFtStack <em>Ft Stack</em>}</li>
  *   <li>{@link km2ecore.impl.KM2EcoreContextImpl#getCondStack <em>Cond Stack</em>}</li>
+ *   <li>{@link km2ecore.impl.KM2EcoreContextImpl#getFtStack <em>Ft Stack</em>}</li>
  *   <li>{@link km2ecore.impl.KM2EcoreContextImpl#getEcoreOutputs <em>Ecore Outputs</em>}</li>
  *   <li>{@link km2ecore.impl.KM2EcoreContextImpl#getSimkOutput <em>Simk Output</em>}</li>
  *   <li>{@link km2ecore.impl.KM2EcoreContextImpl#getJAVA_CLASS_EXCEPTION_SWITCHER <em>JAVA CLASS EXCEPTION SWITCHER</em>}</li>
  *   <li>{@link km2ecore.impl.KM2EcoreContextImpl#getAfterLbdExpActivation <em>After Lbd Exp Activation</em>}</li>
- *   <li>{@link km2ecore.impl.KM2EcoreContextImpl#getInc_kRErrorStack <em>Inc kR Error Stack</em>}</li>
  *   <li>{@link km2ecore.impl.KM2EcoreContextImpl#getFUNCTION_TYPE_COMPILATION_TASK <em>FUNCTION TYPE COMPILATION TASK</em>}</li>
+ *   <li>{@link km2ecore.impl.KM2EcoreContextImpl#getInc_kRErrorStack <em>Inc kR Error Stack</em>}</li>
  *   <li>{@link km2ecore.impl.KM2EcoreContextImpl#getTraceabilityInput <em>Traceability Input</em>}</li>
  *   <li>{@link km2ecore.impl.KM2EcoreContextImpl#getTasks_stack <em>Tasks stack</em>}</li>
  *   <li>{@link km2ecore.impl.KM2EcoreContextImpl#getMu <em>Mu</em>}</li>
@@ -105,6 +107,26 @@ import traceability.TraceModel;
  * @generated
  */
 public class KM2EcoreContextImpl extends ObjectImpl implements KM2EcoreContext {
+	/**
+	 * The default value of the '{@link #getJAVA_INSTANCE_EXECUTION_CONTEXT() <em>JAVA INSTANCE EXECUTION CONTEXT</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getJAVA_INSTANCE_EXECUTION_CONTEXT()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String JAVA_INSTANCE_EXECUTION_CONTEXT_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getJAVA_INSTANCE_EXECUTION_CONTEXT() <em>JAVA INSTANCE EXECUTION CONTEXT</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getJAVA_INSTANCE_EXECUTION_CONTEXT()
+	 * @generated
+	 * @ordered
+	 */
+	protected String javA_INSTANCE_EXECUTION_CONTEXT = JAVA_INSTANCE_EXECUTION_CONTEXT_EDEFAULT;
+
 	/**
 	 * The cached value of the '{@link #getJavaKeyWordList() <em>Java Key Word List</em>}' reference.
 	 * <!-- begin-user-doc -->
@@ -286,26 +308,6 @@ public class KM2EcoreContextImpl extends ObjectImpl implements KM2EcoreContext {
 	protected Stack<String> ftSuffix;
 
 	/**
-	 * The default value of the '{@link #getInc_condStack() <em>Inc cond Stack</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getInc_condStack()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final Integer INC_COND_STACK_EDEFAULT = null;
-
-	/**
-	 * The cached value of the '{@link #getInc_condStack() <em>Inc cond Stack</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getInc_condStack()
-	 * @generated
-	 * @ordered
-	 */
-	protected Integer inc_condStack = INC_COND_STACK_EDEFAULT;
-
-	/**
 	 * The default value of the '{@link #getBeforeFunctionTypeResult() <em>Before Function Type Result</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -326,6 +328,36 @@ public class KM2EcoreContextImpl extends ObjectImpl implements KM2EcoreContext {
 	protected String beforeFunctionTypeResult = BEFORE_FUNCTION_TYPE_RESULT_EDEFAULT;
 
 	/**
+	 * The default value of the '{@link #getInc_condStack() <em>Inc cond Stack</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getInc_condStack()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final Integer INC_COND_STACK_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getInc_condStack() <em>Inc cond Stack</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getInc_condStack()
+	 * @generated
+	 * @ordered
+	 */
+	protected Integer inc_condStack = INC_COND_STACK_EDEFAULT;
+
+	/**
+	 * The cached value of the '{@link #getFtMapTypeStack() <em>Ft Map Type Stack</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getFtMapTypeStack()
+	 * @generated
+	 * @ordered
+	 */
+	protected Stack<Hashtable<Type, Type>> ftMapTypeStack;
+
+	/**
 	 * The default value of the '{@link #getJAVA_SEPARATOR() <em>JAVA SEPARATOR</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -344,16 +376,6 @@ public class KM2EcoreContextImpl extends ObjectImpl implements KM2EcoreContext {
 	 * @ordered
 	 */
 	protected String javA_SEPARATOR = JAVA_SEPARATOR_EDEFAULT;
-
-	/**
-	 * The cached value of the '{@link #getFtMapTypeStack() <em>Ft Map Type Stack</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getFtMapTypeStack()
-	 * @generated
-	 * @ordered
-	 */
-	protected Stack<Hashtable<Type, Type>> ftMapTypeStack;
 
 	/**
 	 * The cached value of the '{@link #getSimkModel() <em>Simk Model</em>}' reference.
@@ -486,6 +508,26 @@ public class KM2EcoreContextImpl extends ObjectImpl implements KM2EcoreContext {
 	protected String ftReturnType = FT_RETURN_TYPE_EDEFAULT;
 
 	/**
+	 * The default value of the '{@link #getOBJECT_UTIL_CLASS() <em>OBJECT UTIL CLASS</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getOBJECT_UTIL_CLASS()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String OBJECT_UTIL_CLASS_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getOBJECT_UTIL_CLASS() <em>OBJECT UTIL CLASS</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getOBJECT_UTIL_CLASS()
+	 * @generated
+	 * @ordered
+	 */
+	protected String objecT_UTIL_CLASS = OBJECT_UTIL_CLASS_EDEFAULT;
+
+	/**
 	 * The default value of the '{@link #getVARIABLE_EXCEPTION_SWITCHER() <em>VARIABLE EXCEPTION SWITCHER</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -576,6 +618,16 @@ public class KM2EcoreContextImpl extends ObjectImpl implements KM2EcoreContext {
 	protected Integer inc_resultLastStatementStack = INC_RESULT_LAST_STATEMENT_STACK_EDEFAULT;
 
 	/**
+	 * The cached value of the '{@link #getValueTypeMapping() <em>Value Type Mapping</em>}' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getValueTypeMapping()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<String> valueTypeMapping;
+
+	/**
 	 * The default value of the '{@link #getRETURN_EXPRESSION_TO_REPLACE() <em>RETURN EXPRESSION TO REPLACE</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -594,16 +646,6 @@ public class KM2EcoreContextImpl extends ObjectImpl implements KM2EcoreContext {
 	 * @ordered
 	 */
 	protected String returN_EXPRESSION_TO_REPLACE = RETURN_EXPRESSION_TO_REPLACE_EDEFAULT;
-
-	/**
-	 * The cached value of the '{@link #getValueTypeMapping() <em>Value Type Mapping</em>}' attribute list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getValueTypeMapping()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<String> valueTypeMapping;
 
 	/**
 	 * The default value of the '{@link #getMode() <em>Mode</em>}' attribute.
@@ -666,16 +708,6 @@ public class KM2EcoreContextImpl extends ObjectImpl implements KM2EcoreContext {
 	protected String kmInput = KM_INPUT_EDEFAULT;
 
 	/**
-	 * The cached value of the '{@link #getFtStack() <em>Ft Stack</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getFtStack()
-	 * @generated
-	 * @ordered
-	 */
-	protected Stack<LambdaExpression> ftStack;
-
-	/**
 	 * The cached value of the '{@link #getCondStack() <em>Cond Stack</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -684,6 +716,16 @@ public class KM2EcoreContextImpl extends ObjectImpl implements KM2EcoreContext {
 	 * @ordered
 	 */
 	protected Stack<String> condStack;
+
+	/**
+	 * The cached value of the '{@link #getFtStack() <em>Ft Stack</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getFtStack()
+	 * @generated
+	 * @ordered
+	 */
+	protected Stack<LambdaExpression> ftStack;
 
 	/**
 	 * The cached value of the '{@link #getEcoreOutputs() <em>Ecore Outputs</em>}' attribute list.
@@ -756,26 +798,6 @@ public class KM2EcoreContextImpl extends ObjectImpl implements KM2EcoreContext {
 	protected Boolean afterLbdExpActivation = AFTER_LBD_EXP_ACTIVATION_EDEFAULT;
 
 	/**
-	 * The default value of the '{@link #getInc_kRErrorStack() <em>Inc kR Error Stack</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getInc_kRErrorStack()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final Integer INC_KR_ERROR_STACK_EDEFAULT = null;
-
-	/**
-	 * The cached value of the '{@link #getInc_kRErrorStack() <em>Inc kR Error Stack</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getInc_kRErrorStack()
-	 * @generated
-	 * @ordered
-	 */
-	protected Integer inc_kRErrorStack = INC_KR_ERROR_STACK_EDEFAULT;
-
-	/**
 	 * The default value of the '{@link #getFUNCTION_TYPE_COMPILATION_TASK() <em>FUNCTION TYPE COMPILATION TASK</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -794,6 +816,26 @@ public class KM2EcoreContextImpl extends ObjectImpl implements KM2EcoreContext {
 	 * @ordered
 	 */
 	protected String functioN_TYPE_COMPILATION_TASK = FUNCTION_TYPE_COMPILATION_TASK_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getInc_kRErrorStack() <em>Inc kR Error Stack</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getInc_kRErrorStack()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final Integer INC_KR_ERROR_STACK_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getInc_kRErrorStack() <em>Inc kR Error Stack</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getInc_kRErrorStack()
+	 * @generated
+	 * @ordered
+	 */
+	protected Integer inc_kRErrorStack = INC_KR_ERROR_STACK_EDEFAULT;
 
 	/**
 	 * The default value of the '{@link #getTraceabilityInput() <em>Traceability Input</em>}' attribute.
@@ -912,6 +954,33 @@ public class KM2EcoreContextImpl extends ObjectImpl implements KM2EcoreContext {
 	@Override
 	protected EClass eStaticClass() {
 		return Km2ecorePackage.Literals.KM2_ECORE_CONTEXT;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getJAVA_INSTANCE_EXECUTION_CONTEXT() {
+		return javA_INSTANCE_EXECUTION_CONTEXT;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setJAVA_INSTANCE_EXECUTION_CONTEXT(
+			String newJAVA_INSTANCE_EXECUTION_CONTEXT) {
+		String oldJAVA_INSTANCE_EXECUTION_CONTEXT = javA_INSTANCE_EXECUTION_CONTEXT;
+		javA_INSTANCE_EXECUTION_CONTEXT = newJAVA_INSTANCE_EXECUTION_CONTEXT;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(
+					this,
+					Notification.SET,
+					Km2ecorePackage.KM2_ECORE_CONTEXT__JAVA_INSTANCE_EXECUTION_CONTEXT,
+					oldJAVA_INSTANCE_EXECUTION_CONTEXT,
+					javA_INSTANCE_EXECUTION_CONTEXT));
 	}
 
 	/**
@@ -1359,29 +1428,6 @@ public class KM2EcoreContextImpl extends ObjectImpl implements KM2EcoreContext {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Integer getInc_condStack() {
-		return inc_condStack;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setInc_condStack(Integer newInc_condStack) {
-		Integer oldInc_condStack = inc_condStack;
-		inc_condStack = newInc_condStack;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET,
-					Km2ecorePackage.KM2_ECORE_CONTEXT__INC_COND_STACK,
-					oldInc_condStack, inc_condStack));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public String getBeforeFunctionTypeResult() {
 		return beforeFunctionTypeResult;
 	}
@@ -1407,8 +1453,8 @@ public class KM2EcoreContextImpl extends ObjectImpl implements KM2EcoreContext {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public String getJAVA_SEPARATOR() {
-		return javA_SEPARATOR;
+	public Integer getInc_condStack() {
+		return inc_condStack;
 	}
 
 	/**
@@ -1416,13 +1462,13 @@ public class KM2EcoreContextImpl extends ObjectImpl implements KM2EcoreContext {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setJAVA_SEPARATOR(String newJAVA_SEPARATOR) {
-		String oldJAVA_SEPARATOR = javA_SEPARATOR;
-		javA_SEPARATOR = newJAVA_SEPARATOR;
+	public void setInc_condStack(Integer newInc_condStack) {
+		Integer oldInc_condStack = inc_condStack;
+		inc_condStack = newInc_condStack;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET,
-					Km2ecorePackage.KM2_ECORE_CONTEXT__JAVA_SEPARATOR,
-					oldJAVA_SEPARATOR, javA_SEPARATOR));
+					Km2ecorePackage.KM2_ECORE_CONTEXT__INC_COND_STACK,
+					oldInc_condStack, inc_condStack));
 	}
 
 	/**
@@ -1468,6 +1514,29 @@ public class KM2EcoreContextImpl extends ObjectImpl implements KM2EcoreContext {
 			eNotify(new ENotificationImpl(this, Notification.SET,
 					Km2ecorePackage.KM2_ECORE_CONTEXT__FT_MAP_TYPE_STACK,
 					oldFtMapTypeStack, ftMapTypeStack));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getJAVA_SEPARATOR() {
+		return javA_SEPARATOR;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setJAVA_SEPARATOR(String newJAVA_SEPARATOR) {
+		String oldJAVA_SEPARATOR = javA_SEPARATOR;
+		javA_SEPARATOR = newJAVA_SEPARATOR;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET,
+					Km2ecorePackage.KM2_ECORE_CONTEXT__JAVA_SEPARATOR,
+					oldJAVA_SEPARATOR, javA_SEPARATOR));
 	}
 
 	/**
@@ -1730,6 +1799,29 @@ public class KM2EcoreContextImpl extends ObjectImpl implements KM2EcoreContext {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public String getOBJECT_UTIL_CLASS() {
+		return objecT_UTIL_CLASS;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setOBJECT_UTIL_CLASS(String newOBJECT_UTIL_CLASS) {
+		String oldOBJECT_UTIL_CLASS = objecT_UTIL_CLASS;
+		objecT_UTIL_CLASS = newOBJECT_UTIL_CLASS;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET,
+					Km2ecorePackage.KM2_ECORE_CONTEXT__OBJECT_UTIL_CLASS,
+					oldOBJECT_UTIL_CLASS, objecT_UTIL_CLASS));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public String getVARIABLE_EXCEPTION_SWITCHER() {
 		return variablE_EXCEPTION_SWITCHER;
 	}
@@ -1876,6 +1968,19 @@ public class KM2EcoreContextImpl extends ObjectImpl implements KM2EcoreContext {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<String> getValueTypeMapping() {
+		if (valueTypeMapping == null) {
+			valueTypeMapping = new EDataTypeUniqueEList<String>(String.class,
+					this, Km2ecorePackage.KM2_ECORE_CONTEXT__VALUE_TYPE_MAPPING);
+		}
+		return valueTypeMapping;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public String getRETURN_EXPRESSION_TO_REPLACE() {
 		return returN_EXPRESSION_TO_REPLACE;
 	}
@@ -1896,19 +2001,6 @@ public class KM2EcoreContextImpl extends ObjectImpl implements KM2EcoreContext {
 					Km2ecorePackage.KM2_ECORE_CONTEXT__RETURN_EXPRESSION_TO_REPLACE,
 					oldRETURN_EXPRESSION_TO_REPLACE,
 					returN_EXPRESSION_TO_REPLACE));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EList<String> getValueTypeMapping() {
-		if (valueTypeMapping == null) {
-			valueTypeMapping = new EDataTypeUniqueEList<String>(String.class,
-					this, Km2ecorePackage.KM2_ECORE_CONTEXT__VALUE_TYPE_MAPPING);
-		}
-		return valueTypeMapping;
 	}
 
 	/**
@@ -1985,49 +2077,6 @@ public class KM2EcoreContextImpl extends ObjectImpl implements KM2EcoreContext {
 	 * @generated
 	 */
 	@SuppressWarnings("unchecked")
-	public Stack<LambdaExpression> getFtStack() {
-		if (ftStack != null && ftStack.eIsProxy()) {
-			InternalEObject oldFtStack = (InternalEObject) ftStack;
-			ftStack = (Stack<LambdaExpression>) eResolveProxy(oldFtStack);
-			if (ftStack != oldFtStack) {
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE,
-							Km2ecorePackage.KM2_ECORE_CONTEXT__FT_STACK,
-							oldFtStack, ftStack));
-			}
-		}
-		return ftStack;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Stack<LambdaExpression> basicGetFtStack() {
-		return ftStack;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setFtStack(Stack<LambdaExpression> newFtStack) {
-		Stack<LambdaExpression> oldFtStack = ftStack;
-		ftStack = newFtStack;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET,
-					Km2ecorePackage.KM2_ECORE_CONTEXT__FT_STACK, oldFtStack,
-					ftStack));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@SuppressWarnings("unchecked")
 	public Stack<String> getCondStack() {
 		if (condStack != null && condStack.eIsProxy()) {
 			InternalEObject oldCondStack = (InternalEObject) condStack;
@@ -2063,6 +2112,49 @@ public class KM2EcoreContextImpl extends ObjectImpl implements KM2EcoreContext {
 			eNotify(new ENotificationImpl(this, Notification.SET,
 					Km2ecorePackage.KM2_ECORE_CONTEXT__COND_STACK,
 					oldCondStack, condStack));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@SuppressWarnings("unchecked")
+	public Stack<LambdaExpression> getFtStack() {
+		if (ftStack != null && ftStack.eIsProxy()) {
+			InternalEObject oldFtStack = (InternalEObject) ftStack;
+			ftStack = (Stack<LambdaExpression>) eResolveProxy(oldFtStack);
+			if (ftStack != oldFtStack) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE,
+							Km2ecorePackage.KM2_ECORE_CONTEXT__FT_STACK,
+							oldFtStack, ftStack));
+			}
+		}
+		return ftStack;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Stack<LambdaExpression> basicGetFtStack() {
+		return ftStack;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setFtStack(Stack<LambdaExpression> newFtStack) {
+		Stack<LambdaExpression> oldFtStack = ftStack;
+		ftStack = newFtStack;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET,
+					Km2ecorePackage.KM2_ECORE_CONTEXT__FT_STACK, oldFtStack,
+					ftStack));
 	}
 
 	/**
@@ -2158,29 +2250,6 @@ public class KM2EcoreContextImpl extends ObjectImpl implements KM2EcoreContext {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Integer getInc_kRErrorStack() {
-		return inc_kRErrorStack;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setInc_kRErrorStack(Integer newInc_kRErrorStack) {
-		Integer oldInc_kRErrorStack = inc_kRErrorStack;
-		inc_kRErrorStack = newInc_kRErrorStack;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET,
-					Km2ecorePackage.KM2_ECORE_CONTEXT__INC_KR_ERROR_STACK,
-					oldInc_kRErrorStack, inc_kRErrorStack));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public String getFUNCTION_TYPE_COMPILATION_TASK() {
 		return functioN_TYPE_COMPILATION_TASK;
 	}
@@ -2201,6 +2270,29 @@ public class KM2EcoreContextImpl extends ObjectImpl implements KM2EcoreContext {
 					Km2ecorePackage.KM2_ECORE_CONTEXT__FUNCTION_TYPE_COMPILATION_TASK,
 					oldFUNCTION_TYPE_COMPILATION_TASK,
 					functioN_TYPE_COMPILATION_TASK));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Integer getInc_kRErrorStack() {
+		return inc_kRErrorStack;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setInc_kRErrorStack(Integer newInc_kRErrorStack) {
+		Integer oldInc_kRErrorStack = inc_kRErrorStack;
+		inc_kRErrorStack = newInc_kRErrorStack;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET,
+					Km2ecorePackage.KM2_ECORE_CONTEXT__INC_KR_ERROR_STACK,
+					oldInc_kRErrorStack, inc_kRErrorStack));
 	}
 
 	/**
@@ -2458,13 +2550,13 @@ public class KM2EcoreContextImpl extends ObjectImpl implements KM2EcoreContext {
 
 		java.lang.String result = null;
 
-		java.lang.Boolean idIfCond_1040 = false;
-		idIfCond_1040 = kermeta.standard.helper.BooleanWrapper.and(this
+		java.lang.Boolean idIfCond_5 = false;
+		idIfCond_5 = kermeta.standard.helper.BooleanWrapper.and(this
 				.getFtSuffixActivation(),
 				kermeta.standard.helper.IntegerWrapper.isGreater(this
 						.getFtSuffix().size(), 0));
 
-		if (idIfCond_1040) {
+		if (idIfCond_5) {
 
 			result = kermeta.standard.helper.StringWrapper.plus("_lbdExp", this
 					.getFtSuffix().peek());
@@ -2488,11 +2580,11 @@ public class KM2EcoreContextImpl extends ObjectImpl implements KM2EcoreContext {
 
 		result = "";
 
-		java.lang.Boolean idIfCond_1041 = false;
-		idIfCond_1041 = kermeta.standard.helper.IntegerWrapper.isGreater(this
+		java.lang.Boolean idIfCond_6 = false;
+		idIfCond_6 = kermeta.standard.helper.IntegerWrapper.isGreater(this
 				.getResultLastStatementStack().size(), 0);
 
-		if (idIfCond_1041) {
+		if (idIfCond_6) {
 
 			kermeta.standard.OrderedSet<java.lang.String> str_set = kermeta.standard.helper.StringWrapper
 					.split(this.getResultLastStatementStack().peek(), this
@@ -2502,6 +2594,22 @@ public class KM2EcoreContextImpl extends ObjectImpl implements KM2EcoreContext {
 		}
 
 		return result;
+
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void pushFtSuffix() {
+
+		this.setInc_ftSuffix(kermeta.standard.helper.IntegerWrapper.plus(this
+				.getInc_ftSuffix(), 1));
+
+		this.getFtSuffix().push(
+				kermeta.standard.helper.IntegerWrapper.toString(this
+						.getInc_ftSuffix()));
 
 	}
 
@@ -2521,7 +2629,15 @@ public class KM2EcoreContextImpl extends ObjectImpl implements KM2EcoreContext {
 				.setCOLLECTION_UTIL_CLASS("org.kermeta.compil.runtime.helper.basetypes.CollectionUtil");
 
 		this
+				.setOBJECT_UTIL_CLASS("org.kermeta.compil.runtime.helper.language.ObjectUtil");
+
+		this
 				.setJAVA_CLASS_EXECUTION_CONTEXT("org.kermeta.compil.runtime.ExecutionContext");
+
+		this
+				.setJAVA_INSTANCE_EXECUTION_CONTEXT(kermeta.standard.helper.StringWrapper
+						.plus(this.getJAVA_CLASS_EXECUTION_CONTEXT(),
+								".getInstance()"));
 
 		this
 				.setNOT_EVALUATED_MESSAGE("//FIXME This statement cannot be evaluated without an assignment: ");
@@ -2553,29 +2669,13 @@ public class KM2EcoreContextImpl extends ObjectImpl implements KM2EcoreContext {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void pushFtSuffix() {
-
-		this.setInc_ftSuffix(kermeta.standard.helper.IntegerWrapper.plus(this
-				.getInc_ftSuffix(), 1));
-
-		this.getFtSuffix().push(
-				kermeta.standard.helper.IntegerWrapper.toString(this
-						.getInc_ftSuffix()));
-
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public void popResultLastStatementStack() {
 
-		java.lang.Boolean idIfCond_1042 = false;
-		idIfCond_1042 = kermeta.standard.helper.IntegerWrapper.isGreater(this
+		java.lang.Boolean idIfCond_7 = false;
+		idIfCond_7 = kermeta.standard.helper.IntegerWrapper.isGreater(this
 				.getResultLastStatementStack().size(), 0);
 
-		if (idIfCond_1042) {
+		if (idIfCond_7) {
 
 			this.setInc_resultLastStatementStack(this
 					.getInc_resultLastStatementStack());
@@ -2705,13 +2805,13 @@ public class KM2EcoreContextImpl extends ObjectImpl implements KM2EcoreContext {
 
 		java.lang.String result = null;
 
-		java.lang.Boolean idIfCond_1043 = false;
-		idIfCond_1043 = kermeta.standard.helper.BooleanWrapper.and(this
+		java.lang.Boolean idIfCond_8 = false;
+		idIfCond_8 = kermeta.standard.helper.BooleanWrapper.and(this
 				.getFtSuffixActivation(),
 				kermeta.standard.helper.IntegerWrapper.isGreater(this
 						.getFtSuffix().size(), 0));
 
-		if (idIfCond_1043) {
+		if (idIfCond_8) {
 
 			result = kermeta.standard.helper.StringWrapper.plus("_ft", this
 					.getFtSuffix().peek());
@@ -2844,8 +2944,8 @@ public class KM2EcoreContextImpl extends ObjectImpl implements KM2EcoreContext {
 										.getMetaClass(
 												"kermeta.language.structure.ModelingUnit"))));
 
-		java.lang.Boolean idIfCond_1044 = false;
-		idIfCond_1044 = kermeta.standard.helper.BooleanWrapper
+		java.lang.Boolean idIfCond_9 = false;
+		idIfCond_9 = kermeta.standard.helper.BooleanWrapper
 				.and(
 						kermeta.standard.helper.BooleanWrapper
 								.not(org.kermeta.compil.runtime.helper.language.ObjectUtil
@@ -2853,7 +2953,7 @@ public class KM2EcoreContextImpl extends ObjectImpl implements KM2EcoreContext {
 						org.kermeta.compil.runtime.helper.language.ObjectUtil
 								.isNotEqualSwitcher(traceInput, ""));
 
-		if (idIfCond_1044) {
+		if (idIfCond_9) {
 
 			kermeta.persistence.Resource traceResource = this
 					.getInputRepository().createResource(traceInput,
@@ -2894,11 +2994,11 @@ public class KM2EcoreContextImpl extends ObjectImpl implements KM2EcoreContext {
 
 		result = "";
 
-		java.lang.Boolean idIfCond_1045 = false;
-		idIfCond_1045 = kermeta.standard.helper.IntegerWrapper.isGreater(this
+		java.lang.Boolean idIfCond_10 = false;
+		idIfCond_10 = kermeta.standard.helper.IntegerWrapper.isGreater(this
 				.getResultLastStatementStack().size(), 0);
 
-		if (idIfCond_1045) {
+		if (idIfCond_10) {
 
 			kermeta.standard.OrderedSet<java.lang.String> str_set = kermeta.standard.helper.StringWrapper
 					.split(this.getResultLastStatementStack().peek(), this
@@ -2919,6 +3019,8 @@ public class KM2EcoreContextImpl extends ObjectImpl implements KM2EcoreContext {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
+		case Km2ecorePackage.KM2_ECORE_CONTEXT__JAVA_INSTANCE_EXECUTION_CONTEXT:
+			return getJAVA_INSTANCE_EXECUTION_CONTEXT();
 		case Km2ecorePackage.KM2_ECORE_CONTEXT__JAVA_KEY_WORD_LIST:
 			if (resolve)
 				return getJavaKeyWordList();
@@ -2959,16 +3061,16 @@ public class KM2EcoreContextImpl extends ObjectImpl implements KM2EcoreContext {
 			if (resolve)
 				return getFtSuffix();
 			return basicGetFtSuffix();
-		case Km2ecorePackage.KM2_ECORE_CONTEXT__INC_COND_STACK:
-			return getInc_condStack();
 		case Km2ecorePackage.KM2_ECORE_CONTEXT__BEFORE_FUNCTION_TYPE_RESULT:
 			return getBeforeFunctionTypeResult();
-		case Km2ecorePackage.KM2_ECORE_CONTEXT__JAVA_SEPARATOR:
-			return getJAVA_SEPARATOR();
+		case Km2ecorePackage.KM2_ECORE_CONTEXT__INC_COND_STACK:
+			return getInc_condStack();
 		case Km2ecorePackage.KM2_ECORE_CONTEXT__FT_MAP_TYPE_STACK:
 			if (resolve)
 				return getFtMapTypeStack();
 			return basicGetFtMapTypeStack();
+		case Km2ecorePackage.KM2_ECORE_CONTEXT__JAVA_SEPARATOR:
+			return getJAVA_SEPARATOR();
 		case Km2ecorePackage.KM2_ECORE_CONTEXT__SIMK_MODEL:
 			if (resolve)
 				return getSimkModel();
@@ -2991,6 +3093,8 @@ public class KM2EcoreContextImpl extends ObjectImpl implements KM2EcoreContext {
 			return getJAVA_CLASS_EXECUTION_CONTEXT();
 		case Km2ecorePackage.KM2_ECORE_CONTEXT__FT_RETURN_TYPE:
 			return getFtReturnType();
+		case Km2ecorePackage.KM2_ECORE_CONTEXT__OBJECT_UTIL_CLASS:
+			return getOBJECT_UTIL_CLASS();
 		case Km2ecorePackage.KM2_ECORE_CONTEXT__VARIABLE_EXCEPTION_SWITCHER:
 			return getVARIABLE_EXCEPTION_SWITCHER();
 		case Km2ecorePackage.KM2_ECORE_CONTEXT__FT_SUFFIX_ACTIVATION:
@@ -3003,24 +3107,24 @@ public class KM2EcoreContextImpl extends ObjectImpl implements KM2EcoreContext {
 			return getRETURN_EXPRESSION_TO_REPLACE_SPECIAL();
 		case Km2ecorePackage.KM2_ECORE_CONTEXT__INC_RESULT_LAST_STATEMENT_STACK:
 			return getInc_resultLastStatementStack();
-		case Km2ecorePackage.KM2_ECORE_CONTEXT__RETURN_EXPRESSION_TO_REPLACE:
-			return getRETURN_EXPRESSION_TO_REPLACE();
 		case Km2ecorePackage.KM2_ECORE_CONTEXT__VALUE_TYPE_MAPPING:
 			return getValueTypeMapping();
+		case Km2ecorePackage.KM2_ECORE_CONTEXT__RETURN_EXPRESSION_TO_REPLACE:
+			return getRETURN_EXPRESSION_TO_REPLACE();
 		case Km2ecorePackage.KM2_ECORE_CONTEXT__MODE:
 			return getMode();
 		case Km2ecorePackage.KM2_ECORE_CONTEXT__STATIC_OPERATION_MODE:
 			return getStaticOperationMode();
 		case Km2ecorePackage.KM2_ECORE_CONTEXT__KM_INPUT:
 			return getKmInput();
-		case Km2ecorePackage.KM2_ECORE_CONTEXT__FT_STACK:
-			if (resolve)
-				return getFtStack();
-			return basicGetFtStack();
 		case Km2ecorePackage.KM2_ECORE_CONTEXT__COND_STACK:
 			if (resolve)
 				return getCondStack();
 			return basicGetCondStack();
+		case Km2ecorePackage.KM2_ECORE_CONTEXT__FT_STACK:
+			if (resolve)
+				return getFtStack();
+			return basicGetFtStack();
 		case Km2ecorePackage.KM2_ECORE_CONTEXT__ECORE_OUTPUTS:
 			return getEcoreOutputs();
 		case Km2ecorePackage.KM2_ECORE_CONTEXT__SIMK_OUTPUT:
@@ -3029,10 +3133,10 @@ public class KM2EcoreContextImpl extends ObjectImpl implements KM2EcoreContext {
 			return getJAVA_CLASS_EXCEPTION_SWITCHER();
 		case Km2ecorePackage.KM2_ECORE_CONTEXT__AFTER_LBD_EXP_ACTIVATION:
 			return getAfterLbdExpActivation();
-		case Km2ecorePackage.KM2_ECORE_CONTEXT__INC_KR_ERROR_STACK:
-			return getInc_kRErrorStack();
 		case Km2ecorePackage.KM2_ECORE_CONTEXT__FUNCTION_TYPE_COMPILATION_TASK:
 			return getFUNCTION_TYPE_COMPILATION_TASK();
+		case Km2ecorePackage.KM2_ECORE_CONTEXT__INC_KR_ERROR_STACK:
+			return getInc_kRErrorStack();
 		case Km2ecorePackage.KM2_ECORE_CONTEXT__TRACEABILITY_INPUT:
 			return getTraceabilityInput();
 		case Km2ecorePackage.KM2_ECORE_CONTEXT__TASKS_STACK:
@@ -3062,6 +3166,9 @@ public class KM2EcoreContextImpl extends ObjectImpl implements KM2EcoreContext {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
+		case Km2ecorePackage.KM2_ECORE_CONTEXT__JAVA_INSTANCE_EXECUTION_CONTEXT:
+			setJAVA_INSTANCE_EXECUTION_CONTEXT((String) newValue);
+			return;
 		case Km2ecorePackage.KM2_ECORE_CONTEXT__JAVA_KEY_WORD_LIST:
 			setJavaKeyWordList((JavaKeyWordList) newValue);
 			return;
@@ -3103,17 +3210,17 @@ public class KM2EcoreContextImpl extends ObjectImpl implements KM2EcoreContext {
 		case Km2ecorePackage.KM2_ECORE_CONTEXT__FT_SUFFIX:
 			setFtSuffix((Stack<String>) newValue);
 			return;
-		case Km2ecorePackage.KM2_ECORE_CONTEXT__INC_COND_STACK:
-			setInc_condStack((Integer) newValue);
-			return;
 		case Km2ecorePackage.KM2_ECORE_CONTEXT__BEFORE_FUNCTION_TYPE_RESULT:
 			setBeforeFunctionTypeResult((String) newValue);
 			return;
-		case Km2ecorePackage.KM2_ECORE_CONTEXT__JAVA_SEPARATOR:
-			setJAVA_SEPARATOR((String) newValue);
+		case Km2ecorePackage.KM2_ECORE_CONTEXT__INC_COND_STACK:
+			setInc_condStack((Integer) newValue);
 			return;
 		case Km2ecorePackage.KM2_ECORE_CONTEXT__FT_MAP_TYPE_STACK:
 			setFtMapTypeStack((Stack<Hashtable<Type, Type>>) newValue);
+			return;
+		case Km2ecorePackage.KM2_ECORE_CONTEXT__JAVA_SEPARATOR:
+			setJAVA_SEPARATOR((String) newValue);
 			return;
 		case Km2ecorePackage.KM2_ECORE_CONTEXT__SIMK_MODEL:
 			setSimkModel((SIMKModel) newValue);
@@ -3139,6 +3246,9 @@ public class KM2EcoreContextImpl extends ObjectImpl implements KM2EcoreContext {
 		case Km2ecorePackage.KM2_ECORE_CONTEXT__FT_RETURN_TYPE:
 			setFtReturnType((String) newValue);
 			return;
+		case Km2ecorePackage.KM2_ECORE_CONTEXT__OBJECT_UTIL_CLASS:
+			setOBJECT_UTIL_CLASS((String) newValue);
+			return;
 		case Km2ecorePackage.KM2_ECORE_CONTEXT__VARIABLE_EXCEPTION_SWITCHER:
 			setVARIABLE_EXCEPTION_SWITCHER((String) newValue);
 			return;
@@ -3154,13 +3264,13 @@ public class KM2EcoreContextImpl extends ObjectImpl implements KM2EcoreContext {
 		case Km2ecorePackage.KM2_ECORE_CONTEXT__INC_RESULT_LAST_STATEMENT_STACK:
 			setInc_resultLastStatementStack((Integer) newValue);
 			return;
-		case Km2ecorePackage.KM2_ECORE_CONTEXT__RETURN_EXPRESSION_TO_REPLACE:
-			setRETURN_EXPRESSION_TO_REPLACE((String) newValue);
-			return;
 		case Km2ecorePackage.KM2_ECORE_CONTEXT__VALUE_TYPE_MAPPING:
 			getValueTypeMapping().clear();
 			getValueTypeMapping().addAll(
 					(Collection<? extends String>) newValue);
+			return;
+		case Km2ecorePackage.KM2_ECORE_CONTEXT__RETURN_EXPRESSION_TO_REPLACE:
+			setRETURN_EXPRESSION_TO_REPLACE((String) newValue);
 			return;
 		case Km2ecorePackage.KM2_ECORE_CONTEXT__MODE:
 			setMode((CompilingMode) newValue);
@@ -3171,11 +3281,11 @@ public class KM2EcoreContextImpl extends ObjectImpl implements KM2EcoreContext {
 		case Km2ecorePackage.KM2_ECORE_CONTEXT__KM_INPUT:
 			setKmInput((String) newValue);
 			return;
-		case Km2ecorePackage.KM2_ECORE_CONTEXT__FT_STACK:
-			setFtStack((Stack<LambdaExpression>) newValue);
-			return;
 		case Km2ecorePackage.KM2_ECORE_CONTEXT__COND_STACK:
 			setCondStack((Stack<String>) newValue);
+			return;
+		case Km2ecorePackage.KM2_ECORE_CONTEXT__FT_STACK:
+			setFtStack((Stack<LambdaExpression>) newValue);
 			return;
 		case Km2ecorePackage.KM2_ECORE_CONTEXT__ECORE_OUTPUTS:
 			getEcoreOutputs().clear();
@@ -3190,11 +3300,11 @@ public class KM2EcoreContextImpl extends ObjectImpl implements KM2EcoreContext {
 		case Km2ecorePackage.KM2_ECORE_CONTEXT__AFTER_LBD_EXP_ACTIVATION:
 			setAfterLbdExpActivation((Boolean) newValue);
 			return;
-		case Km2ecorePackage.KM2_ECORE_CONTEXT__INC_KR_ERROR_STACK:
-			setInc_kRErrorStack((Integer) newValue);
-			return;
 		case Km2ecorePackage.KM2_ECORE_CONTEXT__FUNCTION_TYPE_COMPILATION_TASK:
 			setFUNCTION_TYPE_COMPILATION_TASK((String) newValue);
+			return;
+		case Km2ecorePackage.KM2_ECORE_CONTEXT__INC_KR_ERROR_STACK:
+			setInc_kRErrorStack((Integer) newValue);
 			return;
 		case Km2ecorePackage.KM2_ECORE_CONTEXT__TRACEABILITY_INPUT:
 			setTraceabilityInput((String) newValue);
@@ -3226,6 +3336,9 @@ public class KM2EcoreContextImpl extends ObjectImpl implements KM2EcoreContext {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
+		case Km2ecorePackage.KM2_ECORE_CONTEXT__JAVA_INSTANCE_EXECUTION_CONTEXT:
+			setJAVA_INSTANCE_EXECUTION_CONTEXT(JAVA_INSTANCE_EXECUTION_CONTEXT_EDEFAULT);
+			return;
 		case Km2ecorePackage.KM2_ECORE_CONTEXT__JAVA_KEY_WORD_LIST:
 			setJavaKeyWordList((JavaKeyWordList) null);
 			return;
@@ -3265,17 +3378,17 @@ public class KM2EcoreContextImpl extends ObjectImpl implements KM2EcoreContext {
 		case Km2ecorePackage.KM2_ECORE_CONTEXT__FT_SUFFIX:
 			setFtSuffix((Stack<String>) null);
 			return;
-		case Km2ecorePackage.KM2_ECORE_CONTEXT__INC_COND_STACK:
-			setInc_condStack(INC_COND_STACK_EDEFAULT);
-			return;
 		case Km2ecorePackage.KM2_ECORE_CONTEXT__BEFORE_FUNCTION_TYPE_RESULT:
 			setBeforeFunctionTypeResult(BEFORE_FUNCTION_TYPE_RESULT_EDEFAULT);
 			return;
-		case Km2ecorePackage.KM2_ECORE_CONTEXT__JAVA_SEPARATOR:
-			setJAVA_SEPARATOR(JAVA_SEPARATOR_EDEFAULT);
+		case Km2ecorePackage.KM2_ECORE_CONTEXT__INC_COND_STACK:
+			setInc_condStack(INC_COND_STACK_EDEFAULT);
 			return;
 		case Km2ecorePackage.KM2_ECORE_CONTEXT__FT_MAP_TYPE_STACK:
 			setFtMapTypeStack((Stack<Hashtable<Type, Type>>) null);
+			return;
+		case Km2ecorePackage.KM2_ECORE_CONTEXT__JAVA_SEPARATOR:
+			setJAVA_SEPARATOR(JAVA_SEPARATOR_EDEFAULT);
 			return;
 		case Km2ecorePackage.KM2_ECORE_CONTEXT__SIMK_MODEL:
 			setSimkModel((SIMKModel) null);
@@ -3301,6 +3414,9 @@ public class KM2EcoreContextImpl extends ObjectImpl implements KM2EcoreContext {
 		case Km2ecorePackage.KM2_ECORE_CONTEXT__FT_RETURN_TYPE:
 			setFtReturnType(FT_RETURN_TYPE_EDEFAULT);
 			return;
+		case Km2ecorePackage.KM2_ECORE_CONTEXT__OBJECT_UTIL_CLASS:
+			setOBJECT_UTIL_CLASS(OBJECT_UTIL_CLASS_EDEFAULT);
+			return;
 		case Km2ecorePackage.KM2_ECORE_CONTEXT__VARIABLE_EXCEPTION_SWITCHER:
 			setVARIABLE_EXCEPTION_SWITCHER(VARIABLE_EXCEPTION_SWITCHER_EDEFAULT);
 			return;
@@ -3316,11 +3432,11 @@ public class KM2EcoreContextImpl extends ObjectImpl implements KM2EcoreContext {
 		case Km2ecorePackage.KM2_ECORE_CONTEXT__INC_RESULT_LAST_STATEMENT_STACK:
 			setInc_resultLastStatementStack(INC_RESULT_LAST_STATEMENT_STACK_EDEFAULT);
 			return;
-		case Km2ecorePackage.KM2_ECORE_CONTEXT__RETURN_EXPRESSION_TO_REPLACE:
-			setRETURN_EXPRESSION_TO_REPLACE(RETURN_EXPRESSION_TO_REPLACE_EDEFAULT);
-			return;
 		case Km2ecorePackage.KM2_ECORE_CONTEXT__VALUE_TYPE_MAPPING:
 			getValueTypeMapping().clear();
+			return;
+		case Km2ecorePackage.KM2_ECORE_CONTEXT__RETURN_EXPRESSION_TO_REPLACE:
+			setRETURN_EXPRESSION_TO_REPLACE(RETURN_EXPRESSION_TO_REPLACE_EDEFAULT);
 			return;
 		case Km2ecorePackage.KM2_ECORE_CONTEXT__MODE:
 			setMode(MODE_EDEFAULT);
@@ -3331,11 +3447,11 @@ public class KM2EcoreContextImpl extends ObjectImpl implements KM2EcoreContext {
 		case Km2ecorePackage.KM2_ECORE_CONTEXT__KM_INPUT:
 			setKmInput(KM_INPUT_EDEFAULT);
 			return;
-		case Km2ecorePackage.KM2_ECORE_CONTEXT__FT_STACK:
-			setFtStack((Stack<LambdaExpression>) null);
-			return;
 		case Km2ecorePackage.KM2_ECORE_CONTEXT__COND_STACK:
 			setCondStack((Stack<String>) null);
+			return;
+		case Km2ecorePackage.KM2_ECORE_CONTEXT__FT_STACK:
+			setFtStack((Stack<LambdaExpression>) null);
 			return;
 		case Km2ecorePackage.KM2_ECORE_CONTEXT__ECORE_OUTPUTS:
 			getEcoreOutputs().clear();
@@ -3349,11 +3465,11 @@ public class KM2EcoreContextImpl extends ObjectImpl implements KM2EcoreContext {
 		case Km2ecorePackage.KM2_ECORE_CONTEXT__AFTER_LBD_EXP_ACTIVATION:
 			setAfterLbdExpActivation(AFTER_LBD_EXP_ACTIVATION_EDEFAULT);
 			return;
-		case Km2ecorePackage.KM2_ECORE_CONTEXT__INC_KR_ERROR_STACK:
-			setInc_kRErrorStack(INC_KR_ERROR_STACK_EDEFAULT);
-			return;
 		case Km2ecorePackage.KM2_ECORE_CONTEXT__FUNCTION_TYPE_COMPILATION_TASK:
 			setFUNCTION_TYPE_COMPILATION_TASK(FUNCTION_TYPE_COMPILATION_TASK_EDEFAULT);
+			return;
+		case Km2ecorePackage.KM2_ECORE_CONTEXT__INC_KR_ERROR_STACK:
+			setInc_kRErrorStack(INC_KR_ERROR_STACK_EDEFAULT);
 			return;
 		case Km2ecorePackage.KM2_ECORE_CONTEXT__TRACEABILITY_INPUT:
 			setTraceabilityInput(TRACEABILITY_INPUT_EDEFAULT);
@@ -3385,6 +3501,10 @@ public class KM2EcoreContextImpl extends ObjectImpl implements KM2EcoreContext {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
+		case Km2ecorePackage.KM2_ECORE_CONTEXT__JAVA_INSTANCE_EXECUTION_CONTEXT:
+			return JAVA_INSTANCE_EXECUTION_CONTEXT_EDEFAULT == null ? javA_INSTANCE_EXECUTION_CONTEXT != null
+					: !JAVA_INSTANCE_EXECUTION_CONTEXT_EDEFAULT
+							.equals(javA_INSTANCE_EXECUTION_CONTEXT);
 		case Km2ecorePackage.KM2_ECORE_CONTEXT__JAVA_KEY_WORD_LIST:
 			return javaKeyWordList != null;
 		case Km2ecorePackage.KM2_ECORE_CONTEXT__TRACE_MODEL:
@@ -3420,18 +3540,18 @@ public class KM2EcoreContextImpl extends ObjectImpl implements KM2EcoreContext {
 			return current_valueType != null;
 		case Km2ecorePackage.KM2_ECORE_CONTEXT__FT_SUFFIX:
 			return ftSuffix != null;
-		case Km2ecorePackage.KM2_ECORE_CONTEXT__INC_COND_STACK:
-			return INC_COND_STACK_EDEFAULT == null ? inc_condStack != null
-					: !INC_COND_STACK_EDEFAULT.equals(inc_condStack);
 		case Km2ecorePackage.KM2_ECORE_CONTEXT__BEFORE_FUNCTION_TYPE_RESULT:
 			return BEFORE_FUNCTION_TYPE_RESULT_EDEFAULT == null ? beforeFunctionTypeResult != null
 					: !BEFORE_FUNCTION_TYPE_RESULT_EDEFAULT
 							.equals(beforeFunctionTypeResult);
+		case Km2ecorePackage.KM2_ECORE_CONTEXT__INC_COND_STACK:
+			return INC_COND_STACK_EDEFAULT == null ? inc_condStack != null
+					: !INC_COND_STACK_EDEFAULT.equals(inc_condStack);
+		case Km2ecorePackage.KM2_ECORE_CONTEXT__FT_MAP_TYPE_STACK:
+			return ftMapTypeStack != null;
 		case Km2ecorePackage.KM2_ECORE_CONTEXT__JAVA_SEPARATOR:
 			return JAVA_SEPARATOR_EDEFAULT == null ? javA_SEPARATOR != null
 					: !JAVA_SEPARATOR_EDEFAULT.equals(javA_SEPARATOR);
-		case Km2ecorePackage.KM2_ECORE_CONTEXT__FT_MAP_TYPE_STACK:
-			return ftMapTypeStack != null;
 		case Km2ecorePackage.KM2_ECORE_CONTEXT__SIMK_MODEL:
 			return simkModel != null;
 		case Km2ecorePackage.KM2_ECORE_CONTEXT__FT_PRODUCT_TYPE_STACK:
@@ -3456,6 +3576,9 @@ public class KM2EcoreContextImpl extends ObjectImpl implements KM2EcoreContext {
 		case Km2ecorePackage.KM2_ECORE_CONTEXT__FT_RETURN_TYPE:
 			return FT_RETURN_TYPE_EDEFAULT == null ? ftReturnType != null
 					: !FT_RETURN_TYPE_EDEFAULT.equals(ftReturnType);
+		case Km2ecorePackage.KM2_ECORE_CONTEXT__OBJECT_UTIL_CLASS:
+			return OBJECT_UTIL_CLASS_EDEFAULT == null ? objecT_UTIL_CLASS != null
+					: !OBJECT_UTIL_CLASS_EDEFAULT.equals(objecT_UTIL_CLASS);
 		case Km2ecorePackage.KM2_ECORE_CONTEXT__VARIABLE_EXCEPTION_SWITCHER:
 			return VARIABLE_EXCEPTION_SWITCHER_EDEFAULT == null ? variablE_EXCEPTION_SWITCHER != null
 					: !VARIABLE_EXCEPTION_SWITCHER_EDEFAULT
@@ -3473,12 +3596,12 @@ public class KM2EcoreContextImpl extends ObjectImpl implements KM2EcoreContext {
 			return INC_RESULT_LAST_STATEMENT_STACK_EDEFAULT == null ? inc_resultLastStatementStack != null
 					: !INC_RESULT_LAST_STATEMENT_STACK_EDEFAULT
 							.equals(inc_resultLastStatementStack);
+		case Km2ecorePackage.KM2_ECORE_CONTEXT__VALUE_TYPE_MAPPING:
+			return valueTypeMapping != null && !valueTypeMapping.isEmpty();
 		case Km2ecorePackage.KM2_ECORE_CONTEXT__RETURN_EXPRESSION_TO_REPLACE:
 			return RETURN_EXPRESSION_TO_REPLACE_EDEFAULT == null ? returN_EXPRESSION_TO_REPLACE != null
 					: !RETURN_EXPRESSION_TO_REPLACE_EDEFAULT
 							.equals(returN_EXPRESSION_TO_REPLACE);
-		case Km2ecorePackage.KM2_ECORE_CONTEXT__VALUE_TYPE_MAPPING:
-			return valueTypeMapping != null && !valueTypeMapping.isEmpty();
 		case Km2ecorePackage.KM2_ECORE_CONTEXT__MODE:
 			return mode != MODE_EDEFAULT;
 		case Km2ecorePackage.KM2_ECORE_CONTEXT__STATIC_OPERATION_MODE:
@@ -3488,10 +3611,10 @@ public class KM2EcoreContextImpl extends ObjectImpl implements KM2EcoreContext {
 		case Km2ecorePackage.KM2_ECORE_CONTEXT__KM_INPUT:
 			return KM_INPUT_EDEFAULT == null ? kmInput != null
 					: !KM_INPUT_EDEFAULT.equals(kmInput);
-		case Km2ecorePackage.KM2_ECORE_CONTEXT__FT_STACK:
-			return ftStack != null;
 		case Km2ecorePackage.KM2_ECORE_CONTEXT__COND_STACK:
 			return condStack != null;
+		case Km2ecorePackage.KM2_ECORE_CONTEXT__FT_STACK:
+			return ftStack != null;
 		case Km2ecorePackage.KM2_ECORE_CONTEXT__ECORE_OUTPUTS:
 			return ecoreOutputs != null && !ecoreOutputs.isEmpty();
 		case Km2ecorePackage.KM2_ECORE_CONTEXT__SIMK_OUTPUT:
@@ -3505,13 +3628,13 @@ public class KM2EcoreContextImpl extends ObjectImpl implements KM2EcoreContext {
 			return AFTER_LBD_EXP_ACTIVATION_EDEFAULT == null ? afterLbdExpActivation != null
 					: !AFTER_LBD_EXP_ACTIVATION_EDEFAULT
 							.equals(afterLbdExpActivation);
-		case Km2ecorePackage.KM2_ECORE_CONTEXT__INC_KR_ERROR_STACK:
-			return INC_KR_ERROR_STACK_EDEFAULT == null ? inc_kRErrorStack != null
-					: !INC_KR_ERROR_STACK_EDEFAULT.equals(inc_kRErrorStack);
 		case Km2ecorePackage.KM2_ECORE_CONTEXT__FUNCTION_TYPE_COMPILATION_TASK:
 			return FUNCTION_TYPE_COMPILATION_TASK_EDEFAULT == null ? functioN_TYPE_COMPILATION_TASK != null
 					: !FUNCTION_TYPE_COMPILATION_TASK_EDEFAULT
 							.equals(functioN_TYPE_COMPILATION_TASK);
+		case Km2ecorePackage.KM2_ECORE_CONTEXT__INC_KR_ERROR_STACK:
+			return INC_KR_ERROR_STACK_EDEFAULT == null ? inc_kRErrorStack != null
+					: !INC_KR_ERROR_STACK_EDEFAULT.equals(inc_kRErrorStack);
 		case Km2ecorePackage.KM2_ECORE_CONTEXT__TRACEABILITY_INPUT:
 			return TRACEABILITY_INPUT_EDEFAULT == null ? traceabilityInput != null
 					: !TRACEABILITY_INPUT_EDEFAULT.equals(traceabilityInput);
@@ -3544,7 +3667,9 @@ public class KM2EcoreContextImpl extends ObjectImpl implements KM2EcoreContext {
 			return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (TYPE_SEPARATOR: ");
+		result.append(" (JAVA_INSTANCE_EXECUTION_CONTEXT: ");
+		result.append(javA_INSTANCE_EXECUTION_CONTEXT);
+		result.append(", TYPE_SEPARATOR: ");
 		result.append(typE_SEPARATOR);
 		result.append(", NOT_EVALUATED_MESSAGE: ");
 		result.append(noT_EVALUATED_MESSAGE);
@@ -3556,10 +3681,10 @@ public class KM2EcoreContextImpl extends ObjectImpl implements KM2EcoreContext {
 		result.append(collectioN_UTIL_CLASS);
 		result.append(", compiledJavaExtern: ");
 		result.append(compiledJavaExtern);
-		result.append(", inc_condStack: ");
-		result.append(inc_condStack);
 		result.append(", beforeFunctionTypeResult: ");
 		result.append(beforeFunctionTypeResult);
+		result.append(", inc_condStack: ");
+		result.append(inc_condStack);
 		result.append(", JAVA_SEPARATOR: ");
 		result.append(javA_SEPARATOR);
 		result.append(", PREVIOUS_STATEMENT_FT: ");
@@ -3572,6 +3697,8 @@ public class KM2EcoreContextImpl extends ObjectImpl implements KM2EcoreContext {
 		result.append(javA_CLASS_EXECUTION_CONTEXT);
 		result.append(", ftReturnType: ");
 		result.append(ftReturnType);
+		result.append(", OBJECT_UTIL_CLASS: ");
+		result.append(objecT_UTIL_CLASS);
 		result.append(", VARIABLE_EXCEPTION_SWITCHER: ");
 		result.append(variablE_EXCEPTION_SWITCHER);
 		result.append(", ftSuffixActivation: ");
@@ -3580,10 +3707,10 @@ public class KM2EcoreContextImpl extends ObjectImpl implements KM2EcoreContext {
 		result.append(returN_EXPRESSION_TO_REPLACE_SPECIAL);
 		result.append(", inc_resultLastStatementStack: ");
 		result.append(inc_resultLastStatementStack);
-		result.append(", RETURN_EXPRESSION_TO_REPLACE: ");
-		result.append(returN_EXPRESSION_TO_REPLACE);
 		result.append(", valueTypeMapping: ");
 		result.append(valueTypeMapping);
+		result.append(", RETURN_EXPRESSION_TO_REPLACE: ");
+		result.append(returN_EXPRESSION_TO_REPLACE);
 		result.append(", mode: ");
 		result.append(mode);
 		result.append(", staticOperationMode: ");
@@ -3598,10 +3725,10 @@ public class KM2EcoreContextImpl extends ObjectImpl implements KM2EcoreContext {
 		result.append(javA_CLASS_EXCEPTION_SWITCHER);
 		result.append(", afterLbdExpActivation: ");
 		result.append(afterLbdExpActivation);
-		result.append(", inc_kRErrorStack: ");
-		result.append(inc_kRErrorStack);
 		result.append(", FUNCTION_TYPE_COMPILATION_TASK: ");
 		result.append(functioN_TYPE_COMPILATION_TASK);
+		result.append(", inc_kRErrorStack: ");
+		result.append(inc_kRErrorStack);
 		result.append(", traceabilityInput: ");
 		result.append(traceabilityInput);
 		result.append(", SELF_EXPRESSION_TO_REPLACE: ");

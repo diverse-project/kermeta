@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ConstraintViolatedPre.java,v 1.7 2008-10-29 08:29:12 cfaucher Exp $
+ * $Id: ConstraintViolatedPre.java,v 1.8 2008-11-07 08:53:04 cfaucher Exp $
  */
 package kermeta.exceptions;
 

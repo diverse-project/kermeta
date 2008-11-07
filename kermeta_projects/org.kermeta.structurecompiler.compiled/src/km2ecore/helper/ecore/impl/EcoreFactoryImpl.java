@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: EcoreFactoryImpl.java,v 1.7 2008-10-29 08:29:28 cfaucher Exp $
+ * $Id: EcoreFactoryImpl.java,v 1.8 2008-11-07 08:54:06 cfaucher Exp $
  */
 package km2ecore.helper.ecore.impl;
 
@@ -61,14 +61,14 @@ public class EcoreFactoryImpl extends EFactoryImpl implements EcoreFactory {
 	@Override
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
-		case EcorePackage.ECORE_MODEL_ELEMENT_HELPER:
-			return createEcoreModelElementHelper();
-		case EcorePackage.MODEL_ANALIZER:
-			return createModelAnalizer();
 		case EcorePackage.EANNOTATION_HELPER:
 			return createEAnnotationHelper();
 		case EcorePackage.ENAMED_ELEMENT_HELPER:
 			return createENamedElementHelper();
+		case EcorePackage.MODEL_ANALIZER:
+			return createModelAnalizer();
+		case EcorePackage.ECORE_MODEL_ELEMENT_HELPER:
+			return createEcoreModelElementHelper();
 		default:
 			throw new IllegalArgumentException("The class '" + eClass.getName()
 					+ "' is not a valid classifier");
@@ -120,9 +120,19 @@ public class EcoreFactoryImpl extends EFactoryImpl implements EcoreFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EcoreModelElementHelper createEcoreModelElementHelper() {
-		EcoreModelElementHelperImpl ecoreModelElementHelper = new EcoreModelElementHelperImpl();
-		return ecoreModelElementHelper;
+	public EAnnotationHelper createEAnnotationHelper() {
+		EAnnotationHelperImpl eAnnotationHelper = new EAnnotationHelperImpl();
+		return eAnnotationHelper;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public ENamedElementHelper createENamedElementHelper() {
+		ENamedElementHelperImpl eNamedElementHelper = new ENamedElementHelperImpl();
+		return eNamedElementHelper;
 	}
 
 	/**
@@ -140,19 +150,9 @@ public class EcoreFactoryImpl extends EFactoryImpl implements EcoreFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAnnotationHelper createEAnnotationHelper() {
-		EAnnotationHelperImpl eAnnotationHelper = new EAnnotationHelperImpl();
-		return eAnnotationHelper;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public ENamedElementHelper createENamedElementHelper() {
-		ENamedElementHelperImpl eNamedElementHelper = new ENamedElementHelperImpl();
-		return eNamedElementHelper;
+	public EcoreModelElementHelper createEcoreModelElementHelper() {
+		EcoreModelElementHelperImpl ecoreModelElementHelper = new EcoreModelElementHelperImpl();
+		return ecoreModelElementHelper;
 	}
 
 	/**

@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ExceptionFactoryImpl.java,v 1.7 2008-10-29 08:29:19 cfaucher Exp $
+ * $Id: ExceptionFactoryImpl.java,v 1.8 2008-11-07 08:53:50 cfaucher Exp $
  */
 package km2ecore.common.exception.impl;
 

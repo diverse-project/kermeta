@@ -2,31 +2,40 @@
  * <copyright>
  * </copyright>
  *
- * $Id: PropertyImpl.java,v 1.8 2008-10-29 13:47:10 cfaucher Exp $
+ * $Id: PropertyImpl.java,v 1.9 2008-11-07 08:52:54 cfaucher Exp $
  */
 package kermeta.language.structure.impl;
 
 import ecore.EStructuralFeature;
 
+import java.util.Collection;
+
 import kermeta.language.behavior.Expression;
 
 import kermeta.language.structure.ClassDefinition;
+import kermeta.language.structure.MultiplicityElement;
+import kermeta.language.structure.NamedElement;
 import kermeta.language.structure.Property;
 import kermeta.language.structure.StructurePackage;
-import kermeta.language.structure.Traceability;
+import kermeta.language.structure.Type;
+import kermeta.language.structure.TypeContainer;
+import kermeta.language.structure.TypedElement;
 
 import km2ecore.KM2EcoreContext;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 
+import org.eclipse.emf.common.util.EList;
+
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
+import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.emf.ecore.util.InternalEList;
 
 /**
  * <!-- begin-user-doc -->
@@ -35,7 +44,13 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link kermeta.language.structure.impl.PropertyImpl#getEcoreModelElement <em>Ecore Model Element</em>}</li>
+ *   <li>{@link kermeta.language.structure.impl.PropertyImpl#getContainedType <em>Contained Type</em>}</li>
+ *   <li>{@link kermeta.language.structure.impl.PropertyImpl#getName <em>Name</em>}</li>
+ *   <li>{@link kermeta.language.structure.impl.PropertyImpl#getType <em>Type</em>}</li>
+ *   <li>{@link kermeta.language.structure.impl.PropertyImpl#getIsOrdered <em>Is Ordered</em>}</li>
+ *   <li>{@link kermeta.language.structure.impl.PropertyImpl#getUpper <em>Upper</em>}</li>
+ *   <li>{@link kermeta.language.structure.impl.PropertyImpl#getLower <em>Lower</em>}</li>
+ *   <li>{@link kermeta.language.structure.impl.PropertyImpl#getIsUnique <em>Is Unique</em>}</li>
  *   <li>{@link kermeta.language.structure.impl.PropertyImpl#get_default <em>default</em>}</li>
  *   <li>{@link kermeta.language.structure.impl.PropertyImpl#getOpposite <em>Opposite</em>}</li>
  *   <li>{@link kermeta.language.structure.impl.PropertyImpl#getIsDerived <em>Is Derived</em>}</li>
@@ -52,16 +67,127 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
  *
  * @generated
  */
-public class PropertyImpl extends MultiplicityElementImpl implements Property {
+public class PropertyImpl extends TraceabilityImpl<EStructuralFeature>
+		implements Property {
 	/**
-	 * The cached value of the '{@link #getEcoreModelElement() <em>Ecore Model Element</em>}' reference.
+	 * The cached value of the '{@link #getContainedType() <em>Contained Type</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getEcoreModelElement()
+	 * @see #getContainedType()
 	 * @generated
 	 * @ordered
 	 */
-	protected EStructuralFeature ecoreModelElement;
+	protected EList<Type> containedType;
+
+	/**
+	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getName()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String NAME_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getName()
+	 * @generated
+	 * @ordered
+	 */
+	protected String name = NAME_EDEFAULT;
+
+	/**
+	 * The cached value of the '{@link #getType() <em>Type</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getType()
+	 * @generated
+	 * @ordered
+	 */
+	protected Type type;
+
+	/**
+	 * The default value of the '{@link #getIsOrdered() <em>Is Ordered</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getIsOrdered()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final Boolean IS_ORDERED_EDEFAULT = Boolean.FALSE;
+
+	/**
+	 * The cached value of the '{@link #getIsOrdered() <em>Is Ordered</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getIsOrdered()
+	 * @generated
+	 * @ordered
+	 */
+	protected Boolean isOrdered = IS_ORDERED_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getUpper() <em>Upper</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getUpper()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final Integer UPPER_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getUpper() <em>Upper</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getUpper()
+	 * @generated
+	 * @ordered
+	 */
+	protected Integer upper = UPPER_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getLower() <em>Lower</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getLower()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final Integer LOWER_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getLower() <em>Lower</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getLower()
+	 * @generated
+	 * @ordered
+	 */
+	protected Integer lower = LOWER_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getIsUnique() <em>Is Unique</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getIsUnique()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final Boolean IS_UNIQUE_EDEFAULT = Boolean.TRUE;
+
+	/**
+	 * The cached value of the '{@link #getIsUnique() <em>Is Unique</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getIsUnique()
+	 * @generated
+	 * @ordered
+	 */
+	protected Boolean isUnique = IS_UNIQUE_EDEFAULT;
 
 	/**
 	 * The default value of the '{@link #get_default() <em>default</em>}' attribute.
@@ -257,19 +383,14 @@ public class PropertyImpl extends MultiplicityElementImpl implements Property {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EStructuralFeature getEcoreModelElement() {
-		if (ecoreModelElement != null
-				&& ((EObject) ecoreModelElement).eIsProxy()) {
-			InternalEObject oldEcoreModelElement = (InternalEObject) ecoreModelElement;
-			ecoreModelElement = (EStructuralFeature) eResolveProxy(oldEcoreModelElement);
-			if (ecoreModelElement != oldEcoreModelElement) {
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE,
-							StructurePackage.PROPERTY__ECORE_MODEL_ELEMENT,
-							oldEcoreModelElement, ecoreModelElement));
-			}
+	public EList<Type> getContainedType() {
+		if (containedType == null) {
+			containedType = new EObjectContainmentWithInverseEList.Resolving<Type>(
+					Type.class, this,
+					StructurePackage.PROPERTY__CONTAINED_TYPE,
+					StructurePackage.TYPE__TYPE_CONTAINER);
 		}
-		return ecoreModelElement;
+		return containedType;
 	}
 
 	/**
@@ -277,8 +398,8 @@ public class PropertyImpl extends MultiplicityElementImpl implements Property {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EStructuralFeature basicGetEcoreModelElement() {
-		return ecoreModelElement;
+	public String getName() {
+		return name;
 	}
 
 	/**
@@ -286,13 +407,141 @@ public class PropertyImpl extends MultiplicityElementImpl implements Property {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setEcoreModelElement(EStructuralFeature newEcoreModelElement) {
-		EStructuralFeature oldEcoreModelElement = ecoreModelElement;
-		ecoreModelElement = newEcoreModelElement;
+	public void setName(String newName) {
+		String oldName = name;
+		name = newName;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET,
-					StructurePackage.PROPERTY__ECORE_MODEL_ELEMENT,
-					oldEcoreModelElement, ecoreModelElement));
+					StructurePackage.PROPERTY__NAME, oldName, name));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Type getType() {
+		if (type != null && type.eIsProxy()) {
+			InternalEObject oldType = (InternalEObject) type;
+			type = (Type) eResolveProxy(oldType);
+			if (type != oldType) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE,
+							StructurePackage.PROPERTY__TYPE, oldType, type));
+			}
+		}
+		return type;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Type basicGetType() {
+		return type;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setType(Type newType) {
+		Type oldType = type;
+		type = newType;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET,
+					StructurePackage.PROPERTY__TYPE, oldType, type));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Boolean getIsOrdered() {
+		return isOrdered;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setIsOrdered(Boolean newIsOrdered) {
+		Boolean oldIsOrdered = isOrdered;
+		isOrdered = newIsOrdered;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET,
+					StructurePackage.PROPERTY__IS_ORDERED, oldIsOrdered,
+					isOrdered));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Integer getUpper() {
+		return upper;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setUpper(Integer newUpper) {
+		Integer oldUpper = upper;
+		upper = newUpper;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET,
+					StructurePackage.PROPERTY__UPPER, oldUpper, upper));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Integer getLower() {
+		return lower;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setLower(Integer newLower) {
+		Integer oldLower = lower;
+		lower = newLower;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET,
+					StructurePackage.PROPERTY__LOWER, oldLower, lower));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Boolean getIsUnique() {
+		return isUnique;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setIsUnique(Boolean newIsUnique) {
+		Boolean oldIsUnique = isUnique;
+		isUnique = newIsUnique;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET,
+					StructurePackage.PROPERTY__IS_UNIQUE, oldIsUnique, isUnique));
 	}
 
 	/**
@@ -747,13 +996,13 @@ public class PropertyImpl extends MultiplicityElementImpl implements Property {
 
 		java.lang.String javaCode = "";
 
-		java.lang.Boolean idIfCond_192 = false;
-		idIfCond_192 = this.getIsDerived();
+		java.lang.Boolean idIfCond_265 = false;
+		idIfCond_265 = this.getIsDerived();
 
-		if (idIfCond_192) {
+		if (idIfCond_265) {
 
-			java.lang.Boolean idIfCond_193 = false;
-			idIfCond_193 = kermeta.standard.helper.BooleanWrapper
+			java.lang.Boolean idIfCond_266 = false;
+			idIfCond_266 = kermeta.standard.helper.BooleanWrapper
 					.and(
 							kermeta.standard.helper.BooleanWrapper.not(this
 									.getIsReadOnly()),
@@ -762,7 +1011,7 @@ public class PropertyImpl extends MultiplicityElementImpl implements Property {
 											.isVoidSwitcher(this
 													.getSetterBody())));
 
-			if (idIfCond_193) {
+			if (idIfCond_266) {
 
 				javaCode = this.getSetterBody().createBehaviorJava(context);
 
@@ -811,10 +1060,10 @@ public class PropertyImpl extends MultiplicityElementImpl implements Property {
 
 			java.lang.String type_label = "";
 
-			java.lang.Boolean idIfCond_194 = false;
-			idIfCond_194 = context.getFtSuffixActivation();
+			java.lang.Boolean idIfCond_267 = false;
+			idIfCond_267 = context.getFtSuffixActivation();
 
-			if (idIfCond_194) {
+			if (idIfCond_267) {
 
 				type_label = context.getFtReturnType();
 
@@ -826,13 +1075,13 @@ public class PropertyImpl extends MultiplicityElementImpl implements Property {
 						.ppTypeFromMultiplicityElement(this, context);
 			}
 
-			java.lang.Boolean idIfCond_195 = false;
-			idIfCond_195 = kermeta.standard.helper.BooleanWrapper
+			java.lang.Boolean idIfCond_268 = false;
+			idIfCond_268 = kermeta.standard.helper.BooleanWrapper
 					.not(((kermeta.language.structure.Operation) org.kermeta.compil.runtime.helper.language.ClassUtil
 							.newObject("kermeta.language.structure.Operation"))
 							.isVoidType(type_label));
 
-			if (idIfCond_195) {
+			if (idIfCond_268) {
 
 				javaCode = kermeta.standard.helper.StringWrapper
 						.plus(
@@ -852,12 +1101,12 @@ public class PropertyImpl extends MultiplicityElementImpl implements Property {
 								" = null;\n");
 			}
 
-			java.lang.Boolean idIfCond_196 = false;
-			idIfCond_196 = kermeta.standard.helper.BooleanWrapper
+			java.lang.Boolean idIfCond_269 = false;
+			idIfCond_269 = kermeta.standard.helper.BooleanWrapper
 					.not(org.kermeta.compil.runtime.helper.language.ObjectUtil
 							.isVoidSwitcher(this.getGetterBody()));
 
-			if (idIfCond_196) {
+			if (idIfCond_269) {
 
 				javaCode = kermeta.standard.helper.StringWrapper.plus(javaCode,
 						this.getGetterBody().createBehaviorJava(context));
@@ -938,8 +1187,11 @@ public class PropertyImpl extends MultiplicityElementImpl implements Property {
 
 		kermeta.language.structure.ClassDefinition c = null;
 
-		c = (kermeta.language.structure.ClassDefinition) org.kermeta.compil.runtime.helper.language.ObjectUtil
-				.containerSwitcher(this);
+		c = (kermeta.language.structure.ClassDefinition) org.kermeta.compil.runtime.ExecutionContext
+				.getInstance()
+				.<kermeta.language.structure.ClassDefinition> asTypeOrVoid(
+						org.kermeta.compil.runtime.helper.language.ObjectUtil
+								.containerSwitcher(this));
 
 		org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
 				.<ecore.EStructuralFeature> convertAsOrderedSet(
@@ -954,22 +1206,23 @@ public class PropertyImpl extends MultiplicityElementImpl implements Property {
 
 		{
 
-			kermeta.standard.Iterator<kermeta.language.structure.Tag> it_ft67 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
+			kermeta.standard.Iterator<kermeta.language.structure.Tag> it_ft101 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
 					.<kermeta.language.structure.Tag> convertAsOrderedSet(
 							this.getOwnedTags()).iterator();
-			java.lang.Boolean idLoopCond_197 = false;
-			while (!idLoopCond_197) {
-				idLoopCond_197 = it_ft67.isOff();
-				if (idLoopCond_197) {
+			java.lang.Boolean idLoopCond_270 = false;
+			while (!idLoopCond_270) {
+				idLoopCond_270 = it_ft101.isOff();
+				if (idLoopCond_270) {
 				} else {
 
 					//BIle:func
-					kermeta.language.structure.Tag o_lbdExp67 = it_ft67.next();
+					kermeta.language.structure.Tag o_lbdExp101 = it_ft101
+							.next();
 
 					//BIle:func
-					kermeta.language.structure.Tag o_lbdExp66 = o_lbdExp67;
+					kermeta.language.structure.Tag o_lbdExp100 = o_lbdExp101;
 
-					o_lbdExp66.applyPass1(context);
+					o_lbdExp100.applyPass1(context);
 					//EIle:func
 
 					//EIle:func
@@ -981,6 +1234,113 @@ public class PropertyImpl extends MultiplicityElementImpl implements Property {
 		//EIft:each
 
 		//EIft:eachOwnedElement
+
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EStructuralFeature createEcoreModelElement(KM2EcoreContext context) {
+
+		ecore.EStructuralFeature result = null;
+
+		ecore.EStructuralFeature ecoreStructuralFeature = null;
+
+		kermeta.language.structure.Type current_type = ((kermeta.language.structure.Type) org.kermeta.compil.runtime.helper.language.ObjectUtil
+				.asTypeSwitcher(this.getType(),
+						org.kermeta.compil.runtime.ExecutionContext
+								.getInstance().getMetaClass(
+										"kermeta.language.structure.Type")));
+
+		java.lang.Boolean idIfCond_271 = false;
+		idIfCond_271 = kermeta.standard.helper.BooleanWrapper.or(
+				kermeta.standard.helper.BooleanWrapper.or(current_type
+						.isValueType(), current_type.isEnumeration()),
+				current_type.isEDataType());
+
+		if (idIfCond_271) {
+
+			ecoreStructuralFeature = ((ecore.EAttribute) org.kermeta.compil.runtime.helper.language.ClassUtil
+					.newObject("ecore.EAttribute"));
+		} else {
+
+			ecoreStructuralFeature = ((ecore.EReference) org.kermeta.compil.runtime.helper.language.ClassUtil
+					.newObject("ecore.EReference"));
+
+			((ecore.EReference) org.kermeta.compil.runtime.helper.language.ObjectUtil
+					.asTypeSwitcher(ecoreStructuralFeature,
+							org.kermeta.compil.runtime.ExecutionContext
+									.getInstance().getMetaClass(
+											"ecore.EReference")))
+					.setContainment(this.getIsComposite());
+		}
+
+		((km2ecore.helper.ecore.EcoreModelElementHelper) org.kermeta.compil.runtime.helper.language.ClassUtil
+				.newObject("km2ecore.helper.ecore.EcoreModelElementHelper"))
+				.setEStructuralFeatureProperties(this, ecoreStructuralFeature,
+						context);
+
+		java.lang.Boolean idIfCond_272 = false;
+		idIfCond_272 = this.getIsDerived();
+
+		if (idIfCond_272) {
+
+			ecore.EAnnotation annotation = ((km2ecore.helper.ecore.EAnnotationHelper) org.kermeta.compil.runtime.helper.language.ClassUtil
+					.newObject("km2ecore.helper.ecore.EAnnotationHelper"))
+					.createKermetaEAnnotation(
+							kermeta.standard.helper.StringWrapper
+									.toString(km2ecore.helper.ecore.KermetaEAnnotationKey
+											.getByName("isReadOnly").getName()),
+							kermeta.standard.helper.BooleanWrapper
+									.toString(this.getIsReadOnly()));
+
+			org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
+					.<ecore.EAnnotation> convertAsOrderedSet(
+							ecoreStructuralFeature.getEAnnotations()).add(
+							annotation);
+		}
+
+		ecoreStructuralFeature.set_transient(this.getEMFIsTransient());
+
+		java.lang.Boolean idIfCond_273 = false;
+		idIfCond_273 = kermeta.standard.helper.BooleanWrapper
+				.and(
+						kermeta.standard.helper.BooleanWrapper
+								.and(
+										kermeta.standard.helper.BooleanWrapper
+												.not(ecoreStructuralFeature
+														.is_transient()),
+										org.kermeta.compil.runtime.helper.language.ObjectUtil
+												.isInstanceOfSwitcher(
+														ecoreStructuralFeature,
+														org.kermeta.compil.runtime.ExecutionContext
+																.getInstance()
+																.getMetaClass(
+																		"ecore.EAttribute"))),
+						kermeta.standard.helper.StringWrapper
+								.equals(
+										org.kermeta.compil.runtime.helper.language.ObjectUtil
+												.getMetaClassSwitcher(
+														this.getType())
+												.getTypeDefinition()
+												.qualifiedName(),
+										"kermeta::language::structure::Enumeration"));
+
+		if (idIfCond_273) {
+
+			((ecore.EAttribute) org.kermeta.compil.runtime.helper.language.ObjectUtil
+					.asTypeSwitcher(ecoreStructuralFeature,
+							org.kermeta.compil.runtime.ExecutionContext
+									.getInstance().getMetaClass(
+											"ecore.EAttribute")))
+					.set_transient(true);
+		}
+
+		result = ecoreStructuralFeature;
+
+		return result;
 
 	}
 
@@ -1009,39 +1369,39 @@ public class PropertyImpl extends MultiplicityElementImpl implements Property {
 
 		result = "";
 
-		java.lang.Boolean idIfCond_198 = false;
-		idIfCond_198 = this.getIsDerived();
+		java.lang.Boolean idIfCond_274 = false;
+		idIfCond_274 = this.getIsDerived();
 
-		if (idIfCond_198) {
+		if (idIfCond_274) {
 
 			result = "getter";
 		} else {
 
 			java.lang.Boolean isBoolean = false;
 
-			java.lang.Boolean idIfCond_199 = false;
-			idIfCond_199 = kermeta.standard.helper.BooleanWrapper
+			java.lang.Boolean idIfCond_275 = false;
+			idIfCond_275 = kermeta.standard.helper.BooleanWrapper
 					.not(org.kermeta.compil.runtime.helper.language.ObjectUtil
 							.isVoidSwitcher(this.getEcoreModelElement()));
 
-			if (idIfCond_199) {
+			if (idIfCond_275) {
 
-				java.lang.Boolean idIfCond_200 = false;
-				idIfCond_200 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+				java.lang.Boolean idIfCond_276 = false;
+				idIfCond_276 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 						.isInstanceOfSwitcher(this.getEcoreModelElement(),
 								org.kermeta.compil.runtime.ExecutionContext
 										.getInstance().getMetaClass(
 												"ecore.EAttribute"));
 
-				if (idIfCond_200) {
+				if (idIfCond_276) {
 
-					java.lang.Boolean idIfCond_201 = false;
-					idIfCond_201 = kermeta.standard.helper.StringWrapper
+					java.lang.Boolean idIfCond_277 = false;
+					idIfCond_277 = kermeta.standard.helper.StringWrapper
 							.equals(this.getType()
 									.getEMFEDataTypeInstanceClassName(),
 									"boolean");
 
-					if (idIfCond_201) {
+					if (idIfCond_277) {
 
 						isBoolean = true;
 					}
@@ -1050,10 +1410,10 @@ public class PropertyImpl extends MultiplicityElementImpl implements Property {
 
 			}
 
-			java.lang.Boolean idIfCond_202 = false;
-			idIfCond_202 = isBoolean;
+			java.lang.Boolean idIfCond_278 = false;
+			idIfCond_278 = isBoolean;
 
-			if (idIfCond_202) {
+			if (idIfCond_278) {
 
 				result = "is";
 			} else {
@@ -1076,123 +1436,16 @@ public class PropertyImpl extends MultiplicityElementImpl implements Property {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EStructuralFeature createEcoreModelElement(KM2EcoreContext context) {
-
-		ecore.EStructuralFeature result = null;
-
-		ecore.EStructuralFeature ecoreStructuralFeature = null;
-
-		kermeta.language.structure.Type current_type = ((kermeta.language.structure.Type) org.kermeta.compil.runtime.helper.language.ObjectUtil
-				.asTypeSwitcher(this.getType(),
-						org.kermeta.compil.runtime.ExecutionContext
-								.getInstance().getMetaClass(
-										"kermeta.language.structure.Type")));
-
-		java.lang.Boolean idIfCond_203 = false;
-		idIfCond_203 = kermeta.standard.helper.BooleanWrapper.or(
-				kermeta.standard.helper.BooleanWrapper.or(current_type
-						.isValueType(), current_type.isEnumeration()),
-				current_type.isEDataType());
-
-		if (idIfCond_203) {
-
-			ecoreStructuralFeature = ((ecore.EAttribute) org.kermeta.compil.runtime.helper.language.ClassUtil
-					.newObject("ecore.EAttribute"));
-		} else {
-
-			ecoreStructuralFeature = ((ecore.EReference) org.kermeta.compil.runtime.helper.language.ClassUtil
-					.newObject("ecore.EReference"));
-
-			((ecore.EReference) org.kermeta.compil.runtime.helper.language.ObjectUtil
-					.asTypeSwitcher(ecoreStructuralFeature,
-							org.kermeta.compil.runtime.ExecutionContext
-									.getInstance().getMetaClass(
-											"ecore.EReference")))
-					.setContainment(this.getIsComposite());
-		}
-
-		((km2ecore.helper.ecore.EcoreModelElementHelper) org.kermeta.compil.runtime.helper.language.ClassUtil
-				.newObject("km2ecore.helper.ecore.EcoreModelElementHelper"))
-				.setEStructuralFeatureProperties(this, ecoreStructuralFeature,
-						context);
-
-		java.lang.Boolean idIfCond_204 = false;
-		idIfCond_204 = this.getIsDerived();
-
-		if (idIfCond_204) {
-
-			ecore.EAnnotation annotation = ((km2ecore.helper.ecore.EAnnotationHelper) org.kermeta.compil.runtime.helper.language.ClassUtil
-					.newObject("km2ecore.helper.ecore.EAnnotationHelper"))
-					.createKermetaEAnnotation(
-							kermeta.standard.helper.StringWrapper
-									.toString(km2ecore.helper.ecore.KermetaEAnnotationKey
-											.getByName("isReadOnly").getName()),
-							kermeta.standard.helper.BooleanWrapper
-									.toString(this.getIsReadOnly()));
-
-			org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
-					.<ecore.EAnnotation> convertAsOrderedSet(
-							ecoreStructuralFeature.getEAnnotations()).add(
-							annotation);
-		}
-
-		ecoreStructuralFeature.set_transient(this.getEMFIsTransient());
-
-		java.lang.Boolean idIfCond_205 = false;
-		idIfCond_205 = kermeta.standard.helper.BooleanWrapper
-				.and(
-						kermeta.standard.helper.BooleanWrapper
-								.and(
-										kermeta.standard.helper.BooleanWrapper
-												.not(ecoreStructuralFeature
-														.is_transient()),
-										org.kermeta.compil.runtime.helper.language.ObjectUtil
-												.isInstanceOfSwitcher(
-														ecoreStructuralFeature,
-														org.kermeta.compil.runtime.ExecutionContext
-																.getInstance()
-																.getMetaClass(
-																		"ecore.EAttribute"))),
-						kermeta.standard.helper.StringWrapper
-								.equals(
-										org.kermeta.compil.runtime.helper.language.ObjectUtil
-												.getMetaClassSwitcher(
-														this.getType())
-												.getTypeDefinition()
-												.qualifiedName(),
-										"kermeta::language::structure::Enumeration"));
-
-		if (idIfCond_205) {
-
-			((ecore.EAttribute) org.kermeta.compil.runtime.helper.language.ObjectUtil
-					.asTypeSwitcher(ecoreStructuralFeature,
-							org.kermeta.compil.runtime.ExecutionContext
-									.getInstance().getMetaClass(
-											"ecore.EAttribute")))
-					.set_transient(true);
-		}
-
-		result = ecoreStructuralFeature;
-
-		return result;
-
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public String printSetAccessor(KM2EcoreContext context) {
 
 		java.lang.String result = null;
 
 		result = "";
 
-		java.lang.Boolean idIfCond_206 = false;
-		idIfCond_206 = this.getIsDerived();
+		java.lang.Boolean idIfCond_279 = false;
+		idIfCond_279 = this.getIsDerived();
 
-		if (idIfCond_206) {
+		if (idIfCond_279) {
 
 			result = "setter";
 		} else {
@@ -1219,20 +1472,20 @@ public class PropertyImpl extends MultiplicityElementImpl implements Property {
 				.newObject("kermeta.language.structure.LinkSetterForTypedElement"))
 				.setLinks(this, this.getEcoreModelElement(), context);
 
-		java.lang.Boolean idIfCond_207 = false;
-		idIfCond_207 = kermeta.standard.helper.BooleanWrapper
+		java.lang.Boolean idIfCond_280 = false;
+		idIfCond_280 = kermeta.standard.helper.BooleanWrapper
 				.not(org.kermeta.compil.runtime.helper.language.ObjectUtil
 						.isVoidSwitcher(this.getOpposite()));
 
-		if (idIfCond_207) {
+		if (idIfCond_280) {
 
-			java.lang.Boolean idIfCond_208 = false;
-			idIfCond_208 = kermeta.standard.helper.BooleanWrapper
+			java.lang.Boolean idIfCond_281 = false;
+			idIfCond_281 = kermeta.standard.helper.BooleanWrapper
 					.not(org.kermeta.compil.runtime.helper.language.ObjectUtil
 							.isVoidSwitcher(this.getOpposite()
 									.getEcoreModelElement()));
 
-			if (idIfCond_208) {
+			if (idIfCond_281) {
 
 				((ecore.EReference) org.kermeta.compil.runtime.helper.language.ObjectUtil
 						.asTypeSwitcher(this.getEcoreModelElement(),
@@ -1250,40 +1503,40 @@ public class PropertyImpl extends MultiplicityElementImpl implements Property {
 
 		}
 
-		java.lang.Boolean idIfCond_209 = false;
-		idIfCond_209 = kermeta.standard.helper.StringWrapper.equals(this
+		java.lang.Boolean idIfCond_282 = false;
+		idIfCond_282 = kermeta.standard.helper.StringWrapper.equals(this
 				.getType().getTypeQName(), "kermeta::standard::Boolean");
 
-		if (idIfCond_209) {
+		if (idIfCond_282) {
 
 			java.lang.Boolean mustSetted = false;
 
-			java.lang.Boolean idIfCond_210 = false;
-			idIfCond_210 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+			java.lang.Boolean idIfCond_283 = false;
+			idIfCond_283 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 					.isVoidSwitcher(this.getEcoreModelElement()
 							.getDefaultValueLiteral());
 
-			if (idIfCond_210) {
+			if (idIfCond_283) {
 
 				mustSetted = true;
 			} else {
 
-				java.lang.Boolean idIfCond_211 = false;
-				idIfCond_211 = kermeta.standard.helper.StringWrapper.equals(
+				java.lang.Boolean idIfCond_284 = false;
+				idIfCond_284 = kermeta.standard.helper.StringWrapper.equals(
 						this.getEcoreModelElement().getDefaultValueLiteral(),
 						"");
 
-				if (idIfCond_211) {
+				if (idIfCond_284) {
 
 					mustSetted = true;
 				}
 
 			}
 
-			java.lang.Boolean idIfCond_212 = false;
-			idIfCond_212 = mustSetted;
+			java.lang.Boolean idIfCond_285 = false;
+			idIfCond_285 = mustSetted;
 
-			if (idIfCond_212) {
+			if (idIfCond_285) {
 
 				this.getEcoreModelElement().setDefaultValueLiteral("false");
 			}
@@ -1307,22 +1560,23 @@ public class PropertyImpl extends MultiplicityElementImpl implements Property {
 
 		{
 
-			kermeta.standard.Iterator<kermeta.language.structure.Tag> it_ft69 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
+			kermeta.standard.Iterator<kermeta.language.structure.Tag> it_ft103 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
 					.<kermeta.language.structure.Tag> convertAsOrderedSet(
 							this.getOwnedTags()).iterator();
-			java.lang.Boolean idLoopCond_213 = false;
-			while (!idLoopCond_213) {
-				idLoopCond_213 = it_ft69.isOff();
-				if (idLoopCond_213) {
+			java.lang.Boolean idLoopCond_286 = false;
+			while (!idLoopCond_286) {
+				idLoopCond_286 = it_ft103.isOff();
+				if (idLoopCond_286) {
 				} else {
 
 					//BIle:func
-					kermeta.language.structure.Tag o_lbdExp69 = it_ft69.next();
+					kermeta.language.structure.Tag o_lbdExp103 = it_ft103
+							.next();
 
 					//BIle:func
-					kermeta.language.structure.Tag p_lbdExp68 = o_lbdExp69;
+					kermeta.language.structure.Tag p_lbdExp102 = o_lbdExp103;
 
-					p_lbdExp68.applyPass2BehaviorJava(context);
+					p_lbdExp102.applyPass2BehaviorJava(context);
 					//EIle:func
 
 					//EIle:func
@@ -1344,10 +1598,224 @@ public class PropertyImpl extends MultiplicityElementImpl implements Property {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public String getRecopyInValueTypes() {
+
+		java.lang.String result = null;
+
+		result = this.getUniqueTagValue("RecopyInValueTypes");
+
+		return result;
+
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getFinalName(KM2EcoreContext context) {
+
+		java.lang.String result = null;
+
+		result = ((km2ecore.helper.java.IdentifierHelper) org.kermeta.compil.runtime.helper.language.ClassUtil
+				.newObject("km2ecore.helper.java.IdentifierHelper"))
+				.getMangledIdentifier(this.getName(), context);
+
+		java.lang.Boolean idIfCond_367 = false;
+		idIfCond_367 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+				.isNotEqualSwitcher(this.getEMFRenameAs(), "");
+
+		if (idIfCond_367) {
+
+			result = this.getEMFRenameAs();
+		}
+
+		return result;
+
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getEMFRenameAs() {
+
+		java.lang.String result = null;
+
+		result = this.getUniqueTagValue("EMF_renameAs");
+
+		return result;
+
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String ppReturnResult(KM2EcoreContext context) {
+
+		java.lang.String result = null;
+
+		result = "\nreturn ";
+
+		java.lang.Boolean idIfCond_368 = false;
+		idIfCond_368 = kermeta.standard.helper.IntegerWrapper.equals(this
+				.getUpper(), 1);
+
+		if (idIfCond_368) {
+
+			result = kermeta.standard.helper.StringWrapper.plus(result,
+					"result");
+		} else {
+
+			result = kermeta.standard.helper.StringWrapper.plus(
+					kermeta.standard.helper.StringWrapper.plus(result, context
+							.getCOLLECTION_UTIL_CLASS()),
+					".convertAsEList(result)");
+		}
+
+		result = kermeta.standard.helper.StringWrapper.plus(result, ";\n");
+
+		return result;
+
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getGenModelQualifiedName() {
+
+		java.lang.String result = null;
+
+		result = kermeta.standard.helper.StringWrapper.plus(
+				kermeta.standard.helper.StringWrapper.plus(this
+						.getRootPackage().getGenModelBasePackage(), "::"), this
+						.qualifiedName());
+
+		return result;
+
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getJavaQualifiedName() {
+
+		java.lang.String result = null;
+
+		result = kermeta.standard.helper.StringWrapper.replace(this
+				.qualifiedName(), "::", ".");
+
+		return result;
+
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getGenModelJavaQualifiedName() {
+
+		java.lang.String result = null;
+
+		result = kermeta.standard.helper.StringWrapper.replace(this
+				.getGenModelQualifiedName(), "::", ".");
+
+		return result;
+
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String qualifiedName() {
+
+		java.lang.String result = null;
+
+		kermeta.language.structure.NamedElement elem = this;
+
+		result = this.getName();
+
+		java.lang.Boolean idIfCond_402 = false;
+		idIfCond_402 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+				.isInstanceOfSwitcher(
+						org.kermeta.compil.runtime.helper.language.ObjectUtil
+								.containerSwitcher(elem),
+						org.kermeta.compil.runtime.ExecutionContext
+								.getInstance()
+								.getMetaClass(
+										"kermeta.language.structure.NamedElement"));
+
+		if (idIfCond_402) {
+
+			elem = (kermeta.language.structure.NamedElement) org.kermeta.compil.runtime.ExecutionContext
+					.getInstance()
+					.<kermeta.language.structure.NamedElement> asTypeOrVoid(
+							org.kermeta.compil.runtime.helper.language.ObjectUtil
+									.containerSwitcher(elem));
+			java.lang.Boolean idLoopCond_403 = false;
+			while (!idLoopCond_403) {
+				idLoopCond_403 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+						.equalsSwitcher(elem, null);
+				if (idLoopCond_403) {
+				} else {
+
+					result = kermeta.standard.helper.StringWrapper.plus(
+							kermeta.standard.helper.StringWrapper.plus(elem
+									.getName(), "::"), result);
+
+					java.lang.Boolean idIfCond_404 = false;
+					idIfCond_404 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+							.isInstanceOfSwitcher(
+									org.kermeta.compil.runtime.helper.language.ObjectUtil
+											.containerSwitcher(elem),
+									org.kermeta.compil.runtime.ExecutionContext
+											.getInstance()
+											.getMetaClass(
+													"kermeta.language.structure.NamedElement"));
+
+					if (idIfCond_404) {
+
+						elem = (kermeta.language.structure.NamedElement) org.kermeta.compil.runtime.ExecutionContext
+								.getInstance()
+								.<kermeta.language.structure.NamedElement> asTypeOrVoid(
+										org.kermeta.compil.runtime.helper.language.ObjectUtil
+												.containerSwitcher(elem));
+					} else {
+
+						elem = null;
+					}
+
+				}
+			}
+		}
+
+		return result;
+
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@SuppressWarnings("unchecked")
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd,
 			int featureID, NotificationChain msgs) {
 		switch (featureID) {
+		case StructurePackage.PROPERTY__CONTAINED_TYPE:
+			return ((InternalEList<InternalEObject>) (InternalEList<?>) getContainedType())
+					.basicAdd(otherEnd, msgs);
 		case StructurePackage.PROPERTY__OWNING_CLASS:
 			if (eInternalContainer() != null)
 				msgs = eBasicRemoveFromContainer(msgs);
@@ -1365,6 +1833,9 @@ public class PropertyImpl extends MultiplicityElementImpl implements Property {
 	public NotificationChain eInverseRemove(InternalEObject otherEnd,
 			int featureID, NotificationChain msgs) {
 		switch (featureID) {
+		case StructurePackage.PROPERTY__CONTAINED_TYPE:
+			return ((InternalEList<?>) getContainedType()).basicRemove(
+					otherEnd, msgs);
 		case StructurePackage.PROPERTY__GETTER_BODY:
 			return basicSetGetterBody(null, msgs);
 		case StructurePackage.PROPERTY__SETTER_BODY:
@@ -1400,10 +1871,22 @@ public class PropertyImpl extends MultiplicityElementImpl implements Property {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-		case StructurePackage.PROPERTY__ECORE_MODEL_ELEMENT:
+		case StructurePackage.PROPERTY__CONTAINED_TYPE:
+			return getContainedType();
+		case StructurePackage.PROPERTY__NAME:
+			return getName();
+		case StructurePackage.PROPERTY__TYPE:
 			if (resolve)
-				return getEcoreModelElement();
-			return basicGetEcoreModelElement();
+				return getType();
+			return basicGetType();
+		case StructurePackage.PROPERTY__IS_ORDERED:
+			return getIsOrdered();
+		case StructurePackage.PROPERTY__UPPER:
+			return getUpper();
+		case StructurePackage.PROPERTY__LOWER:
+			return getLower();
+		case StructurePackage.PROPERTY__IS_UNIQUE:
+			return getIsUnique();
 		case StructurePackage.PROPERTY__DEFAULT:
 			return get_default();
 		case StructurePackage.PROPERTY__OPPOSITE:
@@ -1443,11 +1926,31 @@ public class PropertyImpl extends MultiplicityElementImpl implements Property {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-		case StructurePackage.PROPERTY__ECORE_MODEL_ELEMENT:
-			setEcoreModelElement((EStructuralFeature) newValue);
+		case StructurePackage.PROPERTY__CONTAINED_TYPE:
+			getContainedType().clear();
+			getContainedType().addAll((Collection<? extends Type>) newValue);
+			return;
+		case StructurePackage.PROPERTY__NAME:
+			setName((String) newValue);
+			return;
+		case StructurePackage.PROPERTY__TYPE:
+			setType((Type) newValue);
+			return;
+		case StructurePackage.PROPERTY__IS_ORDERED:
+			setIsOrdered((Boolean) newValue);
+			return;
+		case StructurePackage.PROPERTY__UPPER:
+			setUpper((Integer) newValue);
+			return;
+		case StructurePackage.PROPERTY__LOWER:
+			setLower((Integer) newValue);
+			return;
+		case StructurePackage.PROPERTY__IS_UNIQUE:
+			setIsUnique((Boolean) newValue);
 			return;
 		case StructurePackage.PROPERTY__DEFAULT:
 			set_default((String) newValue);
@@ -1494,8 +1997,26 @@ public class PropertyImpl extends MultiplicityElementImpl implements Property {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-		case StructurePackage.PROPERTY__ECORE_MODEL_ELEMENT:
-			setEcoreModelElement((EStructuralFeature) null);
+		case StructurePackage.PROPERTY__CONTAINED_TYPE:
+			getContainedType().clear();
+			return;
+		case StructurePackage.PROPERTY__NAME:
+			setName(NAME_EDEFAULT);
+			return;
+		case StructurePackage.PROPERTY__TYPE:
+			setType((Type) null);
+			return;
+		case StructurePackage.PROPERTY__IS_ORDERED:
+			setIsOrdered(IS_ORDERED_EDEFAULT);
+			return;
+		case StructurePackage.PROPERTY__UPPER:
+			setUpper(UPPER_EDEFAULT);
+			return;
+		case StructurePackage.PROPERTY__LOWER:
+			setLower(LOWER_EDEFAULT);
+			return;
+		case StructurePackage.PROPERTY__IS_UNIQUE:
+			setIsUnique(IS_UNIQUE_EDEFAULT);
 			return;
 		case StructurePackage.PROPERTY__DEFAULT:
 			set_default(_DEFAULT_EDEFAULT);
@@ -1542,8 +2063,25 @@ public class PropertyImpl extends MultiplicityElementImpl implements Property {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-		case StructurePackage.PROPERTY__ECORE_MODEL_ELEMENT:
-			return ecoreModelElement != null;
+		case StructurePackage.PROPERTY__CONTAINED_TYPE:
+			return containedType != null && !containedType.isEmpty();
+		case StructurePackage.PROPERTY__NAME:
+			return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT
+					.equals(name);
+		case StructurePackage.PROPERTY__TYPE:
+			return type != null;
+		case StructurePackage.PROPERTY__IS_ORDERED:
+			return IS_ORDERED_EDEFAULT == null ? isOrdered != null
+					: !IS_ORDERED_EDEFAULT.equals(isOrdered);
+		case StructurePackage.PROPERTY__UPPER:
+			return UPPER_EDEFAULT == null ? upper != null : !UPPER_EDEFAULT
+					.equals(upper);
+		case StructurePackage.PROPERTY__LOWER:
+			return LOWER_EDEFAULT == null ? lower != null : !LOWER_EDEFAULT
+					.equals(lower);
+		case StructurePackage.PROPERTY__IS_UNIQUE:
+			return IS_UNIQUE_EDEFAULT == null ? isUnique != null
+					: !IS_UNIQUE_EDEFAULT.equals(isUnique);
 		case StructurePackage.PROPERTY__DEFAULT:
 			return _DEFAULT_EDEFAULT == null ? _default != null
 					: !_DEFAULT_EDEFAULT.equals(_default);
@@ -1584,10 +2122,40 @@ public class PropertyImpl extends MultiplicityElementImpl implements Property {
 	 */
 	@Override
 	public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass) {
-		if (baseClass == Traceability.class) {
+		if (baseClass == TypeContainer.class) {
 			switch (derivedFeatureID) {
-			case StructurePackage.PROPERTY__ECORE_MODEL_ELEMENT:
-				return StructurePackage.TRACEABILITY__ECORE_MODEL_ELEMENT;
+			case StructurePackage.PROPERTY__CONTAINED_TYPE:
+				return StructurePackage.TYPE_CONTAINER__CONTAINED_TYPE;
+			default:
+				return -1;
+			}
+		}
+		if (baseClass == NamedElement.class) {
+			switch (derivedFeatureID) {
+			case StructurePackage.PROPERTY__NAME:
+				return StructurePackage.NAMED_ELEMENT__NAME;
+			default:
+				return -1;
+			}
+		}
+		if (baseClass == TypedElement.class) {
+			switch (derivedFeatureID) {
+			case StructurePackage.PROPERTY__TYPE:
+				return StructurePackage.TYPED_ELEMENT__TYPE;
+			default:
+				return -1;
+			}
+		}
+		if (baseClass == MultiplicityElement.class) {
+			switch (derivedFeatureID) {
+			case StructurePackage.PROPERTY__IS_ORDERED:
+				return StructurePackage.MULTIPLICITY_ELEMENT__IS_ORDERED;
+			case StructurePackage.PROPERTY__UPPER:
+				return StructurePackage.MULTIPLICITY_ELEMENT__UPPER;
+			case StructurePackage.PROPERTY__LOWER:
+				return StructurePackage.MULTIPLICITY_ELEMENT__LOWER;
+			case StructurePackage.PROPERTY__IS_UNIQUE:
+				return StructurePackage.MULTIPLICITY_ELEMENT__IS_UNIQUE;
 			default:
 				return -1;
 			}
@@ -1602,10 +2170,40 @@ public class PropertyImpl extends MultiplicityElementImpl implements Property {
 	 */
 	@Override
 	public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass) {
-		if (baseClass == Traceability.class) {
+		if (baseClass == TypeContainer.class) {
 			switch (baseFeatureID) {
-			case StructurePackage.TRACEABILITY__ECORE_MODEL_ELEMENT:
-				return StructurePackage.PROPERTY__ECORE_MODEL_ELEMENT;
+			case StructurePackage.TYPE_CONTAINER__CONTAINED_TYPE:
+				return StructurePackage.PROPERTY__CONTAINED_TYPE;
+			default:
+				return -1;
+			}
+		}
+		if (baseClass == NamedElement.class) {
+			switch (baseFeatureID) {
+			case StructurePackage.NAMED_ELEMENT__NAME:
+				return StructurePackage.PROPERTY__NAME;
+			default:
+				return -1;
+			}
+		}
+		if (baseClass == TypedElement.class) {
+			switch (baseFeatureID) {
+			case StructurePackage.TYPED_ELEMENT__TYPE:
+				return StructurePackage.PROPERTY__TYPE;
+			default:
+				return -1;
+			}
+		}
+		if (baseClass == MultiplicityElement.class) {
+			switch (baseFeatureID) {
+			case StructurePackage.MULTIPLICITY_ELEMENT__IS_ORDERED:
+				return StructurePackage.PROPERTY__IS_ORDERED;
+			case StructurePackage.MULTIPLICITY_ELEMENT__UPPER:
+				return StructurePackage.PROPERTY__UPPER;
+			case StructurePackage.MULTIPLICITY_ELEMENT__LOWER:
+				return StructurePackage.PROPERTY__LOWER;
+			case StructurePackage.MULTIPLICITY_ELEMENT__IS_UNIQUE:
+				return StructurePackage.PROPERTY__IS_UNIQUE;
 			default:
 				return -1;
 			}
@@ -1624,7 +2222,17 @@ public class PropertyImpl extends MultiplicityElementImpl implements Property {
 			return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (_default: ");
+		result.append(" (name: ");
+		result.append(name);
+		result.append(", isOrdered: ");
+		result.append(isOrdered);
+		result.append(", upper: ");
+		result.append(upper);
+		result.append(", lower: ");
+		result.append(lower);
+		result.append(", isUnique: ");
+		result.append(isUnique);
+		result.append(", _default: ");
 		result.append(_default);
 		result.append(", isDerived: ");
 		result.append(isDerived);

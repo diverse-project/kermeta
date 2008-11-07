@@ -1,5 +1,5 @@
 
-/*$Id: Saver.java,v 1.8 2008-10-30 17:37:05 cfaucher Exp $
+/*$Id: Saver.java,v 1.9 2008-11-07 08:54:01 cfaucher Exp $
 * Project : org.kermeta.compiler.generator
 * File : 	Saver.java
 * License : EPL

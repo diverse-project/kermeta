@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: EcoreAdapterFactory.java,v 1.6 2008-10-29 08:29:30 cfaucher Exp $
+ * $Id: EcoreAdapterFactory.java,v 1.7 2008-11-07 08:54:12 cfaucher Exp $
  */
 package ecore.util;
 
@@ -336,20 +336,6 @@ public class EcoreAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link ecore.EObject <em>EObject</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see ecore.EObject
-	 * @generated
-	 */
-	public Adapter createEObjectAdapter() {
-		return null;
-	}
-
-	/**
 	 * Creates a new adapter for an object of class '{@link ecore.EOperation <em>EOperation</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -489,6 +475,16 @@ public class EcoreAdapterFactory extends AdapterFactoryImpl {
 		return null;
 	}
 
-
+	/**
+	 * Creates a new adapter for the default case.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @generated
+	 */
+	public Adapter createEObjectAdapter() {
+		return null;
+	}
 
 } //EcoreAdapterFactory

@@ -2,11 +2,9 @@
  * <copyright>
  * </copyright>
  *
- * $Id: EcorePackageImpl.java,v 1.7 2008-10-29 08:29:28 cfaucher Exp $
+ * $Id: EcorePackageImpl.java,v 1.8 2008-11-07 08:54:06 cfaucher Exp $
  */
 package km2ecore.helper.ecore.impl;
-
-import kermeta.KermetaPackage;
 
 import kermeta.compiler.CompilerPackage;
 
@@ -15,8 +13,6 @@ import kermeta.compiler.impl.CompilerPackageImpl;
 import kermeta.exceptions.ExceptionsPackage;
 
 import kermeta.exceptions.impl.ExceptionsPackageImpl;
-
-import kermeta.impl.KermetaPackageImpl;
 
 import kermeta.interpreter.InterpreterPackage;
 
@@ -77,6 +73,10 @@ import km2ecore.helper.java.JavaPackage;
 
 import km2ecore.helper.java.impl.JavaPackageImpl;
 
+import km2ecore.helper.kermeta.KermetaPackage;
+
+import km2ecore.helper.kermeta.impl.KermetaPackageImpl;
+
 import km2ecore.impl.Km2ecorePackageImpl;
 
 import org.eclipse.emf.ecore.EClass;
@@ -106,7 +106,14 @@ public class EcorePackageImpl extends EPackageImpl implements EcorePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass ecoreModelElementHelperEClass = null;
+	private EClass eAnnotationHelperEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass eNamedElementHelperEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -120,14 +127,7 @@ public class EcorePackageImpl extends EPackageImpl implements EcorePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass eAnnotationHelperEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass eNamedElementHelperEClass = null;
+	private EClass ecoreModelElementHelperEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -205,10 +205,30 @@ public class EcorePackageImpl extends EPackageImpl implements EcorePackage {
 		isInited = true;
 
 		// Obtain or create and register interdependencies
+		Km2ecorePackageImpl theKm2ecorePackage = (Km2ecorePackageImpl) (EPackage.Registry.INSTANCE
+				.getEPackage(Km2ecorePackage.eNS_URI) instanceof Km2ecorePackageImpl ? EPackage.Registry.INSTANCE
+				.getEPackage(Km2ecorePackage.eNS_URI)
+				: Km2ecorePackage.eINSTANCE);
+		JavaPackageImpl theJavaPackage = (JavaPackageImpl) (EPackage.Registry.INSTANCE
+				.getEPackage(JavaPackage.eNS_URI) instanceof JavaPackageImpl ? EPackage.Registry.INSTANCE
+				.getEPackage(JavaPackage.eNS_URI)
+				: JavaPackage.eINSTANCE);
 		KermetaPackageImpl theKermetaPackage = (KermetaPackageImpl) (EPackage.Registry.INSTANCE
 				.getEPackage(KermetaPackage.eNS_URI) instanceof KermetaPackageImpl ? EPackage.Registry.INSTANCE
 				.getEPackage(KermetaPackage.eNS_URI)
 				: KermetaPackage.eINSTANCE);
+		CommonPackageImpl theCommonPackage = (CommonPackageImpl) (EPackage.Registry.INSTANCE
+				.getEPackage(CommonPackage.eNS_URI) instanceof CommonPackageImpl ? EPackage.Registry.INSTANCE
+				.getEPackage(CommonPackage.eNS_URI)
+				: CommonPackage.eINSTANCE);
+		ExceptionPackageImpl theExceptionPackage = (ExceptionPackageImpl) (EPackage.Registry.INSTANCE
+				.getEPackage(ExceptionPackage.eNS_URI) instanceof ExceptionPackageImpl ? EPackage.Registry.INSTANCE
+				.getEPackage(ExceptionPackage.eNS_URI)
+				: ExceptionPackage.eINSTANCE);
+		kermeta.impl.KermetaPackageImpl theKermetaPackage_1 = (kermeta.impl.KermetaPackageImpl) (EPackage.Registry.INSTANCE
+				.getEPackage(kermeta.KermetaPackage.eNS_URI) instanceof kermeta.impl.KermetaPackageImpl ? EPackage.Registry.INSTANCE
+				.getEPackage(kermeta.KermetaPackage.eNS_URI)
+				: kermeta.KermetaPackage.eINSTANCE);
 		LanguagePackageImpl theLanguagePackage = (LanguagePackageImpl) (EPackage.Registry.INSTANCE
 				.getEPackage(LanguagePackage.eNS_URI) instanceof LanguagePackageImpl ? EPackage.Registry.INSTANCE
 				.getEPackage(LanguagePackage.eNS_URI)
@@ -221,18 +241,14 @@ public class EcorePackageImpl extends EPackageImpl implements EcorePackage {
 				.getEPackage(BehaviorPackage.eNS_URI) instanceof BehaviorPackageImpl ? EPackage.Registry.INSTANCE
 				.getEPackage(BehaviorPackage.eNS_URI)
 				: BehaviorPackage.eINSTANCE);
-		CompilerPackageImpl theCompilerPackage = (CompilerPackageImpl) (EPackage.Registry.INSTANCE
-				.getEPackage(CompilerPackage.eNS_URI) instanceof CompilerPackageImpl ? EPackage.Registry.INSTANCE
-				.getEPackage(CompilerPackage.eNS_URI)
-				: CompilerPackage.eINSTANCE);
-		ExceptionsPackageImpl theExceptionsPackage = (ExceptionsPackageImpl) (EPackage.Registry.INSTANCE
-				.getEPackage(ExceptionsPackage.eNS_URI) instanceof ExceptionsPackageImpl ? EPackage.Registry.INSTANCE
-				.getEPackage(ExceptionsPackage.eNS_URI)
-				: ExceptionsPackage.eINSTANCE);
 		StandardPackageImpl theStandardPackage = (StandardPackageImpl) (EPackage.Registry.INSTANCE
 				.getEPackage(StandardPackage.eNS_URI) instanceof StandardPackageImpl ? EPackage.Registry.INSTANCE
 				.getEPackage(StandardPackage.eNS_URI)
 				: StandardPackage.eINSTANCE);
+		ExceptionsPackageImpl theExceptionsPackage = (ExceptionsPackageImpl) (EPackage.Registry.INSTANCE
+				.getEPackage(ExceptionsPackage.eNS_URI) instanceof ExceptionsPackageImpl ? EPackage.Registry.INSTANCE
+				.getEPackage(ExceptionsPackage.eNS_URI)
+				: ExceptionsPackage.eINSTANCE);
 		PersistencePackageImpl thePersistencePackage = (PersistencePackageImpl) (EPackage.Registry.INSTANCE
 				.getEPackage(PersistencePackage.eNS_URI) instanceof PersistencePackageImpl ? EPackage.Registry.INSTANCE
 				.getEPackage(PersistencePackage.eNS_URI)
@@ -257,109 +273,75 @@ public class EcorePackageImpl extends EPackageImpl implements EcorePackage {
 				.getEPackage(KunitPackage.eNS_URI) instanceof KunitPackageImpl ? EPackage.Registry.INSTANCE
 				.getEPackage(KunitPackage.eNS_URI)
 				: KunitPackage.eINSTANCE);
-		Km2ecorePackageImpl theKm2ecorePackage = (Km2ecorePackageImpl) (EPackage.Registry.INSTANCE
-				.getEPackage(Km2ecorePackage.eNS_URI) instanceof Km2ecorePackageImpl ? EPackage.Registry.INSTANCE
-				.getEPackage(Km2ecorePackage.eNS_URI)
-				: Km2ecorePackage.eINSTANCE);
-		km2ecore.helper.kermeta.impl.KermetaPackageImpl theKermetaPackage_1 = (km2ecore.helper.kermeta.impl.KermetaPackageImpl) (EPackage.Registry.INSTANCE
-				.getEPackage(km2ecore.helper.kermeta.KermetaPackage.eNS_URI) instanceof km2ecore.helper.kermeta.impl.KermetaPackageImpl ? EPackage.Registry.INSTANCE
-				.getEPackage(km2ecore.helper.kermeta.KermetaPackage.eNS_URI)
-				: km2ecore.helper.kermeta.KermetaPackage.eINSTANCE);
-		JavaPackageImpl theJavaPackage = (JavaPackageImpl) (EPackage.Registry.INSTANCE
-				.getEPackage(JavaPackage.eNS_URI) instanceof JavaPackageImpl ? EPackage.Registry.INSTANCE
-				.getEPackage(JavaPackage.eNS_URI)
-				: JavaPackage.eINSTANCE);
-		CommonPackageImpl theCommonPackage = (CommonPackageImpl) (EPackage.Registry.INSTANCE
-				.getEPackage(CommonPackage.eNS_URI) instanceof CommonPackageImpl ? EPackage.Registry.INSTANCE
-				.getEPackage(CommonPackage.eNS_URI)
-				: CommonPackage.eINSTANCE);
-		ExceptionPackageImpl theExceptionPackage = (ExceptionPackageImpl) (EPackage.Registry.INSTANCE
-				.getEPackage(ExceptionPackage.eNS_URI) instanceof ExceptionPackageImpl ? EPackage.Registry.INSTANCE
-				.getEPackage(ExceptionPackage.eNS_URI)
-				: ExceptionPackage.eINSTANCE);
+		CompilerPackageImpl theCompilerPackage = (CompilerPackageImpl) (EPackage.Registry.INSTANCE
+				.getEPackage(CompilerPackage.eNS_URI) instanceof CompilerPackageImpl ? EPackage.Registry.INSTANCE
+				.getEPackage(CompilerPackage.eNS_URI)
+				: CompilerPackage.eINSTANCE);
 		SimkPackageImpl theSimkPackage = (SimkPackageImpl) (EPackage.Registry.INSTANCE
 				.getEPackage(SimkPackage.eNS_URI) instanceof SimkPackageImpl ? EPackage.Registry.INSTANCE
 				.getEPackage(SimkPackage.eNS_URI)
 				: SimkPackage.eINSTANCE);
-		TraceabilityPackageImpl theTraceabilityPackage = (TraceabilityPackageImpl) (EPackage.Registry.INSTANCE
-				.getEPackage(TraceabilityPackage.eNS_URI) instanceof TraceabilityPackageImpl ? EPackage.Registry.INSTANCE
-				.getEPackage(TraceabilityPackage.eNS_URI)
-				: TraceabilityPackage.eINSTANCE);
 		ecore.impl.EcorePackageImpl theEcorePackage_2 = (ecore.impl.EcorePackageImpl) (EPackage.Registry.INSTANCE
 				.getEPackage(ecore.EcorePackage.eNS_URI) instanceof ecore.impl.EcorePackageImpl ? EPackage.Registry.INSTANCE
 				.getEPackage(ecore.EcorePackage.eNS_URI)
 				: ecore.EcorePackage.eINSTANCE);
+		TraceabilityPackageImpl theTraceabilityPackage = (TraceabilityPackageImpl) (EPackage.Registry.INSTANCE
+				.getEPackage(TraceabilityPackage.eNS_URI) instanceof TraceabilityPackageImpl ? EPackage.Registry.INSTANCE
+				.getEPackage(TraceabilityPackage.eNS_URI)
+				: TraceabilityPackage.eINSTANCE);
 
 		// Create package meta-data objects
 		theEcorePackage.createPackageContents();
+		theKm2ecorePackage.createPackageContents();
+		theJavaPackage.createPackageContents();
 		theKermetaPackage.createPackageContents();
+		theCommonPackage.createPackageContents();
+		theExceptionPackage.createPackageContents();
+		theKermetaPackage_1.createPackageContents();
 		theLanguagePackage.createPackageContents();
 		theStructurePackage.createPackageContents();
 		theBehaviorPackage.createPackageContents();
-		theCompilerPackage.createPackageContents();
-		theExceptionsPackage.createPackageContents();
 		theStandardPackage.createPackageContents();
+		theExceptionsPackage.createPackageContents();
 		thePersistencePackage.createPackageContents();
 		theIoPackage.createPackageContents();
 		theUtilsPackage.createPackageContents();
 		theEcorePackage_1.createPackageContents();
 		theInterpreterPackage.createPackageContents();
 		theKunitPackage.createPackageContents();
-		theKm2ecorePackage.createPackageContents();
-		theKermetaPackage_1.createPackageContents();
-		theJavaPackage.createPackageContents();
-		theCommonPackage.createPackageContents();
-		theExceptionPackage.createPackageContents();
+		theCompilerPackage.createPackageContents();
 		theSimkPackage.createPackageContents();
-		theTraceabilityPackage.createPackageContents();
 		theEcorePackage_2.createPackageContents();
+		theTraceabilityPackage.createPackageContents();
 
 		// Initialize created meta-data
 		theEcorePackage.initializePackageContents();
+		theKm2ecorePackage.initializePackageContents();
+		theJavaPackage.initializePackageContents();
 		theKermetaPackage.initializePackageContents();
+		theCommonPackage.initializePackageContents();
+		theExceptionPackage.initializePackageContents();
+		theKermetaPackage_1.initializePackageContents();
 		theLanguagePackage.initializePackageContents();
 		theStructurePackage.initializePackageContents();
 		theBehaviorPackage.initializePackageContents();
-		theCompilerPackage.initializePackageContents();
-		theExceptionsPackage.initializePackageContents();
 		theStandardPackage.initializePackageContents();
+		theExceptionsPackage.initializePackageContents();
 		thePersistencePackage.initializePackageContents();
 		theIoPackage.initializePackageContents();
 		theUtilsPackage.initializePackageContents();
 		theEcorePackage_1.initializePackageContents();
 		theInterpreterPackage.initializePackageContents();
 		theKunitPackage.initializePackageContents();
-		theKm2ecorePackage.initializePackageContents();
-		theKermetaPackage_1.initializePackageContents();
-		theJavaPackage.initializePackageContents();
-		theCommonPackage.initializePackageContents();
-		theExceptionPackage.initializePackageContents();
+		theCompilerPackage.initializePackageContents();
 		theSimkPackage.initializePackageContents();
-		theTraceabilityPackage.initializePackageContents();
 		theEcorePackage_2.initializePackageContents();
+		theTraceabilityPackage.initializePackageContents();
 
 		// Mark meta-data to indicate it can't be changed
 		theEcorePackage.freeze();
 
 		return theEcorePackage;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EClass getEcoreModelElementHelper() {
-		return ecoreModelElementHelperEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EClass getModelAnalizer() {
-		return modelAnalizerEClass;
 	}
 
 	/**
@@ -378,6 +360,24 @@ public class EcorePackageImpl extends EPackageImpl implements EcorePackage {
 	 */
 	public EClass getENamedElementHelper() {
 		return eNamedElementHelperEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getModelAnalizer() {
+		return modelAnalizerEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getEcoreModelElementHelper() {
+		return ecoreModelElementHelperEClass;
 	}
 
 	/**
@@ -427,13 +427,13 @@ public class EcorePackageImpl extends EPackageImpl implements EcorePackage {
 		isCreated = true;
 
 		// Create classes and their features
-		ecoreModelElementHelperEClass = createEClass(ECORE_MODEL_ELEMENT_HELPER);
-
-		modelAnalizerEClass = createEClass(MODEL_ANALIZER);
-
 		eAnnotationHelperEClass = createEClass(EANNOTATION_HELPER);
 
 		eNamedElementHelperEClass = createEClass(ENAMED_ELEMENT_HELPER);
+
+		modelAnalizerEClass = createEClass(MODEL_ANALIZER);
+
+		ecoreModelElementHelperEClass = createEClass(ECORE_MODEL_ELEMENT_HELPER);
 
 		// Create enums
 		kermetaEAnnotationSourceEEnum = createEEnum(KERMETA_EANNOTATION_SOURCE);
@@ -469,72 +469,31 @@ public class EcorePackageImpl extends EPackageImpl implements EcorePackage {
 				.getEPackage(StructurePackage.eNS_URI);
 		ecore.EcorePackage theEcorePackage_2 = (ecore.EcorePackage) EPackage.Registry.INSTANCE
 				.getEPackage(ecore.EcorePackage.eNS_URI);
-		Km2ecorePackage theKm2ecorePackage = (Km2ecorePackage) EPackage.Registry.INSTANCE
-				.getEPackage(Km2ecorePackage.eNS_URI);
 		StandardPackage theStandardPackage = (StandardPackage) EPackage.Registry.INSTANCE
 				.getEPackage(StandardPackage.eNS_URI);
+		Km2ecorePackage theKm2ecorePackage = (Km2ecorePackage) EPackage.Registry.INSTANCE
+				.getEPackage(Km2ecorePackage.eNS_URI);
 
 		// Create type parameters
 
 		// Set bounds for type parameters
 
 		// Add supertypes to classes
-		ecoreModelElementHelperEClass.getESuperTypes().add(
-				theStructurePackage.getObject());
-		modelAnalizerEClass.getESuperTypes().add(
-				theStructurePackage.getObject());
 		eAnnotationHelperEClass.getESuperTypes().add(
 				theStructurePackage.getObject());
 		eNamedElementHelperEClass.getESuperTypes().add(
 				theStructurePackage.getObject());
+		modelAnalizerEClass.getESuperTypes().add(
+				theStructurePackage.getObject());
+		ecoreModelElementHelperEClass.getESuperTypes().add(
+				theStructurePackage.getObject());
 
 		// Initialize classes and features; add operations and parameters
-		initEClass(ecoreModelElementHelperEClass,
-				EcoreModelElementHelper.class, "EcoreModelElementHelper",
-				!IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
-		EOperation op = addEOperation(ecoreModelElementHelperEClass,
-				theEcorePackage_2.getEOperation(), "findEOperationProxy", 0, 1,
-				IS_UNIQUE, IS_ORDERED);
-		addEParameter(op, theStructurePackage.getOperation(), "op", 0, 1,
-				IS_UNIQUE, IS_ORDERED);
-
-		op = addEOperation(ecoreModelElementHelperEClass, null,
-				"setEStructuralFeatureProperties", 0, 1, IS_UNIQUE, IS_ORDERED);
-		addEParameter(op, theStructurePackage.getProperty(), "self_", 0, 1,
-				IS_UNIQUE, IS_ORDERED);
-		addEParameter(op, theEcorePackage_2.getEStructuralFeature(),
-				"ecoreStructuralFeature", 0, 1, IS_UNIQUE, IS_ORDERED);
-		addEParameter(op, theKm2ecorePackage.getKM2EcoreContext(), "context",
-				0, 1, IS_UNIQUE, IS_ORDERED);
-
-		op = addEOperation(ecoreModelElementHelperEClass, theEcorePackage_2
-				.getEClass(), "findEClassProxy", 0, 1, IS_UNIQUE, IS_ORDERED);
-		addEParameter(op, theStructurePackage.getClassDefinition(), "cd", 0, 1,
-				IS_UNIQUE, IS_ORDERED);
-
-		initEClass(modelAnalizerEClass, ModelAnalizer.class, "ModelAnalizer",
-				!IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
-		op = addEOperation(modelAnalizerEClass, theStandardPackage
-				.getJavaBoolean(), "isInterfaceBy", 0, 1, IS_UNIQUE, IS_ORDERED);
-		addEParameter(op, theEcorePackage_2.getEClass(), "extended_class", 0,
-				1, IS_UNIQUE, IS_ORDERED);
-		addEParameter(op, theEcorePackage_2.getEClass(), "super_class", 0, 1,
-				IS_UNIQUE, IS_ORDERED);
-
-		op = addEOperation(modelAnalizerEClass, theStandardPackage
-				.getJavaBoolean(), "isExtendedBy", 0, 1, IS_UNIQUE, IS_ORDERED);
-		addEParameter(op, theEcorePackage_2.getEClass(), "extended_class", 0,
-				1, IS_UNIQUE, IS_ORDERED);
-		addEParameter(op, theEcorePackage_2.getEClass(), "super_class", 0, 1,
-				IS_UNIQUE, IS_ORDERED);
-
 		initEClass(eAnnotationHelperEClass, EAnnotationHelper.class,
 				"EAnnotationHelper", !IS_ABSTRACT, !IS_INTERFACE,
 				IS_GENERATED_INSTANCE_CLASS);
 
-		op = addEOperation(eAnnotationHelperEClass, null,
+		EOperation op = addEOperation(eAnnotationHelperEClass, null,
 				"addAnnotationPropGetter", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, theEcorePackage_2.getEModelElement(),
 				"eModelElement", 0, 1, IS_UNIQUE, IS_ORDERED);
@@ -576,6 +535,10 @@ public class EcorePackageImpl extends EPackageImpl implements EcorePackage {
 		addEParameter(op, theStandardPackage.getJavaString(), "value", 0, 1,
 				IS_UNIQUE, IS_ORDERED);
 
+		addEOperation(eAnnotationHelperEClass, theEcorePackage_2
+				.getEAnnotation(), "createAbstract", 0, 1, IS_UNIQUE,
+				IS_ORDERED);
+
 		op = addEOperation(eAnnotationHelperEClass, theEcorePackage_2
 				.getEAnnotation(), "getKermetaEAnnotation", 0, 1, IS_UNIQUE,
 				IS_ORDERED);
@@ -583,18 +546,14 @@ public class EcorePackageImpl extends EPackageImpl implements EcorePackage {
 				IS_UNIQUE, IS_ORDERED);
 
 		addEOperation(eAnnotationHelperEClass, theEcorePackage_2
-				.getEAnnotation(), "createAbstract", 0, 1, IS_UNIQUE,
-				IS_ORDERED);
+				.getEAnnotation(), "getEmptyKermetaEAnnotation", 0, 1,
+				IS_UNIQUE, IS_ORDERED);
 
 		op = addEOperation(eAnnotationHelperEClass, null,
 				"addAnnotationPropSetter", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, theEcorePackage_2.getEModelElement(),
 				"eModelElement", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, theStandardPackage.getJavaString(), "body", 0, 1,
-				IS_UNIQUE, IS_ORDERED);
-
-		addEOperation(eAnnotationHelperEClass, theEcorePackage_2
-				.getEAnnotation(), "getEmptyKermetaEAnnotation", 0, 1,
 				IS_UNIQUE, IS_ORDERED);
 
 		op = addEOperation(eAnnotationHelperEClass, theEcorePackage_2
@@ -613,6 +572,47 @@ public class EcorePackageImpl extends EPackageImpl implements EcorePackage {
 		op = addEOperation(eNamedElementHelperEClass, theStandardPackage
 				.getJavaString(), "asString", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, theEcorePackage_2.getEObject(), "element", 0, 1,
+				IS_UNIQUE, IS_ORDERED);
+
+		initEClass(modelAnalizerEClass, ModelAnalizer.class, "ModelAnalizer",
+				!IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		op = addEOperation(modelAnalizerEClass, theStandardPackage
+				.getJavaBoolean(), "isInterfaceBy", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, theEcorePackage_2.getEClass(), "extended_class", 0,
+				1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, theEcorePackage_2.getEClass(), "super_class", 0, 1,
+				IS_UNIQUE, IS_ORDERED);
+
+		op = addEOperation(modelAnalizerEClass, theStandardPackage
+				.getJavaBoolean(), "isExtendedBy", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, theEcorePackage_2.getEClass(), "extended_class", 0,
+				1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, theEcorePackage_2.getEClass(), "super_class", 0, 1,
+				IS_UNIQUE, IS_ORDERED);
+
+		initEClass(ecoreModelElementHelperEClass,
+				EcoreModelElementHelper.class, "EcoreModelElementHelper",
+				!IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		op = addEOperation(ecoreModelElementHelperEClass, theEcorePackage_2
+				.getEOperation(), "findEOperationProxy", 0, 1, IS_UNIQUE,
+				IS_ORDERED);
+		addEParameter(op, theStructurePackage.getOperation(), "op", 0, 1,
+				IS_UNIQUE, IS_ORDERED);
+
+		op = addEOperation(ecoreModelElementHelperEClass, null,
+				"setEStructuralFeatureProperties", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, theStructurePackage.getProperty(), "self_", 0, 1,
+				IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, theEcorePackage_2.getEStructuralFeature(),
+				"ecoreStructuralFeature", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, theKm2ecorePackage.getKM2EcoreContext(), "context",
+				0, 1, IS_UNIQUE, IS_ORDERED);
+
+		op = addEOperation(ecoreModelElementHelperEClass, theEcorePackage_2
+				.getEClass(), "findEClassProxy", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, theStructurePackage.getClassDefinition(), "cd", 0, 1,
 				IS_UNIQUE, IS_ORDERED);
 
 		// Initialize enums and add enum literals
@@ -648,17 +648,13 @@ public class EcorePackageImpl extends EPackageImpl implements EcorePackage {
 		String source = "kermeta";
 		addAnnotation(this, source, new String[] { "ecoreUri",
 				"http://www.kermeta.org/km2ecore/helper/ecore" });
-		addAnnotation(ecoreModelElementHelperEClass.getEOperations().get(0),
-				source, new String[] { "deprecated", "unused" });
-		addAnnotation(ecoreModelElementHelperEClass.getEOperations().get(2),
-				source, new String[] { "deprecated", "unused" });
 		addAnnotation(eAnnotationHelperEClass.getEOperations().get(0), source,
 				new String[] { "documentation", "/**\n\t * Not used\n\t */" });
 		addAnnotation(eAnnotationHelperEClass.getEOperations().get(0), source,
 				new String[] { "deprecated", "true" });
-		addAnnotation(eAnnotationHelperEClass.getEOperations().get(8), source,
+		addAnnotation(eAnnotationHelperEClass.getEOperations().get(9), source,
 				new String[] { "documentation", "/**\n\t * Not used\n\t */" });
-		addAnnotation(eAnnotationHelperEClass.getEOperations().get(8), source,
+		addAnnotation(eAnnotationHelperEClass.getEOperations().get(9), source,
 				new String[] { "deprecated", "true" });
 		addAnnotation(
 				kermetaEAnnotationSourceEEnum,
@@ -666,6 +662,10 @@ public class EcorePackageImpl extends EPackageImpl implements EcorePackage {
 				new String[] {
 						"documentation",
 						"/** Enumeration that lists the different keys among the Kermeta annotation in the Ecore side */" });
+		addAnnotation(ecoreModelElementHelperEClass.getEOperations().get(0),
+				source, new String[] { "deprecated", "unused" });
+		addAnnotation(ecoreModelElementHelperEClass.getEOperations().get(2),
+				source, new String[] { "deprecated", "unused" });
 	}
 
 } //EcorePackageImpl

@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: VirtualType.java,v 1.7 2008-10-29 08:29:16 cfaucher Exp $
+ * $Id: VirtualType.java,v 1.8 2008-11-07 08:53:36 cfaucher Exp $
  */
 package kermeta.language.structure;
 

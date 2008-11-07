@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: MultiplicityElementImpl.java,v 1.7 2008-10-29 08:29:11 cfaucher Exp $
+ * $Id: MultiplicityElementImpl.java,v 1.8 2008-11-07 08:52:53 cfaucher Exp $
  */
 package kermeta.language.structure.impl;
 
@@ -254,11 +254,11 @@ public class MultiplicityElementImpl extends TypedElementImpl implements
 				.newObject("km2ecore.helper.java.IdentifierHelper"))
 				.getMangledIdentifier(this.getName(), context);
 
-		java.lang.Boolean idIfCond_328 = false;
-		idIfCond_328 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+		java.lang.Boolean idIfCond_367 = false;
+		idIfCond_367 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 				.isNotEqualSwitcher(this.getEMFRenameAs(), "");
 
-		if (idIfCond_328) {
+		if (idIfCond_367) {
 
 			result = this.getEMFRenameAs();
 		}
@@ -293,11 +293,11 @@ public class MultiplicityElementImpl extends TypedElementImpl implements
 
 		result = "\nreturn ";
 
-		java.lang.Boolean idIfCond_329 = false;
-		idIfCond_329 = kermeta.standard.helper.IntegerWrapper.equals(this
+		java.lang.Boolean idIfCond_368 = false;
+		idIfCond_368 = kermeta.standard.helper.IntegerWrapper.equals(this
 				.getUpper(), 1);
 
-		if (idIfCond_329) {
+		if (idIfCond_368) {
 
 			result = kermeta.standard.helper.StringWrapper.plus(result,
 					"result");

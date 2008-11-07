@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: Stack.java,v 1.7 2008-10-29 08:29:22 cfaucher Exp $
+ * $Id: Stack.java,v 1.8 2008-11-07 08:53:58 cfaucher Exp $
  */
 package kermeta.utils;
 
@@ -22,20 +22,20 @@ public interface Stack<G> extends Sequence<G> {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @model annotation="kermeta documentation='/**\r\n\t * Get and remove the element at the top of the stack\r\n\t \052/'"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='\nG result = null;\n\n\tresult = this.peek();\n\n\tthis.removeAt(0);\n\nreturn result;\n'"
-	 * @generated
-	 */
-	G pop();
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
 	 * @model annotation="kermeta documentation='/**\r\n\t * Gets the element at the top of the stack\r\n\t \052/'"
 	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='\nG result = null;\n\n\tresult = this.first();\n\nreturn result;\n'"
 	 * @generated
 	 */
 	G peek();
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model annotation="kermeta documentation='/**\r\n\t * Get and remove the element at the top of the stack\r\n\t \052/'"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='\nG result = null;\n\n\tresult = this.peek();\n\n\tthis.removeAt(0);\n\nreturn result;\n'"
+	 * @generated
+	 */
+	G pop();
 
 	/**
 	 * <!-- begin-user-doc -->

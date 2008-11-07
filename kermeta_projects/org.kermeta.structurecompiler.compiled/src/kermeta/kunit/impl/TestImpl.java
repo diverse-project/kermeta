@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: TestImpl.java,v 1.7 2008-10-29 08:29:09 cfaucher Exp $
+ * $Id: TestImpl.java,v 1.8 2008-11-07 08:52:29 cfaucher Exp $
  */
 package kermeta.kunit.impl;
 
@@ -112,7 +112,7 @@ public abstract class TestImpl extends ObjectImpl implements Test {
 		//PreConditions Checking
 		{
 			if (org.kermeta.compil.runtime.ExecutionContext.getInstance()
-					.mustBeChecked("pre__211840__paramNotVoid")) {
+					.mustBeChecked("pre__40069663__paramNotVoid")) {
 				java.lang.Boolean result_pre = false;
 
 				result_pre = org.kermeta.compil.runtime.helper.language.ObjectUtil
@@ -130,7 +130,7 @@ public abstract class TestImpl extends ObjectImpl implements Test {
 		//PostConditions Checking
 		{
 			if (org.kermeta.compil.runtime.ExecutionContext.getInstance()
-					.mustBeChecked("post__211846__logNotVoid")) {
+					.mustBeChecked("post__40069669__logNotVoid")) {
 				java.lang.Boolean result_post = false;
 
 				result_post = org.kermeta.compil.runtime.helper.language.ObjectUtil

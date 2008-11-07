@@ -50,6 +50,7 @@ public class ExecutionContext {
 	}
 
 	/**
+	 * Used for pre and post conditions
 	 * @generated
 	 */
 	public java.lang.Boolean mustBeChecked(String id) {
@@ -188,6 +189,20 @@ public class ExecutionContext {
 			}
 		}
 		return null;
+	}
+
+	/**
+	 * @generated
+	 */
+	public <G> java.lang.Object asTypeOrVoid(java.lang.Object self) {
+
+		try {
+			G o = (G) self;
+		} catch (ClassCastException e) {
+			return null;
+		}
+
+		return self;
 	}
 
 }

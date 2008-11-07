@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: FileIOImpl.java,v 1.7 2008-10-29 08:29:13 cfaucher Exp $
+ * $Id: FileIOImpl.java,v 1.8 2008-11-07 08:53:17 cfaucher Exp $
  */
 package kermeta.io.impl;
 
@@ -49,11 +49,11 @@ public class FileIOImpl extends ObjectImpl implements FileIO {
 	 */
 	public void writeTextFile(String filename, String text) {
 
-		java.lang.Boolean idIfCond_976 = false;
-		idIfCond_976 = kermeta.standard.helper.StringWrapper.equals(filename,
+		java.lang.Boolean idIfCond_941 = false;
+		idIfCond_941 = kermeta.standard.helper.StringWrapper.equals(filename,
 				null);
 
-		if (idIfCond_976) {
+		if (idIfCond_941) {
 
 			if (true)
 				throw new org.kermeta.compil.runtime.helper.error.KRuntimeError(
@@ -76,11 +76,11 @@ public class FileIOImpl extends ObjectImpl implements FileIO {
 
 		java.lang.String result = null;
 
-		java.lang.Boolean idIfCond_977 = false;
-		idIfCond_977 = kermeta.standard.helper.StringWrapper.equals(filename,
+		java.lang.Boolean idIfCond_942 = false;
+		idIfCond_942 = kermeta.standard.helper.StringWrapper.equals(filename,
 				null);
 
-		if (idIfCond_977) {
+		if (idIfCond_942) {
 
 			if (true)
 				throw new org.kermeta.compil.runtime.helper.error.KRuntimeError(
@@ -93,18 +93,22 @@ public class FileIOImpl extends ObjectImpl implements FileIO {
 
 		java.lang.Boolean isdirectory = null;
 
-		exists = (java.lang.Boolean) org.kermeta.compil.runtime.helper.io.SimpleFileIOUtil
-				.fileExists(filename);
+		exists = (java.lang.Boolean) org.kermeta.compil.runtime.ExecutionContext
+				.getInstance().<java.lang.Boolean> asTypeOrVoid(
+						org.kermeta.compil.runtime.helper.io.SimpleFileIOUtil
+								.fileExists(filename));
 
-		isdirectory = (java.lang.Boolean) org.kermeta.compil.runtime.helper.io.SimpleFileIOUtil
-				.fileIsDirectory(filename);
+		isdirectory = (java.lang.Boolean) org.kermeta.compil.runtime.ExecutionContext
+				.getInstance().<java.lang.Boolean> asTypeOrVoid(
+						org.kermeta.compil.runtime.helper.io.SimpleFileIOUtil
+								.fileIsDirectory(filename));
 
-		java.lang.Boolean idIfCond_978 = false;
-		idIfCond_978 = kermeta.standard.helper.BooleanWrapper
+		java.lang.Boolean idIfCond_943 = false;
+		idIfCond_943 = kermeta.standard.helper.BooleanWrapper
 				.or(kermeta.standard.helper.BooleanWrapper.not(exists),
 						isdirectory);
 
-		if (idIfCond_978) {
+		if (idIfCond_943) {
 
 			if (true)
 				throw new org.kermeta.compil.runtime.helper.error.KRuntimeError(
@@ -113,8 +117,10 @@ public class FileIOImpl extends ObjectImpl implements FileIO {
 
 		}
 
-		result = (java.lang.String) org.kermeta.compil.runtime.helper.io.SimpleFileIOUtil
-				.readTextFile(filename);
+		result = (java.lang.String) org.kermeta.compil.runtime.ExecutionContext
+				.getInstance().<java.lang.String> asTypeOrVoid(
+						org.kermeta.compil.runtime.helper.io.SimpleFileIOUtil
+								.readTextFile(filename));
 
 		return result;
 

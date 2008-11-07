@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: EReferenceImpl.java,v 1.9 2008-10-29 08:29:11 cfaucher Exp $
+ * $Id: EReferenceImpl.java,v 1.10 2008-11-07 08:53:01 cfaucher Exp $
  */
 package ecore.impl;
 

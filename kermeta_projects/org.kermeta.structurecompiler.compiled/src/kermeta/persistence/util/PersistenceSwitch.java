@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: PersistenceSwitch.java,v 1.7 2008-10-29 08:29:31 cfaucher Exp $
+ * $Id: PersistenceSwitch.java,v 1.8 2008-11-07 08:54:15 cfaucher Exp $
  */
 package kermeta.persistence.util;
 

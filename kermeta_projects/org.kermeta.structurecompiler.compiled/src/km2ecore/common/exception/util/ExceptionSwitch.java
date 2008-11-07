@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ExceptionSwitch.java,v 1.7 2008-10-29 08:29:37 cfaucher Exp $
+ * $Id: ExceptionSwitch.java,v 1.8 2008-11-07 08:54:21 cfaucher Exp $
  */
 package km2ecore.common.exception.util;
 
