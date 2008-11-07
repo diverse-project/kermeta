@@ -2,7 +2,7 @@
 	 package="org.kermeta.compiler.generator.templates"
 	 
 	 class="ExecutionContext"
-	 version="$Id: ExecutionContext.javajet,v 1.11 2008-10-23 12:54:54 cfaucher Exp $" %>
+	 version="$Id: ExecutionContext.javajet,v 1.12 2008-11-07 08:45:04 cfaucher Exp $" %>
 <%String kmFilePath_forReflection = (String) argument;%>
 
 package org.kermeta.compil.runtime;
@@ -57,6 +57,7 @@ public class ExecutionContext {
 	}
 	
 	/**
+	 * Used for pre and post conditions
 	 * @generated
 	 */
 	public java.lang.Boolean mustBeChecked(String id) {
@@ -195,6 +196,20 @@ public class ExecutionContext {
 			}
 		}
 		return null;
+	}
+	
+	/**
+	 * @generated
+	 */
+	public <G> java.lang.Object asTypeOrVoid(java.lang.Object self) {
+		
+		try {
+			G o = (G) self;
+		} catch (ClassCastException e) {
+			return null;
+		}
+		
+		return self;
 	}
 
 }
