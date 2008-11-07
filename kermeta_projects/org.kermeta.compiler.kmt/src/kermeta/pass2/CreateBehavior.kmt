@@ -1,4 +1,4 @@
-/* $Id: CreateBehavior.kmt,v 1.88 2008-10-28 21:59:27 barais Exp $
+/* $Id: CreateBehavior.kmt,v 1.89 2008-11-07 08:53:31 cfaucher Exp $
  * Creation date: January 21, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -912,7 +912,7 @@ package behavior {
 					
 						var tmp_prefix : String init ""
 						if not self.parameters.detect{ p | p.callsFunctionType() }.isVoid() then
-							tmp_prefix := context.RETURN_EXPRESSION_TO_REPLACE //+ "_8_"
+							tmp_prefix := context.RETURN_EXPRESSION_TO_REPLACE //+ "*_8_*"
 						end
 						
 						result := tmp_prefix + static_call + "(" + result
@@ -1222,21 +1222,6 @@ package behavior {
 	}
 	
 	aspect class Assignment {
-	
-		operation ppCast(context : KM2EcoreContext) : String is do
-			result := ""
-			if self.isCast() then
-				result := "(" + self.getCastTypeQName(context) + ") "
-			end
-		end
-		
-		operation getCastTypeQName(context : KM2EcoreContext) : String is do
-			result := ""
-			if self.isCast() then
-				//FIXME CF 08-08-01 When the bug#6018 will be fixed, self.target.staticType could be self.staticType
-				result := self.target.staticType.createBehaviorJava(context)
-			end
-		end
 		
 		operation requireValueTypeConversion(context : KM2EcoreContext) : Boolean is do
 			result := false
@@ -1266,12 +1251,13 @@ package behavior {
 			
 			var left : String init self.target.createBehaviorJava(context)
 			
-			var ppCast : String init self.ppCast(context)
+			var ppCastPrefix : String init self.ppCastPrefix(context)
+			var ppCastSuffix : String init self.ppCastSuffix()
 			
 			//requireValueTypeConversion(context)
 			
 			// We should use: self.staticType.createBehaviorJava(context), but this value is not setted rightly
-			context.resultLastStatementStack.push(left + " = " + ppCast + context.TYPE_SEPARATOR + self.target.staticType.createBehaviorJava(context))
+			context.resultLastStatementStack.push(left + " = " + ppCastPrefix + context.TYPE_SEPARATOR + self.target.staticType.createBehaviorJava(context))
 			
 			var right : String init self.~value.createBehaviorJava(context)
 		
@@ -1295,9 +1281,9 @@ package behavior {
 					else
 						if i == (tabLeft.size()-1) then
 							if self.~value.callsFunctionType() then
-								result := right + result + self.target.asType(CallFeature).printSetAccessor(context) + "(" + ppCast + self.~value.asType(CallFeature).calledFtResult + ");"
+								result := right + result + self.target.asType(CallFeature).printSetAccessor(context) + "(" + ppCastPrefix + self.~value.asType(CallFeature).calledFtResult + ppCastSuffix + ");"
 							else
-								result := result + self.target.asType(CallFeature).printSetAccessor(context) + "(" + ppCast + right + ");"
+								result := result + self.target.asType(CallFeature).printSetAccessor(context) + "(" + ppCastPrefix + right + ppCastSuffix + ");"
 							end
 						end
 					end
@@ -1309,12 +1295,12 @@ package behavior {
 					result := right
 				else
 					if right.contains(context.RETURN_EXPRESSION_TO_REPLACE) then
-						result := right.replace(context.RETURN_EXPRESSION_TO_REPLACE, left + " = " + ppCast)
+						result := right.replace(context.RETURN_EXPRESSION_TO_REPLACE, left + " = " + ppCastPrefix)
 					else
 						if ( self.target.isInstanceOf(CallVariable) or self.target.isInstanceOf(CallResult) ) and (self.~value.callsFunctionType() or self.~value.isFunctionTypeVariable()) then
 							result := right
 						else
-							result := left + " = " + ppCast + right
+							result := left + " = " + ppCastPrefix + right
 						end
 					end
 				end

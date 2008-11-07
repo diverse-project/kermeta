@@ -1,4 +1,4 @@
-/* $Id: OperationHelper.kmt,v 1.15 2008-10-16 09:18:44 cfaucher Exp $
+/* $Id: OperationHelper.kmt,v 1.16 2008-11-07 08:53:31 cfaucher Exp $
  * Creation date: May 20, 2008
  * License: EPL
  * Copyright:
@@ -218,7 +218,27 @@ aspect class Operation {
 				end
 			end
 			
-			staticMethod.body := self.createBehaviorJava(context)
+			staticMethod.body := "//Protection of the following code\n"
+			
+			if context.frameworkOperations.contains(self.name) then
+				staticMethod.body := staticMethod.body + "if( self == null || ((java.lang.Object) self) instanceof kermeta.language.structure.Object ) {\n"
+				if staticMethod.sMReturn.type!="void" then
+					staticMethod.body := staticMethod.body + "return (" + staticMethod.sMReturn.type + ") "
+				end
+				staticMethod.body := staticMethod.body + context.OBJECT_UTIL_CLASS + "." + self.name + "((kermeta.language.structure.Object) ((java.lang.Object) self)"
+				self.ownedParameter.each{ p |
+					staticMethod.body := staticMethod.body + ", " + p.name
+				}
+				staticMethod.body := staticMethod.body + ");\n"
+			else
+				staticMethod.body := staticMethod.body + "if( self == null ) {\n"
+				staticMethod.body := staticMethod.body + "kermeta.exceptions.CallOnVoidTarget exp = kermeta.exceptions.ExceptionsFactory.eINSTANCE.createCallOnVoidTarget();\n"
+				staticMethod.body := staticMethod.body + "exp.setMessage(\"Initialize the " + context.current_valueType.name + " expression\");\n"
+				staticMethod.body := staticMethod.body + "throw new " + context.JAVA_CLASS_EXCEPTION_SWITCHER + "(exp);\n"
+			end
+			
+			staticMethod.body := staticMethod.body + "}\n//End of the protection\n\n"
+			staticMethod.body := staticMethod.body + self.createBehaviorJava(context)
 		
 		end
 		

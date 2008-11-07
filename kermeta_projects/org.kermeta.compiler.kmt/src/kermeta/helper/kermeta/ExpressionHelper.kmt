@@ -1,4 +1,4 @@
-/* $Id: ExpressionHelper.kmt,v 1.30 2008-10-28 23:19:17 cfaucher Exp $
+/* $Id: ExpressionHelper.kmt,v 1.31 2008-11-07 08:53:31 cfaucher Exp $
  * Creation date: Jul 25, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -82,7 +82,7 @@ aspect class Expression {
 							if assignment.container.isInstanceOf(CallFeature) then
 								result := ""
 							else
-								result := ";"
+								result := self.container.asType(Assignment).ppCastSuffix() + ";"
 							end
 						end
 					end
@@ -559,7 +559,12 @@ aspect class CallFeature {
 			ft_str := ft_str + "null;\n"
 		end
 		
+		var ppCastSuffix : String init ""
+		
 		if self.container.isInstanceOf(Assignment) then
+			
+			ppCastSuffix := self.container.asType(Assignment).ppCastSuffix()
+		
 			if self.container.asType(Assignment).target.isInstanceOf(CallResult) then
 				callElement := self.container.asType(Assignment).target.createBehaviorJava(context)
 			end
@@ -595,13 +600,11 @@ aspect class CallFeature {
 		// and the variables of the given function type
 		if callElement != "" then
 			
-			
-			
 			//callElement
 			ft_str := ft_str + "\n//CE\n"
 			
 			if context.getResultLastStatementId()!="" then
-				ft_str := ft_str + context.getResultLastStatementId() + "result" + context.printFtSuffix() + ";\n"
+				ft_str := ft_str + context.getResultLastStatementId() + "result" + context.printFtSuffix() + ppCastSuffix + ";\n"
 			else
 				ft_str := ft_str + callElement + " = result" + context.printFtSuffix() + ";\n"
 			end
@@ -611,7 +614,7 @@ aspect class CallFeature {
 			if self.container.asType(Assignment).target.isInstanceOf(CallResult) then
 				//callElement
 				ft_str := ft_str + "\n//CER\n"
-				ft_str := ft_str + context.RETURN_EXPRESSION_TO_REPLACE + "result" + context.printFtSuffix() + ";\n"
+				ft_str := ft_str + context.RETURN_EXPRESSION_TO_REPLACE + "result" + context.printFtSuffix() + ppCastSuffix + ";\n"
 			end
 		end
 		
