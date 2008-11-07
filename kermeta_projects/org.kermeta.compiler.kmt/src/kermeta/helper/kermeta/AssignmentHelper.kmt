@@ -1,0 +1,49 @@
+/* $Id: AssignmentHelper.kmt,v 1.1 2008-11-07 08:52:50 cfaucher Exp $
+ * Creation date: Nov 06, 2008
+ * License: EPL
+ * Copyright: IRISA / INRIA / Universite Rennes 1
+ * Authors:
+ * 			Cyril Faucher <cfaucher@irisa.fr>
+ */
+
+package kermeta::language::behavior;
+
+require kermeta
+require "KermetaHelper.kmt"
+require "platform:/resource/org.kermeta.compiler.kmt/src/kermeta/KM2EcoreContext.kmt"
+
+using kermeta::language::structure
+using kermeta::standard
+using km2ecore
+using km2ecore::helper::kermeta
+
+aspect class Assignment {
+	operation ppCast(context : KM2EcoreContext) : String is do
+		result := ""
+		if self.isCast() then
+			result := "(" + self.getCastTypeQName(context) + ") "
+		end
+	end
+	
+	operation ppCastPrefix(context : KM2EcoreContext) : String is do
+		result := ""
+		if self.isCast() then
+			result := self.ppCast(context) + context.JAVA_INSTANCE_EXECUTION_CONTEXT + ".<" + self.getCastTypeQName(context) + ">asTypeOrVoid("
+		end
+	end
+	
+	operation ppCastSuffix() : String is do
+		result := ""
+		if self.isCast() then
+			result := ")"
+		end
+	end
+	
+	operation getCastTypeQName(context : KM2EcoreContext) : String is do
+		result := ""
+		if self.isCast() then
+			//FIXME CF 08-08-01 When the bug#6018 will be fixed, self.target.staticType could be self.staticType
+			result := self.target.staticType.createBehaviorJava(context)
+		end
+	end
+}
