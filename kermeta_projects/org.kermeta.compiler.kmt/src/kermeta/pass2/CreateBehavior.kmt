@@ -1,4 +1,4 @@
-/* $Id: CreateBehavior.kmt,v 1.89 2008-11-07 08:53:31 cfaucher Exp $
+/* $Id: CreateBehavior.kmt,v 1.90 2008-11-07 09:44:28 cfaucher Exp $
  * Creation date: January 21, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -530,80 +530,6 @@ package behavior {
 				end
 				
 				javaCode := stm.createExpression(context, javaCode, lastExpression)
-				
-				//Put the following code in the ClassExpression
-				/*var str_statement : String init stm.createBehaviorJava(context).normalizeStatement()
-
-				var str_statement_splitted : OrderedSet<String> init str_statement.split(context.SEPARATOR_STATEMENT_FT) 
-				
-				if str_statement_splitted.size() == 2 then
-					var s1 : String init str_statement_splitted.first()
-					var s2 : String init str_statement_splitted.last()
-					
-					if s2.contains(context.PREVIOUS_STATEMENT_FT) then
-						str_statement := s2.replace(context.PREVIOUS_STATEMENT_FT, s1)
-					end
-
-				end
-				
-				//FIXME CF Maybe we could find a better solution
-				str_statement := str_statement.replace(context.SEPARATOR_STATEMENT_FT + "//", "//")
-				str_statement := str_statement.replace(context.RETURN_EXPRESSION_TO_REPLACE + "result", "result")
-				
-				javaCode.append(context.beforeLambdaExpressionResult)
-				context.beforeLambdaExpressionResult := ""
-				
-				javaCode.append("\n\t")
-				
-				//if the given statement is the last one
-				if lastExpression then
-					
-					if stm.mustBeAssigned() then
-						if self.container.isInstanceOf(Operation) then
-							javaCode.append(context.NOT_EVALUATED_MESSAGE)
-						else
-							if Operation.new().isVoidType(stm.asType(Expression).staticType.getTypeName()) then
-								javaCode.append(context.NOT_EVALUATED_MESSAGE)
-							else
-								if self.container.container.isInstanceOf(Block) and (context.resultLastStatementStack.size()==0) then
-									javaCode.append(context.NOT_EVALUATED_MESSAGE)
-								else
-									if context.getResultLastStatementType() == stm.asType(Expression).staticType.createBehaviorJava(context) then
-										javaCode.append(context.getResultLastStatementId())
-									end
-								end
-							end
-						end
-					else
-						if stm.isInstanceOf(CallFeature) and (context.resultLastStatementStack.size()>0) then
-
-							if context.getResultLastStatementType() == stm.asType(Expression).staticType.createBehaviorJava(context) then
-								if stm.callsFunctionType() then
-									str_statement := str_statement + context.getResultLastStatementId() + stm.asType(CallFeature).calledFtResult + ";\n"
-								else
-									if str_statement.contains(context.RETURN_EXPRESSION_TO_REPLACE_SPECIAL) then
-										str_statement := str_statement.replace(context.RETURN_EXPRESSION_TO_REPLACE_SPECIAL, context.getResultLastStatementId())
-									else
-										javaCode.append(context.getResultLastStatementId())
-									end
-								end
-							end
-						end
-					end
-				else
-					if stm.mustBeAssigned() then
-						javaCode.append(context.NOT_EVALUATED_MESSAGE)
-					end
-				end
-				
-				if str_statement.contains(context.RETURN_EXPRESSION_TO_REPLACE_SPECIAL) then
-					// We have to remove the context.RETURN_EXPRESSION_TO_REPLACE_SPECIAL, but not its setter in the operation KM2EcoreContext::initializeConstants
-					if not str_statement.contains( "(\"" + context.RETURN_EXPRESSION_TO_REPLACE_SPECIAL + "\")") then
-						str_statement := str_statement.replace(context.RETURN_EXPRESSION_TO_REPLACE_SPECIAL, "")
-					end
-				end
-				
-				javaCode.append(str_statement)*/
 				
 				javaCode.append("\n")
 				
