@@ -50,7 +50,7 @@ GPL license.
       <import feature="fr.irisa.triskell.traceability" version="1.1.0" match="greaterOrEqual"/>
       <import feature="org.eclipse.platform" version="3.3.0" match="greaterOrEqual"/>
       <import feature="org.kermeta.log4j" version="1.1.0" match="greaterOrEqual"/>
-      <import feature="org.eclipse.emf.sdk" version="2.3.0" match="greaterOrEqual"/>
+      <import feature="org.eclipse.emf" version="2.4.1.v200808251517" match="greaterOrEqual"/>
    </requires>
 
    <plugin
