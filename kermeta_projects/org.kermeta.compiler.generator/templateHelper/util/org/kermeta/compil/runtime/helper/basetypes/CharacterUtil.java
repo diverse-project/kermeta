@@ -35,19 +35,5 @@ public class CharacterUtil {
 		return org.kermeta.compil.runtime.ExecutionContext.getInstance().getMetaClass("java.lang.Character");
 	}
 
-	
-	/**************************************/
-	/************** SWITCHER **************/
-	/**************************************/
-	public static java.lang.String toStringSwitcher(java.lang.Object self) {
-		if (self == null) {
-			return ObjectUtil.toString(self);
-		} else {
-			return CharacterWrapper.toString((java.lang.Character) self);
-		}
-	}
-	/**************************************/
-	/************** SWITCHER **************/
-	/**************************************/
 }
 /* END OF FILE */
