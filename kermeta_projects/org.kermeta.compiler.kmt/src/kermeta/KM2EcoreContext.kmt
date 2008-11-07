@@ -1,4 +1,4 @@
-/* $Id: KM2EcoreContext.kmt,v 1.48 2008-10-22 16:07:51 cfaucher Exp $
+/* $Id: KM2EcoreContext.kmt,v 1.49 2008-11-07 08:50:34 cfaucher Exp $
  * Creation date: February 14, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -106,7 +106,9 @@ class KM2EcoreContext {
 	attribute JAVA_CLASS_EXCEPTION_SWITCHER : String [1..1]
 	attribute VARIABLE_EXCEPTION_SWITCHER : String [1..1]
 	attribute COLLECTION_UTIL_CLASS : String [1..1]
+	attribute OBJECT_UTIL_CLASS : String [1..1]
 	attribute JAVA_CLASS_EXECUTION_CONTEXT : String [1..1]
+	attribute JAVA_INSTANCE_EXECUTION_CONTEXT : String [1..1]
 	attribute NOT_EVALUATED_MESSAGE : String [1..1]
 	//attribute leftAssign : String [1..1]
 	attribute SELF_EXPRESSION_TO_REPLACE : String [1..1]
@@ -209,7 +211,9 @@ class KM2EcoreContext {
 		self.JAVA_CLASS_EXCEPTION_SWITCHER := "org.kermeta.compil.runtime.helper.error.KRuntimeError"
 		self.VARIABLE_EXCEPTION_SWITCHER := "ex_switcher"
 		self.COLLECTION_UTIL_CLASS := "org.kermeta.compil.runtime.helper.basetypes.CollectionUtil"
+		self.OBJECT_UTIL_CLASS := "org.kermeta.compil.runtime.helper.language.ObjectUtil"
 		self.JAVA_CLASS_EXECUTION_CONTEXT := "org.kermeta.compil.runtime.ExecutionContext"
+		self.JAVA_INSTANCE_EXECUTION_CONTEXT := self.JAVA_CLASS_EXECUTION_CONTEXT + ".getInstance()"
 		self.NOT_EVALUATED_MESSAGE := "//FIXME This statement cannot be evaluated without an assignment: "
 		self.SELF_EXPRESSION_TO_REPLACE := "SELF_EXPRESSION_TO_REPLACE_STR"
 		self.RETURN_EXPRESSION_TO_REPLACE := "RETURN_EXPRESSION_TO_REPLACE_STR"
