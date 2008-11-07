@@ -59,7 +59,7 @@ License (&quot;EPL&quot;).
       <import plugin="org.eclipse.ui"/>
       <import plugin="org.eclipse.jface.text"/>
       <import plugin="org.eclipse.ui.cheatsheets"/>
-      <import feature="org.eclipse.emf.sdk" version="2.3.0" match="greaterOrEqual"/>
+      <import feature="org.eclipse.emf" version="2.4.1" match="greaterOrEqual"/>
    </requires>
 
    <plugin
