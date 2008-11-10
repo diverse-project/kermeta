@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Script used to run the tests on a command line, typically in a daily build
+ the tests must be deployed in the eclipse that will run them
+ the following plugins must be installed : org.kermeta.eclipse.test and org.kermeta.eclipse.ant.optionnal.junit4 
+ -->
+<project name="testsuite" default="run" basedir=".">
+	<!-- The property ${eclipse-home} should be passed into this script -->
+	<!-- Set a meaningful default value for when it is not. -->
+	<property name="eclipse-home" value="${basedir}\..\.."/>
+
+	<!-- sets the properties eclipse-home, and library-file -->
+	<property name="plugin-name" value="org.kermeta.compiler.tests"/>
+	<!-- calculate library.xml location , org.eclipse.test plugin must be deployed unpacked-->
+	<!--<path id="library-file.id">
+		    <fileset dir="${eclipse-home}/plugins">
+		        <include name="org.kermeta.eclipse.test_*/library.xml"/>
+		    </fileset>
+	</path>-->
+	<path id="library-file.id">
+			    <fileset dir="..">
+			        <include name="org.kermeta.eclipse.test/library.xml"/>
+			    </fileset>
+	</path>
+	<property name="library-file" refid="library-file.id"/>
+	<echo message="library-file=${library-file}"/>
+	<property name="os" value="win32"/>
+	<property name="ws" value="win32"/>
+	<property name="arch" value="x86"/>
+	
+	<!-- calculate plugin path, in some situation this may be simply the basedir
+	  here we suppose that the plugin is deployed (and unzipped/unpacked) in the plugins folder -->
+	<path id="plugin-path.id">
+	    <dirset dir="${eclipse-home}/plugins">
+	        <include name="${plugin-name}_*"/>
+	     </dirset>
+	</path>
+	<property name="plugin-patha" refid="plugin-path.id"/> 
+	<property name="plugin-path" value="${plugin-patha}"/> 
+	<!-- <echo message="And the mystery file is ${plugin-path}"/>--> 
+	
+
+	<!-- This target holds all initialization code that needs to be done for -->
+	<!-- all tests that are to be run. Initialization for individual tests -->
+	<!-- should be done within the body of the suite target. -->
+	<target name="init">
+		<tstamp/>
+		<delete>
+			<fileset dir="${eclipse-home}" includes="org*.xml"/>
+		</delete>
+	</target>
+
+	<!-- This target defines the tests that need to be run. -->
+	<target name="suite">
+		<property name="refactoring-folder" 
+              value="${eclipse-home}/refactoring_folder"/>
+		<delete dir="${refactoring-folder}" quiet="true"/>
+		<ant target="ui-test" antfile="${library-file}" dir="${eclipse-home}">
+		<!--<ant target="core-test" antfile="${library-file}" dir="${eclipse-home}">-->
+			<property name="data-dir" value="${refactoring-folder}"/>
+			<property name="plugin-name" value="${plugin-name}"/>
+			<property name="classname" 
+                value="org.kermeta.compiler.tests.CompiledCodeBehaviorTestSuite"/>
+			<property name="useEclipseExe" value="true"/>
+		</ant>
+	</target>
+	
+	<!-- This target holds code to cleanup the testing environment after -->
+	<!-- after all of the tests have been run. You can use this target to -->
+	<!-- delete temporary files that have been created. -->
+	<target name="cleanup">
+	</target>
+
+	<!-- This target runs the test suite. Any actions that need to happen -->
+	<!-- after all the tests have been run should go here. -->
+	<target name="run" depends="init,suite,cleanup">
+		<ant target="collect" antfile="${library-file}" dir="${basedir}">
+			<property name="includes" value="org*.xml"/>
+			<property name="output-file" value="TEST-${plugin-name}.xml"/>
+		</ant>
+	</target>
+</project>
