@@ -11,7 +11,11 @@ public class CollectionUtil<G> {
 
 	static public <G> void add(Collection<G> c, Object o) {
 		try {
-			c.getValues().add((G) o);
+			// The addUnique method is called instead of add to fix
+			// the problem of uniqueness, the uniqueness constraint is
+			// checked before this calling in function of the type given
+			// of the Collection: bag, seq, set, oset
+			((BasicEList<G>) c.getValues()).addUnique((G) o);
 		} catch (NullPointerException e) {
 			c.setValues( new BasicEList<G>() );
 			c.getValues().add((G) o);
