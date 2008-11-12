@@ -37,7 +37,7 @@ class CleanEcoreKMAnnotation
 	var emf_res: EMFResource 
 	emf_res := lsEcore.loadEcore(modelURI)
 	// Removing the EAnnotations at the top of the resource
-	emf_res.instances.select{o|o.isInstanceOf(EAnnotation)}.select{o|o.asType(EAnnotation).source.indexOf("ModellingUnit") != -1
+	emf_res.instances.select{o|o.isInstanceOf(EAnnotation)}.select{o|o.asType(EAnnotation).source.indexOf("ModelingUnit") != -1
 							or o.asType(EAnnotation).source.indexOf("kermeta") != -1
 							}.each{e|emf_res.contents.each{o|if o.equals(e) then 
 							o.containingResource.remove(o)
@@ -60,7 +60,7 @@ class CleanEcoreKMAnnotation
 		stdio.writeln("Annotation at the package level")
 		
 		p.eAnnotations.select{e | e.source.indexOf("kermeta")!=-1
-								or e.source.indexOf("ModellingUnit")!=-1}.each{e|p.eAnnotations.remove(e)}
+								or e.source.indexOf("ModelingUnit")!=-1}.each{e|p.eAnnotations.remove(e)}
 	end
 	// removing classifier annotations i.e. classes and datatypes 
 	if p.eClassifiers.size != 0 then
