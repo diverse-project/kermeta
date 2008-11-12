@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: CallFeatureImpl.java,v 1.11 2008-11-07 08:53:28 cfaucher Exp $
+ * $Id: CallFeatureImpl.java,v 1.12 2008-11-12 16:24:29 cfaucher Exp $
  */
 package kermeta.language.behavior.impl;
 
@@ -980,7 +980,7 @@ public class CallFeatureImpl extends CallExpressionImpl implements CallFeature {
 								"\"))");
 			} else {
 
-				result = "null";
+				result = "new " + tgt.createBehaviorJava(context) + "()";
 			}
 
 		} else {
