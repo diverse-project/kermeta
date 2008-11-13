@@ -1,4 +1,4 @@
-/* $Id: CompileKermetaAction.java,v 1.9 2008-10-31 11:03:40 dvojtise Exp $
+/* $Id: CompileKermetaAction.java,v 1.10 2008-11-13 10:01:52 dvojtise Exp $
  * Project   : fr.irisa.triskell.kermeta.compiler
  * File      : CompileKermetaAction.java
  * License   : EPL
@@ -14,7 +14,6 @@ import java.util.Iterator;
 
 import kermeta.compiler.runner.Main__main_km2ecore_behaviorJava__Runner;
 
-import org.apache.commons.logging.Log;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
@@ -32,7 +31,6 @@ import org.kermeta.compiler.KermetaCompiler;
 import org.kermeta.compiler.ui.Activator;
 import org.kermeta.io.KermetaUnit;
 import org.kermeta.io.loader.plugin.LoaderPlugin;
-import org.kermeta.log4j.util.LogConfigurationHelper;
 import org.kermeta.simk.presentation.SimkEditor;
 
 import fr.irisa.triskell.eclipse.resources.ResourceHelper;
@@ -74,6 +72,7 @@ public class CompileKermetaAction implements IObjectActionDelegate {
 					
 					//The following 2 lines are required to set rightly the Simk plugin
 					Platform.getBundle("org.kermeta.simk").start();
+					@SuppressWarnings("unused")
 					SimkEditor simkEditor = new SimkEditor();
 					
 		
@@ -109,7 +108,10 @@ public class CompileKermetaAction implements IObjectActionDelegate {
 					compiler.run();
 					Activator.internalLog.info("The compilation process is complete");
 								
-				} catch (Exception e) {
+				}catch (UnsupportedClassVersionError e){
+					Activator.logErrorMessage("Java version incompatibility : one of the dependencies of this plugin is not compatible with your JVM", e);
+        		}
+				catch (Exception e) {
 					String message = "Compilation of " + file.getName()+" failed";
 					Activator.logErrorMessage(message, e);
 				}catch (Error e) {

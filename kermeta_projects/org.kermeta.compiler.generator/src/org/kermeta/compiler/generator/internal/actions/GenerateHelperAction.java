@@ -8,7 +8,7 @@
  * Technologies), Jacques Lescot (Anyware Technologies) - initial API and
  * implementation
  ******************************************************************************/
-/*$Id: GenerateHelperAction.java,v 1.10 2008-10-17 14:40:19 cfaucher Exp $
+/*$Id: GenerateHelperAction.java,v 1.11 2008-11-13 10:01:49 dvojtise Exp $
 * Project : org.kermeta.compiler.generator
 * File : 	GenerateHelperAction.java
 * License : EPL
@@ -48,7 +48,7 @@ public class GenerateHelperAction //implements IActionDelegate
 {
     //private ISelection selection;
 
-    private IProject generatedProject;
+    protected IProject generatedProject;
     
     private IProgressMonitor monitor;
     
@@ -135,7 +135,11 @@ public class GenerateHelperAction //implements IActionDelegate
                 } catch (IOException ioe) {
                     IStatus status = new Status(IStatus.ERROR, GeneratorPlugin.getId(), IStatus.OK, "Operation failed.", ioe);
                     throw new CoreException(status);
-                } finally {
+                }catch (UnsupportedClassVersionError e){
+        			// TODO Auto-generated catch block
+        			//e.printStackTrace();
+        			GeneratorPlugin.getDefault().logError("Java version incompatibility : one of the dependencies of this plugin is not compatible with your JVM", e);
+        		} finally {
                     monitor.done();
                 }
             }
@@ -149,7 +153,7 @@ public class GenerateHelperAction //implements IActionDelegate
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
+		} 
 
 /*        try {
             Shell shell = GeneratorPlugin.getActiveWorkbenchShell();

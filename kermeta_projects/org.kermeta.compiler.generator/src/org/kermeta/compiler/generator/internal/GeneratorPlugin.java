@@ -9,7 +9,7 @@
  *    David Sciamma (Anyware Technologies), Mathieu Garcia (Anyware Technologies),
  *    Jacques Lescot (Anyware Technologies) - initial API and implementation
  *******************************************************************************/
-/*$Id: GeneratorPlugin.java,v 1.2 2007-12-21 14:24:21 cfaucher Exp $
+/*$Id: GeneratorPlugin.java,v 1.3 2008-11-13 10:01:49 dvojtise Exp $
 * Project : org.kermeta.compiler.generator
 * File : 	GeneratorPlugin.java
 * License : EPL
@@ -172,6 +172,10 @@ public class GeneratorPlugin extends AbstractUIPlugin
         return workBench.getActiveWorkbenchWindow();
     }
 
+    
+    public void logError(String message, Throwable e){
+    	getLog().log(new Status(IStatus.ERROR, getId(), IStatus.OK, message, e));
+    }
     /**
      * Display a dialog box with the specified level
      * 
