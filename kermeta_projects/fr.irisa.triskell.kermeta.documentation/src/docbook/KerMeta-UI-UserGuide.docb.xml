@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.4//EN"
 "http://www.oasis-open.org/docbook/xml/4.4/docbookx.dtd">
-<!-- $Id: KerMeta-UI-UserGuide.docb.xml,v 1.11 2008-05-20 08:36:54 dvojtise Exp $ -->
+<!-- $Id: KerMeta-UI-UserGuide.docb.xml,v 1.12 2008-11-13 16:43:14 dvojtise Exp $ -->
 <book lang="en-GB">
   <bookinfo>
     <title>How the workbench is able to help you in your metamodelling
     tasks</title>
 
     <pubdate>Build date: @BUILD.DATE@</pubdate>
-    <pubdate>$Date: 2008-05-20 08:36:54 $</pubdate>
+    <pubdate>$Date: 2008-11-13 16:43:14 $</pubdate>
 
     <author>
       <firstname>Didier Vojtisek, Francois Tanguy, Cyril Faucher</firstname>
@@ -19,42 +19,33 @@
     <title>Introduction</title>
 
     <para>Kermeta is distributed with a workbench that
-    provides many .</para>
+    provides many features.</para>
 
-    <para>Current features in v0.4.0
-    are:</para>
-
-    <itemizedlist>
-      <listitem>
-        <para>Text editor</para>
-      </listitem>
-    </itemizedlist>
+    <para>In the bundle version 1.2.2 you have:</para>
 
     <itemizedlist>
       <listitem>
-        <para>Outline view</para>
+        <para>Text editors for kermeta textual syntax and KET (kermeta template emitter)</para>
       </listitem>
-    </itemizedlist>
-
-    <itemizedlist>
       <listitem>
-        <para>Problems view</para>
+        <para>an outline view</para>
       </listitem>
-
       <listitem>
-        <para>Ecore Model Editor (provided by
+        <para>a problems view</para>
+      </listitem>
+      <listitem>
+        <para>an Ecore Model Editor (provided by
         Eclipse/EMF)</para>
       </listitem>
-
       <listitem>
-        <para>Execution with an
-        interpreter</para>
+        <para>an interpreter</para>
       </listitem>
-
       <listitem>
-        <para>Debugger</para>
+        <para>a debugger</para>
       </listitem>
-
+      <listitem>
+        <para>a compiler (compiles your kermeta code into an eclipse java plugin)</para>
+      </listitem>
       <listitem>
         <para>Transformations to and from Kermeta.
         (especially to Ecore)</para>
@@ -70,9 +61,12 @@
         editor</para>
       </listitem>
 
+      
       <listitem>
-        <para>Class TouchNavigator (alpha version in
-        release 0.1.1</para>
+        <para>Object TouchNavigator</para>
+      </listitem>
+      <listitem>
+        <para>KermetaDoc view (showing the documentation associated to your metamodel)</para>
       </listitem>
       
       <listitem>
@@ -91,26 +85,12 @@
       </listitem>
     </itemizedlist>
 
-    <para>Planned features:</para>
-
-    <itemizedlist>
-
-      <listitem>
-        <para>Seamless integration of Java
-        code</para>
-      </listitem>
-
-      <listitem>
-        <para>Object TouchNavigator</para>
-      </listitem>
-    </itemizedlist>
-
-
+    
     <para>Here is a screenshot of a typical Kermeta
     workbench.</para>
 
     <figure id="refIllustration0">
-      <title>Kermeta workbench screenshoot (v0.0.4)</title>
+      <title>Kermeta workbench screenshoot (v1.2.2)</title>
 
       <mediaobject>
         <imageobject>
@@ -121,19 +101,21 @@
 
 
     <warning>
-       Kermeta is an evolving software and despite that we put a lot of attention to this
-        document, it may contain errors or not conform to the latest version.
-        If you find any error or have some information that improves this
-        document, please send it to us using the bugtracker in the
-        forge:
-
-       
-
-      <ulink type="" url="http://gforge.inria.fr/tracker/?group_id=32">
-        http://gforge.inria.fr/tracker/?group_id=32
-      </ulink>
-
-       Last check: v0.4.0 
+    	<para>
+	       Kermeta is an evolving software and despite that we put a lot of attention to this
+	        document, it may contain errors or not conform to the latest version.
+	        If you find any error or have some information that improves this
+	        document, please send it to us using the bugtracker in the
+	        forge:
+	
+	       
+	
+	      <ulink type="" url="http://gforge.inria.fr/tracker/?group_id=32">
+	        http://gforge.inria.fr/tracker/?group_id=32
+	      </ulink>
+	
+	       Last check: v1.2.2 
+       </para>
     </warning>
   </chapter>
 
@@ -177,7 +159,9 @@
       one of them.</para>
 
       <note>
-         The usual &lt;ctrl&gt;+&lt;space&gt; keyboard shortcut is used to access the code completion 
+      	<para>
+        	The usual &lt;ctrl&gt;+&lt;space&gt; keyboard shortcut is used to access the code completion
+      	</para> 
       </note>
 
       <figure>
@@ -195,16 +179,19 @@
       <title>Outline</title>
 
       <para>The outline is a structural view of your program. Code is not
-      visible in this view, but the structure that is to say packages,
-      classes, attributes and methods are visible in a tree hierarchy. Usually
+      visible in this view, but the structure (packages,
+      classes, attributes, methods and constraints) are visible in a tree hierarchy. Usually
       the outline position is on the top right side of the Eclipse's window.
       You can get advantages of the outline, when your program reaches a big
       size and when it is difficult to get a good visibility on the program's
       structure. Browsing the outline is much more faster than browsing the
       file. Moreover, clicking on an item (packages, classes, attributes or
       methods) brings you to that item in the file.</para>
+      
 
       <itemizedlist>
+        <title>The following buttons are available on this view :
+        </title>
         <listitem>
           <para>sort features : The content of the outline is sorted
           alphabetically. </para>
@@ -226,11 +213,16 @@
       </itemizedlist>
 
       <note>
-         The Flatten inheritance also display the features of the Object class as all the Kermeta classes inherit from it. 
+      	<para>
+         	The Flatten inheritance also display the features of the Object class as all the Kermeta classes inherit from it.
+        </para> 
       </note>
 
       <warning>
-         The "Show imported types" feature works on a per file basis and then it only shows the features declared using the require statement in this file and NOT all the files in your project. 
+      	<para>
+         	The "Show imported types" feature works on a per file basis and then it only shows the features declared using the require statement in this file and NOT all the files in your project.
+         	This option is really useful when you work with kermeta aspects since it display the elements in your faile and the elements imported by aspect.  
+      	</para> 
       </warning>
 
       <figure>
@@ -242,6 +234,53 @@
           </imageobject>
         </mediaobject>
       </figure>
+      
+      <para>
+      	In addition, the elements are colored in order to help to identify where and how
+      	an element is defined.
+      </para>
+      <itemizedlist>
+        <title>The following  meaning are assigned to the colors in this view :
+        </title>
+        <listitem>
+          <para>Red : The element is defined in the current file. It 
+          applies to : Packages, Classes, Attributes, References, Derived Properties and Operations. </para>
+        </listitem>
+
+        <listitem>
+          <para>Blue : The element is defined in an imported (required) file. It 
+          applies to : Packages, Classes, Attributes, References, Derived Properties and Operations. 
+          On classes features, this typically represent features imported via an aspect.</para>
+        </listitem>
+
+        <listitem>
+          <para>Yellow : The element is inherited from another class (regardless 
+          of the containment in the file). It applies to Attribute, Reference, Derived properties and Operations</para>
+        </listitem>
+
+        <listitem>
+          <para> Green : The operation is imported via an aspect and is still abstract.</para>
+        </listitem>
+        <listitem>
+          <para> Grey : The package doesn't define any class.</para>
+        </listitem>
+      </itemizedlist>
+      <tip>
+      	<para>
+      		A double click will open the editor in order to show you the selected element.
+      		This feature works only if the element to display is in a kmt file.
+      	</para>
+      </tip>
+      <tip>
+      	<para>
+      		If you have activated the KermetaDoc view, it will show the documentation associated to the selected element.
+      	</para>
+      </tip>
+      <note>
+      	<para>
+      		In version 1.2.2, the constrains don't have a color differentiation.
+      	</para>
+      </note>
     </section>
 
     <section>
@@ -253,7 +292,9 @@
       is thing is that in the Eclipse's problems view, just by double clicking
       on an error opens the erroneous file and make the cursor focusing on the
       correct line.</para>
-
+	  <para> In addition, a list of all current errors is available in the general
+	  "Problems view".
+	  </para>
       <figure>
         <title>Error reporting</title>
 
@@ -263,6 +304,8 @@
           </imageobject>
         </mediaobject>
       </figure>
+      
+      
     </section>
 
     <section>
@@ -336,7 +379,9 @@
       <para></para>
 
       <caution>
-         The run menu is available only with some perspectives. If you don't see the run menu, switch to the Kermeta perspective. 
+      	<para>
+        	The run menu is available only with some perspectives. If you don't see the run menu, switch to the Kermeta perspective.
+        </para> 
       </caution>
 
       <para>In the dialog, you selects the file, the main class and the main
@@ -346,7 +391,9 @@
       files.</para>
 
       <caution>
-         The search button may not work properly if your file contains errors. 
+      	<para>
+        	The search button may not work properly if your file contains errors. 
+      	</para>
       </caution>
 
       <figure id="refIllustration4">
@@ -376,15 +423,17 @@
       toolbars.</para>
 
       <tip>
-         A shortcut allows you to quickly start a Kermeta run configuration. It is available in the popup menu of *.kmt files. The " 
-
-        <literal>Run As/Kermeta App</literal>
-
-         " button runs an existing configuration and the " 
-
-        <literal>Run As/Run...</literal>
-
-         " button opens the configuration dialog. 
+      	<para>
+	         A shortcut allows you to quickly start a Kermeta run configuration. It is available in the popup menu of *.kmt files. The " 
+	
+	        <literal>Run As/Kermeta App</literal>
+	
+	         " button runs an existing configuration and the " 
+	
+	        <literal>Run As/Run...</literal>
+	
+	         " button opens the configuration dialog. 
+         </para>
       </tip>
 
       <figure id="refIllustration5">
@@ -427,7 +476,9 @@
       <para>[Give more details on that]</para>
 
       <warning>
-         This method need to know precisely which jar you use. If you update any of the required plugins (kermeta, emf, ecore , ...) the directory containing the jar will change because eclipse uses the version number as part of the directory name. You'll have to manually change your ant file in order to reflect the update. 
+      	<para>
+         	This method need to know precisely which jar you use. If you update any of the required plugins (kermeta, emf, ecore , ...) the directory containing the jar will change because eclipse uses the version number as part of the directory name. You'll have to manually change your ant file in order to reflect the update.
+         </para>
       </warning>
     </section>
 
@@ -494,11 +545,15 @@
       <para></para>
 
       <tip>
-         This RunCommandLine class or one of its sibling can also be used by any of your java programs.For more information please see the Javadoc reference of RunCommandLine. 
+      	<para>
+         	This RunCommandLine class or one of its sibling can also be used by any of your java programs.For more information please see the Javadoc reference of RunCommandLine.
+        </para> 
       </tip>
 
       <warning>
-         This method need to know precisely which jar you use. If you update any of the required plugins (kermeta, emf, ecore , ...) the directory containing the jar will change because eclipse use the version number as part of the directory name. You'll have to manually change to ant file in order to reflect the update. 
+      	<para>
+         	This method need to know precisely which jar you use. If you update any of the required plugins (kermeta, emf, ecore , ...) the directory containing the jar will change because eclipse use the version number as part of the directory name. You'll have to manually change to ant file in order to reflect the update.
+        </para> 
       </warning>
 
       <section>
@@ -734,12 +789,11 @@
     </figure>
 
     <tip>
-       Alternatively, an online version of all those documents is available at 
-
-      <ulink type=""
-      url="http://www.kermeta.org/documents">http://www.kermeta.org/documents</ulink>
-
-       
+    	<para>
+	       Alternatively, an online version of all those documents is available at 
+	      <ulink type=""
+	      url="http://www.kermeta.org/documents">http://www.kermeta.org/documents</ulink>
+      </para>
     </tip>
   </chapter>
 
@@ -747,7 +801,8 @@
 
   <!-- begin - of the chapter about Transformations -->
 
-  <chapter>
+  <chapter> 
+  
     <title>Transformations</title>
 
     <para>The workbench provides several additional
@@ -904,6 +959,7 @@
       <para>This metamodel is very generic and can be
       used for any model.</para>
     </section>
+    
   </chapter>
 
   <!-- end - of the chapter about Transformations -->
@@ -1052,8 +1108,10 @@
     <para></para>
 
     <tip>
-      It is in alpha stage, feel free to notify us
-      what you found interesting or not in this view.
+    	<para>
+	      It is in alpha stage, feel free to notify us
+	      what you found interesting or not in this view.
+	    </para>
     </tip>
   </chapter>
 
@@ -1095,7 +1153,9 @@
     <title>Tip and tricks</title>
 
     <tip>
-       This section contains many useful information about how to use the Kermeta workbench. 
+    	<para>
+       		This section contains many useful information about how to use the Kermeta workbench.
+       	</para>  
     </tip>
 
     <section>
