@@ -33,4 +33,4 @@ Require-Bundle: org.eclipse.core.runtime,
  org.kermeta.compiler.common,
  org.apache.commons.logging;bundle-version="1.0.4",
  org.kermeta.compiler.generator
-Eclipse-LazyStart: true
+Bundle-ActivationPolicy: lazy

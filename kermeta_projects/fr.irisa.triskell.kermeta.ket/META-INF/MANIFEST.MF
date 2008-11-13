@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Kermeta Emitter Template Plugin
 Bundle-SymbolicName: fr.irisa.triskell.kermeta.ket; singleton:=true
-Bundle-Version: 1.2.0
+Bundle-Version: 1.2.0.qualifier
 Bundle-Localization: plugin
 Bundle-Vendor: IRISA/INRIA
 Require-Bundle: org.eclipse.text,
@@ -23,3 +23,4 @@ Export-Package: fr.irisa.triskell.kermeta.ket,
  fr.irisa.triskell.kermeta.ket.builder,
  fr.irisa.triskell.kermeta.ket.kpm.actions,
  fr.irisa.triskell.kermeta.ket.parser
+Bundle-RequiredExecutionEnvironment: J2SE-1.5

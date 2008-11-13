@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Tests on UML2 MDK profiles tools
 Bundle-SymbolicName: org.kermeta.uml2.profiles.tests;singleton:=true
-Bundle-Version: 1.1.0
+Bundle-Version: 1.1.0.qualifier
 Bundle-Vendor: IRISA/INRIA
 Require-Bundle: org.eclipse.ui,
  org.eclipse.core.runtime,
@@ -17,10 +17,10 @@ Require-Bundle: org.eclipse.ui,
  org.eclipse.emf.compare,
  org.eclipse.emf.compare.diff,
  org.kermeta.io.loader
-Eclipse-LazyStart: false
 Export-Package: org.kermeta.uml2.profiles.tests;uses:="org.osgi.framework,org.eclipse.ui.plugin",
  org.kermeta.uml2.profiles.tests.helper,
  org.kermeta.uml2.profiles.tests.kmttestsuite;uses:="junit.framework,kermeta_interpreter.jutils",
  org.kermeta.uml2.profiles.tests.launcher;uses:="org.openembedd.tests",
  org.kermeta.uml2.profiles.tests.toecoretestsuite
 Bundle-ClassPath: .
+Bundle-RequiredExecutionEnvironment: J2SE-1.5

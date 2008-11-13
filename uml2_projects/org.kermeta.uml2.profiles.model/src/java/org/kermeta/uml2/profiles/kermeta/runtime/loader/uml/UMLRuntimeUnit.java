@@ -1,4 +1,4 @@
-/* $Id: UMLRuntimeUnit.java,v 1.4 2008-02-26 16:56:35 dvojtise Exp $
+/* $Id: UMLRuntimeUnit.java,v 1.5 2008-11-13 10:09:27 dvojtise Exp $
  * Project   : org.kermeta.uml2.profiles
  * File      : UMLRuntimeUnit.java
  * License   : EPL
@@ -139,7 +139,7 @@ public class UMLRuntimeUnit extends EMFRuntimeUnit {
 	protected String safeGetName(EObject obj){
 		String result = "";
 		Object pname = null;
-		Class[] paramtypes = new Class[0];
+		Class<?>[] paramtypes = new Class[0];
 		Object[] paramsArray = new Object[0];
 		
 		Class<? extends EObject> jclass = obj.getClass();

@@ -1,6 +1,6 @@
 
 
-/*$Id: ResourceChangeListener.java,v 1.10 2008-11-07 16:16:43 dvojtise Exp $
+/*$Id: ResourceChangeListener.java,v 1.11 2008-11-13 09:55:33 dvojtise Exp $
 * Project : fr.irisa.triskell.kermeta.kpm
 * File : 	ResourceChangeListener.java
 * License : EPL
@@ -107,8 +107,12 @@ public class ResourceChangeListener implements IResourceChangeListener, IResourc
 			}
 		};
 		// reserves exclusive write access to the resource we are updating by associating a scheduling rule with the job
-		//job.setRule(IWorkspace.getRuleFactory().buildRule());
-		job.setRule(delta.getResource()); 
+		
+		//Must reserve the whole workspace in case the change need it  
+		// DVK: maybe an analysis of the resource kind  may allow  a finer grain ?
+		job.setRule(delta.getResource().getWorkspace().getRuleFactory().buildRule());
+		//job.setRule(delta.getResource()); 
+		//job.setRule(delta.getResource().getProject());
 		job.schedule();
 	}
 	

@@ -3,7 +3,6 @@ Bundle-ManifestVersion: 2
 Bundle-Name: UML2 MDK Transformations Plug-in
 Bundle-SymbolicName: org.kermeta.uml2;singleton:=true
 Bundle-Version: 1.2.0
-Require-Bundle: org.eclipse.uml2,
- org.eclipse.uml2.common,
+Require-Bundle: org.eclipse.uml2.common,
  org.eclipse.uml2.uml
 Bundle-Vendor: IRISA/INRIA

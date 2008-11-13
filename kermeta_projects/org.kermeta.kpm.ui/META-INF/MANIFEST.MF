@@ -1,8 +1,8 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: Ui Plug-in
+Bundle-Name: KPM UI Plug-in
 Bundle-SymbolicName: org.kermeta.kpm.ui;singleton:=true
-Bundle-Version: 1.2.0
+Bundle-Version: 1.2.0.qualifier
 Bundle-Activator: org.kermeta.kpm.ui.Activator
 Bundle-Vendor: IRISA/INRIA
 Require-Bundle: org.eclipse.ui,
@@ -10,4 +10,5 @@ Require-Bundle: org.eclipse.ui,
  fr.irisa.triskell.kermeta.kpm,
  org.eclipse.ui.ide,
  fr.irisa.triskell.kermeta.kpm.editor
-Eclipse-LazyStart: true
+Bundle-ActivationPolicy: lazy
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
