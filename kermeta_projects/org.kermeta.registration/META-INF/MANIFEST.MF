@@ -2,9 +2,10 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Kermeta Registration Plug-in
 Bundle-SymbolicName: org.kermeta.registration;singleton:=true
-Bundle-Version: 1.0.0
+Bundle-Version: 1.0.0.qualifier
 Bundle-Vendor: IRISA/INRIA
 Require-Bundle: org.eclipse.ui,
  org.eclipse.core.runtime,
  fr.irisa.triskell.kermeta
 Export-Package: org.kermeta.registration.view
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
