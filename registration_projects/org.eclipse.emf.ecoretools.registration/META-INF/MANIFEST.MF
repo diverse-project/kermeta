@@ -11,6 +11,7 @@ Require-Bundle: org.eclipse.ui,
  org.eclipse.core.resources
 Bundle-ActivationPolicy: lazy
 Export-Package: org.eclipse.emf.ecoretools.registration,
+ org.eclipse.emf.ecoretools.registration.exceptions,
  org.eclipse.emf.ecoretools.registration.internal;x-internal:=true
 Bundle-Vendor: INRIA
 Bundle-ClassPath: .

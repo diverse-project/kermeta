@@ -1,4 +1,4 @@
-/* $Id: RegistrationConstants.java,v 1.1 2008-04-25 07:42:50 cfaucher Exp $ */
+/* $Id: RegistrationConstants.java,v 1.2 2008-11-13 10:51:22 cfaucher Exp $ */
 /* **********************************************************************
  * Copyright (c) 2007, 2008 INRIA and others
  *
@@ -19,8 +19,6 @@ package org.eclipse.emf.ecoretools.registration.ui;
 public class RegistrationConstants {
 
 	public static final String FOLDER = "folder";
-	public static final String FILE = "file";
-	public static final String ECORE_FILE = "file";
 	public static final String PROJECT = "project";
 	public static final String IMG_GENERATED_PACKAGE = "IMG_GENERATED_PACKAGE";
 	public static final String IMG_ECORE_FILE = "IMG_ECORE_FILE";
