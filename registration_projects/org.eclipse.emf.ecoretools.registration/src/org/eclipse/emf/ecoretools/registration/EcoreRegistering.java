@@ -1,4 +1,4 @@
-/* $Id: EcoreRegistering.java,v 1.1 2008-11-13 10:51:27 cfaucher Exp $ */
+/* $Id: EcoreRegistering.java,v 1.2 2008-11-13 13:37:22 cfaucher Exp $ */
 /* **********************************************************************
  * Copyright (c) 2007, 2008 INRIA and others
  *
@@ -21,6 +21,7 @@ import org.eclipse.emf.ecore.EPackage.Registry;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.eclipse.emf.ecoretools.registration.exceptions.NotValidEPackageURIException;
 
 public class EcoreRegistering {
@@ -38,8 +39,14 @@ public class EcoreRegistering {
 	
 	public static void registerPackages(URI ecoreFileUri) throws NotValidEPackageURIException {
 		ResourceSet rs = new ResourceSetImpl();
+		
+		String ecore_ext = org.eclipse.emf.ecore.EcorePackage.eINSTANCE.getName().toLowerCase();
+		if( !rs.getResourceFactoryRegistry().getExtensionToFactoryMap().containsKey(ecore_ext) ) {
+			rs.getResourceFactoryRegistry().getExtensionToFactoryMap().put(ecore_ext, new XMIResourceFactoryImpl());
+		}
+		
 		Resource res = rs.getResource(ecoreFileUri, true);
-
+		
 		for(EObject eobj : res.getContents()) {
 			if( eobj instanceof EPackage) {
 				registerPackages((EPackage) eobj);
