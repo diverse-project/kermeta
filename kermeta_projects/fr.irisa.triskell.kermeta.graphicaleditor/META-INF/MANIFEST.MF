@@ -21,7 +21,7 @@ Require-Bundle: org.eclipse.core.runtime,
  fr.irisa.triskell.kermeta.io,
  org.kermeta.io.loader,
  fr.irisa.triskell.kermeta
-Eclipse-LazyStart: true
+Bundle-ActivationPolicy: lazy
 Export-Package: fr.irisa.triskell.kermeta.graphicaleditor,
  fr.irisa.triskell.kermeta.graphicaleditor.actions,
  fr.irisa.triskell.kermeta.graphicaleditor.actions.utils,
@@ -39,3 +39,4 @@ Export-Package: fr.irisa.triskell.kermeta.graphicaleditor,
  fr.irisa.triskell.kermeta.graphicaleditor.preferences,
  fr.irisa.triskell.kermeta.graphicaleditor.providers,
  fr.irisa.triskell.kermeta.graphicaleditor.wizards
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
