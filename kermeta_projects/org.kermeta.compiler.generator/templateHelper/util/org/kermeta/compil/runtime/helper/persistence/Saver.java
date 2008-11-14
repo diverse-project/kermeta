@@ -1,5 +1,5 @@
 
-/*$Id: Saver.java,v 1.7 2008-10-17 14:40:18 cfaucher Exp $
+/*$Id: Saver.java,v 1.8 2008-11-14 13:58:45 cfaucher Exp $
 * Project : org.kermeta.compiler.generator
 * File : 	Saver.java
 * License : EPL
@@ -77,8 +77,9 @@ public class Saver extends SaverOrLoader {
 	 */
 	private EObject clone(EObject o) {
 		EObject targetObject = createInstance(o, this.getMetamodelURI());
-		if ( o == targetObject )
+		if ( o == targetObject ) {
 			return o;
+		}
 		cloneEObject(o, targetObject);
 		return targetObject;
 	}
@@ -116,9 +117,10 @@ public class Saver extends SaverOrLoader {
 						// Setting the value.
 						targetObject.eSet(targetFeature, targetValue);
 						
-						if ( clone )
+						if ( clone ) {
 							// Cloning if necessary.
 							cloneEObject( (EObject) value, targetValue);
+						}
 						
 					/*
 					 * 
@@ -156,8 +158,9 @@ public class Saver extends SaverOrLoader {
 					} else if ( value != null ) {
 						Object realValue = value;
 						// Special case for enumerator. Need to create an instance from the good factory.
-						if ( value instanceof Enumerator )
+						if ( value instanceof Enumerator ) {
 							realValue = createInstance( (Enumerator) value, this.getMetamodelURI());
+						}
 						// Setting the value.
 						if( !sourceFeature.isDerived() && targetFeature.isChangeable() /*&& !targetFeature.isUnsettable()*/ ) {
 							targetObject.eSet(targetFeature, realValue);
@@ -174,10 +177,13 @@ public class Saver extends SaverOrLoader {
 	 * @return The structural feature which name matches the feature name argument or null if any.
 	 */
 	private EStructuralFeature getEStructuralFeature(EClass clazz, String featureName) {
-		for ( EStructuralFeature feature : clazz.getEAllStructuralFeatures() )
+		for ( EStructuralFeature feature : clazz.getEAllStructuralFeatures() ) {
 			// Pay attention to special keywords that have been prefixed with the '_' character.
-			if ( feature.getName().equals(featureName) || feature.getName().replaceFirst("_", "").equals(featureName) )
+			// FIXME CF: Holala Paco, this patch should be handled in another way...
+			if ( feature.getName().equals(featureName) || feature.getName().replaceFirst("_", "").equals(featureName) ) {
 				return feature;
+			}
+		}
 		return null;
 	}
 	
