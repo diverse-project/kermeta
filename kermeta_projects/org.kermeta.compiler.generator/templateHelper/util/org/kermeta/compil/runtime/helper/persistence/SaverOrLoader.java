@@ -1,5 +1,5 @@
 
-/*$Id: SaverOrLoader.java,v 1.8 2008-11-03 16:49:12 cfaucher Exp $
+/*$Id: SaverOrLoader.java,v 1.9 2008-11-14 14:10:20 cfaucher Exp $
 * Project : org.kermeta.compiler.generator
 * File : 	SaverOrLoader.java
 * License : EPL
@@ -23,7 +23,7 @@ import org.eclipse.core.runtime.IConfigurationElement;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.emf.codegen.util.CodeGenUtil;
 import org.eclipse.emf.common.util.Enumerator;
-import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EEnumLiteral;
@@ -32,9 +32,6 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EPackage.Registry;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.emf.ecore.resource.impl.ExtensibleURIConverterImpl;
-import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.kermeta.compil.runtime.PersistenceMapping;
@@ -179,7 +176,7 @@ abstract public class SaverOrLoader {
 			return null;
 		}
 		
-		for( org.eclipse.emf.ecore.EClassifier eclassifier : target_root_epack.getEClassifiers() ) {
+		for( EClassifier eclassifier : target_root_epack.getEClassifiers() ) {
 			if( eclassifier instanceof org.eclipse.emf.ecore.EClass ) {
 				if( eclassifier.getName().equals(array_qualified_name[array_qualified_name.length-1]) ) {
 					return (org.eclipse.emf.ecore.EClass) eclassifier;
@@ -261,6 +258,7 @@ abstract public class SaverOrLoader {
 	
 	/**
 	 * @generated
+	 * @unused for the moment
 	 * Get all factories used by the given package and its subpackages.
 	 * @param p
 	 * @return
@@ -276,6 +274,7 @@ abstract public class SaverOrLoader {
 	
 	/**
 	 * @generated
+	 * @unused for the moment
 	 * Getting the list of all packages contained by the given package.
 	 * @param l
 	 * @param p
@@ -353,7 +352,7 @@ abstract public class SaverOrLoader {
 	 * @param factory
 	 * @return
 	 */
-	protected Enumerator createInstance(Enumerator sourceObject, String metamodelURI) {
+	protected java.lang.Object createInstance(Enumerator sourceObject, String metamodelURI) {
 		
 		EPackage root_pack = getRootEPackage(Registry.INSTANCE.getEPackage(metamodelURI));
 		String tmp_pack_qn = sourceObject.getClass().getCanonicalName().replace("." + sourceObject.getClass().getSimpleName(), "");
@@ -395,6 +394,25 @@ abstract public class SaverOrLoader {
 			Enumerator targetObject = (Enumerator) method.invoke(factory, new Object[] {null, sourceObject.getLiteral()});
 			return targetObject;
 		} catch (Exception e) {
+			if( Registry.INSTANCE.getEPackage(metamodelURI).getClass() == org.eclipse.emf.ecore.impl.EPackageImpl.class ) {
+			
+				if(sourceObject.getClass().isEnum()) {
+					
+					String u_uri = _epack.getNsURI();
+					if( u_uri.contains(uri_suffix) ) {
+						u_uri = u_uri.replace(uri_suffix, "");
+					} else {
+						u_uri += uri_suffix;
+					}
+					
+					for(EClassifier eClassifier : Registry.INSTANCE.getEPackage(u_uri).getEClassifiers()) {
+						if( eClassifier.getName().equals(sourceObject.getClass().getSimpleName()) ) {
+							EDataType eenum = (EDataType) eClassifier;
+							return EcoreUtil.createFromString(eenum, sourceObject.getLiteral());
+						}
+					}
+				}
+			}
 			System.err.println("createInstance(Enumerator sourceObject, String metamodelURI): " + sourceObject.toString());
 		}
 		
@@ -438,42 +456,6 @@ abstract public class SaverOrLoader {
 	public static String getFileExtension( String modelURI ) {
 		String[] seg_modelURI = modelURI.split("\\.");
 		return seg_modelURI[seg_modelURI.length-1];
-	}
-	
-	/**
-	 * @generated
-	 * @param uri
-	 */
-	public static void registerEcoreMetamodel(String uri){
-		
-		//Get the Ecore metamodel
-        Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(org.eclipse.emf.ecore.EcorePackage.eNAME, new XMIResourceFactoryImpl());
-        ResourceSet resource_set = new ResourceSetImpl();
-        URI u = URI.createURI(uri);
-        u = new ExtensibleURIConverterImpl().normalize(u);
-        Resource resource = resource_set.getResource(u, true);
-            
-        for(EObject eobj : resource.getContents()) {
-        	if( eobj instanceof EPackage) {
-    			registerPackages((EPackage) eobj);
-    		}
-    	}
-	}
-	
-	/**
-	 * @generated
-	 * Register the given EPackage and all its contained EPackages
-	 * @param pack
-	 */
-	public static void registerPackages(EPackage pack) {
-		String packNsURI = pack.getNsURI();
-		if( packNsURI != null && !packNsURI.equals("") ) {
-			Registry.INSTANCE.put(packNsURI, pack);
-
-			for(EPackage subPack : pack.getESubpackages()) {
-				registerPackages(subPack);
-			}
-		}
 	}
 	
 	/**
