@@ -1,4 +1,4 @@
-<%@ jet package="org.eclipse.emf.codegen.ecore.templates.model" imports="java.util.* org.eclipse.emf.codegen.ecore.genmodel.*" class="ManifestMF" version="$Id: manifest.mfjet,v 1.10 2008-10-17 14:40:29 cfaucher Exp $" %>
+<%@ jet package="org.eclipse.emf.codegen.ecore.templates.model" imports="java.util.* org.eclipse.emf.codegen.ecore.genmodel.*" class="ManifestMF" version="$Id: manifest.mfjet,v 1.11 2008-11-14 16:09:37 cfaucher Exp $" %>
 <%
 /**
  * <copyright>
@@ -45,7 +45,8 @@ Require-Bundle: <%=pluginID%><%if (!pluginID.startsWith("org.eclipse.core.runtim
  fr.irisa.triskell.eclipse.util;visibility:=reexport,
  fr.irisa.triskell.kermeta.model;visibility:=reexport,
  org.kermeta.simk;bundle-version="1.2.0",
- fr.irisa.triskell.traceability.model;bundle-version="1.1.99"
+ fr.irisa.triskell.traceability.model;bundle-version="1.1.99",
+ org.eclipse.emf.ecoretools.registration;bundle-version="1.0.0"
 <%if (genModel.getRuntimeVersion() == GenRuntimeVersion.EMF22 || genModel.getRuntimeVersion() == GenRuntimeVersion.EMF23) {%>
 Eclipse-LazyStart: true
 <%}%>
