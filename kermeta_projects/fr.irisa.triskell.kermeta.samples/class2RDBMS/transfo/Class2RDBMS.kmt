@@ -1,7 +1,7 @@
-@mainClass "Class2RDBMS::Main"
+@mainClass "class2RDBMS::Main"
 @mainOperation "main"
 
-package Class2RDBMS;
+package class2RDBMS;
 
 require kermeta
 require "trace.kmt"
@@ -211,9 +211,10 @@ class Main
         var outputModel : RDBMSModel init tranfo.transform(inputModel)
         
         var repository : EMFRepository init EMFRepository.new
+        repository.registerEcoreFile("platform:/resource/fr.irisa.triskell.kermeta.samples/class2RDBMS/metamodels/RDBMSMM.ecore")
         var resource : Resource init 
         	repository.createResource("platform:/resource/fr.irisa.triskell.kermeta.samples/class2RDBMS/models/out.xmi", 
-        							  "platform:/resource/fr.irisa.triskell.kermeta.samples/class2RDBMS/metamodels/RDBMSMM.ecore")
+        							 					 "platform:/resource/fr.irisa.triskell.kermeta.samples/class2RDBMS/metamodels/RDBMSMM.ecore")
 	 	// Define a Root ...
 	 	resource.instances.add(outputModel)
 	 		 	
@@ -224,8 +225,10 @@ class Main
     end
     
     operation loadClassModel() : ClassModel is do             
-   		var repository : EMFRepository init EMFRepository.new             
-   		var resource : Resource init repository.getResource("platform:/resource/fr.irisa.triskell.kermeta.samples/class2RDBMS/models/ClassModel.xmi")
+   		var repository : EMFRepository init EMFRepository.new
+   		repository.registerEcoreFile("platform:/resource/fr.irisa.triskell.kermeta.samples/class2RDBMS/metamodels/ClassMM.ecore")             
+   		var resource : Resource init repository.createResource("platform:/resource/fr.irisa.triskell.kermeta.samples/class2RDBMS/models/ClassModel.xmi",
+   																									"platform:/resource/mtip/class2RDBMS/metamodels/ClassMM.ecore")
        	resource.load()
       
        // result ?= resource.instances.one
