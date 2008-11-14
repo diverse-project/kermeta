@@ -1,4 +1,4 @@
-/* $Id: Repository.java,v 1.13 2008-07-11 13:27:02 dvojtise Exp $
+/* $Id: Repository.java,v 1.14 2008-11-14 14:51:17 cfaucher Exp $
  * Project   : Kermeta (First iteration)
  * File      : Repository.java
  * License   : EPL
@@ -16,8 +16,8 @@ import java.util.regex.Pattern;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.URIConverter;
+import org.eclipse.emf.ecore.resource.impl.ExtensibleURIConverterImpl;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
-import org.eclipse.emf.ecore.resource.impl.URIConverterImpl;
 import org.kermeta.io.KermetaUnit;
 
 import fr.irisa.triskell.kermeta.language.structure.GenericTypeDefinition;
@@ -43,6 +43,15 @@ public class Repository {
     	
     	// default implemetation use EMF and the default singleton        
     	return EMFRepositorySingleton.getSingleton().createResource(selfRO, uriRO, mmUriRO);
+    }
+    /**
+     * @param mmUriRO - RO for the uri of the metamodel of the resource to be created
+     * @return        - void RO
+     */
+    public static RuntimeObject registerEcoreFile(RuntimeObject mmUriRO) {
+    	
+    	// default implemetation use EMF and the default singleton        
+    	return EMFRepositorySingleton.getSingleton().registerEcoreFile(mmUriRO);
     }
 
 
@@ -137,7 +146,7 @@ public class Repository {
     			// looking for the root of the bundle/project
     			if ( defaultPath == null ) {
 	    			defaultPath = unit_uripath;
-	        		URIConverter c = new URIConverterImpl();
+	        		URIConverter c = new ExtensibleURIConverterImpl();
 	        		u = u.resolve(c.normalize(URI.createURI(defaultPath)));    			
 	    		} else {
 	    			if ( ! defaultPath.startsWith("platform:/") ) {	    			
@@ -157,7 +166,7 @@ public class Repository {
     		else{ // this is an URI of kind ./ or ../
 	    		if ( defaultPath == null ) {
 	    			defaultPath = unit_uripath;
-	        		URIConverter c = new URIConverterImpl();
+	        		URIConverter c = new ExtensibleURIConverterImpl();
 	        		u = u.resolve(c.normalize(URI.createURI(defaultPath)));    			
 	    		} else if ( ! defaultPath.startsWith("platform:/") ) {
 	    			defaultPath = "platform:/resource" + defaultPath;

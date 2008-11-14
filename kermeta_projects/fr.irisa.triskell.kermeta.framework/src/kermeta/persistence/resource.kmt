@@ -9,7 +9,7 @@ require "../Standard.kmt"
 using kermeta::standard
 
 /* ****************************************************************************
- * $Id: resource.kmt,v 1.66 2008-09-15 13:20:00 cfaucher Exp $
+ * $Id: resource.kmt,v 1.67 2008-11-14 14:51:40 cfaucher Exp $
  * Project : Kermeta (First iteration)
  * Creation date :  
  * File : resource.kmt
@@ -574,6 +574,11 @@ class EMFRepository inherits Repository
 	 * by default, not setting this attribute is considered as false.
 	 */
 	 attribute ignoreLoadErrorUnknownProperty : kermeta::standard::Boolean
+	 
+	 operation registerEcoreFile(mm_uri : String) : Void is do
+	 	@compiledJavaExtern "org.kermeta.compil.runtime.helper.basetypes.RepositoryUtil.registerEcoreFile(mm_uri)"
+		extern fr::irisa::triskell::kermeta::runtime::basetypes::Repository.registerEcoreFile(mm_uri)
+	 end
 }
 
 

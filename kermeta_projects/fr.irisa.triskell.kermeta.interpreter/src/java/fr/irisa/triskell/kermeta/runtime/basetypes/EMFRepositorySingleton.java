@@ -1,4 +1,4 @@
-/*$Id: EMFRepositorySingleton.java,v 1.4 2008-07-11 13:27:02 dvojtise Exp $
+/*$Id: EMFRepositorySingleton.java,v 1.5 2008-11-14 14:51:17 cfaucher Exp $
 * Project : fr.irisa.triskell.kermeta.interpreter
 * File : 	RepositorySingleton.java
 * License : EPL
@@ -16,9 +16,9 @@ import java.util.ArrayList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.emf.ecore.resource.URIConverter;
-import org.eclipse.emf.ecore.resource.impl.URIConverterImpl;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
+import org.eclipse.emf.ecoretools.registration.EcoreRegistering;
+import org.eclipse.emf.ecoretools.registration.exceptions.NotValidEPackageURIException;
 
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
 import fr.irisa.triskell.kermeta.runtime.factory.RuntimeObjectFactory;
@@ -95,6 +95,22 @@ public class EMFRepositorySingleton {
         	l.add(resRO);
     	}
         
+    	return resRO;
+    }
+    
+    public RuntimeObject registerEcoreFile(RuntimeObject mmUriRO) {
+    	
+    	java.lang.String ecore_file = fr.irisa.triskell.kermeta.runtime.basetypes.String.getValue(mmUriRO);
+    	URI ecoreFileUri = URI.createURI(ecore_file);
+    	try {
+			EcoreRegistering.registerPackages(ecoreFileUri);
+		} catch (NotValidEPackageURIException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    	// Default value for the resource RO to be returned
+    	RuntimeObject resRO = mmUriRO.getFactory().getMemory().voidINSTANCE;
+    	
     	return resRO;
     }
     
