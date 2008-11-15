@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.4//EN"
 "http://www.oasis-open.org/docbook/xml/4.4/docbookx.dtd">
-<!-- $Id: KerMeta-UI-UserGuide.docb.xml,v 1.12 2008-11-13 16:43:14 dvojtise Exp $ -->
+<!-- $Id: KerMeta-UI-UserGuide.docb.xml,v 1.13 2008-11-15 09:15:55 dvojtise Exp $ -->
 <book lang="en-GB">
   <bookinfo>
     <title>How the workbench is able to help you in your metamodelling
     tasks</title>
 
     <pubdate>Build date: @BUILD.DATE@</pubdate>
-    <pubdate>$Date: 2008-11-13 16:43:14 $</pubdate>
+    <pubdate>$Date: 2008-11-15 09:15:55 $</pubdate>
 
     <author>
       <firstname>Didier Vojtisek, Francois Tanguy, Cyril Faucher</firstname>
@@ -311,16 +311,21 @@
     <section>
       <title>Debugging information</title>
 
-      <para>Kermeta is meant an executable language. So, we may want to debug
-      programs because of their complexity. It is possible because Kermeta
-      platform includes a debugger. Like in a Java style, some breakpoints can
+      <para>Kermeta is meant an executable language and provides a debugger. So, 
+      the textual editor is used to interact with the debugger. 
+      </para>
+      <para>
+      Like in a Java style, some breakpoints can
       be added to the program by right clicking on the grey line at the left
       of the editor (as in the figure below). The breakpoint will be added in
       front of the selected line. Afterwards, when running the debugger, the
       program will halt at every breakpoint it goes through. At this moment,
       you will be able to have a look at the variables' value and run step by
       step or step into some methods.</para>
-
+      <para>
+      	See <xref linkend="chapter_debugger.link" /> for more details
+      	on the debugger features.
+      </para>
       <figure>
         <title>Debugging Information in the Kermeta Text Editor</title>
 
@@ -408,14 +413,14 @@
 
       <para></para>
 
-      <para>Two annotations in your Kermeta code allow you to save time while
+      <para>Two optional annotations in your Kermeta code allow you to save time while
       creating run configurations. The @mainClass and @mainOperation are used
       to fill field when creating a new configuration.</para>
 
       <para>Ex:</para>
 
-      <programlisting>@mainClass "automaton::Derterminization"
-@mainOperation "main"</programlisting>
+      <programlisting>@mainClass "fsm::Main"
+@mainOperation "mainloadFSM"</programlisting>
 
       <para>Then, once you have your configuration, you can run it by all the
       means provided by Eclipse. Ie. "<literal>Run Last Launched</literal>", "
@@ -448,8 +453,10 @@
 
       <para>The operation arguments field allow you to pass some strings as
       parameters of the operation you are launching.</para>
+       <para>In this sample screenshot, the FSM take a string as teh path to the file that
+       will be loaded and simulated.</para>
 
-      <para>Optionally, in the common Tab of the Kermeta run configuration,
+      <para>In addtion to this simple scenario, in the common Tab of the Kermeta run configuration,
       you can:</para>
 
       <itemizedlist>
@@ -462,24 +469,19 @@
           <para>specify where the stdio outputs must be sent. Typically, this
           can be in the Eclipse console or in a file.</para>
         </listitem>
+        <listitem>
+          <para>specify additional entries in the interpreter classpath that must 
+          be taken into while running this kermeta code. This is needed if you use
+          "extern" call to your own jars.</para>
+        </listitem>
       </itemizedlist>
-    </section>
-
-    <section>
-      <title>Run using a ant file</title>
-
-      <para>It is possible to run a Kermeta program from ant using the
-      RunCommandLine.java from a java task.</para>
-
-      <para>You'll have to correctly set the classpath and the argument</para>
-
-      <para>[Give more details on that]</para>
-
-      <warning>
+      
+      <tip>
       	<para>
-         	This method need to know precisely which jar you use. If you update any of the required plugins (kermeta, emf, ecore , ...) the directory containing the jar will change because eclipse uses the version number as part of the directory name. You'll have to manually change your ant file in order to reflect the update.
-         </para>
-      </warning>
+      		If you specify the kermeta project u=in the run configuration and if this project is an eclipse
+      		plugin, then the interpreter will automatically take this plugin and all its dependencies into account in tha classpath. 
+      	</para>
+      </tip>
     </section>
 
     <section>
@@ -490,72 +492,89 @@
       the Kermeta source file, and optionally the name of the class and the
       operation to run.</para>
 
-      <para>You can create a Java application LaunchConfiguration that will
-      run the interpreter with your Kermeta file.</para>
-
-      <figure id="refIllustration6">
-        <title>Java run configuration main tab</title>
-
-        <mediaobject>
-          <imageobject>
-            <imagedata fileref="KerMeta-UI-UserGuide_figures/KerMeta_RunCommandLine1.png" />
-          </imageobject>
-        </mediaobject>
-      </figure>
-
-      <para></para>
-
-      <para>Be careful, you must select "Include external jars when searching
-      for a main class".</para>
-
-      <figure id="refIllustration7">
-        <title>Java run configuration arguments</title>
-
-        <mediaobject>
-          <imageobject>
-            <imagedata fileref="KerMeta-UI-UserGuide_figures/KerMeta_RunCommandLine_arguments.png" />
-          </imageobject>
-        </mediaobject>
-      </figure>
-
-      <para></para>
-
-      <para>The output level of interpreter traces can be set using a log4j
-      configuration file. The concrete file to use is set by the java property
-      "kermeta.log4j.configurationfile.name". A sample of log4j configuration
-      file is located in the textEditor plugin.</para>
-
-      <para>Exemple add the following in the VM arguments box:
-      -Dkermeta.log4j.configurationfile.name= "../../plugins/fr.irisa.triskell.kermeta.texteditor_0.0.4/kermeta_log4j_configuration.xml"</para>
-
-      <para>The classpath must be carefully set using the jar of Kermeta, the
-      jar of Ecore and of emf.</para>
-
-      <figure id="refIllustration8">
-        <title>Java run configuration classpath (using the interpreter jars in
-        the texteditor)</title>
-
-        <mediaobject>
-          <imageobject>
-            <imagedata fileref="KerMeta-UI-UserGuide_figures/KerMeta_RunCommandLine_classpath.png" />
-          </imageobject>
-        </mediaobject>
-      </figure>
-
-      <para></para>
-
-      <tip>
-      	<para>
-         	This RunCommandLine class or one of its sibling can also be used by any of your java programs.For more information please see the Javadoc reference of RunCommandLine.
-        </para> 
-      </tip>
-
-      <warning>
-      	<para>
-         	This method need to know precisely which jar you use. If you update any of the required plugins (kermeta, emf, ecore , ...) the directory containing the jar will change because eclipse use the version number as part of the directory name. You'll have to manually change to ant file in order to reflect the update.
-        </para> 
-      </warning>
-
+	  <para>
+	  The interpreter command line is available in two bundle : directly within 
+	  eclipse, or using one of the standalone bundle.
+	  </para>
+	  
+	  <para>
+	  The standalone bundle is available in two forms : all in one jar, or only kermeta in the main jar
+	  </para>
+	  
+	  
+      
+	  <para>Depending wether you use the standalone jars or the jar embedded in eclipse, the process
+	  will be more or less simple. The simpliest is to use the standalone version because you don't need
+	  to deal with the classpath.</para>
+	  
+	  <section>
+	  	<title>Run the eclipse version of the interpreter in eclipse</title>
+	      <para>In this section we focus on calling the interpreter embedded in an eclipse installation.</para>
+	      <para>From eclipse, you create a Java application LaunchConfiguration that will
+	      run the interpreter with your Kermeta file.</para>
+	      <figure id="refIllustration6">
+	        <title>Java run configuration main tab</title>
+	
+	        <mediaobject>
+	          <imageobject>
+	            <imagedata fileref="KerMeta-UI-UserGuide_figures/KerMeta_RunCommandLine1.png" />
+	          </imageobject>
+	        </mediaobject>
+	      </figure>
+	
+	      <para></para>
+	
+	      <para>Be careful, you must select "Include external jars when searching
+	      for a main class".</para>
+	
+	      <figure id="refIllustration7">
+	        <title>Java run configuration arguments</title>
+	
+	        <mediaobject>
+	          <imageobject>
+	            <imagedata fileref="KerMeta-UI-UserGuide_figures/KerMeta_RunCommandLine_arguments.png" />
+	          </imageobject>
+	        </mediaobject>
+	      </figure>
+	
+	      <para></para>
+	
+	      <para>The output level of interpreter traces can be set using a log4j
+	      configuration file. The concrete file to use is set by the java property
+	      "kermeta.log4j.configurationfile.name". A sample of log4j configuration
+	      file is located in the textEditor plugin.</para>
+	
+	      <para>Exemple add the following in the VM arguments box:
+	      -Dkermeta.log4j.configurationfile.name= "../../plugins/fr.irisa.triskell.kermeta.texteditor_0.0.4/kermeta_log4j_configuration.xml"</para>
+	
+	      <para>The classpath must be carefully set using the jar of Kermeta, the
+	      jar of Ecore and of emf.</para>
+	
+	      <figure id="refIllustration8">
+	        <title>Java run configuration classpath (using the interpreter jars in
+	        the texteditor)</title>
+	
+	        <mediaobject>
+	          <imageobject>
+	            <imagedata fileref="KerMeta-UI-UserGuide_figures/KerMeta_RunCommandLine_classpath.png" />
+	          </imageobject>
+	        </mediaobject>
+	      </figure>
+	
+	      <para></para>
+	
+	      <tip>
+	      	<para>
+	         	This RunCommandLine class or one of its sibling can also be used by any of your java programs.For more information please see the Javadoc reference of RunCommandLine.
+	        </para> 
+	      </tip>
+	
+	      <warning>
+	      	<para>
+	         	This method need to know precisely which jar you use. If you update any of the required plugins (kermeta, emf, ecore , ...) the directory containing the jar will change because eclipse use the version number as part of the directory name. You'll have to manually change to ant file in order to reflect the update.
+	        </para> 
+	      </warning>
+      </section>
       <section>
         <title>Command line options</title>
 
@@ -649,123 +668,150 @@
 "platform:/resource/fr.irisa.triskell.kermeta/"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"file:/C:/eclipse3.0.2/eclipse/workspace/fr.irisa.triskell.kermeta/"</programlisting>
       </section>
     </section>
+
+    
   </chapter>
 
-  <chapter>
-    <title>Debugging</title>
+  <chapter id="chapter_debugger.link">
+  	<title>Debugging</title>
 
-    <para>Since v0.1.0 Kermeta has a debugger. As any debugger, it proposes
-    breakpoints step over, step into, run, resume, visualization of variables,
-    etc</para>
+  	<para>
+  		Since v0.1.0 Kermeta has a debugger. As any debugger, it
+  		proposes breakpoints step over, step into, run, resume,
+  		visualization of variables, etc
+  	</para>
 
-    <section>
-      <title>Global View</title>
+  	<section>
+  		<title>Global View</title>
 
-      <para>A debugger offers users the possibility to interpret Kermeta's
-      programs step by step, or stopping programs at one moment to check the
-      the programs' state. Above you can see the global view of the
-      editor.</para>
+  		<para>
+  			A debugger offers users the possibility to interpret
+  			Kermeta's programs step by step, or stopping programs at
+  			one moment to check the the programs' state. Above you can
+  			see the global view of the editor.
+  		</para>
 
-      <figure>
-        <title>The Debugger global view</title>
+  		<figure>
+  			<title>The Debugger global view</title>
 
-        <mediaobject>
-          <imageobject>
-            <imagedata fileref="KerMeta-UI-UserGuide_figures/debug_perspective.png" />
-          </imageobject>
-        </mediaobject>
-      </figure>
-    </section>
+  			<mediaobject>
+  				<imageobject>
+  					<imagedata
+  						fileref="KerMeta-UI-UserGuide_figures/debug_perspective.png" />
+  				</imageobject>
+  			</mediaobject>
+  		</figure>
+  	</section>
 
-    <section>
-      <title>The Watch View</title>
+  	<section>
+  		<title>The Watch View</title>
 
-      <para>During programs execution, you may want to know variables' values.
-      For that purpose, you can use the watch view which displays all the
-      variables accessible in the current context and their values. Moreover
-      you can browse those variables to have a deeper look inside
-      variables.</para>
+  		<para>
+  			During programs execution, you may want to know variables'
+  			values. For that purpose, you can use the watch view which
+  			displays all the variables accessible in the current
+  			context and their values. Moreover you can browse those
+  			variables to have a deeper look inside variables.
+  		</para>
 
-      <figure>
-        <title>The Watch View</title>
+  		<figure>
+  			<title>The Watch View</title>
 
-        <mediaobject>
-          <imageobject>
-            <imagedata fileref="KerMeta-UI-UserGuide_figures/watch_page.png" />
-          </imageobject>
-        </mediaobject>
-      </figure>
-    </section>
+  			<mediaobject>
+  				<imageobject>
+  					<imagedata
+  						fileref="KerMeta-UI-UserGuide_figures/watch_page.png" />
+  				</imageobject>
+  			</mediaobject>
+  		</figure>
+  	</section>
 
-    <section>
-      <title>The Frame View</title>
+  	<section>
+  		<title>The Frame View</title>
 
-      <para>A frame is a context environment for a call method. That means
-      that for each method call, you have access to its context that is to say
-      the variables values. Obviously, it is strongly related to the watch
-      view. Clicking on one frame modifies the watch view. The frame view is
-      also nice to follow the execution. For instance, in the figure above, we
-      know that the run method has called the step method which has called the
-      fire method.</para>
+  		<para>
+  			A frame is a context environment for a call method. That
+  			means that for each method call, you have access to its
+  			context that is to say the variables values. Obviously, it
+  			is strongly related to the watch view. Clicking on one
+  			frame modifies the watch view. The frame view is also nice
+  			to follow the execution. For instance, in the figure
+  			above, we know that the run method has called the step
+  			method which has called the fire method.
+  		</para>
 
-      <figure>
-        <title>The Frame View</title>
+  		<figure>
+  			<title>The Frame View</title>
 
-        <mediaobject>
-          <imageobject>
-            <imagedata fileref="KerMeta-UI-UserGuide_figures/frame_page.png" />
-          </imageobject>
-        </mediaobject>
-      </figure>
-    </section>
+  			<mediaobject>
+  				<imageobject>
+  					<imagedata
+  						fileref="KerMeta-UI-UserGuide_figures/frame_page.png" />
+  				</imageobject>
+  			</mediaobject>
+  		</figure>
+  	</section>
 
-    <section>
-      <title>The Editor View</title>
+  	<section>
+  		<title>The Editor View</title>
 
-      <para>When debugging, you surely want to know which line of code is
-      executed. That is the reason why the Kermeta text editor is displayed
-      with the outline. The current line of code is colored in green as in the
-      following figure. This green line is moving to the next instruction
-      depending your action.</para>
+  		<para>
+  			When debugging, you surely want to know which line of code
+  			is executed. That is the reason why the Kermeta text
+  			editor is displayed with the outline. The current line of
+  			code is colored in green as in the following figure. This
+  			green line is moving to the next instruction depending
+  			your action.
+  		</para>
 
-      <figure>
-        <title>The Editor View</title>
+  		<figure>
+  			<title>The Editor View</title>
 
-        <mediaobject>
-          <imageobject>
-            <imagedata fileref="KerMeta-UI-UserGuide_figures/debug_editor.png" />
-          </imageobject>
-        </mediaobject>
-      </figure>
-    </section>
+  			<mediaobject>
+  				<imageobject>
+  					<imagedata
+  						fileref="KerMeta-UI-UserGuide_figures/debug_editor.png" />
+  				</imageobject>
+  			</mediaobject>
+  		</figure>
+  	</section>
 
-    <section>
-      <title>Debugging actions</title>
+  	<section>
+  		<title>Debugging actions</title>
 
-      <para>There are three kind of actions you can execute: </para>
+  		<para>There are three kind of actions you can execute:</para>
 
-      <itemizedlist>
-        <listitem>
-          <para>F5 : pressing the F5 key makes the debugger entering in the
-          current operation.</para>
-        </listitem>
+  		<itemizedlist>
+  			<listitem>
+  				<para>
+  					F5 : pressing the F5 key makes the debugger
+  					entering in the current operation.
+  				</para>
+  			</listitem>
 
-        <listitem>
-          <para>F6 : pressing the F6 key makes the debugger stepping to the
-          next operation.</para>
-        </listitem>
+  			<listitem>
+  				<para>
+  					F6 : pressing the F6 key makes the debugger
+  					stepping to the next operation.
+  				</para>
+  			</listitem>
 
-        <listitem>
-          <para>F8 : pressing the F8 key makes the debugger executing all the
-          operations to the next breakpoint, if there is some one.</para>
-        </listitem>
-      </itemizedlist>
+  			<listitem>
+  				<para>
+  					F8 : pressing the F8 key makes the debugger
+  					executing all the operations to the next
+  					breakpoint, if there is some one.
+  				</para>
+  			</listitem>
+  		</itemizedlist>
 
-      <note>
-        <para>A nice feature is that you can add or remove breakpoints to your
-        Kermeta file during debugging.</para>
-      </note>
-    </section>
+  		<note>
+  			<para>
+  				A nice feature is that you can add or remove
+  				breakpoints to your Kermeta file during debugging.
+  			</para>
+  		</note>
+  	</section>
   </chapter>
 
 
@@ -809,6 +855,15 @@
     tools available directly on the files using the popup
     menu.</para>
 
+    <important>
+    	<para>
+    		Several of the wizards provided are multipages wizards. This means
+    		that several advanced options are available only after clicking on "Next"
+    		instead of clicking on "Finish". So if you get an error while transforming
+    		a file, make sure that none of the options (on the main page or on the "Next" pages)
+    		fix the default behavior for your special need.
+    	</para>
+    </important>
     <section>
       <title>Actions for Ecore files</title>
 
