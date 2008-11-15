@@ -1,4 +1,4 @@
-/* $Id: GetImageVisitor.java,v 1.14 2008-02-14 07:13:43 uid21732 Exp $
+/* $Id: GetImageVisitor.java,v 1.15 2008-11-15 09:20:31 dvojtise Exp $
 * Project : fr.irisa.triskell.kermeta.texteditor
 * File : GetImageVisitor.java
 * License : EPL
@@ -134,9 +134,9 @@ public class GetImageVisitor extends KermetaOptimizedVisitor {
 		    }
 		    else {
 		    	// is imported from an aspect
-			    if (arg0.isIsAbstract()) return KermetaIconsBlue.OPERATION_ABSTRACT;
+			    if (arg0.isIsAbstract()) return KermetaIconsGreen.OPERATION_ABSTRACT;
 				if (arg0.getSuperOperation() != null) return KermetaIconsBlue.METHOD;
-				return KermetaIconsGreen.OPERATION;
+				return KermetaIconsBlue.OPERATION;
 		    }
 		}
 	}
