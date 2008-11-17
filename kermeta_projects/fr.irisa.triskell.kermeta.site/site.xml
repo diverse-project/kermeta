@@ -42,6 +42,9 @@
    <feature url="features/fr.irisa.triskell.kermeta.graphical_1.2.0.jar" id="fr.irisa.triskell.kermeta.graphical" version="1.2.0">
       <category name="Kermeta IDE"/>
    </feature>
+   <feature url="features/org.kermeta.kompose.feature_0.0.2.jar" id="org.kermeta.kompose.feature" version="0.0.2">
+      <category name="MDKs"/>
+   </feature>
    <category-def name="Kermeta IDE" label="Kermeta IDE">
       <description>
          provided by Triskell team
