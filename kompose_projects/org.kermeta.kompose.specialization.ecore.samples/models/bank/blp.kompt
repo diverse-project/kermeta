@@ -1,0 +1,25 @@
+// Primary Model URI
+PM "platform:/resource/org.kermeta.kompose.specialization.ecore.samples/models/bank/Bank.ecore" 
+
+// Aspect Model URI
+AM "platform:/resource/org.kermeta.kompose.specialization.ecore.samples/models/bank/BLP.ecore" 
+
+// Composed Model URI
+CM "platform:/resource/org.kermeta.kompose.specialization.ecore.samples/models/bank/BankBLP.ecore"
+
+// predirectives for primary model
+PMPre { 
+	
+}
+
+// predirectives for aspect model
+AMPre { 
+	// Rename package BLP to Bank
+	BLP.name = "Bank"
+}
+
+// postdirectives 
+Post { 
+	//Bank::Controller.eOperations - Bank::Controller::transfer
+	//Bank::Controller.eOperations - Bank::Controller::withdraw
+}

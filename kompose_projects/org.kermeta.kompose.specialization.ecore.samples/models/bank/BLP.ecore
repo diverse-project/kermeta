@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="BLP"
+    nsURI="http://hola" nsPrefix="blp">
+  <eClassifiers xsi:type="ecore:EClass" name="BankUser">
+    <eOperations name="CreateSubject" eType="#//BankSubject">
+      <eParameters name="sl" eType="#//SecurityLevel"/>
+    </eOperations>
+    <eOperations name="DeleteSubject" eType="#//Boolean">
+      <eParameters name="sb" eType="#//BankSubject"/>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="subject" lowerBound="1"
+        eType="#//BankSubject" eOpposite="#//BankSubject/user"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="securityLevel" lowerBound="1"
+        eType="#//SecurityLevel" eOpposite="#//SecurityLevel/user"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SecurityLevel">
+    <eOperations name="GetAllDominatiees" upperBound="-1" eType="#//SecurityLevel"/>
+    <eOperations name="AddDominatee" eType="#//Boolean">
+      <eParameters name="sl" eType="#//SecurityLevel"/>
+    </eOperations>
+    <eOperations name="AddDominator" eType="#//Boolean">
+      <eParameters name="sl" eType="#//SecurityLevel"/>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="subject" upperBound="-1"
+        eType="#//BankSubject" eOpposite="#//BankSubject/securityLevel"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="dominatee" upperBound="-1"
+        eType="#//SecurityLevel" eOpposite="#//SecurityLevel/dominator"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="dominator" upperBound="-1"
+        eType="#//SecurityLevel" eOpposite="#//SecurityLevel/dominatee"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="user" upperBound="-1" eType="#//BankUser"
+        eOpposite="#//BankUser/securityLevel"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="target" upperBound="-1"
+        eType="#//Account" eOpposite="#//Account/securityLevel"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Account">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="securityLevel" lowerBound="1"
+        eType="#//SecurityLevel" eOpposite="#//SecurityLevel/target"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="operationType" upperBound="-1"
+        eType="#//Operation" eOpposite="#//Operation/Target"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Operation">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="Type" eType="#//OperationTypeEnum"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="Target" upperBound="-1"
+        eType="#//Account" eOpposite="#//Account/operationType"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="BankSubject">
+    <eOperations name="CheckAccess">
+      <eParameters name="t" eType="#//Account"/>
+      <eParameters name="op" eType="#//Operation"/>
+    </eOperations>
+    <eOperations name="withdraw"/>
+    <eOperations name="transfer"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="user" upperBound="-1" eType="#//BankUser"
+        eOpposite="#//BankUser/subject"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="securityLevel" lowerBound="1"
+        eType="#//SecurityLevel" eOpposite="#//SecurityLevel/subject"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="OperationTypeEnum" instanceClassName="fr.irista.triskell.Optype">
+    <eLiterals name="READ" value="1"/>
+    <eLiterals name="WRITE" value="2"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="OperationEnum">
+    <eLiterals name="TRANSFER" value="1"/>
+    <eLiterals name="WITHDRAW" value="2"/>
+    <eLiterals name="DEPOSIT" value="3"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EDataType" name="Boolean" instanceClassName="java.lng.Boolean"/>
+</ecore:EPackage>

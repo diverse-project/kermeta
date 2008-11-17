@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="org.kermeta.kompose.specialization.rdbschema.samples" default="gather.bin.parts" basedir=".">
+	<target name="gather.bin.parts" >
+		<tstamp>
+			<format property="TODAY_UK" pattern="d-MMMM-yyyy" locale="en"/>
+		</tstamp>
+		<filter token="BUILD.DATE" value="${TODAY_UK}"/>
+		<mkdir dir="mytemp"/>
+		<copy todir="mytemp" failonerror="true" overwrite="true">
+			<fileset dir="." includes="**" excludes="*zip_build.xml,*mytemp, org.kermeta.kompose.specialization.rdbschema.samples.zip"/>
+		</copy>
+		<zip destfile="org.kermeta.kompose.specialization.rdbschema.samples.zip" basedir="mytemp" includes="**" filesonly="false" whenempty="skip" update="false"/>
+		<delete dir="mytemp"/>
+	</target>
+</project>

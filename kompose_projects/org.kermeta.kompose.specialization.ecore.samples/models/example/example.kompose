@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="ASCII"?>
+<kompose:Composer xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:kompose="http://www.kermeta.org/kompose" primaryModelURI="platform:/resource/org.kermeta.kompose.specialization.ecore.samples/models/example/Input.ecore" aspectModelURI="platform:/resource/org.kermeta.kompose.specialization.ecore.samples/models/example/Empty.ecore" composedModelURI="platform:/resource/org.kermeta.kompose.specialization.ecore.samples/models/example/Output.ecore">
+  <predirectivesPM xsi:type="kompose:Set" propertyName="name">
+    <target xsi:type="kompose:NameRef" qname="P::B"/>
+    <value xsi:type="kompose:StringLiteral" value="C"/>
+  </predirectivesPM>
+  <predirectivesPM xsi:type="kompose:Set" propertyName="name">
+    <target xsi:type="kompose:NameRef" qname="P::A::b"/>
+    <value xsi:type="kompose:StringLiteral" value="c"/>
+  </predirectivesPM>
+  <predirectivesPM xsi:type="kompose:Set" propertyName="containment">
+    <target xsi:type="kompose:NameRef" qname="P::A::c"/>
+    <value xsi:type="kompose:BooleanLiteral"/>
+  </predirectivesPM>
+  <predirectivesPM xsi:type="kompose:Create" className="Class" identifier="e"/>
+  <predirectivesPM xsi:type="kompose:Create" className="Operation" identifier="op"/>
+  <predirectivesPM xsi:type="kompose:Set" propertyName="name">
+    <target xsi:type="kompose:IDRef" identifier="e"/>
+    <value xsi:type="kompose:StringLiteral" value="E"/>
+  </predirectivesPM>
+  <predirectivesPM xsi:type="kompose:Set" propertyName="name">
+    <target xsi:type="kompose:IDRef" identifier="op"/>
+    <value xsi:type="kompose:StringLiteral" value="opA"/>
+  </predirectivesPM>
+  <predirectivesPM xsi:type="kompose:Add" propertyName="eClassifiers">
+    <target xsi:type="kompose:NameRef" qname="P"/>
+    <value xsi:type="kompose:IDRef" identifier="e"/>
+  </predirectivesPM>
+  <predirectivesPM xsi:type="kompose:Add" propertyName="eOperations">
+    <target xsi:type="kompose:NameRef" qname="P::A"/>
+    <value xsi:type="kompose:IDRef" identifier="op"/>
+  </predirectivesPM>
+  <predirectivesPM xsi:type="kompose:Remove" propertyName="eStructuralFeatures">
+    <target xsi:type="kompose:NameRef" qname="P::A"/>
+    <value xsi:type="kompose:NameRef" qname="P::A::d"/>
+  </predirectivesPM>
+  <predirectivesPM xsi:type="kompose:Remove" propertyName="eClassifiers">
+    <target xsi:type="kompose:NameRef" qname="P"/>
+    <value xsi:type="kompose:NameRef" qname="P::D"/>
+  </predirectivesPM>
+</kompose:Composer>

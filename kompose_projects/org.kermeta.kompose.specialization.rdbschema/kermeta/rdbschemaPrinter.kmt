@@ -1,0 +1,47 @@
+package rdbschema;
+
+require kermeta
+require "../model/Rdbschema.ecore"
+
+using kermeta::language::structure
+using kermeta::standard
+using kermeta::utils
+using kermeta::persistence
+
+
+@aspect "true"
+class Table
+{
+	operation print() is do
+		stdio.writeln("TABLE " + name)
+		// print the primary keys
+		pkey.each{ c | 
+			stdio.writeln("  PK " + c.name + " : " + c.type)
+		}
+		// print the foreign keys
+		fkeys.each{ fk | 
+			fk.cols.each{ c |
+				stdio.writeln("  FK " + c.name + " : " + c.type + " -> TABLE " + fk.references.name)
+			}
+		}
+		// print the other columns
+		cols.select{ c | not pkey.contains(c) and not fkeys.exists{ fk | fk.cols.contains(c)}}.each{ c |
+			stdio.writeln("     " + c.name + " : " + c.type)
+		}
+		
+	end
+}
+
+@aspect "true"
+class RDBMSModel 
+{
+	operation print() is do
+		table.each{ t |
+			t.print
+			stdio.writeln("")
+		}
+	end
+}
+
+
+

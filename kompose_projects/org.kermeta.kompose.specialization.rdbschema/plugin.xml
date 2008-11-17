@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.2"?>
+<plugin>
+   <extension
+         point="org.eclipse.ui.popupMenus">
+      <objectContribution
+            objectClass="org.eclipse.core.resources.IFile"
+            nameFilter="*.kompose"
+            id="org.kermeta.kompose.specialization.rdbschema.contribution1">
+         <menu
+               label="Kompose"
+               path="additions"
+               id="org.kermeta.kompose.specialization.kompose.menu1">
+            <separator
+                  name="group1">
+            </separator>
+         </menu>
+         <action
+               label="Compose Models (Rdbschema)"
+               class="org.kermeta.kompose.specialization.rdbschema.popup.action.Composer"
+               menubarPath="org.kermeta.kompose.specialization.kompose.menu1/group1"
+               enablesFor="1"
+               id="org.kermeta.kompose.specialization.rdbschema.newAction">
+         </action>
+      </objectContribution>
+   </extension>
+   <extension
+         point="org.eclipse.ui.startup">
+      <startup class="org.kermeta.kompose.specialization.rdbschema.startup.RegisterStartup"/>
+   </extension>
+</plugin>
