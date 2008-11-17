@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.2"?>
+<plugin>
+<extension
+         id="org.kermeta.kompose.specialization.ecore.newWizard"
+         name="Kompose Samples Wizard"
+         point="org.eclipse.ui.newWizards">
+      <category
+            id="org.kermeta.kompose.specialization.models.samplesCategory"
+            name="Kompose Model Samples"
+            parentCategory="org.eclipse.ui.Examples"/>
+      <wizard
+            canFinishEarly="true"
+            category="org.eclipse.ui.Examples/org.kermeta.kompose.specialization.models.samplesCategory"
+            class="org.kermeta.kompose.specialization.ecore.ui.KomposeEcoreSamplesWizard"
+            hasPages="false"
+            icon="icons/newkermetafile.png"
+            id="org.kermeta.kompose.samples.KomposeEcoreSampleWizard"
+            name="Ecore Composition Samples"/>
+   </extension>
+</plugin>

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="ASCII"?>
+<composition:Composer xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:composition="directives.ecore" xsi:schemaLocation="directives.ecore platform:/resource/Composition/metamodel/directives.ecore" primaryModelURI="platform:/resource/HealthWatcherCaseStudy/Primary_Security-v1.ecore" aspectModelURI="platform:/resource/HealthWatcherCaseStudy/Persistence_RBACPersistence.ecore" composedModelURI="platform:/resource/HealthWatcherCaseStudy/Primary_Security-v1_Persistence_RBACPersistence.ecore">
+  <postdirectives xsi:type="composition:Remove" propertyName="eStructuralFeatures">
+    <target xsi:type="composition:NameRef" qname="healthwatcher::DataManager"/>
+    <value xsi:type="composition:NameRef" qname="healthwatcher::DataManager::units"/>
+  </postdirectives>
+  <postdirectives xsi:type="composition:Remove" propertyName="eStructuralFeatures">
+    <target xsi:type="composition:NameRef" qname="healthwatcher::DataManager"/>
+    <value xsi:type="composition:NameRef" qname="healthwatcher::DataManager::diseases"/>
+  </postdirectives>
+  <postdirectives xsi:type="composition:Remove" propertyName="eStructuralFeatures">
+    <target xsi:type="composition:NameRef" qname="healthwatcher::DataManager"/>
+    <value xsi:type="composition:NameRef" qname="healthwatcher::DataManager::symptoms"/>
+  </postdirectives>
+  <postdirectives xsi:type="composition:Remove" propertyName="eStructuralFeatures">
+    <target xsi:type="composition:NameRef" qname="healthwatcher::DataManager"/>
+    <value xsi:type="composition:NameRef" qname="healthwatcher::DataManager::speciatlties"/>
+  </postdirectives>
+  <postdirectives xsi:type="composition:Remove" propertyName="eStructuralFeatures">
+    <target xsi:type="composition:NameRef" qname="healthwatcher::DataManager"/>
+    <value xsi:type="composition:NameRef" qname="healthwatcher::DataManager::users"/>
+  </postdirectives>
+  <postdirectives xsi:type="composition:Remove" propertyName="eStructuralFeatures">
+    <target xsi:type="composition:NameRef" qname="healthwatcher::DataManager"/>
+    <value xsi:type="composition:NameRef" qname="healthwatcher::DataManager::complaints"/>
+  </postdirectives>
+  <postdirectives xsi:type="composition:Remove" propertyName="eStructuralFeatures">
+    <target xsi:type="composition:NameRef" qname="healthwatcher::AccessControlManager"/>
+    <value xsi:type="composition:NameRef" qname="healthwatcher::AccessControlManager::users"/>
+  </postdirectives>
+  <postdirectives xsi:type="composition:Remove" propertyName="eStructuralFeatures">
+    <target xsi:type="composition:NameRef" qname="healthwatcher::AccessControlManager"/>
+    <value xsi:type="composition:NameRef" qname="healthwatcher::AccessControlManager::permissions"/>
+  </postdirectives>
+  <postdirectives xsi:type="composition:Remove" propertyName="eStructuralFeatures">
+    <target xsi:type="composition:NameRef" qname="healthwatcher::AccessControlManager"/>
+    <value xsi:type="composition:NameRef" qname="healthwatcher::AccessControlManager::roles"/>
+  </postdirectives>
+  <predirectivesAM xsi:type="composition:Set" propertyName="name">
+    <target xsi:type="composition:NameRef" qname="PersistenceAspect"/>
+    <value xsi:type="composition:StringLiteral" value="healthwatcher"/>
+  </predirectivesAM>
+</composition:Composer>

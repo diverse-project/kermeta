@@ -1,0 +1,11 @@
+<%@ jet package="org.kermeta.kompose.specialization_wizard.generator.template"
+
+imports="org.kermeta.kompose.specialization_wizard.wizards.SpecializerIntermediateDataContainer"
+
+class="PluginBuildProperties"
+%>
+source.. = src/
+output.. = bin/
+bin.includes = plugin.xml,\
+               META-INF/,\
+               .

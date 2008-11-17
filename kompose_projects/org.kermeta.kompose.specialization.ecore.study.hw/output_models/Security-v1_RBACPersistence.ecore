@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="SecurityAspect"
+    nsURI="http://SecurityAspect" nsPrefix="SecurityAspect">
+  <eClassifiers xsi:type="ecore:EEnum" name="OperationType">
+    <eLiterals name="reportComplaint" literal="reportComplaint"/>
+    <eLiterals name="updateComplaint" value="1" literal="updateComplaint"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="RoleType">
+    <eLiterals name="citizen" literal="citizen"/>
+    <eLiterals name="manager" value="1" literal="manager"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="HWSessionManager">
+    <eOperations name="createSession"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="sessions" upperBound="-1"
+        eType="#//HWSession" eOpposite="#//HWSession/mgr"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="HWSession">
+    <eOperations name="addActiveRole"/>
+    <eOperations name="dropActiveRole"/>
+    <eOperations name="checkAccess"/>
+    <eOperations name="assignUser"/>
+    <eOperations name="getAllActiveRoles"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="user" lowerBound="1" eType="#//HWUser"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="mgr" lowerBound="1" eType="#//HWSessionManager"
+        eOpposite="#//HWSessionManager/sessions"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="roles" lowerBound="1" upperBound="-1"
+        eType="#//HWRole" eOpposite="#//HWRole/sessions"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Target">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="permissions" upperBound="-1"
+        eType="#//Permission" eOpposite="#//Permission/targets"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="object" lowerBound="1"
+        eType="#//ProtectedTarget" eOpposite="#//ProtectedTarget/target"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ProtectedTarget" abstract="true">
+    <eOperations name="contructor"/>
+    <eOperations name="createPermissions"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="target" lowerBound="1"
+        eType="#//Target" eOpposite="#//Target/object"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Complaint" eSuperTypes="#//ProtectedTarget"/>
+  <eClassifiers xsi:type="ecore:EClass" name="HealthUnit" eSuperTypes="#//ProtectedTarget"/>
+  <eClassifiers xsi:type="ecore:EClass" name="DiseaseType" eSuperTypes="#//ProtectedTarget"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Symptom" eSuperTypes="#//ProtectedTarget"/>
+  <eClassifiers xsi:type="ecore:EClass" name="AccessControlManager">
+    <eOperations name="createUser"/>
+    <eOperations name="createRole"/>
+    <eOperations name="createPermission"/>
+    <eOperations name="assignPermission"/>
+    <eOperations name="deleteUser"/>
+    <eOperations name="deassignUserRole"/>
+    <eOperations name="assignUserRole"/>
+    <eOperations name="deletePermission"/>
+    <eOperations name="deleteRole"/>
+    <eOperations name="deassignPermission"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="roles" upperBound="-1"
+        eType="#//HWRole" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="permissions" upperBound="-1"
+        eType="#//Permission" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="users" upperBound="-1"
+        eType="#//HWUser" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Specialty" eSuperTypes="#//ProtectedTarget"/>
+  <eClassifiers xsi:type="ecore:EClass" name="HWUserPM">
+    <eOperations name="getAllUsers"/>
+    <eOperations name="getUserByID"/>
+    <eOperations name="insertUser"/>
+    <eOperations name="updateUser"/>
+    <eOperations name="deleteUser"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="HWRolePM">
+    <eOperations name="getAllRoles"/>
+    <eOperations name="getRoleByID"/>
+    <eOperations name="insertRole"/>
+    <eOperations name="updateRole"/>
+    <eOperations name="deleteRole"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="PermissionPM">
+    <eOperations name="getAllPermissions"/>
+    <eOperations name="getPermissionByID"/>
+    <eOperations name="insertPermission"/>
+    <eOperations name="updatePermission"/>
+    <eOperations name="deletePermission"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DataManager">
+    <eOperations name="getConnexion"/>
+    <eOperations name="beginTransaction"/>
+    <eOperations name="commitTransaction"/>
+    <eOperations name="rollbackTransaction"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="userPM" lowerBound="1"
+        eType="#//HWUserPM" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="rolePM" lowerBound="1"
+        eType="#//HWRolePM" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="permissionPM" lowerBound="1"
+        eType="#//PermissionPM" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EDataType" name="String" instanceClassName="java.lang.String"/>
+  <eClassifiers xsi:type="ecore:EClass" name="HWRole">
+    <eOperations name="grantPermission"/>
+    <eOperations name="revokePermission"/>
+    <eOperations name="checkAccess"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="roleType" eType="#//RoleType"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="#//String"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="sessions" upperBound="-1"
+        eType="#//HWSession" eOpposite="#//HWSession/roles"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="assignedUsers" upperBound="-1"
+        eType="#//HWUser" eOpposite="#//HWUser/authroles"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="code" lowerBound="1" eType="#//String"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="permissions" upperBound="-1"
+        eType="#//Permission" eOpposite="#//Permission/roles"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Permission">
+    <eOperations name="checkAccess"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="operations" upperBound="-1"
+        eType="#//OperationType"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="roles" upperBound="-1"
+        eType="#//HWRole" eOpposite="#//HWRole/permissions"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="code" lowerBound="1" eType="#//String"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="targets" lowerBound="1"
+        upperBound="-1" eType="#//Target" eOpposite="#//Target/permissions"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="HWUser" eSuperTypes="#//ProtectedTarget">
+    <eOperations name="getAuthorizedRoles"/>
+    <eOperations name="getAssignedRoles"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="loginID" lowerBound="1"
+        eType="#//String"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="authroles" upperBound="-1"
+        eType="#//HWRole" eOpposite="#//HWRole/assignedUsers"/>
+  </eClassifiers>
+</ecore:EPackage>

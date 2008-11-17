@@ -1,0 +1,14 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Kompose Specialization Wizard Plug-in
+Bundle-SymbolicName: org.kermeta.kompose.specialization_wizard;singleton:=true
+Bundle-Version: 0.0.2
+Bundle-Activator: org.kermeta.kompose.specialization_wizard.Activator
+Bundle-Vendor: triskell
+Require-Bundle: org.eclipse.ui,
+ org.eclipse.pde.core,
+ org.eclipse.core.runtime,
+ org.eclipse.core.resources,
+ org.eclipse.jdt,
+ org.eclipse.jdt.core
+Bundle-ActivationPolicy: lazy

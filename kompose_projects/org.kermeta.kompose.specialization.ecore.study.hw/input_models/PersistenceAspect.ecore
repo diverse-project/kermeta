@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<ecore:EPackage xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="PersistenceAspect"
+    nsURI="http://PersistenceAspect" nsPrefix="PersistenceAspect">
+  <eClassifiers xsi:type="ecore:EClass" name="DataManager">
+    <eOperations name="getConnexion"/>
+    <eOperations name="beginTransaction"/>
+    <eOperations name="commitTransaction"/>
+    <eOperations name="rollbackTransaction"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="userPM" lowerBound="1"
+        eType="#//HWUserPM" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="complaintPM" lowerBound="1"
+        eType="#//ComplaintPM" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="healthUnitPM" lowerBound="1"
+        eType="#//HealthUnitPM" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="specialtyPM" lowerBound="1"
+        eType="#//SpecialtyPM" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="diseaseTypePM" lowerBound="1"
+        eType="#//DiseaseTypePM" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="symptomPM" lowerBound="1"
+        eType="#//SymptomPM" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="HWUserPM">
+    <eOperations name="getAllUsers"/>
+    <eOperations name="getUserByID"/>
+    <eOperations name="insertUser"/>
+    <eOperations name="updateUser"/>
+    <eOperations name="deleteUser"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="HWUser">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="loginID" lowerBound="1"
+        eType="#//String"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EDataType" name="String" instanceClassName="java.lang.String"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Complaint">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="code" lowerBound="1" eType="#//String"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ComplaintPM">
+    <eOperations name="getAllComplaint"/>
+    <eOperations name="getComplaintByID"/>
+    <eOperations name="insertComplaint"/>
+    <eOperations name="updateComplaint"/>
+    <eOperations name="deleteComplaint"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="HealthUnit">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="code" lowerBound="1" eType="#//String"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="HealthUnitPM">
+    <eOperations name="getAllHealthUnit"/>
+    <eOperations name="getHealthUnitByID"/>
+    <eOperations name="insertHealthUnit"/>
+    <eOperations name="updateHealthUnit"/>
+    <eOperations name="deleteHealthUnit"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Specialty">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="code" lowerBound="1" eType="#//String"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SpecialtyPM">
+    <eOperations name="getAllSpecialty"/>
+    <eOperations name="getSpecialtyByID"/>
+    <eOperations name="insertSpecialty"/>
+    <eOperations name="updateSpecialty"/>
+    <eOperations name="deleteSpecialty"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DiseaseType">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="code" lowerBound="1" eType="#//String"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DiseaseTypePM">
+    <eOperations name="getAllDiseaseType"/>
+    <eOperations name="getDiseaseTypeByID"/>
+    <eOperations name="insertDiseaseType"/>
+    <eOperations name="updateDiseaseType"/>
+    <eOperations name="deleteDiseaseType"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Symptom">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="code" lowerBound="1" eType="#//String"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SymptomPM">
+    <eOperations name="getAllSymptom"/>
+    <eOperations name="getSymptomByID"/>
+    <eOperations name="insertSymptom"/>
+    <eOperations name="updateSymptom"/>
+    <eOperations name="deleteSymptom"/>
+  </eClassifiers>
+</ecore:EPackage>

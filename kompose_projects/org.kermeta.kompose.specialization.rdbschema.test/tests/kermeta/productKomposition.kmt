@@ -1,0 +1,22 @@
+@mainClass "tests::kermeta::SimpleTest"
+@mainOperation "main"
+
+
+package tests::kermeta;
+
+require "platform:/plugin/org.kermeta.kompose.specialization.rdbschema/kermeta/rdbschemaComposer.kmt"
+require kermeta
+
+using kermeta::language::structure
+using kermeta::standard
+using kermeta::utils
+using kermeta::persistence
+
+class SimpleTest
+{
+	operation main() : Void is do
+		var rdbMain : rdbschema::Main init rdbschema::Main.new
+		rdbMain.main("platform:/resource/org.kermeta.kompose.specialization.rdbschema.samples/models/product/comp.xmi")
+        
+	end
+}

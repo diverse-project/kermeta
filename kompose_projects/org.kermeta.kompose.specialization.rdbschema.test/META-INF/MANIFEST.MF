@@ -1,0 +1,9 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Kompose Test for RBDSchema Specialization Plug-in
+Bundle-SymbolicName: org.kermeta.kompose.specialization.rdbschema.test
+Bundle-Version: 0.0.2
+Bundle-Activator: org.kermeta.kompose.specialization.rdbschema.test.Activator
+Bundle-ActivationPolicy: lazy
+Require-Bundle: org.eclipse.ui,
+ org.eclipse.core.runtime

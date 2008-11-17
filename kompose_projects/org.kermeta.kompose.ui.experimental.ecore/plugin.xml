@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.2"?>
+<plugin>
+
+   <extension
+         point="org.eclipse.ui.popupMenus">
+      <objectContribution
+            id="org.kermeta.kompose.ui.experimental.ecore.contribution1"
+            nameFilter="*.ecore"
+            objectClass="org.eclipse.core.resources.IFile">
+         <menu
+               id="org.kermeta.kompose.ui.experimental.ecore.menu1"
+               label="Kermeta Experiment"
+               path="additions">
+            <separator
+                  name="group1">
+            </separator>
+         </menu>
+         <action
+               class="org.kermeta.kompose.ui.experimental.ecore.popup.actions.MergeEcoreAction"
+               enablesFor="2+"
+               id="org.kermeta.kompose.ui.experimental.ecore.newAction"
+               label="Merge 2 Ecore Files"
+               menubarPath="org.kermeta.kompose.ui.experimental.ecore.menu1/group1">
+         </action>
+      </objectContribution>
+   </extension>
+
+</plugin>
