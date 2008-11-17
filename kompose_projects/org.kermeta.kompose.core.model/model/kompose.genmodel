@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/org.kermeta.kompose.core.model/src"
+    modelPluginID="org.kermeta.kompose.core.model" modelName="Kompose" importerID="org.eclipse.emf.importer.ecore">
+  <foreignModel>kompose.ecore</foreignModel>
+  <genPackages prefix="Kompose" disposableProviderFactory="true" ecorePackage="kompose.ecore#/">
+    <genDataTypes ecoreDataType="kompose.ecore#//String"/>
+    <genDataTypes ecoreDataType="kompose.ecore#//Boolean"/>
+    <genDataTypes ecoreDataType="kompose.ecore#//Integer"/>
+    <genClasses image="false" ecoreClass="kompose.ecore#//ElementDirective">
+      <genOperations ecoreOperation="kompose.ecore#//ElementDirective/execute"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="kompose.ecore#//CompositionDirective">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference kompose.ecore#//CompositionDirective/context"/>
+    </genClasses>
+    <genClasses ecoreClass="kompose.ecore#//Remove"/>
+    <genClasses ecoreClass="kompose.ecore#//Add"/>
+    <genClasses ecoreClass="kompose.ecore#//Create">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kompose.ecore#//Create/className"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kompose.ecore#//Create/identifier"/>
+    </genClasses>
+    <genClasses ecoreClass="kompose.ecore#//Set"/>
+    <genClasses image="false" ecoreClass="kompose.ecore#//ElementRef"/>
+    <genClasses ecoreClass="kompose.ecore#//NameRef">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kompose.ecore#//NameRef/qname"/>
+    </genClasses>
+    <genClasses ecoreClass="kompose.ecore#//IDRef">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kompose.ecore#//IDRef/identifier"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="kompose.ecore#//Change">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kompose.ecore#//Change/propertyName"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference kompose.ecore#//Change/target"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference kompose.ecore#//Change/value"/>
+    </genClasses>
+    <genClasses ecoreClass="kompose.ecore#//Literal"/>
+    <genClasses ecoreClass="kompose.ecore#//StringLiteral">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kompose.ecore#//StringLiteral/value"/>
+    </genClasses>
+    <genClasses ecoreClass="kompose.ecore#//BooleanLiteral">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kompose.ecore#//BooleanLiteral/value"/>
+    </genClasses>
+    <genClasses ecoreClass="kompose.ecore#//IntegerLiteral">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kompose.ecore#//IntegerLiteral/value"/>
+    </genClasses>
+    <genClasses ecoreClass="kompose.ecore#//VoidLiteral"/>
+    <genClasses ecoreClass="kompose.ecore#//Context"/>
+    <genClasses ecoreClass="kompose.ecore#//Composer">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference kompose.ecore#//Composer/predirectivesPM"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference kompose.ecore#//Composer/postdirectives"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kompose.ecore#//Composer/primaryModelURI"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kompose.ecore#//Composer/aspectModelURI"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kompose.ecore#//Composer/composedModelURI"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference kompose.ecore#//Composer/predirectivesAM"/>
+      <genOperations ecoreOperation="kompose.ecore#//Composer/compose"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="kompose.ecore#//Mergeable"/>
+  </genPackages>
+</genmodel:GenModel>

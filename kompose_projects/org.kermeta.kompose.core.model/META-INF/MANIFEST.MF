@@ -1,0 +1,12 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: %pluginName
+Bundle-SymbolicName: org.kermeta.kompose.core.model; singleton:=true
+Bundle-Version: 0.0.2
+Bundle-ClassPath: .
+Bundle-Vendor: %providerName
+Bundle-Localization: plugin
+Require-Bundle: org.eclipse.emf.ecore;bundle-version="2.4.1";visibility:=reexport,
+ org.eclipse.emf.ecore.xmi;bundle-version="2.4.1"
+Bundle-ActivationPolicy: lazy
+Export-Package: kompose, kompose.impl, kompose.util
