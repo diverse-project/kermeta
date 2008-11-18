@@ -1,4 +1,4 @@
-/* $Id: structure.kmt,v 1.73 2008-10-28 10:49:32 cfaucher Exp $
+/* $Id: structure.kmt,v 1.74 2008-11-18 14:37:51 cfaucher Exp $
  * Project : framework
  * File : structure.kmt
  * License : EPL
@@ -403,7 +403,7 @@ aspect class Class
 	 */
 	operation new() : Object from Class is 
 	do
-		@compiledJavaExtern "org.kermeta.compil.runtime.helper.language.ClassUtil.newObject(this.getClass().getName())"
+		@compiledJavaExtern "org.kermeta.compil.runtime.helper.language.ClassUtil.newObject(this.getTypeDefinition().qualifiedName().replace(\"::\", \".\"))"
 		result := extern fr::irisa::triskell::kermeta::runtime::language::Class.newObject(self)
 	end
 
