@@ -1,4 +1,4 @@
-/* $Id: KermetaTypeChecker.java,v 1.41 2008-10-09 15:13:13 cfaucher Exp $
+/* $Id: KermetaTypeChecker.java,v 1.42 2008-11-18 14:32:29 cfaucher Exp $
 * Project : Kermeta (First iteration)
 * File : KermetaTypeChecker.java
 * License : EPL
@@ -19,6 +19,7 @@ import java.util.List;
 import org.apache.commons.logging.Log;
 import org.kermeta.io.KermetaUnit;
 import org.kermeta.log4j.util.LogConfigurationHelper;
+import org.kermeta.model.internal.ClassDefinitionHelper;
 
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
 import fr.irisa.triskell.kermeta.language.structure.Constraint;
@@ -71,7 +72,7 @@ public class KermetaTypeChecker {
     }
     
     private void fixEMFNameForCompiler(Operation op) {
-    	for (Property prop : ((ClassDefinition) op.eContainer()).getOwnedAttribute()) {
+    	for (Property prop : ClassDefinitionHelper.getAllProperties((ClassDefinition) op.eContainer())) {
 			if( op.getName().length()>3 && op.getName().substring(3, op.getName().length()).toLowerCase().equals(prop.getName().toLowerCase()) &&
 					( op.getName().substring(0, 3).equals("set") || op.getName().substring(0, 3).equals("get") ) ) {
 				addRenamingTag(op);
