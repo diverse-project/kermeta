@@ -14,6 +14,8 @@ public class ClassUtil {
 
 	static public Object newObject( String class_QN ) {
 		
+		class_QN = class_QN.replace("impl.", "").replace("Impl", "");
+		
 		String type = class_QN;
 		String[] type_ = class_QN.split("<");
 		if ( type_.length > 1) {
@@ -84,8 +86,12 @@ public class ClassUtil {
 	}
 	
 	public static Boolean equals(kermeta.language.structure.Class class_, Object other) {
-		if(other instanceof kermeta.language.structure.Class) {
+		if(class_ == null || other == null) {
 			return class_ == other;
+		}
+	
+		if(other instanceof kermeta.language.structure.Class) {
+			return ObjectUtil.qualifiedNameDot(class_.getTypeDefinition()).equals(ObjectUtil.qualifiedNameDot(((kermeta.language.structure.Class) other).getTypeDefinition()));
 		} else {
 			return false;
 		}

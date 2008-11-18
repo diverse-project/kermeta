@@ -396,7 +396,7 @@ public class ObjectUtil {
 	
 	public static Boolean equalsSwitcher(java.lang.Object object, java.lang.Object element) {
 		if( object instanceof kermeta.language.structure.Object && element instanceof kermeta.language.structure.Object) {
-			return object.equals(element);
+			return ((kermeta.language.structure.Object) object).equals((kermeta.language.structure.Object) element);
 		} else {
 			return equals(object, element);
 		}
