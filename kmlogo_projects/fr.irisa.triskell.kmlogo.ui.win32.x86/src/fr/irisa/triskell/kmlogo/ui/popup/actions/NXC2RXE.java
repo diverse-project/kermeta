@@ -39,7 +39,7 @@ public class NXC2RXE implements IObjectActionDelegate
 	/** The file selection */
 	private StructuredSelection	selection;
 	
-	private final String PLUGIN_ID = "fr.irisa.triskell.kmlogo.ui.win32.x86";
+	private final String PLUGIN_ID = "fr.irisa.triskell.kmlogo.ui.win32";
 
 	/**
 	 * Constructor
