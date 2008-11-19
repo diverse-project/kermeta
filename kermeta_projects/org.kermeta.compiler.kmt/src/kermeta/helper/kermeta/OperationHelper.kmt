@@ -1,4 +1,4 @@
-/* $Id: OperationHelper.kmt,v 1.16 2008-11-07 08:53:31 cfaucher Exp $
+/* $Id: OperationHelper.kmt,v 1.17 2008-11-19 17:14:51 cfaucher Exp $
  * Creation date: May 20, 2008
  * License: EPL
  * Copyright:
@@ -219,6 +219,13 @@ aspect class Operation {
 			end
 			
 			staticMethod.body := "//Protection of the following code\n"
+			
+			if self.name == "equals" then
+				staticMethod.body := staticMethod.body + "if( self == null || "
+				staticMethod.body := staticMethod.body + self.ownedParameter.first.name + " == null ) {\n"
+				staticMethod.body := staticMethod.body + "return self == " + self.ownedParameter.first.name + ";\n"
+				staticMethod.body := staticMethod.body + "}\n\n"
+			end
 			
 			if context.frameworkOperations.contains(self.name) then
 				staticMethod.body := staticMethod.body + "if( self == null || ((java.lang.Object) self) instanceof kermeta.language.structure.Object ) {\n"
