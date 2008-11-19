@@ -1,4 +1,4 @@
-/* $Id: ExpressionHelper.kmt,v 1.31 2008-11-07 08:53:31 cfaucher Exp $
+/* $Id: ExpressionHelper.kmt,v 1.32 2008-11-19 17:15:34 cfaucher Exp $
  * Creation date: Jul 25, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -31,7 +31,8 @@ aspect class Expression {
 			or self.isInstanceOf(Literal)
 			or self.isInstanceOf(SelfExpression)
 			or self.isInstanceOf(CallResult)
-			or self.isInstanceOf(VoidType) then
+			or self.isInstanceOf(VoidType)
+			/*return pack: or self.isInstanceOf(Assignment)*/ then
 			result := true
 		end
 		
