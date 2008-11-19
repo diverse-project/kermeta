@@ -1,4 +1,4 @@
-/* $Id: SimpleFileIO.java,v 1.14 2008-06-12 07:17:54 ftanguy Exp $
+/* $Id: SimpleFileIO.java,v 1.15 2008-11-19 12:45:19 cfaucher Exp $
  * Project: Kermeta (First iteration)
  * File: SimpleFileIO.java
  * License: EPL
@@ -29,7 +29,7 @@ import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.URIConverter;
-import org.eclipse.emf.ecore.resource.impl.URIConverterImpl;
+import org.eclipse.emf.ecore.resource.impl.ExtensibleURIConverterImpl;
 
 import fr.irisa.triskell.eclipse.resources.ResourceHelper;
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
@@ -40,7 +40,16 @@ public class SimpleFileIO {
 	public static RuntimeObject fileExists(RuntimeObject filename)
     {
 		java.lang.String fname = getOSFileLocation(String.getValue(filename));
-		File file = new File(fname);
+		
+		java.lang.String filePath = null;
+		
+		if ( fname.startsWith("platform:/resource") ) {
+    		java.lang.String platformFname = fname.replace("platform:/resource", "");
+    		IFolder folder = ResourcesPlugin.getWorkspace().getRoot().getFolder( new Path(platformFname) );
+    		filePath = folder.getLocation().toString();
+    	}
+		
+		File file = new File(filePath.replace("file:/", ""));
 		if ( file.exists() ) 
 			return filename.getFactory().getMemory().trueINSTANCE;
 		else 
@@ -50,7 +59,16 @@ public class SimpleFileIO {
 	public static RuntimeObject fileIsDirectory(RuntimeObject filename)
     {
 		java.lang.String fname = getOSFileLocation(String.getValue(filename));
-		File file = new File(fname);
+		
+		java.lang.String filePath = null;
+		
+		if ( fname.startsWith("platform:/resource") ) {
+    		java.lang.String platformFname = fname.replace("platform:/resource", "");
+    		IFolder folder = ResourcesPlugin.getWorkspace().getRoot().getFolder( new Path(platformFname) );
+    		filePath = folder.getLocation().toString();
+    	}
+		
+		File file = new File(filePath.replace("file:/", ""));
 		if (file.isDirectory()) 
 			return filename.getFactory().getMemory().trueINSTANCE;
 		else 
@@ -117,7 +135,16 @@ public class SimpleFileIO {
        	try {
        		//convert windows delimiter into /    		
     		java.lang.String sfileName = getOSFileLocation(String.getValue(filename));
-			br = new BufferedReader(new FileReader(sfileName));
+    		
+    		java.lang.String sfilePath = null;
+    		
+    		if ( sfileName.startsWith("platform:/resource") ) {
+        		java.lang.String platformFname = sfileName.replace("platform:/resource", "");
+        		IFolder folder = ResourcesPlugin.getWorkspace().getRoot().getFolder( new Path(platformFname) );
+        		sfilePath = folder.getLocation().toString();
+        	}
+    		
+			br = new BufferedReader(new FileReader(sfilePath.replace("file:/", "")));
 			while((ligne = br.readLine()) != null) builder.append(ligne + "\n");
 			br.close();
 		} catch (FileNotFoundException e) {
@@ -163,7 +190,7 @@ public class SimpleFileIO {
 		java.lang.String cleanPath = unifiedSepratorResourcePath;
 		if ( unifiedSepratorResourcePath.matches("platform:/resource.*") ) {
 			URI uri = URI.createURI(unifiedSepratorResourcePath);
-			URIConverter converter = new URIConverterImpl();
+			URIConverter converter = new ExtensibleURIConverterImpl();
 			uri = converter.normalize(uri);
 			cleanPath = uri.toString();
 			//cleanPath = ResourceHelper.root.getLocation().toString() + URIHelper.getPathFromPlatformURI(resourcePath);
