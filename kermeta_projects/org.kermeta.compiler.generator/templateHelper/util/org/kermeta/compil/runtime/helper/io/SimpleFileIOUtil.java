@@ -1,4 +1,4 @@
-/* $Id: SimpleFileIOUtil.java,v 1.3 2008-11-04 17:17:39 cfaucher Exp $
+/* $Id: SimpleFileIOUtil.java,v 1.4 2008-11-19 08:53:19 cfaucher Exp $
  * Project: Kermeta (First iteration)
  * File: SimpleFileIO.java
  * License: EPL
@@ -70,7 +70,8 @@ public class SimpleFileIOUtil {
         			int i_1 = local_path.lastIndexOf("/");
                 	local_path = local_path.substring(0, i_1);
         			folderPath = local_path + platformFolderPath;
-        			filePath = folderPath + filePath.substring(i).replace("file:/", "");
+        			folderPath = folderPath.replace("file:/", "");
+        			filePath = folderPath + filePath.substring(i);
         		}
         	}
         	       	
@@ -78,8 +79,9 @@ public class SimpleFileIOUtil {
         	 * Checking for its existency
         	 */
         	File folder = new File( folderPath );
-        	if ( ! folder.exists() )
+        	if ( ! folder.exists() ) {
         		folder.mkdirs();
+        	}
         	
         	FileWriter fw = new FileWriter( filePath );
             fw.write(text);
