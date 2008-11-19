@@ -1,4 +1,4 @@
-/* $Id: SimpleFileIOUtil.java,v 1.4 2008-11-19 08:53:19 cfaucher Exp $
+/* $Id: SimpleFileIOUtil.java,v 1.5 2008-11-19 10:04:06 cfaucher Exp $
  * Project: Kermeta (First iteration)
  * File: SimpleFileIO.java
  * License: EPL
@@ -35,13 +35,14 @@ public class SimpleFileIOUtil {
 	
 	public static java.lang.Boolean fileExists(java.lang.String filename) {
 		java.lang.String fname = getOSFileLocation(filename);
-		File file = new File(fname);
+		File file = new File(fname.replace("file:/", ""));
 		return file.exists();
     }
 	
 	public static java.lang.Boolean fileIsDirectory(java.lang.String filename) {
 		java.lang.String fname = getOSFileLocation(filename);
-		File file = new File(fname);
+		File file = new File(fname.replace("file:/", ""));
+		
 		return file.isDirectory();
     }
 	
@@ -110,7 +111,7 @@ public class SimpleFileIOUtil {
        	try {
        		//convert windows delimiter into /    		
     		java.lang.String sfileName = getOSFileLocation(filename);
-			br = new BufferedReader(new FileReader(sfileName));
+			br = new BufferedReader(new FileReader(sfileName.replace("file:/", "")));
 			while((ligne = br.readLine()) != null) builder.append(ligne + "\n");
 			br.close();
 		} catch (FileNotFoundException e) {
