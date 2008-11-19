@@ -1,4 +1,4 @@
-/* $Id: SimpleFileIOUtil.java,v 1.6 2008-11-19 10:29:20 cfaucher Exp $
+/* $Id: SimpleFileIOUtil.java,v 1.7 2008-11-19 15:07:06 cfaucher Exp $
  * Project: Kermeta (First iteration)
  * File: SimpleFileIO.java
  * License: EPL
@@ -22,6 +22,10 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 
+import org.eclipse.core.resources.IFolder;
+import org.eclipse.core.resources.ResourcesPlugin;
+import org.eclipse.core.runtime.Path;
+import org.eclipse.core.runtime.Platform;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.emf.ecore.resource.impl.ExtensibleURIConverterImpl;
@@ -31,13 +35,13 @@ public class SimpleFileIOUtil {
 	
 	public static java.lang.Boolean fileExists(java.lang.String filename) {
 		java.lang.String fname = getOSFileLocation(filename);
-		File file = new File(fname.replace("file:/", ""));
+		File file = new File(fname);
 		return file.exists();
     }
 	
 	public static java.lang.Boolean fileIsDirectory(java.lang.String filename) {
 		java.lang.String fname = getOSFileLocation(filename);
-		File file = new File(fname.replace("file:/", ""));
+		File file = new File(fname);
 		
 		return file.isDirectory();
     }
@@ -57,12 +61,12 @@ public class SimpleFileIOUtil {
         	/*
         	 * Checking for its existency
         	 */
-        	File folder = new File( folderPath.replace("file:/", "") );
+        	File folder = new File( folderPath );
         	if ( ! folder.exists() ) {
         		folder.mkdirs();
         	}
         	
-        	FileWriter fw = new FileWriter( filePath.replace("file:/", "") );
+        	FileWriter fw = new FileWriter( filePath );
             fw.write(text);
             fw.close();
             
@@ -89,7 +93,7 @@ public class SimpleFileIOUtil {
        	try {
        		//convert windows delimiter into /    		
     		java.lang.String sfileName = getOSFileLocation(filename);
-			br = new BufferedReader(new FileReader(sfileName.replace("file:/", "")));
+			br = new BufferedReader(new FileReader(sfileName));
 			while((ligne = br.readLine()) != null) builder.append(ligne + "\n");
 			br.close();
 		} catch (FileNotFoundException e) {
@@ -113,7 +117,22 @@ public class SimpleFileIOUtil {
     	// We should here recalculate the path of the file if filePath is a relative path !
     	java.lang.String filePath = cleanIfNecessaryPath(fileEclipsePath);
     	
-    	return filePath;
+    	if ( filePath.startsWith("platform:/resource") ) {
+    		java.lang.String platformFolderPath = filePath.replace("platform:/resource", "");
+    		
+    		if(Platform.isRunning()) {
+    			IFolder folder = ResourcesPlugin.getWorkspace().getRoot().getFolder( new Path(platformFolderPath) );
+    			filePath = folder.getLocation().toString();
+    		} else {
+    			String local_path = SimpleFileIOUtil.class.getProtectionDomain().getCodeSource().getLocation().toExternalForm();
+    			local_path = local_path.replace("/bin/", "");
+    			int i_1 = local_path.lastIndexOf("/");
+            	local_path = local_path.substring(0, i_1);
+            	filePath = local_path + platformFolderPath;
+    		}
+    	}
+    	
+    	return filePath.replace("file:/", "");
     }
     
     /**
