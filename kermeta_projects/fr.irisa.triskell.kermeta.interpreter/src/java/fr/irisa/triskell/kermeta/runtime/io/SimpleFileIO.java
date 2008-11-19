@@ -1,4 +1,4 @@
-/* $Id: SimpleFileIO.java,v 1.15 2008-11-19 12:45:19 cfaucher Exp $
+/* $Id: SimpleFileIO.java,v 1.16 2008-11-19 16:45:26 cfaucher Exp $
  * Project: Kermeta (First iteration)
  * File: SimpleFileIO.java
  * License: EPL
@@ -41,7 +41,7 @@ public class SimpleFileIO {
     {
 		java.lang.String fname = getOSFileLocation(String.getValue(filename));
 		
-		java.lang.String filePath = null;
+		java.lang.String filePath = fname;
 		
 		if ( fname.startsWith("platform:/resource") ) {
     		java.lang.String platformFname = fname.replace("platform:/resource", "");
@@ -49,7 +49,7 @@ public class SimpleFileIO {
     		filePath = folder.getLocation().toString();
     	}
 		
-		File file = new File(filePath.replace("file:/", ""));
+		File file = new File(filePath.replace("file://", "").replace("file:/", ""));
 		if ( file.exists() ) 
 			return filename.getFactory().getMemory().trueINSTANCE;
 		else 
@@ -60,7 +60,7 @@ public class SimpleFileIO {
     {
 		java.lang.String fname = getOSFileLocation(String.getValue(filename));
 		
-		java.lang.String filePath = null;
+		java.lang.String filePath = fname;
 		
 		if ( fname.startsWith("platform:/resource") ) {
     		java.lang.String platformFname = fname.replace("platform:/resource", "");
@@ -68,7 +68,7 @@ public class SimpleFileIO {
     		filePath = folder.getLocation().toString();
     	}
 		
-		File file = new File(filePath.replace("file:/", ""));
+		File file = new File(filePath.replace("file://", "").replace("file:/", ""));
 		if (file.isDirectory()) 
 			return filename.getFactory().getMemory().trueINSTANCE;
 		else 
@@ -99,11 +99,11 @@ public class SimpleFileIO {
         	/*
         	 * Checking for its existency
         	 */
-        	File folder = new File( folderPath );
+        	File folder = new File( folderPath.replace("file://", "").replace("file:/", "") );
         	if ( ! folder.exists() )
         		folder.mkdirs();
         	
-        	FileWriter fw = new FileWriter( filePath );
+        	FileWriter fw = new FileWriter( filePath.replace("file://", "").replace("file:/", "") );
             fw.write(String.getValue(text));
             fw.close();
             
@@ -136,7 +136,7 @@ public class SimpleFileIO {
        		//convert windows delimiter into /    		
     		java.lang.String sfileName = getOSFileLocation(String.getValue(filename));
     		
-    		java.lang.String sfilePath = null;
+    		java.lang.String sfilePath = sfileName;
     		
     		if ( sfileName.startsWith("platform:/resource") ) {
         		java.lang.String platformFname = sfileName.replace("platform:/resource", "");
@@ -144,7 +144,7 @@ public class SimpleFileIO {
         		sfilePath = folder.getLocation().toString();
         	}
     		
-			br = new BufferedReader(new FileReader(sfilePath.replace("file:/", "")));
+			br = new BufferedReader(new FileReader(sfilePath.replace("file://", "").replace("file:/", "")));
 			while((ligne = br.readLine()) != null) builder.append(ligne + "\n");
 			br.close();
 		} catch (FileNotFoundException e) {
