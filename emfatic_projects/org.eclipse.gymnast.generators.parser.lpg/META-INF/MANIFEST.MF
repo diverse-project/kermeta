@@ -10,6 +10,7 @@ Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.jdt.core,
  org.eclipse.gymnast.generator.core,
  org.eclipse.gymnast.runtime.core
-Eclipse-LazyStart: true
+Bundle-ActivationPolicy: lazy
 Bundle-ClassPath: .
 Export-Package: org.eclipse.gymnast.generators.parser.lpg
+Bundle-RequiredExecutionEnvironment: J2SE-1.5

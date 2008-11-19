@@ -19,4 +19,5 @@ Require-Bundle: org.antlr,
  org.eclipse.ui.views,
  org.eclipse.core.runtime,
  org.eclipse.gymnast.runtime.core
-Eclipse-LazyStart: true
+Bundle-ActivationPolicy: lazy
+Bundle-RequiredExecutionEnvironment: J2SE-1.5

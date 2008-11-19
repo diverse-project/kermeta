@@ -14,7 +14,7 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jface.viewers.ITreeContentProvider;
 import org.eclipse.jface.viewers.Viewer;
 
-import com.sun.org.apache.bcel.internal.generic.GETSTATIC;
+//import com.sun.org.apache.bcel.internal.generic.GETSTATIC;
 
 class TypesViewContentProvider implements ITreeContentProvider {
 
