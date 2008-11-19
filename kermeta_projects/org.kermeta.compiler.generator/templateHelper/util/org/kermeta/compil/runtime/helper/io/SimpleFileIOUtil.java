@@ -1,4 +1,4 @@
-/* $Id: SimpleFileIOUtil.java,v 1.5 2008-11-19 10:04:06 cfaucher Exp $
+/* $Id: SimpleFileIOUtil.java,v 1.6 2008-11-19 10:29:20 cfaucher Exp $
  * Project: Kermeta (First iteration)
  * File: SimpleFileIO.java
  * License: EPL
@@ -22,10 +22,6 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 
-import org.eclipse.core.resources.IFolder;
-import org.eclipse.core.resources.ResourcesPlugin;
-import org.eclipse.core.runtime.Path;
-import org.eclipse.core.runtime.Platform;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.emf.ecore.resource.impl.ExtensibleURIConverterImpl;
@@ -50,41 +46,23 @@ public class SimpleFileIOUtil {
 	public static void writeTextFile(java.lang.String filename, java.lang.String text) {
 		
         try {
-        	/*
-        	 * Getting the directory        	 
-        	 */
-        	java.lang.String filePath = filename;
+        	// Getting the file
+        	String filePath = getOSFileLocation(filename);
         	
         	int i = filePath.lastIndexOf("/");
-        	java.lang.String folderPath = filePath.substring(0, i);
         	
-        	if ( folderPath.startsWith("platform:/resource") ) {
-        		java.lang.String platformFolderPath = folderPath.replace("platform:/resource", "");
-        		
-        		if(Platform.isRunning()) {
-        			IFolder folder = ResourcesPlugin.getWorkspace().getRoot().getFolder( new Path(platformFolderPath) );
-        			folderPath = folder.getLocation().toString();
-            		filePath = folderPath + filePath.substring(i);
-        		} else {
-        			String local_path = SimpleFileIOUtil.class.getProtectionDomain().getCodeSource().getLocation().toExternalForm();
-        			local_path = local_path.replace("/bin/", "");
-        			int i_1 = local_path.lastIndexOf("/");
-                	local_path = local_path.substring(0, i_1);
-        			folderPath = local_path + platformFolderPath;
-        			folderPath = folderPath.replace("file:/", "");
-        			filePath = folderPath + filePath.substring(i);
-        		}
-        	}
+        	// Getting the file
+        	java.lang.String folderPath = filePath.substring(0, i);
         	       	
         	/*
         	 * Checking for its existency
         	 */
-        	File folder = new File( folderPath );
+        	File folder = new File( folderPath.replace("file:/", "") );
         	if ( ! folder.exists() ) {
         		folder.mkdirs();
         	}
         	
-        	FileWriter fw = new FileWriter( filePath );
+        	FileWriter fw = new FileWriter( filePath.replace("file:/", "") );
             fw.write(text);
             fw.close();
             
