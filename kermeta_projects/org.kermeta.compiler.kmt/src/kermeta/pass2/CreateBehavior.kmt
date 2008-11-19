@@ -1,4 +1,4 @@
-/* $Id: CreateBehavior.kmt,v 1.90 2008-11-07 09:44:28 cfaucher Exp $
+/* $Id: CreateBehavior.kmt,v 1.91 2008-11-19 17:18:02 cfaucher Exp $
  * Creation date: January 21, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -379,7 +379,8 @@ package structure {
 			if self.body.isInstanceOf(Block) then
 				result := result + self.body.createBehaviorJava(context)
 			else
-				result := result + self.body.createExpression(context, StringBuffer.new(), true).toString()
+				self.body.asType(Expression).isLastExpression := true
+				result := result + self.body.createExpression(context, StringBuffer.new()/*, true*/).toString()
 			end
 		end
 	}
@@ -390,6 +391,9 @@ package behavior {
 	
 	/** Complete */
 	aspect class Expression {
+	
+		attribute isLastExpression : Boolean
+		
 		method createBehaviorJava(context : KM2EcoreContext) : String is do
 		
 			// Set the context.compiledJavaExtern variable
@@ -412,7 +416,7 @@ package behavior {
 
 		end
 	
-		operation createExpression(context : KM2EcoreContext, javaCode : StringBuffer, lastExpression : Boolean) : StringBuffer is do
+		operation createExpression(context : KM2EcoreContext, javaCode : StringBuffer/*, lastExpression : Boolean*/) : StringBuffer is do
 		
 			var stm : Expression init self
 			
@@ -440,27 +444,43 @@ package behavior {
 				javaCode.append("\n\t")
 				
 				//if the given statement is the last one
-				if lastExpression then
+				if (not self.isLastExpression.isVoid()).andThen{ i | self.isLastExpression} then
 					
 					if stm.mustBeAssigned() then
 						if self.container.isInstanceOf(Operation) then
 							javaCode.append(context.NOT_EVALUATED_MESSAGE)
 						else
-							if Operation.new().isVoidType(stm.asType(Expression).staticType.getTypeName()) then
-								javaCode.append(context.NOT_EVALUATED_MESSAGE)
-							else
-								if (self.container.container.isInstanceOf(Block)
-										or self.container.container.isInstanceOf(Operation)
-										or self.container.container.isInstanceOf(Property)
-										or self.container.container.isInstanceOf(Constraint))
-									and (context.resultLastStatementStack.size()==0) then
-									javaCode.append(context.NOT_EVALUATED_MESSAGE)
-								else
-									if context.getResultLastStatementType() == stm.asType(Expression).staticType.createBehaviorJava(context) then
+							/*return pack: if stm.asType(Expression).isInstanceOf(Assignment) then
+							
+								var assign : Assignment init stm.asType(Expression).asType(Assignment)
+								// When the bug#6018 will be fixed, the assign.target.staticType could be assign.staticType
+								// and I guess we could reuse the existing conditional contained in the following 'else' block
+								var assign_staticType : Type init assign.target.staticType
+								if not assign_staticType.isVoid() then
+									if (context.getResultLastStatementType() == assign_staticType.createBehaviorJava(context))
+										and (not assign.~value.callsFunctionType())
+										and (not assign.~value.isFunctionTypeVariable()) then
 										javaCode.append(context.getResultLastStatementId())
 									end
 								end
-							end
+								
+							else*/
+								if Operation.new().isVoidType(stm.asType(Expression).staticType.getTypeName()) then
+									javaCode.append(context.NOT_EVALUATED_MESSAGE)
+								else
+									if (self.container.container.isInstanceOf(Block)
+											or self.container.container.isInstanceOf(Operation)
+											or self.container.container.isInstanceOf(Property)
+											or self.container.container.isInstanceOf(Constraint))
+										and (context.resultLastStatementStack.size()==0) then
+										javaCode.append(context.NOT_EVALUATED_MESSAGE)
+									else
+										if context.getResultLastStatementType() == stm.asType(Expression).staticType.createBehaviorJava(context) then
+											javaCode.append(context.getResultLastStatementId())
+										end
+									end
+								end
+							//end
 						end
 					else
 						if stm.isInstanceOf(CallFeature) and (context.resultLastStatementStack.size()>0) then
@@ -524,12 +544,11 @@ package behavior {
 			var i_stm : Integer init 0
 			self.statement.each{ stm |
 				
-				var lastExpression : Boolean init false
 				if i_stm == (nbrStm-1) then
-					lastExpression := true
+					stm.asType(Expression).isLastExpression := true
 				end
 				
-				javaCode := stm.createExpression(context, javaCode, lastExpression)
+				javaCode := stm.createExpression(context, javaCode)
 				
 				javaCode.append("\n")
 				
@@ -688,10 +707,12 @@ package behavior {
 					and (not tgt.isInstanceOf(CallFeature))
 					and (not tgt.isInstanceOf(SelfExpression))
 					and (not tgt.isInstanceOf(CallResult)) then
-				if not tgt.createBehaviorJava(context).isValueType(context) then
-					result := result + "((" + tgt.createBehaviorJava(context) + ") " + "org.kermeta.compil.runtime.helper.language.ClassUtil.newObject(\"" + tgt.createBehaviorJava(context) + "\"))"
+					
+				var type_label : String init tgt.createBehaviorJava(context)
+				if not type_label.isValueType(context) then
+					result := result + "((" + type_label + ") " + "org.kermeta.compil.runtime.helper.language.ClassUtil.newObject(\"" + type_label + "\"))"
 				else
-					result := "null"
+					result := "new " + type_label + "()"
 				end
 			else
 				
@@ -1509,6 +1530,7 @@ package behavior {
 				result := "\"" + result.replace("\"", "\\\"") + "\""
 				result := result.replace("\n", "\\n")
 				result := result.replace("\t", "\\t")
+				result := result.replace("\r", "\\r")
 			end
 			
 			result := result + self.endOfExpressionFixer()
