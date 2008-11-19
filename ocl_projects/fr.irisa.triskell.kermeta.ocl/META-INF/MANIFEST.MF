@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: OCL MDK Plug-in
 Bundle-SymbolicName: fr.irisa.triskell.kermeta.ocl;singleton:=true
-Bundle-Version: 1.2.0
+Bundle-Version: 1.2.0.qualifier
 Bundle-Activator: fr.irisa.triskell.kermeta.ocl.Activator
 Require-Bundle: org.eclipse.ui,
  org.eclipse.core.runtime,
@@ -11,7 +11,7 @@ Require-Bundle: org.eclipse.ui,
  net.sourceforge.lpg.lpgjavaruntime,
  org.eclipse.ui.ide,
  org.kermeta.eclipse.ocl.parser
-Eclipse-LazyStart: true
+Bundle-ActivationPolicy: lazy
 Bundle-Vendor: IRISA/INRIA
 Export-Package: fr.irisa.triskell.kermeta.ocl,
  fr.irisa.triskell.kermeta.ocl.kmtactions,
@@ -19,3 +19,4 @@ Export-Package: fr.irisa.triskell.kermeta.ocl,
  fr.irisa.triskell.kermeta.ocl.ui.popup.actions,
  org.kermeta.compiler.runtime.basetypes.ocl.helpers,
  org.kermeta.interpreter.runtime.basetypes.ocl.helpers
+Bundle-RequiredExecutionEnvironment: J2SE-1.5

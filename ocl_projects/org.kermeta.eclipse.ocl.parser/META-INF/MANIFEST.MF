@@ -21,7 +21,7 @@ Export-Package: org.eclipse.ocl,org.eclipse.ocl.expressions,org.eclips
  .eclipse.ocl.types.util,org.eclipse.ocl.util,org.eclipse.ocl.utilitie
  s,org.eclipse.ocl.utilities.impl,org.eclipse.ocl.utilities.util
 Bundle-Version: 1.1.0.v200706201508
-Eclipse-LazyStart: true
+Bundle-ActivationPolicy: lazy
 Bundle-Name: %Plugin.name
 Bundle-ClassPath: .
 Bundle-ManifestVersion: 2
