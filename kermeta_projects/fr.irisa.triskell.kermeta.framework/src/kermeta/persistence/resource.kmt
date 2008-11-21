@@ -9,7 +9,7 @@ require "../Standard.kmt"
 using kermeta::standard
 
 /* ****************************************************************************
- * $Id: resource.kmt,v 1.67 2008-11-14 14:51:40 cfaucher Exp $
+ * $Id: resource.kmt,v 1.68 2008-11-21 16:16:09 dvojtise Exp $
  * Project : Kermeta (First iteration)
  * Creation date :  
  * File : resource.kmt
@@ -575,6 +575,12 @@ class EMFRepository inherits Repository
 	 */
 	 attribute ignoreLoadErrorUnknownProperty : kermeta::standard::Boolean
 	 
+	 /**
+	  * Register the content of the given ecore file into EMF registry
+	  * Once registered, EMF will be able to load and save models conformant to this ecore file
+	  * Warning: if the NSURI you wish to register is already, registered (either statically or due to a previous call)
+	  *  it will do nothing. Ie. modification in the ecore file will not be taken into account unless you manually unregister it.	    
+	  */
 	 operation registerEcoreFile(mm_uri : String) : Void is do
 	 	@compiledJavaExtern "org.kermeta.compil.runtime.helper.basetypes.RepositoryUtil.registerEcoreFile(mm_uri)"
 		extern fr::irisa::triskell::kermeta::runtime::basetypes::Repository.registerEcoreFile(mm_uri)

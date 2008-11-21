@@ -1,4 +1,4 @@
-/* $Id: EcoreRegistering.java,v 1.2 2008-11-13 13:37:22 cfaucher Exp $ */
+/* $Id: EcoreRegistering.java,v 1.3 2008-11-21 16:15:55 dvojtise Exp $ */
 /* **********************************************************************
  * Copyright (c) 2007, 2008 INRIA and others
  *
@@ -28,6 +28,7 @@ public class EcoreRegistering {
 
 	/**
 	 * Register the contained EPackages by the given IFile
+	 * Ignores EPackages for which the NsURI is already present in the registry
 	 * @param ecoreFile
 	 * @throws NotValidEPackageURIException 
 	 */
@@ -37,6 +38,12 @@ public class EcoreRegistering {
 		registerPackages(mmURI);
 	}
 	
+	/**
+	 * Registers the given ecore file and all its contained EPackages
+	 * Ignores EPackages for which the NsURI is already present in the registry
+	 * @param pack
+	 * @throws NotValidEPackageURIException 
+	 */
 	public static void registerPackages(URI ecoreFileUri) throws NotValidEPackageURIException {
 		ResourceSet rs = new ResourceSetImpl();
 		
@@ -55,7 +62,8 @@ public class EcoreRegistering {
 	}
 
 	/**
-	 * Register the given EPackage and all its contained EPackages
+	 * Registers the given EPackage and all its contained EPackages
+	 * Ignores EPackages for which the NsURI is already present in the registry
 	 * @param pack
 	 * @throws NotValidEPackageURIException 
 	 */

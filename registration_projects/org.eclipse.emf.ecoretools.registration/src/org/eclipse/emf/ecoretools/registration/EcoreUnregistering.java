@@ -1,4 +1,4 @@
-/* $Id: EcoreUnregistering.java,v 1.1 2008-11-13 10:51:27 cfaucher Exp $ */
+/* $Id: EcoreUnregistering.java,v 1.2 2008-11-21 16:15:55 dvojtise Exp $ */
 /* **********************************************************************
  * Copyright (c) 2007, 2008 INRIA and others
  *
@@ -27,6 +27,7 @@ public class EcoreUnregistering {
 
 	/**
 	 * Unregister the contained EPackages by the given IFile
+	 * Security: It ignores request to unregister statically registered EPackages
 	 * @param ecoreFile
 	 * @throws NotValidEPackageURIException 
 	 */
@@ -45,6 +46,7 @@ public class EcoreUnregistering {
 
 	/**
 	 * Unregister the package and its nested packages
+	 * Security: It ignores request to unregister statically registered EPackages
 	 * @param pack
 	 * @throws NotValidEPackageURIException 
 	 */
