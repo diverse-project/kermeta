@@ -1,4 +1,4 @@
-/*$Id: EMFRepositorySingleton.java,v 1.5 2008-11-14 14:51:17 cfaucher Exp $
+/*$Id: EMFRepositorySingleton.java,v 1.6 2008-11-21 15:55:03 dvojtise Exp $
 * Project : fr.irisa.triskell.kermeta.interpreter
 * File : 	RepositorySingleton.java
 * License : EPL
@@ -11,8 +11,10 @@
 
 package fr.irisa.triskell.kermeta.runtime.basetypes;
 
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
+import org.eclipse.emf.common.util.DiagnosticException;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
@@ -20,6 +22,7 @@ import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.eclipse.emf.ecoretools.registration.EcoreRegistering;
 import org.eclipse.emf.ecoretools.registration.exceptions.NotValidEPackageURIException;
 
+import fr.irisa.triskell.kermeta.interpreter.KermetaRaisedException;
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
 import fr.irisa.triskell.kermeta.runtime.factory.RuntimeObjectFactory;
 
@@ -105,8 +108,19 @@ public class EMFRepositorySingleton {
     	try {
 			EcoreRegistering.registerPackages(ecoreFileUri);
 		} catch (NotValidEPackageURIException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			throw KermetaRaisedException.createKermetaException("kermeta::exceptions::Exception",
+	        		"Invalid EPackage URI: " + ecore_file + " cannot register it",
+	        		mmUriRO.getFactory().getMemory().getInterpreter().getBasicInterpreter(),
+	        		mmUriRO.getFactory().getMemory(),
+	        		mmUriRO.getFactory().getMemory().getInterpreter().getBasicInterpreter().getParent(),
+					e);
+		} catch (Exception e) {
+			throw KermetaRaisedException.createKermetaException( e.getMessage().contains("java.io.FileNotFoundException") ? "kermeta::exceptions::FileNotFoundException" :"kermeta::exceptions::Exception",
+	        		e.getMessage(),
+	        		mmUriRO.getFactory().getMemory().getInterpreter().getBasicInterpreter(),
+	        		mmUriRO.getFactory().getMemory(),
+	        		mmUriRO.getFactory().getMemory().getInterpreter().getBasicInterpreter().getParent(),
+					e);
 		}
     	// Default value for the resource RO to be returned
     	RuntimeObject resRO = mmUriRO.getFactory().getMemory().voidINSTANCE;
