@@ -48,7 +48,16 @@ class FileIO
 		
 		@compiledJavaExtern "org.kermeta.compil.runtime.helper.io.SimpleFileIOUtil.fileIsDirectory(filename)"
 		isdirectory ?= extern fr::irisa::triskell::kermeta::runtime::io::SimpleFileIO.fileIsDirectory(filename)
-		if not exists or isdirectory then raise FileNotFoundException.new end
+		if not exists then 
+			var e : FileNotFoundException.new
+			e.message = filename
+			raise e 
+		end
+		if isdirectory then 
+			var e : FileNotFoundException.new
+			e.message = filename + " is not a file"
+			raise e 
+		end
 		
 		@compiledJavaExtern "org.kermeta.compil.runtime.helper.io.SimpleFileIOUtil.readTextFile(filename)"
 		result ?= extern fr::irisa::triskell::kermeta::runtime::io::SimpleFileIO.readTextFile(filename)
