@@ -712,6 +712,10 @@ public class ObjectUtil {
 		}
 	}
 	
+	public static void setSwitcher(java.lang.Object self, kermeta.language.structure.Property prop, String type) {
+		return self.set;
+	}
+	
 	public static java.lang.Object containingResource(Object element) {
 		if(element instanceof kermeta.language.structure.Object) {
 			return ((kermeta.language.structure.Object) element).eResource();
