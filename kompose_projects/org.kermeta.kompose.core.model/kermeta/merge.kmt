@@ -174,7 +174,7 @@ class MergeContext {
 		any := Hashtable<kermeta::standard::Integer, Mergeable>.new
 		reverse := Hashtable<kermeta::standard::Integer, Mergeable>.new
 		processed := Hashtable<kermeta::standard::Integer, kermeta::standard::Boolean>.new
-		comp := Hashtable<kermeta::standard::Integer, kermeta::standard::kermeta::standard::Boolean>.new
+		comp := Hashtable<kermeta::standard::Integer, kermeta::standard::Boolean>.new
 	end
 	operation resouceContains(element:Object):kermeta::standard::Boolean is do
 		result:=false
