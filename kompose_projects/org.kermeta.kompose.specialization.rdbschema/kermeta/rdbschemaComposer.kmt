@@ -33,7 +33,7 @@ class RDBSchemaComposer inherits kompose::Composer
 		}
 	end
    
-    method saveModel(model : Mergeable, uri : String) is do
+    method saveModel(model : Mergeable, uri : kermeta::standard::String) is do
    		self.saveModelByUri(model, uri, "http://www.kermeta.org/rdbschema.ecore")
    end
 
@@ -61,7 +61,7 @@ class NamedElement inherits kompose::Mergeable
 		result := s
 	end
 	
-	method getStringID() : String is do
+	method getStringID() : kermeta::standard::String is do
 		result := name
 	end
 }
@@ -76,7 +76,7 @@ class FKey inherits kompose::Mergeable
 		result := s
 	end
 	
-	method getStringID() : String is do
+	method getStringID() : kermeta::standard::String is do
 		result := oid.toString
 	end
 }
@@ -91,7 +91,7 @@ class RDBMSModel inherits kompose::Mergeable
 		result := s
 	end
 	
-	method getStringID() : String is do
+	method getStringID() : kermeta::standard::String is do
 		result := ""
 	end
 }
@@ -100,7 +100,7 @@ class RDBMSModel inherits kompose::Mergeable
 
 class Main inherits kompose::KomposeMain
 {
-	operation main(uri : String) : kompose::Mergeable is do
+	operation main(uri : kermeta::standard::String) : kompose::Mergeable is do
 		var c : kompose::Composer init loadComposer(uri,RDBSchemaComposer.new)
 		result := c.compose
 	end

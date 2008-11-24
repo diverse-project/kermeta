@@ -42,8 +42,8 @@
   <eClassifiers xsi:type="ecore:EClass" name="IntegerLiteral" eSuperTypes="#//Literal">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="#//Integer"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EDataType" name="Boolean" instanceClassName="boolean"/>
-  <eClassifiers xsi:type="ecore:EDataType" name="Integer" instanceClassName="int"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="Boolean" instanceClassName="java.lang.Boolean"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="Integer" instanceClassName="java.lang.Integer"/>
   <eClassifiers xsi:type="ecore:EClass" name="VoidLiteral" eSuperTypes="#//Literal"/>
   <eClassifiers xsi:type="ecore:EClass" name="Context"/>
   <eClassifiers xsi:type="ecore:EClass" name="Composer">

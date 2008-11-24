@@ -17,7 +17,7 @@ using kompose
  
 class EcoreComposer inherits kompose::Composer
 {
-   method saveModel(model : Mergeable, uri : String) is do
+   method saveModel(model : Mergeable, uri : kermeta::standard::String) is do
    		self.saveModelByUri(model, uri, "http://www.eclipse.org/emf/2002/Ecore")
    end
    
@@ -37,7 +37,7 @@ class OperationSignature inherits kompose::Signature
 {
 	reference op : EOperation 
 	
-	method equals(other : Object ) : Boolean is do
+	method equals(other : Object ) : kermeta::standard::Boolean is do
 		var othersign : OperationSignature
 		othersign ?= other
 		if othersign != void then
@@ -59,7 +59,7 @@ class ParameterSignature inherits kompose::Signature
 {
 	reference param : EParameter 
 	
-	method equals(other : Object ) : Boolean is do
+	method equals(other : Object ) : kermeta::standard::Boolean is do
 		var othersign : ParameterSignature
 		othersign ?= other
 		if othersign != void then
@@ -96,7 +96,7 @@ class EAnnotation{
 		s.sign := source
 		result := s
 	end
-	method getStringID() : String is do
+	method getStringID() : kermeta::standard::String is do
 		result := source
 
 	end
@@ -111,7 +111,7 @@ class ENamedElement{
 		result := s
 	end
 	
-	method getStringID() : String is do
+	method getStringID() : kermeta::standard::String is do
 		result := name
 	end
 }
@@ -141,7 +141,7 @@ class EParameter
 
 class Main inherits kompose::KomposeMain
 {
-	operation main(uri : String) is do
+	operation main(uri : kermeta::standard::String) is do
 		var c : kompose::Composer init loadComposer(uri,EcoreComposer.new)
 		c.compose
 	end

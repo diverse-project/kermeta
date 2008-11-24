@@ -152,31 +152,31 @@ aspect abstract class Mergeable
 	end
 
 	operation getSignature() : Signature is abstract
-	operation getStringID() : String is abstract
+	operation getStringID() : kermeta::standard::String is abstract
 
 }
 
 /** this class is used to store the traceability between composed models */
 class MergeContext {
-	attribute left : Hashtable<Integer, Mergeable>
-	attribute right : Hashtable<Integer, Mergeable>
-	attribute any : Hashtable<Integer, Mergeable>
-	attribute reverse : Hashtable<Integer, Mergeable>
-	attribute processed : Hashtable<Integer, kermeta::standard::Boolean>
-	attribute comp : Hashtable<Integer, kermeta::standard::Boolean>
+	attribute left : Hashtable<kermeta::standard::Integer, Mergeable>
+	attribute right : Hashtable<kermeta::standard::Integer, Mergeable>
+	attribute any : Hashtable<kermeta::standard::Integer, Mergeable>
+	attribute reverse : Hashtable<kermeta::standard::Integer, Mergeable>
+	attribute processed : Hashtable<kermeta::standard::Integer, kermeta::standard::Boolean>
+	attribute comp : Hashtable<kermeta::standard::Integer, kermeta::standard::Boolean>
 	reference resources: kermeta::persistence::EMFResource[0..*]      
-	attribute objectIndex:String [0..*]
+	attribute objectIndex:kermeta::standard::String [0..*]
 	
 	 
 	operation initialize() is do
-		left := Hashtable<Integer, Mergeable>.new
-		right := Hashtable<Integer, Mergeable>.new
-		any := Hashtable<Integer, Mergeable>.new
-		reverse := Hashtable<Integer, Mergeable>.new
-		processed := Hashtable<Integer, kermeta::standard::Boolean>.new
-		comp := Hashtable<Integer, kermeta::standard::Boolean>.new
+		left := Hashtable<kermeta::standard::Integer, Mergeable>.new
+		right := Hashtable<kermeta::standard::Integer, Mergeable>.new
+		any := Hashtable<kermeta::standard::Integer, Mergeable>.new
+		reverse := Hashtable<kermeta::standard::Integer, Mergeable>.new
+		processed := Hashtable<kermeta::standard::Integer, kermeta::standard::Boolean>.new
+		comp := Hashtable<kermeta::standard::Integer, kermeta::standard::kermeta::standard::Boolean>.new
 	end
-	operation resouceContains(element:Object):Boolean is do
+	operation resouceContains(element:Object):kermeta::standard::Boolean is do
 		result:=false
 		self.resources.each{resource|
 			if element.containingResource()==resource then
@@ -357,9 +357,9 @@ abstract class Signature
 /** Example of signature based on a String */
 class StringSignature inherits Signature
 {
-	attribute sign : String
+	attribute sign : kermeta::standard::String
 	
-	method equals(other : Object ) : Boolean is do
+	method equals(other : Object ) : kermeta::standard::Boolean is do
 		var othersign : StringSignature
 		othersign ?= other
 		if othersign != void then
