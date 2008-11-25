@@ -1,5 +1,5 @@
 /*****************************************************************************
- * $Id: 037_testLambda.main.kmt,v 1.4 2008-11-25 13:12:13 dvojtise Exp $
+ * $Id: 037_testLambda.main.kmt,v 1.5 2008-11-25 14:43:25 dvojtise Exp $
  * Project : Kermeta (First iteration)
  * Creation date :  
  * File : testLambda.kmt
@@ -169,6 +169,63 @@ class TestLambda inherits kermeta::kunit::TestCase
 		extern_var := 5
 		assert(lf1(4)==9)
 	end
+	
+	reference lambdaStoredInReference : <Integer->Integer>
+	
+	// test a lambda expression stored in a reference
+	operation testLambdaStoredInReference() : Void is do
+		
+		lambdaStoredInReference := function { i : kermeta::standard::Integer |  i.plus(1)}
+		
+		//assert(lambdaInReference(4)==5) // doesn't work
+		// workaround
+		var lf1 : <Integer->Integer>
+		lf1 := lambdaStoredInReference
+		assert(lf1(4) == 5)
+	end
+	
+	//----------------
+	reference lambdaWithExternVarStoredInReference : <Integer->Integer>
+	
+	// test a lambda expression stored in a reference
+	operation testLambdaWithExternVarStoredInReference() : Void is do
+		var extern_var : Integer init 5
+		lambdaWithExternVarStoredInReference := function { i : kermeta::standard::Integer |  i.plus(extern_var)}
+		
+		//assert(lambdaInReference(4)==5) // doesn't work
+		// workaround
+		var lf1 : <Integer->Integer>
+		lf1 := lambdaWithExternVarStoredInReference
+		assert(lf1(4) == 9)
+	end
+	
+	//--------------------
+	
+	
+	operation testOutsideScopeVar() : Void is do
+		var lf1 : <Integer->Integer>
+		lf1 := getOutsidescopeLambda()
+		assert(lf1(4) == 7)
+		//stdio.writeln("   " +lf1(4).toString)
+		use1OutsidescopeLambda(lf1)
+		use2OutsidescopeLambda(lf1)
+	end
+	
+	operation getOutsidescopeLambda() : <Integer->Integer> is do
+		var extern_var : Integer init 5
+		result := function { i : kermeta::standard::Integer |  i.plus(extern_var)}
+		extern_var := 3
+	end
+	
+	operation use1OutsidescopeLambda( f : <Integer->Integer>) : Void is do
+		assert(f(4) == 7)
+	end
+	operation use2OutsidescopeLambda( f : <Integer->Integer>) : Void is do
+		// check that the variable isn't overwriten
+		var extern_var : Integer init 8
+		assert(f(4) == 7)
+	end
+	
 	
 	// test a lambda expression using in its params 
 	// a variable of same name as an extern variable
