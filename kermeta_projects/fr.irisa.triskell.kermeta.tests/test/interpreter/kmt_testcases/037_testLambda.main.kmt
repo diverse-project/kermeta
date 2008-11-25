@@ -1,5 +1,5 @@
 /*****************************************************************************
- * $Id: 037_testLambda.main.kmt,v 1.3 2008-01-02 10:28:13 vmahe Exp $
+ * $Id: 037_testLambda.main.kmt,v 1.4 2008-11-25 13:12:13 dvojtise Exp $
  * Project : Kermeta (First iteration)
  * Creation date :  
  * File : testLambda.kmt
@@ -7,7 +7,9 @@
  * License : EPL
  * Copyright : IRISA / INRIA / Universite de Rennes 1
  * Creation date : Apr 18 11:13:50 2005
- * Author : zdrey
+ * Authors : 
+ *		zdrey
+ *		dvojtise
  * Description : 
  *		test for Lambda
  * 		test all the possible maneers to use a lambda expression
@@ -16,23 +18,30 @@
 
 @testOperation "yes"
 @mainClass "testLambda::TestLambda"
-@mainOperation "testNoLambda"
+@mainOperation "mainTest"
 
 package testLambda;
 
 require kermeta
 
 using kermeta::standard
+using kermeta::kunit
 
 
 //alias FunctionType : kermeta::language::structure::FunctionType;
 
 class TestLambda inherits kermeta::kunit::TestCase
 {
-
+	
+	operation mainTest() : Void is do
+		var tr : TestRunner init TestRunner.new
+		tr.run(TestLambda)
+		tr.printTestResult
+	end
+	
 	operation testNoLambda() : kermeta::standard::Integer is do
 		stdio.write("toto")
-		result := void
+		result := void 
 	end
 	/** test a simple lambda expression call with one argument 
 	 *  A call of a lambda expression is "interpreted" as a callvariable with parameters
@@ -97,6 +106,49 @@ class TestLambda inherits kermeta::kunit::TestCase
 		assert(lft2(3, 4, "stringOfMoreThanSevenChars")=="fM")
 	end
 
+	operation testLambdaWithoutParam1() is
+	do
+		var f: <Void -> Void>
+		var passed : Boolean init false
+		f := function{i : Void | stdio.writeln("testLambdaWithoutParam")
+				passed := true
+				void
+			}       
+		
+		f(void)
+		assertTrueWithMsg(passed,"function f(void) not called !")
+		
+
+	end 
+	/** test for bug #6883 */
+	operation testLambdaWithoutParam2() is
+	do
+		var f: <Void -> Void>
+		var passed : Boolean init false
+		f := function{i : Void | stdio.writeln("testLambdaWithoutParam")
+				passed := true
+				void
+			}       
+		
+		f() // "Hello" is not displayed
+		assertTrueWithMsg(passed,"function f() not called !")
+		
+
+	end
+	/** test for bug #6883 */
+	operation testLambdaWithoutParam3() is
+	do
+		var f: <Void -> Void>
+		var passed : Boolean init false
+		f := function{i : Void | stdio.writeln("testLambdaWithoutParam3")
+				passed := true
+				void
+			}       
+				
+		f // "Hello" is not displayed
+		assertTrueWithMsg(passed,"function f not called !")
+
+	end
 
 	// todo : { i : Integer | i }?
 
