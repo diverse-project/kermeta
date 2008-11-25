@@ -1,0 +1,63 @@
+<project name="compile_kermeta_workbench" default="compile">
+	<!-- configuration properties -->		
+	<!-- project configuration -->
+	<property environment="env"/>
+
+	<property name="env.WORKSPACE" location="."/>
+	<property name="prepare.Kermeta.sources.last.successfull.dir" location="${env.WORKSPACE}/../../prepare Kermeta sources/lastSuccessful/archive"/>
+	<property name="prepare.OpenEmbeDD.sources.last.successfull.dir" location="${env.WORKSPACE}/../../prepare OpenEmbeDD sources/lastSuccessful/archive"/>
+	<property name="previousStep.dir" location="${env.WORKSPACE}/previousStep"/>
+	<property name="eclipse.home" location="/local/daily_build/eclipse3.4_with_topcased/eclipse"/>
+	<property name="equinox.jar" location="${eclipse.home}/plugins/org.eclipse.equinox.launcher_1.0.101.R34x_v20080819.jar"/>
+	<property name="eclipse.workspace.dir" location="${env.WORKSPACE}/eclipseworkspace"/>			
+	
+	<target name="all" depends="getSources, compile">
+		
+	</target>
+	<target name="getSources">	
+		<mkdir dir="${previousStep.dir}"/>			
+		<get src="http://pamplemousse.irisa.fr:8080/job/prepare_Kermeta_sources/lastSuccessfulBuild/artifact/src//*zip*/src.zip" 
+			dest="${previousStep.dir}/prepare_Kermeta_sources.zip"
+			usetimestamp="true"/>
+	    <get src="http://pamplemousse.irisa.fr:8080/job/prepare_OpenEmbeDD_sources/lastSuccessfulBuild/artifact/src//*zip*/src.zip" 
+		 	dest="${previousStep.dir}/prepare_OpenEmbeDD_sources.zip"
+			usetimestamp="true"/>
+		<unzip dest="${env.WORKSPACE}">
+		    <fileset dir="${previousStep.dir}">
+		        <include name="**/*.zip"/>
+		    </fileset>
+		</unzip>
+
+	</target>
+	<target name="getCompileScripts">	
+		<!--<mkdir dir="${previousStep.dir}"/>-->
+	<!--	<copy file="/udd/triskell/bin/linux/dev/kermeta_daily_build/build.xml" todir="${env.WORKSPACE}/"/>
+
+		<copy todir="${env.WORKSPACE}/kermeta">
+			<fileset dir="/udd/triskell/bin/linux/dev/kermeta_daily_build/kermeta"/>
+		</copy>
+-->
+
+	</target>
+	<target name="compile" depends="getCompileScripts">	
+		<mkdir dir="${eclipse.workspace.dir}"/>
+		<java jar="${equinox.jar}"
+		           fork="true"
+		           failonerror="true"
+		           maxmemory="128m"
+		           >
+			<arg value="-application"/>
+			<arg value="org.eclipse.ant.core.antRunner"/>
+			<arg value="-buildfile"/>
+			<arg value="${env.WORKSPACE}/build.xml"/>
+			<arg value="-data"/>
+			<arg value="${eclipse.workspace.dir}"/>
+			<arg value="-Dcomponent=traceability"/>
+			<arg value="-Dpde.build.scripts=${eclipse.home}/plugins/org.eclipse.pde.build_3.4.1.R34x_v20080805/scripts"/>
+			<arg value="-DbaseLocation=${eclipse.home}"/>
+
+		</java>
+	
+
+	</target>
+</project>
