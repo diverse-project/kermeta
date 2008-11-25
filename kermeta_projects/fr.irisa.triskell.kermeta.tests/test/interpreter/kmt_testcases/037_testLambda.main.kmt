@@ -1,5 +1,5 @@
 /*****************************************************************************
- * $Id: 037_testLambda.main.kmt,v 1.5 2008-11-25 14:43:25 dvojtise Exp $
+ * $Id: 037_testLambda.main.kmt,v 1.6 2008-11-25 14:54:23 dvojtise Exp $
  * Project : Kermeta (First iteration)
  * Creation date :  
  * File : testLambda.kmt
@@ -226,7 +226,21 @@ class TestLambda inherits kermeta::kunit::TestCase
 		assert(f(4) == 7)
 	end
 	
+	/* -------------------- */
+	attribute anInteger : Integer
+	operation testOutsideScopeAttribute() : Void is do
+		var lf1 : <Integer->Integer>
+		lf1 := getOutsidescopeLambdaAtt()
+		anInteger := 3
+		assert(lf1(4) == 7)
+		stdio.writeln("   " +lf1(4).toString)
+	end
 	
+	operation getOutsidescopeLambdaAtt() : <Integer->Integer> is do
+		result := function { i : kermeta::standard::Integer |  i.plus(anInteger)}
+	end
+	
+	/* ----------------- */
 	// test a lambda expression using in its params 
 	// a variable of same name as an extern variable
 	operation testLambdaVarPriority() : Void is do
