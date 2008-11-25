@@ -1,5 +1,5 @@
 /*****************************************************************************
- * $Id: 037_testLambda.main.kmt,v 1.6 2008-11-25 14:54:23 dvojtise Exp $
+ * $Id: 037_testLambda.main.kmt,v 1.7 2008-11-25 14:57:30 dvojtise Exp $
  * Project : Kermeta (First iteration)
  * Creation date :  
  * File : testLambda.kmt
@@ -284,7 +284,7 @@ class TestLambda inherits kermeta::kunit::TestCase
 	operation testintegerTimesToString() is do
 		3.times{ i |
 			stdio.writeln("hello " + i.toString)
-			stdio.write((i+1).toString)
+			//stdio.write((i+1).toString)
 		}
 	end
 	
