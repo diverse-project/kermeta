@@ -53,7 +53,7 @@
 			<arg value="${eclipse.home}/plugins/org.eclipse.pde.build_3.4.1.R34x_v20080805/scripts/build.xml"/>
 			<arg value="-data"/>
 			<arg value="${eclipse.workspace.dir}"/>
-			<arg value="-Dbuilder=/local/hudson/home/jobs/compile_traceability/workspace/hudson_scripts/compile_traceability/eclipse_build_scripts/traceability"/>
+			<arg value="-Dbuilder=/local/hudson/home/jobs/compile_traceability/workspace/hudson_scripts/compile_log4j/eclipse_build_scripts/log4j"/>
 			<!--<arg value="-Dcomponent=traceability"/>-->
 			<!--<arg value="-Dpde.build.scripts=${eclipse.home}/plugins/org.eclipse.pde.build_3.4.1.R34x_v20080805/scripts"/>-->
 			<arg value="-Dbase=${eclipse.home}"/>
