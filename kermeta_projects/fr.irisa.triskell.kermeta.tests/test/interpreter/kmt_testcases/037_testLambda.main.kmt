@@ -1,5 +1,5 @@
 /*****************************************************************************
- * $Id: 037_testLambda.main.kmt,v 1.7 2008-11-25 14:57:30 dvojtise Exp $
+ * $Id: 037_testLambda.main.kmt,v 1.8 2008-11-25 15:11:47 dvojtise Exp $
  * Project : Kermeta (First iteration)
  * Creation date :  
  * File : testLambda.kmt
@@ -233,11 +233,29 @@ class TestLambda inherits kermeta::kunit::TestCase
 		lf1 := getOutsidescopeLambdaAtt()
 		anInteger := 3
 		assert(lf1(4) == 7)
-		stdio.writeln("   " +lf1(4).toString)
+		stdio.writeln("testOutsideScopeAttribute   " +lf1(4).toString)
 	end
 	
 	operation getOutsidescopeLambdaAtt() : <Integer->Integer> is do
 		result := function { i : kermeta::standard::Integer |  i.plus(anInteger)}
+	end
+	
+	/* -------------------- */
+	operation testOutsideScopeParam() : Void is do
+		var lf1 : <Integer->Integer>
+		var myInteger : Integer init 3
+		lf1 := getOutsidescopeLambdaParam(myInteger)
+		assert(lf1(4) == 7)
+		stdio.writeln(" hop  " +lf1(4).toString)
+		myInteger := 4
+		getOutsidescopeLambdaParam(myInteger)
+		assert(lf1(4) == 7) // verify that the previous instructions haven't changed lf1 behavior 
+					// DVK is it true even if we use non priomitive types ?
+		stdio.writeln(" hop  " +lf1(4).toString)
+	end
+	
+	operation getOutsidescopeLambdaParam(aParamInteger : Integer) : <Integer->Integer> is do
+		result := function { i : kermeta::standard::Integer |  i.plus(aParamInteger)}
 	end
 	
 	/* ----------------- */
