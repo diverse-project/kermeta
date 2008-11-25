@@ -487,7 +487,7 @@ public class ObjectUtil {
 		return null;
 	}
 	
-	public static kermeta.persistence.Resource getContainingResourceSwitcher(java.lang.Object self) {
+	public static kermeta.persistence.Resource containingResourceSwitcher(java.lang.Object self) {
 		if (self instanceof kermeta.language.structure.Object) {
 			return ((kermeta.language.structure.Object) self).containingResource();
 		}
