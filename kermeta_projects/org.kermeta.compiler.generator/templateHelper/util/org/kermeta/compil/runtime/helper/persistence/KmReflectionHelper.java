@@ -1,5 +1,5 @@
 
-/*$Id: KmReflectionHelper.java,v 1.2 2008-10-17 14:40:18 cfaucher Exp $
+/*$Id: KmReflectionHelper.java,v 1.3 2008-11-25 12:32:10 cfaucher Exp $
 * Project : org.kermeta.compiler.generator
 * File : 	KmReflectionHelper.java
 * License : EPL
@@ -27,6 +27,6 @@ public class KmReflectionHelper {
 	 */
 	public static void load(Resource self) {
 		self.clear();
-		org.kermeta.compil.runtime.helper.persistence.Loader.load(self.getValues(), self.getUri(), self.getMetaModelURI());
+		org.kermeta.compil.runtime.helper.persistence.Loader.load(self, self.getUri(), self.getMetaModelURI());
 	}
 }

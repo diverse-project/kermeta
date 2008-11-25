@@ -1,5 +1,5 @@
 
-/*$Id: Loader.java,v 1.11 2008-11-03 16:49:12 cfaucher Exp $
+/*$Id: Loader.java,v 1.12 2008-11-25 12:32:10 cfaucher Exp $
 * Project : org.kermeta.compiler.generator
 * File : 	Loader.java
 * License : EPL
@@ -25,6 +25,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.kermeta.compil.runtime.ExecutionContext;
 
 /**
  * @generated
@@ -38,7 +39,9 @@ public class Loader extends SaverOrLoader {
 	 * @return The list of objects cloned.
 	 * @generated
 	 */
-	static public void load(List contents, String modelURI, String metamodelURI) {
+	static public void load(kermeta.persistence.Resource kermetaResource, String modelURI, String metamodelURI) {
+		
+		List contents = kermetaResource.getValues();
 		
 		Loader l = new Loader(metamodelURI);
 		l.normalizeRegistry(modelURI, metamodelURI);
@@ -46,6 +49,9 @@ public class Loader extends SaverOrLoader {
 		ResourceSet rs = new ResourceSetImpl();
 		
 		org.eclipse.emf.ecore.resource.Resource resource = rs.getResource( URI.createURI(modelURI), true );
+		
+		ExecutionContext.getInstance().setResourceMapping(resource, kermetaResource);
+		
 		for ( EObject o : resource.getContents() ) {
 			instances.add( l.clone(o) );
 		}

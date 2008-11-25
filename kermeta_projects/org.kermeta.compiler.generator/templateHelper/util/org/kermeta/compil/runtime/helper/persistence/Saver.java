@@ -1,5 +1,5 @@
 
-/*$Id: Saver.java,v 1.8 2008-11-14 13:58:45 cfaucher Exp $
+/*$Id: Saver.java,v 1.9 2008-11-25 12:32:10 cfaucher Exp $
 * Project : org.kermeta.compiler.generator
 * File : 	Saver.java
 * License : EPL
@@ -26,6 +26,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.kermeta.compil.runtime.ExecutionContext;
 
 
 /**
@@ -42,7 +43,9 @@ public class Saver extends SaverOrLoader {
 	 * @param metamodelURI The uri of the metamodel to use when cloning objects.
 	 * @throws IOException
 	 */
-	static public void save(List contents, String modelURI, String metamodelURI) {
+	static public void save(kermeta.persistence.Resource kermetaResource, String modelURI, String metamodelURI) {
+		
+		List contents = kermetaResource.getValues();
 		
 		try {
 			Saver s = new Saver(metamodelURI);
@@ -56,6 +59,9 @@ public class Saver extends SaverOrLoader {
 			
 			ResourceSet resourceSet = new ResourceSetImpl();
 			org.eclipse.emf.ecore.resource.Resource resource = resourceSet.createResource( URI.createURI(modelURI) );
+			
+			ExecutionContext.getInstance().setResourceMapping(resource, kermetaResource);
+			
 			resource.getContents().addAll(instancesToSave);
 			resource.save(null);
 		} catch (IOException e) {		

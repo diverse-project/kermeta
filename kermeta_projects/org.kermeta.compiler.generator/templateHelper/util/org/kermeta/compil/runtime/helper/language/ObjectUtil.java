@@ -22,6 +22,7 @@ import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.Enumerator;
 import org.eclipse.emf.ecore.EStructuralFeature;
+import org.kermeta.compil.runtime.ExecutionContext;
 import org.kermeta.compil.runtime.helper.basetypes.BooleanUtil;
 import org.kermeta.compil.runtime.helper.basetypes.CharacterUtil;
 import org.kermeta.compil.runtime.helper.basetypes.CollectionUtil;
@@ -120,6 +121,16 @@ public class ObjectUtil {
 			return isInstanceOf((kermeta.language.structure.Object) self, metaClass);
 		} else {
 			return isInstanceOf((java.lang.Object) self, metaClass);
+		}
+	}
+	
+	public static void setSwitcher(java.lang.Object self, Property property, Object element) {
+		if( self instanceof kermeta.language.structure.Object ) {
+			(( kermeta.language.structure.Object) self).set(property, element);
+		} else {
+			throw new org.kermeta.compil.runtime.helper.error.KRuntimeError(
+					((kermeta.exceptions.NotImplementedException) org.kermeta.compil.runtime.helper.language.ClassUtil
+							.newObject("kermeta.exceptions.NotImplementedException")));
 		}
 	}
 	
@@ -439,55 +450,78 @@ public class ObjectUtil {
 	}
 	
 	public static Boolean isFrozen(kermeta.language.structure.Object object) {
-		// TODO Auto-generated method stub
+		if (true)
+			throw new org.kermeta.compil.runtime.helper.error.KRuntimeError(
+					((kermeta.exceptions.NotImplementedException) org.kermeta.compil.runtime.helper.language.ClassUtil
+							.newObject("kermeta.exceptions.NotImplementedException")));
 		return null;
 	}
 	
 	public static Boolean isFrozen(java.lang.Object objectImpl) {
-		// TODO Auto-generated method stub
+		if (true)
+			throw new org.kermeta.compil.runtime.helper.error.KRuntimeError(
+					((kermeta.exceptions.NotImplementedException) org.kermeta.compil.runtime.helper.language.ClassUtil
+							.newObject("kermeta.exceptions.NotImplementedException")));
 		return null;
 	}
 	
 	public static void freeze(kermeta.language.structure.Object objectImpl) {
-		// TODO Auto-generated method stub
-		
+		if (true)
+			throw new org.kermeta.compil.runtime.helper.error.KRuntimeError(
+					((kermeta.exceptions.NotImplementedException) org.kermeta.compil.runtime.helper.language.ClassUtil
+							.newObject("kermeta.exceptions.NotImplementedException")));
 	}
 	
 	public static void freeze(java.lang.Object objectImpl) {
-		// TODO Auto-generated method stub
-		
+		if (true)
+			throw new org.kermeta.compil.runtime.helper.error.KRuntimeError(
+					((kermeta.exceptions.NotImplementedException) org.kermeta.compil.runtime.helper.language.ClassUtil
+							.newObject("kermeta.exceptions.NotImplementedException")));
 	}
 	
-	public static kermeta.persistence.Resource getContainingResource(kermeta.language.structure.Object objectImpl) {
-		// TODO Auto-generated method stub
+	public static kermeta.persistence.Resource getContainingResource(kermeta.language.structure.Object self) {
+		return ExecutionContext.getInstance().getKermetaResourceMapping(self.eResource());
+	}
+	
+	public static kermeta.persistence.Resource getContainingResource(java.lang.Object self) {
 		return null;
 	}
 	
-	public static kermeta.persistence.Resource getContainingResource(java.lang.Object objectImpl) {
-		// TODO Auto-generated method stub
+	public static kermeta.persistence.Resource getContainingResourceSwitcher(java.lang.Object self) {
+		if (self instanceof kermeta.language.structure.Object) {
+			return ((kermeta.language.structure.Object) self).containingResource();
+		}
 		return null;
 	}
 	
 	public static void unSetContainingResource(kermeta.language.structure.Object instance) {
-		// TODO Auto-generated method stub
-		
+		if (true)
+			throw new org.kermeta.compil.runtime.helper.error.KRuntimeError(
+					((kermeta.exceptions.NotImplementedException) org.kermeta.compil.runtime.helper.language.ClassUtil
+							.newObject("kermeta.exceptions.NotImplementedException")));
 	}
 	
 	public static void unSetContainingResource(java.lang.Object instance) {
-		// TODO Auto-generated method stub
-		
+		if (true)
+			throw new org.kermeta.compil.runtime.helper.error.KRuntimeError(
+					((kermeta.exceptions.NotImplementedException) org.kermeta.compil.runtime.helper.language.ClassUtil
+							.newObject("kermeta.exceptions.NotImplementedException")));
 	}
 	
 	public static void setContainingResource(kermeta.language.structure.Object instance,
 			kermeta.persistence.EMFResource resourceImpl) {
-		// TODO Auto-generated method stub
-		
+		if (true)
+			throw new org.kermeta.compil.runtime.helper.error.KRuntimeError(
+					((kermeta.exceptions.NotImplementedException) org.kermeta.compil.runtime.helper.language.ClassUtil
+							.newObject("kermeta.exceptions.NotImplementedException")));
 	}
 	
 	public static void setContainingResource(java.lang.Object instance,
 			kermeta.persistence.EMFResource resourceImpl) {
-		// TODO Auto-generated method stub
-		
+		if (true)
+			throw new org.kermeta.compil.runtime.helper.error.KRuntimeError(
+					((kermeta.exceptions.NotImplementedException) org.kermeta.compil.runtime.helper.language.ClassUtil
+							.newObject("kermeta.exceptions.NotImplementedException")));
 	}
 	
 	public static java.lang.Boolean isNotEqualSwitcher(java.lang.Object self, java.lang.Object o) {
@@ -710,10 +744,6 @@ public class ObjectUtil {
 		} else {
 			return isKindOf(self, metaClass);
 		}
-	}
-	
-	public static void setSwitcher(java.lang.Object self, kermeta.language.structure.Property prop, String type) {
-		return self.set;
 	}
 	
 	public static java.lang.Object containingResource(Object element) {
