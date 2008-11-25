@@ -10,36 +10,7 @@
 		<property name="type" value="feature" />
 		<property name="id" value="fr.irisa.triskell.traceability" />
 	</ant>
-    <ant antfile="${genericTargets}" target="${target}" >
-		<property name="type" value="feature" />
-		<property name="id" value="org.kermeta.log4j" />
-	</ant>
 	
-    <ant antfile="${genericTargets}" target="${target}" >
-		<property name="type" value="feature" />
-		<property name="id" value="fr.irisa.triskell.kermeta" />
-	</ant>	
-    <ant antfile="${genericTargets}" target="${target}" >
-		<property name="type" value="feature" />
-		<property name="id" value="fr.irisa.triskell.kermeta.samples.fsm" />
-	</ant>
-	
-    <ant antfile="${genericTargets}" target="${target}" >
-		<property name="type" value="feature" />
-		<property name="id" value="org.kermeta.uml2" />
-	</ant>
-    <ant antfile="${genericTargets}" target="${target}" >
-		<property name="type" value="feature" />
-		<property name="id" value="org.kermeta.alltests" />
-	</ant>
-    <ant antfile="${genericTargets}" target="${target}" >
-		<property name="type" value="feature" />
-		<property name="id" value="fr.irisa.triskell.kermeta.ecore" />
-	</ant>
-    <ant antfile="${genericTargets}" target="${target}" >
-		<property name="type" value="feature" />
-		<property name="id" value="fr.irisa.triskell.kermeta.ocl" />
-	</ant>	
 </target>
 
 <!-- ===================================================================== -->
@@ -49,46 +20,9 @@
 <!-- Add one target for each root element and each configuration -->
 <!-- ===================================================================== -->
 
-<target name="assemble.fr.irisa.triskell.kermeta">
-	<property name="archiveName" value="fr.irisa.triskell.kermeta-${buildId}.zip"/>
-	<ant antfile="${assembleScriptName}" dir="${buildDirectory}"/>
-</target>
+
 <target name="assemble.fr.irisa.triskell.traceability">
 	<property name="archiveName" value="fr.irisa.triskell.traceability-${buildId}.zip"/>
-	<ant antfile="${assembleScriptName}" dir="${buildDirectory}"/>
-</target>
-
-<target name="assemble.fr.irisa.triskell.kermeta.samples.fsm">
-	<property name="archiveName" value="fr.irisa.triskell.kermeta.samples.fsm-${buildId}.zip"/>
-	<ant antfile="${assembleScriptName}" dir="${buildDirectory}"/>
-</target>
-
-<target name="assemble.fr.irisa.triskell.kermeta.ecore">
-	<property name="archiveName" value="fr.irisa.triskell.kermeta.ecore-${buildId}.zip"/>
-	<ant antfile="${assembleScriptName}" dir="${buildDirectory}"/>
-</target>
-<target name="assemble.fr.irisa.triskell.kermeta.ocl">
-	<property name="archiveName" value="fr.irisa.triskell.kermeta.ocl-${buildId}.zip"/>
-	<ant antfile="${assembleScriptName}" dir="${buildDirectory}"/>
-</target>
-
-<target name="assemble.org.kermeta.uml2">
-	<property name="archiveName" value="org.kermeta.uml2-${buildId}.zip"/>
-	<ant antfile="${assembleScriptName}" dir="${buildDirectory}"/>
-</target>
-
-<target name="assemble.org.kermeta.log4j">
-	<property name="archiveName" value="org.kermeta.log4j-${buildId}.zip"/>
-	<ant antfile="${assembleScriptName}" dir="${buildDirectory}"/>
-</target>
-
-<target name="assemble.org.kermeta.alltests">
-	<property name="archiveName" value="org.kermeta.alltests-${buildId}.zip"/>
-	<ant antfile="${assembleScriptName}" dir="${buildDirectory}"/>
-</target>
-
-<target name="assemble.fr.irisa.triskell.kermeta.win32.win32.x86">
-	<property name="archiveName" value="kermeta-${buildId}-win32.zip"/>
 	<ant antfile="${assembleScriptName}" dir="${buildDirectory}"/>
 </target>
 <target name="assemble.fr.irisa.triskell.traceability.win32.win32.x86">
@@ -96,15 +30,6 @@
 	<ant antfile="${assembleScriptName}" dir="${buildDirectory}"/>
 </target>
 
-<target name="assemble.fr.irisa.triskell.kermeta.samples.fsm.win32.win32.x86">
-	<property name="archiveName" value="kermeta-fsm-${buildId}-win32.zip"/>
-	<ant antfile="${assembleScriptName}" dir="${buildDirectory}"/>
-</target>
-
-<target name="assemble.org.kermeta.alltests.win32.win32.x86">
-	<property name="archiveName" value="org.kermeta.alltests-${buildId}-win32.zip"/>
-	<ant antfile="${assembleScriptName}" dir="${buildDirectory}"/>
-</target>
 
 <!-- ===================================================================== -->
 <!-- Check out map files from correct repository -->
