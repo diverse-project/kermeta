@@ -1,15 +1,16 @@
-<project name="compile_kermeta_workbench" default="compile">
+<project name="compile_log4j" default="compile">
 	<!-- configuration properties -->		
 	<!-- project configuration -->
 	<property environment="env"/>
 
-	<property name="env.WORKSPACE" location="."/>
+	<property name="env.WORKSPACE" location="/local/hudson/home/jobs/compile_log4j/workspace"/>
 	<property name="prepare.Kermeta.sources.last.successfull.dir" location="${env.WORKSPACE}/../../prepare Kermeta sources/lastSuccessful/archive"/>
 	<property name="prepare.OpenEmbeDD.sources.last.successfull.dir" location="${env.WORKSPACE}/../../prepare OpenEmbeDD sources/lastSuccessful/archive"/>
 	<property name="previousStep.dir" location="${env.WORKSPACE}/previousStep"/>
 	<property name="eclipse.home" location="/local/daily_build/eclipse3.4_with_topcased/eclipse"/>
 	<property name="equinox.jar" location="${eclipse.home}/plugins/org.eclipse.equinox.launcher_1.0.101.R34x_v20080819.jar"/>
-	<property name="eclipse.workspace.dir" location="${env.WORKSPACE}/eclipseworkspace"/>			
+	<property name="eclipse.workspace.dir" location="${env.WORKSPACE}/eclipseworkspace"/>	
+	<property name="eclipse.build.dir" location="${env.WORKSPACE}/src"/>
 	
 	<target name="all" depends="getSources, compile">
 		
@@ -29,6 +30,24 @@
 		</unzip>
 
 	</target>
+	
+	<target name="organizeSources">	
+		<mkdir dir="${eclipse.build.dir}"/>	
+		<mkdir dir="${eclipse.build.dir}/plugins"/>
+		<mkdir dir="${eclipse.build.dir}/features"/>		
+		<copy todir="${eclipse.build.dir}/features/org.kermeta.log4j">
+			<fileset dir="${env.WORKSPACE}/log4j_projects/org.kermeta.log4j.feature">
+				 <exclude name="**/CVS/**"/>
+			</fileset>
+		</copy>		
+		<copy todir="${eclipse.build.dir}/plugins">
+			<fileset dir="${env.WORKSPACE}/log4j_projects">
+				 <exclude name="**/org.kermeta.log4j.feature/**"/>
+				 <exclude name="**/CVS/**"/>
+			</fileset>
+		</copy>
+
+	</target>
 	<target name="getCompileScripts">	
 		<!--<mkdir dir="${previousStep.dir}"/>-->
 	<!--	<copy file="/udd/triskell/bin/linux/dev/kermeta_daily_build/build.xml" todir="${env.WORKSPACE}/"/>
@@ -39,7 +58,7 @@
 -->
 
 	</target>
-	<target name="compile" depends="getCompileScripts">	
+	<target name="compile" depends="organizeSources">	
 		<mkdir dir="${eclipse.workspace.dir}"/>
 		<java jar="${equinox.jar}"
 		           fork="true"
@@ -53,10 +72,10 @@
 			<arg value="${eclipse.home}/plugins/org.eclipse.pde.build_3.4.1.R34x_v20080805/scripts/build.xml"/>
 			<arg value="-data"/>
 			<arg value="${eclipse.workspace.dir}"/>
-			<arg value="-Dbuilder=/local/hudson/home/jobs/compile_traceability/workspace/hudson_scripts/compile_traceability/eclipse_build_scripts/traceability"/>
+			<arg value="-Dbuilder=${env.WORKSPACE}/hudson_scripts/compile_traceability/eclipse_build_scripts/traceability"/>
 			<!--<arg value="-Dcomponent=traceability"/>-->
 			<!--<arg value="-Dpde.build.scripts=${eclipse.home}/plugins/org.eclipse.pde.build_3.4.1.R34x_v20080805/scripts"/>-->
-			<arg value="-Dbase=${eclipse.home}"/>
+			<!--<arg value="-Dbase=${eclipse.home}"/>-->
 		</java>
 	
 
