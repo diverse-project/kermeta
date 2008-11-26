@@ -1,4 +1,4 @@
-/* $Id: CreateBehavior.kmt,v 1.91 2008-11-19 17:18:02 cfaucher Exp $
+/* $Id: CreateBehavior.kmt,v 1.92 2008-11-26 17:12:04 cfaucher Exp $
  * Creation date: January 21, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -1190,11 +1190,18 @@ package behavior {
 			end
 		end
 		
+		operation initCast(context : KM2EcoreContext) : Void is do
+			self.valueTypeCastPrefix := self.ppValueTypeCastPrefix(context)
+			self.valueTypeCastSuffix := self.ppValueTypeCastSuffix(context)
+		end
+		
 		method createBehaviorJava(context : KM2EcoreContext) : String from Expression is do
 		
 			super(context)
 			
 			result := ""
+			
+			initCast(context)
 			
 			var left : String init self.target.createBehaviorJava(context)
 			
@@ -1204,7 +1211,7 @@ package behavior {
 			//requireValueTypeConversion(context)
 			
 			// We should use: self.staticType.createBehaviorJava(context), but this value is not setted rightly
-			context.resultLastStatementStack.push(left + " = " + ppCastPrefix + context.TYPE_SEPARATOR + self.target.staticType.createBehaviorJava(context))
+			context.resultLastStatementStack.push(left + " = " + ppCastPrefix + self.valueTypeCastPrefix + context.TYPE_SEPARATOR + self.target.staticType.createBehaviorJava(context))
 			
 			var right : String init self.~value.createBehaviorJava(context)
 		
@@ -1228,9 +1235,9 @@ package behavior {
 					else
 						if i == (tabLeft.size()-1) then
 							if self.~value.callsFunctionType() then
-								result := right + result + self.target.asType(CallFeature).printSetAccessor(context) + "(" + ppCastPrefix + self.~value.asType(CallFeature).calledFtResult + ppCastSuffix + ");"
+								result := right + result + self.target.asType(CallFeature).printSetAccessor(context) + "(" + ppCastPrefix + self.valueTypeCastPrefix + self.~value.asType(CallFeature).calledFtResult + self.valueTypeCastSuffix + ppCastSuffix + ");"
 							else
-								result := result + self.target.asType(CallFeature).printSetAccessor(context) + "(" + ppCastPrefix + right + ppCastSuffix + ");"
+								result := result + self.target.asType(CallFeature).printSetAccessor(context) + "(" + ppCastPrefix + self.valueTypeCastPrefix + right + self.valueTypeCastSuffix + ppCastSuffix + ");"
 							end
 						end
 					end
@@ -1242,12 +1249,12 @@ package behavior {
 					result := right
 				else
 					if right.contains(context.RETURN_EXPRESSION_TO_REPLACE) then
-						result := right.replace(context.RETURN_EXPRESSION_TO_REPLACE, left + " = " + ppCastPrefix)
+						result := right.replace(context.RETURN_EXPRESSION_TO_REPLACE, left + " = " + ppCastPrefix + self.valueTypeCastPrefix) //valueTypeCastSuffix has been managed in the ExpressionHelper.kmt 
 					else
 						if ( self.target.isInstanceOf(CallVariable) or self.target.isInstanceOf(CallResult) ) and (self.~value.callsFunctionType() or self.~value.isFunctionTypeVariable()) then
 							result := right
 						else
-							result := left + " = " + ppCastPrefix + right
+							result := left + " = " + ppCastPrefix + self.valueTypeCastPrefix + right //valueTypeCastSuffix has been managed in the ExpressionHelper.kmt
 						end
 					end
 				end

@@ -1,4 +1,4 @@
-/* $Id: ExpressionHelper.kmt,v 1.32 2008-11-19 17:15:34 cfaucher Exp $
+/* $Id: ExpressionHelper.kmt,v 1.33 2008-11-26 17:12:04 cfaucher Exp $
  * Creation date: Jul 25, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -83,7 +83,7 @@ aspect class Expression {
 							if assignment.container.isInstanceOf(CallFeature) then
 								result := ""
 							else
-								result := self.container.asType(Assignment).ppCastSuffix() + ";"
+								result := self.container.asType(Assignment).valueTypeCastSuffix + self.container.asType(Assignment).ppCastSuffix + ";"
 							end
 						end
 					end
@@ -561,10 +561,12 @@ aspect class CallFeature {
 		end
 		
 		var ppCastSuffix : String init ""
+		var ppValueTypeCastSuffix : String init ""
 		
 		if self.container.isInstanceOf(Assignment) then
 			
 			ppCastSuffix := self.container.asType(Assignment).ppCastSuffix()
+			ppValueTypeCastSuffix := self.container.asType(Assignment).valueTypeCastSuffix
 		
 			if self.container.asType(Assignment).target.isInstanceOf(CallResult) then
 				callElement := self.container.asType(Assignment).target.createBehaviorJava(context)
@@ -605,7 +607,7 @@ aspect class CallFeature {
 			ft_str := ft_str + "\n//CE\n"
 			
 			if context.getResultLastStatementId()!="" then
-				ft_str := ft_str + context.getResultLastStatementId() + "result" + context.printFtSuffix() + ppCastSuffix + ";\n"
+				ft_str := ft_str + context.getResultLastStatementId() + "result" + context.printFtSuffix() + ppValueTypeCastSuffix + ppCastSuffix + ";\n"
 			else
 				ft_str := ft_str + callElement + " = result" + context.printFtSuffix() + ";\n"
 			end
@@ -615,7 +617,7 @@ aspect class CallFeature {
 			if self.container.asType(Assignment).target.isInstanceOf(CallResult) then
 				//callElement
 				ft_str := ft_str + "\n//CER\n"
-				ft_str := ft_str + context.RETURN_EXPRESSION_TO_REPLACE + "result" + context.printFtSuffix() + ppCastSuffix + ";\n"
+				ft_str := ft_str + context.RETURN_EXPRESSION_TO_REPLACE + "result" + context.printFtSuffix() + ppValueTypeCastSuffix + ppCastSuffix + ";\n"
 			end
 		end
 		
