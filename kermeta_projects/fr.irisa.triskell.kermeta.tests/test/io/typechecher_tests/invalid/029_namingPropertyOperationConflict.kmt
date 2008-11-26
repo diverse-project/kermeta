@@ -1,12 +1,10 @@
-/* $Id: 029_namingPropertyOperationConflict.kmt,v 1.1 2008-11-26 09:50:52 cfaucher Exp $ 
+/* $Id: 029_namingPropertyOperationConflict.kmt,v 1.2 2008-11-26 10:01:04 cfaucher Exp $ 
  * Creation : November 26, 2008
  * Licence  : EPL 
  * Copyright:
  * Authors  : 
  *            paco
  */
-@mainClass "namingPropertyOperationConflict::Main"
-@mainOperation "main"
 
 
 package namingPropertyOperationConflict;
@@ -17,16 +15,7 @@ require kermeta
 using kermeta::standard
 using kermeta::kunit
 
-class Main inherits TestCase {
-
-	operation main() : Void is do 
-		var runner : TestRunner init TestRunner.new
-		runner.run(Main)
-		runner.printTestResult()
-	end
-
+class Main{
 	attribute testOperation : String[0..1]
 	operation testOperation() is do end    
-}
-
 }

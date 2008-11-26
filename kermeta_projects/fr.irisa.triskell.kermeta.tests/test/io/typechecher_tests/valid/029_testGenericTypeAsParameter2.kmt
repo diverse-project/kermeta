@@ -1,12 +1,10 @@
-/* $Id: 029_testGenericTypeAsParameter2.kmt,v 1.1 2008-11-26 09:40:04 cfaucher Exp $ 
+/* $Id: 029_testGenericTypeAsParameter2.kmt,v 1.2 2008-11-26 10:00:46 cfaucher Exp $ 
  * Creation : November 26, 2008
  * Licence  : EPL 
  * Copyright:
  * Authors  : 
  *            cfaucher
- */
-@mainClass "testGenericTypeAsParameter2::GenericClass"
-@mainOperation "main"
+ */s
 
 
 package testGenericTypeAsParameter2;
@@ -15,16 +13,9 @@ package testGenericTypeAsParameter2;
 require kermeta
 
 using kermeta::standard
-using kermeta::kunit
 
 
-class GenericClass<C: String> inherits TestCase {
-
-	operation main() : Void is do 
-		var runner : TestRunner init TestRunner.new
-		runner.run(Main)
-		runner.printTestResult()
-	end
+class GenericClass<C: String> {
 
     operation testOperation1(o: C) is do end
 
