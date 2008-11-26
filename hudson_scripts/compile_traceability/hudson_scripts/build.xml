@@ -11,6 +11,7 @@
 	<property name="equinox.jar" location="${eclipse.home}/plugins/org.eclipse.equinox.launcher_1.0.101.R34x_v20080819.jar"/>
 	<property name="eclipse.workspace.dir" location="${env.WORKSPACE}/eclipseworkspace"/>	
 	<property name="eclipse.build.dir" location="${env.WORKSPACE}/src"/>
+	<property name="eclipse.extension.location" location="${env.WORKSPACE}/extension_location"/>
 	
 	<target name="all" depends="getSources, compile">
 		
@@ -48,6 +49,19 @@
 		</copy>
 
 	</target>
+	<target name="getDependencies">	
+			<mkdir dir="${eclipse.extension.location}"/>			
+			<get src="http://pamplemousse.irisa.fr:8080/job/compile_eclipse.util/lastSuccessfulBuild/artifact/src/I.TestBuild/fr.irisa.triskell.eclipse.util.feature-TestBuild.zip" 
+				dest="${eclipse.extension.location}"
+				usetimestamp="true"/>		    
+			<unzip dest="${env.WORKSPACE}">
+			    <fileset dir="${eclipse.extension.location}">
+			        <include name="**/*.zip"/>
+			    </fileset>
+			</unzip>
+
+		</target>
+	
 	<target name="getCompileScripts">	
 		<!--<mkdir dir="${previousStep.dir}"/>-->
 	<!--	<copy file="/udd/triskell/bin/linux/dev/kermeta_daily_build/build.xml" todir="${env.WORKSPACE}/"/>
@@ -58,7 +72,7 @@
 -->
 
 	</target>
-	<target name="compile" depends="organizeSources">	
+	<target name="compile" depends="organizeSources, getDependencies">	
 		<mkdir dir="${eclipse.workspace.dir}"/>
 		<java jar="${equinox.jar}"
 		           fork="true"
