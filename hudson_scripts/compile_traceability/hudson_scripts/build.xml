@@ -54,7 +54,7 @@
 			<get src="http://pamplemousse.irisa.fr:8080/job/compile_eclipse.util/lastSuccessfulBuild/artifact/src/I.TestBuild/fr.irisa.triskell.eclipse.util.feature-TestBuild.zip" 
 				dest="${eclipse.extension.location}/fr.irisa.triskell.eclipse.util.feature-TestBuild.zip"
 				usetimestamp="true"/>		    
-			<unzip dest="${env.WORKSPACE}">
+			<unzip dest="${eclipse.extension.location}">
 			    <fileset dir="${eclipse.extension.location}">
 			        <include name="**/*.zip"/>
 			    </fileset>
