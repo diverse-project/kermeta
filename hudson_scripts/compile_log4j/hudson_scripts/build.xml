@@ -34,7 +34,7 @@
 		<mkdir dir="${eclipse.build.dir}"/>	
 		<mkdir dir="${eclipse.build.dir}/plugins"/>
 		<mkdir dir="${eclipse.build.dir}/features"/>		
-		<copy todir="${eclipse.build.dir}/features">
+		<copy todir="${eclipse.build.dir}/features/org.kermeta.log4j">
 			<fileset dir="${env.WORKSPACE}/log4j_projects/org.kermeta.log4j.feature">
 				 <exclude name="**/CVS/**"/>
 			</fileset>
