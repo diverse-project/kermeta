@@ -68,7 +68,6 @@
 					featureId="fr.irisa.triskell.eclipse.util.feature"
 					buildDirectory="${buildDirectory}"
 					baseLocation="${baseLocation}"
-					productFile="${product}"
 					verify="false"
 					pluginPath="${pluginPath}"
 					configInfo="${configs}"
@@ -76,6 +75,7 @@
 					featureList="${featureList}"
 					includeLaunchers="false"
 				/>
+		<!-- productFile="${product}"-->
 
 	</target>
 
