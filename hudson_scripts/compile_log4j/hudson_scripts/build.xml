@@ -74,7 +74,7 @@
 			<arg value="-Dbuilder=${env.WORKSPACE}/hudson_scripts/compile_log4j/eclipse_build_scripts/log4j"/>
 			<!--<arg value="-Dcomponent=traceability"/>-->
 			<!--<arg value="-Dpde.build.scripts=${eclipse.home}/plugins/org.eclipse.pde.build_3.4.1.R34x_v20080805/scripts"/>-->
-			<arg value="-Dbase=${eclipse.home}"/>
+			<!--<arg value="-Dbase=${eclipse.home}"/>-->
 		</java>
 	
 
