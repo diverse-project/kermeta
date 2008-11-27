@@ -44,7 +44,7 @@
 			<fileset dir="${env.WORKSPACE}/emfatic_projects">
 				 <exclude name="**/CVS/**"/>
 			</fileset>
-			<fileset dir="${env.WORKSPACE}/org.eclipse.emf.ecoretools.registration">
+			<fileset dir="${env.WORKSPACE}/registration_projects">
 				 <exclude name="**/CVS/**"/>
 			</fileset>
 		</copy>
