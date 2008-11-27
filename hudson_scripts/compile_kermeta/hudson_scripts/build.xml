@@ -39,6 +39,8 @@
 				 <exclude name="**/org.kermeta.kpm.tests/**"/>
 				 <exclude name="**/fr.irisa.triskell.kermeta.graphicaleditor/**"/>
 				 <exclude name="**/org.kermeta.compiler.generator/**"/>
+				 <exclude name="**/org.kermeta.compiler.trek.ui/**"/>
+				 <exclude name="**/org.kermeta.compiler.ui/**"/>
 				 <exclude name="**/CVS/**"/>
 			</fileset>
 			<fileset dir="${env.WORKSPACE}/emfatic_projects">
