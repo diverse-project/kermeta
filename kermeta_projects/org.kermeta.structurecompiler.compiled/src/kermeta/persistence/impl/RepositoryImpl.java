@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: RepositoryImpl.java,v 1.8 2008-11-07 08:53:48 cfaucher Exp $
+ * $Id: RepositoryImpl.java,v 1.9 2008-11-27 15:50:06 cfaucher Exp $
  */
 package kermeta.persistence.impl;
 
@@ -134,33 +134,33 @@ public abstract class RepositoryImpl extends ObjectImpl implements Repository {
 
 		{
 
-			kermeta.standard.Iterator<kermeta.persistence.Resource> it_ft204 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
+			kermeta.standard.Iterator<kermeta.persistence.Resource> it_ft232 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
 					.<kermeta.persistence.Resource> convertAsSet(
 							this.getResources()).iterator();
-			java.lang.Boolean idLoopCond_924 = false;
-			while (!idLoopCond_924) {
-				idLoopCond_924 = it_ft204.isOff();
-				if (idLoopCond_924) {
+			java.lang.Boolean idLoopCond_1028 = false;
+			while (!idLoopCond_1028) {
+				idLoopCond_1028 = it_ft232.isOff();
+				if (idLoopCond_1028) {
 				} else {
 
 					//BIle:func
-					kermeta.persistence.Resource res_lbdExp204 = it_ft204
+					kermeta.persistence.Resource res_lbdExp232 = it_ft232
 							.next();
 
-					java.lang.Boolean idIfCond_925 = false;
-					idIfCond_925 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+					java.lang.Boolean idIfCond_1029 = false;
+					idIfCond_1029 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 							.isVoidSwitcher(fullResContents);
 
-					if (idIfCond_925) {
+					if (idIfCond_1029) {
 
 						fullResContents = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
-								.<kermeta.language.structure.Object> convertAsSet(res_lbdExp204
+								.<kermeta.language.structure.Object> convertAsSet(res_lbdExp232
 										.getterContents());
 					} else {
 
 						fullResContents
 								.addAll(org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
-										.<kermeta.language.structure.Object> convertAsSet(res_lbdExp204
+										.<kermeta.language.structure.Object> convertAsSet(res_lbdExp232
 												.getterContents()));
 					}
 
@@ -176,16 +176,16 @@ public abstract class RepositoryImpl extends ObjectImpl implements Repository {
 
 		{
 
-			kermeta.standard.Iterator<kermeta.language.structure.Object> it_ft205 = fullResContents
+			kermeta.standard.Iterator<kermeta.language.structure.Object> it_ft233 = fullResContents
 					.iterator();
-			java.lang.Boolean idLoopCond_926 = false;
-			while (!idLoopCond_926) {
-				idLoopCond_926 = it_ft205.isOff();
-				if (idLoopCond_926) {
+			java.lang.Boolean idLoopCond_1030 = false;
+			while (!idLoopCond_1030) {
+				idLoopCond_1030 = it_ft233.isOff();
+				if (idLoopCond_1030) {
 				} else {
 
 					//BIle:func
-					kermeta.language.structure.Object containedObj_lbdExp205 = it_ft205
+					kermeta.language.structure.Object containedObj_lbdExp233 = it_ft233
 							.next();
 
 					kermeta.language.structure.ClassDefinition classDef = null;
@@ -195,56 +195,56 @@ public abstract class RepositoryImpl extends ObjectImpl implements Repository {
 							.<kermeta.language.structure.ClassDefinition> asTypeOrVoid(
 									org.kermeta.compil.runtime.helper.language.ObjectUtil
 											.getMetaClassSwitcher(
-													containedObj_lbdExp205)
+													containedObj_lbdExp233)
 											.getTypeDefinition());
 
-					java.lang.Boolean idIfCond_927 = false;
-					idIfCond_927 = kermeta.standard.helper.BooleanWrapper
+					java.lang.Boolean idIfCond_1031 = false;
+					idIfCond_1031 = kermeta.standard.helper.BooleanWrapper
 							.not(org.kermeta.compil.runtime.helper.language.ObjectUtil
 									.isVoidSwitcher(classDef));
 
-					if (idIfCond_927) {
+					if (idIfCond_1031) {
 
 						//BIft:each
 
 						{
 
-							kermeta.standard.Iterator<kermeta.language.structure.Property> it_ft206 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
+							kermeta.standard.Iterator<kermeta.language.structure.Property> it_ft234 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
 									.<kermeta.language.structure.Property> convertAsSet(
 											classDef.getterAllAttribute())
 									.iterator();
-							java.lang.Boolean idLoopCond_928 = false;
-							while (!idLoopCond_928) {
-								idLoopCond_928 = it_ft206.isOff();
-								if (idLoopCond_928) {
+							java.lang.Boolean idLoopCond_1032 = false;
+							while (!idLoopCond_1032) {
+								idLoopCond_1032 = it_ft234.isOff();
+								if (idLoopCond_1032) {
 								} else {
 
 									//BIle:func
-									kermeta.language.structure.Property prop_lbdExp206 = it_ft206
+									kermeta.language.structure.Property prop_lbdExp234 = it_ft234
 											.next();
 
-									java.lang.Boolean idIfCond_929 = false;
-									idIfCond_929 = kermeta.standard.helper.BooleanWrapper
-											.not(prop_lbdExp206.getIsDerived());
+									java.lang.Boolean idIfCond_1033 = false;
+									idIfCond_1033 = kermeta.standard.helper.BooleanWrapper
+											.not(prop_lbdExp234.getIsDerived());
 
-									if (idIfCond_929) {
+									if (idIfCond_1033) {
 
-										java.lang.Boolean idIfCond_930 = false;
-										idIfCond_930 = kermeta.standard.helper.BooleanWrapper
+										java.lang.Boolean idIfCond_1034 = false;
+										idIfCond_1034 = kermeta.standard.helper.BooleanWrapper
 												.or(
 														kermeta.standard.helper.IntegerWrapper
 																.isGreater(
-																		prop_lbdExp206
+																		prop_lbdExp234
 																				.getUpper(),
 																		1),
 														kermeta.standard.helper.IntegerWrapper
 																.equals(
-																		prop_lbdExp206
+																		prop_lbdExp234
 																				.getUpper(),
 																		kermeta.standard.helper.IntegerWrapper
 																				.uminus(1)));
 
-										if (idIfCond_930) {
+										if (idIfCond_1034) {
 
 											kermeta.standard.Collection<kermeta.language.structure.Object> referencedObjs = null;
 
@@ -253,39 +253,39 @@ public abstract class RepositoryImpl extends ObjectImpl implements Repository {
 													.<kermeta.standard.Collection<kermeta.language.structure.Object>> asTypeOrVoid(
 															org.kermeta.compil.runtime.helper.language.ObjectUtil
 																	.getSwitcher(
-																			containedObj_lbdExp205,
-																			prop_lbdExp206));
+																			containedObj_lbdExp233,
+																			prop_lbdExp234));
 
-											java.lang.Boolean idIfCond_931 = false;
-											idIfCond_931 = kermeta.standard.helper.BooleanWrapper
+											java.lang.Boolean idIfCond_1035 = false;
+											idIfCond_1035 = kermeta.standard.helper.BooleanWrapper
 													.not(org.kermeta.compil.runtime.helper.language.ObjectUtil
 															.isVoidSwitcher(referencedObjs));
 
-											if (idIfCond_931) {
+											if (idIfCond_1035) {
 
 												//BIft:each
 
 												{
 
-													kermeta.standard.Iterator<kermeta.language.structure.Object> it_ft207 = referencedObjs
+													kermeta.standard.Iterator<kermeta.language.structure.Object> it_ft235 = referencedObjs
 															.iterator();
-													java.lang.Boolean idLoopCond_932 = false;
-													while (!idLoopCond_932) {
-														idLoopCond_932 = it_ft207
+													java.lang.Boolean idLoopCond_1036 = false;
+													while (!idLoopCond_1036) {
+														idLoopCond_1036 = it_ft235
 																.isOff();
-														if (idLoopCond_932) {
+														if (idLoopCond_1036) {
 														} else {
 
 															//BIle:func
-															kermeta.language.structure.Object referencedObj_lbdExp207 = it_ft207
+															kermeta.language.structure.Object referencedObj_lbdExp235 = it_ft235
 																	.next();
 
-															java.lang.Boolean idIfCond_933 = false;
-															idIfCond_933 = kermeta.standard.helper.BooleanWrapper
+															java.lang.Boolean idIfCond_1037 = false;
+															idIfCond_1037 = kermeta.standard.helper.BooleanWrapper
 																	.and(
 																			kermeta.standard.helper.BooleanWrapper
 																					.not(fullResContents
-																							.contains(referencedObj_lbdExp207)),
+																							.contains(referencedObj_lbdExp235)),
 																			kermeta.standard.helper.BooleanWrapper
 																					.not(kermeta.standard.helper.BooleanWrapper
 																							.or(
@@ -293,39 +293,39 @@ public abstract class RepositoryImpl extends ObjectImpl implements Repository {
 																											.or(
 																													org.kermeta.compil.runtime.helper.language.ObjectUtil
 																															.isKindOfSwitcher(
-																																	referencedObj_lbdExp207,
+																																	referencedObj_lbdExp235,
 																																	org.kermeta.compil.runtime.ExecutionContext
 																																			.getInstance()
 																																			.getMetaClass(
 																																					"java.lang.String")),
 																													org.kermeta.compil.runtime.helper.language.ObjectUtil
 																															.isKindOfSwitcher(
-																																	referencedObj_lbdExp207,
+																																	referencedObj_lbdExp235,
 																																	org.kermeta.compil.runtime.ExecutionContext
 																																			.getInstance()
 																																			.getMetaClass(
 																																					"java.lang.Integer"))),
 																									org.kermeta.compil.runtime.helper.language.ObjectUtil
 																											.isKindOfSwitcher(
-																													referencedObj_lbdExp207,
+																													referencedObj_lbdExp235,
 																													org.kermeta.compil.runtime.ExecutionContext
 																															.getInstance()
 																															.getMetaClass(
 																																	"java.lang.Boolean")))));
 
-															if (idIfCond_933) {
+															if (idIfCond_1037) {
 
 																kermeta.persistence.DanglingDiagnostic diagnostic = ((kermeta.persistence.DanglingDiagnostic) org.kermeta.compil.runtime.helper.language.ClassUtil
 																		.newObject("kermeta.persistence.DanglingDiagnostic"));
 
 																diagnostic
-																		.setDanglingElement(referencedObj_lbdExp207);
+																		.setDanglingElement(referencedObj_lbdExp235);
 
 																diagnostic
-																		.setReferencingElement(containedObj_lbdExp205);
+																		.setReferencingElement(containedObj_lbdExp233);
 
 																diagnostic
-																		.setReferencingProperty(prop_lbdExp206);
+																		.setReferencingProperty(prop_lbdExp234);
 
 																result
 																		.add(diagnostic);
@@ -347,18 +347,18 @@ public abstract class RepositoryImpl extends ObjectImpl implements Repository {
 
 											referencedObj = org.kermeta.compil.runtime.helper.language.ObjectUtil
 													.getSwitcher(
-															containedObj_lbdExp205,
-															prop_lbdExp206);
+															containedObj_lbdExp233,
+															prop_lbdExp234);
 
-											java.lang.Boolean idIfCond_934 = false;
-											idIfCond_934 = kermeta.standard.helper.BooleanWrapper
+											java.lang.Boolean idIfCond_1038 = false;
+											idIfCond_1038 = kermeta.standard.helper.BooleanWrapper
 													.not(org.kermeta.compil.runtime.helper.language.ObjectUtil
 															.isVoidSwitcher(referencedObj));
 
-											if (idIfCond_934) {
+											if (idIfCond_1038) {
 
-												java.lang.Boolean idIfCond_935 = false;
-												idIfCond_935 = kermeta.standard.helper.BooleanWrapper
+												java.lang.Boolean idIfCond_1039 = false;
+												idIfCond_1039 = kermeta.standard.helper.BooleanWrapper
 														.and(
 																kermeta.standard.helper.BooleanWrapper
 																		.not(fullResContents
@@ -390,7 +390,7 @@ public abstract class RepositoryImpl extends ObjectImpl implements Repository {
 																												.getMetaClass(
 																														"java.lang.Boolean")))));
 
-												if (idIfCond_935) {
+												if (idIfCond_1039) {
 
 													kermeta.persistence.DanglingDiagnostic diagnostic = ((kermeta.persistence.DanglingDiagnostic) org.kermeta.compil.runtime.helper.language.ClassUtil
 															.newObject("kermeta.persistence.DanglingDiagnostic"));
@@ -399,10 +399,10 @@ public abstract class RepositoryImpl extends ObjectImpl implements Repository {
 															.setDanglingElement(referencedObj);
 
 													diagnostic
-															.setReferencingElement(containedObj_lbdExp205);
+															.setReferencingElement(containedObj_lbdExp233);
 
 													diagnostic
-															.setReferencingProperty(prop_lbdExp206);
+															.setReferencingProperty(prop_lbdExp234);
 
 													result.add(diagnostic);
 												}
@@ -454,19 +454,19 @@ public abstract class RepositoryImpl extends ObjectImpl implements Repository {
 			kermeta.standard.Iterator<kermeta.persistence.Resource> it = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
 					.<kermeta.persistence.Resource> convertAsSet(
 							this.getResources()).iterator();
-			java.lang.Boolean idLoopCond_936 = false;
-			while (!idLoopCond_936) {
-				idLoopCond_936 = it.isOff();
-				if (idLoopCond_936) {
+			java.lang.Boolean idLoopCond_1040 = false;
+			while (!idLoopCond_1040) {
+				idLoopCond_1040 = it.isOff();
+				if (idLoopCond_1040) {
 				} else {
 
 					kermeta.persistence.Resource next = it.next();
 
-					java.lang.Boolean idIfCond_937 = false;
-					idIfCond_937 = kermeta.standard.helper.StringWrapper
+					java.lang.Boolean idIfCond_1041 = false;
+					idIfCond_1041 = kermeta.standard.helper.StringWrapper
 							.equals(normalisedUri, next.normalizedUri());
 
-					if (idIfCond_937) {
+					if (idIfCond_1041) {
 
 						result = next;
 					}
@@ -475,10 +475,10 @@ public abstract class RepositoryImpl extends ObjectImpl implements Repository {
 			}
 		}
 
-		java.lang.Boolean idIfCond_938 = false;
-		idIfCond_938 = result == null;
+		java.lang.Boolean idIfCond_1042 = false;
+		idIfCond_1042 = result == null;
 
-		if (idIfCond_938) {
+		if (idIfCond_1042) {
 
 			result = this.createResource(uri, "");
 

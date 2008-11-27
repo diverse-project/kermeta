@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ConstraintViolatedExceptionImpl.java,v 1.6 2008-11-07 08:52:25 cfaucher Exp $
+ * $Id: ConstraintViolatedExceptionImpl.java,v 1.7 2008-11-27 15:49:48 cfaucher Exp $
  */
 package kermeta.exceptions.impl;
 

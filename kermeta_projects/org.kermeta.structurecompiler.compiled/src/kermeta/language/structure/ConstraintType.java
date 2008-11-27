@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ConstraintType.java,v 1.8 2008-11-07 08:53:40 cfaucher Exp $
+ * $Id: ConstraintType.java,v 1.9 2008-11-27 15:50:04 cfaucher Exp $
  */
 package kermeta.language.structure;
 

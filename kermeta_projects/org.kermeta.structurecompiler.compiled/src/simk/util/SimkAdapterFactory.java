@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: SimkAdapterFactory.java,v 1.8 2008-11-07 08:53:53 cfaucher Exp $
+ * $Id: SimkAdapterFactory.java,v 1.9 2008-11-27 15:50:08 cfaucher Exp $
  */
 package simk.util;
 

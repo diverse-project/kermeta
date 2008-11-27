@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: EcoreFactory.java,v 1.8 2008-11-07 08:54:00 cfaucher Exp $
+ * $Id: EcoreFactory.java,v 1.9 2008-11-27 15:50:11 cfaucher Exp $
  */
 package km2ecore.helper.ecore;
 
@@ -24,15 +24,6 @@ public interface EcoreFactory extends EFactory {
 	 * @generated
 	 */
 	EcoreFactory eINSTANCE = km2ecore.helper.ecore.impl.EcoreFactoryImpl.init();
-
-	/**
-	 * Returns a new object of class '<em>EAnnotation Helper</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>EAnnotation Helper</em>'.
-	 * @generated
-	 */
-	EAnnotationHelper createEAnnotationHelper();
 
 	/**
 	 * Returns a new object of class '<em>ENamed Element Helper</em>'.
@@ -60,6 +51,15 @@ public interface EcoreFactory extends EFactory {
 	 * @generated
 	 */
 	EcoreModelElementHelper createEcoreModelElementHelper();
+
+	/**
+	 * Returns a new object of class '<em>EAnnotation Helper</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>EAnnotation Helper</em>'.
+	 * @generated
+	 */
+	EAnnotationHelper createEAnnotationHelper();
 
 	/**
 	 * Returns the package supported by this factory.

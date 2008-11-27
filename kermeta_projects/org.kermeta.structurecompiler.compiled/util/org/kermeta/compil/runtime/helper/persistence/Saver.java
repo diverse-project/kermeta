@@ -1,5 +1,5 @@
 
-/*$Id: Saver.java,v 1.9 2008-11-07 08:54:01 cfaucher Exp $
+/*$Id: Saver.java,v 1.10 2008-11-27 15:50:12 cfaucher Exp $
 * Project : org.kermeta.compiler.generator
 * File : 	Saver.java
 * License : EPL
@@ -26,6 +26,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.kermeta.compil.runtime.ExecutionContext;
 
 
 /**
@@ -42,7 +43,9 @@ public class Saver extends SaverOrLoader {
 	 * @param metamodelURI The uri of the metamodel to use when cloning objects.
 	 * @throws IOException
 	 */
-	static public void save(List contents, String modelURI, String metamodelURI) {
+	static public void save(kermeta.persistence.Resource kermetaResource, String modelURI, String metamodelURI) {
+		
+		List contents = kermetaResource.getValues();
 		
 		try {
 			Saver s = new Saver(metamodelURI);
@@ -56,6 +59,7 @@ public class Saver extends SaverOrLoader {
 			
 			ResourceSet resourceSet = new ResourceSetImpl();
 			org.eclipse.emf.ecore.resource.Resource resource = resourceSet.createResource( URI.createURI(modelURI) );
+			
 			resource.getContents().addAll(instancesToSave);
 			resource.save(null);
 		} catch (IOException e) {		
@@ -77,8 +81,9 @@ public class Saver extends SaverOrLoader {
 	 */
 	private EObject clone(EObject o) {
 		EObject targetObject = createInstance(o, this.getMetamodelURI());
-		if ( o == targetObject )
+		if ( o == targetObject ) {
 			return o;
+		}
 		cloneEObject(o, targetObject);
 		return targetObject;
 	}
@@ -116,9 +121,10 @@ public class Saver extends SaverOrLoader {
 						// Setting the value.
 						targetObject.eSet(targetFeature, targetValue);
 						
-						if ( clone )
+						if ( clone ) {
 							// Cloning if necessary.
 							cloneEObject( (EObject) value, targetValue);
+						}
 						
 					/*
 					 * 
@@ -156,8 +162,9 @@ public class Saver extends SaverOrLoader {
 					} else if ( value != null ) {
 						Object realValue = value;
 						// Special case for enumerator. Need to create an instance from the good factory.
-						if ( value instanceof Enumerator )
+						if ( value instanceof Enumerator ) {
 							realValue = createInstance( (Enumerator) value, this.getMetamodelURI());
+						}
 						// Setting the value.
 						if( !sourceFeature.isDerived() && targetFeature.isChangeable() /*&& !targetFeature.isUnsettable()*/ ) {
 							targetObject.eSet(targetFeature, realValue);
@@ -174,10 +181,13 @@ public class Saver extends SaverOrLoader {
 	 * @return The structural feature which name matches the feature name argument or null if any.
 	 */
 	private EStructuralFeature getEStructuralFeature(EClass clazz, String featureName) {
-		for ( EStructuralFeature feature : clazz.getEAllStructuralFeatures() )
+		for ( EStructuralFeature feature : clazz.getEAllStructuralFeatures() ) {
 			// Pay attention to special keywords that have been prefixed with the '_' character.
-			if ( feature.getName().equals(featureName) || feature.getName().replaceFirst("_", "").equals(featureName) )
+			// FIXME CF: Holala Paco, this patch should be handled in another way...
+			if ( feature.getName().equals(featureName) || feature.getName().replaceFirst("_", "").equals(featureName) ) {
 				return feature;
+			}
+		}
 		return null;
 	}
 	

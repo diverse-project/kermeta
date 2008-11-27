@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: Failure.java,v 1.8 2008-11-07 08:53:46 cfaucher Exp $
+ * $Id: Failure.java,v 1.9 2008-11-27 15:50:05 cfaucher Exp $
  */
 package kermeta.kunit;
 
@@ -20,7 +20,7 @@ package kermeta.kunit;
  * </p>
  *
  * @see kermeta.kunit.KunitPackage#getFailure()
- * @model annotation="kermeta documentation='/**\r\n * Failure represents an assertion failure stored in a failure log\r\n \052/'"
+ * @model annotation="kermeta documentation='/**\n * Failure represents an assertion failure stored in a failure log\n \052/'"
  * @generated
  */
 public interface Failure extends kermeta.language.structure.Object {
@@ -36,7 +36,7 @@ public interface Failure extends kermeta.language.structure.Object {
 	 * @see #setMessage(String)
 	 * @see kermeta.kunit.KunitPackage#getFailure_Message()
 	 * @model dataType="kermeta.standard.JavaString"
-	 *        annotation="kermeta documentation='/**\r\n\t * the stored message (given or generated one)\r\n\t \052/'"
+	 *        annotation="kermeta documentation='/**\n\t * the stored message (given or generated one)\n\t \052/'"
 	 * @generated
 	 */
 	String getMessage();
@@ -62,7 +62,7 @@ public interface Failure extends kermeta.language.structure.Object {
 	 * @return the value of the '<em>Failure</em>' reference.
 	 * @see #setFailure(Fallible)
 	 * @see kermeta.kunit.KunitPackage#getFailure_Failure()
-	 * @model annotation="kermeta documentation='/**\r\n\t * the stored failure\r\n\t \052/'"
+	 * @model annotation="kermeta documentation='/**\n\t * the stored failure\n\t \052/'"
 	 * @generated
 	 */
 	Fallible getFailure();
@@ -81,7 +81,7 @@ public interface Failure extends kermeta.language.structure.Object {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @model dataType="kermeta.standard.JavaString"
-	 *        annotation="kermeta documentation='/**\r\n\t * overwrite the default method, in order to add the message\r\n\t \052/'"
+	 *        annotation="kermeta documentation='/**\n\t * overwrite the default method, in order to add the message\n\t \052/'"
 	 *        annotation="kermeta superOperation='kermeta::language::structure::Object'"
 	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='\njava.lang.String result = null;\n\n\tresult = kermeta.standard.helper.StringWrapper.plus(kermeta.standard.helper.StringWrapper.plus(org.kermeta.compil.runtime.helper.language.ObjectUtil.toStringSwitcher(this.getFailure()), \" \"), this.getMessage());\n\nreturn result;\n'"
 	 * @generated
@@ -92,7 +92,7 @@ public interface Failure extends kermeta.language.structure.Object {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @model msgDataType="kermeta.standard.JavaString"
-	 *        annotation="kermeta documentation='/**\r\n\t * initialization of the failure\r\n\t \052/'"
+	 *        annotation="kermeta documentation='/**\n\t * initialization of the failure\n\t \052/'"
 	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='\nkermeta.kunit.Failure result = null;\n\n\tthis.setFailure(fallible);\n\n\tthis.setMessage(msg);\n\n\tresult = this;\n\nreturn result;\n'"
 	 * @generated
 	 */

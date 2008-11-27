@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: IntegerImpl.java,v 1.3 2008-11-07 08:53:32 cfaucher Exp $
+ * $Id: IntegerImpl.java,v 1.4 2008-11-27 15:49:56 cfaucher Exp $
  */
 package kermeta.standard.impl;
 

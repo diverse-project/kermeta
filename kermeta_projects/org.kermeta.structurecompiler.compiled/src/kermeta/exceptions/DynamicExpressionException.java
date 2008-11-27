@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: DynamicExpressionException.java,v 1.8 2008-11-07 08:53:05 cfaucher Exp $
+ * $Id: DynamicExpressionException.java,v 1.9 2008-11-27 15:49:51 cfaucher Exp $
  */
 package kermeta.exceptions;
 
@@ -13,7 +13,7 @@ package kermeta.exceptions;
  *
  *
  * @see kermeta.exceptions.ExceptionsPackage#getDynamicExpressionException()
- * @model annotation="kermeta documentation='/**\r\n * to be written #########################################\r\n \052/'"
+ * @model annotation="kermeta documentation='/**\n * to be written #########################################\n \052/'"
  * @generated
  */
 public interface DynamicExpressionException extends

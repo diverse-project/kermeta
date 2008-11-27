@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: KermetaPackage.java,v 1.8 2008-11-07 08:54:19 cfaucher Exp $
+ * $Id: KermetaPackage.java,v 1.9 2008-11-27 15:50:26 cfaucher Exp $
  */
 package kermeta;
 
@@ -25,7 +25,7 @@ import org.eclipse.emf.ecore.EPackage;
  * @see kermeta.KermetaFactory
  * @model kind="package"
  *        annotation="kermeta ecoreUri='http://www.kermeta.org/kermeta/1_2_0//kermeta'"
- *        annotation="kermeta documentation='/**\r\n * The root package. See the other packages if you want to browse the classes of Kermeta api.\r\n * <img src=\"platform:/plugin/fr.irisa.triskell.kermeta.documentation/src/figures/kermeta_packages.png\"/>\r\n \052/'"
+ *        annotation="kermeta documentation='/**\n * The root package. See the other packages if you want to browse the classes of Kermeta api.\n * <img src=\"platform:/plugin/fr.irisa.triskell.kermeta.documentation/src/figures/kermeta_packages.png\"/>\n \052/'"
  * @generated
  */
 public interface KermetaPackage extends EPackage {
@@ -72,15 +72,6 @@ public interface KermetaPackage extends EPackage {
 	int DUMMY_CLASS = 0;
 
 	/**
-	 * The feature id for the '<em><b>Tag</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DUMMY_CLASS__TAG = StructurePackage.OBJECT__TAG;
-
-	/**
 	 * The feature id for the '<em><b>File</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -88,6 +79,15 @@ public interface KermetaPackage extends EPackage {
 	 * @ordered
 	 */
 	int DUMMY_CLASS__FILE = StructurePackage.OBJECT__FILE;
+
+	/**
+	 * The feature id for the '<em><b>Tag</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DUMMY_CLASS__TAG = StructurePackage.OBJECT__TAG;
 
 	/**
 	 * The feature id for the '<em><b>File Name</b></em>' attribute.
@@ -124,6 +124,15 @@ public interface KermetaPackage extends EPackage {
 	 * @ordered
 	 */
 	int DUMMY_CLASS__OID = StructurePackage.OBJECT__OID;
+
+	/**
+	 * The feature id for the '<em><b>Internal Containing Resource</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DUMMY_CLASS__INTERNAL_CONTAINING_RESOURCE = StructurePackage.OBJECT__INTERNAL_CONTAINING_RESOURCE;
 
 	/**
 	 * The number of structural features of the '<em>Dummy Class</em>' class.

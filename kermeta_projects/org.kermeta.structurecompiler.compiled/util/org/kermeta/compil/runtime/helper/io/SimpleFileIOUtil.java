@@ -1,4 +1,4 @@
-/* $Id: SimpleFileIOUtil.java,v 1.8 2008-11-07 08:54:24 cfaucher Exp $
+/* $Id: SimpleFileIOUtil.java,v 1.9 2008-11-27 15:50:33 cfaucher Exp $
  * Project: Kermeta (First iteration)
  * File: SimpleFileIO.java
  * License: EPL
@@ -42,6 +42,7 @@ public class SimpleFileIOUtil {
 	public static java.lang.Boolean fileIsDirectory(java.lang.String filename) {
 		java.lang.String fname = getOSFileLocation(filename);
 		File file = new File(fname);
+		
 		return file.isDirectory();
     }
 	
@@ -49,37 +50,21 @@ public class SimpleFileIOUtil {
 	public static void writeTextFile(java.lang.String filename, java.lang.String text) {
 		
         try {
-        	/*
-        	 * Getting the directory        	 
-        	 */
-        	java.lang.String filePath = filename;
+        	// Getting the file
+        	String filePath = getOSFileLocation(filename);
         	
         	int i = filePath.lastIndexOf("/");
-        	java.lang.String folderPath = filePath.substring(0, i);
         	
-        	if ( folderPath.startsWith("platform:/resource") ) {
-        		java.lang.String platformFolderPath = folderPath.replace("platform:/resource", "");
-        		
-        		if(Platform.isRunning()) {
-        			IFolder folder = ResourcesPlugin.getWorkspace().getRoot().getFolder( new Path(platformFolderPath) );
-        			folderPath = folder.getLocation().toString();
-            		filePath = folderPath + filePath.substring(i);
-        		} else {
-        			String local_path = SimpleFileIOUtil.class.getProtectionDomain().getCodeSource().getLocation().toExternalForm();
-        			local_path = local_path.replace("/bin/", "");
-        			int i_1 = local_path.lastIndexOf("/");
-                	local_path = local_path.substring(0, i_1);
-        			folderPath = local_path + platformFolderPath;
-        			filePath = folderPath + filePath.substring(i).replace("file:/", "");
-        		}
-        	}
+        	// Getting the file
+        	java.lang.String folderPath = filePath.substring(0, i);
         	       	
         	/*
         	 * Checking for its existency
         	 */
         	File folder = new File( folderPath );
-        	if ( ! folder.exists() )
+        	if ( ! folder.exists() ) {
         		folder.mkdirs();
+        	}
         	
         	FileWriter fw = new FileWriter( filePath );
             fw.write(text);
@@ -132,7 +117,22 @@ public class SimpleFileIOUtil {
     	// We should here recalculate the path of the file if filePath is a relative path !
     	java.lang.String filePath = cleanIfNecessaryPath(fileEclipsePath);
     	
-    	return filePath;
+    	if ( filePath.startsWith("platform:/resource") ) {
+    		java.lang.String platformFolderPath = filePath.replace("platform:/resource", "");
+    		
+    		if(Platform.isRunning()) {
+    			IFolder folder = ResourcesPlugin.getWorkspace().getRoot().getFolder( new Path(platformFolderPath) );
+    			filePath = folder.getLocation().toString();
+    		} else {
+    			String local_path = SimpleFileIOUtil.class.getProtectionDomain().getCodeSource().getLocation().toExternalForm();
+    			local_path = local_path.replace("/bin/", "");
+    			int i_1 = local_path.lastIndexOf("/");
+            	local_path = local_path.substring(0, i_1);
+            	filePath = local_path + platformFolderPath;
+    		}
+    	}
+    	
+    	return filePath.replace("file:/", "");
     }
     
     /**

@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: EStructuralFeatureImpl.java,v 1.9 2008-11-07 08:52:59 cfaucher Exp $
+ * $Id: EStructuralFeatureImpl.java,v 1.10 2008-11-27 15:49:51 cfaucher Exp $
  */
 package ecore.impl;
 
@@ -25,8 +25,8 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  * The following features are implemented:
  * <ul>
  *   <li>{@link ecore.impl.EStructuralFeatureImpl#is_volatile <em>volatile</em>}</li>
- *   <li>{@link ecore.impl.EStructuralFeatureImpl#getDefaultValueLiteral <em>Default Value Literal</em>}</li>
  *   <li>{@link ecore.impl.EStructuralFeatureImpl#getEContainingClass <em>EContaining Class</em>}</li>
+ *   <li>{@link ecore.impl.EStructuralFeatureImpl#getDefaultValueLiteral <em>Default Value Literal</em>}</li>
  *   <li>{@link ecore.impl.EStructuralFeatureImpl#is_transient <em>transient</em>}</li>
  *   <li>{@link ecore.impl.EStructuralFeatureImpl#isUnsettable <em>Unsettable</em>}</li>
  *   <li>{@link ecore.impl.EStructuralFeatureImpl#isDerived <em>Derived</em>}</li>
@@ -205,6 +205,28 @@ public abstract class EStructuralFeatureImpl extends ETypedElementImpl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public ecore.EClass getEContainingClass() {
+		if (eContainerFeatureID != EcorePackage.ESTRUCTURAL_FEATURE__ECONTAINING_CLASS)
+			return null;
+		return (ecore.EClass) eContainer();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public ecore.EClass basicGetEContainingClass() {
+		if (eContainerFeatureID != EcorePackage.ESTRUCTURAL_FEATURE__ECONTAINING_CLASS)
+			return null;
+		return (ecore.EClass) eInternalContainer();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public String getDefaultValueLiteral() {
 		return defaultValueLiteral;
 	}
@@ -221,28 +243,6 @@ public abstract class EStructuralFeatureImpl extends ETypedElementImpl
 			eNotify(new ENotificationImpl(this, Notification.SET,
 					EcorePackage.ESTRUCTURAL_FEATURE__DEFAULT_VALUE_LITERAL,
 					oldDefaultValueLiteral, defaultValueLiteral));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public ecore.EClass getEContainingClass() {
-		if (eContainerFeatureID != EcorePackage.ESTRUCTURAL_FEATURE__ECONTAINING_CLASS)
-			return null;
-		return (ecore.EClass) eContainer();
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public ecore.EClass basicGetEContainingClass() {
-		if (eContainerFeatureID != EcorePackage.ESTRUCTURAL_FEATURE__ECONTAINING_CLASS)
-			return null;
-		return (ecore.EClass) eInternalContainer();
 	}
 
 	/**
@@ -435,12 +435,12 @@ public abstract class EStructuralFeatureImpl extends ETypedElementImpl
 		switch (featureID) {
 		case EcorePackage.ESTRUCTURAL_FEATURE__VOLATILE:
 			return is_volatile() ? Boolean.TRUE : Boolean.FALSE;
-		case EcorePackage.ESTRUCTURAL_FEATURE__DEFAULT_VALUE_LITERAL:
-			return getDefaultValueLiteral();
 		case EcorePackage.ESTRUCTURAL_FEATURE__ECONTAINING_CLASS:
 			if (resolve)
 				return getEContainingClass();
 			return basicGetEContainingClass();
+		case EcorePackage.ESTRUCTURAL_FEATURE__DEFAULT_VALUE_LITERAL:
+			return getDefaultValueLiteral();
 		case EcorePackage.ESTRUCTURAL_FEATURE__TRANSIENT:
 			return is_transient() ? Boolean.TRUE : Boolean.FALSE;
 		case EcorePackage.ESTRUCTURAL_FEATURE__UNSETTABLE:
@@ -523,12 +523,12 @@ public abstract class EStructuralFeatureImpl extends ETypedElementImpl
 		switch (featureID) {
 		case EcorePackage.ESTRUCTURAL_FEATURE__VOLATILE:
 			return _volatile != _VOLATILE_EDEFAULT;
+		case EcorePackage.ESTRUCTURAL_FEATURE__ECONTAINING_CLASS:
+			return basicGetEContainingClass() != null;
 		case EcorePackage.ESTRUCTURAL_FEATURE__DEFAULT_VALUE_LITERAL:
 			return DEFAULT_VALUE_LITERAL_EDEFAULT == null ? defaultValueLiteral != null
 					: !DEFAULT_VALUE_LITERAL_EDEFAULT
 							.equals(defaultValueLiteral);
-		case EcorePackage.ESTRUCTURAL_FEATURE__ECONTAINING_CLASS:
-			return basicGetEContainingClass() != null;
 		case EcorePackage.ESTRUCTURAL_FEATURE__TRANSIENT:
 			return _transient != _TRANSIENT_EDEFAULT;
 		case EcorePackage.ESTRUCTURAL_FEATURE__UNSETTABLE:

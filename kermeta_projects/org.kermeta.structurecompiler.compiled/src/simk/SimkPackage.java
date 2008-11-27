@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: SimkPackage.java,v 1.8 2008-11-07 08:54:03 cfaucher Exp $
+ * $Id: SimkPackage.java,v 1.9 2008-11-27 15:50:13 cfaucher Exp $
  */
 package simk;
 
@@ -74,15 +74,6 @@ public interface SimkPackage extends EPackage {
 	int SM_NAMED_ELEMENT = 4;
 
 	/**
-	 * The feature id for the '<em><b>Tag</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SM_NAMED_ELEMENT__TAG = StructurePackage.OBJECT__TAG;
-
-	/**
 	 * The feature id for the '<em><b>File</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -90,6 +81,15 @@ public interface SimkPackage extends EPackage {
 	 * @ordered
 	 */
 	int SM_NAMED_ELEMENT__FILE = StructurePackage.OBJECT__FILE;
+
+	/**
+	 * The feature id for the '<em><b>Tag</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SM_NAMED_ELEMENT__TAG = StructurePackage.OBJECT__TAG;
 
 	/**
 	 * The feature id for the '<em><b>File Name</b></em>' attribute.
@@ -128,6 +128,15 @@ public interface SimkPackage extends EPackage {
 	int SM_NAMED_ELEMENT__OID = StructurePackage.OBJECT__OID;
 
 	/**
+	 * The feature id for the '<em><b>Internal Containing Resource</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SM_NAMED_ELEMENT__INTERNAL_CONTAINING_RESOURCE = StructurePackage.OBJECT__INTERNAL_CONTAINING_RESOURCE;
+
+	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -156,15 +165,6 @@ public interface SimkPackage extends EPackage {
 	int SIMK_MODEL = 0;
 
 	/**
-	 * The feature id for the '<em><b>Tag</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SIMK_MODEL__TAG = SM_NAMED_ELEMENT__TAG;
-
-	/**
 	 * The feature id for the '<em><b>File</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -172,6 +172,15 @@ public interface SimkPackage extends EPackage {
 	 * @ordered
 	 */
 	int SIMK_MODEL__FILE = SM_NAMED_ELEMENT__FILE;
+
+	/**
+	 * The feature id for the '<em><b>Tag</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SIMK_MODEL__TAG = SM_NAMED_ELEMENT__TAG;
 
 	/**
 	 * The feature id for the '<em><b>File Name</b></em>' attribute.
@@ -208,6 +217,15 @@ public interface SimkPackage extends EPackage {
 	 * @ordered
 	 */
 	int SIMK_MODEL__OID = SM_NAMED_ELEMENT__OID;
+
+	/**
+	 * The feature id for the '<em><b>Internal Containing Resource</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SIMK_MODEL__INTERNAL_CONTAINING_RESOURCE = SM_NAMED_ELEMENT__INTERNAL_CONTAINING_RESOURCE;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -256,15 +274,6 @@ public interface SimkPackage extends EPackage {
 	int SM_CLASS = 1;
 
 	/**
-	 * The feature id for the '<em><b>Tag</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SM_CLASS__TAG = SM_NAMED_ELEMENT__TAG;
-
-	/**
 	 * The feature id for the '<em><b>File</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -272,6 +281,15 @@ public interface SimkPackage extends EPackage {
 	 * @ordered
 	 */
 	int SM_CLASS__FILE = SM_NAMED_ELEMENT__FILE;
+
+	/**
+	 * The feature id for the '<em><b>Tag</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SM_CLASS__TAG = SM_NAMED_ELEMENT__TAG;
 
 	/**
 	 * The feature id for the '<em><b>File Name</b></em>' attribute.
@@ -308,6 +326,15 @@ public interface SimkPackage extends EPackage {
 	 * @ordered
 	 */
 	int SM_CLASS__OID = SM_NAMED_ELEMENT__OID;
+
+	/**
+	 * The feature id for the '<em><b>Internal Containing Resource</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SM_CLASS__INTERNAL_CONTAINING_RESOURCE = SM_NAMED_ELEMENT__INTERNAL_CONTAINING_RESOURCE;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -356,15 +383,6 @@ public interface SimkPackage extends EPackage {
 	int SM_METHOD = 2;
 
 	/**
-	 * The feature id for the '<em><b>Tag</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SM_METHOD__TAG = SM_NAMED_ELEMENT__TAG;
-
-	/**
 	 * The feature id for the '<em><b>File</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -372,6 +390,15 @@ public interface SimkPackage extends EPackage {
 	 * @ordered
 	 */
 	int SM_METHOD__FILE = SM_NAMED_ELEMENT__FILE;
+
+	/**
+	 * The feature id for the '<em><b>Tag</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SM_METHOD__TAG = SM_NAMED_ELEMENT__TAG;
 
 	/**
 	 * The feature id for the '<em><b>File Name</b></em>' attribute.
@@ -408,6 +435,15 @@ public interface SimkPackage extends EPackage {
 	 * @ordered
 	 */
 	int SM_METHOD__OID = SM_NAMED_ELEMENT__OID;
+
+	/**
+	 * The feature id for the '<em><b>Internal Containing Resource</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SM_METHOD__INTERNAL_CONTAINING_RESOURCE = SM_NAMED_ELEMENT__INTERNAL_CONTAINING_RESOURCE;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -455,22 +491,22 @@ public interface SimkPackage extends EPackage {
 	int SM_METHOD__STATIC = SM_NAMED_ELEMENT_FEATURE_COUNT + 3;
 
 	/**
-	 * The feature id for the '<em><b>Type Parameters</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SM_METHOD__TYPE_PARAMETERS = SM_NAMED_ELEMENT_FEATURE_COUNT + 4;
-
-	/**
 	 * The feature id for the '<em><b>Parent EOperation</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int SM_METHOD__PARENT_EOPERATION = SM_NAMED_ELEMENT_FEATURE_COUNT + 5;
+	int SM_METHOD__PARENT_EOPERATION = SM_NAMED_ELEMENT_FEATURE_COUNT + 4;
+
+	/**
+	 * The feature id for the '<em><b>Type Parameters</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SM_METHOD__TYPE_PARAMETERS = SM_NAMED_ELEMENT_FEATURE_COUNT + 5;
 
 	/**
 	 * The feature id for the '<em><b>Parent EAttribute</b></em>' reference.
@@ -500,22 +536,22 @@ public interface SimkPackage extends EPackage {
 	int SM_METHOD__SM_RETURN = SM_NAMED_ELEMENT_FEATURE_COUNT + 8;
 
 	/**
-	 * The feature id for the '<em><b>SM Context</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SM_METHOD__SM_CONTEXT = SM_NAMED_ELEMENT_FEATURE_COUNT + 9;
-
-	/**
 	 * The feature id for the '<em><b>Usages</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int SM_METHOD__USAGES = SM_NAMED_ELEMENT_FEATURE_COUNT + 10;
+	int SM_METHOD__USAGES = SM_NAMED_ELEMENT_FEATURE_COUNT + 9;
+
+	/**
+	 * The feature id for the '<em><b>SM Context</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SM_METHOD__SM_CONTEXT = SM_NAMED_ELEMENT_FEATURE_COUNT + 10;
 
 	/**
 	 * The feature id for the '<em><b>Access</b></em>' attribute.
@@ -546,15 +582,6 @@ public interface SimkPackage extends EPackage {
 	int SM_CONTEXT = 3;
 
 	/**
-	 * The feature id for the '<em><b>Tag</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SM_CONTEXT__TAG = StructurePackage.OBJECT__TAG;
-
-	/**
 	 * The feature id for the '<em><b>File</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -562,6 +589,15 @@ public interface SimkPackage extends EPackage {
 	 * @ordered
 	 */
 	int SM_CONTEXT__FILE = StructurePackage.OBJECT__FILE;
+
+	/**
+	 * The feature id for the '<em><b>Tag</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SM_CONTEXT__TAG = StructurePackage.OBJECT__TAG;
 
 	/**
 	 * The feature id for the '<em><b>File Name</b></em>' attribute.
@@ -598,6 +634,15 @@ public interface SimkPackage extends EPackage {
 	 * @ordered
 	 */
 	int SM_CONTEXT__OID = StructurePackage.OBJECT__OID;
+
+	/**
+	 * The feature id for the '<em><b>Internal Containing Resource</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SM_CONTEXT__INTERNAL_CONTAINING_RESOURCE = StructurePackage.OBJECT__INTERNAL_CONTAINING_RESOURCE;
 
 	/**
 	 * The feature id for the '<em><b>SM Class</b></em>' containment reference.
@@ -646,15 +691,6 @@ public interface SimkPackage extends EPackage {
 	int SM_PARAMETER = 5;
 
 	/**
-	 * The feature id for the '<em><b>Tag</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SM_PARAMETER__TAG = SM_NAMED_ELEMENT__TAG;
-
-	/**
 	 * The feature id for the '<em><b>File</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -662,6 +698,15 @@ public interface SimkPackage extends EPackage {
 	 * @ordered
 	 */
 	int SM_PARAMETER__FILE = SM_NAMED_ELEMENT__FILE;
+
+	/**
+	 * The feature id for the '<em><b>Tag</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SM_PARAMETER__TAG = SM_NAMED_ELEMENT__TAG;
 
 	/**
 	 * The feature id for the '<em><b>File Name</b></em>' attribute.
@@ -698,6 +743,15 @@ public interface SimkPackage extends EPackage {
 	 * @ordered
 	 */
 	int SM_PARAMETER__OID = SM_NAMED_ELEMENT__OID;
+
+	/**
+	 * The feature id for the '<em><b>Internal Containing Resource</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SM_PARAMETER__INTERNAL_CONTAINING_RESOURCE = SM_NAMED_ELEMENT__INTERNAL_CONTAINING_RESOURCE;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -737,15 +791,6 @@ public interface SimkPackage extends EPackage {
 	int SM_TYPED_ELEMENT = 6;
 
 	/**
-	 * The feature id for the '<em><b>Tag</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SM_TYPED_ELEMENT__TAG = StructurePackage.OBJECT__TAG;
-
-	/**
 	 * The feature id for the '<em><b>File</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -753,6 +798,15 @@ public interface SimkPackage extends EPackage {
 	 * @ordered
 	 */
 	int SM_TYPED_ELEMENT__FILE = StructurePackage.OBJECT__FILE;
+
+	/**
+	 * The feature id for the '<em><b>Tag</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SM_TYPED_ELEMENT__TAG = StructurePackage.OBJECT__TAG;
 
 	/**
 	 * The feature id for the '<em><b>File Name</b></em>' attribute.
@@ -791,6 +845,15 @@ public interface SimkPackage extends EPackage {
 	int SM_TYPED_ELEMENT__OID = StructurePackage.OBJECT__OID;
 
 	/**
+	 * The feature id for the '<em><b>Internal Containing Resource</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SM_TYPED_ELEMENT__INTERNAL_CONTAINING_RESOURCE = StructurePackage.OBJECT__INTERNAL_CONTAINING_RESOURCE;
+
+	/**
 	 * The feature id for the '<em><b>Type</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -819,15 +882,6 @@ public interface SimkPackage extends EPackage {
 	int SM_RETURN = 7;
 
 	/**
-	 * The feature id for the '<em><b>Tag</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SM_RETURN__TAG = SM_TYPED_ELEMENT__TAG;
-
-	/**
 	 * The feature id for the '<em><b>File</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -835,6 +889,15 @@ public interface SimkPackage extends EPackage {
 	 * @ordered
 	 */
 	int SM_RETURN__FILE = SM_TYPED_ELEMENT__FILE;
+
+	/**
+	 * The feature id for the '<em><b>Tag</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SM_RETURN__TAG = SM_TYPED_ELEMENT__TAG;
 
 	/**
 	 * The feature id for the '<em><b>File Name</b></em>' attribute.
@@ -871,6 +934,15 @@ public interface SimkPackage extends EPackage {
 	 * @ordered
 	 */
 	int SM_RETURN__OID = SM_TYPED_ELEMENT__OID;
+
+	/**
+	 * The feature id for the '<em><b>Internal Containing Resource</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SM_RETURN__INTERNAL_CONTAINING_RESOURCE = SM_TYPED_ELEMENT__INTERNAL_CONTAINING_RESOURCE;
 
 	/**
 	 * The feature id for the '<em><b>Type</b></em>' attribute.
@@ -1029,17 +1101,6 @@ public interface SimkPackage extends EPackage {
 	EAttribute getSMMethod__static();
 
 	/**
-	 * Returns the meta object for the attribute '{@link simk.SMMethod#getTypeParameters <em>Type Parameters</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Type Parameters</em>'.
-	 * @see simk.SMMethod#getTypeParameters()
-	 * @see #getSMMethod()
-	 * @generated
-	 */
-	EAttribute getSMMethod_TypeParameters();
-
-	/**
 	 * Returns the meta object for the reference '{@link simk.SMMethod#getParentEOperation <em>Parent EOperation</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1049,6 +1110,17 @@ public interface SimkPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getSMMethod_ParentEOperation();
+
+	/**
+	 * Returns the meta object for the attribute '{@link simk.SMMethod#getTypeParameters <em>Type Parameters</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Type Parameters</em>'.
+	 * @see simk.SMMethod#getTypeParameters()
+	 * @see #getSMMethod()
+	 * @generated
+	 */
+	EAttribute getSMMethod_TypeParameters();
 
 	/**
 	 * Returns the meta object for the reference '{@link simk.SMMethod#getParentEAttribute <em>Parent EAttribute</em>}'.
@@ -1084,17 +1156,6 @@ public interface SimkPackage extends EPackage {
 	EReference getSMMethod_SMReturn();
 
 	/**
-	 * Returns the meta object for the reference '{@link simk.SMMethod#getSMContext <em>SM Context</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>SM Context</em>'.
-	 * @see simk.SMMethod#getSMContext()
-	 * @see #getSMMethod()
-	 * @generated
-	 */
-	EReference getSMMethod_SMContext();
-
-	/**
 	 * Returns the meta object for the attribute '{@link simk.SMMethod#getUsages <em>Usages</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1104,6 +1165,17 @@ public interface SimkPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getSMMethod_Usages();
+
+	/**
+	 * Returns the meta object for the reference '{@link simk.SMMethod#getSMContext <em>SM Context</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>SM Context</em>'.
+	 * @see simk.SMMethod#getSMContext()
+	 * @see #getSMMethod()
+	 * @generated
+	 */
+	EReference getSMMethod_SMContext();
 
 	/**
 	 * Returns the meta object for the attribute '{@link simk.SMMethod#getAccess <em>Access</em>}'.
@@ -1360,15 +1432,6 @@ public interface SimkPackage extends EPackage {
 		EAttribute SM_METHOD__STATIC = eINSTANCE.getSMMethod__static();
 
 		/**
-		 * The meta object literal for the '<em><b>Type Parameters</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute SM_METHOD__TYPE_PARAMETERS = eINSTANCE
-				.getSMMethod_TypeParameters();
-
-		/**
 		 * The meta object literal for the '<em><b>Parent EOperation</b></em>' reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -1376,6 +1439,15 @@ public interface SimkPackage extends EPackage {
 		 */
 		EReference SM_METHOD__PARENT_EOPERATION = eINSTANCE
 				.getSMMethod_ParentEOperation();
+
+		/**
+		 * The meta object literal for the '<em><b>Type Parameters</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute SM_METHOD__TYPE_PARAMETERS = eINSTANCE
+				.getSMMethod_TypeParameters();
 
 		/**
 		 * The meta object literal for the '<em><b>Parent EAttribute</b></em>' reference feature.
@@ -1404,20 +1476,20 @@ public interface SimkPackage extends EPackage {
 		EReference SM_METHOD__SM_RETURN = eINSTANCE.getSMMethod_SMReturn();
 
 		/**
-		 * The meta object literal for the '<em><b>SM Context</b></em>' reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference SM_METHOD__SM_CONTEXT = eINSTANCE.getSMMethod_SMContext();
-
-		/**
 		 * The meta object literal for the '<em><b>Usages</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
 		EAttribute SM_METHOD__USAGES = eINSTANCE.getSMMethod_Usages();
+
+		/**
+		 * The meta object literal for the '<em><b>SM Context</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference SM_METHOD__SM_CONTEXT = eINSTANCE.getSMMethod_SMContext();
 
 		/**
 		 * The meta object literal for the '<em><b>Access</b></em>' attribute feature.

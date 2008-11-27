@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: BooleanImpl.java,v 1.3 2008-11-07 08:53:30 cfaucher Exp $
+ * $Id: BooleanImpl.java,v 1.4 2008-11-27 15:49:56 cfaucher Exp $
  */
 package kermeta.standard.impl;
 

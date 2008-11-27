@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: JavaFactoryImpl.java,v 1.8 2008-11-07 08:53:49 cfaucher Exp $
+ * $Id: JavaFactoryImpl.java,v 1.9 2008-11-27 15:50:06 cfaucher Exp $
  */
 package km2ecore.helper.java.impl;
 

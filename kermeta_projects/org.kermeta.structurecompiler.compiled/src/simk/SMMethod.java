@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: SMMethod.java,v 1.5 2008-11-07 08:54:03 cfaucher Exp $
+ * $Id: SMMethod.java,v 1.6 2008-11-27 15:50:13 cfaucher Exp $
  */
 package simk;
 
@@ -24,13 +24,13 @@ import org.eclipse.emf.common.util.EList;
  *   <li>{@link simk.SMMethod#getBody <em>Body</em>}</li>
  *   <li>{@link simk.SMMethod#getParentEReference <em>Parent EReference</em>}</li>
  *   <li>{@link simk.SMMethod#is_static <em>static</em>}</li>
- *   <li>{@link simk.SMMethod#getTypeParameters <em>Type Parameters</em>}</li>
  *   <li>{@link simk.SMMethod#getParentEOperation <em>Parent EOperation</em>}</li>
+ *   <li>{@link simk.SMMethod#getTypeParameters <em>Type Parameters</em>}</li>
  *   <li>{@link simk.SMMethod#getParentEAttribute <em>Parent EAttribute</em>}</li>
  *   <li>{@link simk.SMMethod#getSMParameters <em>SM Parameters</em>}</li>
  *   <li>{@link simk.SMMethod#getSMReturn <em>SM Return</em>}</li>
- *   <li>{@link simk.SMMethod#getSMContext <em>SM Context</em>}</li>
  *   <li>{@link simk.SMMethod#getUsages <em>Usages</em>}</li>
+ *   <li>{@link simk.SMMethod#getSMContext <em>SM Context</em>}</li>
  *   <li>{@link simk.SMMethod#getAccess <em>Access</em>}</li>
  * </ul>
  * </p>
@@ -147,32 +147,6 @@ public interface SMMethod extends SMNamedElement {
 	void set_static(boolean value);
 
 	/**
-	 * Returns the value of the '<em><b>Type Parameters</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Type Parameters</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Type Parameters</em>' attribute.
-	 * @see #setTypeParameters(String)
-	 * @see simk.SimkPackage#getSMMethod_TypeParameters()
-	 * @model dataType="ecore.EString"
-	 * @generated
-	 */
-	String getTypeParameters();
-
-	/**
-	 * Sets the value of the '{@link simk.SMMethod#getTypeParameters <em>Type Parameters</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Type Parameters</em>' attribute.
-	 * @see #getTypeParameters()
-	 * @generated
-	 */
-	void setTypeParameters(String value);
-
-	/**
 	 * Returns the value of the '<em><b>Parent EOperation</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
@@ -197,6 +171,32 @@ public interface SMMethod extends SMNamedElement {
 	 * @generated
 	 */
 	void setParentEOperation(EOperation value);
+
+	/**
+	 * Returns the value of the '<em><b>Type Parameters</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Type Parameters</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Type Parameters</em>' attribute.
+	 * @see #setTypeParameters(String)
+	 * @see simk.SimkPackage#getSMMethod_TypeParameters()
+	 * @model dataType="ecore.EString"
+	 * @generated
+	 */
+	String getTypeParameters();
+
+	/**
+	 * Sets the value of the '{@link simk.SMMethod#getTypeParameters <em>Type Parameters</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Type Parameters</em>' attribute.
+	 * @see #getTypeParameters()
+	 * @generated
+	 */
+	void setTypeParameters(String value);
 
 	/**
 	 * Returns the value of the '<em><b>Parent EAttribute</b></em>' reference.
@@ -267,34 +267,6 @@ public interface SMMethod extends SMNamedElement {
 	void setSMReturn(SMReturn value);
 
 	/**
-	 * Returns the value of the '<em><b>SM Context</b></em>' reference.
-	 * It is bidirectional and its opposite is '{@link simk.SMContext#getSMMethods <em>SM Methods</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>SM Context</em>' reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>SM Context</em>' reference.
-	 * @see #setSMContext(SMContext)
-	 * @see simk.SimkPackage#getSMMethod_SMContext()
-	 * @see simk.SMContext#getSMMethods
-	 * @model opposite="sMMethods"
-	 * @generated
-	 */
-	SMContext getSMContext();
-
-	/**
-	 * Sets the value of the '{@link simk.SMMethod#getSMContext <em>SM Context</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>SM Context</em>' reference.
-	 * @see #getSMContext()
-	 * @generated
-	 */
-	void setSMContext(SMContext value);
-
-	/**
 	 * Returns the value of the '<em><b>Usages</b></em>' attribute.
 	 * The literals are from the enumeration {@link simk.SMUsage}.
 	 * <!-- begin-user-doc -->
@@ -322,6 +294,34 @@ public interface SMMethod extends SMNamedElement {
 	 * @generated
 	 */
 	void setUsages(SMUsage value);
+
+	/**
+	 * Returns the value of the '<em><b>SM Context</b></em>' reference.
+	 * It is bidirectional and its opposite is '{@link simk.SMContext#getSMMethods <em>SM Methods</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>SM Context</em>' reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>SM Context</em>' reference.
+	 * @see #setSMContext(SMContext)
+	 * @see simk.SimkPackage#getSMMethod_SMContext()
+	 * @see simk.SMContext#getSMMethods
+	 * @model opposite="sMMethods"
+	 * @generated
+	 */
+	SMContext getSMContext();
+
+	/**
+	 * Sets the value of the '{@link simk.SMMethod#getSMContext <em>SM Context</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>SM Context</em>' reference.
+	 * @see #getSMContext()
+	 * @generated
+	 */
+	void setSMContext(SMContext value);
 
 	/**
 	 * Returns the value of the '<em><b>Access</b></em>' attribute.

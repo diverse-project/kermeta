@@ -2,17 +2,25 @@
  * <copyright>
  * </copyright>
  *
- * $Id: IoPackageImpl.java,v 1.8 2008-11-07 08:53:17 cfaucher Exp $
+ * $Id: IoPackageImpl.java,v 1.9 2008-11-27 15:49:53 cfaucher Exp $
  */
 package kermeta.io.impl;
+
+import kermeta.KermetaPackage;
 
 import kermeta.compiler.CompilerPackage;
 
 import kermeta.compiler.impl.CompilerPackageImpl;
 
+import kermeta.ecore.EcorePackage;
+
+import kermeta.ecore.impl.EcorePackageImpl;
+
 import kermeta.exceptions.ExceptionsPackage;
 
 import kermeta.exceptions.impl.ExceptionsPackageImpl;
+
+import kermeta.impl.KermetaPackageImpl;
 
 import kermeta.interpreter.InterpreterPackage;
 
@@ -61,17 +69,9 @@ import km2ecore.common.exception.impl.ExceptionPackageImpl;
 
 import km2ecore.common.impl.CommonPackageImpl;
 
-import km2ecore.helper.ecore.EcorePackage;
-
-import km2ecore.helper.ecore.impl.EcorePackageImpl;
-
 import km2ecore.helper.java.JavaPackage;
 
 import km2ecore.helper.java.impl.JavaPackageImpl;
-
-import km2ecore.helper.kermeta.KermetaPackage;
-
-import km2ecore.helper.kermeta.impl.KermetaPackageImpl;
 
 import km2ecore.impl.Km2ecorePackageImpl;
 
@@ -101,14 +101,14 @@ public class IoPackageImpl extends EPackageImpl implements IoPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass fileIOEClass = null;
+	private EClass stdIOEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass stdIOEClass = null;
+	private EClass fileIOEClass = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -172,34 +172,10 @@ public class IoPackageImpl extends EPackageImpl implements IoPackage {
 		isInited = true;
 
 		// Obtain or create and register interdependencies
-		Km2ecorePackageImpl theKm2ecorePackage = (Km2ecorePackageImpl) (EPackage.Registry.INSTANCE
-				.getEPackage(Km2ecorePackage.eNS_URI) instanceof Km2ecorePackageImpl ? EPackage.Registry.INSTANCE
-				.getEPackage(Km2ecorePackage.eNS_URI)
-				: Km2ecorePackage.eINSTANCE);
-		EcorePackageImpl theEcorePackage = (EcorePackageImpl) (EPackage.Registry.INSTANCE
-				.getEPackage(EcorePackage.eNS_URI) instanceof EcorePackageImpl ? EPackage.Registry.INSTANCE
-				.getEPackage(EcorePackage.eNS_URI)
-				: EcorePackage.eINSTANCE);
-		JavaPackageImpl theJavaPackage = (JavaPackageImpl) (EPackage.Registry.INSTANCE
-				.getEPackage(JavaPackage.eNS_URI) instanceof JavaPackageImpl ? EPackage.Registry.INSTANCE
-				.getEPackage(JavaPackage.eNS_URI)
-				: JavaPackage.eINSTANCE);
 		KermetaPackageImpl theKermetaPackage = (KermetaPackageImpl) (EPackage.Registry.INSTANCE
 				.getEPackage(KermetaPackage.eNS_URI) instanceof KermetaPackageImpl ? EPackage.Registry.INSTANCE
 				.getEPackage(KermetaPackage.eNS_URI)
 				: KermetaPackage.eINSTANCE);
-		CommonPackageImpl theCommonPackage = (CommonPackageImpl) (EPackage.Registry.INSTANCE
-				.getEPackage(CommonPackage.eNS_URI) instanceof CommonPackageImpl ? EPackage.Registry.INSTANCE
-				.getEPackage(CommonPackage.eNS_URI)
-				: CommonPackage.eINSTANCE);
-		ExceptionPackageImpl theExceptionPackage = (ExceptionPackageImpl) (EPackage.Registry.INSTANCE
-				.getEPackage(ExceptionPackage.eNS_URI) instanceof ExceptionPackageImpl ? EPackage.Registry.INSTANCE
-				.getEPackage(ExceptionPackage.eNS_URI)
-				: ExceptionPackage.eINSTANCE);
-		kermeta.impl.KermetaPackageImpl theKermetaPackage_1 = (kermeta.impl.KermetaPackageImpl) (EPackage.Registry.INSTANCE
-				.getEPackage(kermeta.KermetaPackage.eNS_URI) instanceof kermeta.impl.KermetaPackageImpl ? EPackage.Registry.INSTANCE
-				.getEPackage(kermeta.KermetaPackage.eNS_URI)
-				: kermeta.KermetaPackage.eINSTANCE);
 		LanguagePackageImpl theLanguagePackage = (LanguagePackageImpl) (EPackage.Registry.INSTANCE
 				.getEPackage(LanguagePackage.eNS_URI) instanceof LanguagePackageImpl ? EPackage.Registry.INSTANCE
 				.getEPackage(LanguagePackage.eNS_URI)
@@ -212,6 +188,14 @@ public class IoPackageImpl extends EPackageImpl implements IoPackage {
 				.getEPackage(BehaviorPackage.eNS_URI) instanceof BehaviorPackageImpl ? EPackage.Registry.INSTANCE
 				.getEPackage(BehaviorPackage.eNS_URI)
 				: BehaviorPackage.eINSTANCE);
+		CompilerPackageImpl theCompilerPackage = (CompilerPackageImpl) (EPackage.Registry.INSTANCE
+				.getEPackage(CompilerPackage.eNS_URI) instanceof CompilerPackageImpl ? EPackage.Registry.INSTANCE
+				.getEPackage(CompilerPackage.eNS_URI)
+				: CompilerPackage.eINSTANCE);
+		KunitPackageImpl theKunitPackage = (KunitPackageImpl) (EPackage.Registry.INSTANCE
+				.getEPackage(KunitPackage.eNS_URI) instanceof KunitPackageImpl ? EPackage.Registry.INSTANCE
+				.getEPackage(KunitPackage.eNS_URI)
+				: KunitPackage.eINSTANCE);
 		StandardPackageImpl theStandardPackage = (StandardPackageImpl) (EPackage.Registry.INSTANCE
 				.getEPackage(StandardPackage.eNS_URI) instanceof StandardPackageImpl ? EPackage.Registry.INSTANCE
 				.getEPackage(StandardPackage.eNS_URI)
@@ -220,30 +204,50 @@ public class IoPackageImpl extends EPackageImpl implements IoPackage {
 				.getEPackage(ExceptionsPackage.eNS_URI) instanceof ExceptionsPackageImpl ? EPackage.Registry.INSTANCE
 				.getEPackage(ExceptionsPackage.eNS_URI)
 				: ExceptionsPackage.eINSTANCE);
-		PersistencePackageImpl thePersistencePackage = (PersistencePackageImpl) (EPackage.Registry.INSTANCE
-				.getEPackage(PersistencePackage.eNS_URI) instanceof PersistencePackageImpl ? EPackage.Registry.INSTANCE
-				.getEPackage(PersistencePackage.eNS_URI)
-				: PersistencePackage.eINSTANCE);
 		UtilsPackageImpl theUtilsPackage = (UtilsPackageImpl) (EPackage.Registry.INSTANCE
 				.getEPackage(UtilsPackage.eNS_URI) instanceof UtilsPackageImpl ? EPackage.Registry.INSTANCE
 				.getEPackage(UtilsPackage.eNS_URI)
 				: UtilsPackage.eINSTANCE);
-		kermeta.ecore.impl.EcorePackageImpl theEcorePackage_1 = (kermeta.ecore.impl.EcorePackageImpl) (EPackage.Registry.INSTANCE
-				.getEPackage(kermeta.ecore.EcorePackage.eNS_URI) instanceof kermeta.ecore.impl.EcorePackageImpl ? EPackage.Registry.INSTANCE
-				.getEPackage(kermeta.ecore.EcorePackage.eNS_URI)
-				: kermeta.ecore.EcorePackage.eINSTANCE);
+		PersistencePackageImpl thePersistencePackage = (PersistencePackageImpl) (EPackage.Registry.INSTANCE
+				.getEPackage(PersistencePackage.eNS_URI) instanceof PersistencePackageImpl ? EPackage.Registry.INSTANCE
+				.getEPackage(PersistencePackage.eNS_URI)
+				: PersistencePackage.eINSTANCE);
+		EcorePackageImpl theEcorePackage = (EcorePackageImpl) (EPackage.Registry.INSTANCE
+				.getEPackage(EcorePackage.eNS_URI) instanceof EcorePackageImpl ? EPackage.Registry.INSTANCE
+				.getEPackage(EcorePackage.eNS_URI)
+				: EcorePackage.eINSTANCE);
 		InterpreterPackageImpl theInterpreterPackage = (InterpreterPackageImpl) (EPackage.Registry.INSTANCE
 				.getEPackage(InterpreterPackage.eNS_URI) instanceof InterpreterPackageImpl ? EPackage.Registry.INSTANCE
 				.getEPackage(InterpreterPackage.eNS_URI)
 				: InterpreterPackage.eINSTANCE);
-		KunitPackageImpl theKunitPackage = (KunitPackageImpl) (EPackage.Registry.INSTANCE
-				.getEPackage(KunitPackage.eNS_URI) instanceof KunitPackageImpl ? EPackage.Registry.INSTANCE
-				.getEPackage(KunitPackage.eNS_URI)
-				: KunitPackage.eINSTANCE);
-		CompilerPackageImpl theCompilerPackage = (CompilerPackageImpl) (EPackage.Registry.INSTANCE
-				.getEPackage(CompilerPackage.eNS_URI) instanceof CompilerPackageImpl ? EPackage.Registry.INSTANCE
-				.getEPackage(CompilerPackage.eNS_URI)
-				: CompilerPackage.eINSTANCE);
+		Km2ecorePackageImpl theKm2ecorePackage = (Km2ecorePackageImpl) (EPackage.Registry.INSTANCE
+				.getEPackage(Km2ecorePackage.eNS_URI) instanceof Km2ecorePackageImpl ? EPackage.Registry.INSTANCE
+				.getEPackage(Km2ecorePackage.eNS_URI)
+				: Km2ecorePackage.eINSTANCE);
+		km2ecore.helper.ecore.impl.EcorePackageImpl theEcorePackage_1 = (km2ecore.helper.ecore.impl.EcorePackageImpl) (EPackage.Registry.INSTANCE
+				.getEPackage(km2ecore.helper.ecore.EcorePackage.eNS_URI) instanceof km2ecore.helper.ecore.impl.EcorePackageImpl ? EPackage.Registry.INSTANCE
+				.getEPackage(km2ecore.helper.ecore.EcorePackage.eNS_URI)
+				: km2ecore.helper.ecore.EcorePackage.eINSTANCE);
+		km2ecore.helper.kermeta.impl.KermetaPackageImpl theKermetaPackage_1 = (km2ecore.helper.kermeta.impl.KermetaPackageImpl) (EPackage.Registry.INSTANCE
+				.getEPackage(km2ecore.helper.kermeta.KermetaPackage.eNS_URI) instanceof km2ecore.helper.kermeta.impl.KermetaPackageImpl ? EPackage.Registry.INSTANCE
+				.getEPackage(km2ecore.helper.kermeta.KermetaPackage.eNS_URI)
+				: km2ecore.helper.kermeta.KermetaPackage.eINSTANCE);
+		JavaPackageImpl theJavaPackage = (JavaPackageImpl) (EPackage.Registry.INSTANCE
+				.getEPackage(JavaPackage.eNS_URI) instanceof JavaPackageImpl ? EPackage.Registry.INSTANCE
+				.getEPackage(JavaPackage.eNS_URI)
+				: JavaPackage.eINSTANCE);
+		CommonPackageImpl theCommonPackage = (CommonPackageImpl) (EPackage.Registry.INSTANCE
+				.getEPackage(CommonPackage.eNS_URI) instanceof CommonPackageImpl ? EPackage.Registry.INSTANCE
+				.getEPackage(CommonPackage.eNS_URI)
+				: CommonPackage.eINSTANCE);
+		ExceptionPackageImpl theExceptionPackage = (ExceptionPackageImpl) (EPackage.Registry.INSTANCE
+				.getEPackage(ExceptionPackage.eNS_URI) instanceof ExceptionPackageImpl ? EPackage.Registry.INSTANCE
+				.getEPackage(ExceptionPackage.eNS_URI)
+				: ExceptionPackage.eINSTANCE);
+		TraceabilityPackageImpl theTraceabilityPackage = (TraceabilityPackageImpl) (EPackage.Registry.INSTANCE
+				.getEPackage(TraceabilityPackage.eNS_URI) instanceof TraceabilityPackageImpl ? EPackage.Registry.INSTANCE
+				.getEPackage(TraceabilityPackage.eNS_URI)
+				: TraceabilityPackage.eINSTANCE);
 		SimkPackageImpl theSimkPackage = (SimkPackageImpl) (EPackage.Registry.INSTANCE
 				.getEPackage(SimkPackage.eNS_URI) instanceof SimkPackageImpl ? EPackage.Registry.INSTANCE
 				.getEPackage(SimkPackage.eNS_URI)
@@ -252,58 +256,54 @@ public class IoPackageImpl extends EPackageImpl implements IoPackage {
 				.getEPackage(ecore.EcorePackage.eNS_URI) instanceof ecore.impl.EcorePackageImpl ? EPackage.Registry.INSTANCE
 				.getEPackage(ecore.EcorePackage.eNS_URI)
 				: ecore.EcorePackage.eINSTANCE);
-		TraceabilityPackageImpl theTraceabilityPackage = (TraceabilityPackageImpl) (EPackage.Registry.INSTANCE
-				.getEPackage(TraceabilityPackage.eNS_URI) instanceof TraceabilityPackageImpl ? EPackage.Registry.INSTANCE
-				.getEPackage(TraceabilityPackage.eNS_URI)
-				: TraceabilityPackage.eINSTANCE);
 
 		// Create package meta-data objects
 		theIoPackage.createPackageContents();
-		theKm2ecorePackage.createPackageContents();
-		theEcorePackage.createPackageContents();
-		theJavaPackage.createPackageContents();
 		theKermetaPackage.createPackageContents();
-		theCommonPackage.createPackageContents();
-		theExceptionPackage.createPackageContents();
-		theKermetaPackage_1.createPackageContents();
 		theLanguagePackage.createPackageContents();
 		theStructurePackage.createPackageContents();
 		theBehaviorPackage.createPackageContents();
+		theCompilerPackage.createPackageContents();
+		theKunitPackage.createPackageContents();
 		theStandardPackage.createPackageContents();
 		theExceptionsPackage.createPackageContents();
-		thePersistencePackage.createPackageContents();
 		theUtilsPackage.createPackageContents();
-		theEcorePackage_1.createPackageContents();
+		thePersistencePackage.createPackageContents();
+		theEcorePackage.createPackageContents();
 		theInterpreterPackage.createPackageContents();
-		theKunitPackage.createPackageContents();
-		theCompilerPackage.createPackageContents();
+		theKm2ecorePackage.createPackageContents();
+		theEcorePackage_1.createPackageContents();
+		theKermetaPackage_1.createPackageContents();
+		theJavaPackage.createPackageContents();
+		theCommonPackage.createPackageContents();
+		theExceptionPackage.createPackageContents();
+		theTraceabilityPackage.createPackageContents();
 		theSimkPackage.createPackageContents();
 		theEcorePackage_2.createPackageContents();
-		theTraceabilityPackage.createPackageContents();
 
 		// Initialize created meta-data
 		theIoPackage.initializePackageContents();
-		theKm2ecorePackage.initializePackageContents();
-		theEcorePackage.initializePackageContents();
-		theJavaPackage.initializePackageContents();
 		theKermetaPackage.initializePackageContents();
-		theCommonPackage.initializePackageContents();
-		theExceptionPackage.initializePackageContents();
-		theKermetaPackage_1.initializePackageContents();
 		theLanguagePackage.initializePackageContents();
 		theStructurePackage.initializePackageContents();
 		theBehaviorPackage.initializePackageContents();
+		theCompilerPackage.initializePackageContents();
+		theKunitPackage.initializePackageContents();
 		theStandardPackage.initializePackageContents();
 		theExceptionsPackage.initializePackageContents();
-		thePersistencePackage.initializePackageContents();
 		theUtilsPackage.initializePackageContents();
-		theEcorePackage_1.initializePackageContents();
+		thePersistencePackage.initializePackageContents();
+		theEcorePackage.initializePackageContents();
 		theInterpreterPackage.initializePackageContents();
-		theKunitPackage.initializePackageContents();
-		theCompilerPackage.initializePackageContents();
+		theKm2ecorePackage.initializePackageContents();
+		theEcorePackage_1.initializePackageContents();
+		theKermetaPackage_1.initializePackageContents();
+		theJavaPackage.initializePackageContents();
+		theCommonPackage.initializePackageContents();
+		theExceptionPackage.initializePackageContents();
+		theTraceabilityPackage.initializePackageContents();
 		theSimkPackage.initializePackageContents();
 		theEcorePackage_2.initializePackageContents();
-		theTraceabilityPackage.initializePackageContents();
 
 		// Mark meta-data to indicate it can't be changed
 		theIoPackage.freeze();
@@ -316,8 +316,8 @@ public class IoPackageImpl extends EPackageImpl implements IoPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getFileIO() {
-		return fileIOEClass;
+	public EClass getStdIO() {
+		return stdIOEClass;
 	}
 
 	/**
@@ -325,8 +325,8 @@ public class IoPackageImpl extends EPackageImpl implements IoPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getStdIO() {
-		return stdIOEClass;
+	public EClass getFileIO() {
+		return fileIOEClass;
 	}
 
 	/**
@@ -358,9 +358,9 @@ public class IoPackageImpl extends EPackageImpl implements IoPackage {
 		isCreated = true;
 
 		// Create classes and their features
-		fileIOEClass = createEClass(FILE_IO);
-
 		stdIOEClass = createEClass(STD_IO);
+
+		fileIOEClass = createEClass(FILE_IO);
 	}
 
 	/**
@@ -398,30 +398,15 @@ public class IoPackageImpl extends EPackageImpl implements IoPackage {
 		// Set bounds for type parameters
 
 		// Add supertypes to classes
-		fileIOEClass.getESuperTypes().add(theStructurePackage.getObject());
 		stdIOEClass.getESuperTypes().add(theStructurePackage.getObject());
+		fileIOEClass.getESuperTypes().add(theStructurePackage.getObject());
 
 		// Initialize classes and features; add operations and parameters
-		initEClass(fileIOEClass, FileIO.class, "FileIO", !IS_ABSTRACT,
-				!IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
-		EOperation op = addEOperation(fileIOEClass, null, "writeTextFile", 0,
-				1, IS_UNIQUE, IS_ORDERED);
-		addEParameter(op, theStandardPackage.getJavaString(), "filename", 0, 1,
-				IS_UNIQUE, IS_ORDERED);
-		addEParameter(op, theStandardPackage.getJavaString(), "text", 0, 1,
-				IS_UNIQUE, IS_ORDERED);
-
-		op = addEOperation(fileIOEClass, theStandardPackage.getJavaString(),
-				"readTextFile", 0, 1, IS_UNIQUE, IS_ORDERED);
-		addEParameter(op, theStandardPackage.getJavaString(), "filename", 0, 1,
-				IS_UNIQUE, IS_ORDERED);
-
 		initEClass(stdIOEClass, StdIO.class, "StdIO", !IS_ABSTRACT,
 				!IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
-		op = addEOperation(stdIOEClass, null, "writeln", 0, 1, IS_UNIQUE,
-				IS_ORDERED);
+		EOperation op = addEOperation(stdIOEClass, null, "writeln", 0, 1,
+				IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, theStandardPackage.getJavaString(), "object", 0, 1,
 				IS_UNIQUE, IS_ORDERED);
 
@@ -445,6 +430,21 @@ public class IoPackageImpl extends EPackageImpl implements IoPackage {
 		addEParameter(op, theStandardPackage.getJavaString(), "prompt", 0, 1,
 				IS_UNIQUE, IS_ORDERED);
 
+		initEClass(fileIOEClass, FileIO.class, "FileIO", !IS_ABSTRACT,
+				!IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		op = addEOperation(fileIOEClass, null, "writeTextFile", 0, 1,
+				IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, theStandardPackage.getJavaString(), "filename", 0, 1,
+				IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, theStandardPackage.getJavaString(), "text", 0, 1,
+				IS_UNIQUE, IS_ORDERED);
+
+		op = addEOperation(fileIOEClass, theStandardPackage.getJavaString(),
+				"readTextFile", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, theStandardPackage.getJavaString(), "filename", 0, 1,
+				IS_UNIQUE, IS_ORDERED);
+
 		// Create annotations
 		// kermeta
 		createKermetaAnnotations();
@@ -463,57 +463,51 @@ public class IoPackageImpl extends EPackageImpl implements IoPackage {
 		addAnnotation(
 				this,
 				source,
-				new String[] {
-						"documentation",
-						"/**\r\n * Contains file input/output related classes. \r\n * <img src=\"platform:/plugin/fr.irisa.triskell.kermeta.documentation/src/figures/io_package.png\"/>\r\n */" });
+				new String[] { "documentation",
+						"/**\n * Contains standard input/output related classes. \n */" });
 		addAnnotation(
 				this,
 				source,
-				new String[] { "documentation",
-						"/**\r\n * Contains standard input/output related classes. \r\n */" });
-		addAnnotation(
-				fileIOEClass,
-				source,
 				new String[] {
 						"documentation",
-						"/**\r\n * Implementation of simple helpers to read ans write text files\r\n * <img src=\"platform:/plugin/fr.irisa.triskell.kermeta.documentation/src/figures/io_package.png\"/>\r\n */" });
-		addAnnotation(fileIOEClass.getEOperations().get(0), source,
-				new String[] { "documentation",
-						"/**\r\n\t * Writes a String in a text file\r\n\t */" });
-		addAnnotation(fileIOEClass.getEOperations().get(1), source,
-				new String[] { "documentation",
-						"/**\r\n\t * Reads a text file\r\n\t */" });
+						"/**\n * Contains file input/output related classes. \n * <img src=\"platform:/plugin/fr.irisa.triskell.kermeta.documentation/src/figures/io_package.png\"/>\n */" });
 		addAnnotation(
 				stdIOEClass,
 				source,
 				new String[] {
 						"documentation",
-						"/**\r\n * An implementation of StdIO : standard input/output\r\n * <img src=\"platform:/plugin/fr.irisa.triskell.kermeta.documentation/src/figures/io_package.png\"/>\r\n */" });
+						"/**\n * An implementation of StdIO : standard input/output\n * <img src=\"platform:/plugin/fr.irisa.triskell.kermeta.documentation/src/figures/io_package.png\"/>\n */" });
 		addAnnotation(
 				stdIOEClass.getEOperations().get(0),
 				source,
 				new String[] { "documentation",
-						"/**\r\n\t * Writeln the object to standard output\r\n\t */" });
-		addAnnotation(
-				stdIOEClass.getEOperations().get(1),
-				source,
+						"/**\n\t * Writeln the object to standard output\n\t */" });
+		addAnnotation(stdIOEClass.getEOperations().get(1), source,
 				new String[] { "documentation",
-						"/**\r\n\t * Writeln the object to error output\r\n\t */" });
-		addAnnotation(
-				stdIOEClass.getEOperations().get(2),
-				source,
+						"/**\n\t * Writeln the object to error output\n\t */" });
+		addAnnotation(stdIOEClass.getEOperations().get(2), source,
 				new String[] { "documentation",
-						"/**\r\n\t * Writes the object to error output\r\n\t */" });
+						"/**\n\t * Writes the object to error output\n\t */" });
 		addAnnotation(
 				stdIOEClass.getEOperations().get(3),
 				source,
 				new String[] { "documentation",
-						"/**\r\n\t * Writes the object to standard output\r\n\t */" });
-		addAnnotation(
-				stdIOEClass.getEOperations().get(4),
-				source,
+						"/**\n\t * Writes the object to standard output\n\t */" });
+		addAnnotation(stdIOEClass.getEOperations().get(4), source,
 				new String[] { "documentation",
-						"/**\r\n\t * Reads a String from standard input\r\n\t */" });
+						"/**\n\t * Reads a String from standard input\n\t */" });
+		addAnnotation(
+				fileIOEClass,
+				source,
+				new String[] {
+						"documentation",
+						"/**\n * Implementation of simple helpers to read ans write text files\n * <img src=\"platform:/plugin/fr.irisa.triskell.kermeta.documentation/src/figures/io_package.png\"/>\n */" });
+		addAnnotation(fileIOEClass.getEOperations().get(0), source,
+				new String[] { "documentation",
+						"/**\n\t * Writes a String in a text file\n\t */" });
+		addAnnotation(fileIOEClass.getEOperations().get(1), source,
+				new String[] { "documentation",
+						"/**\n\t * Reads a text file\n\t */" });
 	}
 
 } //IoPackageImpl

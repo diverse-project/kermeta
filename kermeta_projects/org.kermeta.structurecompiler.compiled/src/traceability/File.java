@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: File.java,v 1.8 2008-11-07 08:53:56 cfaucher Exp $
+ * $Id: File.java,v 1.9 2008-11-27 15:50:09 cfaucher Exp $
  */
 package traceability;
 
@@ -80,10 +80,11 @@ public interface File extends kermeta.language.structure.Object {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @model uri_toFindDataType="traceability.String"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='\ntraceability.File result = null;\n\n\ttraceability.File file = null;\n//BIft:detect\n\ntraceability.File result_ft254 = null;\n\n\ttraceability.File elem_ft254 = null;\n\n\tresult_ft254 = null;\n\n\t\n{\n\n\tkermeta.standard.Iterator<traceability.File> it_ft254 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil.<traceability.File>convertAsOrderedSet(traceModel.getFiles()).iterator();\n\tjava.lang.Boolean idLoopCond_1112 = false;\n\twhile( !idLoopCond_1112 ) {\n\tidLoopCond_1112 = kermeta.standard.helper.BooleanWrapper.or(it_ft254.isOff(), org.kermeta.compil.runtime.helper.language.ObjectUtil.isNotEqualSwitcher(result_ft254, null));\n\tif ( idLoopCond_1112 ) {\n\t} else {\n\n\telem_ft254 = it_ft254.next();\n\n\tjava.lang.Boolean idIfCond_1113 = false;\n//BIle:detector\ntraceability.File f_lbdExp254 = elem_ft254;\n\n\tidIfCond_1113 = kermeta.standard.helper.StringWrapper.equals(f_lbdExp254.getUri(), uri_toFind);\n//EIle:detector\n\n\n\tif( idIfCond_1113 ) {\n\n\tresult_ft254 = elem_ft254;\n}\n\n}\n\t}\n}\n\n\n//CE\nfile = result_ft254;\n//EIft:detect\n\n\n\tjava.lang.Boolean idIfCond_1114 = false;\n\tidIfCond_1114 = org.kermeta.compil.runtime.helper.language.ObjectUtil.isVoidSwitcher(file);\n\n\tif( idIfCond_1114 ) {\n\n\tfile = ((traceability.File) org.kermeta.compil.runtime.helper.language.ClassUtil.newObject(\"traceability.File\"));\n\n\tfile.setUri(uri_toFind);\n\n\torg.kermeta.compil.runtime.helper.basetypes.CollectionUtil.<traceability.File>convertAsOrderedSet(traceModel.getFiles()).add(file);\n\n\tfile.setId(org.kermeta.compil.runtime.helper.basetypes.CollectionUtil.<traceability.File>convertAsOrderedSet(traceModel.getFiles()).size());\n}\n\n\n\tresult = file;\n\nreturn result;\n'"
+	 *        annotation="kermeta EMF_renameAs='getFileEMF_renameAs'"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='\ntraceability.File result = null;\n\n\ttraceability.File file = null;\n//BIft:detect\n\ntraceability.File result_ft250 = null;\n\n\ttraceability.File elem_ft250 = null;\n\n\tresult_ft250 = null;\n\n\t\n{\n\n\tkermeta.standard.Iterator<traceability.File> it_ft250 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil.<traceability.File>convertAsOrderedSet(traceModel.getFiles()).iterator();\n\tjava.lang.Boolean idLoopCond_1102 = false;\n\twhile( !idLoopCond_1102 ) {\n\tidLoopCond_1102 = kermeta.standard.helper.BooleanWrapper.or(it_ft250.isOff(), org.kermeta.compil.runtime.helper.language.ObjectUtil.isNotEqualSwitcher(result_ft250, null));\n\tif ( idLoopCond_1102 ) {\n\t} else {\n\n\telem_ft250 = it_ft250.next();\n\n\tjava.lang.Boolean idIfCond_1103 = false;\n//BIle:detector\ntraceability.File f_lbdExp250 = elem_ft250;\n\n\tidIfCond_1103 = kermeta.standard.helper.StringWrapper.equals(f_lbdExp250.getUri(), uri_toFind);\n//EIle:detector\n\n\n\tif( idIfCond_1103 ) {\n\n\tresult_ft250 = elem_ft250;\n}\n\n}\n\t}\n}\n\n\n//CE\nfile = result_ft250;\n//EIft:detect\n\n\n\tjava.lang.Boolean idIfCond_1104 = false;\n\tidIfCond_1104 = org.kermeta.compil.runtime.helper.language.ObjectUtil.isVoidSwitcher(file);\n\n\tif( idIfCond_1104 ) {\n\n\tfile = ((traceability.File) org.kermeta.compil.runtime.helper.language.ClassUtil.newObject(\"traceability.File\"));\n\n\tfile.setUri(uri_toFind);\n\n\torg.kermeta.compil.runtime.helper.basetypes.CollectionUtil.<traceability.File>convertAsOrderedSet(traceModel.getFiles()).add(file);\n\n\tfile.setId(org.kermeta.compil.runtime.helper.basetypes.CollectionUtil.<traceability.File>convertAsOrderedSet(traceModel.getFiles()).size());\n}\n\n\n\tresult = file;\n\nreturn result;\n'"
 	 * @generated
 	 */
-	File getFile(TraceModel traceModel, String uri_toFind);
+	File getFileEMF_renameAs(TraceModel traceModel, String uri_toFind);
 
 	/**
 	 * <!-- begin-user-doc -->

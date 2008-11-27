@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: BehaviorFactory.java,v 1.8 2008-11-07 08:52:24 cfaucher Exp $
+ * $Id: BehaviorFactory.java,v 1.9 2008-11-27 15:49:47 cfaucher Exp $
  */
 package kermeta.language.behavior;
 
@@ -27,15 +27,6 @@ public interface BehaviorFactory extends EFactory {
 			.init();
 
 	/**
-	 * Returns a new object of class '<em>Block</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Block</em>'.
-	 * @generated
-	 */
-	Block createBlock();
-
-	/**
 	 * Returns a new object of class '<em>Expression</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -45,13 +36,22 @@ public interface BehaviorFactory extends EFactory {
 	Expression createExpression();
 
 	/**
-	 * Returns a new object of class '<em>Call Variable</em>'.
+	 * Returns a new object of class '<em>Block</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Call Variable</em>'.
+	 * @return a new object of class '<em>Block</em>'.
 	 * @generated
 	 */
-	CallVariable createCallVariable();
+	Block createBlock();
+
+	/**
+	 * Returns a new object of class '<em>Call Expression</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Call Expression</em>'.
+	 * @generated
+	 */
+	CallExpression createCallExpression();
 
 	/**
 	 * Returns a new object of class '<em>Call Feature</em>'.
@@ -63,13 +63,13 @@ public interface BehaviorFactory extends EFactory {
 	CallFeature createCallFeature();
 
 	/**
-	 * Returns a new object of class '<em>Call Expression</em>'.
+	 * Returns a new object of class '<em>Call Variable</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Call Expression</em>'.
+	 * @return a new object of class '<em>Call Variable</em>'.
 	 * @generated
 	 */
-	CallExpression createCallExpression();
+	CallVariable createCallVariable();
 
 	/**
 	 * Returns a new object of class '<em>Call Result</em>'.

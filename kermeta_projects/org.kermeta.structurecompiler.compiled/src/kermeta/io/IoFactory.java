@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: IoFactory.java,v 1.8 2008-11-07 08:54:13 cfaucher Exp $
+ * $Id: IoFactory.java,v 1.9 2008-11-27 15:50:17 cfaucher Exp $
  */
 package kermeta.io;
 
@@ -26,15 +26,6 @@ public interface IoFactory extends EFactory {
 	IoFactory eINSTANCE = kermeta.io.impl.IoFactoryImpl.init();
 
 	/**
-	 * Returns a new object of class '<em>File IO</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>File IO</em>'.
-	 * @generated
-	 */
-	FileIO createFileIO();
-
-	/**
 	 * Returns a new object of class '<em>Std IO</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -42,6 +33,15 @@ public interface IoFactory extends EFactory {
 	 * @generated
 	 */
 	StdIO createStdIO();
+
+	/**
+	 * Returns a new object of class '<em>File IO</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>File IO</em>'.
+	 * @generated
+	 */
+	FileIO createFileIO();
 
 	/**
 	 * Returns the package supported by this factory.

@@ -5,6 +5,10 @@ import kermeta.persistence.EMFRepository;
 import kermeta.persistence.PersistenceFactory;
 import kermeta.persistence.Resource;
 
+import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecoretools.registration.EcoreRegistering;
+import org.eclipse.emf.ecoretools.registration.exceptions.NotValidEPackageURIException;
+
 /**
  * This class is intended to "wrap" the repository management from kermeta.
  */
@@ -29,7 +33,13 @@ public class RepositoryUtil {
     	return null;
     }
 
-
+    /**
+     * 
+     * @param self
+     * @param uri
+     * @param mm_uri
+     * @return
+     */
 	public static Resource createResource(EMFRepository self,
 			String uri, String mm_uri) {
 		Resource resource = PersistenceFactory.eINSTANCE.createEMFResource();
@@ -38,5 +48,21 @@ public class RepositoryUtil {
 		self.getResources().add( resource );
 		return resource;
 	}
+	
+	/**
+	 * 
+	 * @param mm_uri
+	 */
+	public static void registerEcoreFile(String mm_uri) {
+    	
+    	URI ecoreFileUri = URI.createURI(mm_uri);
+    	try {
+			EcoreRegistering.registerPackages(ecoreFileUri);
+		} catch (NotValidEPackageURIException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+    }
     
 }

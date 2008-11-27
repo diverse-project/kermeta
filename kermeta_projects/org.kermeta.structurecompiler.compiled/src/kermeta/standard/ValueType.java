@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ValueType.java,v 1.8 2008-11-07 08:53:24 cfaucher Exp $
+ * $Id: ValueType.java,v 1.9 2008-11-27 15:49:55 cfaucher Exp $
  */
 package kermeta.standard;
 
@@ -14,7 +14,7 @@ package kermeta.standard;
  *
  * @see kermeta.standard.StandardPackage#getValueType()
  * @model abstract="true"
- *        annotation="kermeta documentation='/**\r\n * The abstract class ValueType does not contain any feature.\r\n * However, any instance of a sub-class of ValueType will be passed by value \r\n * instead of by reference for any other objects.\r\n * that means that each time you := such object it will call the clone function associated to it (Not implemented yet except for Integer, String and boolean!!!)\r\n * \r\n \052/'"
+ *        annotation="kermeta documentation='/**\n * The abstract class ValueType does not contain any feature.\n * However, any instance of a sub-class of ValueType will be passed by value \n * instead of by reference for any other objects.\n * that means that each time you := such object it will call the clone function associated to it (Not implemented yet except for Integer, String and boolean!!!)\n * \n \052/'"
  * @generated
  */
 public interface ValueType extends kermeta.language.structure.Object {

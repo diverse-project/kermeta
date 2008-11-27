@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ConstraintViolatedException.java,v 1.6 2008-11-07 08:53:05 cfaucher Exp $
+ * $Id: ConstraintViolatedException.java,v 1.7 2008-11-27 15:49:51 cfaucher Exp $
  */
 package kermeta.exceptions;
 
@@ -35,7 +35,7 @@ public interface ConstraintViolatedException extends
 	 * @return the value of the '<em>Constraint Applied To</em>' reference.
 	 * @see #setConstraintAppliedTo(kermeta.language.structure.Object)
 	 * @see kermeta.exceptions.ExceptionsPackage#getConstraintViolatedException_ConstraintAppliedTo()
-	 * @model annotation="kermeta documentation='/** Object on which the constraint was applied to\r\n\t * On Invariant, we can generally consider this object as the faulty Object\r\n\t \052/'"
+	 * @model annotation="kermeta documentation='/** Object on which the constraint was applied to\n\t * On Invariant, we can generally consider this object as the faulty Object\n\t \052/'"
 	 * @generated
 	 */
 	kermeta.language.structure.Object getConstraintAppliedTo();

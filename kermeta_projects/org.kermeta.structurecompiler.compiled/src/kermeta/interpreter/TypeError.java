@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: TypeError.java,v 1.8 2008-11-07 08:53:43 cfaucher Exp $
+ * $Id: TypeError.java,v 1.9 2008-11-27 15:50:05 cfaucher Exp $
  */
 package kermeta.interpreter;
 
@@ -13,7 +13,7 @@ package kermeta.interpreter;
  *
  *
  * @see kermeta.interpreter.InterpreterPackage#getTypeError()
- * @model annotation="kermeta documentation='/**\r\n * Type errors in a code written in Kermeta\r\n \052/'"
+ * @model annotation="kermeta documentation='/**\n * Type errors in a code written in Kermeta\n \052/'"
  * @generated
  */
 public interface TypeError extends KermetaError {

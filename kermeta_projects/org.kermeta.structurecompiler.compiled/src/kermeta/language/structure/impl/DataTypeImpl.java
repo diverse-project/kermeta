@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: DataTypeImpl.java,v 1.8 2008-11-07 08:52:54 cfaucher Exp $
+ * $Id: DataTypeImpl.java,v 1.9 2008-11-27 15:49:50 cfaucher Exp $
  */
 package kermeta.language.structure.impl;
 
@@ -199,8 +199,8 @@ public abstract class DataTypeImpl extends TypeImpl implements DataType {
 
 		result = this.getName();
 
-		java.lang.Boolean idIfCond_402 = false;
-		idIfCond_402 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+		java.lang.Boolean idIfCond_369 = false;
+		idIfCond_369 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 				.isInstanceOfSwitcher(
 						org.kermeta.compil.runtime.helper.language.ObjectUtil
 								.containerSwitcher(elem),
@@ -209,26 +209,26 @@ public abstract class DataTypeImpl extends TypeImpl implements DataType {
 								.getMetaClass(
 										"kermeta.language.structure.NamedElement"));
 
-		if (idIfCond_402) {
+		if (idIfCond_369) {
 
 			elem = (kermeta.language.structure.NamedElement) org.kermeta.compil.runtime.ExecutionContext
 					.getInstance()
 					.<kermeta.language.structure.NamedElement> asTypeOrVoid(
 							org.kermeta.compil.runtime.helper.language.ObjectUtil
 									.containerSwitcher(elem));
-			java.lang.Boolean idLoopCond_403 = false;
-			while (!idLoopCond_403) {
-				idLoopCond_403 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+			java.lang.Boolean idLoopCond_370 = false;
+			while (!idLoopCond_370) {
+				idLoopCond_370 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 						.equalsSwitcher(elem, null);
-				if (idLoopCond_403) {
+				if (idLoopCond_370) {
 				} else {
 
 					result = kermeta.standard.helper.StringWrapper.plus(
 							kermeta.standard.helper.StringWrapper.plus(elem
 									.getName(), "::"), result);
 
-					java.lang.Boolean idIfCond_404 = false;
-					idIfCond_404 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+					java.lang.Boolean idIfCond_371 = false;
+					idIfCond_371 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 							.isInstanceOfSwitcher(
 									org.kermeta.compil.runtime.helper.language.ObjectUtil
 											.containerSwitcher(elem),
@@ -237,7 +237,7 @@ public abstract class DataTypeImpl extends TypeImpl implements DataType {
 											.getMetaClass(
 													"kermeta.language.structure.NamedElement"));
 
-					if (idIfCond_404) {
+					if (idIfCond_371) {
 
 						elem = (kermeta.language.structure.NamedElement) org.kermeta.compil.runtime.ExecutionContext
 								.getInstance()

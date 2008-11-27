@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: EcoreSwitch.java,v 1.8 2008-11-07 08:54:15 cfaucher Exp $
+ * $Id: EcoreSwitch.java,v 1.9 2008-11-27 15:50:18 cfaucher Exp $
  */
 package kermeta.ecore.util;
 

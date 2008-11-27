@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: TypeVariable.java,v 1.8 2008-11-07 08:53:37 cfaucher Exp $
+ * $Id: TypeVariable.java,v 1.9 2008-11-27 15:50:02 cfaucher Exp $
  */
 package kermeta.language.structure;
 

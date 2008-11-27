@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ExceptionsSwitch.java,v 1.8 2008-11-07 08:53:21 cfaucher Exp $
+ * $Id: ExceptionsSwitch.java,v 1.9 2008-11-27 15:49:54 cfaucher Exp $
  */
 package kermeta.exceptions.util;
 

@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: EClassImpl.java,v 1.9 2008-11-07 08:53:02 cfaucher Exp $
+ * $Id: EClassImpl.java,v 1.10 2008-11-27 15:49:51 cfaucher Exp $
  */
 package ecore.impl;
 
@@ -253,8 +253,8 @@ public class EClassImpl extends EClassifierImpl implements EClass {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public int getFeatureID(EStructuralFeature feature) {
-		java.lang.Integer result = null;
+	public EStructuralFeature getEStructuralFeature(String featureName) {
+		ecore.EStructuralFeature result = null;
 
 		return result;
 
@@ -265,8 +265,8 @@ public class EClassImpl extends EClassifierImpl implements EClass {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EStructuralFeature getEStructuralFeature(String featureName) {
-		ecore.EStructuralFeature result = null;
+	public int getFeatureID(EStructuralFeature feature) {
+		java.lang.Integer result = null;
 
 		return result;
 
@@ -410,9 +410,9 @@ public class EClassImpl extends EClassifierImpl implements EClass {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<EOperation> getterEAllOperations() {
+	public EList<EStructuralFeature> getterEAllStructuralFeatures() {
 
-		kermeta.standard.OrderedSet<ecore.EOperation> result = null;
+		kermeta.standard.OrderedSet<ecore.EStructuralFeature> result = null;
 
 		return org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
 				.convertAsEList(result);
@@ -424,9 +424,9 @@ public class EClassImpl extends EClassifierImpl implements EClass {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<EStructuralFeature> getterEAllStructuralFeatures() {
+	public EList<EOperation> getterEAllOperations() {
 
-		kermeta.standard.OrderedSet<ecore.EStructuralFeature> result = null;
+		kermeta.standard.OrderedSet<ecore.EOperation> result = null;
 
 		return org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
 				.convertAsEList(result);

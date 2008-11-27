@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ExceptionsPackage.java,v 1.8 2008-11-07 08:53:06 cfaucher Exp $
+ * $Id: ExceptionsPackage.java,v 1.9 2008-11-27 15:49:52 cfaucher Exp $
  */
 package kermeta.exceptions;
 
@@ -28,7 +28,7 @@ import org.eclipse.emf.ecore.EReference;
  * @see kermeta.exceptions.ExceptionsFactory
  * @model kind="package"
  *        annotation="kermeta ecoreUri='http://www.kermeta.org/kermeta/1_2_0//kermeta/exceptions'"
- *        annotation="kermeta documentation='/** \r\n * Contains the definition of a Kermeta exception and a few basic exceptions.\r\n * <img src=\"platform:/plugin/fr.irisa.triskell.kermeta.documentation/src/figures/exceptions_package.png\"/>\r\n \052/'"
+ *        annotation="kermeta documentation='/** \n * Contains the definition of a Kermeta exception and a few basic exceptions.\n * <img src=\"platform:/plugin/fr.irisa.triskell.kermeta.documentation/src/figures/exceptions_package.png\"/>\n \052/'"
  * @generated
  */
 public interface ExceptionsPackage extends EPackage {
@@ -76,15 +76,6 @@ public interface ExceptionsPackage extends EPackage {
 	int EXCEPTION = 0;
 
 	/**
-	 * The feature id for the '<em><b>Tag</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EXCEPTION__TAG = StructurePackage.OBJECT__TAG;
-
-	/**
 	 * The feature id for the '<em><b>File</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -92,6 +83,15 @@ public interface ExceptionsPackage extends EPackage {
 	 * @ordered
 	 */
 	int EXCEPTION__FILE = StructurePackage.OBJECT__FILE;
+
+	/**
+	 * The feature id for the '<em><b>Tag</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXCEPTION__TAG = StructurePackage.OBJECT__TAG;
 
 	/**
 	 * The feature id for the '<em><b>File Name</b></em>' attribute.
@@ -128,6 +128,15 @@ public interface ExceptionsPackage extends EPackage {
 	 * @ordered
 	 */
 	int EXCEPTION__OID = StructurePackage.OBJECT__OID;
+
+	/**
+	 * The feature id for the '<em><b>Internal Containing Resource</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXCEPTION__INTERNAL_CONTAINING_RESOURCE = StructurePackage.OBJECT__INTERNAL_CONTAINING_RESOURCE;
 
 	/**
 	 * The feature id for the '<em><b>Message</b></em>' attribute.
@@ -176,15 +185,6 @@ public interface ExceptionsPackage extends EPackage {
 	int RUNTIME_ERROR = 1;
 
 	/**
-	 * The feature id for the '<em><b>Tag</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int RUNTIME_ERROR__TAG = EXCEPTION__TAG;
-
-	/**
 	 * The feature id for the '<em><b>File</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -192,6 +192,15 @@ public interface ExceptionsPackage extends EPackage {
 	 * @ordered
 	 */
 	int RUNTIME_ERROR__FILE = EXCEPTION__FILE;
+
+	/**
+	 * The feature id for the '<em><b>Tag</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RUNTIME_ERROR__TAG = EXCEPTION__TAG;
 
 	/**
 	 * The feature id for the '<em><b>File Name</b></em>' attribute.
@@ -228,6 +237,15 @@ public interface ExceptionsPackage extends EPackage {
 	 * @ordered
 	 */
 	int RUNTIME_ERROR__OID = EXCEPTION__OID;
+
+	/**
+	 * The feature id for the '<em><b>Internal Containing Resource</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RUNTIME_ERROR__INTERNAL_CONTAINING_RESOURCE = EXCEPTION__INTERNAL_CONTAINING_RESOURCE;
 
 	/**
 	 * The feature id for the '<em><b>Message</b></em>' attribute.
@@ -285,15 +303,6 @@ public interface ExceptionsPackage extends EPackage {
 	int CALL_ON_VOID_TARGET = 2;
 
 	/**
-	 * The feature id for the '<em><b>Tag</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CALL_ON_VOID_TARGET__TAG = RUNTIME_ERROR__TAG;
-
-	/**
 	 * The feature id for the '<em><b>File</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -301,6 +310,15 @@ public interface ExceptionsPackage extends EPackage {
 	 * @ordered
 	 */
 	int CALL_ON_VOID_TARGET__FILE = RUNTIME_ERROR__FILE;
+
+	/**
+	 * The feature id for the '<em><b>Tag</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CALL_ON_VOID_TARGET__TAG = RUNTIME_ERROR__TAG;
 
 	/**
 	 * The feature id for the '<em><b>File Name</b></em>' attribute.
@@ -337,6 +355,15 @@ public interface ExceptionsPackage extends EPackage {
 	 * @ordered
 	 */
 	int CALL_ON_VOID_TARGET__OID = RUNTIME_ERROR__OID;
+
+	/**
+	 * The feature id for the '<em><b>Internal Containing Resource</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CALL_ON_VOID_TARGET__INTERNAL_CONTAINING_RESOURCE = RUNTIME_ERROR__INTERNAL_CONTAINING_RESOURCE;
 
 	/**
 	 * The feature id for the '<em><b>Message</b></em>' attribute.
@@ -394,15 +421,6 @@ public interface ExceptionsPackage extends EPackage {
 	int TYPE_CAST_ERROR = 3;
 
 	/**
-	 * The feature id for the '<em><b>Tag</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TYPE_CAST_ERROR__TAG = RUNTIME_ERROR__TAG;
-
-	/**
 	 * The feature id for the '<em><b>File</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -410,6 +428,15 @@ public interface ExceptionsPackage extends EPackage {
 	 * @ordered
 	 */
 	int TYPE_CAST_ERROR__FILE = RUNTIME_ERROR__FILE;
+
+	/**
+	 * The feature id for the '<em><b>Tag</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TYPE_CAST_ERROR__TAG = RUNTIME_ERROR__TAG;
 
 	/**
 	 * The feature id for the '<em><b>File Name</b></em>' attribute.
@@ -446,6 +473,15 @@ public interface ExceptionsPackage extends EPackage {
 	 * @ordered
 	 */
 	int TYPE_CAST_ERROR__OID = RUNTIME_ERROR__OID;
+
+	/**
+	 * The feature id for the '<em><b>Internal Containing Resource</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TYPE_CAST_ERROR__INTERNAL_CONTAINING_RESOURCE = RUNTIME_ERROR__INTERNAL_CONTAINING_RESOURCE;
 
 	/**
 	 * The feature id for the '<em><b>Message</b></em>' attribute.
@@ -503,15 +539,6 @@ public interface ExceptionsPackage extends EPackage {
 	int NOT_IMPLEMENTED_EXCEPTION = 4;
 
 	/**
-	 * The feature id for the '<em><b>Tag</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int NOT_IMPLEMENTED_EXCEPTION__TAG = RUNTIME_ERROR__TAG;
-
-	/**
 	 * The feature id for the '<em><b>File</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -519,6 +546,15 @@ public interface ExceptionsPackage extends EPackage {
 	 * @ordered
 	 */
 	int NOT_IMPLEMENTED_EXCEPTION__FILE = RUNTIME_ERROR__FILE;
+
+	/**
+	 * The feature id for the '<em><b>Tag</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NOT_IMPLEMENTED_EXCEPTION__TAG = RUNTIME_ERROR__TAG;
 
 	/**
 	 * The feature id for the '<em><b>File Name</b></em>' attribute.
@@ -555,6 +591,15 @@ public interface ExceptionsPackage extends EPackage {
 	 * @ordered
 	 */
 	int NOT_IMPLEMENTED_EXCEPTION__OID = RUNTIME_ERROR__OID;
+
+	/**
+	 * The feature id for the '<em><b>Internal Containing Resource</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NOT_IMPLEMENTED_EXCEPTION__INTERNAL_CONTAINING_RESOURCE = RUNTIME_ERROR__INTERNAL_CONTAINING_RESOURCE;
 
 	/**
 	 * The feature id for the '<em><b>Message</b></em>' attribute.
@@ -612,15 +657,6 @@ public interface ExceptionsPackage extends EPackage {
 	int UPPER_BOUND_REACHED_ERROR = 5;
 
 	/**
-	 * The feature id for the '<em><b>Tag</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int UPPER_BOUND_REACHED_ERROR__TAG = RUNTIME_ERROR__TAG;
-
-	/**
 	 * The feature id for the '<em><b>File</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -628,6 +664,15 @@ public interface ExceptionsPackage extends EPackage {
 	 * @ordered
 	 */
 	int UPPER_BOUND_REACHED_ERROR__FILE = RUNTIME_ERROR__FILE;
+
+	/**
+	 * The feature id for the '<em><b>Tag</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UPPER_BOUND_REACHED_ERROR__TAG = RUNTIME_ERROR__TAG;
 
 	/**
 	 * The feature id for the '<em><b>File Name</b></em>' attribute.
@@ -664,6 +709,15 @@ public interface ExceptionsPackage extends EPackage {
 	 * @ordered
 	 */
 	int UPPER_BOUND_REACHED_ERROR__OID = RUNTIME_ERROR__OID;
+
+	/**
+	 * The feature id for the '<em><b>Internal Containing Resource</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UPPER_BOUND_REACHED_ERROR__INTERNAL_CONTAINING_RESOURCE = RUNTIME_ERROR__INTERNAL_CONTAINING_RESOURCE;
 
 	/**
 	 * The feature id for the '<em><b>Message</b></em>' attribute.
@@ -721,15 +775,6 @@ public interface ExceptionsPackage extends EPackage {
 	int ABSTRACT_CLASS_INSTANTIATION_ERROR = 6;
 
 	/**
-	 * The feature id for the '<em><b>Tag</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ABSTRACT_CLASS_INSTANTIATION_ERROR__TAG = RUNTIME_ERROR__TAG;
-
-	/**
 	 * The feature id for the '<em><b>File</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -737,6 +782,15 @@ public interface ExceptionsPackage extends EPackage {
 	 * @ordered
 	 */
 	int ABSTRACT_CLASS_INSTANTIATION_ERROR__FILE = RUNTIME_ERROR__FILE;
+
+	/**
+	 * The feature id for the '<em><b>Tag</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ABSTRACT_CLASS_INSTANTIATION_ERROR__TAG = RUNTIME_ERROR__TAG;
 
 	/**
 	 * The feature id for the '<em><b>File Name</b></em>' attribute.
@@ -773,6 +827,15 @@ public interface ExceptionsPackage extends EPackage {
 	 * @ordered
 	 */
 	int ABSTRACT_CLASS_INSTANTIATION_ERROR__OID = RUNTIME_ERROR__OID;
+
+	/**
+	 * The feature id for the '<em><b>Internal Containing Resource</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ABSTRACT_CLASS_INSTANTIATION_ERROR__INTERNAL_CONTAINING_RESOURCE = RUNTIME_ERROR__INTERNAL_CONTAINING_RESOURCE;
 
 	/**
 	 * The feature id for the '<em><b>Message</b></em>' attribute.
@@ -830,15 +893,6 @@ public interface ExceptionsPackage extends EPackage {
 	int INCOMPATIBLE_TYPE_ERROR = 7;
 
 	/**
-	 * The feature id for the '<em><b>Tag</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int INCOMPATIBLE_TYPE_ERROR__TAG = RUNTIME_ERROR__TAG;
-
-	/**
 	 * The feature id for the '<em><b>File</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -846,6 +900,15 @@ public interface ExceptionsPackage extends EPackage {
 	 * @ordered
 	 */
 	int INCOMPATIBLE_TYPE_ERROR__FILE = RUNTIME_ERROR__FILE;
+
+	/**
+	 * The feature id for the '<em><b>Tag</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INCOMPATIBLE_TYPE_ERROR__TAG = RUNTIME_ERROR__TAG;
 
 	/**
 	 * The feature id for the '<em><b>File Name</b></em>' attribute.
@@ -882,6 +945,15 @@ public interface ExceptionsPackage extends EPackage {
 	 * @ordered
 	 */
 	int INCOMPATIBLE_TYPE_ERROR__OID = RUNTIME_ERROR__OID;
+
+	/**
+	 * The feature id for the '<em><b>Internal Containing Resource</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INCOMPATIBLE_TYPE_ERROR__INTERNAL_CONTAINING_RESOURCE = RUNTIME_ERROR__INTERNAL_CONTAINING_RESOURCE;
 
 	/**
 	 * The feature id for the '<em><b>Message</b></em>' attribute.
@@ -939,15 +1011,6 @@ public interface ExceptionsPackage extends EPackage {
 	int DIVISION_BY_ZERO = 8;
 
 	/**
-	 * The feature id for the '<em><b>Tag</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DIVISION_BY_ZERO__TAG = EXCEPTION__TAG;
-
-	/**
 	 * The feature id for the '<em><b>File</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -955,6 +1018,15 @@ public interface ExceptionsPackage extends EPackage {
 	 * @ordered
 	 */
 	int DIVISION_BY_ZERO__FILE = EXCEPTION__FILE;
+
+	/**
+	 * The feature id for the '<em><b>Tag</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DIVISION_BY_ZERO__TAG = EXCEPTION__TAG;
 
 	/**
 	 * The feature id for the '<em><b>File Name</b></em>' attribute.
@@ -991,6 +1063,15 @@ public interface ExceptionsPackage extends EPackage {
 	 * @ordered
 	 */
 	int DIVISION_BY_ZERO__OID = EXCEPTION__OID;
+
+	/**
+	 * The feature id for the '<em><b>Internal Containing Resource</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DIVISION_BY_ZERO__INTERNAL_CONTAINING_RESOURCE = EXCEPTION__INTERNAL_CONTAINING_RESOURCE;
 
 	/**
 	 * The feature id for the '<em><b>Message</b></em>' attribute.
@@ -1039,15 +1120,6 @@ public interface ExceptionsPackage extends EPackage {
 	int OVERFLOW_ERROR = 9;
 
 	/**
-	 * The feature id for the '<em><b>Tag</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int OVERFLOW_ERROR__TAG = EXCEPTION__TAG;
-
-	/**
 	 * The feature id for the '<em><b>File</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1055,6 +1127,15 @@ public interface ExceptionsPackage extends EPackage {
 	 * @ordered
 	 */
 	int OVERFLOW_ERROR__FILE = EXCEPTION__FILE;
+
+	/**
+	 * The feature id for the '<em><b>Tag</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OVERFLOW_ERROR__TAG = EXCEPTION__TAG;
 
 	/**
 	 * The feature id for the '<em><b>File Name</b></em>' attribute.
@@ -1091,6 +1172,15 @@ public interface ExceptionsPackage extends EPackage {
 	 * @ordered
 	 */
 	int OVERFLOW_ERROR__OID = EXCEPTION__OID;
+
+	/**
+	 * The feature id for the '<em><b>Internal Containing Resource</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OVERFLOW_ERROR__INTERNAL_CONTAINING_RESOURCE = EXCEPTION__INTERNAL_CONTAINING_RESOURCE;
 
 	/**
 	 * The feature id for the '<em><b>Message</b></em>' attribute.
@@ -1139,15 +1229,6 @@ public interface ExceptionsPackage extends EPackage {
 	int VOID_OPERAND_ERROR = 10;
 
 	/**
-	 * The feature id for the '<em><b>Tag</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int VOID_OPERAND_ERROR__TAG = EXCEPTION__TAG;
-
-	/**
 	 * The feature id for the '<em><b>File</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1155,6 +1236,15 @@ public interface ExceptionsPackage extends EPackage {
 	 * @ordered
 	 */
 	int VOID_OPERAND_ERROR__FILE = EXCEPTION__FILE;
+
+	/**
+	 * The feature id for the '<em><b>Tag</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VOID_OPERAND_ERROR__TAG = EXCEPTION__TAG;
 
 	/**
 	 * The feature id for the '<em><b>File Name</b></em>' attribute.
@@ -1191,6 +1281,15 @@ public interface ExceptionsPackage extends EPackage {
 	 * @ordered
 	 */
 	int VOID_OPERAND_ERROR__OID = EXCEPTION__OID;
+
+	/**
+	 * The feature id for the '<em><b>Internal Containing Resource</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VOID_OPERAND_ERROR__INTERNAL_CONTAINING_RESOURCE = EXCEPTION__INTERNAL_CONTAINING_RESOURCE;
 
 	/**
 	 * The feature id for the '<em><b>Message</b></em>' attribute.
@@ -1239,15 +1338,6 @@ public interface ExceptionsPackage extends EPackage {
 	int STRING_INDEX_OUT_OF_BOUND = 11;
 
 	/**
-	 * The feature id for the '<em><b>Tag</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int STRING_INDEX_OUT_OF_BOUND__TAG = EXCEPTION__TAG;
-
-	/**
 	 * The feature id for the '<em><b>File</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1255,6 +1345,15 @@ public interface ExceptionsPackage extends EPackage {
 	 * @ordered
 	 */
 	int STRING_INDEX_OUT_OF_BOUND__FILE = EXCEPTION__FILE;
+
+	/**
+	 * The feature id for the '<em><b>Tag</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STRING_INDEX_OUT_OF_BOUND__TAG = EXCEPTION__TAG;
 
 	/**
 	 * The feature id for the '<em><b>File Name</b></em>' attribute.
@@ -1291,6 +1390,15 @@ public interface ExceptionsPackage extends EPackage {
 	 * @ordered
 	 */
 	int STRING_INDEX_OUT_OF_BOUND__OID = EXCEPTION__OID;
+
+	/**
+	 * The feature id for the '<em><b>Internal Containing Resource</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STRING_INDEX_OUT_OF_BOUND__INTERNAL_CONTAINING_RESOURCE = EXCEPTION__INTERNAL_CONTAINING_RESOURCE;
 
 	/**
 	 * The feature id for the '<em><b>Message</b></em>' attribute.
@@ -1339,15 +1447,6 @@ public interface ExceptionsPackage extends EPackage {
 	int STRING_FORMAT_EXCEPTION = 12;
 
 	/**
-	 * The feature id for the '<em><b>Tag</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int STRING_FORMAT_EXCEPTION__TAG = EXCEPTION__TAG;
-
-	/**
 	 * The feature id for the '<em><b>File</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1355,6 +1454,15 @@ public interface ExceptionsPackage extends EPackage {
 	 * @ordered
 	 */
 	int STRING_FORMAT_EXCEPTION__FILE = EXCEPTION__FILE;
+
+	/**
+	 * The feature id for the '<em><b>Tag</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STRING_FORMAT_EXCEPTION__TAG = EXCEPTION__TAG;
 
 	/**
 	 * The feature id for the '<em><b>File Name</b></em>' attribute.
@@ -1391,6 +1499,15 @@ public interface ExceptionsPackage extends EPackage {
 	 * @ordered
 	 */
 	int STRING_FORMAT_EXCEPTION__OID = EXCEPTION__OID;
+
+	/**
+	 * The feature id for the '<em><b>Internal Containing Resource</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STRING_FORMAT_EXCEPTION__INTERNAL_CONTAINING_RESOURCE = EXCEPTION__INTERNAL_CONTAINING_RESOURCE;
 
 	/**
 	 * The feature id for the '<em><b>Message</b></em>' attribute.
@@ -1439,15 +1556,6 @@ public interface ExceptionsPackage extends EPackage {
 	int INDEX_OUT_OF_BOUND = 13;
 
 	/**
-	 * The feature id for the '<em><b>Tag</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int INDEX_OUT_OF_BOUND__TAG = EXCEPTION__TAG;
-
-	/**
 	 * The feature id for the '<em><b>File</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1455,6 +1563,15 @@ public interface ExceptionsPackage extends EPackage {
 	 * @ordered
 	 */
 	int INDEX_OUT_OF_BOUND__FILE = EXCEPTION__FILE;
+
+	/**
+	 * The feature id for the '<em><b>Tag</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INDEX_OUT_OF_BOUND__TAG = EXCEPTION__TAG;
 
 	/**
 	 * The feature id for the '<em><b>File Name</b></em>' attribute.
@@ -1491,6 +1608,15 @@ public interface ExceptionsPackage extends EPackage {
 	 * @ordered
 	 */
 	int INDEX_OUT_OF_BOUND__OID = EXCEPTION__OID;
+
+	/**
+	 * The feature id for the '<em><b>Internal Containing Resource</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INDEX_OUT_OF_BOUND__INTERNAL_CONTAINING_RESOURCE = EXCEPTION__INTERNAL_CONTAINING_RESOURCE;
 
 	/**
 	 * The feature id for the '<em><b>Message</b></em>' attribute.
@@ -1539,15 +1665,6 @@ public interface ExceptionsPackage extends EPackage {
 	int EMPTY_COLLECTION = 14;
 
 	/**
-	 * The feature id for the '<em><b>Tag</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EMPTY_COLLECTION__TAG = EXCEPTION__TAG;
-
-	/**
 	 * The feature id for the '<em><b>File</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1555,6 +1672,15 @@ public interface ExceptionsPackage extends EPackage {
 	 * @ordered
 	 */
 	int EMPTY_COLLECTION__FILE = EXCEPTION__FILE;
+
+	/**
+	 * The feature id for the '<em><b>Tag</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EMPTY_COLLECTION__TAG = EXCEPTION__TAG;
 
 	/**
 	 * The feature id for the '<em><b>File Name</b></em>' attribute.
@@ -1591,6 +1717,15 @@ public interface ExceptionsPackage extends EPackage {
 	 * @ordered
 	 */
 	int EMPTY_COLLECTION__OID = EXCEPTION__OID;
+
+	/**
+	 * The feature id for the '<em><b>Internal Containing Resource</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EMPTY_COLLECTION__INTERNAL_CONTAINING_RESOURCE = EXCEPTION__INTERNAL_CONTAINING_RESOURCE;
 
 	/**
 	 * The feature id for the '<em><b>Message</b></em>' attribute.
@@ -1639,15 +1774,6 @@ public interface ExceptionsPackage extends EPackage {
 	int ITERATOR_IS_OFF = 15;
 
 	/**
-	 * The feature id for the '<em><b>Tag</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ITERATOR_IS_OFF__TAG = EXCEPTION__TAG;
-
-	/**
 	 * The feature id for the '<em><b>File</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1655,6 +1781,15 @@ public interface ExceptionsPackage extends EPackage {
 	 * @ordered
 	 */
 	int ITERATOR_IS_OFF__FILE = EXCEPTION__FILE;
+
+	/**
+	 * The feature id for the '<em><b>Tag</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ITERATOR_IS_OFF__TAG = EXCEPTION__TAG;
 
 	/**
 	 * The feature id for the '<em><b>File Name</b></em>' attribute.
@@ -1691,6 +1826,15 @@ public interface ExceptionsPackage extends EPackage {
 	 * @ordered
 	 */
 	int ITERATOR_IS_OFF__OID = EXCEPTION__OID;
+
+	/**
+	 * The feature id for the '<em><b>Internal Containing Resource</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ITERATOR_IS_OFF__INTERNAL_CONTAINING_RESOURCE = EXCEPTION__INTERNAL_CONTAINING_RESOURCE;
 
 	/**
 	 * The feature id for the '<em><b>Message</b></em>' attribute.
@@ -1739,15 +1883,6 @@ public interface ExceptionsPackage extends EPackage {
 	int IO_EXCEPTION = 16;
 
 	/**
-	 * The feature id for the '<em><b>Tag</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int IO_EXCEPTION__TAG = EXCEPTION__TAG;
-
-	/**
 	 * The feature id for the '<em><b>File</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1755,6 +1890,15 @@ public interface ExceptionsPackage extends EPackage {
 	 * @ordered
 	 */
 	int IO_EXCEPTION__FILE = EXCEPTION__FILE;
+
+	/**
+	 * The feature id for the '<em><b>Tag</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int IO_EXCEPTION__TAG = EXCEPTION__TAG;
 
 	/**
 	 * The feature id for the '<em><b>File Name</b></em>' attribute.
@@ -1791,6 +1935,15 @@ public interface ExceptionsPackage extends EPackage {
 	 * @ordered
 	 */
 	int IO_EXCEPTION__OID = EXCEPTION__OID;
+
+	/**
+	 * The feature id for the '<em><b>Internal Containing Resource</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int IO_EXCEPTION__INTERNAL_CONTAINING_RESOURCE = EXCEPTION__INTERNAL_CONTAINING_RESOURCE;
 
 	/**
 	 * The feature id for the '<em><b>Message</b></em>' attribute.
@@ -1839,15 +1992,6 @@ public interface ExceptionsPackage extends EPackage {
 	int FILE_NOT_FOUND_EXCEPTION = 17;
 
 	/**
-	 * The feature id for the '<em><b>Tag</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FILE_NOT_FOUND_EXCEPTION__TAG = IO_EXCEPTION__TAG;
-
-	/**
 	 * The feature id for the '<em><b>File</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1855,6 +1999,15 @@ public interface ExceptionsPackage extends EPackage {
 	 * @ordered
 	 */
 	int FILE_NOT_FOUND_EXCEPTION__FILE = IO_EXCEPTION__FILE;
+
+	/**
+	 * The feature id for the '<em><b>Tag</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FILE_NOT_FOUND_EXCEPTION__TAG = IO_EXCEPTION__TAG;
 
 	/**
 	 * The feature id for the '<em><b>File Name</b></em>' attribute.
@@ -1891,6 +2044,15 @@ public interface ExceptionsPackage extends EPackage {
 	 * @ordered
 	 */
 	int FILE_NOT_FOUND_EXCEPTION__OID = IO_EXCEPTION__OID;
+
+	/**
+	 * The feature id for the '<em><b>Internal Containing Resource</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FILE_NOT_FOUND_EXCEPTION__INTERNAL_CONTAINING_RESOURCE = IO_EXCEPTION__INTERNAL_CONTAINING_RESOURCE;
 
 	/**
 	 * The feature id for the '<em><b>Message</b></em>' attribute.
@@ -1939,15 +2101,6 @@ public interface ExceptionsPackage extends EPackage {
 	int CONSTRAINT_VIOLATED_EXCEPTION = 18;
 
 	/**
-	 * The feature id for the '<em><b>Tag</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CONSTRAINT_VIOLATED_EXCEPTION__TAG = EXCEPTION__TAG;
-
-	/**
 	 * The feature id for the '<em><b>File</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1955,6 +2108,15 @@ public interface ExceptionsPackage extends EPackage {
 	 * @ordered
 	 */
 	int CONSTRAINT_VIOLATED_EXCEPTION__FILE = EXCEPTION__FILE;
+
+	/**
+	 * The feature id for the '<em><b>Tag</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONSTRAINT_VIOLATED_EXCEPTION__TAG = EXCEPTION__TAG;
 
 	/**
 	 * The feature id for the '<em><b>File Name</b></em>' attribute.
@@ -1991,6 +2153,15 @@ public interface ExceptionsPackage extends EPackage {
 	 * @ordered
 	 */
 	int CONSTRAINT_VIOLATED_EXCEPTION__OID = EXCEPTION__OID;
+
+	/**
+	 * The feature id for the '<em><b>Internal Containing Resource</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONSTRAINT_VIOLATED_EXCEPTION__INTERNAL_CONTAINING_RESOURCE = EXCEPTION__INTERNAL_CONTAINING_RESOURCE;
 
 	/**
 	 * The feature id for the '<em><b>Message</b></em>' attribute.
@@ -2048,15 +2219,6 @@ public interface ExceptionsPackage extends EPackage {
 	int CONSTRAINT_VIOLATED_PRE = 19;
 
 	/**
-	 * The feature id for the '<em><b>Tag</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CONSTRAINT_VIOLATED_PRE__TAG = CONSTRAINT_VIOLATED_EXCEPTION__TAG;
-
-	/**
 	 * The feature id for the '<em><b>File</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2064,6 +2226,15 @@ public interface ExceptionsPackage extends EPackage {
 	 * @ordered
 	 */
 	int CONSTRAINT_VIOLATED_PRE__FILE = CONSTRAINT_VIOLATED_EXCEPTION__FILE;
+
+	/**
+	 * The feature id for the '<em><b>Tag</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONSTRAINT_VIOLATED_PRE__TAG = CONSTRAINT_VIOLATED_EXCEPTION__TAG;
 
 	/**
 	 * The feature id for the '<em><b>File Name</b></em>' attribute.
@@ -2100,6 +2271,15 @@ public interface ExceptionsPackage extends EPackage {
 	 * @ordered
 	 */
 	int CONSTRAINT_VIOLATED_PRE__OID = CONSTRAINT_VIOLATED_EXCEPTION__OID;
+
+	/**
+	 * The feature id for the '<em><b>Internal Containing Resource</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONSTRAINT_VIOLATED_PRE__INTERNAL_CONTAINING_RESOURCE = CONSTRAINT_VIOLATED_EXCEPTION__INTERNAL_CONTAINING_RESOURCE;
 
 	/**
 	 * The feature id for the '<em><b>Message</b></em>' attribute.
@@ -2157,15 +2337,6 @@ public interface ExceptionsPackage extends EPackage {
 	int CONSTRAINT_VIOLATED_POST = 20;
 
 	/**
-	 * The feature id for the '<em><b>Tag</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CONSTRAINT_VIOLATED_POST__TAG = CONSTRAINT_VIOLATED_EXCEPTION__TAG;
-
-	/**
 	 * The feature id for the '<em><b>File</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2173,6 +2344,15 @@ public interface ExceptionsPackage extends EPackage {
 	 * @ordered
 	 */
 	int CONSTRAINT_VIOLATED_POST__FILE = CONSTRAINT_VIOLATED_EXCEPTION__FILE;
+
+	/**
+	 * The feature id for the '<em><b>Tag</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONSTRAINT_VIOLATED_POST__TAG = CONSTRAINT_VIOLATED_EXCEPTION__TAG;
 
 	/**
 	 * The feature id for the '<em><b>File Name</b></em>' attribute.
@@ -2209,6 +2389,15 @@ public interface ExceptionsPackage extends EPackage {
 	 * @ordered
 	 */
 	int CONSTRAINT_VIOLATED_POST__OID = CONSTRAINT_VIOLATED_EXCEPTION__OID;
+
+	/**
+	 * The feature id for the '<em><b>Internal Containing Resource</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONSTRAINT_VIOLATED_POST__INTERNAL_CONTAINING_RESOURCE = CONSTRAINT_VIOLATED_EXCEPTION__INTERNAL_CONTAINING_RESOURCE;
 
 	/**
 	 * The feature id for the '<em><b>Message</b></em>' attribute.
@@ -2266,15 +2455,6 @@ public interface ExceptionsPackage extends EPackage {
 	int CONSTRAINT_VIOLATED_INV = 21;
 
 	/**
-	 * The feature id for the '<em><b>Tag</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CONSTRAINT_VIOLATED_INV__TAG = CONSTRAINT_VIOLATED_EXCEPTION__TAG;
-
-	/**
 	 * The feature id for the '<em><b>File</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2282,6 +2462,15 @@ public interface ExceptionsPackage extends EPackage {
 	 * @ordered
 	 */
 	int CONSTRAINT_VIOLATED_INV__FILE = CONSTRAINT_VIOLATED_EXCEPTION__FILE;
+
+	/**
+	 * The feature id for the '<em><b>Tag</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONSTRAINT_VIOLATED_INV__TAG = CONSTRAINT_VIOLATED_EXCEPTION__TAG;
 
 	/**
 	 * The feature id for the '<em><b>File Name</b></em>' attribute.
@@ -2318,6 +2507,15 @@ public interface ExceptionsPackage extends EPackage {
 	 * @ordered
 	 */
 	int CONSTRAINT_VIOLATED_INV__OID = CONSTRAINT_VIOLATED_EXCEPTION__OID;
+
+	/**
+	 * The feature id for the '<em><b>Internal Containing Resource</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONSTRAINT_VIOLATED_INV__INTERNAL_CONTAINING_RESOURCE = CONSTRAINT_VIOLATED_EXCEPTION__INTERNAL_CONTAINING_RESOURCE;
 
 	/**
 	 * The feature id for the '<em><b>Message</b></em>' attribute.
@@ -2375,15 +2573,6 @@ public interface ExceptionsPackage extends EPackage {
 	int RESOURCE_LOAD_EXCEPTION = 22;
 
 	/**
-	 * The feature id for the '<em><b>Tag</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int RESOURCE_LOAD_EXCEPTION__TAG = EXCEPTION__TAG;
-
-	/**
 	 * The feature id for the '<em><b>File</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2391,6 +2580,15 @@ public interface ExceptionsPackage extends EPackage {
 	 * @ordered
 	 */
 	int RESOURCE_LOAD_EXCEPTION__FILE = EXCEPTION__FILE;
+
+	/**
+	 * The feature id for the '<em><b>Tag</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RESOURCE_LOAD_EXCEPTION__TAG = EXCEPTION__TAG;
 
 	/**
 	 * The feature id for the '<em><b>File Name</b></em>' attribute.
@@ -2427,6 +2625,15 @@ public interface ExceptionsPackage extends EPackage {
 	 * @ordered
 	 */
 	int RESOURCE_LOAD_EXCEPTION__OID = EXCEPTION__OID;
+
+	/**
+	 * The feature id for the '<em><b>Internal Containing Resource</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RESOURCE_LOAD_EXCEPTION__INTERNAL_CONTAINING_RESOURCE = EXCEPTION__INTERNAL_CONTAINING_RESOURCE;
 
 	/**
 	 * The feature id for the '<em><b>Message</b></em>' attribute.
@@ -2475,15 +2682,6 @@ public interface ExceptionsPackage extends EPackage {
 	int RESOURCE_SAVE_EXCEPTION = 23;
 
 	/**
-	 * The feature id for the '<em><b>Tag</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int RESOURCE_SAVE_EXCEPTION__TAG = EXCEPTION__TAG;
-
-	/**
 	 * The feature id for the '<em><b>File</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2491,6 +2689,15 @@ public interface ExceptionsPackage extends EPackage {
 	 * @ordered
 	 */
 	int RESOURCE_SAVE_EXCEPTION__FILE = EXCEPTION__FILE;
+
+	/**
+	 * The feature id for the '<em><b>Tag</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RESOURCE_SAVE_EXCEPTION__TAG = EXCEPTION__TAG;
 
 	/**
 	 * The feature id for the '<em><b>File Name</b></em>' attribute.
@@ -2527,6 +2734,15 @@ public interface ExceptionsPackage extends EPackage {
 	 * @ordered
 	 */
 	int RESOURCE_SAVE_EXCEPTION__OID = EXCEPTION__OID;
+
+	/**
+	 * The feature id for the '<em><b>Internal Containing Resource</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RESOURCE_SAVE_EXCEPTION__INTERNAL_CONTAINING_RESOURCE = EXCEPTION__INTERNAL_CONTAINING_RESOURCE;
 
 	/**
 	 * The feature id for the '<em><b>Message</b></em>' attribute.
@@ -2584,15 +2800,6 @@ public interface ExceptionsPackage extends EPackage {
 	int RESOURCE_MIXED_LEVELS_EXCEPTION = 24;
 
 	/**
-	 * The feature id for the '<em><b>Tag</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int RESOURCE_MIXED_LEVELS_EXCEPTION__TAG = RESOURCE_SAVE_EXCEPTION__TAG;
-
-	/**
 	 * The feature id for the '<em><b>File</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2600,6 +2807,15 @@ public interface ExceptionsPackage extends EPackage {
 	 * @ordered
 	 */
 	int RESOURCE_MIXED_LEVELS_EXCEPTION__FILE = RESOURCE_SAVE_EXCEPTION__FILE;
+
+	/**
+	 * The feature id for the '<em><b>Tag</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RESOURCE_MIXED_LEVELS_EXCEPTION__TAG = RESOURCE_SAVE_EXCEPTION__TAG;
 
 	/**
 	 * The feature id for the '<em><b>File Name</b></em>' attribute.
@@ -2636,6 +2852,15 @@ public interface ExceptionsPackage extends EPackage {
 	 * @ordered
 	 */
 	int RESOURCE_MIXED_LEVELS_EXCEPTION__OID = RESOURCE_SAVE_EXCEPTION__OID;
+
+	/**
+	 * The feature id for the '<em><b>Internal Containing Resource</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RESOURCE_MIXED_LEVELS_EXCEPTION__INTERNAL_CONTAINING_RESOURCE = RESOURCE_SAVE_EXCEPTION__INTERNAL_CONTAINING_RESOURCE;
 
 	/**
 	 * The feature id for the '<em><b>Message</b></em>' attribute.
@@ -2693,15 +2918,6 @@ public interface ExceptionsPackage extends EPackage {
 	int RESOURCE_CREATE_EXCEPTION = 25;
 
 	/**
-	 * The feature id for the '<em><b>Tag</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int RESOURCE_CREATE_EXCEPTION__TAG = EXCEPTION__TAG;
-
-	/**
 	 * The feature id for the '<em><b>File</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2709,6 +2925,15 @@ public interface ExceptionsPackage extends EPackage {
 	 * @ordered
 	 */
 	int RESOURCE_CREATE_EXCEPTION__FILE = EXCEPTION__FILE;
+
+	/**
+	 * The feature id for the '<em><b>Tag</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RESOURCE_CREATE_EXCEPTION__TAG = EXCEPTION__TAG;
 
 	/**
 	 * The feature id for the '<em><b>File Name</b></em>' attribute.
@@ -2745,6 +2970,15 @@ public interface ExceptionsPackage extends EPackage {
 	 * @ordered
 	 */
 	int RESOURCE_CREATE_EXCEPTION__OID = EXCEPTION__OID;
+
+	/**
+	 * The feature id for the '<em><b>Internal Containing Resource</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RESOURCE_CREATE_EXCEPTION__INTERNAL_CONTAINING_RESOURCE = EXCEPTION__INTERNAL_CONTAINING_RESOURCE;
 
 	/**
 	 * The feature id for the '<em><b>Message</b></em>' attribute.
@@ -2793,15 +3027,6 @@ public interface ExceptionsPackage extends EPackage {
 	int RESOURCE_UNCONFORMITY_EXCEPTION = 26;
 
 	/**
-	 * The feature id for the '<em><b>Tag</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int RESOURCE_UNCONFORMITY_EXCEPTION__TAG = EXCEPTION__TAG;
-
-	/**
 	 * The feature id for the '<em><b>File</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2809,6 +3034,15 @@ public interface ExceptionsPackage extends EPackage {
 	 * @ordered
 	 */
 	int RESOURCE_UNCONFORMITY_EXCEPTION__FILE = EXCEPTION__FILE;
+
+	/**
+	 * The feature id for the '<em><b>Tag</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RESOURCE_UNCONFORMITY_EXCEPTION__TAG = EXCEPTION__TAG;
 
 	/**
 	 * The feature id for the '<em><b>File Name</b></em>' attribute.
@@ -2845,6 +3079,15 @@ public interface ExceptionsPackage extends EPackage {
 	 * @ordered
 	 */
 	int RESOURCE_UNCONFORMITY_EXCEPTION__OID = EXCEPTION__OID;
+
+	/**
+	 * The feature id for the '<em><b>Internal Containing Resource</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RESOURCE_UNCONFORMITY_EXCEPTION__INTERNAL_CONTAINING_RESOURCE = EXCEPTION__INTERNAL_CONTAINING_RESOURCE;
 
 	/**
 	 * The feature id for the '<em><b>Message</b></em>' attribute.
@@ -2893,15 +3136,6 @@ public interface ExceptionsPackage extends EPackage {
 	int UNREGISTERED_METAMODEL_EXCEPTION = 27;
 
 	/**
-	 * The feature id for the '<em><b>Tag</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int UNREGISTERED_METAMODEL_EXCEPTION__TAG = EXCEPTION__TAG;
-
-	/**
 	 * The feature id for the '<em><b>File</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2909,6 +3143,15 @@ public interface ExceptionsPackage extends EPackage {
 	 * @ordered
 	 */
 	int UNREGISTERED_METAMODEL_EXCEPTION__FILE = EXCEPTION__FILE;
+
+	/**
+	 * The feature id for the '<em><b>Tag</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UNREGISTERED_METAMODEL_EXCEPTION__TAG = EXCEPTION__TAG;
 
 	/**
 	 * The feature id for the '<em><b>File Name</b></em>' attribute.
@@ -2945,6 +3188,15 @@ public interface ExceptionsPackage extends EPackage {
 	 * @ordered
 	 */
 	int UNREGISTERED_METAMODEL_EXCEPTION__OID = EXCEPTION__OID;
+
+	/**
+	 * The feature id for the '<em><b>Internal Containing Resource</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UNREGISTERED_METAMODEL_EXCEPTION__INTERNAL_CONTAINING_RESOURCE = EXCEPTION__INTERNAL_CONTAINING_RESOURCE;
 
 	/**
 	 * The feature id for the '<em><b>Message</b></em>' attribute.
@@ -2993,15 +3245,6 @@ public interface ExceptionsPackage extends EPackage {
 	int DYNAMIC_EXPRESSION_EXCEPTION = 28;
 
 	/**
-	 * The feature id for the '<em><b>Tag</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DYNAMIC_EXPRESSION_EXCEPTION__TAG = EXCEPTION__TAG;
-
-	/**
 	 * The feature id for the '<em><b>File</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3009,6 +3252,15 @@ public interface ExceptionsPackage extends EPackage {
 	 * @ordered
 	 */
 	int DYNAMIC_EXPRESSION_EXCEPTION__FILE = EXCEPTION__FILE;
+
+	/**
+	 * The feature id for the '<em><b>Tag</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DYNAMIC_EXPRESSION_EXCEPTION__TAG = EXCEPTION__TAG;
 
 	/**
 	 * The feature id for the '<em><b>File Name</b></em>' attribute.
@@ -3045,6 +3297,15 @@ public interface ExceptionsPackage extends EPackage {
 	 * @ordered
 	 */
 	int DYNAMIC_EXPRESSION_EXCEPTION__OID = EXCEPTION__OID;
+
+	/**
+	 * The feature id for the '<em><b>Internal Containing Resource</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DYNAMIC_EXPRESSION_EXCEPTION__INTERNAL_CONTAINING_RESOURCE = EXCEPTION__INTERNAL_CONTAINING_RESOURCE;
 
 	/**
 	 * The feature id for the '<em><b>Message</b></em>' attribute.

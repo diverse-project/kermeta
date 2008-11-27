@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: EcoreSwitch.java,v 1.8 2008-11-07 08:54:09 cfaucher Exp $
+ * $Id: EcoreSwitch.java,v 1.9 2008-11-27 15:50:16 cfaucher Exp $
  */
 package km2ecore.helper.ecore.util;
 
@@ -84,15 +84,6 @@ public class EcoreSwitch<T> {
 	 */
 	protected T doSwitch(int classifierID, EObject theEObject) {
 		switch (classifierID) {
-		case EcorePackage.EANNOTATION_HELPER: {
-			EAnnotationHelper eAnnotationHelper = (EAnnotationHelper) theEObject;
-			T result = caseEAnnotationHelper(eAnnotationHelper);
-			if (result == null)
-				result = caseObject(eAnnotationHelper);
-			if (result == null)
-				result = defaultCase(theEObject);
-			return result;
-		}
 		case EcorePackage.ENAMED_ELEMENT_HELPER: {
 			ENamedElementHelper eNamedElementHelper = (ENamedElementHelper) theEObject;
 			T result = caseENamedElementHelper(eNamedElementHelper);
@@ -120,24 +111,18 @@ public class EcoreSwitch<T> {
 				result = defaultCase(theEObject);
 			return result;
 		}
+		case EcorePackage.EANNOTATION_HELPER: {
+			EAnnotationHelper eAnnotationHelper = (EAnnotationHelper) theEObject;
+			T result = caseEAnnotationHelper(eAnnotationHelper);
+			if (result == null)
+				result = caseObject(eAnnotationHelper);
+			if (result == null)
+				result = defaultCase(theEObject);
+			return result;
+		}
 		default:
 			return defaultCase(theEObject);
 		}
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>EAnnotation Helper</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>EAnnotation Helper</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseEAnnotationHelper(EAnnotationHelper object) {
-		return null;
 	}
 
 	/**
@@ -182,6 +167,21 @@ public class EcoreSwitch<T> {
 	 * @generated
 	 */
 	public T caseEcoreModelElementHelper(EcoreModelElementHelper object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>EAnnotation Helper</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>EAnnotation Helper</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseEAnnotationHelper(EAnnotationHelper object) {
 		return null;
 	}
 

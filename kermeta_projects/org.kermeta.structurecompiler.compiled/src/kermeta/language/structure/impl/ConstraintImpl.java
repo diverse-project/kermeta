@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ConstraintImpl.java,v 1.8 2008-11-07 08:52:54 cfaucher Exp $
+ * $Id: ConstraintImpl.java,v 1.9 2008-11-27 15:49:50 cfaucher Exp $
  */
 package kermeta.language.structure.impl;
 
@@ -527,18 +527,27 @@ public class ConstraintImpl extends TraceabilityImpl<EAnnotation> implements
 
 		result = "";
 
-		java.lang.Boolean idIfCond_258 = false;
-		idIfCond_258 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+		java.lang.Boolean idIfCond_43 = false;
+		idIfCond_43 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 				.isInstanceOfSwitcher(this.getBody(),
 						org.kermeta.compil.runtime.ExecutionContext
 								.getInstance().getMetaClass(
 										"kermeta.language.behavior.Block"));
 
-		if (idIfCond_258) {
+		if (idIfCond_43) {
 
 			result = kermeta.standard.helper.StringWrapper.plus(result, this
 					.getBody().createBehaviorJava(context));
 		} else {
+
+			((kermeta.language.behavior.Expression) org.kermeta.compil.runtime.helper.language.ObjectUtil
+					.asTypeSwitcher(
+							this.getBody(),
+							org.kermeta.compil.runtime.ExecutionContext
+									.getInstance()
+									.getMetaClass(
+											"kermeta.language.behavior.Expression")))
+					.setIsLastExpression(true);
 
 			result = kermeta.standard.helper.StringWrapper
 					.plus(
@@ -548,8 +557,8 @@ public class ConstraintImpl extends TraceabilityImpl<EAnnotation> implements
 									.createExpression(
 											context,
 											((kermeta.utils.StringBuffer) org.kermeta.compil.runtime.helper.language.ClassUtil
-													.newObject("kermeta.utils.StringBuffer")),
-											true).toString());
+													.newObject("kermeta.utils.StringBuffer")))
+									.toString());
 		}
 
 		return result;
@@ -566,12 +575,12 @@ public class ConstraintImpl extends TraceabilityImpl<EAnnotation> implements
 		simk.SMContext smContext = context.getSimkModel()
 				.retrieveOrCreateContextForInvariant(this, context);
 
-		java.lang.Boolean idIfCond_259 = false;
-		idIfCond_259 = kermeta.standard.helper.BooleanWrapper
+		java.lang.Boolean idIfCond_44 = false;
+		idIfCond_44 = kermeta.standard.helper.BooleanWrapper
 				.not(org.kermeta.compil.runtime.helper.language.ObjectUtil
 						.isVoidSwitcher(smContext));
 
-		if (idIfCond_259) {
+		if (idIfCond_44) {
 
 			simk.SMMethod staticMethod = ((simk.SMMethod) org.kermeta.compil.runtime.helper.language.ClassUtil
 					.newObject("simk.SMMethod"));
@@ -663,11 +672,11 @@ public class ConstraintImpl extends TraceabilityImpl<EAnnotation> implements
 		kermeta.language.structure.Property p = c
 				.getPropertyValue("ecoreModelElement");
 
-		java.lang.Boolean idIfCond_260 = false;
-		idIfCond_260 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+		java.lang.Boolean idIfCond_45 = false;
+		idIfCond_45 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 				.isNotEqualSwitcher(p, null);
 
-		if (idIfCond_260) {
+		if (idIfCond_45) {
 
 			ecore.EModelElement ecoreModelElement = ((ecore.EModelElement) org.kermeta.compil.runtime.helper.language.ObjectUtil
 					.asTypeSwitcher(
@@ -702,57 +711,45 @@ public class ConstraintImpl extends TraceabilityImpl<EAnnotation> implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void applyPass2(KM2EcoreContext context) {
-
-		kermeta.language.structure.helper.ObjectSuper.super_applyPass2(this,
-				context);
-
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EAnnotation createEcoreModelElement(KM2EcoreContext context) {
 
 		ecore.EAnnotation result = null;
 
 		java.lang.String body = "";
 
-		java.lang.Boolean idIfCond_261 = false;
-		idIfCond_261 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+		java.lang.Boolean idIfCond_46 = false;
+		idIfCond_46 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 				.equalsSwitcher(this.getStereotype(),
 						kermeta.language.structure.ConstraintType
 								.getByName("inv"));
 
-		if (idIfCond_261) {
+		if (idIfCond_46) {
 
 			result = ((km2ecore.helper.ecore.EAnnotationHelper) org.kermeta.compil.runtime.helper.language.ClassUtil
 					.newObject("km2ecore.helper.ecore.EAnnotationHelper"))
 					.create("kermeta.inv", this.getName(), body);
 		} else {
 
-			java.lang.Boolean idIfCond_262 = false;
-			idIfCond_262 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+			java.lang.Boolean idIfCond_47 = false;
+			idIfCond_47 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 					.equalsSwitcher(this.getStereotype(),
 							kermeta.language.structure.ConstraintType
 									.getByName("pre"));
 
-			if (idIfCond_262) {
+			if (idIfCond_47) {
 
 				result = ((km2ecore.helper.ecore.EAnnotationHelper) org.kermeta.compil.runtime.helper.language.ClassUtil
 						.newObject("km2ecore.helper.ecore.EAnnotationHelper"))
 						.create("kermeta.pre", this.getName(), body);
 			} else {
 
-				java.lang.Boolean idIfCond_263 = false;
-				idIfCond_263 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+				java.lang.Boolean idIfCond_48 = false;
+				idIfCond_48 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 						.equalsSwitcher(this.getStereotype(),
 								kermeta.language.structure.ConstraintType
 										.getByName("post"));
 
-				if (idIfCond_263) {
+				if (idIfCond_48) {
 
 					result = ((km2ecore.helper.ecore.EAnnotationHelper) org.kermeta.compil.runtime.helper.language.ClassUtil
 							.newObject("km2ecore.helper.ecore.EAnnotationHelper"))
@@ -764,6 +761,18 @@ public class ConstraintImpl extends TraceabilityImpl<EAnnotation> implements
 		}
 
 		return result;
+
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void applyPass2(KM2EcoreContext context) {
+
+		kermeta.language.structure.helper.ObjectSuper.super_applyPass2(this,
+				context);
 
 	}
 
@@ -792,13 +801,13 @@ public class ConstraintImpl extends TraceabilityImpl<EAnnotation> implements
 	 */
 	public void applyPass2BehaviorJava(KM2EcoreContext context) {
 
-		java.lang.Boolean idIfCond_264 = false;
-		idIfCond_264 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+		java.lang.Boolean idIfCond_49 = false;
+		idIfCond_49 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 				.equalsSwitcher(this.getStereotype(),
 						kermeta.language.structure.ConstraintType
 								.getByName("inv"));
 
-		if (idIfCond_264) {
+		if (idIfCond_49) {
 
 			this.setSimkForInvariant(context);
 		}
@@ -886,8 +895,8 @@ public class ConstraintImpl extends TraceabilityImpl<EAnnotation> implements
 
 		result = this.getName();
 
-		java.lang.Boolean idIfCond_402 = false;
-		idIfCond_402 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+		java.lang.Boolean idIfCond_369 = false;
+		idIfCond_369 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 				.isInstanceOfSwitcher(
 						org.kermeta.compil.runtime.helper.language.ObjectUtil
 								.containerSwitcher(elem),
@@ -896,26 +905,26 @@ public class ConstraintImpl extends TraceabilityImpl<EAnnotation> implements
 								.getMetaClass(
 										"kermeta.language.structure.NamedElement"));
 
-		if (idIfCond_402) {
+		if (idIfCond_369) {
 
 			elem = (kermeta.language.structure.NamedElement) org.kermeta.compil.runtime.ExecutionContext
 					.getInstance()
 					.<kermeta.language.structure.NamedElement> asTypeOrVoid(
 							org.kermeta.compil.runtime.helper.language.ObjectUtil
 									.containerSwitcher(elem));
-			java.lang.Boolean idLoopCond_403 = false;
-			while (!idLoopCond_403) {
-				idLoopCond_403 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+			java.lang.Boolean idLoopCond_370 = false;
+			while (!idLoopCond_370) {
+				idLoopCond_370 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 						.equalsSwitcher(elem, null);
-				if (idLoopCond_403) {
+				if (idLoopCond_370) {
 				} else {
 
 					result = kermeta.standard.helper.StringWrapper.plus(
 							kermeta.standard.helper.StringWrapper.plus(elem
 									.getName(), "::"), result);
 
-					java.lang.Boolean idIfCond_404 = false;
-					idIfCond_404 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+					java.lang.Boolean idIfCond_371 = false;
+					idIfCond_371 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 							.isInstanceOfSwitcher(
 									org.kermeta.compil.runtime.helper.language.ObjectUtil
 											.containerSwitcher(elem),
@@ -924,7 +933,7 @@ public class ConstraintImpl extends TraceabilityImpl<EAnnotation> implements
 											.getMetaClass(
 													"kermeta.language.structure.NamedElement"));
 
-					if (idIfCond_404) {
+					if (idIfCond_371) {
 
 						elem = (kermeta.language.structure.NamedElement) org.kermeta.compil.runtime.ExecutionContext
 								.getInstance()

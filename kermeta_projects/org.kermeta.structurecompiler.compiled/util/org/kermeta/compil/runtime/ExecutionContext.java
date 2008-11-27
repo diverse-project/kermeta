@@ -112,8 +112,11 @@ public class ExecutionContext {
 			return hashtable_classes.get(javaQualifiedName);
 		}
 
-		javaQualifiedName = javaQualifiedName.replace("impl.", "").replace(
-				"Impl", "");
+		javaQualifiedName = javaQualifiedName.replace("impl.", "");
+
+		if (javaQualifiedName.endsWith("Impl")) {
+			javaQualifiedName = javaQualifiedName.replace("Impl", "");
+		}
 
 		// Optimization
 		if (hashtable_classes.containsKey(javaQualifiedName)) {

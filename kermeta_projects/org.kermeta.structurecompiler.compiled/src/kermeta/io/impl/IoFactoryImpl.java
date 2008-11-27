@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: IoFactoryImpl.java,v 1.8 2008-11-07 08:53:17 cfaucher Exp $
+ * $Id: IoFactoryImpl.java,v 1.9 2008-11-27 15:49:53 cfaucher Exp $
  */
 package kermeta.io.impl;
 
@@ -60,10 +60,10 @@ public class IoFactoryImpl extends EFactoryImpl implements IoFactory {
 	@Override
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
-		case IoPackage.FILE_IO:
-			return createFileIO();
 		case IoPackage.STD_IO:
 			return createStdIO();
+		case IoPackage.FILE_IO:
+			return createFileIO();
 		default:
 			throw new IllegalArgumentException("The class '" + eClass.getName()
 					+ "' is not a valid classifier");
@@ -75,9 +75,9 @@ public class IoFactoryImpl extends EFactoryImpl implements IoFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public FileIO createFileIO() {
-		FileIOImpl fileIO = new FileIOImpl();
-		return fileIO;
+	public StdIO createStdIO() {
+		StdIOImpl stdIO = new StdIOImpl();
+		return stdIO;
 	}
 
 	/**
@@ -85,9 +85,9 @@ public class IoFactoryImpl extends EFactoryImpl implements IoFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public StdIO createStdIO() {
-		StdIOImpl stdIO = new StdIOImpl();
-		return stdIO;
+	public FileIO createFileIO() {
+		FileIOImpl fileIO = new FileIOImpl();
+		return fileIO;
 	}
 
 	/**

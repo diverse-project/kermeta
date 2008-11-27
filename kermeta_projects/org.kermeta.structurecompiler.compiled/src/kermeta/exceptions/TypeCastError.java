@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: TypeCastError.java,v 1.8 2008-11-07 08:53:05 cfaucher Exp $
+ * $Id: TypeCastError.java,v 1.9 2008-11-27 15:49:51 cfaucher Exp $
  */
 package kermeta.exceptions;
 
@@ -13,7 +13,7 @@ package kermeta.exceptions;
  *
  *
  * @see kermeta.exceptions.ExceptionsPackage#getTypeCastError()
- * @model annotation="kermeta documentation='/**\r\n * Occurs when a cast (Object::asType operation) fails\r\n \052/'"
+ * @model annotation="kermeta documentation='/**\n * Occurs when a cast (Object::asType operation) fails\n \052/'"
  * @generated
  */
 public interface TypeCastError extends RuntimeError {

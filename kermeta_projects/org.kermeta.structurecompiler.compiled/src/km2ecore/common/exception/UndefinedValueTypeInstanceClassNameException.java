@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: UndefinedValueTypeInstanceClassNameException.java,v 1.8 2008-11-07 08:53:20 cfaucher Exp $
+ * $Id: UndefinedValueTypeInstanceClassNameException.java,v 1.9 2008-11-27 15:49:54 cfaucher Exp $
  */
 package km2ecore.common.exception;
 

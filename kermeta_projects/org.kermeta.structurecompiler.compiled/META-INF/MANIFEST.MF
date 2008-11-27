@@ -81,5 +81,6 @@ Require-Bundle: org.eclipse.core.runtime,
  fr.irisa.triskell.eclipse.util;visibility:=reexport,
  fr.irisa.triskell.kermeta.model;visibility:=reexport,
  org.kermeta.simk;bundle-version="1.2.0",
- fr.irisa.triskell.traceability.model;bundle-version="1.1.99"
+ fr.irisa.triskell.traceability.model;bundle-version="1.1.99",
+ org.eclipse.emf.ecoretools.registration;bundle-version="1.0.0"
 Bundle-ActivationPolicy: lazy

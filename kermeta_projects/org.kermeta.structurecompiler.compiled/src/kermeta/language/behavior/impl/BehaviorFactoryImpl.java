@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: BehaviorFactoryImpl.java,v 1.8 2008-11-07 08:53:26 cfaucher Exp $
+ * $Id: BehaviorFactoryImpl.java,v 1.9 2008-11-27 15:49:56 cfaucher Exp $
  */
 package kermeta.language.behavior.impl;
 
@@ -61,16 +61,16 @@ public class BehaviorFactoryImpl extends EFactoryImpl implements
 	@Override
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
-		case BehaviorPackage.BLOCK:
-			return createBlock();
 		case BehaviorPackage.EXPRESSION:
 			return createExpression();
-		case BehaviorPackage.CALL_VARIABLE:
-			return createCallVariable();
-		case BehaviorPackage.CALL_FEATURE:
-			return createCallFeature();
+		case BehaviorPackage.BLOCK:
+			return createBlock();
 		case BehaviorPackage.CALL_EXPRESSION:
 			return createCallExpression();
+		case BehaviorPackage.CALL_FEATURE:
+			return createCallFeature();
+		case BehaviorPackage.CALL_VARIABLE:
+			return createCallVariable();
 		case BehaviorPackage.CALL_RESULT:
 			return createCallResult();
 		case BehaviorPackage.CALL_VALUE:
@@ -124,16 +124,6 @@ public class BehaviorFactoryImpl extends EFactoryImpl implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Block createBlock() {
-		BlockImpl block = new BlockImpl();
-		return block;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public Expression createExpression() {
 		ExpressionImpl expression = new ExpressionImpl();
 		return expression;
@@ -144,9 +134,19 @@ public class BehaviorFactoryImpl extends EFactoryImpl implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public CallVariable createCallVariable() {
-		CallVariableImpl callVariable = new CallVariableImpl();
-		return callVariable;
+	public Block createBlock() {
+		BlockImpl block = new BlockImpl();
+		return block;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public CallExpression createCallExpression() {
+		CallExpressionImpl callExpression = new CallExpressionImpl();
+		return callExpression;
 	}
 
 	/**
@@ -164,9 +164,9 @@ public class BehaviorFactoryImpl extends EFactoryImpl implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public CallExpression createCallExpression() {
-		CallExpressionImpl callExpression = new CallExpressionImpl();
-		return callExpression;
+	public CallVariable createCallVariable() {
+		CallVariableImpl callVariable = new CallVariableImpl();
+		return callVariable;
 	}
 
 	/**

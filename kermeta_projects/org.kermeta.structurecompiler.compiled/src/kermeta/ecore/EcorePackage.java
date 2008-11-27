@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: EcorePackage.java,v 1.8 2008-11-07 08:54:22 cfaucher Exp $
+ * $Id: EcorePackage.java,v 1.9 2008-11-27 15:50:32 cfaucher Exp $
  */
 package kermeta.ecore;
 
@@ -27,7 +27,7 @@ import org.eclipse.emf.ecore.EReference;
  * @see kermeta.ecore.EcoreFactory
  * @model kind="package"
  *        annotation="kermeta ecoreUri='http://www.kermeta.org/kermeta/1_2_0//kermeta/ecore'"
- *        annotation="kermeta documentation='/** \r\n * Contains the definition of a Kermeta classes used for compatibility with Ecore \r\n * <img src=\"platform:/plugin/fr.irisa.triskell.kermeta.documentation/src/figures/ecore_compatibility_package.png\"/>\r\n \052/'"
+ *        annotation="kermeta documentation='/** \n * Contains the definition of a Kermeta classes used for compatibility with Ecore \n * <img src=\"platform:/plugin/fr.irisa.triskell.kermeta.documentation/src/figures/ecore_compatibility_package.png\"/>\n \052/'"
  * @generated
  */
 public interface EcorePackage extends EPackage {
@@ -74,15 +74,6 @@ public interface EcorePackage extends EPackage {
 	int EFEATURE_MAP_ENTRY = 0;
 
 	/**
-	 * The feature id for the '<em><b>Tag</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EFEATURE_MAP_ENTRY__TAG = StructurePackage.OBJECT__TAG;
-
-	/**
 	 * The feature id for the '<em><b>File</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -90,6 +81,15 @@ public interface EcorePackage extends EPackage {
 	 * @ordered
 	 */
 	int EFEATURE_MAP_ENTRY__FILE = StructurePackage.OBJECT__FILE;
+
+	/**
+	 * The feature id for the '<em><b>Tag</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EFEATURE_MAP_ENTRY__TAG = StructurePackage.OBJECT__TAG;
 
 	/**
 	 * The feature id for the '<em><b>File Name</b></em>' attribute.
@@ -126,6 +126,15 @@ public interface EcorePackage extends EPackage {
 	 * @ordered
 	 */
 	int EFEATURE_MAP_ENTRY__OID = StructurePackage.OBJECT__OID;
+
+	/**
+	 * The feature id for the '<em><b>Internal Containing Resource</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EFEATURE_MAP_ENTRY__INTERNAL_CONTAINING_RESOURCE = StructurePackage.OBJECT__INTERNAL_CONTAINING_RESOURCE;
 
 	/**
 	 * The feature id for the '<em><b>Value</b></em>' containment reference.

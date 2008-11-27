@@ -50,7 +50,12 @@ public class ObjectUtil {
 	
 	static public java.lang.Boolean isInstanceOf(kermeta.language.structure.Object o, String type) {
 		
-		if ( type.equals(o.getClass().getName().replace("impl.", "").replace("Impl", "")) ) {
+		String str_type = o.getClass().getName().replace("impl.", "");
+		if(str_type.endsWith("Impl")) {
+			str_type = str_type.replace("Impl", "");
+		}
+		
+		if ( type.equals(str_type) ) {
 			return true;
 		} else {
 			for( Type superTypes : allSuperTypes((ClassDefinition) getMetaClass(o).getTypeDefinition()) ) {
@@ -63,8 +68,13 @@ public class ObjectUtil {
 	}
 	
 	static public java.lang.Boolean isInstanceOf(java.lang.Object o, String type) {
+		
+		String str_type = o.getClass().getName().replace("impl.", "");
+		if(str_type.endsWith("Impl")) {
+			str_type = str_type.replace("Impl", "");
+		}
 
-		if ( type.equals(o.getClass().getName().replace("impl.", "").replace("Impl", "")) ) {
+		if ( type.equals(str_type) ) {
 			return true;
 		} else {
 			for( Type superTypes : allSuperTypes((ClassDefinition) getMetaClass(o).getTypeDefinition()) ) {			
@@ -120,6 +130,16 @@ public class ObjectUtil {
 			return isInstanceOf((kermeta.language.structure.Object) self, metaClass);
 		} else {
 			return isInstanceOf((java.lang.Object) self, metaClass);
+		}
+	}
+	
+	public static void setSwitcher(java.lang.Object self, Property property, Object element) {
+		if( self instanceof kermeta.language.structure.Object ) {
+			(( kermeta.language.structure.Object) self).set(property, element);
+		} else {
+			throw new org.kermeta.compil.runtime.helper.error.KRuntimeError(
+					((kermeta.exceptions.NotImplementedException) org.kermeta.compil.runtime.helper.language.ClassUtil
+							.newObject("kermeta.exceptions.NotImplementedException")));
 		}
 	}
 	
@@ -366,37 +386,66 @@ public class ObjectUtil {
 		return getMetaClass(self);
 	}
 	
-	///////////Unused for the moment
-	static public kermeta.language.structure.Object convertFromJavaString(java.lang.String o) {
-		if (true)
-			throw new org.kermeta.compil.runtime.helper.error.KRuntimeError(
-					((kermeta.exceptions.NotImplementedException) org.kermeta.compil.runtime.helper.language.ClassUtil
-							.newObject("kermeta.exceptions.NotImplementedException")));
-		return null;
+	// CONVERT VALUE TYPES IN OBJECT
+	public static kermeta.language.structure.Object convertAsObject(java.lang.String self) {
+		
+		if(self==null) {
+			return null;
+		}
+		
+		kermeta.standard.String _obj = StandardFactory.eINSTANCE.createString();
+		_obj.setValue(self);
+		return _obj;
 	}
 	
-	static public kermeta.language.structure.Object convertFromJavaInteger(java.lang.Integer o) {
-		if (true)
-			throw new org.kermeta.compil.runtime.helper.error.KRuntimeError(
-					((kermeta.exceptions.NotImplementedException) org.kermeta.compil.runtime.helper.language.ClassUtil
-							.newObject("kermeta.exceptions.NotImplementedException")));
-		return null;
+	public static kermeta.language.structure.Object convertAsObject(java.lang.Integer self) {
+		
+		if(self==null) {
+			return null;
+		}
+		
+		kermeta.standard.Integer _obj = StandardFactory.eINSTANCE.createInteger();
+		_obj.setValue(self.toString());
+		return _obj;
 	}
 	
-	static public kermeta.language.structure.Object convertFromJavaBoolean(java.lang.Boolean o) {
-		if (true)
-			throw new org.kermeta.compil.runtime.helper.error.KRuntimeError(
-					((kermeta.exceptions.NotImplementedException) org.kermeta.compil.runtime.helper.language.ClassUtil
-							.newObject("kermeta.exceptions.NotImplementedException")));
-		return null;
+	public static kermeta.language.structure.Object convertAsObject(java.lang.Boolean self) {
+		
+		if(self==null) {
+			return null;
+		}
+		
+		kermeta.standard.Boolean _obj = StandardFactory.eINSTANCE.createBoolean();
+		_obj.setValue(self.toString());
+		return _obj;
 	}
-	///////////end of Unused for the moment
 	
+	public static kermeta.language.structure.Object convertAsObject(java.lang.Character self) {
+		
+		if(self==null) {
+			return null;
+		}
+		
+		kermeta.standard.Character _obj = StandardFactory.eINSTANCE.createCharacter();
+		_obj.setValue(self.toString());
+		return _obj;
+	}
 	
+	public static kermeta.language.structure.Object convertAsObject(java.lang.Double self) {
+		
+		if(self==null) {
+			return null;
+		}
+		
+		kermeta.standard.Real _obj = StandardFactory.eINSTANCE.createReal();
+		_obj.setValue(self.toString());
+		return _obj;
+	}
+	//end of CONVERT VALUE TYPES IN OBJECT
 	
 	public static Boolean equalsSwitcher(java.lang.Object object, java.lang.Object element) {
 		if( object instanceof kermeta.language.structure.Object && element instanceof kermeta.language.structure.Object) {
-			return object.equals(element);
+			return ((kermeta.language.structure.Object) object).equals((kermeta.language.structure.Object) element);
 		} else {
 			return equals(object, element);
 		}
@@ -439,55 +488,70 @@ public class ObjectUtil {
 	}
 	
 	public static Boolean isFrozen(kermeta.language.structure.Object object) {
-		// TODO Auto-generated method stub
+		if (true)
+			throw new org.kermeta.compil.runtime.helper.error.KRuntimeError(
+					((kermeta.exceptions.NotImplementedException) org.kermeta.compil.runtime.helper.language.ClassUtil
+							.newObject("kermeta.exceptions.NotImplementedException")));
 		return null;
 	}
 	
 	public static Boolean isFrozen(java.lang.Object objectImpl) {
-		// TODO Auto-generated method stub
+		if (true)
+			throw new org.kermeta.compil.runtime.helper.error.KRuntimeError(
+					((kermeta.exceptions.NotImplementedException) org.kermeta.compil.runtime.helper.language.ClassUtil
+							.newObject("kermeta.exceptions.NotImplementedException")));
 		return null;
 	}
 	
 	public static void freeze(kermeta.language.structure.Object objectImpl) {
-		// TODO Auto-generated method stub
-		
+		if (true)
+			throw new org.kermeta.compil.runtime.helper.error.KRuntimeError(
+					((kermeta.exceptions.NotImplementedException) org.kermeta.compil.runtime.helper.language.ClassUtil
+							.newObject("kermeta.exceptions.NotImplementedException")));
 	}
 	
 	public static void freeze(java.lang.Object objectImpl) {
-		// TODO Auto-generated method stub
-		
+		if (true)
+			throw new org.kermeta.compil.runtime.helper.error.KRuntimeError(
+					((kermeta.exceptions.NotImplementedException) org.kermeta.compil.runtime.helper.language.ClassUtil
+							.newObject("kermeta.exceptions.NotImplementedException")));
 	}
 	
-	public static kermeta.persistence.Resource getContainingResource(kermeta.language.structure.Object objectImpl) {
-		// TODO Auto-generated method stub
+	public static kermeta.persistence.Resource getContainingResource(kermeta.language.structure.Object self) {
+		return self.getInternalContainingResource();
+	}
+	
+	public static kermeta.persistence.Resource getContainingResource(java.lang.Object self) {
 		return null;
 	}
 	
-	public static kermeta.persistence.Resource getContainingResource(java.lang.Object objectImpl) {
-		// TODO Auto-generated method stub
+	public static kermeta.persistence.Resource containingResourceSwitcher(java.lang.Object self) {
+		if (self instanceof kermeta.language.structure.Object) {
+			return ((kermeta.language.structure.Object) self).containingResource();
+		}
 		return null;
 	}
 	
-	public static void unSetContainingResource(kermeta.language.structure.Object instance) {
-		// TODO Auto-generated method stub
-		
+	public static void unSetContainingResource(kermeta.language.structure.Object self) {
+		if (self instanceof kermeta.language.structure.Object) {
+			setContainingResource((kermeta.language.structure.Object) self, null);
+		}
 	}
 	
-	public static void unSetContainingResource(java.lang.Object instance) {
-		// TODO Auto-generated method stub
-		
+	public static void unSetContainingResource(java.lang.Object self) {
+		//Do nothing
 	}
 	
-	public static void setContainingResource(kermeta.language.structure.Object instance,
-			kermeta.persistence.EMFResource resourceImpl) {
-		// TODO Auto-generated method stub
-		
+	public static void setContainingResource(kermeta.language.structure.Object self,
+			kermeta.persistence.EMFResource resource) {
+		if (self instanceof kermeta.language.structure.Object) {
+			((kermeta.language.structure.Object) self).setInternalContainingResource(resource);
+		}
 	}
 	
 	public static void setContainingResource(java.lang.Object instance,
 			kermeta.persistence.EMFResource resourceImpl) {
-		// TODO Auto-generated method stub
-		
+		//Do nothing
 	}
 	
 	public static java.lang.Boolean isNotEqualSwitcher(java.lang.Object self, java.lang.Object o) {

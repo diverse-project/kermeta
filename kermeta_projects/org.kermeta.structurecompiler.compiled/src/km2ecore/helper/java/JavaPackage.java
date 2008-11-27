@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: JavaPackage.java,v 1.8 2008-11-07 08:53:51 cfaucher Exp $
+ * $Id: JavaPackage.java,v 1.9 2008-11-27 15:50:07 cfaucher Exp $
  */
 package km2ecore.helper.java;
 
@@ -71,15 +71,6 @@ public interface JavaPackage extends EPackage {
 	int IDENTIFIER_HELPER = 0;
 
 	/**
-	 * The feature id for the '<em><b>Tag</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int IDENTIFIER_HELPER__TAG = StructurePackage.OBJECT__TAG;
-
-	/**
 	 * The feature id for the '<em><b>File</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -87,6 +78,15 @@ public interface JavaPackage extends EPackage {
 	 * @ordered
 	 */
 	int IDENTIFIER_HELPER__FILE = StructurePackage.OBJECT__FILE;
+
+	/**
+	 * The feature id for the '<em><b>Tag</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int IDENTIFIER_HELPER__TAG = StructurePackage.OBJECT__TAG;
 
 	/**
 	 * The feature id for the '<em><b>File Name</b></em>' attribute.
@@ -123,6 +123,15 @@ public interface JavaPackage extends EPackage {
 	 * @ordered
 	 */
 	int IDENTIFIER_HELPER__OID = StructurePackage.OBJECT__OID;
+
+	/**
+	 * The feature id for the '<em><b>Internal Containing Resource</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int IDENTIFIER_HELPER__INTERNAL_CONTAINING_RESOURCE = StructurePackage.OBJECT__INTERNAL_CONTAINING_RESOURCE;
 
 	/**
 	 * The number of structural features of the '<em>Identifier Helper</em>' class.

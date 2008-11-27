@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: CommonPackage.java,v 1.8 2008-11-07 08:54:22 cfaucher Exp $
+ * $Id: CommonPackage.java,v 1.9 2008-11-27 15:50:31 cfaucher Exp $
  */
 package km2ecore.common;
 
@@ -72,15 +72,6 @@ public interface CommonPackage extends EPackage {
 	int JAVA_KEY_WORD_LIST = 0;
 
 	/**
-	 * The feature id for the '<em><b>Tag</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int JAVA_KEY_WORD_LIST__TAG = StructurePackage.OBJECT__TAG;
-
-	/**
 	 * The feature id for the '<em><b>File</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -88,6 +79,15 @@ public interface CommonPackage extends EPackage {
 	 * @ordered
 	 */
 	int JAVA_KEY_WORD_LIST__FILE = StructurePackage.OBJECT__FILE;
+
+	/**
+	 * The feature id for the '<em><b>Tag</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int JAVA_KEY_WORD_LIST__TAG = StructurePackage.OBJECT__TAG;
 
 	/**
 	 * The feature id for the '<em><b>File Name</b></em>' attribute.
@@ -124,6 +124,15 @@ public interface CommonPackage extends EPackage {
 	 * @ordered
 	 */
 	int JAVA_KEY_WORD_LIST__OID = StructurePackage.OBJECT__OID;
+
+	/**
+	 * The feature id for the '<em><b>Internal Containing Resource</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int JAVA_KEY_WORD_LIST__INTERNAL_CONTAINING_RESOURCE = StructurePackage.OBJECT__INTERNAL_CONTAINING_RESOURCE;
 
 	/**
 	 * The feature id for the '<em><b>Keywords</b></em>' containment reference.

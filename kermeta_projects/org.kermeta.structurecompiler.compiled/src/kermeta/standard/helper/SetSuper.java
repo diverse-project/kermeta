@@ -19,37 +19,37 @@ public class SetSuper {
 		G elem = null;
 		//BIft:detect
 
-		G result_ft257 = null;
+		G result_ft258 = null;
 
-		G elem_ft257 = null;
+		G elem_ft258 = null;
 
-		result_ft257 = null;
+		result_ft258 = null;
 
 		{
 
-			kermeta.standard.Iterator<G> it_ft257 = self.iterator();
-			java.lang.Boolean idLoopCond_1123 = false;
-			while (!idLoopCond_1123) {
-				idLoopCond_1123 = kermeta.standard.helper.BooleanWrapper.or(
-						it_ft257.isOff(),
+			kermeta.standard.Iterator<G> it_ft258 = self.iterator();
+			java.lang.Boolean idLoopCond_1129 = false;
+			while (!idLoopCond_1129) {
+				idLoopCond_1129 = kermeta.standard.helper.BooleanWrapper.or(
+						it_ft258.isOff(),
 						org.kermeta.compil.runtime.helper.language.ObjectUtil
-								.isNotEqualSwitcher(result_ft257, null));
-				if (idLoopCond_1123) {
+								.isNotEqualSwitcher(result_ft258, null));
+				if (idLoopCond_1129) {
 				} else {
 
-					elem_ft257 = it_ft257.next();
+					elem_ft258 = it_ft258.next();
 
-					java.lang.Boolean idIfCond_1124 = false;
+					java.lang.Boolean idIfCond_1130 = false;
 					//BIle:detector
-					G e_lbdExp257 = elem_ft257;
+					G e_lbdExp258 = elem_ft258;
 
-					idIfCond_1124 = org.kermeta.compil.runtime.helper.language.ObjectUtil
-							.equalsSwitcher(e_lbdExp257, element);
+					idIfCond_1130 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+							.equalsSwitcher(e_lbdExp258, element);
 					//EIle:detector
 
-					if (idIfCond_1124) {
+					if (idIfCond_1130) {
 
-						result_ft257 = elem_ft257;
+						result_ft258 = elem_ft258;
 					}
 
 				}
@@ -57,14 +57,14 @@ public class SetSuper {
 		}
 
 		//CE
-		elem = result_ft257;
+		elem = result_ft258;
 		//EIft:detect
 
-		java.lang.Boolean idIfCond_1125 = false;
-		idIfCond_1125 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+		java.lang.Boolean idIfCond_1131 = false;
+		idIfCond_1131 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 				.isNotEqualSwitcher(elem, null);
 
-		if (idIfCond_1125) {
+		if (idIfCond_1131) {
 
 			org.kermeta.compil.runtime.helper.basetypes.CollectionUtil.remove(
 					self, elem);
@@ -82,11 +82,11 @@ public class SetSuper {
 
 	) {
 
-		java.lang.Boolean idIfCond_1126 = false;
-		idIfCond_1126 = kermeta.standard.helper.BooleanWrapper.not(self
+		java.lang.Boolean idIfCond_1132 = false;
+		idIfCond_1132 = kermeta.standard.helper.BooleanWrapper.not(self
 				.contains(element));
 
-		if (idIfCond_1126) {
+		if (idIfCond_1132) {
 
 			kermeta.standard.helper.CollectionSuper.super_add(self, element);
 		}

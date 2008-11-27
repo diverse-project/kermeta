@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: InvalidTestCaseNameException.java,v 1.8 2008-11-07 08:53:45 cfaucher Exp $
+ * $Id: InvalidTestCaseNameException.java,v 1.9 2008-11-27 15:50:05 cfaucher Exp $
  */
 package kermeta.kunit;
 
@@ -13,7 +13,7 @@ package kermeta.kunit;
  *
  *
  * @see kermeta.kunit.KunitPackage#getInvalidTestCaseNameException()
- * @model annotation="kermeta documentation='/**\r\n * This exception is rose if there is a problem on the name of the test method\r\n \052/'"
+ * @model annotation="kermeta documentation='/**\n * This exception is rose if there is a problem on the name of the test method\n \052/'"
  * @generated
  */
 public interface InvalidTestCaseNameException extends

@@ -2,17 +2,25 @@
  * <copyright>
  * </copyright>
  *
- * $Id: InterpreterPackageImpl.java,v 1.8 2008-11-07 08:53:32 cfaucher Exp $
+ * $Id: InterpreterPackageImpl.java,v 1.9 2008-11-27 15:49:56 cfaucher Exp $
  */
 package kermeta.interpreter.impl;
+
+import kermeta.KermetaPackage;
 
 import kermeta.compiler.CompilerPackage;
 
 import kermeta.compiler.impl.CompilerPackageImpl;
 
+import kermeta.ecore.EcorePackage;
+
+import kermeta.ecore.impl.EcorePackageImpl;
+
 import kermeta.exceptions.ExceptionsPackage;
 
 import kermeta.exceptions.impl.ExceptionsPackageImpl;
+
+import kermeta.impl.KermetaPackageImpl;
 
 import kermeta.interpreter.DynamicExpression;
 import kermeta.interpreter.InterpreterFactory;
@@ -63,17 +71,9 @@ import km2ecore.common.exception.impl.ExceptionPackageImpl;
 
 import km2ecore.common.impl.CommonPackageImpl;
 
-import km2ecore.helper.ecore.EcorePackage;
-
-import km2ecore.helper.ecore.impl.EcorePackageImpl;
-
 import km2ecore.helper.java.JavaPackage;
 
 import km2ecore.helper.java.impl.JavaPackageImpl;
-
-import km2ecore.helper.kermeta.KermetaPackage;
-
-import km2ecore.helper.kermeta.impl.KermetaPackageImpl;
 
 import km2ecore.impl.Km2ecorePackageImpl;
 
@@ -192,34 +192,10 @@ public class InterpreterPackageImpl extends EPackageImpl implements
 		isInited = true;
 
 		// Obtain or create and register interdependencies
-		Km2ecorePackageImpl theKm2ecorePackage = (Km2ecorePackageImpl) (EPackage.Registry.INSTANCE
-				.getEPackage(Km2ecorePackage.eNS_URI) instanceof Km2ecorePackageImpl ? EPackage.Registry.INSTANCE
-				.getEPackage(Km2ecorePackage.eNS_URI)
-				: Km2ecorePackage.eINSTANCE);
-		EcorePackageImpl theEcorePackage = (EcorePackageImpl) (EPackage.Registry.INSTANCE
-				.getEPackage(EcorePackage.eNS_URI) instanceof EcorePackageImpl ? EPackage.Registry.INSTANCE
-				.getEPackage(EcorePackage.eNS_URI)
-				: EcorePackage.eINSTANCE);
-		JavaPackageImpl theJavaPackage = (JavaPackageImpl) (EPackage.Registry.INSTANCE
-				.getEPackage(JavaPackage.eNS_URI) instanceof JavaPackageImpl ? EPackage.Registry.INSTANCE
-				.getEPackage(JavaPackage.eNS_URI)
-				: JavaPackage.eINSTANCE);
 		KermetaPackageImpl theKermetaPackage = (KermetaPackageImpl) (EPackage.Registry.INSTANCE
 				.getEPackage(KermetaPackage.eNS_URI) instanceof KermetaPackageImpl ? EPackage.Registry.INSTANCE
 				.getEPackage(KermetaPackage.eNS_URI)
 				: KermetaPackage.eINSTANCE);
-		CommonPackageImpl theCommonPackage = (CommonPackageImpl) (EPackage.Registry.INSTANCE
-				.getEPackage(CommonPackage.eNS_URI) instanceof CommonPackageImpl ? EPackage.Registry.INSTANCE
-				.getEPackage(CommonPackage.eNS_URI)
-				: CommonPackage.eINSTANCE);
-		ExceptionPackageImpl theExceptionPackage = (ExceptionPackageImpl) (EPackage.Registry.INSTANCE
-				.getEPackage(ExceptionPackage.eNS_URI) instanceof ExceptionPackageImpl ? EPackage.Registry.INSTANCE
-				.getEPackage(ExceptionPackage.eNS_URI)
-				: ExceptionPackage.eINSTANCE);
-		kermeta.impl.KermetaPackageImpl theKermetaPackage_1 = (kermeta.impl.KermetaPackageImpl) (EPackage.Registry.INSTANCE
-				.getEPackage(kermeta.KermetaPackage.eNS_URI) instanceof kermeta.impl.KermetaPackageImpl ? EPackage.Registry.INSTANCE
-				.getEPackage(kermeta.KermetaPackage.eNS_URI)
-				: kermeta.KermetaPackage.eINSTANCE);
 		LanguagePackageImpl theLanguagePackage = (LanguagePackageImpl) (EPackage.Registry.INSTANCE
 				.getEPackage(LanguagePackage.eNS_URI) instanceof LanguagePackageImpl ? EPackage.Registry.INSTANCE
 				.getEPackage(LanguagePackage.eNS_URI)
@@ -232,6 +208,14 @@ public class InterpreterPackageImpl extends EPackageImpl implements
 				.getEPackage(BehaviorPackage.eNS_URI) instanceof BehaviorPackageImpl ? EPackage.Registry.INSTANCE
 				.getEPackage(BehaviorPackage.eNS_URI)
 				: BehaviorPackage.eINSTANCE);
+		CompilerPackageImpl theCompilerPackage = (CompilerPackageImpl) (EPackage.Registry.INSTANCE
+				.getEPackage(CompilerPackage.eNS_URI) instanceof CompilerPackageImpl ? EPackage.Registry.INSTANCE
+				.getEPackage(CompilerPackage.eNS_URI)
+				: CompilerPackage.eINSTANCE);
+		KunitPackageImpl theKunitPackage = (KunitPackageImpl) (EPackage.Registry.INSTANCE
+				.getEPackage(KunitPackage.eNS_URI) instanceof KunitPackageImpl ? EPackage.Registry.INSTANCE
+				.getEPackage(KunitPackage.eNS_URI)
+				: KunitPackage.eINSTANCE);
 		StandardPackageImpl theStandardPackage = (StandardPackageImpl) (EPackage.Registry.INSTANCE
 				.getEPackage(StandardPackage.eNS_URI) instanceof StandardPackageImpl ? EPackage.Registry.INSTANCE
 				.getEPackage(StandardPackage.eNS_URI)
@@ -240,30 +224,50 @@ public class InterpreterPackageImpl extends EPackageImpl implements
 				.getEPackage(ExceptionsPackage.eNS_URI) instanceof ExceptionsPackageImpl ? EPackage.Registry.INSTANCE
 				.getEPackage(ExceptionsPackage.eNS_URI)
 				: ExceptionsPackage.eINSTANCE);
-		PersistencePackageImpl thePersistencePackage = (PersistencePackageImpl) (EPackage.Registry.INSTANCE
-				.getEPackage(PersistencePackage.eNS_URI) instanceof PersistencePackageImpl ? EPackage.Registry.INSTANCE
-				.getEPackage(PersistencePackage.eNS_URI)
-				: PersistencePackage.eINSTANCE);
-		IoPackageImpl theIoPackage = (IoPackageImpl) (EPackage.Registry.INSTANCE
-				.getEPackage(IoPackage.eNS_URI) instanceof IoPackageImpl ? EPackage.Registry.INSTANCE
-				.getEPackage(IoPackage.eNS_URI)
-				: IoPackage.eINSTANCE);
 		UtilsPackageImpl theUtilsPackage = (UtilsPackageImpl) (EPackage.Registry.INSTANCE
 				.getEPackage(UtilsPackage.eNS_URI) instanceof UtilsPackageImpl ? EPackage.Registry.INSTANCE
 				.getEPackage(UtilsPackage.eNS_URI)
 				: UtilsPackage.eINSTANCE);
-		kermeta.ecore.impl.EcorePackageImpl theEcorePackage_1 = (kermeta.ecore.impl.EcorePackageImpl) (EPackage.Registry.INSTANCE
-				.getEPackage(kermeta.ecore.EcorePackage.eNS_URI) instanceof kermeta.ecore.impl.EcorePackageImpl ? EPackage.Registry.INSTANCE
-				.getEPackage(kermeta.ecore.EcorePackage.eNS_URI)
-				: kermeta.ecore.EcorePackage.eINSTANCE);
-		KunitPackageImpl theKunitPackage = (KunitPackageImpl) (EPackage.Registry.INSTANCE
-				.getEPackage(KunitPackage.eNS_URI) instanceof KunitPackageImpl ? EPackage.Registry.INSTANCE
-				.getEPackage(KunitPackage.eNS_URI)
-				: KunitPackage.eINSTANCE);
-		CompilerPackageImpl theCompilerPackage = (CompilerPackageImpl) (EPackage.Registry.INSTANCE
-				.getEPackage(CompilerPackage.eNS_URI) instanceof CompilerPackageImpl ? EPackage.Registry.INSTANCE
-				.getEPackage(CompilerPackage.eNS_URI)
-				: CompilerPackage.eINSTANCE);
+		IoPackageImpl theIoPackage = (IoPackageImpl) (EPackage.Registry.INSTANCE
+				.getEPackage(IoPackage.eNS_URI) instanceof IoPackageImpl ? EPackage.Registry.INSTANCE
+				.getEPackage(IoPackage.eNS_URI)
+				: IoPackage.eINSTANCE);
+		PersistencePackageImpl thePersistencePackage = (PersistencePackageImpl) (EPackage.Registry.INSTANCE
+				.getEPackage(PersistencePackage.eNS_URI) instanceof PersistencePackageImpl ? EPackage.Registry.INSTANCE
+				.getEPackage(PersistencePackage.eNS_URI)
+				: PersistencePackage.eINSTANCE);
+		EcorePackageImpl theEcorePackage = (EcorePackageImpl) (EPackage.Registry.INSTANCE
+				.getEPackage(EcorePackage.eNS_URI) instanceof EcorePackageImpl ? EPackage.Registry.INSTANCE
+				.getEPackage(EcorePackage.eNS_URI)
+				: EcorePackage.eINSTANCE);
+		Km2ecorePackageImpl theKm2ecorePackage = (Km2ecorePackageImpl) (EPackage.Registry.INSTANCE
+				.getEPackage(Km2ecorePackage.eNS_URI) instanceof Km2ecorePackageImpl ? EPackage.Registry.INSTANCE
+				.getEPackage(Km2ecorePackage.eNS_URI)
+				: Km2ecorePackage.eINSTANCE);
+		km2ecore.helper.ecore.impl.EcorePackageImpl theEcorePackage_1 = (km2ecore.helper.ecore.impl.EcorePackageImpl) (EPackage.Registry.INSTANCE
+				.getEPackage(km2ecore.helper.ecore.EcorePackage.eNS_URI) instanceof km2ecore.helper.ecore.impl.EcorePackageImpl ? EPackage.Registry.INSTANCE
+				.getEPackage(km2ecore.helper.ecore.EcorePackage.eNS_URI)
+				: km2ecore.helper.ecore.EcorePackage.eINSTANCE);
+		km2ecore.helper.kermeta.impl.KermetaPackageImpl theKermetaPackage_1 = (km2ecore.helper.kermeta.impl.KermetaPackageImpl) (EPackage.Registry.INSTANCE
+				.getEPackage(km2ecore.helper.kermeta.KermetaPackage.eNS_URI) instanceof km2ecore.helper.kermeta.impl.KermetaPackageImpl ? EPackage.Registry.INSTANCE
+				.getEPackage(km2ecore.helper.kermeta.KermetaPackage.eNS_URI)
+				: km2ecore.helper.kermeta.KermetaPackage.eINSTANCE);
+		JavaPackageImpl theJavaPackage = (JavaPackageImpl) (EPackage.Registry.INSTANCE
+				.getEPackage(JavaPackage.eNS_URI) instanceof JavaPackageImpl ? EPackage.Registry.INSTANCE
+				.getEPackage(JavaPackage.eNS_URI)
+				: JavaPackage.eINSTANCE);
+		CommonPackageImpl theCommonPackage = (CommonPackageImpl) (EPackage.Registry.INSTANCE
+				.getEPackage(CommonPackage.eNS_URI) instanceof CommonPackageImpl ? EPackage.Registry.INSTANCE
+				.getEPackage(CommonPackage.eNS_URI)
+				: CommonPackage.eINSTANCE);
+		ExceptionPackageImpl theExceptionPackage = (ExceptionPackageImpl) (EPackage.Registry.INSTANCE
+				.getEPackage(ExceptionPackage.eNS_URI) instanceof ExceptionPackageImpl ? EPackage.Registry.INSTANCE
+				.getEPackage(ExceptionPackage.eNS_URI)
+				: ExceptionPackage.eINSTANCE);
+		TraceabilityPackageImpl theTraceabilityPackage = (TraceabilityPackageImpl) (EPackage.Registry.INSTANCE
+				.getEPackage(TraceabilityPackage.eNS_URI) instanceof TraceabilityPackageImpl ? EPackage.Registry.INSTANCE
+				.getEPackage(TraceabilityPackage.eNS_URI)
+				: TraceabilityPackage.eINSTANCE);
 		SimkPackageImpl theSimkPackage = (SimkPackageImpl) (EPackage.Registry.INSTANCE
 				.getEPackage(SimkPackage.eNS_URI) instanceof SimkPackageImpl ? EPackage.Registry.INSTANCE
 				.getEPackage(SimkPackage.eNS_URI)
@@ -272,58 +276,54 @@ public class InterpreterPackageImpl extends EPackageImpl implements
 				.getEPackage(ecore.EcorePackage.eNS_URI) instanceof ecore.impl.EcorePackageImpl ? EPackage.Registry.INSTANCE
 				.getEPackage(ecore.EcorePackage.eNS_URI)
 				: ecore.EcorePackage.eINSTANCE);
-		TraceabilityPackageImpl theTraceabilityPackage = (TraceabilityPackageImpl) (EPackage.Registry.INSTANCE
-				.getEPackage(TraceabilityPackage.eNS_URI) instanceof TraceabilityPackageImpl ? EPackage.Registry.INSTANCE
-				.getEPackage(TraceabilityPackage.eNS_URI)
-				: TraceabilityPackage.eINSTANCE);
 
 		// Create package meta-data objects
 		theInterpreterPackage.createPackageContents();
-		theKm2ecorePackage.createPackageContents();
-		theEcorePackage.createPackageContents();
-		theJavaPackage.createPackageContents();
 		theKermetaPackage.createPackageContents();
-		theCommonPackage.createPackageContents();
-		theExceptionPackage.createPackageContents();
-		theKermetaPackage_1.createPackageContents();
 		theLanguagePackage.createPackageContents();
 		theStructurePackage.createPackageContents();
 		theBehaviorPackage.createPackageContents();
+		theCompilerPackage.createPackageContents();
+		theKunitPackage.createPackageContents();
 		theStandardPackage.createPackageContents();
 		theExceptionsPackage.createPackageContents();
-		thePersistencePackage.createPackageContents();
-		theIoPackage.createPackageContents();
 		theUtilsPackage.createPackageContents();
+		theIoPackage.createPackageContents();
+		thePersistencePackage.createPackageContents();
+		theEcorePackage.createPackageContents();
+		theKm2ecorePackage.createPackageContents();
 		theEcorePackage_1.createPackageContents();
-		theKunitPackage.createPackageContents();
-		theCompilerPackage.createPackageContents();
+		theKermetaPackage_1.createPackageContents();
+		theJavaPackage.createPackageContents();
+		theCommonPackage.createPackageContents();
+		theExceptionPackage.createPackageContents();
+		theTraceabilityPackage.createPackageContents();
 		theSimkPackage.createPackageContents();
 		theEcorePackage_2.createPackageContents();
-		theTraceabilityPackage.createPackageContents();
 
 		// Initialize created meta-data
 		theInterpreterPackage.initializePackageContents();
-		theKm2ecorePackage.initializePackageContents();
-		theEcorePackage.initializePackageContents();
-		theJavaPackage.initializePackageContents();
 		theKermetaPackage.initializePackageContents();
-		theCommonPackage.initializePackageContents();
-		theExceptionPackage.initializePackageContents();
-		theKermetaPackage_1.initializePackageContents();
 		theLanguagePackage.initializePackageContents();
 		theStructurePackage.initializePackageContents();
 		theBehaviorPackage.initializePackageContents();
+		theCompilerPackage.initializePackageContents();
+		theKunitPackage.initializePackageContents();
 		theStandardPackage.initializePackageContents();
 		theExceptionsPackage.initializePackageContents();
-		thePersistencePackage.initializePackageContents();
-		theIoPackage.initializePackageContents();
 		theUtilsPackage.initializePackageContents();
+		theIoPackage.initializePackageContents();
+		thePersistencePackage.initializePackageContents();
+		theEcorePackage.initializePackageContents();
+		theKm2ecorePackage.initializePackageContents();
 		theEcorePackage_1.initializePackageContents();
-		theKunitPackage.initializePackageContents();
-		theCompilerPackage.initializePackageContents();
+		theKermetaPackage_1.initializePackageContents();
+		theJavaPackage.initializePackageContents();
+		theCommonPackage.initializePackageContents();
+		theExceptionPackage.initializePackageContents();
+		theTraceabilityPackage.initializePackageContents();
 		theSimkPackage.initializePackageContents();
 		theEcorePackage_2.initializePackageContents();
-		theTraceabilityPackage.initializePackageContents();
 
 		// Mark meta-data to indicate it can't be changed
 		theInterpreterPackage.freeze();
@@ -538,9 +538,6 @@ public class InterpreterPackageImpl extends EPackageImpl implements
 				IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES,
 				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		addEOperation(dynamicExpressionEClass, null, "initializeDefaults", 0,
-				1, IS_UNIQUE, !IS_ORDERED);
-
 		EOperation op = addEOperation(dynamicExpressionEClass,
 				theStructurePackage.getObject(), "execute", 0, 1, IS_UNIQUE,
 				IS_ORDERED);
@@ -552,6 +549,9 @@ public class InterpreterPackageImpl extends EPackageImpl implements
 		g2 = createEGenericType(theStructurePackage.getObject());
 		g1.getETypeArguments().add(g2);
 		addEParameter(op, g1, "actualParams", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		addEOperation(dynamicExpressionEClass, null, "initializeDefaults", 0,
+				1, IS_UNIQUE, !IS_ORDERED);
 
 		op = addEOperation(dynamicExpressionEClass, theStandardPackage
 				.getJavaBoolean(), "parse", 0, 1, IS_UNIQUE, IS_ORDERED);
@@ -604,64 +604,64 @@ public class InterpreterPackageImpl extends EPackageImpl implements
 				source,
 				new String[] {
 						"documentation",
-						"/**\r\n * Contains a set of classes whose function is to evaluate a kermeta \r\n * expression written as a string.\r\n * <img src=\"platform:/plugin/fr.irisa.triskell.kermeta.documentation/src/figures/interpreter_package.png\"/>\r\n */" });
+						"/**\n * Contains a set of classes whose function is to evaluate a kermeta \n * expression written as a string.\n * <img src=\"platform:/plugin/fr.irisa.triskell.kermeta.documentation/src/figures/interpreter_package.png\"/>\n */" });
 		addAnnotation(
 				dynamicExpressionEClass,
 				source,
 				new String[] {
 						"documentation",
-						"/**\r\n * DynamicExpression is a class used to make dynamic calls, i.e dynamic evaluation\r\n * of Kermeta statements represented in a string.\r\n * \r\n * An example :\r\n *   var de : DynamicExpression init DynamicExpression.new\r\n *   de.initializeDefaults\r\n *   de.formalParameters.put(\"a\", String)\r\n *   de.parse(\"stdio.writeln(a)\") // note: to execute a list of statements, you have to surround them with do..end\r\n *   var params : Hashtable<String, Object> init Hashtable<String, Object>.new\r\n *   params.put(\"a\", \"hello world!\")\r\n *   de.execute(void, params)\r\n * <img src=\"platform:/plugin/fr.irisa.triskell.kermeta.documentation/src/figures/dynamic_expression_view.png\"/>\r\n */" });
+						"/**\n * DynamicExpression is a class used to make dynamic calls, i.e dynamic evaluation\n * of Kermeta statements represented in a string.\n * \n * An example :\n *   var de : DynamicExpression init DynamicExpression.new\n *   de.initializeDefaults\n *   de.formalParameters.put(\"a\", String)\n *   de.parse(\"stdio.writeln(a)\") // note: to execute a list of statements, you have to surround them with do..end\n *   var params : Hashtable<String, Object> init Hashtable<String, Object>.new\n *   params.put(\"a\", \"hello world!\")\n *   de.execute(void, params)\n * <img src=\"platform:/plugin/fr.irisa.triskell.kermeta.documentation/src/figures/dynamic_expression_view.png\"/>\n */" });
 		addAnnotation(
 				dynamicExpressionEClass.getEOperations().get(0),
 				source,
-				new String[] {
-						"documentation",
-						"/**\r\n\t * Initializes the formalParameters with an empty set of parameters\r\n\t * and the self type with void\r\n\t */" });
+				new String[] { "documentation",
+						"/**\n     * Execute the expression in the given context\n     */" });
 		addAnnotation(
 				dynamicExpressionEClass.getEOperations().get(1),
 				source,
-				new String[] { "documentation",
-						"/**\r\n     * Execute the expression in the given context\r\n     */" });
+				new String[] {
+						"documentation",
+						"/**\n\t * Initializes the formalParameters with an empty set of parameters\n\t * and the self type with void\n\t */" });
 		addAnnotation(
 				dynamicExpressionEClass.getEOperations().get(2),
 				source,
 				new String[] {
 						"documentation",
-						"/**\r\n\t * Parse the expression as a string\r\n\t * and updates the expression field and errors\r\n\t * Returns true if the expression was parsed sucessfuly\r\n\t */" });
+						"/**\n\t * Parse the expression as a string\n\t * and updates the expression field and errors\n\t * Returns true if the expression was parsed sucessfuly\n\t */" });
 		addAnnotation(
 				dynamicExpressionEClass.getEOperations().get(3),
 				source,
 				new String[] {
 						"documentation",
-						"/**\r\n     * Execute the expression given as a string.\r\n     * the self type and formal parameters are supposed to be set\r\n     * before calling this operation\r\n     */" });
+						"/**\n     * Execute the expression given as a string.\n     * the self type and formal parameters are supposed to be set\n     * before calling this operation\n     */" });
 		addAnnotation(getDynamicExpression_Expression(), source, new String[] {
-				"documentation", "/**\r\n\t * the expression\r\n\t */" });
+				"documentation", "/**\n\t * the expression\n\t */" });
 		addAnnotation(getDynamicExpression_Errors(), source, new String[] {
 				"documentation",
-				"/**\r\n\t * Parse errors and type errors\r\n\t */" });
+				"/**\n\t * Parse errors and type errors\n\t */" });
 		addAnnotation(
 				getDynamicExpression_FormalParameters(),
 				source,
 				new String[] {
 						"documentation",
-						"/**\r\n\t * Formal parameters of the expression (bindings between parameters\' names and types)\r\n\t */" });
+						"/**\n\t * Formal parameters of the expression (bindings between parameters\' names and types)\n\t */" });
 		addAnnotation(
 				getDynamicExpression_SelfClass(),
 				source,
 				new String[] {
 						"documentation",
-						"/**\r\n\t * The type of the self object\r\n\t * or void if the expression is not to be executed\r\n\t * in the context of an object\r\n\t */" });
+						"/**\n\t * The type of the self object\n\t * or void if the expression is not to be executed\n\t * in the context of an object\n\t */" });
 		addAnnotation(
 				kermetaErrorEClass,
 				source,
 				new String[] { "documentation",
-						"/**\r\n * Kermeta language error in a code written in Kermeta\r\n */" });
+						"/**\n * Kermeta language error in a code written in Kermeta\n */" });
 		addAnnotation(getKermetaError_Message(), source, new String[] {
-				"documentation", "/**\r\n\t * Error message\r\n\t */" });
+				"documentation", "/**\n\t * Error message\n\t */" });
 		addAnnotation(parseErrorEClass, source, new String[] { "documentation",
-				"/**\r\n * Kermeta error for parsing problems\r\n */" });
+				"/**\n * Kermeta error for parsing problems\n */" });
 		addAnnotation(typeErrorEClass, source, new String[] { "documentation",
-				"/**\r\n * Type errors in a code written in Kermeta\r\n */" });
+				"/**\n * Type errors in a code written in Kermeta\n */" });
 	}
 
 } //InterpreterPackageImpl

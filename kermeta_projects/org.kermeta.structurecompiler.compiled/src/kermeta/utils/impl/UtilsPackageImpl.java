@@ -2,19 +2,27 @@
  * <copyright>
  * </copyright>
  *
- * $Id: UtilsPackageImpl.java,v 1.8 2008-11-07 08:53:12 cfaucher Exp $
+ * $Id: UtilsPackageImpl.java,v 1.9 2008-11-27 15:49:53 cfaucher Exp $
  */
 package kermeta.utils.impl;
 
 import java.lang.StringBuffer;
 
+import kermeta.KermetaPackage;
+
 import kermeta.compiler.CompilerPackage;
 
 import kermeta.compiler.impl.CompilerPackageImpl;
 
+import kermeta.ecore.EcorePackage;
+
+import kermeta.ecore.impl.EcorePackageImpl;
+
 import kermeta.exceptions.ExceptionsPackage;
 
 import kermeta.exceptions.impl.ExceptionsPackageImpl;
+
+import kermeta.impl.KermetaPackageImpl;
 
 import kermeta.interpreter.InterpreterPackage;
 
@@ -63,17 +71,9 @@ import km2ecore.common.exception.impl.ExceptionPackageImpl;
 
 import km2ecore.common.impl.CommonPackageImpl;
 
-import km2ecore.helper.ecore.EcorePackage;
-
-import km2ecore.helper.ecore.impl.EcorePackageImpl;
-
 import km2ecore.helper.java.JavaPackage;
 
 import km2ecore.helper.java.impl.JavaPackageImpl;
-
-import km2ecore.helper.kermeta.KermetaPackage;
-
-import km2ecore.helper.kermeta.impl.KermetaPackageImpl;
 
 import km2ecore.impl.Km2ecorePackageImpl;
 
@@ -107,6 +107,13 @@ public class UtilsPackageImpl extends EPackageImpl implements UtilsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	private EClass stringBufferEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	private EClass stackEClass = null;
 
 	/**
@@ -121,7 +128,7 @@ public class UtilsPackageImpl extends EPackageImpl implements UtilsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass stringBufferEClass = null;
+	private EDataType kermetaProperty_StringBuffer_contentEDataType = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -129,13 +136,6 @@ public class UtilsPackageImpl extends EPackageImpl implements UtilsPackage {
 	 * @generated
 	 */
 	private EDataType kermetaProperty_Hashtable_wrappedHashtableEDataType = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EDataType kermetaProperty_StringBuffer_contentEDataType = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -199,34 +199,10 @@ public class UtilsPackageImpl extends EPackageImpl implements UtilsPackage {
 		isInited = true;
 
 		// Obtain or create and register interdependencies
-		Km2ecorePackageImpl theKm2ecorePackage = (Km2ecorePackageImpl) (EPackage.Registry.INSTANCE
-				.getEPackage(Km2ecorePackage.eNS_URI) instanceof Km2ecorePackageImpl ? EPackage.Registry.INSTANCE
-				.getEPackage(Km2ecorePackage.eNS_URI)
-				: Km2ecorePackage.eINSTANCE);
-		EcorePackageImpl theEcorePackage = (EcorePackageImpl) (EPackage.Registry.INSTANCE
-				.getEPackage(EcorePackage.eNS_URI) instanceof EcorePackageImpl ? EPackage.Registry.INSTANCE
-				.getEPackage(EcorePackage.eNS_URI)
-				: EcorePackage.eINSTANCE);
-		JavaPackageImpl theJavaPackage = (JavaPackageImpl) (EPackage.Registry.INSTANCE
-				.getEPackage(JavaPackage.eNS_URI) instanceof JavaPackageImpl ? EPackage.Registry.INSTANCE
-				.getEPackage(JavaPackage.eNS_URI)
-				: JavaPackage.eINSTANCE);
 		KermetaPackageImpl theKermetaPackage = (KermetaPackageImpl) (EPackage.Registry.INSTANCE
 				.getEPackage(KermetaPackage.eNS_URI) instanceof KermetaPackageImpl ? EPackage.Registry.INSTANCE
 				.getEPackage(KermetaPackage.eNS_URI)
 				: KermetaPackage.eINSTANCE);
-		CommonPackageImpl theCommonPackage = (CommonPackageImpl) (EPackage.Registry.INSTANCE
-				.getEPackage(CommonPackage.eNS_URI) instanceof CommonPackageImpl ? EPackage.Registry.INSTANCE
-				.getEPackage(CommonPackage.eNS_URI)
-				: CommonPackage.eINSTANCE);
-		ExceptionPackageImpl theExceptionPackage = (ExceptionPackageImpl) (EPackage.Registry.INSTANCE
-				.getEPackage(ExceptionPackage.eNS_URI) instanceof ExceptionPackageImpl ? EPackage.Registry.INSTANCE
-				.getEPackage(ExceptionPackage.eNS_URI)
-				: ExceptionPackage.eINSTANCE);
-		kermeta.impl.KermetaPackageImpl theKermetaPackage_1 = (kermeta.impl.KermetaPackageImpl) (EPackage.Registry.INSTANCE
-				.getEPackage(kermeta.KermetaPackage.eNS_URI) instanceof kermeta.impl.KermetaPackageImpl ? EPackage.Registry.INSTANCE
-				.getEPackage(kermeta.KermetaPackage.eNS_URI)
-				: kermeta.KermetaPackage.eINSTANCE);
 		LanguagePackageImpl theLanguagePackage = (LanguagePackageImpl) (EPackage.Registry.INSTANCE
 				.getEPackage(LanguagePackage.eNS_URI) instanceof LanguagePackageImpl ? EPackage.Registry.INSTANCE
 				.getEPackage(LanguagePackage.eNS_URI)
@@ -239,6 +215,14 @@ public class UtilsPackageImpl extends EPackageImpl implements UtilsPackage {
 				.getEPackage(BehaviorPackage.eNS_URI) instanceof BehaviorPackageImpl ? EPackage.Registry.INSTANCE
 				.getEPackage(BehaviorPackage.eNS_URI)
 				: BehaviorPackage.eINSTANCE);
+		CompilerPackageImpl theCompilerPackage = (CompilerPackageImpl) (EPackage.Registry.INSTANCE
+				.getEPackage(CompilerPackage.eNS_URI) instanceof CompilerPackageImpl ? EPackage.Registry.INSTANCE
+				.getEPackage(CompilerPackage.eNS_URI)
+				: CompilerPackage.eINSTANCE);
+		KunitPackageImpl theKunitPackage = (KunitPackageImpl) (EPackage.Registry.INSTANCE
+				.getEPackage(KunitPackage.eNS_URI) instanceof KunitPackageImpl ? EPackage.Registry.INSTANCE
+				.getEPackage(KunitPackage.eNS_URI)
+				: KunitPackage.eINSTANCE);
 		StandardPackageImpl theStandardPackage = (StandardPackageImpl) (EPackage.Registry.INSTANCE
 				.getEPackage(StandardPackage.eNS_URI) instanceof StandardPackageImpl ? EPackage.Registry.INSTANCE
 				.getEPackage(StandardPackage.eNS_URI)
@@ -247,30 +231,50 @@ public class UtilsPackageImpl extends EPackageImpl implements UtilsPackage {
 				.getEPackage(ExceptionsPackage.eNS_URI) instanceof ExceptionsPackageImpl ? EPackage.Registry.INSTANCE
 				.getEPackage(ExceptionsPackage.eNS_URI)
 				: ExceptionsPackage.eINSTANCE);
-		PersistencePackageImpl thePersistencePackage = (PersistencePackageImpl) (EPackage.Registry.INSTANCE
-				.getEPackage(PersistencePackage.eNS_URI) instanceof PersistencePackageImpl ? EPackage.Registry.INSTANCE
-				.getEPackage(PersistencePackage.eNS_URI)
-				: PersistencePackage.eINSTANCE);
 		IoPackageImpl theIoPackage = (IoPackageImpl) (EPackage.Registry.INSTANCE
 				.getEPackage(IoPackage.eNS_URI) instanceof IoPackageImpl ? EPackage.Registry.INSTANCE
 				.getEPackage(IoPackage.eNS_URI)
 				: IoPackage.eINSTANCE);
-		kermeta.ecore.impl.EcorePackageImpl theEcorePackage_1 = (kermeta.ecore.impl.EcorePackageImpl) (EPackage.Registry.INSTANCE
-				.getEPackage(kermeta.ecore.EcorePackage.eNS_URI) instanceof kermeta.ecore.impl.EcorePackageImpl ? EPackage.Registry.INSTANCE
-				.getEPackage(kermeta.ecore.EcorePackage.eNS_URI)
-				: kermeta.ecore.EcorePackage.eINSTANCE);
+		PersistencePackageImpl thePersistencePackage = (PersistencePackageImpl) (EPackage.Registry.INSTANCE
+				.getEPackage(PersistencePackage.eNS_URI) instanceof PersistencePackageImpl ? EPackage.Registry.INSTANCE
+				.getEPackage(PersistencePackage.eNS_URI)
+				: PersistencePackage.eINSTANCE);
+		EcorePackageImpl theEcorePackage = (EcorePackageImpl) (EPackage.Registry.INSTANCE
+				.getEPackage(EcorePackage.eNS_URI) instanceof EcorePackageImpl ? EPackage.Registry.INSTANCE
+				.getEPackage(EcorePackage.eNS_URI)
+				: EcorePackage.eINSTANCE);
 		InterpreterPackageImpl theInterpreterPackage = (InterpreterPackageImpl) (EPackage.Registry.INSTANCE
 				.getEPackage(InterpreterPackage.eNS_URI) instanceof InterpreterPackageImpl ? EPackage.Registry.INSTANCE
 				.getEPackage(InterpreterPackage.eNS_URI)
 				: InterpreterPackage.eINSTANCE);
-		KunitPackageImpl theKunitPackage = (KunitPackageImpl) (EPackage.Registry.INSTANCE
-				.getEPackage(KunitPackage.eNS_URI) instanceof KunitPackageImpl ? EPackage.Registry.INSTANCE
-				.getEPackage(KunitPackage.eNS_URI)
-				: KunitPackage.eINSTANCE);
-		CompilerPackageImpl theCompilerPackage = (CompilerPackageImpl) (EPackage.Registry.INSTANCE
-				.getEPackage(CompilerPackage.eNS_URI) instanceof CompilerPackageImpl ? EPackage.Registry.INSTANCE
-				.getEPackage(CompilerPackage.eNS_URI)
-				: CompilerPackage.eINSTANCE);
+		Km2ecorePackageImpl theKm2ecorePackage = (Km2ecorePackageImpl) (EPackage.Registry.INSTANCE
+				.getEPackage(Km2ecorePackage.eNS_URI) instanceof Km2ecorePackageImpl ? EPackage.Registry.INSTANCE
+				.getEPackage(Km2ecorePackage.eNS_URI)
+				: Km2ecorePackage.eINSTANCE);
+		km2ecore.helper.ecore.impl.EcorePackageImpl theEcorePackage_1 = (km2ecore.helper.ecore.impl.EcorePackageImpl) (EPackage.Registry.INSTANCE
+				.getEPackage(km2ecore.helper.ecore.EcorePackage.eNS_URI) instanceof km2ecore.helper.ecore.impl.EcorePackageImpl ? EPackage.Registry.INSTANCE
+				.getEPackage(km2ecore.helper.ecore.EcorePackage.eNS_URI)
+				: km2ecore.helper.ecore.EcorePackage.eINSTANCE);
+		km2ecore.helper.kermeta.impl.KermetaPackageImpl theKermetaPackage_1 = (km2ecore.helper.kermeta.impl.KermetaPackageImpl) (EPackage.Registry.INSTANCE
+				.getEPackage(km2ecore.helper.kermeta.KermetaPackage.eNS_URI) instanceof km2ecore.helper.kermeta.impl.KermetaPackageImpl ? EPackage.Registry.INSTANCE
+				.getEPackage(km2ecore.helper.kermeta.KermetaPackage.eNS_URI)
+				: km2ecore.helper.kermeta.KermetaPackage.eINSTANCE);
+		JavaPackageImpl theJavaPackage = (JavaPackageImpl) (EPackage.Registry.INSTANCE
+				.getEPackage(JavaPackage.eNS_URI) instanceof JavaPackageImpl ? EPackage.Registry.INSTANCE
+				.getEPackage(JavaPackage.eNS_URI)
+				: JavaPackage.eINSTANCE);
+		CommonPackageImpl theCommonPackage = (CommonPackageImpl) (EPackage.Registry.INSTANCE
+				.getEPackage(CommonPackage.eNS_URI) instanceof CommonPackageImpl ? EPackage.Registry.INSTANCE
+				.getEPackage(CommonPackage.eNS_URI)
+				: CommonPackage.eINSTANCE);
+		ExceptionPackageImpl theExceptionPackage = (ExceptionPackageImpl) (EPackage.Registry.INSTANCE
+				.getEPackage(ExceptionPackage.eNS_URI) instanceof ExceptionPackageImpl ? EPackage.Registry.INSTANCE
+				.getEPackage(ExceptionPackage.eNS_URI)
+				: ExceptionPackage.eINSTANCE);
+		TraceabilityPackageImpl theTraceabilityPackage = (TraceabilityPackageImpl) (EPackage.Registry.INSTANCE
+				.getEPackage(TraceabilityPackage.eNS_URI) instanceof TraceabilityPackageImpl ? EPackage.Registry.INSTANCE
+				.getEPackage(TraceabilityPackage.eNS_URI)
+				: TraceabilityPackage.eINSTANCE);
 		SimkPackageImpl theSimkPackage = (SimkPackageImpl) (EPackage.Registry.INSTANCE
 				.getEPackage(SimkPackage.eNS_URI) instanceof SimkPackageImpl ? EPackage.Registry.INSTANCE
 				.getEPackage(SimkPackage.eNS_URI)
@@ -279,63 +283,77 @@ public class UtilsPackageImpl extends EPackageImpl implements UtilsPackage {
 				.getEPackage(ecore.EcorePackage.eNS_URI) instanceof ecore.impl.EcorePackageImpl ? EPackage.Registry.INSTANCE
 				.getEPackage(ecore.EcorePackage.eNS_URI)
 				: ecore.EcorePackage.eINSTANCE);
-		TraceabilityPackageImpl theTraceabilityPackage = (TraceabilityPackageImpl) (EPackage.Registry.INSTANCE
-				.getEPackage(TraceabilityPackage.eNS_URI) instanceof TraceabilityPackageImpl ? EPackage.Registry.INSTANCE
-				.getEPackage(TraceabilityPackage.eNS_URI)
-				: TraceabilityPackage.eINSTANCE);
 
 		// Create package meta-data objects
 		theUtilsPackage.createPackageContents();
-		theKm2ecorePackage.createPackageContents();
-		theEcorePackage.createPackageContents();
-		theJavaPackage.createPackageContents();
 		theKermetaPackage.createPackageContents();
-		theCommonPackage.createPackageContents();
-		theExceptionPackage.createPackageContents();
-		theKermetaPackage_1.createPackageContents();
 		theLanguagePackage.createPackageContents();
 		theStructurePackage.createPackageContents();
 		theBehaviorPackage.createPackageContents();
+		theCompilerPackage.createPackageContents();
+		theKunitPackage.createPackageContents();
 		theStandardPackage.createPackageContents();
 		theExceptionsPackage.createPackageContents();
-		thePersistencePackage.createPackageContents();
 		theIoPackage.createPackageContents();
-		theEcorePackage_1.createPackageContents();
+		thePersistencePackage.createPackageContents();
+		theEcorePackage.createPackageContents();
 		theInterpreterPackage.createPackageContents();
-		theKunitPackage.createPackageContents();
-		theCompilerPackage.createPackageContents();
+		theKm2ecorePackage.createPackageContents();
+		theEcorePackage_1.createPackageContents();
+		theKermetaPackage_1.createPackageContents();
+		theJavaPackage.createPackageContents();
+		theCommonPackage.createPackageContents();
+		theExceptionPackage.createPackageContents();
+		theTraceabilityPackage.createPackageContents();
 		theSimkPackage.createPackageContents();
 		theEcorePackage_2.createPackageContents();
-		theTraceabilityPackage.createPackageContents();
 
 		// Initialize created meta-data
 		theUtilsPackage.initializePackageContents();
-		theKm2ecorePackage.initializePackageContents();
-		theEcorePackage.initializePackageContents();
-		theJavaPackage.initializePackageContents();
 		theKermetaPackage.initializePackageContents();
-		theCommonPackage.initializePackageContents();
-		theExceptionPackage.initializePackageContents();
-		theKermetaPackage_1.initializePackageContents();
 		theLanguagePackage.initializePackageContents();
 		theStructurePackage.initializePackageContents();
 		theBehaviorPackage.initializePackageContents();
+		theCompilerPackage.initializePackageContents();
+		theKunitPackage.initializePackageContents();
 		theStandardPackage.initializePackageContents();
 		theExceptionsPackage.initializePackageContents();
-		thePersistencePackage.initializePackageContents();
 		theIoPackage.initializePackageContents();
-		theEcorePackage_1.initializePackageContents();
+		thePersistencePackage.initializePackageContents();
+		theEcorePackage.initializePackageContents();
 		theInterpreterPackage.initializePackageContents();
-		theKunitPackage.initializePackageContents();
-		theCompilerPackage.initializePackageContents();
+		theKm2ecorePackage.initializePackageContents();
+		theEcorePackage_1.initializePackageContents();
+		theKermetaPackage_1.initializePackageContents();
+		theJavaPackage.initializePackageContents();
+		theCommonPackage.initializePackageContents();
+		theExceptionPackage.initializePackageContents();
+		theTraceabilityPackage.initializePackageContents();
 		theSimkPackage.initializePackageContents();
 		theEcorePackage_2.initializePackageContents();
-		theTraceabilityPackage.initializePackageContents();
 
 		// Mark meta-data to indicate it can't be changed
 		theUtilsPackage.freeze();
 
 		return theUtilsPackage;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getStringBuffer() {
+		return stringBufferEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getStringBuffer_Content() {
+		return (EAttribute) stringBufferEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -370,17 +388,8 @@ public class UtilsPackageImpl extends EPackageImpl implements UtilsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getStringBuffer() {
-		return stringBufferEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getStringBuffer_Content() {
-		return (EAttribute) stringBufferEClass.getEStructuralFeatures().get(0);
+	public EDataType getKermetaProperty_StringBuffer_content() {
+		return kermetaProperty_StringBuffer_contentEDataType;
 	}
 
 	/**
@@ -390,15 +399,6 @@ public class UtilsPackageImpl extends EPackageImpl implements UtilsPackage {
 	 */
 	public EDataType getKermetaProperty_Hashtable_wrappedHashtable() {
 		return kermetaProperty_Hashtable_wrappedHashtableEDataType;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EDataType getKermetaProperty_StringBuffer_content() {
-		return kermetaProperty_StringBuffer_contentEDataType;
 	}
 
 	/**
@@ -430,17 +430,17 @@ public class UtilsPackageImpl extends EPackageImpl implements UtilsPackage {
 		isCreated = true;
 
 		// Create classes and their features
+		stringBufferEClass = createEClass(STRING_BUFFER);
+		createEAttribute(stringBufferEClass, STRING_BUFFER__CONTENT);
+
 		stackEClass = createEClass(STACK);
 
 		hashtableEClass = createEClass(HASHTABLE);
 		createEAttribute(hashtableEClass, HASHTABLE__WRAPPED_HASHTABLE);
 
-		stringBufferEClass = createEClass(STRING_BUFFER);
-		createEAttribute(stringBufferEClass, STRING_BUFFER__CONTENT);
-
 		// Create data types
-		kermetaProperty_Hashtable_wrappedHashtableEDataType = createEDataType(KERMETA_PROPERTY_HASHTABLE_WRAPPED_HASHTABLE);
 		kermetaProperty_StringBuffer_contentEDataType = createEDataType(KERMETA_PROPERTY_STRING_BUFFER_CONTENT);
+		kermetaProperty_Hashtable_wrappedHashtableEDataType = createEDataType(KERMETA_PROPERTY_HASHTABLE_WRAPPED_HASHTABLE);
 	}
 
 	/**
@@ -468,10 +468,10 @@ public class UtilsPackageImpl extends EPackageImpl implements UtilsPackage {
 		setNsURI(eNS_URI);
 
 		// Obtain other dependent packages
-		StandardPackage theStandardPackage = (StandardPackage) EPackage.Registry.INSTANCE
-				.getEPackage(StandardPackage.eNS_URI);
 		StructurePackage theStructurePackage = (StructurePackage) EPackage.Registry.INSTANCE
 				.getEPackage(StructurePackage.eNS_URI);
+		StandardPackage theStandardPackage = (StandardPackage) EPackage.Registry.INSTANCE
+				.getEPackage(StandardPackage.eNS_URI);
 
 		// Create type parameters
 		ETypeParameter stackEClass_G = addETypeParameter(stackEClass, "G");
@@ -487,20 +487,40 @@ public class UtilsPackageImpl extends EPackageImpl implements UtilsPackage {
 		// Set bounds for type parameters
 
 		// Add supertypes to classes
+		stringBufferEClass.getESuperTypes()
+				.add(theStructurePackage.getObject());
 		EGenericType g1 = createEGenericType(theStandardPackage.getSequence());
 		EGenericType g2 = createEGenericType(stackEClass_G);
 		g1.getETypeArguments().add(g2);
 		stackEClass.getEGenericSuperTypes().add(g1);
 		hashtableEClass.getESuperTypes().add(theStructurePackage.getObject());
-		stringBufferEClass.getESuperTypes()
-				.add(theStructurePackage.getObject());
 
 		// Initialize classes and features; add operations and parameters
+		initEClass(stringBufferEClass, kermeta.utils.StringBuffer.class,
+				"StringBuffer", !IS_ABSTRACT, !IS_INTERFACE,
+				IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getStringBuffer_Content(), this
+				.getKermetaProperty_StringBuffer_content(), "content", null, 0,
+				1, kermeta.utils.StringBuffer.class, !IS_TRANSIENT,
+				!IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE,
+				!IS_DERIVED, IS_ORDERED);
+
+		EOperation op = addEOperation(stringBufferEClass, this
+				.getStringBuffer(), "append", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, theStandardPackage.getJavaString(), "arg0", 0, 1,
+				IS_UNIQUE, IS_ORDERED);
+
+		addEOperation(stringBufferEClass, theStandardPackage.getJavaInteger(),
+				"length", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		addEOperation(stringBufferEClass, theStandardPackage.getJavaString(),
+				"toString", 0, 1, IS_UNIQUE, IS_ORDERED);
+
 		initEClass(stackEClass, Stack.class, "Stack", !IS_ABSTRACT,
 				!IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
-		EOperation op = addEOperation(stackEClass, null, "peek", 0, 1,
-				IS_UNIQUE, IS_ORDERED);
+		op = addEOperation(stackEClass, null, "peek", 0, 1, IS_UNIQUE,
+				IS_ORDERED);
 		g1 = createEGenericType(stackEClass_G);
 		initEOperation(op, g1);
 
@@ -527,9 +547,6 @@ public class UtilsPackageImpl extends EPackageImpl implements UtilsPackage {
 				IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED,
 				IS_ORDERED);
 
-		addEOperation(hashtableEClass, null, "clear", 0, 1, IS_UNIQUE,
-				IS_ORDERED);
-
 		op = addEOperation(hashtableEClass, null, "getValue", 0, 1, IS_UNIQUE,
 				IS_ORDERED);
 		g1 = createEGenericType(hashtableEClass_K);
@@ -537,18 +554,14 @@ public class UtilsPackageImpl extends EPackageImpl implements UtilsPackage {
 		g1 = createEGenericType(hashtableEClass_V);
 		initEOperation(op, g1);
 
+		addEOperation(hashtableEClass, null, "clear", 0, 1, IS_UNIQUE,
+				IS_ORDERED);
+
 		op = addEOperation(hashtableEClass,
 				theStandardPackage.getJavaBoolean(), "containsKey", 0, 1,
 				IS_UNIQUE, IS_ORDERED);
 		g1 = createEGenericType(hashtableEClass_K);
 		addEParameter(op, g1, "key", 0, 1, IS_UNIQUE, IS_ORDERED);
-
-		op = addEOperation(hashtableEClass, null, "values", 0, 1, IS_UNIQUE,
-				IS_ORDERED);
-		g1 = createEGenericType(theStandardPackage.getCollection());
-		g2 = createEGenericType(hashtableEClass_V);
-		g1.getETypeArguments().add(g2);
-		initEOperation(op, g1);
 
 		op = addEOperation(hashtableEClass, null, "put", 0, 1, IS_UNIQUE,
 				IS_ORDERED);
@@ -556,6 +569,13 @@ public class UtilsPackageImpl extends EPackageImpl implements UtilsPackage {
 		addEParameter(op, g1, "key", 0, 1, IS_UNIQUE, IS_ORDERED);
 		g1 = createEGenericType(hashtableEClass_V);
 		addEParameter(op, g1, "value", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		op = addEOperation(hashtableEClass, null, "values", 0, 1, IS_UNIQUE,
+				IS_ORDERED);
+		g1 = createEGenericType(theStandardPackage.getCollection());
+		g2 = createEGenericType(hashtableEClass_V);
+		g1.getETypeArguments().add(g2);
+		initEOperation(op, g1);
 
 		op = addEOperation(hashtableEClass, null, "remove", 0, 1, IS_UNIQUE,
 				IS_ORDERED);
@@ -586,34 +606,14 @@ public class UtilsPackageImpl extends EPackageImpl implements UtilsPackage {
 		addEOperation(hashtableEClass, theStandardPackage.getJavaInteger(),
 				"size", 0, 1, IS_UNIQUE, IS_ORDERED);
 
-		initEClass(stringBufferEClass, kermeta.utils.StringBuffer.class,
-				"StringBuffer", !IS_ABSTRACT, !IS_INTERFACE,
-				IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getStringBuffer_Content(), this
-				.getKermetaProperty_StringBuffer_content(), "content", null, 0,
-				1, kermeta.utils.StringBuffer.class, !IS_TRANSIENT,
-				!IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE,
-				!IS_DERIVED, IS_ORDERED);
-
-		op = addEOperation(stringBufferEClass, this.getStringBuffer(),
-				"append", 0, 1, IS_UNIQUE, IS_ORDERED);
-		addEParameter(op, theStandardPackage.getJavaString(), "arg0", 0, 1,
-				IS_UNIQUE, IS_ORDERED);
-
-		addEOperation(stringBufferEClass, theStandardPackage.getJavaInteger(),
-				"length", 0, 1, IS_UNIQUE, IS_ORDERED);
-
-		addEOperation(stringBufferEClass, theStandardPackage.getJavaString(),
-				"toString", 0, 1, IS_UNIQUE, IS_ORDERED);
-
 		// Initialize data types
+		initEDataType(kermetaProperty_StringBuffer_contentEDataType,
+				StringBuffer.class, "KermetaProperty_StringBuffer_content",
+				IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
 		initEDataType(kermetaProperty_Hashtable_wrappedHashtableEDataType,
 				java.util.Hashtable.class,
 				"KermetaProperty_Hashtable_wrappedHashtable", IS_SERIALIZABLE,
 				!IS_GENERATED_INSTANCE_CLASS);
-		initEDataType(kermetaProperty_StringBuffer_contentEDataType,
-				StringBuffer.class, "KermetaProperty_StringBuffer_content",
-				IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
 
 		// Create annotations
 		// kermeta
@@ -635,99 +635,13 @@ public class UtilsPackageImpl extends EPackageImpl implements UtilsPackage {
 				source,
 				new String[] {
 						"documentation",
-						"/** \r\n * Contains special classes (Hashtable, Stack) that are not contained in Kermeta\r\n * metamodel\r\n */" });
+						"/** \n * Contains special classes (Hashtable, Stack) that are not contained in Kermeta\n * metamodel\n */" });
 		addAnnotation(
 				this,
 				source,
 				new String[] {
 						"documentation",
-						"/** \r\n * Contains special classes (Hashtable, Stack) that are not contained in Kermeta\r\n * metamodel\r\n * \r\n * <img src=\"./figures/utils_package.png\"/>\r\n */" });
-		addAnnotation(
-				stackEClass,
-				source,
-				new String[] {
-						"documentation",
-						"/**\r\n * An implementation of stack\r\n * <img src=\"platform:/plugin/fr.irisa.triskell.kermeta.documentation/src/figures/utils_package.png\"/>\r\n */" });
-		addAnnotation(
-				stackEClass.getEOperations().get(0),
-				source,
-				new String[] { "documentation",
-						"/**\r\n\t * Gets the element at the top of the stack\r\n\t */" });
-		addAnnotation(
-				stackEClass.getEOperations().get(1),
-				source,
-				new String[] { "documentation",
-						"/**\r\n\t * Get and remove the element at the top of the stack\r\n\t */" });
-		addAnnotation(
-				stackEClass.getEOperations().get(2),
-				source,
-				new String[] { "documentation",
-						"/**\r\n\t * Pushes an element into the stack\r\n\t */" });
-		addAnnotation(
-				hashtableEClass,
-				source,
-				new String[] {
-						"documentation",
-						"/**\r\n * An implementation of hashtable\r\n * This implementation is for speed optimisation it cannot be serialized. \r\n * If your wish to serialize its content you need to copy its content into a classical ecore structure (attribute or references)\r\n * <img src=\"platform:/plugin/fr.irisa.triskell.kermeta.documentation/src/figures/utils_package.png\"/>\r\n */" });
-		addAnnotation(
-				hashtableEClass,
-				source,
-				new String[] {
-						"EMF_needProperty",
-						"name=wrappedHashtable isUnique=false isOrdered=false javaClass=java.util.Hashtable" });
-		addAnnotation(
-				hashtableEClass.getEOperations().get(0),
-				source,
-				new String[] { "documentation",
-						"/**\r\n\t * Removes all elements from the Hashtable\r\n\t */" });
-		addAnnotation(
-				hashtableEClass.getEOperations().get(1),
-				source,
-				new String[] {
-						"documentation",
-						"/**\r\n\t * Returns the value for key \'key\' if it exists, otherwise returns Void\r\n\t */" });
-		addAnnotation(
-				hashtableEClass.getEOperations().get(2),
-				source,
-				new String[] {
-						"documentation",
-						"/**\t\r\n\t * Returns a Boolean stating whether a key is present or not in this Hashtable\r\n\t */" });
-		addAnnotation(
-				hashtableEClass.getEOperations().get(3),
-				source,
-				new String[] {
-						"documentation",
-						"/**\r\n\t * Returns a collection containing the elements of this Hashtable\r\n\t */" });
-		addAnnotation(
-				hashtableEClass.getEOperations().get(4),
-				source,
-				new String[] { "documentation",
-						"/**\r\n\t * Adds a entry into the Hashtable\r\n\t */" });
-		addAnnotation(
-				hashtableEClass.getEOperations().get(5),
-				source,
-				new String[] { "documentation",
-						"/**\r\n\t * Removes the entry with key equals to \'key\'\r\n\t */" });
-		addAnnotation(
-				hashtableEClass.getEOperations().get(6),
-				source,
-				new String[] { "documentation",
-						"/**\r\n\t * Returns a set containing the hash keys of this Hashtable\r\n\t */" });
-		addAnnotation(
-				hashtableEClass.getEOperations().get(7),
-				source,
-				new String[] { "documentation",
-						"/**\r\n\t * Returns an iterator over the Keys of this Hashtable\r\n\t */" });
-		addAnnotation(
-				hashtableEClass.getEOperations().get(8),
-				source,
-				new String[] { "documentation",
-						"/**\r\n\t * Returns an iterator over the values of this Hashtable\r\n\t */" });
-		addAnnotation(
-				hashtableEClass.getEOperations().get(9),
-				source,
-				new String[] { "documentation",
-						"/**\r\n\t * Returns the size of this Hashtable\r\n\t */" });
+						"/** \n * Contains special classes (Hashtable, Stack) that are not contained in Kermeta\n * metamodel\n * \n * <img src=\"./figures/utils_package.png\"/>\n */" });
 		addAnnotation(
 				stringBufferEClass,
 				source,
@@ -760,6 +674,86 @@ public class UtilsPackageImpl extends EPackageImpl implements UtilsPackage {
 		addAnnotation(stringBufferEClass.getEOperations().get(2), source,
 				new String[] { "superOperation",
 						"kermeta::language::structure::Object" });
+		addAnnotation(
+				stackEClass,
+				source,
+				new String[] {
+						"documentation",
+						"/**\n * An implementation of stack\n * <img src=\"platform:/plugin/fr.irisa.triskell.kermeta.documentation/src/figures/utils_package.png\"/>\n */" });
+		addAnnotation(
+				stackEClass.getEOperations().get(0),
+				source,
+				new String[] { "documentation",
+						"/**\n\t * Gets the element at the top of the stack\n\t */" });
+		addAnnotation(
+				stackEClass.getEOperations().get(1),
+				source,
+				new String[] { "documentation",
+						"/**\n\t * Get and remove the element at the top of the stack\n\t */" });
+		addAnnotation(stackEClass.getEOperations().get(2), source,
+				new String[] { "documentation",
+						"/**\n\t * Pushes an element into the stack\n\t */" });
+		addAnnotation(
+				hashtableEClass,
+				source,
+				new String[] {
+						"documentation",
+						"/**\n * An implementation of hashtable\n * This implementation is for speed optimisation it cannot be serialized. \n * If your wish to serialize its content you need to copy its content into a classical ecore structure (attribute or references)\n * <img src=\"platform:/plugin/fr.irisa.triskell.kermeta.documentation/src/figures/utils_package.png\"/>\n */" });
+		addAnnotation(
+				hashtableEClass,
+				source,
+				new String[] {
+						"EMF_needProperty",
+						"name=wrappedHashtable isUnique=false isOrdered=false javaClass=java.util.Hashtable" });
+		addAnnotation(
+				hashtableEClass.getEOperations().get(0),
+				source,
+				new String[] {
+						"documentation",
+						"/**\n\t * Returns the value for key \'key\' if it exists, otherwise returns Void\n\t */" });
+		addAnnotation(
+				hashtableEClass.getEOperations().get(1),
+				source,
+				new String[] { "documentation",
+						"/**\n\t * Removes all elements from the Hashtable\n\t */" });
+		addAnnotation(
+				hashtableEClass.getEOperations().get(2),
+				source,
+				new String[] {
+						"documentation",
+						"/**\t\n\t * Returns a Boolean stating whether a key is present or not in this Hashtable\n\t */" });
+		addAnnotation(hashtableEClass.getEOperations().get(3), source,
+				new String[] { "documentation",
+						"/**\n\t * Adds a entry into the Hashtable\n\t */" });
+		addAnnotation(
+				hashtableEClass.getEOperations().get(4),
+				source,
+				new String[] {
+						"documentation",
+						"/**\n\t * Returns a collection containing the elements of this Hashtable\n\t */" });
+		addAnnotation(
+				hashtableEClass.getEOperations().get(5),
+				source,
+				new String[] { "documentation",
+						"/**\n\t * Removes the entry with key equals to \'key\'\n\t */" });
+		addAnnotation(
+				hashtableEClass.getEOperations().get(6),
+				source,
+				new String[] { "documentation",
+						"/**\n\t * Returns a set containing the hash keys of this Hashtable\n\t */" });
+		addAnnotation(
+				hashtableEClass.getEOperations().get(7),
+				source,
+				new String[] { "documentation",
+						"/**\n\t * Returns an iterator over the Keys of this Hashtable\n\t */" });
+		addAnnotation(
+				hashtableEClass.getEOperations().get(8),
+				source,
+				new String[] { "documentation",
+						"/**\n\t * Returns an iterator over the values of this Hashtable\n\t */" });
+		addAnnotation(hashtableEClass.getEOperations().get(9), source,
+				new String[] { "documentation",
+						"/**\n\t * Returns the size of this Hashtable\n\t */" });
 	}
 
 } //UtilsPackageImpl

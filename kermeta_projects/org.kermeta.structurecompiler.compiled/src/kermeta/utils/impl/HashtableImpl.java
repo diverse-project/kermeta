@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: HashtableImpl.java,v 1.8 2008-11-07 08:53:12 cfaucher Exp $
+ * $Id: HashtableImpl.java,v 1.9 2008-11-27 15:49:53 cfaucher Exp $
  */
 package kermeta.utils.impl;
 
@@ -93,17 +93,6 @@ public class HashtableImpl<K, V> extends ObjectImpl implements Hashtable<K, V> {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void clear() {
-
-		org.kermeta.compil.runtime.helper.basetypes.MapUtil.clear(this);
-
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public V getValue(K key) {
 
 		V result = null;
@@ -114,6 +103,17 @@ public class HashtableImpl<K, V> extends ObjectImpl implements Hashtable<K, V> {
 								.get(this, key));
 
 		return result;
+
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void clear() {
+
+		org.kermeta.compil.runtime.helper.basetypes.MapUtil.clear(this);
 
 	}
 
@@ -138,6 +138,18 @@ public class HashtableImpl<K, V> extends ObjectImpl implements Hashtable<K, V> {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public void put(K key, V value) {
+
+		org.kermeta.compil.runtime.helper.basetypes.MapUtil.put(this, key,
+				value);
+
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public Collection<V> values() {
 
 		kermeta.standard.Collection<V> result = null;
@@ -149,17 +161,17 @@ public class HashtableImpl<K, V> extends ObjectImpl implements Hashtable<K, V> {
 
 		{
 
-			kermeta.standard.Iterator<K> it_ft209 = this.keys().iterator();
-			java.lang.Boolean idLoopCond_949 = false;
-			while (!idLoopCond_949) {
-				idLoopCond_949 = it_ft209.isOff();
-				if (idLoopCond_949) {
+			kermeta.standard.Iterator<K> it_ft223 = this.keys().iterator();
+			java.lang.Boolean idLoopCond_998 = false;
+			while (!idLoopCond_998) {
+				idLoopCond_998 = it_ft223.isOff();
+				if (idLoopCond_998) {
 				} else {
 
 					//BIle:func
-					K k_lbdExp209 = it_ft209.next();
+					K k_lbdExp223 = it_ft223.next();
 
-					result.add(this.getValue(k_lbdExp209));
+					result.add(this.getValue(k_lbdExp223));
 					//EIle:func
 
 				}
@@ -169,18 +181,6 @@ public class HashtableImpl<K, V> extends ObjectImpl implements Hashtable<K, V> {
 		//EIft:each
 
 		return result;
-
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void put(K key, V value) {
-
-		org.kermeta.compil.runtime.helper.basetypes.MapUtil.put(this, key,
-				value);
 
 	}
 
@@ -210,10 +210,10 @@ public class HashtableImpl<K, V> extends ObjectImpl implements Hashtable<K, V> {
 		{
 
 			kermeta.standard.Iterator<K> it = this.keyIterator();
-			java.lang.Boolean idLoopCond_950 = false;
-			while (!idLoopCond_950) {
-				idLoopCond_950 = it.isOff();
-				if (idLoopCond_950) {
+			java.lang.Boolean idLoopCond_999 = false;
+			while (!idLoopCond_999) {
+				idLoopCond_999 = it.isOff();
+				if (idLoopCond_999) {
 				} else {
 
 					result.add(it.next());

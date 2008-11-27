@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: EFeatureMapEntry.java,v 1.8 2008-11-07 08:54:23 cfaucher Exp $
+ * $Id: EFeatureMapEntry.java,v 1.9 2008-11-27 15:50:32 cfaucher Exp $
  */
 package kermeta.ecore;
 
@@ -20,7 +20,7 @@ package kermeta.ecore;
  * </p>
  *
  * @see kermeta.ecore.EcorePackage#getEFeatureMapEntry()
- * @model annotation="kermeta documentation='/**\r\n * Kermeta representation of EMF EFeatureMapEntry\r\n * it contains the name of the required feature and the actual value\r\n * <img src=\"platform:/plugin/fr.irisa.triskell.kermeta.documentation/src/figures/ecore_compatibility_package.png\"/>\r\n \052/'"
+ * @model annotation="kermeta documentation='/**\n * Kermeta representation of EMF EFeatureMapEntry\n * it contains the name of the required feature and the actual value\n * <img src=\"platform:/plugin/fr.irisa.triskell.kermeta.documentation/src/figures/ecore_compatibility_package.png\"/>\n \052/'"
  * @generated
  */
 public interface EFeatureMapEntry extends kermeta.language.structure.Object {

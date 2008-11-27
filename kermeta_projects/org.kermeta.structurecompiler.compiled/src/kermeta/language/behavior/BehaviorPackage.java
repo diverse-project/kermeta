@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: BehaviorPackage.java,v 1.8 2008-11-07 08:52:20 cfaucher Exp $
+ * $Id: BehaviorPackage.java,v 1.9 2008-11-27 15:49:47 cfaucher Exp $
  */
 package kermeta.language.behavior;
 
@@ -71,16 +71,7 @@ public interface BehaviorPackage extends EPackage {
 	 * @see kermeta.language.behavior.impl.BehaviorPackageImpl#getExpression()
 	 * @generated
 	 */
-	int EXPRESSION = 1;
-
-	/**
-	 * The feature id for the '<em><b>Tag</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EXPRESSION__TAG = StructurePackage.TYPE_CONTAINER__TAG;
+	int EXPRESSION = 0;
 
 	/**
 	 * The feature id for the '<em><b>File</b></em>' reference.
@@ -90,6 +81,15 @@ public interface BehaviorPackage extends EPackage {
 	 * @ordered
 	 */
 	int EXPRESSION__FILE = StructurePackage.TYPE_CONTAINER__FILE;
+
+	/**
+	 * The feature id for the '<em><b>Tag</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXPRESSION__TAG = StructurePackage.TYPE_CONTAINER__TAG;
 
 	/**
 	 * The feature id for the '<em><b>File Name</b></em>' attribute.
@@ -128,6 +128,15 @@ public interface BehaviorPackage extends EPackage {
 	int EXPRESSION__OID = StructurePackage.TYPE_CONTAINER__OID;
 
 	/**
+	 * The feature id for the '<em><b>Internal Containing Resource</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXPRESSION__INTERNAL_CONTAINING_RESOURCE = StructurePackage.TYPE_CONTAINER__INTERNAL_CONTAINING_RESOURCE;
+
+	/**
 	 * The feature id for the '<em><b>Contained Type</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -146,13 +155,22 @@ public interface BehaviorPackage extends EPackage {
 	int EXPRESSION__BEFORE_LAMBDA_EXPRESSION_RESULT = StructurePackage.TYPE_CONTAINER_FEATURE_COUNT + 0;
 
 	/**
+	 * The feature id for the '<em><b>Is Last Expression</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXPRESSION__IS_LAST_EXPRESSION = StructurePackage.TYPE_CONTAINER_FEATURE_COUNT + 1;
+
+	/**
 	 * The feature id for the '<em><b>Static Type</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int EXPRESSION__STATIC_TYPE = StructurePackage.TYPE_CONTAINER_FEATURE_COUNT + 1;
+	int EXPRESSION__STATIC_TYPE = StructurePackage.TYPE_CONTAINER_FEATURE_COUNT + 2;
 
 	/**
 	 * The number of structural features of the '<em>Expression</em>' class.
@@ -161,7 +179,7 @@ public interface BehaviorPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EXPRESSION_FEATURE_COUNT = StructurePackage.TYPE_CONTAINER_FEATURE_COUNT + 2;
+	int EXPRESSION_FEATURE_COUNT = StructurePackage.TYPE_CONTAINER_FEATURE_COUNT + 3;
 
 	/**
 	 * The meta object id for the '{@link kermeta.language.behavior.impl.BlockImpl <em>Block</em>}' class.
@@ -171,16 +189,7 @@ public interface BehaviorPackage extends EPackage {
 	 * @see kermeta.language.behavior.impl.BehaviorPackageImpl#getBlock()
 	 * @generated
 	 */
-	int BLOCK = 0;
-
-	/**
-	 * The feature id for the '<em><b>Tag</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BLOCK__TAG = EXPRESSION__TAG;
+	int BLOCK = 1;
 
 	/**
 	 * The feature id for the '<em><b>File</b></em>' reference.
@@ -190,6 +199,15 @@ public interface BehaviorPackage extends EPackage {
 	 * @ordered
 	 */
 	int BLOCK__FILE = EXPRESSION__FILE;
+
+	/**
+	 * The feature id for the '<em><b>Tag</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BLOCK__TAG = EXPRESSION__TAG;
 
 	/**
 	 * The feature id for the '<em><b>File Name</b></em>' attribute.
@@ -228,6 +246,15 @@ public interface BehaviorPackage extends EPackage {
 	int BLOCK__OID = EXPRESSION__OID;
 
 	/**
+	 * The feature id for the '<em><b>Internal Containing Resource</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BLOCK__INTERNAL_CONTAINING_RESOURCE = EXPRESSION__INTERNAL_CONTAINING_RESOURCE;
+
+	/**
 	 * The feature id for the '<em><b>Contained Type</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -244,6 +271,15 @@ public interface BehaviorPackage extends EPackage {
 	 * @ordered
 	 */
 	int BLOCK__BEFORE_LAMBDA_EXPRESSION_RESULT = EXPRESSION__BEFORE_LAMBDA_EXPRESSION_RESULT;
+
+	/**
+	 * The feature id for the '<em><b>Is Last Expression</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BLOCK__IS_LAST_EXPRESSION = EXPRESSION__IS_LAST_EXPRESSION;
 
 	/**
 	 * The feature id for the '<em><b>Static Type</b></em>' reference.
@@ -289,16 +325,7 @@ public interface BehaviorPackage extends EPackage {
 	 * @see kermeta.language.behavior.impl.BehaviorPackageImpl#getCallExpression()
 	 * @generated
 	 */
-	int CALL_EXPRESSION = 4;
-
-	/**
-	 * The feature id for the '<em><b>Tag</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CALL_EXPRESSION__TAG = EXPRESSION__TAG;
+	int CALL_EXPRESSION = 2;
 
 	/**
 	 * The feature id for the '<em><b>File</b></em>' reference.
@@ -308,6 +335,15 @@ public interface BehaviorPackage extends EPackage {
 	 * @ordered
 	 */
 	int CALL_EXPRESSION__FILE = EXPRESSION__FILE;
+
+	/**
+	 * The feature id for the '<em><b>Tag</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CALL_EXPRESSION__TAG = EXPRESSION__TAG;
 
 	/**
 	 * The feature id for the '<em><b>File Name</b></em>' attribute.
@@ -346,6 +382,15 @@ public interface BehaviorPackage extends EPackage {
 	int CALL_EXPRESSION__OID = EXPRESSION__OID;
 
 	/**
+	 * The feature id for the '<em><b>Internal Containing Resource</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CALL_EXPRESSION__INTERNAL_CONTAINING_RESOURCE = EXPRESSION__INTERNAL_CONTAINING_RESOURCE;
+
+	/**
 	 * The feature id for the '<em><b>Contained Type</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -362,6 +407,15 @@ public interface BehaviorPackage extends EPackage {
 	 * @ordered
 	 */
 	int CALL_EXPRESSION__BEFORE_LAMBDA_EXPRESSION_RESULT = EXPRESSION__BEFORE_LAMBDA_EXPRESSION_RESULT;
+
+	/**
+	 * The feature id for the '<em><b>Is Last Expression</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CALL_EXPRESSION__IS_LAST_EXPRESSION = EXPRESSION__IS_LAST_EXPRESSION;
 
 	/**
 	 * The feature id for the '<em><b>Static Type</b></em>' reference.
@@ -409,14 +463,23 @@ public interface BehaviorPackage extends EPackage {
 	int CALL_EXPRESSION_FEATURE_COUNT = EXPRESSION_FEATURE_COUNT + 3;
 
 	/**
-	 * The meta object id for the '{@link kermeta.language.behavior.impl.CallVariableImpl <em>Call Variable</em>}' class.
+	 * The meta object id for the '{@link kermeta.language.behavior.impl.CallFeatureImpl <em>Call Feature</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see kermeta.language.behavior.impl.CallVariableImpl
-	 * @see kermeta.language.behavior.impl.BehaviorPackageImpl#getCallVariable()
+	 * @see kermeta.language.behavior.impl.CallFeatureImpl
+	 * @see kermeta.language.behavior.impl.BehaviorPackageImpl#getCallFeature()
 	 * @generated
 	 */
-	int CALL_VARIABLE = 2;
+	int CALL_FEATURE = 3;
+
+	/**
+	 * The feature id for the '<em><b>File</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CALL_FEATURE__FILE = CALL_EXPRESSION__FILE;
 
 	/**
 	 * The feature id for the '<em><b>Tag</b></em>' reference list.
@@ -425,7 +488,188 @@ public interface BehaviorPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CALL_VARIABLE__TAG = CALL_EXPRESSION__TAG;
+	int CALL_FEATURE__TAG = CALL_EXPRESSION__TAG;
+
+	/**
+	 * The feature id for the '<em><b>File Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CALL_FEATURE__FILE_NAME = CALL_EXPRESSION__FILE_NAME;
+
+	/**
+	 * The feature id for the '<em><b>Line Number</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CALL_FEATURE__LINE_NUMBER = CALL_EXPRESSION__LINE_NUMBER;
+
+	/**
+	 * The feature id for the '<em><b>Owned Tags</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CALL_FEATURE__OWNED_TAGS = CALL_EXPRESSION__OWNED_TAGS;
+
+	/**
+	 * The feature id for the '<em><b>Oid</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CALL_FEATURE__OID = CALL_EXPRESSION__OID;
+
+	/**
+	 * The feature id for the '<em><b>Internal Containing Resource</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CALL_FEATURE__INTERNAL_CONTAINING_RESOURCE = CALL_EXPRESSION__INTERNAL_CONTAINING_RESOURCE;
+
+	/**
+	 * The feature id for the '<em><b>Contained Type</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CALL_FEATURE__CONTAINED_TYPE = CALL_EXPRESSION__CONTAINED_TYPE;
+
+	/**
+	 * The feature id for the '<em><b>Before Lambda Expression Result</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CALL_FEATURE__BEFORE_LAMBDA_EXPRESSION_RESULT = CALL_EXPRESSION__BEFORE_LAMBDA_EXPRESSION_RESULT;
+
+	/**
+	 * The feature id for the '<em><b>Is Last Expression</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CALL_FEATURE__IS_LAST_EXPRESSION = CALL_EXPRESSION__IS_LAST_EXPRESSION;
+
+	/**
+	 * The feature id for the '<em><b>Static Type</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CALL_FEATURE__STATIC_TYPE = CALL_EXPRESSION__STATIC_TYPE;
+
+	/**
+	 * The feature id for the '<em><b>Static Type Variable Bindings</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CALL_FEATURE__STATIC_TYPE_VARIABLE_BINDINGS = CALL_EXPRESSION__STATIC_TYPE_VARIABLE_BINDINGS;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CALL_FEATURE__NAME = CALL_EXPRESSION__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Parameters</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CALL_FEATURE__PARAMETERS = CALL_EXPRESSION__PARAMETERS;
+
+	/**
+	 * The feature id for the '<em><b>Static Operation</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CALL_FEATURE__STATIC_OPERATION = CALL_EXPRESSION_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Is Atpre</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CALL_FEATURE__IS_ATPRE = CALL_EXPRESSION_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Called Ft Result</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CALL_FEATURE__CALLED_FT_RESULT = CALL_EXPRESSION_FEATURE_COUNT + 2;
+
+	/**
+	 * The feature id for the '<em><b>Target</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CALL_FEATURE__TARGET = CALL_EXPRESSION_FEATURE_COUNT + 3;
+
+	/**
+	 * The feature id for the '<em><b>Static Enum Literal</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CALL_FEATURE__STATIC_ENUM_LITERAL = CALL_EXPRESSION_FEATURE_COUNT + 4;
+
+	/**
+	 * The feature id for the '<em><b>Static Property</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CALL_FEATURE__STATIC_PROPERTY = CALL_EXPRESSION_FEATURE_COUNT + 5;
+
+	/**
+	 * The number of structural features of the '<em>Call Feature</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CALL_FEATURE_FEATURE_COUNT = CALL_EXPRESSION_FEATURE_COUNT + 6;
+
+	/**
+	 * The meta object id for the '{@link kermeta.language.behavior.impl.CallVariableImpl <em>Call Variable</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see kermeta.language.behavior.impl.CallVariableImpl
+	 * @see kermeta.language.behavior.impl.BehaviorPackageImpl#getCallVariable()
+	 * @generated
+	 */
+	int CALL_VARIABLE = 4;
 
 	/**
 	 * The feature id for the '<em><b>File</b></em>' reference.
@@ -435,6 +679,15 @@ public interface BehaviorPackage extends EPackage {
 	 * @ordered
 	 */
 	int CALL_VARIABLE__FILE = CALL_EXPRESSION__FILE;
+
+	/**
+	 * The feature id for the '<em><b>Tag</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CALL_VARIABLE__TAG = CALL_EXPRESSION__TAG;
 
 	/**
 	 * The feature id for the '<em><b>File Name</b></em>' attribute.
@@ -473,6 +726,15 @@ public interface BehaviorPackage extends EPackage {
 	int CALL_VARIABLE__OID = CALL_EXPRESSION__OID;
 
 	/**
+	 * The feature id for the '<em><b>Internal Containing Resource</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CALL_VARIABLE__INTERNAL_CONTAINING_RESOURCE = CALL_EXPRESSION__INTERNAL_CONTAINING_RESOURCE;
+
+	/**
 	 * The feature id for the '<em><b>Contained Type</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -489,6 +751,15 @@ public interface BehaviorPackage extends EPackage {
 	 * @ordered
 	 */
 	int CALL_VARIABLE__BEFORE_LAMBDA_EXPRESSION_RESULT = CALL_EXPRESSION__BEFORE_LAMBDA_EXPRESSION_RESULT;
+
+	/**
+	 * The feature id for the '<em><b>Is Last Expression</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CALL_VARIABLE__IS_LAST_EXPRESSION = CALL_EXPRESSION__IS_LAST_EXPRESSION;
 
 	/**
 	 * The feature id for the '<em><b>Static Type</b></em>' reference.
@@ -554,187 +825,6 @@ public interface BehaviorPackage extends EPackage {
 	int CALL_VARIABLE_FEATURE_COUNT = CALL_EXPRESSION_FEATURE_COUNT + 2;
 
 	/**
-	 * The meta object id for the '{@link kermeta.language.behavior.impl.CallFeatureImpl <em>Call Feature</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see kermeta.language.behavior.impl.CallFeatureImpl
-	 * @see kermeta.language.behavior.impl.BehaviorPackageImpl#getCallFeature()
-	 * @generated
-	 */
-	int CALL_FEATURE = 3;
-
-	/**
-	 * The feature id for the '<em><b>Tag</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CALL_FEATURE__TAG = CALL_EXPRESSION__TAG;
-
-	/**
-	 * The feature id for the '<em><b>File</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CALL_FEATURE__FILE = CALL_EXPRESSION__FILE;
-
-	/**
-	 * The feature id for the '<em><b>File Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CALL_FEATURE__FILE_NAME = CALL_EXPRESSION__FILE_NAME;
-
-	/**
-	 * The feature id for the '<em><b>Line Number</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CALL_FEATURE__LINE_NUMBER = CALL_EXPRESSION__LINE_NUMBER;
-
-	/**
-	 * The feature id for the '<em><b>Owned Tags</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CALL_FEATURE__OWNED_TAGS = CALL_EXPRESSION__OWNED_TAGS;
-
-	/**
-	 * The feature id for the '<em><b>Oid</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CALL_FEATURE__OID = CALL_EXPRESSION__OID;
-
-	/**
-	 * The feature id for the '<em><b>Contained Type</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CALL_FEATURE__CONTAINED_TYPE = CALL_EXPRESSION__CONTAINED_TYPE;
-
-	/**
-	 * The feature id for the '<em><b>Before Lambda Expression Result</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CALL_FEATURE__BEFORE_LAMBDA_EXPRESSION_RESULT = CALL_EXPRESSION__BEFORE_LAMBDA_EXPRESSION_RESULT;
-
-	/**
-	 * The feature id for the '<em><b>Static Type</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CALL_FEATURE__STATIC_TYPE = CALL_EXPRESSION__STATIC_TYPE;
-
-	/**
-	 * The feature id for the '<em><b>Static Type Variable Bindings</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CALL_FEATURE__STATIC_TYPE_VARIABLE_BINDINGS = CALL_EXPRESSION__STATIC_TYPE_VARIABLE_BINDINGS;
-
-	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CALL_FEATURE__NAME = CALL_EXPRESSION__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Parameters</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CALL_FEATURE__PARAMETERS = CALL_EXPRESSION__PARAMETERS;
-
-	/**
-	 * The feature id for the '<em><b>Called Ft Result</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CALL_FEATURE__CALLED_FT_RESULT = CALL_EXPRESSION_FEATURE_COUNT + 0;
-
-	/**
-	 * The feature id for the '<em><b>Is Atpre</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CALL_FEATURE__IS_ATPRE = CALL_EXPRESSION_FEATURE_COUNT + 1;
-
-	/**
-	 * The feature id for the '<em><b>Static Operation</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CALL_FEATURE__STATIC_OPERATION = CALL_EXPRESSION_FEATURE_COUNT + 2;
-
-	/**
-	 * The feature id for the '<em><b>Target</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CALL_FEATURE__TARGET = CALL_EXPRESSION_FEATURE_COUNT + 3;
-
-	/**
-	 * The feature id for the '<em><b>Static Enum Literal</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CALL_FEATURE__STATIC_ENUM_LITERAL = CALL_EXPRESSION_FEATURE_COUNT + 4;
-
-	/**
-	 * The feature id for the '<em><b>Static Property</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CALL_FEATURE__STATIC_PROPERTY = CALL_EXPRESSION_FEATURE_COUNT + 5;
-
-	/**
-	 * The number of structural features of the '<em>Call Feature</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CALL_FEATURE_FEATURE_COUNT = CALL_EXPRESSION_FEATURE_COUNT + 6;
-
-	/**
 	 * The meta object id for the '{@link kermeta.language.behavior.impl.CallResultImpl <em>Call Result</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -745,15 +835,6 @@ public interface BehaviorPackage extends EPackage {
 	int CALL_RESULT = 5;
 
 	/**
-	 * The feature id for the '<em><b>Tag</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CALL_RESULT__TAG = CALL_VARIABLE__TAG;
-
-	/**
 	 * The feature id for the '<em><b>File</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -761,6 +842,15 @@ public interface BehaviorPackage extends EPackage {
 	 * @ordered
 	 */
 	int CALL_RESULT__FILE = CALL_VARIABLE__FILE;
+
+	/**
+	 * The feature id for the '<em><b>Tag</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CALL_RESULT__TAG = CALL_VARIABLE__TAG;
 
 	/**
 	 * The feature id for the '<em><b>File Name</b></em>' attribute.
@@ -799,6 +889,15 @@ public interface BehaviorPackage extends EPackage {
 	int CALL_RESULT__OID = CALL_VARIABLE__OID;
 
 	/**
+	 * The feature id for the '<em><b>Internal Containing Resource</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CALL_RESULT__INTERNAL_CONTAINING_RESOURCE = CALL_VARIABLE__INTERNAL_CONTAINING_RESOURCE;
+
+	/**
 	 * The feature id for the '<em><b>Contained Type</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -815,6 +914,15 @@ public interface BehaviorPackage extends EPackage {
 	 * @ordered
 	 */
 	int CALL_RESULT__BEFORE_LAMBDA_EXPRESSION_RESULT = CALL_VARIABLE__BEFORE_LAMBDA_EXPRESSION_RESULT;
+
+	/**
+	 * The feature id for the '<em><b>Is Last Expression</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CALL_RESULT__IS_LAST_EXPRESSION = CALL_VARIABLE__IS_LAST_EXPRESSION;
 
 	/**
 	 * The feature id for the '<em><b>Static Type</b></em>' reference.
@@ -890,15 +998,6 @@ public interface BehaviorPackage extends EPackage {
 	int CALL_VALUE = 6;
 
 	/**
-	 * The feature id for the '<em><b>Tag</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CALL_VALUE__TAG = CALL_EXPRESSION__TAG;
-
-	/**
 	 * The feature id for the '<em><b>File</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -906,6 +1005,15 @@ public interface BehaviorPackage extends EPackage {
 	 * @ordered
 	 */
 	int CALL_VALUE__FILE = CALL_EXPRESSION__FILE;
+
+	/**
+	 * The feature id for the '<em><b>Tag</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CALL_VALUE__TAG = CALL_EXPRESSION__TAG;
 
 	/**
 	 * The feature id for the '<em><b>File Name</b></em>' attribute.
@@ -944,6 +1052,15 @@ public interface BehaviorPackage extends EPackage {
 	int CALL_VALUE__OID = CALL_EXPRESSION__OID;
 
 	/**
+	 * The feature id for the '<em><b>Internal Containing Resource</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CALL_VALUE__INTERNAL_CONTAINING_RESOURCE = CALL_EXPRESSION__INTERNAL_CONTAINING_RESOURCE;
+
+	/**
 	 * The feature id for the '<em><b>Contained Type</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -960,6 +1077,15 @@ public interface BehaviorPackage extends EPackage {
 	 * @ordered
 	 */
 	int CALL_VALUE__BEFORE_LAMBDA_EXPRESSION_RESULT = CALL_EXPRESSION__BEFORE_LAMBDA_EXPRESSION_RESULT;
+
+	/**
+	 * The feature id for the '<em><b>Is Last Expression</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CALL_VALUE__IS_LAST_EXPRESSION = CALL_EXPRESSION__IS_LAST_EXPRESSION;
 
 	/**
 	 * The feature id for the '<em><b>Static Type</b></em>' reference.
@@ -1017,15 +1143,6 @@ public interface BehaviorPackage extends EPackage {
 	int CALL_SUPER_OPERATION = 7;
 
 	/**
-	 * The feature id for the '<em><b>Tag</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CALL_SUPER_OPERATION__TAG = CALL_EXPRESSION__TAG;
-
-	/**
 	 * The feature id for the '<em><b>File</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1033,6 +1150,15 @@ public interface BehaviorPackage extends EPackage {
 	 * @ordered
 	 */
 	int CALL_SUPER_OPERATION__FILE = CALL_EXPRESSION__FILE;
+
+	/**
+	 * The feature id for the '<em><b>Tag</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CALL_SUPER_OPERATION__TAG = CALL_EXPRESSION__TAG;
 
 	/**
 	 * The feature id for the '<em><b>File Name</b></em>' attribute.
@@ -1071,6 +1197,15 @@ public interface BehaviorPackage extends EPackage {
 	int CALL_SUPER_OPERATION__OID = CALL_EXPRESSION__OID;
 
 	/**
+	 * The feature id for the '<em><b>Internal Containing Resource</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CALL_SUPER_OPERATION__INTERNAL_CONTAINING_RESOURCE = CALL_EXPRESSION__INTERNAL_CONTAINING_RESOURCE;
+
+	/**
 	 * The feature id for the '<em><b>Contained Type</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1087,6 +1222,15 @@ public interface BehaviorPackage extends EPackage {
 	 * @ordered
 	 */
 	int CALL_SUPER_OPERATION__BEFORE_LAMBDA_EXPRESSION_RESULT = CALL_EXPRESSION__BEFORE_LAMBDA_EXPRESSION_RESULT;
+
+	/**
+	 * The feature id for the '<em><b>Is Last Expression</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CALL_SUPER_OPERATION__IS_LAST_EXPRESSION = CALL_EXPRESSION__IS_LAST_EXPRESSION;
 
 	/**
 	 * The feature id for the '<em><b>Static Type</b></em>' reference.
@@ -1144,15 +1288,6 @@ public interface BehaviorPackage extends EPackage {
 	int VARIABLE_DECL = 8;
 
 	/**
-	 * The feature id for the '<em><b>Tag</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int VARIABLE_DECL__TAG = EXPRESSION__TAG;
-
-	/**
 	 * The feature id for the '<em><b>File</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1160,6 +1295,15 @@ public interface BehaviorPackage extends EPackage {
 	 * @ordered
 	 */
 	int VARIABLE_DECL__FILE = EXPRESSION__FILE;
+
+	/**
+	 * The feature id for the '<em><b>Tag</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VARIABLE_DECL__TAG = EXPRESSION__TAG;
 
 	/**
 	 * The feature id for the '<em><b>File Name</b></em>' attribute.
@@ -1198,6 +1342,15 @@ public interface BehaviorPackage extends EPackage {
 	int VARIABLE_DECL__OID = EXPRESSION__OID;
 
 	/**
+	 * The feature id for the '<em><b>Internal Containing Resource</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VARIABLE_DECL__INTERNAL_CONTAINING_RESOURCE = EXPRESSION__INTERNAL_CONTAINING_RESOURCE;
+
+	/**
 	 * The feature id for the '<em><b>Contained Type</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1214,6 +1367,15 @@ public interface BehaviorPackage extends EPackage {
 	 * @ordered
 	 */
 	int VARIABLE_DECL__BEFORE_LAMBDA_EXPRESSION_RESULT = EXPRESSION__BEFORE_LAMBDA_EXPRESSION_RESULT;
+
+	/**
+	 * The feature id for the '<em><b>Is Last Expression</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VARIABLE_DECL__IS_LAST_EXPRESSION = EXPRESSION__IS_LAST_EXPRESSION;
 
 	/**
 	 * The feature id for the '<em><b>Static Type</b></em>' reference.
@@ -1271,15 +1433,6 @@ public interface BehaviorPackage extends EPackage {
 	int ASSIGNMENT = 9;
 
 	/**
-	 * The feature id for the '<em><b>Tag</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ASSIGNMENT__TAG = EXPRESSION__TAG;
-
-	/**
 	 * The feature id for the '<em><b>File</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1287,6 +1440,15 @@ public interface BehaviorPackage extends EPackage {
 	 * @ordered
 	 */
 	int ASSIGNMENT__FILE = EXPRESSION__FILE;
+
+	/**
+	 * The feature id for the '<em><b>Tag</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ASSIGNMENT__TAG = EXPRESSION__TAG;
 
 	/**
 	 * The feature id for the '<em><b>File Name</b></em>' attribute.
@@ -1325,6 +1487,15 @@ public interface BehaviorPackage extends EPackage {
 	int ASSIGNMENT__OID = EXPRESSION__OID;
 
 	/**
+	 * The feature id for the '<em><b>Internal Containing Resource</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ASSIGNMENT__INTERNAL_CONTAINING_RESOURCE = EXPRESSION__INTERNAL_CONTAINING_RESOURCE;
+
+	/**
 	 * The feature id for the '<em><b>Contained Type</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1343,6 +1514,15 @@ public interface BehaviorPackage extends EPackage {
 	int ASSIGNMENT__BEFORE_LAMBDA_EXPRESSION_RESULT = EXPRESSION__BEFORE_LAMBDA_EXPRESSION_RESULT;
 
 	/**
+	 * The feature id for the '<em><b>Is Last Expression</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ASSIGNMENT__IS_LAST_EXPRESSION = EXPRESSION__IS_LAST_EXPRESSION;
+
+	/**
 	 * The feature id for the '<em><b>Static Type</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1352,13 +1532,13 @@ public interface BehaviorPackage extends EPackage {
 	int ASSIGNMENT__STATIC_TYPE = EXPRESSION__STATIC_TYPE;
 
 	/**
-	 * The feature id for the '<em><b>Target</b></em>' containment reference.
+	 * The feature id for the '<em><b>Value Type Cast Suffix</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ASSIGNMENT__TARGET = EXPRESSION_FEATURE_COUNT + 0;
+	int ASSIGNMENT__VALUE_TYPE_CAST_SUFFIX = EXPRESSION_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Value</b></em>' containment reference.
@@ -1370,13 +1550,31 @@ public interface BehaviorPackage extends EPackage {
 	int ASSIGNMENT__VALUE = EXPRESSION_FEATURE_COUNT + 1;
 
 	/**
+	 * The feature id for the '<em><b>Target</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ASSIGNMENT__TARGET = EXPRESSION_FEATURE_COUNT + 2;
+
+	/**
 	 * The feature id for the '<em><b>Is Cast</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ASSIGNMENT__IS_CAST = EXPRESSION_FEATURE_COUNT + 2;
+	int ASSIGNMENT__IS_CAST = EXPRESSION_FEATURE_COUNT + 3;
+
+	/**
+	 * The feature id for the '<em><b>Value Type Cast Prefix</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ASSIGNMENT__VALUE_TYPE_CAST_PREFIX = EXPRESSION_FEATURE_COUNT + 4;
 
 	/**
 	 * The number of structural features of the '<em>Assignment</em>' class.
@@ -1385,7 +1583,7 @@ public interface BehaviorPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ASSIGNMENT_FEATURE_COUNT = EXPRESSION_FEATURE_COUNT + 3;
+	int ASSIGNMENT_FEATURE_COUNT = EXPRESSION_FEATURE_COUNT + 5;
 
 	/**
 	 * The meta object id for the '{@link kermeta.language.behavior.impl.LambdaExpressionImpl <em>Lambda Expression</em>}' class.
@@ -1398,15 +1596,6 @@ public interface BehaviorPackage extends EPackage {
 	int LAMBDA_EXPRESSION = 10;
 
 	/**
-	 * The feature id for the '<em><b>Tag</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int LAMBDA_EXPRESSION__TAG = EXPRESSION__TAG;
-
-	/**
 	 * The feature id for the '<em><b>File</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1414,6 +1603,15 @@ public interface BehaviorPackage extends EPackage {
 	 * @ordered
 	 */
 	int LAMBDA_EXPRESSION__FILE = EXPRESSION__FILE;
+
+	/**
+	 * The feature id for the '<em><b>Tag</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LAMBDA_EXPRESSION__TAG = EXPRESSION__TAG;
 
 	/**
 	 * The feature id for the '<em><b>File Name</b></em>' attribute.
@@ -1452,6 +1650,15 @@ public interface BehaviorPackage extends EPackage {
 	int LAMBDA_EXPRESSION__OID = EXPRESSION__OID;
 
 	/**
+	 * The feature id for the '<em><b>Internal Containing Resource</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LAMBDA_EXPRESSION__INTERNAL_CONTAINING_RESOURCE = EXPRESSION__INTERNAL_CONTAINING_RESOURCE;
+
+	/**
 	 * The feature id for the '<em><b>Contained Type</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1468,6 +1675,15 @@ public interface BehaviorPackage extends EPackage {
 	 * @ordered
 	 */
 	int LAMBDA_EXPRESSION__BEFORE_LAMBDA_EXPRESSION_RESULT = EXPRESSION__BEFORE_LAMBDA_EXPRESSION_RESULT;
+
+	/**
+	 * The feature id for the '<em><b>Is Last Expression</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LAMBDA_EXPRESSION__IS_LAST_EXPRESSION = EXPRESSION__IS_LAST_EXPRESSION;
 
 	/**
 	 * The feature id for the '<em><b>Static Type</b></em>' reference.
@@ -1525,15 +1741,6 @@ public interface BehaviorPackage extends EPackage {
 	int LAMBDA_PARAMETER = 11;
 
 	/**
-	 * The feature id for the '<em><b>Tag</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int LAMBDA_PARAMETER__TAG = StructurePackage.OBJECT__TAG;
-
-	/**
 	 * The feature id for the '<em><b>File</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1541,6 +1748,15 @@ public interface BehaviorPackage extends EPackage {
 	 * @ordered
 	 */
 	int LAMBDA_PARAMETER__FILE = StructurePackage.OBJECT__FILE;
+
+	/**
+	 * The feature id for the '<em><b>Tag</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LAMBDA_PARAMETER__TAG = StructurePackage.OBJECT__TAG;
 
 	/**
 	 * The feature id for the '<em><b>File Name</b></em>' attribute.
@@ -1577,6 +1793,15 @@ public interface BehaviorPackage extends EPackage {
 	 * @ordered
 	 */
 	int LAMBDA_PARAMETER__OID = StructurePackage.OBJECT__OID;
+
+	/**
+	 * The feature id for the '<em><b>Internal Containing Resource</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LAMBDA_PARAMETER__INTERNAL_CONTAINING_RESOURCE = StructurePackage.OBJECT__INTERNAL_CONTAINING_RESOURCE;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -1616,15 +1841,6 @@ public interface BehaviorPackage extends EPackage {
 	int TYPE_REFERENCE = 12;
 
 	/**
-	 * The feature id for the '<em><b>Tag</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TYPE_REFERENCE__TAG = StructurePackage.MULTIPLICITY_ELEMENT__TAG;
-
-	/**
 	 * The feature id for the '<em><b>File</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1632,6 +1848,15 @@ public interface BehaviorPackage extends EPackage {
 	 * @ordered
 	 */
 	int TYPE_REFERENCE__FILE = StructurePackage.MULTIPLICITY_ELEMENT__FILE;
+
+	/**
+	 * The feature id for the '<em><b>Tag</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TYPE_REFERENCE__TAG = StructurePackage.MULTIPLICITY_ELEMENT__TAG;
 
 	/**
 	 * The feature id for the '<em><b>File Name</b></em>' attribute.
@@ -1668,6 +1893,15 @@ public interface BehaviorPackage extends EPackage {
 	 * @ordered
 	 */
 	int TYPE_REFERENCE__OID = StructurePackage.MULTIPLICITY_ELEMENT__OID;
+
+	/**
+	 * The feature id for the '<em><b>Internal Containing Resource</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TYPE_REFERENCE__INTERNAL_CONTAINING_RESOURCE = StructurePackage.MULTIPLICITY_ELEMENT__INTERNAL_CONTAINING_RESOURCE;
 
 	/**
 	 * The feature id for the '<em><b>Contained Type</b></em>' containment reference list.
@@ -1752,15 +1986,6 @@ public interface BehaviorPackage extends EPackage {
 	int RAISE = 13;
 
 	/**
-	 * The feature id for the '<em><b>Tag</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int RAISE__TAG = EXPRESSION__TAG;
-
-	/**
 	 * The feature id for the '<em><b>File</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1768,6 +1993,15 @@ public interface BehaviorPackage extends EPackage {
 	 * @ordered
 	 */
 	int RAISE__FILE = EXPRESSION__FILE;
+
+	/**
+	 * The feature id for the '<em><b>Tag</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RAISE__TAG = EXPRESSION__TAG;
 
 	/**
 	 * The feature id for the '<em><b>File Name</b></em>' attribute.
@@ -1806,6 +2040,15 @@ public interface BehaviorPackage extends EPackage {
 	int RAISE__OID = EXPRESSION__OID;
 
 	/**
+	 * The feature id for the '<em><b>Internal Containing Resource</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RAISE__INTERNAL_CONTAINING_RESOURCE = EXPRESSION__INTERNAL_CONTAINING_RESOURCE;
+
+	/**
 	 * The feature id for the '<em><b>Contained Type</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1822,6 +2065,15 @@ public interface BehaviorPackage extends EPackage {
 	 * @ordered
 	 */
 	int RAISE__BEFORE_LAMBDA_EXPRESSION_RESULT = EXPRESSION__BEFORE_LAMBDA_EXPRESSION_RESULT;
+
+	/**
+	 * The feature id for the '<em><b>Is Last Expression</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RAISE__IS_LAST_EXPRESSION = EXPRESSION__IS_LAST_EXPRESSION;
 
 	/**
 	 * The feature id for the '<em><b>Static Type</b></em>' reference.
@@ -1861,15 +2113,6 @@ public interface BehaviorPackage extends EPackage {
 	int RESCUE = 14;
 
 	/**
-	 * The feature id for the '<em><b>Tag</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int RESCUE__TAG = StructurePackage.OBJECT__TAG;
-
-	/**
 	 * The feature id for the '<em><b>File</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1877,6 +2120,15 @@ public interface BehaviorPackage extends EPackage {
 	 * @ordered
 	 */
 	int RESCUE__FILE = StructurePackage.OBJECT__FILE;
+
+	/**
+	 * The feature id for the '<em><b>Tag</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RESCUE__TAG = StructurePackage.OBJECT__TAG;
 
 	/**
 	 * The feature id for the '<em><b>File Name</b></em>' attribute.
@@ -1915,13 +2167,13 @@ public interface BehaviorPackage extends EPackage {
 	int RESCUE__OID = StructurePackage.OBJECT__OID;
 
 	/**
-	 * The feature id for the '<em><b>Exception Name</b></em>' attribute.
+	 * The feature id for the '<em><b>Internal Containing Resource</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int RESCUE__EXCEPTION_NAME = StructurePackage.OBJECT_FEATURE_COUNT + 0;
+	int RESCUE__INTERNAL_CONTAINING_RESOURCE = StructurePackage.OBJECT__INTERNAL_CONTAINING_RESOURCE;
 
 	/**
 	 * The feature id for the '<em><b>Body</b></em>' containment reference list.
@@ -1930,7 +2182,16 @@ public interface BehaviorPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int RESCUE__BODY = StructurePackage.OBJECT_FEATURE_COUNT + 1;
+	int RESCUE__BODY = StructurePackage.OBJECT_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Exception Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RESCUE__EXCEPTION_NAME = StructurePackage.OBJECT_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Exception Type</b></em>' containment reference.
@@ -1961,15 +2222,6 @@ public interface BehaviorPackage extends EPackage {
 	int SELF_EXPRESSION = 15;
 
 	/**
-	 * The feature id for the '<em><b>Tag</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SELF_EXPRESSION__TAG = EXPRESSION__TAG;
-
-	/**
 	 * The feature id for the '<em><b>File</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1977,6 +2229,15 @@ public interface BehaviorPackage extends EPackage {
 	 * @ordered
 	 */
 	int SELF_EXPRESSION__FILE = EXPRESSION__FILE;
+
+	/**
+	 * The feature id for the '<em><b>Tag</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SELF_EXPRESSION__TAG = EXPRESSION__TAG;
 
 	/**
 	 * The feature id for the '<em><b>File Name</b></em>' attribute.
@@ -2015,6 +2276,15 @@ public interface BehaviorPackage extends EPackage {
 	int SELF_EXPRESSION__OID = EXPRESSION__OID;
 
 	/**
+	 * The feature id for the '<em><b>Internal Containing Resource</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SELF_EXPRESSION__INTERNAL_CONTAINING_RESOURCE = EXPRESSION__INTERNAL_CONTAINING_RESOURCE;
+
+	/**
 	 * The feature id for the '<em><b>Contained Type</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2031,6 +2301,15 @@ public interface BehaviorPackage extends EPackage {
 	 * @ordered
 	 */
 	int SELF_EXPRESSION__BEFORE_LAMBDA_EXPRESSION_RESULT = EXPRESSION__BEFORE_LAMBDA_EXPRESSION_RESULT;
+
+	/**
+	 * The feature id for the '<em><b>Is Last Expression</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SELF_EXPRESSION__IS_LAST_EXPRESSION = EXPRESSION__IS_LAST_EXPRESSION;
 
 	/**
 	 * The feature id for the '<em><b>Static Type</b></em>' reference.
@@ -2061,15 +2340,6 @@ public interface BehaviorPackage extends EPackage {
 	int CONDITIONAL = 16;
 
 	/**
-	 * The feature id for the '<em><b>Tag</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CONDITIONAL__TAG = EXPRESSION__TAG;
-
-	/**
 	 * The feature id for the '<em><b>File</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2077,6 +2347,15 @@ public interface BehaviorPackage extends EPackage {
 	 * @ordered
 	 */
 	int CONDITIONAL__FILE = EXPRESSION__FILE;
+
+	/**
+	 * The feature id for the '<em><b>Tag</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONDITIONAL__TAG = EXPRESSION__TAG;
 
 	/**
 	 * The feature id for the '<em><b>File Name</b></em>' attribute.
@@ -2115,6 +2394,15 @@ public interface BehaviorPackage extends EPackage {
 	int CONDITIONAL__OID = EXPRESSION__OID;
 
 	/**
+	 * The feature id for the '<em><b>Internal Containing Resource</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONDITIONAL__INTERNAL_CONTAINING_RESOURCE = EXPRESSION__INTERNAL_CONTAINING_RESOURCE;
+
+	/**
 	 * The feature id for the '<em><b>Contained Type</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2131,6 +2419,15 @@ public interface BehaviorPackage extends EPackage {
 	 * @ordered
 	 */
 	int CONDITIONAL__BEFORE_LAMBDA_EXPRESSION_RESULT = EXPRESSION__BEFORE_LAMBDA_EXPRESSION_RESULT;
+
+	/**
+	 * The feature id for the '<em><b>Is Last Expression</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONDITIONAL__IS_LAST_EXPRESSION = EXPRESSION__IS_LAST_EXPRESSION;
 
 	/**
 	 * The feature id for the '<em><b>Static Type</b></em>' reference.
@@ -2188,15 +2485,6 @@ public interface BehaviorPackage extends EPackage {
 	int LOOP = 17;
 
 	/**
-	 * The feature id for the '<em><b>Tag</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int LOOP__TAG = EXPRESSION__TAG;
-
-	/**
 	 * The feature id for the '<em><b>File</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2204,6 +2492,15 @@ public interface BehaviorPackage extends EPackage {
 	 * @ordered
 	 */
 	int LOOP__FILE = EXPRESSION__FILE;
+
+	/**
+	 * The feature id for the '<em><b>Tag</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LOOP__TAG = EXPRESSION__TAG;
 
 	/**
 	 * The feature id for the '<em><b>File Name</b></em>' attribute.
@@ -2242,6 +2539,15 @@ public interface BehaviorPackage extends EPackage {
 	int LOOP__OID = EXPRESSION__OID;
 
 	/**
+	 * The feature id for the '<em><b>Internal Containing Resource</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LOOP__INTERNAL_CONTAINING_RESOURCE = EXPRESSION__INTERNAL_CONTAINING_RESOURCE;
+
+	/**
 	 * The feature id for the '<em><b>Contained Type</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2258,6 +2564,15 @@ public interface BehaviorPackage extends EPackage {
 	 * @ordered
 	 */
 	int LOOP__BEFORE_LAMBDA_EXPRESSION_RESULT = EXPRESSION__BEFORE_LAMBDA_EXPRESSION_RESULT;
+
+	/**
+	 * The feature id for the '<em><b>Is Last Expression</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LOOP__IS_LAST_EXPRESSION = EXPRESSION__IS_LAST_EXPRESSION;
 
 	/**
 	 * The feature id for the '<em><b>Static Type</b></em>' reference.
@@ -2315,15 +2630,6 @@ public interface BehaviorPackage extends EPackage {
 	int JAVA_STATIC_CALL = 18;
 
 	/**
-	 * The feature id for the '<em><b>Tag</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int JAVA_STATIC_CALL__TAG = EXPRESSION__TAG;
-
-	/**
 	 * The feature id for the '<em><b>File</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2331,6 +2637,15 @@ public interface BehaviorPackage extends EPackage {
 	 * @ordered
 	 */
 	int JAVA_STATIC_CALL__FILE = EXPRESSION__FILE;
+
+	/**
+	 * The feature id for the '<em><b>Tag</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int JAVA_STATIC_CALL__TAG = EXPRESSION__TAG;
 
 	/**
 	 * The feature id for the '<em><b>File Name</b></em>' attribute.
@@ -2369,6 +2684,15 @@ public interface BehaviorPackage extends EPackage {
 	int JAVA_STATIC_CALL__OID = EXPRESSION__OID;
 
 	/**
+	 * The feature id for the '<em><b>Internal Containing Resource</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int JAVA_STATIC_CALL__INTERNAL_CONTAINING_RESOURCE = EXPRESSION__INTERNAL_CONTAINING_RESOURCE;
+
+	/**
 	 * The feature id for the '<em><b>Contained Type</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2385,6 +2709,15 @@ public interface BehaviorPackage extends EPackage {
 	 * @ordered
 	 */
 	int JAVA_STATIC_CALL__BEFORE_LAMBDA_EXPRESSION_RESULT = EXPRESSION__BEFORE_LAMBDA_EXPRESSION_RESULT;
+
+	/**
+	 * The feature id for the '<em><b>Is Last Expression</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int JAVA_STATIC_CALL__IS_LAST_EXPRESSION = EXPRESSION__IS_LAST_EXPRESSION;
 
 	/**
 	 * The feature id for the '<em><b>Static Type</b></em>' reference.
@@ -2405,22 +2738,22 @@ public interface BehaviorPackage extends EPackage {
 	int JAVA_STATIC_CALL__JMETHOD = EXPRESSION_FEATURE_COUNT + 0;
 
 	/**
-	 * The feature id for the '<em><b>Parameters</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int JAVA_STATIC_CALL__PARAMETERS = EXPRESSION_FEATURE_COUNT + 1;
-
-	/**
 	 * The feature id for the '<em><b>Jclass</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int JAVA_STATIC_CALL__JCLASS = EXPRESSION_FEATURE_COUNT + 2;
+	int JAVA_STATIC_CALL__JCLASS = EXPRESSION_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Parameters</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int JAVA_STATIC_CALL__PARAMETERS = EXPRESSION_FEATURE_COUNT + 2;
 
 	/**
 	 * The number of structural features of the '<em>Java Static Call</em>' class.
@@ -2442,15 +2775,6 @@ public interface BehaviorPackage extends EPackage {
 	int LITERAL = 19;
 
 	/**
-	 * The feature id for the '<em><b>Tag</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int LITERAL__TAG = EXPRESSION__TAG;
-
-	/**
 	 * The feature id for the '<em><b>File</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2458,6 +2782,15 @@ public interface BehaviorPackage extends EPackage {
 	 * @ordered
 	 */
 	int LITERAL__FILE = EXPRESSION__FILE;
+
+	/**
+	 * The feature id for the '<em><b>Tag</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LITERAL__TAG = EXPRESSION__TAG;
 
 	/**
 	 * The feature id for the '<em><b>File Name</b></em>' attribute.
@@ -2496,6 +2829,15 @@ public interface BehaviorPackage extends EPackage {
 	int LITERAL__OID = EXPRESSION__OID;
 
 	/**
+	 * The feature id for the '<em><b>Internal Containing Resource</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LITERAL__INTERNAL_CONTAINING_RESOURCE = EXPRESSION__INTERNAL_CONTAINING_RESOURCE;
+
+	/**
 	 * The feature id for the '<em><b>Contained Type</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2512,6 +2854,15 @@ public interface BehaviorPackage extends EPackage {
 	 * @ordered
 	 */
 	int LITERAL__BEFORE_LAMBDA_EXPRESSION_RESULT = EXPRESSION__BEFORE_LAMBDA_EXPRESSION_RESULT;
+
+	/**
+	 * The feature id for the '<em><b>Is Last Expression</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LITERAL__IS_LAST_EXPRESSION = EXPRESSION__IS_LAST_EXPRESSION;
 
 	/**
 	 * The feature id for the '<em><b>Static Type</b></em>' reference.
@@ -2542,15 +2893,6 @@ public interface BehaviorPackage extends EPackage {
 	int STRING_LITERAL = 20;
 
 	/**
-	 * The feature id for the '<em><b>Tag</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int STRING_LITERAL__TAG = LITERAL__TAG;
-
-	/**
 	 * The feature id for the '<em><b>File</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2558,6 +2900,15 @@ public interface BehaviorPackage extends EPackage {
 	 * @ordered
 	 */
 	int STRING_LITERAL__FILE = LITERAL__FILE;
+
+	/**
+	 * The feature id for the '<em><b>Tag</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STRING_LITERAL__TAG = LITERAL__TAG;
 
 	/**
 	 * The feature id for the '<em><b>File Name</b></em>' attribute.
@@ -2596,6 +2947,15 @@ public interface BehaviorPackage extends EPackage {
 	int STRING_LITERAL__OID = LITERAL__OID;
 
 	/**
+	 * The feature id for the '<em><b>Internal Containing Resource</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STRING_LITERAL__INTERNAL_CONTAINING_RESOURCE = LITERAL__INTERNAL_CONTAINING_RESOURCE;
+
+	/**
 	 * The feature id for the '<em><b>Contained Type</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2612,6 +2972,15 @@ public interface BehaviorPackage extends EPackage {
 	 * @ordered
 	 */
 	int STRING_LITERAL__BEFORE_LAMBDA_EXPRESSION_RESULT = LITERAL__BEFORE_LAMBDA_EXPRESSION_RESULT;
+
+	/**
+	 * The feature id for the '<em><b>Is Last Expression</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STRING_LITERAL__IS_LAST_EXPRESSION = LITERAL__IS_LAST_EXPRESSION;
 
 	/**
 	 * The feature id for the '<em><b>Static Type</b></em>' reference.
@@ -2651,15 +3020,6 @@ public interface BehaviorPackage extends EPackage {
 	int INTEGER_LITERAL = 21;
 
 	/**
-	 * The feature id for the '<em><b>Tag</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int INTEGER_LITERAL__TAG = LITERAL__TAG;
-
-	/**
 	 * The feature id for the '<em><b>File</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2667,6 +3027,15 @@ public interface BehaviorPackage extends EPackage {
 	 * @ordered
 	 */
 	int INTEGER_LITERAL__FILE = LITERAL__FILE;
+
+	/**
+	 * The feature id for the '<em><b>Tag</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INTEGER_LITERAL__TAG = LITERAL__TAG;
 
 	/**
 	 * The feature id for the '<em><b>File Name</b></em>' attribute.
@@ -2705,6 +3074,15 @@ public interface BehaviorPackage extends EPackage {
 	int INTEGER_LITERAL__OID = LITERAL__OID;
 
 	/**
+	 * The feature id for the '<em><b>Internal Containing Resource</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INTEGER_LITERAL__INTERNAL_CONTAINING_RESOURCE = LITERAL__INTERNAL_CONTAINING_RESOURCE;
+
+	/**
 	 * The feature id for the '<em><b>Contained Type</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2721,6 +3099,15 @@ public interface BehaviorPackage extends EPackage {
 	 * @ordered
 	 */
 	int INTEGER_LITERAL__BEFORE_LAMBDA_EXPRESSION_RESULT = LITERAL__BEFORE_LAMBDA_EXPRESSION_RESULT;
+
+	/**
+	 * The feature id for the '<em><b>Is Last Expression</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INTEGER_LITERAL__IS_LAST_EXPRESSION = LITERAL__IS_LAST_EXPRESSION;
 
 	/**
 	 * The feature id for the '<em><b>Static Type</b></em>' reference.
@@ -2760,15 +3147,6 @@ public interface BehaviorPackage extends EPackage {
 	int BOOLEAN_LITERAL = 22;
 
 	/**
-	 * The feature id for the '<em><b>Tag</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BOOLEAN_LITERAL__TAG = LITERAL__TAG;
-
-	/**
 	 * The feature id for the '<em><b>File</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2776,6 +3154,15 @@ public interface BehaviorPackage extends EPackage {
 	 * @ordered
 	 */
 	int BOOLEAN_LITERAL__FILE = LITERAL__FILE;
+
+	/**
+	 * The feature id for the '<em><b>Tag</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BOOLEAN_LITERAL__TAG = LITERAL__TAG;
 
 	/**
 	 * The feature id for the '<em><b>File Name</b></em>' attribute.
@@ -2814,6 +3201,15 @@ public interface BehaviorPackage extends EPackage {
 	int BOOLEAN_LITERAL__OID = LITERAL__OID;
 
 	/**
+	 * The feature id for the '<em><b>Internal Containing Resource</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BOOLEAN_LITERAL__INTERNAL_CONTAINING_RESOURCE = LITERAL__INTERNAL_CONTAINING_RESOURCE;
+
+	/**
 	 * The feature id for the '<em><b>Contained Type</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2830,6 +3226,15 @@ public interface BehaviorPackage extends EPackage {
 	 * @ordered
 	 */
 	int BOOLEAN_LITERAL__BEFORE_LAMBDA_EXPRESSION_RESULT = LITERAL__BEFORE_LAMBDA_EXPRESSION_RESULT;
+
+	/**
+	 * The feature id for the '<em><b>Is Last Expression</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BOOLEAN_LITERAL__IS_LAST_EXPRESSION = LITERAL__IS_LAST_EXPRESSION;
 
 	/**
 	 * The feature id for the '<em><b>Static Type</b></em>' reference.
@@ -2869,15 +3274,6 @@ public interface BehaviorPackage extends EPackage {
 	int TYPE_LITERAL = 23;
 
 	/**
-	 * The feature id for the '<em><b>Tag</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TYPE_LITERAL__TAG = LITERAL__TAG;
-
-	/**
 	 * The feature id for the '<em><b>File</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2885,6 +3281,15 @@ public interface BehaviorPackage extends EPackage {
 	 * @ordered
 	 */
 	int TYPE_LITERAL__FILE = LITERAL__FILE;
+
+	/**
+	 * The feature id for the '<em><b>Tag</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TYPE_LITERAL__TAG = LITERAL__TAG;
 
 	/**
 	 * The feature id for the '<em><b>File Name</b></em>' attribute.
@@ -2923,6 +3328,15 @@ public interface BehaviorPackage extends EPackage {
 	int TYPE_LITERAL__OID = LITERAL__OID;
 
 	/**
+	 * The feature id for the '<em><b>Internal Containing Resource</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TYPE_LITERAL__INTERNAL_CONTAINING_RESOURCE = LITERAL__INTERNAL_CONTAINING_RESOURCE;
+
+	/**
 	 * The feature id for the '<em><b>Contained Type</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2939,6 +3353,15 @@ public interface BehaviorPackage extends EPackage {
 	 * @ordered
 	 */
 	int TYPE_LITERAL__BEFORE_LAMBDA_EXPRESSION_RESULT = LITERAL__BEFORE_LAMBDA_EXPRESSION_RESULT;
+
+	/**
+	 * The feature id for the '<em><b>Is Last Expression</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TYPE_LITERAL__IS_LAST_EXPRESSION = LITERAL__IS_LAST_EXPRESSION;
 
 	/**
 	 * The feature id for the '<em><b>Static Type</b></em>' reference.
@@ -2978,15 +3401,6 @@ public interface BehaviorPackage extends EPackage {
 	int VOID_LITERAL = 24;
 
 	/**
-	 * The feature id for the '<em><b>Tag</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int VOID_LITERAL__TAG = LITERAL__TAG;
-
-	/**
 	 * The feature id for the '<em><b>File</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2994,6 +3408,15 @@ public interface BehaviorPackage extends EPackage {
 	 * @ordered
 	 */
 	int VOID_LITERAL__FILE = LITERAL__FILE;
+
+	/**
+	 * The feature id for the '<em><b>Tag</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VOID_LITERAL__TAG = LITERAL__TAG;
 
 	/**
 	 * The feature id for the '<em><b>File Name</b></em>' attribute.
@@ -3032,6 +3455,15 @@ public interface BehaviorPackage extends EPackage {
 	int VOID_LITERAL__OID = LITERAL__OID;
 
 	/**
+	 * The feature id for the '<em><b>Internal Containing Resource</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VOID_LITERAL__INTERNAL_CONTAINING_RESOURCE = LITERAL__INTERNAL_CONTAINING_RESOURCE;
+
+	/**
 	 * The feature id for the '<em><b>Contained Type</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3048,6 +3480,15 @@ public interface BehaviorPackage extends EPackage {
 	 * @ordered
 	 */
 	int VOID_LITERAL__BEFORE_LAMBDA_EXPRESSION_RESULT = LITERAL__BEFORE_LAMBDA_EXPRESSION_RESULT;
+
+	/**
+	 * The feature id for the '<em><b>Is Last Expression</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VOID_LITERAL__IS_LAST_EXPRESSION = LITERAL__IS_LAST_EXPRESSION;
 
 	/**
 	 * The feature id for the '<em><b>Static Type</b></em>' reference.
@@ -3078,15 +3519,6 @@ public interface BehaviorPackage extends EPackage {
 	int EMPTY_EXPRESSION = 25;
 
 	/**
-	 * The feature id for the '<em><b>Tag</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EMPTY_EXPRESSION__TAG = EXPRESSION__TAG;
-
-	/**
 	 * The feature id for the '<em><b>File</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3094,6 +3526,15 @@ public interface BehaviorPackage extends EPackage {
 	 * @ordered
 	 */
 	int EMPTY_EXPRESSION__FILE = EXPRESSION__FILE;
+
+	/**
+	 * The feature id for the '<em><b>Tag</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EMPTY_EXPRESSION__TAG = EXPRESSION__TAG;
 
 	/**
 	 * The feature id for the '<em><b>File Name</b></em>' attribute.
@@ -3132,6 +3573,15 @@ public interface BehaviorPackage extends EPackage {
 	int EMPTY_EXPRESSION__OID = EXPRESSION__OID;
 
 	/**
+	 * The feature id for the '<em><b>Internal Containing Resource</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EMPTY_EXPRESSION__INTERNAL_CONTAINING_RESOURCE = EXPRESSION__INTERNAL_CONTAINING_RESOURCE;
+
+	/**
 	 * The feature id for the '<em><b>Contained Type</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3150,6 +3600,15 @@ public interface BehaviorPackage extends EPackage {
 	int EMPTY_EXPRESSION__BEFORE_LAMBDA_EXPRESSION_RESULT = EXPRESSION__BEFORE_LAMBDA_EXPRESSION_RESULT;
 
 	/**
+	 * The feature id for the '<em><b>Is Last Expression</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EMPTY_EXPRESSION__IS_LAST_EXPRESSION = EXPRESSION__IS_LAST_EXPRESSION;
+
+	/**
 	 * The feature id for the '<em><b>Static Type</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3166,6 +3625,49 @@ public interface BehaviorPackage extends EPackage {
 	 * @ordered
 	 */
 	int EMPTY_EXPRESSION_FEATURE_COUNT = EXPRESSION_FEATURE_COUNT + 0;
+
+	/**
+	 * Returns the meta object for class '{@link kermeta.language.behavior.Expression <em>Expression</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Expression</em>'.
+	 * @see kermeta.language.behavior.Expression
+	 * @generated
+	 */
+	EClass getExpression();
+
+	/**
+	 * Returns the meta object for the attribute '{@link kermeta.language.behavior.Expression#getBeforeLambdaExpressionResult <em>Before Lambda Expression Result</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Before Lambda Expression Result</em>'.
+	 * @see kermeta.language.behavior.Expression#getBeforeLambdaExpressionResult()
+	 * @see #getExpression()
+	 * @generated
+	 */
+	EAttribute getExpression_BeforeLambdaExpressionResult();
+
+	/**
+	 * Returns the meta object for the attribute '{@link kermeta.language.behavior.Expression#getIsLastExpression <em>Is Last Expression</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Is Last Expression</em>'.
+	 * @see kermeta.language.behavior.Expression#getIsLastExpression()
+	 * @see #getExpression()
+	 * @generated
+	 */
+	EAttribute getExpression_IsLastExpression();
+
+	/**
+	 * Returns the meta object for the reference '{@link kermeta.language.behavior.Expression#getStaticType <em>Static Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Static Type</em>'.
+	 * @see kermeta.language.behavior.Expression#getStaticType()
+	 * @see #getExpression()
+	 * @generated
+	 */
+	EReference getExpression_StaticType();
 
 	/**
 	 * Returns the meta object for class '{@link kermeta.language.behavior.Block <em>Block</em>}'.
@@ -3198,146 +3700,6 @@ public interface BehaviorPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getBlock_RescueBlock();
-
-	/**
-	 * Returns the meta object for class '{@link kermeta.language.behavior.Expression <em>Expression</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Expression</em>'.
-	 * @see kermeta.language.behavior.Expression
-	 * @generated
-	 */
-	EClass getExpression();
-
-	/**
-	 * Returns the meta object for the attribute '{@link kermeta.language.behavior.Expression#getBeforeLambdaExpressionResult <em>Before Lambda Expression Result</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Before Lambda Expression Result</em>'.
-	 * @see kermeta.language.behavior.Expression#getBeforeLambdaExpressionResult()
-	 * @see #getExpression()
-	 * @generated
-	 */
-	EAttribute getExpression_BeforeLambdaExpressionResult();
-
-	/**
-	 * Returns the meta object for the reference '{@link kermeta.language.behavior.Expression#getStaticType <em>Static Type</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Static Type</em>'.
-	 * @see kermeta.language.behavior.Expression#getStaticType()
-	 * @see #getExpression()
-	 * @generated
-	 */
-	EReference getExpression_StaticType();
-
-	/**
-	 * Returns the meta object for class '{@link kermeta.language.behavior.CallVariable <em>Call Variable</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Call Variable</em>'.
-	 * @see kermeta.language.behavior.CallVariable
-	 * @generated
-	 */
-	EClass getCallVariable();
-
-	/**
-	 * Returns the meta object for the attribute '{@link kermeta.language.behavior.CallVariable#getIsAtpre <em>Is Atpre</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Is Atpre</em>'.
-	 * @see kermeta.language.behavior.CallVariable#getIsAtpre()
-	 * @see #getCallVariable()
-	 * @generated
-	 */
-	EAttribute getCallVariable_IsAtpre();
-
-	/**
-	 * Returns the meta object for the reference '{@link kermeta.language.behavior.CallVariable#getLambdaExpression <em>Lambda Expression</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Lambda Expression</em>'.
-	 * @see kermeta.language.behavior.CallVariable#getLambdaExpression()
-	 * @see #getCallVariable()
-	 * @generated
-	 */
-	EReference getCallVariable_LambdaExpression();
-
-	/**
-	 * Returns the meta object for class '{@link kermeta.language.behavior.CallFeature <em>Call Feature</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Call Feature</em>'.
-	 * @see kermeta.language.behavior.CallFeature
-	 * @generated
-	 */
-	EClass getCallFeature();
-
-	/**
-	 * Returns the meta object for the attribute '{@link kermeta.language.behavior.CallFeature#getCalledFtResult <em>Called Ft Result</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Called Ft Result</em>'.
-	 * @see kermeta.language.behavior.CallFeature#getCalledFtResult()
-	 * @see #getCallFeature()
-	 * @generated
-	 */
-	EAttribute getCallFeature_CalledFtResult();
-
-	/**
-	 * Returns the meta object for the attribute '{@link kermeta.language.behavior.CallFeature#getIsAtpre <em>Is Atpre</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Is Atpre</em>'.
-	 * @see kermeta.language.behavior.CallFeature#getIsAtpre()
-	 * @see #getCallFeature()
-	 * @generated
-	 */
-	EAttribute getCallFeature_IsAtpre();
-
-	/**
-	 * Returns the meta object for the reference '{@link kermeta.language.behavior.CallFeature#getStaticOperation <em>Static Operation</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Static Operation</em>'.
-	 * @see kermeta.language.behavior.CallFeature#getStaticOperation()
-	 * @see #getCallFeature()
-	 * @generated
-	 */
-	EReference getCallFeature_StaticOperation();
-
-	/**
-	 * Returns the meta object for the containment reference '{@link kermeta.language.behavior.CallFeature#getTarget <em>Target</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Target</em>'.
-	 * @see kermeta.language.behavior.CallFeature#getTarget()
-	 * @see #getCallFeature()
-	 * @generated
-	 */
-	EReference getCallFeature_Target();
-
-	/**
-	 * Returns the meta object for the reference '{@link kermeta.language.behavior.CallFeature#getStaticEnumLiteral <em>Static Enum Literal</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Static Enum Literal</em>'.
-	 * @see kermeta.language.behavior.CallFeature#getStaticEnumLiteral()
-	 * @see #getCallFeature()
-	 * @generated
-	 */
-	EReference getCallFeature_StaticEnumLiteral();
-
-	/**
-	 * Returns the meta object for the reference '{@link kermeta.language.behavior.CallFeature#getStaticProperty <em>Static Property</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Static Property</em>'.
-	 * @see kermeta.language.behavior.CallFeature#getStaticProperty()
-	 * @see #getCallFeature()
-	 * @generated
-	 */
-	EReference getCallFeature_StaticProperty();
 
 	/**
 	 * Returns the meta object for class '{@link kermeta.language.behavior.CallExpression <em>Call Expression</em>}'.
@@ -3381,6 +3743,114 @@ public interface BehaviorPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getCallExpression_Parameters();
+
+	/**
+	 * Returns the meta object for class '{@link kermeta.language.behavior.CallFeature <em>Call Feature</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Call Feature</em>'.
+	 * @see kermeta.language.behavior.CallFeature
+	 * @generated
+	 */
+	EClass getCallFeature();
+
+	/**
+	 * Returns the meta object for the reference '{@link kermeta.language.behavior.CallFeature#getStaticOperation <em>Static Operation</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Static Operation</em>'.
+	 * @see kermeta.language.behavior.CallFeature#getStaticOperation()
+	 * @see #getCallFeature()
+	 * @generated
+	 */
+	EReference getCallFeature_StaticOperation();
+
+	/**
+	 * Returns the meta object for the attribute '{@link kermeta.language.behavior.CallFeature#getIsAtpre <em>Is Atpre</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Is Atpre</em>'.
+	 * @see kermeta.language.behavior.CallFeature#getIsAtpre()
+	 * @see #getCallFeature()
+	 * @generated
+	 */
+	EAttribute getCallFeature_IsAtpre();
+
+	/**
+	 * Returns the meta object for the attribute '{@link kermeta.language.behavior.CallFeature#getCalledFtResult <em>Called Ft Result</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Called Ft Result</em>'.
+	 * @see kermeta.language.behavior.CallFeature#getCalledFtResult()
+	 * @see #getCallFeature()
+	 * @generated
+	 */
+	EAttribute getCallFeature_CalledFtResult();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link kermeta.language.behavior.CallFeature#getTarget <em>Target</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Target</em>'.
+	 * @see kermeta.language.behavior.CallFeature#getTarget()
+	 * @see #getCallFeature()
+	 * @generated
+	 */
+	EReference getCallFeature_Target();
+
+	/**
+	 * Returns the meta object for the reference '{@link kermeta.language.behavior.CallFeature#getStaticEnumLiteral <em>Static Enum Literal</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Static Enum Literal</em>'.
+	 * @see kermeta.language.behavior.CallFeature#getStaticEnumLiteral()
+	 * @see #getCallFeature()
+	 * @generated
+	 */
+	EReference getCallFeature_StaticEnumLiteral();
+
+	/**
+	 * Returns the meta object for the reference '{@link kermeta.language.behavior.CallFeature#getStaticProperty <em>Static Property</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Static Property</em>'.
+	 * @see kermeta.language.behavior.CallFeature#getStaticProperty()
+	 * @see #getCallFeature()
+	 * @generated
+	 */
+	EReference getCallFeature_StaticProperty();
+
+	/**
+	 * Returns the meta object for class '{@link kermeta.language.behavior.CallVariable <em>Call Variable</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Call Variable</em>'.
+	 * @see kermeta.language.behavior.CallVariable
+	 * @generated
+	 */
+	EClass getCallVariable();
+
+	/**
+	 * Returns the meta object for the attribute '{@link kermeta.language.behavior.CallVariable#getIsAtpre <em>Is Atpre</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Is Atpre</em>'.
+	 * @see kermeta.language.behavior.CallVariable#getIsAtpre()
+	 * @see #getCallVariable()
+	 * @generated
+	 */
+	EAttribute getCallVariable_IsAtpre();
+
+	/**
+	 * Returns the meta object for the reference '{@link kermeta.language.behavior.CallVariable#getLambdaExpression <em>Lambda Expression</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Lambda Expression</em>'.
+	 * @see kermeta.language.behavior.CallVariable#getLambdaExpression()
+	 * @see #getCallVariable()
+	 * @generated
+	 */
+	EReference getCallVariable_LambdaExpression();
 
 	/**
 	 * Returns the meta object for class '{@link kermeta.language.behavior.CallResult <em>Call Result</em>}'.
@@ -3466,15 +3936,15 @@ public interface BehaviorPackage extends EPackage {
 	EClass getAssignment();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link kermeta.language.behavior.Assignment#getTarget <em>Target</em>}'.
+	 * Returns the meta object for the attribute '{@link kermeta.language.behavior.Assignment#getValueTypeCastSuffix <em>Value Type Cast Suffix</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Target</em>'.
-	 * @see kermeta.language.behavior.Assignment#getTarget()
+	 * @return the meta object for the attribute '<em>Value Type Cast Suffix</em>'.
+	 * @see kermeta.language.behavior.Assignment#getValueTypeCastSuffix()
 	 * @see #getAssignment()
 	 * @generated
 	 */
-	EReference getAssignment_Target();
+	EAttribute getAssignment_ValueTypeCastSuffix();
 
 	/**
 	 * Returns the meta object for the containment reference '{@link kermeta.language.behavior.Assignment#getValue <em>Value</em>}'.
@@ -3488,6 +3958,17 @@ public interface BehaviorPackage extends EPackage {
 	EReference getAssignment_Value();
 
 	/**
+	 * Returns the meta object for the containment reference '{@link kermeta.language.behavior.Assignment#getTarget <em>Target</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Target</em>'.
+	 * @see kermeta.language.behavior.Assignment#getTarget()
+	 * @see #getAssignment()
+	 * @generated
+	 */
+	EReference getAssignment_Target();
+
+	/**
 	 * Returns the meta object for the attribute '{@link kermeta.language.behavior.Assignment#getIsCast <em>Is Cast</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3497,6 +3978,17 @@ public interface BehaviorPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getAssignment_IsCast();
+
+	/**
+	 * Returns the meta object for the attribute '{@link kermeta.language.behavior.Assignment#getValueTypeCastPrefix <em>Value Type Cast Prefix</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Value Type Cast Prefix</em>'.
+	 * @see kermeta.language.behavior.Assignment#getValueTypeCastPrefix()
+	 * @see #getAssignment()
+	 * @generated
+	 */
+	EAttribute getAssignment_ValueTypeCastPrefix();
 
 	/**
 	 * Returns the meta object for class '{@link kermeta.language.behavior.LambdaExpression <em>Lambda Expression</em>}'.
@@ -3615,17 +4107,6 @@ public interface BehaviorPackage extends EPackage {
 	EClass getRescue();
 
 	/**
-	 * Returns the meta object for the attribute '{@link kermeta.language.behavior.Rescue#getExceptionName <em>Exception Name</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Exception Name</em>'.
-	 * @see kermeta.language.behavior.Rescue#getExceptionName()
-	 * @see #getRescue()
-	 * @generated
-	 */
-	EAttribute getRescue_ExceptionName();
-
-	/**
 	 * Returns the meta object for the containment reference list '{@link kermeta.language.behavior.Rescue#getBody <em>Body</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3635,6 +4116,17 @@ public interface BehaviorPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getRescue_Body();
+
+	/**
+	 * Returns the meta object for the attribute '{@link kermeta.language.behavior.Rescue#getExceptionName <em>Exception Name</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Exception Name</em>'.
+	 * @see kermeta.language.behavior.Rescue#getExceptionName()
+	 * @see #getRescue()
+	 * @generated
+	 */
+	EAttribute getRescue_ExceptionName();
 
 	/**
 	 * Returns the meta object for the containment reference '{@link kermeta.language.behavior.Rescue#getExceptionType <em>Exception Type</em>}'.
@@ -3765,17 +4257,6 @@ public interface BehaviorPackage extends EPackage {
 	EAttribute getJavaStaticCall_Jmethod();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link kermeta.language.behavior.JavaStaticCall#getParameters <em>Parameters</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Parameters</em>'.
-	 * @see kermeta.language.behavior.JavaStaticCall#getParameters()
-	 * @see #getJavaStaticCall()
-	 * @generated
-	 */
-	EReference getJavaStaticCall_Parameters();
-
-	/**
 	 * Returns the meta object for the attribute '{@link kermeta.language.behavior.JavaStaticCall#getJclass <em>Jclass</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3785,6 +4266,17 @@ public interface BehaviorPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getJavaStaticCall_Jclass();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link kermeta.language.behavior.JavaStaticCall#getParameters <em>Parameters</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Parameters</em>'.
+	 * @see kermeta.language.behavior.JavaStaticCall#getParameters()
+	 * @see #getJavaStaticCall()
+	 * @generated
+	 */
+	EReference getJavaStaticCall_Parameters();
 
 	/**
 	 * Returns the meta object for class '{@link kermeta.language.behavior.Literal <em>Literal</em>}'.
@@ -3923,6 +4415,43 @@ public interface BehaviorPackage extends EPackage {
 	 */
 	interface Literals {
 		/**
+		 * The meta object literal for the '{@link kermeta.language.behavior.impl.ExpressionImpl <em>Expression</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see kermeta.language.behavior.impl.ExpressionImpl
+		 * @see kermeta.language.behavior.impl.BehaviorPackageImpl#getExpression()
+		 * @generated
+		 */
+		EClass EXPRESSION = eINSTANCE.getExpression();
+
+		/**
+		 * The meta object literal for the '<em><b>Before Lambda Expression Result</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute EXPRESSION__BEFORE_LAMBDA_EXPRESSION_RESULT = eINSTANCE
+				.getExpression_BeforeLambdaExpressionResult();
+
+		/**
+		 * The meta object literal for the '<em><b>Is Last Expression</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute EXPRESSION__IS_LAST_EXPRESSION = eINSTANCE
+				.getExpression_IsLastExpression();
+
+		/**
+		 * The meta object literal for the '<em><b>Static Type</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference EXPRESSION__STATIC_TYPE = eINSTANCE
+				.getExpression_StaticType();
+
+		/**
 		 * The meta object literal for the '{@link kermeta.language.behavior.impl.BlockImpl <em>Block</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -3947,124 +4476,6 @@ public interface BehaviorPackage extends EPackage {
 		 * @generated
 		 */
 		EReference BLOCK__RESCUE_BLOCK = eINSTANCE.getBlock_RescueBlock();
-
-		/**
-		 * The meta object literal for the '{@link kermeta.language.behavior.impl.ExpressionImpl <em>Expression</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see kermeta.language.behavior.impl.ExpressionImpl
-		 * @see kermeta.language.behavior.impl.BehaviorPackageImpl#getExpression()
-		 * @generated
-		 */
-		EClass EXPRESSION = eINSTANCE.getExpression();
-
-		/**
-		 * The meta object literal for the '<em><b>Before Lambda Expression Result</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute EXPRESSION__BEFORE_LAMBDA_EXPRESSION_RESULT = eINSTANCE
-				.getExpression_BeforeLambdaExpressionResult();
-
-		/**
-		 * The meta object literal for the '<em><b>Static Type</b></em>' reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference EXPRESSION__STATIC_TYPE = eINSTANCE
-				.getExpression_StaticType();
-
-		/**
-		 * The meta object literal for the '{@link kermeta.language.behavior.impl.CallVariableImpl <em>Call Variable</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see kermeta.language.behavior.impl.CallVariableImpl
-		 * @see kermeta.language.behavior.impl.BehaviorPackageImpl#getCallVariable()
-		 * @generated
-		 */
-		EClass CALL_VARIABLE = eINSTANCE.getCallVariable();
-
-		/**
-		 * The meta object literal for the '<em><b>Is Atpre</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute CALL_VARIABLE__IS_ATPRE = eINSTANCE
-				.getCallVariable_IsAtpre();
-
-		/**
-		 * The meta object literal for the '<em><b>Lambda Expression</b></em>' reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference CALL_VARIABLE__LAMBDA_EXPRESSION = eINSTANCE
-				.getCallVariable_LambdaExpression();
-
-		/**
-		 * The meta object literal for the '{@link kermeta.language.behavior.impl.CallFeatureImpl <em>Call Feature</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see kermeta.language.behavior.impl.CallFeatureImpl
-		 * @see kermeta.language.behavior.impl.BehaviorPackageImpl#getCallFeature()
-		 * @generated
-		 */
-		EClass CALL_FEATURE = eINSTANCE.getCallFeature();
-
-		/**
-		 * The meta object literal for the '<em><b>Called Ft Result</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute CALL_FEATURE__CALLED_FT_RESULT = eINSTANCE
-				.getCallFeature_CalledFtResult();
-
-		/**
-		 * The meta object literal for the '<em><b>Is Atpre</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute CALL_FEATURE__IS_ATPRE = eINSTANCE.getCallFeature_IsAtpre();
-
-		/**
-		 * The meta object literal for the '<em><b>Static Operation</b></em>' reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference CALL_FEATURE__STATIC_OPERATION = eINSTANCE
-				.getCallFeature_StaticOperation();
-
-		/**
-		 * The meta object literal for the '<em><b>Target</b></em>' containment reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference CALL_FEATURE__TARGET = eINSTANCE.getCallFeature_Target();
-
-		/**
-		 * The meta object literal for the '<em><b>Static Enum Literal</b></em>' reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference CALL_FEATURE__STATIC_ENUM_LITERAL = eINSTANCE
-				.getCallFeature_StaticEnumLiteral();
-
-		/**
-		 * The meta object literal for the '<em><b>Static Property</b></em>' reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference CALL_FEATURE__STATIC_PROPERTY = eINSTANCE
-				.getCallFeature_StaticProperty();
 
 		/**
 		 * The meta object literal for the '{@link kermeta.language.behavior.impl.CallExpressionImpl <em>Call Expression</em>}' class.
@@ -4101,6 +4512,96 @@ public interface BehaviorPackage extends EPackage {
 		 */
 		EReference CALL_EXPRESSION__PARAMETERS = eINSTANCE
 				.getCallExpression_Parameters();
+
+		/**
+		 * The meta object literal for the '{@link kermeta.language.behavior.impl.CallFeatureImpl <em>Call Feature</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see kermeta.language.behavior.impl.CallFeatureImpl
+		 * @see kermeta.language.behavior.impl.BehaviorPackageImpl#getCallFeature()
+		 * @generated
+		 */
+		EClass CALL_FEATURE = eINSTANCE.getCallFeature();
+
+		/**
+		 * The meta object literal for the '<em><b>Static Operation</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference CALL_FEATURE__STATIC_OPERATION = eINSTANCE
+				.getCallFeature_StaticOperation();
+
+		/**
+		 * The meta object literal for the '<em><b>Is Atpre</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute CALL_FEATURE__IS_ATPRE = eINSTANCE.getCallFeature_IsAtpre();
+
+		/**
+		 * The meta object literal for the '<em><b>Called Ft Result</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute CALL_FEATURE__CALLED_FT_RESULT = eINSTANCE
+				.getCallFeature_CalledFtResult();
+
+		/**
+		 * The meta object literal for the '<em><b>Target</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference CALL_FEATURE__TARGET = eINSTANCE.getCallFeature_Target();
+
+		/**
+		 * The meta object literal for the '<em><b>Static Enum Literal</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference CALL_FEATURE__STATIC_ENUM_LITERAL = eINSTANCE
+				.getCallFeature_StaticEnumLiteral();
+
+		/**
+		 * The meta object literal for the '<em><b>Static Property</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference CALL_FEATURE__STATIC_PROPERTY = eINSTANCE
+				.getCallFeature_StaticProperty();
+
+		/**
+		 * The meta object literal for the '{@link kermeta.language.behavior.impl.CallVariableImpl <em>Call Variable</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see kermeta.language.behavior.impl.CallVariableImpl
+		 * @see kermeta.language.behavior.impl.BehaviorPackageImpl#getCallVariable()
+		 * @generated
+		 */
+		EClass CALL_VARIABLE = eINSTANCE.getCallVariable();
+
+		/**
+		 * The meta object literal for the '<em><b>Is Atpre</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute CALL_VARIABLE__IS_ATPRE = eINSTANCE
+				.getCallVariable_IsAtpre();
+
+		/**
+		 * The meta object literal for the '<em><b>Lambda Expression</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference CALL_VARIABLE__LAMBDA_EXPRESSION = eINSTANCE
+				.getCallVariable_LambdaExpression();
 
 		/**
 		 * The meta object literal for the '{@link kermeta.language.behavior.impl.CallResultImpl <em>Call Result</em>}' class.
@@ -4179,12 +4680,13 @@ public interface BehaviorPackage extends EPackage {
 		EClass ASSIGNMENT = eINSTANCE.getAssignment();
 
 		/**
-		 * The meta object literal for the '<em><b>Target</b></em>' containment reference feature.
+		 * The meta object literal for the '<em><b>Value Type Cast Suffix</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference ASSIGNMENT__TARGET = eINSTANCE.getAssignment_Target();
+		EAttribute ASSIGNMENT__VALUE_TYPE_CAST_SUFFIX = eINSTANCE
+				.getAssignment_ValueTypeCastSuffix();
 
 		/**
 		 * The meta object literal for the '<em><b>Value</b></em>' containment reference feature.
@@ -4195,12 +4697,29 @@ public interface BehaviorPackage extends EPackage {
 		EReference ASSIGNMENT__VALUE = eINSTANCE.getAssignment_Value();
 
 		/**
+		 * The meta object literal for the '<em><b>Target</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference ASSIGNMENT__TARGET = eINSTANCE.getAssignment_Target();
+
+		/**
 		 * The meta object literal for the '<em><b>Is Cast</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
 		EAttribute ASSIGNMENT__IS_CAST = eINSTANCE.getAssignment_IsCast();
+
+		/**
+		 * The meta object literal for the '<em><b>Value Type Cast Prefix</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute ASSIGNMENT__VALUE_TYPE_CAST_PREFIX = eINSTANCE
+				.getAssignment_ValueTypeCastPrefix();
 
 		/**
 		 * The meta object literal for the '{@link kermeta.language.behavior.impl.LambdaExpressionImpl <em>Lambda Expression</em>}' class.
@@ -4304,20 +4823,20 @@ public interface BehaviorPackage extends EPackage {
 		EClass RESCUE = eINSTANCE.getRescue();
 
 		/**
-		 * The meta object literal for the '<em><b>Exception Name</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute RESCUE__EXCEPTION_NAME = eINSTANCE.getRescue_ExceptionName();
-
-		/**
 		 * The meta object literal for the '<em><b>Body</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
 		EReference RESCUE__BODY = eINSTANCE.getRescue_Body();
+
+		/**
+		 * The meta object literal for the '<em><b>Exception Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute RESCUE__EXCEPTION_NAME = eINSTANCE.getRescue_ExceptionName();
 
 		/**
 		 * The meta object literal for the '<em><b>Exception Type</b></em>' containment reference feature.
@@ -4426,15 +4945,6 @@ public interface BehaviorPackage extends EPackage {
 				.getJavaStaticCall_Jmethod();
 
 		/**
-		 * The meta object literal for the '<em><b>Parameters</b></em>' containment reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference JAVA_STATIC_CALL__PARAMETERS = eINSTANCE
-				.getJavaStaticCall_Parameters();
-
-		/**
 		 * The meta object literal for the '<em><b>Jclass</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -4442,6 +4952,15 @@ public interface BehaviorPackage extends EPackage {
 		 */
 		EAttribute JAVA_STATIC_CALL__JCLASS = eINSTANCE
 				.getJavaStaticCall_Jclass();
+
+		/**
+		 * The meta object literal for the '<em><b>Parameters</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference JAVA_STATIC_CALL__PARAMETERS = eINSTANCE
+				.getJavaStaticCall_Parameters();
 
 		/**
 		 * The meta object literal for the '{@link kermeta.language.behavior.impl.LiteralImpl <em>Literal</em>}' class.

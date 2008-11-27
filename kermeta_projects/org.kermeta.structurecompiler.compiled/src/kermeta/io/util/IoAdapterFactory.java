@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: IoAdapterFactory.java,v 1.8 2008-11-07 08:54:14 cfaucher Exp $
+ * $Id: IoAdapterFactory.java,v 1.9 2008-11-27 15:50:17 cfaucher Exp $
  */
 package kermeta.io.util;
 
@@ -71,13 +71,13 @@ public class IoAdapterFactory extends AdapterFactoryImpl {
 	 */
 	protected IoSwitch<Adapter> modelSwitch = new IoSwitch<Adapter>() {
 		@Override
-		public Adapter caseFileIO(FileIO object) {
-			return createFileIOAdapter();
+		public Adapter caseStdIO(StdIO object) {
+			return createStdIOAdapter();
 		}
 
 		@Override
-		public Adapter caseStdIO(StdIO object) {
-			return createStdIOAdapter();
+		public Adapter caseFileIO(FileIO object) {
+			return createFileIOAdapter();
 		}
 
 		@Override
@@ -105,20 +105,6 @@ public class IoAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link kermeta.io.FileIO <em>File IO</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see kermeta.io.FileIO
-	 * @generated
-	 */
-	public Adapter createFileIOAdapter() {
-		return null;
-	}
-
-	/**
 	 * Creates a new adapter for an object of class '{@link kermeta.io.StdIO <em>Std IO</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -129,6 +115,20 @@ public class IoAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createStdIOAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link kermeta.io.FileIO <em>File IO</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see kermeta.io.FileIO
+	 * @generated
+	 */
+	public Adapter createFileIOAdapter() {
 		return null;
 	}
 

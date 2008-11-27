@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: KermetaAdapterFactory.java,v 1.8 2008-11-07 08:54:07 cfaucher Exp $
+ * $Id: KermetaAdapterFactory.java,v 1.9 2008-11-27 15:50:14 cfaucher Exp $
  */
 package km2ecore.helper.kermeta.util;
 
@@ -71,14 +71,14 @@ public class KermetaAdapterFactory extends AdapterFactoryImpl {
 	 */
 	protected KermetaSwitch<Adapter> modelSwitch = new KermetaSwitch<Adapter>() {
 		@Override
-		public Adapter caseGenericTypeDefinitionHelper(
-				GenericTypeDefinitionHelper object) {
-			return createGenericTypeDefinitionHelperAdapter();
+		public Adapter caseCompilerHelperJava(CompilerHelperJava object) {
+			return createCompilerHelperJavaAdapter();
 		}
 
 		@Override
-		public Adapter caseCompilerHelperJava(CompilerHelperJava object) {
-			return createCompilerHelperJavaAdapter();
+		public Adapter caseGenericTypeDefinitionHelper(
+				GenericTypeDefinitionHelper object) {
+			return createGenericTypeDefinitionHelperAdapter();
 		}
 
 		@Override
@@ -106,20 +106,6 @@ public class KermetaAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link km2ecore.helper.kermeta.GenericTypeDefinitionHelper <em>Generic Type Definition Helper</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see km2ecore.helper.kermeta.GenericTypeDefinitionHelper
-	 * @generated
-	 */
-	public Adapter createGenericTypeDefinitionHelperAdapter() {
-		return null;
-	}
-
-	/**
 	 * Creates a new adapter for an object of class '{@link km2ecore.helper.kermeta.CompilerHelperJava <em>Compiler Helper Java</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -130,6 +116,20 @@ public class KermetaAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createCompilerHelperJavaAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link km2ecore.helper.kermeta.GenericTypeDefinitionHelper <em>Generic Type Definition Helper</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see km2ecore.helper.kermeta.GenericTypeDefinitionHelper
+	 * @generated
+	 */
+	public Adapter createGenericTypeDefinitionHelperAdapter() {
 		return null;
 	}
 

@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: KunitFactoryImpl.java,v 1.8 2008-11-07 08:52:29 cfaucher Exp $
+ * $Id: KunitFactoryImpl.java,v 1.9 2008-11-27 15:49:48 cfaucher Exp $
  */
 package kermeta.kunit.impl;
 
@@ -71,6 +71,10 @@ public class KunitFactoryImpl extends EFactoryImpl implements KunitFactory {
 	@Override
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
+		case KunitPackage.ASSERTION_FAILED_ERROR:
+			return createAssertionFailedError();
+		case KunitPackage.ASSERT:
+			return createAssert();
 		case KunitPackage.INVALID_TEST_CASE_NAME_EXCEPTION:
 			return createInvalidTestCaseNameException();
 		case KunitPackage.INVALID_PARAMETER_EXCEPTION:
@@ -85,10 +89,6 @@ public class KunitFactoryImpl extends EFactoryImpl implements KunitFactory {
 			return createTestSuite();
 		case KunitPackage.TEST_RUNNER:
 			return createTestRunner();
-		case KunitPackage.ASSERTION_FAILED_ERROR:
-			return createAssertionFailedError();
-		case KunitPackage.ASSERT:
-			return createAssert();
 		default:
 			throw new IllegalArgumentException("The class '" + eClass.getName()
 					+ "' is not a valid classifier");
@@ -125,6 +125,26 @@ public class KunitFactoryImpl extends EFactoryImpl implements KunitFactory {
 			throw new IllegalArgumentException("The datatype '"
 					+ eDataType.getName() + "' is not a valid classifier");
 		}
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public AssertionFailedError createAssertionFailedError() {
+		AssertionFailedErrorImpl assertionFailedError = new AssertionFailedErrorImpl();
+		return assertionFailedError;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Assert createAssert() {
+		AssertImpl assert_ = new AssertImpl();
+		return assert_;
 	}
 
 	/**
@@ -195,26 +215,6 @@ public class KunitFactoryImpl extends EFactoryImpl implements KunitFactory {
 	public TestRunner createTestRunner() {
 		TestRunnerImpl testRunner = new TestRunnerImpl();
 		return testRunner;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public AssertionFailedError createAssertionFailedError() {
-		AssertionFailedErrorImpl assertionFailedError = new AssertionFailedErrorImpl();
-		return assertionFailedError;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Assert createAssert() {
-		AssertImpl assert_ = new AssertImpl();
-		return assert_;
 	}
 
 	/**

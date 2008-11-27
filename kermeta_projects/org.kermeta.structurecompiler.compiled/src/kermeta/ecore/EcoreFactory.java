@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: EcoreFactory.java,v 1.8 2008-11-07 08:54:23 cfaucher Exp $
+ * $Id: EcoreFactory.java,v 1.9 2008-11-27 15:50:32 cfaucher Exp $
  */
 package kermeta.ecore;
 

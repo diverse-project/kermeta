@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: Error.java,v 1.8 2008-11-07 08:53:45 cfaucher Exp $
+ * $Id: Error.java,v 1.9 2008-11-27 15:50:05 cfaucher Exp $
  */
 package kermeta.kunit;
 
@@ -21,7 +21,7 @@ package kermeta.kunit;
  * </p>
  *
  * @see kermeta.kunit.KunitPackage#getError()
- * @model annotation="kermeta documentation='/**\r\n * Error represents an occurrence of an exception in setUp, tearDown or a test\r\n * and is stored in a failure log\r\n \052/'"
+ * @model annotation="kermeta documentation='/**\n * Error represents an occurrence of an exception in setUp, tearDown or a test\n * and is stored in a failure log\n \052/'"
  * @generated
  */
 public interface Error extends kermeta.language.structure.Object {
@@ -36,7 +36,7 @@ public interface Error extends kermeta.language.structure.Object {
 	 * @return the value of the '<em>Error</em>' reference.
 	 * @see #setError(Fallible)
 	 * @see kermeta.kunit.KunitPackage#getError_Error()
-	 * @model annotation="kermeta documentation='/**\r\n\t * the stored error\r\n\t \052/'"
+	 * @model annotation="kermeta documentation='/**\n\t * the stored error\n\t \052/'"
 	 * @generated
 	 */
 	Fallible getError();
@@ -62,7 +62,7 @@ public interface Error extends kermeta.language.structure.Object {
 	 * @return the value of the '<em>Exception</em>' reference.
 	 * @see #setException(kermeta.exceptions.Exception)
 	 * @see kermeta.kunit.KunitPackage#getError_Exception()
-	 * @model annotation="kermeta documentation='/**\r\n\t * the Kermeta exception corresponding to the error\r\n\t \052/'"
+	 * @model annotation="kermeta documentation='/**\n\t * the Kermeta exception corresponding to the error\n\t \052/'"
 	 * @generated
 	 */
 	kermeta.exceptions.Exception getException();
@@ -91,7 +91,7 @@ public interface Error extends kermeta.language.structure.Object {
 	 * @see #setKind(ErrorKind)
 	 * @see kermeta.kunit.KunitPackage#getError_Kind()
 	 * @model transient="true"
-	 *        annotation="kermeta documentation='/**\r\n\t * the nature of the stored error\r\n\t \052/'"
+	 *        annotation="kermeta documentation='/**\n\t * the nature of the stored error\n\t \052/'"
 	 * @generated
 	 */
 	ErrorKind getKind();
@@ -110,7 +110,7 @@ public interface Error extends kermeta.language.structure.Object {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @model annotation="kermeta documentation='/**\r\n\t * Changes the type of an error to makeTearDownError, the best way to use\r\n\t * this method is to call it after the init from line:\r\n\t * var e : Error init Error.new.initFrom(f, e).makeTearDown\r\n\t \052/'"
+	 * @model annotation="kermeta documentation='/**\n\t * Changes the type of an error to makeTearDownError, the best way to use\n\t * this method is to call it after the init from line:\n\t * var e : Error init Error.new.initFrom(f, e).makeTearDown\n\t \052/'"
 	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='\nkermeta.kunit.Error result = null;\n\n\tthis.setKind(kermeta.kunit.ErrorKind.getByName(\"tearDownError\"));\n\n\tresult = this;\n\nreturn result;\n'"
 	 * @generated
 	 */
@@ -119,7 +119,7 @@ public interface Error extends kermeta.language.structure.Object {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @model annotation="kermeta documentation='/**\r\n\t * Changes the type of an error to SetUpError, the best way to use\r\n\t * this method is to call it after the init from line:\r\n\t * var e : Error init Error.new.initFrom(f, e).makeSetUp\r\n\t \052/'"
+	 * @model annotation="kermeta documentation='/**\n\t * Changes the type of an error to SetUpError, the best way to use\n\t * this method is to call it after the init from line:\n\t * var e : Error init Error.new.initFrom(f, e).makeSetUp\n\t \052/'"
 	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='\nkermeta.kunit.Error result = null;\n\n\tthis.setKind(kermeta.kunit.ErrorKind.getByName(\"setUpError\"));\n\n\tresult = this;\n\nreturn result;\n'"
 	 * @generated
 	 */
@@ -129,9 +129,9 @@ public interface Error extends kermeta.language.structure.Object {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @model dataType="kermeta.standard.JavaString"
-	 *        annotation="kermeta documentation='/**\r\n\t * overwrite the default method, in order to add :\r\n\t *   - the type\r\n\t *   - the message\r\n\t *   - the stack trace\r\n\t \052/'"
+	 *        annotation="kermeta documentation='/**\n\t * overwrite the default method, in order to add :\n\t *   - the type\n\t *   - the message\n\t *   - the stack trace\n\t \052/'"
 	 *        annotation="kermeta superOperation='kermeta::language::structure::Object'"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='\njava.lang.String result = null;\n\n\tjava.lang.Boolean idIfCond_965 = false;\n\tidIfCond_965 = org.kermeta.compil.runtime.helper.language.ObjectUtil.equalsSwitcher(this.getKind(), kermeta.kunit.ErrorKind.getByName(\"testError\"));\n\n\tif( idIfCond_965 ) {\n\n\tresult = org.kermeta.compil.runtime.helper.language.ObjectUtil.toStringSwitcher(this.getError());\n}\n else {\n\n\tresult = kermeta.standard.helper.StringWrapper.plus(org.kermeta.compil.runtime.helper.language.ObjectUtil.getMetaClassSwitcher(this.getError()).getterName(), \".\");\n\n\tjava.lang.Boolean idIfCond_966 = false;\n\tidIfCond_966 = org.kermeta.compil.runtime.helper.language.ObjectUtil.equalsSwitcher(this.getKind(), kermeta.kunit.ErrorKind.getByName(\"setUpError\"));\n\n\tif( idIfCond_966 ) {\n\n\tresult = kermeta.standard.helper.StringWrapper.plus(result, \"setUp()\");\n}\n else {\n\n\tresult = kermeta.standard.helper.StringWrapper.plus(result, \"tearDown()\");\n}\n\n}\n\n\n\tresult = kermeta.standard.helper.StringWrapper.plus(kermeta.standard.helper.StringWrapper.plus(result, \" raised \"), org.kermeta.compil.runtime.helper.language.ObjectUtil.getMetaClassSwitcher(this.getException()).getterName());\n\n\tjava.lang.Boolean idIfCond_967 = false;\n\tidIfCond_967 = org.kermeta.compil.runtime.helper.language.ObjectUtil.isNotEqualSwitcher(this.getException().getMessage(), null);\n\n\tif( idIfCond_967 ) {\n\n\tresult = kermeta.standard.helper.StringWrapper.plus(kermeta.standard.helper.StringWrapper.plus(result, \"\\n    Caused by: \"), this.getException().getMessage());\n}\n else {\n\n\tresult = kermeta.standard.helper.StringWrapper.plus(result, \"\\n    (no message)\");\n}\n\n\n\tjava.lang.Boolean idIfCond_968 = false;\n\tidIfCond_968 = org.kermeta.compil.runtime.helper.language.ObjectUtil.isNotEqualSwitcher(this.getException().getStackTrace(), null);\n\n\tif( idIfCond_968 ) {\n\n\tresult = kermeta.standard.helper.StringWrapper.plus(kermeta.standard.helper.StringWrapper.plus(result, \"\\n    Stack Trace:\\n\"), this.getException().getStackTrace());\n}\n else {\n\n\tresult = kermeta.standard.helper.StringWrapper.plus(result, \"\\n    (no stack trace)\");\n}\n\n\nreturn result;\n'"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='\njava.lang.String result = null;\n\n\tjava.lang.Boolean idIfCond_752 = false;\n\tidIfCond_752 = org.kermeta.compil.runtime.helper.language.ObjectUtil.equalsSwitcher(this.getKind(), kermeta.kunit.ErrorKind.getByName(\"testError\"));\n\n\tif( idIfCond_752 ) {\n\n\tresult = org.kermeta.compil.runtime.helper.language.ObjectUtil.toStringSwitcher(this.getError());\n}\n else {\n\n\tresult = kermeta.standard.helper.StringWrapper.plus(org.kermeta.compil.runtime.helper.language.ObjectUtil.getMetaClassSwitcher(this.getError()).getterName(), \".\");\n\n\tjava.lang.Boolean idIfCond_753 = false;\n\tidIfCond_753 = org.kermeta.compil.runtime.helper.language.ObjectUtil.equalsSwitcher(this.getKind(), kermeta.kunit.ErrorKind.getByName(\"setUpError\"));\n\n\tif( idIfCond_753 ) {\n\n\tresult = kermeta.standard.helper.StringWrapper.plus(result, \"setUp()\");\n}\n else {\n\n\tresult = kermeta.standard.helper.StringWrapper.plus(result, \"tearDown()\");\n}\n\n}\n\n\n\tresult = kermeta.standard.helper.StringWrapper.plus(kermeta.standard.helper.StringWrapper.plus(result, \" raised \"), org.kermeta.compil.runtime.helper.language.ObjectUtil.getMetaClassSwitcher(this.getException()).getterName());\n\n\tjava.lang.Boolean idIfCond_754 = false;\n\tidIfCond_754 = org.kermeta.compil.runtime.helper.language.ObjectUtil.isNotEqualSwitcher(this.getException().getMessage(), null);\n\n\tif( idIfCond_754 ) {\n\n\tresult = kermeta.standard.helper.StringWrapper.plus(kermeta.standard.helper.StringWrapper.plus(result, \"\\n    Caused by: \"), this.getException().getMessage());\n}\n else {\n\n\tresult = kermeta.standard.helper.StringWrapper.plus(result, \"\\n    (no message)\");\n}\n\n\n\tjava.lang.Boolean idIfCond_755 = false;\n\tidIfCond_755 = org.kermeta.compil.runtime.helper.language.ObjectUtil.isNotEqualSwitcher(this.getException().getStackTrace(), null);\n\n\tif( idIfCond_755 ) {\n\n\tresult = kermeta.standard.helper.StringWrapper.plus(kermeta.standard.helper.StringWrapper.plus(result, \"\\n    Stack Trace:\\n\"), this.getException().getStackTrace());\n}\n else {\n\n\tresult = kermeta.standard.helper.StringWrapper.plus(result, \"\\n    (no stack trace)\");\n}\n\n\nreturn result;\n'"
 	 * @generated
 	 */
 	String toString();
@@ -139,7 +139,7 @@ public interface Error extends kermeta.language.structure.Object {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @model annotation="kermeta documentation='/**\r\n\t * Sets up a new error with failable object and the exception that occurred\r\n\t * by default it will be a test error. Use makeSetUp or makeTearDown to\r\n\t * change its type\r\n\t \052/'"
+	 * @model annotation="kermeta documentation='/**\n\t * Sets up a new error with failable object and the exception that occurred\n\t * by default it will be a test error. Use makeSetUp or makeTearDown to\n\t * change its type\n\t \052/'"
 	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='\nkermeta.kunit.Error result = null;\n\n\tthis.setError(error);\n\n\tthis.setException(e);\n\n\tthis.setKind(kermeta.kunit.ErrorKind.getByName(\"testError\"));\n\n\tresult = this;\n\nreturn result;\n'"
 	 * @generated
 	 */

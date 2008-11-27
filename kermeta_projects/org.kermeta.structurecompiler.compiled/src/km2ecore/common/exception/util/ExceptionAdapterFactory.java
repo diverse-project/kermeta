@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ExceptionAdapterFactory.java,v 1.8 2008-11-07 08:54:21 cfaucher Exp $
+ * $Id: ExceptionAdapterFactory.java,v 1.9 2008-11-27 15:50:29 cfaucher Exp $
  */
 package km2ecore.common.exception.util;
 

@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: EcoreFactoryImpl.java,v 1.8 2008-11-07 08:54:06 cfaucher Exp $
+ * $Id: EcoreFactoryImpl.java,v 1.9 2008-11-27 15:50:14 cfaucher Exp $
  */
 package km2ecore.helper.ecore.impl;
 
@@ -61,14 +61,14 @@ public class EcoreFactoryImpl extends EFactoryImpl implements EcoreFactory {
 	@Override
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
-		case EcorePackage.EANNOTATION_HELPER:
-			return createEAnnotationHelper();
 		case EcorePackage.ENAMED_ELEMENT_HELPER:
 			return createENamedElementHelper();
 		case EcorePackage.MODEL_ANALIZER:
 			return createModelAnalizer();
 		case EcorePackage.ECORE_MODEL_ELEMENT_HELPER:
 			return createEcoreModelElementHelper();
+		case EcorePackage.EANNOTATION_HELPER:
+			return createEAnnotationHelper();
 		default:
 			throw new IllegalArgumentException("The class '" + eClass.getName()
 					+ "' is not a valid classifier");
@@ -120,16 +120,6 @@ public class EcoreFactoryImpl extends EFactoryImpl implements EcoreFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAnnotationHelper createEAnnotationHelper() {
-		EAnnotationHelperImpl eAnnotationHelper = new EAnnotationHelperImpl();
-		return eAnnotationHelper;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public ENamedElementHelper createENamedElementHelper() {
 		ENamedElementHelperImpl eNamedElementHelper = new ENamedElementHelperImpl();
 		return eNamedElementHelper;
@@ -153,6 +143,16 @@ public class EcoreFactoryImpl extends EFactoryImpl implements EcoreFactory {
 	public EcoreModelElementHelper createEcoreModelElementHelper() {
 		EcoreModelElementHelperImpl ecoreModelElementHelper = new EcoreModelElementHelperImpl();
 		return ecoreModelElementHelper;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAnnotationHelper createEAnnotationHelper() {
+		EAnnotationHelperImpl eAnnotationHelper = new EAnnotationHelperImpl();
+		return eAnnotationHelper;
 	}
 
 	/**

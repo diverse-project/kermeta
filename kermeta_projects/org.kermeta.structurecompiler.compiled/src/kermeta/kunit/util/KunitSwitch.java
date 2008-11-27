@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: KunitSwitch.java,v 1.8 2008-11-07 08:53:43 cfaucher Exp $
+ * $Id: KunitSwitch.java,v 1.9 2008-11-27 15:50:05 cfaucher Exp $
  */
 package kermeta.kunit.util;
 
@@ -96,6 +96,37 @@ public class KunitSwitch<T> {
 	 */
 	protected T doSwitch(int classifierID, EObject theEObject) {
 		switch (classifierID) {
+		case KunitPackage.ABSTRACT_FALLIBLE: {
+			AbstractFallible abstractFallible = (AbstractFallible) theEObject;
+			T result = caseAbstractFallible(abstractFallible);
+			if (result == null)
+				result = caseObject(abstractFallible);
+			if (result == null)
+				result = defaultCase(theEObject);
+			return result;
+		}
+		case KunitPackage.ASSERTION_FAILED_ERROR: {
+			AssertionFailedError assertionFailedError = (AssertionFailedError) theEObject;
+			T result = caseAssertionFailedError(assertionFailedError);
+			if (result == null)
+				result = caseException(assertionFailedError);
+			if (result == null)
+				result = caseObject(assertionFailedError);
+			if (result == null)
+				result = defaultCase(theEObject);
+			return result;
+		}
+		case KunitPackage.ASSERT: {
+			Assert assert_ = (Assert) theEObject;
+			T result = caseAssert(assert_);
+			if (result == null)
+				result = caseAbstractFallible(assert_);
+			if (result == null)
+				result = caseObject(assert_);
+			if (result == null)
+				result = defaultCase(theEObject);
+			return result;
+		}
 		case KunitPackage.INVALID_TEST_CASE_NAME_EXCEPTION: {
 			InvalidTestCaseNameException invalidTestCaseNameException = (InvalidTestCaseNameException) theEObject;
 			T result = caseInvalidTestCaseNameException(invalidTestCaseNameException);
@@ -200,40 +231,54 @@ public class KunitSwitch<T> {
 				result = defaultCase(theEObject);
 			return result;
 		}
-		case KunitPackage.ABSTRACT_FALLIBLE: {
-			AbstractFallible abstractFallible = (AbstractFallible) theEObject;
-			T result = caseAbstractFallible(abstractFallible);
-			if (result == null)
-				result = caseObject(abstractFallible);
-			if (result == null)
-				result = defaultCase(theEObject);
-			return result;
-		}
-		case KunitPackage.ASSERTION_FAILED_ERROR: {
-			AssertionFailedError assertionFailedError = (AssertionFailedError) theEObject;
-			T result = caseAssertionFailedError(assertionFailedError);
-			if (result == null)
-				result = caseException(assertionFailedError);
-			if (result == null)
-				result = caseObject(assertionFailedError);
-			if (result == null)
-				result = defaultCase(theEObject);
-			return result;
-		}
-		case KunitPackage.ASSERT: {
-			Assert assert_ = (Assert) theEObject;
-			T result = caseAssert(assert_);
-			if (result == null)
-				result = caseAbstractFallible(assert_);
-			if (result == null)
-				result = caseObject(assert_);
-			if (result == null)
-				result = defaultCase(theEObject);
-			return result;
-		}
 		default:
 			return defaultCase(theEObject);
 		}
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Abstract Fallible</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Abstract Fallible</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseAbstractFallible(AbstractFallible object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Assertion Failed Error</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Assertion Failed Error</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseAssertionFailedError(AssertionFailedError object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Assert</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Assert</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseAssert(Assert object) {
+		return null;
 	}
 
 	/**
@@ -384,51 +429,6 @@ public class KunitSwitch<T> {
 	 * @generated
 	 */
 	public T caseTestRunner(TestRunner object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Abstract Fallible</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Abstract Fallible</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseAbstractFallible(AbstractFallible object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Assertion Failed Error</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Assertion Failed Error</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseAssertionFailedError(AssertionFailedError object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Assert</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Assert</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseAssert(Assert object) {
 		return null;
 	}
 

@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: BehaviorAdapterFactory.java,v 1.8 2008-11-07 08:54:20 cfaucher Exp $
+ * $Id: BehaviorAdapterFactory.java,v 1.9 2008-11-27 15:50:28 cfaucher Exp $
  */
 package kermeta.language.behavior.util;
 
@@ -76,18 +76,18 @@ public class BehaviorAdapterFactory extends AdapterFactoryImpl {
 	 */
 	protected BehaviorSwitch<Adapter> modelSwitch = new BehaviorSwitch<Adapter>() {
 		@Override
-		public Adapter caseBlock(Block object) {
-			return createBlockAdapter();
-		}
-
-		@Override
 		public Adapter caseExpression(Expression object) {
 			return createExpressionAdapter();
 		}
 
 		@Override
-		public Adapter caseCallVariable(CallVariable object) {
-			return createCallVariableAdapter();
+		public Adapter caseBlock(Block object) {
+			return createBlockAdapter();
+		}
+
+		@Override
+		public Adapter caseCallExpression(CallExpression object) {
+			return createCallExpressionAdapter();
 		}
 
 		@Override
@@ -96,8 +96,8 @@ public class BehaviorAdapterFactory extends AdapterFactoryImpl {
 		}
 
 		@Override
-		public Adapter caseCallExpression(CallExpression object) {
-			return createCallExpressionAdapter();
+		public Adapter caseCallVariable(CallVariable object) {
+			return createCallVariableAdapter();
 		}
 
 		@Override
@@ -250,20 +250,6 @@ public class BehaviorAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link kermeta.language.behavior.Block <em>Block</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see kermeta.language.behavior.Block
-	 * @generated
-	 */
-	public Adapter createBlockAdapter() {
-		return null;
-	}
-
-	/**
 	 * Creates a new adapter for an object of class '{@link kermeta.language.behavior.Expression <em>Expression</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -278,16 +264,30 @@ public class BehaviorAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link kermeta.language.behavior.CallVariable <em>Call Variable</em>}'.
+	 * Creates a new adapter for an object of class '{@link kermeta.language.behavior.Block <em>Block</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see kermeta.language.behavior.CallVariable
+	 * @see kermeta.language.behavior.Block
 	 * @generated
 	 */
-	public Adapter createCallVariableAdapter() {
+	public Adapter createBlockAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link kermeta.language.behavior.CallExpression <em>Call Expression</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see kermeta.language.behavior.CallExpression
+	 * @generated
+	 */
+	public Adapter createCallExpressionAdapter() {
 		return null;
 	}
 
@@ -306,16 +306,16 @@ public class BehaviorAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link kermeta.language.behavior.CallExpression <em>Call Expression</em>}'.
+	 * Creates a new adapter for an object of class '{@link kermeta.language.behavior.CallVariable <em>Call Variable</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see kermeta.language.behavior.CallExpression
+	 * @see kermeta.language.behavior.CallVariable
 	 * @generated
 	 */
-	public Adapter createCallExpressionAdapter() {
+	public Adapter createCallVariableAdapter() {
 		return null;
 	}
 

@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ResourceCreateException.java,v 1.8 2008-11-07 08:53:04 cfaucher Exp $
+ * $Id: ResourceCreateException.java,v 1.9 2008-11-27 15:49:51 cfaucher Exp $
  */
 package kermeta.exceptions;
 

@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ResourceMixedLevelsExceptionImpl.java,v 1.8 2008-11-07 08:52:26 cfaucher Exp $
+ * $Id: ResourceMixedLevelsExceptionImpl.java,v 1.9 2008-11-27 15:49:48 cfaucher Exp $
  */
 package kermeta.exceptions.impl;
 

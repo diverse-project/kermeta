@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ResourceSaveException.java,v 1.8 2008-11-07 08:53:05 cfaucher Exp $
+ * $Id: ResourceSaveException.java,v 1.9 2008-11-27 15:49:51 cfaucher Exp $
  */
 package kermeta.exceptions;
 
@@ -34,7 +34,7 @@ public interface ResourceSaveException extends kermeta.exceptions.Exception {
 	 * @return the value of the '<em>Failed While Saving</em>' reference.
 	 * @see #setFailedWhileSaving(kermeta.language.structure.Object)
 	 * @see kermeta.exceptions.ExceptionsPackage#getResourceSaveException_FailedWhileSaving()
-	 * @model annotation="kermeta documentation='/** Object on which the the saved failed\r\n\t * One can rescue the exception and analyse the structure next to this object, \r\n\t * this can give some clue about the faulty structure\r\n\t \052/'"
+	 * @model annotation="kermeta documentation='/** Object on which the the saved failed\n\t * One can rescue the exception and analyse the structure next to this object, \n\t * this can give some clue about the faulty structure\n\t \052/'"
 	 * @generated
 	 */
 	kermeta.language.structure.Object getFailedWhileSaving();

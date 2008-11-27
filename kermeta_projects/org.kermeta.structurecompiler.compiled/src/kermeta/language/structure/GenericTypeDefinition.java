@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: GenericTypeDefinition.java,v 1.8 2008-11-07 08:53:40 cfaucher Exp $
+ * $Id: GenericTypeDefinition.java,v 1.9 2008-11-27 15:50:04 cfaucher Exp $
  */
 package kermeta.language.structure;
 
@@ -21,8 +21,7 @@ import org.eclipse.emf.common.util.EList;
  * </p>
  *
  * @see kermeta.language.structure.StructurePackage#getGenericTypeDefinition()
- * @model abstract="true"
- *        annotation="kermeta documentation='Abstracts the definition of generic type definitions (i.e. type definitions that\ncan be parameterized), namely, for ClassDefinition and ModelTypeDefinition.'"
+ * @model annotation="kermeta documentation='Abstracts the definition of generic type definitions (i.e. type definitions that\ncan be parameterized), namely, for ClassDefinition and ModelTypeDefinition.'"
  * @generated
  */
 public interface GenericTypeDefinition extends TypeDefinition {

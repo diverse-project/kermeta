@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: VoidLiteral.java,v 1.8 2008-11-07 08:52:22 cfaucher Exp $
+ * $Id: VoidLiteral.java,v 1.9 2008-11-27 15:49:47 cfaucher Exp $
  */
 package kermeta.language.behavior;
 
