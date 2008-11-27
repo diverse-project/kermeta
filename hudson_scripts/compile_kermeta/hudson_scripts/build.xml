@@ -29,6 +29,19 @@
 		<copy todir="${eclipse.build.dir}/plugins">
 			<fileset dir="${env.WORKSPACE}/kermeta_projects">
 				 <exclude name="**/fr.irisa.triskell.kermeta.feature/**"/>
+				 <exclude name="**/fr.irisa.triskell.kermeta.ket/**"/>
+				 <exclude name="**/org.kermeta.prototyper/**"/>
+				 <exclude name="**/org.kermeta.registration/**"/>
+				 <exclude name="**/org.kermeta.kpm.test.workbench/**"/>
+				 <exclude name="**/org.kermeta.compiler.tests/**"/>
+				 <exclude name="**/org.kermeta.ket.texteditor/**"/>
+				 <exclude name="**/org.kermeta.compiler/**"/>
+				 <exclude name="**/org.kermeta.kpm.tests/**"/>
+				 <exclude name="**/fr.irisa.triskell.kermeta.graphicaleditor/**"/>
+				 <exclude name="**/org.kermeta.compiler.generator/**"/>
+				 <exclude name="**/CVS/**"/>
+			</fileset>
+			<fileset dir="${env.WORKSPACE}/emfatic_projects">
 				 <exclude name="**/CVS/**"/>
 			</fileset>
 		</copy>
