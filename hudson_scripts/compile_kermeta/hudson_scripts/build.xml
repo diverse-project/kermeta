@@ -22,7 +22,7 @@
 		<mkdir dir="${eclipse.build.dir}/plugins"/>
 		<mkdir dir="${eclipse.build.dir}/features"/>		
 		<copy todir="${eclipse.build.dir}/features/fr.irisa.triskell.kermeta">
-			<fileset dir="${env.WORKSPACE}/Traceability_projects/fr.irisa.triskell.kermeta.feature">
+			<fileset dir="${env.WORKSPACE}/kermeta_projects/fr.irisa.triskell.kermeta.feature">
 				 <exclude name="**/CVS/**"/>
 			</fileset>
 		</copy>		
@@ -37,10 +37,10 @@
 	<target name="getDependencies">	
 		<mkdir dir="${eclipse.extension.location}"/>			
 		<get src="http://pamplemousse.irisa.fr:8080/job/compile_traceability/lastSuccessfulBuild/artifact/src/I.TestBuild/fr.irisa.triskell.traceability-TestBuild.zip" 
-			dest="${eclipse.extension.location}/fr.irisa.triskell.eclipse.util.feature-TestBuild.zip"
+			dest="${eclipse.extension.location}/fr.irisa.triskell.traceability-TestBuild.zip"
 			usetimestamp="true"/>
 		<get src="http://pamplemousse.irisa.fr:8080/job/compile_log4j/lastSuccessfulBuild/artifact/src/I.TestBuild/org.kermeta.log4j-TestBuild.zip" 
-					dest="${eclipse.extension.location}/fr.irisa.triskell.eclipse.util.feature-TestBuild.zip"
+					dest="${eclipse.extension.location}/org.kermeta.log4j-TestBuild.zip"
 					usetimestamp="true"/>
 		<unzip dest="${eclipse.extension.location}">
 		    <fileset dir="${eclipse.extension.location}">
