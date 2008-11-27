@@ -14,7 +14,11 @@ public class ClassUtil {
 
 	static public Object newObject( String class_QN ) {
 		
-		class_QN = class_QN.replace("impl.", "").replace("Impl", "");
+		class_QN = class_QN.replace("impl.", "");
+		
+		if(class_QN.endsWith("Impl")) {
+			class_QN = class_QN.replace("Impl", "");
+		}
 		
 		String type = class_QN;
 		String[] type_ = class_QN.split("<");

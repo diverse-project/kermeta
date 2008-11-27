@@ -1,5 +1,5 @@
 
-/*$Id: Saver.java,v 1.9 2008-11-25 12:32:10 cfaucher Exp $
+/*$Id: Saver.java,v 1.10 2008-11-27 15:00:47 cfaucher Exp $
 * Project : org.kermeta.compiler.generator
 * File : 	Saver.java
 * License : EPL
@@ -59,8 +59,6 @@ public class Saver extends SaverOrLoader {
 			
 			ResourceSet resourceSet = new ResourceSetImpl();
 			org.eclipse.emf.ecore.resource.Resource resource = resourceSet.createResource( URI.createURI(modelURI) );
-			
-			ExecutionContext.getInstance().setResourceMapping(resource, kermetaResource);
 			
 			resource.getContents().addAll(instancesToSave);
 			resource.save(null);

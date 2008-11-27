@@ -1,5 +1,5 @@
 
-/*$Id: Loader.java,v 1.12 2008-11-25 12:32:10 cfaucher Exp $
+/*$Id: Loader.java,v 1.13 2008-11-27 15:00:47 cfaucher Exp $
 * Project : org.kermeta.compiler.generator
 * File : 	Loader.java
 * License : EPL
@@ -49,8 +49,6 @@ public class Loader extends SaverOrLoader {
 		ResourceSet rs = new ResourceSetImpl();
 		
 		org.eclipse.emf.ecore.resource.Resource resource = rs.getResource( URI.createURI(modelURI), true );
-		
-		ExecutionContext.getInstance().setResourceMapping(resource, kermetaResource);
 		
 		for ( EObject o : resource.getContents() ) {
 			instances.add( l.clone(o) );

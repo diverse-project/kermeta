@@ -2,7 +2,7 @@
 	 package="org.kermeta.compiler.generator.templates"
 	 
 	 class="ExecutionContext"
-	 version="$Id: ExecutionContext.javajet,v 1.13 2008-11-25 12:32:10 cfaucher Exp $" %>
+	 version="$Id: ExecutionContext.javajet,v 1.14 2008-11-27 15:00:48 cfaucher Exp $" %>
 <%String kmFilePath_forReflection = (String) argument;%>
 
 package org.kermeta.compil.runtime;
@@ -33,8 +33,6 @@ public class ExecutionContext {
 	private String _modelKMURI = "<%= kmFilePath_forReflection %>";
 	
 	private List<Object> _modelKM;
-	
-	private Hashtable<org.eclipse.emf.ecore.resource.Resource, kermeta.persistence.Resource> _resourceMapping;
 
 	/**
 	 * @generated
@@ -121,8 +119,11 @@ public class ExecutionContext {
 			return hashtable_classes.get(javaQualifiedName);
 		}
 
-		javaQualifiedName = javaQualifiedName.replace("impl.", "").replace(
-				"Impl", "");
+		javaQualifiedName = javaQualifiedName.replace("impl.", "");
+		
+		if(javaQualifiedName.endsWith("Impl")) {
+			javaQualifiedName = javaQualifiedName.replace("Impl", "");
+		}
 
 		// Optimization
 		if (hashtable_classes.containsKey(javaQualifiedName)) {
@@ -212,20 +213,6 @@ public class ExecutionContext {
 		}
 
 		return self;
-	}
-	
-	/**
-	 * @generated
-	 */
-	public kermeta.persistence.Resource getKermetaResourceMapping(org.eclipse.emf.ecore.resource.Resource emfResource) {
-		return _resourceMapping.get(emfResource);
-	}
-	
-	/**
-	 * @generated
-	 */
-	public void setResourceMapping(org.eclipse.emf.ecore.resource.Resource emfResource, kermeta.persistence.Resource kermetaResource) {
-		_resourceMapping.put(emfResource, kermetaResource);
 	}
 
 }
