@@ -1,4 +1,4 @@
-/* $Id: structure.kmt,v 1.74 2008-11-18 14:37:51 cfaucher Exp $
+/* $Id: structure.kmt,v 1.75 2008-11-27 15:08:38 cfaucher Exp $
  * Project : framework
  * File : structure.kmt
  * License : EPL
@@ -30,6 +30,7 @@ using kermeta::standard
 using kermeta::exceptions
 
  @EMF_needProperty "name=oid javaClass=java.lang.Integer"
+ @EMF_needProperty "name=internalContainingResource classDefinitionQN=kermeta::persistence::Resource"
 aspect class Object
 {
 	/**
