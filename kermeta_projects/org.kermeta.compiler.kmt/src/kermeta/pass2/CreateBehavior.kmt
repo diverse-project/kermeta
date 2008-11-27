@@ -1,4 +1,4 @@
-/* $Id: CreateBehavior.kmt,v 1.93 2008-11-27 14:35:25 cfaucher Exp $
+/* $Id: CreateBehavior.kmt,v 1.94 2008-11-27 15:44:45 cfaucher Exp $
  * Creation date: January 21, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -1176,14 +1176,14 @@ package behavior {
 			var right_type : String init self.~value.staticType.getTypeQName()
 			
 			var value_type_list : Set<String> init Set<String>.new()
-			value_type_list.add("java.lang.String")
-			value_type_list.add("java.lang.Boolean")
-			value_type_list.add("java.lang.Integer")
-			value_type_list.add("java.lang.Character")
-			value_type_list.add("java.lang.Double")
+			value_type_list.add("kermeta::standard::String")
+			value_type_list.add("kermeta::standard::Boolean")
+			value_type_list.add("kermeta::standard::Integer")
+			value_type_list.add("kermeta::standard::Character")
+			value_type_list.add("kermeta::standard::Real")
 			
 			var castType : String init self.getCastTypeQName(context)
-			if right_type == "kermeta.language.structure.Object" then
+			if right_type == "kermeta::language::structure::Object" then
 				if value_type_list.contains(castType) then
 					stdio.writeln("a conversion is required")
 					result := true
@@ -1197,16 +1197,15 @@ package behavior {
 			var left_type : String init self.target.staticType.getTypeQName()
 			
 			var value_type_list : Set<String> init Set<String>.new()
-			value_type_list.add("java.lang.String")
-			value_type_list.add("java.lang.Boolean")
-			value_type_list.add("java.lang.Integer")
-			value_type_list.add("java.lang.Character")
-			value_type_list.add("java.lang.Double")
+			value_type_list.add("kermeta::standard::String")
+			value_type_list.add("kermeta::standard::Boolean")
+			value_type_list.add("kermeta::standard::Integer")
+			value_type_list.add("kermeta::standard::Character")
+			value_type_list.add("kermeta::standard::Real")
 			
 			var castType : String init self.~value.staticType.getTypeQName()
-			if left_type == "kermeta.language.structure.Object" then
+			if left_type == "kermeta::language::structure::Object" then
 				if value_type_list.contains(castType) then
-					stdio.writeln("a conversion is required")
 					result := true
 				end
 			end
