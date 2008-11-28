@@ -1,4 +1,4 @@
-/* $Id: Profile.kmt,v 1.9 2008-11-02 17:26:54 gperroui Exp $
+/* $Id: Profile.kmt,v 1.10 2008-11-28 10:16:27 gperroui Exp $
  * Creation date: November 30, 2007
  * License: EPL
  * Copyright:
@@ -29,11 +29,11 @@ using kermeta::persistence
 using UMLProfileUtils
  
 
-aspect class Profile 
+aspect class Profile inherits ToEcore
 {
 	reference prof : EObject
 	/** This method deals with creation of new Ecore objects */
-	method toEcorePass1(trace: UMLProfile2EcoreTrace) : EObject is do
+	method toEcorePass1(trace: UMLProfile2EcoreTrace) : EObject from ToEcore is do
 	trace.traceLog("Entering Profile : Pass1")
 	prof := EPackage.new
 	// registering elements in the trace to keep track of them...
@@ -59,7 +59,7 @@ aspect class Profile
 	
 	 
 	/** This method deals with relationship establishment*/
-	method toEcorePass2(trace: UMLProfile2EcoreTrace) : Void is do
+	method toEcorePass2(trace: UMLProfile2EcoreTrace) : Void from ToEcore is do
 	trace.traceLog("Entering Profile : Pass2")
 	if self.container != void then
 	trace.traceLog("Container is not void, trying to retreive it....")
@@ -80,7 +80,7 @@ aspect class Profile
 end
 
 	/** This method performs cleanup and deals with template parameters related issues... */
-	method toEcorePass3(trace: UMLProfile2EcoreTrace) : Void is do
+	method toEcorePass3(trace: UMLProfile2EcoreTrace) : Void from ToEcore is do
 	trace.traceLog("Entering Profile: Pass3")
 	trace.traceLog("Quitting Profile: Pass3")
 	 
