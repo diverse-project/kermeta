@@ -1,4 +1,4 @@
-/* $Id: Profile.kmt,v 1.10 2008-11-28 10:16:27 gperroui Exp $
+/* $Id: Profile.kmt,v 1.11 2008-11-28 13:24:31 gperroui Exp $
  * Creation date: November 30, 2007
  * License: EPL
  * Copyright:
@@ -870,7 +870,7 @@ end
 	method toEcorePass3(trace: UMLProfile2EcoreTrace) : Void is do
 	trace.traceLog("Entering Property: Pass3")
 	trace.traceLog("property qualified name " + self.getQualifiedName)
-
+   if not self.type.isVoid then
 	if not self.type.owningTemplateParameter.isVoid then
 		if not ref.isVoid then 
 			if not ref.eContainingClass.isVoid then
@@ -909,6 +909,7 @@ end
 	else
 		trace.traceLog("No template parameter nothing to do here...")
 	end
+ end
 	trace.traceLog("Quitting Property: Pass3")
 end 
 
@@ -1207,8 +1208,17 @@ end
 	/** This method deals with relationship establishment*/
 	method toEcorePass2(trace: UMLProfile2EcoreTrace) : Void is do
 	trace.traceLog("Entering Generalization : Pass2")
-	var spe :  ecore::EClass init trace.getEcoreFromUMLQualName(self.specific.getQualifiedName).asType(ecore::EClass)
-	var general :  ecore::EClass init trace.getEcoreFromUMLQualName(self.general.getQualifiedName).asType(ecore::EClass)
+	trace.traceLog("specific qualified name: " + self.specific.getQualifiedName)
+	trace.traceLog("general qualified name: " + self.general.getQualifiedName)
+	var spe: ecore::EClass
+	var general : ecore::EClass
+	
+	if not trace.getEcoreFromUMLQualName(self.specific.getQualifiedName).isInstanceOf(ecore::EDataType) then
+		if not trace.getEcoreFromUMLQualName(self.general.getQualifiedName).isInstanceOf(ecore::EDataType) then
+			spe  := trace.getEcoreFromUMLQualName(self.specific.getQualifiedName).asType(ecore::EClass)
+			general := trace.getEcoreFromUMLQualName(self.general.getQualifiedName).asType(ecore::EClass)
+		end
+	end
 	if spe != void and general != void then
 		spe.addSuperType(general)
 		var collatt : Sequence<ecore::EStructuralFeature> init  spe.eStructuralFeatures.select{att| general.eStructuralFeatures.exists{gatt|gatt.name == att.name}}

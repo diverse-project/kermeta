@@ -1,4 +1,4 @@
-/* $Id: UMLProfile2Ecore.kmt,v 1.11 2008-11-02 17:26:54 gperroui Exp $
+/* $Id: UMLProfile2Ecore.kmt,v 1.12 2008-11-28 13:24:31 gperroui Exp $
  * Creation date: November 29, 2007
  * License: EPL
  * Copyright:
@@ -24,7 +24,7 @@ require "platform:/resource/org.kermeta.uml2.profiles.model/src/kmt/persistence/
 require "platform:/resource/org.kermeta.uml2.profiles.model/src/kmt/utils/EcorePP.kmt"
 
 // generated Ecore form the UML model via EMF to bootstrap MARTE.profile.uml loading for kermeta
-require "platform:/resource/org.kermeta.uml2.profiles.model/model/ecore/MARTE_Library.ecore" 
+//require "platform:/resource/org.kermeta.uml2.profiles.model/model/ecore/MARTE_Library.ecore" 
 //require "platform:/resource/org.kermeta.uml2.profiles.model/model/ecore/MARTE.ecore"
 
 
@@ -39,8 +39,11 @@ class Main
 {
  
  	operation standaloneTestMain() : Void is do
- 		main("platform:/resource/org.kermeta.uml2.profile.marte/model/uml/beta1/MARTE_Library.library.uml", "platform:/resource/org.kermeta.uml2.profile.marte/model/ecore/beta2/MARTE_Library.library.ecore",true)
- 		//main("platform:/resource/org.kermeta.uml2.profile.marte/model/uml/MARTE.profile.uml", "platform:/resource/org.kermeta.uml2.profile.marte/model/ecore/MARTE.profile.ecore",true)
+// 		main("platform:/resource/VOCS_CS_BR/MD_metamodels/SESAME_Profile.profile.uml", "platform:/resource/VOCS_CS_BR/Ecore/SESAME_Profile.ecore",true)
+// 		main("platform:/resource/VOCS_CS_BR/MD_metamodels/UML_Standard_Profile.MagicDraw_Profile.DSL_Customization.profile.uml", "platform:/resource/VOCS_CS_BR/Ecore/UML_MagicDraw_DSL_Profile.ecore",true)
+// 		main("platform:/resource/VOCS_CS_BR/MD_metamodels/UML_Standard_Profile.MagicDraw_Profile.profile.uml", "platform:/resource/VOCS_CS_BR/Ecore/UML_MagicDraw_Profile.ecore",true)
+//		main("platform:/resource/VOCS_CS_BR/MD_metamodels/UML_Standard_Profile.UML_Standard_Profile.profile.uml", "platform:/resource/VOCS_CS_BR/Ecore/UML_Standard_Profile.ecore",true)
+ 		main("platform:/resource/VOCS_CS_BR/MD_metamodels/UML_Standard_Profile.Validation_Profile.profile.uml", "platform:/resource/VOCS_CS_BR/Ecore/UML_Validation_Profile.ecore",true)
  	end
  	
 	operation main(input : String, output : String, isProfiled: Boolean) : Void is do 
@@ -152,7 +155,7 @@ class Main
 			e.asType(uml::ToEcore).toEcorePass3(trace)}
 		
 		// pretty print the created bag for debug...
-		createdObjectBag.each{e|e.asType(ecore::EModelElement).prettyPrint}
+		//createdObjectBag.each{e|e.asType(ecore::EModelElement).prettyPrint}
 		// push content of the bag in the resource : only push element that have no container
 	
 		tgtEmf_res.addAll(createdObjectBag.select{e|e.container.isVoid}) 
@@ -215,7 +218,7 @@ class Main
 			e.asType(uml::ToEcore).toEcorePass3(trace)}
 		
 		// pretty print the created bag for debug...
-		createdObjectBag.each{e|e.asType(ecore::EModelElement).prettyPrint}
+		//createdObjectBag.each{e|e.asType(ecore::EModelElement).prettyPrint}
 		// push content of the bag in the resource : only push element that have no container
 	
 		tgtEmf_res.addAll(createdObjectBag.select{e|e.container.isVoid}) 
