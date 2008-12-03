@@ -1,10 +1,10 @@
-/* $Id: 029_testGenericTypeAsParameter2.kmt,v 1.2 2008-11-26 10:00:46 cfaucher Exp $ 
+/* $Id: 029_testGenericTypeAsParameter2.kmt,v 1.3 2008-12-03 15:22:48 dvojtise Exp $ 
  * Creation : November 26, 2008
  * Licence  : EPL 
  * Copyright:
  * Authors  : 
  *            cfaucher
- */s
+ */
 
 
 package testGenericTypeAsParameter2;
