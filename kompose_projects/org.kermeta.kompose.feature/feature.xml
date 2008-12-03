@@ -41,38 +41,38 @@
 &lt;!--
  /* Style Definitions */
 p.MsoNormal, li.MsoNormal, div.MsoNormal
-	{mso-style-parent:&quot;&quot;;
-	margin:0mm;
-	margin-bottom:.0001pt;
-	mso-pagination:widow-orphan;
-	font-size:12.0pt;
-	font-family:&quot;Times New Roman&quot;;
-	mso-fareast-font-family:&quot;Times New Roman&quot;;}
+ {mso-style-parent:&quot;&quot;;
+ margin:0mm;
+ margin-bottom:.0001pt;
+ mso-pagination:widow-orphan;
+ font-size:12.0pt;
+ font-family:&quot;Times New Roman&quot;;
+ mso-fareast-font-family:&quot;Times New Roman&quot;;}
 a:link, span.MsoHyperlink
-	{color:blue;
-	text-decoration:underline;
-	text-underline:single;}
+ {color:blue;
+ text-decoration:underline;
+ text-underline:single;}
 a:visited, span.MsoHyperlinkFollowed
-	{color:blue;
-	text-decoration:underline;
-	text-underline:single;}
+ {color:blue;
+ text-decoration:underline;
+ text-underline:single;}
 @page Section1
-	{size:612.0pt 792.0pt;
-	margin:72.0pt 90.0pt 72.0pt 90.0pt;
-	mso-header-margin:36.0pt;
-	mso-footer-margin:36.0pt;
-	mso-paper-source:0;}
+ {size:612.0pt 792.0pt;
+ margin:72.0pt 90.0pt 72.0pt 90.0pt;
+ mso-header-margin:36.0pt;
+ mso-footer-margin:36.0pt;
+ mso-paper-source:0;}
 div.Section1
-	{page:Section1;}
+ {page:Section1;}
  /* List Definitions */
 @list l0
-	{mso-list-id:1343123315;
-	mso-list-type:hybrid;
-	mso-list-template-ids:-1242149746 67698703 67698713 67698715 67698703 67698713 67698715 67698703 67698713 67698715;}
+ {mso-list-id:1343123315;
+ mso-list-type:hybrid;
+ mso-list-template-ids:-1242149746 67698703 67698713 67698715 67698703 67698713 67698715 67698703 67698713 67698715;}
 ol
-	{margin-bottom:0mm;}
+ {margin-bottom:0mm;}
 ul
-	{margin-bottom:0mm;}
+ {margin-bottom:0mm;}
 --&gt;
 &lt;/style&gt;&lt;!--[if gte mso 9]&gt;&lt;xml&gt;
  &lt;o:shapedefaults v:ext=&quot;edit&quot; spidmax=&quot;1027&quot;/&gt;
@@ -137,35 +137,35 @@ replicate the demo presented below.&lt;/p&gt;
  &lt;li class=&quot;MsoNormal&quot; style=&quot;&quot;&gt;
           &lt;span style=&quot;font-style:bold&quot;&gt;Core&lt;/span&gt; 
           &lt;br&gt;
-	&lt;ul style=&quot;list-style-position:inside&quot;&gt;
-	&lt;li&gt;Model
-	&lt;br&gt; &lt;div style=&quot;line-height:10.5pt;text-indent:1cm;font-style:italic;color:green&quot;&gt;Kompose source files and meta model&lt;/div&gt;
-	&lt;/li&gt;
-	&lt;li&gt;Parser
-	&lt;br&gt; &lt;div style=&quot;line-height:10.5pt;text-indent:1cm;font-style:italic;color:green&quot;&gt;Parser for user&apos;s composition directives&lt;/div&gt;&lt;/li&gt;
+ &lt;ul style=&quot;list-style-position:inside&quot;&gt;
+ &lt;li&gt;Model
+ &lt;br&gt; &lt;div style=&quot;line-height:10.5pt;text-indent:1cm;font-style:italic;color:green&quot;&gt;Kompose source files and meta model&lt;/div&gt;
+ &lt;/li&gt;
+ &lt;li&gt;Parser
+ &lt;br&gt; &lt;div style=&quot;line-height:10.5pt;text-indent:1cm;font-style:italic;color:green&quot;&gt;Parser for user&apos;s composition directives&lt;/div&gt;&lt;/li&gt;
         &lt;/ul&gt;
  &lt;li class=&quot;MsoNormal&quot; style=&quot;&quot;&gt;Specialization
           &lt;br&gt;
-	&lt;ul style=&quot;list-style-position:inside&quot;&gt;
-	&lt;li&gt;_wizard &lt;div style=&quot;line-height:10.5pt;text-indent:1cm;font-style:italic;color:green&quot;&gt;Specialization wizard to create new specializations from specific metamodels (DSL)&lt;/div&gt;&lt;/li&gt;
-	&lt;li&gt;Ecore
-	&lt;br&gt; &lt;div style=&quot;line-height:10.5pt;text-indent:1cm;font-style:italic;color:green&quot;&gt;ECore specialization example&lt;/div&gt;&lt;/li&gt;
-	&lt;ul&gt;
-	&lt;LI&gt;Study.HW&lt;br&gt; &lt;div style=&quot;line-height:10.5pt;text-indent:1cm;font-style:italic;color:green&quot;&gt;ECore specialization Case Study on Health Watcher&lt;/div&gt;
-	&lt;/LI&gt;
-	&lt;/ul&gt;
-	&lt;/li&gt;
-	&lt;li&gt;RDBSchema&lt;br&gt; &lt;div style=&quot;line-height:10.5pt;text-indent:1cm;font-style:italic;color:green&quot;&gt;RDBSchema specialization example&lt;/div&gt;
-	&lt;/li&gt;
+ &lt;ul style=&quot;list-style-position:inside&quot;&gt;
+ &lt;li&gt;_wizard &lt;div style=&quot;line-height:10.5pt;text-indent:1cm;font-style:italic;color:green&quot;&gt;Specialization wizard to create new specializations from specific metamodels (DSL)&lt;/div&gt;&lt;/li&gt;
+ &lt;li&gt;Ecore
+ &lt;br&gt; &lt;div style=&quot;line-height:10.5pt;text-indent:1cm;font-style:italic;color:green&quot;&gt;ECore specialization example&lt;/div&gt;&lt;/li&gt;
+ &lt;ul&gt;
+ &lt;LI&gt;Study.HW&lt;br&gt; &lt;div style=&quot;line-height:10.5pt;text-indent:1cm;font-style:italic;color:green&quot;&gt;ECore specialization Case Study on Health Watcher&lt;/div&gt;
+ &lt;/LI&gt;
+ &lt;/ul&gt;
+ &lt;/li&gt;
+ &lt;li&gt;RDBSchema&lt;br&gt; &lt;div style=&quot;line-height:10.5pt;text-indent:1cm;font-style:italic;color:green&quot;&gt;RDBSchema specialization example&lt;/div&gt;
+ &lt;/li&gt;
         &lt;/ul&gt;
         &lt;/li&gt;
  &lt;li class=&quot;MsoNormal&quot; style=&quot;&quot;&gt;User Interface
           &lt;br&gt;
           &lt;ul style=&quot;list-style-position:inside&quot;&gt;
-	&lt;li&gt;Samples&lt;br&gt; &lt;div style=&quot;line-height:10.5pt;text-indent:1cm;font-style:italic;color:green&quot;&gt;Kompose Specialization Samples&lt;/div&gt;
-	&lt;/li&gt;
-	&lt;li&gt;Experimental&lt;br&gt; &lt;div style=&quot;line-height:10.5pt;text-indent:1cm;font-style:italic;color:green&quot;&gt;Experimental ECore Merge (multiple selection of ECore models)&lt;/div&gt;
-	&lt;/li&gt;
+ &lt;li&gt;Samples&lt;br&gt; &lt;div style=&quot;line-height:10.5pt;text-indent:1cm;font-style:italic;color:green&quot;&gt;Kompose Specialization Samples&lt;/div&gt;
+ &lt;/li&gt;
+ &lt;li&gt;Experimental&lt;br&gt; &lt;div style=&quot;line-height:10.5pt;text-indent:1cm;font-style:italic;color:green&quot;&gt;Experimental ECore Merge (multiple selection of ECore models)&lt;/div&gt;
+ &lt;/li&gt;
         &lt;/ul&gt;
         &lt;/li&gt;
 &lt;/uL&gt;
@@ -175,8 +175,8 @@ replicate the demo presented below.&lt;/p&gt;
 on the &lt;a href=&quot;http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kompose_projects/?cvsroot=kermeta&quot;&gt;CVS repository&lt;/a&gt;. 
         &lt;br&gt;
         The source code can be anonymously be downloaded but to contribute you will have to register and contact one of the project admin to be added to the developers list.
-	&lt;br&gt;
-	New specialization examples or models should respect packages naming. Please refer to existing examples before committing new projects.
+ &lt;br&gt;
+ New specialization examples or models should respect packages naming. Please refer to existing examples before committing new projects.
       &lt;/p&gt;
 
 &lt;h2&gt;Demo of the Kompose tool for Ecore models&lt;o:p&gt;&lt;/o:p&gt;&lt;/h2&gt;
@@ -234,38 +234,38 @@ this distribution, and is available at http://www.eclipse.org/legal/epl-v10.html
 &lt;!--
  /* Style Definitions */
 p.MsoNormal, li.MsoNormal, div.MsoNormal
-	{mso-style-parent:&quot;&quot;;
-	margin:0mm;
-	margin-bottom:.0001pt;
-	mso-pagination:widow-orphan;
-	font-size:12.0pt;
-	font-family:&quot;Times New Roman&quot;;
-	mso-fareast-font-family:&quot;Times New Roman&quot;;}
+ {mso-style-parent:&quot;&quot;;
+ margin:0mm;
+ margin-bottom:.0001pt;
+ mso-pagination:widow-orphan;
+ font-size:12.0pt;
+ font-family:&quot;Times New Roman&quot;;
+ mso-fareast-font-family:&quot;Times New Roman&quot;;}
 a:link, span.MsoHyperlink
-	{color:blue;
-	text-decoration:underline;
-	text-underline:single;}
+ {color:blue;
+ text-decoration:underline;
+ text-underline:single;}
 a:visited, span.MsoHyperlinkFollowed
-	{color:blue;
-	text-decoration:underline;
-	text-underline:single;}
+ {color:blue;
+ text-decoration:underline;
+ text-underline:single;}
 @page Section1
-	{size:612.0pt 792.0pt;
-	margin:72.0pt 90.0pt 72.0pt 90.0pt;
-	mso-header-margin:36.0pt;
-	mso-footer-margin:36.0pt;
-	mso-paper-source:0;}
+ {size:612.0pt 792.0pt;
+ margin:72.0pt 90.0pt 72.0pt 90.0pt;
+ mso-header-margin:36.0pt;
+ mso-footer-margin:36.0pt;
+ mso-paper-source:0;}
 div.Section1
-	{page:Section1;}
+ {page:Section1;}
  /* List Definitions */
 @list l0
-	{mso-list-id:1343123315;
-	mso-list-type:hybrid;
-	mso-list-template-ids:-1242149746 67698703 67698713 67698715 67698703 67698713 67698715 67698703 67698713 67698715;}
+ {mso-list-id:1343123315;
+ mso-list-type:hybrid;
+ mso-list-template-ids:-1242149746 67698703 67698713 67698715 67698703 67698713 67698715 67698703 67698713 67698715;}
 ol
-	{margin-bottom:0mm;}
+ {margin-bottom:0mm;}
 ul
-	{margin-bottom:0mm;}
+ {margin-bottom:0mm;}
 --&gt;
 &lt;/style&gt;&lt;!--[if gte mso 9]&gt;&lt;xml&gt;
  &lt;o:shapedefaults v:ext=&quot;edit&quot; spidmax=&quot;1027&quot;/&gt;
@@ -330,35 +330,35 @@ replicate the demo presented below.&lt;/p&gt;
  &lt;li class=&quot;MsoNormal&quot; style=&quot;&quot;&gt;
           &lt;span style=&quot;font-style:bold&quot;&gt;Core&lt;/span&gt; 
           &lt;br&gt;
-	&lt;ul style=&quot;list-style-position:inside&quot;&gt;
-	&lt;li&gt;Model
-	&lt;br&gt; &lt;div style=&quot;line-height:10.5pt;text-indent:1cm;font-style:italic;color:green&quot;&gt;Kompose source files and meta model&lt;/div&gt;
-	&lt;/li&gt;
-	&lt;li&gt;Parser
-	&lt;br&gt; &lt;div style=&quot;line-height:10.5pt;text-indent:1cm;font-style:italic;color:green&quot;&gt;Parser for user&apos;s composition directives&lt;/div&gt;&lt;/li&gt;
+ &lt;ul style=&quot;list-style-position:inside&quot;&gt;
+ &lt;li&gt;Model
+ &lt;br&gt; &lt;div style=&quot;line-height:10.5pt;text-indent:1cm;font-style:italic;color:green&quot;&gt;Kompose source files and meta model&lt;/div&gt;
+ &lt;/li&gt;
+ &lt;li&gt;Parser
+ &lt;br&gt; &lt;div style=&quot;line-height:10.5pt;text-indent:1cm;font-style:italic;color:green&quot;&gt;Parser for user&apos;s composition directives&lt;/div&gt;&lt;/li&gt;
         &lt;/ul&gt;
  &lt;li class=&quot;MsoNormal&quot; style=&quot;&quot;&gt;Specialization
           &lt;br&gt;
-	&lt;ul style=&quot;list-style-position:inside&quot;&gt;
-	&lt;li&gt;_wizard &lt;div style=&quot;line-height:10.5pt;text-indent:1cm;font-style:italic;color:green&quot;&gt;Specialization wizard to create new specializations from specific metamodels (DSL)&lt;/div&gt;&lt;/li&gt;
-	&lt;li&gt;Ecore
-	&lt;br&gt; &lt;div style=&quot;line-height:10.5pt;text-indent:1cm;font-style:italic;color:green&quot;&gt;ECore specialization example&lt;/div&gt;&lt;/li&gt;
-	&lt;ul&gt;
-	&lt;LI&gt;Study.HW&lt;br&gt; &lt;div style=&quot;line-height:10.5pt;text-indent:1cm;font-style:italic;color:green&quot;&gt;ECore specialization Case Study on Health Watcher&lt;/div&gt;
-	&lt;/LI&gt;
-	&lt;/ul&gt;
-	&lt;/li&gt;
-	&lt;li&gt;RDBSchema&lt;br&gt; &lt;div style=&quot;line-height:10.5pt;text-indent:1cm;font-style:italic;color:green&quot;&gt;RDBSchema specialization example&lt;/div&gt;
-	&lt;/li&gt;
+ &lt;ul style=&quot;list-style-position:inside&quot;&gt;
+ &lt;li&gt;_wizard &lt;div style=&quot;line-height:10.5pt;text-indent:1cm;font-style:italic;color:green&quot;&gt;Specialization wizard to create new specializations from specific metamodels (DSL)&lt;/div&gt;&lt;/li&gt;
+ &lt;li&gt;Ecore
+ &lt;br&gt; &lt;div style=&quot;line-height:10.5pt;text-indent:1cm;font-style:italic;color:green&quot;&gt;ECore specialization example&lt;/div&gt;&lt;/li&gt;
+ &lt;ul&gt;
+ &lt;LI&gt;Study.HW&lt;br&gt; &lt;div style=&quot;line-height:10.5pt;text-indent:1cm;font-style:italic;color:green&quot;&gt;ECore specialization Case Study on Health Watcher&lt;/div&gt;
+ &lt;/LI&gt;
+ &lt;/ul&gt;
+ &lt;/li&gt;
+ &lt;li&gt;RDBSchema&lt;br&gt; &lt;div style=&quot;line-height:10.5pt;text-indent:1cm;font-style:italic;color:green&quot;&gt;RDBSchema specialization example&lt;/div&gt;
+ &lt;/li&gt;
         &lt;/ul&gt;
         &lt;/li&gt;
  &lt;li class=&quot;MsoNormal&quot; style=&quot;&quot;&gt;User Interface
           &lt;br&gt;
           &lt;ul style=&quot;list-style-position:inside&quot;&gt;
-	&lt;li&gt;Samples&lt;br&gt; &lt;div style=&quot;line-height:10.5pt;text-indent:1cm;font-style:italic;color:green&quot;&gt;Kompose Specialization Samples&lt;/div&gt;
-	&lt;/li&gt;
-	&lt;li&gt;Experimental&lt;br&gt; &lt;div style=&quot;line-height:10.5pt;text-indent:1cm;font-style:italic;color:green&quot;&gt;Experimental ECore Merge (multiple selection of ECore models)&lt;/div&gt;
-	&lt;/li&gt;
+ &lt;li&gt;Samples&lt;br&gt; &lt;div style=&quot;line-height:10.5pt;text-indent:1cm;font-style:italic;color:green&quot;&gt;Kompose Specialization Samples&lt;/div&gt;
+ &lt;/li&gt;
+ &lt;li&gt;Experimental&lt;br&gt; &lt;div style=&quot;line-height:10.5pt;text-indent:1cm;font-style:italic;color:green&quot;&gt;Experimental ECore Merge (multiple selection of ECore models)&lt;/div&gt;
+ &lt;/li&gt;
         &lt;/ul&gt;
         &lt;/li&gt;
 &lt;/uL&gt;
@@ -368,8 +368,8 @@ replicate the demo presented below.&lt;/p&gt;
 on the &lt;a href=&quot;http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kompose_projects/?cvsroot=kermeta&quot;&gt;CVS repository&lt;/a&gt;. 
         &lt;br&gt;
         The source code can be anonymously be downloaded but to contribute you will have to register and contact one of the project admin to be added to the developers list.
-	&lt;br&gt;
-	New specialization examples or models should respect packages naming. Please refer to existing examples before committing new projects.
+ &lt;br&gt;
+ New specialization examples or models should respect packages naming. Please refer to existing examples before committing new projects.
       &lt;/p&gt;
 
 &lt;h2&gt;Demo of the Kompose tool for Ecore models&lt;o:p&gt;&lt;/o:p&gt;&lt;/h2&gt;
@@ -400,7 +400,15 @@ on the &lt;a href=&quot;http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kompose
       <import plugin="org.eclipse.jdt.core"/>
       <import plugin="org.eclipse.ui.console"/>
       <import plugin="org.eclipse.core.filesystem"/>
+      <import plugin="org.antlr.antlr2"/>
    </requires>
+
+   <plugin
+         id="org.kermeta.kompose.ui"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
 
    <plugin
          id="org.kermeta.kompose.core.model"
@@ -454,7 +462,8 @@ on the &lt;a href=&quot;http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kompose
          id="org.kermeta.kompose.specialization.ecore.test"
          download-size="0"
          install-size="0"
-         version="0.0.0"/>
+         version="0.0.0"
+         unpack="false"/>
 
    <plugin
          id="org.kermeta.kompose.specialization.ecore.ui"
@@ -492,13 +501,6 @@ on the &lt;a href=&quot;http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kompose
 
    <plugin
          id="org.kermeta.kompose.specialization_wizard"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="org.kermeta.kompose.ui"
          download-size="0"
          install-size="0"
          version="0.0.0"
