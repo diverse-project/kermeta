@@ -10,9 +10,14 @@ public class IteratorUtil {
 		try {
 			return self.getJavaIterator().hasNext();
 		} catch (NullPointerException e) {
-			if ( self.getKermetaCollection().getValues() == null )
+			if ( self.getKermetaCollection().getValues() == null ) {
 				self.getKermetaCollection().setValues( new BasicEList<G>() );
-			self.setJavaIterator( self.getKermetaCollection().getValues().iterator() );
+			}
+			
+			BasicEList<G> forIterator = new BasicEList<G>();
+			forIterator.addAll(self.getKermetaCollection().getValues());
+			
+			self.setJavaIterator( forIterator.iterator() );
 			return self.getJavaIterator().hasNext();
 		}
 	}
@@ -21,9 +26,14 @@ public class IteratorUtil {
 		try {
 			return (java.lang.Object) self.getJavaIterator().next();
 		} catch (NullPointerException e) {
-			if ( self.getKermetaCollection().getValues() == null )
+			if ( self.getKermetaCollection().getValues() == null ) {
 				self.getKermetaCollection().setValues( new BasicEList<G>() );
-			self.setJavaIterator( self.getKermetaCollection().getValues().iterator() );
+			}
+			
+			BasicEList<G> forIterator = new BasicEList<G>();
+			forIterator.addAll(self.getKermetaCollection().getValues());
+			
+			self.setJavaIterator( forIterator.iterator() );
 			return (java.lang.Object) self.getJavaIterator().next();
 		}
 	}
