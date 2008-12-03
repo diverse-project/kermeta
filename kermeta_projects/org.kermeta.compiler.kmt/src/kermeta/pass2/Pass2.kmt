@@ -1,4 +1,4 @@
-/* $Id: Pass2.kmt,v 1.41 2008-10-28 13:21:45 cfaucher Exp $
+/* $Id: Pass2.kmt,v 1.42 2008-12-03 16:52:53 cfaucher Exp $
  * Creation date: January 21, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -30,6 +30,7 @@ require "platform:/resource/org.kermeta.compiler.kmt/src/kermeta/helper/simk/Sim
 
 using km2ecore
 using ecore
+using km2ecore::helper::kermeta
 using km2ecore::helper::ecore
 using km2ecore::helper::java
 using simk
@@ -284,10 +285,12 @@ package structure {
 						
 						var cd_qn : String init self.container.asType(ClassDefinition).qualifiedName().replace("::", ".")
 						
+						var class_label : String init CompilerHelperJava.new().ppEmfLikeGetEMF(cd_qn)
+						
 						staticMethod.name := "main"
 						staticMethod.body := "\n" +
 							cd_qn + " anExec = (" + cd_qn + ")" +
-							 " org.kermeta.compil.runtime.helper.language.ClassUtil.newObject(\"" + cd_qn + "\");" +
+							 " org.kermeta.compil.runtime.helper.language.ClassUtil.newObject(" + class_label + ");" +
 							"\nanExec." + self.getFinalName(context) + "("
 						
 						var i : Integer init 0

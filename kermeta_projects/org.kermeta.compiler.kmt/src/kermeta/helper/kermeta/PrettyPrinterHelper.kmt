@@ -1,4 +1,4 @@
-/* $Id: PrettyPrinterHelper.kmt,v 1.18 2008-11-07 08:53:31 cfaucher Exp $
+/* $Id: PrettyPrinterHelper.kmt,v 1.19 2008-12-03 16:52:51 cfaucher Exp $
  * Creation date: February 27, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -37,14 +37,32 @@ class CompilerHelperJava {
 	operation ppEmfLikeCreateFactory(localType : String) : String is do
 		result := ""
 
-		var name_set : OrderedSet<String> init localType.split("\\.")
+		var name_set : Sequence<String> init localType.split("\\.")
 			
 		var allPackages_label : String init localType.substring(0, localType.size()-name_set.elementAt(name_set.size()-1).size())
 			
 		if name_set.size()>=2 then
 			result := " = " + allPackages_label + name_set.elementAt(name_set.size-2).capName() +"Factory.eINSTANCE.create" + name_set.elementAt(name_set.size()-1) + "()"
-		else
-			result := " = " + "Factory.eINSTANCE.create" + localType + "()"
+		end
+	end
+	
+	operation ppEmfLikeGetEMF(localType : String) : String is do
+		result := ""
+
+		localType := localType.split("<").first()
+		
+		var name_set : Sequence<String> init localType.split("\\.")
+			
+		var allPackages_label : String init localType.substring(0, localType.size()-name_set.elementAt(name_set.size()-1).size())
+			
+		if name_set.size()>=2 then
+			var class_label : String init name_set.elementAt(name_set.size()-1)
+			
+			if class_label == "Class" then
+				class_label := class_label + "_"
+			end
+			
+			result := allPackages_label + name_set.elementAt(name_set.size-2).capName() + "Package.eINSTANCE.get" + class_label + "()"
 		end
 	end
 	

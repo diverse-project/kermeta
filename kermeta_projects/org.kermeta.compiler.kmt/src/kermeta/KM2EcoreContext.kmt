@@ -1,4 +1,4 @@
-/* $Id: KM2EcoreContext.kmt,v 1.49 2008-11-07 08:50:34 cfaucher Exp $
+/* $Id: KM2EcoreContext.kmt,v 1.50 2008-12-03 16:52:52 cfaucher Exp $
  * Creation date: February 14, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -309,7 +309,7 @@ class KM2EcoreContext {
 	operation getResultLastStatementId() : String is do
 		result := ""
 		if self.resultLastStatementStack.size()>0 then
-			var str_set : OrderedSet<String> init self.resultLastStatementStack.peek().split(self.TYPE_SEPARATOR)
+			var str_set : Sequence<String> init self.resultLastStatementStack.peek().split(self.TYPE_SEPARATOR)
 			result := str_set.first()
 		end
 	end
@@ -317,7 +317,7 @@ class KM2EcoreContext {
 	operation getResultLastStatementType() : String is do
 		result := ""
 		if self.resultLastStatementStack.size()>0 then
-			var str_set : OrderedSet<String> init self.resultLastStatementStack.peek().split(self.TYPE_SEPARATOR)
+			var str_set : Sequence<String> init self.resultLastStatementStack.peek().split(self.TYPE_SEPARATOR)
 			result := str_set.last()
 		end
 	end

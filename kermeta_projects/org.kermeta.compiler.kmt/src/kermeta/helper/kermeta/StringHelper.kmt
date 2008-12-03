@@ -1,4 +1,4 @@
-/* $Id: StringHelper.kmt,v 1.11 2008-11-19 17:13:22 cfaucher Exp $
+/* $Id: StringHelper.kmt,v 1.12 2008-12-03 16:52:51 cfaucher Exp $
  * Creation date: February 27, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -30,7 +30,7 @@ aspect class String {
 	
 		result := ""
 		
-		var set_str : OrderedSet<String> init self.split("\\.")
+		var set_str : Sequence<String> init self.split("\\.")
 		
 		var inc_seg : Integer init 0
 		set_str.each{ seg |
@@ -49,13 +49,13 @@ aspect class String {
 	 */	 
 	operation getPropertyInfos() : Hashtable<String, String> is do
 		
-		var set_infos : OrderedSet<String> init OrderedSet<String>.new()
+		var set_infos : Sequence<String> init Sequence<String>.new()
 		var map_infos : Hashtable<String, String> init Hashtable<String, String>.new()
 		
 		set_infos := self.split(" ")
 		
 		set_infos.each{ i |
-			var tmp_set_infos : OrderedSet<String> init i.split("=")
+			var tmp_set_infos : Sequence<String> init i.split("=")
 			if tmp_set_infos.size()>=2 then
 				if not tmp_set_infos.elementAt(0).isVoid() then
 					if (not tmp_set_infos.elementAt(1).isVoid()) and (tmp_set_infos.elementAt(1)!="") then

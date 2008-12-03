@@ -1,4 +1,4 @@
-/* $Id: CreateBehavior.kmt,v 1.94 2008-11-27 15:44:45 cfaucher Exp $
+/* $Id: CreateBehavior.kmt,v 1.95 2008-12-03 16:52:53 cfaucher Exp $
  * Creation date: January 21, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -422,7 +422,7 @@ package behavior {
 			
 				var str_statement : String init stm.createBehaviorJava(context).normalizeStatement()
 
-				var str_statement_splitted : OrderedSet<String> init str_statement.split(context.SEPARATOR_STATEMENT_FT) 
+				var str_statement_splitted : Sequence<String> init str_statement.split(context.SEPARATOR_STATEMENT_FT) 
 				
 				if str_statement_splitted.size() == 2 then
 					var s1 : String init str_statement_splitted.first()
@@ -710,7 +710,8 @@ package behavior {
 					
 				var type_label : String init tgt.createBehaviorJava(context)
 				if not type_label.isValueType(context) then
-					result := result + "((" + type_label + ") " + "org.kermeta.compil.runtime.helper.language.ClassUtil.newObject(\"" + type_label + "\"))"
+					var class_label : String init CompilerHelperJava.new().ppEmfLikeGetEMF(type_label)
+					result := result + "((" + type_label + ") " + "org.kermeta.compil.runtime.helper.language.ClassUtil.newObject(" + class_label + "))"
 				else
 					result := "new " + type_label + "()"
 				end
@@ -1245,7 +1246,7 @@ package behavior {
 						
 			if self.target.isCallFeatureAsStaticProperty() then
 					
-				var tabLeft : kermeta::standard::OrderedSet<String> init left.split("\\.")
+				var tabLeft : kermeta::standard::Sequence<String> init left.split("\\.")
 				
 				result := ""
 				from var i : Integer init 0
