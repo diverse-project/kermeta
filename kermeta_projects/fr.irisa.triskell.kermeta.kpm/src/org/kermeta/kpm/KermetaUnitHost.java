@@ -1,4 +1,4 @@
-/*$Id: KermetaUnitHost.java,v 1.2 2008-08-29 14:59:55 dvojtise Exp $
+/*$Id: KermetaUnitHost.java,v 1.3 2008-12-03 10:24:31 dvojtise Exp $
 * Project : fr.irisa.triskell.kermeta.kpm
 * File : 	sdfg.java
 * License : EPL
@@ -10,8 +10,8 @@
 package org.kermeta.kpm;
 
 import org.eclipse.core.resources.IFile;
-import org.eclipse.core.runtime.Platform;
 import org.eclipse.core.runtime.jobs.ILock;
+import org.eclipse.core.runtime.jobs.Job;
 import org.kermeta.interest.InterestedObject;
 import org.kermeta.interest.exception.IdNotFoundException;
 import org.kermeta.io.KermetaUnit;
@@ -22,7 +22,7 @@ public class KermetaUnitHost {
 
 	private InterestHost host = InterestFactory.eINSTANCE.createInterestHost();
 	
-	private static ILock lock = Platform.getJobManager().newLock();
+	private static ILock lock = Job.getJobManager().newLock();
 	
 	private KermetaUnitHost() {}
 	
