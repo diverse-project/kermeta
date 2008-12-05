@@ -1,4 +1,4 @@
-/* $Id: String.java,v 1.18 2008-08-17 20:15:55 cfaucher Exp $
+/* $Id: String.java,v 1.19 2008-12-05 16:08:59 cfaucher Exp $
 * Project : Kermeta interpreter
 * File : String.java
 * License : EPL
@@ -146,7 +146,7 @@ public class String {
 	    fr.irisa.triskell.kermeta.language.structure.Class typeParam = StructureFactory.eINSTANCE.createClass();
 	    typeParam.setTypeDefinition(typeVarClassDef);
 		
-	    RuntimeObject result = fr.irisa.triskell.kermeta.runtime.basetypes.Collection.create("kermeta::standard::OrderedSet", factory, typeParam);
+	    RuntimeObject result = fr.irisa.triskell.kermeta.runtime.basetypes.Collection.create("kermeta::standard::Sequence", factory, typeParam);
 		
 		for(java.lang.String string_item : getValue(self).split(getValue(param0))) {
 			RuntimeObject addedString = self.getFactory().createObjectFromClassName("kermeta::standard::String");
