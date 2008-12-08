@@ -1,4 +1,4 @@
-/* $Id: KetParser.java,v 1.2 2007-07-26 12:25:39 cfaucher Exp $
+/* $Id: KetParser.java,v 1.3 2008-12-08 14:48:26 dvojtise Exp $
  * Project    : fr.irisa.triskell.kermeta.ket
  * File       : KetParser.java
  * License    : EPL
@@ -129,7 +129,10 @@ public class KetParser implements JETParseEventListener2, IJETParser
       "package", //$NON-NLS-1$
       "require", //$NON-NLS-1$
       "using", //$NON-NLS-1$
+      "isaspectclass", //$NON-NLS-1$
       "class", //$NON-NLS-1$
+      "ismethod", //$NON-NLS-1$
+      "operation", //$NON-NLS-1$
       "parameters", //$NON-NLS-1$
       "nlString", //$NON-NLS-1$
       "startTag", //$NON-NLS-1$

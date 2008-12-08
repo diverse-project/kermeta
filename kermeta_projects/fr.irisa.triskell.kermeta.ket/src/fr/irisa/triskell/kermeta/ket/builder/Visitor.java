@@ -1,4 +1,4 @@
-/* $Id: Visitor.java,v 1.4 2007-09-05 15:16:18 cfaucher Exp $
+/* $Id: Visitor.java,v 1.5 2008-12-08 14:48:25 dvojtise Exp $
  * Project    : fr.irisa.triskell.kermeta.ket
  * File       : Visitor.java
  * License    : EPL
@@ -130,9 +130,33 @@ public class Visitor extends JETASTVisitor {
 		while (utk.hasMoreTokens()){
 			out.println("using " +  utk.nextToken());
 		}
+		boolean isAspectClass = false;
+		if(directive.getAttributes().get("isAspectClass") != null) {
+			if(((String)directive.getAttributes().get("isAspectClass")).equalsIgnoreCase("true")){
+				isAspectClass = true;
+			}			
+		}
+		if(isAspectClass) {
+			out.print("aspect ");
+		}
 		out.println("class " +  directive.getAttributes().get("class") + "{");
 
-		out.println("operation generate("+directive.getAttributes().get("parameters")  +"):String is do");
+		String operationName = "generate";
+		if(directive.getAttributes().get("operation") != null) {
+			operationName = (String) directive.getAttributes().get("operation");
+		}
+		boolean isMethod = false;
+		if(directive.getAttributes().get("isMethod") != null) {
+			if(((String)directive.getAttributes().get("isMethod")).equalsIgnoreCase("true")){
+				isMethod = true;
+			}			
+		}
+		if(isMethod) {
+			out.print("method ");
+		}
+		else
+			out.print("operation ");
+		out.println( operationName +"("+directive.getAttributes().get("parameters")  +"):String is do");
 		out.println("var _res: StringBuffer init StringBuffer.new");
 		begin=true;
 		

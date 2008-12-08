@@ -1,6 +1,6 @@
 
 
-/*$Id: WizardNewKETFileCreationPage.java,v 1.2 2008-02-18 09:48:36 ftanguy Exp $
+/*$Id: WizardNewKETFileCreationPage.java,v 1.3 2008-12-08 14:48:26 dvojtise Exp $
 * Project : fr.irisa.triskell.kermeta.ket
 * File : 	WizardNewKETFileCreationPage.java
 * License : EPL
@@ -21,7 +21,14 @@ import org.eclipse.ui.dialogs.WizardNewFileCreationPage;
 
 public class WizardNewKETFileCreationPage extends WizardNewFileCreationPage {
 
-	private String template = "<%@ket\npackage=\"\"\nrequire=\"\"\nusing=\"\"\nclass=\"\"\nparameters=\"\"\n%>";
+	private String template = "<%@ket\npackage=\"\"\n"+
+								"require=\"\"\n"+
+								"using=\"\"\n"+
+								"isAspectClass=\"false\"\n"+
+								"class=\"\"\n"+
+							    "ismethod=\"false\""+
+								"operation=\"generate\"\n"+
+								"parameters=\"\"\n%>";
 	
 	public WizardNewKETFileCreationPage(String pageName, IStructuredSelection selection) {
 		super(pageName, selection);	
