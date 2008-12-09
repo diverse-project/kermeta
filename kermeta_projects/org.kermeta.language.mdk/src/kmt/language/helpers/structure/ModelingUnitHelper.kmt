@@ -1,0 +1,83 @@
+/* $Id: ModelingUnitHelper.kmt,v 1.1 2008-12-09 14:26:05 dvojtise Exp $
+ * Creation date: May 19, 2008
+ * License: EPL
+ * Copyright: IRISA / INRIA / Universite Rennes 1
+ * Authors: 
+ *		Cyril Faucher <cfaucher@irisa.fr>
+ */
+
+
+package kermeta::language::structure;
+
+require kermeta
+require "PackageHelper.kmt"
+
+using kermeta::standard
+
+aspect class ModelingUnit {
+
+	/**
+	 * Get a TypeDefinition contained in the current ModelingUnit by qualifiedName
+	 */
+	operation getTypeDefinitionByQualifiedName( qname : String ) : TypeDefinition is do
+		var set_qname : Sequence<String> init qname.split("::")
+		if set_qname.size()==0 then
+			set_qname.add(qname)
+		end
+		
+		var pack : Package init self.packages.detect{ p |
+			p.name == set_qname.at(0)
+		}
+		if not pack.isVoid then
+			from var i : Integer init 1
+			until i>=(set_qname.size()-1)
+			loop
+				pack := pack.nestedPackage.detect{ p |
+					p.name == set_qname.at(i)
+				}
+				i := i + 1
+			end
+			
+			result := pack.ownedTypeDefinition.detect{ c |
+				c.name == set_qname.at(set_qname.size()-1)
+			}
+		else
+			result := void
+		end
+	end
+	
+	
+	operation getAllPackages() : OrderedSet<Package> is do
+		result := OrderedSet<Package>.new()
+				
+		var pack : Package init self.packages.each{ p |
+			result.add(p)
+			result.addAll(p.getAllSubPackages())
+		}
+
+	end
+	
+	
+	operation retrievePackage( qname : String ) : Package is do
+		var set_qname : Sequence<String> init qname.split("::")
+		if set_qname.size()==0 then
+			set_qname.add(qname)
+		end
+		
+		var pack : Package init self.packages.detect{ p |
+			p.name == set_qname.at(0)
+		}
+		
+		from var i : Integer init 1
+		until i>=(set_qname.size())
+		loop
+			pack := pack.nestedPackage.detect{ p |
+				p.name == set_qname.at(i)
+			}
+			i := i + 1
+		end
+		
+		result := pack
+	end
+		
+}
