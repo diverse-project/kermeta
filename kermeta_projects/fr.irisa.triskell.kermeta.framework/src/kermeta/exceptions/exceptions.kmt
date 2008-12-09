@@ -11,7 +11,7 @@ using kermeta::standard
 using kermeta::utils
 
 /* ****************************************************************************
- * $Id: exceptions.kmt,v 1.28 2008-09-24 12:04:45 dvojtise Exp $
+ * $Id: exceptions.kmt,v 1.29 2008-12-09 10:03:05 dvojtise Exp $
  * Project : Kermeta framework
  * Creation date :  
  * File : exception.kmt
@@ -154,6 +154,10 @@ class ConstraintViolatedException inherits Exception {
 	 * On Invariant, we can generally consider this object as the faulty Object
 	 */
 	reference constraintAppliedTo : Object
+	
+	/** constraint that has failed
+	 */
+	reference failedConstraint : kermeta::language::structure::Constraint
 }
 
 /** The pre-condition is not satisfied */
