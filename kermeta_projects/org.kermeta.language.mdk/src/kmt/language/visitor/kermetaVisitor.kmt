@@ -1,0 +1,12 @@
+/* $Id: kermetaVisitor.kmt,v 1.1 2008-12-09 14:27:30 dvojtise Exp $
+ * Creation date: February 4, 2008
+ * License:
+ * Copyright:
+ * Authors:
+ */
+
+package kermeta::language;
+
+
+require "kermetaStructureVisitor.kmt"
+require "kermetaBehaviorVisitor.kmt"
