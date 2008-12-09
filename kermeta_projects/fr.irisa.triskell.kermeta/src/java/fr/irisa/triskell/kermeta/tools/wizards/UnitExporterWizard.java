@@ -1,4 +1,4 @@
-/* $Id: UnitExporterWizard.java,v 1.36 2008-05-28 15:34:57 ftanguy Exp $
+/* $Id: UnitExporterWizard.java,v 1.37 2008-12-09 10:04:54 dvojtise Exp $
  * Project    : fr.irisa.triskell.kermeta
  * File       : KmtPrinter.java
  * License    : EPL
@@ -26,7 +26,6 @@ import org.eclipse.core.resources.IWorkspaceRunnable;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
@@ -42,8 +41,6 @@ import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkbenchWizard;
 import org.kermeta.io.KermetaUnit;
 import org.kermeta.io.loader.plugin.LoaderPlugin;
-import org.kermeta.io.plugin.IOPlugin;
-
 import fr.irisa.triskell.eclipse.console.messages.ErrorMessage;
 import fr.irisa.triskell.eclipse.console.messages.ThrowableMessage;
 import fr.irisa.triskell.eclipse.console.messages.WarningMessage;
