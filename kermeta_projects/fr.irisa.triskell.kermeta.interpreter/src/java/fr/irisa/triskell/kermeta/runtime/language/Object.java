@@ -1,4 +1,4 @@
-/* $Id: Object.java,v 1.29 2008-09-04 13:09:04 dvojtise Exp $
+/* $Id: Object.java,v 1.30 2008-12-09 10:08:48 dvojtise Exp $
  * Project   : Kermeta interpreter
  * File      : Object.java
  * License   : EPL
@@ -118,13 +118,21 @@ public class Object {
 	        			memory,
 						c.getBody(),
 						null);
-	   			// set the constraintAppliedTo reference
+	   			
+	   			//Set additional data in the raised Exception
 	   			fr.irisa.triskell.kermeta.language.structure.Class t_target=(fr.irisa.triskell.kermeta.language.structure.Class)kre.raised_object.getMetaclass().getKCoreObject();        	
-	   	    	SimpleType target = new SimpleType(t_target);
-	   			CallableProperty cproperty = target.getPropertyByName("constraintAppliedTo");
-	   		    RuntimeObject ro_property = memory.getRuntimeObjectForFObject(cproperty.getProperty());
+	   	    	SimpleType target = new SimpleType(t_target);	   			
+	   			// set the constraintAppliedTo reference
+	   			CallableProperty constraintAppliedToproperty = target.getPropertyByName("constraintAppliedTo");
+	   		    RuntimeObject ro_property = memory.getRuntimeObjectForFObject(constraintAppliedToproperty.getProperty());
 	   		    RuntimeObject rovalue = self;
 	   	    	fr.irisa.triskell.kermeta.runtime.language.Object.set(kre.raised_object, ro_property, rovalue);
+	   		    
+	   	    	// set the failedConstraint reference
+	   			CallableProperty failedConstraintproperty = target.getPropertyByName("failedConstraint");
+	   		    RuntimeObject failedConstraint_ro_property = memory.getRuntimeObjectForFObject(failedConstraintproperty.getProperty());
+	   		    RuntimeObject failedConstraint_rovalue = memory.getRuntimeObjectForFObject(c);
+	   	    	fr.irisa.triskell.kermeta.runtime.language.Object.set(kre.raised_object, failedConstraint_ro_property, failedConstraint_rovalue);
 	   		    
 	   			 throw kre;
 	   		 }
