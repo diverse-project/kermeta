@@ -1,0 +1,39 @@
+/* $Id: Math.kmt,v 1.1 2008-12-09 14:20:22 dvojtise Exp $
+ * Creation date: May 30, 2007
+ * License: EPL
+ * Copyright: IRISA/INRIA
+ * Authors:
+ *		Didier Vojtisek
+ */
+
+
+package math;
+
+
+require kermeta
+
+using kermeta::standard
+
+/**
+ * This is a wrapper class for some of the classical math functions
+ * example of use : Math.new.sin(1.toReal)
+ */
+class Math
+{
+	operation sin(a : Real) : Real is do 
+		result ?= extern org::kermeta::language::mdk::math::Math.sin(a)
+	end
+	operation cos(a : Real) : Real is do 
+		result ?= extern org::kermeta::language::mdk::math::Math.cos(a)
+	end
+	operation pi() : Real is do
+		result ?= extern org::kermeta::language::mdk::math::Math.pi(self)
+	end
+	
+	operation toDegrees(a : Real) : Real is do 
+		result ?= extern org::kermeta::language::mdk::math::Math.toDegrees(a)
+	end
+	operation toRadians(a : Real) : Real is do 
+		result ?= extern org::kermeta::language::mdk::math::Math.toRadians(a)
+	end
+}
