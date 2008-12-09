@@ -1,0 +1,790 @@
+//@mainClass "kermeta::utils::PrettyPrinter"
+//@mainmethod "visit"
+/* $Id: kmtPrettyPrinter.kmt,v 1.1 2008-12-09 16:51:34 dvojtise Exp $
+ * Project : Kermeta samples
+ * File : printer.kmt
+ * License : EPL
+ * Copyright : IRISA / Universite de Rennes 1
+ * ----------------------------------------------------------------------------
+ * Creation date : Jul 04, 2005
+ * Authors : 
+ *  Zoe Drey 		zdrey@irisa.fr
+ * 
+ * Notes : 
+ *   This is a Kermeta transcription of the KM2KMTPrettyPrinter written in Java
+ *   This version is based on a visitor. (Maybe it could be rewritten using an aspect approach ?)
+ */
+
+package kermeta::utils;
+require kermeta
+require "../kermetaBehaviorVisitor.kmt"
+require "../kermetaStructureVisitor.kmt"
+using kermeta::language::structure
+using kermeta::language::behavior
+using kermeta::standard
+
+
+/**
+ * Prints in its textual representation a parsed kermeta entity.
+ * self.pretty printer only visits :
+ *  - package,
+ *	- class,
+ *  - method,
+ *  - attribute.
+ *  Indeed, the tags (as MOF elements attached to any MOF entity) are only handled yet
+ *  for these types.
+ */
+class BasicPrettyPrinter inherits 
+	kermeta::language::structure::KMStructureVisitor<Integer, String>,
+	kermeta::language::behavior::KMExpressionVisitor<Integer, String>
+{
+	/** self.is a print helper */
+ 	attribute pp : PrintHelper
+ 	attribute indent : String
+ 	attribute typedef : Boolean
+ 	attribute current_pname : String
+ 	
+ 	operation initialize() is do
+ 		pp := PrintHelper.new
+ 		pp.initialize(self)
+ 		indent := ""
+ 		typedef := false
+ 		current_pname := ""
+ 	end
+ 	 
+    /** visit a class and transcript it in the Kermeta Text format */
+    method visitClass(node : Class, context : Integer) : String is do
+    	// TODO : do not print qualified name if class belongs to current package
+    	result := node.typeDefinition.qualifiedName
+		if (node.typeParamBinding.size > 0) then
+			result.append("<" + self.visitTypeVariableBindingSet(node.typeParamBinding, context) + ">")
+		end
+    end
+    
+    method visitMultiplicityElement(node : MultiplicityElement, context : Integer) : String is do
+	    result := "" 
+		// Visit never go there...(handled by ppTypeFromMultiplicityElement)
+    end
+     
+    /**
+	 * Visit a property (attribute, reference, property)
+	 */
+	method visitOperation(node : Operation, context : Integer) : String is do
+		result := ""
+		result.append(indent)
+		result.append(visitTagSet(node.tag, context))
+		if (node.superOperation != void) then result.append( "method ")
+		else result.append("operation ") 
+		end
+		// node name
+		result.append( node.name)
+		// type parameters of operation
+		if (node.typeParameter.size() > 0) then
+			result.append( "<")
+			result.append( self.visitTypeVariableSet(node.typeParameter, context))
+			result.append( ">")
+		end
+		// arguments
+		result.append( "(")
+		result.append( self.visitTypeParameters(node.ownedParameter, context))
+		result.append( ")")
+		if(node.type != void) then
+			result.append( " : " + pp.ppTypeFromMultiplicityElement(node))
+		end
+	 
+		if (node.superOperation != void) then
+			result.append( " from " + node.superOperation.owningClass.qualifiedName )
+		end
+		if (node.raisedException.size > 0) then
+			result.append( " raises " + self.visitTypeSet(node.raisedException, context, ", "))
+		end
+		if (node.body != void) then
+			result.append( " is\n")
+			pushIndent()
+			result.append(self.accept(node.body, context))
+			popIndent()
+		
+		else 
+			if (node.isAbstract) then result.append( " is abstract")
+
+			else 
+				result.append( " is do\n")
+				pushIndent()
+				result.append( indent + "//TODO: implement operation " + node.name + "\n") 
+				popIndent()
+				result.append( indent + "end")
+			end
+		end
+	end
+	
+	method visitTag(node : Tag, context : Integer) : String is do 
+	    result := ""
+	    result.append(indent + "@" + node.name + " \"" + node.~value + "\"")
+	end
+	
+	/**
+	 * Visit a property (attribute, reference, property)
+	 */
+	method visitProperty(node : Property, context : Integer) : String is do
+		result := "" // weird behavior when we directly write : result := indent???
+		result.append(indent)
+		if (node.isDerived) then
+			result.append( "property " )
+		else 
+			if (node.isComposite) then 
+				result.append("attribute ")
+			else 
+				result.append("reference ")
+			end
+		end
+			
+		if (node.isReadOnly) then result.append("readonly ")
+		end
+		
+		// print the attribute def
+		result.append(indent)
+		result.append(node.name + " : " + pp.ppTypeFromMultiplicityElement(node))
+		
+		if (node.opposite != void) then
+			result.append("#" + node.opposite.name)
+		end
+		
+		if (node.isDerived) then
+			pushIndent()
+			result.append("\n" + indent + "getter is " )
+			if (node.getterBody != void) then
+				//result.append(node.getterbody.acceptKMExpressionVisitor(self, node.getterbody))
+			else
+				result.append("do\n")
+				pushIndent()
+				result.append(indent + "//TODO: implement getter for derived property " + node.name + "\n") 
+				popIndent()
+				result.append(indent + "end")
+			end
+			
+			if (not node.isReadOnly) then
+				result.append("\n" + indent + "setter is ")
+				if (node.getterBody != void) then 
+					//result.append(node.getterbody.acceptKMExpressionVisitor(self, node.getterbody))
+				else 
+					result.append("do\n")
+					pushIndent()
+					result.append(indent + "//TODO: implement setter for derived property " + node.name + "\n")
+					popIndent()
+					result.append(indent + "end")
+				end
+			end
+			popIndent()
+		end
+		result.append("\n")
+
+	end
+	
+	method visitClassDefinition(node : ClassDefinition, context : Integer) : String from kermeta::language::structure::KMStructureVisitor is do
+	    var a : String
+		result := ""
+
+		result.append(self.indent)
+		
+	    if (node.isAbstract) then 
+			result.append("abstract ")
+		end
+	    
+		result.append("class " + node.qualifiedName)
+		var s : Set<TypeVariable>
+		var it : Iterator<TypeVariable>
+		it := 	node.typeParameter.iterator
+		
+		
+		if (node.typeParameter.size > 0) then
+			result.append("<"+self.visitTypeVariableSet(node.typeParameter, context)+">")
+		end
+		
+		if (node.superType.size > 0) then
+			result.append(" inherits ")
+			result.append(self.visitTypeSet(node.superType, context, ", "))
+		end
+		
+		// print the attributes
+		result.append("\n"+self.indent+"{\n")
+		self.pushIndent()
+		result.append(self.visitFeatures(node.ownedAttribute.asType( kermeta::standard::Set<kermeta::language::structure::KMStructureVisitable>), context))
+		
+		// print the operations
+		result.append(self.visitFeatures(node.ownedOperation.asType( kermeta::standard::Set<kermeta::language::structure::KMStructureVisitable>), context))
+		self.popIndent()
+		result.append("\n"+self.indent+"}")
+	end
+	
+	method visitTypedElement(node : TypedElement, context : Integer) : String is do
+		result := "[typed element]"
+	end
+	
+	operation visitTypeVariable(node : TypeVariable, context : Integer) : String is do
+		result := pp.ppIdentifier(node.name)
+	end
+	
+	method visitProductType(node : ProductType, context : Integer) : String is do
+		result := "[" + visitTypeSet(node.type.asSet, context, ", ") + "]"
+	end
+	
+	method visitFunctionType(node : FunctionType, context : Integer) : String is do
+		result := "< " + self.accept(node.left, context) + "->" + self.accept(node.right, context)
+	end
+	
+	/**
+	 * Parent visit method for "Type" instances, it should be a more tidy visitor,
+	 * with no "isInstance" tests...
+	 */ 
+	method visitType(node : Type, context : Integer) : String is do
+		result := ""
+		if (PrimitiveType.isInstance(node)) then 
+			var pt : PrimitiveType
+			pt ?= node
+			result := self.accept(pt.instanceType, context)
+		else
+			result := node.toString 
+		end
+	end
+	
+	method visitTypeVariableBinding(node : TypeVariableBinding, context : Integer) : String is do
+		result := self.accept(node.type, context)
+	end
+	
+	method visitPrimitiveType(node : PrimitiveType, context : Integer) : String is do
+		result := "primitive type"
+		if (typedef == true) then
+			typedef := false
+			result := "alias " + node.name + " : " + self.accept(node.instanceType, context) + ";"
+			typedef := true
+		else 
+			result := node.getMetaClass.typeDefinition.qualifiedName
+		end
+	end
+	
+	method visitNamedElement(node : NamedElement, context : Integer) : String is do
+		result := "[named element]"
+	end
+	
+	/*method visitSelfType(node : SelfType, context : Integer) : String is do
+		result := "self"
+	end*/
+	
+	method visitPackage(node : Package, context : Integer) : String is do
+		result := "package " + node.qualifiedName // TODO : the ppIdentifier of the Java KM2KMTPrettyPrinter
+
+		result.append( indent + " {\n")
+		var old_cname : String init current_pname
+		var current_pname : String init node.qualifiedName
+		pushIndent()
+		typedef := true
+		if (node.ownedTypeDefinition.size > 0) then
+			result.append( self.visitExpressionSet(node.ownedTypeDefinition, context, "\n"))
+		end
+		if (node.nestedPackage.size > 0) then
+			result.append( self.visitExpressionSet(node.nestedPackage, context, "\n"))
+		end
+		popIndent()
+		current_pname := old_cname
+		result.append( indent + "\n}")
+		
+	end
+	
+	method visitTypeDefinition(node : TypeDefinition, context : Integer) : String is do
+		result := node.name
+	end
+	
+	method visitVoidType(node : VoidType, context : Integer) : String is do
+		result := "Void"
+	end
+	
+	method visitDataType(node : DataType, context : Integer) : String is do
+		result := "[DataType]"
+	end
+	
+	method visitEnumeration(node : Enumeration, context : Integer) : String is do
+		result := ""
+		if (typedef == true) then
+			typedef := false
+			result.append("enumeration " + pp.ppIdentifier(node.name) + "\n")
+			result.append( indent + "{\n")
+			pushIndent()
+			result.append( self.accept(node.ownedLiteral, context)) 
+			popIndent() 
+			result.append( indent + "}")
+			typedef := true
+		
+		else 
+			var qname : String init getQualifiedName(node)
+			var name : String init pp.ppIdentifier(node.name)
+			result := qname
+		end
+	end
+	
+	method visitEnumerationLiteral(node : EnumerationLiteral, context : Integer) : String is do
+		result := ""
+		result := pp.ppIdentifier(node.name) + ";"
+	end
+	
+	method visitParameter(node : Parameter, context : Integer) : String is do
+		result := "[param]"
+    end
+    
+    
+    /**
+     * Helper
+    */
+    operation getQualifiedName(node : Object) : String is do
+    	result := node.getMetaClass.typeDefinition.qualifiedName
+    end
+    
+    /*
+     *
+     *  Here begins the inheritance of the KMExpressionVisitor methods
+     *
+     *
+     */
+     method visitTypeReference(node : kermeta::language::behavior::TypeReference, context : Integer) : String is do
+    	result := pp.ppTypeFromMultiplicityElement(node)
+     end
+     
+     method visitBlock(node : kermeta::language::behavior::Block, context : Integer) : String is do
+     	result := ""
+     	result.append(indent)
+     	result.append("do\n")
+		pushIndent()
+		result.append(self.visitExpressionSet(node.statement, context, "\n"+indent))
+		popIndent()
+		from var it : Iterator<Rescue> init node.rescueBlock.iterator
+		until it.isOff
+		loop 
+			var resc : Rescue
+			resc := it.next
+			result.append(indent + self.accept(resc, context) + "\n") 
+		end
+		result.append("\n" + indent + "end\n")
+     end
+    
+	method visitAssignment(node : Assignment, context : Integer) : String is do
+		var left : String init self.accept(node.target, context).toString
+		var right : String init self.accept(node.~value, context).toString
+		var op : String
+		if (node.isCast) then op := "?" else op :=":" end
+		result := left + " " + op + "= " + right
+	end     
+
+	method visitCallResult(node  : CallResult, context : Integer) : String is do
+		result := "result"
+	end
+	
+	method visitCallFeature(node : CallFeature, context : Integer) : String is do
+		result := "" 
+		if (node.target != void) then 
+			result.append( self.accept(node.target, context))
+		else
+			result.append( "self")
+		end
+		
+		result.append( "." + node.name)
+		// handle the special case where there is 1 parameter, and when This
+		// parameter is a lambdaPostFix
+		if (node.parameters.size==1 and LambdaExpression.isInstance(node.parameters.one )) then
+	   		result.append(self.visitExpressionSet(node.parameters, context, ", "))
+		// the classic case : a list of parameters
+		else 
+			if (node.parameters.size> 0) then
+				result.append( "(" + self.visitExpressionSet(node.parameters, context, ", ")+ ")")
+			end 
+		end
+		rescue kermeta::exceptions::EmptyCollection 
+			// DO nothing : this case is protected by the above condition
+
+	end
+	
+	method visitCallSuperOperation(node : CallSuperOperation, context : Integer) : String is do
+		result := "super("
+		result.append( self.visitExpressionSet(node.parameters, context, ", "))
+		result.append( ")")
+	end
+	
+	method visitCallVariable(node : CallVariable, context : Integer) : String is do
+		result := node.name
+		if (node.parameters.size> 0) then
+			result.append("(" /*+ visitExpressionSet(node.parameters, context, ", ") */+ ")")
+		end
+	end
+
+	method visitConditional(node : Conditional, context : Integer) : String is do 
+		result := ""
+		result.append("if " + self.accept(node.condition, context) + " then\n")
+		pushIndent()
+		if (node.thenBody != void) then
+			result.append(self.accept(node.thenBody, context) + "\n")
+		end
+		popIndent()
+		// TODO : this condition is not perfect : elseBody is in fact never void, even if
+		// there is no ;..body in elseBody....
+		if (node.elseBody != void) then
+			result.append( indent + "else\n")
+			pushIndent()
+			result.append(self.accept(node.elseBody, context) + "\n")
+			popIndent()
+		end
+		result.append(indent + "end")
+	end
+	
+	method visitEmptyExpression(node : EmptyExpression, context : Integer) : String is do
+		result := " "
+	end
+	method visitIntegerLiteral(node : IntegerLiteral, context : Integer) : String is do
+		result := node.~value.toString
+	end
+
+	method visitStringLiteral(node : StringLiteral, context : Integer) : String is do
+		result := "\""+node.~value+"\""
+	end
+	
+	method visitBooleanLiteral(node : BooleanLiteral, context : Integer) : String is do
+		result := node.~value.toString 
+	end
+	
+	method visitTypeLiteral(node : TypeLiteral, context : Integer) : String is do
+		result := self.accept(node.typeref, context) 
+	end
+	
+	method visitVoidLiteral(node : VoidLiteral, context : Integer) : String is do 
+		result := "void"
+	end
+	
+	method visitLoop(node : Loop, context : Integer) : String is do
+		result := "from "
+		result.append( self.accept(node.initialization, context) + "\n")
+		result.append( indent + "until " + self.accept(node.stopCondition, context) + "\n")
+		result.append( indent +"loop\n") 
+		pushIndent()
+		result.append( self.accept(node.body, context))
+		popIndent()
+		result.append( indent +"end")
+	end
+	
+	method visitSelfExpression(node : SelfExpression, context : Integer) : String is do 
+		result := "self"
+	end
+	
+	method visitVariableDecl(node : VariableDecl, context : Integer) : String is do 
+		result := "var" + node.identifier + " : " + self.accept(node.type, context)
+		
+		if (node.initialization != void) then
+			result.append(" init " + self.accept(node.initialization, context))
+		end
+	end 
+	
+	method visitRaise(node : Raise, context : Integer) : String is do
+		result := "raise " + self.accept(node.expression, context)
+	end
+	
+	method visitRescue(node : Rescue, context : Integer) : String is do 
+		result := "rescue "
+		if (node.exceptionName != void) then
+			result.append( "(" + node.exceptionName + " : " + self.accept(node.exceptionType, context) + ")")
+		end
+		result.append("\n")
+		pushIndent()
+		result.append(self.visitExpressionSet(node.body, context, "\n"+indent))
+		popIndent()
+	end
+	
+	method visitJavaStaticCall(node : JavaStaticCall, context : Integer) : String is do 
+		result := "extern "
+		result.append(node.jclass + "." + node.jmethod + "(")
+		result.append(self.visitExpressionSet( node.parameters, context, ", "))
+		result.append(")")
+	end
+	
+	method visitLambdaExpression(node : LambdaExpression, context : Integer) : String is do 
+		result := "{"
+		result.append(self.visitExpressionSet(node.parameters, context, ", "))
+		result.append(" | ")
+		pushIndent()
+		result.append(self.accept(node.body, context))
+		popIndent()
+		result.append("}")
+	end
+	
+	method visitLambdaParameter(node : LambdaParameter, context : Integer) : String is do
+		result := node.name 
+		if (node.type != void) then
+			result.append(" : " + self.accept(node.type, context))
+		end
+    end
+
+    /**
+     * Visit a set that contains visitable elements
+     * @param pset : the set to visit
+     * @param context : the context attached to self.visitor
+     * @param Indent : the indentation (can be an empty string)
+    */
+    operation visitTypeSet
+    	(pset : Set<Type>, context : Integer, sep : String) : String is do
+//    	result := basicVisitSet(pset, context, ", ", "")	
+    	result := ""
+		from var it : Iterator<Type> init pset.iterator
+		until it.isOff
+		loop
+			var next : Type init it.next
+			var cnext : Type
+			cnext := next
+			// TODO : a real visit..
+			result.append(cnext.toString)
+//			result.append(self.accept(cnext, context))
+			if (it.hasNext) then
+				result.append(", ")
+			end
+		end
+    end
+ 
+    
+    /**
+     * Visit a set of Expression.
+     * (note : we could create a generic method for visiting Sets, but )
+     */
+     operation visitGenericSet<ConcreteType, AbstractType>
+    	(typedElement : ConcreteType, pset : Set<AbstractType>, context : Integer, sep : String) : String is do
+    	result := ""
+		from var it : Iterator<AbstractType> init pset.iterator
+		until it.isOff
+		loop
+			var next : AbstractType init it.next
+			var cnext : ConcreteType
+			//cnext ?= next
+			result.append(self.accept(cnext, context))
+			if (it.hasNext) then
+				result.append(sep)
+			end
+		end
+    end 
+    
+    /**
+     * Visit a set of Expression.
+     * (note : we could create a generic method for visiting Sets, but )
+     */
+     operation visitExpressionSet<BExpression>
+    	(pset : Set<BExpression>, context : Integer, sep : String) : String is do
+    	result := ""
+    	// FIXME : quite dirty that...
+    	if (sep.equals("\n"+indent)) then result.append(indent) end
+		from var it : Iterator<BExpression> init pset.iterator
+		until it.isOff
+		loop
+			var next : BExpression init it.next
+			result.append(self.accept(next, context))
+			if (it.hasNext) then
+				result.append(sep) 
+			end
+		end
+    end
+
+    
+    /**
+     * Visit the type parameters.
+     * TODO : create a generic operation, and find a way to get the concrete implementation
+     * of the element in the set that we want to pretty print
+     */
+    operation visitTypeParameters
+    	(pset : Set<Parameter>, context : Integer) : String is do
+    	result := ""
+		from var it : Iterator<Parameter> init pset.iterator
+		until it.isOff
+		loop
+			var inext : Parameter
+			inext := it.next
+	    	//stdio.write("-->" + inext.toString)
+			// TODO : a real visit..
+			result.append(inext.name)
+//			result.append(self.accept(cnext, context))
+			if (it.hasNext) then
+				result.append(", ")
+			end
+		end
+    end
+ 
+ 
+     /**
+     * Visit the type parameters.
+     * TODO : create a generic operation, and find a way to get the concrete implementation
+     * of the element in the set that we want to pretty print
+     */
+    operation visitTypeVariableBindingSet
+    	(pset : Set<TypeVariableBinding>, context : Integer) : String is do
+    	result := ""
+		from var it : Iterator<TypeVariableBinding> init pset.iterator
+		until it.isOff
+		loop
+			var cnext : TypeVariableBinding  
+			cnext := it.next
+			result.append(self.accept(cnext, context))
+			if (it.hasNext) then
+				result.append(", ")
+			end
+		end
+    end
+    
+    /** Prettyprints tags -- todo : define a generic parametric method!!! */
+    operation visitTagSet( tags : Set<Tag>, context : Integer) : String is do
+    	result := ""
+		from var it : Iterator<Tag> init tags.iterator
+		until it.isOff
+		loop
+			var next : Tag
+			next := it.next
+			result.append(self.accept(next, context))
+			result.append("\n"+indent)
+		end
+    end
+    
+    
+    /** Pretty prints a set of TypeVariables, separated by a comma */
+	operation visitTypeVariableSet(tparams : Set<TypeVariable>, context : Integer) : String is do
+		result := "" 
+		from var it : Iterator<TypeVariable> init tparams.iterator
+		until it.isOff
+		loop
+			var next : TypeVariable 
+			next := it.next
+			result.append(next.name)
+			if (it.hasNext) then
+				result.append(", ")
+			end
+		end
+	end
+
+    
+    /**
+     * Visit a set that contains elements that 
+     * : kermeta::language::structure::KMStructureVisitable
+     */
+    operation visitFeatures<T : kermeta::language::structure::KMStructureVisitable>(pset : Set<T>,	context : Integer) : String is do
+    	result := ""
+		from var it : Iterator<T> init pset.iterator
+		until it.isOff
+		loop
+			var next : T init it.next
+			result.append(next.acceptKMStructureVisitor(self, context ))
+			
+		end
+    end
+    
+	/**
+	 * Calls acceptKMExpressionVisitor oR acceptKMStructureVisitor according to the 
+	 * type of parsed node
+	 */
+    operation accept(node : Object, context : Integer) : String is do
+    	// structurevisitable node
+		var snode : KMStructureVisitable init void
+		var enode : KMExpressionVisitable init void
+		
+		var node_qname : String init node.getMetaClass.typeDefinition.qualifiedName
+		var node_name : String init node.getMetaClass.typeDefinition.name
+		var diff_size : Integer init node_qname.size-node_name.size
+		//stdio.writeln(node_name+"->"+node_qname)
+		// FIXME : ok until isInstance "works"
+		if (node_qname.substring(0, diff_size).equals("kermeta::language::behavior::")) then
+			enode ?= node
+			result := enode.acceptKMExpressionVisitor(self, context)
+		else 
+			if (node_qname.substring(0, diff_size).equals("kermeta::language::structure::")) then
+				snode := node
+				result:= snode.acceptKMStructureVisitor(self, context)
+			else
+				stdio.writeln("ouuup")
+				result := "[not found!]"
+			end
+		end
+		
+//		if (node_name.
+  // isInstance does not work yet
+/*		if (claz.isInstance(node)) then
+
+			enode ?= node
+			enode.acceptKMExpressionVisitor(self, context)
+		else
+			snode := node
+			snode.acceptKMStructureVisitor(self, context)
+		end
+*/		
+    end
+    
+
+    operation pushIndent() is do
+    	self.indent.append("    ")
+    end
+    
+    operation popIndent() is do
+    	if (indent != void and indent.size>0) then
+	    	indent := indent.substring(0, indent.size-4)
+	    end
+    end
+    
+    
+}
+
+/**
+ * Provides a set of methods that help the pretty printer.
+ * Greatly inspired from KM2KMTPrettyPrinter : 
+ * TODO : add all the equivalent methods of KM2KMTPrettyPrinter would be great!
+ */
+class PrintHelper 
+{
+
+	/** The current package name */ 
+	attribute current_pname : String
+	reference pprinter : BasicPrettyPrinter
+	
+	operation initialize(p : BasicPrettyPrinter) is do
+		pprinter := p
+	end
+	
+	operation ppTypeName(qname : String, name : String) : String is do
+		result := ""
+		if (qname.equals(current_pname + "::" + name)) then
+			 result := result + name
+		
+		else
+			result := name
+		end
+	end
+	
+	/** FIXME : impletment this correctly */
+	operation ppIdentifier(name : String) : String is do
+		result := name
+	end
+	
+	operation ppTypeFromMultiplicityElement(elem : MultiplicityElement) : String is do
+	 
+		result := ""
+		if (elem.upper != 1) then
+			if (elem.isOrdered) then
+				if (not elem.isUnique) then result.append("seq ") end
+			
+			else 
+				if (elem.isUnique) then result.append("set ")
+				else result.append("bag ") end
+			end
+		end
+		
+		// need to cast into concrete type
+		var ctype : Type
+		ctype := elem.type
+
+		result.append( pprinter.visitType(ctype, 0))
+		
+		if (elem.lower != 0 or elem.upper  != 1) then
+			result.append( "[" + elem.lower.toString + "..")
+			if (elem.upper<0) then result.append("*") else result.append(elem.upper.toString) end
+			result.append( "]")
+		end
+	
+	end
+	
+}
+
