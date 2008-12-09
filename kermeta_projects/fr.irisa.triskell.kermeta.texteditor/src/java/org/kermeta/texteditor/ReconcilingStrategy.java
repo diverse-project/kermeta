@@ -1,6 +1,6 @@
 
 
-/*$Id: ReconcilingStrategy.java,v 1.9 2008-10-28 12:31:03 dvojtise Exp $
+/*$Id: ReconcilingStrategy.java,v 1.10 2008-12-09 10:04:20 dvojtise Exp $
 * Project : fr.irisa.triskell.kermeta.texteditor
 * File : 	FoldingStrategy.java
 * License : EPL
@@ -27,6 +27,7 @@ import org.kermeta.kpm.EventDispatcher;
 import org.kermeta.kpm.KpmManager;
 import org.kermeta.texteditor.folding.FoldingStrategyHelper;
 
+import antlr.MismatchedTokenException;
 import antlr.RecognitionException;
 import antlr.TokenStreamException;
 import fr.irisa.triskell.kermeta.kpm.Unit;
@@ -53,8 +54,11 @@ public class ReconcilingStrategy implements IReconcilingStrategy {
 		
 		try {
 			FoldingStrategyHelper.updateFoldingPositions(editor, document.get());
+		} catch (MismatchedTokenException e){
 		} catch (RecognitionException e) {
 		} catch (TokenStreamException e) {
+		} catch (Exception e){
+			//e.printStackTrace();
 		}
 	
 		/*
