@@ -1,4 +1,4 @@
-/* $Id: CreateBehavior.kmt,v 1.95 2008-12-03 16:52:53 cfaucher Exp $
+/* $Id: CreateBehavior.kmt,v 1.96 2008-12-10 09:37:37 cfaucher Exp $
  * Creation date: January 21, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -560,9 +560,16 @@ package behavior {
 				context.pushKRErrorStack()
 				javaCode.append("} catch( " + context.JAVA_CLASS_EXCEPTION_SWITCHER + " " + context.VARIABLE_EXCEPTION_SWITCHER + "_" + context.kRErrorStack.peek() + " ) {\n")
 				
+				var caught_str : String init "caught_" + context.kRErrorStack.peek()
+				
+				javaCode.append("boolean " + caught_str + " = false;\n")
+				
 				self.rescueBlock.each{ e |
 					javaCode.append(e.createBehaviorJava(context))
 				}
+				
+				javaCode.append("\nif( !" + caught_str + " ) { throw " + context.VARIABLE_EXCEPTION_SWITCHER + "_" + context.kRErrorStack.peek() + "; }\n")
+				
 				javaCode.append("\n}\n")
 				context.kRErrorStack.pop()
 			end
@@ -1333,6 +1340,8 @@ package behavior {
 				var str_exceptionType : String init self.exceptionType.createBehaviorJava(context)
 				
 				result := result + "if( " + context.VARIABLE_EXCEPTION_SWITCHER + "_" + context.kRErrorStack.peek() + ".getRealException() instanceof " + str_exceptionType + " ) {\n"
+				
+				result := result + "caught_" + context.kRErrorStack.peek() + " = true;\n"
 				
 				result := result + str_exceptionType + " " + self.exceptionName + " = (" + str_exceptionType + ") " + context.VARIABLE_EXCEPTION_SWITCHER + "_" + context.kRErrorStack.peek() + ".getRealException();\n"
 				
