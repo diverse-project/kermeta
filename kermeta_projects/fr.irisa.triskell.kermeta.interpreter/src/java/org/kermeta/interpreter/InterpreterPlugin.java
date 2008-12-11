@@ -1,7 +1,9 @@
 package org.kermeta.interpreter;
 
 import org.apache.commons.logging.Log;
+import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Plugin;
+import org.eclipse.core.runtime.Status;
 
 import org.kermeta.log4j.util.LogConfigurationHelper;
 
@@ -9,6 +11,9 @@ public class InterpreterPlugin extends Plugin {
 
 	/** Logger to get the error of this interpreter */
 	final static public Log internalLog = LogConfigurationHelper.getLogger("kermeta.interpreter");
+
+	// The plug-in ID
+	public static final String PLUGIN_ID = "fr.irisa.triskell.kermeta.interpreter";
 
 	static private InterpreterPlugin _instance;
 	
@@ -27,4 +32,31 @@ public class InterpreterPlugin extends Plugin {
 		return _instance;
 	}
 	
+	/**
+	 * This method logs an error message and an associated exception (as a trace)
+	 * It will post the message both in the ErrorLog view in Eclipse and in the Log4J
+	 * @param message String
+	 */
+	public static void logErrorMessage(String message, Throwable e) {
+		if (message == null)
+			message= "";
+		// eclipse logger
+		getDefault().getLog().log(new Status(IStatus.ERROR, PLUGIN_ID, IStatus.ERROR, message, e));
+		// log4j message
+		internalLog.error(message, e);
+	}
+	
+	/**
+	 * This method logs a warning message and an associated exception (as a trace)
+	 * It will post the message both in the ErrorLog view in Eclipse and in the Log4J
+	 * @param message String
+	 */
+	public static void logWarningMessage(String message, Throwable e) {
+		if (message == null)
+			message= "";
+		// eclipse logger
+		getDefault().getLog().log(new Status(IStatus.WARNING, PLUGIN_ID, IStatus.WARNING, message, e));
+		// log4j message
+		internalLog.error(message, e);
+	}
 }
