@@ -1,0 +1,41 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+	<title>Introduction to KET</title>
+</head>
+
+<body>
+<h1>Presentation</h1>
+The idea is similar to <A href="http://www.eclipse.org/modeling/m2t/?project=jet#jet">JET</A>, Velocity or JSP. 
+This is a text template engine which allow to generate text from a template and a model in an easy way. 
+It uses Kermeta as expression language in order to easily navigate the model and fill the holes in the template.
+
+
+<H1>When to use KET</H1>
+<P>KET is a template engine it cannot be used to parse text (contrary to tools 
+   like <A href="http://www.kermeta.org/sintaks">Sintaks<A>)</P>
+<P>The best cases where using KET is efficient is when the templates contains more text that expressions. Ie.
+A text with holes.
+If you have more expressions than text, you should consider writing a pretty printer directly in Kermeta.
+</P>
+
+<H1>Getting started</H1>
+<P>Your template file should be *.ket. </P>
+<P>Next with a right click you can transform it as a kmt file. You can call the operation generate method 
+on the generated class. </P>
+<P>It returns a String that contains the generated code.</P>
+
+
+<div style="">
+  <p align="center"><img src="img/ket_process.png" alt="Ket Process"></p>
+
+ </div>
+ <div class="image-caption">
+  <p align="center"><i>Ket process.</i></p>
+ </div>
+</div>
+
+</body>
+</html>

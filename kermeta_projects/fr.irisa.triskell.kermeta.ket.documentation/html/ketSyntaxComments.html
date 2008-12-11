@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+  <head>
+
+    <title>KET Comment Reference Syntax</title>
+
+
+
+
+</head>
+
+  <body>
+
+    <h2>KET Comment Syntax Reference</h2>
+
+    <p>KET templates may contain comments between the characters 
+    <code>&lt;%--</code> and <code>--%&gt;</code>.
+    Comments have no impact on the execution of the template, except that they may influence
+    whitespace stripping rules.
+    KET comments are copied to the generated kermeta class as kermeta line comments. </p>
+    <p>
+    KET templates accept two special tags in the first non-blank line of a comment. The tag '@header' will
+    cause the comment to be emitted as the file header comment for the generated kermeta class.
+    This can be useful for inserting copyright notices into the generated kermeta code. 
+    The tag '@class' will
+    cause the comment to be emitted as the class kermeta doc comment for the generated kermeta class.
+    </p>
+
+    <h3>Valid comments</h3>
+
+    <p>Comments may span several lines, and may contain any text. The 
+    following are examples of a KET comments:</p>
+
+    <pre xml:space="preserve">  
+    &lt;%-- @header
+    This comment will appear as the file header comment 
+    in the generated kermeta code
+     --%&gt;
+    &lt;%-- 
+    @class
+    This comment will appear as the kermeta class doc comment 
+    in the generated kermeta code
+     --%&gt;
+     &lt;%-- This comment will not appear in the template output --%&gt;
+     &lt;%-- This directive is not used 
+     &lt;%@taglib id="org.eclipse.KET.controlTags" prefix="cc"%&gt;
+     --%&gt;</pre>
+    <h3>Invalid comments</h3>
+
+    <p>Comments may not appear within other KET elements. The following 
+    are illegal comments:</p>
+
+    <pre xml:space="preserve">&lt;%@taglib id="org.eclipse.KET.controlTags" &lt;%-- illegal comment --%&gt;
+          prefix="cc" %&gt;</pre>
+    <h3>Escaping comment characters</h3>
+
+    <p>To emit the characters <code>&lt;%--</code> in a templates 
+    output, enter <code>&lt;\%--</code>. To emit <code>--%&gt;</code>, 
+    enter <code>--%\&gt;</code>.</p>
+
+    <p>The following is an example of an escaped KET comments:</p>
+
+    <pre xml:space="preserve">&lt;\%-- this will show in the template output --%\&gt;
+    
+    </pre>
+  </body>
+
+</html>
