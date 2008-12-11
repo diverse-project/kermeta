@@ -1,4 +1,4 @@
-/* $Id: OperationTypeVariableChecker.java,v 1.1 2008-04-14 09:49:59 dvojtise Exp $
+/* $Id: OperationTypeVariableChecker.java,v 1.2 2008-12-11 19:49:21 dvojtise Exp $
  * Project : Kermeta io
  * File : OperationTypeVariableChecker.java
  * License : EPL
@@ -44,8 +44,15 @@ public class OperationTypeVariableChecker extends KermetaOptimizedVisitor {
 			OperationTypeVariableChecker checker = new OperationTypeVariableChecker( tv);
 			boolean canBeBound = false; 
 			fr.irisa.triskell.kermeta.language.structure.Type t = (fr.irisa.triskell.kermeta.language.structure.Type) op.getType();
-	    	if((Boolean) checker.accept(t)){
-	    		canBeBound = true; 
+			
+	    	try{
+	    		if((Boolean) checker.accept(t)){
+		    	
+		    		canBeBound = true; 
+		    	}
+	    	}
+	    	catch(NullPointerException e){
+	    		unit.error("TYPE-CHECKER INTERNAL ERROR : checker cannot check type " +t+" of operation " + op.getName() + " please verify that you have implemented all visit operations", op);
 	    	}
 	    	for(Parameter param : op.getOwnedParameter()){
 	    		if((Boolean) checker.accept(param.getType() )){
