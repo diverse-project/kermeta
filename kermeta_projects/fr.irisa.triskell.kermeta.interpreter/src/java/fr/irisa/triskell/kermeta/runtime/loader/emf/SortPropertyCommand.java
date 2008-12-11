@@ -1,4 +1,4 @@
-/*$Id: SortPropertyCommand.java,v 1.4 2008-09-24 15:18:35 dvojtise Exp $
+/*$Id: SortPropertyCommand.java,v 1.5 2008-12-11 19:47:09 dvojtise Exp $
 * Project : fr.irisa.triskell.kermeta.interpreter
 * File : 	SortPropertyCommand.java
 * License : EPL
@@ -13,9 +13,12 @@ package fr.irisa.triskell.kermeta.runtime.loader.emf;
 
 import java.util.ArrayList;
 
+import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
+import org.kermeta.interpreter.InterpreterPlugin;
 
 import fr.irisa.triskell.kermeta.interpreter.KermetaRaisedException;
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
@@ -65,12 +68,28 @@ public class SortPropertyCommand {
 		}
 		
 		for(int i = 0; i <= sourceRuntimeObjects.size()-1 ; i++){
-			RuntimeObject rcoll = sourceRuntimeObjects.get(i);			
-			if(	((EList<Object>) eObject.eGet(feature)).get(i) != rcoll.getR2eEmfObject()){
+			RuntimeObject rcoll = sourceRuntimeObjects.get(i);	
+			Object value;
+			if(RuntimeObjectHelper.isKermetaBasicType(rcoll)){
+				value = RuntimeObjectHelper.getPrimitiveTypeValueFromRuntimeObject(rcoll);
+			}
+			else{
+			
+				value = rcoll.getR2eEmfObject();
+			}
+			if(	((EList<Object>) eObject.eGet(feature)).get(i) != value){
 				// they are not at the correct place in the eObject feature
 				// need to move it
 				Runtime2EMF.internalLog.debug("moving "+ eObject.eClass().getName() + "."  + feature.getName() + "["+i+"] =  "+ rcoll.getProperties().toString());
-				((EList<Object>) eObject.eGet(feature)).move(i, rcoll.getR2eEmfObject());
+				if(((EList<Object>) eObject.eGet(feature)).contains(rcoll.getR2eEmfObject()))
+					((EList<Object>) eObject.eGet(feature)).move(i, rcoll.getR2eEmfObject());
+				else {
+					
+					InterpreterPlugin.logErrorMessage("Failed moving "+ eObject.eClass().getName() + "."  + feature.getName() + "["+i+"] =  "+ rcoll.getProperties().toString() +
+					" because rcoll.getR2eEmfObject()"+rcoll.getR2eEmfObject() +" wasn't in the feature !?", 
+						new Exception("Failed moving "+ eObject.eClass().getName() + "."  + feature.getName() + "["+i+"] =  "+ rcoll.getProperties().toString()));
+				}
+				
 			}
 		}
 		
