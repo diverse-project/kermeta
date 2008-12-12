@@ -1,4 +1,4 @@
-/* $Id: Random.kmt,v 1.1 2008-12-12 15:38:34 cfaucher Exp $ 
+/* $Id: Random.kmt,v 1.2 2008-12-12 15:39:18 cfaucher Exp $ 
  * Creation : December 10, 2008
  * Licence  : EPL 
  * Copyright: INRIA / IRISA / University of Rennes 1, France
@@ -22,7 +22,7 @@ class Random {
 		// if num==1 => result:=0
 		if num > 1 then
 			@compiledJavaExtern "externs.Random.nextId(this, num)"
-        	result ?= extern org::kermeta::language::mdk::externs::random::Random.nextId(self, num)
+        	result ?= extern org::kermeta::language::mdk::externs::random::Random.nextInteger(self, num)
         else
         	if num == 0 then
         		//Should raise an exception
