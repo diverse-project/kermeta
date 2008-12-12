@@ -1,4 +1,4 @@
-/* $Id: ExpressionInterpreter.java,v 1.72 2008-09-03 08:28:42 dvojtise Exp $
+/* $Id: ExpressionInterpreter.java,v 1.73 2008-12-12 16:23:32 dvojtise Exp $
  * Project : Kermeta (First iteration)
  * File : ExpressionInterpreter.java
  * License : EPL
@@ -395,7 +395,12 @@ public class ExpressionInterpreter extends KermetaOptimizedVisitor {
 	    	}
 	    	else{
 	    		internalLog.error("INTERPRETER INTERNAL ERROR : derived property  " + property.getName() + " has no getter body");
-		        throw new Error("INTERPRETER INTERNAL ERROR : derived property  " + property.getName() + " has no getter body");
+		        throw KermetaRaisedException.createKermetaException("kermeta::exceptions::RuntimeError",
+		        		"INTERPRETER INTERNAL ERROR : derived property  " + property.getName() + " has no getter body. Maybe you forgot to provide a body to this derived property defined in Ecore ?",
+						this,
+						memory,
+						property.getProperty(),
+						null);
 	    	}
 	    }
 	    finally {
