@@ -1,4 +1,4 @@
-/* $Id: prototype.kmt,v 1.3 2008-01-02 10:28:25 vmahe Exp $
+/* $Id: prototype.kmt,v 1.4 2008-12-15 10:54:41 vmahe Exp $
  * Creation date: August 7, 2006
  * License: EPL
  * Copyright: irisa.fr
@@ -96,20 +96,20 @@ class UserInterface
 	operation choiceCustomer() : bank::Customer is do
 		var num : kermeta::standard::Integer init 0
 		customers.each{ c |
-			stdio.writeln("  "+ c.name +" - n� "+num.toString)
+			stdio.writeln("  "+ c.name +" - number "+num.toString)
 			num := num + 1
 		}
-		num := utility.string2Integer(stdio.read("    give the n� of the customer : "))
+		num := utility.string2Integer(stdio.read("    give the number of the customer : "))
 		result := customers.elementAt(num)
 	end
 	operation choiceAccount() : bank::Account is do
 		var customer : bank::Customer init choiceCustomer()
 		var num : kermeta::standard::Integer init 0
 		customer.account.each{ acc |
-			stdio.writeln("  "+customer.name+" account n� "+num.toString)
+			stdio.writeln("  "+customer.name+" account number "+num.toString)
 			num := num + 1
 		}
-		num := utility.string2Integer(stdio.read("    give the n� of the account : "))
+		num := utility.string2Integer(stdio.read("    give the number of the account : "))
 		result := customer.account.elementAt(num)
 	end
 	operation getAmount() : kermeta::standard::Integer is do

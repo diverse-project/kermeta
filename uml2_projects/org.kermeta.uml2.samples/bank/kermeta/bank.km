@@ -1,37 +1,164 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xmi:XMI xmi:version="2.0"
+<kermeta_language_structure:ModelingUnit xmi:version="2.0"
     xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xmlns:kermeta_language_structure="http://www.kermeta.org/kermeta//language/structure">
-  <kermeta_language_structure:ModelingUnit>
-    <packages name="bank">
-      <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="Customer">
-        <ownedAttribute name="name" type="#/4" upper="1"/>
-        <ownedAttribute name="account" type="#/5" isOrdered="true" upper="-1"/>
-      </ownedTypeDefinition>
-      <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="Account">
-        <ownedAttribute name="amount" type="#/6" upper="1"/>
-        <ownedOperation tag="#/1" name="deposit" lower="1" upper="1">
-          <ownedParameter name="new_cash" type="#/6" upper="1"/>
-        </ownedOperation>
-        <ownedOperation tag="#/2" name="printAmount" type="#/4" lower="1" upper="1">
-          <ownedParameter type="#/4" upper="1"/>
-        </ownedOperation>
-        <ownedOperation tag="#/3" name="withdraw" type="#/6" lower="1" upper="1">
-          <ownedParameter type="#/6" upper="1"/>
-          <ownedParameter name="desired" type="#/6" upper="1"/>
-        </ownedOperation>
-      </ownedTypeDefinition>
-    </packages>
-    <requires uri="kermeta"/>
-  </kermeta_language_structure:ModelingUnit>
-  <kermeta_language_structure:Tag name="kdoc" value="do&#xA;    if amount == void then&#xA;        amount := new_cash&#xA;    else&#xA;        amount := amount + new_cash&#xA;    end&#xA;end"
-      object="#/0/@packages.0/@ownedTypeDefinition.1/@ownedOperation.0"/>
-  <kermeta_language_structure:Tag name="kdoc" value="do&#xA;    result := amount&#xA;end"
-      object="#/0/@packages.0/@ownedTypeDefinition.1/@ownedOperation.1"/>
-  <kermeta_language_structure:Tag name="kdoc" value="do&#xA;    if amount > desired then&#xA;        result := desired&#xA;        amount := amount - desired&#xA;    else&#xA;        result := amount&#xA;        amount := 0&#xA;    end&#xA;end"
-      object="#/0/@packages.0/@ownedTypeDefinition.1/@ownedOperation.2"/>
-  <kermeta_language_structure:Class typeDefinition="kermeta_language_structure:ClassDefinition ../../.bin/kermetisationUml2KMPass1_Uml2KMTVisitorvisitableUMLkeywo.km#//@packages.1/standard/String"/>
-  <kermeta_language_structure:Class typeDefinition="#/0/@packages.0/@ownedTypeDefinition.1"/>
-  <kermeta_language_structure:Class typeDefinition="kermeta_language_structure:ClassDefinition ../../.bin/kermetisationUml2KMPass1_Uml2KMTVisitorvisitableUMLkeywo.km#//@packages.1/standard/Integer"/>
-  <kermeta_language_structure:Class typeDefinition="#/0/@packages.0/@ownedTypeDefinition.0"/>
-</xmi:XMI>
+    xmlns:kermeta_language_behavior="http://www.kermeta.org/kermeta/1_2_0//kermeta/language/behavior"
+    xmlns:kermeta_language_structure="http://www.kermeta.org/kermeta/1_2_0//kermeta/language/structure" referencedModelingUnits="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#/">
+  <packages name="bank">
+    <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="Customer"
+        superType="#//@packages.0/Customer/@containedType.0">
+      <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/language/structure/Object"/>
+      <ownedAttribute name="name" type="#//@packages.0/Customer/name/@containedType.0"
+          isOrdered="true" upper="1">
+        <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/String"/>
+      </ownedAttribute>
+      <ownedAttribute name="account" type="#//@packages.0/Customer/account/@containedType.0"
+          isOrdered="true" upper="1">
+        <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/OrderedSet">
+          <typeParamBinding variable="kermeta_language_structure:ObjectTypeVariable platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/OrderedSet/G"
+              type="#//@packages.0/Customer/account/@containedType.0/@typeParamBinding.0/@containedType.0">
+            <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="#//@packages.0/Account"/>
+          </typeParamBinding>
+        </containedType>
+      </ownedAttribute>
+    </ownedTypeDefinition>
+    <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="Account"
+        superType="#//@packages.0/Account/@containedType.0">
+      <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/language/structure/Object"/>
+      <ownedAttribute name="amount" type="#//@packages.0/Account/amount/@containedType.0"
+          isOrdered="true" upper="1">
+        <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Integer"/>
+      </ownedAttribute>
+      <ownedOperation name="deposit" type="#//@packages.0/Account/deposit/@containedType.0"
+          upper="1">
+        <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Void"/>
+        <ownedParameter name="new_cash" type="#//@packages.0/Account/deposit/@ownedParameter.0/@containedType.0"
+            isOrdered="true" upper="1">
+          <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Integer"/>
+        </ownedParameter>
+        <body xsi:type="kermeta_language_behavior:Block" staticType="#//@packages.0/Account/deposit/@ownedParameter.0/@containedType.0">
+          <statement xsi:type="kermeta_language_behavior:Conditional" staticType="#//@packages.0/Account/deposit/@ownedParameter.0/@containedType.0">
+            <thenBody xsi:type="kermeta_language_behavior:Block" staticType="#//@packages.0/Account/deposit/@ownedParameter.0/@containedType.0">
+              <statement xsi:type="kermeta_language_behavior:Assignment" staticType="#//@packages.0/Account/deposit/@ownedParameter.0/@containedType.0">
+                <target xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/Account/amount/@containedType.0"
+                    name="amount" staticProperty="#//@packages.0/Account/amount"/>
+                <value xsi:type="kermeta_language_behavior:CallVariable" staticType="#//@packages.0/Account/deposit/@ownedParameter.0/@containedType.0"
+                    name="new_cash"/>
+              </statement>
+            </thenBody>
+            <elseBody xsi:type="kermeta_language_behavior:Block" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Integer/plus/@containedType.0">
+              <statement xsi:type="kermeta_language_behavior:Assignment" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Integer/plus/@containedType.0">
+                <target xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/Account/amount/@containedType.0"
+                    name="amount" staticProperty="#//@packages.0/Account/amount"/>
+                <value xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Integer/plus/@containedType.0"
+                    name="plus" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Integer/plus">
+                  <containedType xsi:type="kermeta_language_structure:FunctionType"
+                      left="#//@packages.0/Account/deposit/@body/@statement.0/@elseBody/@statement.0/@value/@containedType.0/@containedType.0"
+                      right="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Integer/plus/@containedType.0">
+                    <containedType xsi:type="kermeta_language_structure:ProductType"
+                        type="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Integer/plus/@ownedParameter.0/@containedType.0"/>
+                  </containedType>
+                  <parameters xsi:type="kermeta_language_behavior:CallVariable" staticType="#//@packages.0/Account/deposit/@ownedParameter.0/@containedType.0"
+                      name="new_cash"/>
+                  <target xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/Account/amount/@containedType.0"
+                      name="amount" staticProperty="#//@packages.0/Account/amount"/>
+                </value>
+              </statement>
+            </elseBody>
+            <condition xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Integer/equals/@containedType.0"
+                name="equals" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Integer/equals">
+              <containedType xsi:type="kermeta_language_structure:FunctionType" left="#//@packages.0/Account/deposit/@body/@statement.0/@condition/@containedType.0/@containedType.0"
+                  right="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Integer/equals/@containedType.0">
+                <containedType xsi:type="kermeta_language_structure:ProductType" type="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Object/@containedType.0"/>
+              </containedType>
+              <parameters xsi:type="kermeta_language_behavior:VoidLiteral" staticType="#//@packages.0/Account/deposit/@body/@statement.0/@condition/@parameters.0/@containedType.0">
+                <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Void"/>
+              </parameters>
+              <target xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/Account/amount/@containedType.0"
+                  name="amount" staticProperty="#//@packages.0/Account/amount"/>
+            </condition>
+          </statement>
+        </body>
+      </ownedOperation>
+      <ownedOperation name="printAmount" type="#//@packages.0/Account/printAmount/@containedType.0"
+          isOrdered="true" upper="1">
+        <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/String"/>
+        <body xsi:type="kermeta_language_behavior:Block" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Integer/toString/@containedType.0">
+          <statement xsi:type="kermeta_language_behavior:Assignment" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Integer/toString/@containedType.0">
+            <target xsi:type="kermeta_language_behavior:CallResult" staticType="#//@packages.0/Account/printAmount/@containedType.0"
+                name="result"/>
+            <value xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Integer/toString/@containedType.0"
+                name="toString" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Integer/toString">
+              <target xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/Account/amount/@containedType.0"
+                  name="amount" staticProperty="#//@packages.0/Account/amount"/>
+            </value>
+          </statement>
+        </body>
+      </ownedOperation>
+      <ownedOperation name="withdraw" type="#//@packages.0/Account/withdraw/@containedType.0"
+          isOrdered="true" upper="1">
+        <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Integer"/>
+        <ownedParameter name="desired" type="#//@packages.0/Account/withdraw/@ownedParameter.0/@containedType.0"
+            isOrdered="true" upper="1">
+          <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Integer"/>
+        </ownedParameter>
+        <body xsi:type="kermeta_language_behavior:Block" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Integer/minus/@containedType.0">
+          <statement xsi:type="kermeta_language_behavior:Conditional" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Integer/minus/@containedType.0">
+            <thenBody xsi:type="kermeta_language_behavior:Block" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Integer/minus/@containedType.0">
+              <statement xsi:type="kermeta_language_behavior:Assignment" staticType="#//@packages.0/Account/withdraw/@ownedParameter.0/@containedType.0">
+                <target xsi:type="kermeta_language_behavior:CallResult" staticType="#//@packages.0/Account/withdraw/@containedType.0"
+                    name="result"/>
+                <value xsi:type="kermeta_language_behavior:CallVariable" staticType="#//@packages.0/Account/withdraw/@ownedParameter.0/@containedType.0"
+                    name="desired"/>
+              </statement>
+              <statement xsi:type="kermeta_language_behavior:Assignment" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Integer/minus/@containedType.0">
+                <target xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/Account/amount/@containedType.0"
+                    name="amount" staticProperty="#//@packages.0/Account/amount"/>
+                <value xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Integer/minus/@containedType.0"
+                    name="minus" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Integer/minus">
+                  <containedType xsi:type="kermeta_language_structure:FunctionType"
+                      left="#//@packages.0/Account/withdraw/@body/@statement.0/@thenBody/@statement.1/@value/@containedType.0/@containedType.0"
+                      right="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Integer/minus/@containedType.0">
+                    <containedType xsi:type="kermeta_language_structure:ProductType"
+                        type="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Integer/minus/@ownedParameter.0/@containedType.0"/>
+                  </containedType>
+                  <parameters xsi:type="kermeta_language_behavior:CallVariable" staticType="#//@packages.0/Account/withdraw/@ownedParameter.0/@containedType.0"
+                      name="desired"/>
+                  <target xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/Account/amount/@containedType.0"
+                      name="amount" staticProperty="#//@packages.0/Account/amount"/>
+                </value>
+              </statement>
+            </thenBody>
+            <elseBody xsi:type="kermeta_language_behavior:Block" staticType="#//@packages.0/Account/withdraw/@body/@statement.0/@elseBody/@statement.1/@value/@containedType.0">
+              <statement xsi:type="kermeta_language_behavior:Assignment" staticType="#//@packages.0/Account/amount/@containedType.0">
+                <target xsi:type="kermeta_language_behavior:CallResult" staticType="#//@packages.0/Account/withdraw/@containedType.0"
+                    name="result"/>
+                <value xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/Account/amount/@containedType.0"
+                    name="amount" staticProperty="#//@packages.0/Account/amount"/>
+              </statement>
+              <statement xsi:type="kermeta_language_behavior:Assignment" staticType="#//@packages.0/Account/withdraw/@body/@statement.0/@elseBody/@statement.1/@value/@containedType.0">
+                <target xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/Account/amount/@containedType.0"
+                    name="amount" staticProperty="#//@packages.0/Account/amount"/>
+                <value xsi:type="kermeta_language_behavior:IntegerLiteral" staticType="#//@packages.0/Account/withdraw/@body/@statement.0/@elseBody/@statement.1/@value/@containedType.0">
+                  <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Integer"/>
+                </value>
+              </statement>
+            </elseBody>
+            <condition xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Integer/isGreater/@containedType.0"
+                name="isGreater" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Integer/isGreater">
+              <containedType xsi:type="kermeta_language_structure:FunctionType" left="#//@packages.0/Account/withdraw/@body/@statement.0/@condition/@containedType.0/@containedType.0"
+                  right="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Integer/isGreater/@containedType.0">
+                <containedType xsi:type="kermeta_language_structure:ProductType" type="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Object/@containedType.0"/>
+              </containedType>
+              <parameters xsi:type="kermeta_language_behavior:CallVariable" staticType="#//@packages.0/Account/withdraw/@ownedParameter.0/@containedType.0"
+                  name="desired"/>
+              <target xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/Account/amount/@containedType.0"
+                  name="amount" staticProperty="#//@packages.0/Account/amount"/>
+            </condition>
+          </statement>
+        </body>
+      </ownedOperation>
+    </ownedTypeDefinition>
+  </packages>
+  <requires uri="kermeta"/>
+  <usings qualifiedName="bank"/>
+</kermeta_language_structure:ModelingUnit>
