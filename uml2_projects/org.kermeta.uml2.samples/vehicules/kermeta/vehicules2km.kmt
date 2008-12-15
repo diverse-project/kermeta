@@ -1,4 +1,4 @@
-/* $Id: vehicules2km.kmt,v 1.1 2007-12-14 08:41:29 vmahe Exp $
+/* $Id: vehicules2km.kmt,v 1.2 2008-12-15 12:41:00 vmahe Exp $
  * Creation date: November 29, 2007
  * License:
  * Copyright:
@@ -19,11 +19,9 @@ class PrettyPrinter inherits Uml2KM
     method main() : Void is do
     	stdio.writeln("\n>>>>-------------> initializing the model !\n")
         // the UML2 model to be transformed
-        initialize("platform:/resource/fr.irisa.triskell.uml2.samples/vehicules/models/improved_vehicules.uml",
-        		"platform:/plugin/org.eclipse.uml2.uml/model/UML.ecore")
+        initialize("platform:/resource/fr.irisa.triskell.uml2.samples/vehicules/models/improved_vehicules.uml")
 		uml2km()
-		saveKm("platform:/resource/fr.irisa.triskell.uml2.samples/vehicules/models/improved_vehicules.km",
-			"platform:/plugin/fr.irisa.triskell.kermeta/lib/kermeta_java.ecore")
+		saveKm("platform:/resource/fr.irisa.triskell.uml2.samples/vehicules/models/improved_vehicules.km")
 		
 	   	stdio.writeln("\n<-------------<<<< end of the programm.\n")
     end
