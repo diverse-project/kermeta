@@ -29,17 +29,17 @@ class KMComposer inherits kompose::Composer
    		// FIXME Objects from dedicated metamodel have to be added
    		//result.classes.put("ContextObject", ContextObjectClass)
    		
-   		/*result.classes.put("Object", Object)
-   			result.classes.put("Type",Type)
+   		result.classes.put("Object", Object)
+   			/*result.classes.put("Type",Type)
    				result.classes.put("VoidType",VoidType)
    				result.classes.put("ProductType",ProductType)
    				result.classes.put("FunctionType",FunctionType)*/
    				result.classes.put("ParameterizedType",ParameterizedType)
    				/*	result.classes.put("ModelType",ModelType)
    					result.classes.put("Class",Class)
-   				result.classes.put("TypeVariable",TypeVariable)
+   				result.classes.put("TypeVariable",TypeVariable)*/
    				result.classes.put("DataType",DataType)
-   					result.classes.put("Enumeration",Enumeration)*/
+   					/*result.classes.put("Enumeration",Enumeration)*/
    			result.classes.put("NamedElement",NamedElement)
    			result.classes.put("ModelingUnit",ModelingUnit)
    				/*result.classes.put("TypeDefinitionContainer",TypeDefinitionContainer)
@@ -49,15 +49,16 @@ class KMComposer inherits kompose::Composer
    				/*result.classes.put("TypeDefinition",TypeDefinition)
    					result.classes.put("GenericTypeDefinition",GenericTypeDefinition)
    				result.classes.put("TypedElement",TypedElement)
-   					result.classes.put("MultiplicityElement",MultiplicityElement)*/
+   					result.classes.put("MultiplicityElement",MultiplicityElement)
    						result.classes.put("Property",Property)
-   						/*result.classes.put("Parameter",Parameter)
+   						result.classes.put("Parameter",Parameter)
    						result.classes.put("Operation",Operation)
-   			result.classes.put("TypeContainer",TypeContainer)
+   			result.classes.put("TypeContainer",TypeContainer)*/
    				result.classes.put("ClassDefinition",ClassDefinition)
-   				result.classes.put("PrimitiveType",PrimitiveType)
-   			result.classes.put("TypeVariableBinding",TypeVariableBinding)
-   			result.classes.put("Tag",Tag)*/
+   				/*result.classes.put("PrimitiveType",PrimitiveType)*/
+   			//result.classes.put("TypeVariableBinding",TypeVariableBinding)
+   			//result.classes.put("Tag",Tag)
+   			//result.classes.put("VirtualType",VirtualType)
    		
 		/*result.classes.put("Class", EClass)
 		result.classes.put("Attribute", EAttribute)
@@ -82,7 +83,7 @@ class PackageSignature inherits kompose::Signature
 		var othersign : PackageSignature
 		othersign ?= other
 		if othersign != void then
-			stdio.write("**** DEBUG Equals Package "+self.pack.name+" / "+othersign.pack.name)
+			//stdio.write("**** DEBUG Equals Package "+self.pack.name+" / "+othersign.pack.name)
 			result := self.pack.name == othersign.pack.name 
 			
 			/*self.op.eParameters.each{ p1 | 
@@ -93,8 +94,8 @@ class PackageSignature inherits kompose::Signature
 		else
 			result := false
 		end
-		stdio.write(" : "+result.toString+"\n")
-		stdio.writeln("**** DEBUG End Equals Package ")
+		//stdio.write(" : "+result.toString+"\n")
+		//stdio.writeln("**** DEBUG End Equals Package ")
 	end
 	
 }
@@ -107,7 +108,7 @@ class ModelingUnitSignature inherits kompose::Signature
 		var othersign : ModelingUnitSignature
 		othersign ?= other
 		if othersign != void then
-			stdio.write("**** DEBUG Equals MU "+self.mu.toString+" / "+othersign.mu.toString)
+			//stdio.write("**** DEBUG Equals MU "+self.mu.toString+" / "+othersign.mu.toString)
 			//result := self.mu.packages == othersign.mu.name 
 			
 			self.mu.packages.each{ p1 | 
@@ -118,8 +119,8 @@ class ModelingUnitSignature inherits kompose::Signature
 		else
 			result := false
 		end
-		stdio.write(" : "+result.toString+"\n")
-		stdio.writeln("**** DEBUG End Equals MU ")
+		//stdio.write(" : "+result.toString+"\n")
+		//stdio.writeln("**** DEBUG End Equals MU ")
 	end
 	
 }
@@ -130,8 +131,10 @@ class ParameterizedTypeSignature inherits kompose::Signature
 	method equals(other : Object ) : Boolean is do
 		var othersign : ParameterizedTypeSignature
 		othersign ?= other
-		stdio.write("**** DEBUG Equals ParameterizedType "+self.type.toString+" / "+othersign.type.toString)
 		if othersign != void then
+			//stdio.write("**** DEBUG Equals ParameterizedType "+self.type.toString+" / "+othersign.type.toString)
+			//stdio.writeln(othersign.type.typeDefinition.toString)
+			/* Case test for Parameterized type definition as class */
 			var otherType : ClassDefinition
 			if othersign.type.typeDefinition.isKindOf(ClassDefinition) then
 				otherType ?= othersign.type.typeDefinition
@@ -141,8 +144,9 @@ class ParameterizedTypeSignature inherits kompose::Signature
 				selfType ?= self.type.typeDefinition
 			end
 			if (otherType != void).andThen{e|selfType != void} then
+				/*stdio.writeln("ClassDefinitions")
 				stdio.writeln("otherType.qualifiedName() = "+otherType.qualifiedName())
-				stdio.writeln("selfType.qualifiedName() = "+selfType.qualifiedName())
+				stdio.writeln("selfType.qualifiedName() = "+selfType.qualifiedName())*/
 				result := otherType.qualifiedName().equals(selfType.qualifiedName())
 			else
 				result := false
@@ -150,11 +154,108 @@ class ParameterizedTypeSignature inherits kompose::Signature
 		else
 			result := false
 		end
-		stdio.write(" : "+result.toString+"\n")
-		stdio.writeln("**** DEBUG End Equals ParameterizedType ")
+		//stdio.write(" : "+result.toString+"\n")
+		//stdio.writeln("**** DEBUG End Equals ParameterizedType ")
 	end
 	
 }
+
+class ClassDefinitionSignature inherits kompose::Signature
+{
+	reference cd : ClassDefinition 
+	
+	method equals(other : Object ) : Boolean is do
+		var othersign : ClassDefinitionSignature
+		othersign ?= other
+		if othersign != void then
+			//stdio.write("**** DEBUG Equals CD "+self.cd.toString+" / "+othersign.cd.toString)
+			result := othersign.cd.name.equals(self.cd.name)
+		else
+			result := false
+		end
+		//stdio.write(" : "+result.toString+"\n")
+		//stdio.writeln("**** DEBUG End Equals CD ")
+	end
+	
+}
+
+/*class TypeVariableBindingSignature inherits kompose::Signature
+{
+	reference tvb : TypeVariableBinding 
+	
+	method equals(other : Object ) : Boolean is do
+		var othersign : TypeVariableBindingSignature
+		othersign ?= other
+		if othersign != void then
+			stdio.write("**** DEBUG Equals TVB "+self.tvb.toString+" / "+othersign.tvb.toString)
+			result := othersign.tvb.type.equals(self.tvb.type)// and othersign.tvb.variable.getSignature == self.tvb.variable.getSignature
+			//result := true
+		else
+			result := false
+		end
+		stdio.write(" : "+result.toString+"\n")
+		stdio.writeln("**** DEBUG End Equals TVB ")
+	end
+	
+}*/
+
+/*class VirtualTypeSignature inherits kompose::Signature
+{
+	reference vt : VirtualType 
+	
+	method equals(other : Object ) : Boolean is do
+		/*var othersign : VirtualTypeSignature
+		othersign ?= other
+		if othersign != void then
+			stdio.write("**** DEBUG Equals VT "+self.vt.toString+" / "+othersign.vt.toString)
+			result := self.vt.classDefinition.equals(othersign.vt.classDefinition).andThen{e|}
+		else
+			result := false
+		end
+		stdio.write(" : "+result.toString+"\n")
+		stdio.writeln("**** DEBUG End Equals VT ")
+		result:=true
+	end
+	
+}
+
+class GenericTypeDefinitionSignature inherits kompose::Signature
+{
+	reference gtd : GenericTypeDefinition 
+	
+	method equals(other : Object ) : Boolean is do
+		var othersign : GenericTypeDefinitionSignature
+		othersign ?= other
+		if othersign != void then
+			stdio.write("**** DEBUG Equals VT "+self.gtd.toString+" / "+othersign.gtd.toString)
+			result := self.gtd.typeParameter.equals(othersign.gtd.typeParameter)
+		else
+			result := false
+		end
+		stdio.write(" : "+result.toString+"\n")
+		stdio.writeln("**** DEBUG End Equals VT ")
+	end
+	
+}*/
+
+/*class PrimitiveTypeSignature inherits kompose::Signature
+{
+	reference pt : PrimitiveType 
+	
+	method equals(other : Object ) : Boolean is do
+		var othersign : PrimitiveTypeSignature
+		othersign ?= other
+		if othersign != void then
+			stdio.write("**** DEBUG Equals PT "+self.pt.toString+" / "+othersign.pt.toString)
+			result := self.pt.instanceType.equals(othersign.pt.instanceType)
+		else
+			result := false
+		end
+		stdio.write(" : "+result.toString+"\n")
+		stdio.writeln("**** DEBUG End Equals PT ")
+	end
+	
+}*/
 
 /*class TypeSignature inherits kompose::Signature
 {
@@ -293,15 +394,17 @@ class Parameter inherits kompose::Mergeable {}
 @aspect "true"
 class Operation inherits kompose::Mergeable {}
 @aspect "true"
-class TypeContainer inherits kompose::Mergeable {}
+class TypeContainer inherits kompose::Mergeable {}*/
 @aspect "true"
 class ClassDefinition inherits kompose::Mergeable {}
-@aspect "true"
+/*@aspect "true"
 class PrimitiveType inherits kompose::Mergeable {}
 @aspect "true"
 class TypeVariableBinding inherits kompose::Mergeable {}
 @aspect "true"
 class Tag inherits kompose::Mergeable {}*/
+/*@aspect "true"
+class VirtualType inherits kompose::Mergeable{}*/
 
 @aspect "true"
 class NamedElement
@@ -362,6 +465,46 @@ class ParameterizedType
 		result := s
 	end
 }
+
+@aspect "true"
+class ClassDefinition
+{
+	method getSignature() : kompose::Signature is do
+		var s : ClassDefinitionSignature init ClassDefinitionSignature.new
+		s.cd := self
+		result := s
+	end
+}
+
+/*@aspect "true"
+class VirtualType
+{
+	method getSignature() : kompose::Signature is do
+		var s : VirtualTypeSignature init VirtualTypeSignature.new
+		s.vt := self
+		result := s
+	end
+}
+
+@aspect "true"
+class GenericTypeDefinition
+{
+	method getSignature() : kompose::Signature is do
+		var s : GenericTypeDefinitionSignature init GenericTypeDefinitionSignature.new
+		s.gtd := self
+		result := s
+	end
+}*/
+
+/*@aspect "true"
+class PrimitiveType
+{
+	method getSignature() : kompose::Signature is do
+		var s : PrimitiveTypeSignature init PrimitiveTypeSignature.new
+		s.pt := self
+		result := s
+	end
+}*/
 
 /*@aspect "true"
 class Property
