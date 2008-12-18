@@ -34,7 +34,7 @@ aspect abstract class Mergeable
 		result ?= type.new
 		ctx.addObjectComposedTrace(self, other, result)
 	
-		stdio.writeln("-> MERGE " + self.toString + " AND " + other.toString + " -- " + result.toString)
+		//stdio.writeln("-> MERGE " + self.toString + " AND " + other.toString + " -- " + result.toString)
 		
 		var props : Collection<Property> init self.getMetaClass.classDefinition.allAttribute.select{p | not p.isDerived}
 		
@@ -66,8 +66,7 @@ aspect abstract class Mergeable
 									var m : Mergeable	m ?= k
 									col2.add(m)
 								}
-								col1.each{ me | 
-									
+								col1.each{ me |
 									var matching : Collection<Mergeable> init me.getmatchingElements(col2)
 									var col : Collection<Object>
 									col ?= result.get(p)
@@ -82,11 +81,9 @@ aspect abstract class Mergeable
 												col.add(me)
 											end
 										}
-									end	
-								}
-								
+									end
+								}								
 								col2.each{ me | 
-									
 									var matching : Collection<Mergeable> init me.getmatchingElements(col1)
 									var col : Collection<Object>
 									col ?= result.get(p)
@@ -94,9 +91,6 @@ aspect abstract class Mergeable
 										col.add(me)
 									end
 								}
-								
-							
-								
 							else // upper == 1
 								var me1 : Mergeable		me1 ?= self.get(p)
 								var me2 : Mergeable		me2 ?= other.get(p)
@@ -132,26 +126,76 @@ aspect abstract class Mergeable
 						else
 							//stdio.writeln("Obj 1 = " + self.get(p).toString)
 							//stdio.writeln("Obj 2 = " + other.get(p).toString)
-							if self.get(p) == other.get(p) then
-								result.~set(p, self.get(p))
+							if self.get(p).isInstanceOf(kermeta::language::structure::EnumerationLiteral) then
+								//stdio.writeln("I am an EnumLiteral: " + self.get(p).toString)
+								var v : kermeta::language::structure::EnumerationLiteral
+								v ?= self.get(p)
+								if(v != void) then
+									if p.type == v.~enumeration then
+										//stdio.writeln("*** DEBUG : Appel EXTERN")
+										extern fr::irisa::triskell::kermeta::runtime::language::Object.~set(self, p, self.get(p))
+									end
+								end
 							else
-								//stdio.writeln("WARNING : conflicting value for property " + p.name + " picking the first value")
-								result.~set(p, self.get(p))
+								if self.get(p) == other.get(p) then
+									result.~set(p, self.get(p))
+								else
+									//stdio.writeln("WARNING : conflicting value for property " + p.name + " picking the first value")
+									result.~set(p, self.get(p))
+								end
 							end
 						end
 					end
 				
 				else // p.upper != 1
-					// TODO : Implement this
-				end
-				
+					var ocol1 : Collection<Object> 	ocol1 ?= self.get(p) 
+					var col1 : Collection<Mergeable> init Sequence<Mergeable>.new
+					ocol1.each{ k | 
+						var m : Mergeable	
+						m ?= k
+						col1.add(m)
+					}
+					var ocol2 : Collection<Object> 	ocol2 ?= other.get(p) 
+					var col2 : Collection<Mergeable> init Sequence<Mergeable>.new
+					ocol2.each{ k | 
+						var m : Mergeable	
+						m ?= k
+						col2.add(m)
+					}
+					col1.each{ me |	
+						if me != void then
+							var matching : Collection<Mergeable> init me.getmatchingElements(col2)
+							var col : Collection<Object>
+							col ?= result.get(p)
+							if matching.size == 0 then							
+								col.add(me)
+							else
+								matching.each{ me2 | 
+									if p.isComposite then
+										col.add(me.merge(me2, ctx))
+									else
+										col.add(me)
+									end
+								}
+							end
+						end
+					}					
+					col2.each{ me |
+						if me != void then 						
+							var matching : Collection<Mergeable> init me.getmatchingElements(col1)
+							var col : Collection<Object>
+							col ?= result.get(p)
+							if matching.size == 0 then
+								col.add(me)
+							end
+						end
+					}
+				end				
 			end
-		
-		
 		}
 	end
 
-	operation getSignature() : Signature is abstract
+	operation getSignature() : kompose::Signature is abstract
 	operation getStringID() : kermeta::standard::String is abstract
 
 }
@@ -165,7 +209,8 @@ class MergeContext {
 	attribute processed : Hashtable<kermeta::standard::Integer, kermeta::standard::Boolean>
 	attribute comp : Hashtable<kermeta::standard::Integer, kermeta::standard::Boolean>
 	reference resources: kermeta::persistence::EMFResource[0..*]      
-	attribute objectIndex:kermeta::standard::String [0..*]
+	//attribute objectIndex:kermeta::standard::String [0..*]
+	attribute objectIndex : Hashtable<kermeta::standard::Integer,kermeta::standard::Object>
 	
 	 
 	operation initialize() is do
@@ -175,6 +220,7 @@ class MergeContext {
 		reverse := Hashtable<kermeta::standard::Integer, Mergeable>.new
 		processed := Hashtable<kermeta::standard::Integer, kermeta::standard::Boolean>.new
 		comp := Hashtable<kermeta::standard::Integer, kermeta::standard::Boolean>.new
+		objectIndex := Hashtable<kermeta::standard::Integer,kermeta::standard::Object>.new
 	end
 	operation resouceContains(element:Object):kermeta::standard::Boolean is do
 		result:=false
@@ -185,20 +231,48 @@ class MergeContext {
 		}
 	end
 	operation indexate(element:Object): Void is do
+		//stdio.writeln("*** DEBUG compose merge.kmt : test "+element.toString+" : "+element.isInstanceOf(kermeta::language::behavior::Expression).toString)
+		if not element.isInstanceOf(kermeta::language::behavior::Expression) and not element.isInstanceOf(kermeta::language::structure::Tag) then
+		//stdio.writeln("*** DEBUG compose merge.kmt : resouceContains "+element.toString)
 		if self.resouceContains(element) then
-			if not self.objectIndex.contains(element.toString) then
-				self.objectIndex.add(element.toString)
-				var properties : Collection<Property> init element.getMetaClass.classDefinition.allAttribute.select{p | not p.isDerived}
+			//stdio.writeln("*** DEBUG compose merge.kmt : contains "+element.toString)
+			if not self.objectIndex.containsKey(element.oid) then
+				//stdio.writeln("*** DEBUG compose merge.kmt : add "+element.toString)
+				self.objectIndex.put(element.oid,element)
+				//stdio.writeln("*** DEBUG compose merge.kmt : properties "+element.toString)
+				/*var properties : Collection<Property> init element.getMetaClass.classDefinition.allAttribute.select{p | not p.isDerived}
+				//stdio.writeln("*** DEBUG compose merge.kmt : each "+properties.toString)
 				properties.each{ p |
 					if p.upper != 1 then
+						//stdio.writeln("*** DEBUG compose merge.kmt : get "+p.toString)
 						var objects : Collection<Object> objects?=element.~get(p)
 						objects.each{obj|self.indexate(obj)}
 					else
+						//stdio.writeln("*** DEBUG compose merge.kmt : indexate recursive "+element.~get(p).toString)
 						self.indexate(element.~get(p))
+					end
+				}*/
+				var properties : Collection<Property> init element.getMetaClass.classDefinition.allAttribute.each{p|
+					if not p.isDerived() then
+						if p.upper != 1 then
+							//stdio.writeln("*** DEBUG compose merge.kmt : get "+p.toString)
+							var objects : Collection<Object> objects?=element.~get(p)
+							objects.each{obj|
+							if not obj.isKindOf(kermeta::language::behavior::Expression) then
+								self.indexate(obj)
+							end
+							}
+						else
+							//stdio.writeln("*** DEBUG compose merge.kmt : indexate recursive "+element.~get(p).toString)
+							if not p.isKindOf(kermeta::language::behavior::Expression) then
+								self.indexate(element.~get(p))
+							end
+						end						
 					end
 				}
 			end
-		end		
+		end
+		end
 	end
 	
 	operation addObjectComposedTrace(l : Mergeable, r : Mergeable, composed : Mergeable) is do
@@ -248,20 +322,25 @@ class ModelElementComposer
 	
 	operation compose(m1 : Mergeable, m2 : Mergeable) : Mergeable is do
 		var ctx : MergeContext init MergeContext.new
+		//stdio.writeln("*** DEBUG compose merge.kmt : initialize")
 		ctx.initialize
+		//stdio.writeln("*** DEBUG compose merge.kmt : addAll")
 		ctx.resources.addAll(self.resources)
+		stdio.writeln("*** DEBUG compose merge.kmt : indexate m1")
 		ctx.indexate(m1)
+		stdio.writeln("*** DEBUG compose merge.kmt : indexate m2")
 		ctx.indexate(m2)
-		
+		stdio.writeln("*** DEBUG compose merge.kmt : end indexate")
 		if m1 == void or m2 == void then
 			raise "Model elements are not mergeable"
 		end
-		
-		if m1.getSignature == m2.getSignature then 
+		//stdio.writeln("*** DEBUG compose merge.kmt : trying to compose "+m1.toString+" / "+m2.toString)
+		//stdio.writeln("*** DEBUG compose merge.kmt : signatures "+(m1.getSignature==m2.getSignature).toString)
+		if m1.getSignature == m2.getSignature then
+			stdio.writeln("*** DEBUG compose merge.kmt : merging")
 			result := m1.merge(m2, ctx)
-			
+			stdio.writeln("*** DEBUG compose merge.kmt : fixReferences")
 			result := fixReferences(result, ctx)
-			
 			
 		else
 			stdio.writeln("Models not mergeable")
@@ -310,19 +389,47 @@ class ModelElementComposer
 				mcls.allAttribute.select{ k | not k.isDerived }.each{ p | 
 					if p.upper == 1 then 
 						me ?= e.get(p)
-						//stdio.write("property " + p.name)
+						//stdio.writeln("property " + p.name)
 						if me != void then
 							//stdio.writeln(" recurse")
-							if ctx.objectIndex.contains(me.toString()) or ctx.isProcessed(me) or ctx.isComposedObject(me) then
-								result.~set(p, fixReferences(me, ctx)) 
+							//if ctx.isProcessed(me).orElse{e|ctx.isComposedObject(me)}.orElse{e|ctx.objectIndex.containsKey(me.oid())} then
+							if ctx.isProcessed(me) or ctx.isComposedObject(me) or ctx.objectIndex.containsKey(me.oid()) then
+								result.~set(p, fixReferences(me, ctx))
 							else
-								stdio.writeln(" directly on: "+me.toString+" propety:"+p.name)
-								result.~set(p, e.get(p)) 
+								if e.get(p).isInstanceOf(kermeta::language::structure::EnumerationLiteral) then
+									//stdio.writeln("I am an EnumLiteral: " + self.get(p).toString)
+									var v : kermeta::language::structure::EnumerationLiteral
+									v ?= e.get(p)
+									if(v != void) then
+										if p.type == v.~enumeration then
+											//stdio.writeln("*** DEBUG : Appel EXTERN")
+											extern fr::irisa::triskell::kermeta::runtime::language::Object.~set(self, p, e.get(p))
+										end
+									end
+								else
+									result.~set(p, e.get(p))
+								end
+								/*stdio.writeln(" directly on: "+me.toString+" propety:"+p.name)
+								result.~set(p, e.get(p)) */
 							end
 						else
-							result.~set(p, e.get(p)) 
+							/*stdio.writeln("e.get(p) = "+e.get(p).toString)
+							result.~set(p, e.get(p))
+							stdio.writeln("p.upper==1 = "+result.toString + "." + p.name + " = " + result.get(p).toString)*/
+							if e.get(p).isInstanceOf(kermeta::language::structure::EnumerationLiteral) then
+								//stdio.writeln("I am an EnumLiteral: " + self.get(p).toString)
+								var v : kermeta::language::structure::EnumerationLiteral
+								v ?= e.get(p)
+								if(v != void) then
+									if p.type == v.~enumeration then
+										//stdio.writeln("*** DEBUG : Appel EXTERN")
+										extern fr::irisa::triskell::kermeta::runtime::language::Object.~set(self, p, e.get(p))
+									end
+								end
+							else
+								result.~set(p, e.get(p))
+							end
 						end
-						//stdio.writeln(result.toString + "." + p.name + " = " + result.get(p).toString)
 					else
 						objs ?= e.get(p)
 						objres := Hashtable<Object, Object>.new
@@ -336,7 +443,7 @@ class ModelElementComposer
 						objres.keys.each{ k | 
 							objs.remove(k)
 							objs.add(objres.getValue(k))
-							//stdio.writeln(result.toString + "." + p.name + " + " + objres.getValue(k).toString)
+							//stdio.writeln("OBJRES = "+result.toString + "." + p.name + " + " + objres.getValue(k).toString)
 						}
 						
 						objs ?= result.get(p)
