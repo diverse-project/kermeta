@@ -1,6 +1,6 @@
 
 
-/*$Id: Pass1.java,v 1.7 2008-07-23 07:28:04 ftanguy Exp $
+/*$Id: Pass1.java,v 1.8 2008-12-22 09:35:21 cfaucher Exp $
 * Project : org.kermeta.merger
 * File : 	Pass1.java
 * License : EPL
@@ -68,6 +68,7 @@ public class Pass1 extends MergePass {
 				newTag.setName( tag.getName() );
 				newTag.setValue( tag.getValue() );
 				kermetaUnit.getModelingUnit().getOwnedTags().add( newTag );
+				kermetaUnit.getModelingUnit().getTag().add( newTag );
 			}			
 			
 			for ( Package p : unit.getInternalPackages() ) {			

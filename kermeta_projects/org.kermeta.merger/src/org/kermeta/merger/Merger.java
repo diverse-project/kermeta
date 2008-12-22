@@ -1,6 +1,6 @@
 
 
-/*$Id: Merger.java,v 1.7 2008-07-08 13:18:34 ftanguy Exp $
+/*$Id: Merger.java,v 1.8 2008-12-22 09:36:34 cfaucher Exp $
 * Project : org.kermeta.merger
 * File : 	Merger.java
 * License : EPL
@@ -143,6 +143,7 @@ public class Merger {
 		kermetaUnit = IOPlugin.getDefault().basicGetKermetaUnit(outputFile);
 		Tag t = KermetaModelHelper.Tag.create(KermetaModelHelper.Tag.KERMETA_EXECUTABLE, "true");
 		kermetaUnit.getModelingUnit().getOwnedTags().add(t);
+		kermetaUnit.getModelingUnit().getTag().add(t);
 		
 		MergeContext context = null;
 		if ( trace ) {
