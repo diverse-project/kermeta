@@ -1,4 +1,4 @@
-/* $Id: AddAnnotations.java,v 1.4 2008-07-17 12:46:04 ftanguy Exp $
+/* $Id: AddAnnotations.java,v 1.5 2008-12-22 09:30:07 cfaucher Exp $
  * Project : Kermeta (First iteration)
  * File : KMT2KMPrettyPrinter.java
  * License : EPL
@@ -83,7 +83,8 @@ public class AddAnnotations extends KermetaASTNodeVisitor implements ILoadingAct
 		for ( fr.irisa.triskell.kermeta.language.structure.Tag tag : currentTags ) {
 			if ( isEntrypoint(tag) ) {
 				// entryPoint tag should go to the modeling unit
-				kermetaUnit.getModelingUnit().getOwnedTags().add( tag );
+				kermetaUnit.getModelingUnit().getOwnedTags().add( tag ); // tag is owned by this object
+				kermetaUnit.getModelingUnit().getTag().add( tag ); // this object is tagged
 				fr.irisa.triskell.kermeta.language.structure.Tag mainClassTag = ModelingUnitHelper.getMainClass(kermetaUnit);
 				if ( mainClassTag != null ) {
 					TypeDefinition mainClass = kermetaUnit.getTypeDefinitionByName( mainClassTag.getValue(), null );
@@ -106,7 +107,7 @@ public class AddAnnotations extends KermetaASTNodeVisitor implements ILoadingAct
 						object.getOwnedTags().add( tag ); // tag is owned by this object
 						object.getTag().add( tag ); // this object is tagged
 				}
-			} else{
+			} else {
 				object.getOwnedTags().add( tag ); // tag is owned by this object
 				object.getTag().add( tag ); // this object is tagged
 			}

@@ -1,6 +1,6 @@
 
 
-/*$Id: BehaviorClonerWithTraces.java,v 1.3 2008-07-08 13:18:34 ftanguy Exp $
+/*$Id: BehaviorClonerWithTraces.java,v 1.4 2008-12-22 09:33:55 cfaucher Exp $
 * Project : org.kermeta.merger
 * File : 	BehaviorClonerWithTraces.java
 * License : EPL
@@ -236,7 +236,11 @@ public class BehaviorClonerWithTraces extends AbstractBehaviorCloner {
 	private void cloneTags(Object sourceObject, Object targetObject) {
 		for ( Tag sourceTag : sourceObject.getOwnedTags() ) {
 			Tag targetTag = KermetaModelHelper.Tag.create(sourceTag.getName(), sourceTag.getValue());
+			
+			// Set the object as container of the Tag
 			targetObject.getOwnedTags().add(targetTag);
+			// This object is tagged by targetTag
+			targetObject.getTag().add(targetTag);
 		}
 	}
 
