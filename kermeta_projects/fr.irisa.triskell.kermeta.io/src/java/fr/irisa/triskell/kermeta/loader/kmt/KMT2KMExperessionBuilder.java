@@ -1,4 +1,4 @@
-/* $Id: KMT2KMExperessionBuilder.java,v 1.17 2008-08-18 07:33:37 cfaucher Exp $
+/* $Id: KMT2KMExperessionBuilder.java,v 1.18 2008-12-22 09:47:09 cfaucher Exp $
  * Created on 5 f�vr. 2005
  * By Franck FLEUREY (ffleurey@irisa.fr)
  */
@@ -63,8 +63,12 @@ public class KMT2KMExperessionBuilder extends KMT2KMPass {
 		}
 		
 		fr.irisa.triskell.kermeta.language.structure.Tag t = KermetaModelHelper.Tag.create(qualifiedName, value);
-		if ( result != null )
+		if ( result != null ) {
+			// Set result as the container of the Tag
 			result.getOwnedTags().add(t);
+			// Set t as a Tag on result
+			result.getTag().add(t);
+		}
 		return false;
 	}
 	
