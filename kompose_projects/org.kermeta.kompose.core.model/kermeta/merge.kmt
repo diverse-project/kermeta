@@ -29,7 +29,6 @@ aspect abstract class Mergeable
 	operation merge(other : Mergeable, ctx : MergeContext) : Mergeable 
 	pre same_type is self.getMetaClass == other.getMetaClass
 	is do
-
 		var type : Class init self.getMetaClass 
 		result ?= type.new
 		ctx.addObjectComposedTrace(self, other, result)
@@ -37,11 +36,7 @@ aspect abstract class Mergeable
 		//stdio.writeln("-> MERGE " + self.toString + " AND " + other.toString + " -- " + result.toString)
 		
 		var props : Collection<Property> init self.getMetaClass.classDefinition.allAttribute.select{p | not p.isDerived}
-		
-		props.each{ p | 
-			
-			
-			
+		props.each{ p |
 			if Mergeable.isSuperTypeOf(p.type)  then 
 			
 			//stdio.writeln("Process Property " + p.name + ":" +  p.type.toString + " is subtype of mergeable")
@@ -116,7 +111,6 @@ aspect abstract class Mergeable
 			else
 				
 				if p.upper == 1 then
-				
 					//stdio.writeln(p.type.toString + " is NOT a subtype of mergeable" )
 					if self.get(p) == void then
 						result.~set(p, other.get(p))
@@ -345,7 +339,6 @@ class ModelElementComposer
 		else
 			stdio.writeln("Models not mergeable")
 		end
-		
 	end
 	
 	
@@ -413,9 +406,6 @@ class ModelElementComposer
 								result.~set(p, e.get(p)) */
 							end
 						else
-							/*stdio.writeln("e.get(p) = "+e.get(p).toString)
-							result.~set(p, e.get(p))
-							stdio.writeln("p.upper==1 = "+result.toString + "." + p.name + " = " + result.get(p).toString)*/
 							if e.get(p).isInstanceOf(kermeta::language::structure::EnumerationLiteral) then
 								//stdio.writeln("I am an EnumLiteral: " + self.get(p).toString)
 								var v : kermeta::language::structure::EnumerationLiteral
@@ -433,14 +423,14 @@ class ModelElementComposer
 					else
 						objs ?= e.get(p)
 						objres := Hashtable<Object, Object>.new
-						objs.each{ o | 
+						objs.each{ o |
 							me ?= o
 							if me != void then
 								objres.put(me, fixReferences(me, ctx))
 							end
 						}
 						objs ?= result.get(p)
-						objres.keys.each{ k | 
+						objres.keys.each{ k |
 							objs.remove(k)
 							objs.add(objres.getValue(k))
 							//stdio.writeln("OBJRES = "+result.toString + "." + p.name + " + " + objres.getValue(k).toString)
