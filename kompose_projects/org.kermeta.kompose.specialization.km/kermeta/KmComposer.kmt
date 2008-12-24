@@ -9,9 +9,8 @@
 package kermeta::language::structure;
 
 require kermeta
-require "http://www.eclipse.org/emf/2002/Ecore"
-require "platform:/plugin/org.kermeta.kompose.core.model/kermeta/kompose.kmt"
-//require "platform:/resource/org.kermeta.kompose.core.model/kermeta/kompose.kmt"
+//require "platform:/plugin/org.kermeta.kompose.core.model/kermeta/kompose.kmt"
+require "platform:/resource/org.kermeta.kompose.core.model/kermeta/kompose.kmt"
 using kermeta::standard
 using kermeta::utils
 using kermeta::persistence
@@ -31,34 +30,38 @@ class KMComposer inherits kompose::Composer
    		
    		result.classes.put("Object", Object)
    			/*result.classes.put("Type",Type)
-   				result.classes.put("VoidType",VoidType)
-   				result.classes.put("ProductType",ProductType)
+   				*/result.classes.put("VoidType",VoidType)
+   				/*result.classes.put("ProductType",ProductType)
    				result.classes.put("FunctionType",FunctionType)*/
    				result.classes.put("ParameterizedType",ParameterizedType)
    				/*	result.classes.put("ModelType",ModelType)
    					result.classes.put("Class",Class)
    				result.classes.put("TypeVariable",TypeVariable)*/
    				result.classes.put("DataType",DataType)
-   					/*result.classes.put("Enumeration",Enumeration)*/
+   					result.classes.put("Enumeration",Enumeration)
    			result.classes.put("NamedElement",NamedElement)
    			result.classes.put("ModelingUnit",ModelingUnit)
    				/*result.classes.put("TypeDefinitionContainer",TypeDefinitionContainer)
-   					result.classes.put("ModelTypeDefinition",ModelTypeDefinition)
-   				result.classes.put("EnumerationLiteral",EnumerationLiteral)*/
+   					result.classes.put("ModelTypeDefinition",ModelTypeDefinition)*/
+   				result.classes.put("EnumerationLiteral",EnumerationLiteral)
    				result.classes.put("Package",Package)
    				/*result.classes.put("TypeDefinition",TypeDefinition)
    					result.classes.put("GenericTypeDefinition",GenericTypeDefinition)
    				result.classes.put("TypedElement",TypedElement)
    					result.classes.put("MultiplicityElement",MultiplicityElement)
    						result.classes.put("Property",Property)
-   						result.classes.put("Parameter",Parameter)
+   						result.classes.put("Parameter",Parameter)*/
    						result.classes.put("Operation",Operation)
-   			result.classes.put("TypeContainer",TypeContainer)*/
+   			/*result.classes.put("TypeContainer",TypeContainer)*/
    				result.classes.put("ClassDefinition",ClassDefinition)
    				/*result.classes.put("PrimitiveType",PrimitiveType)*/
-   			//result.classes.put("TypeVariableBinding",TypeVariableBinding)
-   			//result.classes.put("Tag",Tag)
+   			result.classes.put("TypeVariableBinding",TypeVariableBinding)
+   			result.classes.put("Tag",Tag)
    			//result.classes.put("VirtualType",VirtualType)
+   			result.classes.put("ValueType",ValueType)
+   			
+   			result.classes.put("Using",Using)
+   			result.classes.put("Require",Require)
    		
 		/*result.classes.put("Class", EClass)
 		result.classes.put("Attribute", EAttribute)
@@ -72,9 +75,6 @@ class KMComposer inherits kompose::Composer
 
 // 2) Definition of specific signature classes
 
-/*
- * this lines of code are specific to the Ecore metamodel. Other specializations may mimic this code
- */
 class PackageSignature inherits kompose::Signature
 {
 	reference pack : Package 
@@ -84,13 +84,7 @@ class PackageSignature inherits kompose::Signature
 		othersign ?= other
 		if othersign != void then
 			//stdio.write("**** DEBUG Equals Package "+self.pack.name+" / "+othersign.pack.name)
-			result := self.pack.name == othersign.pack.name 
-			
-			/*self.op.eParameters.each{ p1 | 
-				if result then
-					result := othersign.op.eParameters.select{ p2 | p1.getSignature.equals((p2.getSignature)) }.size == 1
-				end
-			}*/
+			result := self.pack.qualifiedName == othersign.pack.qualifiedName 
 		else
 			result := false
 		end
@@ -169,7 +163,25 @@ class ClassDefinitionSignature inherits kompose::Signature
 		othersign ?= other
 		if othersign != void then
 			//stdio.write("**** DEBUG Equals CD "+self.cd.toString+" / "+othersign.cd.toString)
-			result := othersign.cd.name.equals(self.cd.name)
+			/*result := true
+			othersign.cd.superType.each{t1|
+				//if result then
+					var ty1 : ParameterizedType
+					ty1 ?= t1
+					self.cd.superType.exists{t2|
+						var ty2 : ParameterizedType
+						ty2 ?= t2
+						stdio.writeln("ty1 "+ty1.toString)
+						stdio.writeln("ty2 "+ty2.toString)
+						stdio.writeln("name : "+ty1.typeDefinition.qualifiedName().equals(ty2.typeDefinition.qualifiedName()).toString)
+						result := ty1.typeDefinition.qualifiedName().equals(ty2.typeDefinition.qualifiedName())
+					}
+				end
+			}
+			stdio.writeln(self.cd.toString+" / "+othersign.cd.toString+"superType: "+self.cd.superType.equals(othersign.cd.superType).toString)
+			*/
+			//result := othersign.cd.superType.equals(self.cd.superType)
+			result := othersign.cd.qualifiedName().equals(self.cd.qualifiedName())
 		else
 			result := false
 		end
@@ -179,7 +191,7 @@ class ClassDefinitionSignature inherits kompose::Signature
 	
 }
 
-/*class TypeVariableBindingSignature inherits kompose::Signature
+class TypeVariableBindingSignature inherits kompose::Signature
 {
 	reference tvb : TypeVariableBinding 
 	
@@ -187,17 +199,36 @@ class ClassDefinitionSignature inherits kompose::Signature
 		var othersign : TypeVariableBindingSignature
 		othersign ?= other
 		if othersign != void then
-			stdio.write("**** DEBUG Equals TVB "+self.tvb.toString+" / "+othersign.tvb.toString)
-			result := othersign.tvb.type.equals(self.tvb.type)// and othersign.tvb.variable.getSignature == self.tvb.variable.getSignature
+			//stdio.write("**** DEBUG Equals TVB "+self.tvb.type.toString+" / "+othersign.tvb.type.toString)
+			if self.tvb.type.isKindOf(ObjectTypeVariable) and othersign.tvb.type.isKindOf(ObjectTypeVariable) then
+				var selfType : ObjectTypeVariable
+				selfType ?= self.tvb.type
+				var otherType : ObjectTypeVariable
+				otherType ?= othersign.tvb.type
+				result := selfType.qualifiedName().equals(otherType.qualifiedName())// and othersign.tvb.variable.getSignature == self.tvb.variable.getSignature
+			else
+				if self.tvb.type.isInstanceOf(ParameterizedType) and othersign.tvb.type.isInstanceOf(ParameterizedType) then
+					var selfType : ParameterizedType
+					selfType ?= self.tvb.type
+					var otherType : ParameterizedType
+					otherType ?= othersign.tvb.type
+					result := selfType.getSignature == otherType.getSignature
+				else
+					
+					//stdio.writeln(self.tvb.type.toString)
+					result := self.tvb.type.getMetaClass().name.equals(othersign.tvb.type.getMetaClass().name)
+				end
+			end
 			//result := true
+			//result := othersign.tvb.type
 		else
 			result := false
 		end
-		stdio.write(" : "+result.toString+"\n")
-		stdio.writeln("**** DEBUG End Equals TVB ")
+		//stdio.write(" : "+result.toString+"\n")
+		//stdio.writeln("**** DEBUG End Equals TVB ")
 	end
 	
-}*/
+}
 
 /*class VirtualTypeSignature inherits kompose::Signature
 {
@@ -284,41 +315,30 @@ class GenericTypeDefinitionSignature inherits kompose::Signature
 		var othersign : PropertySignature
 		othersign ?= other
 		if othersign != void then
+			result := self.~property.qualifiedName().equals(othersign.~property.qualifiedName())
 			stdio.writeln("**** DEBUG Equals Property "+self.~property.toString+" / "+othersign.~property.toString+" : "+result.toString)
-			//result := self.mu.packages == othersign.mu.name 
-			/*if self.~property.isComposite() then
-				result := othersign.~property.getSignature.equals((self.~property.getSignature))
-			else*/
-			//	result := othersign.~property.name.equals(self.~property.name)
-			//end
-			/*self.~property.packages.each{ p1 | 
-				//if result then
-					result := othersign.~property.packages.select{ p2 | p1.getSignature.equals((p2.getSignature)) }.size == 1
-				//end
-			}*/
-		/*else
+		else
 			result := false
 		end
 		stdio.writeln("**** DEBUG End Equals Property ")
 	end
 	
 }*/
-/*
+
 class OperationSignature inherits kompose::Signature
 {
-	reference op : EOperation 
+	reference op : Operation 
 	
 	method equals(other : Object ) : Boolean is do
 		var othersign : OperationSignature
 		othersign ?= other
 		if othersign != void then
-			result := self.op.name == othersign.op.name 
-			
-			self.op.eParameters.each{ p1 | 
+			result := self.op.qualifiedName == othersign.op.qualifiedName 
+			/*self.op.eParameters.each{ p1 | 
 				if result then
 					result := othersign.op.eParameters.select{ p2 | p1.getSignature.equals((p2.getSignature)) }.size == 1
 				end
-			}
+			}*/
 		else
 			result := false
 		end
@@ -326,6 +346,107 @@ class OperationSignature inherits kompose::Signature
 	
 }
 
+class VoidTypeSignature inherits kompose::Signature
+{
+	reference vt : VoidType 
+	
+	method equals(other : Object ) : Boolean is do
+		var othersign : VoidTypeSignature
+		othersign ?= other
+		if othersign != void then
+			result := true
+		else
+			result := false
+		end
+	end
+	
+}
+
+class UsingSignature inherits kompose::Signature
+{
+	reference ~using : Using
+	
+	method equals(other : Object ) : Boolean is do
+		var othersign : UsingSignature
+		othersign ?= other
+		if othersign != void then
+			result := self.~using.qualifiedName.equals(othersign.~using.qualifiedName)
+		else
+			result := false
+		end
+	end
+	
+}
+
+class TagSignature inherits kompose::Signature
+{
+	reference tagRef : Tag
+	
+	method equals(other : Object ) : Boolean is do
+		var othersign : TagSignature
+		othersign ?= other
+		if not othersign.isVoid then
+			result := self.tagRef.name.equals(othersign.tagRef.name).
+			andThen{e|self.tagRef.~value.equals(othersign.tagRef.~value)}
+			
+			stdio.writeln("result = "+result.toString+" for "+self.tagRef.toString+" and "+othersign.tagRef.toString)
+		else
+			result := false
+		end
+		/*stdio.write("\n"+self.toString)
+		stdio.write(" --> ")
+		stdio.write(other.toString)*/
+	end
+	
+}
+
+class EnumerationSignature inherits kompose::Signature
+{
+	reference enum : Enumeration
+	
+	method equals(other : Object ) : Boolean is do
+		var othersign : EnumerationSignature
+		othersign ?= other
+		if not othersign.isVoid then
+			result := self.enum.name.equals(othersign.enum.name)
+		else
+			result := false
+		end
+	end
+	
+}
+
+class EnumerationLiteralSignature inherits kompose::Signature
+{
+	reference enumLiteral : EnumerationLiteral
+	
+	method equals(other : Object ) : Boolean is do
+		var othersign : EnumerationLiteralSignature
+		othersign ?= other
+		if not othersign.isVoid then
+			result := self.enumLiteral.name.equals(othersign.enumLiteral.name)
+		else
+			result := false
+		end
+	end
+	
+}
+
+class RequireSignature inherits kompose::Signature
+{
+	reference req : Require
+	
+	method equals(other : Object ) : Boolean is do
+		var othersign : RequireSignature
+		othersign ?= other
+		if not othersign.isVoid then
+			result := self.req.uri.equals(othersign.req.uri)
+		else
+			result := false
+		end
+	end	
+}
+/*
 class ParameterSignature inherits kompose::Signature
 {
 	reference param : EParameter 
@@ -348,10 +469,10 @@ class ParameterSignature inherits kompose::Signature
 /*@aspect "true"
 class Object inherits kompose::Mergeable {}
 @aspect "true"
-class Type inherits kompose::Mergeable {}
-/*@aspect "true"
-class VoidType inherits kompose::Mergeable {}
+class Type inherits kompose::Mergeable {}*/
 @aspect "true"
+class VoidType inherits kompose::Mergeable {}
+/*@aspect "true"
 class ProductType inherits kompose::Mergeable {}
 @aspect "true"
 class FunctionType inherits kompose::Mergeable {}*/
@@ -364,9 +485,9 @@ class Class inherits kompose::Mergeable {}
 @aspect "true"
 class TypeVariable inherits kompose::Mergeable {}
 @aspect "true"
-class DataType inherits kompose::Mergeable {}
+class DataType inherits kompose::Mergeable {}*/
 @aspect "true"
-class Enumeration inherits kompose::Mergeable {}*/
+class Enumeration inherits kompose::Mergeable {}
 @aspect "true"
 class NamedElement inherits kompose::Mergeable {}
 @aspect "true"
@@ -374,9 +495,9 @@ class ModelingUnit inherits kompose::Mergeable {}
 /*@aspect "true"
 class TypeDefinitionContainer inherits kompose::Mergeable {}
 @aspect "true"
-class ModelTypeDefinition inherits kompose::Mergeable {}
+class ModelTypeDefinition inherits kompose::Mergeable {}*/
 @aspect "true"
-class EnumerationLiteral inherits kompose::Mergeable {}*/
+class EnumerationLiteral inherits kompose::Mergeable {}
 @aspect "true"
 class Package inherits kompose::Mergeable {}
 /*@aspect "true"
@@ -390,21 +511,24 @@ class MultiplicityElement inherits kompose::Mergeable {}
 @aspect "true"
 class Property inherits kompose::Mergeable {}
 @aspect "true"
-class Parameter inherits kompose::Mergeable {}
+class Parameter inherits kompose::Mergeable {}*/
 @aspect "true"
 class Operation inherits kompose::Mergeable {}
-@aspect "true"
+/*@aspect "true"
 class TypeContainer inherits kompose::Mergeable {}*/
 @aspect "true"
 class ClassDefinition inherits kompose::Mergeable {}
 /*@aspect "true"
-class PrimitiveType inherits kompose::Mergeable {}
+class PrimitiveType inherits kompose::Mergeable {}*/
 @aspect "true"
 class TypeVariableBinding inherits kompose::Mergeable {}
 @aspect "true"
-class Tag inherits kompose::Mergeable {}*/
+class Tag inherits kompose::Mergeable {}
 /*@aspect "true"
 class VirtualType inherits kompose::Mergeable{}*/
+
+aspect class Using inherits kompose::Mergeable {}
+aspect class Require inherits kompose::Mergeable {}
 
 @aspect "true"
 class NamedElement
@@ -476,6 +600,26 @@ class ClassDefinition
 	end
 }
 
+@aspect "true"
+class TypeVariableBinding
+{
+	method getSignature() : kompose::Signature is do
+		var s : TypeVariableBindingSignature init TypeVariableBindingSignature.new
+		s.tvb := self
+		result := s
+	end
+}
+
+@aspect "true"
+class VoidType
+{
+	method getSignature() : kompose::Signature is do
+		var s : VoidTypeSignature init VoidTypeSignature.new
+		s.vt := self
+		result := s
+	end
+}
+
 /*@aspect "true"
 class VirtualType
 {
@@ -504,9 +648,9 @@ class PrimitiveType
 		s.pt := self
 		result := s
 	end
-}*/
+}
 
-/*@aspect "true"
+@aspect "true"
 class Property
 {
 	method getSignature() : kompose::Signature is do
@@ -519,10 +663,10 @@ class Property
 	method getStringID() : String is do
 		result := name
 	end
-}*/
-
-/*@aspect "true"
-class EOperation
+}
+*/
+@aspect "true"
+class Operation
 {
 	method getSignature() : kompose::Signature is do
 		var s : OperationSignature init OperationSignature.new
@@ -531,6 +675,48 @@ class EOperation
 	end
 }
 
+aspect class Using
+{
+	method getSignature() : kompose::Signature is do
+		var s : UsingSignature init UsingSignature.new
+		s.~using := self
+		result := s
+	end
+}
+
+aspect class Tag
+{
+	method getSignature() : kompose::Signature is do
+		var s : TagSignature init TagSignature.new
+		s.tagRef := self
+		result := s
+	end
+}
+
+aspect class Enumeration {
+	method getSignature() : kompose::Signature is do
+		var s : EnumerationSignature init EnumerationSignature.new
+		s.enum := self
+		result := s
+	end
+}
+
+aspect class EnumerationLiteral {
+	method getSignature() : kompose::Signature is do
+		var s : EnumerationLiteralSignature init EnumerationLiteralSignature.new
+		s.enumLiteral := self
+		result := s
+	end
+}
+
+aspect class Require {
+	method getSignature() : kompose::Signature is do
+		var s : RequireSignature init RequireSignature.new
+		s.req := self
+		result := s
+	end
+}
+/*
 @aspect "true"
 class EParameter
 {
