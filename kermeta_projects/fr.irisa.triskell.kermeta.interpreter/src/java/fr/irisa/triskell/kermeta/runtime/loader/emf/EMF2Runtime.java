@@ -1,4 +1,4 @@
-/* $Id: EMF2Runtime.java,v 1.86 2008-08-29 14:43:22 dvojtise Exp $
+/* $Id: EMF2Runtime.java,v 1.87 2008-12-31 08:56:58 dvojtise Exp $
  * Project   : Kermeta (First iteration)
  * File      : EMF2Runtime.java
  * License   : EPL
@@ -1041,10 +1041,10 @@ public class EMF2Runtime {
 	    else
 	    {   
 	    	Type ftype = this.getTypeFromEClassifier(metaclass);
-	    	if ((this.ignoreAllLoadErrors ||this.ignoreLoadErrorUnknownMetaclass) && ftype == null){
+	    	if ( ftype == null){
     			// we had to ignore this kind of object return null
     			result = null; // unit.getRuntimeMemory().getRuntimeObjectForFObject(ftype);
-    			throw new UnknownMetaclassException("Cannot retreive RuntimeObject for metaclass "+metaclass_name, metaclass_name);
+    			throw new UnknownMetaclassException("Cannot retrieve RuntimeObject for metaclass "+metaclass_name, metaclass_name);
     		}
     		else{
     			// normal case
