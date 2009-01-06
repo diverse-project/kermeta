@@ -1,6 +1,6 @@
 
 
-/*$Id: MergeAction.java,v 1.8 2008-09-02 21:57:37 cfaucher Exp $
+/*$Id: MergeAction.java,v 1.9 2009-01-06 10:00:55 cfaucher Exp $
 * Project : org.kermeta.compiler.ui
 * File : 	MergeAction.java
 * License : EPL
@@ -11,8 +11,6 @@
 */
 
 package org.kermeta.compiler.ui.popup.actions;
-
-import java.util.ArrayList;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IWorkspaceRunnable;
@@ -28,13 +26,9 @@ import org.kermeta.compiler.KermetaCompiler;
 import org.kermeta.io.KermetaUnit;
 import org.kermeta.io.loader.plugin.LoaderPlugin;
 
-import fr.irisa.triskell.eclipse.resources.ResourceHelper;
-
 public class MergeAction implements IObjectActionDelegate {
 
 	private IFile file;
-	
-	private ArrayList<KermetaUnit> excludedKmUnit = new ArrayList<KermetaUnit>();
 	
 	public MergeAction() {
 	}
