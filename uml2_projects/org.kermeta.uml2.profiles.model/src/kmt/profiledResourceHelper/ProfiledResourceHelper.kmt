@@ -1,4 +1,4 @@
-/* $Id: ProfiledResourceHelper.kmt,v 1.9 2008-10-24 12:16:01 gperroui Exp $
+/* $Id: ProfiledResourceHelper.kmt,v 1.10 2009-01-06 13:15:08 dvojtise Exp $
  * Creation date: June 19, 2007
  * License: EPL
  * Copyright: IRISA/INRIA
@@ -69,25 +69,12 @@ class ProfilesHelper {
 		var stereotypes : Set <Object> init Set <Object>.new
 	 
 		stereotypeInstances.each { instance |
-			var prop : kermeta::language::structure::Property
-			var metaclassName : String init object.getMetaClass.name
-			
-			prop := getProperty( "base_" + metaclassName, instance )
-			
-			if not prop.isVoid then
-			 	var base_Object : Object
-				base_Object := instance.get( prop )
-				if ( base_Object.isVoid() ) then
-					if getBase(instance).isVoid	then
-				 		var e : InvalidUMLStereotype init InvalidUMLStereotype.new
-				 		e.message := "Stereotype \"" + instance.getMetaClass().name + "\" base_"+metaclassName+" is Void"
-				 		raise e
-				 	end
-				 	// else this stereotype applies to some other uml::Element
-			 	end 			 
-				if ( (base_Object != void) and (base_Object.equals(object) ) ) then
-					stereotypes.add( instance )
-				end
+						
+			var base_Object : Object init getBase(instance)
+			if ( (base_Object != void) and (base_Object.equals(object) ) ) then
+				stereotypes.add( instance )
+		 	//else
+		 	//	stdio.writeln("Stereotype doesn't apply to " + object.toString + " but to " + getBase(instance).toString)
 			end
 		}
 		
