@@ -12,7 +12,7 @@
  *
  * </copyright>
  *
- * $Id: Generator.java,v 1.6 2008-09-04 13:34:23 cfaucher Exp $
+ * $Id: Generator.java,v 1.7 2009-01-06 10:02:24 cfaucher Exp $
  */
 package org.kermeta.compiler;
 
@@ -43,11 +43,13 @@ import org.eclipse.emf.codegen.util.CodeGenUtil;
 import org.eclipse.emf.common.util.BasicMonitor;
 import org.eclipse.emf.common.util.Monitor;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.equinox.app.IApplication;
 import org.eclipse.equinox.app.IApplicationContext;
 import org.xml.sax.Attributes;
@@ -122,13 +124,16 @@ public class Generator extends org.eclipse.emf.codegen.ecore.Generator
                   resourceSet.getURIConverter().getURIMap().putAll(EcorePlugin.computePlatformURIMap()); 
                   URI ecoreURI = URI.createFileURI(ecorePath.toString());
                   Resource resource = resourceSet.getResource(ecoreURI, true);
+                  
+                  EcoreUtil.resolveAll(resource);
+                  
                   // Kermeta compiler customization
                   List<EPackage> availablePackageList = new ArrayList<EPackage>();
-                  for(org.eclipse.emf.ecore.EObject eObj : resource.getContents()) {
+                  /*for(org.eclipse.emf.ecore.EObject eObj : resource.getContents()) {
                   	if(eObj instanceof EPackage) {
                   		availablePackageList.add((EPackage) eObj);
                   	}
-                  }
+                  }*/
                   //EPackage ePackage = (EPackage)resource.getContents().get(0);
   
                   IPath genModelPath = ecorePath.removeFileExtension().addFileExtension("genmodel");
@@ -142,7 +147,17 @@ public class Generator extends org.eclipse.emf.codegen.ecore.Generator
                   genModelResource.getContents().add(genModel);
                   resourceSet.getResources().add(genModelResource);
                   genModel.setModelDirectory("/TargetProject/src");
-                  genModel.getForeignModel().add(ecorePath.toString());
+                  // Kermeta compiler customization
+                  //genModel.getForeignModel().add(ecorePath.toString());
+                  for(Resource res_ : resourceSet.getResources()) {
+                	  genModel.getForeignModel().add(res_.getURI().toFileString());
+                	  
+                	  for(EObject eobj_tmp : res_.getContents()) {
+                		  if(eobj_tmp instanceof EPackage) {
+                        		availablePackageList.add((EPackage) eobj_tmp);
+                        	}
+                	  }
+                  }
                   // Kermeta compiler customization
                   genModel.initialize(availablePackageList/*Collections.singleton(ePackage)*/);
                   GenPackage genPackage = genModel.getGenPackages().get(0);
