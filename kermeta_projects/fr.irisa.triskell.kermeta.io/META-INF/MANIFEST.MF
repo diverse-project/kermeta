@@ -3,8 +3,7 @@ Bundle-ManifestVersion: 2
 Bundle-Name: Kermeta IO Plugin
 Bundle-SymbolicName: fr.irisa.triskell.kermeta.io;singleton:=true
 Bundle-Version: 1.2.0.qualifier
-Bundle-ClassPath: .,
- lib/thirdparty/antlr.jar
+Bundle-ClassPath: .
 Bundle-Localization: plugin
 Require-Bundle: org.eclipse.emf.ecore.xmi;visibility:=reexport,
  org.eclipse.emf.ecore;visibility:=reexport,
@@ -16,20 +15,11 @@ Require-Bundle: org.eclipse.emf.ecore.xmi;visibility:=reexport,
  fr.irisa.triskell.eclipse.util,
  fr.irisa.triskell.traceability.model,
  org.eclipse.gymnast.runtime.core;visibility:=reexport,
- org.eclipse.emf.ecoretools.registration
+ org.eclipse.emf.ecoretools.registration,
+ org.antlr.antlr2
 Bundle-ActivationPolicy: lazy
 Bundle-Activator: org.kermeta.io.plugin.IOPlugin
-Export-Package: antlr,
- antlr.actions,
- antlr.actions.cpp,
- antlr.actions.csharp,
- antlr.actions.java,
- antlr.build,
- antlr.collections,
- antlr.collections.impl,
- antlr.debug,
- antlr.debug.misc,
- antlr.preprocessor,
+Export-Package: 
  fr.irisa.triskell.kermeta.ast.helper,
  fr.irisa.triskell.kermeta.constraintchecker,
  fr.irisa.triskell.kermeta.directedgraph,
