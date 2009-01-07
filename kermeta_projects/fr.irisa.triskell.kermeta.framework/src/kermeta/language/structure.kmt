@@ -1,4 +1,4 @@
-/* $Id: structure.kmt,v 1.75 2008-11-27 15:08:38 cfaucher Exp $
+/* $Id: structure.kmt,v 1.76 2009-01-07 15:16:24 mclavreu Exp $
  * Project : framework
  * File : structure.kmt
  * License : EPL
@@ -207,9 +207,15 @@ aspect class Object
 			@compiledJavaExtern "org.kermeta.compil.runtime.helper.language.ObjectUtil.set(this, property, element)"
 			extern fr::irisa::triskell::kermeta::runtime::language::Object.~set(self, ~property, element)
 		else
-			var e : kermeta::exceptions::IncompatibleTypeError init kermeta::exceptions::IncompatibleTypeError.new
-			e.message := "IncompatibleTypeError : Cannot set property " + ~property.name + " of object " + self.toString + " to " + element.toString + "."
-			raise e
+			var v : kermeta::language::structure::EnumerationLiteral
+			v ?= element
+			if (v != void).andThen{ e | ~property.type == v.~enumeration } then
+				extern fr::irisa::triskell::kermeta::runtime::language::Object.~set(self, ~property,v)
+			else
+				var e : kermeta::exceptions::IncompatibleTypeError init kermeta::exceptions::IncompatibleTypeError.new
+				e.message := "IncompatibleTypeError : Cannot set property " + ~property.name + " of object " + self.toString + " to " + element.toString + "."
+				raise e
+			end
 		end
 	end
 	
