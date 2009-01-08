@@ -1,4 +1,4 @@
-/* $Id: GenerateOCL.java,v 1.14 2008-04-30 14:38:01 ftanguy Exp $
+/* $Id: GenerateOCL.java,v 1.15 2009-01-08 19:11:34 gperroui Exp $
  * Project    : fr.irisa.triskell.kermeta.ocl
  * File       : GenerateOCL.java
  * License    : EPL
@@ -23,7 +23,8 @@ import org.kermeta.interpreter.api.InterpreterOptions;
 import org.kermeta.interpreter.helper.RunnerHelper;
 import org.kermeta.io.KermetaUnit;
 
-import fr.irisa.triskell.eclipse.console.EclipseConsole;
+import fr.irisa.triskell.eclipse.console.IOConsole;
+import fr.irisa.triskell.eclipse.console.LocalIOConsole;
 import fr.irisa.triskell.eclipse.console.messages.InfoMessage;
 import fr.irisa.triskell.kermeta.exceptions.NotRegisteredURIException;
 import fr.irisa.triskell.kermeta.exceptions.URIMalformedException;
@@ -45,7 +46,7 @@ public class GenerateOCL {
 	 * @param outKmtPath
 	 */
 	public static void run(String inCstXmiPath, String modelEcorePath, String outKmtPath) {
-		run(inCstXmiPath, modelEcorePath, outKmtPath);
+		run(inCstXmiPath, modelEcorePath, outKmtPath, new LocalIOConsole());	
 	}
 	
 	/**
@@ -55,7 +56,7 @@ public class GenerateOCL {
 	 * @param outKmtPath
 	 * @param console
 	 */
-	public static void run(String inCstXmiPath, String modelEcorePath, String outKmtPath, EclipseConsole console ) {
+	public static void run(String inCstXmiPath, String modelEcorePath, String outKmtPath, IOConsole console ) {
 		console.println(new InfoMessage("running OCL2KMT Transformation \n from " + inCstXmiPath + "\n to " + outKmtPath + "\n against: " + modelEcorePath));
 		if ( getInterpreter() != null ) {
 			getInterpreter().setStreams(console);
