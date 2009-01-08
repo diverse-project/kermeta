@@ -71,8 +71,8 @@ public class StringUtil {
 	}
 	
 	/** Java version */
-	public static kermeta.standard.OrderedSet<java.lang.String> split(java.lang.String self, java.lang.String param0) {
-		kermeta.standard.OrderedSet<java.lang.String> result = StandardFactory.eINSTANCE.createOrderedSet();
+	public static kermeta.standard.Sequence<java.lang.String> split(java.lang.String self, java.lang.String param0) {
+		kermeta.standard.Sequence<java.lang.String> result = StandardFactory.eINSTANCE.createSequence();
 		
 		for(java.lang.String string_item : self.split(param0)) {
 			result.add(string_item);

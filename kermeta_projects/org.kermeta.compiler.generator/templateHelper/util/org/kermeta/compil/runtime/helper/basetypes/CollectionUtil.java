@@ -10,37 +10,36 @@ import org.eclipse.emf.common.util.EList;
 public class CollectionUtil<G> {
 
 	static public <G> void add(Collection<G> c, Object o) {
-		try {
-			// The addUnique method is called instead of add to fix
-			// the problem of uniqueness, the uniqueness constraint is
-			// checked before this calling in function of the type given
-			// of the Collection: bag, seq, set, oset
+		// The addUnique method is called instead of add to fix
+		// the problem of uniqueness, the uniqueness constraint is
+		// checked before this calling in function of the type given
+		// of the Collection: bag, seq, set, oset
+		if( c.getValues() != null ) {
 			((BasicEList<G>) c.getValues()).addUnique((G) o);
-		} catch (NullPointerException e) {
+		} else {
 			c.setValues( new BasicEList<G>() );
-			c.getValues().add((G) o);
+			((BasicEList<G>) c.getValues()).addUnique((G) o);
 		}
 	}
 	
 	static public <G> void remove(Collection<G> c, Object o) {
-		try {
+		if( c.getValues() != null ) {
 			c.getValues().remove(o);
-		} catch (NullPointerException e) {
 		}
 	}
 	
 	static public <G> void clear(Collection<G> c) {
-		try {
+		if( c.getValues() != null ) {
 			c.getValues().clear();
-		} catch (NullPointerException e) {
+		} else {
 			c.setValues( new BasicEList<G>() );
 		}
 	}
 	
 	static public <G> int size(Collection<G> c) {
-		try {
+		if( c.getValues() != null ) {
 			return c.getValues().size();
-		} catch (NullPointerException e) {
+		} else {
 			return 0;
 		}
 	}

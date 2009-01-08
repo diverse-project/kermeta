@@ -8,7 +8,7 @@
  * Technologies), Jacques Lescot (Anyware Technologies) - initial API and
  * implementation
  ******************************************************************************/
-/*$Id: GenerateHelperAction.java,v 1.11 2008-11-13 10:01:49 dvojtise Exp $
+/*$Id: GenerateHelperAction.java,v 1.12 2009-01-08 17:28:26 cfaucher Exp $
 * Project : org.kermeta.compiler.generator
 * File : 	GenerateHelperAction.java
 * License : EPL

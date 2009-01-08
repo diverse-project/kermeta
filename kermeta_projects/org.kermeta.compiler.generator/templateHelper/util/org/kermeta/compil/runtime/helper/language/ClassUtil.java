@@ -9,8 +9,13 @@ import kermeta.language.structure.Object;
 import org.eclipse.emf.codegen.util.CodeGenUtil;
 import org.eclipse.emf.ecore.EFactory;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 
 public class ClassUtil {
+	
+	public static Object newObject( org.eclipse.emf.ecore.EClass eClass ) {
+		return (kermeta.language.structure.Object) EcoreUtil.create(eClass);
+	}
 
 	static public Object newObject( String class_QN ) {
 		
