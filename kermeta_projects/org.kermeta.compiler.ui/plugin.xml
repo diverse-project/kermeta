@@ -39,9 +39,9 @@
                label="Compile Kmt to EMF plugin (experimental)"
                menubarPath="org.eclipse.ui.articles.action.contribution.navigator.subMenu/kermetagroup1"/>
       </objectContribution>
-      <!-- objectContribution
-            id="org.kermeta.compiler.compilekmcontribution"
-            nameFilter="*.km"
+      <objectContribution
+            id="org.kermeta.compiler.compilekmt2ecorecontribution"
+            nameFilter="*.kmt"
             objectClass="org.eclipse.core.resources.IFile">
          <menu
                id="org.eclipse.ui.articles.action.contribution.navigator.subMenu"
@@ -50,14 +50,13 @@
             <separator name="kermetagroup1"/>
          </menu>
          <action
-               class="org.kermeta.compiler.ui.popup.actions.CompileKermetaAction"
+               class="org.kermeta.compiler.ui.popup.actions.CompileKermeta2EcoreAction"
                enablesFor="1"
                icon="icons/etools_persp.gif"
-               id="fr.irisa.triskell.kermeta.compiler.CompileKmtAction"
-               label="Compile Km to EMF plugin (experimental)"
-               menubarPath="org.eclipse.ui.articles.action.contribution.navigator.subMenu/kermetagroup1">
-         </action>
-      </objectContribution -->
+               id="fr.irisa.triskell.kermeta.compiler.CompileKermeta2EcoreAction"
+               label="Compile Kmt to Ecore (experimental)"
+               menubarPath="org.eclipse.ui.articles.action.contribution.navigator.subMenu/kermetagroup1"/>
+      </objectContribution>
       <objectContribution
             id="org.kermeta.compiler.merge"
             nameFilter="*.kmt"
@@ -80,43 +79,6 @@
             </objectClass>
          </enablement>
       </objectContribution>
-      <!-- objectContribution
-            id="org.kermeta.compiler.ui.generateKm"
-            objectClass="org.eclipse.core.resources.IFolder">
-         <action
-               class="org.kermeta.compiler.ui.popup.actions.GenerateKmAction"
-               id="org.kermeta.compiler.ui.action.generateKm"
-               label="Generate Km for all files"
-               menubarPath="org.eclipse.ui.articles.action.contribution.navigator.subMenu/kermetagroup1">
-         </action>
-      </objectContribution -->
-      <!--objectContribution
-            id="org.kermeta.compiler.compilekmtwithparamcontribution"
-            nameFilter="*.kmt"
-            objectClass="org.eclipse.core.resources.IFile">
-         <menu
-               id="org.eclipse.ui.articles.action.contribution.navigator.subMenu"
-               label="Kermeta"
-               path="additions">
-            <separator name="kermetagroup1"/>
-         </menu>
-         <action
-               class="org.kermeta.compiler.popup.actions.CompileKermetaActionWithParam"
-               enablesFor="1"
-               icon="icons/emfCode.png"
-               id="fr.irisa.triskell.kermeta.compiler.CompileKmtActionWithParam"
-               label="Compile Kmt to EMF plugin with params (experimental) ..."
-               menubarPath="org.eclipse.ui.articles.action.contribution.navigator.subMenu/kermetagroup1"/>
-      </objectContribution-->
    </extension>
-   <!--<extension
-         point="org.eclipse.emf.codegen.ecore.generatorAdapters">
-      <adapter
-            class="test.GenClassGeneratorAdapter"
-            modelClass="EClass"
-            modelPackage="http://www.eclipse.org/emf/2002/Ecore">
-      </adapter>
-   </extension>-->
-
-
+   
 </plugin>
