@@ -1,4 +1,4 @@
-/* $Id: GenerateKMT.java,v 1.12 2008-07-25 14:25:10 dvojtise Exp $
+/* $Id: GenerateKMT.java,v 1.13 2009-01-09 13:40:48 gperroui Exp $
  * Project: OCL
  * File: GenerateKMT.java
  * License: EPL
@@ -37,7 +37,7 @@ public class GenerateKMT {
 	private static String workbench_path = "platform:/plugin/";
 	private static String project_path = workbench_path + "fr.irisa.triskell.kermeta.ocl/kermeta/transformations-dev/";
 	private static String ecore_ecore =  project_path + "Ecore.ecore";
-	private static String oclcst_ecore =  project_path + "OCLCST.ecore";
+	private static String oclcst_ecore =  "platform:/plugin/org.kermeta.eclipse.ocl.parser/model/OCLCST.ecore";
 	
 	//private IOConsole defaultConsole = new LocalIOConsole();
 	

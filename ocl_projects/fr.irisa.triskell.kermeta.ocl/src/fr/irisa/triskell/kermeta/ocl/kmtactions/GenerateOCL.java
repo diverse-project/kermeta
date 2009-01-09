@@ -1,4 +1,4 @@
-/* $Id: GenerateOCL.java,v 1.15 2009-01-08 19:11:34 gperroui Exp $
+/* $Id: GenerateOCL.java,v 1.16 2009-01-09 13:40:48 gperroui Exp $
  * Project    : fr.irisa.triskell.kermeta.ocl
  * File       : GenerateOCL.java
  * License    : EPL
@@ -61,7 +61,7 @@ public class GenerateOCL {
 		if ( getInterpreter() != null ) {
 			getInterpreter().setStreams(console);
 			// This is the operation to call
-			getInterpreter().setEntryPoint("OCLKMTPrinter::OCLKMTPrinter", "generateOCL");
+			getInterpreter().setEntryPoint("oclKMTPrinter::OCLKMTPrinter", "generateOCL");
 			// These are the parameters
 			String[] params = new String[] { inCstXmiPath, modelEcorePath, outKmtPath };
 			getInterpreter().setParameters(params);
