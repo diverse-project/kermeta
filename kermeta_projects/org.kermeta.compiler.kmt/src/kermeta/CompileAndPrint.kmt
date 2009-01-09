@@ -1,4 +1,4 @@
-/* $Id: CompileAndPrint.kmt,v 1.2 2008-12-03 16:52:52 cfaucher Exp $
+/* $Id: CompileAndPrint.kmt,v 1.3 2009-01-09 10:56:13 cfaucher Exp $
  * Creation date: January 24, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -20,8 +20,8 @@ using km2ecore
 
 class Printer inherits Main {
 
-    method main_mode(input : String, traceInput : String, output : String, mode : CompilingMode) : Void is do		
-		super(input, traceInput, output, mode)
+    method main_mode(input : String, traceInput : String, output : String, mode : CompilingMode, splitEcore : Boolean) : Void is do		
+		super(input, traceInput, output, mode, false)
 		
 		// Print in the console the Java
 		stdio.writeln("\n - Start Java printing -")

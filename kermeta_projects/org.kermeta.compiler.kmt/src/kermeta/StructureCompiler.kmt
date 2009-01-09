@@ -1,4 +1,4 @@
-/* $Id: StructureCompiler.kmt,v 1.75 2008-12-03 16:52:52 cfaucher Exp $
+/* $Id: StructureCompiler.kmt,v 1.76 2009-01-09 10:56:13 cfaucher Exp $
  * Creation date: January 21, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -40,6 +40,7 @@ class Main {
     	
 		//modelInput := "platform:/resource/org.kermeta.compiler.kmt/models/framework.km"
 		modelInput := "platform:/resource/org.kermeta.compiler.kmt/models/StructureCompiler.km"
+		modelInput := "platform:/resource/org.kermeta.compiler.kmt/src/kermeta/StructureCompiler.km"
 		//modelInput := "platform:/resource/org.kermeta.compiler.kmt/models/ExpressionEvaluation.km"
 		//modelInput := "platform:/resource/org.kermeta.compiler.kmt/models/compilertest.km"
 		//modelInput := "platform:/resource/org.kermeta.compiler.kmt/models/testAddSet.km"
@@ -57,22 +58,22 @@ class Main {
 
 		output := modelInput.replaceExtension("ecore")
 		
-		main_mode(modelInput, traceInput, output, CompilingMode.behaviorJava)
+		main_mode(modelInput, traceInput, output, CompilingMode.behaviorJava, true)
 	end
 	
     operation main(modelInput : String) : Void is do
-    	main_mode(modelInput, "", modelInput.replaceExtension("ecore"), CompilingMode.behaviorJava)
+    	main_mode(modelInput, "", modelInput.replaceExtension("ecore"), CompilingMode.behaviorJava, false)
     end
     
     operation main_km2ecore_onlyEcore(modelInput : String) : Void is do
-    	main_mode(modelInput, "", modelInput.replaceExtension("ecore"), CompilingMode.onlyEcore)
+    	main_mode(modelInput, "", modelInput.replaceExtension("ecore"), CompilingMode.onlyEcore, false)
     end
     
     operation main_km2ecore_behaviorJava(modelInput : String) : Void is do
-    	main_mode(modelInput, "", modelInput.replaceExtension("ecore"), CompilingMode.behaviorJava)
+    	main_mode(modelInput, "", modelInput.replaceExtension("ecore"), CompilingMode.behaviorJava, false)
     end
     	
-	operation main_mode(modelInput : String, traceInput : String, output : String, mode : CompilingMode) : Void is do
+	operation main_mode(modelInput : String, traceInput : String, output : String, mode : CompilingMode, splitEcore : Boolean) : Void is do
 
 		stdio.writeln("KermetaCompiler - Starting up of the Ecore generation for the model: " + modelInput)
 
@@ -105,21 +106,42 @@ class Main {
 		stdio.writeln("KermetaCompiler - Pass 2 is finished")
 		
 		// Save the generated ecore
-		context.ecoreOutputs.add(output)
-   		var ecore_resource : Resource init context.outputRepository.createResource(output, "http://www.eclipse.org/emf/2002/Ecore")
-		ecore_resource.instances.add(context.mu.ecoreModelElement)
+		//////////////context.ecoreOutputs.add(output)
+   		//var ecore_resource : Resource init context.outputRepository.createResource(output, "http://www.eclipse.org/emf/2002/Ecore")
+		//ecore_resource.instances.add(context.mu.ecoreModelElement)
 		//stdio.writeln("context.mu.ecoreModelElement: " + context.mu.ecoreModelElement.toString)
 		
-		context.mu.entryPoints.each{ e |
-			ecore_resource.instances.add(e)
-		}
-		context.mu.ecorePackages.each{ p |
-			//stdio.writeln("I have found a package: " + p.toString)
+		/*context.mu.entryPoints.each{ e |
+			//ecore_resource.instances.add(e)
+		}*/
+		
+		//var resourceBag : Bag<Resource> init Bag<Resource>.new()
+				
+		//context.mu.ecorePackages.each{ p |
+			/*var output_final : String init output
+			
+			if resourceBag.size>0 then
+				output_final := output + "__" + p.name + ".ecore"
+			end
+			
+			var ecore_resource : Resource init context.outputRepository.createResource(output_final, "http://www.eclipse.org/emf/2002/Ecore")
 			ecore_resource.instances.add(p)
-		}
+			resourceBag.add(ecore_resource)*/
+			
+			//ecore_resource.instances.add(p)
+		//}
+		
+		//resourceBag.each{ res_ | res_.save() }
 		
 		stdio.writeln("Save the Ecore Model")
-		ecore_resource.save()
+		//ecore_resource.save()
+		
+		if splitEcore then
+			saveSplitEcore(output)
+		else
+			saveSingleEcore(output)
+		end
+		
 		stdio.writeln("The Ecore Model has been saved")
 		
 		// Save the context to reuse it during the EMF Java generation
@@ -133,6 +155,34 @@ class Main {
 		
     end
     
+    operation saveSingleEcore(output : String) is do
+    	var ecore_resource : Resource init context.outputRepository.createResource(output, "http://www.eclipse.org/emf/2002/Ecore")
+		ecore_resource.instances.add(context.mu.ecoreModelElement)
+		
+    	context.mu.ecorePackages.each{ p |
+			ecore_resource.instances.add(p)
+		}
+		
+		ecore_resource.save()
+    end
+    
+    operation saveSplitEcore(output : String) is do
+    	var resourceBag : Bag<Resource> init Bag<Resource>.new()
+				
+		context.mu.ecorePackages.each{ p |
+			var output_final : String init output
+			
+			if resourceBag.size>0 then
+				output_final := output + "__" + p.name + ".ecore"
+			end
+			
+			var ecore_resource : Resource init context.outputRepository.createResource(output_final, "http://www.eclipse.org/emf/2002/Ecore")
+			ecore_resource.instances.add(p)
+			resourceBag.add(ecore_resource)
+		}
+		
+		resourceBag.each{ res_ | res_.save() }
+    end
     
     
     /*****************************************/
