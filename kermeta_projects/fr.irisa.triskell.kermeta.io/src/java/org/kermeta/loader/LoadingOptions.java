@@ -1,6 +1,6 @@
 
 
-/*$Id: LoadingOptions.java,v 1.3 2008-04-28 11:50:17 ftanguy Exp $
+/*$Id: LoadingOptions.java,v 1.4 2009-01-09 08:56:56 cfaucher Exp $
 * Project : fr.irisa.triskell.kermeta.io
 * File : 	LoadingOptions.java
 * License : EPL
@@ -34,7 +34,8 @@ public class LoadingOptions {
 	/*
 	 * 
 	 * Constants for Km loading.
-	 * 
+	 * true: if the given km must require the framework, thus the framework.km will be auto-added
+	 * false: if the given km file already contains the framework, thus the framework.km will be not added
 	 */
 	static final public String INCLUDE_FRAMEWORK = "_INCLUDE_FRAMEWORK_";
 	
