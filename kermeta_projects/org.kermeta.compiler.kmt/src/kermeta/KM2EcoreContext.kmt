@@ -1,4 +1,4 @@
-/* $Id: KM2EcoreContext.kmt,v 1.50 2008-12-03 16:52:52 cfaucher Exp $
+/* $Id: KM2EcoreContext.kmt,v 1.51 2009-01-09 10:55:30 cfaucher Exp $
  * Creation date: February 14, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -39,7 +39,7 @@ class KM2EcoreContext {
 	attribute traceabilityInput : String [1..1]
 	
 	/** The output Ecore models (as output of the transformation) */
-	attribute ecoreOutputs : String [1..*]
+	/////////////attribute ecoreOutputs : String [1..*]
 	
 	/** The simk model (as output of the transformation) */
 	attribute simkOutput : String [1..1]
