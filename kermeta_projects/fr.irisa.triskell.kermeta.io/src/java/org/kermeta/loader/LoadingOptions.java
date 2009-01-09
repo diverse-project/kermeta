@@ -1,6 +1,6 @@
 
 
-/*$Id: LoadingOptions.java,v 1.4 2009-01-09 08:56:56 cfaucher Exp $
+/*$Id: LoadingOptions.java,v 1.5 2009-01-09 09:43:12 cfaucher Exp $
 * Project : fr.irisa.triskell.kermeta.io
 * File : 	LoadingOptions.java
 * License : EPL
@@ -19,6 +19,7 @@ public class LoadingOptions {
 	/*
 	 * 
 	 * Constants for KMT loading.
+	 * This constant indicates that the given kmt comes from the content in memory of the textual editor and not from a file
 	 * 
 	 */
 	static final public String CONTENT = "content";
@@ -34,8 +35,7 @@ public class LoadingOptions {
 	/*
 	 * 
 	 * Constants for Km loading.
-	 * true: if the given km must require the framework, thus the framework.km will be auto-added
-	 * false: if the given km file already contains the framework, thus the framework.km will be not added
+	 * This constant indicates that the given km requires the loading of the framework.km
 	 */
 	static final public String INCLUDE_FRAMEWORK = "_INCLUDE_FRAMEWORK_";
 	
