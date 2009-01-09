@@ -1,6 +1,6 @@
 //@mainClass "kermeta::utils::PrettyPrinter"
 //@mainmethod "visit"
-/* $Id: kmtPrettyPrinter.kmt,v 1.1 2008-12-09 16:51:34 dvojtise Exp $
+/* $Id: kmtPrettyPrinter.kmt,v 1.2 2009-01-09 13:39:24 dvojtise Exp $
  * Project : Kermeta samples
  * File : printer.kmt
  * License : EPL
@@ -44,12 +44,13 @@ class BasicPrettyPrinter inherits
  	attribute typedef : Boolean
  	attribute current_pname : String
  	
- 	operation initialize() is do
+ 	operation initialize() : BasicPrettyPrinter is do
  		pp := PrintHelper.new
  		pp.initialize(self)
  		indent := ""
  		typedef := false
  		current_pname := ""
+ 		result := self
  	end
  	 
     /** visit a class and transcript it in the Kermeta Text format */
