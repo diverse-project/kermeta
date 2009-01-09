@@ -1,4 +1,4 @@
-/* $Id: StructureCompiler.kmt,v 1.76 2009-01-09 10:56:13 cfaucher Exp $
+/* $Id: StructureCompiler.kmt,v 1.77 2009-01-09 13:28:00 cfaucher Exp $
  * Creation date: January 21, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -40,7 +40,7 @@ class Main {
     	
 		//modelInput := "platform:/resource/org.kermeta.compiler.kmt/models/framework.km"
 		modelInput := "platform:/resource/org.kermeta.compiler.kmt/models/StructureCompiler.km"
-		modelInput := "platform:/resource/org.kermeta.compiler.kmt/src/kermeta/StructureCompiler.km"
+		//modelInput := "platform:/resource/org.kermeta.compiler.kmt/src/kermeta/StructureCompiler.km"
 		//modelInput := "platform:/resource/org.kermeta.compiler.kmt/models/ExpressionEvaluation.km"
 		//modelInput := "platform:/resource/org.kermeta.compiler.kmt/models/compilertest.km"
 		//modelInput := "platform:/resource/org.kermeta.compiler.kmt/models/testAddSet.km"
@@ -58,7 +58,7 @@ class Main {
 
 		output := modelInput.replaceExtension("ecore")
 		
-		main_mode(modelInput, traceInput, output, CompilingMode.behaviorJava, true)
+		main_mode(modelInput, traceInput, output, CompilingMode.behaviorJava, false)
 	end
 	
     operation main(modelInput : String) : Void is do
