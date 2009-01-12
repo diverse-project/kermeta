@@ -1,4 +1,4 @@
-/* $Id: UnitExporterWizard.java,v 1.37 2008-12-09 10:04:54 dvojtise Exp $
+/* $Id: UnitExporterWizard.java,v 1.38 2009-01-12 09:37:44 moha Exp $
  * Project    : fr.irisa.triskell.kermeta
  * File       : KmtPrinter.java
  * License    : EPL
@@ -41,6 +41,8 @@ import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkbenchWizard;
 import org.kermeta.io.KermetaUnit;
 import org.kermeta.io.loader.plugin.LoaderPlugin;
+import org.kermeta.merger.Merger;
+
 import fr.irisa.triskell.eclipse.console.messages.ErrorMessage;
 import fr.irisa.triskell.eclipse.console.messages.ThrowableMessage;
 import fr.irisa.triskell.eclipse.console.messages.WarningMessage;
@@ -48,11 +50,11 @@ import fr.irisa.triskell.eclipse.resources.ResourceHelper;
 import fr.irisa.triskell.kermeta.constraintchecker.KermetaConstraintChecker;
 import fr.irisa.triskell.kermeta.exceptions.URIMalformedException;
 import fr.irisa.triskell.kermeta.exporter.km.KmExporter;
+import fr.irisa.triskell.kermeta.loader.ecore.Ecore2KM;
 import fr.irisa.triskell.kermeta.modelhelper.KermetaUnitHelper;
 import fr.irisa.triskell.kermeta.plugin.KermetaPlugin;
 import fr.irisa.triskell.kermeta.typechecker.KermetaTypeChecker;
 import fr.irisa.triskell.traceability.helper.Tracer;
-import org.kermeta.merger.Merger;
 
 /**
  * Pretty print of kmt files from a KermetaUnit. It may be subclassed in order
@@ -325,6 +327,14 @@ public class UnitExporterWizard extends Wizard {
 	 */
 	public KermetaUnit createUnit() {
 
+		// by default exporter enable the quick fix
+		Ecore2KM.isQuickFixEnabled = true;
+        Ecore2KM.isMethodPropertyNameOverlapSafe = true;
+        Ecore2KM.isMethodNameOverlapSafe = true;
+        Ecore2KM.methodRenamePrefix = "op_";
+        Ecore2KM.methodRenamePostfix = "";
+        
+        
 		String inputFile_uri = "platform:/resource" + inputFile.getFullPath().toString();
 			
 			//"platform:/resource"
