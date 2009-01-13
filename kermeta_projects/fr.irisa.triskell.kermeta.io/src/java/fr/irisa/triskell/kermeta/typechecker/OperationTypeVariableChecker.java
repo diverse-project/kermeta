@@ -1,4 +1,4 @@
-/* $Id: OperationTypeVariableChecker.java,v 1.2 2008-12-11 19:49:21 dvojtise Exp $
+/* $Id: OperationTypeVariableChecker.java,v 1.3 2009-01-13 17:27:43 dvojtise Exp $
  * Project : Kermeta io
  * File : OperationTypeVariableChecker.java
  * License : EPL
@@ -12,6 +12,7 @@ package fr.irisa.triskell.kermeta.typechecker;
 
 
 import org.kermeta.io.KermetaUnit;
+import org.kermeta.io.plugin.IOPlugin;
 
 import fr.irisa.triskell.kermeta.language.behavior.TypeReference;
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
@@ -19,6 +20,7 @@ import fr.irisa.triskell.kermeta.language.structure.DataType;
 import fr.irisa.triskell.kermeta.language.structure.ObjectTypeVariable;
 import fr.irisa.triskell.kermeta.language.structure.Parameter;
 import fr.irisa.triskell.kermeta.language.structure.ParameterizedType;
+import fr.irisa.triskell.kermeta.language.structure.PrimitiveType;
 import fr.irisa.triskell.kermeta.language.structure.TypeVariable;
 import fr.irisa.triskell.kermeta.language.structure.FunctionType;
 import fr.irisa.triskell.kermeta.language.structure.Operation;
@@ -53,11 +55,18 @@ public class OperationTypeVariableChecker extends KermetaOptimizedVisitor {
 	    	}
 	    	catch(NullPointerException e){
 	    		unit.error("TYPE-CHECKER INTERNAL ERROR : checker cannot check type " +t+" of operation " + op.getName() + " please verify that you have implemented all visit operations", op);
+	    		IOPlugin.internalLog.error("TYPE-CHECKER INTERNAL ERROR : checker cannot check type " +t+" of operation " + op.getName() + " please verify that you have implemented all visit operations", null);
 	    	}
 	    	for(Parameter param : op.getOwnedParameter()){
-	    		if((Boolean) checker.accept(param.getType() )){
-	        		canBeBound = true;
-	        	}	    		
+	    		try{
+	    	    	if((Boolean) checker.accept(param.getType() )){
+		        		canBeBound = true;
+		        	}
+	    		}
+		    	catch(NullPointerException e){
+		    		unit.error("TYPE-CHECKER INTERNAL ERROR : checker cannot check type " +t+" of operation " + op.getName() + " please verify that you have implemented all visit operations", op);
+		    		IOPlugin.internalLog.error("TYPE-CHECKER INTERNAL ERROR : checker cannot check type " +t+" of operation " + op.getName() + " please verify that you have implemented all visit operations", null);
+		    	}
 	    	}
 	    	ClassDefinition cd = (ClassDefinition)op.eContainer();
 	    	for(TypeVariable classTV :cd.getTypeParameter()){
@@ -97,6 +106,12 @@ public class OperationTypeVariableChecker extends KermetaOptimizedVisitor {
 		return result;
 	}
 	public Object visitType(DataType arg0){
+		Boolean result = new Boolean(false);
+		if(checkedTypeVariable == arg0) result = new Boolean(true);
+		return result;
+	}
+	
+	public Object visitPrimitiveType(PrimitiveType arg0){
 		Boolean result = new Boolean(false);
 		if(checkedTypeVariable == arg0) result = new Boolean(true);
 		return result;
