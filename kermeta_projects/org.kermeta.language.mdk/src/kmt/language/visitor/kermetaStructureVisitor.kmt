@@ -1,4 +1,4 @@
-/* $Id: kermetaStructureVisitor.kmt,v 1.1 2008-12-09 14:27:30 dvojtise Exp $
+/* $Id: kermetaStructureVisitor.kmt,v 1.2 2009-01-13 13:11:35 dvojtise Exp $
  * License : EPL
  * Copyright : IRISA / INRIA / Universite de Rennes 1
  * ----------------------------------------------------------------------------
@@ -14,8 +14,8 @@ require kermeta
 
 using kermeta::standard
 
-aspect class Object inherits KMStructureVisitable {
-}
+/*aspect class Object inherits KMStructureVisitable {
+}*/
 
 aspect abstract class ParameterizedType inherits KMStructureVisitable
 {
@@ -90,7 +90,7 @@ aspect class Tag inherits KMStructureVisitable
 	/**
 	 * 'accept()' method of the GoF 'Visitor' design pattern
 	 */
-	method acceptKMStructureVisitor<ContextType, ResultType>(visitor : KMStructureVisitor<ContextType, ResultType>, context : ContextType) : ResultType from kermeta::language::structure::KMStructureVisitable is
+	method acceptKMStructureVisitor<ContextType, ResultType>(visitor : visitor::KMStructureVisitor<ContextType, ResultType>, context : ContextType) : ResultType from kermeta::language::structure::visitor::KMStructureVisitable is
 		do
 			result := visitor.visitTag(self, context)
 		end
@@ -179,7 +179,7 @@ aspect class Model inherits KMStructureVisitable {
 	/**
 	 * 'accept()' method of the GoF 'Visitor' design pattern
 	 */
-	method acceptKMStructureVisitor<ContextType, ResultType>(visitor : KMStructureVisitor<ContextType, ResultType>, context : ContextType) : ResultType from kermeta::language::structure::KMStructureVisitable is
+	method acceptKMStructureVisitor<ContextType, ResultType>(visitor : visitor::KMStructureVisitor<ContextType, ResultType>, context : ContextType) : ResultType from kermeta::language::structure::visitor::KMStructureVisitable is
 		do
 			result := visitor.visitModel(self, context)
 		end
@@ -212,7 +212,7 @@ aspect class Type inherits KMStructureVisitable
 	/**
 	 * 'accept()' method of the GoF 'Visitor' design pattern
 	 */
-	method acceptKMStructureVisitor<ContextType, ResultType>(visitor : KMStructureVisitor<ContextType, ResultType>, context : ContextType) : ResultType from kermeta::language::structure::KMStructureVisitable is
+	method acceptKMStructureVisitor<ContextType, ResultType>(visitor : visitor::KMStructureVisitor<ContextType, ResultType>, context : ContextType) : ResultType from kermeta::language::structure::visitor::KMStructureVisitable is
 		do
 			result := visitor.visitType(self, context)
 		end
@@ -223,7 +223,7 @@ aspect class TypeVariableBinding inherits KMStructureVisitable
 	/**
 	 * 'accept()' method of the GoF 'Visitor' design pattern
 	 */
-	method acceptKMStructureVisitor<ContextType, ResultType>(visitor : KMStructureVisitor<ContextType, ResultType>, context : ContextType) : ResultType from kermeta::language::structure::KMStructureVisitable is
+	method acceptKMStructureVisitor<ContextType, ResultType>(visitor : visitor::KMStructureVisitor<ContextType, ResultType>, context : ContextType) : ResultType from kermeta::language::structure::visitor::KMStructureVisitable is
 		do
 			result := visitor.visitTypeVariableBinding(self, context)
 		end
@@ -245,7 +245,7 @@ aspect class NamedElement inherits KMStructureVisitable
 	/**
 	 * 'accept()' method of the GoF 'Visitor' design pattern
 	 */
-	method acceptKMStructureVisitor<ContextType, ResultType>(visitor : KMStructureVisitor<ContextType, ResultType>, context : ContextType) : ResultType from kermeta::language::structure::KMStructureVisitable is
+	method acceptKMStructureVisitor<ContextType, ResultType>(visitor : visitor::KMStructureVisitor<ContextType, ResultType>, context : ContextType) : ResultType from kermeta::language::structure::visitor::KMStructureVisitable is
 		do
 			result := visitor.visitNamedElement(self, context)
 		end
@@ -278,7 +278,7 @@ aspect class ModelingUnit inherits KMStructureVisitable
 	/**
 	 * 'accept()' method of the GoF 'Visitor' design pattern
 	 */
-	method acceptKMStructureVisitor<ContextType, ResultType>(visitor : KMStructureVisitor<ContextType, ResultType>, context : ContextType) : ResultType from kermeta::language::structure::KMStructureVisitable is
+	method acceptKMStructureVisitor<ContextType, ResultType>(visitor : visitor::KMStructureVisitor<ContextType, ResultType>, context : ContextType) : ResultType from kermeta::language::structure::visitor::KMStructureVisitable is
 		do
 			result := visitor.visitModelingUnit(self, context)
 		end
@@ -289,7 +289,7 @@ aspect class Filter inherits KMStructureVisitable
 	/**
 	 * 'accept()' method of the GoF 'Visitor' design pattern
 	 */
-	method acceptKMStructureVisitor<ContextType, ResultType>(visitor : KMStructureVisitor<ContextType, ResultType>, context : ContextType) : ResultType from kermeta::language::structure::KMStructureVisitable is
+	method acceptKMStructureVisitor<ContextType, ResultType>(visitor : visitor::KMStructureVisitor<ContextType, ResultType>, context : ContextType) : ResultType from kermeta::language::structure::visitor::KMStructureVisitable is
 		do
 			result := visitor.visitFilter(self, context)
 		end
@@ -300,7 +300,7 @@ aspect abstract class Require inherits KMStructureVisitable
 	/**
 	 * 'accept()' method of the GoF 'Visitor' design pattern
 	 */
-	method acceptKMStructureVisitor<ContextType, ResultType>(visitor : KMStructureVisitor<ContextType, ResultType>, context : ContextType) : ResultType from kermeta::language::structure::KMStructureVisitable is
+	method acceptKMStructureVisitor<ContextType, ResultType>(visitor : visitor::KMStructureVisitor<ContextType, ResultType>, context : ContextType) : ResultType from kermeta::language::structure::visitor::KMStructureVisitable is
 		do
 			result := visitor.visitRequire(self, context)
 		end
@@ -311,7 +311,7 @@ aspect abstract class Using inherits KMStructureVisitable
 	/**
 	 * 'accept()' method of the GoF 'Visitor' design pattern
 	 */
-	method acceptKMStructureVisitor<ContextType, ResultType>(visitor : KMStructureVisitor<ContextType, ResultType>, context : ContextType) : ResultType from kermeta::language::structure::KMStructureVisitable is
+	method acceptKMStructureVisitor<ContextType, ResultType>(visitor : visitor::KMStructureVisitor<ContextType, ResultType>, context : ContextType) : ResultType from kermeta::language::structure::visitor::KMStructureVisitable is
 		do
 			result := visitor.visitUsing(self, context)
 		end
@@ -383,192 +383,196 @@ aspect class Parameter inherits KMStructureVisitable
 		end
 }
 
-/**
- * Implementation of the Visitor pattern for the model elements contained in structure package
- */
-abstract class KMStructureVisitor<ContextType, ResultType>
-{
-	/** Implementation of the Visitor pattern : 'visit(node)' method */
-	operation visitClass(node : Class, context : ContextType) : ResultType is do 
-		result := void
-	end
-
-	/** Implementation of the Visitor pattern : 'visit(node)' method */
-	operation visitMultiplicityElement(node : MultiplicityElement, context : ContextType) : ResultType is do 
-		result := void
-	end
-
-	/** Implementation of the Visitor pattern : 'visit(node)' method */
-	operation visitOperation(node : Operation, context : ContextType) : ResultType is do 
-		result := void
-	end
-
-	/** Implementation of the Visitor pattern : 'visit(node)' method */
-	operation visitTag(node : Tag, context : ContextType) : ResultType is do 
-		result := void
-	end
-
-	/** Implementation of the Visitor pattern : 'visit(node)' method */
-	operation visitProperty(node : Property, context : ContextType) : ResultType is do 
-		result := void
-	end
-
-	/** Implementation of the Visitor pattern : 'visit(node)' method */
-	operation visitClassDefinition(node : ClassDefinition, context : ContextType) : ResultType is do 
-		result := void
-	end
-
-	/** Implementation of the Visitor pattern : 'visit(node)' method */
-	operation visitTypedElement(node : TypedElement, context : ContextType) : ResultType is do 
-		result := void
-	end
-
-	/** Implementation of the Visitor pattern : 'visit(node)' method */
-	operation visitObjectTypeVariable(node : ObjectTypeVariable, context : ContextType) : ResultType is do 
-		result := void
-	end
-
-	/** Implementation of the Visitor pattern : 'visit(node)' method */
-	operation visitVirtualType(node : VirtualType, context : ContextType) : ResultType is do 
-		result := void
-	end
-
-	/** Implementation of the Visitor pattern : 'visit(node)' method */
-	operation visitModelTypeVariable(node : ModelTypeVariable, context : ContextType) : ResultType is do 
-		result := void
-	end
-
-	/** Implementation of the Visitor pattern : 'visit(node)' method */
-	operation visitModel(node : Model, context : ContextType) : ResultType is do 
-		result := void
-	end
-
-	/** Implementation of the Visitor pattern : 'visit(node)' method */
-	operation visitProductType(node : ProductType, context : ContextType) : ResultType is do 
-		result := void
-	end
-
-	/** Implementation of the Visitor pattern : 'visit(node)' method */
-	operation visitFunctionType(node : FunctionType, context : ContextType) : ResultType is do 
-		result := void
-	end
-
-	/** Implementation of the Visitor pattern : 'visit(node)' method */
-	operation visitType(node : Type, context : ContextType) : ResultType is do 
-		result := void
-	end
-
-	/** Implementation of the Visitor pattern : 'visit(node)' method */
-	operation visitTypeVariableBinding(node : TypeVariableBinding, context : ContextType) : ResultType is do 
-		result := void
-	end
-
-	/** Implementation of the Visitor pattern : 'visit(node)' method */
-	operation visitPrimitiveType(node : PrimitiveType, context : ContextType) : ResultType is do 
-		result := void
-	end
-
-	/** Implementation of the Visitor pattern : 'visit(node)' method */
-	operation visitNamedElement(node : NamedElement, context : ContextType) : ResultType is do 
-		result := void
-	end
-
-	/*operation visitSelfType(node : SelfType, context : ContextType) : ResultType is do 
-		result := void
-	end*/
-
-	/** Implementation of the Visitor pattern : 'visit(node)' method */
-	operation visitPackage(node : Package, context : ContextType) : ResultType is do 
-		result := void
-	end
-
-	/** Implementation of the Visitor pattern : 'visit(node)' method */
-	operation visitTypeDefinition(node : TypeDefinition, context : ContextType) : ResultType is do 
-		result := void
-	end
-
-	/** Implementation of the Visitor pattern : 'visit(node)' method */
-	operation visitVoidType(node : VoidType, context : ContextType) : ResultType is do 
-		result := void
-	end
-	
-	/** Implementation of the Visitor pattern : 'visit(node)' method */
-	operation visitDataType(node : DataType, context : ContextType) : ResultType is do 
-		result := void
-	end
-	
-	/** Implementation of the Visitor pattern : 'visit(node)' method */
-	operation visitEnumeration(node : Enumeration, context : ContextType) : ResultType is do 
-		result := void
-	end
-
-	/** Implementation of the Visitor pattern : 'visit(node)' method */
-	operation visitEnumerationLiteral(node : EnumerationLiteral, context : ContextType) : ResultType is do 
-		result := void
-	end
-
-	/** Implementation of the Visitor pattern : 'visit(node)' method */
-	operation visitParameter(node : Parameter, context : ContextType) : ResultType is do 
-		result := void
-	end
-
-	/** Implementation of the Visitor pattern : 'visit(node)' method */
-	operation visitGenericTypeDefinition(node : GenericTypeDefinition, context : ContextType) : ResultType is do 
-		result := void
-	end
-
-	/** Implementation of the Visitor pattern : 'visit(node)' method */
-	operation visitParameterizedType(node : ParameterizedType, context : ContextType) : ResultType is do 
-		result := void
-	end
-
-	/** Implementation of the Visitor pattern : 'visit(node)' method */
-	operation visitModelType(node : ModelType, context : ContextType) : ResultType is do 
-		result := void
-	end
-
-	/** Implementation of the Visitor pattern : 'visit(node)' method */
-	operation visitTypeDefinitionContainer(node : TypeDefinitionContainer, context : ContextType) : ResultType is do 
-		result := void
-	end
-
-	/** Implementation of the Visitor pattern : 'visit(node)' method */
-	operation visitConstraint(node : Constraint, context : ContextType) : ResultType is do 
-		result := void
-	end
-
-	/** Implementation of the Visitor pattern : 'visit(node)' method */
-	operation visitModelingUnit(node : ModelingUnit, context : ContextType) : ResultType is do 
-		result := void
-	end
-
-	/** Implementation of the Visitor pattern : 'visit(node)' method */
-	operation visitRequire(node : Require, context : ContextType) : ResultType is do 
-		result := void
-	end
-
-	/** Implementation of the Visitor pattern : 'visit(node)' method */
-	operation visitUsing(node : Using, context : ContextType) : ResultType is do 
-		result := void
-	end
-
-	/** Implementation of the Visitor pattern : 'visit(node)' method */
-	operation visitFilter(node : Filter, context : ContextType) : ResultType is do 
-		result := void
-	end
-
-}
-
-
-/**
- * All the classes defined in this <code>kermeta::language::structure</code> package 
- * inherit this class. Part of Visitor pattern implementation.
- */
-abstract class KMStructureVisitable
-{
+package visitor {
 	/**
-	 * 'accept()' method of the GoF 'Visitor' design pattern
+	 * Implementation of the Visitor pattern for the model elements contained in structure package
 	 */
-	operation acceptKMStructureVisitor<ContextType, ResultType>(visitor : KMStructureVisitor<ContextType, ResultType>, context : ContextType) : ResultType is abstract
-}
-}
+	abstract class KMStructureVisitor<ContextType, ResultType>
+	{
+		/** Implementation of the Visitor pattern : 'visit(node)' method */
+		operation visitClass(node : Class, context : ContextType) : ResultType is do 
+			result := void
+		end
+	
+		/** Implementation of the Visitor pattern : 'visit(node)' method */
+		operation visitMultiplicityElement(node : MultiplicityElement, context : ContextType) : ResultType is do 
+			result := void
+		end
+	
+		/** Implementation of the Visitor pattern : 'visit(node)' method */
+		operation visitOperation(node : Operation, context : ContextType) : ResultType is do 
+			result := void
+		end
+	
+		/** Implementation of the Visitor pattern : 'visit(node)' method */
+		operation visitTag(node : Tag, context : ContextType) : ResultType is do 
+			result := void
+		end
+	
+		/** Implementation of the Visitor pattern : 'visit(node)' method */
+		operation visitProperty(node : Property, context : ContextType) : ResultType is do 
+			result := void
+		end
+	
+		/** Implementation of the Visitor pattern : 'visit(node)' method */
+		operation visitClassDefinition(node : ClassDefinition, context : ContextType) : ResultType is do 
+			result := void
+		end
+	
+		/** Implementation of the Visitor pattern : 'visit(node)' method */
+		operation visitTypedElement(node : TypedElement, context : ContextType) : ResultType is do 
+			result := void
+		end
+	
+		/** Implementation of the Visitor pattern : 'visit(node)' method */
+		operation visitObjectTypeVariable(node : ObjectTypeVariable, context : ContextType) : ResultType is do 
+			result := void
+		end
+	
+		/** Implementation of the Visitor pattern : 'visit(node)' method */
+		operation visitVirtualType(node : VirtualType, context : ContextType) : ResultType is do 
+			result := void
+		end
+	
+		/** Implementation of the Visitor pattern : 'visit(node)' method */
+		operation visitModelTypeVariable(node : ModelTypeVariable, context : ContextType) : ResultType is do 
+			result := void
+		end
+	
+		/** Implementation of the Visitor pattern : 'visit(node)' method */
+		operation visitModel(node : Model, context : ContextType) : ResultType is do 
+			result := void
+		end
+	
+		/** Implementation of the Visitor pattern : 'visit(node)' method */
+		operation visitProductType(node : ProductType, context : ContextType) : ResultType is do 
+			result := void
+		end
+	
+		/** Implementation of the Visitor pattern : 'visit(node)' method */
+		operation visitFunctionType(node : FunctionType, context : ContextType) : ResultType is do 
+			result := void
+		end
+	
+		/** Implementation of the Visitor pattern : 'visit(node)' method */
+		operation visitType(node : Type, context : ContextType) : ResultType is do 
+			result := void
+		end
+	
+		/** Implementation of the Visitor pattern : 'visit(node)' method */
+		operation visitTypeVariableBinding(node : TypeVariableBinding, context : ContextType) : ResultType is do 
+			result := void
+		end
+	
+		/** Implementation of the Visitor pattern : 'visit(node)' method */
+		operation visitPrimitiveType(node : PrimitiveType, context : ContextType) : ResultType is do 
+			result := void
+		end
+	
+		/** Implementation of the Visitor pattern : 'visit(node)' method */
+		operation visitNamedElement(node : NamedElement, context : ContextType) : ResultType is do 
+			result := void
+		end
+	
+		/*operation visitSelfType(node : SelfType, context : ContextType) : ResultType is do 
+			result := void
+		end*/
+	
+		/** Implementation of the Visitor pattern : 'visit(node)' method */
+		operation visitPackage(node : Package, context : ContextType) : ResultType is do 
+			result := void
+		end
+	
+		/** Implementation of the Visitor pattern : 'visit(node)' method */
+		operation visitTypeDefinition(node : TypeDefinition, context : ContextType) : ResultType is do 
+			result := void
+		end
+	
+		/** Implementation of the Visitor pattern : 'visit(node)' method */
+		operation visitVoidType(node : VoidType, context : ContextType) : ResultType is do 
+			result := void
+		end
+		
+		/** Implementation of the Visitor pattern : 'visit(node)' method */
+		operation visitDataType(node : DataType, context : ContextType) : ResultType is do 
+			result := void
+		end
+		
+		/** Implementation of the Visitor pattern : 'visit(node)' method */
+		operation visitEnumeration(node : Enumeration, context : ContextType) : ResultType is do 
+			result := void
+		end
+	
+		/** Implementation of the Visitor pattern : 'visit(node)' method */
+		operation visitEnumerationLiteral(node : EnumerationLiteral, context : ContextType) : ResultType is do 
+			result := void
+		end
+	
+		/** Implementation of the Visitor pattern : 'visit(node)' method */
+		operation visitParameter(node : Parameter, context : ContextType) : ResultType is do 
+			result := void
+		end
+	
+		/** Implementation of the Visitor pattern : 'visit(node)' method */
+		operation visitGenericTypeDefinition(node : GenericTypeDefinition, context : ContextType) : ResultType is do 
+			result := void
+		end
+	
+		/** Implementation of the Visitor pattern : 'visit(node)' method */
+		operation visitParameterizedType(node : ParameterizedType, context : ContextType) : ResultType is do 
+			result := void
+		end
+	
+		/** Implementation of the Visitor pattern : 'visit(node)' method */
+		operation visitModelType(node : ModelType, context : ContextType) : ResultType is do 
+			result := void
+		end
+	
+		/** Implementation of the Visitor pattern : 'visit(node)' method */
+		operation visitTypeDefinitionContainer(node : TypeDefinitionContainer, context : ContextType) : ResultType is do 
+			result := void
+		end
+	
+		/** Implementation of the Visitor pattern : 'visit(node)' method */
+		operation visitConstraint(node : Constraint, context : ContextType) : ResultType is do 
+			result := void
+		end
+	
+		/** Implementation of the Visitor pattern : 'visit(node)' method */
+		operation visitModelingUnit(node : ModelingUnit, context : ContextType) : ResultType is do 
+			result := void
+		end
+	
+		/** Implementation of the Visitor pattern : 'visit(node)' method */
+		operation visitRequire(node : Require, context : ContextType) : ResultType is do 
+			result := void
+		end
+	
+		/** Implementation of the Visitor pattern : 'visit(node)' method */
+		operation visitUsing(node : Using, context : ContextType) : ResultType is do 
+			result := void
+		end
+	
+		/** Implementation of the Visitor pattern : 'visit(node)' method */
+		operation visitFilter(node : Filter, context : ContextType) : ResultType is do 
+			result := void
+		end
+	
+	}
+	
+	
+	/**
+	 * All the classes defined in this <code>kermeta::language::structure</code> package 
+	 * inherit this class. Part of Visitor pattern implementation.
+	 */
+	abstract class KMStructureVisitable
+	{
+		/**
+		 * 'accept()' method of the GoF 'Visitor' design pattern
+		 */
+		operation acceptKMStructureVisitor<ContextType, ResultType>(visitor : KMStructureVisitor<ContextType, ResultType>, context : ContextType) : ResultType is abstract
+	
+	}
+
+} // enf of packahe visitor
+

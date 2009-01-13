@@ -1,4 +1,4 @@
-/* $Id: kermetaBehaviorVisitor.kmt,v 1.1 2008-12-09 14:27:30 dvojtise Exp $
+/* $Id: kermetaBehaviorVisitor.kmt,v 1.2 2009-01-13 13:11:35 dvojtise Exp $
  * Project   : fr.irisa.triskell.kermeta.framework
  * File      : behavior.kmt
  * License   : EPL
@@ -21,7 +21,7 @@ aspect class CallVariable inherits KMExpressionVisitable
 	/**
 	 * Implementation of the visitor design pattern on CallFeature objects
 	 */
-	method acceptKMExpressionVisitor<ContextType, ResultType>(visitor : KMExpressionVisitor<ContextType, ResultType>, context : ContextType) : ResultType from kermeta::language::behavior::KMExpressionVisitable is
+	method acceptKMExpressionVisitor<ContextType, ResultType>(visitor : visitor::KMExpressionVisitor<ContextType, ResultType>, context : ContextType) : ResultType from kermeta::language::behavior::visitor::KMExpressionVisitable is
 		do
 			result := visitor.visitCallVariable(self, context)
 		end
@@ -32,7 +32,7 @@ aspect class CallFeature inherits KMExpressionVisitable
 	/**
 	 * Implementation of the visitor design pattern on CallFeature objects
 	 */
-	method acceptKMExpressionVisitor<ContextType, ResultType>(visitor : KMExpressionVisitor<ContextType, ResultType>, context : ContextType) : ResultType from kermeta::language::behavior::KMExpressionVisitable is
+	method acceptKMExpressionVisitor<ContextType, ResultType>(visitor : visitor::KMExpressionVisitor<ContextType, ResultType>, context : ContextType) : ResultType from kermeta::language::behavior::visitor::KMExpressionVisitable is
 		do
 			result := visitor.visitCallFeature(self, context)
 		end
@@ -43,7 +43,7 @@ aspect class CallSuperOperation inherits KMExpressionVisitable
 	/**
 	 * Implementation of the visitor design pattern on CallFeature objects
 	 */
-	method acceptKMExpressionVisitor<ContextType, ResultType>(visitor : KMExpressionVisitor<ContextType, ResultType>, context : ContextType) : ResultType from kermeta::language::behavior::KMExpressionVisitable is
+	method acceptKMExpressionVisitor<ContextType, ResultType>(visitor : visitor::KMExpressionVisitor<ContextType, ResultType>, context : ContextType) : ResultType from kermeta::language::behavior::visitor::KMExpressionVisitable is
 		do
 			result := visitor.visitCallSuperOperation(self, context)
 		end
@@ -65,7 +65,7 @@ aspect class CallValue inherits KMExpressionVisitable
 	/**
 	 * Implementation of the visitor design pattern on CallFeature objects
 	 */
-	method acceptKMExpressionVisitor<ContextType, ResultType>(visitor : KMExpressionVisitor<ContextType, ResultType>, context : ContextType) : ResultType from kermeta::language::behavior::KMExpressionVisitable is
+	method acceptKMExpressionVisitor<ContextType, ResultType>(visitor : visitor::KMExpressionVisitor<ContextType, ResultType>, context : ContextType) : ResultType from visitor::KMExpressionVisitable is
 		do
 			result := visitor.visitCallValue(self, context)
 		end
@@ -76,7 +76,7 @@ aspect class Assignment inherits KMExpressionVisitable
 	/**
 	 * Implementation of the visitor design pattern on Assignment objects
 	 */
-	method acceptKMExpressionVisitor<ContextType, ResultType>(visitor : KMExpressionVisitor<ContextType, ResultType>, context : ContextType) : ResultType from kermeta::language::behavior::KMExpressionVisitable is
+	method acceptKMExpressionVisitor<ContextType, ResultType>(visitor : visitor::KMExpressionVisitor<ContextType, ResultType>, context : ContextType) : ResultType from kermeta::language::behavior::visitor::KMExpressionVisitable is
 		do
 			result := visitor.visitAssignment(self, context)
 		end
@@ -87,7 +87,7 @@ aspect class Block inherits KMExpressionVisitable
 	/**
 	 * Implementation of the visitor design pattern on Block objects
 	 */	
-	method acceptKMExpressionVisitor<ContextType, ResultType>(visitor : KMExpressionVisitor<ContextType, ResultType>, context : ContextType) : ResultType from kermeta::language::behavior::KMExpressionVisitable is
+	method acceptKMExpressionVisitor<ContextType, ResultType>(visitor : visitor::KMExpressionVisitor<ContextType, ResultType>, context : ContextType) : ResultType from kermeta::language::behavior::visitor::KMExpressionVisitable is
 		do
 			result := visitor.visitBlock(self, context)
 		end
@@ -98,7 +98,7 @@ aspect class Conditional inherits KMExpressionVisitable
 	/**
 	 * Implementation of the visitor design pattern on Conditional objects
 	 */	
-	method acceptKMExpressionVisitor<ContextType, ResultType>(visitor : KMExpressionVisitor<ContextType, ResultType>, context : ContextType) : ResultType from kermeta::language::behavior::KMExpressionVisitable is
+	method acceptKMExpressionVisitor<ContextType, ResultType>(visitor : visitor::KMExpressionVisitor<ContextType, ResultType>, context : ContextType) : ResultType from kermeta::language::behavior::visitor::KMExpressionVisitable is
 		do
 			result := visitor.visitConditional(self, context)
 		end
@@ -109,7 +109,7 @@ aspect class EmptyExpression inherits KMExpressionVisitable
 	/**
 	 * Implementation of the visitor design pattern on EmptyExpression objects
 	 */	
-	method acceptKMExpressionVisitor<ContextType, ResultType>(visitor : KMExpressionVisitor<ContextType, ResultType>, context : ContextType) : ResultType from kermeta::language::behavior::KMExpressionVisitable is
+	method acceptKMExpressionVisitor<ContextType, ResultType>(visitor : visitor::KMExpressionVisitor<ContextType, ResultType>, context : ContextType) : ResultType from kermeta::language::behavior::visitor::KMExpressionVisitable is
 		do
 			result := visitor.visitEmptyExpression(self, context)
 		end
@@ -120,7 +120,7 @@ aspect class IntegerLiteral inherits KMExpressionVisitable
 	/**
 	 * Implementation of the visitor design pattern on IntegerLiteral objects
 	 */	
-	method acceptKMExpressionVisitor<ContextType, ResultType>(visitor : KMExpressionVisitor<ContextType, ResultType>, context : ContextType) : ResultType from kermeta::language::behavior::KMExpressionVisitable is
+	method acceptKMExpressionVisitor<ContextType, ResultType>(visitor : visitor::KMExpressionVisitor<ContextType, ResultType>, context : ContextType) : ResultType from kermeta::language::behavior::visitor::KMExpressionVisitable is
 		do
 			result := visitor.visitIntegerLiteral(self, context)
 		end
@@ -131,7 +131,7 @@ aspect class StringLiteral inherits KMExpressionVisitable
 	/**
 	 * Implementation of the visitor design pattern on StringLiteral objects
 	 */	
-	method acceptKMExpressionVisitor<ContextType, ResultType>(visitor : KMExpressionVisitor<ContextType, ResultType>, context : ContextType) : ResultType from kermeta::language::behavior::KMExpressionVisitable is
+	method acceptKMExpressionVisitor<ContextType, ResultType>(visitor : visitor::KMExpressionVisitor<ContextType, ResultType>, context : ContextType) : ResultType from kermeta::language::behavior::visitor::KMExpressionVisitable is
 		do
 			result := visitor.visitStringLiteral(self, context)
 		end
@@ -142,7 +142,7 @@ aspect class BooleanLiteral inherits KMExpressionVisitable
 	/**
 	 * Implementation of the visitor design pattern on BooleanLiteral objects
 	 */	
-	method acceptKMExpressionVisitor<ContextType, ResultType>(visitor : KMExpressionVisitor<ContextType, ResultType>, context : ContextType) : ResultType from kermeta::language::behavior::KMExpressionVisitable is
+	method acceptKMExpressionVisitor<ContextType, ResultType>(visitor : visitor::KMExpressionVisitor<ContextType, ResultType>, context : ContextType) : ResultType from kermeta::language::behavior::visitor::KMExpressionVisitable is
 		do
 			result := visitor.visitBooleanLiteral(self, context)
 		end
@@ -153,7 +153,7 @@ aspect class TypeLiteral inherits KMExpressionVisitable
 	/**
 	 * Implementation of the visitor design pattern on TypeLiteral objects
 	 */	
-	method acceptKMExpressionVisitor<ContextType, ResultType>(visitor : KMExpressionVisitor<ContextType, ResultType>, context : ContextType) : ResultType from kermeta::language::behavior::KMExpressionVisitable is
+	method acceptKMExpressionVisitor<ContextType, ResultType>(visitor : visitor::KMExpressionVisitor<ContextType, ResultType>, context : ContextType) : ResultType from kermeta::language::behavior::visitor::KMExpressionVisitable is
 		do
 			result := visitor.visitTypeLiteral(self, context)
 		end
@@ -164,7 +164,7 @@ aspect class TypeReference inherits KMExpressionVisitable
 	/**
 	 * Implementation of the visitor design pattern on BooleanLiteral objects
 	 */		
-	method acceptKMExpressionVisitor<ContextType, ResultType>(visitor : KMExpressionVisitor<ContextType, ResultType>, context : ContextType) : ResultType from kermeta::language::behavior::KMExpressionVisitable is
+	method acceptKMExpressionVisitor<ContextType, ResultType>(visitor : visitor::KMExpressionVisitor<ContextType, ResultType>, context : ContextType) : ResultType from kermeta::language::behavior::visitor::KMExpressionVisitable is
 		do
 			result := visitor.visitTypeReference(self, context)
 		end
@@ -175,7 +175,7 @@ aspect class VoidLiteral inherits KMExpressionVisitable
 	/**
 	 * Implementation of the visitor design pattern on VoidLiteral objects
 	 */		
-	method acceptKMExpressionVisitor<ContextType, ResultType>(visitor : KMExpressionVisitor<ContextType, ResultType>, context : ContextType) : ResultType from kermeta::language::behavior::KMExpressionVisitable is
+	method acceptKMExpressionVisitor<ContextType, ResultType>(visitor : visitor::KMExpressionVisitor<ContextType, ResultType>, context : ContextType) : ResultType from kermeta::language::behavior::visitor::KMExpressionVisitable is
 		do
 			result := visitor.visitVoidLiteral(self, context)
 		end
@@ -186,7 +186,7 @@ aspect class Loop inherits KMExpressionVisitable
 	/**
 	 * Implementation of the visitor design pattern on Loop objects
 	 */
-	method acceptKMExpressionVisitor<ContextType, ResultType>(visitor : KMExpressionVisitor<ContextType, ResultType>, context : ContextType) : ResultType from kermeta::language::behavior::KMExpressionVisitable is
+	method acceptKMExpressionVisitor<ContextType, ResultType>(visitor : visitor::KMExpressionVisitor<ContextType, ResultType>, context : ContextType) : ResultType from kermeta::language::behavior::visitor::KMExpressionVisitable is
 		do
 			result := visitor.visitLoop(self, context)
 		end
@@ -194,7 +194,7 @@ aspect class Loop inherits KMExpressionVisitable
 
 aspect class SelfExpression inherits KMExpressionVisitable
 {
-	method acceptKMExpressionVisitor<ContextType, ResultType>(visitor : KMExpressionVisitor<ContextType, ResultType>, context : ContextType) : ResultType from kermeta::language::behavior::KMExpressionVisitable is
+	method acceptKMExpressionVisitor<ContextType, ResultType>(visitor : visitor::KMExpressionVisitor<ContextType, ResultType>, context : ContextType) : ResultType from kermeta::language::behavior::visitor::KMExpressionVisitable is
 		do
 			result := visitor.visitSelfExpression(self, context)
 		end
@@ -205,7 +205,7 @@ aspect class VariableDecl inherits KMExpressionVisitable
 	/**
 	 * Implementation of the visitor design pattern on Variable objects
 	 */
-	method acceptKMExpressionVisitor<ContextType, ResultType>(visitor : KMExpressionVisitor<ContextType, ResultType>, context : ContextType) : ResultType from kermeta::language::behavior::KMExpressionVisitable is
+	method acceptKMExpressionVisitor<ContextType, ResultType>(visitor : visitor::KMExpressionVisitor<ContextType, ResultType>, context : ContextType) : ResultType from kermeta::language::behavior::visitor::KMExpressionVisitable is
 		do
 			result := visitor.visitVariableDecl(self, context)
 		end
@@ -216,7 +216,7 @@ aspect class Raise inherits KMExpressionVisitable
 	/**
 	 * Implementation of the visitor design pattern on Raise objects
 	 */
-	method acceptKMExpressionVisitor<ContextType, ResultType>(visitor : KMExpressionVisitor<ContextType, ResultType>, context : ContextType) : ResultType from kermeta::language::behavior::KMExpressionVisitable is
+	method acceptKMExpressionVisitor<ContextType, ResultType>(visitor : visitor::KMExpressionVisitor<ContextType, ResultType>, context : ContextType) : ResultType from kermeta::language::behavior::visitor::KMExpressionVisitable is
 		do
 			result := visitor.visitRaise(self, context)
 		end
@@ -227,7 +227,7 @@ aspect class Rescue inherits KMExpressionVisitable
 	/**
 	 * Implementation of the visitor design pattern on Rescue objects
 	 */
-	method acceptKMExpressionVisitor<ContextType, ResultType>(visitor : KMExpressionVisitor<ContextType, ResultType>, context : ContextType) : ResultType from kermeta::language::behavior::KMExpressionVisitable is
+	method acceptKMExpressionVisitor<ContextType, ResultType>(visitor : visitor::KMExpressionVisitor<ContextType, ResultType>, context : ContextType) : ResultType from kermeta::language::behavior::visitor::KMExpressionVisitable is
 		do
 			result := visitor.visitRescue(self, context)
 		end
@@ -238,7 +238,7 @@ aspect class JavaStaticCall inherits KMExpressionVisitable
 	/**
 	 * Implementation of the visitor design pattern on JavaStaticCall objects
 	 */
-	method acceptKMExpressionVisitor<ContextType, ResultType>(visitor : KMExpressionVisitor<ContextType, ResultType>, context : ContextType) : ResultType from kermeta::language::behavior::KMExpressionVisitable is
+	method acceptKMExpressionVisitor<ContextType, ResultType>(visitor : visitor::KMExpressionVisitor<ContextType, ResultType>, context : ContextType) : ResultType from kermeta::language::behavior::visitor::KMExpressionVisitable is
 		do
 			result := visitor.visitJavaStaticCall(self, context)
 		end
@@ -249,7 +249,7 @@ aspect class LambdaExpression inherits KMExpressionVisitable
 	/**
 	 *
 	 */
-	method acceptKMExpressionVisitor<ContextType, ResultType>(visitor : KMExpressionVisitor<ContextType, ResultType>, context : ContextType) : ResultType from kermeta::language::behavior::KMExpressionVisitable is
+	method acceptKMExpressionVisitor<ContextType, ResultType>(visitor : visitor::KMExpressionVisitor<ContextType, ResultType>, context : ContextType) : ResultType from kermeta::language::behavior::visitor::KMExpressionVisitable is
 		do
 			result := visitor.visitLambdaExpression(self, context)
 		end
@@ -260,122 +260,126 @@ aspect class LambdaParameter inherits KMExpressionVisitable
 	/**
 	 * Implementation of the visitor design pattern on LambdaParameter objects
 	 */
-	method acceptKMExpressionVisitor<ContextType, ResultType>(visitor : KMExpressionVisitor<ContextType, ResultType>, context : ContextType) : ResultType from kermeta::language::behavior::KMExpressionVisitable is
+	method acceptKMExpressionVisitor<ContextType, ResultType>(visitor : visitor::KMExpressionVisitor<ContextType, ResultType>, context : ContextType) : ResultType from kermeta::language::behavior::visitor::KMExpressionVisitable is
 		do
 			result := visitor.visitLambdaParameter(self, context)
 		end
 }
 
-
-/**
- * This class implements the visitor design pattern for all the classes of this Behavior package,
- * in particular the classes that inherits from kermeta::behavior::Expression
- */
-abstract class KMExpressionVisitor<ContextType, ResultType>
-{
-	operation visitCallVariable(node : CallVariable, context : ContextType) : ResultType is do 
-		result := void
-	end
-	
-	operation visitCallFeature(node : CallFeature, context : ContextType) : ResultType is do 
-		result := void
-	end
-	
-	operation visitCallSuperOperation(node : CallSuperOperation, context : ContextType) : ResultType is do 
-		result := void
-	end
-	
-	operation visitCallResult(node : CallResult, context : ContextType) : ResultType is do 
-		result := void
-	end
-	
-	operation visitCallValue(node : CallValue, context : ContextType) : ResultType is do 
-		result := void
-	end
-	
-	operation visitAssignment(node : Assignment, context : ContextType) : ResultType is do 
-		result := void
-	end
-	
-	operation visitBlock(node : Block, context : ContextType) : ResultType is do 
-		result := void
-	end
-	
-	operation visitConditional(node : Conditional, context : ContextType) : ResultType is do 
-		result := void
-	end
-	
-	operation visitEmptyExpression(node : EmptyExpression, context : ContextType) : ResultType is do 
-		result := void
-	end
-	
-	operation visitIntegerLiteral(node : IntegerLiteral, context : ContextType) : ResultType is do 
-		result := void
-	end
-	
-	operation visitStringLiteral(node : StringLiteral, context : ContextType) : ResultType is do 
-		result := void
-	end
-	
-	operation visitBooleanLiteral(node : BooleanLiteral, context : ContextType) : ResultType is do 
-		result := void
-	end
-	
-	operation visitTypeLiteral(node : TypeLiteral, context : ContextType) : ResultType is do 
-		result := void
-	end
-	
-	operation visitTypeReference(node : TypeReference, context : ContextType) : ResultType is do 
-		result := void
-	end
-	
-	operation visitVoidLiteral(node : VoidLiteral, context : ContextType) : ResultType is do 
-		result := void
-	end
-	
-	operation visitLoop(node : Loop, context : ContextType) : ResultType is do 
-		result := void
-	end
-	
-	operation visitSelfExpression(node : SelfExpression, context : ContextType) : ResultType is do 
-		result := void
-	end
-	
-	operation visitVariableDecl(node : VariableDecl, context : ContextType) : ResultType is do 
-		result := void
-	end
-	
-	operation visitRaise(node : Raise, context : ContextType) : ResultType is do 
-		result := void
-	end
-	
-	operation visitRescue(node : Rescue, context : ContextType) : ResultType is do 
-		result := void
-	end
-	
-	operation visitJavaStaticCall(node : JavaStaticCall, context : ContextType) : ResultType is do 
-		result := void
-	end
-	
-	operation visitLambdaExpression(node : LambdaExpression, context : ContextType) : ResultType is do 
-		result := void
-	end
-	
-	operation visitLambdaParameter(node : LambdaParameter, context : ContextType) : ResultType is do 
-		result := void
-	end
-	
-}
-
-
-/**
- * All classes that can be visited using kermeta::behavior::KMExpressionVisitor must implement this class
- */
-abstract class KMExpressionVisitable
-{
+package visitor {
 	/**
-	 * accept method of the visitor design pattern
+	 * This class implements the visitor design pattern for all the classes of this Behavior package,
+	 * in particular the classes that inherits from kermeta::behavior::Expression
 	 */
-	operation acceptKMExpressionVisitor<ContextType, ResultType>(visitor : KMExpressionVisitor<ContextType, ResultType>, context : ContextType) : ResultType is abstract
-}
+	abstract class KMExpressionVisitor<ContextType, ResultType>
+	{
+		operation visitCallVariable(node : CallVariable, context : ContextType) : ResultType is do 
+			result := void
+		end
+		
+		operation visitCallFeature(node : CallFeature, context : ContextType) : ResultType is do 
+			result := void
+		end
+		
+		operation visitCallSuperOperation(node : CallSuperOperation, context : ContextType) : ResultType is do 
+			result := void
+		end
+		
+		operation visitCallResult(node : CallResult, context : ContextType) : ResultType is do 
+			result := void
+		end
+		
+		operation visitCallValue(node : CallValue, context : ContextType) : ResultType is do 
+			result := void
+		end
+		
+		operation visitAssignment(node : Assignment, context : ContextType) : ResultType is do 
+			result := void
+		end
+		
+		operation visitBlock(node : Block, context : ContextType) : ResultType is do 
+			result := void
+		end
+		
+		operation visitConditional(node : Conditional, context : ContextType) : ResultType is do 
+			result := void
+		end
+		
+		operation visitEmptyExpression(node : EmptyExpression, context : ContextType) : ResultType is do 
+			result := void
+		end
+		
+		operation visitIntegerLiteral(node : IntegerLiteral, context : ContextType) : ResultType is do 
+			result := void
+		end
+		
+		operation visitStringLiteral(node : StringLiteral, context : ContextType) : ResultType is do 
+			result := void
+		end
+		
+		operation visitBooleanLiteral(node : BooleanLiteral, context : ContextType) : ResultType is do 
+			result := void
+		end
+		
+		operation visitTypeLiteral(node : TypeLiteral, context : ContextType) : ResultType is do 
+			result := void
+		end
+		
+		operation visitTypeReference(node : TypeReference, context : ContextType) : ResultType is do 
+			result := void
+		end
+		
+		operation visitVoidLiteral(node : VoidLiteral, context : ContextType) : ResultType is do 
+			result := void
+		end
+		
+		operation visitLoop(node : Loop, context : ContextType) : ResultType is do 
+			result := void
+		end
+		
+		operation visitSelfExpression(node : SelfExpression, context : ContextType) : ResultType is do 
+			result := void
+		end
+		
+		operation visitVariableDecl(node : VariableDecl, context : ContextType) : ResultType is do 
+			result := void
+		end
+		
+		operation visitRaise(node : Raise, context : ContextType) : ResultType is do 
+			result := void
+		end
+		
+		operation visitRescue(node : Rescue, context : ContextType) : ResultType is do 
+			result := void
+		end
+		
+		operation visitJavaStaticCall(node : JavaStaticCall, context : ContextType) : ResultType is do 
+			result := void
+		end
+		
+		operation visitLambdaExpression(node : LambdaExpression, context : ContextType) : ResultType is do 
+			result := void
+		end
+		
+		operation visitLambdaParameter(node : LambdaParameter, context : ContextType) : ResultType is do 
+			result := void
+		end
+		
+	}
+	
+	
+	/**
+	 * All classes that can be visited using kermeta::behavior::KMExpressionVisitor must implement this class
+	 */
+	 // DVK : the inherits kermeta::language::structure::Object is a workaround for a loading problem
+	 // it seems that if we don't add it, the merge isn't correct and then when we load a km, if fails to find the tag attribute
+	 // still don't know if we need to fix the load or the merge ...
+	abstract class KMExpressionVisitable inherits kermeta::language::structure::Object
+	{
+		/**
+		 * accept method of the visitor design pattern
+		 */
+		operation acceptKMExpressionVisitor<ContextType, ResultType>(visitor : KMExpressionVisitor<ContextType, ResultType>, context : ContextType) : ResultType is abstract
+	}
 
+}
