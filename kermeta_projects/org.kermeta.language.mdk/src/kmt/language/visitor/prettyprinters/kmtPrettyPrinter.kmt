@@ -1,6 +1,6 @@
 //@mainClass "kermeta::utils::PrettyPrinter"
 //@mainmethod "visit"
-/* $Id: kmtPrettyPrinter.kmt,v 1.2 2009-01-09 13:39:24 dvojtise Exp $
+/* $Id: kmtPrettyPrinter.kmt,v 1.3 2009-01-13 13:12:11 dvojtise Exp $
  * Project : Kermeta samples
  * File : printer.kmt
  * License : EPL
@@ -35,8 +35,8 @@ using kermeta::standard
  *  for these types.
  */
 class BasicPrettyPrinter inherits 
-	kermeta::language::structure::KMStructureVisitor<Integer, String>,
-	kermeta::language::behavior::KMExpressionVisitor<Integer, String>
+	kermeta::language::structure::visitor::KMStructureVisitor<Integer, String>,
+	kermeta::language::behavior::visitor::KMExpressionVisitor<Integer, String>
 {
 	/** self.is a print helper */
  	attribute pp : PrintHelper
@@ -181,7 +181,7 @@ class BasicPrettyPrinter inherits
 
 	end
 	
-	method visitClassDefinition(node : ClassDefinition, context : Integer) : String from kermeta::language::structure::KMStructureVisitor is do
+	method visitClassDefinition(node : ClassDefinition, context : Integer) : String from kermeta::language::structure::visitor::KMStructureVisitor is do
 	    var a : String
 		result := ""
 
@@ -209,10 +209,10 @@ class BasicPrettyPrinter inherits
 		// print the attributes
 		result.append("\n"+self.indent+"{\n")
 		self.pushIndent()
-		result.append(self.visitFeatures(node.ownedAttribute.asType( kermeta::standard::Set<kermeta::language::structure::KMStructureVisitable>), context))
+		result.append(self.visitPropertySet(node.ownedAttribute, context))
 		
 		// print the operations
-		result.append(self.visitFeatures(node.ownedOperation.asType( kermeta::standard::Set<kermeta::language::structure::KMStructureVisitable>), context))
+		result.append(self.visitOperationSet(node.ownedOperation, context))
 		self.popIndent()
 		result.append("\n"+self.indent+"}")
 	end
@@ -660,11 +660,11 @@ class BasicPrettyPrinter inherits
 	end
 
     
-    /**
+    /* *
      * Visit a set that contains elements that 
      * : kermeta::language::structure::KMStructureVisitable
      */
-    operation visitFeatures<T : kermeta::language::structure::KMStructureVisitable>(pset : Set<T>,	context : Integer) : String is do
+ /*   operation visitFeatures<T : kermeta::language::structure::visitor::KMStructureVisitable>(pset : Set<T>,	context : Integer) : String is do
     	result := ""
 		from var it : Iterator<T> init pset.iterator
 		until it.isOff
@@ -672,7 +672,37 @@ class BasicPrettyPrinter inherits
 			var next : T init it.next
 			result.append(next.acceptKMStructureVisitor(self, context ))
 			
-		end
+		end 
+    end */
+    
+    /**
+     * Visit all Property contained in a set
+     * DVK : this rewritting is is a workaround for bug #7144
+     */
+    operation visitPropertySet(pset : Set<Property>,	context : Integer) : String is do
+    	result := ""
+		from var it : Iterator<Property> init pset.iterator
+		until it.isOff
+		loop
+			var next : Property init it.next
+			result.append(next.acceptKMStructureVisitor(self, context ))
+			
+		end 
+    end
+    
+    /**
+     * Visit all Operation contained in a set
+     * DVK : this rewritting is is a workaround for bug #7144
+     */
+    operation visitOperationSet(pset : Set<Operation>,	context : Integer) : String is do
+    	result := ""
+		from var it : Iterator<Operation> init pset.iterator
+		until it.isOff
+		loop
+			var next : Operation init it.next
+			result.append(next.acceptKMStructureVisitor(self, context ))
+			
+		end 
     end
     
 	/**
@@ -681,8 +711,8 @@ class BasicPrettyPrinter inherits
 	 */
     operation accept(node : Object, context : Integer) : String is do
     	// structurevisitable node
-		var snode : KMStructureVisitable init void
-		var enode : KMExpressionVisitable init void
+		var snode : visitor::KMStructureVisitable init void
+		var enode : visitor::KMExpressionVisitable init void
 		
 		var node_qname : String init node.getMetaClass.typeDefinition.qualifiedName
 		var node_name : String init node.getMetaClass.typeDefinition.name
@@ -694,7 +724,7 @@ class BasicPrettyPrinter inherits
 			result := enode.acceptKMExpressionVisitor(self, context)
 		else 
 			if (node_qname.substring(0, diff_size).equals("kermeta::language::structure::")) then
-				snode := node
+				snode ?= node
 				result:= snode.acceptKMStructureVisitor(self, context)
 			else
 				stdio.writeln("ouuup")
