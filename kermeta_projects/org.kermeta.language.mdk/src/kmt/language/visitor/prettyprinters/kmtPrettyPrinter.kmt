@@ -1,6 +1,6 @@
 //@mainClass "kermeta::utils::PrettyPrinter"
 //@mainmethod "visit"
-/* $Id: kmtPrettyPrinter.kmt,v 1.3 2009-01-13 13:12:11 dvojtise Exp $
+/* $Id: kmtPrettyPrinter.kmt,v 1.4 2009-01-13 17:33:00 dvojtise Exp $
  * Project : Kermeta samples
  * File : printer.kmt
  * License : EPL
@@ -352,7 +352,9 @@ class BasicPrettyPrinter inherits
      method visitBlock(node : kermeta::language::behavior::Block, context : Integer) : String is do
      	result := ""
      	result.append(indent)
-     	result.append("do\n")
+     	if node.statement.size > 1 then // omit the do end if there is only one instruction 
+     		result.append("do\n")
+     	end
 		pushIndent()
 		result.append(self.visitExpressionSet(node.statement, context, "\n"+indent))
 		popIndent()
@@ -363,7 +365,10 @@ class BasicPrettyPrinter inherits
 			resc := it.next
 			result.append(indent + self.accept(resc, context) + "\n") 
 		end
-		result.append("\n" + indent + "end\n")
+		if node.statement.size > 1 then // omit the do end if there is only one instruction 
+     		result.append("\n" + indent + "end\n")
+     	end
+		
      end
     
 	method visitAssignment(node : Assignment, context : Integer) : String is do
