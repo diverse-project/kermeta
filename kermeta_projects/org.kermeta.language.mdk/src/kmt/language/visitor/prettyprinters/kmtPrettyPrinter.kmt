@@ -1,6 +1,6 @@
 //@mainClass "kermeta::utils::PrettyPrinter"
 //@mainmethod "visit"
-/* $Id: kmtPrettyPrinter.kmt,v 1.6 2009-01-14 15:38:10 dvojtise Exp $
+/* $Id: kmtPrettyPrinter.kmt,v 1.7 2009-01-14 16:36:07 dvojtise Exp $
  * Project : Kermeta samples
  * File : printer.kmt
  * License : EPL
@@ -259,7 +259,8 @@ class BasicPrettyPrinter inherits
 			result := "alias " + node.name + " : " + self.accept(node.instanceType, context) + ";"
 			typedef := true
 		else 
-			result := node.getMetaClass.typeDefinition.qualifiedName
+			//result := node.getMetaClass.typeDefinition.qualifiedName
+			result := self.accept(node.instanceType, context)
 		end
 	end
 	
@@ -316,9 +317,9 @@ class BasicPrettyPrinter inherits
 			typedef := true
 		
 		else 
-			var qname : String init getQualifiedName(node)
+			//var qname : String init getQualifiedName(node) this is the qualifiedname of the metaclass not of the enumeration
 			var name : String init pp.ppIdentifier(node.name)
-			result := qname
+			result := name
 		end
 	end
 	
@@ -815,7 +816,8 @@ class PrintHelper
 		var ctype : Type
 		ctype := elem.type
 
-		result.append( pprinter.visitType(ctype, 0))
+		result.append( pprinter.accept(ctype, 0))
+		// DVK result.append(pprinter.accept)
 		
 		if (elem.lower != 0 or elem.upper  != 1) then
 			result.append( "[" + elem.lower.toString + "..")
