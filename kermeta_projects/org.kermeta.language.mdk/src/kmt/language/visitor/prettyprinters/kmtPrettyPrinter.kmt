@@ -1,6 +1,6 @@
 //@mainClass "kermeta::utils::PrettyPrinter"
 //@mainmethod "visit"
-/* $Id: kmtPrettyPrinter.kmt,v 1.4 2009-01-13 17:33:00 dvojtise Exp $
+/* $Id: kmtPrettyPrinter.kmt,v 1.5 2009-01-14 15:08:18 dvojtise Exp $
  * Project : Kermeta samples
  * File : printer.kmt
  * License : EPL
@@ -478,7 +478,7 @@ class BasicPrettyPrinter inherits
 	end
 	
 	method visitVariableDecl(node : VariableDecl, context : Integer) : String is do 
-		result := "var" + node.identifier + " : " + self.accept(node.type, context)
+		result := "var " + node.identifier + " : " + self.accept(node.type, context)
 		
 		if (node.initialization != void) then
 			result.append(" init " + self.accept(node.initialization, context))
@@ -510,7 +510,7 @@ class BasicPrettyPrinter inherits
 	method visitLambdaExpression(node : LambdaExpression, context : Integer) : String is do 
 		result := "{"
 		result.append(self.visitExpressionSet(node.parameters, context, ", "))
-		result.append(" | ")
+		result.append(" | \n")
 		pushIndent()
 		result.append(self.accept(node.body, context))
 		popIndent()
