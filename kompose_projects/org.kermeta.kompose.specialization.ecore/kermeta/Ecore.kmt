@@ -3,11 +3,12 @@ package ecore;
 
 
 require kermeta
-require "http://www.eclipse.org/emf/2002/Ecore"
+//require "http://www.eclipse.org/emf/2002/Ecore"
 
 
-require "platform:/plugin/org.kermeta.kompose.core.model/kermeta/kompose.kmt"
-
+//require "platform:/plugin/org.kermeta.kompose.core.model/kermeta/kompose.kmt"
+//require "platform:/resource/org.kermeta.kompose.core.model/kermeta/kompose.kmt"
+require "ECoreDirectivesSpecialization.kmt"
 using kermeta::standard
 using kermeta::utils
 using kermeta::persistence
@@ -138,12 +139,10 @@ class EParameter
 
 // 4) the Main
 
-
 class Main inherits kompose::KomposeMain
 {
 	operation main(uri : kermeta::standard::String) is do
-		var c : kompose::Composer init loadComposer(uri,EcoreComposer.new)
+		var c : kompose::Composer init loadComposer(uri,EcoreComposer.new,false)
 		c.compose
 	end
 }
-
