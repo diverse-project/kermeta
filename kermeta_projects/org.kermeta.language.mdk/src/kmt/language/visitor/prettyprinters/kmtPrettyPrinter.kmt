@@ -1,6 +1,6 @@
 //@mainClass "kermeta::utils::PrettyPrinter"
 //@mainmethod "visit"
-/* $Id: kmtPrettyPrinter.kmt,v 1.5 2009-01-14 15:08:18 dvojtise Exp $
+/* $Id: kmtPrettyPrinter.kmt,v 1.6 2009-01-14 15:38:10 dvojtise Exp $
  * Project : Kermeta samples
  * File : printer.kmt
  * License : EPL
@@ -351,13 +351,16 @@ class BasicPrettyPrinter inherits
      
      method visitBlock(node : kermeta::language::behavior::Block, context : Integer) : String is do
      	result := ""
-     	result.append(indent)
-     	if node.statement.size > 1 then // omit the do end if there is only one instruction 
+     	var needDoEnd : Boolean init (node.statement.size > 1 and not node.container.isInstanceOf(Conditional)) or node.rescueBlock.size != 0
+     	if needDoEnd then // omit the do end if there is only one instruction      	
+     		result.append(indent)
      		result.append("do\n")
+			pushIndent()
      	end
-		pushIndent()
 		result.append(self.visitExpressionSet(node.statement, context, "\n"+indent))
-		popIndent()
+		if needDoEnd then 
+			popIndent()
+		end
 		from var it : Iterator<Rescue> init node.rescueBlock.iterator
 		until it.isOff
 		loop 
@@ -365,7 +368,7 @@ class BasicPrettyPrinter inherits
 			resc := it.next
 			result.append(indent + self.accept(resc, context) + "\n") 
 		end
-		if node.statement.size > 1 then // omit the do end if there is only one instruction 
+		if needDoEnd then // omit the do end if there is only one instruction 
      		result.append("\n" + indent + "end\n")
      	end
 		
