@@ -7,7 +7,7 @@ using kermeta::utils
 using kermeta::persistence
 
 class KomposeMain {
-	operation loadComposer(path : String, composer : kompose::Composer ) : kompose::Composer is do
+	operation loadComposer(path : String, composer : kompose::Composer, logging : Boolean) : kompose::Composer is do
 		var resource : kermeta::persistence::EMFResource             
    		var repository : EMFRepository init EMFRepository.new             
        	resource ?= repository.createResource(path, "http://www.kermeta.org/kompose")
@@ -22,13 +22,16 @@ class KomposeMain {
         result.primaryModelURI := c.primaryModelURI
         result.aspectModelURI := c.aspectModelURI
         result.composedModelURI := c.composedModelURI
+        result.logger := KLogger.new
+        result.logger.initialize
+        result.logger.enableLog(logging)
 	end
 }
 
 aspect abstract class Composer {
 
 	reference resources: kermeta::persistence::EMFResource [0..*]   
-	
+	reference logger : KLogger
 	// Has to be defined for each specific meta-model
 	operation loadModel(path : String) : kompose::Mergeable is do
     	var resource : kermeta::persistence::EMFResource             
@@ -72,40 +75,40 @@ aspect abstract class Composer {
 	
 	operation compose() : Mergeable is do
 		// load models to compose
-		stdio.write("loading models...")
+		self.logger.printInfo("Loading models...")
 		var pm : Mergeable init loadModel(primaryModelURI)
 		var am : Mergeable init loadModel(aspectModelURI)
 		var cm : Mergeable
-		stdio.writeln("OK")
+		self.logger.printInfo("OK")
 		
 		// execute pre-directives
-		stdio.write("Executing predirectives on primary model...")
+		self.logger.printInfo("Executing predirectives on primary model...")
 		executeDirectives(pm, predirectivesPM)
-		stdio.writeln("OK")
-		stdio.write("Executing predirectives on aspect model...")
+		self.logger.printInfo("OK")
+		self.logger.printInfo("Executing predirectives on aspect model...")
 		executeDirectives(am, predirectivesAM)
-		stdio.writeln("OK")
+		self.logger.printInfo("OK")
 		
 		// perform the composition
-		stdio.writeln("Composing models...")
+		self.logger.printInfo("Composing models...")
 		var composer : ModelElementComposer init ModelElementComposer.new
 		composer.resources.addAll(self.resources)
-		cm := composer.compose(pm, am)
+		cm := composer.compose(pm, am,self.logger)
 		
 		// execute post-directives
-		stdio.write("Executing postdirectives on composed model...")
+		self.logger.printInfo("Executing postdirectives on composed model...")
 		executeDirectives(cm, postdirectives)
-		stdio.writeln("OK")
+		self.logger.printInfo("OK")
 		
 		// save the result
-		stdio.write("Saving composed model...")
+		self.logger.printInfo("Saving composed model...")
 		saveModel(cm, composedModelURI)
-        stdio.writeln("OK")
+        self.logger.printInfo("OK")
         result := cm
         
     rescue (ex : DirectiveRuntimeException)
-   		stdio.writeln("\n" + ex.toString)
-   		stdio.writeln("composition aborded.")
+   		self.logger.printError("\n" + ex.toString)
+   		self.logger.printInfo("composition aborded.")
 	end 
 	
 }
