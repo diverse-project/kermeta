@@ -1,4 +1,4 @@
-/* $Id: StringUtils.kmt,v 1.1 2009-01-14 13:06:28 dvojtise Exp $ 
+/* $Id: StringUtils.kmt,v 1.2 2009-01-14 13:49:50 dvojtise Exp $ 
  * Creation : January 14, 2009
  * Licence  : EPL 
  * Copyright: IRISA/INRIA
@@ -23,10 +23,18 @@ aspect class String
 	 */
 	operation trim() : String is do 
 		var sBuffer : StringBuffer init StringBuffer.new
-
+		var intermediateSpacesKept : String init ""
+		var firstNormalCharReached : Boolean init false
 		allCharacters.each{c |
 			if c != " ".elementAt(0) and c != "\n".elementAt(0) then
+				sBuffer.append(intermediateSpacesKept)
+				intermediateSpacesKept := ""
 				sBuffer.append(c.toString)
+				firstNormalCharReached := true
+			else
+				if firstNormalCharReached then
+					intermediateSpacesKept.append(c.toString)
+				end
 			end
 		}
 		result := sBuffer.toString
@@ -57,4 +65,6 @@ aspect class String
 			end
 		end
 	end
+	
+
 }
