@@ -1,0 +1,60 @@
+/* $Id: StringUtils.kmt,v 1.1 2009-01-14 13:06:28 dvojtise Exp $ 
+ * Creation : January 14, 2009
+ * Licence  : EPL 
+ * Copyright: IRISA/INRIA
+ * Authors  : 
+ *            Didier Vojtisek <dvojtise@irisa.fr>
+ */
+
+
+
+package kermeta::standard;
+
+require kermeta
+using kermeta::utils
+
+/**
+ * Aspect for String providing additional functions manipulating String
+ */
+aspect class String
+{
+	/** 
+	 *  Creates a new String by trimming any leading or trailing whitespace and cariage return from the current String.
+	 */
+	operation trim() : String is do 
+		var sBuffer : StringBuffer init StringBuffer.new
+
+		allCharacters.each{c |
+			if c != " ".elementAt(0) and c != "\n".elementAt(0) then
+				sBuffer.append(c.toString)
+			end
+		}
+		result := sBuffer.toString
+	end
+	
+	/**
+	 * returns a sequence of all characters in the String
+	 */
+	operation allCharacters() : Sequence<Character> is do
+		var chars : Sequence<Character> init Sequence<Character>.new
+		from var i : Integer init 0
+		until i > self.size()-1
+		loop
+			chars.add(self.elementAt(i))
+		    i := i + 1
+		end
+		result := chars
+	end
+	
+	/**
+	 * indicates if self starts with the given string
+	 */
+	operation startWith(str : String) : Boolean is do
+		result := false
+		if str.size <= self.size then
+			if self.substring(0,str.size) == str then
+				result := true
+			end
+		end
+	end
+}
