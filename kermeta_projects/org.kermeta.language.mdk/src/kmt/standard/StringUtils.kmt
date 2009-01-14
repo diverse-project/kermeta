@@ -1,4 +1,4 @@
-/* $Id: StringUtils.kmt,v 1.2 2009-01-14 13:49:50 dvojtise Exp $ 
+/* $Id: StringUtils.kmt,v 1.3 2009-01-14 13:57:19 dvojtise Exp $ 
  * Creation : January 14, 2009
  * Licence  : EPL 
  * Copyright: IRISA/INRIA
@@ -57,10 +57,22 @@ aspect class String
 	/**
 	 * indicates if self starts with the given string
 	 */
-	operation startWith(str : String) : Boolean is do
+	operation startsWith(str : String) : Boolean is do
 		result := false
 		if str.size <= self.size then
 			if self.substring(0,str.size) == str then
+				result := true
+			end
+		end
+	end
+	
+	/**
+	 * indicates if self ends with the given string
+	 */
+	operation endsWith(str : String) : Boolean is do
+		result := false
+		if str.size <= self.size then
+			if self.substring(self.size - str.size, self.size) == str then
 				result := true
 			end
 		end
