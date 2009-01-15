@@ -41,7 +41,7 @@
 </xsl:template>
 
 <xsl:template name="book.titlepage.verso">
-  <xsl:choose>
+<!--  <xsl:choose>
     <xsl:when test="bookinfo/title">
       <xsl:apply-templates mode="book.titlepage.verso.auto.mode" select="bookinfo/title"/>
     </xsl:when>
@@ -74,7 +74,7 @@
   <xsl:apply-templates mode="book.titlepage.verso.auto.mode" select="bookinfo/pubdate"/>
   <xsl:apply-templates mode="book.titlepage.verso.auto.mode" select="info/pubdate"/>
   <xsl:apply-templates mode="book.titlepage.verso.auto.mode" select="bookinfo/copyright"/>
-  <xsl:apply-templates mode="book.titlepage.verso.auto.mode" select="info/copyright"/>
+  <xsl:apply-templates mode="book.titlepage.verso.auto.mode" select="info/copyright"/> -->
 </xsl:template>
 
 <xsl:template name="book.titlepage">
