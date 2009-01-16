@@ -1,4 +1,4 @@
-// $Id: value_types.kmt,v 1.11 2009-01-14 13:44:28 dvojtise Exp $
+// $Id: value_types.kmt,v 1.12 2009-01-16 10:43:12 cfaucher Exp $
 /* *************************************************
  * Franck FLEUREY - 11/02/2005
  * Triskell Research Group
@@ -631,8 +631,8 @@ class String inherits ValueType, Comparable, Summable<String>
 	 * takes as parameters : the startIndex and endIndex
 	 */
 	operation substring(startIndex : Integer, endIndex : Integer) : String is do
-		if startIndex >= 0 and startIndex <= size and subStringSize <= size and subStringSize >= startIndex then
-			result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::String.substring(self,startIndex, endIndex)
+		if startIndex >= 0 and startIndex <= size and endIndex <= size and endIndex >= startIndex then
+			result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::String.substring(self, startIndex, endIndex)
 		else
 			raise StringIndexOutOfBound.new
 		end
