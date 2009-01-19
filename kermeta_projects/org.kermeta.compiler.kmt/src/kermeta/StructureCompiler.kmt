@@ -1,4 +1,4 @@
-/* $Id: StructureCompiler.kmt,v 1.77 2009-01-09 13:28:00 cfaucher Exp $
+/* $Id: StructureCompiler.kmt,v 1.78 2009-01-19 14:17:30 cfaucher Exp $
  * Creation date: January 21, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -226,7 +226,7 @@ class Main {
     end
     
     
-    operation main_mode3(modelInput : String, traceInput : String, output : String, mode : CompilingMode) : Void is do
+    operation main_mode3(modelInput : String, traceInput : String, output : String, mode : CompilingMode, splitEcore : Boolean) : Void is do
     	
     	var operations : OrderedSet<String> init OrderedSet<String>.new()
     	
@@ -236,7 +236,7 @@ class Main {
     	operations.add("toString")
     	operations.add("isSet")
     	operations.add("containsKey")*/
-    	operations.add("checkInvariants")
+    	//operations.add("checkInvariants")
     	//operations.add("count")
     	//operations.add("flatten")
     	//operations.add("addAllTestCasesFrom")
@@ -294,8 +294,9 @@ class Main {
     	//operations.add("testForAll__")
     	//operations.add("testy")
     	//operations.add("getFunctionType")
-    	operations.add("testBoolean")
+    	//operations.add("testBoolean")
     	//operations.add("getTypeName")
+    	operations.add("parse")
     	
     	main_compilingOnlyOperations(modelInput, traceInput, output, mode, operations)
     end

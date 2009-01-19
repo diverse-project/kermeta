@@ -1,4 +1,4 @@
-/* $Id: CreateBehavior.kmt,v 1.96 2008-12-10 09:37:37 cfaucher Exp $
+/* $Id: CreateBehavior.kmt,v 1.97 2009-01-19 14:17:29 cfaucher Exp $
  * Creation date: January 21, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -1234,13 +1234,13 @@ package behavior {
 			
 			var left : String init self.target.createBehaviorJava(context)
 			
-			var ppCastPrefix : String init self.ppCastPrefix(context)
-			var ppCastSuffix : String init self.ppCastSuffix()
+			self.cacheCastPrefix := self.ppCastPrefix(context)
+			self.cacheCastSuffix := self.ppCastSuffix(context)
 			
 			//requireConversionObjectToValueType(context)
 			
 			// We should use: self.staticType.createBehaviorJava(context), but this value is not setted rightly
-			context.resultLastStatementStack.push(left + " = " + ppCastPrefix + self.valueTypeCastPrefix + context.TYPE_SEPARATOR + self.target.staticType.createBehaviorJava(context))
+			context.resultLastStatementStack.push(left + " = " + cacheCastPrefix + self.valueTypeCastPrefix + context.TYPE_SEPARATOR + self.target.staticType.createBehaviorJava(context))
 			
 			var right : String init self.~value.createBehaviorJava(context)
 		
@@ -1264,9 +1264,9 @@ package behavior {
 					else
 						if i == (tabLeft.size()-1) then
 							if self.~value.callsFunctionType() then
-								result := right + result + self.target.asType(CallFeature).printSetAccessor(context) + "(" + ppCastPrefix + self.valueTypeCastPrefix + self.~value.asType(CallFeature).calledFtResult + self.valueTypeCastSuffix + ppCastSuffix + ");"
+								result := right + result + self.target.asType(CallFeature).printSetAccessor(context) + "(" + self.cacheCastPrefix + self.valueTypeCastPrefix + self.~value.asType(CallFeature).calledFtResult + self.valueTypeCastSuffix + self.cacheCastSuffix + ");"
 							else
-								result := result + self.target.asType(CallFeature).printSetAccessor(context) + "(" + ppCastPrefix + self.valueTypeCastPrefix + right + self.valueTypeCastSuffix + ppCastSuffix + ");"
+								result := result + self.target.asType(CallFeature).printSetAccessor(context) + "(" + self.cacheCastPrefix + self.valueTypeCastPrefix + right + self.valueTypeCastSuffix + self.cacheCastSuffix + ");"
 							end
 						end
 					end
@@ -1278,12 +1278,12 @@ package behavior {
 					result := right
 				else
 					if right.contains(context.RETURN_EXPRESSION_TO_REPLACE) then
-						result := right.replace(context.RETURN_EXPRESSION_TO_REPLACE, left + " = " + ppCastPrefix + self.valueTypeCastPrefix) //valueTypeCastSuffix has been managed in the ExpressionHelper.kmt 
+						result := right.replace(context.RETURN_EXPRESSION_TO_REPLACE, left + " = " + self.cacheCastPrefix + self.valueTypeCastPrefix) //valueTypeCastSuffix has been managed in the ExpressionHelper.kmt 
 					else
 						if ( self.target.isInstanceOf(CallVariable) or self.target.isInstanceOf(CallResult) ) and (self.~value.callsFunctionType() or self.~value.isFunctionTypeVariable()) then
 							result := right
 						else
-							result := left + " = " + ppCastPrefix + self.valueTypeCastPrefix + right //valueTypeCastSuffix has been managed in the ExpressionHelper.kmt
+							result := left + " = " + self.cacheCastPrefix + self.valueTypeCastPrefix + right //valueTypeCastSuffix has been managed in the ExpressionHelper.kmt
 						end
 					end
 				end
