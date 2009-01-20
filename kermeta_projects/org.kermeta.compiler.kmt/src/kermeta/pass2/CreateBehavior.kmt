@@ -1,4 +1,4 @@
-/* $Id: CreateBehavior.kmt,v 1.97 2009-01-19 14:17:29 cfaucher Exp $
+/* $Id: CreateBehavior.kmt,v 1.98 2009-01-20 15:52:39 cfaucher Exp $
  * Creation date: January 21, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -716,9 +716,22 @@ package behavior {
 					and (not tgt.isInstanceOf(CallResult)) then
 					
 				var type_label : String init tgt.createBehaviorJava(context)
+				
 				if not type_label.isValueType(context) then
-					var class_label : String init CompilerHelperJava.new().ppEmfLikeGetEMF(type_label)
-					result := result + "((" + type_label + ") " + "org.kermeta.compil.runtime.helper.language.ClassUtil.newObject(" + class_label + "))"
+					
+					var pojoType_label : String init ""
+					
+					if tgt.staticType.isInstanceOf(ParameterizedType) then
+						pojoType_label := tgt.staticType.asType(ParameterizedType).typeDefinition.getFinalJavaClassQN()
+					end
+					
+					if pojoType_label != "" then
+						result := "new " + pojoType_label + "()"
+					else
+						var class_label : String init CompilerHelperJava.new().ppEmfLikeGetEMF(type_label)
+						result := result + "((" + type_label + ") " + "org.kermeta.compil.runtime.helper.language.ClassUtil.newObject(" + class_label + "))"
+					end
+					
 				else
 					result := "new " + type_label + "()"
 				end
