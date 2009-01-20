@@ -1,5 +1,5 @@
 /* *************************************************
- * $Id: collections.kmt,v 1.59 2008-09-17 17:13:53 cfaucher Exp $
+ * $Id: collections.kmt,v 1.60 2009-01-20 13:13:06 dvojtise Exp $
  * Franck FLEUREY - 14/02/2005 
  * Triskell Research Group
  * IRISA / University of Rennes 1 (France)
@@ -51,15 +51,17 @@ abstract class Collection<G>
 	operation asSequence() : Sequence<G> is abstract
 	
 	/**
-	 * To be written #####################################
-	 * => result := self.forAll{x | self.forAll {y | f(x,y)}}
+	 * Combinaison of ForAll on two elements in the collection 
+	 * result := self.forAll{x | self.forAll {y | f(x,y)}}
+	 * (where x and y are 2 elements of the Collection)
+	 * typical use sample : ownedState.forAll{s1,s2| (s1.name==s2.name)implies(s1==s2)}
 	 */
 	operation forAllCpl(f : < [G, G] -> Boolean> ) : Boolean is do
    		result := self.forAll{x | self.forAll {y | f(x,y)}}
 	end 
 
 	/**
-	 * To be written #####################################
+	 * Combinaison of exists on two elements in the collection
 	 * => result := self.exists{x | self.exists {y | f(x,y)}}
 	 */
 	operation existsCpl(f : < [G, G] -> Boolean> ) : Boolean is do
