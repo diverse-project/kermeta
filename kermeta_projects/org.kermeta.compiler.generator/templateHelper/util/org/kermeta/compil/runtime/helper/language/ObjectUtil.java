@@ -944,7 +944,7 @@ public class ObjectUtil {
 	/**
 	 * @generated
 	 */
-	public java.lang.Object asTypeOrVoid(java.lang.Object self, java.lang.String metaClass) {
+	public static java.lang.Object asTypeOrVoid(java.lang.Object self, java.lang.String metaClass) {
 
 		boolean result = false;
 		if(self instanceof kermeta.language.structure.Object) {
