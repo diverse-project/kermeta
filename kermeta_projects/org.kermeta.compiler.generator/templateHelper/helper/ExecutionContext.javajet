@@ -2,7 +2,7 @@
 	 package="org.kermeta.compiler.generator.templates"
 	 
 	 class="ExecutionContext"
-	 version="$Id: ExecutionContext.javajet,v 1.15 2009-01-20 14:06:26 cfaucher Exp $" %>
+	 version="$Id: ExecutionContext.javajet,v 1.16 2009-01-20 16:43:11 cfaucher Exp $" %>
 <%String kmFilePath_forReflection = (String) argument;%>
 
 package org.kermeta.compil.runtime;
@@ -199,6 +199,26 @@ public class ExecutionContext {
 			}
 		}
 		return null;
+	}
+	
+	/**
+	 * @generated
+	 */
+	public java.lang.Object asTypeOrVoid(java.lang.Object self, java.lang.String metaClass) {
+
+		boolean result = false;
+		if(self instanceof kermeta.language.structure.Object) {
+			result = ObjectUtil.isInstanceOf((kermeta.language.structure.Object) self, metaClass);
+		} else {
+			result = ObjectUtil.isInstanceOf((java.lang.Object) self, metaClass);
+		}
+		
+		if(result) {
+			return self;
+		} else {
+			return null;
+		}
+
 	}
 
 }
