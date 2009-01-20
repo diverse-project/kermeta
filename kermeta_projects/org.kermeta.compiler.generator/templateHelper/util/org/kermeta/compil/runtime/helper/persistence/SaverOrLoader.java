@@ -1,5 +1,5 @@
 
-/*$Id: SaverOrLoader.java,v 1.9 2008-11-14 14:10:20 cfaucher Exp $
+/*$Id: SaverOrLoader.java,v 1.10 2009-01-20 15:44:54 cfaucher Exp $
 * Project : org.kermeta.compiler.generator
 * File : 	SaverOrLoader.java
 * License : EPL
@@ -80,7 +80,6 @@ abstract public class SaverOrLoader {
 	protected SaverOrLoader(String metamodelURI) {
 		this.metamodelURI = metamodelURI;
 		this.metamodelURISpecialCompiler = this.metamodelURI + this.uri_suffix;
-		//initialize();
 	}
 	
 	/**
@@ -124,7 +123,7 @@ abstract public class SaverOrLoader {
 	 * @return
 	 */
 	public EFactory getTargetEFactory(EPackage target_root_epack, String source_epack_qn) {
-		EcoreHelper.getQualifiedName(target_root_epack);
+		
 		String[] array_qualified_name = source_epack_qn.split("\\.");
 		
 		for(int i=1; i<array_qualified_name.length ; i++ ) {
@@ -212,36 +211,31 @@ abstract public class SaverOrLoader {
 	 */
 	protected EObject createInstance(EObject sourceObject, String metamodelURI) {
 		
-		if( Registry.INSTANCE.getEFactory(metamodelURI) == null ) {
+		EPackage current_EPackage = Registry.INSTANCE.getEPackage(metamodelURI);
+		
+		if( current_EPackage == null ) {
 			String tmp_ns_uri = sourceObject.eClass().getEPackage().getNsURI();
 			if( tmp_ns_uri.contains(uri_suffix) ) {
 				metamodelURI = tmp_ns_uri.replace(uri_suffix, "");
 			} else {
 				metamodelURI = tmp_ns_uri + uri_suffix;
 			}
+			current_EPackage = Registry.INSTANCE.getEPackage(metamodelURI);
 		}
 		
-		if( Registry.INSTANCE.getEFactory(metamodelURI) != null ) {
+		if( current_EPackage != null ) {
 			
-			if( Registry.INSTANCE.getEPackage(metamodelURI).getClass() != org.eclipse.emf.ecore.impl.EPackageImpl.class ) { //The EPackage does not come from an Ecore file
-				EPackage root_pack = getRootEPackage(Registry.INSTANCE.getEPackage(metamodelURI));
-				EFactory factory = getTargetEFactory(root_pack, sourceObject.eClass().getEPackage());
+			if( current_EPackage.getClass() != org.eclipse.emf.ecore.impl.EPackageImpl.class ) { //The EPackage does not come from an Ecore file
+				EPackage root_pack = getRootEPackage(current_EPackage);
 				
-				try {
-					// Getting the name of the method to call.
-					// In factory classes, it is always something like create* where * corresponds to the class name to be created.
-					String creationMethodName = "create" + sourceObject.eClass().getName();
+				EObject targetObject = EcoreUtil.create(getTargetEClassGenerated(root_pack, sourceObject.eClass()));
 					
-					Method method = factory.getClass().getMethod(creationMethodName, new Class[] {});
-					EObject targetObject = (EObject) method.invoke(factory, new Object[] {});
-					// Make the mapping between the source object and the target one.
-					_instanceMapping.put(sourceObject, targetObject);
-					return targetObject;
-				} catch (Exception e) {
-					System.err.println("createInstance(EObject sourceObject, String metamodelURI): " + sourceObject.toString());
-				}
+				// Make the mapping between the source object and the target one.
+				_instanceMapping.put(sourceObject, targetObject);
+				return targetObject;
+				
 			} else {
-				EPackage root_pack = getRootEPackage(Registry.INSTANCE.getEPackage(metamodelURI));
+				EPackage root_pack = getRootEPackage(current_EPackage);
 				org.eclipse.emf.ecore.EClass eClass = getTargetEClass(root_pack, sourceObject.eClass());
 				EObject targetObject = (EObject) EcoreUtil.create(eClass);
 				// Make the mapping between the source object and the target one.
@@ -253,7 +247,6 @@ abstract public class SaverOrLoader {
 			return null;
 		}
 		
-		return null;
 	}
 	
 	/**
@@ -288,26 +281,26 @@ abstract public class SaverOrLoader {
 	protected Enumerator createInstance(EEnumLiteral sourceObject, String metamodelURI) {
 
 		EPackage tmp_epack = Registry.INSTANCE.getEPackage(metamodelURI);
-		EPackage epapa = null;
+		EPackage current_EPackage = null;
 		
 		if(tmp_epack==null) {
 			String tmp_ns_uri = ((EPackage) sourceObject.eContainer().eContainer()).getNsURI();
 			if( tmp_ns_uri.contains(uri_suffix) ) {
-				epapa = Registry.INSTANCE.getEPackage(tmp_ns_uri.replace(uri_suffix, ""));
+				current_EPackage = Registry.INSTANCE.getEPackage(tmp_ns_uri.replace(uri_suffix, ""));
 			} else {
-				epapa = Registry.INSTANCE.getEPackage(tmp_ns_uri + uri_suffix);
+				current_EPackage = Registry.INSTANCE.getEPackage(tmp_ns_uri + uri_suffix);
 			}
 		} else {
 			EPackage root_pack = getRootEPackage(tmp_epack);
 		
 			String enumQName = EcoreHelper.getQualifiedName((org.eclipse.emf.ecore.ENamedElement) sourceObject.getEEnum().eContainer(), ".");
-			epapa = getPackPack(root_pack, enumQName);
+			current_EPackage = getPackPack(root_pack, enumQName);
 		}
 		
-		String pppp_name = ((org.eclipse.emf.ecore.ENamedElement) sourceObject.getEEnum().eContainer()).getName();
+		String container_name = ((org.eclipse.emf.ecore.ENamedElement) sourceObject.getEEnum().eContainer()).getName();
 		
-		String toto = epapa.getClass().getName();
-		String str_enum = toto.replace(".impl." + CodeGenUtil.capName(pppp_name) + "PackageImpl", "." + sourceObject.getEEnum().getName());
+		String java_qname_package = current_EPackage.getClass().getName();
+		String str_enum = java_qname_package.replace(".impl." + CodeGenUtil.capName(container_name) + "PackageImpl", "." + sourceObject.getEEnum().getName());
 		
 		if(str_enum.equals("ecore.impl.EcorePackageImpl") && metamodelURI.equals(org.eclipse.emf.ecore.EcorePackage.eNS_URI + this.uri_suffix)) {
 			if(sourceObject.eContainer().eContainer().getClass() == org.eclipse.emf.ecore.impl.EPackageImpl.class) {
@@ -320,20 +313,12 @@ abstract public class SaverOrLoader {
 		try {
 			str_pack_Class = SaverOrLoader.class.getClassLoader().loadClass(str_enum);
 		
-		} catch (ClassNotFoundException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		} catch (SecurityException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IllegalArgumentException e) {
-			// TODO Auto-generated catch block
+		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		}
 		
 		try {
 			String creationMethodName = "getByName";
-			//Method method = str_pack_Class.getClass().getMethod(creationMethodName, new Class[] {});
 			Method method = str_pack_Class.getMethod(creationMethodName, java.lang.String.class);
 			Enumerator targetObject = (Enumerator) method.invoke(str_pack_Class, new Object[] {sourceObject.getLiteral()});
 			return targetObject;
@@ -370,19 +355,10 @@ abstract public class SaverOrLoader {
 			_epack = (EPackage) field.get(null);
 		
 		} catch (ClassNotFoundException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
-		} catch (SecurityException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		} catch (NoSuchFieldException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IllegalArgumentException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IllegalAccessException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
@@ -473,7 +449,7 @@ abstract public class SaverOrLoader {
 				str_clazz = element.getAttribute("class");
 			}
 		} else {
-			str_clazz = PersistenceMapping.uri_ePackageClass.get(metamodelURI);
+			str_clazz = PersistenceMapping.getInstance().uri_ePackageClass.get(metamodelURI);
 		}
 		
 		if( str_clazz!=null ) {
@@ -485,16 +461,10 @@ abstract public class SaverOrLoader {
 				
 				Registry.INSTANCE.put( metamodelURI, ePackage );
 			} catch (ClassNotFoundException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			} catch (IllegalAccessException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (SecurityException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			} catch (NoSuchFieldException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
@@ -511,6 +481,15 @@ abstract public class SaverOrLoader {
 		for( IConfigurationElement currentElement : elements ) {
 			if ( currentElement.getAttribute("uri").equals( metamodelURI ) ) {
 				return currentElement;
+			}
+		}
+		return null;
+	}
+	
+	public org.eclipse.emf.ecore.EClass getTargetEClassGenerated(EPackage root_pack, org.eclipse.emf.ecore.EClass eClass) {
+		for(EClassifier e : getPackPack(root_pack, EcoreHelper.getQualifiedName(eClass.getEPackage(), ".")).getEClassifiers() ) {
+			if(e instanceof org.eclipse.emf.ecore.EClass && e.getName().equals(eClass.getName()) ) {
+				return (org.eclipse.emf.ecore.EClass) e;
 			}
 		}
 		return null;
