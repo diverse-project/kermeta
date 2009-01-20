@@ -1,4 +1,4 @@
-/* $Id: AssignmentHelper.kmt,v 1.5 2009-01-19 14:17:29 cfaucher Exp $
+/* $Id: AssignmentHelper.kmt,v 1.6 2009-01-20 15:52:13 cfaucher Exp $
  * Creation date: Nov 06, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -35,7 +35,7 @@ aspect class Assignment {
 	operation ppCastPrefix(context : KM2EcoreContext) : String is do
 		result := ""
 		if self.isCast() then
-			result := self.ppCast(context) + context.JAVA_INSTANCE_EXECUTION_CONTEXT + ".asTypeOrVoid("
+			result := self.ppCast(context) + context.OBJECT_UTIL_CLASS + ".asTypeOrVoid("
 		end
 	end
 	
