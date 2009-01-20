@@ -3,32 +3,9 @@ package org.kermeta.compil.runtime.helper.basetypes;
 
 import kermeta.standard.StandardFactory;
 
-import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.common.util.BasicEList;
 
-/** Implementation of Kermeta base type Map  
- * to be used via an extern call in Kermeta */
 public class MapUtil {
-	
-	/**
-	 * IMPORTANT README
-	 * 
-	 * two hashtables are used in java to implement the hashtable<K,V> of kermeta
-	 * 
-	 * when using a hahstable<String><Integer> and doing the sequence
-	 * 	put("key", 333)
-	 *  get("key")
-	 *  
-	 *  "key" is generally not the same RuntimeObject because it is used in
-	 *  different methods, it comes from a variable, and so on
-	 *  
-	 *  But when accessing the getData().get("Value") you should find the same
-	 *  "key" java String.
-	 *  
-	 *  So, the content of the runtimeObject (ro.getData().get("Value") is used
-	 *  as entry both to get the ro available keys in KeyHashtable and ro values
-	 *  in KeyContentHahstable. 
-	 *
-	 */
 	
 	// Implementation of method size called as :
 	public static <K, V> java.lang.Integer size(kermeta.utils.Hashtable<K, V> self) {
@@ -41,11 +18,11 @@ public class MapUtil {
 	public static <K, V> kermeta.standard.Iterator<K> keysIterator(kermeta.utils.Hashtable<K, V> self) {
 		initialize(self);
 		
-		self.getWrappedHashtable().keySet().iterator();
-		kermeta.standard.Collection<K> newBag = StandardFactory.eINSTANCE.createBag();
-		newBag.setValues((EList<K>) self.getWrappedHashtable().keySet());
+		kermeta.standard.Set<K> newSet = StandardFactory.eINSTANCE.createSet();
+		newSet.setValues( new BasicEList<K>() );
+		newSet.getValues().addAll(self.getWrappedHashtable().keySet());
 		
-		return newBag.iterator();
+		return newSet.iterator();
 	}
 
 	// Implementation of method valueIterator called as :
@@ -53,9 +30,9 @@ public class MapUtil {
 	public static <K, V> kermeta.standard.Iterator<V> valueIterator(kermeta.utils.Hashtable<K, V> self) {
 		initialize(self);
 		
-		self.getWrappedHashtable().values().iterator();
-		kermeta.standard.Collection<V> newBag = StandardFactory.eINSTANCE.createBag();
-		newBag.setValues((EList<V>) self.getWrappedHashtable().keySet());
+		kermeta.standard.Bag<V> newBag = StandardFactory.eINSTANCE.createBag();
+		newBag.setValues( new BasicEList<V>() );
+		newBag.getValues().addAll(self.getWrappedHashtable().values());
 		
 		return newBag.iterator();
 	}
