@@ -2,7 +2,7 @@
 	 package="org.kermeta.compiler.generator.templates"
 	 class="PersistenceMapping"
 	 skeleton="../../skeleton/2param.skeleton"
-	 version="$Id: PersistenceMapping.javajet,v 1.2 2008-10-17 14:40:18 cfaucher Exp $" %>
+	 version="$Id: PersistenceMapping.javajet,v 1.3 2009-01-20 14:08:37 cfaucher Exp $" %>
 <%String uriEPackageInstance = (String) argument0;%>
 <%String uriEPackageClass = (String) argument1;%>
 
@@ -17,10 +17,28 @@ final public class PersistenceMapping {
 	
 	/**
 	 * @generated
+	 */
+	private PersistenceMapping() {
+		initialize();
+	}
+
+	static private PersistenceMapping _instance;
+
+	/**
+	 * @generated
+	 */
+	public static PersistenceMapping getInstance() {
+		if (_instance == null)
+			_instance = new PersistenceMapping();
+		return _instance;
+	}
+	
+	/**
+	 * @generated
 	 * Initialize the EPackage registry for the generated EPackages that are not deployed 
 	 */
-	public static void initialize() {
-		
+	public void initialize() {
+
 		initializeMap();
 		
 		//The following source code comes from Simk
@@ -31,12 +49,12 @@ final public class PersistenceMapping {
 	/**
 	 * @generated
 	 */
-	public static HashMap<String, String> uri_ePackageClass = new HashMap<String, String>();
-	
+	public HashMap<String, String> uri_ePackageClass = new HashMap<String, String>();
+
 	/**
 	 * @generated
 	 */
-	private static void initializeMap() {
+	private void initializeMap() {
 		<%=uriEPackageClass%>
 	}
 	
