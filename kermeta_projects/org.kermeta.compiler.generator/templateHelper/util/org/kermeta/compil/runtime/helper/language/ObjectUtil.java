@@ -22,6 +22,7 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.Enumerator;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
+import org.kermeta.compil.runtime.ExecutionContext;
 import org.kermeta.compil.runtime.helper.basetypes.BooleanUtil;
 import org.kermeta.compil.runtime.helper.basetypes.CharacterUtil;
 import org.kermeta.compil.runtime.helper.basetypes.CollectionUtil;
@@ -562,6 +563,13 @@ public class ObjectUtil {
 	//end of CONVERT VALUE TYPES IN OBJECT
 	
 	public static Boolean equalsSwitcher(java.lang.Object object, java.lang.Object element) {
+		
+		/*** Equals optimization ***/
+		if( object==element ) {
+			return true;
+		}
+		/******/
+		
 		if( object instanceof kermeta.language.structure.Object && element instanceof kermeta.language.structure.Object) {
 			
 			//Equals dedicated to the ValueTypes
@@ -584,17 +592,20 @@ public class ObjectUtil {
 	}
 	
 	public static Boolean equals(kermeta.language.structure.Object object, kermeta.language.structure.Object element) {
-		//if( object == null || element == null ) {
 			return object==element;
-		/*} else {
-			return object.equals(element);
-		}*/
 	}
 	
 	public static Boolean equals(java.lang.Object object, java.lang.Object element) {
 		if( object == null || element == null ) {
 			return object==element;
 		} else {
+			
+			/*** Equals optimization ***/
+			if( object==element ) {
+				return true;
+			}
+			/******/
+			
 			if( object instanceof java.lang.String || object instanceof java.lang.Integer || object instanceof java.lang.Boolean || object instanceof java.lang.Character || object instanceof java.lang.Double ) {
 				return object.equals(element);
 			} else {
@@ -604,19 +615,11 @@ public class ObjectUtil {
 	}
 	
 	public static Boolean equals(kermeta.language.structure.Object object, java.lang.Object element) {
-		//if( object == null || element == null ) {
-			return object==element;
-		/*} else {
-			return object.equals(element);
-		}*/
+		return object==element;
 	}
 	
 	public static Boolean equals(java.lang.Object object, kermeta.language.structure.Object element) {
-		//if( object == null || element == null ) {
-			return object==element;
-		/*} else {
-			return object.equals(element);
-		}*/
+		return object==element;
 	}
 	
 	public static Boolean isFrozen(kermeta.language.structure.Object self) {
@@ -944,19 +947,42 @@ public class ObjectUtil {
 	/**
 	 * @generated
 	 */
-	public static java.lang.Object asTypeOrVoid(java.lang.Object self, java.lang.String metaClass) {
+	public static java.lang.Object asTypeOrVoid(java.lang.Object self,
+			java.lang.String metaClass) {
 
-		boolean result = false;
-		if(self instanceof kermeta.language.structure.Object) {
-			result = ObjectUtil.isInstanceOf((kermeta.language.structure.Object) self, metaClass);
-		} else {
-			result = ObjectUtil.isInstanceOf((java.lang.Object) self, metaClass);
+		//boolean result = false;
+		
+		if (ExecutionContext.getInstance().hashtable_java_classes.containsKey(metaClass)) {
+			return ExecutionContext.getInstance().hashtable_java_classes.get(metaClass).cast(self);
 		}
 		
-		if(result) {
-			return self;
+		String type = metaClass;
+		
+		//Optimization split-contains
+		if( type.contains("<") ) {
+			String[] type_ = type.split("<");
+			if ( type_.length > 1) {
+				type = type_[0];
+			}
+		}
+		
+		//Case of a Generic Type: G
+		if( type.contains(".") ) {
+		
+			try {
+				//java.lang.Class<?> clazz = ClassLoader.getSystemClassLoader().loadClass(type);
+				java.lang.Class<?> clazz = ExecutionContext.getInstance().getClassLoader().loadClass(type);
+				
+				ExecutionContext.getInstance().hashtable_java_classes.put(metaClass, clazz);
+				
+				/*result = */return clazz.cast(self);//isInstance(self);
+			} catch (ClassNotFoundException e) {
+				return self;
+				//e.printStackTrace();
+			}
+		
 		} else {
-			return null;
+			return self;
 		}
 
 	}
