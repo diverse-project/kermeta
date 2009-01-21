@@ -950,10 +950,14 @@ public class ObjectUtil {
 	public static java.lang.Object asTypeOrVoid(java.lang.Object self,
 			java.lang.String metaClass) {
 
-		//boolean result = false;
+		boolean result = false;
 		
 		if (ExecutionContext.getInstance().hashtable_java_classes.containsKey(metaClass)) {
-			return ExecutionContext.getInstance().hashtable_java_classes.get(metaClass).cast(self);
+			if( ExecutionContext.getInstance().hashtable_java_classes.get(metaClass).isInstance(self) ) {
+				return self;
+			} else {
+				return null;
+			}
 		}
 		
 		String type = metaClass;
@@ -970,12 +974,11 @@ public class ObjectUtil {
 		if( type.contains(".") ) {
 		
 			try {
-				//java.lang.Class<?> clazz = ClassLoader.getSystemClassLoader().loadClass(type);
+
 				java.lang.Class<?> clazz = ExecutionContext.getInstance().getClassLoader().loadClass(type);
-				
 				ExecutionContext.getInstance().hashtable_java_classes.put(metaClass, clazz);
+				result = clazz.isInstance(self);
 				
-				/*result = */return clazz.cast(self);//isInstance(self);
 			} catch (ClassNotFoundException e) {
 				return self;
 				//e.printStackTrace();
@@ -983,6 +986,12 @@ public class ObjectUtil {
 		
 		} else {
 			return self;
+		}
+		
+		if( result ) {
+			return self;
+		} else {
+			return null;
 		}
 
 	}
