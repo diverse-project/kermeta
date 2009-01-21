@@ -19,8 +19,8 @@ Require-Bundle: fr.irisa.triskell.kermeta.model,
  fr.irisa.triskell.kermeta.io;visibility:=reexport,
  org.eclipse.debug.core,
  org.junit4,
- org.apache.commons.logging;bundle-version="1.0.4",
- org.eclipse.emf.ecoretools.registration;bundle-version="1.0.0"
+ org.apache.commons.logging;bundle-version="[1.0.4,2.0.0)",
+ org.eclipse.emf.ecoretools.registration;bundle-version="[1.0.99,2.0.0)"
 Export-Package: fr.irisa.triskell.kermeta.builder,
  fr.irisa.triskell.kermeta.dev.interpreter,
  fr.irisa.triskell.kermeta.error,
