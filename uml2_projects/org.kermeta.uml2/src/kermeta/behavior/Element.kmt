@@ -1,0 +1,31 @@
+/* $Id: Element.kmt,v 1.1 2009-01-21 15:19:49 dvojtise Exp $
+ * Creation date: Oct 16, 2008
+ * License:	EPL
+ * Copyright:	INRIA
+ * Authors:
+ *			Didier Vojtisek
+ */
+
+
+
+package uml;
+
+
+require kermeta
+require "http://www.eclipse.org/uml2/2.1.0/UML"
+
+using kermeta::persistence
+using kermeta::standard
+using kermeta::exceptions
+using uml
+
+aspect class Element {
+	property owner : Element
+        getter is do
+            result := container.asType(Element)
+        end
+
+
+}
+
+

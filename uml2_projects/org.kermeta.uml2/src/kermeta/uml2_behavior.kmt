@@ -1,4 +1,4 @@
-/* $Id: uml2_behavior.kmt,v 1.2 2008-07-03 13:25:41 gperroui Exp $
+/* $Id: uml2_behavior.kmt,v 1.3 2009-01-21 15:19:49 dvojtise Exp $
  * Creation date: March 19, 2008
  * License:
  * Copyright:
@@ -14,5 +14,6 @@ require kermeta
 require "platform:/resource/org.kermeta.uml2/src/kermeta/behavior/NamedElement.kmt"
 require "platform:/resource/org.kermeta.uml2/src/kermeta/behavior/Component.kmt"
 require "platform:/resource/org.kermeta.uml2/src/kermeta/behavior/Package.kmt"
+require "platform:/resource/org.kermeta.uml2/src/kermeta/behavior/Element.kmt"
 class UML2Behavior {
 }
