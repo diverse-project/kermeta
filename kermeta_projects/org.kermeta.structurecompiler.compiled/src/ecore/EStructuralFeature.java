@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: EStructuralFeature.java,v 1.10 2008-11-27 15:50:08 cfaucher Exp $
+ * $Id: EStructuralFeature.java,v 1.11 2009-01-21 09:16:02 cfaucher Exp $
  */
 package ecore;
 
@@ -15,8 +15,8 @@ package ecore;
  * The following features are supported:
  * <ul>
  *   <li>{@link ecore.EStructuralFeature#is_volatile <em>volatile</em>}</li>
- *   <li>{@link ecore.EStructuralFeature#getEContainingClass <em>EContaining Class</em>}</li>
  *   <li>{@link ecore.EStructuralFeature#getDefaultValueLiteral <em>Default Value Literal</em>}</li>
+ *   <li>{@link ecore.EStructuralFeature#getEContainingClass <em>EContaining Class</em>}</li>
  *   <li>{@link ecore.EStructuralFeature#is_transient <em>transient</em>}</li>
  *   <li>{@link ecore.EStructuralFeature#isUnsettable <em>Unsettable</em>}</li>
  *   <li>{@link ecore.EStructuralFeature#isDerived <em>Derived</em>}</li>
@@ -57,24 +57,6 @@ public interface EStructuralFeature extends ETypedElement {
 	void set_volatile(boolean value);
 
 	/**
-	 * Returns the value of the '<em><b>EContaining Class</b></em>' container reference.
-	 * It is bidirectional and its opposite is '{@link ecore.EClass#getEStructuralFeatures <em>EStructural Features</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>EContaining Class</em>' container reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>EContaining Class</em>' container reference.
-	 * @see ecore.EcorePackage#getEStructuralFeature_EContainingClass()
-	 * @see ecore.EClass#getEStructuralFeatures
-	 * @model opposite="eStructuralFeatures" changeable="false"
-	 *        annotation="kermeta ecore.isTransient='true'"
-	 * @generated
-	 */
-	EClass getEContainingClass();
-
-	/**
 	 * Returns the value of the '<em><b>Default Value Literal</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <p>
@@ -99,6 +81,24 @@ public interface EStructuralFeature extends ETypedElement {
 	 * @generated
 	 */
 	void setDefaultValueLiteral(String value);
+
+	/**
+	 * Returns the value of the '<em><b>EContaining Class</b></em>' container reference.
+	 * It is bidirectional and its opposite is '{@link ecore.EClass#getEStructuralFeatures <em>EStructural Features</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>EContaining Class</em>' container reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>EContaining Class</em>' container reference.
+	 * @see ecore.EcorePackage#getEStructuralFeature_EContainingClass()
+	 * @see ecore.EClass#getEStructuralFeatures
+	 * @model opposite="eStructuralFeatures" changeable="false"
+	 *        annotation="kermeta ecore.isTransient='true'"
+	 * @generated
+	 */
+	EClass getEContainingClass();
 
 	/**
 	 * Returns the value of the '<em><b>transient</b></em>' attribute.

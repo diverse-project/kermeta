@@ -1,22 +1,51 @@
 
 package org.kermeta.compil.runtime.helper.language;
 
+import kermeta.language.structure.ClassDefinition;
+import kermeta.language.structure.ParameterizedType;
+import kermeta.language.structure.PrimitiveType;
+import kermeta.language.structure.Type;
 
-/**
- * Implementation of the extern of the class Type in Kermeta framework
- * it does the mapping with fr.irisa.triskell.kermeta.language.structure.Type and its kermeta version
- */
+
 public class TypeUtil {
 
-
-	// Implementation of method cloneObject called as :
-	// extern fr::irisa::triskell::kermeta::runtime::language::Type.hasSubType(object)
-	/**
-	 * note: it is able to say if a type is a subtype of another
-	 * current implementation relies on KCoreObject, this means that it works only if the type object comes from
-	 * a kermeta definition (ie. in a require) It won't work with types created by the user 
-	 */
+	public static java.lang.Boolean hasSubTypeSwitcher(kermeta.language.structure.Type self, kermeta.language.structure.Object object) {
+		if(self instanceof kermeta.language.structure.Type && object instanceof kermeta.language.structure.Object ) {
+			return hasSubType((kermeta.language.structure.Type) self, (kermeta.language.structure.Object) object);
+		} else {
+			return hasSubType(self, object);
+		}
+	}
+	
 	public static java.lang.Boolean hasSubType(kermeta.language.structure.Type self, kermeta.language.structure.Object object) {
+		
+		if(object instanceof ParameterizedType) {
+			String expected_qn = ObjectUtil.qualifiedNameDot((ClassDefinition) ((ParameterizedType) self).getTypeDefinition());
+			for( Type cd_type : ObjectUtil.allSuperTypes((ClassDefinition) ((ParameterizedType) object).getTypeDefinition()) ) {
+				
+				if(cd_type instanceof  ParameterizedType) {
+					String qn = ObjectUtil.qualifiedNameDot(((ParameterizedType) cd_type).getTypeDefinition());
+					if( expected_qn.equals(qn) ) {
+						return true;
+					}
+				}
+				
+				
+				//return ObjectUtil.allSuperTypes((ClassDefinition) ((ParameterizedType) object).getTypeDefinition()).contains(self);
+			}
+			return false;
+		}
+		if(object instanceof PrimitiveType) {
+			return hasSubType(self, ((PrimitiveType)object).getInstanceType());
+		}
+		return null;
+	}
+	
+	public static java.lang.Boolean hasSubType(kermeta.language.structure.Type self, java.lang.Object object) {
+		if (true)
+			throw new org.kermeta.compil.runtime.helper.error.KRuntimeError(
+					((kermeta.exceptions.NotImplementedException) org.kermeta.compil.runtime.helper.language.ClassUtil
+							.newObject("kermeta.exceptions.NotImplementedException")));
 		return null;
 	}
 
@@ -65,12 +94,23 @@ public class TypeUtil {
 	}
 	
 	public static java.lang.Boolean isSuperTypeOf(kermeta.language.structure.Type type, kermeta.language.structure.Type metaClass) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		if(metaClass instanceof ParameterizedType) {
+			return ObjectUtil.allSuperTypes((ClassDefinition) ((ParameterizedType) metaClass).getTypeDefinition()).contains(type);
+		}
+		//if metaClass is instance of PrimitiveType then the method is recalled on the getInstanceType
+		if(metaClass instanceof PrimitiveType) {
+			return isSuperTypeOf( ((PrimitiveType) type).getInstanceType() , metaClass);
+		}
+		
+		return false;
 	}
 	
 	public static java.lang.Boolean isSuperTypeOf(java.lang.Object type, java.lang.Object metaClass) {
-		// TODO Auto-generated method stub
+		if (true)
+			throw new org.kermeta.compil.runtime.helper.error.KRuntimeError(
+					((kermeta.exceptions.NotImplementedException) org.kermeta.compil.runtime.helper.language.ClassUtil
+							.newObject("kermeta.exceptions.NotImplementedException")));
 		return null;
 	}
 	

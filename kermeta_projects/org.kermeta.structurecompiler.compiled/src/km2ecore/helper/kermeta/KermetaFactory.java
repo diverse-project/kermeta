@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: KermetaFactory.java,v 1.9 2008-11-27 15:50:13 cfaucher Exp $
+ * $Id: KermetaFactory.java,v 1.10 2009-01-21 09:16:06 cfaucher Exp $
  */
 package km2ecore.helper.kermeta;
 
@@ -27,15 +27,6 @@ public interface KermetaFactory extends EFactory {
 			.init();
 
 	/**
-	 * Returns a new object of class '<em>Compiler Helper Java</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Compiler Helper Java</em>'.
-	 * @generated
-	 */
-	CompilerHelperJava createCompilerHelperJava();
-
-	/**
 	 * Returns a new object of class '<em>Generic Type Definition Helper</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -43,6 +34,15 @@ public interface KermetaFactory extends EFactory {
 	 * @generated
 	 */
 	GenericTypeDefinitionHelper createGenericTypeDefinitionHelper();
+
+	/**
+	 * Returns a new object of class '<em>Compiler Helper Java</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Compiler Helper Java</em>'.
+	 * @generated
+	 */
+	CompilerHelperJava createCompilerHelperJava();
 
 	/**
 	 * Returns the package supported by this factory.

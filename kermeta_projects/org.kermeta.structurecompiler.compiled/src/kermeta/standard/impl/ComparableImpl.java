@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ComparableImpl.java,v 1.9 2008-11-27 15:49:56 cfaucher Exp $
+ * $Id: ComparableImpl.java,v 1.10 2009-01-21 09:15:58 cfaucher Exp $
  */
 package kermeta.standard.impl;
 

@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: Filter.java,v 1.9 2008-11-27 15:50:03 cfaucher Exp $
+ * $Id: Filter.java,v 1.10 2009-01-21 09:15:59 cfaucher Exp $
  */
 package kermeta.language.structure;
 

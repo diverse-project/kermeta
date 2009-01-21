@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: JavaKeyWordListImpl.java,v 1.9 2008-11-27 15:50:06 cfaucher Exp $
+ * $Id: JavaKeyWordListImpl.java,v 1.10 2009-01-21 09:16:01 cfaucher Exp $
  */
 package km2ecore.common.impl;
 
@@ -191,7 +191,8 @@ public class JavaKeyWordListImpl extends ObjectImpl implements JavaKeyWordList {
 
 		this
 				.setKeywords(((kermeta.utils.Hashtable<java.lang.String, java.lang.String>) org.kermeta.compil.runtime.helper.language.ClassUtil
-						.newObject("kermeta.utils.Hashtable<java.lang.String, java.lang.String>")));
+						.newObject(kermeta.utils.UtilsPackage.eINSTANCE
+								.getHashtable())));
 
 		this.addKeyword("abstract");
 

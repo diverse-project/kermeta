@@ -1,5 +1,5 @@
 
-/*$Id: Loader.java,v 1.11 2008-11-27 15:50:12 cfaucher Exp $
+/*$Id: Loader.java,v 1.12 2009-01-21 09:16:06 cfaucher Exp $
 * Project : org.kermeta.compiler.generator
 * File : 	Loader.java
 * License : EPL
@@ -12,8 +12,9 @@
 */
 package org.kermeta.compil.runtime.helper.persistence;
 
-import java.util.ArrayList;
 import java.util.List;
+
+import kermeta.persistence.EMFResource;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.Enumerator;
@@ -25,7 +26,6 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
-import org.kermeta.compil.runtime.ExecutionContext;
 
 /**
  * @generated
@@ -45,15 +45,29 @@ public class Loader extends SaverOrLoader {
 		
 		Loader l = new Loader(metamodelURI);
 		l.normalizeRegistry(modelURI, metamodelURI);
-		List<EObject> instances = new ArrayList<EObject>();
+		//List<EObject> instances = new ArrayList<EObject>();
+		
 		ResourceSet rs = new ResourceSetImpl();
 		
 		org.eclipse.emf.ecore.resource.Resource resource = rs.getResource( URI.createURI(modelURI), true );
 		
-		for ( EObject o : resource.getContents() ) {
-			instances.add( l.clone(o) );
+		if( metamodelURI.equals("") ) {
+			metamodelURI = resource.getContents().get(0).eClass().getEPackage().getNsURI();
+			l = new Loader(metamodelURI);
+			l.normalizeRegistry(modelURI, metamodelURI);
 		}
-		contents.addAll(instances);	
+		
+		for ( EObject o : resource.getContents() ) {
+			contents.add( l.clone(o) );
+		}
+		//contents.addAll(instances);
+		
+		//Set the containing resource info, for the root elements
+		for(java.lang.Object a_root_object : contents) {
+			if(a_root_object instanceof kermeta.language.structure.Object) {
+				org.kermeta.compil.runtime.helper.language.ObjectUtil.setContainingResource((kermeta.language.structure.Object) a_root_object, (EMFResource) kermetaResource);
+			}
+		}
 	}
 	
 	/**
@@ -201,6 +215,7 @@ public class Loader extends SaverOrLoader {
 	private EStructuralFeature getEStructuralFeature(EClass clazz, String featureName) {
 		for ( EStructuralFeature feature : clazz.getEAllStructuralFeatures() )
 			// Pay attention to special keywords that have been prefixed with the '_' character.
+			// FIXME TODO We need use the dictionnary of Java Keywords CF: Holala Paco, this patch should be handled in another way...
 			if ( feature.getName().equals(featureName) || feature.getName().equals("_" + featureName) )
 				return feature;
 		return null;

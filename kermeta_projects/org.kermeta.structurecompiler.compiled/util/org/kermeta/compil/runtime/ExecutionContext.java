@@ -27,16 +27,25 @@ public class ExecutionContext {
 
 	private List<Object> _modelKM;
 
+	public ClassLoader _classLoader;
+
+	public ClassLoader getClassLoader() {
+		return _classLoader;
+	}
+
 	/**
 	 * @generated
 	 */
 	private ExecutionContext() {
 		initValueTypes();
+		_classLoader = ExecutionContext.class.getClassLoader();
 	}
 
 	private static Map<String, String> value_types = new HashMap<String, String>();
 
-	private Hashtable<String, kermeta.language.structure.Class> hashtable_classes = new Hashtable<String, Class>();
+	private Hashtable<String, kermeta.language.structure.Class> hashtable_classes = new Hashtable<String, kermeta.language.structure.Class>();
+
+	public Hashtable<String, java.lang.Class> hashtable_java_classes = new Hashtable<String, java.lang.Class>();
 
 	static private ExecutionContext _instance;
 
@@ -54,7 +63,7 @@ public class ExecutionContext {
 	 * @generated
 	 */
 	public java.lang.Boolean mustBeChecked(String id) {
-		return true;
+		return false;
 	}
 
 	/**
@@ -104,8 +113,10 @@ public class ExecutionContext {
 			return hashtable_classes.get(javaQualifiedName);
 		}
 
-		String[] tmp_javaQualifiedName = javaQualifiedName.split("<");
-		javaQualifiedName = tmp_javaQualifiedName[0];
+		if (javaQualifiedName.contains("<")) {
+			String[] tmp_javaQualifiedName = javaQualifiedName.split("<");
+			javaQualifiedName = tmp_javaQualifiedName[0];
+		}
 
 		// Optimization
 		if (hashtable_classes.containsKey(javaQualifiedName)) {
@@ -192,20 +203,6 @@ public class ExecutionContext {
 			}
 		}
 		return null;
-	}
-
-	/**
-	 * @generated
-	 */
-	public <G> java.lang.Object asTypeOrVoid(java.lang.Object self) {
-
-		try {
-			G o = (G) self;
-		} catch (ClassCastException e) {
-			return null;
-		}
-
-		return self;
 	}
 
 }

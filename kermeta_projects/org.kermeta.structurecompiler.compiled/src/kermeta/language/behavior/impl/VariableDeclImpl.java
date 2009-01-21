@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: VariableDeclImpl.java,v 1.9 2008-11-27 15:49:56 cfaucher Exp $
+ * $Id: VariableDeclImpl.java,v 1.10 2009-01-21 09:15:57 cfaucher Exp $
  */
 package kermeta.language.behavior.impl;
 
@@ -321,7 +321,8 @@ public class VariableDeclImpl extends ExpressionImpl implements VariableDecl {
 		java.lang.String var_id = kermeta.standard.helper.StringWrapper
 				.plus(
 						((km2ecore.helper.java.IdentifierHelper) org.kermeta.compil.runtime.helper.language.ClassUtil
-								.newObject("km2ecore.helper.java.IdentifierHelper"))
+								.newObject(km2ecore.helper.java.JavaPackage.eINSTANCE
+										.getIdentifierHelper()))
 								.getMangledIdentifier(this.getIdentifier(),
 										context), context.printFtSuffix());
 
@@ -330,15 +331,15 @@ public class VariableDeclImpl extends ExpressionImpl implements VariableDecl {
 						kermeta.standard.helper.StringWrapper.plus(result,
 								localType), " "), var_id);
 
-		java.lang.Boolean idIfCond_599 = false;
-		idIfCond_599 = kermeta.standard.helper.BooleanWrapper
+		java.lang.Boolean idIfCond_606 = false;
+		idIfCond_606 = kermeta.standard.helper.BooleanWrapper
 				.not(org.kermeta.compil.runtime.helper.language.ObjectUtil
 						.isVoidSwitcher(this.getInitialization()));
 
-		if (idIfCond_599) {
+		if (idIfCond_606) {
 
-			java.lang.Boolean idIfCond_600 = false;
-			idIfCond_600 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+			java.lang.Boolean idIfCond_607 = false;
+			idIfCond_607 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 					.isInstanceOfSwitcher(
 							this.getInitialization(),
 							org.kermeta.compil.runtime.ExecutionContext
@@ -346,7 +347,7 @@ public class VariableDeclImpl extends ExpressionImpl implements VariableDecl {
 									.getMetaClass(
 											"kermeta.language.behavior.Conditional"));
 
-			if (idIfCond_600) {
+			if (idIfCond_607) {
 
 				context.getResultLastStatementStack().push(
 						kermeta.standard.helper.StringWrapper.plus(

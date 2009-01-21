@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: DataType.java,v 1.9 2008-11-27 15:50:02 cfaucher Exp $
+ * $Id: DataType.java,v 1.10 2009-01-21 09:15:58 cfaucher Exp $
  */
 package kermeta.language.structure;
 

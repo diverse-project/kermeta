@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ProductTypeImpl.java,v 1.9 2008-11-27 15:49:50 cfaucher Exp $
+ * $Id: ProductTypeImpl.java,v 1.10 2009-01-21 09:15:51 cfaucher Exp $
  */
 package kermeta.language.structure.impl;
 
@@ -157,16 +157,16 @@ public class ProductTypeImpl extends TypeContainerImpl implements ProductType {
 
 		result = null;
 
-		java.lang.Boolean idIfCond_196 = false;
-		idIfCond_196 = kermeta.standard.helper.IntegerWrapper.isLower(index,
+		java.lang.Boolean idIfCond_351 = false;
+		idIfCond_351 = kermeta.standard.helper.IntegerWrapper.isLower(index,
 				org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
 						.<kermeta.language.structure.Type> convertAsSequence(
 								this.getType()).size());
 
-		if (idIfCond_196) {
+		if (idIfCond_351) {
 
-			java.lang.Boolean idIfCond_197 = false;
-			idIfCond_197 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+			java.lang.Boolean idIfCond_352 = false;
+			idIfCond_352 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 					.isInstanceOfSwitcher(
 							org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
 									.<kermeta.language.structure.Type> convertAsSequence(
@@ -176,7 +176,7 @@ public class ProductTypeImpl extends TypeContainerImpl implements ProductType {
 									.getMetaClass(
 											"kermeta.language.structure.FunctionType"));
 
-			if (idIfCond_197) {
+			if (idIfCond_352) {
 
 				result = ((kermeta.language.structure.FunctionType) org.kermeta.compil.runtime.helper.language.ObjectUtil
 						.asTypeSwitcher(
@@ -213,8 +213,8 @@ public class ProductTypeImpl extends TypeContainerImpl implements ProductType {
 
 		result = false;
 
-		java.lang.Boolean idIfCond_134 = false;
-		idIfCond_134 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+		java.lang.Boolean idIfCond_291 = false;
+		idIfCond_291 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 				.isInstanceOfSwitcher(
 						this,
 						org.kermeta.compil.runtime.ExecutionContext
@@ -222,10 +222,10 @@ public class ProductTypeImpl extends TypeContainerImpl implements ProductType {
 								.getMetaClass(
 										"kermeta.language.structure.ParameterizedType"));
 
-		if (idIfCond_134) {
+		if (idIfCond_291) {
 
-			java.lang.Boolean idIfCond_135 = false;
-			idIfCond_135 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+			java.lang.Boolean idIfCond_292 = false;
+			idIfCond_292 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 					.isInstanceOfSwitcher(
 							((kermeta.language.structure.ParameterizedType) org.kermeta.compil.runtime.helper.language.ObjectUtil
 									.asTypeSwitcher(
@@ -240,7 +240,7 @@ public class ProductTypeImpl extends TypeContainerImpl implements ProductType {
 									.getMetaClass(
 											"kermeta.language.structure.ClassDefinition"));
 
-			if (idIfCond_135) {
+			if (idIfCond_292) {
 
 				result = ((kermeta.language.structure.ClassDefinition) org.kermeta.compil.runtime.helper.language.ObjectUtil
 						.asTypeSwitcher(
@@ -311,27 +311,85 @@ public class ProductTypeImpl extends TypeContainerImpl implements ProductType {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public kermeta.language.structure.Class getClassFromPrimitiveType() {
+
+		kermeta.language.structure.Class result = null;
+
+		java.lang.Boolean idIfCond_293 = false;
+		idIfCond_293 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+				.isInstanceOfSwitcher(
+						this,
+						org.kermeta.compil.runtime.ExecutionContext
+								.getInstance()
+								.getMetaClass(
+										"kermeta.language.structure.PrimitiveType"));
+
+		if (idIfCond_293) {
+
+			kermeta.language.structure.PrimitiveType pt = ((kermeta.language.structure.PrimitiveType) org.kermeta.compil.runtime.helper.language.ObjectUtil
+					.asTypeSwitcher(
+							this,
+							org.kermeta.compil.runtime.ExecutionContext
+									.getInstance()
+									.getMetaClass(
+											"kermeta.language.structure.PrimitiveType")));
+
+			java.lang.Boolean idIfCond_294 = false;
+			idIfCond_294 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+					.isInstanceOfSwitcher(pt.getInstanceType(),
+							org.kermeta.compil.runtime.ExecutionContext
+									.getInstance().getMetaClass(
+											"kermeta.language.structure.Class"));
+
+			if (idIfCond_294) {
+
+				result = ((kermeta.language.structure.Class) org.kermeta.compil.runtime.helper.language.ObjectUtil
+						.asTypeSwitcher(
+								pt.getInstanceType(),
+								org.kermeta.compil.runtime.ExecutionContext
+										.getInstance()
+										.getMetaClass(
+												"kermeta.language.structure.Class")));
+			} else {
+
+				result = pt.getInstanceType().getClassFromPrimitiveType();
+			}
+
+		} else {
+
+			result = null;
+		}
+
+		return result;
+
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public Boolean isBooleanTypeDef(KM2EcoreContext context) {
 
 		java.lang.Boolean result = null;
 
 		result = false;
 
-		java.lang.Boolean idIfCond_136 = false;
-		idIfCond_136 = kermeta.standard.helper.BooleanWrapper
+		java.lang.Boolean idIfCond_295 = false;
+		idIfCond_295 = kermeta.standard.helper.BooleanWrapper
 				.not(org.kermeta.compil.runtime.helper.language.ObjectUtil
 						.isVoidSwitcher(this));
 
-		if (idIfCond_136) {
+		if (idIfCond_295) {
 
-			java.lang.Boolean idIfCond_137 = false;
-			idIfCond_137 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+			java.lang.Boolean idIfCond_296 = false;
+			idIfCond_296 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 					.isInstanceOfSwitcher(this,
 							org.kermeta.compil.runtime.ExecutionContext
 									.getInstance().getMetaClass(
 											"kermeta.language.structure.Class"));
 
-			if (idIfCond_137) {
+			if (idIfCond_296) {
 
 				result = kermeta.standard.helper.StringWrapper
 						.equals(
@@ -346,8 +404,8 @@ public class ProductTypeImpl extends TypeContainerImpl implements ProductType {
 								"Boolean");
 			} else {
 
-				java.lang.Boolean idIfCond_138 = false;
-				idIfCond_138 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+				java.lang.Boolean idIfCond_297 = false;
+				idIfCond_297 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 						.isInstanceOfSwitcher(
 								this,
 								org.kermeta.compil.runtime.ExecutionContext
@@ -355,10 +413,10 @@ public class ProductTypeImpl extends TypeContainerImpl implements ProductType {
 										.getMetaClass(
 												"kermeta.language.structure.PrimitiveType"));
 
-				if (idIfCond_138) {
+				if (idIfCond_297) {
 
-					java.lang.Boolean idIfCond_139 = false;
-					idIfCond_139 = kermeta.standard.helper.BooleanWrapper
+					java.lang.Boolean idIfCond_298 = false;
+					idIfCond_298 = kermeta.standard.helper.BooleanWrapper
 							.or(
 									kermeta.standard.helper.BooleanWrapper
 											.or(
@@ -409,7 +467,7 @@ public class ProductTypeImpl extends TypeContainerImpl implements ProductType {
 															.createBehaviorJava(context),
 													"Boolean"));
 
-					if (idIfCond_139) {
+					if (idIfCond_298) {
 
 						result = true;
 					}
@@ -429,64 +487,6 @@ public class ProductTypeImpl extends TypeContainerImpl implements ProductType {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public kermeta.language.structure.Class getClassFromPrimitiveType() {
-
-		kermeta.language.structure.Class result = null;
-
-		java.lang.Boolean idIfCond_140 = false;
-		idIfCond_140 = org.kermeta.compil.runtime.helper.language.ObjectUtil
-				.isInstanceOfSwitcher(
-						this,
-						org.kermeta.compil.runtime.ExecutionContext
-								.getInstance()
-								.getMetaClass(
-										"kermeta.language.structure.PrimitiveType"));
-
-		if (idIfCond_140) {
-
-			kermeta.language.structure.PrimitiveType pt = ((kermeta.language.structure.PrimitiveType) org.kermeta.compil.runtime.helper.language.ObjectUtil
-					.asTypeSwitcher(
-							this,
-							org.kermeta.compil.runtime.ExecutionContext
-									.getInstance()
-									.getMetaClass(
-											"kermeta.language.structure.PrimitiveType")));
-
-			java.lang.Boolean idIfCond_141 = false;
-			idIfCond_141 = org.kermeta.compil.runtime.helper.language.ObjectUtil
-					.isInstanceOfSwitcher(pt.getInstanceType(),
-							org.kermeta.compil.runtime.ExecutionContext
-									.getInstance().getMetaClass(
-											"kermeta.language.structure.Class"));
-
-			if (idIfCond_141) {
-
-				result = ((kermeta.language.structure.Class) org.kermeta.compil.runtime.helper.language.ObjectUtil
-						.asTypeSwitcher(
-								pt.getInstanceType(),
-								org.kermeta.compil.runtime.ExecutionContext
-										.getInstance()
-										.getMetaClass(
-												"kermeta.language.structure.Class")));
-			} else {
-
-				result = pt.getInstanceType().getClassFromPrimitiveType();
-			}
-
-		} else {
-
-			result = null;
-		}
-
-		return result;
-
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public Boolean isValueType() {
 
 		java.lang.Boolean result = null;
@@ -495,8 +495,8 @@ public class ProductTypeImpl extends TypeContainerImpl implements ProductType {
 
 		kermeta.language.structure.Type theType = null;
 
-		java.lang.Boolean idIfCond_142 = false;
-		idIfCond_142 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+		java.lang.Boolean idIfCond_299 = false;
+		idIfCond_299 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 				.isInstanceOfSwitcher(
 						this,
 						org.kermeta.compil.runtime.ExecutionContext
@@ -504,7 +504,7 @@ public class ProductTypeImpl extends TypeContainerImpl implements ProductType {
 								.getMetaClass(
 										"kermeta.language.structure.PrimitiveType"));
 
-		if (idIfCond_142) {
+		if (idIfCond_299) {
 
 			theType = ((kermeta.language.structure.Type) org.kermeta.compil.runtime.helper.language.ObjectUtil
 					.asTypeSwitcher(this.getClassFromPrimitiveType(),
@@ -516,8 +516,8 @@ public class ProductTypeImpl extends TypeContainerImpl implements ProductType {
 			theType = this;
 		}
 
-		java.lang.Boolean idIfCond_143 = false;
-		idIfCond_143 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+		java.lang.Boolean idIfCond_300 = false;
+		idIfCond_300 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 				.isInstanceOfSwitcher(
 						theType,
 						org.kermeta.compil.runtime.ExecutionContext
@@ -525,7 +525,7 @@ public class ProductTypeImpl extends TypeContainerImpl implements ProductType {
 								.getMetaClass(
 										"kermeta.language.structure.ParameterizedType"));
 
-		if (idIfCond_143) {
+		if (idIfCond_300) {
 
 			kermeta.language.structure.ParameterizedType pt = ((kermeta.language.structure.ParameterizedType) org.kermeta.compil.runtime.helper.language.ObjectUtil
 					.asTypeSwitcher(
@@ -535,8 +535,8 @@ public class ProductTypeImpl extends TypeContainerImpl implements ProductType {
 									.getMetaClass(
 											"kermeta.language.structure.ParameterizedType")));
 
-			java.lang.Boolean idIfCond_144 = false;
-			idIfCond_144 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+			java.lang.Boolean idIfCond_301 = false;
+			idIfCond_301 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 					.isInstanceOfSwitcher(
 							pt.getTypeDefinition(),
 							org.kermeta.compil.runtime.ExecutionContext
@@ -544,7 +544,7 @@ public class ProductTypeImpl extends TypeContainerImpl implements ProductType {
 									.getMetaClass(
 											"kermeta.language.structure.ClassDefinition"));
 
-			if (idIfCond_144) {
+			if (idIfCond_301) {
 
 				result = ((kermeta.language.structure.ClassDefinition) org.kermeta.compil.runtime.helper.language.ObjectUtil
 						.asTypeSwitcher(
@@ -573,14 +573,14 @@ public class ProductTypeImpl extends TypeContainerImpl implements ProductType {
 
 		result = null;
 
-		java.lang.Boolean idIfCond_145 = false;
-		idIfCond_145 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+		java.lang.Boolean idIfCond_302 = false;
+		idIfCond_302 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 				.isInstanceOfSwitcher(this,
 						org.kermeta.compil.runtime.ExecutionContext
 								.getInstance().getMetaClass(
 										"kermeta.language.structure.Class"));
 
-		if (idIfCond_145) {
+		if (idIfCond_302) {
 
 			kermeta.language.structure.ClassDefinition cd = ((kermeta.language.structure.Class) org.kermeta.compil.runtime.helper.language.ObjectUtil
 					.asTypeSwitcher(this,
@@ -592,8 +592,8 @@ public class ProductTypeImpl extends TypeContainerImpl implements ProductType {
 			result = cd.getName();
 		} else {
 
-			java.lang.Boolean idIfCond_146 = false;
-			idIfCond_146 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+			java.lang.Boolean idIfCond_303 = false;
+			idIfCond_303 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 					.isInstanceOfSwitcher(
 							this,
 							org.kermeta.compil.runtime.ExecutionContext
@@ -601,7 +601,7 @@ public class ProductTypeImpl extends TypeContainerImpl implements ProductType {
 									.getMetaClass(
 											"kermeta.language.structure.ObjectTypeVariable"));
 
-			if (idIfCond_146) {
+			if (idIfCond_303) {
 
 				kermeta.language.structure.ObjectTypeVariable otv = ((kermeta.language.structure.ObjectTypeVariable) org.kermeta.compil.runtime.helper.language.ObjectUtil
 						.asTypeSwitcher(
@@ -614,8 +614,8 @@ public class ProductTypeImpl extends TypeContainerImpl implements ProductType {
 				result = otv.getName();
 			} else {
 
-				java.lang.Boolean idIfCond_147 = false;
-				idIfCond_147 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+				java.lang.Boolean idIfCond_304 = false;
+				idIfCond_304 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 						.isInstanceOfSwitcher(
 								this,
 								org.kermeta.compil.runtime.ExecutionContext
@@ -623,7 +623,7 @@ public class ProductTypeImpl extends TypeContainerImpl implements ProductType {
 										.getMetaClass(
 												"kermeta.language.structure.PrimitiveType"));
 
-				if (idIfCond_147) {
+				if (idIfCond_304) {
 
 					kermeta.language.structure.ClassDefinition cd = this
 							.getClassFromPrimitiveType()
@@ -632,8 +632,8 @@ public class ProductTypeImpl extends TypeContainerImpl implements ProductType {
 					result = cd.getName();
 				} else {
 
-					java.lang.Boolean idIfCond_148 = false;
-					idIfCond_148 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+					java.lang.Boolean idIfCond_305 = false;
+					idIfCond_305 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 							.isInstanceOfSwitcher(
 									this,
 									org.kermeta.compil.runtime.ExecutionContext
@@ -641,7 +641,7 @@ public class ProductTypeImpl extends TypeContainerImpl implements ProductType {
 											.getMetaClass(
 													"kermeta.language.structure.Enumeration"));
 
-					if (idIfCond_148) {
+					if (idIfCond_305) {
 
 						result = ((kermeta.language.structure.Enumeration) org.kermeta.compil.runtime.helper.language.ObjectUtil
 								.asTypeSwitcher(
@@ -653,8 +653,8 @@ public class ProductTypeImpl extends TypeContainerImpl implements ProductType {
 								.getName();
 					} else {
 
-						java.lang.Boolean idIfCond_149 = false;
-						idIfCond_149 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+						java.lang.Boolean idIfCond_306 = false;
+						idIfCond_306 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 								.isInstanceOfSwitcher(
 										this,
 										org.kermeta.compil.runtime.ExecutionContext
@@ -662,7 +662,7 @@ public class ProductTypeImpl extends TypeContainerImpl implements ProductType {
 												.getMetaClass(
 														"kermeta.language.structure.VoidType"));
 
-						if (idIfCond_149) {
+						if (idIfCond_306) {
 
 							result = "VoidType";
 						}
@@ -675,35 +675,35 @@ public class ProductTypeImpl extends TypeContainerImpl implements ProductType {
 
 		}
 
-		java.lang.Boolean idIfCond_150 = false;
+		java.lang.Boolean idIfCond_307 = false;
 		//BIft:orElse
 
-		java.lang.Boolean result_ft37 = null;
+		java.lang.Boolean result_ft109 = null;
 
-		java.lang.Boolean idIfCond_151 = false;
-		idIfCond_151 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+		java.lang.Boolean idIfCond_308 = false;
+		idIfCond_308 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 				.isVoidSwitcher(result);
 
-		if (idIfCond_151) {
+		if (idIfCond_308) {
 
-			result_ft37 = true;
+			result_ft109 = true;
 		} else {
 
 			//BIle:right
-			/*This variable should be never used*/kermeta.language.structure.Object v_lbdExp37 = null;
+			/*This variable should be never used*/kermeta.language.structure.Object v_lbdExp109 = null;
 
-			result_ft37 = ((kermeta.language.structure.Operation) org.kermeta.compil.runtime.helper.language.ClassUtil
-					.newObject("kermeta.language.structure.Operation"))
-					.isVoidType(result);
+			result_ft109 = ((kermeta.language.structure.Operation) org.kermeta.compil.runtime.helper.language.ClassUtil
+					.newObject(kermeta.language.structure.StructurePackage.eINSTANCE
+							.getOperation())).isVoidType(result);
 			//EIle:right
 
 		}
 
 		//CEC
-		idIfCond_150 = result_ft37;
+		idIfCond_307 = result_ft109;
 		//EIft:orElse
 
-		if (idIfCond_150) {
+		if (idIfCond_307) {
 
 			result = "VoidType";
 		}
@@ -723,23 +723,23 @@ public class ProductTypeImpl extends TypeContainerImpl implements ProductType {
 
 		result = false;
 
-		java.lang.Boolean idIfCond_152 = false;
-		idIfCond_152 = kermeta.standard.helper.BooleanWrapper
+		java.lang.Boolean idIfCond_309 = false;
+		idIfCond_309 = kermeta.standard.helper.BooleanWrapper
 				.not(org.kermeta.compil.runtime.helper.language.ObjectUtil
 						.isVoidSwitcher(this));
 
-		if (idIfCond_152) {
+		if (idIfCond_309) {
 
 			java.lang.String tName = null;
 
-			java.lang.Boolean idIfCond_153 = false;
-			idIfCond_153 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+			java.lang.Boolean idIfCond_310 = false;
+			idIfCond_310 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 					.isInstanceOfSwitcher(this,
 							org.kermeta.compil.runtime.ExecutionContext
 									.getInstance().getMetaClass(
 											"kermeta.language.structure.Class"));
 
-			if (idIfCond_153) {
+			if (idIfCond_310) {
 
 				tName = ((kermeta.language.structure.ParameterizedType) org.kermeta.compil.runtime.helper.language.ObjectUtil
 						.asTypeSwitcher(
@@ -750,22 +750,22 @@ public class ProductTypeImpl extends TypeContainerImpl implements ProductType {
 												"kermeta.language.structure.ParameterizedType")))
 						.getTypeDefinition().getName();
 
-				java.lang.Boolean idIfCond_154 = false;
-				idIfCond_154 = kermeta.standard.helper.BooleanWrapper.or(
+				java.lang.Boolean idIfCond_311 = false;
+				idIfCond_311 = kermeta.standard.helper.BooleanWrapper.or(
 						kermeta.standard.helper.StringWrapper.equals(tName,
 								"Integer"),
 						kermeta.standard.helper.StringWrapper.equals(tName,
 								"Real"));
 
-				if (idIfCond_154) {
+				if (idIfCond_311) {
 
 					result = true;
 				}
 
 			} else {
 
-				java.lang.Boolean idIfCond_155 = false;
-				idIfCond_155 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+				java.lang.Boolean idIfCond_312 = false;
+				idIfCond_312 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 						.isInstanceOfSwitcher(
 								this,
 								org.kermeta.compil.runtime.ExecutionContext
@@ -773,7 +773,7 @@ public class ProductTypeImpl extends TypeContainerImpl implements ProductType {
 										.getMetaClass(
 												"kermeta.language.structure.PrimitiveType"));
 
-				if (idIfCond_155) {
+				if (idIfCond_312) {
 
 					tName = ((kermeta.language.structure.PrimitiveType) org.kermeta.compil.runtime.helper.language.ObjectUtil
 							.asTypeSwitcher(
@@ -784,14 +784,14 @@ public class ProductTypeImpl extends TypeContainerImpl implements ProductType {
 													"kermeta.language.structure.PrimitiveType")))
 							.createBehaviorJava(context);
 
-					java.lang.Boolean idIfCond_156 = false;
-					idIfCond_156 = kermeta.standard.helper.BooleanWrapper.or(
+					java.lang.Boolean idIfCond_313 = false;
+					idIfCond_313 = kermeta.standard.helper.BooleanWrapper.or(
 							kermeta.standard.helper.StringWrapper.equals(tName,
 									"Integer"),
 							kermeta.standard.helper.StringWrapper.equals(tName,
 									"Real"));
 
-					if (idIfCond_156) {
+					if (idIfCond_313) {
 
 						result = true;
 					}
@@ -817,14 +817,14 @@ public class ProductTypeImpl extends TypeContainerImpl implements ProductType {
 
 		result = null;
 
-		java.lang.Boolean idIfCond_157 = false;
-		idIfCond_157 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+		java.lang.Boolean idIfCond_314 = false;
+		idIfCond_314 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 				.isInstanceOfSwitcher(this,
 						org.kermeta.compil.runtime.ExecutionContext
 								.getInstance().getMetaClass(
 										"kermeta.language.structure.Class"));
 
-		if (idIfCond_157) {
+		if (idIfCond_314) {
 
 			kermeta.language.structure.ClassDefinition cd = ((kermeta.language.structure.Class) org.kermeta.compil.runtime.helper.language.ObjectUtil
 					.asTypeSwitcher(this,
@@ -836,8 +836,8 @@ public class ProductTypeImpl extends TypeContainerImpl implements ProductType {
 			result = cd.qualifiedName();
 		} else {
 
-			java.lang.Boolean idIfCond_158 = false;
-			idIfCond_158 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+			java.lang.Boolean idIfCond_315 = false;
+			idIfCond_315 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 					.isInstanceOfSwitcher(
 							this,
 							org.kermeta.compil.runtime.ExecutionContext
@@ -845,7 +845,7 @@ public class ProductTypeImpl extends TypeContainerImpl implements ProductType {
 									.getMetaClass(
 											"kermeta.language.structure.ObjectTypeVariable"));
 
-			if (idIfCond_158) {
+			if (idIfCond_315) {
 
 				kermeta.language.structure.ObjectTypeVariable otv = ((kermeta.language.structure.ObjectTypeVariable) org.kermeta.compil.runtime.helper.language.ObjectUtil
 						.asTypeSwitcher(
@@ -858,8 +858,8 @@ public class ProductTypeImpl extends TypeContainerImpl implements ProductType {
 				result = otv.qualifiedName();
 			} else {
 
-				java.lang.Boolean idIfCond_159 = false;
-				idIfCond_159 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+				java.lang.Boolean idIfCond_316 = false;
+				idIfCond_316 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 						.isInstanceOfSwitcher(
 								this,
 								org.kermeta.compil.runtime.ExecutionContext
@@ -867,7 +867,7 @@ public class ProductTypeImpl extends TypeContainerImpl implements ProductType {
 										.getMetaClass(
 												"kermeta.language.structure.PrimitiveType"));
 
-				if (idIfCond_159) {
+				if (idIfCond_316) {
 
 					kermeta.language.structure.ClassDefinition cd = this
 							.getClassFromPrimitiveType()
@@ -876,8 +876,8 @@ public class ProductTypeImpl extends TypeContainerImpl implements ProductType {
 					result = cd.qualifiedName();
 				} else {
 
-					java.lang.Boolean idIfCond_160 = false;
-					idIfCond_160 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+					java.lang.Boolean idIfCond_317 = false;
+					idIfCond_317 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 							.isInstanceOfSwitcher(
 									this,
 									org.kermeta.compil.runtime.ExecutionContext
@@ -885,7 +885,7 @@ public class ProductTypeImpl extends TypeContainerImpl implements ProductType {
 											.getMetaClass(
 													"kermeta.language.structure.Enumeration"));
 
-					if (idIfCond_160) {
+					if (idIfCond_317) {
 
 						result = ((kermeta.language.structure.Enumeration) org.kermeta.compil.runtime.helper.language.ObjectUtil
 								.asTypeSwitcher(
@@ -897,8 +897,8 @@ public class ProductTypeImpl extends TypeContainerImpl implements ProductType {
 								.qualifiedName();
 					} else {
 
-						java.lang.Boolean idIfCond_161 = false;
-						idIfCond_161 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+						java.lang.Boolean idIfCond_318 = false;
+						idIfCond_318 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 								.isInstanceOfSwitcher(
 										this,
 										org.kermeta.compil.runtime.ExecutionContext
@@ -906,7 +906,7 @@ public class ProductTypeImpl extends TypeContainerImpl implements ProductType {
 												.getMetaClass(
 														"kermeta.language.structure.VoidType"));
 
-						if (idIfCond_161) {
+						if (idIfCond_318) {
 
 							result = "kermeta::language::structure::VoidType";
 						}
@@ -919,38 +919,54 @@ public class ProductTypeImpl extends TypeContainerImpl implements ProductType {
 
 		}
 
-		java.lang.Boolean idIfCond_162 = false;
+		java.lang.Boolean idIfCond_319 = false;
 		//BIft:orElse
 
-		java.lang.Boolean result_ft38 = null;
+		java.lang.Boolean result_ft110 = null;
 
-		java.lang.Boolean idIfCond_163 = false;
-		idIfCond_163 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+		java.lang.Boolean idIfCond_320 = false;
+		idIfCond_320 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 				.isVoidSwitcher(result);
 
-		if (idIfCond_163) {
+		if (idIfCond_320) {
 
-			result_ft38 = true;
+			result_ft110 = true;
 		} else {
 
 			//BIle:right
-			/*This variable should be never used*/kermeta.language.structure.Object v_lbdExp38 = null;
+			/*This variable should be never used*/kermeta.language.structure.Object v_lbdExp110 = null;
 
-			result_ft38 = ((kermeta.language.structure.Operation) org.kermeta.compil.runtime.helper.language.ClassUtil
-					.newObject("kermeta.language.structure.Operation"))
-					.isVoidType(result);
+			result_ft110 = ((kermeta.language.structure.Operation) org.kermeta.compil.runtime.helper.language.ClassUtil
+					.newObject(kermeta.language.structure.StructurePackage.eINSTANCE
+							.getOperation())).isVoidType(result);
 			//EIle:right
 
 		}
 
 		//CEC
-		idIfCond_162 = result_ft38;
+		idIfCond_319 = result_ft110;
 		//EIft:orElse
 
-		if (idIfCond_162) {
+		if (idIfCond_319) {
 
 			result = "kermeta::language::structure::VoidType";
 		}
+
+		return result;
+
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Boolean isSubTypeOf(Type object) {
+
+		java.lang.Boolean result = null;
+
+		result = org.kermeta.compil.runtime.helper.language.TypeUtil
+				.isSuperTypeOfSwitcher(object, this);
 
 		return result;
 
@@ -982,46 +998,14 @@ public class ProductTypeImpl extends TypeContainerImpl implements ProductType {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Boolean isSubTypeOf(Type object) {
-
-		java.lang.Boolean result = null;
-
-		result = org.kermeta.compil.runtime.helper.language.TypeUtil
-				.isSuperTypeOfSwitcher(object, this);
-
-		return result;
-
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public Boolean isSuperTypeOf(Type object) {
 
 		java.lang.Boolean result = null;
 
-		result = (java.lang.Boolean) org.kermeta.compil.runtime.ExecutionContext
-				.getInstance().<java.lang.Boolean> asTypeOrVoid(
+		result = (java.lang.Boolean) org.kermeta.compil.runtime.helper.language.ObjectUtil
+				.asTypeOrVoid(
 						org.kermeta.compil.runtime.helper.language.TypeUtil
-								.hasSubType(this, object));
-
-		return result;
-
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Boolean isInstance(kermeta.language.structure.Object element) {
-
-		java.lang.Boolean result = null;
-
-		result = org.kermeta.compil.runtime.helper.language.ObjectUtil
-				.isInstanceOfSwitcher(element, this);
+								.hasSubType(this, object), "java.lang.Boolean");
 
 		return result;
 
@@ -1038,14 +1022,30 @@ public class ProductTypeImpl extends TypeContainerImpl implements ProductType {
 
 		result = false;
 
-		java.lang.Boolean idIfCond_164 = false;
-		idIfCond_164 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+		java.lang.Boolean idIfCond_321 = false;
+		idIfCond_321 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 				.isNotEqualSwitcher(this.getEMFEDataTypeInstanceClassName(), "");
 
-		if (idIfCond_164) {
+		if (idIfCond_321) {
 
 			result = true;
 		}
+
+		return result;
+
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Boolean isInstance(kermeta.language.structure.Object element) {
+
+		java.lang.Boolean result = null;
+
+		result = org.kermeta.compil.runtime.helper.language.ObjectUtil
+				.isInstanceOfSwitcher(element, this);
 
 		return result;
 

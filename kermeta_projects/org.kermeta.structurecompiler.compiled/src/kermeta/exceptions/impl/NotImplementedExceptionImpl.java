@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: NotImplementedExceptionImpl.java,v 1.9 2008-11-27 15:49:47 cfaucher Exp $
+ * $Id: NotImplementedExceptionImpl.java,v 1.10 2009-01-21 09:15:49 cfaucher Exp $
  */
 package kermeta.exceptions.impl;
 

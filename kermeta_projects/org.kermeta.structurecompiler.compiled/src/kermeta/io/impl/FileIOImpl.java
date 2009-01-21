@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: FileIOImpl.java,v 1.9 2008-11-27 15:49:53 cfaucher Exp $
+ * $Id: FileIOImpl.java,v 1.10 2009-01-21 09:15:56 cfaucher Exp $
  */
 package kermeta.io.impl;
 
@@ -49,16 +49,17 @@ public class FileIOImpl extends ObjectImpl implements FileIO {
 	 */
 	public void writeTextFile(String filename, String text) {
 
-		java.lang.Boolean idIfCond_1005 = false;
-		idIfCond_1005 = kermeta.standard.helper.StringWrapper.equals(filename,
+		java.lang.Boolean idIfCond_886 = false;
+		idIfCond_886 = kermeta.standard.helper.StringWrapper.equals(filename,
 				null);
 
-		if (idIfCond_1005) {
+		if (idIfCond_886) {
 
 			if (true)
 				throw new org.kermeta.compil.runtime.helper.error.KRuntimeError(
 						((kermeta.exceptions.FileNotFoundException) org.kermeta.compil.runtime.helper.language.ClassUtil
-								.newObject("kermeta.exceptions.FileNotFoundException")));
+								.newObject(kermeta.exceptions.ExceptionsPackage.eINSTANCE
+										.getFileNotFoundException())));
 
 		}
 
@@ -76,16 +77,17 @@ public class FileIOImpl extends ObjectImpl implements FileIO {
 
 		java.lang.String result = null;
 
-		java.lang.Boolean idIfCond_1006 = false;
-		idIfCond_1006 = kermeta.standard.helper.StringWrapper.equals(filename,
+		java.lang.Boolean idIfCond_887 = false;
+		idIfCond_887 = kermeta.standard.helper.StringWrapper.equals(filename,
 				null);
 
-		if (idIfCond_1006) {
+		if (idIfCond_887) {
 
 			if (true)
 				throw new org.kermeta.compil.runtime.helper.error.KRuntimeError(
 						((kermeta.exceptions.FileNotFoundException) org.kermeta.compil.runtime.helper.language.ClassUtil
-								.newObject("kermeta.exceptions.FileNotFoundException")));
+								.newObject(kermeta.exceptions.ExceptionsPackage.eINSTANCE
+										.getFileNotFoundException())));
 
 		}
 
@@ -93,23 +95,24 @@ public class FileIOImpl extends ObjectImpl implements FileIO {
 
 		java.lang.Boolean isdirectory = null;
 
-		exists = (java.lang.Boolean) org.kermeta.compil.runtime.ExecutionContext
-				.getInstance().<java.lang.Boolean> asTypeOrVoid(
+		exists = (java.lang.Boolean) org.kermeta.compil.runtime.helper.language.ObjectUtil
+				.asTypeOrVoid(
 						org.kermeta.compil.runtime.helper.io.SimpleFileIOUtil
-								.fileExists(filename));
+								.fileExists(filename), "java.lang.Boolean");
 
-		isdirectory = (java.lang.Boolean) org.kermeta.compil.runtime.ExecutionContext
-				.getInstance().<java.lang.Boolean> asTypeOrVoid(
+		isdirectory = (java.lang.Boolean) org.kermeta.compil.runtime.helper.language.ObjectUtil
+				.asTypeOrVoid(
 						org.kermeta.compil.runtime.helper.io.SimpleFileIOUtil
-								.fileIsDirectory(filename));
+								.fileIsDirectory(filename), "java.lang.Boolean");
 
-		java.lang.Boolean idIfCond_1007 = false;
-		idIfCond_1007 = kermeta.standard.helper.BooleanWrapper.not(exists);
+		java.lang.Boolean idIfCond_888 = false;
+		idIfCond_888 = kermeta.standard.helper.BooleanWrapper.not(exists);
 
-		if (idIfCond_1007) {
+		if (idIfCond_888) {
 
 			kermeta.exceptions.FileNotFoundException e = ((kermeta.exceptions.FileNotFoundException) org.kermeta.compil.runtime.helper.language.ClassUtil
-					.newObject("kermeta.exceptions.FileNotFoundException"));
+					.newObject(kermeta.exceptions.ExceptionsPackage.eINSTANCE
+							.getFileNotFoundException()));
 
 			e.setMessage(filename);
 
@@ -119,13 +122,14 @@ public class FileIOImpl extends ObjectImpl implements FileIO {
 
 		}
 
-		java.lang.Boolean idIfCond_1008 = false;
-		idIfCond_1008 = isdirectory;
+		java.lang.Boolean idIfCond_889 = false;
+		idIfCond_889 = isdirectory;
 
-		if (idIfCond_1008) {
+		if (idIfCond_889) {
 
 			kermeta.exceptions.FileNotFoundException e = ((kermeta.exceptions.FileNotFoundException) org.kermeta.compil.runtime.helper.language.ClassUtil
-					.newObject("kermeta.exceptions.FileNotFoundException"));
+					.newObject(kermeta.exceptions.ExceptionsPackage.eINSTANCE
+							.getFileNotFoundException()));
 
 			e.setMessage(kermeta.standard.helper.StringWrapper.plus(filename,
 					" is not a file"));
@@ -136,10 +140,10 @@ public class FileIOImpl extends ObjectImpl implements FileIO {
 
 		}
 
-		result = (java.lang.String) org.kermeta.compil.runtime.ExecutionContext
-				.getInstance().<java.lang.String> asTypeOrVoid(
+		result = (java.lang.String) org.kermeta.compil.runtime.helper.language.ObjectUtil
+				.asTypeOrVoid(
 						org.kermeta.compil.runtime.helper.io.SimpleFileIOUtil
-								.readTextFile(filename));
+								.readTextFile(filename), "java.lang.String");
 
 		return result;
 

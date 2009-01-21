@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: EClassImpl.java,v 1.10 2008-11-27 15:49:51 cfaucher Exp $
+ * $Id: EClassImpl.java,v 1.11 2009-01-21 09:15:52 cfaucher Exp $
  */
 package ecore.impl;
 
@@ -37,8 +37,8 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link ecore.impl.EClassImpl#is_abstract <em>abstract</em>}</li>
  *   <li>{@link ecore.impl.EClassImpl#getEStructuralFeatures <em>EStructural Features</em>}</li>
+ *   <li>{@link ecore.impl.EClassImpl#is_abstract <em>abstract</em>}</li>
  *   <li>{@link ecore.impl.EClassImpl#getEOperations <em>EOperations</em>}</li>
  *   <li>{@link ecore.impl.EClassImpl#is_interface <em>interface</em>}</li>
  *   <li>{@link ecore.impl.EClassImpl#getESuperTypes <em>ESuper Types</em>}</li>
@@ -49,6 +49,16 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * @generated
  */
 public class EClassImpl extends EClassifierImpl implements EClass {
+	/**
+	 * The cached value of the '{@link #getEStructuralFeatures() <em>EStructural Features</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getEStructuralFeatures()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<EStructuralFeature> eStructuralFeatures;
+
 	/**
 	 * The default value of the '{@link #is_abstract() <em>abstract</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -68,16 +78,6 @@ public class EClassImpl extends EClassifierImpl implements EClass {
 	 * @ordered
 	 */
 	protected boolean _abstract = _ABSTRACT_EDEFAULT;
-
-	/**
-	 * The cached value of the '{@link #getEStructuralFeatures() <em>EStructural Features</em>}' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getEStructuralFeatures()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<EStructuralFeature> eStructuralFeatures;
 
 	/**
 	 * The cached value of the '{@link #getEOperations() <em>EOperations</em>}' containment reference list.
@@ -153,6 +153,21 @@ public class EClassImpl extends EClassifierImpl implements EClass {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<EStructuralFeature> getEStructuralFeatures() {
+		if (eStructuralFeatures == null) {
+			eStructuralFeatures = new EObjectContainmentWithInverseEList.Resolving<EStructuralFeature>(
+					EStructuralFeature.class, this,
+					EcorePackage.ECLASS__ESTRUCTURAL_FEATURES,
+					EcorePackage.ESTRUCTURAL_FEATURE__ECONTAINING_CLASS);
+		}
+		return eStructuralFeatures;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public boolean is_abstract() {
 		return _abstract;
 	}
@@ -168,21 +183,6 @@ public class EClassImpl extends EClassifierImpl implements EClass {
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET,
 					EcorePackage.ECLASS__ABSTRACT, old_abstract, _abstract));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EList<EStructuralFeature> getEStructuralFeatures() {
-		if (eStructuralFeatures == null) {
-			eStructuralFeatures = new EObjectContainmentWithInverseEList.Resolving<EStructuralFeature>(
-					EStructuralFeature.class, this,
-					EcorePackage.ECLASS__ESTRUCTURAL_FEATURES,
-					EcorePackage.ESTRUCTURAL_FEATURE__ECONTAINING_CLASS);
-		}
-		return eStructuralFeatures;
 	}
 
 	/**
@@ -253,8 +253,8 @@ public class EClassImpl extends EClassifierImpl implements EClass {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EStructuralFeature getEStructuralFeature(String featureName) {
-		ecore.EStructuralFeature result = null;
+	public int getFeatureID(EStructuralFeature feature) {
+		java.lang.Integer result = null;
 
 		return result;
 
@@ -265,8 +265,8 @@ public class EClassImpl extends EClassifierImpl implements EClass {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public int getFeatureID(EStructuralFeature feature) {
-		java.lang.Integer result = null;
+	public EStructuralFeature getEStructuralFeature(String featureName) {
+		ecore.EStructuralFeature result = null;
 
 		return result;
 
@@ -410,9 +410,9 @@ public class EClassImpl extends EClassifierImpl implements EClass {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<EStructuralFeature> getterEAllStructuralFeatures() {
+	public EList<EOperation> getterEAllOperations() {
 
-		kermeta.standard.OrderedSet<ecore.EStructuralFeature> result = null;
+		kermeta.standard.OrderedSet<ecore.EOperation> result = null;
 
 		return org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
 				.convertAsEList(result);
@@ -424,9 +424,9 @@ public class EClassImpl extends EClassifierImpl implements EClass {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<EOperation> getterEAllOperations() {
+	public EList<EStructuralFeature> getterEAllStructuralFeatures() {
 
-		kermeta.standard.OrderedSet<ecore.EOperation> result = null;
+		kermeta.standard.OrderedSet<ecore.EStructuralFeature> result = null;
 
 		return org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
 				.convertAsEList(result);
@@ -497,10 +497,10 @@ public class EClassImpl extends EClassifierImpl implements EClass {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-		case EcorePackage.ECLASS__ABSTRACT:
-			return is_abstract() ? Boolean.TRUE : Boolean.FALSE;
 		case EcorePackage.ECLASS__ESTRUCTURAL_FEATURES:
 			return getEStructuralFeatures();
+		case EcorePackage.ECLASS__ABSTRACT:
+			return is_abstract() ? Boolean.TRUE : Boolean.FALSE;
 		case EcorePackage.ECLASS__EOPERATIONS:
 			return getEOperations();
 		case EcorePackage.ECLASS__INTERFACE:
@@ -522,13 +522,13 @@ public class EClassImpl extends EClassifierImpl implements EClass {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-		case EcorePackage.ECLASS__ABSTRACT:
-			set_abstract(((Boolean) newValue).booleanValue());
-			return;
 		case EcorePackage.ECLASS__ESTRUCTURAL_FEATURES:
 			getEStructuralFeatures().clear();
 			getEStructuralFeatures().addAll(
 					(Collection<? extends EStructuralFeature>) newValue);
+			return;
+		case EcorePackage.ECLASS__ABSTRACT:
+			set_abstract(((Boolean) newValue).booleanValue());
 			return;
 		case EcorePackage.ECLASS__EOPERATIONS:
 			getEOperations().clear();
@@ -559,11 +559,11 @@ public class EClassImpl extends EClassifierImpl implements EClass {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-		case EcorePackage.ECLASS__ABSTRACT:
-			set_abstract(_ABSTRACT_EDEFAULT);
-			return;
 		case EcorePackage.ECLASS__ESTRUCTURAL_FEATURES:
 			getEStructuralFeatures().clear();
+			return;
+		case EcorePackage.ECLASS__ABSTRACT:
+			set_abstract(_ABSTRACT_EDEFAULT);
 			return;
 		case EcorePackage.ECLASS__EOPERATIONS:
 			getEOperations().clear();
@@ -589,11 +589,11 @@ public class EClassImpl extends EClassifierImpl implements EClass {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-		case EcorePackage.ECLASS__ABSTRACT:
-			return _abstract != _ABSTRACT_EDEFAULT;
 		case EcorePackage.ECLASS__ESTRUCTURAL_FEATURES:
 			return eStructuralFeatures != null
 					&& !eStructuralFeatures.isEmpty();
+		case EcorePackage.ECLASS__ABSTRACT:
+			return _abstract != _ABSTRACT_EDEFAULT;
 		case EcorePackage.ECLASS__EOPERATIONS:
 			return eOperations != null && !eOperations.isEmpty();
 		case EcorePackage.ECLASS__INTERFACE:

@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: Character.java,v 1.4 2008-11-27 15:49:55 cfaucher Exp $
+ * $Id: Character.java,v 1.5 2009-01-21 09:15:57 cfaucher Exp $
  */
 package kermeta.standard;
 

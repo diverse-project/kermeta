@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ModelType.java,v 1.9 2008-11-27 15:50:02 cfaucher Exp $
+ * $Id: ModelType.java,v 1.10 2009-01-21 09:15:58 cfaucher Exp $
  */
 package kermeta.language.structure;
 
@@ -45,7 +45,7 @@ public interface ModelType extends Type, TypeDefinition {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @model annotation="kermeta documentation='/**\n\t * To be written ##########################################\n\t \052/'"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='\nkermeta.language.structure.Model result = null;\n\n\tresult = (kermeta.language.structure.Model) org.kermeta.compil.runtime.ExecutionContext.getInstance().<kermeta.language.structure.Model>asTypeOrVoid(org.kermeta.compil.runtime.helper.language.ModelTypeUtil.newObject(this));\n\nreturn result;\n'"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='\nkermeta.language.structure.Model result = null;\n\n\tresult = (kermeta.language.structure.Model) org.kermeta.compil.runtime.helper.language.ObjectUtil.asTypeOrVoid(org.kermeta.compil.runtime.helper.language.ModelTypeUtil.newObject(this), \"kermeta.language.structure.Model\");\n\nreturn result;\n'"
 	 * @generated
 	 */
 	Model _new();
@@ -55,7 +55,7 @@ public interface ModelType extends Type, TypeDefinition {
 	 * <!-- end-user-doc -->
 	 * @model dataType="kermeta.standard.JavaBoolean"
 	 *        annotation="kermeta documentation='/**\n\t * To be written ##########################################\n\t \052/'"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='\njava.lang.Boolean result = null;\n\n\tresult = (java.lang.Boolean) org.kermeta.compil.runtime.ExecutionContext.getInstance().<java.lang.Boolean>asTypeOrVoid(org.kermeta.compil.runtime.helper.language.ModelTypeUtil.isModelTypeOf(this, m));\n\nreturn result;\n'"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='\njava.lang.Boolean result = null;\n\n\tresult = (java.lang.Boolean) org.kermeta.compil.runtime.helper.language.ObjectUtil.asTypeOrVoid(org.kermeta.compil.runtime.helper.language.ModelTypeUtil.isModelTypeOf(this, m), \"java.lang.Boolean\");\n\nreturn result;\n'"
 	 * @generated
 	 */
 	Boolean isModelTypeOf(Model m);

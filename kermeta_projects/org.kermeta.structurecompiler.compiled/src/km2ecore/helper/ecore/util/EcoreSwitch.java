@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: EcoreSwitch.java,v 1.9 2008-11-27 15:50:16 cfaucher Exp $
+ * $Id: EcoreSwitch.java,v 1.10 2009-01-21 09:16:06 cfaucher Exp $
  */
 package km2ecore.helper.ecore.util;
 
@@ -84,15 +84,6 @@ public class EcoreSwitch<T> {
 	 */
 	protected T doSwitch(int classifierID, EObject theEObject) {
 		switch (classifierID) {
-		case EcorePackage.ENAMED_ELEMENT_HELPER: {
-			ENamedElementHelper eNamedElementHelper = (ENamedElementHelper) theEObject;
-			T result = caseENamedElementHelper(eNamedElementHelper);
-			if (result == null)
-				result = caseObject(eNamedElementHelper);
-			if (result == null)
-				result = defaultCase(theEObject);
-			return result;
-		}
 		case EcorePackage.MODEL_ANALIZER: {
 			ModelAnalizer modelAnalizer = (ModelAnalizer) theEObject;
 			T result = caseModelAnalizer(modelAnalizer);
@@ -111,6 +102,15 @@ public class EcoreSwitch<T> {
 				result = defaultCase(theEObject);
 			return result;
 		}
+		case EcorePackage.ENAMED_ELEMENT_HELPER: {
+			ENamedElementHelper eNamedElementHelper = (ENamedElementHelper) theEObject;
+			T result = caseENamedElementHelper(eNamedElementHelper);
+			if (result == null)
+				result = caseObject(eNamedElementHelper);
+			if (result == null)
+				result = defaultCase(theEObject);
+			return result;
+		}
 		case EcorePackage.EANNOTATION_HELPER: {
 			EAnnotationHelper eAnnotationHelper = (EAnnotationHelper) theEObject;
 			T result = caseEAnnotationHelper(eAnnotationHelper);
@@ -123,21 +123,6 @@ public class EcoreSwitch<T> {
 		default:
 			return defaultCase(theEObject);
 		}
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>ENamed Element Helper</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>ENamed Element Helper</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseENamedElementHelper(ENamedElementHelper object) {
-		return null;
 	}
 
 	/**
@@ -167,6 +152,21 @@ public class EcoreSwitch<T> {
 	 * @generated
 	 */
 	public T caseEcoreModelElementHelper(EcoreModelElementHelper object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>ENamed Element Helper</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>ENamed Element Helper</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseENamedElementHelper(ENamedElementHelper object) {
 		return null;
 	}
 

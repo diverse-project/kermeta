@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: TraceabilityImpl.java,v 1.9 2008-11-27 15:49:49 cfaucher Exp $
+ * $Id: TraceabilityImpl.java,v 1.10 2009-01-21 09:15:50 cfaucher Exp $
  */
 package kermeta.language.structure.impl;
 

@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: SelfExpressionImpl.java,v 1.9 2008-11-27 15:49:56 cfaucher Exp $
+ * $Id: SelfExpressionImpl.java,v 1.10 2009-01-21 09:15:57 cfaucher Exp $
  */
 package kermeta.language.behavior.impl;
 
@@ -56,8 +56,8 @@ public class SelfExpressionImpl extends ExpressionImpl implements
 
 		result = "this";
 
-		java.lang.Boolean idIfCond_623 = false;
-		idIfCond_623 = kermeta.standard.helper.BooleanWrapper
+		java.lang.Boolean idIfCond_627 = false;
+		idIfCond_627 = kermeta.standard.helper.BooleanWrapper
 				.or(
 						kermeta.standard.helper.BooleanWrapper
 								.not(org.kermeta.compil.runtime.helper.language.ObjectUtil
@@ -65,15 +65,15 @@ public class SelfExpressionImpl extends ExpressionImpl implements
 												.getCurrent_valueType())),
 						context.getStaticOperationMode());
 
-		if (idIfCond_623) {
+		if (idIfCond_627) {
 
 			result = "self";
 		}
 
-		java.lang.Boolean idIfCond_624 = false;
-		idIfCond_624 = context.getFtSuffixActivation();
+		java.lang.Boolean idIfCond_628 = false;
+		idIfCond_628 = context.getFtSuffixActivation();
 
-		if (idIfCond_624) {
+		if (idIfCond_628) {
 
 			result = context.getFtContextualSelf();
 		}

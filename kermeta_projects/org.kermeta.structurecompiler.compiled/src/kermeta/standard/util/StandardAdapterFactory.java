@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: StandardAdapterFactory.java,v 1.9 2008-11-27 15:50:31 cfaucher Exp $
+ * $Id: StandardAdapterFactory.java,v 1.10 2009-01-21 09:16:13 cfaucher Exp $
  */
 package kermeta.standard.util;
 
@@ -83,8 +83,8 @@ public class StandardAdapterFactory extends AdapterFactoryImpl {
 	 */
 	protected StandardSwitch<Adapter> modelSwitch = new StandardSwitch<Adapter>() {
 		@Override
-		public Adapter caseUnknownJavaObject(UnknownJavaObject object) {
-			return createUnknownJavaObjectAdapter();
+		public Adapter caseString(kermeta.standard.String object) {
+			return createStringAdapter();
 		}
 
 		@Override
@@ -120,6 +120,11 @@ public class StandardAdapterFactory extends AdapterFactoryImpl {
 		@Override
 		public <G> Adapter caseIterator(Iterator<G> object) {
 			return createIteratorAdapter();
+		}
+
+		@Override
+		public Adapter caseUnknownJavaObject(UnknownJavaObject object) {
+			return createUnknownJavaObjectAdapter();
 		}
 
 		@Override
@@ -168,11 +173,6 @@ public class StandardAdapterFactory extends AdapterFactoryImpl {
 		}
 
 		@Override
-		public Adapter caseString(kermeta.standard.String object) {
-			return createStringAdapter();
-		}
-
-		@Override
 		public Adapter caseObject(kermeta.language.structure.Object object) {
 			return createObjectAdapter();
 		}
@@ -202,16 +202,16 @@ public class StandardAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link kermeta.standard.UnknownJavaObject <em>Unknown Java Object</em>}'.
+	 * Creates a new adapter for an object of class '{@link kermeta.standard.String <em>String</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see kermeta.standard.UnknownJavaObject
+	 * @see kermeta.standard.String
 	 * @generated
 	 */
-	public Adapter createUnknownJavaObjectAdapter() {
+	public Adapter createStringAdapter() {
 		return null;
 	}
 
@@ -310,6 +310,20 @@ public class StandardAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createIteratorAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link kermeta.standard.UnknownJavaObject <em>Unknown Java Object</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see kermeta.standard.UnknownJavaObject
+	 * @generated
+	 */
+	public Adapter createUnknownJavaObjectAdapter() {
 		return null;
 	}
 
@@ -436,20 +450,6 @@ public class StandardAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createCharacterAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link kermeta.standard.String <em>String</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see kermeta.standard.String
-	 * @generated
-	 */
-	public Adapter createStringAdapter() {
 		return null;
 	}
 

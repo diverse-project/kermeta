@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: SMAccess.java,v 1.6 2008-11-27 15:50:13 cfaucher Exp $
+ * $Id: SMAccess.java,v 1.7 2009-01-21 09:16:06 cfaucher Exp $
  */
 package simk;
 

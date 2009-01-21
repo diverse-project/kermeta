@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: UtilsFactory.java,v 1.9 2008-11-27 15:50:10 cfaucher Exp $
+ * $Id: UtilsFactory.java,v 1.10 2009-01-21 09:16:05 cfaucher Exp $
  */
 package kermeta.utils;
 
@@ -26,6 +26,15 @@ public interface UtilsFactory extends EFactory {
 	UtilsFactory eINSTANCE = kermeta.utils.impl.UtilsFactoryImpl.init();
 
 	/**
+	 * Returns a new object of class '<em>Hashtable</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Hashtable</em>'.
+	 * @generated
+	 */
+	<K, V> Hashtable<K, V> createHashtable();
+
+	/**
 	 * Returns a new object of class '<em>String Buffer</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -42,15 +51,6 @@ public interface UtilsFactory extends EFactory {
 	 * @generated
 	 */
 	<G> Stack<G> createStack();
-
-	/**
-	 * Returns a new object of class '<em>Hashtable</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Hashtable</em>'.
-	 * @generated
-	 */
-	<K, V> Hashtable<K, V> createHashtable();
 
 	/**
 	 * Returns the package supported by this factory.

@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: Iterator.java,v 1.9 2008-11-27 15:49:55 cfaucher Exp $
+ * $Id: Iterator.java,v 1.10 2009-01-21 09:15:57 cfaucher Exp $
  */
 package kermeta.standard;
 
@@ -85,7 +85,7 @@ public interface Iterator<G> extends kermeta.language.structure.Object {
 	 * <!-- end-user-doc -->
 	 * @model dataType="kermeta.standard.JavaBoolean"
 	 *        annotation="kermeta documentation='/**\n\t * Returns true if the iterator has a next element\n\t \052/'"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='\njava.lang.Boolean result = null;\n\n\tresult = (java.lang.Boolean) org.kermeta.compil.runtime.ExecutionContext.getInstance().<java.lang.Boolean>asTypeOrVoid(org.kermeta.compil.runtime.helper.basetypes.IteratorUtil.hasNext(this));\n\nreturn result;\n'"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='\njava.lang.Boolean result = null;\n\n\tresult = (java.lang.Boolean) org.kermeta.compil.runtime.helper.language.ObjectUtil.asTypeOrVoid(org.kermeta.compil.runtime.helper.basetypes.IteratorUtil.hasNext(this), \"java.lang.Boolean\");\n\nreturn result;\n'"
 	 * @generated
 	 */
 	Boolean hasNext();
@@ -94,7 +94,7 @@ public interface Iterator<G> extends kermeta.language.structure.Object {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @model annotation="kermeta documentation='/**\n\t * Returns the next element of the iterator\n\t * Raises IteratorIsOff exception in case the iterator is on the last element \n\t \052/'"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='\nG result = null;\n\n\tjava.lang.Boolean idIfCond_852 = false;\n\tidIfCond_852 = kermeta.standard.helper.BooleanWrapper.not(this.hasNext());\n\n\tif( idIfCond_852 ) {\n\n\t\nif (true)\n\tthrow new org.kermeta.compil.runtime.helper.error.KRuntimeError( ((kermeta.exceptions.IteratorIsOff) org.kermeta.compil.runtime.helper.language.ClassUtil.newObject(\"kermeta.exceptions.IteratorIsOff\")) );\n\n}\n\n\n\tresult = (G) org.kermeta.compil.runtime.ExecutionContext.getInstance().<G>asTypeOrVoid(org.kermeta.compil.runtime.helper.basetypes.IteratorUtil.next(this));\n\nreturn result;\n'"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='\nG result = null;\n\n\tjava.lang.Boolean idIfCond_762 = false;\n\tidIfCond_762 = kermeta.standard.helper.BooleanWrapper.not(this.hasNext());\n\n\tif( idIfCond_762 ) {\n\n\t\nif (true)\n\tthrow new org.kermeta.compil.runtime.helper.error.KRuntimeError( ((kermeta.exceptions.IteratorIsOff) org.kermeta.compil.runtime.helper.language.ClassUtil.newObject(kermeta.exceptions.ExceptionsPackage.eINSTANCE.getIteratorIsOff())) );\n\n}\n\n\n\tresult = (G) org.kermeta.compil.runtime.helper.language.ObjectUtil.asTypeOrVoid(org.kermeta.compil.runtime.helper.basetypes.IteratorUtil.next(this), \"G\");\n\nreturn result;\n'"
 	 * @generated
 	 */
 	G next();

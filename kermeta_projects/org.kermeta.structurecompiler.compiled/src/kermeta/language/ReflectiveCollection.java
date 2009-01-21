@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ReflectiveCollection.java,v 1.9 2008-11-27 15:50:07 cfaucher Exp $
+ * $Id: ReflectiveCollection.java,v 1.10 2009-01-21 09:16:01 cfaucher Exp $
  */
 package kermeta.language;
 

@@ -2,40 +2,31 @@
  * <copyright>
  * </copyright>
  *
- * $Id: PropertyImpl.java,v 1.10 2008-11-27 15:49:50 cfaucher Exp $
+ * $Id: PropertyImpl.java,v 1.11 2009-01-21 09:15:51 cfaucher Exp $
  */
 package kermeta.language.structure.impl;
 
 import ecore.EStructuralFeature;
 
-import java.util.Collection;
-
 import kermeta.language.behavior.Expression;
 
 import kermeta.language.structure.ClassDefinition;
-import kermeta.language.structure.MultiplicityElement;
-import kermeta.language.structure.NamedElement;
 import kermeta.language.structure.Property;
 import kermeta.language.structure.StructurePackage;
-import kermeta.language.structure.Type;
-import kermeta.language.structure.TypeContainer;
-import kermeta.language.structure.TypedElement;
+import kermeta.language.structure.Traceability;
 
 import km2ecore.KM2EcoreContext;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 
-import org.eclipse.emf.common.util.EList;
-
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
-import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.eclipse.emf.ecore.util.InternalEList;
 
 /**
  * <!-- begin-user-doc -->
@@ -44,13 +35,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link kermeta.language.structure.impl.PropertyImpl#getContainedType <em>Contained Type</em>}</li>
- *   <li>{@link kermeta.language.structure.impl.PropertyImpl#getName <em>Name</em>}</li>
- *   <li>{@link kermeta.language.structure.impl.PropertyImpl#getType <em>Type</em>}</li>
- *   <li>{@link kermeta.language.structure.impl.PropertyImpl#getIsOrdered <em>Is Ordered</em>}</li>
- *   <li>{@link kermeta.language.structure.impl.PropertyImpl#getUpper <em>Upper</em>}</li>
- *   <li>{@link kermeta.language.structure.impl.PropertyImpl#getLower <em>Lower</em>}</li>
- *   <li>{@link kermeta.language.structure.impl.PropertyImpl#getIsUnique <em>Is Unique</em>}</li>
+ *   <li>{@link kermeta.language.structure.impl.PropertyImpl#getEcoreModelElement <em>Ecore Model Element</em>}</li>
  *   <li>{@link kermeta.language.structure.impl.PropertyImpl#get_default <em>default</em>}</li>
  *   <li>{@link kermeta.language.structure.impl.PropertyImpl#getIsDerived <em>Is Derived</em>}</li>
  *   <li>{@link kermeta.language.structure.impl.PropertyImpl#getOpposite <em>Opposite</em>}</li>
@@ -58,136 +43,25 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *   <li>{@link kermeta.language.structure.impl.PropertyImpl#getIsReadOnly <em>Is Read Only</em>}</li>
  *   <li>{@link kermeta.language.structure.impl.PropertyImpl#getSetterBody <em>Setter Body</em>}</li>
  *   <li>{@link kermeta.language.structure.impl.PropertyImpl#getOwningClass <em>Owning Class</em>}</li>
- *   <li>{@link kermeta.language.structure.impl.PropertyImpl#getIsSetterAbstract <em>Is Setter Abstract</em>}</li>
  *   <li>{@link kermeta.language.structure.impl.PropertyImpl#getIsID <em>Is ID</em>}</li>
- *   <li>{@link kermeta.language.structure.impl.PropertyImpl#getIsGetterAbstract <em>Is Getter Abstract</em>}</li>
+ *   <li>{@link kermeta.language.structure.impl.PropertyImpl#getIsSetterAbstract <em>Is Setter Abstract</em>}</li>
  *   <li>{@link kermeta.language.structure.impl.PropertyImpl#getIsComposite <em>Is Composite</em>}</li>
+ *   <li>{@link kermeta.language.structure.impl.PropertyImpl#getIsGetterAbstract <em>Is Getter Abstract</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class PropertyImpl extends TraceabilityImpl<EStructuralFeature>
-		implements Property {
+public class PropertyImpl extends MultiplicityElementImpl implements Property {
 	/**
-	 * The cached value of the '{@link #getContainedType() <em>Contained Type</em>}' containment reference list.
+	 * The cached value of the '{@link #getEcoreModelElement() <em>Ecore Model Element</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getContainedType()
+	 * @see #getEcoreModelElement()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<Type> containedType;
-
-	/**
-	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getName()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final String NAME_EDEFAULT = null;
-
-	/**
-	 * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getName()
-	 * @generated
-	 * @ordered
-	 */
-	protected String name = NAME_EDEFAULT;
-
-	/**
-	 * The cached value of the '{@link #getType() <em>Type</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getType()
-	 * @generated
-	 * @ordered
-	 */
-	protected Type type;
-
-	/**
-	 * The default value of the '{@link #getIsOrdered() <em>Is Ordered</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getIsOrdered()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final Boolean IS_ORDERED_EDEFAULT = Boolean.FALSE;
-
-	/**
-	 * The cached value of the '{@link #getIsOrdered() <em>Is Ordered</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getIsOrdered()
-	 * @generated
-	 * @ordered
-	 */
-	protected Boolean isOrdered = IS_ORDERED_EDEFAULT;
-
-	/**
-	 * The default value of the '{@link #getUpper() <em>Upper</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getUpper()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final Integer UPPER_EDEFAULT = null;
-
-	/**
-	 * The cached value of the '{@link #getUpper() <em>Upper</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getUpper()
-	 * @generated
-	 * @ordered
-	 */
-	protected Integer upper = UPPER_EDEFAULT;
-
-	/**
-	 * The default value of the '{@link #getLower() <em>Lower</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getLower()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final Integer LOWER_EDEFAULT = null;
-
-	/**
-	 * The cached value of the '{@link #getLower() <em>Lower</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getLower()
-	 * @generated
-	 * @ordered
-	 */
-	protected Integer lower = LOWER_EDEFAULT;
-
-	/**
-	 * The default value of the '{@link #getIsUnique() <em>Is Unique</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getIsUnique()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final Boolean IS_UNIQUE_EDEFAULT = Boolean.TRUE;
-
-	/**
-	 * The cached value of the '{@link #getIsUnique() <em>Is Unique</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getIsUnique()
-	 * @generated
-	 * @ordered
-	 */
-	protected Boolean isUnique = IS_UNIQUE_EDEFAULT;
+	protected EStructuralFeature ecoreModelElement;
 
 	/**
 	 * The default value of the '{@link #get_default() <em>default</em>}' attribute.
@@ -280,26 +154,6 @@ public class PropertyImpl extends TraceabilityImpl<EStructuralFeature>
 	protected Expression setterBody;
 
 	/**
-	 * The default value of the '{@link #getIsSetterAbstract() <em>Is Setter Abstract</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getIsSetterAbstract()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final Boolean IS_SETTER_ABSTRACT_EDEFAULT = Boolean.FALSE;
-
-	/**
-	 * The cached value of the '{@link #getIsSetterAbstract() <em>Is Setter Abstract</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getIsSetterAbstract()
-	 * @generated
-	 * @ordered
-	 */
-	protected Boolean isSetterAbstract = IS_SETTER_ABSTRACT_EDEFAULT;
-
-	/**
 	 * The default value of the '{@link #getIsID() <em>Is ID</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -320,24 +174,24 @@ public class PropertyImpl extends TraceabilityImpl<EStructuralFeature>
 	protected Boolean isID = IS_ID_EDEFAULT;
 
 	/**
-	 * The default value of the '{@link #getIsGetterAbstract() <em>Is Getter Abstract</em>}' attribute.
+	 * The default value of the '{@link #getIsSetterAbstract() <em>Is Setter Abstract</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getIsGetterAbstract()
+	 * @see #getIsSetterAbstract()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final Boolean IS_GETTER_ABSTRACT_EDEFAULT = Boolean.FALSE;
+	protected static final Boolean IS_SETTER_ABSTRACT_EDEFAULT = Boolean.FALSE;
 
 	/**
-	 * The cached value of the '{@link #getIsGetterAbstract() <em>Is Getter Abstract</em>}' attribute.
+	 * The cached value of the '{@link #getIsSetterAbstract() <em>Is Setter Abstract</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getIsGetterAbstract()
+	 * @see #getIsSetterAbstract()
 	 * @generated
 	 * @ordered
 	 */
-	protected Boolean isGetterAbstract = IS_GETTER_ABSTRACT_EDEFAULT;
+	protected Boolean isSetterAbstract = IS_SETTER_ABSTRACT_EDEFAULT;
 
 	/**
 	 * The default value of the '{@link #getIsComposite() <em>Is Composite</em>}' attribute.
@@ -358,6 +212,26 @@ public class PropertyImpl extends TraceabilityImpl<EStructuralFeature>
 	 * @ordered
 	 */
 	protected Boolean isComposite = IS_COMPOSITE_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getIsGetterAbstract() <em>Is Getter Abstract</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getIsGetterAbstract()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final Boolean IS_GETTER_ABSTRACT_EDEFAULT = Boolean.FALSE;
+
+	/**
+	 * The cached value of the '{@link #getIsGetterAbstract() <em>Is Getter Abstract</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getIsGetterAbstract()
+	 * @generated
+	 * @ordered
+	 */
+	protected Boolean isGetterAbstract = IS_GETTER_ABSTRACT_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -383,54 +257,19 @@ public class PropertyImpl extends TraceabilityImpl<EStructuralFeature>
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<Type> getContainedType() {
-		if (containedType == null) {
-			containedType = new EObjectContainmentWithInverseEList.Resolving<Type>(
-					Type.class, this,
-					StructurePackage.PROPERTY__CONTAINED_TYPE,
-					StructurePackage.TYPE__TYPE_CONTAINER);
-		}
-		return containedType;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public String getName() {
-		return name;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setName(String newName) {
-		String oldName = name;
-		name = newName;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET,
-					StructurePackage.PROPERTY__NAME, oldName, name));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Type getType() {
-		if (type != null && type.eIsProxy()) {
-			InternalEObject oldType = (InternalEObject) type;
-			type = (Type) eResolveProxy(oldType);
-			if (type != oldType) {
+	public EStructuralFeature getEcoreModelElement() {
+		if (ecoreModelElement != null
+				&& ((EObject) ecoreModelElement).eIsProxy()) {
+			InternalEObject oldEcoreModelElement = (InternalEObject) ecoreModelElement;
+			ecoreModelElement = (EStructuralFeature) eResolveProxy(oldEcoreModelElement);
+			if (ecoreModelElement != oldEcoreModelElement) {
 				if (eNotificationRequired())
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE,
-							StructurePackage.PROPERTY__TYPE, oldType, type));
+							StructurePackage.PROPERTY__ECORE_MODEL_ELEMENT,
+							oldEcoreModelElement, ecoreModelElement));
 			}
 		}
-		return type;
+		return ecoreModelElement;
 	}
 
 	/**
@@ -438,8 +277,8 @@ public class PropertyImpl extends TraceabilityImpl<EStructuralFeature>
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Type basicGetType() {
-		return type;
+	public EStructuralFeature basicGetEcoreModelElement() {
+		return ecoreModelElement;
 	}
 
 	/**
@@ -447,101 +286,13 @@ public class PropertyImpl extends TraceabilityImpl<EStructuralFeature>
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setType(Type newType) {
-		Type oldType = type;
-		type = newType;
+	public void setEcoreModelElement(EStructuralFeature newEcoreModelElement) {
+		EStructuralFeature oldEcoreModelElement = ecoreModelElement;
+		ecoreModelElement = newEcoreModelElement;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET,
-					StructurePackage.PROPERTY__TYPE, oldType, type));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Boolean getIsOrdered() {
-		return isOrdered;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setIsOrdered(Boolean newIsOrdered) {
-		Boolean oldIsOrdered = isOrdered;
-		isOrdered = newIsOrdered;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET,
-					StructurePackage.PROPERTY__IS_ORDERED, oldIsOrdered,
-					isOrdered));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Integer getUpper() {
-		return upper;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setUpper(Integer newUpper) {
-		Integer oldUpper = upper;
-		upper = newUpper;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET,
-					StructurePackage.PROPERTY__UPPER, oldUpper, upper));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Integer getLower() {
-		return lower;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setLower(Integer newLower) {
-		Integer oldLower = lower;
-		lower = newLower;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET,
-					StructurePackage.PROPERTY__LOWER, oldLower, lower));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Boolean getIsUnique() {
-		return isUnique;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setIsUnique(Boolean newIsUnique) {
-		Boolean oldIsUnique = isUnique;
-		isUnique = newIsUnique;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET,
-					StructurePackage.PROPERTY__IS_UNIQUE, oldIsUnique, isUnique));
+					StructurePackage.PROPERTY__ECORE_MODEL_ELEMENT,
+					oldEcoreModelElement, ecoreModelElement));
 	}
 
 	/**
@@ -897,29 +648,6 @@ public class PropertyImpl extends TraceabilityImpl<EStructuralFeature>
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Boolean getIsSetterAbstract() {
-		return isSetterAbstract;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setIsSetterAbstract(Boolean newIsSetterAbstract) {
-		Boolean oldIsSetterAbstract = isSetterAbstract;
-		isSetterAbstract = newIsSetterAbstract;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET,
-					StructurePackage.PROPERTY__IS_SETTER_ABSTRACT,
-					oldIsSetterAbstract, isSetterAbstract));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public Boolean getIsID() {
 		return isID;
 	}
@@ -942,8 +670,8 @@ public class PropertyImpl extends TraceabilityImpl<EStructuralFeature>
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Boolean getIsGetterAbstract() {
-		return isGetterAbstract;
+	public Boolean getIsSetterAbstract() {
+		return isSetterAbstract;
 	}
 
 	/**
@@ -951,13 +679,13 @@ public class PropertyImpl extends TraceabilityImpl<EStructuralFeature>
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setIsGetterAbstract(Boolean newIsGetterAbstract) {
-		Boolean oldIsGetterAbstract = isGetterAbstract;
-		isGetterAbstract = newIsGetterAbstract;
+	public void setIsSetterAbstract(Boolean newIsSetterAbstract) {
+		Boolean oldIsSetterAbstract = isSetterAbstract;
+		isSetterAbstract = newIsSetterAbstract;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET,
-					StructurePackage.PROPERTY__IS_GETTER_ABSTRACT,
-					oldIsGetterAbstract, isGetterAbstract));
+					StructurePackage.PROPERTY__IS_SETTER_ABSTRACT,
+					oldIsSetterAbstract, isSetterAbstract));
 	}
 
 	/**
@@ -988,6 +716,29 @@ public class PropertyImpl extends TraceabilityImpl<EStructuralFeature>
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public Boolean getIsGetterAbstract() {
+		return isGetterAbstract;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setIsGetterAbstract(Boolean newIsGetterAbstract) {
+		Boolean oldIsGetterAbstract = isGetterAbstract;
+		isGetterAbstract = newIsGetterAbstract;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET,
+					StructurePackage.PROPERTY__IS_GETTER_ABSTRACT,
+					oldIsGetterAbstract, isGetterAbstract));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public String createBehaviorJava(KM2EcoreContext context) {
 
 		java.lang.String result = null;
@@ -996,13 +747,13 @@ public class PropertyImpl extends TraceabilityImpl<EStructuralFeature>
 
 		java.lang.String javaCode = "";
 
-		java.lang.Boolean idIfCond_50 = false;
-		idIfCond_50 = this.getIsDerived();
+		java.lang.Boolean idIfCond_257 = false;
+		idIfCond_257 = this.getIsDerived();
 
-		if (idIfCond_50) {
+		if (idIfCond_257) {
 
-			java.lang.Boolean idIfCond_51 = false;
-			idIfCond_51 = kermeta.standard.helper.BooleanWrapper
+			java.lang.Boolean idIfCond_258 = false;
+			idIfCond_258 = kermeta.standard.helper.BooleanWrapper
 					.and(
 							kermeta.standard.helper.BooleanWrapper.not(this
 									.getIsReadOnly()),
@@ -1011,12 +762,12 @@ public class PropertyImpl extends TraceabilityImpl<EStructuralFeature>
 											.isVoidSwitcher(this
 													.getSetterBody())));
 
-			if (idIfCond_51) {
+			if (idIfCond_258) {
 
 				javaCode = this.getSetterBody().createBehaviorJava(context);
 
 				ecore.EOperation setterEOp = ((ecore.EOperation) org.kermeta.compil.runtime.helper.language.ClassUtil
-						.newObject("ecore.EOperation"));
+						.newObject(ecore.EcorePackage.eINSTANCE.getEOperation()));
 
 				setterEOp.setName(this.printSetAccessor(context));
 
@@ -1025,13 +776,14 @@ public class PropertyImpl extends TraceabilityImpl<EStructuralFeature>
 				setterEOp.setUnique(this.getEcoreModelElement().isUnique());
 
 				ecore.EParameter param_setterEOp = ((ecore.EParameter) org.kermeta.compil.runtime.helper.language.ClassUtil
-						.newObject("ecore.EParameter"));
+						.newObject(ecore.EcorePackage.eINSTANCE.getEParameter()));
 
 				param_setterEOp.setName("value");
 
 				((kermeta.language.structure.LinkSetterForTypedElement) org.kermeta.compil.runtime.helper.language.ClassUtil
-						.newObject("kermeta.language.structure.LinkSetterForTypedElement"))
-						.setLinks(this, param_setterEOp, context);
+						.newObject(kermeta.language.structure.StructurePackage.eINSTANCE
+								.getLinkSetterForTypedElement())).setLinks(
+						this, param_setterEOp, context);
 
 				org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
 						.<ecore.EParameter> convertAsOrderedSet(
@@ -1039,7 +791,8 @@ public class PropertyImpl extends TraceabilityImpl<EStructuralFeature>
 						.add(param_setterEOp);
 
 				((km2ecore.helper.ecore.EAnnotationHelper) org.kermeta.compil.runtime.helper.language.ClassUtil
-						.newObject("km2ecore.helper.ecore.EAnnotationHelper"))
+						.newObject(km2ecore.helper.ecore.EcorePackage.eINSTANCE
+								.getEAnnotationHelper()))
 						.addAnnotationGenModelImpl(setterEOp, javaCode);
 
 				org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
@@ -1060,10 +813,10 @@ public class PropertyImpl extends TraceabilityImpl<EStructuralFeature>
 
 			java.lang.String type_label = "";
 
-			java.lang.Boolean idIfCond_52 = false;
-			idIfCond_52 = context.getFtSuffixActivation();
+			java.lang.Boolean idIfCond_259 = false;
+			idIfCond_259 = context.getFtSuffixActivation();
 
-			if (idIfCond_52) {
+			if (idIfCond_259) {
 
 				type_label = context.getFtReturnType();
 
@@ -1071,17 +824,18 @@ public class PropertyImpl extends TraceabilityImpl<EStructuralFeature>
 			} else {
 
 				type_label = ((km2ecore.helper.kermeta.CompilerHelperJava) org.kermeta.compil.runtime.helper.language.ClassUtil
-						.newObject("km2ecore.helper.kermeta.CompilerHelperJava"))
+						.newObject(km2ecore.helper.kermeta.KermetaPackage.eINSTANCE
+								.getCompilerHelperJava()))
 						.ppTypeFromMultiplicityElement(this, context);
 			}
 
-			java.lang.Boolean idIfCond_53 = false;
-			idIfCond_53 = kermeta.standard.helper.BooleanWrapper
+			java.lang.Boolean idIfCond_260 = false;
+			idIfCond_260 = kermeta.standard.helper.BooleanWrapper
 					.not(((kermeta.language.structure.Operation) org.kermeta.compil.runtime.helper.language.ClassUtil
-							.newObject("kermeta.language.structure.Operation"))
-							.isVoidType(type_label));
+							.newObject(kermeta.language.structure.StructurePackage.eINSTANCE
+									.getOperation())).isVoidType(type_label));
 
-			if (idIfCond_53) {
+			if (idIfCond_260) {
 
 				javaCode = kermeta.standard.helper.StringWrapper
 						.plus(
@@ -1101,12 +855,12 @@ public class PropertyImpl extends TraceabilityImpl<EStructuralFeature>
 								" = null;\n");
 			}
 
-			java.lang.Boolean idIfCond_54 = false;
-			idIfCond_54 = kermeta.standard.helper.BooleanWrapper
+			java.lang.Boolean idIfCond_261 = false;
+			idIfCond_261 = kermeta.standard.helper.BooleanWrapper
 					.not(org.kermeta.compil.runtime.helper.language.ObjectUtil
 							.isVoidSwitcher(this.getGetterBody()));
 
-			if (idIfCond_54) {
+			if (idIfCond_261) {
 
 				javaCode = kermeta.standard.helper.StringWrapper.plus(javaCode,
 						this.getGetterBody().createBehaviorJava(context));
@@ -1116,7 +870,7 @@ public class PropertyImpl extends TraceabilityImpl<EStructuralFeature>
 					this.ppReturnResult(context));
 
 			ecore.EOperation getterEOp = ((ecore.EOperation) org.kermeta.compil.runtime.helper.language.ClassUtil
-					.newObject("ecore.EOperation"));
+					.newObject(ecore.EcorePackage.eINSTANCE.getEOperation()));
 
 			getterEOp.setName(this.printGetAccessor(context));
 
@@ -1128,11 +882,13 @@ public class PropertyImpl extends TraceabilityImpl<EStructuralFeature>
 			getterEOp.setUnique(this.getEcoreModelElement().isUnique());
 
 			((kermeta.language.structure.LinkSetterForTypedElement) org.kermeta.compil.runtime.helper.language.ClassUtil
-					.newObject("kermeta.language.structure.LinkSetterForTypedElement"))
-					.setLinks(this, getterEOp, context);
+					.newObject(kermeta.language.structure.StructurePackage.eINSTANCE
+							.getLinkSetterForTypedElement())).setLinks(this,
+					getterEOp, context);
 
 			((km2ecore.helper.ecore.EAnnotationHelper) org.kermeta.compil.runtime.helper.language.ClassUtil
-					.newObject("km2ecore.helper.ecore.EAnnotationHelper"))
+					.newObject(km2ecore.helper.ecore.EcorePackage.eINSTANCE
+							.getEAnnotationHelper()))
 					.addAnnotationGenModelImpl(getterEOp, javaCode);
 
 			org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
@@ -1187,11 +943,11 @@ public class PropertyImpl extends TraceabilityImpl<EStructuralFeature>
 
 		kermeta.language.structure.ClassDefinition c = null;
 
-		c = (kermeta.language.structure.ClassDefinition) org.kermeta.compil.runtime.ExecutionContext
-				.getInstance()
-				.<kermeta.language.structure.ClassDefinition> asTypeOrVoid(
+		c = (kermeta.language.structure.ClassDefinition) org.kermeta.compil.runtime.helper.language.ObjectUtil
+				.asTypeOrVoid(
 						org.kermeta.compil.runtime.helper.language.ObjectUtil
-								.containerSwitcher(this));
+								.containerSwitcher(this),
+						"kermeta.language.structure.ClassDefinition");
 
 		org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
 				.<ecore.EStructuralFeature> convertAsOrderedSet(
@@ -1206,22 +962,23 @@ public class PropertyImpl extends TraceabilityImpl<EStructuralFeature>
 
 		{
 
-			kermeta.standard.Iterator<kermeta.language.structure.Tag> it_ft14 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
+			kermeta.standard.Iterator<kermeta.language.structure.Tag> it_ft105 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
 					.<kermeta.language.structure.Tag> convertAsOrderedSet(
 							this.getOwnedTags()).iterator();
-			java.lang.Boolean idLoopCond_55 = false;
-			while (!idLoopCond_55) {
-				idLoopCond_55 = it_ft14.isOff();
-				if (idLoopCond_55) {
+			java.lang.Boolean idLoopCond_262 = false;
+			while (!idLoopCond_262) {
+				idLoopCond_262 = it_ft105.isOff();
+				if (idLoopCond_262) {
 				} else {
 
 					//BIle:func
-					kermeta.language.structure.Tag o_lbdExp14 = it_ft14.next();
+					kermeta.language.structure.Tag o_lbdExp105 = it_ft105
+							.next();
 
 					//BIle:func
-					kermeta.language.structure.Tag o_lbdExp13 = o_lbdExp14;
+					kermeta.language.structure.Tag o_lbdExp104 = o_lbdExp105;
 
-					o_lbdExp13.applyPass1(context);
+					o_lbdExp104.applyPass1(context);
 					//EIle:func
 
 					//EIle:func
@@ -1233,6 +990,79 @@ public class PropertyImpl extends TraceabilityImpl<EStructuralFeature>
 		//EIft:each
 
 		//EIft:eachOwnedElement
+
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String printGetAccessor(KM2EcoreContext context) {
+
+		java.lang.String result = null;
+
+		result = "";
+
+		java.lang.Boolean idIfCond_263 = false;
+		idIfCond_263 = this.getIsDerived();
+
+		if (idIfCond_263) {
+
+			result = "getter";
+		} else {
+
+			java.lang.Boolean isBoolean = false;
+
+			java.lang.Boolean idIfCond_264 = false;
+			idIfCond_264 = kermeta.standard.helper.BooleanWrapper
+					.not(org.kermeta.compil.runtime.helper.language.ObjectUtil
+							.isVoidSwitcher(this.getEcoreModelElement()));
+
+			if (idIfCond_264) {
+
+				java.lang.Boolean idIfCond_265 = false;
+				idIfCond_265 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+						.isInstanceOfSwitcher(this.getEcoreModelElement(),
+								org.kermeta.compil.runtime.ExecutionContext
+										.getInstance().getMetaClass(
+												"ecore.EAttribute"));
+
+				if (idIfCond_265) {
+
+					java.lang.Boolean idIfCond_266 = false;
+					idIfCond_266 = kermeta.standard.helper.StringWrapper
+							.equals(this.getType()
+									.getEMFEDataTypeInstanceClassName(),
+									"boolean");
+
+					if (idIfCond_266) {
+
+						isBoolean = true;
+					}
+
+				}
+
+			}
+
+			java.lang.Boolean idIfCond_267 = false;
+			idIfCond_267 = isBoolean;
+
+			if (idIfCond_267) {
+
+				result = "is";
+			} else {
+
+				result = "get";
+			}
+
+		}
+
+		result = kermeta.standard.helper.StringWrapper.plus(result,
+				kermeta.standard.helper.StringWrapper.capName(this
+						.getFinalName(context)));
+
+		return result;
 
 	}
 
@@ -1253,20 +1083,20 @@ public class PropertyImpl extends TraceabilityImpl<EStructuralFeature>
 								.getInstance().getMetaClass(
 										"kermeta.language.structure.Type")));
 
-		java.lang.Boolean idIfCond_56 = false;
-		idIfCond_56 = kermeta.standard.helper.BooleanWrapper.or(
+		java.lang.Boolean idIfCond_268 = false;
+		idIfCond_268 = kermeta.standard.helper.BooleanWrapper.or(
 				kermeta.standard.helper.BooleanWrapper.or(current_type
 						.isValueType(), current_type.isEnumeration()),
 				current_type.isEDataType());
 
-		if (idIfCond_56) {
+		if (idIfCond_268) {
 
 			ecoreStructuralFeature = ((ecore.EAttribute) org.kermeta.compil.runtime.helper.language.ClassUtil
-					.newObject("ecore.EAttribute"));
+					.newObject(ecore.EcorePackage.eINSTANCE.getEAttribute()));
 		} else {
 
 			ecoreStructuralFeature = ((ecore.EReference) org.kermeta.compil.runtime.helper.language.ClassUtil
-					.newObject("ecore.EReference"));
+					.newObject(ecore.EcorePackage.eINSTANCE.getEReference()));
 
 			((ecore.EReference) org.kermeta.compil.runtime.helper.language.ObjectUtil
 					.asTypeSwitcher(ecoreStructuralFeature,
@@ -1277,17 +1107,19 @@ public class PropertyImpl extends TraceabilityImpl<EStructuralFeature>
 		}
 
 		((km2ecore.helper.ecore.EcoreModelElementHelper) org.kermeta.compil.runtime.helper.language.ClassUtil
-				.newObject("km2ecore.helper.ecore.EcoreModelElementHelper"))
+				.newObject(km2ecore.helper.ecore.EcorePackage.eINSTANCE
+						.getEcoreModelElementHelper()))
 				.setEStructuralFeatureProperties(this, ecoreStructuralFeature,
 						context);
 
-		java.lang.Boolean idIfCond_57 = false;
-		idIfCond_57 = this.getIsDerived();
+		java.lang.Boolean idIfCond_269 = false;
+		idIfCond_269 = this.getIsDerived();
 
-		if (idIfCond_57) {
+		if (idIfCond_269) {
 
 			ecore.EAnnotation annotation = ((km2ecore.helper.ecore.EAnnotationHelper) org.kermeta.compil.runtime.helper.language.ClassUtil
-					.newObject("km2ecore.helper.ecore.EAnnotationHelper"))
+					.newObject(km2ecore.helper.ecore.EcorePackage.eINSTANCE
+							.getEAnnotationHelper()))
 					.createKermetaEAnnotation(
 							kermeta.standard.helper.StringWrapper
 									.toString(km2ecore.helper.ecore.KermetaEAnnotationKey
@@ -1303,8 +1135,8 @@ public class PropertyImpl extends TraceabilityImpl<EStructuralFeature>
 
 		ecoreStructuralFeature.set_transient(this.getEMFIsTransient());
 
-		java.lang.Boolean idIfCond_58 = false;
-		idIfCond_58 = kermeta.standard.helper.BooleanWrapper
+		java.lang.Boolean idIfCond_270 = false;
+		idIfCond_270 = kermeta.standard.helper.BooleanWrapper
 				.and(
 						kermeta.standard.helper.BooleanWrapper
 								.and(
@@ -1327,7 +1159,7 @@ public class PropertyImpl extends TraceabilityImpl<EStructuralFeature>
 												.qualifiedName(),
 										"kermeta::language::structure::Enumeration"));
 
-		if (idIfCond_58) {
+		if (idIfCond_270) {
 
 			((ecore.EAttribute) org.kermeta.compil.runtime.helper.language.ObjectUtil
 					.asTypeSwitcher(ecoreStructuralFeature,
@@ -1362,88 +1194,16 @@ public class PropertyImpl extends TraceabilityImpl<EStructuralFeature>
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public String printGetAccessor(KM2EcoreContext context) {
-
-		java.lang.String result = null;
-
-		result = "";
-
-		java.lang.Boolean idIfCond_59 = false;
-		idIfCond_59 = this.getIsDerived();
-
-		if (idIfCond_59) {
-
-			result = "getter";
-		} else {
-
-			java.lang.Boolean isBoolean = false;
-
-			java.lang.Boolean idIfCond_60 = false;
-			idIfCond_60 = kermeta.standard.helper.BooleanWrapper
-					.not(org.kermeta.compil.runtime.helper.language.ObjectUtil
-							.isVoidSwitcher(this.getEcoreModelElement()));
-
-			if (idIfCond_60) {
-
-				java.lang.Boolean idIfCond_61 = false;
-				idIfCond_61 = org.kermeta.compil.runtime.helper.language.ObjectUtil
-						.isInstanceOfSwitcher(this.getEcoreModelElement(),
-								org.kermeta.compil.runtime.ExecutionContext
-										.getInstance().getMetaClass(
-												"ecore.EAttribute"));
-
-				if (idIfCond_61) {
-
-					java.lang.Boolean idIfCond_62 = false;
-					idIfCond_62 = kermeta.standard.helper.StringWrapper.equals(
-							this.getType().getEMFEDataTypeInstanceClassName(),
-							"boolean");
-
-					if (idIfCond_62) {
-
-						isBoolean = true;
-					}
-
-				}
-
-			}
-
-			java.lang.Boolean idIfCond_63 = false;
-			idIfCond_63 = isBoolean;
-
-			if (idIfCond_63) {
-
-				result = "is";
-			} else {
-
-				result = "get";
-			}
-
-		}
-
-		result = kermeta.standard.helper.StringWrapper.plus(result,
-				kermeta.standard.helper.StringWrapper.capName(this
-						.getFinalName(context)));
-
-		return result;
-
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public String printSetAccessor(KM2EcoreContext context) {
 
 		java.lang.String result = null;
 
 		result = "";
 
-		java.lang.Boolean idIfCond_64 = false;
-		idIfCond_64 = this.getIsDerived();
+		java.lang.Boolean idIfCond_271 = false;
+		idIfCond_271 = this.getIsDerived();
 
-		if (idIfCond_64) {
+		if (idIfCond_271) {
 
 			result = "setter";
 		} else {
@@ -1467,23 +1227,24 @@ public class PropertyImpl extends TraceabilityImpl<EStructuralFeature>
 	public void setLinks(KM2EcoreContext context) {
 
 		((kermeta.language.structure.LinkSetterForTypedElement) org.kermeta.compil.runtime.helper.language.ClassUtil
-				.newObject("kermeta.language.structure.LinkSetterForTypedElement"))
-				.setLinks(this, this.getEcoreModelElement(), context);
+				.newObject(kermeta.language.structure.StructurePackage.eINSTANCE
+						.getLinkSetterForTypedElement())).setLinks(this, this
+				.getEcoreModelElement(), context);
 
-		java.lang.Boolean idIfCond_65 = false;
-		idIfCond_65 = kermeta.standard.helper.BooleanWrapper
+		java.lang.Boolean idIfCond_272 = false;
+		idIfCond_272 = kermeta.standard.helper.BooleanWrapper
 				.not(org.kermeta.compil.runtime.helper.language.ObjectUtil
 						.isVoidSwitcher(this.getOpposite()));
 
-		if (idIfCond_65) {
+		if (idIfCond_272) {
 
-			java.lang.Boolean idIfCond_66 = false;
-			idIfCond_66 = kermeta.standard.helper.BooleanWrapper
+			java.lang.Boolean idIfCond_273 = false;
+			idIfCond_273 = kermeta.standard.helper.BooleanWrapper
 					.not(org.kermeta.compil.runtime.helper.language.ObjectUtil
 							.isVoidSwitcher(this.getOpposite()
 									.getEcoreModelElement()));
 
-			if (idIfCond_66) {
+			if (idIfCond_273) {
 
 				((ecore.EReference) org.kermeta.compil.runtime.helper.language.ObjectUtil
 						.asTypeSwitcher(this.getEcoreModelElement(),
@@ -1501,39 +1262,40 @@ public class PropertyImpl extends TraceabilityImpl<EStructuralFeature>
 
 		}
 
-		java.lang.Boolean idIfCond_67 = false;
-		idIfCond_67 = kermeta.standard.helper.StringWrapper.equals(this
+		java.lang.Boolean idIfCond_274 = false;
+		idIfCond_274 = kermeta.standard.helper.StringWrapper.equals(this
 				.getType().getTypeQName(), "kermeta::standard::Boolean");
 
-		if (idIfCond_67) {
+		if (idIfCond_274) {
 
 			java.lang.Boolean mustSetted = false;
 
-			java.lang.Boolean idIfCond_68 = false;
-			idIfCond_68 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+			java.lang.Boolean idIfCond_275 = false;
+			idIfCond_275 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 					.isVoidSwitcher(this.getEcoreModelElement()
 							.getDefaultValueLiteral());
 
-			if (idIfCond_68) {
+			if (idIfCond_275) {
 
 				mustSetted = true;
 			} else {
 
-				java.lang.Boolean idIfCond_69 = false;
-				idIfCond_69 = kermeta.standard.helper.StringWrapper.equals(this
-						.getEcoreModelElement().getDefaultValueLiteral(), "");
+				java.lang.Boolean idIfCond_276 = false;
+				idIfCond_276 = kermeta.standard.helper.StringWrapper.equals(
+						this.getEcoreModelElement().getDefaultValueLiteral(),
+						"");
 
-				if (idIfCond_69) {
+				if (idIfCond_276) {
 
 					mustSetted = true;
 				}
 
 			}
 
-			java.lang.Boolean idIfCond_70 = false;
-			idIfCond_70 = mustSetted;
+			java.lang.Boolean idIfCond_277 = false;
+			idIfCond_277 = mustSetted;
 
-			if (idIfCond_70) {
+			if (idIfCond_277) {
 
 				this.getEcoreModelElement().setDefaultValueLiteral("false");
 			}
@@ -1557,22 +1319,23 @@ public class PropertyImpl extends TraceabilityImpl<EStructuralFeature>
 
 		{
 
-			kermeta.standard.Iterator<kermeta.language.structure.Tag> it_ft16 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
+			kermeta.standard.Iterator<kermeta.language.structure.Tag> it_ft107 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
 					.<kermeta.language.structure.Tag> convertAsOrderedSet(
 							this.getOwnedTags()).iterator();
-			java.lang.Boolean idLoopCond_71 = false;
-			while (!idLoopCond_71) {
-				idLoopCond_71 = it_ft16.isOff();
-				if (idLoopCond_71) {
+			java.lang.Boolean idLoopCond_278 = false;
+			while (!idLoopCond_278) {
+				idLoopCond_278 = it_ft107.isOff();
+				if (idLoopCond_278) {
 				} else {
 
 					//BIle:func
-					kermeta.language.structure.Tag o_lbdExp16 = it_ft16.next();
+					kermeta.language.structure.Tag o_lbdExp107 = it_ft107
+							.next();
 
 					//BIle:func
-					kermeta.language.structure.Tag p_lbdExp15 = o_lbdExp16;
+					kermeta.language.structure.Tag p_lbdExp106 = o_lbdExp107;
 
-					p_lbdExp15.applyPass2BehaviorJava(context);
+					p_lbdExp106.applyPass2BehaviorJava(context);
 					//EIle:func
 
 					//EIle:func
@@ -1594,224 +1357,10 @@ public class PropertyImpl extends TraceabilityImpl<EStructuralFeature>
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public String getRecopyInValueTypes() {
-
-		java.lang.String result = null;
-
-		result = this.getUniqueTagValue("RecopyInValueTypes");
-
-		return result;
-
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public String getFinalName(KM2EcoreContext context) {
-
-		java.lang.String result = null;
-
-		result = ((km2ecore.helper.java.IdentifierHelper) org.kermeta.compil.runtime.helper.language.ClassUtil
-				.newObject("km2ecore.helper.java.IdentifierHelper"))
-				.getMangledIdentifier(this.getName(), context);
-
-		java.lang.Boolean idIfCond_41 = false;
-		idIfCond_41 = org.kermeta.compil.runtime.helper.language.ObjectUtil
-				.isNotEqualSwitcher(this.getEMFRenameAs(), "");
-
-		if (idIfCond_41) {
-
-			result = this.getEMFRenameAs();
-		}
-
-		return result;
-
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public String getEMFRenameAs() {
-
-		java.lang.String result = null;
-
-		result = this.getUniqueTagValue("EMF_renameAs");
-
-		return result;
-
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public String ppReturnResult(KM2EcoreContext context) {
-
-		java.lang.String result = null;
-
-		result = "\nreturn ";
-
-		java.lang.Boolean idIfCond_42 = false;
-		idIfCond_42 = kermeta.standard.helper.IntegerWrapper.equals(this
-				.getUpper(), 1);
-
-		if (idIfCond_42) {
-
-			result = kermeta.standard.helper.StringWrapper.plus(result,
-					"result");
-		} else {
-
-			result = kermeta.standard.helper.StringWrapper.plus(
-					kermeta.standard.helper.StringWrapper.plus(result, context
-							.getCOLLECTION_UTIL_CLASS()),
-					".convertAsEList(result)");
-		}
-
-		result = kermeta.standard.helper.StringWrapper.plus(result, ";\n");
-
-		return result;
-
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public String getGenModelQualifiedName() {
-
-		java.lang.String result = null;
-
-		result = kermeta.standard.helper.StringWrapper.plus(
-				kermeta.standard.helper.StringWrapper.plus(this
-						.getRootPackage().getGenModelBasePackage(), "::"), this
-						.qualifiedName());
-
-		return result;
-
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public String getJavaQualifiedName() {
-
-		java.lang.String result = null;
-
-		result = kermeta.standard.helper.StringWrapper.replace(this
-				.qualifiedName(), "::", ".");
-
-		return result;
-
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public String getGenModelJavaQualifiedName() {
-
-		java.lang.String result = null;
-
-		result = kermeta.standard.helper.StringWrapper.replace(this
-				.getGenModelQualifiedName(), "::", ".");
-
-		return result;
-
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public String qualifiedName() {
-
-		java.lang.String result = null;
-
-		kermeta.language.structure.NamedElement elem = this;
-
-		result = this.getName();
-
-		java.lang.Boolean idIfCond_369 = false;
-		idIfCond_369 = org.kermeta.compil.runtime.helper.language.ObjectUtil
-				.isInstanceOfSwitcher(
-						org.kermeta.compil.runtime.helper.language.ObjectUtil
-								.containerSwitcher(elem),
-						org.kermeta.compil.runtime.ExecutionContext
-								.getInstance()
-								.getMetaClass(
-										"kermeta.language.structure.NamedElement"));
-
-		if (idIfCond_369) {
-
-			elem = (kermeta.language.structure.NamedElement) org.kermeta.compil.runtime.ExecutionContext
-					.getInstance()
-					.<kermeta.language.structure.NamedElement> asTypeOrVoid(
-							org.kermeta.compil.runtime.helper.language.ObjectUtil
-									.containerSwitcher(elem));
-			java.lang.Boolean idLoopCond_370 = false;
-			while (!idLoopCond_370) {
-				idLoopCond_370 = org.kermeta.compil.runtime.helper.language.ObjectUtil
-						.equalsSwitcher(elem, null);
-				if (idLoopCond_370) {
-				} else {
-
-					result = kermeta.standard.helper.StringWrapper.plus(
-							kermeta.standard.helper.StringWrapper.plus(elem
-									.getName(), "::"), result);
-
-					java.lang.Boolean idIfCond_371 = false;
-					idIfCond_371 = org.kermeta.compil.runtime.helper.language.ObjectUtil
-							.isInstanceOfSwitcher(
-									org.kermeta.compil.runtime.helper.language.ObjectUtil
-											.containerSwitcher(elem),
-									org.kermeta.compil.runtime.ExecutionContext
-											.getInstance()
-											.getMetaClass(
-													"kermeta.language.structure.NamedElement"));
-
-					if (idIfCond_371) {
-
-						elem = (kermeta.language.structure.NamedElement) org.kermeta.compil.runtime.ExecutionContext
-								.getInstance()
-								.<kermeta.language.structure.NamedElement> asTypeOrVoid(
-										org.kermeta.compil.runtime.helper.language.ObjectUtil
-												.containerSwitcher(elem));
-					} else {
-
-						elem = null;
-					}
-
-				}
-			}
-		}
-
-		return result;
-
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@SuppressWarnings("unchecked")
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd,
 			int featureID, NotificationChain msgs) {
 		switch (featureID) {
-		case StructurePackage.PROPERTY__CONTAINED_TYPE:
-			return ((InternalEList<InternalEObject>) (InternalEList<?>) getContainedType())
-					.basicAdd(otherEnd, msgs);
 		case StructurePackage.PROPERTY__OWNING_CLASS:
 			if (eInternalContainer() != null)
 				msgs = eBasicRemoveFromContainer(msgs);
@@ -1829,9 +1378,6 @@ public class PropertyImpl extends TraceabilityImpl<EStructuralFeature>
 	public NotificationChain eInverseRemove(InternalEObject otherEnd,
 			int featureID, NotificationChain msgs) {
 		switch (featureID) {
-		case StructurePackage.PROPERTY__CONTAINED_TYPE:
-			return ((InternalEList<?>) getContainedType()).basicRemove(
-					otherEnd, msgs);
 		case StructurePackage.PROPERTY__GETTER_BODY:
 			return basicSetGetterBody(null, msgs);
 		case StructurePackage.PROPERTY__SETTER_BODY:
@@ -1867,22 +1413,10 @@ public class PropertyImpl extends TraceabilityImpl<EStructuralFeature>
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-		case StructurePackage.PROPERTY__CONTAINED_TYPE:
-			return getContainedType();
-		case StructurePackage.PROPERTY__NAME:
-			return getName();
-		case StructurePackage.PROPERTY__TYPE:
+		case StructurePackage.PROPERTY__ECORE_MODEL_ELEMENT:
 			if (resolve)
-				return getType();
-			return basicGetType();
-		case StructurePackage.PROPERTY__IS_ORDERED:
-			return getIsOrdered();
-		case StructurePackage.PROPERTY__UPPER:
-			return getUpper();
-		case StructurePackage.PROPERTY__LOWER:
-			return getLower();
-		case StructurePackage.PROPERTY__IS_UNIQUE:
-			return getIsUnique();
+				return getEcoreModelElement();
+			return basicGetEcoreModelElement();
 		case StructurePackage.PROPERTY__DEFAULT:
 			return get_default();
 		case StructurePackage.PROPERTY__IS_DERIVED:
@@ -1905,14 +1439,14 @@ public class PropertyImpl extends TraceabilityImpl<EStructuralFeature>
 			if (resolve)
 				return getOwningClass();
 			return basicGetOwningClass();
-		case StructurePackage.PROPERTY__IS_SETTER_ABSTRACT:
-			return getIsSetterAbstract();
 		case StructurePackage.PROPERTY__IS_ID:
 			return getIsID();
-		case StructurePackage.PROPERTY__IS_GETTER_ABSTRACT:
-			return getIsGetterAbstract();
+		case StructurePackage.PROPERTY__IS_SETTER_ABSTRACT:
+			return getIsSetterAbstract();
 		case StructurePackage.PROPERTY__IS_COMPOSITE:
 			return getIsComposite();
+		case StructurePackage.PROPERTY__IS_GETTER_ABSTRACT:
+			return getIsGetterAbstract();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -1922,31 +1456,11 @@ public class PropertyImpl extends TraceabilityImpl<EStructuralFeature>
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-		case StructurePackage.PROPERTY__CONTAINED_TYPE:
-			getContainedType().clear();
-			getContainedType().addAll((Collection<? extends Type>) newValue);
-			return;
-		case StructurePackage.PROPERTY__NAME:
-			setName((String) newValue);
-			return;
-		case StructurePackage.PROPERTY__TYPE:
-			setType((Type) newValue);
-			return;
-		case StructurePackage.PROPERTY__IS_ORDERED:
-			setIsOrdered((Boolean) newValue);
-			return;
-		case StructurePackage.PROPERTY__UPPER:
-			setUpper((Integer) newValue);
-			return;
-		case StructurePackage.PROPERTY__LOWER:
-			setLower((Integer) newValue);
-			return;
-		case StructurePackage.PROPERTY__IS_UNIQUE:
-			setIsUnique((Boolean) newValue);
+		case StructurePackage.PROPERTY__ECORE_MODEL_ELEMENT:
+			setEcoreModelElement((EStructuralFeature) newValue);
 			return;
 		case StructurePackage.PROPERTY__DEFAULT:
 			set_default((String) newValue);
@@ -1969,17 +1483,17 @@ public class PropertyImpl extends TraceabilityImpl<EStructuralFeature>
 		case StructurePackage.PROPERTY__OWNING_CLASS:
 			setOwningClass((ClassDefinition) newValue);
 			return;
-		case StructurePackage.PROPERTY__IS_SETTER_ABSTRACT:
-			setIsSetterAbstract((Boolean) newValue);
-			return;
 		case StructurePackage.PROPERTY__IS_ID:
 			setIsID((Boolean) newValue);
 			return;
-		case StructurePackage.PROPERTY__IS_GETTER_ABSTRACT:
-			setIsGetterAbstract((Boolean) newValue);
+		case StructurePackage.PROPERTY__IS_SETTER_ABSTRACT:
+			setIsSetterAbstract((Boolean) newValue);
 			return;
 		case StructurePackage.PROPERTY__IS_COMPOSITE:
 			setIsComposite((Boolean) newValue);
+			return;
+		case StructurePackage.PROPERTY__IS_GETTER_ABSTRACT:
+			setIsGetterAbstract((Boolean) newValue);
 			return;
 		}
 		super.eSet(featureID, newValue);
@@ -1993,26 +1507,8 @@ public class PropertyImpl extends TraceabilityImpl<EStructuralFeature>
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-		case StructurePackage.PROPERTY__CONTAINED_TYPE:
-			getContainedType().clear();
-			return;
-		case StructurePackage.PROPERTY__NAME:
-			setName(NAME_EDEFAULT);
-			return;
-		case StructurePackage.PROPERTY__TYPE:
-			setType((Type) null);
-			return;
-		case StructurePackage.PROPERTY__IS_ORDERED:
-			setIsOrdered(IS_ORDERED_EDEFAULT);
-			return;
-		case StructurePackage.PROPERTY__UPPER:
-			setUpper(UPPER_EDEFAULT);
-			return;
-		case StructurePackage.PROPERTY__LOWER:
-			setLower(LOWER_EDEFAULT);
-			return;
-		case StructurePackage.PROPERTY__IS_UNIQUE:
-			setIsUnique(IS_UNIQUE_EDEFAULT);
+		case StructurePackage.PROPERTY__ECORE_MODEL_ELEMENT:
+			setEcoreModelElement((EStructuralFeature) null);
 			return;
 		case StructurePackage.PROPERTY__DEFAULT:
 			set_default(_DEFAULT_EDEFAULT);
@@ -2035,17 +1531,17 @@ public class PropertyImpl extends TraceabilityImpl<EStructuralFeature>
 		case StructurePackage.PROPERTY__OWNING_CLASS:
 			setOwningClass((ClassDefinition) null);
 			return;
-		case StructurePackage.PROPERTY__IS_SETTER_ABSTRACT:
-			setIsSetterAbstract(IS_SETTER_ABSTRACT_EDEFAULT);
-			return;
 		case StructurePackage.PROPERTY__IS_ID:
 			setIsID(IS_ID_EDEFAULT);
 			return;
-		case StructurePackage.PROPERTY__IS_GETTER_ABSTRACT:
-			setIsGetterAbstract(IS_GETTER_ABSTRACT_EDEFAULT);
+		case StructurePackage.PROPERTY__IS_SETTER_ABSTRACT:
+			setIsSetterAbstract(IS_SETTER_ABSTRACT_EDEFAULT);
 			return;
 		case StructurePackage.PROPERTY__IS_COMPOSITE:
 			setIsComposite(IS_COMPOSITE_EDEFAULT);
+			return;
+		case StructurePackage.PROPERTY__IS_GETTER_ABSTRACT:
+			setIsGetterAbstract(IS_GETTER_ABSTRACT_EDEFAULT);
 			return;
 		}
 		super.eUnset(featureID);
@@ -2059,25 +1555,8 @@ public class PropertyImpl extends TraceabilityImpl<EStructuralFeature>
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-		case StructurePackage.PROPERTY__CONTAINED_TYPE:
-			return containedType != null && !containedType.isEmpty();
-		case StructurePackage.PROPERTY__NAME:
-			return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT
-					.equals(name);
-		case StructurePackage.PROPERTY__TYPE:
-			return type != null;
-		case StructurePackage.PROPERTY__IS_ORDERED:
-			return IS_ORDERED_EDEFAULT == null ? isOrdered != null
-					: !IS_ORDERED_EDEFAULT.equals(isOrdered);
-		case StructurePackage.PROPERTY__UPPER:
-			return UPPER_EDEFAULT == null ? upper != null : !UPPER_EDEFAULT
-					.equals(upper);
-		case StructurePackage.PROPERTY__LOWER:
-			return LOWER_EDEFAULT == null ? lower != null : !LOWER_EDEFAULT
-					.equals(lower);
-		case StructurePackage.PROPERTY__IS_UNIQUE:
-			return IS_UNIQUE_EDEFAULT == null ? isUnique != null
-					: !IS_UNIQUE_EDEFAULT.equals(isUnique);
+		case StructurePackage.PROPERTY__ECORE_MODEL_ELEMENT:
+			return ecoreModelElement != null;
 		case StructurePackage.PROPERTY__DEFAULT:
 			return _DEFAULT_EDEFAULT == null ? _default != null
 					: !_DEFAULT_EDEFAULT.equals(_default);
@@ -2095,18 +1574,18 @@ public class PropertyImpl extends TraceabilityImpl<EStructuralFeature>
 			return setterBody != null;
 		case StructurePackage.PROPERTY__OWNING_CLASS:
 			return basicGetOwningClass() != null;
-		case StructurePackage.PROPERTY__IS_SETTER_ABSTRACT:
-			return IS_SETTER_ABSTRACT_EDEFAULT == null ? isSetterAbstract != null
-					: !IS_SETTER_ABSTRACT_EDEFAULT.equals(isSetterAbstract);
 		case StructurePackage.PROPERTY__IS_ID:
 			return IS_ID_EDEFAULT == null ? isID != null : !IS_ID_EDEFAULT
 					.equals(isID);
-		case StructurePackage.PROPERTY__IS_GETTER_ABSTRACT:
-			return IS_GETTER_ABSTRACT_EDEFAULT == null ? isGetterAbstract != null
-					: !IS_GETTER_ABSTRACT_EDEFAULT.equals(isGetterAbstract);
+		case StructurePackage.PROPERTY__IS_SETTER_ABSTRACT:
+			return IS_SETTER_ABSTRACT_EDEFAULT == null ? isSetterAbstract != null
+					: !IS_SETTER_ABSTRACT_EDEFAULT.equals(isSetterAbstract);
 		case StructurePackage.PROPERTY__IS_COMPOSITE:
 			return IS_COMPOSITE_EDEFAULT == null ? isComposite != null
 					: !IS_COMPOSITE_EDEFAULT.equals(isComposite);
+		case StructurePackage.PROPERTY__IS_GETTER_ABSTRACT:
+			return IS_GETTER_ABSTRACT_EDEFAULT == null ? isGetterAbstract != null
+					: !IS_GETTER_ABSTRACT_EDEFAULT.equals(isGetterAbstract);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -2118,40 +1597,10 @@ public class PropertyImpl extends TraceabilityImpl<EStructuralFeature>
 	 */
 	@Override
 	public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass) {
-		if (baseClass == TypeContainer.class) {
+		if (baseClass == Traceability.class) {
 			switch (derivedFeatureID) {
-			case StructurePackage.PROPERTY__CONTAINED_TYPE:
-				return StructurePackage.TYPE_CONTAINER__CONTAINED_TYPE;
-			default:
-				return -1;
-			}
-		}
-		if (baseClass == NamedElement.class) {
-			switch (derivedFeatureID) {
-			case StructurePackage.PROPERTY__NAME:
-				return StructurePackage.NAMED_ELEMENT__NAME;
-			default:
-				return -1;
-			}
-		}
-		if (baseClass == TypedElement.class) {
-			switch (derivedFeatureID) {
-			case StructurePackage.PROPERTY__TYPE:
-				return StructurePackage.TYPED_ELEMENT__TYPE;
-			default:
-				return -1;
-			}
-		}
-		if (baseClass == MultiplicityElement.class) {
-			switch (derivedFeatureID) {
-			case StructurePackage.PROPERTY__IS_ORDERED:
-				return StructurePackage.MULTIPLICITY_ELEMENT__IS_ORDERED;
-			case StructurePackage.PROPERTY__UPPER:
-				return StructurePackage.MULTIPLICITY_ELEMENT__UPPER;
-			case StructurePackage.PROPERTY__LOWER:
-				return StructurePackage.MULTIPLICITY_ELEMENT__LOWER;
-			case StructurePackage.PROPERTY__IS_UNIQUE:
-				return StructurePackage.MULTIPLICITY_ELEMENT__IS_UNIQUE;
+			case StructurePackage.PROPERTY__ECORE_MODEL_ELEMENT:
+				return StructurePackage.TRACEABILITY__ECORE_MODEL_ELEMENT;
 			default:
 				return -1;
 			}
@@ -2166,40 +1615,10 @@ public class PropertyImpl extends TraceabilityImpl<EStructuralFeature>
 	 */
 	@Override
 	public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass) {
-		if (baseClass == TypeContainer.class) {
+		if (baseClass == Traceability.class) {
 			switch (baseFeatureID) {
-			case StructurePackage.TYPE_CONTAINER__CONTAINED_TYPE:
-				return StructurePackage.PROPERTY__CONTAINED_TYPE;
-			default:
-				return -1;
-			}
-		}
-		if (baseClass == NamedElement.class) {
-			switch (baseFeatureID) {
-			case StructurePackage.NAMED_ELEMENT__NAME:
-				return StructurePackage.PROPERTY__NAME;
-			default:
-				return -1;
-			}
-		}
-		if (baseClass == TypedElement.class) {
-			switch (baseFeatureID) {
-			case StructurePackage.TYPED_ELEMENT__TYPE:
-				return StructurePackage.PROPERTY__TYPE;
-			default:
-				return -1;
-			}
-		}
-		if (baseClass == MultiplicityElement.class) {
-			switch (baseFeatureID) {
-			case StructurePackage.MULTIPLICITY_ELEMENT__IS_ORDERED:
-				return StructurePackage.PROPERTY__IS_ORDERED;
-			case StructurePackage.MULTIPLICITY_ELEMENT__UPPER:
-				return StructurePackage.PROPERTY__UPPER;
-			case StructurePackage.MULTIPLICITY_ELEMENT__LOWER:
-				return StructurePackage.PROPERTY__LOWER;
-			case StructurePackage.MULTIPLICITY_ELEMENT__IS_UNIQUE:
-				return StructurePackage.PROPERTY__IS_UNIQUE;
+			case StructurePackage.TRACEABILITY__ECORE_MODEL_ELEMENT:
+				return StructurePackage.PROPERTY__ECORE_MODEL_ELEMENT;
 			default:
 				return -1;
 			}
@@ -2218,30 +1637,20 @@ public class PropertyImpl extends TraceabilityImpl<EStructuralFeature>
 			return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (name: ");
-		result.append(name);
-		result.append(", isOrdered: ");
-		result.append(isOrdered);
-		result.append(", upper: ");
-		result.append(upper);
-		result.append(", lower: ");
-		result.append(lower);
-		result.append(", isUnique: ");
-		result.append(isUnique);
-		result.append(", _default: ");
+		result.append(" (_default: ");
 		result.append(_default);
 		result.append(", isDerived: ");
 		result.append(isDerived);
 		result.append(", isReadOnly: ");
 		result.append(isReadOnly);
-		result.append(", isSetterAbstract: ");
-		result.append(isSetterAbstract);
 		result.append(", isID: ");
 		result.append(isID);
-		result.append(", isGetterAbstract: ");
-		result.append(isGetterAbstract);
+		result.append(", isSetterAbstract: ");
+		result.append(isSetterAbstract);
 		result.append(", isComposite: ");
 		result.append(isComposite);
+		result.append(", isGetterAbstract: ");
+		result.append(isGetterAbstract);
 		result.append(')');
 		return result.toString();
 	}

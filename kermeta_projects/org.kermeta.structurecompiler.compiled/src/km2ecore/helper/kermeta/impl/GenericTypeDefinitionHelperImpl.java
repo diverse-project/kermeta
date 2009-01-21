@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: GenericTypeDefinitionHelperImpl.java,v 1.9 2008-11-27 15:49:51 cfaucher Exp $
+ * $Id: GenericTypeDefinitionHelperImpl.java,v 1.10 2009-01-21 09:15:52 cfaucher Exp $
  */
 package km2ecore.helper.kermeta.impl;
 
@@ -61,50 +61,50 @@ public class GenericTypeDefinitionHelperImpl extends ObjectImpl implements
 
 		//BIft:detect
 
-		ecore.EClassifier result_ft247 = null;
+		ecore.EClassifier result_ft246 = null;
 
-		ecore.EClassifier elem_ft247 = null;
+		ecore.EClassifier elem_ft246 = null;
 
-		result_ft247 = null;
+		result_ft246 = null;
 
 		{
 
-			kermeta.standard.Iterator<ecore.EClassifier> it_ft247 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
+			kermeta.standard.Iterator<ecore.EClassifier> it_ft246 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
 					.<ecore.EClassifier> convertAsOrderedSet(
 							p.getEcoreModelElement().getEClassifiers())
 					.iterator();
-			java.lang.Boolean idLoopCond_1094 = false;
-			while (!idLoopCond_1094) {
-				idLoopCond_1094 = kermeta.standard.helper.BooleanWrapper.or(
-						it_ft247.isOff(),
+			java.lang.Boolean idLoopCond_1078 = false;
+			while (!idLoopCond_1078) {
+				idLoopCond_1078 = kermeta.standard.helper.BooleanWrapper.or(
+						it_ft246.isOff(),
 						org.kermeta.compil.runtime.helper.language.ObjectUtil
-								.isNotEqualSwitcher(result_ft247, null));
-				if (idLoopCond_1094) {
+								.isNotEqualSwitcher(result_ft246, null));
+				if (idLoopCond_1078) {
 				} else {
 
-					elem_ft247 = it_ft247.next();
+					elem_ft246 = it_ft246.next();
 
-					java.lang.Boolean idIfCond_1095 = false;
+					java.lang.Boolean idIfCond_1079 = false;
 					//BIle:detector
-					ecore.EClassifier c_lbdExp247 = elem_ft247;
+					ecore.EClassifier c_lbdExp246 = elem_ft246;
 
-					idIfCond_1095 = kermeta.standard.helper.BooleanWrapper
+					idIfCond_1079 = kermeta.standard.helper.BooleanWrapper
 							.and(
 									org.kermeta.compil.runtime.helper.language.ObjectUtil
 											.isInstanceOfSwitcher(
-													c_lbdExp247,
+													c_lbdExp246,
 													org.kermeta.compil.runtime.ExecutionContext
 															.getInstance()
 															.getMetaClass(
 																	"ecore.EClass")),
 									kermeta.standard.helper.StringWrapper
-											.equals(c_lbdExp247.getName(),
+											.equals(c_lbdExp246.getName(),
 													name_KermetaSspecialType));
 					//EIle:detector
 
-					if (idIfCond_1095) {
+					if (idIfCond_1079) {
 
-						result_ft247 = elem_ft247;
+						result_ft246 = elem_ft246;
 					}
 
 				}
@@ -112,15 +112,15 @@ public class GenericTypeDefinitionHelperImpl extends ObjectImpl implements
 		}
 
 		//CE
-		retrieveSpecialType = result_ft247;
+		retrieveSpecialType = result_ft246;
 		//EIft:detect
 
-		java.lang.Boolean idIfCond_1096 = false;
-		idIfCond_1096 = kermeta.standard.helper.BooleanWrapper
+		java.lang.Boolean idIfCond_1080 = false;
+		idIfCond_1080 = kermeta.standard.helper.BooleanWrapper
 				.not(org.kermeta.compil.runtime.helper.language.ObjectUtil
 						.isVoidSwitcher(retrieveSpecialType));
 
-		if (idIfCond_1096) {
+		if (idIfCond_1080) {
 
 			result = ((ecore.EClass) org.kermeta.compil.runtime.helper.language.ObjectUtil
 					.asTypeSwitcher(retrieveSpecialType,
@@ -129,7 +129,7 @@ public class GenericTypeDefinitionHelperImpl extends ObjectImpl implements
 		} else {
 
 			specialType = ((ecore.EClass) org.kermeta.compil.runtime.helper.language.ClassUtil
-					.newObject("ecore.EClass"));
+					.newObject(ecore.EcorePackage.eINSTANCE.getEClass()));
 
 			specialType.setName(name_KermetaSspecialType);
 
@@ -145,7 +145,8 @@ public class GenericTypeDefinitionHelperImpl extends ObjectImpl implements
 							specialType.getEAnnotations())
 					.add(
 							((km2ecore.helper.ecore.EAnnotationHelper) org.kermeta.compil.runtime.helper.language.ClassUtil
-									.newObject("km2ecore.helper.ecore.EAnnotationHelper"))
+									.newObject(km2ecore.helper.ecore.EcorePackage.eINSTANCE
+											.getEAnnotationHelper()))
 									.createKermetaEAnnotation(
 											kermeta.standard.helper.StringWrapper
 													.toString(km2ecore.helper.ecore.KermetaEAnnotationKey

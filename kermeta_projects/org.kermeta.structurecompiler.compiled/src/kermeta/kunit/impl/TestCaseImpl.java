@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: TestCaseImpl.java,v 1.9 2008-11-27 15:49:48 cfaucher Exp $
+ * $Id: TestCaseImpl.java,v 1.10 2009-01-21 09:15:49 cfaucher Exp $
  */
 package kermeta.kunit.impl;
 
@@ -199,13 +199,13 @@ public abstract class TestCaseImpl extends TestImpl implements TestCase {
 
 		java.lang.String msg = "";
 
-		java.lang.Boolean idIfCond_767 = false;
-		idIfCond_767 = kermeta.standard.helper.BooleanWrapper
+		java.lang.Boolean idIfCond_924 = false;
+		idIfCond_924 = kermeta.standard.helper.BooleanWrapper
 				.not(org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
 						.<kermeta.kunit.Failure> convertAsOrderedSet(
 								this.getLog().getFailures()).empty());
 
-		if (idIfCond_767) {
+		if (idIfCond_924) {
 
 			msg = "Failures: ";
 
@@ -213,21 +213,21 @@ public abstract class TestCaseImpl extends TestImpl implements TestCase {
 
 			{
 
-				kermeta.standard.Iterator<kermeta.kunit.Failure> it_ft175 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
+				kermeta.standard.Iterator<kermeta.kunit.Failure> it_ft200 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
 						.<kermeta.kunit.Failure> convertAsOrderedSet(
 								this.getLog().getFailures()).iterator();
-				java.lang.Boolean idLoopCond_768 = false;
-				while (!idLoopCond_768) {
-					idLoopCond_768 = it_ft175.isOff();
-					if (idLoopCond_768) {
+				java.lang.Boolean idLoopCond_925 = false;
+				while (!idLoopCond_925) {
+					idLoopCond_925 = it_ft200.isOff();
+					if (idLoopCond_925) {
 					} else {
 
 						//BIle:func
-						kermeta.kunit.Failure f_lbdExp175 = it_ft175.next();
+						kermeta.kunit.Failure f_lbdExp200 = it_ft200.next();
 
 						msg = kermeta.standard.helper.StringWrapper.plus(
 								kermeta.standard.helper.StringWrapper.plus(msg,
-										"\n   "), f_lbdExp175.toString());
+										"\n   "), f_lbdExp200.toString());
 						//EIle:func
 
 					}
@@ -237,7 +237,8 @@ public abstract class TestCaseImpl extends TestImpl implements TestCase {
 			//EIft:each
 
 			kermeta.kunit.AssertionFailedError exception = ((kermeta.kunit.AssertionFailedError) org.kermeta.compil.runtime.helper.language.ClassUtil
-					.newObject("kermeta.kunit.AssertionFailedError"));
+					.newObject(kermeta.kunit.KunitPackage.eINSTANCE
+							.getAssertionFailedError()));
 
 			exception.setMessage(msg);
 
@@ -247,38 +248,39 @@ public abstract class TestCaseImpl extends TestImpl implements TestCase {
 
 		}
 
-		java.lang.Boolean idIfCond_769 = false;
-		idIfCond_769 = kermeta.standard.helper.BooleanWrapper
+		java.lang.Boolean idIfCond_926 = false;
+		idIfCond_926 = kermeta.standard.helper.BooleanWrapper
 				.not(org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
 						.<kermeta.kunit.Error> convertAsOrderedSet(
 								this.getLog().getErrors()).empty());
 
-		if (idIfCond_769) {
+		if (idIfCond_926) {
 
 			//BIft:each
 
 			{
 
-				kermeta.standard.Iterator<kermeta.kunit.Error> it_ft176 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
+				kermeta.standard.Iterator<kermeta.kunit.Error> it_ft201 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
 						.<kermeta.kunit.Error> convertAsOrderedSet(
 								this.getLog().getErrors()).iterator();
-				java.lang.Boolean idLoopCond_770 = false;
-				while (!idLoopCond_770) {
-					idLoopCond_770 = it_ft176.isOff();
-					if (idLoopCond_770) {
+				java.lang.Boolean idLoopCond_927 = false;
+				while (!idLoopCond_927) {
+					idLoopCond_927 = it_ft201.isOff();
+					if (idLoopCond_927) {
 					} else {
 
 						//BIle:func
-						kermeta.kunit.Error f_lbdExp176 = it_ft176.next();
+						kermeta.kunit.Error f_lbdExp201 = it_ft201.next();
 
 						msg = "Errors: ";
 
 						msg = kermeta.standard.helper.StringWrapper.plus(
 								kermeta.standard.helper.StringWrapper.plus(msg,
-										"\n   "), f_lbdExp176.toString());
+										"\n   "), f_lbdExp201.toString());
 
 						kermeta.exceptions.Exception exception = ((kermeta.exceptions.Exception) org.kermeta.compil.runtime.helper.language.ClassUtil
-								.newObject("kermeta.exceptions.Exception"));
+								.newObject(kermeta.exceptions.ExceptionsPackage.eINSTANCE
+										.getException()));
 
 						exception.setMessage(msg);
 
@@ -387,18 +389,19 @@ public abstract class TestCaseImpl extends TestImpl implements TestCase {
 				{
 					try {
 						kermeta.interpreter.DynamicExpression de = ((kermeta.interpreter.DynamicExpression) org.kermeta.compil.runtime.helper.language.ClassUtil
-								.newObject("kermeta.interpreter.DynamicExpression"));
+								.newObject(kermeta.interpreter.InterpreterPackage.eINSTANCE
+										.getDynamicExpression()));
 
 						de.initializeDefaults();
 
 						de
-								.setSelfClass((kermeta.language.structure.ClassDefinition) org.kermeta.compil.runtime.ExecutionContext
-										.getInstance()
-										.<kermeta.language.structure.ClassDefinition> asTypeOrVoid(
+								.setSelfClass((kermeta.language.structure.ClassDefinition) org.kermeta.compil.runtime.helper.language.ObjectUtil
+										.asTypeOrVoid(
 												org.kermeta.compil.runtime.helper.language.ObjectUtil
 														.getMetaClassSwitcher(
 																this)
-														.getTypeDefinition()));
+														.getTypeDefinition(),
+												"kermeta.language.structure.ClassDefinition"));
 
 						de.parse(kermeta.standard.helper.StringWrapper.plus(
 								"self.", this.getTestMethodName()));
@@ -407,22 +410,31 @@ public abstract class TestCaseImpl extends TestImpl implements TestCase {
 								.execute(
 										this,
 										((kermeta.utils.Hashtable<java.lang.String, kermeta.language.structure.Object>) org.kermeta.compil.runtime.helper.language.ClassUtil
-												.newObject("kermeta.utils.Hashtable<java.lang.String, kermeta.language.structure.Object>")));
+												.newObject(kermeta.utils.UtilsPackage.eINSTANCE
+														.getHashtable())));
 
 						{
 							try {
 								this.tearDown();
 							} catch (org.kermeta.compil.runtime.helper.error.KRuntimeError ex_switcher_1) {
+								boolean caught_1 = false;
 								if (ex_switcher_1.getRealException() instanceof kermeta.exceptions.Exception) {
+									caught_1 = true;
 									kermeta.exceptions.Exception e = (kermeta.exceptions.Exception) ex_switcher_1
 											.getRealException();
 									this.getLogEMF_renameAs().addTearDownError(
 											this, e);
 								}
+								if (!caught_1) {
+									throw ex_switcher_1;
+								}
+
 							}
 						}
 					} catch (org.kermeta.compil.runtime.helper.error.KRuntimeError ex_switcher_2) {
+						boolean caught_2 = false;
 						if (ex_switcher_2.getRealException() instanceof kermeta.kunit.AssertionFailedError) {
+							caught_2 = true;
 							kermeta.kunit.AssertionFailedError afe = (kermeta.kunit.AssertionFailedError) ex_switcher_2
 									.getRealException();
 							this
@@ -439,6 +451,7 @@ public abstract class TestCaseImpl extends TestImpl implements TestCase {
 															afe.getStackTrace()));
 						}
 						if (ex_switcher_2.getRealException() instanceof kermeta.exceptions.Exception) {
+							caught_2 = true;
 							kermeta.exceptions.Exception e1 = (kermeta.exceptions.Exception) ex_switcher_2
 									.getRealException();
 							this.getLogEMF_renameAs().addTestError(this, e1);
@@ -446,23 +459,39 @@ public abstract class TestCaseImpl extends TestImpl implements TestCase {
 								try {
 									this.tearDown();
 								} catch (org.kermeta.compil.runtime.helper.error.KRuntimeError ex_switcher_3) {
+									boolean caught_3 = false;
 									if (ex_switcher_3.getRealException() instanceof kermeta.exceptions.Exception) {
+										caught_3 = true;
 										kermeta.exceptions.Exception e = (kermeta.exceptions.Exception) ex_switcher_3
 												.getRealException();
 										this.getLogEMF_renameAs()
 												.addTearDownError(this, e);
 									}
+									if (!caught_3) {
+										throw ex_switcher_3;
+									}
+
 								}
 							}
 						}
+						if (!caught_2) {
+							throw ex_switcher_2;
+						}
+
 					}
 				}
 			} catch (org.kermeta.compil.runtime.helper.error.KRuntimeError ex_switcher_4) {
+				boolean caught_4 = false;
 				if (ex_switcher_4.getRealException() instanceof kermeta.exceptions.Exception) {
+					caught_4 = true;
 					kermeta.exceptions.Exception e = (kermeta.exceptions.Exception) ex_switcher_4
 							.getRealException();
 					this.getLogEMF_renameAs().addSetUpError(this, e);
 				}
+				if (!caught_4) {
+					throw ex_switcher_4;
+				}
+
 			}
 		}
 
@@ -519,13 +548,14 @@ public abstract class TestCaseImpl extends TestImpl implements TestCase {
 	 */
 	public void fail(String msg) {
 
-		java.lang.Boolean idIfCond_744 = false;
-		idIfCond_744 = this.mustStop();
+		java.lang.Boolean idIfCond_901 = false;
+		idIfCond_901 = this.mustStop();
 
-		if (idIfCond_744) {
+		if (idIfCond_901) {
 
 			kermeta.kunit.AssertionFailedError exception = ((kermeta.kunit.AssertionFailedError) org.kermeta.compil.runtime.helper.language.ClassUtil
-					.newObject("kermeta.kunit.AssertionFailedError"));
+					.newObject(kermeta.kunit.KunitPackage.eINSTANCE
+							.getAssertionFailedError()));
 
 			exception.setMessage(kermeta.standard.helper.StringWrapper.plus(
 					"explicit failure: ", msg));
@@ -592,10 +622,10 @@ public abstract class TestCaseImpl extends TestImpl implements TestCase {
 
 		java.lang.Integer number = this.number();
 
-		java.lang.Boolean idIfCond_745 = false;
-		idIfCond_745 = kermeta.standard.helper.BooleanWrapper.not(condition);
+		java.lang.Boolean idIfCond_902 = false;
+		idIfCond_902 = kermeta.standard.helper.BooleanWrapper.not(condition);
 
-		if (idIfCond_745) {
+		if (idIfCond_902) {
 
 			java.lang.String msg = kermeta.standard.helper.StringWrapper.plus(
 					kermeta.standard.helper.StringWrapper.plus(
@@ -603,13 +633,14 @@ public abstract class TestCaseImpl extends TestImpl implements TestCase {
 							kermeta.standard.helper.IntegerWrapper
 									.toString(number)), " failed");
 
-			java.lang.Boolean idIfCond_746 = false;
-			idIfCond_746 = this.mustStop();
+			java.lang.Boolean idIfCond_903 = false;
+			idIfCond_903 = this.mustStop();
 
-			if (idIfCond_746) {
+			if (idIfCond_903) {
 
 				kermeta.kunit.AssertionFailedError exception = ((kermeta.kunit.AssertionFailedError) org.kermeta.compil.runtime.helper.language.ClassUtil
-						.newObject("kermeta.kunit.AssertionFailedError"));
+						.newObject(kermeta.kunit.KunitPackage.eINSTANCE
+								.getAssertionFailedError()));
 
 				exception.setMessage(msg);
 
@@ -635,11 +666,11 @@ public abstract class TestCaseImpl extends TestImpl implements TestCase {
 
 		java.lang.Integer result = null;
 
-		java.lang.Boolean idIfCond_747 = false;
-		idIfCond_747 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+		java.lang.Boolean idIfCond_904 = false;
+		idIfCond_904 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 				.isVoidSwitcher(this.getRank());
 
-		if (idIfCond_747) {
+		if (idIfCond_904) {
 
 			this.setRank(0);
 		}
@@ -662,10 +693,10 @@ public abstract class TestCaseImpl extends TestImpl implements TestCase {
 
 		java.lang.Integer number = this.number();
 
-		java.lang.Boolean idIfCond_748 = false;
-		idIfCond_748 = kermeta.standard.helper.BooleanWrapper.not(condition);
+		java.lang.Boolean idIfCond_905 = false;
+		idIfCond_905 = kermeta.standard.helper.BooleanWrapper.not(condition);
 
-		if (idIfCond_748) {
+		if (idIfCond_905) {
 
 			java.lang.String realMsg = kermeta.standard.helper.StringWrapper
 					.plus(kermeta.standard.helper.StringWrapper.plus(
@@ -675,13 +706,14 @@ public abstract class TestCaseImpl extends TestImpl implements TestCase {
 											.toString(number)), " failed: "),
 							msg);
 
-			java.lang.Boolean idIfCond_749 = false;
-			idIfCond_749 = this.mustStop();
+			java.lang.Boolean idIfCond_906 = false;
+			idIfCond_906 = this.mustStop();
 
-			if (idIfCond_749) {
+			if (idIfCond_906) {
 
 				kermeta.kunit.AssertionFailedError exception = ((kermeta.kunit.AssertionFailedError) org.kermeta.compil.runtime.helper.language.ClassUtil
-						.newObject("kermeta.kunit.AssertionFailedError"));
+						.newObject(kermeta.kunit.KunitPackage.eINSTANCE
+								.getAssertionFailedError()));
 
 				exception.setMessage(realMsg);
 
@@ -707,11 +739,11 @@ public abstract class TestCaseImpl extends TestImpl implements TestCase {
 
 		java.lang.Boolean result = null;
 
-		java.lang.Boolean idIfCond_750 = false;
-		idIfCond_750 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+		java.lang.Boolean idIfCond_907 = false;
+		idIfCond_907 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 				.isVoidSwitcher(this.getStopOnFailure());
 
-		if (idIfCond_750) {
+		if (idIfCond_907) {
 
 			this.setStopOnFailure(true);
 		}
@@ -738,30 +770,30 @@ public abstract class TestCaseImpl extends TestImpl implements TestCase {
 		{
 
 			java.lang.Integer i = 0;
-			java.lang.Boolean idLoopCond_733 = false;
-			while (!idLoopCond_733) {
-				idLoopCond_733 = kermeta.standard.helper.IntegerWrapper.equals(
+			java.lang.Boolean idLoopCond_890 = false;
+			while (!idLoopCond_890) {
+				idLoopCond_890 = kermeta.standard.helper.IntegerWrapper.equals(
 						i, kermeta.standard.helper.StringWrapper.size(s));
-				if (idLoopCond_733) {
+				if (idLoopCond_890) {
 				} else {
 
 					java.lang.String c = kermeta.standard.helper.CharacterWrapper
 							.toString(kermeta.standard.helper.StringWrapper
 									.elementAt(s, i));
 
-					java.lang.Boolean idIfCond_734 = false;
-					idIfCond_734 = kermeta.standard.helper.IntegerWrapper
+					java.lang.Boolean idIfCond_891 = false;
+					idIfCond_891 = kermeta.standard.helper.IntegerWrapper
 							.isGreaterOrEqual(
 									kermeta.standard.helper.StringWrapper
 											.indexOf(" \n\t", c), 0);
 
-					if (idIfCond_734) {
+					if (idIfCond_891) {
 
-						java.lang.Boolean idIfCond_735 = false;
-						idIfCond_735 = kermeta.standard.helper.BooleanWrapper
+						java.lang.Boolean idIfCond_892 = false;
+						idIfCond_892 = kermeta.standard.helper.BooleanWrapper
 								.not(white);
 
-						if (idIfCond_735) {
+						if (idIfCond_892) {
 
 							white = true;
 
@@ -774,10 +806,10 @@ public abstract class TestCaseImpl extends TestImpl implements TestCase {
 						result = kermeta.standard.helper.StringWrapper.plus(
 								result, c);
 
-						java.lang.Boolean idIfCond_736 = false;
-						idIfCond_736 = white;
+						java.lang.Boolean idIfCond_893 = false;
+						idIfCond_893 = white;
 
-						if (idIfCond_736) {
+						if (idIfCond_893) {
 
 							white = false;
 						}

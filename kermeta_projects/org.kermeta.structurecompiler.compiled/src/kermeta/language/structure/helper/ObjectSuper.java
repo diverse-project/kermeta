@@ -22,29 +22,29 @@ public class ObjectSuper {
 
 		{
 
-			kermeta.standard.Iterator<kermeta.language.structure.Tag> it_ft257 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
+			kermeta.standard.Iterator<kermeta.language.structure.Tag> it_ft264 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
 					.<kermeta.language.structure.Tag> convertAsOrderedSet(
 							self.getOwnedTags()).iterator();
-			java.lang.Boolean idLoopCond_1121 = false;
-			while (!idLoopCond_1121) {
-				idLoopCond_1121 = it_ft257.isOff();
-				if (idLoopCond_1121) {
+			java.lang.Boolean idLoopCond_1140 = false;
+			while (!idLoopCond_1140) {
+				idLoopCond_1140 = it_ft264.isOff();
+				if (idLoopCond_1140) {
 				} else {
 
 					//BIle:func
-					kermeta.language.structure.Tag o_lbdExp257 = it_ft257
+					kermeta.language.structure.Tag o_lbdExp264 = it_ft264
 							.next();
 
 					//BIle:func
-					kermeta.language.structure.Tag p_lbdExp256 = o_lbdExp257;
+					kermeta.language.structure.Tag p_lbdExp263 = o_lbdExp264;
 
-					java.lang.Boolean idIfCond_1122 = false;
-					idIfCond_1122 = kermeta.standard.helper.StringWrapper
-							.equals(p_lbdExp256.getDeprecated(), "");
+					java.lang.Boolean idIfCond_1141 = false;
+					idIfCond_1141 = kermeta.standard.helper.StringWrapper
+							.equals(p_lbdExp263.getDeprecated(), "");
 
-					if (idIfCond_1122) {
+					if (idIfCond_1141) {
 
-						p_lbdExp256.applyPass2(context);
+						p_lbdExp263.applyPass2(context);
 					}
 
 					//EIle:func

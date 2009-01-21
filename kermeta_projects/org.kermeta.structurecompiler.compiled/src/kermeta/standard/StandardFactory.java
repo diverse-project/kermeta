@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: StandardFactory.java,v 1.9 2008-11-27 15:49:55 cfaucher Exp $
+ * $Id: StandardFactory.java,v 1.10 2009-01-21 09:15:57 cfaucher Exp $
  */
 package kermeta.standard;
 
@@ -27,13 +27,13 @@ public interface StandardFactory extends EFactory {
 			.init();
 
 	/**
-	 * Returns a new object of class '<em>Unknown Java Object</em>'.
+	 * Returns a new object of class '<em>String</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Unknown Java Object</em>'.
+	 * @return a new object of class '<em>String</em>'.
 	 * @generated
 	 */
-	UnknownJavaObject createUnknownJavaObject();
+	kermeta.standard.String createString();
 
 	/**
 	 * Returns a new object of class '<em>Set</em>'.
@@ -79,6 +79,15 @@ public interface StandardFactory extends EFactory {
 	 * @generated
 	 */
 	<G> Iterator<G> createIterator();
+
+	/**
+	 * Returns a new object of class '<em>Unknown Java Object</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Unknown Java Object</em>'.
+	 * @generated
+	 */
+	UnknownJavaObject createUnknownJavaObject();
 
 	/**
 	 * Returns a new object of class '<em>Void</em>'.
@@ -133,15 +142,6 @@ public interface StandardFactory extends EFactory {
 	 * @generated
 	 */
 	kermeta.standard.Character createCharacter();
-
-	/**
-	 * Returns a new object of class '<em>String</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>String</em>'.
-	 * @generated
-	 */
-	kermeta.standard.String createString();
 
 	/**
 	 * Returns the package supported by this factory.

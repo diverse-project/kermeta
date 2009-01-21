@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: BehaviorFactoryImpl.java,v 1.9 2008-11-27 15:49:56 cfaucher Exp $
+ * $Id: BehaviorFactoryImpl.java,v 1.10 2009-01-21 09:15:57 cfaucher Exp $
  */
 package kermeta.language.behavior.impl;
 
@@ -61,10 +61,12 @@ public class BehaviorFactoryImpl extends EFactoryImpl implements
 	@Override
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
-		case BehaviorPackage.EXPRESSION:
-			return createExpression();
 		case BehaviorPackage.BLOCK:
 			return createBlock();
+		case BehaviorPackage.RESCUE:
+			return createRescue();
+		case BehaviorPackage.EXPRESSION:
+			return createExpression();
 		case BehaviorPackage.CALL_EXPRESSION:
 			return createCallExpression();
 		case BehaviorPackage.CALL_FEATURE:
@@ -89,8 +91,6 @@ public class BehaviorFactoryImpl extends EFactoryImpl implements
 			return createTypeReference();
 		case BehaviorPackage.RAISE:
 			return createRaise();
-		case BehaviorPackage.RESCUE:
-			return createRescue();
 		case BehaviorPackage.SELF_EXPRESSION:
 			return createSelfExpression();
 		case BehaviorPackage.CONDITIONAL:
@@ -124,9 +124,9 @@ public class BehaviorFactoryImpl extends EFactoryImpl implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Expression createExpression() {
-		ExpressionImpl expression = new ExpressionImpl();
-		return expression;
+	public Block createBlock() {
+		BlockImpl block = new BlockImpl();
+		return block;
 	}
 
 	/**
@@ -134,9 +134,19 @@ public class BehaviorFactoryImpl extends EFactoryImpl implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Block createBlock() {
-		BlockImpl block = new BlockImpl();
-		return block;
+	public Rescue createRescue() {
+		RescueImpl rescue = new RescueImpl();
+		return rescue;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Expression createExpression() {
+		ExpressionImpl expression = new ExpressionImpl();
+		return expression;
 	}
 
 	/**
@@ -257,16 +267,6 @@ public class BehaviorFactoryImpl extends EFactoryImpl implements
 	public Raise createRaise() {
 		RaiseImpl raise = new RaiseImpl();
 		return raise;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Rescue createRescue() {
-		RescueImpl rescue = new RescueImpl();
-		return rescue;
 	}
 
 	/**

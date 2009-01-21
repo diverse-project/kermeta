@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: UtilsSwitch.java,v 1.9 2008-11-27 15:49:57 cfaucher Exp $
+ * $Id: UtilsSwitch.java,v 1.10 2009-01-21 09:15:58 cfaucher Exp $
  */
 package kermeta.utils.util;
 
@@ -91,6 +91,15 @@ public class UtilsSwitch<T> {
 	 */
 	protected T doSwitch(int classifierID, EObject theEObject) {
 		switch (classifierID) {
+		case UtilsPackage.HASHTABLE: {
+			Hashtable<?, ?> hashtable = (Hashtable<?, ?>) theEObject;
+			T result = caseHashtable(hashtable);
+			if (result == null)
+				result = caseObject(hashtable);
+			if (result == null)
+				result = defaultCase(theEObject);
+			return result;
+		}
 		case UtilsPackage.STRING_BUFFER: {
 			kermeta.utils.StringBuffer stringBuffer = (kermeta.utils.StringBuffer) theEObject;
 			T result = caseStringBuffer(stringBuffer);
@@ -117,18 +126,24 @@ public class UtilsSwitch<T> {
 				result = defaultCase(theEObject);
 			return result;
 		}
-		case UtilsPackage.HASHTABLE: {
-			Hashtable<?, ?> hashtable = (Hashtable<?, ?>) theEObject;
-			T result = caseHashtable(hashtable);
-			if (result == null)
-				result = caseObject(hashtable);
-			if (result == null)
-				result = defaultCase(theEObject);
-			return result;
-		}
 		default:
 			return defaultCase(theEObject);
 		}
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Hashtable</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Hashtable</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public <K, V> T caseHashtable(Hashtable<K, V> object) {
+		return null;
 	}
 
 	/**
@@ -158,21 +173,6 @@ public class UtilsSwitch<T> {
 	 * @generated
 	 */
 	public <G> T caseStack(Stack<G> object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Hashtable</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Hashtable</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public <K, V> T caseHashtable(Hashtable<K, V> object) {
 		return null;
 	}
 

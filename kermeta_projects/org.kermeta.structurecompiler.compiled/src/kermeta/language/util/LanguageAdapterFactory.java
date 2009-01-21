@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: LanguageAdapterFactory.java,v 1.9 2008-11-27 15:50:11 cfaucher Exp $
+ * $Id: LanguageAdapterFactory.java,v 1.10 2009-01-21 09:16:05 cfaucher Exp $
  */
 package kermeta.language.util;
 
@@ -76,6 +76,11 @@ public class LanguageAdapterFactory extends AdapterFactoryImpl {
 	 */
 	protected LanguageSwitch<Adapter> modelSwitch = new LanguageSwitch<Adapter>() {
 		@Override
+		public Adapter caseDummyClass(DummyClass object) {
+			return createDummyClassAdapter();
+		}
+
+		@Override
 		public <G> Adapter caseReflectiveCollection(
 				ReflectiveCollection<G> object) {
 			return createReflectiveCollectionAdapter();
@@ -84,11 +89,6 @@ public class LanguageAdapterFactory extends AdapterFactoryImpl {
 		@Override
 		public <G> Adapter caseReflectiveSequence(ReflectiveSequence<G> object) {
 			return createReflectiveSequenceAdapter();
-		}
-
-		@Override
-		public Adapter caseDummyClass(DummyClass object) {
-			return createDummyClassAdapter();
 		}
 
 		@Override
@@ -136,6 +136,20 @@ public class LanguageAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
+	 * Creates a new adapter for an object of class '{@link kermeta.language.DummyClass <em>Dummy Class</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see kermeta.language.DummyClass
+	 * @generated
+	 */
+	public Adapter createDummyClassAdapter() {
+		return null;
+	}
+
+	/**
 	 * Creates a new adapter for an object of class '{@link kermeta.language.ReflectiveCollection <em>Reflective Collection</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -160,20 +174,6 @@ public class LanguageAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createReflectiveSequenceAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link kermeta.language.DummyClass <em>Dummy Class</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see kermeta.language.DummyClass
-	 * @generated
-	 */
-	public Adapter createDummyClassAdapter() {
 		return null;
 	}
 

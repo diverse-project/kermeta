@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: CallValueImpl.java,v 1.9 2008-11-27 15:49:56 cfaucher Exp $
+ * $Id: CallValueImpl.java,v 1.10 2009-01-21 09:15:57 cfaucher Exp $
  */
 package kermeta.language.behavior.impl;
 

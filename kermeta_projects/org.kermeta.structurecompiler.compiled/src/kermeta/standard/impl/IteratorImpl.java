@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: IteratorImpl.java,v 1.9 2008-11-27 15:49:56 cfaucher Exp $
+ * $Id: IteratorImpl.java,v 1.10 2009-01-21 09:15:58 cfaucher Exp $
  */
 package kermeta.standard.impl;
 
@@ -150,11 +150,10 @@ public class IteratorImpl<G> extends ObjectImpl implements Iterator<G> {
 
 		java.lang.Boolean result = null;
 
-		result = (java.lang.Boolean) org.kermeta.compil.runtime.ExecutionContext
-				.getInstance()
-				.<java.lang.Boolean> asTypeOrVoid(
+		result = (java.lang.Boolean) org.kermeta.compil.runtime.helper.language.ObjectUtil
+				.asTypeOrVoid(
 						org.kermeta.compil.runtime.helper.basetypes.IteratorUtil
-								.hasNext(this));
+								.hasNext(this), "java.lang.Boolean");
 
 		return result;
 
@@ -169,24 +168,24 @@ public class IteratorImpl<G> extends ObjectImpl implements Iterator<G> {
 
 		G result = null;
 
-		java.lang.Boolean idIfCond_852 = false;
-		idIfCond_852 = kermeta.standard.helper.BooleanWrapper.not(this
+		java.lang.Boolean idIfCond_762 = false;
+		idIfCond_762 = kermeta.standard.helper.BooleanWrapper.not(this
 				.hasNext());
 
-		if (idIfCond_852) {
+		if (idIfCond_762) {
 
 			if (true)
 				throw new org.kermeta.compil.runtime.helper.error.KRuntimeError(
 						((kermeta.exceptions.IteratorIsOff) org.kermeta.compil.runtime.helper.language.ClassUtil
-								.newObject("kermeta.exceptions.IteratorIsOff")));
+								.newObject(kermeta.exceptions.ExceptionsPackage.eINSTANCE
+										.getIteratorIsOff())));
 
 		}
 
-		result = (G) org.kermeta.compil.runtime.ExecutionContext
-				.getInstance()
-				.<G> asTypeOrVoid(
+		result = (G) org.kermeta.compil.runtime.helper.language.ObjectUtil
+				.asTypeOrVoid(
 						org.kermeta.compil.runtime.helper.basetypes.IteratorUtil
-								.next(this));
+								.next(this), "G");
 
 		return result;
 

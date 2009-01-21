@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: KunitSwitch.java,v 1.9 2008-11-27 15:50:05 cfaucher Exp $
+ * $Id: KunitSwitch.java,v 1.10 2009-01-21 09:16:00 cfaucher Exp $
  */
 package kermeta.kunit.util;
 

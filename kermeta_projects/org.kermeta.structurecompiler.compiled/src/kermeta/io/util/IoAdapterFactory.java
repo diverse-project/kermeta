@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: IoAdapterFactory.java,v 1.9 2008-11-27 15:50:17 cfaucher Exp $
+ * $Id: IoAdapterFactory.java,v 1.10 2009-01-21 09:16:07 cfaucher Exp $
  */
 package kermeta.io.util;
 

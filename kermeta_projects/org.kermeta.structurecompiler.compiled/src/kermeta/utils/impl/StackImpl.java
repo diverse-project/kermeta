@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: StackImpl.java,v 1.9 2008-11-27 15:49:53 cfaucher Exp $
+ * $Id: StackImpl.java,v 1.10 2009-01-21 09:15:55 cfaucher Exp $
  */
 package kermeta.utils.impl;
 

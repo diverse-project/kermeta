@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: EcoreAdapterFactory.java,v 1.9 2008-11-27 15:50:16 cfaucher Exp $
+ * $Id: EcoreAdapterFactory.java,v 1.10 2009-01-21 09:16:06 cfaucher Exp $
  */
 package km2ecore.helper.ecore.util;
 
@@ -71,11 +71,6 @@ public class EcoreAdapterFactory extends AdapterFactoryImpl {
 	 */
 	protected EcoreSwitch<Adapter> modelSwitch = new EcoreSwitch<Adapter>() {
 		@Override
-		public Adapter caseENamedElementHelper(ENamedElementHelper object) {
-			return createENamedElementHelperAdapter();
-		}
-
-		@Override
 		public Adapter caseModelAnalizer(ModelAnalizer object) {
 			return createModelAnalizerAdapter();
 		}
@@ -84,6 +79,11 @@ public class EcoreAdapterFactory extends AdapterFactoryImpl {
 		public Adapter caseEcoreModelElementHelper(
 				EcoreModelElementHelper object) {
 			return createEcoreModelElementHelperAdapter();
+		}
+
+		@Override
+		public Adapter caseENamedElementHelper(ENamedElementHelper object) {
+			return createENamedElementHelperAdapter();
 		}
 
 		@Override
@@ -116,20 +116,6 @@ public class EcoreAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link km2ecore.helper.ecore.ENamedElementHelper <em>ENamed Element Helper</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see km2ecore.helper.ecore.ENamedElementHelper
-	 * @generated
-	 */
-	public Adapter createENamedElementHelperAdapter() {
-		return null;
-	}
-
-	/**
 	 * Creates a new adapter for an object of class '{@link km2ecore.helper.ecore.ModelAnalizer <em>Model Analizer</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -154,6 +140,20 @@ public class EcoreAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createEcoreModelElementHelperAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link km2ecore.helper.ecore.ENamedElementHelper <em>ENamed Element Helper</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see km2ecore.helper.ecore.ENamedElementHelper
+	 * @generated
+	 */
+	public Adapter createENamedElementHelperAdapter() {
 		return null;
 	}
 

@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: AssertImpl.java,v 1.9 2008-11-27 15:49:48 cfaucher Exp $
+ * $Id: AssertImpl.java,v 1.10 2009-01-21 09:15:49 cfaucher Exp $
  */
 package kermeta.kunit.impl;
 
@@ -47,10 +47,10 @@ public class AssertImpl extends AbstractFallibleImpl implements Assert {
 	 */
 	public void assertTrue(Boolean condition) {
 
-		java.lang.Boolean idIfCond_737 = false;
-		idIfCond_737 = kermeta.standard.helper.BooleanWrapper.not(condition);
+		java.lang.Boolean idIfCond_894 = false;
+		idIfCond_894 = kermeta.standard.helper.BooleanWrapper.not(condition);
 
-		if (idIfCond_737) {
+		if (idIfCond_894) {
 
 			this.fail("assertTrue failed");
 		}
@@ -64,10 +64,10 @@ public class AssertImpl extends AbstractFallibleImpl implements Assert {
 	 */
 	public void assertFalseWithMsg(Boolean condition, String msg) {
 
-		java.lang.Boolean idIfCond_738 = false;
-		idIfCond_738 = condition;
+		java.lang.Boolean idIfCond_895 = false;
+		idIfCond_895 = condition;
 
-		if (idIfCond_738) {
+		if (idIfCond_895) {
 
 			this.fail(kermeta.standard.helper.StringWrapper.plus(
 					"assertTrueWithMsg failed : ", msg));
@@ -83,7 +83,8 @@ public class AssertImpl extends AbstractFallibleImpl implements Assert {
 	public void fail(String msg) {
 
 		kermeta.kunit.AssertionFailedError exception = ((kermeta.kunit.AssertionFailedError) org.kermeta.compil.runtime.helper.language.ClassUtil
-				.newObject("kermeta.kunit.AssertionFailedError"));
+				.newObject(kermeta.kunit.KunitPackage.eINSTANCE
+						.getAssertionFailedError()));
 
 		exception.setMessage(msg);
 
@@ -100,12 +101,12 @@ public class AssertImpl extends AbstractFallibleImpl implements Assert {
 	 */
 	public void assertEqual(String expected, String actual) {
 
-		java.lang.Boolean idIfCond_739 = false;
-		idIfCond_739 = kermeta.standard.helper.BooleanWrapper
+		java.lang.Boolean idIfCond_896 = false;
+		idIfCond_896 = kermeta.standard.helper.BooleanWrapper
 				.not(kermeta.standard.helper.StringWrapper.equals(expected,
 						actual));
 
-		if (idIfCond_739) {
+		if (idIfCond_896) {
 
 			this.fail(kermeta.standard.helper.StringWrapper.plus(
 					kermeta.standard.helper.StringWrapper.plus(
@@ -125,10 +126,10 @@ public class AssertImpl extends AbstractFallibleImpl implements Assert {
 	 */
 	public void assertFalse(Boolean condition) {
 
-		java.lang.Boolean idIfCond_740 = false;
-		idIfCond_740 = condition;
+		java.lang.Boolean idIfCond_897 = false;
+		idIfCond_897 = condition;
 
-		if (idIfCond_740) {
+		if (idIfCond_897) {
 
 			this.fail("assertTrue number failed");
 		}
@@ -142,10 +143,10 @@ public class AssertImpl extends AbstractFallibleImpl implements Assert {
 	 */
 	public void assertTrueWithMsg(Boolean condition, String msg) {
 
-		java.lang.Boolean idIfCond_741 = false;
-		idIfCond_741 = kermeta.standard.helper.BooleanWrapper.not(condition);
+		java.lang.Boolean idIfCond_898 = false;
+		idIfCond_898 = kermeta.standard.helper.BooleanWrapper.not(condition);
 
-		if (idIfCond_741) {
+		if (idIfCond_898) {
 
 			this.fail(kermeta.standard.helper.StringWrapper.plus(
 					"assertTrueWithMsg failed : ", msg));
@@ -160,10 +161,10 @@ public class AssertImpl extends AbstractFallibleImpl implements Assert {
 	 */
 	public void _assert(Boolean condition) {
 
-		java.lang.Boolean idIfCond_742 = false;
-		idIfCond_742 = kermeta.standard.helper.BooleanWrapper.not(condition);
+		java.lang.Boolean idIfCond_899 = false;
+		idIfCond_899 = kermeta.standard.helper.BooleanWrapper.not(condition);
 
-		if (idIfCond_742) {
+		if (idIfCond_899) {
 
 			this.fail("assert failed");
 		}
@@ -177,10 +178,10 @@ public class AssertImpl extends AbstractFallibleImpl implements Assert {
 	 */
 	public void assertWithMsg(Boolean condition, String msg) {
 
-		java.lang.Boolean idIfCond_743 = false;
-		idIfCond_743 = kermeta.standard.helper.BooleanWrapper.not(condition);
+		java.lang.Boolean idIfCond_900 = false;
+		idIfCond_900 = kermeta.standard.helper.BooleanWrapper.not(condition);
 
-		if (idIfCond_743) {
+		if (idIfCond_900) {
 
 			this.fail(kermeta.standard.helper.StringWrapper.plus(
 					"assertTrueWithMsg failed : ", msg));

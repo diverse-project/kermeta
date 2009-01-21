@@ -1,5 +1,5 @@
 
-/*$Id: Saver.java,v 1.10 2008-11-27 15:50:12 cfaucher Exp $
+/*$Id: Saver.java,v 1.11 2009-01-21 09:16:06 cfaucher Exp $
 * Project : org.kermeta.compiler.generator
 * File : 	Saver.java
 * License : EPL
@@ -26,7 +26,6 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
-import org.kermeta.compil.runtime.ExecutionContext;
 
 
 /**
@@ -45,13 +44,11 @@ public class Saver extends SaverOrLoader {
 	 */
 	static public void save(kermeta.persistence.Resource kermetaResource, String modelURI, String metamodelURI) {
 		
-		List contents = kermetaResource.getValues();
-		
 		try {
 			Saver s = new Saver(metamodelURI);
 			s.normalizeRegistry(modelURI, metamodelURI);
 			List<EObject> instancesToSave = new ArrayList<EObject>();
-			for ( Object o : contents ) {
+			for ( Object o : kermetaResource.getValues() ) {
 				if ( o instanceof EObject ) {
 					instancesToSave.add(s.clone((EObject) o));
 				}
@@ -61,8 +58,10 @@ public class Saver extends SaverOrLoader {
 			org.eclipse.emf.ecore.resource.Resource resource = resourceSet.createResource( URI.createURI(modelURI) );
 			
 			resource.getContents().addAll(instancesToSave);
+			
 			resource.save(null);
-		} catch (IOException e) {		
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
 	}
 		
@@ -98,6 +97,7 @@ public class Saver extends SaverOrLoader {
 			
 				Object value = sourceObject.eGet(sourceFeature);
 				EStructuralFeature targetFeature = getEStructuralFeature(targetObject.eClass(), sourceFeature.getName());
+				
 				// The source feature can have been added by aspect in Kermeta.
 				// So a source feature may not have a target feature.
 				if ( targetFeature != null ) {
@@ -113,10 +113,25 @@ public class Saver extends SaverOrLoader {
 						// Better set the feature before cloning the value to avoid possible recursive calls.
 						
 						boolean clone = false;
+						
+						if( targetValue instanceof org.eclipse.emf.ecore.EDataType && !(targetValue instanceof org.eclipse.emf.ecore.EEnum) ) {
+							
+							java.lang.String val_name = (java.lang.String) sourceValue.eGet(sourceValue.eClass().getEStructuralFeature("name"));
+							java.lang.String val_instanceClassName = (java.lang.String) sourceValue.eGet(sourceValue.eClass().getEStructuralFeature("instanceClassName"));
+							
+							org.eclipse.emf.ecore.EClassifier eclassifier = org.eclipse.emf.ecore.EcorePackage.eINSTANCE.getEClassifier(val_name);
+							if( eclassifier instanceof org.eclipse.emf.ecore.EDataType
+									&& ((org.eclipse.emf.ecore.EDataType) eclassifier).getInstanceClassName().equals(val_instanceClassName) ) {
+								targetValue = (org.eclipse.emf.ecore.EDataType) eclassifier;
+							}
+							
+						}
+						
 						if ( targetValue == null ) {
 							targetValue = createInstance(sourceValue, this.getMetamodelURI());
 							clone = true;
 						}
+						
 						
 						// Setting the value.
 						targetObject.eSet(targetFeature, targetValue);
@@ -161,10 +176,12 @@ public class Saver extends SaverOrLoader {
 					 */
 					} else if ( value != null ) {
 						Object realValue = value;
+						
 						// Special case for enumerator. Need to create an instance from the good factory.
 						if ( value instanceof Enumerator ) {
 							realValue = createInstance( (Enumerator) value, this.getMetamodelURI());
 						}
+
 						// Setting the value.
 						if( !sourceFeature.isDerived() && targetFeature.isChangeable() /*&& !targetFeature.isUnsettable()*/ ) {
 							targetObject.eSet(targetFeature, realValue);
@@ -183,8 +200,8 @@ public class Saver extends SaverOrLoader {
 	private EStructuralFeature getEStructuralFeature(EClass clazz, String featureName) {
 		for ( EStructuralFeature feature : clazz.getEAllStructuralFeatures() ) {
 			// Pay attention to special keywords that have been prefixed with the '_' character.
-			// FIXME CF: Holala Paco, this patch should be handled in another way...
-			if ( feature.getName().equals(featureName) || feature.getName().replaceFirst("_", "").equals(featureName) ) {
+			// FIXME TODO We need use the dictionnary of Java Keywords CF: Holala Paco, this patch should be handled in another way...
+			if ( feature.getName().equals(featureName) || feature.getName().substring(1).equals(featureName) || feature.getName().equals(featureName.substring(1)) ) {
 				return feature;
 			}
 		}

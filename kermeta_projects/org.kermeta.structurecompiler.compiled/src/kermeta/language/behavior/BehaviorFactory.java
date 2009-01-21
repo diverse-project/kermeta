@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: BehaviorFactory.java,v 1.9 2008-11-27 15:49:47 cfaucher Exp $
+ * $Id: BehaviorFactory.java,v 1.10 2009-01-21 09:15:49 cfaucher Exp $
  */
 package kermeta.language.behavior;
 
@@ -27,15 +27,6 @@ public interface BehaviorFactory extends EFactory {
 			.init();
 
 	/**
-	 * Returns a new object of class '<em>Expression</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Expression</em>'.
-	 * @generated
-	 */
-	Expression createExpression();
-
-	/**
 	 * Returns a new object of class '<em>Block</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -43,6 +34,24 @@ public interface BehaviorFactory extends EFactory {
 	 * @generated
 	 */
 	Block createBlock();
+
+	/**
+	 * Returns a new object of class '<em>Rescue</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Rescue</em>'.
+	 * @generated
+	 */
+	Rescue createRescue();
+
+	/**
+	 * Returns a new object of class '<em>Expression</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Expression</em>'.
+	 * @generated
+	 */
+	Expression createExpression();
 
 	/**
 	 * Returns a new object of class '<em>Call Expression</em>'.
@@ -151,15 +160,6 @@ public interface BehaviorFactory extends EFactory {
 	 * @generated
 	 */
 	Raise createRaise();
-
-	/**
-	 * Returns a new object of class '<em>Rescue</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Rescue</em>'.
-	 * @generated
-	 */
-	Rescue createRescue();
 
 	/**
 	 * Returns a new object of class '<em>Self Expression</em>'.

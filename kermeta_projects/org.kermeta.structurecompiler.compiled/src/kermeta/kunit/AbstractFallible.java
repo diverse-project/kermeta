@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: AbstractFallible.java,v 1.9 2008-11-27 15:50:05 cfaucher Exp $
+ * $Id: AbstractFallible.java,v 1.10 2009-01-21 09:16:00 cfaucher Exp $
  */
 package kermeta.kunit;
 
@@ -34,7 +34,7 @@ public interface AbstractFallible extends kermeta.language.structure.Object {
 	 * <!-- end-user-doc -->
 	 * @model dataType="kermeta.standard.JavaString" sDataType="kermeta.standard.JavaString"
 	 *        annotation="kermeta documentation='/** \n\t ** reduces all runs of white-space to a single space character\n\t *\052/'"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='\njava.lang.String result = null;\n\n\tresult = \"\";\n\n\tjava.lang.Boolean white = false;\n\n\t\n{\n\n\tjava.lang.Integer i = 0;\n\tjava.lang.Boolean idLoopCond_733 = false;\n\twhile( !idLoopCond_733 ) {\n\tidLoopCond_733 = kermeta.standard.helper.IntegerWrapper.equals(i, kermeta.standard.helper.StringWrapper.size(s));\n\tif ( idLoopCond_733 ) {\n\t} else {\n\n\tjava.lang.String c = kermeta.standard.helper.CharacterWrapper.toString(kermeta.standard.helper.StringWrapper.elementAt(s, i));\n\n\tjava.lang.Boolean idIfCond_734 = false;\n\tidIfCond_734 = kermeta.standard.helper.IntegerWrapper.isGreaterOrEqual(kermeta.standard.helper.StringWrapper.indexOf(\" \\n\\t\", c), 0);\n\n\tif( idIfCond_734 ) {\n\n\tjava.lang.Boolean idIfCond_735 = false;\n\tidIfCond_735 = kermeta.standard.helper.BooleanWrapper.not(white);\n\n\tif( idIfCond_735 ) {\n\n\twhite = true;\n\n\tresult = kermeta.standard.helper.StringWrapper.plus(result, \" \");\n}\n\n}\n else {\n\n\tresult = kermeta.standard.helper.StringWrapper.plus(result, c);\n\n\tjava.lang.Boolean idIfCond_736 = false;\n\tidIfCond_736 = white;\n\n\tif( idIfCond_736 ) {\n\n\twhite = false;\n}\n\n}\n\n\n\ti = kermeta.standard.helper.IntegerWrapper.plus(i, 1);\n}\n\t}\n}\n\n\nreturn result;\n'"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='\njava.lang.String result = null;\n\n\tresult = \"\";\n\n\tjava.lang.Boolean white = false;\n\n\t\n{\n\n\tjava.lang.Integer i = 0;\n\tjava.lang.Boolean idLoopCond_890 = false;\n\twhile( !idLoopCond_890 ) {\n\tidLoopCond_890 = kermeta.standard.helper.IntegerWrapper.equals(i, kermeta.standard.helper.StringWrapper.size(s));\n\tif ( idLoopCond_890 ) {\n\t} else {\n\n\tjava.lang.String c = kermeta.standard.helper.CharacterWrapper.toString(kermeta.standard.helper.StringWrapper.elementAt(s, i));\n\n\tjava.lang.Boolean idIfCond_891 = false;\n\tidIfCond_891 = kermeta.standard.helper.IntegerWrapper.isGreaterOrEqual(kermeta.standard.helper.StringWrapper.indexOf(\" \\n\\t\", c), 0);\n\n\tif( idIfCond_891 ) {\n\n\tjava.lang.Boolean idIfCond_892 = false;\n\tidIfCond_892 = kermeta.standard.helper.BooleanWrapper.not(white);\n\n\tif( idIfCond_892 ) {\n\n\twhite = true;\n\n\tresult = kermeta.standard.helper.StringWrapper.plus(result, \" \");\n}\n\n}\n else {\n\n\tresult = kermeta.standard.helper.StringWrapper.plus(result, c);\n\n\tjava.lang.Boolean idIfCond_893 = false;\n\tidIfCond_893 = white;\n\n\tif( idIfCond_893 ) {\n\n\twhite = false;\n}\n\n}\n\n\n\ti = kermeta.standard.helper.IntegerWrapper.plus(i, 1);\n}\n\t}\n}\n\n\nreturn result;\n'"
 	 * @generated
 	 */
 	String distil(String s);

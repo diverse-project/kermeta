@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: EMFRepositoryImpl.java,v 1.9 2008-11-27 15:50:06 cfaucher Exp $
+ * $Id: EMFRepositoryImpl.java,v 1.10 2009-01-21 09:16:01 cfaucher Exp $
  */
 package kermeta.persistence.impl;
 
@@ -247,50 +247,52 @@ public class EMFRepositoryImpl extends RepositoryImpl implements EMFRepository {
 
 		//BIft:collect
 
-		kermeta.standard.Sequence<java.lang.String> result_ft236 = null;
+		kermeta.standard.Sequence<java.lang.String> result_ft217 = null;
 
-		result_ft236 = ((kermeta.standard.Sequence<java.lang.String>) org.kermeta.compil.runtime.helper.language.ClassUtil
-				.newObject("kermeta.standard.Sequence<java.lang.String>"));
+		result_ft217 = ((kermeta.standard.Sequence<java.lang.String>) org.kermeta.compil.runtime.helper.language.ClassUtil
+				.newObject(kermeta.standard.StandardPackage.eINSTANCE
+						.getSequence()));
 
 		{
 
-			kermeta.standard.Iterator<kermeta.persistence.Resource> it_ft236 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
+			kermeta.standard.Iterator<kermeta.persistence.Resource> it_ft217 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
 					.<kermeta.persistence.Resource> convertAsSet(
 							this.getResources()).iterator();
-			java.lang.Boolean idLoopCond_1044 = false;
-			while (!idLoopCond_1044) {
-				idLoopCond_1044 = it_ft236.isOff();
-				if (idLoopCond_1044) {
+			java.lang.Boolean idLoopCond_969 = false;
+			while (!idLoopCond_969) {
+				idLoopCond_969 = it_ft217.isOff();
+				if (idLoopCond_969) {
 				} else {
 
-					java.lang.String result_lambda_ft236 = null;
+					java.lang.String result_lambda_ft217 = null;
 					//BIle:collector
-					kermeta.persistence.Resource r_lbdExp236 = it_ft236.next();
+					kermeta.persistence.Resource r_lbdExp217 = it_ft217.next();
 
-					result_lambda_ft236 = r_lbdExp236.getUri();
+					result_lambda_ft217 = r_lbdExp217.getUri();
 					//EIle:collector
 
-					result_ft236.add(result_lambda_ft236);
+					result_ft217.add(result_lambda_ft217);
 				}
 			}
 		}
 
 		//EIft:collect
-		java.lang.Boolean idIfCond_1043 = false;
-		idIfCond_1043 = kermeta.standard.helper.BooleanWrapper.not(result_ft236
+		java.lang.Boolean idIfCond_968 = false;
+		idIfCond_968 = kermeta.standard.helper.BooleanWrapper.not(result_ft217
 				.contains(uri));
 
-		if (idIfCond_1043) {
+		if (idIfCond_968) {
 
-			result = (kermeta.persistence.Resource) org.kermeta.compil.runtime.ExecutionContext
-					.getInstance()
-					.<kermeta.persistence.Resource> asTypeOrVoid(
+			result = (kermeta.persistence.Resource) org.kermeta.compil.runtime.helper.language.ObjectUtil
+					.asTypeOrVoid(
 							org.kermeta.compil.runtime.helper.basetypes.RepositoryUtil
-									.createResource(this, uri, mm_uri));
+									.createResource(this, uri, mm_uri),
+							"kermeta.persistence.Resource");
 		} else {
 
 			kermeta.exceptions.ResourceCreateException e = ((kermeta.exceptions.ResourceCreateException) org.kermeta.compil.runtime.helper.language.ClassUtil
-					.newObject("kermeta.exceptions.ResourceCreateException"));
+					.newObject(kermeta.exceptions.ExceptionsPackage.eINSTANCE
+							.getResourceCreateException()));
 
 			e
 					.setMessage(kermeta.standard.helper.StringWrapper

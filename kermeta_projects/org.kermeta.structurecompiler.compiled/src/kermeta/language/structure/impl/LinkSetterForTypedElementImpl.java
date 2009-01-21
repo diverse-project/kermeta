@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: LinkSetterForTypedElementImpl.java,v 1.9 2008-11-27 15:49:49 cfaucher Exp $
+ * $Id: LinkSetterForTypedElementImpl.java,v 1.10 2009-01-21 09:15:50 cfaucher Exp $
  */
 package kermeta.language.structure.impl;
 
@@ -54,28 +54,29 @@ public class LinkSetterForTypedElementImpl extends ObjectImpl implements
 	public void setLinks(TypedElement element, ETypedElement ecoreModelElement,
 			KM2EcoreContext context) {
 
-		java.lang.Boolean idIfCond_355 = false;
-		idIfCond_355 = kermeta.standard.helper.BooleanWrapper
+		java.lang.Boolean idIfCond_279 = false;
+		idIfCond_279 = kermeta.standard.helper.BooleanWrapper
 				.and(
 						kermeta.standard.helper.BooleanWrapper
 								.not(org.kermeta.compil.runtime.helper.language.ObjectUtil
 										.isVoidSwitcher(ecoreModelElement)),
 						kermeta.standard.helper.BooleanWrapper
 								.not(((kermeta.language.structure.Operation) org.kermeta.compil.runtime.helper.language.ClassUtil
-										.newObject("kermeta.language.structure.Operation"))
+										.newObject(kermeta.language.structure.StructurePackage.eINSTANCE
+												.getOperation()))
 										.isVoidType(element.getType()
 												.getTypeQName())));
 
-		if (idIfCond_355) {
+		if (idIfCond_279) {
 
-			java.lang.Boolean idIfCond_356 = false;
-			idIfCond_356 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+			java.lang.Boolean idIfCond_280 = false;
+			idIfCond_280 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 					.isInstanceOfSwitcher(element.getType(),
 							org.kermeta.compil.runtime.ExecutionContext
 									.getInstance().getMetaClass(
 											"kermeta.language.structure.Class"));
 
-			if (idIfCond_356) {
+			if (idIfCond_280) {
 
 				kermeta.language.structure.Class c = ((kermeta.language.structure.Class) org.kermeta.compil.runtime.helper.language.ObjectUtil
 						.asTypeSwitcher(
@@ -89,13 +90,14 @@ public class LinkSetterForTypedElementImpl extends ObjectImpl implements
 						.getClassDefinitionAsTyped();
 
 				ecore.EGenericType genericType = ((ecore.EGenericType) org.kermeta.compil.runtime.helper.language.ClassUtil
-						.newObject("ecore.EGenericType"));
+						.newObject(ecore.EcorePackage.eINSTANCE
+								.getEGenericType()));
 
-				java.lang.Boolean idIfCond_357 = false;
-				idIfCond_357 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+				java.lang.Boolean idIfCond_281 = false;
+				idIfCond_281 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 						.isVoidSwitcher(classDefinition.getEcoreDataType());
 
-				if (idIfCond_357) {
+				if (idIfCond_281) {
 
 					genericType.setEClassifier(classDefinition
 							.getEcoreModelElement());
@@ -112,8 +114,8 @@ public class LinkSetterForTypedElementImpl extends ObjectImpl implements
 				c.setLinks(context);
 			} else {
 
-				java.lang.Boolean idIfCond_358 = false;
-				idIfCond_358 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+				java.lang.Boolean idIfCond_282 = false;
+				idIfCond_282 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 						.isInstanceOfSwitcher(
 								element.getType(),
 								org.kermeta.compil.runtime.ExecutionContext
@@ -121,19 +123,20 @@ public class LinkSetterForTypedElementImpl extends ObjectImpl implements
 										.getMetaClass(
 												"kermeta.language.structure.PrimitiveType"));
 
-				if (idIfCond_358) {
+				if (idIfCond_282) {
 
 					kermeta.language.structure.ClassDefinition cd = element
 							.getType().getClassFromPrimitiveType()
 							.getClassDefinitionAsTyped();
 
-					java.lang.Boolean idIfCond_359 = false;
-					idIfCond_359 = element.getType().isEDataType();
+					java.lang.Boolean idIfCond_283 = false;
+					idIfCond_283 = element.getType().isEDataType();
 
-					if (idIfCond_359) {
+					if (idIfCond_283) {
 
 						ecore.EGenericType newEGT = ((ecore.EGenericType) org.kermeta.compil.runtime.helper.language.ClassUtil
-								.newObject("ecore.EGenericType"));
+								.newObject(ecore.EcorePackage.eINSTANCE
+										.getEGenericType()));
 
 						newEGT
 								.setEClassifier(((kermeta.language.structure.PrimitiveType) org.kermeta.compil.runtime.helper.language.ObjectUtil
@@ -151,7 +154,7 @@ public class LinkSetterForTypedElementImpl extends ObjectImpl implements
 
 						{
 
-							kermeta.standard.Iterator<ecore.ETypeParameter> it_ft116 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
+							kermeta.standard.Iterator<ecore.ETypeParameter> it_ft108 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
 									.<ecore.ETypeParameter> convertAsOrderedSet(
 											((kermeta.language.structure.PrimitiveType) org.kermeta.compil.runtime.helper.language.ObjectUtil
 													.asTypeSwitcher(
@@ -163,23 +166,23 @@ public class LinkSetterForTypedElementImpl extends ObjectImpl implements
 													.getEcoreModelElement()
 													.getETypeParameters())
 									.iterator();
-							java.lang.Boolean idLoopCond_360 = false;
-							while (!idLoopCond_360) {
-								idLoopCond_360 = it_ft116.isOff();
-								if (idLoopCond_360) {
+							java.lang.Boolean idLoopCond_284 = false;
+							while (!idLoopCond_284) {
+								idLoopCond_284 = it_ft108.isOff();
+								if (idLoopCond_284) {
 								} else {
 
 									//BIle:func
-									ecore.ETypeParameter etp_lbdExp116 = it_ft116
+									ecore.ETypeParameter etp_lbdExp108 = it_ft108
 											.next();
 
-									java.lang.Boolean idIfCond_361 = false;
-									idIfCond_361 = kermeta.standard.helper.BooleanWrapper
+									java.lang.Boolean idIfCond_285 = false;
+									idIfCond_285 = kermeta.standard.helper.BooleanWrapper
 											.not(org.kermeta.compil.runtime.helper.language.ObjectUtil
 													.isVoidSwitcher(ecoreModelElement
 															.getEGenericType()));
 
-									if (idIfCond_361) {
+									if (idIfCond_285) {
 
 										org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
 												.<ecore.EGenericType> convertAsOrderedSet(
@@ -187,7 +190,8 @@ public class LinkSetterForTypedElementImpl extends ObjectImpl implements
 																.getETypeArguments())
 												.add(
 														((ecore.EGenericType) org.kermeta.compil.runtime.helper.language.ClassUtil
-																.newObject("ecore.EGenericType")));
+																.newObject(ecore.EcorePackage.eINSTANCE
+																		.getEGenericType())));
 									}
 
 									//EIle:func
@@ -200,11 +204,11 @@ public class LinkSetterForTypedElementImpl extends ObjectImpl implements
 
 					} else {
 
-						java.lang.Boolean idIfCond_362 = false;
-						idIfCond_362 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+						java.lang.Boolean idIfCond_286 = false;
+						idIfCond_286 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 								.isVoidSwitcher(cd.getEcoreDataType());
 
-						if (idIfCond_362) {
+						if (idIfCond_286) {
 
 							ecoreModelElement.setEType(cd
 									.getEcoreModelElement());
@@ -217,8 +221,8 @@ public class LinkSetterForTypedElementImpl extends ObjectImpl implements
 
 				} else {
 
-					java.lang.Boolean idIfCond_363 = false;
-					idIfCond_363 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+					java.lang.Boolean idIfCond_287 = false;
+					idIfCond_287 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 							.isInstanceOfSwitcher(
 									element.getType(),
 									org.kermeta.compil.runtime.ExecutionContext
@@ -226,7 +230,7 @@ public class LinkSetterForTypedElementImpl extends ObjectImpl implements
 											.getMetaClass(
 													"kermeta.language.structure.Enumeration"));
 
-					if (idIfCond_363) {
+					if (idIfCond_287) {
 
 						ecoreModelElement
 								.setEType(((kermeta.language.structure.Enumeration) org.kermeta.compil.runtime.helper.language.ObjectUtil
@@ -239,8 +243,8 @@ public class LinkSetterForTypedElementImpl extends ObjectImpl implements
 										.getEcoreModelElement());
 					} else {
 
-						java.lang.Boolean idIfCond_364 = false;
-						idIfCond_364 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+						java.lang.Boolean idIfCond_288 = false;
+						idIfCond_288 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 								.isInstanceOfSwitcher(
 										element.getType(),
 										org.kermeta.compil.runtime.ExecutionContext
@@ -248,10 +252,11 @@ public class LinkSetterForTypedElementImpl extends ObjectImpl implements
 												.getMetaClass(
 														"kermeta.language.structure.ObjectTypeVariable"));
 
-						if (idIfCond_364) {
+						if (idIfCond_288) {
 
 							ecore.EGenericType genericType = ((ecore.EGenericType) org.kermeta.compil.runtime.helper.language.ClassUtil
-									.newObject("ecore.EGenericType"));
+									.newObject(ecore.EcorePackage.eINSTANCE
+											.getEGenericType()));
 
 							genericType
 									.setETypeParameter(((kermeta.language.structure.ObjectTypeVariable) org.kermeta.compil.runtime.helper.language.ObjectUtil

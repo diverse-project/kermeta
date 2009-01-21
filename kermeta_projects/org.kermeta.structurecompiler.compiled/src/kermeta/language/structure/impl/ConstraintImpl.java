@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ConstraintImpl.java,v 1.9 2008-11-27 15:49:50 cfaucher Exp $
+ * $Id: ConstraintImpl.java,v 1.10 2009-01-21 09:15:51 cfaucher Exp $
  */
 package kermeta.language.structure.impl;
 
@@ -14,9 +14,9 @@ import kermeta.language.structure.ClassDefinition;
 import kermeta.language.structure.Constraint;
 import kermeta.language.structure.ConstraintLanguage;
 import kermeta.language.structure.ConstraintType;
-import kermeta.language.structure.NamedElement;
 import kermeta.language.structure.Operation;
 import kermeta.language.structure.StructurePackage;
+import kermeta.language.structure.Traceability;
 
 import km2ecore.KM2EcoreContext;
 
@@ -24,6 +24,7 @@ import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
@@ -37,7 +38,7 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link kermeta.language.structure.impl.ConstraintImpl#getName <em>Name</em>}</li>
+ *   <li>{@link kermeta.language.structure.impl.ConstraintImpl#getEcoreModelElement <em>Ecore Model Element</em>}</li>
  *   <li>{@link kermeta.language.structure.impl.ConstraintImpl#getId <em>Id</em>}</li>
  *   <li>{@link kermeta.language.structure.impl.ConstraintImpl#getBody <em>Body</em>}</li>
  *   <li>{@link kermeta.language.structure.impl.ConstraintImpl#getPreOwner <em>Pre Owner</em>}</li>
@@ -50,27 +51,16 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
  *
  * @generated
  */
-public class ConstraintImpl extends TraceabilityImpl<EAnnotation> implements
-		Constraint {
+public class ConstraintImpl extends NamedElementImpl implements Constraint {
 	/**
-	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
+	 * The cached value of the '{@link #getEcoreModelElement() <em>Ecore Model Element</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getName()
+	 * @see #getEcoreModelElement()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final String NAME_EDEFAULT = null;
-
-	/**
-	 * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getName()
-	 * @generated
-	 * @ordered
-	 */
-	protected String name = NAME_EDEFAULT;
+	protected EAnnotation ecoreModelElement;
 
 	/**
 	 * The default value of the '{@link #getId() <em>Id</em>}' attribute.
@@ -166,8 +156,19 @@ public class ConstraintImpl extends TraceabilityImpl<EAnnotation> implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public String getName() {
-		return name;
+	public EAnnotation getEcoreModelElement() {
+		if (ecoreModelElement != null
+				&& ((EObject) ecoreModelElement).eIsProxy()) {
+			InternalEObject oldEcoreModelElement = (InternalEObject) ecoreModelElement;
+			ecoreModelElement = (EAnnotation) eResolveProxy(oldEcoreModelElement);
+			if (ecoreModelElement != oldEcoreModelElement) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE,
+							StructurePackage.CONSTRAINT__ECORE_MODEL_ELEMENT,
+							oldEcoreModelElement, ecoreModelElement));
+			}
+		}
+		return ecoreModelElement;
 	}
 
 	/**
@@ -175,12 +176,22 @@ public class ConstraintImpl extends TraceabilityImpl<EAnnotation> implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setName(String newName) {
-		String oldName = name;
-		name = newName;
+	public EAnnotation basicGetEcoreModelElement() {
+		return ecoreModelElement;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setEcoreModelElement(EAnnotation newEcoreModelElement) {
+		EAnnotation oldEcoreModelElement = ecoreModelElement;
+		ecoreModelElement = newEcoreModelElement;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET,
-					StructurePackage.CONSTRAINT__NAME, oldName, name));
+					StructurePackage.CONSTRAINT__ECORE_MODEL_ELEMENT,
+					oldEcoreModelElement, ecoreModelElement));
 	}
 
 	/**
@@ -527,14 +538,14 @@ public class ConstraintImpl extends TraceabilityImpl<EAnnotation> implements
 
 		result = "";
 
-		java.lang.Boolean idIfCond_43 = false;
-		idIfCond_43 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+		java.lang.Boolean idIfCond_353 = false;
+		idIfCond_353 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 				.isInstanceOfSwitcher(this.getBody(),
 						org.kermeta.compil.runtime.ExecutionContext
 								.getInstance().getMetaClass(
 										"kermeta.language.behavior.Block"));
 
-		if (idIfCond_43) {
+		if (idIfCond_353) {
 
 			result = kermeta.standard.helper.StringWrapper.plus(result, this
 					.getBody().createBehaviorJava(context));
@@ -557,7 +568,8 @@ public class ConstraintImpl extends TraceabilityImpl<EAnnotation> implements
 									.createExpression(
 											context,
 											((kermeta.utils.StringBuffer) org.kermeta.compil.runtime.helper.language.ClassUtil
-													.newObject("kermeta.utils.StringBuffer")))
+													.newObject(kermeta.utils.UtilsPackage.eINSTANCE
+															.getStringBuffer())))
 									.toString());
 		}
 
@@ -575,15 +587,15 @@ public class ConstraintImpl extends TraceabilityImpl<EAnnotation> implements
 		simk.SMContext smContext = context.getSimkModel()
 				.retrieveOrCreateContextForInvariant(this, context);
 
-		java.lang.Boolean idIfCond_44 = false;
-		idIfCond_44 = kermeta.standard.helper.BooleanWrapper
+		java.lang.Boolean idIfCond_354 = false;
+		idIfCond_354 = kermeta.standard.helper.BooleanWrapper
 				.not(org.kermeta.compil.runtime.helper.language.ObjectUtil
 						.isVoidSwitcher(smContext));
 
-		if (idIfCond_44) {
+		if (idIfCond_354) {
 
 			simk.SMMethod staticMethod = ((simk.SMMethod) org.kermeta.compil.runtime.helper.language.ClassUtil
-					.newObject("simk.SMMethod"));
+					.newObject(simk.SimkPackage.eINSTANCE.getSMMethod()));
 
 			staticMethod.setName(kermeta.standard.helper.StringWrapper.plus(
 					"checkInvariant_", this.getId()));
@@ -623,14 +635,14 @@ public class ConstraintImpl extends TraceabilityImpl<EAnnotation> implements
 							smContext.getSMMethods()).add(staticMethod);
 
 			simk.SMReturn smReturn = ((simk.SMReturn) org.kermeta.compil.runtime.helper.language.ClassUtil
-					.newObject("simk.SMReturn"));
+					.newObject(simk.SimkPackage.eINSTANCE.getSMReturn()));
 
 			smReturn.setType("java.lang.Boolean");
 
 			staticMethod.setSMReturn(smReturn);
 
 			simk.SMParameter default_param = ((simk.SMParameter) org.kermeta.compil.runtime.helper.language.ClassUtil
-					.newObject("simk.SMParameter"));
+					.newObject(simk.SimkPackage.eINSTANCE.getSMParameter()));
 
 			default_param.setName("self");
 
@@ -672,11 +684,11 @@ public class ConstraintImpl extends TraceabilityImpl<EAnnotation> implements
 		kermeta.language.structure.Property p = c
 				.getPropertyValue("ecoreModelElement");
 
-		java.lang.Boolean idIfCond_45 = false;
-		idIfCond_45 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+		java.lang.Boolean idIfCond_355 = false;
+		idIfCond_355 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 				.isNotEqualSwitcher(p, null);
 
-		if (idIfCond_45) {
+		if (idIfCond_355) {
 
 			ecore.EModelElement ecoreModelElement = ((ecore.EModelElement) org.kermeta.compil.runtime.helper.language.ObjectUtil
 					.asTypeSwitcher(
@@ -711,56 +723,10 @@ public class ConstraintImpl extends TraceabilityImpl<EAnnotation> implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAnnotation createEcoreModelElement(KM2EcoreContext context) {
+	public void applyPass2(KM2EcoreContext context) {
 
-		ecore.EAnnotation result = null;
-
-		java.lang.String body = "";
-
-		java.lang.Boolean idIfCond_46 = false;
-		idIfCond_46 = org.kermeta.compil.runtime.helper.language.ObjectUtil
-				.equalsSwitcher(this.getStereotype(),
-						kermeta.language.structure.ConstraintType
-								.getByName("inv"));
-
-		if (idIfCond_46) {
-
-			result = ((km2ecore.helper.ecore.EAnnotationHelper) org.kermeta.compil.runtime.helper.language.ClassUtil
-					.newObject("km2ecore.helper.ecore.EAnnotationHelper"))
-					.create("kermeta.inv", this.getName(), body);
-		} else {
-
-			java.lang.Boolean idIfCond_47 = false;
-			idIfCond_47 = org.kermeta.compil.runtime.helper.language.ObjectUtil
-					.equalsSwitcher(this.getStereotype(),
-							kermeta.language.structure.ConstraintType
-									.getByName("pre"));
-
-			if (idIfCond_47) {
-
-				result = ((km2ecore.helper.ecore.EAnnotationHelper) org.kermeta.compil.runtime.helper.language.ClassUtil
-						.newObject("km2ecore.helper.ecore.EAnnotationHelper"))
-						.create("kermeta.pre", this.getName(), body);
-			} else {
-
-				java.lang.Boolean idIfCond_48 = false;
-				idIfCond_48 = org.kermeta.compil.runtime.helper.language.ObjectUtil
-						.equalsSwitcher(this.getStereotype(),
-								kermeta.language.structure.ConstraintType
-										.getByName("post"));
-
-				if (idIfCond_48) {
-
-					result = ((km2ecore.helper.ecore.EAnnotationHelper) org.kermeta.compil.runtime.helper.language.ClassUtil
-							.newObject("km2ecore.helper.ecore.EAnnotationHelper"))
-							.create("kermeta.post", this.getName(), body);
-				}
-
-			}
-
-		}
-
-		return result;
+		kermeta.language.structure.helper.ObjectSuper.super_applyPass2(this,
+				context);
 
 	}
 
@@ -769,10 +735,59 @@ public class ConstraintImpl extends TraceabilityImpl<EAnnotation> implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void applyPass2(KM2EcoreContext context) {
+	public EAnnotation createEcoreModelElement(KM2EcoreContext context) {
 
-		kermeta.language.structure.helper.ObjectSuper.super_applyPass2(this,
-				context);
+		ecore.EAnnotation result = null;
+
+		java.lang.String body = "";
+
+		java.lang.Boolean idIfCond_356 = false;
+		idIfCond_356 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+				.equalsSwitcher(this.getStereotype(),
+						kermeta.language.structure.ConstraintType
+								.getByName("inv"));
+
+		if (idIfCond_356) {
+
+			result = ((km2ecore.helper.ecore.EAnnotationHelper) org.kermeta.compil.runtime.helper.language.ClassUtil
+					.newObject(km2ecore.helper.ecore.EcorePackage.eINSTANCE
+							.getEAnnotationHelper())).create("kermeta.inv",
+					this.getName(), body);
+		} else {
+
+			java.lang.Boolean idIfCond_357 = false;
+			idIfCond_357 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+					.equalsSwitcher(this.getStereotype(),
+							kermeta.language.structure.ConstraintType
+									.getByName("pre"));
+
+			if (idIfCond_357) {
+
+				result = ((km2ecore.helper.ecore.EAnnotationHelper) org.kermeta.compil.runtime.helper.language.ClassUtil
+						.newObject(km2ecore.helper.ecore.EcorePackage.eINSTANCE
+								.getEAnnotationHelper())).create("kermeta.pre",
+						this.getName(), body);
+			} else {
+
+				java.lang.Boolean idIfCond_358 = false;
+				idIfCond_358 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+						.equalsSwitcher(this.getStereotype(),
+								kermeta.language.structure.ConstraintType
+										.getByName("post"));
+
+				if (idIfCond_358) {
+
+					result = ((km2ecore.helper.ecore.EAnnotationHelper) org.kermeta.compil.runtime.helper.language.ClassUtil
+							.newObject(km2ecore.helper.ecore.EcorePackage.eINSTANCE
+									.getEAnnotationHelper())).create(
+							"kermeta.post", this.getName(), body);
+				}
+
+			}
+
+		}
+
+		return result;
 
 	}
 
@@ -801,13 +816,13 @@ public class ConstraintImpl extends TraceabilityImpl<EAnnotation> implements
 	 */
 	public void applyPass2BehaviorJava(KM2EcoreContext context) {
 
-		java.lang.Boolean idIfCond_49 = false;
-		idIfCond_49 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+		java.lang.Boolean idIfCond_359 = false;
+		idIfCond_359 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 				.equalsSwitcher(this.getStereotype(),
 						kermeta.language.structure.ConstraintType
 								.getByName("inv"));
 
-		if (idIfCond_49) {
+		if (idIfCond_359) {
 
 			this.setSimkForInvariant(context);
 		}
@@ -827,127 +842,6 @@ public class ConstraintImpl extends TraceabilityImpl<EAnnotation> implements
 				.equalsSwitcher(this.getStereotype(),
 						kermeta.language.structure.ConstraintType
 								.getByName("post"));
-
-		return result;
-
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public String getGenModelQualifiedName() {
-
-		java.lang.String result = null;
-
-		result = kermeta.standard.helper.StringWrapper.plus(
-				kermeta.standard.helper.StringWrapper.plus(this
-						.getRootPackage().getGenModelBasePackage(), "::"), this
-						.qualifiedName());
-
-		return result;
-
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public String getJavaQualifiedName() {
-
-		java.lang.String result = null;
-
-		result = kermeta.standard.helper.StringWrapper.replace(this
-				.qualifiedName(), "::", ".");
-
-		return result;
-
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public String getGenModelJavaQualifiedName() {
-
-		java.lang.String result = null;
-
-		result = kermeta.standard.helper.StringWrapper.replace(this
-				.getGenModelQualifiedName(), "::", ".");
-
-		return result;
-
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public String qualifiedName() {
-
-		java.lang.String result = null;
-
-		kermeta.language.structure.NamedElement elem = this;
-
-		result = this.getName();
-
-		java.lang.Boolean idIfCond_369 = false;
-		idIfCond_369 = org.kermeta.compil.runtime.helper.language.ObjectUtil
-				.isInstanceOfSwitcher(
-						org.kermeta.compil.runtime.helper.language.ObjectUtil
-								.containerSwitcher(elem),
-						org.kermeta.compil.runtime.ExecutionContext
-								.getInstance()
-								.getMetaClass(
-										"kermeta.language.structure.NamedElement"));
-
-		if (idIfCond_369) {
-
-			elem = (kermeta.language.structure.NamedElement) org.kermeta.compil.runtime.ExecutionContext
-					.getInstance()
-					.<kermeta.language.structure.NamedElement> asTypeOrVoid(
-							org.kermeta.compil.runtime.helper.language.ObjectUtil
-									.containerSwitcher(elem));
-			java.lang.Boolean idLoopCond_370 = false;
-			while (!idLoopCond_370) {
-				idLoopCond_370 = org.kermeta.compil.runtime.helper.language.ObjectUtil
-						.equalsSwitcher(elem, null);
-				if (idLoopCond_370) {
-				} else {
-
-					result = kermeta.standard.helper.StringWrapper.plus(
-							kermeta.standard.helper.StringWrapper.plus(elem
-									.getName(), "::"), result);
-
-					java.lang.Boolean idIfCond_371 = false;
-					idIfCond_371 = org.kermeta.compil.runtime.helper.language.ObjectUtil
-							.isInstanceOfSwitcher(
-									org.kermeta.compil.runtime.helper.language.ObjectUtil
-											.containerSwitcher(elem),
-									org.kermeta.compil.runtime.ExecutionContext
-											.getInstance()
-											.getMetaClass(
-													"kermeta.language.structure.NamedElement"));
-
-					if (idIfCond_371) {
-
-						elem = (kermeta.language.structure.NamedElement) org.kermeta.compil.runtime.ExecutionContext
-								.getInstance()
-								.<kermeta.language.structure.NamedElement> asTypeOrVoid(
-										org.kermeta.compil.runtime.helper.language.ObjectUtil
-												.containerSwitcher(elem));
-					} else {
-
-						elem = null;
-					}
-
-				}
-			}
-		}
 
 		return result;
 
@@ -1030,8 +924,10 @@ public class ConstraintImpl extends TraceabilityImpl<EAnnotation> implements
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-		case StructurePackage.CONSTRAINT__NAME:
-			return getName();
+		case StructurePackage.CONSTRAINT__ECORE_MODEL_ELEMENT:
+			if (resolve)
+				return getEcoreModelElement();
+			return basicGetEcoreModelElement();
 		case StructurePackage.CONSTRAINT__ID:
 			return getId();
 		case StructurePackage.CONSTRAINT__BODY:
@@ -1066,8 +962,8 @@ public class ConstraintImpl extends TraceabilityImpl<EAnnotation> implements
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-		case StructurePackage.CONSTRAINT__NAME:
-			setName((String) newValue);
+		case StructurePackage.CONSTRAINT__ECORE_MODEL_ELEMENT:
+			setEcoreModelElement((EAnnotation) newValue);
 			return;
 		case StructurePackage.CONSTRAINT__ID:
 			setId((String) newValue);
@@ -1102,8 +998,8 @@ public class ConstraintImpl extends TraceabilityImpl<EAnnotation> implements
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-		case StructurePackage.CONSTRAINT__NAME:
-			setName(NAME_EDEFAULT);
+		case StructurePackage.CONSTRAINT__ECORE_MODEL_ELEMENT:
+			setEcoreModelElement((EAnnotation) null);
 			return;
 		case StructurePackage.CONSTRAINT__ID:
 			setId(ID_EDEFAULT);
@@ -1138,9 +1034,8 @@ public class ConstraintImpl extends TraceabilityImpl<EAnnotation> implements
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-		case StructurePackage.CONSTRAINT__NAME:
-			return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT
-					.equals(name);
+		case StructurePackage.CONSTRAINT__ECORE_MODEL_ELEMENT:
+			return ecoreModelElement != null;
 		case StructurePackage.CONSTRAINT__ID:
 			return ID_EDEFAULT == null ? id != null : !ID_EDEFAULT.equals(id);
 		case StructurePackage.CONSTRAINT__BODY:
@@ -1166,10 +1061,10 @@ public class ConstraintImpl extends TraceabilityImpl<EAnnotation> implements
 	 */
 	@Override
 	public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass) {
-		if (baseClass == NamedElement.class) {
+		if (baseClass == Traceability.class) {
 			switch (derivedFeatureID) {
-			case StructurePackage.CONSTRAINT__NAME:
-				return StructurePackage.NAMED_ELEMENT__NAME;
+			case StructurePackage.CONSTRAINT__ECORE_MODEL_ELEMENT:
+				return StructurePackage.TRACEABILITY__ECORE_MODEL_ELEMENT;
 			default:
 				return -1;
 			}
@@ -1184,10 +1079,10 @@ public class ConstraintImpl extends TraceabilityImpl<EAnnotation> implements
 	 */
 	@Override
 	public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass) {
-		if (baseClass == NamedElement.class) {
+		if (baseClass == Traceability.class) {
 			switch (baseFeatureID) {
-			case StructurePackage.NAMED_ELEMENT__NAME:
-				return StructurePackage.CONSTRAINT__NAME;
+			case StructurePackage.TRACEABILITY__ECORE_MODEL_ELEMENT:
+				return StructurePackage.CONSTRAINT__ECORE_MODEL_ELEMENT;
 			default:
 				return -1;
 			}
@@ -1206,9 +1101,7 @@ public class ConstraintImpl extends TraceabilityImpl<EAnnotation> implements
 			return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (name: ");
-		result.append(name);
-		result.append(", id: ");
+		result.append(" (id: ");
 		result.append(id);
 		result.append(", stereotype: ");
 		result.append(stereotype);

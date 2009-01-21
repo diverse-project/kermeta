@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: RescueImpl.java,v 1.9 2008-11-27 15:49:56 cfaucher Exp $
+ * $Id: RescueImpl.java,v 1.10 2009-01-21 09:15:57 cfaucher Exp $
  */
 package kermeta.language.behavior.impl;
 
@@ -243,12 +243,12 @@ public class RescueImpl extends ObjectImpl implements Rescue {
 
 		result = "";
 
-		java.lang.Boolean idIfCond_620 = false;
-		idIfCond_620 = kermeta.standard.helper.BooleanWrapper
+		java.lang.Boolean idIfCond_382 = false;
+		idIfCond_382 = kermeta.standard.helper.BooleanWrapper
 				.not(org.kermeta.compil.runtime.helper.language.ObjectUtil
 						.isVoidSwitcher(this.getExceptionType()));
 
-		if (idIfCond_620) {
+		if (idIfCond_382) {
 
 			java.lang.String str_exceptionType = this.getExceptionType()
 					.createBehaviorJava(context);
@@ -277,6 +277,12 @@ public class RescueImpl extends ObjectImpl implements Rescue {
 																					.peek()),
 															".getRealException() instanceof "),
 											str_exceptionType), " ) {\n");
+
+			result = kermeta.standard.helper.StringWrapper.plus(
+					kermeta.standard.helper.StringWrapper.plus(
+							kermeta.standard.helper.StringWrapper.plus(result,
+									"caught_"), context.getKRErrorStack()
+									.peek()), " = true;\n");
 
 			result = kermeta.standard.helper.StringWrapper
 					.plus(
@@ -318,24 +324,24 @@ public class RescueImpl extends ObjectImpl implements Rescue {
 
 			{
 
-				kermeta.standard.Iterator<kermeta.language.structure.Tag> it_ft142 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
+				kermeta.standard.Iterator<kermeta.language.structure.Tag> it_ft123 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
 						.<kermeta.language.structure.Tag> convertAsOrderedSet(
 								this.getOwnedTags()).iterator();
-				java.lang.Boolean idLoopCond_621 = false;
-				while (!idLoopCond_621) {
-					idLoopCond_621 = it_ft142.isOff();
-					if (idLoopCond_621) {
+				java.lang.Boolean idLoopCond_383 = false;
+				while (!idLoopCond_383) {
+					idLoopCond_383 = it_ft123.isOff();
+					if (idLoopCond_383) {
 					} else {
 
 						//BIle:func
-						kermeta.language.structure.Tag o_lbdExp142 = it_ft142
+						kermeta.language.structure.Tag o_lbdExp123 = it_ft123
 								.next();
 
 						//BIle:func
-						kermeta.language.structure.Tag e_lbdExp141 = o_lbdExp142;
+						kermeta.language.structure.Tag e_lbdExp122 = o_lbdExp123;
 
 						result = kermeta.standard.helper.StringWrapper
-								.plus(result, e_lbdExp141
+								.plus(result, e_lbdExp122
 										.createBehaviorJava(context));
 						//EIle:func
 
@@ -351,24 +357,24 @@ public class RescueImpl extends ObjectImpl implements Rescue {
 
 			{
 
-				kermeta.standard.Iterator<kermeta.language.behavior.Expression> it_ft143 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
+				kermeta.standard.Iterator<kermeta.language.behavior.Expression> it_ft124 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
 						.<kermeta.language.behavior.Expression> convertAsOrderedSet(
 								this.getBody()).iterator();
-				java.lang.Boolean idLoopCond_622 = false;
-				while (!idLoopCond_622) {
-					idLoopCond_622 = it_ft143.isOff();
-					if (idLoopCond_622) {
+				java.lang.Boolean idLoopCond_384 = false;
+				while (!idLoopCond_384) {
+					idLoopCond_384 = it_ft124.isOff();
+					if (idLoopCond_384) {
 					} else {
 
 						//BIle:func
-						kermeta.language.behavior.Expression s_lbdExp143 = it_ft143
+						kermeta.language.behavior.Expression s_lbdExp124 = it_ft124
 								.next();
 
 						//BIle:func
-						kermeta.language.behavior.Expression e_lbdExp141 = s_lbdExp143;
+						kermeta.language.behavior.Expression e_lbdExp122 = s_lbdExp124;
 
 						result = kermeta.standard.helper.StringWrapper
-								.plus(result, e_lbdExp141
+								.plus(result, e_lbdExp122
 										.createBehaviorJava(context));
 						//EIle:func
 

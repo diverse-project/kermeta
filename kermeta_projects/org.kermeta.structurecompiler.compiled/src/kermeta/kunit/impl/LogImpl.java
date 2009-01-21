@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: LogImpl.java,v 1.9 2008-11-27 15:49:48 cfaucher Exp $
+ * $Id: LogImpl.java,v 1.10 2009-01-21 09:15:49 cfaucher Exp $
  */
 package kermeta.kunit.impl;
 
@@ -185,8 +185,9 @@ public class LogImpl extends ObjectImpl implements Log {
 						this.getHarnessErrors())
 				.add(
 						((kermeta.kunit.Error) org.kermeta.compil.runtime.helper.language.ClassUtil
-								.newObject("kermeta.kunit.Error")).initFrom(
-								test, e).makeSetUp());
+								.newObject(kermeta.kunit.KunitPackage.eINSTANCE
+										.getError())).initFrom(test, e)
+								.makeSetUp());
 
 	}
 
@@ -201,8 +202,8 @@ public class LogImpl extends ObjectImpl implements Log {
 				.<kermeta.kunit.Error> convertAsOrderedSet(this.getErrors())
 				.add(
 						((kermeta.kunit.Error) org.kermeta.compil.runtime.helper.language.ClassUtil
-								.newObject("kermeta.kunit.Error")).initFrom(
-								test, e));
+								.newObject(kermeta.kunit.KunitPackage.eINSTANCE
+										.getError())).initFrom(test, e));
 
 	}
 
@@ -217,8 +218,8 @@ public class LogImpl extends ObjectImpl implements Log {
 				.<kermeta.kunit.Failure> convertAsOrderedSet(this.getFailures())
 				.add(
 						((kermeta.kunit.Failure) org.kermeta.compil.runtime.helper.language.ClassUtil
-								.newObject("kermeta.kunit.Failure")).initFrom(
-								test, msg));
+								.newObject(kermeta.kunit.KunitPackage.eINSTANCE
+										.getFailure())).initFrom(test, msg));
 
 	}
 
@@ -234,8 +235,9 @@ public class LogImpl extends ObjectImpl implements Log {
 						this.getHarnessErrors())
 				.add(
 						((kermeta.kunit.Error) org.kermeta.compil.runtime.helper.language.ClassUtil
-								.newObject("kermeta.kunit.Error")).initFrom(
-								test, e).makeTearDown());
+								.newObject(kermeta.kunit.KunitPackage.eINSTANCE
+										.getError())).initFrom(test, e)
+								.makeTearDown());
 
 	}
 
@@ -246,11 +248,11 @@ public class LogImpl extends ObjectImpl implements Log {
 	 */
 	public void newAttempt() {
 
-		java.lang.Boolean idIfCond_751 = false;
-		idIfCond_751 = kermeta.standard.helper.IntegerWrapper.equals(this
+		java.lang.Boolean idIfCond_908 = false;
+		idIfCond_908 = kermeta.standard.helper.IntegerWrapper.equals(this
 				.getRuntests(), null);
 
-		if (idIfCond_751) {
+		if (idIfCond_908) {
 
 			this.setRuntests(0);
 		}

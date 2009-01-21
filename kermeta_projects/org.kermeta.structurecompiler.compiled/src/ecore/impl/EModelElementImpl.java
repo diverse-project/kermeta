@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: EModelElementImpl.java,v 1.10 2008-11-27 15:49:51 cfaucher Exp $
+ * $Id: EModelElementImpl.java,v 1.11 2009-01-21 09:15:52 cfaucher Exp $
  */
 package ecore.impl;
 

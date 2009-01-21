@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ModelImpl.java,v 1.9 2008-11-27 15:49:49 cfaucher Exp $
+ * $Id: ModelImpl.java,v 1.10 2009-01-21 09:15:50 cfaucher Exp $
  */
 package kermeta.language.structure.impl;
 
@@ -120,35 +120,35 @@ public class ModelImpl extends ObjectImpl implements Model {
 		kermeta.standard.Collection<kermeta.language.structure.Object> result = null;
 
 		result = ((kermeta.standard.Set<kermeta.language.structure.Object>) org.kermeta.compil.runtime.helper.language.ClassUtil
-				.newObject("kermeta.standard.Set<kermeta.language.structure.Object>"));
+				.newObject(kermeta.standard.StandardPackage.eINSTANCE.getSet()));
 
 		//BIft:each
 
 		{
 
-			kermeta.standard.Iterator<kermeta.language.structure.Object> it_ft117 = objectsToAdd
+			kermeta.standard.Iterator<kermeta.language.structure.Object> it_ft118 = objectsToAdd
 					.iterator();
-			java.lang.Boolean idLoopCond_365 = false;
-			while (!idLoopCond_365) {
-				idLoopCond_365 = it_ft117.isOff();
-				if (idLoopCond_365) {
+			java.lang.Boolean idLoopCond_370 = false;
+			while (!idLoopCond_370) {
+				idLoopCond_370 = it_ft118.isOff();
+				if (idLoopCond_370) {
 				} else {
 
 					//BIle:func
-					kermeta.language.structure.Object obj_lbdExp117 = it_ft117
+					kermeta.language.structure.Object obj_lbdExp118 = it_ft118
 							.next();
 
 					kermeta.language.structure.Object addedObject = this
-							.addCompatible(obj_lbdExp117);
+							.addCompatible(obj_lbdExp118);
 
-					java.lang.Boolean idIfCond_366 = false;
-					idIfCond_366 = kermeta.standard.helper.BooleanWrapper
+					java.lang.Boolean idIfCond_371 = false;
+					idIfCond_371 = kermeta.standard.helper.BooleanWrapper
 							.not(org.kermeta.compil.runtime.helper.language.ObjectUtil
 									.isVoidSwitcher(addedObject));
 
-					if (idIfCond_366) {
+					if (idIfCond_371) {
 
-						result.add(obj_lbdExp117);
+						result.add(obj_lbdExp118);
 					}
 
 					//EIle:func
@@ -189,37 +189,38 @@ public class ModelImpl extends ObjectImpl implements Model {
 
 		//BIft:select
 
-		kermeta.standard.Sequence<kermeta.language.structure.Object> result_ft118 = null;
+		kermeta.standard.Sequence<kermeta.language.structure.Object> result_ft119 = null;
 
-		kermeta.language.structure.Object elem_ft118 = null;
+		kermeta.language.structure.Object elem_ft119 = null;
 
-		result_ft118 = ((kermeta.standard.Sequence<kermeta.language.structure.Object>) org.kermeta.compil.runtime.helper.language.ClassUtil
-				.newObject("kermeta.standard.Sequence<kermeta.language.structure.Object>"));
+		result_ft119 = ((kermeta.standard.Sequence<kermeta.language.structure.Object>) org.kermeta.compil.runtime.helper.language.ClassUtil
+				.newObject(kermeta.standard.StandardPackage.eINSTANCE
+						.getSequence()));
 
 		{
 
-			kermeta.standard.Iterator<kermeta.language.structure.Object> it_ft118 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
+			kermeta.standard.Iterator<kermeta.language.structure.Object> it_ft119 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
 					.<kermeta.language.structure.Object> convertAsOrderedSet(
 							this.getContents()).iterator();
-			java.lang.Boolean idLoopCond_367 = false;
-			while (!idLoopCond_367) {
-				idLoopCond_367 = it_ft118.isOff();
-				if (idLoopCond_367) {
+			java.lang.Boolean idLoopCond_372 = false;
+			while (!idLoopCond_372) {
+				idLoopCond_372 = it_ft119.isOff();
+				if (idLoopCond_372) {
 				} else {
 
-					elem_ft118 = it_ft118.next();
+					elem_ft119 = it_ft119.next();
 
-					java.lang.Boolean idIfCond_368 = false;
+					java.lang.Boolean idIfCond_373 = false;
 					//BIle:selector
-					kermeta.language.structure.Object o_lbdExp118 = elem_ft118;
+					kermeta.language.structure.Object o_lbdExp119 = elem_ft119;
 
-					idIfCond_368 = org.kermeta.compil.runtime.helper.language.TypeUtil
-							.isInstanceSwitcher(typeName, o_lbdExp118);
+					idIfCond_373 = org.kermeta.compil.runtime.helper.language.TypeUtil
+							.isInstanceSwitcher(typeName, o_lbdExp119);
 					//EIle:selector
 
-					if (idIfCond_368) {
+					if (idIfCond_373) {
 
-						result_ft118.add(elem_ft118);
+						result_ft119.add(elem_ft119);
 					}
 
 				}
@@ -227,7 +228,7 @@ public class ModelImpl extends ObjectImpl implements Model {
 		}
 
 		//EIft:select
-		result = result_ft118.asSet();
+		result = result_ft119.asSet();
 
 		return result;
 

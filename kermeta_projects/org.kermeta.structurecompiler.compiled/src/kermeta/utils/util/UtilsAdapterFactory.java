@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: UtilsAdapterFactory.java,v 1.9 2008-11-27 15:49:57 cfaucher Exp $
+ * $Id: UtilsAdapterFactory.java,v 1.10 2009-01-21 09:15:58 cfaucher Exp $
  */
 package kermeta.utils.util;
 
@@ -78,6 +78,11 @@ public class UtilsAdapterFactory extends AdapterFactoryImpl {
 	 */
 	protected UtilsSwitch<Adapter> modelSwitch = new UtilsSwitch<Adapter>() {
 		@Override
+		public <K, V> Adapter caseHashtable(Hashtable<K, V> object) {
+			return createHashtableAdapter();
+		}
+
+		@Override
 		public Adapter caseStringBuffer(kermeta.utils.StringBuffer object) {
 			return createStringBufferAdapter();
 		}
@@ -85,11 +90,6 @@ public class UtilsAdapterFactory extends AdapterFactoryImpl {
 		@Override
 		public <G> Adapter caseStack(Stack<G> object) {
 			return createStackAdapter();
-		}
-
-		@Override
-		public <K, V> Adapter caseHashtable(Hashtable<K, V> object) {
-			return createHashtableAdapter();
 		}
 
 		@Override
@@ -137,6 +137,20 @@ public class UtilsAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
+	 * Creates a new adapter for an object of class '{@link kermeta.utils.Hashtable <em>Hashtable</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see kermeta.utils.Hashtable
+	 * @generated
+	 */
+	public Adapter createHashtableAdapter() {
+		return null;
+	}
+
+	/**
 	 * Creates a new adapter for an object of class '{@link kermeta.utils.StringBuffer <em>String Buffer</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -161,20 +175,6 @@ public class UtilsAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createStackAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link kermeta.utils.Hashtable <em>Hashtable</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see kermeta.utils.Hashtable
-	 * @generated
-	 */
-	public Adapter createHashtableAdapter() {
 		return null;
 	}
 

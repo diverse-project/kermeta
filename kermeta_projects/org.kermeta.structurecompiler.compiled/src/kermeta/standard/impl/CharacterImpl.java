@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: CharacterImpl.java,v 1.4 2008-11-27 15:49:56 cfaucher Exp $
+ * $Id: CharacterImpl.java,v 1.5 2009-01-21 09:15:58 cfaucher Exp $
  */
 package kermeta.standard.impl;
 
