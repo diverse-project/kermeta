@@ -1,4 +1,4 @@
-/* $Id: ParameterizedTypeChecker.java,v 1.11 2008-04-28 11:50:10 ftanguy Exp $
+/* $Id: ParameterizedTypeChecker.java,v 1.12 2009-01-21 15:21:04 moha Exp $
  * Project : Kermeta io
  * File : ParametrizedTypeChecker.java
  * License : EPL
@@ -107,6 +107,8 @@ public class ParameterizedTypeChecker extends KermetaOptimizedVisitor {
 								TypeVariableBinding new_tvb = StructureFactory.eINSTANCE.createTypeVariableBinding();
 								new_tvb.setVariable(vt);
 								new_tvb.setType(matcher.getResultMatch().get(e));
+								if ( new_tvb.getType().eContainer() == null )
+									new_tvb.getContainedType().add( new_tvb.getType() );
 								arg0.getVirtualTypeBinding().add(new_tvb);
 							}
 						}
