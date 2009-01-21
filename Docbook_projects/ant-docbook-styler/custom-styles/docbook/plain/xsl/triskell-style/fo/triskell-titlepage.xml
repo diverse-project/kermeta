@@ -42,23 +42,26 @@
 	</xsl:attribute-set>
 	
   <t:titlepage t:element="book" t:wrapper="fo:block" >         
-    <t:titlepage-content t:side="recto">                  
+    <t:titlepage-content t:side="recto"> 
+      <mediaobject/>                 
       <title  xsl:use-attribute-sets="titlepage.recto.title.style" />
       <subtitle xsl:use-attribute-sets="titlepage.recto.subtitle.style"/>                       
       <author/>
       <contrib/>
       <edition/>
+      <publishername/>
 	  <copyright/>                                       
       <abstract xsl:use-attribute-sets="titlepage.recto.abstract.style" />
+	  <pubdate/>
     </t:titlepage-content>
 	<t:titlepage-content t:side="verso">                  
-      <title/>
+    <!--  <title/>
       <subtitle/>                       
       <author/>
       <contrib/>
       <edition/>
 	  <pubdate/>
-	  <copyright/>                                       
+	  <copyright/> -->                                       
     </t:titlepage-content>
   </t:titlepage>
 </t:templates>
