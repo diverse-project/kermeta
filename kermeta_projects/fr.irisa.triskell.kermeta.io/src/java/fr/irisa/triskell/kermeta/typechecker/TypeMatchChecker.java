@@ -1,4 +1,4 @@
-/* $Id: TypeMatchChecker.java,v 1.14 2009-01-06 17:07:24 vmahe Exp $
+/* $Id: TypeMatchChecker.java,v 1.15 2009-01-21 15:22:29 moha Exp $
  * Project : Kermeta io
  * File : TypeMatchChecker.java
  * License : EPL
@@ -17,10 +17,12 @@ package fr.irisa.triskell.kermeta.typechecker;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.Map.Entry;
 
 import org.apache.commons.logging.Log;
@@ -241,21 +243,27 @@ public class TypeMatchChecker {
 				debugMsg.add("--------------------------------------------------------------------");
 				for (CallableProperty r_prop : (ArrayList<CallableProperty>) r_type
 						.callableProperties()) {
-					// BEGIN Naouel
-					// Verify that the required property does not have a tag 'rename'
-//					CallableProperty p_prop = null;
-//					String renameTag = null;
-//					renameTag = TypeMatchChecker.getValueRenameTag(r_prop);
-//					if(renameTag==null){
-//						p_prop = p_type.getPropertyByName(r_prop.getName());
-//					} else {
-//						p_prop = p_type.getPropertyByName(renameTag);
-//					}
-					CallableProperty p_prop = p_type.getPropertyByName(r_prop
-							.getName());
-					
-					
-					// END Naouel
+					// moha : Nov 2008
+					// Avant : CallableProperty p_prop = p_type.getPropertyByName(r_prop.getName());
+					// BEGIN modification	 
+					CallableProperty p_prop = null;
+					String valueRenameTag = null;
+
+					valueRenameTag = TypeMatchChecker.getValueRenameTag(r_prop);
+
+					if (valueRenameTag == null) {
+						p_prop = p_type.getPropertyByName(r_prop.getName());
+					} else {
+						Map<String, String> elemsTag = getElemsValueRenameTag(valueRenameTag);
+						if (elemsTag.containsKey(this.provided.getName())) {
+							String newNameTag = elemsTag.get(this.provided
+									.getName());
+							p_prop = p_type.getPropertyByName(newNameTag);
+						} else {
+							p_prop = p_type.getPropertyByName(r_prop.getName());
+						}
+					}
+					// END modification
 					
 					debugMsg.add(">> Required property: " + r_prop.property + "");
 					if (p_prop == null) {
@@ -557,47 +565,75 @@ public class TypeMatchChecker {
 	}
 	
 	/**
-	 * Naouel
-	 * TODO : can be put in a ModelTypeHelper
+	 * Put in a map the elements of rename tag. 
+	 * For example : @rename "UmlMT=packagedElement kermetaMT=ownedTypeDefinition" 
+	 *               attribute ownedClass : set MyClass[0..*]
+	 * 
+	 * Result : Map<UmlMT, packagedElement> Map<kermetaMT, ownedTypeDefinition>
+	 * 
+	 * @author moha
+	 * @since 23/12/2008
+	 * 
+	 * @param String
+	 *            valueRenameTag
+	 * @return Map<String, String>
 	 */
-	private static String getValueRenameTag(CallableProperty r_prop){
-		
-		String valueRenameTag = null;
-		
-		for(Tag tag : r_prop.getProperty().getTag()){
-			if(tag.getName().equals("rename"))
-				valueRenameTag = tag.getValue();
-				return valueRenameTag;
-		}
-		// case for aspect, look in the context of the owning class if there is another with the 
-		// same name
-		ClassDefinition classDefinition = r_prop.getProperty().getOwningClass();
-		
-		/*List <Property> props = KermetaModelHelper.ClassDefinition.getAllProperties(classDefinition);
-		for (Property otherProperty : props) {
-			if(otherProperty.getName().equals(r_prop.getProperty().getName())){
-				// we have found another property with the same name : probably an aspect ;-)
-				for(Tag tag : otherProperty.getTag()){
-					if(tag.getName().equals("rename")){
-						valueRenameTag = tag.getValue();
-						return valueRenameTag;
-					}
+	private Map<String, String> getElemsValueRenameTag(String valueRenameTag) {
+		Map<String, String> elemsTag = new HashMap<String, String>();
+		if (valueRenameTag != null) {
+			String elems[] = valueRenameTag.split(" ");
+			for (String elem : elems) {
+				String sub_elems[] = null;
+				sub_elems = elem.split("=");
+				if (sub_elems.length > 1) {
+					elemsTag.put(sub_elems[0], sub_elems[1]);
 				}
 			}
-		}*/
-		
-		KermetaUnit kermetaUnit = KermetaUnitHelper.getKermetaUnitFromObject(classDefinition);
-		//kermetaUnit.getAspects();
-		EList<TypeDefinition> aspectList = kermetaUnit.getAspects().get(classDefinition);
-		if ( aspectList!=null ) {
-			for ( TypeDefinition aspect : aspectList )  {
-				if ( aspect instanceof ClassDefinition ){
-					List <Property> props = KermetaModelHelper.ClassDefinition.getAllProperties((ClassDefinition)aspect);
+		}
+		return elemsTag;
+	}
+
+	/**
+	 * Get in a String the value associated to a rename tag. 
+	 * For example : @rename "UmlMT=packagedElement kermetaMT=ownedTypeDefinition" 
+	 *               attribute ownedClass : set MyClass[0..*]
+	 * 
+	 * Result : "UmlMT=packagedElement kermetaMT=ownedTypeDefinition"
+	 * 
+	 * @author moha
+	 * @since 01/12/2008
+	 * 
+	 * @param CallableProperty r_prop
+	 * @return String
+	 */
+	private static String getValueRenameTag(CallableProperty r_prop) {
+
+		String valueRenameTag = null;
+
+		for (Tag tag : r_prop.getProperty().getTag()) {
+			if (tag.getName().equals("rename")) {
+				valueRenameTag = tag.getValue();
+				return valueRenameTag;
+			}
+		}
+		// case for aspect, look in the context of the owning class if there is
+		// another with the same name
+		ClassDefinition classDefinition = r_prop.getProperty().getOwningClass();
+
+		KermetaUnit kermetaUnit = KermetaUnitHelper
+				.getKermetaUnitFromObject(classDefinition);
+		EList<TypeDefinition> aspectList = kermetaUnit.getAspects().get(
+				classDefinition);
+		if (aspectList != null) {
+			for (TypeDefinition aspect : aspectList) {
+				if (aspect instanceof ClassDefinition) {
+					List<Property> props = KermetaModelHelper.ClassDefinition
+							.getAllProperties((ClassDefinition) aspect);
 					for (Property otherProperty : props) {
-						if(otherProperty.getName().equals(r_prop.getProperty().getName())){
-							// we have found another property with the same name : probably an aspect ;-)
-							for(Tag tag : otherProperty.getTag()){
-								if(tag.getName().equals("rename")){
+						if (otherProperty.getName().equals(
+								r_prop.getProperty().getName())) {
+							for (Tag tag : otherProperty.getTag()) {
+								if (tag.getName().equals("rename")) {
 									valueRenameTag = tag.getValue();
 									return valueRenameTag;
 								}
@@ -607,10 +643,7 @@ public class TypeMatchChecker {
 				}
 			}
 		}
-		
-		
-		
-		
+
 		return valueRenameTag;
 	}
 	
