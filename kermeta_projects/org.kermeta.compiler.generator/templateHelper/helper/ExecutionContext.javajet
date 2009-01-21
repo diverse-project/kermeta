@@ -2,7 +2,7 @@
 	 package="org.kermeta.compiler.generator.templates"
 	 
 	 class="ExecutionContext"
-	 version="$Id: ExecutionContext.javajet,v 1.16 2009-01-20 16:43:11 cfaucher Exp $" %>
+	 version="$Id: ExecutionContext.javajet,v 1.17 2009-01-21 08:34:53 cfaucher Exp $" %>
 <%String kmFilePath_forReflection = (String) argument;%>
 
 package org.kermeta.compil.runtime;
@@ -34,16 +34,25 @@ public class ExecutionContext {
 	
 	private List<Object> _modelKM;
 
+	public ClassLoader _classLoader;
+	
+	public ClassLoader getClassLoader() {
+		return _classLoader;
+	}
+	
 	/**
 	 * @generated
 	 */
 	private ExecutionContext() {
 		initValueTypes();
+		_classLoader = ExecutionContext.class.getClassLoader();
 	}
 
 	private static Map<String, String> value_types = new HashMap<String, String>();
 
-	private Hashtable<String, kermeta.language.structure.Class> hashtable_classes = new Hashtable<String, Class>();
+	private Hashtable<String, kermeta.language.structure.Class> hashtable_classes = new Hashtable<String, kermeta.language.structure.Class>();
+	
+	public Hashtable<String, java.lang.Class> hashtable_java_classes = new Hashtable<String, java.lang.Class>();
 
 	static private ExecutionContext _instance;
 
@@ -111,17 +120,19 @@ public class ExecutionContext {
 			return hashtable_classes.get(javaQualifiedName);
 		}
 
-		String[] tmp_javaQualifiedName = javaQualifiedName.split("<");
-		javaQualifiedName = tmp_javaQualifiedName[0];
-
+		if( javaQualifiedName.contains("<") ) {
+			String[] tmp_javaQualifiedName = javaQualifiedName.split("<");
+			javaQualifiedName = tmp_javaQualifiedName[0];
+		}
+		
 		// Optimization
 		if (hashtable_classes.containsKey(javaQualifiedName)) {
 			return hashtable_classes.get(javaQualifiedName);
 		}
 
 		javaQualifiedName = javaQualifiedName.replace("impl.", "");
-		
-		if(javaQualifiedName.endsWith("Impl")) {
+
+		if (javaQualifiedName.endsWith("Impl")) {
 			javaQualifiedName = javaQualifiedName.replace("Impl", "");
 		}
 
@@ -199,26 +210,6 @@ public class ExecutionContext {
 			}
 		}
 		return null;
-	}
-	
-	/**
-	 * @generated
-	 */
-	public java.lang.Object asTypeOrVoid(java.lang.Object self, java.lang.String metaClass) {
-
-		boolean result = false;
-		if(self instanceof kermeta.language.structure.Object) {
-			result = ObjectUtil.isInstanceOf((kermeta.language.structure.Object) self, metaClass);
-		} else {
-			result = ObjectUtil.isInstanceOf((java.lang.Object) self, metaClass);
-		}
-		
-		if(result) {
-			return self;
-		} else {
-			return null;
-		}
-
 	}
 
 }
