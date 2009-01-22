@@ -1,0 +1,81 @@
+/* $Id: 001_SingletonSupport.main.kmt,v 1.1 2009-01-22 16:40:12 dvojtise Exp $ 
+ * Creation : January 22, 2009
+ * Licence  : EPL 
+ * Copyright: IRISA/INRIA
+ * Authors  : 
+ *            dvojtise
+ */
+@mainClass "language_mdk::kmt_testcases::TestSingletonSupport"
+@mainOperation "main"
+
+
+package language_mdk::kmt_testcases;
+
+
+require kermeta
+require "platform:/plugin/org.kermeta.language.mdk/src/kmt/language/extension/SingletonSupport.kmt"
+//require "platform:/resource/org.kermeta.language.mdk/src/kmt/language/extension/SingletonSupport.kmt"
+
+using kermeta::language::structure
+using kermeta::kunit
+
+/**
+ * Checks that the singleton support of kermeta mdk works correctly
+ */
+class TestSingletonSupport inherits kermeta::kunit::TestCase
+{
+	operation main() : Void is do 
+	    stdio.writeln("start3")
+		var tr : TestRunner init TestRunner.new
+		tr.run(TestSingletonSupport)
+		tr.printTestResult
+	end
+	
+	operation testSimpleSingleton() : Void is do
+		var a1 : MySingletonClass 
+		a1 ?=  MySingletonClass.getDefault()		
+		assert(not a1.isVoid)
+		a1.name := "a1"
+		
+		var a2 : MySingletonClass
+		a2 :=  MySingletonClass.getDefault().asType(MySingletonClass)
+		assert(not a2.isVoid)
+		assert(a1.oid == a2.oid)
+		assert(a2.name == "a1")
+		
+	end
+	operation testGenericSingleton() : Void is do
+		var a1 : MySingletonGenericClass<String> 
+		a1 ?=  MySingletonGenericClass<String>.getDefault()		
+		assert(not a1.isVoid)
+		a1.t := "a1"
+		
+		var a2 : MySingletonGenericClass<String>
+		a2 :=  MySingletonGenericClass<String>.getDefault().asType(MySingletonGenericClass<String>)
+		assert(not a2.isVoid)
+		assert(a1.oid == a2.oid)
+		assert(a2.t == "a1")
+		
+	end
+	
+	operation testGenericSingleton2() : Void is do
+		var a1 : MySingletonGenericClass<String> 
+		a1 ?=  MySingletonGenericClass<String>.getDefault()		
+		assert(not a1.isVoid)
+		a1.t := "a1"
+		
+		var a2 : MySingletonGenericClass<Integer>
+		a2 :=  MySingletonGenericClass<Integer>.getDefault().asType(MySingletonGenericClass<Integer>)
+		assert(not a2.isVoid)
+		assert(a1.oid == a2.oid)
+		assert(a2.t.asType(String) == "a1") // t is actually a String  since we have only one singleton for all flavour of MySingletonGenericClass 
+		
+	end
+}
+
+class MySingletonClass {
+	attribute name : String
+}
+class MySingletonGenericClass<T> {
+	attribute t : T
+}
