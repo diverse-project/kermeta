@@ -9,8 +9,8 @@
 package kermeta::language::structure;
 
 require kermeta
-//require "platform:/plugin/org.kermeta.kompose.core.model/kermeta/kompose.kmt"
-require "platform:/resource/org.kermeta.kompose.core.model/kermeta/kompose.kmt"
+require "platform:/plugin/org.kermeta.kompose.core.model/kermeta/kompose.kmt"
+
 using kermeta::standard
 using kermeta::utils
 using kermeta::persistence
@@ -388,8 +388,6 @@ class TagSignature inherits kompose::Signature
 		if not othersign.isVoid then
 			result := self.tagRef.name.equals(othersign.tagRef.name).
 			andThen{e|self.tagRef.~value.equals(othersign.tagRef.~value)}
-			
-			stdio.writeln("result = "+result.toString+" for "+self.tagRef.toString+" and "+othersign.tagRef.toString)
 		else
 			result := false
 		end
@@ -728,14 +726,14 @@ class EParameter
 }
 */
 
-// 4) the Main
+// 4) Main
 /*
  * This code must not be modified.
  */
 class Main inherits kompose::KomposeMain
 {
 	operation main(uri : String) is do
-		var c : kompose::Composer init loadComposer(uri,KMComposer.new)
+		var c : kompose::Composer init loadComposer(uri,KMComposer.new,false)
 		c.compose
 	end
 }
