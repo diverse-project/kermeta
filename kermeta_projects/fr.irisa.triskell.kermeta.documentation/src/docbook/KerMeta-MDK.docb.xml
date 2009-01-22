@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.4//EN"
 "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
-<!-- $Id: KerMeta-MDK.docb.xml,v 1.1 2008-07-30 15:57:47 dvojtise Exp $ -->
+<!-- $Id: KerMeta-MDK.docb.xml,v 1.2 2009-01-22 15:35:01 dvojtise Exp $ -->
 <book lang="en-US">
   <bookinfo>
     <title>Kermeta MDK for Kermeta</title>
 
     <pubdate>Build date: @BUILD.DATE@</pubdate>
 
-    <pubdate>$Date: 2008-07-30 15:57:47 $</pubdate>
+    <pubdate>$Date: 2009-01-22 15:35:01 $</pubdate>
 
     <author>
       <firstname>Didier</firstname>
@@ -30,6 +30,7 @@
 
     <abstract>
       <para>This document presents the Model Development Kit (MDK) for Kermeta.</para>
+      <para>It summarizes the provided services and presents some of its typicall uses.</para>
     </abstract>
 
     <publisher>
@@ -68,7 +69,7 @@
         role="strong">http://gforge.inria.fr/tracker/?group_id=32</emphasis>
       </ulink>
 
-       or using the developer mailing list (kermeta-developers@lists.gforge.inria.fr) Last check: v1.2.0 
+       or using the developer mailing list (kermeta-developers@lists.gforge.inria.fr) Last check: v1.2.2 
     </para></important>
 
     <tip><para>
@@ -98,24 +99,56 @@
       		<title>Kermeta MDK available files</title>
 	  		<para>Currently, the MDK provides the following files :</para>
       		<varlistentry>
-        		<term><emphasis role="strong"><filename role="strong">require "platform:/plugin/fr.irisa.triskell.kermeta/src/kermeta/visitor/kermetaVisitor.kmt"</filename></emphasis></term>
+        		<term><emphasis role="strong"><filename role="strong">require "platform:/plugin/org.kermeta.language.mdk/src/kmt/language/visitor/kermetaVisitor.kmt"</filename></emphasis></term>
         		<listitem>
           			This file adds a visitor to Kermeta metamodel. It helps you traverse a Kermeta model.
         		</listitem>
       		</varlistentry> 
       		<varlistentry>
-        		<term><emphasis role="strong"><filename role="strong">require "platform:/plugin/fr.irisa.triskell.kermeta/src/kermeta/helpers/AllHelpers.kmt"</filename></emphasis></term>
+        		<term><emphasis role="strong"><filename role="strong">require "platform:/plugin/org.kermeta.language.mdk/src/kmt/language/helpers/AllHelpers.kmt"</filename></emphasis></term>
         		<listitem>
           			This file adds various helper operations to the Metaclasses of Kermeta.
           			<tip>If you are interested in only a subset of those helpers, you can directly require the corresponding files in the <filename>helpers</filename> directory of the plugin.</tip>
         		</listitem>
       		</varlistentry>
       		<varlistentry>
-        		<term><emphasis role="strong"><filename role="strong">require "platform:/plugin/fr.irisa.triskell.kermeta/src/kermeta/helpers/structure/AllStructureHelpers.kmt"</filename></emphasis></term>
+        		<term><emphasis role="strong"><filename role="strong">require "platform:/plugin/org.kermeta.language.mdk/src/kmt/language/helpers/structure/AllStructureHelpers.kmt"</filename></emphasis></term>
         		<listitem>
           			Same as <filename>AllHelpers.kmt</filename> except that it provides only helpers on classes of the structure package.
         		</listitem>
       		</varlistentry> 
+      		
+      		<varlistentry>
+        		<term><emphasis role="strong"><filename role="strong">require "platform:/plugin/org.kermeta.language.mdk/src/kmt/language/extension/SingletonSupport.kmt"</filename></emphasis></term>
+        		<listitem>
+          			This files adds a support for getting a kind of singleton in Kermeta.
+        		</listitem>
+      		</varlistentry>
+      		<varlistentry>
+        		<term><emphasis role="strong"><filename role="strong">require "platform:/plugin/org.kermeta.language.mdk/src/kmt/math/Math.kmt"</filename></emphasis></term>
+        		<listitem>
+          			Provides a kermeta::Math class that offers some of the classical operation like sin, cos, pi, toDegrees, toRadians, etc
+        		</listitem>
+      		</varlistentry>
+      		<varlistentry>
+        		<term><emphasis role="strong"><filename role="strong">require "platform:/plugin/org.kermeta.language.mdk/src/kmt/language/visitor/prettyprinters/kmtPrettyPrinter.kmt"</filename></emphasis></term>
+        		<listitem>
+          			This file adds a KMT prettyprinter visitor to Kermeta metamodel. It provides a String output of the kmt surface syntax for your km models.
+        		</listitem>
+      		</varlistentry>
+      		<varlistentry>
+        		<term><emphasis role="strong"><filename role="strong">require "platform:/plugin/org.kermeta.language.mdk/src/kmt/standard/StringUtils.kmt"</filename></emphasis></term>
+        		<listitem>
+          			This file adds some String manipulation operations to String. for example trim(), startsWith(), endsWiths(), etc
+        		</listitem>
+      		</varlistentry>
+      		
+      		<varlistentry>
+        		<term><emphasis role="strong"><filename role="strong">require "platform:/plugin/org.kermeta.language.mdk/src/kmt/utils/Random.kmt"</filename></emphasis></term>
+        		<listitem>
+          			This file offers some operations to get random elements. (Currently, random numbers, but can/should be extended) 
+        		</listitem>
+      		</varlistentry>
 		</variablelist>
     </section>
   </chapter>
@@ -160,7 +193,7 @@ anOperation.containedType.add(aClass)
       	<programlisting>
 ...
 // get the helper
-require "platform:/plugin/fr.irisa.triskell.kermeta/src/kermeta/helpers/structure/ModelingUnitHelper.kmt"
+require "platform:/plugin/org.kermeta.language.mdk/src/kmt/language/helpers/structure/ModelingUnitHelper.kmt"
 ...
       	
 var repository : EMFRepository init EMFRepository.new
