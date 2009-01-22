@@ -81,27 +81,12 @@ class FKey inherits kompose::Mergeable
 	end
 }
 
-@aspect "true"
-class RDBMSModel inherits kompose::Mergeable
-{
-	method getSignature() : kompose::Signature is do
-		var s : kompose::StringSignature init 
-			kompose::StringSignature.new
-		s.sign := ""
-		result := s
-	end
-	
-	method getStringID() : kermeta::standard::String is do
-		result := ""
-	end
-}
-
 // 4) the Main
 
 class Main inherits kompose::KomposeMain
 {
 	operation main(uri : kermeta::standard::String) : kompose::Mergeable is do
-		var c : kompose::Composer init loadComposer(uri,RDBSchemaComposer.new)
+		var c : kompose::Composer init loadComposer(uri,RDBSchemaComposer.new,false)
 		result := c.compose
 	end
 }
