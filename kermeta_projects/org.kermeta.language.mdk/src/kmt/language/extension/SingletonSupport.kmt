@@ -1,0 +1,36 @@
+/* $Id: SingletonSupport.kmt,v 1.1 2009-01-22 10:29:19 dvojtise Exp $ 
+ * Creation : January 21, 2009
+ * Licence  : EPL 
+ * Copyright: Irisa/INRIA
+ * Authors  : 
+ *            Didier Vojtisek <dvojtise@irisa.fr>
+ */
+
+package kermeta::language::structure;
+
+
+require kermeta
+aspect class ClassDefinition
+{
+	/**
+	 * Internal object returned by getDefault
+	 * Should not be accessed by other means
+	 */
+	reference defaultObject : Object
+
+		
+	/**
+	 * Get or create a default object instance of this ClassDefinition
+	 * This allows to have a kind of singleton if you ensure to never call "new" on this ClassDefinition
+	 * Typical use : MySingleton.getDefault().asType(MySingleton)
+	 * Current limitation : handles only "simple" class. Parametrized classes aren't supported.
+	 */
+	operation getDefault() : Object is do 
+		if defaultObject.isVoid then
+			var clazz : Class init Class.new
+			clazz.typeDefinition := self
+			defaultObject := clazz.new
+		end
+		result := defaultObject
+	end
+}
