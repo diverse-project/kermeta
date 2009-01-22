@@ -1,6 +1,6 @@
 
 
-/*$Id: Random.java,v 1.1 2008-12-12 15:39:48 cfaucher Exp $
+/*$Id: Random.java,v 1.2 2009-01-22 16:45:23 cfaucher Exp $
 * Project : org.kermeta.language.mdk
 * File : 	Random.java
 * License : EPL
@@ -20,7 +20,7 @@ import fr.irisa.triskell.kermeta.runtime.factory.RuntimeObjectFactory;
 public class Random {
 
 	/**
-	 * Get randomly an Integer between 0 and param0
+	 * Get randomly an Integer between 0 and (param0 - 1)
 	 * @param self
 	 * @param param0
 	 * @return
