@@ -3,11 +3,7 @@ package ecore;
 
 
 require kermeta
-//require "http://www.eclipse.org/emf/2002/Ecore"
 
-
-//require "platform:/plugin/org.kermeta.kompose.core.model/kermeta/kompose.kmt"
-//require "platform:/resource/org.kermeta.kompose.core.model/kermeta/kompose.kmt"
 require "ECoreDirectivesSpecialization.kmt"
 using kermeta::standard
 using kermeta::utils

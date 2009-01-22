@@ -1,4 +1,4 @@
-/* $Id: ECoreDirectivesSpecialization.kmt,v 1.1 2009-01-14 15:35:33 mclavreu Exp $ 
+/* $Id: ECoreDirectivesSpecialization.kmt,v 1.2 2009-01-22 20:31:08 mclavreu Exp $ 
  * Creation : January 5, 2009
  * Licence  : EPL 
  * Copyright:
@@ -9,7 +9,6 @@ package kompose;
 
 
 require kermeta
-//require "platform:/resource/org.kermeta.kompose.core.model/kermeta/kompose.kmt"
 require "platform:/plugin/org.kermeta.kompose.core.model/kermeta/kompose.kmt"
 require "http://www.eclipse.org/emf/2002/Ecore"
 using ecore
@@ -26,7 +25,6 @@ aspect class Remove {
 		var val : Object init resolveValue
 		var c : kermeta::standard::Collection<Object> 
 		c ?= targetObj.get(prop)
-		stdio.writeln(prop.name)
 		if prop.name.equals("eSuperTypes") then
 			var aClass : EClass
 			var o : Object
@@ -35,8 +33,6 @@ aspect class Remove {
 			var generic : EGenericType init aClass.eGenericSuperTypes.detect{
 			generic| not aClass.eSuperTypes.select{t|t.equals(generic.eClassifier)}.isEmpty}
 			aClass.eGenericSuperTypes.each{t|stdio.writeln(t.eClassifier.name.equals(aClass.name).toString)}
-			stdio.writeln(aClass.name)
-			stdio.writeln("slurp "+aClass.eGenericSuperTypes.one.eClassifier.name)
 			aClass.eGenericSuperTypes.remove(generic)
 			//aClass.eSuperTypes.remove(val)
 			c.remove(val)
