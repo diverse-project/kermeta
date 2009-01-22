@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: BooleanLiteralImpl.java,v 1.1.1.1 2008-11-17 15:36:42 mclavreu Exp $
+ * $Id: BooleanLiteralImpl.java,v 1.2 2009-01-22 20:26:53 mclavreu Exp $
  */
 package kompose.impl;
 
@@ -22,7 +22,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link kompose.impl.BooleanLiteralImpl#isValue <em>Value</em>}</li>
+ *   <li>{@link kompose.impl.BooleanLiteralImpl#getValue <em>Value</em>}</li>
  * </ul>
  * </p>
  *
@@ -30,24 +30,24 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  */
 public class BooleanLiteralImpl extends LiteralImpl implements BooleanLiteral {
 	/**
-	 * The default value of the '{@link #isValue() <em>Value</em>}' attribute.
+	 * The default value of the '{@link #getValue() <em>Value</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #isValue()
+	 * @see #getValue()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final boolean VALUE_EDEFAULT = false;
+	protected static final Boolean VALUE_EDEFAULT = null;
 
 	/**
-	 * The cached value of the '{@link #isValue() <em>Value</em>}' attribute.
+	 * The cached value of the '{@link #getValue() <em>Value</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #isValue()
+	 * @see #getValue()
 	 * @generated
 	 * @ordered
 	 */
-	protected boolean value = VALUE_EDEFAULT;
+	protected Boolean value = VALUE_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -63,6 +63,7 @@ public class BooleanLiteralImpl extends LiteralImpl implements BooleanLiteral {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	protected EClass eStaticClass() {
 		return KomposePackage.Literals.BOOLEAN_LITERAL;
 	}
@@ -72,7 +73,7 @@ public class BooleanLiteralImpl extends LiteralImpl implements BooleanLiteral {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean isValue() {
+	public Boolean getValue() {
 		return value;
 	}
 
@@ -81,8 +82,8 @@ public class BooleanLiteralImpl extends LiteralImpl implements BooleanLiteral {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setValue(boolean newValue) {
-		boolean oldValue = value;
+	public void setValue(Boolean newValue) {
+		Boolean oldValue = value;
 		value = newValue;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, KomposePackage.BOOLEAN_LITERAL__VALUE, oldValue, value));
@@ -93,10 +94,11 @@ public class BooleanLiteralImpl extends LiteralImpl implements BooleanLiteral {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case KomposePackage.BOOLEAN_LITERAL__VALUE:
-				return isValue() ? Boolean.TRUE : Boolean.FALSE;
+				return getValue();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -106,10 +108,11 @@ public class BooleanLiteralImpl extends LiteralImpl implements BooleanLiteral {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case KomposePackage.BOOLEAN_LITERAL__VALUE:
-				setValue(((Boolean)newValue).booleanValue());
+				setValue((Boolean)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -120,6 +123,7 @@ public class BooleanLiteralImpl extends LiteralImpl implements BooleanLiteral {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
 			case KomposePackage.BOOLEAN_LITERAL__VALUE:
@@ -134,10 +138,11 @@ public class BooleanLiteralImpl extends LiteralImpl implements BooleanLiteral {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
 			case KomposePackage.BOOLEAN_LITERAL__VALUE:
-				return value != VALUE_EDEFAULT;
+				return VALUE_EDEFAULT == null ? value != null : !VALUE_EDEFAULT.equals(value);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -147,6 +152,7 @@ public class BooleanLiteralImpl extends LiteralImpl implements BooleanLiteral {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String toString() {
 		if (eIsProxy()) return super.toString();
 

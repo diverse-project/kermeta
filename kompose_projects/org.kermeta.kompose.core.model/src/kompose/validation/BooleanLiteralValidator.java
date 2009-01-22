@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: BooleanLiteralValidator.java,v 1.1.1.1 2008-11-17 15:36:42 mclavreu Exp $
+ * $Id: BooleanLiteralValidator.java,v 1.2 2009-01-22 20:26:53 mclavreu Exp $
  */
 package kompose.validation;
 
@@ -15,6 +15,8 @@ package kompose.validation;
  */
 public interface BooleanLiteralValidator {
 	boolean validate();
+
+	boolean validateValue(Boolean value);
 
 	boolean validateValue(boolean value);
 }

@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ComposerImpl.java,v 1.1.1.1 2008-11-17 15:36:42 mclavreu Exp $
+ * $Id: ComposerImpl.java,v 1.2 2009-01-22 20:26:53 mclavreu Exp $
  */
 package kompose.impl;
 
@@ -54,7 +54,7 @@ public class ComposerImpl extends EObjectImpl implements Composer {
 	 * @generated
 	 * @ordered
 	 */
-	protected EList predirectivesPM;
+	protected EList<ElementDirective> predirectivesPM;
 
 	/**
 	 * The cached value of the '{@link #getPostdirectives() <em>Postdirectives</em>}' containment reference list.
@@ -64,7 +64,7 @@ public class ComposerImpl extends EObjectImpl implements Composer {
 	 * @generated
 	 * @ordered
 	 */
-	protected EList postdirectives;
+	protected EList<ElementDirective> postdirectives;
 
 	/**
 	 * The default value of the '{@link #getPrimaryModelURI() <em>Primary Model URI</em>}' attribute.
@@ -134,7 +134,7 @@ public class ComposerImpl extends EObjectImpl implements Composer {
 	 * @generated
 	 * @ordered
 	 */
-	protected EList predirectivesAM;
+	protected EList<ElementDirective> predirectivesAM;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -150,6 +150,7 @@ public class ComposerImpl extends EObjectImpl implements Composer {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	protected EClass eStaticClass() {
 		return KomposePackage.Literals.COMPOSER;
 	}
@@ -159,9 +160,9 @@ public class ComposerImpl extends EObjectImpl implements Composer {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList getPredirectivesPM() {
+	public EList<ElementDirective> getPredirectivesPM() {
 		if (predirectivesPM == null) {
-			predirectivesPM = new EObjectContainmentEList(ElementDirective.class, this, KomposePackage.COMPOSER__PREDIRECTIVES_PM);
+			predirectivesPM = new EObjectContainmentEList<ElementDirective>(ElementDirective.class, this, KomposePackage.COMPOSER__PREDIRECTIVES_PM);
 		}
 		return predirectivesPM;
 	}
@@ -171,9 +172,9 @@ public class ComposerImpl extends EObjectImpl implements Composer {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList getPostdirectives() {
+	public EList<ElementDirective> getPostdirectives() {
 		if (postdirectives == null) {
-			postdirectives = new EObjectContainmentEList(ElementDirective.class, this, KomposePackage.COMPOSER__POSTDIRECTIVES);
+			postdirectives = new EObjectContainmentEList<ElementDirective>(ElementDirective.class, this, KomposePackage.COMPOSER__POSTDIRECTIVES);
 		}
 		return postdirectives;
 	}
@@ -246,9 +247,9 @@ public class ComposerImpl extends EObjectImpl implements Composer {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList getPredirectivesAM() {
+	public EList<ElementDirective> getPredirectivesAM() {
 		if (predirectivesAM == null) {
-			predirectivesAM = new EObjectContainmentEList(ElementDirective.class, this, KomposePackage.COMPOSER__PREDIRECTIVES_AM);
+			predirectivesAM = new EObjectContainmentEList<ElementDirective>(ElementDirective.class, this, KomposePackage.COMPOSER__PREDIRECTIVES_AM);
 		}
 		return predirectivesAM;
 	}
@@ -269,14 +270,15 @@ public class ComposerImpl extends EObjectImpl implements Composer {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case KomposePackage.COMPOSER__PREDIRECTIVES_PM:
-				return ((InternalEList)getPredirectivesPM()).basicRemove(otherEnd, msgs);
+				return ((InternalEList<?>)getPredirectivesPM()).basicRemove(otherEnd, msgs);
 			case KomposePackage.COMPOSER__POSTDIRECTIVES:
-				return ((InternalEList)getPostdirectives()).basicRemove(otherEnd, msgs);
+				return ((InternalEList<?>)getPostdirectives()).basicRemove(otherEnd, msgs);
 			case KomposePackage.COMPOSER__PREDIRECTIVES_AM:
-				return ((InternalEList)getPredirectivesAM()).basicRemove(otherEnd, msgs);
+				return ((InternalEList<?>)getPredirectivesAM()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -286,6 +288,7 @@ public class ComposerImpl extends EObjectImpl implements Composer {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case KomposePackage.COMPOSER__PREDIRECTIVES_PM:
@@ -309,15 +312,17 @@ public class ComposerImpl extends EObjectImpl implements Composer {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@SuppressWarnings("unchecked")
+		@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case KomposePackage.COMPOSER__PREDIRECTIVES_PM:
 				getPredirectivesPM().clear();
-				getPredirectivesPM().addAll((Collection)newValue);
+				getPredirectivesPM().addAll((Collection<? extends ElementDirective>)newValue);
 				return;
 			case KomposePackage.COMPOSER__POSTDIRECTIVES:
 				getPostdirectives().clear();
-				getPostdirectives().addAll((Collection)newValue);
+				getPostdirectives().addAll((Collection<? extends ElementDirective>)newValue);
 				return;
 			case KomposePackage.COMPOSER__PRIMARY_MODEL_URI:
 				setPrimaryModelURI((String)newValue);
@@ -330,7 +335,7 @@ public class ComposerImpl extends EObjectImpl implements Composer {
 				return;
 			case KomposePackage.COMPOSER__PREDIRECTIVES_AM:
 				getPredirectivesAM().clear();
-				getPredirectivesAM().addAll((Collection)newValue);
+				getPredirectivesAM().addAll((Collection<? extends ElementDirective>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -341,6 +346,7 @@ public class ComposerImpl extends EObjectImpl implements Composer {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
 			case KomposePackage.COMPOSER__PREDIRECTIVES_PM:
@@ -370,6 +376,7 @@ public class ComposerImpl extends EObjectImpl implements Composer {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
 			case KomposePackage.COMPOSER__PREDIRECTIVES_PM:
@@ -393,6 +400,7 @@ public class ComposerImpl extends EObjectImpl implements Composer {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String toString() {
 		if (eIsProxy()) return super.toString();
 

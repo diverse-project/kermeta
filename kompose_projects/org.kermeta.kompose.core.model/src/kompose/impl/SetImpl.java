@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: SetImpl.java,v 1.1.1.1 2008-11-17 15:36:42 mclavreu Exp $
+ * $Id: SetImpl.java,v 1.2 2009-01-22 20:26:53 mclavreu Exp $
  */
 package kompose.impl;
 
@@ -35,6 +35,7 @@ public class SetImpl extends ChangeImpl implements Set {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	protected EClass eStaticClass() {
 		return KomposePackage.Literals.SET;
 	}

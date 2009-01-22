@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: StringLiteralImpl.java,v 1.1.1.1 2008-11-17 15:36:42 mclavreu Exp $
+ * $Id: StringLiteralImpl.java,v 1.2 2009-01-22 20:26:53 mclavreu Exp $
  */
 package kompose.impl;
 
@@ -63,6 +63,7 @@ public class StringLiteralImpl extends LiteralImpl implements StringLiteral {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	protected EClass eStaticClass() {
 		return KomposePackage.Literals.STRING_LITERAL;
 	}
@@ -93,6 +94,7 @@ public class StringLiteralImpl extends LiteralImpl implements StringLiteral {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case KomposePackage.STRING_LITERAL__VALUE:
@@ -106,6 +108,7 @@ public class StringLiteralImpl extends LiteralImpl implements StringLiteral {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case KomposePackage.STRING_LITERAL__VALUE:
@@ -120,6 +123,7 @@ public class StringLiteralImpl extends LiteralImpl implements StringLiteral {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
 			case KomposePackage.STRING_LITERAL__VALUE:
@@ -134,6 +138,7 @@ public class StringLiteralImpl extends LiteralImpl implements StringLiteral {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
 			case KomposePackage.STRING_LITERAL__VALUE:
@@ -147,6 +152,7 @@ public class StringLiteralImpl extends LiteralImpl implements StringLiteral {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String toString() {
 		if (eIsProxy()) return super.toString();
 

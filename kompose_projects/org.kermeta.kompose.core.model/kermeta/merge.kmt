@@ -90,6 +90,8 @@ aspect abstract class Mergeable
 				end
 			else
 			/* Merging collections */
+			/* Test is made on collection size because on compiled mode, collection are
+				initialized as empty ones and not null ones */
 				if selfValue == void then
 					result.~set(p, otherValue)
 				else
@@ -207,11 +209,11 @@ class MergeContext {
 	operation resouceContains(element:Object):kermeta::standard::Boolean is do
 		result:=false
 		self.resources.each{resource|
-			stdio.writeln("resouceContains "+element.toString)
-			if element.containingResource()==resource then
-				result:=true
+			if not element.containingResource().isVoid then
+				if element.containingResource()==resource then
+					result:=true
+				end
 			end
-			stdio.writeln("resouceContains containing "+element.containingResource().toString)
 		}
 	end
 	operation indexate(element:Object): Void is do
@@ -355,30 +357,10 @@ class ModelElementComposer
 							if ctx.isProcessed(me).orElse{e|ctx.isComposedObject(me)}.orElse{e|ctx.objectIndex.containsKey(me.oid())} then
 								result.~set(p, fixReferences(me, ctx))
 							else								
-								if e.get(p).isInstanceOf(kermeta::language::structure::EnumerationLiteral) then
-									var v : kermeta::language::structure::EnumerationLiteral
-									v ?= e.get(p)
-									if(v != void) then
-										if p.type == v.~enumeration then
-											extern fr::irisa::triskell::kermeta::runtime::language::Object.~set(self, p, me)
-										end
-									end
-								else
 									result.~set(p, e.get(p))
-								end
 							end
 						else
-							if e.get(p).isInstanceOf(kermeta::language::structure::EnumerationLiteral) then
-								var v : kermeta::language::structure::EnumerationLiteral
-								v ?= e.get(p)
-								if(v != void) then
-									if p.type == v.~enumeration then
-										extern fr::irisa::triskell::kermeta::runtime::language::Object.~set(self, p, e.get(p))
-									end
-								end
-							else
 								result.~set(p, e.get(p))
-							end
 						end
 					else
 						objs ?= e.get(p)

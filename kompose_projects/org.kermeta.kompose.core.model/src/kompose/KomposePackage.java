@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: KomposePackage.java,v 1.1.1.1 2008-11-17 15:36:42 mclavreu Exp $
+ * $Id: KomposePackage.java,v 1.2 2009-01-22 20:26:53 mclavreu Exp $
  */
 package kompose;
 
@@ -704,6 +704,7 @@ public interface KomposePackage extends EPackage {
 	 * The meta object id for the '<em>Boolean</em>' data type.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @see java.lang.Boolean
 	 * @see kompose.impl.KomposePackageImpl#getBoolean()
 	 * @generated
 	 */
@@ -713,6 +714,7 @@ public interface KomposePackage extends EPackage {
 	 * The meta object id for the '<em>Integer</em>' data type.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @see java.lang.Integer
 	 * @see kompose.impl.KomposePackageImpl#getInteger()
 	 * @generated
 	 */
@@ -949,11 +951,11 @@ public interface KomposePackage extends EPackage {
 	EClass getBooleanLiteral();
 
 	/**
-	 * Returns the meta object for the attribute '{@link kompose.BooleanLiteral#isValue <em>Value</em>}'.
+	 * Returns the meta object for the attribute '{@link kompose.BooleanLiteral#getValue <em>Value</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Value</em>'.
-	 * @see kompose.BooleanLiteral#isValue()
+	 * @see kompose.BooleanLiteral#getValue()
 	 * @see #getBooleanLiteral()
 	 * @generated
 	 */
@@ -1098,21 +1100,23 @@ public interface KomposePackage extends EPackage {
 	EDataType getString();
 
 	/**
-	 * Returns the meta object for data type '<em>Boolean</em>'.
+	 * Returns the meta object for data type '{@link java.lang.Boolean <em>Boolean</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for data type '<em>Boolean</em>'.
-	 * @model instanceClass="boolean"
+	 * @see java.lang.Boolean
+	 * @model instanceClass="java.lang.Boolean"
 	 * @generated
 	 */
 	EDataType getBoolean();
 
 	/**
-	 * Returns the meta object for data type '<em>Integer</em>'.
+	 * Returns the meta object for data type '{@link java.lang.Integer <em>Integer</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for data type '<em>Integer</em>'.
-	 * @model instanceClass="int"
+	 * @see java.lang.Integer
+	 * @model instanceClass="java.lang.Integer"
 	 * @generated
 	 */
 	EDataType getInteger();
@@ -1469,6 +1473,7 @@ public interface KomposePackage extends EPackage {
 		 * The meta object literal for the '<em>Boolean</em>' data type.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
+		 * @see java.lang.Boolean
 		 * @see kompose.impl.KomposePackageImpl#getBoolean()
 		 * @generated
 		 */
@@ -1478,6 +1483,7 @@ public interface KomposePackage extends EPackage {
 		 * The meta object literal for the '<em>Integer</em>' data type.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
+		 * @see java.lang.Integer
 		 * @see kompose.impl.KomposePackageImpl#getInteger()
 		 * @generated
 		 */

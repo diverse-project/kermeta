@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: IntegerLiteral.java,v 1.1.1.1 2008-11-17 15:36:42 mclavreu Exp $
+ * $Id: IntegerLiteral.java,v 1.2 2009-01-22 20:26:53 mclavreu Exp $
  */
 package kompose;
 
@@ -33,12 +33,12 @@ public interface IntegerLiteral extends Literal {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Value</em>' attribute.
-	 * @see #setValue(int)
+	 * @see #setValue(Integer)
 	 * @see kompose.KomposePackage#getIntegerLiteral_Value()
 	 * @model dataType="kompose.Integer"
 	 * @generated
 	 */
-	int getValue();
+	Integer getValue();
 
 	/**
 	 * Sets the value of the '{@link kompose.IntegerLiteral#getValue <em>Value</em>}' attribute.
@@ -48,6 +48,6 @@ public interface IntegerLiteral extends Literal {
 	 * @see #getValue()
 	 * @generated
 	 */
-	void setValue(int value);
+	void setValue(Integer value);
 
 } // IntegerLiteral

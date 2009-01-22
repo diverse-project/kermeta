@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: KomposeAdapterFactory.java,v 1.1.1.1 2008-11-17 15:36:42 mclavreu Exp $
+ * $Id: KomposeAdapterFactory.java,v 1.2 2009-01-22 20:26:53 mclavreu Exp $
  */
 package kompose.util;
 
@@ -52,6 +52,7 @@ public class KomposeAdapterFactory extends AdapterFactoryImpl {
 	 * @return whether this factory is applicable for the type of the object.
 	 * @generated
 	 */
+	@Override
 	public boolean isFactoryForType(Object object) {
 		if (object == modelPackage) {
 			return true;
@@ -68,63 +69,82 @@ public class KomposeAdapterFactory extends AdapterFactoryImpl {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected KomposeSwitch modelSwitch =
-		new KomposeSwitch() {
-			public Object caseElementDirective(ElementDirective object) {
+	protected KomposeSwitch<Adapter> modelSwitch =
+		new KomposeSwitch<Adapter>() {
+			@Override
+			public Adapter caseElementDirective(ElementDirective object) {
 				return createElementDirectiveAdapter();
 			}
-			public Object caseCompositionDirective(CompositionDirective object) {
+			@Override
+			public Adapter caseCompositionDirective(CompositionDirective object) {
 				return createCompositionDirectiveAdapter();
 			}
-			public Object caseRemove(Remove object) {
+			@Override
+			public Adapter caseRemove(Remove object) {
 				return createRemoveAdapter();
 			}
-			public Object caseAdd(Add object) {
+			@Override
+			public Adapter caseAdd(Add object) {
 				return createAddAdapter();
 			}
-			public Object caseCreate(Create object) {
+			@Override
+			public Adapter caseCreate(Create object) {
 				return createCreateAdapter();
 			}
-			public Object caseSet(Set object) {
+			@Override
+			public Adapter caseSet(Set object) {
 				return createSetAdapter();
 			}
-			public Object caseElementRef(ElementRef object) {
+			@Override
+			public Adapter caseElementRef(ElementRef object) {
 				return createElementRefAdapter();
 			}
-			public Object caseNameRef(NameRef object) {
+			@Override
+			public Adapter caseNameRef(NameRef object) {
 				return createNameRefAdapter();
 			}
-			public Object caseIDRef(IDRef object) {
+			@Override
+			public Adapter caseIDRef(IDRef object) {
 				return createIDRefAdapter();
 			}
-			public Object caseChange(Change object) {
+			@Override
+			public Adapter caseChange(Change object) {
 				return createChangeAdapter();
 			}
-			public Object caseLiteral(Literal object) {
+			@Override
+			public Adapter caseLiteral(Literal object) {
 				return createLiteralAdapter();
 			}
-			public Object caseStringLiteral(StringLiteral object) {
+			@Override
+			public Adapter caseStringLiteral(StringLiteral object) {
 				return createStringLiteralAdapter();
 			}
-			public Object caseBooleanLiteral(BooleanLiteral object) {
+			@Override
+			public Adapter caseBooleanLiteral(BooleanLiteral object) {
 				return createBooleanLiteralAdapter();
 			}
-			public Object caseIntegerLiteral(IntegerLiteral object) {
+			@Override
+			public Adapter caseIntegerLiteral(IntegerLiteral object) {
 				return createIntegerLiteralAdapter();
 			}
-			public Object caseVoidLiteral(VoidLiteral object) {
+			@Override
+			public Adapter caseVoidLiteral(VoidLiteral object) {
 				return createVoidLiteralAdapter();
 			}
-			public Object caseContext(Context object) {
+			@Override
+			public Adapter caseContext(Context object) {
 				return createContextAdapter();
 			}
-			public Object caseComposer(Composer object) {
+			@Override
+			public Adapter caseComposer(Composer object) {
 				return createComposerAdapter();
 			}
-			public Object caseMergeable(Mergeable object) {
+			@Override
+			public Adapter caseMergeable(Mergeable object) {
 				return createMergeableAdapter();
 			}
-			public Object defaultCase(EObject object) {
+			@Override
+			public Adapter defaultCase(EObject object) {
 				return createEObjectAdapter();
 			}
 		};
@@ -137,8 +157,9 @@ public class KomposeAdapterFactory extends AdapterFactoryImpl {
 	 * @return the adapter for the <code>target</code>.
 	 * @generated
 	 */
+	@Override
 	public Adapter createAdapter(Notifier target) {
-		return (Adapter)modelSwitch.doSwitch((EObject)target);
+		return modelSwitch.doSwitch((EObject)target);
 	}
 
 

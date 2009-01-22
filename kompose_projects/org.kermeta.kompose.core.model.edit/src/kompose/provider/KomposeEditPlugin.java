@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: KomposeEditPlugin.java,v 1.1.1.1 2008-11-17 15:37:25 mclavreu Exp $
+ * $Id: KomposeEditPlugin.java,v 1.2 2009-01-22 20:27:00 mclavreu Exp $
  */
 package kompose.provider;
 
@@ -52,6 +52,7 @@ public final class KomposeEditPlugin extends EMFPlugin {
 	 * @return the singleton instance.
 	 * @generated
 	 */
+	@Override
 	public ResourceLocator getPluginResourceLocator() {
 		return plugin;
 	}

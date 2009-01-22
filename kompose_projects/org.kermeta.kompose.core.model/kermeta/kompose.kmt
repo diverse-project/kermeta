@@ -48,7 +48,7 @@ aspect abstract class Composer {
    		resource ?= repository.createResource(uri, metamodelUri)
         resource.instances.add(model)
       //  repository.findDanglingModelElements().each{e|stdio.writeln(e.toString)}
-        resource.save
+      	resource.save
    end
    
     // Has to be defined for each specific meta-model
@@ -109,7 +109,7 @@ aspect abstract class Composer {
     rescue (ex : DirectiveRuntimeException)
    		self.logger.printError("\n" + ex.toString)
    		self.logger.printInfo("composition aborded.")
-	end 
+	end
 	
 }
 
@@ -261,14 +261,14 @@ class NameRef
 					end
 				end
 			}
-			if not found then 
+			if not found then
 				var ex : ElementNotResolvedException init ElementNotResolvedException.new
 				ex.elementRef := self
 				raise ex
 			end
 		}
 		result := cur
-	rescue 
+	rescue
 		result := void
 	end
 	

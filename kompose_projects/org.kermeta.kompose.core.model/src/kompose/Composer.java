@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: Composer.java,v 1.1.1.1 2008-11-17 15:36:42 mclavreu Exp $
+ * $Id: Composer.java,v 1.2 2009-01-22 20:26:53 mclavreu Exp $
  */
 package kompose;
 
@@ -43,10 +43,10 @@ public interface Composer extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Predirectives PM</em>' containment reference list.
 	 * @see kompose.KomposePackage#getComposer_PredirectivesPM()
-	 * @model type="kompose.ElementDirective" containment="true"
+	 * @model containment="true"
 	 * @generated
 	 */
-	EList getPredirectivesPM();
+	EList<ElementDirective> getPredirectivesPM();
 
 	/**
 	 * Returns the value of the '<em><b>Postdirectives</b></em>' containment reference list.
@@ -59,10 +59,10 @@ public interface Composer extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Postdirectives</em>' containment reference list.
 	 * @see kompose.KomposePackage#getComposer_Postdirectives()
-	 * @model type="kompose.ElementDirective" containment="true"
+	 * @model containment="true"
 	 * @generated
 	 */
-	EList getPostdirectives();
+	EList<ElementDirective> getPostdirectives();
 
 	/**
 	 * Returns the value of the '<em><b>Primary Model URI</b></em>' attribute.
@@ -153,10 +153,10 @@ public interface Composer extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Predirectives AM</em>' containment reference list.
 	 * @see kompose.KomposePackage#getComposer_PredirectivesAM()
-	 * @model type="kompose.ElementDirective" containment="true"
+	 * @model containment="true"
 	 * @generated
 	 */
-	EList getPredirectivesAM();
+	EList<ElementDirective> getPredirectivesAM();
 
 	/**
 	 * <!-- begin-user-doc -->

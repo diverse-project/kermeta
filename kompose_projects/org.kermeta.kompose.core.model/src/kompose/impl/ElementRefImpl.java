@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ElementRefImpl.java,v 1.1.1.1 2008-11-17 15:36:42 mclavreu Exp $
+ * $Id: ElementRefImpl.java,v 1.2 2009-01-22 20:26:52 mclavreu Exp $
  */
 package kompose.impl;
 
@@ -37,6 +37,7 @@ public abstract class ElementRefImpl extends EObjectImpl implements ElementRef {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	protected EClass eStaticClass() {
 		return KomposePackage.Literals.ELEMENT_REF;
 	}

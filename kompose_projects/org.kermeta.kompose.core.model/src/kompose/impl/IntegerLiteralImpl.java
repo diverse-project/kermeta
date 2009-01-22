@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: IntegerLiteralImpl.java,v 1.1.1.1 2008-11-17 15:36:42 mclavreu Exp $
+ * $Id: IntegerLiteralImpl.java,v 1.2 2009-01-22 20:26:52 mclavreu Exp $
  */
 package kompose.impl;
 
@@ -37,7 +37,7 @@ public class IntegerLiteralImpl extends LiteralImpl implements IntegerLiteral {
 	 * @generated
 	 * @ordered
 	 */
-	protected static final int VALUE_EDEFAULT = 0;
+	protected static final Integer VALUE_EDEFAULT = null;
 
 	/**
 	 * The cached value of the '{@link #getValue() <em>Value</em>}' attribute.
@@ -47,7 +47,7 @@ public class IntegerLiteralImpl extends LiteralImpl implements IntegerLiteral {
 	 * @generated
 	 * @ordered
 	 */
-	protected int value = VALUE_EDEFAULT;
+	protected Integer value = VALUE_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -63,6 +63,7 @@ public class IntegerLiteralImpl extends LiteralImpl implements IntegerLiteral {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	protected EClass eStaticClass() {
 		return KomposePackage.Literals.INTEGER_LITERAL;
 	}
@@ -72,7 +73,7 @@ public class IntegerLiteralImpl extends LiteralImpl implements IntegerLiteral {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public int getValue() {
+	public Integer getValue() {
 		return value;
 	}
 
@@ -81,8 +82,8 @@ public class IntegerLiteralImpl extends LiteralImpl implements IntegerLiteral {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setValue(int newValue) {
-		int oldValue = value;
+	public void setValue(Integer newValue) {
+		Integer oldValue = value;
 		value = newValue;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, KomposePackage.INTEGER_LITERAL__VALUE, oldValue, value));
@@ -93,10 +94,11 @@ public class IntegerLiteralImpl extends LiteralImpl implements IntegerLiteral {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case KomposePackage.INTEGER_LITERAL__VALUE:
-				return new Integer(getValue());
+				return getValue();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -106,10 +108,11 @@ public class IntegerLiteralImpl extends LiteralImpl implements IntegerLiteral {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case KomposePackage.INTEGER_LITERAL__VALUE:
-				setValue(((Integer)newValue).intValue());
+				setValue((Integer)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -120,6 +123,7 @@ public class IntegerLiteralImpl extends LiteralImpl implements IntegerLiteral {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
 			case KomposePackage.INTEGER_LITERAL__VALUE:
@@ -134,10 +138,11 @@ public class IntegerLiteralImpl extends LiteralImpl implements IntegerLiteral {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
 			case KomposePackage.INTEGER_LITERAL__VALUE:
-				return value != VALUE_EDEFAULT;
+				return VALUE_EDEFAULT == null ? value != null : !VALUE_EDEFAULT.equals(value);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -147,6 +152,7 @@ public class IntegerLiteralImpl extends LiteralImpl implements IntegerLiteral {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String toString() {
 		if (eIsProxy()) return super.toString();
 

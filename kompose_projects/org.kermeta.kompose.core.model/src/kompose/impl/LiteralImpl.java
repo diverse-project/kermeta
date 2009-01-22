@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: LiteralImpl.java,v 1.1.1.1 2008-11-17 15:36:42 mclavreu Exp $
+ * $Id: LiteralImpl.java,v 1.2 2009-01-22 20:26:53 mclavreu Exp $
  */
 package kompose.impl;
 
@@ -35,6 +35,7 @@ public class LiteralImpl extends ElementRefImpl implements Literal {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	protected EClass eStaticClass() {
 		return KomposePackage.Literals.LITERAL;
 	}

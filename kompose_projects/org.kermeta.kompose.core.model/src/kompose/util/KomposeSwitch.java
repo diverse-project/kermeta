@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: KomposeSwitch.java,v 1.1.1.1 2008-11-17 15:36:42 mclavreu Exp $
+ * $Id: KomposeSwitch.java,v 1.2 2009-01-22 20:26:53 mclavreu Exp $
  */
 package kompose.util;
 
@@ -26,7 +26,7 @@ import org.eclipse.emf.ecore.EObject;
  * @see kompose.KomposePackage
  * @generated
  */
-public class KomposeSwitch {
+public class KomposeSwitch<T> {
 	/**
 	 * The cached model package
 	 * <!-- begin-user-doc -->
@@ -54,7 +54,7 @@ public class KomposeSwitch {
 	 * @return the first non-null result returned by a <code>caseXXX</code> call.
 	 * @generated
 	 */
-	public Object doSwitch(EObject theEObject) {
+	public T doSwitch(EObject theEObject) {
 		return doSwitch(theEObject.eClass(), theEObject);
 	}
 
@@ -65,16 +65,16 @@ public class KomposeSwitch {
 	 * @return the first non-null result returned by a <code>caseXXX</code> call.
 	 * @generated
 	 */
-	protected Object doSwitch(EClass theEClass, EObject theEObject) {
+	protected T doSwitch(EClass theEClass, EObject theEObject) {
 		if (theEClass.eContainer() == modelPackage) {
 			return doSwitch(theEClass.getClassifierID(), theEObject);
 		}
 		else {
-			List eSuperTypes = theEClass.getESuperTypes();
+			List<EClass> eSuperTypes = theEClass.getESuperTypes();
 			return
 				eSuperTypes.isEmpty() ?
 					defaultCase(theEObject) :
-					doSwitch((EClass)eSuperTypes.get(0), theEObject);
+					doSwitch(eSuperTypes.get(0), theEObject);
 		}
 	}
 
@@ -85,24 +85,24 @@ public class KomposeSwitch {
 	 * @return the first non-null result returned by a <code>caseXXX</code> call.
 	 * @generated
 	 */
-	protected Object doSwitch(int classifierID, EObject theEObject) {
+	protected T doSwitch(int classifierID, EObject theEObject) {
 		switch (classifierID) {
 			case KomposePackage.ELEMENT_DIRECTIVE: {
 				ElementDirective elementDirective = (ElementDirective)theEObject;
-				Object result = caseElementDirective(elementDirective);
+				T result = caseElementDirective(elementDirective);
 				if (result == null) result = caseCompositionDirective(elementDirective);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
 			case KomposePackage.COMPOSITION_DIRECTIVE: {
 				CompositionDirective compositionDirective = (CompositionDirective)theEObject;
-				Object result = caseCompositionDirective(compositionDirective);
+				T result = caseCompositionDirective(compositionDirective);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
 			case KomposePackage.REMOVE: {
 				Remove remove = (Remove)theEObject;
-				Object result = caseRemove(remove);
+				T result = caseRemove(remove);
 				if (result == null) result = caseChange(remove);
 				if (result == null) result = caseElementDirective(remove);
 				if (result == null) result = caseCompositionDirective(remove);
@@ -111,7 +111,7 @@ public class KomposeSwitch {
 			}
 			case KomposePackage.ADD: {
 				Add add = (Add)theEObject;
-				Object result = caseAdd(add);
+				T result = caseAdd(add);
 				if (result == null) result = caseChange(add);
 				if (result == null) result = caseElementDirective(add);
 				if (result == null) result = caseCompositionDirective(add);
@@ -120,7 +120,7 @@ public class KomposeSwitch {
 			}
 			case KomposePackage.CREATE: {
 				Create create = (Create)theEObject;
-				Object result = caseCreate(create);
+				T result = caseCreate(create);
 				if (result == null) result = caseElementDirective(create);
 				if (result == null) result = caseCompositionDirective(create);
 				if (result == null) result = defaultCase(theEObject);
@@ -128,7 +128,7 @@ public class KomposeSwitch {
 			}
 			case KomposePackage.SET: {
 				Set set = (Set)theEObject;
-				Object result = caseSet(set);
+				T result = caseSet(set);
 				if (result == null) result = caseChange(set);
 				if (result == null) result = caseElementDirective(set);
 				if (result == null) result = caseCompositionDirective(set);
@@ -137,27 +137,27 @@ public class KomposeSwitch {
 			}
 			case KomposePackage.ELEMENT_REF: {
 				ElementRef elementRef = (ElementRef)theEObject;
-				Object result = caseElementRef(elementRef);
+				T result = caseElementRef(elementRef);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
 			case KomposePackage.NAME_REF: {
 				NameRef nameRef = (NameRef)theEObject;
-				Object result = caseNameRef(nameRef);
+				T result = caseNameRef(nameRef);
 				if (result == null) result = caseElementRef(nameRef);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
 			case KomposePackage.ID_REF: {
 				IDRef idRef = (IDRef)theEObject;
-				Object result = caseIDRef(idRef);
+				T result = caseIDRef(idRef);
 				if (result == null) result = caseElementRef(idRef);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
 			case KomposePackage.CHANGE: {
 				Change change = (Change)theEObject;
-				Object result = caseChange(change);
+				T result = caseChange(change);
 				if (result == null) result = caseElementDirective(change);
 				if (result == null) result = caseCompositionDirective(change);
 				if (result == null) result = defaultCase(theEObject);
@@ -165,14 +165,14 @@ public class KomposeSwitch {
 			}
 			case KomposePackage.LITERAL: {
 				Literal literal = (Literal)theEObject;
-				Object result = caseLiteral(literal);
+				T result = caseLiteral(literal);
 				if (result == null) result = caseElementRef(literal);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
 			case KomposePackage.STRING_LITERAL: {
 				StringLiteral stringLiteral = (StringLiteral)theEObject;
-				Object result = caseStringLiteral(stringLiteral);
+				T result = caseStringLiteral(stringLiteral);
 				if (result == null) result = caseLiteral(stringLiteral);
 				if (result == null) result = caseElementRef(stringLiteral);
 				if (result == null) result = defaultCase(theEObject);
@@ -180,7 +180,7 @@ public class KomposeSwitch {
 			}
 			case KomposePackage.BOOLEAN_LITERAL: {
 				BooleanLiteral booleanLiteral = (BooleanLiteral)theEObject;
-				Object result = caseBooleanLiteral(booleanLiteral);
+				T result = caseBooleanLiteral(booleanLiteral);
 				if (result == null) result = caseLiteral(booleanLiteral);
 				if (result == null) result = caseElementRef(booleanLiteral);
 				if (result == null) result = defaultCase(theEObject);
@@ -188,7 +188,7 @@ public class KomposeSwitch {
 			}
 			case KomposePackage.INTEGER_LITERAL: {
 				IntegerLiteral integerLiteral = (IntegerLiteral)theEObject;
-				Object result = caseIntegerLiteral(integerLiteral);
+				T result = caseIntegerLiteral(integerLiteral);
 				if (result == null) result = caseLiteral(integerLiteral);
 				if (result == null) result = caseElementRef(integerLiteral);
 				if (result == null) result = defaultCase(theEObject);
@@ -196,7 +196,7 @@ public class KomposeSwitch {
 			}
 			case KomposePackage.VOID_LITERAL: {
 				VoidLiteral voidLiteral = (VoidLiteral)theEObject;
-				Object result = caseVoidLiteral(voidLiteral);
+				T result = caseVoidLiteral(voidLiteral);
 				if (result == null) result = caseLiteral(voidLiteral);
 				if (result == null) result = caseElementRef(voidLiteral);
 				if (result == null) result = defaultCase(theEObject);
@@ -204,19 +204,19 @@ public class KomposeSwitch {
 			}
 			case KomposePackage.CONTEXT: {
 				Context context = (Context)theEObject;
-				Object result = caseContext(context);
+				T result = caseContext(context);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
 			case KomposePackage.COMPOSER: {
 				Composer composer = (Composer)theEObject;
-				Object result = caseComposer(composer);
+				T result = caseComposer(composer);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
 			case KomposePackage.MERGEABLE: {
 				Mergeable mergeable = (Mergeable)theEObject;
-				Object result = caseMergeable(mergeable);
+				T result = caseMergeable(mergeable);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -235,7 +235,7 @@ public class KomposeSwitch {
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public Object caseElementDirective(ElementDirective object) {
+	public T caseElementDirective(ElementDirective object) {
 		return null;
 	}
 
@@ -250,7 +250,7 @@ public class KomposeSwitch {
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public Object caseCompositionDirective(CompositionDirective object) {
+	public T caseCompositionDirective(CompositionDirective object) {
 		return null;
 	}
 
@@ -265,7 +265,7 @@ public class KomposeSwitch {
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public Object caseRemove(Remove object) {
+	public T caseRemove(Remove object) {
 		return null;
 	}
 
@@ -280,7 +280,7 @@ public class KomposeSwitch {
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public Object caseAdd(Add object) {
+	public T caseAdd(Add object) {
 		return null;
 	}
 
@@ -295,7 +295,7 @@ public class KomposeSwitch {
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public Object caseCreate(Create object) {
+	public T caseCreate(Create object) {
 		return null;
 	}
 
@@ -310,7 +310,7 @@ public class KomposeSwitch {
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public Object caseSet(Set object) {
+	public T caseSet(Set object) {
 		return null;
 	}
 
@@ -325,7 +325,7 @@ public class KomposeSwitch {
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public Object caseElementRef(ElementRef object) {
+	public T caseElementRef(ElementRef object) {
 		return null;
 	}
 
@@ -340,7 +340,7 @@ public class KomposeSwitch {
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public Object caseNameRef(NameRef object) {
+	public T caseNameRef(NameRef object) {
 		return null;
 	}
 
@@ -355,7 +355,7 @@ public class KomposeSwitch {
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public Object caseIDRef(IDRef object) {
+	public T caseIDRef(IDRef object) {
 		return null;
 	}
 
@@ -370,7 +370,7 @@ public class KomposeSwitch {
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public Object caseChange(Change object) {
+	public T caseChange(Change object) {
 		return null;
 	}
 
@@ -385,7 +385,7 @@ public class KomposeSwitch {
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public Object caseLiteral(Literal object) {
+	public T caseLiteral(Literal object) {
 		return null;
 	}
 
@@ -400,7 +400,7 @@ public class KomposeSwitch {
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public Object caseStringLiteral(StringLiteral object) {
+	public T caseStringLiteral(StringLiteral object) {
 		return null;
 	}
 
@@ -415,7 +415,7 @@ public class KomposeSwitch {
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public Object caseBooleanLiteral(BooleanLiteral object) {
+	public T caseBooleanLiteral(BooleanLiteral object) {
 		return null;
 	}
 
@@ -430,7 +430,7 @@ public class KomposeSwitch {
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public Object caseIntegerLiteral(IntegerLiteral object) {
+	public T caseIntegerLiteral(IntegerLiteral object) {
 		return null;
 	}
 
@@ -445,7 +445,7 @@ public class KomposeSwitch {
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public Object caseVoidLiteral(VoidLiteral object) {
+	public T caseVoidLiteral(VoidLiteral object) {
 		return null;
 	}
 
@@ -460,7 +460,7 @@ public class KomposeSwitch {
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public Object caseContext(Context object) {
+	public T caseContext(Context object) {
 		return null;
 	}
 
@@ -475,7 +475,7 @@ public class KomposeSwitch {
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public Object caseComposer(Composer object) {
+	public T caseComposer(Composer object) {
 		return null;
 	}
 
@@ -490,7 +490,7 @@ public class KomposeSwitch {
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public Object caseMergeable(Mergeable object) {
+	public T caseMergeable(Mergeable object) {
 		return null;
 	}
 
@@ -505,7 +505,7 @@ public class KomposeSwitch {
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject)
 	 * @generated
 	 */
-	public Object defaultCase(EObject object) {
+	public T defaultCase(EObject object) {
 		return null;
 	}
 

@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: KomposeFactoryImpl.java,v 1.1.1.1 2008-11-17 15:36:42 mclavreu Exp $
+ * $Id: KomposeFactoryImpl.java,v 1.2 2009-01-22 20:26:53 mclavreu Exp $
  */
 package kompose.impl;
 
@@ -58,6 +58,7 @@ public class KomposeFactoryImpl extends EFactoryImpl implements KomposeFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
 			case KomposePackage.REMOVE: return createRemove();
@@ -83,6 +84,7 @@ public class KomposeFactoryImpl extends EFactoryImpl implements KomposeFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Object createFromString(EDataType eDataType, String initialValue) {
 		switch (eDataType.getClassifierID()) {
 			case KomposePackage.STRING:
@@ -101,6 +103,7 @@ public class KomposeFactoryImpl extends EFactoryImpl implements KomposeFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String convertToString(EDataType eDataType, Object instanceValue) {
 		switch (eDataType.getClassifierID()) {
 			case KomposePackage.STRING:
@@ -313,6 +316,7 @@ public class KomposeFactoryImpl extends EFactoryImpl implements KomposeFactory {
 	 * @deprecated
 	 * @generated
 	 */
+	@Deprecated
 	public static KomposePackage getPackage() {
 		return KomposePackage.eINSTANCE;
 	}

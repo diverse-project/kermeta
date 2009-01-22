@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: KomposePackageImpl.java,v 1.1.1.1 2008-11-17 15:36:42 mclavreu Exp $
+ * $Id: KomposePackageImpl.java,v 1.2 2009-01-22 20:26:52 mclavreu Exp $
  */
 package kompose.impl;
 
@@ -15,6 +15,7 @@ import kompose.Context;
 import kompose.Create;
 import kompose.ElementDirective;
 import kompose.ElementRef;
+import kompose.Equals;
 import kompose.IDRef;
 import kompose.IntegerLiteral;
 import kompose.KomposeFactory;
@@ -23,6 +24,7 @@ import kompose.Literal;
 import kompose.Mergeable;
 import kompose.NameRef;
 import kompose.Remove;
+import kompose.Select;
 import kompose.Set;
 import kompose.StringLiteral;
 import kompose.VoidLiteral;
@@ -709,6 +711,10 @@ public class KomposePackageImpl extends EPackageImpl implements KomposePackage {
 		setNsPrefix(eNS_PREFIX);
 		setNsURI(eNS_URI);
 
+		// Create type parameters
+
+		// Set bounds for type parameters
+
 		// Add supertypes to classes
 		elementDirectiveEClass.getESuperTypes().add(this.getCompositionDirective());
 		removeEClass.getESuperTypes().add(this.getChange());
@@ -727,7 +733,7 @@ public class KomposePackageImpl extends EPackageImpl implements KomposePackage {
 		// Initialize classes and features; add operations and parameters
 		initEClass(elementDirectiveEClass, ElementDirective.class, "ElementDirective", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
-		addEOperation(elementDirectiveEClass, null, "execute");
+		addEOperation(elementDirectiveEClass, null, "execute", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(compositionDirectiveEClass, CompositionDirective.class, "CompositionDirective", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getCompositionDirective_Context(), this.getContext(), null, "context", null, 1, 1, CompositionDirective.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -778,14 +784,14 @@ public class KomposePackageImpl extends EPackageImpl implements KomposePackage {
 		initEAttribute(getComposer_ComposedModelURI(), this.getString(), "composedModelURI", null, 0, 1, Composer.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getComposer_PredirectivesAM(), this.getElementDirective(), null, "predirectivesAM", null, 0, -1, Composer.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		addEOperation(composerEClass, this.getMergeable(), "compose", 0, 1);
+		addEOperation(composerEClass, this.getMergeable(), "compose", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(mergeableEClass, Mergeable.class, "Mergeable", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		// Initialize data types
 		initEDataType(stringEDataType, String.class, "String", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
-		initEDataType(booleanEDataType, boolean.class, "Boolean", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
-		initEDataType(integerEDataType, int.class, "Integer", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
+		initEDataType(booleanEDataType, Boolean.class, "Boolean", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
+		initEDataType(integerEDataType, Integer.class, "Integer", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
 
 		// Create resource
 		createResource(eNS_URI);

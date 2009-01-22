@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: KomposeItemProviderAdapterFactory.java,v 1.1.1.1 2008-11-17 15:37:25 mclavreu Exp $
+ * $Id: KomposeItemProviderAdapterFactory.java,v 1.2 2009-01-22 20:27:00 mclavreu Exp $
  */
 package kompose.provider;
 
@@ -59,7 +59,7 @@ public class KomposeItemProviderAdapterFactory extends KomposeAdapterFactory imp
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected Collection supportedTypes = new ArrayList();
+	protected Collection<Object> supportedTypes = new ArrayList<Object>();
 
 	/**
 	 * This constructs an instance.
@@ -89,6 +89,7 @@ public class KomposeItemProviderAdapterFactory extends KomposeAdapterFactory imp
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Adapter createRemoveAdapter() {
 		if (removeItemProvider == null) {
 			removeItemProvider = new RemoveItemProvider(this);
@@ -111,6 +112,7 @@ public class KomposeItemProviderAdapterFactory extends KomposeAdapterFactory imp
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Adapter createAddAdapter() {
 		if (addItemProvider == null) {
 			addItemProvider = new AddItemProvider(this);
@@ -133,6 +135,7 @@ public class KomposeItemProviderAdapterFactory extends KomposeAdapterFactory imp
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Adapter createCreateAdapter() {
 		if (createItemProvider == null) {
 			createItemProvider = new CreateItemProvider(this);
@@ -155,6 +158,7 @@ public class KomposeItemProviderAdapterFactory extends KomposeAdapterFactory imp
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Adapter createSetAdapter() {
 		if (setItemProvider == null) {
 			setItemProvider = new SetItemProvider(this);
@@ -177,6 +181,7 @@ public class KomposeItemProviderAdapterFactory extends KomposeAdapterFactory imp
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Adapter createNameRefAdapter() {
 		if (nameRefItemProvider == null) {
 			nameRefItemProvider = new NameRefItemProvider(this);
@@ -199,6 +204,7 @@ public class KomposeItemProviderAdapterFactory extends KomposeAdapterFactory imp
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Adapter createIDRefAdapter() {
 		if (idRefItemProvider == null) {
 			idRefItemProvider = new IDRefItemProvider(this);
@@ -221,6 +227,7 @@ public class KomposeItemProviderAdapterFactory extends KomposeAdapterFactory imp
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Adapter createLiteralAdapter() {
 		if (literalItemProvider == null) {
 			literalItemProvider = new LiteralItemProvider(this);
@@ -243,6 +250,7 @@ public class KomposeItemProviderAdapterFactory extends KomposeAdapterFactory imp
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Adapter createStringLiteralAdapter() {
 		if (stringLiteralItemProvider == null) {
 			stringLiteralItemProvider = new StringLiteralItemProvider(this);
@@ -265,6 +273,7 @@ public class KomposeItemProviderAdapterFactory extends KomposeAdapterFactory imp
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Adapter createBooleanLiteralAdapter() {
 		if (booleanLiteralItemProvider == null) {
 			booleanLiteralItemProvider = new BooleanLiteralItemProvider(this);
@@ -287,6 +296,7 @@ public class KomposeItemProviderAdapterFactory extends KomposeAdapterFactory imp
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Adapter createIntegerLiteralAdapter() {
 		if (integerLiteralItemProvider == null) {
 			integerLiteralItemProvider = new IntegerLiteralItemProvider(this);
@@ -309,6 +319,7 @@ public class KomposeItemProviderAdapterFactory extends KomposeAdapterFactory imp
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Adapter createVoidLiteralAdapter() {
 		if (voidLiteralItemProvider == null) {
 			voidLiteralItemProvider = new VoidLiteralItemProvider(this);
@@ -331,6 +342,7 @@ public class KomposeItemProviderAdapterFactory extends KomposeAdapterFactory imp
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Adapter createContextAdapter() {
 		if (contextItemProvider == null) {
 			contextItemProvider = new ContextItemProvider(this);
@@ -353,6 +365,7 @@ public class KomposeItemProviderAdapterFactory extends KomposeAdapterFactory imp
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Adapter createComposerAdapter() {
 		if (composerItemProvider == null) {
 			composerItemProvider = new ComposerItemProvider(this);
@@ -386,6 +399,7 @@ public class KomposeItemProviderAdapterFactory extends KomposeAdapterFactory imp
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public boolean isFactoryForType(Object type) {
 		return supportedTypes.contains(type) || super.isFactoryForType(type);
 	}
@@ -396,6 +410,7 @@ public class KomposeItemProviderAdapterFactory extends KomposeAdapterFactory imp
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Adapter adapt(Notifier notifier, Object type) {
 		return super.adapt(notifier, this);
 	}
@@ -405,10 +420,11 @@ public class KomposeItemProviderAdapterFactory extends KomposeAdapterFactory imp
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Object adapt(Object object, Object type) {
 		if (isFactoryForType(type)) {
 			Object adapter = super.adapt(object, type);
-			if (!(type instanceof Class) || (((Class)type).isInstance(adapter))) {
+			if (!(type instanceof Class) || (((Class<?>)type).isInstance(adapter))) {
 				return adapter;
 			}
 		}

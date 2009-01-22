@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: BooleanLiteral.java,v 1.1.1.1 2008-11-17 15:36:42 mclavreu Exp $
+ * $Id: BooleanLiteral.java,v 1.2 2009-01-22 20:26:53 mclavreu Exp $
  */
 package kompose;
 
@@ -15,7 +15,7 @@ package kompose;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link kompose.BooleanLiteral#isValue <em>Value</em>}</li>
+ *   <li>{@link kompose.BooleanLiteral#getValue <em>Value</em>}</li>
  * </ul>
  * </p>
  *
@@ -33,21 +33,21 @@ public interface BooleanLiteral extends Literal {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Value</em>' attribute.
-	 * @see #setValue(boolean)
+	 * @see #setValue(Boolean)
 	 * @see kompose.KomposePackage#getBooleanLiteral_Value()
 	 * @model dataType="kompose.Boolean"
 	 * @generated
 	 */
-	boolean isValue();
+	Boolean getValue();
 
 	/**
-	 * Sets the value of the '{@link kompose.BooleanLiteral#isValue <em>Value</em>}' attribute.
+	 * Sets the value of the '{@link kompose.BooleanLiteral#getValue <em>Value</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Value</em>' attribute.
-	 * @see #isValue()
+	 * @see #getValue()
 	 * @generated
 	 */
-	void setValue(boolean value);
+	void setValue(Boolean value);
 
 } // BooleanLiteral
