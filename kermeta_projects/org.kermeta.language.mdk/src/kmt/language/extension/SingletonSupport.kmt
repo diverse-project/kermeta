@@ -1,4 +1,4 @@
-/* $Id: SingletonSupport.kmt,v 1.1 2009-01-22 10:29:19 dvojtise Exp $ 
+/* $Id: SingletonSupport.kmt,v 1.2 2009-01-22 16:39:30 dvojtise Exp $ 
  * Creation : January 21, 2009
  * Licence  : EPL 
  * Copyright: Irisa/INRIA
@@ -13,24 +13,40 @@ require kermeta
 aspect class ClassDefinition
 {
 	/**
-	 * Internal object returned by getDefault
+	 * Internal object returned by getDefault on a Class whose typeDefinition is 
 	 * Should not be accessed by other means
 	 */
 	reference defaultObject : Object
 
-		
+			
+}
+
+aspect class Class
+{
+			
 	/**
-	 * Get or create a default object instance of this ClassDefinition
+	 * Get or create a default object instance of this Class
 	 * This allows to have a kind of singleton if you ensure to never call "new" on this ClassDefinition
 	 * Typical use : MySingleton.getDefault().asType(MySingleton)
-	 * Current limitation : handles only "simple" class. Parametrized classes aren't supported.
+	 * Current limitation : Parametrized classes are supported but you'll get only one default object 
+	 *		for a given ClassDefinition not matters its parameters. Using getDefault with several binding may lead to "TypeCastError"
+	 * Be careful, as it uses reflection this may be less efficient than passing an object as parameter through your code
+	 * 
 	 */
-	operation getDefault() : Object is do 
-		if defaultObject.isVoid then
-			var clazz : Class init Class.new
-			clazz.typeDefinition := self
-			defaultObject := clazz.new
-		end
-		result := defaultObject
+	operation getDefault() : Object is do
+		if 	self.typeDefinition.isInstanceOf(ClassDefinition) then
+			var cd : ClassDefinition
+			cd ?= self.typeDefinition
+			if cd.defaultObject.isVoid then
+				// create the default object
+				cd.defaultObject := self.new
+			end
+			result := cd.defaultObject	
+		
+		else
+			var exception : kermeta::exceptions::NotImplementedException init kermeta::exceptions::NotImplementedException.new
+			exception.message := "getDefault works only with ClassDefinition"
+			raise exception
+		end 
 	end
 }
