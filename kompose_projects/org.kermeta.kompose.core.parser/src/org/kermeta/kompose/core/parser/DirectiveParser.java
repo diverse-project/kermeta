@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import kompose.*;
 import kompose.impl.KomposePackageImpl;
 
+
 import antlr.TokenBuffer;
 import antlr.TokenStreamException;
 import antlr.Token;
@@ -17,14 +18,14 @@ import antlr.NoViableAltException;
 import antlr.ParserSharedInputState;
 import antlr.collections.impl.BitSet;
 
-public class DirectiveParser extends antlr.LLkParser implements DirectiveParserTokenTypes
+public class DirectiveParser extends antlr.LLkParser       implements DirectiveParserTokenTypes
  {
 
 	
 	private static KomposeFactory factory = KomposePackageImpl.init().getKomposeFactory();
 	
 	public static void main(String[] args) throws Exception {
-		 DirectiveLexer lexer = new DirectiveLexer(new FileInputStream("src/directives/parser/dir1.cd"));
+		 DirectiveLexer lexer = new DirectiveLexer(new FileInputStream("dir1.cd"));
 	     DirectiveParser parser = new DirectiveParser(lexer);
 	     try {
 			parser.dirUnit();

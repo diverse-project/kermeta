@@ -1,6 +1,7 @@
 // $ANTLR : "DirectiveParser.g" -> "DirectiveLexer.java"$
 
-package org.kermeta.kompose.core.parser; 
+package org.kermeta.kompose.core.parser;
+
 
 import java.io.InputStream;
 import antlr.TokenStreamException;

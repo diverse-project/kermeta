@@ -1,5 +1,5 @@
 header {
-package kompose.parser; 
+package org.kermeta.kompose.core.parser; 
 
 import java.io.FileInputStream;
 import java.util.ArrayList;
@@ -26,7 +26,7 @@ class DirectiveParser extends Parser;
 	private static KomposeFactory factory = KomposePackageImpl.init().getKomposeFactory();
 	
 	public static void main(String[] args) throws Exception {
-		 DirectiveLexer lexer = new DirectiveLexer(new FileInputStream("src/directives/parser/dir1.cd"));
+		 DirectiveLexer lexer = new DirectiveLexer(new FileInputStream("dir1.cd"));
 	     DirectiveParser parser = new DirectiveParser(lexer);
 	     try {
 			parser.dirUnit();
