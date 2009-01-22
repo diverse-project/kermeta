@@ -12,7 +12,6 @@ import org.eclipse.ui.IWorkbenchPart;
 import org.kermeta.interpreter.api.Interpreter;
 import org.kermeta.interpreter.api.InterpreterMode;
 
-
 import fr.irisa.triskell.eclipse.console.EclipseConsole;
 import fr.irisa.triskell.kermeta.exceptions.NotRegisteredURIException;
 import fr.irisa.triskell.kermeta.exceptions.URIMalformedException;
@@ -25,7 +24,7 @@ public class Composer implements IObjectActionDelegate, Runnable {
     protected String uri;
 	
 	/**
-	 * Constructor for Action1.
+	 * Constructor for Composer.
 	 */
 	public Composer() {
 		super();
@@ -86,5 +85,4 @@ public class Composer implements IObjectActionDelegate, Runnable {
 			e.printStackTrace();
 		}
 	}
-
 }
