@@ -1,4 +1,4 @@
-/* $Id: structure.kmt,v 1.77 2009-01-16 10:56:31 cfaucher Exp $
+/* $Id: structure.kmt,v 1.78 2009-01-23 10:23:27 dvojtise Exp $
  * Project : framework
  * File : structure.kmt
  * License : EPL
@@ -444,6 +444,9 @@ aspect class Class
 
 aspect class ClassDefinition
 {
+	/**
+	 * Returns all the types directly and indirectly inherited by this ClasDefinition 
+	 */
 	operation allSuperTypes() : Set<Type> is do
 	 
 		var allSuperClasses : Set<Type> init Set<Type>.new
