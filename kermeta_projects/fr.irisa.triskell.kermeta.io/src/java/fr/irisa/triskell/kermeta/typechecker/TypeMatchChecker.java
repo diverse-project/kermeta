@@ -1,4 +1,4 @@
-/* $Id: TypeMatchChecker.java,v 1.15 2009-01-21 15:22:29 moha Exp $
+/* $Id: TypeMatchChecker.java,v 1.16 2009-01-23 15:52:03 moha Exp $
  * Project : Kermeta io
  * File : TypeMatchChecker.java
  * License : EPL
@@ -49,6 +49,7 @@ import org.kermeta.io.KermetaUnit;
 import org.kermeta.io.plugin.IOPlugin;
 import org.kermeta.log4j.util.LogConfigurationHelper;
 import org.kermeta.model.KermetaModelHelper;
+import fr.irisa.triskell.kermeta.modelhelper.ModelTypeHelper;
 
 //import com.sun.net.ssl.internal.ssl.Debug;
 
@@ -254,7 +255,7 @@ public class TypeMatchChecker {
 					if (valueRenameTag == null) {
 						p_prop = p_type.getPropertyByName(r_prop.getName());
 					} else {
-						Map<String, String> elemsTag = getElemsValueRenameTag(valueRenameTag);
+						Map<String, String> elemsTag = ModelTypeHelper.getElemsValueRenameTag(valueRenameTag);
 						if (elemsTag.containsKey(this.provided.getName())) {
 							String newNameTag = elemsTag.get(this.provided
 									.getName());
@@ -564,34 +565,7 @@ public class TypeMatchChecker {
 		}
 	}
 	
-	/**
-	 * Put in a map the elements of rename tag. 
-	 * For example : @rename "UmlMT=packagedElement kermetaMT=ownedTypeDefinition" 
-	 *               attribute ownedClass : set MyClass[0..*]
-	 * 
-	 * Result : Map<UmlMT, packagedElement> Map<kermetaMT, ownedTypeDefinition>
-	 * 
-	 * @author moha
-	 * @since 23/12/2008
-	 * 
-	 * @param String
-	 *            valueRenameTag
-	 * @return Map<String, String>
-	 */
-	private Map<String, String> getElemsValueRenameTag(String valueRenameTag) {
-		Map<String, String> elemsTag = new HashMap<String, String>();
-		if (valueRenameTag != null) {
-			String elems[] = valueRenameTag.split(" ");
-			for (String elem : elems) {
-				String sub_elems[] = null;
-				sub_elems = elem.split("=");
-				if (sub_elems.length > 1) {
-					elemsTag.put(sub_elems[0], sub_elems[1]);
-				}
-			}
-		}
-		return elemsTag;
-	}
+	
 
 	/**
 	 * Get in a String the value associated to a rename tag. 
