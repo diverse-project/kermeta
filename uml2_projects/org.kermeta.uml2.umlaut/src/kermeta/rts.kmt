@@ -437,7 +437,7 @@ class Configuration inherits simulator::core::Configuration
         sm.context := self
     end
     operation superSwap(modelPack : kermeta::language::structure::Package,
-    					sClass : kermeta::reflection::Class,
+    					sClass : kermeta::language::structure::Class,
     					origin : rts::StateMachine,
     					dest : rts::StateMachine) is do
     	var pack : kermeta::language::structure::Package
@@ -448,12 +448,14 @@ class Configuration inherits simulator::core::Configuration
 			}
 			// recursive call, for exploring all inherited attributes
 			// (Class_in_State -|> Class_top_state -|> Class_impl -|> Class)
-			var sc : kermeta::reflection::Class
-			var sd : kermeta::reflection::ClassDefinition
+			var sc : kermeta::language::structure::Class
+			var sd : kermeta::language::structure::ClassDefinition
 			sd ?= sClass.typeDefinition
 			sd.superType.each{ st |
-				if not st.isVoid then
-					superSwap(modelPack, st, origin, dest)
+				var sx : kermeta::language::structure::Class
+				sx ?= st
+				if not sx.isVoid then
+					superSwap(modelPack, sx, origin, dest)
 				end
 			}
 			
@@ -537,7 +539,7 @@ class Configuration inherits simulator::core::Configuration
 							end
 							res.append("\n")
 						else
-							var collP : Collection<kermeta::reflection::Object>
+							var collP : Collection<kermeta::language::structure::Object>
 							collP ?= state.get(p)
 							var j : Integer init 0
 							collP.each{ k |
@@ -566,11 +568,11 @@ class Configuration inherits simulator::core::Configuration
 		}
 		result := res
 	end
-	operation getSet(orig : StateMachine, dest : Object, prop : kermeta::reflection::Property) is do
+	operation getSet(orig : StateMachine, dest : Object, prop : kermeta::language::structure::Property) is do
 		if prop.upper != 1 then
-			var collOrig : Collection<kermeta::reflection::Object>
+			var collOrig : Collection<kermeta::language::structure::Object>
 			collOrig ?= orig.get(prop)
-			var collDest : Collection<kermeta::reflection::Object>
+			var collDest : Collection<kermeta::language::structure::Object>
 			collDest ?= dest.get(prop)
 			collDest.clear
 			collDest.addAll(collOrig)

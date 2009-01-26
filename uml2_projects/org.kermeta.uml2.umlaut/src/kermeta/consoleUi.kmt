@@ -1,4 +1,4 @@
-/* $Id: consoleUi.kmt,v 1.1 2007-12-14 13:04:32 vmahe Exp $
+/* $Id: consoleUi.kmt,v 1.2 2009-01-26 17:05:50 vmahe Exp $
  * Creation date: June 12, 2006
  * License:
  * Copyright:
@@ -20,7 +20,7 @@ class Simulator inherits core::Simulator
         stdio.writeln("Welcome in the Kermeta simulator")
     end
     method displayCurrentSystem() is do
-    	if fullDisplay then
+//    	if fullDisplay then
     		// displays the complete configuration
     		
     		// no way to the current state of each object, for the moment
@@ -29,27 +29,27 @@ class Simulator inherits core::Simulator
     			writeln("    --> " + inst.name + " is in state " + inst.currentState.name)
     		} */
     		// no way to the current state of each object, for the moment, so idem short display
-    		writeln("  current object :")
-    		writeln("    --> " + currentState.ownerInstance.name + " is in state " + currentState.name)
-    	else
-    		// displays a short view : only the current state
-    		writeln("  current object :")
-    		writeln("    --> " + currentState.ownerInstance.name + " is in state " + currentState.name)
-    	end
+    		stdio.writeln("  current object :")
+//    		stdio.writeln("    --> " + currentState.ownerInstance.name + " is in state " + currentState.name)
+//    	else
+//    		// displays a short view : only the current state
+//   		stdio.writeln("  current object :")
+//    		stdio.writeln("    --> " + currentState.ownerInstance.name + " is in state " + currentState.name)
+//    	end
     end
     method displayFireableTransitions() is do
-    	var i : Integer init 0
-    	writeln("Fireable transitions :")
+    	var i : kermeta::standard::Integer init 0
+    	stdio.writeln("Fireable transitions :")
     	fireableTransitions.each{ s|
-    		writeln("  -- " +i.toString + " -- " + s)
+    		stdio.writeln("  -- " +i.toString + " -- " + s.toString)
     		i := i + 1
     	}
     end
-    method readChoosenTransition() :core::Transition is do
-	    var numTransition : Integer
-    	numTransition := stdio.read("Give the number of the choosen transition --> ")
+    method readChoosenTransition() : core::Transition is do
+	    var numTransition : kermeta::standard::Integer
+    	numTransition := stdio.read("Give the number of the choosen transition --> ").toInteger
     	result := fireableTransitions.elementAt(numTransition)
-    rescue (e : Exception)
+    rescue (e : kermeta::exceptions::Exception)
     	// we give the user another chance
     	result := readChoosenTransition()
     end

@@ -1,4 +1,4 @@
-/* $Id: simulator.kmt,v 1.1 2007-12-14 13:04:32 vmahe Exp $
+/* $Id: simulator.kmt,v 1.2 2009-01-26 17:05:50 vmahe Exp $
  * Creation date: June 12, 2006
  * License:
  * Copyright:
@@ -18,7 +18,7 @@ package core
     abstract class Simulator
     {
     	reference configuration : Configuration
-    	reference fireableTransitions : String
+    	reference fireableTransitions : Transition[0..*]
     	
     	/** this method must be implemented by Ui simulators */
     	operation displayFireableTransitions() is abstract
@@ -28,7 +28,7 @@ package core
     	
     	/** this method must be implemented by Ui simulators.
     	 * Must also have exception handling to intercept user mistakes */
-    	operation readChoosenTransition() : Integer is abstract
+    	operation readChoosenTransition() : Transition is abstract
     	
     	operation setInitialConfiguration(new : Configuration) is do
     		configuration := new
@@ -38,7 +38,7 @@ package core
     		// including the new set of fireable transitions
     		from true until false
 	    	loop
-	    		var choice : Integer
+	    		var choice : Transition
 	    		choice := readChoosenTransition
 	    		configuration.fireTransition(choice)
 	    		displayCurrentSystem()
@@ -57,8 +57,12 @@ package core
     abstract class Configuration
     {
     	operation getStatus() : String is abstract
-    	operation getFireableTransitions() : String is abstract
-    	operation fireTransition(num : Integer) is abstract
+    	operation getFireableTransitions() : Transition[0..*] is abstract
+    	operation fireTransition(t : Transition) is abstract
+    }
+    
+    abstract class Transition
+    {
     }
 }
 
@@ -69,6 +73,6 @@ package ui
 	{
 		method displayCurrentSystem() is abstract
 		method displayFireableTransitions() is abstract
-		method readChoosenTransition() : Integer is abstract
+		method readChoosenTransition() : Transition is abstract
 	}
 }

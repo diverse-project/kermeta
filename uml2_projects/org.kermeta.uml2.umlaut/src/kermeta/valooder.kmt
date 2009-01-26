@@ -1,4 +1,4 @@
-/* $Id: valooder.kmt,v 1.2 2008-01-02 10:28:39 vmahe Exp $
+/* $Id: valooder.kmt,v 1.3 2009-01-26 17:05:50 vmahe Exp $
  * Creation date: August 21, 2006
  * License: EPL
  * Copyright: IRISA (http://irisa.fr)
@@ -8,22 +8,22 @@ package valood;
 
 
 require kermeta
-require "../../../fr.irisa.triskell.uml2/src/kermeta/transformations/BehaviorTools.kmt"
-require "../../../fr.irisa.triskell.uml2/src/kermeta/transformations/GOFStatePatternTool.kmt"
-require "../../../fr.irisa.triskell.uml2/src/kermeta/transformations/StaticTools.kmt"
-require "../../../fr.irisa.triskell.uml2/src/kermeta/transformations/UmlCloneFactory.kmt"
+require "../../../org.kermeta.uml2/src/kermeta/transformations/BehaviorTools.kmt"
+require "../../../org.kermeta.uml2/src/kermeta/transformations/GOFStatePatternTool.kmt"
+require "../../../org.kermeta.uml2/src/kermeta/transformations/StaticTools.kmt"
+require "../../../org.kermeta.uml2/src/kermeta/transformations/UmlCloneFactory.kmt"
 
-using uml2
+using uml
 
-class Valood inherits uml2::transformations::GOFStatePatternTool
+class Valood inherits uml::transformations::GOFStatePatternTool
 {
-	reference factory : uml2::transformations::UmlCloneFactory
+	reference factory : uml::transformations::UmlCloneFactory
 	reference accessor_Tool : ValooderAccessor_Tool
-	reference association_Tool : uml2::transformations::Association_Tool
-	reference generalization_Tool : uml2::transformations::Generalization_Tool
+	reference association_Tool : uml::transformations::Association_Tool
+	reference generalization_Tool : uml::transformations::Generalization_Tool
 	reference interface_Tool : ValooderInterface_Tool
 	reference transition_Tool : ValooderTransition_Tool
-	reference tools : uml2::transformations::Tools
+	reference tools : uml::transformations::Tools
 	
 	reference rtsPackage : Package
 	reference rtsActiveStateMachine : Class
@@ -37,22 +37,22 @@ class Valood inherits uml2::transformations::GOFStatePatternTool
 		currentPackage := input
 		
 		// initialization of the cloning tool
-		factory := uml2::transformations::UmlCloneFactory.new
+		factory := uml::transformations::UmlCloneFactory.new
 		factory.initialize
 		ioTable := factory.ioTable
 		
 		// initialization of other tools
 		accessor_Tool := ValooderAccessor_Tool.new
-		association_Tool := uml2::transformations::Association_Tool.new
-		generalization_Tool := uml2::transformations::Generalization_Tool.new
+		association_Tool := uml::transformations::Association_Tool.new
+		generalization_Tool := uml::transformations::Generalization_Tool.new
 		interface_Tool := ValooderInterface_Tool.new
 		transition_Tool := ValooderTransition_Tool.new
-		tools := uml2::transformations::Tools.new
+		tools := uml::transformations::Tools.new
 		
     	// load the RTS UML2 resource
     	var inputRepository : kermeta::persistence::EMFRepository init kermeta::persistence::EMFRepository.new
     	var inputResource : kermeta::persistence::EMFResource
-    	inputResource ?= inputRepository.createResource("../uml2/rts.uml2", "../../../fr.irisa.triskell.uml2/src/ecore/UML2.ecore")
+    	inputResource ?= inputRepository.createResource("../uml/rts.uml", "../../../fr.irisa.triskell.uml/src/ecore/UML2.ecore")
     	inputResource.load()
     	
     	// catching the needed classes inside the RTS library
@@ -125,7 +125,7 @@ class Valood inherits uml2::transformations::GOFStatePatternTool
 		currentOutPackage.ownedMember.add(createProxy(clone, concreteClass))
 		
 		// the concrete class has the RTS ActiveStateMachine type
-		if visitable.ownedStateMachine.size == 1 then
+		if visitable.ownedBehavior.size == 1 then
 			generalization_Tool.addGeneralization(rtsActiveStateMachine, concreteClass)
 		end
 		
@@ -341,14 +341,14 @@ class Valood inherits uml2::transformations::GOFStatePatternTool
 		// generate the code
 		var dispatchOpCode : Comment init Comment.new
 		dispatchOpCode.body := "do\n"
-		dispatchOpCode.body.append("\ttarget_as_"+op.class_.name+ " : "+ op.class_.name+"\n")
-		dispatchOpCode.body.append("\ttarget_as_"+op.class_.name+ " ?= target\n")
+		dispatchOpCode.body.append("\ttarget_as_"+op.~class.name+ " : "+ op.~class.name+"\n")
+		dispatchOpCode.body.append("\ttarget_as_"+op.~class.name+ " ?= target\n")
 		var count : kermeta::standard::Integer init 0
 		op.ownedParameter.each{ par|
 			dispatchOpCode.body.append("\tvar arg"+count.toString+ " : " +par.type.name+"\n")
 			count := count + 1
 		}
-		dispatchOpCode.body.append("\ttarget_as_"+op.class_.name+ "."+op.name+"(")	// begin of the call
+		dispatchOpCode.body.append("\ttarget_as_"+op.~class.name+ "."+op.name+"(")	// begin of the call
 		count := 0
 		op.ownedParameter.each{ par|
 			if count > 0 then dispatchOpCode.body.append(", ") end
@@ -413,11 +413,11 @@ class Valood inherits uml2::transformations::GOFStatePatternTool
 	end
 	
 	operation nameForCallEvent(op : Operation) : kermeta::standard::String is do
-		result := op.class_.name + "_" + op.name + "_call_event"
+		result := op.~class.name + "_" + op.name + "_call_event"
 	end
 	
 	operation nameForSignal(op : Operation) : kermeta::standard::String is do
-		result := op.class_.name + "_" + op.name + "_signal"
+		result := op.~class.name + "_" + op.name + "_signal"
 	end
 	
 	operation nameForProxy(className : kermeta::standard::String) : kermeta::standard::String is do
@@ -450,7 +450,7 @@ class Valood inherits uml2::transformations::GOFStatePatternTool
 }
 
 /** redefine the naming of abstract and concrete classes */
-class ValooderInterface_Tool inherits uml2::transformations::Interface_Tool
+class ValooderInterface_Tool inherits uml::transformations::Interface_Tool
 {
     method prefixForAbstract() : kermeta::standard::String is do result := "" end
     method suffixForAbstract() : kermeta::standard::String is do result := "" end
@@ -462,7 +462,7 @@ class ValooderInterface_Tool inherits uml2::transformations::Interface_Tool
 }
 
 /** redefine the naming of some getters and setters (others stay unchanged) */
-class ValooderAccessor_Tool inherits uml2::transformations::Accessor_Tool
+class ValooderAccessor_Tool inherits uml::transformations::Accessor_Tool
 {
 	method prefixForGetter() : kermeta::standard::String is do result := "get" end
 	method prefixForSetter() : kermeta::standard::String is do result := "set" end
@@ -470,11 +470,11 @@ class ValooderAccessor_Tool inherits uml2::transformations::Accessor_Tool
 }
 
 /** redefine the code for leave source and enter target (others stay unchanged) */
-class ValooderTransition_Tool inherits uml2::transformations::Transition_Tool
+class ValooderTransition_Tool inherits uml::transformations::Transition_Tool
 {
 	method sourceIntoOperation() : kermeta::standard::String is do
 		if transition.source != void then
-			var tools : uml2::transformations::Tools init uml2::transformations::Tools.new
+			var tools : uml::transformations::Tools init uml::transformations::Tools.new
 			result := "\tleave("+tools.lowerFirstChar(transition.source.name)+")"
 		else
 			var message : kermeta::standard::String
@@ -484,7 +484,7 @@ class ValooderTransition_Tool inherits uml2::transformations::Transition_Tool
 	end
 	method targetIntoOperation() : kermeta::standard::String is do
 		if transition.target != void then
-			var tools : uml2::transformations::Tools init uml2::transformations::Tools.new
+			var tools : uml::transformations::Tools init uml::transformations::Tools.new
 			result := "\tenter("+tools.lowerFirstChar(transition.target.name)+")"
 		else
 			var message : kermeta::standard::String

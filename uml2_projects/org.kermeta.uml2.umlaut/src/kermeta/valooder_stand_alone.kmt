@@ -1,4 +1,4 @@
-/* $Id: valooder_stand_alone.kmt,v 1.2 2008-01-02 10:28:39 vmahe Exp $
+/* $Id: valooder_stand_alone.kmt,v 1.3 2009-01-26 17:05:50 vmahe Exp $
  * Creation date: August 21, 2006
  * License: EPL
  * Copyright: IRISA (http://irisa.fr)
@@ -13,17 +13,17 @@ package valood;
 
 require kermeta
 require "valooder.kmt"
-require "../../../fr.irisa.triskell.uml2/src/kermeta/uml2km/Uml2KM.kmt"
+require "../../../org.kermeta.uml2/src/kermeta/uml2km/Uml2KM.kmt"
 
 
-using uml2
+using uml
 
 class ValooderStandAlone
 {
 	reference inputModel : Model
 	reference outputModel : Model
 	
-	method setUp() is do
+	operation setUp() is do
     	// load the given UML2 resource
     	var inputRepository : kermeta::persistence::EMFRepository init kermeta::persistence::EMFRepository.new
     	var inputResource : kermeta::persistence::EMFResource
