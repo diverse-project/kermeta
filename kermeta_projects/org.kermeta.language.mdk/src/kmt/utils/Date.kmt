@@ -1,4 +1,4 @@
-/* $Id: Date.kmt,v 1.1 2009-01-27 13:40:02 cfaucher Exp $ 
+/* $Id: Date.kmt,v 1.2 2009-01-27 15:08:15 cfaucher Exp $ 
  * Creation : January 27, 2009
  * Licence  : EPL 
  * Copyright: INRIA / IRISA / University of Rennes 1, France
@@ -14,10 +14,13 @@ require kermeta
 using kermeta::standard
 
 /**
- * Implementation of a getter of random integers
+ * Implementation of Date to calculate elapsed time
  */
 class Date {
 
+	/**
+	 * Store as a String the first calculated time
+	 */
 	attribute time : String [1..1]
 
 	/**
