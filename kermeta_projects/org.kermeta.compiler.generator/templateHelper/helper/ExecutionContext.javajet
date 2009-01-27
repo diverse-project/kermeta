@@ -2,7 +2,7 @@
 	 package="org.kermeta.compiler.generator.templates"
 	 
 	 class="ExecutionContext"
-	 version="$Id: ExecutionContext.javajet,v 1.18 2009-01-27 14:37:21 cfaucher Exp $" %>
+	 version="$Id: ExecutionContext.javajet,v 1.19 2009-01-27 14:59:35 cfaucher Exp $" %>
 <%String kmFilePath_forReflection = (String) argument;%>
 
 package org.kermeta.compil.runtime;
@@ -120,7 +120,10 @@ public class ExecutionContext {
 	public void lazyInitialize() {
 		if (_modelKM == null) {
 			
-			ExecutionContext.setDefaultUriMap();
+			// the uri map is not setted in deployed mode
+			if( !Platform.isRunning() ) {
+				ExecutionContext.setDefaultUriMap();
+			}
 			
 			System.out
 					.println("Beginning of the initialization of the reflection...");
