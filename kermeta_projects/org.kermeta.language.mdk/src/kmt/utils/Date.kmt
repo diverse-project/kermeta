@@ -1,0 +1,47 @@
+/* $Id: Date.kmt,v 1.1 2009-01-27 13:40:02 cfaucher Exp $ 
+ * Creation : January 27, 2009
+ * Licence  : EPL 
+ * Copyright: INRIA / IRISA / University of Rennes 1, France
+ * Authors  : 
+ *            Cyril Faucher <cyril.faucher@inria.fr>
+ *            Brice Morin <brice.morin@inria.fr>
+ */
+
+package kermeta::utils;
+
+require kermeta
+
+using kermeta::standard
+
+/**
+ * Implementation of a getter of random integers
+ */
+class Date {
+
+	attribute time : String [1..1]
+
+	/**
+	 * Initialize a new Date and set the attribute time to the String value of the current time
+	 */
+	operation start() : Void is do
+		@compiledJavaExtern "externs.Date.start(this)"
+        time ?= extern org::kermeta::language::mdk::externs::date::Date.start(self)
+	end
+
+	/**
+	 * Return the elapsed time between the start of self - the start of startDate
+	 */
+	operation getTimeDiff(startDate : Date) : Integer is do
+		@compiledJavaExtern "externs.Date.getTime(this, startDate)"
+        result ?= extern org::kermeta::language::mdk::externs::date::Date.getTime(self, startDate)
+	end
+	
+	/**
+	 * Return the elapsed time since the last push, i.e.: the last myDate.start()
+	 */
+	operation getElapsedTime() : Integer is do
+		@compiledJavaExtern "externs.Date.getElapsedTime(this)"
+        result ?= extern org::kermeta::language::mdk::externs::date::Date.getElapsedTime(self)
+	end
+	
+}
