@@ -212,11 +212,7 @@ public class ObjectUtil {
 	
 	private static String getFinalName(Property prop) {
 		
-		List<String> java_keyword = new ArrayList<String>();
-		java_keyword.add("abstract");
-		java_keyword.add("interface");
-		java_keyword.add("volatile");
-		java_keyword.add("transient");
+		List<String> java_keyword = ExecutionContext.getJavaKeywords();
 		
 		String str = prop.getName();
 		if(java_keyword.contains(str)) {
