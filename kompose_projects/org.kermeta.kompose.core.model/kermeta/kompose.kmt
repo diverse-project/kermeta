@@ -190,7 +190,7 @@ aspect class Remove
 		var val : Object init resolveValue
 		
 		//TODO: check that the type of the value is correct
-		// add the value
+		// remove the value
 		var c : kermeta::standard::Collection<Object> 
 		c ?= targetObj.get(prop)
 		c.remove(val)
@@ -331,8 +331,7 @@ aspect class NameRef
 					//stdio.writeln(" --found |" +  ne.getStringID + "| (looking for |"+ n +"|)" )
 					if n == ne.getStringID then 
 						cur := ne
-						found := true
-						
+						found := true						
 					end
 				end
 			}
@@ -343,8 +342,9 @@ aspect class NameRef
 			end
 		}
 		result := cur
-	rescue
-		result := void
+	rescue (e : kermeta::exceptions::Exception)
+		stdio.writeln(e.message)
+		result := void	
 	end
 	
 	/** get all the objects containes by the object c */
