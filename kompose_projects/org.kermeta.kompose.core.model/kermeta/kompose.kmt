@@ -1,4 +1,11 @@
-package kompose;
+/*
+ * Kompose 2008 - http://www.kermeta.org/mdk/kompose
+ * 
+ * author: Freddy Munoz - fmunoz(at)irisa.fr - Triskell Team
+ * author: Mickael Clavreul - mclavreu(at)irisa.fr - Triskell Team
+ * 
+ */
+ package kompose;
 
 require "merge.kmt" 
 
@@ -6,7 +13,19 @@ using kermeta::language::structure
 using kermeta::utils
 using kermeta::persistence
 
+/** 
+ * Main class of the Kompose process
+ */
 class KomposeMain {
+
+	/**
+	 * Constructs a composer with full information of the elements to compose
+	 * and pre-loading of directives
+	 * param path : path of the komposition model (*.kompose)
+	 * param composer : Specific composer to initialize
+	 * param logging : boolean to enable debugging informations or not
+	 * returns a composer
+	 */
 	operation loadComposer(path : String, composer : kompose::Composer, logging : Boolean) : kompose::Composer is do
 		var resource : kermeta::persistence::EMFResource             
    		var repository : EMFRepository init EMFRepository.new             
@@ -28,11 +47,19 @@ class KomposeMain {
 	end
 }
 
+/** 
+ * Abstract class Composer
+ */
 aspect abstract class Composer {
 
 	reference resources: kermeta::persistence::EMFResource [0..*]   
 	reference logger : KLogger
-	// Has to be defined for each specific meta-model
+	
+	/**
+	 * Loads a specific model from uri
+	 * param path : path of the model to load
+	 * returns the root of the model as a Mergeable element
+	 */
 	operation loadModel(path : String) : kompose::Mergeable is do
     	var resource : kermeta::persistence::EMFResource             
    		var repository : EMFRepository init EMFRepository.new             
@@ -42,6 +69,12 @@ aspect abstract class Composer {
     	result ?= resource.instances.one
    end
    
+   /**
+	 * Saves a specific model to uri
+	 * param model : root element of the model
+	 * param uri : uri to save the model in
+	 * param metamodelUri : the metamodel's identifier
+	 */
    operation saveModelByUri(model : kompose::Mergeable, uri : String, metamodelUri : String) is do
    		var resource : kermeta::persistence::EMFResource             
    		var repository : EMFRepository init EMFRepository.new
@@ -51,18 +84,33 @@ aspect abstract class Composer {
       	resource.save
    end
    
-    // Has to be defined for each specific meta-model
+   /**
+	 * Abstract save of a specific model to uri
+	 * Should be redefined for each specialization
+	 * param model : root element of the model
+	 * param uri : uri to save the model in
+	 */
     operation saveModel(model : Mergeable, uri : String) : Void is abstract
     
+    /**
+	 * Initialize the context of the generic directives engine
+	 * param model : root element of the model
+	 * returns a new context
+	 */
     // Can be extended for a specific meta-model
     // If the Create directive is to be used, the "classes" property of the context
     // should be populated with the classes that might be instanciated using the
-    // create directive 
+    // create directive
     operation createContext(model : Mergeable) : Context is do
     	result := Context.new
     	result.initialize(model)
     end
 	
+	/**
+	 * Executes directives on a model
+	 * param model : root element of the model
+	 * param directives : set of directives to be applied
+	 */
 	operation executeDirectives(model : Mergeable, directives : oset ElementDirective[*]) is do
 		// create the context
 		var context : Context init createContext(model)
@@ -73,6 +121,10 @@ aspect abstract class Composer {
 		}
 	end
 	
+	/**
+	 * Global composition operation that realizes the whole process of composition
+	 * returns the root of the composed model
+	 */
 	operation compose() : Mergeable is do
 		// load models to compose
 		self.logger.printInfo("Loading models...")
@@ -113,10 +165,20 @@ aspect abstract class Composer {
 	
 }
 
+/** 
+ * Directive class
+ */
 aspect class ElementDirective {
+	
+	/**
+	 * Abstract method to get the symbol of a directive
+	 */
 	operation getSymb() : String is abstract
 }
 
+/** 
+ * Remove class : directive that deletes a value of a property
+ */
 aspect class Remove
 {
 	method execute() is do
@@ -139,6 +201,9 @@ aspect class Remove
 	end
 }
 
+/** 
+ * Add class : directive that adds a new value to a property
+ */
 aspect class Add
 {
 	method execute() is do
@@ -162,8 +227,10 @@ aspect class Add
 	
 }
 
-@aspect "true"
-class Create
+/** 
+ * Create class : directive that creates a new element in a model
+ */
+aspect class Create
 {	
 	method toString() : String is do
 		result := 	"create " + className + " as " + "$" + identifier
@@ -185,8 +252,10 @@ class Create
 	end
 } 
 
-@aspect "true"
-class Set
+/** 
+ * Set class : directive that sets he value of a property
+ */
+aspect class Set
 {
 	method execute() is do
 		// resolve the target object
@@ -210,21 +279,25 @@ class Set
 	end
 }
 
-@aspect "true"
-class ElementRef
+/** 
+ * ElementRef class
+ */
+aspect class ElementRef
 {
 	operation getElement(c: Context) : Object is abstract
 }
 
-@aspect "true"
-class NameRef
+/** 
+ * NameRef class : represents a reference by name
+ */
+aspect class NameRef
 {
 	method toString() : String is do
 		result := qname
 	end
 	
 	method getElement(c: Context) : Object is do
-		// Split the qualified name 
+		// Splits the qualified name 
 		var names : kermeta::standard::Sequence<String> init kermeta::standard::Sequence<String>.new
 		var str : String
 		from  str := qname
@@ -235,19 +308,21 @@ class NameRef
 		end
 		names.add(str)
 		
-		// check the name of the first package
+		// checks the name of the first package
 		if names.elementAt(0) != c.model.getStringID then
 		 	var ex : ElementNotResolvedException init ElementNotResolvedException.new
 			ex.elementRef := self
 			raise ex
 		end
+		// removes the root of the model
 		names.removeAt(0)
 		
-		// iterate on names
+		// iterates on names
 		var ne : Mergeable 
 		var cur : Mergeable init c.model
 		var found : Boolean
 		
+		// iterates on each name and contained resources
 		names.each{ n |
 			found := false
 			getContents(cur).each{ e | 
@@ -295,8 +370,10 @@ class NameRef
 	end
 }
 
-@aspect "true"
-class IDRef
+/** 
+ * IDRef class : represents a variable
+ */
+aspect class IDRef
 {	
 	method toString() : String is do
 		result := "$" + identifier
@@ -307,8 +384,10 @@ class IDRef
 	end
 }
 
-@aspect "true"
-abstract class Change
+/** 
+ * Change class : represents a modification of a property
+ */
+aspect abstract class Change
 {	
 	method toString() : String is do
 		result := 	target.toString+"." +propertyName+ " " + 
@@ -356,8 +435,10 @@ abstract class Change
 
 }
 
-@aspect "true"
-class StringLiteral
+/** 
+ * StringLiteral class
+ */
+aspect class StringLiteral
 {	
 	method toString() : String is do
 		result := "\"" + ~value.toString + "\""
@@ -368,8 +449,10 @@ class StringLiteral
 	end
 }
 
-@aspect "true"
-class BooleanLiteral
+/** 
+ * BooleanLiteral class
+ */
+aspect class BooleanLiteral
 {	
 	method toString() : String is do
 		result := ~value.toString
@@ -380,8 +463,10 @@ class BooleanLiteral
 	end
 }
 
-@aspect "true"
-class IntegerLiteral
+/** 
+ * IntegerLiteral class
+ */
+aspect class IntegerLiteral
 {	
 	method toString() : String is do
 		result := ~value.toString
@@ -392,16 +477,20 @@ class IntegerLiteral
 	end
 }
 
-@aspect "true"
-class VoidLiteral
+/** 
+ * VoidLiteral class
+ */
+aspect class VoidLiteral
 {
 	method toString() : String is do
 		result := "void"
 	end
 }
 
-@aspect "true"
-class Context
+/** 
+ * Context class
+ */
+aspect class Context
 {
 	reference model : Mergeable
 	reference variables : Hashtable<String, Object>
@@ -469,6 +558,7 @@ class PropertyNotFoundException inherits DirectiveRuntimeException {
 		end
 }
 
+/* The metaclass could not be found */
 class ClassNotFoundException inherits DirectiveRuntimeException {
 	property createDirective : Create 
 		getter is do result ?= directive end

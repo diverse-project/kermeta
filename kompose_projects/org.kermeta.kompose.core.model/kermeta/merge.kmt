@@ -1,3 +1,10 @@
+/*
+ * Kompose 2008 - http://www.kermeta.org/mdk/kompose
+ * 
+ * author: Freddy Munoz - fmunoz(at)irisa.fr - Triskell Team
+ * author: Mickael Clavreul - mclavreu(at)irisa.fr - Triskell Team
+ * 
+ */
 package kompose;
 
 require kermeta
@@ -7,10 +14,15 @@ using kermeta::language::structure
 using kermeta::standard
 using kermeta::utils 
 
-/** Any class that instances should be merged should inherit 
+/** Any class that owns instances to merge should inherit 
  from this class and define operation getSignature */
 aspect abstract class Mergeable
 {
+	/**
+	 * Get a sequence of matching elements compared with a collection
+	 * param elements : the collection in which we look for matching elements
+	 * returns a sequence of matching elements
+	 */
 	operation getmatchingElements(elements : Collection<Mergeable>) : seq Mergeable[0..*] is do
 		var e1 : Mergeable init self
 		if e1 == void then
@@ -53,44 +65,36 @@ aspect abstract class Mergeable
 					if other.get(p) == void then
 						result.~set(p, selfValue)
 					else
-						/* This specific handler has been created to cope with the merge of
-						 * properties that have some values coming from the metamodel, i.e 
-						 * properties related with an enumeration literal.
-						 */
-						//if selfValue.isInstanceOf(kermeta::language::structure::EnumerationLiteral) then
-							//specificEnumerationHandler(self,p,result)
-						//else
-							if mergeable then
-								var me1 : Mergeable		me1 ?= selfValue
-								var me2 : Mergeable		me2 ?= otherValue								
-								if me1 == void or me2 == void then
-									ctx.logger.printError("Elements are not mergeable")
-								else						
-									if me1.getSignature == me2.getSignature then
-										/* p is a relation */
-										if p.isComposite then
-											result.~set(p, me1.merge(me2, ctx))
-										else
-											result.~set(p, me1)
-										end
-									else										
-										ctx.logger.printError("Elements signature do not match")
+						if mergeable then
+							var me1 : Mergeable		me1 ?= selfValue
+							var me2 : Mergeable		me2 ?= otherValue								
+							if me1 == void or me2 == void then
+								ctx.logger.printError("Elements are not mergeable")
+							else						
+								if me1.getSignature == me2.getSignature then
+									/* p is a relation */
+									if p.isComposite then
+										result.~set(p, me1.merge(me2, ctx))
+									else
+										result.~set(p, me1)
 									end
-								end
-							else
-								if selfValue == otherValue then
-									result.~set(p, selfValue)
-								else
-									ctx.logger.printError("conflicting value for property " + p.name + " picking the first value")
-									result.~set(p, selfValue)
+								else										
+									ctx.logger.printError("Elements signature do not match")
 								end
 							end
-						//end
+						else
+							if selfValue == otherValue then
+								result.~set(p, selfValue)
+							else
+								ctx.logger.printError("conflicting value for property " + p.name + " picking the first value")
+								result.~set(p, selfValue)
+							end
+						end
 					end
 				end
 			else
 			/* Merging collections */
-			/* Test is made on collection size because on compiled mode, collection are
+			/* Test on collection size because on compiled mode, collection are
 				initialized as empty ones and not null ones */
 				if selfValue == void then
 					result.~set(p, otherValue)
@@ -159,27 +163,15 @@ aspect abstract class Mergeable
 	end
 	
 	/**
-	 * Specific method to set enumeration literals in the right way
-	 * param m : element that owns the property
-	 * param o : property that corresponds to an enumeration literal
-	 * param out : element with enumeration literal correctly set
-	 * returns out
+	 * Abstract method getSignature that returns the signature of current element
+	 * returns a signature
 	 */
-	operation specificEnumerationHandler(m : Object, o : Object, out : Object) : Object is do
-		result := out
-		var prop : kermeta::language::structure::Property
-		prop ?= o
-		var v : kermeta::language::structure::EnumerationLiteral
-		v ?= m.get(prop)
-		if(v != void) then
-			// Test property enumeration is the same as EnumerationLiteral owner
-			if prop.type == v.~enumeration then
-				extern fr::irisa::triskell::kermeta::runtime::language::Object.~set(result,o,m.get(prop))
-			end
-		end
-	end
-	
 	operation getSignature() : kompose::Signature is abstract
+	
+	/**
+	 * Gets the string representation of an element
+	 * returns a string
+	 */
 	operation getStringID() : kermeta::standard::String is abstract
 }
 
@@ -195,7 +187,10 @@ class MergeContext {
 	attribute objectIndex : Hashtable<kermeta::standard::Integer,kermeta::standard::Object>
 	reference logger : KLogger
 	
-	 
+	/**
+	 * Initialization of context information containers
+	 * param logger : a KLogger object to be able to log informations
+	 */
 	operation initialize(logger : KLogger) is do
 		left := Hashtable<kermeta::standard::Integer, Mergeable>.new
 		right := Hashtable<kermeta::standard::Integer, Mergeable>.new
@@ -206,7 +201,13 @@ class MergeContext {
 		objectIndex := Hashtable<kermeta::standard::Integer,kermeta::standard::Object>.new
 		self.logger := logger
 	end
-	operation resouceContains(element:Object):kermeta::standard::Boolean is do
+	
+	/**
+	 * Test if an element comes from a resource already loaded
+	 * param element : element to test
+	 * returns true if element comes from one of the resources loaded, false otherwise
+	 */
+	operation resourceContains(element : Object) : kermeta::standard::Boolean is do
 		result:=false
 		self.resources.each{resource|
 			if not element.containingResource().isVoid then
@@ -216,11 +217,17 @@ class MergeContext {
 			end
 		}
 	end
-	operation indexate(element:Object): Void is do
+	
+	/**
+	 * Creates a context to be able to get back references from elements once merge process
+	 * is done
+	 * param element : element to indexate
+	 */
+	operation indexate(element : Object) : Void is do
 		self.logger.printDebug("indexate : test "+element.toString+" : "+element.isInstanceOf(kermeta::language::behavior::Expression).toString)
 		if not element.isInstanceOf(kermeta::language::behavior::Expression) and not element.isInstanceOf(kermeta::language::structure::Tag) then
 			self.logger.printDebug("compose merge.kmt : resouceContains "+element.toString)
-			if self.resouceContains(element) then
+			if self.resourceContains(element) then
 				self.logger.printDebug("compose merge.kmt : contains "+element.toString)
 				if not self.objectIndex.containsKey(element.oid) then
 					self.logger.printDebug("indexate merge.kmt : add "+element.toString)
@@ -249,6 +256,12 @@ class MergeContext {
 		end
 	end
 	
+	/**
+	 * Creates a trace for composed objects
+	 * param l : element from base model
+	 * param r : element from aspect model
+	 * param composed : result of the composition of l and r
+	 */
 	operation addObjectComposedTrace(l : Mergeable, r : Mergeable, composed : Mergeable) is do
 		left.put(l.oid(), composed)
 		right.put(r.oid(), composed)
@@ -256,10 +269,20 @@ class MergeContext {
 		comp.put(composed.oid(), true)
 	end
 	
+	/**
+	 * Test if an object is a composed one
+	 * param composed : element to test
+	 * returns true if the element has already been composed, false otherwise
+	 */
 	operation isComposedObject(composed : Mergeable) : kermeta::standard::Boolean is do
 		result := comp.getValue(composed.oid()) != void
 	end
 	
+	/**
+	 * Gets a composed object
+	 * param o : element from base or aspect models
+	 * returns a composed element if found, void otherwise
+	 */
 	operation getComposedObject(o : Mergeable) : Mergeable is do
 		result := left.getValue(o.oid())
 		if result == void then 
@@ -270,19 +293,38 @@ class MergeContext {
 		end
 	end
 	
+	/**
+	 * Adds a simple trace to be able to retrieve ancestor for an element
+	 * param o : element from base model
+	 * param r : element from aspect model
+	 */
 	operation addSimpleTrace(o : Mergeable, r : Mergeable) is do
 		any.put(o.oid(), r)
 		reverse.put(r.oid(), o)
 	end
 	
+	/**
+	 * Gets the source of a composed object
+	 * param r : element created through the process of composition
+	 * returns the predecessor of r if found, void otherwise
+	 */
 	operation getAncestor(r : Mergeable) : Mergeable is do
 		result := reverse.getValue(r.oid())
 	end
 	
+	/**
+	 * Give the information that an object has been processed in fixReferences
+	 * param e : element processed
+	 */
 	operation addProcessedElement(e : Mergeable) is do
 		processed.put(e.oid(), true)
 	end
 	
+	/**
+	 * Tests if an object has been processed in fixReferences
+	 * param e : element to test
+	 * returns true if e has been processed, false otherwise
+	 */
 	operation isProcessed(e : Mergeable) : kermeta::standard::Boolean is do
 		result := processed.getValue(e.oid()) != void
 	end
@@ -294,6 +336,13 @@ class ModelElementComposer
 	reference resources: kermeta::persistence::EMFResource [0..*]
 	reference logger : KLogger
 	
+	/**
+	 * Global method of composition
+	 * param m1 : root element from base model
+	 * param m2 : root element from aspect model
+	 * param logger : KLogger object
+	 * returns a mergeable object
+	 */
 	operation compose(m1 : Mergeable, m2 : Mergeable, logger : KLogger) : Mergeable is do
 		self.logger := logger
 		var ctx : MergeContext init MergeContext.new
@@ -321,6 +370,12 @@ class ModelElementComposer
 		end
 	end	
 	
+	/**
+	 * Restore broken links between elements or between resource and elements
+	 * param e : an object result of the composition
+	 * param ctx : index context
+	 * returns a restored mergeable object
+	 */
 	operation fixReferences(e : Mergeable, ctx : MergeContext) : Mergeable is do
 		// the object is already processed
 		if ctx.isProcessed(e) then
@@ -349,7 +404,6 @@ class ModelElementComposer
 				var objs : Collection<Object>
 				var objres : Hashtable<Object, Object>
 				mcls ?= e.getMetaClass.typeDefinition
-				// allOwnedAttribute -> allAttribute en nouvelle version
 				mcls.allAttribute.select{ k | not k.isDerived }.each{ p | 
 					if p.upper == 1 then 
 						me ?= e.get(p)
@@ -383,117 +437,7 @@ class ModelElementComposer
 			end
 		end
 	end
-	
-/*	operation fixReferences2(e: Mergeable, ctx : MergeContext) : Mergeable is do
-		//stdio.writeln("Call for " + e.toString)
-		// the object is already processed
-		if ctx.isProcessed(e) then
-			result := e
-			//stdio.write(" processed ")
-		else 
-			if ctx.isComposedObject(e) then	
-				//stdio.writeln("COMPOSED OBJECT " + e.toString)
-				result := e
-			else	
-				// Get the composed object
-				result := ctx.getComposedObject(e)
-				
-				// if no composed object the it has to be created
-				if result == void then 
-					result ?= e.getMetaClass.new
-					//stdio.writeln("NO COMPOSED OBJ FOR " + e.toString + " CREATED " + result.toString)
-					ctx.addSimpleTrace(e, result)
-				else 
-					// if it is a composed object we should process it
-					// and not only one of its ancestors
-					e := result
-				end
-			end
-			//stdio.writeln("Call for " + e.toString + "->" + result.toString)
-			if not ctx.isProcessed(result) then
-			
-				ctx.addProcessedElement(result)
-				
-				// Process the properties of the object
-				var me : Mergeable
-				var mcls : ClassDefinition 
-				var objs : Collection<Object>
-				var objres : Hashtable<Object, Object>
-				mcls ?= e.getMetaClass.typeDefinition
-				// allOwnedAttribute -> allAttribute en nouvelle version
-				mcls.allAttribute.select{ k | not k.isDerived }.each{ p | 
-					if p.upper == 1 then 
-						me ?= e.get(p)
-						//stdio.writeln("property " + p.name)
-						if me != void then
-							//stdio.writeln(" recurse")
-							//if ctx.isProcessed(me).orElse{e|ctx.isComposedObject(me)}.orElse{e|ctx.objectIndex.containsKey(me.oid())} then
-							if ctx.isProcessed(me) or ctx.isComposedObject(me) or ctx.objectIndex.containsKey(me.oid()) then
-								result.~set(p, fixReferences(me, ctx))
-							else
-								
-								/*if me.notPossibleToHandleThisWay then
-									stdio.writeln("specific handler fixreferences")
-									result := me.specificHandler(result,me)
-								else*/
-							/*	if e.get(p).isInstanceOf(kermeta::language::structure::EnumerationLiteral) then
-									//stdio.writeln("I am an EnumLiteral: " + self.get(p).toString)
-									var v : kermeta::language::structure::EnumerationLiteral
-									v ?= e.get(p)
-									if(v != void) then
-										if p.type == v.~enumeration then
-											//stdio.writeln("*** DEBUG : Appel EXTERN")
-											extern fr::irisa::triskell::kermeta::runtime::language::Object.~set(self, p, e.get(p))
-										end
-									end
-								else*/
-						/*			result.~set(p, e.get(p))
-								//end
-								/*stdio.writeln(" directly on: "+me.toString+" propety:"+p.name)
-								result.~set(p, e.get(p)) */
-								//end
-						/*	end
-						else
-							/*if e.get(p).isInstanceOf(kermeta::language::structure::EnumerationLiteral) then
-								//stdio.writeln("I am an EnumLiteral: " + self.get(p).toString)
-								var v : kermeta::language::structure::EnumerationLiteral
-								v ?= e.get(p)
-								if(v != void) then
-									if p.type == v.~enumeration then
-										stdio.writeln("specific handler fixreferences not mergeable")
-										//stdio.writeln("*** DEBUG : Appel EXTERN")
-										extern fr::irisa::triskell::kermeta::runtime::language::Object.~set(self, p, e.get(p))
-									end
-								end
-							else*/
-					/*			result.~set(p, e.get(p))
-							//end
-						end
-					else
-						objs ?= e.get(p)
-						objres := Hashtable<Object, Object>.new
-						objs.each{ o |
-							me ?= o
-							if me != void then
-								objres.put(me, fixReferences(me, ctx))
-							end
-						}
-						objs ?= result.get(p)
-						objres.keys.each{ k |
-							objs.remove(k)
-							objs.add(objres.getValue(k))
-							//stdio.writeln("OBJRES = "+result.toString + "." + p.name + " + " + objres.getValue(k).toString)
-						}
-						
-						objs ?= result.get(p)
-						
-					end
-				}
-			end
-		end
-	end*/
 }
-
 /** The superclass for signature the equals operation has to be 
     defined for each type of signature */
 abstract class Signature
@@ -513,8 +457,7 @@ class StringSignature inherits Signature
 		else
 			result := false
 		end
-	end
-	
+	end	
 }
 
 /**
@@ -527,23 +470,45 @@ class KLogger
 	attribute debug : String
 	attribute info : String
 	
+	/**
+	 * Initializes static information
+	 */
 	operation initialize() is do
 		error := "-ERROR: "
 		info := "-INFO: "
 		debug := "-DEBUG: "
 	end
+	
+	/**
+	 * Prints an error message in the console view
+	 * param message : the message to print
+	 */
 	operation printError(message : String) : Void is do
 		stdio.writeln("KOMPOSE"+error+ message)
 	end
+	
+	/**
+	 * Prints a debug message in the console view
+	 * param message : the message to print
+	 */
 	operation printDebug(message : String) : Void is do
 		if tracingEnabled then
 			stdio.writeln("KOMPOSE"+debug+ message)
 		end
 	end
+	
+	/**
+	 * Prints an information message in the console view
+	 * param message : the message to print
+	 */
 	operation printInfo(message : String) : Void is do
 		stdio.writeln("KOMPOSE"+info+ message)
 	end
 	
+	/**
+	 * Enables the debugging messages
+	 * param b : true to activate logging, false otherwise
+	 */
 	operation enableLog(b: Boolean): Void is do
 		tracingEnabled := b
 	end
