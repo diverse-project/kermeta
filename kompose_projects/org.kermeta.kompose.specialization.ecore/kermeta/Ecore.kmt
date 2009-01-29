@@ -90,6 +90,10 @@ class EGenericType inherits kompose::Mergeable {
 		s.sign := eClassifier.name
 		result := s
 	end
+	
+	method getStringID() : kermeta::standard::String is do
+		result := self.eClassifier.name
+	end
 }
 
 @aspect "true"
@@ -100,9 +104,9 @@ class EAnnotation{
 		s.sign := source
 		result := s
 	end
+	
 	method getStringID() : kermeta::standard::String is do
 		result := source
-
 	end
 }
 
