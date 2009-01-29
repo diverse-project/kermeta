@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="ASCII"?>
+<rdbschema:RDBMSModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:rdbschema="http://www.kermeta.org/rdbschema.ecore" name="eBusiness">
+  <table name="Order" pkey="//@table.0/@cols.3">
+    <cols name="quantity" type="NUMBER"/>
+    <cols name="product" type="NUMBER"/>
+    <cols name="total" type="NUMBER"/>
+    <cols name="orderNum" type="NUMBER"/>
+    <cols name="orderClientNumber" type="NUMBER"/>
+    <fkeys references="//@table.5" cols="//@table.0/@cols.4"/>
+    <fkeys references="//@table.3" cols="//@table.0/@cols.1"/>
+  </table>
+  <table name="Permission" pkey="//@table.1/@cols.0">
+    <cols name="idPermission" type="NUMBER"/>
+    <cols name="rightId" type="NUMBER"/>
+    <cols name="groupId" type="NUMBER"/>
+    <fkeys references="//@table.2" cols="//@table.1/@cols.1"/>
+    <fkeys references="//@table.4" cols="//@table.1/@cols.2"/>
+  </table>
+  <table name="Right" pkey="//@table.2/@cols.1">
+    <cols name="rightType" type="VARCHAR2(3)"/>
+    <cols name="idRight" type="NUMBER"/>
+  </table>
+  <table name="Product" pkey="//@table.3/@cols.2">
+    <cols name="price" type="NUMBER"/>
+    <cols name="description" type="VARCHAR2(255)"/>
+    <cols name="number" type="NUMBER"/>
+  </table>
+  <table name="UserGroup" pkey="//@table.4/@cols.1">
+    <cols name="groupName" type="VARCHAR2(25)"/>
+    <cols name="idGroup" type="NUMBER"/>
+  </table>
+  <table name="Customer" pkey="//@table.5/@cols.3">
+    <cols name="address" type="VARCHAR2(255)"/>
+    <cols name="lastName" type="VARCHAR2(25)"/>
+    <cols name="firstName" type="VARCHAR2(25)"/>
+    <cols name="clientNumber" type="NUMBER"/>
+  </table>
+</rdbschema:RDBMSModel>

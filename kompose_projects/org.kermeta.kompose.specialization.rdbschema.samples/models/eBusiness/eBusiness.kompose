@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="ASCII"?>
+<kompose:Composer xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:kompose="http://www.kermeta.org/kompose" primaryModelURI="platform:/resource/org.kermeta.kompose.specialization.rdbschema.samples/models/eBusiness/eBusiness.rdbschema" aspectModelURI="platform:/resource/org.kermeta.kompose.specialization.rdbschema.samples/models/eBusiness/security.rdbschema" composedModelURI="platform:/resource/org.kermeta.kompose.specialization.rdbschema.samples/models/eBusiness/eBusiness_secure.rdbschema">
+  <predirectivesAM xsi:type="kompose:Set" propertyName="name">
+    <target xsi:type="kompose:NameRef" qname="security::User::idUser"/>
+    <value xsi:type="kompose:StringLiteral" value="clientNumber"/>
+  </predirectivesAM>
+  <predirectivesAM xsi:type="kompose:Set" propertyName="name">
+    <target xsi:type="kompose:NameRef" qname="security::User"/>
+    <value xsi:type="kompose:StringLiteral" value="Customer"/>
+  </predirectivesAM>
+  <predirectivesAM xsi:type="kompose:Set" propertyName="name">
+    <target xsi:type="kompose:NameRef" qname="security"/>
+    <value xsi:type="kompose:StringLiteral" value="eBusiness"/>
+  </predirectivesAM>
+</kompose:Composer>

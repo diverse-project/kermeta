@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rdbschema:RDBMSModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:rdbschema="http://www.kermeta.org/rdbschema.ecore" name="eBusiness">
+  <table name="Customer">
+    <cols name="clientNumber" type="NUMBER"/>
+    <cols name="firstName" type="VARCHAR2(25)"/>
+    <cols name="lastName" type="VARCHAR2(25)"/>
+    <cols name="address" type="VARCHAR2(255)"/>
+  </table>
+  <table name="Order" pkey="//@table.1/@cols.0">
+    <cols name="orderNum" type="NUMBER"/>
+    <cols name="product" type="NUMBER"/>
+    <cols name="orderClientNumber" type="NUMBER"/>
+    <cols name="total" type="NUMBER"/>
+    <cols name="quantity" type="NUMBER"/>
+    <fkeys references="//@table.2" cols="//@table.1/@cols.1"/>
+    <fkeys references="//@table.0" cols="//@table.1/@cols.2"/>
+  </table>
+  <table name="Product" pkey="//@table.2/@cols.0">
+    <cols name="number" type="NUMBER"/>
+    <cols name="description" type="VARCHAR2(255)"/>
+    <cols name="price" type="NUMBER"/>
+  </table>
+</rdbschema:RDBMSModel>

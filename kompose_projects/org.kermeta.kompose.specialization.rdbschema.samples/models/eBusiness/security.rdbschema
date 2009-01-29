@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rdbschema:RDBMSModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:rdbschema="http://www.kermeta.org/rdbschema.ecore" name="security">
+  <table name="User" pkey="//@table.0/@cols.0">
+    <cols name="idUser" type="NUMBER"/>
+    <cols name="firstName" type="VARCHAR2(25)"/>
+    <cols name="lastName" type="VARCHAR2(25)"/>
+  </table>
+  <table name="UserGroup" pkey="//@table.1/@cols.0">
+    <cols name="idGroup" type="NUMBER"/>
+    <cols name="groupName" type="VARCHAR2(25)"/>
+  </table>
+  <table name="Permission" pkey="//@table.2/@cols.0">
+    <cols name="idPermission" type="NUMBER"/>
+    <cols name="groupId" type="NUMBER"/>
+    <cols name="rightId" type="NUMBER"/>
+    <fkeys references="//@table.1" cols="//@table.2/@cols.1"/>
+    <fkeys references="//@table.3" cols="//@table.2/@cols.2"/>
+  </table>
+  <table name="Right" pkey="//@table.3/@cols.0">
+    <cols name="idRight" type="NUMBER"/>
+    <cols name="rightType" type="VARCHAR2(3)"/>
+  </table>
+</rdbschema:RDBMSModel>
