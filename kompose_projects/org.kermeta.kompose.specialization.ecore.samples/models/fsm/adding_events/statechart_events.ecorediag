@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<notation:Diagram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.1/notation" xmi:id="_kX0l4NtEEd2tUejiqd7NbA" type="EcoreTools" name="statechart_events" measurementUnit="Pixel">
+  <children xmi:type="notation:Node" xmi:id="_lXPbgNtEEd2tUejiqd7NbA" type="1001">
+    <children xmi:type="notation:Node" xmi:id="_lXZzkNtEEd2tUejiqd7NbA" type="4001"/>
+    <children xmi:type="notation:Node" xmi:id="_lXaaoNtEEd2tUejiqd7NbA" type="5001">
+      <styles xmi:type="notation:DrawerStyle" xmi:id="_lXaaodtEEd2tUejiqd7NbA"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_lXaaottEEd2tUejiqd7NbA"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_lXaao9tEEd2tUejiqd7NbA"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_lXbBsNtEEd2tUejiqd7NbA" type="5002">
+      <styles xmi:type="notation:DrawerStyle" xmi:id="_lXbBsdtEEd2tUejiqd7NbA"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_lXbBsttEEd2tUejiqd7NbA"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_lXbBs9tEEd2tUejiqd7NbA"/>
+    </children>
+    <styles xmi:type="notation:ShapeStyle" xmi:id="_lXPbgdtEEd2tUejiqd7NbA" fontName="Sans" fontHeight="10" fillColor="13761016" lineColor="0"/>
+    <element xmi:type="ecore:EClass" href="statechart_events.ecore#//Transition"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_lXPbgttEEd2tUejiqd7NbA" x="165" y="270"/>
+  </children>
+  <children xmi:type="notation:Node" xmi:id="_m8nd4NtEEd2tUejiqd7NbA" type="1001">
+    <children xmi:type="notation:Node" xmi:id="_m8osANtEEd2tUejiqd7NbA" type="4001"/>
+    <children xmi:type="notation:Node" xmi:id="_m8pTENtEEd2tUejiqd7NbA" type="5001">
+      <styles xmi:type="notation:DrawerStyle" xmi:id="_m8pTEdtEEd2tUejiqd7NbA"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_m8pTEttEEd2tUejiqd7NbA"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_m8pTE9tEEd2tUejiqd7NbA"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_m8p6INtEEd2tUejiqd7NbA" type="5002">
+      <styles xmi:type="notation:DrawerStyle" xmi:id="_m8p6IdtEEd2tUejiqd7NbA"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_m8p6IttEEd2tUejiqd7NbA"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_m8p6I9tEEd2tUejiqd7NbA"/>
+    </children>
+    <styles xmi:type="notation:ShapeStyle" xmi:id="_m8nd4dtEEd2tUejiqd7NbA" fontName="Sans" fontHeight="10" fillColor="13761016" lineColor="0"/>
+    <element xmi:type="ecore:EClass" href="statechart_events.ecore#//Event"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_m8nd4ttEEd2tUejiqd7NbA" x="165" y="180"/>
+  </children>
+  <children xmi:type="notation:Node" xmi:id="_p7SOcNtEEd2tUejiqd7NbA" type="1001">
+    <children xmi:type="notation:Node" xmi:id="_p7TckNtEEd2tUejiqd7NbA" type="4001"/>
+    <children xmi:type="notation:Node" xmi:id="_p7UDoNtEEd2tUejiqd7NbA" type="5001">
+      <styles xmi:type="notation:DrawerStyle" xmi:id="_p7UDodtEEd2tUejiqd7NbA"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_p7UDottEEd2tUejiqd7NbA"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_p7UDo9tEEd2tUejiqd7NbA"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_p7VRwNtEEd2tUejiqd7NbA" type="5002">
+      <styles xmi:type="notation:DrawerStyle" xmi:id="_p7VRwdtEEd2tUejiqd7NbA"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_p7V40NtEEd2tUejiqd7NbA"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_p7V40dtEEd2tUejiqd7NbA"/>
+    </children>
+    <styles xmi:type="notation:ShapeStyle" xmi:id="_p7SOcdtEEd2tUejiqd7NbA" fontName="Sans" fontHeight="10" fillColor="13761016" lineColor="0"/>
+    <element xmi:type="ecore:EClass" href="statechart_events.ecore#//Statemachine"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_p7SOcttEEd2tUejiqd7NbA" x="168" y="88"/>
+  </children>
+  <styles xmi:type="notation:DiagramStyle" xmi:id="_kX0l4dtEEd2tUejiqd7NbA"/>
+  <element xmi:type="ecore:EPackage" href="statechart_events.ecore#/"/>
+  <edges xmi:type="notation:Edge" xmi:id="_rLQokNtEEd2tUejiqd7NbA" type="3002" source="_p7SOcNtEEd2tUejiqd7NbA" target="_m8nd4NtEEd2tUejiqd7NbA">
+    <children xmi:type="notation:Node" xmi:id="_rLSdwNtEEd2tUejiqd7NbA" type="4011">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_rLTE0NtEEd2tUejiqd7NbA" x="-1" y="-25"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_rLTr4NtEEd2tUejiqd7NbA" type="4012">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_rLTr4dtEEd2tUejiqd7NbA" x="-13" y="12"/>
+    </children>
+    <styles xmi:type="notation:ConnectorStyle" xmi:id="_rLQokdtEEd2tUejiqd7NbA" lineColor="0"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_rLQokttEEd2tUejiqd7NbA" fontName="Sans" fontHeight="10"/>
+    <element xmi:type="ecore:EReference" href="statechart_events.ecore#//Statemachine/event"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_rLQok9tEEd2tUejiqd7NbA" points="[55, 4, -142, -15]$[247, 9, 50, -10]"/>
+  </edges>
+  <edges xmi:type="notation:Edge" xmi:id="_AWvH0NtFEd2tUejiqd7NbA" type="3002" source="_lXPbgNtEEd2tUejiqd7NbA" target="_m8nd4NtEEd2tUejiqd7NbA">
+    <children xmi:type="notation:Node" xmi:id="_AWvu4NtFEd2tUejiqd7NbA" type="4011">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_AWvu4dtFEd2tUejiqd7NbA" x="-17" y="-18"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_AWvu4ttFEd2tUejiqd7NbA" type="4012">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_AWwV8NtFEd2tUejiqd7NbA" y="16"/>
+    </children>
+    <styles xmi:type="notation:ConnectorStyle" xmi:id="_AWvH0dtFEd2tUejiqd7NbA" lineColor="0"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_AWvH0ttFEd2tUejiqd7NbA" fontName="Sans" fontHeight="10"/>
+    <element xmi:type="ecore:EReference" href="statechart_events.ecore#//Transition/trigger"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_AWvH09tFEd2tUejiqd7NbA" points="[-3, -20, -12, 83]$[-41, -94, -50, 9]"/>
+  </edges>
+</notation:Diagram>

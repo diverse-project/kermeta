@@ -1,0 +1,25 @@
+// Primary Model URI
+PM "platform:/resource/org.kermeta.kompose.specialization.ecore.samples/models/fsm/adding_concurrency/statechart_events.ecore"
+
+// Aspect Model URI
+AM "platform:/resource/org.kermeta.kompose.specialization.ecore.samples/models/fsm/adding_concurrency/concurrent_statechart.ecore" 
+
+// Composed Model URI
+CM "platform:/resource/org.kermeta.kompose.specialization.ecore.samples/models/fsm/statecharts.ecore"
+
+// predirectives for primary model
+PMPre {
+	// Removing specifities of compositeState to cope with the introduction of Region
+	statechart::CompositeState.eStructuralFeatures - statechart::CompositeState::states
+	statechart::CompositeState.eSuperTypes - statechart::State
+}
+
+// predirectives for aspect model
+AMPre {
+	// Rename package to cope with primary model root package
+	concurrent_statechart.name = "statechart"
+}
+
+// postdirectives
+Post {
+}

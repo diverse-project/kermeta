@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<notation:Diagram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.1/notation" xmi:id="_T28hcNssEd2msuL3xPXdMQ" type="EcoreTools" name="concurrent_statechart" measurementUnit="Pixel">
+  <children xmi:type="notation:Node" xmi:id="_kO0HwNssEd2msuL3xPXdMQ" type="1001">
+    <children xmi:type="notation:Node" xmi:id="_kO188NssEd2msuL3xPXdMQ" type="4001"/>
+    <children xmi:type="notation:Node" xmi:id="_kO2kANssEd2msuL3xPXdMQ" type="5001">
+      <styles xmi:type="notation:DrawerStyle" xmi:id="_kO2kAdssEd2msuL3xPXdMQ"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_kO2kAtssEd2msuL3xPXdMQ"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_kO2kA9ssEd2msuL3xPXdMQ"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_kO3LENssEd2msuL3xPXdMQ" type="5002">
+      <styles xmi:type="notation:DrawerStyle" xmi:id="_kO3LEdssEd2msuL3xPXdMQ"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_kO3LEtssEd2msuL3xPXdMQ"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_kO3LE9ssEd2msuL3xPXdMQ"/>
+    </children>
+    <styles xmi:type="notation:ShapeStyle" xmi:id="_kO0HwdssEd2msuL3xPXdMQ" fontName="Sans" fontHeight="10" fillColor="13761016" lineColor="0"/>
+    <element xmi:type="ecore:EClass" href="concurrent_statechart.ecore#//State"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_kO0HwtssEd2msuL3xPXdMQ" x="240" y="30"/>
+  </children>
+  <children xmi:type="notation:Node" xmi:id="_leaHYNssEd2msuL3xPXdMQ" type="1001">
+    <children xmi:type="notation:Node" xmi:id="_lebVgNssEd2msuL3xPXdMQ" type="4001"/>
+    <children xmi:type="notation:Node" xmi:id="_leb8kNssEd2msuL3xPXdMQ" type="5001">
+      <styles xmi:type="notation:DrawerStyle" xmi:id="_leb8kdssEd2msuL3xPXdMQ"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_leb8ktssEd2msuL3xPXdMQ"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_leb8k9ssEd2msuL3xPXdMQ"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_leb8lNssEd2msuL3xPXdMQ" type="5002">
+      <styles xmi:type="notation:DrawerStyle" xmi:id="_leb8ldssEd2msuL3xPXdMQ"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_leb8ltssEd2msuL3xPXdMQ"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_leb8l9ssEd2msuL3xPXdMQ"/>
+    </children>
+    <styles xmi:type="notation:ShapeStyle" xmi:id="_leaHYdssEd2msuL3xPXdMQ" fontName="Sans" fontHeight="10" fillColor="13761016" lineColor="0"/>
+    <element xmi:type="ecore:EClass" href="concurrent_statechart.ecore#//CompositeState"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_leaHYtssEd2msuL3xPXdMQ" x="225" y="180"/>
+  </children>
+  <children xmi:type="notation:Node" xmi:id="_49_FgNssEd2msuL3xPXdMQ" type="1001">
+    <children xmi:type="notation:Node" xmi:id="_4-AToNssEd2msuL3xPXdMQ" type="4001"/>
+    <children xmi:type="notation:Node" xmi:id="_4-ATodssEd2msuL3xPXdMQ" type="5001">
+      <styles xmi:type="notation:DrawerStyle" xmi:id="_4-ATotssEd2msuL3xPXdMQ"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_4-ATo9ssEd2msuL3xPXdMQ"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_4-ATpNssEd2msuL3xPXdMQ"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_4-Cv4NssEd2msuL3xPXdMQ" type="5002">
+      <styles xmi:type="notation:DrawerStyle" xmi:id="_4-Cv4dssEd2msuL3xPXdMQ"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_4-Cv4tssEd2msuL3xPXdMQ"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_4-Cv49ssEd2msuL3xPXdMQ"/>
+    </children>
+    <styles xmi:type="notation:ShapeStyle" xmi:id="_49_FgdssEd2msuL3xPXdMQ" fontName="Sans" fontHeight="10" fillColor="13761016" lineColor="0"/>
+    <element xmi:type="ecore:EClass" href="concurrent_statechart.ecore#//Region"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_49_FgtssEd2msuL3xPXdMQ" x="105" y="105"/>
+  </children>
+  <styles xmi:type="notation:DiagramStyle" xmi:id="_T28hcdssEd2msuL3xPXdMQ"/>
+  <element xmi:type="ecore:EPackage" href="concurrent_statechart.ecore#/"/>
+  <edges xmi:type="notation:Edge" xmi:id="_6sRMQNssEd2msuL3xPXdMQ" type="3002" source="_leaHYNssEd2msuL3xPXdMQ" target="_49_FgNssEd2msuL3xPXdMQ">
+    <children xmi:type="notation:Node" xmi:id="_6sSaYNssEd2msuL3xPXdMQ" type="4011">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_6sSaYdssEd2msuL3xPXdMQ" x="6" y="-30"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_6sSaYtssEd2msuL3xPXdMQ" type="4012">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_6sSaY9ssEd2msuL3xPXdMQ" x="6" y="21"/>
+    </children>
+    <styles xmi:type="notation:ConnectorStyle" xmi:id="_6sRMQdssEd2msuL3xPXdMQ" lineColor="0"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_6sRMQtssEd2msuL3xPXdMQ" fontName="Sans" fontHeight="10"/>
+    <element xmi:type="ecore:EReference" href="concurrent_statechart.ecore#//CompositeState/region"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_6sRMQ9ssEd2msuL3xPXdMQ" points="[-9, 0, 70, 72]$[-79, 0, 0, 72]$[-79, -51, 0, 21]"/>
+    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_6sYhANssEd2msuL3xPXdMQ" id="(0.08130081,0.4390244)"/>
+  </edges>
+  <edges xmi:type="notation:Edge" xmi:id="_BgZLcNstEd2msuL3xPXdMQ" type="3002" source="_49_FgNssEd2msuL3xPXdMQ" target="_kO0HwNssEd2msuL3xPXdMQ">
+    <children xmi:type="notation:Node" xmi:id="_BgZygNstEd2msuL3xPXdMQ" type="4011">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_BgZygdstEd2msuL3xPXdMQ" x="-10" y="-10"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_BgZygtstEd2msuL3xPXdMQ" type="4012">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_BgZyg9stEd2msuL3xPXdMQ" x="10" y="10"/>
+    </children>
+    <styles xmi:type="notation:ConnectorStyle" xmi:id="_BgZLcdstEd2msuL3xPXdMQ" lineColor="0"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_BgZLctstEd2msuL3xPXdMQ" fontName="Sans" fontHeight="10"/>
+    <element xmi:type="ecore:EReference" href="concurrent_statechart.ecore#//Region/states"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_BgZLc9stEd2msuL3xPXdMQ" points="[0, -20, -99, 73]$[0, -93, -99, 0]$[85, -93, -14, 0]"/>
+    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_Bgf5INstEd2msuL3xPXdMQ" id="(0.14,0.07317073)"/>
+  </edges>
+</notation:Diagram>

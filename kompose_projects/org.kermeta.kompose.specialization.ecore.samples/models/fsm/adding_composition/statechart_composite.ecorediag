@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<notation:Diagram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.1/notation" xmi:id="_tHFCkNskEd2p3-Fi3-CeqQ" type="EcoreTools" name="statechart_composite" measurementUnit="Pixel">
+  <children xmi:type="notation:Node" xmi:id="_vU9PYNskEd2p3-Fi3-CeqQ" type="1001">
+    <children xmi:type="notation:Node" xmi:id="_vU-dgNskEd2p3-Fi3-CeqQ" type="4001"/>
+    <children xmi:type="notation:Node" xmi:id="_vU_EkNskEd2p3-Fi3-CeqQ" type="5001">
+      <children xmi:type="notation:Node" xmi:id="_DXiM4NslEd2p3-Fi3-CeqQ" type="2001">
+        <element xmi:type="ecore:EAttribute" href="statechart_composite.ecore#//State/name"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_DXiM4dslEd2p3-Fi3-CeqQ"/>
+      </children>
+      <styles xmi:type="notation:DrawerStyle" xmi:id="_vU_EkdskEd2p3-Fi3-CeqQ"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_vU_EktskEd2p3-Fi3-CeqQ"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_vU_Ek9skEd2p3-Fi3-CeqQ"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_vU_ElNskEd2p3-Fi3-CeqQ" type="5002">
+      <styles xmi:type="notation:DrawerStyle" xmi:id="_vU_roNskEd2p3-Fi3-CeqQ"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_vU_rodskEd2p3-Fi3-CeqQ"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_vU_rotskEd2p3-Fi3-CeqQ"/>
+    </children>
+    <styles xmi:type="notation:ShapeStyle" xmi:id="_vU9PYdskEd2p3-Fi3-CeqQ" fontName="Sans" fontHeight="10" fillColor="13761016" lineColor="0"/>
+    <element xmi:type="ecore:EClass" href="statechart_composite.ecore#//State"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_vU9PYtskEd2p3-Fi3-CeqQ" x="180" y="75" height="61"/>
+  </children>
+  <children xmi:type="notation:Node" xmi:id="_cQQZ8NslEd2p3-Fi3-CeqQ" type="1001">
+    <children xmi:type="notation:Node" xmi:id="_cQRoENslEd2p3-Fi3-CeqQ" type="4001"/>
+    <children xmi:type="notation:Node" xmi:id="_cQRoEdslEd2p3-Fi3-CeqQ" type="5001">
+      <styles xmi:type="notation:DrawerStyle" xmi:id="_cQRoEtslEd2p3-Fi3-CeqQ"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_cQRoE9slEd2p3-Fi3-CeqQ"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_cQRoFNslEd2p3-Fi3-CeqQ"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_cQRoFdslEd2p3-Fi3-CeqQ" type="5002">
+      <styles xmi:type="notation:DrawerStyle" xmi:id="_cQRoFtslEd2p3-Fi3-CeqQ"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_cQRoF9slEd2p3-Fi3-CeqQ"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_cQRoGNslEd2p3-Fi3-CeqQ"/>
+    </children>
+    <styles xmi:type="notation:ShapeStyle" xmi:id="_cQQZ8dslEd2p3-Fi3-CeqQ" fontName="Sans" fontHeight="10" fillColor="13761016" lineColor="0"/>
+    <element xmi:type="ecore:EClass" href="statechart_composite.ecore#//CompositeState"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_cQQZ8tslEd2p3-Fi3-CeqQ" x="193" y="179"/>
+  </children>
+  <styles xmi:type="notation:DiagramStyle" xmi:id="_tHFCkdskEd2p3-Fi3-CeqQ"/>
+  <element xmi:type="ecore:EPackage" href="statechart_composite.ecore#/"/>
+  <edges xmi:type="notation:Edge" xmi:id="_daq-oNslEd2p3-Fi3-CeqQ" type="3003" source="_cQQZ8NslEd2p3-Fi3-CeqQ" target="_vU9PYNskEd2p3-Fi3-CeqQ">
+    <styles xmi:type="notation:ConnectorStyle" xmi:id="_daq-odslEd2p3-Fi3-CeqQ" routing="Tree" lineColor="0"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_daq-otslEd2p3-Fi3-CeqQ" fontName="Sans"/>
+    <element xsi:nil="true"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_daq-o9slEd2p3-Fi3-CeqQ" points="[-2, -20, 4, 55]$[-6, -64, 0, 11]"/>
+    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_dazhgNslEd2p3-Fi3-CeqQ" id="(0.5,0.8196721)"/>
+  </edges>
+  <edges xmi:type="notation:Edge" xmi:id="_LvMl8NsmEd2p3-Fi3-CeqQ" type="3002" source="_cQQZ8NslEd2p3-Fi3-CeqQ" target="_vU9PYNskEd2p3-Fi3-CeqQ">
+    <children xmi:type="notation:Node" xmi:id="_LvQ3YNsmEd2p3-Fi3-CeqQ" type="4011">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_LvQ3YdsmEd2p3-Fi3-CeqQ" x="-7" y="-25"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_LvRecNsmEd2p3-Fi3-CeqQ" type="4012">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_LvRecdsmEd2p3-Fi3-CeqQ" x="8" y="-19"/>
+    </children>
+    <styles xmi:type="notation:ConnectorStyle" xmi:id="_LvMl8dsmEd2p3-Fi3-CeqQ" lineColor="0"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_LvMl8tsmEd2p3-Fi3-CeqQ" fontName="Sans" fontHeight="10"/>
+    <element xmi:type="ecore:EReference" href="statechart_composite.ecore#//CompositeState/states"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_LvMl89smEd2p3-Fi3-CeqQ" points="[-2, 0, 5, 92]$[-27, 0, -20, 92]$[-27, -92, -20, 0]$[-15, -92, -8, 0]"/>
+    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_LvVv4NsmEd2p3-Fi3-CeqQ" id="(0.03,0.31707317)"/>
+    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_LvVv4dsmEd2p3-Fi3-CeqQ" id="(0.07258064,0.40983605)"/>
+  </edges>
+</notation:Diagram>

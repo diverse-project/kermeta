@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="ASCII"?>
+<kompose:Composer xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:kompose="http://www.kermeta.org/kompose" primaryModelURI="platform:/resource/org.kermeta.kompose.specialization.ecore.samples/models/fsm/adding_concurrency/statechart_events.ecore" aspectModelURI="platform:/resource/org.kermeta.kompose.specialization.ecore.samples/models/fsm/adding_concurrency/concurrent_statechart.ecore" composedModelURI="platform:/resource/org.kermeta.kompose.specialization.ecore.samples/models/fsm/statecharts.ecore">
+  <predirectivesPM xsi:type="kompose:Remove" propertyName="eStructuralFeatures">
+    <target xsi:type="kompose:NameRef" qname="statechart::CompositeState"/>
+    <value xsi:type="kompose:NameRef" qname="statechart::CompositeState::states"/>
+  </predirectivesPM>
+  <predirectivesPM xsi:type="kompose:Remove" propertyName="eSuperTypes">
+    <target xsi:type="kompose:NameRef" qname="statechart::CompositeState"/>
+    <value xsi:type="kompose:NameRef" qname="statechart::State"/>
+  </predirectivesPM>
+  <predirectivesAM xsi:type="kompose:Set" propertyName="name">
+    <target xsi:type="kompose:NameRef" qname="concurrent_statechart"/>
+    <value xsi:type="kompose:StringLiteral" value="statechart"/>
+  </predirectivesAM>
+</kompose:Composer>
