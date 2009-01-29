@@ -10,7 +10,7 @@
   </predirectivesPM>
   <predirectivesPM xsi:type="kompose:Set" propertyName="containment">
     <target xsi:type="kompose:NameRef" qname="P::A::c"/>
-    <value xsi:type="kompose:BooleanLiteral"/>
+    <value xsi:type="kompose:BooleanLiteral" value="false"/>
   </predirectivesPM>
   <predirectivesPM xsi:type="kompose:Create" className="Class" identifier="e"/>
   <predirectivesPM xsi:type="kompose:Create" className="Operation" identifier="op"/>
