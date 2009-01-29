@@ -8,4 +8,20 @@ source.. = src/
 output.. = bin/
 bin.includes = plugin.xml,\
                META-INF/,\
+               .,\
+               kermeta/,\
+               bin/,\
+               build.properties,\
+               .project,\
+               .classpath,\
+               zip_build.xml
+src.includes = kermeta/,\
+               .classpath,\
+               .project,\
+               META-INF/,\
+               bin/,\
+               build.properties,\
+               plugin.xml,\
+               src/,\
+               zip_build.xml
                .

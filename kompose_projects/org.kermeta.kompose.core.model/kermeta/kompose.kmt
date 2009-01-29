@@ -39,7 +39,7 @@ aspect abstract class Composer {
        	resource ?= repository.getResource(path)
         resource.load
         self.resources.add(resource)
-       result ?= resource.instances.one
+    	result ?= resource.instances.one
    end
    
    operation saveModelByUri(model : kompose::Mergeable, uri : String, metamodelUri : String) is do

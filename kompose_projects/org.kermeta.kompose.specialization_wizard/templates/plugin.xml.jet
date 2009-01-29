@@ -17,7 +17,7 @@ class="PluginXMLGenerator"
          <menu
                label="Kompose"
                path="additions"
-               id="<%=data.getPackage_name()%>.menu1">
+               id="org.kermeta.kompose.specialization.kompose.menu1">
             <separator
                   name="group1">
             </separator>
@@ -25,9 +25,9 @@ class="PluginXMLGenerator"
          <action
                label="Compose Models (<%=data.getModel_name()%>)"
                class="<%=data.getPopupPackage()%>.Composer"
-               menubarPath="<%=data.getPackage_name()%>.menu1/group1"
+               menubarPath="org.kermeta.kompose.specialization.kompose.menu1/group1"
                enablesFor="1"
-               id="<%=data.getPackage_name()%>.newAction">
+               id="<%=data.getPackage_name()%>.composer">
          </action>
       </objectContribution>
    </extension>

@@ -14,7 +14,7 @@ public class PluginBuildProperties
   }
 
   public final String NL = nl == null ? (System.getProperties().getProperty("line.separator")) : nl;
-  protected final String TEXT_1 = "source.. = src/" + NL + "output.. = bin/" + NL + "bin.includes = plugin.xml,\\" + NL + "               META-INF/,\\" + NL + "               .";
+  protected final String TEXT_1 = "source.. = src/" + NL + "output.. = bin/" + NL + "bin.includes = plugin.xml,\\" + NL + "               META-INF/,\\" + NL + "               .,\\" + NL + "               kermeta/,\\" + NL + "               bin/,\\" + NL + "               build.properties,\\" + NL + "               .project,\\" + NL + "               .classpath,\\" + NL + "               zip_build.xml" + NL + "src.includes = kermeta/,\\" + NL + "               .classpath,\\" + NL + "               .project,\\" + NL + "               META-INF/,\\" + NL + "               bin/,\\" + NL + "               build.properties,\\" + NL + "               plugin.xml,\\" + NL + "               src/,\\" + NL + "               zip_build.xml" + NL + "               .";
 
   public String generate(Object argument)
   {

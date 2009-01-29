@@ -28,7 +28,7 @@ public class SpecializeWizardPage extends WizardPage {
 	private ISelection selection;
 	
 	public SpecializeWizardPage(ISelection selection,SpecializerIntermediateDataContainer data){
-		super("Kompose Specialization wizard");
+		super("Kompose Specialization Wizard");
 		setTitle("New Kompose Specialization");
 		setDescription("This wizard creates a new plugin project extending the kompose framework, ready to be specialized.");
 		this.selection = selection;
@@ -120,9 +120,9 @@ public class SpecializeWizardPage extends WizardPage {
 		setControl(container);
 	}
 	private void initialize() {
-		this.composer_name.setText("foor_bar_specialization");
-		this.plugin_name.setText("org.foo.bar.specialization");
-		this.plugin_package.setText("org.foo.bar.specialization");
+		this.composer_name.setText("fooComposer");
+		this.plugin_name.setText("org.kermeta.kompose.specialization.foo");
+		this.plugin_package.setText("org.kermeta.kompose.specialization.foo");
 		this.main_package.setText("fooPackage");
 		this.model_name.setText("FooBarModel");
 	}
