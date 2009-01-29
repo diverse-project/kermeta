@@ -22,7 +22,6 @@ public class RegisterStartup implements IStartup {
    /*
     * This method register all the meta-model packages on startup
     */
-    @SuppressWarnings("unchecked")
 	public void earlyStartup() {
 
 		String strURI = null;
@@ -39,7 +38,6 @@ public class RegisterStartup implements IStartup {
 		}
 	}
 
-    @SuppressWarnings("unchecked")
 	private void registerPackages(EPackage pack) {
 		if( pack.getNsURI() != null && !pack.getNsURI().equals("") ) {
 			Registry.INSTANCE.put(pack.getNsURI(), pack);
