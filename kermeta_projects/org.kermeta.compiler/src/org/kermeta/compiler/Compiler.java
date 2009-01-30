@@ -1,4 +1,4 @@
-/* $Id: Compiler.java,v 1.19 2008-10-21 20:53:58 cfaucher Exp $
+/* $Id: Compiler.java,v 1.20 2009-01-30 08:58:47 cfaucher Exp $
  * Project   : fr.irisa.triskell.kermeta.compiler
  * File      : Compiler.java
  * License   : EPL
@@ -10,9 +10,16 @@
 
 package org.kermeta.compiler;
 
+import java.io.BufferedReader;
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
+import java.util.List;
+import java.util.Properties;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.ResourcesPlugin;
@@ -20,6 +27,7 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.NullProgressMonitor;
+import org.eclipse.core.runtime.Path;
 import org.eclipse.emf.codegen.ecore.genmodel.GenJDKLevel;
 import org.eclipse.emf.codegen.ecore.genmodel.GenModel;
 import org.eclipse.emf.codegen.util.CodeGenUtil;
@@ -32,6 +40,7 @@ import org.kermeta.compiler.common.KCompilerConstants;
 import org.kermeta.compiler.generator.helper.model.Context;
 import org.kermeta.compiler.generator.internal.actions.GenerateHelperAction;
 import org.kermeta.compiler.internal.ConfigurationCreator;
+import org.kermeta.compiler.util.CompilerProperties;
 import org.kermeta.compiler.util.CompilerUtil;
 
 import fr.irisa.triskell.eclipse.resources.ResourceHelper;
@@ -50,6 +59,8 @@ public class Compiler extends org.kermeta.compiler.Generator {
 	private Context compilationContext;
 	
 	private IProgressMonitor monitor;
+	
+	private Properties compilerProperties;
 	
 	/**
 	 * @deprecated
@@ -80,6 +91,7 @@ public class Compiler extends org.kermeta.compiler.Generator {
 		this.monitor = monitor;
 		
 		initContext();
+		initCompilerProperties(ecorefile.getLocation().removeFileExtension().addFileExtension("compiler.properties").toString());
 	}
 
 	/**
@@ -96,6 +108,7 @@ public class Compiler extends org.kermeta.compiler.Generator {
 		this.monitor = monitor;
 		
 		initContext();
+		initCompilerProperties(ecorefile.getLocation().removeFileExtension().addFileExtension("compiler.properties").toString());
 	}
 
 	/**
@@ -131,7 +144,7 @@ public class Compiler extends org.kermeta.compiler.Generator {
 				// Resolve prefix settings for each GenPackage with canGenerate()==true => with a classifier in this one
 				CompilerUtil.ePackageFixerAll(genModel);
 				
-				setCompiledPluginId(genModel);
+				fixCompilerProperties(genModel);
 				
 				// Set parameters in GenModel
 				setGenModelParameters(genModel);
@@ -157,19 +170,102 @@ public class Compiler extends org.kermeta.compiler.Generator {
 			
 			// Delete the old compiled sources
 			ResourceHelper.deleteIProject(compiledPluginId, true);
-			//Step 2: Generate the plugins
+			
+			//Step 2: Generate the plugin
 			this.run(args);
 			
-			// Create the Configuration model
+			// Set the persistence mapping maps
             ConfigurationCreator.createConfiguration(genModel, this.getCompilationContext());
 			
 			//Step 3: Generate the content of the simk file
 			compileHelpers();
+			
+			fixManifestMF();
+			fixBuildProperties();
 		
 		} else {
-			throw new IOException("IOException Compiler- The compilation fails: none ecore file was found");
+			throw new IOException("IOException Compiler - The compilation fails: none ecore file was found");
 		}
 
+	}
+	
+	private void fixManifestMF() {
+
+		IFile manifest_file = ResourcesPlugin.getWorkspace().getRoot().getFile(new Path(compiledPluginId + "/META-INF/MANIFEST.MF"));
+		
+		StringBuffer new_file = new StringBuffer();
+		
+		try {
+			
+			List<String> file_as_list = readStringByLine(manifest_file.getContents());
+			
+			for(String line : file_as_list) {
+				if( line.contains("Bundle-Version:") ) {
+					if( compilerProperties.containsKey(CompilerProperties.BUNDLE_VERSION) ) {
+						line = "Bundle-Version: " + this.compilerProperties.getProperty(CompilerProperties.BUNDLE_VERSION);
+					}
+				} else {
+					if( line.contains("Require-Bundle:") ) {
+						line += "\n org.eclipse.emf.codegen,"
+							+ "\n fr.irisa.triskell.eclipse.util,"
+							+ "\n fr.irisa.triskell.kermeta.model,"
+							+ "\n org.eclipse.emf.ecoretools.registration,";
+						
+						if( compilerProperties.containsKey(CompilerProperties.REQUIRE_BUNDLE)
+								&& !compilerProperties.getProperty(CompilerProperties.REQUIRE_BUNDLE).equals("") ) {
+							for(String dependency : compilerProperties.getProperty(CompilerProperties.REQUIRE_BUNDLE).replace(" ", "").split(",")) {
+								line += "\n " + dependency + ",";
+							}
+						}
+						
+					}
+				}
+				
+				new_file.append(line);
+				new_file.append("\n");
+			}
+			
+			manifest_file.delete(true, new NullProgressMonitor());
+			
+			IFile new_manifest_file = ResourceHelper.getOrCreateIFile(compiledPluginId + "/META-INF/MANIFEST.MF");
+			new_manifest_file.create(new ByteArrayInputStream(new_file.toString().getBytes()), true, new NullProgressMonitor());
+			
+		} catch (CoreException e) {
+			e.printStackTrace();
+		}
+		
+	}
+	
+	private void fixBuildProperties() {
+		/*Properties properties = new Properties();
+	    
+	    try {
+	        properties.load(new FileInputStream(ResourcesPlugin.getWorkspace().getRoot().getLocation().toString() + "/" + compiledPluginId + "/build.properties"));
+	        properties.setProperty(CompilerProperties.SOURCE, properties.getProperty(CompilerProperties.SOURCE) + ",\\\nutil/");
+	        FileOutputStream fos = new FileOutputStream("arg0");
+	        properties.store(fos, "arg1");
+	    } catch (FileNotFoundException e) {
+	    	e.printStackTrace();
+	    } catch (IOException e) {
+	    	e.printStackTrace();
+		}*/
+	}
+	
+	public static List<String> readStringByLine( InputStream in ){
+		
+		List<String> list = new ArrayList<String>();
+		
+		BufferedReader input = new BufferedReader(new InputStreamReader(in));
+		try {
+			String thisLine;
+			while ((thisLine = input.readLine()) != null) {
+				list.add(thisLine);
+		    }
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return list;
 	}
 
 	/**
@@ -194,9 +290,9 @@ public class Compiler extends org.kermeta.compiler.Generator {
 	 */
 	private void setGenModelParameters(GenModel genModel) {
 		genModel.setModelName(CodeGenUtil.capName(genModel.getModelName()));
-		genModel.setModelPluginID(compiledPluginId);
+		genModel.setModelPluginID(compilerProperties.getProperty(CompilerProperties.PLUGIN_ID));
 		// Model and edit sources are generated in the same plugin and in the same source folder
-		genModel.setModelDirectory("/" + compiledPluginId + "/src");
+		genModel.setModelDirectory("/" + compilerProperties.getProperty(CompilerProperties.PLUGIN_ID) + "/src");
 		genModel.setEditDirectory("");
 		// The editor and tests plugins are not generated
 		genModel.setEditorDirectory("");
@@ -218,7 +314,26 @@ public class Compiler extends org.kermeta.compiler.Generator {
 		genModel.setColorProviders(false);
 		genModel.setCreationIcons(false);
 		
-		//genModel.setCopyrightText("Copyright: IRISA/INRIA/Universite de Rennes 1 - License: EPL - Web site: http://www.kermeta.org");
+		if( compilerProperties.containsKey(CompilerProperties.COPYRIGHT_HEADER) ) {
+			genModel.setCopyrightText(compilerProperties.getProperty(CompilerProperties.COPYRIGHT_HEADER));
+		}
+	}
+	
+	private void fixCompilerProperties(GenModel genModel) {
+		
+		setCompiledPluginId(genModel);
+		
+		if(compilerProperties==null) {
+			compilerProperties = new Properties();
+			compilerProperties.setProperty(CompilerProperties.PLUGIN_ID, compiledPluginId);
+		} else {
+			if( compilerProperties.containsKey(CompilerProperties.PLUGIN_ID)
+					&& !compilerProperties.getProperty(CompilerProperties.PLUGIN_ID).equals("") ) {
+				compiledPluginId = compilerProperties.getProperty(CompilerProperties.PLUGIN_ID);
+			} else {
+				compilerProperties.setProperty(CompilerProperties.PLUGIN_ID, compiledPluginId);
+			}
+		}
 	}
 
 	/**
@@ -272,6 +387,11 @@ public class Compiler extends org.kermeta.compiler.Generator {
 	
 	private void initContext() {
 		this.compilationContext = new Context();
+	}
+	
+	private void initCompilerProperties(String properties_file_path) {
+		CompilerProperties prop = new CompilerProperties(properties_file_path);
+		this.compilerProperties = prop.getProperties();
 	}
 	
 	public Context getCompilationContext() {
