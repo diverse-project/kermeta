@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.4//EN"
 "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
-<!-- $Id: Traceability-MDK.docb.xml,v 1.1 2009-01-30 10:50:59 dvojtise Exp $ -->
+<!-- $Id: Traceability-MDK.docb.xml,v 1.2 2009-01-30 12:51:01 dvojtise Exp $ -->
 <book lang="en-US">
   <bookinfo>
     <title>Traceability MDK for Kermeta</title>
 
     <pubdate>Build date: @BUILD.DATE@</pubdate>
 
-    <pubdate>$Date: 2009-01-30 10:50:59 $</pubdate>
+    <pubdate>$Date: 2009-01-30 12:51:01 $</pubdate>
 
     <author>
       <firstname>Didier</firstname>
@@ -97,7 +97,7 @@
       		<varlistentry>
         		<term><emphasis role="strong"><filename role="strong">require "platform:/plugin/fr.irisa.triskell.traceability.model/model/kmt/Traceability_Behavior.kmt"</filename></emphasis></term>
         		<listitem>
-          			This file adds various helper operations to the Metaclasses of the Traceability. In partucular, it provides some support for optimizing the trace model and ensuring that there is one and only one refeence to a given Object. 
+          			This file adds various helper operations to the Metaclasses of the Traceability. In particular, it provides some support for optimizing the trace model and ensuring that there is one and only one refeence to a given Object. 
         		</listitem>
       		</varlistentry>      		 
 		</variablelist>
@@ -117,7 +117,7 @@
         </mediaobject>
     </figure>
     <para> Basically, a tracemodel is a set of Reference (textual or model) and a set of Trace.
- 		A Trace can be decorated by a Message that gives information about the who and why the trace was generated.
+ 		A Trace can be decorated by a Message that gives information about who and why the trace was generated.
  	</para>
  	<note> You choose the level of granurarilty of your traces and if they are optimized or not
 by optimized we mean garanting that there is one and only one ModelReference for a given Object. This optimization can be done while building the trace or in a post processing. 
