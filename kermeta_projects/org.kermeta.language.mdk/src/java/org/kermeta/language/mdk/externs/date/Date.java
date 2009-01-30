@@ -1,6 +1,6 @@
 
 
-/*$Id: Date.java,v 1.1 2009-01-27 13:40:01 cfaucher Exp $
+/*$Id: Date.java,v 1.2 2009-01-30 12:44:21 cfaucher Exp $
 * Project : org.kermeta.language.mdk
 * File : 	Date.java
 * License : EPL
@@ -25,7 +25,6 @@ public class Date {
 	/**
 	 * 
 	 * @param self
-	 * @param param0
 	 * @return
 	 */
 	public static RuntimeObject start(RuntimeObject self) {
@@ -45,12 +44,12 @@ public class Date {
 	public static RuntimeObject getTimeDiff(RuntimeObject self, RuntimeObject startDate) {
 		
 		java.lang.String self_time = fr.irisa.triskell.kermeta.runtime.basetypes.String.getValue(self.getProperties().get("time"));
-		java.lang.String param0_time = fr.irisa.triskell.kermeta.runtime.basetypes.String.getValue(self.getProperties().get("time"));
+		java.lang.String startDate_time = fr.irisa.triskell.kermeta.runtime.basetypes.String.getValue(self.getProperties().get("time"));
 		
 		//End
 		java.lang.Long self_time_long = new java.lang.Long(self_time);
 		//Start
-		java.lang.Long param0_time_long = new java.lang.Long(param0_time);
+		java.lang.Long param0_time_long = new java.lang.Long(startDate_time);
 		
 		//Create the resulting object
 		RuntimeObject result = self.getFactory().createObjectFromClassName("kermeta::standard::Integer");
