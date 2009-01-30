@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Kompose Specialization Composition Plug-in
 Bundle-SymbolicName: org.kermeta.kompose.specialization.rdbschema; singleton:=true
-Bundle-Version: 0.0.2
+Bundle-Version: 0.0.3
 Bundle-Activator: org.kermeta.kompose.specialization.rdbschema.activator.Activator
 Bundle-Vendor: Unknown
 Require-Bundle: org.eclipse.ui,
