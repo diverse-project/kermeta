@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.2"?>
+<plugin>
+
+   <extension
+         point="org.eclipse.help.toc">      
+      <toc
+            file="mainToc.xml"
+            primary="true">
+      </toc>
+      <toc file="build/eclipse.help/Traceability-MDK/toc.xml">
+      </toc>
+      <toc file="toc.xml">
+      </toc>
+   </extension>
+
+</plugin>

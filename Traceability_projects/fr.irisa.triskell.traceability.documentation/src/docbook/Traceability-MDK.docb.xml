@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.4//EN"
+"http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
+<!-- $Id: Traceability-MDK.docb.xml,v 1.1 2009-01-30 10:50:59 dvojtise Exp $ -->
+<book lang="en-US">
+  <bookinfo>
+    <title>Traceability MDK for Kermeta</title>
+
+    <pubdate>Build date: @BUILD.DATE@</pubdate>
+
+    <pubdate>$Date: 2009-01-30 10:50:59 $</pubdate>
+
+    <author>
+      <firstname>Didier</firstname>
+
+      <surname>Vojtisek</surname>
+    </author>
+
+    <keywordset>
+      <keyword>Kermeta</keyword>
+
+      <keyword>metamodeling</keyword>
+
+      <keyword>language</keyword>
+    </keywordset>
+
+    <subtitle>MDK manual</subtitle>
+
+    <bibliomisc>License EPL</bibliomisc>
+
+    <abstract>
+      <para>This document presents the Traceability Model Development Kit (MDK) for Kermeta.</para>
+    </abstract>
+
+    <publisher>
+      <publishername>INRIA</publishername>
+
+      <address><state>France</state>
+<otheraddr><ulink url="http://www.inria.fr">http://www.inria.fr</ulink></otheraddr></address>
+    </publisher>
+  </bookinfo>
+
+  <preface id="preface.link">
+    <title id="preface.title.link">Preface<phrase
+    id="preface"></phrase></title>
+
+    <para></para>
+    
+    <para>In this document we will focus on the Traceabilty MDK. This MDK applies to 
+    Traceabilty metamodel. Ie. it provides functionalities to manipulate traces.</para>
+
+    
+
+    <important>
+      <para>Kermeta and its MDKs are evolving softwares and despite that we put a lot of attention to this document, it may contain errors (more likely in the code samples). If you find any error or have some information that improves this document, please send it to us using the bug tracker in the forge: 
+
+      <ulink type="" url="http://gforge.inria.fr/tracker/?group_id=32">
+        <emphasis
+        role="strong">http://gforge.inria.fr/tracker/?group_id=32</emphasis>
+      </ulink>
+
+       or using the developer mailing list (kermeta-developers@lists.gforge.inria.fr) Last check: v1.2.1 
+    </para></important>
+
+    <tip><para>
+       The most update version of this document is available on line from 
+
+      <ulink type=""
+      url="http://www.kermeta.org/">http://www.kermeta.org</ulink>
+
+       . 
+    </para></tip>
+  </preface>
+
+  <chapter id="chapter_introduction.link">
+    <title id="chapter_introduction.title.link">Introduction to the Traceability MDK</title>
+
+    <para> The Model Development Kit for Kermeta contains various kind of codes 
+    that work with Tracability models: some helper classes and some transformations.
+	</para>
+	<tip><para>
+	To use them you simply have to add the corresponding require statement to 
+	your kermeta code. Then, the outline and the KermetaDoc views should help you to use its content.
+	</para></tip>
+	
+	<section>
+      	<title>Short description of the available <emphasis>require</emphasis></title>
+		<variablelist>
+      		<title>Traceability MDK available files</title>
+	  		<para>Currently, the MDK provides the following files :</para>
+      		<varlistentry>
+        		<term><emphasis role="strong"><filename role="strong">require "http://www.kermeta.org/Traceability"</filename></emphasis></term>
+        		<listitem>
+          			This is the Traceability metamodel itself, without behavior.
+        		</listitem>
+      		</varlistentry> 
+      		<varlistentry>
+        		<term><emphasis role="strong"><filename role="strong">require "platform:/plugin/fr.irisa.triskell.traceability.model/model/kmt/Traceability_Behavior.kmt"</filename></emphasis></term>
+        		<listitem>
+          			This file adds various helper operations to the Metaclasses of the Traceability. In partucular, it provides some support for optimizing the trace model and ensuring that there is one and only one refeence to a given Object. 
+        		</listitem>
+      		</varlistentry>      		 
+		</variablelist>
+    </section>
+  </chapter>
+  <chapter id="chapter_metamodel.link">
+    <title id="chapter_metamodel.title.link">Presentation of the Traceability Metamodel</title>
+    <para> This chapter presents the Metamodel and some considerations about how to use it.
+	</para>
+    <figure id="refIllustration01">
+    	<title>Traceability metamodel class diagram</title>
+
+        <mediaobject>
+        	<imageobject>
+            	<imagedata fileref="Traceability-MDK_figures/TraceabilityClassDiagram.png" />
+            </imageobject>
+        </mediaobject>
+    </figure>
+    <para> Basically, a tracemodel is a set of Reference (textual or model) and a set of Trace.
+ 		A Trace can be decorated by a Message that gives information about the who and why the trace was generated.
+ 	</para>
+ 	<note> You choose the level of granurarilty of your traces and if they are optimized or not
+by optimized we mean garanting that there is one and only one ModelReference for a given Object. This optimization can be done while building the trace or in a post processing. 
+    </note>
+  </chapter>
+</book>
