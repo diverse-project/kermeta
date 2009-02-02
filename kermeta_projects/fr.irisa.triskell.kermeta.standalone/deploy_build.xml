@@ -1,4 +1,4 @@
-<!-- $Id: deploy_build.xml,v 1.3 2008-07-23 06:48:24 dvojtise Exp $ -->
+<!-- $Id: deploy_build.xml,v 1.4 2009-02-02 16:12:33 dvojtise Exp $ -->
 <project name="kermeta_standalone" default="all" basedir=".">
         
     <description>
@@ -38,7 +38,7 @@
 		-->
 		<!-- retrieve and rename jars from kermeta -->
 		<copy todir="./lib/" flatten="true"> <!-- rename to traceability.jar -->
-			<fileset dir="${kermeta.plugins}" includes="**/fr.irisa.triskell.traceability_*.jar"/>
+			<fileset dir="${kermeta.plugins}" includes="**/fr.irisa.triskell.traceability.model_*.jar"/>
 		    <mapper type="merge" to="traceability.jar"/>
 		</copy>
 		<copy todir="./lib/" flatten="true"> <!-- rename main kermeta plugin to kermeta.jar -->
