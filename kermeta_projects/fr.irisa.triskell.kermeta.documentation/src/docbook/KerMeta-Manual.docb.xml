@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.4//EN"
 "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
-<!-- $Id: KerMeta-Manual.docb.xml,v 1.37 2009-02-02 09:23:23 dvojtise Exp $ -->
+<!-- $Id: KerMeta-Manual.docb.xml,v 1.38 2009-02-02 09:26:14 dvojtise Exp $ -->
 <book lang="en-US">
   <bookinfo>
     <title>Kermeta language</title>
 
     <pubdate>Build date: @BUILD.DATE@</pubdate>
-    <pubdate>$Date: 2009-02-02 09:23:23 $</pubdate>
+    <pubdate>$Date: 2009-02-02 09:26:14 $</pubdate>
 
     <author>
       <firstname>Zoé</firstname>
@@ -4768,7 +4768,7 @@ class testRequireJava inherits kermeta::kunit::TestCase
 	      	<para>Class is a bit special, since its name is a derived property.</para>
       </section>
       <section>
-      	<title>NamedElement view</title>
+      	<title>Type system view</title>
 
 			<figure id="refIllustrationTypeSystemBigPictureView">
 		        <title>Kermeta type system class diagram (the big picture)</title>
