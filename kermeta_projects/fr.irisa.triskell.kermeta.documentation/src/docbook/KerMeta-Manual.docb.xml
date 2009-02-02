@@ -1,56 +1,47 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.4//EN"
 "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
-<!-- $Id: KerMeta-Manual.docb.xml,v 1.36 2008-09-24 15:39:30 dvojtise Exp $ -->
+<!-- $Id: KerMeta-Manual.docb.xml,v 1.37 2009-02-02 09:23:23 dvojtise Exp $ -->
 <book lang="en-US">
   <bookinfo>
     <title>Kermeta language</title>
 
     <pubdate>Build date: @BUILD.DATE@</pubdate>
-
-    <pubdate>$Date: 2008-09-24 15:39:30 $</pubdate>
+    <pubdate>$Date: 2009-02-02 09:23:23 $</pubdate>
 
     <author>
       <firstname>Zoé</firstname>
-
       <surname>Drey</surname>
     </author>
 
     <author>
       <firstname>Cyril</firstname>
-
       <surname>Faucher</surname>
     </author>
 
     <author>
       <firstname>Franck</firstname>
-
       <surname>Fleurey</surname>
     </author>
 
     <author>
       <firstname>Vincent</firstname>
-
       <surname>Mahé</surname>
     </author>
 
     <author>
       <firstname>Didier</firstname>
-
       <surname>Vojtisek</surname>
     </author>
 
     <keywordset>
       <keyword>Kermeta</keyword>
-
       <keyword>metamodeling</keyword>
-
       <keyword>language</keyword>
     </keywordset>
 
     <subtitle>Reference manual</subtitle>
-
-    <bibliomisc>Licence EPL</bibliomisc>
+    <bibliomisc>License EPL</bibliomisc>
 
     <abstract>
       <para>This manual presents the various aspects of the Kermeta language.
@@ -553,7 +544,7 @@ smithBooks.addAll(
 
       <section>
         <title>Functions in Kermeta<phrase
-        id="sec:function-types"></phrase></title>
+        id="function-types.link"></phrase></title>
 
         <para>In order to implement and statically type check OCL-like
         iterators, Kermeta includes some limited functional features by
@@ -1675,7 +1666,7 @@ class A
 
       <section>
         <title>Using simple inheritance<phrase
-        id="set:simple-inheritance"></phrase></title>
+        id="sec_simple-inheritance.link"></phrase></title>
 
         <programlisting><emphasis role="strong">abstract</emphasis> <emphasis
             role="strong">class</emphasis> Person
@@ -2833,8 +2824,7 @@ aCollection2 := aCollection.<emphasis role="strong">collect</emphasis> { e |
       <section id="section_properties-opposite.link">
         <title id="section_properties-opposite.title.link">Attributes
         <emphasis>(attribute)</emphasis>, references
-        <emphasis>(reference)</emphasis> <phrase
-        id="sec:properties-opposite"></phrase></title>
+        <emphasis>(reference)</emphasis> </title>
 
         <para>We introduce here the 2 first cases, which are relationships
         between two concrete entities.</para>
@@ -4760,6 +4750,40 @@ class testRequireJava inherits kermeta::kunit::TestCase
 
       <para>So all the meaning of those metaclasses are very close to those
       described in the OMG standard specification.</para>
+      <section>
+      	<title>NamedElement view</title>
+
+			<figure id="refIllustrationNamedElementView">
+		        <title>NamedElement class diagram</title>		
+		        <mediaobject>
+		          <imageobject>
+		            <imagedata fileref="figures/kermeta_ecorediag/kermeta_structure_NamedElement.png" />
+		          </imageobject>
+		        </mediaobject>
+	      	</figure>
+	
+	      	<para>This figure presents the element in the structure package that have a name. 
+	      	Kermeta relies on in various situation (For example in the typechecking process). 
+	      	The containment hierarchy is also presented since it is used in the identification process.</para>
+	      	<para>Class is a bit special, since its name is a derived property.</para>
+      </section>
+      <section>
+      	<title>NamedElement view</title>
+
+			<figure id="refIllustrationTypeSystemBigPictureView">
+		        <title>Kermeta type system class diagram (the big picture)</title>
+		        <mediaobject>
+		          <imageobject>
+		            <imagedata fileref="figures/kermeta_ecorediag/kermeta_structure_TypeSystemBigPicture.png" />
+		          </imageobject>
+		        </mediaobject>
+	      	</figure>
+	
+	      	<para>This figure presents the global view of all the metaclasses involved in Kermeta type system.</para>
+	      	<para>Basically, you can notice the split between Type and TypeDefinion needed in order to handle generics.</para>
+	      	<para>The containment is also represented here.</para>
+	      	<para>TODO : if time : provide a set of small diagrams that focus of some elements of the type system.</para>
+      </section>
     </section>
 
     <section>
