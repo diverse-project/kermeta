@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feature
+      id="org.kermeta.interpreter.feature"
+      label="Kermeta interpreter Feature"
+      version="1.2.1.qualifier"
+      provider-name="IRISA/INRIA">
+
+   <description url="http://www.example.com/description">
+      [Enter Feature Description here.]
+   </description>
+
+   <copyright url="http://www.example.com/copyright">
+      [Enter Copyright Description here.]
+   </copyright>
+
+   <license url="http://www.example.com/license">
+      [Enter License Description here.]
+   </license>
+
+   <requires>
+      <import feature="fr.irisa.triskell.kermeta" version="1.2.0" match="greaterOrEqual"/>
+      <import plugin="fr.irisa.triskell.kermeta.model"/>
+      <import plugin="org.eclipse.emf.ecore.xmi"/>
+      <import plugin="org.eclipse.emf"/>
+      <import plugin="org.eclipse.core.resources"/>
+      <import plugin="org.eclipse.core.runtime"/>
+      <import plugin="fr.irisa.triskell.eclipse.util"/>
+      <import plugin="fr.irisa.triskell.traceability.model"/>
+      <import plugin="org.kermeta.merger"/>
+      <import plugin="org.eclipse.gymnast.runtime.core"/>
+      <import plugin="org.kermeta.io.loader"/>
+      <import plugin="fr.irisa.triskell.kermeta.io"/>
+      <import plugin="org.eclipse.debug.core"/>
+      <import plugin="org.junit4"/>
+      <import plugin="org.apache.commons.logging" version="1.0.4" match="compatible"/>
+      <import plugin="org.eclipse.emf.ecoretools.registration" version="1.0.99" match="compatible"/>
+      <import plugin="org.eclipse.ui"/>
+      <import plugin="org.eclipse.jdt.launching"/>
+      <import plugin="org.eclipse.jdt.core"/>
+      <import plugin="org.apache.commons.logging" version="1.0.4" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.debug.ui"/>
+      <import plugin="org.eclipse.ui.ide"/>
+      <import plugin="org.eclipse.jdt.ui"/>
+      <import plugin="org.eclipse.jdt.debug.ui"/>
+      <import plugin="org.eclipse.ui.workbench.texteditor"/>
+      <import plugin="org.eclipse.jface.text"/>
+      <import plugin="fr.irisa.triskell.kermeta.model.edit"/>
+      <import plugin="fr.irisa.triskell.kermeta.texteditor"/>
+   </requires>
+
+   <plugin
+         id="fr.irisa.triskell.kermeta.interpreter"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.kermeta.runner"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.kermeta.runner.ui"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+</feature>
