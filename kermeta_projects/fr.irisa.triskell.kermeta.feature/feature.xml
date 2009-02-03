@@ -2,7 +2,7 @@
 <feature
       id="fr.irisa.triskell.kermeta"
       label="Kermeta Workbench"
-      version="1.2.0"
+      version="1.2.0.qualifier"
       provider-name="IRISA/INRIA"
       image="images/kmt_32.gif">
    <install-handler/>
@@ -117,13 +117,6 @@ GPL license.
          unpack="false"/>
 
    <plugin
-         id="fr.irisa.triskell.kermeta.interpreter"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
          id="fr.irisa.triskell.kermeta.io"
          download-size="0"
          install-size="0"
@@ -187,20 +180,6 @@ GPL license.
          unpack="false"/>
 
    <plugin
-         id="org.kermeta.runner"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="org.kermeta.runner.ui"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
          id="org.kermeta.log4j.util"
          download-size="0"
          install-size="0"
@@ -230,6 +209,13 @@ GPL license.
 
    <plugin
          id="org.antlr.antlr2"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.kermeta.language.mdk"
          download-size="0"
          install-size="0"
          version="0.0.0"

@@ -5,16 +5,18 @@
       version="1.2.1.qualifier"
       provider-name="IRISA/INRIA">
 
-   <description url="http://www.example.com/description">
-      [Enter Feature Description here.]
+   <description url="http://www.kermeta.org">
+      Intepreter for Kermeta Feature
    </description>
 
-   <copyright url="http://www.example.com/copyright">
-      [Enter Copyright Description here.]
+   <copyright url="http://www.eclipse.org/legal/epl-v10.html">
+      Copyright : IRISA / INRIA
+All rights reserved.
    </copyright>
 
-   <license url="http://www.example.com/license">
-      [Enter License Description here.]
+   <license url="http://www.kermeta.org">
+      KerMeta workbench and most of its plugins are distributed under
+the terms of the EPL licence.
    </license>
 
    <requires>
