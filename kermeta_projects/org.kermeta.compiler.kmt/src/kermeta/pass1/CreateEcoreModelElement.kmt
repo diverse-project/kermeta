@@ -1,4 +1,4 @@
-/* $Id: CreateEcoreModelElement.kmt,v 1.44 2008-12-03 16:52:52 cfaucher Exp $
+/* $Id: CreateEcoreModelElement.kmt,v 1.45 2009-02-03 17:51:52 cfaucher Exp $
  * Creation date: February 1, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -44,8 +44,6 @@ aspect class ModelingUnit {
 		usingEntry.~value := ""
 		// Setting the details
 		ecoreAnnotation.details.add(usingEntry)
-		
-		//self.eachOwnedElement{ omu | omu.createEcoreModelElement(context) }
 
 		result := ecoreAnnotation
 	end
@@ -214,9 +212,6 @@ aspect class ClassDefinition {
 		ecoreClass.name := IdentifierHelper.new.getMangledIdentifier(self.name, context)
 		ecoreClass.~abstract := self.isAbstract
 		
-		/*if not (self.getEMFInstanceClassName() == "") then
-			ecoreClass.instanceClassName := self.getEMFInstanceClassName()
-		end*/
 		result := ecoreClass
 	end
 }
@@ -240,7 +235,6 @@ aspect class Operation {
 		if self.isAbstract then
 			var ecoreAnnotation : EAnnotation init EAnnotationHelper.new.createAbstract()
 			ecoreOperation.eAnnotations.add( ecoreAnnotation )
-			//self.container.asType(ClassDefinition).ecoreModelElement.~abstract := true
 		end 
 		result := ecoreOperation 
 	end
@@ -293,9 +287,8 @@ aspect class Property {
 	operation createEcoreModelElement(context : KM2EcoreContext) : EStructuralFeature is do
 		var ecoreStructuralFeature : EStructuralFeature
 		var current_type : Type init self.type.asType(Type)
-		//stdio.writeln("Create Property: " + self.name) + " - " + current_type.toString() + " - " + current_type.getTypeQName())
+		
 		if current_type.isValueType() or current_type.isEnumeration() or current_type.isEDataType() then
-			//stdio.writeln("Create Property2: " + self.name + " " + self.type.getTypeQName())
 			ecoreStructuralFeature := EAttribute.new
 			//ecoreStructuralFeature.iD := 
 		else
@@ -346,13 +339,10 @@ aspect class Tag {
 	operation createEcoreModelElement(context : KM2EcoreContext) : EAnnotation is do
 		var ecoreAnnotation : EAnnotation init EAnnotationHelper.new.getKermetaEAnnotation(self)
 		
-		if ( self.name.isVoid() ) then
-		
+		if self.name.isVoid() then
 			EAnnotationHelper.new.addEntry(ecoreAnnotation, KermetaEAnnotationKey.documentation.name.toString(), self.~value)
-			//ecoreAnnotation := EAnnotationHelper.new.createKermetaEAnnotation(KermetaEAnnotationKey.documentation.name.toString(), self.~value)
 		else
 			EAnnotationHelper.new.addEntry(ecoreAnnotation, self.name, self.~value)
-			//ecoreAnnotation := EAnnotationHelper.new.createKermetaEAnnotation(self.name, self.~value)
 		end
 		result := ecoreAnnotation
 	end
