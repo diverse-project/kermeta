@@ -1,4 +1,4 @@
-/* $Id: OperationHelper.kmt,v 1.18 2008-12-03 16:52:51 cfaucher Exp $
+/* $Id: OperationHelper.kmt,v 1.19 2009-02-03 17:58:06 cfaucher Exp $
  * Creation date: May 20, 2008
  * License: EPL
  * Copyright:
@@ -21,6 +21,8 @@ using simk
 
 aspect class Operation {
 
+	//reference implementationMethods : Operation [0..*]
+	
 	reference lambdaExpression : LambdaExpression [0..1]
 	
 	attribute cuid : String [0..1]
@@ -69,11 +71,9 @@ aspect class Operation {
 	operation mustBeCompiled() : Boolean is do
 		result := true
 		
-		var cd_container : ClassDefinition init self.container.asType(ClassDefinition)
-		
 		// This test is there, because some methods may be compiled as Static methods via Simk like the method: times on Integer
-		if cd_container.isValueType() then
-			if cd_container.getEMFInstanceClassName() != "" then
+		if self.owningClass.isValueType() then
+			if self.owningClass.getEMFInstanceClassName() != "" then
 				result := false
 			end
 		end
@@ -181,7 +181,7 @@ aspect class Operation {
 				param.name := p.name
 				
 				if not p.type.isInstanceOf(FunctionType) then
-					if (p.type.getTypeQName() == self.container.asType(ClassDefinition).qualifiedName) or (p.type.getTypeQName() == "kermeta::language::structure::Object") then
+					if (p.type.getTypeQName() == self.owningClass.qualifiedName) or (p.type.getTypeQName() == "kermeta::language::structure::Object") then
 						param.type := context.current_valueType.getEMFInstanceClassName()
 					else
 						param.type := p.type.createBehaviorJava(context)
@@ -200,7 +200,7 @@ aspect class Operation {
 			var sMReturn : SMReturn init SMReturn.new()
 			staticMethod.sMReturn := sMReturn
 			
-			//if self.type.getTypeQName() == self.container.asType(ClassDefinition).qualifiedName then
+			//if self.type.getTypeQName() == self.owningClass.qualifiedName then
 			if self.getWrapperValueTypeReturnType()!="" then
 				var map_infos : Hashtable<String, String> init self.getWrapperValueTypeReturnType().getPropertyInfos()
 				

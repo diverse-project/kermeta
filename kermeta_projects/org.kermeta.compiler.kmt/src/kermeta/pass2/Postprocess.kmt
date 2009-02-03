@@ -1,4 +1,4 @@
-/* $Id: Postprocess.kmt,v 1.12 2008-12-03 16:52:53 cfaucher Exp $ 
+/* $Id: Postprocess.kmt,v 1.13 2009-02-03 17:53:59 cfaucher Exp $ 
  * Creation : August 27, 2008
  * Licence  : EPL 
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -27,6 +27,15 @@ aspect class ModelingUnit {
 	operation postprocess( context : KM2EcoreContext ) : Void is do
 		self.compileSuperOperation(context)
 		self.cleanEObject()
+		
+		/*context.abstractOperations.each{ o |
+			if o.implementationMethods.isVoid().orElse{ e | o.implementationMethods.size()==0 } then
+				o.owningClass.subClassDefinitions.collect{e |
+					o.implementationMethods.exists{ m | m.owningClass==e}
+				}
+				stdio.writeln("abstractOperations: " + o.qualifiedName)
+			end
+		}*/
 	end
 	
 	operation compileSuperOperation( context : KM2EcoreContext ) : Void is do 
@@ -67,7 +76,7 @@ aspect class ModelingUnit {
 			// By default, a self parameter is added
 			var default_param : SMParameter init SMParameter.new
 			default_param.name := "self"
-			default_param.type := op.container.asType(ClassDefinition).qualifiedName.replace(context.KERMETA_SEPARATOR, context.JAVA_SEPARATOR)
+			default_param.type := op.owningClass.qualifiedName.replace(context.KERMETA_SEPARATOR, context.JAVA_SEPARATOR)
 			staticMethod.sMParameters.add(default_param)
 			
 			// Management of the Parameters

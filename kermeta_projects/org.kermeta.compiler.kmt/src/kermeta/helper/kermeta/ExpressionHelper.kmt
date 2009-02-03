@@ -1,4 +1,4 @@
-/* $Id: ExpressionHelper.kmt,v 1.34 2009-01-19 14:17:29 cfaucher Exp $
+/* $Id: ExpressionHelper.kmt,v 1.35 2009-02-03 17:58:06 cfaucher Exp $
  * Creation date: Jul 25, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -418,9 +418,9 @@ aspect class CallFeature {
 		
 		//stdio.writeln(" -- " + self.toString + " - " + self.staticOperation.toString + " - " + self.staticOperation.container().toString)
 		
-		if self.staticOperation.container().asType(ClassDefinition).isValueType()
+		if self.staticOperation.owningClass.isValueType()
 		
-			or (self.staticOperation.container().asType(ClassDefinition).qualifiedName=="kermeta::language::structure::Object"
+			or (self.staticOperation.owningClass.qualifiedName=="kermeta::language::structure::Object"
 				and (
 					context.frameworkOperations.contains(fName)
 						or ( (not target.isInstanceOf(CallVariable)) 
@@ -431,7 +431,7 @@ aspect class CallFeature {
 					)
 				)
 			
-			or (self.staticOperation.container().asType(ClassDefinition).qualifiedName=="kermeta::language::structure::Type"
+			or (self.staticOperation.owningClass.qualifiedName=="kermeta::language::structure::Type"
 				and (
 					context.frameworkOperations.contains(fName)
 						or ( (not target.isInstanceOf(CallVariable)) 
@@ -453,7 +453,7 @@ aspect class CallFeature {
 	operation isFromClass() : Boolean is do
 		result := false
 		if not self.staticOperation.isVoid() then
-			if self.staticOperation.container.asType(ClassDefinition).qualifiedName=="kermeta::language::structure::Class" then
+			if self.staticOperation.owningClass.qualifiedName=="kermeta::language::structure::Class" then
 				result := true
 			end
 		end
@@ -591,7 +591,7 @@ aspect class CallFeature {
 		/****************************/
 		/****************************/
 		/****************************/
-		//if self.target.staticType.getTypeQName() == self.staticOperation.container.asType(ClassDefinition).qualifiedName then
+		//if self.target.staticType.getTypeQName() == self.staticOperation.owningClass.qualifiedName then
 			ft_str := ft_str + self.staticOperation.createBehaviorJava(context)
 		/*else
 			ft_str := ft_str + self.getMoreAppropriateOperation().createBehaviorJava(context)

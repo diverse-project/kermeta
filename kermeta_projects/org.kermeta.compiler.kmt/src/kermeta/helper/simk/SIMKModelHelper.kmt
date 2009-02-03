@@ -1,4 +1,4 @@
-/* $Id: SIMKModelHelper.kmt,v 1.15 2008-12-03 16:52:52 cfaucher Exp $
+/* $Id: SIMKModelHelper.kmt,v 1.16 2009-02-03 17:57:20 cfaucher Exp $
  * Creation date: Jul 21, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -72,8 +72,8 @@ aspect class SIMKModel {
 		result := void
 		
 		var sMContext : SMContext init retrieveOrCreateContextWithClass(
-			op.container.asType(ClassDefinition).name + "Super",
-			op.container.asType(ClassDefinition).container.asType(Package).qualifiedName().replace(context.KERMETA_SEPARATOR, context.JAVA_SEPARATOR) + context.JAVA_SEPARATOR + "helper",
+			op.owningClass.name + "Super",
+			op.owningClass.container.asType(Package).qualifiedName().replace(context.KERMETA_SEPARATOR, context.JAVA_SEPARATOR) + context.JAVA_SEPARATOR + "helper",
 			SMUsage.Super,
 			context)
 		
@@ -108,8 +108,8 @@ aspect class SIMKModel {
 		result := void
 		
 		var sMContext : SMContext init retrieveOrCreateContextWithClass(
-			op.container.asType(ClassDefinition).name + "__" + op.getFinalName(context) + "__" + "Runner",
-			op.container.asType(ClassDefinition).container.asType(Package).qualifiedName().replace(context.KERMETA_SEPARATOR, context.JAVA_SEPARATOR) + context.JAVA_SEPARATOR + "runner",
+			op.owningClass.name + "__" + op.getFinalName(context) + "__" + "Runner",
+			op.owningClass.container.asType(Package).qualifiedName().replace(context.KERMETA_SEPARATOR, context.JAVA_SEPARATOR) + context.JAVA_SEPARATOR + "runner",
 			SMUsage.Runner,
 			context)
 		
