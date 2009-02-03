@@ -17,6 +17,40 @@
       [Enter License Description here.]
    </license>
 
+   <requires>
+      <import plugin="org.eclipse.core.runtime"/>
+      <import plugin="org.eclipse.emf.ecore"/>
+      <import plugin="org.eclipse.emf.codegen.ecore"/>
+      <import plugin="org.eclipse.ui"/>
+      <import plugin="org.eclipse.emf.codegen"/>
+      <import plugin="org.eclipse.emf.codegen.ecore.ui"/>
+      <import plugin="org.eclipse.emf.codegen.ui"/>
+      <import plugin="org.eclipse.core.resources"/>
+      <import plugin="fr.irisa.triskell.kermeta.model"/>
+      <import plugin="fr.irisa.triskell.eclipse.util"/>
+      <import plugin="fr.irisa.triskell.traceability.model"/>
+      <import plugin="org.eclipse.jdt.core"/>
+      <import plugin="org.eclipse.jdt.launching"/>
+      <import plugin="fr.irisa.triskell.kermeta.interpreter"/>
+      <import plugin="org.kermeta.merger"/>
+      <import plugin="org.kermeta.io.loader"/>
+      <import plugin="org.apache.commons.logging" version="1.0.4" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.jface"/>
+      <import plugin="org.eclipse.emf.ecore.editor"/>
+      <import plugin="fr.irisa.triskell.kermeta.io"/>
+      <import plugin="org.eclipse.emf"/>
+      <import plugin="org.eclipse.emf.common"/>
+      <import plugin="org.eclipse.jdt.ui"/>
+      <import plugin="org.eclipse.jface.text"/>
+      <import plugin="org.eclipse.emf.edit"/>
+      <import plugin="org.eclipse.emf.ecore.xmi"/>
+      <import plugin="org.eclipse.emf.edit.ui"/>
+      <import plugin="org.eclipse.ui.ide"/>
+      <import plugin="org.eclipse.emf.ecoretools.registration"/>
+      <import feature="fr.irisa.triskell.kermeta" version="1.2.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.jet.core" version="1.1.0" match="compatible"/>
+   </requires>
+
    <plugin
          id="org.kermeta.compiler"
          download-size="0"
