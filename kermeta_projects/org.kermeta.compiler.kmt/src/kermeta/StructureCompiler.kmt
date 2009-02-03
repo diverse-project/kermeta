@@ -1,4 +1,4 @@
-/* $Id: StructureCompiler.kmt,v 1.78 2009-01-19 14:17:30 cfaucher Exp $
+/* $Id: StructureCompiler.kmt,v 1.79 2009-02-03 23:55:06 cfaucher Exp $
  * Creation date: January 21, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -82,7 +82,7 @@ class Main {
 		context.initialize( modelInput, traceInput )
 		context.mode := mode
 		
-		//The compilation of the structure is composed of 2 passes: the first is dedicated to the creation of all the Ecore elements
+		// The compilation of the structure is composed of 2 passes: the first is dedicated to the creation of all the Ecore elements
 		// the second one consits to set the link between the created elements
 		context.mu.applyPass1(context)
 		
@@ -105,36 +105,7 @@ class Main {
 		
 		stdio.writeln("KermetaCompiler - Pass 2 is finished")
 		
-		// Save the generated ecore
-		//////////////context.ecoreOutputs.add(output)
-   		//var ecore_resource : Resource init context.outputRepository.createResource(output, "http://www.eclipse.org/emf/2002/Ecore")
-		//ecore_resource.instances.add(context.mu.ecoreModelElement)
-		//stdio.writeln("context.mu.ecoreModelElement: " + context.mu.ecoreModelElement.toString)
-		
-		/*context.mu.entryPoints.each{ e |
-			//ecore_resource.instances.add(e)
-		}*/
-		
-		//var resourceBag : Bag<Resource> init Bag<Resource>.new()
-				
-		//context.mu.ecorePackages.each{ p |
-			/*var output_final : String init output
-			
-			if resourceBag.size>0 then
-				output_final := output + "__" + p.name + ".ecore"
-			end
-			
-			var ecore_resource : Resource init context.outputRepository.createResource(output_final, "http://www.eclipse.org/emf/2002/Ecore")
-			ecore_resource.instances.add(p)
-			resourceBag.add(ecore_resource)*/
-			
-			//ecore_resource.instances.add(p)
-		//}
-		
-		//resourceBag.each{ res_ | res_.save() }
-		
 		stdio.writeln("Save the Ecore Model")
-		//ecore_resource.save()
 		
 		if splitEcore then
 			saveSplitEcore(output)
@@ -144,8 +115,7 @@ class Main {
 		
 		stdio.writeln("The Ecore Model has been saved")
 		
-		// Save the context to reuse it during the EMF Java generation
-		
+		// Save the context to reuse it during the EMF Java generation (i.e.: *.simk)
 		context.save()
 		
 		stdio.writeln("Stats:\n\tconditional + loop: " + context.inc_condStack.toString()
