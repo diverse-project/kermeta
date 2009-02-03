@@ -1,4 +1,4 @@
-/* $Id: 053_savingKM.main.kmt,v 1.5 2008-07-30 15:58:53 dvojtise Exp $
+/* $Id: 053_savingKM.main.kmt,v 1.6 2009-02-03 09:36:38 dvojtise Exp $
  * Creation date: June 14, 2006
  * License:
  * Copyright:
@@ -18,7 +18,7 @@ package savingKM;
 
 require kermeta
 
-require "platform:/plugin/fr.irisa.triskell.kermeta/src/kermeta/helpers/structure/ModelingUnitHelper.kmt"
+require "platform:/plugin/org.kermeta.language.mdk/src/kmt/language/helpers/structure/ModelingUnitHelper.kmt"
 
 using kermeta::interpreter
 using kermeta::standard
