@@ -1,5 +1,5 @@
 
-/*$Id: Loader.java,v 1.14 2009-01-20 15:44:54 cfaucher Exp $
+/*$Id: Loader.java,v 1.15 2009-02-04 17:33:54 cfaucher Exp $
 * Project : org.kermeta.compiler.generator
 * File : 	Loader.java
 * License : EPL
@@ -50,6 +50,22 @@ public class Loader extends SaverOrLoader {
 		ResourceSet rs = new ResourceSetImpl();
 		
 		org.eclipse.emf.ecore.resource.Resource resource = rs.getResource( URI.createURI(modelURI), true );
+		
+		/*** Maybe this source code could be used to improve performance
+		 * the first tries on the compiler itself are not concluant,
+		 * but maybe for other usages the gain will be better
+		 * please see at: http://www.eclipse.org/modeling/emf/docs/performance/EMFPerformanceTips.html
+		org.eclipse.emf.ecore.resource.Resource resource = rs.createResource( URI.createURI(modelURI));
+		java.util.Map<java.lang.String, java.lang.String> map_options = new java.util.HashMap<java.lang.String, java.lang.String>();
+		
+		map_options.put("OPTION_USE_PARSER_POOL", "org.eclipse.emf.ecore.xmi.XMLParserPool");
+		map_options.put("OPTION_USE_XML_NAME_TO_FEATURE_MAP", "java.util.Map");
+		
+		try {
+			resource.load(map_options);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}******/
 		
 		if( metamodelURI.equals("") ) {
 			metamodelURI = resource.getContents().get(0).eClass().getEPackage().getNsURI();
