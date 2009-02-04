@@ -1,4 +1,4 @@
-/* $Id: CompilerUtil.java,v 1.9 2008-10-21 20:53:58 cfaucher Exp $
+/* $Id: CompilerUtil.java,v 1.10 2009-02-04 00:21:06 cfaucher Exp $
  * Project   : fr.irisa.triskell.kermeta.compiler
  * File      : CompilerUtil.java
  * License   : EPL
@@ -30,7 +30,10 @@ public class CompilerUtil {
 	public static void ePackageFixerAll(GenModel genModel) {
 		for ( GenPackage _genPackage : genModel.getAllGenPackagesWithClassifiers() ) {
 			prefixFixer(_genPackage);
-			loadInitializationFixer(_genPackage);
+			
+			// Uncomment the following if you wish not support the initialize by loading for large ecore files
+			//loadInitializationFixer(_genPackage);
+			
 			multipleEditorPagesFixer(_genPackage);
 		}
 	}

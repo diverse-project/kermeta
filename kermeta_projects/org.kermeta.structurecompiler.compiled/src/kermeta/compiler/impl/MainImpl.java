@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: MainImpl.java,v 1.11 2009-01-21 09:16:13 cfaucher Exp $
+ * $Id: MainImpl.java,v 1.12 2009-02-04 00:19:32 cfaucher Exp $
  */
 package kermeta.compiler.impl;
 
@@ -118,10 +118,10 @@ public class MainImpl extends ObjectImpl implements Main {
 		kermeta.persistence.Resource ecore_resource = this.getContext()
 				.getOutputRepository().createResource(output,
 						"http://www.eclipse.org/emf/2002/Ecore");
-
+/*
 		ecore_resource.instances().add(
 				this.getContext().getMu().getEcoreModelElement());
-
+*/
 		//BIft:each
 
 		{
