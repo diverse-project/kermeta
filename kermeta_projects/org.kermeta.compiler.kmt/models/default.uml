@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<uml:Package xmi:version="2.1" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:uml="http://www.eclipse.org/uml2/2.1.0/UML" xmi:id="_YJMioPJKEd2lRe3x_pizoA" name="PackageTest">
+  <elementImport xmi:id="_YNqL4PJKEd2lRe3x_pizoA">
+    <importedElement xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
+  </elementImport>
+  <elementImport xmi:id="_YN9t4PJKEd2lRe3x_pizoA">
+    <importedElement xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+  </elementImport>
+  <elementImport xmi:id="_YN9t4fJKEd2lRe3x_pizoA">
+    <importedElement xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#UnlimitedNatural"/>
+  </elementImport>
+  <elementImport xmi:id="_YN9t4vJKEd2lRe3x_pizoA">
+    <importedElement xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+  </elementImport>
+  <packagedElement xmi:type="uml:Class" xmi:id="_ZrHoYPJKEd2lRe3x_pizoA" name="A"/>
+  <packagedElement xmi:type="uml:Class" xmi:id="_aHjFsPJKEd2lRe3x_pizoA" name="B"/>
+  <packagedElement xmi:type="uml:Association" xmi:id="_dTI38PJKEd2lRe3x_pizoA" name="a_to_b" memberEnd="_dTI38fJKEd2lRe3x_pizoA _dTI39PJKEd2lRe3x_pizoA">
+    <ownedEnd xmi:id="_dTI38fJKEd2lRe3x_pizoA" name="src" type="_ZrHoYPJKEd2lRe3x_pizoA" association="_dTI38PJKEd2lRe3x_pizoA">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_dTI38_JKEd2lRe3x_pizoA" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_dTI38vJKEd2lRe3x_pizoA" value="1"/>
+    </ownedEnd>
+    <ownedEnd xmi:id="_dTI39PJKEd2lRe3x_pizoA" name="dst" type="_aHjFsPJKEd2lRe3x_pizoA" association="_dTI38PJKEd2lRe3x_pizoA">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_dTI39vJKEd2lRe3x_pizoA" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_dTI39fJKEd2lRe3x_pizoA" value="1"/>
+    </ownedEnd>
+  </packagedElement>
+</uml:Package>

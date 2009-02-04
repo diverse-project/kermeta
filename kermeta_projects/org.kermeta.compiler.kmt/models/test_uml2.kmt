@@ -1,0 +1,32 @@
+/* $Id: test_uml2.kmt,v 1.1 2009-02-04 00:25:21 cfaucher Exp $ 
+ * Creation : February 3, 2009
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            cfaucher
+ */
+@mainClass "test_uml2::Main"
+@mainOperation "main"
+
+
+package test_uml2;
+
+
+require kermeta
+require "http://www.eclipse.org/uml2/2.1.0/UML"
+
+using kermeta::persistence
+
+class Main
+{
+	operation main() : Void is do 
+		stdio.writeln("Hello UML2 !")
+		
+		var rep : EMFRepository init EMFRepository.new()
+		
+		var uml_resource : Resource init rep.createResource("platform:/resource/org.kermeta.compiler.kmt/models/default.uml", "http://www.eclipse.org/uml2/2.1.0/UML")
+		uml_resource.load()
+		stdio.writeln("Root element of the UML2 model: " + uml_resource.instances.one.toString())
+		
+	end
+}
