@@ -1,5 +1,5 @@
 
-/* $Id: UMLResource.kmt,v 1.3 2008-02-25 16:54:01 dvojtise Exp $
+/* $Id: UMLResource.kmt,v 1.4 2009-02-04 18:34:52 cfaucher Exp $
  * Creation date: February 11, 2008
  * License: EPL
  * Copyright:	IRISA/INRIA
@@ -33,12 +33,18 @@ aspect class EMFRepository
 	 */
 	operation createUMLResource(uri : String, mm_uri : String) : Resource is do
 		var nUri : String
+		@compiledJavaExtern "org.kermeta.compil.runtime.helper.basetypes.RepositoryUtil.normalizeUri(uri)"
 		nUri ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Repository.normalizeUri(uri)
 
 	    // make sure we can deal with UML units
+	    @compiledJavaExtern "org.kermeta.compil.runtime.helper.basetypes.Resource.addUMLRuntimeUnitFactory()"
 		extern org::kermeta::uml2::profiles::kermeta::runtime::basetypes::Resource.addUMLRuntimeUnitFactory()
 		
-		if(not resources.collect{r | extern fr::irisa::triskell::kermeta::runtime::basetypes::Repository.normalizeUri(r.uri)}.contains(nUri)) then
+		if(not resources.collect{r |
+			@compiledJavaExtern "org.kermeta.compil.runtime.helper.basetypes.RepositoryUtil.normalizeUri(r.uri)"
+			extern fr::irisa::triskell::kermeta::runtime::basetypes::Repository.normalizeUri(r.uri)
+		}.contains(nUri)) then
+			@compiledJavaExtern "org.kermeta.compil.runtime.helper.basetypes.RepositoryUtil.createResource(this, uri, mm_uri)"
 			result ?= extern org::kermeta::uml2::profiles::kermeta::runtime::basetypes::Repository.createResource(self, uri, mm_uri)
 		else
 			var e : ResourceCreateException init ResourceCreateException.new
@@ -62,8 +68,10 @@ class UMLResource inherits EMFResource
 		self.clear		
 		
 		// make sure we can deal with UML units
+		@compiledJavaExtern "org.kermeta.compil.runtime.helper.basetypes.ResourceUtil.addUMLRuntimeUnitFactory()"
 		extern org::kermeta::uml2::profiles::kermeta::runtime::basetypes::Resource.addUMLRuntimeUnitFactory()
 		
+		@compiledJavaExtern "org.kermeta.compil.runtime.helper.persistence.Loader.load(this, getUri(), getMetaModelURI())"
 		extern fr::irisa::triskell::kermeta::runtime::basetypes::Resource.load(
 		    self, uri, metaModelURI, "UML"
 		)
