@@ -40,7 +40,7 @@
 	<!--
 	<xsl:param name="nominal.table.width" select="15cm"></xsl:param> -->
 	
-	<xsl:attribute-set name="informaltable.properties" xsl:use-attribute-sets="table.properties"/>
+	<xsl:attribute-set name="informaltable.properties" use-attribute-sets="table.properties"/>
 	
 	<xsl:attribute-set name="table.properties">
 		<xsl:attribute name="font-family">Helvetica</xsl:attribute>
