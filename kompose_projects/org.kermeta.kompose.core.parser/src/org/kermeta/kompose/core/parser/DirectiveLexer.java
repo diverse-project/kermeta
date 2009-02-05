@@ -1,6 +1,12 @@
 // $ANTLR : "DirectiveParser.g" -> "DirectiveLexer.java"$
 
-package org.kermeta.kompose.core.parser;
+package org.kermeta.kompose.core.parser; 
+
+import java.io.FileInputStream;
+import java.util.ArrayList;
+
+import kompose.*;
+import kompose.impl.KomposePackageImpl;
 
 
 import java.io.InputStream;
@@ -9,18 +15,23 @@ import antlr.TokenStreamIOException;
 import antlr.TokenStreamRecognitionException;
 import antlr.CharStreamException;
 import antlr.CharStreamIOException;
+import antlr.ANTLRException;
 import java.io.Reader;
 import java.util.Hashtable;
+import antlr.CharScanner;
 import antlr.InputBuffer;
 import antlr.ByteBuffer;
 import antlr.CharBuffer;
 import antlr.Token;
+import antlr.CommonToken;
 import antlr.RecognitionException;
 import antlr.NoViableAltForCharException;
+import antlr.MismatchedCharException;
 import antlr.TokenStream;
 import antlr.ANTLRHashString;
 import antlr.LexerSharedInputState;
 import antlr.collections.impl.BitSet;
+import antlr.SemanticException;
 
 public class DirectiveLexer extends antlr.CharScanner implements DirectiveParserTokenTypes, TokenStream
  {
@@ -38,12 +49,13 @@ public DirectiveLexer(LexerSharedInputState state) {
 	caseSensitiveLiterals = true;
 	setCaseSensitive(true);
 	literals = new Hashtable();
-	literals.put(new ANTLRHashString("AMPre", this), new Integer(11));
-	literals.put(new ANTLRHashString("AM", this), new Integer(6));
-	literals.put(new ANTLRHashString("PMPre", this), new Integer(8));
-	literals.put(new ANTLRHashString("Post", this), new Integer(12));
-	literals.put(new ANTLRHashString("CM", this), new Integer(7));
-	literals.put(new ANTLRHashString("PM", this), new Integer(4));
+	literals.put(new ANTLRHashString("AMPre", this), new Integer(12));
+	literals.put(new ANTLRHashString("AM", this), new Integer(7));
+	literals.put(new ANTLRHashString("PMPre", this), new Integer(9));
+	literals.put(new ANTLRHashString("Post", this), new Integer(13));
+	literals.put(new ANTLRHashString("CM", this), new Integer(8));
+	literals.put(new ANTLRHashString("EXT", this), new Integer(4));
+	literals.put(new ANTLRHashString("PM", this), new Integer(6));
 }
 
 public Token nextToken() throws TokenStreamException {
@@ -381,7 +393,7 @@ tryAgain:
 		
 		match('"');
 		{
-		_loop39:
+		_loop525:
 		do {
 			switch ( LA(1)) {
 			case '\\':
@@ -429,7 +441,7 @@ tryAgain:
 			}
 			default:
 			{
-				break _loop39;
+				break _loop525;
 			}
 			}
 		} while (true);
@@ -656,7 +668,7 @@ tryAgain:
 		}
 		}
 		{
-		_loop49:
+		_loop535:
 		do {
 			switch ( LA(1)) {
 			case 'a':  case 'b':  case 'c':  case 'd':
@@ -695,7 +707,7 @@ tryAgain:
 			}
 			default:
 			{
-				break _loop49;
+				break _loop535;
 			}
 			}
 		} while (true);
@@ -733,17 +745,17 @@ tryAgain:
 		}
 		}
 		{
-		int _cnt53=0;
-		_loop53:
+		int _cnt539=0;
+		_loop539:
 		do {
 			if (((LA(1) >= '0' && LA(1) <= '9'))) {
 				mDIGIT(false);
 			}
 			else {
-				if ( _cnt53>=1 ) { break _loop53; } else {throw new NoViableAltForCharException((char)LA(1), getFilename(), getLine(), getColumn());}
+				if ( _cnt539>=1 ) { break _loop539; } else {throw new NoViableAltForCharException((char)LA(1), getFilename(), getLine(), getColumn());}
 			}
 			
-			_cnt53++;
+			_cnt539++;
 		} while (true);
 		}
 		if ( _createToken && _token==null && _ttype!=Token.SKIP ) {
@@ -809,17 +821,17 @@ tryAgain:
 		}
 		}
 		{
-		int _cnt60=0;
-		_loop60:
+		int _cnt546=0;
+		_loop546:
 		do {
 			if (((LA(1) >= '0' && LA(1) <= '9'))) {
 				mDIGIT(false);
 			}
 			else {
-				if ( _cnt60>=1 ) { break _loop60; } else {throw new NoViableAltForCharException((char)LA(1), getFilename(), getLine(), getColumn());}
+				if ( _cnt546>=1 ) { break _loop546; } else {throw new NoViableAltForCharException((char)LA(1), getFilename(), getLine(), getColumn());}
 			}
 			
-			_cnt60++;
+			_cnt546++;
 		} while (true);
 		}
 		if ( _createToken && _token==null && _ttype!=Token.SKIP ) {
@@ -835,8 +847,8 @@ tryAgain:
 		int _saveIndex;
 		
 		{
-		int _cnt64=0;
-		_loop64:
+		int _cnt550=0;
+		_loop550:
 		do {
 			switch ( LA(1)) {
 			case ' ':
@@ -866,10 +878,10 @@ tryAgain:
 			}
 			default:
 			{
-				if ( _cnt64>=1 ) { break _loop64; } else {throw new NoViableAltForCharException((char)LA(1), getFilename(), getLine(), getColumn());}
+				if ( _cnt550>=1 ) { break _loop550; } else {throw new NoViableAltForCharException((char)LA(1), getFilename(), getLine(), getColumn());}
 			}
 			}
-			_cnt64++;
+			_cnt550++;
 		} while (true);
 		}
 		_ttype = Token.SKIP;
@@ -887,7 +899,7 @@ tryAgain:
 		
 		match("//");
 		{
-		_loop68:
+		_loop554:
 		do {
 			if ((_tokenSet_3.member(LA(1)))) {
 				{
@@ -895,7 +907,7 @@ tryAgain:
 				}
 			}
 			else {
-				break _loop68;
+				break _loop554;
 			}
 			
 		} while (true);
@@ -941,7 +953,7 @@ tryAgain:
 		
 		match("/**");
 		{
-		_loop74:
+		_loop560:
 		do {
 			switch ( LA(1)) {
 			case '\n':
@@ -999,7 +1011,7 @@ tryAgain:
 					match('\r');
 				}
 			else {
-				break _loop74;
+				break _loop560;
 			}
 			}
 		} while (true);
@@ -1030,7 +1042,7 @@ tryAgain:
 			match(_tokenSet_5);
 			}
 			{
-			_loop80:
+			_loop566:
 			do {
 				switch ( LA(1)) {
 				case '\n':
@@ -1088,7 +1100,7 @@ tryAgain:
 						match('\r');
 					}
 				else {
-					break _loop80;
+					break _loop566;
 				}
 				}
 			} while (true);

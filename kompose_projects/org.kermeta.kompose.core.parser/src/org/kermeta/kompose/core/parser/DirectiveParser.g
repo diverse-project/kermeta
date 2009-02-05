@@ -4,25 +4,11 @@ package org.kermeta.kompose.core.parser;
 import java.io.FileInputStream;
 import java.util.ArrayList;
 
-import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
-import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
-
-import antlr.*;
-import antlr.collections.*;
-
 import kompose.*;
-import kompose.impl.KomposeFactoryImpl;
 import kompose.impl.KomposePackageImpl;
-
 }
-
 class DirectiveParser extends Parser;
-
-{
-	
+{	
 	private static KomposeFactory factory = KomposePackageImpl.init().getKomposeFactory();
 	
 	public static void main(String[] args) throws Exception {
@@ -36,11 +22,7 @@ class DirectiveParser extends Parser;
 		} catch (TokenStreamException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
-	     //AST t = parser.getAST();
-	     //System.out.println(t.toStringTree());
-	    
-	     
+     	}
 	}
 	public ArrayList<String> errors = new ArrayList<String>();
 	public ArrayList<String> warnings = new ArrayList<String>();
@@ -57,8 +39,9 @@ class DirectiveParser extends Parser;
 
 dirUnit returns [Composer c = factory.createComposer()] :
 {
-	ArrayList pmpre, ampre, post;	
+	ArrayList pmpre, ampre, post;
 }
+	"EXT" mn:STRING_LITERAL
 	"PM" pm:STRING_LITERAL
 	"AM" am:STRING_LITERAL
 	"CM" cm:STRING_LITERAL
@@ -67,6 +50,7 @@ dirUnit returns [Composer c = factory.createComposer()] :
 	"AMPre" LCURLY ampre=directives RCURLY
 	"Post" LCURLY post=directives RCURLY
 {
+	c.setMetamodelName(mn.getText().substring(1, mn.getText().length()-1));
 	c.getPredirectivesPM().addAll(pmpre);
 	c.getPredirectivesAM().addAll(ampre);
 	c.getPostdirectives().addAll(post);

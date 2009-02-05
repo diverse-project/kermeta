@@ -2,39 +2,47 @@
 
 package org.kermeta.kompose.core.parser; 
 
+import java.io.FileInputStream;
+import java.util.ArrayList;
+
+import kompose.*;
+import kompose.impl.KomposePackageImpl;
+
+
 public interface DirectiveParserTokenTypes {
 	int EOF = 1;
 	int NULL_TREE_LOOKAHEAD = 3;
-	int LITERAL_PM = 4;
+	int LITERAL_EXT = 4;
 	int STRING_LITERAL = 5;
-	int LITERAL_AM = 6;
-	int LITERAL_CM = 7;
-	int LITERAL_PMPre = 8;
-	int LCURLY = 9;
-	int RCURLY = 10;
-	int LITERAL_AMPre = 11;
-	int LITERAL_Post = 12;
-	int CREATE = 13;
-	int ID = 14;
-	int AS = 15;
-	int DOLLAR = 16;
-	int DOT = 17;
-	int EQUALS = 18;
-	int PLUS = 19;
-	int MINUS = 20;
-	int INT_LITERAL = 21;
-	int TRUE = 22;
-	int FALSE = 23;
-	int COL_COL = 24;
-	int PRE = 25;
-	int POST = 26;
-	int CHAR_LITERAL = 27;
-	int ESC = 28;
-	int REAL_LITERAL = 29;
-	int EXPONENT = 30;
-	int DIGIT = 31;
-	int WS = 32;
-	int SINGLE_LINE_COMMENT = 33;
-	int CONTEXT_MULTI_LINE_COMMENT = 34;
-	int EMPTY_LINE_COMMENT = 35;
+	int LITERAL_PM = 6;
+	int LITERAL_AM = 7;
+	int LITERAL_CM = 8;
+	int LITERAL_PMPre = 9;
+	int LCURLY = 10;
+	int RCURLY = 11;
+	int LITERAL_AMPre = 12;
+	int LITERAL_Post = 13;
+	int CREATE = 14;
+	int ID = 15;
+	int AS = 16;
+	int DOLLAR = 17;
+	int DOT = 18;
+	int EQUALS = 19;
+	int PLUS = 20;
+	int MINUS = 21;
+	int INT_LITERAL = 22;
+	int TRUE = 23;
+	int FALSE = 24;
+	int COL_COL = 25;
+	int PRE = 26;
+	int POST = 27;
+	int CHAR_LITERAL = 28;
+	int ESC = 29;
+	int REAL_LITERAL = 30;
+	int EXPONENT = 31;
+	int DIGIT = 32;
+	int WS = 33;
+	int SINGLE_LINE_COMMENT = 34;
+	int CONTEXT_MULTI_LINE_COMMENT = 35;
+	int EMPTY_LINE_COMMENT = 36;
 }

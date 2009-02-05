@@ -11,21 +11,25 @@ import kompose.impl.KomposePackageImpl;
 
 import antlr.TokenBuffer;
 import antlr.TokenStreamException;
+import antlr.TokenStreamIOException;
+import antlr.ANTLRException;
+import antlr.LLkParser;
 import antlr.Token;
 import antlr.TokenStream;
 import antlr.RecognitionException;
 import antlr.NoViableAltException;
+import antlr.MismatchedTokenException;
+import antlr.SemanticException;
 import antlr.ParserSharedInputState;
 import antlr.collections.impl.BitSet;
 
 public class DirectiveParser extends antlr.LLkParser       implements DirectiveParserTokenTypes
  {
-
 	
 	private static KomposeFactory factory = KomposePackageImpl.init().getKomposeFactory();
 	
 	public static void main(String[] args) throws Exception {
-		 DirectiveLexer lexer = new DirectiveLexer(new FileInputStream("dir1.cd"));
+		 DirectiveLexer lexer = new DirectiveLexer(new FileInputStream("/home/mclavreu/workspaceTestParser/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/dir1.cd"));
 	     DirectiveParser parser = new DirectiveParser(lexer);
 	     try {
 			parser.dirUnit();
@@ -35,11 +39,7 @@ public class DirectiveParser extends antlr.LLkParser       implements DirectiveP
 		} catch (TokenStreamException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
-	     //AST t = parser.getAST();
-	     //System.out.println(t.toStringTree());
-	    
-	     
+     	}
 	}
 	public ArrayList<String> errors = new ArrayList<String>();
 	public ArrayList<String> warnings = new ArrayList<String>();
@@ -79,14 +79,18 @@ public DirectiveParser(ParserSharedInputState state) {
 	public final Composer  dirUnit() throws RecognitionException, TokenStreamException {
 		Composer c = factory.createComposer();
 		
+		Token  mn = null;
 		Token  pm = null;
 		Token  am = null;
 		Token  cm = null;
 		
 		try {      // for error handling
 			
-				ArrayList pmpre, ampre, post;	
+				ArrayList pmpre, ampre, post;
 			
+			match(LITERAL_EXT);
+			mn = LT(1);
+			match(STRING_LITERAL);
 			match(LITERAL_PM);
 			pm = LT(1);
 			match(STRING_LITERAL);
@@ -109,6 +113,7 @@ public DirectiveParser(ParserSharedInputState state) {
 			post=directives();
 			match(RCURLY);
 			
+				c.setMetamodelName(mn.getText().substring(1, mn.getText().length()-1));
 				c.getPredirectivesPM().addAll(pmpre);
 				c.getPredirectivesAM().addAll(ampre);
 				c.getPostdirectives().addAll(post);
@@ -133,14 +138,14 @@ public DirectiveParser(ParserSharedInputState state) {
 				ElementDirective d = null;
 			
 			{
-			_loop4:
+			_loop490:
 			do {
 				if ((_tokenSet_1.member(LA(1)))) {
 					d=directive();
 					lst.add(d);
 				}
 				else {
-					break _loop4;
+					break _loop490;
 				}
 				
 			} while (true);
@@ -496,7 +501,7 @@ public DirectiveParser(ParserSharedInputState state) {
 			match(ID);
 			val+=str1.getText();
 			{
-			_loop21:
+			_loop507:
 			do {
 				if ((LA(1)==COL_COL)) {
 					match(COL_COL);
@@ -505,7 +510,7 @@ public DirectiveParser(ParserSharedInputState state) {
 					val+="::"+strn.getText();
 				}
 				else {
-					break _loop21;
+					break _loop507;
 				}
 				
 			} while (true);
@@ -524,8 +529,9 @@ public DirectiveParser(ParserSharedInputState state) {
 		"EOF",
 		"<2>",
 		"NULL_TREE_LOOKAHEAD",
-		"\"PM\"",
+		"\"EXT\"",
 		"STRING_LITERAL",
+		"\"PM\"",
 		"\"AM\"",
 		"\"CM\"",
 		"\"PMPre\"",
@@ -564,22 +570,22 @@ public DirectiveParser(ParserSharedInputState state) {
 	}
 	public static final BitSet _tokenSet_0 = new BitSet(mk_tokenSet_0());
 	private static final long[] mk_tokenSet_1() {
-		long[] data = { 14770208L, 0L};
+		long[] data = { 29540384L, 0L};
 		return data;
 	}
 	public static final BitSet _tokenSet_1 = new BitSet(mk_tokenSet_1());
 	private static final long[] mk_tokenSet_2() {
-		long[] data = { 1024L, 0L};
+		long[] data = { 2048L, 0L};
 		return data;
 	}
 	public static final BitSet _tokenSet_2 = new BitSet(mk_tokenSet_2());
 	private static final long[] mk_tokenSet_3() {
-		long[] data = { 14771232L, 0L};
+		long[] data = { 29542432L, 0L};
 		return data;
 	}
 	public static final BitSet _tokenSet_3 = new BitSet(mk_tokenSet_3());
 	private static final long[] mk_tokenSet_4() {
-		long[] data = { 14902304L, 0L};
+		long[] data = { 29804576L, 0L};
 		return data;
 	}
 	public static final BitSet _tokenSet_4 = new BitSet(mk_tokenSet_4());

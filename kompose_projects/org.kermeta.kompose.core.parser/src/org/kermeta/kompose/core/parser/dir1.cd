@@ -1,5 +1,9 @@
+EXT "ecore"
+PM ""
+AM ""
+CM ""
 // predirectives
-pre {
+PMPre {
 
 	Package::A::ab.upperBound = 5 
 
@@ -27,8 +31,9 @@ pre {
 	
 	
 }
+AMPre{}
 
 // postdirectives
-post {
+Post {
 
 }
