@@ -1,0 +1,57 @@
+%% $Id: lstlang0.sty,v 1.1 2009-02-05 14:06:43 mclavreu Exp $
+%% Project : fr.irisa.triskell.kermeta.documentation
+%% File : 	lstlang0.sty
+%% Copyright : IRISA / INRIA / Universite de Rennes 1
+%% ----------------------------------------------------------------------------
+%% Creation date : 05 fevrier 2009
+%% Authors : bmorin, mclavreu
+%%
+%%
+\ProvidesFile{lstlang0.sty}
+    [2009/02/05 0.1 listings language file]
+
+%% Kermeta Language
+\definecolor{KRed}{rgb}{0.59,0,0}
+\definecolor{KBlue}{rgb}{0,0,0.59}
+\definecolor{KBlack}{rgb}{0,0,0}
+\definecolor{KGreen}{rgb}{0,0.59,0}
+\definecolor{KPurple}{rgb}{0.5,0,0.47}
+\definecolor{KOliveGreen}{cmyk}{0.64,0,0.95,0.40}
+
+\lstdefinelanguage{kermeta}
+{
+morekeywords=[0]{ require, using, extern, pre, post, inv},
+morekeywords=[1]{ package, inherits, class, attribute, reference, property, readonly, getter, is, setter, alias, enumeration, operation, method },
+morekeywords=[2]{ aspect, abstract },
+morekeywords=[3]{ do, end, function, rescue, from, until, loop, if, then, else, raise, var, init, raises },
+morekeywords=[4]{ true, false, void, result, value, self, super },
+morekeywords=[5]{ bag, set, seq, oset, Void},
+morekeywords=[6]{ and, or, not },
+sensitive=true,
+morecomment=[l]{//},
+morecomment=[s]{/*}{*/},
+morestring=[b]",
+}
+
+\lstset{language=kermeta,
+   basicstyle=\ttfamily,
+   keywordstyle=[0]\bf\color{KRed},
+   keywordstyle=[1]\bf\color{KBlue},
+   keywordstyle=[2]\textit\bf\color{KBlue},
+   keywordstyle=[3]\bf\color{KBlue},
+   keywordstyle=[4]\textit\bf\color{KPurple},
+   keywordstyle=[5]\bf\color{KBlack},
+   keywordstyle=[6]\bf\color{KPurple},
+   commentstyle=\color{KOliveGreen},
+   tabsize=2,
+   breaklines=true,
+%   frame=single,
+%   backgroundcolor=\color{Gris}    
+}
+
+\endinput
+
+%% End of file `lstlang0.sty'.
+
+
+  
