@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.4//EN"
+"http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
+<!-- $Id: Ecore-MDK.docb.xml,v 1.1 2009-02-05 16:21:10 dvojtise Exp $ -->
+<book lang="en-US">
+  <bookinfo>
+    <title>Ecore MDK for Kermeta</title>
+
+    <pubdate>Build date: @BUILD.DATE@</pubdate>
+
+    <pubdate>$Date: 2009-02-05 16:21:10 $</pubdate>
+
+    <author>
+      <firstname>Didier</firstname>
+      <surname>Vojtisek</surname>
+    </author>
+
+    <keywordset>
+      <keyword>Kermeta</keyword>
+      <keyword>metamodeling</keyword>
+      <keyword>language</keyword>
+    </keywordset>
+
+    <subtitle>Ecore MDK manual</subtitle>
+
+    <bibliomisc>License EPL</bibliomisc>
+
+    <abstract>
+      <para>This document presents the Ecore Model Development Kit (MDK) for Kermeta.</para>
+    </abstract>
+
+    <publisher>
+      <publishername>INRIA</publishername>
+
+      <address><state>France</state>
+<otheraddr><ulink url="http://www.inria.fr">http://www.inria.fr</ulink></otheraddr></address>
+    </publisher>
+  </bookinfo>
+
+  <preface id="preface.link">
+    <title id="preface.title.link">Preface<phrase
+    id="preface"></phrase></title>
+
+    <para></para>
+    
+    <para>In this document we will focus on the Ecore MDK. This MDK applies to 
+    Ecore metamodel.</para>
+
+    
+
+    <important>
+      <para>Kermeta and its MDKs are evolving softwares and despite that we put a lot of attention to this document, it may contain errors (more likely in the code samples). If you find any error or have some information that improves this document, please send it to us using the bug tracker in the forge: 
+
+      <ulink type="" url="http://gforge.inria.fr/tracker/?group_id=32">
+        <emphasis
+        role="strong">http://gforge.inria.fr/tracker/?group_id=32</emphasis>
+      </ulink>
+
+       or using the developer mailing list (kermeta-developers@lists.gforge.inria.fr) Last check: v1.2.1 
+    </para></important>
+
+    <tip><para>
+       The most update version of this document is available on line from 
+
+      <ulink type=""
+      url="http://www.kermeta.org/">http://www.kermeta.org</ulink>
+
+       . 
+    </para></tip>
+  </preface>
+
+  <chapter id="chapter_introduction.link">
+    <title id="chapter_introduction.title.link">Introduction to the Ecore MDK</title>
+
+    <para> The Model Development Kit for Kermeta contains various kind of codes 
+    that work with Ecore models: some helper classes and some transformations.
+	</para>
+	<tip><para>
+	To use them you simply have to add the corresponding require statement to 
+	your kermeta code. Then, the outline and the KermetaDoc views should help you to use its content.
+	</para></tip>
+	
+	<section>
+      	<title>Short description of the available <emphasis>require</emphasis></title>
+		<variablelist>
+      		<title>Ecore MDK available files</title>
+	  		<para>Currently, the MDK provides the following files :</para>
+      		<varlistentry>
+        		<term><emphasis role="strong"><filename role="strong">require "http://www.eclipse.org/emf/2002/Ecore"</filename></emphasis></term>
+        		<listitem><simpara>
+          			This is the Ecore metamodel itself, without behavior. All other files have a direct or indirect dependency to that one.
+        		</simpara></listitem>
+      		</varlistentry> 
+      		<varlistentry>
+        		<term><emphasis role="strong"><filename role="strong">require "platform:/plugin/fr.irisa.triskell.kermeta.ecore/src/kermeta/ecore_behavior.kmt"</filename></emphasis></term>
+        		<listitem><simpara>       			
+					This file adds the behavior on all metaclasses of Ecore metamodel. 
+        		</simpara></listitem>
+      		</varlistentry> 
+      		<varlistentry>
+        		<term><emphasis role="strong"><filename role="strong">require "platform:/plugin/fr.irisa.triskell.kermeta.ecore/src/kermeta/helpers/EcoreHelper.kmt"</filename></emphasis></term>
+        		<listitem><simpara>       			
+					This file contains some helper classes for loading Ecore models, retreiving elements in 
+					the Ecore model (by name for example), adding EAnnotation to the model, ... 
+        		</simpara></listitem>
+      		</varlistentry>  
+      		<varlistentry>
+        		<term><emphasis role="strong"><filename role="strong">require "platform:/plugin/fr.irisa.triskell.kermeta.ecore/src/kermeta/transformations/Patterns4Ecore.kmt"</filename></emphasis></term>
+        		<listitem> <simpara>      			
+					This file contains a transformation class that allows to transform your Ecore model and 
+					apply Design Patterns to it. Provided Design Pattern (and variants) are : Visitor, Command, 
+					Builder and Observer.
+        		</simpara></listitem>
+      		</varlistentry>  
+      		<varlistentry>
+        		<term><emphasis role="strong"><filename role="strong">require "platform:/plugin/fr.irisa.triskell.kermeta.ecore/src/kermeta/transformations/ContainmentBasedActionPerformerGenerator.kmt"</filename></emphasis></term>
+        		<listitem>  <simpara>     			
+					This file contains a transformation class that allows to generate a visitor to traverse 
+					the EReferences that are isComposite by using the Aspect way. The result is a kmt file 
+					containing the architecture to perform actions (function type passed in parameter) during 
+					the traverse of a model.
+        		</simpara></listitem>
+      		</varlistentry>  
+      		<varlistentry>
+        		<term><emphasis role="strong"><filename role="strong">require "platform:/plugin/fr.irisa.triskell.kermeta.ecore/src/kermeta/transformations/CleanEcoreKMAnnotations.kmt"</filename></emphasis></term>
+        		<listitem> <simpara>      			
+					This file contains a transformation class that allows to remove all EAnnotation in the 
+					ecore model that may have been introduced by kermeta2ecore transformation.  
+        		</simpara></listitem>
+      		</varlistentry>     
+      		<varlistentry>
+        		<term><emphasis role="strong"><filename role="strong">require "platform:/plugin/fr.irisa.triskell.kermeta.ecore/src/kermeta/ecore2dot/ecore2dot.kmt"</filename></emphasis></term>
+        		<listitem> <simpara>      			
+					This file contains an experimental transformation class that allows to produce the 
+					text of a dot file for producing a graphical representation of the ecore model. 
+        		</simpara></listitem>
+      		</varlistentry>            		 
+		</variablelist>
+    </section>
+    <section>
+    	<title>Using Ecore behavior aspect</title>
+    	<para>
+    		Kermeta Ecore MDK main part consist of the implementation of Ecore behavior in kermeta. 
+    		Almost all operations and derived properties are available.    	
+    	</para>
+		<para>
+			To use it, you simply have to add this require statement to your kermeta code :
+		</para>
+		<programlisting>
+			require "platform:/plugin/fr.irisa.triskell.kermeta.ecore/src/kermeta/ecore_behavior.kmt"
+		</programlisting>
+		<note>
+			In the current implementation of the derived properties with a multiplicity greater than 1, 
+			you'll get a new collection with the desired content. However, even if you can modify the elements themselves, 
+			these collections aren't the real
+			container of the elements, if you modify it (adding or removing elements) the real attributes (from which 
+			the derived properties are calculated) won't be changed.			
+		</note>
+    </section>
+  </chapter>
+  <chapter id="chapter_metamodel.link">
+    <title id="chapter_metamodel.title.link">Presentation of the Ecore Metamodel</title>
+    <para> This chapter presents the Metamodel and some considerations about how to use it.
+	</para>
+	<section>
+		<title>Global view</title>
+		    <figure id="refIllustration01">
+		    	<title>Ecore metamodel main class diagram.</title>
+		
+		        <mediaobject>
+		        	<imageobject>
+		            	<imagedata fileref="Ecore-MDK_figures/EcoreMainView.png" />
+		            </imageobject>
+		        </mediaobject>
+		    </figure>
+		    <important> <simpara>Ecore metamodel use a lot of calculated properties. (In red in our figures) If you need to use them, 
+		    make sure to require their kermeta implementation (require <filename>"platform:/plugin/fr.irisa.triskell.kermeta.ecore/src/kermeta/ecore_behavior.kmt"</filename>
+		 	</simpara></important>
+ 	</section>
+ 	<section>
+ 		<title>Generics</title>
+		 	<para>Since EMF 2.4, Eclipse has introduced a support for generics. Here is a quick overview of the introduces elements.</para>
+		 	
+		    <figure id="refIllustration02">
+		    	<title>Representation of Generics in the Ecore metamodel.</title>
+		
+		        <mediaobject>
+		        	<imageobject>
+		            	<imagedata fileref="Ecore-MDK_figures/EcoreGenerics.png" />
+		            </imageobject>
+		        </mediaobject>
+		    </figure>
+    </section>
+  </chapter>
+</book>

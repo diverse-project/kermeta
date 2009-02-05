@@ -1340,7 +1340,7 @@
         <styles xmi:type="notation:SortingStyle" xmi:id="_0zBGevOBEd2Ah8gW72jUpw"/>
         <styles xmi:type="notation:FilteringStyle" xmi:id="_0zBGe_OBEd2Ah8gW72jUpw"/>
       </children>
-      <styles xmi:type="notation:ShapeStyle" xmi:id="_0zBGcfOBEd2Ah8gW72jUpw" fontHeight="10" fillColor="13761016" lineColor="0"/>
+      <styles xmi:type="notation:ShapeStyle" xmi:id="_0zBGcfOBEd2Ah8gW72jUpw" fontHeight="10" fillColor="8047085" lineColor="0"/>
       <element xmi:type="ecore:EClass" href="Ecore.ecore#//ETypeParameter"/>
       <layoutConstraint xmi:type="notation:Bounds" xmi:id="_0zBGcvOBEd2Ah8gW72jUpw" x="265" y="390" width="169"/>
     </children>
@@ -1356,7 +1356,7 @@
         <styles xmi:type="notation:SortingStyle" xmi:id="_2WbZ-vOBEd2Ah8gW72jUpw"/>
         <styles xmi:type="notation:FilteringStyle" xmi:id="_2WbZ-_OBEd2Ah8gW72jUpw"/>
       </children>
-      <styles xmi:type="notation:ShapeStyle" xmi:id="_2WbZ8fOBEd2Ah8gW72jUpw" fontHeight="10" fillColor="13761016" lineColor="0"/>
+      <styles xmi:type="notation:ShapeStyle" xmi:id="_2WbZ8fOBEd2Ah8gW72jUpw" fontHeight="10" fillColor="8047085" lineColor="0"/>
       <element xmi:type="ecore:EClass" href="Ecore.ecore#//EGenericType"/>
       <layoutConstraint xmi:type="notation:Bounds" xmi:id="_2WbZ8vOBEd2Ah8gW72jUpw" x="225" y="565" width="336"/>
     </children>
@@ -1431,7 +1431,7 @@
         <layoutConstraint xmi:type="notation:Location" xmi:id="_0zK3efOBEd2Ah8gW72jUpw" x="-10" y="-10"/>
       </children>
       <children xmi:type="notation:Node" xmi:id="_0zK3evOBEd2Ah8gW72jUpw" type="4012">
-        <layoutConstraint xmi:type="notation:Location" xmi:id="_0zK3e_OBEd2Ah8gW72jUpw" x="10" y="10"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_0zK3e_OBEd2Ah8gW72jUpw" x="-13" y="10"/>
       </children>
       <styles xmi:type="notation:ConnectorStyle" xmi:id="_0zK3dfOBEd2Ah8gW72jUpw" lineColor="0"/>
       <styles xmi:type="notation:FontStyle" xmi:id="_0zK3dvOBEd2Ah8gW72jUpw" fontHeight="10"/>

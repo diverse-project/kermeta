@@ -2,7 +2,11 @@
 <?eclipse version="3.2"?>
 <plugin>
    <extension point="org.eclipse.help.toc">
-		<toc primary="true" file="help/toc.xml"></toc>
+		<toc primary="true" file="mainToc.xml"></toc>
+      	<toc file="build/eclipse.help/Ecore-MDK/toc.xml">
+      	</toc>
+	    <toc file="toc.xml">
+	    </toc>
 	</extension>
 
 </plugin>

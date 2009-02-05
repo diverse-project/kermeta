@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?NLS TYPE="org.eclipse.help.toc"?>
+
+<toc label="Kermeta MDKs">
+	<topic label="Ecore MDK">
+	    <link toc="build/eclipse.help/Ecore-MDK/toc.xml"/>
+	</topic>
+</toc>
