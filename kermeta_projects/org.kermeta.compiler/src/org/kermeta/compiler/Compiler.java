@@ -1,4 +1,4 @@
-/* $Id: Compiler.java,v 1.20 2009-01-30 08:58:47 cfaucher Exp $
+/* $Id: Compiler.java,v 1.21 2009-02-05 13:13:49 cfaucher Exp $
  * Project   : fr.irisa.triskell.kermeta.compiler
  * File      : Compiler.java
  * License   : EPL
@@ -21,13 +21,17 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Properties;
 
+import org.eclipse.core.resources.IContainer;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.Path;
+import org.eclipse.core.runtime.Status;
+import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.emf.codegen.ecore.genmodel.GenJDKLevel;
 import org.eclipse.emf.codegen.ecore.genmodel.GenModel;
 import org.eclipse.emf.codegen.util.CodeGenUtil;
@@ -45,6 +49,13 @@ import org.kermeta.compiler.util.CompilerUtil;
 
 import fr.irisa.triskell.eclipse.resources.ResourceHelper;
 
+/**
+ * 
+ * @author cfaucher
+ *
+ * This class has got an important FIXME since EMF2.5
+ * please see it by searching this in the setGenModelParameters method: "FIXME Compiler-DynamicTemplates-EMF"
+ */
 public class Compiler extends org.kermeta.compiler.Generator {
 
 	// Parameters array use by the GenModel generator
@@ -61,23 +72,12 @@ public class Compiler extends org.kermeta.compiler.Generator {
 	private IProgressMonitor monitor;
 	
 	private Properties compilerProperties;
-	
-	/**
-	 * @deprecated
-	 */
-	//private KermetaUnit kmUnit = null;
-	
-	/**
-	 * @deprecated
-	 */
-	//private EcoreExporter km2ecoreGen = null;
 
 
 	/**
-	 * Constructor
+	 * 
 	 * @param abosluteEcorePath
-	 * @param kmUnit
-	 * @param km2ecoreGen
+	 * @param monitor
 	 */
 	public Compiler(String abosluteEcorePath, IProgressMonitor monitor) {
 		super();
@@ -95,8 +95,9 @@ public class Compiler extends org.kermeta.compiler.Generator {
 	}
 
 	/**
-	 * Constructor
+	 * 
 	 * @param ecoreFile
+	 * @param monitor
 	 */
 	public Compiler(IFile ecoreFile, IProgressMonitor monitor) {
 		super();
@@ -191,7 +192,7 @@ public class Compiler extends org.kermeta.compiler.Generator {
 	
 	private void fixManifestMF() {
 
-		IFile manifest_file = ResourcesPlugin.getWorkspace().getRoot().getFile(new Path(compiledPluginId + "/META-INF/MANIFEST.MF"));
+		final IFile manifest_file = ResourcesPlugin.getWorkspace().getRoot().getFile(new Path(compiledPluginId + "/META-INF/MANIFEST.MF"));
 		
 		StringBuffer new_file = new StringBuffer();
 		
@@ -225,12 +226,40 @@ public class Compiler extends org.kermeta.compiler.Generator {
 				new_file.append("\n");
 			}
 			
-			manifest_file.delete(true, new NullProgressMonitor());
+			// Close the file to free of its usage and avoiding deletion error
+			manifest_file.getContents().close();
+			
+			IContainer parent = manifest_file.getParent();
+			
+			Job job = new Job("Deletion of the MANIFEST.MF") {
+				@Override
+				protected IStatus run(IProgressMonitor monitor) {
+		
+					try {
+						manifest_file.delete(true, new NullProgressMonitor());
+					} catch (CoreException e) {
+						e.printStackTrace();
+					}
+						
+					return Status.OK_STATUS;
+				}
+			};
+			
+			job.setRule(ResourcesPlugin.getWorkspace().getRoot());
+			job.schedule();
+			
+			// This piece of code avoids many problems of synchro for deleting the MANIFEST and recreate it
+			while (manifest_file.exists()) {
+				parent.refreshLocal(1, new NullProgressMonitor());
+			}
 			
 			IFile new_manifest_file = ResourceHelper.getOrCreateIFile(compiledPluginId + "/META-INF/MANIFEST.MF");
 			new_manifest_file.create(new ByteArrayInputStream(new_file.toString().getBytes()), true, new NullProgressMonitor());
 			
 		} catch (CoreException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
@@ -293,15 +322,26 @@ public class Compiler extends org.kermeta.compiler.Generator {
 		genModel.setModelPluginID(compilerProperties.getProperty(CompilerProperties.PLUGIN_ID));
 		// Model and edit sources are generated in the same plugin and in the same source folder
 		genModel.setModelDirectory("/" + compilerProperties.getProperty(CompilerProperties.PLUGIN_ID) + "/src");
+		
+		// The edit, editor and tests plugins are not generated
 		genModel.setEditDirectory("");
-		// The editor and tests plugins are not generated
 		genModel.setEditorDirectory("");
 		genModel.setTestsDirectory("");
-		// Icons will be not generated
+		
+		// Icons will be not generated, because the editor is not generated too
 		genModel.setCreationIcons(false);
-		// Use of dynamic templates like  for the implementation of the getter/setter of derived properties
+		
+		//FIXME Compiler-DynamicTemplates-EMF
+		// Use of dynamic templates for avoiding an EMF bug in AdapterFactoryClass.javajet
+		// This bug occurs when a compiled Class is named EObject...
+		// That seems the bug is fixed in EMF2.5 (official release in June or July 2009), thus
+		// if the bug is really fixed, we couldn't use the plugin org.kermeta.compiler.generator.emftemplates
+		// and also set the 2 following parameters:
+		// - genModel.setDynamicTemplates(false);
+		// - genModel.setTemplateDirectory("");
 		genModel.setDynamicTemplates(true);
 		genModel.setTemplateDirectory("platform:/plugin/org.kermeta.compiler.generator.emftemplates/templates");
+		
 		// Use of Java generics is enabled
 		genModel.setComplianceLevel(GenJDKLevel.JDK50_LITERAL);
 		genModel.setContainmentProxies(true);
