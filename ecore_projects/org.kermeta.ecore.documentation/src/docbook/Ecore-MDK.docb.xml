@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.4//EN"
 "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
-<!-- $Id: Ecore-MDK.docb.xml,v 1.1 2009-02-05 16:21:10 dvojtise Exp $ -->
+<!-- $Id: Ecore-MDK.docb.xml,v 1.2 2009-02-05 16:22:33 dvojtise Exp $ -->
 <book lang="en-US">
   <bookinfo>
     <title>Ecore MDK for Kermeta</title>
 
     <pubdate>Build date: @BUILD.DATE@</pubdate>
 
-    <pubdate>$Date: 2009-02-05 16:21:10 $</pubdate>
+    <pubdate>$Date: 2009-02-05 16:22:33 $</pubdate>
 
     <author>
       <firstname>Didier</firstname>
@@ -146,8 +146,7 @@
 		<para>
 			To use it, you simply have to add this require statement to your kermeta code :
 		</para>
-		<programlisting>
-			require "platform:/plugin/fr.irisa.triskell.kermeta.ecore/src/kermeta/ecore_behavior.kmt"
+		<programlisting>require "platform:/plugin/fr.irisa.triskell.kermeta.ecore/src/kermeta/ecore_behavior.kmt"
 		</programlisting>
 		<note>
 			In the current implementation of the derived properties with a multiplicity greater than 1, 
