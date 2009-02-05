@@ -1,4 +1,4 @@
-// $Id: value_types.kmt,v 1.12 2009-01-16 10:43:12 cfaucher Exp $
+// $Id: value_types.kmt,v 1.13 2009-02-05 13:19:10 cfaucher Exp $
 /* *************************************************
  * Franck FLEUREY - 11/02/2005
  * Triskell Research Group
@@ -56,6 +56,7 @@ class ~Void {
  * that means that each time you := such object it will call the clone function associated to it (Not implemented yet except for Integer, String and boolean!!!)
  * 
  */
+ @EMF_needProperty "name=value javaClass=java.lang.String"
 abstract class  ValueType {
 }
 
@@ -140,7 +141,6 @@ class NotComparableException inherits kermeta::exceptions::Exception {
  * The Boolean type
  */
  @EMF_instanceClassName "java.lang.Boolean"
- @EMF_needProperty "name=value javaClass=java.lang.String"
 class Boolean inherits ValueType
 {
 	/**
@@ -238,7 +238,6 @@ abstract class Numeric inherits Comparable, ValueType {
  * The class Integer
  */
  @EMF_instanceClassName "java.lang.Integer"
- @EMF_needProperty "name=value javaClass=java.lang.String"
 class Integer inherits Numeric, Summable<Integer>
 {
 	/**
@@ -424,7 +423,6 @@ class Integer inherits Numeric, Summable<Integer>
  * class Real
  */
  @EMF_instanceClassName "java.lang.Double"
- @EMF_needProperty "name=value javaClass=java.lang.String"
 class Real inherits Numeric, Summable<Real>
 {
 	/**
@@ -524,7 +522,6 @@ class Real inherits Numeric, Summable<Real>
  * The class Character
  */
  @EMF_instanceClassName "java.lang.Character"
- @EMF_needProperty "name=value javaClass=java.lang.String"
 class Character inherits ValueType, Comparable
 {
 	/**
@@ -561,7 +558,6 @@ class Character inherits ValueType, Comparable
  * The class String
  */
  @EMF_instanceClassName "java.lang.String"
- @EMF_needProperty "name=value javaClass=java.lang.String"
 class String inherits ValueType, Comparable, Summable<String>
 {
 	/**
