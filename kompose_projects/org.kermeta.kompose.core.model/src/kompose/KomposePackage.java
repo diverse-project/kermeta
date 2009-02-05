@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: KomposePackage.java,v 1.2 2009-01-22 20:26:53 mclavreu Exp $
+ * $Id: KomposePackage.java,v 1.3 2009-02-05 17:29:21 mclavreu Exp $
  */
 package kompose;
 
@@ -663,13 +663,22 @@ public interface KomposePackage extends EPackage {
 	int COMPOSER__PREDIRECTIVES_AM = 5;
 
 	/**
+	 * The feature id for the '<em><b>Metamodel name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMPOSER__METAMODEL_NAME = 6;
+
+	/**
 	 * The number of structural features of the '<em>Composer</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int COMPOSER_FEATURE_COUNT = 6;
+	int COMPOSER_FEATURE_COUNT = 7;
 
 	/**
 	 * The meta object id for the '{@link kompose.impl.MergeableImpl <em>Mergeable</em>}' class.
@@ -1079,6 +1088,17 @@ public interface KomposePackage extends EPackage {
 	EReference getComposer_PredirectivesAM();
 
 	/**
+	 * Returns the meta object for the attribute '{@link kompose.Composer#getMetamodel_name <em>Metamodel name</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Metamodel name</em>'.
+	 * @see kompose.Composer#getMetamodel_name()
+	 * @see #getComposer()
+	 * @generated
+	 */
+	EAttribute getComposer_Metamodel_name();
+
+	/**
 	 * Returns the meta object for class '{@link kompose.Mergeable <em>Mergeable</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1448,6 +1468,14 @@ public interface KomposePackage extends EPackage {
 		 * @generated
 		 */
 		EReference COMPOSER__PREDIRECTIVES_AM = eINSTANCE.getComposer_PredirectivesAM();
+
+		/**
+		 * The meta object literal for the '<em><b>Metamodel name</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute COMPOSER__METAMODEL_NAME = eINSTANCE.getComposer_Metamodel_name();
 
 		/**
 		 * The meta object literal for the '{@link kompose.impl.MergeableImpl <em>Mergeable</em>}' class.

@@ -53,6 +53,7 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kompose.ecore#//Composer/aspectModelURI"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kompose.ecore#//Composer/composedModelURI"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference kompose.ecore#//Composer/predirectivesAM"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kompose.ecore#//Composer/metamodel_name"/>
       <genOperations ecoreOperation="kompose.ecore#//Composer/compose"/>
     </genClasses>
     <genClasses image="false" ecoreClass="kompose.ecore#//Mergeable"/>
