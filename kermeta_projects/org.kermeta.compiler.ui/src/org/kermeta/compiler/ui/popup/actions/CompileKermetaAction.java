@@ -1,4 +1,4 @@
-/* $Id: CompileKermetaAction.java,v 1.10 2008-11-13 10:01:52 dvojtise Exp $
+/* $Id: CompileKermetaAction.java,v 1.11 2009-02-06 10:22:00 cfaucher Exp $
  * Project   : fr.irisa.triskell.kermeta.compiler
  * File      : CompileKermetaAction.java
  * License   : EPL
@@ -37,6 +37,12 @@ import fr.irisa.triskell.eclipse.resources.ResourceHelper;
 import fr.irisa.triskell.kermeta.exceptions.NotRegisteredURIException;
 import fr.irisa.triskell.kermeta.exceptions.URIMalformedException;
 
+/**
+ * This action is dedicated to launch the compilation + generation of the Java source code from the given kmt file
+ * this action is available by right-click on a kmt file
+ * @author cfaucher
+ *
+ */
 public class CompileKermetaAction implements IObjectActionDelegate {
 
 	protected StructuredSelection currentSelection;

@@ -1,4 +1,4 @@
-/* $Id: CompileEcoreAction.java,v 1.4 2008-10-17 14:40:57 cfaucher Exp $
+/* $Id: CompileEcoreAction.java,v 1.5 2009-02-06 10:19:50 cfaucher Exp $
  * Project   : fr.irisa.triskell.kermeta.compiler
  * File      : CompileEcoreAction.java
  * License   : EPL
@@ -29,7 +29,12 @@ import org.eclipse.ui.IWorkbenchPart;
 import org.kermeta.compiler.Compiler;
 import org.kermeta.log4j.util.LogConfigurationHelper;
 
-
+/**
+ * This action is dedicated to launch the generation of the Java source code from the Ecore and Simk files
+ * this actino is launched by right-click on an Ecore file
+ * @author cfaucher
+ *
+ */
 public class CompileEcoreAction implements IObjectActionDelegate {
 
 	protected StructuredSelection currentSelection;
