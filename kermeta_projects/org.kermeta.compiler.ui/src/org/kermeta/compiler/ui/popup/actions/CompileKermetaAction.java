@@ -1,4 +1,4 @@
-/* $Id: CompileKermetaAction.java,v 1.11 2009-02-06 10:22:00 cfaucher Exp $
+/* $Id: CompileKermetaAction.java,v 1.12 2009-02-06 12:50:54 cfaucher Exp $
  * Project   : fr.irisa.triskell.kermeta.compiler
  * File      : CompileKermetaAction.java
  * License   : EPL
@@ -75,12 +75,13 @@ public class CompileKermetaAction implements IObjectActionDelegate {
 				monitor.beginTask("Merging km", 3);
 				try {
 					
+					//Avoid out of sync issue
+					file.getParent().refreshLocal(1, monitor);
 					
 					//The following 2 lines are required to set rightly the Simk plugin
 					Platform.getBundle("org.kermeta.simk").start();
 					@SuppressWarnings("unused")
 					SimkEditor simkEditor = new SimkEditor();
-					
 		
 					KermetaCompiler kermetaCompiler = new KermetaCompiler(file);
 					
@@ -105,6 +106,8 @@ public class CompileKermetaAction implements IObjectActionDelegate {
 					monitor.setTaskName("Generating java plugin from ecore");
 					monitor.subTask("Generating java plugin from ecore");
 					
+					//Avoid out of sync issue
+					file.getParent().refreshLocal(1, monitor);
 					
 					// Run the generation of Java Classes and the required helpers (Simk)
 					IFile ecore_file = ResourceHelper.getIFile(file.getFullPath()

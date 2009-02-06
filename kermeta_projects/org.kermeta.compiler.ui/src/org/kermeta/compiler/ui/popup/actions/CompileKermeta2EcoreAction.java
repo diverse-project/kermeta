@@ -1,4 +1,4 @@
-/* $Id: CompileKermeta2EcoreAction.java,v 1.1 2009-01-08 16:29:39 cfaucher Exp $
+/* $Id: CompileKermeta2EcoreAction.java,v 1.2 2009-02-06 12:50:54 cfaucher Exp $
  * Project   : fr.irisa.triskell.kermeta.compiler
  * File      : CompileKermetaAction.java
  * License   : EPL
@@ -73,13 +73,14 @@ public class CompileKermeta2EcoreAction implements IObjectActionDelegate {
 				monitor.beginTask("Merging km", 3);
 				try {
 					
+					//Avoid out of sync issue
+					file.getParent().refreshLocal(1, monitor);
 					
 					//The following 2 lines are required to set rightly the Simk plugin
 					Platform.getBundle("org.kermeta.simk").start();
 					@SuppressWarnings("unused")
 					SimkEditor simkEditor = new SimkEditor();
 					
-		
 					KermetaCompiler kermetaCompiler = new KermetaCompiler(file);
 					
 					String uri = "platform:/resource" + file.getFullPath().toString();
@@ -98,6 +99,8 @@ public class CompileKermeta2EcoreAction implements IObjectActionDelegate {
 					_args[0] = km_merged_file.getFullPath().toString();
 					Main__main_km2ecore_behaviorJava__Runner.main_forDeployedVersion(_args);
 					
+					//Avoid out of sync issue
+					file.getParent().refreshLocal(1, monitor);
 
 					monitor.worked(1);
 					monitor.setTaskName("Generating java plugin from ecore");
@@ -105,13 +108,12 @@ public class CompileKermeta2EcoreAction implements IObjectActionDelegate {
 					
 					Activator.internalLog.info("The compilation process is complete");
 								
-				}catch (UnsupportedClassVersionError e){
+				} catch (UnsupportedClassVersionError e){
 					Activator.logErrorMessage("Java version incompatibility : one of the dependencies of this plugin is not compatible with your JVM", e);
-        		}
-				catch (Exception e) {
+        		} catch (Exception e) {
 					String message = "Compilation of " + file.getName()+" failed";
 					Activator.logErrorMessage(message, e);
-				}catch (Error e) {
+				} catch (Error e) {
 					String message = "Compilation of " + file.getName()+" failed";
 					Activator.logErrorMessage(message, e);
 				}
