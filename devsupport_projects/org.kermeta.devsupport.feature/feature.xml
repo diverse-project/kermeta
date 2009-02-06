@@ -2,7 +2,7 @@
 <feature
       id="org.kermeta.devsupport.feature"
       label="Dev support for Kermeta Feature"
-      version="0.1.0"
+      version="0.1.0.qualifier"
       provider-name="IRISA/INRIA"
       image="kermeta_logo_32.gif">
 
@@ -36,8 +36,6 @@
          version="0.0.0"/>
 
    <requires>
-      <import feature="com.kyrsoft.stmemmonitorFeature" version="1.1.0"/>
-      <import feature="de.kyrsoft.memmonitorFeature" version="1.6.0" match="greaterOrEqual"/>
       <import feature="org.antlr.ui" version="4.1.1"/>
       <import plugin="org.apache.log4j"/>
       <import plugin="org.apache.commons.logging"/>
