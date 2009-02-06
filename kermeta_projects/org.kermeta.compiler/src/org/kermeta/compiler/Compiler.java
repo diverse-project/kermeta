@@ -1,4 +1,4 @@
-/* $Id: Compiler.java,v 1.21 2009-02-05 13:13:49 cfaucher Exp $
+/* $Id: Compiler.java,v 1.22 2009-02-06 12:49:45 cfaucher Exp $
  * Project   : fr.irisa.triskell.kermeta.compiler
  * File      : Compiler.java
  * License   : EPL
@@ -231,26 +231,14 @@ public class Compiler extends org.kermeta.compiler.Generator {
 			
 			IContainer parent = manifest_file.getParent();
 			
-			Job job = new Job("Deletion of the MANIFEST.MF") {
-				@Override
-				protected IStatus run(IProgressMonitor monitor) {
-		
-					try {
-						manifest_file.delete(true, new NullProgressMonitor());
-					} catch (CoreException e) {
-						e.printStackTrace();
-					}
-						
-					return Status.OK_STATUS;
-				}
-			};
-			
-			job.setRule(ResourcesPlugin.getWorkspace().getRoot());
-			job.schedule();
-			
 			// This piece of code avoids many problems of synchro for deleting the MANIFEST and recreate it
 			while (manifest_file.exists()) {
 				parent.refreshLocal(1, new NullProgressMonitor());
+				try {
+					manifest_file.delete(true, new NullProgressMonitor());
+				} catch (CoreException e) {
+					e.printStackTrace();
+				}
 			}
 			
 			IFile new_manifest_file = ResourceHelper.getOrCreateIFile(compiledPluginId + "/META-INF/MANIFEST.MF");
