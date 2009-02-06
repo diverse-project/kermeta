@@ -1,9 +1,12 @@
-/* $Id: CreateEcoreModelElement.kmt,v 1.45 2009-02-03 17:51:52 cfaucher Exp $
+/* $Id: CreateEcoreModelElement.kmt,v 1.46 2009-02-06 17:06:12 cfaucher Exp $
  * Creation date: February 1, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
  * Authors: Francois Tanguy <ftanguy@irisa.fr>
  *			Cyril Faucher <cfaucher@irisa.fr>
+ *
+ * This file is dedicated to the creation of Ecore elements during the first pass of the Km2Ecore transformation
+ * Typically, the "createEcoreModelElement" methods are builders called during the traverse in Pass1.kmt
  */
 
 package kermeta::language::structure;
@@ -44,6 +47,12 @@ aspect class ModelingUnit {
 		usingEntry.~value := ""
 		// Setting the details
 		ecoreAnnotation.details.add(usingEntry)
+		
+		// Please (CF), do not remove the following source line
+		// These tags have not been included into the generated Ecore file
+		// in order to support the loading of the EMF reflection at runtime like for uml.ecore
+		// this reflection mode is required when the number of concepts in an EPackage are too numerous
+		//self.eachOwnedElement{ omu | omu.createEcoreModelElement(context) }
 
 		result := ecoreAnnotation
 	end
