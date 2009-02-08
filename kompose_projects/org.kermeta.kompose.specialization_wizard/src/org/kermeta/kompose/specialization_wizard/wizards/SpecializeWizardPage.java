@@ -63,7 +63,7 @@ public class SpecializeWizardPage extends WizardPage {
 		plugin_name.setLayoutData(gd);
 		plugin_name.addModifyListener(new ModifyListener() {
 			public void modifyText(ModifyEvent e) {
-				dialogChanged_name(plugin_name);
+				dialogChanged_plugin_name(plugin_name);
 				data.setPlugin_name(plugin_name.getText());
 			}
 		});
@@ -138,7 +138,7 @@ public class SpecializeWizardPage extends WizardPage {
 		initialize();
 		setControl(container);
 	}
-	
+
 	private void initialize() {
 		this.composer_name.setText("fooComposer");
 		this.plugin_name.setText("org.kermeta.kompose.specialization.foo");
@@ -146,6 +146,16 @@ public class SpecializeWizardPage extends WizardPage {
 		this.main_package.setText("fooPackage");
 		this.model_name.setText("FooBarModel");
 		this.metamodel_uri.setText("http://metamodel");
+	}
+	
+	protected void dialogChanged_plugin_name(Text text) {
+		String stext=text.getText();
+		if (projectExists(stext)){
+			updateStatus("Project already exists");
+		}
+		else {
+			updateStatus(null);
+		}
 	}
 	
 	private void dialogChanged_name(Text text) {
@@ -162,9 +172,6 @@ public class SpecializeWizardPage extends WizardPage {
 		//else if(!stext.matches("^([a-zA-Z])+((_)|[a-zA-Z]|[0-9])*$")){
 		else if(!stext.matches("^([a-zA-Z])+((_)|[a-zA-Z]|[0-9])*((\\.){1}((_)|[a-zA-Z]|[0-9])+)*$")){
 			updateStatus("invalid name");
-		}
-		else if (!projectExists(stext)){
-			updateStatus("Project already exists");
 		}
 		else {
 			updateStatus(null);
