@@ -17,7 +17,7 @@ public class PluginManifest
   protected final String TEXT_1 = "Manifest-Version: 1.0" + NL + "Bundle-ManifestVersion: 2" + NL + "Bundle-Name: Kompose Specialization Composition Plug-in (";
   protected final String TEXT_2 = " Example)" + NL + "Bundle-SymbolicName: ";
   protected final String TEXT_3 = "; singleton:=true" + NL + "Bundle-Version: 0.0.1" + NL + "Bundle-Activator: ";
-  protected final String TEXT_4 = ".Activator" + NL + "Bundle-Vendor: Unknown" + NL + "Require-Bundle: org.eclipse.ui," + NL + " org.eclipse.core.runtime," + NL + " org.eclipse.core.resources," + NL + " org.kermeta.kompose.core.model," + NL + " fr.irisa.triskell.kermeta.interpreter" + NL + "Bundle-RequiredExecutionEnvironment: J2SE-1.5";
+  protected final String TEXT_4 = ".Activator" + NL + "Bundle-Vendor: Unknown" + NL + "Require-Bundle: org.eclipse.ui," + NL + " org.eclipse.core.runtime," + NL + " org.eclipse.core.resources," + NL + " org.kermeta.kompose.core.model," + NL + " fr.irisa.triskell.kermeta.interpreter," + NL + " org.eclipse.core.expressions;bundle-version=\"3.4.0\"" + NL + "Bundle-RequiredExecutionEnvironment: J2SE-1.5";
   protected final String TEXT_5 = NL;
 
   public String generate(Object argument)

@@ -27,7 +27,7 @@ public class ModelEcore
     stringBuffer.append(TEXT_1);
     stringBuffer.append(data.getMainKmtPackage());
     stringBuffer.append(TEXT_2);
-    stringBuffer.append(data.getModel_name());
+    stringBuffer.append(data.getMetamodelURI());
     stringBuffer.append(TEXT_3);
     stringBuffer.append(data.getMainKmtPackage());
     stringBuffer.append(TEXT_4);

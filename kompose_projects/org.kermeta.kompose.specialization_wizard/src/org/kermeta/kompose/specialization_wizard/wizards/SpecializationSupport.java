@@ -72,6 +72,10 @@ public class SpecializationSupport {
         
         this.data.setStartupClass(((IFolder)o.getResource()).getFile("RegisterStartup.java").getLocation().toOSString());
         
+        o=javaProj.getPackageFragmentRoot(srcDir).createPackageFragment(this.data.getPropertyTesterPackage(), false, new NullProgressMonitor());
+        
+        this.data.setPropertyTesterClass(((IFolder)o.getResource()).getFile("KomposePropertyTester.java").getLocation().toOSString());
+        
         this.data.setKmtDir(kermetaDir.getFile(data.getComposer_name()+".kmt").getLocation().toOSString());
         this.data.setMetainfDir(metaInf.getFile("MANIFEST.MF").getLocation().toOSString());
         this.data.setPluginXmlDir(this.project.getFile("plugin.xml").getLocation().toOSString());

@@ -16,6 +16,7 @@ public class FilesGenerator {
 		ActivatorJava activator=new ActivatorJava();
 		ComposerJava composerjava=new ComposerJava();
 		ComposeKMT composerkmt=new ComposeKMT();
+		KomposePropertyTesterJava komposePropertyTesterJava = new KomposePropertyTesterJava();
 		PluginBuildProperties properties=new PluginBuildProperties();
 		PluginManifest manifest=new PluginManifest();
 		PluginXMLGenerator xmlgenerator=new PluginXMLGenerator();
@@ -25,6 +26,10 @@ public class FilesGenerator {
 		
 		FileWriter outFile=new FileWriter(this.data.getActivatorDir());
 		outFile.write(activator.generate(this.data));
+		outFile.close();
+		
+		outFile = new FileWriter(this.data.getPropertyTesterClass());
+		outFile.write(komposePropertyTesterJava.generate(this.data));
 		outFile.close();
 		
 		outFile=new FileWriter(this.data.getPopupDir());

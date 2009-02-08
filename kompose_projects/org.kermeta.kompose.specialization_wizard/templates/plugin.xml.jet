@@ -11,21 +11,27 @@ class="PluginXMLGenerator"
    <extension
          point="org.eclipse.ui.popupMenus">
       <objectContribution
+      		adaptable="true"
             objectClass="org.eclipse.core.resources.IFile"
             nameFilter="*.kompose"
             id="<%=data.getPackage_name()%>.contribution1">
+         <enablement>
+	     	<test
+	        	forcePluginActivation="true"
+	            property="kompose.metamodel"/>
+	     </enablement >
          <menu
                label="Kompose"
                path="additions"
-               id="org.kermeta.kompose.specialization.kompose.menu1">
+               id="org.kermeta.kompose.specialization.kompose.menu">
             <separator
-                  name="group1">
+                  name="popup">
             </separator>
          </menu>
          <action
-               label="Compose Models (<%=data.getModel_name()%>)"
+               label="Compose (<%=data.getModel_name()%>) Models"
                class="<%=data.getPopupPackage()%>.Composer"
-               menubarPath="org.kermeta.kompose.specialization.kompose.menu1/group1"
+               menubarPath="org.kermeta.kompose.specialization.kompose.menu/popup"
                enablesFor="1"
                id="<%=data.getPackage_name()%>.composer">
          </action>
@@ -34,5 +40,14 @@ class="PluginXMLGenerator"
    <extension
          point="org.eclipse.ui.startup">
       <startup class="<%=data.getStartupPackage()%>.RegisterStartup"/>
+   </extension>
+   <extension point="org.eclipse.core.expressions.propertyTesters">
+     <propertyTester
+        id="org.kermeta.kompose.specialization.propertyTester"
+        namespace="kompose"
+        properties="metamodel"
+        type="org.eclipse.core.resources.IFile"
+        class="<%=data.getPackage_name()%>.contribution.KomposePropertyTester">
+     </propertyTester>
    </extension>
 </plugin>

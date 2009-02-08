@@ -8,5 +8,5 @@ class="ModelEcore"
 	xmlns:xmi="http://www.omg.org/XMI" 
 	xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" 
 	name="<%=data.getMainKmtPackage()%>"
-	nsURI="http://<%=data.getModel_name()%>.ecore" 
+	nsURI="http://<%=data.getMetamodelURI()%>.ecore" 
 	nsPrefix="<%=data.getMainKmtPackage()%>"/>

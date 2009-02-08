@@ -1,5 +1,8 @@
 package org.kermeta.kompose.specialization_wizard.wizards;
 
+import org.eclipse.core.resources.IProject;
+import org.eclipse.core.resources.IWorkspace;
+import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.wizard.WizardPage;
 import org.eclipse.swt.SWT;
@@ -22,6 +25,8 @@ public class SpecializeWizardPage extends WizardPage {
 	private Text model_name;
 	
 	private Text main_package;
+	
+	private Text metamodel_uri;
 	
 	private SpecializerIntermediateDataContainer data;
 
@@ -116,15 +121,31 @@ public class SpecializeWizardPage extends WizardPage {
 			}
 		});
 		
+		createLine(container, ncol);
+		label = new Label(container, SWT.NULL);
+		label.setText("&Metamodel URI:");
+		
+		this.metamodel_uri = new Text(container, SWT.BORDER | SWT.SINGLE);
+		gd = new GridData(GridData.FILL_HORIZONTAL);
+		metamodel_uri.setLayoutData(gd);
+		metamodel_uri.addModifyListener(new ModifyListener() {
+			public void modifyText(ModifyEvent e) {
+				dialogChanged_metamodel(metamodel_uri);
+				data.setMetamodelURI(metamodel_uri.getText());
+			}
+		});
+		
 		initialize();
 		setControl(container);
 	}
+	
 	private void initialize() {
 		this.composer_name.setText("fooComposer");
 		this.plugin_name.setText("org.kermeta.kompose.specialization.foo");
 		this.plugin_package.setText("org.kermeta.kompose.specialization.foo");
 		this.main_package.setText("fooPackage");
 		this.model_name.setText("FooBarModel");
+		this.metamodel_uri.setText("http://metamodel");
 	}
 	
 	private void dialogChanged_name(Text text) {
@@ -133,7 +154,7 @@ public class SpecializeWizardPage extends WizardPage {
 			updateStatus("A name must be specified");
 		}
 		else if(stext.contains(" ")){
-			updateStatus("names can't contains spaces");	
+			updateStatus("names can't contains spaces");
 		}
 		/*else if(stext.contains(".")){
 			updateStatus("names can't be qualified");	
@@ -142,9 +163,22 @@ public class SpecializeWizardPage extends WizardPage {
 		else if(!stext.matches("^([a-zA-Z])+((_)|[a-zA-Z]|[0-9])*((\\.){1}((_)|[a-zA-Z]|[0-9])+)*$")){
 			updateStatus("invalid name");
 		}
-		else{
+		else if (!projectExists(stext)){
+			updateStatus("Project already exists");
+		}
+		else {
 			updateStatus(null);
 		}
+	}
+
+	private boolean projectExists(String text) {
+		IProject[] projects = ResourcesPlugin.getWorkspace().getRoot().getProjects();
+		for (int i = 0; i < projects.length; i++) {
+			IProject project = projects[i];
+			if(text.equals(project.getName()))
+				return true;
+		}
+		return false;
 	}
 	private void dialogChanged_package(Text text) {
 		String stext=text.getText();
@@ -156,6 +190,21 @@ public class SpecializeWizardPage extends WizardPage {
 		}
 		else if(!stext.matches("^([a-zA-Z])+((_)|[a-zA-Z]|[0-9])*((\\.){1}((_)|[a-zA-Z]|[0-9])+)*$")){
 			updateStatus("invalid package name");
+		}
+		else{
+			updateStatus(null);
+		}
+	}
+	private void dialogChanged_metamodel(Text text) {
+		String stext=text.getText();
+		if(stext.length()==0){
+			updateStatus("A metamodel uri must be specified");
+		}
+		else if(stext.contains(" ")){
+			updateStatus("metamodel uri can't contains spaces");	
+		}
+		else if(!stext.matches("^http://([a-zA-Z])+((_)|[a-zA-Z]|[0-9]|/)*((\\.){1}((_)|[a-zA-Z]|[0-9]|/)+)*$")){
+			updateStatus("Invalid metamodel uri");
 		}
 		else{
 			updateStatus(null);

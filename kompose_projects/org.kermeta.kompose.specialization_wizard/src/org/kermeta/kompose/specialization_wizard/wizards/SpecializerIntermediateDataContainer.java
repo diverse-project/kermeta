@@ -28,6 +28,10 @@ public class SpecializerIntermediateDataContainer {
 	
 	private String startupClass;
 	
+	private String propertyTester;
+
+	private String metamodelURI;
+	
 	public String getActivatorDir() {
 		return activatorDir;
 	}
@@ -135,5 +139,23 @@ public class SpecializerIntermediateDataContainer {
 	}
 	public void setMainKmtPackage(String mainKmtPackage) {
 		this.mainKmtPackage = mainKmtPackage;
+	}
+	public String getPropertyTesterPackage(){
+		if(this.package_name==null){
+			return null;
+		}
+		return this.package_name+".contribution";
+	}
+	public void setPropertyTesterClass(String propertyTesterClass) {
+		this.propertyTester = propertyTesterClass;
+	}
+	public String getPropertyTesterClass() {
+		return this.propertyTester;
+	}
+	public void setMetamodelURI(String text) {
+		this.metamodelURI = text;
+	}
+	public String getMetamodelURI(){
+		return this.metamodelURI;
 	}
 }
