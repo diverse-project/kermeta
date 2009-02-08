@@ -57,7 +57,7 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="composedModelURI" eType="#//String"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="predirectivesAM" upperBound="-1"
         eType="#//ElementDirective" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="metamodel_name" eType="#//String"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="metamodelName" eType="#//String"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Mergeable" abstract="true"/>
 </ecore:EPackage>

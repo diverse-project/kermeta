@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ComposerItemProvider.java,v 1.3 2009-02-05 17:29:24 mclavreu Exp $
+ * $Id: ComposerItemProvider.java,v 1.4 2009-02-08 14:32:44 mclavreu Exp $
  */
 package kompose.provider;
 
@@ -70,7 +70,7 @@ public class ComposerItemProvider
 			addPrimaryModelURIPropertyDescriptor(object);
 			addAspectModelURIPropertyDescriptor(object);
 			addComposedModelURIPropertyDescriptor(object);
-			addMetamodel_namePropertyDescriptor(object);
+			addMetamodelNamePropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -142,18 +142,18 @@ public class ComposerItemProvider
 	}
 
 	/**
-	 * This adds a property descriptor for the Metamodel name feature.
+	 * This adds a property descriptor for the Metamodel Name feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void addMetamodel_namePropertyDescriptor(Object object) {
+	protected void addMetamodelNamePropertyDescriptor(Object object) {
 		itemPropertyDescriptors.add
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_Composer_metamodel_name_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_Composer_metamodel_name_feature", "_UI_Composer_type"),
+				 getString("_UI_Composer_metamodelName_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_Composer_metamodelName_feature", "_UI_Composer_type"),
 				 KomposePackage.Literals.COMPOSER__METAMODEL_NAME,
 				 true,
 				 false,
@@ -214,7 +214,7 @@ public class ComposerItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((Composer)object).getMetamodel_name();
+		String label = ((Composer)object).getMetamodelName();
 		return label == null || label.length() == 0 ?
 			getString("_UI_Composer_type") :
 			getString("_UI_Composer_type") + " " + label;

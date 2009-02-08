@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: KomposePackageImpl.java,v 1.3 2009-02-05 17:29:21 mclavreu Exp $
+ * $Id: KomposePackageImpl.java,v 1.4 2009-02-08 14:32:28 mclavreu Exp $
  */
 package kompose.impl;
 
@@ -570,7 +570,7 @@ public class KomposePackageImpl extends EPackageImpl implements KomposePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getComposer_Metamodel_name() {
+	public EAttribute getComposer_MetamodelName() {
 		return (EAttribute)composerEClass.getEStructuralFeatures().get(6);
 	}
 
@@ -793,7 +793,7 @@ public class KomposePackageImpl extends EPackageImpl implements KomposePackage {
 		initEAttribute(getComposer_AspectModelURI(), this.getString(), "aspectModelURI", null, 0, 1, Composer.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getComposer_ComposedModelURI(), this.getString(), "composedModelURI", null, 0, 1, Composer.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getComposer_PredirectivesAM(), this.getElementDirective(), null, "predirectivesAM", null, 0, -1, Composer.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getComposer_Metamodel_name(), this.getString(), "metamodel_name", null, 0, 1, Composer.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getComposer_MetamodelName(), this.getString(), "metamodelName", null, 0, 1, Composer.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		addEOperation(composerEClass, this.getMergeable(), "compose", 0, 1, IS_UNIQUE, IS_ORDERED);
 

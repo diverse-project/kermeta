@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: Composer.java,v 1.3 2009-02-05 17:29:21 mclavreu Exp $
+ * $Id: Composer.java,v 1.4 2009-02-08 14:32:28 mclavreu Exp $
  */
 package kompose;
 
@@ -24,7 +24,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link kompose.Composer#getAspectModelURI <em>Aspect Model URI</em>}</li>
  *   <li>{@link kompose.Composer#getComposedModelURI <em>Composed Model URI</em>}</li>
  *   <li>{@link kompose.Composer#getPredirectivesAM <em>Predirectives AM</em>}</li>
- *   <li>{@link kompose.Composer#getMetamodel_name <em>Metamodel name</em>}</li>
+ *   <li>{@link kompose.Composer#getMetamodelName <em>Metamodel Name</em>}</li>
  * </ul>
  * </p>
  *
@@ -160,30 +160,30 @@ public interface Composer extends EObject {
 	EList<ElementDirective> getPredirectivesAM();
 
 	/**
-	 * Returns the value of the '<em><b>Metamodel name</b></em>' attribute.
+	 * Returns the value of the '<em><b>Metamodel Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Metamodel name</em>' attribute isn't clear,
+	 * If the meaning of the '<em>Metamodel Name</em>' attribute isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Metamodel name</em>' attribute.
-	 * @see #setMetamodel_name(String)
-	 * @see kompose.KomposePackage#getComposer_Metamodel_name()
+	 * @return the value of the '<em>Metamodel Name</em>' attribute.
+	 * @see #setMetamodelName(String)
+	 * @see kompose.KomposePackage#getComposer_MetamodelName()
 	 * @model dataType="kompose.String"
 	 * @generated
 	 */
-	String getMetamodel_name();
+	String getMetamodelName();
 
 	/**
-	 * Sets the value of the '{@link kompose.Composer#getMetamodel_name <em>Metamodel name</em>}' attribute.
+	 * Sets the value of the '{@link kompose.Composer#getMetamodelName <em>Metamodel Name</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Metamodel name</em>' attribute.
-	 * @see #getMetamodel_name()
+	 * @param value the new value of the '<em>Metamodel Name</em>' attribute.
+	 * @see #getMetamodelName()
 	 * @generated
 	 */
-	void setMetamodel_name(String value);
+	void setMetamodelName(String value);
 
 	/**
 	 * <!-- begin-user-doc -->

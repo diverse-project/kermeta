@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ComposerImpl.java,v 1.3 2009-02-05 17:29:21 mclavreu Exp $
+ * $Id: ComposerImpl.java,v 1.4 2009-02-08 14:32:28 mclavreu Exp $
  */
 package kompose.impl;
 
@@ -40,7 +40,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *   <li>{@link kompose.impl.ComposerImpl#getAspectModelURI <em>Aspect Model URI</em>}</li>
  *   <li>{@link kompose.impl.ComposerImpl#getComposedModelURI <em>Composed Model URI</em>}</li>
  *   <li>{@link kompose.impl.ComposerImpl#getPredirectivesAM <em>Predirectives AM</em>}</li>
- *   <li>{@link kompose.impl.ComposerImpl#getMetamodel_name <em>Metamodel name</em>}</li>
+ *   <li>{@link kompose.impl.ComposerImpl#getMetamodelName <em>Metamodel Name</em>}</li>
  * </ul>
  * </p>
  *
@@ -138,24 +138,24 @@ public class ComposerImpl extends EObjectImpl implements Composer {
 	protected EList<ElementDirective> predirectivesAM;
 
 	/**
-	 * The default value of the '{@link #getMetamodel_name() <em>Metamodel name</em>}' attribute.
+	 * The default value of the '{@link #getMetamodelName() <em>Metamodel Name</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getMetamodel_name()
+	 * @see #getMetamodelName()
 	 * @generated
 	 * @ordered
 	 */
 	protected static final String METAMODEL_NAME_EDEFAULT = null;
 
 	/**
-	 * The cached value of the '{@link #getMetamodel_name() <em>Metamodel name</em>}' attribute.
+	 * The cached value of the '{@link #getMetamodelName() <em>Metamodel Name</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getMetamodel_name()
+	 * @see #getMetamodelName()
 	 * @generated
 	 * @ordered
 	 */
-	protected String metamodel_name = METAMODEL_NAME_EDEFAULT;
+	protected String metamodelName = METAMODEL_NAME_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -280,8 +280,8 @@ public class ComposerImpl extends EObjectImpl implements Composer {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public String getMetamodel_name() {
-		return metamodel_name;
+	public String getMetamodelName() {
+		return metamodelName;
 	}
 
 	/**
@@ -289,11 +289,11 @@ public class ComposerImpl extends EObjectImpl implements Composer {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setMetamodel_name(String newMetamodel_name) {
-		String oldMetamodel_name = metamodel_name;
-		metamodel_name = newMetamodel_name;
+	public void setMetamodelName(String newMetamodelName) {
+		String oldMetamodelName = metamodelName;
+		metamodelName = newMetamodelName;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, KomposePackage.COMPOSER__METAMODEL_NAME, oldMetamodel_name, metamodel_name));
+			eNotify(new ENotificationImpl(this, Notification.SET, KomposePackage.COMPOSER__METAMODEL_NAME, oldMetamodelName, metamodelName));
 	}
 
 	/**
@@ -346,7 +346,7 @@ public class ComposerImpl extends EObjectImpl implements Composer {
 			case KomposePackage.COMPOSER__PREDIRECTIVES_AM:
 				return getPredirectivesAM();
 			case KomposePackage.COMPOSER__METAMODEL_NAME:
-				return getMetamodel_name();
+				return getMetamodelName();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -382,7 +382,7 @@ public class ComposerImpl extends EObjectImpl implements Composer {
 				getPredirectivesAM().addAll((Collection<? extends ElementDirective>)newValue);
 				return;
 			case KomposePackage.COMPOSER__METAMODEL_NAME:
-				setMetamodel_name((String)newValue);
+				setMetamodelName((String)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -415,7 +415,7 @@ public class ComposerImpl extends EObjectImpl implements Composer {
 				getPredirectivesAM().clear();
 				return;
 			case KomposePackage.COMPOSER__METAMODEL_NAME:
-				setMetamodel_name(METAMODEL_NAME_EDEFAULT);
+				setMetamodelName(METAMODEL_NAME_EDEFAULT);
 				return;
 		}
 		super.eUnset(featureID);
@@ -442,7 +442,7 @@ public class ComposerImpl extends EObjectImpl implements Composer {
 			case KomposePackage.COMPOSER__PREDIRECTIVES_AM:
 				return predirectivesAM != null && !predirectivesAM.isEmpty();
 			case KomposePackage.COMPOSER__METAMODEL_NAME:
-				return METAMODEL_NAME_EDEFAULT == null ? metamodel_name != null : !METAMODEL_NAME_EDEFAULT.equals(metamodel_name);
+				return METAMODEL_NAME_EDEFAULT == null ? metamodelName != null : !METAMODEL_NAME_EDEFAULT.equals(metamodelName);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -463,8 +463,8 @@ public class ComposerImpl extends EObjectImpl implements Composer {
 		result.append(aspectModelURI);
 		result.append(", composedModelURI: ");
 		result.append(composedModelURI);
-		result.append(", metamodel_name: ");
-		result.append(metamodel_name);
+		result.append(", metamodelName: ");
+		result.append(metamodelName);
 		result.append(')');
 		return result.toString();
 	}
