@@ -1,3 +1,7 @@
+// Common Metamodel URI (for now, Kompose only works with models conforming to a single metamodel)
+// Available values are "http://www.eclipse.org/emf/2002/Ecore" and "http://www.kermeta.org/rdbschema.ecore" for now
+EXT "http://www.eclipse.org/emf/2002/Ecore"
+
 // Primary Model URI
 PM "platform:/resource/org.kermeta.kompose.specialization.ecore.samples/models/kermeta/kermeta_java.ecore" 
 
