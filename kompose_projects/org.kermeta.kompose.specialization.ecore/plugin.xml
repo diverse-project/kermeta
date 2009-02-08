@@ -1,12 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?eclipse version="3.2"?>
 <plugin>
-   <extension
+	<extension
          point="org.eclipse.ui.popupMenus">
       <objectContribution
-            objectClass="org.eclipse.core.resources.IFile"
+            adaptable="true"
+            id="org.kermeta.kompose.specialization.ecore.contribution1"
             nameFilter="*.kompose"
-            id="org.kermeta.kompose.specialization.ecore.contribution1">
+            objectClass="org.eclipse.core.resources.IFile">
+			<enablement>
+	           <test
+	              forcePluginActivation="true"
+	              property="kompose.metamodel"/>
+	        </enablement >
          <menu
                label="Kompose"
                path="additions"
@@ -23,5 +29,14 @@
                id="org.kermeta.kompose.specialization.ecore.composer">
          </action>
       </objectContribution>
+   </extension>
+   <extension point="org.eclipse.core.expressions.propertyTesters">
+     <propertyTester
+        id="org.kermeta.kompose.specialization.propertyTester"
+        namespace="kompose"
+        properties="metamodel"
+        type="org.eclipse.core.resources.IFile"
+        class="org.kermeta.kompose.specialization.ecore.contribution.KomposePropertyTester">
+     </propertyTester>
    </extension>
 </plugin>
