@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="C:/eclipse3.4_dev/eclipse/plugins/org.apache.ant_1.7.0.v200803061910/lib/ant.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
