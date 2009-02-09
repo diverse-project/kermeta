@@ -84,7 +84,23 @@ public class ClassUtil {
 		return (kermeta.language.structure.Object) newObject;
 	}
 	
+	public static Object cloneSwitcher(kermeta.language.structure.Class class_, Object objectToClone) {
+		if (true)
+			throw new org.kermeta.compil.runtime.helper.error.KRuntimeError(
+					((kermeta.exceptions.NotImplementedException) org.kermeta.compil.runtime.helper.language.ClassUtil
+							.newObject("kermeta.exceptions.NotImplementedException")));
+		return null;
+	}
+	
 	public static Object cloneObject(kermeta.language.structure.Class class_, Object objectToClone) {
+		if (true)
+			throw new org.kermeta.compil.runtime.helper.error.KRuntimeError(
+					((kermeta.exceptions.NotImplementedException) org.kermeta.compil.runtime.helper.language.ClassUtil
+							.newObject("kermeta.exceptions.NotImplementedException")));
+		return null;
+	}
+	
+	public static Object deepCloneSwitcher(kermeta.language.structure.Class class_, Object objectToClone) {
 		if (true)
 			throw new org.kermeta.compil.runtime.helper.error.KRuntimeError(
 					((kermeta.exceptions.NotImplementedException) org.kermeta.compil.runtime.helper.language.ClassUtil
