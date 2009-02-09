@@ -145,14 +145,16 @@ li {
 pre {
     margin:         .75em 0;
     line-height:    1.0;
-    color:          #461b7e;
+    color:          #000000; /* #461b7e;*/
 }
 
 pre.programlisting {
     font-size:      9pt;
     padding-left:   1em;
     margin-left:    1em;
-    border-left:    double gray;
+    border-left:    double gray;   
+    background-color: WhiteSmoke  ;
+    
 }
 
 div.table {
