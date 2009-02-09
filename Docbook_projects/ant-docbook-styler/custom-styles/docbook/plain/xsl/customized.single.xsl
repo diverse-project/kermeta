@@ -1,9 +1,21 @@
 <?xml version='1.0'?>
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
                 xmlns:fo="http://www.w3.org/1999/XSL/Format"
-                version='1.0'>
+                version='1.0'
+                xmlns:xslthl="http://xslthl.sf.net"
+                exclude-result-prefixes="xslthl"> 
 
 <xsl:import href="@ant.docbook.styler.fileuri@/docbook/xsl/html/docbook.xsl" />
+
+<!-- support for highlighting -->
+<xsl:param name="highlight.source" select="1"/>
+<xsl:template match='xslthl:keyword'>
+  <b class="hl-keyword" style="color:darkred"><xsl:apply-templates/></b>
+</xsl:template>
+
+<xsl:template match='xslthl:string'>
+  <i style="color:blue" class="hl-string"><xsl:apply-templates/></i>
+</xsl:template>
 
 <!-- (MM20040315) xsl parameters moved from ant-build-docbook.xml to here -->
 <xsl:param name="table.borders.with.css" select="1"/>
