@@ -10,7 +10,8 @@
 	<property name="OOo.source.file" location="${OOo.source.dir}/${project.name}.sxw"/>
 	<property name="deployment.dest" location="\\\\jersey\\triskell\\www\\triskell\\softwares\\kermeta\\docs"/>
 		
-	
+    <!-- disable use of xsltproc in order to enable xslthl for programlisting coloration -->
+	<property name="disable.xsltproc" value="true"/>
 	
 	<!-- common configuration properties -->
 	<!-- tool location -->
@@ -101,6 +102,9 @@
              <property name="docbook.resources.dir" location="${build.dir}/figures" />
              <property name="distribution.dir" location="${build.dir}/html.single/${project.name}" />
              <property name="build.dir" location="${build.docbook.dir}/${project.name}" />
+			 <property name="disable.xsltproc" value="true"/> 
+			 <property name="disable.saxon" value="true"/> 
+			<property name="xslthl.config" value="file:///c:/docbook-xsl/highlighting/xslthl-config.xml"/>
         </ant>
 
         <available property="tmp:single.ok" file="${build.dir}/html.single/${project.name}/index.html" />
@@ -202,6 +206,7 @@
 	             <property name="docbook.resources.dir" location="${build.docbook.dir}/${project.name}/figures" />
 	             <property name="distribution.dir" location="${build.dir}/pdf.fop/${project.name}" />
 	             <property name="build.dir" location="${build.docbook.dir}/${project.name}" />
+				 <property name="disable.xsltproc" value="true"/>
 	        </ant>
 	    	<!-- HACK: remove the copy from ${ant.docbook.styler.dir} directory -->
 	    	<delete dir="${ant.docbook.styler.dir}/figures" failonerror="false" quiet="true" /> 
