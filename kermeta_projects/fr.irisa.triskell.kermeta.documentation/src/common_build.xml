@@ -69,7 +69,10 @@
 		</copy>
     	<copy todir="${build.dir}/figures">
     	    <fileset dir="${OOo.source.dir}/figures"/>
-    	</copy>		
+    	</copy>	
+    	<copy todir="${build.dir}/figures">
+    	    <fileset dir="${project.base.dir}/src/figures"/>
+    	</copy>	
 	</target>
 	<target name="prepare_index.xml">
 		<tstamp>
