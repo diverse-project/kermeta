@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="ASCII"?>
-<rdbschema:RDBMSModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:rdbschema="http://www.kermeta.org/rdbschema.ecore" xsi:schemaLocation="http://www.kermeta.org/rdbschema.ecore rdbschema.ecore">
+<rdbschema:RDBMSModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:rdbschema="http://www.kermeta.org/rdbschema.ecore" xsi:schemaLocation="http://www.kermeta.org/rdbschema.ecore ../../../../plugin/org.kermeta.kompose.specialization.rdbschema/model/Rdbschema.ecore">
   <table name="User" pkey="//@table.0/@cols.0">
     <cols name="userID" type="Varchar(10)"/>
     <cols name="groupIDRef" type="Integer"/>

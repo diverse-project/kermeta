@@ -1,0 +1,2 @@
+<?xml version="1.0" encoding="ASCII"?>
+<kompose:Composer xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:kompose="http://www.kermeta.org/kompose" primaryModelURI="platform:/resource/org.kermeta.kompose.specialization.rdbschema.samples/models/product/input1.rdbschema" aspectModelURI="platform:/resource/org.kermeta.kompose.specialization.rdbschema.samples/models/product/input2.rdbschema" composedModelURI="platform:/resource/org.kermeta.kompose.specialization.rdbschema.samples/models/product/output.rdbschema" metamodelName="http://www.kermeta.org/rdbschema.ecore"/>
