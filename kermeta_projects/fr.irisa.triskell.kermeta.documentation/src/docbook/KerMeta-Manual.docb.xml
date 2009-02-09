@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.4//EN"
 "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
-<!-- $Id: KerMeta-Manual.docb.xml,v 1.38 2009-02-02 09:26:14 dvojtise Exp $ -->
+<!-- $Id: KerMeta-Manual.docb.xml,v 1.39 2009-02-09 14:18:56 dvojtise Exp $ -->
 <book lang="en-US">
   <bookinfo>
     <title>Kermeta language</title>
 
     <pubdate>Build date: @BUILD.DATE@</pubdate>
-    <pubdate>$Date: 2009-02-02 09:26:14 $</pubdate>
+    <pubdate>$Date: 2009-02-09 14:18:56 $</pubdate>
 
     <author>
       <firstname>Zoé</firstname>
@@ -190,20 +190,19 @@
         traditional " Hello world " example you can find in every programming
         book.</para>
 
-        <programlisting>@mainClass "helloworld::HelloworldExample"
+        <programlisting language="kermeta">@mainClass "helloworld::HelloworldExample"
 @mainOperation "sayHello"
-<emphasis role="strong">package</emphasis> helloworld;
+package helloworld;
 
-<emphasis role="strong">require</emphasis> kermeta
-<emphasis role="strong">using</emphasis> kermeta::standard
+require kermeta
+using kermeta::standard
 
-<emphasis role="strong">class</emphasis> HelloworldExample
+class HelloworldExample
 {
-    <emphasis role="strong">operation</emphasis> sayHello() <emphasis
-            role="strong">is</emphasis>
-    <emphasis role="strong">do</emphasis>
+    operation sayHello() is
+    do
         stdio.writeln("Hello world, ...")
-    <emphasis role="strong">end</emphasis>
+    end
 }</programlisting>
       </section>
 
@@ -213,21 +212,21 @@
         <para>Kermeta language includes usual statements like blocks and
         loops, comments,...</para>
 
-        <programlisting><emphasis>do</emphasis>
-    <literal>// a loop for getting a text from an user</literal>
-    <emphasis>var</emphasis> s : kermeta::standard::String
-    <emphasis>from var</emphasis> found : kermeta::standard::Boolean <emphasis>init</emphasis> false
-    <emphasis>until</emphasis> found
-    <emphasis>loop</emphasis>
+        <programlisting language="kermeta">do
+    // a loop for getting a text from an user
+    var s : kermeta::standard::String
+    from var found : kermeta::standard::Boolean init false
+    until found
+    loop
         s := stdio.read("Enter a text:\n --&gt; ")
-        <emphasis>if</emphasis> s.size &gt; 0 <emphasis>then</emphasis>
+        if s.size &gt; 0 then
             found := true
-        <emphasis>else</emphasis>
+        else
             stdio.writeln("ERROR - Empty text!")
-        <emphasis>end</emphasis>
-    <emphasis>end</emphasis>
+        end
+    end
     stdio.writeln("\n You entered: " + s)
-<emphasis>end</emphasis>
+end
 </programlisting>
       </section>
 
@@ -267,47 +266,48 @@
       easy with object-oriented features in Kermeta: classes, inheritance,
       exceptions, and even genericity.</para>
 
-      <programlisting>// persons who write documents
-<emphasis>class</emphasis> Writer {
-    <emphasis>attribute</emphasis> name : kermeta::standard::String
+      <programlisting language="kermeta">require "truc"
+// persons who write documents
+class Writer {
+    attribute name : kermeta::standard::String
 }
 
 // generic concept for every document
-<emphasis>abstract</emphasis> <emphasis>class</emphasis> Document {
-    <emphasis>reference</emphasis> author : Writer
-    <emphasis>attribute</emphasis> text : kermeta::standard::String
+abstract class Document {
+    reference author : Writer
+    attribute text : kermeta::standard::String
 }
 
 // a "Document" from the real world
-<emphasis>class</emphasis> Book <emphasis>inherits</emphasis> Document {}
+class Book inherits Document {}
 
 // a specialized "Book"
-<emphasis>class</emphasis> ChildBook <emphasis>inherits</emphasis> Book {
-    <emphasis>attribute</emphasis> minimalAge : kermeta::standard::Integer
+class ChildBook inherits Book {
+    attribute minimalAge : kermeta::standard::Integer
 }</programlisting>
 
       <para>Such classes can be used for verifications:</para>
 
-      <programlisting>// a specialized Exception
-<emphasis>class</emphasis> AgeException <emphasis>inherits</emphasis> kermeta::exceptions::Exception {}
+      <programlisting language="kermeta">// a specialized Exception
+class AgeException inherits kermeta::exceptions::Exception {}
 
-<emphasis>abstract</emphasis> <emphasis>class</emphasis> Reader {
-    <emphasis>operation</emphasis> read(book : ChildBook) : <emphasis>Void</emphasis> <emphasis>is</emphasis> <emphasis>abstract</emphasis>
+abstract class Reader {
+    operation read(book : ChildBook) : Void is abstract
 }
 
-<emphasis>class</emphasis> Child <emphasis>inherits</emphasis> Reader {
-    <emphasis>attribute</emphasis> age :  kermeta::standard::Integer
-    <emphasis>operation</emphasis> initialize(age :  kermeta::standard::Integer) : <emphasis>Void</emphasis> <emphasis>is</emphasis>
-    <emphasis>do</emphasis>
+class Child inherits Reader {
+    attribute age :  kermeta::standard::Integer
+    operation initialize(age :  kermeta::standard::Integer) : Void is
+    do>
         self.age := age
-    <emphasis>end</emphasis>
+    end
     // an action which triggers an Exception...
-    <emphasis>operation</emphasis> read(book : ChildBook) : <emphasis>Void</emphasis> <emphasis>is</emphasis>
-    <emphasis>do</emphasis>
-        <emphasis>if</emphasis> age &lt; book.minimalAge <emphasis>then</emphasis>
-            <emphasis>raise</emphasis> AgeException.new
-        <emphasis>end</emphasis>
-    <emphasis>end</emphasis>
+    operation read(book : ChildBook) : Void is
+    do
+        if age &lt; book.minimalAge then
+            raise AgeException.new
+        end
+    end
 }</programlisting>
 
       <section>
@@ -378,26 +378,26 @@
         the <literal>opposite</literal> concept in MOF terminology – see also
         section <xref linkend="section_properties-opposite.link" />).</para>
 
-        <programlisting><emphasis role="strong">class</emphasis> Library
+        <programlisting language="kermeta">class Library
 {
-    <emphasis role="strong">attribute</emphasis> books : set Book[0..*]
+    attribute books : set Book[0..*]
 }
 
-<emphasis role="strong">class</emphasis> Book
+class Book
 {
-    <emphasis role="strong">attribute</emphasis> title : String
-    <emphasis role="strong">attribute</emphasis> subtitle : String
+    attribute title : String
+    attribute subtitle : String
 
-    <emphasis role="strong">reference</emphasis> authors : oset Author[1..*]#works
+    reference authors : oset Author[1..*]#works
 }
 
 
-<emphasis role="strong">class</emphasis> Author
+class Author
 {
-    <emphasis role="strong">attribute</emphasis> name : String
-    <emphasis role="strong">attribute</emphasis> lastName : String
+    attribute name : String
+    attribute lastName : String
     
-    <emphasis role="strong">reference</emphasis> works : set Book[0..*]#authors
+    reference works : set Book[0..*]#authors
 }</programlisting>
 
         <para>If we represent our Kermeta model in a graphical syntax we
@@ -421,13 +421,11 @@
         <para>Using Eclipse Modeling Framework (EMF), Kermeta can load and
         save models done with other EMF tools.</para>
 
-        <programlisting>/* Initialize the EMF repository */
-<emphasis role="strong">var</emphasis> repository : EMFRepository <emphasis
-            role="strong">init</emphasis> EMFRepository.new
+        <programlisting language="kermeta">/* Initialize the EMF repository */
+var repository : EMFRepository init EMFRepository.new
 
 /* Create an EMF Resource, given model and metamodel URIs as String */
-<emphasis role="strong">var</emphasis> resource : Resource <emphasis
-            role="strong">init</emphasis> repository.createResource(myModelURI, itsMetamodelURI)
+var resource : Resource init repository.createResource(myModelURI, itsMetamodelURI)
 
 /* Load the resource */
 resource.load
@@ -435,7 +433,7 @@ resource.load
 // get elements from the resource
 // in this sample, you know that your root element is always a Library, 
 // so you can directly get the first one
-<emphasis role="strong">var</emphasis> aLibrary : Libray
+var aLibrary : Libray
 aLibrary ?= resource.one // note the conditionnal assignment using the ?=, if not a Library you'll get Void</programlisting>
 
         <para>In the same way, you can serialize a model, or load, change and
@@ -477,7 +475,7 @@ aLibrary ?= resource.one // note the conditionnal assignment using the ?=, if no
 
 		<para>Example (based on the library sample of <xref 
       linkend="section_toward_a_first_concrete_example.link" />):</para>
-		<programlisting>
+		<programlisting language="kermeta">
 var smithBooks : Set&lt;Book&gt; init Set&lt;Book&gt;.new
 smithBooks.addAll(
 	lib.books.select{aLibraryBook | 
@@ -559,29 +557,27 @@ smithBooks.addAll(
         will build a collection of names of the operations that start with
         "test".</para>
 
-        <programlisting><emphasis role="strong">var</emphasis> names : Collection&lt;String&gt;
-names := <emphasis role="strong">self</emphasis>.getMetaClass.classDefinition.ownedOperation
+        <programlisting language="kermeta">var names : Collection&lt;String&gt;
+names := self.getMetaClass.classDefinition.ownedOperation
             .select{ op | op.name.indexOf("test") == 0}
-            .collect{ op | op.name }</programlisting>
-
+            .collect{ op | op.name }
+	    </programlisting>
         <para><emphasis role="strong">Example 2</emphasis>: Providing a time
         function on Integer</para>
 
-        <programlisting><emphasis role="strong">operation</emphasis> times(body : &lt;Integer-&gt;Object&gt;) : Void <emphasis
-            role="strong">is</emphasis> <emphasis role="strong">do</emphasis>
-    <emphasis role="strong">from</emphasis> <emphasis role="strong">var</emphasis> i : Integer <emphasis
-            role="strong">init</emphasis> 0
-    <emphasis role="strong">until</emphasis> i == <emphasis role="strong">self</emphasis>
-    <emphasis role="strong">loop</emphasis>
+        <programlisting language="kermeta">operation times(body : &lt;Integer-&gt;Object&gt;) : Void is do
+    from var i : Integer init 0
+    until i == self
+    loop
         body(i)
         i := i + 1
-    <emphasis role="strong">end</emphasis>
-<emphasis role="strong">end</emphasis> </programlisting>
+    end
+end</programlisting>
 
         <para>this allows to write code like :</para>
 
-        <programlisting><emphasis role="strong">var</emphasis> res : Integer
-10.<emphasis role="strong">times</emphasis> { i | stdio.writeln(i.toString + ": Hello") } <emphasis>// Say 10 times Hello</emphasis></programlisting>
+        <programlisting language="kermeta">var res : Integer
+10.times { i | stdio.writeln(i.toString + ": Hello") } // Say 10 times Hello</programlisting>
 
         <para>See sections "<xref
         endterm="section_lambda_expression.title.link"
@@ -660,7 +656,7 @@ names := <emphasis role="strong">self</emphasis>.getMetaClass.classDefinition.ow
           <listitem>
             <para>simple line comments, i.e text line beginning with //</para>
 
-            <programlisting>// This is a single line comment</programlisting>
+            <programlisting language="kermeta">// This is a single line comment</programlisting>
           </listitem>
 
           <listitem>
@@ -670,7 +666,7 @@ names := <emphasis role="strong">self</emphasis>.getMetaClass.classDefinition.ow
             <xref linkend="section_linked-comments.link" />), i.e a comment
             that is part of the Kermeta program as a model.</para>
 
-            <programlisting>/* This a multi line comment
+            <programlisting language="kermeta">/* This a multi line comment
 all these lines are comments
 this line too. */</programlisting>
           </listitem>
@@ -694,24 +690,22 @@ this line too. */</programlisting>
         <para><emphasis role="strong">Example 1:</emphasis> you can define an
         annotation to describe the role of a property</para>
 
-        <programlisting>@usage "count the number of ..."
-<emphasis role="strong">reference</emphasis> myCounter : Integer </programlisting>
+        <programlisting language="kermeta">@usage "count the number of ..."
+reference myCounter : Integer </programlisting>
 
         <para><emphasis role="strong">Example 2</emphasis>: you can document
         your classes and operation using /** ... */</para>
 
-        <programlisting><emphasis>/** * This is a documentation tag for the class "myClass" */</emphasis>
-<emphasis role="strong">class</emphasis> MyClass {
-    <emphasis>/** This is a documentation tag for myOperation */</emphasis>
-    <emphasis role="strong">operation</emphasis> myOperation() <emphasis
-            role="strong">is</emphasis> <emphasis role="strong">do</emphasis>
-        <emphasis>// Unlinked comment</emphasis>
-    <emphasis role="strong">end</emphasis>
-    <emphasis role="strong">@desc</emphasis> "This is a named annotation for thisOperation"
-    <emphasis role="strong">operation</emphasis> thisOperation() <emphasis
-            role="strong">is</emphasis> <emphasis role="strong">do</emphasis>
-        <emphasis>/* This is an unlinked comment */</emphasis>
-    <emphasis role="strong">end</emphasis>
+        <programlisting language="kermeta">/** * This is a documentation tag for the class "myClass" */
+class MyClass {
+    /** This is a documentation tag for myOperation */
+    operation myOperation() is do
+        // Unlinked comment
+    end
+    @desc "This is a named annotation for thisOperation"
+    operation thisOperation() is do
+        /* This is an unlinked comment */
+    end
 }</programlisting>
       </section>
     </section>
@@ -735,10 +729,10 @@ this line too. */</programlisting>
       <para>This example is valid even if we use "class" and "attribute" which
       are keywords in the language:</para>
 
-      <programlisting>
-<emphasis role="strong">class</emphasis> ~class {
-    <emphasis role="strong">attribute</emphasis> ~attribute : kermeta::standard::String
-    <emphasis role="strong">attribute</emphasis> ~class : kermeta::standard::String
+      <programlisting language="kermeta">
+class ~class {
+    attribute ~attribute : kermeta::standard::String
+    attribute ~class : kermeta::standard::String
 }</programlisting>
     </section>
 
@@ -1018,20 +1012,17 @@ this line too. */</programlisting>
         <para>A variable could only be accessed in the block where it was
         defined and in its sub blocks:</para>
 
-        <programlisting><emphasis role="strong">do</emphasis>
-    <emphasis role="strong">var</emphasis> v1 : Integer <emphasis
-            role="strong">init</emphasis> 3
-    <emphasis role="strong">var</emphasis> v2 : Integer <emphasis
-            role="strong">init</emphasis> 2
-    <emphasis role="strong">do</emphasis>
-        <emphasis role="strong">var</emphasis> v3 : Integer
-        v3 := v1 + v2</programlisting>
+        <programlisting language="kermeta">do
+    var v1 : Integer init 3
+    var v2 : Integer init 2
+    do
+        var v3 : Integer
+        v3 := v1 + v2
 
-        <programlisting>        <emphasis role="strong">var</emphasis> v2 : Integer <emphasis>// error : v2 is already declared in the upper block</emphasis>
-    <emphasis role="strong">end</emphasis>
-    <emphasis role="strong">var</emphasis> v4 : Integer <emphasis
-            role="strong">init</emphasis> v3 <emphasis>// error : v3 is unknown here</emphasis>
-<emphasis role="strong">end</emphasis></programlisting>
+        var v2 : Integer // error : v2 is already declared in the upper block
+    end
+    var v4 : Integer init v3 // error : v3 is unknown here
+end</programlisting>
       </section>
 
       <section>
@@ -1047,18 +1038,17 @@ this line too. */</programlisting>
         <para><emphasis role="strong">Example 1</emphasis>: if..then..else
         block</para>
 
-        <programlisting><emphasis role="strong">var</emphasis> v1 : Integer <emphasis
-            role="strong">init</emphasis> 2
-<emphasis role="strong">var</emphasis> v2 : String <emphasis role="strong">init</emphasis> "blah"
+        <programlisting language="kermeta">var v1 : Integer init 2
+var v2 : String init "blah"
 
-<emphasis role="strong">if</emphasis> v1 &gt; 5 <emphasis role="strong">then</emphasis> v1 := v1-5
+if v1 &gt; 5 then v1 := v1-5
 
-<emphasis role="strong">if</emphasis> v1 == 2 <emphasis role="strong">then</emphasis>
+if v1 == 2 then
     v2 := v1
     v1 := v2 + v1
-<emphasis role="strong">else</emphasis>
+else
     v1 := 0
-<emphasis role="strong">end</emphasis></programlisting>
+end</programlisting>
 
         <para>The <literal>if</literal> statement is an expression (see <xref
         linkend="section_kermeta_metamodel.link" />). As any expression in
@@ -1073,21 +1063,20 @@ this line too. */</programlisting>
         <para><emphasis role="strong">Example 2</emphasis>: conditional is an
         expression</para>
 
-        <programlisting><emphasis role="strong">var</emphasis> s : String
-    s := <emphasis role="strong">if false then</emphasis> "a" <emphasis
-            role="strong">else</emphasis> "b" <emphasis role="strong">end</emphasis></programlisting>
+        <programlisting language="kermeta">var s : String
+    s := if false then "a" else "b" end</programlisting>
 
         <para>Example 3: a more complex conditional</para>
 
-        <programlisting><emphasis role="strong">var</emphasis> x : String
-    <emphasis role="strong">var</emphasis> y : Integer <emphasis role="strong">init</emphasis> 5 
-    x := <emphasis role="strong">if </emphasis>y &lt; 3<emphasis role="strong"> then</emphasis> 
+        <programlisting language="kermeta">var x : String
+    var y : Integer init 5 
+    x := if y &lt; 3 then 
          stdio.writeln("hello")
          "a" 
-          <emphasis role="strong">else</emphasis> 
+         else 
          "b"
          "c" 
-          <emphasis role="strong">end</emphasis> <emphasis>// The String "c" will be the value of x</emphasis></programlisting>
+         end // The String "c" will be the value of x</programlisting>
       </section>
 
       <section>
@@ -1095,16 +1084,14 @@ this line too. */</programlisting>
 
         <para>Here is a sample of a typical loop in Kermeta.</para>
 
-        <programlisting><emphasis role="strong">var</emphasis> v1 : Integer <emphasis
-            role="strong">init</emphasis> 3
-<emphasis role="strong">var</emphasis> v2 : Integer <emphasis role="strong">init</emphasis> 6
+        <programlisting language="kermeta">var v1 : Integer init 3
+var v2 : Integer init 6
 
-<emphasis role="strong">from</emphasis> <emphasis role="strong">var</emphasis> i : Integer <emphasis
-            role="strong">init</emphasis> 0
-<emphasis role="strong">until</emphasis> i == 10
-<emphasis role="strong">loop</emphasis>
+from var i : Integer init 0
+until i == 10
+loop
     i := i + 1
-<emphasis role="strong">end</emphasis></programlisting>
+end</programlisting>
 
         <note><para>Unlike Java, there is no exit, break or continue function in Kermeta.</para></note>
 
@@ -1350,7 +1337,7 @@ this line too. */</programlisting>
         literals. The way to get them is to use the convertion methods
         available on String (for both of them) or Integer (for Float).</para>
         <para>For example:</para>
-<programlisting>
+<programlisting language="kermeta">
 var c : Character init "f".elementAt(0)
 var r : Real init "4.5".toReal
 </programlisting>        
@@ -1608,7 +1595,7 @@ a := A&lt;Integer&gt;.new
         operation which will return self after having done the initialization
         work.</para>
 
-        <programlisting>
+        <programlisting language="kermeta">
 class A
 {
 	attribute name : String
@@ -1618,7 +1605,7 @@ class A
 }        
         </programlisting>
 
-        <programlisting>
+        <programlisting language="kermeta">
 // now you can use it easily in one line
 	var aA : A init A.new.initialize("hello")
         </programlisting>
@@ -1715,7 +1702,7 @@ class Female <emphasis role="strong">inherits</emphasis> Person
 
         <para>For example :</para>
 
-        <programlisting>
+        <programlisting language="kermeta">
 class A {
 }
 class SubA inherits A {
@@ -1740,7 +1727,7 @@ class AnotherSubA inherits A {
           the correct type, the assigned value will simply be
           <literal>Void</literal>.</para>
 
-          <programlisting>
+          <programlisting language="kermeta">
 	aSubA ?= aA  // works
 	var aAnotherSubA : AnotherSubA
 	aAnotherSubA ?= aA  // works too, but has been assigned Void and not the value ...
@@ -1750,7 +1737,7 @@ class AnotherSubA inherits A {
           all kind of cast, for example, you cannot conditionnaly assign if
           you don't have a common supertype.</para>
 
-          <programlisting>
+          <programlisting language="kermeta">
 class B {
 }
 // ...	
@@ -1769,7 +1756,7 @@ class B {
           drawback is that, if it fails to cast, then it will raise an
           exception.</para>
 
-          <programlisting>
+          <programlisting language="kermeta">
 class C {
 	operation needASubA(sa : SubA) : Void	is do
 		// do something
@@ -2156,7 +2143,7 @@ class C {
         type variable can only be substituted by a sub-type of this type. The
         following code demonstrates how to create generic classes.</para>
 
-        <programlisting>// A class with a type variable G that can be bound with any type</programlisting>
+        <programlisting language="kermeta">// A class with a type variable G that can be bound with any type</programlisting>
 
         <programlisting><emphasis role="strong">class</emphasis> Queue&lt;G&gt;
 {
@@ -2176,7 +2163,7 @@ class C {
 }
 </programlisting>
 
-        <programlisting>// A class with a type variable C that can be bound with any sub-type of Comparable</programlisting>
+        <programlisting language="kermeta">// A class with a type variable C that can be bound with any sub-type of Comparable</programlisting>
 
         <programlisting><emphasis role="strong">class</emphasis> SortedQueue&lt;C : Comparable&gt; <emphasis
             role="strong">inherits</emphasis> Queue&lt;C&gt; 
@@ -2391,7 +2378,7 @@ class C {
           </listitem>
         </itemizedlist>
 
-        <programlisting>
+        <programlisting language="kermeta">
 operation main() is do 
    var instances := self.initialize("./test.cs", "./cs.ecore") 
    from var it : Iterator&lt;Object&gt; init instances.iterator 
@@ -2404,7 +2391,7 @@ operation main() is do
          stdio.writeln("Objet : " + o.getMetaClass.classDefinition.qualifiedName 
             + " ( " + o.getMetaClass.typeDefinition.ownedAttribute.size.toString+ "attr.)" ) 
       end
-      var template : cs::Template <emphasis>// Print instances which type is cs::Template</emphasis> 
+      var template : cs::Template // Print instances which type is cs::Template 
       if (cs::Template.isInstance(o)) 
       then 
          template ?= o 
@@ -2412,7 +2399,7 @@ operation main() is do
          stdio.writeln(" decision : " + template.decision.toString) 
          stdio.writeln(" content : " + template.content) stdio.writeln(" referer : " + template.referer.toString) 
       end
-      <emphasis>// Print instances which type is cs::Decision</emphasis> 
+      // Print instances which type is cs::Decision 
       if (cs::Decision.isInstance(o)) 
       then
          decision ?= o 
@@ -2870,7 +2857,7 @@ aCollection2 := aCollection.<emphasis role="strong">collect</emphasis> { e |
 
         <para>For example :</para>
 
-        <programlisting>
+        <programlisting language="kermeta">
 class A {
 	attribute x1 : seq String[0..*]  // allows duplicates, ordered
 	attribute x2 : set String[0..*]  // doesn't allow duplicates, not ordered        
@@ -3209,7 +3196,7 @@ a5.b := b5</programlisting></entry>
               <row>
                 <entry><para>Unset a property</para></entry>
 
-                <entry><programlisting>a5.b := void</programlisting></entry>
+                <entry><programlisting language="kermeta">a5.b := void</programlisting></entry>
               </row>
 
               <row>
@@ -3330,7 +3317,7 @@ aB.c2 := aA.c1     <emphasis>// aB.c2 == aA.c1 and aA.c1 keeps its value !!!
         in java. This means that you can overwrite it, if you want to compare
         the contents of two objects of the same class.</para>
 
-        <programlisting>@mainClass "root::Main"
+        <programlisting language="kermeta">@mainClass "root::Main"
 @mainOperation "main"
 
 package root;
@@ -3408,7 +3395,7 @@ class Main inherits kermeta::kunit::TestCase{
         compare values of primitive types. These classes simply redefine the
         equals. Then we can write this code :</para>
 
-        <programlisting>var i1 : Integer init 10
+        <programlisting language="kermeta">var i1 : Integer init 10
 var i2 : Integer init 10
 assert (i1.equals(i2))
 
@@ -3428,7 +3415,7 @@ assert (i3 == i4)
         collection which takes into account the order of elements. Have a look
         to the following pieces of code :</para>
 
-        <programlisting>operation test_try1() : Void is do
+        <programlisting language="kermeta">operation test_try1() : Void is do
    var os : OrderedSet&lt;Integer&gt; init OrderedSet&lt;Integer&gt;.new
    os.add(1) os.add(2) os.add(3) os.add(4) os.add(5) os.add(6)
 
@@ -3513,7 +3500,7 @@ end
           <listitem>
             <para>Call of a function:</para>
 
-            <programlisting>anInstance.FUNCTION_NAME ( TYPE | SOME_CODE )
+            <programlisting language="kermeta">anInstance.FUNCTION_NAME ( TYPE | SOME_CODE )
 anInstance.FUNCTION_NAME ( TYPE_1, TYPE_2 | SOME_CODE )</programlisting>
           </listitem>
 
@@ -3575,7 +3562,7 @@ f := <emphasis role="strong">function</emphasis> { VAR_NAME_1 : TYPE_1, VAR_NAME
 		<para>The operation andThen and orElse of Boolean use the ability of functions to postpone the parameter evaluation.
 		This allows to implement the expected behavior without adding new construct to the language.
 		</para>
-        <programlisting>
+        <programlisting language="kermeta">
         // this kind of code allows to avoid a cast exception on the second test
         if cl.isInstanceOf(NamedElement).andThen{f|	cl.asType(NamedElement).name == "foo"} then
         	// do something...
@@ -3893,7 +3880,7 @@ and op.name.indexOf("All")==-1}
           <literal>checkAllInvariants</literal>, checks recursively the
           element being a containment link with the checked element.</para>
 
-          <programlisting>theModelElement.checkInvariants
+          <programlisting language="kermeta">theModelElement.checkInvariants
 </programlisting>
 
           <para>The checkAllInvariants operation is a recursive method which
@@ -3999,7 +3986,7 @@ and op.name.indexOf("All")==-1}
 
          <para>In this sample, writing:</para>
 
-        <programlisting>// aspect1.kmt
+        <programlisting language="kermeta">// aspect1.kmt
 package pack;
 require kermeta
 // this is the first aspect of class A
@@ -4013,7 +4000,7 @@ class Decoration{
 
          
 
-        <programlisting>// base.kmt
+        <programlisting language="kermeta">// base.kmt
 package pack;
 require kermeta
 // this is the base class
@@ -4028,7 +4015,7 @@ class A {
 
          
 
-        <programlisting>// aspect2.kmt
+        <programlisting language="kermeta">// aspect2.kmt
 package pack;
 require kermeta
 require "base.kmt"
@@ -4060,7 +4047,7 @@ aspect class A {
 
          
 
-        <programlisting>class A {
+        <programlisting language="kermeta">class A {
 	attribute name : kermeta::standard::String
 	attribute decorations : Decoration[0..*]	
 	attribute id : kermeta::standard::Integer
@@ -4103,7 +4090,7 @@ class Decoration{
         linkend="section_derived_properties.link">derived properties</link>
         cannot be redefined in several aspect classes.</para>
 
-        <programlisting>aspect class A {
+        <programlisting language="kermeta">aspect class A {
 	//the feature is equivalent to the one define in the base class, so this is legal
 	attribute name : kermeta::standard::String	
 	
@@ -4113,7 +4100,7 @@ class Decoration{
 		is abstract
 }</programlisting>
 
-        <programlisting>package pack;
+        <programlisting language="kermeta">package pack;
 require kermeta
 class A {
 
@@ -4129,7 +4116,7 @@ class A {
 
         <para>This sample shows the use of the overloadable tag</para>
 
-        <programlisting>package pack;
+        <programlisting language="kermeta">package pack;
 require kermeta
 aspect class A {	
 	@overloadable "true"
@@ -4138,7 +4125,7 @@ aspect class A {
 		is abstract
 }</programlisting>
 
-        <programlisting>package pack;
+        <programlisting language="kermeta">package pack;
 require kermeta
 aspect class A {	
 	@overloadable "true"
@@ -4147,7 +4134,7 @@ aspect class A {
 	end
 }</programlisting>
 
-        <programlisting>class A {
+        <programlisting language="kermeta">class A {
 	attribute name : kermeta::standard::String
 	operation getQualifiedName() : kermeta::standard::String is do
 		result := name
@@ -4179,7 +4166,7 @@ aspect class A {
 
         <para>In kermeta textual syntax, the keyword aspect must be placed before the keyword abstract.</para>
         <para>Example :</para>
-        <programlisting>package pack;
+        <programlisting language="kermeta">package pack;
 require kermeta
 aspect abstract class A {	
 	// add something
@@ -4222,7 +4209,7 @@ aspect abstract class A {
         <para>A model type is simply a set of metaclasses. Expressed in
         kermeta, this is a collection of kermeta classes.</para>
 
-        <programlisting>
+        <programlisting language="kermeta">
 package aMetamodel;
 // let's define some normal classes 
 class C1 {
@@ -4249,7 +4236,7 @@ modeltype MainMT { aMetamodel::C1, aMetamodel::C2}
         <para>Now that you have defined a ModelType, you can use it to declare
         model variables.</para>
 
-        <programlisting>
+        <programlisting language="kermeta">
 	var aMainMT : MainMT init MainMT.new
       	</programlisting>
 
@@ -4261,7 +4248,7 @@ modeltype MainMT { aMetamodel::C1, aMetamodel::C2}
         collection, only compatible objects will be added to the
         model).</para>
 
-        <programlisting>
+        <programlisting language="kermeta">
     // create a model element
 	var newC1 : aMetamodel::C1 init aMetamodel::C1.new()
 	newC1.name := "hello"
@@ -4283,7 +4270,7 @@ modeltype MainMT { aMetamodel::C1, aMetamodel::C2}
         or <literal>resourceToModel</literal> with the resource. That will
         fill the model with compatible objects.</para>
 
-        <programlisting>
+        <programlisting language="kermeta">
 	// load a resource with model elements
 	var res : EMFRepository init EMFRepository.new
 	var resource : Resource init res.createResource(modelFileName, ecoreMetamodelFileName)
@@ -4318,7 +4305,7 @@ modeltype MainMT { aMetamodel::C1, aMetamodel::C2}
         <para>As a sample, let's define a mini metamodel and its corresponding
         model type :</para>
 
-        <programlisting>
+        <programlisting language="kermeta">
       	</programlisting>
 
         <note>
@@ -4328,7 +4315,7 @@ modeltype MainMT { aMetamodel::C1, aMetamodel::C2}
           illustrated the fact that the name of metaclasses are
           ignored.</para>
 
-          <programlisting>
+          <programlisting language="kermeta">
  modeltype MiniMT_2 { aMetamodel::C1 }
       		</programlisting>
         </note>
@@ -4463,7 +4450,7 @@ modeltype MainMT { aMetamodel::C1, aMetamodel::C2}
 
          
 
-        <programlisting> require "yourjar.jar" </programlisting>
+        <programlisting language="kermeta"> require "yourjar.jar" </programlisting>
 
          
 
@@ -4491,7 +4478,7 @@ modeltype MainMT { aMetamodel::C1, aMetamodel::C2}
 		<para>Sample using java.io from java Standard library</para>
 		<para/>
 
-        <programlisting> 
+        <programlisting language="kermeta"> 
 require kermeta
 
 require java_rt_jar includeFilter ("java::io")   // the filter ensure we don't get all java
