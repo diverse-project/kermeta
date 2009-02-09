@@ -12,7 +12,6 @@ public class KomposePropertyTester extends PropertyTester {
 
 	private static final String METAMODEL = "http://www.eclipse.org/emf/2002/Ecore";
 	
-	@Override
 	public boolean test(Object receiver, String property, Object[] args,
 			Object expectedValue) {
 		IFile komposeModel = (IFile) receiver;

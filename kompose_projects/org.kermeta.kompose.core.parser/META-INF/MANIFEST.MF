@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Kompose Parser Plug-in
 Bundle-SymbolicName: org.kermeta.kompose.core.parser;singleton:=true
-Bundle-Version: 0.0.3
+Bundle-Version: 0.0.3.1
 Require-Bundle: org.eclipse.emf;bundle-version="2.4.0",
  org.eclipse.emf.common;bundle-version="2.4.0",
  org.eclipse.emf.ecore;bundle-version="2.4.1",

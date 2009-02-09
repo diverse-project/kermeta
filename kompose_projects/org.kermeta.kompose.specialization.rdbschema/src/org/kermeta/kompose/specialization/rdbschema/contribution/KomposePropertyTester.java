@@ -12,7 +12,6 @@ public class KomposePropertyTester extends PropertyTester {
 
 	private static final String METAMODEL = "http://www.kermeta.org/rdbschema.ecore";
 	
-	@Override
 	public boolean test(Object receiver, String property, Object[] args,
 			Object expectedValue) {
 		IFile komposeModel = (IFile) receiver;

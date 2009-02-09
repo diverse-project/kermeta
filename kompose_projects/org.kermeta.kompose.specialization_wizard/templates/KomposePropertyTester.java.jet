@@ -26,7 +26,6 @@ public class KomposePropertyTester extends PropertyTester {
 
 	private static final String METAMODEL = "<%=data.getMetamodelURI()%>";
 	
-	@Override
 	public boolean test(Object receiver, String property, Object[] args,
 			Object expectedValue) {
 		IFile komposeModel = (IFile) receiver;
