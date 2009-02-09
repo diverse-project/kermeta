@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
 <project name="Docbook styler module for ANT" default="help" basedir=".">
+	
   <property name="undefined"               value="__UNDEFINED__VALUE__" />
 
   <!-- ## (DW 20040307) Added explicit property 'ant.docbook.styler.dir'. This
@@ -49,6 +50,9 @@
     <fileset dir="${ant.docbook.styler.dir}/ant-extensions" includes="**/*.jar" />
     <pathelement path="${ant.docbook.styler.dir}/ant-extensions" />
   </path>
+
+	
+  <taskdef name="setsystemproperty" classname="fr.inria.ant.javasystem.tasks.SetSystemPropertyTask"/>
 
   <!-- ##################################### -->
   <!-- ### {{{ CHECK REQUIRED PROPS      ### -->
@@ -410,6 +414,8 @@ set up XEP's installation directory in the module's configuration property file.
     >
         <filterset refid="filterset.fileuris" />
     </copy>
+    <setsystemproperty key="xslthl.config.verbose" value="true"/>
+    <setsystemproperty key="xslthl.config" value="file:///${ant.docbook.styler.dir}/xslthl/highlighters/xslthl-config.xml"/>
 
     <xslt
         in      = "${temp:docbook.ready.file}"
@@ -736,7 +742,7 @@ set up XEP's installation directory in the module's configuration property file.
         </or>
     </condition>
     
-    <condition property="xslt.processor" value="com.dawidweiss.ant.taskdefs.XsltProcLiaison">
+  <condition property="xslt.processor" value="com.dawidweiss.ant.taskdefs.XsltProcLiaison">
         <and>
             <isset property="tmp:xsltproc.available" />
             <not>
