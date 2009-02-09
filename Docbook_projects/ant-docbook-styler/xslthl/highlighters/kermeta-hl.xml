@@ -43,27 +43,23 @@ Michiel Hendriks <elmuerte at users.sourceforge.net>
 		<string>"</string>
 		<escape>\</escape>
 	</highlighter>
-	<highlighter type="string">
+	<!--  <highlighter type="string">
 		<string>'</string>
 		<escape>\</escape>
-	</highlighter>
+	</highlighter> -->
 	<highlighter type="annotation">
 		<start>@</start>
-		<valueStart>(</valueStart>
-		<valueEnd>)</valueEnd>
+		<valueStart>"</valueStart>
+		<valueEnd>"</valueEnd>
 	</highlighter>
-	<highlighter type="hexnumber">
-		<prefix>0x</prefix>
-		<ignoreCase />
-	</highlighter>
-	<highlighter type="number">
+	<!--  <highlighter type="number">
 		<point>.</point>
 		<exponent>e</exponent>
 		<suffix>f</suffix>
 		<suffix>d</suffix>
 		<suffix>l</suffix>
 		<ignoreCase />
-	</highlighter>
+	</highlighter> -->
 	<highlighter type="keywords">
 		<keyword>abstract</keyword>
 		<keyword>alias</keyword>

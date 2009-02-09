@@ -15,12 +15,18 @@
 <xsl:template match='xslthl:filekeyword'> 
   <b class="hl-keyword" style="color: darkred"><xsl:apply-templates/></b>
 </xsl:template>
+<xsl:template match='xslthl:annotation'> 
+  <b class="hl-keyword" style="color: darkred"><xsl:apply-templates/></b>
+</xsl:template>
 
 <xsl:template match='xslthl:string'>
   <i style="color:blue" class="hl-string"><xsl:apply-templates/></i>
 </xsl:template>
 <xsl:template match='xslthl:comment'>
-  <i class="hl-comment" style="color: darkgrey"><xsl:apply-templates/></i>
+  <i class="hl-comment" style="color: darkgreen"><xsl:apply-templates/></i>
+</xsl:template>
+<xsl:template match='xslthl:doccomment'>
+  <i class="hl-comment" style="color: darkblue"><xsl:apply-templates/></i>
 </xsl:template>
 
 
