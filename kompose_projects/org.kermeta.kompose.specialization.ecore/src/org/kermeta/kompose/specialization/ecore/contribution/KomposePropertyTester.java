@@ -25,7 +25,7 @@ public class KomposePropertyTester extends PropertyTester {
 			br.readLine();
 			composerDefinition = br.readLine();
 			composerMetamodelTmp = composerDefinition.substring(composerDefinition.indexOf("metamodelName"), composerDefinition.indexOf(">"));
-			composerMetamodel = composerMetamodelTmp.substring(composerMetamodelTmp.indexOf("=")+2, composerMetamodelTmp.length()-1);
+			composerMetamodel = composerMetamodelTmp.substring(composerMetamodelTmp.indexOf("=")+2, composerMetamodelTmp.lastIndexOf("\""));
 		} catch (CoreException e) {
 			System.out.println("KOMPOSE-ERROR: Impossible to open selected file");
 			e.printStackTrace();

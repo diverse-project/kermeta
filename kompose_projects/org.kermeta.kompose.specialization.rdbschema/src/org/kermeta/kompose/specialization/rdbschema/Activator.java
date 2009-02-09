@@ -6,7 +6,7 @@
  * author: Mickael Clavreul - mclavreu(at)irisa.fr - Triskell Team
  * 
  */
-package org.kermeta.kompose.specialization.rdbschema.activator;
+package org.kermeta.kompose.specialization.rdbschema;
 
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.ui.plugin.AbstractUIPlugin;

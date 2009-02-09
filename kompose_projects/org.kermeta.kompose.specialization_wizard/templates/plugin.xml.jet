@@ -18,7 +18,7 @@ class="PluginXMLGenerator"
          <enablement>
 	     	<test
 	        	forcePluginActivation="true"
-	            property="kompose.metamodel"/>
+	            property="<%=data.getPackage_name()%>.metamodel"/>
 	     </enablement >
          <menu
                label="Kompose"
@@ -44,7 +44,7 @@ class="PluginXMLGenerator"
    <extension point="org.eclipse.core.expressions.propertyTesters">
      <propertyTester
         id="org.kermeta.kompose.specialization.propertyTester"
-        namespace="kompose"
+        namespace="<%=data.getPackage_name()%>"
         properties="metamodel"
         type="org.eclipse.core.resources.IFile"
         class="<%=data.getPackage_name()%>.contribution.KomposePropertyTester">

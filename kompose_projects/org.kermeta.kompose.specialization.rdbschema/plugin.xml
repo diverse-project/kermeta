@@ -7,6 +7,11 @@
             objectClass="org.eclipse.core.resources.IFile"
             nameFilter="*.kompose"
             id="org.kermeta.kompose.specialization.rdbschema.contribution1">
+            <enablement>
+	           <test
+	              forcePluginActivation="true"
+	              property="org.kermeta.kompose.specialization.rdbschema.metamodel"/>
+	        </enablement >
          <menu
                label="Kompose"
                path="additions"
@@ -20,9 +25,18 @@
                class="org.kermeta.kompose.specialization.rdbschema.popup.action.Composer"
                menubarPath="org.kermeta.kompose.specialization.kompose.menu1/group1"
                enablesFor="1"
-               id="org.kermeta.kompose.specialization.rdbschema.newAction">
+               id="org.kermeta.kompose.specialization.rdbschema.composer">
          </action>
       </objectContribution>
+   </extension>
+   <extension point="org.eclipse.core.expressions.propertyTesters">
+     <propertyTester
+        id="org.kermeta.kompose.specialization.propertyTester"
+        namespace="org.kermeta.kompose.specialization.rdbschema"
+        properties="metamodel"
+        type="org.eclipse.core.resources.IFile"
+        class="org.kermeta.kompose.specialization.rdbschema.contribution.KomposePropertyTester">
+     </propertyTester>
    </extension>
    <extension
          point="org.eclipse.ui.startup">
