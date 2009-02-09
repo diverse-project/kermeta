@@ -317,6 +317,8 @@
         <filterset refid="filterset.fileuris" />
     </copy>
 
+    <setsystemproperty key="xslthl.config.verbose" value="true"/>
+    <setsystemproperty key="xslthl.config" value="file:///${ant.docbook.styler.dir}/xslthl/highlighters/xslthl-config.xml"/>
     <xslt
         in      = "${temp:docbook.ready.file}"
         style   = "${build.dir}/customized.pdf-fop.xsl.tmp"
@@ -453,6 +455,8 @@ set up XEP's installation directory in the module's configuration property file.
         </filterset>
     </copy>
 
+    <setsystemproperty key="xslthl.config.verbose" value="true"/>
+    <setsystemproperty key="xslthl.config" value="file:///${ant.docbook.styler.dir}/xslthl/highlighters/xslthl-config.xml"/>
     <xslt
         in      = "${temp:docbook.ready.file}"
         style   = "${build.dir}/customized.chunked.xsl.tmp"
@@ -501,6 +505,8 @@ set up XEP's installation directory in the module's configuration property file.
     </copy>
 
 	<mkdir dir="${distribution.dir}/${eclipse.html.base.dir}" />
+    <setsystemproperty key="xslthl.config.verbose" value="true"/>
+    <setsystemproperty key="xslthl.config" value="file:///${ant.docbook.styler.dir}/xslthl/highlighters/xslthl-config.xml"/>
     <xslt
         in      = "${temp:docbook.ready.file}"
         style   = "${build.dir}/customized.eclipse-help.xsl.tmp"
