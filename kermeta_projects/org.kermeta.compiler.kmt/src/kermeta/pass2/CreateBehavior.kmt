@@ -1,4 +1,4 @@
-/* $Id: CreateBehavior.kmt,v 1.99 2009-02-03 17:55:18 cfaucher Exp $
+/* $Id: CreateBehavior.kmt,v 1.100 2009-02-09 17:09:23 cfaucher Exp $
  * Creation date: January 21, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -793,7 +793,7 @@ package behavior {
 						
 							if (self.staticProperty.upper != 1) and (not self.isParameterMany()) then
 								var type_binding : String init self.staticType.asType(Class).typeParamBinding.first().type.createBehaviorJava(context)
-								
+
 								if (not self.staticProperty.isUnique) and (not self.staticProperty.isOrdered) then
 									result := context.COLLECTION_UTIL_CLASS + ".<" + type_binding + ">convertAsBag(" + result
 								end
@@ -817,7 +817,7 @@ package behavior {
 							cf_prop_suffix := ""
 							
 						else
-						
+
 							if not self.callsFunctionType() then
 							
 								if (self.staticOperation.upper != 1) and (not self.isParameterMany()) then
@@ -1020,7 +1020,13 @@ package behavior {
 					if (not self.isParameter()) and (not self.isParameterForOwningOperation()) then
 						result := result + IdentifierHelper.new.getMangledIdentifier(self.name, context) + self.printSuffix(context)
 					else
-						if self.isParameterSingle() or self.isParameterForOwningOperationSingle() or self.isParameterManyAndForOwningOperation() then
+					
+						if ( self.isParameterSingle()
+								or self.isParameterForOwningOperationSingle()
+								or self.isParameterManyAndForOwningOperation() )
+							and
+								( not (self.isParameterSingle()
+								and self.isParameterForOwningOperationMany()) ) then
 							result := result + IdentifierHelper.new.getMangledIdentifier(self.name, context) + self.printSuffix(context)
 						else
 						
@@ -1190,47 +1196,6 @@ package behavior {
 	}
 	
 	aspect class Assignment {
-		
-		//Not used for the moment
-		operation requireConversionObjectToValueType(context : KM2EcoreContext) : Boolean is do
-			result := false
-			var right_type : String init self.~value.staticType.getTypeQName()
-			
-			var value_type_list : Set<String> init Set<String>.new()
-			value_type_list.add("kermeta::standard::String")
-			value_type_list.add("kermeta::standard::Boolean")
-			value_type_list.add("kermeta::standard::Integer")
-			value_type_list.add("kermeta::standard::Character")
-			value_type_list.add("kermeta::standard::Real")
-			
-			var castType : String init self.getCastTypeQName(context)
-			if right_type == "kermeta::language::structure::Object" then
-				if value_type_list.contains(castType) then
-					stdio.writeln("a conversion is required")
-					result := true
-				end
-			end
-		end
-		
-		operation requireConversionValueTypeToObject(context : KM2EcoreContext) : Boolean is do
-			result := false
-			
-			var left_type : String init self.target.staticType.getTypeQName()
-			
-			var value_type_list : Set<String> init Set<String>.new()
-			value_type_list.add("kermeta::standard::String")
-			value_type_list.add("kermeta::standard::Boolean")
-			value_type_list.add("kermeta::standard::Integer")
-			value_type_list.add("kermeta::standard::Character")
-			value_type_list.add("kermeta::standard::Real")
-			
-			var castType : String init self.~value.staticType.getTypeQName()
-			if left_type == "kermeta::language::structure::Object" then
-				if value_type_list.contains(castType) then
-					result := true
-				end
-			end
-		end
 		
 		operation initCast(context : KM2EcoreContext) : Void is do
 			self.valueTypeCastPrefix := self.ppValueTypeCastPrefix(context)

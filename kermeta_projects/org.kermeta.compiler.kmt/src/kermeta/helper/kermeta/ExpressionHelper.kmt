@@ -1,4 +1,4 @@
-/* $Id: ExpressionHelper.kmt,v 1.35 2009-02-03 17:58:06 cfaucher Exp $
+/* $Id: ExpressionHelper.kmt,v 1.36 2009-02-09 17:09:23 cfaucher Exp $
  * Creation date: Jul 25, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -83,6 +83,7 @@ aspect class Expression {
 							if assignment.container.isInstanceOf(CallFeature) then
 								result := ""
 							else
+								// FIXME CF: please check if the following just could be like that: result := ";"
 								result := self.container.asType(Assignment).valueTypeCastSuffix + self.container.asType(Assignment).cacheCastSuffix + ";"
 							end
 						end
@@ -692,6 +693,41 @@ aspect class CallFeature {
 		}
 		if result != "" then
 			result := "<" + result + ">"
+		end
+	end
+	
+	operation getCallFeatureCorrespondingParameter() : Parameter is do
+		result := void
+
+		if self.isParameter() then
+			// In this case the callFeature self is contained by another callFeature
+			var cf_ : CallFeature init self.container.asType(CallFeature)
+			var i : Integer init -1
+			var exp : Expression init cf_.parameters.detect{ p |
+				i := i+1
+				p==self
+			}
+			result := cf_.staticOperation.ownedParameter.elementAt(i).asType(Parameter)
+		end
+	end
+
+	operation requireConversionValueTypeToObject(context : KM2EcoreContext) : Boolean is do
+		result := false
+		
+		if self.isParameter() then
+			
+			var param : Parameter init self.getCallFeatureCorrespondingParameter()
+			
+			if not param.isVoid() then
+				var left_type : String init param.type.getTypeQName()
+				
+				if left_type == "kermeta::language::structure::Object" then
+					if self.staticType.isValueType() then
+						result := true
+					end
+				end
+			end
+		
 		end
 	end
 

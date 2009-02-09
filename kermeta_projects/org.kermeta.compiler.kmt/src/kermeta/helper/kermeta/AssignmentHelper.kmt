@@ -1,4 +1,4 @@
-/* $Id: AssignmentHelper.kmt,v 1.6 2009-01-20 15:52:13 cfaucher Exp $
+/* $Id: AssignmentHelper.kmt,v 1.7 2009-02-09 17:09:23 cfaucher Exp $
  * Creation date: Nov 06, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -65,6 +65,31 @@ aspect class Assignment {
 		result := ""
 		if self.requireConversionValueTypeToObject(context) then
 			result := ")"
+		end
+	end
+	
+	//Not used yet
+	operation requireConversionObjectToValueType(context : KM2EcoreContext) : Boolean is do
+		result := false
+		var right_type : String init self.~value.staticType.getTypeQName()
+
+		if right_type == "kermeta::language::structure::Object" then
+			if self.target.staticType.isValueType() then
+				stdio.writeln("Not implemented yet, a conversion is required, see at: Assignment::requireConversionObjectToValueType")
+				result := true
+			end
+		end
+	end
+	
+	operation requireConversionValueTypeToObject(context : KM2EcoreContext) : Boolean is do
+		result := false
+		
+		var left_type : String init self.target.staticType.getTypeQName()
+
+		if left_type == "kermeta::language::structure::Object" then
+			if self.~value.staticType.isValueType() then
+				result := true
+			end
 		end
 	end
 }
