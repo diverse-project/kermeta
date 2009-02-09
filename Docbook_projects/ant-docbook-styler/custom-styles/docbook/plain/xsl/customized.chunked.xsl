@@ -5,6 +5,9 @@
 
 <xsl:import href="@ant.docbook.styler.fileuri@/docbook/xsl/html/chunk.xsl" />
 
+<!-- support for highlighting and other custom html. see docbook/xsl/html/highlight.xsl for sample of coloration for html document-->
+<xsl:include href="@ant.docbook.styler.fileuri@/custom-styles/docbook/plain/xsl/customized.html-base.xsl"/>
+
 <!-- (MM20040315) xsl parameters moved from ant-build-docbook.xml to here -->
 <xsl:param name="table.borders.with.css" select="1"/>
 <xsl:param name="html.stylesheet">css/docbook.css</xsl:param>

@@ -5,6 +5,10 @@
 
 <xsl:import href="@ant.docbook.styler.fileuri@/docbook/xsl/eclipse/eclipse.xsl" />
 
+<!-- support for highlighting and other custom html. see docbook/xsl/html/highlight.xsl for sample of coloration for html document-->
+<xsl:include href="@ant.docbook.styler.fileuri@/custom-styles/docbook/plain/xsl/customized.html-base.xsl"/>
+
+
 <!-- specific to eclips help -->
 <xsl:param name="manifest.in.base.dir" select="0"></xsl:param>
 <xsl:param name="base.dir">help/html/</xsl:param>

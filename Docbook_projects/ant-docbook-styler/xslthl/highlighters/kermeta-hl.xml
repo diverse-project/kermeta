@@ -100,7 +100,7 @@ Michiel Hendriks <elmuerte at users.sourceforge.net>
 		<keyword>raises</keyword>
 		<keyword>readonly</keyword>
 		<keyword>reference</keyword>
-		<keyword>require</keyword>
+		<!--<keyword>require</keyword>-->
 		<keyword>rescue</keyword>
 		<keyword>result</keyword>
 		<keyword>setter</keyword>
@@ -111,9 +111,14 @@ Michiel Hendriks <elmuerte at users.sourceforge.net>
 		<keyword>then</keyword>
 		<keyword>true</keyword>
 		<keyword>until</keyword>
-		<keyword>using</keyword>
+		<!--<keyword>using</keyword>-->
 		<keyword>value</keyword>
 		<keyword>var</keyword>
 		<keyword>void</keyword>
+	</highlighter>
+	<highlighter type="keywords">
+		<keyword>require</keyword>
+		<keyword>using</keyword>    
+		<style>filekeyword</style>
 	</highlighter>
 </highlighters>
