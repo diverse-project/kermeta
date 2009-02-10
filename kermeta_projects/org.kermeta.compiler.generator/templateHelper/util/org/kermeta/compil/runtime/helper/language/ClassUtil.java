@@ -94,7 +94,13 @@ public class ClassUtil {
 	}
 	
 	public static Object cloneObject(kermeta.language.structure.Class class_, kermeta.language.structure.Object objectToClone) {
-		return (kermeta.language.structure.Object) EcoreUtil.copy((kermeta.language.structure.Object) objectToClone);
+		// We cannot use the EcoreUtil.copy from EMF for "clone", because the behavior of this one is a deepClone
+		//return (kermeta.language.structure.Object) EcoreUtil.copy((kermeta.language.structure.Object) objectToClone);
+		if (true)
+			throw new org.kermeta.compil.runtime.helper.error.KRuntimeError(
+					((kermeta.exceptions.NotImplementedException) org.kermeta.compil.runtime.helper.language.ClassUtil
+							.newObject("kermeta.exceptions.NotImplementedException")));
+		return null;
 	}
 	
 	public static Object cloneObject(kermeta.language.structure.Class class_, java.lang.Object objectToClone) {
