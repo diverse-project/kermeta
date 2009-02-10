@@ -84,24 +84,20 @@ public class ClassUtil {
 		return (kermeta.language.structure.Object) newObject;
 	}
 	
-	public static Object cloneSwitcher(kermeta.language.structure.Class class_, java.lang.Object objectToClone) {
-		
-		/*
+	public static java.lang.Object cloneSwitcher(kermeta.language.structure.Class class_, java.lang.Object objectToClone) {
 		if( objectToClone instanceof kermeta.language.structure.Object ) {
-			//TODO
+			return class_.clone((kermeta.language.structure.Object) objectToClone);
 		} else {
-			//TODO
+			return cloneObject(class_, (java.lang.Object) objectToClone);
 		}
-		*/
-		
-		if (true)
-			throw new org.kermeta.compil.runtime.helper.error.KRuntimeError(
-					((kermeta.exceptions.NotImplementedException) org.kermeta.compil.runtime.helper.language.ClassUtil
-							.newObject("kermeta.exceptions.NotImplementedException")));
-		return null;
+
 	}
 	
-	public static Object cloneObject(kermeta.language.structure.Class class_, Object objectToClone) {
+	public static Object cloneObject(kermeta.language.structure.Class class_, kermeta.language.structure.Object objectToClone) {
+		return (kermeta.language.structure.Object) EcoreUtil.copy((kermeta.language.structure.Object) objectToClone);
+	}
+	
+	public static Object cloneObject(kermeta.language.structure.Class class_, java.lang.Object objectToClone) {
 		if (true)
 			throw new org.kermeta.compil.runtime.helper.error.KRuntimeError(
 					((kermeta.exceptions.NotImplementedException) org.kermeta.compil.runtime.helper.language.ClassUtil
@@ -110,23 +106,18 @@ public class ClassUtil {
 	}
 	
 	public static Object deepCloneSwitcher(kermeta.language.structure.Class class_, java.lang.Object objectToClone) {
-		
-		/*
 		if( objectToClone instanceof kermeta.language.structure.Object ) {
-			//TODO
+			return class_.deepClone((kermeta.language.structure.Object) objectToClone);
 		} else {
-			//TODO
+			return deepCloneObject(class_, (java.lang.Object) objectToClone);
 		}
-		*/
-		
-		if (true)
-			throw new org.kermeta.compil.runtime.helper.error.KRuntimeError(
-					((kermeta.exceptions.NotImplementedException) org.kermeta.compil.runtime.helper.language.ClassUtil
-							.newObject("kermeta.exceptions.NotImplementedException")));
-		return null;
 	}
 
 	public static Object deepCloneObject(kermeta.language.structure.Class class_, Object objectToClone) {
+		return (kermeta.language.structure.Object) EcoreUtil.copy((kermeta.language.structure.Object) objectToClone);
+	}
+	
+	public static Object deepCloneObject(kermeta.language.structure.Class class_, java.lang.Object objectToClone) {
 		if (true)
 			throw new org.kermeta.compil.runtime.helper.error.KRuntimeError(
 					((kermeta.exceptions.NotImplementedException) org.kermeta.compil.runtime.helper.language.ClassUtil
