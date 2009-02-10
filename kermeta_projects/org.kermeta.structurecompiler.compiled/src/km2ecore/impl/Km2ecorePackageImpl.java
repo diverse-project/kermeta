@@ -1,26 +1,20 @@
 /**
- * <copyright>
- * </copyright>
+ * License: EPL
+ * Copyright: IRISA / INRIA / Universite de Rennes 1
+ * 
+ * Generating with Kermeta <http://www.kermeta.org>
  *
- * $Id: Km2ecorePackageImpl.java,v 1.10 2009-01-21 09:16:01 cfaucher Exp $
+ * $Id: Km2ecorePackageImpl.java,v 1.11 2009-02-10 17:51:54 cfaucher Exp $
  */
 package km2ecore.impl;
-
-import kermeta.KermetaPackage;
 
 import kermeta.compiler.CompilerPackage;
 
 import kermeta.compiler.impl.CompilerPackageImpl;
 
-import kermeta.ecore.EcorePackage;
-
-import kermeta.ecore.impl.EcorePackageImpl;
-
 import kermeta.exceptions.ExceptionsPackage;
 
 import kermeta.exceptions.impl.ExceptionsPackageImpl;
-
-import kermeta.impl.KermetaPackageImpl;
 
 import kermeta.interpreter.InterpreterPackage;
 
@@ -72,9 +66,17 @@ import km2ecore.common.exception.impl.ExceptionPackageImpl;
 
 import km2ecore.common.impl.CommonPackageImpl;
 
+import km2ecore.helper.ecore.EcorePackage;
+
+import km2ecore.helper.ecore.impl.EcorePackageImpl;
+
 import km2ecore.helper.java.JavaPackage;
 
 import km2ecore.helper.java.impl.JavaPackageImpl;
+
+import km2ecore.helper.kermeta.KermetaPackage;
+
+import km2ecore.helper.kermeta.impl.KermetaPackageImpl;
 
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
@@ -107,14 +109,14 @@ public class Km2ecorePackageImpl extends EPackageImpl implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass sourceTracerEClass = null;
+	private EClass km2EcoreContextEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass km2EcoreContextEClass = null;
+	private EClass sourceTracerEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -189,66 +191,14 @@ public class Km2ecorePackageImpl extends EPackageImpl implements
 				.getEPackage(KermetaPackage.eNS_URI) instanceof KermetaPackageImpl ? EPackage.Registry.INSTANCE
 				.getEPackage(KermetaPackage.eNS_URI)
 				: KermetaPackage.eINSTANCE);
-		LanguagePackageImpl theLanguagePackage = (LanguagePackageImpl) (EPackage.Registry.INSTANCE
-				.getEPackage(LanguagePackage.eNS_URI) instanceof LanguagePackageImpl ? EPackage.Registry.INSTANCE
-				.getEPackage(LanguagePackage.eNS_URI)
-				: LanguagePackage.eINSTANCE);
-		StructurePackageImpl theStructurePackage = (StructurePackageImpl) (EPackage.Registry.INSTANCE
-				.getEPackage(StructurePackage.eNS_URI) instanceof StructurePackageImpl ? EPackage.Registry.INSTANCE
-				.getEPackage(StructurePackage.eNS_URI)
-				: StructurePackage.eINSTANCE);
-		BehaviorPackageImpl theBehaviorPackage = (BehaviorPackageImpl) (EPackage.Registry.INSTANCE
-				.getEPackage(BehaviorPackage.eNS_URI) instanceof BehaviorPackageImpl ? EPackage.Registry.INSTANCE
-				.getEPackage(BehaviorPackage.eNS_URI)
-				: BehaviorPackage.eINSTANCE);
-		StandardPackageImpl theStandardPackage = (StandardPackageImpl) (EPackage.Registry.INSTANCE
-				.getEPackage(StandardPackage.eNS_URI) instanceof StandardPackageImpl ? EPackage.Registry.INSTANCE
-				.getEPackage(StandardPackage.eNS_URI)
-				: StandardPackage.eINSTANCE);
-		UtilsPackageImpl theUtilsPackage = (UtilsPackageImpl) (EPackage.Registry.INSTANCE
-				.getEPackage(UtilsPackage.eNS_URI) instanceof UtilsPackageImpl ? EPackage.Registry.INSTANCE
-				.getEPackage(UtilsPackage.eNS_URI)
-				: UtilsPackage.eINSTANCE);
-		IoPackageImpl theIoPackage = (IoPackageImpl) (EPackage.Registry.INSTANCE
-				.getEPackage(IoPackage.eNS_URI) instanceof IoPackageImpl ? EPackage.Registry.INSTANCE
-				.getEPackage(IoPackage.eNS_URI)
-				: IoPackage.eINSTANCE);
-		KunitPackageImpl theKunitPackage = (KunitPackageImpl) (EPackage.Registry.INSTANCE
-				.getEPackage(KunitPackage.eNS_URI) instanceof KunitPackageImpl ? EPackage.Registry.INSTANCE
-				.getEPackage(KunitPackage.eNS_URI)
-				: KunitPackage.eINSTANCE);
-		ExceptionsPackageImpl theExceptionsPackage = (ExceptionsPackageImpl) (EPackage.Registry.INSTANCE
-				.getEPackage(ExceptionsPackage.eNS_URI) instanceof ExceptionsPackageImpl ? EPackage.Registry.INSTANCE
-				.getEPackage(ExceptionsPackage.eNS_URI)
-				: ExceptionsPackage.eINSTANCE);
-		EcorePackageImpl theEcorePackage = (EcorePackageImpl) (EPackage.Registry.INSTANCE
-				.getEPackage(EcorePackage.eNS_URI) instanceof EcorePackageImpl ? EPackage.Registry.INSTANCE
-				.getEPackage(EcorePackage.eNS_URI)
-				: EcorePackage.eINSTANCE);
-		PersistencePackageImpl thePersistencePackage = (PersistencePackageImpl) (EPackage.Registry.INSTANCE
-				.getEPackage(PersistencePackage.eNS_URI) instanceof PersistencePackageImpl ? EPackage.Registry.INSTANCE
-				.getEPackage(PersistencePackage.eNS_URI)
-				: PersistencePackage.eINSTANCE);
-		InterpreterPackageImpl theInterpreterPackage = (InterpreterPackageImpl) (EPackage.Registry.INSTANCE
-				.getEPackage(InterpreterPackage.eNS_URI) instanceof InterpreterPackageImpl ? EPackage.Registry.INSTANCE
-				.getEPackage(InterpreterPackage.eNS_URI)
-				: InterpreterPackage.eINSTANCE);
-		CompilerPackageImpl theCompilerPackage = (CompilerPackageImpl) (EPackage.Registry.INSTANCE
-				.getEPackage(CompilerPackage.eNS_URI) instanceof CompilerPackageImpl ? EPackage.Registry.INSTANCE
-				.getEPackage(CompilerPackage.eNS_URI)
-				: CompilerPackage.eINSTANCE);
-		km2ecore.helper.kermeta.impl.KermetaPackageImpl theKermetaPackage_1 = (km2ecore.helper.kermeta.impl.KermetaPackageImpl) (EPackage.Registry.INSTANCE
-				.getEPackage(km2ecore.helper.kermeta.KermetaPackage.eNS_URI) instanceof km2ecore.helper.kermeta.impl.KermetaPackageImpl ? EPackage.Registry.INSTANCE
-				.getEPackage(km2ecore.helper.kermeta.KermetaPackage.eNS_URI)
-				: km2ecore.helper.kermeta.KermetaPackage.eINSTANCE);
-		km2ecore.helper.ecore.impl.EcorePackageImpl theEcorePackage_1 = (km2ecore.helper.ecore.impl.EcorePackageImpl) (EPackage.Registry.INSTANCE
-				.getEPackage(km2ecore.helper.ecore.EcorePackage.eNS_URI) instanceof km2ecore.helper.ecore.impl.EcorePackageImpl ? EPackage.Registry.INSTANCE
-				.getEPackage(km2ecore.helper.ecore.EcorePackage.eNS_URI)
-				: km2ecore.helper.ecore.EcorePackage.eINSTANCE);
 		JavaPackageImpl theJavaPackage = (JavaPackageImpl) (EPackage.Registry.INSTANCE
 				.getEPackage(JavaPackage.eNS_URI) instanceof JavaPackageImpl ? EPackage.Registry.INSTANCE
 				.getEPackage(JavaPackage.eNS_URI)
 				: JavaPackage.eINSTANCE);
+		EcorePackageImpl theEcorePackage = (EcorePackageImpl) (EPackage.Registry.INSTANCE
+				.getEPackage(EcorePackage.eNS_URI) instanceof EcorePackageImpl ? EPackage.Registry.INSTANCE
+				.getEPackage(EcorePackage.eNS_URI)
+				: EcorePackage.eINSTANCE);
 		CommonPackageImpl theCommonPackage = (CommonPackageImpl) (EPackage.Registry.INSTANCE
 				.getEPackage(CommonPackage.eNS_URI) instanceof CommonPackageImpl ? EPackage.Registry.INSTANCE
 				.getEPackage(CommonPackage.eNS_URI)
@@ -257,6 +207,62 @@ public class Km2ecorePackageImpl extends EPackageImpl implements
 				.getEPackage(ExceptionPackage.eNS_URI) instanceof ExceptionPackageImpl ? EPackage.Registry.INSTANCE
 				.getEPackage(ExceptionPackage.eNS_URI)
 				: ExceptionPackage.eINSTANCE);
+		kermeta.impl.KermetaPackageImpl theKermetaPackage_1 = (kermeta.impl.KermetaPackageImpl) (EPackage.Registry.INSTANCE
+				.getEPackage(kermeta.KermetaPackage.eNS_URI) instanceof kermeta.impl.KermetaPackageImpl ? EPackage.Registry.INSTANCE
+				.getEPackage(kermeta.KermetaPackage.eNS_URI)
+				: kermeta.KermetaPackage.eINSTANCE);
+		LanguagePackageImpl theLanguagePackage = (LanguagePackageImpl) (EPackage.Registry.INSTANCE
+				.getEPackage(LanguagePackage.eNS_URI) instanceof LanguagePackageImpl ? EPackage.Registry.INSTANCE
+				.getEPackage(LanguagePackage.eNS_URI)
+				: LanguagePackage.eINSTANCE);
+		BehaviorPackageImpl theBehaviorPackage = (BehaviorPackageImpl) (EPackage.Registry.INSTANCE
+				.getEPackage(BehaviorPackage.eNS_URI) instanceof BehaviorPackageImpl ? EPackage.Registry.INSTANCE
+				.getEPackage(BehaviorPackage.eNS_URI)
+				: BehaviorPackage.eINSTANCE);
+		StructurePackageImpl theStructurePackage = (StructurePackageImpl) (EPackage.Registry.INSTANCE
+				.getEPackage(StructurePackage.eNS_URI) instanceof StructurePackageImpl ? EPackage.Registry.INSTANCE
+				.getEPackage(StructurePackage.eNS_URI)
+				: StructurePackage.eINSTANCE);
+		CompilerPackageImpl theCompilerPackage = (CompilerPackageImpl) (EPackage.Registry.INSTANCE
+				.getEPackage(CompilerPackage.eNS_URI) instanceof CompilerPackageImpl ? EPackage.Registry.INSTANCE
+				.getEPackage(CompilerPackage.eNS_URI)
+				: CompilerPackage.eINSTANCE);
+		StandardPackageImpl theStandardPackage = (StandardPackageImpl) (EPackage.Registry.INSTANCE
+				.getEPackage(StandardPackage.eNS_URI) instanceof StandardPackageImpl ? EPackage.Registry.INSTANCE
+				.getEPackage(StandardPackage.eNS_URI)
+				: StandardPackage.eINSTANCE);
+		ExceptionsPackageImpl theExceptionsPackage = (ExceptionsPackageImpl) (EPackage.Registry.INSTANCE
+				.getEPackage(ExceptionsPackage.eNS_URI) instanceof ExceptionsPackageImpl ? EPackage.Registry.INSTANCE
+				.getEPackage(ExceptionsPackage.eNS_URI)
+				: ExceptionsPackage.eINSTANCE);
+		UtilsPackageImpl theUtilsPackage = (UtilsPackageImpl) (EPackage.Registry.INSTANCE
+				.getEPackage(UtilsPackage.eNS_URI) instanceof UtilsPackageImpl ? EPackage.Registry.INSTANCE
+				.getEPackage(UtilsPackage.eNS_URI)
+				: UtilsPackage.eINSTANCE);
+		PersistencePackageImpl thePersistencePackage = (PersistencePackageImpl) (EPackage.Registry.INSTANCE
+				.getEPackage(PersistencePackage.eNS_URI) instanceof PersistencePackageImpl ? EPackage.Registry.INSTANCE
+				.getEPackage(PersistencePackage.eNS_URI)
+				: PersistencePackage.eINSTANCE);
+		IoPackageImpl theIoPackage = (IoPackageImpl) (EPackage.Registry.INSTANCE
+				.getEPackage(IoPackage.eNS_URI) instanceof IoPackageImpl ? EPackage.Registry.INSTANCE
+				.getEPackage(IoPackage.eNS_URI)
+				: IoPackage.eINSTANCE);
+		KunitPackageImpl theKunitPackage = (KunitPackageImpl) (EPackage.Registry.INSTANCE
+				.getEPackage(KunitPackage.eNS_URI) instanceof KunitPackageImpl ? EPackage.Registry.INSTANCE
+				.getEPackage(KunitPackage.eNS_URI)
+				: KunitPackage.eINSTANCE);
+		InterpreterPackageImpl theInterpreterPackage = (InterpreterPackageImpl) (EPackage.Registry.INSTANCE
+				.getEPackage(InterpreterPackage.eNS_URI) instanceof InterpreterPackageImpl ? EPackage.Registry.INSTANCE
+				.getEPackage(InterpreterPackage.eNS_URI)
+				: InterpreterPackage.eINSTANCE);
+		kermeta.ecore.impl.EcorePackageImpl theEcorePackage_1 = (kermeta.ecore.impl.EcorePackageImpl) (EPackage.Registry.INSTANCE
+				.getEPackage(kermeta.ecore.EcorePackage.eNS_URI) instanceof kermeta.ecore.impl.EcorePackageImpl ? EPackage.Registry.INSTANCE
+				.getEPackage(kermeta.ecore.EcorePackage.eNS_URI)
+				: kermeta.ecore.EcorePackage.eINSTANCE);
+		TraceabilityPackageImpl theTraceabilityPackage = (TraceabilityPackageImpl) (EPackage.Registry.INSTANCE
+				.getEPackage(TraceabilityPackage.eNS_URI) instanceof TraceabilityPackageImpl ? EPackage.Registry.INSTANCE
+				.getEPackage(TraceabilityPackage.eNS_URI)
+				: TraceabilityPackage.eINSTANCE);
 		ecore.impl.EcorePackageImpl theEcorePackage_2 = (ecore.impl.EcorePackageImpl) (EPackage.Registry.INSTANCE
 				.getEPackage(ecore.EcorePackage.eNS_URI) instanceof ecore.impl.EcorePackageImpl ? EPackage.Registry.INSTANCE
 				.getEPackage(ecore.EcorePackage.eNS_URI)
@@ -265,72 +271,59 @@ public class Km2ecorePackageImpl extends EPackageImpl implements
 				.getEPackage(SimkPackage.eNS_URI) instanceof SimkPackageImpl ? EPackage.Registry.INSTANCE
 				.getEPackage(SimkPackage.eNS_URI)
 				: SimkPackage.eINSTANCE);
-		TraceabilityPackageImpl theTraceabilityPackage = (TraceabilityPackageImpl) (EPackage.Registry.INSTANCE
-				.getEPackage(TraceabilityPackage.eNS_URI) instanceof TraceabilityPackageImpl ? EPackage.Registry.INSTANCE
-				.getEPackage(TraceabilityPackage.eNS_URI)
-				: TraceabilityPackage.eINSTANCE);
 
 		// Create package meta-data objects
 		theKm2ecorePackage.createPackageContents();
 		theKermetaPackage.createPackageContents();
-		theLanguagePackage.createPackageContents();
-		theStructurePackage.createPackageContents();
-		theBehaviorPackage.createPackageContents();
-		theStandardPackage.createPackageContents();
-		theUtilsPackage.createPackageContents();
-		theIoPackage.createPackageContents();
-		theKunitPackage.createPackageContents();
-		theExceptionsPackage.createPackageContents();
-		theEcorePackage.createPackageContents();
-		thePersistencePackage.createPackageContents();
-		theInterpreterPackage.createPackageContents();
-		theCompilerPackage.createPackageContents();
-		theKermetaPackage_1.createPackageContents();
-		theEcorePackage_1.createPackageContents();
 		theJavaPackage.createPackageContents();
+		theEcorePackage.createPackageContents();
 		theCommonPackage.createPackageContents();
 		theExceptionPackage.createPackageContents();
+		theKermetaPackage_1.createPackageContents();
+		theLanguagePackage.createPackageContents();
+		theBehaviorPackage.createPackageContents();
+		theStructurePackage.createPackageContents();
+		theCompilerPackage.createPackageContents();
+		theStandardPackage.createPackageContents();
+		theExceptionsPackage.createPackageContents();
+		theUtilsPackage.createPackageContents();
+		thePersistencePackage.createPackageContents();
+		theIoPackage.createPackageContents();
+		theKunitPackage.createPackageContents();
+		theInterpreterPackage.createPackageContents();
+		theEcorePackage_1.createPackageContents();
+		theTraceabilityPackage.createPackageContents();
 		theEcorePackage_2.createPackageContents();
 		theSimkPackage.createPackageContents();
-		theTraceabilityPackage.createPackageContents();
 
 		// Initialize created meta-data
 		theKm2ecorePackage.initializePackageContents();
 		theKermetaPackage.initializePackageContents();
-		theLanguagePackage.initializePackageContents();
-		theStructurePackage.initializePackageContents();
-		theBehaviorPackage.initializePackageContents();
-		theStandardPackage.initializePackageContents();
-		theUtilsPackage.initializePackageContents();
-		theIoPackage.initializePackageContents();
-		theKunitPackage.initializePackageContents();
-		theExceptionsPackage.initializePackageContents();
-		theEcorePackage.initializePackageContents();
-		thePersistencePackage.initializePackageContents();
-		theInterpreterPackage.initializePackageContents();
-		theCompilerPackage.initializePackageContents();
-		theKermetaPackage_1.initializePackageContents();
-		theEcorePackage_1.initializePackageContents();
 		theJavaPackage.initializePackageContents();
+		theEcorePackage.initializePackageContents();
 		theCommonPackage.initializePackageContents();
 		theExceptionPackage.initializePackageContents();
+		theKermetaPackage_1.initializePackageContents();
+		theLanguagePackage.initializePackageContents();
+		theBehaviorPackage.initializePackageContents();
+		theStructurePackage.initializePackageContents();
+		theCompilerPackage.initializePackageContents();
+		theStandardPackage.initializePackageContents();
+		theExceptionsPackage.initializePackageContents();
+		theUtilsPackage.initializePackageContents();
+		thePersistencePackage.initializePackageContents();
+		theIoPackage.initializePackageContents();
+		theKunitPackage.initializePackageContents();
+		theInterpreterPackage.initializePackageContents();
+		theEcorePackage_1.initializePackageContents();
+		theTraceabilityPackage.initializePackageContents();
 		theEcorePackage_2.initializePackageContents();
 		theSimkPackage.initializePackageContents();
-		theTraceabilityPackage.initializePackageContents();
 
 		// Mark meta-data to indicate it can't be changed
 		theKm2ecorePackage.freeze();
 
 		return theKm2ecorePackage;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EClass getSourceTracer() {
-		return sourceTracerEClass;
 	}
 
 	/**
@@ -477,8 +470,8 @@ public class Km2ecorePackageImpl extends EPackageImpl implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getKM2EcoreContext_FtSuffix() {
-		return (EReference) km2EcoreContextEClass.getEStructuralFeatures().get(
+	public EAttribute getKM2EcoreContext_BeforeFunctionTypeResult() {
+		return (EAttribute) km2EcoreContextEClass.getEStructuralFeatures().get(
 				13);
 	}
 
@@ -487,8 +480,8 @@ public class Km2ecorePackageImpl extends EPackageImpl implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getKM2EcoreContext_BeforeFunctionTypeResult() {
-		return (EAttribute) km2EcoreContextEClass.getEStructuralFeatures().get(
+	public EReference getKM2EcoreContext_FtSuffix() {
+		return (EReference) km2EcoreContextEClass.getEStructuralFeatures().get(
 				14);
 	}
 
@@ -557,7 +550,7 @@ public class Km2ecorePackageImpl extends EPackageImpl implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getKM2EcoreContext_PREVIOUS_STATEMENT_FT() {
+	public EAttribute getKM2EcoreContext_FtContextualSelf() {
 		return (EAttribute) km2EcoreContextEClass.getEStructuralFeatures().get(
 				21);
 	}
@@ -567,7 +560,7 @@ public class Km2ecorePackageImpl extends EPackageImpl implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getKM2EcoreContext_FtContextualSelf() {
+	public EAttribute getKM2EcoreContext_PREVIOUS_STATEMENT_FT() {
 		return (EAttribute) km2EcoreContextEClass.getEStructuralFeatures().get(
 				22);
 	}
@@ -577,7 +570,7 @@ public class Km2ecorePackageImpl extends EPackageImpl implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getKM2EcoreContext_BeforeLambdaExpressionResult() {
+	public EAttribute getKM2EcoreContext_JAVA_CLASS_EXECUTION_CONTEXT() {
 		return (EAttribute) km2EcoreContextEClass.getEStructuralFeatures().get(
 				23);
 	}
@@ -587,7 +580,7 @@ public class Km2ecorePackageImpl extends EPackageImpl implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getKM2EcoreContext_JAVA_CLASS_EXECUTION_CONTEXT() {
+	public EAttribute getKM2EcoreContext_BeforeLambdaExpressionResult() {
 		return (EAttribute) km2EcoreContextEClass.getEStructuralFeatures().get(
 				24);
 	}
@@ -647,7 +640,7 @@ public class Km2ecorePackageImpl extends EPackageImpl implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getKM2EcoreContext_Inc_resultLastStatementStack() {
+	public EAttribute getKM2EcoreContext_RETURN_EXPRESSION_TO_REPLACE_SPECIAL() {
 		return (EAttribute) km2EcoreContextEClass.getEStructuralFeatures().get(
 				30);
 	}
@@ -657,7 +650,7 @@ public class Km2ecorePackageImpl extends EPackageImpl implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getKM2EcoreContext_RETURN_EXPRESSION_TO_REPLACE_SPECIAL() {
+	public EAttribute getKM2EcoreContext_Inc_resultLastStatementStack() {
 		return (EAttribute) km2EcoreContextEClass.getEStructuralFeatures().get(
 				31);
 	}
@@ -717,7 +710,7 @@ public class Km2ecorePackageImpl extends EPackageImpl implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getKM2EcoreContext_FtStack() {
+	public EReference getKM2EcoreContext_CondStack() {
 		return (EReference) km2EcoreContextEClass.getEStructuralFeatures().get(
 				37);
 	}
@@ -727,7 +720,7 @@ public class Km2ecorePackageImpl extends EPackageImpl implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getKM2EcoreContext_CondStack() {
+	public EReference getKM2EcoreContext_FtStack() {
 		return (EReference) km2EcoreContextEClass.getEStructuralFeatures().get(
 				38);
 	}
@@ -847,6 +840,15 @@ public class Km2ecorePackageImpl extends EPackageImpl implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getSourceTracer() {
+		return sourceTracerEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EEnum getCompilingMode() {
 		return compilingModeEEnum;
 	}
@@ -880,8 +882,6 @@ public class Km2ecorePackageImpl extends EPackageImpl implements
 		isCreated = true;
 
 		// Create classes and their features
-		sourceTracerEClass = createEClass(SOURCE_TRACER);
-
 		km2EcoreContextEClass = createEClass(KM2_ECORE_CONTEXT);
 		createEAttribute(km2EcoreContextEClass,
 				KM2_ECORE_CONTEXT__JAVA_INSTANCE_EXECUTION_CONTEXT);
@@ -908,9 +908,9 @@ public class Km2ecorePackageImpl extends EPackageImpl implements
 				KM2_ECORE_CONTEXT__COMPILED_JAVA_EXTERN);
 		createEReference(km2EcoreContextEClass,
 				KM2_ECORE_CONTEXT__CURRENT_VALUE_TYPE);
-		createEReference(km2EcoreContextEClass, KM2_ECORE_CONTEXT__FT_SUFFIX);
 		createEAttribute(km2EcoreContextEClass,
 				KM2_ECORE_CONTEXT__BEFORE_FUNCTION_TYPE_RESULT);
+		createEReference(km2EcoreContextEClass, KM2_ECORE_CONTEXT__FT_SUFFIX);
 		createEAttribute(km2EcoreContextEClass,
 				KM2_ECORE_CONTEXT__INC_COND_STACK);
 		createEAttribute(km2EcoreContextEClass,
@@ -923,13 +923,13 @@ public class Km2ecorePackageImpl extends EPackageImpl implements
 		createEReference(km2EcoreContextEClass,
 				KM2_ECORE_CONTEXT__CURRENT_PARAM_FT);
 		createEAttribute(km2EcoreContextEClass,
-				KM2_ECORE_CONTEXT__PREVIOUS_STATEMENT_FT);
-		createEAttribute(km2EcoreContextEClass,
 				KM2_ECORE_CONTEXT__FT_CONTEXTUAL_SELF);
 		createEAttribute(km2EcoreContextEClass,
-				KM2_ECORE_CONTEXT__BEFORE_LAMBDA_EXPRESSION_RESULT);
+				KM2_ECORE_CONTEXT__PREVIOUS_STATEMENT_FT);
 		createEAttribute(km2EcoreContextEClass,
 				KM2_ECORE_CONTEXT__JAVA_CLASS_EXECUTION_CONTEXT);
+		createEAttribute(km2EcoreContextEClass,
+				KM2_ECORE_CONTEXT__BEFORE_LAMBDA_EXPRESSION_RESULT);
 		createEAttribute(km2EcoreContextEClass,
 				KM2_ECORE_CONTEXT__FT_RETURN_TYPE);
 		createEAttribute(km2EcoreContextEClass,
@@ -941,9 +941,9 @@ public class Km2ecorePackageImpl extends EPackageImpl implements
 		createEReference(km2EcoreContextEClass,
 				KM2_ECORE_CONTEXT__KR_ERROR_STACK);
 		createEAttribute(km2EcoreContextEClass,
-				KM2_ECORE_CONTEXT__INC_RESULT_LAST_STATEMENT_STACK);
-		createEAttribute(km2EcoreContextEClass,
 				KM2_ECORE_CONTEXT__RETURN_EXPRESSION_TO_REPLACE_SPECIAL);
+		createEAttribute(km2EcoreContextEClass,
+				KM2_ECORE_CONTEXT__INC_RESULT_LAST_STATEMENT_STACK);
 		createEAttribute(km2EcoreContextEClass,
 				KM2_ECORE_CONTEXT__RETURN_EXPRESSION_TO_REPLACE);
 		createEAttribute(km2EcoreContextEClass,
@@ -952,8 +952,8 @@ public class Km2ecorePackageImpl extends EPackageImpl implements
 		createEAttribute(km2EcoreContextEClass,
 				KM2_ECORE_CONTEXT__STATIC_OPERATION_MODE);
 		createEAttribute(km2EcoreContextEClass, KM2_ECORE_CONTEXT__KM_INPUT);
-		createEReference(km2EcoreContextEClass, KM2_ECORE_CONTEXT__FT_STACK);
 		createEReference(km2EcoreContextEClass, KM2_ECORE_CONTEXT__COND_STACK);
+		createEReference(km2EcoreContextEClass, KM2_ECORE_CONTEXT__FT_STACK);
 		createEAttribute(km2EcoreContextEClass, KM2_ECORE_CONTEXT__SIMK_OUTPUT);
 		createEAttribute(km2EcoreContextEClass,
 				KM2_ECORE_CONTEXT__JAVA_CLASS_EXCEPTION_SWITCHER);
@@ -973,6 +973,8 @@ public class Km2ecorePackageImpl extends EPackageImpl implements
 				KM2_ECORE_CONTEXT__KERMETA_SEPARATOR);
 		createEAttribute(km2EcoreContextEClass,
 				KM2_ECORE_CONTEXT__INC_FT_SUFFIX);
+
+		sourceTracerEClass = createEClass(SOURCE_TRACER);
 
 		// Create enums
 		compilingModeEEnum = createEEnum(COMPILING_MODE);
@@ -1003,12 +1005,12 @@ public class Km2ecorePackageImpl extends EPackageImpl implements
 		setNsURI(eNS_URI);
 
 		// Obtain other dependent packages
-		km2ecore.helper.kermeta.KermetaPackage theKermetaPackage_1 = (km2ecore.helper.kermeta.KermetaPackage) EPackage.Registry.INSTANCE
-				.getEPackage(km2ecore.helper.kermeta.KermetaPackage.eNS_URI);
-		km2ecore.helper.ecore.EcorePackage theEcorePackage_1 = (km2ecore.helper.ecore.EcorePackage) EPackage.Registry.INSTANCE
-				.getEPackage(km2ecore.helper.ecore.EcorePackage.eNS_URI);
+		KermetaPackage theKermetaPackage = (KermetaPackage) EPackage.Registry.INSTANCE
+				.getEPackage(KermetaPackage.eNS_URI);
 		JavaPackage theJavaPackage = (JavaPackage) EPackage.Registry.INSTANCE
 				.getEPackage(JavaPackage.eNS_URI);
+		EcorePackage theEcorePackage = (EcorePackage) EPackage.Registry.INSTANCE
+				.getEPackage(EcorePackage.eNS_URI);
 		CommonPackage theCommonPackage = (CommonPackage) EPackage.Registry.INSTANCE
 				.getEPackage(CommonPackage.eNS_URI);
 		StructurePackage theStructurePackage = (StructurePackage) EPackage.Registry.INSTANCE
@@ -1027,9 +1029,9 @@ public class Km2ecorePackageImpl extends EPackageImpl implements
 				.getEPackage(BehaviorPackage.eNS_URI);
 
 		// Add subpackages
-		getESubpackages().add(theKermetaPackage_1);
-		getESubpackages().add(theEcorePackage_1);
+		getESubpackages().add(theKermetaPackage);
 		getESubpackages().add(theJavaPackage);
+		getESubpackages().add(theEcorePackage);
 		getESubpackages().add(theCommonPackage);
 
 		// Create type parameters
@@ -1037,20 +1039,12 @@ public class Km2ecorePackageImpl extends EPackageImpl implements
 		// Set bounds for type parameters
 
 		// Add supertypes to classes
-		sourceTracerEClass.getESuperTypes()
-				.add(theStructurePackage.getObject());
 		km2EcoreContextEClass.getESuperTypes().add(
 				theStructurePackage.getObject());
+		sourceTracerEClass.getESuperTypes()
+				.add(theStructurePackage.getObject());
 
 		// Initialize classes and features; add operations and parameters
-		initEClass(sourceTracerEClass, SourceTracer.class, "SourceTracer",
-				!IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
-		EOperation op = addEOperation(sourceTracerEClass, null,
-				"addSourceInformation", 0, 1, IS_UNIQUE, !IS_ORDERED);
-		addEParameter(op, this.getKM2EcoreContext(), "context", 0, 1,
-				IS_UNIQUE, IS_ORDERED);
-
 		initEClass(km2EcoreContextEClass, KM2EcoreContext.class,
 				"KM2EcoreContext", !IS_ABSTRACT, !IS_INTERFACE,
 				IS_GENERATED_INSTANCE_CLASS);
@@ -1126,6 +1120,11 @@ public class Km2ecorePackageImpl extends EPackageImpl implements
 				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE,
 				IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED,
 				IS_ORDERED);
+		initEAttribute(getKM2EcoreContext_BeforeFunctionTypeResult(),
+				theStandardPackage.getJavaString(), "beforeFunctionTypeResult",
+				null, 0, 1, KM2EcoreContext.class, !IS_TRANSIENT, !IS_VOLATILE,
+				IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED,
+				IS_ORDERED);
 		g1 = createEGenericType(theUtilsPackage.getStack());
 		g2 = createEGenericType(theStandardPackage.getJavaString());
 		g1.getETypeArguments().add(g2);
@@ -1133,11 +1132,6 @@ public class Km2ecorePackageImpl extends EPackageImpl implements
 				null, 0, 1, KM2EcoreContext.class, !IS_TRANSIENT, !IS_VOLATILE,
 				IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES,
 				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getKM2EcoreContext_BeforeFunctionTypeResult(),
-				theStandardPackage.getJavaString(), "beforeFunctionTypeResult",
-				null, 0, 1, KM2EcoreContext.class, !IS_TRANSIENT, !IS_VOLATILE,
-				IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED,
-				IS_ORDERED);
 		initEAttribute(getKM2EcoreContext_Inc_condStack(), theStandardPackage
 				.getJavaInteger(), "inc_condStack", null, 0, 1,
 				KM2EcoreContext.class, !IS_TRANSIENT, !IS_VOLATILE,
@@ -1181,25 +1175,25 @@ public class Km2ecorePackageImpl extends EPackageImpl implements
 				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE,
 				IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED,
 				IS_ORDERED);
-		initEAttribute(getKM2EcoreContext_PREVIOUS_STATEMENT_FT(),
-				theStandardPackage.getJavaString(), "PREVIOUS_STATEMENT_FT",
-				null, 1, 1, KM2EcoreContext.class, !IS_TRANSIENT, !IS_VOLATILE,
-				IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED,
-				IS_ORDERED);
 		initEAttribute(getKM2EcoreContext_FtContextualSelf(),
 				theStandardPackage.getJavaString(), "ftContextualSelf", null,
 				0, 1, KM2EcoreContext.class, !IS_TRANSIENT, !IS_VOLATILE,
 				IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED,
 				IS_ORDERED);
-		initEAttribute(getKM2EcoreContext_BeforeLambdaExpressionResult(),
-				theStandardPackage.getJavaString(),
-				"beforeLambdaExpressionResult", null, 0, 1,
-				KM2EcoreContext.class, !IS_TRANSIENT, !IS_VOLATILE,
+		initEAttribute(getKM2EcoreContext_PREVIOUS_STATEMENT_FT(),
+				theStandardPackage.getJavaString(), "PREVIOUS_STATEMENT_FT",
+				null, 1, 1, KM2EcoreContext.class, !IS_TRANSIENT, !IS_VOLATILE,
 				IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED,
 				IS_ORDERED);
 		initEAttribute(getKM2EcoreContext_JAVA_CLASS_EXECUTION_CONTEXT(),
 				theStandardPackage.getJavaString(),
 				"JAVA_CLASS_EXECUTION_CONTEXT", null, 1, 1,
+				KM2EcoreContext.class, !IS_TRANSIENT, !IS_VOLATILE,
+				IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED,
+				IS_ORDERED);
+		initEAttribute(getKM2EcoreContext_BeforeLambdaExpressionResult(),
+				theStandardPackage.getJavaString(),
+				"beforeLambdaExpressionResult", null, 0, 1,
 				KM2EcoreContext.class, !IS_TRANSIENT, !IS_VOLATILE,
 				IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED,
 				IS_ORDERED);
@@ -1232,16 +1226,16 @@ public class Km2ecorePackageImpl extends EPackageImpl implements
 				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE,
 				IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED,
 				IS_ORDERED);
-		initEAttribute(getKM2EcoreContext_Inc_resultLastStatementStack(),
-				theStandardPackage.getJavaInteger(),
-				"inc_resultLastStatementStack", null, 0, 1,
-				KM2EcoreContext.class, !IS_TRANSIENT, !IS_VOLATILE,
-				IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED,
-				IS_ORDERED);
 		initEAttribute(
 				getKM2EcoreContext_RETURN_EXPRESSION_TO_REPLACE_SPECIAL(),
 				theStandardPackage.getJavaString(),
 				"RETURN_EXPRESSION_TO_REPLACE_SPECIAL", null, 1, 1,
+				KM2EcoreContext.class, !IS_TRANSIENT, !IS_VOLATILE,
+				IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED,
+				IS_ORDERED);
+		initEAttribute(getKM2EcoreContext_Inc_resultLastStatementStack(),
+				theStandardPackage.getJavaInteger(),
+				"inc_resultLastStatementStack", null, 0, 1,
 				KM2EcoreContext.class, !IS_TRANSIENT, !IS_VOLATILE,
 				IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED,
 				IS_ORDERED);
@@ -1270,17 +1264,17 @@ public class Km2ecorePackageImpl extends EPackageImpl implements
 				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE,
 				!IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		g1 = createEGenericType(theUtilsPackage.getStack());
-		g2 = createEGenericType(theBehaviorPackage.getLambdaExpression());
-		g1.getETypeArguments().add(g2);
-		initEReference(getKM2EcoreContext_FtStack(), g1, null, "ftStack", null,
-				0, 1, KM2EcoreContext.class, !IS_TRANSIENT, !IS_VOLATILE,
-				IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES,
-				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		g1 = createEGenericType(theUtilsPackage.getStack());
 		g2 = createEGenericType(theStandardPackage.getJavaString());
 		g1.getETypeArguments().add(g2);
 		initEReference(getKM2EcoreContext_CondStack(), g1, null, "condStack",
 				null, 0, 1, KM2EcoreContext.class, !IS_TRANSIENT, !IS_VOLATILE,
+				IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES,
+				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		g1 = createEGenericType(theUtilsPackage.getStack());
+		g2 = createEGenericType(theBehaviorPackage.getLambdaExpression());
+		g1.getETypeArguments().add(g2);
+		initEReference(getKM2EcoreContext_FtStack(), g1, null, "ftStack", null,
+				0, 1, KM2EcoreContext.class, !IS_TRANSIENT, !IS_VOLATILE,
 				IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES,
 				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getKM2EcoreContext_SimkOutput(), theStandardPackage
@@ -1349,14 +1343,14 @@ public class Km2ecorePackageImpl extends EPackageImpl implements
 				theStandardPackage.getJavaString(), "getLoopConditionId", 0, 1,
 				IS_UNIQUE, IS_ORDERED);
 
-		addEOperation(km2EcoreContextEClass,
-				theStandardPackage.getJavaString(), "getIfConditionId", 0, 1,
+		addEOperation(km2EcoreContextEClass, null, "pushKRErrorStack", 0, 1,
 				IS_UNIQUE, IS_ORDERED);
 
 		addEOperation(km2EcoreContextEClass, null, "save", 0, 1, IS_UNIQUE,
 				IS_ORDERED);
 
-		addEOperation(km2EcoreContextEClass, null, "pushKRErrorStack", 0, 1,
+		addEOperation(km2EcoreContextEClass,
+				theStandardPackage.getJavaString(), "getIfConditionId", 0, 1,
 				IS_UNIQUE, IS_ORDERED);
 
 		addEOperation(km2EcoreContextEClass,
@@ -1367,10 +1361,10 @@ public class Km2ecorePackageImpl extends EPackageImpl implements
 				theStandardPackage.getJavaString(),
 				"getResultLastStatementType", 0, 1, IS_UNIQUE, IS_ORDERED);
 
-		addEOperation(km2EcoreContextEClass, null, "pushFtSuffix", 0, 1,
+		addEOperation(km2EcoreContextEClass, null, "initializeConstants", 0, 1,
 				IS_UNIQUE, IS_ORDERED);
 
-		addEOperation(km2EcoreContextEClass, null, "initializeConstants", 0, 1,
+		addEOperation(km2EcoreContextEClass, null, "pushFtSuffix", 0, 1,
 				IS_UNIQUE, IS_ORDERED);
 
 		addEOperation(km2EcoreContextEClass, null,
@@ -1386,8 +1380,8 @@ public class Km2ecorePackageImpl extends EPackageImpl implements
 		addEOperation(km2EcoreContextEClass, null, "pushCondStack", 0, 1,
 				IS_UNIQUE, IS_ORDERED);
 
-		op = addEOperation(km2EcoreContextEClass, null, "initialize", 0, 1,
-				IS_UNIQUE, IS_ORDERED);
+		EOperation op = addEOperation(km2EcoreContextEClass, null,
+				"initialize", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, theStandardPackage.getJavaString(), "modelInput", 0,
 				1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, theStandardPackage.getJavaString(), "traceInput", 0,
@@ -1396,6 +1390,14 @@ public class Km2ecorePackageImpl extends EPackageImpl implements
 		addEOperation(km2EcoreContextEClass,
 				theStandardPackage.getJavaString(), "getResultLastStatementId",
 				0, 1, IS_UNIQUE, IS_ORDERED);
+
+		initEClass(sourceTracerEClass, SourceTracer.class, "SourceTracer",
+				!IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		op = addEOperation(sourceTracerEClass, null, "addSourceInformation", 0,
+				1, IS_UNIQUE, !IS_ORDERED);
+		addEParameter(op, this.getKM2EcoreContext(), "context", 0, 1,
+				IS_UNIQUE, IS_ORDERED);
 
 		// Initialize enums and add enum literals
 		initEEnum(compilingModeEEnum, CompilingMode.class, "CompilingMode");
@@ -1424,10 +1426,10 @@ public class Km2ecorePackageImpl extends EPackageImpl implements
 		addAnnotation(km2EcoreContextEClass.getEOperations().get(0), source,
 				new String[] { "documentation",
 						"/**\r\n\t * Get the identifier\r\n\t */" });
-		addAnnotation(km2EcoreContextEClass.getEOperations().get(1), source,
+		addAnnotation(km2EcoreContextEClass.getEOperations().get(3), source,
 				new String[] { "documentation",
 						"/**\r\n\t * Get the identifier\r\n\t */" });
-		addAnnotation(km2EcoreContextEClass.getEOperations().get(7), source,
+		addAnnotation(km2EcoreContextEClass.getEOperations().get(6), source,
 				new String[] { "documentation",
 						"/**\r\n\t * Initialize the constants\r\n\t */" });
 		addAnnotation(km2EcoreContextEClass.getEOperations().get(13), source,

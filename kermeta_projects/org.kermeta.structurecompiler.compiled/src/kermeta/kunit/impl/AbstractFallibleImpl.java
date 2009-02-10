@@ -1,8 +1,10 @@
 /**
- * <copyright>
- * </copyright>
+ * License: EPL
+ * Copyright: IRISA / INRIA / Universite de Rennes 1
+ * 
+ * Generating with Kermeta <http://www.kermeta.org>
  *
- * $Id: AbstractFallibleImpl.java,v 1.10 2009-01-21 09:15:49 cfaucher Exp $
+ * $Id: AbstractFallibleImpl.java,v 1.11 2009-02-10 17:51:44 cfaucher Exp $
  */
 package kermeta.kunit.impl;
 
@@ -68,30 +70,31 @@ public abstract class AbstractFallibleImpl extends ObjectImpl implements
 		{
 
 			java.lang.Integer i = 0;
-			java.lang.Boolean idLoopCond_890 = false;
-			while (!idLoopCond_890) {
-				idLoopCond_890 = kermeta.standard.helper.IntegerWrapper.equals(
-						i, kermeta.standard.helper.StringWrapper.size(s));
-				if (idLoopCond_890) {
+			java.lang.Boolean idLoopCond_1089 = false;
+			while (!idLoopCond_1089) {
+				idLoopCond_1089 = kermeta.standard.helper.IntegerWrapper
+						.equals(i, kermeta.standard.helper.StringWrapper
+								.size(s));
+				if (idLoopCond_1089) {
 				} else {
 
 					java.lang.String c = kermeta.standard.helper.CharacterWrapper
 							.toString(kermeta.standard.helper.StringWrapper
 									.elementAt(s, i));
 
-					java.lang.Boolean idIfCond_891 = false;
-					idIfCond_891 = kermeta.standard.helper.IntegerWrapper
+					java.lang.Boolean idIfCond_1090 = false;
+					idIfCond_1090 = kermeta.standard.helper.IntegerWrapper
 							.isGreaterOrEqual(
 									kermeta.standard.helper.StringWrapper
 											.indexOf(" \n\t", c), 0);
 
-					if (idIfCond_891) {
+					if (idIfCond_1090) {
 
-						java.lang.Boolean idIfCond_892 = false;
-						idIfCond_892 = kermeta.standard.helper.BooleanWrapper
+						java.lang.Boolean idIfCond_1091 = false;
+						idIfCond_1091 = kermeta.standard.helper.BooleanWrapper
 								.not(white);
 
-						if (idIfCond_892) {
+						if (idIfCond_1091) {
 
 							white = true;
 
@@ -104,10 +107,10 @@ public abstract class AbstractFallibleImpl extends ObjectImpl implements
 						result = kermeta.standard.helper.StringWrapper.plus(
 								result, c);
 
-						java.lang.Boolean idIfCond_893 = false;
-						idIfCond_893 = white;
+						java.lang.Boolean idIfCond_1092 = false;
+						idIfCond_1092 = white;
 
-						if (idIfCond_893) {
+						if (idIfCond_1092) {
 
 							white = false;
 						}

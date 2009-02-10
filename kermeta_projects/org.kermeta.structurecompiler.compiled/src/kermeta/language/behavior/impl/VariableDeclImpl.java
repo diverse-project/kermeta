@@ -1,8 +1,10 @@
 /**
- * <copyright>
- * </copyright>
+ * License: EPL
+ * Copyright: IRISA / INRIA / Universite de Rennes 1
+ * 
+ * Generating with Kermeta <http://www.kermeta.org>
  *
- * $Id: VariableDeclImpl.java,v 1.10 2009-01-21 09:15:57 cfaucher Exp $
+ * $Id: VariableDeclImpl.java,v 1.11 2009-02-10 17:51:51 cfaucher Exp $
  */
 package kermeta.language.behavior.impl;
 
@@ -331,15 +333,15 @@ public class VariableDeclImpl extends ExpressionImpl implements VariableDecl {
 						kermeta.standard.helper.StringWrapper.plus(result,
 								localType), " "), var_id);
 
-		java.lang.Boolean idIfCond_606 = false;
-		idIfCond_606 = kermeta.standard.helper.BooleanWrapper
+		java.lang.Boolean idIfCond_83 = false;
+		idIfCond_83 = kermeta.standard.helper.BooleanWrapper
 				.not(org.kermeta.compil.runtime.helper.language.ObjectUtil
 						.isVoidSwitcher(this.getInitialization()));
 
-		if (idIfCond_606) {
+		if (idIfCond_83) {
 
-			java.lang.Boolean idIfCond_607 = false;
-			idIfCond_607 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+			java.lang.Boolean idIfCond_84 = false;
+			idIfCond_84 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 					.isInstanceOfSwitcher(
 							this.getInitialization(),
 							org.kermeta.compil.runtime.ExecutionContext
@@ -347,7 +349,7 @@ public class VariableDeclImpl extends ExpressionImpl implements VariableDecl {
 									.getMetaClass(
 											"kermeta.language.behavior.Conditional"));
 
-			if (idIfCond_607) {
+			if (idIfCond_84) {
 
 				context.getResultLastStatementStack().push(
 						kermeta.standard.helper.StringWrapper.plus(
@@ -365,16 +367,107 @@ public class VariableDeclImpl extends ExpressionImpl implements VariableDecl {
 				context.getResultLastStatementStack().pop();
 			} else {
 
-				result = kermeta.standard.helper.StringWrapper.plus(
-						kermeta.standard.helper.StringWrapper.plus(result,
-								" = "), this.getInitialization()
-								.createBehaviorJava(context));
+				java.lang.String literal_prefix = "";
+
+				java.lang.String literal_suffix = "";
+
+				java.lang.Boolean idIfCond_85 = false;
+				idIfCond_85 = this.requireConversionValueTypeToObject();
+
+				if (idIfCond_85) {
+
+					literal_prefix = kermeta.standard.helper.StringWrapper
+							.plus(context.getOBJECT_UTIL_CLASS(),
+									".convertAsObject(");
+
+					literal_suffix = ")";
+				}
+
+				result = kermeta.standard.helper.StringWrapper
+						.plus(
+								kermeta.standard.helper.StringWrapper
+										.plus(
+												kermeta.standard.helper.StringWrapper
+														.plus(
+																kermeta.standard.helper.StringWrapper
+																		.plus(
+																				kermeta.standard.helper.StringWrapper
+																						.plus(
+																								result,
+																								" = "),
+																				literal_prefix),
+																this
+																		.getInitialization()
+																		.createBehaviorJava(
+																				context)),
+												literal_suffix), this
+										.endOfExpressionFixer());
 			}
 
 		} else {
 
 			result = kermeta.standard.helper.StringWrapper.plus(result,
 					" = null;");
+		}
+
+		return result;
+
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Boolean requireConversionValueTypeToObject() {
+
+		java.lang.Boolean result = null;
+
+		result = false;
+
+		java.lang.Boolean idIfCond_86 = false;
+		idIfCond_86 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+				.isInstanceOfSwitcher(this.getInitialization(),
+						org.kermeta.compil.runtime.ExecutionContext
+								.getInstance().getMetaClass(
+										"kermeta.language.behavior.Literal"));
+
+		if (idIfCond_86) {
+
+			java.lang.Boolean idIfCond_87 = false;
+			idIfCond_87 = ((kermeta.language.behavior.Literal) org.kermeta.compil.runtime.helper.language.ObjectUtil
+					.asTypeSwitcher(
+							this.getInitialization(),
+							org.kermeta.compil.runtime.ExecutionContext
+									.getInstance()
+									.getMetaClass(
+											"kermeta.language.behavior.Literal")))
+					.getStaticType().isValueType();
+
+			if (idIfCond_87) {
+
+				java.lang.String left_type = this.getStaticType()
+						.getTypeQName();
+
+				java.lang.Boolean idIfCond_88 = false;
+				idIfCond_88 = kermeta.standard.helper.StringWrapper.equals(
+						left_type, "kermeta::language::structure::Object");
+
+				if (idIfCond_88) {
+
+					java.lang.Boolean idIfCond_89 = false;
+					idIfCond_89 = this.getInitialization().getStaticType()
+							.isValueType();
+
+					if (idIfCond_89) {
+
+						result = true;
+					}
+
+				}
+
+			}
+
 		}
 
 		return result;

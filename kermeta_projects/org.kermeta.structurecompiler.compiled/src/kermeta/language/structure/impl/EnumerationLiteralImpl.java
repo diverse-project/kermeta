@@ -1,8 +1,10 @@
 /**
- * <copyright>
- * </copyright>
+ * License: EPL
+ * Copyright: IRISA / INRIA / Universite de Rennes 1
+ * 
+ * Generating with Kermeta <http://www.kermeta.org>
  *
- * $Id: EnumerationLiteralImpl.java,v 1.10 2009-01-21 09:15:50 cfaucher Exp $
+ * $Id: EnumerationLiteralImpl.java,v 1.11 2009-02-10 17:51:45 cfaucher Exp $
  */
 package kermeta.language.structure.impl;
 
@@ -10,8 +12,8 @@ import ecore.EEnumLiteral;
 
 import kermeta.language.structure.Enumeration;
 import kermeta.language.structure.EnumerationLiteral;
+import kermeta.language.structure.NamedElement;
 import kermeta.language.structure.StructurePackage;
-import kermeta.language.structure.Traceability;
 
 import km2ecore.KM2EcoreContext;
 
@@ -19,7 +21,6 @@ import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
@@ -33,24 +34,34 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link kermeta.language.structure.impl.EnumerationLiteralImpl#getEcoreModelElement <em>Ecore Model Element</em>}</li>
+ *   <li>{@link kermeta.language.structure.impl.EnumerationLiteralImpl#getName <em>Name</em>}</li>
  *   <li>{@link kermeta.language.structure.impl.EnumerationLiteralImpl#getEnumeration <em>Enumeration</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class EnumerationLiteralImpl extends NamedElementImpl implements
-		EnumerationLiteral {
+public class EnumerationLiteralImpl extends TraceabilityImpl<EEnumLiteral>
+		implements EnumerationLiteral {
 	/**
-	 * The cached value of the '{@link #getEcoreModelElement() <em>Ecore Model Element</em>}' reference.
+	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getEcoreModelElement()
+	 * @see #getName()
 	 * @generated
 	 * @ordered
 	 */
-	protected EEnumLiteral ecoreModelElement;
+	protected static final String NAME_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getName()
+	 * @generated
+	 * @ordered
+	 */
+	protected String name = NAME_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -76,21 +87,8 @@ public class EnumerationLiteralImpl extends NamedElementImpl implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EEnumLiteral getEcoreModelElement() {
-		if (ecoreModelElement != null
-				&& ((EObject) ecoreModelElement).eIsProxy()) {
-			InternalEObject oldEcoreModelElement = (InternalEObject) ecoreModelElement;
-			ecoreModelElement = (EEnumLiteral) eResolveProxy(oldEcoreModelElement);
-			if (ecoreModelElement != oldEcoreModelElement) {
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(
-							this,
-							Notification.RESOLVE,
-							StructurePackage.ENUMERATION_LITERAL__ECORE_MODEL_ELEMENT,
-							oldEcoreModelElement, ecoreModelElement));
-			}
-		}
-		return ecoreModelElement;
+	public String getName() {
+		return name;
 	}
 
 	/**
@@ -98,22 +96,12 @@ public class EnumerationLiteralImpl extends NamedElementImpl implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EEnumLiteral basicGetEcoreModelElement() {
-		return ecoreModelElement;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setEcoreModelElement(EEnumLiteral newEcoreModelElement) {
-		EEnumLiteral oldEcoreModelElement = ecoreModelElement;
-		ecoreModelElement = newEcoreModelElement;
+	public void setName(String newName) {
+		String oldName = name;
+		name = newName;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET,
-					StructurePackage.ENUMERATION_LITERAL__ECORE_MODEL_ELEMENT,
-					oldEcoreModelElement, ecoreModelElement));
+					StructurePackage.ENUMERATION_LITERAL__NAME, oldName, name));
 	}
 
 	/**
@@ -244,6 +232,127 @@ public class EnumerationLiteralImpl extends NamedElementImpl implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public String getGenModelQualifiedName() {
+
+		java.lang.String result = null;
+
+		result = kermeta.standard.helper.StringWrapper.plus(
+				kermeta.standard.helper.StringWrapper.plus(this
+						.getRootPackage().getGenModelBasePackage(), "::"), this
+						.qualifiedName());
+
+		return result;
+
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getJavaQualifiedName() {
+
+		java.lang.String result = null;
+
+		result = kermeta.standard.helper.StringWrapper.replace(this
+				.qualifiedName(), "::", ".");
+
+		return result;
+
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String qualifiedName() {
+
+		java.lang.String result = null;
+
+		kermeta.language.structure.NamedElement elem = this;
+
+		result = this.getName();
+
+		java.lang.Boolean idIfCond_345 = false;
+		idIfCond_345 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+				.isInstanceOfSwitcher(
+						org.kermeta.compil.runtime.helper.language.ObjectUtil
+								.containerSwitcher(elem),
+						org.kermeta.compil.runtime.ExecutionContext
+								.getInstance()
+								.getMetaClass(
+										"kermeta.language.structure.NamedElement"));
+
+		if (idIfCond_345) {
+
+			elem = (kermeta.language.structure.NamedElement) org.kermeta.compil.runtime.helper.language.ObjectUtil
+					.asTypeOrVoid(
+							org.kermeta.compil.runtime.helper.language.ObjectUtil
+									.containerSwitcher(elem),
+							"kermeta.language.structure.NamedElement");
+			java.lang.Boolean idLoopCond_346 = false;
+			while (!idLoopCond_346) {
+				idLoopCond_346 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+						.equalsSwitcher(elem, null);
+				if (idLoopCond_346) {
+				} else {
+
+					result = kermeta.standard.helper.StringWrapper.plus(
+							kermeta.standard.helper.StringWrapper.plus(elem
+									.getName(), "::"), result);
+
+					java.lang.Boolean idIfCond_347 = false;
+					idIfCond_347 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+							.isInstanceOfSwitcher(
+									org.kermeta.compil.runtime.helper.language.ObjectUtil
+											.containerSwitcher(elem),
+									org.kermeta.compil.runtime.ExecutionContext
+											.getInstance()
+											.getMetaClass(
+													"kermeta.language.structure.NamedElement"));
+
+					if (idIfCond_347) {
+
+						elem = (kermeta.language.structure.NamedElement) org.kermeta.compil.runtime.helper.language.ObjectUtil
+								.asTypeOrVoid(
+										org.kermeta.compil.runtime.helper.language.ObjectUtil
+												.containerSwitcher(elem),
+										"kermeta.language.structure.NamedElement");
+					} else {
+
+						elem = null;
+					}
+
+				}
+			}
+		}
+
+		return result;
+
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getGenModelJavaQualifiedName() {
+
+		java.lang.String result = null;
+
+		result = kermeta.standard.helper.StringWrapper.replace(this
+				.getGenModelQualifiedName(), "::", ".");
+
+		return result;
+
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd,
 			int featureID, NotificationChain msgs) {
@@ -296,10 +405,8 @@ public class EnumerationLiteralImpl extends NamedElementImpl implements
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-		case StructurePackage.ENUMERATION_LITERAL__ECORE_MODEL_ELEMENT:
-			if (resolve)
-				return getEcoreModelElement();
-			return basicGetEcoreModelElement();
+		case StructurePackage.ENUMERATION_LITERAL__NAME:
+			return getName();
 		case StructurePackage.ENUMERATION_LITERAL__ENUMERATION:
 			if (resolve)
 				return getEnumeration();
@@ -316,8 +423,8 @@ public class EnumerationLiteralImpl extends NamedElementImpl implements
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-		case StructurePackage.ENUMERATION_LITERAL__ECORE_MODEL_ELEMENT:
-			setEcoreModelElement((EEnumLiteral) newValue);
+		case StructurePackage.ENUMERATION_LITERAL__NAME:
+			setName((String) newValue);
 			return;
 		case StructurePackage.ENUMERATION_LITERAL__ENUMERATION:
 			setEnumeration((Enumeration) newValue);
@@ -334,8 +441,8 @@ public class EnumerationLiteralImpl extends NamedElementImpl implements
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-		case StructurePackage.ENUMERATION_LITERAL__ECORE_MODEL_ELEMENT:
-			setEcoreModelElement((EEnumLiteral) null);
+		case StructurePackage.ENUMERATION_LITERAL__NAME:
+			setName(NAME_EDEFAULT);
 			return;
 		case StructurePackage.ENUMERATION_LITERAL__ENUMERATION:
 			setEnumeration((Enumeration) null);
@@ -352,8 +459,9 @@ public class EnumerationLiteralImpl extends NamedElementImpl implements
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-		case StructurePackage.ENUMERATION_LITERAL__ECORE_MODEL_ELEMENT:
-			return ecoreModelElement != null;
+		case StructurePackage.ENUMERATION_LITERAL__NAME:
+			return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT
+					.equals(name);
 		case StructurePackage.ENUMERATION_LITERAL__ENUMERATION:
 			return basicGetEnumeration() != null;
 		}
@@ -367,10 +475,10 @@ public class EnumerationLiteralImpl extends NamedElementImpl implements
 	 */
 	@Override
 	public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass) {
-		if (baseClass == Traceability.class) {
+		if (baseClass == NamedElement.class) {
 			switch (derivedFeatureID) {
-			case StructurePackage.ENUMERATION_LITERAL__ECORE_MODEL_ELEMENT:
-				return StructurePackage.TRACEABILITY__ECORE_MODEL_ELEMENT;
+			case StructurePackage.ENUMERATION_LITERAL__NAME:
+				return StructurePackage.NAMED_ELEMENT__NAME;
 			default:
 				return -1;
 			}
@@ -385,15 +493,32 @@ public class EnumerationLiteralImpl extends NamedElementImpl implements
 	 */
 	@Override
 	public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass) {
-		if (baseClass == Traceability.class) {
+		if (baseClass == NamedElement.class) {
 			switch (baseFeatureID) {
-			case StructurePackage.TRACEABILITY__ECORE_MODEL_ELEMENT:
-				return StructurePackage.ENUMERATION_LITERAL__ECORE_MODEL_ELEMENT;
+			case StructurePackage.NAMED_ELEMENT__NAME:
+				return StructurePackage.ENUMERATION_LITERAL__NAME;
 			default:
 				return -1;
 			}
 		}
 		return super.eDerivedStructuralFeatureID(baseFeatureID, baseClass);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String toString() {
+		if (eIsProxy())
+			return super.toString();
+
+		StringBuffer result = new StringBuffer(super.toString());
+		result.append(" (name: ");
+		result.append(name);
+		result.append(')');
+		return result.toString();
 	}
 
 } //EnumerationLiteralImpl

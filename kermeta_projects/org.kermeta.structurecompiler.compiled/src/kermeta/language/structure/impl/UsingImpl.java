@@ -1,8 +1,10 @@
 /**
- * <copyright>
- * </copyright>
+ * License: EPL
+ * Copyright: IRISA / INRIA / Universite de Rennes 1
+ * 
+ * Generating with Kermeta <http://www.kermeta.org>
  *
- * $Id: UsingImpl.java,v 1.10 2009-01-21 09:15:51 cfaucher Exp $
+ * $Id: UsingImpl.java,v 1.11 2009-02-10 17:51:45 cfaucher Exp $
  */
 package kermeta.language.structure.impl;
 
@@ -128,39 +130,39 @@ public class UsingImpl extends ObjectImpl implements Using {
 		ecore.EStringToStringMapEntry usingEntry = null;
 		//BIft:detect
 
-		ecore.EStringToStringMapEntry result_ft117 = null;
+		ecore.EStringToStringMapEntry result_ft153 = null;
 
-		ecore.EStringToStringMapEntry elem_ft117 = null;
+		ecore.EStringToStringMapEntry elem_ft153 = null;
 
-		result_ft117 = null;
+		result_ft153 = null;
 
 		{
 
-			kermeta.standard.Iterator<ecore.EStringToStringMapEntry> it_ft117 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
+			kermeta.standard.Iterator<ecore.EStringToStringMapEntry> it_ft153 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
 					.<ecore.EStringToStringMapEntry> convertAsOrderedSet(
 							ecoreAnnotation.getDetails()).iterator();
-			java.lang.Boolean idLoopCond_365 = false;
-			while (!idLoopCond_365) {
-				idLoopCond_365 = kermeta.standard.helper.BooleanWrapper.or(
-						it_ft117.isOff(),
+			java.lang.Boolean idLoopCond_710 = false;
+			while (!idLoopCond_710) {
+				idLoopCond_710 = kermeta.standard.helper.BooleanWrapper.or(
+						it_ft153.isOff(),
 						org.kermeta.compil.runtime.helper.language.ObjectUtil
-								.isNotEqualSwitcher(result_ft117, null));
-				if (idLoopCond_365) {
+								.isNotEqualSwitcher(result_ft153, null));
+				if (idLoopCond_710) {
 				} else {
 
-					elem_ft117 = it_ft117.next();
+					elem_ft153 = it_ft153.next();
 
-					java.lang.Boolean idIfCond_366 = false;
+					java.lang.Boolean idIfCond_711 = false;
 					//BIle:detector
-					ecore.EStringToStringMapEntry d_lbdExp117 = elem_ft117;
+					ecore.EStringToStringMapEntry d_lbdExp153 = elem_ft153;
 
-					idIfCond_366 = kermeta.standard.helper.StringWrapper
-							.equals(d_lbdExp117.getKey(), "using");
+					idIfCond_711 = kermeta.standard.helper.StringWrapper
+							.equals(d_lbdExp153.getKey(), "using");
 					//EIle:detector
 
-					if (idIfCond_366) {
+					if (idIfCond_711) {
 
-						result_ft117 = elem_ft117;
+						result_ft153 = elem_ft153;
 					}
 
 				}
@@ -168,8 +170,9 @@ public class UsingImpl extends ObjectImpl implements Using {
 		}
 
 		//CE
-		usingEntry = result_ft117;
+		usingEntry = result_ft153;
 		//EIft:detect
+		;
 
 		usingEntry.setValue(kermeta.standard.helper.StringWrapper.plus(
 				kermeta.standard.helper.StringWrapper.plus(usingEntry

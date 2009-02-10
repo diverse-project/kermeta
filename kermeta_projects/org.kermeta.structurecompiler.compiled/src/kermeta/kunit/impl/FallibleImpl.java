@@ -1,8 +1,10 @@
 /**
- * <copyright>
- * </copyright>
+ * License: EPL
+ * Copyright: IRISA / INRIA / Universite de Rennes 1
+ * 
+ * Generating with Kermeta <http://www.kermeta.org>
  *
- * $Id: FallibleImpl.java,v 1.10 2009-01-21 09:15:49 cfaucher Exp $
+ * $Id: FallibleImpl.java,v 1.11 2009-02-10 17:51:44 cfaucher Exp $
  */
 package kermeta.kunit.impl;
 
@@ -178,10 +180,10 @@ public abstract class FallibleImpl extends AbstractFallibleImpl implements
 	 */
 	public void fail(String msg) {
 
-		java.lang.Boolean idIfCond_901 = false;
-		idIfCond_901 = this.mustStop();
+		java.lang.Boolean idIfCond_1100 = false;
+		idIfCond_1100 = this.mustStop();
 
-		if (idIfCond_901) {
+		if (idIfCond_1100) {
 
 			kermeta.kunit.AssertionFailedError exception = ((kermeta.kunit.AssertionFailedError) org.kermeta.compil.runtime.helper.language.ClassUtil
 					.newObject(kermeta.kunit.KunitPackage.eINSTANCE
@@ -252,10 +254,10 @@ public abstract class FallibleImpl extends AbstractFallibleImpl implements
 
 		java.lang.Integer number = this.number();
 
-		java.lang.Boolean idIfCond_902 = false;
-		idIfCond_902 = kermeta.standard.helper.BooleanWrapper.not(condition);
+		java.lang.Boolean idIfCond_1101 = false;
+		idIfCond_1101 = kermeta.standard.helper.BooleanWrapper.not(condition);
 
-		if (idIfCond_902) {
+		if (idIfCond_1101) {
 
 			java.lang.String msg = kermeta.standard.helper.StringWrapper.plus(
 					kermeta.standard.helper.StringWrapper.plus(
@@ -263,10 +265,10 @@ public abstract class FallibleImpl extends AbstractFallibleImpl implements
 							kermeta.standard.helper.IntegerWrapper
 									.toString(number)), " failed");
 
-			java.lang.Boolean idIfCond_903 = false;
-			idIfCond_903 = this.mustStop();
+			java.lang.Boolean idIfCond_1102 = false;
+			idIfCond_1102 = this.mustStop();
 
-			if (idIfCond_903) {
+			if (idIfCond_1102) {
 
 				kermeta.kunit.AssertionFailedError exception = ((kermeta.kunit.AssertionFailedError) org.kermeta.compil.runtime.helper.language.ClassUtil
 						.newObject(kermeta.kunit.KunitPackage.eINSTANCE
@@ -296,11 +298,11 @@ public abstract class FallibleImpl extends AbstractFallibleImpl implements
 
 		java.lang.Integer result = null;
 
-		java.lang.Boolean idIfCond_904 = false;
-		idIfCond_904 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+		java.lang.Boolean idIfCond_1103 = false;
+		idIfCond_1103 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 				.isVoidSwitcher(this.getRank());
 
-		if (idIfCond_904) {
+		if (idIfCond_1103) {
 
 			this.setRank(0);
 		}
@@ -323,10 +325,10 @@ public abstract class FallibleImpl extends AbstractFallibleImpl implements
 
 		java.lang.Integer number = this.number();
 
-		java.lang.Boolean idIfCond_905 = false;
-		idIfCond_905 = kermeta.standard.helper.BooleanWrapper.not(condition);
+		java.lang.Boolean idIfCond_1104 = false;
+		idIfCond_1104 = kermeta.standard.helper.BooleanWrapper.not(condition);
 
-		if (idIfCond_905) {
+		if (idIfCond_1104) {
 
 			java.lang.String realMsg = kermeta.standard.helper.StringWrapper
 					.plus(kermeta.standard.helper.StringWrapper.plus(
@@ -336,10 +338,10 @@ public abstract class FallibleImpl extends AbstractFallibleImpl implements
 											.toString(number)), " failed: "),
 							msg);
 
-			java.lang.Boolean idIfCond_906 = false;
-			idIfCond_906 = this.mustStop();
+			java.lang.Boolean idIfCond_1105 = false;
+			idIfCond_1105 = this.mustStop();
 
-			if (idIfCond_906) {
+			if (idIfCond_1105) {
 
 				kermeta.kunit.AssertionFailedError exception = ((kermeta.kunit.AssertionFailedError) org.kermeta.compil.runtime.helper.language.ClassUtil
 						.newObject(kermeta.kunit.KunitPackage.eINSTANCE
@@ -369,11 +371,11 @@ public abstract class FallibleImpl extends AbstractFallibleImpl implements
 
 		java.lang.Boolean result = null;
 
-		java.lang.Boolean idIfCond_907 = false;
-		idIfCond_907 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+		java.lang.Boolean idIfCond_1106 = false;
+		idIfCond_1106 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 				.isVoidSwitcher(this.getStopOnFailure());
 
-		if (idIfCond_907) {
+		if (idIfCond_1106) {
 
 			this.setStopOnFailure(true);
 		}

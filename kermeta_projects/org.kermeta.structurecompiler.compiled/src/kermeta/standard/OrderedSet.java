@@ -1,8 +1,10 @@
 /**
- * <copyright>
- * </copyright>
+ * License: EPL
+ * Copyright: IRISA / INRIA / Universite de Rennes 1
+ * 
+ * Generating with Kermeta <http://www.kermeta.org>
  *
- * $Id: OrderedSet.java,v 1.10 2009-01-21 09:15:57 cfaucher Exp $
+ * $Id: OrderedSet.java,v 1.11 2009-02-10 17:51:50 cfaucher Exp $
  */
 package kermeta.standard;
 
@@ -16,14 +18,14 @@ import java.lang.Integer;
  *
  *
  * @see kermeta.standard.StandardPackage#getOrderedSet()
- * @model annotation="kermeta documentation='/**\n * An OrderedSet is a Set that contained ordered distinct elements\n * not used for the moment @EMF_needProperty \"isUnique=true isOrdered=true javaClass=org.eclipse.emf.common.util.BasicEList\"\n \052/'"
+ * @model annotation="kermeta documentation='/**\r\n * An OrderedSet is a Set that contained ordered distinct elements\r\n * not used for the moment @EMF_needProperty \"isUnique=true isOrdered=true javaClass=org.eclipse.emf.common.util.BasicEList\"\r\n \052/'"
  * @generated
  */
 public interface OrderedSet<G> extends Set<G>, OrderedCollection<G> {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @model annotation="kermeta documentation='/**\n\t * Builds and returns a new OrderedSet from current one with element\n\t * inserted in head\n\t \052/'"
+	 * @model annotation="kermeta documentation='/**\r\n\t * Builds and returns a new OrderedSet from current one with element\r\n\t * inserted in head\r\n\t \052/'"
 	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='\nkermeta.standard.OrderedSet<G> result = null;\n\n\tresult = ((kermeta.standard.OrderedSet<G>) org.kermeta.compil.runtime.helper.language.ClassUtil.newObject(kermeta.standard.StandardPackage.eINSTANCE.getOrderedSet()));\n\n\tresult.addAll(this);\n\n\tresult.add(element);\n\nreturn result;\n'"
 	 * @generated
 	 */
@@ -33,7 +35,18 @@ public interface OrderedSet<G> extends Set<G>, OrderedCollection<G> {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @model indexDataType="kermeta.standard.JavaInteger"
-	 *        annotation="kermeta documentation='/**\n\t * Builds and returns a new OrderedSet from current one with element\n\t * inserted at rank index\n\t \052/'"
+	 *        annotation="kermeta documentation='/**\r\n\t * Overrides OrderedCollection<G>.addAt(Integer, G)\r\n\t * Adds element in the OrderedSet at rank index if the ordered set does\r\n\t * not already contain the element, does nothing otherwise\r\n\t \052/'"
+	 *        annotation="kermeta superOperation='kermeta::standard::OrderedCollection'"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='\n\tjava.lang.Boolean idIfCond_1030 = false;\n\tidIfCond_1030 = kermeta.standard.helper.BooleanWrapper.not(this.contains(element));\n\n\tif( idIfCond_1030 ) {\n\n\tkermeta.standard.helper.OrderedCollectionSuper.super_addAt(this, index, element);\n}\n\n'"
+	 * @generated
+	 */
+	void addAt(Integer index, G element);
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model indexDataType="kermeta.standard.JavaInteger"
+	 *        annotation="kermeta documentation='/**\r\n\t * Builds and returns a new OrderedSet from current one with element\r\n\t * inserted at rank index\r\n\t \052/'"
 	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='\nkermeta.standard.OrderedSet<G> result = null;\n\n\tresult = ((kermeta.standard.OrderedSet<G>) org.kermeta.compil.runtime.helper.language.ClassUtil.newObject(kermeta.standard.StandardPackage.eINSTANCE.getOrderedSet()));\n\n\tresult.addAll(this);\n\n\tresult.addAt(index, subject);\n\nreturn result;\n'"
 	 * @generated
 	 */
@@ -42,18 +55,7 @@ public interface OrderedSet<G> extends Set<G>, OrderedCollection<G> {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @model indexDataType="kermeta.standard.JavaInteger"
-	 *        annotation="kermeta documentation='/**\n\t * Overrides OrderedCollection<G>.addAt(Integer, G)\n\t * Adds element in the OrderedSet at rank index if the ordered set does\n\t * not already contain the element, does nothing otherwise\n\t \052/'"
-	 *        annotation="kermeta superOperation='kermeta::standard::OrderedCollection'"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='\n\tjava.lang.Boolean idIfCond_751 = false;\n\tidIfCond_751 = kermeta.standard.helper.BooleanWrapper.not(this.contains(element));\n\n\tif( idIfCond_751 ) {\n\n\tkermeta.standard.helper.OrderedCollectionSuper.super_addAt(this, index, element);\n}\n\n'"
-	 * @generated
-	 */
-	void addAt(Integer index, G element);
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @model annotation="kermeta documentation='/**\n\t * Builds and returns a new OrderedSet from current one with element\n\t * inserted in tail\n\t \052/'"
+	 * @model annotation="kermeta documentation='/**\r\n\t * Builds and returns a new OrderedSet from current one with element\r\n\t * inserted in tail\r\n\t \052/'"
 	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='\nkermeta.standard.OrderedSet<G> result = null;\n\n\tresult = ((kermeta.standard.OrderedSet<G>) org.kermeta.compil.runtime.helper.language.ClassUtil.newObject(kermeta.standard.StandardPackage.eINSTANCE.getOrderedSet()));\n\n\tresult.add(element);\n\n\tresult.addAll(this);\n\nreturn result;\n'"
 	 * @generated
 	 */
@@ -63,7 +65,7 @@ public interface OrderedSet<G> extends Set<G>, OrderedCollection<G> {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @model dataType="kermeta.standard.JavaBoolean"
-	 *        annotation="kermeta documentation='/**\n\t * See OrderedCollection<G>.equals(Object) \n\t \052/'"
+	 *        annotation="kermeta documentation='/**\r\n\t * See OrderedCollection<G>.equals(Object) \r\n\t \052/'"
 	 *        annotation="kermeta superOperation='kermeta::standard::OrderedCollection'"
 	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='\njava.lang.Boolean result = null;\n\n\tresult = kermeta.standard.helper.OrderedCollectionSuper.super_equals(this, element);\n\nreturn result;\n'"
 	 * @generated
@@ -74,8 +76,8 @@ public interface OrderedSet<G> extends Set<G>, OrderedCollection<G> {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @model indexDataType="kermeta.standard.JavaInteger"
-	 *        annotation="kermeta documentation='/**\n\t * Returns element at rank index in the sequence\n\t * Raises IndexOutOfBound exception if provided index is lower than 0 or\n\t * larger than the size of the OrderedSet\n\t \052/'"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='\nG result = null;\n\n\tjava.lang.Boolean idIfCond_752 = false;\n\tidIfCond_752 = kermeta.standard.helper.BooleanWrapper.and(kermeta.standard.helper.IntegerWrapper.isGreaterOrEqual(index, 0), kermeta.standard.helper.IntegerWrapper.isLowerOrEqual(index, this.size()));\n\n\tif( idIfCond_752 ) {\n\n\tkermeta.standard.Iterator<G> it = this.iterator();\n\n\t\n{\n\n\tjava.lang.Integer i = kermeta.standard.helper.IntegerWrapper.uminus(1);\n\tjava.lang.Boolean idLoopCond_753 = false;\n\twhile( !idLoopCond_753 ) {\n\tidLoopCond_753 = kermeta.standard.helper.IntegerWrapper.equals(i, index);\n\tif ( idLoopCond_753 ) {\n\t} else {\n\n\tresult = it.next();\n\n\ti = kermeta.standard.helper.IntegerWrapper.plus(i, 1);\n}\n\t}\n}\n\n}\n else {\n\n\t\nif (true)\n\tthrow new org.kermeta.compil.runtime.helper.error.KRuntimeError( ((kermeta.exceptions.IndexOutOfBound) org.kermeta.compil.runtime.helper.language.ClassUtil.newObject(kermeta.exceptions.ExceptionsPackage.eINSTANCE.getIndexOutOfBound())) );\n\n}\n\n\nreturn result;\n'"
+	 *        annotation="kermeta documentation='/**\r\n\t * Returns element at rank index in the sequence\r\n\t * Raises IndexOutOfBound exception if provided index is lower than 0 or\r\n\t * larger than the size of the OrderedSet\r\n\t \052/'"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='\nG result = null;\n\n\tjava.lang.Boolean idIfCond_1031 = false;\n\tidIfCond_1031 = kermeta.standard.helper.BooleanWrapper.and(kermeta.standard.helper.IntegerWrapper.isGreaterOrEqual(index, 0), kermeta.standard.helper.IntegerWrapper.isLowerOrEqual(index, this.size()));\n\n\tif( idIfCond_1031 ) {\n\n\tkermeta.standard.Iterator<G> it = this.iterator();\n\n\t\n{\n\n\tjava.lang.Integer i = kermeta.standard.helper.IntegerWrapper.uminus(1);\n\tjava.lang.Boolean idLoopCond_1032 = false;\n\twhile( !idLoopCond_1032 ) {\n\tidLoopCond_1032 = kermeta.standard.helper.IntegerWrapper.equals(i, index);\n\tif ( idLoopCond_1032 ) {\n\t} else {\n\n\tresult = it.next();\n\n\ti = kermeta.standard.helper.IntegerWrapper.plus(i, 1);\n}\n\t}\n}\n\n}\n else {\n\n\t\nif (true)\n\tthrow new org.kermeta.compil.runtime.helper.error.KRuntimeError( ((kermeta.exceptions.IndexOutOfBound) org.kermeta.compil.runtime.helper.language.ClassUtil.newObject(kermeta.exceptions.ExceptionsPackage.eINSTANCE.getIndexOutOfBound())) );\n\n}\n\n\nreturn result;\n'"
 	 * @generated
 	 */
 	G at(Integer index);
@@ -83,7 +85,7 @@ public interface OrderedSet<G> extends Set<G>, OrderedCollection<G> {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @model annotation="kermeta documentation='/**\n\t * See Set<G>.add(G)\n\t \052/'"
+	 * @model annotation="kermeta documentation='/**\r\n\t * See Set<G>.add(G)\r\n\t \052/'"
 	 *        annotation="kermeta superOperation='kermeta::standard::Set'"
 	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='\n\tsuper.add(element);\n'"
 	 * @generated
@@ -94,8 +96,8 @@ public interface OrderedSet<G> extends Set<G>, OrderedCollection<G> {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @model minDataType="kermeta.standard.JavaInteger" maxDataType="kermeta.standard.JavaInteger"
-	 *        annotation="kermeta documentation='/**\n\t * Builds and returns a new OrderedSet composed of elements of current ordered\n\t * set from rank min to rank max (order is respected)\n\t * Raises IndexOutOfBound exception if min is negative, max is larger than \n\t * the size of the ordered set or min is larger than max\n\t \052/'"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='\nkermeta.standard.OrderedSet<G> result = null;\n\n\tresult = ((kermeta.standard.OrderedSet<G>) org.kermeta.compil.runtime.helper.language.ClassUtil.newObject(kermeta.standard.StandardPackage.eINSTANCE.getOrderedSet()));\n\n\tjava.lang.Boolean idIfCond_754 = false;\n\tidIfCond_754 = kermeta.standard.helper.BooleanWrapper.and(kermeta.standard.helper.BooleanWrapper.and(kermeta.standard.helper.IntegerWrapper.isGreaterOrEqual(min, 0), kermeta.standard.helper.IntegerWrapper.isLowerOrEqual(max, this.size())), kermeta.standard.helper.IntegerWrapper.isLowerOrEqual(min, max));\n\n\tif( idIfCond_754 ) {\n\n\tkermeta.standard.Iterator<G> it = this.iterator();\n\n\tjava.lang.Integer i = 0;\n\n\t\n\tjava.lang.Boolean idLoopCond_755 = false;\n\twhile( !idLoopCond_755 ) {\n\tidLoopCond_755 = kermeta.standard.helper.IntegerWrapper.equals(i, min);\n\tif ( idLoopCond_755 ) {\n\t} else {\n\n\tit.next();\n\n\ti = kermeta.standard.helper.IntegerWrapper.plus(i, 1);\n}\n\t}\n\n\t\n\tjava.lang.Boolean idLoopCond_756 = false;\n\twhile( !idLoopCond_756 ) {\n\tidLoopCond_756 = kermeta.standard.helper.IntegerWrapper.equals(i, kermeta.standard.helper.IntegerWrapper.plus(max, 1));\n\tif ( idLoopCond_756 ) {\n\t} else {\n\n\tresult.add(it.next());\n\n\ti = kermeta.standard.helper.IntegerWrapper.plus(i, 1);\n}\n\t}\n}\n else {\n\n\t\nif (true)\n\tthrow new org.kermeta.compil.runtime.helper.error.KRuntimeError( ((kermeta.exceptions.IndexOutOfBound) org.kermeta.compil.runtime.helper.language.ClassUtil.newObject(kermeta.exceptions.ExceptionsPackage.eINSTANCE.getIndexOutOfBound())) );\n\n}\n\n\nreturn result;\n'"
+	 *        annotation="kermeta documentation='/**\r\n\t * Builds and returns a new OrderedSet composed of elements of current ordered\r\n\t * set from rank min to rank max (order is respected)\r\n\t * Raises IndexOutOfBound exception if min is negative, max is larger than \r\n\t * the size of the ordered set or min is larger than max\r\n\t \052/'"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='\nkermeta.standard.OrderedSet<G> result = null;\n\n\tresult = ((kermeta.standard.OrderedSet<G>) org.kermeta.compil.runtime.helper.language.ClassUtil.newObject(kermeta.standard.StandardPackage.eINSTANCE.getOrderedSet()));\n\n\tjava.lang.Boolean idIfCond_1033 = false;\n\tidIfCond_1033 = kermeta.standard.helper.BooleanWrapper.and(kermeta.standard.helper.BooleanWrapper.and(kermeta.standard.helper.IntegerWrapper.isGreaterOrEqual(min, 0), kermeta.standard.helper.IntegerWrapper.isLowerOrEqual(max, this.size())), kermeta.standard.helper.IntegerWrapper.isLowerOrEqual(min, max));\n\n\tif( idIfCond_1033 ) {\n\n\tkermeta.standard.Iterator<G> it = this.iterator();\n\n\tjava.lang.Integer i = 0;\n\n\t\n\tjava.lang.Boolean idLoopCond_1034 = false;\n\twhile( !idLoopCond_1034 ) {\n\tidLoopCond_1034 = kermeta.standard.helper.IntegerWrapper.equals(i, min);\n\tif ( idLoopCond_1034 ) {\n\t} else {\n\n\tit.next();\n\n\ti = kermeta.standard.helper.IntegerWrapper.plus(i, 1);\n}\n\t}\n\n\t\n\tjava.lang.Boolean idLoopCond_1035 = false;\n\twhile( !idLoopCond_1035 ) {\n\tidLoopCond_1035 = kermeta.standard.helper.IntegerWrapper.equals(i, kermeta.standard.helper.IntegerWrapper.plus(max, 1));\n\tif ( idLoopCond_1035 ) {\n\t} else {\n\n\tresult.add(it.next());\n\n\ti = kermeta.standard.helper.IntegerWrapper.plus(i, 1);\n}\n\t}\n}\n else {\n\n\t\nif (true)\n\tthrow new org.kermeta.compil.runtime.helper.error.KRuntimeError( ((kermeta.exceptions.IndexOutOfBound) org.kermeta.compil.runtime.helper.language.ClassUtil.newObject(kermeta.exceptions.ExceptionsPackage.eINSTANCE.getIndexOutOfBound())) );\n\n}\n\n\nreturn result;\n'"
 	 * @generated
 	 */
 	OrderedSet<G> subSet(Integer min, Integer max);

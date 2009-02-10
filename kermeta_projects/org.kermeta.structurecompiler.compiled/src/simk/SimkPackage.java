@@ -1,8 +1,10 @@
 /**
- * <copyright>
- * </copyright>
+ * License: EPL
+ * Copyright: IRISA / INRIA / Universite de Rennes 1
+ * 
+ * Generating with Kermeta <http://www.kermeta.org>
  *
- * $Id: SimkPackage.java,v 1.10 2009-01-21 09:16:06 cfaucher Exp $
+ * $Id: SimkPackage.java,v 1.11 2009-02-10 17:51:59 cfaucher Exp $
  */
 package simk;
 
@@ -536,22 +538,22 @@ public interface SimkPackage extends EPackage {
 	int SM_METHOD__SM_RETURN = SM_NAMED_ELEMENT_FEATURE_COUNT + 8;
 
 	/**
-	 * The feature id for the '<em><b>SM Context</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SM_METHOD__SM_CONTEXT = SM_NAMED_ELEMENT_FEATURE_COUNT + 9;
-
-	/**
 	 * The feature id for the '<em><b>Usages</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int SM_METHOD__USAGES = SM_NAMED_ELEMENT_FEATURE_COUNT + 10;
+	int SM_METHOD__USAGES = SM_NAMED_ELEMENT_FEATURE_COUNT + 9;
+
+	/**
+	 * The feature id for the '<em><b>SM Context</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SM_METHOD__SM_CONTEXT = SM_NAMED_ELEMENT_FEATURE_COUNT + 10;
 
 	/**
 	 * The feature id for the '<em><b>Access</b></em>' attribute.
@@ -1156,17 +1158,6 @@ public interface SimkPackage extends EPackage {
 	EReference getSMMethod_SMReturn();
 
 	/**
-	 * Returns the meta object for the reference '{@link simk.SMMethod#getSMContext <em>SM Context</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>SM Context</em>'.
-	 * @see simk.SMMethod#getSMContext()
-	 * @see #getSMMethod()
-	 * @generated
-	 */
-	EReference getSMMethod_SMContext();
-
-	/**
 	 * Returns the meta object for the attribute '{@link simk.SMMethod#getUsages <em>Usages</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1176,6 +1167,17 @@ public interface SimkPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getSMMethod_Usages();
+
+	/**
+	 * Returns the meta object for the reference '{@link simk.SMMethod#getSMContext <em>SM Context</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>SM Context</em>'.
+	 * @see simk.SMMethod#getSMContext()
+	 * @see #getSMMethod()
+	 * @generated
+	 */
+	EReference getSMMethod_SMContext();
 
 	/**
 	 * Returns the meta object for the attribute '{@link simk.SMMethod#getAccess <em>Access</em>}'.
@@ -1476,20 +1478,20 @@ public interface SimkPackage extends EPackage {
 		EReference SM_METHOD__SM_RETURN = eINSTANCE.getSMMethod_SMReturn();
 
 		/**
-		 * The meta object literal for the '<em><b>SM Context</b></em>' reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference SM_METHOD__SM_CONTEXT = eINSTANCE.getSMMethod_SMContext();
-
-		/**
 		 * The meta object literal for the '<em><b>Usages</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
 		EAttribute SM_METHOD__USAGES = eINSTANCE.getSMMethod_Usages();
+
+		/**
+		 * The meta object literal for the '<em><b>SM Context</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference SM_METHOD__SM_CONTEXT = eINSTANCE.getSMMethod_SMContext();
 
 		/**
 		 * The meta object literal for the '<em><b>Access</b></em>' attribute feature.

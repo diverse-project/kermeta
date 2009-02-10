@@ -1,8 +1,10 @@
 /**
- * <copyright>
- * </copyright>
+ * License: EPL
+ * Copyright: IRISA / INRIA / Universite de Rennes 1
+ * 
+ * Generating with Kermeta <http://www.kermeta.org>
  *
- * $Id: EClassImpl.java,v 1.11 2009-01-21 09:15:52 cfaucher Exp $
+ * $Id: EClassImpl.java,v 1.12 2009-02-10 17:51:46 cfaucher Exp $
  */
 package ecore.impl;
 
@@ -253,8 +255,8 @@ public class EClassImpl extends EClassifierImpl implements EClass {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public int getFeatureID(EStructuralFeature feature) {
-		java.lang.Integer result = null;
+	public EStructuralFeature getEStructuralFeature(String featureName) {
+		ecore.EStructuralFeature result = null;
 
 		return result;
 
@@ -265,8 +267,8 @@ public class EClassImpl extends EClassifierImpl implements EClass {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EStructuralFeature getEStructuralFeature(String featureName) {
-		ecore.EStructuralFeature result = null;
+	public int getFeatureID(EStructuralFeature feature) {
+		java.lang.Integer result = null;
 
 		return result;
 
@@ -410,9 +412,9 @@ public class EClassImpl extends EClassifierImpl implements EClass {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<EOperation> getterEAllOperations() {
+	public EList<EStructuralFeature> getterEAllStructuralFeatures() {
 
-		kermeta.standard.OrderedSet<ecore.EOperation> result = null;
+		kermeta.standard.OrderedSet<ecore.EStructuralFeature> result = null;
 
 		return org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
 				.convertAsEList(result);
@@ -424,9 +426,9 @@ public class EClassImpl extends EClassifierImpl implements EClass {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<EStructuralFeature> getterEAllStructuralFeatures() {
+	public EList<EOperation> getterEAllOperations() {
 
-		kermeta.standard.OrderedSet<ecore.EStructuralFeature> result = null;
+		kermeta.standard.OrderedSet<ecore.EOperation> result = null;
 
 		return org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
 				.convertAsEList(result);

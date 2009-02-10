@@ -1,8 +1,10 @@
 /**
- * <copyright>
- * </copyright>
+ * License: EPL
+ * Copyright: IRISA / INRIA / Universite de Rennes 1
+ * 
+ * Generating with Kermeta <http://www.kermeta.org>
  *
- * $Id: Log.java,v 1.10 2009-01-21 09:16:00 cfaucher Exp $
+ * $Id: Log.java,v 1.11 2009-02-10 17:51:54 cfaucher Exp $
  */
 package kermeta.kunit;
 
@@ -24,7 +26,7 @@ import org.eclipse.emf.common.util.EList;
  * </p>
  *
  * @see kermeta.kunit.KunitPackage#getLog()
- * @model annotation="kermeta documentation='/**\n * Log is a log of failures and errors that happened to fallibles since start was called\n \052/'"
+ * @model annotation="kermeta documentation='/**\r\n * Log is a log of failures and errors that happened to fallibles since start was called\r\n \052/'"
  * @generated
  */
 public interface Log extends kermeta.language.structure.Object {
@@ -39,7 +41,7 @@ public interface Log extends kermeta.language.structure.Object {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Failures</em>' reference list.
 	 * @see kermeta.kunit.KunitPackage#getLog_Failures()
-	 * @model annotation="kermeta documentation='/** \n\t * list of detected assertion failures\n\t \052/'"
+	 * @model annotation="kermeta documentation='/** \r\n\t * list of detected assertion failures\r\n\t \052/'"
 	 * @generated
 	 */
 	EList<Failure> getFailures();
@@ -55,7 +57,7 @@ public interface Log extends kermeta.language.structure.Object {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Errors</em>' reference list.
 	 * @see kermeta.kunit.KunitPackage#getLog_Errors()
-	 * @model annotation="kermeta documentation='/**\n\t * list of detected test errors\n\t \052/'"
+	 * @model annotation="kermeta documentation='/**\r\n\t * list of detected test errors\r\n\t \052/'"
 	 * @generated
 	 */
 	EList<kermeta.kunit.Error> getErrors();
@@ -72,7 +74,7 @@ public interface Log extends kermeta.language.structure.Object {
 	 * @see #setRuntests(Integer)
 	 * @see kermeta.kunit.KunitPackage#getLog_Runtests()
 	 * @model dataType="kermeta.standard.JavaInteger"
-	 *        annotation="kermeta documentation='/**\n\t * number of test that were run\n\t \052/'"
+	 *        annotation="kermeta documentation='/**\r\n\t * number of test that were run\r\n\t \052/'"
 	 * @generated
 	 */
 	Integer getRuntests();
@@ -98,7 +100,7 @@ public interface Log extends kermeta.language.structure.Object {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Harness Errors</em>' reference list.
 	 * @see kermeta.kunit.KunitPackage#getLog_HarnessErrors()
-	 * @model annotation="kermeta documentation='/**\n\t* list of detected errors with the test harness\n\t\052/'"
+	 * @model annotation="kermeta documentation='/**\r\n\t* list of detected errors with the test harness\r\n\t\052/'"
 	 * @generated
 	 */
 	EList<kermeta.kunit.Error> getHarnessErrors();
@@ -106,7 +108,7 @@ public interface Log extends kermeta.language.structure.Object {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @model annotation="kermeta documentation='/**\n\t * Adds errors which occur during the SetUp phase\n\t \052/'"
+	 * @model annotation="kermeta documentation='/**\r\n\t * Adds errors which occur during the SetUp phase\r\n\t \052/'"
 	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='\n\torg.kermeta.compil.runtime.helper.basetypes.CollectionUtil.<kermeta.kunit.Error>convertAsOrderedSet(this.getHarnessErrors()).add(((kermeta.kunit.Error) org.kermeta.compil.runtime.helper.language.ClassUtil.newObject(kermeta.kunit.KunitPackage.eINSTANCE.getError())).initFrom(test, e).makeSetUp());\n'"
 	 * @generated
 	 */
@@ -115,7 +117,7 @@ public interface Log extends kermeta.language.structure.Object {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @model annotation="kermeta documentation='/**\n\t * Adds an error to the list of errors\n\t \052/'"
+	 * @model annotation="kermeta documentation='/**\r\n\t * Adds an error to the list of errors\r\n\t \052/'"
 	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='\n\torg.kermeta.compil.runtime.helper.basetypes.CollectionUtil.<kermeta.kunit.Error>convertAsOrderedSet(this.getErrors()).add(((kermeta.kunit.Error) org.kermeta.compil.runtime.helper.language.ClassUtil.newObject(kermeta.kunit.KunitPackage.eINSTANCE.getError())).initFrom(test, e));\n'"
 	 * @generated
 	 */
@@ -125,7 +127,7 @@ public interface Log extends kermeta.language.structure.Object {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @model msgDataType="kermeta.standard.JavaString"
-	 *        annotation="kermeta documentation='/**\n\t * Adds a failed test to the list of failed tests\n\t \052/'"
+	 *        annotation="kermeta documentation='/**\r\n\t * Adds a failed test to the list of failed tests\r\n\t \052/'"
 	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='\n\torg.kermeta.compil.runtime.helper.basetypes.CollectionUtil.<kermeta.kunit.Failure>convertAsOrderedSet(this.getFailures()).add(((kermeta.kunit.Failure) org.kermeta.compil.runtime.helper.language.ClassUtil.newObject(kermeta.kunit.KunitPackage.eINSTANCE.getFailure())).initFrom(test, msg));\n'"
 	 * @generated
 	 */
@@ -134,7 +136,7 @@ public interface Log extends kermeta.language.structure.Object {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @model annotation="kermeta documentation='/**\n\t * Adds errors which occur during the TearDown phase\n\t \052/'"
+	 * @model annotation="kermeta documentation='/**\r\n\t * Adds errors which occur during the TearDown phase\r\n\t \052/'"
 	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='\n\torg.kermeta.compil.runtime.helper.basetypes.CollectionUtil.<kermeta.kunit.Error>convertAsOrderedSet(this.getHarnessErrors()).add(((kermeta.kunit.Error) org.kermeta.compil.runtime.helper.language.ClassUtil.newObject(kermeta.kunit.KunitPackage.eINSTANCE.getError())).initFrom(test, e).makeTearDown());\n'"
 	 * @generated
 	 */
@@ -143,8 +145,8 @@ public interface Log extends kermeta.language.structure.Object {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @model annotation="kermeta documentation='/**\n\t * Increments the runtests counter\n\t \052/'"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='\n\tjava.lang.Boolean idIfCond_908 = false;\n\tidIfCond_908 = kermeta.standard.helper.IntegerWrapper.equals(this.getRuntests(), null);\n\n\tif( idIfCond_908 ) {\n\n\tthis.setRuntests(0);\n}\n\n\n\tthis.setRuntests(kermeta.standard.helper.IntegerWrapper.plus(1, this.getRuntests()));\n'"
+	 * @model annotation="kermeta documentation='/**\r\n\t * Increments the runtests counter\r\n\t \052/'"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='\n\tjava.lang.Boolean idIfCond_1107 = false;\n\tidIfCond_1107 = kermeta.standard.helper.IntegerWrapper.equals(this.getRuntests(), null);\n\n\tif( idIfCond_1107 ) {\n\n\tthis.setRuntests(0);\n}\n\n\n\tthis.setRuntests(kermeta.standard.helper.IntegerWrapper.plus(1, this.getRuntests()));\n'"
 	 * @generated
 	 */
 	void newAttempt();

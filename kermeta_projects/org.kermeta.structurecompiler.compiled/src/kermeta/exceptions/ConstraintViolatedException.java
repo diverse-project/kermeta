@@ -1,8 +1,10 @@
 /**
- * <copyright>
- * </copyright>
+ * License: EPL
+ * Copyright: IRISA / INRIA / Universite de Rennes 1
+ * 
+ * Generating with Kermeta <http://www.kermeta.org>
  *
- * $Id: ConstraintViolatedException.java,v 1.8 2009-01-21 09:15:52 cfaucher Exp $
+ * $Id: ConstraintViolatedException.java,v 1.9 2009-02-10 17:51:47 cfaucher Exp $
  */
 package kermeta.exceptions;
 
@@ -38,7 +40,7 @@ public interface ConstraintViolatedException extends
 	 * @return the value of the '<em>Constraint Applied To</em>' reference.
 	 * @see #setConstraintAppliedTo(kermeta.language.structure.Object)
 	 * @see kermeta.exceptions.ExceptionsPackage#getConstraintViolatedException_ConstraintAppliedTo()
-	 * @model annotation="kermeta documentation='/** Object on which the constraint was applied to\n\t * On Invariant, we can generally consider this object as the faulty Object\n\t \052/'"
+	 * @model annotation="kermeta documentation='/** Object on which the constraint was applied to\r\n\t * On Invariant, we can generally consider this object as the faulty Object\r\n\t \052/'"
 	 * @generated
 	 */
 	kermeta.language.structure.Object getConstraintAppliedTo();
@@ -64,7 +66,7 @@ public interface ConstraintViolatedException extends
 	 * @return the value of the '<em>Failed Constraint</em>' reference.
 	 * @see #setFailedConstraint(Constraint)
 	 * @see kermeta.exceptions.ExceptionsPackage#getConstraintViolatedException_FailedConstraint()
-	 * @model annotation="kermeta documentation='/** constraint that has failed\n\t \052/'"
+	 * @model annotation="kermeta documentation='/** constraint that has failed\r\n\t \052/'"
 	 * @generated
 	 */
 	Constraint getFailedConstraint();

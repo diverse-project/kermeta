@@ -1,8 +1,10 @@
 /**
- * <copyright>
- * </copyright>
+ * License: EPL
+ * Copyright: IRISA / INRIA / Universite de Rennes 1
+ * 
+ * Generating with Kermeta <http://www.kermeta.org>
  *
- * $Id: TypeError.java,v 1.10 2009-01-21 09:15:59 cfaucher Exp $
+ * $Id: TypeError.java,v 1.11 2009-02-10 17:51:53 cfaucher Exp $
  */
 package kermeta.interpreter;
 
@@ -13,7 +15,7 @@ package kermeta.interpreter;
  *
  *
  * @see kermeta.interpreter.InterpreterPackage#getTypeError()
- * @model annotation="kermeta documentation='/**\n * Type errors in a code written in Kermeta\n \052/'"
+ * @model annotation="kermeta documentation='/**\r\n * Type errors in a code written in Kermeta\r\n \052/'"
  * @generated
  */
 public interface TypeError extends KermetaError {

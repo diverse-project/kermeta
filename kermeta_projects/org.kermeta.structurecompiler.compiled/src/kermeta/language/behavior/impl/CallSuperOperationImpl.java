@@ -1,8 +1,10 @@
 /**
- * <copyright>
- * </copyright>
+ * License: EPL
+ * Copyright: IRISA / INRIA / Universite de Rennes 1
+ * 
+ * Generating with Kermeta <http://www.kermeta.org>
  *
- * $Id: CallSuperOperationImpl.java,v 1.11 2009-01-21 09:15:57 cfaucher Exp $
+ * $Id: CallSuperOperationImpl.java,v 1.12 2009-02-10 17:51:50 cfaucher Exp $
  */
 package kermeta.language.behavior.impl;
 
@@ -75,15 +77,9 @@ public class CallSuperOperationImpl extends CallExpressionImpl implements
 																														((kermeta.language.structure.Package) org.kermeta.compil.runtime.helper.language.ObjectUtil
 																																.asTypeSwitcher(
 																																		org.kermeta.compil.runtime.helper.language.ObjectUtil
-																																				.containerSwitcher(((kermeta.language.structure.ClassDefinition) org.kermeta.compil.runtime.helper.language.ObjectUtil
-																																						.asTypeSwitcher(
-																																								org.kermeta.compil.runtime.helper.language.ObjectUtil
-																																										.containerSwitcher(owningOperation
-																																												.getSuperOperation()),
-																																								org.kermeta.compil.runtime.ExecutionContext
-																																										.getInstance()
-																																										.getMetaClass(
-																																												"kermeta.language.structure.ClassDefinition")))),
+																																				.containerSwitcher(owningOperation
+																																						.getSuperOperation()
+																																						.getOwningClass()),
 																																		org.kermeta.compil.runtime.ExecutionContext
 																																				.getInstance()
 																																				.getMetaClass(
@@ -92,24 +88,18 @@ public class CallSuperOperationImpl extends CallExpressionImpl implements
 																														"::",
 																														".")),
 																						".helper."),
-																		((kermeta.language.structure.ClassDefinition) org.kermeta.compil.runtime.helper.language.ObjectUtil
-																				.asTypeSwitcher(
-																						org.kermeta.compil.runtime.helper.language.ObjectUtil
-																								.containerSwitcher(owningOperation
-																										.getSuperOperation()),
-																						org.kermeta.compil.runtime.ExecutionContext
-																								.getInstance()
-																								.getMetaClass(
-																										"kermeta.language.structure.ClassDefinition")))
+																		owningOperation
+																				.getSuperOperation()
+																				.getOwningClass()
 																				.getName()),
 														"Super.super_"),
 										owningOperation.getSuperOperation()
 												.getFinalName(context)), "(");
 
-		java.lang.Boolean idIfCond_601 = false;
-		idIfCond_601 = context.getStaticOperationMode();
+		java.lang.Boolean idIfCond_294 = false;
+		idIfCond_294 = context.getStaticOperationMode();
 
-		if (idIfCond_601) {
+		if (idIfCond_294) {
 
 			result = kermeta.standard.helper.StringWrapper.plus(result, "self");
 		} else {
@@ -117,22 +107,22 @@ public class CallSuperOperationImpl extends CallExpressionImpl implements
 			result = kermeta.standard.helper.StringWrapper.plus(result, "this");
 		}
 
-		java.lang.Boolean idIfCond_602 = false;
-		idIfCond_602 = kermeta.standard.helper.IntegerWrapper
+		java.lang.Boolean idIfCond_295 = false;
+		idIfCond_295 = kermeta.standard.helper.IntegerWrapper
 				.isGreater(
 						org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
 								.<kermeta.language.behavior.Expression> convertAsOrderedSet(
 										this.getParameters()).size(), 0);
 
-		if (idIfCond_602) {
+		if (idIfCond_295) {
 
 			result = kermeta.standard.helper.StringWrapper.plus(result, ", ");
 		}
 
-		java.lang.Boolean idIfCond_603 = false;
-		idIfCond_603 = context.getStaticOperationMode();
+		java.lang.Boolean idIfCond_296 = false;
+		idIfCond_296 = context.getStaticOperationMode();
 
-		if (idIfCond_603) {
+		if (idIfCond_296) {
 
 			((kermeta.language.structure.ModelingUnit) org.kermeta.compil.runtime.helper.language.ClassUtil
 					.newObject(kermeta.language.structure.StructurePackage.eINSTANCE
@@ -174,17 +164,8 @@ public class CallSuperOperationImpl extends CallExpressionImpl implements
 										"kermeta.language.structure.Operation")));
 
 		java.lang.String fromOperation_cd = kermeta.standard.helper.StringWrapper
-				.replace(
-						((kermeta.language.structure.ClassDefinition) org.kermeta.compil.runtime.helper.language.ObjectUtil
-								.asTypeSwitcher(
-										org.kermeta.compil.runtime.helper.language.ObjectUtil
-												.containerSwitcher(owningOperation
-														.getSuperOperation()),
-										org.kermeta.compil.runtime.ExecutionContext
-												.getInstance()
-												.getMetaClass(
-														"kermeta.language.structure.ClassDefinition")))
-								.qualifiedName(), "::", ".");
+				.replace(owningOperation.getSuperOperation().getOwningClass()
+						.qualifiedName(), "::", ".");
 
 		result = "";
 
@@ -201,25 +182,17 @@ public class CallSuperOperationImpl extends CallExpressionImpl implements
 										"kermeta.language.structure.ClassDefinition")))
 				.getEcoreModelElement();
 
-		ecore.EClass super_class = ((kermeta.language.structure.ClassDefinition) org.kermeta.compil.runtime.helper.language.ObjectUtil
-				.asTypeSwitcher(
-						org.kermeta.compil.runtime.helper.language.ObjectUtil
-								.containerSwitcher(owningOperation
-										.getSuperOperation()),
-						org.kermeta.compil.runtime.ExecutionContext
-								.getInstance()
-								.getMetaClass(
-										"kermeta.language.structure.ClassDefinition")))
-				.getEcoreModelElement();
+		ecore.EClass super_class = owningOperation.getSuperOperation()
+				.getOwningClass().getEcoreModelElement();
 
-		java.lang.Boolean idIfCond_604 = false;
-		idIfCond_604 = kermeta.standard.helper.BooleanWrapper
+		java.lang.Boolean idIfCond_297 = false;
+		idIfCond_297 = kermeta.standard.helper.BooleanWrapper
 				.not(owningOperation.isFunctionType());
 
-		if (idIfCond_604) {
+		if (idIfCond_297) {
 
-			java.lang.Boolean idIfCond_605 = false;
-			idIfCond_605 = kermeta.standard.helper.BooleanWrapper
+			java.lang.Boolean idIfCond_298 = false;
+			idIfCond_298 = kermeta.standard.helper.BooleanWrapper
 					.and(
 							((km2ecore.helper.ecore.ModelAnalizer) org.kermeta.compil.runtime.helper.language.ClassUtil
 									.newObject(km2ecore.helper.ecore.EcorePackage.eINSTANCE
@@ -228,7 +201,7 @@ public class CallSuperOperationImpl extends CallExpressionImpl implements
 							kermeta.standard.helper.BooleanWrapper.not(context
 									.getStaticOperationMode()));
 
-			if (idIfCond_605) {
+			if (idIfCond_298) {
 
 				result = kermeta.standard.helper.StringWrapper.plus(
 						kermeta.standard.helper.StringWrapper.plus(

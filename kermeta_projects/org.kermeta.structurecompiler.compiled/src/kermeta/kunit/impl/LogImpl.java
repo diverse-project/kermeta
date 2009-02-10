@@ -1,8 +1,10 @@
 /**
- * <copyright>
- * </copyright>
+ * License: EPL
+ * Copyright: IRISA / INRIA / Universite de Rennes 1
+ * 
+ * Generating with Kermeta <http://www.kermeta.org>
  *
- * $Id: LogImpl.java,v 1.10 2009-01-21 09:15:49 cfaucher Exp $
+ * $Id: LogImpl.java,v 1.11 2009-02-10 17:51:44 cfaucher Exp $
  */
 package kermeta.kunit.impl;
 
@@ -248,11 +250,11 @@ public class LogImpl extends ObjectImpl implements Log {
 	 */
 	public void newAttempt() {
 
-		java.lang.Boolean idIfCond_908 = false;
-		idIfCond_908 = kermeta.standard.helper.IntegerWrapper.equals(this
+		java.lang.Boolean idIfCond_1107 = false;
+		idIfCond_1107 = kermeta.standard.helper.IntegerWrapper.equals(this
 				.getRuntests(), null);
 
-		if (idIfCond_908) {
+		if (idIfCond_1107) {
 
 			this.setRuntests(0);
 		}

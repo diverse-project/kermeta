@@ -1,8 +1,10 @@
 /**
- * <copyright>
- * </copyright>
+ * License: EPL
+ * Copyright: IRISA / INRIA / Universite de Rennes 1
+ * 
+ * Generating with Kermeta <http://www.kermeta.org>
  *
- * $Id: StackImpl.java,v 1.10 2009-01-21 09:15:55 cfaucher Exp $
+ * $Id: StackImpl.java,v 1.11 2009-02-10 17:51:48 cfaucher Exp $
  */
 package kermeta.utils.impl;
 
@@ -47,11 +49,13 @@ public class StackImpl<G> extends SequenceImpl<G> implements Stack<G> {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public G peek() {
+	public G pop() {
 
 		G result = null;
 
-		result = this.first();
+		result = this.peek();
+
+		this.removeAt(0);
 
 		return result;
 
@@ -62,13 +66,11 @@ public class StackImpl<G> extends SequenceImpl<G> implements Stack<G> {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public G pop() {
+	public G peek() {
 
 		G result = null;
 
-		result = this.peek();
-
-		this.removeAt(0);
+		result = this.first();
 
 		return result;
 

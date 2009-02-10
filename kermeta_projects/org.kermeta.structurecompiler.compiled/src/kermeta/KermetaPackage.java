@@ -1,8 +1,10 @@
 /**
- * <copyright>
- * </copyright>
+ * License: EPL
+ * Copyright: IRISA / INRIA / Universite de Rennes 1
+ * 
+ * Generating with Kermeta <http://www.kermeta.org>
  *
- * $Id: KermetaPackage.java,v 1.10 2009-01-21 09:16:13 cfaucher Exp $
+ * $Id: KermetaPackage.java,v 1.11 2009-02-10 17:52:06 cfaucher Exp $
  */
 package kermeta;
 
@@ -25,7 +27,7 @@ import org.eclipse.emf.ecore.EPackage;
  * @see kermeta.KermetaFactory
  * @model kind="package"
  *        annotation="kermeta ecoreUri='http://www.kermeta.org/kermeta/1_2_0//kermeta'"
- *        annotation="kermeta documentation='/**\n * The root package. See the other packages if you want to browse the classes of Kermeta api.\n * <img src=\"platform:/plugin/fr.irisa.triskell.kermeta.documentation/src/figures/kermeta_packages.png\"/>\n \052/'"
+ *        annotation="kermeta documentation='/**\r\n * The root package. See the other packages if you want to browse the classes of Kermeta api.\r\n * <img src=\"platform:/plugin/fr.irisa.triskell.kermeta.documentation/src/figures/kermeta_packages.png\"/>\r\n \052/'"
  * @generated
  */
 public interface KermetaPackage extends EPackage {

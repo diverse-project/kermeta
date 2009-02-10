@@ -1,8 +1,10 @@
 /**
- * <copyright>
- * </copyright>
+ * License: EPL
+ * Copyright: IRISA / INRIA / Universite de Rennes 1
+ * 
+ * Generating with Kermeta <http://www.kermeta.org>
  *
- * $Id: FunctionType.java,v 1.10 2009-01-21 09:15:58 cfaucher Exp $
+ * $Id: FunctionType.java,v 1.11 2009-02-10 17:51:52 cfaucher Exp $
  */
 package kermeta.language.structure;
 
@@ -28,8 +30,8 @@ import km2ecore.KM2EcoreContext;
  *        annotation="kermeta.inv resultType=''"
  * @generated
  */
-public interface FunctionType extends TypeContainer, Type,
-		Traceability<EAnnotation> {
+public interface FunctionType extends Traceability<EAnnotation>, TypeContainer,
+		Type {
 	/**
 	 * Returns the value of the '<em><b>Left</b></em>' reference.
 	 * <!-- begin-user-doc -->

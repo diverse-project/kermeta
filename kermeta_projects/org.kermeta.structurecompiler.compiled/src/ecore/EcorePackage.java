@@ -1,8 +1,10 @@
 /**
- * <copyright>
- * </copyright>
+ * License: EPL
+ * Copyright: IRISA / INRIA / Universite de Rennes 1
+ * 
+ * Generating with Kermeta <http://www.kermeta.org>
  *
- * $Id: EcorePackage.java,v 1.10 2009-01-21 09:16:02 cfaucher Exp $
+ * $Id: EcorePackage.java,v 1.11 2009-02-10 17:51:55 cfaucher Exp $
  */
 package ecore;
 
@@ -2873,22 +2875,22 @@ public interface EcorePackage extends EPackage {
 	int EGENERIC_TYPE__INTERNAL_CONTAINING_RESOURCE = EOBJECT__INTERNAL_CONTAINING_RESOURCE;
 
 	/**
-	 * The feature id for the '<em><b>EType Arguments</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EGENERIC_TYPE__ETYPE_ARGUMENTS = EOBJECT_FEATURE_COUNT + 0;
-
-	/**
 	 * The feature id for the '<em><b>EUpper Bound</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int EGENERIC_TYPE__EUPPER_BOUND = EOBJECT_FEATURE_COUNT + 1;
+	int EGENERIC_TYPE__EUPPER_BOUND = EOBJECT_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>EType Arguments</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EGENERIC_TYPE__ETYPE_ARGUMENTS = EOBJECT_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>EClassifier</b></em>' reference.
@@ -4153,17 +4155,6 @@ public interface EcorePackage extends EPackage {
 	EClass getEGenericType();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link ecore.EGenericType#getETypeArguments <em>EType Arguments</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>EType Arguments</em>'.
-	 * @see ecore.EGenericType#getETypeArguments()
-	 * @see #getEGenericType()
-	 * @generated
-	 */
-	EReference getEGenericType_ETypeArguments();
-
-	/**
 	 * Returns the meta object for the containment reference '{@link ecore.EGenericType#getEUpperBound <em>EUpper Bound</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4173,6 +4164,17 @@ public interface EcorePackage extends EPackage {
 	 * @generated
 	 */
 	EReference getEGenericType_EUpperBound();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link ecore.EGenericType#getETypeArguments <em>EType Arguments</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>EType Arguments</em>'.
+	 * @see ecore.EGenericType#getETypeArguments()
+	 * @see #getEGenericType()
+	 * @generated
+	 */
+	EReference getEGenericType_ETypeArguments();
 
 	/**
 	 * Returns the meta object for the reference '{@link ecore.EGenericType#getEClassifier <em>EClassifier</em>}'.
@@ -5359,15 +5361,6 @@ public interface EcorePackage extends EPackage {
 		EClass EGENERIC_TYPE = eINSTANCE.getEGenericType();
 
 		/**
-		 * The meta object literal for the '<em><b>EType Arguments</b></em>' containment reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference EGENERIC_TYPE__ETYPE_ARGUMENTS = eINSTANCE
-				.getEGenericType_ETypeArguments();
-
-		/**
 		 * The meta object literal for the '<em><b>EUpper Bound</b></em>' containment reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -5375,6 +5368,15 @@ public interface EcorePackage extends EPackage {
 		 */
 		EReference EGENERIC_TYPE__EUPPER_BOUND = eINSTANCE
 				.getEGenericType_EUpperBound();
+
+		/**
+		 * The meta object literal for the '<em><b>EType Arguments</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference EGENERIC_TYPE__ETYPE_ARGUMENTS = eINSTANCE
+				.getEGenericType_ETypeArguments();
 
 		/**
 		 * The meta object literal for the '<em><b>EClassifier</b></em>' reference feature.

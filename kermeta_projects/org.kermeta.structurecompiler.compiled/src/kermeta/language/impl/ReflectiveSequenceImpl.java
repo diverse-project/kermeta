@@ -1,8 +1,10 @@
 /**
- * <copyright>
- * </copyright>
+ * License: EPL
+ * Copyright: IRISA / INRIA / Universite de Rennes 1
+ * 
+ * Generating with Kermeta <http://www.kermeta.org>
  *
- * $Id: ReflectiveSequenceImpl.java,v 1.10 2009-01-21 09:15:57 cfaucher Exp $
+ * $Id: ReflectiveSequenceImpl.java,v 1.11 2009-02-10 17:51:51 cfaucher Exp $
  */
 package kermeta.language.impl;
 
@@ -59,10 +61,10 @@ public class ReflectiveSequenceImpl<G> extends OrderedSetImpl<G> implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void removeAt(Integer index) {
+	public void addAt(Integer index, G element) {
 
 		org.kermeta.compil.runtime.helper.language.ReflectiveSequenceUtil
-				.removeAt(this, index);
+				.addAt(this, index, element);
 
 	}
 
@@ -71,10 +73,10 @@ public class ReflectiveSequenceImpl<G> extends OrderedSetImpl<G> implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void addAt(Integer index, G element) {
+	public void removeAt(Integer index) {
 
 		org.kermeta.compil.runtime.helper.language.ReflectiveSequenceUtil
-				.addAt(this, index, element);
+				.removeAt(this, index);
 
 	}
 

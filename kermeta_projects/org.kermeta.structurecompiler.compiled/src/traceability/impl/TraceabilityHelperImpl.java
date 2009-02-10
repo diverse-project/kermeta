@@ -1,8 +1,10 @@
 /**
- * <copyright>
- * </copyright>
+ * License: EPL
+ * Copyright: IRISA / INRIA / Universite de Rennes 1
+ * 
+ * Generating with Kermeta <http://www.kermeta.org>
  *
- * $Id: TraceabilityHelperImpl.java,v 1.10 2009-01-21 09:16:04 cfaucher Exp $
+ * $Id: TraceabilityHelperImpl.java,v 1.11 2009-02-10 17:51:56 cfaucher Exp $
  */
 package traceability.impl;
 
@@ -57,70 +59,70 @@ public class TraceabilityHelperImpl extends ObjectImpl implements
 		kermeta.standard.Sequence<traceability.Reference> c = null;
 		//BIft:collect
 
-		kermeta.standard.Sequence<traceability.Reference> result_ft260 = null;
+		kermeta.standard.Sequence<traceability.Reference> result_ft256 = null;
 
-		result_ft260 = ((kermeta.standard.Sequence<traceability.Reference>) org.kermeta.compil.runtime.helper.language.ClassUtil
+		result_ft256 = ((kermeta.standard.Sequence<traceability.Reference>) org.kermeta.compil.runtime.helper.language.ClassUtil
 				.newObject(kermeta.standard.StandardPackage.eINSTANCE
 						.getSequence()));
 
 		{
 
-			kermeta.standard.Iterator<traceability.Trace> it_ft260 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
+			kermeta.standard.Iterator<traceability.Trace> it_ft256 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
 					.<traceability.Trace> convertAsOrderedSet(
 							mr.getSourceTraces()).iterator();
-			java.lang.Boolean idLoopCond_1134 = false;
-			while (!idLoopCond_1134) {
-				idLoopCond_1134 = it_ft260.isOff();
-				if (idLoopCond_1134) {
+			java.lang.Boolean idLoopCond_1139 = false;
+			while (!idLoopCond_1139) {
+				idLoopCond_1139 = it_ft256.isOff();
+				if (idLoopCond_1139) {
 				} else {
 
-					traceability.Reference result_lambda_ft260 = null;
+					traceability.Reference result_lambda_ft256 = null;
 					//BIle:collector
-					traceability.Trace t_lbdExp260 = it_ft260.next();
+					traceability.Trace t_lbdExp256 = it_ft256.next();
 
 					//BIft:detect
 
-					traceability.Reference result_ft261 = null;
+					traceability.Reference result_ft257 = null;
 
-					traceability.Reference elem_ft261 = null;
+					traceability.Reference elem_ft257 = null;
 
-					result_ft261 = null;
+					result_ft257 = null;
 
 					{
 
-						kermeta.standard.Iterator<traceability.Reference> it_ft261 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
+						kermeta.standard.Iterator<traceability.Reference> it_ft257 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
 								.<traceability.Reference> convertAsOrderedSet(
-										t_lbdExp260.getSourceReferences())
+										t_lbdExp256.getSourceReferences())
 								.iterator();
-						java.lang.Boolean idLoopCond_1135 = false;
-						while (!idLoopCond_1135) {
-							idLoopCond_1135 = kermeta.standard.helper.BooleanWrapper
+						java.lang.Boolean idLoopCond_1140 = false;
+						while (!idLoopCond_1140) {
+							idLoopCond_1140 = kermeta.standard.helper.BooleanWrapper
 									.or(
-											it_ft261.isOff(),
+											it_ft257.isOff(),
 											org.kermeta.compil.runtime.helper.language.ObjectUtil
 													.isNotEqualSwitcher(
-															result_ft261, null));
-							if (idLoopCond_1135) {
+															result_ft257, null));
+							if (idLoopCond_1140) {
 							} else {
 
-								elem_ft261 = it_ft261.next();
+								elem_ft257 = it_ft257.next();
 
-								java.lang.Boolean idIfCond_1136 = false;
+								java.lang.Boolean idIfCond_1141 = false;
 								//BIle:detector
-								traceability.Reference sr_lbdExp261 = elem_ft261;
+								traceability.Reference sr_lbdExp257 = elem_ft257;
 
-								idIfCond_1136 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+								idIfCond_1141 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 										.isInstanceOfSwitcher(
-												sr_lbdExp261,
+												sr_lbdExp257,
 												org.kermeta.compil.runtime.ExecutionContext
 														.getInstance()
 														.getMetaClass(
 																"traceability.TextReference"));
 								//EIle:detector
 
-								if (idIfCond_1136) {
+								if (idIfCond_1141) {
 
-									result_ft261 = elem_ft261;
+									result_ft257 = elem_ft257;
 								}
 
 							}
@@ -128,18 +130,19 @@ public class TraceabilityHelperImpl extends ObjectImpl implements
 					}
 
 					//EIft:detect
-					result_lambda_ft260 = result_ft261;
+					result_lambda_ft256 = result_ft257;
 
 					//EIle:collector
 
-					result_ft260.add(result_lambda_ft260);
+					result_ft256.add(result_lambda_ft256);
 				}
 			}
 		}
 
 		//CE
-		c = result_ft260;
+		c = result_ft256;
 		//EIft:collect
+		;
 
 		{
 			try {

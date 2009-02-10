@@ -1,8 +1,10 @@
 /**
- * <copyright>
- * </copyright>
+ * License: EPL
+ * Copyright: IRISA / INRIA / Universite de Rennes 1
+ * 
+ * Generating with Kermeta <http://www.kermeta.org>
  *
- * $Id: ModelReferenceImpl.java,v 1.10 2009-01-21 09:16:04 cfaucher Exp $
+ * $Id: ModelReferenceImpl.java,v 1.11 2009-02-10 17:51:56 cfaucher Exp $
  */
 package traceability.impl;
 

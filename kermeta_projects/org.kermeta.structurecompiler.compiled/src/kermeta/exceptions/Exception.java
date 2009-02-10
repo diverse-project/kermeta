@@ -1,8 +1,10 @@
 /**
- * <copyright>
- * </copyright>
+ * License: EPL
+ * Copyright: IRISA / INRIA / Universite de Rennes 1
+ * 
+ * Generating with Kermeta <http://www.kermeta.org>
  *
- * $Id: Exception.java,v 1.10 2009-01-21 09:15:53 cfaucher Exp $
+ * $Id: Exception.java,v 1.11 2009-02-10 17:51:47 cfaucher Exp $
  */
 package kermeta.exceptions;
 
@@ -21,7 +23,7 @@ package kermeta.exceptions;
  * </p>
  *
  * @see kermeta.exceptions.ExceptionsPackage#getException()
- * @model annotation="kermeta documentation='/**\n * Generic exceptions\n * The main class from which all the exception inherit\n \052/'"
+ * @model annotation="kermeta documentation='/**\r\n * Generic exceptions\r\n * The main class from which all the exception inherit\r\n \052/'"
  * @generated
  */
 public interface Exception extends kermeta.language.structure.Object {
@@ -91,7 +93,7 @@ public interface Exception extends kermeta.language.structure.Object {
 	 * @see #setStackTrace(String)
 	 * @see kermeta.exceptions.ExceptionsPackage#getException_StackTrace()
 	 * @model dataType="kermeta.standard.JavaString"
-	 *        annotation="kermeta documentation='/**\n     * The stack trace as a String\n     * Filled by the interpreted when the exception is raised\n     \052/'"
+	 *        annotation="kermeta documentation='/**\r\n     * The stack trace as a String\r\n     * Filled by the interpreted when the exception is raised\r\n     \052/'"
 	 * @generated
 	 */
 	String getStackTrace();

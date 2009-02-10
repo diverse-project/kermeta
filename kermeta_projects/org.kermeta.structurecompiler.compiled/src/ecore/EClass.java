@@ -1,8 +1,10 @@
 /**
- * <copyright>
- * </copyright>
+ * License: EPL
+ * Copyright: IRISA / INRIA / Universite de Rennes 1
+ * 
+ * Generating with Kermeta <http://www.kermeta.org>
  *
- * $Id: EClass.java,v 1.11 2009-01-21 09:16:03 cfaucher Exp $
+ * $Id: EClass.java,v 1.12 2009-02-10 17:51:55 cfaucher Exp $
  */
 package ecore;
 
@@ -155,22 +157,22 @@ public interface EClass extends EClassifier {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @model dataType="ecore.EInt"
-	 *        annotation="kermeta isAbstract='true'"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='java.lang.Integer result = null;\n\nreturn result;\n'"
-	 * @generated
-	 */
-	int getFeatureID(EStructuralFeature feature);
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
 	 * @model featureNameDataType="ecore.EString"
 	 *        annotation="kermeta isAbstract='true'"
 	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='ecore.EStructuralFeature result = null;\n\nreturn result;\n'"
 	 * @generated
 	 */
 	EStructuralFeature getEStructuralFeature(String featureName);
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model dataType="ecore.EInt"
+	 *        annotation="kermeta isAbstract='true'"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='java.lang.Integer result = null;\n\nreturn result;\n'"
+	 * @generated
+	 */
+	int getFeatureID(EStructuralFeature feature);
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -261,18 +263,18 @@ public interface EClass extends EClassifier {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @model annotation="http://www.eclipse.org/emf/2002/GenModel body='\nkermeta.standard.OrderedSet<ecore.EOperation> result = null;\n\nreturn org.kermeta.compil.runtime.helper.basetypes.CollectionUtil.convertAsEList(result);\n'"
-	 * @generated
-	 */
-	EList<EOperation> getterEAllOperations();
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
 	 * @model annotation="http://www.eclipse.org/emf/2002/GenModel body='\nkermeta.standard.OrderedSet<ecore.EStructuralFeature> result = null;\n\nreturn org.kermeta.compil.runtime.helper.basetypes.CollectionUtil.convertAsEList(result);\n'"
 	 * @generated
 	 */
 	EList<EStructuralFeature> getterEAllStructuralFeatures();
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model annotation="http://www.eclipse.org/emf/2002/GenModel body='\nkermeta.standard.OrderedSet<ecore.EOperation> result = null;\n\nreturn org.kermeta.compil.runtime.helper.basetypes.CollectionUtil.convertAsEList(result);\n'"
+	 * @generated
+	 */
+	EList<EOperation> getterEAllOperations();
 
 	/**
 	 * <!-- begin-user-doc -->

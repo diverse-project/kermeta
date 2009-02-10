@@ -1,20 +1,16 @@
 /**
- * <copyright>
- * </copyright>
+ * License: EPL
+ * Copyright: IRISA / INRIA / Universite de Rennes 1
+ * 
+ * Generating with Kermeta <http://www.kermeta.org>
  *
- * $Id: ExceptionsPackageImpl.java,v 1.10 2009-01-21 09:15:49 cfaucher Exp $
+ * $Id: ExceptionsPackageImpl.java,v 1.11 2009-02-10 17:51:43 cfaucher Exp $
  */
 package kermeta.exceptions.impl;
-
-import kermeta.KermetaPackage;
 
 import kermeta.compiler.CompilerPackage;
 
 import kermeta.compiler.impl.CompilerPackageImpl;
-
-import kermeta.ecore.EcorePackage;
-
-import kermeta.ecore.impl.EcorePackageImpl;
 
 import kermeta.exceptions.AbstractClassInstantiationError;
 import kermeta.exceptions.CallOnVoidTarget;
@@ -46,8 +42,6 @@ import kermeta.exceptions.TypeCastError;
 import kermeta.exceptions.UnregisteredMetamodelException;
 import kermeta.exceptions.UpperBoundReachedError;
 import kermeta.exceptions.VoidOperandError;
-
-import kermeta.impl.KermetaPackageImpl;
 
 import kermeta.interpreter.InterpreterPackage;
 
@@ -95,9 +89,17 @@ import km2ecore.common.exception.impl.ExceptionPackageImpl;
 
 import km2ecore.common.impl.CommonPackageImpl;
 
+import km2ecore.helper.ecore.EcorePackage;
+
+import km2ecore.helper.ecore.impl.EcorePackageImpl;
+
 import km2ecore.helper.java.JavaPackage;
 
 import km2ecore.helper.java.impl.JavaPackageImpl;
+
+import km2ecore.helper.kermeta.KermetaPackage;
+
+import km2ecore.helper.kermeta.impl.KermetaPackageImpl;
 
 import km2ecore.impl.Km2ecorePackageImpl;
 
@@ -399,70 +401,22 @@ public class ExceptionsPackageImpl extends EPackageImpl implements
 		isInited = true;
 
 		// Obtain or create and register interdependencies
-		KermetaPackageImpl theKermetaPackage = (KermetaPackageImpl) (EPackage.Registry.INSTANCE
-				.getEPackage(KermetaPackage.eNS_URI) instanceof KermetaPackageImpl ? EPackage.Registry.INSTANCE
-				.getEPackage(KermetaPackage.eNS_URI)
-				: KermetaPackage.eINSTANCE);
-		LanguagePackageImpl theLanguagePackage = (LanguagePackageImpl) (EPackage.Registry.INSTANCE
-				.getEPackage(LanguagePackage.eNS_URI) instanceof LanguagePackageImpl ? EPackage.Registry.INSTANCE
-				.getEPackage(LanguagePackage.eNS_URI)
-				: LanguagePackage.eINSTANCE);
-		StructurePackageImpl theStructurePackage = (StructurePackageImpl) (EPackage.Registry.INSTANCE
-				.getEPackage(StructurePackage.eNS_URI) instanceof StructurePackageImpl ? EPackage.Registry.INSTANCE
-				.getEPackage(StructurePackage.eNS_URI)
-				: StructurePackage.eINSTANCE);
-		BehaviorPackageImpl theBehaviorPackage = (BehaviorPackageImpl) (EPackage.Registry.INSTANCE
-				.getEPackage(BehaviorPackage.eNS_URI) instanceof BehaviorPackageImpl ? EPackage.Registry.INSTANCE
-				.getEPackage(BehaviorPackage.eNS_URI)
-				: BehaviorPackage.eINSTANCE);
-		StandardPackageImpl theStandardPackage = (StandardPackageImpl) (EPackage.Registry.INSTANCE
-				.getEPackage(StandardPackage.eNS_URI) instanceof StandardPackageImpl ? EPackage.Registry.INSTANCE
-				.getEPackage(StandardPackage.eNS_URI)
-				: StandardPackage.eINSTANCE);
-		UtilsPackageImpl theUtilsPackage = (UtilsPackageImpl) (EPackage.Registry.INSTANCE
-				.getEPackage(UtilsPackage.eNS_URI) instanceof UtilsPackageImpl ? EPackage.Registry.INSTANCE
-				.getEPackage(UtilsPackage.eNS_URI)
-				: UtilsPackage.eINSTANCE);
-		IoPackageImpl theIoPackage = (IoPackageImpl) (EPackage.Registry.INSTANCE
-				.getEPackage(IoPackage.eNS_URI) instanceof IoPackageImpl ? EPackage.Registry.INSTANCE
-				.getEPackage(IoPackage.eNS_URI)
-				: IoPackage.eINSTANCE);
-		KunitPackageImpl theKunitPackage = (KunitPackageImpl) (EPackage.Registry.INSTANCE
-				.getEPackage(KunitPackage.eNS_URI) instanceof KunitPackageImpl ? EPackage.Registry.INSTANCE
-				.getEPackage(KunitPackage.eNS_URI)
-				: KunitPackage.eINSTANCE);
-		EcorePackageImpl theEcorePackage = (EcorePackageImpl) (EPackage.Registry.INSTANCE
-				.getEPackage(EcorePackage.eNS_URI) instanceof EcorePackageImpl ? EPackage.Registry.INSTANCE
-				.getEPackage(EcorePackage.eNS_URI)
-				: EcorePackage.eINSTANCE);
-		PersistencePackageImpl thePersistencePackage = (PersistencePackageImpl) (EPackage.Registry.INSTANCE
-				.getEPackage(PersistencePackage.eNS_URI) instanceof PersistencePackageImpl ? EPackage.Registry.INSTANCE
-				.getEPackage(PersistencePackage.eNS_URI)
-				: PersistencePackage.eINSTANCE);
-		InterpreterPackageImpl theInterpreterPackage = (InterpreterPackageImpl) (EPackage.Registry.INSTANCE
-				.getEPackage(InterpreterPackage.eNS_URI) instanceof InterpreterPackageImpl ? EPackage.Registry.INSTANCE
-				.getEPackage(InterpreterPackage.eNS_URI)
-				: InterpreterPackage.eINSTANCE);
-		CompilerPackageImpl theCompilerPackage = (CompilerPackageImpl) (EPackage.Registry.INSTANCE
-				.getEPackage(CompilerPackage.eNS_URI) instanceof CompilerPackageImpl ? EPackage.Registry.INSTANCE
-				.getEPackage(CompilerPackage.eNS_URI)
-				: CompilerPackage.eINSTANCE);
 		Km2ecorePackageImpl theKm2ecorePackage = (Km2ecorePackageImpl) (EPackage.Registry.INSTANCE
 				.getEPackage(Km2ecorePackage.eNS_URI) instanceof Km2ecorePackageImpl ? EPackage.Registry.INSTANCE
 				.getEPackage(Km2ecorePackage.eNS_URI)
 				: Km2ecorePackage.eINSTANCE);
-		km2ecore.helper.kermeta.impl.KermetaPackageImpl theKermetaPackage_1 = (km2ecore.helper.kermeta.impl.KermetaPackageImpl) (EPackage.Registry.INSTANCE
-				.getEPackage(km2ecore.helper.kermeta.KermetaPackage.eNS_URI) instanceof km2ecore.helper.kermeta.impl.KermetaPackageImpl ? EPackage.Registry.INSTANCE
-				.getEPackage(km2ecore.helper.kermeta.KermetaPackage.eNS_URI)
-				: km2ecore.helper.kermeta.KermetaPackage.eINSTANCE);
-		km2ecore.helper.ecore.impl.EcorePackageImpl theEcorePackage_1 = (km2ecore.helper.ecore.impl.EcorePackageImpl) (EPackage.Registry.INSTANCE
-				.getEPackage(km2ecore.helper.ecore.EcorePackage.eNS_URI) instanceof km2ecore.helper.ecore.impl.EcorePackageImpl ? EPackage.Registry.INSTANCE
-				.getEPackage(km2ecore.helper.ecore.EcorePackage.eNS_URI)
-				: km2ecore.helper.ecore.EcorePackage.eINSTANCE);
+		KermetaPackageImpl theKermetaPackage = (KermetaPackageImpl) (EPackage.Registry.INSTANCE
+				.getEPackage(KermetaPackage.eNS_URI) instanceof KermetaPackageImpl ? EPackage.Registry.INSTANCE
+				.getEPackage(KermetaPackage.eNS_URI)
+				: KermetaPackage.eINSTANCE);
 		JavaPackageImpl theJavaPackage = (JavaPackageImpl) (EPackage.Registry.INSTANCE
 				.getEPackage(JavaPackage.eNS_URI) instanceof JavaPackageImpl ? EPackage.Registry.INSTANCE
 				.getEPackage(JavaPackage.eNS_URI)
 				: JavaPackage.eINSTANCE);
+		EcorePackageImpl theEcorePackage = (EcorePackageImpl) (EPackage.Registry.INSTANCE
+				.getEPackage(EcorePackage.eNS_URI) instanceof EcorePackageImpl ? EPackage.Registry.INSTANCE
+				.getEPackage(EcorePackage.eNS_URI)
+				: EcorePackage.eINSTANCE);
 		CommonPackageImpl theCommonPackage = (CommonPackageImpl) (EPackage.Registry.INSTANCE
 				.getEPackage(CommonPackage.eNS_URI) instanceof CommonPackageImpl ? EPackage.Registry.INSTANCE
 				.getEPackage(CommonPackage.eNS_URI)
@@ -471,6 +425,58 @@ public class ExceptionsPackageImpl extends EPackageImpl implements
 				.getEPackage(ExceptionPackage.eNS_URI) instanceof ExceptionPackageImpl ? EPackage.Registry.INSTANCE
 				.getEPackage(ExceptionPackage.eNS_URI)
 				: ExceptionPackage.eINSTANCE);
+		kermeta.impl.KermetaPackageImpl theKermetaPackage_1 = (kermeta.impl.KermetaPackageImpl) (EPackage.Registry.INSTANCE
+				.getEPackage(kermeta.KermetaPackage.eNS_URI) instanceof kermeta.impl.KermetaPackageImpl ? EPackage.Registry.INSTANCE
+				.getEPackage(kermeta.KermetaPackage.eNS_URI)
+				: kermeta.KermetaPackage.eINSTANCE);
+		LanguagePackageImpl theLanguagePackage = (LanguagePackageImpl) (EPackage.Registry.INSTANCE
+				.getEPackage(LanguagePackage.eNS_URI) instanceof LanguagePackageImpl ? EPackage.Registry.INSTANCE
+				.getEPackage(LanguagePackage.eNS_URI)
+				: LanguagePackage.eINSTANCE);
+		BehaviorPackageImpl theBehaviorPackage = (BehaviorPackageImpl) (EPackage.Registry.INSTANCE
+				.getEPackage(BehaviorPackage.eNS_URI) instanceof BehaviorPackageImpl ? EPackage.Registry.INSTANCE
+				.getEPackage(BehaviorPackage.eNS_URI)
+				: BehaviorPackage.eINSTANCE);
+		StructurePackageImpl theStructurePackage = (StructurePackageImpl) (EPackage.Registry.INSTANCE
+				.getEPackage(StructurePackage.eNS_URI) instanceof StructurePackageImpl ? EPackage.Registry.INSTANCE
+				.getEPackage(StructurePackage.eNS_URI)
+				: StructurePackage.eINSTANCE);
+		CompilerPackageImpl theCompilerPackage = (CompilerPackageImpl) (EPackage.Registry.INSTANCE
+				.getEPackage(CompilerPackage.eNS_URI) instanceof CompilerPackageImpl ? EPackage.Registry.INSTANCE
+				.getEPackage(CompilerPackage.eNS_URI)
+				: CompilerPackage.eINSTANCE);
+		StandardPackageImpl theStandardPackage = (StandardPackageImpl) (EPackage.Registry.INSTANCE
+				.getEPackage(StandardPackage.eNS_URI) instanceof StandardPackageImpl ? EPackage.Registry.INSTANCE
+				.getEPackage(StandardPackage.eNS_URI)
+				: StandardPackage.eINSTANCE);
+		UtilsPackageImpl theUtilsPackage = (UtilsPackageImpl) (EPackage.Registry.INSTANCE
+				.getEPackage(UtilsPackage.eNS_URI) instanceof UtilsPackageImpl ? EPackage.Registry.INSTANCE
+				.getEPackage(UtilsPackage.eNS_URI)
+				: UtilsPackage.eINSTANCE);
+		PersistencePackageImpl thePersistencePackage = (PersistencePackageImpl) (EPackage.Registry.INSTANCE
+				.getEPackage(PersistencePackage.eNS_URI) instanceof PersistencePackageImpl ? EPackage.Registry.INSTANCE
+				.getEPackage(PersistencePackage.eNS_URI)
+				: PersistencePackage.eINSTANCE);
+		IoPackageImpl theIoPackage = (IoPackageImpl) (EPackage.Registry.INSTANCE
+				.getEPackage(IoPackage.eNS_URI) instanceof IoPackageImpl ? EPackage.Registry.INSTANCE
+				.getEPackage(IoPackage.eNS_URI)
+				: IoPackage.eINSTANCE);
+		KunitPackageImpl theKunitPackage = (KunitPackageImpl) (EPackage.Registry.INSTANCE
+				.getEPackage(KunitPackage.eNS_URI) instanceof KunitPackageImpl ? EPackage.Registry.INSTANCE
+				.getEPackage(KunitPackage.eNS_URI)
+				: KunitPackage.eINSTANCE);
+		InterpreterPackageImpl theInterpreterPackage = (InterpreterPackageImpl) (EPackage.Registry.INSTANCE
+				.getEPackage(InterpreterPackage.eNS_URI) instanceof InterpreterPackageImpl ? EPackage.Registry.INSTANCE
+				.getEPackage(InterpreterPackage.eNS_URI)
+				: InterpreterPackage.eINSTANCE);
+		kermeta.ecore.impl.EcorePackageImpl theEcorePackage_1 = (kermeta.ecore.impl.EcorePackageImpl) (EPackage.Registry.INSTANCE
+				.getEPackage(kermeta.ecore.EcorePackage.eNS_URI) instanceof kermeta.ecore.impl.EcorePackageImpl ? EPackage.Registry.INSTANCE
+				.getEPackage(kermeta.ecore.EcorePackage.eNS_URI)
+				: kermeta.ecore.EcorePackage.eINSTANCE);
+		TraceabilityPackageImpl theTraceabilityPackage = (TraceabilityPackageImpl) (EPackage.Registry.INSTANCE
+				.getEPackage(TraceabilityPackage.eNS_URI) instanceof TraceabilityPackageImpl ? EPackage.Registry.INSTANCE
+				.getEPackage(TraceabilityPackage.eNS_URI)
+				: TraceabilityPackage.eINSTANCE);
 		ecore.impl.EcorePackageImpl theEcorePackage_2 = (ecore.impl.EcorePackageImpl) (EPackage.Registry.INSTANCE
 				.getEPackage(ecore.EcorePackage.eNS_URI) instanceof ecore.impl.EcorePackageImpl ? EPackage.Registry.INSTANCE
 				.getEPackage(ecore.EcorePackage.eNS_URI)
@@ -479,58 +485,54 @@ public class ExceptionsPackageImpl extends EPackageImpl implements
 				.getEPackage(SimkPackage.eNS_URI) instanceof SimkPackageImpl ? EPackage.Registry.INSTANCE
 				.getEPackage(SimkPackage.eNS_URI)
 				: SimkPackage.eINSTANCE);
-		TraceabilityPackageImpl theTraceabilityPackage = (TraceabilityPackageImpl) (EPackage.Registry.INSTANCE
-				.getEPackage(TraceabilityPackage.eNS_URI) instanceof TraceabilityPackageImpl ? EPackage.Registry.INSTANCE
-				.getEPackage(TraceabilityPackage.eNS_URI)
-				: TraceabilityPackage.eINSTANCE);
 
 		// Create package meta-data objects
 		theExceptionsPackage.createPackageContents();
-		theKermetaPackage.createPackageContents();
-		theLanguagePackage.createPackageContents();
-		theStructurePackage.createPackageContents();
-		theBehaviorPackage.createPackageContents();
-		theStandardPackage.createPackageContents();
-		theUtilsPackage.createPackageContents();
-		theIoPackage.createPackageContents();
-		theKunitPackage.createPackageContents();
-		theEcorePackage.createPackageContents();
-		thePersistencePackage.createPackageContents();
-		theInterpreterPackage.createPackageContents();
-		theCompilerPackage.createPackageContents();
 		theKm2ecorePackage.createPackageContents();
-		theKermetaPackage_1.createPackageContents();
-		theEcorePackage_1.createPackageContents();
+		theKermetaPackage.createPackageContents();
 		theJavaPackage.createPackageContents();
+		theEcorePackage.createPackageContents();
 		theCommonPackage.createPackageContents();
 		theExceptionPackage.createPackageContents();
+		theKermetaPackage_1.createPackageContents();
+		theLanguagePackage.createPackageContents();
+		theBehaviorPackage.createPackageContents();
+		theStructurePackage.createPackageContents();
+		theCompilerPackage.createPackageContents();
+		theStandardPackage.createPackageContents();
+		theUtilsPackage.createPackageContents();
+		thePersistencePackage.createPackageContents();
+		theIoPackage.createPackageContents();
+		theKunitPackage.createPackageContents();
+		theInterpreterPackage.createPackageContents();
+		theEcorePackage_1.createPackageContents();
+		theTraceabilityPackage.createPackageContents();
 		theEcorePackage_2.createPackageContents();
 		theSimkPackage.createPackageContents();
-		theTraceabilityPackage.createPackageContents();
 
 		// Initialize created meta-data
 		theExceptionsPackage.initializePackageContents();
-		theKermetaPackage.initializePackageContents();
-		theLanguagePackage.initializePackageContents();
-		theStructurePackage.initializePackageContents();
-		theBehaviorPackage.initializePackageContents();
-		theStandardPackage.initializePackageContents();
-		theUtilsPackage.initializePackageContents();
-		theIoPackage.initializePackageContents();
-		theKunitPackage.initializePackageContents();
-		theEcorePackage.initializePackageContents();
-		thePersistencePackage.initializePackageContents();
-		theInterpreterPackage.initializePackageContents();
-		theCompilerPackage.initializePackageContents();
 		theKm2ecorePackage.initializePackageContents();
-		theKermetaPackage_1.initializePackageContents();
-		theEcorePackage_1.initializePackageContents();
+		theKermetaPackage.initializePackageContents();
 		theJavaPackage.initializePackageContents();
+		theEcorePackage.initializePackageContents();
 		theCommonPackage.initializePackageContents();
 		theExceptionPackage.initializePackageContents();
+		theKermetaPackage_1.initializePackageContents();
+		theLanguagePackage.initializePackageContents();
+		theBehaviorPackage.initializePackageContents();
+		theStructurePackage.initializePackageContents();
+		theCompilerPackage.initializePackageContents();
+		theStandardPackage.initializePackageContents();
+		theUtilsPackage.initializePackageContents();
+		thePersistencePackage.initializePackageContents();
+		theIoPackage.initializePackageContents();
+		theKunitPackage.initializePackageContents();
+		theInterpreterPackage.initializePackageContents();
+		theEcorePackage_1.initializePackageContents();
+		theTraceabilityPackage.initializePackageContents();
 		theEcorePackage_2.initializePackageContents();
 		theSimkPackage.initializePackageContents();
-		theTraceabilityPackage.initializePackageContents();
 
 		// Mark meta-data to indicate it can't be changed
 		theExceptionsPackage.freeze();
@@ -1230,13 +1232,13 @@ public class ExceptionsPackageImpl extends EPackageImpl implements
 				source,
 				new String[] {
 						"documentation",
-						"/** \n * Contains the definition of a Kermeta exception and a few basic exceptions.\n * <img src=\"platform:/plugin/fr.irisa.triskell.kermeta.documentation/src/figures/exceptions_package.png\"/>\n */" });
+						"/** \r\n * Contains the definition of a Kermeta exception and a few basic exceptions.\r\n * <img src=\"platform:/plugin/fr.irisa.triskell.kermeta.documentation/src/figures/exceptions_package.png\"/>\r\n */" });
 		addAnnotation(
 				exceptionEClass,
 				source,
 				new String[] {
 						"documentation",
-						"/**\n * Generic exceptions\n * The main class from which all the exception inherit\n */" });
+						"/**\r\n * Generic exceptions\r\n * The main class from which all the exception inherit\r\n */" });
 		addAnnotation(getException_Message(), source, new String[] {
 				"documentation",
 				"/** The message attached to the exception     */" });
@@ -1247,7 +1249,7 @@ public class ExceptionsPackageImpl extends EPackageImpl implements
 				source,
 				new String[] {
 						"documentation",
-						"/**\n     * The stack trace as a String\n     * Filled by the interpreted when the exception is raised\n     */" });
+						"/**\r\n     * The stack trace as a String\r\n     * Filled by the interpreted when the exception is raised\r\n     */" });
 		addAnnotation(runtimeErrorEClass, source,
 				new String[] { "documentation",
 						"/** Exception for interpreter exceptions */" });
@@ -1260,31 +1262,31 @@ public class ExceptionsPackageImpl extends EPackageImpl implements
 				typeCastErrorEClass,
 				source,
 				new String[] { "documentation",
-						"/**\n * Occurs when a cast (Object::asType operation) fails\n */" });
+						"/**\r\n * Occurs when a cast (Object::asType operation) fails\r\n */" });
 		addAnnotation(
 				notImplementedExceptionEClass,
 				source,
 				new String[] {
 						"documentation",
-						"/**\n * Use this exception when you want to forbid the access to an unimplemented operation \n * and invite to implement it\n */" });
+						"/**\r\n * Use this exception when you want to forbid the access to an unimplemented operation \r\n * and invite to implement it\r\n */" });
 		addAnnotation(
 				upperBoundReachedErrorEClass,
 				source,
 				new String[] {
 						"documentation",
-						"/** \n * Use this exception when user tries to add an element to a property which type is collection\n * which has an upper bound != -1 ( ie *)\n */" });
+						"/** \r\n * Use this exception when user tries to add an element to a property which type is collection\r\n * which has an upper bound != -1 ( ie *)\r\n */" });
 		addAnnotation(
 				abstractClassInstantiationErrorEClass,
 				source,
 				new String[] {
 						"documentation",
-						"/**\n * Creation on an abstract class. Usually this is detected by the type-checker. The only\n * case where this happens is when instantiating a type variable, whose bound type turns\n * out to be abstract.\n */" });
+						"/**\r\n * Creation on an abstract class. Usually this is detected by the type-checker. The only\r\n * case where this happens is when instantiating a type variable, whose bound type turns\r\n * out to be abstract.\r\n */" });
 		addAnnotation(
 				incompatibleTypeErrorEClass,
 				source,
 				new String[] {
 						"documentation",
-						"/**\n * Raised by the Object::set operation if the type of the \n * Object to set has an incompatible type.\n */" });
+						"/**\r\n * Raised by the Object::set operation if the type of the \r\n * Object to set has an incompatible type.\r\n */" });
 		addAnnotation(
 				divisionByZeroEClass,
 				source,
@@ -1305,7 +1307,7 @@ public class ExceptionsPackageImpl extends EPackageImpl implements
 				stringFormatExceptionEClass,
 				source,
 				new String[] { "documentation",
-						"/**\n * to be written #########################################\n */" });
+						"/**\r\n * to be written #########################################\r\n */" });
 		addAnnotation(indexOutOfBoundEClass, source, new String[] {
 				"documentation",
 				"/** Occurs when trying to access out of bounds elements */" });
@@ -1319,7 +1321,7 @@ public class ExceptionsPackageImpl extends EPackageImpl implements
 				source,
 				new String[] {
 						"documentation",
-						"/**\n * Occurs when calling next() operation while iterator is already\n * positioned on the last element of a collection\n */" });
+						"/**\r\n * Occurs when calling next() operation while iterator is already\r\n * positioned on the last element of a collection\r\n */" });
 		addAnnotation(ioExceptionEClass, source, new String[] {
 				"documentation",
 				"/** an interaction with the underlying system failed */" });
@@ -1336,10 +1338,10 @@ public class ExceptionsPackageImpl extends EPackageImpl implements
 				source,
 				new String[] {
 						"documentation",
-						"/** Object on which the constraint was applied to\n\t * On Invariant, we can generally consider this object as the faulty Object\n\t */" });
+						"/** Object on which the constraint was applied to\r\n\t * On Invariant, we can generally consider this object as the faulty Object\r\n\t */" });
 		addAnnotation(getConstraintViolatedException_FailedConstraint(),
 				source, new String[] { "documentation",
-						"/** constraint that has failed\n\t */" });
+						"/** constraint that has failed\r\n\t */" });
 		addAnnotation(constraintViolatedPreEClass, source, new String[] {
 				"documentation", "/** The pre-condition is not satisfied */" });
 		addAnnotation(constraintViolatedPostEClass, source, new String[] {
@@ -1358,13 +1360,13 @@ public class ExceptionsPackageImpl extends EPackageImpl implements
 				source,
 				new String[] {
 						"documentation",
-						"/** Object on which the the saved failed\n\t * One can rescue the exception and analyse the structure next to this object, \n\t * this can give some clue about the faulty structure\n\t */" });
+						"/** Object on which the the saved failed\r\n\t * One can rescue the exception and analyse the structure next to this object, \r\n\t * this can give some clue about the faulty structure\r\n\t */" });
 		addAnnotation(
 				resourceMixedLevelsExceptionEClass,
 				source,
 				new String[] {
 						"documentation",
-						"/** Occurs when Resource saving fails because an object refers to an element which \n * belongs to the Definition of the currently running program */" });
+						"/** Occurs when Resource saving fails because an object refers to an element which \r\n * belongs to the Definition of the currently running program */" });
 		addAnnotation(
 				resourceCreateExceptionEClass,
 				source,
@@ -1382,12 +1384,12 @@ public class ExceptionsPackageImpl extends EPackageImpl implements
 				source,
 				new String[] {
 						"documentation",
-						"/** Raised when a resource cannot be loaded or saved because the URI used for \n * the  metamodel is not registered\n */" });
+						"/** Raised when a resource cannot be loaded or saved because the URI used for \r\n * the  metamodel is not registered\r\n */" });
 		addAnnotation(
 				dynamicExpressionExceptionEClass,
 				source,
 				new String[] { "documentation",
-						"/**\n * to be written #########################################\n */" });
+						"/**\r\n * to be written #########################################\r\n */" });
 	}
 
 } //ExceptionsPackageImpl

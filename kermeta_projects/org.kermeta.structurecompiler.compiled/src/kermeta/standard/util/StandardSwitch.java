@@ -1,8 +1,10 @@
 /**
- * <copyright>
- * </copyright>
+ * License: EPL
+ * Copyright: IRISA / INRIA / Universite de Rennes 1
+ * 
+ * Generating with Kermeta <http://www.kermeta.org>
  *
- * $Id: StandardSwitch.java,v 1.10 2009-01-21 09:16:13 cfaucher Exp $
+ * $Id: StandardSwitch.java,v 1.11 2009-02-10 17:52:07 cfaucher Exp $
  */
 package kermeta.standard.util;
 
@@ -107,96 +109,6 @@ public class StandardSwitch<T> {
 				result = defaultCase(theEObject);
 			return result;
 		}
-		case StandardPackage.COLLECTION: {
-			Collection<?> collection = (Collection<?>) theEObject;
-			T result = caseCollection(collection);
-			if (result == null)
-				result = caseObject(collection);
-			if (result == null)
-				result = defaultCase(theEObject);
-			return result;
-		}
-		case StandardPackage.SET: {
-			Set<?> set = (Set<?>) theEObject;
-			T result = caseSet(set);
-			if (result == null)
-				result = caseCollection(set);
-			if (result == null)
-				result = caseObject(set);
-			if (result == null)
-				result = defaultCase(theEObject);
-			return result;
-		}
-		case StandardPackage.BAG: {
-			Bag<?> bag = (Bag<?>) theEObject;
-			T result = caseBag(bag);
-			if (result == null)
-				result = caseCollection(bag);
-			if (result == null)
-				result = caseObject(bag);
-			if (result == null)
-				result = defaultCase(theEObject);
-			return result;
-		}
-		case StandardPackage.ORDERED_COLLECTION: {
-			OrderedCollection<?> orderedCollection = (OrderedCollection<?>) theEObject;
-			T result = caseOrderedCollection(orderedCollection);
-			if (result == null)
-				result = caseCollection(orderedCollection);
-			if (result == null)
-				result = caseObject(orderedCollection);
-			if (result == null)
-				result = defaultCase(theEObject);
-			return result;
-		}
-		case StandardPackage.ORDERED_SET: {
-			OrderedSet<?> orderedSet = (OrderedSet<?>) theEObject;
-			T result = caseOrderedSet(orderedSet);
-			if (result == null)
-				result = caseSet(orderedSet);
-			if (result == null)
-				result = caseOrderedCollection(orderedSet);
-			if (result == null)
-				result = caseCollection(orderedSet);
-			if (result == null)
-				result = caseObject(orderedSet);
-			if (result == null)
-				result = defaultCase(theEObject);
-			return result;
-		}
-		case StandardPackage.SEQUENCE: {
-			Sequence<?> sequence = (Sequence<?>) theEObject;
-			T result = caseSequence(sequence);
-			if (result == null)
-				result = caseBag(sequence);
-			if (result == null)
-				result = caseOrderedCollection(sequence);
-			if (result == null)
-				result = caseCollection(sequence);
-			if (result == null)
-				result = caseObject(sequence);
-			if (result == null)
-				result = defaultCase(theEObject);
-			return result;
-		}
-		case StandardPackage.ITERATOR: {
-			Iterator<?> iterator = (Iterator<?>) theEObject;
-			T result = caseIterator(iterator);
-			if (result == null)
-				result = caseObject(iterator);
-			if (result == null)
-				result = defaultCase(theEObject);
-			return result;
-		}
-		case StandardPackage.UNKNOWN_JAVA_OBJECT: {
-			UnknownJavaObject unknownJavaObject = (UnknownJavaObject) theEObject;
-			T result = caseUnknownJavaObject(unknownJavaObject);
-			if (result == null)
-				result = caseObject(unknownJavaObject);
-			if (result == null)
-				result = defaultCase(theEObject);
-			return result;
-		}
 		case StandardPackage.VOID: {
 			kermeta.standard.Void void_ = (kermeta.standard.Void) theEObject;
 			T result = caseVoid(void_);
@@ -288,6 +200,96 @@ public class StandardSwitch<T> {
 				result = defaultCase(theEObject);
 			return result;
 		}
+		case StandardPackage.COLLECTION: {
+			Collection<?> collection = (Collection<?>) theEObject;
+			T result = caseCollection(collection);
+			if (result == null)
+				result = caseObject(collection);
+			if (result == null)
+				result = defaultCase(theEObject);
+			return result;
+		}
+		case StandardPackage.SET: {
+			Set<?> set = (Set<?>) theEObject;
+			T result = caseSet(set);
+			if (result == null)
+				result = caseCollection(set);
+			if (result == null)
+				result = caseObject(set);
+			if (result == null)
+				result = defaultCase(theEObject);
+			return result;
+		}
+		case StandardPackage.BAG: {
+			Bag<?> bag = (Bag<?>) theEObject;
+			T result = caseBag(bag);
+			if (result == null)
+				result = caseCollection(bag);
+			if (result == null)
+				result = caseObject(bag);
+			if (result == null)
+				result = defaultCase(theEObject);
+			return result;
+		}
+		case StandardPackage.ORDERED_COLLECTION: {
+			OrderedCollection<?> orderedCollection = (OrderedCollection<?>) theEObject;
+			T result = caseOrderedCollection(orderedCollection);
+			if (result == null)
+				result = caseCollection(orderedCollection);
+			if (result == null)
+				result = caseObject(orderedCollection);
+			if (result == null)
+				result = defaultCase(theEObject);
+			return result;
+		}
+		case StandardPackage.ORDERED_SET: {
+			OrderedSet<?> orderedSet = (OrderedSet<?>) theEObject;
+			T result = caseOrderedSet(orderedSet);
+			if (result == null)
+				result = caseSet(orderedSet);
+			if (result == null)
+				result = caseOrderedCollection(orderedSet);
+			if (result == null)
+				result = caseCollection(orderedSet);
+			if (result == null)
+				result = caseObject(orderedSet);
+			if (result == null)
+				result = defaultCase(theEObject);
+			return result;
+		}
+		case StandardPackage.SEQUENCE: {
+			Sequence<?> sequence = (Sequence<?>) theEObject;
+			T result = caseSequence(sequence);
+			if (result == null)
+				result = caseBag(sequence);
+			if (result == null)
+				result = caseOrderedCollection(sequence);
+			if (result == null)
+				result = caseCollection(sequence);
+			if (result == null)
+				result = caseObject(sequence);
+			if (result == null)
+				result = defaultCase(theEObject);
+			return result;
+		}
+		case StandardPackage.ITERATOR: {
+			Iterator<?> iterator = (Iterator<?>) theEObject;
+			T result = caseIterator(iterator);
+			if (result == null)
+				result = caseObject(iterator);
+			if (result == null)
+				result = defaultCase(theEObject);
+			return result;
+		}
+		case StandardPackage.UNKNOWN_JAVA_OBJECT: {
+			UnknownJavaObject unknownJavaObject = (UnknownJavaObject) theEObject;
+			T result = caseUnknownJavaObject(unknownJavaObject);
+			if (result == null)
+				result = caseObject(unknownJavaObject);
+			if (result == null)
+				result = defaultCase(theEObject);
+			return result;
+		}
 		default:
 			return defaultCase(theEObject);
 		}
@@ -305,126 +307,6 @@ public class StandardSwitch<T> {
 	 * @generated
 	 */
 	public T caseString(kermeta.standard.String object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Collection</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Collection</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public <G> T caseCollection(Collection<G> object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Set</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Set</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public <G> T caseSet(Set<G> object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Bag</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Bag</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public <G> T caseBag(Bag<G> object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Ordered Collection</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Ordered Collection</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public <G> T caseOrderedCollection(OrderedCollection<G> object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Ordered Set</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Ordered Set</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public <G> T caseOrderedSet(OrderedSet<G> object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Sequence</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Sequence</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public <G> T caseSequence(Sequence<G> object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Iterator</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Iterator</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public <G> T caseIterator(Iterator<G> object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Unknown Java Object</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Unknown Java Object</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseUnknownJavaObject(UnknownJavaObject object) {
 		return null;
 	}
 
@@ -560,6 +442,126 @@ public class StandardSwitch<T> {
 	 * @generated
 	 */
 	public T caseCharacter(kermeta.standard.Character object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Collection</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Collection</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public <G> T caseCollection(Collection<G> object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Set</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Set</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public <G> T caseSet(Set<G> object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Bag</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Bag</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public <G> T caseBag(Bag<G> object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Ordered Collection</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Ordered Collection</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public <G> T caseOrderedCollection(OrderedCollection<G> object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Ordered Set</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Ordered Set</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public <G> T caseOrderedSet(OrderedSet<G> object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Sequence</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Sequence</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public <G> T caseSequence(Sequence<G> object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Iterator</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Iterator</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public <G> T caseIterator(Iterator<G> object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Unknown Java Object</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Unknown Java Object</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseUnknownJavaObject(UnknownJavaObject object) {
 		return null;
 	}
 

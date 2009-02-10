@@ -1,8 +1,10 @@
 /**
- * <copyright>
- * </copyright>
+ * License: EPL
+ * Copyright: IRISA / INRIA / Universite de Rennes 1
+ * 
+ * Generating with Kermeta <http://www.kermeta.org>
  *
- * $Id: LoopImpl.java,v 1.10 2009-01-21 09:15:57 cfaucher Exp $
+ * $Id: LoopImpl.java,v 1.11 2009-02-10 17:51:51 cfaucher Exp $
  */
 package kermeta.language.behavior.impl;
 
@@ -360,8 +362,8 @@ public class LoopImpl extends ExpressionImpl implements Loop {
 
 		context.pushCondStack();
 
-		java.lang.Boolean idIfCond_640 = false;
-		idIfCond_640 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+		java.lang.Boolean idIfCond_334 = false;
+		idIfCond_334 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 				.isInstanceOfSwitcher(
 						this.getInitialization(),
 						org.kermeta.compil.runtime.ExecutionContext
@@ -369,11 +371,11 @@ public class LoopImpl extends ExpressionImpl implements Loop {
 								.getMetaClass(
 										"kermeta.language.behavior.CallVariable"));
 
-		if (idIfCond_640) {
+		if (idIfCond_334) {
 		} else {
 
-			java.lang.Boolean idIfCond_641 = false;
-			idIfCond_641 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+			java.lang.Boolean idIfCond_335 = false;
+			idIfCond_335 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 					.isInstanceOfSwitcher(
 							this.getInitialization(),
 							org.kermeta.compil.runtime.ExecutionContext
@@ -381,7 +383,7 @@ public class LoopImpl extends ExpressionImpl implements Loop {
 									.getMetaClass(
 											"kermeta.language.behavior.VariableDecl"));
 
-			if (idIfCond_641) {
+			if (idIfCond_335) {
 
 				result = kermeta.standard.helper.StringWrapper.plus(
 						kermeta.standard.helper.StringWrapper
@@ -431,8 +433,8 @@ public class LoopImpl extends ExpressionImpl implements Loop {
 
 		result = kermeta.standard.helper.StringWrapper.plus(result, "\n\t}");
 
-		java.lang.Boolean idIfCond_642 = false;
-		idIfCond_642 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+		java.lang.Boolean idIfCond_336 = false;
+		idIfCond_336 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 				.isInstanceOfSwitcher(
 						this.getInitialization(),
 						org.kermeta.compil.runtime.ExecutionContext
@@ -440,7 +442,7 @@ public class LoopImpl extends ExpressionImpl implements Loop {
 								.getMetaClass(
 										"kermeta.language.behavior.VariableDecl"));
 
-		if (idIfCond_642) {
+		if (idIfCond_336) {
 
 			result = kermeta.standard.helper.StringWrapper
 					.plus(result, "\n}\n");

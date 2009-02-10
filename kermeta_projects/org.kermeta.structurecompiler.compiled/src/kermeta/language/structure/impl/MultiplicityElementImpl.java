@@ -1,8 +1,10 @@
 /**
- * <copyright>
- * </copyright>
+ * License: EPL
+ * Copyright: IRISA / INRIA / Universite de Rennes 1
+ * 
+ * Generating with Kermeta <http://www.kermeta.org>
  *
- * $Id: MultiplicityElementImpl.java,v 1.10 2009-01-21 09:15:50 cfaucher Exp $
+ * $Id: MultiplicityElementImpl.java,v 1.11 2009-02-10 17:51:45 cfaucher Exp $
  */
 package kermeta.language.structure.impl;
 
@@ -255,11 +257,11 @@ public class MultiplicityElementImpl extends TypedElementImpl implements
 						.getIdentifierHelper())).getMangledIdentifier(this
 				.getName(), context);
 
-		java.lang.Boolean idIfCond_289 = false;
-		idIfCond_289 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+		java.lang.Boolean idIfCond_581 = false;
+		idIfCond_581 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 				.isNotEqualSwitcher(this.getEMFRenameAs(), "");
 
-		if (idIfCond_289) {
+		if (idIfCond_581) {
 
 			result = this.getEMFRenameAs();
 		}
@@ -294,11 +296,11 @@ public class MultiplicityElementImpl extends TypedElementImpl implements
 
 		result = "\nreturn ";
 
-		java.lang.Boolean idIfCond_290 = false;
-		idIfCond_290 = kermeta.standard.helper.IntegerWrapper.equals(this
+		java.lang.Boolean idIfCond_582 = false;
+		idIfCond_582 = kermeta.standard.helper.IntegerWrapper.equals(this
 				.getUpper(), 1);
 
-		if (idIfCond_290) {
+		if (idIfCond_582) {
 
 			result = kermeta.standard.helper.StringWrapper.plus(result,
 					"result");

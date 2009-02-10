@@ -1,8 +1,10 @@
 /**
- * <copyright>
- * </copyright>
+ * License: EPL
+ * Copyright: IRISA / INRIA / Universite de Rennes 1
+ * 
+ * Generating with Kermeta <http://www.kermeta.org>
  *
- * $Id: ConstraintViolatedExceptionImpl.java,v 1.8 2009-01-21 09:15:49 cfaucher Exp $
+ * $Id: ConstraintViolatedExceptionImpl.java,v 1.9 2009-02-10 17:51:43 cfaucher Exp $
  */
 package kermeta.exceptions.impl;
 

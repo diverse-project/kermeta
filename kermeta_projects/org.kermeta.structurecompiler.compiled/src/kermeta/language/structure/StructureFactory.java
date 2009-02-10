@@ -1,8 +1,10 @@
 /**
- * <copyright>
- * </copyright>
+ * License: EPL
+ * Copyright: IRISA / INRIA / Universite de Rennes 1
+ * 
+ * Generating with Kermeta <http://www.kermeta.org>
  *
- * $Id: StructureFactory.java,v 1.10 2009-01-21 09:15:59 cfaucher Exp $
+ * $Id: StructureFactory.java,v 1.11 2009-02-10 17:51:53 cfaucher Exp $
  */
 package kermeta.language.structure;
 
@@ -27,40 +29,22 @@ public interface StructureFactory extends EFactory {
 			.init();
 
 	/**
-	 * Returns a new object of class '<em>Object</em>'.
+	 * Returns a new object of class '<em>Named Element</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Object</em>'.
+	 * @return a new object of class '<em>Named Element</em>'.
 	 * @generated
 	 */
-	kermeta.language.structure.Object createObject();
+	NamedElement createNamedElement();
 
 	/**
-	 * Returns a new object of class '<em>Modeling Unit</em>'.
+	 * Returns a new object of class '<em>Parameter</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Modeling Unit</em>'.
+	 * @return a new object of class '<em>Parameter</em>'.
 	 * @generated
 	 */
-	ModelingUnit createModelingUnit();
-
-	/**
-	 * Returns a new object of class '<em>Package</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Package</em>'.
-	 * @generated
-	 */
-	kermeta.language.structure.Package createPackage();
-
-	/**
-	 * Returns a new object of class '<em>Enumeration</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Enumeration</em>'.
-	 * @generated
-	 */
-	Enumeration createEnumeration();
+	Parameter createParameter();
 
 	/**
 	 * Returns a new object of class '<em>Class Definition</em>'.
@@ -72,15 +56,6 @@ public interface StructureFactory extends EFactory {
 	ClassDefinition createClassDefinition();
 
 	/**
-	 * Returns a new object of class '<em>Operation</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Operation</em>'.
-	 * @generated
-	 */
-	Operation createOperation();
-
-	/**
 	 * Returns a new object of class '<em>Class</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -90,13 +65,13 @@ public interface StructureFactory extends EFactory {
 	kermeta.language.structure.Class createClass();
 
 	/**
-	 * Returns a new object of class '<em>Parameter</em>'.
+	 * Returns a new object of class '<em>Operation</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Parameter</em>'.
+	 * @return a new object of class '<em>Operation</em>'.
 	 * @generated
 	 */
-	Parameter createParameter();
+	Operation createOperation();
 
 	/**
 	 * Returns a new object of class '<em>Property</em>'.
@@ -117,13 +92,13 @@ public interface StructureFactory extends EFactory {
 	LinkSetterForTypedElement createLinkSetterForTypedElement();
 
 	/**
-	 * Returns a new object of class '<em>Generic Type Definition</em>'.
+	 * Returns a new object of class '<em>Modeling Unit</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Generic Type Definition</em>'.
+	 * @return a new object of class '<em>Modeling Unit</em>'.
 	 * @generated
 	 */
-	GenericTypeDefinition createGenericTypeDefinition();
+	ModelingUnit createModelingUnit();
 
 	/**
 	 * Returns a new object of class '<em>Multiplicity Element</em>'.
@@ -133,6 +108,15 @@ public interface StructureFactory extends EFactory {
 	 * @generated
 	 */
 	MultiplicityElement createMultiplicityElement();
+
+	/**
+	 * Returns a new object of class '<em>Object</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Object</em>'.
+	 * @generated
+	 */
+	kermeta.language.structure.Object createObject();
 
 	/**
 	 * Returns a new object of class '<em>Type</em>'.
@@ -180,6 +164,15 @@ public interface StructureFactory extends EFactory {
 	ObjectTypeVariable createObjectTypeVariable();
 
 	/**
+	 * Returns a new object of class '<em>Enumeration</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Enumeration</em>'.
+	 * @generated
+	 */
+	Enumeration createEnumeration();
+
+	/**
 	 * Returns a new object of class '<em>Function Type</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -207,13 +200,13 @@ public interface StructureFactory extends EFactory {
 	Constraint createConstraint();
 
 	/**
-	 * Returns a new object of class '<em>Named Element</em>'.
+	 * Returns a new object of class '<em>Package</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Named Element</em>'.
+	 * @return a new object of class '<em>Package</em>'.
 	 * @generated
 	 */
-	NamedElement createNamedElement();
+	kermeta.language.structure.Package createPackage();
 
 	/**
 	 * Returns a new object of class '<em>Require</em>'.
@@ -250,6 +243,24 @@ public interface StructureFactory extends EFactory {
 	 * @generated
 	 */
 	Tag createTag();
+
+	/**
+	 * Returns a new object of class '<em>Generic Type Definition</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Generic Type Definition</em>'.
+	 * @generated
+	 */
+	GenericTypeDefinition createGenericTypeDefinition();
+
+	/**
+	 * Returns a new object of class '<em>Traceability</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Traceability</em>'.
+	 * @generated
+	 */
+	<X> Traceability<X> createTraceability();
 
 	/**
 	 * Returns a new object of class '<em>Type Variable Binding</em>'.
@@ -313,15 +324,6 @@ public interface StructureFactory extends EFactory {
 	 * @generated
 	 */
 	Filter createFilter();
-
-	/**
-	 * Returns a new object of class '<em>Traceability</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Traceability</em>'.
-	 * @generated
-	 */
-	<X> Traceability<X> createTraceability();
 
 	/**
 	 * Returns the package supported by this factory.

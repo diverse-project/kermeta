@@ -1,8 +1,10 @@
 /**
- * <copyright>
- * </copyright>
+ * License: EPL
+ * Copyright: IRISA / INRIA / Universite de Rennes 1
+ * 
+ * Generating with Kermeta <http://www.kermeta.org>
  *
- * $Id: StandardFactory.java,v 1.10 2009-01-21 09:15:57 cfaucher Exp $
+ * $Id: StandardFactory.java,v 1.11 2009-02-10 17:51:50 cfaucher Exp $
  */
 package kermeta.standard;
 
@@ -34,60 +36,6 @@ public interface StandardFactory extends EFactory {
 	 * @generated
 	 */
 	kermeta.standard.String createString();
-
-	/**
-	 * Returns a new object of class '<em>Set</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Set</em>'.
-	 * @generated
-	 */
-	<G> Set<G> createSet();
-
-	/**
-	 * Returns a new object of class '<em>Bag</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Bag</em>'.
-	 * @generated
-	 */
-	<G> Bag<G> createBag();
-
-	/**
-	 * Returns a new object of class '<em>Ordered Set</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Ordered Set</em>'.
-	 * @generated
-	 */
-	<G> OrderedSet<G> createOrderedSet();
-
-	/**
-	 * Returns a new object of class '<em>Sequence</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Sequence</em>'.
-	 * @generated
-	 */
-	<G> Sequence<G> createSequence();
-
-	/**
-	 * Returns a new object of class '<em>Iterator</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Iterator</em>'.
-	 * @generated
-	 */
-	<G> Iterator<G> createIterator();
-
-	/**
-	 * Returns a new object of class '<em>Unknown Java Object</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Unknown Java Object</em>'.
-	 * @generated
-	 */
-	UnknownJavaObject createUnknownJavaObject();
 
 	/**
 	 * Returns a new object of class '<em>Void</em>'.
@@ -142,6 +90,60 @@ public interface StandardFactory extends EFactory {
 	 * @generated
 	 */
 	kermeta.standard.Character createCharacter();
+
+	/**
+	 * Returns a new object of class '<em>Set</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Set</em>'.
+	 * @generated
+	 */
+	<G> Set<G> createSet();
+
+	/**
+	 * Returns a new object of class '<em>Bag</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Bag</em>'.
+	 * @generated
+	 */
+	<G> Bag<G> createBag();
+
+	/**
+	 * Returns a new object of class '<em>Ordered Set</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Ordered Set</em>'.
+	 * @generated
+	 */
+	<G> OrderedSet<G> createOrderedSet();
+
+	/**
+	 * Returns a new object of class '<em>Sequence</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Sequence</em>'.
+	 * @generated
+	 */
+	<G> Sequence<G> createSequence();
+
+	/**
+	 * Returns a new object of class '<em>Iterator</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Iterator</em>'.
+	 * @generated
+	 */
+	<G> Iterator<G> createIterator();
+
+	/**
+	 * Returns a new object of class '<em>Unknown Java Object</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Unknown Java Object</em>'.
+	 * @generated
+	 */
+	UnknownJavaObject createUnknownJavaObject();
 
 	/**
 	 * Returns the package supported by this factory.

@@ -1,8 +1,10 @@
 /**
- * <copyright>
- * </copyright>
+ * License: EPL
+ * Copyright: IRISA / INRIA / Universite de Rennes 1
+ * 
+ * Generating with Kermeta <http://www.kermeta.org>
  *
- * $Id: EObjectImpl.java,v 1.9 2009-01-21 09:15:51 cfaucher Exp $
+ * $Id: EObjectImpl.java,v 1.10 2009-02-10 17:51:46 cfaucher Exp $
  */
 package ecore.impl;
 

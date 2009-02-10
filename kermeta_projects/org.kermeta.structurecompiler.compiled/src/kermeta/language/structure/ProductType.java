@@ -1,8 +1,10 @@
 /**
- * <copyright>
- * </copyright>
+ * License: EPL
+ * Copyright: IRISA / INRIA / Universite de Rennes 1
+ * 
+ * Generating with Kermeta <http://www.kermeta.org>
  *
- * $Id: ProductType.java,v 1.10 2009-01-21 09:15:59 cfaucher Exp $
+ * $Id: ProductType.java,v 1.11 2009-02-10 17:51:52 cfaucher Exp $
  */
 package kermeta.language.structure;
 
@@ -45,7 +47,7 @@ public interface ProductType extends TypeContainer, Type {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @model indexDataType="kermeta.standard.JavaInteger"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='\nkermeta.language.structure.Type result = null;\n\n\tresult = null;\n\n\tjava.lang.Boolean idIfCond_351 = false;\n\tidIfCond_351 = kermeta.standard.helper.IntegerWrapper.isLower(index, org.kermeta.compil.runtime.helper.basetypes.CollectionUtil.<kermeta.language.structure.Type>convertAsSequence(this.getType()).size());\n\n\tif( idIfCond_351 ) {\n\n\tjava.lang.Boolean idIfCond_352 = false;\n\tidIfCond_352 = org.kermeta.compil.runtime.helper.language.ObjectUtil.isInstanceOfSwitcher(org.kermeta.compil.runtime.helper.basetypes.CollectionUtil.<kermeta.language.structure.Type>convertAsSequence(this.getType()).elementAt(index), org.kermeta.compil.runtime.ExecutionContext.getInstance().getMetaClass(\"kermeta.language.structure.FunctionType\"));\n\n\tif( idIfCond_352 ) {\n\n\tresult = ((kermeta.language.structure.FunctionType) org.kermeta.compil.runtime.helper.language.ObjectUtil.asTypeSwitcher(org.kermeta.compil.runtime.helper.basetypes.CollectionUtil.<kermeta.language.structure.Type>convertAsSequence(this.getType()).elementAt(index), org.kermeta.compil.runtime.ExecutionContext.getInstance().getMetaClass(\"kermeta.language.structure.FunctionType\"))).getRight();\n}\n else {\n\n\tresult = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil.<kermeta.language.structure.Type>convertAsSequence(this.getType()).elementAt(index);\n}\n\n}\n\n\nreturn result;\n'"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='\nkermeta.language.structure.Type result = null;\n\n\tresult = null;\n\n\tjava.lang.Boolean idIfCond_687 = false;\n\tidIfCond_687 = kermeta.standard.helper.IntegerWrapper.isLower(index, org.kermeta.compil.runtime.helper.basetypes.CollectionUtil.<kermeta.language.structure.Type>convertAsSequence(this.getType()).size());\n\n\tif( idIfCond_687 ) {\n\n\tjava.lang.Boolean idIfCond_688 = false;\n\tidIfCond_688 = org.kermeta.compil.runtime.helper.language.ObjectUtil.isInstanceOfSwitcher(org.kermeta.compil.runtime.helper.basetypes.CollectionUtil.<kermeta.language.structure.Type>convertAsSequence(this.getType()).elementAt(index), org.kermeta.compil.runtime.ExecutionContext.getInstance().getMetaClass(\"kermeta.language.structure.FunctionType\"));\n\n\tif( idIfCond_688 ) {\n\n\tresult = ((kermeta.language.structure.FunctionType) org.kermeta.compil.runtime.helper.language.ObjectUtil.asTypeSwitcher(org.kermeta.compil.runtime.helper.basetypes.CollectionUtil.<kermeta.language.structure.Type>convertAsSequence(this.getType()).elementAt(index), org.kermeta.compil.runtime.ExecutionContext.getInstance().getMetaClass(\"kermeta.language.structure.FunctionType\"))).getRight();\n}\n else {\n\n\tresult = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil.<kermeta.language.structure.Type>convertAsSequence(this.getType()).elementAt(index);\n}\n\n}\n\n\nreturn result;\n'"
 	 * @generated
 	 */
 	Type getTypeByIndex(Integer index);

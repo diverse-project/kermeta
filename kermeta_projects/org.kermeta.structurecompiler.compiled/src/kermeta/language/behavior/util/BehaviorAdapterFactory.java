@@ -1,8 +1,10 @@
 /**
- * <copyright>
- * </copyright>
+ * License: EPL
+ * Copyright: IRISA / INRIA / Universite de Rennes 1
+ * 
+ * Generating with Kermeta <http://www.kermeta.org>
  *
- * $Id: BehaviorAdapterFactory.java,v 1.10 2009-01-21 09:16:13 cfaucher Exp $
+ * $Id: BehaviorAdapterFactory.java,v 1.11 2009-02-10 17:52:07 cfaucher Exp $
  */
 package kermeta.language.behavior.util;
 
@@ -76,23 +78,18 @@ public class BehaviorAdapterFactory extends AdapterFactoryImpl {
 	 */
 	protected BehaviorSwitch<Adapter> modelSwitch = new BehaviorSwitch<Adapter>() {
 		@Override
-		public Adapter caseBlock(Block object) {
-			return createBlockAdapter();
-		}
-
-		@Override
-		public Adapter caseRescue(Rescue object) {
-			return createRescueAdapter();
-		}
-
-		@Override
 		public Adapter caseExpression(Expression object) {
 			return createExpressionAdapter();
 		}
 
 		@Override
-		public Adapter caseCallExpression(CallExpression object) {
-			return createCallExpressionAdapter();
+		public Adapter caseVariableDecl(VariableDecl object) {
+			return createVariableDeclAdapter();
+		}
+
+		@Override
+		public Adapter caseCallVariable(CallVariable object) {
+			return createCallVariableAdapter();
 		}
 
 		@Override
@@ -101,8 +98,13 @@ public class BehaviorAdapterFactory extends AdapterFactoryImpl {
 		}
 
 		@Override
-		public Adapter caseCallVariable(CallVariable object) {
-			return createCallVariableAdapter();
+		public Adapter caseBlock(Block object) {
+			return createBlockAdapter();
+		}
+
+		@Override
+		public Adapter caseCallExpression(CallExpression object) {
+			return createCallExpressionAdapter();
 		}
 
 		@Override
@@ -118,11 +120,6 @@ public class BehaviorAdapterFactory extends AdapterFactoryImpl {
 		@Override
 		public Adapter caseCallSuperOperation(CallSuperOperation object) {
 			return createCallSuperOperationAdapter();
-		}
-
-		@Override
-		public Adapter caseVariableDecl(VariableDecl object) {
-			return createVariableDeclAdapter();
 		}
 
 		@Override
@@ -148,6 +145,11 @@ public class BehaviorAdapterFactory extends AdapterFactoryImpl {
 		@Override
 		public Adapter caseRaise(Raise object) {
 			return createRaiseAdapter();
+		}
+
+		@Override
+		public Adapter caseRescue(Rescue object) {
+			return createRescueAdapter();
 		}
 
 		@Override
@@ -250,34 +252,6 @@ public class BehaviorAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link kermeta.language.behavior.Block <em>Block</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see kermeta.language.behavior.Block
-	 * @generated
-	 */
-	public Adapter createBlockAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link kermeta.language.behavior.Rescue <em>Rescue</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see kermeta.language.behavior.Rescue
-	 * @generated
-	 */
-	public Adapter createRescueAdapter() {
-		return null;
-	}
-
-	/**
 	 * Creates a new adapter for an object of class '{@link kermeta.language.behavior.Expression <em>Expression</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -292,16 +266,30 @@ public class BehaviorAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link kermeta.language.behavior.CallExpression <em>Call Expression</em>}'.
+	 * Creates a new adapter for an object of class '{@link kermeta.language.behavior.VariableDecl <em>Variable Decl</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see kermeta.language.behavior.CallExpression
+	 * @see kermeta.language.behavior.VariableDecl
 	 * @generated
 	 */
-	public Adapter createCallExpressionAdapter() {
+	public Adapter createVariableDeclAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link kermeta.language.behavior.CallVariable <em>Call Variable</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see kermeta.language.behavior.CallVariable
+	 * @generated
+	 */
+	public Adapter createCallVariableAdapter() {
 		return null;
 	}
 
@@ -320,16 +308,30 @@ public class BehaviorAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link kermeta.language.behavior.CallVariable <em>Call Variable</em>}'.
+	 * Creates a new adapter for an object of class '{@link kermeta.language.behavior.Block <em>Block</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see kermeta.language.behavior.CallVariable
+	 * @see kermeta.language.behavior.Block
 	 * @generated
 	 */
-	public Adapter createCallVariableAdapter() {
+	public Adapter createBlockAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link kermeta.language.behavior.CallExpression <em>Call Expression</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see kermeta.language.behavior.CallExpression
+	 * @generated
+	 */
+	public Adapter createCallExpressionAdapter() {
 		return null;
 	}
 
@@ -372,20 +374,6 @@ public class BehaviorAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createCallSuperOperationAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link kermeta.language.behavior.VariableDecl <em>Variable Decl</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see kermeta.language.behavior.VariableDecl
-	 * @generated
-	 */
-	public Adapter createVariableDeclAdapter() {
 		return null;
 	}
 
@@ -456,6 +444,20 @@ public class BehaviorAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createRaiseAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link kermeta.language.behavior.Rescue <em>Rescue</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see kermeta.language.behavior.Rescue
+	 * @generated
+	 */
+	public Adapter createRescueAdapter() {
 		return null;
 	}
 

@@ -1,8 +1,10 @@
 /**
- * <copyright>
- * </copyright>
+ * License: EPL
+ * Copyright: IRISA / INRIA / Universite de Rennes 1
+ * 
+ * Generating with Kermeta <http://www.kermeta.org>
  *
- * $Id: EcoreFactory.java,v 1.10 2009-01-21 09:16:05 cfaucher Exp $
+ * $Id: EcoreFactory.java,v 1.11 2009-02-10 17:51:58 cfaucher Exp $
  */
 package km2ecore.helper.ecore;
 
@@ -26,13 +28,13 @@ public interface EcoreFactory extends EFactory {
 	EcoreFactory eINSTANCE = km2ecore.helper.ecore.impl.EcoreFactoryImpl.init();
 
 	/**
-	 * Returns a new object of class '<em>Model Analizer</em>'.
+	 * Returns a new object of class '<em>ENamed Element Helper</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Model Analizer</em>'.
+	 * @return a new object of class '<em>ENamed Element Helper</em>'.
 	 * @generated
 	 */
-	ModelAnalizer createModelAnalizer();
+	ENamedElementHelper createENamedElementHelper();
 
 	/**
 	 * Returns a new object of class '<em>Model Element Helper</em>'.
@@ -44,15 +46,6 @@ public interface EcoreFactory extends EFactory {
 	EcoreModelElementHelper createEcoreModelElementHelper();
 
 	/**
-	 * Returns a new object of class '<em>ENamed Element Helper</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>ENamed Element Helper</em>'.
-	 * @generated
-	 */
-	ENamedElementHelper createENamedElementHelper();
-
-	/**
 	 * Returns a new object of class '<em>EAnnotation Helper</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -60,6 +53,15 @@ public interface EcoreFactory extends EFactory {
 	 * @generated
 	 */
 	EAnnotationHelper createEAnnotationHelper();
+
+	/**
+	 * Returns a new object of class '<em>Model Analizer</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Model Analizer</em>'.
+	 * @generated
+	 */
+	ModelAnalizer createModelAnalizer();
 
 	/**
 	 * Returns the package supported by this factory.

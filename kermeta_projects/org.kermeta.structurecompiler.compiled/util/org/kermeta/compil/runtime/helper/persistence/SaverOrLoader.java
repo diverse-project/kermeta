@@ -1,5 +1,5 @@
 
-/*$Id: SaverOrLoader.java,v 1.13 2009-01-21 09:16:06 cfaucher Exp $
+/*$Id: SaverOrLoader.java,v 1.14 2009-02-10 17:51:58 cfaucher Exp $
 * Project : org.kermeta.compiler.generator
 * File : 	SaverOrLoader.java
 * License : EPL
@@ -349,6 +349,11 @@ abstract public class SaverOrLoader {
 		
 		EPackage _epack = null;
 		try {
+			
+			if( str_pack.equals("org.eclipse.uml2.uml.UmlPackage") ) {
+				str_pack = "org.eclipse.uml2.uml.UMLPackage";
+			}
+			
 			str_pack_Class = SaverOrLoader.class.getClassLoader().loadClass(str_pack);
 		
 			Field field = str_pack_Class.getField("eINSTANCE");

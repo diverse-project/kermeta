@@ -1,8 +1,10 @@
 /**
- * <copyright>
- * </copyright>
+ * License: EPL
+ * Copyright: IRISA / INRIA / Universite de Rennes 1
+ * 
+ * Generating with Kermeta <http://www.kermeta.org>
  *
- * $Id: ExceptionsPackage.java,v 1.10 2009-01-21 09:15:53 cfaucher Exp $
+ * $Id: ExceptionsPackage.java,v 1.11 2009-02-10 17:51:47 cfaucher Exp $
  */
 package kermeta.exceptions;
 
@@ -28,7 +30,7 @@ import org.eclipse.emf.ecore.EReference;
  * @see kermeta.exceptions.ExceptionsFactory
  * @model kind="package"
  *        annotation="kermeta ecoreUri='http://www.kermeta.org/kermeta/1_2_0//kermeta/exceptions'"
- *        annotation="kermeta documentation='/** \n * Contains the definition of a Kermeta exception and a few basic exceptions.\n * <img src=\"platform:/plugin/fr.irisa.triskell.kermeta.documentation/src/figures/exceptions_package.png\"/>\n \052/'"
+ *        annotation="kermeta documentation='/** \r\n * Contains the definition of a Kermeta exception and a few basic exceptions.\r\n * <img src=\"platform:/plugin/fr.irisa.triskell.kermeta.documentation/src/figures/exceptions_package.png\"/>\r\n \052/'"
  * @generated
  */
 public interface ExceptionsPackage extends EPackage {

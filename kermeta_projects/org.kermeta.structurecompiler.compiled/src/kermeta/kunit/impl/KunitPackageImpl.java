@@ -1,26 +1,20 @@
 /**
- * <copyright>
- * </copyright>
+ * License: EPL
+ * Copyright: IRISA / INRIA / Universite de Rennes 1
+ * 
+ * Generating with Kermeta <http://www.kermeta.org>
  *
- * $Id: KunitPackageImpl.java,v 1.10 2009-01-21 09:15:49 cfaucher Exp $
+ * $Id: KunitPackageImpl.java,v 1.11 2009-02-10 17:51:43 cfaucher Exp $
  */
 package kermeta.kunit.impl;
-
-import kermeta.KermetaPackage;
 
 import kermeta.compiler.CompilerPackage;
 
 import kermeta.compiler.impl.CompilerPackageImpl;
 
-import kermeta.ecore.EcorePackage;
-
-import kermeta.ecore.impl.EcorePackageImpl;
-
 import kermeta.exceptions.ExceptionsPackage;
 
 import kermeta.exceptions.impl.ExceptionsPackageImpl;
-
-import kermeta.impl.KermetaPackageImpl;
 
 import kermeta.interpreter.InterpreterPackage;
 
@@ -80,9 +74,17 @@ import km2ecore.common.exception.impl.ExceptionPackageImpl;
 
 import km2ecore.common.impl.CommonPackageImpl;
 
+import km2ecore.helper.ecore.EcorePackage;
+
+import km2ecore.helper.ecore.impl.EcorePackageImpl;
+
 import km2ecore.helper.java.JavaPackage;
 
 import km2ecore.helper.java.impl.JavaPackageImpl;
+
+import km2ecore.helper.kermeta.KermetaPackage;
+
+import km2ecore.helper.kermeta.impl.KermetaPackageImpl;
 
 import km2ecore.impl.Km2ecorePackageImpl;
 
@@ -270,70 +272,22 @@ public class KunitPackageImpl extends EPackageImpl implements KunitPackage {
 		isInited = true;
 
 		// Obtain or create and register interdependencies
-		KermetaPackageImpl theKermetaPackage = (KermetaPackageImpl) (EPackage.Registry.INSTANCE
-				.getEPackage(KermetaPackage.eNS_URI) instanceof KermetaPackageImpl ? EPackage.Registry.INSTANCE
-				.getEPackage(KermetaPackage.eNS_URI)
-				: KermetaPackage.eINSTANCE);
-		LanguagePackageImpl theLanguagePackage = (LanguagePackageImpl) (EPackage.Registry.INSTANCE
-				.getEPackage(LanguagePackage.eNS_URI) instanceof LanguagePackageImpl ? EPackage.Registry.INSTANCE
-				.getEPackage(LanguagePackage.eNS_URI)
-				: LanguagePackage.eINSTANCE);
-		StructurePackageImpl theStructurePackage = (StructurePackageImpl) (EPackage.Registry.INSTANCE
-				.getEPackage(StructurePackage.eNS_URI) instanceof StructurePackageImpl ? EPackage.Registry.INSTANCE
-				.getEPackage(StructurePackage.eNS_URI)
-				: StructurePackage.eINSTANCE);
-		BehaviorPackageImpl theBehaviorPackage = (BehaviorPackageImpl) (EPackage.Registry.INSTANCE
-				.getEPackage(BehaviorPackage.eNS_URI) instanceof BehaviorPackageImpl ? EPackage.Registry.INSTANCE
-				.getEPackage(BehaviorPackage.eNS_URI)
-				: BehaviorPackage.eINSTANCE);
-		StandardPackageImpl theStandardPackage = (StandardPackageImpl) (EPackage.Registry.INSTANCE
-				.getEPackage(StandardPackage.eNS_URI) instanceof StandardPackageImpl ? EPackage.Registry.INSTANCE
-				.getEPackage(StandardPackage.eNS_URI)
-				: StandardPackage.eINSTANCE);
-		UtilsPackageImpl theUtilsPackage = (UtilsPackageImpl) (EPackage.Registry.INSTANCE
-				.getEPackage(UtilsPackage.eNS_URI) instanceof UtilsPackageImpl ? EPackage.Registry.INSTANCE
-				.getEPackage(UtilsPackage.eNS_URI)
-				: UtilsPackage.eINSTANCE);
-		IoPackageImpl theIoPackage = (IoPackageImpl) (EPackage.Registry.INSTANCE
-				.getEPackage(IoPackage.eNS_URI) instanceof IoPackageImpl ? EPackage.Registry.INSTANCE
-				.getEPackage(IoPackage.eNS_URI)
-				: IoPackage.eINSTANCE);
-		ExceptionsPackageImpl theExceptionsPackage = (ExceptionsPackageImpl) (EPackage.Registry.INSTANCE
-				.getEPackage(ExceptionsPackage.eNS_URI) instanceof ExceptionsPackageImpl ? EPackage.Registry.INSTANCE
-				.getEPackage(ExceptionsPackage.eNS_URI)
-				: ExceptionsPackage.eINSTANCE);
-		EcorePackageImpl theEcorePackage = (EcorePackageImpl) (EPackage.Registry.INSTANCE
-				.getEPackage(EcorePackage.eNS_URI) instanceof EcorePackageImpl ? EPackage.Registry.INSTANCE
-				.getEPackage(EcorePackage.eNS_URI)
-				: EcorePackage.eINSTANCE);
-		PersistencePackageImpl thePersistencePackage = (PersistencePackageImpl) (EPackage.Registry.INSTANCE
-				.getEPackage(PersistencePackage.eNS_URI) instanceof PersistencePackageImpl ? EPackage.Registry.INSTANCE
-				.getEPackage(PersistencePackage.eNS_URI)
-				: PersistencePackage.eINSTANCE);
-		InterpreterPackageImpl theInterpreterPackage = (InterpreterPackageImpl) (EPackage.Registry.INSTANCE
-				.getEPackage(InterpreterPackage.eNS_URI) instanceof InterpreterPackageImpl ? EPackage.Registry.INSTANCE
-				.getEPackage(InterpreterPackage.eNS_URI)
-				: InterpreterPackage.eINSTANCE);
-		CompilerPackageImpl theCompilerPackage = (CompilerPackageImpl) (EPackage.Registry.INSTANCE
-				.getEPackage(CompilerPackage.eNS_URI) instanceof CompilerPackageImpl ? EPackage.Registry.INSTANCE
-				.getEPackage(CompilerPackage.eNS_URI)
-				: CompilerPackage.eINSTANCE);
 		Km2ecorePackageImpl theKm2ecorePackage = (Km2ecorePackageImpl) (EPackage.Registry.INSTANCE
 				.getEPackage(Km2ecorePackage.eNS_URI) instanceof Km2ecorePackageImpl ? EPackage.Registry.INSTANCE
 				.getEPackage(Km2ecorePackage.eNS_URI)
 				: Km2ecorePackage.eINSTANCE);
-		km2ecore.helper.kermeta.impl.KermetaPackageImpl theKermetaPackage_1 = (km2ecore.helper.kermeta.impl.KermetaPackageImpl) (EPackage.Registry.INSTANCE
-				.getEPackage(km2ecore.helper.kermeta.KermetaPackage.eNS_URI) instanceof km2ecore.helper.kermeta.impl.KermetaPackageImpl ? EPackage.Registry.INSTANCE
-				.getEPackage(km2ecore.helper.kermeta.KermetaPackage.eNS_URI)
-				: km2ecore.helper.kermeta.KermetaPackage.eINSTANCE);
-		km2ecore.helper.ecore.impl.EcorePackageImpl theEcorePackage_1 = (km2ecore.helper.ecore.impl.EcorePackageImpl) (EPackage.Registry.INSTANCE
-				.getEPackage(km2ecore.helper.ecore.EcorePackage.eNS_URI) instanceof km2ecore.helper.ecore.impl.EcorePackageImpl ? EPackage.Registry.INSTANCE
-				.getEPackage(km2ecore.helper.ecore.EcorePackage.eNS_URI)
-				: km2ecore.helper.ecore.EcorePackage.eINSTANCE);
+		KermetaPackageImpl theKermetaPackage = (KermetaPackageImpl) (EPackage.Registry.INSTANCE
+				.getEPackage(KermetaPackage.eNS_URI) instanceof KermetaPackageImpl ? EPackage.Registry.INSTANCE
+				.getEPackage(KermetaPackage.eNS_URI)
+				: KermetaPackage.eINSTANCE);
 		JavaPackageImpl theJavaPackage = (JavaPackageImpl) (EPackage.Registry.INSTANCE
 				.getEPackage(JavaPackage.eNS_URI) instanceof JavaPackageImpl ? EPackage.Registry.INSTANCE
 				.getEPackage(JavaPackage.eNS_URI)
 				: JavaPackage.eINSTANCE);
+		EcorePackageImpl theEcorePackage = (EcorePackageImpl) (EPackage.Registry.INSTANCE
+				.getEPackage(EcorePackage.eNS_URI) instanceof EcorePackageImpl ? EPackage.Registry.INSTANCE
+				.getEPackage(EcorePackage.eNS_URI)
+				: EcorePackage.eINSTANCE);
 		CommonPackageImpl theCommonPackage = (CommonPackageImpl) (EPackage.Registry.INSTANCE
 				.getEPackage(CommonPackage.eNS_URI) instanceof CommonPackageImpl ? EPackage.Registry.INSTANCE
 				.getEPackage(CommonPackage.eNS_URI)
@@ -342,6 +296,58 @@ public class KunitPackageImpl extends EPackageImpl implements KunitPackage {
 				.getEPackage(ExceptionPackage.eNS_URI) instanceof ExceptionPackageImpl ? EPackage.Registry.INSTANCE
 				.getEPackage(ExceptionPackage.eNS_URI)
 				: ExceptionPackage.eINSTANCE);
+		kermeta.impl.KermetaPackageImpl theKermetaPackage_1 = (kermeta.impl.KermetaPackageImpl) (EPackage.Registry.INSTANCE
+				.getEPackage(kermeta.KermetaPackage.eNS_URI) instanceof kermeta.impl.KermetaPackageImpl ? EPackage.Registry.INSTANCE
+				.getEPackage(kermeta.KermetaPackage.eNS_URI)
+				: kermeta.KermetaPackage.eINSTANCE);
+		LanguagePackageImpl theLanguagePackage = (LanguagePackageImpl) (EPackage.Registry.INSTANCE
+				.getEPackage(LanguagePackage.eNS_URI) instanceof LanguagePackageImpl ? EPackage.Registry.INSTANCE
+				.getEPackage(LanguagePackage.eNS_URI)
+				: LanguagePackage.eINSTANCE);
+		BehaviorPackageImpl theBehaviorPackage = (BehaviorPackageImpl) (EPackage.Registry.INSTANCE
+				.getEPackage(BehaviorPackage.eNS_URI) instanceof BehaviorPackageImpl ? EPackage.Registry.INSTANCE
+				.getEPackage(BehaviorPackage.eNS_URI)
+				: BehaviorPackage.eINSTANCE);
+		StructurePackageImpl theStructurePackage = (StructurePackageImpl) (EPackage.Registry.INSTANCE
+				.getEPackage(StructurePackage.eNS_URI) instanceof StructurePackageImpl ? EPackage.Registry.INSTANCE
+				.getEPackage(StructurePackage.eNS_URI)
+				: StructurePackage.eINSTANCE);
+		CompilerPackageImpl theCompilerPackage = (CompilerPackageImpl) (EPackage.Registry.INSTANCE
+				.getEPackage(CompilerPackage.eNS_URI) instanceof CompilerPackageImpl ? EPackage.Registry.INSTANCE
+				.getEPackage(CompilerPackage.eNS_URI)
+				: CompilerPackage.eINSTANCE);
+		StandardPackageImpl theStandardPackage = (StandardPackageImpl) (EPackage.Registry.INSTANCE
+				.getEPackage(StandardPackage.eNS_URI) instanceof StandardPackageImpl ? EPackage.Registry.INSTANCE
+				.getEPackage(StandardPackage.eNS_URI)
+				: StandardPackage.eINSTANCE);
+		ExceptionsPackageImpl theExceptionsPackage = (ExceptionsPackageImpl) (EPackage.Registry.INSTANCE
+				.getEPackage(ExceptionsPackage.eNS_URI) instanceof ExceptionsPackageImpl ? EPackage.Registry.INSTANCE
+				.getEPackage(ExceptionsPackage.eNS_URI)
+				: ExceptionsPackage.eINSTANCE);
+		UtilsPackageImpl theUtilsPackage = (UtilsPackageImpl) (EPackage.Registry.INSTANCE
+				.getEPackage(UtilsPackage.eNS_URI) instanceof UtilsPackageImpl ? EPackage.Registry.INSTANCE
+				.getEPackage(UtilsPackage.eNS_URI)
+				: UtilsPackage.eINSTANCE);
+		PersistencePackageImpl thePersistencePackage = (PersistencePackageImpl) (EPackage.Registry.INSTANCE
+				.getEPackage(PersistencePackage.eNS_URI) instanceof PersistencePackageImpl ? EPackage.Registry.INSTANCE
+				.getEPackage(PersistencePackage.eNS_URI)
+				: PersistencePackage.eINSTANCE);
+		IoPackageImpl theIoPackage = (IoPackageImpl) (EPackage.Registry.INSTANCE
+				.getEPackage(IoPackage.eNS_URI) instanceof IoPackageImpl ? EPackage.Registry.INSTANCE
+				.getEPackage(IoPackage.eNS_URI)
+				: IoPackage.eINSTANCE);
+		InterpreterPackageImpl theInterpreterPackage = (InterpreterPackageImpl) (EPackage.Registry.INSTANCE
+				.getEPackage(InterpreterPackage.eNS_URI) instanceof InterpreterPackageImpl ? EPackage.Registry.INSTANCE
+				.getEPackage(InterpreterPackage.eNS_URI)
+				: InterpreterPackage.eINSTANCE);
+		kermeta.ecore.impl.EcorePackageImpl theEcorePackage_1 = (kermeta.ecore.impl.EcorePackageImpl) (EPackage.Registry.INSTANCE
+				.getEPackage(kermeta.ecore.EcorePackage.eNS_URI) instanceof kermeta.ecore.impl.EcorePackageImpl ? EPackage.Registry.INSTANCE
+				.getEPackage(kermeta.ecore.EcorePackage.eNS_URI)
+				: kermeta.ecore.EcorePackage.eINSTANCE);
+		TraceabilityPackageImpl theTraceabilityPackage = (TraceabilityPackageImpl) (EPackage.Registry.INSTANCE
+				.getEPackage(TraceabilityPackage.eNS_URI) instanceof TraceabilityPackageImpl ? EPackage.Registry.INSTANCE
+				.getEPackage(TraceabilityPackage.eNS_URI)
+				: TraceabilityPackage.eINSTANCE);
 		ecore.impl.EcorePackageImpl theEcorePackage_2 = (ecore.impl.EcorePackageImpl) (EPackage.Registry.INSTANCE
 				.getEPackage(ecore.EcorePackage.eNS_URI) instanceof ecore.impl.EcorePackageImpl ? EPackage.Registry.INSTANCE
 				.getEPackage(ecore.EcorePackage.eNS_URI)
@@ -350,58 +356,54 @@ public class KunitPackageImpl extends EPackageImpl implements KunitPackage {
 				.getEPackage(SimkPackage.eNS_URI) instanceof SimkPackageImpl ? EPackage.Registry.INSTANCE
 				.getEPackage(SimkPackage.eNS_URI)
 				: SimkPackage.eINSTANCE);
-		TraceabilityPackageImpl theTraceabilityPackage = (TraceabilityPackageImpl) (EPackage.Registry.INSTANCE
-				.getEPackage(TraceabilityPackage.eNS_URI) instanceof TraceabilityPackageImpl ? EPackage.Registry.INSTANCE
-				.getEPackage(TraceabilityPackage.eNS_URI)
-				: TraceabilityPackage.eINSTANCE);
 
 		// Create package meta-data objects
 		theKunitPackage.createPackageContents();
-		theKermetaPackage.createPackageContents();
-		theLanguagePackage.createPackageContents();
-		theStructurePackage.createPackageContents();
-		theBehaviorPackage.createPackageContents();
-		theStandardPackage.createPackageContents();
-		theUtilsPackage.createPackageContents();
-		theIoPackage.createPackageContents();
-		theExceptionsPackage.createPackageContents();
-		theEcorePackage.createPackageContents();
-		thePersistencePackage.createPackageContents();
-		theInterpreterPackage.createPackageContents();
-		theCompilerPackage.createPackageContents();
 		theKm2ecorePackage.createPackageContents();
-		theKermetaPackage_1.createPackageContents();
-		theEcorePackage_1.createPackageContents();
+		theKermetaPackage.createPackageContents();
 		theJavaPackage.createPackageContents();
+		theEcorePackage.createPackageContents();
 		theCommonPackage.createPackageContents();
 		theExceptionPackage.createPackageContents();
+		theKermetaPackage_1.createPackageContents();
+		theLanguagePackage.createPackageContents();
+		theBehaviorPackage.createPackageContents();
+		theStructurePackage.createPackageContents();
+		theCompilerPackage.createPackageContents();
+		theStandardPackage.createPackageContents();
+		theExceptionsPackage.createPackageContents();
+		theUtilsPackage.createPackageContents();
+		thePersistencePackage.createPackageContents();
+		theIoPackage.createPackageContents();
+		theInterpreterPackage.createPackageContents();
+		theEcorePackage_1.createPackageContents();
+		theTraceabilityPackage.createPackageContents();
 		theEcorePackage_2.createPackageContents();
 		theSimkPackage.createPackageContents();
-		theTraceabilityPackage.createPackageContents();
 
 		// Initialize created meta-data
 		theKunitPackage.initializePackageContents();
-		theKermetaPackage.initializePackageContents();
-		theLanguagePackage.initializePackageContents();
-		theStructurePackage.initializePackageContents();
-		theBehaviorPackage.initializePackageContents();
-		theStandardPackage.initializePackageContents();
-		theUtilsPackage.initializePackageContents();
-		theIoPackage.initializePackageContents();
-		theExceptionsPackage.initializePackageContents();
-		theEcorePackage.initializePackageContents();
-		thePersistencePackage.initializePackageContents();
-		theInterpreterPackage.initializePackageContents();
-		theCompilerPackage.initializePackageContents();
 		theKm2ecorePackage.initializePackageContents();
-		theKermetaPackage_1.initializePackageContents();
-		theEcorePackage_1.initializePackageContents();
+		theKermetaPackage.initializePackageContents();
 		theJavaPackage.initializePackageContents();
+		theEcorePackage.initializePackageContents();
 		theCommonPackage.initializePackageContents();
 		theExceptionPackage.initializePackageContents();
+		theKermetaPackage_1.initializePackageContents();
+		theLanguagePackage.initializePackageContents();
+		theBehaviorPackage.initializePackageContents();
+		theStructurePackage.initializePackageContents();
+		theCompilerPackage.initializePackageContents();
+		theStandardPackage.initializePackageContents();
+		theExceptionsPackage.initializePackageContents();
+		theUtilsPackage.initializePackageContents();
+		thePersistencePackage.initializePackageContents();
+		theIoPackage.initializePackageContents();
+		theInterpreterPackage.initializePackageContents();
+		theEcorePackage_1.initializePackageContents();
+		theTraceabilityPackage.initializePackageContents();
 		theEcorePackage_2.initializePackageContents();
 		theSimkPackage.initializePackageContents();
-		theTraceabilityPackage.initializePackageContents();
 
 		// Mark meta-data to indicate it can't be changed
 		theKunitPackage.freeze();
@@ -1145,11 +1147,11 @@ public class KunitPackageImpl extends EPackageImpl implements KunitPackage {
 				TestCase.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE,
 				!IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		addEOperation(testCaseEClass, null, "setUp", 0, 1, IS_UNIQUE,
-				IS_ORDERED);
-
 		addEOperation(testCaseEClass, null, "raiseIfHasFailures", 0, 1,
 				IS_UNIQUE, IS_ORDERED);
+
+		addEOperation(testCaseEClass, null, "setUp", 0, 1, IS_UNIQUE,
+				IS_ORDERED);
 
 		addEOperation(testCaseEClass, this.getLog(), "getLogEMF_renameAs", 0,
 				1, IS_UNIQUE, IS_ORDERED);
@@ -1219,16 +1221,16 @@ public class KunitPackageImpl extends EPackageImpl implements KunitPackage {
 				source,
 				new String[] {
 						"documentation",
-						"/**\n * main features of the famous Unit test tool for Kermeta language\n * <img src=\"platform:/plugin/fr.irisa.triskell.kermeta.documentation/src/figures/kunit_package.png\"/>\n */" });
+						"/**\r\n * main features of the famous Unit test tool for Kermeta language\r\n * <img src=\"platform:/plugin/fr.irisa.triskell.kermeta.documentation/src/figures/kunit_package.png\"/>\r\n */" });
 		addAnnotation(
 				this,
 				source,
 				new String[] {
 						"documentation",
-						"/**\n * Contains the implementation of a unit test tool. This is a clone of\n * JUnit architecture.\n * Reference : http://junit.sourceforge.net/doc/cookstour/cookstour.htm\n *\n * Usage example of kunit can be found in fr.irisa.triskell.kermeta.samples project.\n *\n * <img src=\"platform:/plugin/fr.irisa.triskell.kermeta.documentation/src/figures/kunit_package.png\"/>\n */" });
+						"/**\r\n * Contains the implementation of a unit test tool. This is a clone of\r\n * JUnit architecture.\r\n * Reference : http://junit.sourceforge.net/doc/cookstour/cookstour.htm\r\n *\r\n * Usage example of kunit can be found in fr.irisa.triskell.kermeta.samples project.\r\n *\r\n * <img src=\"platform:/plugin/fr.irisa.triskell.kermeta.documentation/src/figures/kunit_package.png\"/>\r\n */" });
 		addAnnotation(abstractFallibleEClass, source, new String[] {
 				"documentation",
-				"/**\n * to be written ############################\n */" });
+				"/**\r\n * to be written ############################\r\n */" });
 		addAnnotation(abstractFallibleEClass.getEOperations().get(0), source,
 				new String[] { "isAbstract", "true" });
 		addAnnotation(
@@ -1241,7 +1243,7 @@ public class KunitPackageImpl extends EPackageImpl implements KunitPackage {
 				source,
 				new String[] {
 						"documentation",
-						"/** \n\t ** reduces all runs of white-space to a single space character\n\t **/" });
+						"/** \r\n\t ** reduces all runs of white-space to a single space character\r\n\t **/" });
 		addAnnotation(abstractFallibleEClass.getEOperations().get(2), source,
 				new String[] { "isAbstract", "true" });
 		addAnnotation(
@@ -1249,7 +1251,7 @@ public class KunitPackageImpl extends EPackageImpl implements KunitPackage {
 				source,
 				new String[] {
 						"documentation",
-						"/**\n     * process the given condition and react with the given message\n     * if it is satisfied\n     */" });
+						"/**\r\n     * process the given condition and react with the given message\r\n     * if it is satisfied\r\n     */" });
 		addAnnotation(abstractFallibleEClass.getEOperations().get(3), source,
 				new String[] { "isAbstract", "true" });
 		addAnnotation(abstractFallibleEClass.getEOperations().get(3), source,
@@ -1276,7 +1278,7 @@ public class KunitPackageImpl extends EPackageImpl implements KunitPackage {
 				source,
 				new String[] {
 						"documentation",
-						"/**\n     * process the given condition and react with the given message\n     * if it is not satisfied\n     */" });
+						"/**\r\n     * process the given condition and react with the given message\r\n     * if it is not satisfied\r\n     */" });
 		addAnnotation(abstractFallibleEClass.getEOperations().get(7), source,
 				new String[] { "isAbstract", "true" });
 		addAnnotation(
@@ -1289,7 +1291,7 @@ public class KunitPackageImpl extends EPackageImpl implements KunitPackage {
 				source,
 				new String[] {
 						"documentation",
-						"/**\n   * Log a failure if the two strings are not identical modulo-white-space\n   */" });
+						"/**\r\n   * Log a failure if the two strings are not identical modulo-white-space\r\n   */" });
 		addAnnotation(abstractFallibleEClass.getEOperations().get(9), source,
 				new String[] { "isAbstract", "true" });
 		addAnnotation(
@@ -1297,7 +1299,7 @@ public class KunitPackageImpl extends EPackageImpl implements KunitPackage {
 				source,
 				new String[] {
 						"documentation",
-						"/**\n     * process the given condition and react with the given message\n     * if it is not satisfied\n     */" });
+						"/**\r\n     * process the given condition and react with the given message\r\n     * if it is not satisfied\r\n     */" });
 		addAnnotation(
 				assertionFailedErrorEClass,
 				source,
@@ -1360,24 +1362,24 @@ public class KunitPackageImpl extends EPackageImpl implements KunitPackage {
 				source,
 				new String[] {
 						"documentation",
-						"/**\n * This exception is rose if there is a problem on the name of the test method\n */" });
+						"/**\r\n * This exception is rose if there is a problem on the name of the test method\r\n */" });
 		addAnnotation(
 				invalidParameterExceptionEClass,
 				source,
 				new String[] {
 						"documentation",
-						"/**\n * This is for when we try to build a suite from a class that isn\'t a TestCase\n */" });
+						"/**\r\n * This is for when we try to build a suite from a class that isn\'t a TestCase\r\n */" });
 		addAnnotation(
 				fallibleEClass,
 				source,
 				new String[] {
 						"documentation",
-						"/**\n * This is represents the aspect of tests that they may go wrong.\n * it defines the ability to define the conditions for success\n * (assertions) and the mechanism for recording that those \n * conditions have not been met.\n */" });
+						"/**\r\n * This is represents the aspect of tests that they may go wrong.\r\n * it defines the ability to define the conditions for success\r\n * (assertions) and the mechanism for recording that those \r\n * conditions have not been met.\r\n */" });
 		addAnnotation(
 				fallibleEClass.getEOperations().get(0),
 				source,
 				new String[] { "documentation",
-						"/**\n   * Log a failure if condition is false\n   */" });
+						"/**\r\n   * Log a failure if condition is false\r\n   */" });
 		addAnnotation(fallibleEClass.getEOperations().get(0), source,
 				new String[] { "superOperation",
 						"kermeta::kunit::AbstractFallible" });
@@ -1385,18 +1387,20 @@ public class KunitPackageImpl extends EPackageImpl implements KunitPackage {
 				new String[] { "isAbstract", "true" });
 		addAnnotation(fallibleEClass.getEOperations().get(1), source,
 				new String[] { "documentation",
-						"/**\n   * where failures will be put \n   */" });
+						"/**\r\n   * where failures will be put \r\n   */" });
 		addAnnotation(fallibleEClass.getEOperations().get(1), source,
 				new String[] { "EMF_renameAs", "getLogKermeta" });
-		addAnnotation(fallibleEClass.getEOperations().get(2), source,
+		addAnnotation(
+				fallibleEClass.getEOperations().get(2),
+				source,
 				new String[] { "documentation",
-						"/**\n   * Log a failure if condition is true\n   */" });
+						"/**\r\n   * Log a failure if condition is true\r\n   */" });
 		addAnnotation(fallibleEClass.getEOperations().get(2), source,
 				new String[] { "superOperation",
 						"kermeta::kunit::AbstractFallible" });
 		addAnnotation(fallibleEClass.getEOperations().get(3), source,
 				new String[] { "documentation",
-						"/**\n   * Log a failure \n   */" });
+						"/**\r\n   * Log a failure \r\n   */" });
 		addAnnotation(fallibleEClass.getEOperations().get(3), source,
 				new String[] { "superOperation",
 						"kermeta::kunit::AbstractFallible" });
@@ -1404,13 +1408,15 @@ public class KunitPackageImpl extends EPackageImpl implements KunitPackage {
 				fallibleEClass.getEOperations().get(4),
 				source,
 				new String[] { "documentation",
-						"/**\n   * Log a failure if the two strings are not identical\n   */" });
+						"/**\r\n   * Log a failure if the two strings are not identical\r\n   */" });
 		addAnnotation(fallibleEClass.getEOperations().get(4), source,
 				new String[] { "superOperation",
 						"kermeta::kunit::AbstractFallible" });
-		addAnnotation(fallibleEClass.getEOperations().get(5), source,
+		addAnnotation(
+				fallibleEClass.getEOperations().get(5),
+				source,
 				new String[] { "documentation",
-						"/**\n   * Log a failure if condition is true\n   */" });
+						"/**\r\n   * Log a failure if condition is true\r\n   */" });
 		addAnnotation(fallibleEClass.getEOperations().get(5), source,
 				new String[] { "superOperation",
 						"kermeta::kunit::AbstractFallible" });
@@ -1418,7 +1424,7 @@ public class KunitPackageImpl extends EPackageImpl implements KunitPackage {
 				fallibleEClass.getEOperations().get(6),
 				source,
 				new String[] { "documentation",
-						"/**\n   * Log a failure if condition is false\n   */" });
+						"/**\r\n   * Log a failure if condition is false\r\n   */" });
 		addAnnotation(fallibleEClass.getEOperations().get(6), source,
 				new String[] { "superOperation",
 						"kermeta::kunit::AbstractFallible" });
@@ -1426,7 +1432,7 @@ public class KunitPackageImpl extends EPackageImpl implements KunitPackage {
 				fallibleEClass.getEOperations().get(7),
 				source,
 				new String[] { "documentation",
-						"/**\n   * Log a failure if condition is false\n   */" });
+						"/**\r\n   * Log a failure if condition is false\r\n   */" });
 		addAnnotation(fallibleEClass.getEOperations().get(7), source,
 				new String[] { "superOperation",
 						"kermeta::kunit::AbstractFallible" });
@@ -1434,12 +1440,12 @@ public class KunitPackageImpl extends EPackageImpl implements KunitPackage {
 				fallibleEClass.getEOperations().get(8),
 				source,
 				new String[] { "documentation",
-						"/**\n   * current order position of counter of assertions\n   */" });
+						"/**\r\n   * current order position of counter of assertions\r\n   */" });
 		addAnnotation(
 				fallibleEClass.getEOperations().get(9),
 				source,
 				new String[] { "documentation",
-						"/**\n   * Log a failure if condition is false\n   */" });
+						"/**\r\n   * Log a failure if condition is false\r\n   */" });
 		addAnnotation(fallibleEClass.getEOperations().get(9), source,
 				new String[] { "superOperation",
 						"kermeta::kunit::AbstractFallible" });
@@ -1448,99 +1454,103 @@ public class KunitPackageImpl extends EPackageImpl implements KunitPackage {
 				source,
 				new String[] {
 						"documentation",
-						"/**\n   * Set this attribute to false if you wish your test to not stop if the assert fails.\n   * note : if set to false, the count of failures/errors may be bigger that the number of executed test operations\n   */" });
-		addAnnotation(getFallible_Rank(), source, new String[] {
-				"documentation",
-				"/**\n   * counter of assertions in the test method\n   */" });
+						"/**\r\n   * Set this attribute to false if you wish your test to not stop if the assert fails.\r\n   * note : if set to false, the count of failures/errors may be bigger that the number of executed test operations\r\n   */" });
+		addAnnotation(
+				getFallible_Rank(),
+				source,
+				new String[] { "documentation",
+						"/**\r\n   * counter of assertions in the test method\r\n   */" });
 		addAnnotation(
 				logEClass,
 				source,
 				new String[] {
 						"documentation",
-						"/**\n * Log is a log of failures and errors that happened to fallibles since start was called\n */" });
+						"/**\r\n * Log is a log of failures and errors that happened to fallibles since start was called\r\n */" });
 		addAnnotation(
 				logEClass.getEOperations().get(0),
 				source,
 				new String[] { "documentation",
-						"/**\n\t * Adds errors which occur during the SetUp phase\n\t */" });
+						"/**\r\n\t * Adds errors which occur during the SetUp phase\r\n\t */" });
 		addAnnotation(logEClass.getEOperations().get(1), source, new String[] {
 				"documentation",
-				"/**\n\t * Adds an error to the list of errors\n\t */" });
+				"/**\r\n\t * Adds an error to the list of errors\r\n\t */" });
 		addAnnotation(
 				logEClass.getEOperations().get(2),
 				source,
 				new String[] { "documentation",
-						"/**\n\t * Adds a failed test to the list of failed tests\n\t */" });
+						"/**\r\n\t * Adds a failed test to the list of failed tests\r\n\t */" });
 		addAnnotation(
 				logEClass.getEOperations().get(3),
 				source,
 				new String[] { "documentation",
-						"/**\n\t * Adds errors which occur during the TearDown phase\n\t */" });
+						"/**\r\n\t * Adds errors which occur during the TearDown phase\r\n\t */" });
 		addAnnotation(logEClass.getEOperations().get(4), source, new String[] {
 				"documentation",
-				"/**\n\t * Increments the runtests counter\n\t */" });
+				"/**\r\n\t * Increments the runtests counter\r\n\t */" });
 		addAnnotation(getLog_Failures(), source, new String[] {
 				"documentation",
-				"/** \n\t * list of detected assertion failures\n\t */" });
+				"/** \r\n\t * list of detected assertion failures\r\n\t */" });
 		addAnnotation(getLog_Errors(), source, new String[] { "documentation",
-				"/**\n\t * list of detected test errors\n\t */" });
+				"/**\r\n\t * list of detected test errors\r\n\t */" });
 		addAnnotation(getLog_Runtests(), source, new String[] {
 				"documentation",
-				"/**\n\t * number of test that were run\n\t */" });
+				"/**\r\n\t * number of test that were run\r\n\t */" });
 		addAnnotation(
 				getLog_HarnessErrors(),
 				source,
 				new String[] { "documentation",
-						"/**\n\t* list of detected errors with the test harness\n\t*/" });
+						"/**\r\n\t* list of detected errors with the test harness\r\n\t*/" });
 		addAnnotation(
 				failureEClass,
 				source,
-				new String[] { "documentation",
-						"/**\n * Failure represents an assertion failure stored in a failure log\n */" });
+				new String[] {
+						"documentation",
+						"/**\r\n * Failure represents an assertion failure stored in a failure log\r\n */" });
 		addAnnotation(
 				failureEClass.getEOperations().get(0),
 				source,
-				new String[] { "documentation",
-						"/**\n\t * overwrite the default method, in order to add the message\n\t */" });
+				new String[] {
+						"documentation",
+						"/**\r\n\t * overwrite the default method, in order to add the message\r\n\t */" });
 		addAnnotation(failureEClass.getEOperations().get(0), source,
 				new String[] { "superOperation",
 						"kermeta::language::structure::Object" });
 		addAnnotation(failureEClass.getEOperations().get(1), source,
 				new String[] { "documentation",
-						"/**\n\t * initialization of the failure\n\t */" });
+						"/**\r\n\t * initialization of the failure\r\n\t */" });
 		addAnnotation(
 				getFailure_Message(),
 				source,
 				new String[] { "documentation",
-						"/**\n\t * the stored message (given or generated one)\n\t */" });
+						"/**\r\n\t * the stored message (given or generated one)\r\n\t */" });
 		addAnnotation(getFailure_Failure(), source, new String[] {
-				"documentation", "/**\n\t * the stored failure\n\t */" });
+				"documentation", "/**\r\n\t * the stored failure\r\n\t */" });
 		addAnnotation(errorKindEEnum, source, new String[] { "documentation",
-				"/**\n * all kinds of error we can meet\n */" });
+				"/**\r\n * all kinds of error we can meet\r\n */" });
 		addAnnotation(
 				errorEClass,
 				source,
 				new String[] {
 						"documentation",
-						"/**\n * Error represents an occurrence of an exception in setUp, tearDown or a test\n * and is stored in a failure log\n */" });
+						"/**\r\n * Error represents an occurrence of an exception in setUp, tearDown or a test\r\n * and is stored in a failure log\r\n */" });
 		addAnnotation(
 				errorEClass.getEOperations().get(0),
 				source,
 				new String[] {
 						"documentation",
-						"/**\n\t * Changes the type of an error to makeTearDownError, the best way to use\n\t * this method is to call it after the init from line:\n\t * var e : Error init Error.new.initFrom(f, e).makeTearDown\n\t */" });
+						"/**\r\n\t * Changes the type of an error to makeTearDownError, the best way to use\r\n\t * this method is to call it after the init from line:\r\n\t * var e : Error init Error.new.initFrom(f, e).makeTearDown\r\n\t */" });
 		addAnnotation(
 				errorEClass.getEOperations().get(1),
 				source,
 				new String[] {
 						"documentation",
-						"/**\n\t * Changes the type of an error to SetUpError, the best way to use\n\t * this method is to call it after the init from line:\n\t * var e : Error init Error.new.initFrom(f, e).makeSetUp\n\t */" });
+						"/**\r\n\t * Changes the type of an error to SetUpError, the best way to use\r\n\t * this method is to call it after the init from line:\r\n\t * var e : Error init Error.new.initFrom(f, e).makeSetUp\r\n\t */" });
 		addAnnotation(
 				errorEClass.getEOperations().get(2),
 				source,
 				new String[] {
 						"documentation",
-						"/**\n\t * overwrite the default method, in order to add :\n\t *   - the type\n\t *   - the message\n\t *   - the stack trace\n\t */" });
+						"/**\r\n\t * overwrite the default method, in order to add :\r\n\t *   - the type\r\n\t *   - the message\r\n\t *   - the stack trace\r\n\t */" });
 		addAnnotation(errorEClass.getEOperations().get(2), source,
 				new String[] { "superOperation",
 						"kermeta::language::structure::Object" });
@@ -1549,56 +1559,62 @@ public class KunitPackageImpl extends EPackageImpl implements KunitPackage {
 				source,
 				new String[] {
 						"documentation",
-						"/**\n\t * Sets up a new error with failable object and the exception that occurred\n\t * by default it will be a test error. Use makeSetUp or makeTearDown to\n\t * change its type\n\t */" });
+						"/**\r\n\t * Sets up a new error with failable object and the exception that occurred\r\n\t * by default it will be a test error. Use makeSetUp or makeTearDown to\r\n\t * change its type\r\n\t */" });
 		addAnnotation(getError_Error(), source, new String[] { "documentation",
-				"/**\n\t * the stored error\n\t */" });
+				"/**\r\n\t * the stored error\r\n\t */" });
 		addAnnotation(
 				getError_Exception(),
 				source,
 				new String[] { "documentation",
-						"/**\n\t * the Kermeta exception corresponding to the error\n\t */" });
+						"/**\r\n\t * the Kermeta exception corresponding to the error\r\n\t */" });
 		addAnnotation(getError_Kind(), source, new String[] { "documentation",
-				"/**\n\t * the nature of the stored error\n\t */" });
+				"/**\r\n\t * the nature of the stored error\r\n\t */" });
 		addAnnotation(
 				testEClass,
 				source,
 				new String[] {
 						"documentation",
-						"/**\n * The abstact notion of a test which is runnable and which has a log\n * in which it can keep note of failures\n */" });
+						"/**\r\n * The abstact notion of a test which is runnable and which has a log\r\n * in which it can keep note of failures\r\n */" });
 		addAnnotation(
 				testEClass.getEOperations().get(0),
 				source,
-				new String[] { "documentation",
-						"/**\n\t * Initializes the log where failures and errors will be put\n\t */" });
+				new String[] {
+						"documentation",
+						"/**\r\n\t * Initializes the log where failures and errors will be put\r\n\t */" });
 		addAnnotation(testEClass.getEOperations().get(0), source, new String[] {
 				"EMF_renameAs", "setLogKermeta" });
 		addAnnotation(testEClass.getEOperations().get(1), source, new String[] {
 				"isAbstract", "true" });
-		addAnnotation(testEClass.getEOperations().get(1), source, new String[] {
-				"documentation",
-				"/**\n\t * Execute the test and verify its assertions\n\t */" });
+		addAnnotation(
+				testEClass.getEOperations().get(1),
+				source,
+				new String[] { "documentation",
+						"/**\r\n\t * Execute the test and verify its assertions\r\n\t */" });
 		addAnnotation(testEClass.getEOperations().get(2), source, new String[] {
 				"documentation",
-				"/**\n\t * called when run by the java testrunner\n\t */" });
-		addAnnotation(getTest_Log(), source, new String[] { "documentation",
-				"/**\n     * where failures and errors will be put \n     */" });
+				"/**\r\n\t * called when run by the java testrunner\r\n\t */" });
+		addAnnotation(
+				getTest_Log(),
+				source,
+				new String[] { "documentation",
+						"/**\r\n     * where failures and errors will be put \r\n     */" });
 		addAnnotation(
 				testSuiteEClass,
 				source,
 				new String[] {
 						"documentation",
-						"/**\n * A TestSuite is a structured collection of tests, using the\n * composite pattern, all tests are runnable and have a log\n * In addition a suite can be populated automatically from a\n * test case class with one test case object for each test\n * method in the class.\n *  You can make a suite and populate it manually like this:\n *\n *  var suite : TestSuite init TestSuite.new.\n *  suite.tests.add(t1)\n *\n *  Alternatively you can populate a suite automatically from\n *  a class that inherits TestCase and which has several methods\n *  called test:\n *\n *  var suite : TestSuite init TestSuite.new.addAllTestCasesFrom(InterestingTestCaseSet)\n */" });
+						"/**\r\n * A TestSuite is a structured collection of tests, using the\r\n * composite pattern, all tests are runnable and have a log\r\n * In addition a suite can be populated automatically from a\r\n * test case class with one test case object for each test\r\n * method in the class.\r\n *  You can make a suite and populate it manually like this:\r\n *\r\n *  var suite : TestSuite init TestSuite.new.\r\n *  suite.tests.add(t1)\r\n *\r\n *  Alternatively you can populate a suite automatically from\r\n *  a class that inherits TestCase and which has several methods\r\n *  called test:\r\n *\r\n *  var suite : TestSuite init TestSuite.new.addAllTestCasesFrom(InterestingTestCaseSet)\r\n */" });
 		addAnnotation(
 				testSuiteEClass.getEOperations().get(0),
 				source,
 				new String[] {
 						"documentation",
-						"/**\n\t  * Add to this suite, a set of test cases of type c, one for each\n\t  * test method in class c. C must be a descendent of TestCase\n\t  */" });
+						"/**\r\n\t  * Add to this suite, a set of test cases of type c, one for each\r\n\t  * test method in class c. C must be a descendent of TestCase\r\n\t  */" });
 		addAnnotation(
 				testSuiteEClass.getEOperations().get(1),
 				source,
 				new String[] { "documentation",
-						"/** \n\t * Run all the tests in the test suite\n\t */" });
+						"/** \r\n\t * Run all the tests in the test suite\r\n\t */" });
 		addAnnotation(testSuiteEClass.getEOperations().get(1), source,
 				new String[] { "superOperation", "kermeta::kunit::Test" });
 		addAnnotation(
@@ -1606,33 +1622,33 @@ public class KunitPackageImpl extends EPackageImpl implements KunitPackage {
 				source,
 				new String[] {
 						"documentation",
-						"/**\n\t  * to be written #####################################################\n\t  */" });
+						"/**\r\n\t  * to be written #####################################################\r\n\t  */" });
 		addAnnotation(
 				getTestSuite_Tests(),
 				source,
 				new String[] { "documentation",
-						"/**\n\t * The collection of tests which will be ran as the suite\n\t */" });
+						"/**\r\n\t * The collection of tests which will be ran as the suite\r\n\t */" });
 		addAnnotation(
 				testCaseEClass,
 				source,
 				new String[] {
 						"documentation",
-						"/**\n * A test case comprises one or more test methods plus\n * setUp and tearDown that build and destroy their test harness.\n * An instance of a subclass of TestCase should have its\n * testMethodName set to the name of one of its operations\n * which should be called whe the test is run. You can do this\n * yourself:\n *\n * var testCase : TestCase init MyTestCaseClass.new.setTestMethodName(\"testSomething\")\n *\n * Alternatively if your TestCase Class has many methods whose\n * name begins with \'test\' you can create a set of instaces already\n * set up with their testMethodName using the addAllTestCasesFrom\n * operation on TestSuite\n */" });
+						"/**\r\n * A test case comprises one or more test methods plus\r\n * setUp and tearDown that build and destroy their test harness.\r\n * An instance of a subclass of TestCase should have its\r\n * testMethodName set to the name of one of its operations\r\n * which should be called whe the test is run. You can do this\r\n * yourself:\r\n *\r\n * var testCase : TestCase init MyTestCaseClass.new.setTestMethodName(\"testSomething\")\r\n *\r\n * Alternatively if your TestCase Class has many methods whose\r\n * name begins with \'test\' you can create a set of instaces already\r\n * set up with their testMethodName using the addAllTestCasesFrom\r\n * operation on TestSuite\r\n */" });
 		addAnnotation(
 				testCaseEClass.getEOperations().get(0),
 				source,
 				new String[] {
 						"documentation",
-						"/**\n\t * the things to be done before execution of the test method\n\t * (designed to be overwritten in real TestCase classes) \n\t */" });
+						"/**\r\n\t * operation used when the TestCase is run from a java test runner, encapsulates the failures results\r\n\t * into an AssertionFailedError so the TestRunner can detect it\r\n\t */" });
 		addAnnotation(
 				testCaseEClass.getEOperations().get(1),
 				source,
 				new String[] {
 						"documentation",
-						"/**\n\t * operation used when the TestCase is run from a java test runner, encapsulates the failures results\n\t * into an AssertionFailedError so the TestRunner can detect it\n\t */" });
+						"/**\r\n\t * the things to be done before execution of the test method\r\n\t * (designed to be overwritten in real TestCase classes) \r\n\t */" });
 		addAnnotation(testCaseEClass.getEOperations().get(2), source,
 				new String[] { "documentation",
-						"/**\n\t * accessor on the log\n\t */" });
+						"/**\r\n\t * accessor on the log\r\n\t */" });
 		addAnnotation(testCaseEClass.getEOperations().get(2), source,
 				new String[] { "EMF_renameAs", "getLogEMF_renameAs" });
 		addAnnotation(testCaseEClass.getEOperations().get(2), source,
@@ -1642,15 +1658,16 @@ public class KunitPackageImpl extends EPackageImpl implements KunitPackage {
 				source,
 				new String[] {
 						"documentation",
-						"/**\n\t * Sets the name of the method from the concrete subclass of\n\t *  TestCase that should be executed when this TestCase instance\n\t * is run as a test.\n\t * Throws invalidTestCaseNameException if the given string is not\n\t * the name of a method in the test case\n\t */" });
+						"/**\r\n\t * Sets the name of the method from the concrete subclass of\r\n\t *  TestCase that should be executed when this TestCase instance\r\n\t * is run as a test.\r\n\t * Throws invalidTestCaseNameException if the given string is not\r\n\t * the name of a method in the test case\r\n\t */" });
 		addAnnotation(testCaseEClass.getEOperations().get(4), source,
 				new String[] { "documentation",
-						"/**\n\t * accessor on the method name\n\t */" });
+						"/**\r\n\t * accessor on the method name\r\n\t */" });
 		addAnnotation(
 				testCaseEClass.getEOperations().get(5),
 				source,
-				new String[] { "documentation",
-						"/**\n\t * overwrites the default method for more informative output\n\t */" });
+				new String[] {
+						"documentation",
+						"/**\r\n\t * overwrites the default method for more informative output\r\n\t */" });
 		addAnnotation(testCaseEClass.getEOperations().get(5), source,
 				new String[] { "superOperation",
 						"kermeta::language::structure::Object" });
@@ -1659,7 +1676,7 @@ public class KunitPackageImpl extends EPackageImpl implements KunitPackage {
 				source,
 				new String[] {
 						"documentation",
-						"/**\n\t * Execute the whole test case : SetUp, test method, TearDown\n\t * The assertions of the test method are computed\n\t */" });
+						"/**\r\n\t * Execute the whole test case : SetUp, test method, TearDown\r\n\t * The assertions of the test method are computed\r\n\t */" });
 		addAnnotation(testCaseEClass.getEOperations().get(6), source,
 				new String[] { "superOperation", "kermeta::kunit::Test" });
 		addAnnotation(
@@ -1667,40 +1684,42 @@ public class KunitPackageImpl extends EPackageImpl implements KunitPackage {
 				source,
 				new String[] {
 						"documentation",
-						"/**\n\t * the things to be done after execution of the test method\n\t * (designed to be overwritten in real TestCase classes) \n\t */" });
+						"/**\r\n\t * the things to be done after execution of the test method\r\n\t * (designed to be overwritten in real TestCase classes) \r\n\t */" });
 		addAnnotation(
 				getTestCase___testMethodName(),
 				source,
 				new String[] {
 						"documentation",
-						"/**\n\t * the name of the method which corresponds to the test case in the test class\n\t */" });
+						"/**\r\n\t * the name of the method which corresponds to the test case in the test class\r\n\t */" });
 		addAnnotation(
 				testRunnerEClass,
 				source,
 				new String[] {
 						"documentation",
-						"/**\n * Create and use a test runner to run one or more tests and print the failure log. E.g.:\n * do\n *\t     var suite : TestSuite init TestSuite.new.addAllTestCasesFrom(InterestingTestCaseSet)\n *\t     var runner : TestRunner init TestRunner.new\n *\t     runner.run(suite)\n *\t     runner.printLogs\n * end\n *\n * Where InterestingTestCaseSet is a subclass of TestCase and contains several test... methods\n */" });
+						"/**\r\n * Create and use a test runner to run one or more tests and print the failure log. E.g.:\r\n * do\r\n *\t     var suite : TestSuite init TestSuite.new.addAllTestCasesFrom(InterestingTestCaseSet)\r\n *\t     var runner : TestRunner init TestRunner.new\r\n *\t     runner.run(suite)\r\n *\t     runner.printLogs\r\n * end\r\n *\r\n * Where InterestingTestCaseSet is a subclass of TestCase and contains several test... methods\r\n */" });
 		addAnnotation(
 				testRunnerEClass.getEOperations().get(0),
 				source,
 				new String[] {
 						"documentation",
-						"/**\n\t * Use this to run a test case or a test suite.\n\t * If you want to run all the test.... methods in a TestCase class,\n\t *  you can populate a suite with TestSuite.addAllTestCasesFrom\n\t */" });
+						"/**\r\n\t * Use this to run a test case or a test suite.\r\n\t * If you want to run all the test.... methods in a TestCase class,\r\n\t *  you can populate a suite with TestSuite.addAllTestCasesFrom\r\n\t */" });
 		addAnnotation(
 				testRunnerEClass.getEOperations().get(1),
 				source,
 				new String[] {
 						"documentation",
-						"/**\n\t * Prints the log or errors and failures from a test run.\n\t * Run some tests first.\n\t */" });
+						"/**\r\n\t * Prints the log or errors and failures from a test run.\r\n\t * Run some tests first.\r\n\t */" });
 		addAnnotation(
 				testRunnerEClass.getEOperations().get(2),
 				source,
 				new String[] {
 						"documentation",
-						"/**\n\t  * For backwards compatibility with old kunit, this takes a test case class\n\t  * and creates the necessary suite, and runs it. DEPRECATED\n\t  */" });
-		addAnnotation(getTestRunner_Log(), source, new String[] {
-				"documentation",
-				"/**\n\t * Where to register the failures and errors\n\t */" });
+						"/**\r\n\t  * For backwards compatibility with old kunit, this takes a test case class\r\n\t  * and creates the necessary suite, and runs it. DEPRECATED\r\n\t  */" });
+		addAnnotation(
+				getTestRunner_Log(),
+				source,
+				new String[] { "documentation",
+						"/**\r\n\t * Where to register the failures and errors\r\n\t */" });
 	}
 
 	/**

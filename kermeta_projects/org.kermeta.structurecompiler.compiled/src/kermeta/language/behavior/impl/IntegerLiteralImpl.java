@@ -1,8 +1,10 @@
 /**
- * <copyright>
- * </copyright>
+ * License: EPL
+ * Copyright: IRISA / INRIA / Universite de Rennes 1
+ * 
+ * Generating with Kermeta <http://www.kermeta.org>
  *
- * $Id: IntegerLiteralImpl.java,v 1.10 2009-01-21 09:15:57 cfaucher Exp $
+ * $Id: IntegerLiteralImpl.java,v 1.11 2009-02-10 17:51:51 cfaucher Exp $
  */
 package kermeta.language.behavior.impl;
 
@@ -106,8 +108,22 @@ public class IntegerLiteralImpl extends LiteralImpl implements IntegerLiteral {
 		result = kermeta.standard.helper.IntegerWrapper.toString(this
 				.getValue());
 
-		result = kermeta.standard.helper.StringWrapper.plus(result, this
-				.endOfExpressionFixer());
+		java.lang.Boolean idIfCond_343 = false;
+		idIfCond_343 = kermeta.standard.helper.BooleanWrapper
+				.not(org.kermeta.compil.runtime.helper.language.ObjectUtil
+						.isInstanceOfSwitcher(
+								org.kermeta.compil.runtime.helper.language.ObjectUtil
+										.containerSwitcher(this),
+								org.kermeta.compil.runtime.ExecutionContext
+										.getInstance()
+										.getMetaClass(
+												"kermeta.language.behavior.VariableDecl")));
+
+		if (idIfCond_343) {
+
+			result = kermeta.standard.helper.StringWrapper.plus(result, this
+					.endOfExpressionFixer());
+		}
 
 		return result;
 

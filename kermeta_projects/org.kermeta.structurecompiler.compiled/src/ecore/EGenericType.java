@@ -1,8 +1,10 @@
 /**
- * <copyright>
- * </copyright>
+ * License: EPL
+ * Copyright: IRISA / INRIA / Universite de Rennes 1
+ * 
+ * Generating with Kermeta <http://www.kermeta.org>
  *
- * $Id: EGenericType.java,v 1.11 2009-01-21 09:16:02 cfaucher Exp $
+ * $Id: EGenericType.java,v 1.12 2009-02-10 17:51:55 cfaucher Exp $
  */
 package ecore;
 
@@ -16,8 +18,8 @@ import org.eclipse.emf.common.util.EList;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link ecore.EGenericType#getETypeArguments <em>EType Arguments</em>}</li>
  *   <li>{@link ecore.EGenericType#getEUpperBound <em>EUpper Bound</em>}</li>
+ *   <li>{@link ecore.EGenericType#getETypeArguments <em>EType Arguments</em>}</li>
  *   <li>{@link ecore.EGenericType#getEClassifier <em>EClassifier</em>}</li>
  *   <li>{@link ecore.EGenericType#getETypeParameter <em>EType Parameter</em>}</li>
  *   <li>{@link ecore.EGenericType#getELowerBound <em>ELower Bound</em>}</li>
@@ -29,22 +31,6 @@ import org.eclipse.emf.common.util.EList;
  * @generated
  */
 public interface EGenericType extends EObject {
-	/**
-	 * Returns the value of the '<em><b>EType Arguments</b></em>' containment reference list.
-	 * The list contents are of type {@link ecore.EGenericType}.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>EType Arguments</em>' containment reference list isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>EType Arguments</em>' containment reference list.
-	 * @see ecore.EcorePackage#getEGenericType_ETypeArguments()
-	 * @model containment="true" resolveProxies="true"
-	 * @generated
-	 */
-	EList<EGenericType> getETypeArguments();
-
 	/**
 	 * Returns the value of the '<em><b>EUpper Bound</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
@@ -70,6 +56,22 @@ public interface EGenericType extends EObject {
 	 * @generated
 	 */
 	void setEUpperBound(EGenericType value);
+
+	/**
+	 * Returns the value of the '<em><b>EType Arguments</b></em>' containment reference list.
+	 * The list contents are of type {@link ecore.EGenericType}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>EType Arguments</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>EType Arguments</em>' containment reference list.
+	 * @see ecore.EcorePackage#getEGenericType_ETypeArguments()
+	 * @model containment="true" resolveProxies="true"
+	 * @generated
+	 */
+	EList<EGenericType> getETypeArguments();
 
 	/**
 	 * Returns the value of the '<em><b>EClassifier</b></em>' reference.

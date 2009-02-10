@@ -1,8 +1,10 @@
 /**
- * <copyright>
- * </copyright>
+ * License: EPL
+ * Copyright: IRISA / INRIA / Universite de Rennes 1
+ * 
+ * Generating with Kermeta <http://www.kermeta.org>
  *
- * $Id: ModelAnalizerImpl.java,v 1.10 2009-01-21 09:16:06 cfaucher Exp $
+ * $Id: ModelAnalizerImpl.java,v 1.11 2009-02-10 17:51:59 cfaucher Exp $
  */
 package km2ecore.helper.ecore.impl;
 
@@ -71,8 +73,8 @@ public class ModelAnalizerImpl extends ObjectImpl implements ModelAnalizer {
 
 		result = false;
 
-		java.lang.Boolean idIfCond_1097 = false;
-		idIfCond_1097 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+		java.lang.Boolean idIfCond_53 = false;
+		idIfCond_53 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 				.equalsSwitcher(
 						super_class,
 						org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
@@ -80,7 +82,7 @@ public class ModelAnalizerImpl extends ObjectImpl implements ModelAnalizer {
 										extended_class.getEGenericSuperTypes())
 								.first().getEClassifier());
 
-		if (idIfCond_1097) {
+		if (idIfCond_53) {
 
 			result = true;
 		}

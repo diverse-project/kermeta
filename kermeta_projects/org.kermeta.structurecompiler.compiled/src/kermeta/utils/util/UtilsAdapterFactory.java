@@ -1,8 +1,10 @@
 /**
- * <copyright>
- * </copyright>
+ * License: EPL
+ * Copyright: IRISA / INRIA / Universite de Rennes 1
+ * 
+ * Generating with Kermeta <http://www.kermeta.org>
  *
- * $Id: UtilsAdapterFactory.java,v 1.10 2009-01-21 09:15:58 cfaucher Exp $
+ * $Id: UtilsAdapterFactory.java,v 1.11 2009-02-10 17:51:52 cfaucher Exp $
  */
 package kermeta.utils.util;
 
@@ -83,13 +85,13 @@ public class UtilsAdapterFactory extends AdapterFactoryImpl {
 		}
 
 		@Override
-		public Adapter caseStringBuffer(kermeta.utils.StringBuffer object) {
-			return createStringBufferAdapter();
+		public <G> Adapter caseStack(Stack<G> object) {
+			return createStackAdapter();
 		}
 
 		@Override
-		public <G> Adapter caseStack(Stack<G> object) {
-			return createStackAdapter();
+		public Adapter caseStringBuffer(kermeta.utils.StringBuffer object) {
+			return createStringBufferAdapter();
 		}
 
 		@Override
@@ -151,20 +153,6 @@ public class UtilsAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link kermeta.utils.StringBuffer <em>String Buffer</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see kermeta.utils.StringBuffer
-	 * @generated
-	 */
-	public Adapter createStringBufferAdapter() {
-		return null;
-	}
-
-	/**
 	 * Creates a new adapter for an object of class '{@link kermeta.utils.Stack <em>Stack</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -175,6 +163,20 @@ public class UtilsAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createStackAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link kermeta.utils.StringBuffer <em>String Buffer</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see kermeta.utils.StringBuffer
+	 * @generated
+	 */
+	public Adapter createStringBufferAdapter() {
 		return null;
 	}
 

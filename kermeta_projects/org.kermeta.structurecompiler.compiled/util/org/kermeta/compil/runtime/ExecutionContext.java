@@ -80,32 +80,40 @@ public class ExecutionContext {
 		value_types.put("java.lang.Character", "kermeta.standard.Character");
 		value_types.put("java.lang.Double", "kermeta.standard.Real");
 	}
-	
+
 	private static URI getWorkspaceLocationAccordingToClassLocation() {
-		String local_path = ExecutionContext.class.getProtectionDomain().getCodeSource().getLocation().toExternalForm();
+		String local_path = ExecutionContext.class.getProtectionDomain()
+				.getCodeSource().getLocation().toExternalForm();
 		local_path = local_path.replace("/bin/", "");
 		int index = local_path.lastIndexOf("/");
-		
-		local_path = local_path.substring(0, index+1);
+
+		local_path = local_path.substring(0, index + 1);
 		return URI.createURI(local_path);
 	}
-	
+
 	private static URI getProjectLocationAccordingToClassLocation() {
-		String local_path = ExecutionContext.class.getProtectionDomain().getCodeSource().getLocation().toExternalForm();
+		String local_path = ExecutionContext.class.getProtectionDomain()
+				.getCodeSource().getLocation().toExternalForm();
 		local_path = local_path.replace("bin/", "");
 		return URI.createURI(local_path);
 	}
-	
-	public static final URI URI_PLATFORM_RESOURCE = URI.createURI("platform:/resource/");
-	public static final URI URI_PLATFORM_PLUGIN = URI.createURI("platform:/plugin/");
-	
+
+	public static final URI URI_PLATFORM_RESOURCE = URI
+			.createURI("platform:/resource/");
+	public static final URI URI_PLATFORM_PLUGIN = URI
+			.createURI("platform:/plugin/");
+
 	public static void setDefaultUriMap() {
 		//if the uri map is not setted then the *.class location is setted as URI_PLATFORM_RESOURCE and URI_PLATFORM_PLUGIN
-		if( !ExtensibleURIConverterImpl.URI_MAP.containsKey(URI_PLATFORM_RESOURCE) ) {
-			ExtensibleURIConverterImpl.URI_MAP.put(URI_PLATFORM_RESOURCE, getWorkspaceLocationAccordingToClassLocation());
+		if (!ExtensibleURIConverterImpl.URI_MAP
+				.containsKey(URI_PLATFORM_RESOURCE)) {
+			ExtensibleURIConverterImpl.URI_MAP.put(URI_PLATFORM_RESOURCE,
+					getWorkspaceLocationAccordingToClassLocation());
 		}
-		if( !ExtensibleURIConverterImpl.URI_MAP.containsKey(URI_PLATFORM_PLUGIN) ) {
-			ExtensibleURIConverterImpl.URI_MAP.put(URI_PLATFORM_PLUGIN, getWorkspaceLocationAccordingToClassLocation());
+		if (!ExtensibleURIConverterImpl.URI_MAP
+				.containsKey(URI_PLATFORM_PLUGIN)) {
+			ExtensibleURIConverterImpl.URI_MAP.put(URI_PLATFORM_PLUGIN,
+					getWorkspaceLocationAccordingToClassLocation());
 		}
 	}
 
@@ -114,18 +122,20 @@ public class ExecutionContext {
 	 */
 	public void lazyInitialize() {
 		if (_modelKM == null) {
-			
+
 			// the uri map is not setted in deployed mode
-			if( !Platform.isRunning() ) {
+			if (!Platform.isRunning()) {
 				ExecutionContext.setDefaultUriMap();
 			}
-			
+
 			System.out
 					.println("Beginning of the initialization of the reflection...");
 			Repository repository = PersistenceFactory.eINSTANCE
 					.createEMFRepository();
 
-			String local_path = ExecutionContext.getProjectLocationAccordingToClassLocation() + _modelKMURI;
+			String local_path = ExecutionContext
+					.getProjectLocationAccordingToClassLocation()
+					+ _modelKMURI;
 
 			Resource resource = repository.createResource(local_path,
 					"http://www.kermeta.org/kermeta/1_2_0//kermeta");
@@ -240,17 +250,17 @@ public class ExecutionContext {
 		}
 		return null;
 	}
-	
+
 	private static List<String> java_keywords = null;
-	
+
 	public static List<String> getJavaKeywords() {
-		
-		if( java_keywords!=null ) {
+
+		if (java_keywords != null) {
 			return java_keywords;
 		}
-		
+
 		java_keywords = new ArrayList<String>();
-		
+
 		java_keywords.add("abstract");
 		java_keywords.add("continue");
 		java_keywords.add("for");
@@ -301,15 +311,15 @@ public class ExecutionContext {
 		java_keywords.add("native");
 		java_keywords.add("super");
 		java_keywords.add("while");
-		
+
 		// To see
 		java_keywords.add("true");
 		java_keywords.add("false");
 		java_keywords.add("null");
-		
+
 		// Specific to Kermeta
 		java_keywords.add("result");
-		
+
 		return java_keywords;
 	}
 

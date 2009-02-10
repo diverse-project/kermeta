@@ -1,8 +1,10 @@
 /**
- * <copyright>
- * </copyright>
+ * License: EPL
+ * Copyright: IRISA / INRIA / Universite de Rennes 1
+ * 
+ * Generating with Kermeta <http://www.kermeta.org>
  *
- * $Id: UtilsPackage.java,v 1.10 2009-01-21 09:16:05 cfaucher Exp $
+ * $Id: UtilsPackage.java,v 1.11 2009-02-10 17:51:57 cfaucher Exp $
  */
 package kermeta.utils;
 
@@ -29,8 +31,8 @@ import org.eclipse.emf.ecore.EPackage;
  * @see kermeta.utils.UtilsFactory
  * @model kind="package"
  *        annotation="kermeta ecoreUri='http://www.kermeta.org/kermeta/1_2_0//kermeta/utils'"
- *        annotation="kermeta documentation='/** \n * Contains special classes (Hashtable, Stack) that are not contained in Kermeta\n * metamodel\n * \n * <img src=\"./figures/utils_package.png\"/>\n \052/'"
- *        annotation="kermeta documentation='/** \n * Contains special classes (Hashtable, Stack) that are not contained in Kermeta\n * metamodel\n \052/'"
+ *        annotation="kermeta documentation='/** \r\n * Contains special classes (Hashtable, Stack) that are not contained in Kermeta\r\n * metamodel\r\n * \r\n * <img src=\"./figures/utils_package.png\"/>\r\n \052/'"
+ *        annotation="kermeta documentation='/** \r\n * Contains special classes (Hashtable, Stack) that are not contained in Kermeta\r\n * metamodel\r\n \052/'"
  * @generated
  */
 public interface UtilsPackage extends EPackage {
@@ -158,97 +160,6 @@ public interface UtilsPackage extends EPackage {
 	int HASHTABLE_FEATURE_COUNT = StructurePackage.OBJECT_FEATURE_COUNT + 1;
 
 	/**
-	 * The meta object id for the '{@link kermeta.utils.impl.StringBufferImpl <em>String Buffer</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see kermeta.utils.impl.StringBufferImpl
-	 * @see kermeta.utils.impl.UtilsPackageImpl#getStringBuffer()
-	 * @generated
-	 */
-	int STRING_BUFFER = 1;
-
-	/**
-	 * The feature id for the '<em><b>Tag</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int STRING_BUFFER__TAG = StructurePackage.OBJECT__TAG;
-
-	/**
-	 * The feature id for the '<em><b>File</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int STRING_BUFFER__FILE = StructurePackage.OBJECT__FILE;
-
-	/**
-	 * The feature id for the '<em><b>File Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int STRING_BUFFER__FILE_NAME = StructurePackage.OBJECT__FILE_NAME;
-
-	/**
-	 * The feature id for the '<em><b>Line Number</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int STRING_BUFFER__LINE_NUMBER = StructurePackage.OBJECT__LINE_NUMBER;
-
-	/**
-	 * The feature id for the '<em><b>Owned Tags</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int STRING_BUFFER__OWNED_TAGS = StructurePackage.OBJECT__OWNED_TAGS;
-
-	/**
-	 * The feature id for the '<em><b>Oid</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int STRING_BUFFER__OID = StructurePackage.OBJECT__OID;
-
-	/**
-	 * The feature id for the '<em><b>Internal Containing Resource</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int STRING_BUFFER__INTERNAL_CONTAINING_RESOURCE = StructurePackage.OBJECT__INTERNAL_CONTAINING_RESOURCE;
-
-	/**
-	 * The feature id for the '<em><b>Content</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int STRING_BUFFER__CONTENT = StructurePackage.OBJECT_FEATURE_COUNT + 0;
-
-	/**
-	 * The number of structural features of the '<em>String Buffer</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int STRING_BUFFER_FEATURE_COUNT = StructurePackage.OBJECT_FEATURE_COUNT + 1;
-
-	/**
 	 * The meta object id for the '{@link kermeta.utils.impl.StackImpl <em>Stack</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -256,7 +167,7 @@ public interface UtilsPackage extends EPackage {
 	 * @see kermeta.utils.impl.UtilsPackageImpl#getStack()
 	 * @generated
 	 */
-	int STACK = 2;
+	int STACK = 1;
 
 	/**
 	 * The feature id for the '<em><b>Tag</b></em>' reference list.
@@ -340,6 +251,97 @@ public interface UtilsPackage extends EPackage {
 	int STACK_FEATURE_COUNT = StandardPackage.SEQUENCE_FEATURE_COUNT + 0;
 
 	/**
+	 * The meta object id for the '{@link kermeta.utils.impl.StringBufferImpl <em>String Buffer</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see kermeta.utils.impl.StringBufferImpl
+	 * @see kermeta.utils.impl.UtilsPackageImpl#getStringBuffer()
+	 * @generated
+	 */
+	int STRING_BUFFER = 2;
+
+	/**
+	 * The feature id for the '<em><b>Tag</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STRING_BUFFER__TAG = StructurePackage.OBJECT__TAG;
+
+	/**
+	 * The feature id for the '<em><b>File</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STRING_BUFFER__FILE = StructurePackage.OBJECT__FILE;
+
+	/**
+	 * The feature id for the '<em><b>File Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STRING_BUFFER__FILE_NAME = StructurePackage.OBJECT__FILE_NAME;
+
+	/**
+	 * The feature id for the '<em><b>Line Number</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STRING_BUFFER__LINE_NUMBER = StructurePackage.OBJECT__LINE_NUMBER;
+
+	/**
+	 * The feature id for the '<em><b>Owned Tags</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STRING_BUFFER__OWNED_TAGS = StructurePackage.OBJECT__OWNED_TAGS;
+
+	/**
+	 * The feature id for the '<em><b>Oid</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STRING_BUFFER__OID = StructurePackage.OBJECT__OID;
+
+	/**
+	 * The feature id for the '<em><b>Internal Containing Resource</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STRING_BUFFER__INTERNAL_CONTAINING_RESOURCE = StructurePackage.OBJECT__INTERNAL_CONTAINING_RESOURCE;
+
+	/**
+	 * The feature id for the '<em><b>Content</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STRING_BUFFER__CONTENT = StructurePackage.OBJECT_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>String Buffer</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STRING_BUFFER_FEATURE_COUNT = StructurePackage.OBJECT_FEATURE_COUNT + 1;
+
+	/**
 	 * The meta object id for the '<em>Kermeta Property Hashtable wrapped Hashtable</em>' data type.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -381,6 +383,16 @@ public interface UtilsPackage extends EPackage {
 	EAttribute getHashtable_WrappedHashtable();
 
 	/**
+	 * Returns the meta object for class '{@link kermeta.utils.Stack <em>Stack</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Stack</em>'.
+	 * @see kermeta.utils.Stack
+	 * @generated
+	 */
+	EClass getStack();
+
+	/**
 	 * Returns the meta object for class '{@link kermeta.utils.StringBuffer <em>String Buffer</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -400,16 +412,6 @@ public interface UtilsPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getStringBuffer_Content();
-
-	/**
-	 * Returns the meta object for class '{@link kermeta.utils.Stack <em>Stack</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Stack</em>'.
-	 * @see kermeta.utils.Stack
-	 * @generated
-	 */
-	EClass getStack();
 
 	/**
 	 * Returns the meta object for data type '{@link java.util.Hashtable <em>Kermeta Property Hashtable wrapped Hashtable</em>}'.
@@ -475,6 +477,16 @@ public interface UtilsPackage extends EPackage {
 				.getHashtable_WrappedHashtable();
 
 		/**
+		 * The meta object literal for the '{@link kermeta.utils.impl.StackImpl <em>Stack</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see kermeta.utils.impl.StackImpl
+		 * @see kermeta.utils.impl.UtilsPackageImpl#getStack()
+		 * @generated
+		 */
+		EClass STACK = eINSTANCE.getStack();
+
+		/**
 		 * The meta object literal for the '{@link kermeta.utils.impl.StringBufferImpl <em>String Buffer</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -491,16 +503,6 @@ public interface UtilsPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute STRING_BUFFER__CONTENT = eINSTANCE.getStringBuffer_Content();
-
-		/**
-		 * The meta object literal for the '{@link kermeta.utils.impl.StackImpl <em>Stack</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see kermeta.utils.impl.StackImpl
-		 * @see kermeta.utils.impl.UtilsPackageImpl#getStack()
-		 * @generated
-		 */
-		EClass STACK = eINSTANCE.getStack();
 
 		/**
 		 * The meta object literal for the '<em>Kermeta Property Hashtable wrapped Hashtable</em>' data type.

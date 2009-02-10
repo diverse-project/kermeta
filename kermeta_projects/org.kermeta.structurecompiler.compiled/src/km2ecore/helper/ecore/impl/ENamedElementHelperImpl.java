@@ -1,8 +1,10 @@
 /**
- * <copyright>
- * </copyright>
+ * License: EPL
+ * Copyright: IRISA / INRIA / Universite de Rennes 1
+ * 
+ * Generating with Kermeta <http://www.kermeta.org>
  *
- * $Id: ENamedElementHelperImpl.java,v 1.10 2009-01-21 09:16:06 cfaucher Exp $
+ * $Id: ENamedElementHelperImpl.java,v 1.11 2009-02-10 17:51:59 cfaucher Exp $
  */
 package km2ecore.helper.ecore.impl;
 
@@ -56,8 +58,8 @@ public class ENamedElementHelperImpl extends ObjectImpl implements
 
 		result = null;
 
-		java.lang.Boolean idIfCond_1104 = false;
-		idIfCond_1104 = kermeta.standard.helper.BooleanWrapper
+		java.lang.Boolean idIfCond_35 = false;
+		idIfCond_35 = kermeta.standard.helper.BooleanWrapper
 				.and(
 						kermeta.standard.helper.BooleanWrapper
 								.not(org.kermeta.compil.runtime.helper.language.ObjectUtil
@@ -69,7 +71,7 @@ public class ENamedElementHelperImpl extends ObjectImpl implements
 												.getInstance().getMetaClass(
 														"ecore.ENamedElement")));
 
-		if (idIfCond_1104) {
+		if (idIfCond_35) {
 
 			result = ((ecore.ENamedElement) org.kermeta.compil.runtime.helper.language.ObjectUtil
 					.asTypeSwitcher(element,

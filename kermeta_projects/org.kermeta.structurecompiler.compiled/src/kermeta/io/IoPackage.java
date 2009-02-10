@@ -1,8 +1,10 @@
 /**
- * <copyright>
- * </copyright>
+ * License: EPL
+ * Copyright: IRISA / INRIA / Universite de Rennes 1
+ * 
+ * Generating with Kermeta <http://www.kermeta.org>
  *
- * $Id: IoPackage.java,v 1.10 2009-01-21 09:16:07 cfaucher Exp $
+ * $Id: IoPackage.java,v 1.11 2009-02-10 17:52:00 cfaucher Exp $
  */
 package kermeta.io;
 
@@ -25,8 +27,8 @@ import org.eclipse.emf.ecore.EPackage;
  * @see kermeta.io.IoFactory
  * @model kind="package"
  *        annotation="kermeta ecoreUri='http://www.kermeta.org/kermeta/1_2_0//kermeta/io'"
- *        annotation="kermeta documentation='/**\n * Contains standard input/output related classes. \n \052/'"
- *        annotation="kermeta documentation='/**\n * Contains file input/output related classes. \n * <img src=\"platform:/plugin/fr.irisa.triskell.kermeta.documentation/src/figures/io_package.png\"/>\n \052/'"
+ *        annotation="kermeta documentation='/**\r\n * Contains standard input/output related classes. \r\n \052/'"
+ *        annotation="kermeta documentation='/**\r\n * Contains file input/output related classes. \r\n * <img src=\"platform:/plugin/fr.irisa.triskell.kermeta.documentation/src/figures/io_package.png\"/>\r\n \052/'"
  * @generated
  */
 public interface IoPackage extends EPackage {

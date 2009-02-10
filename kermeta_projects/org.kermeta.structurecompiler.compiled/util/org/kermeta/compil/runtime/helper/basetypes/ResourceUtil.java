@@ -36,9 +36,4 @@ public class ResourceUtil {
 		return null;
 	}
 	
-	public static void addUMLRuntimeUnitFactory() {
-		//Do nothing
-		//In compiled mode the behavior, the loader is "better" thanks to the cloner
-	}
-	
 }

@@ -1,8 +1,10 @@
 /**
- * <copyright>
- * </copyright>
+ * License: EPL
+ * Copyright: IRISA / INRIA / Universite de Rennes 1
+ * 
+ * Generating with Kermeta <http://www.kermeta.org>
  *
- * $Id: KunitPackage.java,v 1.10 2009-01-21 09:16:00 cfaucher Exp $
+ * $Id: KunitPackage.java,v 1.11 2009-02-10 17:51:54 cfaucher Exp $
  */
 package kermeta.kunit;
 
@@ -30,8 +32,8 @@ import org.eclipse.emf.ecore.EReference;
  * @see kermeta.kunit.KunitFactory
  * @model kind="package"
  *        annotation="kermeta ecoreUri='http://www.kermeta.org/kermeta/1_2_0//kermeta/kunit'"
- *        annotation="kermeta documentation='/**\n * main features of the famous Unit test tool for Kermeta language\n * <img src=\"platform:/plugin/fr.irisa.triskell.kermeta.documentation/src/figures/kunit_package.png\"/>\n \052/'"
- *        annotation="kermeta documentation='/**\n * Contains the implementation of a unit test tool. This is a clone of\n * JUnit architecture.\n * Reference : http://junit.sourceforge.net/doc/cookstour/cookstour.htm\n *\n * Usage example of kunit can be found in fr.irisa.triskell.kermeta.samples project.\n *\n * <img src=\"platform:/plugin/fr.irisa.triskell.kermeta.documentation/src/figures/kunit_package.png\"/>\n \052/'"
+ *        annotation="kermeta documentation='/**\r\n * main features of the famous Unit test tool for Kermeta language\r\n * <img src=\"platform:/plugin/fr.irisa.triskell.kermeta.documentation/src/figures/kunit_package.png\"/>\r\n \052/'"
+ *        annotation="kermeta documentation='/**\r\n * Contains the implementation of a unit test tool. This is a clone of\r\n * JUnit architecture.\r\n * Reference : http://junit.sourceforge.net/doc/cookstour/cookstour.htm\r\n *\r\n * Usage example of kunit can be found in fr.irisa.triskell.kermeta.samples project.\r\n *\r\n * <img src=\"platform:/plugin/fr.irisa.triskell.kermeta.documentation/src/figures/kunit_package.png\"/>\r\n \052/'"
  * @generated
  */
 public interface KunitPackage extends EPackage {

@@ -1,8 +1,10 @@
 /**
- * <copyright>
- * </copyright>
+ * License: EPL
+ * Copyright: IRISA / INRIA / Universite de Rennes 1
+ * 
+ * Generating with Kermeta <http://www.kermeta.org>
  *
- * $Id: StringLiteral.java,v 1.10 2009-01-21 09:15:49 cfaucher Exp $
+ * $Id: StringLiteral.java,v 1.11 2009-02-10 17:51:43 cfaucher Exp $
  */
 package kermeta.language.behavior;
 
@@ -58,7 +60,7 @@ public interface StringLiteral extends Literal {
 	 * <!-- end-user-doc -->
 	 * @model dataType="kermeta.standard.JavaString"
 	 *        annotation="kermeta superOperation='kermeta::language::behavior::Literal'"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='\njava.lang.String result = null;\n\n\tsuper.createBehaviorJava(context);\n\n\tresult = this.getValue();\n\n\tjava.lang.Boolean idIfCond_647 = false;\n\tidIfCond_647 = kermeta.standard.helper.StringWrapper.equals(result, \".\");\n\n\tif( idIfCond_647 ) {\n\n\tresult = \"\\\".\\\"\";\n}\n else {\n\n\tresult = kermeta.standard.helper.StringWrapper.replace(result, \"\\\\\", \"\\\\\\\\\");\n\n\tresult = kermeta.standard.helper.StringWrapper.plus(kermeta.standard.helper.StringWrapper.plus(\"\\\"\", kermeta.standard.helper.StringWrapper.replace(result, \"\\\"\", \"\\\\\\\"\")), \"\\\"\");\n\n\tresult = kermeta.standard.helper.StringWrapper.replace(result, \"\\n\", \"\\\\n\");\n\n\tresult = kermeta.standard.helper.StringWrapper.replace(result, \"\\t\", \"\\\\t\");\n\n\tresult = kermeta.standard.helper.StringWrapper.replace(result, \"\\r\", \"\\\\r\");\n}\n\n\n\tresult = kermeta.standard.helper.StringWrapper.plus(result, this.endOfExpressionFixer());\n\nreturn result;\n'"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='\njava.lang.String result = null;\n\n\tsuper.createBehaviorJava(context);\n\n\tresult = this.getValue();\n\n\tjava.lang.Boolean idIfCond_341 = false;\n\tidIfCond_341 = kermeta.standard.helper.StringWrapper.equals(result, \".\");\n\n\tif( idIfCond_341 ) {\n\n\tresult = \"\\\".\\\"\";\n}\n else {\n\n\tresult = kermeta.standard.helper.StringWrapper.replace(result, \"\\\\\", \"\\\\\\\\\");\n\n\tresult = kermeta.standard.helper.StringWrapper.plus(kermeta.standard.helper.StringWrapper.plus(\"\\\"\", kermeta.standard.helper.StringWrapper.replace(result, \"\\\"\", \"\\\\\\\"\")), \"\\\"\");\n\n\tresult = kermeta.standard.helper.StringWrapper.replace(result, \"\\n\", \"\\\\n\");\n\n\tresult = kermeta.standard.helper.StringWrapper.replace(result, \"\\t\", \"\\\\t\");\n\n\tresult = kermeta.standard.helper.StringWrapper.replace(result, \"\\r\", \"\\\\r\");\n}\n\n\n\tjava.lang.Boolean idIfCond_342 = false;\n\tidIfCond_342 = kermeta.standard.helper.BooleanWrapper.not(org.kermeta.compil.runtime.helper.language.ObjectUtil.isInstanceOfSwitcher(org.kermeta.compil.runtime.helper.language.ObjectUtil.containerSwitcher(this), org.kermeta.compil.runtime.ExecutionContext.getInstance().getMetaClass(\"kermeta.language.behavior.VariableDecl\")));\n\n\tif( idIfCond_342 ) {\n\n\tresult = kermeta.standard.helper.StringWrapper.plus(result, this.endOfExpressionFixer());\n}\n\n\nreturn result;\n'"
 	 * @generated
 	 */
 	String createBehaviorJava(KM2EcoreContext context);

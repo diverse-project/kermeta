@@ -1,8 +1,10 @@
 /**
- * <copyright>
- * </copyright>
+ * License: EPL
+ * Copyright: IRISA / INRIA / Universite de Rennes 1
+ * 
+ * Generating with Kermeta <http://www.kermeta.org>
  *
- * $Id: CommonPackage.java,v 1.10 2009-01-21 09:16:13 cfaucher Exp $
+ * $Id: CommonPackage.java,v 1.11 2009-02-10 17:52:07 cfaucher Exp $
  */
 package km2ecore.common;
 

@@ -1,8 +1,10 @@
 /**
- * <copyright>
- * </copyright>
+ * License: EPL
+ * Copyright: IRISA / INRIA / Universite de Rennes 1
+ * 
+ * Generating with Kermeta <http://www.kermeta.org>
  *
- * $Id: EcoreFactoryImpl.java,v 1.10 2009-01-21 09:16:06 cfaucher Exp $
+ * $Id: EcoreFactoryImpl.java,v 1.11 2009-02-10 17:52:00 cfaucher Exp $
  */
 package km2ecore.helper.ecore.impl;
 
@@ -61,14 +63,14 @@ public class EcoreFactoryImpl extends EFactoryImpl implements EcoreFactory {
 	@Override
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
-		case EcorePackage.MODEL_ANALIZER:
-			return createModelAnalizer();
-		case EcorePackage.ECORE_MODEL_ELEMENT_HELPER:
-			return createEcoreModelElementHelper();
 		case EcorePackage.ENAMED_ELEMENT_HELPER:
 			return createENamedElementHelper();
+		case EcorePackage.ECORE_MODEL_ELEMENT_HELPER:
+			return createEcoreModelElementHelper();
 		case EcorePackage.EANNOTATION_HELPER:
 			return createEAnnotationHelper();
+		case EcorePackage.MODEL_ANALIZER:
+			return createModelAnalizer();
 		default:
 			throw new IllegalArgumentException("The class '" + eClass.getName()
 					+ "' is not a valid classifier");
@@ -120,9 +122,9 @@ public class EcoreFactoryImpl extends EFactoryImpl implements EcoreFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ModelAnalizer createModelAnalizer() {
-		ModelAnalizerImpl modelAnalizer = new ModelAnalizerImpl();
-		return modelAnalizer;
+	public ENamedElementHelper createENamedElementHelper() {
+		ENamedElementHelperImpl eNamedElementHelper = new ENamedElementHelperImpl();
+		return eNamedElementHelper;
 	}
 
 	/**
@@ -140,9 +142,9 @@ public class EcoreFactoryImpl extends EFactoryImpl implements EcoreFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ENamedElementHelper createENamedElementHelper() {
-		ENamedElementHelperImpl eNamedElementHelper = new ENamedElementHelperImpl();
-		return eNamedElementHelper;
+	public EAnnotationHelper createEAnnotationHelper() {
+		EAnnotationHelperImpl eAnnotationHelper = new EAnnotationHelperImpl();
+		return eAnnotationHelper;
 	}
 
 	/**
@@ -150,9 +152,9 @@ public class EcoreFactoryImpl extends EFactoryImpl implements EcoreFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAnnotationHelper createEAnnotationHelper() {
-		EAnnotationHelperImpl eAnnotationHelper = new EAnnotationHelperImpl();
-		return eAnnotationHelper;
+	public ModelAnalizer createModelAnalizer() {
+		ModelAnalizerImpl modelAnalizer = new ModelAnalizerImpl();
+		return modelAnalizer;
 	}
 
 	/**

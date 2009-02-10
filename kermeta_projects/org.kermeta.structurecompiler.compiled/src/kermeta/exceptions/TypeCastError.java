@@ -1,8 +1,10 @@
 /**
- * <copyright>
- * </copyright>
+ * License: EPL
+ * Copyright: IRISA / INRIA / Universite de Rennes 1
+ * 
+ * Generating with Kermeta <http://www.kermeta.org>
  *
- * $Id: TypeCastError.java,v 1.10 2009-01-21 09:15:53 cfaucher Exp $
+ * $Id: TypeCastError.java,v 1.11 2009-02-10 17:51:47 cfaucher Exp $
  */
 package kermeta.exceptions;
 
@@ -13,7 +15,7 @@ package kermeta.exceptions;
  *
  *
  * @see kermeta.exceptions.ExceptionsPackage#getTypeCastError()
- * @model annotation="kermeta documentation='/**\n * Occurs when a cast (Object::asType operation) fails\n \052/'"
+ * @model annotation="kermeta documentation='/**\r\n * Occurs when a cast (Object::asType operation) fails\r\n \052/'"
  * @generated
  */
 public interface TypeCastError extends RuntimeError {

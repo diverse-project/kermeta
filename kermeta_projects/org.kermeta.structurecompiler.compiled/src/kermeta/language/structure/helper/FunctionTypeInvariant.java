@@ -10,7 +10,7 @@ public class FunctionTypeInvariant {
 	 *
 	 * @generated
 	 */
-	public static java.lang.Boolean checkInvariant_11958__resultType(
+	public static java.lang.Boolean checkInvariant_23249__resultType(
 
 	kermeta.language.structure.FunctionType self
 

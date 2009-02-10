@@ -1,8 +1,10 @@
 /**
- * <copyright>
- * </copyright>
+ * License: EPL
+ * Copyright: IRISA / INRIA / Universite de Rennes 1
+ * 
+ * Generating with Kermeta <http://www.kermeta.org>
  *
- * $Id: EcorePackage.java,v 1.10 2009-01-21 09:16:05 cfaucher Exp $
+ * $Id: EcorePackage.java,v 1.11 2009-02-10 17:51:58 cfaucher Exp $
  */
 package km2ecore.helper.ecore;
 
@@ -62,14 +64,14 @@ public interface EcorePackage extends EPackage {
 	EcorePackage eINSTANCE = km2ecore.helper.ecore.impl.EcorePackageImpl.init();
 
 	/**
-	 * The meta object id for the '{@link km2ecore.helper.ecore.impl.ModelAnalizerImpl <em>Model Analizer</em>}' class.
+	 * The meta object id for the '{@link km2ecore.helper.ecore.impl.ENamedElementHelperImpl <em>ENamed Element Helper</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see km2ecore.helper.ecore.impl.ModelAnalizerImpl
-	 * @see km2ecore.helper.ecore.impl.EcorePackageImpl#getModelAnalizer()
+	 * @see km2ecore.helper.ecore.impl.ENamedElementHelperImpl
+	 * @see km2ecore.helper.ecore.impl.EcorePackageImpl#getENamedElementHelper()
 	 * @generated
 	 */
-	int MODEL_ANALIZER = 0;
+	int ENAMED_ELEMENT_HELPER = 0;
 
 	/**
 	 * The feature id for the '<em><b>Tag</b></em>' reference list.
@@ -78,7 +80,7 @@ public interface EcorePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MODEL_ANALIZER__TAG = StructurePackage.OBJECT__TAG;
+	int ENAMED_ELEMENT_HELPER__TAG = StructurePackage.OBJECT__TAG;
 
 	/**
 	 * The feature id for the '<em><b>File</b></em>' reference.
@@ -87,7 +89,7 @@ public interface EcorePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MODEL_ANALIZER__FILE = StructurePackage.OBJECT__FILE;
+	int ENAMED_ELEMENT_HELPER__FILE = StructurePackage.OBJECT__FILE;
 
 	/**
 	 * The feature id for the '<em><b>File Name</b></em>' attribute.
@@ -96,7 +98,7 @@ public interface EcorePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MODEL_ANALIZER__FILE_NAME = StructurePackage.OBJECT__FILE_NAME;
+	int ENAMED_ELEMENT_HELPER__FILE_NAME = StructurePackage.OBJECT__FILE_NAME;
 
 	/**
 	 * The feature id for the '<em><b>Line Number</b></em>' attribute.
@@ -105,7 +107,7 @@ public interface EcorePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MODEL_ANALIZER__LINE_NUMBER = StructurePackage.OBJECT__LINE_NUMBER;
+	int ENAMED_ELEMENT_HELPER__LINE_NUMBER = StructurePackage.OBJECT__LINE_NUMBER;
 
 	/**
 	 * The feature id for the '<em><b>Owned Tags</b></em>' containment reference list.
@@ -114,7 +116,7 @@ public interface EcorePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MODEL_ANALIZER__OWNED_TAGS = StructurePackage.OBJECT__OWNED_TAGS;
+	int ENAMED_ELEMENT_HELPER__OWNED_TAGS = StructurePackage.OBJECT__OWNED_TAGS;
 
 	/**
 	 * The feature id for the '<em><b>Oid</b></em>' attribute.
@@ -123,7 +125,7 @@ public interface EcorePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MODEL_ANALIZER__OID = StructurePackage.OBJECT__OID;
+	int ENAMED_ELEMENT_HELPER__OID = StructurePackage.OBJECT__OID;
 
 	/**
 	 * The feature id for the '<em><b>Internal Containing Resource</b></em>' reference.
@@ -132,16 +134,16 @@ public interface EcorePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MODEL_ANALIZER__INTERNAL_CONTAINING_RESOURCE = StructurePackage.OBJECT__INTERNAL_CONTAINING_RESOURCE;
+	int ENAMED_ELEMENT_HELPER__INTERNAL_CONTAINING_RESOURCE = StructurePackage.OBJECT__INTERNAL_CONTAINING_RESOURCE;
 
 	/**
-	 * The number of structural features of the '<em>Model Analizer</em>' class.
+	 * The number of structural features of the '<em>ENamed Element Helper</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MODEL_ANALIZER_FEATURE_COUNT = StructurePackage.OBJECT_FEATURE_COUNT + 0;
+	int ENAMED_ELEMENT_HELPER_FEATURE_COUNT = StructurePackage.OBJECT_FEATURE_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link km2ecore.helper.ecore.impl.EcoreModelElementHelperImpl <em>Model Element Helper</em>}' class.
@@ -226,88 +228,6 @@ public interface EcorePackage extends EPackage {
 	int ECORE_MODEL_ELEMENT_HELPER_FEATURE_COUNT = StructurePackage.OBJECT_FEATURE_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link km2ecore.helper.ecore.impl.ENamedElementHelperImpl <em>ENamed Element Helper</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see km2ecore.helper.ecore.impl.ENamedElementHelperImpl
-	 * @see km2ecore.helper.ecore.impl.EcorePackageImpl#getENamedElementHelper()
-	 * @generated
-	 */
-	int ENAMED_ELEMENT_HELPER = 2;
-
-	/**
-	 * The feature id for the '<em><b>Tag</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ENAMED_ELEMENT_HELPER__TAG = StructurePackage.OBJECT__TAG;
-
-	/**
-	 * The feature id for the '<em><b>File</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ENAMED_ELEMENT_HELPER__FILE = StructurePackage.OBJECT__FILE;
-
-	/**
-	 * The feature id for the '<em><b>File Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ENAMED_ELEMENT_HELPER__FILE_NAME = StructurePackage.OBJECT__FILE_NAME;
-
-	/**
-	 * The feature id for the '<em><b>Line Number</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ENAMED_ELEMENT_HELPER__LINE_NUMBER = StructurePackage.OBJECT__LINE_NUMBER;
-
-	/**
-	 * The feature id for the '<em><b>Owned Tags</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ENAMED_ELEMENT_HELPER__OWNED_TAGS = StructurePackage.OBJECT__OWNED_TAGS;
-
-	/**
-	 * The feature id for the '<em><b>Oid</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ENAMED_ELEMENT_HELPER__OID = StructurePackage.OBJECT__OID;
-
-	/**
-	 * The feature id for the '<em><b>Internal Containing Resource</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ENAMED_ELEMENT_HELPER__INTERNAL_CONTAINING_RESOURCE = StructurePackage.OBJECT__INTERNAL_CONTAINING_RESOURCE;
-
-	/**
-	 * The number of structural features of the '<em>ENamed Element Helper</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ENAMED_ELEMENT_HELPER_FEATURE_COUNT = StructurePackage.OBJECT_FEATURE_COUNT + 0;
-
-	/**
 	 * The meta object id for the '{@link km2ecore.helper.ecore.impl.EAnnotationHelperImpl <em>EAnnotation Helper</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -315,7 +235,7 @@ public interface EcorePackage extends EPackage {
 	 * @see km2ecore.helper.ecore.impl.EcorePackageImpl#getEAnnotationHelper()
 	 * @generated
 	 */
-	int EANNOTATION_HELPER = 3;
+	int EANNOTATION_HELPER = 2;
 
 	/**
 	 * The feature id for the '<em><b>Tag</b></em>' reference list.
@@ -390,6 +310,88 @@ public interface EcorePackage extends EPackage {
 	int EANNOTATION_HELPER_FEATURE_COUNT = StructurePackage.OBJECT_FEATURE_COUNT + 0;
 
 	/**
+	 * The meta object id for the '{@link km2ecore.helper.ecore.impl.ModelAnalizerImpl <em>Model Analizer</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see km2ecore.helper.ecore.impl.ModelAnalizerImpl
+	 * @see km2ecore.helper.ecore.impl.EcorePackageImpl#getModelAnalizer()
+	 * @generated
+	 */
+	int MODEL_ANALIZER = 3;
+
+	/**
+	 * The feature id for the '<em><b>Tag</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MODEL_ANALIZER__TAG = StructurePackage.OBJECT__TAG;
+
+	/**
+	 * The feature id for the '<em><b>File</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MODEL_ANALIZER__FILE = StructurePackage.OBJECT__FILE;
+
+	/**
+	 * The feature id for the '<em><b>File Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MODEL_ANALIZER__FILE_NAME = StructurePackage.OBJECT__FILE_NAME;
+
+	/**
+	 * The feature id for the '<em><b>Line Number</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MODEL_ANALIZER__LINE_NUMBER = StructurePackage.OBJECT__LINE_NUMBER;
+
+	/**
+	 * The feature id for the '<em><b>Owned Tags</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MODEL_ANALIZER__OWNED_TAGS = StructurePackage.OBJECT__OWNED_TAGS;
+
+	/**
+	 * The feature id for the '<em><b>Oid</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MODEL_ANALIZER__OID = StructurePackage.OBJECT__OID;
+
+	/**
+	 * The feature id for the '<em><b>Internal Containing Resource</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MODEL_ANALIZER__INTERNAL_CONTAINING_RESOURCE = StructurePackage.OBJECT__INTERNAL_CONTAINING_RESOURCE;
+
+	/**
+	 * The number of structural features of the '<em>Model Analizer</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MODEL_ANALIZER_FEATURE_COUNT = StructurePackage.OBJECT_FEATURE_COUNT + 0;
+
+	/**
 	 * The meta object id for the '{@link km2ecore.helper.ecore.KermetaEAnnotationSource <em>Kermeta EAnnotation Source</em>}' enum.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -410,14 +412,14 @@ public interface EcorePackage extends EPackage {
 	int KERMETA_EANNOTATION_KEY = 5;
 
 	/**
-	 * Returns the meta object for class '{@link km2ecore.helper.ecore.ModelAnalizer <em>Model Analizer</em>}'.
+	 * Returns the meta object for class '{@link km2ecore.helper.ecore.ENamedElementHelper <em>ENamed Element Helper</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Model Analizer</em>'.
-	 * @see km2ecore.helper.ecore.ModelAnalizer
+	 * @return the meta object for class '<em>ENamed Element Helper</em>'.
+	 * @see km2ecore.helper.ecore.ENamedElementHelper
 	 * @generated
 	 */
-	EClass getModelAnalizer();
+	EClass getENamedElementHelper();
 
 	/**
 	 * Returns the meta object for class '{@link km2ecore.helper.ecore.EcoreModelElementHelper <em>Model Element Helper</em>}'.
@@ -430,16 +432,6 @@ public interface EcorePackage extends EPackage {
 	EClass getEcoreModelElementHelper();
 
 	/**
-	 * Returns the meta object for class '{@link km2ecore.helper.ecore.ENamedElementHelper <em>ENamed Element Helper</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>ENamed Element Helper</em>'.
-	 * @see km2ecore.helper.ecore.ENamedElementHelper
-	 * @generated
-	 */
-	EClass getENamedElementHelper();
-
-	/**
 	 * Returns the meta object for class '{@link km2ecore.helper.ecore.EAnnotationHelper <em>EAnnotation Helper</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -448,6 +440,16 @@ public interface EcorePackage extends EPackage {
 	 * @generated
 	 */
 	EClass getEAnnotationHelper();
+
+	/**
+	 * Returns the meta object for class '{@link km2ecore.helper.ecore.ModelAnalizer <em>Model Analizer</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Model Analizer</em>'.
+	 * @see km2ecore.helper.ecore.ModelAnalizer
+	 * @generated
+	 */
+	EClass getModelAnalizer();
 
 	/**
 	 * Returns the meta object for enum '{@link km2ecore.helper.ecore.KermetaEAnnotationSource <em>Kermeta EAnnotation Source</em>}'.
@@ -492,14 +494,14 @@ public interface EcorePackage extends EPackage {
 	 */
 	interface Literals {
 		/**
-		 * The meta object literal for the '{@link km2ecore.helper.ecore.impl.ModelAnalizerImpl <em>Model Analizer</em>}' class.
+		 * The meta object literal for the '{@link km2ecore.helper.ecore.impl.ENamedElementHelperImpl <em>ENamed Element Helper</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see km2ecore.helper.ecore.impl.ModelAnalizerImpl
-		 * @see km2ecore.helper.ecore.impl.EcorePackageImpl#getModelAnalizer()
+		 * @see km2ecore.helper.ecore.impl.ENamedElementHelperImpl
+		 * @see km2ecore.helper.ecore.impl.EcorePackageImpl#getENamedElementHelper()
 		 * @generated
 		 */
-		EClass MODEL_ANALIZER = eINSTANCE.getModelAnalizer();
+		EClass ENAMED_ELEMENT_HELPER = eINSTANCE.getENamedElementHelper();
 
 		/**
 		 * The meta object literal for the '{@link km2ecore.helper.ecore.impl.EcoreModelElementHelperImpl <em>Model Element Helper</em>}' class.
@@ -513,16 +515,6 @@ public interface EcorePackage extends EPackage {
 				.getEcoreModelElementHelper();
 
 		/**
-		 * The meta object literal for the '{@link km2ecore.helper.ecore.impl.ENamedElementHelperImpl <em>ENamed Element Helper</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see km2ecore.helper.ecore.impl.ENamedElementHelperImpl
-		 * @see km2ecore.helper.ecore.impl.EcorePackageImpl#getENamedElementHelper()
-		 * @generated
-		 */
-		EClass ENAMED_ELEMENT_HELPER = eINSTANCE.getENamedElementHelper();
-
-		/**
 		 * The meta object literal for the '{@link km2ecore.helper.ecore.impl.EAnnotationHelperImpl <em>EAnnotation Helper</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -531,6 +523,16 @@ public interface EcorePackage extends EPackage {
 		 * @generated
 		 */
 		EClass EANNOTATION_HELPER = eINSTANCE.getEAnnotationHelper();
+
+		/**
+		 * The meta object literal for the '{@link km2ecore.helper.ecore.impl.ModelAnalizerImpl <em>Model Analizer</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see km2ecore.helper.ecore.impl.ModelAnalizerImpl
+		 * @see km2ecore.helper.ecore.impl.EcorePackageImpl#getModelAnalizer()
+		 * @generated
+		 */
+		EClass MODEL_ANALIZER = eINSTANCE.getModelAnalizer();
 
 		/**
 		 * The meta object literal for the '{@link km2ecore.helper.ecore.KermetaEAnnotationSource <em>Kermeta EAnnotation Source</em>}' enum.

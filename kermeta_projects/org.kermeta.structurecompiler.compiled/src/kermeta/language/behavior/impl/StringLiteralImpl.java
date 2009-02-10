@@ -1,8 +1,10 @@
 /**
- * <copyright>
- * </copyright>
+ * License: EPL
+ * Copyright: IRISA / INRIA / Universite de Rennes 1
+ * 
+ * Generating with Kermeta <http://www.kermeta.org>
  *
- * $Id: StringLiteralImpl.java,v 1.11 2009-01-21 09:15:57 cfaucher Exp $
+ * $Id: StringLiteralImpl.java,v 1.12 2009-02-10 17:51:51 cfaucher Exp $
  */
 package kermeta.language.behavior.impl;
 
@@ -105,11 +107,11 @@ public class StringLiteralImpl extends LiteralImpl implements StringLiteral {
 
 		result = this.getValue();
 
-		java.lang.Boolean idIfCond_647 = false;
-		idIfCond_647 = kermeta.standard.helper.StringWrapper
+		java.lang.Boolean idIfCond_341 = false;
+		idIfCond_341 = kermeta.standard.helper.StringWrapper
 				.equals(result, ".");
 
-		if (idIfCond_647) {
+		if (idIfCond_341) {
 
 			result = "\".\"";
 		} else {
@@ -132,8 +134,22 @@ public class StringLiteralImpl extends LiteralImpl implements StringLiteral {
 					"\r", "\\r");
 		}
 
-		result = kermeta.standard.helper.StringWrapper.plus(result, this
-				.endOfExpressionFixer());
+		java.lang.Boolean idIfCond_342 = false;
+		idIfCond_342 = kermeta.standard.helper.BooleanWrapper
+				.not(org.kermeta.compil.runtime.helper.language.ObjectUtil
+						.isInstanceOfSwitcher(
+								org.kermeta.compil.runtime.helper.language.ObjectUtil
+										.containerSwitcher(this),
+								org.kermeta.compil.runtime.ExecutionContext
+										.getInstance()
+										.getMetaClass(
+												"kermeta.language.behavior.VariableDecl")));
+
+		if (idIfCond_342) {
+
+			result = kermeta.standard.helper.StringWrapper.plus(result, this
+					.endOfExpressionFixer());
+		}
 
 		return result;
 

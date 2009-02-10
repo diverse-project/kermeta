@@ -1,8 +1,10 @@
 /**
- * <copyright>
- * </copyright>
+ * License: EPL
+ * Copyright: IRISA / INRIA / Universite de Rennes 1
+ * 
+ * Generating with Kermeta <http://www.kermeta.org>
  *
- * $Id: IdentifierHelperImpl.java,v 1.10 2009-01-21 09:16:01 cfaucher Exp $
+ * $Id: IdentifierHelperImpl.java,v 1.11 2009-02-10 17:51:55 cfaucher Exp $
  */
 package km2ecore.helper.java.impl;
 
@@ -54,19 +56,19 @@ public class IdentifierHelperImpl extends ObjectImpl implements
 
 		java.lang.String result = null;
 
-		java.lang.Boolean idIfCond_1116 = false;
-		idIfCond_1116 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+		java.lang.Boolean idIfCond_33 = false;
+		idIfCond_33 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 				.isVoidSwitcher(id);
 
-		if (idIfCond_1116) {
+		if (idIfCond_33) {
 
 			result = id;
 		}
 
-		java.lang.Boolean idIfCond_1117 = false;
-		idIfCond_1117 = context.getJavaKeyWordList().isKeyword(id);
+		java.lang.Boolean idIfCond_34 = false;
+		idIfCond_34 = context.getJavaKeyWordList().isKeyword(id);
 
-		if (idIfCond_1117) {
+		if (idIfCond_34) {
 
 			result = kermeta.standard.helper.StringWrapper.plus("_", id);
 		} else {

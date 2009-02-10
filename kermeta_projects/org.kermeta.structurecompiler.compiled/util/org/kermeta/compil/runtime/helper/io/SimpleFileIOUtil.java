@@ -1,4 +1,4 @@
-/* $Id: SimpleFileIOUtil.java,v 1.10 2009-01-21 09:16:13 cfaucher Exp $
+/* $Id: SimpleFileIOUtil.java,v 1.11 2009-02-10 17:52:07 cfaucher Exp $
  * Project: Kermeta (First iteration)
  * File: SimpleFileIO.java
  * License: EPL

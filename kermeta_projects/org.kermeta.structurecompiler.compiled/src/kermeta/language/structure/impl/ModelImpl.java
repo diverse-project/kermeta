@@ -1,8 +1,10 @@
 /**
- * <copyright>
- * </copyright>
+ * License: EPL
+ * Copyright: IRISA / INRIA / Universite de Rennes 1
+ * 
+ * Generating with Kermeta <http://www.kermeta.org>
  *
- * $Id: ModelImpl.java,v 1.10 2009-01-21 09:15:50 cfaucher Exp $
+ * $Id: ModelImpl.java,v 1.11 2009-02-10 17:51:45 cfaucher Exp $
  */
 package kermeta.language.structure.impl;
 
@@ -126,29 +128,29 @@ public class ModelImpl extends ObjectImpl implements Model {
 
 		{
 
-			kermeta.standard.Iterator<kermeta.language.structure.Object> it_ft118 = objectsToAdd
+			kermeta.standard.Iterator<kermeta.language.structure.Object> it_ft154 = objectsToAdd
 					.iterator();
-			java.lang.Boolean idLoopCond_370 = false;
-			while (!idLoopCond_370) {
-				idLoopCond_370 = it_ft118.isOff();
-				if (idLoopCond_370) {
+			java.lang.Boolean idLoopCond_715 = false;
+			while (!idLoopCond_715) {
+				idLoopCond_715 = it_ft154.isOff();
+				if (idLoopCond_715) {
 				} else {
 
 					//BIle:func
-					kermeta.language.structure.Object obj_lbdExp118 = it_ft118
+					kermeta.language.structure.Object obj_lbdExp154 = it_ft154
 							.next();
 
 					kermeta.language.structure.Object addedObject = this
-							.addCompatible(obj_lbdExp118);
+							.addCompatible(obj_lbdExp154);
 
-					java.lang.Boolean idIfCond_371 = false;
-					idIfCond_371 = kermeta.standard.helper.BooleanWrapper
+					java.lang.Boolean idIfCond_716 = false;
+					idIfCond_716 = kermeta.standard.helper.BooleanWrapper
 							.not(org.kermeta.compil.runtime.helper.language.ObjectUtil
 									.isVoidSwitcher(addedObject));
 
-					if (idIfCond_371) {
+					if (idIfCond_716) {
 
-						result.add(obj_lbdExp118);
+						result.add(obj_lbdExp154);
 					}
 
 					//EIle:func
@@ -189,38 +191,38 @@ public class ModelImpl extends ObjectImpl implements Model {
 
 		//BIft:select
 
-		kermeta.standard.Sequence<kermeta.language.structure.Object> result_ft119 = null;
+		kermeta.standard.Sequence<kermeta.language.structure.Object> result_ft155 = null;
 
-		kermeta.language.structure.Object elem_ft119 = null;
+		kermeta.language.structure.Object elem_ft155 = null;
 
-		result_ft119 = ((kermeta.standard.Sequence<kermeta.language.structure.Object>) org.kermeta.compil.runtime.helper.language.ClassUtil
+		result_ft155 = ((kermeta.standard.Sequence<kermeta.language.structure.Object>) org.kermeta.compil.runtime.helper.language.ClassUtil
 				.newObject(kermeta.standard.StandardPackage.eINSTANCE
 						.getSequence()));
 
 		{
 
-			kermeta.standard.Iterator<kermeta.language.structure.Object> it_ft119 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
+			kermeta.standard.Iterator<kermeta.language.structure.Object> it_ft155 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
 					.<kermeta.language.structure.Object> convertAsOrderedSet(
 							this.getContents()).iterator();
-			java.lang.Boolean idLoopCond_372 = false;
-			while (!idLoopCond_372) {
-				idLoopCond_372 = it_ft119.isOff();
-				if (idLoopCond_372) {
+			java.lang.Boolean idLoopCond_717 = false;
+			while (!idLoopCond_717) {
+				idLoopCond_717 = it_ft155.isOff();
+				if (idLoopCond_717) {
 				} else {
 
-					elem_ft119 = it_ft119.next();
+					elem_ft155 = it_ft155.next();
 
-					java.lang.Boolean idIfCond_373 = false;
+					java.lang.Boolean idIfCond_718 = false;
 					//BIle:selector
-					kermeta.language.structure.Object o_lbdExp119 = elem_ft119;
+					kermeta.language.structure.Object o_lbdExp155 = elem_ft155;
 
-					idIfCond_373 = org.kermeta.compil.runtime.helper.language.TypeUtil
-							.isInstanceSwitcher(typeName, o_lbdExp119);
+					idIfCond_718 = org.kermeta.compil.runtime.helper.language.TypeUtil
+							.isInstanceSwitcher(typeName, o_lbdExp155);
 					//EIle:selector
 
-					if (idIfCond_373) {
+					if (idIfCond_718) {
 
-						result_ft119.add(elem_ft119);
+						result_ft155.add(elem_ft155);
 					}
 
 				}
@@ -228,7 +230,7 @@ public class ModelImpl extends ObjectImpl implements Model {
 		}
 
 		//EIft:select
-		result = result_ft119.asSet();
+		result = result_ft155.asSet();
 
 		return result;
 

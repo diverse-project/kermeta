@@ -1,8 +1,10 @@
 /**
- * <copyright>
- * </copyright>
+ * License: EPL
+ * Copyright: IRISA / INRIA / Universite de Rennes 1
+ * 
+ * Generating with Kermeta <http://www.kermeta.org>
  *
- * $Id: IoSwitch.java,v 1.10 2009-01-21 09:16:07 cfaucher Exp $
+ * $Id: IoSwitch.java,v 1.11 2009-02-10 17:52:01 cfaucher Exp $
  */
 package kermeta.io.util;
 

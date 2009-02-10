@@ -1,8 +1,10 @@
 /**
- * <copyright>
- * </copyright>
+ * License: EPL
+ * Copyright: IRISA / INRIA / Universite de Rennes 1
+ * 
+ * Generating with Kermeta <http://www.kermeta.org>
  *
- * $Id: ModelType.java,v 1.10 2009-01-21 09:15:58 cfaucher Exp $
+ * $Id: ModelType.java,v 1.11 2009-02-10 17:51:52 cfaucher Exp $
  */
 package kermeta.language.structure;
 
@@ -44,7 +46,7 @@ public interface ModelType extends Type, TypeDefinition {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @model annotation="kermeta documentation='/**\n\t * To be written ##########################################\n\t \052/'"
+	 * @model annotation="kermeta documentation='/**\r\n\t * To be written ##########################################\r\n\t \052/'"
 	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='\nkermeta.language.structure.Model result = null;\n\n\tresult = (kermeta.language.structure.Model) org.kermeta.compil.runtime.helper.language.ObjectUtil.asTypeOrVoid(org.kermeta.compil.runtime.helper.language.ModelTypeUtil.newObject(this), \"kermeta.language.structure.Model\");\n\nreturn result;\n'"
 	 * @generated
 	 */
@@ -54,7 +56,7 @@ public interface ModelType extends Type, TypeDefinition {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @model dataType="kermeta.standard.JavaBoolean"
-	 *        annotation="kermeta documentation='/**\n\t * To be written ##########################################\n\t \052/'"
+	 *        annotation="kermeta documentation='/**\r\n\t * To be written ##########################################\r\n\t \052/'"
 	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='\njava.lang.Boolean result = null;\n\n\tresult = (java.lang.Boolean) org.kermeta.compil.runtime.helper.language.ObjectUtil.asTypeOrVoid(org.kermeta.compil.runtime.helper.language.ModelTypeUtil.isModelTypeOf(this, m), \"java.lang.Boolean\");\n\nreturn result;\n'"
 	 * @generated
 	 */

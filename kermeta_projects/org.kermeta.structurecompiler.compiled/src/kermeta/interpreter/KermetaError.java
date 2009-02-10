@@ -1,8 +1,10 @@
 /**
- * <copyright>
- * </copyright>
+ * License: EPL
+ * Copyright: IRISA / INRIA / Universite de Rennes 1
+ * 
+ * Generating with Kermeta <http://www.kermeta.org>
  *
- * $Id: KermetaError.java,v 1.10 2009-01-21 09:15:59 cfaucher Exp $
+ * $Id: KermetaError.java,v 1.11 2009-02-10 17:51:53 cfaucher Exp $
  */
 package kermeta.interpreter;
 
@@ -20,7 +22,7 @@ package kermeta.interpreter;
  *
  * @see kermeta.interpreter.InterpreterPackage#getKermetaError()
  * @model abstract="true"
- *        annotation="kermeta documentation='/**\n * Kermeta language error in a code written in Kermeta\n \052/'"
+ *        annotation="kermeta documentation='/**\r\n * Kermeta language error in a code written in Kermeta\r\n \052/'"
  * @generated
  */
 public interface KermetaError extends kermeta.language.structure.Object {
@@ -36,7 +38,7 @@ public interface KermetaError extends kermeta.language.structure.Object {
 	 * @see #setMessage(String)
 	 * @see kermeta.interpreter.InterpreterPackage#getKermetaError_Message()
 	 * @model dataType="kermeta.standard.JavaString"
-	 *        annotation="kermeta documentation='/**\n\t * Error message\n\t \052/'"
+	 *        annotation="kermeta documentation='/**\r\n\t * Error message\r\n\t \052/'"
 	 * @generated
 	 */
 	String getMessage();
