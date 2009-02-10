@@ -1,4 +1,4 @@
-/* $Id: CreateBehavior.kmt,v 1.100 2009-02-09 17:09:23 cfaucher Exp $
+/* $Id: CreateBehavior.kmt,v 1.101 2009-02-10 13:32:20 cfaucher Exp $
  * Creation date: January 21, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -670,7 +670,7 @@ package behavior {
 				
 					if fromUtil(context) then
 					
-						if self.staticOperation.owningClass.isValueType() then
+						if self.staticOperation.ownedByValueType() then
 							static_call := self.staticOperation.getOptimizedStaticCall(context)
 							
 							if static_call == "" then
@@ -1186,7 +1186,15 @@ package behavior {
 					result := result + " = null;\n" + self.initialization.createBehaviorJava(context)
 					context.resultLastStatementStack.pop()
 				else
-					result := result + " = " + self.initialization.createBehaviorJava(context)
+					
+					var literal_prefix : String init ""
+					var literal_suffix : String init ""
+					
+					if self.requireConversionValueTypeToObject() then
+						literal_prefix := context.OBJECT_UTIL_CLASS + ".convertAsObject("
+						literal_suffix := ")"
+					end
+					result := result + " = " + literal_prefix + self.initialization.createBehaviorJava(context) + literal_suffix + self.endOfExpressionFixer()
 				end
 			else
 				result := result + " = null;"
@@ -1549,7 +1557,9 @@ package behavior {
 				result := result.replace("\r", "\\r")
 			end
 			
-			result := result + self.endOfExpressionFixer()
+			if not self.container.isInstanceOf(VariableDecl) then
+				result := result + self.endOfExpressionFixer()
+			end
 		end
 	}
 	
@@ -1558,7 +1568,10 @@ package behavior {
 		method createBehaviorJava(context : KM2EcoreContext) : String from Literal is do
 			super(context)
 			result := self.~value.toString
-			result := result + self.endOfExpressionFixer()
+			
+			if not self.container.isInstanceOf(VariableDecl) then
+				result := result + self.endOfExpressionFixer()
+			end
 		end
 	}
 	
@@ -1567,7 +1580,10 @@ package behavior {
 		method createBehaviorJava(context : KM2EcoreContext) : String from Literal is do
 			super(context)
 			result := self.~value.toString
-			result := result + self.endOfExpressionFixer()
+			
+			if not self.container.isInstanceOf(VariableDecl) then
+				result := result + self.endOfExpressionFixer()
+			end
 		end
 	}
 	

@@ -1,4 +1,4 @@
-/* $Id: ExpressionHelper.kmt,v 1.36 2009-02-09 17:09:23 cfaucher Exp $
+/* $Id: ExpressionHelper.kmt,v 1.37 2009-02-10 13:32:20 cfaucher Exp $
  * Creation date: Jul 25, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -83,7 +83,6 @@ aspect class Expression {
 							if assignment.container.isInstanceOf(CallFeature) then
 								result := ""
 							else
-								// FIXME CF: please check if the following just could be like that: result := ";"
 								result := self.container.asType(Assignment).valueTypeCastSuffix + self.container.asType(Assignment).cacheCastSuffix + ";"
 							end
 						end
@@ -97,6 +96,29 @@ aspect class Expression {
 		end
 	end
 	
+}
+
+
+aspect class VariableDecl {
+
+	operation requireConversionValueTypeToObject() : Boolean is do
+		result := false
+		
+		if self.initialization.isInstanceOf(Literal) then
+		
+			if self.initialization.asType(Literal).staticType.isValueType() then
+				
+				var left_type : String init self.staticType.getTypeQName()
+					
+				if left_type == "kermeta::language::structure::Object" then
+					if self.initialization.staticType.isValueType() then
+						result := true
+					end
+				end
+			end
+		end
+	end
+
 }
 
 
@@ -412,35 +434,34 @@ aspect class CallFeature {
 		end
 	end
 	
+	operation isFromUtil_MethodFragment(fName : String, context : KM2EcoreContext) : Boolean is do
+		result := context.frameworkOperations.contains(fName)
+						or ( (not target.isInstanceOf(CallVariable)) 
+								and (not target.isInstanceOf(CallResult))
+								and (not target.isInstanceOf(CallFeature))
+								and (not target.isInstanceOf(SelfExpression))
+							)
+	end
+	
 	// Determine if the callFeature is called by a static method: Java package 'util'
 	operation fromUtil(context : KM2EcoreContext) : Boolean is do
 	
 		var fName : String  init IdentifierHelper.new.getMangledIdentifier(self.name, context)
 		
-		//stdio.writeln(" -- " + self.toString + " - " + self.staticOperation.toString + " - " + self.staticOperation.container().toString)
+		//stdio.writeln(" -- " + self.toString + " - " + self.staticOperation.name + " - " + self.staticOperation.owningClass.name)
 		
-		if self.staticOperation.owningClass.isValueType()
+		if self.staticOperation.ownedByValueType()
 		
 			or (self.staticOperation.owningClass.qualifiedName=="kermeta::language::structure::Object"
-				and (
-					context.frameworkOperations.contains(fName)
-						or ( (not target.isInstanceOf(CallVariable)) 
-								and (not target.isInstanceOf(CallResult))
-								and (not target.isInstanceOf(CallFeature))
-								and (not target.isInstanceOf(SelfExpression))
-							)
-					)
+				and isFromUtil_MethodFragment(fName, context)
 				)
 			
 			or (self.staticOperation.owningClass.qualifiedName=="kermeta::language::structure::Type"
-				and (
-					context.frameworkOperations.contains(fName)
-						or ( (not target.isInstanceOf(CallVariable)) 
-								and (not target.isInstanceOf(CallResult))
-								and (not target.isInstanceOf(CallFeature))
-								and (not target.isInstanceOf(SelfExpression))
-							)
-					)
+				and isFromUtil_MethodFragment(fName, context)
+				)
+
+			or (self.staticOperation.owningClass.qualifiedName=="kermeta::language::structure::Class"
+				and isFromUtil_MethodFragment(fName, context)
 				)
 		then
 			result := true
@@ -710,24 +731,32 @@ aspect class CallFeature {
 			result := cf_.staticOperation.ownedParameter.elementAt(i).asType(Parameter)
 		end
 	end
+	
+	operation isCallFeatureTargetsValueTypeOperation() : Boolean is do
+		result := false
+		
+		if self.staticOperation.ownedByValueType then
+			result := true
+		end
+	end
 
 	operation requireConversionValueTypeToObject(context : KM2EcoreContext) : Boolean is do
 		result := false
 		
 		if self.isParameter() then
-			
-			var param : Parameter init self.getCallFeatureCorrespondingParameter()
-			
-			if not param.isVoid() then
-				var left_type : String init param.type.getTypeQName()
+			if not self.container.asType(CallFeature).isCallFeatureTargetsValueTypeOperation() then
+				var param : Parameter init self.getCallFeatureCorrespondingParameter()
 				
-				if left_type == "kermeta::language::structure::Object" then
-					if self.staticType.isValueType() then
-						result := true
+				if not param.isVoid() then
+					var left_type : String init param.type.getTypeQName()
+					
+					if left_type == "kermeta::language::structure::Object" then
+						if self.staticType.isValueType() then
+							result := true
+						end
 					end
 				end
 			end
-		
 		end
 	end
 
