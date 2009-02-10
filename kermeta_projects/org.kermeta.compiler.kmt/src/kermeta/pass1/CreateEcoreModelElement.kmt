@@ -1,4 +1,4 @@
-/* $Id: CreateEcoreModelElement.kmt,v 1.46 2009-02-06 17:06:12 cfaucher Exp $
+/* $Id: CreateEcoreModelElement.kmt,v 1.47 2009-02-10 13:33:28 cfaucher Exp $
  * Creation date: February 1, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -47,12 +47,6 @@ aspect class ModelingUnit {
 		usingEntry.~value := ""
 		// Setting the details
 		ecoreAnnotation.details.add(usingEntry)
-		
-		// Please (CF), do not remove the following source line
-		// These tags have not been included into the generated Ecore file
-		// in order to support the loading of the EMF reflection at runtime like for uml.ecore
-		// this reflection mode is required when the number of concepts in an EPackage are too numerous
-		//self.eachOwnedElement{ omu | omu.createEcoreModelElement(context) }
 
 		result := ecoreAnnotation
 	end

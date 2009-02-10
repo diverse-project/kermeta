@@ -1,4 +1,4 @@
-/* $Id: StructureCompiler.kmt,v 1.79 2009-02-03 23:55:06 cfaucher Exp $
+/* $Id: StructureCompiler.kmt,v 1.80 2009-02-10 13:33:28 cfaucher Exp $
  * Creation date: January 21, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -40,7 +40,7 @@ class Main {
     	
 		//modelInput := "platform:/resource/org.kermeta.compiler.kmt/models/framework.km"
 		modelInput := "platform:/resource/org.kermeta.compiler.kmt/models/StructureCompiler.km"
-		//modelInput := "platform:/resource/org.kermeta.compiler.kmt/src/kermeta/StructureCompiler.km"
+		modelInput := "platform:/resource/org.kermeta.compiler.kmt/src/kermeta/StructureCompiler.km"
 		//modelInput := "platform:/resource/org.kermeta.compiler.kmt/models/ExpressionEvaluation.km"
 		//modelInput := "platform:/resource/org.kermeta.compiler.kmt/models/compilertest.km"
 		//modelInput := "platform:/resource/org.kermeta.compiler.kmt/models/testAddSet.km"
@@ -127,7 +127,12 @@ class Main {
     
     operation saveSingleEcore(output : String) is do
     	var ecore_resource : Resource init context.outputRepository.createResource(output, "http://www.eclipse.org/emf/2002/Ecore")
-		ecore_resource.instances.add(context.mu.ecoreModelElement)
+		
+		// Please (CF), do not remove the following source line
+		// These tags have not been included into the generated Ecore file
+		// in order to support the loading of the EMF reflection at runtime like for uml.ecore
+		// this reflection mode is required when the number of concepts in an EPackage are too numerous
+		//ecore_resource.instances.add(context.mu.ecoreModelElement)
 		
     	context.mu.ecorePackages.each{ p |
 			ecore_resource.instances.add(p)
@@ -266,7 +271,9 @@ class Main {
     	//operations.add("getFunctionType")
     	//operations.add("testBoolean")
     	//operations.add("getTypeName")
-    	operations.add("parse")
+    	//operations.add("parse")
+    	//operations.add("distil")
+    	operations.add("testAssignValueTypeInObject")
     	
     	main_compilingOnlyOperations(modelInput, traceInput, output, mode, operations)
     end
@@ -324,6 +331,21 @@ class Main {
 				
 		stdio.writeln("\nFinish")
 		
+    end
+    
+    operation testAssignValueTypeInObject() : Void is do
+    	var o : kermeta::language::structure::Object init 22
+		var o2 : kermeta::language::structure::Object init kermeta::language::structure::Object.clone(o)
+		
+		kermeta::language::structure::Object.isInstance(o)
+		
+		var s : String 
+		s ?= o
+
+		var s2 : String init String.clone(s)
+		
+		stdio.writeln("s2: " + s2)
+		   
     end
    	
 }
