@@ -84,7 +84,16 @@ public class ClassUtil {
 		return (kermeta.language.structure.Object) newObject;
 	}
 	
-	public static Object cloneSwitcher(kermeta.language.structure.Class class_, Object objectToClone) {
+	public static Object cloneSwitcher(kermeta.language.structure.Class class_, java.lang.Object objectToClone) {
+		
+		/*
+		if( objectToClone instanceof kermeta.language.structure.Object ) {
+			//TODO
+		} else {
+			//TODO
+		}
+		*/
+		
 		if (true)
 			throw new org.kermeta.compil.runtime.helper.error.KRuntimeError(
 					((kermeta.exceptions.NotImplementedException) org.kermeta.compil.runtime.helper.language.ClassUtil
@@ -100,7 +109,16 @@ public class ClassUtil {
 		return null;
 	}
 	
-	public static Object deepCloneSwitcher(kermeta.language.structure.Class class_, Object objectToClone) {
+	public static Object deepCloneSwitcher(kermeta.language.structure.Class class_, java.lang.Object objectToClone) {
+		
+		/*
+		if( objectToClone instanceof kermeta.language.structure.Object ) {
+			//TODO
+		} else {
+			//TODO
+		}
+		*/
+		
 		if (true)
 			throw new org.kermeta.compil.runtime.helper.error.KRuntimeError(
 					((kermeta.exceptions.NotImplementedException) org.kermeta.compil.runtime.helper.language.ClassUtil
@@ -114,6 +132,19 @@ public class ClassUtil {
 					((kermeta.exceptions.NotImplementedException) org.kermeta.compil.runtime.helper.language.ClassUtil
 							.newObject("kermeta.exceptions.NotImplementedException")));
 		return null;
+	}
+	
+	public static Boolean equalsSwitcher(kermeta.language.structure.Class self, java.lang.Object other) {
+		if( other instanceof kermeta.language.structure.Object ) {
+			return self.equals((kermeta.language.structure.Object) other);
+		} else {
+			// This case should not occurred, other must be instance of kermeta.language.structure.Object
+			if (self == other ) {
+				return true;
+			} else {
+				return self.equals(other);
+			}
+		}
 	}
 	
 	public static Boolean equals(kermeta.language.structure.Class class_, Object other) {
