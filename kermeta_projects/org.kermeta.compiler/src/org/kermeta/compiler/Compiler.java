@@ -1,4 +1,4 @@
-/* $Id: Compiler.java,v 1.22 2009-02-06 12:49:45 cfaucher Exp $
+/* $Id: Compiler.java,v 1.23 2009-02-11 10:44:54 cfaucher Exp $
  * Project   : fr.irisa.triskell.kermeta.compiler
  * File      : Compiler.java
  * License   : EPL
@@ -335,8 +335,27 @@ public class Compiler extends org.kermeta.compiler.Generator {
 		genModel.setContainmentProxies(true);
 		genModel.setCodeFormatting(true);
 		
+		// IMPORTANT NOTE: we could use this hack, yes this is a hack from EMF,
+		// for using the java.util.List instead of EList, but
+		// the performance are not improved with java.util.List.
+		// Why ? EMF keeps EList for modeling the EAttribute or EReference with a cardinality many,
+		// just the getters return java.util.List.
+		//
+		// This hack could infer some side effects, i.e.: in a future context with AspectJ
+		// if a user like decides to use the java.util.List (instead of EList) in its plugin
+		// then we have none utils (a priori) to know which is the expected List binding and so choose
+		// List or EList in our impl.. In a context with multiple required: plugins ecore + uml + marte + ...
+		// the CollectionUtil, MapUtil and persistence impls. must be adapted (if it is possible) to support both List and EList.
+		//
+		// To conclude, we could use directly java.util.List, it works but the performance are not improved
+		//
+		// N.B.: it works after some refactorings in the externs like CollectionUtil, MapUtil and persistence,
+		// i.e. in the most of cases: EList to List and BasicEList to ArrayList
+		//genModel.setSuppressEMFTypes(true);
+		
 		// IMPORTANT NOTE: the notification system of EMF MUST BE KEPT ! If the notification is suppressed,
 		// then some references like 'container' are not updated.
+		//
 		//genModel.setSuppressNotification(true);
 		
 		genModel.setColorProviders(false);
