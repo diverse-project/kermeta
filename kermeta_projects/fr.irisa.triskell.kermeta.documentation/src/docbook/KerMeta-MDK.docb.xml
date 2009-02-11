@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.4//EN"
 "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
-<!-- $Id: KerMeta-MDK.docb.xml,v 1.2 2009-01-22 15:35:01 dvojtise Exp $ -->
+<!-- $Id: KerMeta-MDK.docb.xml,v 1.3 2009-02-11 15:50:37 cfaucher Exp $ -->
 <book lang="en-US">
   <bookinfo>
     <title>Kermeta MDK for Kermeta</title>
 
     <pubdate>Build date: @BUILD.DATE@</pubdate>
 
-    <pubdate>$Date: 2009-01-22 15:35:01 $</pubdate>
+    <pubdate>$Date: 2009-02-11 15:50:37 $</pubdate>
 
     <author>
       <firstname>Didier</firstname>
@@ -147,6 +147,12 @@
         		<term><emphasis role="strong"><filename role="strong">require "platform:/plugin/org.kermeta.language.mdk/src/kmt/utils/Random.kmt"</filename></emphasis></term>
         		<listitem>
           			This file offers some operations to get random elements. (Currently, random numbers, but can/should be extended) 
+        		</listitem>
+      		</varlistentry>
+      		<varlistentry>
+        		<term><emphasis role="strong"><filename role="strong">require "platform:/plugin/org.kermeta.language.mdk/src/kmt/utils/Date.kmt"</filename></emphasis></term>
+        		<listitem>
+          			This file offers some operations to calculate elapsed time.
         		</listitem>
       		</varlistentry>
 		</variablelist>
