@@ -88,6 +88,10 @@ abstract public class AbstractKInterpreter {
 	/**		The basic interpreter used to visit kermeta objects.		*/
 	protected ExpressionInterpreter _basicInterpreter;
 	
+	public ExpressionInterpreter getExpressionInterpreter(){
+		return _basicInterpreter;
+	}
+	
 	public AbstractKInterpreter(KermetaUnit program, BufferedReader inputReader, PrintStream outputWriter, PrintStream errorWriter) {
 		assert( program != null );
 		_kermetaUnit = program;
@@ -140,6 +144,20 @@ abstract public class AbstractKInterpreter {
 		}
 	}
 	
+	public Operation getEntryPoint(String className, String operationName) {
+		_mainClassDefinition = (ClassDefinition) _kermetaUnit.getTypeDefinitionByQualifiedName(className);
+	    if ( _mainClassDefinition == null ) {
+	    	 String message = "Entry @mainClass '" + className + "' not found.";
+	    	 throwError(message);
+	    }
+		_mainOperation = KermetaModelHelper.ClassDefinition.getOperationByName(_mainClassDefinition, operationName);
+		if ( _mainOperation == null ) {
+	        String message = "Cannot find entry @mainOperation '" + operationName + "' in @mainClass '" + className+"'";
+	        throwError(message);
+		}
+		return _mainOperation;
+	}
+	
 	/**
 	 * Sets the parameters to send to the main operation. It converts each string into a corresponding
 	 * RuntimeObject.
@@ -173,7 +191,8 @@ abstract public class AbstractKInterpreter {
 	abstract protected ExpressionInterpreter createBasicInterpreter();
 	
 	/**
-	 * 
+	 * Starts the interpreter with the default operation 
+	 * The interpreter stops and release all resources after this call.
 	 * @return The result of the operation or null if an exception has been raised.
 	 */
 	public RuntimeObject launch() {
@@ -199,22 +218,61 @@ abstract public class AbstractKInterpreter {
 			// msg for eclipse ui (ErrorLog view)
 			InterpreterPlugin.getDefault().getLog().log(new Status(IStatus.ERROR, "fr.irisa.triskell.kermeta.interpreter", msg,e));
 		} finally {
-			try { // Give time for other processes to flush their content string.
-				Thread.sleep(100);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
-			if ( _fakeProcess != null )
-				try {
-					_fakeProcess.terminate();
-				} catch (DebugException e) {
-					e.printStackTrace();
-				}
-			_started = false;
-			_terminated = true;
-			releaseResources();
+			this.terminate();
 		}
 		return null;
+	}
+	
+	
+	/**
+	 * Starts the interpreter with the default operation
+	 * After having run this operation, the interpreter isn't stopped, so you can access the _basicInterpreter and invoke
+	 * some other operation
+	 * @return The result of the operation or null if an exception has been raised.
+	 */
+	public RuntimeObject launchAndWait() {
+		try {
+			// setting the context
+			_basicInterpreter.setInterpreterContext( _context );
+			// Creating the main runtime object
+			RuntimeObject entryClass = _memory.getROFactory().createObjectFromClassName( KermetaModelHelper.NamedElement.qualifiedName(_mainClassDefinition) );
+			// Starting the basic interpreter
+			_started = true;
+			return (RuntimeObject) _basicInterpreter.invoke(entryClass, _mainOperation, _parameters);
+		} catch (KermetaRaisedException e) {
+            error( e.getMessage()+ "\n" + e.toString() );
+		} catch (Throwable e) {
+			e.printStackTrace();
+			
+			String msg = "Kermeta internal error due to ";
+			if(e.getMessage() != null) msg += e.getMessage();
+			else msg += e.toString();
+			msg += ". Please contact the development team and send them the logs. \n" + _basicInterpreter.computeCurrentContextString();;
+			// msg for the logger
+			error( msg );
+			// msg for eclipse ui (ErrorLog view)
+			InterpreterPlugin.getDefault().getLog().log(new Status(IStatus.ERROR, "fr.irisa.triskell.kermeta.interpreter", msg,e));
+		} finally {
+			
+		}
+		return null;
+	}
+	
+	public void terminate(){
+		try { // Give time for other processes to flush their content string.
+			Thread.sleep(100);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		if ( _fakeProcess != null )
+			try {
+				_fakeProcess.terminate();
+			} catch (DebugException e) {
+				e.printStackTrace();
+			}
+		_started = false;
+		_terminated = true;
+		releaseResources();
 	}
 	
 	/**

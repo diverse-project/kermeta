@@ -1,4 +1,4 @@
-/* $Id: ExpressionInterpreter.java,v 1.73 2008-12-12 16:23:32 dvojtise Exp $
+/* $Id: ExpressionInterpreter.java,v 1.74 2009-02-11 10:52:02 dvojtise Exp $
  * Project : Kermeta (First iteration)
  * File : ExpressionInterpreter.java
  * License : EPL
@@ -174,7 +174,7 @@ public class ExpressionInterpreter extends KermetaOptimizedVisitor {
         finally {
 	        // After operation has been evaluated, pop its context
 	        interpreterContext.popCallFrame();
-	        terminate();
+	       // terminate();
         }
 		return result;
 	}

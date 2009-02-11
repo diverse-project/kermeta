@@ -24,6 +24,7 @@ import fr.irisa.triskell.eclipse.console.IOConsole;
 import fr.irisa.triskell.kermeta.error.KermetaInterpreterError;
 import fr.irisa.triskell.kermeta.exceptions.NotRegisteredURIException;
 import fr.irisa.triskell.kermeta.exceptions.URIMalformedException;
+import fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter;
 import fr.irisa.triskell.kermeta.launcher.AbstractKInterpreter;
 import fr.irisa.triskell.kermeta.launcher.KConstraintInterpreter;
 import fr.irisa.triskell.kermeta.launcher.KDebugger;
@@ -192,6 +193,25 @@ public class Interpreter {
 	}
 	
 	/**
+	 * get an entry point of the program.
+	 * @param className The main class of the program.
+	 * @param operationName The operation of the main class to be executed.
+	 * @return Operation The Operation object corresponding to the parameters
+	 */
+	public fr.irisa.triskell.kermeta.language.structure.Operation getEntryPoint(String className, String operationName) {
+		return _realInterpreter.getEntryPoint(className, operationName);
+	}
+	
+	/**
+	 * get the internal expression interpreter of the interpreter.
+	 * @return ExpressionInterpreter
+	 */
+	public ExpressionInterpreter getExpressionInterpreter(){
+		return _realInterpreter.getBasicInterpreter();
+	}
+	
+	
+	/**
 	 * Sets the prameters to send to the main operation.
 	 * @param parameters The parameters in String representation.
 	 */
@@ -346,6 +366,35 @@ public class Interpreter {
 	}
 	
 	/**
+	 * launch the interpreter but does not exit at the end so that it is possible to ask for other 
+	 * method thanks to invoke()
+	 * @return RuntimeObject The RuntimeObject corresponding to the chosen entry point
+	 */
+	public RuntimeObject launchAndWait() throws InitializationError {
+		try {
+			if ( _kermetaUnit.isErroneous() )
+				throw new InitializationError(_kermetaUnit);			
+			if ( _realInterpreter == null )
+				ready();
+			if ( _realInterpreter != null ) {
+				_realInterpreter.setEntryPoint(_className, _operationName);
+				_realInterpreter.setParameters(_parameters);
+				_realInterpreter.setDefaultPath(_defaultPath);
+				_realInterpreter.setContextClassLoader(_classLoader);
+				
+				return _realInterpreter.launchAndWait();
+			}
+		} catch (KermetaInterpreterError e) {
+			e.printStackTrace( _errorStream);
+		} finally {
+			//releaseResources();
+		}
+		return null;
+	}
+	
+	
+	
+	/**
 	 * 
 	 * @return true if the interpreter has terminated and false otherwise.
 	 */
@@ -353,6 +402,15 @@ public class Interpreter {
 		if ( _realInterpreter == null )
 			return false;
 		return _realInterpreter.isTerminated();
+	}
+	
+	
+	/**
+	 * stop the kermeta interpreter when used with launchAndWait()
+	 */
+	public void terminate() {
+		if ( _realInterpreter != null )
+			_realInterpreter.terminate();
 	}
 	
 	/**
