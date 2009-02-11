@@ -1,5 +1,5 @@
 
-/*$Id: Saver.java,v 1.12 2009-02-11 13:55:17 cfaucher Exp $
+/*$Id: Saver.java,v 1.13 2009-02-11 16:50:57 cfaucher Exp $
 * Project : org.kermeta.compiler.generator
 * File : 	Saver.java
 * License : EPL
@@ -160,16 +160,17 @@ public class Saver extends SaverOrLoader {
 									cloneEObject(sourceListObject, targetListObject);
 								}
 								
-								if( targetList instanceof BasicEList ) {
+								if( !targetFeature.isUnique() &&  targetList instanceof BasicEList ) {
 									((BasicEList) targetList).addUnique(targetListObject);
 								} else {
 									targetList.add(targetListObject);
 								}
+								
 							// Special case for enumerator.
 							} else if ( o instanceof Enumerator ) {
 								Object realValue = createInstance( (Enumerator) o, this.getMetamodelURI());
 								
-								if( targetList instanceof BasicEList ) {
+								if( !targetFeature.isUnique() && targetList instanceof BasicEList ) {
 									((BasicEList) targetList).addUnique(realValue);
 								} else {
 									targetList.add(realValue);
@@ -178,7 +179,7 @@ public class Saver extends SaverOrLoader {
 							// Default case for String, Integer...
 							} else {
 							
-								if( targetList instanceof BasicEList ) {
+								if( !targetFeature.isUnique() && targetList instanceof BasicEList ) {
 									((BasicEList) targetList).addUnique(o);
 								} else {
 									targetList.add(o);

@@ -1,5 +1,5 @@
 
-/*$Id: Loader.java,v 1.14 2009-02-11 13:51:56 cfaucher Exp $
+/*$Id: Loader.java,v 1.15 2009-02-11 16:51:00 cfaucher Exp $
 * Project : org.kermeta.compiler.generator
 * File : 	Loader.java
 * License : EPL
@@ -188,7 +188,7 @@ public class Loader extends SaverOrLoader {
 							}
 							
 							if( targetList!=null ) {
-								if( targetList instanceof BasicEList ) {
+								if( !targetFeature.isUnique() && targetList instanceof BasicEList ) {
 									((BasicEList) targetList).addUnique(targetListObject);
 								} else {
 									targetList.add(targetListObject);
@@ -198,7 +198,7 @@ public class Loader extends SaverOrLoader {
 						} else if ( o instanceof Enumerator ) {
 							Object realValue = createInstance( (Enumerator) o, this.getMetamodelURISpecialCompiler());
 							
-							if( targetList instanceof BasicEList ) {
+							if( !targetFeature.isUnique() && targetList instanceof BasicEList ) {
 								((BasicEList) targetList).addUnique(realValue);
 							} else {
 								targetList.add(realValue);
@@ -206,7 +206,7 @@ public class Loader extends SaverOrLoader {
 							
 						} else {
 							
-							if( targetList instanceof BasicEList ) {
+							if( !targetFeature.isUnique() && targetList instanceof BasicEList ) {
 								((BasicEList) targetList).addUnique(o);
 							} else {
 								targetList.add(o);
