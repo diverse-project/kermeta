@@ -1,5 +1,5 @@
 
-/*$Id: Loader.java,v 1.15 2009-02-04 17:33:54 cfaucher Exp $
+/*$Id: Loader.java,v 1.16 2009-02-11 13:55:17 cfaucher Exp $
 * Project : org.kermeta.compiler.generator
 * File : 	Loader.java
 * License : EPL
@@ -16,6 +16,7 @@ import java.util.List;
 
 import kermeta.persistence.EMFResource;
 
+import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.Enumerator;
 import org.eclipse.emf.common.util.URI;
@@ -187,14 +188,30 @@ public class Loader extends SaverOrLoader {
 							}
 							
 							if( targetList!=null ) {
-								targetList.add(targetListObject);
+								if( targetList instanceof BasicEList ) {
+									((BasicEList) targetList).addUnique(targetListObject);
+								} else {
+									targetList.add(targetListObject);
+								}
 							}
 							
 						} else if ( o instanceof Enumerator ) {
 							Object realValue = createInstance( (Enumerator) o, this.getMetamodelURISpecialCompiler());
-							targetList.add(realValue);
+							
+							if( targetList instanceof BasicEList ) {
+								((BasicEList) targetList).addUnique(realValue);
+							} else {
+								targetList.add(realValue);
+							}
+							
 						} else {
-							targetList.add(o);
+							
+							if( targetList instanceof BasicEList ) {
+								((BasicEList) targetList).addUnique(o);
+							} else {
+								targetList.add(o);
+							}
+							
 						}
 					}
 				}
