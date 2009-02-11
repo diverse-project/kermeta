@@ -1,5 +1,5 @@
 /* *************************************************
- * $Id: collections.kmt,v 1.60 2009-01-20 13:13:06 dvojtise Exp $
+ * $Id: collections.kmt,v 1.61 2009-02-11 09:51:02 cfaucher Exp $
  * Franck FLEUREY - 14/02/2005 
  * Triskell Research Group
  * IRISA / University of Rennes 1 (France)
@@ -404,7 +404,6 @@ abstract class Collection<G>
 /**
  * A Set is a non-ordered collection that contains distinct elements
  * (with regards to the G.equals(Object) operation)
- * not used for the moment @EMF_needProperty "isUnique=true isOrdered=false javaClass=org.eclipse.emf.common.util.BasicEList"
  */
 class Set<G> inherits Collection<G>
 {
@@ -642,7 +641,6 @@ class Set<G> inherits Collection<G>
 
 /**
  * Bag is a concrete non-ordered Collection allowing duplicates
- * not used for the moment @EMF_needProperty "isUnique=false isOrdered=false javaClass=org.eclipse.emf.common.util.BasicEList"
  */
 class Bag<G> inherits Collection<G>
 {
@@ -883,7 +881,6 @@ class Bag<G> inherits Collection<G>
 
 /**
  * An OrderedCollection is the root abstract class for all ordered Collections.
- * not used for the moment @EMF_needProperty "isUnique=false isOrdered=true javaClass=org.eclipse.emf.common.util.BasicEList"
  */
 abstract class OrderedCollection<G> inherits Collection<G> {
 	
@@ -1026,7 +1023,6 @@ abstract class OrderedCollection<G> inherits Collection<G> {
 
 /**
  * An OrderedSet is a Set that contained ordered distinct elements
- * not used for the moment @EMF_needProperty "isUnique=true isOrdered=true javaClass=org.eclipse.emf.common.util.BasicEList"
  */
 class OrderedSet<G> inherits Set<G>, OrderedCollection<G>
 {
@@ -1171,7 +1167,6 @@ class OrderedSet<G> inherits Set<G>, OrderedCollection<G>
 
 /**
  * A Sequence is an OrderedCollection of elements allowing duplicates
- * not used for the moment @EMF_needProperty "isUnique=false isOrdered=true javaClass=org.eclipse.emf.common.util.BasicEList"
  */
 class Sequence<G> inherits Bag<G>, OrderedCollection<G>
 {
