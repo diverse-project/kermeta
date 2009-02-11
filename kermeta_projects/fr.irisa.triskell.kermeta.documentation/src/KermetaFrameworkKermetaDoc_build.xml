@@ -29,11 +29,13 @@
 		</fileset>	
 		<pathelement location="../lib/xercesImpl.jar"/>
 		<pathelement location="../../fr.irisa.triskell.eclipse.util/bin"/>
+		<pathelement location="../../org.kermeta.log4j.util/bin/"/>
+		<pathelement location="../../org.kermeta.log4j.util/lib/thirdparty/commons-logging-1.1.1/commons-logging-1.1.1.jar"/>
 		<pathelement location="../../fr.irisa.triskell.traceability.model/bin"/>
 		<pathelement location="../../fr.irisa.triskell.kermeta.io/build/class"/>
 		<pathelement location="../../org.kermeta.io.loader/bin"/>
 		<pathelement location="../../org.eclipse.gymnast.runtime.core/bin"/>
-		<pathelement location="../../fr.irisa.triskell.kermeta.io/lib/thirdparty/antlr.jar"/>
+		<pathelement location="../../org.antlr.antlr2/bin"/>
 		<pathelement location="../../fr.irisa.triskell.kermeta.model/build/class"/>
 		<pathelement location="../../fr.irisa.triskell.kermeta.interpreter/build/class"/>
 		<pathelement location="../../fr.irisa.triskell.kermeta/lib/thirdparty/emfatic-core.jar"/>
