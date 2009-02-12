@@ -1,4 +1,4 @@
-/* $Id: EcoreModelElementHelper.kmt,v 1.13 2008-12-03 16:52:51 cfaucher Exp $
+/* $Id: EcoreModelElementHelper.kmt,v 1.14 2009-02-12 15:25:50 mclavreu Exp $
  * Creation date: January 25, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -19,30 +19,6 @@ using km2ecore
 
 class EcoreModelElementHelper {
 	
-	@deprecated "unused"
-	operation findEClassProxy(cd : ClassDefinition) : EClass is do
-		var pack : Package init Package.new 
-		pack ?= cd.container
-		var eclassifier : EClassifier init pack.ecoreModelElement.eClassifiers.detect{ c |
-			if c.isInstanceOf(EClass) then
-				c.asType(EClass).name.equals(cd.name)
-			end
-		}
-		result := eclassifier.asType(EClass)
-	end
-	
-	@deprecated "unused"
-	operation findEOperationProxy(op : Operation) : EOperation is do
-		var cd : ClassDefinition init ClassDefinition.new
-		cd ?= op.container
-		var eop : EOperation init cd.ecoreModelElement.eOperations.detect{ c |
-			if c.isInstanceOf(EOperation) then
-				c.asType(EOperation).name.equals(op.name)
-			end
-		}
-		result := eop.asType(EOperation)
-	end
-	
 	operation setEStructuralFeatureProperties(self_ : Property, ecoreStructuralFeature : EStructuralFeature, context : KM2EcoreContext) : Void is do
 		ecoreStructuralFeature.name := self_.getFinalName(context)
 		ecoreStructuralFeature.ordered := self_.isOrdered
@@ -59,4 +35,5 @@ class EcoreModelElementHelper {
 		//ecoreStructuralFeature.unsettable :=
 		ecoreStructuralFeature.derived := self_.isDerived
 	end
+
 }
