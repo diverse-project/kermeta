@@ -84,7 +84,7 @@ public class ClassUtil {
 		return (kermeta.language.structure.Object) newObject;
 	}
 	
-	public static java.lang.Object cloneSwitcher(kermeta.language.structure.Class class_, java.lang.Object objectToClone) {
+	public static Object cloneSwitcher(kermeta.language.structure.Class class_, java.lang.Object objectToClone) {
 		if( objectToClone instanceof kermeta.language.structure.Object ) {
 			return class_.clone((kermeta.language.structure.Object) objectToClone);
 		} else {
