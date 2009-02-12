@@ -1,4 +1,4 @@
-/* $Id: KM2EcoreHelper.kmt,v 1.13 2008-12-03 16:52:53 cfaucher Exp $
+/* $Id: KM2EcoreHelper.kmt,v 1.14 2009-02-12 15:26:17 mclavreu Exp $
  * Creation date: January 29, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -8,8 +8,9 @@
 @uri "http://www.kermeta.org/km2ecore/helper"
 package km2ecore::helper;
 
-// The 4 following require statements are here to simplify the call of these files
+// The following require statements are here to simplify the call of these files
 require "kermeta/KermetaHelper.kmt" 
 require "ecore/EcoreHelper.kmt"
 require "java/JavaHelper.kmt"
 require "traceability/TraceabilityHelper.kmt"
+require "simk/SimkHelper.kmt"
