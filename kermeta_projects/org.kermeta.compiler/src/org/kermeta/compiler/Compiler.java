@@ -1,4 +1,4 @@
-/* $Id: Compiler.java,v 1.23 2009-02-11 10:44:54 cfaucher Exp $
+/* $Id: Compiler.java,v 1.24 2009-02-12 12:39:47 cfaucher Exp $
  * Project   : fr.irisa.triskell.kermeta.compiler
  * File      : Compiler.java
  * License   : EPL
@@ -237,7 +237,8 @@ public class Compiler extends org.kermeta.compiler.Generator {
 				try {
 					manifest_file.delete(true, new NullProgressMonitor());
 				} catch (CoreException e) {
-					e.printStackTrace();
+					// We know this exception could be raised, but the while loop fixes the eventual problems
+					//e.printStackTrace();
 				}
 			}
 			
