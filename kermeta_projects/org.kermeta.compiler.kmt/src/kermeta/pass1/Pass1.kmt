@@ -1,4 +1,4 @@
-/* $Id: Pass1.kmt,v 1.38 2008-12-03 16:52:52 cfaucher Exp $
+/* $Id: Pass1.kmt,v 1.39 2009-02-12 16:33:30 mclavreu Exp $
  * Creation date: January 21, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -81,9 +81,7 @@ aspect class Package {
 		self.ecoreModelElement := ecorePackage
 		// Compile the owned elements
 		self.eachOwnedElement{ cd |
-			if cd.getDeprecated() == "" then
-					cd.applyPass1(context)
-			end
+			cd.applyPass1(context)
 		}
 	end
 }
