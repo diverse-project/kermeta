@@ -1,4 +1,4 @@
-/* $Id: ModelAnalizerHelper.kmt,v 1.7 2008-12-03 16:52:52 cfaucher Exp $
+/* $Id: ModelAnalizerHelper.kmt,v 1.8 2009-02-12 15:25:18 mclavreu Exp $
  * Creation date: May 29, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -14,6 +14,8 @@ using kermeta::language::structure
 using ecore
 
 class ModelAnalizer {
+
+	// Detect if the given super_class has extended_class as specialization (extends)
 	operation isExtendedBy( extended_class : EClass , super_class : EClass ) : Boolean is do
 		result := false
 		
@@ -22,6 +24,7 @@ class ModelAnalizer {
 		end
 	end
 	
+	// Detect if the given super_class has extended_class as realization (implements)
 	operation isInterfaceBy( extended_class : EClass , super_class : EClass ) : Boolean is do
 		result := not isExtendedBy( extended_class, super_class )
 	end
