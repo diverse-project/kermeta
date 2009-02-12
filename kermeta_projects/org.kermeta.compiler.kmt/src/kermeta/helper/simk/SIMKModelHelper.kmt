@@ -1,4 +1,4 @@
-/* $Id: SIMKModelHelper.kmt,v 1.16 2009-02-03 17:57:20 cfaucher Exp $
+/* $Id: SIMKModelHelper.kmt,v 1.17 2009-02-12 16:32:56 mclavreu Exp $
  * Creation date: Jul 21, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -18,6 +18,7 @@ using kermeta::language::structure
 using kermeta::standard
 using km2ecore
 using km2ecore::helper::java
+using kermeta::persistence
 
 aspect class SIMKModel {
 
@@ -119,6 +120,15 @@ aspect class SIMKModel {
 		if sm.isVoid() then	
 			result := sMContext
 		end
+	end
+	
+	operation save(context : KM2EcoreContext) : Void is do
+		// Create a Simk resource
+		context.simkOutput := context.kmInput.replaceExtension("simk")
+	    var simkResource : Resource init context.outputRepository.createResource(context.simkOutput, "http://www.kermeta.org/simk")
+	    simkResource.add(self)
+	    // Save the Simk model
+	    simkResource.save()
 	end
 }
 

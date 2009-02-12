@@ -1,4 +1,4 @@
-/* $Id: StructureCompiler.kmt,v 1.80 2009-02-10 13:33:28 cfaucher Exp $
+/* $Id: StructureCompiler.kmt,v 1.81 2009-02-12 16:32:56 mclavreu Exp $
  * Creation date: January 21, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -28,6 +28,7 @@ using kermeta::persistence
 using kermeta::language::structure
 using km2ecore
 using kermeta::standard
+using kermeta::exceptions
 
 class Main {	
 	reference context : KM2EcoreContext [1..1]
@@ -72,7 +73,10 @@ class Main {
     operation main_km2ecore_behaviorJava(modelInput : String) : Void is do
     	main_mode(modelInput, "", modelInput.replaceExtension("ecore"), CompilingMode.behaviorJava, false)
     end
-    	
+    
+    /**
+     * Last operation before running the transfo.
+     */
 	operation main_mode(modelInput : String, traceInput : String, output : String, mode : CompilingMode, splitEcore : Boolean) : Void is do
 
 		stdio.writeln("KermetaCompiler - Starting up of the Ecore generation for the model: " + modelInput)
@@ -91,9 +95,11 @@ class Main {
 		if context.mode == CompilingMode.onlyEcore then
 			context.mu.applyPass2(context)
 		end
-				
+		
+		// Not implemented yet
 		if context.mode == CompilingMode.behaviorKmt then
-			context.mu.applyPass2BehaviorKmt(context)
+			//context.mu.applyPass2BehaviorKmt(context)
+			raise NotImplementedException.new()
 		end
 		
 		if context.mode == CompilingMode.behaviorJava then
@@ -115,8 +121,10 @@ class Main {
 		
 		stdio.writeln("The Ecore Model has been saved")
 		
-		// Save the context to reuse it during the EMF Java generation (i.e.: *.simk)
-		context.save()
+		context.simkModel.save(context)
+		
+		// Save resources to reuse it during the EMF Java generation or incremental compilation (e.g.: traceability)
+		//context.save()
 		
 		stdio.writeln("Stats:\n\tconditional + loop: " + context.inc_condStack.toString()
 			+ "\n\tfunction type: " + context.inc_ftSuffix.toString())
@@ -141,6 +149,9 @@ class Main {
 		ecore_resource.save()
     end
     
+    /**
+     * Save an Ecore file for each root EPackages
+     */
     operation saveSplitEcore(output : String) is do
     	var resourceBag : Bag<Resource> init Bag<Resource>.new()
 				
@@ -163,24 +174,6 @@ class Main {
     /*****************************************/
     /********** METHODS FOR TESTING **********/
     /*****************************************/
-    
-    operation main_mode2(modelInput : String, traceInput : String, output : String, mode : CompilingMode) : Void is do
-
-		// Creating and initializing the context
-		context := KM2EcoreContext.new
-		context.initialize( modelInput, traceInput )
-		context.mode := mode
-		
-		stdio.writeln(typeDefinitionToString(getTypeDefinitionByQualifiedName("kermeta::standard::Integer")))
-		//stdio.writeln(typeDefinitionToString(getTypeDefinitionByQualifiedName("kermeta::standard::Integer")))
-		stdio.writeln(typeDefinitionToString(getTypeDefinitionByQualifiedName("kermeta::standard::Boolean")))
-		stdio.writeln(typeDefinitionToString(getTypeDefinitionByQualifiedName("kermeta::standard::Real")))
-		stdio.writeln(typeDefinitionToString(getTypeDefinitionByQualifiedName("kermeta::standard::Character")))
-		stdio.writeln(typeDefinitionToString(getTypeDefinitionByQualifiedName("kermeta::standard::String")))
-		stdio.writeln(typeDefinitionToString(getTypeDefinitionByQualifiedName("kermeta::standard::Numeric")))
-		
-				
-    end
     
     operation getTypeDefinitionByQualifiedName( qn : String ) : TypeDefinition is do
     	var td : TypeDefinition init TypeDefinition.new
@@ -216,7 +209,7 @@ class Main {
     	//operations.add("flatten")
     	//operations.add("addAllTestCasesFrom")
     	//operations.add("count")
-    	//operations.add("createResource")
+    	operations.add("createResource")
     	//operations.add("saveAndValidateWithEMF")
     	//operations.add("applyPass1")
     	//operations.add("applyPass2BehaviorJava")
@@ -224,7 +217,7 @@ class Main {
     	//operations.add("replaceExtension")
     	//operations.add("getFirstTextReference")
     	//operations.add("saveAndValidateWithEMF")
-    	//operations.add("main")
+    	operations.add("main")
     	//operations.add("getContainerValue")
     	//operations.add("getContainerClass")
     	//operations.add("getAllSubPackages")
@@ -273,11 +266,14 @@ class Main {
     	//operations.add("getTypeName")
     	//operations.add("parse")
     	//operations.add("distil")
-    	operations.add("testAssignValueTypeInObject")
+    	//operations.add("testAssignValueTypeInObject")
     	
     	main_compilingOnlyOperations(modelInput, traceInput, output, mode, operations)
     end
     
+    /**
+     * Generate a string representing the Java version of a Kermeta operation
+     */
     operation main_compilingOnlyOperations(modelInput : String, traceInput : String, output : String, mode : CompilingMode, operations : OrderedSet<String>) : Void is do
 
 		// Creating and initializing the context
@@ -331,21 +327,6 @@ class Main {
 				
 		stdio.writeln("\nFinish")
 		
-    end
-    
-    operation testAssignValueTypeInObject() : Void is do
-    	var o : kermeta::language::structure::Object init 22
-		var o2 : kermeta::language::structure::Object init kermeta::language::structure::Object.clone(o)
-		
-		kermeta::language::structure::Object.isInstance(o)
-		
-		var s : String 
-		s ?= o
-
-		var s2 : String init String.clone(s)
-		
-		stdio.writeln("s2: " + s2)
-		   
     end
    	
 }

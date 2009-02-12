@@ -1,4 +1,4 @@
-/* $Id: KM2EcoreContext.kmt,v 1.51 2009-01-09 10:55:30 cfaucher Exp $
+/* $Id: KM2EcoreContext.kmt,v 1.52 2009-02-12 16:32:56 mclavreu Exp $
  * Creation date: February 14, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -28,6 +28,7 @@ using km2ecore::helper::kermeta
 using traceability
 using kermeta::persistence
 using simk
+using kermeta::exceptions
 using kermeta::utils
 
 class KM2EcoreContext {
@@ -38,14 +39,11 @@ class KM2EcoreContext {
 	/** The input model (as input of the transformation) */
 	attribute traceabilityInput : String [1..1]
 	
-	/** The output Ecore models (as output of the transformation) */
-	/////////////attribute ecoreOutputs : String [1..*]
-	
 	/** The simk model (as output of the transformation) */
 	attribute simkOutput : String [1..1]
 	
 	/** The modeling units source */
-	reference mu : oset ModelingUnit [1..1]
+	reference mu : ModelingUnit [1..1]
 	
 	/** The choosen compiling mode */
 	attribute mode : CompilingMode [1..1]
@@ -86,9 +84,6 @@ class KM2EcoreContext {
 	
 	/** List of the method from the framework */
 	reference frameworkOperations : String [0..*]
-	
-	/** Unique instance of the JavaTypeMapping */
-	//reference javaTypeMapping : JavaTypeMapping [0..1]
 	
 	/**  */
 	reference inputRepository : EMFRepository [1..1]
@@ -178,10 +173,6 @@ class KM2EcoreContext {
 		
 		self.staticOperationMode := false
 		
-		// Initializing the java type mappings.
-		//javaTypeMapping := JavaTypeMapping.new
-		//javaTypeMapping.initialize()
-		
 		// Loading the km model and its possible trace model.
 		self.inputRepository := EMFRepository.new
 		var modelResource : Resource init self.inputRepository.createResource(modelInput, "http://www.kermeta.org/kermeta/1_2_0//kermeta")		
@@ -228,6 +219,13 @@ class KM2EcoreContext {
 		//self.GENMODEL_ANNOTATION := "http://www.eclipse.org/emf/2002/GenModel"
 	end
 	
+	/**
+	 * All methods from Type, Class and Object that are called via Switcher in order to resolve the following issue:
+	 * Type.isInstance: not possible directly in Java
+	 * Class.clone: not possible directly in Java
+	 * 22.getMetaClass: not possible directly in Java
+	 * Limits: each new methods
+	 */
 	operation initializeFrameworkOperations() : Void is do
 	
 		//From Object
@@ -338,15 +336,11 @@ class KM2EcoreContext {
 		end
 	end
 	
+	/**
+	 * Save the context
+	 */
 	operation save() : Void is do
-	
-		// Create a Simk resource
-		self.simkOutput := self.kmInput.replaceExtension("simk")
-	    var simkResource : Resource init self.outputRepository.createResource(self.simkOutput, "http://www.kermeta.org/simk")
-	    simkResource.add(self.simkModel)
-	    // Save the Simk model
-	    simkResource.save()
-	    
+		raise NotImplementedException.new()
 	    /*var traceResource : Resource init self.outputRepository.createResource("platform:/resource/org.kermeta.compiler.kmt/src/kermeta/common/TraceStructure.kermeta", "platform:/resource/org.kermeta.compiler.kmt/src/kermeta/common/TraceStructure.ecore")
 		traceResource.add(self.mu)
 		traceResource.save()*/
