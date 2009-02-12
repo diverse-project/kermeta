@@ -1,9 +1,11 @@
-/* $Id: TraceSource.kmt,v 1.4 2008-12-03 16:52:52 cfaucher Exp $
+/* $Id: TraceSource.kmt,v 1.5 2009-02-12 13:42:10 mclavreu Exp $
  * Creation date: April 17, 2008
  * License:
  * Copyright:
  * Authors: Francois Tanguy <ftanguy@irisa.fr>
  *			Cyril Faucher <cfaucher@irisa.fr>
+ * 
+ * IMPORTANT NOTE: Not used yet
  */
 
 package kermeta::language::structure;
