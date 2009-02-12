@@ -1,4 +1,4 @@
-/* $Id: Postprocess.kmt,v 1.13 2009-02-03 17:53:59 cfaucher Exp $ 
+/* $Id: Postprocess.kmt,v 1.14 2009-02-12 16:33:57 mclavreu Exp $ 
  * Creation : August 27, 2008
  * Licence  : EPL 
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -38,6 +38,10 @@ aspect class ModelingUnit {
 		}*/
 	end
 	
+	/**
+	 * Compilation of super operations is only mandatory when kermeta code is using super methods from classes converted into Java interfaces
+	 * Super operation are declared static in Java code
+	 */
 	operation compileSuperOperation( context : KM2EcoreContext ) : Void is do 
 		
 		// Compile the super operation in helper in using Simk
