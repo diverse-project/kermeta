@@ -1,4 +1,4 @@
-/* $Id: Compiler.java,v 1.24 2009-02-12 12:39:47 cfaucher Exp $
+/* $Id: Compiler.java,v 1.25 2009-02-13 11:01:59 cfaucher Exp $
  * Project   : fr.irisa.triskell.kermeta.compiler
  * File      : Compiler.java
  * License   : EPL
@@ -10,12 +10,8 @@
 
 package org.kermeta.compiler;
 
-import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
@@ -27,11 +23,8 @@ import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.Path;
-import org.eclipse.core.runtime.Status;
-import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.emf.codegen.ecore.genmodel.GenJDKLevel;
 import org.eclipse.emf.codegen.ecore.genmodel.GenModel;
 import org.eclipse.emf.codegen.util.CodeGenUtil;
@@ -44,6 +37,7 @@ import org.kermeta.compiler.common.KCompilerConstants;
 import org.kermeta.compiler.generator.helper.model.Context;
 import org.kermeta.compiler.generator.internal.actions.GenerateHelperAction;
 import org.kermeta.compiler.internal.ConfigurationCreator;
+import org.kermeta.compiler.internal.GenModelUtil;
 import org.kermeta.compiler.util.CompilerProperties;
 import org.kermeta.compiler.util.CompilerUtil;
 
@@ -134,6 +128,7 @@ public class Compiler extends org.kermeta.compiler.Generator {
 	
 			GenModel genModel = null;
 	
+			//Retrieve the GenModel instance
 			for (Iterator<EObject> it = genModelResource.getContents().iterator(); it.hasNext();) {
 				EObject gm_res = it.next();
 				if (gm_res instanceof GenModel) {
@@ -142,14 +137,14 @@ public class Compiler extends org.kermeta.compiler.Generator {
 			}
 	
 			if (genModel != null) {
-				// Resolve prefix settings for each GenPackage with canGenerate()==true => with a classifier in this one
-				CompilerUtil.ePackageFixerAll(genModel);
+				// Resolve prefix settings for each GenPackage, multipleEditorPages, ...
+				GenModelUtil.ePackageFixerAll(genModel);
 				
+				// Align the properties value with the genmodel
 				fixCompilerProperties(genModel);
 				
 				// Set parameters in GenModel
 				setGenModelParameters(genModel);
-				
 				
 				//Step1: Saving the *.genmodel before the generation of plugins
 				genModelResource.save(Collections.EMPTY_MAP);
@@ -198,7 +193,7 @@ public class Compiler extends org.kermeta.compiler.Generator {
 		
 		try {
 			
-			List<String> file_as_list = readStringByLine(manifest_file.getContents());
+			List<String> file_as_list = CompilerUtil.readStringByLine(manifest_file.getContents());
 			
 			for(String line : file_as_list) {
 				if( line.contains("Bundle-Version:") ) {
@@ -268,23 +263,7 @@ public class Compiler extends org.kermeta.compiler.Generator {
 	    	e.printStackTrace();
 		}*/
 	}
-	
-	public static List<String> readStringByLine( InputStream in ){
-		
-		List<String> list = new ArrayList<String>();
-		
-		BufferedReader input = new BufferedReader(new InputStreamReader(in));
-		try {
-			String thisLine;
-			while ((thisLine = input.readLine()) != null) {
-				list.add(thisLine);
-		    }
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return list;
-	}
+
 
 	/**
 	 * Set the path of the given metamodel in Ecore
@@ -365,6 +344,12 @@ public class Compiler extends org.kermeta.compiler.Generator {
 		if( compilerProperties.containsKey(CompilerProperties.COPYRIGHT_HEADER) ) {
 			genModel.setCopyrightText(compilerProperties.getProperty(CompilerProperties.COPYRIGHT_HEADER));
 		}
+		
+		if( compilerProperties.containsKey(CompilerProperties.ENABLE_EMF_LOAD_INITIALIZATION) ) {
+			if( compilerProperties.getProperty(CompilerProperties.ENABLE_EMF_LOAD_INITIALIZATION).equals("false") ) {
+				GenModelUtil.ePackageLoadInitializationFixer(genModel);
+			}
+		}
 	}
 	
 	private void fixCompilerProperties(GenModel genModel) {
@@ -385,7 +370,7 @@ public class Compiler extends org.kermeta.compiler.Generator {
 	}
 
 	/**
-	 * Launch the generation of the Java Source from the simk file
+	 * Launch the generation of the Java Source from the Simk file
 	 */
 	private void compileHelpers() {
 		GenerateHelperAction compileHelperAction = new GenerateHelperAction(this.monitor);

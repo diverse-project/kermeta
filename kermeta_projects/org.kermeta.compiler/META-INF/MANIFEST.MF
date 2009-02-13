@@ -8,9 +8,6 @@ Bundle-Vendor: %providerName
 Bundle-Localization: plugin
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Export-Package: org.kermeta.compiler,
- org.kermeta.compiler.model.compiler,
- org.kermeta.compiler.model.compiler.impl,
- org.kermeta.compiler.model.compiler.util,
  org.kermeta.compiler.util
 Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.emf.ecore;visibility:=reexport,

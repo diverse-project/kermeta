@@ -1,6 +1,6 @@
 
 
-/*$Id: MergeAction.java,v 1.9 2009-01-06 10:00:55 cfaucher Exp $
+/*$Id: MergeAction.java,v 1.10 2009-02-13 11:01:56 cfaucher Exp $
 * Project : org.kermeta.compiler.ui
 * File : 	MergeAction.java
 * License : EPL
@@ -22,7 +22,7 @@ import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.TreeSelection;
 import org.eclipse.ui.IObjectActionDelegate;
 import org.eclipse.ui.IWorkbenchPart;
-import org.kermeta.compiler.KermetaCompiler;
+import org.kermeta.compiler.Kmt2KmExporter;
 import org.kermeta.io.KermetaUnit;
 import org.kermeta.io.loader.plugin.LoaderPlugin;
 
@@ -44,7 +44,7 @@ public class MergeAction implements IObjectActionDelegate {
 					
 					String uri = "platform:/resource" + file.getFullPath().toString();
 					KermetaUnit kermetaUnit = LoaderPlugin.getDefault().load(uri, null);
-					KermetaCompiler kermetaCompiler = new KermetaCompiler(file);
+					Kmt2KmExporter kermetaCompiler = new Kmt2KmExporter(file);
 					kermetaCompiler.writeUnit(kermetaUnit, file);
 					
 				} catch (Exception e) {

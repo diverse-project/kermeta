@@ -1,38 +1,31 @@
-/* $Id: KermetaCompiler.java,v 1.10 2008-10-17 14:40:13 cfaucher Exp $
- * Project   : fr.irisa.triskell.kermeta.compiler
- * File      : CompileKermetaAction.java
+/* $Id: Kmt2KmExporter.java,v 1.1 2009-02-13 11:01:59 cfaucher Exp $
+ * Project   : org.kermeta.compiler
+ * File      : Kmt2KmExporter.java
  * License   : EPL
  * Copyright : IRISA / INRIA / Universite de Rennes 1
  * ----------------------------------------------------------------------------
  * Creation date : Feb 22, 2007
- * Authors       : cfaucher
+ * Authors       : Cyril Faucher <cfaucher@irisa.fr>
  */
 
 package org.kermeta.compiler;
 
 import java.io.IOException;
-import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Map;
 import java.util.Set;
 
 import org.apache.commons.logging.Log;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.CoreException;
-import org.kermeta.compiler.model.compiler.impl.AbstractCompilerImpl;
-import org.kermeta.interpreter.api.Interpreter;
-import org.kermeta.interpreter.api.InterpreterMode;
-import org.kermeta.interpreter.api.InterpreterOptions;
 import org.kermeta.io.KermetaUnit;
 import org.kermeta.log4j.util.LogConfigurationHelper;
 import org.kermeta.merger.Merger;
 
-import fr.irisa.triskell.eclipse.console.EclipseConsole;
 import fr.irisa.triskell.kermeta.exceptions.NotRegisteredURIException;
 import fr.irisa.triskell.kermeta.exceptions.URIMalformedException;
 import fr.irisa.triskell.kermeta.modelhelper.KermetaUnitHelper;
 
-public class KermetaCompiler extends AbstractCompilerImpl {
+public class Kmt2KmExporter {
 
 	protected IFile kermetafile;
 
@@ -41,41 +34,15 @@ public class KermetaCompiler extends AbstractCompilerImpl {
 	/**
 	 * Constructor for CompileKermetaAction.
 	 */
-	public KermetaCompiler(IFile kermetaFile) {
+	public Kmt2KmExporter(IFile kermetaFile) {
 		super();
 		this.kermetafile = kermetaFile;
 	}
 	
-	@Deprecated
-	public void generateEcore(IFile ifile) {
-				
-		Map<String, Object> options = new HashMap<String, Object>();
-		options.put(InterpreterOptions.MERGE, false);
-		options.put(InterpreterOptions.TYPE_CHECKED, true);
-		try {
-			Interpreter interpreter = new Interpreter("platform:/plugin/fr.irisa.triskell.kermeta/src/java/org/kermeta/km2ecore/StructureCompiler.km", InterpreterMode.RUN, options);
-			interpreter.setEntryPoint("kermeta::compiler::Main", "main_km2ecore_behaviorJava");
-			String[] parameters = new String[3];
-			parameters[0] = "platform:/resource" + ifile.getFullPath().toString();
-			parameters[1] = "";
-			parameters[2] = "platform:/resource" + ifile.getFullPath().removeFileExtension().addFileExtension("ecore").toString();
-			interpreter.setParameters(parameters);
-			EclipseConsole console = new EclipseConsole("KM2Ecore_with_behaviorJava");
-			interpreter.setStreams(console);
-			interpreter.launch();
-			ifile.refreshLocal(1, null);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		
-	}
-	
 	/**
-	 * output to the given file using default format: XMI
-	 * 
-	 * @param builder
+	 * Export the kmt file to a km file that is merged and typechecked
+	 * @param kermetaUnit
 	 * @param ifile
-	 * @param isExecutable
 	 * @throws Exception
 	 */
 	public void writeUnit(KermetaUnit kermetaUnit, IFile ifile) throws Exception {

@@ -1,4 +1,4 @@
-/* $Id: CompileKermetaAction.java,v 1.12 2009-02-06 12:50:54 cfaucher Exp $
+/* $Id: CompileKermetaAction.java,v 1.13 2009-02-13 11:01:56 cfaucher Exp $
  * Project   : fr.irisa.triskell.kermeta.compiler
  * File      : CompileKermetaAction.java
  * License   : EPL
@@ -27,7 +27,7 @@ import org.eclipse.ui.IActionDelegate;
 import org.eclipse.ui.IObjectActionDelegate;
 import org.eclipse.ui.IWorkbenchPart;
 import org.kermeta.compiler.Compiler;
-import org.kermeta.compiler.KermetaCompiler;
+import org.kermeta.compiler.Kmt2KmExporter;
 import org.kermeta.compiler.ui.Activator;
 import org.kermeta.io.KermetaUnit;
 import org.kermeta.io.loader.plugin.LoaderPlugin;
@@ -83,7 +83,7 @@ public class CompileKermetaAction implements IObjectActionDelegate {
 					@SuppressWarnings("unused")
 					SimkEditor simkEditor = new SimkEditor();
 		
-					KermetaCompiler kermetaCompiler = new KermetaCompiler(file);
+					Kmt2KmExporter kermetaCompiler = new Kmt2KmExporter(file);
 					
 					String uri = "platform:/resource" + file.getFullPath().toString();
 					KermetaUnit kermetaUnit = LoaderPlugin.getDefault().load(uri, null);

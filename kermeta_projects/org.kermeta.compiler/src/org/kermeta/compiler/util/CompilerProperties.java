@@ -17,6 +17,7 @@ public class CompilerProperties {
 	public final static String BUNDLE_VERSION = "bundle_version";
 	public final static String REQUIRE_BUNDLE = "require_bundles";
 	public final static String SOURCE = "source..";
+	public final static String ENABLE_EMF_LOAD_INITIALIZATION = "enable_emf_load_initialization";
 	
 	private String file_path;
 	

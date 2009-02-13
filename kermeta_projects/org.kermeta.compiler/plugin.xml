@@ -5,16 +5,10 @@
  <copyright>
  </copyright>
 
- $Id: plugin.xml,v 1.4 2008-01-31 13:29:04 cfaucher Exp $
+ $Id: plugin.xml,v 1.5 2009-02-13 11:01:59 cfaucher Exp $
 -->
 
 <plugin>
 
-  <extension point="org.eclipse.emf.ecore.generated_package">
-    <package 
-       uri = "http://www.kermeta.org/compiler" 
-       class = "org.kermeta.compiler.model.compiler.CompilerPackage"
-       genModel = "model/ecore/compiler.genmodel" /> 
-  </extension>
 
 </plugin>
