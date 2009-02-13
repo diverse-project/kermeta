@@ -1,4 +1,4 @@
-/* $Id: Pass1.kmt,v 1.39 2009-02-12 16:33:30 mclavreu Exp $
+/* $Id: Pass1.kmt,v 1.40 2009-02-13 12:24:39 cfaucher Exp $
  * Creation date: January 21, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -229,6 +229,18 @@ aspect class Operation {
 		c.ecoreModelElement.eOperations.add(ecoreOperation)
 		// Setting the ecore proxy
 		self.ecoreModelElement := ecoreOperation
+		
+		/*if self.isAbstract then
+			context.abstractOperations.add(self)
+		end
+		
+		if not self.superOperation.isVoid() then
+			if self.superOperation.isAbstract then
+				stdio.writeln("Add in implementationMethods: " + self.name + " - " + self.superOperation.qualifiedName )
+				self.superOperation.implementationMethods.add(self)
+			end
+		end*/
+		
 		// Compile the owned elements
 		self.eachOwnedElement{ o |
 			o.applyPass1(context)
