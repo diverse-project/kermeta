@@ -1,4 +1,4 @@
-/* $Id: Pass2.kmt,v 1.44 2009-02-12 16:34:37 mclavreu Exp $
+/* $Id: Pass2.kmt,v 1.45 2009-02-13 10:28:05 cfaucher Exp $
  * Creation date: January 21, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -86,7 +86,7 @@ package structure {
 		
 		method applyPass2BehaviorJava(context : KM2EcoreContext) is do
 		
-			if not self.isValueType() then
+			if not self.isAddedValueType() then
 				self.setLinks(context)
 			else
 				var cd_valueType : ClassDefinition
@@ -120,7 +120,7 @@ package structure {
 				
 				context.current_valueType := void
 			else
-				if not self.isValueType() then
+				if not self.isAddedValueType() then
 					//FIXME CF TO REMOVE super(context)
 					self.eachOwnedElement{ p |
 						p.applyPass2BehaviorJava(context)
@@ -134,7 +134,9 @@ package structure {
 					
 		end
 		
-		 @deprecated "true"
+		/**
+		 * FIXME CF Should be optimized via the context to avoid the re-creation everytime
+		 */
 		operation isAddedValueType() : Boolean is do
 			result := false
 			var qName : String init self.qualifiedName()
