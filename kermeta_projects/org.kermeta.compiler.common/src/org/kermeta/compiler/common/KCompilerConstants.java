@@ -1,4 +1,4 @@
-/*$Id: KCompilerConstants.java,v 1.3 2008-08-19 12:35:28 cfaucher Exp $
+/*$Id: KCompilerConstants.java,v 1.4 2009-02-13 16:16:08 cfaucher Exp $
 * Project : org.kermeta.compiler.trek.ui
 * File : 	KCompilerConstants.java
 * License : EPL
@@ -63,6 +63,9 @@ public final class KCompilerConstants {
 	public static final int PROGRESS_OK = 100;
 	
 	public static final int PROGRESS_NOK = 0;
+	
+	/** The name of the util directory */
+    public static final String UTIL_DIRECTORY = "util";
 	
 	
 	//From Persistence Mapping

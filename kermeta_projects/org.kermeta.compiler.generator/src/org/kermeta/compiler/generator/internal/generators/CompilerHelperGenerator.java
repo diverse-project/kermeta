@@ -8,7 +8,7 @@
  * Technologies), Jacques Lescot (Anyware Technologies) - initial API and
  * implementation
  ******************************************************************************/
-/*$Id: CompilerHelperGenerator.java,v 1.26 2009-02-12 12:36:35 cfaucher Exp $
+/*$Id: CompilerHelperGenerator.java,v 1.27 2009-02-13 16:16:06 cfaucher Exp $
 * Project : org.kermeta.compiler.generator
 * File : 	CompilerHelperGenerator.java
 * License : EPL
@@ -43,6 +43,7 @@ import org.eclipse.emf.codegen.ecore.genmodel.GenPackage;
 import org.eclipse.emf.codegen.jet.JETEmitter;
 import org.eclipse.emf.codegen.jet.JETException;
 import org.eclipse.emf.common.util.Monitor;
+import org.kermeta.compiler.common.KCompilerConstants;
 import org.kermeta.compiler.common.util.UnzipFile;
 import org.kermeta.compiler.generator.helper.model.Context;
 import org.kermeta.compiler.generator.internal.GeneratorPlugin;
@@ -123,7 +124,7 @@ public class CompilerHelperGenerator extends AbstractGenerator {
 		try {
 			
 			// Create the util folder
-			IPath util_folder_location = project.getFullPath().append("/" + UTIL_DIRECTORY);
+			IPath util_folder_location = project.getFullPath().append("/" + KCompilerConstants.UTIL_DIRECTORY);
 			ResourcesPlugin.getWorkspace().getRoot().getFolder(util_folder_location).create(true, true, new NullProgressMonitor());
 			
 			generateBaseTypesUtil();
@@ -370,7 +371,7 @@ public class CompilerHelperGenerator extends AbstractGenerator {
 			applyTemplate(
 					context.getKmFilePathForReflection(),
 					getTemplateURI(EXECUTION_CONTEXT_JAVA),
-					projectPath.append("/" + UTIL_DIRECTORY + "/org.kermeta.compil.runtime".replace(".", "/") + "/ExecutionContext.java"),
+					projectPath.append("/" + KCompilerConstants.UTIL_DIRECTORY + "/org.kermeta.compil.runtime".replace(".", "/") + "/ExecutionContext.java"),
 					configuration.isForceOverwrite());
 	}
 	
@@ -384,7 +385,7 @@ public class CompilerHelperGenerator extends AbstractGenerator {
 	applyTemplate(
 			args,
 			getTemplateURI(PERSISTENCE_MAPPING_JAVA),
-			projectPath.append("/" + UTIL_DIRECTORY + "/org.kermeta.compil.runtime".replace(".", "/") + "/PersistenceMapping.java"),
+			projectPath.append("/" + KCompilerConstants.UTIL_DIRECTORY + "/org.kermeta.compil.runtime".replace(".", "/") + "/PersistenceMapping.java"),
 			configuration.isForceOverwrite());
 	}
 	
@@ -414,7 +415,7 @@ public class CompilerHelperGenerator extends AbstractGenerator {
 	private void generateBaseTypesUtil() {
 		
 		IProject project = ResourcesPlugin.getWorkspace().getRoot().getProject( configuration.getModelPluginID() );
-		IPath destination_folder_location = project.getFullPath().append("/" + UTIL_DIRECTORY);
+		IPath destination_folder_location = project.getFullPath().append("/" + KCompilerConstants.UTIL_DIRECTORY);
 		
 		UnzipFile.unzipFile(GeneratorPlugin.getDefault().getBundle().getEntry("baseTypesUtil.zip"), destination_folder_location);
 
