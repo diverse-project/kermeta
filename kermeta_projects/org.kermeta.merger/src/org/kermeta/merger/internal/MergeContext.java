@@ -1,6 +1,6 @@
 
 
-/*$Id: MergeContext.java,v 1.4 2008-07-01 08:44:57 cfaucher Exp $
+/*$Id: MergeContext.java,v 1.5 2009-02-16 16:45:51 cfaucher Exp $
 * Project : org.kermeta.merger
 * File : 	MergeContext.java
 * License : EPL
@@ -28,6 +28,7 @@ import fr.irisa.triskell.kermeta.language.structure.Constraint;
 import fr.irisa.triskell.kermeta.language.structure.Operation;
 import fr.irisa.triskell.kermeta.language.structure.Parameter;
 import fr.irisa.triskell.kermeta.language.structure.Property;
+import fr.irisa.triskell.kermeta.language.structure.Tag;
 import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
 import fr.irisa.triskell.kermeta.modelhelper.KermetaUnitHelper;
 import fr.irisa.triskell.traceability.TextReference;
@@ -56,6 +57,8 @@ public class MergeContext extends LoadingContext {
 	private HashMap<ClassDefinition, ClassDefinitionContext> classDefinitionsContext = new HashMap<ClassDefinition, ClassDefinitionContext> (); 
 	
 	private HashMap<Constraint, Constraint> constraintsMapping = new HashMap<Constraint, Constraint> ();
+	
+	private HashMap<Tag, Tag> tagsMapping = new HashMap<Tag, Tag> ();
 	
 	private List<String> postUsingsToAdd = new ArrayList<String> ();
 	
@@ -147,6 +150,10 @@ public class MergeContext extends LoadingContext {
 	
 	public void putBaseConstraint(Constraint newConstraint, Constraint baseConstraint) {
 		constraintsMapping.put(newConstraint, baseConstraint);
+	}
+	
+	public void putBaseTag(Tag newTag, Tag baseTag) {
+		tagsMapping.put(newTag, baseTag);
 	}
 	
 	public void addPreUsing(String s) {

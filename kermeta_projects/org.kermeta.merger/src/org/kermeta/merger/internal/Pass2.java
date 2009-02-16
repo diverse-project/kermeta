@@ -1,6 +1,6 @@
 
 
-/*$Id: Pass2.java,v 1.8 2008-09-24 08:54:45 cfaucher Exp $
+/*$Id: Pass2.java,v 1.9 2009-02-16 16:45:51 cfaucher Exp $
 * Project : org.kermeta.merger
 * File : 	Pass2.java
 * License : EPL
@@ -28,6 +28,7 @@ import fr.irisa.triskell.kermeta.language.structure.Operation;
 import fr.irisa.triskell.kermeta.language.structure.Parameter;
 import fr.irisa.triskell.kermeta.language.structure.Property;
 import fr.irisa.triskell.kermeta.language.structure.StructureFactory;
+import fr.irisa.triskell.kermeta.language.structure.Tag;
 import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
 import fr.irisa.triskell.kermeta.language.structure.TypeVariable;
 import fr.irisa.triskell.kermeta.modelhelper.KermetaUnitHelper;
@@ -89,9 +90,14 @@ public class Pass2 extends MergePass {
 			newProperty.setIsUnique( p.isIsUnique() );
 			t.getOwnedAttribute().add( newProperty );
 			context.putBaseProperty(newProperty, p);
-			createTags(newProperty, p);
 			// Try to trace
 			context.tryToTrace(newProperty, p);
+			
+			for ( Property prop : context.getProperties(t, p.getName()) ) {
+				// Creating the tags
+				createTracedTags(newProperty, prop);
+			}
+			
 		}
 		
 	}
@@ -217,10 +223,11 @@ public class Pass2 extends MergePass {
 		newOperation.setIsOrdered(o.isIsOrdered());
 		newOperation.setIsUnique(o.isIsUnique());
 		newDefinition.getOwnedOperation().add( newOperation );
-		createTags(newOperation, o);
+		//createTags(newOperation, o);
 		context.putBaseOperation(newOperation, o);
 		// Try to trace
 		context.tryToTrace(newOperation, o);
+
 		
 		/*
 		 * 
@@ -240,6 +247,10 @@ public class Pass2 extends MergePass {
 		}
 		
 		for ( Operation op : context.getOperations(newDefinition, o.getName()) ) {
+			
+			// Creating the tags
+			createTracedTags(newOperation, op);
+			
 			/*
 			 * 
 			 * Creating the pre constraints.
@@ -254,6 +265,7 @@ public class Pass2 extends MergePass {
 				// Try to trace
 				context.tryToTrace(newConstraint, constraint);
 			}
+			
 			/*
 			 * 
 			 * Creating the post constraints.

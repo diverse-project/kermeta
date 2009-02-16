@@ -1,6 +1,6 @@
 
 
-/*$Id: MergePass.java,v 1.2 2008-02-14 07:12:56 uid21732 Exp $
+/*$Id: MergePass.java,v 1.3 2009-02-16 16:45:51 cfaucher Exp $
 * Project : org.kermeta.merger
 * File : 	MergePass.java
 * License : EPL
@@ -38,6 +38,19 @@ abstract public class MergePass {
 			newTag.setValue( t.getValue() );
 			newObject.getOwnedTags().add( newTag );
 			newObject.getTag().add( newTag );
+		}
+	}
+	
+	protected void createTracedTags(Object newObject, Object o) {
+		for ( Tag tag : o.getOwnedTags() ) {
+			Tag newTag = StructureFactory.eINSTANCE.createTag();
+			newTag.setName( tag.getName() );
+			newTag.setValue( tag.getValue() );
+			newObject.getTag().add( newTag );
+			newObject.getOwnedTags().add( newTag );
+			context.putBaseTag(newTag, tag);
+			// Try to trace
+			context.tryToTrace(newTag, tag);
 		}
 	}
 	
