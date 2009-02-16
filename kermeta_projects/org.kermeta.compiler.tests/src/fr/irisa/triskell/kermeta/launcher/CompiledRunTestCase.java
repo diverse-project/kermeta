@@ -1,4 +1,4 @@
-/* $Id: CompiledRunTestCase.java,v 1.4 2008-11-06 11:13:52 dvojtise Exp $
+/* $Id: CompiledRunTestCase.java,v 1.5 2009-02-16 16:53:29 cfaucher Exp $
  * Project    : fr.irisa.triskell.kermeta.test
  * File       : CompiledRunTestCase.java
  * License    : EPL
@@ -38,7 +38,7 @@ import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.jdt.launching.IVMInstall;
 import org.eclipse.jdt.launching.IVMRunner;
 import org.eclipse.jdt.launching.JavaRuntime;
-import org.kermeta.compiler.KermetaCompiler;
+import org.kermeta.compiler.Kmt2KmExporter4Compiler;
 import org.kermeta.compiler.tests.CompilerTestsPlugin;
 import org.kermeta.core.helper.FileHelper;
 import org.kermeta.io.KermetaUnit;
@@ -188,7 +188,7 @@ public class CompiledRunTestCase extends AbstractRunTestCase {
 		SimkEditor simkEditor = new SimkEditor();
 		
 
-		KermetaCompiler kermetaCompiler = new KermetaCompiler(source_file);
+		Kmt2KmExporter4Compiler kermetaCompiler = new Kmt2KmExporter4Compiler(source_file);
 		
 		String uri = "platform:/resource" + source_file.getFullPath().toString();
 		KermetaUnit kermetaUnit = LoaderPlugin.getDefault().load(uri, null);
