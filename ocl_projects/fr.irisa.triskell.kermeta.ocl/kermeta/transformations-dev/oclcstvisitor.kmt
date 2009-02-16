@@ -5,10 +5,10 @@ require "platform:/resource/fr.irisa.triskell.kermeta.ocl/mmodel/OCLCST.ecore"
 package cst
 {
 	@aspect "true"
-	abstract class CSTNode inherits visitors::Visitable
+	abstract class CSTNode inherits ocl::cst::visitors::Visitable
 	{
 
-		operation accept(visitor : visitors::Visitor) : Void is
+		operation accept(visitor : cst::visitors::Visitor) : Void is
 			 visitor.visitCSTNode(self)
  
 	}
@@ -16,7 +16,7 @@ package cst
 	class PackageDeclarationCS 
 	{ 
 
-		method accept(visitor : visitors::Visitor) : Void from ocl::cst::CSTNode is
+		method accept(visitor : cst::visitors::Visitor) : Void from ocl::cst::CSTNode is
 			 visitor.visitPackageDeclarationCS(self)
   
 	}  
