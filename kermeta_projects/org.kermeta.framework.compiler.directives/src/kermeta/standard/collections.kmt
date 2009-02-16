@@ -1,0 +1,22 @@
+/* $Id: collections.kmt,v 1.1 2009-02-16 15:47:10 cfaucher Exp $ 
+ * Creation : February 16, 2009
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            Cyril Faucher <cfaucher@irisa.fr>
+ *
+ *
+ */
+
+package kermeta::standard;
+
+require kermeta
+
+ @EMF_needProperty "name=values isUnique=false isOrdered=false javaClass=org.eclipse.emf.common.util.EList"
+aspect abstract class Collection<G> {
+}
+
+ @EMF_needProperty "name=javaIterator javaClass=java.util.Iterator"
+ @EMF_needProperty "name=kermetaCollection classDefinitionQN=kermeta::standard::Collection"
+aspect class Iterator<G> {
+}

@@ -1,0 +1,13 @@
+/* $Id: framework_directives_for_compiler.kmt,v 1.1 2009-02-16 15:47:10 cfaucher Exp $ 
+ * Creation : February 16, 2009
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *             Cyril Faucher <cfaucher@irisa.fr>
+ */
+
+package kermeta;
+
+require kermeta
+require "kunit/kunit.kmt"
+require "standard/value_types.kmt"

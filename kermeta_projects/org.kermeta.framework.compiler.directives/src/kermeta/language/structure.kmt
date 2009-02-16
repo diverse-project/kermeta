@@ -1,0 +1,98 @@
+/* $Id: structure.kmt,v 1.1 2009-02-16 15:47:10 cfaucher Exp $ 
+ * Creation : February 16, 2009
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            Cyril Faucher <cfaucher@irisa.fr>
+ *
+ *
+ */
+
+
+package kermeta::language::structure;
+
+require kermeta
+
+  @EMF_needProperty "name=oid javaClass=java.lang.Integer"
+  @EMF_needProperty "name=internalContainingResource classDefinitionQN=kermeta::persistence::Resource"
+aspect class Object {
+
+	 @RecopyInValueTypes "true"
+	operation getMetaClass() : Class from Object is abstract
+	
+	 @WrapperValueTypeReturnType "java.lang.String=kermeta.language.structure.Object java.lang.Boolean=kermeta.language.structure.Object java.lang.Integer=kermeta.language.structure.Object java.lang.Double=kermeta.language.structure.Object java.lang.Character=kermeta.language.structure.Object java.lang.Number=kermeta.language.structure.Object"
+	 @RecopyInValueTypes "true"
+	operation container() : Object from Object is abstract
+	
+	 @RecopyInValueTypes "true"	
+	operation checkInvariants() : Void from Object is abstract
+	
+	 @RecopyInValueTypes "true"
+	operation checkAllInvariants() : Void from Object is abstract
+	
+	 @RecopyInValueTypes "true"	
+	operation equals(element : Object) : Boolean from Object is abstract
+	
+	 @RecopyInValueTypes "true"	
+	operation isNotEqual(element : Object) : Boolean from Object is abstract
+	
+	 @RecopyInValueTypes "true"	
+	operation isKindOf(cl : Class) : Boolean is abstract
+	
+	 @WrapperValueTypeReturnType "java.lang.String=kermeta.language.structure.Object java.lang.Boolean=kermeta.language.structure.Object java.lang.Integer=kermeta.language.structure.Object java.lang.Double=kermeta.language.structure.Object java.lang.Character=kermeta.language.structure.Object java.lang.Number=kermeta.language.structure.Object"
+	 @RecopyInValueTypes "true"
+	operation get(~property : Property) : Object from Object is abstract
+	
+	 @RecopyInValueTypes "true"	
+	operation ~set(~property : Property, element : Object) : Void from Object is abstract
+	
+	 @RecopyInValueTypes "true"	
+	operation isSet(~property : Property) : Boolean from Object is abstract
+	
+	 @RecopyInValueTypes "true"	
+	operation unset(~property : Property) : Void from Object is abstract
+	
+	 @RecopyInValueTypes "true"	
+	operation oid() : Integer is abstract
+	
+	 @RecopyInValueTypes "true"
+	operation toString() : String is abstract
+	
+	 @RecopyInValueTypes "true"
+	operation isFrozen() : Boolean is abstract
+	
+	 @RecopyInValueTypes "true"
+	operation isVoid() : Boolean is abstract
+	
+	 @RecopyInValueTypes "true"
+	operation hashcode() : Integer is abstract
+	
+	 @RecopyInValueTypes "true"
+	operation freeze() : Void is abstract
+	
+	 @WrapperValueTypeReturnType "java.lang.String=kermeta.language.structure.Object java.lang.Boolean=kermeta.language.structure.Object java.lang.Integer=kermeta.language.structure.Object java.lang.Double=kermeta.language.structure.Object java.lang.Character=kermeta.language.structure.Object java.lang.Number=kermeta.language.structure.Object"
+	 @WrapperValueTypeSelfExpression "java.lang.String=kermeta.language.structure.Object java.lang.Boolean=kermeta.language.structure.Object java.lang.Integer=kermeta.language.structure.Object java.lang.Double=kermeta.language.structure.Object java.lang.Character=kermeta.language.structure.Object java.lang.Number=kermeta.language.structure.Object"
+	 @RecopyInValueTypes "true"
+	operation asType(type : Class) : Object is abstract
+	
+	 @RecopyInValueTypes "true"
+	operation isInstanceOf(type : Type) : Boolean is abstract
+	
+	 @RecopyInValueTypes "true"
+	operation containingResource() : kermeta::persistence::Resource is abstract
+
+}
+
+aspect class Type {
+
+	 @RecopyInValueTypes "true"
+	operation isInstance(element : Object) : Boolean from Type is abstract
+	
+	 @RecopyInValueTypes "true"	
+	operation isSuperTypeOf(object : Type) : Boolean is abstract
+	
+	 @RecopyInValueTypes "true"	
+	operation isSubTypeOf(object : Type) : Boolean is abstract
+
+}
+

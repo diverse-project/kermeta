@@ -1,0 +1,11 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Compiler directives for the Kermeta framework
+Bundle-SymbolicName: org.kermeta.framework.compiler.directives;singleton:=true
+Bundle-Version: 1.0.0.qualifier
+Bundle-Activator: org.kermeta.framework.compiler.directives.Activator
+Require-Bundle: org.eclipse.ui,
+ org.eclipse.core.runtime
+Bundle-ActivationPolicy: lazy
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-Vendor: IRISA/INRIA

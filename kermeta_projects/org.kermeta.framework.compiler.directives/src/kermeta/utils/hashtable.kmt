@@ -1,0 +1,15 @@
+/* $Id: hashtable.kmt,v 1.1 2009-02-16 15:47:10 cfaucher Exp $ 
+ * Creation : February 16, 2009
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            Cyril Faucher <cfaucher@irisa.fr>
+ */
+
+package kermeta::utils;
+
+require kermeta
+
+ @EMF_needProperty "name=wrappedHashtable isUnique=false isOrdered=false javaClass=java.util.Hashtable"
+aspect class Hashtable<K, V> {
+}

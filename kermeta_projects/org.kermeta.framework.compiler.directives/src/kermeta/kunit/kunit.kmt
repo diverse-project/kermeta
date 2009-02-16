@@ -1,0 +1,25 @@
+/* $Id: kunit.kmt,v 1.1 2009-02-16 15:47:10 cfaucher Exp $ 
+ * Creation : February 16, 2009
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            Cyril Faucher <cfaucher@irisa.fr>
+ */
+
+package kermeta::kunit;
+
+require kermeta
+
+aspect abstract class Fallible inherits AbstractFallible {
+
+	 @EMF_renameAs "getLogKermeta"
+	operation  getLog(): Log is abstract
+
+}
+
+aspect abstract class Test {
+
+	 @EMF_renameAs "setLogKermeta"
+	operation setLog(log: Log): Void is abstract
+	
+}
