@@ -109,4 +109,11 @@ the terms of the EPL licence.
          version="0.0.0"
          unpack="false"/>
 
+   <plugin
+         id="org.kermeta.framework.compiler.directives"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
 </feature>
