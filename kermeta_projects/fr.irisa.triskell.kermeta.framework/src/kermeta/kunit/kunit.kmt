@@ -1,4 +1,4 @@
-/* $Id: kunit.kmt,v 1.44 2008-08-21 15:48:24 cfaucher Exp $
+/* $Id: kunit.kmt,v 1.45 2009-02-16 15:55:50 cfaucher Exp $
  * Creation date: February 19, 2007
  * License: EPL
  * Copyright:
@@ -67,7 +67,6 @@ abstract class Fallible inherits AbstractFallible
   /**
    * where failures will be put 
    */
-   @EMF_renameAs "getLogKermeta"
   operation  getLog(): Log  
   	post logDefined is result != void 
   	is abstract
@@ -403,7 +402,6 @@ abstract class Test
 	/**
 	 * Initializes the log where failures and errors will be put
 	 */
-	 @EMF_renameAs "setLogKermeta"
 	operation setLog(log: Log): Void 
 		pre paramNotVoid is log != void
 		post logNotVoid is self.log != void

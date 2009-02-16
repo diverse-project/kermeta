@@ -1,4 +1,4 @@
-/* $Id: structure.kmt,v 1.78 2009-01-23 10:23:27 dvojtise Exp $
+/* $Id: structure.kmt,v 1.79 2009-02-16 15:55:50 cfaucher Exp $
  * Project : framework
  * File : structure.kmt
  * License : EPL
@@ -29,14 +29,11 @@ require "platform:/resource/fr.irisa.triskell.kermeta.model/build/ecore/kermeta_
 using kermeta::standard
 using kermeta::exceptions
 
- @EMF_needProperty "name=oid javaClass=java.lang.Integer"
- @EMF_needProperty "name=internalContainingResource classDefinitionQN=kermeta::persistence::Resource"
 aspect class Object
 {
 	/**
 	 * Returns the Class object that is the metaclass of current Object
 	 */
-	 @RecopyInValueTypes "true"
 	operation getMetaClass() : Class from Object is do
 		//@compiledJavaExtern "org.kermeta.compil.runtime.ExecutionContext.getInstance().getMetaClass( this.getClass().getName() )"
 		@compiledJavaExtern "org.kermeta.compil.runtime.helper.language.ObjectUtil.getMetaClass( this )"
@@ -47,8 +44,6 @@ aspect class Object
 	 * Returns the Object that contains current Object, void if the Object has
 	 * no container
 	 */
-	 @WrapperValueTypeReturnType "java.lang.String=kermeta.language.structure.Object java.lang.Boolean=kermeta.language.structure.Object java.lang.Integer=kermeta.language.structure.Object java.lang.Double=kermeta.language.structure.Object java.lang.Character=kermeta.language.structure.Object java.lang.Number=kermeta.language.structure.Object"
-	 @RecopyInValueTypes "true"
 	operation container() : Object from Object is do
 		@compiledJavaExtern "org.kermeta.compil.runtime.helper.language.ObjectUtil.container(this)"
 		result := extern fr::irisa::triskell::kermeta::runtime::language::Object.container(self)
@@ -58,7 +53,6 @@ aspect class Object
 	 * Runs checking of invariants defined for the metaclass of the Object
 	 * Also check the multiplicity of attributes (except derived and transient attributes)
 	 */
-	 @RecopyInValueTypes "true"	
 	operation checkInvariants() : Void from Object is do
 		var cd : ClassDefinition init self.getMetaClass.classDefinition
 		if ( not cd.isVoid ) then
@@ -100,7 +94,6 @@ aspect class Object
 	 * and its supertypes
 	 * Ignores derived attributes. 
 	 */	
-	 @RecopyInValueTypes "true"
 	operation checkAllInvariants() : Void from Object is do
 		if(self!=void) then
 			// Call the invariant verification
@@ -147,7 +140,6 @@ aspect class Object
 	 * note1: the operator == is mapped to this 
 	 * note2: overloading this operation have some impact on the behavior on collection and hashtable that rely on it
 	 */
-	 @RecopyInValueTypes "true"	
 	operation equals(element : Object) : Boolean from Object is do
 		@compiledJavaExtern "org.kermeta.compil.runtime.helper.language.ObjectUtil.equals(this, element)"
 		result ?= extern fr::irisa::triskell::kermeta::runtime::language::Object.equals(self, element)
@@ -156,7 +148,6 @@ aspect class Object
 	/**
 	 * See kermeta::language::structure::Object.equals(Object)
 	 */
-	 @RecopyInValueTypes "true"	
 	operation isNotEqual(element : Object) : Boolean from Object is do
 		result := not equals(element)
 	end		
@@ -164,7 +155,6 @@ aspect class Object
 	/**
 	 * Returns a Boolean stating whether the current Object is an instance of the given Class
 	 */
-	 @RecopyInValueTypes "true"	
 	operation isKindOf(cl : Class) : Boolean is do
 		result := (self.getMetaClass.equals(cl))
 	end
@@ -191,8 +181,6 @@ aspect class Object
 	 * result is a Sequence<ThePropertyName>. Otherwise, the type corresponds to 
 	 * the name of the given Property (i.e the type of the property instance).
 	 */
-	 @WrapperValueTypeReturnType "java.lang.String=kermeta.language.structure.Object java.lang.Boolean=kermeta.language.structure.Object java.lang.Integer=kermeta.language.structure.Object java.lang.Double=kermeta.language.structure.Object java.lang.Character=kermeta.language.structure.Object java.lang.Number=kermeta.language.structure.Object"
-	 @RecopyInValueTypes "true"
 	operation get(~property : Property) : Object from Object is do
 		@compiledJavaExtern "org.kermeta.compil.runtime.helper.language.ObjectUtil.get(this, property)"
 		result := extern fr::irisa::triskell::kermeta::runtime::language::Object.get(self, ~property)
@@ -201,7 +189,6 @@ aspect class Object
 	/**
 	 * Sets the <code>element</code> to the <code>~property</code> of the object 
 	 */
-	 @RecopyInValueTypes "true"	
 	operation ~set(~property : Property, element : Object) : Void from Object is do
 		if element.isInstanceOf(~property.type) then
 			@compiledJavaExtern "org.kermeta.compil.runtime.helper.language.ObjectUtil.set(this, property, element)"
@@ -223,7 +210,6 @@ aspect class Object
 	/**
 	 * True if the <code>~property</code> of the object has been set
 	 */
-	 @RecopyInValueTypes "true"	
 	operation isSet(~property : Property) : Boolean from Object is do
 		@compiledJavaExtern "org.kermeta.compil.runtime.helper.language.ObjectUtil.isSet(this, property)"
 		result ?= extern fr::irisa::triskell::kermeta::runtime::language::Object.isSet(self, ~property)
@@ -233,7 +219,6 @@ aspect class Object
 	 * Remove the element set as the <code>~property</code> of the object.
 	 * The <code>isSet(~property)</code> method will then return False
 	 */
-	 @RecopyInValueTypes "true"	
 	operation unset(~property : Property) : Void from Object is do
 		@compiledJavaExtern "org.kermeta.compil.runtime.helper.language.ObjectUtil.unset(this, property)"
 		extern fr::irisa::triskell::kermeta::runtime::language::Object.unSet(self, ~property)
@@ -242,7 +227,6 @@ aspect class Object
 	/**
 	 * Returns the unique Oid of the Object
 	 */
-	 @RecopyInValueTypes "true"	
 	operation oid() : Integer is do
 		@compiledJavaExtern "org.kermeta.compil.runtime.helper.language.ObjectUtil.getOID(this)"
 		result ?= extern fr::irisa::triskell::kermeta::runtime::language::Object.oid(self)
@@ -253,7 +237,6 @@ aspect class Object
  	 * Returns a String of form [qn:oid] where 'qn' is the qualified name of
  	 * the object type, and oid the unique ID of the object
  	 */
- 	 @RecopyInValueTypes "true"
 	operation toString() : String is do
 		result := "[" + self.getMetaClass.typeDefinition.qualifiedName + ":" + oid.toString + "]"
 	end
@@ -262,7 +245,6 @@ aspect class Object
 	 * Returns a Boolean stating whether the Object is currently in a
 	 * frozen state
 	 */
-	 @RecopyInValueTypes "true"
 	operation isFrozen() : Boolean is do
 		@compiledJavaExtern "org.kermeta.compil.runtime.helper.language.ObjectUtil.isFrozen(this)"
 		result ?= extern fr::irisa::triskell::kermeta::runtime::language::Object.isFrozen(self)
@@ -271,7 +253,6 @@ aspect class Object
 	/**
 	 * Returns a Boolean stating whether the Object is Void
 	 */
-	 @RecopyInValueTypes "true"
 	operation isVoid() : Boolean is do
 		result := false
 	end
@@ -281,7 +262,6 @@ aspect class Object
 	 * This system is similar to the hashcode used in java. Please refer to java documentation
 	 * for more information about hashcode
 	 */
-	 @RecopyInValueTypes "true"
 	operation hashcode() : Integer is do		
 		// usually this method is not called when using hashtable because it directly tries the method hashcode in the RuntimeObject.java
 		// which fall back here only if the method is not redefined
@@ -292,7 +272,6 @@ aspect class Object
 	/**
 	 * Freeze the Object
 	 */
-	 @RecopyInValueTypes "true"
 	operation freeze() : Void is do
 		@compiledJavaExtern "org.kermeta.compil.runtime.helper.language.ObjectUtil.freeze(this)"
 		extern fr::irisa::triskell::kermeta::runtime::language::Object.freeze(self)
@@ -301,9 +280,6 @@ aspect class Object
 	/**
 	 * Implementation of OCL like cast. It returns self if the object object conforms to the type given as parameter.
 	 */
-	 @WrapperValueTypeReturnType "java.lang.String=kermeta.language.structure.Object java.lang.Boolean=kermeta.language.structure.Object java.lang.Integer=kermeta.language.structure.Object java.lang.Double=kermeta.language.structure.Object java.lang.Character=kermeta.language.structure.Object java.lang.Number=kermeta.language.structure.Object"
-	 @WrapperValueTypeSelfExpression "java.lang.String=kermeta.language.structure.Object java.lang.Boolean=kermeta.language.structure.Object java.lang.Integer=kermeta.language.structure.Object java.lang.Double=kermeta.language.structure.Object java.lang.Character=kermeta.language.structure.Object java.lang.Number=kermeta.language.structure.Object"
-	 @RecopyInValueTypes "true"
 	operation asType(type : Class) : Object is do
 		if isInstanceOf(type) then result := self
 		else raise kermeta::exceptions::TypeCastError.new
@@ -314,7 +290,6 @@ aspect class Object
 	 * Returns a Boolean stating whether the current Object conforms to given Type
 	 * This means: is this object an instance of this type, or is it an instance of its subtype 
 	 */
-	 @RecopyInValueTypes "true"
 	operation isInstanceOf(type : Type) : Boolean is do
 		@compiledJavaExtern "org.kermeta.compil.runtime.helper.language.ObjectUtil.isInstanceOf(this, type.getClass().getName())"
 		result ?= extern fr::irisa::triskell::kermeta::runtime::language::Object.isInstanceOf(self, type)
@@ -324,7 +299,6 @@ aspect class Object
 	 * Returns the Resource currently containing (directly or indirectly) the Object 
 	 * or void if the object belongs to no Resource
 	 */
-	 @RecopyInValueTypes "true"
 	operation containingResource() : kermeta::persistence::Resource is do
 		@compiledJavaExtern "org.kermeta.compil.runtime.helper.language.ObjectUtil.getContainingResource(this)"
 		result ?= extern fr::irisa::triskell::kermeta::runtime::language::Object.getContainingResource(self)
@@ -599,7 +573,6 @@ aspect class Type
 	/**
 	 * Implements Type.isInstance(Object)
 	 */
-	 @RecopyInValueTypes "true"
 	operation isInstance(element : Object) : Boolean from Type is do
 		result := element.isInstanceOf(self)
 	end
@@ -610,7 +583,6 @@ aspect class Type
  	 * it won't work with Type created programmaticaly by the user. If you need that, please ask to the kermeta developpers
  	 * to extend it.
  	 */
- 	 @RecopyInValueTypes "true"	
 	operation isSuperTypeOf(object : Type) : Boolean is do
 		@compiledJavaExtern "org.kermeta.compil.runtime.helper.language.TypeUtil.hasSubType(this, object)"
 		result ?= extern fr::irisa::triskell::kermeta::runtime::language::Type.hasSubType(self, object)
@@ -622,7 +594,6 @@ aspect class Type
  	 * it won't work with Type created programmaticaly by the user. If you need that, please ask to the kermeta developpers
  	 * to extend it.
  	 */
- 	 @RecopyInValueTypes "true"	
 	operation isSubTypeOf(object : Type) : Boolean is do
 		result := object.isSuperTypeOf(self)
 	end

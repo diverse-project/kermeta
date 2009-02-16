@@ -1,4 +1,4 @@
-// $Id: value_types.kmt,v 1.13 2009-02-05 13:19:10 cfaucher Exp $
+// $Id: value_types.kmt,v 1.14 2009-02-16 15:55:49 cfaucher Exp $
 /* *************************************************
  * Franck FLEUREY - 11/02/2005
  * Triskell Research Group
@@ -56,7 +56,6 @@ class ~Void {
  * that means that each time you := such object it will call the clone function associated to it (Not implemented yet except for Integer, String and boolean!!!)
  * 
  */
- @EMF_needProperty "name=value javaClass=java.lang.String"
 abstract class  ValueType {
 }
 
@@ -76,13 +75,11 @@ abstract class Comparable {
 	 * returns > 0 if  self > other
 	 * returns < 0 if  self < other
 	 */
-	 @RecopyInValueTypes "true"
 	operation compareTo(other : Object) : Integer is abstract
 	
 	/**
 	 * return true if self > other
 	 */
-	 @RecopyInValueTypes "true"
 	operation isGreater(other : Object) : Boolean is do
 		result := self.compareTo(other) > 0
 	end
@@ -90,7 +87,6 @@ abstract class Comparable {
 	/**
 	 * return true if self < other
 	 */
-	 @RecopyInValueTypes "true"
 	operation isLower(other : Object) : Boolean is do
 		result := self.compareTo(other) < 0
 	end
@@ -98,7 +94,6 @@ abstract class Comparable {
 	/**
 	 * return true if self <= other
 	 */
-	 @RecopyInValueTypes "true"
 	operation isLowerOrEqual(other : Object) : Boolean is do
 		result := self.compareTo(other) <= 0
 	end
@@ -106,7 +101,6 @@ abstract class Comparable {
 	/**
 	 * return true if self >= other
 	 */
-	 @RecopyInValueTypes "true"
 	operation isGreaterOrEqual(other : Object) : Boolean is do
 		result := self.compareTo(other) >= 0
 	end
@@ -125,7 +119,6 @@ abstract class Summable<G> {
 	 * The parameter must have the same type (or one of its subtypes)
 	 *  than the current object .
 	 */
-	 @RecopyInValueTypes "true"
 	operation plus(other : G) : G is abstract
 }
 
@@ -140,7 +133,6 @@ class NotComparableException inherits kermeta::exceptions::Exception {
 /**
  * The Boolean type
  */
- @EMF_instanceClassName "java.lang.Boolean"
 class Boolean inherits ValueType
 {
 	/**
@@ -229,7 +221,6 @@ class Boolean inherits ValueType
  * The abstract class Numeric is the root class for all
  * numeric types
  */
- @EMF_instanceClassName "java.lang.Number"
 abstract class Numeric inherits Comparable, ValueType { 
 }
 
@@ -237,7 +228,6 @@ abstract class Numeric inherits Comparable, ValueType {
 /**
  * The class Integer
  */
- @EMF_instanceClassName "java.lang.Integer"
 class Integer inherits Numeric, Summable<Integer>
 {
 	/**
@@ -422,7 +412,6 @@ class Integer inherits Numeric, Summable<Integer>
 /**
  * class Real
  */
- @EMF_instanceClassName "java.lang.Double"
 class Real inherits Numeric, Summable<Real>
 {
 	/**
@@ -521,7 +510,6 @@ class Real inherits Numeric, Summable<Real>
 /**
  * The class Character
  */
- @EMF_instanceClassName "java.lang.Character"
 class Character inherits ValueType, Comparable
 {
 	/**
@@ -557,7 +545,6 @@ class Character inherits ValueType, Comparable
 /**
  * The class String
  */
- @EMF_instanceClassName "java.lang.String"
 class String inherits ValueType, Comparable, Summable<String>
 {
 	/**

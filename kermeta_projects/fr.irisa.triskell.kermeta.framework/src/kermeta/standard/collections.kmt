@@ -1,5 +1,5 @@
 /* *************************************************
- * $Id: collections.kmt,v 1.61 2009-02-11 09:51:02 cfaucher Exp $
+ * $Id: collections.kmt,v 1.62 2009-02-16 15:55:49 cfaucher Exp $
  * Franck FLEUREY - 14/02/2005 
  * Triskell Research Group
  * IRISA / University of Rennes 1 (France)
@@ -27,7 +27,6 @@ alias Object : kermeta::language::structure::Object;
 /**
  * Collection is the root abstract class for all kermeta collections
  */
- @EMF_needProperty "name=values isUnique=false isOrdered=false javaClass=org.eclipse.emf.common.util.EList"
 abstract class Collection<G> 
 {
 	/**
@@ -1273,8 +1272,6 @@ class Sequence<G> inherits Bag<G>, OrderedCollection<G>
  * Iterator to be used with Collection
  * See also Collection<G>.getIterator()
  */
- @EMF_needProperty "name=javaIterator javaClass=java.util.Iterator"
- @EMF_needProperty "name=kermetaCollection classDefinitionQN=kermeta::standard::Collection"
 class Iterator<G>
 {
 	/**
