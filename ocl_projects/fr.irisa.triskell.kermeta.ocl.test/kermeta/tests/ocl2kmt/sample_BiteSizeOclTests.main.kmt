@@ -1,4 +1,4 @@
-/* $Id: sample_BiteSizeOclTests.main.kmt,v 1.1 2008-07-25 12:38:04 dvojtise Exp $
+/* $Id: sample_BiteSizeOclTests.main.kmt,v 1.2 2009-02-16 17:14:45 dvojtise Exp $
  * Creation date: February 22, 2007
  * License:
  * Copyright:
@@ -37,7 +37,8 @@ class  BiteSizeOclTests  inherits TestCase
                     
     method setUp() is
         do
-            repository := EMFRepository.new        
+            repository := EMFRepository.new 
+            repository.registerEcoreFile("platform:/plugin/org.kermeta.eclipse.ocl.parser/model/OCLCST.ecore")       
             helper := OCLHelpers::OCLHelper.new
             visitor := Ocl2kmtVisitor.new
             ecoreFile := "platform:/resource/fr.irisa.triskell.kermeta.ocl.test/tests/sample/metamodel/sample.ecore"

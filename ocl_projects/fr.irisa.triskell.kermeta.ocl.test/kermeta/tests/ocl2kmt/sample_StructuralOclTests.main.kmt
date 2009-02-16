@@ -1,4 +1,4 @@
-/* $Id: sample_StructuralOclTests.main.kmt,v 1.2 2008-07-25 15:11:33 dvojtise Exp $
+/* $Id: sample_StructuralOclTests.main.kmt,v 1.3 2009-02-16 17:14:46 dvojtise Exp $
  * Creation date: March 6, 2007
  * License:
  * Copyright:
@@ -33,7 +33,8 @@ class  StructuralOclTests  inherits TestCase
 				    
 	method setUp() is
 		do
-			repository := EMFRepository.new        
+			repository := EMFRepository.new   
+            repository.registerEcoreFile("platform:/plugin/org.kermeta.eclipse.ocl.parser/model/OCLCST.ecore")     
             helper := OCLHelpers::OCLHelper.new
             visitor := Ocl2kmtVisitor.new
             ecoreFile := "platform:/resource/fr.irisa.triskell.kermeta.ocl.test/tests/sample/metamodel/sample.ecore"
