@@ -24,7 +24,7 @@
              class="fr.irisa.triskell.kermeta.popup.actions.Ecore2KmAction"
              icon="images/to_xmi_16.gif"
              id="fr.irisa.triskell.kermeta.action1"
-             label="Compile to Kermeta model  (=&gt;km)"
+             label="Generate Km (Kermeta model)"
              menubarPath="org.eclipse.ui.articles.action.contribution.navigator.subMenu/kermetagroup1"/>
        
       </objectContribution>
@@ -40,7 +40,7 @@
       	</menu>
         <action
                enablesFor="1"
-               label="Compile to Kermeta model  (=&gt;km)"
+               label="Generate Km (Kermeta model)"
                icon="images/to_xmi_16.gif"
                menubarPath="org.eclipse.ui.articles.action.contribution.navigator.subMenu/kermetagroup1" 
                class="fr.irisa.triskell.kermeta.popup.actions.CompileKMTAction"
