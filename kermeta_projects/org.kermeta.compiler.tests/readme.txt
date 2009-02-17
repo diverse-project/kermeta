@@ -1,4 +1,4 @@
-$Id: readme.txt,v 1.5 2007-12-21 15:41:59 cfaucher Exp $
+$Id: readme.txt,v 1.6 2009-02-17 13:50:51 cfaucher Exp $
 - Project : org.kermeta.compiler.tests
 - File : 	readme.txt
 - License : EPL
@@ -9,7 +9,7 @@ $Id: readme.txt,v 1.5 2007-12-21 15:41:59 cfaucher Exp $
 
 
 
-DEPRECATED: all the documentation is now in the docbook file: Generator-UI-Guide.docb.xml
+****** DEPRECATED: all the documentation is now in the docbook file: Generator-UI-Guide.docb.xml ******
 
 
 
@@ -34,7 +34,6 @@ Plugin dependencies: your installation should contain the following plugins:
 org.kermeta.trek.model
 org.kermeta.trek.model.edit
 org.kermeta.trek.model.editor
-org.kermeta.trek.ui
 org.kermeta.compiler.trek.ui
 
 
