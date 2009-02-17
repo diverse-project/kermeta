@@ -1,0 +1,456 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<psf version="2.0">
+<provider id="org.tigris.subversion.subclipse.core.svnnature">
+<project reference="0.9.3,svn+ssh://dvojtise@scm.gforge.inria.fr/svn/mopcomsoc/mopcomspec_projects/trunk/fr.mopcom.wfr,fr.mopcom.wfr"/>
+<project reference="0.9.3,svn+ssh://dvojtise@scm.gforge.inria.fr/svn/mopcomsoc/mopcomspec_projects/trunk/fr.mopcom.wfr.documentation,fr.mopcom.wfr.documentation"/>
+<project reference="0.9.3,svn+ssh://dvojtise@scm.gforge.inria.fr/svn/mopcomsoc/mopcomspec_projects/trunk/fr.mopcom.wfr.feature,fr.mopcom.wfr.feature"/>
+<project reference="0.9.3,svn+ssh://dvojtise@scm.gforge.inria.fr/svn/mopcomsoc/mopcomspec_projects/trunk/fr.mopcom.wfr.ui,fr.mopcom.wfr.ui"/>
+<project reference="0.9.3,svn+ssh://dvojtise@scm.gforge.inria.fr/svn/mopcomsoc/mopcomspec_projects/trunk/org.kermeta.uml2.profile.marte,org.kermeta.uml2.profile.marte"/>
+<project reference="0.9.3,svn+ssh://dvojtise@scm.gforge.inria.fr/svn/mopcomsoc/mopcomspec_projects/trunk/org.kermeta.uml2.profile.marte.feature,org.kermeta.uml2.profile.marte.feature"/>
+<project reference="0.9.3,svn+ssh://dvojtise@scm.gforge.inria.fr/svn/mopcomsoc/mopcomspec_projects/trunk/org.kermeta.uml2.profile.marte.ui,org.kermeta.uml2.profile.marte.ui"/>
+</provider>
+<provider id="org.eclipse.team.cvs.core.cvsnature">
+<project reference="1.0,:extssh:scm.gforge.inria.fr:/cvsroot/kermeta,Docbook_projects/ant-docbook-styler,ant-docbook-styler"/>
+<project reference="1.0,:extssh:scm.gforge.inria.fr:/cvsroot/triskellexchang,dev/ipr_projects/fr.inria.ipr,fr.inria.ipr"/>
+<project reference="1.0,:extssh:scm.gforge.inria.fr:/cvsroot/triskellexchang,dev/ipr_projects/fr.inria.ipr.edit,fr.inria.ipr.edit"/>
+<project reference="1.0,:extssh:scm.gforge.inria.fr:/cvsroot/triskellexchang,dev/ipr_projects/fr.inria.ipr.editor,fr.inria.ipr.editor"/>
+<project reference="1.0,:extssh:scm.gforge.inria.fr:/cvsroot/triskellexchang,dev/ipr_projects/fr.inria.ipr.feature,fr.inria.ipr.feature"/>
+<project reference="1.0,:extssh:scm.gforge.inria.fr:/cvsroot/triskellexchang,dev/ipr_projects/fr.inria.ipr.ui,fr.inria.ipr.ui"/>
+<project reference="1.0,:extssh:scm.gforge.inria.fr:/cvsroot/kermeta,kermeta_projects/fr.irisa.triskell.eclipse.util,fr.irisa.triskell.eclipse.util"/>
+<project reference="1.0,:extssh:scm.gforge.inria.fr:/cvsroot/kermeta,kermeta_projects/fr.irisa.triskell.kermeta,fr.irisa.triskell.kermeta"/>
+<project reference="1.0,:extssh:scm.gforge.inria.fr:/cvsroot/kermeta,kermeta_projects/fr.irisa.triskell.kermeta.documentation,fr.irisa.triskell.kermeta.documentation"/>
+<project reference="1.0,:extssh:scm.gforge.inria.fr:/cvsroot/kermeta,ecore_projects/fr.irisa.triskell.kermeta.ecore,fr.irisa.triskell.kermeta.ecore"/>
+<project reference="1.0,:extssh:scm.gforge.inria.fr:/cvsroot/kermeta,ecore_projects/fr.irisa.triskell.kermeta.ecore.feature,fr.irisa.triskell.kermeta.ecore.feature"/>
+<project reference="1.0,:extssh:scm.gforge.inria.fr:/cvsroot/kermeta,ecore_projects/fr.irisa.triskell.kermeta.ecore.tests,fr.irisa.triskell.kermeta.ecore.tests"/>
+<project reference="1.0,:extssh:scm.gforge.inria.fr:/cvsroot/kermeta,kermeta_projects/fr.irisa.triskell.kermeta.feature,fr.irisa.triskell.kermeta.feature"/>
+<project reference="1.0,:extssh:scm.gforge.inria.fr:/cvsroot/kermeta,kermeta_projects/fr.irisa.triskell.kermeta.framework,fr.irisa.triskell.kermeta.framework"/>
+<project reference="1.0,:extssh:scm.gforge.inria.fr:/cvsroot/kermeta,kermeta_projects/fr.irisa.triskell.kermeta.graphical.feature,fr.irisa.triskell.kermeta.graphical.feature"/>
+<project reference="1.0,:extssh:scm.gforge.inria.fr:/cvsroot/kermeta,kermeta_projects/fr.irisa.triskell.kermeta.graphicaleditor,fr.irisa.triskell.kermeta.graphicaleditor"/>
+<project reference="1.0,:extssh:scm.gforge.inria.fr:/cvsroot/kermeta,kermeta_projects/fr.irisa.triskell.kermeta.interpreter,fr.irisa.triskell.kermeta.interpreter"/>
+<project reference="1.0,:extssh:scm.gforge.inria.fr:/cvsroot/kermeta,kermeta_projects/fr.irisa.triskell.kermeta.io,fr.irisa.triskell.kermeta.io"/>
+<project reference="1.0,:extssh:scm.gforge.inria.fr:/cvsroot/kermeta,kermeta_projects/fr.irisa.triskell.kermeta.ket,fr.irisa.triskell.kermeta.ket"/>
+<project reference="1.0,:extssh:scm.gforge.inria.fr:/cvsroot/kermeta,kermeta_projects/fr.irisa.triskell.kermeta.ket.documentation,fr.irisa.triskell.kermeta.ket.documentation"/>
+<project reference="1.0,:extssh:scm.gforge.inria.fr:/cvsroot/kermeta,kermeta_projects/fr.irisa.triskell.kermeta.ket.feature,fr.irisa.triskell.kermeta.ket.feature"/>
+<project reference="1.0,:extssh:scm.gforge.inria.fr:/cvsroot/kermeta,kermeta_projects/fr.irisa.triskell.kermeta.kpm,fr.irisa.triskell.kermeta.kpm"/>
+<project reference="1.0,:extssh:scm.gforge.inria.fr:/cvsroot/kermeta,kermeta_projects/fr.irisa.triskell.kermeta.kpm.actions,fr.irisa.triskell.kermeta.kpm.actions"/>
+<project reference="1.0,:extssh:scm.gforge.inria.fr:/cvsroot/kermeta,kermeta_projects/fr.irisa.triskell.kermeta.kpm.edit,fr.irisa.triskell.kermeta.kpm.edit"/>
+<project reference="1.0,:extssh:scm.gforge.inria.fr:/cvsroot/kermeta,kermeta_projects/fr.irisa.triskell.kermeta.kpm.editor,fr.irisa.triskell.kermeta.kpm.editor"/>
+<project reference="1.0,:extssh:scm.gforge.inria.fr:/cvsroot/kermeta,kermeta_projects/fr.irisa.triskell.kermeta.model,fr.irisa.triskell.kermeta.model"/>
+<project reference="1.0,:extssh:scm.gforge.inria.fr:/cvsroot/kermeta,kermeta_projects/fr.irisa.triskell.kermeta.model.edit,fr.irisa.triskell.kermeta.model.edit"/>
+<project reference="1.0,:extssh:scm.gforge.inria.fr:/cvsroot/kermeta,kermeta_projects/fr.irisa.triskell.kermeta.model.editor,fr.irisa.triskell.kermeta.model.editor"/>
+<project reference="1.0,:extssh:scm.gforge.inria.fr:/cvsroot/kermeta,ocl_projects/fr.irisa.triskell.kermeta.ocl,fr.irisa.triskell.kermeta.ocl"/>
+<project reference="1.0,:extssh:scm.gforge.inria.fr:/cvsroot/kermeta,ocl_projects/fr.irisa.triskell.kermeta.ocl.feature,fr.irisa.triskell.kermeta.ocl.feature"/>
+<project reference="1.0,:extssh:scm.gforge.inria.fr:/cvsroot/kermeta,ocl_projects/fr.irisa.triskell.kermeta.ocl.test,fr.irisa.triskell.kermeta.ocl.test"/>
+<project reference="1.0,:extssh:scm.gforge.inria.fr:/cvsroot/kermeta,samples.fsm_projects/fr.irisa.triskell.kermeta.samples.fsm,fr.irisa.triskell.kermeta.samples.fsm"/>
+<project reference="1.0,:extssh:scm.gforge.inria.fr:/cvsroot/kermeta,samples.fsm_projects/fr.irisa.triskell.kermeta.samples.fsm.demo,fr.irisa.triskell.kermeta.samples.fsm.demo"/>
+<project reference="1.0,:extssh:scm.gforge.inria.fr:/cvsroot/kermeta,samples.fsm_projects/fr.irisa.triskell.kermeta.samples.fsm.demoAspect,fr.irisa.triskell.kermeta.samples.fsm.demoAspect"/>
+<project reference="1.0,:extssh:scm.gforge.inria.fr:/cvsroot/kermeta,samples.fsm_projects/fr.irisa.triskell.kermeta.samples.fsm.feature,fr.irisa.triskell.kermeta.samples.fsm.feature"/>
+<project reference="1.0,:extssh:scm.gforge.inria.fr:/cvsroot/kermeta,samples.fsm_projects/fr.irisa.triskell.kermeta.samples.fsm.graphicalEditor,fr.irisa.triskell.kermeta.samples.fsm.graphicalEditor"/>
+<project reference="1.0,:extssh:scm.gforge.inria.fr:/cvsroot/kermeta,samples.fsm_projects/fr.irisa.triskell.kermeta.samples.fsm.model,fr.irisa.triskell.kermeta.samples.fsm.model"/>
+<project reference="1.0,:extssh:scm.gforge.inria.fr:/cvsroot/kermeta,samples.fsm_projects/fr.irisa.triskell.kermeta.samples.fsm.model.edit,fr.irisa.triskell.kermeta.samples.fsm.model.edit"/>
+<project reference="1.0,:extssh:scm.gforge.inria.fr:/cvsroot/kermeta,samples.fsm_projects/fr.irisa.triskell.kermeta.samples.fsm.model.editor,fr.irisa.triskell.kermeta.samples.fsm.model.editor"/>
+<project reference="1.0,:extssh:scm.gforge.inria.fr:/cvsroot/kermeta,samples.fsm_projects/fr.irisa.triskell.kermeta.samples.fsm.tests,fr.irisa.triskell.kermeta.samples.fsm.tests"/>
+<project reference="1.0,:extssh:scm.gforge.inria.fr:/cvsroot/kermeta,kermeta_projects/fr.irisa.triskell.kermeta.site,fr.irisa.triskell.kermeta.site"/>
+<project reference="1.0,:extssh:scm.gforge.inria.fr:/cvsroot/kermeta,kermeta_projects/fr.irisa.triskell.kermeta.standalone,fr.irisa.triskell.kermeta.standalone"/>
+<project reference="1.0,:extssh:scm.gforge.inria.fr:/cvsroot/kermeta,kermeta_projects/fr.irisa.triskell.kermeta.tests,fr.irisa.triskell.kermeta.tests"/>
+<project reference="1.0,:extssh:scm.gforge.inria.fr:/cvsroot/kermeta,kermeta_projects/fr.irisa.triskell.kermeta.texteditor,fr.irisa.triskell.kermeta.texteditor"/>
+<project reference="1.0,:extssh:scm.gforge.inria.fr:/cvsroot/kermeta,kermeta_projects/fr.irisa.triskell.kermeta.touchnavigator,fr.irisa.triskell.kermeta.touchnavigator"/>
+<project reference="1.0,:extssh:scm.gforge.inria.fr:/cvsroot/kermeta,kermeta_projects/fr.irisa.triskell.kermeta.ui,fr.irisa.triskell.kermeta.ui"/>
+<project reference="1.0,:extssh:scm.gforge.inria.fr:/cvsroot/kermeta,kmlogo_projects/fr.irisa.triskell.kmlogo.model,fr.irisa.triskell.kmlogo.model"/>
+<project reference="1.0,:extssh:scm.gforge.inria.fr:/cvsroot/kermeta,kmlogo_projects/fr.irisa.triskell.kmlogo.model.edit,fr.irisa.triskell.kmlogo.model.edit"/>
+<project reference="1.0,:extssh:scm.gforge.inria.fr:/cvsroot/kermeta,kmlogo_projects/fr.irisa.triskell.kmlogo.model.editor,fr.irisa.triskell.kmlogo.model.editor"/>
+<project reference="1.0,:extssh:scm.gforge.inria.fr:/cvsroot/kermeta,kmlogo_projects/fr.irisa.triskell.kmlogo.ui,fr.irisa.triskell.kmlogo.ui"/>
+<project reference="1.0,:extssh:scm.gforge.inria.fr:/cvsroot/kermeta,kmlogo_projects/fr.irisa.triskell.kmlogo.ui.linux.x86,fr.irisa.triskell.kmlogo.ui.linux.x86"/>
+<project reference="1.0,:extssh:scm.gforge.inria.fr:/cvsroot/kermeta,kmlogo_projects/fr.irisa.triskell.kmlogo.ui.macosx,fr.irisa.triskell.kmlogo.ui.macosx"/>
+<project reference="1.0,:extssh:scm.gforge.inria.fr:/cvsroot/kermeta,kmlogo_projects/fr.irisa.triskell.kmlogo.ui.win32.x86,fr.irisa.triskell.kmlogo.ui.win32.x86"/>
+<project reference="1.0,:extssh:scm.gforge.inria.fr:/cvsroot/kermeta,ktr_projects/fr.irisa.triskell.ktr.feature,fr.irisa.triskell.ktr.feature"/>
+<project reference="1.0,:extssh:scm.gforge.inria.fr:/cvsroot/kermeta,ktr_projects/fr.irisa.triskell.ktr.model,fr.irisa.triskell.ktr.model"/>
+<project reference="1.0,:extssh:scm.gforge.inria.fr:/cvsroot/kermeta,ktr_projects/fr.irisa.triskell.ktr.model.edit,fr.irisa.triskell.ktr.model.edit"/>
+<project reference="1.0,:extssh:scm.gforge.inria.fr:/cvsroot/kermeta,ktr_projects/fr.irisa.triskell.ktr.model.editor,fr.irisa.triskell.ktr.model.editor"/>
+<project reference="1.0,:extssh:scm.gforge.inria.fr:/cvsroot/kermeta,samples.fsm_projects/fr.irisa.triskell.samples.fsm,fr.irisa.triskell.samples.fsm"/>
+<project reference="1.0,:extssh:scm.gforge.inria.fr:/cvsroot/kermeta,Traceability_projects/fr.irisa.triskell.traceability.documentation,fr.irisa.triskell.traceability.documentation"/>
+<project reference="1.0,:extssh:scm.gforge.inria.fr:/cvsroot/kermeta,Traceability_projects/fr.irisa.triskell.traceability.feature,fr.irisa.triskell.traceability.feature"/>
+<project reference="1.0,:extssh:scm.gforge.inria.fr:/cvsroot/kermeta,Traceability_projects/fr.irisa.triskell.traceability.model,fr.irisa.triskell.traceability.model"/>
+<project reference="1.0,:extssh:scm.gforge.inria.fr:/cvsroot/kermeta,Traceability_projects/fr.irisa.triskell.traceability.model.edit,fr.irisa.triskell.traceability.model.edit"/>
+<project reference="1.0,:extssh:scm.gforge.inria.fr:/cvsroot/kermeta,Traceability_projects/fr.irisa.triskell.traceability.model.editor,fr.irisa.triskell.traceability.model.editor"/>
+<project reference="1.0,:extssh:scm.gforge.inria.fr:/cvsroot/sintaks,sintaks_projects/fr.uha.mips.sintaks.ecore2hutn,fr.uha.mips.sintaks.ecore2hutn"/>
+<project reference="1.0,:extssh:scm.gforge.inria.fr:/cvsroot/sintaks,sintaks_projects/fr.uha.mips.sintaks.trace,fr.uha.mips.sintaks.trace"/>
+<project reference="1.0,:extssh:scm.gforge.inria.fr:/cvsroot/kermeta,devsupport_projects/org.antlr.antlr2,org.antlr.antlr2"/>
+<project reference="1.0,:extssh:scm.gforge.inria.fr:/cvsroot/kermeta,registration_projects/org.eclipse.emf.ecoretools.registration,org.eclipse.emf.ecoretools.registration"/>
+<project reference="1.0,:extssh:scm.gforge.inria.fr:/cvsroot/kermeta,registration_projects/org.eclipse.emf.ecoretools.registration.ui,org.eclipse.emf.ecoretools.registration.ui"/>
+<project reference="1.0,:extssh:scm.gforge.inria.fr:/cvsroot/kermeta,emfatic_projects/org.eclipse.emf.emfatic-feature,org.eclipse.emf.emfatic-feature"/>
+<project reference="1.0,:extssh:scm.gforge.inria.fr:/cvsroot/kermeta,emfatic_projects/org.eclipse.emf.emfatic.core,org.eclipse.emf.emfatic.core"/>
+<project reference="1.0,:extssh:scm.gforge.inria.fr:/cvsroot/kermeta,emfatic_projects/org.eclipse.emf.emfatic.doc.user,org.eclipse.emf.emfatic.doc.user"/>
+<project reference="1.0,:extssh:scm.gforge.inria.fr:/cvsroot/kermeta,emfatic_projects/org.eclipse.emf.emfatic.ui,org.eclipse.emf.emfatic.ui"/>
+<project reference="1.0,:extssh:scm.gforge.inria.fr:/cvsroot/kermeta,emfatic_projects/org.eclipse.gymnast.examples.game,org.eclipse.gymnast.examples.game"/>
+<project reference="1.0,:extssh:scm.gforge.inria.fr:/cvsroot/kermeta,emfatic_projects/org.eclipse.gymnast.generator-feature,org.eclipse.gymnast.generator-feature"/>
+<project reference="1.0,:extssh:scm.gforge.inria.fr:/cvsroot/kermeta,emfatic_projects/org.eclipse.gymnast.generator.core,org.eclipse.gymnast.generator.core"/>
+<project reference="1.0,:extssh:scm.gforge.inria.fr:/cvsroot/kermeta,emfatic_projects/org.eclipse.gymnast.generator.ui,org.eclipse.gymnast.generator.ui"/>
+<project reference="1.0,:extssh:scm.gforge.inria.fr:/cvsroot/kermeta,emfatic_projects/org.eclipse.gymnast.generators.ast-primordial,org.eclipse.gymnast.generators.ast-primordial"/>
+<project reference="1.0,:extssh:scm.gforge.inria.fr:/cvsroot/kermeta,emfatic_projects/org.eclipse.gymnast.generators.parser.antlr,org.eclipse.gymnast.generators.parser.antlr"/>
+<project reference="1.0,:extssh:scm.gforge.inria.fr:/cvsroot/kermeta,emfatic_projects/org.eclipse.gymnast.generators.parser.javacc,org.eclipse.gymnast.generators.parser.javacc"/>
+<project reference="1.0,:extssh:scm.gforge.inria.fr:/cvsroot/kermeta,emfatic_projects/org.eclipse.gymnast.generators.parser.lpg,org.eclipse.gymnast.generators.parser.lpg"/>
+<project reference="1.0,:extssh:scm.gforge.inria.fr:/cvsroot/kermeta,emfatic_projects/org.eclipse.gymnast.runtime-feature,org.eclipse.gymnast.runtime-feature"/>
+<project reference="1.0,:extssh:scm.gforge.inria.fr:/cvsroot/kermeta,emfatic_projects/org.eclipse.gymnast.runtime.core,org.eclipse.gymnast.runtime.core"/>
+<project reference="1.0,:extssh:scm.gforge.inria.fr:/cvsroot/kermeta,emfatic_projects/org.eclipse.gymnast.runtime.ui,org.eclipse.gymnast.runtime.ui"/>
+<project reference="1.0,:extssh:scm.gforge.inria.fr:/cvsroot/kermeta,kermeta_projects/org.kermeta.alltests.feature,org.kermeta.alltests.feature"/>
+<project reference="1.0,:extssh:scm.gforge.inria.fr:/cvsroot/kermeta,kermeta_projects/org.kermeta.compiler,org.kermeta.compiler"/>
+<project reference="1.0,:extssh:scm.gforge.inria.fr:/cvsroot/kermeta,kermeta_projects/org.kermeta.compiler.common,org.kermeta.compiler.common"/>
+<project reference="1.0,:extssh:scm.gforge.inria.fr:/cvsroot/kermeta,kermeta_projects/org.kermeta.compiler.feature,org.kermeta.compiler.feature"/>
+<project reference="1.0,:extssh:scm.gforge.inria.fr:/cvsroot/kermeta,kermeta_projects/org.kermeta.compiler.generator,org.kermeta.compiler.generator"/>
+<project reference="1.0,:extssh:scm.gforge.inria.fr:/cvsroot/kermeta,kermeta_projects/org.kermeta.compiler.generator.emftemplates,org.kermeta.compiler.generator.emftemplates"/>
+<project reference="1.0,:extssh:scm.gforge.inria.fr:/cvsroot/kermeta,kermeta_projects/org.kermeta.compiler.tests,org.kermeta.compiler.tests"/>
+<project reference="1.0,:extssh:scm.gforge.inria.fr:/cvsroot/kermeta,kermeta_projects/org.kermeta.compiler.trek.ui,org.kermeta.compiler.trek.ui"/>
+<project reference="1.0,:extssh:scm.gforge.inria.fr:/cvsroot/kermeta,kermeta_projects/org.kermeta.compiler.ui,org.kermeta.compiler.ui"/>
+<project reference="1.0,:extssh:scm.gforge.inria.fr:/cvsroot/kermeta,devsupport_projects/org.kermeta.devsupport.feature,org.kermeta.devsupport.feature"/>
+<project reference="1.0,:extssh:scm.gforge.inria.fr:/cvsroot/kermeta,devsupport_projects/org.kermeta.devsupport.site,org.kermeta.devsupport.site"/>
+<project reference="1.0,:extssh:scm.gforge.inria.fr:/cvsroot/kermeta,devsupport_projects/org.kermeta.eclipse.ant.optional.junit4,org.kermeta.eclipse.ant.optional.junit4"/>
+<project reference="1.0,:extssh:scm.gforge.inria.fr:/cvsroot/kermeta,ocl_projects/org.kermeta.eclipse.ocl.parser,org.kermeta.eclipse.ocl.parser"/>
+<project reference="1.0,:extssh:scm.gforge.inria.fr:/cvsroot/kermeta,devsupport_projects/org.kermeta.eclipse.test,org.kermeta.eclipse.test"/>
+<project reference="1.0,:extssh:scm.gforge.inria.fr:/cvsroot/kermeta,ecore_projects/org.kermeta.ecore.documentation,org.kermeta.ecore.documentation"/>
+<project reference="1.0,:extssh:scm.gforge.inria.fr:/cvsroot/kermeta,emfutils_projects/org.kermeta.emfutils.feature,org.kermeta.emfutils.feature"/>
+<project reference="1.0,:extssh:scm.gforge.inria.fr:/cvsroot/kermeta,emfutils_projects/org.kermeta.emfutils.models.ui,org.kermeta.emfutils.models.ui"/>
+<project reference="1.0,:extssh:scm.gforge.inria.fr:/cvsroot/kermeta,kermeta_projects/org.kermeta.generator,org.kermeta.generator"/>
+<project reference="1.0,:extssh:scm.gforge.inria.fr:/cvsroot/kermeta,kermeta_projects/org.kermeta.interest,org.kermeta.interest"/>
+<project reference="1.0,:extssh:scm.gforge.inria.fr:/cvsroot/kermeta,kermeta_projects/org.kermeta.interpreter.feature,org.kermeta.interpreter.feature"/>
+<project reference="1.0,:extssh:scm.gforge.inria.fr:/cvsroot/kermeta,kermeta_projects/org.kermeta.io.loader,org.kermeta.io.loader"/>
+<project reference="1.0,:extssh:scm.gforge.inria.fr:/cvsroot/kermeta,kermeta_projects/org.kermeta.ket.texteditor,org.kermeta.ket.texteditor"/>
+<project reference="1.0,:extssh:scm.gforge.inria.fr:/cvsroot/kermeta,kmlogo_projects/org.kermeta.kmlogo.feature,org.kermeta.kmlogo.feature"/>
+<project reference="1.0,:extssh:scm.gforge.inria.fr:/cvsroot/kermeta,kmlogo_projects/org.kermeta.kmlogo.samples,org.kermeta.kmlogo.samples"/>
+<project reference="1.0,:extssh:scm.gforge.inria.fr:/cvsroot/kermeta,kmlogo_projects/org.kermeta.kmlogo.texteditor,org.kermeta.kmlogo.texteditor"/>
+<project reference="1.0,:extssh:scm.gforge.inria.fr:/cvsroot/kermeta,kmlogo_projects/org.kermeta.kmlogo.tutorial,org.kermeta.kmlogo.tutorial"/>
+<project reference="1.0,:extssh:scm.gforge.inria.fr:/cvsroot/kermeta,kompose_projects/org.kermeta.kompose.core.model,org.kermeta.kompose.core.model"/>
+<project reference="1.0,:extssh:scm.gforge.inria.fr:/cvsroot/kermeta,kompose_projects/org.kermeta.kompose.core.model.edit,org.kermeta.kompose.core.model.edit"/>
+<project reference="1.0,:extssh:scm.gforge.inria.fr:/cvsroot/kermeta,kompose_projects/org.kermeta.kompose.core.model.editor,org.kermeta.kompose.core.model.editor"/>
+<project reference="1.0,:extssh:scm.gforge.inria.fr:/cvsroot/kermeta,kompose_projects/org.kermeta.kompose.core.parser,org.kermeta.kompose.core.parser"/>
+<project reference="1.0,:extssh:scm.gforge.inria.fr:/cvsroot/kermeta,kompose_projects/org.kermeta.kompose.feature,org.kermeta.kompose.feature"/>
+<project reference="1.0,:extssh:scm.gforge.inria.fr:/cvsroot/kermeta,kompose_projects/org.kermeta.kompose.samples.ui,org.kermeta.kompose.samples.ui"/>
+<project reference="1.0,:extssh:scm.gforge.inria.fr:/cvsroot/kermeta,kompose_projects/org.kermeta.kompose.specialization.ecore,org.kermeta.kompose.specialization.ecore"/>
+<project reference="1.0,:extssh:scm.gforge.inria.fr:/cvsroot/kermeta,kompose_projects/org.kermeta.kompose.specialization.ecore.samples,org.kermeta.kompose.specialization.ecore.samples"/>
+<project reference="1.0,:extssh:scm.gforge.inria.fr:/cvsroot/kermeta,kompose_projects/org.kermeta.kompose.specialization.ecore.test,org.kermeta.kompose.specialization.ecore.test"/>
+<project reference="1.0,:extssh:scm.gforge.inria.fr:/cvsroot/kermeta,kompose_projects/org.kermeta.kompose.specialization.ecore.ui,org.kermeta.kompose.specialization.ecore.ui"/>
+<project reference="1.0,:extssh:scm.gforge.inria.fr:/cvsroot/kermeta,kompose_projects/org.kermeta.kompose.specialization.rdbschema,org.kermeta.kompose.specialization.rdbschema"/>
+<project reference="1.0,:extssh:scm.gforge.inria.fr:/cvsroot/kermeta,kompose_projects/org.kermeta.kompose.specialization.rdbschema.samples,org.kermeta.kompose.specialization.rdbschema.samples"/>
+<project reference="1.0,:extssh:scm.gforge.inria.fr:/cvsroot/kermeta,kompose_projects/org.kermeta.kompose.specialization.rdbschema.test,org.kermeta.kompose.specialization.rdbschema.test"/>
+<project reference="1.0,:extssh:scm.gforge.inria.fr:/cvsroot/kermeta,kompose_projects/org.kermeta.kompose.specialization.rdbschema.ui,org.kermeta.kompose.specialization.rdbschema.ui"/>
+<project reference="1.0,:extssh:scm.gforge.inria.fr:/cvsroot/kermeta,kompose_projects/org.kermeta.kompose.specialization_wizard,org.kermeta.kompose.specialization_wizard"/>
+<project reference="1.0,:extssh:scm.gforge.inria.fr:/cvsroot/kermeta,kompose_projects/org.kermeta.kompose.ui,org.kermeta.kompose.ui"/>
+<project reference="1.0,:extssh:scm.gforge.inria.fr:/cvsroot/kermeta,kermeta_projects/org.kermeta.kpm.test,org.kermeta.kpm.test"/>
+<project reference="1.0,:extssh:scm.gforge.inria.fr:/cvsroot/kermeta,kermeta_projects/org.kermeta.kpm.test.workbench,org.kermeta.kpm.test.workbench"/>
+<project reference="1.0,:extssh:scm.gforge.inria.fr:/cvsroot/kermeta,kermeta_projects/org.kermeta.kpm.ui,org.kermeta.kpm.ui"/>
+<project reference="1.0,:extssh:scm.gforge.inria.fr:/cvsroot/kermeta,kermeta_projects/org.kermeta.language.mdk,org.kermeta.language.mdk"/>
+<project reference="1.0,:extssh:scm.gforge.inria.fr:/cvsroot/kermeta,log4j_projects/org.kermeta.log4j.feature,org.kermeta.log4j.feature"/>
+<project reference="1.0,:extssh:scm.gforge.inria.fr:/cvsroot/kermeta,log4j_projects/org.kermeta.log4j.util,org.kermeta.log4j.util"/>
+<project reference="1.0,:extssh:scm.gforge.inria.fr:/cvsroot/kermeta,kermeta_projects/org.kermeta.merger,org.kermeta.merger"/>
+<project reference="1.0,:extssh:scm.gforge.inria.fr:/cvsroot/kermeta,kermeta_projects/org.kermeta.runner,org.kermeta.runner"/>
+<project reference="1.0,:extssh:scm.gforge.inria.fr:/cvsroot/kermeta,kermeta_projects/org.kermeta.runner.ui,org.kermeta.runner.ui"/>
+<project reference="1.0,:extssh:scm.gforge.inria.fr:/cvsroot/kermeta,kermeta_projects/org.kermeta.simk,org.kermeta.simk"/>
+<project reference="1.0,:extssh:scm.gforge.inria.fr:/cvsroot/sintaks,sintaks_projects/org.kermeta.sintaks,org.kermeta.sintaks,V1_1_0"/>
+<project reference="1.0,:extssh:scm.gforge.inria.fr:/cvsroot/sintaks,sintaks_projects/org.kermeta.sintaks.alltests.feature,org.kermeta.sintaks.alltests.feature"/>
+<project reference="1.0,:extssh:scm.gforge.inria.fr:/cvsroot/sintaks,sintaks_projects/org.kermeta.sintaks.feature,org.kermeta.sintaks.feature"/>
+<project reference="1.0,:extssh:scm.gforge.inria.fr:/cvsroot/sintaks,sintaks_projects/org.kermeta.sintaks.model,org.kermeta.sintaks.model,V1_1_0"/>
+<project reference="1.0,:extssh:scm.gforge.inria.fr:/cvsroot/sintaks,sintaks_projects/org.kermeta.sintaks.model.edit,org.kermeta.sintaks.model.edit,V1_1_0"/>
+<project reference="1.0,:extssh:scm.gforge.inria.fr:/cvsroot/sintaks,sintaks_projects/org.kermeta.sintaks.model.editor,org.kermeta.sintaks.model.editor,V1_1_0"/>
+<project reference="1.0,:extssh:scm.gforge.inria.fr:/cvsroot/sintaks,sintaks_projects/org.kermeta.sintaks.samples,org.kermeta.sintaks.samples,V1_1_0"/>
+<project reference="1.0,:extssh:scm.gforge.inria.fr:/cvsroot/sintaks,sintaks_projects/org.kermeta.sintaks.texteditor,org.kermeta.sintaks.texteditor"/>
+<project reference="1.0,:extssh:scm.gforge.inria.fr:/cvsroot/sintaks,sintaks_projects/org.kermeta.sintaks.trace,org.kermeta.sintaks.trace"/>
+<project reference="1.0,:extssh:scm.gforge.inria.fr:/cvsroot/sintaks,sintaks_projects/org.kermeta.sintaks.ui,org.kermeta.sintaks.ui,V1_1_0"/>
+<project reference="1.0,:extssh:scm.gforge.inria.fr:/cvsroot/kermeta,kermeta_projects/org.kermeta.standalone.tests,org.kermeta.standalone.tests"/>
+<project reference="1.0,:extssh:scm.gforge.inria.fr:/cvsroot/kermeta,kermeta_projects/org.kermeta.structurecompiler.compiled,org.kermeta.structurecompiler.compiled"/>
+<project reference="1.0,:extssh:scm.gforge.inria.fr:/cvsroot/kermeta,trek_projects/org.kermeta.trek.feature,org.kermeta.trek.feature"/>
+<project reference="1.0,:extssh:scm.gforge.inria.fr:/cvsroot/kermeta,trek_projects/org.kermeta.trek.model,org.kermeta.trek.model"/>
+<project reference="1.0,:extssh:scm.gforge.inria.fr:/cvsroot/kermeta,trek_projects/org.kermeta.trek.model.edit,org.kermeta.trek.model.edit"/>
+<project reference="1.0,:extssh:scm.gforge.inria.fr:/cvsroot/kermeta,trek_projects/org.kermeta.trek.model.editor,org.kermeta.trek.model.editor"/>
+<project reference="1.0,:extssh:scm.gforge.inria.fr:/cvsroot/kermeta,trek_projects/org.kermeta.trek.ui,org.kermeta.trek.ui"/>
+<project reference="1.0,:extssh:scm.gforge.inria.fr:/cvsroot/kermeta,tutorials_projects/org.kermeta.tutorial.aspects,org.kermeta.tutorial.aspects"/>
+<project reference="1.0,:extssh:scm.gforge.inria.fr:/cvsroot/kermeta,tutorials_projects/org.kermeta.tutorial.aspects.documentation,org.kermeta.tutorial.aspects.documentation"/>
+<project reference="1.0,:extssh:scm.gforge.inria.fr:/cvsroot/kermeta,tutorials_projects/org.kermeta.tutorial.aspects.feature,org.kermeta.tutorial.aspects.feature"/>
+<project reference="1.0,:extssh:scm.gforge.inria.fr:/cvsroot/kermeta,uml2_projects/org.kermeta.uml2,org.kermeta.uml2"/>
+<project reference="1.0,:extssh:scm.gforge.inria.fr:/cvsroot/kermeta,uml2_projects/org.kermeta.uml2.documentation,org.kermeta.uml2.documentation"/>
+<project reference="1.0,:extssh:scm.gforge.inria.fr:/cvsroot/kermeta,uml2_projects/org.kermeta.uml2.feature,org.kermeta.uml2.feature"/>
+<project reference="1.0,:extssh:scm.gforge.inria.fr:/cvsroot/kermeta,uml2_projects/org.kermeta.uml2.profile.marte.samples,org.kermeta.uml2.profile.marte.samples"/>
+<project reference="1.0,:extssh:scm.gforge.inria.fr:/cvsroot/kermeta,uml2_projects/org.kermeta.uml2.profiles.model,org.kermeta.uml2.profiles.model"/>
+<project reference="1.0,:extssh:scm.gforge.inria.fr:/cvsroot/kermeta,uml2_projects/org.kermeta.uml2.profiles.tests,org.kermeta.uml2.profiles.tests"/>
+<project reference="1.0,:extssh:scm.gforge.inria.fr:/cvsroot/kermeta,uml2_projects/org.kermeta.uml2.samples,org.kermeta.uml2.samples"/>
+<project reference="1.0,:extssh:scm.gforge.inria.fr:/cvsroot/kermeta,uml2_projects/org.kermeta.uml2.tests,org.kermeta.uml2.tests"/>
+<project reference="1.0,:extssh:scm.gforge.inria.fr:/cvsroot/kermeta,uml2_projects/org.kermeta.uml2.umlaut,org.kermeta.uml2.umlaut"/>
+<project reference="1.0,:extssh:scm.gforge.inria.fr:/cvsroot/kermeta,uml2_projects/org.kermeta.uml2.umlaut.samples,org.kermeta.uml2.umlaut.samples"/>
+<project reference="1.0,:extssh:scm.gforge.inria.fr:/cvsroot/kermeta,uml2_projects/org.kermeta.uml2.umlaut.tests,org.kermeta.uml2.umlaut.tests"/>
+<project reference="1.0,:extssh:scm.gforge.inria.fr:/cvsroot/openembedd,integration_projects/dev/org.openembedd.launchexec,org.openembedd.launchexec"/>
+<project reference="1.0,:extssh:scm.gforge.inria.fr:/cvsroot/openembedd,integration_projects/tests/org.openembedd.tests,org.openembedd.tests"/>
+</provider>
+<workingSets editPageId="org.eclipse.jdt.ui.JavaWorkingSetPage" label="devsupport" name="devsupport">
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.kermeta.eclipse.ant.optional.junit4" type="4"/>
+<item elementID="=org.openembedd.tests" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.kermeta.devsupport.feature" type="4"/>
+<item elementID="=org.antlr.antlr2" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.kermeta.devsupport.site" type="4"/>
+</workingSets>
+<workingSets editPageId="org.eclipse.jdt.ui.JavaWorkingSetPage" label="documentation" name="documentation">
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/ant-docbook-styler" type="4"/>
+<item elementID="=org.kermeta.ecore.documentation" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=fr.irisa.triskell.traceability.documentation" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=org.kermeta.tutorial.aspects.documentation" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=fr.irisa.triskell.kermeta.ket.documentation" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=org.kermeta.uml2.documentation" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=fr.mopcom.wfr.documentation" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=fr.irisa.triskell.kermeta.documentation" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+</workingSets>
+<workingSets editPageId="org.eclipse.jdt.ui.JavaWorkingSetPage" label="ecore_mdk" name="ecore_mdk">
+<item elementID="=org.kermeta.ecore.documentation" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=fr.irisa.triskell.kermeta.ecore" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=fr.irisa.triskell.kermeta.ecore.tests" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/fr.irisa.triskell.kermeta.ecore.feature" type="4"/>
+</workingSets>
+<workingSets editPageId="org.eclipse.ui.resourceWorkingSetPage" label="emfatic" name="emfatic">
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.eclipse.gymnast.runtime.ui" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.eclipse.emf.emfatic.doc.user" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.eclipse.emf.emfatic.ui" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.eclipse.emf.emfatic-feature" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.eclipse.gymnast.examples.game" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.eclipse.emf.emfatic.core" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.eclipse.gymnast.generators.parser.lpg" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.eclipse.gymnast.generators.ast-primordial" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.eclipse.gymnast.generator-feature" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.eclipse.gymnast.generators.parser.antlr" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.eclipse.gymnast.generator.core" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.eclipse.gymnast.generators.parser.javacc" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.eclipse.gymnast.runtime-feature" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.eclipse.gymnast.generator.ui" type="4"/>
+</workingSets>
+<workingSets editPageId="org.eclipse.jdt.ui.JavaWorkingSetPage" label="extras" name="extras">
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.kermeta.emfutils.feature" type="4"/>
+<item elementID="=fr.irisa.triskell.kermeta.touchnavigator" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=org.kermeta.emfutils.models.ui" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+</workingSets>
+<workingSets editPageId="org.eclipse.jdt.ui.JavaWorkingSetPage" label="features" name="features">
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.kermeta.uml2.feature" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.kermeta.kmlogo.feature" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/fr.inria.ipr.feature" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.kermeta.interpreter.feature" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/fr.irisa.triskell.kermeta.ecore.feature" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/fr.irisa.triskell.traceability.feature" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/fr.irisa.triskell.ktr.feature" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.kermeta.log4j.feature" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.eclipse.gymnast.generator-feature" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/fr.irisa.triskell.kermeta.graphical.feature" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.kermeta.uml2.profile.marte.feature" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.kermeta.alltests.feature" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.kermeta.kompose.feature" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.eclipse.gymnast.runtime-feature" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/fr.irisa.triskell.kermeta.site" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.kermeta.tutorial.aspects.feature" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/fr.mopcom.wfr.feature" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/fr.irisa.triskell.kermeta.ocl.feature" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.eclipse.emf.emfatic-feature" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/fr.irisa.triskell.kermeta.ket.feature" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.kermeta.devsupport.site" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.kermeta.emfutils.feature" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.kermeta.trek.feature" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.kermeta.devsupport.feature" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/fr.irisa.triskell.kermeta.samples.fsm.feature" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/fr.irisa.triskell.kermeta.feature" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.kermeta.compiler.feature" type="4"/>
+</workingSets>
+<workingSets editPageId="org.eclipse.ui.resourceWorkingSetPage" label="fsm" name="fsm">
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/fr.irisa.triskell.kermeta.samples.fsm.model" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/fr.irisa.triskell.kermeta.samples.fsm.model.editor" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/fr.irisa.triskell.samples.fsm" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/fr.irisa.triskell.kermeta.samples.fsm.feature" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/fr.irisa.triskell.kermeta.samples.fsm" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/fr.irisa.triskell.kermeta.samples.fsm.model.edit" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/fr.irisa.triskell.kermeta.samples.fsm.demo" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/fr.irisa.triskell.kermeta.samples.fsm.demoAspect" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/fr.irisa.triskell.kermeta.samples.fsm.graphicalEditor" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/fr.irisa.triskell.kermeta.samples.fsm.tests" type="4"/>
+</workingSets>
+<workingSets editPageId="org.eclipse.jdt.ui.JavaWorkingSetPage" label="ipr" name="ipr">
+<item elementID="=fr.inria.ipr.ui" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=fr.inria.ipr.edit" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=fr.inria.ipr.editor" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/fr.inria.ipr.feature" type="4"/>
+<item elementID="=fr.inria.ipr" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+</workingSets>
+<workingSets editPageId="org.eclipse.jdt.ui.JavaWorkingSetPage" label="kermeta_compiler" name="kermeta_compiler">
+<item elementID="=org.kermeta.generator" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=org.kermeta.compiler.trek.ui" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=org.kermeta.structurecompiler.compiled" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=org.kermeta.compiler" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=org.kermeta.compiler.common" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=org.kermeta.simk" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=org.kermeta.compiler.ui" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=org.kermeta.compiler.generator" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=org.kermeta.compiler.generator.emftemplates" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.kermeta.compiler.feature" type="4"/>
+</workingSets>
+<workingSets editPageId="org.eclipse.jdt.ui.JavaWorkingSetPage" label="kermeta_core" name="kermeta_core">
+<item elementID="=fr.irisa.triskell.kermeta.texteditor" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=org.kermeta.merger" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=fr.irisa.triskell.kermeta.model.edit" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=fr.irisa.triskell.kermeta.io" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=org.kermeta.io.loader" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=fr.irisa.triskell.kermeta.framework" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=fr.irisa.triskell.kermeta.model" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=fr.irisa.triskell.kermeta.ui" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/fr.irisa.triskell.kermeta.standalone" type="4"/>
+<item elementID="=fr.irisa.triskell.kermeta.model.editor" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=fr.irisa.triskell.kermeta.documentation" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=org.kermeta.interest" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=fr.irisa.triskell.kermeta" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+</workingSets>
+<workingSets editPageId="org.eclipse.jdt.ui.JavaWorkingSetPage" label="kermeta_graphicaleditor" name="kermeta_graphicaleditor">
+<item elementID="=fr.irisa.triskell.kermeta.graphicaleditor" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/fr.irisa.triskell.kermeta.graphical.feature" type="4"/>
+</workingSets>
+<workingSets editPageId="org.eclipse.jdt.ui.JavaWorkingSetPage" label="kermeta_interpreter" name="kermeta_interpreter">
+<item elementID="=org.kermeta.runner.ui" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=fr.irisa.triskell.kermeta.interpreter" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=org.kermeta.runner" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.kermeta.interpreter.feature" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/juliencontrib" type="4"/>
+</workingSets>
+<workingSets editPageId="org.eclipse.ui.resourceWorkingSetPage" label="kermeta_mdk" name="kermeta_mdk">
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.kermeta.language.mdk" type="4"/>
+</workingSets>
+<workingSets editPageId="org.eclipse.jdt.ui.JavaWorkingSetPage" label="ket" name="ket">
+<item elementID="=org.kermeta.ket.texteditor" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=fr.irisa.triskell.kermeta.ket.documentation" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=fr.irisa.triskell.kermeta.ket" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/fr.irisa.triskell.kermeta.ket.feature" type="4"/>
+</workingSets>
+<workingSets editPageId="org.eclipse.ui.resourceWorkingSetPage" label="kmLogo" name="kmLogo">
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.kermeta.kmlogo.samples" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/fr.irisa.triskell.kmlogo.ui" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/fr.irisa.triskell.kmlogo.ui.linux.x86" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/fr.irisa.triskell.kmlogo.ui.macosx" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.kermeta.kmlogo.feature" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/fr.irisa.triskell.kmlogo.model" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/fr.irisa.triskell.kmlogo.ui.win32.x86" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/fr.irisa.triskell.kmlogo.model.editor" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/fr.irisa.triskell.kmlogo.model.edit" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.kermeta.kmlogo.tutorial" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.kermeta.kmlogo.texteditor" type="4"/>
+</workingSets>
+<workingSets editPageId="org.eclipse.ui.resourceWorkingSetPage" label="kompose" name="kompose">
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.kermeta.kompose.specialization_wizard" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.kermeta.kompose.specialization.rdbschema.ui" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.kermeta.kompose.core.model.edit" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.kermeta.kompose.specialization.ecore.test" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.kermeta.kompose.specialization.rdbschema.test" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.kermeta.kompose.core.parser" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.kermeta.kompose.samples.ui" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.kermeta.kompose.specialization.rdbschema.samples" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.kermeta.kompose.specialization.ecore.samples" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.kermeta.kompose.specialization.ecore" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.kermeta.kompose.specialization.ecore.ui" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.kermeta.kompose.core.model.editor" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.kermeta.kompose.specialization.rdbschema" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.kermeta.kompose.core.model" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.kermeta.kompose.feature" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.kermeta.kompose.ui" type="4"/>
+</workingSets>
+<workingSets editPageId="org.eclipse.ui.resourceWorkingSetPage" label="kpm" name="kpm">
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.kermeta.kpm.ui" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/fr.irisa.triskell.kermeta.kpm.actions" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/fr.irisa.triskell.kermeta.kpm" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/fr.irisa.triskell.kermeta.kpm.editor" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/fr.irisa.triskell.kermeta.kpm.edit" type="4"/>
+</workingSets>
+<workingSets editPageId="org.eclipse.ui.resourceWorkingSetPage" label="ktr" name="ktr">
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/fr.irisa.triskell.ktr.model" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/fr.irisa.triskell.ktr.feature" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/fr.irisa.triskell.ktr.model.editor" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/fr.irisa.triskell.ktr.model.edit" type="4"/>
+</workingSets>
+<workingSets editPageId="org.eclipse.ui.resourceWorkingSetPage" label="mopcom-soc" name="mopcom-soc">
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.kermeta.uml2.profile.marte.feature" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/fr.mopcom.wfr" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/fr.mopcom.wfr.ui" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/fr.mopcom.wfr.feature" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/fr.mopcom.wfr.documentation" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.kermeta.uml2.profile.marte.ui" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.kermeta.uml2.profile.marte" type="4"/>
+</workingSets>
+<workingSets editPageId="org.eclipse.ui.resourceWorkingSetPage" label="ocl" name="ocl">
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/fr.irisa.triskell.kermeta.ocl" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/fr.irisa.triskell.kermeta.ocl.test" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/fr.irisa.triskell.kermeta.ocl.feature" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.kermeta.eclipse.ocl.parser" type="4"/>
+</workingSets>
+<workingSets editPageId="org.eclipse.ui.resourceWorkingSetPage" label="sintaks" name="sintaks">
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.kermeta.sintaks.alltests.feature" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.kermeta.sintaks.model.edit" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.kermeta.sintaks.ui" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.kermeta.sintaks.samples" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.kermeta.sintaks.feature" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/fr.uha.mips.sintaks.ecore2hutn" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.kermeta.sintaks" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/fr.uha.mips.sintaks.trace" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.kermeta.sintaks.trace" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.kermeta.sintaks.model.editor" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.kermeta.sintaks.model" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.kermeta.sintaks.texteditor" type="4"/>
+</workingSets>
+<workingSets editPageId="org.eclipse.jdt.ui.JavaWorkingSetPage" label="standalone" name="standalone">
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/fr.irisa.triskell.kermeta.standalone" type="4"/>
+<item elementID="=org.kermeta.standalone.tests" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+</workingSets>
+<workingSets editPageId="org.eclipse.ui.resourceWorkingSetPage" label="test" name="test">
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.kermeta.uml2.profiles.tests" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.kermeta.eclipse.test" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/fr.irisa.triskell.kermeta.ocl.test" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.kermeta.kpm.test.workbench" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/fr.irisa.triskell.kermeta.tests" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.kermeta.uml2.umlaut.tests" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/fr.irisa.triskell.kermeta.samples.fsm.tests" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.kermeta.kpm.test" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.kermeta.compiler.tests" type="4"/>
+<item elementID="=org.openembedd.launchexec" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.kermeta.uml2.tests" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.kermeta.alltests.feature" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/fr.irisa.triskell.kermeta.ecore.tests" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.kermeta.standalone.tests" type="4"/>
+</workingSets>
+<workingSets editPageId="org.eclipse.jdt.ui.JavaWorkingSetPage" label="traceability" name="traceability">
+<item elementID="=fr.irisa.triskell.traceability.model" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=fr.irisa.triskell.traceability.model.editor" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=fr.irisa.triskell.traceability.documentation" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=fr.uha.mips.sintaks.trace" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=fr.irisa.triskell.traceability.model.edit" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/fr.irisa.triskell.traceability.feature" type="4"/>
+</workingSets>
+<workingSets editPageId="org.eclipse.ui.resourceWorkingSetPage" label="trek" name="trek">
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.kermeta.trek.ui" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.kermeta.compiler.trek.ui" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.kermeta.trek.model.edit" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.kermeta.trek.model" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.kermeta.trek.feature" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.kermeta.trek.model.editor" type="4"/>
+</workingSets>
+<workingSets editPageId="org.eclipse.ui.resourceWorkingSetPage" label="tutorials" name="tutorials">
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.kermeta.tutorial.aspects" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.kermeta.tutorial.aspects.documentation" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.kermeta.tutorial.aspects.feature" type="4"/>
+</workingSets>
+<workingSets editPageId="org.eclipse.ui.resourceWorkingSetPage" label="uml" name="uml">
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.kermeta.uml2.feature" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.kermeta.uml2" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.kermeta.uml2.profile.marte.samples" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.kermeta.uml2.samples" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.kermeta.uml2.profiles.tests" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.kermeta.uml2.umlaut" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.kermeta.uml2.documentation" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.kermeta.uml2.profiles.model" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.kermeta.uml2.umlaut.tests" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.kermeta.uml2.tests" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.kermeta.uml2.umlaut.samples" type="4"/>
+</workingSets>
+<workingSets editPageId="org.eclipse.jdt.ui.JavaWorkingSetPage" label="utils" name="utils">
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.kermeta.log4j.feature" type="4"/>
+<item elementID="=org.eclipse.emf.ecoretools.registration.ui" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=org.eclipse.gymnast.runtime.core" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=org.eclipse.emf.ecoretools.registration" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=org.kermeta.log4j.util" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=fr.irisa.triskell.eclipse.util" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+</workingSets>
+</psf>
