@@ -1,4 +1,4 @@
-/* $Id: GenerateOCL.java,v 1.16 2009-01-09 13:40:48 gperroui Exp $
+/* $Id: GenerateOCL.java,v 1.17 2009-02-17 15:38:51 dvojtise Exp $
  * Project    : fr.irisa.triskell.kermeta.ocl
  * File       : GenerateOCL.java
  * License    : EPL
@@ -72,7 +72,8 @@ public class GenerateOCL {
 	}
 	
 	static private Interpreter getInterpreter() {
-		if ( _interpreter == null )
+		
+		if ( _interpreter == null || _interpreter.hasMemoryBeenFreed())
 			try {
 				KermetaUnit kermetaUnit = RunnerHelper.getKermetaUnitToExecute(oclKmtPrinterKmtPath, "platform:/resource/ocl/OCLKMTPrinter.km");
 				Map<String, Object> options = new HashMap<String, Object>();
