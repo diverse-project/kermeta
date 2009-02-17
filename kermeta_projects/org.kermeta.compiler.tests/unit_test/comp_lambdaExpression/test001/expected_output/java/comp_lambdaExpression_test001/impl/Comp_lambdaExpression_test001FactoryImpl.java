@@ -1,7 +1,7 @@
 /**
  * Copyright: IRISA/INRIA/Universite de Rennes 1 - License: EPL - Web site: http://www.kermeta.org
  *
- * $Id: Comp_lambdaExpression_test001FactoryImpl.java,v 1.1 2007-11-19 13:16:55 cfaucher Exp $
+ * $Id: Comp_lambdaExpression_test001FactoryImpl.java,v 1.2 2009-02-17 13:40:58 cfaucher Exp $
  */
 package comp_lambdaExpression_test001.impl;
 

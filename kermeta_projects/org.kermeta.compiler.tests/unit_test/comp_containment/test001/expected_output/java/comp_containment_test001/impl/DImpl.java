@@ -1,7 +1,7 @@
 /**
  * Copyright: IRISA/INRIA/Universite de Rennes 1 - License: EPL - Web site: http://www.kermeta.org
  *
- * $Id: DImpl.java,v 1.1 2007-11-19 13:23:37 cfaucher Exp $
+ * $Id: DImpl.java,v 1.2 2009-02-17 13:40:51 cfaucher Exp $
  */
 package comp_containment_test001.impl;
 

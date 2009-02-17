@@ -1,7 +1,7 @@
 /**
  * Copyright: IRISA/INRIA/Universite de Rennes 1 - License: EPL - Web site: http://www.kermeta.org
  *
- * $Id: Main.java,v 1.1 2007-11-19 09:44:41 cfaucher Exp $
+ * $Id: Main.java,v 1.2 2009-02-17 13:40:56 cfaucher Exp $
  */
 package comp_callResult_test002;
 

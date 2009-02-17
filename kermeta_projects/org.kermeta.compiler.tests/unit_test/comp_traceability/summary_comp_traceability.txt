@@ -1,1 +1,1 @@
-<para>A traceability mechanism could be added between the merged Kermeta model file (*.km) and the generated Java.</para>
+<para>A traceability mechanism could be added between the merged Kermeta model file (*.km) and the generated Java. See the first attempt at pass0.kmt</para>

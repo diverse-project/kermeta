@@ -1,3 +1,2 @@
 Design=10
-Impl_Java=0
-Impl_Kermeta=0
+Impl_Kermeta=10

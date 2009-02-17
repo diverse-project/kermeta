@@ -29,3 +29,5 @@ a.ref.each{ r |
 
 <para>The call of the method from the original method:</para>
 <programlisting>Main_3_Helper.each(a.getRef());</programlisting>
+
+<para>To implement: recursive function types, succession of lambda expressions using self as Target, calling function types from subtype: switch (dynamic linking)</para>

@@ -1,1 +1,1 @@
-<para></para>
+<para>The bug #6380 remains</para>

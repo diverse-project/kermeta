@@ -1,3 +1,3 @@
-Design=0
-Impl_Java=0
-Impl_Kermeta=0
+Design=90
+Impl_Kermeta=90
+Impl_Simk=100

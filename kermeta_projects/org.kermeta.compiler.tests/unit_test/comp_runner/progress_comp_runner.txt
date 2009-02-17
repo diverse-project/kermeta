@@ -1,5 +1,4 @@
 Design=100
-Impl_Java=100
-Impl_Kermeta=0
+Impl_Kermeta=100
 Impl_Jet=100
 Impl_Simk=100
