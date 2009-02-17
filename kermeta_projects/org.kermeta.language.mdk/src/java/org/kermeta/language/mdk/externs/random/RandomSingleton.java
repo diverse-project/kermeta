@@ -1,6 +1,6 @@
 
 
-/*$Id: RandomSingleton.java,v 1.1 2008-12-12 15:39:48 cfaucher Exp $
+/*$Id: RandomSingleton.java,v 1.2 2009-02-17 10:11:31 cfaucher Exp $
 * Project : org.kermeta.language.mdk
 * File : 	Random.java
 * License : EPL
@@ -20,7 +20,7 @@ public class RandomSingleton {
 	private static java.util.Random _randomJava;
 	
 	private RandomSingleton() {
-		_randomJava = new java.util.Random(12345678);
+		_randomJava = new java.util.Random(8888888);
 	}
 	
 	public static RandomSingleton getInstance() {
