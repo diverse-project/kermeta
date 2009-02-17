@@ -1,0 +1,280 @@
+/* $Id: CallVariableHelper.kmt,v 1.1 2009-02-17 12:23:38 cfaucher Exp $ 
+ * Creation : February 17, 2009
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            Cyril Faucher <cfaucher@irisa.fr>
+ */
+
+package kermeta::language::behavior;
+
+require kermeta
+require "ExpressionHelper.kmt"
+
+using kermeta::standard
+using kermeta::language::structure
+
+aspect class CallVariable {
+	
+	operation isParameter() : Boolean is do
+		result := false
+		if self.container.isInstanceOf(CallFeature) then
+			var exp : Expression init self.container.asType(CallFeature).parameters.detect{ p |
+				p==self
+			}
+			if not exp.isVoid() then
+				result := true
+			end
+		end
+	end
+	
+	operation isParameterSingle() : Boolean is do
+		result := false
+		
+		if self.isParameter() then
+			var cf_ : CallFeature init self.container.asType(CallFeature)
+			var i : Integer init -1
+			var exp : Expression init cf_.parameters.detect{ p |
+				i := i+1
+				p==self
+			}
+			if cf_.staticOperation.ownedParameter.elementAt(i).asType(Parameter).upper==1 then
+				result := true
+			end
+		end
+	end
+	
+	operation isParameterMany() : Boolean is do
+		result := false
+		
+		if self.isParameter() then
+			var cf_ : CallFeature init self.container.asType(CallFeature)
+			var i : Integer init -1
+			var exp : Expression init cf_.parameters.detect{ p |
+				i := i+1
+				p==self
+			}
+			if cf_.staticOperation.ownedParameter.elementAt(i).asType(Parameter).upper!=1 then
+				result := true
+			end
+		end
+	end
+	
+	operation getCallFeatureCorrespondingParameter() : Parameter is do
+		result := void
+
+		if self.isParameter() then
+			var cf_ : CallFeature init self.container.asType(CallFeature)
+			var i : Integer init -1
+			var exp : Expression init cf_.parameters.detect{ p |
+				i := i+1
+				p==self
+			}
+			result := cf_.staticOperation.ownedParameter.elementAt(i).asType(Parameter)
+		end
+	end
+	
+	operation isParameterForOwningOperation() : Boolean is do
+		result := false
+		// The container could not be an Operation, but a derived property
+		if self.container.isInstanceOf(CallFeature) and (not self.getContainerAsType(Operation).isVoid()) then
+			result := not self.getContainerAsType(Operation).asType(Operation).ownedParameter.detect{ p |
+				p.name==self.name
+			}.isVoid()
+		end
+	end
+	
+	operation isParameterForOwningOperationSingle() : Boolean is do
+		result := false
+		if not self.retrieveCorrespondingParameter().isVoid() then
+			if self.retrieveCorrespondingParameter().upper==1 then
+				result := true
+			end
+		end
+	end
+	
+	operation isParameterForOwningOperationMany() : Boolean is do
+		result := false
+		if not self.retrieveCorrespondingParameter().isVoid() then
+			if self.retrieveCorrespondingParameter().upper!=1 then
+				result := true
+			end
+		end
+	end
+	
+	operation isParameterManyAndForOwningOperation() : Boolean is do
+		result := false
+		
+		if self.isParameterMany() and self.isParameterForOwningOperation() then
+			result := true
+		end
+	end
+	
+	method isFunctionTypeVariable() : Boolean is do
+		result := false
+		var ftParam : Parameter init retrieveCorrespondingParameter()
+		if not ftParam.isVoid() then
+			if ftParam.isFunctionType() then
+				result := true
+			end
+		end
+	end
+	
+	/** Retrieve in an operation signature, the parameter that is a function type */
+	operation getFunctionTypeParameter() : Parameter is do
+		var ftParam : Parameter init retrieveCorrespondingParameter()
+		if not ftParam.isVoid() then
+			if ftParam.isFunctionType() then
+				result := ftParam
+			end
+		end
+	end
+	
+	operation retrieveCorrespondingParameter() : Parameter is do
+		result := void
+		// The container could not be an Operation, but a derived property
+		if not self.getContainerAsType(Operation).isVoid() then
+			result := self.getContainerAsType(Operation).asType(Operation).ownedParameter.detect{ p | p.name == self.name }
+		end
+	end
+	
+	operation isDeclaredInLambdaExpression() : Boolean is do
+		result := false
+		
+		if not self.getContainerAsType(LambdaExpression).isVoid() then
+		
+			var tmp_block : Block
+			tmp_block ?= self.getContainerAsType(Block)
+			var aStatement : Expression
+			if not tmp_block.isVoid() then
+				aStatement := getVariableDeclInBlock(tmp_block)
+			end
+			
+			if not aStatement.isVoid() then
+				if aStatement.isInstanceOf(VariableDecl) then
+					var theVariableDecl : VariableDecl init aStatement.asType(VariableDecl)
+					result := not theVariableDecl.getContainerAsType(LambdaExpression).isVoid()
+				end
+			end
+			
+			if not result then
+				var tmp_loop : Loop
+				tmp_loop ?= self.getContainerAsType(Loop)
+				var aStatement_ : Expression
+				if not tmp_loop.isVoid() then
+					aStatement_ := getVariableDeclInLoop(tmp_loop)
+				end
+				
+				if not aStatement_.isVoid() then
+					if aStatement_.isInstanceOf(VariableDecl) then
+						var theVariableDecl : VariableDecl init aStatement_.asType(VariableDecl)
+						result := not theVariableDecl.getContainerAsType(LambdaExpression).isVoid()
+					end
+				end
+			end
+		end
+		
+	end
+	
+	operation getVariableDeclInBlock(block : Block) : Expression is do
+		result := block.statement.detect{s |
+			if s.isInstanceOf(VariableDecl) then
+				s.asType(VariableDecl).identifier == self.name
+			else
+				false
+			end
+		}
+		
+		if result.isVoid() and (not block.getContainerAsType(Block).isVoid()) then
+			result := getVariableDeclInBlock(block.getContainerAsType(Block).asType(Block))
+		end
+	end
+	
+	operation getVariableDeclInLoop(l : Loop) : Expression is do
+		result := void
+
+		if not l.isVoid() then
+			if not l.initialization.isVoid() then
+				if l.initialization.isInstanceOf(VariableDecl) then
+					if l.initialization.asType(VariableDecl).identifier == self.name then
+						result := l.initialization.asType(VariableDecl)
+					end
+				end
+			end
+		end
+		
+		if result.isVoid() and (not l.getContainerAsType(Loop).isVoid()) then
+			result := getVariableDeclInLoop(l.getContainerAsType(Loop).asType(Loop))
+		end
+	end
+	
+	operation isDeclaredInAFunctionType() : Boolean is do
+
+		result := false
+		
+		if not self.getContainerAsType(Operation).isVoid() then
+			if self.getContainerAsType(Operation).asType(Operation).isFunctionType() then
+
+				var tmp_block : Block
+				tmp_block ?= self.getContainerAsType(Block)
+				var aStatement : Expression
+				if not tmp_block.isVoid() then
+					aStatement := getVariableDeclInBlock(tmp_block)
+				end
+				
+				if not aStatement.isVoid() then
+					if aStatement.isInstanceOf(VariableDecl) then
+						var theVariableDecl : VariableDecl init aStatement.asType(VariableDecl)
+						result := theVariableDecl.getContainerAsType(Operation).asType(Operation).isFunctionType()
+					end
+				end
+
+				if not result then
+					var tmp_loop : Loop
+					tmp_loop ? = self.getContainerAsType(Loop)
+					var aStatement_ : Expression
+					if not tmp_loop.isVoid() then
+						aStatement_ := getVariableDeclInLoop(tmp_loop)
+					end
+
+					if not aStatement_.isVoid() then
+						if aStatement_.isInstanceOf(VariableDecl) then
+							var theVariableDecl : VariableDecl init aStatement_.asType(VariableDecl)
+							result := theVariableDecl.getContainerAsType(Operation).asType(Operation).isFunctionType()
+						end
+					end
+				end
+			
+			end
+		end
+		
+	end
+	
+	operation isLambdaExpressionParameter() : Boolean is do
+		result := false	
+		if not self.getContainerAsType(LambdaExpression).isVoid() then
+			result := not getLambdaParameter(self.getContainerAsType(LambdaExpression).asType(LambdaExpression)).isVoid()
+		end
+	end
+	
+	operation getCorrespondingLambdaExpressionParameter() : LambdaParameter is do
+		result := void
+		
+		if not self.getContainerAsType(LambdaExpression).isVoid() then
+			//result := not self.getContainerAsType(LambdaExpression).asType(LambdaExpression).parameters.detect{ p | p.name == self.name }.isVoid()
+			result := getLambdaParameter(self.getContainerAsType(LambdaExpression).asType(LambdaExpression))
+		end
+	end
+	
+	operation getLambdaParameter(lambdaExpression : LambdaExpression) : LambdaParameter is do
+		result := void
+		
+		if not lambdaExpression.isVoid() then
+			result := lambdaExpression.parameters.detect{ p | p.name == self.name }
+			
+			if (result.isVoid()) and (not lambdaExpression.getContainerAsType(LambdaExpression).isVoid()) then
+				result := getLambdaParameter(lambdaExpression.getContainerAsType(LambdaExpression).asType(LambdaExpression))
+			end
+		end
+	end
+}

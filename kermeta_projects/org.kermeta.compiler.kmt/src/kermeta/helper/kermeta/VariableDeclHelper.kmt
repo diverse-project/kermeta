@@ -1,0 +1,36 @@
+/* $Id: VariableDeclHelper.kmt,v 1.1 2009-02-17 12:23:38 cfaucher Exp $ 
+ * Creation : February 17, 2009
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            Cyril Faucher <cfaucher@irisa.fr>
+ */
+
+package kermeta::language::behavior;
+
+require kermeta
+require "TypeHelper.kmt"
+
+using kermeta::standard
+
+aspect class VariableDecl {
+
+	operation requireConversionValueTypeToObject() : Boolean is do
+		result := false
+		
+		if self.initialization.isInstanceOf(Literal) then
+		
+			if self.initialization.asType(Literal).staticType.isValueType() then
+				
+				var left_type : String init self.staticType.getTypeQName()
+					
+				if left_type == "kermeta::language::structure::Object" then
+					if self.initialization.staticType.isValueType() then
+						result := true
+					end
+				end
+			end
+		end
+	end
+
+}
