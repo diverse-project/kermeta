@@ -1,4 +1,4 @@
-/* $Id: OptionalEMFValidator.java,v 1.5 2008-05-28 13:36:26 dvojtise Exp $
+/* $Id: OptionalEMFValidator.java,v 1.6 2009-02-17 12:41:08 dvojtise Exp $
  * Project   : Kermeta 
  * File      : OptionalEMFValidator.java
  * License   : EPL
@@ -44,7 +44,7 @@ public class OptionalEMFValidator {
 	
 			for(Object obj : res.getContents()){
 				EObject eobj = (EObject) obj;
-				try{
+				
 					IStatus status = validator.validate(eobj);
 					internalLog.debug("Validating EObject with EMF validator");
 					// do something if this is not valid ...
@@ -55,13 +55,11 @@ public class OptionalEMFValidator {
 				    			runtimeMemory,
 				    			null);
 					}
-				}
-				catch(java.lang.ExceptionInInitializerError e){
-					// didn't succeed to validate maybe we are running outside of eclipse and the service is not correctly activated
-					internalLog.warn("Didn't succeed to validate EObject with EMF validator, maybe you are running outside of eclipse ...",e);
-				}
-				
 			}
+		}
+		catch(java.lang.ExceptionInInitializerError e){
+			// didn't succeed to validate maybe we are running outside of eclipse and the service is not correctly activated
+			internalLog.warn("Didn't succeed to validate EObject with EMF validator, maybe you are running outside of eclipse ...",e);
 		}
 		catch(NoClassDefFoundError e){
 			// didn't succeed to validate maybe we are running outside of eclipse and the service is not correctly activated
