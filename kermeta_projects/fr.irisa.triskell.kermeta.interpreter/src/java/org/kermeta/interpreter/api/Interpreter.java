@@ -207,7 +207,7 @@ public class Interpreter {
 	 * @return ExpressionInterpreter
 	 */
 	public ExpressionInterpreter getExpressionInterpreter(){
-		return _realInterpreter.getBasicInterpreter();
+		return _realInterpreter == null ? null : _realInterpreter.getBasicInterpreter();
 	}
 	
 	
@@ -443,6 +443,12 @@ public class Interpreter {
 		Runtime.getRuntime().gc();
 	}
 	
+	
+	/** if true, this means that this interpreter cannot be reused anymore since its resources has been released */
+	public boolean hasMemoryBeenFreed(){
+		
+		return this._kermetaUnit.getModelingUnit() == null;
+	}
 	/**
 	 * The interpretation is forcibly terminated. 
 	 * @throws DebugException 
