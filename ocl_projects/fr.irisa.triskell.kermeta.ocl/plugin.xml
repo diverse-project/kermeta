@@ -20,7 +20,7 @@
                enablesFor="1"
                icon="icons/ocl_2_kermeta.png"
                id="fr.irisa.triskell.ocl.menu.action"
-               label="Convert to Kermeta..."
+               label="Convert to Kermeta... (Interpreted)"
                menubarPath="org.eclipse.ui.articles.action.contribution.navigator.subMenu/Kermeta">
          </action>
       </objectContribution>
@@ -38,7 +38,7 @@
                      enablesFor="1"
                      icon="icons/ocl_2_kermeta.png"
                      id="fr.irisa.triskell.kermeta.ocl.action1"
-                     label="Generate KMT Files from OCL Files"
+                     label="Generate KMT Files from OCL Files (Interpreted)"
                      menubarPath="org.eclipse.ui.articles.action.contribution.navigator.subMenu/Kermeta">
          </action>
       </objectContribution>
