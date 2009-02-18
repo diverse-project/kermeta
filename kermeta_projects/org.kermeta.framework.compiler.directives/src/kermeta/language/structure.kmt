@@ -1,4 +1,4 @@
-/* $Id: structure.kmt,v 1.1 2009-02-16 15:47:10 cfaucher Exp $ 
+/* $Id: structure.kmt,v 1.2 2009-02-18 15:13:42 cfaucher Exp $ 
  * Creation : February 16, 2009
  * Licence  : EPL 
  * Copyright:
@@ -13,10 +13,13 @@ package kermeta::language::structure;
 
 require kermeta
 
+	// Better solution than creating aspects because end-user should not have knowledge of that through reflexivity
+	// Properties are then created in the Ecore file only
   @EMF_needProperty "name=oid javaClass=java.lang.Integer"
   @EMF_needProperty "name=internalContainingResource classDefinitionQN=kermeta::persistence::Resource"
 aspect class Object {
 
+		// Recopy the behavior from Object.getMetaClass() in the ValueType Wrapper
 	 @RecopyInValueTypes "true"
 	operation getMetaClass() : Class from Object is abstract
 	

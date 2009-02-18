@@ -1,4 +1,4 @@
-/* $Id: StringBuffer.kmt,v 1.1 2009-02-16 15:47:10 cfaucher Exp $ 
+/* $Id: StringBuffer.kmt,v 1.2 2009-02-18 15:13:42 cfaucher Exp $ 
  * Creation : February 16, 2009
  * Licence  : EPL 
  * Copyright:
@@ -10,6 +10,7 @@ package kermeta::utils;
 
 require kermeta
 
- @EMF_needProperty "name=content isUnique=true isOrdered=false javaClass=java.lang.StringBuffer"
+	// Need a property for targeting a Java Native StringBuffer
+ @EMF_needProperty "name=content javaClass=java.lang.StringBuffer"
 aspect class StringBuffer {
 }

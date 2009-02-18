@@ -1,4 +1,4 @@
-/* $Id: collections.kmt,v 1.1 2009-02-16 15:47:10 cfaucher Exp $ 
+/* $Id: collections.kmt,v 1.2 2009-02-18 15:13:42 cfaucher Exp $ 
  * Creation : February 16, 2009
  * Licence  : EPL 
  * Copyright:
@@ -11,11 +11,13 @@
 package kermeta::standard;
 
 require kermeta
-
- @EMF_needProperty "name=values isUnique=false isOrdered=false javaClass=org.eclipse.emf.common.util.EList"
+	
+	// Need a property for targeting a Java Native collection
+ @EMF_needProperty "name=values javaClass=org.eclipse.emf.common.util.EList"
 aspect abstract class Collection<G> {
 }
 
+	// Need a property for targeting a Java Native iterator
  @EMF_needProperty "name=javaIterator javaClass=java.util.Iterator"
  @EMF_needProperty "name=kermetaCollection classDefinitionQN=kermeta::standard::Collection"
 aspect class Iterator<G> {

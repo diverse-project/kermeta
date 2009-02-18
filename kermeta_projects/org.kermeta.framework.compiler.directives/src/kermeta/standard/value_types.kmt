@@ -1,4 +1,4 @@
-/* $Id: value_types.kmt,v 1.1 2009-02-16 15:47:10 cfaucher Exp $ 
+/* $Id: value_types.kmt,v 1.2 2009-02-18 15:13:42 cfaucher Exp $ 
  * Creation : February 16, 2009
  * Licence  : EPL 
  * Copyright:
@@ -13,8 +13,8 @@ package kermeta::standard;
 
 require kermeta
 
-@EMF_needProperty "name=value javaClass=java.lang.String"
-aspect abstract class  ValueType {
+ @EMF_needProperty "name=value javaClass=java.lang.String"
+aspect abstract class ValueType {
 }
 
 aspect abstract class Comparable {
@@ -43,6 +43,7 @@ aspect abstract class Summable<G> {
 
 }
 
+	// Boolean becomes an EDataType in Ecore with java.lang.Boolean as instanceClassName
  @EMF_instanceClassName "java.lang.Boolean"
 aspect class Boolean inherits ValueType {
 }
