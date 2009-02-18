@@ -1,4 +1,4 @@
-/* $Id: OperatorPolicies.kmt,v 1.14 2008-11-02 18:21:08 barais Exp $
+/* $Id: OperatorPolicies.kmt,v 1.15 2009-02-18 16:55:53 dvojtise Exp $
  * 
  * License: EPL
  * Copyright: IRISA/INRIA
@@ -39,7 +39,7 @@ using qualifiedNames
           			if __operators.isVoid then
           				__operators := Hashtable<String, OperatorPolicy>.new
           			    var functionCall : OperatorPolicy init FunctionCallOp.new
-          				__operators.put("implies", ImpliesOP.new)
+          				__operators.put("implies", functionCall)
           				__operators.put("and", functionCall)  
           				__operators.put("or", functionCall) 
           				__operators.put("xor", functionCall)
@@ -223,7 +223,7 @@ class MinusSignOp inherits OperatorPolicy {
 
 }
 
-
+/*
 class ImpliesOP inherits OperatorPolicy {
 
 	method generate(oclOp: OperationCallExpCS, visitor: Ocl2kmtVisitor): Void is
@@ -236,7 +236,7 @@ class ImpliesOP inherits OperatorPolicy {
 		  	}
   			visitor.writeln(")")
 		 end
-}
+}*/
 
 class UnimplementedOp inherits OperatorPolicy {
 

@@ -1,4 +1,4 @@
-/* $Id: sample_BiteSizeOclTests.main.kmt,v 1.3 2009-02-18 15:58:43 dvojtise Exp $
+/* $Id: sample_BiteSizeOclTests.main.kmt,v 1.4 2009-02-18 16:55:55 dvojtise Exp $
  * Creation date: February 22, 2007
  * License:
  * Copyright:
@@ -136,7 +136,7 @@ class  BiteSizeOclTests  inherits TestCase
   // implies
     operation test10(): Void is
         do
-            assertSimilar( expect( "true.~not.~or(true) "), visitOclXmi( "10"))
+            assertSimilar( expect( "true.implies(true) "), visitOclXmi( "10"))
         end
         
   // not
@@ -672,13 +672,13 @@ class  BiteSizeOclTests  inherits TestCase
     operation test74():Void is
         do
             var kmt : String  init  visitOclXmi("74") 
-            assertSimilar( expect("self.ab.isInstanceOf(SubB).~not.~or(self.ab.asType(SubB).ac)"), kmt)
+            assertSimilar( expect("self.ab.isInstanceOf(SubB).implies(self.ab.asType(SubB).ac)"), kmt)
         end
             
     operation test75():Void is
         do
             var kmt : String  init  visitOclXmi("75") 
-            assertSimilar( expect("self.ab.isInstanceOf(sample::SubB).~not.~or(self.ab.asType(sample::SubB).ac)"), kmt)
+            assertSimilar( expect("self.ab.isInstanceOf(sample::SubB).implies(self.ab.asType(sample::SubB).ac)"), kmt)
         end
   
       operation runOneTest(testRunner: TestRunner, nn:String) is
