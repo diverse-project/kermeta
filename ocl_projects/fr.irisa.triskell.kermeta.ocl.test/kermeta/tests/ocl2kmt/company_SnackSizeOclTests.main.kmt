@@ -1,4 +1,4 @@
-/* $Id: company_SnackSizeOclTests.main.kmt,v 1.3 2009-02-16 17:14:45 dvojtise Exp $
+/* $Id: company_SnackSizeOclTests.main.kmt,v 1.4 2009-02-18 15:58:43 dvojtise Exp $
  * Creation date: February 22, 2007
  * License:
  * Copyright:
@@ -43,8 +43,8 @@ class  SnackSizeOclTests  inherits TestCase
                     
     method setUp() is
         do
-            repository := EMFRepository.new        
-            repository.registerEcoreFile("platform:/plugin/org.kermeta.eclipse.ocl.parser/model/OCLCST.ecore")
+            repository := EMFRepository.new   
+            repository.registerEcoreFile("platform:/plugin/org.kermeta.eclipse.ocl.parser/model/OCLCST.ecore")     
             helper := OCLHelpers::OCLHelper.new
             visitor := Ocl2kmtVisitor.new
             //visitor.initialize
@@ -59,10 +59,9 @@ class  SnackSizeOclTests  inherits TestCase
         do
             result := "package " + packageName + "; "
             result.append("require kermeta ")
-            result.append("require \"" + ecoreFilePath + "\" ")
+            result.append("require \"" + ecoreFile + "\" ")
             result.append("using kermeta::standard ")
-            result.append("@aspect \"true\" ")
-            result.append("class " + contextName + "{ ")
+            result.append("aspect class " + contextName + "{ ")
             result.append("inv invariant1 is do " + expression +" end } ")
         end
         
@@ -97,7 +96,7 @@ class  SnackSizeOclTests  inherits TestCase
         operation test01(): Void is
             do
                  var kmt : String init visitOclXmi("c01")
-                 var expected: String init expect("self.employee.forAll{e1, e2 : Personnel::Person | e1.equals(e2).~not.~not.or(e1.forename.equals(e2.forename).~not)}", company)
+                 var expected: String init expect("self.employee.forAllCpl{ e1, e2 | e1.equals(e2).~not.implies(e1.forename.equals(e2.forename).~not)}", company)
                  assertEqual( expected, kmt )
                 	// self.employee->forAll( e1, e2 : Person | e1 <> e2 implies e1.forename <> e2.forename)
             end 
