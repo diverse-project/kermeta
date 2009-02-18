@@ -1,4 +1,4 @@
-<!-- $Id: test_io_build.xml,v 1.17 2008-10-20 15:24:57 dvojtise Exp $ -->
+<!-- $Id: test_io_build.xml,v 1.18 2009-02-18 17:25:01 dvojtise Exp $ -->
 <project name="run interpreter tests" default="all" basedir=".">
 	
 	<description>
@@ -52,6 +52,9 @@
 	<property name="ui.console.jar" location="${eclipse.home}/plugins/org.eclipse.ui.console_3.3.0.v20080529-1300.jar" />
 	<property name="jface.jar" location="${eclipse.home}/plugins/org.eclipse.jface_3.4.1.M20080827-2000.jar" />
 	<property name="swt.jar" location="${eclipse.home}/plugins/org.eclipse.swt.gtk.linux.x86_3.4.1.v3449c.jar" />
+	<property name="emf.compare.jar" location="${eclipse.home}/plugins/org.eclipse.emf.compare_0.8.1.v200809170822.jar" />
+	<property name="emf.compare.diff.jar" location="${eclipse.home}/plugins/org.eclipse.emf.compare.diff_0.8.1.v200809170822.jar" />
+	<property name="emf.compare.match.jar" location="${eclipse.home}/plugins/org.eclipse.emf.compare.match_0.8.1.v200809170822.jar" />
 	<property name="junit4.jar" location="${eclipse.home}/plugins/org.junit4_4.3.1/junit.jar" />
 	<property name="apache.commons.logging.jar" location="..\..\..\org.kermeta.log4j.util\lib\thirdparty\commons-logging-1.1.1\commons-logging-1.1.1.jar" />
 	<property name="apache.commons.logging.adapters.jar" location="..\..\..\org.kermeta.log4j.util\lib\thirdparty\commons-logging-1.1.1\commons-logging-adapters-1.1.1.jar" />
