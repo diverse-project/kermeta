@@ -10,8 +10,9 @@
       </category>
       <wizard
             canFinishEarly="true"
-            category="fr.irisa.triskell.kermeta.samples.category"
-            class="org.kermeta.uml2.UML2ExamplesWizard"
+            category="org.eclipse.ui.Examples/fr.irisa.triskell.kermeta.samples.category"
+            class="org.kermeta.uml2.Uml2ExampleWizard"
+            finalPerspective="fr.irisa.triskell.kermeta.ui.perspective"
             hasPages="false"
             icon="icons/kermetaproject.gif"
             id="org.kermeta.uml2.samples.wizard"

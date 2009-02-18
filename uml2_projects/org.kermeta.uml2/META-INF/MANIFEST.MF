@@ -7,9 +7,15 @@ Require-Bundle: org.eclipse.uml2,
  org.eclipse.uml2.common,
  org.eclipse.uml2.uml,
  org.kermeta.language.mdk,
- org.openembedd.wizards,
  org.eclipse.core.resources,
  org.eclipse.core.runtime,
  org.eclipse.jface,
- org.eclipse.ui
+ org.eclipse.ui,
+ fr.irisa.triskell.eclipse.util,
+ org.apache.commons.logging,
+ org.kermeta.log4j.util,
+ fr.irisa.triskell.kermeta
 Bundle-Vendor: IRISA/INRIA
+Bundle-Classpath: .
+Export-Package: org.kermeta.uml2
+Bundle-ActivationPolicy: lazy
