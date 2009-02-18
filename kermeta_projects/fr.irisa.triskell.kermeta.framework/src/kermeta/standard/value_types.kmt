@@ -1,4 +1,4 @@
-// $Id: value_types.kmt,v 1.14 2009-02-16 15:55:49 cfaucher Exp $
+// $Id: value_types.kmt,v 1.15 2009-02-18 15:37:08 dvojtise Exp $
 /* *************************************************
  * Franck FLEUREY - 11/02/2005
  * Triskell Research Group
@@ -170,10 +170,11 @@ class Boolean inherits ValueType
 	
 	/**
 	 * return self implies other
-	 * meaning : not( (not (self and other)) and self)
+	 * http://en.wikipedia.org/wiki/Material_implication
+	 * meaning : (not self) or other
 	 */
 	operation ~implies(other : Boolean) : Boolean is do
-		result := not( (not (self and other)) and self)
+		result := (not self ) or other
 	end
 	
 	/**
