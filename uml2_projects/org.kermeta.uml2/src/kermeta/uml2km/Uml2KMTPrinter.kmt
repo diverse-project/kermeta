@@ -2,7 +2,7 @@ package uml;
 
 
 require kermeta
-require "printer.kmt"
+require "platform:/resource/org.kermeta.language.mdk/src/kmt/language/visitor/prettyprinters/kmtPrettyPrinter.kmt"
 
 using kermeta::language::structure
 using kermeta::language::behavior
@@ -18,36 +18,36 @@ class Uml2KMTPrinter inherits kermeta::utils::BasicPrettyPrinter
 	 */
 /*	method visitOperation(node : kermeta::language::structure::Operation, context : Integer) : String is do
 		result := ""
-		out.write(visitTagSet(node.tag, context))
-		if (node.superOperation != void) then out.write(indent + "method ")
-		else out.write(indent + "operation ") 
+		stdio.write(visitTagSet(node.tag, context))
+		if (node.superOperation != void) then stdio.write(indent + "method ")
+		else stdio.write(indent + "operation ") 
 		end
 		// node name
-		out.write(node.name)
+		stdio.write(node.name)
 		
 		// type parameters of operation
 		if (node.typeParameter.size() > 0) then
-			out.write( "<")
-			out.write( self.visitTypeVariableSet(node.typeParameter, context))
-			out.write( ">")
+			stdio.write( "<")
+			stdio.write( self.visitTypeVariableSet(node.typeParameter, context))
+			stdio.write( ">")
 		end
 		// arguments
-		out.write( "(")
-		out.write( self.visitTypeParameters(node.ownedParameter, context))
-		out.write( ")")
+		stdio.write( "(")
+		stdio.write( self.visitTypeParameters(node.ownedParameter, context))
+		stdio.write( ")")
 		if(node.type != void) then
-			out.write( " : " + pp.ppTypeFromMultiplicityElement(node))
+			stdio.write( " : " + pp.ppTypeFromMultiplicityElement(node))
 		end
 	 
 		if (node.superOperation != void) then
-			out.write( " from " + node.superOperation.owningClass.qualifiedName )
+			stdio.write( " from " + node.superOperation.owningClass.qualifiedName )
 		end
 		if (node.raisedException.size > 0) then
-			out.write( " raises " + self.visitTypeSet(node.raisedException, context, ", "))
+			stdio.write( " raises " + self.visitTypeSet(node.raisedException, context, ", "))
 		end
 		
 		if node.tag.size > 0 then
-			out.write( " is\n")
+			stdio.write( " is\n")
 			var body : String
 			from var it : Iterator<kermeta::reflection::Tag> init node.tag.iterator
 			until it.isOff
@@ -57,21 +57,21 @@ class Uml2KMTPrinter inherits kermeta::utils::BasicPrettyPrinter
 				// the body of each operation has been stored in a "km_body" tag
 	    		if next.name == "km_body" then
 	    			pushIndent()
-					out.write(self.visitTag(next, context))
+					stdio.write(self.visitTag(next, context))
 					popIndent()
 				end
 			end
 		else 
 			if (node.isAbstract) then
-				out.write( " is abstract\n")
+				stdio.write( " is abstract\n")
 			else 
-				out.write( " is\n")
+				stdio.write( " is\n")
 				pushIndent()
-				out.write( indent + "do\n")
+				stdio.write( indent + "do\n")
 					pushIndent()
-					out.write( indent + "//TODO: implement operation " + node.name + "\n") 
+					stdio.write( indent + "//TODO: implement operation " + node.name + "\n") 
 					popIndent()
-				out.write( indent + "end\n")
+				stdio.write( indent + "end\n")
 				popIndent()
 			end
 		end
@@ -88,8 +88,8 @@ class Uml2KMTPrinter inherits kermeta::utils::BasicPrettyPrinter
 			// the body of each operation has been stored in a "km_body" tag
 			// which is processed inside the "visitOperation" method
     		if next.name != "km_body" then
-				out.write(self.accept(next, context))
-				out.write("\n")
+				stdio.write(self.accept(next, context))
+				stdio.write("\n")
 			end
 		end
     end		*/
@@ -102,32 +102,32 @@ class Uml2KMTPrinter inherits kermeta::utils::BasicPrettyPrinter
 	  context : Integer) : String is do
 	  
 		result := ""
-		out.write(visitTagSet(node.tag, context))
+		stdio.write(visitTagSet(node.tag, context))
 		
-		out.write("package " + node.qualifiedName + ";\n\n")
+		stdio.write("package " + node.qualifiedName + ";\n\n")
 		
-		out.write("require kermeta\n")
+		stdio.write("require kermeta\n")
 		// manage references to external diagrams
 		externs.each{ p |
 			// the kermeta corresponding code is supposed to be
 			// in the same directory (suggest : a "kermeta" subdir) !!
-			out.write("require " + p.name + ".kmt\n")
+			stdio.write("require " + p.name + ".kmt\n")
 		}
 		
-		out.write("\nusing kermeta::standard\n\n")
+		stdio.write("\nusing kermeta::standard\n\n")
 		
 		var old_cname : String init current_pname
 		var current_pname : String init node.qualifiedName
 //		pushIndent()
 		typedef := true
 		if (node.ownedTypeDefinition.size > 0) then
-			out.write( self.visitExpressionSet(node.ownedTypeDefinition, context, "\n"))
+			stdio.write( self.visitExpressionSet(node.ownedTypeDefinition, context, "\n"))
 		end
 		if (node.nestedPackage.size > 0) then
-			out.write( self.visitExpressionSet(node.nestedPackage, context, "\n"))
+			stdio.write( self.visitExpressionSet(node.nestedPackage, context, "\n"))
 		end
 //		popIndent()
 		current_pname := old_cname
-		out.write("\n")
+		stdio.write("\n")
 	end
 }

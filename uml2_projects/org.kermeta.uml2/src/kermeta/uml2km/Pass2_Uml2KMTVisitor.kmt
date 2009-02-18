@@ -175,15 +175,31 @@ class Pass2_Uml2KMTVisitor inherits uml::visitors::TopDownVisitor
     	
     	// attach the elements which belong to a package
     	visitable.packagedElement.each{ e |
+	    		
+	stdio.writeln("DEBUG - Pass2_UML2KM.visitPackage() - Package : "+p.name+" - packagedElement : "+e.name)
+	    		
+    		var o : Object init output.getValue(e)
 	    	var obj : TypeDefinition
-	    	obj ?= output.getValue(e)
+	    	obj ?= o
 	    	if obj != void
 	    	then
 	    		/* we don't reference DataTypes in the package
 	    		  (used for typing parameters and properties) */
 	    		var dt : DataType
 	    		dt ?= obj
-	    		if dt.isVoid() then p.ownedTypeDefinition.add(obj) end
+	    		if dt.isVoid()
+	    		then
+	    			p.ownedTypeDefinition.add(obj)
+	    		end
+	    	else
+	    		// manage nested packages
+	    		var nestedP : Package
+	    		nestedP ?= o
+	    		if nestedP != void
+	    		then
+	    			p.nestedPackage.add(nestedP)
+	    		else
+	    		end
 			end
     	}
     	
@@ -198,14 +214,17 @@ class Pass2_Uml2KMTVisitor inherits uml::visitors::TopDownVisitor
     	// we must add the "general" type to the "source" object
     	var gen : ClassDefinition
     	gen ?= output.getValue(visitable.general)
+    	
    		var spec : ClassDefinition
    		spec ?= output.getValue(visitable.specific)
+   		
    		var cl : Class init Class.new
    		cl.typeDefinition := gen
    		if not spec.superType.exists{ k | k.oid == cl.oid }
    		then
 	   		spec.superType.add(cl)
    		end
+   		
 		// as Class/DataType/Tag are not linked thru composition
 		// we must add them in the resulting KM resource
 		resourceObjects.add(cl)

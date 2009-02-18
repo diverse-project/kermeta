@@ -184,11 +184,14 @@ class Pass1_Uml2KMTVisitor inherits uml::visitors::TopDownVisitor
 //   			output.put(visitable, o)
 //    		end
     	else
-	    	// DataType are defined thru ClassDefinition in Kermeta
-	    	var dt : DataType
-	    	dt := build.createDataType()
-	    	dt.name := validName(visitable.name)
-	    	output.put(visitable, dt)
+//	    	// DataType are defined thru ClassDefinition in Kermeta
+//	    	var dt : DataType
+//	    	dt := build.createDataType()
+//	    	dt.name := validName(visitable.name)
+//
+//stdio.writeln("DEBUG - Pass1_Uml2KMTVisitor - createDataType() - type = "+ dt.name)
+//
+//	    	output.put(visitable, dt)
     	end
     	
     	super(visitable)

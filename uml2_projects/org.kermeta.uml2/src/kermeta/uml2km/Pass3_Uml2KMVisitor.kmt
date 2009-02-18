@@ -1,4 +1,4 @@
-/* $Id: Pass3_Uml2KMVisitor.kmt,v 1.1 2007-12-13 10:34:40 vmahe Exp $
+/* $Id: Pass3_Uml2KMVisitor.kmt,v 1.2 2009-02-18 10:22:51 vmahe Exp $
  * Creation date: May 10, 2006
  * License:
  * Copyright:
@@ -35,10 +35,7 @@ class Pass3_Uml2KMTVisitor inherits uml::visitors::TopDownVisitor
 		
     	// all other parameters
 		op.ownedParameter.each{e |
-			var t : Type
-			t ?= e.type
-			
-			de.formalParameters.put(e.name, t)
+			de.formalParameters.put(e.name, e.type)
 		}
 		
 		op.tag.each{ t |

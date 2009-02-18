@@ -46,11 +46,12 @@ class KmBuilder
     end
 
     operation createDataType() : DataType is do 
-        var obj : DataType init DataType.new
+        var obj : DataType
+        obj ?= TypeDefinition.new
         
         result := obj
     end
-
+    
     operation createPackage() : Package is do 
         var obj : Package init Package.new
         

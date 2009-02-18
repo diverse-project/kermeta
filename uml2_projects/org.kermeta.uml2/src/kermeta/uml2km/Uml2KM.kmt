@@ -7,7 +7,7 @@ require kermeta
 require "Pass1_Uml2KMTVisitor.kmt"
 require "Pass2_Uml2KMTVisitor.kmt"
 require "Pass3_Uml2KMVisitor.kmt"
-require "Uml2KMTPrinter.kmt"
+//require "Uml2KMTPrinter.kmt"
 
 using kermeta::standard
 using uml2kmt_visitors
@@ -63,6 +63,21 @@ class Uml2KM
 		
 	   	stdio.writeln("\n<-------------<<<< end of the programm.\n")
     end
+    
+    operation transform(input_uri : String, output_uri : String) : Void is do
+    	
+        // the UML2 model to be transformed
+    	stdio.writeln("\n>>>>-------------> initializing the input model " + input_uri + "\n")
+        initialize(input_uri)
+        
+		uml2km()
+		
+    	stdio.writeln("\n>>>>-------------> saving the output model " + output_uri + "\n")
+		saveKm(output_uri)
+		
+	   	stdio.writeln("\n<-------------<<<< end of the programm.\n")
+    end
+    
     operation uml2km() is do
     	stdio.writeln("\n>>>>-------------> running Pass 1 !\n")
         // the first Pass creates the KM objects
@@ -109,7 +124,7 @@ class Uml2KM
 		var mainUnit : kermeta::language::structure::ModelingUnit init kermeta::language::structure::ModelingUnit.new
 		mainUnit := kermeta::language::structure::ModelingUnit.new
 		mainUnit.packages.add(kmTree)
-		resResource.instances.add(mainUnit)
+		resResource.add(mainUnit)
 		
 		// we add external referenced models
 		var externKmTree : kermeta::language::structure::Package
@@ -118,12 +133,12 @@ class Uml2KM
 			externKmTree ?= objectsStore.getValue(p)
 			externUnit := kermeta::language::structure::ModelingUnit.new
 			externUnit.packages.add(externKmTree)
-			resResource.instances.add(externUnit)
+			resResource.add(externUnit)
 		}
 		// we also add the objects not composed in the tree
 		//FIXME : may be some should not be put in the resource
 		uncomposedObjects.each{ o |
-			resResource.instances.add(o)
+			resResource.add(o)
 		}
 		// add the kermeta requirement
 		var kRequire : kermeta::language::structure::Require init kermeta::language::structure::Require.new
@@ -132,26 +147,31 @@ class Uml2KM
 		
 		/////////// suspended waiting correction of "pre" & "post" problems
 		
+		stdio.writeln("List of found Dangling Model Elements :")
+		resResource.findDanglingModelElements().each{ d |
+			stdio.writeln("  - "+d.toString)
+		}	
+		
 		resResource.save()
 	end
-	operation prettyPrintKmt() is do
-		var tree : kermeta::language::structure::Package
-		tree ?= objectsStore.getValue(rootPackage)
-
-        // the Kermeta PrettyPrinter transforms the KM tree to code
-    	stdio.writeln("\n>>>>-------------> running Km2Kmt pretty printer !\n")
-        var upp : uml::Uml2KMTPrinter init uml::Uml2KMTPrinter.new
-        upp.initialize()
-		// external references to other diagramms
-		var extRef : OrderedSet<kermeta::language::structure::Package>
-		  init OrderedSet<kermeta::language::structure::Package>.new
-		externModels.each{ p |
-			var pack : kermeta::language::structure::Package
-			pack ?= objectsStore.getValue(p)
-			extRef.add(pack)
-		}
-	    stdio.writeln(upp.visitRootPackage(tree, extRef, 0))
-     end
+//	operation prettyPrintKmt() is do
+//		var tree : kermeta::language::structure::Package
+//		tree ?= objectsStore.getValue(rootPackage)
+//
+//        // the Kermeta PrettyPrinter transforms the KM tree to code
+//    	stdio.writeln("\n>>>>-------------> running Km2Kmt pretty printer !\n")
+//        var upp : uml::Uml2KMTPrinter init uml::Uml2KMTPrinter.new
+//        upp.initialize()
+//		// external references to other diagramms
+//		var extRef : OrderedSet<kermeta::language::structure::Package>
+//		  init OrderedSet<kermeta::language::structure::Package>.new
+//		externModels.each{ p |
+//			var pack : kermeta::language::structure::Package
+//			pack ?= objectsStore.getValue(p)
+//			extRef.add(pack)
+//		}
+//	    stdio.writeln(upp.visitRootPackage(tree, extRef, 0))
+//     end
 }
 /*
 class KMLoaderModuleUML inherits KermetaLoaderModule {
