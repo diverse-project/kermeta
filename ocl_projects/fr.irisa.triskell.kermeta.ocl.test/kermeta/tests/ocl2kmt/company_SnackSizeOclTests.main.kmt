@@ -1,4 +1,4 @@
-/* $Id: company_SnackSizeOclTests.main.kmt,v 1.4 2009-02-18 15:58:43 dvojtise Exp $
+/* $Id: company_SnackSizeOclTests.main.kmt,v 1.5 2009-02-18 16:08:25 dvojtise Exp $
  * Creation date: February 22, 2007
  * License:
  * Copyright:
@@ -55,19 +55,25 @@ class  SnackSizeOclTests  inherits TestCase
         end
         
         
-    operation expectedCode(packageName: String, ecoreFilePath: String, contextName : String, expression: String): String is
+    operation expectedCode(packageName: String, subPackageName : String, ecoreFilePath: String, contextName : String, expression: String): String is
         do
             result := "package " + packageName + "; "
             result.append("require kermeta ")
             result.append("require \"" + ecoreFile + "\" ")
             result.append("using kermeta::standard ")
+            if not subPackageName.isVoid then
+            	result.append("package " + subPackageName + "{ ")
+            end
             result.append("aspect class " + contextName + "{ ")
             result.append("inv invariant1 is do " + expression +" end } ")
+            if not subPackageName.isVoid then
+            result.append("} ")
+            end
         end
         
-    operation expect(expression : String, context: String):String is
+    operation expect(expression : String, subPackageName : String, context: String):String is
         do
-            result := expectedCode("company", "company.ecore", context, expression)
+            result := expectedCode("company",subPackageName,  "company.ecore", context, expression)
         end
         
     operation visitOclXmi(filename: String): String is
@@ -96,7 +102,7 @@ class  SnackSizeOclTests  inherits TestCase
         operation test01(): Void is
             do
                  var kmt : String init visitOclXmi("c01")
-                 var expected: String init expect("self.employee.forAllCpl{ e1, e2 | e1.equals(e2).~not.implies(e1.forename.equals(e2.forename).~not)}", company)
+                 var expected: String init expect("self.employee.forAllCpl{ e1, e2 | e1.equals(e2).~not.implies(e1.forename.equals(e2.forename).~not)}", "Business", company)
                  assertEqual( expected, kmt )
                 	// self.employee->forAll( e1, e2 : Person | e1 <> e2 implies e1.forename <> e2.forename)
             end 
@@ -105,7 +111,7 @@ class  SnackSizeOclTests  inherits TestCase
         operation test02(): Void is
             do
                  var kmt : String init visitOclXmi("c02")
-                 var expected: String init expect("self.name.equals(\"smith\")", person)
+                 var expected: String init expect("self.name.equals(\"smith\")", "Personnel", person)
                  assertEqual( expected, kmt )
             end 
             
@@ -114,7 +120,7 @@ class  SnackSizeOclTests  inherits TestCase
             do
                  var kmt : String init visitOclXmi("c03")
 				 var source : String init "self.owner.isKindOf(Personnel::Person).~not.~or(self.owner.asType(Personnel::Person).forename.equals(\"dupont\").~not)"
-                 var expected: String init expect(source, company)
+                 var expected: String init expect(source, "Business", company)
                 //self.owner.oclIsTypeOf (Personnel::Person) implies self.owner->oclAsType(Personnel::Person).forename <>"smith"                 
                 assertEqual( expected, kmt )
             end 
@@ -124,7 +130,7 @@ class  SnackSizeOclTests  inherits TestCase
             do
                  var kmt : String init visitOclXmi("c04")
 				 var source : String init  "self.company.first().employee.collect{ variable2 | variable2.forename}"
-                 var expected: String init expect(source, company)
+                 var expected: String init expect(source, "Personnel", company)
                 assertEqual( expected, kmt )
             end 
             
