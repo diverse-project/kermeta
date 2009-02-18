@@ -1,4 +1,4 @@
-/* $Id: CreateBehavior.kmt,v 1.101 2009-02-10 13:32:20 cfaucher Exp $
+/* $Id: CreateBehavior.kmt,v 1.102 2009-02-18 17:30:31 cfaucher Exp $
  * Creation date: January 21, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -981,7 +981,7 @@ package behavior {
 						type_param_ := "/*This variable should be never used*/ kermeta.language.structure.Object"
 					end
 					
-					str_toInclude := str_toInclude + type_param_ + " " + p.name + "_lbdExp" + self.getContainerAsType(Operation).asType(Operation).cuid
+					str_toInclude := str_toInclude + type_param_ + " " + IdentifierHelper.new().getMangledIdentifier(p.name, context) + "_lbdExp" + self.getContainerAsType(Operation).asType(Operation).cuid
 					
 					context.ftSuffixActivation := true
 					
