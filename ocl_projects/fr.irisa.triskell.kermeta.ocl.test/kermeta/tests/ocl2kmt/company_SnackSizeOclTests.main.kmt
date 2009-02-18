@@ -1,4 +1,4 @@
-/* $Id: company_SnackSizeOclTests.main.kmt,v 1.5 2009-02-18 16:08:25 dvojtise Exp $
+/* $Id: company_SnackSizeOclTests.main.kmt,v 1.6 2009-02-18 16:15:07 dvojtise Exp $
  * Creation date: February 22, 2007
  * License:
  * Copyright:
@@ -50,8 +50,8 @@ class  SnackSizeOclTests  inherits TestCase
             //visitor.initialize
             ecoreFile := "platform:/resource/fr.irisa.triskell.kermeta.ocl.test/tests/company/metamodel/company.ecore"
             
-            person := "Personnel::Person"
-            company := "Business:Company"
+            person := "Person"
+            company := "Company"
         end
         
         
@@ -62,7 +62,7 @@ class  SnackSizeOclTests  inherits TestCase
             result.append("require \"" + ecoreFile + "\" ")
             result.append("using kermeta::standard ")
             if not subPackageName.isVoid then
-            	result.append("package " + subPackageName + "{ ")
+            	result.append("package " + subPackageName + " { ")
             end
             result.append("aspect class " + contextName + "{ ")
             result.append("inv invariant1 is do " + expression +" end } ")
@@ -103,7 +103,7 @@ class  SnackSizeOclTests  inherits TestCase
             do
                  var kmt : String init visitOclXmi("c01")
                  var expected: String init expect("self.employee.forAllCpl{ e1, e2 | e1.equals(e2).~not.implies(e1.forename.equals(e2.forename).~not)}", "Business", company)
-                 assertEqual( expected, kmt )
+                 assertSimilar( expected, kmt )
                 	// self.employee->forAll( e1, e2 : Person | e1 <> e2 implies e1.forename <> e2.forename)
             end 
         
@@ -112,7 +112,7 @@ class  SnackSizeOclTests  inherits TestCase
             do
                  var kmt : String init visitOclXmi("c02")
                  var expected: String init expect("self.name.equals(\"smith\")", "Personnel", person)
-                 assertEqual( expected, kmt )
+                 assertSimilar( expected, kmt )
             end 
             
       // boolean Simple test to get started
@@ -122,7 +122,7 @@ class  SnackSizeOclTests  inherits TestCase
 				 var source : String init "self.owner.isKindOf(Personnel::Person).~not.~or(self.owner.asType(Personnel::Person).forename.equals(\"dupont\").~not)"
                  var expected: String init expect(source, "Business", company)
                 //self.owner.oclIsTypeOf (Personnel::Person) implies self.owner->oclAsType(Personnel::Person).forename <>"smith"                 
-                assertEqual( expected, kmt )
+                assertSimilar( expected, kmt )
             end 
             
       // boolean Simple test to get started
@@ -131,7 +131,7 @@ class  SnackSizeOclTests  inherits TestCase
                  var kmt : String init visitOclXmi("c04")
 				 var source : String init  "self.company.first().employee.collect{ variable2 | variable2.forename}"
                  var expected: String init expect(source, "Personnel", company)
-                assertEqual( expected, kmt )
+                assertSimilar( expected, kmt )
             end 
             
       operation runOneTest(testRunner: TestRunner, nn:String) is
