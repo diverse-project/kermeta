@@ -1,4 +1,4 @@
-/* $Id: TagHelper.kmt,v 1.17 2009-01-20 15:52:39 cfaucher Exp $
+/* $Id: TagHelper.kmt,v 1.18 2009-02-18 17:29:56 cfaucher Exp $
  * Creation date: April 07, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -45,6 +45,8 @@ aspect class Object {
 	
 	/**
 	 * Get the instanceClassName
+	 * 
+	 * This is used to convert ValueTypes in EDataType and so fill the instanceClassName attribute
 	 */
 	operation getEMFInstanceClassName() : String is do
 		result := getUniqueTagValue("EMF_instanceClassName")
@@ -52,13 +54,37 @@ aspect class Object {
 	
 	/**
 	 * Get the EDataType_instanceClassName
+	 * 
+	 * This used to declare if the element is an EDataType in the Ecore model side
 	 */
 	operation getEMFEDataTypeInstanceClassName() : String is do
 		result := getUniqueTagValue("ecore.EDataType_instanceClassName")
 	end
 	
 	/**
+	 * Get the EDataType_eTypeParameters
+	 * 
+	 * This used to store the ETypeParameters in the Ecore model side
+	 */
+	operation getEMFEDataTypeETypeParameters() : String is do
+		result := getUniqueTagValue("ecore.EDataType_eTypeParameters")
+	end
+	
+	/**
 	 * Get the EMF_needProperty
+	 *
+	 * Better solution than creating aspects because end-user should not have knowledge of that through reflexivity
+	 * Properties are then created in the Ecore file only
+	 *
+	 * This tag is complex, i.e.: with 2 values: name and javaClass/classDefinitionQN
+	 * - javaClass is used when the expected type is a Java CLass
+	 * - classDefinitionQN is used when the expected type is a ClassDefinition
+	 *
+	 * Example with javaClass: the Collection class definition needs a new reference for representing a Java Native collection
+	 * the tag is like: @EMF_needProperty "name=values javaClass=org.eclipse.emf.common.util.EList"
+	 * 
+	 * Example with classDefinitionQN: the Object class definition needs at runtime a reference for storing the internalContainingResource
+	 * the tag is like: @EMF_needProperty "name=internalContainingResource classDefinitionQN=kermeta::persistence::Resource"
 	 */
 	operation getEMFNeedProperty() : OrderedSet<String> is do
 		result := getTagValues("EMF_needProperty")
@@ -66,6 +92,8 @@ aspect class Object {
 	
 	/**
 	 * Get the compiledJavaExtern call for replacing the current one
+	 * 
+	 * Represents the static call in compiled mode
 	 */
 	operation getCompiledJavaExtern() : String is do
 		result := getUniqueTagValue("compiledJavaExtern")
@@ -73,6 +101,8 @@ aspect class Object {
 	
 	/**
 	 * Get the Wrapprings of ValueType's ReturnType for tackle the  eplacing the current one
+	 * 
+	 * For ValueType Wrapper methods, if needed that is able to precise the return type
 	 */
 	operation getWrapperValueTypeReturnType() : String is do
 		result := getUniqueTagValue("WrapperValueTypeReturnType")
@@ -80,6 +110,9 @@ aspect class Object {
 	
 	/**
 	 * Get the Wrapprings of ValueType's SelfExpression for tackle the  eplacing the current one
+	 * 
+	 * For ValueType Wrapper methods, if needed that is able to precise the type of self expression
+	 * the self expression is added by default in the Wrapper method signature
 	 */
 	operation getWrapperValueTypeSelfExpression() : String is do
 		result := getUniqueTagValue("WrapperValueTypeSelfExpression")
@@ -87,6 +120,7 @@ aspect class Object {
 	
 	/**
 	 * Get the the final Java Class Qualified Name
+	 *
 	 * Used for the POJO creation
 	 */
 	operation getFinalJavaClassQN() : String is do
@@ -110,11 +144,16 @@ aspect class Object {
 	/**
 	 * Get the deprecated tag
 	 * Specific method for detecting the deprecated model elements
+	 * 
+	 * Not really used in the rest of the impl.
 	 */
 	operation getDeprecated() : String is do
 		result := getUniqueTagValue("deprecated")
 	end
 	
+	/**
+	 * Interpret boolean tags, thus retruns true or false the given tag has got a value like: "true" or "false"
+	 */
 	operation interpretBooleanTag( str_tag : String ) : Boolean is do
 		result := false
 		
@@ -134,6 +173,12 @@ aspect class MultiplicityElement {
 	
 	/**
 	 * Get the EMFRenameAs reference of an Operation
+	 * 
+	 * This tag is used to rename the operation at compilation time if its name is conflicting
+	 * with EMF name, i.e.: if the user is using a property named "log" and operations named "getLog" or "setLog",
+	 * thus the operation's names will conflict with the generated getter and setter for log by EMF, i.e.: "getLog" and "setLog"
+	 * This tag is taking into account if the user defines it, but if a potential conflict is present then
+	 * the Kermeta loader adds automatically this tag
 	 */
 	operation getEMFRenameAs() : String is do
 		result := getUniqueTagValue("EMF_renameAs")
@@ -141,6 +186,10 @@ aspect class MultiplicityElement {
 	
 	/**
 	 * Get the RecopyInValueTypes reference of an Operation
+	 * 
+	 * For example, recopy the behavior from Object.getMetaClass() in the ValueType Wrapper.
+	 * This is needed because the super operation call is broken by the usage of Java primitive types instead of kermeta::standard types
+	 * (Java primitive types do not inherit from kermeta::language::structure::Object)
 	 */
 	operation getRecopyInValueTypes() : String is do
 		result := getUniqueTagValue("RecopyInValueTypes")

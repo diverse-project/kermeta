@@ -1,4 +1,4 @@
-/* $Id: CreateEcoreModelElement.kmt,v 1.47 2009-02-10 13:33:28 cfaucher Exp $
+/* $Id: CreateEcoreModelElement.kmt,v 1.48 2009-02-18 17:29:56 cfaucher Exp $
  * Creation date: February 1, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -140,7 +140,7 @@ aspect class PrimitiveType {
 		var instanceClassName : String init self.getEMFEDataTypeInstanceClassName()
 		if instanceClassName != "" then //is an EDataType from an Ecore model
 			eModelElement.instanceClassName := instanceClassName
-			var etps : Sequence<String> init self.getUniqueTagValue("ecore.EDataType_eTypeParameters").split(" , ")
+			var etps : Sequence<String> init self.getEMFEDataTypeETypeParameters().split(" , ")
 			
 			if etps.size()>0 then
 				etps.each{ etp |
