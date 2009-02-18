@@ -1,5 +1,5 @@
-/* $Id: ocl2kmtVisitor.kmt,v 1.20 2009-02-18 14:01:38 dvojtise Exp $
-/* $Id: ocl2kmtVisitor.kmt,v 1.20 2009-02-18 14:01:38 dvojtise Exp $
+/* $Id: ocl2kmtVisitor.kmt,v 1.21 2009-02-18 14:11:53 dvojtise Exp $
+/* $Id: ocl2kmtVisitor.kmt,v 1.21 2009-02-18 14:11:53 dvojtise Exp $
  * Creation date: February 5, 2007
  * License: EPL
  * Copyright: IRISA/INRIA
@@ -361,7 +361,9 @@ using qualifiedNames
     			stdio.writeln("Processing Variable [" + variableName + "]")
 				write(kermeta.escape(variableName))
 				if visitable.typeCS != void then // type specified?
-					write(" : ")
+					if not isInLambdaExpressionShortSyntax then 
+						write(" : ") 
+					end
 					visitable.typeCS.accept(self)
 					addLocalVariable(variableName, qualifiedTypeName, 0, 1, false)
 				else
