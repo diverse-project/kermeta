@@ -1,5 +1,5 @@
-/* $Id: ocl2kmtVisitor.kmt,v 1.21 2009-02-18 14:11:53 dvojtise Exp $
-/* $Id: ocl2kmtVisitor.kmt,v 1.21 2009-02-18 14:11:53 dvojtise Exp $
+/* $Id: ocl2kmtVisitor.kmt,v 1.22 2009-02-18 14:15:06 dvojtise Exp $
+/* $Id: ocl2kmtVisitor.kmt,v 1.22 2009-02-18 14:15:06 dvojtise Exp $
  * Creation date: February 5, 2007
  * License: EPL
  * Copyright: IRISA/INRIA
@@ -171,8 +171,7 @@ using qualifiedNames
 				visitable.pathNameCS.sequenceOfNames.each{ e | packsName.push(e)}
 				packsName.pop // not counting the default one for the file
 				packsName.each{ e | writeln("package " + e +" {")}
-				writeln("@aspect \"true\"")
-				write("class ")
+				write("aspect class ")
 				write(getContextClassifier.name)
 				writeln("{")
 				visitable.invOrDefCS.accept(self)
@@ -189,8 +188,7 @@ using qualifiedNames
 				visitable.operationCS.pathNameCS.sequenceOfNames.each{ e | packageNames.push(e)}
 				var className: String init packageNames.pop
 				packageNames.each{ e | writeln("package " + e +" {")}
-				writeln("@aspect \"true\"")
-				write("class ")
+				write("aspect class ")
 				write(className)
 				writeln("{")
 				writeln("@overloadable \"true\"")
