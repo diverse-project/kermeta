@@ -1,4 +1,4 @@
-/* $Id: company_SnackSizeOclTests.main.kmt,v 1.6 2009-02-18 16:15:07 dvojtise Exp $
+/* $Id: company_SnackSizeOclTests.main.kmt,v 1.7 2009-02-18 16:50:01 dvojtise Exp $
  * Creation date: February 22, 2007
  * License:
  * Copyright:
@@ -129,8 +129,8 @@ class  SnackSizeOclTests  inherits TestCase
         operation test04(): Void is
             do
                  var kmt : String init visitOclXmi("c04")
-				 var source : String init  "self.company.first().employee.collect{ variable2 | variable2.forename}"
-                 var expected: String init expect(source, "Personnel", company)
+				 var source : String init  "self.company.first.employee.collect{ variable2 | variable2.forename }"
+                 var expected: String init expect(source, "Personnel", person)
                 assertSimilar( expected, kmt )
             end 
             
