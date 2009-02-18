@@ -1,5 +1,5 @@
-/* $Id: ocl2kmtVisitor.kmt,v 1.19 2008-11-02 18:21:06 barais Exp $
-/* $Id: ocl2kmtVisitor.kmt,v 1.19 2008-11-02 18:21:06 barais Exp $
+/* $Id: ocl2kmtVisitor.kmt,v 1.20 2009-02-18 14:01:38 dvojtise Exp $
+/* $Id: ocl2kmtVisitor.kmt,v 1.20 2009-02-18 14:01:38 dvojtise Exp $
  * Creation date: February 5, 2007
  * License: EPL
  * Copyright: IRISA/INRIA
@@ -102,6 +102,22 @@ using qualifiedNames
 			do
 				__expectingType := true
 			end
+			
+		
+		/** interal attribute : this attribute is used by some visit method in order to not print the Type of the declared variable */
+		attribute __isInLambdaExpressionShortSyntax : Boolean
+		
+		/** this attribute is used by some visit method in order to not print the Type of the declared variable */
+		property isInLambdaExpressionShortSyntax: Boolean 
+		getter is do
+			if __isInLambdaExpressionShortSyntax.isVoid then
+					__isInLambdaExpressionShortSyntax := false
+			end
+			result := __isInLambdaExpressionShortSyntax
+		end
+		setter is do 
+			__isInLambdaExpressionShortSyntax := value
+		end
 			
 		/** undoes the effect of expectType() **/
 		operation expectExpression(): Void is
@@ -293,7 +309,10 @@ using qualifiedNames
 		method visitPathNameCS(visitable : PathNameCS) : Void is
 			do
 				qualifiedTypeName := QualifiedName.new.fromSequence(visitable.sequenceOfNames.asSequence())
-				write(qualifiedTypeName.toString)
+				if not isInLambdaExpressionShortSyntax then
+					// do not write the typeif we are into the shortcut syntax of lambda expression
+					write(qualifiedTypeName.toString)
+				end
 			end
           
 		method visitSimpleNameCS(visitable : SimpleNameCS) : Void is
@@ -310,7 +329,10 @@ using qualifiedNames
 				else
 					qualifiedTypeName := QualifiedName.new.fromString( kermeta.escape(visitable.~value.toString))
 				end
-				write(qualifiedTypeName.toString)
+				if not isInLambdaExpressionShortSyntax then
+					// do not write the typeif we are into the shortcut syntax of lambda expression
+					write(qualifiedTypeName.toString)
+				end
 			end
 
 		method visitTupleTypeCS(visitable : TupleTypeCS) : Void is

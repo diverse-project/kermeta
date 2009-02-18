@@ -1,4 +1,4 @@
-/* $Id: IteratorPolicies.kmt,v 1.8 2008-11-02 18:21:06 barais Exp $
+/* $Id: IteratorPolicies.kmt,v 1.9 2009-02-18 14:01:38 dvojtise Exp $
  * Creation date: July 25, 2007
  * License: EPL
  * Copyright: IRISA/INRIA
@@ -103,7 +103,7 @@ class SimpleIteratorIP inherits IteratorPolicy {
 			stdio.writeln("Processing iterator variable [" + variableName + "]")
 			visitor.write(kermeta.escape(variableName))
 			if visitable.typeCS != void then // type specified?
-				visitor.write(" : ")
+			//	visitor.write(" : ")
 				visitable.typeCS.accept(visitor)
 				stdio.writeln("Iterator variable [" + variableName + "] has explicit type ["+visitor.qualifiedTypeName.toString+"] and implicit type["+ implicitTypeName +"].")
 				visitor.addLocalVariable(variableName, visitor.qualifiedTypeName, 0, 1, false)
@@ -143,9 +143,20 @@ class SimpleIteratorIP inherits IteratorPolicy {
 			end
 			if (oclIterator.variable2 != void) then
 				visitor.write(", ")
-				oclIterator.variable2.accept(visitor)
+				visitor.isInLambdaExpressionShortSyntax := true
+				oclIterator.variable2.accept(visitor)	
+				/* stdio.writeln("DVK: Iterator variable2; name="+oclIterator.variable2.name+ " " /*+ visitor.qualifiedTypeName.toString */)
+				stdio.writeln("DVK:"+oclIterator.variable2.typeCS.toString)	
+				var pnCS : ocl::cst::PathNameCS
+				pnCS ?= oclIterator.variable2.typeCS
+				visitor.qualifiedTypeName := qualifiedNames::QualifiedName.new.fromSequence(pnCS.sequenceOfNames.asSequence())	
+				*/
+				visitor.write(oclIterator.variable2.name)
+				/* visitor.addLocalVariable(oclIterator.variable2.name, visitor.qualifiedTypeName, 0, 1, false)
+				*/
 				visitor.context.lookup(oclIterator.variable2.name).upperBound := 1
 				//TODO Check that mark
+				visitor.isInLambdaExpressionShortSyntax := false
 			end
 			visitor.write(" | ")
 			oclIterator.body.accept(visitor)
