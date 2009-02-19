@@ -1,4 +1,4 @@
-/* $Id: JunitTestSuite.java,v 1.22 2008-10-31 13:57:07 dvojtise Exp $
+/* $Id: JunitTestSuite.java,v 1.23 2009-02-19 11:29:27 dvojtise Exp $
  * Project : Kermeta.interpreter
  * File : JunitTestSuite.java
  * License : EPL
@@ -114,6 +114,8 @@ public class JunitTestSuite extends TestSuite {
 		testWithFile("test/interpreter/emf_testcases/kermeta","058_loadSaveIndirectUseOfEcoreEnum.main.kmt" );
 
 		testWithFile("test/interpreter/emf_testcases/kermeta","058_loadSaveUseOfEcoreEnum.main.kmt" );
+
+		testWithFile("test/interpreter/emf_testcases/kermeta","058_loadSaveUseOfEcoreEnum_withLiteralNameMismatch.main.kmt" );
 
 		testWithFile("test/interpreter/emf_testcases/kermeta","059_loadSaveKMEnum.main.kmt" );
 
