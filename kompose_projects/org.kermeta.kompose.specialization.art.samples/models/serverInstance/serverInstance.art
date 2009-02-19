@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="ASCII"?>
+<art:System xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:art="http://art" xmlns:instance="http://art/instance" name="OSGi System">
+  <root name="ci1">
+    <binding serverInstance="//@root/@subComponent.0" id="tb1"/>
+    <subComponent xsi:type="instance:CompositeInstance" name="pp"/>
+  </root>
+</art:System>

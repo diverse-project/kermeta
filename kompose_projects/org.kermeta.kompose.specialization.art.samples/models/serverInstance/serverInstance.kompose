@@ -1,0 +1,2 @@
+<?xml version="1.0" encoding="ASCII"?>
+<kompose:Composer xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:kompose="http://www.kermeta.org/kompose" primaryModelURI="platform:/resource/org.kermeta.kompose.specialization.art.samples/models/serverInstance/serverInstance.art" aspectModelURI="platform:/resource/org.kermeta.kompose.specialization.art.samples/models/serverInstance/serverInstance2.art" composedModelURI="platform:/resource/org.kermeta.kompose.specialization.art.samples/models/serverInstance/serverInstance_merged.art" metamodelName="http://art"/>

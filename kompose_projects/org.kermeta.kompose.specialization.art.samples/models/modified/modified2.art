@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="ASCII"?>
+<art:System xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:art="http://art" xmlns:instance="http://art/instance" xmlns:type="http://art/type" name="OSGi System">
+  <root name="OSGi System">
+    <subComponent xsi:type="instance:PrimitiveInstance" name="fr.irisa.triskell.bind.moins" type="//@types.0" state="32"/>
+    <subComponent xsi:type="instance:PrimitiveInstance" name="fr.irisa.triskell.Engine" state="32">
+      <binding serverInstance="//@root/@subComponent.0" id="fr.irisa.triskell.Engine -> fr.irisa.triskell.bind.moins" server="//@types.0/@port.0"/>
+    </subComponent>
+  </root>
+  <services xsi:type="type:FunctionalService" name="{fr.irisa.triskell.bind.frm.Operator}={type=MOINS, service.id=28}"/>
+  <types xsi:type="type:PrimitiveType" name="!MoinsOperator">
+    <port name="28" service="//@services.0" role="server"/>
+  </types>
+</art:System>

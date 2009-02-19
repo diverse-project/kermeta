@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="ASCII"?>
+<art:System xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:art="http://art" xmlns:instance="http://art/instance" xmlns:type="http://art/type" name="OSGi System">
+  <root name="OSGi System">
+    <subComponent xsi:type="instance:PrimitiveInstance" name="fr.irisa.triskell.bind.div" type="//@types.0" state="32"/>
+    <subComponent xsi:type="instance:PrimitiveInstance" name="fr.irisa.triskell.bind.mult" type="//@types.1" state="32"/>
+    <subComponent xsi:type="instance:PrimitiveInstance" name="fr.irisa.triskell.bind.moins" type="//@types.4" state="32"/>
+    <subComponent xsi:type="instance:PrimitiveInstance" name="fr.irisa.triskell.Calculator" type="//@types.2" state="32">
+      <binding serverInstance="//@root/@subComponent.4" id="fr.irisa.triskell.Calculator -> fr.irisa.triskell.Engine" client="//@types.2/@port.0" server="//@types.3/@port.1"/>
+    </subComponent>
+    <subComponent xsi:type="instance:PrimitiveInstance" name="fr.irisa.triskell.Engine" type="//@types.3" state="32">
+      <binding serverInstance="//@root/@subComponent.2" id="fr.irisa.triskell.Engine -> fr.irisa.triskell.bind.moins" server="//@types.4/@port.0"/>
+      <binding serverInstance="//@root/@subComponent.0" id="fr.irisa.triskell.Engine -> fr.irisa.triskell.bind.div" client="//@types.3/@port.3" server="//@types.0/@port.0"/>
+      <binding serverInstance="//@root/@subComponent.1" id="fr.irisa.triskell.Engine -> fr.irisa.triskell.bind.mult" client="//@types.3/@port.4" server="//@types.1/@port.0"/>
+    </subComponent>
+  </root>
+  <services xsi:type="type:FunctionalService" name="{fr.irisa.triskell.bind.frm.Operator}={type=MOINS, service.id=28}"/>
+  <services xsi:type="type:FunctionalService" name="{fr.irisa.triskell.bind.frm.Operator}={type=PLUS, service.id=24}"/>
+  <services xsi:type="type:FunctionalService" name="{fr.irisa.triskell.bind.frm.Operator}={type=DIV, service.id=26}"/>
+  <services xsi:type="type:FunctionalService" name="{fr.irisa.triskell.bind.frm.Operator}={type=MULT, service.id=30}"/>
+  <services xsi:type="type:FunctionalService" name="{fr.irisa.triskell.engine.IEngine}={service.id=33}"/>
+  <types xsi:type="type:PrimitiveType" name="!DivOperator">
+    <port name="26" service="//@services.2" role="server"/>
+  </types>
+  <types xsi:type="type:PrimitiveType" name="!MultOperator">
+    <port name="30" service="//@services.3" role="server"/>
+  </types>
+  <types xsi:type="type:PrimitiveType" name="?Engine">
+    <port name="33" service="//@services.4" role="client"/>
+  </types>
+  <types xsi:type="type:PrimitiveType" name="!Engine?PlusOperator?DivOperator?MoinsOperator?MultOperator">
+    <port name="24" service="//@services.1" role="client"/>
+    <port name="33" service="//@services.4" role="server"/>
+    <port name="28" service="//@services.0" role="client"/>
+    <port name="26" service="//@services.2" role="client"/>
+    <port name="30" service="//@services.3" role="client"/>
+  </types>
+  <types xsi:type="type:PrimitiveType" name="!MoinsOperator">
+    <port name="28" service="//@services.0" role="server"/>
+  </types>
+</art:System>
