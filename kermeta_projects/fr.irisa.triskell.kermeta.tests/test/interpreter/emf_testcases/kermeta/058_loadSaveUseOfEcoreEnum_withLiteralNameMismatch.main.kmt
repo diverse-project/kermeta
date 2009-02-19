@@ -1,0 +1,152 @@
+/* $Id: 058_loadSaveUseOfEcoreEnum_withLiteralNameMismatch.main.kmt,v 1.1 2009-02-19 11:21:59 dvojtise Exp $
+ * Creation date: June 5, 2007
+ * License:
+ * Copyright:
+ * Authors:
+ */
+@mainClass "loadSaveUseOfEcoreEnum_withLiteralNameMismatch::Main"
+@mainOperation "main"
+
+/**
+ * Test that we can load a xmi file conforms to an Ecore file containing an EEnumeration
+ * the xmi file has an usage of this EEnumeration and after that we try to save it into a new xmi file
+ * this is a variant of 058_loadSaveUseOfEcoreEnum:
+ *	  this variant use a metamodel where in the ecore, the EnumLiteral have different value for literal and name
+ *		ie. the EnumLiteral with name=ACCPUBLIC has its literal=accPublic
+ */
+
+package loadSaveUseOfEcoreEnum_withLiteralNameMismatch;
+
+
+require kermeta
+require "platform:/resource/fr.irisa.triskell.kermeta.tests/test/interpreter/emf_testcases/metamodels/058_MMEnum_withLiteralNameMismatch.ecore"
+require "http://www.eclipse.org/emf/2002/Ecore"
+// DVK note : I don't know why the metamodel generates this dependency to ecore : It seems that when opening the model, 
+// the findDependentResourse also open the metamodel ... (can be checked directly opening the model in the reflective editor ...)
+
+using kermeta::standard
+using kermeta::persistence
+using kermeta::kunit
+class Main inherits TestCase
+{
+	attribute metamodelUri : String
+	attribute modelUriBase : String
+	attribute outputmodelUriBase : String
+	
+	operation main() : Void is do 
+		var tr : TestRunner init TestRunner.new
+		tr.run(Main)
+		tr.printTestResult
+	end
+	
+	method setUp() is do
+		metamodelUri := "platform:/resource/fr.irisa.triskell.kermeta.tests/test/interpreter/emf_testcases/metamodels/058_MMEnum.ecore"
+		modelUriBase  := "platform:/resource/fr.irisa.triskell.kermeta.tests/test/interpreter/emf_testcases/instances/058_"
+		outputmodelUriBase  := "platform:/resource/fr.irisa.triskell.kermeta.tests/test/interpreter/emf_testcases/output/058_"
+	end
+	
+	operation testLoadModelWithUseOfEcoreEnum() is do
+		stdio.writeln("BEGIN testLoadModelWithUseOfEcoreEnum")
+		var emfRep : EMFRepository init EMFRepository.new
+		var res : EMFResource
+		res ?= emfRep.createResource(modelUriBase + "modelWithEEnum_withLiteralNameMismatch1.xmi", metamodelUri)
+		
+		res.load
+		
+		var modelelement : MDK::EnumTest
+		// that's the first element ...
+		modelelement ?= res.instances.one
+		assert(not modelelement.a.isVoid)
+		stdio.writeln(modelelement.a.toString + modelelement.a.name + modelelement.a.~enumeration.toString)
+		stdio.writeln(MDK::AccesVariableEnumeration.ACCPUBLIC.toString + MDK::AccesVariableEnumeration.ACCPUBLIC.name + MDK::AccesVariableEnumeration.ACCPUBLIC.~enumeration.toString)
+		stdio.writeln(MDK::AccesVariableEnumeration.ACCPRIVATE.toString + MDK::AccesVariableEnumeration.ACCPRIVATE.name + MDK::AccesVariableEnumeration.ACCPRIVATE.~enumeration.toString)
+		// (different OId but same names !?
+		assert (modelelement.a == MDK::AccesVariableEnumeration.ACCPRIVATE)
+		stdio.writeln("END testLoadModelWithUseOfEcoreEnum")
+	end
+	operation testLoadModelWithUseOfEcoreEnumDefaultValue() is do
+		stdio.writeln("BEGIN testLoadModelWithUseOfEcoreEnumDefaultValue")
+		var emfRep : EMFRepository init EMFRepository.new
+		var res : EMFResource
+		res ?= emfRep.createResource(modelUriBase + "modelWithEEnum_withLiteralNameMismatch2.xmi", metamodelUri)
+		
+		res.load
+		
+		var modelelement : MDK::EnumTest
+		// that's the first element ...
+		modelelement ?= res.instances.one
+		assert(not modelelement.a.isVoid)
+		stdio.writeln(modelelement.a.toString + modelelement.a.name + modelelement.a.~enumeration.toString)
+		stdio.writeln(MDK::AccesVariableEnumeration.ACCPUBLIC.toString + MDK::AccesVariableEnumeration.ACCPUBLIC.name + MDK::AccesVariableEnumeration.ACCPUBLIC.~enumeration.toString)
+		stdio.writeln(MDK::AccesVariableEnumeration.ACCPRIVATE.toString + MDK::AccesVariableEnumeration.ACCPRIVATE.name + MDK::AccesVariableEnumeration.ACCPRIVATE.~enumeration.toString)
+		// (different OId but same names !?
+		assert (modelelement.a == MDK::AccesVariableEnumeration.ACCPUBLIC)
+		stdio.writeln("END testLoadModelWithUseOfEcoreEnumDefaultValue")
+	end
+	
+	operation testSaveModelWithUseOfEcoreEnum() is do
+		stdio.writeln("BEGIN testSaveModelWithUseOfEcoreEnum")
+		var emfRep1 : EMFRepository init EMFRepository.new
+		var res1 : EMFResource
+		res1 ?= emfRep1.createResource(outputmodelUriBase+"modelWithEEnum_withLiteralNameMismatch1.xmi", metamodelUri)
+		
+		// create the model
+		var modelelement1 : MDK::EnumTest init MDK::EnumTest.new
+		modelelement1.a := MDK::AccesVariableEnumeration.ACCPRIVATE
+		res1.add(modelelement1)
+		stdio.writeln("before save1")
+		res1.save()
+		stdio.writeln("after save1")
+		// reload it in a new repository and check it
+		
+		var emfRep2 : EMFRepository init EMFRepository.new
+		var res2 : EMFResource
+		res2 ?= emfRep2.createResource(outputmodelUriBase+"modelWithEEnum_withLiteralNameMismatch1.xmi", metamodelUri)
+		res2.load()
+		stdio.writeln("after load1")
+		var modelelement2 : MDK::EnumTest
+		// that's the first element ...
+		modelelement2 ?= res2.instances.one
+		assert(not modelelement2.isVoid)
+		assert(not modelelement2.a.isVoid)
+		stdio.writeln("modelelement2.a.toString = " + modelelement2.a.toString)
+		stdio.writeln("MDK::AccesVariableEnumeration.accPublic.toString = "+MDK::AccesVariableEnumeration.ACCPUBLIC.toString)
+		stdio.writeln("MDK::AccesVariableEnumeration.accPrivate.toString = "+MDK::AccesVariableEnumeration.ACCPRIVATE.toString)
+		assert (modelelement2.a == MDK::AccesVariableEnumeration.ACCPRIVATE)
+		
+		stdio.writeln("END testSaveModelWithUseOfEcoreEnum")
+	end
+	operation testSaveModelWithUseOfEcoreEnumDefaultValue() is do
+		stdio.writeln("BEGIN testSaveModelWithUseOfEcoreEnumDefaultValue")
+		var emfRep1 : EMFRepository init EMFRepository.new
+		var res1 : EMFResource
+		res1 ?= emfRep1.createResource(outputmodelUriBase+"modelWithEEnum_withLiteralNameMismatch2.xmi", metamodelUri)
+		
+		// create the model
+		var modelelement1 : MDK::EnumTest init MDK::EnumTest.new
+		modelelement1.a := MDK::AccesVariableEnumeration.ACCPUBLIC
+		res1.add(modelelement1)
+		stdio.writeln("before save1")
+		res1.save()
+		stdio.writeln("after save1")
+		// reload it in a new repository and check it
+		
+		var emfRep2 : EMFRepository init EMFRepository.new
+		var res2 : EMFResource
+		res2 ?= emfRep2.createResource(outputmodelUriBase+"modelWithEEnum_withLiteralNameMismatch2.xmi", metamodelUri)
+		res2.load()
+		stdio.writeln("after load1")
+		var modelelement2 : MDK::EnumTest
+		// that's the first element ...
+		modelelement2 ?= res2.instances.one
+		assert(not modelelement2.isVoid)
+		assert(not modelelement2.a.isVoid)
+		stdio.writeln("modelelement2.a.toString = " + modelelement2.a.toString)
+		stdio.writeln("MDK::AccesVariableEnumeration.accPublic.toString = "+MDK::AccesVariableEnumeration.ACCPUBLIC.toString)
+		stdio.writeln("MDK::AccesVariableEnumeration.accPrivate.toString = "+MDK::AccesVariableEnumeration.ACCPRIVATE.toString)
+		assert (modelelement2.a == MDK::AccesVariableEnumeration.ACCPUBLIC)
+		
+		stdio.writeln("END testSaveModelWithUseOfEcoreEnumDefaultValue")
+	end
+	
+}

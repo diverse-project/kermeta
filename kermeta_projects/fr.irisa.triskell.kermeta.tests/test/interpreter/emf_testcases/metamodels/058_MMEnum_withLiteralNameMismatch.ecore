@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="ASCII"?>
+<ecore:EPackage xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="MDK"
+    nsURI="platform:/resource/fr.irisa.triskell.kermeta.tests/test/interpreter/emf_testcases/metamodels/058_MMEnum_withLiteralNameMismatch.ecore"
+    nsPrefix="root_package">
+  <eClassifiers xsi:type="ecore:EEnum" name="AccesVariableEnumeration">
+    <eLiterals name="ACCPUBLIC" literal="accPublic"/>
+    <eLiterals name="ACCPRIVATE" value="1" literal="accPrivate"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="EnumTest">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="a" eType="#//AccesVariableEnumeration"/>
+  </eClassifiers>
+</ecore:EPackage>
