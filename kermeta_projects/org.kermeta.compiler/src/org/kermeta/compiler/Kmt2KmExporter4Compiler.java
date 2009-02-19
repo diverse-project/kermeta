@@ -1,4 +1,4 @@
-/* $Id: Kmt2KmExporter4Compiler.java,v 1.1 2009-02-16 16:00:59 cfaucher Exp $
+/* $Id: Kmt2KmExporter4Compiler.java,v 1.2 2009-02-19 13:17:57 cfaucher Exp $
  * Project   : org.kermeta.compiler
  * File      : Kmt2KmExporter.java
  * License   : EPL
@@ -48,18 +48,22 @@ public class Kmt2KmExporter4Compiler {
 	 */
 	public void writeUnit(KermetaUnit kermetaUnit, IFile ifile) throws Exception {
 		
-		KermetaUnit tags_ku = LoaderPlugin.getDefault().load("platform:/plugin/org.kermeta.framework.compiler.directives/src/kermeta/framework_directives_for_compiler.kmt", null);
 		
-		kermetaUnit.addRequire(tags_ku.getUri(), tags_ku);
+		/////////// Add the framework directives to the given ModelingUnit for compiling
+		KermetaUnit framework_directives_ku = LoaderPlugin.getDefault().load("platform:/plugin/org.kermeta.framework.compiler.directives/src/kermeta/framework_directives_for_compiler.kmt", null);
 		
-		kermetaUnit.getImportedKermetaUnits().add(tags_ku);
+		kermetaUnit.addRequire(framework_directives_ku.getUri(), framework_directives_ku);
 		
-		kermetaUnit.importKermetaUnit(tags_ku, true, true);
+		kermetaUnit.getImportedKermetaUnits().add(framework_directives_ku);
+		
+		kermetaUnit.importKermetaUnit(framework_directives_ku, true, true);
+		///////////
 		
 		Set<KermetaUnit> l = new HashSet<KermetaUnit>();
 		l.add(kermetaUnit);
 		l.addAll( KermetaUnitHelper.getAllImportedKermetaUnits(kermetaUnit) );
 		
+		// Create the merged and typechecked Km
 		String fileURI = "platform:/resource" + ifile.getFullPath().removeFileExtension().addFileExtension("km").toString();
 				
 		Merger merger = new Merger();
