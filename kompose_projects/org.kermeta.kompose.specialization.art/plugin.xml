@@ -22,7 +22,7 @@
             </separator>
          </menu>
          <action
-               label="Compose (art) Models"
+               label="Compose (Models@Runtime) Models"
                class="org.kermeta.kompose.specialization.art.popup.action.Composer"
                menubarPath="org.kermeta.kompose.specialization.kompose.menu/popup"
                enablesFor="1"

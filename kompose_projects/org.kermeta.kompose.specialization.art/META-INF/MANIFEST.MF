@@ -1,6 +1,6 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: Kompose Specialization Composition Plug-in (art Example)
+Bundle-Name: Kompose Specialization Composition Plug-in (Models@Runtime Example)
 Bundle-SymbolicName: org.kermeta.kompose.specialization.art; singleton:=true
 Bundle-Version: 0.0.1
 Bundle-Activator: org.kermeta.kompose.specialization.art.activator.Activator
