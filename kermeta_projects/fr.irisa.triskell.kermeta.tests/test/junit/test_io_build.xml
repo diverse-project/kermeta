@@ -1,4 +1,4 @@
-<!-- $Id: test_io_build.xml,v 1.18 2009-02-18 17:25:01 dvojtise Exp $ -->
+<!-- $Id: test_io_build.xml,v 1.19 2009-02-19 15:33:29 dvojtise Exp $ -->
 <project name="run interpreter tests" default="all" basedir=".">
 	
 	<description>
@@ -34,8 +34,9 @@
 	<property name="log4j.jar" location="${eclipse.home}/plugins/org.apache.log4j_1.2.13.v200806030600.jar" />
 	<property name="antlr.jar" location="${eclipse.home}/plugins/org.antlr_2.7.6/antlr.jar"/>
 	<!--<property name="ldt-core.jar" location="..\..\..\fr.irisa.triskell.kermeta\lib\thirdparty\ldt-core.jar" />-->
-	<property name="emfatic-core.jar" location="..\..\..\org.eclipse.gymnast.runtime.core\${dot.or.bin}"/>
-
+	<!--<property name="emfatic-core.jar" location="..\..\..\org.eclipse.gymnast.runtime.core\${dot.or.bin}"/>-->
+	<property name="emfatic-core.jar" location="${eclipse.home}/plugins/org.eclipse.gymnast.runtime.core_0.3.0.jar"/>
+	
 	<property name="emf.common.jar" location="${eclipse.home}/plugins/org.eclipse.emf.common_2.4.0.v200808251517.jar" />
 	<property name="emf.ecore.jar" location="${eclipse.home}/plugins/org.eclipse.emf.ecore_2.4.1.v200808251517.jar" />
 	<property name="emf.ecore.xmi.jar" location="${eclipse.home}/plugins/org.eclipse.emf.ecore.xmi_2.4.1.v200808251517.jar" />
