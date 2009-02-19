@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.2"?>
+<plugin>
+   <extension
+         point="org.eclipse.ui.popupMenus">
+      <objectContribution
+      		adaptable="true"
+            objectClass="org.eclipse.core.resources.IFile"
+            nameFilter="*.kompose"
+            id="org.kermeta.kompose.specialization.art.contribution1">
+         <enablement>
+	     	<test
+	        	forcePluginActivation="true"
+	            property="org.kermeta.kompose.specialization.art.metamodel"/>
+	     </enablement >
+         <menu
+               label="Kompose"
+               path="additions"
+               id="org.kermeta.kompose.specialization.kompose.menu">
+            <separator
+                  name="popup">
+            </separator>
+         </menu>
+         <action
+               label="Compose (art) Models"
+               class="org.kermeta.kompose.specialization.art.popup.action.Composer"
+               menubarPath="org.kermeta.kompose.specialization.kompose.menu/popup"
+               enablesFor="1"
+               id="org.kermeta.kompose.specialization.art.composer">
+         </action>
+      </objectContribution>
+   </extension>
+   <extension
+         point="org.eclipse.ui.startup">
+      <startup class="org.kermeta.kompose.specialization.art.startup.RegisterStartup"/>
+   </extension>
+   <extension point="org.eclipse.core.expressions.propertyTesters">
+     <propertyTester
+        id="org.kermeta.kompose.specialization.propertyTester"
+        namespace="org.kermeta.kompose.specialization.art"
+        properties="metamodel"
+        type="org.eclipse.core.resources.IFile"
+        class="org.kermeta.kompose.specialization.art.contribution.KomposePropertyTester">
+     </propertyTester>
+   </extension>
+</plugin>

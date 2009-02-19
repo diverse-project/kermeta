@@ -1,0 +1,14 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Kompose Specialization Composition Plug-in (art Example)
+Bundle-SymbolicName: org.kermeta.kompose.specialization.art; singleton:=true
+Bundle-Version: 0.0.1
+Bundle-Activator: org.kermeta.kompose.specialization.art.activator.Activator
+Bundle-Vendor: Unknown
+Require-Bundle: org.eclipse.ui,
+ org.eclipse.core.runtime,
+ org.eclipse.core.resources,
+ org.kermeta.kompose.core.model,
+ fr.irisa.triskell.kermeta.interpreter,
+ org.eclipse.core.expressions;bundle-version="3.4.0"
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
