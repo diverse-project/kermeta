@@ -1,4 +1,4 @@
-/* $Id: 058_loadSaveUseOfEcoreEnum_withLiteralNameMismatch.main.kmt,v 1.1 2009-02-19 11:21:59 dvojtise Exp $
+/* $Id: 058_loadSaveUseOfEcoreEnum_withLiteralNameMismatch.main.kmt,v 1.2 2009-02-19 11:26:37 dvojtise Exp $
  * Creation date: June 5, 2007
  * License:
  * Copyright:
@@ -40,7 +40,7 @@ class Main inherits TestCase
 	end
 	
 	method setUp() is do
-		metamodelUri := "platform:/resource/fr.irisa.triskell.kermeta.tests/test/interpreter/emf_testcases/metamodels/058_MMEnum.ecore"
+		metamodelUri := "platform:/resource/fr.irisa.triskell.kermeta.tests/test/interpreter/emf_testcases/metamodels/058_MMEnum_withLiteralNameMismatch.ecore"
 		modelUriBase  := "platform:/resource/fr.irisa.triskell.kermeta.tests/test/interpreter/emf_testcases/instances/058_"
 		outputmodelUriBase  := "platform:/resource/fr.irisa.triskell.kermeta.tests/test/interpreter/emf_testcases/output/058_"
 	end
