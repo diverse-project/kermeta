@@ -1,4 +1,4 @@
-/* $Id: 058_loadSaveUseOfEcoreEnum.main.kmt,v 1.1 2008-04-24 17:23:38 cfaucher Exp $
+/* $Id: 058_loadSaveUseOfEcoreEnum.main.kmt,v 1.2 2009-02-19 09:35:46 dvojtise Exp $
  * Creation date: June 5, 2007
  * License:
  * Copyright:
@@ -43,9 +43,10 @@ class Main inherits TestCase
 	end
 	
 	operation testLoadModelWithUseOfEcoreEnum() is do
+		stdio.writeln("BEGIN testLoadModelWithUseOfEcoreEnum")
 		var emfRep : EMFRepository init EMFRepository.new
 		var res : EMFResource
-		res ?= emfRep.createResource(modelUriBase+"modelWithEEnum1.xmi", metamodelUri)
+		res ?= emfRep.createResource(modelUriBase + "modelWithEEnum1.xmi", metamodelUri)
 		
 		res.load
 		
@@ -57,17 +58,70 @@ class Main inherits TestCase
 		stdio.writeln(MDK::AccesVariableEnumeration.accPublic.toString + MDK::AccesVariableEnumeration.accPublic.name + MDK::AccesVariableEnumeration.accPublic.~enumeration.toString)
 		stdio.writeln(MDK::AccesVariableEnumeration.accPrivate.toString + MDK::AccesVariableEnumeration.accPrivate.name + MDK::AccesVariableEnumeration.accPrivate.~enumeration.toString)
 		// (different OId but same names !?
-		assert (modelelement.a == MDK::AccesVariableEnumeration.accPrivate)		
+		assert (modelelement.a == MDK::AccesVariableEnumeration.accPrivate)
+		stdio.writeln("END testLoadModelWithUseOfEcoreEnum")
+	end
+	operation testLoadModelWithUseOfEcoreEnumDefaultValue() is do
+		stdio.writeln("BEGIN testLoadModelWithUseOfEcoreEnumDefaultValue")
+		var emfRep : EMFRepository init EMFRepository.new
+		var res : EMFResource
+		res ?= emfRep.createResource(modelUriBase + "modelWithEEnum2.xmi", metamodelUri)
+		
+		res.load
+		
+		var modelelement : MDK::EnumTest
+		// that's the first element ...
+		modelelement ?= res.instances.one
+		assert(not modelelement.a.isVoid)
+		stdio.writeln(modelelement.a.toString + modelelement.a.name + modelelement.a.~enumeration.toString)
+		stdio.writeln(MDK::AccesVariableEnumeration.accPublic.toString + MDK::AccesVariableEnumeration.accPublic.name + MDK::AccesVariableEnumeration.accPublic.~enumeration.toString)
+		stdio.writeln(MDK::AccesVariableEnumeration.accPrivate.toString + MDK::AccesVariableEnumeration.accPrivate.name + MDK::AccesVariableEnumeration.accPrivate.~enumeration.toString)
+		// (different OId but same names !?
+		assert (modelelement.a == MDK::AccesVariableEnumeration.accPublic)
+		stdio.writeln("END testLoadModelWithUseOfEcoreEnumDefaultValue")
 	end
 	
 	operation testSaveModelWithUseOfEcoreEnum() is do
+		stdio.writeln("BEGIN testSaveModelWithUseOfEcoreEnum")
+		var emfRep1 : EMFRepository init EMFRepository.new
+		var res1 : EMFResource
+		res1 ?= emfRep1.createResource(outputmodelUriBase+"modelWithEEnum1.xmi", metamodelUri)
+		
+		// create the model
+		var modelelement1 : MDK::EnumTest init MDK::EnumTest.new
+		modelelement1.a := MDK::AccesVariableEnumeration.accPrivate
+		res1.add(modelelement1)
+		stdio.writeln("before save1")
+		res1.save()
+		stdio.writeln("after save1")
+		// reload it in a new repository and check it
+		
+		var emfRep2 : EMFRepository init EMFRepository.new
+		var res2 : EMFResource
+		res2 ?= emfRep2.createResource(outputmodelUriBase+"modelWithEEnum1.xmi", metamodelUri)
+		res2.load()
+		stdio.writeln("after load1")
+		var modelelement2 : MDK::EnumTest
+		// that's the first element ...
+		modelelement2 ?= res2.instances.one
+		assert(not modelelement2.isVoid)
+		assert(not modelelement2.a.isVoid)
+		stdio.writeln("modelelement2.a.toString = " + modelelement2.a.toString)
+		stdio.writeln("MDK::AccesVariableEnumeration.accPublic.toString = "+MDK::AccesVariableEnumeration.accPublic.toString)
+		stdio.writeln("MDK::AccesVariableEnumeration.accPrivate.toString = "+MDK::AccesVariableEnumeration.accPrivate.toString)
+		assert (modelelement2.a == MDK::AccesVariableEnumeration.accPrivate)
+		
+		stdio.writeln("END testSaveModelWithUseOfEcoreEnum")
+	end
+	operation testSaveModelWithUseOfEcoreEnumDefaultValue() is do
+		stdio.writeln("BEGIN testSaveModelWithUseOfEcoreEnumDefaultValue")
 		var emfRep1 : EMFRepository init EMFRepository.new
 		var res1 : EMFResource
 		res1 ?= emfRep1.createResource(outputmodelUriBase+"modelWithEEnum2.xmi", metamodelUri)
 		
 		// create the model
 		var modelelement1 : MDK::EnumTest init MDK::EnumTest.new
-		modelelement1.a := MDK::AccesVariableEnumeration.accPrivate
+		modelelement1.a := MDK::AccesVariableEnumeration.accPublic
 		res1.add(modelelement1)
 		stdio.writeln("before save1")
 		res1.save()
@@ -84,11 +138,12 @@ class Main inherits TestCase
 		modelelement2 ?= res2.instances.one
 		assert(not modelelement2.isVoid)
 		assert(not modelelement2.a.isVoid)
-		stdio.writeln(modelelement2.a.toString)
-		stdio.writeln(MDK::AccesVariableEnumeration.accPublic.toString)
-		stdio.writeln(MDK::AccesVariableEnumeration.accPrivate.toString)
-		assert (modelelement2.a == MDK::AccesVariableEnumeration.accPrivate)
+		stdio.writeln("modelelement2.a.toString = " + modelelement2.a.toString)
+		stdio.writeln("MDK::AccesVariableEnumeration.accPublic.toString = "+MDK::AccesVariableEnumeration.accPublic.toString)
+		stdio.writeln("MDK::AccesVariableEnumeration.accPrivate.toString = "+MDK::AccesVariableEnumeration.accPrivate.toString)
+		assert (modelelement2.a == MDK::AccesVariableEnumeration.accPublic)
 		
+		stdio.writeln("END testSaveModelWithUseOfEcoreEnumDefaultValue")
 	end
 	
 }
