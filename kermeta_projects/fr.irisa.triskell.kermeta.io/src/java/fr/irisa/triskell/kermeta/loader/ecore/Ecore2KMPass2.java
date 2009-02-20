@@ -1,4 +1,4 @@
-/* $Id: Ecore2KMPass2.java,v 1.34 2008-06-11 12:36:21 dvojtise Exp $
+/* $Id: Ecore2KMPass2.java,v 1.35 2009-02-20 09:20:50 dvojtise Exp $
  * Project : Kermeta io
  * File : ECore2Kermeta.java
  * License : EPL
@@ -129,6 +129,10 @@ public class Ecore2KMPass2 extends Ecore2KMPass {
 		// Set the type of the operation
 		Type t = null;
 		
+		context.pushContext();
+		for ( TypeVariable tv : currentOperation.getTypeParameter() )
+			context.addTypeVar(tv);
+		
 		if (node.getEType() != null) {
 			t = createType(node.getEType(), node.getEGenericType(), node);
 			//t = createTypeForEClassifier(node.getEType(), node);
@@ -175,6 +179,9 @@ public class Ecore2KMPass2 extends Ecore2KMPass {
 		 * 
 		 */
 		acceptList( node.getETypeParameters() );
+		
+
+		context.popContext();
 		return currentOperation;
 	}
 	
@@ -472,48 +479,14 @@ public class Ecore2KMPass2 extends Ecore2KMPass {
 		}
 		return result;
 	}
-/*
-	@Override
-	public Object visit(ETypeParameter node) {
-		if ( ! node.getEAnnotations().isEmpty() ) {
-			for (Object next :  node.getEAnnotations().getDetails().keySet()) {
-				
-			}
-		}
-		
-		
-		List<TypeVariable> params = new ArrayList<TypeVariable>();
-		
-		for (Object next :  node.getDetails().keySet()) {
-			String name = (String)next;
-			TypeVariable tv = StructureFactory.eINSTANCE.createObjectTypeVariable(); 
-			tv.setName(name);
-			// detail can be " A : Anothertype" -> means that A must inherit Anothertype
-			String detail = (String)node.getDetails().get(name); 
-			if (detail.indexOf(":")>0) {
-				detail = detail.replaceAll(" ", ""); // strip spaces
-				String str_cdef = detail.substring(detail.indexOf(":")+1);
-				ClassDefinition cdef = (ClassDefinition) kermetaUnit.getTypeDefinitionByQualifiedName(str_cdef, monitor);
-				fr.irisa.triskell.kermeta.language.structure.Class type = 
-					StructureFactory.eINSTANCE.createClass();
-		        type.setTypeDefinition((ClassDefinition)cdef);
-				tv.setSupertype(type);
-			}
-			params.add(tv);
-		} 
 
-		// for current_class - add the parameter to the class
-		if(node.getEModelElement() instanceof EClass) {
-			currentClassDefinition.getTypeParameter().addAll(params);
-		}
-		// for current_op
-		else {
-			currentOperation.getTypeParameter().addAll(params);
-		}
-		return super.visit(node);
-	}
-*/
-	
+	/** Create a type according to the current context
+	 * (do not forget to push/pop the type variable in order to make it work correctly
+	 * @param classfier
+	 * @param genericType
+	 * @param node
+	 * @return
+	 */
 	private Type createType(EClassifier classfier, EGenericType genericType, ENamedElement node) {
 		Type type = null;
 		type = createTypeForEClassifier( classfier, node );
@@ -553,7 +526,7 @@ public class Ecore2KMPass2 extends Ecore2KMPass {
 				if ( gt.getEClassifier() != null )
 					kermetaTypeParameter = createType(gt.getEClassifier(), null, null);
 				else if ( gt.getETypeParameter() != null ) {
-					kermetaTypeParameter = context.typeVariableLookup(gt.getETypeParameter().getName());
+					kermetaTypeParameter = context.typeVariableLookup(gt.getETypeParameter().getName()); 
 				} else if ( gt.getERawType() != null ) {
 					// last chance : check the raw type for a data type if this is not an EJavaObject
 					if ( ! gt.getERawType().getName().equals("EJavaObject" ))
