@@ -1,4 +1,4 @@
-<!-- $Id: test_ocl_build.xml,v 1.9 2008-10-21 11:47:50 dvojtise Exp $ -->
+<!-- $Id: test_ocl_build.xml,v 1.10 2009-02-20 07:54:25 dvojtise Exp $ -->
 <project name="run ocl tests" default="all" basedir=".">
 
 	<description>
@@ -36,7 +36,8 @@
 	<property name="log4j.jar" location="${eclipse.home}/plugins/org.apache.log4j_1.2.13.v200706111418.jar" />
 	<property name="antlr.jar" location="${eclipse.home}/plugins/org.antlr_2.7.6/antlr.jar"/>
 	<!--<property name="ldt-core.jar" location="..\..\..\fr.irisa.triskell.kermeta\lib\thirdparty\ldt-core.jar" />-->
-	<property name="emfatic-core.jar" location="..\org.eclipse.gymnast.runtime.core\${dot.or.bin}"/>
+	<!--<property name="emfatic-core.jar" location="..\..\..\org.eclipse.gymnast.runtime.core\${dot.or.bin}"/>-->
+	<property name="emfatic-core.jar" location="${eclipse.home}/plugins/org.eclipse.gymnast.runtime.core_0.3.0.jar"/>
 
 	<property name="log4j.jar" location="${eclipse.home}/plugins/org.apache.log4j_1.2.13.v200806030600.jar" />
 			<property name="antlr.jar" location="${eclipse.home}/plugins/org.antlr_2.7.6/antlr.jar"/>
