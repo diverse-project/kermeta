@@ -110,6 +110,7 @@
 <project reference="1.0,:extssh:scm.gforge.inria.fr:/cvsroot/kermeta,ecore_projects/org.kermeta.ecore.documentation,org.kermeta.ecore.documentation"/>
 <project reference="1.0,:extssh:scm.gforge.inria.fr:/cvsroot/kermeta,emfutils_projects/org.kermeta.emfutils.feature,org.kermeta.emfutils.feature"/>
 <project reference="1.0,:extssh:scm.gforge.inria.fr:/cvsroot/kermeta,emfutils_projects/org.kermeta.emfutils.models.ui,org.kermeta.emfutils.models.ui"/>
+<project reference="1.0,:extssh:scm.gforge.inria.fr:/cvsroot/kermeta,kermeta_projects/org.kermeta.framework.compiler.directives,org.kermeta.framework.compiler.directives"/>
 <project reference="1.0,:extssh:scm.gforge.inria.fr:/cvsroot/kermeta,kermeta_projects/org.kermeta.generator,org.kermeta.generator"/>
 <project reference="1.0,:extssh:scm.gforge.inria.fr:/cvsroot/kermeta,kermeta_projects/org.kermeta.interest,org.kermeta.interest"/>
 <project reference="1.0,:extssh:scm.gforge.inria.fr:/cvsroot/kermeta,kermeta_projects/org.kermeta.interpreter.feature,org.kermeta.interpreter.feature"/>
@@ -282,6 +283,8 @@
 <item elementID="=org.kermeta.compiler.generator" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
 <item elementID="=org.kermeta.compiler.generator.emftemplates" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
 <item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.kermeta.compiler.feature" type="4"/>
+<item elementID="=org.kermeta.framework.compiler.directives" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=org.kermeta.compiler.tests" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
 </workingSets>
 <workingSets editPageId="org.eclipse.jdt.ui.JavaWorkingSetPage" label="kermeta_core" name="kermeta_core">
 <item elementID="=fr.irisa.triskell.kermeta.texteditor" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
