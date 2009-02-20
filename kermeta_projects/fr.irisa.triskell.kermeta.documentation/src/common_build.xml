@@ -126,6 +126,7 @@
              <property name="docbook.resources.dir" location="${build.dir}/figures" />
              <property name="distribution.dir" location="${build.dir}/html.chunked/${project.name}" />
              <property name="build.dir" location="${build.docbook.dir}/${project.name}" />
+			 <property name="disable.xsltproc" value="true"/> 
         </ant>
 
         <available property="tmp:chunked.ok" file="${build.dir}/html.chunked/${project.name}/index.html" />
@@ -143,6 +144,7 @@
              <property name="docbook.resources.dir" location="${build.dir}/figures" />
              <property name="distribution.dir" location="${build.dir}/html.help/${project.name}" />
              <property name="build.dir" location="${build.docbook.dir}/${project.name}" />
+			 <property name="disable.xsltproc" value="true"/> 
         </ant>
 
         <available property="tmp:help.ok" file="${build.dir}/html.help/${project.name}/index.html" />
@@ -171,6 +173,7 @@
             <property name="docbook.eclipse.plugin.id" value="fr.irisa.triskell.kermeta.documentation" />
             <property name="docbook.eclipse.plugin.provider" value="IRISA/INRIA" />
 			<property name="eclipse.html.base.dir" value="build/eclipse.help/${project.name}/"/>
+			 <property name="disable.xsltproc" value="true"/> 
         </ant>
 
 	  	<move todir="${build.dir}">
