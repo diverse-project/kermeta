@@ -1,9 +1,13 @@
-/* $Id: ContainmentTraversable.kmt,v 1.7 2008-12-03 16:52:52 cfaucher Exp $
+/* $Id: ContainmentTraversable.kmt,v 1.8 2009-02-20 10:09:27 dvojtise Exp $
  * Creation date: January 21, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
  * Authors: Cyril Faucher <cfaucher@irisa.fr>
  *			Francois Tanguy <ftanguy@irisa.fr>
+ * Description :
+ *		Currently, this version doesn't provide traverse for the content of Expression, 
+ *		this might be done later
+ *		
  */
 
 /**
