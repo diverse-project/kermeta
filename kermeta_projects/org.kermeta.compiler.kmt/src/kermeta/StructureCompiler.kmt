@@ -1,4 +1,4 @@
-/* $Id: StructureCompiler.kmt,v 1.81 2009-02-12 16:32:56 mclavreu Exp $
+/* $Id: StructureCompiler.kmt,v 1.82 2009-02-20 13:25:31 dvojtise Exp $
  * Creation date: January 21, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -59,7 +59,11 @@ class Main {
 
 		output := modelInput.replaceExtension("ecore")
 		
+		// Run the full transformation km2ecore
 		main_mode(modelInput, traceInput, output, CompilingMode.behaviorJava, false)
+		
+		// Debug mode : Generate in the console the Java version of the given operations (see main_mode3() code)
+		//main_mode3(modelInput, traceInput, output, CompilingMode.behaviorJava, false)
 	end
 	
     operation main(modelInput : String) : Void is do

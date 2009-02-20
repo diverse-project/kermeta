@@ -1,6 +1,6 @@
 
 
-/*$Id: GenModelUtil.java,v 1.2 2009-02-13 11:01:59 cfaucher Exp $
+/*$Id: GenModelUtil.java,v 1.3 2009-02-20 13:27:46 dvojtise Exp $
 * Project : org.kermeta.compiler
 * File : 	GenModelUtil.java
 * License : EPL
@@ -84,7 +84,8 @@ public class GenModelUtil {
 	}
 	
 	/**
-	 * To avoid the use of 'Initialization By Loading' on a genPackage
+	 * To avoid the use of 'Initialization of the EMF reflection by an Ecore file loading instead of generated Java code' on a genPackage
+	 * Example: for UML metamodel, the Initialization by loading must be true to avoid too large generated body in methods
 	 * @param genPackage
 	 */
 	private static void loadInitializationFixer(GenPackage genPackage) {
