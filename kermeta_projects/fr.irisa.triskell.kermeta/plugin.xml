@@ -76,7 +76,7 @@
                label="Generate Ecore"
                icon="images/eclipse_ecore.gif"
                menubarPath="org.eclipse.ui.articles.action.contribution.navigator.subMenu/kermetagroup1" 
-               class="fr.irisa.triskell.kermeta.popup.actions.Kermeta2EcoreAction"
+               class="fr.irisa.triskell.kermeta.popup.actions.Kermeta2EcoreAction"   		
                id="fr.irisa.triskell.kermeta.KM2Ecore"/>
       </objectContribution>
       <objectContribution
