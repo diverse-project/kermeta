@@ -24,7 +24,8 @@
 	<property name="python.exe"				location="C:\python24\python.exe"/>
 	<property name="hhc.exe"				location="T:\bin\win32\HTML Help Workshop\hhc.exe"/>
 	
-	
+	 <!-- disable use of xsltproc in order to enable xslthl for programlisting coloration -->
+	<property name="disable.xsltproc" value="true"/>
 
 	<target name="all" depends="OOo2dbk, html.single, html.chunked ,pdf.fop, eclipse.help">
 	</target>
@@ -101,6 +102,7 @@
              <property name="docbook.resources.dir" location="${build.dir}/figures" />
              <property name="distribution.dir" location="${build.dir}/html.single/${project.name}" />
              <property name="build.dir" location="${build.docbook.dir}/${project.name}" />
+			 <property name="disable.xsltproc" value="true"/> 
         </ant>
 
         <available property="tmp:single.ok" file="${build.dir}/html.single/${project.name}/index.html" />
@@ -119,6 +121,7 @@
              <property name="docbook.resources.dir" location="${build.dir}/figures" />
              <property name="distribution.dir" location="${build.dir}/html.chunked/${project.name}" />
              <property name="build.dir" location="${build.docbook.dir}/${project.name}" />
+			 <property name="disable.xsltproc" value="true"/> 
         </ant>
 
         <available property="tmp:chunked.ok" file="${build.dir}/html.chunked/${project.name}/index.html" />
@@ -136,6 +139,7 @@
              <property name="docbook.resources.dir" location="${build.dir}/figures" />
              <property name="distribution.dir" location="${build.dir}/html.help/${project.name}" />
              <property name="build.dir" location="${build.docbook.dir}/${project.name}" />
+			 <property name="disable.xsltproc" value="true"/> 
         </ant>
 
         <available property="tmp:help.ok" file="${build.dir}/html.help/${project.name}/index.html" />
@@ -164,6 +168,7 @@
             <property name="docbook.eclipse.plugin.id" value="fr.irisa.triskell.kermeta.documentation" />
             <property name="docbook.eclipse.plugin.provider" value="IRISA/INRIA" />
 			<property name="eclipse.html.base.dir" value="build/eclipse.help/${project.name}/"/>
+			 <property name="disable.xsltproc" value="true"/> 
         </ant>
 
 	  	<move todir="${build.dir}">
@@ -202,6 +207,7 @@
 	             <property name="docbook.resources.dir" location="${build.docbook.dir}/${project.name}/figures" />
 	             <property name="distribution.dir" location="${build.dir}/pdf.fop/${project.name}" />
 	             <property name="build.dir" location="${build.docbook.dir}/${project.name}" />
+				 <property name="disable.xsltproc" value="true"/> 
 	        </ant>
 	    	<!-- HACK: remove the copy from ${ant.docbook.styler.dir} directory -->
 	    	<delete dir="${ant.docbook.styler.dir}/figures" failonerror="false" quiet="true" /> 
