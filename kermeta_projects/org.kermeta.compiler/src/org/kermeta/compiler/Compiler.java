@@ -1,4 +1,4 @@
-/* $Id: Compiler.java,v 1.26 2009-02-13 16:16:04 cfaucher Exp $
+/* $Id: Compiler.java,v 1.27 2009-02-20 13:28:20 dvojtise Exp $
  * Project   : fr.irisa.triskell.kermeta.compiler
  * File      : Compiler.java
  * License   : EPL
@@ -309,6 +309,10 @@ public class Compiler extends org.kermeta.compiler.Generator {
 		// The edit, editor and tests plugins are not generated
 		genModel.setEditDirectory("");
 		genModel.setEditorDirectory("");
+		
+		genModel.setColorProviders(false);
+		genModel.setCreationIcons(false);
+		
 		genModel.setTestsDirectory("");
 		
 		// Icons will be not generated, because the editor is not generated too
@@ -353,8 +357,6 @@ public class Compiler extends org.kermeta.compiler.Generator {
 		//
 		//genModel.setSuppressNotification(true);
 		
-		genModel.setColorProviders(false);
-		genModel.setCreationIcons(false);
 		
 		if( compilerProperties.containsKey(CompilerProperties.COPYRIGHT_HEADER) ) {
 			genModel.setCopyrightText(compilerProperties.getProperty(CompilerProperties.COPYRIGHT_HEADER));
