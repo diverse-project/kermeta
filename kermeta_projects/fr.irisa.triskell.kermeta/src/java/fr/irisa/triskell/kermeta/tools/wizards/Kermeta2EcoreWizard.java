@@ -1,4 +1,4 @@
-/* $Id: Kermeta2EcoreWizard.java,v 1.12 2007-08-29 11:50:29 cfaucher Exp $
+/* $Id: Kermeta2EcoreWizard.java,v 1.13 2009-02-20 12:56:06 dvojtise Exp $
  * Project    : fr.irisa.triskell.kermeta
  * File       : Kermeta2EcoreWizard.java
  * License    : EPL
@@ -14,8 +14,6 @@
 package fr.irisa.triskell.kermeta.tools.wizards;
 
 import org.eclipse.core.resources.IFile;
-import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
@@ -41,7 +39,7 @@ public class Kermeta2EcoreWizard extends UnitExporterWizard{
 	public static final String DEFAULT_GEN_DIR = "build/ecore"; // "platform:/resource/project_name/" + DEFAULT_GEN_DIR
 	
 	
-	protected Button independentButton;
+	protected Button dependentOfFrameworkButton;
 	
 	protected Button structuralButton;
 	
@@ -101,23 +99,17 @@ public class Kermeta2EcoreWizard extends UnitExporterWizard{
 		group.setLayout(layout);
 		group.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 		group.setFont( outputPage.linkedResourceParent.getFont() );
-		group.setText("Independency from the Kermeta framework");
+		group.setText("Kermeta specificities in the generated ecore");
 				
 		Label label = new Label(group, SWT.NULL);
-		label.setText("yes / no : ");
-		independentButton = new Button(group, SWT.CHECK);
-		independentButton.setSelection(false);
+		label.setText("Dependency to the Kermeta framework (framework.ecore) for primitive types: ");
+		dependentOfFrameworkButton = new Button(group, SWT.CHECK);
+		dependentOfFrameworkButton.setSelection(false);
 		
-		group = new Group(outputPage.linkedResourceParent, SWT.NONE);
-		layout = new GridLayout(2, false);
-		group.setLayout(layout);
-		group.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
-		group.setFont( outputPage.linkedResourceParent.getFont() );
-		group.setText("Generate without the behavioral part (operations)");
 		label = new Label(group, SWT.NULL);
-		label.setText("yes / no : ");
+		label.setText("Generate with the behavioral part (operations) ");
 		structuralButton = new Button(group, SWT.CHECK);
-		structuralButton.setSelection(false);
+		structuralButton.setSelection(true);
 	}
 	
 	/**
@@ -152,8 +144,8 @@ public class Kermeta2EcoreWizard extends UnitExporterWizard{
 	    
     	ExporterOptions exporterOptions = ExporterOptions.getDefault();
     	
-    	exporterOptions.isIndependent = independentButton.getSelection();
-    	exporterOptions.isOnlyStructural = structuralButton.getSelection();
+    	exporterOptions.isIndependent = !dependentOfFrameworkButton.getSelection();
+    	exporterOptions.isOnlyStructural = !structuralButton.getSelection();
     	
     	// Fixed bug #3813 null to fileURI
 	    exporter.export(builder, targetDir, fileURI, exporterOptions);
