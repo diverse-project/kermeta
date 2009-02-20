@@ -1,4 +1,4 @@
-/* $Id: JunitTestSuite.java,v 1.18 2008-11-25 10:17:11 dvojtise Exp $
+/* $Id: JunitTestSuite.java,v 1.19 2009-02-20 08:19:33 dvojtise Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : JunitTestSuite.java
  * License    : EPL
@@ -163,6 +163,18 @@ public void testvalid_028_testValidCastOnCollection() throws Exception {
 testvalidFile("test/io/typechecher_tests/valid","028_testValidCastOnCollection.kmt" );
 }
 
+public void testvalid_029_testGenericTypeAsParameter1() throws Exception {
+testvalidFile("test/io/typechecher_tests/valid","029_testGenericTypeAsParameter1.kmt" );
+}
+
+public void testvalid_029_testGenericTypeAsParameter2() throws Exception {
+testvalidFile("test/io/typechecher_tests/valid","029_testGenericTypeAsParameter2.kmt" );
+}
+
+public void testvalid_030_requireEcoreUsingGenerics() throws Exception {
+testvalidFile("test/io/typechecher_tests/valid","030_requireEcoreUsingGenerics.kmt" );
+}
+
 public void testvalid_AliasAndFunctions() throws Exception {
 testvalidFile("test/io/typechecher_tests/valid","AliasAndFunctions.kmt" );
 }
@@ -281,6 +293,10 @@ testinvalidFile("test/io/typechecher_tests/invalid","026_assignmenterror.kmt" );
 
 public void testinvalid_028_testInvalidCastOnCollection() throws Exception {
 testinvalidFile("test/io/typechecher_tests/invalid","028_testInvalidCastOnCollection.kmt" );
+}
+
+public void testinvalid_029_namingPropertyOperationConflict() throws Exception {
+testinvalidFile("test/io/typechecher_tests/invalid","029_namingPropertyOperationConflict.kmt" );
 }
 
 public void testinvalid_1_ClassSubTyping_1() throws Exception {

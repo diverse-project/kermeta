@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="simpleMM"
+    nsURI="simpleMM" nsPrefix="simpleMM">
+  <eClassifiers xsi:type="ecore:EClass" name="File" eSuperTypes="#//Visitable"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Visitable" abstract="true" interface="true">
+    <eOperations name="accept">
+      <eGenericType eTypeParameter="#//Visitable/accept/R"/>
+      <eTypeParameters name="C"/>
+      <eTypeParameters name="R"/>
+      <eParameters name="visitor">
+        <eGenericType eClassifier="#//Visitor">
+          <eTypeArguments eTypeParameter="#//Visitable/accept/C"/>
+          <eTypeArguments eTypeParameter="#//Visitable/accept/R"/>
+        </eGenericType>
+      </eParameters>
+      <eParameters name="context">
+        <eGenericType eTypeParameter="#//Visitable/accept/C"/>
+      </eParameters>
+    </eOperations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Visitor" abstract="true" interface="true">
+    <eTypeParameters name="ContextType"/>
+    <eTypeParameters name="ResultType"/>
+    <eOperations name="visitFile">
+      <eGenericType eTypeParameter="#//Visitor/ResultType"/>
+      <eParameters name="node" eType="#//File"/>
+      <eParameters name="context">
+        <eGenericType eTypeParameter="#//Visitor/ContextType"/>
+      </eParameters>
+    </eOperations>
+  </eClassifiers>
+</ecore:EPackage>
