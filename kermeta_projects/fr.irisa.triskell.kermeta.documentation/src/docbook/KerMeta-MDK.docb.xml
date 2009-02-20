@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.4//EN"
 "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
-<!-- $Id: KerMeta-MDK.docb.xml,v 1.4 2009-02-20 15:57:12 dvojtise Exp $ -->
+<!-- $Id: KerMeta-MDK.docb.xml,v 1.5 2009-02-20 16:07:09 dvojtise Exp $ -->
 <book lang="en-US">
   <bookinfo>
     <title>Kermeta MDK for Kermeta</title>
 
     <pubdate>Build date: @BUILD.DATE@</pubdate>
 
-    <pubdate>$Date: 2009-02-20 15:57:12 $</pubdate>
+    <pubdate>$Date: 2009-02-20 16:07:09 $</pubdate>
 
     <author>
       <firstname>Didier</firstname>
@@ -175,7 +175,7 @@
       	<para>
       		A first but wrong approach would be to use the reflectivity : 
       	</para>
-      	<programlisting>
+      	<programlisting language="kermeta">
 var anOperation : kermeta::language::structure::Operation init kermeta::language::structure::Operation.new       
 anOperation.name := "Op1"       
 var aClass : kermeta::language::structure::Class init kermeta::language::structure::Class.new
@@ -199,7 +199,7 @@ anOperation.containedType.add(aClass)
       	The MDK will help us in this task by providing a function <literal>getTypeDefinitionByQualifiedName</literal> to ModelingUnit.
       	The code will then look like :       	 
       	</para>
-      	<programlisting>
+      	<programlisting language="kermeta">
 ...
 // get the helper
 require "platform:/plugin/org.kermeta.language.mdk/src/kmt/language/helpers/structure/ModelingUnitHelper.kmt"
