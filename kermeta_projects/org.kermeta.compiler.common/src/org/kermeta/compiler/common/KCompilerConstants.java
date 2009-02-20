@@ -1,4 +1,4 @@
-/*$Id: KCompilerConstants.java,v 1.4 2009-02-13 16:16:08 cfaucher Exp $
+/*$Id: KCompilerConstants.java,v 1.5 2009-02-20 13:55:14 dvojtise Exp $
 * Project : org.kermeta.compiler.trek.ui
 * File : 	KCompilerConstants.java
 * License : EPL
@@ -64,7 +64,7 @@ public final class KCompilerConstants {
 	
 	public static final int PROGRESS_NOK = 0;
 	
-	/** The name of the util directory */
+	/** The name of the util directory in the generated code */
     public static final String UTIL_DIRECTORY = "util";
 	
 	
