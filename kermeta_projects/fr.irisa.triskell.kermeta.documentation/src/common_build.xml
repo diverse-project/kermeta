@@ -106,8 +106,8 @@
              <property name="distribution.dir" location="${build.dir}/html.single/${project.name}" />
              <property name="build.dir" location="${build.docbook.dir}/${project.name}" />
 			 <property name="disable.xsltproc" value="true"/> 
-			 <property name="disable.saxon" value="true"/> 
-			<property name="xslthl.config" value="file:///c:/docbook-xsl/highlighting/xslthl-config.xml"/>
+			 <!-- <property name="disable.saxon" value="true"/> --> 
+			 <!-- <property name="xslthl.config" value="file:///c:/docbook-xsl/highlighting/xslthl-config.xml"/> -->
         </ant>
 
         <available property="tmp:single.ok" file="${build.dir}/html.single/${project.name}/index.html" />
@@ -127,6 +127,7 @@
              <property name="distribution.dir" location="${build.dir}/html.chunked/${project.name}" />
              <property name="build.dir" location="${build.docbook.dir}/${project.name}" />
 			 <property name="disable.xsltproc" value="true"/> 
+			 <!--<property name="disable.saxon" value="true"/>--> 
         </ant>
 
         <available property="tmp:chunked.ok" file="${build.dir}/html.chunked/${project.name}/index.html" />
@@ -145,6 +146,7 @@
              <property name="distribution.dir" location="${build.dir}/html.help/${project.name}" />
              <property name="build.dir" location="${build.docbook.dir}/${project.name}" />
 			 <property name="disable.xsltproc" value="true"/> 
+			 <!--<property name="disable.saxon" value="true"/>--> 
         </ant>
 
         <available property="tmp:help.ok" file="${build.dir}/html.help/${project.name}/index.html" />
@@ -165,20 +167,22 @@
 			</copy>
 		<ant antfile="${ant.docbook.styler}" dir="${ant.docbook.styler.dir}" inheritall="false"
               target="eclipse.help">
-             <property name="docbook.xml.dir" location="${build.docbook.dir}/${project.name}" />
+            <property name="docbook.xml.dir" location="${build.docbook.dir}/${project.name}" />
             <property name="docbook.resources.dir" location="${build.dir}/figures" />
             <property name="distribution.dir" location="${build.dir}/eclipse.help/${project.name}" />
             <property name="build.dir" location="${build.docbook.dir}/${project.name}" />
             <property name="docbook.eclipse.plugin.name" value="KerMeta documentation" />
             <property name="docbook.eclipse.plugin.id" value="fr.irisa.triskell.kermeta.documentation" />
             <property name="docbook.eclipse.plugin.provider" value="IRISA/INRIA" />
-			<property name="eclipse.html.base.dir" value="build/eclipse.help/${project.name}/"/>
-			 <property name="disable.xsltproc" value="true"/> 
+			<property name="eclipse.html.base.dir" location="${build.dir}/eclipse.help/${project.name}/build/"/>
+			<!--<property name="base.dir" value="${build.dir}/eclipse.help/${project.name}"/> -->
+			<property name="disable.xsltproc" value="true"/> 
         </ant>
 
-	  	<move todir="${build.dir}">
+		<echo>${build.dir}/eclipse.help/${project.name}/build</echo>
+	  	<move todir="${build.dir}/eclipse.help/${project.name}">
 	  	    <fileset dir="${build.dir}/eclipse.help/${project.name}/build"/>
-	  	</move>
+	  	</move> 
 		<condition property="tmp:Eclipsehelp.ok" value="true">
 	        <and>
 	        	<available file="${build.dir}/eclipse.help/${project.name}/index.html" />	        	
