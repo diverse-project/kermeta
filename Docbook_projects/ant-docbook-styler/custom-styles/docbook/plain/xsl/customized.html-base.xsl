@@ -2,8 +2,11 @@
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
                 xmlns:fo="http://www.w3.org/1999/XSL/Format"
                 version='1.0'
-                xmlns:xslthl="http://xslthl.sf.net"
-                exclude-result-prefixes="xslthl"> 
+                xmlns:s6hl="java:net.sf.xslthl.ConnectorSaxon6"
+    			xmlns:xslthl="http://xslthl.sf.net"
+    			extension-element-prefixes="s6hl xslthl">
+               <!--  xmlns:xslthl="http://xslthl.sf.net"
+                exclude-result-prefixes="xslthl"> --> 
 
 <!-- common base for all html based presentations -->
            
