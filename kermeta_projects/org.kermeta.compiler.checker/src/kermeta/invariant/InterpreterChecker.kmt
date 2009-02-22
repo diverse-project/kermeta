@@ -1,0 +1,22 @@
+/* $Id: InterpreterChecker.kmt,v 1.1 2009-02-22 16:28:43 cfaucher Exp $ 
+ * Creation : February 18, 2009
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            Cyril Faucher <cfaucher@irisa.fr>
+ */
+
+
+package kermeta::interpreter;
+
+require kermeta
+
+aspect class DynamicExpression {
+
+	/**
+	 * The DynamicExpressions are not supported
+	 */
+	inv notSupported is do
+		false
+	end
+}

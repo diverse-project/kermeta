@@ -1,0 +1,95 @@
+/* $Id: CheckInvariantHelper.kmt,v 1.1 2009-02-22 16:28:43 cfaucher Exp $ 
+ * Creation : February 18, 2009
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            Cyril Faucher <cfaucher@irisa.fr>
+ */
+
+
+package kermeta::language::structure;
+
+require kermeta
+require "platform:/resource/org.kermeta.compiler.kmt/src/kermeta/helper/kermeta/ObjectHelper.kmt"
+
+
+aspect class Object {
+
+	operation checkOperation() : Void is do
+		self.eachOwnedElement{ o |
+			if o.isInstanceOf(Operation) then
+				stdio.writeln(o.asType(Operation).qualifiedName)
+				o.checkAllNewInvariants()
+			else
+				o.checkOperation()
+			end
+		}
+	end
+	
+	operation checkAllNewInvariants() : Void from Object is do
+		
+		if(self!=void) then
+			// Call the invariant verification
+			self.checkNewInvariants()
+			// Invariant checking on each value of self properties			
+			var cd : ClassDefinition
+			cd ?= self.getMetaClass.typeDefinition
+			cd.allAttribute.each { prop |
+				if ( prop.isComposite and not prop.isDerived) then
+					if not self.get(prop).isVoid() then
+						if self.get(prop).getMetaClass.typeDefinition.asType(ClassDefinition).allSuperTypes.exists{ t |
+							if t.isInstanceOf(ParameterizedType) then
+								t.asType(ParameterizedType).typeDefinition.qualifiedName=="kermeta::standard::Collection"
+							else
+								false
+							end } then
+						
+							var subObjInstances : kermeta::standard::Collection<Object>
+							subObjInstances ?= self.get(prop)
+							subObjInstances.each { aSubObjInstances | aSubObjInstances.checkAllNewInvariants() }
+						else
+							self.get(prop).checkAllNewInvariants()
+						end
+					end
+				end
+			}
+		end
+	end
+	
+	operation checkNewInvariants() : Void from Object is do
+		@compiledJavaExtern "org.kermeta.compil.runtime.helper.language.ObjectUtil.checkInvariants(this)"
+		extern fr::irisa::triskell::kermeta::runtime::language::Object.checkInvariants(self)
+	end
+	
+	operation traverseAllObjectsByContainment(func : <Object -> Object>) : Void from Object is do
+		
+		stdio.writeln(self.toString)
+		
+		if(self!=void) then
+			// Call the invariant verification
+			func(self)
+			// Invariant checking on each value of self properties			
+			var cd : ClassDefinition
+			cd ?= self.getMetaClass.typeDefinition
+			cd.allAttribute.each { prop |
+				if ( prop.isComposite and not prop.isDerived) then
+					if not self.get(prop).isVoid() then
+						if self.get(prop).getMetaClass.typeDefinition.asType(ClassDefinition).allSuperTypes.exists{ t |
+							if t.isInstanceOf(ParameterizedType) then
+								t.asType(ParameterizedType).typeDefinition.qualifiedName=="kermeta::standard::Collection"
+							else
+								false
+							end } then
+						
+							var subObjInstances : kermeta::standard::Collection<Object>
+							subObjInstances ?= self.get(prop)
+							subObjInstances.each { aSubObjInstances | aSubObjInstances.traverseAllObjectsByContainment(func) }
+						else
+							self.get(prop).traverseAllObjectsByContainment(func)
+						end
+					end
+				end
+			}
+		end
+	end
+}

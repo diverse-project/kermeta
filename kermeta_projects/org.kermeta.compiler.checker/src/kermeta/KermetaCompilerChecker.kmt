@@ -1,0 +1,54 @@
+/* $Id: KermetaCompilerChecker.kmt,v 1.1 2009-02-22 16:28:43 cfaucher Exp $ 
+ * Creation : February 18, 2009
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            Cyril Faucher <cfaucher@irisa.fr>
+ */
+@mainClass "kermeta::compiler::checker::Main"
+@mainOperation "main_inner"
+
+
+package kermeta::compiler::checker;
+
+require kermeta
+require "CheckInvariantHelper.kmt"
+require "invariant/StructureChecker.kmt"
+require "invariant/BehaviorChecker.kmt"
+require "platform:/resource/org.kermeta.compiler.kmt/src/kermeta/common/ContainmentTraversable.kmt"
+
+using kermeta::standard
+using kermeta::persistence
+using kermeta::language::structure
+
+class Main
+{
+	operation main_inner() : Void is do
+		var modelInput : String
+		modelInput := "platform:/resource/org.kermeta.compiler.kmt/src/kermeta/StructureCompiler.km"
+		checkReadyForCompiling(modelInput)
+	end
+	
+	/**
+	 * Check if Ready For Compiling
+	 */
+	operation checkReadyForCompiling(modelInput : String) : Void is do
+		
+		stdio.writeln("Starting up of the Km checking before compiling...")
+		
+		// Check the whole Km (ModelType included)
+		self.getModelingUnit(modelInput).checkAllNewInvariants()
+		
+		// Check only the operation body
+		//self.getModelingUnit(modelInput).checkOperation()
+		
+		stdio.writeln("Ready for compiling !")
+	end
+	
+	operation getModelingUnit(modelInput : String) : ModelingUnit is do
+		var inputRepository : EMFRepository init EMFRepository.new
+		var modelResource : Resource init inputRepository.createResource(modelInput, "http://www.kermeta.org/kermeta/1_2_0//kermeta")		
+	    modelResource.load()
+	    result := modelResource.instances.one.asType(ModelingUnit)
+	end
+}

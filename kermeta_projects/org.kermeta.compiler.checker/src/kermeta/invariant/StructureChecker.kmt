@@ -1,0 +1,38 @@
+/* $Id: StructureChecker.kmt,v 1.1 2009-02-22 16:28:43 cfaucher Exp $ 
+ * Creation : February 18, 2009
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            Cyril Faucher <cfaucher@irisa.fr>
+ */
+
+
+package kermeta::language::structure;
+
+require kermeta
+require "platform:/resource/org.kermeta.compiler.kmt/src/kermeta/helper/kermeta/ObjectHelper.kmt"
+
+aspect class ProductType {
+	/**
+	 * A function type with more 1 parameter is not supported
+	 */
+	inv multipleParameters_inLambdaExpression is do
+	
+		if ( not self.getContainerAsType(FunctionType).isVoid() ) and ( not self.getContainerAsType(Parameter).isVoid() ) then
+			stdio.writeln(self.getContainerAsType(Operation).asType(Operation).qualifiedName + " - " + self.getContainerAsType(Parameter).asType(Parameter).name + " - " + self.type.size().toString())
+			self.type.size() <= 1
+		else
+			true
+		end
+		
+	end
+}
+
+aspect class ModelType {
+	/**
+	 * The ModelType is not supported
+	 */
+	inv notSupported is do
+		false
+	end
+}

@@ -1,0 +1,31 @@
+/* $Id: BehaviorChecker.kmt,v 1.1 2009-02-22 16:28:43 cfaucher Exp $ 
+ * Creation : February 18, 2009
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            Cyril Faucher <cfaucher@irisa.fr>
+ */
+
+
+package kermeta::language::behavior;
+
+require kermeta
+require "platform:/resource/org.kermeta.compiler.kmt/src/kermeta/helper/kermeta/ObjectHelper.kmt"
+
+using kermeta::language::structure
+
+aspect class CallSuperOperation {
+
+	/**
+	 * A function type does not call a Super Operation
+	 */
+	inv callSuperOperation_inFunctionType is do
+	
+		if self.getContainerAsType(Operation).asType(Operation).isFunctionType() then
+			false
+		else
+			true
+		end
+		
+	end
+}
