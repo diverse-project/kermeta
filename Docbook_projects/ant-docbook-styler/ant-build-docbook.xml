@@ -265,13 +265,14 @@
   </target>
     
   <target name="docbook.consolidate"
-          depends="prepare, copyResources-build, copyResources-distribution, create.styler.uri">
+          depends="prepare, copyResources-build, copyResources-distribution, create.styler.uri, advice-for-resolver-install">
 
     <copy todir="${build.dir}" overwrite="true" filtering="false">
         <fileset dir="${docbook.xml.dir}" />
     </copy>
 
-    <property name="catalog.location" location="${ant.docbook.styler.dir}/preprocess/catalog.xml" />
+    <!--<property name="catalog.location" location="${ant.docbook.styler.dir}/preprocess/catalog.xml" />-->
+  	<property name="catalog.location" location="${ant.docbook.styler.dir}/docbook/dtd/catalog.xml" />
     
     <!-- (MM 20040314) make the Java XSLT use the same catalog as the XSLTProc -->
     <!-- works only with ant 1.6 and newer, but avoids problems when upgrading 
@@ -796,7 +797,13 @@ processor by defining 'disable.xsltproc' property.
 
     </echo>
   </target>
-  
+	
+	<available classname="org.apache.xml.resolver.Resolver" property="ok:resolver.available" />
+		
+	<target name="advice-for-resolver-install" unless="ok:resolver.available">
+		<echo>In order to run xslt on docbook offline you must add the resolver into ant classpath</echo>
+		<echo>Resolver is here : ${ant.docbook.styler.dir}/ant-extensions/resolver.jar</echo>		    
+	</target>
   
   <target name="create.styler.uri">
     <pathconvert dirsep="/" property="tmp:ant.docbook.styler.abs">
