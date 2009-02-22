@@ -52,7 +52,10 @@
   </path>
 
 	
-  <taskdef name="setsystemproperty" classname="fr.inria.ant.javasystem.tasks.SetSystemPropertyTask"/>
+	<!-- General Task definitions -->
+	<taskdef name="setsystemproperty" classname="fr.inria.ant.javasystem.tasks.SetSystemPropertyTask">
+		<classpath refid="ant-extensions"/>
+	</taskdef>
 
   <!-- ##################################### -->
   <!-- ### {{{ CHECK REQUIRED PROPS      ### -->
@@ -504,25 +507,27 @@ set up XEP's installation directory in the module's configuration property file.
         <filterset refid="filterset.fileuris" />
     </copy>
 
-	<mkdir dir="${distribution.dir}/${eclipse.html.base.dir}" />
+	<mkdir dir="${eclipse.html.base.dir}" />
     <setsystemproperty key="xslthl.config.verbose" value="true"/>
     <setsystemproperty key="xslthl.config" value="file:///${ant.docbook.styler.dir}/xslthl/highlighters/xslthl-config.xml"/>
-    <xslt
+    <echo>eclipse.html.base.dir = ${eclipse.html.base.dir}</echo>
+  	 <echo>base.dir = ${base.dir}</echo>
+  	<xslt
         in      = "${temp:docbook.ready.file}"
         style   = "${build.dir}/customized.eclipse-help.xsl.tmp"
-        out     = "${distribution.dir}/${manual.name}.html"
+        out     = "${eclipse.html.base.dir}/${manual.name}.html"
         processor = "${xslt.processor}"
         >
         <classpath refid="ant-extensions" />
         <param name="eclipse.plugin.name"  expression="${docbook.eclipse.plugin.name}" />
         <param name="eclipse.plugin.id"  expression="${docbook.eclipse.plugin.id}" />
         <param name="eclipse.plugin.provider"  expression="${docbook.eclipse.plugin.provider}" />
-		<param name="base.dir" expression="${eclipse.html.base.dir}"/>
+		<param name="base.dir" expression="${eclipse.html.base.dir}/"/>
     </xslt>
-  	<move todir="${distribution.dir}/${eclipse.html.base.dir}/css">
+  	<move todir="${eclipse.html.base.dir}/css">
   	    <fileset dir="${build.dir}/css"/>
   	</move>
-  	<move todir="${distribution.dir}/${eclipse.html.base.dir}/gfx">
+  	<move todir="${eclipse.html.base.dir}/gfx">
   	    <fileset dir="${build.dir}/gfx"/>
   	</move>
     <delete file="${build.dir}/customized.eclipse-help.xsl.tmp" />
