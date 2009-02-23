@@ -1,4 +1,4 @@
-/* $Id: KM2HTMLPrettyPrinter.java,v 1.21 2008-03-07 13:00:43 dvojtise Exp $
+/* $Id: KM2HTMLPrettyPrinter.java,v 1.22 2009-02-23 08:10:37 dvojtise Exp $
  * Project    : fr.irisa.triskell.kermeta.documentation
  * File       : KM2HTMLPrettyPrinter.java
  * License    : GPL
@@ -37,7 +37,7 @@ import java.util.Locale;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.URIConverter;
-import org.eclipse.emf.ecore.resource.impl.URIConverterImpl;
+import org.eclipse.emf.ecore.resource.impl.ExtensibleURIConverterImpl;
 import org.kermeta.io.KermetaUnit;
 import org.kermeta.io.loader.plugin.LoaderPlugin;
 import org.kermeta.io.plugin.IOPlugin;
@@ -208,7 +208,7 @@ public class KM2HTMLPrettyPrinter extends KM2KMTPrettyPrinter {
 		 try 
 		 {
 			 URI _uri = URI.createURI(str_uri);
-			 URIConverter converter = new URIConverterImpl();
+			 URIConverter converter = new ExtensibleURIConverterImpl();
 			 
 			 BufferedReader r = new BufferedReader(
 					 new InputStreamReader(converter.createInputStream(_uri)));
