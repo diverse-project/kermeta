@@ -1,4 +1,4 @@
-/* $Id: TagHelper.kmt,v 1.18 2009-02-18 17:29:56 cfaucher Exp $
+/* $Id: TagHelper.kmt,v 1.19 2009-02-23 14:04:06 cfaucher Exp $
  * Creation date: April 07, 2008
  * License: EPL
  * Copyright: IRISA / INRIA / Universite Rennes 1
@@ -47,6 +47,8 @@ aspect class Object {
 	 * Get the instanceClassName
 	 * 
 	 * This is used to convert ValueTypes in EDataType and so fill the instanceClassName attribute
+	 *
+	 * The value of the tag must be a Java Class Qualified Name, eg: java.lang.String
 	 */
 	operation getEMFInstanceClassName() : String is do
 		result := getUniqueTagValue("EMF_instanceClassName")
@@ -56,6 +58,8 @@ aspect class Object {
 	 * Get the EDataType_instanceClassName
 	 * 
 	 * This used to declare if the element is an EDataType in the Ecore model side
+	 *
+	 * The value of the tag must be a Java Class Qualified Name, eg: java.lang.String
 	 */
 	operation getEMFEDataTypeInstanceClassName() : String is do
 		result := getUniqueTagValue("ecore.EDataType_instanceClassName")
@@ -65,6 +69,8 @@ aspect class Object {
 	 * Get the EDataType_eTypeParameters
 	 * 
 	 * This used to store the ETypeParameters in the Ecore model side
+	 * 
+	 * The value of the tag must be ETypeParameters separated by " , "
 	 */
 	operation getEMFEDataTypeETypeParameters() : String is do
 		result := getUniqueTagValue("ecore.EDataType_eTypeParameters")
@@ -94,6 +100,9 @@ aspect class Object {
 	 * Get the compiledJavaExtern call for replacing the current one
 	 * 
 	 * Represents the static call in compiled mode
+	 *
+	 * The value of the tag must be like a Java Static Call, eg: org.kermeta.compil.runtime.helper.basetypes.CollectionUtil.add(this, element)
+	 * without the ";" at the end, ";" is added automatically
 	 */
 	operation getCompiledJavaExtern() : String is do
 		result := getUniqueTagValue("compiledJavaExtern")
@@ -103,6 +112,9 @@ aspect class Object {
 	 * Get the Wrapprings of ValueType's ReturnType for tackle the  eplacing the current one
 	 * 
 	 * For ValueType Wrapper methods, if needed that is able to precise the return type
+	 *
+	 * Value is like this: java.lang.String=kermeta.language.structure.Object java.lang.Boolean=kermeta.language.structure.Object
+	 * A binding must be defined for each ValueType
 	 */
 	operation getWrapperValueTypeReturnType() : String is do
 		result := getUniqueTagValue("WrapperValueTypeReturnType")
@@ -113,6 +125,9 @@ aspect class Object {
 	 * 
 	 * For ValueType Wrapper methods, if needed that is able to precise the type of self expression
 	 * the self expression is added by default in the Wrapper method signature
+	 *
+	 * Value is like this: java.lang.String=kermeta.language.structure.Object java.lang.Boolean=kermeta.language.structure.Object
+	 * A binding must be defined for each ValueType
 	 */
 	operation getWrapperValueTypeSelfExpression() : String is do
 		result := getUniqueTagValue("WrapperValueTypeSelfExpression")
@@ -122,6 +137,8 @@ aspect class Object {
 	 * Get the the final Java Class Qualified Name
 	 *
 	 * Used for the POJO creation
+	 * 
+	 * Value is like this: a Java Class Qualified Name
 	 */
 	operation getFinalJavaClassQN() : String is do
 		result := getUniqueTagValue("finalJavaClassQN")
@@ -129,6 +146,8 @@ aspect class Object {
 	
 	/**
 	 * Get the EDataType_isSerializable
+	 *
+	 * Value is true or false
 	 */
 	operation getEMFEDataTypeIsSerializable() : Boolean is do
 		result := interpretBooleanTag("ecore.EDataType_isSerializable")
@@ -136,6 +155,8 @@ aspect class Object {
 	
 	/**
 	 * Get the isTransient
+	 *
+	 * Value is true or false
 	 */
 	operation getEMFIsTransient() : Boolean is do
 		result := interpretBooleanTag("ecore.isTransient")
