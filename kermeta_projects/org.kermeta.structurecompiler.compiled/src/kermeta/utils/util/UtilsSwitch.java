@@ -4,7 +4,7 @@
  * 
  * Generating with Kermeta <http://www.kermeta.org>
  *
- * $Id: UtilsSwitch.java,v 1.11 2009-02-10 17:51:52 cfaucher Exp $
+ * $Id: UtilsSwitch.java,v 1.12 2009-02-23 15:26:47 cfaucher Exp $
  */
 package kermeta.utils.util;
 
@@ -93,6 +93,15 @@ public class UtilsSwitch<T> {
 	 */
 	protected T doSwitch(int classifierID, EObject theEObject) {
 		switch (classifierID) {
+		case UtilsPackage.STRING_BUFFER: {
+			kermeta.utils.StringBuffer stringBuffer = (kermeta.utils.StringBuffer) theEObject;
+			T result = caseStringBuffer(stringBuffer);
+			if (result == null)
+				result = caseObject(stringBuffer);
+			if (result == null)
+				result = defaultCase(theEObject);
+			return result;
+		}
 		case UtilsPackage.HASHTABLE: {
 			Hashtable<?, ?> hashtable = (Hashtable<?, ?>) theEObject;
 			T result = caseHashtable(hashtable);
@@ -119,18 +128,24 @@ public class UtilsSwitch<T> {
 				result = defaultCase(theEObject);
 			return result;
 		}
-		case UtilsPackage.STRING_BUFFER: {
-			kermeta.utils.StringBuffer stringBuffer = (kermeta.utils.StringBuffer) theEObject;
-			T result = caseStringBuffer(stringBuffer);
-			if (result == null)
-				result = caseObject(stringBuffer);
-			if (result == null)
-				result = defaultCase(theEObject);
-			return result;
-		}
 		default:
 			return defaultCase(theEObject);
 		}
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>String Buffer</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>String Buffer</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseStringBuffer(kermeta.utils.StringBuffer object) {
+		return null;
 	}
 
 	/**
@@ -160,21 +175,6 @@ public class UtilsSwitch<T> {
 	 * @generated
 	 */
 	public <G> T caseStack(Stack<G> object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>String Buffer</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>String Buffer</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseStringBuffer(kermeta.utils.StringBuffer object) {
 		return null;
 	}
 

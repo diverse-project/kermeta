@@ -4,7 +4,7 @@
  * 
  * Generating with Kermeta <http://www.kermeta.org>
  *
- * $Id: InvalidTestCaseNameException.java,v 1.11 2009-02-10 17:51:54 cfaucher Exp $
+ * $Id: InvalidTestCaseNameException.java,v 1.12 2009-02-23 15:26:50 cfaucher Exp $
  */
 package kermeta.kunit;
 

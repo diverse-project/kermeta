@@ -4,7 +4,7 @@
  * 
  * Generating with Kermeta <http://www.kermeta.org>
  *
- * $Id: IteratorImpl.java,v 1.11 2009-02-10 17:51:51 cfaucher Exp $
+ * $Id: IteratorImpl.java,v 1.12 2009-02-23 15:26:47 cfaucher Exp $
  */
 package kermeta.standard.impl;
 
@@ -170,11 +170,11 @@ public class IteratorImpl<G> extends ObjectImpl implements Iterator<G> {
 
 		G result = null;
 
-		java.lang.Boolean idIfCond_1041 = false;
-		idIfCond_1041 = kermeta.standard.helper.BooleanWrapper.not(this
+		java.lang.Boolean idIfCond_941 = false;
+		idIfCond_941 = kermeta.standard.helper.BooleanWrapper.not(this
 				.hasNext());
 
-		if (idIfCond_1041) {
+		if (idIfCond_941) {
 
 			if (true)
 				throw new org.kermeta.compil.runtime.helper.error.KRuntimeError(

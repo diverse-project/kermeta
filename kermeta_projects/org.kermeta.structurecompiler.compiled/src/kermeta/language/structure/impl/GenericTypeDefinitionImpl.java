@@ -4,7 +4,7 @@
  * 
  * Generating with Kermeta <http://www.kermeta.org>
  *
- * $Id: GenericTypeDefinitionImpl.java,v 1.11 2009-02-10 17:51:45 cfaucher Exp $
+ * $Id: GenericTypeDefinitionImpl.java,v 1.12 2009-02-23 15:26:40 cfaucher Exp $
  */
 package kermeta.language.structure.impl;
 
@@ -37,8 +37,8 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *
  * @generated
  */
-public class GenericTypeDefinitionImpl extends TypeDefinitionImpl implements
-		GenericTypeDefinition {
+public abstract class GenericTypeDefinitionImpl extends TypeDefinitionImpl
+		implements GenericTypeDefinition {
 	/**
 	 * The cached value of the '{@link #getTypeParameter() <em>Type Parameter</em>}' containment reference list.
 	 * <!-- begin-user-doc -->

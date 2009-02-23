@@ -4,7 +4,7 @@
  * 
  * Generating with Kermeta <http://www.kermeta.org>
  *
- * $Id: EMFResource.java,v 1.12 2009-02-10 17:51:57 cfaucher Exp $
+ * $Id: EMFResource.java,v 1.13 2009-02-23 15:26:53 cfaucher Exp $
  */
 package kermeta.persistence;
 
@@ -22,22 +22,22 @@ public interface EMFResource extends Resource {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @model annotation="kermeta documentation='/**\r\n\t * Overrides Set<Object>.remove(Object)\r\n\t * Remove the instance from the Resource\r\n\t \052/'"
-	 *        annotation="kermeta superOperation='kermeta::standard::Set'"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='\n\tjava.lang.Boolean idIfCond_1057 = false;\n\tidIfCond_1057 = this.contains(instance);\n\n\tif( idIfCond_1057 ) {\n\n\torg.kermeta.compil.runtime.helper.language.ObjectUtil.unSetContainingResource(instance);\n\n\tkermeta.standard.helper.SetSuper.super_remove(this, instance);\n}\n\n'"
+	 * @model annotation="kermeta documentation='/**\r\n\t * Overrides Resource.save()\r\n\t \052/'"
+	 *        annotation="kermeta superOperation='kermeta::persistence::Resource'"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='\n\tjava.lang.Boolean idIfCond_1008 = false;\n\tidIfCond_1008 = this.getIsReadOnly();\n\n\tif( idIfCond_1008 ) {\n\n\tkermeta.exceptions.ResourceSaveException e = ((kermeta.exceptions.ResourceSaveException) org.kermeta.compil.runtime.helper.language.ClassUtil.newObject(kermeta.exceptions.ExceptionsPackage.eINSTANCE.getResourceSaveException()));\n\n\te.setMessage(kermeta.standard.helper.StringWrapper.plus(kermeta.standard.helper.StringWrapper.plus(\"Cannot save a readonly resource. Probably this resource was indirectly loaded when loading another resource. \\n\", \"If you really intend to save this resource, you can set isReadOnly to false, but you must ensure to do so before any resource save.\\n\"), \"Note : setting isReadOnly to false on the metamodel may lead to unpredictable results\"));\n\n\t\nif (true)\n\tthrow new org.kermeta.compil.runtime.helper.error.KRuntimeError( e );\n\n}\n\n\n\torg.kermeta.compil.runtime.helper.persistence.Saver.save(this, getUri(), getMetaModelURI());\n'"
 	 * @generated
 	 */
-	void remove(kermeta.language.structure.Object instance);
+	void save();
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @model annotation="kermeta documentation='/**\r\n\t * Overrides Resource.save()\r\n\t \052/'"
-	 *        annotation="kermeta superOperation='kermeta::persistence::Resource'"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='\n\tjava.lang.Boolean idIfCond_1058 = false;\n\tidIfCond_1058 = this.getIsReadOnly();\n\n\tif( idIfCond_1058 ) {\n\n\tkermeta.exceptions.ResourceSaveException e = ((kermeta.exceptions.ResourceSaveException) org.kermeta.compil.runtime.helper.language.ClassUtil.newObject(kermeta.exceptions.ExceptionsPackage.eINSTANCE.getResourceSaveException()));\n\n\te.setMessage(kermeta.standard.helper.StringWrapper.plus(kermeta.standard.helper.StringWrapper.plus(\"Cannot save a readonly resource. Probably this resource was indirectly loaded when loading another resource. \\n\", \"If you really intend to save this resource, you can set isReadOnly to false, but you must ensure to do so before any resource save.\\n\"), \"Note : setting isReadOnly to false on the metamodel may lead to unpredictable results\"));\n\n\t\nif (true)\n\tthrow new org.kermeta.compil.runtime.helper.error.KRuntimeError( e );\n\n}\n\n\n\torg.kermeta.compil.runtime.helper.persistence.Saver.save(this, getUri(), getMetaModelURI());\n'"
+	 * @model annotation="kermeta documentation='/**\r\n\t * Overrides Set<Object>.remove(Object)\r\n\t * Remove the instance from the Resource\r\n\t \052/'"
+	 *        annotation="kermeta superOperation='kermeta::standard::Set'"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='\n\tjava.lang.Boolean idIfCond_1009 = false;\n\tidIfCond_1009 = this.contains(instance);\n\n\tif( idIfCond_1009 ) {\n\n\torg.kermeta.compil.runtime.helper.language.ObjectUtil.unSetContainingResource(instance);\n\n\tkermeta.standard.helper.SetSuper.super_remove(this, instance);\n}\n\n'"
 	 * @generated
 	 */
-	void save();
+	void remove(kermeta.language.structure.Object instance);
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -65,7 +65,7 @@ public interface EMFResource extends Resource {
 	 * <!-- end-user-doc -->
 	 * @model annotation="kermeta documentation='/**\r\n\t * Overrides Resource.load()\r\n\t * In case the metamodelURI was not previously set, metamodelURI is filled with\r\n\t * the nsuri of the root package of the metamodel used to load the Resource after\r\n\t * a successful load\r\n\t \052/'"
 	 *        annotation="kermeta superOperation='kermeta::persistence::Resource'"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='\n\tthis.clear();\n\n\torg.kermeta.compil.runtime.helper.persistence.Loader.load(this, getUri(), getMetaModelURI());\n\n\tjava.lang.Boolean idIfCond_1059 = false;\n\tidIfCond_1059 = kermeta.standard.helper.IntegerWrapper.equals(this.size(), 0);\n\n\tif( idIfCond_1059 ) {\n\n\torg.kermeta.compil.runtime.helper.io.StdIOUtil.getInstance().writeln(\"Resource load failed!\");\n\n\tkermeta.exceptions.ResourceLoadException e = ((kermeta.exceptions.ResourceLoadException) org.kermeta.compil.runtime.helper.language.ClassUtil.newObject(kermeta.exceptions.ExceptionsPackage.eINSTANCE.getResourceLoadException()));\n\n\te.setMessage(kermeta.standard.helper.StringWrapper.plus(\"Resource load failed, no object was created in this resource from \", this.getUri()));\n\n\t\nif (true)\n\tthrow new org.kermeta.compil.runtime.helper.error.KRuntimeError( e );\n\n}\n\n'"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='\n\tthis.clear();\n\n\torg.kermeta.compil.runtime.helper.persistence.Loader.load(this, getUri(), getMetaModelURI());\n\n\tjava.lang.Boolean idIfCond_1010 = false;\n\tidIfCond_1010 = kermeta.standard.helper.IntegerWrapper.equals(this.size(), 0);\n\n\tif( idIfCond_1010 ) {\n\n\torg.kermeta.compil.runtime.helper.io.StdIOUtil.getInstance().writeln(\"Resource load failed!\");\n\n\tkermeta.exceptions.ResourceLoadException e = ((kermeta.exceptions.ResourceLoadException) org.kermeta.compil.runtime.helper.language.ClassUtil.newObject(kermeta.exceptions.ExceptionsPackage.eINSTANCE.getResourceLoadException()));\n\n\te.setMessage(kermeta.standard.helper.StringWrapper.plus(\"Resource load failed, no object was created in this resource from \", this.getUri()));\n\n\t\nif (true)\n\tthrow new org.kermeta.compil.runtime.helper.error.KRuntimeError( e );\n\n}\n\n'"
 	 * @generated
 	 */
 	void load();
@@ -75,7 +75,7 @@ public interface EMFResource extends Resource {
 	 * <!-- end-user-doc -->
 	 * @model annotation="kermeta documentation='/**\r\n\t * Overrides Set<Object>.add(Object)\r\n\t * Add an instance to the Resource \r\n\t * Ensures that the instance is referenced by a one and only one Resource of the same Repository\r\n\t * Ensures that the instance does not appear more than once in the Resource\r\n\t \052/'"
 	 *        annotation="kermeta superOperation='kermeta::standard::Set'"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='\n\t//BIft:select\n\nkermeta.standard.Sequence<kermeta.persistence.Resource> result_ft238 = null;\n\n\tkermeta.persistence.Resource elem_ft238 = null;\n\n\tresult_ft238 = ((kermeta.standard.Sequence<kermeta.persistence.Resource>) org.kermeta.compil.runtime.helper.language.ClassUtil.newObject(kermeta.standard.StandardPackage.eINSTANCE.getSequence()));\n\n\t\n{\n\n\tkermeta.standard.Iterator<kermeta.persistence.Resource> it_ft238 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil.<kermeta.persistence.Resource>convertAsSet(this.getRepository().getResources()).iterator();\n\tjava.lang.Boolean idLoopCond_1061 = false;\n\twhile( !idLoopCond_1061 ) {\n\tidLoopCond_1061 = it_ft238.isOff();\n\tif ( idLoopCond_1061 ) {\n\t} else {\n\n\telem_ft238 = it_ft238.next();\n\n\tjava.lang.Boolean idIfCond_1062 = false;\n//BIle:selector\nkermeta.persistence.Resource r_lbdExp238 = elem_ft238;\n\n\tidIfCond_1062 = kermeta.standard.helper.BooleanWrapper.and(org.kermeta.compil.runtime.helper.language.ObjectUtil.isNotEqualSwitcher(r_lbdExp238, this), r_lbdExp238.contains(instance));\n//EIle:selector\n\n\n\tif( idIfCond_1062 ) {\n\n\tresult_ft238.add(elem_ft238);\n}\n\n}\n\t}\n}\n\n//EIft:select\n//BIft:each\n\n\t\n{\n\n\tkermeta.standard.Iterator<kermeta.persistence.Resource> it_ft237 = result_ft238.iterator();\n\tjava.lang.Boolean idLoopCond_1060 = false;\n\twhile( !idLoopCond_1060 ) {\n\tidLoopCond_1060 = it_ft237.isOff();\n\tif ( idLoopCond_1060 ) {\n\t} else {\n\n\t//BIle:func\nkermeta.persistence.Resource r_lbdExp237 = it_ft237.next();\n\n\torg.kermeta.compil.runtime.helper.io.StdIOUtil.getInstance().writeln(\"DVK ! another resource of the same repository was containing this element\");\n\n\tr_lbdExp237.remove(instance);\n//EIle:func\n\n}\n\t}\n}\n\n//EIft:each\n\n\n\torg.kermeta.compil.runtime.helper.language.ObjectUtil.setContainingResource(instance, this);\n\n\tkermeta.standard.helper.SetSuper.super_add(this, instance);\n'"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='\n\t//BIft:select\n\nkermeta.standard.Sequence<kermeta.persistence.Resource> result_ft221 = null;\n\n\tkermeta.persistence.Resource elem_ft221 = null;\n\n\tresult_ft221 = ((kermeta.standard.Sequence<kermeta.persistence.Resource>) org.kermeta.compil.runtime.helper.language.ClassUtil.newObject(kermeta.standard.StandardPackage.eINSTANCE.getSequence()));\n\n\t\n{\n\n\tkermeta.standard.Iterator<kermeta.persistence.Resource> it_ft221 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil.<kermeta.persistence.Resource>convertAsSet(this.getRepository().getResources()).iterator();\n\tjava.lang.Boolean idLoopCond_1012 = false;\n\twhile( !idLoopCond_1012 ) {\n\tidLoopCond_1012 = it_ft221.isOff();\n\tif ( idLoopCond_1012 ) {\n\t} else {\n\n\telem_ft221 = it_ft221.next();\n\n\tjava.lang.Boolean idIfCond_1013 = false;\n//BIle:selector\nkermeta.persistence.Resource r_lbdExp221 = elem_ft221;\n\n\tidIfCond_1013 = kermeta.standard.helper.BooleanWrapper.and(org.kermeta.compil.runtime.helper.language.ObjectUtil.isNotEqualSwitcher(r_lbdExp221, this), r_lbdExp221.contains(instance));\n//EIle:selector\n\n\n\tif( idIfCond_1013 ) {\n\n\tresult_ft221.add(elem_ft221);\n}\n\n}\n\t}\n}\n\n//EIft:select\n//BIft:each\n\n\t\n{\n\n\tkermeta.standard.Iterator<kermeta.persistence.Resource> it_ft220 = result_ft221.iterator();\n\tjava.lang.Boolean idLoopCond_1011 = false;\n\twhile( !idLoopCond_1011 ) {\n\tidLoopCond_1011 = it_ft220.isOff();\n\tif ( idLoopCond_1011 ) {\n\t} else {\n\n\t//BIle:func\nkermeta.persistence.Resource r_lbdExp220 = it_ft220.next();\n\n\torg.kermeta.compil.runtime.helper.io.StdIOUtil.getInstance().writeln(\"DVK ! another resource of the same repository was containing this element\");\n\n\tr_lbdExp220.remove(instance);\n//EIle:func\n\n}\n\t}\n}\n\n//EIft:each\n\n\n\torg.kermeta.compil.runtime.helper.language.ObjectUtil.setContainingResource(instance, this);\n\n\tkermeta.standard.helper.SetSuper.super_add(this, instance);\n'"
 	 * @generated
 	 */
 	void add(kermeta.language.structure.Object instance);

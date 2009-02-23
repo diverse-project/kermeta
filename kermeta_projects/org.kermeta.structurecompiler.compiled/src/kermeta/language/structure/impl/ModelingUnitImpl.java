@@ -4,7 +4,7 @@
  * 
  * Generating with Kermeta <http://www.kermeta.org>
  *
- * $Id: ModelingUnitImpl.java,v 1.11 2009-02-10 17:51:45 cfaucher Exp $
+ * $Id: ModelingUnitImpl.java,v 1.12 2009-02-23 15:26:40 cfaucher Exp $
  */
 package kermeta.language.structure.impl;
 
@@ -46,10 +46,10 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * <ul>
  *   <li>{@link kermeta.language.structure.impl.ModelingUnitImpl#getEcorePackages <em>Ecore Packages</em>}</li>
  *   <li>{@link kermeta.language.structure.impl.ModelingUnitImpl#getUsings <em>Usings</em>}</li>
- *   <li>{@link kermeta.language.structure.impl.ModelingUnitImpl#getIncludeFilters <em>Include Filters</em>}</li>
  *   <li>{@link kermeta.language.structure.impl.ModelingUnitImpl#getPackages <em>Packages</em>}</li>
- *   <li>{@link kermeta.language.structure.impl.ModelingUnitImpl#getExcludeFilters <em>Exclude Filters</em>}</li>
+ *   <li>{@link kermeta.language.structure.impl.ModelingUnitImpl#getIncludeFilters <em>Include Filters</em>}</li>
  *   <li>{@link kermeta.language.structure.impl.ModelingUnitImpl#getSuperOperationsToCompileInHelper <em>Super Operations To Compile In Helper</em>}</li>
+ *   <li>{@link kermeta.language.structure.impl.ModelingUnitImpl#getExcludeFilters <em>Exclude Filters</em>}</li>
  *   <li>{@link kermeta.language.structure.impl.ModelingUnitImpl#getReferencedModelingUnits <em>Referenced Modeling Units</em>}</li>
  *   <li>{@link kermeta.language.structure.impl.ModelingUnitImpl#getRequires <em>Requires</em>}</li>
  *   <li>{@link kermeta.language.structure.impl.ModelingUnitImpl#getEntryPoints <em>Entry Points</em>}</li>
@@ -81,16 +81,6 @@ public class ModelingUnitImpl extends TraceabilityImpl<EAnnotation> implements
 	protected EList<Using> usings;
 
 	/**
-	 * The cached value of the '{@link #getIncludeFilters() <em>Include Filters</em>}' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getIncludeFilters()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<Filter> includeFilters;
-
-	/**
 	 * The cached value of the '{@link #getPackages() <em>Packages</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -101,14 +91,14 @@ public class ModelingUnitImpl extends TraceabilityImpl<EAnnotation> implements
 	protected EList<kermeta.language.structure.Package> packages;
 
 	/**
-	 * The cached value of the '{@link #getExcludeFilters() <em>Exclude Filters</em>}' containment reference list.
+	 * The cached value of the '{@link #getIncludeFilters() <em>Include Filters</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getExcludeFilters()
+	 * @see #getIncludeFilters()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<Filter> excludeFilters;
+	protected EList<Filter> includeFilters;
 
 	/**
 	 * The cached value of the '{@link #getSuperOperationsToCompileInHelper() <em>Super Operations To Compile In Helper</em>}' reference list.
@@ -119,6 +109,16 @@ public class ModelingUnitImpl extends TraceabilityImpl<EAnnotation> implements
 	 * @ordered
 	 */
 	protected EList<Operation> superOperationsToCompileInHelper;
+
+	/**
+	 * The cached value of the '{@link #getExcludeFilters() <em>Exclude Filters</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getExcludeFilters()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<Filter> excludeFilters;
 
 	/**
 	 * The cached value of the '{@link #getReferencedModelingUnits() <em>Referenced Modeling Units</em>}' reference list.
@@ -200,20 +200,6 @@ public class ModelingUnitImpl extends TraceabilityImpl<EAnnotation> implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<Filter> getIncludeFilters() {
-		if (includeFilters == null) {
-			includeFilters = new EObjectContainmentEList.Resolving<Filter>(
-					Filter.class, this,
-					StructurePackage.MODELING_UNIT__INCLUDE_FILTERS);
-		}
-		return includeFilters;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EList<kermeta.language.structure.Package> getPackages() {
 		if (packages == null) {
 			packages = new EObjectContainmentEList.Resolving<kermeta.language.structure.Package>(
@@ -228,13 +214,13 @@ public class ModelingUnitImpl extends TraceabilityImpl<EAnnotation> implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<Filter> getExcludeFilters() {
-		if (excludeFilters == null) {
-			excludeFilters = new EObjectContainmentEList.Resolving<Filter>(
+	public EList<Filter> getIncludeFilters() {
+		if (includeFilters == null) {
+			includeFilters = new EObjectContainmentEList.Resolving<Filter>(
 					Filter.class, this,
-					StructurePackage.MODELING_UNIT__EXCLUDE_FILTERS);
+					StructurePackage.MODELING_UNIT__INCLUDE_FILTERS);
 		}
-		return excludeFilters;
+		return includeFilters;
 	}
 
 	/**
@@ -250,6 +236,20 @@ public class ModelingUnitImpl extends TraceabilityImpl<EAnnotation> implements
 					StructurePackage.MODELING_UNIT__SUPER_OPERATIONS_TO_COMPILE_IN_HELPER);
 		}
 		return superOperationsToCompileInHelper;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<Filter> getExcludeFilters() {
+		if (excludeFilters == null) {
+			excludeFilters = new EObjectContainmentEList.Resolving<Filter>(
+					Filter.class, this,
+					StructurePackage.MODELING_UNIT__EXCLUDE_FILTERS);
+		}
+		return excludeFilters;
 	}
 
 	/**
@@ -308,11 +308,11 @@ public class ModelingUnitImpl extends TraceabilityImpl<EAnnotation> implements
 		kermeta.standard.Sequence<java.lang.String> set_qname = kermeta.standard.helper.StringWrapper
 				.split(qname, "::");
 
-		java.lang.Boolean idIfCond_534 = false;
-		idIfCond_534 = kermeta.standard.helper.IntegerWrapper.equals(set_qname
+		java.lang.Boolean idIfCond_100 = false;
+		idIfCond_100 = kermeta.standard.helper.IntegerWrapper.equals(set_qname
 				.size(), 0);
 
-		if (idIfCond_534) {
+		if (idIfCond_100) {
 
 			set_qname.add(qname);
 		}
@@ -320,39 +320,39 @@ public class ModelingUnitImpl extends TraceabilityImpl<EAnnotation> implements
 		kermeta.language.structure.Package pack = null;
 		//BIft:detect
 
-		kermeta.language.structure.Package result_ft96 = null;
+		kermeta.language.structure.Package result_ft32 = null;
 
-		kermeta.language.structure.Package elem_ft96 = null;
+		kermeta.language.structure.Package elem_ft32 = null;
 
-		result_ft96 = null;
+		result_ft32 = null;
 
 		{
 
-			kermeta.standard.Iterator<kermeta.language.structure.Package> it_ft96 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
+			kermeta.standard.Iterator<kermeta.language.structure.Package> it_ft32 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
 					.<kermeta.language.structure.Package> convertAsOrderedSet(
 							this.getPackages()).iterator();
-			java.lang.Boolean idLoopCond_535 = false;
-			while (!idLoopCond_535) {
-				idLoopCond_535 = kermeta.standard.helper.BooleanWrapper.or(
-						it_ft96.isOff(),
+			java.lang.Boolean idLoopCond_101 = false;
+			while (!idLoopCond_101) {
+				idLoopCond_101 = kermeta.standard.helper.BooleanWrapper.or(
+						it_ft32.isOff(),
 						org.kermeta.compil.runtime.helper.language.ObjectUtil
-								.isNotEqualSwitcher(result_ft96, null));
-				if (idLoopCond_535) {
+								.isNotEqualSwitcher(result_ft32, null));
+				if (idLoopCond_101) {
 				} else {
 
-					elem_ft96 = it_ft96.next();
+					elem_ft32 = it_ft32.next();
 
-					java.lang.Boolean idIfCond_536 = false;
+					java.lang.Boolean idIfCond_102 = false;
 					//BIle:detector
-					kermeta.language.structure.Package p_lbdExp96 = elem_ft96;
+					kermeta.language.structure.Package p_lbdExp32 = elem_ft32;
 
-					idIfCond_536 = kermeta.standard.helper.StringWrapper
-							.equals(p_lbdExp96.getName(), set_qname.at(0));
+					idIfCond_102 = kermeta.standard.helper.StringWrapper
+							.equals(p_lbdExp32.getName(), set_qname.at(0));
 					//EIle:detector
 
-					if (idIfCond_536) {
+					if (idIfCond_102) {
 
-						result_ft96 = elem_ft96;
+						result_ft32 = elem_ft32;
 					}
 
 				}
@@ -360,66 +360,66 @@ public class ModelingUnitImpl extends TraceabilityImpl<EAnnotation> implements
 		}
 
 		//CE
-		pack = result_ft96;
+		pack = result_ft32;
 		//EIft:detect
 		;
 
-		java.lang.Boolean idIfCond_537 = false;
-		idIfCond_537 = kermeta.standard.helper.BooleanWrapper
+		java.lang.Boolean idIfCond_103 = false;
+		idIfCond_103 = kermeta.standard.helper.BooleanWrapper
 				.not(org.kermeta.compil.runtime.helper.language.ObjectUtil
 						.isVoidSwitcher(pack));
 
-		if (idIfCond_537) {
+		if (idIfCond_103) {
 
 			{
 
 				java.lang.Integer i = 1;
-				java.lang.Boolean idLoopCond_538 = false;
-				while (!idLoopCond_538) {
-					idLoopCond_538 = kermeta.standard.helper.IntegerWrapper
+				java.lang.Boolean idLoopCond_104 = false;
+				while (!idLoopCond_104) {
+					idLoopCond_104 = kermeta.standard.helper.IntegerWrapper
 							.isGreaterOrEqual(i, set_qname.size());
-					if (idLoopCond_538) {
+					if (idLoopCond_104) {
 					} else {
 
 						//BIft:detect
 
-						kermeta.language.structure.Package result_ft97 = null;
+						kermeta.language.structure.Package result_ft33 = null;
 
-						kermeta.language.structure.Package elem_ft97 = null;
+						kermeta.language.structure.Package elem_ft33 = null;
 
-						result_ft97 = null;
+						result_ft33 = null;
 
 						{
 
-							kermeta.standard.Iterator<kermeta.language.structure.Package> it_ft97 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
+							kermeta.standard.Iterator<kermeta.language.structure.Package> it_ft33 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
 									.<kermeta.language.structure.Package> convertAsOrderedSet(
 											pack.getNestedPackage()).iterator();
-							java.lang.Boolean idLoopCond_539 = false;
-							while (!idLoopCond_539) {
-								idLoopCond_539 = kermeta.standard.helper.BooleanWrapper
+							java.lang.Boolean idLoopCond_105 = false;
+							while (!idLoopCond_105) {
+								idLoopCond_105 = kermeta.standard.helper.BooleanWrapper
 										.or(
-												it_ft97.isOff(),
+												it_ft33.isOff(),
 												org.kermeta.compil.runtime.helper.language.ObjectUtil
 														.isNotEqualSwitcher(
-																result_ft97,
+																result_ft33,
 																null));
-								if (idLoopCond_539) {
+								if (idLoopCond_105) {
 								} else {
 
-									elem_ft97 = it_ft97.next();
+									elem_ft33 = it_ft33.next();
 
-									java.lang.Boolean idIfCond_540 = false;
+									java.lang.Boolean idIfCond_106 = false;
 									//BIle:detector
-									kermeta.language.structure.Package p_lbdExp97 = elem_ft97;
+									kermeta.language.structure.Package p_lbdExp33 = elem_ft33;
 
-									idIfCond_540 = kermeta.standard.helper.StringWrapper
-											.equals(p_lbdExp97.getName(),
+									idIfCond_106 = kermeta.standard.helper.StringWrapper
+											.equals(p_lbdExp33.getName(),
 													set_qname.at(i));
 									//EIle:detector
 
-									if (idIfCond_540) {
+									if (idIfCond_106) {
 
-										result_ft97 = elem_ft97;
+										result_ft33 = elem_ft33;
 									}
 
 								}
@@ -427,7 +427,7 @@ public class ModelingUnitImpl extends TraceabilityImpl<EAnnotation> implements
 						}
 
 						//CE
-						pack = result_ft97;
+						pack = result_ft33;
 						//EIft:detect
 
 						i = kermeta.standard.helper.IntegerWrapper.plus(i, 1);
@@ -485,22 +485,22 @@ public class ModelingUnitImpl extends TraceabilityImpl<EAnnotation> implements
 
 		{
 
-			kermeta.standard.Iterator<kermeta.language.structure.Tag> it_ft99 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
+			kermeta.standard.Iterator<kermeta.language.structure.Tag> it_ft35 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
 					.<kermeta.language.structure.Tag> convertAsOrderedSet(
 							this.getOwnedTags()).iterator();
-			java.lang.Boolean idLoopCond_541 = false;
-			while (!idLoopCond_541) {
-				idLoopCond_541 = it_ft99.isOff();
-				if (idLoopCond_541) {
+			java.lang.Boolean idLoopCond_107 = false;
+			while (!idLoopCond_107) {
+				idLoopCond_107 = it_ft35.isOff();
+				if (idLoopCond_107) {
 				} else {
 
 					//BIle:func
-					kermeta.language.structure.Tag o_lbdExp99 = it_ft99.next();
+					kermeta.language.structure.Tag o_lbdExp35 = it_ft35.next();
 
 					//BIle:func
-					kermeta.language.structure.Tag p_lbdExp98 = o_lbdExp99;
+					kermeta.language.structure.Tag p_lbdExp34 = o_lbdExp35;
 
-					p_lbdExp98.applyPass1(context);
+					p_lbdExp34.applyPass1(context);
 					//EIle:func
 
 					//EIle:func
@@ -515,23 +515,23 @@ public class ModelingUnitImpl extends TraceabilityImpl<EAnnotation> implements
 
 		{
 
-			kermeta.standard.Iterator<kermeta.language.structure.Require> it_ft100 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
+			kermeta.standard.Iterator<kermeta.language.structure.Require> it_ft36 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
 					.<kermeta.language.structure.Require> convertAsOrderedSet(
 							this.getRequires()).iterator();
-			java.lang.Boolean idLoopCond_542 = false;
-			while (!idLoopCond_542) {
-				idLoopCond_542 = it_ft100.isOff();
-				if (idLoopCond_542) {
+			java.lang.Boolean idLoopCond_108 = false;
+			while (!idLoopCond_108) {
+				idLoopCond_108 = it_ft36.isOff();
+				if (idLoopCond_108) {
 				} else {
 
 					//BIle:func
-					kermeta.language.structure.Require p_lbdExp100 = it_ft100
+					kermeta.language.structure.Require p_lbdExp36 = it_ft36
 							.next();
 
 					//BIle:func
-					kermeta.language.structure.Require p_lbdExp98 = p_lbdExp100;
+					kermeta.language.structure.Require p_lbdExp34 = p_lbdExp36;
 
-					p_lbdExp98.applyPass1(context);
+					p_lbdExp34.applyPass1(context);
 					//EIle:func
 
 					//EIle:func
@@ -546,23 +546,23 @@ public class ModelingUnitImpl extends TraceabilityImpl<EAnnotation> implements
 
 		{
 
-			kermeta.standard.Iterator<kermeta.language.structure.Using> it_ft101 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
+			kermeta.standard.Iterator<kermeta.language.structure.Using> it_ft37 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
 					.<kermeta.language.structure.Using> convertAsOrderedSet(
 							this.getUsings()).iterator();
-			java.lang.Boolean idLoopCond_543 = false;
-			while (!idLoopCond_543) {
-				idLoopCond_543 = it_ft101.isOff();
-				if (idLoopCond_543) {
+			java.lang.Boolean idLoopCond_109 = false;
+			while (!idLoopCond_109) {
+				idLoopCond_109 = it_ft37.isOff();
+				if (idLoopCond_109) {
 				} else {
 
 					//BIle:func
-					kermeta.language.structure.Using p_lbdExp101 = it_ft101
+					kermeta.language.structure.Using p_lbdExp37 = it_ft37
 							.next();
 
 					//BIle:func
-					kermeta.language.structure.Using p_lbdExp98 = p_lbdExp101;
+					kermeta.language.structure.Using p_lbdExp34 = p_lbdExp37;
 
-					p_lbdExp98.applyPass1(context);
+					p_lbdExp34.applyPass1(context);
 					//EIle:func
 
 					//EIle:func
@@ -577,23 +577,23 @@ public class ModelingUnitImpl extends TraceabilityImpl<EAnnotation> implements
 
 		{
 
-			kermeta.standard.Iterator<kermeta.language.structure.Package> it_ft102 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
+			kermeta.standard.Iterator<kermeta.language.structure.Package> it_ft38 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
 					.<kermeta.language.structure.Package> convertAsOrderedSet(
 							this.getPackages()).iterator();
-			java.lang.Boolean idLoopCond_544 = false;
-			while (!idLoopCond_544) {
-				idLoopCond_544 = it_ft102.isOff();
-				if (idLoopCond_544) {
+			java.lang.Boolean idLoopCond_110 = false;
+			while (!idLoopCond_110) {
+				idLoopCond_110 = it_ft38.isOff();
+				if (idLoopCond_110) {
 				} else {
 
 					//BIle:func
-					kermeta.language.structure.Package p_lbdExp102 = it_ft102
+					kermeta.language.structure.Package p_lbdExp38 = it_ft38
 							.next();
 
 					//BIle:func
-					kermeta.language.structure.Package p_lbdExp98 = p_lbdExp102;
+					kermeta.language.structure.Package p_lbdExp34 = p_lbdExp38;
 
-					p_lbdExp98.applyPass1(context);
+					p_lbdExp34.applyPass1(context);
 					//EIle:func
 
 					//EIle:func
@@ -610,60 +610,60 @@ public class ModelingUnitImpl extends TraceabilityImpl<EAnnotation> implements
 
 		{
 
-			kermeta.standard.Iterator<kermeta.language.structure.Package> it_ft103 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
+			kermeta.standard.Iterator<kermeta.language.structure.Package> it_ft39 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
 					.<kermeta.language.structure.Package> convertAsOrderedSet(
 							this.getPackages()).iterator();
-			java.lang.Boolean idLoopCond_545 = false;
-			while (!idLoopCond_545) {
-				idLoopCond_545 = it_ft103.isOff();
-				if (idLoopCond_545) {
+			java.lang.Boolean idLoopCond_111 = false;
+			while (!idLoopCond_111) {
+				idLoopCond_111 = it_ft39.isOff();
+				if (idLoopCond_111) {
 				} else {
 
 					//BIle:func
-					kermeta.language.structure.Package p_lbdExp103 = it_ft103
+					kermeta.language.structure.Package p_lbdExp39 = it_ft39
 							.next();
 
 					kermeta.standard.Sequence<ecore.EPackage> eps = null;
 					//BIft:select
 
-					kermeta.standard.Sequence<ecore.EPackage> result_ft104 = null;
+					kermeta.standard.Sequence<ecore.EPackage> result_ft40 = null;
 
-					ecore.EPackage elem_ft104 = null;
+					ecore.EPackage elem_ft40 = null;
 
-					result_ft104 = ((kermeta.standard.Sequence<ecore.EPackage>) org.kermeta.compil.runtime.helper.language.ClassUtil
+					result_ft40 = ((kermeta.standard.Sequence<ecore.EPackage>) org.kermeta.compil.runtime.helper.language.ClassUtil
 							.newObject(kermeta.standard.StandardPackage.eINSTANCE
 									.getSequence()));
 
 					{
 
-						kermeta.standard.Iterator<ecore.EPackage> it_ft104 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
+						kermeta.standard.Iterator<ecore.EPackage> it_ft40 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
 								.<ecore.EPackage> convertAsOrderedSet(
 										this.getEcorePackages()).iterator();
-						java.lang.Boolean idLoopCond_546 = false;
-						while (!idLoopCond_546) {
-							idLoopCond_546 = it_ft104.isOff();
-							if (idLoopCond_546) {
+						java.lang.Boolean idLoopCond_112 = false;
+						while (!idLoopCond_112) {
+							idLoopCond_112 = it_ft40.isOff();
+							if (idLoopCond_112) {
 							} else {
 
-								elem_ft104 = it_ft104.next();
+								elem_ft40 = it_ft40.next();
 
-								java.lang.Boolean idIfCond_547 = false;
+								java.lang.Boolean idIfCond_113 = false;
 								//BIle:selector
-								ecore.EPackage ep_lbdExp104 = elem_ft104;
+								ecore.EPackage ep_lbdExp40 = elem_ft40;
 
-								idIfCond_547 = kermeta.standard.helper.StringWrapper
+								idIfCond_113 = kermeta.standard.helper.StringWrapper
 										.equals(
 												kermeta.standard.helper.StringWrapper
-														.toLowerCase(p_lbdExp103
+														.toLowerCase(p_lbdExp39
 																.getName()),
 												kermeta.standard.helper.StringWrapper
-														.toLowerCase(ep_lbdExp104
+														.toLowerCase(ep_lbdExp40
 																.getName()));
 								//EIle:selector
 
-								if (idIfCond_547) {
+								if (idIfCond_113) {
 
-									result_ft104.add(elem_ft104);
+									result_ft40.add(elem_ft40);
 								}
 
 							}
@@ -671,66 +671,66 @@ public class ModelingUnitImpl extends TraceabilityImpl<EAnnotation> implements
 					}
 
 					//CE
-					eps = result_ft104;
+					eps = result_ft40;
 					//EIft:select
 					;
 
-					java.lang.Boolean idIfCond_548 = false;
-					idIfCond_548 = kermeta.standard.helper.IntegerWrapper
+					java.lang.Boolean idIfCond_114 = false;
+					idIfCond_114 = kermeta.standard.helper.IntegerWrapper
 							.isGreater(eps.size(), 0);
 
-					if (idIfCond_548) {
+					if (idIfCond_114) {
 
-						java.lang.Boolean idIfCond_549 = false;
-						idIfCond_549 = kermeta.standard.helper.IntegerWrapper
+						java.lang.Boolean idIfCond_115 = false;
+						idIfCond_115 = kermeta.standard.helper.IntegerWrapper
 								.equals(eps.size(), 1);
 
-						if (idIfCond_549) {
+						if (idIfCond_115) {
 
 							//BIft:detect
 
-							kermeta.language.structure.Package result_ft105 = null;
+							kermeta.language.structure.Package result_ft41 = null;
 
-							kermeta.language.structure.Package elem_ft105 = null;
+							kermeta.language.structure.Package elem_ft41 = null;
 
-							result_ft105 = null;
+							result_ft41 = null;
 
 							{
 
-								kermeta.standard.Iterator<kermeta.language.structure.Package> it_ft105 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
+								kermeta.standard.Iterator<kermeta.language.structure.Package> it_ft41 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
 										.<kermeta.language.structure.Package> convertAsOrderedSet(
 												this.getPackages()).iterator();
-								java.lang.Boolean idLoopCond_550 = false;
-								while (!idLoopCond_550) {
-									idLoopCond_550 = kermeta.standard.helper.BooleanWrapper
+								java.lang.Boolean idLoopCond_116 = false;
+								while (!idLoopCond_116) {
+									idLoopCond_116 = kermeta.standard.helper.BooleanWrapper
 											.or(
-													it_ft105.isOff(),
+													it_ft41.isOff(),
 													org.kermeta.compil.runtime.helper.language.ObjectUtil
 															.isNotEqualSwitcher(
-																	result_ft105,
+																	result_ft41,
 																	null));
-									if (idLoopCond_550) {
+									if (idLoopCond_116) {
 									} else {
 
-										elem_ft105 = it_ft105.next();
+										elem_ft41 = it_ft41.next();
 
-										java.lang.Boolean idIfCond_551 = false;
+										java.lang.Boolean idIfCond_117 = false;
 										//BIle:detector
-										kermeta.language.structure.Package pack_lbdExp105 = elem_ft105;
+										kermeta.language.structure.Package pack_lbdExp41 = elem_ft41;
 
-										idIfCond_551 = kermeta.standard.helper.StringWrapper
+										idIfCond_117 = kermeta.standard.helper.StringWrapper
 												.equals(
 														kermeta.standard.helper.StringWrapper
-																.toLowerCase(pack_lbdExp105
+																.toLowerCase(pack_lbdExp41
 																		.getName()),
 														kermeta.standard.helper.StringWrapper
-																.toLowerCase(p_lbdExp103
+																.toLowerCase(p_lbdExp39
 																		.getName()));
 										//EIle:detector
 
-										if (idIfCond_551) {
+										if (idIfCond_117) {
 
-											result_ft105 = elem_ft105;
+											result_ft41 = elem_ft41;
 										}
 
 									}
@@ -738,20 +738,20 @@ public class ModelingUnitImpl extends TraceabilityImpl<EAnnotation> implements
 							}
 
 							//EIft:detect
-							result_ft105
+							result_ft41
 									.setGenModelBasePackage(kermeta.standard.helper.StringWrapper
 											.plus(
 													kermeta.standard.helper.StringWrapper
-															.toLowerCase(p_lbdExp103
+															.toLowerCase(p_lbdExp39
 																	.getName()),
 													"0"));
 						}
 
-						p_lbdExp103
+						p_lbdExp39
 								.setGenModelBasePackage(kermeta.standard.helper.StringWrapper
 										.plus(
 												kermeta.standard.helper.StringWrapper
-														.toLowerCase(p_lbdExp103
+														.toLowerCase(p_lbdExp39
 																.getName()),
 												kermeta.standard.helper.IntegerWrapper
 														.toString(eps.size())));
@@ -760,7 +760,7 @@ public class ModelingUnitImpl extends TraceabilityImpl<EAnnotation> implements
 					org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
 							.<ecore.EPackage> convertAsOrderedSet(
 									this.getEcorePackages()).add(
-									p_lbdExp103.getEcoreModelElement());
+									p_lbdExp39.getEcoreModelElement());
 					//EIle:func
 
 				}
@@ -782,18 +782,18 @@ public class ModelingUnitImpl extends TraceabilityImpl<EAnnotation> implements
 
 		{
 
-			kermeta.standard.Iterator<kermeta.language.structure.Operation> it_ft106 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
+			kermeta.standard.Iterator<kermeta.language.structure.Operation> it_ft42 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
 					.<kermeta.language.structure.Operation> convertAsOrderedSet(
 							this.getSuperOperationsToCompileInHelper())
 					.iterator();
-			java.lang.Boolean idLoopCond_552 = false;
-			while (!idLoopCond_552) {
-				idLoopCond_552 = it_ft106.isOff();
-				if (idLoopCond_552) {
+			java.lang.Boolean idLoopCond_118 = false;
+			while (!idLoopCond_118) {
+				idLoopCond_118 = it_ft42.isOff();
+				if (idLoopCond_118) {
 				} else {
 
 					//BIle:func
-					kermeta.language.structure.Operation op_lbdExp106 = it_ft106
+					kermeta.language.structure.Operation op_lbdExp42 = it_ft42
 							.next();
 
 					java.lang.Boolean staticOperationMode_backup = context
@@ -801,7 +801,7 @@ public class ModelingUnitImpl extends TraceabilityImpl<EAnnotation> implements
 
 					context.setStaticOperationMode(true);
 
-					this.compileStaticOperation(op_lbdExp106, context);
+					this.compileStaticOperation(op_lbdExp42, context);
 
 					context.setStaticOperationMode(staticOperationMode_backup);
 					//EIle:func
@@ -841,11 +841,11 @@ public class ModelingUnitImpl extends TraceabilityImpl<EAnnotation> implements
 		kermeta.standard.Sequence<java.lang.String> set_qname = kermeta.standard.helper.StringWrapper
 				.split(qname, "::");
 
-		java.lang.Boolean idIfCond_553 = false;
-		idIfCond_553 = kermeta.standard.helper.IntegerWrapper.equals(set_qname
+		java.lang.Boolean idIfCond_119 = false;
+		idIfCond_119 = kermeta.standard.helper.IntegerWrapper.equals(set_qname
 				.size(), 0);
 
-		if (idIfCond_553) {
+		if (idIfCond_119) {
 
 			set_qname.add(qname);
 		}
@@ -853,39 +853,39 @@ public class ModelingUnitImpl extends TraceabilityImpl<EAnnotation> implements
 		ecore.EPackage pack = null;
 		//BIft:detect
 
-		ecore.EPackage result_ft107 = null;
+		ecore.EPackage result_ft43 = null;
 
-		ecore.EPackage elem_ft107 = null;
+		ecore.EPackage elem_ft43 = null;
 
-		result_ft107 = null;
+		result_ft43 = null;
 
 		{
 
-			kermeta.standard.Iterator<ecore.EPackage> it_ft107 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
+			kermeta.standard.Iterator<ecore.EPackage> it_ft43 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
 					.<ecore.EPackage> convertAsOrderedSet(
 							this.getEcorePackages()).iterator();
-			java.lang.Boolean idLoopCond_554 = false;
-			while (!idLoopCond_554) {
-				idLoopCond_554 = kermeta.standard.helper.BooleanWrapper.or(
-						it_ft107.isOff(),
+			java.lang.Boolean idLoopCond_120 = false;
+			while (!idLoopCond_120) {
+				idLoopCond_120 = kermeta.standard.helper.BooleanWrapper.or(
+						it_ft43.isOff(),
 						org.kermeta.compil.runtime.helper.language.ObjectUtil
-								.isNotEqualSwitcher(result_ft107, null));
-				if (idLoopCond_554) {
+								.isNotEqualSwitcher(result_ft43, null));
+				if (idLoopCond_120) {
 				} else {
 
-					elem_ft107 = it_ft107.next();
+					elem_ft43 = it_ft43.next();
 
-					java.lang.Boolean idIfCond_555 = false;
+					java.lang.Boolean idIfCond_121 = false;
 					//BIle:detector
-					ecore.EPackage p_lbdExp107 = elem_ft107;
+					ecore.EPackage p_lbdExp43 = elem_ft43;
 
-					idIfCond_555 = kermeta.standard.helper.StringWrapper
-							.equals(p_lbdExp107.getName(), set_qname.at(0));
+					idIfCond_121 = kermeta.standard.helper.StringWrapper
+							.equals(p_lbdExp43.getName(), set_qname.at(0));
 					//EIle:detector
 
-					if (idIfCond_555) {
+					if (idIfCond_121) {
 
-						result_ft107 = elem_ft107;
+						result_ft43 = elem_ft43;
 					}
 
 				}
@@ -893,68 +893,68 @@ public class ModelingUnitImpl extends TraceabilityImpl<EAnnotation> implements
 		}
 
 		//CE
-		pack = result_ft107;
+		pack = result_ft43;
 		//EIft:detect
 		;
 
-		java.lang.Boolean idIfCond_556 = false;
-		idIfCond_556 = kermeta.standard.helper.BooleanWrapper
+		java.lang.Boolean idIfCond_122 = false;
+		idIfCond_122 = kermeta.standard.helper.BooleanWrapper
 				.not(org.kermeta.compil.runtime.helper.language.ObjectUtil
 						.isVoidSwitcher(pack));
 
-		if (idIfCond_556) {
+		if (idIfCond_122) {
 
 			{
 
 				java.lang.Integer i = 1;
-				java.lang.Boolean idLoopCond_557 = false;
-				while (!idLoopCond_557) {
-					idLoopCond_557 = kermeta.standard.helper.IntegerWrapper
+				java.lang.Boolean idLoopCond_123 = false;
+				while (!idLoopCond_123) {
+					idLoopCond_123 = kermeta.standard.helper.IntegerWrapper
 							.isGreaterOrEqual(i,
 									kermeta.standard.helper.IntegerWrapper
 											.minus(set_qname.size(), 1));
-					if (idLoopCond_557) {
+					if (idLoopCond_123) {
 					} else {
 
 						//BIft:detect
 
-						ecore.EPackage result_ft108 = null;
+						ecore.EPackage result_ft44 = null;
 
-						ecore.EPackage elem_ft108 = null;
+						ecore.EPackage elem_ft44 = null;
 
-						result_ft108 = null;
+						result_ft44 = null;
 
 						{
 
-							kermeta.standard.Iterator<ecore.EPackage> it_ft108 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
+							kermeta.standard.Iterator<ecore.EPackage> it_ft44 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
 									.<ecore.EPackage> convertAsOrderedSet(
 											pack.getESubpackages()).iterator();
-							java.lang.Boolean idLoopCond_558 = false;
-							while (!idLoopCond_558) {
-								idLoopCond_558 = kermeta.standard.helper.BooleanWrapper
+							java.lang.Boolean idLoopCond_124 = false;
+							while (!idLoopCond_124) {
+								idLoopCond_124 = kermeta.standard.helper.BooleanWrapper
 										.or(
-												it_ft108.isOff(),
+												it_ft44.isOff(),
 												org.kermeta.compil.runtime.helper.language.ObjectUtil
 														.isNotEqualSwitcher(
-																result_ft108,
+																result_ft44,
 																null));
-								if (idLoopCond_558) {
+								if (idLoopCond_124) {
 								} else {
 
-									elem_ft108 = it_ft108.next();
+									elem_ft44 = it_ft44.next();
 
-									java.lang.Boolean idIfCond_559 = false;
+									java.lang.Boolean idIfCond_125 = false;
 									//BIle:detector
-									ecore.EPackage p_lbdExp108 = elem_ft108;
+									ecore.EPackage p_lbdExp44 = elem_ft44;
 
-									idIfCond_559 = kermeta.standard.helper.StringWrapper
-											.equals(p_lbdExp108.getName(),
+									idIfCond_125 = kermeta.standard.helper.StringWrapper
+											.equals(p_lbdExp44.getName(),
 													set_qname.at(i));
 									//EIle:detector
 
-									if (idIfCond_559) {
+									if (idIfCond_125) {
 
-										result_ft108 = elem_ft108;
+										result_ft44 = elem_ft44;
 									}
 
 								}
@@ -962,7 +962,7 @@ public class ModelingUnitImpl extends TraceabilityImpl<EAnnotation> implements
 						}
 
 						//CE
-						pack = result_ft108;
+						pack = result_ft44;
 						//EIft:detect
 
 						i = kermeta.standard.helper.IntegerWrapper.plus(i, 1);
@@ -972,37 +972,37 @@ public class ModelingUnitImpl extends TraceabilityImpl<EAnnotation> implements
 
 			//BIft:detect
 
-			ecore.EClassifier result_ft109 = null;
+			ecore.EClassifier result_ft45 = null;
 
-			ecore.EClassifier elem_ft109 = null;
+			ecore.EClassifier elem_ft45 = null;
 
-			result_ft109 = null;
+			result_ft45 = null;
 
 			{
 
-				kermeta.standard.Iterator<ecore.EClassifier> it_ft109 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
+				kermeta.standard.Iterator<ecore.EClassifier> it_ft45 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
 						.<ecore.EClassifier> convertAsOrderedSet(
 								pack.getEClassifiers()).iterator();
-				java.lang.Boolean idLoopCond_560 = false;
-				while (!idLoopCond_560) {
-					idLoopCond_560 = kermeta.standard.helper.BooleanWrapper
+				java.lang.Boolean idLoopCond_126 = false;
+				while (!idLoopCond_126) {
+					idLoopCond_126 = kermeta.standard.helper.BooleanWrapper
 							.or(
-									it_ft109.isOff(),
+									it_ft45.isOff(),
 									org.kermeta.compil.runtime.helper.language.ObjectUtil
-											.isNotEqualSwitcher(result_ft109,
+											.isNotEqualSwitcher(result_ft45,
 													null));
-					if (idLoopCond_560) {
+					if (idLoopCond_126) {
 					} else {
 
-						elem_ft109 = it_ft109.next();
+						elem_ft45 = it_ft45.next();
 
-						java.lang.Boolean idIfCond_561 = false;
+						java.lang.Boolean idIfCond_127 = false;
 						//BIle:detector
-						ecore.EClassifier c_lbdExp109 = elem_ft109;
+						ecore.EClassifier c_lbdExp45 = elem_ft45;
 
-						idIfCond_561 = kermeta.standard.helper.StringWrapper
+						idIfCond_127 = kermeta.standard.helper.StringWrapper
 								.equals(
-										c_lbdExp109.getName(),
+										c_lbdExp45.getName(),
 										set_qname
 												.at(kermeta.standard.helper.IntegerWrapper
 														.minus(
@@ -1011,9 +1011,9 @@ public class ModelingUnitImpl extends TraceabilityImpl<EAnnotation> implements
 																1)));
 						//EIle:detector
 
-						if (idIfCond_561) {
+						if (idIfCond_127) {
 
-							result_ft109 = elem_ft109;
+							result_ft45 = elem_ft45;
 						}
 
 					}
@@ -1021,7 +1021,7 @@ public class ModelingUnitImpl extends TraceabilityImpl<EAnnotation> implements
 			}
 
 			//CE
-			result = result_ft109;
+			result = result_ft45;
 			//EIft:detect
 
 		}
@@ -1037,13 +1037,13 @@ public class ModelingUnitImpl extends TraceabilityImpl<EAnnotation> implements
 	 */
 	public void cleanEObject() {
 
-		java.lang.Boolean idIfCond_562 = false;
-		idIfCond_562 = kermeta.standard.helper.BooleanWrapper
+		java.lang.Boolean idIfCond_128 = false;
+		idIfCond_128 = kermeta.standard.helper.BooleanWrapper
 				.not(org.kermeta.compil.runtime.helper.language.ObjectUtil
 						.isVoidSwitcher(this
 								.getEClassifierByQualifiedName("ecore::EObject")));
 
-		if (idIfCond_562) {
+		if (idIfCond_128) {
 
 			org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
 					.<ecore.EOperation> convertAsOrderedSet(
@@ -1081,12 +1081,12 @@ public class ModelingUnitImpl extends TraceabilityImpl<EAnnotation> implements
 		simk.SMContext smContext = context.getSimkModel()
 				.retrieveOrCreateContextForSuper(op, context);
 
-		java.lang.Boolean idIfCond_563 = false;
-		idIfCond_563 = kermeta.standard.helper.BooleanWrapper
+		java.lang.Boolean idIfCond_129 = false;
+		idIfCond_129 = kermeta.standard.helper.BooleanWrapper
 				.not(org.kermeta.compil.runtime.helper.language.ObjectUtil
 						.isVoidSwitcher(smContext));
 
-		if (idIfCond_563) {
+		if (idIfCond_129) {
 
 			simk.SMMethod staticMethod = ((simk.SMMethod) org.kermeta.compil.runtime.helper.language.ClassUtil
 					.newObject(simk.SimkPackage.eINSTANCE.getSMMethod()));
@@ -1114,12 +1114,12 @@ public class ModelingUnitImpl extends TraceabilityImpl<EAnnotation> implements
 
 			smReturn.setType(op.getType().createBehaviorJava(context));
 
-			java.lang.Boolean idIfCond_564 = false;
-			idIfCond_564 = ((kermeta.language.structure.Operation) org.kermeta.compil.runtime.helper.language.ClassUtil
+			java.lang.Boolean idIfCond_130 = false;
+			idIfCond_130 = ((kermeta.language.structure.Operation) org.kermeta.compil.runtime.helper.language.ClassUtil
 					.newObject(kermeta.language.structure.StructurePackage.eINSTANCE
 							.getOperation())).isVoidType(smReturn.getType());
 
-			if (idIfCond_564) {
+			if (idIfCond_130) {
 
 				smReturn.setType("void");
 			}
@@ -1144,47 +1144,47 @@ public class ModelingUnitImpl extends TraceabilityImpl<EAnnotation> implements
 
 			{
 
-				kermeta.standard.Iterator<kermeta.language.structure.Parameter> it_ft110 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
+				kermeta.standard.Iterator<kermeta.language.structure.Parameter> it_ft46 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
 						.<kermeta.language.structure.Parameter> convertAsOrderedSet(
 								op.getOwnedParameter()).iterator();
-				java.lang.Boolean idLoopCond_565 = false;
-				while (!idLoopCond_565) {
-					idLoopCond_565 = it_ft110.isOff();
-					if (idLoopCond_565) {
+				java.lang.Boolean idLoopCond_131 = false;
+				while (!idLoopCond_131) {
+					idLoopCond_131 = it_ft46.isOff();
+					if (idLoopCond_131) {
 					} else {
 
 						//BIle:func
-						kermeta.language.structure.Parameter p_lbdExp110 = it_ft110
+						kermeta.language.structure.Parameter p_lbdExp46 = it_ft46
 								.next();
 
 						simk.SMParameter param = ((simk.SMParameter) org.kermeta.compil.runtime.helper.language.ClassUtil
 								.newObject(simk.SimkPackage.eINSTANCE
 										.getSMParameter()));
 
-						param.setName(p_lbdExp110.getName());
+						param.setName(p_lbdExp46.getName());
 
-						java.lang.Boolean idIfCond_566 = false;
-						idIfCond_566 = kermeta.standard.helper.BooleanWrapper
+						java.lang.Boolean idIfCond_132 = false;
+						idIfCond_132 = kermeta.standard.helper.BooleanWrapper
 								.not(org.kermeta.compil.runtime.helper.language.ObjectUtil
 										.isInstanceOfSwitcher(
-												p_lbdExp110.getType(),
+												p_lbdExp46.getType(),
 												org.kermeta.compil.runtime.ExecutionContext
 														.getInstance()
 														.getMetaClass(
 																"kermeta.language.structure.FunctionType")));
 
-						if (idIfCond_566) {
+						if (idIfCond_132) {
 
-							param.setType(p_lbdExp110.getType()
+							param.setType(p_lbdExp46.getType()
 									.createBehaviorJava(context));
 
-							java.lang.Boolean idIfCond_567 = false;
-							idIfCond_567 = ((kermeta.language.structure.Operation) org.kermeta.compil.runtime.helper.language.ClassUtil
+							java.lang.Boolean idIfCond_133 = false;
+							idIfCond_133 = ((kermeta.language.structure.Operation) org.kermeta.compil.runtime.helper.language.ClassUtil
 									.newObject(kermeta.language.structure.StructurePackage.eINSTANCE
 											.getOperation())).isVoidType(param
 									.getType());
 
-							if (idIfCond_567) {
+							if (idIfCond_133) {
 
 								param.setType("void");
 							}
@@ -1269,22 +1269,22 @@ public class ModelingUnitImpl extends TraceabilityImpl<EAnnotation> implements
 
 		{
 
-			kermeta.standard.Iterator<kermeta.language.structure.Package> it_ft111 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
+			kermeta.standard.Iterator<kermeta.language.structure.Package> it_ft47 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
 					.<kermeta.language.structure.Package> convertAsOrderedSet(
 							this.getPackages()).iterator();
-			java.lang.Boolean idLoopCond_568 = false;
-			while (!idLoopCond_568) {
-				idLoopCond_568 = it_ft111.isOff();
-				if (idLoopCond_568) {
+			java.lang.Boolean idLoopCond_134 = false;
+			while (!idLoopCond_134) {
+				idLoopCond_134 = it_ft47.isOff();
+				if (idLoopCond_134) {
 				} else {
 
 					//BIle:func
-					kermeta.language.structure.Package p_lbdExp111 = it_ft111
+					kermeta.language.structure.Package p_lbdExp47 = it_ft47
 							.next();
 
-					result.add(p_lbdExp111);
+					result.add(p_lbdExp47);
 
-					result.addAll(p_lbdExp111.getAllSubPackages());
+					result.addAll(p_lbdExp47.getAllSubPackages());
 					//EIle:func
 
 				}
@@ -1310,23 +1310,22 @@ public class ModelingUnitImpl extends TraceabilityImpl<EAnnotation> implements
 
 		{
 
-			kermeta.standard.Iterator<kermeta.language.structure.Tag> it_ft113 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
+			kermeta.standard.Iterator<kermeta.language.structure.Tag> it_ft49 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
 					.<kermeta.language.structure.Tag> convertAsOrderedSet(
 							this.getOwnedTags()).iterator();
-			java.lang.Boolean idLoopCond_569 = false;
-			while (!idLoopCond_569) {
-				idLoopCond_569 = it_ft113.isOff();
-				if (idLoopCond_569) {
+			java.lang.Boolean idLoopCond_135 = false;
+			while (!idLoopCond_135) {
+				idLoopCond_135 = it_ft49.isOff();
+				if (idLoopCond_135) {
 				} else {
 
 					//BIle:func
-					kermeta.language.structure.Tag o_lbdExp113 = it_ft113
-							.next();
+					kermeta.language.structure.Tag o_lbdExp49 = it_ft49.next();
 
 					//BIle:func
-					kermeta.language.structure.Tag p_lbdExp112 = o_lbdExp113;
+					kermeta.language.structure.Tag p_lbdExp48 = o_lbdExp49;
 
-					p_lbdExp112.applyPass2BehaviorJava(context);
+					p_lbdExp48.applyPass2BehaviorJava(context);
 					//EIle:func
 
 					//EIle:func
@@ -1341,23 +1340,23 @@ public class ModelingUnitImpl extends TraceabilityImpl<EAnnotation> implements
 
 		{
 
-			kermeta.standard.Iterator<kermeta.language.structure.Require> it_ft114 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
+			kermeta.standard.Iterator<kermeta.language.structure.Require> it_ft50 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
 					.<kermeta.language.structure.Require> convertAsOrderedSet(
 							this.getRequires()).iterator();
-			java.lang.Boolean idLoopCond_570 = false;
-			while (!idLoopCond_570) {
-				idLoopCond_570 = it_ft114.isOff();
-				if (idLoopCond_570) {
+			java.lang.Boolean idLoopCond_136 = false;
+			while (!idLoopCond_136) {
+				idLoopCond_136 = it_ft50.isOff();
+				if (idLoopCond_136) {
 				} else {
 
 					//BIle:func
-					kermeta.language.structure.Require p_lbdExp114 = it_ft114
+					kermeta.language.structure.Require p_lbdExp50 = it_ft50
 							.next();
 
 					//BIle:func
-					kermeta.language.structure.Require p_lbdExp112 = p_lbdExp114;
+					kermeta.language.structure.Require p_lbdExp48 = p_lbdExp50;
 
-					p_lbdExp112.applyPass2BehaviorJava(context);
+					p_lbdExp48.applyPass2BehaviorJava(context);
 					//EIle:func
 
 					//EIle:func
@@ -1372,23 +1371,23 @@ public class ModelingUnitImpl extends TraceabilityImpl<EAnnotation> implements
 
 		{
 
-			kermeta.standard.Iterator<kermeta.language.structure.Using> it_ft115 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
+			kermeta.standard.Iterator<kermeta.language.structure.Using> it_ft51 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
 					.<kermeta.language.structure.Using> convertAsOrderedSet(
 							this.getUsings()).iterator();
-			java.lang.Boolean idLoopCond_571 = false;
-			while (!idLoopCond_571) {
-				idLoopCond_571 = it_ft115.isOff();
-				if (idLoopCond_571) {
+			java.lang.Boolean idLoopCond_137 = false;
+			while (!idLoopCond_137) {
+				idLoopCond_137 = it_ft51.isOff();
+				if (idLoopCond_137) {
 				} else {
 
 					//BIle:func
-					kermeta.language.structure.Using p_lbdExp115 = it_ft115
+					kermeta.language.structure.Using p_lbdExp51 = it_ft51
 							.next();
 
 					//BIle:func
-					kermeta.language.structure.Using p_lbdExp112 = p_lbdExp115;
+					kermeta.language.structure.Using p_lbdExp48 = p_lbdExp51;
 
-					p_lbdExp112.applyPass2BehaviorJava(context);
+					p_lbdExp48.applyPass2BehaviorJava(context);
 					//EIle:func
 
 					//EIle:func
@@ -1403,23 +1402,23 @@ public class ModelingUnitImpl extends TraceabilityImpl<EAnnotation> implements
 
 		{
 
-			kermeta.standard.Iterator<kermeta.language.structure.Package> it_ft116 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
+			kermeta.standard.Iterator<kermeta.language.structure.Package> it_ft52 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
 					.<kermeta.language.structure.Package> convertAsOrderedSet(
 							this.getPackages()).iterator();
-			java.lang.Boolean idLoopCond_572 = false;
-			while (!idLoopCond_572) {
-				idLoopCond_572 = it_ft116.isOff();
-				if (idLoopCond_572) {
+			java.lang.Boolean idLoopCond_138 = false;
+			while (!idLoopCond_138) {
+				idLoopCond_138 = it_ft52.isOff();
+				if (idLoopCond_138) {
 				} else {
 
 					//BIle:func
-					kermeta.language.structure.Package p_lbdExp116 = it_ft116
+					kermeta.language.structure.Package p_lbdExp52 = it_ft52
 							.next();
 
 					//BIle:func
-					kermeta.language.structure.Package p_lbdExp112 = p_lbdExp116;
+					kermeta.language.structure.Package p_lbdExp48 = p_lbdExp52;
 
-					p_lbdExp112.applyPass2BehaviorJava(context);
+					p_lbdExp48.applyPass2BehaviorJava(context);
 					//EIle:func
 
 					//EIle:func
@@ -1446,11 +1445,11 @@ public class ModelingUnitImpl extends TraceabilityImpl<EAnnotation> implements
 		kermeta.standard.Sequence<java.lang.String> set_qname = kermeta.standard.helper.StringWrapper
 				.split(qname, "::");
 
-		java.lang.Boolean idIfCond_573 = false;
-		idIfCond_573 = kermeta.standard.helper.IntegerWrapper.equals(set_qname
+		java.lang.Boolean idIfCond_139 = false;
+		idIfCond_139 = kermeta.standard.helper.IntegerWrapper.equals(set_qname
 				.size(), 0);
 
-		if (idIfCond_573) {
+		if (idIfCond_139) {
 
 			set_qname.add(qname);
 		}
@@ -1458,39 +1457,39 @@ public class ModelingUnitImpl extends TraceabilityImpl<EAnnotation> implements
 		kermeta.language.structure.Package pack = null;
 		//BIft:detect
 
-		kermeta.language.structure.Package result_ft117 = null;
+		kermeta.language.structure.Package result_ft53 = null;
 
-		kermeta.language.structure.Package elem_ft117 = null;
+		kermeta.language.structure.Package elem_ft53 = null;
 
-		result_ft117 = null;
+		result_ft53 = null;
 
 		{
 
-			kermeta.standard.Iterator<kermeta.language.structure.Package> it_ft117 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
+			kermeta.standard.Iterator<kermeta.language.structure.Package> it_ft53 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
 					.<kermeta.language.structure.Package> convertAsOrderedSet(
 							this.getPackages()).iterator();
-			java.lang.Boolean idLoopCond_574 = false;
-			while (!idLoopCond_574) {
-				idLoopCond_574 = kermeta.standard.helper.BooleanWrapper.or(
-						it_ft117.isOff(),
+			java.lang.Boolean idLoopCond_140 = false;
+			while (!idLoopCond_140) {
+				idLoopCond_140 = kermeta.standard.helper.BooleanWrapper.or(
+						it_ft53.isOff(),
 						org.kermeta.compil.runtime.helper.language.ObjectUtil
-								.isNotEqualSwitcher(result_ft117, null));
-				if (idLoopCond_574) {
+								.isNotEqualSwitcher(result_ft53, null));
+				if (idLoopCond_140) {
 				} else {
 
-					elem_ft117 = it_ft117.next();
+					elem_ft53 = it_ft53.next();
 
-					java.lang.Boolean idIfCond_575 = false;
+					java.lang.Boolean idIfCond_141 = false;
 					//BIle:detector
-					kermeta.language.structure.Package p_lbdExp117 = elem_ft117;
+					kermeta.language.structure.Package p_lbdExp53 = elem_ft53;
 
-					idIfCond_575 = kermeta.standard.helper.StringWrapper
-							.equals(p_lbdExp117.getName(), set_qname.at(0));
+					idIfCond_141 = kermeta.standard.helper.StringWrapper
+							.equals(p_lbdExp53.getName(), set_qname.at(0));
 					//EIle:detector
 
-					if (idIfCond_575) {
+					if (idIfCond_141) {
 
-						result_ft117 = elem_ft117;
+						result_ft53 = elem_ft53;
 					}
 
 				}
@@ -1498,60 +1497,60 @@ public class ModelingUnitImpl extends TraceabilityImpl<EAnnotation> implements
 		}
 
 		//CE
-		pack = result_ft117;
+		pack = result_ft53;
 		//EIft:detect
 		;
 
 		{
 
 			java.lang.Integer i = 1;
-			java.lang.Boolean idLoopCond_576 = false;
-			while (!idLoopCond_576) {
-				idLoopCond_576 = kermeta.standard.helper.IntegerWrapper
+			java.lang.Boolean idLoopCond_142 = false;
+			while (!idLoopCond_142) {
+				idLoopCond_142 = kermeta.standard.helper.IntegerWrapper
 						.isGreaterOrEqual(i,
 								kermeta.standard.helper.IntegerWrapper.minus(
 										set_qname.size(), 1));
-				if (idLoopCond_576) {
+				if (idLoopCond_142) {
 				} else {
 
 					//BIft:detect
 
-					kermeta.language.structure.Package result_ft118 = null;
+					kermeta.language.structure.Package result_ft54 = null;
 
-					kermeta.language.structure.Package elem_ft118 = null;
+					kermeta.language.structure.Package elem_ft54 = null;
 
-					result_ft118 = null;
+					result_ft54 = null;
 
 					{
 
-						kermeta.standard.Iterator<kermeta.language.structure.Package> it_ft118 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
+						kermeta.standard.Iterator<kermeta.language.structure.Package> it_ft54 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
 								.<kermeta.language.structure.Package> convertAsOrderedSet(
 										pack.getNestedPackage()).iterator();
-						java.lang.Boolean idLoopCond_577 = false;
-						while (!idLoopCond_577) {
-							idLoopCond_577 = kermeta.standard.helper.BooleanWrapper
+						java.lang.Boolean idLoopCond_143 = false;
+						while (!idLoopCond_143) {
+							idLoopCond_143 = kermeta.standard.helper.BooleanWrapper
 									.or(
-											it_ft118.isOff(),
+											it_ft54.isOff(),
 											org.kermeta.compil.runtime.helper.language.ObjectUtil
 													.isNotEqualSwitcher(
-															result_ft118, null));
-							if (idLoopCond_577) {
+															result_ft54, null));
+							if (idLoopCond_143) {
 							} else {
 
-								elem_ft118 = it_ft118.next();
+								elem_ft54 = it_ft54.next();
 
-								java.lang.Boolean idIfCond_578 = false;
+								java.lang.Boolean idIfCond_144 = false;
 								//BIle:detector
-								kermeta.language.structure.Package p_lbdExp118 = elem_ft118;
+								kermeta.language.structure.Package p_lbdExp54 = elem_ft54;
 
-								idIfCond_578 = kermeta.standard.helper.StringWrapper
-										.equals(p_lbdExp118.getName(),
-												set_qname.at(i));
+								idIfCond_144 = kermeta.standard.helper.StringWrapper
+										.equals(p_lbdExp54.getName(), set_qname
+												.at(i));
 								//EIle:detector
 
-								if (idIfCond_578) {
+								if (idIfCond_144) {
 
-									result_ft118 = elem_ft118;
+									result_ft54 = elem_ft54;
 								}
 
 							}
@@ -1559,7 +1558,7 @@ public class ModelingUnitImpl extends TraceabilityImpl<EAnnotation> implements
 					}
 
 					//CE
-					pack = result_ft118;
+					pack = result_ft54;
 					//EIft:detect
 
 					i = kermeta.standard.helper.IntegerWrapper.plus(i, 1);
@@ -1569,41 +1568,41 @@ public class ModelingUnitImpl extends TraceabilityImpl<EAnnotation> implements
 
 		//BIft:detect
 
-		kermeta.language.structure.TypeDefinition result_ft119 = null;
+		kermeta.language.structure.TypeDefinition result_ft55 = null;
 
-		kermeta.language.structure.TypeDefinition elem_ft119 = null;
+		kermeta.language.structure.TypeDefinition elem_ft55 = null;
 
-		result_ft119 = null;
+		result_ft55 = null;
 
 		{
 
-			kermeta.standard.Iterator<kermeta.language.structure.TypeDefinition> it_ft119 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
+			kermeta.standard.Iterator<kermeta.language.structure.TypeDefinition> it_ft55 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
 					.<kermeta.language.structure.TypeDefinition> convertAsOrderedSet(
 							pack.getOwnedTypeDefinition()).iterator();
-			java.lang.Boolean idLoopCond_579 = false;
-			while (!idLoopCond_579) {
-				idLoopCond_579 = kermeta.standard.helper.BooleanWrapper.or(
-						it_ft119.isOff(),
+			java.lang.Boolean idLoopCond_145 = false;
+			while (!idLoopCond_145) {
+				idLoopCond_145 = kermeta.standard.helper.BooleanWrapper.or(
+						it_ft55.isOff(),
 						org.kermeta.compil.runtime.helper.language.ObjectUtil
-								.isNotEqualSwitcher(result_ft119, null));
-				if (idLoopCond_579) {
+								.isNotEqualSwitcher(result_ft55, null));
+				if (idLoopCond_145) {
 				} else {
 
-					elem_ft119 = it_ft119.next();
+					elem_ft55 = it_ft55.next();
 
-					java.lang.Boolean idIfCond_580 = false;
+					java.lang.Boolean idIfCond_146 = false;
 					//BIle:detector
-					kermeta.language.structure.TypeDefinition c_lbdExp119 = elem_ft119;
+					kermeta.language.structure.TypeDefinition c_lbdExp55 = elem_ft55;
 
-					idIfCond_580 = kermeta.standard.helper.StringWrapper
-							.equals(c_lbdExp119.getName(), set_qname
+					idIfCond_146 = kermeta.standard.helper.StringWrapper
+							.equals(c_lbdExp55.getName(), set_qname
 									.at(kermeta.standard.helper.IntegerWrapper
 											.minus(set_qname.size(), 1)));
 					//EIle:detector
 
-					if (idIfCond_580) {
+					if (idIfCond_146) {
 
-						result_ft119 = elem_ft119;
+						result_ft55 = elem_ft55;
 					}
 
 				}
@@ -1611,7 +1610,7 @@ public class ModelingUnitImpl extends TraceabilityImpl<EAnnotation> implements
 		}
 
 		//CE
-		result = result_ft119;
+		result = result_ft55;
 		//EIft:detect
 
 		return result;
@@ -1629,12 +1628,12 @@ public class ModelingUnitImpl extends TraceabilityImpl<EAnnotation> implements
 		switch (featureID) {
 		case StructurePackage.MODELING_UNIT__USINGS:
 			return ((InternalEList<?>) getUsings()).basicRemove(otherEnd, msgs);
-		case StructurePackage.MODELING_UNIT__INCLUDE_FILTERS:
-			return ((InternalEList<?>) getIncludeFilters()).basicRemove(
-					otherEnd, msgs);
 		case StructurePackage.MODELING_UNIT__PACKAGES:
 			return ((InternalEList<?>) getPackages()).basicRemove(otherEnd,
 					msgs);
+		case StructurePackage.MODELING_UNIT__INCLUDE_FILTERS:
+			return ((InternalEList<?>) getIncludeFilters()).basicRemove(
+					otherEnd, msgs);
 		case StructurePackage.MODELING_UNIT__EXCLUDE_FILTERS:
 			return ((InternalEList<?>) getExcludeFilters()).basicRemove(
 					otherEnd, msgs);
@@ -1657,14 +1656,14 @@ public class ModelingUnitImpl extends TraceabilityImpl<EAnnotation> implements
 			return getEcorePackages();
 		case StructurePackage.MODELING_UNIT__USINGS:
 			return getUsings();
-		case StructurePackage.MODELING_UNIT__INCLUDE_FILTERS:
-			return getIncludeFilters();
 		case StructurePackage.MODELING_UNIT__PACKAGES:
 			return getPackages();
-		case StructurePackage.MODELING_UNIT__EXCLUDE_FILTERS:
-			return getExcludeFilters();
+		case StructurePackage.MODELING_UNIT__INCLUDE_FILTERS:
+			return getIncludeFilters();
 		case StructurePackage.MODELING_UNIT__SUPER_OPERATIONS_TO_COMPILE_IN_HELPER:
 			return getSuperOperationsToCompileInHelper();
+		case StructurePackage.MODELING_UNIT__EXCLUDE_FILTERS:
+			return getExcludeFilters();
 		case StructurePackage.MODELING_UNIT__REFERENCED_MODELING_UNITS:
 			return getReferencedModelingUnits();
 		case StructurePackage.MODELING_UNIT__REQUIRES:
@@ -1693,24 +1692,24 @@ public class ModelingUnitImpl extends TraceabilityImpl<EAnnotation> implements
 			getUsings().clear();
 			getUsings().addAll((Collection<? extends Using>) newValue);
 			return;
-		case StructurePackage.MODELING_UNIT__INCLUDE_FILTERS:
-			getIncludeFilters().clear();
-			getIncludeFilters().addAll((Collection<? extends Filter>) newValue);
-			return;
 		case StructurePackage.MODELING_UNIT__PACKAGES:
 			getPackages().clear();
 			getPackages()
 					.addAll(
 							(Collection<? extends kermeta.language.structure.Package>) newValue);
 			return;
-		case StructurePackage.MODELING_UNIT__EXCLUDE_FILTERS:
-			getExcludeFilters().clear();
-			getExcludeFilters().addAll((Collection<? extends Filter>) newValue);
+		case StructurePackage.MODELING_UNIT__INCLUDE_FILTERS:
+			getIncludeFilters().clear();
+			getIncludeFilters().addAll((Collection<? extends Filter>) newValue);
 			return;
 		case StructurePackage.MODELING_UNIT__SUPER_OPERATIONS_TO_COMPILE_IN_HELPER:
 			getSuperOperationsToCompileInHelper().clear();
 			getSuperOperationsToCompileInHelper().addAll(
 					(Collection<? extends Operation>) newValue);
+			return;
+		case StructurePackage.MODELING_UNIT__EXCLUDE_FILTERS:
+			getExcludeFilters().clear();
+			getExcludeFilters().addAll((Collection<? extends Filter>) newValue);
 			return;
 		case StructurePackage.MODELING_UNIT__REFERENCED_MODELING_UNITS:
 			getReferencedModelingUnits().clear();
@@ -1744,17 +1743,17 @@ public class ModelingUnitImpl extends TraceabilityImpl<EAnnotation> implements
 		case StructurePackage.MODELING_UNIT__USINGS:
 			getUsings().clear();
 			return;
-		case StructurePackage.MODELING_UNIT__INCLUDE_FILTERS:
-			getIncludeFilters().clear();
-			return;
 		case StructurePackage.MODELING_UNIT__PACKAGES:
 			getPackages().clear();
 			return;
-		case StructurePackage.MODELING_UNIT__EXCLUDE_FILTERS:
-			getExcludeFilters().clear();
+		case StructurePackage.MODELING_UNIT__INCLUDE_FILTERS:
+			getIncludeFilters().clear();
 			return;
 		case StructurePackage.MODELING_UNIT__SUPER_OPERATIONS_TO_COMPILE_IN_HELPER:
 			getSuperOperationsToCompileInHelper().clear();
+			return;
+		case StructurePackage.MODELING_UNIT__EXCLUDE_FILTERS:
+			getExcludeFilters().clear();
 			return;
 		case StructurePackage.MODELING_UNIT__REFERENCED_MODELING_UNITS:
 			getReferencedModelingUnits().clear();
@@ -1781,15 +1780,15 @@ public class ModelingUnitImpl extends TraceabilityImpl<EAnnotation> implements
 			return ecorePackages != null && !ecorePackages.isEmpty();
 		case StructurePackage.MODELING_UNIT__USINGS:
 			return usings != null && !usings.isEmpty();
-		case StructurePackage.MODELING_UNIT__INCLUDE_FILTERS:
-			return includeFilters != null && !includeFilters.isEmpty();
 		case StructurePackage.MODELING_UNIT__PACKAGES:
 			return packages != null && !packages.isEmpty();
-		case StructurePackage.MODELING_UNIT__EXCLUDE_FILTERS:
-			return excludeFilters != null && !excludeFilters.isEmpty();
+		case StructurePackage.MODELING_UNIT__INCLUDE_FILTERS:
+			return includeFilters != null && !includeFilters.isEmpty();
 		case StructurePackage.MODELING_UNIT__SUPER_OPERATIONS_TO_COMPILE_IN_HELPER:
 			return superOperationsToCompileInHelper != null
 					&& !superOperationsToCompileInHelper.isEmpty();
+		case StructurePackage.MODELING_UNIT__EXCLUDE_FILTERS:
+			return excludeFilters != null && !excludeFilters.isEmpty();
 		case StructurePackage.MODELING_UNIT__REFERENCED_MODELING_UNITS:
 			return referencedModelingUnits != null
 					&& !referencedModelingUnits.isEmpty();

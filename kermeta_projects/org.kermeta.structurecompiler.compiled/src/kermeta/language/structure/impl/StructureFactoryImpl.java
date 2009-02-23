@@ -4,7 +4,7 @@
  * 
  * Generating with Kermeta <http://www.kermeta.org>
  *
- * $Id: StructureFactoryImpl.java,v 1.11 2009-02-10 17:51:45 cfaucher Exp $
+ * $Id: StructureFactoryImpl.java,v 1.12 2009-02-23 15:26:40 cfaucher Exp $
  */
 package kermeta.language.structure.impl;
 
@@ -16,7 +16,6 @@ import kermeta.language.structure.Enumeration;
 import kermeta.language.structure.EnumerationLiteral;
 import kermeta.language.structure.Filter;
 import kermeta.language.structure.FunctionType;
-import kermeta.language.structure.GenericTypeDefinition;
 import kermeta.language.structure.LinkSetterForTypedElement;
 import kermeta.language.structure.Model;
 import kermeta.language.structure.ModelType;
@@ -97,72 +96,70 @@ public class StructureFactoryImpl extends EFactoryImpl implements
 	@Override
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
-		case StructurePackage.NAMED_ELEMENT:
-			return createNamedElement();
-		case StructurePackage.PARAMETER:
-			return createParameter();
-		case StructurePackage.CLASS_DEFINITION:
-			return createClassDefinition();
-		case StructurePackage.CLASS:
-			return createClass();
-		case StructurePackage.OPERATION:
-			return createOperation();
-		case StructurePackage.PROPERTY:
-			return createProperty();
-		case StructurePackage.LINK_SETTER_FOR_TYPED_ELEMENT:
-			return createLinkSetterForTypedElement();
-		case StructurePackage.MODELING_UNIT:
-			return createModelingUnit();
-		case StructurePackage.MULTIPLICITY_ELEMENT:
-			return createMultiplicityElement();
-		case StructurePackage.OBJECT:
-			return createObject();
-		case StructurePackage.TYPE:
-			return createType();
-		case StructurePackage.VOID_TYPE:
-			return createVoidType();
-		case StructurePackage.PRIMITIVE_TYPE:
-			return createPrimitiveType();
-		case StructurePackage.PARAMETERIZED_TYPE:
-			return createParameterizedType();
-		case StructurePackage.OBJECT_TYPE_VARIABLE:
-			return createObjectTypeVariable();
-		case StructurePackage.ENUMERATION:
-			return createEnumeration();
-		case StructurePackage.FUNCTION_TYPE:
-			return createFunctionType();
-		case StructurePackage.PRODUCT_TYPE:
-			return createProductType();
-		case StructurePackage.CONSTRAINT:
-			return createConstraint();
 		case StructurePackage.PACKAGE:
 			return createPackage();
+		case StructurePackage.OBJECT:
+			return createObject();
+		case StructurePackage.MODELING_UNIT:
+			return createModelingUnit();
+		case StructurePackage.CLASS_DEFINITION:
+			return createClassDefinition();
+		case StructurePackage.PROPERTY:
+			return createProperty();
+		case StructurePackage.OPERATION:
+			return createOperation();
+		case StructurePackage.PARAMETER:
+			return createParameter();
+		case StructurePackage.CONSTRAINT:
+			return createConstraint();
 		case StructurePackage.REQUIRE:
 			return createRequire();
 		case StructurePackage.USING:
 			return createUsing();
+		case StructurePackage.PRIMITIVE_TYPE:
+			return createPrimitiveType();
+		case StructurePackage.ENUMERATION:
+			return createEnumeration();
 		case StructurePackage.ENUMERATION_LITERAL:
 			return createEnumerationLiteral();
+		case StructurePackage.OBJECT_TYPE_VARIABLE:
+			return createObjectTypeVariable();
 		case StructurePackage.TAG:
 			return createTag();
-		case StructurePackage.GENERIC_TYPE_DEFINITION:
-			return createGenericTypeDefinition();
-		case StructurePackage.TRACEABILITY:
-			return createTraceability();
+		case StructurePackage.MULTIPLICITY_ELEMENT:
+			return createMultiplicityElement();
+		case StructurePackage.CLASS:
+			return createClass();
+		case StructurePackage.LINK_SETTER_FOR_TYPED_ELEMENT:
+			return createLinkSetterForTypedElement();
+		case StructurePackage.NAMED_ELEMENT:
+			return createNamedElement();
+		case StructurePackage.PARAMETERIZED_TYPE:
+			return createParameterizedType();
+		case StructurePackage.TYPE:
+			return createType();
+		case StructurePackage.MODEL_TYPE:
+			return createModelType();
+		case StructurePackage.MODEL:
+			return createModel();
+		case StructurePackage.FUNCTION_TYPE:
+			return createFunctionType();
 		case StructurePackage.TYPE_VARIABLE_BINDING:
 			return createTypeVariableBinding();
 		case StructurePackage.TYPE_DEFINITION:
 			return createTypeDefinition();
-		case StructurePackage.MODEL_TYPE:
-			return createModelType();
 		case StructurePackage.MODEL_TYPE_VARIABLE:
 			return createModelTypeVariable();
 		case StructurePackage.VIRTUAL_TYPE:
 			return createVirtualType();
-		case StructurePackage.MODEL:
-			return createModel();
 		case StructurePackage.FILTER:
 			return createFilter();
+		case StructurePackage.PRODUCT_TYPE:
+			return createProductType();
+		case StructurePackage.VOID_TYPE:
+			return createVoidType();
+		case StructurePackage.TRACEABILITY:
+			return createTraceability();
 		default:
 			throw new IllegalArgumentException("The class '" + eClass.getName()
 					+ "' is not a valid classifier");
@@ -232,89 +229,9 @@ public class StructureFactoryImpl extends EFactoryImpl implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NamedElement createNamedElement() {
-		NamedElementImpl namedElement = new NamedElementImpl();
-		return namedElement;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Parameter createParameter() {
-		ParameterImpl parameter = new ParameterImpl();
-		return parameter;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public ClassDefinition createClassDefinition() {
-		ClassDefinitionImpl classDefinition = new ClassDefinitionImpl();
-		return classDefinition;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public kermeta.language.structure.Class createClass() {
-		ClassImpl class_ = new ClassImpl();
-		return class_;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Operation createOperation() {
-		OperationImpl operation = new OperationImpl();
-		return operation;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Property createProperty() {
-		PropertyImpl property = new PropertyImpl();
-		return property;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public LinkSetterForTypedElement createLinkSetterForTypedElement() {
-		LinkSetterForTypedElementImpl linkSetterForTypedElement = new LinkSetterForTypedElementImpl();
-		return linkSetterForTypedElement;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public ModelingUnit createModelingUnit() {
-		ModelingUnitImpl modelingUnit = new ModelingUnitImpl();
-		return modelingUnit;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public MultiplicityElement createMultiplicityElement() {
-		MultiplicityElementImpl multiplicityElement = new MultiplicityElementImpl();
-		return multiplicityElement;
+	public kermeta.language.structure.Package createPackage() {
+		PackageImpl package_ = new PackageImpl();
+		return package_;
 	}
 
 	/**
@@ -332,9 +249,9 @@ public class StructureFactoryImpl extends EFactoryImpl implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Type createType() {
-		TypeImpl type = new TypeImpl();
-		return type;
+	public ModelingUnit createModelingUnit() {
+		ModelingUnitImpl modelingUnit = new ModelingUnitImpl();
+		return modelingUnit;
 	}
 
 	/**
@@ -342,9 +259,9 @@ public class StructureFactoryImpl extends EFactoryImpl implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public VoidType createVoidType() {
-		VoidTypeImpl voidType = new VoidTypeImpl();
-		return voidType;
+	public ClassDefinition createClassDefinition() {
+		ClassDefinitionImpl classDefinition = new ClassDefinitionImpl();
+		return classDefinition;
 	}
 
 	/**
@@ -352,9 +269,9 @@ public class StructureFactoryImpl extends EFactoryImpl implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public PrimitiveType createPrimitiveType() {
-		PrimitiveTypeImpl primitiveType = new PrimitiveTypeImpl();
-		return primitiveType;
+	public Property createProperty() {
+		PropertyImpl property = new PropertyImpl();
+		return property;
 	}
 
 	/**
@@ -362,9 +279,9 @@ public class StructureFactoryImpl extends EFactoryImpl implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ParameterizedType createParameterizedType() {
-		ParameterizedTypeImpl parameterizedType = new ParameterizedTypeImpl();
-		return parameterizedType;
+	public Operation createOperation() {
+		OperationImpl operation = new OperationImpl();
+		return operation;
 	}
 
 	/**
@@ -372,39 +289,9 @@ public class StructureFactoryImpl extends EFactoryImpl implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ObjectTypeVariable createObjectTypeVariable() {
-		ObjectTypeVariableImpl objectTypeVariable = new ObjectTypeVariableImpl();
-		return objectTypeVariable;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Enumeration createEnumeration() {
-		EnumerationImpl enumeration = new EnumerationImpl();
-		return enumeration;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public FunctionType createFunctionType() {
-		FunctionTypeImpl functionType = new FunctionTypeImpl();
-		return functionType;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public ProductType createProductType() {
-		ProductTypeImpl productType = new ProductTypeImpl();
-		return productType;
+	public Parameter createParameter() {
+		ParameterImpl parameter = new ParameterImpl();
+		return parameter;
 	}
 
 	/**
@@ -415,16 +302,6 @@ public class StructureFactoryImpl extends EFactoryImpl implements
 	public Constraint createConstraint() {
 		ConstraintImpl constraint = new ConstraintImpl();
 		return constraint;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public kermeta.language.structure.Package createPackage() {
-		PackageImpl package_ = new PackageImpl();
-		return package_;
 	}
 
 	/**
@@ -452,9 +329,39 @@ public class StructureFactoryImpl extends EFactoryImpl implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public PrimitiveType createPrimitiveType() {
+		PrimitiveTypeImpl primitiveType = new PrimitiveTypeImpl();
+		return primitiveType;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Enumeration createEnumeration() {
+		EnumerationImpl enumeration = new EnumerationImpl();
+		return enumeration;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EnumerationLiteral createEnumerationLiteral() {
 		EnumerationLiteralImpl enumerationLiteral = new EnumerationLiteralImpl();
 		return enumerationLiteral;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public ObjectTypeVariable createObjectTypeVariable() {
+		ObjectTypeVariableImpl objectTypeVariable = new ObjectTypeVariableImpl();
+		return objectTypeVariable;
 	}
 
 	/**
@@ -472,9 +379,9 @@ public class StructureFactoryImpl extends EFactoryImpl implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public GenericTypeDefinition createGenericTypeDefinition() {
-		GenericTypeDefinitionImpl genericTypeDefinition = new GenericTypeDefinitionImpl();
-		return genericTypeDefinition;
+	public MultiplicityElement createMultiplicityElement() {
+		MultiplicityElementImpl multiplicityElement = new MultiplicityElementImpl();
+		return multiplicityElement;
 	}
 
 	/**
@@ -482,9 +389,79 @@ public class StructureFactoryImpl extends EFactoryImpl implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public <X> Traceability<X> createTraceability() {
-		TraceabilityImpl<X> traceability = new TraceabilityImpl<X>();
-		return traceability;
+	public kermeta.language.structure.Class createClass() {
+		ClassImpl class_ = new ClassImpl();
+		return class_;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public LinkSetterForTypedElement createLinkSetterForTypedElement() {
+		LinkSetterForTypedElementImpl linkSetterForTypedElement = new LinkSetterForTypedElementImpl();
+		return linkSetterForTypedElement;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NamedElement createNamedElement() {
+		NamedElementImpl namedElement = new NamedElementImpl();
+		return namedElement;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public ParameterizedType createParameterizedType() {
+		ParameterizedTypeImpl parameterizedType = new ParameterizedTypeImpl();
+		return parameterizedType;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Type createType() {
+		TypeImpl type = new TypeImpl();
+		return type;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public ModelType createModelType() {
+		ModelTypeImpl modelType = new ModelTypeImpl();
+		return modelType;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Model createModel() {
+		ModelImpl model = new ModelImpl();
+		return model;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public FunctionType createFunctionType() {
+		FunctionTypeImpl functionType = new FunctionTypeImpl();
+		return functionType;
 	}
 
 	/**
@@ -512,16 +489,6 @@ public class StructureFactoryImpl extends EFactoryImpl implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ModelType createModelType() {
-		ModelTypeImpl modelType = new ModelTypeImpl();
-		return modelType;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public ModelTypeVariable createModelTypeVariable() {
 		ModelTypeVariableImpl modelTypeVariable = new ModelTypeVariableImpl();
 		return modelTypeVariable;
@@ -542,9 +509,9 @@ public class StructureFactoryImpl extends EFactoryImpl implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Model createModel() {
-		ModelImpl model = new ModelImpl();
-		return model;
+	public Filter createFilter() {
+		FilterImpl filter = new FilterImpl();
+		return filter;
 	}
 
 	/**
@@ -552,9 +519,29 @@ public class StructureFactoryImpl extends EFactoryImpl implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Filter createFilter() {
-		FilterImpl filter = new FilterImpl();
-		return filter;
+	public ProductType createProductType() {
+		ProductTypeImpl productType = new ProductTypeImpl();
+		return productType;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public VoidType createVoidType() {
+		VoidTypeImpl voidType = new VoidTypeImpl();
+		return voidType;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public <X> Traceability<X> createTraceability() {
+		TraceabilityImpl<X> traceability = new TraceabilityImpl<X>();
+		return traceability;
 	}
 
 	/**

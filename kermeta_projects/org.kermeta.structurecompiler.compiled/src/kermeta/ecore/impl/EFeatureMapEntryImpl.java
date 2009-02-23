@@ -4,7 +4,7 @@
  * 
  * Generating with Kermeta <http://www.kermeta.org>
  *
- * $Id: EFeatureMapEntryImpl.java,v 1.11 2009-02-10 17:51:53 cfaucher Exp $
+ * $Id: EFeatureMapEntryImpl.java,v 1.12 2009-02-23 15:26:49 cfaucher Exp $
  */
 package kermeta.ecore.impl;
 

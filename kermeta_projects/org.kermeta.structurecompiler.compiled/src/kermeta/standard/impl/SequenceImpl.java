@@ -4,7 +4,7 @@
  * 
  * Generating with Kermeta <http://www.kermeta.org>
  *
- * $Id: SequenceImpl.java,v 1.11 2009-02-10 17:51:51 cfaucher Exp $
+ * $Id: SequenceImpl.java,v 1.12 2009-02-23 15:26:47 cfaucher Exp $
  */
 package kermeta.standard.impl;
 
@@ -58,8 +58,8 @@ public class SequenceImpl<G> extends BagImpl<G> implements Sequence<G> {
 				.newObject(kermeta.standard.StandardPackage.eINSTANCE
 						.getSequence()));
 
-		java.lang.Boolean idIfCond_1036 = false;
-		idIfCond_1036 = kermeta.standard.helper.BooleanWrapper
+		java.lang.Boolean idIfCond_936 = false;
+		idIfCond_936 = kermeta.standard.helper.BooleanWrapper
 				.and(kermeta.standard.helper.BooleanWrapper.and(
 						kermeta.standard.helper.IntegerWrapper
 								.isGreaterOrEqual(min, 0),
@@ -68,17 +68,17 @@ public class SequenceImpl<G> extends BagImpl<G> implements Sequence<G> {
 						kermeta.standard.helper.IntegerWrapper.isLowerOrEqual(
 								min, max));
 
-		if (idIfCond_1036) {
+		if (idIfCond_936) {
 
 			kermeta.standard.Iterator<G> it = this.iterator();
 
 			java.lang.Integer i = 0;
 
-			java.lang.Boolean idLoopCond_1037 = false;
-			while (!idLoopCond_1037) {
-				idLoopCond_1037 = kermeta.standard.helper.IntegerWrapper
-						.equals(i, min);
-				if (idLoopCond_1037) {
+			java.lang.Boolean idLoopCond_937 = false;
+			while (!idLoopCond_937) {
+				idLoopCond_937 = kermeta.standard.helper.IntegerWrapper.equals(
+						i, min);
+				if (idLoopCond_937) {
 				} else {
 
 					it.next();
@@ -87,12 +87,11 @@ public class SequenceImpl<G> extends BagImpl<G> implements Sequence<G> {
 				}
 			}
 
-			java.lang.Boolean idLoopCond_1038 = false;
-			while (!idLoopCond_1038) {
-				idLoopCond_1038 = kermeta.standard.helper.IntegerWrapper
-						.equals(i, kermeta.standard.helper.IntegerWrapper.plus(
-								max, 1));
-				if (idLoopCond_1038) {
+			java.lang.Boolean idLoopCond_938 = false;
+			while (!idLoopCond_938) {
+				idLoopCond_938 = kermeta.standard.helper.IntegerWrapper.equals(
+						i, kermeta.standard.helper.IntegerWrapper.plus(max, 1));
+				if (idLoopCond_938) {
 				} else {
 
 					result.add(it.next());
@@ -202,13 +201,13 @@ public class SequenceImpl<G> extends BagImpl<G> implements Sequence<G> {
 
 		G result = null;
 
-		java.lang.Boolean idIfCond_1039 = false;
-		idIfCond_1039 = kermeta.standard.helper.BooleanWrapper.and(
+		java.lang.Boolean idIfCond_939 = false;
+		idIfCond_939 = kermeta.standard.helper.BooleanWrapper.and(
 				kermeta.standard.helper.IntegerWrapper.isGreaterOrEqual(index,
 						0), kermeta.standard.helper.IntegerWrapper
 						.isLowerOrEqual(index, this.size()));
 
-		if (idIfCond_1039) {
+		if (idIfCond_939) {
 
 			kermeta.standard.Iterator<G> it = this.iterator();
 
@@ -216,11 +215,11 @@ public class SequenceImpl<G> extends BagImpl<G> implements Sequence<G> {
 
 				java.lang.Integer i = kermeta.standard.helper.IntegerWrapper
 						.uminus(1);
-				java.lang.Boolean idLoopCond_1040 = false;
-				while (!idLoopCond_1040) {
-					idLoopCond_1040 = kermeta.standard.helper.IntegerWrapper
+				java.lang.Boolean idLoopCond_940 = false;
+				while (!idLoopCond_940) {
+					idLoopCond_940 = kermeta.standard.helper.IntegerWrapper
 							.equals(i, index);
-					if (idLoopCond_1040) {
+					if (idLoopCond_940) {
 					} else {
 
 						result = it.next();
@@ -249,44 +248,16 @@ public class SequenceImpl<G> extends BagImpl<G> implements Sequence<G> {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void addAt(Integer index, G element) {
-
-		java.lang.Boolean idIfCond_1016 = false;
-		idIfCond_1016 = kermeta.standard.helper.BooleanWrapper.or(
-				kermeta.standard.helper.IntegerWrapper.isLower(index, 0),
-				kermeta.standard.helper.IntegerWrapper.isGreater(index, this
-						.size()));
-
-		if (idIfCond_1016) {
-
-			if (true)
-				throw new org.kermeta.compil.runtime.helper.error.KRuntimeError(
-						((kermeta.exceptions.IndexOutOfBound) org.kermeta.compil.runtime.helper.language.ClassUtil
-								.newObject(kermeta.exceptions.ExceptionsPackage.eINSTANCE
-										.getIndexOutOfBound())));
-
-		}
-
-		org.kermeta.compil.runtime.helper.basetypes.OrderedCollectionUtil
-				.addAt(this, index, element);
-
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public void removeAt(Integer index) {
 
-		java.lang.Boolean idIfCond_1017 = false;
-		idIfCond_1017 = kermeta.standard.helper.BooleanWrapper.or(
+		java.lang.Boolean idIfCond_916 = false;
+		idIfCond_916 = kermeta.standard.helper.BooleanWrapper.or(
 				kermeta.standard.helper.IntegerWrapper.isLower(index, 0),
 				kermeta.standard.helper.IntegerWrapper.isGreater(index,
 						kermeta.standard.helper.IntegerWrapper.minus(this
 								.size(), 1)));
 
-		if (idIfCond_1017) {
+		if (idIfCond_916) {
 
 			if (true)
 				throw new org.kermeta.compil.runtime.helper.error.KRuntimeError(
@@ -306,15 +277,43 @@ public class SequenceImpl<G> extends BagImpl<G> implements Sequence<G> {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public void addAt(Integer index, G element) {
+
+		java.lang.Boolean idIfCond_917 = false;
+		idIfCond_917 = kermeta.standard.helper.BooleanWrapper.or(
+				kermeta.standard.helper.IntegerWrapper.isLower(index, 0),
+				kermeta.standard.helper.IntegerWrapper.isGreater(index, this
+						.size()));
+
+		if (idIfCond_917) {
+
+			if (true)
+				throw new org.kermeta.compil.runtime.helper.error.KRuntimeError(
+						((kermeta.exceptions.IndexOutOfBound) org.kermeta.compil.runtime.helper.language.ClassUtil
+								.newObject(kermeta.exceptions.ExceptionsPackage.eINSTANCE
+										.getIndexOutOfBound())));
+
+		}
+
+		org.kermeta.compil.runtime.helper.basetypes.OrderedCollectionUtil
+				.addAt(this, index, element);
+
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public G last() {
 
 		G result = null;
 
-		java.lang.Boolean idIfCond_1018 = false;
-		idIfCond_1018 = kermeta.standard.helper.IntegerWrapper.equals(this
+		java.lang.Boolean idIfCond_918 = false;
+		idIfCond_918 = kermeta.standard.helper.IntegerWrapper.equals(this
 				.size(), 0);
 
-		if (idIfCond_1018) {
+		if (idIfCond_918) {
 
 			if (true)
 				throw new org.kermeta.compil.runtime.helper.error.KRuntimeError(
@@ -340,11 +339,11 @@ public class SequenceImpl<G> extends BagImpl<G> implements Sequence<G> {
 
 		java.lang.Integer result = null;
 
-		java.lang.Boolean idIfCond_1024 = false;
-		idIfCond_1024 = kermeta.standard.helper.IntegerWrapper.equals(this
+		java.lang.Boolean idIfCond_924 = false;
+		idIfCond_924 = kermeta.standard.helper.IntegerWrapper.equals(this
 				.size(), 0);
 
-		if (idIfCond_1024) {
+		if (idIfCond_924) {
 
 			if (true)
 				throw new org.kermeta.compil.runtime.helper.error.KRuntimeError(
@@ -360,18 +359,18 @@ public class SequenceImpl<G> extends BagImpl<G> implements Sequence<G> {
 
 		java.lang.Boolean found = false;
 
-		java.lang.Boolean idLoopCond_1025 = false;
-		while (!idLoopCond_1025) {
-			idLoopCond_1025 = kermeta.standard.helper.BooleanWrapper.or(found,
+		java.lang.Boolean idLoopCond_925 = false;
+		while (!idLoopCond_925) {
+			idLoopCond_925 = kermeta.standard.helper.BooleanWrapper.or(found,
 					it.isOff());
-			if (idLoopCond_1025) {
+			if (idLoopCond_925) {
 			} else {
 
-				java.lang.Boolean idIfCond_1026 = false;
-				idIfCond_1026 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+				java.lang.Boolean idIfCond_926 = false;
+				idIfCond_926 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 						.equalsSwitcher(element, it.next());
 
-				if (idIfCond_1026) {
+				if (idIfCond_926) {
 
 					found = true;
 				} else {
@@ -382,10 +381,10 @@ public class SequenceImpl<G> extends BagImpl<G> implements Sequence<G> {
 			}
 		}
 
-		java.lang.Boolean idIfCond_1027 = false;
-		idIfCond_1027 = found;
+		java.lang.Boolean idIfCond_927 = false;
+		idIfCond_927 = found;
 
-		if (idIfCond_1027) {
+		if (idIfCond_927) {
 
 			result = i;
 		} else {
@@ -406,14 +405,14 @@ public class SequenceImpl<G> extends BagImpl<G> implements Sequence<G> {
 
 		G result = null;
 
-		java.lang.Boolean idIfCond_1028 = false;
-		idIfCond_1028 = kermeta.standard.helper.BooleanWrapper.or(
+		java.lang.Boolean idIfCond_928 = false;
+		idIfCond_928 = kermeta.standard.helper.BooleanWrapper.or(
 				kermeta.standard.helper.IntegerWrapper.isLower(index, 0),
 				kermeta.standard.helper.IntegerWrapper.isGreater(index,
 						kermeta.standard.helper.IntegerWrapper.minus(this
 								.size(), 1)));
 
-		if (idIfCond_1028) {
+		if (idIfCond_928) {
 
 			if (true)
 				throw new org.kermeta.compil.runtime.helper.error.KRuntimeError(
@@ -441,11 +440,11 @@ public class SequenceImpl<G> extends BagImpl<G> implements Sequence<G> {
 
 		G result = null;
 
-		java.lang.Boolean idIfCond_1029 = false;
-		idIfCond_1029 = kermeta.standard.helper.IntegerWrapper.equals(this
+		java.lang.Boolean idIfCond_929 = false;
+		idIfCond_929 = kermeta.standard.helper.IntegerWrapper.equals(this
 				.size(), 0);
 
-		if (idIfCond_1029) {
+		if (idIfCond_929) {
 
 			if (true)
 				throw new org.kermeta.compil.runtime.helper.error.KRuntimeError(

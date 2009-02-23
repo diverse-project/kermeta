@@ -4,7 +4,7 @@
  * 
  * Generating with Kermeta <http://www.kermeta.org>
  *
- * $Id: GenericTypeDefinitionHelperImpl.java,v 1.11 2009-02-10 17:51:46 cfaucher Exp $
+ * $Id: GenericTypeDefinitionHelperImpl.java,v 1.12 2009-02-23 15:26:42 cfaucher Exp $
  */
 package km2ecore.helper.kermeta.impl;
 
@@ -63,50 +63,50 @@ public class GenericTypeDefinitionHelperImpl extends ObjectImpl implements
 
 		//BIft:detect
 
-		ecore.EClassifier result_ft2 = null;
+		ecore.EClassifier result_ft6 = null;
 
-		ecore.EClassifier elem_ft2 = null;
+		ecore.EClassifier elem_ft6 = null;
 
-		result_ft2 = null;
+		result_ft6 = null;
 
 		{
 
-			kermeta.standard.Iterator<ecore.EClassifier> it_ft2 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
+			kermeta.standard.Iterator<ecore.EClassifier> it_ft6 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
 					.<ecore.EClassifier> convertAsOrderedSet(
 							p.getEcoreModelElement().getEClassifiers())
 					.iterator();
-			java.lang.Boolean idLoopCond_11 = false;
-			while (!idLoopCond_11) {
-				idLoopCond_11 = kermeta.standard.helper.BooleanWrapper.or(
-						it_ft2.isOff(),
+			java.lang.Boolean idLoopCond_25 = false;
+			while (!idLoopCond_25) {
+				idLoopCond_25 = kermeta.standard.helper.BooleanWrapper.or(
+						it_ft6.isOff(),
 						org.kermeta.compil.runtime.helper.language.ObjectUtil
-								.isNotEqualSwitcher(result_ft2, null));
-				if (idLoopCond_11) {
+								.isNotEqualSwitcher(result_ft6, null));
+				if (idLoopCond_25) {
 				} else {
 
-					elem_ft2 = it_ft2.next();
+					elem_ft6 = it_ft6.next();
 
-					java.lang.Boolean idIfCond_12 = false;
+					java.lang.Boolean idIfCond_26 = false;
 					//BIle:detector
-					ecore.EClassifier c_lbdExp2 = elem_ft2;
+					ecore.EClassifier c_lbdExp6 = elem_ft6;
 
-					idIfCond_12 = kermeta.standard.helper.BooleanWrapper
+					idIfCond_26 = kermeta.standard.helper.BooleanWrapper
 							.and(
 									org.kermeta.compil.runtime.helper.language.ObjectUtil
 											.isInstanceOfSwitcher(
-													c_lbdExp2,
+													c_lbdExp6,
 													org.kermeta.compil.runtime.ExecutionContext
 															.getInstance()
 															.getMetaClass(
 																	"ecore.EClass")),
 									kermeta.standard.helper.StringWrapper
-											.equals(c_lbdExp2.getName(),
+											.equals(c_lbdExp6.getName(),
 													name_KermetaSspecialType));
 					//EIle:detector
 
-					if (idIfCond_12) {
+					if (idIfCond_26) {
 
-						result_ft2 = elem_ft2;
+						result_ft6 = elem_ft6;
 					}
 
 				}
@@ -114,15 +114,15 @@ public class GenericTypeDefinitionHelperImpl extends ObjectImpl implements
 		}
 
 		//CE
-		retrieveSpecialType = result_ft2;
+		retrieveSpecialType = result_ft6;
 		//EIft:detect
 
-		java.lang.Boolean idIfCond_13 = false;
-		idIfCond_13 = kermeta.standard.helper.BooleanWrapper
+		java.lang.Boolean idIfCond_27 = false;
+		idIfCond_27 = kermeta.standard.helper.BooleanWrapper
 				.not(org.kermeta.compil.runtime.helper.language.ObjectUtil
 						.isVoidSwitcher(retrieveSpecialType));
 
-		if (idIfCond_13) {
+		if (idIfCond_27) {
 
 			result = ((ecore.EClass) org.kermeta.compil.runtime.helper.language.ObjectUtil
 					.asTypeSwitcher(retrieveSpecialType,

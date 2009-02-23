@@ -4,7 +4,7 @@
  * 
  * Generating with Kermeta <http://www.kermeta.org>
  *
- * $Id: JavaPackage.java,v 1.11 2009-02-10 17:51:55 cfaucher Exp $
+ * $Id: JavaPackage.java,v 1.12 2009-02-23 15:26:51 cfaucher Exp $
  */
 package km2ecore.helper.java;
 
@@ -73,15 +73,6 @@ public interface JavaPackage extends EPackage {
 	int IDENTIFIER_HELPER = 0;
 
 	/**
-	 * The feature id for the '<em><b>Tag</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int IDENTIFIER_HELPER__TAG = StructurePackage.OBJECT__TAG;
-
-	/**
 	 * The feature id for the '<em><b>File</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -89,6 +80,15 @@ public interface JavaPackage extends EPackage {
 	 * @ordered
 	 */
 	int IDENTIFIER_HELPER__FILE = StructurePackage.OBJECT__FILE;
+
+	/**
+	 * The feature id for the '<em><b>Tag</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int IDENTIFIER_HELPER__TAG = StructurePackage.OBJECT__TAG;
 
 	/**
 	 * The feature id for the '<em><b>File Name</b></em>' attribute.

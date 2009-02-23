@@ -4,7 +4,7 @@
  * 
  * Generating with Kermeta <http://www.kermeta.org>
  *
- * $Id: StandardFactory.java,v 1.11 2009-02-10 17:51:50 cfaucher Exp $
+ * $Id: StandardFactory.java,v 1.12 2009-02-23 15:26:46 cfaucher Exp $
  */
 package kermeta.standard;
 
@@ -27,33 +27,6 @@ public interface StandardFactory extends EFactory {
 	 */
 	StandardFactory eINSTANCE = kermeta.standard.impl.StandardFactoryImpl
 			.init();
-
-	/**
-	 * Returns a new object of class '<em>String</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>String</em>'.
-	 * @generated
-	 */
-	kermeta.standard.String createString();
-
-	/**
-	 * Returns a new object of class '<em>Void</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Void</em>'.
-	 * @generated
-	 */
-	kermeta.standard.Void createVoid();
-
-	/**
-	 * Returns a new object of class '<em>Not Comparable Exception</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Not Comparable Exception</em>'.
-	 * @generated
-	 */
-	NotComparableException createNotComparableException();
 
 	/**
 	 * Returns a new object of class '<em>Boolean</em>'.
@@ -90,6 +63,15 @@ public interface StandardFactory extends EFactory {
 	 * @generated
 	 */
 	kermeta.standard.Character createCharacter();
+
+	/**
+	 * Returns a new object of class '<em>String</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>String</em>'.
+	 * @generated
+	 */
+	kermeta.standard.String createString();
 
 	/**
 	 * Returns a new object of class '<em>Set</em>'.
@@ -135,6 +117,24 @@ public interface StandardFactory extends EFactory {
 	 * @generated
 	 */
 	<G> Iterator<G> createIterator();
+
+	/**
+	 * Returns a new object of class '<em>Void</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Void</em>'.
+	 * @generated
+	 */
+	kermeta.standard.Void createVoid();
+
+	/**
+	 * Returns a new object of class '<em>Not Comparable Exception</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Not Comparable Exception</em>'.
+	 * @generated
+	 */
+	NotComparableException createNotComparableException();
 
 	/**
 	 * Returns a new object of class '<em>Unknown Java Object</em>'.

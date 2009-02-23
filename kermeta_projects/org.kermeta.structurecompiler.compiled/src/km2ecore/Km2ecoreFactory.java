@@ -4,7 +4,7 @@
  * 
  * Generating with Kermeta <http://www.kermeta.org>
  *
- * $Id: Km2ecoreFactory.java,v 1.11 2009-02-10 17:51:44 cfaucher Exp $
+ * $Id: Km2ecoreFactory.java,v 1.12 2009-02-23 15:26:38 cfaucher Exp $
  */
 package km2ecore;
 
@@ -28,15 +28,6 @@ public interface Km2ecoreFactory extends EFactory {
 	Km2ecoreFactory eINSTANCE = km2ecore.impl.Km2ecoreFactoryImpl.init();
 
 	/**
-	 * Returns a new object of class '<em>KM2 Ecore Context</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>KM2 Ecore Context</em>'.
-	 * @generated
-	 */
-	KM2EcoreContext createKM2EcoreContext();
-
-	/**
 	 * Returns a new object of class '<em>Source Tracer</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -44,6 +35,15 @@ public interface Km2ecoreFactory extends EFactory {
 	 * @generated
 	 */
 	SourceTracer createSourceTracer();
+
+	/**
+	 * Returns a new object of class '<em>KM2 Ecore Context</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>KM2 Ecore Context</em>'.
+	 * @generated
+	 */
+	KM2EcoreContext createKM2EcoreContext();
 
 	/**
 	 * Returns the package supported by this factory.

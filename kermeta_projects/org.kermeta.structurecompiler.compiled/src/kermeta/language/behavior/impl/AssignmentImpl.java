@@ -4,7 +4,7 @@
  * 
  * Generating with Kermeta <http://www.kermeta.org>
  *
- * $Id: AssignmentImpl.java,v 1.12 2009-02-10 17:51:50 cfaucher Exp $
+ * $Id: AssignmentImpl.java,v 1.13 2009-02-23 15:26:46 cfaucher Exp $
  */
 package kermeta.language.behavior.impl;
 
@@ -33,8 +33,8 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  *   <li>{@link kermeta.language.behavior.impl.AssignmentImpl#getCacheCastPrefix <em>Cache Cast Prefix</em>}</li>
  *   <li>{@link kermeta.language.behavior.impl.AssignmentImpl#getCacheCastSuffix <em>Cache Cast Suffix</em>}</li>
  *   <li>{@link kermeta.language.behavior.impl.AssignmentImpl#getValueTypeCastSuffix <em>Value Type Cast Suffix</em>}</li>
- *   <li>{@link kermeta.language.behavior.impl.AssignmentImpl#getTarget <em>Target</em>}</li>
  *   <li>{@link kermeta.language.behavior.impl.AssignmentImpl#getValue <em>Value</em>}</li>
+ *   <li>{@link kermeta.language.behavior.impl.AssignmentImpl#getTarget <em>Target</em>}</li>
  *   <li>{@link kermeta.language.behavior.impl.AssignmentImpl#getIsCast <em>Is Cast</em>}</li>
  *   <li>{@link kermeta.language.behavior.impl.AssignmentImpl#getValueTypeCastPrefix <em>Value Type Cast Prefix</em>}</li>
  * </ul>
@@ -104,16 +104,6 @@ public class AssignmentImpl extends ExpressionImpl implements Assignment {
 	protected String valueTypeCastSuffix = VALUE_TYPE_CAST_SUFFIX_EDEFAULT;
 
 	/**
-	 * The cached value of the '{@link #getTarget() <em>Target</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getTarget()
-	 * @generated
-	 * @ordered
-	 */
-	protected CallExpression target;
-
-	/**
 	 * The cached value of the '{@link #getValue() <em>Value</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -122,6 +112,16 @@ public class AssignmentImpl extends ExpressionImpl implements Assignment {
 	 * @ordered
 	 */
 	protected Expression value;
+
+	/**
+	 * The cached value of the '{@link #getTarget() <em>Target</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getTarget()
+	 * @generated
+	 * @ordered
+	 */
+	protected CallExpression target;
 
 	/**
 	 * The default value of the '{@link #getIsCast() <em>Is Cast</em>}' attribute.
@@ -256,6 +256,88 @@ public class AssignmentImpl extends ExpressionImpl implements Assignment {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public Expression getValue() {
+		if (value != null && value.eIsProxy()) {
+			InternalEObject oldValue = (InternalEObject) value;
+			value = (Expression) eResolveProxy(oldValue);
+			if (value != oldValue) {
+				InternalEObject newValue = (InternalEObject) value;
+				NotificationChain msgs = oldValue
+						.eInverseRemove(this, EOPPOSITE_FEATURE_BASE
+								- BehaviorPackage.ASSIGNMENT__VALUE, null, null);
+				if (newValue.eInternalContainer() == null) {
+					msgs = newValue.eInverseAdd(this, EOPPOSITE_FEATURE_BASE
+							- BehaviorPackage.ASSIGNMENT__VALUE, null, msgs);
+				}
+				if (msgs != null)
+					msgs.dispatch();
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE,
+							BehaviorPackage.ASSIGNMENT__VALUE, oldValue, value));
+			}
+		}
+		return value;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Expression basicGetValue() {
+		return value;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetValue(Expression newValue,
+			NotificationChain msgs) {
+		Expression oldValue = value;
+		value = newValue;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this,
+					Notification.SET, BehaviorPackage.ASSIGNMENT__VALUE,
+					oldValue, newValue);
+			if (msgs == null)
+				msgs = notification;
+			else
+				msgs.add(notification);
+		}
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setValue(Expression newValue) {
+		if (newValue != value) {
+			NotificationChain msgs = null;
+			if (value != null)
+				msgs = ((InternalEObject) value)
+						.eInverseRemove(this, EOPPOSITE_FEATURE_BASE
+								- BehaviorPackage.ASSIGNMENT__VALUE, null, msgs);
+			if (newValue != null)
+				msgs = ((InternalEObject) newValue)
+						.eInverseAdd(this, EOPPOSITE_FEATURE_BASE
+								- BehaviorPackage.ASSIGNMENT__VALUE, null, msgs);
+			msgs = basicSetValue(newValue, msgs);
+			if (msgs != null)
+				msgs.dispatch();
+		} else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET,
+					BehaviorPackage.ASSIGNMENT__VALUE, newValue, newValue));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public CallExpression getTarget() {
 		if (target != null && target.eIsProxy()) {
 			InternalEObject oldTarget = (InternalEObject) target;
@@ -342,88 +424,6 @@ public class AssignmentImpl extends ExpressionImpl implements Assignment {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Expression getValue() {
-		if (value != null && value.eIsProxy()) {
-			InternalEObject oldValue = (InternalEObject) value;
-			value = (Expression) eResolveProxy(oldValue);
-			if (value != oldValue) {
-				InternalEObject newValue = (InternalEObject) value;
-				NotificationChain msgs = oldValue
-						.eInverseRemove(this, EOPPOSITE_FEATURE_BASE
-								- BehaviorPackage.ASSIGNMENT__VALUE, null, null);
-				if (newValue.eInternalContainer() == null) {
-					msgs = newValue.eInverseAdd(this, EOPPOSITE_FEATURE_BASE
-							- BehaviorPackage.ASSIGNMENT__VALUE, null, msgs);
-				}
-				if (msgs != null)
-					msgs.dispatch();
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE,
-							BehaviorPackage.ASSIGNMENT__VALUE, oldValue, value));
-			}
-		}
-		return value;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Expression basicGetValue() {
-		return value;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public NotificationChain basicSetValue(Expression newValue,
-			NotificationChain msgs) {
-		Expression oldValue = value;
-		value = newValue;
-		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this,
-					Notification.SET, BehaviorPackage.ASSIGNMENT__VALUE,
-					oldValue, newValue);
-			if (msgs == null)
-				msgs = notification;
-			else
-				msgs.add(notification);
-		}
-		return msgs;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setValue(Expression newValue) {
-		if (newValue != value) {
-			NotificationChain msgs = null;
-			if (value != null)
-				msgs = ((InternalEObject) value)
-						.eInverseRemove(this, EOPPOSITE_FEATURE_BASE
-								- BehaviorPackage.ASSIGNMENT__VALUE, null, msgs);
-			if (newValue != null)
-				msgs = ((InternalEObject) newValue)
-						.eInverseAdd(this, EOPPOSITE_FEATURE_BASE
-								- BehaviorPackage.ASSIGNMENT__VALUE, null, msgs);
-			msgs = basicSetValue(newValue, msgs);
-			if (msgs != null)
-				msgs.dispatch();
-		} else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET,
-					BehaviorPackage.ASSIGNMENT__VALUE, newValue, newValue));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public Boolean getIsCast() {
 		return isCast;
 	}
@@ -475,10 +475,10 @@ public class AssignmentImpl extends ExpressionImpl implements Assignment {
 
 		result = "";
 
-		java.lang.Boolean idIfCond_299 = false;
-		idIfCond_299 = this.getIsCast();
+		java.lang.Boolean idIfCond_428 = false;
+		idIfCond_428 = this.getIsCast();
 
-		if (idIfCond_299) {
+		if (idIfCond_428) {
 
 			result = kermeta.standard.helper.StringWrapper.plus(
 					kermeta.standard.helper.StringWrapper.plus(this
@@ -537,8 +537,8 @@ public class AssignmentImpl extends ExpressionImpl implements Assignment {
 
 		java.lang.String right = this.getValue().createBehaviorJava(context);
 
-		java.lang.Boolean idIfCond_300 = false;
-		idIfCond_300 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+		java.lang.Boolean idIfCond_429 = false;
+		idIfCond_429 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 				.isInstanceOfSwitcher(
 						this.getValue(),
 						org.kermeta.compil.runtime.ExecutionContext
@@ -546,7 +546,7 @@ public class AssignmentImpl extends ExpressionImpl implements Assignment {
 								.getMetaClass(
 										"kermeta.language.behavior.LambdaExpression"));
 
-		if (idIfCond_300) {
+		if (idIfCond_429) {
 
 			org.kermeta.compil.runtime.helper.io.StdIOUtil
 					.getInstance()
@@ -557,10 +557,10 @@ public class AssignmentImpl extends ExpressionImpl implements Assignment {
 					right);
 		}
 
-		java.lang.Boolean idIfCond_301 = false;
-		idIfCond_301 = this.getTarget().isCallFeatureAsStaticProperty();
+		java.lang.Boolean idIfCond_430 = false;
+		idIfCond_430 = this.getTarget().isCallFeatureAsStaticProperty();
 
-		if (idIfCond_301) {
+		if (idIfCond_430) {
 
 			kermeta.standard.Sequence<java.lang.String> tabLeft = kermeta.standard.helper.StringWrapper
 					.split(left, "\\.");
@@ -570,20 +570,20 @@ public class AssignmentImpl extends ExpressionImpl implements Assignment {
 			{
 
 				java.lang.Integer i = 0;
-				java.lang.Boolean idLoopCond_302 = false;
-				while (!idLoopCond_302) {
-					idLoopCond_302 = kermeta.standard.helper.IntegerWrapper
+				java.lang.Boolean idLoopCond_431 = false;
+				while (!idLoopCond_431) {
+					idLoopCond_431 = kermeta.standard.helper.IntegerWrapper
 							.isGreaterOrEqual(i, tabLeft.size());
-					if (idLoopCond_302) {
+					if (idLoopCond_431) {
 					} else {
 
-						java.lang.Boolean idIfCond_303 = false;
-						idIfCond_303 = kermeta.standard.helper.IntegerWrapper
+						java.lang.Boolean idIfCond_432 = false;
+						idIfCond_432 = kermeta.standard.helper.IntegerWrapper
 								.isLower(i,
 										kermeta.standard.helper.IntegerWrapper
 												.minus(tabLeft.size(), 1));
 
-						if (idIfCond_303) {
+						if (idIfCond_432) {
 
 							result = kermeta.standard.helper.StringWrapper
 									.plus(
@@ -592,20 +592,20 @@ public class AssignmentImpl extends ExpressionImpl implements Assignment {
 															.elementAt(i)), ".");
 						} else {
 
-							java.lang.Boolean idIfCond_304 = false;
-							idIfCond_304 = kermeta.standard.helper.IntegerWrapper
+							java.lang.Boolean idIfCond_433 = false;
+							idIfCond_433 = kermeta.standard.helper.IntegerWrapper
 									.equals(
 											i,
 											kermeta.standard.helper.IntegerWrapper
 													.minus(tabLeft.size(), 1));
 
-							if (idIfCond_304) {
+							if (idIfCond_433) {
 
-								java.lang.Boolean idIfCond_305 = false;
-								idIfCond_305 = this.getValue()
+								java.lang.Boolean idIfCond_434 = false;
+								idIfCond_434 = this.getValue()
 										.callsFunctionType();
 
-								if (idIfCond_305) {
+								if (idIfCond_434) {
 
 									result = kermeta.standard.helper.StringWrapper
 											.plus(
@@ -707,8 +707,8 @@ public class AssignmentImpl extends ExpressionImpl implements Assignment {
 
 		} else {
 
-			java.lang.Boolean idIfCond_306 = false;
-			idIfCond_306 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+			java.lang.Boolean idIfCond_435 = false;
+			idIfCond_435 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 					.isInstanceOfSwitcher(
 							this.getValue(),
 							org.kermeta.compil.runtime.ExecutionContext
@@ -716,16 +716,16 @@ public class AssignmentImpl extends ExpressionImpl implements Assignment {
 									.getMetaClass(
 											"kermeta.language.behavior.Conditional"));
 
-			if (idIfCond_306) {
+			if (idIfCond_435) {
 
 				result = right;
 			} else {
 
-				java.lang.Boolean idIfCond_307 = false;
-				idIfCond_307 = kermeta.standard.helper.StringWrapper.contains(
+				java.lang.Boolean idIfCond_436 = false;
+				idIfCond_436 = kermeta.standard.helper.StringWrapper.contains(
 						right, context.getRETURN_EXPRESSION_TO_REPLACE());
 
-				if (idIfCond_307) {
+				if (idIfCond_436) {
 
 					result = kermeta.standard.helper.StringWrapper
 							.replace(
@@ -745,8 +745,8 @@ public class AssignmentImpl extends ExpressionImpl implements Assignment {
 															.getValueTypeCastPrefix()));
 				} else {
 
-					java.lang.Boolean idIfCond_308 = false;
-					idIfCond_308 = kermeta.standard.helper.BooleanWrapper
+					java.lang.Boolean idIfCond_437 = false;
+					idIfCond_437 = kermeta.standard.helper.BooleanWrapper
 							.and(
 									kermeta.standard.helper.BooleanWrapper
 											.or(
@@ -772,7 +772,7 @@ public class AssignmentImpl extends ExpressionImpl implements Assignment {
 													.getValue()
 													.isFunctionTypeVariable()));
 
-					if (idIfCond_308) {
+					if (idIfCond_437) {
 
 						result = right;
 					} else {
@@ -820,16 +820,16 @@ public class AssignmentImpl extends ExpressionImpl implements Assignment {
 		java.lang.String right_type = this.getValue().getStaticType()
 				.getTypeQName();
 
-		java.lang.Boolean idIfCond_309 = false;
-		idIfCond_309 = kermeta.standard.helper.StringWrapper.equals(right_type,
+		java.lang.Boolean idIfCond_438 = false;
+		idIfCond_438 = kermeta.standard.helper.StringWrapper.equals(right_type,
 				"kermeta::language::structure::Object");
 
-		if (idIfCond_309) {
+		if (idIfCond_438) {
 
-			java.lang.Boolean idIfCond_310 = false;
-			idIfCond_310 = this.getTarget().getStaticType().isValueType();
+			java.lang.Boolean idIfCond_439 = false;
+			idIfCond_439 = this.getTarget().getStaticType().isValueType();
 
-			if (idIfCond_310) {
+			if (idIfCond_439) {
 
 				org.kermeta.compil.runtime.helper.io.StdIOUtil
 						.getInstance()
@@ -856,62 +856,14 @@ public class AssignmentImpl extends ExpressionImpl implements Assignment {
 
 		result = "";
 
-		java.lang.Boolean idIfCond_311 = false;
-		idIfCond_311 = this.getIsCast();
+		java.lang.Boolean idIfCond_440 = false;
+		idIfCond_440 = this.getIsCast();
 
-		if (idIfCond_311) {
+		if (idIfCond_440) {
 
 			result = kermeta.standard.helper.StringWrapper.plus(
 					kermeta.standard.helper.StringWrapper.plus("(", this
 							.getCastTypeQName(context)), ") ");
-		}
-
-		return result;
-
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public String getCastTypeQName(KM2EcoreContext context) {
-
-		java.lang.String result = null;
-
-		result = "";
-
-		java.lang.Boolean idIfCond_312 = false;
-		idIfCond_312 = this.getIsCast();
-
-		if (idIfCond_312) {
-
-			result = this.getTarget().getStaticType().createBehaviorJava(
-					context);
-		}
-
-		return result;
-
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public String ppValueTypeCastPrefix(KM2EcoreContext context) {
-
-		java.lang.String result = null;
-
-		result = "";
-
-		java.lang.Boolean idIfCond_313 = false;
-		idIfCond_313 = this.requireConversionValueTypeToObject(context);
-
-		if (idIfCond_313) {
-
-			result = kermeta.standard.helper.StringWrapper.plus(context
-					.getOBJECT_UTIL_CLASS(), ".convertAsObject(");
 		}
 
 		return result;
@@ -936,16 +888,64 @@ public class AssignmentImpl extends ExpressionImpl implements Assignment {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public String ppValueTypeCastPrefix(KM2EcoreContext context) {
+
+		java.lang.String result = null;
+
+		result = "";
+
+		java.lang.Boolean idIfCond_441 = false;
+		idIfCond_441 = this.requireConversionValueTypeToObject(context);
+
+		if (idIfCond_441) {
+
+			result = kermeta.standard.helper.StringWrapper.plus(context
+					.getOBJECT_UTIL_CLASS(), ".convertAsObject(");
+		}
+
+		return result;
+
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getCastTypeQName(KM2EcoreContext context) {
+
+		java.lang.String result = null;
+
+		result = "";
+
+		java.lang.Boolean idIfCond_442 = false;
+		idIfCond_442 = this.getIsCast();
+
+		if (idIfCond_442) {
+
+			result = this.getTarget().getStaticType().createBehaviorJava(
+					context);
+		}
+
+		return result;
+
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public String ppCastSuffix(KM2EcoreContext context) {
 
 		java.lang.String result = null;
 
 		result = "";
 
-		java.lang.Boolean idIfCond_314 = false;
-		idIfCond_314 = this.getIsCast();
+		java.lang.Boolean idIfCond_443 = false;
+		idIfCond_443 = this.getIsCast();
 
-		if (idIfCond_314) {
+		if (idIfCond_443) {
 
 			result = kermeta.standard.helper.StringWrapper.plus(
 					kermeta.standard.helper.StringWrapper.plus(", \"", this
@@ -967,10 +967,10 @@ public class AssignmentImpl extends ExpressionImpl implements Assignment {
 
 		result = "";
 
-		java.lang.Boolean idIfCond_315 = false;
-		idIfCond_315 = this.requireConversionValueTypeToObject(context);
+		java.lang.Boolean idIfCond_444 = false;
+		idIfCond_444 = this.requireConversionValueTypeToObject(context);
 
-		if (idIfCond_315) {
+		if (idIfCond_444) {
 
 			result = ")";
 		}
@@ -993,16 +993,16 @@ public class AssignmentImpl extends ExpressionImpl implements Assignment {
 		java.lang.String left_type = this.getTarget().getStaticType()
 				.getTypeQName();
 
-		java.lang.Boolean idIfCond_316 = false;
-		idIfCond_316 = kermeta.standard.helper.StringWrapper.equals(left_type,
+		java.lang.Boolean idIfCond_445 = false;
+		idIfCond_445 = kermeta.standard.helper.StringWrapper.equals(left_type,
 				"kermeta::language::structure::Object");
 
-		if (idIfCond_316) {
+		if (idIfCond_445) {
 
-			java.lang.Boolean idIfCond_317 = false;
-			idIfCond_317 = this.getValue().getStaticType().isValueType();
+			java.lang.Boolean idIfCond_446 = false;
+			idIfCond_446 = this.getValue().getStaticType().isValueType();
 
-			if (idIfCond_317) {
+			if (idIfCond_446) {
 
 				result = true;
 			}
@@ -1022,10 +1022,10 @@ public class AssignmentImpl extends ExpressionImpl implements Assignment {
 	public NotificationChain eInverseRemove(InternalEObject otherEnd,
 			int featureID, NotificationChain msgs) {
 		switch (featureID) {
-		case BehaviorPackage.ASSIGNMENT__TARGET:
-			return basicSetTarget(null, msgs);
 		case BehaviorPackage.ASSIGNMENT__VALUE:
 			return basicSetValue(null, msgs);
+		case BehaviorPackage.ASSIGNMENT__TARGET:
+			return basicSetTarget(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -1044,14 +1044,14 @@ public class AssignmentImpl extends ExpressionImpl implements Assignment {
 			return getCacheCastSuffix();
 		case BehaviorPackage.ASSIGNMENT__VALUE_TYPE_CAST_SUFFIX:
 			return getValueTypeCastSuffix();
-		case BehaviorPackage.ASSIGNMENT__TARGET:
-			if (resolve)
-				return getTarget();
-			return basicGetTarget();
 		case BehaviorPackage.ASSIGNMENT__VALUE:
 			if (resolve)
 				return getValue();
 			return basicGetValue();
+		case BehaviorPackage.ASSIGNMENT__TARGET:
+			if (resolve)
+				return getTarget();
+			return basicGetTarget();
 		case BehaviorPackage.ASSIGNMENT__IS_CAST:
 			return getIsCast();
 		case BehaviorPackage.ASSIGNMENT__VALUE_TYPE_CAST_PREFIX:
@@ -1077,11 +1077,11 @@ public class AssignmentImpl extends ExpressionImpl implements Assignment {
 		case BehaviorPackage.ASSIGNMENT__VALUE_TYPE_CAST_SUFFIX:
 			setValueTypeCastSuffix((String) newValue);
 			return;
-		case BehaviorPackage.ASSIGNMENT__TARGET:
-			setTarget((CallExpression) newValue);
-			return;
 		case BehaviorPackage.ASSIGNMENT__VALUE:
 			setValue((Expression) newValue);
+			return;
+		case BehaviorPackage.ASSIGNMENT__TARGET:
+			setTarget((CallExpression) newValue);
 			return;
 		case BehaviorPackage.ASSIGNMENT__IS_CAST:
 			setIsCast((Boolean) newValue);
@@ -1110,11 +1110,11 @@ public class AssignmentImpl extends ExpressionImpl implements Assignment {
 		case BehaviorPackage.ASSIGNMENT__VALUE_TYPE_CAST_SUFFIX:
 			setValueTypeCastSuffix(VALUE_TYPE_CAST_SUFFIX_EDEFAULT);
 			return;
-		case BehaviorPackage.ASSIGNMENT__TARGET:
-			setTarget((CallExpression) null);
-			return;
 		case BehaviorPackage.ASSIGNMENT__VALUE:
 			setValue((Expression) null);
+			return;
+		case BehaviorPackage.ASSIGNMENT__TARGET:
+			setTarget((CallExpression) null);
 			return;
 		case BehaviorPackage.ASSIGNMENT__IS_CAST:
 			setIsCast(IS_CAST_EDEFAULT);
@@ -1144,10 +1144,10 @@ public class AssignmentImpl extends ExpressionImpl implements Assignment {
 			return VALUE_TYPE_CAST_SUFFIX_EDEFAULT == null ? valueTypeCastSuffix != null
 					: !VALUE_TYPE_CAST_SUFFIX_EDEFAULT
 							.equals(valueTypeCastSuffix);
-		case BehaviorPackage.ASSIGNMENT__TARGET:
-			return target != null;
 		case BehaviorPackage.ASSIGNMENT__VALUE:
 			return value != null;
+		case BehaviorPackage.ASSIGNMENT__TARGET:
+			return target != null;
 		case BehaviorPackage.ASSIGNMENT__IS_CAST:
 			return IS_CAST_EDEFAULT == null ? isCast != null
 					: !IS_CAST_EDEFAULT.equals(isCast);

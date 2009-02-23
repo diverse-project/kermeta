@@ -4,7 +4,7 @@
  * 
  * Generating with Kermeta <http://www.kermeta.org>
  *
- * $Id: CallFeatureImpl.java,v 1.15 2009-02-10 17:51:51 cfaucher Exp $
+ * $Id: CallFeatureImpl.java,v 1.16 2009-02-23 15:26:46 cfaucher Exp $
  */
 package kermeta.language.behavior.impl;
 
@@ -36,9 +36,9 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link kermeta.language.behavior.impl.CallFeatureImpl#getIsAtpre <em>Is Atpre</em>}</li>
- *   <li>{@link kermeta.language.behavior.impl.CallFeatureImpl#getStaticOperation <em>Static Operation</em>}</li>
  *   <li>{@link kermeta.language.behavior.impl.CallFeatureImpl#getCalledFtResult <em>Called Ft Result</em>}</li>
+ *   <li>{@link kermeta.language.behavior.impl.CallFeatureImpl#getStaticOperation <em>Static Operation</em>}</li>
+ *   <li>{@link kermeta.language.behavior.impl.CallFeatureImpl#getIsAtpre <em>Is Atpre</em>}</li>
  *   <li>{@link kermeta.language.behavior.impl.CallFeatureImpl#getTarget <em>Target</em>}</li>
  *   <li>{@link kermeta.language.behavior.impl.CallFeatureImpl#getStaticEnumLiteral <em>Static Enum Literal</em>}</li>
  *   <li>{@link kermeta.language.behavior.impl.CallFeatureImpl#getStaticProperty <em>Static Property</em>}</li>
@@ -48,36 +48,6 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  * @generated
  */
 public class CallFeatureImpl extends CallExpressionImpl implements CallFeature {
-	/**
-	 * The default value of the '{@link #getIsAtpre() <em>Is Atpre</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getIsAtpre()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final Boolean IS_ATPRE_EDEFAULT = Boolean.FALSE;
-
-	/**
-	 * The cached value of the '{@link #getIsAtpre() <em>Is Atpre</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getIsAtpre()
-	 * @generated
-	 * @ordered
-	 */
-	protected Boolean isAtpre = IS_ATPRE_EDEFAULT;
-
-	/**
-	 * The cached value of the '{@link #getStaticOperation() <em>Static Operation</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getStaticOperation()
-	 * @generated
-	 * @ordered
-	 */
-	protected Operation staticOperation;
-
 	/**
 	 * The default value of the '{@link #getCalledFtResult() <em>Called Ft Result</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -97,6 +67,36 @@ public class CallFeatureImpl extends CallExpressionImpl implements CallFeature {
 	 * @ordered
 	 */
 	protected String calledFtResult = CALLED_FT_RESULT_EDEFAULT;
+
+	/**
+	 * The cached value of the '{@link #getStaticOperation() <em>Static Operation</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getStaticOperation()
+	 * @generated
+	 * @ordered
+	 */
+	protected Operation staticOperation;
+
+	/**
+	 * The default value of the '{@link #getIsAtpre() <em>Is Atpre</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getIsAtpre()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final Boolean IS_ATPRE_EDEFAULT = Boolean.FALSE;
+
+	/**
+	 * The cached value of the '{@link #getIsAtpre() <em>Is Atpre</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getIsAtpre()
+	 * @generated
+	 * @ordered
+	 */
+	protected Boolean isAtpre = IS_ATPRE_EDEFAULT;
 
 	/**
 	 * The cached value of the '{@link #getTarget() <em>Target</em>}' containment reference.
@@ -152,8 +152,8 @@ public class CallFeatureImpl extends CallExpressionImpl implements CallFeature {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Boolean getIsAtpre() {
-		return isAtpre;
+	public String getCalledFtResult() {
+		return calledFtResult;
 	}
 
 	/**
@@ -161,12 +161,13 @@ public class CallFeatureImpl extends CallExpressionImpl implements CallFeature {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setIsAtpre(Boolean newIsAtpre) {
-		Boolean oldIsAtpre = isAtpre;
-		isAtpre = newIsAtpre;
+	public void setCalledFtResult(String newCalledFtResult) {
+		String oldCalledFtResult = calledFtResult;
+		calledFtResult = newCalledFtResult;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET,
-					BehaviorPackage.CALL_FEATURE__IS_ATPRE, oldIsAtpre, isAtpre));
+					BehaviorPackage.CALL_FEATURE__CALLED_FT_RESULT,
+					oldCalledFtResult, calledFtResult));
 	}
 
 	/**
@@ -216,8 +217,8 @@ public class CallFeatureImpl extends CallExpressionImpl implements CallFeature {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public String getCalledFtResult() {
-		return calledFtResult;
+	public Boolean getIsAtpre() {
+		return isAtpre;
 	}
 
 	/**
@@ -225,13 +226,12 @@ public class CallFeatureImpl extends CallExpressionImpl implements CallFeature {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setCalledFtResult(String newCalledFtResult) {
-		String oldCalledFtResult = calledFtResult;
-		calledFtResult = newCalledFtResult;
+	public void setIsAtpre(Boolean newIsAtpre) {
+		Boolean oldIsAtpre = isAtpre;
+		isAtpre = newIsAtpre;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET,
-					BehaviorPackage.CALL_FEATURE__CALLED_FT_RESULT,
-					oldCalledFtResult, calledFtResult));
+					BehaviorPackage.CALL_FEATURE__IS_ATPRE, oldIsAtpre, isAtpre));
 	}
 
 	/**
@@ -415,44 +415,44 @@ public class CallFeatureImpl extends CallExpressionImpl implements CallFeature {
 
 		//BIft:detect
 
-		kermeta.language.structure.Type result_ft21 = null;
+		kermeta.language.structure.Type result_ft141 = null;
 
-		kermeta.language.structure.Type elem_ft21 = null;
+		kermeta.language.structure.Type elem_ft141 = null;
 
-		result_ft21 = null;
+		result_ft141 = null;
 
 		{
 
-			kermeta.standard.Iterator<kermeta.language.structure.Type> it_ft21 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
+			kermeta.standard.Iterator<kermeta.language.structure.Type> it_ft141 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
 					.<kermeta.language.structure.Type> convertAsOrderedSet(
 							this.getContainedType()).iterator();
-			java.lang.Boolean idLoopCond_170 = false;
-			while (!idLoopCond_170) {
-				idLoopCond_170 = kermeta.standard.helper.BooleanWrapper.or(
-						it_ft21.isOff(),
+			java.lang.Boolean idLoopCond_562 = false;
+			while (!idLoopCond_562) {
+				idLoopCond_562 = kermeta.standard.helper.BooleanWrapper.or(
+						it_ft141.isOff(),
 						org.kermeta.compil.runtime.helper.language.ObjectUtil
-								.isNotEqualSwitcher(result_ft21, null));
-				if (idLoopCond_170) {
+								.isNotEqualSwitcher(result_ft141, null));
+				if (idLoopCond_562) {
 				} else {
 
-					elem_ft21 = it_ft21.next();
+					elem_ft141 = it_ft141.next();
 
-					java.lang.Boolean idIfCond_171 = false;
+					java.lang.Boolean idIfCond_563 = false;
 					//BIle:detector
-					kermeta.language.structure.Type t_lbdExp21 = elem_ft21;
+					kermeta.language.structure.Type t_lbdExp141 = elem_ft141;
 
-					idIfCond_171 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+					idIfCond_563 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 							.isInstanceOfSwitcher(
-									t_lbdExp21,
+									t_lbdExp141,
 									org.kermeta.compil.runtime.ExecutionContext
 											.getInstance()
 											.getMetaClass(
 													"kermeta.language.structure.FunctionType"));
 					//EIle:detector
 
-					if (idIfCond_171) {
+					if (idIfCond_563) {
 
-						result_ft21 = elem_ft21;
+						result_ft141 = elem_ft141;
 					}
 
 				}
@@ -461,7 +461,7 @@ public class CallFeatureImpl extends CallExpressionImpl implements CallFeature {
 
 		//CE
 		result = (kermeta.language.structure.FunctionType) org.kermeta.compil.runtime.helper.language.ObjectUtil
-				.asTypeOrVoid(result_ft21,
+				.asTypeOrVoid(result_ft141,
 						"kermeta.language.structure.FunctionType");
 		//EIft:detect
 
@@ -486,11 +486,11 @@ public class CallFeatureImpl extends CallExpressionImpl implements CallFeature {
 
 		java.lang.String cf_prop_suffix = "";
 
-		java.lang.Boolean idIfCond_172 = false;
-		idIfCond_172 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+		java.lang.Boolean idIfCond_564 = false;
+		idIfCond_564 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 				.isVoidSwitcher(this.getTarget());
 
-		if (idIfCond_172) {
+		if (idIfCond_564) {
 
 			this
 					.setTarget(((kermeta.language.behavior.SelfExpression) org.kermeta.compil.runtime.helper.language.ClassUtil
@@ -507,15 +507,15 @@ public class CallFeatureImpl extends CallExpressionImpl implements CallFeature {
 
 		java.lang.String static_call = "";
 
-		java.lang.Boolean idIfCond_173 = false;
-		idIfCond_173 = this.isCallFeatureAsStaticOperation();
+		java.lang.Boolean idIfCond_565 = false;
+		idIfCond_565 = this.isCallFeatureAsStaticOperation();
 
-		if (idIfCond_173) {
+		if (idIfCond_565) {
 
-			java.lang.Boolean idIfCond_174 = false;
-			idIfCond_174 = this.callsFunctionType();
+			java.lang.Boolean idIfCond_566 = false;
+			idIfCond_566 = this.callsFunctionType();
 
-			if (idIfCond_174) {
+			if (idIfCond_566) {
 
 				context.getTasks_stack().push(
 						context.getFUNCTION_TYPE_COMPILATION_TASK());
@@ -530,24 +530,24 @@ public class CallFeatureImpl extends CallExpressionImpl implements CallFeature {
 				result = ft_str;
 			} else {
 
-				java.lang.Boolean idIfCond_175 = false;
-				idIfCond_175 = this.fromUtil(context);
+				java.lang.Boolean idIfCond_567 = false;
+				idIfCond_567 = this.fromUtil(context);
 
-				if (idIfCond_175) {
+				if (idIfCond_567) {
 
-					java.lang.Boolean idIfCond_176 = false;
-					idIfCond_176 = this.getStaticOperation().ownedByValueType();
+					java.lang.Boolean idIfCond_568 = false;
+					idIfCond_568 = this.getStaticOperation().ownedByValueType();
 
-					if (idIfCond_176) {
+					if (idIfCond_568) {
 
 						static_call = this.getStaticOperation()
 								.getOptimizedStaticCall(context);
 
-						java.lang.Boolean idIfCond_177 = false;
-						idIfCond_177 = kermeta.standard.helper.StringWrapper
+						java.lang.Boolean idIfCond_569 = false;
+						idIfCond_569 = kermeta.standard.helper.StringWrapper
 								.equals(static_call, "");
 
-						if (idIfCond_177) {
+						if (idIfCond_569) {
 
 							static_call = kermeta.standard.helper.StringWrapper
 									.plus(
@@ -591,11 +591,11 @@ public class CallFeatureImpl extends CallExpressionImpl implements CallFeature {
 						static_call = this.getStaticOperation()
 								.getOptimizedStaticCall(context);
 
-						java.lang.Boolean idIfCond_178 = false;
-						idIfCond_178 = kermeta.standard.helper.StringWrapper
+						java.lang.Boolean idIfCond_570 = false;
+						idIfCond_570 = kermeta.standard.helper.StringWrapper
 								.equals(static_call, "");
 
-						if (idIfCond_178) {
+						if (idIfCond_570) {
 
 							static_call = kermeta.standard.helper.StringWrapper
 									.plus(
@@ -614,11 +614,11 @@ public class CallFeatureImpl extends CallExpressionImpl implements CallFeature {
 															fName), "Switcher");
 						}
 
-						java.lang.Boolean idIfCond_179 = false;
-						idIfCond_179 = kermeta.standard.helper.StringWrapper
+						java.lang.Boolean idIfCond_571 = false;
+						idIfCond_571 = kermeta.standard.helper.StringWrapper
 								.equals(fName, "asType");
 
-						if (idIfCond_179) {
+						if (idIfCond_571) {
 
 							ppCast = true;
 
@@ -643,24 +643,24 @@ public class CallFeatureImpl extends CallExpressionImpl implements CallFeature {
 
 				} else {
 
-					java.lang.Boolean idIfCond_180 = false;
-					idIfCond_180 = kermeta.standard.helper.BooleanWrapper
+					java.lang.Boolean idIfCond_572 = false;
+					idIfCond_572 = kermeta.standard.helper.BooleanWrapper
 							.not(org.kermeta.compil.runtime.helper.language.ObjectUtil
 									.isVoidSwitcher(tgt));
 
-					if (idIfCond_180) {
+					if (idIfCond_572) {
 
-						java.lang.Boolean idIfCond_181 = false;
-						idIfCond_181 = kermeta.standard.helper.BooleanWrapper
+						java.lang.Boolean idIfCond_573 = false;
+						idIfCond_573 = kermeta.standard.helper.BooleanWrapper
 								.not(org.kermeta.compil.runtime.helper.language.ObjectUtil
 										.isVoidSwitcher(tgt.getStaticType()));
 
-						if (idIfCond_181) {
+						if (idIfCond_573) {
 
-							java.lang.Boolean idIfCond_182 = false;
-							idIfCond_182 = tgt.getStaticType().isValueType();
+							java.lang.Boolean idIfCond_574 = false;
+							idIfCond_574 = tgt.getStaticType().isValueType();
 
-							if (idIfCond_182) {
+							if (idIfCond_574) {
 
 								static_call = kermeta.standard.helper.StringWrapper
 										.plus(
@@ -679,8 +679,8 @@ public class CallFeatureImpl extends CallExpressionImpl implements CallFeature {
 
 					} else {
 
-						java.lang.Boolean idIfCond_183 = false;
-						idIfCond_183 = kermeta.standard.helper.BooleanWrapper
+						java.lang.Boolean idIfCond_575 = false;
+						idIfCond_575 = kermeta.standard.helper.BooleanWrapper
 								.and(
 										this.getStaticOperation()
 												.getOwningClass()
@@ -691,7 +691,7 @@ public class CallFeatureImpl extends CallExpressionImpl implements CallFeature {
 																.getStaticOperation()
 																.getBody())));
 
-						if (idIfCond_183) {
+						if (idIfCond_575) {
 
 							static_call = this.getStaticOperation()
 									.getOptimizedStaticCall(context);
@@ -705,8 +705,8 @@ public class CallFeatureImpl extends CallExpressionImpl implements CallFeature {
 
 		}
 
-		java.lang.Boolean idIfCond_184 = false;
-		idIfCond_184 = kermeta.standard.helper.BooleanWrapper
+		java.lang.Boolean idIfCond_576 = false;
+		idIfCond_576 = kermeta.standard.helper.BooleanWrapper
 				.and(
 						kermeta.standard.helper.BooleanWrapper
 								.and(
@@ -755,21 +755,21 @@ public class CallFeatureImpl extends CallExpressionImpl implements CallFeature {
 														.getMetaClass(
 																"kermeta.language.behavior.CallResult"))));
 
-		if (idIfCond_184) {
+		if (idIfCond_576) {
 
 			java.lang.String type_label = tgt.createBehaviorJava(context);
 
-			java.lang.Boolean idIfCond_185 = false;
-			idIfCond_185 = kermeta.standard.helper.BooleanWrapper
+			java.lang.Boolean idIfCond_577 = false;
+			idIfCond_577 = kermeta.standard.helper.BooleanWrapper
 					.not(kermeta.standard.helper.StringWrapper.isValueType(
 							type_label, context));
 
-			if (idIfCond_185) {
+			if (idIfCond_577) {
 
 				java.lang.String pojoType_label = "";
 
-				java.lang.Boolean idIfCond_186 = false;
-				idIfCond_186 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+				java.lang.Boolean idIfCond_578 = false;
+				idIfCond_578 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 						.isInstanceOfSwitcher(
 								tgt.getStaticType(),
 								org.kermeta.compil.runtime.ExecutionContext
@@ -777,7 +777,7 @@ public class CallFeatureImpl extends CallExpressionImpl implements CallFeature {
 										.getMetaClass(
 												"kermeta.language.structure.ParameterizedType"));
 
-				if (idIfCond_186) {
+				if (idIfCond_578) {
 
 					pojoType_label = ((kermeta.language.structure.ParameterizedType) org.kermeta.compil.runtime.helper.language.ObjectUtil
 							.asTypeSwitcher(
@@ -789,11 +789,11 @@ public class CallFeatureImpl extends CallExpressionImpl implements CallFeature {
 							.getTypeDefinition().getFinalJavaClassQN();
 				}
 
-				java.lang.Boolean idIfCond_187 = false;
-				idIfCond_187 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+				java.lang.Boolean idIfCond_579 = false;
+				idIfCond_579 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 						.isNotEqualSwitcher(pojoType_label, "");
 
-				if (idIfCond_187) {
+				if (idIfCond_579) {
 
 					result = kermeta.standard.helper.StringWrapper.plus(
 							kermeta.standard.helper.StringWrapper.plus("new ",
@@ -834,40 +834,40 @@ public class CallFeatureImpl extends CallExpressionImpl implements CallFeature {
 
 		} else {
 
-			java.lang.Boolean idIfCond_188 = false;
-			idIfCond_188 = kermeta.standard.helper.BooleanWrapper
+			java.lang.Boolean idIfCond_580 = false;
+			idIfCond_580 = kermeta.standard.helper.BooleanWrapper
 					.not(org.kermeta.compil.runtime.helper.language.ObjectUtil
 							.isVoidSwitcher(tgt));
 
-			if (idIfCond_188) {
+			if (idIfCond_580) {
 
-				java.lang.Boolean idIfCond_189 = false;
-				idIfCond_189 = kermeta.standard.helper.BooleanWrapper.not(tgt
+				java.lang.Boolean idIfCond_581 = false;
+				idIfCond_581 = kermeta.standard.helper.BooleanWrapper.not(tgt
 						.callsFunctionType());
 
-				if (idIfCond_189) {
+				if (idIfCond_581) {
 
-					java.lang.Boolean idIfCond_190 = false;
-					idIfCond_190 = kermeta.standard.helper.BooleanWrapper
+					java.lang.Boolean idIfCond_582 = false;
+					idIfCond_582 = kermeta.standard.helper.BooleanWrapper
 							.not(this.callsFunctionType());
 
-					if (idIfCond_190) {
+					if (idIfCond_582) {
 
 						java.lang.String tgt_staticType_str = "";
 
-						java.lang.Boolean idIfCond_191 = false;
-						idIfCond_191 = kermeta.standard.helper.BooleanWrapper
+						java.lang.Boolean idIfCond_583 = false;
+						idIfCond_583 = kermeta.standard.helper.BooleanWrapper
 								.not(org.kermeta.compil.runtime.helper.language.ObjectUtil
 										.isVoidSwitcher(tgt.getStaticType()));
 
-						if (idIfCond_191) {
+						if (idIfCond_583) {
 
 							tgt_staticType_str = org.kermeta.compil.runtime.helper.language.ObjectUtil
 									.toStringSwitcher(tgt.getStaticType());
 						}
 
-						java.lang.Boolean idIfCond_192 = false;
-						idIfCond_192 = kermeta.standard.helper.BooleanWrapper
+						java.lang.Boolean idIfCond_584 = false;
+						idIfCond_584 = kermeta.standard.helper.BooleanWrapper
 								.and(
 										org.kermeta.compil.runtime.helper.language.ObjectUtil
 												.isInstanceOfSwitcher(
@@ -881,7 +881,7 @@ public class CallFeatureImpl extends CallExpressionImpl implements CallFeature {
 														tgt_staticType_str,
 														"Enumeration"));
 
-						if (idIfCond_192) {
+						if (idIfCond_584) {
 
 							result = kermeta.standard.helper.StringWrapper
 									.plus(
@@ -901,11 +901,11 @@ public class CallFeatureImpl extends CallExpressionImpl implements CallFeature {
 											.createBehaviorJava(context));
 						}
 
-						java.lang.Boolean idIfCond_193 = false;
-						idIfCond_193 = kermeta.standard.helper.StringWrapper
+						java.lang.Boolean idIfCond_585 = false;
+						idIfCond_585 = kermeta.standard.helper.StringWrapper
 								.equals(static_call, "");
 
-						if (idIfCond_193) {
+						if (idIfCond_585) {
 
 							result = kermeta.standard.helper.StringWrapper
 									.plus(result, ".");
@@ -913,8 +913,8 @@ public class CallFeatureImpl extends CallExpressionImpl implements CallFeature {
 
 					} else {
 
-						java.lang.Boolean idIfCond_194 = false;
-						idIfCond_194 = kermeta.standard.helper.BooleanWrapper
+						java.lang.Boolean idIfCond_586 = false;
+						idIfCond_586 = kermeta.standard.helper.BooleanWrapper
 								.and(
 										org.kermeta.compil.runtime.helper.language.ObjectUtil
 												.isInstanceOfSwitcher(
@@ -929,12 +929,12 @@ public class CallFeatureImpl extends CallExpressionImpl implements CallFeature {
 														.containerSwitcher(this)
 														.callsFunctionType()));
 
-						if (idIfCond_194) {
+						if (idIfCond_586) {
 
 							java.lang.String resultPrefix = "";
 
-							java.lang.Boolean idIfCond_195 = false;
-							idIfCond_195 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+							java.lang.Boolean idIfCond_587 = false;
+							idIfCond_587 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 									.isVoidSwitcher(this
 											.getContainerAsTypeIn(
 													org.kermeta.compil.runtime.ExecutionContext
@@ -946,14 +946,14 @@ public class CallFeatureImpl extends CallExpressionImpl implements CallFeature {
 															.getMetaClass(
 																	"kermeta.language.behavior.Block")));
 
-							if (idIfCond_195) {
+							if (idIfCond_587) {
 
 								resultPrefix = context
 										.getRETURN_EXPRESSION_TO_REPLACE_SPECIAL();
 							}
 
-							java.lang.Boolean idIfCond_196 = false;
-							idIfCond_196 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+							java.lang.Boolean idIfCond_588 = false;
+							idIfCond_588 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 									.isVoidSwitcher(this
 											.getContainerAsTypeIn(
 													org.kermeta.compil.runtime.ExecutionContext
@@ -965,14 +965,14 @@ public class CallFeatureImpl extends CallExpressionImpl implements CallFeature {
 															.getMetaClass(
 																	"kermeta.language.structure.Constraint")));
 
-							if (idIfCond_196) {
+							if (idIfCond_588) {
 
 								resultPrefix = context
 										.getRETURN_EXPRESSION_TO_REPLACE_SPECIAL();
 							}
 
-							java.lang.Boolean idIfCond_197 = false;
-							idIfCond_197 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+							java.lang.Boolean idIfCond_589 = false;
+							idIfCond_589 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 									.isVoidSwitcher(this
 											.getContainerAsTypeIn(
 													org.kermeta.compil.runtime.ExecutionContext
@@ -984,17 +984,17 @@ public class CallFeatureImpl extends CallExpressionImpl implements CallFeature {
 															.getMetaClass(
 																	"kermeta.language.structure.Operation")));
 
-							if (idIfCond_197) {
+							if (idIfCond_589) {
 
 								resultPrefix = context
 										.getRETURN_EXPRESSION_TO_REPLACE_SPECIAL();
 							}
 
-							java.lang.Boolean idIfCond_198 = false;
-							idIfCond_198 = kermeta.standard.helper.BooleanWrapper
+							java.lang.Boolean idIfCond_590 = false;
+							idIfCond_590 = kermeta.standard.helper.BooleanWrapper
 									.not(this.isParameter());
 
-							if (idIfCond_198) {
+							if (idIfCond_590) {
 
 								result = kermeta.standard.helper.StringWrapper
 										.plus(
@@ -1052,16 +1052,16 @@ public class CallFeatureImpl extends CallExpressionImpl implements CallFeature {
 
 			}
 
-			java.lang.Boolean idIfCond_199 = false;
-			idIfCond_199 = kermeta.standard.helper.StringWrapper.equals(
+			java.lang.Boolean idIfCond_591 = false;
+			idIfCond_591 = kermeta.standard.helper.StringWrapper.equals(
 					static_call, "");
 
-			if (idIfCond_199) {
+			if (idIfCond_591) {
 
-				java.lang.Boolean idIfCond_200 = false;
-				idIfCond_200 = this.isCallFeatureAsStaticEnumLiteral();
+				java.lang.Boolean idIfCond_592 = false;
+				idIfCond_592 = this.isCallFeatureAsStaticEnumLiteral();
 
-				if (idIfCond_200) {
+				if (idIfCond_592) {
 
 					result = kermeta.standard.helper.StringWrapper.plus(
 							kermeta.standard.helper.StringWrapper.plus(
@@ -1070,13 +1070,13 @@ public class CallFeatureImpl extends CallExpressionImpl implements CallFeature {
 							"\")");
 				} else {
 
-					java.lang.Boolean idIfCond_201 = false;
-					idIfCond_201 = this.isCallFeatureAsStaticProperty();
+					java.lang.Boolean idIfCond_593 = false;
+					idIfCond_593 = this.isCallFeatureAsStaticProperty();
 
-					if (idIfCond_201) {
+					if (idIfCond_593) {
 
-						java.lang.Boolean idIfCond_202 = false;
-						idIfCond_202 = kermeta.standard.helper.BooleanWrapper
+						java.lang.Boolean idIfCond_594 = false;
+						idIfCond_594 = kermeta.standard.helper.BooleanWrapper
 								.and(
 										org.kermeta.compil.runtime.helper.language.ObjectUtil
 												.isNotEqualSwitcher(this
@@ -1085,7 +1085,7 @@ public class CallFeatureImpl extends CallExpressionImpl implements CallFeature {
 										kermeta.standard.helper.BooleanWrapper
 												.not(this.isParameterMany()));
 
-						if (idIfCond_202) {
+						if (idIfCond_594) {
 
 							java.lang.String type_binding = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
 									.<kermeta.language.structure.TypeVariableBinding> convertAsOrderedSet(
@@ -1101,8 +1101,8 @@ public class CallFeatureImpl extends CallExpressionImpl implements CallFeature {
 									.first().getType().createBehaviorJava(
 											context);
 
-							java.lang.Boolean idIfCond_203 = false;
-							idIfCond_203 = kermeta.standard.helper.BooleanWrapper
+							java.lang.Boolean idIfCond_595 = false;
+							idIfCond_595 = kermeta.standard.helper.BooleanWrapper
 									.and(
 											kermeta.standard.helper.BooleanWrapper
 													.not(this
@@ -1113,7 +1113,7 @@ public class CallFeatureImpl extends CallExpressionImpl implements CallFeature {
 															.getStaticProperty()
 															.getIsOrdered()));
 
-							if (idIfCond_203) {
+							if (idIfCond_595) {
 
 								result = kermeta.standard.helper.StringWrapper
 										.plus(
@@ -1131,8 +1131,8 @@ public class CallFeatureImpl extends CallExpressionImpl implements CallFeature {
 												result);
 							}
 
-							java.lang.Boolean idIfCond_204 = false;
-							idIfCond_204 = kermeta.standard.helper.BooleanWrapper
+							java.lang.Boolean idIfCond_596 = false;
+							idIfCond_596 = kermeta.standard.helper.BooleanWrapper
 									.and(
 											this.getStaticProperty()
 													.getIsUnique(),
@@ -1141,7 +1141,7 @@ public class CallFeatureImpl extends CallExpressionImpl implements CallFeature {
 															.getStaticProperty()
 															.getIsOrdered()));
 
-							if (idIfCond_204) {
+							if (idIfCond_596) {
 
 								result = kermeta.standard.helper.StringWrapper
 										.plus(
@@ -1159,15 +1159,15 @@ public class CallFeatureImpl extends CallExpressionImpl implements CallFeature {
 												result);
 							}
 
-							java.lang.Boolean idIfCond_205 = false;
-							idIfCond_205 = kermeta.standard.helper.BooleanWrapper
+							java.lang.Boolean idIfCond_597 = false;
+							idIfCond_597 = kermeta.standard.helper.BooleanWrapper
 									.and(
 											this.getStaticProperty()
 													.getIsUnique(), this
 													.getStaticProperty()
 													.getIsOrdered());
 
-							if (idIfCond_205) {
+							if (idIfCond_597) {
 
 								result = kermeta.standard.helper.StringWrapper
 										.plus(
@@ -1185,14 +1185,14 @@ public class CallFeatureImpl extends CallExpressionImpl implements CallFeature {
 												result);
 							}
 
-							java.lang.Boolean idIfCond_206 = false;
-							idIfCond_206 = kermeta.standard.helper.BooleanWrapper
+							java.lang.Boolean idIfCond_598 = false;
+							idIfCond_598 = kermeta.standard.helper.BooleanWrapper
 									.and(kermeta.standard.helper.BooleanWrapper
 											.not(this.getStaticProperty()
 													.getIsUnique()), this
 											.getStaticProperty().getIsOrdered());
 
-							if (idIfCond_206) {
+							if (idIfCond_598) {
 
 								result = kermeta.standard.helper.StringWrapper
 										.plus(
@@ -1227,14 +1227,14 @@ public class CallFeatureImpl extends CallExpressionImpl implements CallFeature {
 						cf_prop_suffix = "";
 					} else {
 
-						java.lang.Boolean idIfCond_207 = false;
-						idIfCond_207 = kermeta.standard.helper.BooleanWrapper
+						java.lang.Boolean idIfCond_599 = false;
+						idIfCond_599 = kermeta.standard.helper.BooleanWrapper
 								.not(this.callsFunctionType());
 
-						if (idIfCond_207) {
+						if (idIfCond_599) {
 
-							java.lang.Boolean idIfCond_208 = false;
-							idIfCond_208 = kermeta.standard.helper.BooleanWrapper
+							java.lang.Boolean idIfCond_600 = false;
+							idIfCond_600 = kermeta.standard.helper.BooleanWrapper
 									.and(
 											org.kermeta.compil.runtime.helper.language.ObjectUtil
 													.isNotEqualSwitcher(
@@ -1245,7 +1245,7 @@ public class CallFeatureImpl extends CallExpressionImpl implements CallFeature {
 											kermeta.standard.helper.BooleanWrapper
 													.not(this.isParameterMany()));
 
-							if (idIfCond_208) {
+							if (idIfCond_600) {
 
 								java.lang.String type_binding = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
 										.<kermeta.language.structure.TypeVariableBinding> convertAsOrderedSet(
@@ -1261,8 +1261,8 @@ public class CallFeatureImpl extends CallExpressionImpl implements CallFeature {
 										.first().getType().createBehaviorJava(
 												context);
 
-								java.lang.Boolean idIfCond_209 = false;
-								idIfCond_209 = kermeta.standard.helper.BooleanWrapper
+								java.lang.Boolean idIfCond_601 = false;
+								idIfCond_601 = kermeta.standard.helper.BooleanWrapper
 										.and(
 												kermeta.standard.helper.BooleanWrapper
 														.not(this
@@ -1273,7 +1273,7 @@ public class CallFeatureImpl extends CallExpressionImpl implements CallFeature {
 																.getStaticOperation()
 																.getIsOrdered()));
 
-								if (idIfCond_209) {
+								if (idIfCond_601) {
 
 									result = kermeta.standard.helper.StringWrapper
 											.plus(
@@ -1291,8 +1291,8 @@ public class CallFeatureImpl extends CallExpressionImpl implements CallFeature {
 													result);
 								}
 
-								java.lang.Boolean idIfCond_210 = false;
-								idIfCond_210 = kermeta.standard.helper.BooleanWrapper
+								java.lang.Boolean idIfCond_602 = false;
+								idIfCond_602 = kermeta.standard.helper.BooleanWrapper
 										.and(
 												this.getStaticOperation()
 														.getIsUnique(),
@@ -1301,7 +1301,7 @@ public class CallFeatureImpl extends CallExpressionImpl implements CallFeature {
 																.getStaticOperation()
 																.getIsOrdered()));
 
-								if (idIfCond_210) {
+								if (idIfCond_602) {
 
 									result = kermeta.standard.helper.StringWrapper
 											.plus(
@@ -1319,14 +1319,14 @@ public class CallFeatureImpl extends CallExpressionImpl implements CallFeature {
 													result);
 								}
 
-								java.lang.Boolean idIfCond_211 = false;
-								idIfCond_211 = kermeta.standard.helper.BooleanWrapper
+								java.lang.Boolean idIfCond_603 = false;
+								idIfCond_603 = kermeta.standard.helper.BooleanWrapper
 										.and(this.getStaticOperation()
 												.getIsUnique(), this
 												.getStaticOperation()
 												.getIsOrdered());
 
-								if (idIfCond_211) {
+								if (idIfCond_603) {
 
 									result = kermeta.standard.helper.StringWrapper
 											.plus(
@@ -1344,8 +1344,8 @@ public class CallFeatureImpl extends CallExpressionImpl implements CallFeature {
 													result);
 								}
 
-								java.lang.Boolean idIfCond_212 = false;
-								idIfCond_212 = kermeta.standard.helper.BooleanWrapper
+								java.lang.Boolean idIfCond_604 = false;
+								idIfCond_604 = kermeta.standard.helper.BooleanWrapper
 										.and(
 												kermeta.standard.helper.BooleanWrapper
 														.not(this
@@ -1354,7 +1354,7 @@ public class CallFeatureImpl extends CallExpressionImpl implements CallFeature {
 												this.getStaticOperation()
 														.getIsOrdered());
 
-								if (idIfCond_212) {
+								if (idIfCond_604) {
 
 									result = kermeta.standard.helper.StringWrapper
 											.plus(
@@ -1380,8 +1380,8 @@ public class CallFeatureImpl extends CallExpressionImpl implements CallFeature {
 											.getFinalName(context));
 						} else {
 
-							java.lang.Boolean idIfCond_213 = false;
-							idIfCond_213 = kermeta.standard.helper.BooleanWrapper
+							java.lang.Boolean idIfCond_605 = false;
+							idIfCond_605 = kermeta.standard.helper.BooleanWrapper
 									.and(
 											org.kermeta.compil.runtime.helper.language.ObjectUtil
 													.isInstanceOfSwitcher(
@@ -1397,10 +1397,10 @@ public class CallFeatureImpl extends CallExpressionImpl implements CallFeature {
 																	this)
 															.callsFunctionType()));
 
-							if (idIfCond_213) {
+							if (idIfCond_605) {
 
-								java.lang.Boolean idIfCond_214 = false;
-								idIfCond_214 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+								java.lang.Boolean idIfCond_606 = false;
+								idIfCond_606 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 										.isInstanceOfSwitcher(
 												org.kermeta.compil.runtime.helper.language.ObjectUtil
 														.containerSwitcher(this),
@@ -1409,7 +1409,7 @@ public class CallFeatureImpl extends CallExpressionImpl implements CallFeature {
 														.getMetaClass(
 																"kermeta.language.behavior.CallFeature"));
 
-								if (idIfCond_214) {
+								if (idIfCond_606) {
 
 									kermeta.language.behavior.CallFeature cf_ = ((kermeta.language.behavior.CallFeature) org.kermeta.compil.runtime.helper.language.ObjectUtil
 											.asTypeSwitcher(
@@ -1420,16 +1420,16 @@ public class CallFeatureImpl extends CallExpressionImpl implements CallFeature {
 															.getMetaClass(
 																	"kermeta.language.behavior.CallFeature")));
 
-									java.lang.Boolean idIfCond_215 = false;
-									idIfCond_215 = kermeta.standard.helper.BooleanWrapper
+									java.lang.Boolean idIfCond_607 = false;
+									idIfCond_607 = kermeta.standard.helper.BooleanWrapper
 											.not(org.kermeta.compil.runtime.helper.language.ObjectUtil
 													.isVoidSwitcher(cf_
 															.getStaticOperation()));
 
-									if (idIfCond_215) {
+									if (idIfCond_607) {
 
-										java.lang.Boolean idIfCond_216 = false;
-										idIfCond_216 = kermeta.standard.helper.BooleanWrapper
+										java.lang.Boolean idIfCond_608 = false;
+										idIfCond_608 = kermeta.standard.helper.BooleanWrapper
 												.or(
 														kermeta.standard.helper.BooleanWrapper
 																.or(
@@ -1444,7 +1444,7 @@ public class CallFeatureImpl extends CallExpressionImpl implements CallFeature {
 																				.getCompiledJavaExtern(),
 																		""));
 
-										if (idIfCond_216) {
+										if (idIfCond_608) {
 										} else {
 
 											result = kermeta.standard.helper.StringWrapper
@@ -1453,13 +1453,13 @@ public class CallFeatureImpl extends CallExpressionImpl implements CallFeature {
 
 									} else {
 
-										java.lang.Boolean idIfCond_217 = false;
-										idIfCond_217 = kermeta.standard.helper.BooleanWrapper
+										java.lang.Boolean idIfCond_609 = false;
+										idIfCond_609 = kermeta.standard.helper.BooleanWrapper
 												.not(org.kermeta.compil.runtime.helper.language.ObjectUtil
 														.isVoidSwitcher(cf_
 																.getStaticProperty()));
 
-										if (idIfCond_217) {
+										if (idIfCond_609) {
 
 											result = kermeta.standard.helper.StringWrapper
 													.plus(result, ".");
@@ -1479,11 +1479,11 @@ public class CallFeatureImpl extends CallExpressionImpl implements CallFeature {
 
 			} else {
 
-				java.lang.Boolean idIfCond_218 = false;
-				idIfCond_218 = kermeta.standard.helper.StringWrapper.contains(
+				java.lang.Boolean idIfCond_610 = false;
+				idIfCond_610 = kermeta.standard.helper.StringWrapper.contains(
 						result, context.getRETURN_EXPRESSION_TO_REPLACE());
 
-				if (idIfCond_218) {
+				if (idIfCond_610) {
 
 					result = kermeta.standard.helper.StringWrapper.replace(
 							result, context.getRETURN_EXPRESSION_TO_REPLACE(),
@@ -1495,40 +1495,40 @@ public class CallFeatureImpl extends CallExpressionImpl implements CallFeature {
 
 					//BIft:detect
 
-					kermeta.language.behavior.Expression result_ft22 = null;
+					kermeta.language.behavior.Expression result_ft142 = null;
 
-					kermeta.language.behavior.Expression elem_ft22 = null;
+					kermeta.language.behavior.Expression elem_ft142 = null;
 
-					result_ft22 = null;
+					result_ft142 = null;
 
 					{
 
-						kermeta.standard.Iterator<kermeta.language.behavior.Expression> it_ft22 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
+						kermeta.standard.Iterator<kermeta.language.behavior.Expression> it_ft142 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
 								.<kermeta.language.behavior.Expression> convertAsOrderedSet(
 										this.getParameters()).iterator();
-						java.lang.Boolean idLoopCond_220 = false;
-						while (!idLoopCond_220) {
-							idLoopCond_220 = kermeta.standard.helper.BooleanWrapper
+						java.lang.Boolean idLoopCond_612 = false;
+						while (!idLoopCond_612) {
+							idLoopCond_612 = kermeta.standard.helper.BooleanWrapper
 									.or(
-											it_ft22.isOff(),
+											it_ft142.isOff(),
 											org.kermeta.compil.runtime.helper.language.ObjectUtil
 													.isNotEqualSwitcher(
-															result_ft22, null));
-							if (idLoopCond_220) {
+															result_ft142, null));
+							if (idLoopCond_612) {
 							} else {
 
-								elem_ft22 = it_ft22.next();
+								elem_ft142 = it_ft142.next();
 
-								java.lang.Boolean idIfCond_221 = false;
+								java.lang.Boolean idIfCond_613 = false;
 								//BIle:detector
-								kermeta.language.behavior.Expression p_lbdExp22 = elem_ft22;
+								kermeta.language.behavior.Expression p_lbdExp142 = elem_ft142;
 
-								idIfCond_221 = p_lbdExp22.callsFunctionType();
+								idIfCond_613 = p_lbdExp142.callsFunctionType();
 								//EIle:detector
 
-								if (idIfCond_221) {
+								if (idIfCond_613) {
 
-									result_ft22 = elem_ft22;
+									result_ft142 = elem_ft142;
 								}
 
 							}
@@ -1536,12 +1536,12 @@ public class CallFeatureImpl extends CallExpressionImpl implements CallFeature {
 					}
 
 					//EIft:detect
-					java.lang.Boolean idIfCond_219 = false;
-					idIfCond_219 = kermeta.standard.helper.BooleanWrapper
+					java.lang.Boolean idIfCond_611 = false;
+					idIfCond_611 = kermeta.standard.helper.BooleanWrapper
 							.not(org.kermeta.compil.runtime.helper.language.ObjectUtil
-									.isVoidSwitcher(result_ft22));
+									.isVoidSwitcher(result_ft142));
 
-					if (idIfCond_219) {
+					if (idIfCond_611) {
 
 						tmp_prefix = context.getRETURN_EXPRESSION_TO_REPLACE();
 					}
@@ -1553,10 +1553,10 @@ public class CallFeatureImpl extends CallExpressionImpl implements CallFeature {
 							result);
 				}
 
-				java.lang.Boolean idIfCond_222 = false;
-				idIfCond_222 = ppCast;
+				java.lang.Boolean idIfCond_614 = false;
+				idIfCond_614 = ppCast;
 
-				if (idIfCond_222) {
+				if (idIfCond_614) {
 
 					result = kermeta.standard.helper.StringWrapper.plus("(",
 							result);
@@ -1564,19 +1564,19 @@ public class CallFeatureImpl extends CallExpressionImpl implements CallFeature {
 
 			}
 
-			java.lang.Boolean idIfCond_223 = false;
-			idIfCond_223 = kermeta.standard.helper.BooleanWrapper.and(this
+			java.lang.Boolean idIfCond_615 = false;
+			idIfCond_615 = kermeta.standard.helper.BooleanWrapper.and(this
 					.isCallFeatureAsStaticOperation(),
 					kermeta.standard.helper.BooleanWrapper.not(this
 							.callsFunctionType()));
 
-			if (idIfCond_223) {
+			if (idIfCond_615) {
 
-				java.lang.Boolean idIfCond_224 = false;
-				idIfCond_224 = kermeta.standard.helper.StringWrapper.equals(
+				java.lang.Boolean idIfCond_616 = false;
+				idIfCond_616 = kermeta.standard.helper.StringWrapper.equals(
 						static_call, "");
 
-				if (idIfCond_224) {
+				if (idIfCond_616) {
 
 					result = kermeta.standard.helper.StringWrapper.plus(result,
 							"(");
@@ -1584,8 +1584,8 @@ public class CallFeatureImpl extends CallExpressionImpl implements CallFeature {
 
 					static_call = "";
 
-					java.lang.Boolean idIfCond_225 = false;
-					idIfCond_225 = kermeta.standard.helper.BooleanWrapper
+					java.lang.Boolean idIfCond_617 = false;
+					idIfCond_617 = kermeta.standard.helper.BooleanWrapper
 							.and(
 									kermeta.standard.helper.BooleanWrapper
 											.not(org.kermeta.compil.runtime.helper.language.ObjectUtil
@@ -1600,7 +1600,7 @@ public class CallFeatureImpl extends CallExpressionImpl implements CallFeature {
 																			.getParameters())
 															.size(), 0));
 
-					if (idIfCond_225) {
+					if (idIfCond_617) {
 
 						result = kermeta.standard.helper.StringWrapper.plus(
 								result, ", ");
@@ -1632,10 +1632,10 @@ public class CallFeatureImpl extends CallExpressionImpl implements CallFeature {
 
 				this.setBeforeLambdaExpressionResult("");
 
-				java.lang.Boolean idIfCond_226 = false;
-				idIfCond_226 = ppCast;
+				java.lang.Boolean idIfCond_618 = false;
+				idIfCond_618 = ppCast;
 
-				if (idIfCond_226) {
+				if (idIfCond_618) {
 
 					result = kermeta.standard.helper.StringWrapper.plus(result,
 							")");
@@ -1649,6 +1649,40 @@ public class CallFeatureImpl extends CallExpressionImpl implements CallFeature {
 
 		result = kermeta.standard.helper.StringWrapper.plus(result, this
 				.endOfExpressionFixer());
+
+		return result;
+
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Boolean isFromClass() {
+
+		java.lang.Boolean result = null;
+
+		result = false;
+
+		java.lang.Boolean idIfCond_619 = false;
+		idIfCond_619 = kermeta.standard.helper.BooleanWrapper
+				.not(org.kermeta.compil.runtime.helper.language.ObjectUtil
+						.isVoidSwitcher(this.getStaticOperation()));
+
+		if (idIfCond_619) {
+
+			java.lang.Boolean idIfCond_620 = false;
+			idIfCond_620 = kermeta.standard.helper.StringWrapper.equals(this
+					.getStaticOperation().getOwningClass().qualifiedName(),
+					"kermeta::language::structure::Class");
+
+			if (idIfCond_620) {
+
+				result = true;
+			}
+
+		}
 
 		return result;
 
@@ -1722,50 +1756,16 @@ public class CallFeatureImpl extends CallExpressionImpl implements CallFeature {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Boolean isFromClass() {
-
-		java.lang.Boolean result = null;
-
-		result = false;
-
-		java.lang.Boolean idIfCond_227 = false;
-		idIfCond_227 = kermeta.standard.helper.BooleanWrapper
-				.not(org.kermeta.compil.runtime.helper.language.ObjectUtil
-						.isVoidSwitcher(this.getStaticOperation()));
-
-		if (idIfCond_227) {
-
-			java.lang.Boolean idIfCond_228 = false;
-			idIfCond_228 = kermeta.standard.helper.StringWrapper.equals(this
-					.getStaticOperation().getOwningClass().qualifiedName(),
-					"kermeta::language::structure::Class");
-
-			if (idIfCond_228) {
-
-				result = true;
-			}
-
-		}
-
-		return result;
-
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public Parameter getCallFeatureCorrespondingParameter() {
 
 		kermeta.language.structure.Parameter result = null;
 
 		result = null;
 
-		java.lang.Boolean idIfCond_229 = false;
-		idIfCond_229 = this.isParameter();
+		java.lang.Boolean idIfCond_621 = false;
+		idIfCond_621 = this.isParameter();
 
-		if (idIfCond_229) {
+		if (idIfCond_621) {
 
 			kermeta.language.behavior.CallFeature cf_ = ((kermeta.language.behavior.CallFeature) org.kermeta.compil.runtime.helper.language.ObjectUtil
 					.asTypeSwitcher(
@@ -1782,43 +1782,43 @@ public class CallFeatureImpl extends CallExpressionImpl implements CallFeature {
 			kermeta.language.behavior.Expression exp = null;
 			//BIft:detect
 
-			kermeta.language.behavior.Expression result_ft23 = null;
+			kermeta.language.behavior.Expression result_ft143 = null;
 
-			kermeta.language.behavior.Expression elem_ft23 = null;
+			kermeta.language.behavior.Expression elem_ft143 = null;
 
-			result_ft23 = null;
+			result_ft143 = null;
 
 			{
 
-				kermeta.standard.Iterator<kermeta.language.behavior.Expression> it_ft23 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
+				kermeta.standard.Iterator<kermeta.language.behavior.Expression> it_ft143 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
 						.<kermeta.language.behavior.Expression> convertAsOrderedSet(
 								cf_.getParameters()).iterator();
-				java.lang.Boolean idLoopCond_230 = false;
-				while (!idLoopCond_230) {
-					idLoopCond_230 = kermeta.standard.helper.BooleanWrapper
+				java.lang.Boolean idLoopCond_622 = false;
+				while (!idLoopCond_622) {
+					idLoopCond_622 = kermeta.standard.helper.BooleanWrapper
 							.or(
-									it_ft23.isOff(),
+									it_ft143.isOff(),
 									org.kermeta.compil.runtime.helper.language.ObjectUtil
-											.isNotEqualSwitcher(result_ft23,
+											.isNotEqualSwitcher(result_ft143,
 													null));
-					if (idLoopCond_230) {
+					if (idLoopCond_622) {
 					} else {
 
-						elem_ft23 = it_ft23.next();
+						elem_ft143 = it_ft143.next();
 
-						java.lang.Boolean idIfCond_231 = false;
+						java.lang.Boolean idIfCond_623 = false;
 						//BIle:detector
-						kermeta.language.behavior.Expression p_lbdExp23 = elem_ft23;
+						kermeta.language.behavior.Expression p_lbdExp143 = elem_ft143;
 
 						i = kermeta.standard.helper.IntegerWrapper.plus(i, 1);
 
-						idIfCond_231 = org.kermeta.compil.runtime.helper.language.ObjectUtil
-								.equalsSwitcher(p_lbdExp23, this);
+						idIfCond_623 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+								.equalsSwitcher(p_lbdExp143, this);
 						//EIle:detector
 
-						if (idIfCond_231) {
+						if (idIfCond_623) {
 
-							result_ft23 = elem_ft23;
+							result_ft143 = elem_ft143;
 						}
 
 					}
@@ -1826,7 +1826,7 @@ public class CallFeatureImpl extends CallExpressionImpl implements CallFeature {
 			}
 
 			//CE
-			exp = result_ft23;
+			exp = result_ft143;
 			//EIft:detect
 			;
 
@@ -1867,17 +1867,17 @@ public class CallFeatureImpl extends CallExpressionImpl implements CallFeature {
 
 		{
 
-			kermeta.standard.Iterator<kermeta.language.structure.Type> it_ft24 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
+			kermeta.standard.Iterator<kermeta.language.structure.Type> it_ft144 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
 					.<kermeta.language.structure.Type> convertAsOrderedSet(
 							this.getStaticTypeVariableBindings()).iterator();
-			java.lang.Boolean idLoopCond_232 = false;
-			while (!idLoopCond_232) {
-				idLoopCond_232 = it_ft24.isOff();
-				if (idLoopCond_232) {
+			java.lang.Boolean idLoopCond_624 = false;
+			while (!idLoopCond_624) {
+				idLoopCond_624 = it_ft144.isOff();
+				if (idLoopCond_624) {
 				} else {
 
 					//BIle:func
-					kermeta.language.structure.Type type__lbdExp24 = it_ft24
+					kermeta.language.structure.Type type__lbdExp144 = it_ft144
 							.next();
 
 					map_type
@@ -1886,7 +1886,7 @@ public class CallFeatureImpl extends CallExpressionImpl implements CallFeature {
 											.<kermeta.language.structure.TypeVariable> convertAsOrderedSet(
 													this.getStaticOperation()
 															.getTypeParameter())
-											.elementAt(inc_tp), type__lbdExp24);
+											.elementAt(inc_tp), type__lbdExp144);
 
 					inc_tp = kermeta.standard.helper.IntegerWrapper.plus(
 							inc_tp, 1);
@@ -1908,44 +1908,44 @@ public class CallFeatureImpl extends CallExpressionImpl implements CallFeature {
 
 		//BIft:detect
 
-		kermeta.language.behavior.Expression result_ft25 = null;
+		kermeta.language.behavior.Expression result_ft145 = null;
 
-		kermeta.language.behavior.Expression elem_ft25 = null;
+		kermeta.language.behavior.Expression elem_ft145 = null;
 
-		result_ft25 = null;
+		result_ft145 = null;
 
 		{
 
-			kermeta.standard.Iterator<kermeta.language.behavior.Expression> it_ft25 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
+			kermeta.standard.Iterator<kermeta.language.behavior.Expression> it_ft145 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
 					.<kermeta.language.behavior.Expression> convertAsOrderedSet(
 							this.getParameters()).iterator();
-			java.lang.Boolean idLoopCond_234 = false;
-			while (!idLoopCond_234) {
-				idLoopCond_234 = kermeta.standard.helper.BooleanWrapper.or(
-						it_ft25.isOff(),
+			java.lang.Boolean idLoopCond_626 = false;
+			while (!idLoopCond_626) {
+				idLoopCond_626 = kermeta.standard.helper.BooleanWrapper.or(
+						it_ft145.isOff(),
 						org.kermeta.compil.runtime.helper.language.ObjectUtil
-								.isNotEqualSwitcher(result_ft25, null));
-				if (idLoopCond_234) {
+								.isNotEqualSwitcher(result_ft145, null));
+				if (idLoopCond_626) {
 				} else {
 
-					elem_ft25 = it_ft25.next();
+					elem_ft145 = it_ft145.next();
 
-					java.lang.Boolean idIfCond_235 = false;
+					java.lang.Boolean idIfCond_627 = false;
 					//BIle:detector
-					kermeta.language.behavior.Expression param_lbdExp25 = elem_ft25;
+					kermeta.language.behavior.Expression param_lbdExp145 = elem_ft145;
 
-					idIfCond_235 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+					idIfCond_627 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 							.isInstanceOfSwitcher(
-									param_lbdExp25,
+									param_lbdExp145,
 									org.kermeta.compil.runtime.ExecutionContext
 											.getInstance()
 											.getMetaClass(
 													"kermeta.language.behavior.LambdaExpression"));
 					//EIle:detector
 
-					if (idIfCond_235) {
+					if (idIfCond_627) {
 
-						result_ft25 = elem_ft25;
+						result_ft145 = elem_ft145;
 					}
 
 				}
@@ -1953,55 +1953,55 @@ public class CallFeatureImpl extends CallExpressionImpl implements CallFeature {
 		}
 
 		//EIft:detect
-		java.lang.Boolean idIfCond_233 = false;
-		idIfCond_233 = kermeta.standard.helper.BooleanWrapper
+		java.lang.Boolean idIfCond_625 = false;
+		idIfCond_625 = kermeta.standard.helper.BooleanWrapper
 				.not(org.kermeta.compil.runtime.helper.language.ObjectUtil
-						.isVoidSwitcher(result_ft25));
+						.isVoidSwitcher(result_ft145));
 
-		if (idIfCond_233) {
+		if (idIfCond_625) {
 
 			//BIft:detect
 
-			kermeta.language.behavior.Expression result_ft26 = null;
+			kermeta.language.behavior.Expression result_ft146 = null;
 
-			kermeta.language.behavior.Expression elem_ft26 = null;
+			kermeta.language.behavior.Expression elem_ft146 = null;
 
-			result_ft26 = null;
+			result_ft146 = null;
 
 			{
 
-				kermeta.standard.Iterator<kermeta.language.behavior.Expression> it_ft26 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
+				kermeta.standard.Iterator<kermeta.language.behavior.Expression> it_ft146 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
 						.<kermeta.language.behavior.Expression> convertAsOrderedSet(
 								this.getParameters()).iterator();
-				java.lang.Boolean idLoopCond_236 = false;
-				while (!idLoopCond_236) {
-					idLoopCond_236 = kermeta.standard.helper.BooleanWrapper
+				java.lang.Boolean idLoopCond_628 = false;
+				while (!idLoopCond_628) {
+					idLoopCond_628 = kermeta.standard.helper.BooleanWrapper
 							.or(
-									it_ft26.isOff(),
+									it_ft146.isOff(),
 									org.kermeta.compil.runtime.helper.language.ObjectUtil
-											.isNotEqualSwitcher(result_ft26,
+											.isNotEqualSwitcher(result_ft146,
 													null));
-					if (idLoopCond_236) {
+					if (idLoopCond_628) {
 					} else {
 
-						elem_ft26 = it_ft26.next();
+						elem_ft146 = it_ft146.next();
 
-						java.lang.Boolean idIfCond_237 = false;
+						java.lang.Boolean idIfCond_629 = false;
 						//BIle:detector
-						kermeta.language.behavior.Expression param_lbdExp26 = elem_ft26;
+						kermeta.language.behavior.Expression param_lbdExp146 = elem_ft146;
 
-						idIfCond_237 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+						idIfCond_629 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 								.isInstanceOfSwitcher(
-										param_lbdExp26,
+										param_lbdExp146,
 										org.kermeta.compil.runtime.ExecutionContext
 												.getInstance()
 												.getMetaClass(
 														"kermeta.language.behavior.LambdaExpression"));
 						//EIle:detector
 
-						if (idIfCond_237) {
+						if (idIfCond_629) {
 
-							result_ft26 = elem_ft26;
+							result_ft146 = elem_ft146;
 						}
 
 					}
@@ -2011,7 +2011,7 @@ public class CallFeatureImpl extends CallExpressionImpl implements CallFeature {
 			//EIft:detect
 			kermeta.language.behavior.LambdaExpression theLambdaExp = ((kermeta.language.behavior.LambdaExpression) org.kermeta.compil.runtime.helper.language.ObjectUtil
 					.asTypeSwitcher(
-							result_ft26,
+							result_ft146,
 							org.kermeta.compil.runtime.ExecutionContext
 									.getInstance()
 									.getMetaClass(
@@ -2028,8 +2028,8 @@ public class CallFeatureImpl extends CallExpressionImpl implements CallFeature {
 					kermeta.standard.helper.IntegerWrapper.toString(context
 							.getInc_ftSuffix()));
 
-			java.lang.Boolean idIfCond_238 = false;
-			idIfCond_238 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+			java.lang.Boolean idIfCond_630 = false;
+			idIfCond_630 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 					.isInstanceOfSwitcher(
 							theLambdaExp.getStaticType(),
 							org.kermeta.compil.runtime.ExecutionContext
@@ -2037,7 +2037,7 @@ public class CallFeatureImpl extends CallExpressionImpl implements CallFeature {
 									.getMetaClass(
 											"kermeta.language.structure.FunctionType"));
 
-			if (idIfCond_238) {
+			if (idIfCond_630) {
 
 				kermeta.language.structure.FunctionType current_functionType = ((kermeta.language.structure.FunctionType) org.kermeta.compil.runtime.helper.language.ObjectUtil
 						.asTypeSwitcher(
@@ -2047,8 +2047,8 @@ public class CallFeatureImpl extends CallExpressionImpl implements CallFeature {
 										.getMetaClass(
 												"kermeta.language.structure.FunctionType")));
 
-				java.lang.Boolean idIfCond_239 = false;
-				idIfCond_239 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+				java.lang.Boolean idIfCond_631 = false;
+				idIfCond_631 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 						.isInstanceOfSwitcher(
 								current_functionType.getLeft(),
 								org.kermeta.compil.runtime.ExecutionContext
@@ -2056,7 +2056,7 @@ public class CallFeatureImpl extends CallExpressionImpl implements CallFeature {
 										.getMetaClass(
 												"kermeta.language.structure.ProductType"));
 
-				if (idIfCond_239) {
+				if (idIfCond_631) {
 
 					context
 							.getFtProductTypeStack()
@@ -2078,10 +2078,10 @@ public class CallFeatureImpl extends CallExpressionImpl implements CallFeature {
 
 		java.lang.String ft_str = "";
 
-		java.lang.Boolean idIfCond_240 = false;
-		idIfCond_240 = tgt.callsFunctionType();
+		java.lang.Boolean idIfCond_632 = false;
+		idIfCond_632 = tgt.callsFunctionType();
 
-		if (idIfCond_240) {
+		if (idIfCond_632) {
 
 			context.setFtSuffixActivation(true);
 
@@ -2097,8 +2097,8 @@ public class CallFeatureImpl extends CallExpressionImpl implements CallFeature {
 
 		java.lang.String callElement = "";
 
-		java.lang.Boolean idIfCond_241 = false;
-		idIfCond_241 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+		java.lang.Boolean idIfCond_633 = false;
+		idIfCond_633 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 				.isInstanceOfSwitcher(
 						org.kermeta.compil.runtime.helper.language.ObjectUtil
 								.containerSwitcher(this),
@@ -2107,7 +2107,7 @@ public class CallFeatureImpl extends CallExpressionImpl implements CallFeature {
 								.getMetaClass(
 										"kermeta.language.behavior.VariableDecl"));
 
-		if (idIfCond_241) {
+		if (idIfCond_633) {
 
 			callElement = ((km2ecore.helper.java.IdentifierHelper) org.kermeta.compil.runtime.helper.language.ClassUtil
 					.newObject(km2ecore.helper.java.JavaPackage.eINSTANCE
@@ -2124,8 +2124,8 @@ public class CallFeatureImpl extends CallExpressionImpl implements CallFeature {
 									.getIdentifier(), context);
 		} else {
 
-			java.lang.Boolean idIfCond_242 = false;
-			idIfCond_242 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+			java.lang.Boolean idIfCond_634 = false;
+			idIfCond_634 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 					.isInstanceOfSwitcher(
 							org.kermeta.compil.runtime.helper.language.ObjectUtil
 									.containerSwitcher(this),
@@ -2134,7 +2134,7 @@ public class CallFeatureImpl extends CallExpressionImpl implements CallFeature {
 									.getMetaClass(
 											"kermeta.language.behavior.CallVariable"));
 
-			if (idIfCond_242) {
+			if (idIfCond_634) {
 
 				org.kermeta.compil.runtime.helper.io.StdIOUtil
 						.getInstance()
@@ -2158,11 +2158,11 @@ public class CallFeatureImpl extends CallExpressionImpl implements CallFeature {
 
 		}
 
-		java.lang.Boolean idIfCond_243 = false;
-		idIfCond_243 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+		java.lang.Boolean idIfCond_635 = false;
+		idIfCond_635 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 				.isNotEqualSwitcher(callElement, "");
 
-		if (idIfCond_243) {
+		if (idIfCond_635) {
 
 			ft_str = kermeta.standard.helper.StringWrapper.plus(ft_str,
 					"null;\n");
@@ -2172,8 +2172,8 @@ public class CallFeatureImpl extends CallExpressionImpl implements CallFeature {
 
 		java.lang.String ppValueTypeCastSuffix = "";
 
-		java.lang.Boolean idIfCond_244 = false;
-		idIfCond_244 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+		java.lang.Boolean idIfCond_636 = false;
+		idIfCond_636 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 				.isInstanceOfSwitcher(
 						org.kermeta.compil.runtime.helper.language.ObjectUtil
 								.containerSwitcher(this),
@@ -2181,7 +2181,7 @@ public class CallFeatureImpl extends CallExpressionImpl implements CallFeature {
 								.getInstance().getMetaClass(
 										"kermeta.language.behavior.Assignment"));
 
-		if (idIfCond_244) {
+		if (idIfCond_636) {
 
 			ppCastSuffix = ((kermeta.language.behavior.Assignment) org.kermeta.compil.runtime.helper.language.ObjectUtil
 					.asTypeSwitcher(
@@ -2203,8 +2203,8 @@ public class CallFeatureImpl extends CallExpressionImpl implements CallFeature {
 											"kermeta.language.behavior.Assignment")))
 					.getValueTypeCastSuffix();
 
-			java.lang.Boolean idIfCond_245 = false;
-			idIfCond_245 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+			java.lang.Boolean idIfCond_637 = false;
+			idIfCond_637 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 					.isInstanceOfSwitcher(
 							((kermeta.language.behavior.Assignment) org.kermeta.compil.runtime.helper.language.ObjectUtil
 									.asTypeSwitcher(
@@ -2220,7 +2220,7 @@ public class CallFeatureImpl extends CallExpressionImpl implements CallFeature {
 									.getMetaClass(
 											"kermeta.language.behavior.CallResult"));
 
-			if (idIfCond_245) {
+			if (idIfCond_637) {
 
 				callElement = ((kermeta.language.behavior.Assignment) org.kermeta.compil.runtime.helper.language.ObjectUtil
 						.asTypeSwitcher(
@@ -2233,8 +2233,8 @@ public class CallFeatureImpl extends CallExpressionImpl implements CallFeature {
 						.getTarget().createBehaviorJava(context);
 			}
 
-			java.lang.Boolean idIfCond_246 = false;
-			idIfCond_246 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+			java.lang.Boolean idIfCond_638 = false;
+			idIfCond_638 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 					.isInstanceOfSwitcher(
 							((kermeta.language.behavior.Assignment) org.kermeta.compil.runtime.helper.language.ObjectUtil
 									.asTypeSwitcher(
@@ -2250,7 +2250,7 @@ public class CallFeatureImpl extends CallExpressionImpl implements CallFeature {
 									.getMetaClass(
 											"kermeta.language.behavior.CallVariable"));
 
-			if (idIfCond_246) {
+			if (idIfCond_638) {
 
 				callElement = ((kermeta.language.behavior.Assignment) org.kermeta.compil.runtime.helper.language.ObjectUtil
 						.asTypeSwitcher(
@@ -2292,20 +2292,20 @@ public class CallFeatureImpl extends CallExpressionImpl implements CallFeature {
 		ft_str = kermeta.standard.helper.StringWrapper.plus(ft_str, this
 				.getStaticOperation().createBehaviorJava(context));
 
-		java.lang.Boolean idIfCond_247 = false;
-		idIfCond_247 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+		java.lang.Boolean idIfCond_639 = false;
+		idIfCond_639 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 				.isNotEqualSwitcher(callElement, "");
 
-		if (idIfCond_247) {
+		if (idIfCond_639) {
 
 			ft_str = kermeta.standard.helper.StringWrapper.plus(ft_str,
 					"\n//CE\n");
 
-			java.lang.Boolean idIfCond_248 = false;
-			idIfCond_248 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+			java.lang.Boolean idIfCond_640 = false;
+			idIfCond_640 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 					.isNotEqualSwitcher(context.getResultLastStatementId(), "");
 
-			if (idIfCond_248) {
+			if (idIfCond_640) {
 
 				ft_str = kermeta.standard.helper.StringWrapper
 						.plus(
@@ -2340,8 +2340,8 @@ public class CallFeatureImpl extends CallExpressionImpl implements CallFeature {
 
 		}
 
-		java.lang.Boolean idIfCond_249 = false;
-		idIfCond_249 = kermeta.standard.helper.BooleanWrapper
+		java.lang.Boolean idIfCond_641 = false;
+		idIfCond_641 = kermeta.standard.helper.BooleanWrapper
 				.and(
 						kermeta.standard.helper.StringWrapper.equals(
 								callElement, ""),
@@ -2354,10 +2354,10 @@ public class CallFeatureImpl extends CallExpressionImpl implements CallFeature {
 												.getMetaClass(
 														"kermeta.language.behavior.Assignment")));
 
-		if (idIfCond_249) {
+		if (idIfCond_641) {
 
-			java.lang.Boolean idIfCond_250 = false;
-			idIfCond_250 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+			java.lang.Boolean idIfCond_642 = false;
+			idIfCond_642 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 					.isInstanceOfSwitcher(
 							((kermeta.language.behavior.Assignment) org.kermeta.compil.runtime.helper.language.ObjectUtil
 									.asTypeSwitcher(
@@ -2373,7 +2373,7 @@ public class CallFeatureImpl extends CallExpressionImpl implements CallFeature {
 									.getMetaClass(
 											"kermeta.language.behavior.CallResult"));
 
-			if (idIfCond_250) {
+			if (idIfCond_642) {
 
 				ft_str = kermeta.standard.helper.StringWrapper.plus(ft_str,
 						"\n//CER\n");
@@ -2402,8 +2402,8 @@ public class CallFeatureImpl extends CallExpressionImpl implements CallFeature {
 
 		}
 
-		java.lang.Boolean idIfCond_251 = false;
-		idIfCond_251 = kermeta.standard.helper.BooleanWrapper
+		java.lang.Boolean idIfCond_643 = false;
+		idIfCond_643 = kermeta.standard.helper.BooleanWrapper
 				.and(
 						org.kermeta.compil.runtime.helper.language.ObjectUtil
 								.isNotEqualSwitcher(callElement, ""),
@@ -2416,16 +2416,16 @@ public class CallFeatureImpl extends CallExpressionImpl implements CallFeature {
 												.getMetaClass(
 														"kermeta.language.behavior.VariableDecl")));
 
-		if (idIfCond_251) {
+		if (idIfCond_643) {
 
 			java.lang.String str_binding = kermeta.standard.helper.StringWrapper
 					.replace(context.getResultLastStatementId(), " = ", "");
 
-			java.lang.Boolean idIfCond_252 = false;
-			idIfCond_252 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+			java.lang.Boolean idIfCond_644 = false;
+			idIfCond_644 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 					.isNotEqualSwitcher(str_binding, "");
 
-			if (idIfCond_252) {
+			if (idIfCond_644) {
 
 				ft_str = kermeta.standard.helper.StringWrapper.plus(ft_str,
 						"\n//CEVD\n");
@@ -2440,8 +2440,8 @@ public class CallFeatureImpl extends CallExpressionImpl implements CallFeature {
 
 		}
 
-		java.lang.Boolean idIfCond_253 = false;
-		idIfCond_253 = kermeta.standard.helper.BooleanWrapper
+		java.lang.Boolean idIfCond_645 = false;
+		idIfCond_645 = kermeta.standard.helper.BooleanWrapper
 				.and(
 						kermeta.standard.helper.StringWrapper.equals(
 								callElement, ""),
@@ -2454,7 +2454,7 @@ public class CallFeatureImpl extends CallExpressionImpl implements CallFeature {
 												.getMetaClass(
 														"kermeta.language.behavior.Conditional")));
 
-		if (idIfCond_253) {
+		if (idIfCond_645) {
 
 			ft_str = kermeta.standard.helper.StringWrapper.plus(ft_str,
 					"\n//CEC\n");
@@ -2474,8 +2474,8 @@ public class CallFeatureImpl extends CallExpressionImpl implements CallFeature {
 													.printFtSuffix()), ";\n");
 		}
 
-		java.lang.Boolean idIfCond_254 = false;
-		idIfCond_254 = kermeta.standard.helper.BooleanWrapper
+		java.lang.Boolean idIfCond_646 = false;
+		idIfCond_646 = kermeta.standard.helper.BooleanWrapper
 				.and(
 						kermeta.standard.helper.StringWrapper.equals(
 								callElement, ""),
@@ -2486,7 +2486,7 @@ public class CallFeatureImpl extends CallExpressionImpl implements CallFeature {
 										.isVoidType(this.getStaticType()
 												.getTypeName())));
 
-		if (idIfCond_254) {
+		if (idIfCond_646) {
 
 			this.setCalledFtResult(kermeta.standard.helper.StringWrapper.plus(
 					"result", context.printFtSuffix()));
@@ -2523,13 +2523,13 @@ public class CallFeatureImpl extends CallExpressionImpl implements CallFeature {
 
 		result = false;
 
-		java.lang.Boolean idIfCond_255 = false;
-		idIfCond_255 = this.isParameter();
+		java.lang.Boolean idIfCond_647 = false;
+		idIfCond_647 = this.isParameter();
 
-		if (idIfCond_255) {
+		if (idIfCond_647) {
 
-			java.lang.Boolean idIfCond_256 = false;
-			idIfCond_256 = kermeta.standard.helper.BooleanWrapper
+			java.lang.Boolean idIfCond_648 = false;
+			idIfCond_648 = kermeta.standard.helper.BooleanWrapper
 					.not(((kermeta.language.behavior.CallFeature) org.kermeta.compil.runtime.helper.language.ObjectUtil
 							.asTypeSwitcher(
 									org.kermeta.compil.runtime.helper.language.ObjectUtil
@@ -2540,31 +2540,31 @@ public class CallFeatureImpl extends CallExpressionImpl implements CallFeature {
 													"kermeta.language.behavior.CallFeature")))
 							.isCallFeatureTargetsValueTypeOperation());
 
-			if (idIfCond_256) {
+			if (idIfCond_648) {
 
 				kermeta.language.structure.Parameter param = this
 						.getCallFeatureCorrespondingParameter();
 
-				java.lang.Boolean idIfCond_257 = false;
-				idIfCond_257 = kermeta.standard.helper.BooleanWrapper
+				java.lang.Boolean idIfCond_649 = false;
+				idIfCond_649 = kermeta.standard.helper.BooleanWrapper
 						.not(org.kermeta.compil.runtime.helper.language.ObjectUtil
 								.isVoidSwitcher(param));
 
-				if (idIfCond_257) {
+				if (idIfCond_649) {
 
 					java.lang.String left_type = param.getType().getTypeQName();
 
-					java.lang.Boolean idIfCond_258 = false;
-					idIfCond_258 = kermeta.standard.helper.StringWrapper
+					java.lang.Boolean idIfCond_650 = false;
+					idIfCond_650 = kermeta.standard.helper.StringWrapper
 							.equals(left_type,
 									"kermeta::language::structure::Object");
 
-					if (idIfCond_258) {
+					if (idIfCond_650) {
 
-						java.lang.Boolean idIfCond_259 = false;
-						idIfCond_259 = this.getStaticType().isValueType();
+						java.lang.Boolean idIfCond_651 = false;
+						idIfCond_651 = this.getStaticType().isValueType();
 
-						if (idIfCond_259) {
+						if (idIfCond_651) {
 
 							result = true;
 						}
@@ -2592,10 +2592,10 @@ public class CallFeatureImpl extends CallExpressionImpl implements CallFeature {
 
 		result = false;
 
-		java.lang.Boolean idIfCond_260 = false;
-		idIfCond_260 = this.isParameter();
+		java.lang.Boolean idIfCond_652 = false;
+		idIfCond_652 = this.isParameter();
 
-		if (idIfCond_260) {
+		if (idIfCond_652) {
 
 			kermeta.language.behavior.CallFeature cf_ = ((kermeta.language.behavior.CallFeature) org.kermeta.compil.runtime.helper.language.ObjectUtil
 					.asTypeSwitcher(
@@ -2612,43 +2612,43 @@ public class CallFeatureImpl extends CallExpressionImpl implements CallFeature {
 			kermeta.language.behavior.Expression exp = null;
 			//BIft:detect
 
-			kermeta.language.behavior.Expression result_ft27 = null;
+			kermeta.language.behavior.Expression result_ft147 = null;
 
-			kermeta.language.behavior.Expression elem_ft27 = null;
+			kermeta.language.behavior.Expression elem_ft147 = null;
 
-			result_ft27 = null;
+			result_ft147 = null;
 
 			{
 
-				kermeta.standard.Iterator<kermeta.language.behavior.Expression> it_ft27 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
+				kermeta.standard.Iterator<kermeta.language.behavior.Expression> it_ft147 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
 						.<kermeta.language.behavior.Expression> convertAsOrderedSet(
 								cf_.getParameters()).iterator();
-				java.lang.Boolean idLoopCond_261 = false;
-				while (!idLoopCond_261) {
-					idLoopCond_261 = kermeta.standard.helper.BooleanWrapper
+				java.lang.Boolean idLoopCond_653 = false;
+				while (!idLoopCond_653) {
+					idLoopCond_653 = kermeta.standard.helper.BooleanWrapper
 							.or(
-									it_ft27.isOff(),
+									it_ft147.isOff(),
 									org.kermeta.compil.runtime.helper.language.ObjectUtil
-											.isNotEqualSwitcher(result_ft27,
+											.isNotEqualSwitcher(result_ft147,
 													null));
-					if (idLoopCond_261) {
+					if (idLoopCond_653) {
 					} else {
 
-						elem_ft27 = it_ft27.next();
+						elem_ft147 = it_ft147.next();
 
-						java.lang.Boolean idIfCond_262 = false;
+						java.lang.Boolean idIfCond_654 = false;
 						//BIle:detector
-						kermeta.language.behavior.Expression p_lbdExp27 = elem_ft27;
+						kermeta.language.behavior.Expression p_lbdExp147 = elem_ft147;
 
 						i = kermeta.standard.helper.IntegerWrapper.plus(i, 1);
 
-						idIfCond_262 = org.kermeta.compil.runtime.helper.language.ObjectUtil
-								.equalsSwitcher(p_lbdExp27, this);
+						idIfCond_654 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+								.equalsSwitcher(p_lbdExp147, this);
 						//EIle:detector
 
-						if (idIfCond_262) {
+						if (idIfCond_654) {
 
-							result_ft27 = elem_ft27;
+							result_ft147 = elem_ft147;
 						}
 
 					}
@@ -2656,12 +2656,12 @@ public class CallFeatureImpl extends CallExpressionImpl implements CallFeature {
 			}
 
 			//CE
-			exp = result_ft27;
+			exp = result_ft147;
 			//EIft:detect
 			;
 
-			java.lang.Boolean idIfCond_263 = false;
-			idIfCond_263 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+			java.lang.Boolean idIfCond_655 = false;
+			idIfCond_655 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 					.isNotEqualSwitcher(
 							((kermeta.language.structure.Parameter) org.kermeta.compil.runtime.helper.language.ObjectUtil
 									.asTypeSwitcher(
@@ -2677,7 +2677,7 @@ public class CallFeatureImpl extends CallExpressionImpl implements CallFeature {
 															"kermeta.language.structure.Parameter")))
 									.getUpper(), 1);
 
-			if (idIfCond_263) {
+			if (idIfCond_655) {
 
 				result = true;
 			}
@@ -2699,10 +2699,10 @@ public class CallFeatureImpl extends CallExpressionImpl implements CallFeature {
 
 		result = false;
 
-		java.lang.Boolean idIfCond_264 = false;
-		idIfCond_264 = this.isParameter();
+		java.lang.Boolean idIfCond_656 = false;
+		idIfCond_656 = this.isParameter();
 
-		if (idIfCond_264) {
+		if (idIfCond_656) {
 
 			kermeta.language.behavior.CallFeature cf_ = ((kermeta.language.behavior.CallFeature) org.kermeta.compil.runtime.helper.language.ObjectUtil
 					.asTypeSwitcher(
@@ -2719,43 +2719,43 @@ public class CallFeatureImpl extends CallExpressionImpl implements CallFeature {
 			kermeta.language.behavior.Expression exp = null;
 			//BIft:detect
 
-			kermeta.language.behavior.Expression result_ft28 = null;
+			kermeta.language.behavior.Expression result_ft148 = null;
 
-			kermeta.language.behavior.Expression elem_ft28 = null;
+			kermeta.language.behavior.Expression elem_ft148 = null;
 
-			result_ft28 = null;
+			result_ft148 = null;
 
 			{
 
-				kermeta.standard.Iterator<kermeta.language.behavior.Expression> it_ft28 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
+				kermeta.standard.Iterator<kermeta.language.behavior.Expression> it_ft148 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
 						.<kermeta.language.behavior.Expression> convertAsOrderedSet(
 								cf_.getParameters()).iterator();
-				java.lang.Boolean idLoopCond_265 = false;
-				while (!idLoopCond_265) {
-					idLoopCond_265 = kermeta.standard.helper.BooleanWrapper
+				java.lang.Boolean idLoopCond_657 = false;
+				while (!idLoopCond_657) {
+					idLoopCond_657 = kermeta.standard.helper.BooleanWrapper
 							.or(
-									it_ft28.isOff(),
+									it_ft148.isOff(),
 									org.kermeta.compil.runtime.helper.language.ObjectUtil
-											.isNotEqualSwitcher(result_ft28,
+											.isNotEqualSwitcher(result_ft148,
 													null));
-					if (idLoopCond_265) {
+					if (idLoopCond_657) {
 					} else {
 
-						elem_ft28 = it_ft28.next();
+						elem_ft148 = it_ft148.next();
 
-						java.lang.Boolean idIfCond_266 = false;
+						java.lang.Boolean idIfCond_658 = false;
 						//BIle:detector
-						kermeta.language.behavior.Expression p_lbdExp28 = elem_ft28;
+						kermeta.language.behavior.Expression p_lbdExp148 = elem_ft148;
 
 						i = kermeta.standard.helper.IntegerWrapper.plus(i, 1);
 
-						idIfCond_266 = org.kermeta.compil.runtime.helper.language.ObjectUtil
-								.equalsSwitcher(p_lbdExp28, this);
+						idIfCond_658 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+								.equalsSwitcher(p_lbdExp148, this);
 						//EIle:detector
 
-						if (idIfCond_266) {
+						if (idIfCond_658) {
 
-							result_ft28 = elem_ft28;
+							result_ft148 = elem_ft148;
 						}
 
 					}
@@ -2763,12 +2763,12 @@ public class CallFeatureImpl extends CallExpressionImpl implements CallFeature {
 			}
 
 			//CE
-			exp = result_ft28;
+			exp = result_ft148;
 			//EIft:detect
 			;
 
-			java.lang.Boolean idIfCond_267 = false;
-			idIfCond_267 = kermeta.standard.helper.IntegerWrapper
+			java.lang.Boolean idIfCond_659 = false;
+			idIfCond_659 = kermeta.standard.helper.IntegerWrapper
 					.equals(
 							((kermeta.language.structure.Parameter) org.kermeta.compil.runtime.helper.language.ObjectUtil
 									.asTypeSwitcher(
@@ -2784,7 +2784,7 @@ public class CallFeatureImpl extends CallExpressionImpl implements CallFeature {
 															"kermeta.language.structure.Parameter")))
 									.getUpper(), 1);
 
-			if (idIfCond_267) {
+			if (idIfCond_659) {
 
 				result = true;
 			}
@@ -2809,8 +2809,8 @@ public class CallFeatureImpl extends CallExpressionImpl implements CallFeature {
 						.getIdentifierHelper())).getMangledIdentifier(this
 				.getName(), context);
 
-		java.lang.Boolean idIfCond_268 = false;
-		idIfCond_268 = kermeta.standard.helper.BooleanWrapper
+		java.lang.Boolean idIfCond_660 = false;
+		idIfCond_660 = kermeta.standard.helper.BooleanWrapper
 				.or(
 						kermeta.standard.helper.BooleanWrapper
 								.or(
@@ -2853,7 +2853,7 @@ public class CallFeatureImpl extends CallExpressionImpl implements CallFeature {
 										"kermeta::language::structure::Class"),
 								this.isFromUtil_MethodFragment(fName, context)));
 
-		if (idIfCond_268) {
+		if (idIfCond_660) {
 
 			result = true;
 		} else {
@@ -2882,36 +2882,36 @@ public class CallFeatureImpl extends CallExpressionImpl implements CallFeature {
 
 		{
 
-			kermeta.standard.Iterator<kermeta.language.behavior.Expression> it_ft29 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
+			kermeta.standard.Iterator<kermeta.language.behavior.Expression> it_ft149 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
 					.<kermeta.language.behavior.Expression> convertAsOrderedSet(
 							this.getParameters()).iterator();
-			java.lang.Boolean idLoopCond_269 = false;
-			while (!idLoopCond_269) {
-				idLoopCond_269 = it_ft29.isOff();
-				if (idLoopCond_269) {
+			java.lang.Boolean idLoopCond_661 = false;
+			while (!idLoopCond_661) {
+				idLoopCond_661 = it_ft149.isOff();
+				if (idLoopCond_661) {
 				} else {
 
 					//BIle:func
-					kermeta.language.behavior.Expression param_lbdExp29 = it_ft29
+					kermeta.language.behavior.Expression param_lbdExp149 = it_ft149
 							.next();
 
-					java.lang.Boolean idIfCond_270 = false;
-					idIfCond_270 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+					java.lang.Boolean idIfCond_662 = false;
+					idIfCond_662 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 							.isInstanceOfSwitcher(
-									param_lbdExp29,
+									param_lbdExp149,
 									org.kermeta.compil.runtime.ExecutionContext
 											.getInstance()
 											.getMetaClass(
 													"kermeta.language.behavior.LambdaExpression"));
 
-					if (idIfCond_270) {
+					if (idIfCond_662) {
 
-						java.lang.Boolean idIfCond_271 = false;
-						idIfCond_271 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+						java.lang.Boolean idIfCond_663 = false;
+						idIfCond_663 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 								.isInstanceOfSwitcher(
 										((kermeta.language.behavior.LambdaExpression) org.kermeta.compil.runtime.helper.language.ObjectUtil
 												.asTypeSwitcher(
-														param_lbdExp29,
+														param_lbdExp149,
 														org.kermeta.compil.runtime.ExecutionContext
 																.getInstance()
 																.getMetaClass(
@@ -2922,19 +2922,19 @@ public class CallFeatureImpl extends CallExpressionImpl implements CallFeature {
 												.getMetaClass(
 														"kermeta.language.structure.ProductType"));
 
-						if (idIfCond_271) {
+						if (idIfCond_663) {
 
 							//BIft:each
 
 							{
 
-								kermeta.standard.Iterator<kermeta.language.structure.Type> it_ft30 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
+								kermeta.standard.Iterator<kermeta.language.structure.Type> it_ft150 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
 										.<kermeta.language.structure.Type> convertAsSequence(
 												((kermeta.language.structure.ProductType) org.kermeta.compil.runtime.helper.language.ObjectUtil
 														.asTypeSwitcher(
 																((kermeta.language.behavior.LambdaExpression) org.kermeta.compil.runtime.helper.language.ObjectUtil
 																		.asTypeSwitcher(
-																				param_lbdExp29,
+																				param_lbdExp149,
 																				org.kermeta.compil.runtime.ExecutionContext
 																						.getInstance()
 																						.getMetaClass(
@@ -2945,21 +2945,21 @@ public class CallFeatureImpl extends CallExpressionImpl implements CallFeature {
 																		.getMetaClass(
 																				"kermeta.language.structure.ProductType")))
 														.getType()).iterator();
-								java.lang.Boolean idLoopCond_272 = false;
-								while (!idLoopCond_272) {
-									idLoopCond_272 = it_ft30.isOff();
-									if (idLoopCond_272) {
+								java.lang.Boolean idLoopCond_664 = false;
+								while (!idLoopCond_664) {
+									idLoopCond_664 = it_ft150.isOff();
+									if (idLoopCond_664) {
 									} else {
 
 										//BIle:func
-										kermeta.language.structure.Type t_lbdExp30 = it_ft30
+										kermeta.language.structure.Type t_lbdExp150 = it_ft150
 												.next();
 
-										java.lang.Boolean idIfCond_273 = false;
-										idIfCond_273 = kermeta.standard.helper.IntegerWrapper
+										java.lang.Boolean idIfCond_665 = false;
+										idIfCond_665 = kermeta.standard.helper.IntegerWrapper
 												.equals(i, 1);
 
-										if (idIfCond_273) {
+										if (idIfCond_665) {
 
 											result = kermeta.standard.helper.StringWrapper
 													.plus(result, ", ");
@@ -2969,7 +2969,7 @@ public class CallFeatureImpl extends CallExpressionImpl implements CallFeature {
 										}
 
 										result = kermeta.standard.helper.StringWrapper
-												.plus(result, t_lbdExp30
+												.plus(result, t_lbdExp150
 														.getTypeQName());
 										//EIle:func
 
@@ -2991,11 +2991,11 @@ public class CallFeatureImpl extends CallExpressionImpl implements CallFeature {
 
 		//EIft:each
 
-		java.lang.Boolean idIfCond_274 = false;
-		idIfCond_274 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+		java.lang.Boolean idIfCond_666 = false;
+		idIfCond_666 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 				.isNotEqualSwitcher(result, "");
 
-		if (idIfCond_274) {
+		if (idIfCond_666) {
 
 			result = kermeta.standard.helper.StringWrapper.plus(
 					kermeta.standard.helper.StringWrapper.plus("<", result),
@@ -3017,12 +3017,12 @@ public class CallFeatureImpl extends CallExpressionImpl implements CallFeature {
 
 		result = null;
 
-		java.lang.Boolean idIfCond_275 = false;
-		idIfCond_275 = kermeta.standard.helper.BooleanWrapper
+		java.lang.Boolean idIfCond_667 = false;
+		idIfCond_667 = kermeta.standard.helper.BooleanWrapper
 				.not(org.kermeta.compil.runtime.helper.language.ObjectUtil
 						.isVoidSwitcher(this.getFunctionType()));
 
-		if (idIfCond_275) {
+		if (idIfCond_667) {
 
 			result = this.getFunctionType().getRight();
 		}
@@ -3057,8 +3057,8 @@ public class CallFeatureImpl extends CallExpressionImpl implements CallFeature {
 
 		result = false;
 
-		java.lang.Boolean idIfCond_276 = false;
-		idIfCond_276 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+		java.lang.Boolean idIfCond_668 = false;
+		idIfCond_668 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 				.isInstanceOfSwitcher(
 						org.kermeta.compil.runtime.helper.language.ObjectUtil
 								.containerSwitcher(this),
@@ -3067,19 +3067,19 @@ public class CallFeatureImpl extends CallExpressionImpl implements CallFeature {
 								.getMetaClass(
 										"kermeta.language.behavior.CallFeature"));
 
-		if (idIfCond_276) {
+		if (idIfCond_668) {
 
 			//BIft:detect
 
-			kermeta.language.behavior.Expression result_ft31 = null;
+			kermeta.language.behavior.Expression result_ft151 = null;
 
-			kermeta.language.behavior.Expression elem_ft31 = null;
+			kermeta.language.behavior.Expression elem_ft151 = null;
 
-			result_ft31 = null;
+			result_ft151 = null;
 
 			{
 
-				kermeta.standard.Iterator<kermeta.language.behavior.Expression> it_ft31 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
+				kermeta.standard.Iterator<kermeta.language.behavior.Expression> it_ft151 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
 						.<kermeta.language.behavior.Expression> convertAsOrderedSet(
 								((kermeta.language.behavior.CallFeature) org.kermeta.compil.runtime.helper.language.ObjectUtil
 										.asTypeSwitcher(
@@ -3090,30 +3090,30 @@ public class CallFeatureImpl extends CallExpressionImpl implements CallFeature {
 														.getMetaClass(
 																"kermeta.language.behavior.CallFeature")))
 										.getParameters()).iterator();
-				java.lang.Boolean idLoopCond_277 = false;
-				while (!idLoopCond_277) {
-					idLoopCond_277 = kermeta.standard.helper.BooleanWrapper
+				java.lang.Boolean idLoopCond_669 = false;
+				while (!idLoopCond_669) {
+					idLoopCond_669 = kermeta.standard.helper.BooleanWrapper
 							.or(
-									it_ft31.isOff(),
+									it_ft151.isOff(),
 									org.kermeta.compil.runtime.helper.language.ObjectUtil
-											.isNotEqualSwitcher(result_ft31,
+											.isNotEqualSwitcher(result_ft151,
 													null));
-					if (idLoopCond_277) {
+					if (idLoopCond_669) {
 					} else {
 
-						elem_ft31 = it_ft31.next();
+						elem_ft151 = it_ft151.next();
 
-						java.lang.Boolean idIfCond_278 = false;
+						java.lang.Boolean idIfCond_670 = false;
 						//BIle:detector
-						kermeta.language.behavior.Expression p_lbdExp31 = elem_ft31;
+						kermeta.language.behavior.Expression p_lbdExp151 = elem_ft151;
 
-						idIfCond_278 = org.kermeta.compil.runtime.helper.language.ObjectUtil
-								.equalsSwitcher(p_lbdExp31, this);
+						idIfCond_670 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+								.equalsSwitcher(p_lbdExp151, this);
 						//EIle:detector
 
-						if (idIfCond_278) {
+						if (idIfCond_670) {
 
-							result_ft31 = elem_ft31;
+							result_ft151 = elem_ft151;
 						}
 
 					}
@@ -3123,7 +3123,7 @@ public class CallFeatureImpl extends CallExpressionImpl implements CallFeature {
 			//EIft:detect
 			result = kermeta.standard.helper.BooleanWrapper
 					.not(org.kermeta.compil.runtime.helper.language.ObjectUtil
-							.isVoidSwitcher(result_ft31));
+							.isVoidSwitcher(result_ft151));
 		}
 
 		return result;
@@ -3156,10 +3156,10 @@ public class CallFeatureImpl extends CallExpressionImpl implements CallFeature {
 
 		result = false;
 
-		java.lang.Boolean idIfCond_279 = false;
-		idIfCond_279 = this.getStaticOperation().ownedByValueType();
+		java.lang.Boolean idIfCond_671 = false;
+		idIfCond_671 = this.getStaticOperation().ownedByValueType();
 
-		if (idIfCond_279) {
+		if (idIfCond_671) {
 
 			result = true;
 		}
@@ -3191,14 +3191,14 @@ public class CallFeatureImpl extends CallExpressionImpl implements CallFeature {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-		case BehaviorPackage.CALL_FEATURE__IS_ATPRE:
-			return getIsAtpre();
+		case BehaviorPackage.CALL_FEATURE__CALLED_FT_RESULT:
+			return getCalledFtResult();
 		case BehaviorPackage.CALL_FEATURE__STATIC_OPERATION:
 			if (resolve)
 				return getStaticOperation();
 			return basicGetStaticOperation();
-		case BehaviorPackage.CALL_FEATURE__CALLED_FT_RESULT:
-			return getCalledFtResult();
+		case BehaviorPackage.CALL_FEATURE__IS_ATPRE:
+			return getIsAtpre();
 		case BehaviorPackage.CALL_FEATURE__TARGET:
 			if (resolve)
 				return getTarget();
@@ -3223,14 +3223,14 @@ public class CallFeatureImpl extends CallExpressionImpl implements CallFeature {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-		case BehaviorPackage.CALL_FEATURE__IS_ATPRE:
-			setIsAtpre((Boolean) newValue);
+		case BehaviorPackage.CALL_FEATURE__CALLED_FT_RESULT:
+			setCalledFtResult((String) newValue);
 			return;
 		case BehaviorPackage.CALL_FEATURE__STATIC_OPERATION:
 			setStaticOperation((Operation) newValue);
 			return;
-		case BehaviorPackage.CALL_FEATURE__CALLED_FT_RESULT:
-			setCalledFtResult((String) newValue);
+		case BehaviorPackage.CALL_FEATURE__IS_ATPRE:
+			setIsAtpre((Boolean) newValue);
 			return;
 		case BehaviorPackage.CALL_FEATURE__TARGET:
 			setTarget((Expression) newValue);
@@ -3253,14 +3253,14 @@ public class CallFeatureImpl extends CallExpressionImpl implements CallFeature {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-		case BehaviorPackage.CALL_FEATURE__IS_ATPRE:
-			setIsAtpre(IS_ATPRE_EDEFAULT);
+		case BehaviorPackage.CALL_FEATURE__CALLED_FT_RESULT:
+			setCalledFtResult(CALLED_FT_RESULT_EDEFAULT);
 			return;
 		case BehaviorPackage.CALL_FEATURE__STATIC_OPERATION:
 			setStaticOperation((Operation) null);
 			return;
-		case BehaviorPackage.CALL_FEATURE__CALLED_FT_RESULT:
-			setCalledFtResult(CALLED_FT_RESULT_EDEFAULT);
+		case BehaviorPackage.CALL_FEATURE__IS_ATPRE:
+			setIsAtpre(IS_ATPRE_EDEFAULT);
 			return;
 		case BehaviorPackage.CALL_FEATURE__TARGET:
 			setTarget((Expression) null);
@@ -3283,14 +3283,14 @@ public class CallFeatureImpl extends CallExpressionImpl implements CallFeature {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-		case BehaviorPackage.CALL_FEATURE__IS_ATPRE:
-			return IS_ATPRE_EDEFAULT == null ? isAtpre != null
-					: !IS_ATPRE_EDEFAULT.equals(isAtpre);
-		case BehaviorPackage.CALL_FEATURE__STATIC_OPERATION:
-			return staticOperation != null;
 		case BehaviorPackage.CALL_FEATURE__CALLED_FT_RESULT:
 			return CALLED_FT_RESULT_EDEFAULT == null ? calledFtResult != null
 					: !CALLED_FT_RESULT_EDEFAULT.equals(calledFtResult);
+		case BehaviorPackage.CALL_FEATURE__STATIC_OPERATION:
+			return staticOperation != null;
+		case BehaviorPackage.CALL_FEATURE__IS_ATPRE:
+			return IS_ATPRE_EDEFAULT == null ? isAtpre != null
+					: !IS_ATPRE_EDEFAULT.equals(isAtpre);
 		case BehaviorPackage.CALL_FEATURE__TARGET:
 			return target != null;
 		case BehaviorPackage.CALL_FEATURE__STATIC_ENUM_LITERAL:
@@ -3312,10 +3312,10 @@ public class CallFeatureImpl extends CallExpressionImpl implements CallFeature {
 			return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (isAtpre: ");
-		result.append(isAtpre);
-		result.append(", calledFtResult: ");
+		result.append(" (calledFtResult: ");
 		result.append(calledFtResult);
+		result.append(", isAtpre: ");
+		result.append(isAtpre);
 		result.append(')');
 		return result.toString();
 	}

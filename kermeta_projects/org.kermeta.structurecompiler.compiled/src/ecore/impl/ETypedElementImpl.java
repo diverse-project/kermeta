@@ -4,7 +4,7 @@
  * 
  * Generating with Kermeta <http://www.kermeta.org>
  *
- * $Id: ETypedElementImpl.java,v 1.12 2009-02-10 17:51:46 cfaucher Exp $
+ * $Id: ETypedElementImpl.java,v 1.13 2009-02-23 15:26:42 cfaucher Exp $
  */
 package ecore.impl;
 

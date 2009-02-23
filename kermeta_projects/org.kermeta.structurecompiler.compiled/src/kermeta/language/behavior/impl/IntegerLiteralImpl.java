@@ -4,7 +4,7 @@
  * 
  * Generating with Kermeta <http://www.kermeta.org>
  *
- * $Id: IntegerLiteralImpl.java,v 1.11 2009-02-10 17:51:51 cfaucher Exp $
+ * $Id: IntegerLiteralImpl.java,v 1.12 2009-02-23 15:26:46 cfaucher Exp $
  */
 package kermeta.language.behavior.impl;
 
@@ -108,8 +108,8 @@ public class IntegerLiteralImpl extends LiteralImpl implements IntegerLiteral {
 		result = kermeta.standard.helper.IntegerWrapper.toString(this
 				.getValue());
 
-		java.lang.Boolean idIfCond_343 = false;
-		idIfCond_343 = kermeta.standard.helper.BooleanWrapper
+		java.lang.Boolean idIfCond_695 = false;
+		idIfCond_695 = kermeta.standard.helper.BooleanWrapper
 				.not(org.kermeta.compil.runtime.helper.language.ObjectUtil
 						.isInstanceOfSwitcher(
 								org.kermeta.compil.runtime.helper.language.ObjectUtil
@@ -119,7 +119,7 @@ public class IntegerLiteralImpl extends LiteralImpl implements IntegerLiteral {
 										.getMetaClass(
 												"kermeta.language.behavior.VariableDecl")));
 
-		if (idIfCond_343) {
+		if (idIfCond_695) {
 
 			result = kermeta.standard.helper.StringWrapper.plus(result, this
 					.endOfExpressionFixer());

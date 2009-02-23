@@ -4,7 +4,7 @@
  * 
  * Generating with Kermeta <http://www.kermeta.org>
  *
- * $Id: ExceptionFactory.java,v 1.11 2009-02-10 17:51:50 cfaucher Exp $
+ * $Id: ExceptionFactory.java,v 1.12 2009-02-23 15:26:45 cfaucher Exp $
  */
 package km2ecore.common.exception;
 

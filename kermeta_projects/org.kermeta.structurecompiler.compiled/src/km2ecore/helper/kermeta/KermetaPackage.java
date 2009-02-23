@@ -4,7 +4,7 @@
  * 
  * Generating with Kermeta <http://www.kermeta.org>
  *
- * $Id: KermetaPackage.java,v 1.11 2009-02-10 17:51:59 cfaucher Exp $
+ * $Id: KermetaPackage.java,v 1.12 2009-02-23 15:26:55 cfaucher Exp $
  */
 package km2ecore.helper.kermeta;
 
@@ -74,15 +74,6 @@ public interface KermetaPackage extends EPackage {
 	int GENERIC_TYPE_DEFINITION_HELPER = 0;
 
 	/**
-	 * The feature id for the '<em><b>Tag</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int GENERIC_TYPE_DEFINITION_HELPER__TAG = StructurePackage.OBJECT__TAG;
-
-	/**
 	 * The feature id for the '<em><b>File</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -90,6 +81,15 @@ public interface KermetaPackage extends EPackage {
 	 * @ordered
 	 */
 	int GENERIC_TYPE_DEFINITION_HELPER__FILE = StructurePackage.OBJECT__FILE;
+
+	/**
+	 * The feature id for the '<em><b>Tag</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int GENERIC_TYPE_DEFINITION_HELPER__TAG = StructurePackage.OBJECT__TAG;
 
 	/**
 	 * The feature id for the '<em><b>File Name</b></em>' attribute.
@@ -156,15 +156,6 @@ public interface KermetaPackage extends EPackage {
 	int COMPILER_HELPER_JAVA = 1;
 
 	/**
-	 * The feature id for the '<em><b>Tag</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int COMPILER_HELPER_JAVA__TAG = StructurePackage.OBJECT__TAG;
-
-	/**
 	 * The feature id for the '<em><b>File</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -172,6 +163,15 @@ public interface KermetaPackage extends EPackage {
 	 * @ordered
 	 */
 	int COMPILER_HELPER_JAVA__FILE = StructurePackage.OBJECT__FILE;
+
+	/**
+	 * The feature id for the '<em><b>Tag</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMPILER_HELPER_JAVA__TAG = StructurePackage.OBJECT__TAG;
 
 	/**
 	 * The feature id for the '<em><b>File Name</b></em>' attribute.

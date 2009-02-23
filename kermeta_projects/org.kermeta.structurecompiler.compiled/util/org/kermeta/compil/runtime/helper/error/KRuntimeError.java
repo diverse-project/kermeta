@@ -1,4 +1,4 @@
-/* $Id: KRuntimeError.java,v 1.11 2009-02-10 17:52:07 cfaucher Exp $
+/* $Id: KRuntimeError.java,v 1.12 2009-02-23 15:27:04 cfaucher Exp $
 * Project : org.kermeta.compil.runtime.helper
 * File : KRuntimeException.java
 * License : EPL

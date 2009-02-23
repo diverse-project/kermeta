@@ -4,7 +4,7 @@
  * 
  * Generating with Kermeta <http://www.kermeta.org>
  *
- * $Id: SMAccess.java,v 1.8 2009-02-10 17:51:59 cfaucher Exp $
+ * $Id: SMAccess.java,v 1.9 2009-02-23 15:26:55 cfaucher Exp $
  */
 package simk;
 

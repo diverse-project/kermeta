@@ -4,7 +4,7 @@
  * 
  * Generating with Kermeta <http://www.kermeta.org>
  *
- * $Id: BehaviorAdapterFactory.java,v 1.11 2009-02-10 17:52:07 cfaucher Exp $
+ * $Id: BehaviorAdapterFactory.java,v 1.12 2009-02-23 15:27:04 cfaucher Exp $
  */
 package kermeta.language.behavior.util;
 
@@ -78,13 +78,23 @@ public class BehaviorAdapterFactory extends AdapterFactoryImpl {
 	 */
 	protected BehaviorSwitch<Adapter> modelSwitch = new BehaviorSwitch<Adapter>() {
 		@Override
-		public Adapter caseExpression(Expression object) {
-			return createExpressionAdapter();
+		public Adapter caseBlock(Block object) {
+			return createBlockAdapter();
 		}
 
 		@Override
-		public Adapter caseVariableDecl(VariableDecl object) {
-			return createVariableDeclAdapter();
+		public Adapter caseAssignment(Assignment object) {
+			return createAssignmentAdapter();
+		}
+
+		@Override
+		public Adapter caseCallExpression(CallExpression object) {
+			return createCallExpressionAdapter();
+		}
+
+		@Override
+		public Adapter caseExpression(Expression object) {
+			return createExpressionAdapter();
 		}
 
 		@Override
@@ -98,13 +108,8 @@ public class BehaviorAdapterFactory extends AdapterFactoryImpl {
 		}
 
 		@Override
-		public Adapter caseBlock(Block object) {
-			return createBlockAdapter();
-		}
-
-		@Override
-		public Adapter caseCallExpression(CallExpression object) {
-			return createCallExpressionAdapter();
+		public Adapter caseCallSuperOperation(CallSuperOperation object) {
+			return createCallSuperOperationAdapter();
 		}
 
 		@Override
@@ -118,28 +123,8 @@ public class BehaviorAdapterFactory extends AdapterFactoryImpl {
 		}
 
 		@Override
-		public Adapter caseCallSuperOperation(CallSuperOperation object) {
-			return createCallSuperOperationAdapter();
-		}
-
-		@Override
-		public Adapter caseAssignment(Assignment object) {
-			return createAssignmentAdapter();
-		}
-
-		@Override
-		public Adapter caseLambdaExpression(LambdaExpression object) {
-			return createLambdaExpressionAdapter();
-		}
-
-		@Override
-		public Adapter caseLambdaParameter(LambdaParameter object) {
-			return createLambdaParameterAdapter();
-		}
-
-		@Override
-		public Adapter caseTypeReference(TypeReference object) {
-			return createTypeReferenceAdapter();
+		public Adapter caseConditional(Conditional object) {
+			return createConditionalAdapter();
 		}
 
 		@Override
@@ -153,23 +138,8 @@ public class BehaviorAdapterFactory extends AdapterFactoryImpl {
 		}
 
 		@Override
-		public Adapter caseSelfExpression(SelfExpression object) {
-			return createSelfExpressionAdapter();
-		}
-
-		@Override
-		public Adapter caseConditional(Conditional object) {
-			return createConditionalAdapter();
-		}
-
-		@Override
-		public Adapter caseLoop(Loop object) {
-			return createLoopAdapter();
-		}
-
-		@Override
-		public Adapter caseJavaStaticCall(JavaStaticCall object) {
-			return createJavaStaticCallAdapter();
+		public Adapter caseTypeReference(TypeReference object) {
+			return createTypeReferenceAdapter();
 		}
 
 		@Override
@@ -178,13 +148,33 @@ public class BehaviorAdapterFactory extends AdapterFactoryImpl {
 		}
 
 		@Override
-		public Adapter caseStringLiteral(StringLiteral object) {
-			return createStringLiteralAdapter();
+		public Adapter caseEmptyExpression(EmptyExpression object) {
+			return createEmptyExpressionAdapter();
+		}
+
+		@Override
+		public Adapter caseJavaStaticCall(JavaStaticCall object) {
+			return createJavaStaticCallAdapter();
+		}
+
+		@Override
+		public Adapter caseLambdaExpression(LambdaExpression object) {
+			return createLambdaExpressionAdapter();
+		}
+
+		@Override
+		public Adapter caseLambdaParameter(LambdaParameter object) {
+			return createLambdaParameterAdapter();
 		}
 
 		@Override
 		public Adapter caseIntegerLiteral(IntegerLiteral object) {
 			return createIntegerLiteralAdapter();
+		}
+
+		@Override
+		public Adapter caseStringLiteral(StringLiteral object) {
+			return createStringLiteralAdapter();
 		}
 
 		@Override
@@ -203,8 +193,18 @@ public class BehaviorAdapterFactory extends AdapterFactoryImpl {
 		}
 
 		@Override
-		public Adapter caseEmptyExpression(EmptyExpression object) {
-			return createEmptyExpressionAdapter();
+		public Adapter caseLoop(Loop object) {
+			return createLoopAdapter();
+		}
+
+		@Override
+		public Adapter caseSelfExpression(SelfExpression object) {
+			return createSelfExpressionAdapter();
+		}
+
+		@Override
+		public Adapter caseVariableDecl(VariableDecl object) {
+			return createVariableDeclAdapter();
 		}
 
 		@Override
@@ -252,6 +252,48 @@ public class BehaviorAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
+	 * Creates a new adapter for an object of class '{@link kermeta.language.behavior.Block <em>Block</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see kermeta.language.behavior.Block
+	 * @generated
+	 */
+	public Adapter createBlockAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link kermeta.language.behavior.Assignment <em>Assignment</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see kermeta.language.behavior.Assignment
+	 * @generated
+	 */
+	public Adapter createAssignmentAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link kermeta.language.behavior.CallExpression <em>Call Expression</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see kermeta.language.behavior.CallExpression
+	 * @generated
+	 */
+	public Adapter createCallExpressionAdapter() {
+		return null;
+	}
+
+	/**
 	 * Creates a new adapter for an object of class '{@link kermeta.language.behavior.Expression <em>Expression</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -262,20 +304,6 @@ public class BehaviorAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createExpressionAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link kermeta.language.behavior.VariableDecl <em>Variable Decl</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see kermeta.language.behavior.VariableDecl
-	 * @generated
-	 */
-	public Adapter createVariableDeclAdapter() {
 		return null;
 	}
 
@@ -308,30 +336,16 @@ public class BehaviorAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link kermeta.language.behavior.Block <em>Block</em>}'.
+	 * Creates a new adapter for an object of class '{@link kermeta.language.behavior.CallSuperOperation <em>Call Super Operation</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see kermeta.language.behavior.Block
+	 * @see kermeta.language.behavior.CallSuperOperation
 	 * @generated
 	 */
-	public Adapter createBlockAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link kermeta.language.behavior.CallExpression <em>Call Expression</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see kermeta.language.behavior.CallExpression
-	 * @generated
-	 */
-	public Adapter createCallExpressionAdapter() {
+	public Adapter createCallSuperOperationAdapter() {
 		return null;
 	}
 
@@ -364,72 +378,16 @@ public class BehaviorAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link kermeta.language.behavior.CallSuperOperation <em>Call Super Operation</em>}'.
+	 * Creates a new adapter for an object of class '{@link kermeta.language.behavior.Conditional <em>Conditional</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see kermeta.language.behavior.CallSuperOperation
+	 * @see kermeta.language.behavior.Conditional
 	 * @generated
 	 */
-	public Adapter createCallSuperOperationAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link kermeta.language.behavior.Assignment <em>Assignment</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see kermeta.language.behavior.Assignment
-	 * @generated
-	 */
-	public Adapter createAssignmentAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link kermeta.language.behavior.LambdaExpression <em>Lambda Expression</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see kermeta.language.behavior.LambdaExpression
-	 * @generated
-	 */
-	public Adapter createLambdaExpressionAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link kermeta.language.behavior.LambdaParameter <em>Lambda Parameter</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see kermeta.language.behavior.LambdaParameter
-	 * @generated
-	 */
-	public Adapter createLambdaParameterAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link kermeta.language.behavior.TypeReference <em>Type Reference</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see kermeta.language.behavior.TypeReference
-	 * @generated
-	 */
-	public Adapter createTypeReferenceAdapter() {
+	public Adapter createConditionalAdapter() {
 		return null;
 	}
 
@@ -462,58 +420,16 @@ public class BehaviorAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link kermeta.language.behavior.SelfExpression <em>Self Expression</em>}'.
+	 * Creates a new adapter for an object of class '{@link kermeta.language.behavior.TypeReference <em>Type Reference</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see kermeta.language.behavior.SelfExpression
+	 * @see kermeta.language.behavior.TypeReference
 	 * @generated
 	 */
-	public Adapter createSelfExpressionAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link kermeta.language.behavior.Conditional <em>Conditional</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see kermeta.language.behavior.Conditional
-	 * @generated
-	 */
-	public Adapter createConditionalAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link kermeta.language.behavior.Loop <em>Loop</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see kermeta.language.behavior.Loop
-	 * @generated
-	 */
-	public Adapter createLoopAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link kermeta.language.behavior.JavaStaticCall <em>Java Static Call</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see kermeta.language.behavior.JavaStaticCall
-	 * @generated
-	 */
-	public Adapter createJavaStaticCallAdapter() {
+	public Adapter createTypeReferenceAdapter() {
 		return null;
 	}
 
@@ -532,16 +448,58 @@ public class BehaviorAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link kermeta.language.behavior.StringLiteral <em>String Literal</em>}'.
+	 * Creates a new adapter for an object of class '{@link kermeta.language.behavior.EmptyExpression <em>Empty Expression</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see kermeta.language.behavior.StringLiteral
+	 * @see kermeta.language.behavior.EmptyExpression
 	 * @generated
 	 */
-	public Adapter createStringLiteralAdapter() {
+	public Adapter createEmptyExpressionAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link kermeta.language.behavior.JavaStaticCall <em>Java Static Call</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see kermeta.language.behavior.JavaStaticCall
+	 * @generated
+	 */
+	public Adapter createJavaStaticCallAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link kermeta.language.behavior.LambdaExpression <em>Lambda Expression</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see kermeta.language.behavior.LambdaExpression
+	 * @generated
+	 */
+	public Adapter createLambdaExpressionAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link kermeta.language.behavior.LambdaParameter <em>Lambda Parameter</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see kermeta.language.behavior.LambdaParameter
+	 * @generated
+	 */
+	public Adapter createLambdaParameterAdapter() {
 		return null;
 	}
 
@@ -556,6 +514,20 @@ public class BehaviorAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createIntegerLiteralAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link kermeta.language.behavior.StringLiteral <em>String Literal</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see kermeta.language.behavior.StringLiteral
+	 * @generated
+	 */
+	public Adapter createStringLiteralAdapter() {
 		return null;
 	}
 
@@ -602,16 +574,44 @@ public class BehaviorAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link kermeta.language.behavior.EmptyExpression <em>Empty Expression</em>}'.
+	 * Creates a new adapter for an object of class '{@link kermeta.language.behavior.Loop <em>Loop</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see kermeta.language.behavior.EmptyExpression
+	 * @see kermeta.language.behavior.Loop
 	 * @generated
 	 */
-	public Adapter createEmptyExpressionAdapter() {
+	public Adapter createLoopAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link kermeta.language.behavior.SelfExpression <em>Self Expression</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see kermeta.language.behavior.SelfExpression
+	 * @generated
+	 */
+	public Adapter createSelfExpressionAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link kermeta.language.behavior.VariableDecl <em>Variable Decl</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see kermeta.language.behavior.VariableDecl
+	 * @generated
+	 */
+	public Adapter createVariableDeclAdapter() {
 		return null;
 	}
 

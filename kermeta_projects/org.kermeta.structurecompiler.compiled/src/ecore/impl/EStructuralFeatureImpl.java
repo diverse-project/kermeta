@@ -4,7 +4,7 @@
  * 
  * Generating with Kermeta <http://www.kermeta.org>
  *
- * $Id: EStructuralFeatureImpl.java,v 1.12 2009-02-10 17:51:46 cfaucher Exp $
+ * $Id: EStructuralFeatureImpl.java,v 1.13 2009-02-23 15:26:41 cfaucher Exp $
  */
 package ecore.impl;
 

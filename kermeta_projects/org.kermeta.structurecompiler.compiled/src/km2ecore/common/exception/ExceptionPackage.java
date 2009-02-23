@@ -4,7 +4,7 @@
  * 
  * Generating with Kermeta <http://www.kermeta.org>
  *
- * $Id: ExceptionPackage.java,v 1.11 2009-02-10 17:51:50 cfaucher Exp $
+ * $Id: ExceptionPackage.java,v 1.12 2009-02-23 15:26:45 cfaucher Exp $
  */
 package km2ecore.common.exception;
 
@@ -74,15 +74,6 @@ public interface ExceptionPackage extends EPackage {
 	int UNDEFINED_URI_EPACKAGE_EXCEPTION = 0;
 
 	/**
-	 * The feature id for the '<em><b>Tag</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int UNDEFINED_URI_EPACKAGE_EXCEPTION__TAG = ExceptionsPackage.EXCEPTION__TAG;
-
-	/**
 	 * The feature id for the '<em><b>File</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -90,6 +81,15 @@ public interface ExceptionPackage extends EPackage {
 	 * @ordered
 	 */
 	int UNDEFINED_URI_EPACKAGE_EXCEPTION__FILE = ExceptionsPackage.EXCEPTION__FILE;
+
+	/**
+	 * The feature id for the '<em><b>Tag</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UNDEFINED_URI_EPACKAGE_EXCEPTION__TAG = ExceptionsPackage.EXCEPTION__TAG;
 
 	/**
 	 * The feature id for the '<em><b>File Name</b></em>' attribute.
@@ -183,15 +183,6 @@ public interface ExceptionPackage extends EPackage {
 	int UNDEFINED_VALUE_TYPE_INSTANCE_CLASS_NAME_EXCEPTION = 1;
 
 	/**
-	 * The feature id for the '<em><b>Tag</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int UNDEFINED_VALUE_TYPE_INSTANCE_CLASS_NAME_EXCEPTION__TAG = ExceptionsPackage.EXCEPTION__TAG;
-
-	/**
 	 * The feature id for the '<em><b>File</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -199,6 +190,15 @@ public interface ExceptionPackage extends EPackage {
 	 * @ordered
 	 */
 	int UNDEFINED_VALUE_TYPE_INSTANCE_CLASS_NAME_EXCEPTION__FILE = ExceptionsPackage.EXCEPTION__FILE;
+
+	/**
+	 * The feature id for the '<em><b>Tag</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UNDEFINED_VALUE_TYPE_INSTANCE_CLASS_NAME_EXCEPTION__TAG = ExceptionsPackage.EXCEPTION__TAG;
 
 	/**
 	 * The feature id for the '<em><b>File Name</b></em>' attribute.

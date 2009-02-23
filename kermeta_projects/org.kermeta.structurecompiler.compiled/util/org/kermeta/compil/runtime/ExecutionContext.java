@@ -41,6 +41,10 @@ public class ExecutionContext {
 	 * @generated
 	 */
 	private ExecutionContext() {
+		//Initialize the persistence mapping
+		//Maybe, we can comment the following line
+		PersistenceMapping.getInstance();
+
 		initValueTypes();
 		_classLoader = ExecutionContext.class.getClassLoader();
 	}

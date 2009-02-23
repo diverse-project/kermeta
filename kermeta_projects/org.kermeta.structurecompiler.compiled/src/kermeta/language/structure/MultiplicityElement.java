@@ -4,7 +4,7 @@
  * 
  * Generating with Kermeta <http://www.kermeta.org>
  *
- * $Id: MultiplicityElement.java,v 1.11 2009-02-10 17:51:53 cfaucher Exp $
+ * $Id: MultiplicityElement.java,v 1.12 2009-02-23 15:26:48 cfaucher Exp $
  */
 package kermeta.language.structure;
 
@@ -144,7 +144,7 @@ public interface MultiplicityElement extends TypedElement {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @model kind="operation" dataType="kermeta.standard.JavaString"
-	 *        annotation="kermeta documentation='/**\r\n\t * Get the RecopyInValueTypes reference of an Operation\r\n\t \052/'"
+	 *        annotation="kermeta documentation='/**\r\n\t * Get the RecopyInValueTypes reference of an Operation\r\n\t * \r\n\t * For example, recopy the behavior from Object.getMetaClass() in the ValueType Wrapper.\r\n\t * This is needed because the super operation call is broken by the usage of Java primitive types instead of kermeta::standard types\r\n\t * (Java primitive types do not inherit from kermeta::language::structure::Object)\r\n\t \052/'"
 	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='\njava.lang.String result = null;\n\n\tresult = this.getUniqueTagValue(\"RecopyInValueTypes\");\n\nreturn result;\n'"
 	 * @generated
 	 */
@@ -154,7 +154,7 @@ public interface MultiplicityElement extends TypedElement {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @model dataType="kermeta.standard.JavaString"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='\njava.lang.String result = null;\n\n\tresult = ((km2ecore.helper.java.IdentifierHelper) org.kermeta.compil.runtime.helper.language.ClassUtil.newObject(km2ecore.helper.java.JavaPackage.eINSTANCE.getIdentifierHelper())).getMangledIdentifier(this.getName(), context);\n\n\tjava.lang.Boolean idIfCond_581 = false;\n\tidIfCond_581 = org.kermeta.compil.runtime.helper.language.ObjectUtil.isNotEqualSwitcher(this.getEMFRenameAs(), \"\");\n\n\tif( idIfCond_581 ) {\n\n\tresult = this.getEMFRenameAs();\n}\n\n\nreturn result;\n'"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='\njava.lang.String result = null;\n\n\tresult = ((km2ecore.helper.java.IdentifierHelper) org.kermeta.compil.runtime.helper.language.ClassUtil.newObject(km2ecore.helper.java.JavaPackage.eINSTANCE.getIdentifierHelper())).getMangledIdentifier(this.getName(), context);\n\n\tjava.lang.Boolean idIfCond_340 = false;\n\tidIfCond_340 = org.kermeta.compil.runtime.helper.language.ObjectUtil.isNotEqualSwitcher(this.getEMFRenameAs(), \"\");\n\n\tif( idIfCond_340 ) {\n\n\tresult = this.getEMFRenameAs();\n}\n\n\nreturn result;\n'"
 	 * @generated
 	 */
 	String getFinalName(KM2EcoreContext context);
@@ -163,7 +163,7 @@ public interface MultiplicityElement extends TypedElement {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @model kind="operation" dataType="kermeta.standard.JavaString"
-	 *        annotation="kermeta documentation='/**\r\n\t * Get the EMFRenameAs reference of an Operation\r\n\t \052/'"
+	 *        annotation="kermeta documentation='/**\r\n\t * Get the EMFRenameAs reference of an Operation\r\n\t * \r\n\t * This tag is used to rename the operation at compilation time if its name is conflicting\r\n\t * with EMF name, i.e.: if the user is using a property named \"log\" and operations named \"getLog\" or \"setLog\",\r\n\t * thus the operation\'s names will conflict with the generated getter and setter for log by EMF, i.e.: \"getLog\" and \"setLog\"\r\n\t * This tag is taking into account if the user defines it, but if a potential conflict is present then\r\n\t * the Kermeta loader adds automatically this tag\r\n\t \052/'"
 	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='\njava.lang.String result = null;\n\n\tresult = this.getUniqueTagValue(\"EMF_renameAs\");\n\nreturn result;\n'"
 	 * @generated
 	 */
@@ -174,7 +174,7 @@ public interface MultiplicityElement extends TypedElement {
 	 * <!-- end-user-doc -->
 	 * @model dataType="kermeta.standard.JavaString"
 	 *        annotation="kermeta documentation='/** Generation of the String representing the end of a method: return of the result value \052/'"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='\njava.lang.String result = null;\n\n\tresult = \"\\nreturn \";\n\n\tjava.lang.Boolean idIfCond_582 = false;\n\tidIfCond_582 = kermeta.standard.helper.IntegerWrapper.equals(this.getUpper(), 1);\n\n\tif( idIfCond_582 ) {\n\n\tresult = kermeta.standard.helper.StringWrapper.plus(result, \"result\");\n}\n else {\n\n\tresult = kermeta.standard.helper.StringWrapper.plus(kermeta.standard.helper.StringWrapper.plus(result, context.getCOLLECTION_UTIL_CLASS()), \".convertAsEList(result)\");\n}\n\n\n\tresult = kermeta.standard.helper.StringWrapper.plus(result, \";\\n\");\n\nreturn result;\n'"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='\njava.lang.String result = null;\n\n\tresult = \"\\nreturn \";\n\n\tjava.lang.Boolean idIfCond_341 = false;\n\tidIfCond_341 = kermeta.standard.helper.IntegerWrapper.equals(this.getUpper(), 1);\n\n\tif( idIfCond_341 ) {\n\n\tresult = kermeta.standard.helper.StringWrapper.plus(result, \"result\");\n}\n else {\n\n\tresult = kermeta.standard.helper.StringWrapper.plus(kermeta.standard.helper.StringWrapper.plus(result, context.getCOLLECTION_UTIL_CLASS()), \".convertAsEList(result)\");\n}\n\n\n\tresult = kermeta.standard.helper.StringWrapper.plus(result, \";\\n\");\n\nreturn result;\n'"
 	 * @generated
 	 */
 	String ppReturnResult(KM2EcoreContext context);

@@ -4,7 +4,7 @@
  * 
  * Generating with Kermeta <http://www.kermeta.org>
  *
- * $Id: KermetaSwitch.java,v 1.11 2009-02-10 17:51:57 cfaucher Exp $
+ * $Id: KermetaSwitch.java,v 1.12 2009-02-23 15:26:53 cfaucher Exp $
  */
 package kermeta.util;
 

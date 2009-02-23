@@ -4,7 +4,7 @@
  * 
  * Generating with Kermeta <http://www.kermeta.org>
  *
- * $Id: LanguageFactoryImpl.java,v 1.11 2009-02-10 17:51:51 cfaucher Exp $
+ * $Id: LanguageFactoryImpl.java,v 1.12 2009-02-23 15:26:47 cfaucher Exp $
  */
 package kermeta.language.impl;
 

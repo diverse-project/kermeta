@@ -4,7 +4,7 @@
  * 
  * Generating with Kermeta <http://www.kermeta.org>
  *
- * $Id: DummyClass.java,v 1.11 2009-02-10 17:52:06 cfaucher Exp $
+ * $Id: DummyClass.java,v 1.12 2009-02-23 15:27:03 cfaucher Exp $
  */
 package kermeta;
 

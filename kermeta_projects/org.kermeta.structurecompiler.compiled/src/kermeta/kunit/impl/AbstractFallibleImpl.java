@@ -4,7 +4,7 @@
  * 
  * Generating with Kermeta <http://www.kermeta.org>
  *
- * $Id: AbstractFallibleImpl.java,v 1.11 2009-02-10 17:51:44 cfaucher Exp $
+ * $Id: AbstractFallibleImpl.java,v 1.12 2009-02-23 15:26:38 cfaucher Exp $
  */
 package kermeta.kunit.impl;
 
@@ -70,31 +70,30 @@ public abstract class AbstractFallibleImpl extends ObjectImpl implements
 		{
 
 			java.lang.Integer i = 0;
-			java.lang.Boolean idLoopCond_1089 = false;
-			while (!idLoopCond_1089) {
-				idLoopCond_1089 = kermeta.standard.helper.IntegerWrapper
-						.equals(i, kermeta.standard.helper.StringWrapper
-								.size(s));
-				if (idLoopCond_1089) {
+			java.lang.Boolean idLoopCond_949 = false;
+			while (!idLoopCond_949) {
+				idLoopCond_949 = kermeta.standard.helper.IntegerWrapper.equals(
+						i, kermeta.standard.helper.StringWrapper.size(s));
+				if (idLoopCond_949) {
 				} else {
 
 					java.lang.String c = kermeta.standard.helper.CharacterWrapper
 							.toString(kermeta.standard.helper.StringWrapper
 									.elementAt(s, i));
 
-					java.lang.Boolean idIfCond_1090 = false;
-					idIfCond_1090 = kermeta.standard.helper.IntegerWrapper
+					java.lang.Boolean idIfCond_950 = false;
+					idIfCond_950 = kermeta.standard.helper.IntegerWrapper
 							.isGreaterOrEqual(
 									kermeta.standard.helper.StringWrapper
 											.indexOf(" \n\t", c), 0);
 
-					if (idIfCond_1090) {
+					if (idIfCond_950) {
 
-						java.lang.Boolean idIfCond_1091 = false;
-						idIfCond_1091 = kermeta.standard.helper.BooleanWrapper
+						java.lang.Boolean idIfCond_951 = false;
+						idIfCond_951 = kermeta.standard.helper.BooleanWrapper
 								.not(white);
 
-						if (idIfCond_1091) {
+						if (idIfCond_951) {
 
 							white = true;
 
@@ -107,10 +106,10 @@ public abstract class AbstractFallibleImpl extends ObjectImpl implements
 						result = kermeta.standard.helper.StringWrapper.plus(
 								result, c);
 
-						java.lang.Boolean idIfCond_1092 = false;
-						idIfCond_1092 = white;
+						java.lang.Boolean idIfCond_952 = false;
+						idIfCond_952 = white;
 
-						if (idIfCond_1092) {
+						if (idIfCond_952) {
 
 							white = false;
 						}

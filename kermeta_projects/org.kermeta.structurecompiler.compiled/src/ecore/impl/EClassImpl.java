@@ -4,7 +4,7 @@
  * 
  * Generating with Kermeta <http://www.kermeta.org>
  *
- * $Id: EClassImpl.java,v 1.12 2009-02-10 17:51:46 cfaucher Exp $
+ * $Id: EClassImpl.java,v 1.13 2009-02-23 15:26:42 cfaucher Exp $
  */
 package ecore.impl;
 
@@ -412,9 +412,9 @@ public class EClassImpl extends EClassifierImpl implements EClass {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<EStructuralFeature> getterEAllStructuralFeatures() {
+	public EList<EOperation> getterEAllOperations() {
 
-		kermeta.standard.OrderedSet<ecore.EStructuralFeature> result = null;
+		kermeta.standard.OrderedSet<ecore.EOperation> result = null;
 
 		return org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
 				.convertAsEList(result);
@@ -426,9 +426,9 @@ public class EClassImpl extends EClassifierImpl implements EClass {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<EOperation> getterEAllOperations() {
+	public EList<EStructuralFeature> getterEAllStructuralFeatures() {
 
-		kermeta.standard.OrderedSet<ecore.EOperation> result = null;
+		kermeta.standard.OrderedSet<ecore.EStructuralFeature> result = null;
 
 		return org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
 				.convertAsEList(result);

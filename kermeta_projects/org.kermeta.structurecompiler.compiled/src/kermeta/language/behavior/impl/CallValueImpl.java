@@ -4,7 +4,7 @@
  * 
  * Generating with Kermeta <http://www.kermeta.org>
  *
- * $Id: CallValueImpl.java,v 1.11 2009-02-10 17:51:51 cfaucher Exp $
+ * $Id: CallValueImpl.java,v 1.12 2009-02-23 15:26:46 cfaucher Exp $
  */
 package kermeta.language.behavior.impl;
 

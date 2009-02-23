@@ -4,7 +4,7 @@
  * 
  * Generating with Kermeta <http://www.kermeta.org>
  *
- * $Id: EcoreAdapterFactory.java,v 1.10 2009-02-10 17:52:00 cfaucher Exp $
+ * $Id: EcoreAdapterFactory.java,v 1.11 2009-02-23 15:26:56 cfaucher Exp $
  */
 package ecore.util;
 

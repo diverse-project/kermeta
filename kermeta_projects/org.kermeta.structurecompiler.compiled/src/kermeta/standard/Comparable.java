@@ -4,7 +4,7 @@
  * 
  * Generating with Kermeta <http://www.kermeta.org>
  *
- * $Id: Comparable.java,v 1.11 2009-02-10 17:51:50 cfaucher Exp $
+ * $Id: Comparable.java,v 1.12 2009-02-23 15:26:46 cfaucher Exp $
  */
 package kermeta.standard;
 
@@ -50,8 +50,8 @@ public interface Comparable extends kermeta.language.structure.Object {
 	 * <!-- end-user-doc -->
 	 * @model dataType="kermeta.standard.JavaInteger"
 	 *        annotation="kermeta isAbstract='true'"
-	 *        annotation="kermeta documentation='/**\r\n\t * This method should be implemented by any class that inherits\r\n\t * from Comparable.\r\n\t * returns 0 if self = other\r\n\t * returns > 0 if  self > other\r\n\t * returns < 0 if  self < other\r\n\t \052/'"
 	 *        annotation="kermeta RecopyInValueTypes='true'"
+	 *        annotation="kermeta documentation='/**\r\n\t * This method should be implemented by any class that inherits\r\n\t * from Comparable.\r\n\t * returns 0 if self = other\r\n\t * returns > 0 if  self > other\r\n\t * returns < 0 if  self < other\r\n\t \052/'"
 	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='java.lang.Integer result = null;\n\nreturn result;\n'"
 	 * @generated
 	 */
@@ -61,8 +61,8 @@ public interface Comparable extends kermeta.language.structure.Object {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @model dataType="kermeta.standard.JavaBoolean"
-	 *        annotation="kermeta documentation='/**\r\n\t * return true if self <= other\r\n\t \052/'"
 	 *        annotation="kermeta RecopyInValueTypes='true'"
+	 *        annotation="kermeta documentation='/**\r\n\t * return true if self <= other\r\n\t \052/'"
 	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='\njava.lang.Boolean result = null;\n\n\tresult = kermeta.standard.helper.IntegerWrapper.isLowerOrEqual(this.compareTo(other), 0);\n\nreturn result;\n'"
 	 * @generated
 	 */
@@ -72,8 +72,8 @@ public interface Comparable extends kermeta.language.structure.Object {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @model dataType="kermeta.standard.JavaBoolean"
-	 *        annotation="kermeta documentation='/**\r\n\t * return true if self > other\r\n\t \052/'"
 	 *        annotation="kermeta RecopyInValueTypes='true'"
+	 *        annotation="kermeta documentation='/**\r\n\t * return true if self > other\r\n\t \052/'"
 	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='\njava.lang.Boolean result = null;\n\n\tresult = kermeta.standard.helper.IntegerWrapper.isGreater(this.compareTo(other), 0);\n\nreturn result;\n'"
 	 * @generated
 	 */

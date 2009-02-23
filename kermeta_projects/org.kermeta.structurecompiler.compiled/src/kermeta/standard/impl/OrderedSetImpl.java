@@ -4,7 +4,7 @@
  * 
  * Generating with Kermeta <http://www.kermeta.org>
  *
- * $Id: OrderedSetImpl.java,v 1.11 2009-02-10 17:51:51 cfaucher Exp $
+ * $Id: OrderedSetImpl.java,v 1.12 2009-02-23 15:26:47 cfaucher Exp $
  */
 package kermeta.standard.impl;
 
@@ -71,13 +71,34 @@ public class OrderedSetImpl<G> extends SetImpl<G> implements OrderedSet<G> {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public OrderedSet<G> insertAt(Integer index, G subject) {
+
+		kermeta.standard.OrderedSet<G> result = null;
+
+		result = ((kermeta.standard.OrderedSet<G>) org.kermeta.compil.runtime.helper.language.ClassUtil
+				.newObject(kermeta.standard.StandardPackage.eINSTANCE
+						.getOrderedSet()));
+
+		result.addAll(this);
+
+		result.addAt(index, subject);
+
+		return result;
+
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public void addAt(Integer index, G element) {
 
-		java.lang.Boolean idIfCond_1030 = false;
-		idIfCond_1030 = kermeta.standard.helper.BooleanWrapper.not(this
+		java.lang.Boolean idIfCond_930 = false;
+		idIfCond_930 = kermeta.standard.helper.BooleanWrapper.not(this
 				.contains(element));
 
-		if (idIfCond_1030) {
+		if (idIfCond_930) {
 
 			kermeta.standard.helper.OrderedCollectionSuper.super_addAt(this,
 					index, element);
@@ -90,17 +111,12 @@ public class OrderedSetImpl<G> extends SetImpl<G> implements OrderedSet<G> {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public OrderedSet<G> insertAt(Integer index, G subject) {
+	public Boolean equals(kermeta.language.structure.Object element) {
 
-		kermeta.standard.OrderedSet<G> result = null;
+		java.lang.Boolean result = null;
 
-		result = ((kermeta.standard.OrderedSet<G>) org.kermeta.compil.runtime.helper.language.ClassUtil
-				.newObject(kermeta.standard.StandardPackage.eINSTANCE
-						.getOrderedSet()));
-
-		result.addAll(this);
-
-		result.addAt(index, subject);
+		result = kermeta.standard.helper.OrderedCollectionSuper.super_equals(
+				this, element);
 
 		return result;
 
@@ -132,33 +148,17 @@ public class OrderedSetImpl<G> extends SetImpl<G> implements OrderedSet<G> {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Boolean equals(kermeta.language.structure.Object element) {
-
-		java.lang.Boolean result = null;
-
-		result = kermeta.standard.helper.OrderedCollectionSuper.super_equals(
-				this, element);
-
-		return result;
-
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public G at(Integer index) {
 
 		G result = null;
 
-		java.lang.Boolean idIfCond_1031 = false;
-		idIfCond_1031 = kermeta.standard.helper.BooleanWrapper.and(
+		java.lang.Boolean idIfCond_931 = false;
+		idIfCond_931 = kermeta.standard.helper.BooleanWrapper.and(
 				kermeta.standard.helper.IntegerWrapper.isGreaterOrEqual(index,
 						0), kermeta.standard.helper.IntegerWrapper
 						.isLowerOrEqual(index, this.size()));
 
-		if (idIfCond_1031) {
+		if (idIfCond_931) {
 
 			kermeta.standard.Iterator<G> it = this.iterator();
 
@@ -166,11 +166,11 @@ public class OrderedSetImpl<G> extends SetImpl<G> implements OrderedSet<G> {
 
 				java.lang.Integer i = kermeta.standard.helper.IntegerWrapper
 						.uminus(1);
-				java.lang.Boolean idLoopCond_1032 = false;
-				while (!idLoopCond_1032) {
-					idLoopCond_1032 = kermeta.standard.helper.IntegerWrapper
+				java.lang.Boolean idLoopCond_932 = false;
+				while (!idLoopCond_932) {
+					idLoopCond_932 = kermeta.standard.helper.IntegerWrapper
 							.equals(i, index);
-					if (idLoopCond_1032) {
+					if (idLoopCond_932) {
 					} else {
 
 						result = it.next();
@@ -218,8 +218,8 @@ public class OrderedSetImpl<G> extends SetImpl<G> implements OrderedSet<G> {
 				.newObject(kermeta.standard.StandardPackage.eINSTANCE
 						.getOrderedSet()));
 
-		java.lang.Boolean idIfCond_1033 = false;
-		idIfCond_1033 = kermeta.standard.helper.BooleanWrapper
+		java.lang.Boolean idIfCond_933 = false;
+		idIfCond_933 = kermeta.standard.helper.BooleanWrapper
 				.and(kermeta.standard.helper.BooleanWrapper.and(
 						kermeta.standard.helper.IntegerWrapper
 								.isGreaterOrEqual(min, 0),
@@ -228,17 +228,17 @@ public class OrderedSetImpl<G> extends SetImpl<G> implements OrderedSet<G> {
 						kermeta.standard.helper.IntegerWrapper.isLowerOrEqual(
 								min, max));
 
-		if (idIfCond_1033) {
+		if (idIfCond_933) {
 
 			kermeta.standard.Iterator<G> it = this.iterator();
 
 			java.lang.Integer i = 0;
 
-			java.lang.Boolean idLoopCond_1034 = false;
-			while (!idLoopCond_1034) {
-				idLoopCond_1034 = kermeta.standard.helper.IntegerWrapper
-						.equals(i, min);
-				if (idLoopCond_1034) {
+			java.lang.Boolean idLoopCond_934 = false;
+			while (!idLoopCond_934) {
+				idLoopCond_934 = kermeta.standard.helper.IntegerWrapper.equals(
+						i, min);
+				if (idLoopCond_934) {
 				} else {
 
 					it.next();
@@ -247,12 +247,11 @@ public class OrderedSetImpl<G> extends SetImpl<G> implements OrderedSet<G> {
 				}
 			}
 
-			java.lang.Boolean idLoopCond_1035 = false;
-			while (!idLoopCond_1035) {
-				idLoopCond_1035 = kermeta.standard.helper.IntegerWrapper
-						.equals(i, kermeta.standard.helper.IntegerWrapper.plus(
-								max, 1));
-				if (idLoopCond_1035) {
+			java.lang.Boolean idLoopCond_935 = false;
+			while (!idLoopCond_935) {
+				idLoopCond_935 = kermeta.standard.helper.IntegerWrapper.equals(
+						i, kermeta.standard.helper.IntegerWrapper.plus(max, 1));
+				if (idLoopCond_935) {
 				} else {
 
 					result.add(it.next());
@@ -281,14 +280,14 @@ public class OrderedSetImpl<G> extends SetImpl<G> implements OrderedSet<G> {
 	 */
 	public void removeAt(Integer index) {
 
-		java.lang.Boolean idIfCond_1017 = false;
-		idIfCond_1017 = kermeta.standard.helper.BooleanWrapper.or(
+		java.lang.Boolean idIfCond_916 = false;
+		idIfCond_916 = kermeta.standard.helper.BooleanWrapper.or(
 				kermeta.standard.helper.IntegerWrapper.isLower(index, 0),
 				kermeta.standard.helper.IntegerWrapper.isGreater(index,
 						kermeta.standard.helper.IntegerWrapper.minus(this
 								.size(), 1)));
 
-		if (idIfCond_1017) {
+		if (idIfCond_916) {
 
 			if (true)
 				throw new org.kermeta.compil.runtime.helper.error.KRuntimeError(
@@ -312,11 +311,11 @@ public class OrderedSetImpl<G> extends SetImpl<G> implements OrderedSet<G> {
 
 		G result = null;
 
-		java.lang.Boolean idIfCond_1018 = false;
-		idIfCond_1018 = kermeta.standard.helper.IntegerWrapper.equals(this
+		java.lang.Boolean idIfCond_918 = false;
+		idIfCond_918 = kermeta.standard.helper.IntegerWrapper.equals(this
 				.size(), 0);
 
-		if (idIfCond_1018) {
+		if (idIfCond_918) {
 
 			if (true)
 				throw new org.kermeta.compil.runtime.helper.error.KRuntimeError(
@@ -342,11 +341,11 @@ public class OrderedSetImpl<G> extends SetImpl<G> implements OrderedSet<G> {
 
 		java.lang.Integer result = null;
 
-		java.lang.Boolean idIfCond_1024 = false;
-		idIfCond_1024 = kermeta.standard.helper.IntegerWrapper.equals(this
+		java.lang.Boolean idIfCond_924 = false;
+		idIfCond_924 = kermeta.standard.helper.IntegerWrapper.equals(this
 				.size(), 0);
 
-		if (idIfCond_1024) {
+		if (idIfCond_924) {
 
 			if (true)
 				throw new org.kermeta.compil.runtime.helper.error.KRuntimeError(
@@ -362,18 +361,18 @@ public class OrderedSetImpl<G> extends SetImpl<G> implements OrderedSet<G> {
 
 		java.lang.Boolean found = false;
 
-		java.lang.Boolean idLoopCond_1025 = false;
-		while (!idLoopCond_1025) {
-			idLoopCond_1025 = kermeta.standard.helper.BooleanWrapper.or(found,
+		java.lang.Boolean idLoopCond_925 = false;
+		while (!idLoopCond_925) {
+			idLoopCond_925 = kermeta.standard.helper.BooleanWrapper.or(found,
 					it.isOff());
-			if (idLoopCond_1025) {
+			if (idLoopCond_925) {
 			} else {
 
-				java.lang.Boolean idIfCond_1026 = false;
-				idIfCond_1026 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+				java.lang.Boolean idIfCond_926 = false;
+				idIfCond_926 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 						.equalsSwitcher(element, it.next());
 
-				if (idIfCond_1026) {
+				if (idIfCond_926) {
 
 					found = true;
 				} else {
@@ -384,10 +383,10 @@ public class OrderedSetImpl<G> extends SetImpl<G> implements OrderedSet<G> {
 			}
 		}
 
-		java.lang.Boolean idIfCond_1027 = false;
-		idIfCond_1027 = found;
+		java.lang.Boolean idIfCond_927 = false;
+		idIfCond_927 = found;
 
-		if (idIfCond_1027) {
+		if (idIfCond_927) {
 
 			result = i;
 		} else {
@@ -408,14 +407,14 @@ public class OrderedSetImpl<G> extends SetImpl<G> implements OrderedSet<G> {
 
 		G result = null;
 
-		java.lang.Boolean idIfCond_1028 = false;
-		idIfCond_1028 = kermeta.standard.helper.BooleanWrapper.or(
+		java.lang.Boolean idIfCond_928 = false;
+		idIfCond_928 = kermeta.standard.helper.BooleanWrapper.or(
 				kermeta.standard.helper.IntegerWrapper.isLower(index, 0),
 				kermeta.standard.helper.IntegerWrapper.isGreater(index,
 						kermeta.standard.helper.IntegerWrapper.minus(this
 								.size(), 1)));
 
-		if (idIfCond_1028) {
+		if (idIfCond_928) {
 
 			if (true)
 				throw new org.kermeta.compil.runtime.helper.error.KRuntimeError(
@@ -443,11 +442,11 @@ public class OrderedSetImpl<G> extends SetImpl<G> implements OrderedSet<G> {
 
 		G result = null;
 
-		java.lang.Boolean idIfCond_1029 = false;
-		idIfCond_1029 = kermeta.standard.helper.IntegerWrapper.equals(this
+		java.lang.Boolean idIfCond_929 = false;
+		idIfCond_929 = kermeta.standard.helper.IntegerWrapper.equals(this
 				.size(), 0);
 
-		if (idIfCond_1029) {
+		if (idIfCond_929) {
 
 			if (true)
 				throw new org.kermeta.compil.runtime.helper.error.KRuntimeError(

@@ -4,7 +4,7 @@
  * 
  * Generating with Kermeta <http://www.kermeta.org>
  *
- * $Id: CompilerFactory.java,v 1.11 2009-02-10 17:51:56 cfaucher Exp $
+ * $Id: CompilerFactory.java,v 1.12 2009-02-23 15:26:52 cfaucher Exp $
  */
 package kermeta.compiler;
 

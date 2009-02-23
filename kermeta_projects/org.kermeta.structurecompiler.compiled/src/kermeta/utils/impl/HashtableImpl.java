@@ -4,7 +4,7 @@
  * 
  * Generating with Kermeta <http://www.kermeta.org>
  *
- * $Id: HashtableImpl.java,v 1.11 2009-02-10 17:51:48 cfaucher Exp $
+ * $Id: HashtableImpl.java,v 1.12 2009-02-23 15:26:44 cfaucher Exp $
  */
 package kermeta.utils.impl;
 
@@ -140,18 +140,6 @@ public class HashtableImpl<K, V> extends ObjectImpl implements Hashtable<K, V> {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void put(K key, V value) {
-
-		org.kermeta.compil.runtime.helper.basetypes.MapUtil.put(this, key,
-				value);
-
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public Collection<V> values() {
 
 		kermeta.standard.Collection<V> result = null;
@@ -163,17 +151,17 @@ public class HashtableImpl<K, V> extends ObjectImpl implements Hashtable<K, V> {
 
 		{
 
-			kermeta.standard.Iterator<K> it_ft230 = this.keys().iterator();
-			java.lang.Boolean idLoopCond_1042 = false;
-			while (!idLoopCond_1042) {
-				idLoopCond_1042 = it_ft230.isOff();
-				if (idLoopCond_1042) {
+			kermeta.standard.Iterator<K> it_ft9 = this.keys().iterator();
+			java.lang.Boolean idLoopCond_47 = false;
+			while (!idLoopCond_47) {
+				idLoopCond_47 = it_ft9.isOff();
+				if (idLoopCond_47) {
 				} else {
 
 					//BIle:func
-					K k_lbdExp230 = it_ft230.next();
+					K k_lbdExp9 = it_ft9.next();
 
-					result.add(this.getValue(k_lbdExp230));
+					result.add(this.getValue(k_lbdExp9));
 					//EIle:func
 
 				}
@@ -183,6 +171,18 @@ public class HashtableImpl<K, V> extends ObjectImpl implements Hashtable<K, V> {
 		//EIft:each
 
 		return result;
+
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void put(K key, V value) {
+
+		org.kermeta.compil.runtime.helper.basetypes.MapUtil.put(this, key,
+				value);
 
 	}
 
@@ -212,10 +212,10 @@ public class HashtableImpl<K, V> extends ObjectImpl implements Hashtable<K, V> {
 		{
 
 			kermeta.standard.Iterator<K> it = this.keyIterator();
-			java.lang.Boolean idLoopCond_1043 = false;
-			while (!idLoopCond_1043) {
-				idLoopCond_1043 = it.isOff();
-				if (idLoopCond_1043) {
+			java.lang.Boolean idLoopCond_48 = false;
+			while (!idLoopCond_48) {
+				idLoopCond_48 = it.isOff();
+				if (idLoopCond_48) {
 				} else {
 
 					result.add(it.next());

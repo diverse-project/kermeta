@@ -4,7 +4,7 @@
  * 
  * Generating with Kermeta <http://www.kermeta.org>
  *
- * $Id: IntegerImpl.java,v 1.6 2009-02-10 17:51:51 cfaucher Exp $
+ * $Id: IntegerImpl.java,v 1.7 2009-02-23 15:26:47 cfaucher Exp $
  */
 package kermeta.standard.impl;
 

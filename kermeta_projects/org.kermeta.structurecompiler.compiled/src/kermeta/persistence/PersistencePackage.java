@@ -4,7 +4,7 @@
  * 
  * Generating with Kermeta <http://www.kermeta.org>
  *
- * $Id: PersistencePackage.java,v 1.11 2009-02-10 17:51:57 cfaucher Exp $
+ * $Id: PersistencePackage.java,v 1.12 2009-02-23 15:26:53 cfaucher Exp $
  */
 package kermeta.persistence;
 
@@ -79,15 +79,6 @@ public interface PersistencePackage extends EPackage {
 	int RESOURCE = 0;
 
 	/**
-	 * The feature id for the '<em><b>Tag</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int RESOURCE__TAG = StandardPackage.SET__TAG;
-
-	/**
 	 * The feature id for the '<em><b>File</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -95,6 +86,15 @@ public interface PersistencePackage extends EPackage {
 	 * @ordered
 	 */
 	int RESOURCE__FILE = StandardPackage.SET__FILE;
+
+	/**
+	 * The feature id for the '<em><b>Tag</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RESOURCE__TAG = StandardPackage.SET__TAG;
 
 	/**
 	 * The feature id for the '<em><b>File Name</b></em>' attribute.
@@ -206,15 +206,6 @@ public interface PersistencePackage extends EPackage {
 	int EMF_RESOURCE = 1;
 
 	/**
-	 * The feature id for the '<em><b>Tag</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EMF_RESOURCE__TAG = RESOURCE__TAG;
-
-	/**
 	 * The feature id for the '<em><b>File</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -222,6 +213,15 @@ public interface PersistencePackage extends EPackage {
 	 * @ordered
 	 */
 	int EMF_RESOURCE__FILE = RESOURCE__FILE;
+
+	/**
+	 * The feature id for the '<em><b>Tag</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EMF_RESOURCE__TAG = RESOURCE__TAG;
 
 	/**
 	 * The feature id for the '<em><b>File Name</b></em>' attribute.
@@ -333,15 +333,6 @@ public interface PersistencePackage extends EPackage {
 	int REPOSITORY = 2;
 
 	/**
-	 * The feature id for the '<em><b>Tag</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int REPOSITORY__TAG = StructurePackage.OBJECT__TAG;
-
-	/**
 	 * The feature id for the '<em><b>File</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -349,6 +340,15 @@ public interface PersistencePackage extends EPackage {
 	 * @ordered
 	 */
 	int REPOSITORY__FILE = StructurePackage.OBJECT__FILE;
+
+	/**
+	 * The feature id for the '<em><b>Tag</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int REPOSITORY__TAG = StructurePackage.OBJECT__TAG;
 
 	/**
 	 * The feature id for the '<em><b>File Name</b></em>' attribute.
@@ -424,15 +424,6 @@ public interface PersistencePackage extends EPackage {
 	int DANGLING_DIAGNOSTIC = 3;
 
 	/**
-	 * The feature id for the '<em><b>Tag</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DANGLING_DIAGNOSTIC__TAG = StructurePackage.OBJECT__TAG;
-
-	/**
 	 * The feature id for the '<em><b>File</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -440,6 +431,15 @@ public interface PersistencePackage extends EPackage {
 	 * @ordered
 	 */
 	int DANGLING_DIAGNOSTIC__FILE = StructurePackage.OBJECT__FILE;
+
+	/**
+	 * The feature id for the '<em><b>Tag</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DANGLING_DIAGNOSTIC__TAG = StructurePackage.OBJECT__TAG;
 
 	/**
 	 * The feature id for the '<em><b>File Name</b></em>' attribute.
@@ -533,15 +533,6 @@ public interface PersistencePackage extends EPackage {
 	int EMF_REPOSITORY = 4;
 
 	/**
-	 * The feature id for the '<em><b>Tag</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EMF_REPOSITORY__TAG = REPOSITORY__TAG;
-
-	/**
 	 * The feature id for the '<em><b>File</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -549,6 +540,15 @@ public interface PersistencePackage extends EPackage {
 	 * @ordered
 	 */
 	int EMF_REPOSITORY__FILE = REPOSITORY__FILE;
+
+	/**
+	 * The feature id for the '<em><b>Tag</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EMF_REPOSITORY__TAG = REPOSITORY__TAG;
 
 	/**
 	 * The feature id for the '<em><b>File Name</b></em>' attribute.
@@ -605,22 +605,22 @@ public interface PersistencePackage extends EPackage {
 	int EMF_REPOSITORY__RESOURCES = REPOSITORY__RESOURCES;
 
 	/**
-	 * The feature id for the '<em><b>Use Interpreter Internal Resources</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EMF_REPOSITORY__USE_INTERPRETER_INTERNAL_RESOURCES = REPOSITORY_FEATURE_COUNT + 0;
-
-	/**
 	 * The feature id for the '<em><b>Ignore Load Error Unknown Metaclass</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int EMF_REPOSITORY__IGNORE_LOAD_ERROR_UNKNOWN_METACLASS = REPOSITORY_FEATURE_COUNT + 1;
+	int EMF_REPOSITORY__IGNORE_LOAD_ERROR_UNKNOWN_METACLASS = REPOSITORY_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Use Interpreter Internal Resources</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EMF_REPOSITORY__USE_INTERPRETER_INTERNAL_RESOURCES = REPOSITORY_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Ignore All Load Errors</b></em>' attribute.
@@ -788,17 +788,6 @@ public interface PersistencePackage extends EPackage {
 	EClass getEMFRepository();
 
 	/**
-	 * Returns the meta object for the attribute '{@link kermeta.persistence.EMFRepository#getUseInterpreterInternalResources <em>Use Interpreter Internal Resources</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Use Interpreter Internal Resources</em>'.
-	 * @see kermeta.persistence.EMFRepository#getUseInterpreterInternalResources()
-	 * @see #getEMFRepository()
-	 * @generated
-	 */
-	EAttribute getEMFRepository_UseInterpreterInternalResources();
-
-	/**
 	 * Returns the meta object for the attribute '{@link kermeta.persistence.EMFRepository#getIgnoreLoadErrorUnknownMetaclass <em>Ignore Load Error Unknown Metaclass</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -808,6 +797,17 @@ public interface PersistencePackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getEMFRepository_IgnoreLoadErrorUnknownMetaclass();
+
+	/**
+	 * Returns the meta object for the attribute '{@link kermeta.persistence.EMFRepository#getUseInterpreterInternalResources <em>Use Interpreter Internal Resources</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Use Interpreter Internal Resources</em>'.
+	 * @see kermeta.persistence.EMFRepository#getUseInterpreterInternalResources()
+	 * @see #getEMFRepository()
+	 * @generated
+	 */
+	EAttribute getEMFRepository_UseInterpreterInternalResources();
 
 	/**
 	 * Returns the meta object for the attribute '{@link kermeta.persistence.EMFRepository#getIgnoreAllLoadErrors <em>Ignore All Load Errors</em>}'.
@@ -972,15 +972,6 @@ public interface PersistencePackage extends EPackage {
 		EClass EMF_REPOSITORY = eINSTANCE.getEMFRepository();
 
 		/**
-		 * The meta object literal for the '<em><b>Use Interpreter Internal Resources</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute EMF_REPOSITORY__USE_INTERPRETER_INTERNAL_RESOURCES = eINSTANCE
-				.getEMFRepository_UseInterpreterInternalResources();
-
-		/**
 		 * The meta object literal for the '<em><b>Ignore Load Error Unknown Metaclass</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -988,6 +979,15 @@ public interface PersistencePackage extends EPackage {
 		 */
 		EAttribute EMF_REPOSITORY__IGNORE_LOAD_ERROR_UNKNOWN_METACLASS = eINSTANCE
 				.getEMFRepository_IgnoreLoadErrorUnknownMetaclass();
+
+		/**
+		 * The meta object literal for the '<em><b>Use Interpreter Internal Resources</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute EMF_REPOSITORY__USE_INTERPRETER_INTERNAL_RESOURCES = eINSTANCE
+				.getEMFRepository_UseInterpreterInternalResources();
 
 		/**
 		 * The meta object literal for the '<em><b>Ignore All Load Errors</b></em>' attribute feature.

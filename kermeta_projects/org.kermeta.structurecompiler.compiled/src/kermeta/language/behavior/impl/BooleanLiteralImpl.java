@@ -4,7 +4,7 @@
  * 
  * Generating with Kermeta <http://www.kermeta.org>
  *
- * $Id: BooleanLiteralImpl.java,v 1.11 2009-02-10 17:51:51 cfaucher Exp $
+ * $Id: BooleanLiteralImpl.java,v 1.12 2009-02-23 15:26:46 cfaucher Exp $
  */
 package kermeta.language.behavior.impl;
 
@@ -108,8 +108,8 @@ public class BooleanLiteralImpl extends LiteralImpl implements BooleanLiteral {
 		result = kermeta.standard.helper.BooleanWrapper.toString(this
 				.getValue());
 
-		java.lang.Boolean idIfCond_344 = false;
-		idIfCond_344 = kermeta.standard.helper.BooleanWrapper
+		java.lang.Boolean idIfCond_698 = false;
+		idIfCond_698 = kermeta.standard.helper.BooleanWrapper
 				.not(org.kermeta.compil.runtime.helper.language.ObjectUtil
 						.isInstanceOfSwitcher(
 								org.kermeta.compil.runtime.helper.language.ObjectUtil
@@ -119,7 +119,7 @@ public class BooleanLiteralImpl extends LiteralImpl implements BooleanLiteral {
 										.getMetaClass(
 												"kermeta.language.behavior.VariableDecl")));
 
-		if (idIfCond_344) {
+		if (idIfCond_698) {
 
 			result = kermeta.standard.helper.StringWrapper.plus(result, this
 					.endOfExpressionFixer());

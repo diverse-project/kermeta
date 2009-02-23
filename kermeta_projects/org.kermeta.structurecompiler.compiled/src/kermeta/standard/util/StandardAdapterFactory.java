@@ -4,7 +4,7 @@
  * 
  * Generating with Kermeta <http://www.kermeta.org>
  *
- * $Id: StandardAdapterFactory.java,v 1.11 2009-02-10 17:52:07 cfaucher Exp $
+ * $Id: StandardAdapterFactory.java,v 1.12 2009-02-23 15:27:04 cfaucher Exp $
  */
 package kermeta.standard.util;
 
@@ -85,16 +85,6 @@ public class StandardAdapterFactory extends AdapterFactoryImpl {
 	 */
 	protected StandardSwitch<Adapter> modelSwitch = new StandardSwitch<Adapter>() {
 		@Override
-		public Adapter caseString(kermeta.standard.String object) {
-			return createStringAdapter();
-		}
-
-		@Override
-		public Adapter caseVoid(kermeta.standard.Void object) {
-			return createVoidAdapter();
-		}
-
-		@Override
 		public Adapter caseValueType(ValueType object) {
 			return createValueTypeAdapter();
 		}
@@ -107,11 +97,6 @@ public class StandardAdapterFactory extends AdapterFactoryImpl {
 		@Override
 		public <G> Adapter caseSummable(Summable<G> object) {
 			return createSummableAdapter();
-		}
-
-		@Override
-		public Adapter caseNotComparableException(NotComparableException object) {
-			return createNotComparableExceptionAdapter();
 		}
 
 		@Override
@@ -132,6 +117,11 @@ public class StandardAdapterFactory extends AdapterFactoryImpl {
 		@Override
 		public Adapter caseCharacter(kermeta.standard.Character object) {
 			return createCharacterAdapter();
+		}
+
+		@Override
+		public Adapter caseString(kermeta.standard.String object) {
+			return createStringAdapter();
 		}
 
 		@Override
@@ -170,6 +160,16 @@ public class StandardAdapterFactory extends AdapterFactoryImpl {
 		}
 
 		@Override
+		public Adapter caseVoid(kermeta.standard.Void object) {
+			return createVoidAdapter();
+		}
+
+		@Override
+		public Adapter caseNotComparableException(NotComparableException object) {
+			return createNotComparableExceptionAdapter();
+		}
+
+		@Override
 		public Adapter caseUnknownJavaObject(UnknownJavaObject object) {
 			return createUnknownJavaObjectAdapter();
 		}
@@ -201,34 +201,6 @@ public class StandardAdapterFactory extends AdapterFactoryImpl {
 	@Override
 	public Adapter createAdapter(Notifier target) {
 		return modelSwitch.doSwitch((EObject) target);
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link kermeta.standard.String <em>String</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see kermeta.standard.String
-	 * @generated
-	 */
-	public Adapter createStringAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link kermeta.standard.Void <em>Void</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see kermeta.standard.Void
-	 * @generated
-	 */
-	public Adapter createVoidAdapter() {
-		return null;
 	}
 
 	/**
@@ -270,20 +242,6 @@ public class StandardAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createSummableAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link kermeta.standard.NotComparableException <em>Not Comparable Exception</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see kermeta.standard.NotComparableException
-	 * @generated
-	 */
-	public Adapter createNotComparableExceptionAdapter() {
 		return null;
 	}
 
@@ -340,6 +298,20 @@ public class StandardAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createCharacterAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link kermeta.standard.String <em>String</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see kermeta.standard.String
+	 * @generated
+	 */
+	public Adapter createStringAdapter() {
 		return null;
 	}
 
@@ -438,6 +410,34 @@ public class StandardAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createIteratorAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link kermeta.standard.Void <em>Void</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see kermeta.standard.Void
+	 * @generated
+	 */
+	public Adapter createVoidAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link kermeta.standard.NotComparableException <em>Not Comparable Exception</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see kermeta.standard.NotComparableException
+	 * @generated
+	 */
+	public Adapter createNotComparableExceptionAdapter() {
 		return null;
 	}
 

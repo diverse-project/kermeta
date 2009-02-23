@@ -4,7 +4,7 @@
  * 
  * Generating with Kermeta <http://www.kermeta.org>
  *
- * $Id: IoFactory.java,v 1.11 2009-02-10 17:52:00 cfaucher Exp $
+ * $Id: IoFactory.java,v 1.12 2009-02-23 15:26:57 cfaucher Exp $
  */
 package kermeta.io;
 

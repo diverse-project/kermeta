@@ -4,7 +4,7 @@
  * 
  * Generating with Kermeta <http://www.kermeta.org>
  *
- * $Id: SIMKModelImpl.java,v 1.11 2009-02-10 17:51:47 cfaucher Exp $
+ * $Id: SIMKModelImpl.java,v 1.12 2009-02-23 15:26:43 cfaucher Exp $
  */
 package simk.impl;
 
@@ -116,6 +116,26 @@ public class SIMKModelImpl extends SMNamedElementImpl implements SIMKModel {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public void save(KM2EcoreContext context) {
+
+		context.setSimkOutput(kermeta.standard.helper.StringWrapper
+				.replaceExtension(context.getKmInput(), "simk"));
+
+		kermeta.persistence.Resource simkResource = context
+				.getOutputRepository().createResource(context.getSimkOutput(),
+						"http://www.kermeta.org/simk");
+
+		simkResource.add(this);
+
+		simkResource.save();
+
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public SMContext retrieveOrCreateContextForSuper(Operation op,
 			KM2EcoreContext context) {
 
@@ -155,41 +175,41 @@ public class SIMKModelImpl extends SMNamedElementImpl implements SIMKModel {
 		simk.SMMethod sm = null;
 		//BIft:detect
 
-		simk.SMMethod result_ft259 = null;
+		simk.SMMethod result_ft254 = null;
 
-		simk.SMMethod elem_ft259 = null;
+		simk.SMMethod elem_ft254 = null;
 
-		result_ft259 = null;
+		result_ft254 = null;
 
 		{
 
-			kermeta.standard.Iterator<simk.SMMethod> it_ft259 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
+			kermeta.standard.Iterator<simk.SMMethod> it_ft254 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
 					.<simk.SMMethod> convertAsOrderedSet(
 							sMContext.getSMMethods()).iterator();
-			java.lang.Boolean idLoopCond_1145 = false;
-			while (!idLoopCond_1145) {
-				idLoopCond_1145 = kermeta.standard.helper.BooleanWrapper.or(
-						it_ft259.isOff(),
+			java.lang.Boolean idLoopCond_1129 = false;
+			while (!idLoopCond_1129) {
+				idLoopCond_1129 = kermeta.standard.helper.BooleanWrapper.or(
+						it_ft254.isOff(),
 						org.kermeta.compil.runtime.helper.language.ObjectUtil
-								.isNotEqualSwitcher(result_ft259, null));
-				if (idLoopCond_1145) {
+								.isNotEqualSwitcher(result_ft254, null));
+				if (idLoopCond_1129) {
 				} else {
 
-					elem_ft259 = it_ft259.next();
+					elem_ft254 = it_ft254.next();
 
-					java.lang.Boolean idIfCond_1146 = false;
+					java.lang.Boolean idIfCond_1130 = false;
 					//BIle:detector
-					simk.SMMethod o_lbdExp259 = elem_ft259;
+					simk.SMMethod o_lbdExp254 = elem_ft254;
 
-					idIfCond_1146 = kermeta.standard.helper.StringWrapper
-							.equals(o_lbdExp259.getName(),
+					idIfCond_1130 = kermeta.standard.helper.StringWrapper
+							.equals(o_lbdExp254.getName(),
 									kermeta.standard.helper.StringWrapper.plus(
 											"super_", op.getFinalName(context)));
 					//EIle:detector
 
-					if (idIfCond_1146) {
+					if (idIfCond_1130) {
 
-						result_ft259 = elem_ft259;
+						result_ft254 = elem_ft254;
 					}
 
 				}
@@ -197,94 +217,15 @@ public class SIMKModelImpl extends SMNamedElementImpl implements SIMKModel {
 		}
 
 		//CE
-		sm = result_ft259;
+		sm = result_ft254;
 		//EIft:detect
 		;
 
-		java.lang.Boolean idIfCond_1147 = false;
-		idIfCond_1147 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+		java.lang.Boolean idIfCond_1131 = false;
+		idIfCond_1131 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 				.isVoidSwitcher(sm);
 
-		if (idIfCond_1147) {
-
-			result = sMContext;
-		}
-
-		return result;
-
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public SMContext retrieveOrCreateContextForWrapper(Operation op,
-			KM2EcoreContext context) {
-
-		simk.SMContext result = null;
-
-		result = null;
-
-		simk.SMContext sMContext = this.retrieveOrCreateContextWithClass(
-				kermeta.standard.helper.StringWrapper.plus(context
-						.getCurrent_valueType().getName(), "Wrapper"),
-				"kermeta.standard.helper", simk.SMUsage.getByName("Wrapper"),
-				context);
-
-		simk.SMMethod sm = null;
-		//BIft:detect
-
-		simk.SMMethod result_ft260 = null;
-
-		simk.SMMethod elem_ft260 = null;
-
-		result_ft260 = null;
-
-		{
-
-			kermeta.standard.Iterator<simk.SMMethod> it_ft260 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
-					.<simk.SMMethod> convertAsOrderedSet(
-							sMContext.getSMMethods()).iterator();
-			java.lang.Boolean idLoopCond_1148 = false;
-			while (!idLoopCond_1148) {
-				idLoopCond_1148 = kermeta.standard.helper.BooleanWrapper.or(
-						it_ft260.isOff(),
-						org.kermeta.compil.runtime.helper.language.ObjectUtil
-								.isNotEqualSwitcher(result_ft260, null));
-				if (idLoopCond_1148) {
-				} else {
-
-					elem_ft260 = it_ft260.next();
-
-					java.lang.Boolean idIfCond_1149 = false;
-					//BIle:detector
-					simk.SMMethod o_lbdExp260 = elem_ft260;
-
-					idIfCond_1149 = kermeta.standard.helper.StringWrapper
-							.equals(o_lbdExp260.getName(), op
-									.getFinalName(context));
-					//EIle:detector
-
-					if (idIfCond_1149) {
-
-						result_ft260 = elem_ft260;
-					}
-
-				}
-			}
-		}
-
-		//CE
-		sm = result_ft260;
-		//EIft:detect
-		;
-
-		java.lang.Boolean idIfCond_1150 = false;
-		idIfCond_1150 = org.kermeta.compil.runtime.helper.language.ObjectUtil
-				.isVoidSwitcher(sm);
-
-		if (idIfCond_1150) {
+		if (idIfCond_1131) {
 
 			result = sMContext;
 		}
@@ -352,42 +293,42 @@ public class SIMKModelImpl extends SMNamedElementImpl implements SIMKModel {
 		simk.SMMethod sm = null;
 		//BIft:detect
 
-		simk.SMMethod result_ft261 = null;
+		simk.SMMethod result_ft255 = null;
 
-		simk.SMMethod elem_ft261 = null;
+		simk.SMMethod elem_ft255 = null;
 
-		result_ft261 = null;
+		result_ft255 = null;
 
 		{
 
-			kermeta.standard.Iterator<simk.SMMethod> it_ft261 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
+			kermeta.standard.Iterator<simk.SMMethod> it_ft255 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
 					.<simk.SMMethod> convertAsOrderedSet(
 							sMContext.getSMMethods()).iterator();
-			java.lang.Boolean idLoopCond_1151 = false;
-			while (!idLoopCond_1151) {
-				idLoopCond_1151 = kermeta.standard.helper.BooleanWrapper.or(
-						it_ft261.isOff(),
+			java.lang.Boolean idLoopCond_1132 = false;
+			while (!idLoopCond_1132) {
+				idLoopCond_1132 = kermeta.standard.helper.BooleanWrapper.or(
+						it_ft255.isOff(),
 						org.kermeta.compil.runtime.helper.language.ObjectUtil
-								.isNotEqualSwitcher(result_ft261, null));
-				if (idLoopCond_1151) {
+								.isNotEqualSwitcher(result_ft255, null));
+				if (idLoopCond_1132) {
 				} else {
 
-					elem_ft261 = it_ft261.next();
+					elem_ft255 = it_ft255.next();
 
-					java.lang.Boolean idIfCond_1152 = false;
+					java.lang.Boolean idIfCond_1133 = false;
 					//BIle:detector
-					simk.SMMethod o_lbdExp261 = elem_ft261;
+					simk.SMMethod o_lbdExp255 = elem_ft255;
 
-					idIfCond_1152 = kermeta.standard.helper.StringWrapper
-							.equals(o_lbdExp261.getName(),
+					idIfCond_1133 = kermeta.standard.helper.StringWrapper
+							.equals(o_lbdExp255.getName(),
 									kermeta.standard.helper.StringWrapper.plus(
 											"checkInvariant_", constraint
 													.getId()));
 					//EIle:detector
 
-					if (idIfCond_1152) {
+					if (idIfCond_1133) {
 
-						result_ft261 = elem_ft261;
+						result_ft255 = elem_ft255;
 					}
 
 				}
@@ -395,15 +336,94 @@ public class SIMKModelImpl extends SMNamedElementImpl implements SIMKModel {
 		}
 
 		//CE
-		sm = result_ft261;
+		sm = result_ft255;
 		//EIft:detect
 		;
 
-		java.lang.Boolean idIfCond_1153 = false;
-		idIfCond_1153 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+		java.lang.Boolean idIfCond_1134 = false;
+		idIfCond_1134 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 				.isVoidSwitcher(sm);
 
-		if (idIfCond_1153) {
+		if (idIfCond_1134) {
+
+			result = sMContext;
+		}
+
+		return result;
+
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public SMContext retrieveOrCreateContextForWrapper(Operation op,
+			KM2EcoreContext context) {
+
+		simk.SMContext result = null;
+
+		result = null;
+
+		simk.SMContext sMContext = this.retrieveOrCreateContextWithClass(
+				kermeta.standard.helper.StringWrapper.plus(context
+						.getCurrent_valueType().getName(), "Wrapper"),
+				"kermeta.standard.helper", simk.SMUsage.getByName("Wrapper"),
+				context);
+
+		simk.SMMethod sm = null;
+		//BIft:detect
+
+		simk.SMMethod result_ft256 = null;
+
+		simk.SMMethod elem_ft256 = null;
+
+		result_ft256 = null;
+
+		{
+
+			kermeta.standard.Iterator<simk.SMMethod> it_ft256 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
+					.<simk.SMMethod> convertAsOrderedSet(
+							sMContext.getSMMethods()).iterator();
+			java.lang.Boolean idLoopCond_1135 = false;
+			while (!idLoopCond_1135) {
+				idLoopCond_1135 = kermeta.standard.helper.BooleanWrapper.or(
+						it_ft256.isOff(),
+						org.kermeta.compil.runtime.helper.language.ObjectUtil
+								.isNotEqualSwitcher(result_ft256, null));
+				if (idLoopCond_1135) {
+				} else {
+
+					elem_ft256 = it_ft256.next();
+
+					java.lang.Boolean idIfCond_1136 = false;
+					//BIle:detector
+					simk.SMMethod o_lbdExp256 = elem_ft256;
+
+					idIfCond_1136 = kermeta.standard.helper.StringWrapper
+							.equals(o_lbdExp256.getName(), op
+									.getFinalName(context));
+					//EIle:detector
+
+					if (idIfCond_1136) {
+
+						result_ft256 = elem_ft256;
+					}
+
+				}
+			}
+		}
+
+		//CE
+		sm = result_ft256;
+		//EIft:detect
+		;
+
+		java.lang.Boolean idIfCond_1137 = false;
+		idIfCond_1137 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+				.isVoidSwitcher(sm);
+
+		if (idIfCond_1137) {
 
 			result = sMContext;
 		}
@@ -469,39 +489,39 @@ public class SIMKModelImpl extends SMNamedElementImpl implements SIMKModel {
 		simk.SMMethod sm = null;
 		//BIft:detect
 
-		simk.SMMethod result_ft262 = null;
+		simk.SMMethod result_ft257 = null;
 
-		simk.SMMethod elem_ft262 = null;
+		simk.SMMethod elem_ft257 = null;
 
-		result_ft262 = null;
+		result_ft257 = null;
 
 		{
 
-			kermeta.standard.Iterator<simk.SMMethod> it_ft262 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
+			kermeta.standard.Iterator<simk.SMMethod> it_ft257 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
 					.<simk.SMMethod> convertAsOrderedSet(
 							sMContext.getSMMethods()).iterator();
-			java.lang.Boolean idLoopCond_1154 = false;
-			while (!idLoopCond_1154) {
-				idLoopCond_1154 = kermeta.standard.helper.BooleanWrapper.or(
-						it_ft262.isOff(),
+			java.lang.Boolean idLoopCond_1138 = false;
+			while (!idLoopCond_1138) {
+				idLoopCond_1138 = kermeta.standard.helper.BooleanWrapper.or(
+						it_ft257.isOff(),
 						org.kermeta.compil.runtime.helper.language.ObjectUtil
-								.isNotEqualSwitcher(result_ft262, null));
-				if (idLoopCond_1154) {
+								.isNotEqualSwitcher(result_ft257, null));
+				if (idLoopCond_1138) {
 				} else {
 
-					elem_ft262 = it_ft262.next();
+					elem_ft257 = it_ft257.next();
 
-					java.lang.Boolean idIfCond_1155 = false;
+					java.lang.Boolean idIfCond_1139 = false;
 					//BIle:detector
-					simk.SMMethod o_lbdExp262 = elem_ft262;
+					simk.SMMethod o_lbdExp257 = elem_ft257;
 
-					idIfCond_1155 = kermeta.standard.helper.StringWrapper
-							.equals(o_lbdExp262.getName(), "main");
+					idIfCond_1139 = kermeta.standard.helper.StringWrapper
+							.equals(o_lbdExp257.getName(), "main");
 					//EIle:detector
 
-					if (idIfCond_1155) {
+					if (idIfCond_1139) {
 
-						result_ft262 = elem_ft262;
+						result_ft257 = elem_ft257;
 					}
 
 				}
@@ -509,15 +529,15 @@ public class SIMKModelImpl extends SMNamedElementImpl implements SIMKModel {
 		}
 
 		//CE
-		sm = result_ft262;
+		sm = result_ft257;
 		//EIft:detect
 		;
 
-		java.lang.Boolean idIfCond_1156 = false;
-		idIfCond_1156 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+		java.lang.Boolean idIfCond_1140 = false;
+		idIfCond_1140 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 				.isVoidSwitcher(sm);
 
-		if (idIfCond_1156) {
+		if (idIfCond_1140) {
 
 			result = sMContext;
 		}
@@ -539,11 +559,11 @@ public class SIMKModelImpl extends SMNamedElementImpl implements SIMKModel {
 		simk.SMContext sMContext = this.retrieveOrCreateContext(class_qname,
 				finalPackage_qname, usage, context);
 
-		java.lang.Boolean idIfCond_1157 = false;
-		idIfCond_1157 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+		java.lang.Boolean idIfCond_1141 = false;
+		idIfCond_1141 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 				.isVoidSwitcher(sMContext.getSMClass());
 
-		if (idIfCond_1157) {
+		if (idIfCond_1141) {
 
 			simk.SMClass sMClass = ((simk.SMClass) org.kermeta.compil.runtime.helper.language.ClassUtil
 					.newObject(simk.SimkPackage.eINSTANCE.getSMClass()));
@@ -574,56 +594,56 @@ public class SIMKModelImpl extends SMNamedElementImpl implements SIMKModel {
 		simk.SMContext sMContext = null;
 		//BIft:detect
 
-		simk.SMContext result_ft263 = null;
+		simk.SMContext result_ft258 = null;
 
-		simk.SMContext elem_ft263 = null;
+		simk.SMContext elem_ft258 = null;
 
-		result_ft263 = null;
+		result_ft258 = null;
 
 		{
 
-			kermeta.standard.Iterator<simk.SMContext> it_ft263 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
+			kermeta.standard.Iterator<simk.SMContext> it_ft258 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
 					.<simk.SMContext> convertAsOrderedSet(this.getSMContexts())
 					.iterator();
-			java.lang.Boolean idLoopCond_1158 = false;
-			while (!idLoopCond_1158) {
-				idLoopCond_1158 = kermeta.standard.helper.BooleanWrapper.or(
-						it_ft263.isOff(),
+			java.lang.Boolean idLoopCond_1142 = false;
+			while (!idLoopCond_1142) {
+				idLoopCond_1142 = kermeta.standard.helper.BooleanWrapper.or(
+						it_ft258.isOff(),
 						org.kermeta.compil.runtime.helper.language.ObjectUtil
-								.isNotEqualSwitcher(result_ft263, null));
-				if (idLoopCond_1158) {
+								.isNotEqualSwitcher(result_ft258, null));
+				if (idLoopCond_1142) {
 				} else {
 
-					elem_ft263 = it_ft263.next();
+					elem_ft258 = it_ft258.next();
 
-					java.lang.Boolean idIfCond_1159 = false;
+					java.lang.Boolean idIfCond_1143 = false;
 					//BIle:detector
-					simk.SMContext c_lbdExp263 = elem_ft263;
+					simk.SMContext c_lbdExp258 = elem_ft258;
 
-					idIfCond_1159 = kermeta.standard.helper.BooleanWrapper
+					idIfCond_1143 = kermeta.standard.helper.BooleanWrapper
 							.and(
 									kermeta.standard.helper.BooleanWrapper
 											.and(
 													kermeta.standard.helper.StringWrapper
 															.equals(
-																	c_lbdExp263
+																	c_lbdExp258
 																			.getFinalPackageQName(),
 																	finalPackage_qname),
 													kermeta.standard.helper.StringWrapper
 															.equals(
-																	c_lbdExp263
+																	c_lbdExp258
 																			.getSMClass()
 																			.getName(),
 																	class_qname)),
 									org.kermeta.compil.runtime.helper.language.ObjectUtil
-											.equalsSwitcher(c_lbdExp263
+											.equalsSwitcher(c_lbdExp258
 													.getSMClass().getUsages(),
 													usage));
 					//EIle:detector
 
-					if (idIfCond_1159) {
+					if (idIfCond_1143) {
 
-						result_ft263 = elem_ft263;
+						result_ft258 = elem_ft258;
 					}
 
 				}
@@ -631,15 +651,15 @@ public class SIMKModelImpl extends SMNamedElementImpl implements SIMKModel {
 		}
 
 		//CE
-		sMContext = result_ft263;
+		sMContext = result_ft258;
 		//EIft:detect
 		;
 
-		java.lang.Boolean idIfCond_1160 = false;
-		idIfCond_1160 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+		java.lang.Boolean idIfCond_1144 = false;
+		idIfCond_1144 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 				.isVoidSwitcher(sMContext);
 
-		if (idIfCond_1160) {
+		if (idIfCond_1144) {
 
 			sMContext = ((simk.SMContext) org.kermeta.compil.runtime.helper.language.ClassUtil
 					.newObject(simk.SimkPackage.eINSTANCE.getSMContext()));

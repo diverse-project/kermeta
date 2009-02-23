@@ -4,7 +4,7 @@
  * 
  * Generating with Kermeta <http://www.kermeta.org>
  *
- * $Id: FileIOImpl.java,v 1.11 2009-02-10 17:51:49 cfaucher Exp $
+ * $Id: FileIOImpl.java,v 1.12 2009-02-23 15:26:45 cfaucher Exp $
  */
 package kermeta.io.impl;
 
@@ -51,11 +51,11 @@ public class FileIOImpl extends ObjectImpl implements FileIO {
 	 */
 	public void writeTextFile(String filename, String text) {
 
-		java.lang.Boolean idIfCond_1085 = false;
-		idIfCond_1085 = kermeta.standard.helper.StringWrapper.equals(filename,
+		java.lang.Boolean idIfCond_991 = false;
+		idIfCond_991 = kermeta.standard.helper.StringWrapper.equals(filename,
 				null);
 
-		if (idIfCond_1085) {
+		if (idIfCond_991) {
 
 			if (true)
 				throw new org.kermeta.compil.runtime.helper.error.KRuntimeError(
@@ -79,11 +79,11 @@ public class FileIOImpl extends ObjectImpl implements FileIO {
 
 		java.lang.String result = null;
 
-		java.lang.Boolean idIfCond_1086 = false;
-		idIfCond_1086 = kermeta.standard.helper.StringWrapper.equals(filename,
+		java.lang.Boolean idIfCond_992 = false;
+		idIfCond_992 = kermeta.standard.helper.StringWrapper.equals(filename,
 				null);
 
-		if (idIfCond_1086) {
+		if (idIfCond_992) {
 
 			if (true)
 				throw new org.kermeta.compil.runtime.helper.error.KRuntimeError(
@@ -107,10 +107,10 @@ public class FileIOImpl extends ObjectImpl implements FileIO {
 						org.kermeta.compil.runtime.helper.io.SimpleFileIOUtil
 								.fileIsDirectory(filename), "java.lang.Boolean");
 
-		java.lang.Boolean idIfCond_1087 = false;
-		idIfCond_1087 = kermeta.standard.helper.BooleanWrapper.not(exists);
+		java.lang.Boolean idIfCond_993 = false;
+		idIfCond_993 = kermeta.standard.helper.BooleanWrapper.not(exists);
 
-		if (idIfCond_1087) {
+		if (idIfCond_993) {
 
 			kermeta.exceptions.FileNotFoundException e = ((kermeta.exceptions.FileNotFoundException) org.kermeta.compil.runtime.helper.language.ClassUtil
 					.newObject(kermeta.exceptions.ExceptionsPackage.eINSTANCE
@@ -124,10 +124,10 @@ public class FileIOImpl extends ObjectImpl implements FileIO {
 
 		}
 
-		java.lang.Boolean idIfCond_1088 = false;
-		idIfCond_1088 = isdirectory;
+		java.lang.Boolean idIfCond_994 = false;
+		idIfCond_994 = isdirectory;
 
-		if (idIfCond_1088) {
+		if (idIfCond_994) {
 
 			kermeta.exceptions.FileNotFoundException e = ((kermeta.exceptions.FileNotFoundException) org.kermeta.compil.runtime.helper.language.ClassUtil
 					.newObject(kermeta.exceptions.ExceptionsPackage.eINSTANCE
