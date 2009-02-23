@@ -1,4 +1,4 @@
-/* $Id: KM2HTMLMain.java,v 1.6 2007-08-08 16:19:01 dvojtise Exp $
+/* $Id: KM2HTMLMain.java,v 1.7 2009-02-23 08:09:20 dvojtise Exp $
  * Project    : fr.irisa.triskell.kermeta.documentation
  * File       : KM2HTMLMain.java
  * License    : EPL
@@ -25,7 +25,7 @@ public class KM2HTMLMain {
 		System.setProperty("javax.xml.parsers.SAXParserFactory", "org.apache.xerces.jaxp.SAXParserFactoryImpl");*/
 
 		
-		String framework_path = "platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/Standard.km";
+		String framework_path = "platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km";
 		String output_directory = "";
 		if (args.length <= 0 || args.length > 1)
 			throw new Error("KM2HTMLMain must be called with 1 argument, that will be " +
