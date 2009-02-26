@@ -9,10 +9,12 @@ package kompose;
 
 require kermeta
 require "http://www.kermeta.org/kompose"
+require "platform:/resource/fr.irisa.triskell.traceability.model/model/kmt/Traceability_Behavior.kmt"
 
 using kermeta::language::structure
 using kermeta::standard
 using kermeta::utils 
+using traceability
 
 /** Any class that owns instances to merge should inherit 
  from this class and define operation getSignature */
@@ -60,9 +62,11 @@ aspect abstract class Mergeable
 			if p.upper == 1 then
 				/* Property only exists in one object */
 				if selfValue == void then
+					ctx.trace.addTrace(KTrace.new.newModelTrace(void,other))
 					result.~set(p, otherValue)
 				else
 					if other.get(p) == void then
+						ctx.trace.addTrace(KTrace.new.newModelTrace(self,void))
 						result.~set(p, selfValue)
 					else
 						if mergeable then
@@ -76,14 +80,16 @@ aspect abstract class Mergeable
 									if p.isComposite then
 										result.~set(p, me1.merge(me2, ctx))
 									else
+										ctx.trace.addTrace(KTrace.new.newModelTrace(me1,me2))
 										result.~set(p, me1)
 									end
-								else										
+								else									
 									ctx.logger.printError("Elements signature do not match")
 								end
 							end
 						else
 							if selfValue == otherValue then
+								ctx.trace.addTrace(KTrace.new.newModelTrace(self,other))
 								result.~set(p, selfValue)
 							else
 								ctx.logger.printError("conflicting value for property " + p.name + " picking the first value")
@@ -97,11 +103,14 @@ aspect abstract class Mergeable
 			/* Test on collection size because on compiled mode, collection are
 				initialized as empty ones and not null ones */
 				if selfValue == void then
+					ctx.trace.addTrace(KTrace.new.newModelTrace(void,other))
 					result.~set(p, otherValue)
 				else
 					if otherValue == void then
+						ctx.trace.addTrace(KTrace.new.newModelTrace(self,void))
 						result.~set(p, selfValue)
 					else
+						ctx.trace.addTrace(KTrace.new.newModelTrace(self,other))
 						result := mergeCollections(self,other,result,p,ctx)
 					end
 				end
@@ -144,6 +153,7 @@ aspect abstract class Mergeable
 						if p.isComposite then
 							col.add(me.merge(me2, ctx))
 						else
+							ctx.trace.addTrace(KTrace.new.newModelTrace(me,me2))
 							col.add(me)
 						end
 					}
@@ -157,6 +167,15 @@ aspect abstract class Mergeable
 				col ?= result.get(p)
 				if matching.size == 0 then
 					col.add(me)
+				else
+					matching.each{ me2 | 
+						if p.isComposite then
+							col.add(me.merge(me2, ctx))
+						else
+							ctx.trace.addTrace(KTrace.new.newModelTrace(me,me2))
+							col.add(me)
+						end
+					}
 				end
 			end
 		}
@@ -187,11 +206,13 @@ class MergeContext {
 	attribute objectIndex : Hashtable<kermeta::standard::Integer,kermeta::standard::Object>
 	reference logger : KLogger
 	
+	reference trace : TraceModel
+	
 	/**
 	 * Initialization of context information containers
 	 * param logger : a KLogger object to be able to log informations
 	 */
-	operation initialize(logger : KLogger) is do
+	operation initialize(logger : KLogger, trace : TraceModel) is do
 		left := Hashtable<kermeta::standard::Integer, Mergeable>.new
 		right := Hashtable<kermeta::standard::Integer, Mergeable>.new
 		any := Hashtable<kermeta::standard::Integer, Mergeable>.new
@@ -200,6 +221,7 @@ class MergeContext {
 		comp := Hashtable<kermeta::standard::Integer, kermeta::standard::Boolean>.new
 		objectIndex := Hashtable<kermeta::standard::Integer,kermeta::standard::Object>.new
 		self.logger := logger
+		self.trace := trace
 	end
 	
 	/**
@@ -328,6 +350,10 @@ class MergeContext {
 	operation isProcessed(e : Mergeable) : kermeta::standard::Boolean is do
 		result := processed.getValue(e.oid()) != void
 	end
+	
+	operation getTrace() : TraceModel is do
+		result := self.trace
+	end
 }
 
 /** This class contain the "compose" operation that should be used to recusively merge two models from their roots */
@@ -343,11 +369,11 @@ class ModelElementComposer
 	 * param logger : KLogger object
 	 * returns a mergeable object
 	 */
-	operation compose(m1 : Mergeable, m2 : Mergeable, logger : KLogger) : Mergeable is do
+	operation compose(m1 : Mergeable, m2 : Mergeable, logger : KLogger, trace : TraceModel) : Mergeable is do
 		self.logger := logger
 		var ctx : MergeContext init MergeContext.new
 		self.logger.printDebug("compose merge.kmt : initialize")
-		ctx.initialize(logger)
+		ctx.initialize(logger,trace)
 		self.logger.printDebug("compose merge.kmt : addAll")
 		ctx.resources.addAll(self.resources)
 		self.logger.printDebug("compose merge.kmt : indexate m1")
@@ -514,3 +540,63 @@ class KLogger
 	end
 }
 
+class KTrace {
+
+	operation newModelTrace(o1 : kermeta::standard::Object, o2 : kermeta::standard::Object) : Trace is do
+		var traceElement : Trace init Trace.new
+		var message : Message init Message.new
+		var src_ref : ModelReference
+		var target_ref : ModelReference
+		message.~value := "diff"
+		if o1.isVoid() then
+			if o2.isVoid() then
+			else
+				target_ref := ModelReference.new
+				target_ref.refObject := o2
+				traceElement.targetReferences.add(target_ref)
+			end
+		else
+			src_ref := ModelReference.new
+			src_ref.refObject := o1
+			traceElement.sourceReferences.add(src_ref)
+			if o2.isVoid() then
+			else
+				target_ref := ModelReference.new
+				target_ref.refObject := o2
+				traceElement.targetReferences.add(target_ref)
+				message.~value := "match"
+			end
+		end
+		traceElement.description.add(message)
+		result := traceElement
+	end
+	
+	/*operation newDataTrace(o1 : kermeta::standard::Object, o2 : kermeta::standard::Object) : Trace is do
+		var traceElement : Trace init Trace.new
+		var message : Message init Message.new
+		var src_ref : DataReference
+		var target_ref : DataReference
+		message.~value := "diff"
+		if o1.isVoid() then
+			if o2.isVoid() then
+			else
+				target_ref := DataReference.new
+				target_ref.refData := o2
+				traceElement.targetReferences.add(target_ref)
+			end
+		else
+			src_ref := DataReference.new
+			src_ref.refData := o1
+			traceElement.sourceReferences.add(src_ref)
+			if o2.isVoid() then
+			else
+				target_ref := DataReference.new
+				target_ref.refData := o2
+				traceElement.targetReferences.add(target_ref)
+				message.~value := "match"
+			end
+		end
+		traceElement.description.add(message)
+		result := traceElement
+	end*/
+}

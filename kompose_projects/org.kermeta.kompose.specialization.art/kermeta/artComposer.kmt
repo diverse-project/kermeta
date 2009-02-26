@@ -10,7 +10,7 @@ package art;
 
 require kermeta
 require "http://art"
-require "platform:/plugin/org.kermeta.kompose.core.model/kermeta/kompose.kmt"
+require "platform:/resource/org.kermeta.kompose.core.model/kermeta/kompose.kmt"
 
 using kermeta::standard
 using kermeta::utils
@@ -128,9 +128,35 @@ aspect class TransmissionBinding inherits kompose::Mergeable {
  */
 class Main inherits kompose::KomposeMain
 {
+	attribute repository : EMFRepository
 	operation main(uri : kermeta::standard::String) is do
 		var c : kompose::Composer init loadComposer(uri,artComposer.new,false)
 		c.compose
+		self.repository := c.repository
+		saveModelByUri(c.trace,"platform:/resource/org.kermeta.kompose.specialization.art.samples/models/modified/trace.traceability","http://www.kermeta.org/Traceability")
 	end
+	
+	/**
+	 * Saves a specific model to uri
+	 * param model : root element of the model
+	 * param uri : uri to save the model in
+	 * param metamodelUri : the metamodel's identifier
+	 */
+   operation saveModelByUri(model : Object, uri : String, metamodelUri : String) is do
+   		var resource : kermeta::persistence::EMFResource
+   		resource ?= repository.createResource(uri, metamodelUri)
+        resource.instances.add(model)
+        
+        var m : traceability::TraceModel
+        m ?=model
+        m.traces.each{t|
+			t.sourceReferences.each{r|
+				var mr : traceability::ModelReference
+				mr ?= r
+				stdio.writeln(r.toString())
+			}
+		}
+      	resource.save
+   end
 }
 

@@ -12,6 +12,7 @@ require "merge.kmt"
 using kermeta::language::structure
 using kermeta::utils
 using kermeta::persistence
+using traceability
 
 /** 
  * Main class of the Kompose process
@@ -28,7 +29,7 @@ class KomposeMain {
 	 */
 	operation loadComposer(path : String, composer : kompose::Composer, logging : Boolean) : kompose::Composer is do
 		var resource : kermeta::persistence::EMFResource             
-   		var repository : EMFRepository init EMFRepository.new             
+   		var repository : EMFRepository init EMFRepository.new
        	resource ?= repository.createResource(path, "http://www.kermeta.org/kompose")
         resource.load
         var c : kompose::Composer
@@ -41,9 +42,11 @@ class KomposeMain {
         result.primaryModelURI := c.primaryModelURI
         result.aspectModelURI := c.aspectModelURI
         result.composedModelURI := c.composedModelURI
+        result.repository := EMFRepository.new
         result.logger := KLogger.new
         result.logger.initialize
         result.logger.enableLog(logging)
+        result.trace := TraceModel.new
 	end
 }
 
@@ -54,6 +57,8 @@ aspect abstract class Composer {
 
 	reference resources: kermeta::persistence::EMFResource [0..*]   
 	reference logger : KLogger
+	reference trace : TraceModel
+	reference repository : EMFRepository
 	
 	/**
 	 * Loads a specific model from uri
@@ -61,8 +66,7 @@ aspect abstract class Composer {
 	 * returns the root of the model as a Mergeable element
 	 */
 	operation loadModel(path : String) : kompose::Mergeable is do
-    	var resource : kermeta::persistence::EMFResource             
-   		var repository : EMFRepository init EMFRepository.new             
+    	var resource : kermeta::persistence::EMFResource
        	resource ?= repository.getResource(path)
         resource.load
         self.resources.add(resource)
@@ -145,7 +149,7 @@ aspect abstract class Composer {
 		self.logger.printInfo("Composing models...")
 		var composer : ModelElementComposer init ModelElementComposer.new
 		composer.resources.addAll(self.resources)
-		cm := composer.compose(pm, am,self.logger)
+		cm := composer.compose(pm, am,self.logger,self.trace)
 		
 		// execute post-directives
 		self.logger.printInfo("Executing postdirectives on composed model...")
