@@ -6,10 +6,10 @@
   version="1.0"
   exclude-result-prefixes="exsl db ng">
   
-<xsl:import href="../html/chunk.xsl"/>
+<xsl:import href="../../xsl/html/chunk.xsl"/>
 
 <!-- ********************************************************************
-     $Id: eclipse.xsl,v 1.1 2009-03-02 10:58:20 dvojtise Exp $
+     $Id: eclipse.xsl,v 1.2 2009-03-02 15:49:32 dvojtise Exp $
      ********************************************************************
 
      This file is part of the XSL DocBook Stylesheet distribution.
