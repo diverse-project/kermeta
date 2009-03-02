@@ -13,10 +13,9 @@
    </requires>
   <extension point="org.eclipse.help.toc">
 	<toc file="toc.xml" primary="true"/>
-    <toc file="build/eclipse.help/KermetaArchitectureGuide/toc.xml" />
-    <toc file="build/eclipse.help/KerMeta-MetaModel/toc.xml" />
+    <!--<toc file="build/eclipse.help/KermetaArchitectureGuide/toc.xml" />-->
+    <!--<toc file="build/eclipse.help/KerMeta-MetaModel/toc.xml" />-->
     <toc file="build/eclipse.help/KerMeta-Tutorial/toc.xml" />
-    <toc file="build/eclipse.help/KerMeta-TypeSystem/toc.xml" />
     <toc file="build/eclipse.help/KerMeta-UI-UserGuide/toc.xml" />
     <toc file="build/eclipse.help/KermetaEMFTutorial/toc.xml" />
     <toc file="build/eclipse.help/KerMeta-Manual/toc.xml"/>
