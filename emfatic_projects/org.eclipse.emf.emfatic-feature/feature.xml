@@ -34,7 +34,7 @@
       <import plugin="org.eclipse.jdt.ui"/>
       <import plugin="org.eclipse.core.expressions"/>
       <import plugin="org.eclipse.gymnast.runtime.ui"/>
-      <import feature="org.eclipse.gymnast.runtime_feature" version="0.1.0"/>
+      <import feature="org.eclipse.gymnast.runtime_feature"/>
    </requires>
 
    <plugin
