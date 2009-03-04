@@ -29,19 +29,33 @@
         	nodeprecated="false" 
         	sourcefiles="" 
         	sourcepath="../../fr.irisa.triskell.kermeta.interpreter/src/java;
-        		../../fr.irisa.triskell.kermeta.interpreter/test/junit" 
-        	classpath="../../fr.irisa.triskell.kermeta.interpreter/lib/thirdparty/antlr.jar;
-        		C:\eclipse3.0\eclipse\plugins\org.eclipse.emf.common_2.0.1\runtime\common.jar;
+        		../../org.kermeta.runner/src" 
+        	classpath="../../org.antlr.antlr2/bin;
         		../../fr.irisa.triskell.kermeta.model/build/class;
         		../../fr.irisa.triskell.kermeta.interpreter/lib/thirdparty/ldt-core.jar;
-        		../../fr.irisa.triskell.kermeta.model/lib/thirdparty/log4j.jar;
         		../../fr.irisa.triskell.kermeta.interpreter/lib/io_kermeta.jar;
         		../../fr.irisa.triskell.kermeta.interpreter/build/class;
-        		../../fr.irisa.triskell.kermeta.interpreter/lib/thirdparty/emfatic-core.jar;
-        		C:\eclipse3.0\eclipse\plugins\org.eclipse.emf.ecore.xmi_2.0.1\runtime\ecore.xmi.jar;
-        		../../fr.irisa.triskell.kermeta.interpreter/lib/thirdparty/junit.jar;
-        		C:\eclipse3.0\eclipse\plugins\org.eclipse.emf.ecore_2.0.1\runtime\ecore.jar" 
+        	    ../../fr.irisa.triskell.traceability.model/bin;
+    			../../org.kermeta.io.loader/bin;
+        	    ../../fr.irisa.triskell.eclipse.util/bin;
+        	    ../../org.kermeta.log4j.util/bin;
+    	    	../../org.kermeta.log4j.util/bin;
+    	        ../../org.kermeta.log4j.util/lib/thirdparty/commons-logging-1.1.1/commons-logging-1.1.1.jar;
+        		../../org.eclipse.gymnast.runtime.core/bin;
+        		../../org.eclipse.emf.ecoretools.registration/bin;
+        		C:/eclipse3.4/eclipse/plugins/org.eclipse.emf.common_2.4.0.v200808251517.jar;
+        		C:/eclipse3.4/eclipse/plugins/org.eclipse.emf.validation_1.2.0.v200807161729.jar;
+        		C:/eclipse3.4/eclipse/plugins/org.eclipse.emf.ecore.xmi_2.4.1.v200808251517.jar;        		
+        		C:/eclipse3.4/eclipse/plugins/org.eclipse.core.resources_3.4.1.R34x_v20080902.jar;
+        		
+        		C:/eclipse3.4/eclipse/plugins/org.eclipse.debug.core_3.4.0.v20080612.jar;
+        		C:/eclipse3.4/eclipse/plugins/org.eclipse.equinox.common_3.4.0.v20080421-2006.jar;
+        		C:/eclipse3.4/eclipse/plugins/org.eclipse.jface_3.4.1.M20080827-2000.jar;
+        		C:/eclipse3.4/eclipse/plugins/org.eclipse.swt_3.4.1.v3449c.jar;
+        	C:/eclipse3.4/eclipse/plugins/org.eclipse.emf.ecore_2.4.1.v200808251517.jar  		    		    		    		    				
+        		" 
         	doctitle="Kermeta Interpreter and java Framework">
+        	
         	<packageset dir="../../fr.irisa.triskell.kermeta.interpreter/src/java" defaultexcludes="yes">
     	    	<include name="fr/irisa/triskell/**"/>
     	    </packageset>
