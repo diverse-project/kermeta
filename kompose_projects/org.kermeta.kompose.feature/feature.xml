@@ -6,188 +6,7 @@
       provider-name="IRISA/INRIA">
 
    <description url="http://www.kermeta.org/mdk/kompose">
-      &lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.01 Transitional//EN&quot;&gt;
-&lt;html xmlns:v=&quot;urn:schemas-microsoft-com:vml&quot; xmlns:o=&quot;urn:schemas-microsoft-com:office:office&quot; xmlns:w=&quot;urn:schemas-microsoft-com:office:word&quot; xmlns=&quot;http://www.w3.org/TR/REC-html40&quot;&gt;&lt;head&gt;
-
-
-
-&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=us-ascii&quot;&gt;
-&lt;meta name=&quot;ProgId&quot; content=&quot;Word.Document&quot;&gt;
-&lt;meta name=&quot;Generator&quot; content=&quot;Microsoft Word 9&quot;&gt;
-&lt;meta name=&quot;Originator&quot; content=&quot;Microsoft Word 9&quot;&gt;
-&lt;link rel=&quot;File-List&quot; href=&quot;http://www.cs.colostate.edu/puml/kompose2_files/filelist.xml&quot;&gt;&lt;title&gt;Kompose : A generic model composition tool&lt;/title&gt;&lt;!--[if gte mso 9]&gt;&lt;xml&gt;
- &lt;o:DocumentProperties&gt;
-  &lt;o:Author&gt;france&lt;/o:Author&gt;
-  &lt;o:Template&gt;Normal&lt;/o:Template&gt;
-  &lt;o:LastAuthor&gt;france&lt;/o:LastAuthor&gt;
-  &lt;o:Revision&gt;4&lt;/o:Revision&gt;
-  &lt;o:TotalTime&gt;14&lt;/o:TotalTime&gt;
-  &lt;o:Created&gt;2007-07-06T21:49:00Z&lt;/o:Created&gt;
-  &lt;o:LastSaved&gt;2007-07-06T23:22:00Z&lt;/o:LastSaved&gt;
-  &lt;o:Pages&gt;1&lt;/o:Pages&gt;
-  &lt;o:Words&gt;337&lt;/o:Words&gt;
-  &lt;o:Characters&gt;1921&lt;/o:Characters&gt;
-  &lt;o:Company&gt;CSU&lt;/o:Company&gt;
-  &lt;o:Lines&gt;16&lt;/o:Lines&gt;
-  &lt;o:Paragraphs&gt;3&lt;/o:Paragraphs&gt;
-  &lt;o:CharactersWithSpaces&gt;2359&lt;/o:CharactersWithSpaces&gt;
-  &lt;o:Version&gt;9.2720&lt;/o:Version&gt;
- &lt;/o:DocumentProperties&gt;
-&lt;/xml&gt;&lt;![endif]--&gt;&lt;!--[if gte mso 9]&gt;&lt;xml&gt;
- &lt;w:WordDocument&gt;
-  &lt;w:Zoom&gt;150&lt;/w:Zoom&gt;
- &lt;/w:WordDocument&gt;
-&lt;/xml&gt;&lt;![endif]--&gt;&lt;style&gt;
-&lt;!--
- /* Style Definitions */
-p.MsoNormal, li.MsoNormal, div.MsoNormal
- {mso-style-parent:&quot;&quot;;
- margin:0mm;
- margin-bottom:.0001pt;
- mso-pagination:widow-orphan;
- font-size:12.0pt;
- font-family:&quot;Times New Roman&quot;;
- mso-fareast-font-family:&quot;Times New Roman&quot;;}
-a:link, span.MsoHyperlink
- {color:blue;
- text-decoration:underline;
- text-underline:single;}
-a:visited, span.MsoHyperlinkFollowed
- {color:blue;
- text-decoration:underline;
- text-underline:single;}
-@page Section1
- {size:612.0pt 792.0pt;
- margin:72.0pt 90.0pt 72.0pt 90.0pt;
- mso-header-margin:36.0pt;
- mso-footer-margin:36.0pt;
- mso-paper-source:0;}
-div.Section1
- {page:Section1;}
- /* List Definitions */
-@list l0
- {mso-list-id:1343123315;
- mso-list-type:hybrid;
- mso-list-template-ids:-1242149746 67698703 67698713 67698715 67698703 67698713 67698715 67698703 67698713 67698715;}
-ol
- {margin-bottom:0mm;}
-ul
- {margin-bottom:0mm;}
---&gt;
-&lt;/style&gt;&lt;!--[if gte mso 9]&gt;&lt;xml&gt;
- &lt;o:shapedefaults v:ext=&quot;edit&quot; spidmax=&quot;1027&quot;/&gt;
-&lt;/xml&gt;&lt;![endif]--&gt;&lt;!--[if gte mso 9]&gt;&lt;xml&gt;
- &lt;o:shapelayout v:ext=&quot;edit&quot;&gt;
-  &lt;o:idmap v:ext=&quot;edit&quot; data=&quot;1&quot;/&gt;
- &lt;/o:shapelayout&gt;&lt;/xml&gt;&lt;![endif]--&gt;&lt;/head&gt;&lt;body style=&quot;&quot; lang=&quot;EN-US&quot; link=&quot;blue&quot; vlink=&quot;blue&quot;&gt;
-
-&lt;div class=&quot;Section1&quot;&gt;
-
-&lt;h1&gt;Kompose : A generic model composition tool
-&lt;hr&gt;
-        
-      &lt;/h1&gt;
-
-&lt;p class=&quot;MsoNormal&quot; style=&quot;margin-bottom: 12pt;&quot;&gt;Authors : &lt;a href=&quot;mailto:ffleurey@irisa.fr&quot;&gt;Franck Fleurey&lt;/a&gt; (IRISA/INRIA), Raghu Reddy
-(Rochester Institute of Technology), &lt;a href=&quot;http://www.cs.colostate.edu/%7Efrance&quot;&gt;Robert France&lt;/a&gt; (CSU), Benoit
-Baudry (INRIA), Sudipto Ghosh (CSU), &lt;a href=&quot;mailto:mickael.clavreul@irisa.fr&quot;&gt;Mickael Clavreul&lt;/a&gt; (IRISA/INRIA)&lt;/p&gt;
-
-&lt;h2&gt;What is Kompose?&lt;/h2&gt;
-&lt;hr&gt;
-&lt;p class=&quot;MsoNormal&quot;&gt;Kompose is an open-source generic model composition tool
-that was developed in the context of a collaboration between the Triskell team
-at IRISA (Rennes, France) and the CSU MDE Research group (Fort Collins, CO).
-The tool is based on an algorithm first developed by Raghu Reddy as part of his
-doctoral dissertation on AOM. Franck Fleurey refined and extended the algorithm
-and built the tool using the Kermeta tool developed at IRISA.&lt;br&gt;
-&lt;br&gt;
-Kompose implements a generic structural composition operator that can be
-specialized to a particular modeling language described by a metamodel. This version provides specialization example for Ecore models composition and RDBSchema models compositions. Additional examples can be found as models to be composed and composition directives.&lt;/p&gt;
-
-&lt;h2&gt;Installing Kompose&lt;/h2&gt;
-&lt;hr&gt;
-&lt;p class=&quot;MsoNormal&quot;&gt;Kompose is implemented as a set of eclipse plugins using the &lt;a href=&quot;http://www.kermeta.org/&quot;&gt;kermeta&lt;/a&gt; 1.2 language. &lt;br&gt;
-The current version, &lt;a href=&quot;http://gforge.inria.fr/frs/download.php/10955/kompose-0.0.2.zip&quot;&gt;version
-0.0.2&lt;/a&gt;, is available as a zip file. &lt;/p&gt;
-
-&lt;p class=&quot;MsoNormal&quot;&gt;&lt;br&gt;
-Do the following to install Kompose after you download it:&lt;/p&gt;
-
-&lt;ol style=&quot;margin-top: 0mm;&quot; start=&quot;1&quot; type=&quot;1&quot;&gt;
- &lt;li class=&quot;MsoNormal&quot; style=&quot;&quot;&gt;Download
-     a kermeta eclipse bundle v1.2 from &lt;a href=&quot;http://gforge.inria.fr/frs/?group_id=32&quot;&gt;this page&lt;/a&gt;.&lt;/li&gt;
- &lt;li class=&quot;MsoNormal&quot; style=&quot;&quot;&gt;
-          Unzip the Kompose zip file and copy all the folders it contains into the &quot;dropins&quot; (Eclipse Ganymede) folder of the kermeta bundle.
-          &lt;br style=&quot;&quot;&gt;
-&lt;br style=&quot;&quot;&gt;
-&lt;/ol&gt;
-
-&lt;p class=&quot;MsoNormal&quot;&gt;Once Kompose is installed correctly you should be able to
-replicate the demo presented below.&lt;/p&gt;
-&lt;p class=&quot;MsoNormal&quot;&gt;
-        You will also have access to examples provided in the Kompose bundle to test different compositions and have some clues about creating new Kompose specializations. (Eclipse -&amp;gt; New -&amp;gt; Examples -&amp;gt; Kompose Models Samples &amp; Kompose Specialization Samples)
-      &lt;/p&gt;
-
-&lt;h2&gt;Kompose project contents&lt;/h2&gt;
-&lt;hr&gt;
-       In order to introduce Kompose contents, here is a small description of available materials you can find in the archive.
-      &lt;br style=&quot;&quot;&gt;
-       Kompose plugins are split into three main families and several dedicated plugins: 
-      &lt;uL style=&quot;margin-top: 0mm;&quot; start=&quot;1&quot; type=&quot;1&quot;&gt;
- &lt;li class=&quot;MsoNormal&quot; style=&quot;&quot;&gt;
-          &lt;span style=&quot;font-style:bold&quot;&gt;Core&lt;/span&gt; 
-          &lt;br&gt;
- &lt;ul style=&quot;list-style-position:inside&quot;&gt;
- &lt;li&gt;Model
- &lt;br&gt; &lt;div style=&quot;line-height:10.5pt;text-indent:1cm;font-style:italic;color:green&quot;&gt;Kompose source files and meta model&lt;/div&gt;
- &lt;/li&gt;
- &lt;li&gt;Parser
- &lt;br&gt; &lt;div style=&quot;line-height:10.5pt;text-indent:1cm;font-style:italic;color:green&quot;&gt;Parser for user&apos;s composition directives&lt;/div&gt;&lt;/li&gt;
-        &lt;/ul&gt;
- &lt;li class=&quot;MsoNormal&quot; style=&quot;&quot;&gt;Specialization
-          &lt;br&gt;
- &lt;ul style=&quot;list-style-position:inside&quot;&gt;
- &lt;li&gt;_wizard &lt;div style=&quot;line-height:10.5pt;text-indent:1cm;font-style:italic;color:green&quot;&gt;Specialization wizard to create new specializations from specific metamodels (DSL)&lt;/div&gt;&lt;/li&gt;
- &lt;li&gt;Ecore
- &lt;br&gt; &lt;div style=&quot;line-height:10.5pt;text-indent:1cm;font-style:italic;color:green&quot;&gt;ECore specialization example&lt;/div&gt;&lt;/li&gt;
- &lt;ul&gt;
- &lt;LI&gt;Study.HW&lt;br&gt; &lt;div style=&quot;line-height:10.5pt;text-indent:1cm;font-style:italic;color:green&quot;&gt;ECore specialization Case Study on Health Watcher&lt;/div&gt;
- &lt;/LI&gt;
- &lt;/ul&gt;
- &lt;/li&gt;
- &lt;li&gt;RDBSchema&lt;br&gt; &lt;div style=&quot;line-height:10.5pt;text-indent:1cm;font-style:italic;color:green&quot;&gt;RDBSchema specialization example&lt;/div&gt;
- &lt;/li&gt;
-        &lt;/ul&gt;
-        &lt;/li&gt;
- &lt;li class=&quot;MsoNormal&quot; style=&quot;&quot;&gt;User Interface
-          &lt;br&gt;
-          &lt;ul style=&quot;list-style-position:inside&quot;&gt;
- &lt;li&gt;Samples&lt;br&gt; &lt;div style=&quot;line-height:10.5pt;text-indent:1cm;font-style:italic;color:green&quot;&gt;Kompose Specialization Samples&lt;/div&gt;
- &lt;/li&gt;
- &lt;li&gt;Experimental&lt;br&gt; &lt;div style=&quot;line-height:10.5pt;text-indent:1cm;font-style:italic;color:green&quot;&gt;Experimental ECore Merge (multiple selection of ECore models)&lt;/div&gt;
- &lt;/li&gt;
-        &lt;/ul&gt;
-        &lt;/li&gt;
-&lt;/uL&gt;
-&lt;h2&gt;Contributing to the development of Kompose&lt;/h2&gt;
-&lt;hr&gt;
-&lt;p class=&quot;MsoNormal&quot;&gt;Kompose is an open-source tool. The source code is available
-on the &lt;a href=&quot;http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kompose_projects/?cvsroot=kermeta&quot;&gt;CVS repository&lt;/a&gt;. 
-        &lt;br&gt;
-        The source code can be anonymously be downloaded but to contribute you will have to register and contact one of the project admin to be added to the developers list.
- &lt;br&gt;
- New specialization examples or models should respect packages naming. Please refer to existing examples before committing new projects.
-      &lt;/p&gt;
-
-&lt;h2&gt;Demo of the Kompose tool for Ecore models&lt;o:p&gt;&lt;/o:p&gt;&lt;/h2&gt;
-&lt;hr&gt;
-&lt;object classid=&quot;clsid:D27CDB6E-AE6D-11cf-96B8-444553540000&quot; codebase=&quot;http://active.macromedia.com/flash5/cabs/swflash.cab#version=5,0,0,0&quot; height=&quot;788&quot; width=&quot;1024&quot;&gt;&lt;param name=&quot;movie&quot; value=&quot;kompose.swf&quot;&gt;&lt;param name=&quot;play&quot; value=&quot;true&quot;&gt;&lt;param name=&quot;loop&quot; value=&quot;false&quot;&gt;
-&lt;param name=&quot;quality&quot; value=&quot;low&quot;&gt;
-&lt;embed src=&quot;kompose.swf&quot; quality=&quot;low&quot; loop=&quot;false&quot; type=&quot;application/x-shockwave-flash&quot; pluginspage=&quot;http://www.macromedia.com/shockwave/download/index.cgi?P1_Prod_Version=ShockwaveFlash&quot; height=&quot;866&quot; width=&quot;1440&quot;&gt;&lt;/object&gt;
-
-&lt;/div&gt;
-
-&lt;/body&gt;&lt;/html&gt;
+      Kompose is a models composer for Kermeta
    </description>
 
    <copyright url="http://www.eclipse.org/legal/epl-v10.html">
@@ -198,190 +17,136 @@ under the terms of the Eclipse Public License v1.0 which accompanies
 this distribution, and is available at http://www.eclipse.org/legal/epl-v10.html
    </copyright>
 
-   <license url="http://www.example.com/license">
-      &lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.01 Transitional//EN&quot;&gt;
-&lt;html xmlns:v=&quot;urn:schemas-microsoft-com:vml&quot; xmlns:o=&quot;urn:schemas-microsoft-com:office:office&quot; xmlns:w=&quot;urn:schemas-microsoft-com:office:word&quot; xmlns=&quot;http://www.w3.org/TR/REC-html40&quot;&gt;&lt;head&gt;
-
-
-
-&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=us-ascii&quot;&gt;
-&lt;meta name=&quot;ProgId&quot; content=&quot;Word.Document&quot;&gt;
-&lt;meta name=&quot;Generator&quot; content=&quot;Microsoft Word 9&quot;&gt;
-&lt;meta name=&quot;Originator&quot; content=&quot;Microsoft Word 9&quot;&gt;
-&lt;link rel=&quot;File-List&quot; href=&quot;http://www.cs.colostate.edu/puml/kompose2_files/filelist.xml&quot;&gt;&lt;title&gt;Kompose : A generic model composition tool&lt;/title&gt;&lt;!--[if gte mso 9]&gt;&lt;xml&gt;
- &lt;o:DocumentProperties&gt;
-  &lt;o:Author&gt;france&lt;/o:Author&gt;
-  &lt;o:Template&gt;Normal&lt;/o:Template&gt;
-  &lt;o:LastAuthor&gt;france&lt;/o:LastAuthor&gt;
-  &lt;o:Revision&gt;4&lt;/o:Revision&gt;
-  &lt;o:TotalTime&gt;14&lt;/o:TotalTime&gt;
-  &lt;o:Created&gt;2007-07-06T21:49:00Z&lt;/o:Created&gt;
-  &lt;o:LastSaved&gt;2007-07-06T23:22:00Z&lt;/o:LastSaved&gt;
-  &lt;o:Pages&gt;1&lt;/o:Pages&gt;
-  &lt;o:Words&gt;337&lt;/o:Words&gt;
-  &lt;o:Characters&gt;1921&lt;/o:Characters&gt;
-  &lt;o:Company&gt;CSU&lt;/o:Company&gt;
-  &lt;o:Lines&gt;16&lt;/o:Lines&gt;
-  &lt;o:Paragraphs&gt;3&lt;/o:Paragraphs&gt;
-  &lt;o:CharactersWithSpaces&gt;2359&lt;/o:CharactersWithSpaces&gt;
-  &lt;o:Version&gt;9.2720&lt;/o:Version&gt;
- &lt;/o:DocumentProperties&gt;
-&lt;/xml&gt;&lt;![endif]--&gt;&lt;!--[if gte mso 9]&gt;&lt;xml&gt;
- &lt;w:WordDocument&gt;
-  &lt;w:Zoom&gt;150&lt;/w:Zoom&gt;
- &lt;/w:WordDocument&gt;
-&lt;/xml&gt;&lt;![endif]--&gt;&lt;style&gt;
-&lt;!--
- /* Style Definitions */
-p.MsoNormal, li.MsoNormal, div.MsoNormal
- {mso-style-parent:&quot;&quot;;
- margin:0mm;
- margin-bottom:.0001pt;
- mso-pagination:widow-orphan;
- font-size:12.0pt;
- font-family:&quot;Times New Roman&quot;;
- mso-fareast-font-family:&quot;Times New Roman&quot;;}
-a:link, span.MsoHyperlink
- {color:blue;
- text-decoration:underline;
- text-underline:single;}
-a:visited, span.MsoHyperlinkFollowed
- {color:blue;
- text-decoration:underline;
- text-underline:single;}
-@page Section1
- {size:612.0pt 792.0pt;
- margin:72.0pt 90.0pt 72.0pt 90.0pt;
- mso-header-margin:36.0pt;
- mso-footer-margin:36.0pt;
- mso-paper-source:0;}
-div.Section1
- {page:Section1;}
- /* List Definitions */
-@list l0
- {mso-list-id:1343123315;
- mso-list-type:hybrid;
- mso-list-template-ids:-1242149746 67698703 67698713 67698715 67698703 67698713 67698715 67698703 67698713 67698715;}
-ol
- {margin-bottom:0mm;}
-ul
- {margin-bottom:0mm;}
---&gt;
-&lt;/style&gt;&lt;!--[if gte mso 9]&gt;&lt;xml&gt;
- &lt;o:shapedefaults v:ext=&quot;edit&quot; spidmax=&quot;1027&quot;/&gt;
-&lt;/xml&gt;&lt;![endif]--&gt;&lt;!--[if gte mso 9]&gt;&lt;xml&gt;
- &lt;o:shapelayout v:ext=&quot;edit&quot;&gt;
-  &lt;o:idmap v:ext=&quot;edit&quot; data=&quot;1&quot;/&gt;
- &lt;/o:shapelayout&gt;&lt;/xml&gt;&lt;![endif]--&gt;&lt;/head&gt;&lt;body style=&quot;&quot; lang=&quot;EN-US&quot; link=&quot;blue&quot; vlink=&quot;blue&quot;&gt;
-
-&lt;div class=&quot;Section1&quot;&gt;
-
-&lt;h1&gt;Kompose : A generic model composition tool
-&lt;hr&gt;
-        
-      &lt;/h1&gt;
-
-&lt;p class=&quot;MsoNormal&quot; style=&quot;margin-bottom: 12pt;&quot;&gt;Authors : &lt;a href=&quot;mailto:ffleurey@irisa.fr&quot;&gt;Franck Fleurey&lt;/a&gt; (IRISA/INRIA), Raghu Reddy
-(Rochester Institute of Technology), &lt;a href=&quot;http://www.cs.colostate.edu/%7Efrance&quot;&gt;Robert France&lt;/a&gt; (CSU), Benoit
-Baudry (INRIA), Sudipto Ghosh (CSU), &lt;a href=&quot;mailto:mickael.clavreul@irisa.fr&quot;&gt;Mickael Clavreul&lt;/a&gt; (IRISA/INRIA)&lt;/p&gt;
-
-&lt;h2&gt;What is Kompose?&lt;/h2&gt;
-&lt;hr&gt;
-&lt;p class=&quot;MsoNormal&quot;&gt;Kompose is an open-source generic model composition tool
-that was developed in the context of a collaboration between the Triskell team
-at IRISA (Rennes, France) and the CSU MDE Research group (Fort Collins, CO).
-The tool is based on an algorithm first developed by Raghu Reddy as part of his
-doctoral dissertation on AOM. Franck Fleurey refined and extended the algorithm
-and built the tool using the Kermeta tool developed at IRISA.&lt;br&gt;
-&lt;br&gt;
-Kompose implements a generic structural composition operator that can be
-specialized to a particular modeling language described by a metamodel. This version provides specialization example for Ecore models composition and RDBSchema models compositions. Additional examples can be found as models to be composed and composition directives.&lt;/p&gt;
-
-&lt;h2&gt;Installing Kompose&lt;/h2&gt;
-&lt;hr&gt;
-&lt;p class=&quot;MsoNormal&quot;&gt;Kompose is implemented as a set of eclipse plugins using the &lt;a href=&quot;http://www.kermeta.org/&quot;&gt;kermeta&lt;/a&gt; 1.2 language. &lt;br&gt;
-The current version, &lt;a href=&quot;http://gforge.inria.fr/frs/download.php/10955/kompose-0.0.2.zip&quot;&gt;version
-0.0.2&lt;/a&gt;, is available as a zip file. &lt;/p&gt;
-
-&lt;p class=&quot;MsoNormal&quot;&gt;&lt;br&gt;
-Do the following to install Kompose after you download it:&lt;/p&gt;
-
-&lt;ol style=&quot;margin-top: 0mm;&quot; start=&quot;1&quot; type=&quot;1&quot;&gt;
- &lt;li class=&quot;MsoNormal&quot; style=&quot;&quot;&gt;Download
-     a kermeta eclipse bundle v1.2 from &lt;a href=&quot;http://gforge.inria.fr/frs/?group_id=32&quot;&gt;this page&lt;/a&gt;.&lt;/li&gt;
- &lt;li class=&quot;MsoNormal&quot; style=&quot;&quot;&gt;
-          Unzip the Kompose zip file and copy all the folders it contains into the &quot;dropins&quot; (Eclipse Ganymede) folder of the kermeta bundle.
-          &lt;br style=&quot;&quot;&gt;
-&lt;br style=&quot;&quot;&gt;
-&lt;/ol&gt;
-
-&lt;p class=&quot;MsoNormal&quot;&gt;Once Kompose is installed correctly you should be able to
-replicate the demo presented below.&lt;/p&gt;
-&lt;p class=&quot;MsoNormal&quot;&gt;
-        You will also have access to examples provided in the Kompose bundle to test different compositions and have some clues about creating new Kompose specializations. (Eclipse -&amp;gt; New -&amp;gt; Examples -&amp;gt; Kompose Models Samples &amp; Kompose Specialization Samples)
-      &lt;/p&gt;
-
-&lt;h2&gt;Kompose project contents&lt;/h2&gt;
-&lt;hr&gt;
-       In order to introduce Kompose contents, here is a small description of available materials you can find in the archive.
-      &lt;br style=&quot;&quot;&gt;
-       Kompose plugins are split into three main families and several dedicated plugins: 
-      &lt;uL style=&quot;margin-top: 0mm;&quot; start=&quot;1&quot; type=&quot;1&quot;&gt;
- &lt;li class=&quot;MsoNormal&quot; style=&quot;&quot;&gt;
-          &lt;span style=&quot;font-style:bold&quot;&gt;Core&lt;/span&gt; 
-          &lt;br&gt;
- &lt;ul style=&quot;list-style-position:inside&quot;&gt;
- &lt;li&gt;Model
- &lt;br&gt; &lt;div style=&quot;line-height:10.5pt;text-indent:1cm;font-style:italic;color:green&quot;&gt;Kompose source files and meta model&lt;/div&gt;
- &lt;/li&gt;
- &lt;li&gt;Parser
- &lt;br&gt; &lt;div style=&quot;line-height:10.5pt;text-indent:1cm;font-style:italic;color:green&quot;&gt;Parser for user&apos;s composition directives&lt;/div&gt;&lt;/li&gt;
-        &lt;/ul&gt;
- &lt;li class=&quot;MsoNormal&quot; style=&quot;&quot;&gt;Specialization
-          &lt;br&gt;
- &lt;ul style=&quot;list-style-position:inside&quot;&gt;
- &lt;li&gt;_wizard &lt;div style=&quot;line-height:10.5pt;text-indent:1cm;font-style:italic;color:green&quot;&gt;Specialization wizard to create new specializations from specific metamodels (DSL)&lt;/div&gt;&lt;/li&gt;
- &lt;li&gt;Ecore
- &lt;br&gt; &lt;div style=&quot;line-height:10.5pt;text-indent:1cm;font-style:italic;color:green&quot;&gt;ECore specialization example&lt;/div&gt;&lt;/li&gt;
- &lt;ul&gt;
- &lt;LI&gt;Study.HW&lt;br&gt; &lt;div style=&quot;line-height:10.5pt;text-indent:1cm;font-style:italic;color:green&quot;&gt;ECore specialization Case Study on Health Watcher&lt;/div&gt;
- &lt;/LI&gt;
- &lt;/ul&gt;
- &lt;/li&gt;
- &lt;li&gt;RDBSchema&lt;br&gt; &lt;div style=&quot;line-height:10.5pt;text-indent:1cm;font-style:italic;color:green&quot;&gt;RDBSchema specialization example&lt;/div&gt;
- &lt;/li&gt;
-        &lt;/ul&gt;
-        &lt;/li&gt;
- &lt;li class=&quot;MsoNormal&quot; style=&quot;&quot;&gt;User Interface
-          &lt;br&gt;
-          &lt;ul style=&quot;list-style-position:inside&quot;&gt;
- &lt;li&gt;Samples&lt;br&gt; &lt;div style=&quot;line-height:10.5pt;text-indent:1cm;font-style:italic;color:green&quot;&gt;Kompose Specialization Samples&lt;/div&gt;
- &lt;/li&gt;
- &lt;li&gt;Experimental&lt;br&gt; &lt;div style=&quot;line-height:10.5pt;text-indent:1cm;font-style:italic;color:green&quot;&gt;Experimental ECore Merge (multiple selection of ECore models)&lt;/div&gt;
- &lt;/li&gt;
-        &lt;/ul&gt;
-        &lt;/li&gt;
-&lt;/uL&gt;
-&lt;h2&gt;Contributing to the development of Kompose&lt;/h2&gt;
-&lt;hr&gt;
-&lt;p class=&quot;MsoNormal&quot;&gt;Kompose is an open-source tool. The source code is available
-on the &lt;a href=&quot;http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/kompose_projects/?cvsroot=kermeta&quot;&gt;CVS repository&lt;/a&gt;. 
-        &lt;br&gt;
-        The source code can be anonymously be downloaded but to contribute you will have to register and contact one of the project admin to be added to the developers list.
- &lt;br&gt;
- New specialization examples or models should respect packages naming. Please refer to existing examples before committing new projects.
-      &lt;/p&gt;
-
-&lt;h2&gt;Demo of the Kompose tool for Ecore models&lt;o:p&gt;&lt;/o:p&gt;&lt;/h2&gt;
-&lt;hr&gt;
-&lt;object classid=&quot;clsid:D27CDB6E-AE6D-11cf-96B8-444553540000&quot; codebase=&quot;http://active.macromedia.com/flash5/cabs/swflash.cab#version=5,0,0,0&quot; height=&quot;788&quot; width=&quot;1024&quot;&gt;&lt;param name=&quot;movie&quot; value=&quot;kompose.swf&quot;&gt;&lt;param name=&quot;play&quot; value=&quot;true&quot;&gt;&lt;param name=&quot;loop&quot; value=&quot;false&quot;&gt;
-&lt;param name=&quot;quality&quot; value=&quot;low&quot;&gt;
-&lt;embed src=&quot;kompose.swf&quot; quality=&quot;low&quot; loop=&quot;false&quot; type=&quot;application/x-shockwave-flash&quot; pluginspage=&quot;http://www.macromedia.com/shockwave/download/index.cgi?P1_Prod_Version=ShockwaveFlash&quot; height=&quot;866&quot; width=&quot;1440&quot;&gt;&lt;/object&gt;
-
-&lt;/div&gt;
-
-&lt;/body&gt;&lt;/html&gt;
+   <license url="license.html">
+      ECLIPSE FOUNDATION SOFTWARE USER AGREEMENT
+March 17, 2005
+Usage Of Content
+THE ECLIPSE FOUNDATION MAKES AVAILABLE SOFTWARE, DOCUMENTATION,
+INFORMATION AND/OR
+OTHER MATERIALS FOR OPEN SOURCE PROJECTS (COLLECTIVELY &quot;CONTENT&quot;).
+USE OF THE CONTENT IS GOVERNED BY THE TERMS AND CONDITIONS OF
+THIS
+AGREEMENT AND/OR THE TERMS AND CONDITIONS OF LICENSE AGREEMENTS
+OR
+NOTICES INDICATED OR REFERENCED BELOW. BY USING THE CONTENT,
+YOU
+AGREE THAT YOUR USE OF THE CONTENT IS GOVERNED BY THIS AGREEMENT
+AND/OR THE TERMS AND CONDITIONS OF ANY APPLICABLE LICENSE AGREEMENTS
+OR NOTICES INDICATED OR REFERENCED BELOW. IF YOU DO NOT AGREE
+TO THE
+TERMS AND CONDITIONS OF THIS AGREEMENT AND THE TERMS AND CONDITIONS
+OF ANY APPLICABLE LICENSE AGREEMENTS OR NOTICES INDICATED OR
+REFERENCED
+BELOW, THEN YOU MAY NOT USE THE CONTENT.
+Applicable Licenses
+Unless otherwise indicated, all Content made available by the
+Eclipse Foundation
+is provided to you under the terms and conditions of the Eclipse
+Public
+License Version 1.0 (&quot;EPL&quot;). A copy of the EPL is provided with
+this
+Content and is also available at http://www.eclipse.org/legal/epl-v10.html.
+For purposes of the EPL, &quot;Program&quot; will mean the Content.
+Content includes, but is not limited to, source code, object
+code,
+documentation and other files maintained in the Eclipse.org CVS
+repository (&quot;Repository&quot;) in CVS modules (&quot;Modules&quot;) and made
+available
+as downloadable archives (&quot;Downloads&quot;).
+- Content may be structured and packaged into modules to facilitate
+delivering,
+extending, and upgrading the Content. Typical modules may include
+plug-ins (&quot;Plug-ins&quot;),
+plug-in fragments (&quot;Fragments&quot;), and features (&quot;Features&quot;).
+- Each Plug-in or Fragment may be packaged as a sub-directory
+or JAR (Java ARchive)
+in a directory named &quot;plugins&quot;.
+- A Feature is a bundle of one or more Plug-ins and/or Fragments
+and associated material.
+Each Feature may be packaged as a sub-directory in a directory
+named &quot;features&quot;.
+Within a Feature, files named &quot;feature.xml&quot; may contain a list
+of the names and version
+numbers of the Plug-ins and/or Fragments associated with that
+Feature.
+- Features may also include other Features (&quot;Included Features&quot;).
+Within a Feature, files
+named &quot;feature.xml&quot; may contain a list of the names and version
+numbers of Included Features.
+Features may also include other Features (&quot;Included Features&quot;).
+Files named
+&quot;feature.xml&quot; may contain a list of the names and version numbers
+of
+Included Features.
+The terms and conditions governing Plug-ins and Fragments should
+be
+contained in files named &quot;about.html&quot; (&quot;Abouts&quot;). The terms and
+conditions governing Features and Included Features should be
+contained
+in files named &quot;license.html&quot; (&quot;Feature Licenses&quot;). Abouts and
+Feature
+Licenses may be located in any directory of a Download or Module
+including, but not limited to the following locations:
+- The top-level (root) directory
+- Plug-in and Fragment directories
+- Inside Plug-ins and Fragments packaged as JARs
+- Sub-directories of the directory named &quot;src&quot; of certain Plug-ins
+- Feature directories
+Note: if a Feature made available by the Eclipse Foundation is
+installed using the
+Eclipse Update Manager, you must agree to a license (&quot;Feature
+Update
+License&quot;) during the installation process. If the Feature contains
+Included Features, the Feature Update License should either provide
+you
+with the terms and conditions governing the Included Features
+or inform
+you where you can locate them. Feature Update Licenses may be
+found in
+the &quot;license&quot; property of files named &quot;feature.properties&quot;. Such
+Abouts,
+Feature Licenses and Feature Update Licenses contain the terms
+and
+conditions (or references to such terms and conditions) that
+govern your
+use of the associated Content in that directory.
+THE ABOUTS, FEATURE LICENSES AND FEATURE UPDATE LICENSES MAY
+REFER
+TO THE EPL OR OTHER LICENSE AGREEMENTS, NOTICES OR TERMS AND
+CONDITIONS.
+SOME OF THESE OTHER LICENSE AGREEMENTS MAY INCLUDE (BUT ARE NOT
+LIMITED TO):
+- Common Public License Version 1.0 (available at http://www.eclipse.org/legal/cpl-v10.html)
+- Apache Software License 1.1 (available at http://www.apache.org/licenses/LICENSE)
+- Apache Software License 2.0 (available at http://www.apache.org/licenses/LICENSE-2.0)
+- IBM Public License 1.0 (available at http://oss.software.ibm.com/developerworks/opensource/license10.html)
+- Metro Link Public License 1.00 (available at http://www.opengroup.org/openmotif/supporters/metrolink/license.html)
+- Mozilla Public License Version 1.1 (available at http://www.mozilla.org/MPL/MPL-1.1.html)
+IT IS YOUR OBLIGATION TO READ AND ACCEPT ALL SUCH TERMS AND CONDITIONS
+PRIOR
+TO USE OF THE CONTENT. If no About, Feature License or Feature
+Update License
+is provided, please contact the Eclipse Foundation to determine
+what terms and conditions
+govern that particular Content.
+Cryptography
+Content may contain encryption software. The country in which
+you are
+currently may have restrictions on the import, possession, and
+use,
+and/or re-export to another country, of encryption software.
+BEFORE
+using any encryption software, please check the country&apos;s laws,
+regulations and policies concerning the import, possession, or
+use,
+and re-export of encryption software, to see if this is permitted.
+Java and all Java-based trademarks are trademarks of Sun Microsystems,
+Inc. in the United States, other countries, or both.
    </license>
+
+   <url>
+      <discovery label="Kermeta update site" url="http://kermeta.org/update"/>
+   </url>
 
    <requires>
       <import plugin="org.eclipse.emf.ecore" version="2.4.1" match="greaterOrEqual"/>
