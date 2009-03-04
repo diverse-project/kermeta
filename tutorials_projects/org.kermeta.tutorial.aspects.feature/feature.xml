@@ -17,8 +17,9 @@ under the terms of the Eclipse Public License v1.0 which accompanies
 this distribution, and is available at http://www.eclipse.org/legal/epl-v10.html
    </copyright>
 
-   <license url="http://www.example.com/license">
-      [Enter License Description here.]
+   <license url="http://www.kermeta.org/">
+      KerMeta workbench and most of its plugins are distributed under
+the terms of the EPL licence.
    </license>
 
    <url>
@@ -29,10 +30,11 @@ this distribution, and is available at http://www.eclipse.org/legal/epl-v10.html
       <import plugin="org.eclipse.core.runtime"/>
       <import plugin="org.eclipse.help"/>
       <import plugin="org.eclipse.uml2.uml"/>
-      <import plugin="fr.irisa.triskell.kermeta.samples.fsm"/>
-      <import plugin="fr.irisa.triskell.kermeta.samples.fsm.edit"/>
-      <import plugin="fr.irisa.triskell.kermeta.samples.fsm.editor"/>
-      <import plugin="fr.irisa.triskell.kermeta.samples.fsm.model"/>
+      <import feature="fr.irisa.triskell.kermeta" version="1.2.0.qualifier"/>
+      <import feature="fr.irisa.triskell.kermeta.samples.fsm" version="1.2.0"/>
+      <import plugin="org.eclipse.ui"/>
+      <import plugin="org.eclipse.core.resources"/>
+      <import plugin="org.eclipse.ui.ide"/>
    </requires>
 
    <plugin
