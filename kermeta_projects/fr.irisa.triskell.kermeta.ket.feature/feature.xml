@@ -2,7 +2,7 @@
 <feature
       id="fr.irisa.triskell.kermeta.ket.feature"
       label="Kermeta Emitter Templates"
-      version="1.2.0"
+      version="1.2.1.qualifier"
       provider-name="IRISA/INRIA">
 
    <description url="http://www.kermeta.org/">
@@ -170,6 +170,13 @@ Inc. in the United States, other countries, or both.
 
    <plugin
          id="org.kermeta.ket.texteditor"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="fr.irisa.triskell.kermeta.ket.documentation"
          download-size="0"
          install-size="0"
          version="0.0.0"
