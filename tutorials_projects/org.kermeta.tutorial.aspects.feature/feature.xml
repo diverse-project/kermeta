@@ -5,17 +5,25 @@
       version="1.1.0.qualifier"
       provider-name="IRISA/INRIA">
 
-   <description url="http://www.example.com/description">
-      [Enter Feature Description here.]
+   <description url="http://www.kermeta.org">
+      Tutorial presenting Kermeta aspects, to weave additional behavior in metamodels at runtime.
    </description>
 
-   <copyright url="http://www.example.com/copyright">
-      [Enter Copyright Description here.]
+   <copyright url="http://www.kermeta.org">
+      Copyright : IRISA / INRIA / Universite de Rennes 1.
+All rights reserved.
+This program and the accompanying materials are made available
+under the terms of the Eclipse Public License v1.0 which accompanies
+this distribution, and is available at http://www.eclipse.org/legal/epl-v10.html
    </copyright>
 
    <license url="http://www.example.com/license">
       [Enter License Description here.]
    </license>
+
+   <url>
+      <discovery label="Kermeta Update Site" url="http://kermeta.org/update"/>
+   </url>
 
    <requires>
       <import plugin="org.eclipse.core.runtime"/>
