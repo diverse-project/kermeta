@@ -8,7 +8,7 @@
 	<property name="OOo.source.dir" location="${project.base.dir}/src/OOo"/>
 	<property name="OOo.source.file" location="${OOo.source.dir}/${project.name}.sxw"/>
 	<!--<property name="deployment.dest" location="\\\\jersey\\triskell\\www\\triskell\\softwares\\kermeta\\docs"/>-->
-	<property name="deployment.dest" location="\\\\nas1a\\triskell\\www\\kermeta.org\\docs"/>
+	<property name="deployment.dest" location="T:\\www\\kermeta.org\\docs"/>
 			
 	<target name="all" depends="preparedbk, html.single, html.chunked, eclipse.help, pdf.fop">
 	</target>
@@ -49,7 +49,7 @@
 		     target="pdf.fop"/>
 	</target>
 
-	<target name="deploy" description="copy documentation files to http://www.irisa.fr/triskell/prive/docs" >
+	<target name="deploy" description="copy documentation files to T:\\www\\kermeta.org\\docs" >
 		<ant antfile="common_build.xml"
 		     target="dbkdeploy"/>
 
