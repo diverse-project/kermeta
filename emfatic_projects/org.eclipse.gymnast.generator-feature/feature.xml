@@ -17,7 +17,7 @@
    </license>
 
    <requires>
-      <import feature="org.eclipse.gymnast.runtime_feature" version="0.1.0"/>
+      <import feature="org.eclipse.gymnast.runtime_feature"/>
       <import plugin="org.antlr"/>
       <import plugin="org.eclipse.core.resources"/>
       <import plugin="org.eclipse.jdt.core"/>
