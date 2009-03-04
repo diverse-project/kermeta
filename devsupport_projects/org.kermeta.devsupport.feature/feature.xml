@@ -2,7 +2,7 @@
 <feature
       id="org.kermeta.devsupport.feature"
       label="Dev support for Kermeta Feature"
-      version="0.1.0.qualifier"
+      version="0.1.1"
       provider-name="IRISA/INRIA"
       image="kermeta_logo_32.gif">
 
@@ -19,7 +19,6 @@
    </license>
 
    <url>
-      <discovery label="http://www.kyrsoft.com/updates/" url="http://www.kyrsoft.com/updates/"/>
       <discovery label="ANTLR (http://antlreclipse.sourceforge.net/updates/)" url="http://antlreclipse.sourceforge.net/updates/"/>
    </url>
 
@@ -36,17 +35,17 @@
          version="0.0.0"/>
 
    <requires>
-      <import feature="org.antlr.ui" version="4.1.1"/>
+      <import feature="org.antlr.ui" version="4.1.1" match="greaterOrEqual"/>
       <import plugin="org.apache.log4j"/>
       <import plugin="org.apache.commons.logging"/>
-      <import feature="org.eclipse.emf" version="2.3.0.v200706262000" match="greaterOrEqual"/>
+      <import feature="org.eclipse.emf" version="2.3.0" match="greaterOrEqual"/>
    </requires>
 
    <plugin
          id="org.openembedd.tests"
          download-size="0"
          install-size="0"
-         version="0.0.0"
+         version="0.4.2"
          unpack="false"/>
 
 </feature>
