@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Triskell Logo Ui Plug-in
 Bundle-SymbolicName: fr.irisa.triskell.kmlogo.ui; singleton:=true
-Bundle-Version: 1.2.0
+Bundle-Version: 1.2.0.qualifier
 Bundle-Activator: fr.irisa.triskell.kmlogo.ui.Activator
 Bundle-Vendor: IRISA/INRIA
 Require-Bundle: org.eclipse.ui,
@@ -14,7 +14,7 @@ Require-Bundle: org.eclipse.ui,
  fr.irisa.triskell.kermeta.io,
  fr.irisa.triskell.kermeta.interpreter,
  org.apache.commons.logging;bundle-version="[1.0.4,2.0.0)"
-Eclipse-LazyStart: true
+Bundle-ActivationPolicy: lazy
 Export-Package: fr.irisa.triskell.kmlogo.ui,
  fr.irisa.triskell.kmlogo.ui.popup.actions,
  fr.irisa.triskell.kmlogo.ui.tools.wizards
