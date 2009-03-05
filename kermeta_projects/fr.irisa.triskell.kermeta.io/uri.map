@@ -14,8 +14,8 @@
 #"platform:/resource/"		"/home/paco/Desktop/KermetaCVS/"
 #"platform:/plugin/"			"file://tmp/kermeta_build/src/plugins/"
 #"platform:/resource/"		"file://tmp/kermeta_build/src/plugins/"
-"platform:/plugin/"		"file:/C:/eclipse3.3/eclipse/workspace/"
-"platform:/resource/"		"file:/C:/eclipse3.3/eclipse/workspace/"
-"kconf:/loader/"			"file:/C:/eclipse3.3/eclipse/workspace/org.kermeta.io.loader/instances/"
+"platform:/plugin/"		"file:/C:/eclipse3.4/eclipse/workspace_head/"
+"platform:/resource/"		"file:/C:/eclipse3.4/eclipse/workspace_head/"
+"kconf:/loader/"			"file:/C:/eclipse3.4/eclipse/workspace_head/org.kermeta.io.loader/instances/"
 
 
