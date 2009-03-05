@@ -9,5 +9,6 @@ Require-Bundle: org.eclipse.ui,
  fr.irisa.triskell.kermeta.interpreter,
  org.junit4,
  fr.irisa.triskell.kermeta.tests,
- fr.irisa.triskell.kermeta.ocl
+ fr.irisa.triskell.kermeta.ocl,
+ org.eclipse.emf.ecoretools.registration
 Eclipse-LazyStart: true
