@@ -1,0 +1,42 @@
+<project name="Kermeta update site content generator" default="exec" basedir=".">
+
+	<!-- DVK : for some reason it seems that it doesn't accept white spaces -->
+	<property name="RepositoryName" value="Kermeta Update Site" />
+	<property name="ArtifactsName" value="Kermeta Artifacts" />
+
+	<!-- ================================= 
+          target: exec
+          This tasks generate the metadata for the site update.
+          For this purpose, all plugins/ fragments (for all OS) must be stored in the plugins directory              
+         ================================= -->
+	<target name="exec" depends="clean" description="Generate the content.jar and the artifacts.jar file for the OpenEmbeDD Experimental update site">
+		<echo message="Generate the content.jar and the artifacts.jar file for the ${RepositoryName}" />
+
+		<exec executable="${eclipse.pdebuild.home}/../../eclipse">
+			<arg line="-application org.eclipse.equinox.p2.metadata.generator.EclipseGenerator" />
+			<arg line="-updateSite ${basedir}" />
+			<arg line="-site file:${basedir}/site.xml" />
+			<arg line="-metadataRepository file:${basedir}" />
+			<arg line="-metadataRepositoryName &quot;${RepositoryName}&quot;" />
+			<arg line="-artifactRepository file:${basedir}" />
+			<arg line="-artifactRepositoryName &quot;${RepositoryName}&quot;" />
+			<arg line="-compress" />
+			<arg line="-append" />
+			<arg line="-reusePack200Files" />
+			<arg line="-noDefaultIUs" />
+			<arg line="-vmargs" />
+			<arg line="-Xmx256m" />
+		</exec> 
+	</target>
+	<target name="clean" description="clean the previous version of the artifact and contents that may disturb the generator">
+		<delete failonerror="false">
+			<fileset dir="${basedir}">
+				<include name="artifacts.jar"/>
+				<include name="artifacts.xml"/>
+				<include name="content.jar"/>
+				<include name="content.xml"/>
+			</fileset>
+		</delete>
+	</target>
+
+</project>
