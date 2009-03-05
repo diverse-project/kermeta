@@ -1,5 +1,5 @@
 /*******************************************************************************
- * $Id: KmEditor.java,v 1.9 2007-08-02 16:34:33 cfaucher Exp $
+ * $Id: KmEditor.java,v 1.9.2.1 2008-10-22 12:04:23 vmahe Exp $
  * License: EPL
  * Copyright: IRISA / INRIA / Universite de Rennes 1
  ******************************************************************************/
@@ -10,6 +10,7 @@ import java.util.List;
 
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.jface.preference.IPreferenceStore;
+import org.topcased.modeler.commands.GEFtoEMFCommandStackWrapper;
 import org.topcased.modeler.documentation.EAnnotationDocPage;
 import org.topcased.modeler.documentation.IDocPage;
 import org.topcased.modeler.editor.Modeler;
@@ -67,7 +68,9 @@ public class KmEditor extends Modeler {
 	 */
 	public Object getAdapter(Class type) {
 		if (type == IDocPage.class) {
-			return new EAnnotationDocPage(getCommandStack());
+			GEFtoEMFCommandStackWrapper wrapper = new
+			GEFtoEMFCommandStackWrapper(getCommandStack());
+			            return new EAnnotationDocPage(wrapper);
 		}
 		return super.getAdapter(type);
 	}
