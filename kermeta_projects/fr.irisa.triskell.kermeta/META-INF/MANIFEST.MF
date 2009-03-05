@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Kermeta Workbench
 Bundle-SymbolicName: fr.irisa.triskell.kermeta; singleton:=true
-Bundle-Version: 1.2.0.qualifier
+Bundle-Version: 1.2.1.qualifier
 Bundle-ClassPath: .
 Bundle-Activator: fr.irisa.triskell.kermeta.plugin.KermetaPlugin
 Bundle-Vendor: IRISA/INRIA
