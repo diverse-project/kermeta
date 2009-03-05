@@ -5,7 +5,7 @@
         Deploy the dist jar to the projects that use it
     </description>
 	
-	<property name="eclipse.home" location="/home/paco/Desktop/eclipse"/>
+	<property name="eclipse.home" location="${basedir}/../../"/>
 
 	<path id="project.class.path">
 		
