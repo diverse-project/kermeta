@@ -508,22 +508,27 @@ set up XEP's installation directory in the module's configuration property file.
         <filterset refid="filterset.fileuris" />
     </copy>
 
-	<mkdir dir="${eclipse.html.base.dir}" />
+	<mkdir dir="${eclipse.html.base.dir}/tmp/build/eclipse.help/${manual.name}" />
     <setsystemproperty key="xslthl.config.verbose" value="true"/>
     <setsystemproperty key="xslthl.config" value="file:///${ant.docbook.styler.dir}/xslthl/highlighters/xslthl-config.xml"/>
     <echo>eclipse.html.base.dir = ${eclipse.html.base.dir}</echo>
-  	 <echo>base.dir = ${base.dir}</echo>
+  	<property name="base.dir"             value="${eclipse.html.base.dir}" />
+  	<echo>base.dir = ${base.dir}</echo>
   	<xslt
         in      = "${temp:docbook.ready.file}"
         style   = "${build.dir}/customized.eclipse-help.xsl.tmp"
-        out     = "${eclipse.html.base.dir}/${manual.name}.html"
+        out     = "${eclipse.html.base.dir}/tmp/build/eclipse.help/${manual.name}/${manual.name}.html"
         processor = "${xslt.processor}"
         >
         <classpath refid="ant-extensions" />
         <param name="eclipse.plugin.name"  expression="${docbook.eclipse.plugin.name}" />
         <param name="eclipse.plugin.id"  expression="${docbook.eclipse.plugin.id}" />
         <param name="eclipse.plugin.provider"  expression="${docbook.eclipse.plugin.provider}" />
+		<param name="manifest.root.dir" expression="${eclipse.html.base.dir}/tmp/"/>
 		<param name="base.dir" expression="${eclipse.html.base.dir}/"/>
+  		<param name="to.html.dir.relative.path" expression="${to.html.dir.relative.path}"/>
+  		<param name="toc.dir" expression="${eclipse.html.base.dir}/"/>
+  		<param name="deployed.eclipse.html.dir" expression="${deployed.eclipse.html.dir}"/>
     </xslt>
   	<move todir="${eclipse.html.base.dir}/css">
   	    <fileset dir="${build.dir}/css"/>

@@ -4,7 +4,7 @@
                 version='1.0'>
 
 
-<xsl:import href="@ant.docbook.styler.fileuri@/docbook/xsl/eclipse/eclipse.xsl" />
+<xsl:import href="@ant.docbook.styler.fileuri@/docbook/modified_xsl/eclipse/eclipse.xsl" />
 <!-- <xsl:import href="../../../../docbook-xsl-1.74.0/eclipse/eclipse.xsl" />-->
 
 <!-- support for highlighting and other custom html. see docbook/xsl/html/highlight.xsl for sample of coloration for html document-->
@@ -14,6 +14,10 @@
 
 <!-- specific to eclipse help -->
 <xsl:param name="manifest.in.base.dir" select="1"></xsl:param>
+<xsl:param name="manifest.root.dir"></xsl:param>
+<xsl:param name="deployed.eclipse.html.dir">build/eclipse.help/</xsl:param>
+<xsl:param name="to.html.dir.relative.path">build/eclipse.help/</xsl:param>
+<xsl:param name="toc.dir">build/eclipse.help/</xsl:param>
 <xsl:param name="base.dir">help/html/</xsl:param>
 
 <!-- html presentation -->
