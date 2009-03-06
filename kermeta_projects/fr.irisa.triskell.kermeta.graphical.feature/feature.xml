@@ -2,7 +2,7 @@
 <feature
       id="fr.irisa.triskell.kermeta.graphical"
       label="Kermeta Graphical Editor"
-      version="1.2.0"
+      version="1.2.1.qualifier"
       provider-name="IRISA/INRIA">
 
    <description url="http://www.kermeta.org/">
@@ -31,8 +31,21 @@ the terms of the EPL licence.
    <requires>
       <import feature="fr.irisa.triskell.kermeta" version="1.1.0" match="greaterOrEqual"/>
       <import feature="fr.irisa.triskell.traceability" version="1.1.0" match="greaterOrEqual"/>
-      <import feature="org.topcased.toolkit" version="1.0.0" match="greaterOrEqual"/>
       <import feature="org.eclipse.emf.sdk" version="2.3.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.core.runtime"/>
+      <import plugin="org.eclipse.emf.ecore.edit"/>
+      <import plugin="org.eclipse.ui.ide"/>
+      <import plugin="org.eclipse.emf.edit.ui"/>
+      <import plugin="org.eclipse.emf.edit"/>
+      <import plugin="org.eclipse.core.resources"/>
+      <import plugin="org.eclipse.emf.ecore.xmi"/>
+      <import plugin="org.eclipse.emf.ecore"/>
+      <import plugin="org.topcased.modeler" version="2.2.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.ui.editors"/>
+      <import plugin="fr.irisa.triskell.kermeta.model.editor"/>
+      <import plugin="org.eclipse.ui"/>
+      <import plugin="fr.irisa.triskell.kermeta.io"/>
+      <import plugin="org.kermeta.io.loader"/>
    </requires>
 
    <plugin

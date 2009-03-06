@@ -2,7 +2,7 @@
 <feature
       id="fr.irisa.triskell.kermeta.ecore"
       label="Kermeta MDK for Ecore"
-      version="1.2.0"
+      version="1.2.0.qualifier"
       provider-name="IRISA/INRIA">
 
    <description url="http://www.kermeta.org/">

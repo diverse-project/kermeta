@@ -1,0 +1,18 @@
+<project name="Kermeta update site content generator" default="clean" basedir=".">
+
+	
+	<target name="clean" description="clean the previous version of the artifact and contents that may disturb the generator">
+		<delete failonerror="false" includeEmptyDirs="true">
+			<fileset dir="${basedir}">
+				<include name="artifacts.jar"/>
+				<include name="artifacts.xml"/>
+				<include name="content.jar"/>
+				<include name="content.xml"/>
+			</fileset>
+			<fileset dir="features"/>
+			<fileset dir="plugins"/>
+		</delete>
+
+	</target>
+
+</project>
