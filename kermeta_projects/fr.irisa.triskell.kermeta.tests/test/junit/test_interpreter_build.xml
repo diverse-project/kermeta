@@ -46,7 +46,7 @@
 	<property name="emfatic-core.jar" location="${eclipse.home}/plugins/org.eclipse.gymnast.runtime.core_0.3.0.jar"/>
 
 		<property name="emf.common.jar" location="${eclipse.home}/plugins/org.eclipse.emf.common_2.4.0.v200902171115.jar" />
-		<property name="emf.ecore.jar" location="${eclipse.home}/plugins/org.eclipse.emf.ecore_2.4.1.v200902171115.jar" />
+		<property name="emf.ecore.jar" location="${eclipse.home}/plugins/org.eclipse.emf.ecore_2.4.2.v200902171115.jar" />
 		<property name="emf.ecore.xmi.jar" location="${eclipse.home}/plugins/org.eclipse.emf.ecore.xmi_2.4.1.v200902171115.jar" />
 		<property name="emf.validation.jar" location="${eclipse.home}/plugins/org.eclipse.emf.validation_1.2.0.v200807161729.jar" />
 		<property name="debug.core.jar" location="${eclipse.home}/plugins/org.eclipse.debug.core_3.4.0.v20080612.jar" />
