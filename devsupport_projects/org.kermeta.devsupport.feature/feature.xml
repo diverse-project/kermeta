@@ -2,7 +2,7 @@
 <feature
       id="org.kermeta.devsupport.feature"
       label="Dev support for Kermeta Feature"
-      version="0.1.1"
+      version="0.1.2"
       provider-name="IRISA/INRIA"
       image="kermeta_logo_32.gif">
 

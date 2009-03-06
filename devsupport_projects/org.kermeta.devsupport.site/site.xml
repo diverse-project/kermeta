@@ -3,7 +3,7 @@
    <description url="http://www.kermeta.org/update/devsupport">
       Update site for features that are useful while developping kermeta
    </description>
-   <feature url="features/org.kermeta.devsupport.feature_0.1.1.jar" id="org.kermeta.devsupport.feature" version="0.1.1">
+   <feature url="features/org.kermeta.devsupport.feature_0.1.2.jar" id="org.kermeta.devsupport.feature" version="0.1.2">
       <category name="FeaturesforDeveloppingKermeta"/>
    </feature>
    <category-def name="FeaturesforDeveloppingKermeta" label="Features for developping Kermeta"/>
