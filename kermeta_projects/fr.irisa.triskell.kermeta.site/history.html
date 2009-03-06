@@ -10,6 +10,42 @@ $Id: history.html,v 1.38 2008-10-02 15:36:30 dvojtise Exp $
 -->
 <!-- please follow the template ... -->
 <h1>History of Kermeta development</h1>
+<h2 class="Heading">V1.3.0 (09/03/2003)</h2>
+<h3>New features</h3>
+<ul>
+	<li>A compiler for you kermeta code. Still experimental in this version, it generates the all the java code
+		to be run with EMF. You can deploy the resulting code in your product without installing kermeta in your product.
+		Preliminary tests have shown x35 to x50 speed up compared to the interpreted mode. However, some feature of kermeta
+		are still not supported by the compiler (see the current limitations : <a href="http://www.kermeta.org/community/dev/compilerCompilingIssues">
+		http://www.kermeta.org/community/dev/compilerCompilingIssues</a> )
+	</li>	
+	<li>Kompose is now part of Kermeta update site : it allows to define a specialization to compose your model. 
+		Currently, it is bundled with the following sample specialization : Ecore and rdbschema.
+	<li>Singleton pattern with Kermeta (<a href="http://gforge.inria.fr/tracker/index.php?func=detail&aid=7228&group_id=32&atid=208">feature request #7228</a>). Thanks to Kermeta aspects, you can now use a pseudo singleton
+		in your kermeta code. Be sure to use it only when there is no better design.</li>
+	<li>Date manipulation. (<a href="http://gforge.inria.fr/tracker/index.php?func=detail&aid=7240&group_id=32&atid=208">Feature request #7240</a>)</li>
+	<li>Possibility to register an ecore file directly from Kermeta. ( <a href="https://gforge.inria.fr/tracker/index.php?func=detail&aid=6810&group_id=32&atid=208">feature request #6810</a>). It uses a safe way to register, if the nsUri is already registered form a plugin it will do nothing.  	
+</ul>
+<h3>Improved features</h3>
+<ul>
+	<li>Ket now supports kermeta aspect. You can customize the name of the "generate" operation and weave it into an existing class. (see <a href="https://gforge.inria.fr/tracker/index.php?func=detail&aid=6976&group_id=32&atid=208">Feature request #6976</a>)</li>
+	<li>Better support for invariants : An attribute has been added to the exception InvariantViolated that point to the invariant itself. 
+		This allows analysis of the invariant for feedback to the end-user. (this part of <a href="https://gforge.inria.fr/tracker/index.php?func=detail&aid=1120&group_id=32&atid=208">Feature request #1120</a>)</li>
+	<li>New MDK dedicated to manipulating kermeta models. All special helpers and functions are now gathered in this MDK rather that put into the framework.</li>
+	<li>Improved navigability from the outline (<a href="https://gforge.inria.fr/tracker/index.php?func=detail&aid=5685&group_id=32&atid=208">Feature request #5685</a>)</li>
+	<li>kpm preferences now allow to exclude projects and folder (<a href="https://gforge.inria.fr/tracker/index.php?func=detail&aid=6647&group_id=32&atid=208">feature request #6647</a>)</li>
+</ul>
+<h3>Bug fixed</h3>
+<ul>
+	<li>#6133; <a href="http://gforge.inria.fr/tracker/index.php?func=detail&aid=6133&group_id=32&atid=205">Ecore generics not usable in Kermeta</a></li>
+	<li>#6571; <a href="http://gforge.inria.fr/tracker/index.php?func=detail&aid=6571&group_id=32&atid=205">java.lang.NullPointerException on the .new function</a></li>
+	<li>#6582; <a href="http://gforge.inria.fr/tracker/index.php?func=detail&aid=6582&group_id=32&atid=205">(in)compatibility with Topcased 2.2</a> The editors now works with Topcased 2.3 and 2.4</li>
+	<li>#6634; <a href="http://gforge.inria.fr/tracker/index.php?func=detail&aid=6634&group_id=32&atid=205">readonly on attribute and reference not used</a></li>
+	<li>#6986; <a href="http://gforge.inria.fr/tracker/index.php?func=detail&aid=6986&group_id=32&atid=205">Kermeta internal error due to not implemented derived property</a></li>
+	<li>#7109; <a href="http://gforge.inria.fr/tracker/index.php?func=detail&aid=7109&group_id=32&atid=205">non explicit message when loading a model without the associated "require"</a></li>
+	<li>#7171; <a href="http://gforge.inria.fr/tracker/index.php?func=detail&aid=7171&group_id=32&atid=205">Merger : generic types are not binding in the km file</a></li>
+	<li>#7306; <a href="http://gforge.inria.fr/tracker/index.php?func=detail&aid=7306&group_id=32&atid=205">The tags on properties are lost in the merger</a></li>
+</ul>
 <h2 class="Heading">V1.2.0 (01/10/2008)</h2>
 <h3>New features</h3>
 <ul>
@@ -18,6 +54,7 @@ $Id: history.html,v 1.38 2008-10-02 15:36:30 dvojtise Exp $
 	<li>Added a preference page to let the user configure some options of KPM. Also added a recovery button to reset KPM to its default configuration.</li>
 	<li>Improved feedback on some errors and exceptions. (For example, ResourceSaveException has now a new attribute pointing to the faulty instance)</li>
 	<li>Improved stop button (now you can stop kermeta, you'll get a stacktrace of the last instruction run)</li>
+	<li>A view dedicated to see kermeta documentation of your code in the same spirit as javadoc. (see <a href="http://gforge.inria.fr/tracker/index.php?func=detail&aid=2066&group_id=32&atid=208">Feature request #2066</a>)</li>
 </ul>
 <h3>Improved features</h3>
 <ul>
