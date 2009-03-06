@@ -68,9 +68,8 @@ public class KmEditor extends Modeler {
 	 */
 	public Object getAdapter(Class type) {
 		if (type == IDocPage.class) {
-			GEFtoEMFCommandStackWrapper wrapper = new
-			GEFtoEMFCommandStackWrapper(getCommandStack());
-			            return new EAnnotationDocPage(wrapper);
+			GEFtoEMFCommandStackWrapper wrapper = new GEFtoEMFCommandStackWrapper(getCommandStack());
+			return new EAnnotationDocPage(wrapper);
 		}
 		return super.getAdapter(type);
 	}
