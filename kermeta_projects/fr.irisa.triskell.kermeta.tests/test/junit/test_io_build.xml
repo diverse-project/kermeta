@@ -37,9 +37,9 @@
 	<!--<property name="emfatic-core.jar" location="..\..\..\org.eclipse.gymnast.runtime.core\${dot.or.bin}"/>-->
 	<property name="emfatic-core.jar" location="${eclipse.home}/plugins/org.eclipse.gymnast.runtime.core_0.3.0.jar"/>
 	
-	<property name="emf.common.jar" location="${eclipse.home}/plugins/org.eclipse.emf.common_2.4.0.v200808251517.jar" />
-	<property name="emf.ecore.jar" location="${eclipse.home}/plugins/org.eclipse.emf.ecore_2.4.1.v200808251517.jar" />
-	<property name="emf.ecore.xmi.jar" location="${eclipse.home}/plugins/org.eclipse.emf.ecore.xmi_2.4.1.v200808251517.jar" />
+	<property name="emf.common.jar" location="${eclipse.home}/plugins/org.eclipse.emf.common_2.4.0.v200902171115.jar" />
+	<property name="emf.ecore.jar" location="${eclipse.home}/plugins/org.eclipse.emf.ecore_2.4.1.v200902171115.jar" />
+	<property name="emf.ecore.xmi.jar" location="${eclipse.home}/plugins/org.eclipse.emf.ecore.xmi_2.4.1.v200902171115.jar" />
 	<property name="emf.validation.jar" location="${eclipse.home}/plugins/org.eclipse.emf.validation_1.2.0.v200807161729.jar" />
 	<property name="debug.core.jar" location="${eclipse.home}/plugins/org.eclipse.debug.core_3.4.0.v20080612.jar" />
 	<property name="equinox.common.jar" location="${eclipse.home}/plugins/org.eclipse.equinox.common_3.4.0.v20080421-2006.jar" />
@@ -53,9 +53,9 @@
 	<property name="ui.console.jar" location="${eclipse.home}/plugins/org.eclipse.ui.console_3.3.0.v20080529-1300.jar" />
 	<property name="jface.jar" location="${eclipse.home}/plugins/org.eclipse.jface_3.4.1.M20080827-2000.jar" />
 	<property name="swt.jar" location="${eclipse.home}/plugins/org.eclipse.swt.gtk.linux.x86_3.4.1.v3449c.jar" />
-	<property name="emf.compare.jar" location="${eclipse.home}/plugins/org.eclipse.emf.compare_0.8.1.v200809170822.jar" />
-	<property name="emf.compare.diff.jar" location="${eclipse.home}/plugins/org.eclipse.emf.compare.diff_0.8.1.v200809170822.jar" />
-	<property name="emf.compare.match.jar" location="${eclipse.home}/plugins/org.eclipse.emf.compare.match_0.8.1.v200809170822.jar" />
+	<property name="emf.compare.jar" location="${eclipse.home}/plugins/org.eclipse.emf.compare_0.8.1.v200902100450.jar" />
+	<property name="emf.compare.diff.jar" location="${eclipse.home}/plugins/org.eclipse.emf.compare.diff_0.8.1.v200902100450.jar" />
+	<property name="emf.compare.match.jar" location="${eclipse.home}/plugins/org.eclipse.emf.compare.match_0.8.1.v200902100450.jar" />
 	<property name="junit4.jar" location="${eclipse.home}/plugins/org.junit4_4.3.1/junit.jar" />
 	<property name="apache.commons.logging.jar" location="..\..\..\org.kermeta.log4j.util\lib\thirdparty\commons-logging-1.1.1\commons-logging-1.1.1.jar" />
 	<property name="apache.commons.logging.adapters.jar" location="..\..\..\org.kermeta.log4j.util\lib\thirdparty\commons-logging-1.1.1\commons-logging-adapters-1.1.1.jar" />
