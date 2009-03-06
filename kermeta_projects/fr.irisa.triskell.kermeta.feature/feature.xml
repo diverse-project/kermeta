@@ -2,7 +2,7 @@
 <feature
       id="fr.irisa.triskell.kermeta"
       label="Kermeta Workbench"
-      version="1.2.0.qualifier"
+      version="1.2.1.qualifier"
       provider-name="IRISA/INRIA"
       image="images/kmt_32.gif">
    <install-handler/>
@@ -47,10 +47,10 @@ GPL license.
          version="0.0.0"/>
 
    <requires>
-      <import feature="fr.irisa.triskell.traceability" version="1.1.0" match="greaterOrEqual"/>
+      <import feature="fr.irisa.triskell.traceability" match="greaterOrEqual"/>
       <import feature="org.eclipse.platform" version="3.3.0" match="greaterOrEqual"/>
-      <import feature="org.kermeta.log4j" version="1.1.0" match="greaterOrEqual"/>
       <import feature="org.eclipse.emf" version="2.4.1.v200808251517" match="greaterOrEqual"/>
+      <import feature="org.kermeta.log4j" version="1.2.0"/>
    </requires>
 
    <plugin
@@ -183,8 +183,7 @@ GPL license.
          id="org.kermeta.log4j.util"
          download-size="0"
          install-size="0"
-         version="0.0.0"
-         unpack="false"/>
+         version="0.0.0"/>
 
    <plugin
          id="org.eclipse.emf.ecoretools.registration"
