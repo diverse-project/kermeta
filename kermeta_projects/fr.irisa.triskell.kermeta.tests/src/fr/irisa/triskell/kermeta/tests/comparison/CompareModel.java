@@ -100,7 +100,7 @@ public class CompareModel {
 	public static void main (String args[]) {
 		String l = "test/interpreter/emf_testcases/instances/060_loadSaveEcoreEnum.ecore";
 		String r = "test/interpreter/emf_testcases/instances/060_loadSaveEcoreEnum.ecore";
-		CompareModel modelComparison = new CompareModel(r, r);
+		CompareModel modelComparison = new CompareModel(l, r);
 		System.out.println(modelComparison.compareWithEcoreUtil());
 		System.out.println(modelComparison.compareWithEMFCompare());
 	}
