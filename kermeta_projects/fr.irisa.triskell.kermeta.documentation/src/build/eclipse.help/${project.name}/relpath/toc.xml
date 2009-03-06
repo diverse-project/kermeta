@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<toc label="Kermeta language" topic="index.html">
+   <topic label="Preface" href="build/eclipse.help/KerMeta-Manual/pr01.html"/>
+   <topic label="Introduction to the&#xA;    language" href="build/eclipse.help/KerMeta-Manual/ch01.html">
+      <topic label="Presentation" href="build/eclipse.help/KerMeta-Manual/ch01.html#sec_introduction_presentation.link"/>
+      <topic label="An imperative syntax" href="build/eclipse.help/KerMeta-Manual/ch01s02.html">
+         <topic label="First Program" href="build/eclipse.help/KerMeta-Manual/ch01s02.html#section_first_program.link"/>
+         <topic label="Classic features" href="build/eclipse.help/KerMeta-Manual/ch01s02.html#d0e149"/>
+         <topic label="Corresponding section in the Reference chapter" href="build/eclipse.help/KerMeta-Manual/ch01s02.html#d0e156"/>
+      </topic>
+      <topic label="An object-oriented language" href="build/eclipse.help/KerMeta-Manual/ch01s03.html">
+         <topic label="Corresponding section in the Reference chapter" href="build/eclipse.help/KerMeta-Manual/ch01s03.html#d0e194"/>
+      </topic>
+      <topic label="A model-oriented language" href="build/eclipse.help/KerMeta-Manual/ch01s04.html">
+         <topic label="Associations : toward a first concrete&#xA;        example of a Kermeta model" href="build/eclipse.help/KerMeta-Manual/ch01s04.html#section_toward_a_first_concrete_example.link"/>
+         <topic label="Loading an existing model" href="build/eclipse.help/KerMeta-Manual/ch01s04.html#d0e268"/>
+         <topic label="Navigation in a model" href="build/eclipse.help/KerMeta-Manual/ch01s04.html#d0e285"/>
+         <topic label="Model type" href="build/eclipse.help/KerMeta-Manual/ch01s04.html#d0e303"/>
+         <topic label="Kermeta model reflexively available" href="build/eclipse.help/KerMeta-Manual/ch01s04.html#d0e310"/>
+         <topic label="Corresponding section in the Reference chapter" href="build/eclipse.help/KerMeta-Manual/ch01s04.html#d0e316"/>
+      </topic>
+      <topic label="Some &#34;advanced&#34; features" href="build/eclipse.help/KerMeta-Manual/ch01s05.html">
+         <topic label="Functions in Kermeta" href="build/eclipse.help/KerMeta-Manual/ch01s05.html#d0e340"/>
+         <topic label="Other advanced features" href="build/eclipse.help/KerMeta-Manual/ch01s05.html#d0e385">
+            <topic label="High level modeling" href="build/eclipse.help/KerMeta-Manual/ch01s05.html#d0e388"/>
+            <topic label="Other technical features" href="build/eclipse.help/KerMeta-Manual/ch01s05.html#d0e401"/>
+         </topic>
+      </topic>
+   </topic>
+   <topic label="Reference" href="build/eclipse.help/KerMeta-Manual/ch02.html">
+      <topic label="Comments" href="build/eclipse.help/KerMeta-Manual/ch02.html#section_comments.link">
+         <topic label="Simple and multi-line text comments" href="build/eclipse.help/KerMeta-Manual/ch02.html#d0e429"/>
+         <topic label="Linked comments" href="build/eclipse.help/KerMeta-Manual/ch02.html#section_linked-comments.link"/>
+      </topic>
+      <topic label="Escaping reserved&#xA;      keywords" href="build/eclipse.help/KerMeta-Manual/ch02s02.html"/>
+      <topic label="Operators" href="build/eclipse.help/KerMeta-Manual/ch02s03.html"/>
+      <topic label="Statements : block, condition,&#xA;      loop" href="build/eclipse.help/KerMeta-Manual/ch02s04.html">
+         <topic label="Block statement" href="build/eclipse.help/KerMeta-Manual/ch02s04.html#d0e820"/>
+         <topic label="Conditional statement" href="build/eclipse.help/KerMeta-Manual/ch02s04.html#d0e835"/>
+         <topic label="Loop Statement" href="build/eclipse.help/KerMeta-Manual/ch02s04.html#d0e890"/>
+      </topic>
+      <topic label="File dependency : structuring code" href="build/eclipse.help/KerMeta-Manual/ch02s05.html">
+         <topic label="Require" href="build/eclipse.help/KerMeta-Manual/ch02s05.html#d0e913"/>
+         <topic label="Accepted require statements" href="build/eclipse.help/KerMeta-Manual/ch02s05.html#d0e961"/>
+         <topic label="Organizing code" href="build/eclipse.help/KerMeta-Manual/ch02s05.html#d0e1020"/>
+      </topic>
+      <topic label="Using&#xA;      Variables" href="build/eclipse.help/KerMeta-Manual/ch02s06.html"/>
+      <topic label="Basic types" href="build/eclipse.help/KerMeta-Manual/ch02s07.html">
+         <topic label="Primitive types" href="build/eclipse.help/KerMeta-Manual/ch02s07.html#d0e1092"/>
+         <topic label="Enumeration types" href="build/eclipse.help/KerMeta-Manual/ch02s07.html#d0e1172"/>
+         <topic label="Local datatype using&#xA;        &#34;alias&#34;" href="build/eclipse.help/KerMeta-Manual/ch02s07.html#section_alias.link"/>
+      </topic>
+      <topic label="Classes and&#xA;      methods" href="build/eclipse.help/KerMeta-Manual/ch02s08.html">
+         <topic label="Classes" href="build/eclipse.help/KerMeta-Manual/ch02s08.html#d0e1241"/>
+         <topic label="Defining operations" href="build/eclipse.help/KerMeta-Manual/ch02s08.html#section_defining_operations.link">
+            <topic label="Result" href="build/eclipse.help/KerMeta-Manual/ch02s08.html#d0e1391"/>
+            <topic label="Operations as main entry point." href="build/eclipse.help/KerMeta-Manual/ch02s08.html#d0e1426"/>
+         </topic>
+         <topic label="Initializing classes" href="build/eclipse.help/KerMeta-Manual/ch02s08.html#d0e1491"/>
+         <topic label="Rationale" href="build/eclipse.help/KerMeta-Manual/ch02s08.html#d0e1502">
+            <topic label="No constructor" href="build/eclipse.help/KerMeta-Manual/ch02s08.html#d0e1507"/>
+            <topic label="No operation overloading" href="build/eclipse.help/KerMeta-Manual/ch02s08.html#d0e1512"/>
+         </topic>
+      </topic>
+      <topic label="Inheritance" href="build/eclipse.help/KerMeta-Manual/ch02s09.html">
+         <topic label="Using simple inheritance" href="build/eclipse.help/KerMeta-Manual/ch02s09.html#d0e1523"/>
+         <topic label="Cast" href="build/eclipse.help/KerMeta-Manual/ch02s09.html#d0e1576">
+            <topic label="Casting using contionnal assignment" href="build/eclipse.help/KerMeta-Manual/ch02s09.html#d0e1587"/>
+            <topic label="Casting using asType" href="build/eclipse.help/KerMeta-Manual/ch02s09.html#d0e1604"/>
+            <topic label="Other useful function when casting" href="build/eclipse.help/KerMeta-Manual/ch02s09.html#d0e1614"/>
+         </topic>
+         <topic label="Using multiple inheritance" href="build/eclipse.help/KerMeta-Manual/ch02s09.html#d0e1625"/>
+         <topic label="Overriding behavior with methods" href="build/eclipse.help/KerMeta-Manual/ch02s09.html#d0e1664"/>
+         <topic label="Some limitations" href="build/eclipse.help/KerMeta-Manual/ch02s09.html#d0e1784">
+            <topic label="Operation redefinition" href="build/eclipse.help/KerMeta-Manual/ch02s09.html#d0e1789"/>
+            <topic label="Operation specialization" href="build/eclipse.help/KerMeta-Manual/ch02s09.html#d0e1894"/>
+            <topic label="Operation overloading" href="build/eclipse.help/KerMeta-Manual/ch02s09.html#d0e1917"/>
+            <topic label="Conflicts related to multiple inheritance" href="build/eclipse.help/KerMeta-Manual/ch02s09.html#d0e1952"/>
+         </topic>
+      </topic>
+      <topic label="Genericity" href="build/eclipse.help/KerMeta-Manual/ch02s10.html">
+         <topic label="Generic classes" href="build/eclipse.help/KerMeta-Manual/ch02s10.html#d0e2082"/>
+         <topic label="Generic operations" href="build/eclipse.help/KerMeta-Manual/ch02s10.html#d0e2168"/>
+         <topic label="Type usable with genericity" href="build/eclipse.help/KerMeta-Manual/ch02s10.html#d0e2207"/>
+      </topic>
+      <topic label="Exception handling" href="build/eclipse.help/KerMeta-Manual/ch02s11.html"/>
+      <topic label="Loading and saving&#xA;      models" href="build/eclipse.help/KerMeta-Manual/ch02s12.html">
+         <topic label="Prepare a model" href="build/eclipse.help/KerMeta-Manual/ch02s12.html#d0e2286"/>
+         <topic label="Load a model from an EMF Resource" href="build/eclipse.help/KerMeta-Manual/ch02s12.html#d0e2296"/>
+         <topic label="Save a model into an EMF Resource" href="build/eclipse.help/KerMeta-Manual/ch02s12.html#d0e2405"/>
+      </topic>
+      <topic label="Packages" href="build/eclipse.help/KerMeta-Manual/ch02s13.html">
+         <topic label="Definition" href="build/eclipse.help/KerMeta-Manual/ch02s13.html#d0e2414"/>
+         <topic label="Use of packages" href="build/eclipse.help/KerMeta-Manual/ch02s13.html#d0e2483"/>
+         <topic label="Syntaxic sugars" href="build/eclipse.help/KerMeta-Manual/ch02s13.html#section_using.link"/>
+      </topic>
+      <topic label="Collections" href="build/eclipse.help/KerMeta-Manual/ch02s14.html">
+         <topic label="Definition and initialization" href="build/eclipse.help/KerMeta-Manual/ch02s14.html#d0e2563"/>
+         <topic label="Some existing useful functions" href="build/eclipse.help/KerMeta-Manual/ch02s14.html#d0e2824"/>
+      </topic>
+      <topic label="Class properties" href="build/eclipse.help/KerMeta-Manual/ch02s15.html">
+         <topic label="Attributes&#xA;        (attribute), references&#xA;        (reference) " href="build/eclipse.help/KerMeta-Manual/ch02s15.html#section_properties-opposite.link"/>
+         <topic label="properties modifiers" href="build/eclipse.help/KerMeta-Manual/ch02s15.html#d0e2972"/>
+         <topic label="Association using opposite properties" href="build/eclipse.help/KerMeta-Manual/ch02s15.html#d0e2982"/>
+         <topic label="Derived properties&#xA;        (property)" href="build/eclipse.help/KerMeta-Manual/ch02s15.html#section_derived_properties.link"/>
+         <topic label="How to access and control the properties in Kermeta" href="build/eclipse.help/KerMeta-Manual/ch02s15.html#d0e3258"/>
+         <topic label="Assignment behavior for attribute (and reference)" href="build/eclipse.help/KerMeta-Manual/ch02s15.html#section_assignment_behavior_4_attribute.link"/>
+      </topic>
+      <topic label="Objects&#xA;      comparison" href="build/eclipse.help/KerMeta-Manual/ch02s16.html">
+         <topic label="equals method" href="build/eclipse.help/KerMeta-Manual/ch02s16.html#d0e3624"/>
+         <topic label="Comparison for Primitive Types" href="build/eclipse.help/KerMeta-Manual/ch02s16.html#d0e3634"/>
+         <topic label="Collection comparison" href="build/eclipse.help/KerMeta-Manual/ch02s16.html#d0e3662"/>
+      </topic>
+      <topic label="Lambda Expressions and&#xA;      functions" href="build/eclipse.help/KerMeta-Manual/ch02s17.html">
+         <topic label="Syntax" href="build/eclipse.help/KerMeta-Manual/ch02s17.html#section_function-syntax.link"/>
+         <topic label="Some existing useful functions" href="build/eclipse.help/KerMeta-Manual/ch02s17.html#d0e3733"/>
+         <topic label="Defining new functions in a class" href="build/eclipse.help/KerMeta-Manual/ch02s17.html#d0e3796"/>
+         <topic label="Defining lambda expression variables" href="build/eclipse.help/KerMeta-Manual/ch02s17.html#d0e3890"/>
+      </topic>
+      <topic label="Dynamic evaluation of&#xA;      Kermeta expressions" href="build/eclipse.help/KerMeta-Manual/ch02s18.html"/>
+      <topic label="Design by contract (pre, post,&#xA;      inv contraints)" href="build/eclipse.help/KerMeta-Manual/ch02s19.html">
+         <topic label="Writing a contract" href="build/eclipse.help/KerMeta-Manual/ch02s19.html#d0e4113">
+            <topic label="pre – post conditions syntax" href="build/eclipse.help/KerMeta-Manual/ch02s19.html#section_pre_post_syntax.link"/>
+            <topic label="Invariant constraint syntax" href="build/eclipse.help/KerMeta-Manual/ch02s19.html#section_inv_syntax.link"/>
+         </topic>
+         <topic label="Checking your constraints" href="build/eclipse.help/KerMeta-Manual/ch02s19.html#d0e4238">
+            <topic label="Checking pre – post condition" href="build/eclipse.help/KerMeta-Manual/ch02s19.html#d0e4241"/>
+            <topic label="Checking invariant" href="build/eclipse.help/KerMeta-Manual/ch02s19.html#d0e4254"/>
+         </topic>
+      </topic>
+      <topic label="Weaving kermeta code" href="build/eclipse.help/KerMeta-Manual/ch02s20.html">
+         <topic label="Textual syntax for merging" href="build/eclipse.help/KerMeta-Manual/ch02s20.html#d0e4308"/>
+         <topic label="Example 1: Simple Class merge" href="build/eclipse.help/KerMeta-Manual/ch02s20.html#d0e4340"/>
+         <topic label="Example 2: merge with feature redefinition" href="build/eclipse.help/KerMeta-Manual/ch02s20.html#d0e4366"/>
+         <topic label="Example 3: merge with operation overload" href="build/eclipse.help/KerMeta-Manual/ch02s20.html#d0e4382"/>
+         <topic label="Aspect and inheritance" href="build/eclipse.help/KerMeta-Manual/ch02s20.html#d0e4400"/>
+         <topic label="Aspect and abstract" href="build/eclipse.help/KerMeta-Manual/ch02s20.html#d0e4405"/>
+         <topic label="Aspect without common base" href="build/eclipse.help/KerMeta-Manual/ch02s20.html#d0e4414"/>
+      </topic>
+      <topic label="Model type" href="build/eclipse.help/KerMeta-Manual/ch02s21.html">
+         <topic label="Definition of a model type" href="build/eclipse.help/KerMeta-Manual/ch02s21.html#d0e4431"/>
+         <topic label="Using Model types variables" href="build/eclipse.help/KerMeta-Manual/ch02s21.html#d0e4441"/>
+         <topic label="Model type serialisation" href="build/eclipse.help/KerMeta-Manual/ch02s21.html#d0e4461"/>
+         <topic label="Model type conformance" href="build/eclipse.help/KerMeta-Manual/ch02s21.html#d0e4480"/>
+         <topic label="Using Model types in generic classes/operations" href="build/eclipse.help/KerMeta-Manual/ch02s21.html#d0e4501"/>
+         <topic label="A more complex example of conformance : FSM variants" href="build/eclipse.help/KerMeta-Manual/ch02s21.html#d0e4506"/>
+      </topic>
+      <topic label="Using existing java code in&#xA;      Kermeta" href="build/eclipse.help/KerMeta-Manual/ch02s22.html">
+         <topic label="Using extern to call&#xA;        java code" href="build/eclipse.help/KerMeta-Manual/ch02s22.html#section_extern_java_code.link"/>
+         <topic label="Requiring jar file&#xA;        to call java code" href="build/eclipse.help/KerMeta-Manual/ch02s22.html#section_seamless_java_code.link"/>
+      </topic>
+      <topic label="Cloning objects" href="build/eclipse.help/KerMeta-Manual/ch02s23.html"/>
+   </topic>
+   <topic label="Kermeta Metamodel" href="build/eclipse.help/KerMeta-Manual/ch03.html">
+      <topic label="Architecture" href="build/eclipse.help/KerMeta-Manual/ch03.html#section_architecture.link"/>
+      <topic label="Structure package" href="build/eclipse.help/KerMeta-Manual/ch03s02.html">
+         <topic label="NamedElement view" href="build/eclipse.help/KerMeta-Manual/ch03s02.html#d0e4907"/>
+         <topic label="Type system view" href="build/eclipse.help/KerMeta-Manual/ch03s02.html#d0e4920"/>
+      </topic>
+      <topic label="Behavior package" href="build/eclipse.help/KerMeta-Manual/ch03s03.html">
+         <topic label="Control Structures" href="build/eclipse.help/KerMeta-Manual/ch03s03.html#d0e4947"/>
+         <topic label="Variables" href="build/eclipse.help/KerMeta-Manual/ch03s03.html#d0e4959"/>
+         <topic label="Call Expressions" href="build/eclipse.help/KerMeta-Manual/ch03s03.html#d0e4969">
+            <topic label="CallSuperOperation" href="build/eclipse.help/KerMeta-Manual/ch03s03.html#d0e4979"/>
+            <topic label="CallVariable" href="build/eclipse.help/KerMeta-Manual/ch03s03.html#d0e5030"/>
+            <topic label="CallResult" href="build/eclipse.help/KerMeta-Manual/ch03s03.html#d0e5093"/>
+            <topic label="CallFeature and SelfExpression" href="build/eclipse.help/KerMeta-Manual/ch03s03.html#d0e5118"/>
+         </topic>
+         <topic label="Assignment" href="build/eclipse.help/KerMeta-Manual/ch03s03.html#d0e5191"/>
+         <topic label="Literals" href="build/eclipse.help/KerMeta-Manual/ch03s03.html#d0e5241"/>
+         <topic label="Lambda&#xA;        Expression" href="build/eclipse.help/KerMeta-Manual/ch03s03.html#section_lambda_expression_mm.link"/>
+      </topic>
+      <topic label="Viewing Kermeta metamodel" href="build/eclipse.help/KerMeta-Manual/ch03s04.html"/>
+   </topic>
+   <topic label="Kermeta framework" href="build/eclipse.help/KerMeta-Manual/ch04.html"/>
+   <topic label="Language keywords" href="build/eclipse.help/KerMeta-Manual/apa.html"/>
+</toc>
