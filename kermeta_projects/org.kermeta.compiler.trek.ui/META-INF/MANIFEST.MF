@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Trek UI Plug-in for Kermeta Compiler
 Bundle-SymbolicName: org.kermeta.compiler.trek.ui;singleton:=true
-Bundle-Version: 0.0.99.qualifier
+Bundle-Version: 0.1.0
 Bundle-Activator: org.kermeta.compiler.trek.ui.Activator
 Require-Bundle: org.eclipse.ui,
  org.eclipse.core.runtime,

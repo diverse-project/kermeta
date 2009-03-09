@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Kermeta Compiler Helper Generator
 Bundle-SymbolicName: org.kermeta.compiler.generator;singleton:=true
-Bundle-Version: 1.2.0.qualifier
+Bundle-Version: 1.3.0
 Bundle-Activator: org.kermeta.compiler.generator.internal.GeneratorPlugin
 Bundle-Vendor: IRISA/INRIA
 Bundle-Localization: plugin
