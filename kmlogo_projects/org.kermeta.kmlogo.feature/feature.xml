@@ -2,7 +2,7 @@
 <feature
       id="org.kermeta.kmlogo.feature"
       label="Logo language Kermeta sample"
-      version="1.2.0.qualifier"
+      version="1.3.0"
       provider-name="IRISA/INRIA">
 
    <description url="http://www.kermeta.org">
