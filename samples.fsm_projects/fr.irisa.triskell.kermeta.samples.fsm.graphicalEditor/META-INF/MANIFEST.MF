@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Fsm Graphical Editor
 Bundle-SymbolicName: fr.irisa.triskell.kermeta.samples.fsm.graphicalEditor;singleton:=true
-Bundle-Version: 1.2.0.qualifier
+Bundle-Version: 1.3.0
 Bundle-Activator: fr.irisa.triskell.kermeta.samples.fsm.graphicalEditor.FsmPlugin
 Bundle-Vendor: IRISA/INRIA
 Bundle-Localization: plugin
