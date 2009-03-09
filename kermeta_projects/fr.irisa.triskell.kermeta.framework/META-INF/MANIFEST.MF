@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Kermeta Framework Plug-in
 Bundle-SymbolicName: fr.irisa.triskell.kermeta.framework
-Bundle-Version: 1.1.0.qualifier
+Bundle-Version: 1.3.0
 Export-Package: .
 Require-Bundle: fr.irisa.triskell.kermeta.interpreter,
  fr.irisa.triskell.kermeta.io,
