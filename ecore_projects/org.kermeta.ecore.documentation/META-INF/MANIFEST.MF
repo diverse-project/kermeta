@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Ecore MDK Documentation Plug-in
 Bundle-SymbolicName: org.kermeta.ecore.documentation;singleton:=true
-Bundle-Version: 1.2.0.qualifier
+Bundle-Version: 1.3.0
 Bundle-Activator: org.kermeta.ecore.documentation.Activator
 Bundle-Vendor: IRISA/INRIA
 Require-Bundle: org.eclipse.ui,
