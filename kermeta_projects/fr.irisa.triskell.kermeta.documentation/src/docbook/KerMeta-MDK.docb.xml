@@ -231,5 +231,40 @@ anOperation.containedType.add(aClass)
       	in an ecore file, you'll need to convert it into a km file first.
       	</note>
     </section>
+    <section>
+      	<title>Sample use of the kmt prettyprinter : prettyprinting a failed Constraint </title>
+      	<note>The base of this prettyprinter was written before the introduction of aspect in Kermeta. For a better design, 
+      	we would have now weaved the prettyprint operation rather than weaved a visitor.
+      	</note>
+      	<para>Here is a sample use of this printer (prettyprints the body of a failed invariant). Its main class is <literal>kermeta::utils::BasicPrettyPrinter</literal>
+      	</para>
+      	<programlisting language="kermeta">
+      	...
+      	require "platform:/plugin/org.kermeta.language.mdk/src/kmt/language/visitor/prettyprinters/kmtPrettyPrinter.kmt"
+      	
+      	...
+      	do 
+	    	// checking invariants
+	    	inputResource.instances.each{e|
+	    		e.checkAllInvariants
+    		}
+    		stdio.writeln("model is valid")
+    		
+    	rescue (myError : ConstraintViolatedInv)
+    		// note that this locator helper work only for UMl model and is provided by UML MDK
+    		// you 
+    		var locatorhelper : UMLUtils::UMLElementLocatorHelper init UMLUtils::UMLElementLocatorHelper.new
+		    stdio.errorln(myError.message)
+		    stdio.errorln("Faulty object is : " + locatorhelper.getLocationString(myError.constraintAppliedTo))
+		    
+		    // Do not forget to initialize the BasicPrettyPrinter !
+		    var basicPP : kermeta::utils::BasicPrettyPrinter init kermeta::utils::BasicPrettyPrinter.new.initialize
+		    stdio.errorln("Violated constraint is : " +basicPP.accept(myError.failedConstraint.body, 0))
+		    stdio.errorln(myError.stackTrace)
+		end   
+      	</programlisting>
+      	<warning>Do not forget to initialize the BasicPrettyPrinter !
+      	</warning>
+    </section>
   </chapter>
 </book>
