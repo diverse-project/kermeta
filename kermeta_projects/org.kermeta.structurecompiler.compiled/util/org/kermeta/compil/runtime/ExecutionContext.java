@@ -98,7 +98,12 @@ public class ExecutionContext {
 	private static URI getProjectLocationAccordingToClassLocation() {
 		String local_path = ExecutionContext.class.getProtectionDomain()
 				.getCodeSource().getLocation().toExternalForm();
-		local_path = local_path.replace("bin/", "");
+		
+		if( local_path.endsWith(".jar") ) {
+			local_path = "jar:" + local_path + "!/";
+		} else {
+			local_path = local_path.replace("bin/", "");
+		}
 		return URI.createURI(local_path);
 	}
 
