@@ -1,0 +1,690 @@
+<?xml version="1.0" encoding="ASCII"?>
+<ecore:EPackage xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="emf.spoon"
+    nsURI="emf.spoon" nsPrefix="emf.spoon">
+  <eClassifiers xsi:type="ecore:EDataType" name="Object" instanceClassName="java.lang.Object"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="List" instanceClassName="java.util.List"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="Void" instanceClassName="java.lang.Void"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="Integer" instanceClassName="java.lang.Integer"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="Boolean" instanceClassName="java.lang.Boolean"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="BinaryOperatorKind" instanceClassName="spoon.reflect.code.BinaryOperatorKind"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="TemplateParameter" instanceClassName="spoon.template.TemplateParameter"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="Filter" instanceClassName="spoon.reflect.visitor.Filter"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="Throwable" instanceClassName="java.lang.Throwable"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="String" instanceClassName="java.lang.String"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="TemplateParameterList" instanceClassName="spoon.template.TemplateParameterList"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="UnaryOperatorKind" instanceClassName="spoon.reflect.code.UnaryOperatorKind"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="Annotation" instanceClassName="java.lang.annotation.Annotation"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="Map" instanceClassName="java.util.Map"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="Set" instanceClassName="java.util.Set"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="Comparable" instanceClassName="java.lang.Comparable"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="FactoryAccessor" instanceClassName="spoon.processing.FactoryAccessor"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="CtVisitor" instanceClassName="spoon.reflect.visitor.CtVisitor"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="Class" instanceClassName="java.lang.Class"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="Enum" instanceClassName="java.lang.Enum"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="ModifierKind" instanceClassName="spoon.reflect.declaration.ModifierKind"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="Cloneable" instanceClassName="java.lang.Cloneable"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="CloneNotSupportedException" instanceClassName="java.lang.CloneNotSupportedException"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="File" instanceClassName="java.io.File"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="Method" instanceClassName="java.lang.reflect.Method"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="Field" instanceClassName="java.lang.reflect.Field"/>
+  <eSubpackages name="reflect" nsURI="emf.spoon.reflect" nsPrefix="emf.spoon.reflect">
+    <eSubpackages name="code" nsURI="emf.spoon.reflect.code" nsPrefix="emf.spoon.reflect.code">
+      <eClassifiers xsi:type="ecore:EClass" name="CtAbstractInvocation" eSuperTypes="#//facade/CtAbstractInvocation">
+        <eStructuralFeatures xsi:type="ecore:EReference" name="Executable" eType="#//reflect/reference/CtExecutableReference"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="Arguments" upperBound="-1"
+            eType="#//reflect/code/CtExpression"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="CtArrayAccess" eSuperTypes="#//reflect/code/CtTargetedExpression #//facade/CtArrayAccess">
+        <eStructuralFeatures xsi:type="ecore:EReference" name="IndexExpression" eType="#//reflect/code/CtExpression"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="CtAssert" eSuperTypes="#//reflect/code/CtStatement #//facade/CtAssert">
+        <eStructuralFeatures xsi:type="ecore:EReference" name="Expression" eType="#//reflect/code/CtExpression"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="AssertExpression" eType="#//reflect/code/CtExpression"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="CtAssignment" eSuperTypes="#//reflect/code/CtExpression #//reflect/code/CtStatement #//facade/CtAssignment">
+        <eStructuralFeatures xsi:type="ecore:EReference" name="Assignment" eType="#//reflect/code/CtExpression"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="Assigned" eType="#//reflect/code/CtExpression"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="CtBinaryOperator" eSuperTypes="#//reflect/code/CtExpression #//facade/CtBinaryOperator">
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="Kind" eType="#//BinaryOperatorKind"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="RightHandOperand" eType="#//reflect/code/CtExpression"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="LeftHandOperand" eType="#//reflect/code/CtExpression"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="CtBlock" eSuperTypes="#//reflect/code/CtStatement #//facade/CtBlock">
+        <eOperations name="insertAfter" eType="#//Void">
+          <eParameters name="insertionPoints" eType="#//Filter"/>
+          <eParameters name="statement" eType="#//reflect/code/CtStatement"/>
+        </eOperations>
+        <eOperations name="insertAfter" eType="#//Void">
+          <eParameters name="insertionPoints" eType="#//Filter"/>
+          <eParameters name="statements" eType="#//reflect/code/CtStatementList"/>
+        </eOperations>
+        <eOperations name="insertBefore" eType="#//Void">
+          <eParameters name="insertionPoints" eType="#//Filter"/>
+          <eParameters name="statement" eType="#//reflect/code/CtStatement"/>
+        </eOperations>
+        <eOperations name="insertBefore" eType="#//Void">
+          <eParameters name="insertionPoints" eType="#//Filter"/>
+          <eParameters name="statements" eType="#//reflect/code/CtStatementList"/>
+        </eOperations>
+        <eOperations name="insertBegin" eType="#//Void">
+          <eParameters name="statement" eType="#//reflect/code/CtStatement"/>
+        </eOperations>
+        <eOperations name="insertBegin" eType="#//Void">
+          <eParameters name="statements" eType="#//reflect/code/CtStatementList"/>
+        </eOperations>
+        <eOperations name="insertEnd" eType="#//Void">
+          <eParameters name="statement" eType="#//reflect/code/CtStatement"/>
+        </eOperations>
+        <eOperations name="insertEnd" eType="#//Void">
+          <eParameters name="statements" eType="#//reflect/code/CtStatementList"/>
+        </eOperations>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="Statements" upperBound="-1"
+            eType="#//reflect/code/CtStatement"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="CtBreak" eSuperTypes="#//reflect/code/CtCFlowBreak #//facade/CtBreak">
+        <eStructuralFeatures xsi:type="ecore:EReference" name="LabelledStatement"
+            eType="#//reflect/code/CtStatement"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="CtCFlowBreak" eSuperTypes="#//reflect/code/CtStatement #//facade/CtCFlowBreak"/>
+      <eClassifiers xsi:type="ecore:EClass" name="CtCase" eSuperTypes="#//reflect/code/CtStatement #//facade/CtCase">
+        <eStructuralFeatures xsi:type="ecore:EReference" name="CaseExpression" eType="#//reflect/code/CtExpression"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="Statements" upperBound="-1"
+            eType="#//reflect/code/CtStatement"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="CtCatch" eSuperTypes="#//reflect/code/CtCodeElement #//facade/CtCatch">
+        <eStructuralFeatures xsi:type="ecore:EReference" name="Body" eType="#//reflect/code/CtBlock"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="Parameter" eType="#//reflect/code/CtLocalVariable"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="CtCodeElement" eSuperTypes="#//reflect/declaration/CtElement #//facade/CtCodeElement"/>
+      <eClassifiers xsi:type="ecore:EClass" name="CtConditional" eSuperTypes="#//reflect/code/CtExpression #//facade/CtConditional">
+        <eStructuralFeatures xsi:type="ecore:EReference" name="ElseExpression" eType="#//reflect/code/CtExpression"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="Condition" eType="#//reflect/code/CtExpression"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="ThenExpression" eType="#//reflect/code/CtExpression"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="CtContinue" eSuperTypes="#//reflect/code/CtCFlowBreak #//facade/CtContinue">
+        <eStructuralFeatures xsi:type="ecore:EReference" name="LabelledStatement"
+            eType="#//reflect/code/CtStatement"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="CtDo" eSuperTypes="#//reflect/code/CtLoop #//facade/CtDo">
+        <eStructuralFeatures xsi:type="ecore:EReference" name="LoopingExpression"
+            eType="#//reflect/code/CtExpression"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="CtExpression" eSuperTypes="#//reflect/code/CtCodeElement #//reflect/declaration/CtTypedElement #//facade/CtExpression">
+        <eStructuralFeatures xsi:type="ecore:EReference" name="TypeCasts" upperBound="-1"
+            eType="#//reflect/reference/CtTypeReference"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="CtFieldAccess" eSuperTypes="#//reflect/code/CtTargetedExpression #//reflect/code/CtVariableAccess #//facade/CtFieldAccess"/>
+      <eClassifiers xsi:type="ecore:EClass" name="CtFor" eSuperTypes="#//reflect/code/CtLoop #//facade/CtFor">
+        <eStructuralFeatures xsi:type="ecore:EReference" name="ForInit" upperBound="-1"
+            eType="#//reflect/code/CtStatement"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="ForUpdate" upperBound="-1"
+            eType="#//reflect/code/CtStatement"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="Expression" eType="#//reflect/code/CtExpression"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="CtForEach" eSuperTypes="#//reflect/code/CtLoop #//facade/CtForEach">
+        <eStructuralFeatures xsi:type="ecore:EReference" name="Expression" eType="#//reflect/code/CtExpression"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="Variable" eType="#//reflect/code/CtLocalVariable"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="CtIf" eSuperTypes="#//reflect/code/CtStatement #//facade/CtIf">
+        <eStructuralFeatures xsi:type="ecore:EReference" name="ThenStatement" eType="#//reflect/code/CtStatement"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="Condition" eType="#//reflect/code/CtExpression"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="ElseStatement" eType="#//reflect/code/CtStatement"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="CtInvocation" eSuperTypes="#//reflect/code/CtAbstractInvocation #//reflect/code/CtStatement #//reflect/code/CtTargetedExpression #//facade/CtInvocation"/>
+      <eClassifiers xsi:type="ecore:EClass" name="CtLiteral" eSuperTypes="#//reflect/code/CtExpression #//facade/CtLiteral">
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="Value" eType="#//Object"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="CtLocalVariable" eSuperTypes="#//reflect/code/CtStatement #//reflect/declaration/CtVariable #//facade/CtLocalVariable"/>
+      <eClassifiers xsi:type="ecore:EClass" name="CtLoop" eSuperTypes="#//reflect/code/CtStatement #//facade/CtLoop">
+        <eStructuralFeatures xsi:type="ecore:EReference" name="Body" eType="#//reflect/code/CtStatement"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="CtNewArray" eSuperTypes="#//reflect/code/CtExpression #//facade/CtNewArray">
+        <eStructuralFeatures xsi:type="ecore:EReference" name="DimensionExpressions"
+            upperBound="-1" eType="#//reflect/code/CtExpression"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="Elements" upperBound="-1"
+            eType="#//reflect/code/CtExpression"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="CtNewClass" eSuperTypes="#//reflect/code/CtAbstractInvocation #//reflect/code/CtExpression #//reflect/code/CtStatement #//facade/CtNewClass">
+        <eStructuralFeatures xsi:type="ecore:EReference" name="AnnonymousClass" eType="#//reflect/declaration/CtClass"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="CtOperatorAssignment" eSuperTypes="#//reflect/code/CtAssignment #//facade/CtOperatorAssignment">
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="Kind" eType="#//BinaryOperatorKind"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="CtReturn" eSuperTypes="#//reflect/code/CtCFlowBreak #//facade/CtReturn">
+        <eStructuralFeatures xsi:type="ecore:EReference" name="ReturnedExpression"
+            eType="#//reflect/code/CtExpression"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="CtStatement" eSuperTypes="#//reflect/code/CtCodeElement #//facade/CtStatement">
+        <eOperations name="insertAfter" eType="#//Void">
+          <eParameters name="statement" eType="#//reflect/code/CtStatement"/>
+        </eOperations>
+        <eOperations name="insertAfter" eType="#//Void">
+          <eParameters name="statements" eType="#//reflect/code/CtStatementList"/>
+        </eOperations>
+        <eOperations name="insertBefore" eType="#//Void">
+          <eParameters name="statement" eType="#//reflect/code/CtStatement"/>
+        </eOperations>
+        <eOperations name="insertBefore" eType="#//Void">
+          <eParameters name="statements" eType="#//reflect/code/CtStatementList"/>
+        </eOperations>
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="Label" eType="#//String"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="CtStatementList" eSuperTypes="#//reflect/code/CtCodeElement #//facade/CtStatementList">
+        <eStructuralFeatures xsi:type="ecore:EReference" name="Statements" upperBound="-1"
+            eType="#//reflect/code/CtStatement"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="CtSwitch" eSuperTypes="#//reflect/code/CtStatement #//facade/CtSwitch">
+        <eStructuralFeatures xsi:type="ecore:EReference" name="Selector" eType="#//reflect/code/CtExpression"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="Cases" upperBound="-1"
+            eType="#//reflect/code/CtCase"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="CtSynchronized" eSuperTypes="#//reflect/code/CtStatement #//facade/CtSynchronized">
+        <eStructuralFeatures xsi:type="ecore:EReference" name="Block" eType="#//reflect/code/CtBlock"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="Expression" eType="#//reflect/code/CtExpression"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="CtTargetedExpression" eSuperTypes="#//reflect/code/CtExpression #//facade/CtTargetedExpression">
+        <eStructuralFeatures xsi:type="ecore:EReference" name="Target" eType="#//reflect/code/CtExpression"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="CtThrow" eSuperTypes="#//reflect/code/CtCFlowBreak #//facade/CtThrow">
+        <eStructuralFeatures xsi:type="ecore:EReference" name="ThrownExpression" eType="#//reflect/code/CtExpression"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="CtTry" eSuperTypes="#//reflect/code/CtStatement #//facade/CtTry">
+        <eStructuralFeatures xsi:type="ecore:EReference" name="Finalizer" eType="#//reflect/code/CtBlock"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="Body" eType="#//reflect/code/CtBlock"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="Catchers" upperBound="-1"
+            eType="#//reflect/code/CtCatch"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="CtUnaryOperator" eSuperTypes="#//reflect/code/CtExpression #//reflect/code/CtStatement #//facade/CtUnaryOperator">
+        <eStructuralFeatures xsi:type="ecore:EReference" name="Operand" eType="#//reflect/code/CtExpression"/>
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="Kind" eType="#//UnaryOperatorKind"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="CtVariableAccess" eSuperTypes="#//reflect/code/CtExpression #//facade/CtVariableAccess">
+        <eStructuralFeatures xsi:type="ecore:EReference" name="Variable" eType="#//reflect/reference/CtVariableReference"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="CtWhile" eSuperTypes="#//reflect/code/CtLoop #//facade/CtWhile">
+        <eStructuralFeatures xsi:type="ecore:EReference" name="LoopingExpression"
+            eType="#//reflect/code/CtExpression"/>
+      </eClassifiers>
+    </eSubpackages>
+    <eSubpackages name="declaration" nsURI="emf.spoon.reflect.declaration" nsPrefix="emf.spoon.reflect.declaration">
+      <eClassifiers xsi:type="ecore:EClass" name="CtAnnotation" eSuperTypes="#//reflect/declaration/CtElement #//facade/CtAnnotation">
+        <eOperations name="getElementValue" eType="#//Object">
+          <eParameters name="key" eType="#//String"/>
+        </eOperations>
+        <eOperations name="getElementValues" eType="#//Map">
+          <eAnnotations source="SpoonGenerics">
+            <details key="type" value="java.lang.String"/>
+          </eAnnotations>
+          <eAnnotations source="SpoonGenerics">
+            <details key="type" value="java.lang.Object"/>
+          </eAnnotations>
+        </eOperations>
+        <eOperations name="setElementValues" eType="#//Void">
+          <eParameters name="values" eType="#//Map">
+            <eAnnotations source="SpoonGenerics">
+              <details key="type" value="java.lang.String"/>
+            </eAnnotations>
+            <eAnnotations source="SpoonGenerics">
+              <details key="type" value="java.lang.Object"/>
+            </eAnnotations>
+          </eParameters>
+        </eOperations>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="AnnotationType" eType="#//reflect/reference/CtTypeReference"/>
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="ActualAnnotation" eType="#//Object"
+            changeable="false"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="CtAnnotationType" eSuperTypes="#//reflect/declaration/CtSimpleType #//facade/CtAnnotationType"/>
+      <eClassifiers xsi:type="ecore:EClass" name="CtAnonymousExecutable" eSuperTypes="#//reflect/declaration/CtElement #//reflect/declaration/CtModifiable #//facade/CtAnonymousExecutable">
+        <eStructuralFeatures xsi:type="ecore:EReference" name="Body" eType="#//reflect/code/CtBlock"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="OwnerClass" eType="#//reflect/declaration/CtClass"
+            changeable="false" eOpposite="#//reflect/declaration/CtClass/AnonymousExecutables"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="CtClass" eSuperTypes="#//reflect/declaration/CtType #//facade/CtClass">
+        <eOperations name="getConstructor" eType="#//reflect/declaration/CtConstructor">
+          <eParameters name="parameterTypes" eType="#//List">
+            <eAnnotations source="SpoonGenerics">
+              <details key="type" value="spoon.reflect.reference.CtTypeReference"/>
+            </eAnnotations>
+          </eParameters>
+        </eOperations>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="Superclass" eType="#//reflect/reference/CtTypeReference"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="AnonymousExecutables"
+            upperBound="-1" eType="#//reflect/declaration/CtAnonymousExecutable" eOpposite="#//reflect/declaration/CtAnonymousExecutable/OwnerClass"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="Constructors" upperBound="-1"
+            eType="#//reflect/declaration/CtConstructor"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="CtConstructor" eSuperTypes="#//reflect/declaration/CtExecutable #//facade/CtConstructor"/>
+      <eClassifiers xsi:type="ecore:EClass" name="CtElement" eSuperTypes="#//facade/CtElement">
+        <eOperations name="accept" eType="#//Void">
+          <eParameters name="visitor" eType="#//CtVisitor"/>
+        </eOperations>
+        <eOperations name="getAnnotatedChildren" eType="#//Object">
+          <eAnnotations source="SpoonGenerics">
+            <details key="type" value="spoon.reflect.declaration.CtElement"/>
+          </eAnnotations>
+          <eParameters name="annotationType" eType="#//Class"/>
+        </eOperations>
+        <eOperations name="getAnnotation" eType="#//Object">
+          <eAnnotations source="SpoonGenerics">
+            <details key="type" value="java.lang.annotation.Annotation"/>
+          </eAnnotations>
+          <eParameters name="annotationType" eType="#//Class"/>
+        </eOperations>
+        <eOperations name="getAnnotation" eType="#//Object">
+          <eAnnotations source="SpoonGenerics">
+            <details key="type" value="java.lang.annotation.Annotation"/>
+          </eAnnotations>
+          <eParameters name="annotationType" eType="#//reflect/reference/CtTypeReference"/>
+        </eOperations>
+        <eOperations name="getParent" eType="#//Object">
+          <eAnnotations source="SpoonGenerics">
+            <details key="type" value="spoon.reflect.declaration.CtElement"/>
+          </eAnnotations>
+          <eParameters name="parentType" eType="#//Class"/>
+        </eOperations>
+        <eOperations name="replace" eType="#//Void">
+          <eParameters name="element" eType="#//reflect/declaration/CtElement"/>
+        </eOperations>
+        <eOperations name="replace" eType="#//Void">
+          <eParameters name="replacementPoints" eType="#//Filter"/>
+          <eParameters name="element" eType="#//reflect/declaration/CtElement"/>
+        </eOperations>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="Annotations" upperBound="-1"
+            eType="#//reflect/declaration/CtAnnotation"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="Position" eType="#//reflect/declaration/SourcePosition"/>
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="DocComment" eType="#//String"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="Parent" eType="#//reflect/declaration/CtElement"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="CtEnum" eSuperTypes="#//reflect/declaration/CtSimpleType #//facade/CtEnum"/>
+      <eClassifiers xsi:type="ecore:EClass" name="CtExecutable" eSuperTypes="#//reflect/declaration/CtGenericElement #//reflect/declaration/CtNamedElement #//facade/CtExecutable">
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="EXECUTABLE_SEPARATOR"
+            eType="#//String">
+          <eAnnotations source="SpoonGenerics">
+            <details key="type" value="java.lang.String"/>
+          </eAnnotations>
+        </eStructuralFeatures>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="Parameters" upperBound="-1"
+            eType="#//reflect/declaration/CtParameter"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="Body" eType="#//reflect/code/CtBlock"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="ThrownTypes" upperBound="-1"
+            eType="#//reflect/reference/CtTypeReference"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="DeclaringType" eType="#//reflect/declaration/CtType"
+            changeable="false"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="CtField" eSuperTypes="#//reflect/declaration/CtNamedElement #//reflect/declaration/CtVariable #//facade/CtField">
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="FIELD_SEPARATOR" eType="#//String">
+          <eAnnotations source="SpoonGenerics">
+            <details key="type" value="java.lang.String"/>
+          </eAnnotations>
+        </eStructuralFeatures>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="DeclaringType" eType="#//reflect/declaration/CtSimpleType"
+            changeable="false" eOpposite="#//reflect/declaration/CtSimpleType/Fields"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="CtGenericElement" eSuperTypes="#//reflect/declaration/CtElement #//facade/CtGenericElement">
+        <eStructuralFeatures xsi:type="ecore:EReference" name="FormalTypeParameters"
+            upperBound="-1" eType="#//reflect/reference/CtTypeReference"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="CtInterface" eSuperTypes="#//reflect/declaration/CtType #//facade/CtInterface"/>
+      <eClassifiers xsi:type="ecore:EClass" name="CtMethod" eSuperTypes="#//reflect/declaration/CtExecutable #//reflect/declaration/CtTypedElement #//facade/CtMethod"/>
+      <eClassifiers xsi:type="ecore:EClass" name="CtModifiable" eSuperTypes="#//facade/CtModifiable">
+        <eOperations name="hasModifier" eType="#//Boolean">
+          <eParameters name="modifier" eType="#//ModifierKind"/>
+        </eOperations>
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="Modifiers" upperBound="-1"
+            eType="#//ModifierKind"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="CtNamedElement" eSuperTypes="#//reflect/declaration/CtElement #//reflect/declaration/CtModifiable #//facade/CtNamedElement">
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="SimpleName" eType="#//String"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="Reference" eType="#//reflect/reference/CtReference"
+            changeable="false"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="CtPackage" eSuperTypes="#//reflect/declaration/CtNamedElement #//facade/CtPackage">
+        <eOperations name="getPackage" eType="#//reflect/declaration/CtPackage">
+          <eParameters name="name" eType="#//String"/>
+        </eOperations>
+        <eOperations name="getType" eType="#//reflect/declaration/CtSimpleType">
+          <eParameters name="simpleName" eType="#//String"/>
+        </eOperations>
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="PACKAGE_SEPARATOR"
+            eType="#//String">
+          <eAnnotations source="SpoonGenerics">
+            <details key="type" value="java.lang.String"/>
+          </eAnnotations>
+        </eStructuralFeatures>
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="TOP_LEVEL_PACKAGE_NAME"
+            eType="#//String">
+          <eAnnotations source="SpoonGenerics">
+            <details key="type" value="java.lang.String"/>
+          </eAnnotations>
+        </eStructuralFeatures>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="Packages" upperBound="-1"
+            eType="#//reflect/declaration/CtPackage" eOpposite="#//reflect/declaration/CtPackage/DeclaringPackage"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="Types" upperBound="-1"
+            eType="#//reflect/declaration/CtSimpleType" eOpposite="#//reflect/declaration/CtSimpleType/Package"/>
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="QualifiedName" eType="#//String"
+            changeable="false"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="DeclaringPackage" eType="#//reflect/declaration/CtPackage"
+            changeable="false" eOpposite="#//reflect/declaration/CtPackage/Packages"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="CtParameter" eSuperTypes="#//reflect/declaration/CtNamedElement #//reflect/declaration/CtVariable #//facade/CtParameter">
+        <eOperations name="isVarArgs" eType="#//Boolean"/>
+        <eOperations name="setVarArgs" eType="#//Void">
+          <eParameters name="varArgs" eType="#//Boolean"/>
+        </eOperations>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="CtSimpleType" eSuperTypes="#//reflect/declaration/CtNamedElement #//facade/CtSimpleType">
+        <eOperations name="getField" eType="#//reflect/declaration/CtField">
+          <eParameters name="name" eType="#//String"/>
+        </eOperations>
+        <eOperations name="isTopLevel" eType="#//Boolean"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="Fields" upperBound="-1"
+            eType="#//reflect/declaration/CtField" eOpposite="#//reflect/declaration/CtField/DeclaringType"/>
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="ActualClass" eType="#//Class"
+            changeable="false"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="DeclaringType" eType="#//reflect/declaration/CtType"
+            changeable="false" eOpposite="#//reflect/declaration/CtType/NestedTypes"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="AllFields" upperBound="-1"
+            eType="#//reflect/declaration/CtField" changeable="false" eOpposite="#//reflect/declaration/CtField/DeclaringType"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="Package" eType="#//reflect/declaration/CtPackage"
+            changeable="false" eOpposite="#//reflect/declaration/CtPackage/Types"/>
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="QualifiedName" eType="#//String"
+            changeable="false"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="CtType" eSuperTypes="#//reflect/declaration/CtGenericElement #//reflect/declaration/CtSimpleType #//facade/CtType">
+        <eOperations name="getMethod" eType="#//reflect/declaration/CtMethod">
+          <eParameters name="name" eType="#//String"/>
+          <eParameters name="parameterTypes" eType="#//List">
+            <eAnnotations source="SpoonGenerics">
+              <details key="type" value="spoon.reflect.reference.CtTypeReference"/>
+            </eAnnotations>
+          </eParameters>
+        </eOperations>
+        <eOperations name="getMethod" eType="#//Object">
+          <eAnnotations source="SpoonGenerics">
+            <details key="type" value="java.lang.Object"/>
+          </eAnnotations>
+          <eParameters name="returnType" eType="#//reflect/reference/CtTypeReference"/>
+          <eParameters name="name" eType="#//String"/>
+          <eParameters name="parameterTypes" eType="#//List">
+            <eAnnotations source="SpoonGenerics">
+              <details key="type" value="spoon.reflect.reference.CtTypeReference"/>
+            </eAnnotations>
+          </eParameters>
+        </eOperations>
+        <eOperations name="getNestedType" eType="#//reflect/declaration/CtSimpleType">
+          <eParameters name="name" eType="#//String"/>
+        </eOperations>
+        <eOperations name="setSuperInterfaces" eType="#//Void">
+          <eParameters name="interfaces" eType="#//Set">
+            <eAnnotations source="SpoonGenerics">
+              <details key="type" value="spoon.reflect.reference.CtTypeReference"/>
+            </eAnnotations>
+          </eParameters>
+        </eOperations>
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="INNERTTYPE_SEPARATOR"
+            eType="#//String">
+          <eAnnotations source="SpoonGenerics">
+            <details key="type" value="java.lang.String"/>
+          </eAnnotations>
+        </eStructuralFeatures>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="NestedTypes" upperBound="-1"
+            eType="#//reflect/declaration/CtSimpleType" eOpposite="#//reflect/declaration/CtSimpleType/DeclaringType"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="Methods" upperBound="-1"
+            eType="#//reflect/declaration/CtMethod"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="Superinterfaces" upperBound="-1"
+            eType="#//reflect/reference/CtTypeReference" changeable="false"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="AllMethods" upperBound="-1"
+            eType="#//reflect/declaration/CtMethod" changeable="false"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="CtTypeParameter" eSuperTypes="#//reflect/declaration/CtElement #//facade/CtTypeParameter">
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="Name" eType="#//String"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="Bounds" upperBound="-1"
+            eType="#//reflect/reference/CtTypeReference"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="CtTypedElement" eSuperTypes="#//facade/CtTypedElement">
+        <eStructuralFeatures xsi:type="ecore:EReference" name="Type" eType="#//reflect/reference/CtTypeReference"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="CtVariable" eSuperTypes="#//reflect/declaration/CtNamedElement #//reflect/declaration/CtTypedElement #//facade/CtVariable">
+        <eStructuralFeatures xsi:type="ecore:EReference" name="DefaultExpression"
+            eType="#//reflect/code/CtExpression"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="SourcePosition" eSuperTypes="#//facade/SourcePosition">
+        <eOperations name="clone" eType="#//CloneNotSupportedException"/>
+        <eOperations name="toString" eType="#//String"/>
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="Line" eType="#//Integer"
+            changeable="false"/>
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="Column" eType="#//Integer"
+            changeable="false"/>
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="File" eType="#//File"
+            changeable="false"/>
+      </eClassifiers>
+    </eSubpackages>
+    <eSubpackages name="reference" nsURI="emf.spoon.reflect.reference" nsPrefix="emf.spoon.reflect.reference">
+      <eClassifiers xsi:type="ecore:EClass" name="CtArrayTypeReference" eSuperTypes="#//reflect/reference/CtTypeReference #//facade/CtArrayTypeReference">
+        <eStructuralFeatures xsi:type="ecore:EReference" name="ComponentType" eType="#//reflect/reference/CtTypeReference"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="CtExecutableReference" eSuperTypes="#//reflect/reference/CtGenericElementReference #//reflect/reference/CtReference #//facade/CtExecutableReference">
+        <eOperations name="isOverloading" eType="#//Boolean">
+          <eParameters name="executable" eType="#//reflect/reference/CtExecutableReference"/>
+        </eOperations>
+        <eOperations name="isStatic" eType="#//Boolean"/>
+        <eOperations name="setStatic" eType="#//Void">
+          <eParameters name="stat" eType="#//Boolean"/>
+        </eOperations>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="Type" eType="#//reflect/reference/CtTypeReference"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="DeclaringType" eType="#//reflect/reference/CtTypeReference"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="ParameterTypes" upperBound="-1"
+            eType="#//reflect/reference/CtTypeReference"/>
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="ActualMethod" eType="#//Method"
+            changeable="false"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="CtFieldReference" eSuperTypes="#//reflect/reference/CtVariableReference #//facade/CtFieldReference">
+        <eStructuralFeatures xsi:type="ecore:EReference" name="DeclaringType" eType="#//reflect/reference/CtTypeReference"/>
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="ActualField" eType="#//Field"
+            changeable="false"/>
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="QualifiedName" eType="#//String"
+            changeable="false"/>
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="isStatic" eType="#//Boolean"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="CtGenericElementReference" eSuperTypes="#//facade/CtGenericElementReference">
+        <eStructuralFeatures xsi:type="ecore:EReference" name="ActualTypeArguments"
+            upperBound="-1" eType="#//reflect/reference/CtTypeReference"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="CtLocalVariableReference" eSuperTypes="#//reflect/reference/CtVariableReference #//facade/CtLocalVariableReference"/>
+      <eClassifiers xsi:type="ecore:EClass" name="CtPackageReference" eSuperTypes="#//reflect/reference/CtReference #//facade/CtPackageReference"/>
+      <eClassifiers xsi:type="ecore:EClass" name="CtParameterReference" eSuperTypes="#//reflect/reference/CtVariableReference #//facade/CtParameterReference">
+        <eStructuralFeatures xsi:type="ecore:EReference" name="DeclaringExecutable"
+            eType="#//reflect/reference/CtExecutableReference"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="CtReference" eSuperTypes="#//facade/CtReference">
+        <eOperations name="accept" eType="#//Void">
+          <eParameters name="visitor" eType="#//CtVisitor"/>
+        </eOperations>
+        <eOperations name="getAnnotation" eType="#//Object">
+          <eAnnotations source="SpoonGenerics">
+            <details key="type" value="java.lang.annotation.Annotation"/>
+          </eAnnotations>
+          <eParameters name="annotationType" eType="#//Class"/>
+        </eOperations>
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="SimpleName" eType="#//String"/>
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="Annotations" upperBound="-1"
+            eType="#//Annotation" changeable="false"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="Declaration" eType="#//reflect/declaration/CtElement"
+            changeable="false"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="CtTypeParameterReference" eSuperTypes="#//reflect/reference/CtTypeReference #//facade/CtTypeParameterReference">
+        <eOperations name="isUpper" eType="#//Boolean"/>
+        <eOperations name="setUpper" eType="#//Void">
+          <eParameters name="upper" eType="#//Boolean"/>
+        </eOperations>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="Bounds" upperBound="-1"
+            eType="#//reflect/reference/CtTypeReference"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="CtTypeReference" eSuperTypes="#//reflect/reference/CtGenericElementReference #//reflect/reference/CtReference #//facade/CtTypeReference">
+        <eOperations name="box" eType="#//reflect/reference/CtTypeReference"/>
+        <eOperations name="isAssignableFrom" eType="#//Boolean">
+          <eParameters name="type" eType="#//reflect/reference/CtTypeReference"/>
+        </eOperations>
+        <eOperations name="isPrimitif" eType="#//Boolean"/>
+        <eOperations name="isSubtypeOf" eType="#//Boolean">
+          <eParameters name="type" eType="#//reflect/reference/CtTypeReference"/>
+        </eOperations>
+        <eOperations name="unbox" eType="#//reflect/reference/CtTypeReference"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="DeclaringType" eType="#//reflect/reference/CtTypeReference"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="Package" eType="#//reflect/reference/CtPackageReference"/>
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="ActualClass" eType="#//Class"
+            changeable="false"/>
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="QualifiedName" eType="#//String"
+            changeable="false"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="CtVariableReference" eSuperTypes="#//reflect/reference/CtReference #//facade/CtVariableReference">
+        <eStructuralFeatures xsi:type="ecore:EReference" name="Type" eType="#//reflect/reference/CtTypeReference"/>
+      </eClassifiers>
+    </eSubpackages>
+  </eSubpackages>
+  <eSubpackages name="facade">
+    <eClassifiers xsi:type="ecore:EClass" name="CtAbstractInvocation" instanceClassName="spoon.reflect.code.CtAbstractInvocation"
+        interface="true"/>
+    <eClassifiers xsi:type="ecore:EClass" name="CtArrayAccess" instanceClassName="spoon.reflect.code.CtArrayAccess"
+        interface="true"/>
+    <eClassifiers xsi:type="ecore:EClass" name="CtAssert" instanceClassName="spoon.reflect.code.CtAssert"
+        interface="true"/>
+    <eClassifiers xsi:type="ecore:EClass" name="CtAssignment" instanceClassName="spoon.reflect.code.CtAssignment"
+        interface="true"/>
+    <eClassifiers xsi:type="ecore:EClass" name="CtBinaryOperator" instanceClassName="spoon.reflect.code.CtBinaryOperator"
+        interface="true"/>
+    <eClassifiers xsi:type="ecore:EClass" name="CtBlock" instanceClassName="spoon.reflect.code.CtBlock"
+        interface="true"/>
+    <eClassifiers xsi:type="ecore:EClass" name="CtBreak" instanceClassName="spoon.reflect.code.CtBreak"
+        interface="true"/>
+    <eClassifiers xsi:type="ecore:EClass" name="CtCFlowBreak" instanceClassName="spoon.reflect.code.CtCFlowBreak"
+        interface="true"/>
+    <eClassifiers xsi:type="ecore:EClass" name="CtCase" instanceClassName="spoon.reflect.code.CtCase"
+        interface="true"/>
+    <eClassifiers xsi:type="ecore:EClass" name="CtCatch" instanceClassName="spoon.reflect.code.CtCatch"
+        interface="true"/>
+    <eClassifiers xsi:type="ecore:EClass" name="CtCodeElement" instanceClassName="spoon.reflect.code.CtCodeElement"
+        interface="true"/>
+    <eClassifiers xsi:type="ecore:EClass" name="CtConditional" instanceClassName="spoon.reflect.code.CtConditional"
+        interface="true"/>
+    <eClassifiers xsi:type="ecore:EClass" name="CtContinue" instanceClassName="spoon.reflect.code.CtContinue"
+        interface="true"/>
+    <eClassifiers xsi:type="ecore:EClass" name="CtDo" instanceClassName="spoon.reflect.code.CtDo"
+        interface="true"/>
+    <eClassifiers xsi:type="ecore:EClass" name="CtExpression" instanceClassName="spoon.reflect.code.CtExpression"
+        interface="true"/>
+    <eClassifiers xsi:type="ecore:EClass" name="CtFieldAccess" instanceClassName="spoon.reflect.code.CtFieldAccess"
+        interface="true"/>
+    <eClassifiers xsi:type="ecore:EClass" name="CtFor" instanceClassName="spoon.reflect.code.CtFor"
+        interface="true"/>
+    <eClassifiers xsi:type="ecore:EClass" name="CtForEach" instanceClassName="spoon.reflect.code.CtForEach"
+        interface="true"/>
+    <eClassifiers xsi:type="ecore:EClass" name="CtIf" instanceClassName="spoon.reflect.code.CtIf"
+        interface="true"/>
+    <eClassifiers xsi:type="ecore:EClass" name="CtInvocation" instanceClassName="spoon.reflect.code.CtInvocation"
+        interface="true"/>
+    <eClassifiers xsi:type="ecore:EClass" name="CtLiteral" instanceClassName="spoon.reflect.code.CtLiteral"
+        interface="true"/>
+    <eClassifiers xsi:type="ecore:EClass" name="CtLocalVariable" instanceClassName="spoon.reflect.code.CtLocalVariable"
+        interface="true"/>
+    <eClassifiers xsi:type="ecore:EClass" name="CtLoop" instanceClassName="spoon.reflect.code.CtLoop"
+        interface="true"/>
+    <eClassifiers xsi:type="ecore:EClass" name="CtNewArray" instanceClassName="spoon.reflect.code.CtNewArray"
+        interface="true"/>
+    <eClassifiers xsi:type="ecore:EClass" name="CtNewClass" instanceClassName="spoon.reflect.code.CtNewClass"
+        interface="true"/>
+    <eClassifiers xsi:type="ecore:EClass" name="CtOperatorAssignment" instanceClassName="spoon.reflect.code.CtOperatorAssignment"
+        interface="true"/>
+    <eClassifiers xsi:type="ecore:EClass" name="CtReturn" instanceClassName="spoon.reflect.code.CtReturn"
+        interface="true"/>
+    <eClassifiers xsi:type="ecore:EClass" name="CtStatement" instanceClassName="spoon.reflect.code.CtStatement"
+        interface="true"/>
+    <eClassifiers xsi:type="ecore:EClass" name="CtStatementList" instanceClassName="spoon.reflect.code.CtStatementList"
+        interface="true"/>
+    <eClassifiers xsi:type="ecore:EClass" name="CtSwitch" instanceClassName="spoon.reflect.code.CtSwitch"
+        interface="true"/>
+    <eClassifiers xsi:type="ecore:EClass" name="CtSynchronized" instanceClassName="spoon.reflect.code.CtSynchronized"
+        interface="true"/>
+    <eClassifiers xsi:type="ecore:EClass" name="CtTargetedExpression" instanceClassName="spoon.reflect.code.CtTargetedExpression"
+        interface="true"/>
+    <eClassifiers xsi:type="ecore:EClass" name="CtThrow" instanceClassName="spoon.reflect.code.CtThrow"
+        interface="true"/>
+    <eClassifiers xsi:type="ecore:EClass" name="CtTry" instanceClassName="spoon.reflect.code.CtTry"
+        interface="true"/>
+    <eClassifiers xsi:type="ecore:EClass" name="CtUnaryOperator" instanceClassName="spoon.reflect.code.CtUnaryOperator"
+        interface="true"/>
+    <eClassifiers xsi:type="ecore:EClass" name="CtVariableAccess" instanceClassName="spoon.reflect.code.CtVariableAccess"
+        interface="true"/>
+    <eClassifiers xsi:type="ecore:EClass" name="CtWhile" instanceClassName="spoon.reflect.code.CtWhile"
+        interface="true"/>
+    <eClassifiers xsi:type="ecore:EClass" name="CtAnnotation" instanceClassName="spoon.reflect.declaration.CtAnnotation"
+        interface="true"/>
+    <eClassifiers xsi:type="ecore:EClass" name="CtAnnotationType" instanceClassName="spoon.reflect.declaration.CtAnnotationType"
+        interface="true"/>
+    <eClassifiers xsi:type="ecore:EClass" name="CtAnonymousExecutable" instanceClassName="spoon.reflect.declaration.CtAnonymousExecutable"
+        interface="true"/>
+    <eClassifiers xsi:type="ecore:EClass" name="CtClass" instanceClassName="spoon.reflect.declaration.CtClass"
+        interface="true"/>
+    <eClassifiers xsi:type="ecore:EClass" name="CtConstructor" instanceClassName="spoon.reflect.declaration.CtConstructor"
+        interface="true"/>
+    <eClassifiers xsi:type="ecore:EClass" name="CtElement" instanceClassName="spoon.reflect.declaration.CtElement"
+        interface="true"/>
+    <eClassifiers xsi:type="ecore:EClass" name="CtEnum" instanceClassName="spoon.reflect.declaration.CtEnum"
+        interface="true"/>
+    <eClassifiers xsi:type="ecore:EClass" name="CtExecutable" instanceClassName="spoon.reflect.declaration.CtExecutable"
+        interface="true"/>
+    <eClassifiers xsi:type="ecore:EClass" name="CtField" instanceClassName="spoon.reflect.declaration.CtField"
+        interface="true"/>
+    <eClassifiers xsi:type="ecore:EClass" name="CtGenericElement" instanceClassName="spoon.reflect.declaration.CtGenericElement"
+        interface="true"/>
+    <eClassifiers xsi:type="ecore:EClass" name="CtInterface" instanceClassName="spoon.reflect.declaration.CtInterface"
+        interface="true"/>
+    <eClassifiers xsi:type="ecore:EClass" name="CtMethod" instanceClassName="spoon.reflect.declaration.CtMethod"
+        interface="true"/>
+    <eClassifiers xsi:type="ecore:EClass" name="CtModifiable" instanceClassName="spoon.reflect.declaration.CtModifiable"
+        interface="true"/>
+    <eClassifiers xsi:type="ecore:EClass" name="CtNamedElement" instanceClassName="spoon.reflect.declaration.CtNamedElement"
+        interface="true"/>
+    <eClassifiers xsi:type="ecore:EClass" name="CtPackage" instanceClassName="spoon.reflect.declaration.CtPackage"
+        interface="true"/>
+    <eClassifiers xsi:type="ecore:EClass" name="CtParameter" instanceClassName="spoon.reflect.declaration.CtParameter"
+        interface="true"/>
+    <eClassifiers xsi:type="ecore:EClass" name="CtSimpleType" instanceClassName="spoon.reflect.declaration.CtSimpleType"
+        interface="true"/>
+    <eClassifiers xsi:type="ecore:EClass" name="CtType" instanceClassName="spoon.reflect.declaration.CtType"
+        interface="true"/>
+    <eClassifiers xsi:type="ecore:EClass" name="CtTypeParameter" instanceClassName="spoon.reflect.declaration.CtTypeParameter"
+        interface="true"/>
+    <eClassifiers xsi:type="ecore:EClass" name="CtTypedElement" instanceClassName="spoon.reflect.declaration.CtTypedElement"
+        interface="true"/>
+    <eClassifiers xsi:type="ecore:EClass" name="CtVariable" instanceClassName="spoon.reflect.declaration.CtVariable"
+        interface="true"/>
+    <eClassifiers xsi:type="ecore:EClass" name="SourcePosition" instanceClassName="spoon.reflect.declaration.SourcePosition"
+        interface="true"/>
+    <eClassifiers xsi:type="ecore:EClass" name="CtArrayTypeReference" instanceClassName="spoon.reflect.reference.CtArrayTypeReference"
+        interface="true"/>
+    <eClassifiers xsi:type="ecore:EClass" name="CtExecutableReference" instanceClassName="spoon.reflect.reference.CtExecutableReference"
+        interface="true"/>
+    <eClassifiers xsi:type="ecore:EClass" name="CtFieldReference" instanceClassName="spoon.reflect.reference.CtFieldReference"
+        interface="true"/>
+    <eClassifiers xsi:type="ecore:EClass" name="CtGenericElementReference" instanceClassName="spoon.reflect.reference.CtGenericElementReference"
+        interface="true"/>
+    <eClassifiers xsi:type="ecore:EClass" name="CtLocalVariableReference" instanceClassName="spoon.reflect.reference.CtLocalVariableReference"
+        interface="true"/>
+    <eClassifiers xsi:type="ecore:EClass" name="CtPackageReference" instanceClassName="spoon.reflect.reference.CtPackageReference"
+        interface="true"/>
+    <eClassifiers xsi:type="ecore:EClass" name="CtParameterReference" instanceClassName="spoon.reflect.reference.CtParameterReference"
+        interface="true"/>
+    <eClassifiers xsi:type="ecore:EClass" name="CtReference" instanceClassName="spoon.reflect.reference.CtReference"
+        interface="true"/>
+    <eClassifiers xsi:type="ecore:EClass" name="CtTypeParameterReference" instanceClassName="spoon.reflect.reference.CtTypeParameterReference"
+        interface="true"/>
+    <eClassifiers xsi:type="ecore:EClass" name="CtTypeReference" instanceClassName="spoon.reflect.reference.CtTypeReference"
+        interface="true"/>
+    <eClassifiers xsi:type="ecore:EClass" name="CtVariableReference" instanceClassName="spoon.reflect.reference.CtVariableReference"
+        interface="true"/>
+  </eSubpackages>
+</ecore:EPackage>

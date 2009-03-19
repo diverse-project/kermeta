@@ -1,0 +1,480 @@
+<?xml version="1.0" encoding="ASCII"?>
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:emf.spoon.reflect="emf.spoon.reflect" xmlns:emf.spoon.reflect.code="emf.spoon.reflect.code" xmlns:emf.spoon.reflect.declaration="emf.spoon.reflect.declaration" xmlns:emf.spoon.reflect.reference="emf.spoon.reflect.reference">
+  <emf.spoon.reflect.declaration:CtPackage Position="/1" SimpleName="test" Packages="/2 /195 /263" Types="/344"/>
+  <emf.spoon.reflect:SourcePosition/>
+  <emf.spoon.reflect.declaration:CtPackage Position="/3" Parent="/0" SimpleName="bug1" Types="/4" DeclaringPackage="/0"/>
+  <emf.spoon.reflect:SourcePosition/>
+  <emf.spoon.reflect.declaration:CtClass Position="/5" Parent="/2" DocComment=" @author barais&#xA;" SimpleName="Bug" Fields="/6" Package="/2" Methods="/87 /190" Constructors="/12">
+    <Modifiers>public</Modifiers>
+  </emf.spoon.reflect.declaration:CtClass>
+  <emf.spoon.reflect:SourcePosition/>
+  <emf.spoon.reflect.declaration:CtField Position="/7" Parent="/4" SimpleName="i" Type="/11" DefaultExpression="/8" DeclaringType="/4"/>
+  <emf.spoon.reflect:SourcePosition/>
+  <emf.spoon.reflect.code:CtLiteral Position="/9" Parent="/6" Type="/10" Value="0"/>
+  <emf.spoon.reflect:SourcePosition/>
+  <emf.spoon.reflect.reference:CtTypeReference SimpleName="int"/>
+  <emf.spoon.reflect.reference:CtTypeReference SimpleName="int"/>
+  <emf.spoon.reflect.declaration:CtConstructor Position="/13" Parent="/4" Parameters="/83" Body="/14"/>
+  <emf.spoon.reflect:SourcePosition/>
+  <emf.spoon.reflect.code:CtBlock Position="/15" Parent="/12" Statements="/16 /22"/>
+  <emf.spoon.reflect:SourcePosition/>
+  <emf.spoon.reflect.code:CtInvocation Executable="/19" Position="/17" Parent="/14" Type="/18"/>
+  <emf.spoon.reflect:SourcePosition/>
+  <emf.spoon.reflect.reference:CtTypeReference SimpleName="void"/>
+  <emf.spoon.reflect.reference:CtExecutableReference SimpleName="&lt;init>" DeclaringType="/20"/>
+  <emf.spoon.reflect.reference:CtTypeReference SimpleName="Object" Package="/21"/>
+  <emf.spoon.reflect.reference:CtPackageReference SimpleName="java.lang"/>
+  <emf.spoon.reflect.code:CtTry Position="/23" Parent="/14" Body="/45" Catchers="/24"/>
+  <emf.spoon.reflect:SourcePosition/>
+  <emf.spoon.reflect.code:CtCatch Position="/25" Parent="/22" Body="/26" Parameter="/41"/>
+  <emf.spoon.reflect:SourcePosition/>
+  <emf.spoon.reflect.code:CtBlock Position="/27" Parent="/24" Statements="/28"/>
+  <emf.spoon.reflect:SourcePosition/>
+  <emf.spoon.reflect.code:CtInvocation Executable="/31" Position="/29" Parent="/26" Type="/30" Target="/34"/>
+  <emf.spoon.reflect:SourcePosition/>
+  <emf.spoon.reflect.reference:CtTypeReference SimpleName="void"/>
+  <emf.spoon.reflect.reference:CtExecutableReference SimpleName="printStackTrace" DeclaringType="/32"/>
+  <emf.spoon.reflect.reference:CtTypeReference SimpleName="Throwable" Package="/33"/>
+  <emf.spoon.reflect.reference:CtPackageReference SimpleName="java.lang"/>
+  <emf.spoon.reflect.code:CtVariableAccess Position="/35" Parent="/28" Type="/39" Variable="/36"/>
+  <emf.spoon.reflect:SourcePosition/>
+  <emf.spoon.reflect.reference:CtLocalVariableReference SimpleName="e" Declaration="/41" Type="/37"/>
+  <emf.spoon.reflect.reference:CtTypeReference SimpleName="Exception" Package="/38"/>
+  <emf.spoon.reflect.reference:CtPackageReference SimpleName="java.lang"/>
+  <emf.spoon.reflect.reference:CtTypeReference SimpleName="Exception" Package="/40"/>
+  <emf.spoon.reflect.reference:CtPackageReference SimpleName="java.lang"/>
+  <emf.spoon.reflect.code:CtLocalVariable Position="/42" Parent="/24" SimpleName="e" Type="/43"/>
+  <emf.spoon.reflect:SourcePosition/>
+  <emf.spoon.reflect.reference:CtTypeReference SimpleName="Exception" Package="/44"/>
+  <emf.spoon.reflect.reference:CtPackageReference SimpleName="java.lang"/>
+  <emf.spoon.reflect.code:CtBlock Position="/46" Parent="/22" Statements="/47"/>
+  <emf.spoon.reflect:SourcePosition/>
+  <emf.spoon.reflect.code:CtWhile Position="/48" Parent="/45" Body="/49" LoopingExpression="/70"/>
+  <emf.spoon.reflect:SourcePosition/>
+  <emf.spoon.reflect.code:CtInvocation Executable="/52" Arguments="/57" Position="/50" Parent="/47" Type="/51" Target="/61"/>
+  <emf.spoon.reflect:SourcePosition/>
+  <emf.spoon.reflect.reference:CtTypeReference SimpleName="void"/>
+  <emf.spoon.reflect.reference:CtExecutableReference SimpleName="println" DeclaringType="/55" ParameterTypes="/53"/>
+  <emf.spoon.reflect.reference:CtTypeReference SimpleName="String" Package="/54"/>
+  <emf.spoon.reflect.reference:CtPackageReference SimpleName="java.lang"/>
+  <emf.spoon.reflect.reference:CtTypeReference SimpleName="PrintStream" Package="/56"/>
+  <emf.spoon.reflect.reference:CtPackageReference SimpleName="java.io"/>
+  <emf.spoon.reflect.code:CtLiteral Position="/58" Parent="/49" Type="/59" Value="essai"/>
+  <emf.spoon.reflect:SourcePosition/>
+  <emf.spoon.reflect.reference:CtTypeReference SimpleName="String" Package="/60"/>
+  <emf.spoon.reflect.reference:CtPackageReference SimpleName="java.lang"/>
+  <emf.spoon.reflect.code:CtFieldAccess Position="/62" Parent="/49" Type="/68" Variable="/63"/>
+  <emf.spoon.reflect:SourcePosition/>
+  <emf.spoon.reflect.reference:CtFieldReference SimpleName="out" Type="/66" DeclaringType="/64"/>
+  <emf.spoon.reflect.reference:CtTypeReference SimpleName="System" Package="/65"/>
+  <emf.spoon.reflect.reference:CtPackageReference SimpleName="java.lang"/>
+  <emf.spoon.reflect.reference:CtTypeReference SimpleName="PrintStream" Package="/67"/>
+  <emf.spoon.reflect.reference:CtPackageReference SimpleName="java.io"/>
+  <emf.spoon.reflect.reference:CtTypeReference SimpleName="PrintStream" Package="/69"/>
+  <emf.spoon.reflect.reference:CtPackageReference SimpleName="java.io"/>
+  <emf.spoon.reflect.code:CtBinaryOperator Position="/71" Parent="/47" Type="/72" Kind="EQ" RightHandOperand="/80" LeftHandOperand="/73"/>
+  <emf.spoon.reflect:SourcePosition/>
+  <emf.spoon.reflect.reference:CtTypeReference SimpleName="boolean"/>
+  <emf.spoon.reflect.code:CtFieldAccess Position="/74" Parent="/70" Type="/79" Variable="/75"/>
+  <emf.spoon.reflect:SourcePosition/>
+  <emf.spoon.reflect.reference:CtFieldReference SimpleName="i" Type="/78" DeclaringType="/76"/>
+  <emf.spoon.reflect.reference:CtTypeReference SimpleName="Bug" Package="/77"/>
+  <emf.spoon.reflect.reference:CtPackageReference SimpleName="test.bug1"/>
+  <emf.spoon.reflect.reference:CtTypeReference SimpleName="int"/>
+  <emf.spoon.reflect.reference:CtTypeReference SimpleName="int"/>
+  <emf.spoon.reflect.code:CtLiteral Position="/81" Parent="/70" Type="/82" Value="0"/>
+  <emf.spoon.reflect:SourcePosition/>
+  <emf.spoon.reflect.reference:CtTypeReference SimpleName="int"/>
+  <emf.spoon.reflect.declaration:CtParameter Position="/84" Parent="/12" SimpleName="a" Type="/85"/>
+  <emf.spoon.reflect:SourcePosition/>
+  <emf.spoon.reflect.reference:CtTypeReference SimpleName="String" Package="/86"/>
+  <emf.spoon.reflect.reference:CtPackageReference SimpleName="java.lang"/>
+  <emf.spoon.reflect.declaration:CtMethod Position="/88" Parent="/4" SimpleName="test" Parameters="/186" Body="/89" Type="/189">
+    <Modifiers>public</Modifiers>
+  </emf.spoon.reflect.declaration:CtMethod>
+  <emf.spoon.reflect:SourcePosition/>
+  <emf.spoon.reflect.code:CtBlock Position="/90" Parent="/87" Statements="/91"/>
+  <emf.spoon.reflect:SourcePosition/>
+  <emf.spoon.reflect.code:CtSwitch Position="/92" Parent="/89" Selector="/181" Cases="/93 /121 /149 /177"/>
+  <emf.spoon.reflect:SourcePosition/>
+  <emf.spoon.reflect.code:CtCase Position="/94" Parent="/91" CaseExpression="/95" Statements="/98 /119"/>
+  <emf.spoon.reflect:SourcePosition/>
+  <emf.spoon.reflect.code:CtLiteral Position="/96" Parent="/93" Type="/97" Value="0"/>
+  <emf.spoon.reflect:SourcePosition/>
+  <emf.spoon.reflect.reference:CtTypeReference SimpleName="int"/>
+  <emf.spoon.reflect.code:CtInvocation Executable="/101" Arguments="/106" Position="/99" Parent="/93" Type="/100" Target="/110"/>
+  <emf.spoon.reflect:SourcePosition/>
+  <emf.spoon.reflect.reference:CtTypeReference SimpleName="void"/>
+  <emf.spoon.reflect.reference:CtExecutableReference SimpleName="println" DeclaringType="/104" ParameterTypes="/102"/>
+  <emf.spoon.reflect.reference:CtTypeReference SimpleName="String" Package="/103"/>
+  <emf.spoon.reflect.reference:CtPackageReference SimpleName="java.lang"/>
+  <emf.spoon.reflect.reference:CtTypeReference SimpleName="PrintStream" Package="/105"/>
+  <emf.spoon.reflect.reference:CtPackageReference SimpleName="java.io"/>
+  <emf.spoon.reflect.code:CtLiteral Position="/107" Parent="/98" Type="/108" Value="0"/>
+  <emf.spoon.reflect:SourcePosition/>
+  <emf.spoon.reflect.reference:CtTypeReference SimpleName="String" Package="/109"/>
+  <emf.spoon.reflect.reference:CtPackageReference SimpleName="java.lang"/>
+  <emf.spoon.reflect.code:CtFieldAccess Position="/111" Parent="/98" Type="/117" Variable="/112"/>
+  <emf.spoon.reflect:SourcePosition/>
+  <emf.spoon.reflect.reference:CtFieldReference SimpleName="out" Type="/115" DeclaringType="/113"/>
+  <emf.spoon.reflect.reference:CtTypeReference SimpleName="System" Package="/114"/>
+  <emf.spoon.reflect.reference:CtPackageReference SimpleName="java.lang"/>
+  <emf.spoon.reflect.reference:CtTypeReference SimpleName="PrintStream" Package="/116"/>
+  <emf.spoon.reflect.reference:CtPackageReference SimpleName="java.io"/>
+  <emf.spoon.reflect.reference:CtTypeReference SimpleName="PrintStream" Package="/118"/>
+  <emf.spoon.reflect.reference:CtPackageReference SimpleName="java.io"/>
+  <emf.spoon.reflect.code:CtBreak Position="/120" Parent="/93"/>
+  <emf.spoon.reflect:SourcePosition/>
+  <emf.spoon.reflect.code:CtCase Position="/122" Parent="/91" CaseExpression="/123" Statements="/126 /147"/>
+  <emf.spoon.reflect:SourcePosition/>
+  <emf.spoon.reflect.code:CtLiteral Position="/124" Parent="/121" Type="/125" Value="1"/>
+  <emf.spoon.reflect:SourcePosition/>
+  <emf.spoon.reflect.reference:CtTypeReference SimpleName="int"/>
+  <emf.spoon.reflect.code:CtInvocation Executable="/129" Arguments="/134" Position="/127" Parent="/121" Type="/128" Target="/138"/>
+  <emf.spoon.reflect:SourcePosition/>
+  <emf.spoon.reflect.reference:CtTypeReference SimpleName="void"/>
+  <emf.spoon.reflect.reference:CtExecutableReference SimpleName="println" DeclaringType="/132" ParameterTypes="/130"/>
+  <emf.spoon.reflect.reference:CtTypeReference SimpleName="String" Package="/131"/>
+  <emf.spoon.reflect.reference:CtPackageReference SimpleName="java.lang"/>
+  <emf.spoon.reflect.reference:CtTypeReference SimpleName="PrintStream" Package="/133"/>
+  <emf.spoon.reflect.reference:CtPackageReference SimpleName="java.io"/>
+  <emf.spoon.reflect.code:CtLiteral Position="/135" Parent="/126" Type="/136" Value="1"/>
+  <emf.spoon.reflect:SourcePosition/>
+  <emf.spoon.reflect.reference:CtTypeReference SimpleName="String" Package="/137"/>
+  <emf.spoon.reflect.reference:CtPackageReference SimpleName="java.lang"/>
+  <emf.spoon.reflect.code:CtFieldAccess Position="/139" Parent="/126" Type="/145" Variable="/140"/>
+  <emf.spoon.reflect:SourcePosition/>
+  <emf.spoon.reflect.reference:CtFieldReference SimpleName="out" Type="/143" DeclaringType="/141"/>
+  <emf.spoon.reflect.reference:CtTypeReference SimpleName="System" Package="/142"/>
+  <emf.spoon.reflect.reference:CtPackageReference SimpleName="java.lang"/>
+  <emf.spoon.reflect.reference:CtTypeReference SimpleName="PrintStream" Package="/144"/>
+  <emf.spoon.reflect.reference:CtPackageReference SimpleName="java.io"/>
+  <emf.spoon.reflect.reference:CtTypeReference SimpleName="PrintStream" Package="/146"/>
+  <emf.spoon.reflect.reference:CtPackageReference SimpleName="java.io"/>
+  <emf.spoon.reflect.code:CtBreak Position="/148" Parent="/121"/>
+  <emf.spoon.reflect:SourcePosition/>
+  <emf.spoon.reflect.code:CtCase Position="/150" Parent="/91" CaseExpression="/151" Statements="/154 /175"/>
+  <emf.spoon.reflect:SourcePosition/>
+  <emf.spoon.reflect.code:CtLiteral Position="/152" Parent="/149" Type="/153" Value="2"/>
+  <emf.spoon.reflect:SourcePosition/>
+  <emf.spoon.reflect.reference:CtTypeReference SimpleName="int"/>
+  <emf.spoon.reflect.code:CtInvocation Executable="/157" Arguments="/162" Position="/155" Parent="/149" Type="/156" Target="/166"/>
+  <emf.spoon.reflect:SourcePosition/>
+  <emf.spoon.reflect.reference:CtTypeReference SimpleName="void"/>
+  <emf.spoon.reflect.reference:CtExecutableReference SimpleName="println" DeclaringType="/160" ParameterTypes="/158"/>
+  <emf.spoon.reflect.reference:CtTypeReference SimpleName="String" Package="/159"/>
+  <emf.spoon.reflect.reference:CtPackageReference SimpleName="java.lang"/>
+  <emf.spoon.reflect.reference:CtTypeReference SimpleName="PrintStream" Package="/161"/>
+  <emf.spoon.reflect.reference:CtPackageReference SimpleName="java.io"/>
+  <emf.spoon.reflect.code:CtLiteral Position="/163" Parent="/154" Type="/164" Value="3"/>
+  <emf.spoon.reflect:SourcePosition/>
+  <emf.spoon.reflect.reference:CtTypeReference SimpleName="String" Package="/165"/>
+  <emf.spoon.reflect.reference:CtPackageReference SimpleName="java.lang"/>
+  <emf.spoon.reflect.code:CtFieldAccess Position="/167" Parent="/154" Type="/173" Variable="/168"/>
+  <emf.spoon.reflect:SourcePosition/>
+  <emf.spoon.reflect.reference:CtFieldReference SimpleName="out" Type="/171" DeclaringType="/169"/>
+  <emf.spoon.reflect.reference:CtTypeReference SimpleName="System" Package="/170"/>
+  <emf.spoon.reflect.reference:CtPackageReference SimpleName="java.lang"/>
+  <emf.spoon.reflect.reference:CtTypeReference SimpleName="PrintStream" Package="/172"/>
+  <emf.spoon.reflect.reference:CtPackageReference SimpleName="java.io"/>
+  <emf.spoon.reflect.reference:CtTypeReference SimpleName="PrintStream" Package="/174"/>
+  <emf.spoon.reflect.reference:CtPackageReference SimpleName="java.io"/>
+  <emf.spoon.reflect.code:CtBreak Position="/176" Parent="/149"/>
+  <emf.spoon.reflect:SourcePosition/>
+  <emf.spoon.reflect.code:CtCase Position="/178" Parent="/91" Statements="/179"/>
+  <emf.spoon.reflect:SourcePosition/>
+  <emf.spoon.reflect.code:CtBreak Position="/180" Parent="/177"/>
+  <emf.spoon.reflect:SourcePosition/>
+  <emf.spoon.reflect.code:CtVariableAccess Position="/182" Parent="/91" Type="/185" Variable="/183"/>
+  <emf.spoon.reflect:SourcePosition/>
+  <emf.spoon.reflect.reference:CtParameterReference SimpleName="b" Type="/184"/>
+  <emf.spoon.reflect.reference:CtTypeReference SimpleName="int"/>
+  <emf.spoon.reflect.reference:CtTypeReference SimpleName="int"/>
+  <emf.spoon.reflect.declaration:CtParameter Position="/187" Parent="/87" SimpleName="b" Type="/188"/>
+  <emf.spoon.reflect:SourcePosition/>
+  <emf.spoon.reflect.reference:CtTypeReference SimpleName="int"/>
+  <emf.spoon.reflect.reference:CtTypeReference SimpleName="void"/>
+  <emf.spoon.reflect.declaration:CtMethod Position="/191" Parent="/4" SimpleName="main" Body="/192" Type="/194">
+    <Modifiers>public</Modifiers>
+    <Modifiers>static</Modifiers>
+  </emf.spoon.reflect.declaration:CtMethod>
+  <emf.spoon.reflect:SourcePosition/>
+  <emf.spoon.reflect.code:CtBlock Position="/193" Parent="/190"/>
+  <emf.spoon.reflect:SourcePosition/>
+  <emf.spoon.reflect.reference:CtTypeReference SimpleName="void"/>
+  <emf.spoon.reflect.declaration:CtPackage Position="/196" Parent="/0" SimpleName="bug3" Types="/197" DeclaringPackage="/0"/>
+  <emf.spoon.reflect:SourcePosition/>
+  <emf.spoon.reflect.declaration:CtClass Position="/198" Parent="/195" DocComment=" @author barais&#xA;" SimpleName="Bug3" Fields="/199" Package="/195" Methods="/258" NestedTypes="/246" Constructors="/207">
+    <Modifiers>public</Modifiers>
+  </emf.spoon.reflect.declaration:CtClass>
+  <emf.spoon.reflect:SourcePosition/>
+  <emf.spoon.reflect.declaration:CtField Position="/200" Parent="/197" SimpleName="b" Type="/204" DefaultExpression="/201" DeclaringType="/197"/>
+  <emf.spoon.reflect:SourcePosition/>
+  <emf.spoon.reflect.code:CtLiteral Position="/202" Parent="/199" Type="/203"/>
+  <emf.spoon.reflect:SourcePosition/>
+  <emf.spoon.reflect.reference:CtTypeReference SimpleName="&lt;nulltype>"/>
+  <emf.spoon.reflect.reference:CtTypeReference SimpleName="Bug" DeclaringType="/205"/>
+  <emf.spoon.reflect.reference:CtTypeReference SimpleName="Bug3" Package="/206"/>
+  <emf.spoon.reflect.reference:CtPackageReference SimpleName="test.bug3"/>
+  <emf.spoon.reflect.declaration:CtConstructor Position="/208" Parent="/197" Parameters="/242" Body="/209"/>
+  <emf.spoon.reflect:SourcePosition/>
+  <emf.spoon.reflect.code:CtBlock Position="/210" Parent="/207" Statements="/211 /217"/>
+  <emf.spoon.reflect:SourcePosition/>
+  <emf.spoon.reflect.code:CtInvocation Executable="/214" Position="/212" Parent="/209" Type="/213"/>
+  <emf.spoon.reflect:SourcePosition/>
+  <emf.spoon.reflect.reference:CtTypeReference SimpleName="void"/>
+  <emf.spoon.reflect.reference:CtExecutableReference SimpleName="&lt;init>" DeclaringType="/215"/>
+  <emf.spoon.reflect.reference:CtTypeReference SimpleName="Object" Package="/216"/>
+  <emf.spoon.reflect.reference:CtPackageReference SimpleName="java.lang"/>
+  <emf.spoon.reflect.code:CtAssignment Position="/218" Parent="/209" Type="/219" Assignment="/233" Assigned="/222"/>
+  <emf.spoon.reflect:SourcePosition/>
+  <emf.spoon.reflect.reference:CtTypeReference SimpleName="Bug" DeclaringType="/220"/>
+  <emf.spoon.reflect.reference:CtTypeReference SimpleName="Bug3" Package="/221"/>
+  <emf.spoon.reflect.reference:CtPackageReference SimpleName="test.bug3"/>
+  <emf.spoon.reflect.code:CtFieldAccess Position="/223" Parent="/217" Type="/230" Variable="/224"/>
+  <emf.spoon.reflect:SourcePosition/>
+  <emf.spoon.reflect.reference:CtFieldReference SimpleName="b" Type="/227" DeclaringType="/225"/>
+  <emf.spoon.reflect.reference:CtTypeReference SimpleName="Bug3" Package="/226"/>
+  <emf.spoon.reflect.reference:CtPackageReference SimpleName="test.bug3"/>
+  <emf.spoon.reflect.reference:CtTypeReference SimpleName="Bug" DeclaringType="/228"/>
+  <emf.spoon.reflect.reference:CtTypeReference SimpleName="Bug3" Package="/229"/>
+  <emf.spoon.reflect.reference:CtPackageReference SimpleName="test.bug3"/>
+  <emf.spoon.reflect.reference:CtTypeReference SimpleName="Bug" DeclaringType="/231"/>
+  <emf.spoon.reflect.reference:CtTypeReference SimpleName="Bug3" Package="/232"/>
+  <emf.spoon.reflect.reference:CtPackageReference SimpleName="test.bug3"/>
+  <emf.spoon.reflect.code:CtNewClass Executable="/238" Position="/234" Parent="/217" Type="/235"/>
+  <emf.spoon.reflect:SourcePosition/>
+  <emf.spoon.reflect.reference:CtTypeReference SimpleName="Bug" DeclaringType="/236"/>
+  <emf.spoon.reflect.reference:CtTypeReference SimpleName="Bug3" Package="/237"/>
+  <emf.spoon.reflect.reference:CtPackageReference SimpleName="test.bug3"/>
+  <emf.spoon.reflect.reference:CtExecutableReference SimpleName="&lt;init>" DeclaringType="/239"/>
+  <emf.spoon.reflect.reference:CtTypeReference SimpleName="Bug" DeclaringType="/240"/>
+  <emf.spoon.reflect.reference:CtTypeReference SimpleName="Bug3" Package="/241"/>
+  <emf.spoon.reflect.reference:CtPackageReference SimpleName="test.bug3"/>
+  <emf.spoon.reflect.declaration:CtParameter Position="/243" Parent="/207" SimpleName="a" Type="/244"/>
+  <emf.spoon.reflect:SourcePosition/>
+  <emf.spoon.reflect.reference:CtTypeReference SimpleName="String" Package="/245"/>
+  <emf.spoon.reflect.reference:CtPackageReference SimpleName="java.lang"/>
+  <emf.spoon.reflect.declaration:CtClass Position="/247" Parent="/197" SimpleName="Bug" DeclaringType="/197" Constructors="/248"/>
+  <emf.spoon.reflect:SourcePosition/>
+  <emf.spoon.reflect.declaration:CtConstructor Position="/249" Parent="/246" Body="/250"/>
+  <emf.spoon.reflect:SourcePosition/>
+  <emf.spoon.reflect.code:CtBlock Position="/251" Parent="/248" Statements="/252"/>
+  <emf.spoon.reflect:SourcePosition/>
+  <emf.spoon.reflect.code:CtInvocation Executable="/255" Position="/253" Parent="/250" Type="/254"/>
+  <emf.spoon.reflect:SourcePosition/>
+  <emf.spoon.reflect.reference:CtTypeReference SimpleName="void"/>
+  <emf.spoon.reflect.reference:CtExecutableReference SimpleName="&lt;init>" DeclaringType="/256"/>
+  <emf.spoon.reflect.reference:CtTypeReference SimpleName="Object" Package="/257"/>
+  <emf.spoon.reflect.reference:CtPackageReference SimpleName="java.lang"/>
+  <emf.spoon.reflect.declaration:CtMethod Position="/259" Parent="/197" SimpleName="main" Body="/260" Type="/262">
+    <Modifiers>public</Modifiers>
+    <Modifiers>static</Modifiers>
+  </emf.spoon.reflect.declaration:CtMethod>
+  <emf.spoon.reflect:SourcePosition/>
+  <emf.spoon.reflect.code:CtBlock Position="/261" Parent="/258"/>
+  <emf.spoon.reflect:SourcePosition/>
+  <emf.spoon.reflect.reference:CtTypeReference SimpleName="void"/>
+  <emf.spoon.reflect.declaration:CtPackage Position="/264" Parent="/0" SimpleName="bug2" Types="/265" DeclaringPackage="/0"/>
+  <emf.spoon.reflect:SourcePosition/>
+  <emf.spoon.reflect.declaration:CtClass Position="/266" Parent="/263" DocComment=" @author barais&#xA;" SimpleName="Bug2" Package="/263" Methods="/277" Constructors="/267">
+    <Modifiers>public</Modifiers>
+  </emf.spoon.reflect.declaration:CtClass>
+  <emf.spoon.reflect:SourcePosition/>
+  <emf.spoon.reflect.declaration:CtConstructor Position="/268" Parent="/265" Body="/269">
+    <Modifiers>public</Modifiers>
+  </emf.spoon.reflect.declaration:CtConstructor>
+  <emf.spoon.reflect:SourcePosition/>
+  <emf.spoon.reflect.code:CtBlock Position="/270" Parent="/267" Statements="/271"/>
+  <emf.spoon.reflect:SourcePosition/>
+  <emf.spoon.reflect.code:CtInvocation Executable="/274" Position="/272" Parent="/269" Type="/273"/>
+  <emf.spoon.reflect:SourcePosition/>
+  <emf.spoon.reflect.reference:CtTypeReference SimpleName="void"/>
+  <emf.spoon.reflect.reference:CtExecutableReference SimpleName="&lt;init>" DeclaringType="/275"/>
+  <emf.spoon.reflect.reference:CtTypeReference SimpleName="Object" Package="/276"/>
+  <emf.spoon.reflect.reference:CtPackageReference SimpleName="java.lang"/>
+  <emf.spoon.reflect.declaration:CtMethod Position="/278" Parent="/265" SimpleName="test" Body="/279" Type="/343">
+    <Modifiers>public</Modifiers>
+  </emf.spoon.reflect.declaration:CtMethod>
+  <emf.spoon.reflect:SourcePosition/>
+  <emf.spoon.reflect.code:CtBlock Position="/280" Parent="/277" Statements="/281 /292"/>
+  <emf.spoon.reflect:SourcePosition/>
+  <emf.spoon.reflect.code:CtLocalVariable Position="/282" Parent="/279" SimpleName="resourceSet" Type="/290" DefaultExpression="/283"/>
+  <emf.spoon.reflect:SourcePosition/>
+  <emf.spoon.reflect.code:CtNewClass Executable="/287" Position="/284" Parent="/281" Type="/285"/>
+  <emf.spoon.reflect:SourcePosition/>
+  <emf.spoon.reflect.reference:CtTypeReference SimpleName="ResourceSetImpl" Package="/286"/>
+  <emf.spoon.reflect.reference:CtPackageReference SimpleName="org.eclipse.emf.ecore.resource.impl"/>
+  <emf.spoon.reflect.reference:CtExecutableReference SimpleName="&lt;init>" DeclaringType="/288"/>
+  <emf.spoon.reflect.reference:CtTypeReference SimpleName="ResourceSetImpl" Package="/289"/>
+  <emf.spoon.reflect.reference:CtPackageReference SimpleName="org.eclipse.emf.ecore.resource.impl"/>
+  <emf.spoon.reflect.reference:CtTypeReference SimpleName="ResourceSet" Package="/291"/>
+  <emf.spoon.reflect.reference:CtPackageReference SimpleName="org.eclipse.emf.ecore.resource"/>
+  <emf.spoon.reflect.code:CtInvocation Executable="/295" Arguments="/300 /311" Position="/293" Parent="/279" Type="/294" Target="/318"/>
+  <emf.spoon.reflect:SourcePosition/>
+  <emf.spoon.reflect.reference:CtTypeParameterReference SimpleName="V"/>
+  <emf.spoon.reflect.reference:CtExecutableReference SimpleName="put" DeclaringType="/298" ParameterTypes="/296 /297"/>
+  <emf.spoon.reflect.reference:CtTypeParameterReference SimpleName="K"/>
+  <emf.spoon.reflect.reference:CtTypeParameterReference SimpleName="V"/>
+  <emf.spoon.reflect.reference:CtTypeReference SimpleName="Map" Package="/299"/>
+  <emf.spoon.reflect.reference:CtPackageReference SimpleName="java.util"/>
+  <emf.spoon.reflect.code:CtFieldAccess Position="/301" Parent="/292" Type="/309" Variable="/302"/>
+  <emf.spoon.reflect:SourcePosition/>
+  <emf.spoon.reflect.reference:CtFieldReference SimpleName="DEFAULT_EXTENSION" Type="/307" DeclaringType="/303"/>
+  <emf.spoon.reflect.reference:CtTypeReference SimpleName="Registry" DeclaringType="/304"/>
+  <emf.spoon.reflect.reference:CtTypeReference SimpleName="Factory" DeclaringType="/305"/>
+  <emf.spoon.reflect.reference:CtTypeReference SimpleName="Resource" Package="/306"/>
+  <emf.spoon.reflect.reference:CtPackageReference SimpleName="org.eclipse.emf.ecore.resource"/>
+  <emf.spoon.reflect.reference:CtTypeReference SimpleName="String" Package="/308"/>
+  <emf.spoon.reflect.reference:CtPackageReference SimpleName="java.lang"/>
+  <emf.spoon.reflect.reference:CtTypeReference SimpleName="String" Package="/310"/>
+  <emf.spoon.reflect.reference:CtPackageReference SimpleName="java.lang"/>
+  <emf.spoon.reflect.code:CtNewClass Executable="/315" Position="/312" Parent="/292" Type="/313"/>
+  <emf.spoon.reflect:SourcePosition/>
+  <emf.spoon.reflect.reference:CtTypeReference SimpleName="XMIResourceFactoryImpl" Package="/314"/>
+  <emf.spoon.reflect.reference:CtPackageReference SimpleName="org.eclipse.emf.ecore.xmi.impl"/>
+  <emf.spoon.reflect.reference:CtExecutableReference SimpleName="&lt;init>" DeclaringType="/316"/>
+  <emf.spoon.reflect.reference:CtTypeReference SimpleName="XMIResourceFactoryImpl" Package="/317"/>
+  <emf.spoon.reflect.reference:CtPackageReference SimpleName="org.eclipse.emf.ecore.xmi.impl"/>
+  <emf.spoon.reflect.code:CtInvocation Executable="/322" Position="/319" Parent="/292" Type="/320" Target="/327"/>
+  <emf.spoon.reflect:SourcePosition/>
+  <emf.spoon.reflect.reference:CtTypeReference SimpleName="Map" Package="/321"/>
+  <emf.spoon.reflect.reference:CtPackageReference SimpleName="java.util"/>
+  <emf.spoon.reflect.reference:CtExecutableReference SimpleName="getExtensionToFactoryMap" DeclaringType="/323"/>
+  <emf.spoon.reflect.reference:CtTypeReference SimpleName="Registry" DeclaringType="/324"/>
+  <emf.spoon.reflect.reference:CtTypeReference SimpleName="Factory" DeclaringType="/325"/>
+  <emf.spoon.reflect.reference:CtTypeReference SimpleName="Resource" Package="/326"/>
+  <emf.spoon.reflect.reference:CtPackageReference SimpleName="org.eclipse.emf.ecore.resource"/>
+  <emf.spoon.reflect.code:CtInvocation Executable="/333" Position="/328" Parent="/318" Type="/329" Target="/336"/>
+  <emf.spoon.reflect:SourcePosition/>
+  <emf.spoon.reflect.reference:CtTypeReference SimpleName="Registry" DeclaringType="/330"/>
+  <emf.spoon.reflect.reference:CtTypeReference SimpleName="Factory" DeclaringType="/331"/>
+  <emf.spoon.reflect.reference:CtTypeReference SimpleName="Resource" Package="/332"/>
+  <emf.spoon.reflect.reference:CtPackageReference SimpleName="org.eclipse.emf.ecore.resource"/>
+  <emf.spoon.reflect.reference:CtExecutableReference SimpleName="getResourceFactoryRegistry" DeclaringType="/334"/>
+  <emf.spoon.reflect.reference:CtTypeReference SimpleName="ResourceSet" Package="/335"/>
+  <emf.spoon.reflect.reference:CtPackageReference SimpleName="org.eclipse.emf.ecore.resource"/>
+  <emf.spoon.reflect.code:CtVariableAccess Position="/337" Parent="/327" Type="/341" Variable="/338"/>
+  <emf.spoon.reflect:SourcePosition/>
+  <emf.spoon.reflect.reference:CtLocalVariableReference SimpleName="resourceSet" Declaration="/281" Type="/339"/>
+  <emf.spoon.reflect.reference:CtTypeReference SimpleName="ResourceSet" Package="/340"/>
+  <emf.spoon.reflect.reference:CtPackageReference SimpleName="org.eclipse.emf.ecore.resource"/>
+  <emf.spoon.reflect.reference:CtTypeReference SimpleName="ResourceSet" Package="/342"/>
+  <emf.spoon.reflect.reference:CtPackageReference SimpleName="org.eclipse.emf.ecore.resource"/>
+  <emf.spoon.reflect.reference:CtTypeReference SimpleName="void"/>
+  <emf.spoon.reflect.declaration:CtClass Position="/345" Parent="/0" DocComment=" @author barais&#xA;" SimpleName="Test" Fields="/346" Package="/0" Methods="/427 /447" Constructors="/352">
+    <Modifiers>public</Modifiers>
+  </emf.spoon.reflect.declaration:CtClass>
+  <emf.spoon.reflect:SourcePosition/>
+  <emf.spoon.reflect.declaration:CtField Position="/347" Parent="/344" SimpleName="i" Type="/351" DefaultExpression="/348" DeclaringType="/344"/>
+  <emf.spoon.reflect:SourcePosition/>
+  <emf.spoon.reflect.code:CtLiteral Position="/349" Parent="/346" Type="/350" Value="0"/>
+  <emf.spoon.reflect:SourcePosition/>
+  <emf.spoon.reflect.reference:CtTypeReference SimpleName="int"/>
+  <emf.spoon.reflect.reference:CtTypeReference SimpleName="int"/>
+  <emf.spoon.reflect.declaration:CtConstructor Position="/353" Parent="/344" Parameters="/423" Body="/354"/>
+  <emf.spoon.reflect:SourcePosition/>
+  <emf.spoon.reflect.code:CtBlock Position="/355" Parent="/352" Statements="/356 /362"/>
+  <emf.spoon.reflect:SourcePosition/>
+  <emf.spoon.reflect.code:CtInvocation Executable="/359" Position="/357" Parent="/354" Type="/358"/>
+  <emf.spoon.reflect:SourcePosition/>
+  <emf.spoon.reflect.reference:CtTypeReference SimpleName="void"/>
+  <emf.spoon.reflect.reference:CtExecutableReference SimpleName="&lt;init>" DeclaringType="/360"/>
+  <emf.spoon.reflect.reference:CtTypeReference SimpleName="Object" Package="/361"/>
+  <emf.spoon.reflect.reference:CtPackageReference SimpleName="java.lang"/>
+  <emf.spoon.reflect.code:CtTry Position="/363" Parent="/354" Body="/385" Catchers="/364"/>
+  <emf.spoon.reflect:SourcePosition/>
+  <emf.spoon.reflect.code:CtCatch Position="/365" Parent="/362" Body="/366" Parameter="/381"/>
+  <emf.spoon.reflect:SourcePosition/>
+  <emf.spoon.reflect.code:CtBlock Position="/367" Parent="/364" Statements="/368"/>
+  <emf.spoon.reflect:SourcePosition/>
+  <emf.spoon.reflect.code:CtInvocation Executable="/371" Position="/369" Parent="/366" Type="/370" Target="/374"/>
+  <emf.spoon.reflect:SourcePosition/>
+  <emf.spoon.reflect.reference:CtTypeReference SimpleName="void"/>
+  <emf.spoon.reflect.reference:CtExecutableReference SimpleName="printStackTrace" DeclaringType="/372"/>
+  <emf.spoon.reflect.reference:CtTypeReference SimpleName="Throwable" Package="/373"/>
+  <emf.spoon.reflect.reference:CtPackageReference SimpleName="java.lang"/>
+  <emf.spoon.reflect.code:CtVariableAccess Position="/375" Parent="/368" Type="/379" Variable="/376"/>
+  <emf.spoon.reflect:SourcePosition/>
+  <emf.spoon.reflect.reference:CtLocalVariableReference SimpleName="e" Declaration="/381" Type="/377"/>
+  <emf.spoon.reflect.reference:CtTypeReference SimpleName="Exception" Package="/378"/>
+  <emf.spoon.reflect.reference:CtPackageReference SimpleName="java.lang"/>
+  <emf.spoon.reflect.reference:CtTypeReference SimpleName="Exception" Package="/380"/>
+  <emf.spoon.reflect.reference:CtPackageReference SimpleName="java.lang"/>
+  <emf.spoon.reflect.code:CtLocalVariable Position="/382" Parent="/364" SimpleName="e" Type="/383"/>
+  <emf.spoon.reflect:SourcePosition/>
+  <emf.spoon.reflect.reference:CtTypeReference SimpleName="Exception" Package="/384"/>
+  <emf.spoon.reflect.reference:CtPackageReference SimpleName="java.lang"/>
+  <emf.spoon.reflect.code:CtBlock Position="/386" Parent="/362" Statements="/387"/>
+  <emf.spoon.reflect:SourcePosition/>
+  <emf.spoon.reflect.code:CtWhile Position="/388" Parent="/385" Body="/389" LoopingExpression="/410"/>
+  <emf.spoon.reflect:SourcePosition/>
+  <emf.spoon.reflect.code:CtInvocation Executable="/392" Arguments="/397" Position="/390" Parent="/387" Type="/391" Target="/401"/>
+  <emf.spoon.reflect:SourcePosition/>
+  <emf.spoon.reflect.reference:CtTypeReference SimpleName="void"/>
+  <emf.spoon.reflect.reference:CtExecutableReference SimpleName="println" DeclaringType="/395" ParameterTypes="/393"/>
+  <emf.spoon.reflect.reference:CtTypeReference SimpleName="String" Package="/394"/>
+  <emf.spoon.reflect.reference:CtPackageReference SimpleName="java.lang"/>
+  <emf.spoon.reflect.reference:CtTypeReference SimpleName="PrintStream" Package="/396"/>
+  <emf.spoon.reflect.reference:CtPackageReference SimpleName="java.io"/>
+  <emf.spoon.reflect.code:CtLiteral Position="/398" Parent="/389" Type="/399" Value="essai"/>
+  <emf.spoon.reflect:SourcePosition/>
+  <emf.spoon.reflect.reference:CtTypeReference SimpleName="String" Package="/400"/>
+  <emf.spoon.reflect.reference:CtPackageReference SimpleName="java.lang"/>
+  <emf.spoon.reflect.code:CtFieldAccess Position="/402" Parent="/389" Type="/408" Variable="/403"/>
+  <emf.spoon.reflect:SourcePosition/>
+  <emf.spoon.reflect.reference:CtFieldReference SimpleName="out" Type="/406" DeclaringType="/404"/>
+  <emf.spoon.reflect.reference:CtTypeReference SimpleName="System" Package="/405"/>
+  <emf.spoon.reflect.reference:CtPackageReference SimpleName="java.lang"/>
+  <emf.spoon.reflect.reference:CtTypeReference SimpleName="PrintStream" Package="/407"/>
+  <emf.spoon.reflect.reference:CtPackageReference SimpleName="java.io"/>
+  <emf.spoon.reflect.reference:CtTypeReference SimpleName="PrintStream" Package="/409"/>
+  <emf.spoon.reflect.reference:CtPackageReference SimpleName="java.io"/>
+  <emf.spoon.reflect.code:CtBinaryOperator Position="/411" Parent="/387" Type="/412" Kind="EQ" RightHandOperand="/420" LeftHandOperand="/413"/>
+  <emf.spoon.reflect:SourcePosition/>
+  <emf.spoon.reflect.reference:CtTypeReference SimpleName="boolean"/>
+  <emf.spoon.reflect.code:CtFieldAccess Position="/414" Parent="/410" Type="/419" Variable="/415"/>
+  <emf.spoon.reflect:SourcePosition/>
+  <emf.spoon.reflect.reference:CtFieldReference SimpleName="i" Type="/418" DeclaringType="/416"/>
+  <emf.spoon.reflect.reference:CtTypeReference SimpleName="Test" Package="/417"/>
+  <emf.spoon.reflect.reference:CtPackageReference SimpleName="test"/>
+  <emf.spoon.reflect.reference:CtTypeReference SimpleName="int"/>
+  <emf.spoon.reflect.reference:CtTypeReference SimpleName="int"/>
+  <emf.spoon.reflect.code:CtLiteral Position="/421" Parent="/410" Type="/422" Value="0"/>
+  <emf.spoon.reflect:SourcePosition/>
+  <emf.spoon.reflect.reference:CtTypeReference SimpleName="int"/>
+  <emf.spoon.reflect.declaration:CtParameter Position="/424" Parent="/352" SimpleName="a" Type="/425"/>
+  <emf.spoon.reflect:SourcePosition/>
+  <emf.spoon.reflect.reference:CtTypeReference SimpleName="String" Package="/426"/>
+  <emf.spoon.reflect.reference:CtPackageReference SimpleName="java.lang"/>
+  <emf.spoon.reflect.declaration:CtMethod Position="/428" Parent="/344" SimpleName="test" Parameters="/442" Body="/429" Type="/446">
+    <Modifiers>public</Modifiers>
+  </emf.spoon.reflect.declaration:CtMethod>
+  <emf.spoon.reflect:SourcePosition/>
+  <emf.spoon.reflect.code:CtBlock Position="/430" Parent="/427" Statements="/431"/>
+  <emf.spoon.reflect:SourcePosition/>
+  <emf.spoon.reflect.code:CtLocalVariable Position="/432" Parent="/429" SimpleName="map" Type="/440" DefaultExpression="/433"/>
+  <emf.spoon.reflect:SourcePosition/>
+  <emf.spoon.reflect.code:CtNewClass Executable="/437" Position="/434" Parent="/431" Type="/435"/>
+  <emf.spoon.reflect:SourcePosition/>
+  <emf.spoon.reflect.reference:CtTypeReference SimpleName="HashMap" Package="/436"/>
+  <emf.spoon.reflect.reference:CtPackageReference SimpleName="java.util"/>
+  <emf.spoon.reflect.reference:CtExecutableReference SimpleName="&lt;init>" DeclaringType="/438"/>
+  <emf.spoon.reflect.reference:CtTypeReference SimpleName="HashMap" Package="/439"/>
+  <emf.spoon.reflect.reference:CtPackageReference SimpleName="java.util"/>
+  <emf.spoon.reflect.reference:CtTypeReference SimpleName="HashMap" Package="/441"/>
+  <emf.spoon.reflect.reference:CtPackageReference SimpleName="java.util"/>
+  <emf.spoon.reflect.declaration:CtParameter Position="/443" Parent="/427" SimpleName="a" Type="/444"/>
+  <emf.spoon.reflect:SourcePosition/>
+  <emf.spoon.reflect.reference:CtTypeReference SimpleName="String" Package="/445"/>
+  <emf.spoon.reflect.reference:CtPackageReference SimpleName="java.lang"/>
+  <emf.spoon.reflect.reference:CtTypeReference SimpleName="void"/>
+  <emf.spoon.reflect.declaration:CtMethod Position="/448" Parent="/344" SimpleName="main" Body="/449" Type="/451">
+    <Modifiers>public</Modifiers>
+    <Modifiers>static</Modifiers>
+  </emf.spoon.reflect.declaration:CtMethod>
+  <emf.spoon.reflect:SourcePosition/>
+  <emf.spoon.reflect.code:CtBlock Position="/450" Parent="/447"/>
+  <emf.spoon.reflect:SourcePosition/>
+  <emf.spoon.reflect.reference:CtTypeReference SimpleName="void"/>
+</xmi:XMI>

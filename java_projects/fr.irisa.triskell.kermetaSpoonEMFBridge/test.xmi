@@ -1,0 +1,312 @@
+<?xml version="1.0" encoding="ASCII"?>
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:spoon.reflect.code="http://spoon#reflect.code" xmlns:spoon.reflect.declaration="http://spoon#reflect.declaration" xmlns:spoon.reflect.reference="http://spoon#reflect.reference">
+  <spoon.reflect.declaration:CtClass Position="/280" DocComment=" @author barais&#xA;" Parent="/1" SimpleName="Test" Constructors="/2">
+    <Modifiers>public</Modifiers>
+  </spoon.reflect.declaration:CtClass>
+  <spoon.reflect.declaration:CtPackage SimpleName="test" Packages="/10 /117 /165 /182" Types="/0"/>
+  <spoon.reflect.declaration:CtConstructor Position="/281" Parent="/0" Body="/3">
+    <Modifiers>public</Modifiers>
+  </spoon.reflect.declaration:CtConstructor>
+  <spoon.reflect.code:CtBlock Position="/282" Parent="/2" Statements="/4"/>
+  <spoon.reflect.code:CtInvocation Position="/283" Parent="/3" Executable="/5" Type="/6"/>
+  <spoon.reflect.reference:CtExecutableReference SimpleName="&lt;init>" Type="/6" DeclaringType="/6" Static="false"/>
+  <spoon.reflect.reference:CtTypeReference SimpleName="Object" Package="/7"/>
+  <spoon.reflect.reference:CtPackageReference SimpleName="java.lang"/>
+  <spoon.reflect.reference:CtTypeReference SimpleName="void"/>
+  <spoon.reflect.declaration:CtClass Position="/214" DocComment=" @author barais&#xA;" Parent="/10" SimpleName="Bug" Fields="/11" Methods="/20" Constructors="/14">
+    <Modifiers>public</Modifiers>
+  </spoon.reflect.declaration:CtClass>
+  <spoon.reflect.declaration:CtPackage Parent="/1" SimpleName="bug1" Types="/9" DeclaringPackage="/1"/>
+  <spoon.reflect.declaration:CtField Position="/215" Parent="/9" SimpleName="i" Type="/12" DefaultExpression="/13" DeclaringType="/9"/>
+  <spoon.reflect.reference:CtTypeReference SimpleName="int"/>
+  <spoon.reflect.code:CtLiteral Position="/216" Parent="/11" Type="/12" Value="0"/>
+  <spoon.reflect.declaration:CtConstructor Position="/217" Parent="/9" Body="/15">
+    <Modifiers>public</Modifiers>
+  </spoon.reflect.declaration:CtConstructor>
+  <spoon.reflect.code:CtBlock Position="/218" Parent="/14" Statements="/16"/>
+  <spoon.reflect.code:CtInvocation Position="/219" Parent="/15" Executable="/17" Type="/18"/>
+  <spoon.reflect.reference:CtExecutableReference SimpleName="&lt;init>" Type="/18" DeclaringType="/18" Static="false"/>
+  <spoon.reflect.reference:CtTypeReference SimpleName="Object" Package="/19"/>
+  <spoon.reflect.reference:CtPackageReference SimpleName="java.lang"/>
+  <spoon.reflect.declaration:CtMethod Position="/220" Parent="/9" SimpleName="test" Parameters="/21" Body="/22" Type="/8">
+    <Modifiers>public</Modifiers>
+  </spoon.reflect.declaration:CtMethod>
+  <spoon.reflect.declaration:CtParameter Position="/221" SimpleName="b" Type="/12"/>
+  <spoon.reflect.code:CtBlock Position="/222" Parent="/20" Statements="/23 /91"/>
+  <spoon.reflect.code:CtSwitch Position="/223" Parent="/22" Selector="/24" Cases="/29 /49 /69 /89"/>
+  <spoon.reflect.code:CtVariableAccess Position="/224" Parent="/23" Type="/12" Variable="/25"/>
+  <spoon.reflect.reference:CtParameterReference SimpleName="b" Type="/12" DeclaringExecutable="/26"/>
+  <spoon.reflect.reference:CtExecutableReference SimpleName="test" Type="/8" DeclaringType="/27" ParameterTypes="/12" Static="false"/>
+  <spoon.reflect.reference:CtTypeReference SimpleName="Bug" Package="/28"/>
+  <spoon.reflect.reference:CtPackageReference SimpleName="test.bug1"/>
+  <spoon.reflect.code:CtCase Position="/225" Parent="/23" CaseExpression="/30" Statements="/31 /48"/>
+  <spoon.reflect.code:CtLiteral Position="/226" Parent="/29" Type="/12" Value="0"/>
+  <spoon.reflect.code:CtInvocation Position="/227" Parent="/29" Executable="/32" Arguments="/45" Type="/8" Target="/37"/>
+  <spoon.reflect.reference:CtExecutableReference SimpleName="println" Type="/8" DeclaringType="/33" ParameterTypes="/35" Static="false"/>
+  <spoon.reflect.reference:CtTypeReference SimpleName="PrintStream" Package="/34"/>
+  <spoon.reflect.reference:CtPackageReference SimpleName="java.io"/>
+  <spoon.reflect.reference:CtTypeReference SimpleName="String" Package="/36"/>
+  <spoon.reflect.reference:CtPackageReference SimpleName="java.lang"/>
+  <spoon.reflect.code:CtFieldAccess Position="/228" Parent="/31" Type="/43" Variable="/38"/>
+  <spoon.reflect.reference:CtFieldReference SimpleName="out" Type="/39" DeclaringType="/41" Final="true" Static="true"/>
+  <spoon.reflect.reference:CtTypeReference SimpleName="PrintStream" Package="/40"/>
+  <spoon.reflect.reference:CtPackageReference SimpleName="java.io"/>
+  <spoon.reflect.reference:CtTypeReference SimpleName="System" Package="/42"/>
+  <spoon.reflect.reference:CtPackageReference SimpleName="java.lang"/>
+  <spoon.reflect.reference:CtTypeReference SimpleName="PrintStream" Package="/44"/>
+  <spoon.reflect.reference:CtPackageReference SimpleName="java.io"/>
+  <spoon.reflect.code:CtLiteral Position="/229" Parent="/31" Type="/46" Value="0"/>
+  <spoon.reflect.reference:CtTypeReference SimpleName="String" Package="/47"/>
+  <spoon.reflect.reference:CtPackageReference SimpleName="java.lang"/>
+  <spoon.reflect.code:CtBreak Position="/230" Parent="/29"/>
+  <spoon.reflect.code:CtCase Position="/231" Parent="/23" CaseExpression="/50" Statements="/51 /68"/>
+  <spoon.reflect.code:CtLiteral Position="/232" Parent="/49" Type="/12" Value="1"/>
+  <spoon.reflect.code:CtInvocation Position="/233" Parent="/49" Executable="/52" Arguments="/65" Type="/8" Target="/57"/>
+  <spoon.reflect.reference:CtExecutableReference SimpleName="println" Type="/8" DeclaringType="/53" ParameterTypes="/55" Static="false"/>
+  <spoon.reflect.reference:CtTypeReference SimpleName="PrintStream" Package="/54"/>
+  <spoon.reflect.reference:CtPackageReference SimpleName="java.io"/>
+  <spoon.reflect.reference:CtTypeReference SimpleName="String" Package="/56"/>
+  <spoon.reflect.reference:CtPackageReference SimpleName="java.lang"/>
+  <spoon.reflect.code:CtFieldAccess Position="/234" Parent="/51" Type="/63" Variable="/58"/>
+  <spoon.reflect.reference:CtFieldReference SimpleName="out" Type="/59" DeclaringType="/61" Final="true" Static="true"/>
+  <spoon.reflect.reference:CtTypeReference SimpleName="PrintStream" Package="/60"/>
+  <spoon.reflect.reference:CtPackageReference SimpleName="java.io"/>
+  <spoon.reflect.reference:CtTypeReference SimpleName="System" Package="/62"/>
+  <spoon.reflect.reference:CtPackageReference SimpleName="java.lang"/>
+  <spoon.reflect.reference:CtTypeReference SimpleName="PrintStream" Package="/64"/>
+  <spoon.reflect.reference:CtPackageReference SimpleName="java.io"/>
+  <spoon.reflect.code:CtLiteral Position="/235" Parent="/51" Type="/66" Value="1"/>
+  <spoon.reflect.reference:CtTypeReference SimpleName="String" Package="/67"/>
+  <spoon.reflect.reference:CtPackageReference SimpleName="java.lang"/>
+  <spoon.reflect.code:CtBreak Position="/236" Parent="/49"/>
+  <spoon.reflect.code:CtCase Position="/237" Parent="/23" CaseExpression="/70" Statements="/71 /88"/>
+  <spoon.reflect.code:CtLiteral Position="/238" Parent="/69" Type="/12" Value="2"/>
+  <spoon.reflect.code:CtInvocation Position="/239" Parent="/69" Executable="/72" Arguments="/85" Type="/8" Target="/77"/>
+  <spoon.reflect.reference:CtExecutableReference SimpleName="println" Type="/8" DeclaringType="/73" ParameterTypes="/75" Static="false"/>
+  <spoon.reflect.reference:CtTypeReference SimpleName="PrintStream" Package="/74"/>
+  <spoon.reflect.reference:CtPackageReference SimpleName="java.io"/>
+  <spoon.reflect.reference:CtTypeReference SimpleName="String" Package="/76"/>
+  <spoon.reflect.reference:CtPackageReference SimpleName="java.lang"/>
+  <spoon.reflect.code:CtFieldAccess Position="/240" Parent="/71" Type="/83" Variable="/78"/>
+  <spoon.reflect.reference:CtFieldReference SimpleName="out" Type="/79" DeclaringType="/81" Final="true" Static="true"/>
+  <spoon.reflect.reference:CtTypeReference SimpleName="PrintStream" Package="/80"/>
+  <spoon.reflect.reference:CtPackageReference SimpleName="java.io"/>
+  <spoon.reflect.reference:CtTypeReference SimpleName="System" Package="/82"/>
+  <spoon.reflect.reference:CtPackageReference SimpleName="java.lang"/>
+  <spoon.reflect.reference:CtTypeReference SimpleName="PrintStream" Package="/84"/>
+  <spoon.reflect.reference:CtPackageReference SimpleName="java.io"/>
+  <spoon.reflect.code:CtLiteral Position="/241" Parent="/71" Type="/86" Value="3"/>
+  <spoon.reflect.reference:CtTypeReference SimpleName="String" Package="/87"/>
+  <spoon.reflect.reference:CtPackageReference SimpleName="java.lang"/>
+  <spoon.reflect.code:CtBreak Position="/242" Parent="/69"/>
+  <spoon.reflect.code:CtCase Position="/243" Parent="/23" Statements="/90"/>
+  <spoon.reflect.code:CtBreak Position="/244" Parent="/89"/>
+  <spoon.reflect.code:CtWhile Position="/245" Parent="/22" Body="/99" LoopingExpression="/92"/>
+  <spoon.reflect.code:CtBinaryOperator Position="/246" Parent="/91" Type="/93" Kind="EQ" RightHandOperand="/98" LeftHandOperand="/94"/>
+  <spoon.reflect.reference:CtTypeReference SimpleName="boolean"/>
+  <spoon.reflect.code:CtFieldAccess Position="/247" Parent="/92" Type="/12" Variable="/95"/>
+  <spoon.reflect.reference:CtFieldReference SimpleName="i" Type="/12" DeclaringType="/96"/>
+  <spoon.reflect.reference:CtTypeReference SimpleName="Bug" Package="/97"/>
+  <spoon.reflect.reference:CtPackageReference SimpleName="test.bug1"/>
+  <spoon.reflect.code:CtLiteral Position="/248" Parent="/92" Type="/12" Value="0"/>
+  <spoon.reflect.code:CtInvocation Position="/249" Parent="/91" Executable="/100" Arguments="/113" Type="/8" Target="/105"/>
+  <spoon.reflect.reference:CtExecutableReference SimpleName="println" Type="/8" DeclaringType="/101" ParameterTypes="/103" Static="false"/>
+  <spoon.reflect.reference:CtTypeReference SimpleName="PrintStream" Package="/102"/>
+  <spoon.reflect.reference:CtPackageReference SimpleName="java.io"/>
+  <spoon.reflect.reference:CtTypeReference SimpleName="String" Package="/104"/>
+  <spoon.reflect.reference:CtPackageReference SimpleName="java.lang"/>
+  <spoon.reflect.code:CtFieldAccess Position="/250" Parent="/99" Type="/111" Variable="/106"/>
+  <spoon.reflect.reference:CtFieldReference SimpleName="out" Type="/107" DeclaringType="/109" Final="true" Static="true"/>
+  <spoon.reflect.reference:CtTypeReference SimpleName="PrintStream" Package="/108"/>
+  <spoon.reflect.reference:CtPackageReference SimpleName="java.io"/>
+  <spoon.reflect.reference:CtTypeReference SimpleName="System" Package="/110"/>
+  <spoon.reflect.reference:CtPackageReference SimpleName="java.lang"/>
+  <spoon.reflect.reference:CtTypeReference SimpleName="PrintStream" Package="/112"/>
+  <spoon.reflect.reference:CtPackageReference SimpleName="java.io"/>
+  <spoon.reflect.code:CtLiteral Position="/251" Parent="/99" Type="/114" Value="0"/>
+  <spoon.reflect.reference:CtTypeReference SimpleName="String" Package="/115"/>
+  <spoon.reflect.reference:CtPackageReference SimpleName="java.lang"/>
+  <spoon.reflect.declaration:CtClass Position="/252" DocComment=" @author barais&#xA;" Parent="/117" SimpleName="Bug3" Fields="/125" NestedTypes="/118" Methods="/162" Constructors="/131">
+    <Modifiers>public</Modifiers>
+  </spoon.reflect.declaration:CtClass>
+  <spoon.reflect.declaration:CtPackage Parent="/1" SimpleName="bug3" Types="/116" DeclaringPackage="/1"/>
+  <spoon.reflect.declaration:CtClass Position="/253" Parent="/116" SimpleName="Bug" Constructors="/119"/>
+  <spoon.reflect.declaration:CtConstructor Position="/254" Parent="/118" Body="/120"/>
+  <spoon.reflect.code:CtBlock Position="/255" Parent="/119" Statements="/121"/>
+  <spoon.reflect.code:CtInvocation Position="/256" Parent="/120" Executable="/122" Type="/123"/>
+  <spoon.reflect.reference:CtExecutableReference SimpleName="&lt;init>" Type="/123" DeclaringType="/123" Static="false"/>
+  <spoon.reflect.reference:CtTypeReference SimpleName="Object" Package="/124"/>
+  <spoon.reflect.reference:CtPackageReference SimpleName="java.lang"/>
+  <spoon.reflect.declaration:CtField Position="/257" Parent="/116" SimpleName="b" Type="/126" DefaultExpression="/129" DeclaringType="/116"/>
+  <spoon.reflect.reference:CtTypeReference SimpleName="Bug" DeclaringType="/127"/>
+  <spoon.reflect.reference:CtTypeReference SimpleName="Bug3" Package="/128"/>
+  <spoon.reflect.reference:CtPackageReference SimpleName="test.bug3"/>
+  <spoon.reflect.code:CtLiteral Position="/258" Parent="/125" Type="/130"/>
+  <spoon.reflect.reference:CtTypeReference SimpleName="&lt;nulltype>"/>
+  <spoon.reflect.declaration:CtConstructor Position="/259" Parent="/116" Parameters="/132" Body="/135"/>
+  <spoon.reflect.declaration:CtParameter Position="/260" SimpleName="a" Type="/133"/>
+  <spoon.reflect.reference:CtTypeReference SimpleName="String" Package="/134"/>
+  <spoon.reflect.reference:CtPackageReference SimpleName="java.lang"/>
+  <spoon.reflect.code:CtBlock Position="/261" Parent="/131" Statements="/136 /140"/>
+  <spoon.reflect.code:CtInvocation Position="/262" Parent="/135" Executable="/137" Type="/138"/>
+  <spoon.reflect.reference:CtExecutableReference SimpleName="&lt;init>" Type="/138" DeclaringType="/138" Static="false"/>
+  <spoon.reflect.reference:CtTypeReference SimpleName="Object" Package="/139"/>
+  <spoon.reflect.reference:CtPackageReference SimpleName="java.lang"/>
+  <spoon.reflect.code:CtAssignment Position="/263" Parent="/135" Type="/141" Assignment="/154" Assigned="/144"/>
+  <spoon.reflect.reference:CtTypeReference SimpleName="Bug" DeclaringType="/142"/>
+  <spoon.reflect.reference:CtTypeReference SimpleName="Bug3" Package="/143"/>
+  <spoon.reflect.reference:CtPackageReference SimpleName="test.bug3"/>
+  <spoon.reflect.code:CtFieldAccess Position="/264" Parent="/140" Type="/151" Variable="/145"/>
+  <spoon.reflect.reference:CtFieldReference SimpleName="b" Type="/146" DeclaringType="/149"/>
+  <spoon.reflect.reference:CtTypeReference SimpleName="Bug" DeclaringType="/147"/>
+  <spoon.reflect.reference:CtTypeReference SimpleName="Bug3" Package="/148"/>
+  <spoon.reflect.reference:CtPackageReference SimpleName="test.bug3"/>
+  <spoon.reflect.reference:CtTypeReference SimpleName="Bug3" Package="/150"/>
+  <spoon.reflect.reference:CtPackageReference SimpleName="test.bug3"/>
+  <spoon.reflect.reference:CtTypeReference SimpleName="Bug" DeclaringType="/152"/>
+  <spoon.reflect.reference:CtTypeReference SimpleName="Bug3" Package="/153"/>
+  <spoon.reflect.reference:CtPackageReference SimpleName="test.bug3"/>
+  <spoon.reflect.code:CtNewClass Position="/265" Parent="/140" Executable="/158" Type="/155"/>
+  <spoon.reflect.reference:CtTypeReference SimpleName="Bug" DeclaringType="/156"/>
+  <spoon.reflect.reference:CtTypeReference SimpleName="Bug3" Package="/157"/>
+  <spoon.reflect.reference:CtPackageReference SimpleName="test.bug3"/>
+  <spoon.reflect.reference:CtExecutableReference SimpleName="&lt;init>" Type="/159" DeclaringType="/159" Static="false"/>
+  <spoon.reflect.reference:CtTypeReference SimpleName="Bug" DeclaringType="/160"/>
+  <spoon.reflect.reference:CtTypeReference SimpleName="Bug3" Package="/161"/>
+  <spoon.reflect.reference:CtPackageReference SimpleName="test.bug3"/>
+  <spoon.reflect.declaration:CtMethod Position="/266" Parent="/116" SimpleName="main" Body="/163" Type="/8">
+    <Modifiers>public</Modifiers>
+    <Modifiers>static</Modifiers>
+  </spoon.reflect.declaration:CtMethod>
+  <spoon.reflect.code:CtBlock Position="/267" Parent="/162"/>
+  <spoon.reflect.declaration:CtClass Position="/268" Parent="/165" SimpleName="Essai" Methods="/172" Constructors="/166">
+    <Modifiers>public</Modifiers>
+  </spoon.reflect.declaration:CtClass>
+  <spoon.reflect.declaration:CtPackage Parent="/1" SimpleName="bug4" Types="/164" DeclaringPackage="/1"/>
+  <spoon.reflect.declaration:CtConstructor Position="/269" Parent="/164" Body="/167">
+    <Modifiers>public</Modifiers>
+  </spoon.reflect.declaration:CtConstructor>
+  <spoon.reflect.code:CtBlock Position="/270" Parent="/166" Statements="/168"/>
+  <spoon.reflect.code:CtInvocation Position="/271" Parent="/167" Executable="/169" Type="/170"/>
+  <spoon.reflect.reference:CtExecutableReference SimpleName="&lt;init>" Type="/170" DeclaringType="/170" Static="false"/>
+  <spoon.reflect.reference:CtTypeReference SimpleName="Object" Package="/171"/>
+  <spoon.reflect.reference:CtPackageReference SimpleName="java.lang"/>
+  <spoon.reflect.declaration:CtMethod Position="/272" Parent="/164" SimpleName="getNames" Body="/177" Type="/173">
+    <Modifiers>public</Modifiers>
+  </spoon.reflect.declaration:CtMethod>
+  <spoon.reflect.reference:CtTypeReference ActualTypeArguments="/175" SimpleName="List" Package="/174"/>
+  <spoon.reflect.reference:CtPackageReference SimpleName="java.util"/>
+  <spoon.reflect.reference:CtTypeReference SimpleName="String" Package="/176"/>
+  <spoon.reflect.reference:CtPackageReference SimpleName="java.lang"/>
+  <spoon.reflect.code:CtBlock Position="/273" Parent="/172" Statements="/178"/>
+  <spoon.reflect.code:CtReturn Position="/274" Parent="/177" ReturnedExpression="/179"/>
+  <spoon.reflect.code:CtLiteral Position="/275" Parent="/178" Type="/180"/>
+  <spoon.reflect.reference:CtTypeReference SimpleName="&lt;nulltype>"/>
+  <spoon.reflect.declaration:CtClass Position="/276" Parent="/182" SimpleName="Test" Constructors="/183">
+    <Modifiers>public</Modifiers>
+  </spoon.reflect.declaration:CtClass>
+  <spoon.reflect.declaration:CtPackage Parent="/1" SimpleName="test" Types="/181" DeclaringPackage="/1"/>
+  <spoon.reflect.declaration:CtConstructor Position="/277" Parent="/181" Body="/184">
+    <Modifiers>public</Modifiers>
+  </spoon.reflect.declaration:CtConstructor>
+  <spoon.reflect.code:CtBlock Position="/278" Parent="/183" Statements="/185"/>
+  <spoon.reflect.code:CtInvocation Position="/279" Parent="/184" Executable="/186" Type="/187"/>
+  <spoon.reflect.reference:CtExecutableReference SimpleName="&lt;init>" Type="/187" DeclaringType="/187" Static="false"/>
+  <spoon.reflect.reference:CtTypeReference SimpleName="Object" Package="/188"/>
+  <spoon.reflect.reference:CtPackageReference SimpleName="java.lang"/>
+  <spoon.reflect.reference:CtTypeReference SimpleName="Template" Package="/190"/>
+  <spoon.reflect.reference:CtPackageReference SimpleName="spoon.template"/>
+  <spoon.reflect.reference:CtTypeReference SimpleName="Test" Package="/192"/>
+  <spoon.reflect.reference:CtPackageReference SimpleName="test"/>
+  <spoon.reflect.reference:CtTypeReference SimpleName="Template" Package="/194"/>
+  <spoon.reflect.reference:CtPackageReference SimpleName="spoon.template"/>
+  <spoon.reflect.reference:CtTypeReference SimpleName="Bug" Package="/196"/>
+  <spoon.reflect.reference:CtPackageReference SimpleName="test.bug1"/>
+  <spoon.reflect.reference:CtTypeReference SimpleName="Template" Package="/198"/>
+  <spoon.reflect.reference:CtPackageReference SimpleName="spoon.template"/>
+  <spoon.reflect.reference:CtTypeReference SimpleName="Bug" DeclaringType="/200"/>
+  <spoon.reflect.reference:CtTypeReference SimpleName="Bug3" Package="/201"/>
+  <spoon.reflect.reference:CtPackageReference SimpleName="test.bug3"/>
+  <spoon.reflect.reference:CtTypeReference SimpleName="Template" Package="/203"/>
+  <spoon.reflect.reference:CtPackageReference SimpleName="spoon.template"/>
+  <spoon.reflect.reference:CtTypeReference SimpleName="Bug3" Package="/205"/>
+  <spoon.reflect.reference:CtPackageReference SimpleName="test.bug3"/>
+  <spoon.reflect.reference:CtTypeReference SimpleName="Template" Package="/207"/>
+  <spoon.reflect.reference:CtPackageReference SimpleName="spoon.template"/>
+  <spoon.reflect.reference:CtTypeReference SimpleName="Essai" Package="/209"/>
+  <spoon.reflect.reference:CtPackageReference SimpleName="test.bug4"/>
+  <spoon.reflect.reference:CtTypeReference SimpleName="Template" Package="/211"/>
+  <spoon.reflect.reference:CtPackageReference SimpleName="spoon.template"/>
+  <spoon.reflect.reference:CtTypeReference SimpleName="Test" Package="/213"/>
+  <spoon.reflect.reference:CtPackageReference SimpleName="test.test"/>
+  <spoon.reflect.declaration:SourcePosition/>
+  <spoon.reflect.declaration:SourcePosition/>
+  <spoon.reflect.declaration:SourcePosition/>
+  <spoon.reflect.declaration:SourcePosition/>
+  <spoon.reflect.declaration:SourcePosition/>
+  <spoon.reflect.declaration:SourcePosition/>
+  <spoon.reflect.declaration:SourcePosition/>
+  <spoon.reflect.declaration:SourcePosition/>
+  <spoon.reflect.declaration:SourcePosition/>
+  <spoon.reflect.declaration:SourcePosition/>
+  <spoon.reflect.declaration:SourcePosition/>
+  <spoon.reflect.declaration:SourcePosition/>
+  <spoon.reflect.declaration:SourcePosition/>
+  <spoon.reflect.declaration:SourcePosition/>
+  <spoon.reflect.declaration:SourcePosition/>
+  <spoon.reflect.declaration:SourcePosition/>
+  <spoon.reflect.declaration:SourcePosition/>
+  <spoon.reflect.declaration:SourcePosition/>
+  <spoon.reflect.declaration:SourcePosition/>
+  <spoon.reflect.declaration:SourcePosition/>
+  <spoon.reflect.declaration:SourcePosition/>
+  <spoon.reflect.declaration:SourcePosition/>
+  <spoon.reflect.declaration:SourcePosition/>
+  <spoon.reflect.declaration:SourcePosition/>
+  <spoon.reflect.declaration:SourcePosition/>
+  <spoon.reflect.declaration:SourcePosition/>
+  <spoon.reflect.declaration:SourcePosition/>
+  <spoon.reflect.declaration:SourcePosition/>
+  <spoon.reflect.declaration:SourcePosition/>
+  <spoon.reflect.declaration:SourcePosition/>
+  <spoon.reflect.declaration:SourcePosition/>
+  <spoon.reflect.declaration:SourcePosition/>
+  <spoon.reflect.declaration:SourcePosition/>
+  <spoon.reflect.declaration:SourcePosition/>
+  <spoon.reflect.declaration:SourcePosition/>
+  <spoon.reflect.declaration:SourcePosition/>
+  <spoon.reflect.declaration:SourcePosition/>
+  <spoon.reflect.declaration:SourcePosition/>
+  <spoon.reflect.declaration:SourcePosition/>
+  <spoon.reflect.declaration:SourcePosition/>
+  <spoon.reflect.declaration:SourcePosition/>
+  <spoon.reflect.declaration:SourcePosition/>
+  <spoon.reflect.declaration:SourcePosition/>
+  <spoon.reflect.declaration:SourcePosition/>
+  <spoon.reflect.declaration:SourcePosition/>
+  <spoon.reflect.declaration:SourcePosition/>
+  <spoon.reflect.declaration:SourcePosition/>
+  <spoon.reflect.declaration:SourcePosition/>
+  <spoon.reflect.declaration:SourcePosition/>
+  <spoon.reflect.declaration:SourcePosition/>
+  <spoon.reflect.declaration:SourcePosition/>
+  <spoon.reflect.declaration:SourcePosition/>
+  <spoon.reflect.declaration:SourcePosition/>
+  <spoon.reflect.declaration:SourcePosition/>
+  <spoon.reflect.declaration:SourcePosition/>
+  <spoon.reflect.declaration:SourcePosition/>
+  <spoon.reflect.declaration:SourcePosition/>
+  <spoon.reflect.declaration:SourcePosition/>
+  <spoon.reflect.declaration:SourcePosition/>
+  <spoon.reflect.declaration:SourcePosition/>
+  <spoon.reflect.declaration:SourcePosition/>
+  <spoon.reflect.declaration:SourcePosition/>
+  <spoon.reflect.declaration:SourcePosition/>
+  <spoon.reflect.declaration:SourcePosition/>
+  <spoon.reflect.declaration:SourcePosition/>
+  <spoon.reflect.declaration:SourcePosition/>
+  <spoon.reflect.declaration:SourcePosition/>
+  <spoon.reflect.declaration:SourcePosition/>
+  <spoon.reflect.declaration:SourcePosition/>
+  <spoon.reflect.declaration:SourcePosition/>
+</xmi:XMI>

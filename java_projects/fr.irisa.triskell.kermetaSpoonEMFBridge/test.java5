@@ -1,0 +1,439 @@
+<?xml version="1.0" encoding="ASCII"?>
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:spoon.reflect.code="http://spoon#reflect.code" xmlns:spoon.reflect.declaration="http://spoon#reflect.declaration" xmlns:spoon.reflect.reference="http://spoon#reflect.reference">
+  <spoon.reflect.declaration:CtClass Parent="/1" SimpleName="StoryReader" Methods="/9" Constructors="/2">
+    <Modifiers>public</Modifiers>
+  </spoon.reflect.declaration:CtClass>
+  <spoon.reflect.declaration:CtPackage SimpleName="p1" Types="/0 /183 /334 /388"/>
+  <spoon.reflect.declaration:CtConstructor Parent="/0" Body="/3">
+    <Modifiers>public</Modifiers>
+  </spoon.reflect.declaration:CtConstructor>
+  <spoon.reflect.code:CtBlock Parent="/2" Statements="/4"/>
+  <spoon.reflect.code:CtInvocation Parent="/3" Executable="/5" Type="/6"/>
+  <spoon.reflect.reference:CtExecutableReference SimpleName="&lt;init>" Type="/6" DeclaringType="/6" Static="false"/>
+  <spoon.reflect.reference:CtTypeReference SimpleName="Object" Package="/7"/>
+  <spoon.reflect.reference:CtPackageReference SimpleName="java.lang"/>
+  <spoon.reflect.reference:CtTypeReference SimpleName="void"/>
+  <spoon.reflect.declaration:CtMethod Parent="/0" SimpleName="main" Parameters="/10" Body="/14" Type="/8">
+    <Modifiers>public</Modifiers>
+    <Modifiers>static</Modifiers>
+  </spoon.reflect.declaration:CtMethod>
+  <spoon.reflect.declaration:CtParameter SimpleName="args" Type="/11"/>
+  <spoon.reflect.reference:CtArrayTypeReference ComponentType="/12"/>
+  <spoon.reflect.reference:CtTypeReference SimpleName="String" Package="/13"/>
+  <spoon.reflect.reference:CtPackageReference SimpleName="java.lang"/>
+  <spoon.reflect.code:CtBlock Parent="/9" Statements="/15 /20 /37"/>
+  <spoon.reflect.code:CtLocalVariable Parent="/14" SimpleName="storyList" Type="/16" DefaultExpression="/18"/>
+  <spoon.reflect.reference:CtTypeReference SimpleName="StoryList" Package="/17"/>
+  <spoon.reflect.reference:CtPackageReference SimpleName="p1"/>
+  <spoon.reflect.code:CtLiteral Parent="/15" Type="/19"/>
+  <spoon.reflect.reference:CtTypeReference SimpleName="&lt;nulltype>"/>
+  <spoon.reflect.code:CtLocalVariable Parent="/14" SimpleName="myStories" Type="/21" DefaultExpression="/23"/>
+  <spoon.reflect.reference:CtTypeReference SimpleName="List" Package="/22"/>
+  <spoon.reflect.reference:CtPackageReference SimpleName="java.util"/>
+  <spoon.reflect.code:CtInvocation Parent="/20" Executable="/24" Type="/29" Target="/31"/>
+  <spoon.reflect.reference:CtExecutableReference SimpleName="getStories" Type="/27" DeclaringType="/25" Static="false"/>
+  <spoon.reflect.reference:CtTypeReference SimpleName="StoryList" Package="/26"/>
+  <spoon.reflect.reference:CtPackageReference SimpleName="p1"/>
+  <spoon.reflect.reference:CtTypeReference SimpleName="List" Package="/28"/>
+  <spoon.reflect.reference:CtPackageReference SimpleName="java.util"/>
+  <spoon.reflect.reference:CtTypeReference SimpleName="List" Package="/30"/>
+  <spoon.reflect.reference:CtPackageReference SimpleName="java.util"/>
+  <spoon.reflect.code:CtVariableAccess Parent="/23" Type="/35" Variable="/32"/>
+  <spoon.reflect.reference:CtLocalVariableReference SimpleName="storyList" Declaration="/15" Type="/33"/>
+  <spoon.reflect.reference:CtTypeReference SimpleName="StoryList" Package="/34"/>
+  <spoon.reflect.reference:CtPackageReference SimpleName="p1"/>
+  <spoon.reflect.reference:CtTypeReference SimpleName="StoryList" Package="/36"/>
+  <spoon.reflect.reference:CtPackageReference SimpleName="p1"/>
+  <spoon.reflect.code:CtFor Parent="/14" Body="/58" ForInit="/38" ForUpdate="/55" Expression="/41"/>
+  <spoon.reflect.code:CtLocalVariable Parent="/37" SimpleName="i" Type="/39" DefaultExpression="/40"/>
+  <spoon.reflect.reference:CtTypeReference SimpleName="int"/>
+  <spoon.reflect.code:CtLiteral Parent="/38" Type="/39"/>
+  <spoon.reflect.code:CtBinaryOperator Parent="/37" Type="/42" Kind="LT" RightHandOperand="/45" LeftHandOperand="/43"/>
+  <spoon.reflect.reference:CtTypeReference SimpleName="boolean"/>
+  <spoon.reflect.code:CtVariableAccess Parent="/41" Type="/39" Variable="/44"/>
+  <spoon.reflect.reference:CtLocalVariableReference SimpleName="i" Declaration="/38" Type="/39"/>
+  <spoon.reflect.code:CtInvocation Parent="/41" Executable="/46" Type="/39" Target="/49"/>
+  <spoon.reflect.reference:CtExecutableReference SimpleName="size" Type="/39" DeclaringType="/47" Static="false"/>
+  <spoon.reflect.reference:CtTypeReference SimpleName="List" Package="/48"/>
+  <spoon.reflect.reference:CtPackageReference SimpleName="java.util"/>
+  <spoon.reflect.code:CtVariableAccess Parent="/45" Type="/53" Variable="/50"/>
+  <spoon.reflect.reference:CtLocalVariableReference SimpleName="myStories" Declaration="/20" Type="/51"/>
+  <spoon.reflect.reference:CtTypeReference SimpleName="List" Package="/52"/>
+  <spoon.reflect.reference:CtPackageReference SimpleName="java.util"/>
+  <spoon.reflect.reference:CtTypeReference SimpleName="List" Package="/54"/>
+  <spoon.reflect.reference:CtPackageReference SimpleName="java.util"/>
+  <spoon.reflect.code:CtUnaryOperator Parent="/37" Type="/39" Operand="/56" Kind="POSTINC"/>
+  <spoon.reflect.code:CtVariableAccess Parent="/55" Type="/39" Variable="/57"/>
+  <spoon.reflect.reference:CtLocalVariableReference SimpleName="i" Declaration="/38" Type="/39"/>
+  <spoon.reflect.code:CtBlock Parent="/37" Statements="/59 /80 /143 /171"/>
+  <spoon.reflect.code:CtLocalVariable Parent="/58" SimpleName="currentStory" Type="/60" DefaultExpression="/64"/>
+  <spoon.reflect.reference:CtTypeReference SimpleName="Story" Package="/61"/>
+  <spoon.reflect.reference:CtPackageReference SimpleName="p1"/>
+  <spoon.reflect.reference:CtTypeReference SimpleName="Story" Package="/63"/>
+  <spoon.reflect.reference:CtPackageReference SimpleName="p1"/>
+  <spoon.reflect.code:CtInvocation Parent="/59" Executable="/65" Arguments="/78" Type="/70" TypeCasts="/62" Target="/72"/>
+  <spoon.reflect.reference:CtExecutableReference SimpleName="get" Type="/68" DeclaringType="/66" ParameterTypes="/39" Static="false"/>
+  <spoon.reflect.reference:CtTypeReference SimpleName="List" Package="/67"/>
+  <spoon.reflect.reference:CtPackageReference SimpleName="java.util"/>
+  <spoon.reflect.reference:CtTypeReference SimpleName="Object" Package="/69"/>
+  <spoon.reflect.reference:CtPackageReference SimpleName="java.lang"/>
+  <spoon.reflect.reference:CtTypeReference SimpleName="Object" Package="/71"/>
+  <spoon.reflect.reference:CtPackageReference SimpleName="java.lang"/>
+  <spoon.reflect.code:CtVariableAccess Parent="/64" Type="/76" Variable="/73"/>
+  <spoon.reflect.reference:CtLocalVariableReference SimpleName="myStories" Declaration="/20" Type="/74"/>
+  <spoon.reflect.reference:CtTypeReference SimpleName="List" Package="/75"/>
+  <spoon.reflect.reference:CtPackageReference SimpleName="java.util"/>
+  <spoon.reflect.reference:CtTypeReference SimpleName="List" Package="/77"/>
+  <spoon.reflect.reference:CtPackageReference SimpleName="java.util"/>
+  <spoon.reflect.code:CtVariableAccess Parent="/64" Type="/39" Variable="/79"/>
+  <spoon.reflect.reference:CtLocalVariableReference SimpleName="i" Declaration="/38" Type="/39"/>
+  <spoon.reflect.code:CtInvocation Parent="/58" Executable="/81" Arguments="/94" Type="/8" Target="/86"/>
+  <spoon.reflect.reference:CtExecutableReference SimpleName="println" Type="/8" DeclaringType="/82" ParameterTypes="/84" Static="false"/>
+  <spoon.reflect.reference:CtTypeReference SimpleName="PrintStream" Package="/83"/>
+  <spoon.reflect.reference:CtPackageReference SimpleName="java.io"/>
+  <spoon.reflect.reference:CtTypeReference SimpleName="String" Package="/85"/>
+  <spoon.reflect.reference:CtPackageReference SimpleName="java.lang"/>
+  <spoon.reflect.code:CtFieldAccess Parent="/80" Type="/92" Variable="/87"/>
+  <spoon.reflect.reference:CtFieldReference SimpleName="out" Type="/88" DeclaringType="/90" Final="true" Static="true"/>
+  <spoon.reflect.reference:CtTypeReference SimpleName="PrintStream" Package="/89"/>
+  <spoon.reflect.reference:CtPackageReference SimpleName="java.io"/>
+  <spoon.reflect.reference:CtTypeReference SimpleName="System" Package="/91"/>
+  <spoon.reflect.reference:CtPackageReference SimpleName="java.lang"/>
+  <spoon.reflect.reference:CtTypeReference SimpleName="PrintStream" Package="/93"/>
+  <spoon.reflect.reference:CtPackageReference SimpleName="java.io"/>
+  <spoon.reflect.code:CtBinaryOperator Parent="/80" Type="/95" Kind="PLUS" RightHandOperand="/140" LeftHandOperand="/97"/>
+  <spoon.reflect.reference:CtTypeReference SimpleName="String" Package="/96"/>
+  <spoon.reflect.reference:CtPackageReference SimpleName="java.lang"/>
+  <spoon.reflect.code:CtBinaryOperator Parent="/94" Type="/98" Kind="PLUS" RightHandOperand="/126" LeftHandOperand="/100"/>
+  <spoon.reflect.reference:CtTypeReference SimpleName="String" Package="/99"/>
+  <spoon.reflect.reference:CtPackageReference SimpleName="java.lang"/>
+  <spoon.reflect.code:CtBinaryOperator Parent="/97" Type="/101" Kind="PLUS" RightHandOperand="/123" LeftHandOperand="/103"/>
+  <spoon.reflect.reference:CtTypeReference SimpleName="String" Package="/102"/>
+  <spoon.reflect.reference:CtPackageReference SimpleName="java.lang"/>
+  <spoon.reflect.code:CtBinaryOperator Parent="/100" Type="/104" Kind="PLUS" RightHandOperand="/109" LeftHandOperand="/106"/>
+  <spoon.reflect.reference:CtTypeReference SimpleName="String" Package="/105"/>
+  <spoon.reflect.reference:CtPackageReference SimpleName="java.lang"/>
+  <spoon.reflect.code:CtLiteral Parent="/103" Type="/107"/>
+  <spoon.reflect.reference:CtTypeReference SimpleName="String" Package="/108"/>
+  <spoon.reflect.reference:CtPackageReference SimpleName="java.lang"/>
+  <spoon.reflect.code:CtInvocation Parent="/103" Executable="/110" Type="/115" Target="/117"/>
+  <spoon.reflect.reference:CtExecutableReference SimpleName="getTitle" Type="/113" DeclaringType="/111" Static="false"/>
+  <spoon.reflect.reference:CtTypeReference SimpleName="Story" Package="/112"/>
+  <spoon.reflect.reference:CtPackageReference SimpleName="p1"/>
+  <spoon.reflect.reference:CtTypeReference SimpleName="String" Package="/114"/>
+  <spoon.reflect.reference:CtPackageReference SimpleName="java.lang"/>
+  <spoon.reflect.reference:CtTypeReference SimpleName="String" Package="/116"/>
+  <spoon.reflect.reference:CtPackageReference SimpleName="java.lang"/>
+  <spoon.reflect.code:CtVariableAccess Parent="/109" Type="/121" Variable="/118"/>
+  <spoon.reflect.reference:CtLocalVariableReference SimpleName="currentStory" Declaration="/59" Type="/119"/>
+  <spoon.reflect.reference:CtTypeReference SimpleName="Story" Package="/120"/>
+  <spoon.reflect.reference:CtPackageReference SimpleName="p1"/>
+  <spoon.reflect.reference:CtTypeReference SimpleName="Story" Package="/122"/>
+  <spoon.reflect.reference:CtPackageReference SimpleName="p1"/>
+  <spoon.reflect.code:CtLiteral Parent="/100" Type="/124"/>
+  <spoon.reflect.reference:CtTypeReference SimpleName="String" Package="/125"/>
+  <spoon.reflect.reference:CtPackageReference SimpleName="java.lang"/>
+  <spoon.reflect.code:CtInvocation Parent="/97" Executable="/127" Type="/132" Target="/134"/>
+  <spoon.reflect.reference:CtExecutableReference SimpleName="getAuthor" Type="/130" DeclaringType="/128" Static="false"/>
+  <spoon.reflect.reference:CtTypeReference SimpleName="Story" Package="/129"/>
+  <spoon.reflect.reference:CtPackageReference SimpleName="p1"/>
+  <spoon.reflect.reference:CtTypeReference SimpleName="String" Package="/131"/>
+  <spoon.reflect.reference:CtPackageReference SimpleName="java.lang"/>
+  <spoon.reflect.reference:CtTypeReference SimpleName="String" Package="/133"/>
+  <spoon.reflect.reference:CtPackageReference SimpleName="java.lang"/>
+  <spoon.reflect.code:CtVariableAccess Parent="/126" Type="/138" Variable="/135"/>
+  <spoon.reflect.reference:CtLocalVariableReference SimpleName="currentStory" Declaration="/59" Type="/136"/>
+  <spoon.reflect.reference:CtTypeReference SimpleName="Story" Package="/137"/>
+  <spoon.reflect.reference:CtPackageReference SimpleName="p1"/>
+  <spoon.reflect.reference:CtTypeReference SimpleName="Story" Package="/139"/>
+  <spoon.reflect.reference:CtPackageReference SimpleName="p1"/>
+  <spoon.reflect.code:CtLiteral Parent="/94" Type="/141"/>
+  <spoon.reflect.reference:CtTypeReference SimpleName="String" Package="/142"/>
+  <spoon.reflect.reference:CtPackageReference SimpleName="java.lang"/>
+  <spoon.reflect.code:CtInvocation Parent="/58" Executable="/144" Arguments="/157" Type="/8" Target="/149"/>
+  <spoon.reflect.reference:CtExecutableReference SimpleName="println" Type="/8" DeclaringType="/145" ParameterTypes="/147" Static="false"/>
+  <spoon.reflect.reference:CtTypeReference SimpleName="PrintStream" Package="/146"/>
+  <spoon.reflect.reference:CtPackageReference SimpleName="java.io"/>
+  <spoon.reflect.reference:CtTypeReference SimpleName="String" Package="/148"/>
+  <spoon.reflect.reference:CtPackageReference SimpleName="java.lang"/>
+  <spoon.reflect.code:CtFieldAccess Parent="/143" Type="/155" Variable="/150"/>
+  <spoon.reflect.reference:CtFieldReference SimpleName="out" Type="/151" DeclaringType="/153" Final="true" Static="true"/>
+  <spoon.reflect.reference:CtTypeReference SimpleName="PrintStream" Package="/152"/>
+  <spoon.reflect.reference:CtPackageReference SimpleName="java.io"/>
+  <spoon.reflect.reference:CtTypeReference SimpleName="System" Package="/154"/>
+  <spoon.reflect.reference:CtPackageReference SimpleName="java.lang"/>
+  <spoon.reflect.reference:CtTypeReference SimpleName="PrintStream" Package="/156"/>
+  <spoon.reflect.reference:CtPackageReference SimpleName="java.io"/>
+  <spoon.reflect.code:CtInvocation Parent="/143" Executable="/158" Type="/163" Target="/165"/>
+  <spoon.reflect.reference:CtExecutableReference SimpleName="getContent" Type="/161" DeclaringType="/159" Static="false"/>
+  <spoon.reflect.reference:CtTypeReference SimpleName="Story" Package="/160"/>
+  <spoon.reflect.reference:CtPackageReference SimpleName="p1"/>
+  <spoon.reflect.reference:CtTypeReference SimpleName="String" Package="/162"/>
+  <spoon.reflect.reference:CtPackageReference SimpleName="java.lang"/>
+  <spoon.reflect.reference:CtTypeReference SimpleName="String" Package="/164"/>
+  <spoon.reflect.reference:CtPackageReference SimpleName="java.lang"/>
+  <spoon.reflect.code:CtVariableAccess Parent="/157" Type="/169" Variable="/166"/>
+  <spoon.reflect.reference:CtLocalVariableReference SimpleName="currentStory" Declaration="/59" Type="/167"/>
+  <spoon.reflect.reference:CtTypeReference SimpleName="Story" Package="/168"/>
+  <spoon.reflect.reference:CtPackageReference SimpleName="p1"/>
+  <spoon.reflect.reference:CtTypeReference SimpleName="Story" Package="/170"/>
+  <spoon.reflect.reference:CtPackageReference SimpleName="p1"/>
+  <spoon.reflect.code:CtInvocation Parent="/58" Executable="/172" Type="/8" Target="/175"/>
+  <spoon.reflect.reference:CtExecutableReference SimpleName="println" Type="/8" DeclaringType="/173" Static="false"/>
+  <spoon.reflect.reference:CtTypeReference SimpleName="PrintStream" Package="/174"/>
+  <spoon.reflect.reference:CtPackageReference SimpleName="java.io"/>
+  <spoon.reflect.code:CtFieldAccess Parent="/171" Type="/181" Variable="/176"/>
+  <spoon.reflect.reference:CtFieldReference SimpleName="out" Type="/177" DeclaringType="/179" Final="true" Static="true"/>
+  <spoon.reflect.reference:CtTypeReference SimpleName="PrintStream" Package="/178"/>
+  <spoon.reflect.reference:CtPackageReference SimpleName="java.io"/>
+  <spoon.reflect.reference:CtTypeReference SimpleName="System" Package="/180"/>
+  <spoon.reflect.reference:CtPackageReference SimpleName="java.lang"/>
+  <spoon.reflect.reference:CtTypeReference SimpleName="PrintStream" Package="/182"/>
+  <spoon.reflect.reference:CtPackageReference SimpleName="java.io"/>
+  <spoon.reflect.declaration:CtClass Parent="/1" SimpleName="Story" Fields="/184 /187 /190" Methods="/199 /230 /243 /274 /290 /321" Constructors="/193">
+    <Modifiers>public</Modifiers>
+  </spoon.reflect.declaration:CtClass>
+  <spoon.reflect.declaration:CtField Parent="/183" SimpleName="title" Type="/185" DeclaringType="/183">
+    <Modifiers>private</Modifiers>
+  </spoon.reflect.declaration:CtField>
+  <spoon.reflect.reference:CtTypeReference SimpleName="String" Package="/186"/>
+  <spoon.reflect.reference:CtPackageReference SimpleName="java.lang"/>
+  <spoon.reflect.declaration:CtField Parent="/183" SimpleName="author" Type="/188" DeclaringType="/183">
+    <Modifiers>private</Modifiers>
+  </spoon.reflect.declaration:CtField>
+  <spoon.reflect.reference:CtTypeReference SimpleName="String" Package="/189"/>
+  <spoon.reflect.reference:CtPackageReference SimpleName="java.lang"/>
+  <spoon.reflect.declaration:CtField Parent="/183" SimpleName="content" Type="/191" DeclaringType="/183">
+    <Modifiers>private</Modifiers>
+  </spoon.reflect.declaration:CtField>
+  <spoon.reflect.reference:CtTypeReference SimpleName="String" Package="/192"/>
+  <spoon.reflect.reference:CtPackageReference SimpleName="java.lang"/>
+  <spoon.reflect.declaration:CtConstructor Parent="/183" Body="/194">
+    <Modifiers>public</Modifiers>
+  </spoon.reflect.declaration:CtConstructor>
+  <spoon.reflect.code:CtBlock Parent="/193" Statements="/195"/>
+  <spoon.reflect.code:CtInvocation Parent="/194" Executable="/196" Type="/197"/>
+  <spoon.reflect.reference:CtExecutableReference SimpleName="&lt;init>" Type="/197" DeclaringType="/197" Static="false"/>
+  <spoon.reflect.reference:CtTypeReference SimpleName="Object" Package="/198"/>
+  <spoon.reflect.reference:CtPackageReference SimpleName="java.lang"/>
+  <spoon.reflect.declaration:CtMethod Parent="/183" SimpleName="setTitle" Parameters="/200" Body="/203" Type="/8">
+    <Modifiers>public</Modifiers>
+  </spoon.reflect.declaration:CtMethod>
+  <spoon.reflect.declaration:CtParameter SimpleName="title" Type="/201"/>
+  <spoon.reflect.reference:CtTypeReference SimpleName="String" Package="/202"/>
+  <spoon.reflect.reference:CtPackageReference SimpleName="java.lang"/>
+  <spoon.reflect.code:CtBlock Parent="/199" Statements="/204"/>
+  <spoon.reflect.code:CtAssignment Parent="/203" Type="/205" Assignment="/219" Assigned="/207"/>
+  <spoon.reflect.reference:CtTypeReference SimpleName="String" Package="/206"/>
+  <spoon.reflect.reference:CtPackageReference SimpleName="java.lang"/>
+  <spoon.reflect.code:CtFieldAccess Parent="/204" Type="/213" Target="/218" Variable="/208"/>
+  <spoon.reflect.reference:CtFieldReference SimpleName="title" Type="/209" DeclaringType="/211"/>
+  <spoon.reflect.reference:CtTypeReference SimpleName="String" Package="/210"/>
+  <spoon.reflect.reference:CtPackageReference SimpleName="java.lang"/>
+  <spoon.reflect.reference:CtTypeReference SimpleName="Story" Package="/212"/>
+  <spoon.reflect.reference:CtPackageReference SimpleName="p1"/>
+  <spoon.reflect.reference:CtTypeReference SimpleName="String" Package="/214"/>
+  <spoon.reflect.reference:CtPackageReference SimpleName="java.lang"/>
+  <spoon.reflect.reference:CtFieldReference SimpleName="this" Type="/216" DeclaringType="/216"/>
+  <spoon.reflect.reference:CtTypeReference SimpleName="Story" Package="/217"/>
+  <spoon.reflect.reference:CtPackageReference SimpleName="p1"/>
+  <spoon.reflect.code:CtFieldAccess Parent="/207" Type="/216" Variable="/215"/>
+  <spoon.reflect.code:CtVariableAccess Parent="/204" Type="/228" Variable="/220"/>
+  <spoon.reflect.reference:CtParameterReference SimpleName="title" Type="/221" DeclaringExecutable="/223"/>
+  <spoon.reflect.reference:CtTypeReference SimpleName="String" Package="/222"/>
+  <spoon.reflect.reference:CtPackageReference SimpleName="java.lang"/>
+  <spoon.reflect.reference:CtExecutableReference SimpleName="setTitle" Type="/8" DeclaringType="/224" ParameterTypes="/226" Static="false"/>
+  <spoon.reflect.reference:CtTypeReference SimpleName="Story" Package="/225"/>
+  <spoon.reflect.reference:CtPackageReference SimpleName="p1"/>
+  <spoon.reflect.reference:CtTypeReference SimpleName="String" Package="/227"/>
+  <spoon.reflect.reference:CtPackageReference SimpleName="java.lang"/>
+  <spoon.reflect.reference:CtTypeReference SimpleName="String" Package="/229"/>
+  <spoon.reflect.reference:CtPackageReference SimpleName="java.lang"/>
+  <spoon.reflect.declaration:CtMethod Parent="/183" SimpleName="getTitle" Body="/233" Type="/231">
+    <Modifiers>public</Modifiers>
+  </spoon.reflect.declaration:CtMethod>
+  <spoon.reflect.reference:CtTypeReference SimpleName="String" Package="/232"/>
+  <spoon.reflect.reference:CtPackageReference SimpleName="java.lang"/>
+  <spoon.reflect.code:CtBlock Parent="/230" Statements="/234"/>
+  <spoon.reflect.code:CtReturn Parent="/233" ReturnedExpression="/235"/>
+  <spoon.reflect.code:CtFieldAccess Parent="/234" Type="/241" Variable="/236"/>
+  <spoon.reflect.reference:CtFieldReference SimpleName="title" Type="/237" DeclaringType="/239"/>
+  <spoon.reflect.reference:CtTypeReference SimpleName="String" Package="/238"/>
+  <spoon.reflect.reference:CtPackageReference SimpleName="java.lang"/>
+  <spoon.reflect.reference:CtTypeReference SimpleName="Story" Package="/240"/>
+  <spoon.reflect.reference:CtPackageReference SimpleName="p1"/>
+  <spoon.reflect.reference:CtTypeReference SimpleName="String" Package="/242"/>
+  <spoon.reflect.reference:CtPackageReference SimpleName="java.lang"/>
+  <spoon.reflect.declaration:CtMethod Parent="/183" SimpleName="setAuthor" Parameters="/244" Body="/247" Type="/8">
+    <Modifiers>public</Modifiers>
+  </spoon.reflect.declaration:CtMethod>
+  <spoon.reflect.declaration:CtParameter SimpleName="author" Type="/245"/>
+  <spoon.reflect.reference:CtTypeReference SimpleName="String" Package="/246"/>
+  <spoon.reflect.reference:CtPackageReference SimpleName="java.lang"/>
+  <spoon.reflect.code:CtBlock Parent="/243" Statements="/248"/>
+  <spoon.reflect.code:CtAssignment Parent="/247" Type="/249" Assignment="/263" Assigned="/251"/>
+  <spoon.reflect.reference:CtTypeReference SimpleName="String" Package="/250"/>
+  <spoon.reflect.reference:CtPackageReference SimpleName="java.lang"/>
+  <spoon.reflect.code:CtFieldAccess Parent="/248" Type="/257" Target="/262" Variable="/252"/>
+  <spoon.reflect.reference:CtFieldReference SimpleName="author" Type="/253" DeclaringType="/255"/>
+  <spoon.reflect.reference:CtTypeReference SimpleName="String" Package="/254"/>
+  <spoon.reflect.reference:CtPackageReference SimpleName="java.lang"/>
+  <spoon.reflect.reference:CtTypeReference SimpleName="Story" Package="/256"/>
+  <spoon.reflect.reference:CtPackageReference SimpleName="p1"/>
+  <spoon.reflect.reference:CtTypeReference SimpleName="String" Package="/258"/>
+  <spoon.reflect.reference:CtPackageReference SimpleName="java.lang"/>
+  <spoon.reflect.reference:CtFieldReference SimpleName="this" Type="/260" DeclaringType="/260"/>
+  <spoon.reflect.reference:CtTypeReference SimpleName="Story" Package="/261"/>
+  <spoon.reflect.reference:CtPackageReference SimpleName="p1"/>
+  <spoon.reflect.code:CtFieldAccess Parent="/251" Type="/260" Variable="/259"/>
+  <spoon.reflect.code:CtVariableAccess Parent="/248" Type="/272" Variable="/264"/>
+  <spoon.reflect.reference:CtParameterReference SimpleName="author" Type="/265" DeclaringExecutable="/267"/>
+  <spoon.reflect.reference:CtTypeReference SimpleName="String" Package="/266"/>
+  <spoon.reflect.reference:CtPackageReference SimpleName="java.lang"/>
+  <spoon.reflect.reference:CtExecutableReference SimpleName="setAuthor" Type="/8" DeclaringType="/268" ParameterTypes="/270" Static="false"/>
+  <spoon.reflect.reference:CtTypeReference SimpleName="Story" Package="/269"/>
+  <spoon.reflect.reference:CtPackageReference SimpleName="p1"/>
+  <spoon.reflect.reference:CtTypeReference SimpleName="String" Package="/271"/>
+  <spoon.reflect.reference:CtPackageReference SimpleName="java.lang"/>
+  <spoon.reflect.reference:CtTypeReference SimpleName="String" Package="/273"/>
+  <spoon.reflect.reference:CtPackageReference SimpleName="java.lang"/>
+  <spoon.reflect.declaration:CtMethod Annotations="/277" Parent="/183" SimpleName="getAuthor" Body="/280" Type="/275">
+    <Modifiers>public</Modifiers>
+  </spoon.reflect.declaration:CtMethod>
+  <spoon.reflect.reference:CtTypeReference SimpleName="String" Package="/276"/>
+  <spoon.reflect.reference:CtPackageReference SimpleName="java.lang"/>
+  <spoon.reflect.declaration:CtAnnotation Parent="/274" AnnotationType="/278"/>
+  <spoon.reflect.reference:CtTypeReference SimpleName="OneToMany" Package="/279"/>
+  <spoon.reflect.reference:CtPackageReference SimpleName="p1"/>
+  <spoon.reflect.code:CtBlock Parent="/274" Statements="/281"/>
+  <spoon.reflect.code:CtReturn Parent="/280" ReturnedExpression="/282"/>
+  <spoon.reflect.code:CtFieldAccess Parent="/281" Type="/288" Variable="/283"/>
+  <spoon.reflect.reference:CtFieldReference SimpleName="author" Type="/284" DeclaringType="/286"/>
+  <spoon.reflect.reference:CtTypeReference SimpleName="String" Package="/285"/>
+  <spoon.reflect.reference:CtPackageReference SimpleName="java.lang"/>
+  <spoon.reflect.reference:CtTypeReference SimpleName="Story" Package="/287"/>
+  <spoon.reflect.reference:CtPackageReference SimpleName="p1"/>
+  <spoon.reflect.reference:CtTypeReference SimpleName="String" Package="/289"/>
+  <spoon.reflect.reference:CtPackageReference SimpleName="java.lang"/>
+  <spoon.reflect.declaration:CtMethod Parent="/183" SimpleName="setContent" Parameters="/291" Body="/294" Type="/8">
+    <Modifiers>public</Modifiers>
+  </spoon.reflect.declaration:CtMethod>
+  <spoon.reflect.declaration:CtParameter SimpleName="content" Type="/292"/>
+  <spoon.reflect.reference:CtTypeReference SimpleName="String" Package="/293"/>
+  <spoon.reflect.reference:CtPackageReference SimpleName="java.lang"/>
+  <spoon.reflect.code:CtBlock Parent="/290" Statements="/295"/>
+  <spoon.reflect.code:CtAssignment Parent="/294" Type="/296" Assignment="/310" Assigned="/298"/>
+  <spoon.reflect.reference:CtTypeReference SimpleName="String" Package="/297"/>
+  <spoon.reflect.reference:CtPackageReference SimpleName="java.lang"/>
+  <spoon.reflect.code:CtFieldAccess Parent="/295" Type="/304" Target="/309" Variable="/299"/>
+  <spoon.reflect.reference:CtFieldReference SimpleName="content" Type="/300" DeclaringType="/302"/>
+  <spoon.reflect.reference:CtTypeReference SimpleName="String" Package="/301"/>
+  <spoon.reflect.reference:CtPackageReference SimpleName="java.lang"/>
+  <spoon.reflect.reference:CtTypeReference SimpleName="Story" Package="/303"/>
+  <spoon.reflect.reference:CtPackageReference SimpleName="p1"/>
+  <spoon.reflect.reference:CtTypeReference SimpleName="String" Package="/305"/>
+  <spoon.reflect.reference:CtPackageReference SimpleName="java.lang"/>
+  <spoon.reflect.reference:CtFieldReference SimpleName="this" Type="/307" DeclaringType="/307"/>
+  <spoon.reflect.reference:CtTypeReference SimpleName="Story" Package="/308"/>
+  <spoon.reflect.reference:CtPackageReference SimpleName="p1"/>
+  <spoon.reflect.code:CtFieldAccess Parent="/298" Type="/307" Variable="/306"/>
+  <spoon.reflect.code:CtVariableAccess Parent="/295" Type="/319" Variable="/311"/>
+  <spoon.reflect.reference:CtParameterReference SimpleName="content" Type="/312" DeclaringExecutable="/314"/>
+  <spoon.reflect.reference:CtTypeReference SimpleName="String" Package="/313"/>
+  <spoon.reflect.reference:CtPackageReference SimpleName="java.lang"/>
+  <spoon.reflect.reference:CtExecutableReference SimpleName="setContent" Type="/8" DeclaringType="/315" ParameterTypes="/317" Static="false"/>
+  <spoon.reflect.reference:CtTypeReference SimpleName="Story" Package="/316"/>
+  <spoon.reflect.reference:CtPackageReference SimpleName="p1"/>
+  <spoon.reflect.reference:CtTypeReference SimpleName="String" Package="/318"/>
+  <spoon.reflect.reference:CtPackageReference SimpleName="java.lang"/>
+  <spoon.reflect.reference:CtTypeReference SimpleName="String" Package="/320"/>
+  <spoon.reflect.reference:CtPackageReference SimpleName="java.lang"/>
+  <spoon.reflect.declaration:CtMethod Parent="/183" SimpleName="getContent" Body="/324" Type="/322">
+    <Modifiers>public</Modifiers>
+  </spoon.reflect.declaration:CtMethod>
+  <spoon.reflect.reference:CtTypeReference SimpleName="String" Package="/323"/>
+  <spoon.reflect.reference:CtPackageReference SimpleName="java.lang"/>
+  <spoon.reflect.code:CtBlock Parent="/321" Statements="/325"/>
+  <spoon.reflect.code:CtReturn Parent="/324" ReturnedExpression="/326"/>
+  <spoon.reflect.code:CtFieldAccess Parent="/325" Type="/332" Variable="/327"/>
+  <spoon.reflect.reference:CtFieldReference SimpleName="content" Type="/328" DeclaringType="/330"/>
+  <spoon.reflect.reference:CtTypeReference SimpleName="String" Package="/329"/>
+  <spoon.reflect.reference:CtPackageReference SimpleName="java.lang"/>
+  <spoon.reflect.reference:CtTypeReference SimpleName="Story" Package="/331"/>
+  <spoon.reflect.reference:CtPackageReference SimpleName="p1"/>
+  <spoon.reflect.reference:CtTypeReference SimpleName="String" Package="/333"/>
+  <spoon.reflect.reference:CtPackageReference SimpleName="java.lang"/>
+  <spoon.reflect.declaration:CtClass Parent="/1" SimpleName="StoryList" Fields="/335" Methods="/344 /375" Constructors="/338">
+    <Modifiers>public</Modifiers>
+  </spoon.reflect.declaration:CtClass>
+  <spoon.reflect.declaration:CtField Parent="/334" SimpleName="stories" Type="/336" DeclaringType="/334">
+    <Modifiers>private</Modifiers>
+  </spoon.reflect.declaration:CtField>
+  <spoon.reflect.reference:CtTypeReference SimpleName="List" Package="/337"/>
+  <spoon.reflect.reference:CtPackageReference SimpleName="java.util"/>
+  <spoon.reflect.declaration:CtConstructor Parent="/334" Body="/339">
+    <Modifiers>public</Modifiers>
+  </spoon.reflect.declaration:CtConstructor>
+  <spoon.reflect.code:CtBlock Parent="/338" Statements="/340"/>
+  <spoon.reflect.code:CtInvocation Parent="/339" Executable="/341" Type="/342"/>
+  <spoon.reflect.reference:CtExecutableReference SimpleName="&lt;init>" Type="/342" DeclaringType="/342" Static="false"/>
+  <spoon.reflect.reference:CtTypeReference SimpleName="Object" Package="/343"/>
+  <spoon.reflect.reference:CtPackageReference SimpleName="java.lang"/>
+  <spoon.reflect.declaration:CtMethod Parent="/334" SimpleName="setStories" Parameters="/345" Body="/348" Type="/8">
+    <Modifiers>public</Modifiers>
+  </spoon.reflect.declaration:CtMethod>
+  <spoon.reflect.declaration:CtParameter SimpleName="stories" Type="/346"/>
+  <spoon.reflect.reference:CtTypeReference SimpleName="List" Package="/347"/>
+  <spoon.reflect.reference:CtPackageReference SimpleName="java.util"/>
+  <spoon.reflect.code:CtBlock Parent="/344" Statements="/349"/>
+  <spoon.reflect.code:CtAssignment Parent="/348" Type="/350" Assignment="/364" Assigned="/352"/>
+  <spoon.reflect.reference:CtTypeReference SimpleName="List" Package="/351"/>
+  <spoon.reflect.reference:CtPackageReference SimpleName="java.util"/>
+  <spoon.reflect.code:CtFieldAccess Parent="/349" Type="/358" Target="/363" Variable="/353"/>
+  <spoon.reflect.reference:CtFieldReference SimpleName="stories" Type="/354" DeclaringType="/356"/>
+  <spoon.reflect.reference:CtTypeReference SimpleName="List" Package="/355"/>
+  <spoon.reflect.reference:CtPackageReference SimpleName="java.util"/>
+  <spoon.reflect.reference:CtTypeReference SimpleName="StoryList" Package="/357"/>
+  <spoon.reflect.reference:CtPackageReference SimpleName="p1"/>
+  <spoon.reflect.reference:CtTypeReference SimpleName="List" Package="/359"/>
+  <spoon.reflect.reference:CtPackageReference SimpleName="java.util"/>
+  <spoon.reflect.reference:CtFieldReference SimpleName="this" Type="/361" DeclaringType="/361"/>
+  <spoon.reflect.reference:CtTypeReference SimpleName="StoryList" Package="/362"/>
+  <spoon.reflect.reference:CtPackageReference SimpleName="p1"/>
+  <spoon.reflect.code:CtFieldAccess Parent="/352" Type="/361" Variable="/360"/>
+  <spoon.reflect.code:CtVariableAccess Parent="/349" Type="/373" Variable="/365"/>
+  <spoon.reflect.reference:CtParameterReference SimpleName="stories" Type="/366" DeclaringExecutable="/368"/>
+  <spoon.reflect.reference:CtTypeReference SimpleName="List" Package="/367"/>
+  <spoon.reflect.reference:CtPackageReference SimpleName="java.util"/>
+  <spoon.reflect.reference:CtExecutableReference SimpleName="setStories" Type="/8" DeclaringType="/369" ParameterTypes="/371" Static="false"/>
+  <spoon.reflect.reference:CtTypeReference SimpleName="StoryList" Package="/370"/>
+  <spoon.reflect.reference:CtPackageReference SimpleName="p1"/>
+  <spoon.reflect.reference:CtTypeReference SimpleName="List" Package="/372"/>
+  <spoon.reflect.reference:CtPackageReference SimpleName="java.util"/>
+  <spoon.reflect.reference:CtTypeReference SimpleName="List" Package="/374"/>
+  <spoon.reflect.reference:CtPackageReference SimpleName="java.util"/>
+  <spoon.reflect.declaration:CtMethod Parent="/334" SimpleName="getStories" Body="/378" Type="/376">
+    <Modifiers>public</Modifiers>
+  </spoon.reflect.declaration:CtMethod>
+  <spoon.reflect.reference:CtTypeReference SimpleName="List" Package="/377"/>
+  <spoon.reflect.reference:CtPackageReference SimpleName="java.util"/>
+  <spoon.reflect.code:CtBlock Parent="/375" Statements="/379"/>
+  <spoon.reflect.code:CtReturn Parent="/378" ReturnedExpression="/380"/>
+  <spoon.reflect.code:CtFieldAccess Parent="/379" Type="/386" Variable="/381"/>
+  <spoon.reflect.reference:CtFieldReference SimpleName="stories" Type="/382" DeclaringType="/384"/>
+  <spoon.reflect.reference:CtTypeReference SimpleName="List" Package="/383"/>
+  <spoon.reflect.reference:CtPackageReference SimpleName="java.util"/>
+  <spoon.reflect.reference:CtTypeReference SimpleName="StoryList" Package="/385"/>
+  <spoon.reflect.reference:CtPackageReference SimpleName="p1"/>
+  <spoon.reflect.reference:CtTypeReference SimpleName="List" Package="/387"/>
+  <spoon.reflect.reference:CtPackageReference SimpleName="java.util"/>
+  <spoon.reflect.declaration:CtAnnotationType Parent="/1" SimpleName="OneToMany" Package="/1">
+    <Modifiers>public</Modifiers>
+  </spoon.reflect.declaration:CtAnnotationType>
+  <spoon.reflect.reference:CtTypeReference SimpleName="Template" Package="/390"/>
+  <spoon.reflect.reference:CtPackageReference SimpleName="spoon.template"/>
+  <spoon.reflect.reference:CtTypeReference SimpleName="Template" Package="/392"/>
+  <spoon.reflect.reference:CtPackageReference SimpleName="spoon.template"/>
+  <spoon.reflect.reference:CtTypeReference SimpleName="Template" Package="/394"/>
+  <spoon.reflect.reference:CtPackageReference SimpleName="spoon.template"/>
+</xmi:XMI>
