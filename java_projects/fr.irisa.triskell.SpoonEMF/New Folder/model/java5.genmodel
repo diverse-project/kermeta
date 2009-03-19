@@ -1,0 +1,377 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/TestGeneration/src"
+    creationSubmenus="true" modelPluginID="Java5Test" modelName="Java5" modelPluginClass=""
+    rootImplementsInterface="" suppressEMFTypes="true" featureMapWrapperInterface=""
+    featureMapWrapperInternalInterface="" featureMapWrapperClass="" booleanFlagsField=""
+    importerID="org.eclipse.emf.importer.ecore" minimalReflectiveMethods="false">
+  <foreignModel>java5.ecore</foreignModel>
+  <genPackages prefix="Spoon" basePackage="emf" disposableProviderFactory="true" childCreationExtenders="true"
+      ecorePackage="java5.ecore#/">
+    <genDataTypes ecoreDataType="java5.ecore#//Object"/>
+    <genDataTypes ecoreDataType="java5.ecore#//Constructor"/>
+    <genDataTypes ecoreDataType="java5.ecore#//Method"/>
+    <genDataTypes ecoreDataType="java5.ecore#//Boolean"/>
+    <genDataTypes ecoreDataType="java5.ecore#//Field"/>
+    <genDataTypes ecoreDataType="java5.ecore#//String"/>
+    <genDataTypes ecoreDataType="java5.ecore#//Class"/>
+    <genDataTypes ecoreDataType="java5.ecore#//Annotation"/>
+    <genDataTypes ecoreDataType="java5.ecore#//Integer"/>
+    <genDataTypes ecoreDataType="java5.ecore#//BinaryOperatorKind"/>
+    <genDataTypes ecoreDataType="java5.ecore#//UnaryOperatorKind"/>
+    <genDataTypes ecoreDataType="java5.ecore#//ModifierKind"/>
+    <genDataTypes ecoreDataType="java5.ecore#//File"/>
+    <genClasses image="false" ecoreClass="java5.ecore#//Dummy"/>
+    <nestedGenPackages prefix="Reflect" basePackage="emf.spoon" disposableProviderFactory="true"
+        ecorePackage="java5.ecore#//reflect">
+      <genClasses ecoreClass="java5.ecore#//reflect/Dummy"/>
+      <nestedGenPackages prefix="Reference" basePackage="emf.spoon.reflect" disposableProviderFactory="true"
+          ecorePackage="java5.ecore#//reflect/reference">
+        <genClasses ecoreClass="java5.ecore#//reflect/reference/CtArrayTypeReference">
+          <genFeatures notify="false" createChild="false" ecoreFeature="ecore:EReference java5.ecore#//reflect/reference/CtArrayTypeReference/ComponentType"/>
+        </genClasses>
+        <genClasses ecoreClass="java5.ecore#//reflect/reference/CtExecutableReference">
+          <genFeatures notify="false" createChild="false" ecoreFeature="ecore:EReference java5.ecore#//reflect/reference/CtExecutableReference/Type"/>
+          <genFeatures notify="false" createChild="false" ecoreFeature="ecore:EReference java5.ecore#//reflect/reference/CtExecutableReference/DeclaringType"/>
+          <genFeatures notify="false" createChild="false" ecoreFeature="ecore:EReference java5.ecore#//reflect/reference/CtExecutableReference/ParameterTypes"/>
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute java5.ecore#//reflect/reference/CtExecutableReference/Static"/>
+          <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute java5.ecore#//reflect/reference/CtExecutableReference/ActualConstructor"/>
+          <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute java5.ecore#//reflect/reference/CtExecutableReference/ActualMethod"/>
+        </genClasses>
+        <genClasses ecoreClass="java5.ecore#//reflect/reference/CtFieldReference">
+          <genFeatures notify="false" createChild="false" ecoreFeature="ecore:EReference java5.ecore#//reflect/reference/CtFieldReference/DeclaringType"/>
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute java5.ecore#//reflect/reference/CtFieldReference/Final"/>
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute java5.ecore#//reflect/reference/CtFieldReference/Static"/>
+          <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute java5.ecore#//reflect/reference/CtFieldReference/ActualField"/>
+          <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute java5.ecore#//reflect/reference/CtFieldReference/QualifiedName"/>
+        </genClasses>
+        <genClasses ecoreClass="java5.ecore#//reflect/reference/CtGenericElementReference">
+          <genFeatures notify="false" createChild="false" ecoreFeature="ecore:EReference java5.ecore#//reflect/reference/CtGenericElementReference/ActualTypeArguments"/>
+        </genClasses>
+        <genClasses ecoreClass="java5.ecore#//reflect/reference/CtLocalVariableReference"/>
+        <genClasses ecoreClass="java5.ecore#//reflect/reference/CtPackageReference"/>
+        <genClasses ecoreClass="java5.ecore#//reflect/reference/CtParameterReference">
+          <genFeatures notify="false" createChild="false" ecoreFeature="ecore:EReference java5.ecore#//reflect/reference/CtParameterReference/DeclaringExecutable"/>
+        </genClasses>
+        <genClasses ecoreClass="java5.ecore#//reflect/reference/CtReference">
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute java5.ecore#//reflect/reference/CtReference/SimpleName"/>
+          <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute java5.ecore#//reflect/reference/CtReference/Annotations"/>
+          <genFeatures property="Readonly" notify="false" createChild="false" ecoreFeature="ecore:EReference java5.ecore#//reflect/reference/CtReference/Declaration"/>
+        </genClasses>
+        <genClasses ecoreClass="java5.ecore#//reflect/reference/CtTypeParameterReference">
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute java5.ecore#//reflect/reference/CtTypeParameterReference/Upper"/>
+          <genFeatures notify="false" createChild="false" ecoreFeature="ecore:EReference java5.ecore#//reflect/reference/CtTypeParameterReference/Bounds"/>
+        </genClasses>
+        <genClasses ecoreClass="java5.ecore#//reflect/reference/CtTypeReference">
+          <genFeatures notify="false" createChild="false" ecoreFeature="ecore:EReference java5.ecore#//reflect/reference/CtTypeReference/DeclaringType"/>
+          <genFeatures notify="false" createChild="false" ecoreFeature="ecore:EReference java5.ecore#//reflect/reference/CtTypeReference/Package"/>
+          <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute java5.ecore#//reflect/reference/CtTypeReference/ActualClass"/>
+          <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute java5.ecore#//reflect/reference/CtTypeReference/Primitif"/>
+          <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute java5.ecore#//reflect/reference/CtTypeReference/QualifiedName"/>
+        </genClasses>
+        <genClasses ecoreClass="java5.ecore#//reflect/reference/CtVariableReference">
+          <genFeatures notify="false" createChild="false" ecoreFeature="ecore:EReference java5.ecore#//reflect/reference/CtVariableReference/Type"/>
+        </genClasses>
+      </nestedGenPackages>
+      <nestedGenPackages prefix="Code" basePackage="emf.spoon.reflect" disposableProviderFactory="true"
+          ecorePackage="java5.ecore#//reflect/code">
+        <genClasses ecoreClass="java5.ecore#//reflect/code/CtAbstractInvocation">
+          <genFeatures notify="false" createChild="false" ecoreFeature="ecore:EReference java5.ecore#//reflect/code/CtAbstractInvocation/Executable"/>
+          <genFeatures notify="false" createChild="false" ecoreFeature="ecore:EReference java5.ecore#//reflect/code/CtAbstractInvocation/Arguments"/>
+        </genClasses>
+        <genClasses ecoreClass="java5.ecore#//reflect/code/CtArrayAccess">
+          <genFeatures notify="false" createChild="false" ecoreFeature="ecore:EReference java5.ecore#//reflect/code/CtArrayAccess/IndexExpression"/>
+        </genClasses>
+        <genClasses ecoreClass="java5.ecore#//reflect/code/CtAssert">
+          <genFeatures notify="false" createChild="false" ecoreFeature="ecore:EReference java5.ecore#//reflect/code/CtAssert/Expression"/>
+          <genFeatures notify="false" createChild="false" ecoreFeature="ecore:EReference java5.ecore#//reflect/code/CtAssert/AssertExpression"/>
+        </genClasses>
+        <genClasses ecoreClass="java5.ecore#//reflect/code/CtAssignment">
+          <genFeatures notify="false" createChild="false" ecoreFeature="ecore:EReference java5.ecore#//reflect/code/CtAssignment/Assignment"/>
+          <genFeatures notify="false" createChild="false" ecoreFeature="ecore:EReference java5.ecore#//reflect/code/CtAssignment/Assigned"/>
+        </genClasses>
+        <genClasses ecoreClass="java5.ecore#//reflect/code/CtBinaryOperator">
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute java5.ecore#//reflect/code/CtBinaryOperator/Kind"/>
+          <genFeatures notify="false" createChild="false" ecoreFeature="ecore:EReference java5.ecore#//reflect/code/CtBinaryOperator/RightHandOperand"/>
+          <genFeatures notify="false" createChild="false" ecoreFeature="ecore:EReference java5.ecore#//reflect/code/CtBinaryOperator/LeftHandOperand"/>
+        </genClasses>
+        <genClasses ecoreClass="java5.ecore#//reflect/code/CtBlock">
+          <genFeatures notify="false" createChild="false" ecoreFeature="ecore:EReference java5.ecore#//reflect/code/CtBlock/Statements"/>
+        </genClasses>
+        <genClasses ecoreClass="java5.ecore#//reflect/code/CtBreak">
+          <genFeatures notify="false" createChild="false" ecoreFeature="ecore:EReference java5.ecore#//reflect/code/CtBreak/LabelledStatement"/>
+        </genClasses>
+        <genClasses ecoreClass="java5.ecore#//reflect/code/CtCFlowBreak"/>
+        <genClasses ecoreClass="java5.ecore#//reflect/code/CtCase">
+          <genFeatures notify="false" createChild="false" ecoreFeature="ecore:EReference java5.ecore#//reflect/code/CtCase/CaseExpression"/>
+          <genFeatures notify="false" createChild="false" ecoreFeature="ecore:EReference java5.ecore#//reflect/code/CtCase/Statements"/>
+        </genClasses>
+        <genClasses ecoreClass="java5.ecore#//reflect/code/CtCatch">
+          <genFeatures notify="false" createChild="false" ecoreFeature="ecore:EReference java5.ecore#//reflect/code/CtCatch/Body"/>
+          <genFeatures notify="false" createChild="false" ecoreFeature="ecore:EReference java5.ecore#//reflect/code/CtCatch/Parameter"/>
+        </genClasses>
+        <genClasses ecoreClass="java5.ecore#//reflect/code/CtCodeElement"/>
+        <genClasses ecoreClass="java5.ecore#//reflect/code/CtConditional">
+          <genFeatures notify="false" createChild="false" ecoreFeature="ecore:EReference java5.ecore#//reflect/code/CtConditional/ElseExpression"/>
+          <genFeatures notify="false" createChild="false" ecoreFeature="ecore:EReference java5.ecore#//reflect/code/CtConditional/Condition"/>
+          <genFeatures notify="false" createChild="false" ecoreFeature="ecore:EReference java5.ecore#//reflect/code/CtConditional/ThenExpression"/>
+        </genClasses>
+        <genClasses ecoreClass="java5.ecore#//reflect/code/CtContinue">
+          <genFeatures notify="false" createChild="false" ecoreFeature="ecore:EReference java5.ecore#//reflect/code/CtContinue/LabelledStatement"/>
+        </genClasses>
+        <genClasses ecoreClass="java5.ecore#//reflect/code/CtDo">
+          <genFeatures notify="false" createChild="false" ecoreFeature="ecore:EReference java5.ecore#//reflect/code/CtDo/LoopingExpression"/>
+        </genClasses>
+        <genClasses ecoreClass="java5.ecore#//reflect/code/CtFieldAccess"/>
+        <genClasses ecoreClass="java5.ecore#//reflect/code/CtFor">
+          <genFeatures notify="false" createChild="false" ecoreFeature="ecore:EReference java5.ecore#//reflect/code/CtFor/ForInit"/>
+          <genFeatures notify="false" createChild="false" ecoreFeature="ecore:EReference java5.ecore#//reflect/code/CtFor/ForUpdate"/>
+          <genFeatures notify="false" createChild="false" ecoreFeature="ecore:EReference java5.ecore#//reflect/code/CtFor/Expression"/>
+        </genClasses>
+        <genClasses ecoreClass="java5.ecore#//reflect/code/CtExpression">
+          <genFeatures notify="false" createChild="false" ecoreFeature="ecore:EReference java5.ecore#//reflect/code/CtExpression/TypeCasts"/>
+        </genClasses>
+        <genClasses ecoreClass="java5.ecore#//reflect/code/CtForEach">
+          <genFeatures notify="false" createChild="false" ecoreFeature="ecore:EReference java5.ecore#//reflect/code/CtForEach/Expression"/>
+          <genFeatures notify="false" createChild="false" ecoreFeature="ecore:EReference java5.ecore#//reflect/code/CtForEach/Variable"/>
+        </genClasses>
+        <genClasses ecoreClass="java5.ecore#//reflect/code/CtIf">
+          <genFeatures notify="false" createChild="false" ecoreFeature="ecore:EReference java5.ecore#//reflect/code/CtIf/ThenStatement"/>
+          <genFeatures notify="false" createChild="false" ecoreFeature="ecore:EReference java5.ecore#//reflect/code/CtIf/Condition"/>
+          <genFeatures notify="false" createChild="false" ecoreFeature="ecore:EReference java5.ecore#//reflect/code/CtIf/ElseStatement"/>
+        </genClasses>
+        <genClasses ecoreClass="java5.ecore#//reflect/code/CtInvocation"/>
+        <genClasses ecoreClass="java5.ecore#//reflect/code/CtLiteral">
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute java5.ecore#//reflect/code/CtLiteral/Value"/>
+        </genClasses>
+        <genClasses ecoreClass="java5.ecore#//reflect/code/CtLocalVariable"/>
+        <genClasses ecoreClass="java5.ecore#//reflect/code/CtLoop">
+          <genFeatures notify="false" createChild="false" ecoreFeature="ecore:EReference java5.ecore#//reflect/code/CtLoop/Body"/>
+        </genClasses>
+        <genClasses ecoreClass="java5.ecore#//reflect/code/CtNewArray">
+          <genFeatures notify="false" createChild="false" ecoreFeature="ecore:EReference java5.ecore#//reflect/code/CtNewArray/DimensionExpressions"/>
+          <genFeatures notify="false" createChild="false" ecoreFeature="ecore:EReference java5.ecore#//reflect/code/CtNewArray/Elements"/>
+        </genClasses>
+        <genClasses ecoreClass="java5.ecore#//reflect/code/CtNewClass">
+          <genFeatures notify="false" createChild="false" ecoreFeature="ecore:EReference java5.ecore#//reflect/code/CtNewClass/AnonymousClass"/>
+        </genClasses>
+        <genClasses ecoreClass="java5.ecore#//reflect/code/CtOperatorAssignment">
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute java5.ecore#//reflect/code/CtOperatorAssignment/Kind"/>
+        </genClasses>
+        <genClasses ecoreClass="java5.ecore#//reflect/code/CtReturn">
+          <genFeatures notify="false" createChild="false" ecoreFeature="ecore:EReference java5.ecore#//reflect/code/CtReturn/ReturnedExpression"/>
+        </genClasses>
+        <genClasses ecoreClass="java5.ecore#//reflect/code/CtStatement">
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute java5.ecore#//reflect/code/CtStatement/Label"/>
+        </genClasses>
+        <genClasses ecoreClass="java5.ecore#//reflect/code/CtStatementList">
+          <genFeatures notify="false" createChild="false" ecoreFeature="ecore:EReference java5.ecore#//reflect/code/CtStatementList/Statements"/>
+        </genClasses>
+        <genClasses ecoreClass="java5.ecore#//reflect/code/CtSwitch">
+          <genFeatures notify="false" createChild="false" ecoreFeature="ecore:EReference java5.ecore#//reflect/code/CtSwitch/Selector"/>
+          <genFeatures notify="false" createChild="false" ecoreFeature="ecore:EReference java5.ecore#//reflect/code/CtSwitch/Cases"/>
+        </genClasses>
+        <genClasses ecoreClass="java5.ecore#//reflect/code/CtSynchronized">
+          <genFeatures notify="false" createChild="false" ecoreFeature="ecore:EReference java5.ecore#//reflect/code/CtSynchronized/Block"/>
+          <genFeatures notify="false" createChild="false" ecoreFeature="ecore:EReference java5.ecore#//reflect/code/CtSynchronized/Expression"/>
+        </genClasses>
+        <genClasses ecoreClass="java5.ecore#//reflect/code/CtTargetedExpression">
+          <genFeatures notify="false" createChild="false" ecoreFeature="ecore:EReference java5.ecore#//reflect/code/CtTargetedExpression/Target"/>
+        </genClasses>
+        <genClasses ecoreClass="java5.ecore#//reflect/code/CtThrow">
+          <genFeatures notify="false" createChild="false" ecoreFeature="ecore:EReference java5.ecore#//reflect/code/CtThrow/ThrownExpression"/>
+        </genClasses>
+        <genClasses ecoreClass="java5.ecore#//reflect/code/CtTry">
+          <genFeatures notify="false" createChild="false" ecoreFeature="ecore:EReference java5.ecore#//reflect/code/CtTry/Finalizer"/>
+          <genFeatures notify="false" createChild="false" ecoreFeature="ecore:EReference java5.ecore#//reflect/code/CtTry/Body"/>
+          <genFeatures notify="false" createChild="false" ecoreFeature="ecore:EReference java5.ecore#//reflect/code/CtTry/Catchers"/>
+        </genClasses>
+        <genClasses ecoreClass="java5.ecore#//reflect/code/CtUnaryOperator">
+          <genFeatures notify="false" createChild="false" ecoreFeature="ecore:EReference java5.ecore#//reflect/code/CtUnaryOperator/Operand"/>
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute java5.ecore#//reflect/code/CtUnaryOperator/Kind"/>
+        </genClasses>
+        <genClasses ecoreClass="java5.ecore#//reflect/code/CtVariableAccess">
+          <genFeatures notify="false" createChild="false" ecoreFeature="ecore:EReference java5.ecore#//reflect/code/CtVariableAccess/Variable"/>
+        </genClasses>
+        <genClasses ecoreClass="java5.ecore#//reflect/code/CtWhile">
+          <genFeatures notify="false" createChild="false" ecoreFeature="ecore:EReference java5.ecore#//reflect/code/CtWhile/LoopingExpression"/>
+        </genClasses>
+      </nestedGenPackages>
+      <nestedGenPackages prefix="Declaration" basePackage="emf.spoon.reflect" disposableProviderFactory="true"
+          ecorePackage="java5.ecore#//reflect/declaration">
+        <genClasses ecoreClass="java5.ecore#//reflect/declaration/CtAnnotation">
+          <genFeatures notify="false" createChild="false" ecoreFeature="ecore:EReference java5.ecore#//reflect/declaration/CtAnnotation/AnnotationType"/>
+          <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute java5.ecore#//reflect/declaration/CtAnnotation/ActualAnnotation"/>
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference java5.ecore#//reflect/declaration/CtAnnotation/ElementsVal"/>
+        </genClasses>
+        <genClasses ecoreClass="java5.ecore#//reflect/declaration/CtAnnotationType"/>
+        <genClasses ecoreClass="java5.ecore#//reflect/declaration/CtAnonymousExecutable">
+          <genFeatures notify="false" createChild="false" ecoreFeature="ecore:EReference java5.ecore#//reflect/declaration/CtAnonymousExecutable/Body"/>
+          <genFeatures property="Readonly" notify="false" createChild="false" ecoreFeature="ecore:EReference java5.ecore#//reflect/declaration/CtAnonymousExecutable/OwnerClass"/>
+        </genClasses>
+        <genClasses ecoreClass="java5.ecore#//reflect/declaration/CtClass">
+          <genFeatures notify="false" createChild="false" ecoreFeature="ecore:EReference java5.ecore#//reflect/declaration/CtClass/Superclass"/>
+          <genFeatures notify="false" createChild="false" ecoreFeature="ecore:EReference java5.ecore#//reflect/declaration/CtClass/AnonymousExecutables"/>
+          <genFeatures notify="false" createChild="false" ecoreFeature="ecore:EReference java5.ecore#//reflect/declaration/CtClass/Constructors"/>
+        </genClasses>
+        <genClasses ecoreClass="java5.ecore#//reflect/declaration/CtConstructor"/>
+        <genClasses ecoreClass="java5.ecore#//reflect/declaration/CtElement">
+          <genFeatures notify="false" createChild="false" ecoreFeature="ecore:EReference java5.ecore#//reflect/declaration/CtElement/Annotations"/>
+          <genFeatures notify="false" createChild="false" ecoreFeature="ecore:EReference java5.ecore#//reflect/declaration/CtElement/Position"/>
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute java5.ecore#//reflect/declaration/CtElement/DocComment"/>
+          <genFeatures notify="false" createChild="false" propertySortChoices="true"
+              ecoreFeature="ecore:EReference java5.ecore#//reflect/declaration/CtElement/Parent"/>
+        </genClasses>
+        <genClasses ecoreClass="java5.ecore#//reflect/declaration/CtEnum"/>
+        <genClasses ecoreClass="java5.ecore#//reflect/declaration/CtExecutable">
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute java5.ecore#//reflect/declaration/CtExecutable/EXECUTABLE_SEPARATOR"/>
+          <genFeatures notify="false" createChild="false" ecoreFeature="ecore:EReference java5.ecore#//reflect/declaration/CtExecutable/Parameters"/>
+          <genFeatures notify="false" createChild="false" ecoreFeature="ecore:EReference java5.ecore#//reflect/declaration/CtExecutable/Body"/>
+          <genFeatures notify="false" createChild="false" ecoreFeature="ecore:EReference java5.ecore#//reflect/declaration/CtExecutable/ThrownTypes"/>
+          <genFeatures property="Readonly" notify="false" createChild="false" ecoreFeature="ecore:EReference java5.ecore#//reflect/declaration/CtExecutable/DeclaringType"/>
+        </genClasses>
+        <genClasses ecoreClass="java5.ecore#//reflect/declaration/CtField">
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute java5.ecore#//reflect/declaration/CtField/FIELD_SEPARATOR"/>
+          <genFeatures property="Readonly" notify="false" createChild="false" ecoreFeature="ecore:EReference java5.ecore#//reflect/declaration/CtField/DeclaringType"/>
+        </genClasses>
+        <genClasses ecoreClass="java5.ecore#//reflect/declaration/CtGenericElement">
+          <genFeatures notify="false" createChild="false" ecoreFeature="ecore:EReference java5.ecore#//reflect/declaration/CtGenericElement/FormalTypeParameters"/>
+        </genClasses>
+        <genClasses ecoreClass="java5.ecore#//reflect/declaration/CtInterface"/>
+        <genClasses ecoreClass="java5.ecore#//reflect/declaration/CtMethod"/>
+        <genClasses ecoreClass="java5.ecore#//reflect/declaration/CtModifiable">
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute java5.ecore#//reflect/declaration/CtModifiable/Modifiers"/>
+        </genClasses>
+        <genClasses ecoreClass="java5.ecore#//reflect/declaration/CtNamedElement">
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute java5.ecore#//reflect/declaration/CtNamedElement/SimpleName"/>
+          <genFeatures property="Readonly" notify="false" createChild="false" ecoreFeature="ecore:EReference java5.ecore#//reflect/declaration/CtNamedElement/Reference"/>
+        </genClasses>
+        <genClasses ecoreClass="java5.ecore#//reflect/declaration/CtPackage">
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute java5.ecore#//reflect/declaration/CtPackage/PACKAGE_SEPARATOR"/>
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute java5.ecore#//reflect/declaration/CtPackage/TOP_LEVEL_PACKAGE_NAME"/>
+          <genFeatures notify="false" createChild="false" ecoreFeature="ecore:EReference java5.ecore#//reflect/declaration/CtPackage/Packages"/>
+          <genFeatures createChild="false" ecoreFeature="ecore:EReference java5.ecore#//reflect/declaration/CtPackage/Types"/>
+          <genFeatures property="Readonly" notify="false" createChild="false" ecoreFeature="ecore:EAttribute java5.ecore#//reflect/declaration/CtPackage/QualifiedName"/>
+          <genFeatures property="Readonly" notify="false" createChild="false" ecoreFeature="ecore:EReference java5.ecore#//reflect/declaration/CtPackage/DeclaringPackage"/>
+        </genClasses>
+        <genClasses ecoreClass="java5.ecore#//reflect/declaration/CtParameter">
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute java5.ecore#//reflect/declaration/CtParameter/VarArgs"/>
+        </genClasses>
+        <genClasses ecoreClass="java5.ecore#//reflect/declaration/CtSimpleType">
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute java5.ecore#//reflect/declaration/CtSimpleType/INNERTTYPE_SEPARATOR"/>
+          <genFeatures notify="false" createChild="false" ecoreFeature="ecore:EReference java5.ecore#//reflect/declaration/CtSimpleType/Fields"/>
+          <genFeatures notify="false" createChild="false" ecoreFeature="ecore:EReference java5.ecore#//reflect/declaration/CtSimpleType/NestedTypes"/>
+          <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute java5.ecore#//reflect/declaration/CtSimpleType/ActualClass"/>
+          <genFeatures property="Readonly" notify="false" createChild="false" ecoreFeature="ecore:EReference java5.ecore#//reflect/declaration/CtSimpleType/DeclaringType"/>
+          <genFeatures property="Readonly" notify="false" createChild="false" ecoreFeature="ecore:EReference java5.ecore#//reflect/declaration/CtSimpleType/AllFields"/>
+          <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute java5.ecore#//reflect/declaration/CtSimpleType/TopLevel"/>
+          <genFeatures property="Readonly" notify="false" createChild="false" ecoreFeature="ecore:EReference java5.ecore#//reflect/declaration/CtSimpleType/Package"/>
+          <genFeatures property="Readonly" notify="false" createChild="false" ecoreFeature="ecore:EAttribute java5.ecore#//reflect/declaration/CtSimpleType/QualifiedName"/>
+        </genClasses>
+        <genClasses ecoreClass="java5.ecore#//reflect/declaration/CtType">
+          <genFeatures notify="false" createChild="false" ecoreFeature="ecore:EReference java5.ecore#//reflect/declaration/CtType/Methods"/>
+          <genFeatures property="Readonly" notify="false" createChild="false" ecoreFeature="ecore:EReference java5.ecore#//reflect/declaration/CtType/Superinterfaces"/>
+          <genFeatures property="Readonly" notify="false" createChild="false" ecoreFeature="ecore:EReference java5.ecore#//reflect/declaration/CtType/AllMethods"/>
+        </genClasses>
+        <genClasses ecoreClass="java5.ecore#//reflect/declaration/CtTypeParameter">
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute java5.ecore#//reflect/declaration/CtTypeParameter/Name"/>
+          <genFeatures notify="false" createChild="false" ecoreFeature="ecore:EReference java5.ecore#//reflect/declaration/CtTypeParameter/Bounds"/>
+        </genClasses>
+        <genClasses ecoreClass="java5.ecore#//reflect/declaration/CtTypedElement">
+          <genFeatures notify="false" createChild="false" ecoreFeature="ecore:EReference java5.ecore#//reflect/declaration/CtTypedElement/Type"/>
+        </genClasses>
+        <genClasses ecoreClass="java5.ecore#//reflect/declaration/CtVariable">
+          <genFeatures notify="false" createChild="false" ecoreFeature="ecore:EReference java5.ecore#//reflect/declaration/CtVariable/DefaultExpression"/>
+        </genClasses>
+        <genClasses ecoreClass="java5.ecore#//reflect/declaration/SourcePosition">
+          <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute java5.ecore#//reflect/declaration/SourcePosition/Line"/>
+          <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute java5.ecore#//reflect/declaration/SourcePosition/Column"/>
+          <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute java5.ecore#//reflect/declaration/SourcePosition/File"/>
+        </genClasses>
+        <genClasses ecoreClass="java5.ecore#//reflect/declaration/CtAnnotationElementValue">
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute java5.ecore#//reflect/declaration/CtAnnotationElementValue/key"/>
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute java5.ecore#//reflect/declaration/CtAnnotationElementValue/valueString"/>
+          <genFeatures notify="false" createChild="false" propertySortChoices="true"
+              ecoreFeature="ecore:EReference java5.ecore#//reflect/declaration/CtAnnotationElementValue/valueRef"/>
+          <genFeatures notify="false" createChild="false" propertySortChoices="true"
+              ecoreFeature="ecore:EReference java5.ecore#//reflect/declaration/CtAnnotationElementValue/valueElement"/>
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute java5.ecore#//reflect/declaration/CtAnnotationElementValue/Many"/>
+        </genClasses>
+      </nestedGenPackages>
+    </nestedGenPackages>
+    <nestedGenPackages prefix="Facade" basePackage="emf.spoon" disposableProviderFactory="true"
+        ecorePackage="java5.ecore#//facade">
+      <genClasses ecoreClass="java5.ecore#//facade/CtArrayTypeReference"/>
+      <genClasses ecoreClass="java5.ecore#//facade/CtExecutableReference"/>
+      <genClasses ecoreClass="java5.ecore#//facade/CtFieldReference"/>
+      <genClasses ecoreClass="java5.ecore#//facade/CtGenericElementReference"/>
+      <genClasses ecoreClass="java5.ecore#//facade/CtLocalVariableReference"/>
+      <genClasses ecoreClass="java5.ecore#//facade/CtPackageReference"/>
+      <genClasses ecoreClass="java5.ecore#//facade/CtParameterReference"/>
+      <genClasses ecoreClass="java5.ecore#//facade/CtReference"/>
+      <genClasses ecoreClass="java5.ecore#//facade/CtTypeParameterReference"/>
+      <genClasses ecoreClass="java5.ecore#//facade/CtTypeReference"/>
+      <genClasses ecoreClass="java5.ecore#//facade/CtVariableReference"/>
+      <genClasses ecoreClass="java5.ecore#//facade/CtAbstractInvocation"/>
+      <genClasses ecoreClass="java5.ecore#//facade/CtArrayAccess"/>
+      <genClasses ecoreClass="java5.ecore#//facade/CtAssert"/>
+      <genClasses ecoreClass="java5.ecore#//facade/CtAssignment"/>
+      <genClasses ecoreClass="java5.ecore#//facade/CtBinaryOperator"/>
+      <genClasses ecoreClass="java5.ecore#//facade/CtBlock"/>
+      <genClasses ecoreClass="java5.ecore#//facade/CtBreak"/>
+      <genClasses ecoreClass="java5.ecore#//facade/CtCFlowBreak"/>
+      <genClasses ecoreClass="java5.ecore#//facade/CtCase"/>
+      <genClasses ecoreClass="java5.ecore#//facade/CtCatch"/>
+      <genClasses ecoreClass="java5.ecore#//facade/CtCodeElement"/>
+      <genClasses ecoreClass="java5.ecore#//facade/CtConditional"/>
+      <genClasses ecoreClass="java5.ecore#//facade/CtContinue"/>
+      <genClasses ecoreClass="java5.ecore#//facade/CtDo"/>
+      <genClasses ecoreClass="java5.ecore#//facade/CtExpression"/>
+      <genClasses ecoreClass="java5.ecore#//facade/CtFieldAccess"/>
+      <genClasses ecoreClass="java5.ecore#//facade/CtFor"/>
+      <genClasses ecoreClass="java5.ecore#//facade/CtForEach"/>
+      <genClasses ecoreClass="java5.ecore#//facade/CtIf"/>
+      <genClasses ecoreClass="java5.ecore#//facade/CtInvocation"/>
+      <genClasses ecoreClass="java5.ecore#//facade/CtLiteral"/>
+      <genClasses ecoreClass="java5.ecore#//facade/CtLocalVariable"/>
+      <genClasses ecoreClass="java5.ecore#//facade/CtLoop"/>
+      <genClasses ecoreClass="java5.ecore#//facade/CtNewArray"/>
+      <genClasses ecoreClass="java5.ecore#//facade/CtNewClass"/>
+      <genClasses ecoreClass="java5.ecore#//facade/CtOperatorAssignment"/>
+      <genClasses ecoreClass="java5.ecore#//facade/CtReturn"/>
+      <genClasses ecoreClass="java5.ecore#//facade/CtStatement"/>
+      <genClasses ecoreClass="java5.ecore#//facade/CtStatementList"/>
+      <genClasses ecoreClass="java5.ecore#//facade/CtSwitch"/>
+      <genClasses ecoreClass="java5.ecore#//facade/CtSynchronized"/>
+      <genClasses ecoreClass="java5.ecore#//facade/CtTargetedExpression"/>
+      <genClasses ecoreClass="java5.ecore#//facade/CtThrow"/>
+      <genClasses ecoreClass="java5.ecore#//facade/CtTry"/>
+      <genClasses ecoreClass="java5.ecore#//facade/CtUnaryOperator"/>
+      <genClasses ecoreClass="java5.ecore#//facade/CtVariableAccess"/>
+      <genClasses ecoreClass="java5.ecore#//facade/CtWhile"/>
+      <genClasses ecoreClass="java5.ecore#//facade/CtAnnotation"/>
+      <genClasses ecoreClass="java5.ecore#//facade/CtAnnotationType"/>
+      <genClasses ecoreClass="java5.ecore#//facade/CtAnonymousExecutable"/>
+      <genClasses ecoreClass="java5.ecore#//facade/CtClass"/>
+      <genClasses ecoreClass="java5.ecore#//facade/CtConstructor"/>
+      <genClasses ecoreClass="java5.ecore#//facade/CtElement"/>
+      <genClasses ecoreClass="java5.ecore#//facade/CtEnum"/>
+      <genClasses ecoreClass="java5.ecore#//facade/CtExecutable"/>
+      <genClasses ecoreClass="java5.ecore#//facade/CtField"/>
+      <genClasses ecoreClass="java5.ecore#//facade/CtGenericElement"/>
+      <genClasses ecoreClass="java5.ecore#//facade/CtInterface"/>
+      <genClasses ecoreClass="java5.ecore#//facade/CtMethod"/>
+      <genClasses ecoreClass="java5.ecore#//facade/CtModifiable"/>
+      <genClasses ecoreClass="java5.ecore#//facade/CtNamedElement"/>
+      <genClasses ecoreClass="java5.ecore#//facade/CtPackage"/>
+      <genClasses ecoreClass="java5.ecore#//facade/CtParameter"/>
+      <genClasses ecoreClass="java5.ecore#//facade/CtSimpleType"/>
+      <genClasses ecoreClass="java5.ecore#//facade/CtType"/>
+      <genClasses ecoreClass="java5.ecore#//facade/CtTypeParameter"/>
+      <genClasses ecoreClass="java5.ecore#//facade/CtTypedElement"/>
+      <genClasses ecoreClass="java5.ecore#//facade/CtVariable"/>
+      <genClasses ecoreClass="java5.ecore#//facade/SourcePosition"/>
+    </nestedGenPackages>
+  </genPackages>
+</genmodel:GenModel>
