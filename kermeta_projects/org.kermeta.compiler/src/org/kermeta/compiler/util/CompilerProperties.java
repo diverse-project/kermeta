@@ -16,6 +16,7 @@ public class CompilerProperties {
 	public final static String COPYRIGHT_HEADER = "copyright_header";
 	public final static String BUNDLE_VERSION = "bundle_version";
 	public final static String REQUIRE_BUNDLE = "require_bundles";
+	public final static String UNZIP_EXTERNS = "unzip_externs";
 	public final static String SOURCE = "source..";
 	public final static String ENABLE_EMF_LOAD_INITIALIZATION = "enable_emf_load_initialization";
 	

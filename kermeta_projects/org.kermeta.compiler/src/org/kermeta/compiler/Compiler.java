@@ -15,6 +15,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
@@ -22,6 +23,7 @@ import java.util.Properties;
 
 import org.eclipse.core.resources.IContainer;
 import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
@@ -37,7 +39,9 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.kermeta.compiler.common.KCompilerConstants;
+import org.kermeta.compiler.common.util.UnzipFile;
 import org.kermeta.compiler.generator.helper.model.Context;
+import org.kermeta.compiler.generator.internal.GeneratorPlugin;
 import org.kermeta.compiler.generator.internal.actions.GenerateHelperAction;
 import org.kermeta.compiler.internal.ConfigurationCreator;
 import org.kermeta.compiler.internal.GenModelUtil;
@@ -176,8 +180,11 @@ public class Compiler extends org.kermeta.compiler.Generator {
 			// Set the persistence mapping maps
             ConfigurationCreator.createConfiguration(genModel, this.getCompilationContext());
 			
-			//Step 3: Generate the content of the simk file
+			// Step 3: Generate the content of the simk file
 			compileHelpers();
+			
+			// Unzip externs if nedded
+			unzipExterns();
 			
 			fixManifestMF();
 			fixBuildProperties();
@@ -279,6 +286,26 @@ public class Compiler extends org.kermeta.compiler.Generator {
 	    
 	}
 
+	private void unzipExterns() {
+		
+		String unzipExterns = compilerProperties.getProperty(CompilerProperties.UNZIP_EXTERNS);
+		
+		if( unzipExterns!=null && !unzipExterns.equals("") ) {
+			IProject project = ResourcesPlugin.getWorkspace().getRoot().getProject( compilerProperties.getProperty(CompilerProperties.PLUGIN_ID) );
+			
+			String[] pathzip_pathdest = unzipExterns.split(";");
+			
+			java.net.URL zip_url = null;
+			try {
+				zip_url = new java.net.URL(pathzip_pathdest[0]);
+			} catch (MalformedURLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			IPath destination_folder_location = project.getFullPath().append("/" + pathzip_pathdest[1]);
+			UnzipFile.unzipFile(zip_url, destination_folder_location);
+		}
+	}
 
 	/**
 	 * Set the path of the given metamodel in Ecore
@@ -395,6 +422,14 @@ public class Compiler extends org.kermeta.compiler.Generator {
 		String kmFilePath = ecorefile.getFullPath().removeFileExtension().addFileExtension("km").toString();
 		
 		IFile kmFile = ResourceHelper.getIFile(kmFilePath);
+		
+		try {
+			// Refresh the local folder to avoid Sync mistakes due to SVN
+			kmFile.getParent().refreshLocal(1, new NullProgressMonitor());
+		} catch (CoreException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		
 		IPath kmFilePath_forReflection = ResourcesPlugin.getWorkspace().getRoot().getFullPath().append("/" + compiledPluginId + "/config/" + kmFile.getName());
 		
