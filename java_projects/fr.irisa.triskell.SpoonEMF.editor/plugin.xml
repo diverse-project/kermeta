@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+
+<!--
+ <copyright>
+ </copyright>
+
+ $Id$
+-->
+
+<plugin>
+
+
+  <extension
+    point = "org.eclipse.ui.newWizards">
+    <category
+      id = "org.eclipse.emf.ecore.Wizard.category.ID"
+      name="%_UI_Wizard_category">
+    </category>
+    <wizard
+      id = "emf.spoon.reflect.reference.presentation.ReferenceModelWizardID"
+      name = "%_UI_ReferenceModelWizard_label"
+      class = "emf.spoon.reflect.reference.presentation.ReferenceModelWizard"
+      category = "org.eclipse.emf.ecore.Wizard.category.ID"
+      icon = "icons/full/obj16/ReferenceModelFile.gif">
+      <description>%_UI_ReferenceModelWizard_description</description>
+      <selection class = "org.eclipse.core.resources.IResource" />
+    </wizard>
+  </extension>
+
+  <extension point = "org.eclipse.ui.editors">
+    <editor
+        id = "emf.spoon.reflect.reference.presentation.ReferenceEditorID"
+        name = "%_UI_ReferenceEditor_label"
+        icon = "icons/full/obj16/ReferenceModelFile.gif"
+        extensions = "reference"
+        class = "emf.spoon.reflect.reference.presentation.ReferenceEditor" 
+        contributorClass="emf.spoon.reflect.reference.presentation.ReferenceActionBarContributor" >
+    </editor>
+  </extension>    
+
+  <extension
+    point = "org.eclipse.ui.newWizards">
+    <category
+      id = "org.eclipse.emf.ecore.Wizard.category.ID"
+      name="%_UI_Wizard_category">
+    </category>
+    <wizard
+      id = "emf.spoon.reflect.code.presentation.CodeModelWizardID"
+      name = "%_UI_CodeModelWizard_label"
+      class = "emf.spoon.reflect.code.presentation.CodeModelWizard"
+      category = "org.eclipse.emf.ecore.Wizard.category.ID"
+      icon = "icons/full/obj16/CodeModelFile.gif">
+      <description>%_UI_CodeModelWizard_description</description>
+      <selection class = "org.eclipse.core.resources.IResource" />
+    </wizard>
+  </extension>
+
+  <extension point = "org.eclipse.ui.editors">
+    <editor
+        id = "emf.spoon.reflect.code.presentation.CodeEditorID"
+        name = "%_UI_CodeEditor_label"
+        icon = "icons/full/obj16/CodeModelFile.gif"
+        extensions = "code"
+        class = "emf.spoon.reflect.code.presentation.CodeEditor" 
+        contributorClass="emf.spoon.reflect.code.presentation.CodeActionBarContributor" >
+    </editor>
+  </extension>    
+
+  <extension
+    point = "org.eclipse.ui.newWizards">
+    <category
+      id = "org.eclipse.emf.ecore.Wizard.category.ID"
+      name="%_UI_Wizard_category">
+    </category>
+    <wizard
+      id = "emf.spoon.reflect.declaration.presentation.DeclarationModelWizardID"
+      name = "%_UI_DeclarationModelWizard_label"
+      class = "emf.spoon.reflect.declaration.presentation.DeclarationModelWizard"
+      category = "org.eclipse.emf.ecore.Wizard.category.ID"
+      icon = "icons/full/obj16/DeclarationModelFile.gif">
+      <description>%_UI_DeclarationModelWizard_description</description>
+      <selection class = "org.eclipse.core.resources.IResource" />
+    </wizard>
+  </extension>
+
+  <extension point = "org.eclipse.ui.editors">
+    <editor
+        id = "emf.spoon.reflect.declaration.presentation.DeclarationEditorID"
+        name = "%_UI_DeclarationEditor_label"
+        icon = "icons/spoon.png"
+        extensions = "java5"
+        class = "emf.spoon.reflect.declaration.presentation.DeclarationEditor" 
+        contributorClass="emf.spoon.reflect.declaration.presentation.DeclarationActionBarContributor" >
+    </editor>
+  </extension>    
+</plugin>

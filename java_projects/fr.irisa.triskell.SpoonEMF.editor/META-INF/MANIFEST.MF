@@ -1,0 +1,17 @@
+Bundle-ManifestVersion: 2
+Bundle-Name: %pluginName
+Bundle-SymbolicName: fr.irisa.triskell.SpoonEMF.editor;singleton:=true
+Bundle-Version: 1.0.0
+Bundle-ClassPath: .
+Bundle-Activator: emf.spoon.presentation.Java5EditorPlugin$Implementation
+Bundle-Vendor: %providerName
+Bundle-Localization: plugin
+Export-Package: emf.spoon.presentation
+Require-Bundle: org.eclipse.core.runtime,
+ org.eclipse.core.resources;visibility:=reexport,
+ org.eclipse.emf.ecore.xmi;visibility:=reexport,
+ org.eclipse.emf.edit.ui;visibility:=reexport,
+ org.eclipse.ui.ide;visibility:=reexport,
+ fr.irisa.triskell.SpoonEMF,
+ fr.irisa.triskell.SpoonEMF.edit;bundle-version="1.0.1"
+Eclipse-LazyStart: false
