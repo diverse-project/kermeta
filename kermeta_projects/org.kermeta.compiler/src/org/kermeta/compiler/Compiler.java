@@ -219,8 +219,8 @@ public class Compiler extends org.kermeta.compiler.Generator {
 						
 						if( compilerProperties.containsKey(CompilerProperties.REQUIRE_BUNDLE)
 								&& !compilerProperties.getProperty(CompilerProperties.REQUIRE_BUNDLE).equals("") ) {
-							for(String dependency : compilerProperties.getProperty(CompilerProperties.REQUIRE_BUNDLE).replace(" ", "").split(",")) {
-								line += "\n " + dependency + ",";
+							for(String dependency : compilerProperties.getProperty(CompilerProperties.REQUIRE_BUNDLE).split(",")) {
+								line += "\n " + dependency.trim() + ",";
 							}
 						}
 						
@@ -286,24 +286,34 @@ public class Compiler extends org.kermeta.compiler.Generator {
 	    
 	}
 
+	/**
+	 * Unzip the externs specified by the user in the "compiler properties file"
+	 */
 	private void unzipExterns() {
 		
 		String unzipExterns = compilerProperties.getProperty(CompilerProperties.UNZIP_EXTERNS);
 		
 		if( unzipExterns!=null && !unzipExterns.equals("") ) {
+			
 			IProject project = ResourcesPlugin.getWorkspace().getRoot().getProject( compilerProperties.getProperty(CompilerProperties.PLUGIN_ID) );
 			
-			String[] pathzip_pathdest = unzipExterns.split(";");
+			String[] externs_array = unzipExterns.split(",");
 			
-			java.net.URL zip_url = null;
-			try {
-				zip_url = new java.net.URL(pathzip_pathdest[0]);
-			} catch (MalformedURLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+			for( int i=0 ; i<externs_array.length ; i++) {
+			
+				String[] pathzip_pathdest = externs_array[i].trim().split(";");
+				
+				java.net.URL zip_url = null;
+				try {
+					zip_url = new java.net.URL(pathzip_pathdest[0]);
+				} catch (MalformedURLException e) {
+					e.printStackTrace();
+				}
+
+				IPath destination_folder_location = project.getFullPath().append("/" + pathzip_pathdest[1]);
+				UnzipFile.unzipFile(zip_url, destination_folder_location);
+			
 			}
-			IPath destination_folder_location = project.getFullPath().append("/" + pathzip_pathdest[1]);
-			UnzipFile.unzipFile(zip_url, destination_folder_location);
 		}
 	}
 
