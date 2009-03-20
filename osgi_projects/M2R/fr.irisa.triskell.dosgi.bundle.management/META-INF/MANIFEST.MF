@@ -1,0 +1,8 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: API Bundle management
+Bundle-SymbolicName: fr.irisa.triskell.dosgi.bundle.management
+Bundle-Version: 1.0.0
+Import-Package: org.osgi.framework;version="1.4.0"
+Export-Package: fr.irisa.triskell.dosgi.bundle.management,
+ fr.irisa.triskell.dosgi.bundle.management.memento
