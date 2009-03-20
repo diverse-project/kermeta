@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<jardesc>
+    <jar path="fr.irisa.triskell.kermetaSpoonEMFBridge/dist/fr.irisa.triskell.spoonemfbridge.jar"/>
+    <options buildIfNeeded="true" compress="false" descriptionLocation="/fr.irisa.triskell.kermetaSpoonEMFBridge/spoonBridge.jardesc" exportErrors="true" exportWarnings="true" includeDirectoryEntries="false" overwrite="false" saveDescription="true" storeRefactorings="false" useSourceFolders="false"/>
+    <storedRefactorings deprecationInfo="true" structuralOnly="false"/>
+    <selectedProjects/>
+    <manifest generateManifest="true" manifestLocation="" manifestVersion="1.0" reuseManifest="false" saveManifest="false" usesManifest="true">
+        <sealing sealJar="false">
+            <packagesToSeal/>
+            <packagesToUnSeal/>
+        </sealing>
+    </manifest>
+    <selectedElements exportClassFiles="true" exportJavaFiles="false" exportOutputFolder="false">
+        <file path="/fr.irisa.triskell.kermetaSpoonEMFBridge/.project"/>
+        <file path="/fr.irisa.triskell.kermetaSpoonEMFBridge/.classpath"/>
+        <file path="/fr.irisa.triskell.kermetaSpoonEMFBridge/test.java5"/>
+        <file path="/fr.irisa.triskell.kermetaSpoonEMFBridge/test.xmi"/>
+        <file path="/fr.irisa.triskell.kermetaSpoonEMFBridge/.cvsignore"/>
+        <javaElement handleIdentifier="=fr.irisa.triskell.kermetaSpoonEMFBridge/src&lt;fr.irisa.triskell.kermeta.runtime.loader.java5files"/>
+        <file path="/fr.irisa.triskell.kermetaSpoonEMFBridge/bridge.jardesc"/>
+    </selectedElements>
+    <fatjar builder="org.eclipse.jdt.ui.plain_jar_builder" launchConfig=""/>
+</jardesc>

@@ -1,10 +1,11 @@
 @mainClass "root_package::Main"
 @mainOperation "main"
 
-
+ 
 package root_package;  
 require kermeta  
-require "platform:/plugin/fr.irisa.triskell.SpoonEMF/model/java5.ecore"    
+require "http://spoon"
+
 using kermeta::standard
 using kermeta::persistence
 
@@ -17,30 +18,15 @@ class Main
     operation main() : Void is do 
     
     	//does not support platform:// notation
-        //var xmi_uri : String init "file:///home//barais//test3.xmi"
-        //var xmi_javaFolder : String init  "//home//barais//workspaces//workspace_spoon//SpoonInput//src//test"
-          
+        var xmi_uri : String init "file:///home//barais//test4.xmi"
+        var xmi_javaFolder : String init  "//home//barais//workspaces//workspace_spoon//SpoonInput//src//a"
         
+        var helper : Java5Helper init Java5Helper.new
+        helper.createXMIfromJavaFolder(xmi_uri,xmi_javaFolder)
         
-		
-		//var  java5helper : Java5Helper init Java5Helper.new
+//        helper.loadJava5Model()
         
-        
-        
-        //java5helper.createXMIfromJavaFolder(xmi_uri,xmi_javaFolder)
-
-		 stdio.writeln("XMI file created")
-
-         
-		var resource : EMFResource init EMFResource.new
- 
-		resource.uri := "../Test/src.java5"
-		resource.metaModelURI := "platform:/plugin/fr.irisa.triskell.SpoonEMF/model/java5.ecore"
-		resource.initializeContentMap
-		resource.load()
-		 stdio.writeln("end loading")
-	 	stdio.writeln("size = " + resource.contentMap.getValue("allRootContents").select{e|CtClass.isInstance(e)}.size.toString)
-		
+				
     end
     
 
@@ -52,6 +38,21 @@ class Java5Helper {
 	operation createXMIfromJavaFolder(xmi_uri : String, javafolder_uri : String) : Void is do
 		extern fr::irisa::triskell::kermeta::runtime::loader::java5files::Java52RuntimeResource.createResourcesFromJavaFolder(self, javafolder_uri, xmi_uri)
 	end 
+	
+	operation loadJava5Model(uri: String) : Sequence<CtPackage> is do
+		var rep : EMFRepository init EMFRepository.new
+		var res : Resource
+		
+		res:=rep.createResource(uri, "http://spoon")
+		res.load
+    	var instances : Set<Object> init res.instances
+    	// retreives only the packages
+    	var pack : CtPackage
+    	//var packs : Sequence<CtPackage>
+    	result := instances.select { e | CtPackage.isInstance(e) }.collect{p | pack ?= p}
+		
+	end
+	
 
 }
 
