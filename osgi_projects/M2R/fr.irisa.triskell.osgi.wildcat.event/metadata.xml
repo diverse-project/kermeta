@@ -1,0 +1,24 @@
+<ipojo>
+	<component className="fr.irisa.triskell.osgi.wildcat.events.EventTransmitterImpl" name="EventTransmitter">
+		<requires field="eventAdmin" specification="org.osgi.service.event.EventAdmin" />
+		<provides specifications="fr.irisa.triskell.osgi.wildcat.events.EventTransmitter" />
+	</component>
+	<!-- <instance component="EventTransmitter" name="eventTransmitter" /> -->
+	
+	<component className="fr.irisa.triskell.osgi.wildcat.events.UpdateListener" name="UpdateListener">
+		<requires field="eventTransmitter" specification="fr.irisa.triskell.osgi.wildcat.events.EventTransmitter" />
+		<provides specifications="com.espertech.esper.client.UpdateListener" />
+	</component>
+	<!-- <instance component="UpdateListener" name="updateListener" /> -->
+	
+	<composite name="Composite">
+		<instance component="EventTransmitter" name="eventTransmitter" />
+		<instance component="UpdateListener" name="updateListener" />
+		<provides action="export" 
+            specification="com.espertech.esper.client.UpdateListener" />
+		<subservice action="import" 
+             specification="org.osgi.service.event.EventAdmin" />
+	</composite>
+	
+	<instance component="Composite" name="composite" />
+</ipojo>
