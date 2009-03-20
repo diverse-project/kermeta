@@ -1,0 +1,282 @@
+/* $Id:$ 
+ * Creation : March 18, 2009
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            barais
+ */
+
+
+package spoon::reflect::declaration;
+
+ 
+require kermeta
+require "http://spoon"
+require "EcoreHelper.kmt" 
+
+using ecore
+using kermeta::standard
+using kermeta::utils
+
+class Context{
+	reference classes : Hashtable<String,CtType>
+	reference dataType : Hashtable<String,EDataType>
+	reference lastOperationVisited : CtMethod
+	operation initialize() is do 
+		classes := Hashtable<String,CtType>.new
+		dataType := Hashtable<String,EDataType>.new
+	end
+
+}
+
+aspect class CtPackage
+{	
+	
+	operation getPackageQualifiedName() : String is do
+		if (self.Parent != void) then
+			result := self.Parent.asType(CtPackage).getPackageQualifiedName() + "." + self.SimpleName			
+		else
+			result := self.SimpleName
+		end
+	end
+	
+	
+	reference trace :EPackage
+	operation toEcore1(context:Context) : Void is do 
+		trace := EPackage.new
+		trace.name := self.SimpleName
+		if (not self.Parent.isVoid)  then
+			trace.eSuperPackage := self.Parent.asType(CtPackage).trace
+		end	
+		self.Types.each{c| c.toEcore1(context)}
+		
+		stdio.writeln(self.getPackageQualifiedName())		
+	end
+	operation toEcore2(context:Context) : Void is do 
+		self.Types.each{c| c.toEcore2(context)}
+		
+	end
+	
+}
+
+aspect class CtSimpleType{
+	operation toEcore1(context:Context) : Void is do 
+
+	end
+	operation toEcore2(context:Context) : Void is do 
+
+	end
+	
+}
+
+
+aspect class CtType
+{
+	reference trace :EClass
+	method toEcore1(context:Context) : Void is do 
+		//stdio.writeln("pass par la")
+		trace := EClass.new
+		trace.name := self.SimpleName
+		if (self.isInstanceOf(CtClass)) then
+		
+			self.trace.interface:= false
+		else
+			self.trace.interface:= true
+		end
+		
+		if (not self.Parent.isVoid)  then
+			trace.ePackage := self.Parent.asType(CtPackage).trace
+		end
+		context.classes.put(self.QualifiedName,self)
+			
+	end
+	
+	operation getTrace() : EClass is do
+		result := trace
+	end 
+	
+	method toEcore2(context:Context) : Void is do 
+		self.Fields.each{f| f.toEcore2(context)}
+		self.Methods.each{m| m.toEcore2(context)}
+			
+	end
+	
+}
+
+
+aspect class CtField
+{	
+	
+	reference trace :EStructuralFeature
+	operation toEcore2(context:Context) : Void is do 
+		var TypeName : String init self.Type.QualifiedName
+		var multiple :Boolean init false
+		var ordered :Boolean init false
+		
+		if (TypeName.equals("java.util.Collection")) then 
+			if self.Type.ActualTypeArguments.size ==1 then
+				TypeName := self.Type.ActualTypeArguments.first.QualifiedName			
+				multiple := true
+			end
+		end
+		if (TypeName.equals("java.util.List")) then 
+			if self.Type.ActualTypeArguments.size ==1 then
+				TypeName := self.Type.ActualTypeArguments.first.QualifiedName			
+				multiple := true
+				ordered := true
+			end
+		end
+	
+		if (context.classes.getValue(TypeName).isVoid) then
+			if (context.dataType.getValue(TypeName).isVoid) then			
+				var data : EDataType init EDataType.new
+				data.instanceClassName:=TypeName
+				data.name:=TypeName
+				context.dataType.put(TypeName,data)
+								
+			end
+			var data : EDataType init context.dataType.getValue(TypeName)
+			trace := EAttribute.new
+			trace.name := self.SimpleName
+			if multiple then
+				trace.upperBound := -1
+			else
+				trace.upperBound := 1
+			end
+			trace.ordered := ordered			
+			trace.eType := data
+		else
+			var data : EClass init context.classes.getValue(TypeName).trace
+			trace := EReference.new
+			trace.name := self.SimpleName
+			trace.eType := data		
+			if multiple then
+				trace.upperBound := -1
+			else
+				trace.upperBound := 1
+			end
+			trace.ordered := ordered
+		end
+		self.Parent.asType(CtType).trace.eStructuralFeatures.add(trace)			
+	end
+}
+
+aspect class CtMethod
+{	
+	
+	reference trace :EOperation
+	operation toEcore2(context:Context) : Void is do 
+				var TypeName : String init self.Type.QualifiedName
+		var multiple :Boolean init false
+		var ordered :Boolean init false
+		
+		if (TypeName.equals("java.util.Collection")) then 
+			if self.Type.ActualTypeArguments.size ==1 then
+				TypeName := self.Type.ActualTypeArguments.first.QualifiedName			
+				multiple := true
+			end
+		end
+		if (TypeName.equals("java.util.List")) then 
+			if self.Type.ActualTypeArguments.size ==1 then
+				TypeName := self.Type.ActualTypeArguments.first.QualifiedName			
+				multiple := true
+				ordered := true
+			end
+		end
+	
+		if (context.classes.getValue(TypeName).isVoid) then
+			if (context.dataType.getValue(TypeName).isVoid) then			
+				var data : EDataType init EDataType.new
+				data.instanceClassName:=TypeName
+				data.name:=TypeName
+				context.dataType.put(TypeName,data)
+								
+			end
+			var data : EDataType init context.dataType.getValue(TypeName)
+			trace := EOperation.new
+			trace.name := self.SimpleName
+			if multiple then
+				trace.upperBound := -1
+			else
+				trace.upperBound := 1
+			end
+			trace.ordered := ordered			
+			trace.eType := data
+		else
+			var data : EClass init context.classes.getValue(TypeName).trace
+			trace := EOperation.new
+			trace.name := self.SimpleName
+			trace.eType := data		
+			if multiple then
+				trace.upperBound := -1
+			else
+				trace.upperBound := 1
+			end
+			trace.ordered := ordered
+		end
+		
+		self.Parent.asType(CtType).trace.eOperations.add(trace)		
+		context.lastOperationVisited := self	
+		self.Parameters.each{p|p.toEcore2(context)}
+			
+	end
+}
+
+aspect class CtParameter
+{	
+	
+	reference trace :EParameter
+	operation toEcore2(context:Context) : Void is do 
+						var TypeName : String init self.Type.QualifiedName
+		var multiple :Boolean init false
+		var ordered :Boolean init false
+		
+		if (TypeName.equals("java.util.Collection")) then 
+			if self.Type.ActualTypeArguments.size ==1 then
+				TypeName := self.Type.ActualTypeArguments.first.QualifiedName			
+				multiple := true
+			end
+		end
+		if (TypeName.equals("java.util.List")) then 
+			if self.Type.ActualTypeArguments.size ==1 then
+				TypeName := self.Type.ActualTypeArguments.first.QualifiedName			
+				multiple := true
+				ordered := true
+			end
+		end
+	
+		if (context.classes.getValue(TypeName).isVoid) then
+			if (context.dataType.getValue(TypeName).isVoid) then			
+				var data : EDataType init EDataType.new
+				data.instanceClassName:=TypeName
+				data.name:=TypeName
+				context.dataType.put(TypeName,data)
+								
+			end
+			var data : EDataType init context.dataType.getValue(TypeName)
+			trace := EParameter.new
+			trace.name := self.SimpleName
+			if multiple then
+				trace.upperBound := -1
+			else
+				trace.upperBound := 1
+			end
+			trace.ordered := ordered			
+			trace.eType := data
+		else
+			var data : EClass init context.classes.getValue(TypeName).trace
+			trace := EParameter.new
+			trace.name := self.SimpleName
+			trace.eType := data		
+			if multiple then
+				trace.upperBound := -1
+			else
+				trace.upperBound := 1
+			end
+			trace.ordered := ordered
+		end
+		
+		context.lastOperationVisited.trace.eParameters.add(trace)			
+	end
+}
+

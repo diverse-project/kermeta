@@ -1,0 +1,84 @@
+/* $Id: keyword_list.kmt,v 1.3 2008/03/05 12:37:45 bmorin Exp $
+ * Creation date: May 2, 2006
+ * License: E.P.L.
+ * Copyright: 
+ * Authors:	Vincent MAH� vmahe@irisa.fr
+ */
+
+package kermeta::language::key;
+
+
+require kermeta
+
+using kermeta::standard 
+
+class KeyWordList
+{
+	attribute keywords : kermeta::utils::Hashtable<String,String>
+	
+    operation initialize() is do 
+        // creates the keyword list
+        // see fr.irisa.triskell.kermeta.io/java/[..]parser/SimpleKWList.java
+        // for the complete and up-to-date Kermeta keywords list
+        keywords := kermeta::utils::Hashtable<String,String>.new
+        
+        keywords.put("aspect","aspect")
+		keywords.put("package","package")
+		keywords.put("require","require")
+		keywords.put("using","using")
+		keywords.put("inherits","inherits")
+		keywords.put("class","class")
+		keywords.put("abstract","abstract")
+		keywords.put("Self","Self")
+		keywords.put("Void","Void")
+		keywords.put("attribute","attribute")
+		keywords.put("reference","reference")
+		keywords.put("property","property")
+		keywords.put("readonly","readonly")
+		keywords.put("getter","getter")
+		keywords.put("is","is")
+		keywords.put("setter","setter")
+		keywords.put("raises","raises")
+		keywords.put("select","select")
+		keywords.put("operation","operation")
+		keywords.put("method","method")
+		keywords.put("bag","bag")
+		keywords.put("set","set")
+		keywords.put("seq","seq")
+		keywords.put("oset","oset")
+		keywords.put("alias","alias")
+		keywords.put("enumeration","enumeration")
+		keywords.put("and","and")
+		keywords.put("or","or")
+		keywords.put("not","not")
+		keywords.put("self","self")
+		keywords.put("super","super")
+		keywords.put("result","result")
+		keywords.put("do","do")
+		keywords.put("end","end")
+		keywords.put("function","function")
+		keywords.put("rescue","rescue")
+		keywords.put("from","from")
+		keywords.put("until","until")
+		keywords.put("loop","loop")
+		keywords.put("if","if")
+		keywords.put("then","then")
+		keywords.put("else","else")
+		keywords.put("raise","raise")
+		keywords.put("var","var")
+		keywords.put("init","init")
+		keywords.put("extern","extern")
+		keywords.put("true","true")
+		keywords.put("false","false")
+		keywords.put("void","void")
+		keywords.put("value","value")
+		keywords.put("pre","pre")
+		keywords.put("post","post")
+		keywords.put("inv","inv")
+//		keywords.put("@pre","@pre")
+    end
+    
+    operation isKeyword(str : String) : Boolean is do
+    	result := (keywords.getValue(str) != void)
+    end
+}

@@ -1,0 +1,286 @@
+/* $Id: EcoreHelper.kmt,v 1.12 2008/09/05 14:42:21 dvojtise Exp $
+ * File : EcoreHelper.kmt
+ * License : EPL
+ * Copyright : IRISA / INRIA / Universite de Rennes 1
+ * ----------------------------------------------------------------------------
+ * Creation date : Sep 08, 2005
+ * Authors : 
+ *  Didier Vojtisek <dvojtise@irisa.fr>
+ *  Damien Pollet   <dpollet@irisa.fr>
+ * 
+ */
+//@mainClass "EcoreHelper::Main"
+//@mainOperation "main"
+
+
+package EcoreHelpers;
+
+require kermeta 
+
+//require "ecore_behavior.kmt"
+require "EcoreGenericsHelper.kmt"
+
+//require "platform:/plugin/fr.irisa.triskell.kermeta/lib/ecore.kmt"
+//require "http://www.eclipse.org/emf/2002/Ecore"
+require "keyword_list.kmt"
+ 
+using kermeta::standard
+using kermeta::exceptions
+
+using kermeta::persistence
+using ecore
+using kermeta::language::key
+
+/** This class provides some helper methods to load/save Ecore models
+ *   Plus some other useful navigation methods
+ */
+class EcoreHelper
+{
+	attribute ecoreMetamodel : String
+
+	operation initialize() is do
+		// Ecore.ecore official file
+		//ecoreMetamodel := "platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore"
+	    ecoreMetamodel := "http://www.eclipse.org/emf/2002/Ecore"
+	end
+
+	/** load an ECore model 
+	 * Does not store its content. (Ie. getEcoreClassifierByQualifiedName will not work
+	 */
+    operation loadEcoreModel(repository : EMFRepository, modelUri : String) : Sequence<EPackage> is do
+    	var resource : Resource init repository.createResource(modelUri , ecoreMetamodel)
+    	resource.load
+    	var instances : Set<Object> init resource.instances
+    	// retreives only the packages
+    	var pack : EPackage
+    	result := instances.select { e | EPackage.isInstance(e) }.collect{p | pack ?= p}
+    	
+    end
+
+	/**
+	 * storage of all the loaded EPackage (used by some operations like getEcoreClassifierByQualifiedName()
+	 */
+	reference packages : Sequence<EPackage>
+
+	/** loads an ECore model and stores its content in the packages reference of this helper */
+    operation loadModel(modelUri : String) : Void is do
+    	var repository : EMFRepository init EMFRepository.new 
+    	var resource : Resource init repository.createResource(modelUri , ecoreMetamodel)
+    	resource.load
+    	var instances : Set<Object> init resource.instances
+    	// retreives only the packages
+    	packages := instances.select { e | EPackage.isInstance(e) }.collect{p | var pack : EPackage
+    	pack ?= p}
+    end
+
+
+
+	/** loads ECore as a model and stores its content in the packages reference of this helper*/
+    operation loadEcoreAsModel() : Void is do
+		var repository : EMFRepository init EMFRepository.new 
+    	var resource : Resource init repository.createResource(ecoreMetamodel , ecoreMetamodel)
+    	resource.load
+    	var instances : Set<Object> init resource.instances
+    	// retreives only the packages
+    	packages := instances.select { e | EPackage.isInstance(e) }.collect{p | var pack : EPackage
+    		pack ?= p}
+    end
+
+	
+	/** retreives the qualified name of a class */
+	operation getClassifierQualifiedName(c : EClassifier) : String is do
+		if (c.ePackage != void) then
+			result := getPackageQualifiedName(c.ePackage) + "::" + c.name			
+		else
+			result := c.name
+		end
+	end
+	
+	
+	operation getETypedElementFromPath(contextQualifiedName : String, path : String, token : String) : ETypedElement raises InvalidPathName,MetaModelNotLoaded is do
+		
+		 var context : EClass 
+		 context ?= self.getEcoreClassifierByQualifiedName(contextQualifiedName)
+		 if (context != void) then
+		 
+			 var splitpath: OrderedSet<String> init self.splitString(path,token)
+			 var feature : ETypedElement 
+			 from var it : Iterator<String> init splitpath.iterator
+		 		until (it.isOff) loop
+		 		var s : String init it.next
+		 		//stdio.writeln("s = " +s)
+			 	feature := context.eAllStructuralFeatures.detect{e|e.name == s}
+				
+				if (feature == void) then
+					feature := context.eAllOperations.detect{e|e.name == s}
+					if (feature == void) then
+			 			raise InvalidPathName.new
+					end
+				end			 	
+				result := feature
+			 	context?= feature.eType
+		 	end
+		 else
+		 	raise InvalidContextName.new
+		 end
+	end
+	
+
+
+	operation test():Void is do
+		self.splitString("essai.essai1.essai2.essai3", ".").each{e|stdio.writeln(e)}
+		self.splitString("essai::essai1::essai2::essai3", "::").each{e|stdio.writeln(e)}
+		self.initialize
+		self.loadEcoreAsModel()
+		stdio.writeln(self.getEcoreClassifierByQualifiedName("ecore::EPackage").name)		
+		//stdio.writeln(self.isMultiple("ecore::EPackage", "eSubpackages.eClassifiers",".").toString)
+		//stdio.writeln(self.isMultiple("ecore::EClass", "ePackage",".").toString)
+
+	end
+
+	operation splitString(source : String, token:String) :OrderedSet<String> is do 
+		var stringToSplit : String init source
+		var res: OrderedSet<String>  init OrderedSet<String>.new
+
+		var pos : Integer
+
+		from pos:=stringToSplit.indexOf(token)
+		until (pos==-1)
+		loop
+			var firstElement : String
+			firstElement := stringToSplit.substring(0,pos)
+			res.add(firstElement)
+			stringToSplit := stringToSplit.substring(pos + token.size, stringToSplit.size)
+			//stdio.writeln(firstElement + "  " + stringToSplit + " " + pos.toString)
+			pos := stringToSplit.indexOf(token)
+			
+		end
+		res.add(stringToSplit)
+		result := res
+		
+	end
+
+	/**
+	 * Retreives a Classifier in the loaded (and stored) packages
+	 */
+	operation getEcoreClassifierByQualifiedName(classifierName : String) : EClassifier
+	pre isPackagesInitialized is not packages.isVoid 
+	is do
+	
+		var splitpath: OrderedSet<String> init self.splitString(classifierName,"::")
+		var ClassifierName :String init splitpath.last
+		splitpath.remove(splitpath.last)
+		
+		
+		var pack : EPackage init packages.detect{e|e.name==(splitpath.first)}		
+		splitpath.remove(splitpath.first)
+			
+		 from var it : Iterator<String> init splitpath.iterator
+		 until (it.isOff) loop	
+		 	var s : String init it.next
+			pack := pack.eSubpackages.detect{e|e.name == s}
+		end
+		if (pack== void) then
+			stdio.writeln("ERROR")
+			end
+		result := pack.eClassifiers.detect{e|e.name == ClassifierName}
+	end
+
+	operation getEcoreClassifierNameByQualifiedName(classifierName : String) : String is do
+		result := self.getEcoreClassifierByQualifiedName(classifierName).name
+	end
+	/** retreives the qualified name of a Package */
+	operation getPackageQualifiedName(p : EPackage) : String is do
+		if (p.eSuperPackage != void) then
+			result := getPackageQualifiedName(p.eSuperPackage) + "::" + p.name			
+		else
+			result := p.name
+		end
+	end
+	
+	/** save an ECore model */
+    operation saveEcoreModel(repository : EMFRepository, m : EPackage, uri : String) is do
+	    var resource : Resource init repository.createResource(uri , ecoreMetamodel)
+	    resource.instances.add(m)
+	   /* var report : Set<DanglingDiagnostic>
+	 	report := repository.findDanglingModelElements()
+	 	report.each{ diag | stdio.writeln(diag.toString ) }
+	    */
+	    resource.save
+    end
+
+	operation askIfNecessary(prompt : String, currentValue : String) : String is do
+		result := currentValue
+		if result.isVoid then
+			result := stdio.read(prompt)
+		end
+	end
+    
+    /** retreives a Class by its name */
+    operation findClassByName(model : EPackage, className : String) : EClass is do
+		result ?= model.eClassifiers.detect { ec |
+			EClass.isInstance(ec) and (ec.name.equals(className))
+		}
+    end
+    /** retreives a Package by its name  */
+    operation findPackageByName(model : Sequence<EPackage>, packageName : String) : EPackage is do
+		result := model.detect { ec |
+			EPackage.isInstance(ec) and (ec.name.equals(packageName))
+		}
+    end
+    
+    /** tells if this class has a parent in the given package */
+    operation hasParentInPackage(aClass : EClass, pack : EPackage) : Boolean is do
+    	var boolResult : Boolean init false
+    	result := aClass.eSuperTypes.exists{ ec |
+    		pack.eClassifiers.exists { ec2 | ec == ec2}
+    	}
+    end
+    
+    /** add an annotation to the given model element
+     *  ensures that there is only one EAnnotation instance
+     */
+    operation addAnnotation(aModelElement : EModelElement,
+    	source : String, detailKey : String, detailValue : String) : EAnnotation is do
+    	
+		var theAnnotation : EAnnotation init
+			aModelElement.eAnnotations.detect{annot | annot.source.equals(source)}
+		if theAnnotation.isVoid then 
+			theAnnotation := EAnnotation.new
+			theAnnotation.source := source
+			aModelElement.eAnnotations.add(theAnnotation)
+		end
+		var detail : EStringToStringMapEntry init EStringToStringMapEntry.new
+		detail.key := detailKey
+		detail.~value := detailValue
+		theAnnotation.details.add(detail)
+		result := void
+    end
+	
+	operation getMangledIdentifier(id : String) : String is do
+		
+		if id.isVoid() then
+			result := id
+		else
+			var kermetaKeyWordList : KeyWordList init KeyWordList.new
+			kermetaKeyWordList.initialize()
+			if kermetaKeyWordList.isKeyword(id) then
+				result := "~" + id
+			else
+				result := id
+			end
+		end
+		
+	end
+        
+}
+
+class InvalidPathName inherits Exception{
+}
+
+class InvalidContextName inherits Exception{
+}
+
+
+class MetaModelNotLoaded inherits Exception{
+}

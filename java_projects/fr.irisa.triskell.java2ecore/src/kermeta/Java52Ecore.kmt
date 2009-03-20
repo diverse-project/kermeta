@@ -1,0 +1,54 @@
+/* $Id:$ 
+ * Creation : March 18, 2009
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            barais
+ */
+@mainClass "root_package::Main"
+@mainOperation "main"
+
+
+package root_package;
+
+
+require kermeta
+//require "http://spoon#reflect.declaration"
+//require "http://spoon"
+require "Java5Visitor.kmt"
+
+using kermeta::standard
+using kermeta::persistence
+using ecore
+using spoon::reflect::declaration
+class Main
+{
+	operation main() : Void is do 
+		var rep : EMFRepository init EMFRepository.new
+		var res : Resource
+		
+		res:=rep.createResource("../test.java5", "http://spoon")
+		res.load
+    	var instances : Set<Object> init res.instances
+    	// retreives only the packages
+    	var pack : CtPackage
+    	var packs : Sequence<CtPackage>
+    	packs := instances.select { e | CtPackage.isInstance(e) }.collect{p | pack ?= p}
+		var context:Context init Context.new
+		context.initialize
+		packs.each{p|p.toEcore1(context)}
+		packs.each{p|p.toEcore2(context)}
+		
+		var repository : EMFRepository init EMFRepository.new
+		var epack : EPackage   init packs.first.trace
+		context.dataType.values().each{d|epack.eClassifiers.add(d)}
+		var resource : Resource init repository.createResource("../impl.ecore" ,  "http://www.eclipse.org/emf/2002/Ecore")
+	    resource.instances.add(epack)
+	   /* var report : Set<DanglingDiagnostic>
+	 	report := repository.findDanglingModelElements()
+	 	report.each{ diag | stdio.writeln(diag.toString ) }
+	    */
+	    resource.save
+//		stdio.writeln(res.size.toString)
+	end
+}
