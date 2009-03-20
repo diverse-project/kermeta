@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="wildcat"
+    nsURI="http://wildcat/1.0" nsPrefix="wildcat">
+  <eClassifiers xsi:type="ecore:EClass" name="GestEvent">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="wildcatContext" lowerBound="1"
+        eType="#//WildcatContext" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="WildcatContext">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="wrappers" upperBound="-1"
+        eType="#//WrapperAttribute" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="WrapperAttribute">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="Observer" lowerBound="1"
+        eType="#//Observer" eOpposite="#//Observer/wrappers"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Observer">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="wrappers" upperBound="-1"
+        eType="#//WrapperAttribute" eOpposite="#//WrapperAttribute/Observer"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="sondes" lowerBound="1"
+        upperBound="-1" eType="#//Sonde"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Sonde"/>
+</ecore:EPackage>

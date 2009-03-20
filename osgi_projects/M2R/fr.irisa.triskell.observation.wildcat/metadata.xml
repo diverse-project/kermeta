@@ -1,0 +1,12 @@
+<ipojo xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="org.apache.felix.ipojo http://felix.apache.org/ipojo/schemas/1.1.0-SNAPSHOT/core.xsd"
+	xmlns="org.apache.felix.ipojo">
+	<component classname="fr.irisa.triskell.observation.wildcat.WildcatObservationManager" name="managerImpl">
+		<provides specifications="fr.irisa.triskell.observation.ObservationManager" />
+		<requires field="wildcatContext" specification="org.ow2.wildcat.Context" />
+		<requires field="eventAdmin" specification="org.osgi.service.event.EventAdmin" />
+		<requires field="managers" specification="fr.irisa.triskell.observation.ObservationManager" optional="true" />
+	</component>
+	<instance component="managerImpl" name="manager" />
+	
+</ipojo>
