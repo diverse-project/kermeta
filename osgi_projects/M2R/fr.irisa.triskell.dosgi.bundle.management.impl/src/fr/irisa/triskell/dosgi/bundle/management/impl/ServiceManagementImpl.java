@@ -197,14 +197,6 @@ public class ServiceManagementImpl implements ServiceManagement {
 	@Override
 	public void unregisterService(long id) {
 		ServiceRegistration tmp = serviceRegistrations.get(id);
-		/*for (ServiceRegistration registration : serviceRegistrations) {
-			if (bundleContext.getService(registration.getReference()).equals(service)) {
-				registration.unregister();
-				tmp = registration;
-				System.out.println("Service " + interfaceName + " is unregistered");
-				break;
-			}
-		}*/
 		if (tmp != null) {
 			tmp.unregister();
 			serviceRegistrations.remove(tmp);
@@ -229,18 +221,6 @@ public class ServiceManagementImpl implements ServiceManagement {
 		}
 		
 	}
-
-	/*@Override
-	public void addProperties(String interfaceName, Object service,
-			Properties properties) {
-		for (ServiceRegistration registration : serviceRegistrations) {
-			if (/*serviceRegistrations.get(registration).equals(interfaceName) 
-					&& *bundleContext.getService(registration.getReference()).equals(service)) {
-				this.setProperties(registration, properties);
-				break;
-			}
-		}
-	}*/
 	
 	@Override
 	public void addProperties(long id, Properties properties) {
@@ -253,19 +233,6 @@ public class ServiceManagementImpl implements ServiceManagement {
 		}
 		registration.setProperties(properties);
 	}
-
-	/*@Override
-	public void updateProperties(String interfaceName, Object service,
-			Properties properties) {
-		for (ServiceRegistration registration : serviceRegistrations) {
-			if (/*serviceRegistrations.get(registration).equals(interfaceName)
-				&& *bundleContext.getService(registration.getReference()).equals(service)) {
-				registration.setProperties(properties);
-				break;
-			}
-		}
-		
-	}*/
 	@Override
 	public void updateProperties(long id, Properties properties) {
 		serviceRegistrations.get(id).setProperties(properties);
@@ -275,9 +242,6 @@ public class ServiceManagementImpl implements ServiceManagement {
 	public void updateProperties(String interfaceName,
 			Properties properties) {
 		for (ServiceRegistration registration : serviceRegistrations.values()) {
-			/*if (serviceRegistrations.get(registration).equals(interfaceName)) {
-				registration.setProperties(properties);
-			}*/
 			String[] interfaceNames = (String[])registration.getReference().getProperty(Constants.OBJECTCLASS);
 			boolean appears = false;
 			for (String name : interfaceNames) {
@@ -337,16 +301,12 @@ public class ServiceManagementImpl implements ServiceManagement {
 		return properties;
 	}
 	
-	public List<String> defineServices(List<String> interfaceNames, long bundleId) {
-		List<String> acceptableInterfaceNames = new ArrayList<String>();
-		
-		List<String> filters = filteringServices.get(bundleId); 
-		
-		
-		return acceptableInterfaceNames;
-	}
-	
 	public void defineFiltering(List<String> interfaceNames, long bundleId) {
 		filteringServices.put(bundleId, interfaceNames);
+	}
+
+	@Override
+	public List<String> getAllowedServices(long bundleId) {
+		return filteringServices.get(bundleId);
 	}
 }

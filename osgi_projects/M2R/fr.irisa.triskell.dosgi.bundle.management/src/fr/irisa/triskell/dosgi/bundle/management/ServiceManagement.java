@@ -1,6 +1,7 @@
 package fr.irisa.triskell.dosgi.bundle.management;
 
 import java.util.Dictionary;
+import java.util.List;
 import java.util.Properties;
 
 public interface ServiceManagement {
@@ -81,5 +82,9 @@ public interface ServiceManagement {
 	public Long[] findServiceIds(String interfaceName, String filter, long bundleId);
 	
 	public Properties getProperties(long id);
+	
+	public void defineFiltering(List<String> interfaceNames, long bundleId);
+	
+	public List<String> getAllowedServices(long bundleId);
 	
 }
