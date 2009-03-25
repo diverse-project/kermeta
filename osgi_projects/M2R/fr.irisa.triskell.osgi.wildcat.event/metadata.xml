@@ -1,23 +1,38 @@
-<ipojo>
-	<component className="fr.irisa.triskell.osgi.wildcat.events.EventTransmitterImpl" name="EventTransmitter">
+<ipojo xmlns:ev="org.apache.felix.ipojo.handlers.event">
+	<component classname="fr.irisa.triskell.osgi.wildcat.events.EventTransmitterImpl" name="EventTransmitter">
 		<requires field="eventAdmin" specification="org.osgi.service.event.EventAdmin" />
 		<provides specifications="fr.irisa.triskell.osgi.wildcat.events.EventTransmitter" />
 	</component>
 	<!-- <instance component="EventTransmitter" name="eventTransmitter" /> -->
 	
-	<component className="fr.irisa.triskell.osgi.wildcat.events.UpdateListener" name="UpdateListener">
+	<component classname="fr.irisa.triskell.osgi.wildcat.events.UpdateListener" name="UpdateListener">
 		<requires field="eventTransmitter" specification="fr.irisa.triskell.osgi.wildcat.events.EventTransmitter" />
-		<provides specifications="com.espertech.esper.client.UpdateListener" />
+		<requires field="wildcatContext" specification="org.ow2.wildcat.Context" />
+		<callback transition="validate" method="start" />
+		<callback transition="invalidate" method="stop" />
+		<!-- <provides specifications="com.espertech.esper.client.UpdateListener" /> -->
 	</component>
 	<!-- <instance component="UpdateListener" name="updateListener" /> -->
+	
+	<component classname="fr.irisa.triskell.osgi.wildcat.events.EventHandler" name="EventHandler">
+		<!-- <provides specifications="org.osgi.service.event.EventHandler" /> -->
+		<ev:subscriber name="wildcatSubscriber" callback="handleEvent" topics="*" />
+		<requires field="wildcatContext" specification="org.ow2.wildcat.Context" />
+	</component>
+	<!-- <instance component="EventHandler" name="eventHandler" /> -->
 	
 	<composite name="Composite">
 		<instance component="EventTransmitter" name="eventTransmitter" />
 		<instance component="UpdateListener" name="updateListener" />
+		<instance component="EventHandler" name="eventHandler" />
+		<provides action="export"
+			specification="org.osgi.service.event.EventHandler" />
 		<provides action="export" 
             specification="com.espertech.esper.client.UpdateListener" />
 		<subservice action="import" 
              specification="org.osgi.service.event.EventAdmin" />
+        <subservice action="import" 
+             specification="org.ow2.wildcat.Context" />
 	</composite>
 	
 	<instance component="Composite" name="composite" />
