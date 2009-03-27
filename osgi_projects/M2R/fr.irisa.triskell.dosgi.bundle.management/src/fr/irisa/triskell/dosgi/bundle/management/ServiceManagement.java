@@ -87,4 +87,6 @@ public interface ServiceManagement {
 	
 	public List<String> getAllowedServices(long bundleId);
 	
+	public boolean setMemento(long serviceId, Object memento);
+	
 }
