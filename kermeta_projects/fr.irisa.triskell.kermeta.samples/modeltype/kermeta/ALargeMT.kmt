@@ -1,0 +1,13 @@
+//// ALargeMT.kmt file ////
+package alargemm;
+
+require kermeta
+require "ALargeMM.km"
+
+// we aim for it to correspond
+// referent model type
+modeltype ALargeMT
+{
+	C1,
+	C2
+}

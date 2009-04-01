@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<diagrams:Diagrams xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:di="http://www.topcased.org/DI/1.0" xmlns:diagrams="http://www.topcased.org/Diagrams/1.0" activeDiagram="//@diagrams.0">
+  <model href="ALargeMM.km#//@packages.0"/>
+  <diagrams position="0,0" size="100,100" name="No name" viewport="0,0">
+    <property key="pageFormatName" value="A4"/>
+    <property key="diagramWidth" value="840"/>
+    <property key="diagramHeight" value="1188"/>
+    <property key="pageMarginName" value="Small Margin"/>
+    <property key="diagramTopMargin" value="20"/>
+    <property key="diagramBottomMargin" value="20"/>
+    <property key="diagramLeftMargin" value="20"/>
+    <property key="diagramRightMargin" value="20"/>
+    <property key="orientation" value="portrait"/>
+    <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="fr.irisa.triskell.kermeta.graphicaleditor.cd">
+      <element href="ALargeMM.km#//@packages.0"/>
+    </semanticModel>
+    <contained xsi:type="di:GraphNode" position="28,121" size="-1,-1">
+      <anchorage graphEdge="//@diagrams.0/@contained.2 //@diagrams.0/@contained.3 //@diagrams.0/@contained.4"/>
+      <anchorage graphEdge="//@diagrams.0/@contained.2"/>
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+        <element href="ALargeMM.km#//@packages.0/C1"/>
+      </semanticModel>
+      <contained xsi:type="di:GraphNode">
+        <property key="eStructuralFeatureID" value="8"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+          <element href="ALargeMM.km#//@packages.0/C1"/>
+        </semanticModel>
+        <contained xsi:type="di:GraphNode" position="0,0" size="20,20">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="propertyNode">
+            <element href="ALargeMM.km#//@packages.0/C1/name"/>
+          </semanticModel>
+        </contained>
+      </contained>
+      <contained xsi:type="di:GraphNode">
+        <property key="eStructuralFeatureID" value="9"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+          <element href="ALargeMM.km#//@packages.0/C1"/>
+        </semanticModel>
+      </contained>
+    </contained>
+    <contained xsi:type="di:GraphNode" position="22,10" size="-1,-1">
+      <anchorage graphEdge="//@diagrams.0/@contained.3 //@diagrams.0/@contained.4"/>
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+        <element href="ALargeMM.km#//@packages.0/C2"/>
+      </semanticModel>
+      <contained xsi:type="di:GraphNode">
+        <property key="eStructuralFeatureID" value="8"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+          <element href="ALargeMM.km#//@packages.0/C2"/>
+        </semanticModel>
+        <contained xsi:type="di:GraphNode" position="0,0" size="20,20">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="propertyNode">
+            <element href="ALargeMM.km#//@packages.0/C2/weight"/>
+          </semanticModel>
+        </contained>
+      </contained>
+      <contained xsi:type="di:GraphNode">
+        <property key="eStructuralFeatureID" value="9"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+          <element href="ALargeMM.km#//@packages.0/C2"/>
+        </semanticModel>
+      </contained>
+    </contained>
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.0/@anchorage.0 //@diagrams.0/@contained.0/@anchorage.1">
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+        <element href="ALargeMM.km#//@packages.0/C1/parent"/>
+      </semanticModel>
+      <contained xsi:type="di:EdgeObjectUV" id="nameEdgeObject" uDistance="8" vDistance="8"/>
+      <contained xsi:type="di:EdgeObjectUV" id="multiplicityEdgeObject" uDistance="8" vDistance="-8"/>
+      <waypoints>[80, 3, 80, 3]</waypoints>
+      <waypoints>[80, 59, 80, 59]</waypoints>
+      <waypoints>[0, 59, 0, 59]</waypoints>
+    </contained>
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.0/@anchorage.0 //@diagrams.0/@contained.1/@anchorage.0">
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+        <element href="ALargeMM.km#//@packages.0/C1/aSub"/>
+      </semanticModel>
+      <contained xsi:type="di:EdgeObjectUV" id="nameEdgeObject" uDistance="8" vDistance="8"/>
+      <contained xsi:type="di:EdgeObjectUV" id="multiplicityEdgeObject" uDistance="8" vDistance="-8"/>
+    </contained>
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.1/@anchorage.0 //@diagrams.0/@contained.0/@anchorage.0">
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+        <element href="ALargeMM.km#//@packages.0/C2/myC1"/>
+      </semanticModel>
+      <contained xsi:type="di:EdgeObjectUV" id="nameEdgeObject" uDistance="8" vDistance="8"/>
+      <contained xsi:type="di:EdgeObjectUV" id="multiplicityEdgeObject" uDistance="8" vDistance="-8"/>
+    </contained>
+  </diagrams>
+</diagrams:Diagrams>

@@ -1,0 +1,12 @@
+//// ReferentMT.kmt file ////
+// same root as the .km file
+package referentmm;
+
+require kermeta
+require "ReferentMM.km"
+
+modeltype ReferentMT
+{
+	COne,
+	CTwo
+}

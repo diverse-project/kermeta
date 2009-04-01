@@ -1,0 +1,26 @@
+//// UseOnALargeMM.kmt ////
+@mainClass "alargemm::Main"
+@mainOperation "main"
+
+package alargemm;
+
+require kermeta
+require "ALargeMT.kmt"
+require "ReferentCode.kmt"
+
+class Main
+{
+	operation main() : Void is do 
+		stdio.writeln("UseOnALargeMM.kmt ----------\n  main() - start\n")
+		
+		// we use referent code through targeted modeltype
+		var code : referentmm::Code<alargemm::ALargeMT> init referentmm::Code<alargemm::ALargeMT>.new
+		
+		// we try to create a new C1 class using the referent code
+		var newClass : alargemm::C1 init code.createNewCOne("MyC1Class")
+		
+		// we obtain an effective C1 class
+		stdio.writeln("UseOnALargeMM.kmt ----------")
+		stdio.writeln("  main() - newClass = " + newClass.toString)
+	end
+}

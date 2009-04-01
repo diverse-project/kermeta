@@ -1,0 +1,20 @@
+//// ReferentCode.kmt ////
+package referentmm;
+
+require kermeta
+require "ReferentMT.kmt"
+
+using kermeta::standard
+
+// we define a generic class typed with ReferentMT
+class Code<MT : ReferentMT>
+{
+	operation createNewCOne(name : String) : MT::COne is do 
+		// We are manipulating ReferentMM elements
+		result := MT::COne.new
+		result.name := name
+		stdio.writeln("ReferentCode.kmt ----------")
+		stdio.writeln("  createNewCOne() - instance = "
+						+ result.toString + "\n")
+	end
+}
