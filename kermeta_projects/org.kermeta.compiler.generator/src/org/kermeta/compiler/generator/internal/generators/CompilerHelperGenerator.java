@@ -20,15 +20,9 @@
 
 package org.kermeta.compiler.generator.internal.generators;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.OutputStream;
-import java.net.URL;
-import java.util.zip.ZipEntry;
-import java.util.zip.ZipInputStream;
+import java.util.ArrayList;
+import java.util.List;
 
-import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.ResourcesPlugin;
@@ -293,14 +287,40 @@ public class CompilerHelperGenerator extends AbstractGenerator {
 	 */
 	private void generateRunner(GenModel conf, SIMKModel simkConf, IPath projectPath)
 			throws JETException, CoreException {
-	
+
+		// Look for the specified main opetations, if nothing found then all the potential runners are generated
+		// Note: all the potential runners are generated in the Simk file then just the Ecore to Plugin generation must be replayed
+		String[] main_ops = this.context.getMainOperations().split(",");
+		
+		List<String> main_ops_runner = new ArrayList<String>();
+		
+		if( main_ops[0].length()>0 ) {
+			for(String main_ops_str : main_ops) {
+				main_ops_runner.add(main_ops_str.trim().replace("::", "__") + "__Runner");
+			}
+		}
+		
 		for (SMMethod sm : simkConf.getSMMethods()) {
+			
 			if ( sm.getUsages() == SMUsage.RUNNER /*.contains(SMUsage.RUNNER)*/ ) {
+				
+				boolean bool_generate = false;
+				
+				if( main_ops_runner.size()==0 ) {
+					bool_generate = true;
+				} else {
+					if( main_ops_runner.contains(sm.getSMContext().getFinalPackageQName().replace(".runner", "").replace(".", "__") + "__" + sm.getSMContext().getSMClass().getName()) ) {
+						bool_generate = true;
+					}
+				}
+				
+				if( bool_generate ) {
 				applyTemplate(
 						new Object[] {conf.getModelProjectDirectory(), ResourcesPlugin.getWorkspace().getRoot().getLocationURI().toString().replace("file:/", "file://"), sm},
 						getTemplateURI(RUNNER_JAVA),
 						projectPath.append("/" + SOURCE_DIRECTORY + "/" + sm.getSMContext().getFinalPackageQName().replace(".", "/") + "/" + sm.getSMContext().getSMClass().getName() + ".java"),
 						configuration.isForceOverwrite());
+				}
 			}
 
 		}
