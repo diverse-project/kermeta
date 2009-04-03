@@ -19,6 +19,7 @@ public class CompilerProperties {
 	public final static String UNZIP_EXTERNS = "unzip_externs";
 	public final static String SOURCE = "source..";
 	public final static String ENABLE_EMF_LOAD_INITIALIZATION = "enable_emf_load_initialization";
+	public final static String MAIN_OPERATIONS = "main_operations";
 	
 	private String file_path;
 	

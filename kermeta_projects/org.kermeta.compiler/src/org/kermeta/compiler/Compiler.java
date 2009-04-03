@@ -41,7 +41,6 @@ import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.kermeta.compiler.common.KCompilerConstants;
 import org.kermeta.compiler.common.util.UnzipFile;
 import org.kermeta.compiler.generator.helper.model.Context;
-import org.kermeta.compiler.generator.internal.GeneratorPlugin;
 import org.kermeta.compiler.generator.internal.actions.GenerateHelperAction;
 import org.kermeta.compiler.internal.ConfigurationCreator;
 import org.kermeta.compiler.internal.GenModelUtil;
@@ -451,6 +450,9 @@ public class Compiler extends org.kermeta.compiler.Generator {
 		
 		if(genModelFile.exists()) {
 			this.getCompilationContext().setKmFilePathForReflection("config/" + kmFile.getName());
+			
+			this.getCompilationContext().setMainOperations(this.compilerProperties.getProperty(CompilerProperties.MAIN_OPERATIONS, ""));
+			
 			compileHelperAction.generate(genModelFile, this.getCompilationContext(), simk_file);
 		
 			//Copying the *.km file for the reflection
