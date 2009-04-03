@@ -14,13 +14,10 @@
 
 package <%=sm.getSMContext().getFinalPackageQName()%>;
 
-import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.resource.impl.ExtensibleURIConverterImpl;
 import org.kermeta.compil.runtime.ExecutionContext;
-import org.kermeta.compil.runtime.PersistenceMapping;
 
 /**
- * A Stub of a Java Application Runner for a Kermeta runnable method
+ * A Stub of a Java Application Runner for a Kermeta runnable operation
  *
  * @generated
  */
@@ -28,35 +25,22 @@ public class <%=sm.getSMContext().getSMClass().getName()%> {
 
 	/**
 	 * @generated
-	 * Main for standalone context
+	 * Main to run the execution
 	 */
 	public static void main(String [] args) {
 	
 		// The following uri map is setted automatically,
 		// but you could customize it with your own paths according to your usage
-		/*ExtensibleURIConverterImpl.URI_MAP.put(
-				URI.createURI("platform:/resource/"),
-				URI.createURI("<%=workspaceLocationUri%>/")
+		/*org.eclipse.emf.ecore.resource.impl.ExtensibleURIConverterImpl.URI_MAP.put(
+				org.eclipse.emf.common.util.URI.createURI("platform:/resource/"),
+				org.eclipse.emf.common.util.URI.createURI("<%=workspaceLocationUri%>/")
 			);*/
-		/*ExtensibleURIConverterImpl.URI_MAP.put(
-				URI.createURI("platform:/plugin/"),
-				URI.createURI("<%=workspaceLocationUri%>/")
+		/*org.eclipse.emf.ecore.resource.impl.ExtensibleURIConverterImpl.URI_MAP.put(
+				org.eclipse.emf.common.util.URI.createURI("platform:/plugin/"),
+				org.eclipse.emf.common.util.URI.createURI("<%=workspaceLocationUri%>/")
 			);*/
 
 		
-		//Initialize the reflection
-		ExecutionContext.getInstance().lazyInitialize();
-		
-		<%=sm.getBody()%>
-		
-	}
-	
-	/**
-	 * @generated
-	 * Main for deployed version in Eclipse
-	 */
-	public static void main_forDeployedVersion(String [] args) {
-	
 		//Initialize the reflection
 		ExecutionContext.getInstance().lazyInitialize();
 		
