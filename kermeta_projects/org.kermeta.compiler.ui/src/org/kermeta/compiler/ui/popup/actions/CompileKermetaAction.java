@@ -99,7 +99,7 @@ public class CompileKermetaAction implements IObjectActionDelegate {
 					
 					String[] _args = new String[1];
 					_args[0] = km_merged_file.getFullPath().toString();
-					Main__main_km2ecore_behaviorJava__Runner.main_forDeployedVersion(_args);
+					Main__main_km2ecore_behaviorJava__Runner.main(_args);
 					
 
 					monitor.worked(1);
