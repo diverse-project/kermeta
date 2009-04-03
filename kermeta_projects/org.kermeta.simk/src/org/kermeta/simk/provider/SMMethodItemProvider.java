@@ -142,7 +142,7 @@ public class SMMethodItemProvider
 				 getString("_UI_PropertyDescriptor_description", "_UI_SMMethod_body_feature", "_UI_SMMethod_type"),
 				 SimkPackage.Literals.SM_METHOD__BODY,
 				 true,
-				 false,
+				 true,
 				 false,
 				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
 				 null,
