@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="/opt/kermeta/plugins/fr.irisa.triskell.kermeta.model_1.2.0.jar"/>
+	<classpathentry kind="lib" path="/fr.irisa.triskell.scala.Ecore/lib/org.eclipse.emf_2.4.0.v200808251517.jar"/>
+	<classpathentry kind="lib" path="/fr.irisa.triskell.scala.Ecore/lib/org.eclipse.emf.common_2.4.0.v200808251517.jar"/>
+	<classpathentry kind="lib" path="/fr.irisa.triskell.scala.Ecore/lib/org.eclipse.emf.ecore_2.4.1.v200808251517.jar"/>
+	<classpathentry kind="lib" path="/fr.irisa.triskell.scala.Ecore/lib/org.eclipse.emf.ecore.xmi_2.4.1.v200808251517.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
