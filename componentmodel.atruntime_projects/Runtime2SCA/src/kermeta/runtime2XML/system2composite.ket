@@ -1,0 +1,31 @@
+<%@ket
+package="sca"
+require="platform:/resource/SmartAdapters/metamodel/domain/metamodel@runtime.kmt"
+using="art art::instance art::type"
+class="SCA"
+parameters="system:System"
+%>
+
+<sca:composite xmlns:sca="http://www.osoa.org/xmlns/sca/1.0" xmlns:sample="http://sample" xmlns="http://www.osoa.org/xmlns/sca/1.0" name="<%=system.root.name%>" targetNamespace="http://sample">
+<%system.root.subComponent.each{ sub |%>
+	<sca:component name="<%=sub.name%>">
+	<%sub.type.port.select{p | p.role == "server"}.each{p |%>
+		<sca:service name="<%=p.name%>">
+			<sca:interface.java interface="<%=p.service.name%>"/>
+		</sca:service>
+	<%}%>
+	<%sub.type.port.select{p | p.role == "client"}.each{p |%>
+		 <sca:reference name="<%=p.name%>"/>
+	<%}%>
+	<%sub.~attribute.each{a | %>
+		<sca:property name="<%=a.~value.split(":").elementAt(0).substring(3,a.~value.split(": ").elementAt(0).size)%>"><%=a.~value.split(": ").elementAt(1)%></sca:property>
+	<%}%>
+	</sca:component>
+<%}%>
+<%system.root.getAllBindings.each{b | %>
+	<sca:wire source="<%=b.container.asType(ComponentInstance).name%>/<%=b.client.name%>" target="<%=b.serverInstance.name%>/<%=b.server.name%>"/>
+<%}%>
+<%system.root.delegation.each{d | %>
+	<sca:service name="<%=d.source.name%>" promote="<%=d.serverInstance.name%>/<%=d.exported.name%>"/>
+<%}%>
+</sca:composite>
