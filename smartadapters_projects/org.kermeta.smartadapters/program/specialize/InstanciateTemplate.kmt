@@ -12,7 +12,7 @@ package specialize;
 
 require kermeta
 require "platform:/plugin/fr.irisa.triskell.kermeta.ecore/src/kermeta/helpers/EcoreHelper.kmt"
-require "platform:/resource/SmartAdapters/program/specialize/OptimizedAdaptationTemplate.kmt"
+require "./OptimizedAdaptationTemplate.kmt"
 
 using kermeta::standard
 using kermeta::persistence

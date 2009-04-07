@@ -14,7 +14,7 @@ package runtime2SCA;
 
 
 require kermeta
-require "platform:/resource/Runtime2SCA/src/kermeta/runtime2XML/system2composite.kmt"
+require "./system2composite.kmt"
 
 
 using kermeta::standard
