@@ -11,8 +11,9 @@ Require-Bundle: org.eclipse.core.runtime,
  fr.irisa.triskell.kermeta,
  fr.irisa.triskell.kermeta.model,
  fr.irisa.triskell.kermeta.io,
- fr.irisa.triskell.kermeta.interpreter
-Eclipse-LazyStart: true
+ fr.irisa.triskell.kermeta.interpreter,
+ org.junit;bundle-version="3.8.2"
+Bundle-ActivationPolicy: lazy
 Export-Package: com.declarativa.interprolog;
   uses:="javax.swing.tree,
    junit.framework,
@@ -33,3 +34,4 @@ Export-Package: com.declarativa.interprolog;
  net.sourceforge.flora.javaAPI.src;uses:="com.declarativa.interprolog",
  net.sourceforge.flora.javaAPI.util
 Bundle-ClassPath: .
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
