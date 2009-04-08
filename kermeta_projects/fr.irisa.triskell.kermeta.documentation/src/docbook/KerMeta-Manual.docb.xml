@@ -4769,6 +4769,11 @@ class testRequireJava inherits kermeta::kunit::TestCase
 	      	<para>This figure presents the global view of all the metaclasses involved in Kermeta type system.</para>
 	      	<para>Basically, you can notice the split between Type and TypeDefinion needed in order to handle generics.</para>
 	      	<para>The containment is also represented here.</para>
+	      	<para>Please note that there is both <literal>Type</literal> and <literal>TypeDefinition</literal>. This is needed
+	      	because of the support of the generics. For example in </para>
+	      	<programlisting language="kermeta">var mycoll : Collection&lt;String&gt;</programlisting>
+	      	<para>mycoll is a VariableDecl which point to a <literal>Class</literal> whose typeDefinition is the ClassDefinition <literal>Collection</literal> 
+	      	and has a TypeVariableBinding that lead to String.</para><para>TODO add an object diagram or a figure to illustrate.</para>
 	      	<para>TODO : if time : provide a set of small diagrams that focus of some elements of the type system.</para>
       </section>
     </section>
@@ -4866,12 +4871,11 @@ class testRequireJava inherits kermeta::kunit::TestCase
         <section>
           <title>CallVariable</title>
 
-          <para>The type of <emphasis>callvar</emphasis><emphasis
-          role="strong">,</emphasis> below, is CallVariable:</para>
+          <para>The type of <emphasis>callvar</emphasis>, below, is CallVariable:</para>
 
-          <programlisting><emphasis role="strong">var</emphasis> myvar : Integer
-<emphasis role="strong">var</emphasis> callvar : Integer <emphasis
-              role="strong">init</emphasis> 4
+          <programlisting>
+var myvar : Integer
+var callvar : Integer init 4
 // 
 myvar := callvar </programlisting>
 
@@ -4879,19 +4883,11 @@ myvar := callvar </programlisting>
           <emphasis>lf</emphasis> in the assignment of res, is
           CallVariable.</para>
 
-          <programlisting>
-            <emphasis role="strong">var</emphasis>
-            <emphasis> lf : &lt;Integer-&gt;Integer&gt;</emphasis>
-            <emphasis role="strong">var</emphasis>
-            <emphasis> res : Integerlf := </emphasis>
-            <emphasis role="strong">function</emphasis>
-            <emphasis> { i : Integer | i.plus(1) }</emphasis>
-            <emphasis>// The type of </emphasis>
-            <emphasis>lf</emphasis>
-            <emphasis>, below, is CallVariable</emphasis>
-            <emphasis>res := </emphasis>
-            <emphasis>lf</emphasis>
-            <emphasis>(4)</emphasis>
+          <programlisting language="kermeta">
+var lf : &lt;Integer-&gt;Integer&gt;
+var res : Integerlf := function  { i : Integer | i.plus(1) }
+// The type of lf, below, is CallVariable
+res := lf(4)
           </programlisting>
         </section>
 
