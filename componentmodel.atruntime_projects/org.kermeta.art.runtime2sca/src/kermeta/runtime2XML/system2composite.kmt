@@ -1,6 +1,6 @@
 package sca;
 require kermeta
-require "platform:/resource/SmartAdapters/metamodel/domain/metamodel@runtime.kmt"
+require "platform:/resource/org.kermeta.smartadapters/metamodel/domain/metamodel@runtime.kmt"
 using kermeta::standard
 using kermeta::utils
 using art

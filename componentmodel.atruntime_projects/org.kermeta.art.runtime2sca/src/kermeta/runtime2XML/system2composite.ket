@@ -1,6 +1,6 @@
 <%@ket
 package="sca"
-require="platform:/resource/SmartAdapters/metamodel/domain/metamodel@runtime.kmt"
+require="platform:/resource/org.kermeta.smartadapters/metamodel/domain/metamodel@runtime.kmt"
 using="art art::instance art::type"
 class="SCA"
 parameters="system:System"

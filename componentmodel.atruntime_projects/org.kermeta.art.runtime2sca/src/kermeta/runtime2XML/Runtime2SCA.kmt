@@ -26,9 +26,16 @@ using sca
 
 class Main
 {
+	@main ""
 	operation main() : Void is do
 		var modelURI : String init "platform:/resource/SmartAdapters/examples/serviceDiscovery/model/woven/DAModel.art"
 		var file : String init "C:/Documents and Settings/bmorin/workspace/SCA_example/src/test.composite"
+		
+	 	mainWithParameter(modelURI, file)
+	end
+	
+	@main "platform:/resource/SmartAdapters/examples/serviceDiscovery/model/woven/DAModel.art C:/Documents and Settings/bmorin/workspace/SCA_example/src/test.composite"
+	operation mainWithParameter(modelURI : String, file : String) : Void is do
 		
 	 	var content : String
 	 	var system : System init loadModel(EMFRepository.new, modelURI)
