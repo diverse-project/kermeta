@@ -143,12 +143,14 @@ package type
 	{
 		inv validService is 
 		do
+			var res : Boolean init true
 			do
 				kermeta::io::FileIO.new.readTextFile("C:/work/dev/diva/src/"+self.name.replace(".", "/")+".java")
-				true
+				
 			rescue (e : kermeta::exceptions::FileNotFoundException)
-				false
+				res := false
 			end
+			res  	// this is a workaround for a compiler bug, cannot simply put "false" in the rescue blok
 		end
 	}
 }
