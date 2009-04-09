@@ -28,7 +28,7 @@ import fr.irisa.triskell.kermeta.language.structure.Operation;
 import fr.irisa.triskell.kermeta.language.structure.Parameter;
 import fr.irisa.triskell.kermeta.language.structure.Property;
 import fr.irisa.triskell.kermeta.language.structure.StructureFactory;
-import fr.irisa.triskell.kermeta.language.structure.Tag;
+//import fr.irisa.triskell.kermeta.language.structure.Tag;
 import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
 import fr.irisa.triskell.kermeta.language.structure.TypeVariable;
 import fr.irisa.triskell.kermeta.modelhelper.KermetaUnitHelper;
@@ -135,16 +135,32 @@ public class Pass2 extends MergePass {
 		 * 
 		 * When several properties exist for the same name, let's select only one.
 		 * When aspectizing, you can sometimes find several properties with the same type.
-		 * FIXME Shall we report an error indicating that two properties are differently typed ?
 		 * 
 		 */
 		List<Property> result = new ArrayList<Property> ();
 		for ( String s : mapping.keySet() ) {
-			result.add( mapping.get(s).get(0) );
+			result.add( selectProperty(mapping.get(s)) );
 		}
 		return result;
 	}
-	
+	/**
+	 * When several properties exist for the same name, let's select only one.
+	 * this operation implement some rule to have a "smart decision
+	 * if the difference is about the opposite, need to use the one with opposite
+	 * FIXME Shall we report an error indicating that two properties are differently typed ?
+	 * 	DVK : probably not here, because this should have been checked before the merge
+	 */
+	private Property selectProperty(List<Property> similarProps){
+		Property result = similarProps.get(0);
+		if (similarProps.size()>1){
+			for(Property p : similarProps){
+				if(result.getOpposite() ==  null && p.getOpposite() != null){
+					result = p;
+				}
+			}
+		}
+		return result;
+	}
 	private void setOperations(ClassDefinition t) {
 		List<Operation> operations = getOperations(t);
 		for ( Operation o : operations ) {
@@ -188,12 +204,19 @@ public class Pass2 extends MergePass {
 		 */
 		List<Operation> result = new ArrayList<Operation> ();
 		for ( String s : mapping.keySet() ) {
-			result.add( getOperation(mapping.get(s)) );
+			result.add( selectOperation(mapping.get(s)) );
 		}
 		return result;
 	}
 	
-	private Operation getOperation(List<Operation> operations) {
+	/**
+	 * from several operation with almost the same signature
+	 * select the more appropriate one:
+	 * 		an operation which is not abstract will be preferred
+	 * @param operations
+	 * @return
+	 */
+	private Operation selectOperation(List<Operation> operations) {
 		Operation result = null;
 		for ( Operation currentOperation : operations ) {
 			
