@@ -154,33 +154,41 @@ public class KBasicProcess extends Process {
 	@Override
 	public void destroy() {
 		
-		
-		// Give time for other processes to flush their content string.
-		// Needed for the debug console.
-	/*	synchronized (this) {
-			try {
-				Thread.sleep(1000);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
+		Thread t = new Thread(){
+			public void run(){
+				// Give time for other processes to flush their content string.
+				// Needed for the debug console.
+				synchronized (this) {
+					try {
+						Thread.sleep(2000);
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
+				}
+				// Closing all streams.
+		 		try {
+		 			if(_errorStream != null)			_errorStream.close();
+		 			if(_inputStream != null)			_inputStream.close(); 
+		 			if(_outputStream != null)			{_outputStream.flush(); Thread.yield();_outputStream.close();}
+		 			if(_interpreterErrorStream != null)	{
+		 				_interpreterErrorStream.flush(); 
+		 				Thread.yield(); 
+		 				_interpreterErrorStream.close();}
+		 			if(_interpreterInputStream != null)	_interpreterInputStream.close();
+		 			if(_interpreterOutputStream != null){_interpreterOutputStream.flush(); Thread.yield(); _interpreterOutputStream.close();}
+		 		} catch (IOException e) {
+		 		}
+		 		
+		 		_errorStream = null;
+		 		_inputStream = null;
+		 		_interpreterErrorStream = null;
+		 		_interpreterInputStream = null;
+		 		_interpreterOutputStream = null;
+
 			}
-		}*/
-		// Closing all streams.
- 		try {
- 			if(_errorStream != null)			_errorStream.close();
- 			if(_inputStream != null)			_inputStream.close(); 
- 			if(_outputStream != null)			_outputStream.close();
- 			if(_interpreterErrorStream != null)	_interpreterErrorStream.close();
- 			if(_interpreterInputStream != null)	_interpreterInputStream.close();
- 			if(_interpreterOutputStream != null)_interpreterOutputStream.close();
- 		} catch (IOException e) {
- 		}
- 		
- 		_errorStream = null;
- 		_inputStream = null;
- 		_interpreterErrorStream = null;
- 		_interpreterInputStream = null;
- 		_interpreterOutputStream = null;
-	
+		};
+		t.run();
+			
 	}
 
 	@Override
@@ -202,8 +210,14 @@ public class KBasicProcess extends Process {
 			_interpreter.launch();
 		} catch (InitializationError e) {
 			try {
+				_interpreterErrorStream.write("Cannot initialize the interpreter:\n".getBytes());
+				_interpreterErrorStream.flush();
 				_interpreterErrorStream.write( e.getErrorsAsString().getBytes() );
 				_interpreterErrorStream.flush();
+				Thread.yield();Thread.yield();Thread.yield();Thread.yield();
+				_interpreterOutputStream.write("If this error occurs only at runtime, this may be due to a dependency to a nsUri that is currently not registered \nor a problem in the merger.\n".getBytes());
+				_interpreterOutputStream.flush();
+				
 			} catch (IOException e1) {
 				e1.printStackTrace();
 			}
