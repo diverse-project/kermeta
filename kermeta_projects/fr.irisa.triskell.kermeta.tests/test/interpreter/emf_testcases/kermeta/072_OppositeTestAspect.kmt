@@ -11,28 +11,80 @@ package oppositetestmm;
 require kermeta
 require "../metamodels/072_OppositeTestMM.ecore"
 
-// we want the Operation knows its class
 // we expect each opposite will be filled at runtime
 //     during model loading
-aspect class OSetContainer
-{
-	// add the opposite reference to existing "operations" reference
-	reference manyElements : OSetElement[0..*] #oSet
+
+
+//-----------------
+aspect class Single2BagDest {	
+	reference src : Single2BagSrc#destBag
+}
+aspect class Single2BagSrc {
+	reference destBag : Single2BagDest[0..*]#src
 }
 
-aspect class OSetElement
-{
-	// add the opposite reference to existing "operations" reference
-	reference oSet : OSetContainer #manyElements
-	
+//-----------------
+aspect class Single2SetSrc {
+	reference destSet : Single2SetDest[0..*]#src
+}
+aspect class Single2SetDest {
+	reference src : Single2SetSrc#destSet
 }
 
-aspect class OBagContainer
-{
-	// add the opposite reference to existing "manyElements" reference
-	reference manyElements : bag OBagElement[0..*] #oBag
+//-----------------
+aspect class Single2SingleSrc {
+	reference dest : Single2SingleDest#src
+}
+aspect class Single2SingleDest{
+	reference src : Single2SingleSrc#dest
 }
 
-aspect class OBagElement{
-	reference oBag : OBagContainer #manyElements
+//-----------------
+aspect class Bag2SingleSrc {
+	reference dest : Bag2SingleDest#srcBag
+}
+aspect class Bag2SingleDest {
+	reference srcBag : bag Bag2SingleSrc[0..*]#dest
+}
+
+//-----------------
+aspect class Bag2BagSrc {
+	reference destBag : seq Bag2BagDest[0..*]#srcBag
+}
+aspect class Bag2BagDest {
+	reference srcBag : bag Bag2BagSrc[0..*]#destBag
+}
+
+//-----------------
+aspect class Set2SingleSrc{
+	reference dest : Set2SingleDest#srcSet
+}
+aspect class Set2SingleDest {
+	reference srcSet : Set2SingleSrc[0..*]#dest
+}
+
+//-----------------
+aspect class Set2SetSrc {
+	reference destSet : Set2SetDest[0..*]#srcSet
+
+}
+aspect class Set2SetDest {
+	reference srcSet : Set2SetSrc[0..*]#destSet
+}
+
+//-----------------
+aspect class Bag2SetSrc {
+	reference destSet : Bag2SetDest[0..*]#srcBag
+
+}
+aspect class Bag2SetDest {
+	reference srcBag : bag Bag2SetSrc[0..*]#destSet
+}
+
+//-----------------
+aspect class Set2BagSrc {
+	reference destBag : bag Set2BagDest[0..*]#srcSet
+}
+aspect class Set2BagDest {
+	reference srcSet : Set2BagSrc[0..*]#destBag
 }

@@ -15,6 +15,8 @@ package oppositetestmm;
 require kermeta
 require "../metamodels/072_OppositeTestMM.ecore"
 
+using oppositetestmm
+
 class Main
 {
 	reference output : kermeta::persistence::EMFResource
@@ -49,50 +51,91 @@ class Main
 	
 	operation createModel() : Void is do
 		
-		// ---------------------- BagContainer -----------------------
-		var bag1 : oppositetestmm::OBagContainer init createBag("Bag1")
+		// ---------------------- single2single -----------------------
+		var ss1 : Single2SingleSrc init Single2SingleSrc.new
+		var ss2 : Single2SingleDest init Single2SingleDest.new
+		ss1.dest := ss2
+		output.add(ss1)
+		output.add(ss2)
 		
-		// --------------------- BagElements -----------------------
+		// --------------------- single2bag -----------------------	
+		var sb1 : Single2BagSrc init Single2BagSrc.new
+		var sb2 : Single2BagDest init Single2BagDest.new
+		var sb3 : Single2BagDest init Single2BagDest.new
+		sb1.destBag.add(sb2)
+		sb1.destBag.add(sb3)
+		sb1.destBag.add(sb3)		// add sb3 twice in order to test bag
+		output.add(sb1)
+		output.add(sb2)
+		output.add(sb3)	
 		
-		var classA : oppositetestmm::OBagElement init createBagElement("ClassA", bag1)
-		var classB : oppositetestmm::OBagElement init createBagElement("ClassB", bag1)
-		// add first class a second time to test bag
-		bag1.manyElements.add(classA)
+		// --------------------- bag2single -----------------------
+		var bs1 : Bag2SingleSrc init Bag2SingleSrc.new
+		var bs2 : Bag2SingleDest init Bag2SingleDest.new
+		bs1.dest := bs2
+		output.add(bs1)
+		output.add(bs2)
 		
-		// --------------------- SetContainer -----------------------
-		var set1 : oppositetestmm::OSetContainer init createSet("set1")
+		// --------------------- bag2bag -----------------------
+		var bb1 : Bag2BagSrc init Bag2BagSrc.new
+		var bb2 : Bag2BagDest init Bag2BagDest.new
+		var bb3 : Bag2BagDest init Bag2BagDest.new
+		bb3.name := "AddedTwice"
+		bb1.destBag.add(bb2)
+		bb1.destBag.add(bb3)
+		bb1.destBag.add(bb3)		// add bb2 twice in order to test bag
+		output.add(bb1)
+		output.add(bb2)
+		output.add(bb3)
 		
-		// --------------------- SetElements -----------------------
-		var setelem1 : oppositetestmm::OSetElement init createSetElement("ClassC", set1)
-		var setelem2 : oppositetestmm::OSetElement init createSetElement("ClassD", set1)
+		// --------------------- single2set -----------------------
+		var sse1 : Single2SetSrc init Single2SetSrc.new
+		var sse2 : Single2SetDest init Single2SetDest.new
+		var sse3 : Single2SetDest init Single2SetDest.new
+		sse1.destSet.add(sse2)
+		sse1.destSet.add(sse3)
+		sse1.destSet.add(sse3)		// add sb3 twice in order to test bag
+		output.add(sse1)
+		output.add(sse2)
+		output.add(sse3)
 		
+		// --------------------- set2single -----------------------
+		var ses1 : Set2SingleSrc init Set2SingleSrc.new
+		var ses2 : Set2SingleDest init Set2SingleDest.new
+		ses1.dest := ses2
+		output.add(ses1)
+		output.add(ses2)
+		
+		// --------------------- set2set -----------------------
+		var sese1 : Set2SetSrc init Set2SetSrc.new
+		var sese2 : Set2SetDest init Set2SetDest.new
+		var sese3 : Set2SetDest init Set2SetDest.new
+		sese1.destSet.add(sese2)
+		sese1.destSet.add(sese3)
+		output.add(sese1)
+		output.add(sese2)
+		output.add(sese3)
+		
+		// --------------------- bag2set -----------------------
+		var bse1 : Bag2SetSrc init Bag2SetSrc.new
+		var bse2 : Bag2SetDest init Bag2SetDest.new
+		var bse3 : Bag2SetDest init Bag2SetDest.new
+		bse1.destSet.add(bse2)
+		bse1.destSet.add(bse3)
+		output.add(bse1)
+		output.add(bse2)
+		output.add(bse3)
+		
+		// --------------------- set2bag -----------------------
+		var seb1 : Set2BagSrc init Set2BagSrc.new
+		var seb2 : Set2BagDest init Set2BagDest.new
+		var seb3 : Set2BagDest init Set2BagDest.new
+		seb1.destBag.add(seb2)
+		seb1.destBag.add(seb3)
+		seb1.destBag.add(seb3)		// add bb2 twice in order to test bag
+		output.add(seb1)
+		output.add(seb2)
+		output.add(seb3)
 	end
-	
-	operation createBag(name : kermeta::standard::String) : oppositetestmm::OBagContainer is do
-		result := oppositetestmm::OBagContainer.new
-		result.name := name
-		output.add(result)
-	end
-	
-	operation createBagElement(name : kermeta::standard::String,
-						  abag : oppositetestmm::OBagContainer) : oppositetestmm::OBagElement is do
-		result := oppositetestmm::OBagElement.new
-		result.name := name
-		abag.manyElements.add(result)
-		output.add(result)
-	end
-	
-	operation createSet(name : kermeta::standard::String) : oppositetestmm::OSetContainer is do
-		result := oppositetestmm::OSetContainer.new
-		result.name := name
-		output.add(result)
-	end
-	
-	operation createSetElement(name : kermeta::standard::String,
-						  abag : oppositetestmm::OSetContainer) : oppositetestmm::OSetElement is do
-		result := oppositetestmm::OSetElement.new
-		result.name := name
-		abag.manyElements.add(result)
-		output.add(result)
-	end
+		
 }

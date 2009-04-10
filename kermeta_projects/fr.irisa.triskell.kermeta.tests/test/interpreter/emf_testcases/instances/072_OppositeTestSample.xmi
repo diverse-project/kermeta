@@ -1,9 +1,27 @@
 <?xml version="1.0" encoding="ASCII"?>
 <xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:oppositetestmm="http://oppositetestmm/1.0">
-  <oppositetestmm:OBagContainer manyElements="/1 /2 /1" name="Bag1"/>
-  <oppositetestmm:OBagElement name="ClassA"/>
-  <oppositetestmm:OBagElement name="ClassB"/>
-  <oppositetestmm:OSetContainer manyElements="/4 /5" name="set1"/>
-  <oppositetestmm:OSetElement name="ClassC"/>
-  <oppositetestmm:OSetElement name="ClassD"/>
+  <oppositetestmm:Single2SingleSrc dest="/1"/>
+  <oppositetestmm:Single2SingleDest/>
+  <oppositetestmm:Single2BagSrc destBag="/3 /4 /4"/>
+  <oppositetestmm:Single2BagDest/>
+  <oppositetestmm:Single2BagDest/>
+  <oppositetestmm:Bag2SingleSrc dest="/6"/>
+  <oppositetestmm:Bag2SingleDest/>
+  <oppositetestmm:Bag2BagSrc destBag="/8 /9 /9"/>
+  <oppositetestmm:Bag2BagDest/>
+  <oppositetestmm:Bag2BagDest name="AddedTwice"/>
+  <oppositetestmm:Single2SetSrc destSet="/11 /12"/>
+  <oppositetestmm:Single2SetDest/>
+  <oppositetestmm:Single2SetDest/>
+  <oppositetestmm:Set2SingleSrc dest="/14"/>
+  <oppositetestmm:Set2SingleDest/>
+  <oppositetestmm:Set2SetSrc destSet="/16 /17"/>
+  <oppositetestmm:Set2SetDest/>
+  <oppositetestmm:Set2SetDest/>
+  <oppositetestmm:Bag2SetSrc destSet="/19 /20"/>
+  <oppositetestmm:Bag2SetDest/>
+  <oppositetestmm:Bag2SetDest/>
+  <oppositetestmm:Set2BagSrc destBag="/22 /23 /23"/>
+  <oppositetestmm:Set2BagDest/>
+  <oppositetestmm:Set2BagDest/>
 </xmi:XMI>

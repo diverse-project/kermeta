@@ -3,20 +3,49 @@
     xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="oppositetestmm"
     nsURI="http://oppositetestmm/1.0" nsPrefix="oppositetestmm">
-  <eClassifiers xsi:type="ecore:EClass" name="OBagElement">
+  <eClassifiers xsi:type="ecore:EClass" name="Single2BagDest" eSuperTypes="#//Named"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Single2BagSrc" eSuperTypes="#//Named">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="destBag" ordered="false"
+        unique="false" upperBound="-1" eType="#//Single2BagDest"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Single2SetSrc" eSuperTypes="#//Named">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="destSet" upperBound="-1"
+        eType="#//Single2SetDest"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Single2SetDest" eSuperTypes="#//Named"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Named">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="OBagContainer">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="manyElements" unique="false"
-        upperBound="-1" eType="#//OBagElement"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Single2SingleSrc" eSuperTypes="#//Named">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="dest" eType="#//Single2SingleDest"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="OSetContainer">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="manyElements" upperBound="-1"
-        eType="#//OSetElement"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Single2SingleDest" eSuperTypes="#//Named"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Bag2SingleSrc" eSuperTypes="#//Named">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="dest" eType="#//Bag2SingleDest"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="OSetElement">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Bag2SingleDest" eSuperTypes="#//Named"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Bag2BagSrc" eSuperTypes="#//Named">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="destBag" ordered="false"
+        unique="false" upperBound="-1" eType="#//Bag2BagDest"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Bag2BagDest" eSuperTypes="#//Named"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Set2SingleSrc" eSuperTypes="#//Named">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="dest" eType="#//Set2SingleDest"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Set2SingleDest" eSuperTypes="#//Named"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Set2SetSrc" eSuperTypes="#//Named">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="destSet" upperBound="-1"
+        eType="#//Set2SetDest"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Set2SetDest" eSuperTypes="#//Named"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Bag2SetSrc" eSuperTypes="#//Named">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="destSet" upperBound="-1"
+        eType="#//Bag2SetDest"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Bag2SetDest" eSuperTypes="#//Named"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Set2BagSrc" eSuperTypes="#//Named">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="destBag" ordered="false"
+        unique="false" upperBound="-1" eType="#//Set2BagDest"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Set2BagDest" eSuperTypes="#//Named"/>
 </ecore:EPackage>

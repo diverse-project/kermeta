@@ -37,9 +37,27 @@ class Main inherits TestCase
 		stdio.writeln("end")
     end
     
+    
+    operation test001LoadOppositeSingle2Single() : Void is
+    do
+    	var resource : Resource init loadOppositeInputModelResource()
+    	    	
+       	stdio.writeln("\n  model elements: "+resource.size.toString)
+       	
+       	// for each element in the resource check that the opposite are correctly navigable
+       	resource.each{e|     	
+       		// this is a single2singleSrc
+			var src1 : Single2SingleSrc
+			src1 ?= e
+			if src1 != void then
+				assertTrueWithMsg(src1.dest.src == src1,"Cannot navigate back using reference src")        
+			end
+		}        
+    end
+    
     /*
      */
-    operation test001LoadOppositeBagSimpleReference() : Void is
+    operation test002LoadOppositeSingle2Bag() : Void is
     do
     	var resource : Resource init loadOppositeInputModelResource()
     	    	
@@ -48,24 +66,19 @@ class Main inherits TestCase
        	// for each element in the resource check that the opposite are correctly navigable
        	resource.each{e|
        	
-       		// this is a OBagContainer
-			var aBag : OBagContainer
-			aBag ?= e
-			if aBag != void then
-				stdio.writeln("\nBag : "+aBag.name)
+       		var src1 : Single2BagSrc
+			src1 ?= e
+			if src1 != void then
 				// navigate the attribute "classes"
-				aBag.manyElements.each{ c |
-					stdio.writeln("   bag class : "+c.name)
-					// check that the OClass can navigate back to the original OBag
-					var backToOBag : OBagContainer init c.oBag
-					assertTrueWithMsg(backToOBag == aBag,"OClass cannot navigate back using reference oBag[0..1]")
-        
+				src1.destBag.each{ c |
+					// check that the object can navigate back to the original Object
+					assertTrueWithMsg(c.src == src1, "Cannot navigate back using reference src")        
 				}
 			end
 		}        
     end
     
-    operation test002LoadOppositeBagMultipleReference() : Void is
+    operation test003LoadOppositeBag2Single() : Void is
     do
     	var resource : Resource init loadOppositeInputModelResource()
     	    	
@@ -74,26 +87,41 @@ class Main inherits TestCase
        	// for each element in the resource check that the opposite are correctly navigable
        	resource.each{e|
        	
-       		// this is a OBagContainer
-			var aBag : OBagContainer
-			aBag ?= e
-			if aBag != void then
-				stdio.writeln("\nBag : "+aBag.name)
-				// navigate the attribute "classes2"
+       		var src1 : Bag2SingleSrc
+			src1 ?= e
+			if src1 != void then
+				assertTrueWithMsg(src1.dest.srcBag.contains(src1), "Cannot navigate back using reference srcBag")        
 				
-			fail("Test not implemented") 
-			/*	aBag.classes2.each{ c |
-					stdio.writeln("   bag class : "+c.name)
-					// check that the OClass can navigate back to the original OBag
-					var backToOBag : OBag init c.oBags
-					assertTrueWithMsg(backToOBag == aBag,"OClass cannot navigate back using reference oBags[0..*]")
-        
-				} */
+			end
+		}        
+    end
+  
+  	operation test004LoadOppositeBag2Bag() : Void is
+    do
+    	var resource : Resource init loadOppositeInputModelResource()
+    	    	
+       	stdio.writeln("\n  model elements: "+resource.size.toString)
+       	
+       	// for each element in the resource check that the opposite are correctly navigable
+       	resource.each{e|
+       	
+       		var src1 : Bag2BagSrc
+			src1 ?= e
+			if src1 != void then
+				assertTrueWithMsg(src1.destBag.size == 3, "Bag2BagSrc should refer 3 Bag2BagDest, it currently refers " + src1.destBag.size.toString)
+				src1.destBag.each{ c |
+					// check that the object can navigate back to the original Object
+					assertTrueWithMsg(c.srcBag.contains(src1), "Cannot navigate back using reference srcBag")
+					if "AddedTwice" == c.name then
+						// as it has been added twice it should contain src1 twice too
+						assertTrueWithMsg(c.srcBag.size == 2, "as it has been added twice it should contain src1 twice too")
+					end        
+				}
 			end
 		}        
     end
     
-    operation test003LoadOppositeSetSimpleReference() : Void is
+    operation test005LoadOppositeSingle2Set() : Void is
     do
     	var resource : Resource init loadOppositeInputModelResource()
     	    	
@@ -102,24 +130,17 @@ class Main inherits TestCase
        	// for each element in the resource check that the opposite are correctly navigable
        	resource.each{e|
        	
-       		// this is a OSetContainer
-			var aSet : OSetContainer
-			aSet ?= e
-			if aSet != void then
-				stdio.writeln("\nSet : "+aSet.name)
-				// navigate the attribute "classes"
-				aSet.manyElements.each{ c |
-					stdio.writeln("   set class : "+c.name)
-					// check that the OClass can navigate back to the original OSetContainer
-					var backToOSetContainer : OSetContainer init c.oSet
-					assertTrueWithMsg(backToOSetContainer == aSet,"aSet cannot navigate back using reference oSet[0..1]")
-        
+       		var src1 : Single2SetSrc
+			src1 ?= e
+			if src1 != void then
+				src1.destSet.each{ c |
+					// check that the object can navigate back to the original Object
+					assertTrueWithMsg(c.src == src1, "Cannot navigate back using reference src")        
 				}
 			end
-		}
+		}        
     end
-
-	operation test004LoadOppositeSetMultipleReference() : Void is
+    operation test006LoadOppositeSet2Single() : Void is
     do
     	var resource : Resource init loadOppositeInputModelResource()
     	    	
@@ -128,21 +149,70 @@ class Main inherits TestCase
        	// for each element in the resource check that the opposite are correctly navigable
        	resource.each{e|
        	
-       		// this is a OSetContainer
-			var aSet : OSetContainer
-			aSet ?= e
-			if aSet != void then
-				stdio.writeln("\nBag : "+aSet.name)
-				// navigate the attribute "classes2"
+       		var src1 : Set2SingleSrc
+			src1 ?= e
+			if src1 != void then
+				assertTrueWithMsg(src1.dest.srcSet.contains(src1), "Cannot navigate back using reference srcSet")        
 				
-			fail("Test not implemented") 
-			/*	aBag.classes2.each{ c |
-					stdio.writeln("   bag class : "+c.name)
-					// check that the OClass can navigate back to the original OBag
-					var backToOBag : OBag init c.oBags
-					assertTrueWithMsg(backToOBag == aBag,"OClass cannot navigate back using reference oBags[0..*]")
-        
-				} */
+			end
+		}        
+    end
+    operation test007LoadOppositeSet2Set() : Void is
+    do
+    	var resource : Resource init loadOppositeInputModelResource()
+    	    	
+       	stdio.writeln("\n  model elements: "+resource.size.toString)
+       	
+       	// for each element in the resource check that the opposite are correctly navigable
+       	resource.each{e|
+       	
+       		var src1 : Set2SetSrc
+			src1 ?= e
+			if src1 != void then
+				src1.destSet.each{ c |
+					// check that the object can navigate back to the original Object
+					assertTrueWithMsg(c.srcSet.contains(src1), "Cannot navigate back using reference srcSet")        
+				}
+			end
+		}        
+    end
+    
+    operation test008LoadOppositeBag2Set() : Void is
+    do
+    	var resource : Resource init loadOppositeInputModelResource()
+    	    	
+       	stdio.writeln("\n  model elements: "+resource.size.toString)
+       	
+       	// for each element in the resource check that the opposite are correctly navigable
+       	resource.each{e|
+       	
+       		var src1 : Bag2SetSrc
+			src1 ?= e
+			if src1 != void then
+				src1.destSet.each{ c |
+					// check that the object can navigate back to the original Object
+					assertTrueWithMsg(c.srcBag.contains(src1), "Cannot navigate back using reference srcBag")        
+				}
+			end
+		}        
+    end
+    
+    operation test009LoadOppositeSet2Bag() : Void is
+    do
+    	var resource : Resource init loadOppositeInputModelResource()
+    	    	
+       	stdio.writeln("\n  model elements: "+resource.size.toString)
+       	
+       	// for each element in the resource check that the opposite are correctly navigable
+       	resource.each{e|
+       	
+       		var src1 : Set2BagSrc
+			src1 ?= e
+			if src1 != void then
+				src1.destBag.each{ c |
+					// check that the object can navigate back to the original Object
+					assertTrueWithMsg(c.srcSet.contains(src1), "Cannot navigate back using reference srcSet")        
+				}
 			end
 		}        
     end

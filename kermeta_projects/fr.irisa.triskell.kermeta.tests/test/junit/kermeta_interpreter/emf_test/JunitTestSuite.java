@@ -141,6 +141,8 @@ public class JunitTestSuite extends TestSuite {
 
 		testWithFile("test/interpreter/emf_testcases/kermeta","071_DynamicInstanceLoadSaveWithVariousMM_NsURI.main.kmt" );
 
+		testWithFile("test/interpreter/emf_testcases/kermeta","072_LoadOppositeByAspect.main.kmt" );
+
 /*** END GENERATED TESTS ***/
 		// do not modify this comment
 		//addTest(runfactory.getTest());
