@@ -8,7 +8,7 @@
 	<property name="OOo.source.dir" location="${project.base.dir}/src/OOo"/>
 	<property name="docbook.source.dir" location="${project.base.dir}/src/docbook"/>
 	<property name="OOo.source.file" location="${OOo.source.dir}/${project.name}.sxw"/>
-	<property name="deployment.dest" location="\\\\jersey\\triskell\\www\\triskell\\softwares\\kermeta\\docs"/>
+	<property name="deployment.dest" location="t:\\www\\triskell\\softwares\\kermeta\\docs"/>
 		
     <!-- disable use of xsltproc in order to enable xslthl for programlisting coloration -->
 	<property name="disable.xsltproc" value="true"/>
@@ -250,7 +250,7 @@
 
 	</target>
 	<target name="dbkdeploy" description="generate all and copy documentation files to http://www.irisa.fr/triskell/prive/docs" 
-			depends="preparedbk, html.single, html.chunked, html.help, pdf.fop, eclipse.help">
+			depends="preparedbk, html.single, html.chunked, pdf.fop, eclipse.help">
 		  	<delete dir="${deployment.dest}\\html.single\\${project.name}" failonerror="false"/>
 		  	<delete dir="${deployment.dest}\\html.chunked\\${project.name}" failonerror="false"/>
 			<copy todir="${deployment.dest}\\html.chunked\\${project.name}">
