@@ -780,27 +780,43 @@ public class EMF2Runtime {
 	protected void setPropertyOppositeFromEStructuralFeature(EStructuralFeature eFeature, EObject eObject,
 			Property kprop, RuntimeObject rObject, fr.irisa.triskell.kermeta.language.structure.Class kclass){
 		
-	/*	RuntimeObject rOppositeObject =  rObject.getProperties().get(kprop.getName());
+		// get the opposite RuntimeObject
+		RuntimeObject rOppositeObject =  rObject.getProperties().get(kprop.getName());
+		
+		// get the runtimeobject for the opposite property
+		RuntimeObject rOppositeProperty =  unit.getRuntimeMemory().getRuntimeObjectForFObject(kprop.getOpposite());
 		
 		// this opposite object might be a collection
-		if (kprop.getUpper() > 1){
+		if (kprop.getUpper() > 1 || kprop.getUpper() == -1){
 			// for each of the opposite objects
-				// clear collection and set the opposite objects using the normal kermeta API that ensure opposite  
+			ArrayList<RuntimeObject> elems = new ArrayList<RuntimeObject>(fr.irisa.triskell.kermeta.runtime.basetypes.Collection.getArrayList(rOppositeObject));
+			for(RuntimeObject rOppCollelem : elems){
+				// assign the other side object  
+				if(kprop.getOpposite().getUpper() > 1 || kprop.getOpposite().getUpper() == -1){
+					// the opposite property is a collection
+					RuntimeObject rPropColl = fr.irisa.triskell.kermeta.runtime.language.Object.get(rOppCollelem, rOppositeProperty);
+					fr.irisa.triskell.kermeta.runtime.language.ReflectiveCollection.add(rPropColl, rObject, false);
+				}
+				else{
+					// tells to not use opposite since this has been already done
+					fr.irisa.triskell.kermeta.runtime.language.Object.set(rOppCollelem, rOppositeProperty,rObject, false );
+				}	
+			}
+			
 		}
 		else{
-			// simply unset the object and set it using the normal kermeta API that ensure opposite
-			fr.irisa.triskell.kermeta.runtime.language.Object.unSet(rObject, kprop, false);
-			fr.irisa.triskell.kermeta.runtime.language.Object.set(rObject, kprop, );
-			
-			// on this single opposite object
-			// if the corresponding opposite property is a collection
-			// if the corresponding opposite property has multiplicity = 1
-			//RuntimeObject result = fr.irisa.triskell.kermeta.runtime.language.Object.get(rObject, roprop);
-			//Property oppositeProperty;
-			//rObject.getProperties().put(kprop.getName(), rovalue);
-			//kprop.
+			if(kprop.getOpposite().getUpper() > 1 || kprop.getOpposite().getUpper() == -1){
+				// the opposite property is a collection
+				RuntimeObject rPropColl = fr.irisa.triskell.kermeta.runtime.language.Object.get(rOppositeObject, rOppositeProperty);
+				fr.irisa.triskell.kermeta.runtime.language.ReflectiveCollection.add(rPropColl, rObject, false);
+			}
+			else{
+				// tells to not use opposite since this has been already done
+				fr.irisa.triskell.kermeta.runtime.language.Object.set(rOppositeObject, rOppositeProperty,rObject, false );
+			}
+		
 		}
-		*/
+		
 	}
 	/**
 	 * retreives the property from its names.
