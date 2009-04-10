@@ -1,0 +1,165 @@
+/* $Id: 071_DynamicInstanceLoadSaveUsingRelativePath.main.kmt,v 1.4 2008-07-31 08:34:13 dvojtise Exp $ 
+ * Creation : June 11, 2008
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            dvojtise
+ * This suite tests that we can add by aspect an opposite and that we can load a model 
+ * the opposite information will be filled for use at run time
+ */
+@mainClass "loadOppositeByAspect::Main"
+@mainOperation "main"
+
+
+package loadOppositeByAspect;
+
+
+require kermeta
+
+require "../metamodels/072_OppositeTestMM.ecore"
+require "072_OppositeTestAspect.kmt"
+
+using kermeta::standard
+using kermeta::persistence
+using kermeta::kunit
+using oppositetestmm
+
+class Main inherits TestCase
+{
+	operation main() : Void is do
+    	var tr : TestRunner init TestRunner.new
+		tr.run(Main)
+		tr.printTestResult
+		
+		// test005CreateRootRelativeResourceSaveAbsolute
+		//test006CreateAbsoluteResourceSaveRootRelative
+		
+		stdio.writeln("end")
+    end
+    
+    /*
+     */
+    operation test001LoadOppositeBagSimpleReference() : Void is
+    do
+    	var resource : Resource init loadOppositeInputModelResource()
+    	    	
+       	stdio.writeln("\n  model elements: "+resource.size.toString)
+       	
+       	// for each element in the resource check that the opposite are correctly navigable
+       	resource.each{e|
+       	
+       		// this is a OBagContainer
+			var aBag : OBagContainer
+			aBag ?= e
+			if aBag != void then
+				stdio.writeln("\nBag : "+aBag.name)
+				// navigate the attribute "classes"
+				aBag.manyElements.each{ c |
+					stdio.writeln("   bag class : "+c.name)
+					// check that the OClass can navigate back to the original OBag
+					var backToOBag : OBagContainer init c.oBag
+					assertTrueWithMsg(backToOBag == aBag,"OClass cannot navigate back using reference oBag[0..1]")
+        
+				}
+			end
+		}        
+    end
+    
+    operation test002LoadOppositeBagMultipleReference() : Void is
+    do
+    	var resource : Resource init loadOppositeInputModelResource()
+    	    	
+       	stdio.writeln("\n  model elements: "+resource.size.toString)
+       	
+       	// for each element in the resource check that the opposite are correctly navigable
+       	resource.each{e|
+       	
+       		// this is a OBagContainer
+			var aBag : OBagContainer
+			aBag ?= e
+			if aBag != void then
+				stdio.writeln("\nBag : "+aBag.name)
+				// navigate the attribute "classes2"
+				
+			fail("Test not implemented") 
+			/*	aBag.classes2.each{ c |
+					stdio.writeln("   bag class : "+c.name)
+					// check that the OClass can navigate back to the original OBag
+					var backToOBag : OBag init c.oBags
+					assertTrueWithMsg(backToOBag == aBag,"OClass cannot navigate back using reference oBags[0..*]")
+        
+				} */
+			end
+		}        
+    end
+    
+    operation test003LoadOppositeSetSimpleReference() : Void is
+    do
+    	var resource : Resource init loadOppositeInputModelResource()
+    	    	
+       	stdio.writeln("\n  model elements: "+resource.size.toString)
+       	
+       	// for each element in the resource check that the opposite are correctly navigable
+       	resource.each{e|
+       	
+       		// this is a OSetContainer
+			var aSet : OSetContainer
+			aSet ?= e
+			if aSet != void then
+				stdio.writeln("\nSet : "+aSet.name)
+				// navigate the attribute "classes"
+				aSet.manyElements.each{ c |
+					stdio.writeln("   set class : "+c.name)
+					// check that the OClass can navigate back to the original OSetContainer
+					var backToOSetContainer : OSetContainer init c.oSet
+					assertTrueWithMsg(backToOSetContainer == aSet,"aSet cannot navigate back using reference oSet[0..1]")
+        
+				}
+			end
+		}
+    end
+
+	operation test004LoadOppositeSetMultipleReference() : Void is
+    do
+    	var resource : Resource init loadOppositeInputModelResource()
+    	    	
+       	stdio.writeln("\n  model elements: "+resource.size.toString)
+       	
+       	// for each element in the resource check that the opposite are correctly navigable
+       	resource.each{e|
+       	
+       		// this is a OSetContainer
+			var aSet : OSetContainer
+			aSet ?= e
+			if aSet != void then
+				stdio.writeln("\nBag : "+aSet.name)
+				// navigate the attribute "classes2"
+				
+			fail("Test not implemented") 
+			/*	aBag.classes2.each{ c |
+					stdio.writeln("   bag class : "+c.name)
+					// check that the OClass can navigate back to the original OBag
+					var backToOBag : OBag init c.oBags
+					assertTrueWithMsg(backToOBag == aBag,"OClass cannot navigate back using reference oBags[0..*]")
+        
+				} */
+			end
+		}        
+    end
+    operation loadOppositeInputModelResource() : Resource is
+    do
+    	var ifileName : String init "../instances/072_OppositeTestSample.xmi"
+    	var ofileName : String init "platform:/resource/fr.irisa.triskell.kermeta.tests/test/interpreter/emf_testcases/output/072_OppositeTestSample.out.xmi"
+    	var mmfileName : String init "platform:/resource/fr.irisa.triskell.kermeta.tests/test/interpreter/emf_testcases/metamodels/072_OppositeTestMM.ecore"
+
+		var repository : kermeta::persistence::EMFRepository	init kermeta::persistence::EMFRepository.new
+		repository.registerEcoreFile(mmfileName)
+    	var resource : Resource
+    	
+    	resource :=repository.getResource(ifileName)
+    	
+    	result := resource
+    end
+    
+}
+

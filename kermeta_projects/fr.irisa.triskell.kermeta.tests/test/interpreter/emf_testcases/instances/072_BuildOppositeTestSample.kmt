@@ -1,0 +1,98 @@
+/* $Id: OppositeTestSample.kmt,v 1.2 2009-02-11 15:51:36 vmahe Exp $ 
+ * Creation : January 14, 2009
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            vmahe
+ */
+@mainClass "oppositetestmm::Main"
+@mainOperation "main"
+
+
+package oppositetestmm;
+
+
+require kermeta
+require "../metamodels/072_OppositeTestMM.ecore"
+
+class Main
+{
+	reference output : kermeta::persistence::EMFResource
+	
+	operation main() : Void is do
+		stdio.writeln("Creating resource...")
+		
+		var metamodelURI : kermeta::standard::String
+			init "platform:/resource/fr.irisa.triskell.kermeta.tests/test/interpreter/emf_testcases/metamodels/072_OppositeTestMM.ecore"
+		var repository : kermeta::persistence::EMFRepository
+				init kermeta::persistence::EMFRepository.new
+		repository.registerEcoreFile(metamodelURI)
+    	output ?= repository.createResource("072_OppositeTestSample.xmi", metamodelURI)
+		
+		stdio.writeln("Initializing...")
+		
+		initialize()
+		
+		stdio.writeln("Creating test model...")
+		
+		createModel()
+		
+		stdio.writeln("Saving resource...")
+		
+		output.save()
+		
+		stdio.writeln("... Done")
+	end
+	
+	operation initialize() is do
+	end
+	
+	operation createModel() : Void is do
+		
+		// ---------------------- BagContainer -----------------------
+		var bag1 : oppositetestmm::OBagContainer init createBag("Bag1")
+		
+		// --------------------- BagElements -----------------------
+		
+		var classA : oppositetestmm::OBagElement init createBagElement("ClassA", bag1)
+		var classB : oppositetestmm::OBagElement init createBagElement("ClassB", bag1)
+		// add first class a second time to test bag
+		bag1.manyElements.add(classA)
+		
+		// --------------------- SetContainer -----------------------
+		var set1 : oppositetestmm::OSetContainer init createSet("set1")
+		
+		// --------------------- SetElements -----------------------
+		var setelem1 : oppositetestmm::OSetElement init createSetElement("ClassC", set1)
+		var setelem2 : oppositetestmm::OSetElement init createSetElement("ClassD", set1)
+		
+	end
+	
+	operation createBag(name : kermeta::standard::String) : oppositetestmm::OBagContainer is do
+		result := oppositetestmm::OBagContainer.new
+		result.name := name
+		output.add(result)
+	end
+	
+	operation createBagElement(name : kermeta::standard::String,
+						  abag : oppositetestmm::OBagContainer) : oppositetestmm::OBagElement is do
+		result := oppositetestmm::OBagElement.new
+		result.name := name
+		abag.manyElements.add(result)
+		output.add(result)
+	end
+	
+	operation createSet(name : kermeta::standard::String) : oppositetestmm::OSetContainer is do
+		result := oppositetestmm::OSetContainer.new
+		result.name := name
+		output.add(result)
+	end
+	
+	operation createSetElement(name : kermeta::standard::String,
+						  abag : oppositetestmm::OSetContainer) : oppositetestmm::OSetElement is do
+		result := oppositetestmm::OSetElement.new
+		result.name := name
+		abag.manyElements.add(result)
+		output.add(result)
+	end
+}

@@ -1,0 +1,38 @@
+/* $Id: OppositeTestPlus.kmt,v 1.2 2009-02-11 15:51:36 vmahe Exp $ 
+ * Creation : January 14, 2009
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            vmahe
+ */
+
+package oppositetestmm;
+
+require kermeta
+require "../metamodels/072_OppositeTestMM.ecore"
+
+// we want the Operation knows its class
+// we expect each opposite will be filled at runtime
+//     during model loading
+aspect class OSetContainer
+{
+	// add the opposite reference to existing "operations" reference
+	reference manyElements : OSetElement[0..*] #oSet
+}
+
+aspect class OSetElement
+{
+	// add the opposite reference to existing "operations" reference
+	reference oSet : OSetContainer #manyElements
+	
+}
+
+aspect class OBagContainer
+{
+	// add the opposite reference to existing "manyElements" reference
+	reference manyElements : bag OBagElement[0..*] #oBag
+}
+
+aspect class OBagElement{
+	reference oBag : OBagContainer #manyElements
+}

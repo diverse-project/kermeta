@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="ASCII"?>
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:oppositetestmm="http://oppositetestmm/1.0">
+  <oppositetestmm:OBagContainer manyElements="/1 /2 /1" name="Bag1"/>
+  <oppositetestmm:OBagElement name="ClassA"/>
+  <oppositetestmm:OBagElement name="ClassB"/>
+  <oppositetestmm:OSetContainer manyElements="/4 /5" name="set1"/>
+  <oppositetestmm:OSetElement name="ClassC"/>
+  <oppositetestmm:OSetElement name="ClassD"/>
+</xmi:XMI>
