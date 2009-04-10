@@ -29,6 +29,7 @@ import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EEnumLiteral;
 import org.eclipse.emf.ecore.EFactory;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.impl.EStructuralFeatureImpl.BasicFeatureMapEntry;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -648,103 +649,159 @@ public class EMF2Runtime {
 	    // For each feature, get the value and add it to the properties hashtable
 	    EList<EStructuralFeature> allStructuralFeature = eclass.getEAllStructuralFeatures();
 	    for (EStructuralFeature feature : allStructuralFeature)
-	    {	
-	    	EClassifier feature_type = feature.getEType();
-	    	//Type ftype = getTypeFromEClassifier(feature_type);
-	    	// Find the property corresponding to the given feature
+	    {	// Find the property corresponding to the given feature
 	    	// Note : if it is not found, this method throws a KermetaRaisedException.
-	    	Property prop = getPropertyForEStructuralFeature((ClassDefinition) kclass.getTypeDefinition(), feature, eclass);
-	    	// Means that prop does not exist in kermeta side, so do nothing
-	    	if (prop != null && !prop.isIsDerived())
-	    	{	
-	    		RuntimeObject roprop = unit.getRuntimeMemory().getRuntimeObjectForFObject(prop);
-	    		// eGet can return an elist of features
-	    		Object fvalue = eObject.eGet(feature);
-	    		RuntimeObject rovalue = null;
-	    		try
-	    		{
-	    			// A feature with multiplicity
-	    			if (fvalue instanceof EList)
-	    			{
-	    		    	Type ftype = getTypeFromEClassifier(feature_type);
-	    				if(fvalue instanceof BasicFeatureMap){
-	    					// special case for FeatureMap
-	    					rovalue = createRuntimeObjectForFeatureMap((EList)fvalue, ftype, feature_type, rObject, roprop);
-	    				}
-	    				else // normal case
-	    					rovalue = createRuntimeObjectForCollection((EList)fvalue, ftype, feature_type, rObject, roprop);
-	    			}
-	    			else if (feature_type instanceof EEnum){
-	    				// special case of enumeration we must connect it to the enumartion definition instead of creating a RuntimeObject for it
-	    				String enumName = unit.getEQualifiedName(feature_type);
-	    				RuntimeObject roEnum = unit.getRuntimeMemory().getTypeDefinitionAsRuntimeObject(enumName);
-	    				// get the enumliteral
-	    				String litValue = null;
-	    				if (fvalue instanceof org.eclipse.emf.common.util.AbstractEnumerator){
-	    					litValue = ((org.eclipse.emf.common.util.AbstractEnumerator)fvalue).getLiteral();
-	    				}
-	    				else if (fvalue instanceof EEnumLiteral)
-	    					litValue = ((EEnumLiteral)fvalue).getLiteral();
-	    				else if (fvalue instanceof org.eclipse.emf.common.util.Enumerator){
-	    					litValue = ((org.eclipse.emf.common.util.Enumerator)fvalue).getLiteral();
-	    				}
-	    				else {
-	    					internalLog.warn("not able to retreive literal value for " + fvalue + ", unable to reconnect to the kermeta definition ...");
-	    				}
-	    				RuntimeObject roEnumLit = fr.irisa.triskell.kermeta.runtime.rohelper.EnumerationHelper.getLiteral(roEnum, litValue);
-	    				rObject.getProperties().put(prop.getName(), roEnumLit);
-	    			}
-	    			// Get the RO-repr of this EObject
-	    			else if (fvalue instanceof EObject)
-	    			{   // EFactory is not saved in the model, neither does it refer to a saved element in the model (at the opposite
-	    				// of all the other transient features), so it will not be loaded
-	    				// Indeed, EFactory is a typical ecore case that is used for Java compliance..Unusable in kermeta.
-	    				if (!(fvalue instanceof EFactory))
-	    				{
-	    					rovalue = createRuntimeObjectForEObject(rObject, (EObject)fvalue, feature);
-	    					rObject.getProperties().put(prop.getName(), rovalue);
-	    				}
-	    			}
-	    			
-	    			// BEGIN EMF Patch
-	    			// A "null" instanceClassName property must correspond to a "void" RO property and not to an empty string.
-	    			// Empty string will raise an error during EMF saving.
-	    			else if(eObject instanceof EClassifier && feature.getName().equals("instanceClassName") && fvalue == null) {
-	    				fr.irisa.triskell.kermeta.runtime.language.Object.set(rObject, roprop, unit.getRuntimeMemory().voidINSTANCE);
-	    			}else if(eObject instanceof EClassifier && feature.getName().equals("instanceTypeName") && fvalue == null) {
-	    				fr.irisa.triskell.kermeta.runtime.language.Object.set(rObject, roprop, unit.getRuntimeMemory().voidINSTANCE);
-	    			}
-	    			// END EMF Patch	    			
-	    			
-	    			// equivalent test : fvalue instanceof EString, EInt, etc.
-	    			else if (fvalue == null)
-	    			{    
-	    				fr.irisa.triskell.kermeta.runtime.language.Object.set(rObject, roprop, unit.getRuntimeMemory().voidINSTANCE);
-	    			}
-	    			else if (EDataType.class.isInstance(feature_type))
-	    			{   // EJavaClass -> rovalue null
-	    				rovalue = createRuntimeObjectForPrimitiveTypeValue(fvalue, (EDataType)feature_type);
-	    				fr.irisa.triskell.kermeta.runtime.language.Object.set(rObject, roprop, rovalue);
-	    			}
-	    			else
-	    			{
-	    				String errmsg = "NotImplemented Error : The type <"+feature_type+"> has not been handled yet. Trying to set "+
-	    				fvalue+" into "+rObject;	
-	    				unit.throwKermetaRaisedExceptionOnLoad(errmsg, null);
-	    			}
-	    			// If we instanciated a RuntimeObject value, we can set the properties for the object
-	    			// reminder : rovalue is null if fvalue was an instance of EFactory
-	    			if (fvalue != null && rovalue != null) rovalue.setEmfObject(fvalue);
-	    		} // Catch any unhandled raised exception
-	    		catch (Exception e) {
-	    			String errmsg = "Exception received. Trying to set on " +  rObject  + " this property: " + prop +" / " + feature.getName() + " with value: "+ fvalue;
-	    			e.printStackTrace();
-	    			unit.throwKermetaRaisedExceptionOnLoad(errmsg, e);
-	    		}
-	    	} 
+	    	Property prop = getPropertyForEStructuralFeature((ClassDefinition) kclass.getTypeDefinition(), feature, eObject.eClass());
+	    	
+	    	setPropertyFromEStructuralFeature(feature, eObject, 
+	    			prop, rObject, kclass);
+	    	
+	    	if(feature instanceof EReference){
+	    		EReference ref = (EReference)feature;
+	    		if (ref.getEOpposite() == null && prop.getOpposite() != null){		    	
+		    		// need to manually set the opposite (not done by the normal case because not in the ecore)
+		    		setPropertyOppositeFromEStructuralFeature(feature, eObject, 
+		    				prop, rObject, kclass);
+		    	}
+	    	}
 	    }
 	} 
-	
+	/**
+	 * From an ecore object and given one feature, sets the corresponding property on the kermeta RuntimeObject side
+	 * Do not set the opposite (because in the normal case, this is done by populating the other end objects.
+	 * @param eFeature
+	 * @param eObject
+	 * @param kprop
+	 * @param rObject
+	 * @param kclass
+	 */
+	protected void setPropertyFromEStructuralFeature(EStructuralFeature eFeature, EObject eObject,
+			Property kprop, RuntimeObject rObject, fr.irisa.triskell.kermeta.language.structure.Class kclass){
+		
+		
+		EClassifier feature_type = eFeature.getEType();
+    	// Means that prop does not exist in kermeta side, so do nothing
+    	if (kprop != null && !kprop.isIsDerived())
+    	{	
+    		RuntimeObject roprop = unit.getRuntimeMemory().getRuntimeObjectForFObject(kprop);
+    		// eGet can return an elist of features
+    		Object fvalue = eObject.eGet(eFeature);
+    		RuntimeObject rovalue = null;
+    		try
+    		{
+    			// A feature with multiplicity
+    			if (fvalue instanceof EList)
+    			{
+    		    	Type ftype = getTypeFromEClassifier(feature_type);
+    				if(fvalue instanceof BasicFeatureMap){
+    					// special case for FeatureMap
+    					rovalue = createRuntimeObjectForFeatureMap((EList)fvalue, ftype, feature_type, rObject, roprop);
+    				}
+    				else // normal case
+    					rovalue = createRuntimeObjectForCollection((EList)fvalue, ftype, feature_type, rObject, roprop);
+    			}
+    			else if (feature_type instanceof EEnum){
+    				// special case of enumeration we must connect it to the enumartion definition instead of creating a RuntimeObject for it
+    				String enumName = unit.getEQualifiedName(feature_type);
+    				RuntimeObject roEnum = unit.getRuntimeMemory().getTypeDefinitionAsRuntimeObject(enumName);
+    				// get the enumliteral
+    				String litValue = null;
+    				if (fvalue instanceof org.eclipse.emf.common.util.AbstractEnumerator){
+    					litValue = ((org.eclipse.emf.common.util.AbstractEnumerator)fvalue).getLiteral();
+    				}
+    				else if (fvalue instanceof EEnumLiteral)
+    					litValue = ((EEnumLiteral)fvalue).getLiteral();
+    				else if (fvalue instanceof org.eclipse.emf.common.util.Enumerator){
+    					litValue = ((org.eclipse.emf.common.util.Enumerator)fvalue).getLiteral();
+    				}
+    				else {
+    					internalLog.warn("not able to retreive literal value for " + fvalue + ", unable to reconnect to the kermeta definition ...");
+    				}
+    				RuntimeObject roEnumLit = fr.irisa.triskell.kermeta.runtime.rohelper.EnumerationHelper.getLiteral(roEnum, litValue);
+    				rObject.getProperties().put(kprop.getName(), roEnumLit);
+    			}
+    			// Get the RO-repr of this EObject
+    			else if (fvalue instanceof EObject)
+    			{   // EFactory is not saved in the model, neither does it refer to a saved element in the model (at the opposite
+    				// of all the other transient features), so it will not be loaded
+    				// Indeed, EFactory is a typical ecore case that is used for Java compliance..Unusable in kermeta.
+    				if (!(fvalue instanceof EFactory))
+    				{
+    					rovalue = createRuntimeObjectForEObject(rObject, (EObject)fvalue, eFeature);
+    					rObject.getProperties().put(kprop.getName(), rovalue);
+    				}
+    			}
+    			
+    			// BEGIN EMF Patch
+    			// A "null" instanceClassName property must correspond to a "void" RO property and not to an empty string.
+    			// Empty string will raise an error during EMF saving.
+    			else if(eObject instanceof EClassifier && eFeature.getName().equals("instanceClassName") && fvalue == null) {
+    				fr.irisa.triskell.kermeta.runtime.language.Object.set(rObject, roprop, unit.getRuntimeMemory().voidINSTANCE);
+    			}else if(eObject instanceof EClassifier && eFeature.getName().equals("instanceTypeName") && fvalue == null) {
+    				fr.irisa.triskell.kermeta.runtime.language.Object.set(rObject, roprop, unit.getRuntimeMemory().voidINSTANCE);
+    			}
+    			// END EMF Patch	    			
+    			
+    			// equivalent test : fvalue instanceof EString, EInt, etc.
+    			else if (fvalue == null)
+    			{    
+    				fr.irisa.triskell.kermeta.runtime.language.Object.set(rObject, roprop, unit.getRuntimeMemory().voidINSTANCE);
+    			}
+    			else if (EDataType.class.isInstance(feature_type))
+    			{   // EJavaClass -> rovalue null
+    				rovalue = createRuntimeObjectForPrimitiveTypeValue(fvalue, (EDataType)feature_type);
+    				fr.irisa.triskell.kermeta.runtime.language.Object.set(rObject, roprop, rovalue);
+    			}
+    			else
+    			{
+    				String errmsg = "NotImplemented Error : The type <"+feature_type+"> has not been handled yet. Trying to set "+
+    				fvalue+" into "+rObject;	
+    				unit.throwKermetaRaisedExceptionOnLoad(errmsg, null);
+    			}
+    			// If we instanciated a RuntimeObject value, we can set the properties for the object
+    			// reminder : rovalue is null if fvalue was an instance of EFactory
+    			if (fvalue != null && rovalue != null) rovalue.setEmfObject(fvalue);
+    		} // Catch any unhandled raised exception
+    		catch (Exception e) {
+    			String errmsg = "Exception received. Trying to set on " +  rObject  + " this property: " + kprop +" / " + eFeature.getName() + " with value: "+ fvalue;
+    			e.printStackTrace();
+    			unit.throwKermetaRaisedExceptionOnLoad(errmsg, e);
+    		}
+    	}
+	}
+	/**
+	 * Deal with the special case where the EObject has no opposite but Kermeta Object does ..
+	 * @param eFeature
+	 * @param eObject
+	 * @param kprop
+	 * @param rObject
+	 * @param kclass
+	 */
+	protected void setPropertyOppositeFromEStructuralFeature(EStructuralFeature eFeature, EObject eObject,
+			Property kprop, RuntimeObject rObject, fr.irisa.triskell.kermeta.language.structure.Class kclass){
+		
+	/*	RuntimeObject rOppositeObject =  rObject.getProperties().get(kprop.getName());
+		
+		// this opposite object might be a collection
+		if (kprop.getUpper() > 1){
+			// for each of the opposite objects
+				// clear collection and set the opposite objects using the normal kermeta API that ensure opposite  
+		}
+		else{
+			// simply unset the object and set it using the normal kermeta API that ensure opposite
+			fr.irisa.triskell.kermeta.runtime.language.Object.unSet(rObject, kprop, false);
+			fr.irisa.triskell.kermeta.runtime.language.Object.set(rObject, kprop, );
+			
+			// on this single opposite object
+			// if the corresponding opposite property is a collection
+			// if the corresponding opposite property has multiplicity = 1
+			//RuntimeObject result = fr.irisa.triskell.kermeta.runtime.language.Object.get(rObject, roprop);
+			//Property oppositeProperty;
+			//rObject.getProperties().put(kprop.getName(), rovalue);
+			//kprop.
+		}
+		*/
+	}
 	/**
 	 * retreives the property from its names.
 	 * Also deal with "non natural" properties like the one inherited from the ecore EModelElement that is inherited by all model element  
