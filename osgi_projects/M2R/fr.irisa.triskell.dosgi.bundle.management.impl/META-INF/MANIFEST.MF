@@ -7,8 +7,10 @@ Import-Package: fr.irisa.triskell.dosgi.bundle.management,
  fr.irisa.triskell.dosgi.bundle.management.memento,
  org.osgi.framework;version="1.4.0",
  org.osgi.service.http;version="1.2.0",
- org.osgi.service.obr,
+ org.osgi.service.obr;resolution:=optional,
  org.osgi.service.packageadmin,
  org.osgi.util.tracker;version="1.3.3"
 Bundle-Activator: fr.irisa.triskell.dosgi.bundle.management.impl.ManagementActivator
 Require-Bundle: javax.servlet
+Bundle-RequiredExecutionEnvironment: J2SE-1.5,
+ JavaSE-1.6

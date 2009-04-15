@@ -13,11 +13,12 @@ public class ManagementActivator implements BundleActivator {
 	private ServiceManagement serviceManager;
 	private BundleManagement bundleManager;
 	
-	@Override
+	private long serviceManagerId;
+	private long bundleManagerId;
+	
 	public void start(BundleContext context) throws Exception {
 		
 		serviceManager = new ServiceManagementImpl(context);
-		serviceManager.registerService(ServiceManagement.class.getName(), serviceManager, null, true, context.getBundle().getBundleId());
 		
 		String remoteProperties = context.getProperty("remote-properties");
 		Properties properties = new Properties();
@@ -31,17 +32,18 @@ public class ManagementActivator implements BundleActivator {
 		}
 		
 		((ServiceManagementImpl)serviceManager).setRemoteProperties(properties);
-		
+
 		bundleManager = new BundleManagementImpl(context);
-		((ServiceManagementImpl)serviceManager).registerBundleManagement(bundleManager, null, true);
+		bundleManagerId = ((ServiceManagementImpl)serviceManager).registerBundleManagement(bundleManager, null, true);
+		
+		serviceManagerId = serviceManager.registerService(ServiceManagement.class.getName(), serviceManager, null, true, context.getBundle().getBundleId());
 		
 
 	}
 
-	@Override
 	public void stop(BundleContext context) throws Exception {
-		// TODO Auto-generated method stub
-
+		serviceManager.unregisterService(serviceManagerId);
+		serviceManager.unregisterService(bundleManagerId);
 	}
 
 }

@@ -2,14 +2,17 @@ package fr.irisa.triskell.dosgi.bundle.management;
 
 import java.util.Dictionary;
 import java.util.List;
+import java.util.Map;
 import java.util.Properties;
 
 public interface ServiceManagement {
 	// TODO ALL javadocs
+	// TODO choose between Properties and Dictionary
+	// TODO synchronized functions
 	
-	public long registerService(String interfaceName, Object service, Dictionary<String, String> properties, boolean remote, long bundleId);
+	public long registerService(String interfaceName, Object service, Dictionary<String, Object> properties, boolean remote, long bundleId);
 	
-	public long registerService(String[] interfaceNames, Object service, Dictionary<String, String> properties, boolean remote, long bundleId);
+	public long registerService(String[] interfaceNames, Object service, Dictionary<String, Object> properties, boolean remote, long bundleId);
 	
 	// TODO add register functions to specify the remote properties
 	
@@ -21,10 +24,10 @@ public interface ServiceManagement {
 	 */
 	public void unregisterService(long id);
 	
-	// TODO add funcction to get a service define by an interface name and a filter and not an id
-	public void bindService(Object attribute, long id);
+	// TODO add function to get a service define by an interface name and a filter and not an id
+	public Object getService(long id);
 	
-	public void unbindService();
+	public void ungetService(long id);
 	
 	/**
 	 * This function allows you to move a service define by a interfaceName and an object to another platform
@@ -33,7 +36,7 @@ public interface ServiceManagement {
 	 * @param restart if true, the service is restart on the another platform without reload his state
 	 * @param remote if true, the service will be register on the remote platform and it will be available for the other platform
 	 */
-	public long moveService(long id, ServiceManagement remoteManager, boolean restart, boolean remote);
+	public boolean moveService(long id, String remoteLocation, boolean restart, boolean remote);
 	
 	/**
 	 * This function allows you to duplicate a service define by a interfaceName and an object to another platform
@@ -43,7 +46,7 @@ public interface ServiceManagement {
 	 * @param restart if true, the service is restart on the another platform without reload his state
 	 * @param remote if true, the service will be register on the remote platform and it will be available for the other platform
 	 */
-	public long duplicateService(long id, ServiceManagement remoteManager, boolean restart, boolean remote);
+	public boolean duplicateService(long id, String remoteLocation, boolean restart, boolean remote);
 	
 	/**
 	 * This function allows you to add properties to all services register with the interface name <code>interfaceName</code>
@@ -73,20 +76,22 @@ public interface ServiceManagement {
 	 */
 	public void addProperties(long id, Properties properties);
 	
-	/**
-	 * This function allows you to get the {@link BundleManagement} service located into the same platform of the {@link ServiceManagement}
-	 * @return the {@link BundleManagement}
-	 */
-	public long getBundleManagerId();
+	public BundleManagement getBundleManager();
+	
+	public void ungetBundleManager();
 	
 	public Long[] findServiceIds(String interfaceName, String filter, long bundleId);
 	
 	public Properties getProperties(long id);
 	
-	public void defineFiltering(List<String> interfaceNames, long bundleId);
+	public void defineFiltering(List<String[]> interfaceNames, long bundleId);
 	
-	public List<String> getAllowedServices(long bundleId);
+	public List<String[]> getAllowedServices(long bundleId);
 	
 	public boolean setMemento(long serviceId, Object memento);
+	
+	public void defineMemento(String[] objectClass, long bundleId, Object memento);
+	
+	public void defineProperties(String[] objectClass, long bundleId, Map<String, Object> properties);
 	
 }

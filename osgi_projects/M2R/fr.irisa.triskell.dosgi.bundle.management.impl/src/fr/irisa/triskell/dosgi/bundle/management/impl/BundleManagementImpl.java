@@ -37,10 +37,13 @@ import org.osgi.service.packageadmin.RequiredBundle;
 import org.osgi.util.tracker.ServiceTracker;
 
 import fr.irisa.triskell.dosgi.bundle.management.BundleManagement;
+import fr.irisa.triskell.dosgi.bundle.management.ServiceManagement;
 
 public class BundleManagementImpl implements BundleManagement {
 
 	private BundleContext bundleContext;
+
+	private ServiceManagement serviceManager;
 
 	public BundleManagementImpl(BundleContext context) {
 		this.bundleContext = context;
@@ -54,7 +57,6 @@ public class BundleManagementImpl implements BundleManagement {
 		this.bundleContext = bundleContext;
 	}
 
-	@Override
 	public long install(String location) {
 		try {
 			return bundleContext.installBundle(location).getBundleId();
@@ -125,10 +127,10 @@ public class BundleManagementImpl implements BundleManagement {
 				output.flush();
 				output.close();
 			} catch (FileNotFoundException e) {
-				// TODO
+				// TODO Exception
 				// e.printStackTrace();
 			} catch (IOException e) {
-				// TODO
+				// TODO Exception
 				// e.printStackTrace();
 			}
 
@@ -142,13 +144,13 @@ public class BundleManagementImpl implements BundleManagement {
 			jarFile.close();
 			file.delete();
 		} catch (IOException e) {
-			// TODO
+			// TODO Exception
 			// e.printStackTrace();
 		}
 		return result;
 	}
 
-	@Override
+	
 	public long install(String bundleSymbolicName, String version,
 			String bundleRepositoryLocation) {
 		ServiceTracker serviceTrackerRepositoryAdmin = new ServiceTracker(
@@ -168,7 +170,7 @@ public class BundleManagementImpl implements BundleManagement {
 						.println("The bundleRepositoryLocation parameter must be a valid URL address");
 			} catch (Exception e) {
 				// e.printStackTrace();
-				// TODO
+				// TODO Exception
 			}
 
 			String filter = this.createFilter(bundleSymbolicName, version);
@@ -204,72 +206,32 @@ public class BundleManagementImpl implements BundleManagement {
 		}
 	}
 
-	@Override
-	public long moveBundle(long bundleId, BundleManagement remoteManager) {
-		long remoteBundleId = this.duplicateBundle(bundleId, remoteManager);
+	
+	public long moveBundle(long bundleId, String remoteLocation) {
+		long remoteBundleId = this.duplicateBundle(bundleId, remoteLocation);
 		if (remoteBundleId > -1) {
 			this.uninstall(bundleId);
 		}
 		return remoteBundleId;
 	}
 
-	@Override
-	public long duplicateBundle(long bundleId, BundleManagement remoteManager) {
-		// TODO Maybe it can be better to call only once the remote service
-		// So it could be interesting to simply use the HTTPService even if it
-		// is necessary to copy the jar on the persistent data folder
-		// but maybe not ... (do two implementations)
+	
+	public long duplicateBundle(long bundleId, String remoteLocation) {
 		// TODO It must be better to test with many platform on different
 		// computers
 		if (bundleId > -1) {
 			Bundle bundle = bundleContext.getBundle(bundleId);
 			long remoteBundleId = -1;
-			/*String location = (String) bundle.getHeaders().get(
-					Constants.BUNDLE_UPDATELOCATION);
-			if (location != null) {
-				remoteBundleId = remoteManager.install(location);
-				if (remoteBundleId > -1) {
-					return remoteBundleId;
-				}
+			// FIXME for the moment, it only works with felix dosgi RI
+			String filter = "(&(osgi.remote=true) (osgi.remote.configuration.pojo.address="
+					+ remoteLocation + "*))";
+			BundleManagement remoteManager = null;
+			Long[] remoteBundleManagerIds = serviceManager.findServiceIds(
+					BundleManagement.class.getName(), filter, -1);
+			if (remoteBundleManagerIds.length == 0) {
+				return -1;
 			}
-
-			String bundleSymbolicName = bundle.getSymbolicName();
-			String version = (String) bundle.getHeaders().get(
-					Constants.BUNDLE_VERSION);
-			
-			String bundleRepositoryLocation = null;
-
-			ServiceTracker serviceTrackerRepositoryAdmin = new ServiceTracker(
-					bundleContext, RepositoryAdmin.class.getName(), null);
-			serviceTrackerRepositoryAdmin.open();
-			RepositoryAdmin repositoryAdmin = ((RepositoryAdmin) serviceTrackerRepositoryAdmin
-					.getService());
-			if (repositoryAdmin != null) {
-				String filter = this.createFilter(bundleSymbolicName, version);
-				org.osgi.service.obr.Resource[] resources = repositoryAdmin
-						.discoverResources(filter);
-				if (resources != null && resources.length > 0) {
-					for (Resource resource : resources) {
-						Resolver resolver = repositoryAdmin.resolver();
-						resolver.add(resource);
-						if (resolver.resolve()) {
-							// TODO maybe select a repository available on the
-							// network
-							bundleRepositoryLocation = resources[0]
-									.getRepository().getURL().toExternalForm();
-							remoteBundleId = remoteManager.install(
-									bundleSymbolicName, version,
-									bundleRepositoryLocation);
-							if (remoteBundleId > -1) {
-								break;
-							}
-						}
-					}
-				} else {
-				}
-			} else {
-			}
-			serviceTrackerRepositoryAdmin.close();*/
+			remoteManager = (BundleManagement)serviceManager.getService(remoteBundleManagerIds[0]);
 
 			// Maybe the bundle is already available with a HTTPService
 			if (new File(bundle.getLocation()).exists()) {
@@ -279,8 +241,6 @@ public class BundleManagementImpl implements BundleManagement {
 				String bundleSymbolicName = bundle.getSymbolicName();
 				String version = (String) bundle.getHeaders().get(
 						Constants.BUNDLE_VERSION);
-				// TODO work fine with Felix
-				// need to test more with other platform
 				ServiceTracker tracker = new ServiceTracker(bundleContext,
 						HttpService.class.getName(), null);
 				tracker.open();
@@ -309,8 +269,10 @@ public class BundleManagementImpl implements BundleManagement {
 						output.close();
 					} catch (FileNotFoundException e) {
 						// e.printStackTrace();
+						// TODO Exception
 					} catch (IOException e) {
 						// e.printStackTrace();
+						// TODO Exception
 					}
 					String alias = "/" + bundleSymbolicName + "_" + version;
 					service.registerResources(alias, file.getName(),
@@ -327,23 +289,27 @@ public class BundleManagementImpl implements BundleManagement {
 											.getProperty("org.osgi.service.http.port");
 
 						}
-						bundleAddress += "/" + alias;
+						bundleAddress += alias;
+						System.out.println(bundleAddress);
 						remoteBundleId = remoteManager.install(bundleAddress);
 					} catch (UnknownHostException e) {
 						// e.printStackTrace();
+						// TODO Exception
 					}
 
 				} catch (NamespaceException e1) {
-					//e1.printStackTrace();
+					// e1.printStackTrace();
+					// TODO Exception
 				}
 
 			}
+			serviceManager.ungetService(remoteBundleManagerIds[0]);
 			return remoteBundleId;
 		}
 		return -1;
 	}
 
-	@Override
+	
 	public boolean start(long bundleId) {
 		try {
 			if (bundleId > -1) {
@@ -353,11 +319,12 @@ public class BundleManagementImpl implements BundleManagement {
 			return false;
 		} catch (BundleException e) {
 			// // e.printStackTrace();
+			// TODO Exception
 			return false;
 		}
 	}
 
-	@Override
+	
 	public boolean stop(long bundleId) {
 		try {
 			if (bundleId > -1) {
@@ -367,11 +334,12 @@ public class BundleManagementImpl implements BundleManagement {
 			return false;
 		} catch (BundleException e) {
 			// // e.printStackTrace();
+			// TODO Exception
 			return false;
 		}
 	}
 
-	@Override
+	
 	public boolean uninstall(long bundleId) {
 		try {
 			if (bundleId > -1) {
@@ -381,11 +349,12 @@ public class BundleManagementImpl implements BundleManagement {
 			return false;
 		} catch (BundleException e) {
 			// e.printStackTrace();
+			// TODO Exception
 			return false;
 		}
 	}
 
-	@Override
+	
 	public boolean update(long bundleId) {
 		try {
 			if (bundleId > -1) {
@@ -395,6 +364,7 @@ public class BundleManagementImpl implements BundleManagement {
 			return false;
 		} catch (BundleException e) {
 			// e.printStackTrace();
+			// TODO Exception
 			return false;
 		}
 	}
@@ -423,7 +393,7 @@ public class BundleManagementImpl implements BundleManagement {
 		return -1;
 	}
 
-	@Override
+	
 	public Long[] findBundleIds() {
 		Bundle[] bundles = bundleContext.getBundles();
 		Long[] bundleIds = new Long[bundles.length];
@@ -433,7 +403,7 @@ public class BundleManagementImpl implements BundleManagement {
 		return bundleIds;
 	}
 
-	@Override
+	
 	public Long[] getBundlesUsingService(String clazz, Object service) {
 		ArrayList<Long> bundleIds = new ArrayList<Long>();
 		ServiceReference[] references = null;
@@ -460,7 +430,7 @@ public class BundleManagementImpl implements BundleManagement {
 		return array;
 	}
 
-	@Override
+	
 	public Long[] getBundlesUsingPackages(long bundleId) {
 		ArrayList<Long> bundleIds = new ArrayList<Long>();
 		Bundle bundle = bundleContext.getBundle(bundleId);
@@ -485,7 +455,7 @@ public class BundleManagementImpl implements BundleManagement {
 		return new Long[0];
 	}
 
-	@Override
+	
 	public Long[] getBundlesRequiringBundle(long bundleId) {
 		ArrayList<Long> bundleIds = new ArrayList<Long>();
 		PackageAdmin packageAdmin = (PackageAdmin) bundleContext
@@ -511,7 +481,7 @@ public class BundleManagementImpl implements BundleManagement {
 		return new Long[0];
 	}
 
-	@Override
+	
 	public Long[] getFragmentBundles(long bundleId) {
 		ArrayList<Long> bundleIds = new ArrayList<Long>();
 		PackageAdmin packageAdmin = (PackageAdmin) bundleContext
@@ -532,7 +502,7 @@ public class BundleManagementImpl implements BundleManagement {
 		return new Long[0];
 	}
 
-	@Override
+	
 	public long getHostBundle(long bundleId) {
 		PackageAdmin packageAdmin = (PackageAdmin) bundleContext
 				.getService(bundleContext
@@ -548,26 +518,35 @@ public class BundleManagementImpl implements BundleManagement {
 
 	public class HttpContextImpl implements HttpContext {
 
-		@Override
+		
 		public String getMimeType(String name) {
 			return null;
 		}
 
-		@Override
+		
 		public URL getResource(String name) {
 			try {
 				return bundleContext.getDataFile(name).toURI().toURL();
 			} catch (MalformedURLException e) {
 				// e.printStackTrace();
+				// TODO Exception
 				return null;
 			}
 		}
 
-		@Override
+		
 		public boolean handleSecurity(HttpServletRequest request,
 				HttpServletResponse response) throws IOException {
 			return true;
 		}
 
+	}
+
+	public ServiceManagement getServiceManager() {
+		return serviceManager;
+	}
+
+	public void setServiceManager(ServiceManagement serviceManager) {
+		this.serviceManager = serviceManager;
 	}
 }

@@ -2,6 +2,8 @@ package fr.irisa.triskell.dosgi.bundle.management;
 
 
 public interface BundleManagement {
+	// TODO ALL javadocs
+	// TODO synchronized functions
 
 	/**
 	 * This function allows you to start a bundle defined by this bundleId
@@ -60,7 +62,7 @@ public interface BundleManagement {
 	 * @param remoteManager a {@link BundleManagement} on a remote host
 	 * @return the new bundleId of the bundle or -1
 	 */
-	public long moveBundle(long bundleId, BundleManagement remoteManager);
+	public long moveBundle(long bundleId, String remoteLocation);
 	
 	/**
 	 * This function allows you to duplicate a bundle and move one instance into another platform
@@ -68,7 +70,7 @@ public interface BundleManagement {
 	 * @param remoteManager a {@link BundleManagement} on a remote host
 	 * @return the new bundleId of the instance of the bundle which was moved into another platform
 	 */
-	public long duplicateBundle(long bundleId, BundleManagement remoteManager);
+	public long duplicateBundle(long bundleId, String remoteLocation);
 	
 	/**
 	 * This function allows you to find a bundle identify by his <code>Bundle-SymbolicName</code> and his <code>Bundle-Version</code>
@@ -120,5 +122,9 @@ public interface BundleManagement {
 	 * @return an array which contains all identifiers of all bundles which are fragments of the bundle identify by the bundleId parameter.
 	 */
 	public Long[] getFragmentBundles(long bundleId);
+	
+	public ServiceManagement getServiceManager();
+
+	public void setServiceManager(ServiceManagement serviceManager);
 	
 }
