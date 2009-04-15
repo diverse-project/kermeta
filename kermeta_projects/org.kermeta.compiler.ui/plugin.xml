@@ -83,15 +83,10 @@
                class="org.kermeta.compiler.ui.popup.actions.MergeAction"
                enablesFor="1"
                icon="icons/etools_persp.gif"
-               id="org.kermeta.compiler.ui.action1"
+               id="fr.irisa.triskell.kermeta.compiler.MergeKm4CompilerAction"
                label="Generate Km merged for compilation (experimental)"
                menubarPath="org.eclipse.ui.articles.action.contribution.navigator.subMenu/org.kermeta.advanced.subsubmenu/kermetagroup1">
          </action>
-         <enablement>
-            <objectClass
-                  name="org.eclipse.core.resources.IFile">
-            </objectClass>
-         </enablement>
       </objectContribution>
    </extension>
    
