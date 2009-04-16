@@ -1,0 +1,1029 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kermeta_language_structure:ModelingUnit xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:kermeta_language_behavior="http://www.kermeta.org/kermeta/1_2_0//kermeta/language/behavior"
+    xmlns:kermeta_language_structure="http://www.kermeta.org/kermeta/1_2_0//kermeta/language/structure" referencedModelingUnits="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#/">
+  <packages name="kermeta">
+    <nestedPackage name="language">
+      <nestedPackage name="structure">
+        <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition"
+            name="Object" isAspect="true">
+          <ownedOperation name="print" type="#//@packages.0/language/structure/Object/print/@containedType.0"
+              isOrdered="true" upper="1">
+            <containedType xsi:type="kermeta_language_structure:VoidType"/>
+            <ownedParameter name="indent" type="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/language/structure/String"
+                isOrdered="true" upper="1"/>
+            <body xsi:type="kermeta_language_behavior:Block" staticType="#//@packages.0/language/structure/Object/print/@body/@containedType.0">
+              <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Void"/>
+            </body>
+          </ownedOperation>
+        </ownedTypeDefinition>
+        <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition"
+            name="ModelingUnit" isAspect="true" superType="#//@packages.0/language/structure/ModelingUnit/@containedType.0">
+          <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="#//@packages.0/language/structure/Object"/>
+          <ownedOperation name="print" type="#//@packages.0/language/structure/ModelingUnit/print/@containedType.0"
+              isOrdered="true" upper="1" superOperation="#//@packages.0/language/structure/Object/print">
+            <containedType xsi:type="kermeta_language_structure:VoidType"/>
+            <ownedParameter name="indent" type="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/language/structure/String"
+                isOrdered="true" upper="1"/>
+            <body xsi:type="kermeta_language_behavior:Block" staticType="#//@packages.0/language/structure/Object/print/@body/@containedType.0"/>
+          </ownedOperation>
+        </ownedTypeDefinition>
+        <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition"
+            name="Package" isAspect="true" superType="#//@packages.0/language/structure/Package/@containedType.0">
+          <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="#//@packages.0/language/structure/Object"/>
+          <ownedOperation name="print" type="#//@packages.0/language/structure/Package/print/@containedType.0"
+              isOrdered="true" upper="1" superOperation="#//@packages.0/language/structure/Object/print">
+            <containedType xsi:type="kermeta_language_structure:VoidType"/>
+            <ownedParameter name="indent" type="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/language/structure/String"
+                isOrdered="true" upper="1"/>
+            <body xsi:type="kermeta_language_behavior:Block" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Collection/each/@containedType.0">
+              <statement xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/io/StdIO/writeln/@containedType.0"
+                  name="writeln" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/io/StdIO/writeln">
+                <containedType xsi:type="kermeta_language_structure:FunctionType"
+                    left="#//@packages.0/language/structure/Package/print/@body/@statement.0/@containedType.0/@containedType.0"
+                    right="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/io/StdIO/writeln/@containedType.0">
+                  <containedType xsi:type="kermeta_language_structure:ProductType"
+                      type="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/io/StdIO/writeln/@ownedParameter.0/@containedType.0"/>
+                </containedType>
+                <parameters xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/String/plus/@containedType.0"
+                    name="plus" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/String/plus">
+                  <containedType xsi:type="kermeta_language_structure:FunctionType"
+                      left="#//@packages.0/language/structure/Package/print/@body/@statement.0/@parameters.0/@containedType.0/@containedType.0"
+                      right="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/String/plus/@containedType.0">
+                    <containedType xsi:type="kermeta_language_structure:ProductType"
+                        type="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/String/plus/@ownedParameter.0/@containedType.0"/>
+                  </containedType>
+                  <parameters xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/language/structure/String/@containedType.0"
+                      name="name" staticProperty="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/language/structure/NamedElement/name">
+                    <target xsi:type="kermeta_language_behavior:SelfExpression" staticType="#//@packages.0/language/structure/Package/print/@body/@statement.0/@parameters.0/@parameters.0/@target/@containedType.0">
+                      <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="#//@packages.0/language/structure/Package"/>
+                    </target>
+                  </parameters>
+                  <target xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/String/plus/@containedType.0"
+                      name="plus" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/String/plus">
+                    <containedType xsi:type="kermeta_language_structure:FunctionType"
+                        left="#//@packages.0/language/structure/Package/print/@body/@statement.0/@parameters.0/@target/@containedType.0/@containedType.0"
+                        right="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/String/plus/@containedType.0">
+                      <containedType xsi:type="kermeta_language_structure:ProductType"
+                          type="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/String/plus/@ownedParameter.0/@containedType.0"/>
+                    </containedType>
+                    <parameters xsi:type="kermeta_language_behavior:StringLiteral"
+                        staticType="#//@packages.0/language/structure/Package/print/@body/@statement.0/@parameters.0/@target/@parameters.0/@containedType.0"
+                        value="Package: ">
+                      <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/String"/>
+                    </parameters>
+                    <target xsi:type="kermeta_language_behavior:CallVariable" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/language/structure/String/@containedType.0"
+                        name="indent"/>
+                  </target>
+                </parameters>
+                <target xsi:type="kermeta_language_behavior:CallVariable" staticType="#//@packages.0/language/structure/Package/print/@body/@statement.0/@target/@containedType.0"
+                    name="stdio">
+                  <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/io/StdIO"/>
+                </target>
+              </statement>
+              <statement xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Collection/each/@containedType.0"
+                  name="each" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Collection/each">
+                <containedType xsi:type="kermeta_language_structure:FunctionType"
+                    left="#//@packages.0/language/structure/Package/print/@body/@statement.1/@containedType.0/@containedType.0"
+                    right="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Collection/each/@containedType.0">
+                  <containedType xsi:type="kermeta_language_structure:ProductType"
+                      type="#//@packages.0/language/structure/Package/print/@body/@statement.1/@containedType.0/@containedType.0/@containedType.0">
+                    <containedType xsi:type="kermeta_language_structure:FunctionType"
+                        left="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/language/structure/Package/nestedPackage/@containedType.0"
+                        right="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Object"/>
+                  </containedType>
+                </containedType>
+                <parameters xsi:type="kermeta_language_behavior:LambdaExpression"
+                    staticType="#//@packages.0/language/structure/Package/print/@body/@statement.1/@parameters.0/@containedType.0">
+                  <containedType xsi:type="kermeta_language_structure:FunctionType"
+                      left="#//@packages.0/language/structure/Package/print/@body/@statement.1/@parameters.0/@containedType.0/@containedType.0"
+                      right="#//@packages.0/language/structure/Package/print/@containedType.0">
+                    <containedType xsi:type="kermeta_language_structure:ProductType"
+                        type="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/language/structure/Package/nestedPackage/@containedType.0"/>
+                  </containedType>
+                  <parameters name="np"/>
+                  <body xsi:type="kermeta_language_behavior:Block" staticType="#//@packages.0/language/structure/Package/print/@containedType.0">
+                    <statement xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/language/structure/Package/print/@containedType.0"
+                        name="print" staticOperation="#//@packages.0/language/structure/Package/print">
+                      <containedType xsi:type="kermeta_language_structure:FunctionType"
+                          left="#//@packages.0/language/structure/Package/print/@body/@statement.1/@parameters.0/@body/@statement.0/@containedType.0/@containedType.0"
+                          right="#//@packages.0/language/structure/Package/print/@containedType.0">
+                        <containedType xsi:type="kermeta_language_structure:ProductType"
+                            type="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/language/structure/String/@containedType.0"/>
+                      </containedType>
+                      <parameters xsi:type="kermeta_language_behavior:CallFeature"
+                          staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/String/plus/@containedType.0"
+                          name="plus" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/String/plus">
+                        <containedType xsi:type="kermeta_language_structure:FunctionType"
+                            left="#//@packages.0/language/structure/Package/print/@body/@statement.1/@parameters.0/@body/@statement.0/@parameters.0/@containedType.0/@containedType.0"
+                            right="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/String/plus/@containedType.0">
+                          <containedType xsi:type="kermeta_language_structure:ProductType"
+                              type="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/String/plus/@ownedParameter.0/@containedType.0"/>
+                        </containedType>
+                        <parameters xsi:type="kermeta_language_behavior:StringLiteral"
+                            staticType="#//@packages.0/language/structure/Package/print/@body/@statement.0/@parameters.0/@target/@parameters.0/@containedType.0"
+                            value="  "/>
+                        <target xsi:type="kermeta_language_behavior:CallVariable"
+                            staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/language/structure/String/@containedType.0"
+                            name="indent"/>
+                      </parameters>
+                      <target xsi:type="kermeta_language_behavior:CallVariable" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/language/structure/Package/nestedPackage/@containedType.0"
+                          name="np"/>
+                    </statement>
+                  </body>
+                </parameters>
+                <target xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/language/structure/Package/print/@body/@statement.1/@target/@containedType.0"
+                    name="nestedPackage" staticProperty="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/language/structure/Package/nestedPackage">
+                  <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/OrderedSet">
+                    <typeParamBinding variable="kermeta_language_structure:ObjectTypeVariable platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/OrderedSet/G"
+                        type="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/language/structure/Package/nestedPackage/@containedType.0"/>
+                  </containedType>
+                  <target xsi:type="kermeta_language_behavior:SelfExpression" staticType="#//@packages.0/language/structure/Package/print/@body/@statement.0/@parameters.0/@parameters.0/@target/@containedType.0"/>
+                </target>
+              </statement>
+              <statement xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Collection/each/@containedType.0"
+                  name="each" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Collection/each">
+                <containedType xsi:type="kermeta_language_structure:FunctionType"
+                    left="#//@packages.0/language/structure/Package/print/@body/@statement.2/@containedType.0/@containedType.0"
+                    right="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Collection/each/@containedType.0">
+                  <containedType xsi:type="kermeta_language_structure:ProductType"
+                      type="#//@packages.0/language/structure/Package/print/@body/@statement.2/@containedType.0/@containedType.0/@containedType.0">
+                    <containedType xsi:type="kermeta_language_structure:FunctionType"
+                        left="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/language/structure/TypeDefinitionContainer/ownedTypeDefinition/@containedType.0"
+                        right="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Object"/>
+                  </containedType>
+                </containedType>
+                <parameters xsi:type="kermeta_language_behavior:LambdaExpression"
+                    staticType="#//@packages.0/language/structure/Package/print/@body/@statement.2/@parameters.0/@containedType.0">
+                  <containedType xsi:type="kermeta_language_structure:FunctionType"
+                      left="#//@packages.0/language/structure/Package/print/@body/@statement.2/@parameters.0/@containedType.0/@containedType.0"
+                      right="#//@packages.0/language/structure/Object/print/@containedType.0">
+                    <containedType xsi:type="kermeta_language_structure:ProductType"
+                        type="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/language/structure/TypeDefinitionContainer/ownedTypeDefinition/@containedType.0"/>
+                  </containedType>
+                  <parameters name="otd"/>
+                  <body xsi:type="kermeta_language_behavior:Block" staticType="#//@packages.0/language/structure/Object/print/@containedType.0">
+                    <statement xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/language/structure/Object/print/@containedType.0"
+                        name="print" staticOperation="#//@packages.0/language/structure/Object/print">
+                      <containedType xsi:type="kermeta_language_structure:FunctionType"
+                          left="#//@packages.0/language/structure/Package/print/@body/@statement.2/@parameters.0/@body/@statement.0/@containedType.0/@containedType.0"
+                          right="#//@packages.0/language/structure/Object/print/@containedType.0">
+                        <containedType xsi:type="kermeta_language_structure:ProductType"
+                            type="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/language/structure/String/@containedType.0"/>
+                      </containedType>
+                      <parameters xsi:type="kermeta_language_behavior:CallFeature"
+                          staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/String/plus/@containedType.0"
+                          name="plus" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/String/plus">
+                        <containedType xsi:type="kermeta_language_structure:FunctionType"
+                            left="#//@packages.0/language/structure/Package/print/@body/@statement.2/@parameters.0/@body/@statement.0/@parameters.0/@containedType.0/@containedType.0"
+                            right="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/String/plus/@containedType.0">
+                          <containedType xsi:type="kermeta_language_structure:ProductType"
+                              type="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/String/plus/@ownedParameter.0/@containedType.0"/>
+                        </containedType>
+                        <parameters xsi:type="kermeta_language_behavior:StringLiteral"
+                            staticType="#//@packages.0/language/structure/Package/print/@body/@statement.0/@parameters.0/@target/@parameters.0/@containedType.0"
+                            value="  "/>
+                        <target xsi:type="kermeta_language_behavior:CallVariable"
+                            staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/language/structure/String/@containedType.0"
+                            name="indent"/>
+                      </parameters>
+                      <target xsi:type="kermeta_language_behavior:CallVariable" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/language/structure/TypeDefinitionContainer/ownedTypeDefinition/@containedType.0"
+                          name="otd"/>
+                    </statement>
+                  </body>
+                </parameters>
+                <target xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/language/structure/Package/print/@body/@statement.2/@target/@containedType.0"
+                    name="ownedTypeDefinition" staticProperty="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/language/structure/TypeDefinitionContainer/ownedTypeDefinition">
+                  <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/OrderedSet">
+                    <typeParamBinding variable="kermeta_language_structure:ObjectTypeVariable platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/OrderedSet/G"
+                        type="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/language/structure/TypeDefinitionContainer/ownedTypeDefinition/@containedType.0"/>
+                  </containedType>
+                  <target xsi:type="kermeta_language_behavior:SelfExpression" staticType="#//@packages.0/language/structure/Package/print/@body/@statement.0/@parameters.0/@parameters.0/@target/@containedType.0"/>
+                </target>
+              </statement>
+            </body>
+          </ownedOperation>
+        </ownedTypeDefinition>
+        <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition"
+            name="ClassDefinition" isAspect="true" superType="#//@packages.0/language/structure/ClassDefinition/@containedType.0">
+          <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="#//@packages.0/language/structure/Object"/>
+          <ownedOperation name="print" type="#//@packages.0/language/structure/ClassDefinition/print/@containedType.0"
+              isOrdered="true" upper="1" superOperation="#//@packages.0/language/structure/Object/print">
+            <containedType xsi:type="kermeta_language_structure:VoidType"/>
+            <ownedParameter name="indent" type="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/language/structure/String"
+                isOrdered="true" upper="1"/>
+            <body xsi:type="kermeta_language_behavior:Block" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Collection/each/@containedType.0">
+              <statement xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/io/StdIO/writeln/@containedType.0"
+                  name="writeln" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/io/StdIO/writeln">
+                <containedType xsi:type="kermeta_language_structure:FunctionType"
+                    left="#//@packages.0/language/structure/ClassDefinition/print/@body/@statement.0/@containedType.0/@containedType.0"
+                    right="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/io/StdIO/writeln/@containedType.0">
+                  <containedType xsi:type="kermeta_language_structure:ProductType"
+                      type="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/io/StdIO/writeln/@ownedParameter.0/@containedType.0"/>
+                </containedType>
+                <parameters xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/String/plus/@containedType.0"
+                    name="plus" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/String/plus">
+                  <containedType xsi:type="kermeta_language_structure:FunctionType"
+                      left="#//@packages.0/language/structure/ClassDefinition/print/@body/@statement.0/@parameters.0/@containedType.0/@containedType.0"
+                      right="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/String/plus/@containedType.0">
+                    <containedType xsi:type="kermeta_language_structure:ProductType"
+                        type="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/String/plus/@ownedParameter.0/@containedType.0"/>
+                  </containedType>
+                  <parameters xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/language/structure/String/@containedType.0"
+                      name="name" staticProperty="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/language/structure/NamedElement/name">
+                    <target xsi:type="kermeta_language_behavior:SelfExpression" staticType="#//@packages.0/language/structure/ClassDefinition/print/@body/@statement.0/@parameters.0/@parameters.0/@target/@containedType.0">
+                      <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="#//@packages.0/language/structure/ClassDefinition"/>
+                    </target>
+                  </parameters>
+                  <target xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/String/plus/@containedType.0"
+                      name="plus" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/String/plus">
+                    <containedType xsi:type="kermeta_language_structure:FunctionType"
+                        left="#//@packages.0/language/structure/ClassDefinition/print/@body/@statement.0/@parameters.0/@target/@containedType.0/@containedType.0"
+                        right="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/String/plus/@containedType.0">
+                      <containedType xsi:type="kermeta_language_structure:ProductType"
+                          type="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/String/plus/@ownedParameter.0/@containedType.0"/>
+                    </containedType>
+                    <parameters xsi:type="kermeta_language_behavior:StringLiteral"
+                        staticType="#//@packages.0/language/structure/Package/print/@body/@statement.0/@parameters.0/@target/@parameters.0/@containedType.0"
+                        value="ClassDefinition: "/>
+                    <target xsi:type="kermeta_language_behavior:CallVariable" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/language/structure/String/@containedType.0"
+                        name="indent"/>
+                  </target>
+                </parameters>
+                <target xsi:type="kermeta_language_behavior:CallVariable" staticType="#//@packages.0/language/structure/Package/print/@body/@statement.0/@target/@containedType.0"
+                    name="stdio"/>
+              </statement>
+              <statement xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/io/StdIO/writeln/@containedType.0"
+                  name="writeln" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/io/StdIO/writeln">
+                <containedType xsi:type="kermeta_language_structure:FunctionType"
+                    left="#//@packages.0/language/structure/ClassDefinition/print/@body/@statement.1/@containedType.0/@containedType.0"
+                    right="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/io/StdIO/writeln/@containedType.0">
+                  <containedType xsi:type="kermeta_language_structure:ProductType"
+                      type="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/io/StdIO/writeln/@ownedParameter.0/@containedType.0"/>
+                </containedType>
+                <parameters xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/String/plus/@containedType.0"
+                    name="plus" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/String/plus">
+                  <containedType xsi:type="kermeta_language_structure:FunctionType"
+                      left="#//@packages.0/language/structure/ClassDefinition/print/@body/@statement.1/@parameters.0/@containedType.0/@containedType.0"
+                      right="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/String/plus/@containedType.0">
+                    <containedType xsi:type="kermeta_language_structure:ProductType"
+                        type="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/String/plus/@ownedParameter.0/@containedType.0"/>
+                  </containedType>
+                  <parameters xsi:type="kermeta_language_behavior:StringLiteral" staticType="#//@packages.0/language/structure/Package/print/@body/@statement.0/@parameters.0/@target/@parameters.0/@containedType.0"
+                      value=" - contained types: "/>
+                  <target xsi:type="kermeta_language_behavior:CallVariable" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/language/structure/String/@containedType.0"
+                      name="indent"/>
+                </parameters>
+                <target xsi:type="kermeta_language_behavior:CallVariable" staticType="#//@packages.0/language/structure/Package/print/@body/@statement.0/@target/@containedType.0"
+                    name="stdio"/>
+              </statement>
+              <statement xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Collection/each/@containedType.0"
+                  name="each" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Collection/each">
+                <containedType xsi:type="kermeta_language_structure:FunctionType"
+                    left="#//@packages.0/language/structure/ClassDefinition/print/@body/@statement.2/@containedType.0/@containedType.0"
+                    right="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Collection/each/@containedType.0">
+                  <containedType xsi:type="kermeta_language_structure:ProductType"
+                      type="#//@packages.0/language/structure/ClassDefinition/print/@body/@statement.2/@containedType.0/@containedType.0/@containedType.0">
+                    <containedType xsi:type="kermeta_language_structure:FunctionType"
+                        left="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/language/structure/TypeContainer/containedType/@containedType.0"
+                        right="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Object"/>
+                  </containedType>
+                </containedType>
+                <parameters xsi:type="kermeta_language_behavior:LambdaExpression"
+                    staticType="#//@packages.0/language/structure/ClassDefinition/print/@body/@statement.2/@parameters.0/@containedType.0">
+                  <containedType xsi:type="kermeta_language_structure:FunctionType"
+                      left="#//@packages.0/language/structure/ClassDefinition/print/@body/@statement.2/@parameters.0/@containedType.0/@containedType.0"
+                      right="#//@packages.0/language/structure/Object/print/@containedType.0">
+                    <containedType xsi:type="kermeta_language_structure:ProductType"
+                        type="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/language/structure/TypeContainer/containedType/@containedType.0"/>
+                  </containedType>
+                  <parameters name="ct"/>
+                  <body xsi:type="kermeta_language_behavior:Block" staticType="#//@packages.0/language/structure/Object/print/@containedType.0">
+                    <statement xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/language/structure/Object/print/@containedType.0"
+                        name="print" staticOperation="#//@packages.0/language/structure/Object/print">
+                      <containedType xsi:type="kermeta_language_structure:FunctionType"
+                          left="#//@packages.0/language/structure/ClassDefinition/print/@body/@statement.2/@parameters.0/@body/@statement.0/@containedType.0/@containedType.0"
+                          right="#//@packages.0/language/structure/Object/print/@containedType.0">
+                        <containedType xsi:type="kermeta_language_structure:ProductType"
+                            type="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/language/structure/String/@containedType.0"/>
+                      </containedType>
+                      <parameters xsi:type="kermeta_language_behavior:CallFeature"
+                          staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/String/plus/@containedType.0"
+                          name="plus" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/String/plus">
+                        <containedType xsi:type="kermeta_language_structure:FunctionType"
+                            left="#//@packages.0/language/structure/ClassDefinition/print/@body/@statement.2/@parameters.0/@body/@statement.0/@parameters.0/@containedType.0/@containedType.0"
+                            right="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/String/plus/@containedType.0">
+                          <containedType xsi:type="kermeta_language_structure:ProductType"
+                              type="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/String/plus/@ownedParameter.0/@containedType.0"/>
+                        </containedType>
+                        <parameters xsi:type="kermeta_language_behavior:StringLiteral"
+                            staticType="#//@packages.0/language/structure/Package/print/@body/@statement.0/@parameters.0/@target/@parameters.0/@containedType.0"
+                            value="    "/>
+                        <target xsi:type="kermeta_language_behavior:CallVariable"
+                            staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/language/structure/String/@containedType.0"
+                            name="indent"/>
+                      </parameters>
+                      <target xsi:type="kermeta_language_behavior:CallVariable" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/language/structure/TypeContainer/containedType/@containedType.0"
+                          name="ct"/>
+                    </statement>
+                  </body>
+                </parameters>
+                <target xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/language/structure/ClassDefinition/print/@body/@statement.2/@target/@containedType.0"
+                    name="containedType" staticProperty="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/language/structure/TypeContainer/containedType">
+                  <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/OrderedSet">
+                    <typeParamBinding variable="kermeta_language_structure:ObjectTypeVariable platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/OrderedSet/G"
+                        type="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/language/structure/TypeContainer/containedType/@containedType.0"/>
+                  </containedType>
+                  <target xsi:type="kermeta_language_behavior:SelfExpression" staticType="#//@packages.0/language/structure/ClassDefinition/print/@body/@statement.0/@parameters.0/@parameters.0/@target/@containedType.0"/>
+                </target>
+              </statement>
+              <statement xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Collection/each/@containedType.0"
+                  name="each" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Collection/each">
+                <containedType xsi:type="kermeta_language_structure:FunctionType"
+                    left="#//@packages.0/language/structure/ClassDefinition/print/@body/@statement.3/@containedType.0/@containedType.0"
+                    right="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Collection/each/@containedType.0">
+                  <containedType xsi:type="kermeta_language_structure:ProductType"
+                      type="#//@packages.0/language/structure/ClassDefinition/print/@body/@statement.3/@containedType.0/@containedType.0/@containedType.0">
+                    <containedType xsi:type="kermeta_language_structure:FunctionType"
+                        left="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/language/structure/ClassDefinition/ownedAttribute/@containedType.0"
+                        right="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Object"/>
+                  </containedType>
+                </containedType>
+                <parameters xsi:type="kermeta_language_behavior:LambdaExpression"
+                    staticType="#//@packages.0/language/structure/ClassDefinition/print/@body/@statement.3/@parameters.0/@containedType.0">
+                  <containedType xsi:type="kermeta_language_structure:FunctionType"
+                      left="#//@packages.0/language/structure/ClassDefinition/print/@body/@statement.3/@parameters.0/@containedType.0/@containedType.0"
+                      right="#//@packages.0/language/structure/Property/print/@containedType.0">
+                    <containedType xsi:type="kermeta_language_structure:ProductType"
+                        type="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/language/structure/ClassDefinition/ownedAttribute/@containedType.0"/>
+                  </containedType>
+                  <parameters name="oa"/>
+                  <body xsi:type="kermeta_language_behavior:Block" staticType="#//@packages.0/language/structure/Property/print/@containedType.0">
+                    <statement xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/language/structure/Property/print/@containedType.0"
+                        name="print" staticOperation="#//@packages.0/language/structure/Property/print">
+                      <containedType xsi:type="kermeta_language_structure:FunctionType"
+                          left="#//@packages.0/language/structure/ClassDefinition/print/@body/@statement.3/@parameters.0/@body/@statement.0/@containedType.0/@containedType.0"
+                          right="#//@packages.0/language/structure/Property/print/@containedType.0">
+                        <containedType xsi:type="kermeta_language_structure:ProductType"
+                            type="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/language/structure/String/@containedType.0"/>
+                      </containedType>
+                      <parameters xsi:type="kermeta_language_behavior:CallFeature"
+                          staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/String/plus/@containedType.0"
+                          name="plus" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/String/plus">
+                        <containedType xsi:type="kermeta_language_structure:FunctionType"
+                            left="#//@packages.0/language/structure/ClassDefinition/print/@body/@statement.3/@parameters.0/@body/@statement.0/@parameters.0/@containedType.0/@containedType.0"
+                            right="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/String/plus/@containedType.0">
+                          <containedType xsi:type="kermeta_language_structure:ProductType"
+                              type="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/String/plus/@ownedParameter.0/@containedType.0"/>
+                        </containedType>
+                        <parameters xsi:type="kermeta_language_behavior:StringLiteral"
+                            staticType="#//@packages.0/language/structure/Package/print/@body/@statement.0/@parameters.0/@target/@parameters.0/@containedType.0"
+                            value="  "/>
+                        <target xsi:type="kermeta_language_behavior:CallVariable"
+                            staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/language/structure/String/@containedType.0"
+                            name="indent"/>
+                      </parameters>
+                      <target xsi:type="kermeta_language_behavior:CallVariable" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/language/structure/ClassDefinition/ownedAttribute/@containedType.0"
+                          name="oa"/>
+                    </statement>
+                  </body>
+                </parameters>
+                <target xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/language/structure/ClassDefinition/print/@body/@statement.3/@target/@containedType.0"
+                    name="ownedAttribute" staticProperty="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/language/structure/ClassDefinition/ownedAttribute">
+                  <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/OrderedSet">
+                    <typeParamBinding variable="kermeta_language_structure:ObjectTypeVariable platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/OrderedSet/G"
+                        type="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/language/structure/ClassDefinition/ownedAttribute/@containedType.0"/>
+                  </containedType>
+                  <target xsi:type="kermeta_language_behavior:SelfExpression" staticType="#//@packages.0/language/structure/ClassDefinition/print/@body/@statement.0/@parameters.0/@parameters.0/@target/@containedType.0"/>
+                </target>
+              </statement>
+              <statement xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Collection/each/@containedType.0"
+                  name="each" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Collection/each">
+                <containedType xsi:type="kermeta_language_structure:FunctionType"
+                    left="#//@packages.0/language/structure/ClassDefinition/print/@body/@statement.4/@containedType.0/@containedType.0"
+                    right="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Collection/each/@containedType.0">
+                  <containedType xsi:type="kermeta_language_structure:ProductType"
+                      type="#//@packages.0/language/structure/ClassDefinition/print/@body/@statement.4/@containedType.0/@containedType.0/@containedType.0">
+                    <containedType xsi:type="kermeta_language_structure:FunctionType"
+                        left="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/language/structure/ClassDefinition/ownedOperation/@containedType.0"
+                        right="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Object"/>
+                  </containedType>
+                </containedType>
+                <parameters xsi:type="kermeta_language_behavior:LambdaExpression"
+                    staticType="#//@packages.0/language/structure/ClassDefinition/print/@body/@statement.4/@parameters.0/@containedType.0">
+                  <containedType xsi:type="kermeta_language_structure:FunctionType"
+                      left="#//@packages.0/language/structure/ClassDefinition/print/@body/@statement.4/@parameters.0/@containedType.0/@containedType.0"
+                      right="#//@packages.0/language/structure/Operation/print/@containedType.0">
+                    <containedType xsi:type="kermeta_language_structure:ProductType"
+                        type="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/language/structure/ClassDefinition/ownedOperation/@containedType.0"/>
+                  </containedType>
+                  <parameters name="oo"/>
+                  <body xsi:type="kermeta_language_behavior:Block" staticType="#//@packages.0/language/structure/Operation/print/@containedType.0">
+                    <statement xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/language/structure/Operation/print/@containedType.0"
+                        name="print" staticOperation="#//@packages.0/language/structure/Operation/print">
+                      <containedType xsi:type="kermeta_language_structure:FunctionType"
+                          left="#//@packages.0/language/structure/ClassDefinition/print/@body/@statement.4/@parameters.0/@body/@statement.0/@containedType.0/@containedType.0"
+                          right="#//@packages.0/language/structure/Operation/print/@containedType.0">
+                        <containedType xsi:type="kermeta_language_structure:ProductType"
+                            type="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/language/structure/String/@containedType.0"/>
+                      </containedType>
+                      <parameters xsi:type="kermeta_language_behavior:CallFeature"
+                          staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/String/plus/@containedType.0"
+                          name="plus" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/String/plus">
+                        <containedType xsi:type="kermeta_language_structure:FunctionType"
+                            left="#//@packages.0/language/structure/ClassDefinition/print/@body/@statement.4/@parameters.0/@body/@statement.0/@parameters.0/@containedType.0/@containedType.0"
+                            right="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/String/plus/@containedType.0">
+                          <containedType xsi:type="kermeta_language_structure:ProductType"
+                              type="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/String/plus/@ownedParameter.0/@containedType.0"/>
+                        </containedType>
+                        <parameters xsi:type="kermeta_language_behavior:StringLiteral"
+                            staticType="#//@packages.0/language/structure/Package/print/@body/@statement.0/@parameters.0/@target/@parameters.0/@containedType.0"
+                            value="  "/>
+                        <target xsi:type="kermeta_language_behavior:CallVariable"
+                            staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/language/structure/String/@containedType.0"
+                            name="indent"/>
+                      </parameters>
+                      <target xsi:type="kermeta_language_behavior:CallVariable" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/language/structure/ClassDefinition/ownedOperation/@containedType.0"
+                          name="oo"/>
+                    </statement>
+                  </body>
+                </parameters>
+                <target xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/language/structure/ClassDefinition/print/@body/@statement.4/@target/@containedType.0"
+                    name="ownedOperation" staticProperty="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/language/structure/ClassDefinition/ownedOperation">
+                  <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/OrderedSet">
+                    <typeParamBinding variable="kermeta_language_structure:ObjectTypeVariable platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/OrderedSet/G"
+                        type="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/language/structure/ClassDefinition/ownedOperation/@containedType.0"/>
+                  </containedType>
+                  <target xsi:type="kermeta_language_behavior:SelfExpression" staticType="#//@packages.0/language/structure/ClassDefinition/print/@body/@statement.0/@parameters.0/@parameters.0/@target/@containedType.0"/>
+                </target>
+              </statement>
+            </body>
+          </ownedOperation>
+        </ownedTypeDefinition>
+        <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition"
+            name="Class" isAspect="true" superType="#//@packages.0/language/structure/Class/@containedType.0">
+          <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="#//@packages.0/language/structure/Object"/>
+          <ownedOperation name="print" type="#//@packages.0/language/structure/Class/print/@containedType.0"
+              isOrdered="true" upper="1" superOperation="#//@packages.0/language/structure/Object/print">
+            <containedType xsi:type="kermeta_language_structure:VoidType"/>
+            <ownedParameter name="indent" type="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/language/structure/String"
+                isOrdered="true" upper="1"/>
+            <body xsi:type="kermeta_language_behavior:Block" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/io/StdIO/writeln/@containedType.0">
+              <statement xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/io/StdIO/writeln/@containedType.0"
+                  name="writeln" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/io/StdIO/writeln">
+                <containedType xsi:type="kermeta_language_structure:FunctionType"
+                    left="#//@packages.0/language/structure/Class/print/@body/@statement.0/@containedType.0/@containedType.0"
+                    right="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/io/StdIO/writeln/@containedType.0">
+                  <containedType xsi:type="kermeta_language_structure:ProductType"
+                      type="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/io/StdIO/writeln/@ownedParameter.0/@containedType.0"/>
+                </containedType>
+                <parameters xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/String/plus/@containedType.0"
+                    name="plus" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/String/plus">
+                  <containedType xsi:type="kermeta_language_structure:FunctionType"
+                      left="#//@packages.0/language/structure/Class/print/@body/@statement.0/@parameters.0/@containedType.0/@containedType.0"
+                      right="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/String/plus/@containedType.0">
+                    <containedType xsi:type="kermeta_language_structure:ProductType"
+                        type="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/String/plus/@ownedParameter.0/@containedType.0"/>
+                  </containedType>
+                  <parameters xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/language/structure/String/@containedType.0"
+                      name="name" staticProperty="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/language/structure/Class/name">
+                    <target xsi:type="kermeta_language_behavior:SelfExpression" staticType="#//@packages.0/language/structure/Class/print/@body/@statement.0/@parameters.0/@parameters.0/@target/@containedType.0">
+                      <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="#//@packages.0/language/structure/Class"/>
+                    </target>
+                  </parameters>
+                  <target xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/String/plus/@containedType.0"
+                      name="plus" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/String/plus">
+                    <containedType xsi:type="kermeta_language_structure:FunctionType"
+                        left="#//@packages.0/language/structure/Class/print/@body/@statement.0/@parameters.0/@target/@containedType.0/@containedType.0"
+                        right="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/String/plus/@containedType.0">
+                      <containedType xsi:type="kermeta_language_structure:ProductType"
+                          type="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/String/plus/@ownedParameter.0/@containedType.0"/>
+                    </containedType>
+                    <parameters xsi:type="kermeta_language_behavior:StringLiteral"
+                        staticType="#//@packages.0/language/structure/Package/print/@body/@statement.0/@parameters.0/@target/@parameters.0/@containedType.0"
+                        value="Class: "/>
+                    <target xsi:type="kermeta_language_behavior:CallVariable" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/language/structure/String/@containedType.0"
+                        name="indent"/>
+                  </target>
+                </parameters>
+                <target xsi:type="kermeta_language_behavior:CallVariable" staticType="#//@packages.0/language/structure/Package/print/@body/@statement.0/@target/@containedType.0"
+                    name="stdio"/>
+              </statement>
+            </body>
+          </ownedOperation>
+        </ownedTypeDefinition>
+        <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition"
+            name="Property" isAspect="true" superType="#//@packages.0/language/structure/Property/@containedType.0">
+          <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="#//@packages.0/language/structure/Object"/>
+          <ownedOperation name="print" type="#//@packages.0/language/structure/Property/print/@containedType.0"
+              isOrdered="true" upper="1" superOperation="#//@packages.0/language/structure/Object/print">
+            <containedType xsi:type="kermeta_language_structure:VoidType"/>
+            <ownedParameter name="indent" type="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/language/structure/String"
+                isOrdered="true" upper="1"/>
+            <body xsi:type="kermeta_language_behavior:Block" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/io/StdIO/writeln/@containedType.0">
+              <statement xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/io/StdIO/writeln/@containedType.0"
+                  name="writeln" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/io/StdIO/writeln">
+                <containedType xsi:type="kermeta_language_structure:FunctionType"
+                    left="#//@packages.0/language/structure/Property/print/@body/@statement.0/@containedType.0/@containedType.0"
+                    right="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/io/StdIO/writeln/@containedType.0">
+                  <containedType xsi:type="kermeta_language_structure:ProductType"
+                      type="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/io/StdIO/writeln/@ownedParameter.0/@containedType.0"/>
+                </containedType>
+                <parameters xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/String/plus/@containedType.0"
+                    name="plus" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/String/plus">
+                  <containedType xsi:type="kermeta_language_structure:FunctionType"
+                      left="#//@packages.0/language/structure/Property/print/@body/@statement.0/@parameters.0/@containedType.0/@containedType.0"
+                      right="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/String/plus/@containedType.0">
+                    <containedType xsi:type="kermeta_language_structure:ProductType"
+                        type="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/String/plus/@ownedParameter.0/@containedType.0"/>
+                  </containedType>
+                  <parameters xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/language/structure/String/@containedType.0"
+                      name="name" staticProperty="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/language/structure/NamedElement/name">
+                    <target xsi:type="kermeta_language_behavior:SelfExpression" staticType="#//@packages.0/language/structure/Property/print/@body/@statement.0/@parameters.0/@parameters.0/@target/@containedType.0">
+                      <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="#//@packages.0/language/structure/Property"/>
+                    </target>
+                  </parameters>
+                  <target xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/String/plus/@containedType.0"
+                      name="plus" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/String/plus">
+                    <containedType xsi:type="kermeta_language_structure:FunctionType"
+                        left="#//@packages.0/language/structure/Property/print/@body/@statement.0/@parameters.0/@target/@containedType.0/@containedType.0"
+                        right="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/String/plus/@containedType.0">
+                      <containedType xsi:type="kermeta_language_structure:ProductType"
+                          type="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/String/plus/@ownedParameter.0/@containedType.0"/>
+                    </containedType>
+                    <parameters xsi:type="kermeta_language_behavior:StringLiteral"
+                        staticType="#//@packages.0/language/structure/Package/print/@body/@statement.0/@parameters.0/@target/@parameters.0/@containedType.0"
+                        value="Property: "/>
+                    <target xsi:type="kermeta_language_behavior:CallVariable" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/language/structure/String/@containedType.0"
+                        name="indent"/>
+                  </target>
+                </parameters>
+                <target xsi:type="kermeta_language_behavior:CallVariable" staticType="#//@packages.0/language/structure/Package/print/@body/@statement.0/@target/@containedType.0"
+                    name="stdio"/>
+              </statement>
+              <statement xsi:type="kermeta_language_behavior:Conditional" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/io/StdIO/writeln/@containedType.0">
+                <thenBody xsi:type="kermeta_language_behavior:Block" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/io/StdIO/writeln/@containedType.0">
+                  <statement xsi:type="kermeta_language_behavior:VariableDecl" staticType="#//@packages.0/language/structure/Property/print/@body/@statement.1/@thenBody/@statement.0/@containedType.0"
+                      identifier="cl">
+                    <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="#//@packages.0/language/structure/Class"/>
+                    <type name="Class" type="#//@packages.0/language/structure/Property/print/@body/@statement.1/@thenBody/@statement.0/@containedType.0"
+                        isOrdered="true" upper="1"/>
+                  </statement>
+                  <statement xsi:type="kermeta_language_behavior:Assignment" staticType="#//@packages.0/language/structure/Property/print/@body/@statement.1/@thenBody/@statement.0/@containedType.0"
+                      isCast="true">
+                    <target xsi:type="kermeta_language_behavior:CallVariable" staticType="#//@packages.0/language/structure/Property/print/@body/@statement.1/@thenBody/@statement.0/@containedType.0"
+                        name="cl"/>
+                    <value xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/language/structure/TypedElement/type/@containedType.0"
+                        name="type" staticProperty="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/language/structure/TypedElement/type">
+                      <target xsi:type="kermeta_language_behavior:SelfExpression"
+                          staticType="#//@packages.0/language/structure/Property/print/@body/@statement.0/@parameters.0/@parameters.0/@target/@containedType.0"/>
+                    </value>
+                  </statement>
+                  <statement xsi:type="kermeta_language_behavior:Conditional" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/io/StdIO/writeln/@containedType.0">
+                    <thenBody xsi:type="kermeta_language_behavior:Block" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/io/StdIO/writeln/@containedType.0">
+                      <statement xsi:type="kermeta_language_behavior:CallFeature"
+                          staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/io/StdIO/writeln/@containedType.0"
+                          name="writeln" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/io/StdIO/writeln">
+                        <containedType xsi:type="kermeta_language_structure:FunctionType"
+                            left="#//@packages.0/language/structure/Property/print/@body/@statement.1/@thenBody/@statement.2/@thenBody/@statement.0/@containedType.0/@containedType.0"
+                            right="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/io/StdIO/writeln/@containedType.0">
+                          <containedType xsi:type="kermeta_language_structure:ProductType"
+                              type="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/io/StdIO/writeln/@ownedParameter.0/@containedType.0"/>
+                        </containedType>
+                        <parameters xsi:type="kermeta_language_behavior:CallFeature"
+                            staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/String/plus/@containedType.0"
+                            name="plus" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/String/plus">
+                          <containedType xsi:type="kermeta_language_structure:FunctionType"
+                              left="#//@packages.0/language/structure/Property/print/@body/@statement.1/@thenBody/@statement.2/@thenBody/@statement.0/@parameters.0/@containedType.0/@containedType.0"
+                              right="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/String/plus/@containedType.0">
+                            <containedType xsi:type="kermeta_language_structure:ProductType"
+                                type="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/String/plus/@ownedParameter.0/@containedType.0"/>
+                          </containedType>
+                          <parameters xsi:type="kermeta_language_behavior:CallFeature"
+                              staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/language/structure/String/@containedType.0"
+                              name="name" staticProperty="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/language/structure/Class/name">
+                            <target xsi:type="kermeta_language_behavior:CallVariable"
+                                staticType="#//@packages.0/language/structure/Property/print/@body/@statement.1/@thenBody/@statement.0/@containedType.0"
+                                name="cl"/>
+                          </parameters>
+                          <target xsi:type="kermeta_language_behavior:CallFeature"
+                              staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/String/plus/@containedType.0"
+                              name="plus" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/String/plus">
+                            <containedType xsi:type="kermeta_language_structure:FunctionType"
+                                left="#//@packages.0/language/structure/Property/print/@body/@statement.1/@thenBody/@statement.2/@thenBody/@statement.0/@parameters.0/@target/@containedType.0/@containedType.0"
+                                right="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/String/plus/@containedType.0">
+                              <containedType xsi:type="kermeta_language_structure:ProductType"
+                                  type="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/String/plus/@ownedParameter.0/@containedType.0"/>
+                            </containedType>
+                            <parameters xsi:type="kermeta_language_behavior:StringLiteral"
+                                staticType="#//@packages.0/language/structure/Package/print/@body/@statement.0/@parameters.0/@target/@parameters.0/@containedType.0"
+                                value="   - property type : "/>
+                            <target xsi:type="kermeta_language_behavior:CallVariable"
+                                staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/language/structure/String/@containedType.0"
+                                name="indent"/>
+                          </target>
+                        </parameters>
+                        <target xsi:type="kermeta_language_behavior:CallVariable"
+                            staticType="#//@packages.0/language/structure/Package/print/@body/@statement.0/@target/@containedType.0"
+                            name="stdio"/>
+                      </statement>
+                    </thenBody>
+                    <condition xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/language/structure/Boolean/@containedType.0"
+                        name="isNotEqual" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/language/structure/Object/isNotEqual">
+                      <containedType xsi:type="kermeta_language_structure:FunctionType"
+                          left="#//@packages.0/language/structure/Property/print/@body/@statement.1/@thenBody/@statement.2/@condition/@containedType.0/@containedType.0"
+                          right="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/language/structure/Boolean/@containedType.0">
+                        <containedType xsi:type="kermeta_language_structure:ProductType"
+                            type="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/language/structure/Object/isNotEqual/@ownedParameter.0/@containedType.0"/>
+                      </containedType>
+                      <parameters xsi:type="kermeta_language_behavior:VoidLiteral"
+                          staticType="#//@packages.0/language/structure/Object/print/@body/@containedType.0"/>
+                      <target xsi:type="kermeta_language_behavior:CallVariable" staticType="#//@packages.0/language/structure/Property/print/@body/@statement.1/@thenBody/@statement.0/@containedType.0"
+                          name="cl"/>
+                    </condition>
+                  </statement>
+                </thenBody>
+                <condition xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/language/structure/Boolean/@containedType.0"
+                    name="isNotEqual" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/language/structure/Object/isNotEqual">
+                  <containedType xsi:type="kermeta_language_structure:FunctionType"
+                      left="#//@packages.0/language/structure/Property/print/@body/@statement.1/@condition/@containedType.0/@containedType.0"
+                      right="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/language/structure/Boolean/@containedType.0">
+                    <containedType xsi:type="kermeta_language_structure:ProductType"
+                        type="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/language/structure/Object/isNotEqual/@ownedParameter.0/@containedType.0"/>
+                  </containedType>
+                  <parameters xsi:type="kermeta_language_behavior:VoidLiteral" staticType="#//@packages.0/language/structure/Object/print/@body/@containedType.0"/>
+                  <target xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/language/structure/TypedElement/type/@containedType.0"
+                      name="type" staticProperty="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/language/structure/TypedElement/type">
+                    <target xsi:type="kermeta_language_behavior:SelfExpression" staticType="#//@packages.0/language/structure/Property/print/@body/@statement.0/@parameters.0/@parameters.0/@target/@containedType.0"/>
+                  </target>
+                </condition>
+              </statement>
+            </body>
+          </ownedOperation>
+        </ownedTypeDefinition>
+        <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition"
+            name="Operation" isAspect="true" superType="#//@packages.0/language/structure/Operation/@containedType.0">
+          <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="#//@packages.0/language/structure/Object"/>
+          <ownedOperation name="print" type="#//@packages.0/language/structure/Operation/print/@containedType.0"
+              isOrdered="true" upper="1" superOperation="#//@packages.0/language/structure/Object/print">
+            <containedType xsi:type="kermeta_language_structure:VoidType"/>
+            <ownedParameter name="indent" type="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/language/structure/String"
+                isOrdered="true" upper="1"/>
+            <body xsi:type="kermeta_language_behavior:Block" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/io/StdIO/writeln/@containedType.0">
+              <statement xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/io/StdIO/writeln/@containedType.0"
+                  name="writeln" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/io/StdIO/writeln">
+                <containedType xsi:type="kermeta_language_structure:FunctionType"
+                    left="#//@packages.0/language/structure/Operation/print/@body/@statement.0/@containedType.0/@containedType.0"
+                    right="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/io/StdIO/writeln/@containedType.0">
+                  <containedType xsi:type="kermeta_language_structure:ProductType"
+                      type="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/io/StdIO/writeln/@ownedParameter.0/@containedType.0"/>
+                </containedType>
+                <parameters xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/String/plus/@containedType.0"
+                    name="plus" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/String/plus">
+                  <containedType xsi:type="kermeta_language_structure:FunctionType"
+                      left="#//@packages.0/language/structure/Operation/print/@body/@statement.0/@parameters.0/@containedType.0/@containedType.0"
+                      right="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/String/plus/@containedType.0">
+                    <containedType xsi:type="kermeta_language_structure:ProductType"
+                        type="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/String/plus/@ownedParameter.0/@containedType.0"/>
+                  </containedType>
+                  <parameters xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/language/structure/String/@containedType.0"
+                      name="name" staticProperty="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/language/structure/NamedElement/name">
+                    <target xsi:type="kermeta_language_behavior:SelfExpression" staticType="#//@packages.0/language/structure/Operation/print/@body/@statement.0/@parameters.0/@parameters.0/@target/@containedType.0">
+                      <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="#//@packages.0/language/structure/Operation"/>
+                    </target>
+                  </parameters>
+                  <target xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/String/plus/@containedType.0"
+                      name="plus" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/String/plus">
+                    <containedType xsi:type="kermeta_language_structure:FunctionType"
+                        left="#//@packages.0/language/structure/Operation/print/@body/@statement.0/@parameters.0/@target/@containedType.0/@containedType.0"
+                        right="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/String/plus/@containedType.0">
+                      <containedType xsi:type="kermeta_language_structure:ProductType"
+                          type="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/String/plus/@ownedParameter.0/@containedType.0"/>
+                    </containedType>
+                    <parameters xsi:type="kermeta_language_behavior:StringLiteral"
+                        staticType="#//@packages.0/language/structure/Package/print/@body/@statement.0/@parameters.0/@target/@parameters.0/@containedType.0"
+                        value="Operation: "/>
+                    <target xsi:type="kermeta_language_behavior:CallVariable" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/language/structure/String/@containedType.0"
+                        name="indent"/>
+                  </target>
+                </parameters>
+                <target xsi:type="kermeta_language_behavior:CallVariable" staticType="#//@packages.0/language/structure/Package/print/@body/@statement.0/@target/@containedType.0"
+                    name="stdio"/>
+              </statement>
+              <statement xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Collection/each/@containedType.0"
+                  name="each" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Collection/each">
+                <containedType xsi:type="kermeta_language_structure:FunctionType"
+                    left="#//@packages.0/language/structure/Operation/print/@body/@statement.1/@containedType.0/@containedType.0"
+                    right="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Collection/each/@containedType.0">
+                  <containedType xsi:type="kermeta_language_structure:ProductType"
+                      type="#//@packages.0/language/structure/Operation/print/@body/@statement.1/@containedType.0/@containedType.0/@containedType.0">
+                    <containedType xsi:type="kermeta_language_structure:FunctionType"
+                        left="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/language/structure/Operation/ownedParameter/@containedType.0"
+                        right="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Object"/>
+                  </containedType>
+                </containedType>
+                <parameters xsi:type="kermeta_language_behavior:LambdaExpression"
+                    staticType="#//@packages.0/language/structure/Operation/print/@body/@statement.1/@parameters.0/@containedType.0">
+                  <containedType xsi:type="kermeta_language_structure:FunctionType"
+                      left="#//@packages.0/language/structure/Operation/print/@body/@statement.1/@parameters.0/@containedType.0/@containedType.0"
+                      right="#//@packages.0/language/structure/Parameter/print/@containedType.0">
+                    <containedType xsi:type="kermeta_language_structure:ProductType"
+                        type="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/language/structure/Operation/ownedParameter/@containedType.0"/>
+                  </containedType>
+                  <parameters name="op"/>
+                  <body xsi:type="kermeta_language_behavior:Block" staticType="#//@packages.0/language/structure/Parameter/print/@containedType.0">
+                    <statement xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/language/structure/Parameter/print/@containedType.0"
+                        name="print" staticOperation="#//@packages.0/language/structure/Parameter/print">
+                      <containedType xsi:type="kermeta_language_structure:FunctionType"
+                          left="#//@packages.0/language/structure/Operation/print/@body/@statement.1/@parameters.0/@body/@statement.0/@containedType.0/@containedType.0"
+                          right="#//@packages.0/language/structure/Parameter/print/@containedType.0">
+                        <containedType xsi:type="kermeta_language_structure:ProductType"
+                            type="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/language/structure/String/@containedType.0"/>
+                      </containedType>
+                      <parameters xsi:type="kermeta_language_behavior:CallFeature"
+                          staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/String/plus/@containedType.0"
+                          name="plus" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/String/plus">
+                        <containedType xsi:type="kermeta_language_structure:FunctionType"
+                            left="#//@packages.0/language/structure/Operation/print/@body/@statement.1/@parameters.0/@body/@statement.0/@parameters.0/@containedType.0/@containedType.0"
+                            right="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/String/plus/@containedType.0">
+                          <containedType xsi:type="kermeta_language_structure:ProductType"
+                              type="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/String/plus/@ownedParameter.0/@containedType.0"/>
+                        </containedType>
+                        <parameters xsi:type="kermeta_language_behavior:StringLiteral"
+                            staticType="#//@packages.0/language/structure/Package/print/@body/@statement.0/@parameters.0/@target/@parameters.0/@containedType.0"
+                            value="  "/>
+                        <target xsi:type="kermeta_language_behavior:CallVariable"
+                            staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/language/structure/String/@containedType.0"
+                            name="indent"/>
+                      </parameters>
+                      <target xsi:type="kermeta_language_behavior:CallVariable" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/language/structure/Operation/ownedParameter/@containedType.0"
+                          name="op"/>
+                    </statement>
+                  </body>
+                </parameters>
+                <target xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/language/structure/Operation/print/@body/@statement.1/@target/@containedType.0"
+                    name="ownedParameter" staticProperty="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/language/structure/Operation/ownedParameter">
+                  <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/OrderedSet">
+                    <typeParamBinding variable="kermeta_language_structure:ObjectTypeVariable platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/OrderedSet/G"
+                        type="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/language/structure/Operation/ownedParameter/@containedType.0"/>
+                  </containedType>
+                  <target xsi:type="kermeta_language_behavior:SelfExpression" staticType="#//@packages.0/language/structure/Operation/print/@body/@statement.0/@parameters.0/@parameters.0/@target/@containedType.0"/>
+                </target>
+              </statement>
+              <statement xsi:type="kermeta_language_behavior:Conditional" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/io/StdIO/writeln/@containedType.0">
+                <thenBody xsi:type="kermeta_language_behavior:Block" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/io/StdIO/writeln/@containedType.0">
+                  <statement xsi:type="kermeta_language_behavior:VariableDecl" staticType="#//@packages.0/language/structure/Operation/print/@body/@statement.2/@thenBody/@statement.0/@containedType.0"
+                      identifier="cl">
+                    <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="#//@packages.0/language/structure/Class"/>
+                    <type name="Class" type="#//@packages.0/language/structure/Operation/print/@body/@statement.2/@thenBody/@statement.0/@containedType.0"
+                        isOrdered="true" upper="1"/>
+                  </statement>
+                  <statement xsi:type="kermeta_language_behavior:Assignment" staticType="#//@packages.0/language/structure/Operation/print/@body/@statement.2/@thenBody/@statement.0/@containedType.0"
+                      isCast="true">
+                    <target xsi:type="kermeta_language_behavior:CallVariable" staticType="#//@packages.0/language/structure/Operation/print/@body/@statement.2/@thenBody/@statement.0/@containedType.0"
+                        name="cl"/>
+                    <value xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/language/structure/TypedElement/type/@containedType.0"
+                        name="type" staticProperty="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/language/structure/TypedElement/type">
+                      <target xsi:type="kermeta_language_behavior:SelfExpression"
+                          staticType="#//@packages.0/language/structure/Operation/print/@body/@statement.0/@parameters.0/@parameters.0/@target/@containedType.0"/>
+                    </value>
+                  </statement>
+                  <statement xsi:type="kermeta_language_behavior:Conditional" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/io/StdIO/writeln/@containedType.0">
+                    <thenBody xsi:type="kermeta_language_behavior:Block" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/io/StdIO/writeln/@containedType.0">
+                      <statement xsi:type="kermeta_language_behavior:CallFeature"
+                          staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/io/StdIO/writeln/@containedType.0"
+                          name="writeln" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/io/StdIO/writeln">
+                        <containedType xsi:type="kermeta_language_structure:FunctionType"
+                            left="#//@packages.0/language/structure/Operation/print/@body/@statement.2/@thenBody/@statement.2/@thenBody/@statement.0/@containedType.0/@containedType.0"
+                            right="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/io/StdIO/writeln/@containedType.0">
+                          <containedType xsi:type="kermeta_language_structure:ProductType"
+                              type="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/io/StdIO/writeln/@ownedParameter.0/@containedType.0"/>
+                        </containedType>
+                        <parameters xsi:type="kermeta_language_behavior:CallFeature"
+                            staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/String/plus/@containedType.0"
+                            name="plus" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/String/plus">
+                          <containedType xsi:type="kermeta_language_structure:FunctionType"
+                              left="#//@packages.0/language/structure/Operation/print/@body/@statement.2/@thenBody/@statement.2/@thenBody/@statement.0/@parameters.0/@containedType.0/@containedType.0"
+                              right="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/String/plus/@containedType.0">
+                            <containedType xsi:type="kermeta_language_structure:ProductType"
+                                type="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/String/plus/@ownedParameter.0/@containedType.0"/>
+                          </containedType>
+                          <parameters xsi:type="kermeta_language_behavior:CallFeature"
+                              staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/language/structure/String/@containedType.0"
+                              name="name" staticProperty="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/language/structure/Class/name">
+                            <target xsi:type="kermeta_language_behavior:CallVariable"
+                                staticType="#//@packages.0/language/structure/Operation/print/@body/@statement.2/@thenBody/@statement.0/@containedType.0"
+                                name="cl"/>
+                          </parameters>
+                          <target xsi:type="kermeta_language_behavior:CallFeature"
+                              staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/String/plus/@containedType.0"
+                              name="plus" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/String/plus">
+                            <containedType xsi:type="kermeta_language_structure:FunctionType"
+                                left="#//@packages.0/language/structure/Operation/print/@body/@statement.2/@thenBody/@statement.2/@thenBody/@statement.0/@parameters.0/@target/@containedType.0/@containedType.0"
+                                right="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/String/plus/@containedType.0">
+                              <containedType xsi:type="kermeta_language_structure:ProductType"
+                                  type="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/String/plus/@ownedParameter.0/@containedType.0"/>
+                            </containedType>
+                            <parameters xsi:type="kermeta_language_behavior:StringLiteral"
+                                staticType="#//@packages.0/language/structure/Package/print/@body/@statement.0/@parameters.0/@target/@parameters.0/@containedType.0"
+                                value="   - return type : "/>
+                            <target xsi:type="kermeta_language_behavior:CallVariable"
+                                staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/language/structure/String/@containedType.0"
+                                name="indent"/>
+                          </target>
+                        </parameters>
+                        <target xsi:type="kermeta_language_behavior:CallVariable"
+                            staticType="#//@packages.0/language/structure/Package/print/@body/@statement.0/@target/@containedType.0"
+                            name="stdio"/>
+                      </statement>
+                    </thenBody>
+                    <condition xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/language/structure/Boolean/@containedType.0"
+                        name="isNotEqual" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/language/structure/Object/isNotEqual">
+                      <containedType xsi:type="kermeta_language_structure:FunctionType"
+                          left="#//@packages.0/language/structure/Operation/print/@body/@statement.2/@thenBody/@statement.2/@condition/@containedType.0/@containedType.0"
+                          right="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/language/structure/Boolean/@containedType.0">
+                        <containedType xsi:type="kermeta_language_structure:ProductType"
+                            type="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/language/structure/Object/isNotEqual/@ownedParameter.0/@containedType.0"/>
+                      </containedType>
+                      <parameters xsi:type="kermeta_language_behavior:VoidLiteral"
+                          staticType="#//@packages.0/language/structure/Object/print/@body/@containedType.0"/>
+                      <target xsi:type="kermeta_language_behavior:CallVariable" staticType="#//@packages.0/language/structure/Operation/print/@body/@statement.2/@thenBody/@statement.0/@containedType.0"
+                          name="cl"/>
+                    </condition>
+                  </statement>
+                </thenBody>
+                <condition xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/language/structure/Boolean/@containedType.0"
+                    name="isNotEqual" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/language/structure/Object/isNotEqual">
+                  <containedType xsi:type="kermeta_language_structure:FunctionType"
+                      left="#//@packages.0/language/structure/Operation/print/@body/@statement.2/@condition/@containedType.0/@containedType.0"
+                      right="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/language/structure/Boolean/@containedType.0">
+                    <containedType xsi:type="kermeta_language_structure:ProductType"
+                        type="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/language/structure/Object/isNotEqual/@ownedParameter.0/@containedType.0"/>
+                  </containedType>
+                  <parameters xsi:type="kermeta_language_behavior:VoidLiteral" staticType="#//@packages.0/language/structure/Object/print/@body/@containedType.0"/>
+                  <target xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/language/structure/TypedElement/type/@containedType.0"
+                      name="type" staticProperty="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/language/structure/TypedElement/type">
+                    <target xsi:type="kermeta_language_behavior:SelfExpression" staticType="#//@packages.0/language/structure/Operation/print/@body/@statement.0/@parameters.0/@parameters.0/@target/@containedType.0"/>
+                  </target>
+                </condition>
+              </statement>
+            </body>
+          </ownedOperation>
+        </ownedTypeDefinition>
+        <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition"
+            name="Parameter" isAspect="true" superType="#//@packages.0/language/structure/Parameter/@containedType.0">
+          <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="#//@packages.0/language/structure/Object"/>
+          <ownedOperation name="print" type="#//@packages.0/language/structure/Parameter/print/@containedType.0"
+              isOrdered="true" upper="1" superOperation="#//@packages.0/language/structure/Object/print">
+            <containedType xsi:type="kermeta_language_structure:VoidType"/>
+            <ownedParameter name="indent" type="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/language/structure/String"
+                isOrdered="true" upper="1"/>
+            <body xsi:type="kermeta_language_behavior:Block" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/io/StdIO/writeln/@containedType.0">
+              <statement xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/io/StdIO/writeln/@containedType.0"
+                  name="writeln" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/io/StdIO/writeln">
+                <containedType xsi:type="kermeta_language_structure:FunctionType"
+                    left="#//@packages.0/language/structure/Parameter/print/@body/@statement.0/@containedType.0/@containedType.0"
+                    right="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/io/StdIO/writeln/@containedType.0">
+                  <containedType xsi:type="kermeta_language_structure:ProductType"
+                      type="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/io/StdIO/writeln/@ownedParameter.0/@containedType.0"/>
+                </containedType>
+                <parameters xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/String/plus/@containedType.0"
+                    name="plus" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/String/plus">
+                  <containedType xsi:type="kermeta_language_structure:FunctionType"
+                      left="#//@packages.0/language/structure/Parameter/print/@body/@statement.0/@parameters.0/@containedType.0/@containedType.0"
+                      right="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/String/plus/@containedType.0">
+                    <containedType xsi:type="kermeta_language_structure:ProductType"
+                        type="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/String/plus/@ownedParameter.0/@containedType.0"/>
+                  </containedType>
+                  <parameters xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/language/structure/String/@containedType.0"
+                      name="name" staticProperty="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/language/structure/NamedElement/name">
+                    <target xsi:type="kermeta_language_behavior:SelfExpression" staticType="#//@packages.0/language/structure/Parameter/print/@body/@statement.0/@parameters.0/@parameters.0/@target/@containedType.0">
+                      <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="#//@packages.0/language/structure/Parameter"/>
+                    </target>
+                  </parameters>
+                  <target xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/String/plus/@containedType.0"
+                      name="plus" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/String/plus">
+                    <containedType xsi:type="kermeta_language_structure:FunctionType"
+                        left="#//@packages.0/language/structure/Parameter/print/@body/@statement.0/@parameters.0/@target/@containedType.0/@containedType.0"
+                        right="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/String/plus/@containedType.0">
+                      <containedType xsi:type="kermeta_language_structure:ProductType"
+                          type="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/String/plus/@ownedParameter.0/@containedType.0"/>
+                    </containedType>
+                    <parameters xsi:type="kermeta_language_behavior:StringLiteral"
+                        staticType="#//@packages.0/language/structure/Package/print/@body/@statement.0/@parameters.0/@target/@parameters.0/@containedType.0"
+                        value="Parameter: "/>
+                    <target xsi:type="kermeta_language_behavior:CallVariable" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/language/structure/String/@containedType.0"
+                        name="indent"/>
+                  </target>
+                </parameters>
+                <target xsi:type="kermeta_language_behavior:CallVariable" staticType="#//@packages.0/language/structure/Package/print/@body/@statement.0/@target/@containedType.0"
+                    name="stdio"/>
+              </statement>
+              <statement xsi:type="kermeta_language_behavior:Conditional" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/io/StdIO/writeln/@containedType.0">
+                <thenBody xsi:type="kermeta_language_behavior:Block" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/io/StdIO/writeln/@containedType.0">
+                  <statement xsi:type="kermeta_language_behavior:VariableDecl" staticType="#//@packages.0/language/structure/Parameter/print/@body/@statement.1/@thenBody/@statement.0/@containedType.0"
+                      identifier="cl">
+                    <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="#//@packages.0/language/structure/Class"/>
+                    <type name="Class" type="#//@packages.0/language/structure/Parameter/print/@body/@statement.1/@thenBody/@statement.0/@containedType.0"
+                        isOrdered="true" upper="1"/>
+                  </statement>
+                  <statement xsi:type="kermeta_language_behavior:Assignment" staticType="#//@packages.0/language/structure/Parameter/print/@body/@statement.1/@thenBody/@statement.0/@containedType.0"
+                      isCast="true">
+                    <target xsi:type="kermeta_language_behavior:CallVariable" staticType="#//@packages.0/language/structure/Parameter/print/@body/@statement.1/@thenBody/@statement.0/@containedType.0"
+                        name="cl"/>
+                    <value xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/language/structure/TypedElement/type/@containedType.0"
+                        name="type" staticProperty="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/language/structure/TypedElement/type">
+                      <target xsi:type="kermeta_language_behavior:SelfExpression"
+                          staticType="#//@packages.0/language/structure/Parameter/print/@body/@statement.0/@parameters.0/@parameters.0/@target/@containedType.0"/>
+                    </value>
+                  </statement>
+                  <statement xsi:type="kermeta_language_behavior:Conditional" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/io/StdIO/writeln/@containedType.0">
+                    <thenBody xsi:type="kermeta_language_behavior:Block" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/io/StdIO/writeln/@containedType.0">
+                      <statement xsi:type="kermeta_language_behavior:CallFeature"
+                          staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/io/StdIO/writeln/@containedType.0"
+                          name="writeln" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/io/StdIO/writeln">
+                        <containedType xsi:type="kermeta_language_structure:FunctionType"
+                            left="#//@packages.0/language/structure/Parameter/print/@body/@statement.1/@thenBody/@statement.2/@thenBody/@statement.0/@containedType.0/@containedType.0"
+                            right="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/io/StdIO/writeln/@containedType.0">
+                          <containedType xsi:type="kermeta_language_structure:ProductType"
+                              type="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/io/StdIO/writeln/@ownedParameter.0/@containedType.0"/>
+                        </containedType>
+                        <parameters xsi:type="kermeta_language_behavior:CallFeature"
+                            staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/String/plus/@containedType.0"
+                            name="plus" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/String/plus">
+                          <containedType xsi:type="kermeta_language_structure:FunctionType"
+                              left="#//@packages.0/language/structure/Parameter/print/@body/@statement.1/@thenBody/@statement.2/@thenBody/@statement.0/@parameters.0/@containedType.0/@containedType.0"
+                              right="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/String/plus/@containedType.0">
+                            <containedType xsi:type="kermeta_language_structure:ProductType"
+                                type="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/String/plus/@ownedParameter.0/@containedType.0"/>
+                          </containedType>
+                          <parameters xsi:type="kermeta_language_behavior:CallFeature"
+                              staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/language/structure/String/@containedType.0"
+                              name="name" staticProperty="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/language/structure/Class/name">
+                            <target xsi:type="kermeta_language_behavior:CallVariable"
+                                staticType="#//@packages.0/language/structure/Parameter/print/@body/@statement.1/@thenBody/@statement.0/@containedType.0"
+                                name="cl"/>
+                          </parameters>
+                          <target xsi:type="kermeta_language_behavior:CallFeature"
+                              staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/String/plus/@containedType.0"
+                              name="plus" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/String/plus">
+                            <containedType xsi:type="kermeta_language_structure:FunctionType"
+                                left="#//@packages.0/language/structure/Parameter/print/@body/@statement.1/@thenBody/@statement.2/@thenBody/@statement.0/@parameters.0/@target/@containedType.0/@containedType.0"
+                                right="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/String/plus/@containedType.0">
+                              <containedType xsi:type="kermeta_language_structure:ProductType"
+                                  type="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/String/plus/@ownedParameter.0/@containedType.0"/>
+                            </containedType>
+                            <parameters xsi:type="kermeta_language_behavior:StringLiteral"
+                                staticType="#//@packages.0/language/structure/Package/print/@body/@statement.0/@parameters.0/@target/@parameters.0/@containedType.0"
+                                value="   - property type : "/>
+                            <target xsi:type="kermeta_language_behavior:CallVariable"
+                                staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/language/structure/String/@containedType.0"
+                                name="indent"/>
+                          </target>
+                        </parameters>
+                        <target xsi:type="kermeta_language_behavior:CallVariable"
+                            staticType="#//@packages.0/language/structure/Package/print/@body/@statement.0/@target/@containedType.0"
+                            name="stdio"/>
+                      </statement>
+                    </thenBody>
+                    <condition xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/language/structure/Boolean/@containedType.0"
+                        name="isNotEqual" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/language/structure/Object/isNotEqual">
+                      <containedType xsi:type="kermeta_language_structure:FunctionType"
+                          left="#//@packages.0/language/structure/Parameter/print/@body/@statement.1/@thenBody/@statement.2/@condition/@containedType.0/@containedType.0"
+                          right="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/language/structure/Boolean/@containedType.0">
+                        <containedType xsi:type="kermeta_language_structure:ProductType"
+                            type="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/language/structure/Object/isNotEqual/@ownedParameter.0/@containedType.0"/>
+                      </containedType>
+                      <parameters xsi:type="kermeta_language_behavior:VoidLiteral"
+                          staticType="#//@packages.0/language/structure/Object/print/@body/@containedType.0"/>
+                      <target xsi:type="kermeta_language_behavior:CallVariable" staticType="#//@packages.0/language/structure/Parameter/print/@body/@statement.1/@thenBody/@statement.0/@containedType.0"
+                          name="cl"/>
+                    </condition>
+                  </statement>
+                </thenBody>
+                <condition xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/language/structure/Boolean/@containedType.0"
+                    name="isNotEqual" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/language/structure/Object/isNotEqual">
+                  <containedType xsi:type="kermeta_language_structure:FunctionType"
+                      left="#//@packages.0/language/structure/Parameter/print/@body/@statement.1/@condition/@containedType.0/@containedType.0"
+                      right="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/language/structure/Boolean/@containedType.0">
+                    <containedType xsi:type="kermeta_language_structure:ProductType"
+                        type="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/language/structure/Object/isNotEqual/@ownedParameter.0/@containedType.0"/>
+                  </containedType>
+                  <parameters xsi:type="kermeta_language_behavior:VoidLiteral" staticType="#//@packages.0/language/structure/Object/print/@body/@containedType.0"/>
+                  <target xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/language/structure/TypedElement/type/@containedType.0"
+                      name="type" staticProperty="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/language/structure/TypedElement/type">
+                    <target xsi:type="kermeta_language_behavior:SelfExpression" staticType="#//@packages.0/language/structure/Parameter/print/@body/@statement.0/@parameters.0/@parameters.0/@target/@containedType.0"/>
+                  </target>
+                </condition>
+              </statement>
+            </body>
+          </ownedOperation>
+        </ownedTypeDefinition>
+      </nestedPackage>
+    </nestedPackage>
+  </packages>
+  <requires uri="kermeta"/>
+  <usings qualifiedName="kermeta::language::structure"/>
+  <usings qualifiedName="kermeta::standard"/>
+</kermeta_language_structure:ModelingUnit>

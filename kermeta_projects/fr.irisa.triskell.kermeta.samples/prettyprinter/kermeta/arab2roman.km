@@ -1,0 +1,1843 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kermeta_language_structure:ModelingUnit xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:kermeta_language_behavior="http://www.kermeta.org/kermeta/1_2_0//kermeta/language/behavior"
+    xmlns:kermeta_language_structure="http://www.kermeta.org/kermeta/1_2_0//kermeta/language/structure" tag="#//@ownedTags.0 #//@ownedTags.1"
+    referencedModelingUnits="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#/">
+  <ownedTags name="mainClass" value="root_package::Main" object="#/"/>
+  <ownedTags name="mainOperation" value="main" object="#/"/>
+  <packages name="root_package">
+    <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="ArabicNumber"
+        superType="#//@packages.0/ArabicNumber/@containedType.0">
+      <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/language/structure/Object"/>
+      <ownedAttribute name="content" type="#//@packages.0/ArabicNumber/content/@containedType.0"
+          isOrdered="true" upper="-1">
+        <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="#//@packages.0/Digit"/>
+      </ownedAttribute>
+      <ownedOperation name="toString" type="#//@packages.0/ArabicNumber/toString/@containedType.0"
+          isOrdered="true" upper="1" superOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/language/structure/Object/toString">
+        <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/String"/>
+        <body xsi:type="kermeta_language_behavior:Block" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Collection/each/@containedType.0">
+          <statement xsi:type="kermeta_language_behavior:Assignment" staticType="#//@packages.0/ArabicNumber/toString/@body/@statement.0/@value/@containedType.0">
+            <target xsi:type="kermeta_language_behavior:CallResult" staticType="#//@packages.0/ArabicNumber/toString/@containedType.0"
+                name="result"/>
+            <value xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/ArabicNumber/toString/@body/@statement.0/@value/@containedType.0"
+                name="new" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/language/structure/Class/new">
+              <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/String"/>
+              <target xsi:type="kermeta_language_behavior:TypeLiteral" staticType="#//@packages.0/ArabicNumber/toString/@body/@statement.0/@value/@target/@containedType.0">
+                <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/language/structure/Class"/>
+                <typeref name="String" type="#//@packages.0/ArabicNumber/toString/@body/@statement.0/@value/@containedType.0"
+                    upper="1"/>
+              </target>
+            </value>
+          </statement>
+          <statement xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Collection/each/@containedType.0"
+              name="each" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Collection/each">
+            <containedType xsi:type="kermeta_language_structure:FunctionType" left="#//@packages.0/ArabicNumber/toString/@body/@statement.1/@containedType.0/@containedType.0"
+                right="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Collection/each/@containedType.0">
+              <containedType xsi:type="kermeta_language_structure:ProductType" type="#//@packages.0/ArabicNumber/toString/@body/@statement.1/@containedType.0/@containedType.0/@containedType.0">
+                <containedType xsi:type="kermeta_language_structure:FunctionType"
+                    left="#//@packages.0/ArabicNumber/content/@containedType.0" right="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Object"/>
+              </containedType>
+            </containedType>
+            <parameters xsi:type="kermeta_language_behavior:LambdaExpression" staticType="#//@packages.0/ArabicNumber/toString/@body/@statement.1/@parameters.0/@containedType.0">
+              <containedType xsi:type="kermeta_language_structure:FunctionType" left="#//@packages.0/ArabicNumber/toString/@body/@statement.1/@parameters.0/@containedType.0/@containedType.0"
+                  right="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/String/plus/@containedType.0">
+                <containedType xsi:type="kermeta_language_structure:ProductType" type="#//@packages.0/ArabicNumber/content/@containedType.0"/>
+              </containedType>
+              <parameters name="digit"/>
+              <body xsi:type="kermeta_language_behavior:Block" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/String/plus/@containedType.0">
+                <statement xsi:type="kermeta_language_behavior:Assignment" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/String/plus/@containedType.0">
+                  <target xsi:type="kermeta_language_behavior:CallResult" staticType="#//@packages.0/ArabicNumber/toString/@containedType.0"
+                      name="result"/>
+                  <value xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/String/plus/@containedType.0"
+                      name="plus" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/String/plus">
+                    <containedType xsi:type="kermeta_language_structure:FunctionType"
+                        left="#//@packages.0/ArabicNumber/toString/@body/@statement.1/@parameters.0/@body/@statement.0/@value/@containedType.0/@containedType.0"
+                        right="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/String/plus/@containedType.0">
+                      <containedType xsi:type="kermeta_language_structure:ProductType"
+                          type="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/String/plus/@ownedParameter.0/@containedType.0"/>
+                    </containedType>
+                    <parameters xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Integer/toString/@containedType.0"
+                        name="toString" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Integer/toString">
+                      <target xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/Digit/value/@containedType.0"
+                          name="value" staticProperty="#//@packages.0/Digit/value">
+                        <target xsi:type="kermeta_language_behavior:CallVariable"
+                            staticType="#//@packages.0/ArabicNumber/content/@containedType.0"
+                            name="digit"/>
+                      </target>
+                    </parameters>
+                    <target xsi:type="kermeta_language_behavior:CallResult" staticType="#//@packages.0/ArabicNumber/toString/@containedType.0"
+                        name="result"/>
+                  </value>
+                </statement>
+              </body>
+            </parameters>
+            <target xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/ArabicNumber/toString/@body/@statement.1/@target/@containedType.0"
+                name="content" staticProperty="#//@packages.0/ArabicNumber/content">
+              <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/OrderedSet">
+                <typeParamBinding variable="kermeta_language_structure:ObjectTypeVariable platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/OrderedSet/G"
+                    type="#//@packages.0/ArabicNumber/content/@containedType.0"/>
+              </containedType>
+            </target>
+          </statement>
+        </body>
+      </ownedOperation>
+      <ownedOperation name="getValue" type="#//@packages.0/ArabicNumber/getValue/@containedType.0"
+          isOrdered="true" upper="1">
+        <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Integer"/>
+        <body xsi:type="kermeta_language_behavior:Block" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Collection/each/@containedType.0">
+          <statement xsi:type="kermeta_language_behavior:Assignment" staticType="#//@packages.0/ArabicNumber/getValue/@body/@statement.0/@value/@containedType.0">
+            <target xsi:type="kermeta_language_behavior:CallResult" staticType="#//@packages.0/ArabicNumber/getValue/@containedType.0"
+                name="result"/>
+            <value xsi:type="kermeta_language_behavior:IntegerLiteral" staticType="#//@packages.0/ArabicNumber/getValue/@body/@statement.0/@value/@containedType.0">
+              <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Integer"/>
+            </value>
+          </statement>
+          <statement xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Collection/each/@containedType.0"
+              name="each" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Collection/each">
+            <containedType xsi:type="kermeta_language_structure:FunctionType" left="#//@packages.0/ArabicNumber/getValue/@body/@statement.1/@containedType.0/@containedType.0"
+                right="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Collection/each/@containedType.0">
+              <containedType xsi:type="kermeta_language_structure:ProductType" type="#//@packages.0/ArabicNumber/getValue/@body/@statement.1/@containedType.0/@containedType.0/@containedType.0">
+                <containedType xsi:type="kermeta_language_structure:FunctionType"
+                    left="#//@packages.0/ArabicNumber/content/@containedType.0" right="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Object"/>
+              </containedType>
+            </containedType>
+            <parameters xsi:type="kermeta_language_behavior:LambdaExpression" staticType="#//@packages.0/ArabicNumber/getValue/@body/@statement.1/@parameters.0/@containedType.0">
+              <containedType xsi:type="kermeta_language_structure:FunctionType" left="#//@packages.0/ArabicNumber/getValue/@body/@statement.1/@parameters.0/@containedType.0/@containedType.0"
+                  right="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Integer/plus/@containedType.0">
+                <containedType xsi:type="kermeta_language_structure:ProductType" type="#//@packages.0/ArabicNumber/content/@containedType.0"/>
+              </containedType>
+              <parameters name="n"/>
+              <body xsi:type="kermeta_language_behavior:Block" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Integer/plus/@containedType.0">
+                <statement xsi:type="kermeta_language_behavior:Assignment" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Integer/plus/@containedType.0">
+                  <target xsi:type="kermeta_language_behavior:CallResult" staticType="#//@packages.0/ArabicNumber/getValue/@containedType.0"
+                      name="result"/>
+                  <value xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Integer/plus/@containedType.0"
+                      name="plus" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Integer/plus">
+                    <containedType xsi:type="kermeta_language_structure:FunctionType"
+                        left="#//@packages.0/ArabicNumber/getValue/@body/@statement.1/@parameters.0/@body/@statement.0/@value/@containedType.0/@containedType.0"
+                        right="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Integer/plus/@containedType.0">
+                      <containedType xsi:type="kermeta_language_structure:ProductType"
+                          type="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Integer/plus/@ownedParameter.0/@containedType.0"/>
+                    </containedType>
+                    <parameters xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/Digit/value/@containedType.0"
+                        name="value" staticProperty="#//@packages.0/Digit/value">
+                      <target xsi:type="kermeta_language_behavior:CallVariable" staticType="#//@packages.0/ArabicNumber/content/@containedType.0"
+                          name="n"/>
+                    </parameters>
+                    <target xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Integer/mult/@containedType.0"
+                        name="mult" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Integer/mult">
+                      <containedType xsi:type="kermeta_language_structure:FunctionType"
+                          left="#//@packages.0/ArabicNumber/getValue/@body/@statement.1/@parameters.0/@body/@statement.0/@value/@target/@containedType.0/@containedType.0"
+                          right="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Integer/mult/@containedType.0">
+                        <containedType xsi:type="kermeta_language_structure:ProductType"
+                            type="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Integer/mult/@ownedParameter.0/@containedType.0"/>
+                      </containedType>
+                      <parameters xsi:type="kermeta_language_behavior:IntegerLiteral"
+                          staticType="#//@packages.0/ArabicNumber/getValue/@body/@statement.0/@value/@containedType.0"
+                          value="10"/>
+                      <target xsi:type="kermeta_language_behavior:CallResult" staticType="#//@packages.0/ArabicNumber/getValue/@containedType.0"
+                          name="result"/>
+                    </target>
+                  </value>
+                </statement>
+              </body>
+            </parameters>
+            <target xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/ArabicNumber/getValue/@body/@statement.1/@target/@containedType.0"
+                name="content" staticProperty="#//@packages.0/ArabicNumber/content">
+              <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/OrderedSet">
+                <typeParamBinding variable="kermeta_language_structure:ObjectTypeVariable platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/OrderedSet/G"
+                    type="#//@packages.0/ArabicNumber/content/@containedType.0"/>
+              </containedType>
+            </target>
+          </statement>
+        </body>
+      </ownedOperation>
+      <ownedOperation name="setValue" type="#//@packages.0/ArabicNumber/setValue/@containedType.0"
+          upper="1">
+        <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Void"/>
+        <ownedParameter name="newValue" type="#//@packages.0/ArabicNumber/setValue/@ownedParameter.0/@containedType.0"
+            isOrdered="true" upper="1">
+          <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Integer"/>
+        </ownedParameter>
+        <body xsi:type="kermeta_language_behavior:Block" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Integer/div/@containedType.0">
+          <statement xsi:type="kermeta_language_behavior:VariableDecl" staticType="#//@packages.0/ArabicNumber/setValue/@body/@statement.0/@containedType.0"
+              identifier="rest">
+            <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Integer"/>
+            <initialization xsi:type="kermeta_language_behavior:CallVariable" staticType="#//@packages.0/ArabicNumber/setValue/@ownedParameter.0/@containedType.0"
+                name="newValue"/>
+            <type name="Integer" type="#//@packages.0/ArabicNumber/setValue/@body/@statement.0/@containedType.0"
+                isOrdered="true" upper="1"/>
+          </statement>
+          <statement xsi:type="kermeta_language_behavior:VariableDecl" staticType="#//@packages.0/ArabicNumber/setValue/@body/@statement.1/@containedType.0"
+              identifier="digit">
+            <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="#//@packages.0/Digit"/>
+            <type name="Digit" type="#//@packages.0/ArabicNumber/setValue/@body/@statement.1/@containedType.0"
+                isOrdered="true" upper="1"/>
+          </statement>
+          <statement xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Collection/clear/@containedType.0"
+              name="clear" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Collection/clear">
+            <target xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/ArabicNumber/setValue/@body/@statement.2/@target/@containedType.0"
+                name="content" staticProperty="#//@packages.0/ArabicNumber/content">
+              <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/OrderedSet">
+                <typeParamBinding variable="kermeta_language_structure:ObjectTypeVariable platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/OrderedSet/G"
+                    type="#//@packages.0/ArabicNumber/content/@containedType.0"/>
+              </containedType>
+            </target>
+          </statement>
+          <statement xsi:type="kermeta_language_behavior:Loop" staticType="#//@packages.0/ArabicNumber/setValue/@body/@statement.3/@containedType.0">
+            <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Void"/>
+            <initialization xsi:type="kermeta_language_behavior:VariableDecl" staticType="#//@packages.0/ArabicNumber/setValue/@body/@statement.3/@initialization/@containedType.0"
+                identifier="i">
+              <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Integer"/>
+              <initialization xsi:type="kermeta_language_behavior:IntegerLiteral"
+                  staticType="#//@packages.0/ArabicNumber/getValue/@body/@statement.0/@value/@containedType.0"
+                  value="1000"/>
+              <type name="Integer" type="#//@packages.0/ArabicNumber/setValue/@body/@statement.3/@initialization/@containedType.0"
+                  isOrdered="true" upper="1"/>
+            </initialization>
+            <body xsi:type="kermeta_language_behavior:Block" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Integer/div/@containedType.0">
+              <statement xsi:type="kermeta_language_behavior:Assignment" staticType="#//@packages.0/ArabicNumber/setValue/@body/@statement.3/@body/@statement.0/@value/@containedType.0">
+                <target xsi:type="kermeta_language_behavior:CallVariable" staticType="#//@packages.0/ArabicNumber/setValue/@body/@statement.1/@containedType.0"
+                    name="digit"/>
+                <value xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/ArabicNumber/setValue/@body/@statement.3/@body/@statement.0/@value/@containedType.0"
+                    name="new" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/language/structure/Class/new">
+                  <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="#//@packages.0/Digit"/>
+                  <target xsi:type="kermeta_language_behavior:TypeLiteral" staticType="#//@packages.0/ArabicNumber/toString/@body/@statement.0/@value/@target/@containedType.0">
+                    <typeref name="Digit" type="#//@packages.0/ArabicNumber/setValue/@body/@statement.3/@body/@statement.0/@value/@containedType.0"
+                        upper="1"/>
+                  </target>
+                </value>
+              </statement>
+              <statement xsi:type="kermeta_language_behavior:Assignment" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Integer/div/@containedType.0">
+                <target xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/Digit/value/@containedType.0"
+                    name="value" staticProperty="#//@packages.0/Digit/value">
+                  <target xsi:type="kermeta_language_behavior:CallVariable" staticType="#//@packages.0/ArabicNumber/setValue/@body/@statement.1/@containedType.0"
+                      name="digit"/>
+                </target>
+                <value xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Integer/div/@containedType.0"
+                    name="div" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Integer/div">
+                  <containedType xsi:type="kermeta_language_structure:FunctionType"
+                      left="#//@packages.0/ArabicNumber/setValue/@body/@statement.3/@body/@statement.1/@value/@containedType.0/@containedType.0"
+                      right="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Integer/div/@containedType.0">
+                    <containedType xsi:type="kermeta_language_structure:ProductType"
+                        type="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Integer/div/@ownedParameter.0/@containedType.0"/>
+                  </containedType>
+                  <parameters xsi:type="kermeta_language_behavior:CallVariable" staticType="#//@packages.0/ArabicNumber/setValue/@body/@statement.3/@initialization/@containedType.0"
+                      name="i"/>
+                  <target xsi:type="kermeta_language_behavior:CallVariable" staticType="#//@packages.0/ArabicNumber/setValue/@body/@statement.0/@containedType.0"
+                      name="rest"/>
+                </value>
+              </statement>
+              <statement xsi:type="kermeta_language_behavior:Assignment" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Integer/minus/@containedType.0">
+                <target xsi:type="kermeta_language_behavior:CallVariable" staticType="#//@packages.0/ArabicNumber/setValue/@body/@statement.0/@containedType.0"
+                    name="rest"/>
+                <value xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Integer/minus/@containedType.0"
+                    name="minus" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Integer/minus">
+                  <containedType xsi:type="kermeta_language_structure:FunctionType"
+                      left="#//@packages.0/ArabicNumber/setValue/@body/@statement.3/@body/@statement.2/@value/@containedType.0/@containedType.0"
+                      right="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Integer/minus/@containedType.0">
+                    <containedType xsi:type="kermeta_language_structure:ProductType"
+                        type="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Integer/minus/@ownedParameter.0/@containedType.0"/>
+                  </containedType>
+                  <parameters xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Integer/mult/@containedType.0"
+                      name="mult" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Integer/mult">
+                    <containedType xsi:type="kermeta_language_structure:FunctionType"
+                        left="#//@packages.0/ArabicNumber/setValue/@body/@statement.3/@body/@statement.2/@value/@parameters.0/@containedType.0/@containedType.0"
+                        right="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Integer/mult/@containedType.0">
+                      <containedType xsi:type="kermeta_language_structure:ProductType"
+                          type="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Integer/mult/@ownedParameter.0/@containedType.0"/>
+                    </containedType>
+                    <parameters xsi:type="kermeta_language_behavior:CallVariable"
+                        staticType="#//@packages.0/ArabicNumber/setValue/@body/@statement.3/@initialization/@containedType.0"
+                        name="i"/>
+                    <target xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/Digit/value/@containedType.0"
+                        name="value" staticProperty="#//@packages.0/Digit/value">
+                      <target xsi:type="kermeta_language_behavior:CallVariable" staticType="#//@packages.0/ArabicNumber/setValue/@body/@statement.1/@containedType.0"
+                          name="digit"/>
+                    </target>
+                  </parameters>
+                  <target xsi:type="kermeta_language_behavior:CallVariable" staticType="#//@packages.0/ArabicNumber/setValue/@body/@statement.0/@containedType.0"
+                      name="rest"/>
+                </value>
+              </statement>
+              <statement xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/OrderedSet/add/@containedType.0"
+                  name="add" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/OrderedSet/add">
+                <containedType xsi:type="kermeta_language_structure:FunctionType"
+                    left="#//@packages.0/ArabicNumber/setValue/@body/@statement.3/@body/@statement.3/@containedType.0/@containedType.0"
+                    right="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/OrderedSet/add/@containedType.0">
+                  <containedType xsi:type="kermeta_language_structure:ProductType"
+                      type="#//@packages.0/ArabicNumber/content/@containedType.0"/>
+                </containedType>
+                <parameters xsi:type="kermeta_language_behavior:CallVariable" staticType="#//@packages.0/ArabicNumber/setValue/@body/@statement.1/@containedType.0"
+                    name="digit"/>
+                <target xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/ArabicNumber/setValue/@body/@statement.3/@body/@statement.3/@target/@containedType.0"
+                    name="content" staticProperty="#//@packages.0/ArabicNumber/content">
+                  <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/OrderedSet">
+                    <typeParamBinding variable="kermeta_language_structure:ObjectTypeVariable platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/OrderedSet/G"
+                        type="#//@packages.0/ArabicNumber/content/@containedType.0"/>
+                  </containedType>
+                </target>
+              </statement>
+              <statement xsi:type="kermeta_language_behavior:Assignment" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Integer/div/@containedType.0">
+                <target xsi:type="kermeta_language_behavior:CallVariable" staticType="#//@packages.0/ArabicNumber/setValue/@body/@statement.3/@initialization/@containedType.0"
+                    name="i"/>
+                <value xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Integer/div/@containedType.0"
+                    name="div" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Integer/div">
+                  <containedType xsi:type="kermeta_language_structure:FunctionType"
+                      left="#//@packages.0/ArabicNumber/setValue/@body/@statement.3/@body/@statement.4/@value/@containedType.0/@containedType.0"
+                      right="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Integer/div/@containedType.0">
+                    <containedType xsi:type="kermeta_language_structure:ProductType"
+                        type="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Integer/div/@ownedParameter.0/@containedType.0"/>
+                  </containedType>
+                  <parameters xsi:type="kermeta_language_behavior:IntegerLiteral"
+                      staticType="#//@packages.0/ArabicNumber/getValue/@body/@statement.0/@value/@containedType.0"
+                      value="10"/>
+                  <target xsi:type="kermeta_language_behavior:CallVariable" staticType="#//@packages.0/ArabicNumber/setValue/@body/@statement.3/@initialization/@containedType.0"
+                      name="i"/>
+                </value>
+              </statement>
+            </body>
+            <stopCondition xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Integer/equals/@containedType.0"
+                name="equals" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Integer/equals">
+              <containedType xsi:type="kermeta_language_structure:FunctionType" left="#//@packages.0/ArabicNumber/setValue/@body/@statement.3/@stopCondition/@containedType.0/@containedType.0"
+                  right="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Integer/equals/@containedType.0">
+                <containedType xsi:type="kermeta_language_structure:ProductType" type="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Object/@containedType.0"/>
+              </containedType>
+              <parameters xsi:type="kermeta_language_behavior:IntegerLiteral" staticType="#//@packages.0/ArabicNumber/getValue/@body/@statement.0/@value/@containedType.0"/>
+              <target xsi:type="kermeta_language_behavior:CallVariable" staticType="#//@packages.0/ArabicNumber/setValue/@body/@statement.3/@initialization/@containedType.0"
+                  name="i"/>
+            </stopCondition>
+          </statement>
+          <statement xsi:type="kermeta_language_behavior:VariableDecl" staticType="#//@packages.0/ArabicNumber/setValue/@body/@statement.4/@containedType.0"
+              identifier="i_digit">
+            <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Integer"/>
+            <type name="Integer" type="#//@packages.0/ArabicNumber/setValue/@body/@statement.4/@containedType.0"
+                isOrdered="true" upper="1"/>
+          </statement>
+          <statement xsi:type="kermeta_language_behavior:Assignment" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Integer/div/@containedType.0">
+            <target xsi:type="kermeta_language_behavior:CallVariable" staticType="#//@packages.0/ArabicNumber/setValue/@body/@statement.4/@containedType.0"
+                name="i_digit"/>
+            <value xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Integer/div/@containedType.0"
+                name="div" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Integer/div">
+              <containedType xsi:type="kermeta_language_structure:FunctionType" left="#//@packages.0/ArabicNumber/setValue/@body/@statement.5/@value/@containedType.0/@containedType.0"
+                  right="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Integer/div/@containedType.0">
+                <containedType xsi:type="kermeta_language_structure:ProductType" type="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Integer/div/@ownedParameter.0/@containedType.0"/>
+              </containedType>
+              <parameters xsi:type="kermeta_language_behavior:IntegerLiteral" staticType="#//@packages.0/ArabicNumber/getValue/@body/@statement.0/@value/@containedType.0"
+                  value="1000"/>
+              <target xsi:type="kermeta_language_behavior:CallVariable" staticType="#//@packages.0/ArabicNumber/setValue/@body/@statement.0/@containedType.0"
+                  name="rest"/>
+            </value>
+          </statement>
+        </body>
+      </ownedOperation>
+    </ownedTypeDefinition>
+    <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="Digit"
+        superType="#//@packages.0/Digit/@containedType.0">
+      <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/language/structure/Object"/>
+      <ownedAttribute name="value" type="#//@packages.0/Digit/value/@containedType.0"
+          isOrdered="true" upper="1" isComposite="true">
+        <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Integer"/>
+      </ownedAttribute>
+    </ownedTypeDefinition>
+    <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="RomanNumber"
+        superType="#//@packages.0/RomanNumber/@containedType.0">
+      <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/language/structure/Object"/>
+      <ownedAttribute name="content" type="#//@packages.0/RomanNumber/content/@containedType.0"
+          isOrdered="true" isUnique="false" upper="-1">
+        <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="#//@packages.0/Letter"/>
+      </ownedAttribute>
+      <ownedOperation name="toString" type="#//@packages.0/RomanNumber/toString/@containedType.0"
+          isOrdered="true" upper="1" superOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/language/structure/Object/toString">
+        <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/String"/>
+        <body xsi:type="kermeta_language_behavior:Block" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Collection/each/@containedType.0">
+          <statement xsi:type="kermeta_language_behavior:Assignment" staticType="#//@packages.0/RomanNumber/toString/@body/@statement.0/@value/@containedType.0">
+            <target xsi:type="kermeta_language_behavior:CallResult" staticType="#//@packages.0/RomanNumber/toString/@containedType.0"
+                name="result"/>
+            <value xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/RomanNumber/toString/@body/@statement.0/@value/@containedType.0"
+                name="new" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/language/structure/Class/new">
+              <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/String"/>
+              <target xsi:type="kermeta_language_behavior:TypeLiteral" staticType="#//@packages.0/ArabicNumber/toString/@body/@statement.0/@value/@target/@containedType.0">
+                <typeref name="String" type="#//@packages.0/RomanNumber/toString/@body/@statement.0/@value/@containedType.0"
+                    upper="1"/>
+              </target>
+            </value>
+          </statement>
+          <statement xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Collection/each/@containedType.0"
+              name="each" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Collection/each">
+            <containedType xsi:type="kermeta_language_structure:FunctionType" left="#//@packages.0/RomanNumber/toString/@body/@statement.1/@containedType.0/@containedType.0"
+                right="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Collection/each/@containedType.0">
+              <containedType xsi:type="kermeta_language_structure:ProductType" type="#//@packages.0/RomanNumber/toString/@body/@statement.1/@containedType.0/@containedType.0/@containedType.0">
+                <containedType xsi:type="kermeta_language_structure:FunctionType"
+                    left="#//@packages.0/RomanNumber/content/@containedType.0" right="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Object"/>
+              </containedType>
+            </containedType>
+            <parameters xsi:type="kermeta_language_behavior:LambdaExpression" staticType="#//@packages.0/RomanNumber/toString/@body/@statement.1/@parameters.0/@containedType.0">
+              <containedType xsi:type="kermeta_language_structure:FunctionType" left="#//@packages.0/RomanNumber/toString/@body/@statement.1/@parameters.0/@containedType.0/@containedType.0"
+                  right="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/String/plus/@containedType.0">
+                <containedType xsi:type="kermeta_language_structure:ProductType" type="#//@packages.0/RomanNumber/content/@containedType.0"/>
+              </containedType>
+              <parameters name="letter"/>
+              <body xsi:type="kermeta_language_behavior:Block" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/String/plus/@containedType.0">
+                <statement xsi:type="kermeta_language_behavior:Assignment" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/String/plus/@containedType.0">
+                  <target xsi:type="kermeta_language_behavior:CallResult" staticType="#//@packages.0/RomanNumber/toString/@containedType.0"
+                      name="result"/>
+                  <value xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/String/plus/@containedType.0"
+                      name="plus" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/String/plus">
+                    <containedType xsi:type="kermeta_language_structure:FunctionType"
+                        left="#//@packages.0/RomanNumber/toString/@body/@statement.1/@parameters.0/@body/@statement.0/@value/@containedType.0/@containedType.0"
+                        right="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/String/plus/@containedType.0">
+                      <containedType xsi:type="kermeta_language_structure:ProductType"
+                          type="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/String/plus/@ownedParameter.0/@containedType.0"/>
+                    </containedType>
+                    <parameters xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/Letter/value/@containedType.0"
+                        name="value" staticProperty="#//@packages.0/Letter/value">
+                      <target xsi:type="kermeta_language_behavior:CallVariable" staticType="#//@packages.0/RomanNumber/content/@containedType.0"
+                          name="letter"/>
+                    </parameters>
+                    <target xsi:type="kermeta_language_behavior:CallResult" staticType="#//@packages.0/RomanNumber/toString/@containedType.0"
+                        name="result"/>
+                  </value>
+                </statement>
+              </body>
+            </parameters>
+            <target xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/RomanNumber/toString/@body/@statement.1/@target/@containedType.0"
+                name="content" staticProperty="#//@packages.0/RomanNumber/content">
+              <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Sequence">
+                <typeParamBinding variable="kermeta_language_structure:ObjectTypeVariable platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Sequence/G"
+                    type="#//@packages.0/RomanNumber/content/@containedType.0"/>
+              </containedType>
+            </target>
+          </statement>
+        </body>
+      </ownedOperation>
+      <ownedOperation name="getValue" type="#//@packages.0/RomanNumber/getValue/@containedType.0"
+          isOrdered="true" upper="1">
+        <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Integer"/>
+        <body xsi:type="kermeta_language_behavior:Block" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Collection/each/@containedType.0">
+          <statement xsi:type="kermeta_language_behavior:VariableDecl" staticType="#//@packages.0/RomanNumber/getValue/@body/@statement.0/@containedType.0"
+              identifier="previous">
+            <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Integer"/>
+            <initialization xsi:type="kermeta_language_behavior:IntegerLiteral" staticType="#//@packages.0/ArabicNumber/getValue/@body/@statement.0/@value/@containedType.0"/>
+            <type name="Integer" type="#//@packages.0/RomanNumber/getValue/@body/@statement.0/@containedType.0"
+                isOrdered="true" upper="1"/>
+          </statement>
+          <statement xsi:type="kermeta_language_behavior:Assignment" staticType="#//@packages.0/ArabicNumber/getValue/@body/@statement.0/@value/@containedType.0">
+            <target xsi:type="kermeta_language_behavior:CallResult" staticType="#//@packages.0/RomanNumber/getValue/@containedType.0"
+                name="result"/>
+            <value xsi:type="kermeta_language_behavior:IntegerLiteral" staticType="#//@packages.0/ArabicNumber/getValue/@body/@statement.0/@value/@containedType.0"/>
+          </statement>
+          <statement xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Collection/each/@containedType.0"
+              name="each" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Collection/each">
+            <containedType xsi:type="kermeta_language_structure:FunctionType" left="#//@packages.0/RomanNumber/getValue/@body/@statement.2/@containedType.0/@containedType.0"
+                right="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Collection/each/@containedType.0">
+              <containedType xsi:type="kermeta_language_structure:ProductType" type="#//@packages.0/RomanNumber/getValue/@body/@statement.2/@containedType.0/@containedType.0/@containedType.0">
+                <containedType xsi:type="kermeta_language_structure:FunctionType"
+                    left="#//@packages.0/RomanNumber/content/@containedType.0" right="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Object"/>
+              </containedType>
+            </containedType>
+            <parameters xsi:type="kermeta_language_behavior:LambdaExpression" staticType="#//@packages.0/RomanNumber/getValue/@body/@statement.2/@parameters.0/@containedType.0">
+              <containedType xsi:type="kermeta_language_structure:FunctionType" left="#//@packages.0/RomanNumber/getValue/@body/@statement.2/@parameters.0/@containedType.0/@containedType.0"
+                  right="#//@packages.0/Letter/getValue/@containedType.0">
+                <containedType xsi:type="kermeta_language_structure:ProductType" type="#//@packages.0/RomanNumber/content/@containedType.0"/>
+              </containedType>
+              <parameters name="letter"/>
+              <body xsi:type="kermeta_language_behavior:Block" staticType="#//@packages.0/Letter/getValue/@containedType.0">
+                <statement xsi:type="kermeta_language_behavior:Conditional" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Integer/plus/@containedType.0">
+                  <thenBody xsi:type="kermeta_language_behavior:Block" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Integer/plus/@containedType.0">
+                    <statement xsi:type="kermeta_language_behavior:Assignment" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Integer/plus/@containedType.0">
+                      <target xsi:type="kermeta_language_behavior:CallResult" staticType="#//@packages.0/RomanNumber/getValue/@containedType.0"
+                          name="result"/>
+                      <value xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Integer/plus/@containedType.0"
+                          name="plus" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Integer/plus">
+                        <containedType xsi:type="kermeta_language_structure:FunctionType"
+                            left="#//@packages.0/RomanNumber/getValue/@body/@statement.2/@parameters.0/@body/@statement.0/@thenBody/@statement.0/@value/@containedType.0/@containedType.0"
+                            right="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Integer/plus/@containedType.0">
+                          <containedType xsi:type="kermeta_language_structure:ProductType"
+                              type="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Integer/plus/@ownedParameter.0/@containedType.0"/>
+                        </containedType>
+                        <parameters xsi:type="kermeta_language_behavior:CallFeature"
+                            staticType="#//@packages.0/Letter/getValue/@containedType.0"
+                            name="getValue" staticOperation="#//@packages.0/Letter/getValue">
+                          <target xsi:type="kermeta_language_behavior:CallVariable"
+                              staticType="#//@packages.0/RomanNumber/content/@containedType.0"
+                              name="letter"/>
+                        </parameters>
+                        <target xsi:type="kermeta_language_behavior:CallResult" staticType="#//@packages.0/RomanNumber/getValue/@containedType.0"
+                            name="result"/>
+                      </value>
+                    </statement>
+                  </thenBody>
+                  <elseBody xsi:type="kermeta_language_behavior:Block" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Integer/minus/@containedType.0">
+                    <statement xsi:type="kermeta_language_behavior:Assignment" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Integer/minus/@containedType.0">
+                      <target xsi:type="kermeta_language_behavior:CallResult" staticType="#//@packages.0/RomanNumber/getValue/@containedType.0"
+                          name="result"/>
+                      <value xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Integer/minus/@containedType.0"
+                          name="minus" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Integer/minus">
+                        <containedType xsi:type="kermeta_language_structure:FunctionType"
+                            left="#//@packages.0/RomanNumber/getValue/@body/@statement.2/@parameters.0/@body/@statement.0/@elseBody/@statement.0/@value/@containedType.0/@containedType.0"
+                            right="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Integer/minus/@containedType.0">
+                          <containedType xsi:type="kermeta_language_structure:ProductType"
+                              type="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Integer/minus/@ownedParameter.0/@containedType.0"/>
+                        </containedType>
+                        <parameters xsi:type="kermeta_language_behavior:CallFeature"
+                            staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Integer/mult/@containedType.0"
+                            name="mult" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Integer/mult">
+                          <containedType xsi:type="kermeta_language_structure:FunctionType"
+                              left="#//@packages.0/RomanNumber/getValue/@body/@statement.2/@parameters.0/@body/@statement.0/@elseBody/@statement.0/@value/@parameters.0/@containedType.0/@containedType.0"
+                              right="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Integer/mult/@containedType.0">
+                            <containedType xsi:type="kermeta_language_structure:ProductType"
+                                type="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Integer/mult/@ownedParameter.0/@containedType.0"/>
+                          </containedType>
+                          <parameters xsi:type="kermeta_language_behavior:CallVariable"
+                              staticType="#//@packages.0/RomanNumber/getValue/@body/@statement.0/@containedType.0"
+                              name="previous"/>
+                          <target xsi:type="kermeta_language_behavior:IntegerLiteral"
+                              staticType="#//@packages.0/ArabicNumber/getValue/@body/@statement.0/@value/@containedType.0"
+                              value="2"/>
+                        </parameters>
+                        <target xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Integer/plus/@containedType.0"
+                            name="plus" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Integer/plus">
+                          <containedType xsi:type="kermeta_language_structure:FunctionType"
+                              left="#//@packages.0/RomanNumber/getValue/@body/@statement.2/@parameters.0/@body/@statement.0/@elseBody/@statement.0/@value/@target/@containedType.0/@containedType.0"
+                              right="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Integer/plus/@containedType.0">
+                            <containedType xsi:type="kermeta_language_structure:ProductType"
+                                type="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Integer/plus/@ownedParameter.0/@containedType.0"/>
+                          </containedType>
+                          <parameters xsi:type="kermeta_language_behavior:CallFeature"
+                              staticType="#//@packages.0/Letter/getValue/@containedType.0"
+                              name="getValue" staticOperation="#//@packages.0/Letter/getValue">
+                            <target xsi:type="kermeta_language_behavior:CallVariable"
+                                staticType="#//@packages.0/RomanNumber/content/@containedType.0"
+                                name="letter"/>
+                          </parameters>
+                          <target xsi:type="kermeta_language_behavior:CallResult"
+                              staticType="#//@packages.0/RomanNumber/getValue/@containedType.0"
+                              name="result"/>
+                        </target>
+                      </value>
+                    </statement>
+                  </elseBody>
+                  <condition xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Boolean/or/@containedType.0"
+                      name="or" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Boolean/or">
+                    <containedType xsi:type="kermeta_language_structure:FunctionType"
+                        left="#//@packages.0/RomanNumber/getValue/@body/@statement.2/@parameters.0/@body/@statement.0/@condition/@containedType.0/@containedType.0"
+                        right="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Boolean/or/@containedType.0">
+                      <containedType xsi:type="kermeta_language_structure:ProductType"
+                          type="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Boolean/or/@ownedParameter.0/@containedType.0"/>
+                    </containedType>
+                    <parameters xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Integer/isGreaterOrEqual/@containedType.0"
+                        name="isGreaterOrEqual" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Integer/isGreaterOrEqual">
+                      <containedType xsi:type="kermeta_language_structure:FunctionType"
+                          left="#//@packages.0/RomanNumber/getValue/@body/@statement.2/@parameters.0/@body/@statement.0/@condition/@parameters.0/@containedType.0/@containedType.0"
+                          right="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Integer/isGreaterOrEqual/@containedType.0">
+                        <containedType xsi:type="kermeta_language_structure:ProductType"
+                            type="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Object/@containedType.0"/>
+                      </containedType>
+                      <parameters xsi:type="kermeta_language_behavior:CallFeature"
+                          staticType="#//@packages.0/Letter/getValue/@containedType.0"
+                          name="getValue" staticOperation="#//@packages.0/Letter/getValue">
+                        <target xsi:type="kermeta_language_behavior:CallVariable"
+                            staticType="#//@packages.0/RomanNumber/content/@containedType.0"
+                            name="letter"/>
+                      </parameters>
+                      <target xsi:type="kermeta_language_behavior:CallVariable" staticType="#//@packages.0/RomanNumber/getValue/@body/@statement.0/@containedType.0"
+                          name="previous"/>
+                    </parameters>
+                    <target xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Integer/equals/@containedType.0"
+                        name="equals" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Integer/equals">
+                      <containedType xsi:type="kermeta_language_structure:FunctionType"
+                          left="#//@packages.0/RomanNumber/getValue/@body/@statement.2/@parameters.0/@body/@statement.0/@condition/@target/@containedType.0/@containedType.0"
+                          right="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Integer/equals/@containedType.0">
+                        <containedType xsi:type="kermeta_language_structure:ProductType"
+                            type="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Object/@containedType.0"/>
+                      </containedType>
+                      <parameters xsi:type="kermeta_language_behavior:IntegerLiteral"
+                          staticType="#//@packages.0/ArabicNumber/getValue/@body/@statement.0/@value/@containedType.0"/>
+                      <target xsi:type="kermeta_language_behavior:CallResult" staticType="#//@packages.0/RomanNumber/getValue/@containedType.0"
+                          name="result"/>
+                    </target>
+                  </condition>
+                </statement>
+                <statement xsi:type="kermeta_language_behavior:Assignment" staticType="#//@packages.0/Letter/getValue/@containedType.0">
+                  <target xsi:type="kermeta_language_behavior:CallVariable" staticType="#//@packages.0/RomanNumber/getValue/@body/@statement.0/@containedType.0"
+                      name="previous"/>
+                  <value xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/Letter/getValue/@containedType.0"
+                      name="getValue" staticOperation="#//@packages.0/Letter/getValue">
+                    <target xsi:type="kermeta_language_behavior:CallVariable" staticType="#//@packages.0/RomanNumber/content/@containedType.0"
+                        name="letter"/>
+                  </value>
+                </statement>
+              </body>
+            </parameters>
+            <target xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/RomanNumber/getValue/@body/@statement.2/@target/@containedType.0"
+                name="content" staticProperty="#//@packages.0/RomanNumber/content">
+              <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Sequence">
+                <typeParamBinding variable="kermeta_language_structure:ObjectTypeVariable platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Sequence/G"
+                    type="#//@packages.0/RomanNumber/content/@containedType.0"/>
+              </containedType>
+            </target>
+          </statement>
+        </body>
+      </ownedOperation>
+    </ownedTypeDefinition>
+    <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="Letter"
+        superType="#//@packages.0/Letter/@containedType.0">
+      <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/language/structure/Object"/>
+      <ownedAttribute name="value" type="#//@packages.0/Letter/value/@containedType.0"
+          isOrdered="true" upper="1" isComposite="true">
+        <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/String"/>
+      </ownedAttribute>
+      <ownedOperation name="getValue" type="#//@packages.0/Letter/getValue/@containedType.0"
+          isOrdered="true" upper="1">
+        <ownedTags name="EMF_renameAs" value="getValueEMF_renameAs"/>
+        <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Integer"/>
+        <body xsi:type="kermeta_language_behavior:Block" staticType="#//@packages.0/ArabicNumber/getValue/@body/@statement.0/@value/@containedType.0">
+          <statement xsi:type="kermeta_language_behavior:Conditional" staticType="#//@packages.0/ArabicNumber/getValue/@body/@statement.0/@value/@containedType.0">
+            <thenBody xsi:type="kermeta_language_behavior:Block" staticType="#//@packages.0/ArabicNumber/getValue/@body/@statement.0/@value/@containedType.0">
+              <statement xsi:type="kermeta_language_behavior:Assignment" staticType="#//@packages.0/ArabicNumber/getValue/@body/@statement.0/@value/@containedType.0">
+                <target xsi:type="kermeta_language_behavior:CallResult" staticType="#//@packages.0/Letter/getValue/@containedType.0"
+                    name="result"/>
+                <value xsi:type="kermeta_language_behavior:IntegerLiteral" staticType="#//@packages.0/ArabicNumber/getValue/@body/@statement.0/@value/@containedType.0"
+                    value="1"/>
+              </statement>
+            </thenBody>
+            <elseBody xsi:type="kermeta_language_behavior:Block" staticType="#//@packages.0/ArabicNumber/getValue/@body/@statement.0/@value/@containedType.0">
+              <statement xsi:type="kermeta_language_behavior:Conditional" staticType="#//@packages.0/ArabicNumber/getValue/@body/@statement.0/@value/@containedType.0">
+                <thenBody xsi:type="kermeta_language_behavior:Block" staticType="#//@packages.0/ArabicNumber/getValue/@body/@statement.0/@value/@containedType.0">
+                  <statement xsi:type="kermeta_language_behavior:Assignment" staticType="#//@packages.0/ArabicNumber/getValue/@body/@statement.0/@value/@containedType.0">
+                    <target xsi:type="kermeta_language_behavior:CallResult" staticType="#//@packages.0/Letter/getValue/@containedType.0"
+                        name="result"/>
+                    <value xsi:type="kermeta_language_behavior:IntegerLiteral" staticType="#//@packages.0/ArabicNumber/getValue/@body/@statement.0/@value/@containedType.0"
+                        value="5"/>
+                  </statement>
+                </thenBody>
+                <elseBody xsi:type="kermeta_language_behavior:Block" staticType="#//@packages.0/ArabicNumber/getValue/@body/@statement.0/@value/@containedType.0">
+                  <statement xsi:type="kermeta_language_behavior:Conditional" staticType="#//@packages.0/ArabicNumber/getValue/@body/@statement.0/@value/@containedType.0">
+                    <thenBody xsi:type="kermeta_language_behavior:Block" staticType="#//@packages.0/ArabicNumber/getValue/@body/@statement.0/@value/@containedType.0">
+                      <statement xsi:type="kermeta_language_behavior:Assignment" staticType="#//@packages.0/ArabicNumber/getValue/@body/@statement.0/@value/@containedType.0">
+                        <target xsi:type="kermeta_language_behavior:CallResult" staticType="#//@packages.0/Letter/getValue/@containedType.0"
+                            name="result"/>
+                        <value xsi:type="kermeta_language_behavior:IntegerLiteral"
+                            staticType="#//@packages.0/ArabicNumber/getValue/@body/@statement.0/@value/@containedType.0"
+                            value="10"/>
+                      </statement>
+                    </thenBody>
+                    <elseBody xsi:type="kermeta_language_behavior:Block" staticType="#//@packages.0/ArabicNumber/getValue/@body/@statement.0/@value/@containedType.0">
+                      <statement xsi:type="kermeta_language_behavior:Conditional"
+                          staticType="#//@packages.0/ArabicNumber/getValue/@body/@statement.0/@value/@containedType.0">
+                        <thenBody xsi:type="kermeta_language_behavior:Block" staticType="#//@packages.0/ArabicNumber/getValue/@body/@statement.0/@value/@containedType.0">
+                          <statement xsi:type="kermeta_language_behavior:Assignment"
+                              staticType="#//@packages.0/ArabicNumber/getValue/@body/@statement.0/@value/@containedType.0">
+                            <target xsi:type="kermeta_language_behavior:CallResult"
+                                staticType="#//@packages.0/Letter/getValue/@containedType.0"
+                                name="result"/>
+                            <value xsi:type="kermeta_language_behavior:IntegerLiteral"
+                                staticType="#//@packages.0/ArabicNumber/getValue/@body/@statement.0/@value/@containedType.0"
+                                value="50"/>
+                          </statement>
+                        </thenBody>
+                        <elseBody xsi:type="kermeta_language_behavior:Block" staticType="#//@packages.0/ArabicNumber/getValue/@body/@statement.0/@value/@containedType.0">
+                          <statement xsi:type="kermeta_language_behavior:Conditional"
+                              staticType="#//@packages.0/ArabicNumber/getValue/@body/@statement.0/@value/@containedType.0">
+                            <thenBody xsi:type="kermeta_language_behavior:Block" staticType="#//@packages.0/ArabicNumber/getValue/@body/@statement.0/@value/@containedType.0">
+                              <statement xsi:type="kermeta_language_behavior:Assignment"
+                                  staticType="#//@packages.0/ArabicNumber/getValue/@body/@statement.0/@value/@containedType.0">
+                                <target xsi:type="kermeta_language_behavior:CallResult"
+                                    staticType="#//@packages.0/Letter/getValue/@containedType.0"
+                                    name="result"/>
+                                <value xsi:type="kermeta_language_behavior:IntegerLiteral"
+                                    staticType="#//@packages.0/ArabicNumber/getValue/@body/@statement.0/@value/@containedType.0"
+                                    value="100"/>
+                              </statement>
+                            </thenBody>
+                            <elseBody xsi:type="kermeta_language_behavior:Block" staticType="#//@packages.0/ArabicNumber/getValue/@body/@statement.0/@value/@containedType.0">
+                              <statement xsi:type="kermeta_language_behavior:Conditional"
+                                  staticType="#//@packages.0/ArabicNumber/getValue/@body/@statement.0/@value/@containedType.0">
+                                <thenBody xsi:type="kermeta_language_behavior:Block"
+                                    staticType="#//@packages.0/ArabicNumber/getValue/@body/@statement.0/@value/@containedType.0">
+                                  <statement xsi:type="kermeta_language_behavior:Assignment"
+                                      staticType="#//@packages.0/ArabicNumber/getValue/@body/@statement.0/@value/@containedType.0">
+                                    <target xsi:type="kermeta_language_behavior:CallResult"
+                                        staticType="#//@packages.0/Letter/getValue/@containedType.0"
+                                        name="result"/>
+                                    <value xsi:type="kermeta_language_behavior:IntegerLiteral"
+                                        staticType="#//@packages.0/ArabicNumber/getValue/@body/@statement.0/@value/@containedType.0"
+                                        value="500"/>
+                                  </statement>
+                                </thenBody>
+                                <elseBody xsi:type="kermeta_language_behavior:Block"
+                                    staticType="#//@packages.0/ArabicNumber/getValue/@body/@statement.0/@value/@containedType.0">
+                                  <statement xsi:type="kermeta_language_behavior:Conditional"
+                                      staticType="#//@packages.0/ArabicNumber/getValue/@body/@statement.0/@value/@containedType.0">
+                                    <thenBody xsi:type="kermeta_language_behavior:Block"
+                                        staticType="#//@packages.0/ArabicNumber/getValue/@body/@statement.0/@value/@containedType.0">
+                                      <statement xsi:type="kermeta_language_behavior:Assignment"
+                                          staticType="#//@packages.0/ArabicNumber/getValue/@body/@statement.0/@value/@containedType.0">
+                                        <target xsi:type="kermeta_language_behavior:CallResult"
+                                            staticType="#//@packages.0/Letter/getValue/@containedType.0"
+                                            name="result"/>
+                                        <value xsi:type="kermeta_language_behavior:IntegerLiteral"
+                                            staticType="#//@packages.0/ArabicNumber/getValue/@body/@statement.0/@value/@containedType.0"
+                                            value="1000"/>
+                                      </statement>
+                                    </thenBody>
+                                    <condition xsi:type="kermeta_language_behavior:CallFeature"
+                                        staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/String/equals/@containedType.0"
+                                        name="equals" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/String/equals">
+                                      <containedType xsi:type="kermeta_language_structure:FunctionType"
+                                          left="#//@packages.0/Letter/getValue/@body/@statement.0/@elseBody/@statement.0/@elseBody/@statement.0/@elseBody/@statement.0/@elseBody/@statement.0/@elseBody/@statement.0/@elseBody/@statement.0/@condition/@containedType.0/@containedType.0"
+                                          right="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/String/equals/@containedType.0">
+                                        <containedType xsi:type="kermeta_language_structure:ProductType"
+                                            type="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Object/@containedType.0"/>
+                                      </containedType>
+                                      <parameters xsi:type="kermeta_language_behavior:StringLiteral"
+                                          staticType="#//@packages.0/Letter/getValue/@body/@statement.0/@condition/@parameters.0/@containedType.0"
+                                          value="M"/>
+                                      <target xsi:type="kermeta_language_behavior:CallFeature"
+                                          staticType="#//@packages.0/Letter/value/@containedType.0"
+                                          name="value" staticProperty="#//@packages.0/Letter/value"/>
+                                    </condition>
+                                  </statement>
+                                </elseBody>
+                                <condition xsi:type="kermeta_language_behavior:CallFeature"
+                                    staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/String/equals/@containedType.0"
+                                    name="equals" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/String/equals">
+                                  <containedType xsi:type="kermeta_language_structure:FunctionType"
+                                      left="#//@packages.0/Letter/getValue/@body/@statement.0/@elseBody/@statement.0/@elseBody/@statement.0/@elseBody/@statement.0/@elseBody/@statement.0/@elseBody/@statement.0/@condition/@containedType.0/@containedType.0"
+                                      right="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/String/equals/@containedType.0">
+                                    <containedType xsi:type="kermeta_language_structure:ProductType"
+                                        type="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Object/@containedType.0"/>
+                                  </containedType>
+                                  <parameters xsi:type="kermeta_language_behavior:StringLiteral"
+                                      staticType="#//@packages.0/Letter/getValue/@body/@statement.0/@condition/@parameters.0/@containedType.0"
+                                      value="D"/>
+                                  <target xsi:type="kermeta_language_behavior:CallFeature"
+                                      staticType="#//@packages.0/Letter/value/@containedType.0"
+                                      name="value" staticProperty="#//@packages.0/Letter/value"/>
+                                </condition>
+                              </statement>
+                            </elseBody>
+                            <condition xsi:type="kermeta_language_behavior:CallFeature"
+                                staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/String/equals/@containedType.0"
+                                name="equals" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/String/equals">
+                              <containedType xsi:type="kermeta_language_structure:FunctionType"
+                                  left="#//@packages.0/Letter/getValue/@body/@statement.0/@elseBody/@statement.0/@elseBody/@statement.0/@elseBody/@statement.0/@elseBody/@statement.0/@condition/@containedType.0/@containedType.0"
+                                  right="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/String/equals/@containedType.0">
+                                <containedType xsi:type="kermeta_language_structure:ProductType"
+                                    type="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Object/@containedType.0"/>
+                              </containedType>
+                              <parameters xsi:type="kermeta_language_behavior:StringLiteral"
+                                  staticType="#//@packages.0/Letter/getValue/@body/@statement.0/@condition/@parameters.0/@containedType.0"
+                                  value="C"/>
+                              <target xsi:type="kermeta_language_behavior:CallFeature"
+                                  staticType="#//@packages.0/Letter/value/@containedType.0"
+                                  name="value" staticProperty="#//@packages.0/Letter/value"/>
+                            </condition>
+                          </statement>
+                        </elseBody>
+                        <condition xsi:type="kermeta_language_behavior:CallFeature"
+                            staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/String/equals/@containedType.0"
+                            name="equals" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/String/equals">
+                          <containedType xsi:type="kermeta_language_structure:FunctionType"
+                              left="#//@packages.0/Letter/getValue/@body/@statement.0/@elseBody/@statement.0/@elseBody/@statement.0/@elseBody/@statement.0/@condition/@containedType.0/@containedType.0"
+                              right="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/String/equals/@containedType.0">
+                            <containedType xsi:type="kermeta_language_structure:ProductType"
+                                type="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Object/@containedType.0"/>
+                          </containedType>
+                          <parameters xsi:type="kermeta_language_behavior:StringLiteral"
+                              staticType="#//@packages.0/Letter/getValue/@body/@statement.0/@condition/@parameters.0/@containedType.0"
+                              value="L"/>
+                          <target xsi:type="kermeta_language_behavior:CallFeature"
+                              staticType="#//@packages.0/Letter/value/@containedType.0"
+                              name="value" staticProperty="#//@packages.0/Letter/value"/>
+                        </condition>
+                      </statement>
+                    </elseBody>
+                    <condition xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/String/equals/@containedType.0"
+                        name="equals" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/String/equals">
+                      <containedType xsi:type="kermeta_language_structure:FunctionType"
+                          left="#//@packages.0/Letter/getValue/@body/@statement.0/@elseBody/@statement.0/@elseBody/@statement.0/@condition/@containedType.0/@containedType.0"
+                          right="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/String/equals/@containedType.0">
+                        <containedType xsi:type="kermeta_language_structure:ProductType"
+                            type="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Object/@containedType.0"/>
+                      </containedType>
+                      <parameters xsi:type="kermeta_language_behavior:StringLiteral"
+                          staticType="#//@packages.0/Letter/getValue/@body/@statement.0/@condition/@parameters.0/@containedType.0"
+                          value="X"/>
+                      <target xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/Letter/value/@containedType.0"
+                          name="value" staticProperty="#//@packages.0/Letter/value"/>
+                    </condition>
+                  </statement>
+                </elseBody>
+                <condition xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/String/equals/@containedType.0"
+                    name="equals" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/String/equals">
+                  <containedType xsi:type="kermeta_language_structure:FunctionType"
+                      left="#//@packages.0/Letter/getValue/@body/@statement.0/@elseBody/@statement.0/@condition/@containedType.0/@containedType.0"
+                      right="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/String/equals/@containedType.0">
+                    <containedType xsi:type="kermeta_language_structure:ProductType"
+                        type="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Object/@containedType.0"/>
+                  </containedType>
+                  <parameters xsi:type="kermeta_language_behavior:StringLiteral" staticType="#//@packages.0/Letter/getValue/@body/@statement.0/@condition/@parameters.0/@containedType.0"
+                      value="V"/>
+                  <target xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/Letter/value/@containedType.0"
+                      name="value" staticProperty="#//@packages.0/Letter/value"/>
+                </condition>
+              </statement>
+            </elseBody>
+            <condition xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/String/equals/@containedType.0"
+                name="equals" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/String/equals">
+              <containedType xsi:type="kermeta_language_structure:FunctionType" left="#//@packages.0/Letter/getValue/@body/@statement.0/@condition/@containedType.0/@containedType.0"
+                  right="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/String/equals/@containedType.0">
+                <containedType xsi:type="kermeta_language_structure:ProductType" type="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Object/@containedType.0"/>
+              </containedType>
+              <parameters xsi:type="kermeta_language_behavior:StringLiteral" staticType="#//@packages.0/Letter/getValue/@body/@statement.0/@condition/@parameters.0/@containedType.0"
+                  value="I">
+                <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/String"/>
+              </parameters>
+              <target xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/Letter/value/@containedType.0"
+                  name="value" staticProperty="#//@packages.0/Letter/value"/>
+            </condition>
+          </statement>
+        </body>
+      </ownedOperation>
+    </ownedTypeDefinition>
+    <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="Main"
+        superType="#//@packages.0/Main/@containedType.0">
+      <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/language/structure/Object"/>
+      <ownedOperation name="roman2arab" type="#//@packages.0/Main/roman2arab/@containedType.0"
+          isOrdered="true" upper="1">
+        <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="#//@packages.0/ArabicNumber"/>
+        <ownedParameter name="r" type="#//@packages.0/Main/roman2arab/@ownedParameter.0/@containedType.0"
+            isOrdered="true" upper="1">
+          <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="#//@packages.0/RomanNumber"/>
+        </ownedParameter>
+        <body xsi:type="kermeta_language_behavior:Block" staticType="#//@packages.0/ArabicNumber/setValue/@containedType.0">
+          <statement xsi:type="kermeta_language_behavior:Assignment" staticType="#//@packages.0/Main/roman2arab/@body/@statement.0/@value/@containedType.0">
+            <target xsi:type="kermeta_language_behavior:CallResult" staticType="#//@packages.0/Main/roman2arab/@containedType.0"
+                name="result"/>
+            <value xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/Main/roman2arab/@body/@statement.0/@value/@containedType.0"
+                name="new" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/language/structure/Class/new">
+              <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="#//@packages.0/ArabicNumber"/>
+              <target xsi:type="kermeta_language_behavior:TypeLiteral" staticType="#//@packages.0/ArabicNumber/toString/@body/@statement.0/@value/@target/@containedType.0">
+                <typeref name="ArabicNumber" type="#//@packages.0/Main/roman2arab/@body/@statement.0/@value/@containedType.0"
+                    upper="1"/>
+              </target>
+            </value>
+          </statement>
+          <statement xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/ArabicNumber/setValue/@containedType.0"
+              name="setValue" staticOperation="#//@packages.0/ArabicNumber/setValue">
+            <containedType xsi:type="kermeta_language_structure:FunctionType" left="#//@packages.0/Main/roman2arab/@body/@statement.1/@containedType.0/@containedType.0"
+                right="#//@packages.0/ArabicNumber/setValue/@containedType.0">
+              <containedType xsi:type="kermeta_language_structure:ProductType" type="#//@packages.0/ArabicNumber/setValue/@ownedParameter.0/@containedType.0"/>
+            </containedType>
+            <parameters xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/RomanNumber/getValue/@containedType.0"
+                name="getValue" staticOperation="#//@packages.0/RomanNumber/getValue">
+              <target xsi:type="kermeta_language_behavior:CallVariable" staticType="#//@packages.0/Main/roman2arab/@ownedParameter.0/@containedType.0"
+                  name="r"/>
+            </parameters>
+            <target xsi:type="kermeta_language_behavior:CallResult" staticType="#//@packages.0/Main/roman2arab/@containedType.0"
+                name="result"/>
+          </statement>
+        </body>
+      </ownedOperation>
+      <ownedOperation name="arab2roman" type="#//@packages.0/Main/arab2roman/@containedType.0"
+          isOrdered="true" upper="1">
+        <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="#//@packages.0/RomanNumber"/>
+        <ownedParameter name="a" type="#//@packages.0/Main/arab2roman/@ownedParameter.0/@containedType.0"
+            isOrdered="true" upper="1">
+          <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="#//@packages.0/ArabicNumber"/>
+        </ownedParameter>
+        <body xsi:type="kermeta_language_behavior:Block" staticType="#//@packages.0/Main/addDigit2roman/@containedType.0">
+          <statement xsi:type="kermeta_language_behavior:Assignment" staticType="#//@packages.0/Main/arab2roman/@body/@statement.0/@value/@containedType.0">
+            <target xsi:type="kermeta_language_behavior:CallResult" staticType="#//@packages.0/Main/arab2roman/@containedType.0"
+                name="result"/>
+            <value xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/Main/arab2roman/@body/@statement.0/@value/@containedType.0"
+                name="new" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/language/structure/Class/new">
+              <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="#//@packages.0/RomanNumber"/>
+              <target xsi:type="kermeta_language_behavior:TypeLiteral" staticType="#//@packages.0/ArabicNumber/toString/@body/@statement.0/@value/@target/@containedType.0">
+                <typeref name="RomanNumber" type="#//@packages.0/Main/arab2roman/@body/@statement.0/@value/@containedType.0"
+                    upper="1"/>
+              </target>
+            </value>
+          </statement>
+          <statement xsi:type="kermeta_language_behavior:VariableDecl" staticType="#//@packages.0/Main/arab2roman/@body/@statement.1/@containedType.0"
+              identifier="position">
+            <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Integer"/>
+            <initialization xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Collection/size/@containedType.0"
+                name="size" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Collection/size">
+              <target xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/Main/arab2roman/@body/@statement.1/@initialization/@target/@containedType.0"
+                  name="content" staticProperty="#//@packages.0/ArabicNumber/content">
+                <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/OrderedSet">
+                  <typeParamBinding variable="kermeta_language_structure:ObjectTypeVariable platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/OrderedSet/G"
+                      type="#//@packages.0/ArabicNumber/content/@containedType.0"/>
+                </containedType>
+                <target xsi:type="kermeta_language_behavior:CallVariable" staticType="#//@packages.0/Main/arab2roman/@ownedParameter.0/@containedType.0"
+                    name="a"/>
+              </target>
+            </initialization>
+            <type name="Integer" type="#//@packages.0/Main/arab2roman/@body/@statement.1/@containedType.0"
+                isOrdered="true" upper="1"/>
+          </statement>
+          <statement xsi:type="kermeta_language_behavior:Conditional" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Integer/minus/@containedType.0">
+            <thenBody xsi:type="kermeta_language_behavior:Block" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Integer/minus/@containedType.0">
+              <statement xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/Main/addDigit2roman/@containedType.0"
+                  name="addDigit2roman" staticOperation="#//@packages.0/Main/addDigit2roman">
+                <containedType xsi:type="kermeta_language_structure:FunctionType"
+                    left="#//@packages.0/Main/arab2roman/@body/@statement.2/@thenBody/@statement.0/@containedType.0/@containedType.0"
+                    right="#//@packages.0/Main/addDigit2roman/@containedType.0">
+                  <containedType xsi:type="kermeta_language_structure:ProductType"
+                      type="#//@packages.0/Main/addDigit2roman/@ownedParameter.0/@containedType.0 #//@packages.0/Main/addDigit2roman/@ownedParameter.1/@containedType.0 #//@packages.0/Main/addDigit2roman/@ownedParameter.2/@containedType.0 #//@packages.0/Main/addDigit2roman/@ownedParameter.3/@containedType.0 #//@packages.0/Main/addDigit2roman/@ownedParameter.4/@containedType.0"/>
+                </containedType>
+                <parameters xsi:type="kermeta_language_behavior:CallResult" staticType="#//@packages.0/Main/arab2roman/@containedType.0"
+                    name="result"/>
+                <parameters xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/ArabicNumber/content/@containedType.0"
+                    name="elementAt" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/OrderedCollection/elementAt">
+                  <containedType xsi:type="kermeta_language_structure:FunctionType"
+                      left="#//@packages.0/Main/arab2roman/@body/@statement.2/@thenBody/@statement.0/@parameters.1/@containedType.0/@containedType.0"
+                      right="#//@packages.0/ArabicNumber/content/@containedType.0">
+                    <containedType xsi:type="kermeta_language_structure:ProductType"
+                        type="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/OrderedCollection/elementAt/@ownedParameter.0/@containedType.0"/>
+                  </containedType>
+                  <parameters xsi:type="kermeta_language_behavior:IntegerLiteral"
+                      staticType="#//@packages.0/ArabicNumber/getValue/@body/@statement.0/@value/@containedType.0"/>
+                  <target xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/Main/arab2roman/@body/@statement.2/@thenBody/@statement.0/@parameters.1/@target/@containedType.0"
+                      name="content" staticProperty="#//@packages.0/ArabicNumber/content">
+                    <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/OrderedSet">
+                      <typeParamBinding variable="kermeta_language_structure:ObjectTypeVariable platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/OrderedSet/G"
+                          type="#//@packages.0/ArabicNumber/content/@containedType.0"/>
+                    </containedType>
+                    <target xsi:type="kermeta_language_behavior:CallVariable" staticType="#//@packages.0/Main/arab2roman/@ownedParameter.0/@containedType.0"
+                        name="a"/>
+                  </target>
+                </parameters>
+                <parameters xsi:type="kermeta_language_behavior:StringLiteral" staticType="#//@packages.0/Letter/getValue/@body/@statement.0/@condition/@parameters.0/@containedType.0"
+                    value="M"/>
+                <parameters xsi:type="kermeta_language_behavior:StringLiteral" staticType="#//@packages.0/Letter/getValue/@body/@statement.0/@condition/@parameters.0/@containedType.0"
+                    value=" overflow"/>
+                <parameters xsi:type="kermeta_language_behavior:StringLiteral" staticType="#//@packages.0/Letter/getValue/@body/@statement.0/@condition/@parameters.0/@containedType.0"
+                    value=" overflow"/>
+              </statement>
+              <statement xsi:type="kermeta_language_behavior:Assignment" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Integer/minus/@containedType.0">
+                <target xsi:type="kermeta_language_behavior:CallVariable" staticType="#//@packages.0/Main/arab2roman/@body/@statement.1/@containedType.0"
+                    name="position"/>
+                <value xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Integer/minus/@containedType.0"
+                    name="minus" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Integer/minus">
+                  <containedType xsi:type="kermeta_language_structure:FunctionType"
+                      left="#//@packages.0/Main/arab2roman/@body/@statement.2/@thenBody/@statement.1/@value/@containedType.0/@containedType.0"
+                      right="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Integer/minus/@containedType.0">
+                    <containedType xsi:type="kermeta_language_structure:ProductType"
+                        type="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Integer/minus/@ownedParameter.0/@containedType.0"/>
+                  </containedType>
+                  <parameters xsi:type="kermeta_language_behavior:IntegerLiteral"
+                      staticType="#//@packages.0/ArabicNumber/getValue/@body/@statement.0/@value/@containedType.0"
+                      value="1"/>
+                  <target xsi:type="kermeta_language_behavior:CallVariable" staticType="#//@packages.0/Main/arab2roman/@body/@statement.1/@containedType.0"
+                      name="position"/>
+                </value>
+              </statement>
+            </thenBody>
+            <condition xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Integer/equals/@containedType.0"
+                name="equals" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Integer/equals">
+              <containedType xsi:type="kermeta_language_structure:FunctionType" left="#//@packages.0/Main/arab2roman/@body/@statement.2/@condition/@containedType.0/@containedType.0"
+                  right="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Integer/equals/@containedType.0">
+                <containedType xsi:type="kermeta_language_structure:ProductType" type="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Object/@containedType.0"/>
+              </containedType>
+              <parameters xsi:type="kermeta_language_behavior:IntegerLiteral" staticType="#//@packages.0/ArabicNumber/getValue/@body/@statement.0/@value/@containedType.0"
+                  value="4"/>
+              <target xsi:type="kermeta_language_behavior:CallVariable" staticType="#//@packages.0/Main/arab2roman/@body/@statement.1/@containedType.0"
+                  name="position"/>
+            </condition>
+          </statement>
+          <statement xsi:type="kermeta_language_behavior:Conditional" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Integer/minus/@containedType.0">
+            <thenBody xsi:type="kermeta_language_behavior:Block" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Integer/minus/@containedType.0">
+              <statement xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/Main/addDigit2roman/@containedType.0"
+                  name="addDigit2roman" staticOperation="#//@packages.0/Main/addDigit2roman">
+                <containedType xsi:type="kermeta_language_structure:FunctionType"
+                    left="#//@packages.0/Main/arab2roman/@body/@statement.3/@thenBody/@statement.0/@containedType.0/@containedType.0"
+                    right="#//@packages.0/Main/addDigit2roman/@containedType.0">
+                  <containedType xsi:type="kermeta_language_structure:ProductType"
+                      type="#//@packages.0/Main/addDigit2roman/@ownedParameter.0/@containedType.0 #//@packages.0/Main/addDigit2roman/@ownedParameter.1/@containedType.0 #//@packages.0/Main/addDigit2roman/@ownedParameter.2/@containedType.0 #//@packages.0/Main/addDigit2roman/@ownedParameter.3/@containedType.0 #//@packages.0/Main/addDigit2roman/@ownedParameter.4/@containedType.0"/>
+                </containedType>
+                <parameters xsi:type="kermeta_language_behavior:CallResult" staticType="#//@packages.0/Main/arab2roman/@containedType.0"
+                    name="result"/>
+                <parameters xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/ArabicNumber/content/@containedType.0"
+                    name="elementAt" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/OrderedCollection/elementAt">
+                  <containedType xsi:type="kermeta_language_structure:FunctionType"
+                      left="#//@packages.0/Main/arab2roman/@body/@statement.3/@thenBody/@statement.0/@parameters.1/@containedType.0/@containedType.0"
+                      right="#//@packages.0/ArabicNumber/content/@containedType.0">
+                    <containedType xsi:type="kermeta_language_structure:ProductType"
+                        type="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/OrderedCollection/elementAt/@ownedParameter.0/@containedType.0"/>
+                  </containedType>
+                  <parameters xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Integer/minus/@containedType.0"
+                      name="minus" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Integer/minus">
+                    <containedType xsi:type="kermeta_language_structure:FunctionType"
+                        left="#//@packages.0/Main/arab2roman/@body/@statement.3/@thenBody/@statement.0/@parameters.1/@parameters.0/@containedType.0/@containedType.0"
+                        right="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Integer/minus/@containedType.0">
+                      <containedType xsi:type="kermeta_language_structure:ProductType"
+                          type="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Integer/minus/@ownedParameter.0/@containedType.0"/>
+                    </containedType>
+                    <parameters xsi:type="kermeta_language_behavior:IntegerLiteral"
+                        staticType="#//@packages.0/ArabicNumber/getValue/@body/@statement.0/@value/@containedType.0"
+                        value="3"/>
+                    <target xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Collection/size/@containedType.0"
+                        name="size" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Collection/size">
+                      <target xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/Main/arab2roman/@body/@statement.3/@thenBody/@statement.0/@parameters.1/@parameters.0/@target/@target/@containedType.0"
+                          name="content" staticProperty="#//@packages.0/ArabicNumber/content">
+                        <containedType xsi:type="kermeta_language_structure:Class"
+                            typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/OrderedSet">
+                          <typeParamBinding variable="kermeta_language_structure:ObjectTypeVariable platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/OrderedSet/G"
+                              type="#//@packages.0/ArabicNumber/content/@containedType.0"/>
+                        </containedType>
+                        <target xsi:type="kermeta_language_behavior:CallVariable"
+                            staticType="#//@packages.0/Main/arab2roman/@ownedParameter.0/@containedType.0"
+                            name="a"/>
+                      </target>
+                    </target>
+                  </parameters>
+                  <target xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/Main/arab2roman/@body/@statement.3/@thenBody/@statement.0/@parameters.1/@target/@containedType.0"
+                      name="content" staticProperty="#//@packages.0/ArabicNumber/content">
+                    <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/OrderedSet">
+                      <typeParamBinding variable="kermeta_language_structure:ObjectTypeVariable platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/OrderedSet/G"
+                          type="#//@packages.0/ArabicNumber/content/@containedType.0"/>
+                    </containedType>
+                    <target xsi:type="kermeta_language_behavior:CallVariable" staticType="#//@packages.0/Main/arab2roman/@ownedParameter.0/@containedType.0"
+                        name="a"/>
+                  </target>
+                </parameters>
+                <parameters xsi:type="kermeta_language_behavior:StringLiteral" staticType="#//@packages.0/Letter/getValue/@body/@statement.0/@condition/@parameters.0/@containedType.0"
+                    value="C"/>
+                <parameters xsi:type="kermeta_language_behavior:StringLiteral" staticType="#//@packages.0/Letter/getValue/@body/@statement.0/@condition/@parameters.0/@containedType.0"
+                    value="D"/>
+                <parameters xsi:type="kermeta_language_behavior:StringLiteral" staticType="#//@packages.0/Letter/getValue/@body/@statement.0/@condition/@parameters.0/@containedType.0"
+                    value="M"/>
+              </statement>
+              <statement xsi:type="kermeta_language_behavior:Assignment" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Integer/minus/@containedType.0">
+                <target xsi:type="kermeta_language_behavior:CallVariable" staticType="#//@packages.0/Main/arab2roman/@body/@statement.1/@containedType.0"
+                    name="position"/>
+                <value xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Integer/minus/@containedType.0"
+                    name="minus" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Integer/minus">
+                  <containedType xsi:type="kermeta_language_structure:FunctionType"
+                      left="#//@packages.0/Main/arab2roman/@body/@statement.3/@thenBody/@statement.1/@value/@containedType.0/@containedType.0"
+                      right="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Integer/minus/@containedType.0">
+                    <containedType xsi:type="kermeta_language_structure:ProductType"
+                        type="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Integer/minus/@ownedParameter.0/@containedType.0"/>
+                  </containedType>
+                  <parameters xsi:type="kermeta_language_behavior:IntegerLiteral"
+                      staticType="#//@packages.0/ArabicNumber/getValue/@body/@statement.0/@value/@containedType.0"
+                      value="1"/>
+                  <target xsi:type="kermeta_language_behavior:CallVariable" staticType="#//@packages.0/Main/arab2roman/@body/@statement.1/@containedType.0"
+                      name="position"/>
+                </value>
+              </statement>
+            </thenBody>
+            <condition xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Integer/equals/@containedType.0"
+                name="equals" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Integer/equals">
+              <containedType xsi:type="kermeta_language_structure:FunctionType" left="#//@packages.0/Main/arab2roman/@body/@statement.3/@condition/@containedType.0/@containedType.0"
+                  right="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Integer/equals/@containedType.0">
+                <containedType xsi:type="kermeta_language_structure:ProductType" type="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Object/@containedType.0"/>
+              </containedType>
+              <parameters xsi:type="kermeta_language_behavior:IntegerLiteral" staticType="#//@packages.0/ArabicNumber/getValue/@body/@statement.0/@value/@containedType.0"
+                  value="3"/>
+              <target xsi:type="kermeta_language_behavior:CallVariable" staticType="#//@packages.0/Main/arab2roman/@body/@statement.1/@containedType.0"
+                  name="position"/>
+            </condition>
+          </statement>
+          <statement xsi:type="kermeta_language_behavior:Conditional" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Integer/minus/@containedType.0">
+            <thenBody xsi:type="kermeta_language_behavior:Block" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Integer/minus/@containedType.0">
+              <statement xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/Main/addDigit2roman/@containedType.0"
+                  name="addDigit2roman" staticOperation="#//@packages.0/Main/addDigit2roman">
+                <containedType xsi:type="kermeta_language_structure:FunctionType"
+                    left="#//@packages.0/Main/arab2roman/@body/@statement.4/@thenBody/@statement.0/@containedType.0/@containedType.0"
+                    right="#//@packages.0/Main/addDigit2roman/@containedType.0">
+                  <containedType xsi:type="kermeta_language_structure:ProductType"
+                      type="#//@packages.0/Main/addDigit2roman/@ownedParameter.0/@containedType.0 #//@packages.0/Main/addDigit2roman/@ownedParameter.1/@containedType.0 #//@packages.0/Main/addDigit2roman/@ownedParameter.2/@containedType.0 #//@packages.0/Main/addDigit2roman/@ownedParameter.3/@containedType.0 #//@packages.0/Main/addDigit2roman/@ownedParameter.4/@containedType.0"/>
+                </containedType>
+                <parameters xsi:type="kermeta_language_behavior:CallResult" staticType="#//@packages.0/Main/arab2roman/@containedType.0"
+                    name="result"/>
+                <parameters xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/ArabicNumber/content/@containedType.0"
+                    name="elementAt" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/OrderedCollection/elementAt">
+                  <containedType xsi:type="kermeta_language_structure:FunctionType"
+                      left="#//@packages.0/Main/arab2roman/@body/@statement.4/@thenBody/@statement.0/@parameters.1/@containedType.0/@containedType.0"
+                      right="#//@packages.0/ArabicNumber/content/@containedType.0">
+                    <containedType xsi:type="kermeta_language_structure:ProductType"
+                        type="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/OrderedCollection/elementAt/@ownedParameter.0/@containedType.0"/>
+                  </containedType>
+                  <parameters xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Integer/minus/@containedType.0"
+                      name="minus" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Integer/minus">
+                    <containedType xsi:type="kermeta_language_structure:FunctionType"
+                        left="#//@packages.0/Main/arab2roman/@body/@statement.4/@thenBody/@statement.0/@parameters.1/@parameters.0/@containedType.0/@containedType.0"
+                        right="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Integer/minus/@containedType.0">
+                      <containedType xsi:type="kermeta_language_structure:ProductType"
+                          type="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Integer/minus/@ownedParameter.0/@containedType.0"/>
+                    </containedType>
+                    <parameters xsi:type="kermeta_language_behavior:IntegerLiteral"
+                        staticType="#//@packages.0/ArabicNumber/getValue/@body/@statement.0/@value/@containedType.0"
+                        value="2"/>
+                    <target xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Collection/size/@containedType.0"
+                        name="size" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Collection/size">
+                      <target xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/Main/arab2roman/@body/@statement.4/@thenBody/@statement.0/@parameters.1/@parameters.0/@target/@target/@containedType.0"
+                          name="content" staticProperty="#//@packages.0/ArabicNumber/content">
+                        <containedType xsi:type="kermeta_language_structure:Class"
+                            typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/OrderedSet">
+                          <typeParamBinding variable="kermeta_language_structure:ObjectTypeVariable platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/OrderedSet/G"
+                              type="#//@packages.0/ArabicNumber/content/@containedType.0"/>
+                        </containedType>
+                        <target xsi:type="kermeta_language_behavior:CallVariable"
+                            staticType="#//@packages.0/Main/arab2roman/@ownedParameter.0/@containedType.0"
+                            name="a"/>
+                      </target>
+                    </target>
+                  </parameters>
+                  <target xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/Main/arab2roman/@body/@statement.4/@thenBody/@statement.0/@parameters.1/@target/@containedType.0"
+                      name="content" staticProperty="#//@packages.0/ArabicNumber/content">
+                    <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/OrderedSet">
+                      <typeParamBinding variable="kermeta_language_structure:ObjectTypeVariable platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/OrderedSet/G"
+                          type="#//@packages.0/ArabicNumber/content/@containedType.0"/>
+                    </containedType>
+                    <target xsi:type="kermeta_language_behavior:CallVariable" staticType="#//@packages.0/Main/arab2roman/@ownedParameter.0/@containedType.0"
+                        name="a"/>
+                  </target>
+                </parameters>
+                <parameters xsi:type="kermeta_language_behavior:StringLiteral" staticType="#//@packages.0/Letter/getValue/@body/@statement.0/@condition/@parameters.0/@containedType.0"
+                    value="X"/>
+                <parameters xsi:type="kermeta_language_behavior:StringLiteral" staticType="#//@packages.0/Letter/getValue/@body/@statement.0/@condition/@parameters.0/@containedType.0"
+                    value="L"/>
+                <parameters xsi:type="kermeta_language_behavior:StringLiteral" staticType="#//@packages.0/Letter/getValue/@body/@statement.0/@condition/@parameters.0/@containedType.0"
+                    value="C"/>
+              </statement>
+              <statement xsi:type="kermeta_language_behavior:Assignment" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Integer/minus/@containedType.0">
+                <target xsi:type="kermeta_language_behavior:CallVariable" staticType="#//@packages.0/Main/arab2roman/@body/@statement.1/@containedType.0"
+                    name="position"/>
+                <value xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Integer/minus/@containedType.0"
+                    name="minus" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Integer/minus">
+                  <containedType xsi:type="kermeta_language_structure:FunctionType"
+                      left="#//@packages.0/Main/arab2roman/@body/@statement.4/@thenBody/@statement.1/@value/@containedType.0/@containedType.0"
+                      right="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Integer/minus/@containedType.0">
+                    <containedType xsi:type="kermeta_language_structure:ProductType"
+                        type="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Integer/minus/@ownedParameter.0/@containedType.0"/>
+                  </containedType>
+                  <parameters xsi:type="kermeta_language_behavior:IntegerLiteral"
+                      staticType="#//@packages.0/ArabicNumber/getValue/@body/@statement.0/@value/@containedType.0"
+                      value="1"/>
+                  <target xsi:type="kermeta_language_behavior:CallVariable" staticType="#//@packages.0/Main/arab2roman/@body/@statement.1/@containedType.0"
+                      name="position"/>
+                </value>
+              </statement>
+            </thenBody>
+            <condition xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Integer/equals/@containedType.0"
+                name="equals" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Integer/equals">
+              <containedType xsi:type="kermeta_language_structure:FunctionType" left="#//@packages.0/Main/arab2roman/@body/@statement.4/@condition/@containedType.0/@containedType.0"
+                  right="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Integer/equals/@containedType.0">
+                <containedType xsi:type="kermeta_language_structure:ProductType" type="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Object/@containedType.0"/>
+              </containedType>
+              <parameters xsi:type="kermeta_language_behavior:IntegerLiteral" staticType="#//@packages.0/ArabicNumber/getValue/@body/@statement.0/@value/@containedType.0"
+                  value="2"/>
+              <target xsi:type="kermeta_language_behavior:CallVariable" staticType="#//@packages.0/Main/arab2roman/@body/@statement.1/@containedType.0"
+                  name="position"/>
+            </condition>
+          </statement>
+          <statement xsi:type="kermeta_language_behavior:Conditional" staticType="#//@packages.0/Main/addDigit2roman/@containedType.0">
+            <thenBody xsi:type="kermeta_language_behavior:Block" staticType="#//@packages.0/Main/addDigit2roman/@containedType.0">
+              <statement xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/Main/addDigit2roman/@containedType.0"
+                  name="addDigit2roman" staticOperation="#//@packages.0/Main/addDigit2roman">
+                <containedType xsi:type="kermeta_language_structure:FunctionType"
+                    left="#//@packages.0/Main/arab2roman/@body/@statement.5/@thenBody/@statement.0/@containedType.0/@containedType.0"
+                    right="#//@packages.0/Main/addDigit2roman/@containedType.0">
+                  <containedType xsi:type="kermeta_language_structure:ProductType"
+                      type="#//@packages.0/Main/addDigit2roman/@ownedParameter.0/@containedType.0 #//@packages.0/Main/addDigit2roman/@ownedParameter.1/@containedType.0 #//@packages.0/Main/addDigit2roman/@ownedParameter.2/@containedType.0 #//@packages.0/Main/addDigit2roman/@ownedParameter.3/@containedType.0 #//@packages.0/Main/addDigit2roman/@ownedParameter.4/@containedType.0"/>
+                </containedType>
+                <parameters xsi:type="kermeta_language_behavior:CallResult" staticType="#//@packages.0/Main/arab2roman/@containedType.0"
+                    name="result"/>
+                <parameters xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/ArabicNumber/content/@containedType.0"
+                    name="elementAt" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/OrderedCollection/elementAt">
+                  <containedType xsi:type="kermeta_language_structure:FunctionType"
+                      left="#//@packages.0/Main/arab2roman/@body/@statement.5/@thenBody/@statement.0/@parameters.1/@containedType.0/@containedType.0"
+                      right="#//@packages.0/ArabicNumber/content/@containedType.0">
+                    <containedType xsi:type="kermeta_language_structure:ProductType"
+                        type="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/OrderedCollection/elementAt/@ownedParameter.0/@containedType.0"/>
+                  </containedType>
+                  <parameters xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Integer/minus/@containedType.0"
+                      name="minus" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Integer/minus">
+                    <containedType xsi:type="kermeta_language_structure:FunctionType"
+                        left="#//@packages.0/Main/arab2roman/@body/@statement.5/@thenBody/@statement.0/@parameters.1/@parameters.0/@containedType.0/@containedType.0"
+                        right="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Integer/minus/@containedType.0">
+                      <containedType xsi:type="kermeta_language_structure:ProductType"
+                          type="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Integer/minus/@ownedParameter.0/@containedType.0"/>
+                    </containedType>
+                    <parameters xsi:type="kermeta_language_behavior:IntegerLiteral"
+                        staticType="#//@packages.0/ArabicNumber/getValue/@body/@statement.0/@value/@containedType.0"
+                        value="1"/>
+                    <target xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Collection/size/@containedType.0"
+                        name="size" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Collection/size">
+                      <target xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/Main/arab2roman/@body/@statement.5/@thenBody/@statement.0/@parameters.1/@parameters.0/@target/@target/@containedType.0"
+                          name="content" staticProperty="#//@packages.0/ArabicNumber/content">
+                        <containedType xsi:type="kermeta_language_structure:Class"
+                            typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/OrderedSet">
+                          <typeParamBinding variable="kermeta_language_structure:ObjectTypeVariable platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/OrderedSet/G"
+                              type="#//@packages.0/ArabicNumber/content/@containedType.0"/>
+                        </containedType>
+                        <target xsi:type="kermeta_language_behavior:CallVariable"
+                            staticType="#//@packages.0/Main/arab2roman/@ownedParameter.0/@containedType.0"
+                            name="a"/>
+                      </target>
+                    </target>
+                  </parameters>
+                  <target xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/Main/arab2roman/@body/@statement.5/@thenBody/@statement.0/@parameters.1/@target/@containedType.0"
+                      name="content" staticProperty="#//@packages.0/ArabicNumber/content">
+                    <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/OrderedSet">
+                      <typeParamBinding variable="kermeta_language_structure:ObjectTypeVariable platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/OrderedSet/G"
+                          type="#//@packages.0/ArabicNumber/content/@containedType.0"/>
+                    </containedType>
+                    <target xsi:type="kermeta_language_behavior:CallVariable" staticType="#//@packages.0/Main/arab2roman/@ownedParameter.0/@containedType.0"
+                        name="a"/>
+                  </target>
+                </parameters>
+                <parameters xsi:type="kermeta_language_behavior:StringLiteral" staticType="#//@packages.0/Letter/getValue/@body/@statement.0/@condition/@parameters.0/@containedType.0"
+                    value="I"/>
+                <parameters xsi:type="kermeta_language_behavior:StringLiteral" staticType="#//@packages.0/Letter/getValue/@body/@statement.0/@condition/@parameters.0/@containedType.0"
+                    value="V"/>
+                <parameters xsi:type="kermeta_language_behavior:StringLiteral" staticType="#//@packages.0/Letter/getValue/@body/@statement.0/@condition/@parameters.0/@containedType.0"
+                    value="X"/>
+              </statement>
+            </thenBody>
+            <condition xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Integer/equals/@containedType.0"
+                name="equals" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Integer/equals">
+              <containedType xsi:type="kermeta_language_structure:FunctionType" left="#//@packages.0/Main/arab2roman/@body/@statement.5/@condition/@containedType.0/@containedType.0"
+                  right="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Integer/equals/@containedType.0">
+                <containedType xsi:type="kermeta_language_structure:ProductType" type="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Object/@containedType.0"/>
+              </containedType>
+              <parameters xsi:type="kermeta_language_behavior:IntegerLiteral" staticType="#//@packages.0/ArabicNumber/getValue/@body/@statement.0/@value/@containedType.0"
+                  value="1"/>
+              <target xsi:type="kermeta_language_behavior:CallVariable" staticType="#//@packages.0/Main/arab2roman/@body/@statement.1/@containedType.0"
+                  name="position"/>
+            </condition>
+          </statement>
+        </body>
+      </ownedOperation>
+      <ownedOperation name="addDigit2roman" type="#//@packages.0/Main/addDigit2roman/@containedType.0"
+          upper="1">
+        <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Void"/>
+        <ownedParameter name="r" type="#//@packages.0/Main/addDigit2roman/@ownedParameter.0/@containedType.0"
+            isOrdered="true" upper="1">
+          <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="#//@packages.0/RomanNumber"/>
+        </ownedParameter>
+        <ownedParameter name="d" type="#//@packages.0/Main/addDigit2roman/@ownedParameter.1/@containedType.0"
+            isOrdered="true" upper="1">
+          <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="#//@packages.0/Digit"/>
+        </ownedParameter>
+        <ownedParameter name="unit" type="#//@packages.0/Main/addDigit2roman/@ownedParameter.2/@containedType.0"
+            isOrdered="true" upper="1">
+          <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/String"/>
+        </ownedParameter>
+        <ownedParameter name="five" type="#//@packages.0/Main/addDigit2roman/@ownedParameter.3/@containedType.0"
+            isOrdered="true" upper="1">
+          <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/String"/>
+        </ownedParameter>
+        <ownedParameter name="ten" type="#//@packages.0/Main/addDigit2roman/@ownedParameter.4/@containedType.0"
+            isOrdered="true" upper="1">
+          <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/String"/>
+        </ownedParameter>
+        <body xsi:type="kermeta_language_behavior:Block" staticType="#//@packages.0/Main/addLetters/@containedType.0">
+          <statement xsi:type="kermeta_language_behavior:Conditional" staticType="#//@packages.0/Main/addLetters/@containedType.0">
+            <thenBody xsi:type="kermeta_language_behavior:Block" staticType="#//@packages.0/Main/addLetters/@containedType.0">
+              <statement xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/Main/addLetters/@containedType.0"
+                  name="addLetters" staticOperation="#//@packages.0/Main/addLetters">
+                <containedType xsi:type="kermeta_language_structure:FunctionType"
+                    left="#//@packages.0/Main/addDigit2roman/@body/@statement.0/@thenBody/@statement.0/@containedType.0/@containedType.0"
+                    right="#//@packages.0/Main/addLetters/@containedType.0">
+                  <containedType xsi:type="kermeta_language_structure:ProductType"
+                      type="#//@packages.0/Main/addLetters/@ownedParameter.0/@containedType.0 #//@packages.0/Main/addLetters/@ownedParameter.1/@containedType.0 #//@packages.0/Main/addLetters/@ownedParameter.2/@containedType.0"/>
+                </containedType>
+                <parameters xsi:type="kermeta_language_behavior:CallVariable" staticType="#//@packages.0/Main/addDigit2roman/@ownedParameter.0/@containedType.0"
+                    name="r"/>
+                <parameters xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/Digit/value/@containedType.0"
+                    name="value" staticProperty="#//@packages.0/Digit/value">
+                  <target xsi:type="kermeta_language_behavior:CallVariable" staticType="#//@packages.0/Main/addDigit2roman/@ownedParameter.1/@containedType.0"
+                      name="d"/>
+                </parameters>
+                <parameters xsi:type="kermeta_language_behavior:CallVariable" staticType="#//@packages.0/Main/addDigit2roman/@ownedParameter.2/@containedType.0"
+                    name="unit"/>
+              </statement>
+            </thenBody>
+            <elseBody xsi:type="kermeta_language_behavior:Block" staticType="#//@packages.0/Main/addLetters/@containedType.0">
+              <statement xsi:type="kermeta_language_behavior:Conditional" staticType="#//@packages.0/Main/addLetters/@containedType.0">
+                <thenBody xsi:type="kermeta_language_behavior:Block" staticType="#//@packages.0/Main/addLetters/@containedType.0">
+                  <statement xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/Main/addLetters/@containedType.0"
+                      name="addLetters" staticOperation="#//@packages.0/Main/addLetters">
+                    <containedType xsi:type="kermeta_language_structure:FunctionType"
+                        left="#//@packages.0/Main/addDigit2roman/@body/@statement.0/@elseBody/@statement.0/@thenBody/@statement.0/@containedType.0/@containedType.0"
+                        right="#//@packages.0/Main/addLetters/@containedType.0">
+                      <containedType xsi:type="kermeta_language_structure:ProductType"
+                          type="#//@packages.0/Main/addLetters/@ownedParameter.0/@containedType.0 #//@packages.0/Main/addLetters/@ownedParameter.1/@containedType.0 #//@packages.0/Main/addLetters/@ownedParameter.2/@containedType.0"/>
+                    </containedType>
+                    <parameters xsi:type="kermeta_language_behavior:CallVariable"
+                        staticType="#//@packages.0/Main/addDigit2roman/@ownedParameter.0/@containedType.0"
+                        name="r"/>
+                    <parameters xsi:type="kermeta_language_behavior:IntegerLiteral"
+                        staticType="#//@packages.0/ArabicNumber/getValue/@body/@statement.0/@value/@containedType.0"
+                        value="1"/>
+                    <parameters xsi:type="kermeta_language_behavior:CallVariable"
+                        staticType="#//@packages.0/Main/addDigit2roman/@ownedParameter.2/@containedType.0"
+                        name="unit"/>
+                  </statement>
+                  <statement xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/Main/addLetters/@containedType.0"
+                      name="addLetters" staticOperation="#//@packages.0/Main/addLetters">
+                    <containedType xsi:type="kermeta_language_structure:FunctionType"
+                        left="#//@packages.0/Main/addDigit2roman/@body/@statement.0/@elseBody/@statement.0/@thenBody/@statement.1/@containedType.0/@containedType.0"
+                        right="#//@packages.0/Main/addLetters/@containedType.0">
+                      <containedType xsi:type="kermeta_language_structure:ProductType"
+                          type="#//@packages.0/Main/addLetters/@ownedParameter.0/@containedType.0 #//@packages.0/Main/addLetters/@ownedParameter.1/@containedType.0 #//@packages.0/Main/addLetters/@ownedParameter.2/@containedType.0"/>
+                    </containedType>
+                    <parameters xsi:type="kermeta_language_behavior:CallVariable"
+                        staticType="#//@packages.0/Main/addDigit2roman/@ownedParameter.0/@containedType.0"
+                        name="r"/>
+                    <parameters xsi:type="kermeta_language_behavior:IntegerLiteral"
+                        staticType="#//@packages.0/ArabicNumber/getValue/@body/@statement.0/@value/@containedType.0"
+                        value="1"/>
+                    <parameters xsi:type="kermeta_language_behavior:CallVariable"
+                        staticType="#//@packages.0/Main/addDigit2roman/@ownedParameter.3/@containedType.0"
+                        name="five"/>
+                  </statement>
+                </thenBody>
+                <elseBody xsi:type="kermeta_language_behavior:Block" staticType="#//@packages.0/Main/addLetters/@containedType.0">
+                  <statement xsi:type="kermeta_language_behavior:Conditional" staticType="#//@packages.0/Main/addLetters/@containedType.0">
+                    <thenBody xsi:type="kermeta_language_behavior:Block" staticType="#//@packages.0/Main/addLetters/@containedType.0">
+                      <statement xsi:type="kermeta_language_behavior:Block" staticType="#//@packages.0/Main/addLetters/@containedType.0">
+                        <statement xsi:type="kermeta_language_behavior:CallFeature"
+                            staticType="#//@packages.0/Main/addLetters/@containedType.0"
+                            name="addLetters" staticOperation="#//@packages.0/Main/addLetters">
+                          <containedType xsi:type="kermeta_language_structure:FunctionType"
+                              left="#//@packages.0/Main/addDigit2roman/@body/@statement.0/@elseBody/@statement.0/@elseBody/@statement.0/@thenBody/@statement.0/@statement.0/@containedType.0/@containedType.0"
+                              right="#//@packages.0/Main/addLetters/@containedType.0">
+                            <containedType xsi:type="kermeta_language_structure:ProductType"
+                                type="#//@packages.0/Main/addLetters/@ownedParameter.0/@containedType.0 #//@packages.0/Main/addLetters/@ownedParameter.1/@containedType.0 #//@packages.0/Main/addLetters/@ownedParameter.2/@containedType.0"/>
+                          </containedType>
+                          <parameters xsi:type="kermeta_language_behavior:CallVariable"
+                              staticType="#//@packages.0/Main/addDigit2roman/@ownedParameter.0/@containedType.0"
+                              name="r"/>
+                          <parameters xsi:type="kermeta_language_behavior:IntegerLiteral"
+                              staticType="#//@packages.0/ArabicNumber/getValue/@body/@statement.0/@value/@containedType.0"
+                              value="1"/>
+                          <parameters xsi:type="kermeta_language_behavior:CallVariable"
+                              staticType="#//@packages.0/Main/addDigit2roman/@ownedParameter.3/@containedType.0"
+                              name="five"/>
+                        </statement>
+                        <statement xsi:type="kermeta_language_behavior:CallFeature"
+                            staticType="#//@packages.0/Main/addLetters/@containedType.0"
+                            name="addLetters" staticOperation="#//@packages.0/Main/addLetters">
+                          <containedType xsi:type="kermeta_language_structure:FunctionType"
+                              left="#//@packages.0/Main/addDigit2roman/@body/@statement.0/@elseBody/@statement.0/@elseBody/@statement.0/@thenBody/@statement.0/@statement.1/@containedType.0/@containedType.0"
+                              right="#//@packages.0/Main/addLetters/@containedType.0">
+                            <containedType xsi:type="kermeta_language_structure:ProductType"
+                                type="#//@packages.0/Main/addLetters/@ownedParameter.0/@containedType.0 #//@packages.0/Main/addLetters/@ownedParameter.1/@containedType.0 #//@packages.0/Main/addLetters/@ownedParameter.2/@containedType.0"/>
+                          </containedType>
+                          <parameters xsi:type="kermeta_language_behavior:CallVariable"
+                              staticType="#//@packages.0/Main/addDigit2roman/@ownedParameter.0/@containedType.0"
+                              name="r"/>
+                          <parameters xsi:type="kermeta_language_behavior:CallFeature"
+                              staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Integer/minus/@containedType.0"
+                              name="minus" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Integer/minus">
+                            <containedType xsi:type="kermeta_language_structure:FunctionType"
+                                left="#//@packages.0/Main/addDigit2roman/@body/@statement.0/@elseBody/@statement.0/@elseBody/@statement.0/@thenBody/@statement.0/@statement.1/@parameters.1/@containedType.0/@containedType.0"
+                                right="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Integer/minus/@containedType.0">
+                              <containedType xsi:type="kermeta_language_structure:ProductType"
+                                  type="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Integer/minus/@ownedParameter.0/@containedType.0"/>
+                            </containedType>
+                            <parameters xsi:type="kermeta_language_behavior:IntegerLiteral"
+                                staticType="#//@packages.0/ArabicNumber/getValue/@body/@statement.0/@value/@containedType.0"
+                                value="5"/>
+                            <target xsi:type="kermeta_language_behavior:CallFeature"
+                                staticType="#//@packages.0/Digit/value/@containedType.0"
+                                name="value" staticProperty="#//@packages.0/Digit/value">
+                              <target xsi:type="kermeta_language_behavior:CallVariable"
+                                  staticType="#//@packages.0/Main/addDigit2roman/@ownedParameter.1/@containedType.0"
+                                  name="d"/>
+                            </target>
+                          </parameters>
+                          <parameters xsi:type="kermeta_language_behavior:CallVariable"
+                              staticType="#//@packages.0/Main/addDigit2roman/@ownedParameter.2/@containedType.0"
+                              name="unit"/>
+                        </statement>
+                      </statement>
+                    </thenBody>
+                    <elseBody xsi:type="kermeta_language_behavior:Block" staticType="#//@packages.0/Main/addLetters/@containedType.0">
+                      <statement xsi:type="kermeta_language_behavior:Conditional"
+                          staticType="#//@packages.0/Main/addLetters/@containedType.0">
+                        <thenBody xsi:type="kermeta_language_behavior:Block" staticType="#//@packages.0/Main/addLetters/@containedType.0">
+                          <statement xsi:type="kermeta_language_behavior:Block" staticType="#//@packages.0/Main/addLetters/@containedType.0">
+                            <statement xsi:type="kermeta_language_behavior:CallFeature"
+                                staticType="#//@packages.0/Main/addLetters/@containedType.0"
+                                name="addLetters" staticOperation="#//@packages.0/Main/addLetters">
+                              <containedType xsi:type="kermeta_language_structure:FunctionType"
+                                  left="#//@packages.0/Main/addDigit2roman/@body/@statement.0/@elseBody/@statement.0/@elseBody/@statement.0/@elseBody/@statement.0/@thenBody/@statement.0/@statement.0/@containedType.0/@containedType.0"
+                                  right="#//@packages.0/Main/addLetters/@containedType.0">
+                                <containedType xsi:type="kermeta_language_structure:ProductType"
+                                    type="#//@packages.0/Main/addLetters/@ownedParameter.0/@containedType.0 #//@packages.0/Main/addLetters/@ownedParameter.1/@containedType.0 #//@packages.0/Main/addLetters/@ownedParameter.2/@containedType.0"/>
+                              </containedType>
+                              <parameters xsi:type="kermeta_language_behavior:CallVariable"
+                                  staticType="#//@packages.0/Main/addDigit2roman/@ownedParameter.0/@containedType.0"
+                                  name="r"/>
+                              <parameters xsi:type="kermeta_language_behavior:IntegerLiteral"
+                                  staticType="#//@packages.0/ArabicNumber/getValue/@body/@statement.0/@value/@containedType.0"
+                                  value="1"/>
+                              <parameters xsi:type="kermeta_language_behavior:CallVariable"
+                                  staticType="#//@packages.0/Main/addDigit2roman/@ownedParameter.2/@containedType.0"
+                                  name="unit"/>
+                            </statement>
+                            <statement xsi:type="kermeta_language_behavior:CallFeature"
+                                staticType="#//@packages.0/Main/addLetters/@containedType.0"
+                                name="addLetters" staticOperation="#//@packages.0/Main/addLetters">
+                              <containedType xsi:type="kermeta_language_structure:FunctionType"
+                                  left="#//@packages.0/Main/addDigit2roman/@body/@statement.0/@elseBody/@statement.0/@elseBody/@statement.0/@elseBody/@statement.0/@thenBody/@statement.0/@statement.1/@containedType.0/@containedType.0"
+                                  right="#//@packages.0/Main/addLetters/@containedType.0">
+                                <containedType xsi:type="kermeta_language_structure:ProductType"
+                                    type="#//@packages.0/Main/addLetters/@ownedParameter.0/@containedType.0 #//@packages.0/Main/addLetters/@ownedParameter.1/@containedType.0 #//@packages.0/Main/addLetters/@ownedParameter.2/@containedType.0"/>
+                              </containedType>
+                              <parameters xsi:type="kermeta_language_behavior:CallVariable"
+                                  staticType="#//@packages.0/Main/addDigit2roman/@ownedParameter.0/@containedType.0"
+                                  name="r"/>
+                              <parameters xsi:type="kermeta_language_behavior:IntegerLiteral"
+                                  staticType="#//@packages.0/ArabicNumber/getValue/@body/@statement.0/@value/@containedType.0"
+                                  value="1"/>
+                              <parameters xsi:type="kermeta_language_behavior:CallVariable"
+                                  staticType="#//@packages.0/Main/addDigit2roman/@ownedParameter.4/@containedType.0"
+                                  name="ten"/>
+                            </statement>
+                          </statement>
+                        </thenBody>
+                        <condition xsi:type="kermeta_language_behavior:CallFeature"
+                            staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Integer/equals/@containedType.0"
+                            name="equals" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Integer/equals">
+                          <containedType xsi:type="kermeta_language_structure:FunctionType"
+                              left="#//@packages.0/Main/addDigit2roman/@body/@statement.0/@elseBody/@statement.0/@elseBody/@statement.0/@elseBody/@statement.0/@condition/@containedType.0/@containedType.0"
+                              right="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Integer/equals/@containedType.0">
+                            <containedType xsi:type="kermeta_language_structure:ProductType"
+                                type="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Object/@containedType.0"/>
+                          </containedType>
+                          <parameters xsi:type="kermeta_language_behavior:IntegerLiteral"
+                              staticType="#//@packages.0/ArabicNumber/getValue/@body/@statement.0/@value/@containedType.0"
+                              value="9"/>
+                          <target xsi:type="kermeta_language_behavior:CallFeature"
+                              staticType="#//@packages.0/Digit/value/@containedType.0"
+                              name="value" staticProperty="#//@packages.0/Digit/value">
+                            <target xsi:type="kermeta_language_behavior:CallVariable"
+                                staticType="#//@packages.0/Main/addDigit2roman/@ownedParameter.1/@containedType.0"
+                                name="d"/>
+                          </target>
+                        </condition>
+                      </statement>
+                    </elseBody>
+                    <condition xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Integer/isLower/@containedType.0"
+                        name="isLower" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Integer/isLower">
+                      <containedType xsi:type="kermeta_language_structure:FunctionType"
+                          left="#//@packages.0/Main/addDigit2roman/@body/@statement.0/@elseBody/@statement.0/@elseBody/@statement.0/@condition/@containedType.0/@containedType.0"
+                          right="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Integer/isLower/@containedType.0">
+                        <containedType xsi:type="kermeta_language_structure:ProductType"
+                            type="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Object/@containedType.0"/>
+                      </containedType>
+                      <parameters xsi:type="kermeta_language_behavior:IntegerLiteral"
+                          staticType="#//@packages.0/ArabicNumber/getValue/@body/@statement.0/@value/@containedType.0"
+                          value="9"/>
+                      <target xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/Digit/value/@containedType.0"
+                          name="value" staticProperty="#//@packages.0/Digit/value">
+                        <target xsi:type="kermeta_language_behavior:CallVariable"
+                            staticType="#//@packages.0/Main/addDigit2roman/@ownedParameter.1/@containedType.0"
+                            name="d"/>
+                      </target>
+                    </condition>
+                  </statement>
+                </elseBody>
+                <condition xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Integer/equals/@containedType.0"
+                    name="equals" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Integer/equals">
+                  <containedType xsi:type="kermeta_language_structure:FunctionType"
+                      left="#//@packages.0/Main/addDigit2roman/@body/@statement.0/@elseBody/@statement.0/@condition/@containedType.0/@containedType.0"
+                      right="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Integer/equals/@containedType.0">
+                    <containedType xsi:type="kermeta_language_structure:ProductType"
+                        type="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Object/@containedType.0"/>
+                  </containedType>
+                  <parameters xsi:type="kermeta_language_behavior:IntegerLiteral"
+                      staticType="#//@packages.0/ArabicNumber/getValue/@body/@statement.0/@value/@containedType.0"
+                      value="4"/>
+                  <target xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/Digit/value/@containedType.0"
+                      name="value" staticProperty="#//@packages.0/Digit/value">
+                    <target xsi:type="kermeta_language_behavior:CallVariable" staticType="#//@packages.0/Main/addDigit2roman/@ownedParameter.1/@containedType.0"
+                        name="d"/>
+                  </target>
+                </condition>
+              </statement>
+            </elseBody>
+            <condition xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Integer/isLower/@containedType.0"
+                name="isLower" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Integer/isLower">
+              <containedType xsi:type="kermeta_language_structure:FunctionType" left="#//@packages.0/Main/addDigit2roman/@body/@statement.0/@condition/@containedType.0/@containedType.0"
+                  right="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Integer/isLower/@containedType.0">
+                <containedType xsi:type="kermeta_language_structure:ProductType" type="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Object/@containedType.0"/>
+              </containedType>
+              <parameters xsi:type="kermeta_language_behavior:IntegerLiteral" staticType="#//@packages.0/ArabicNumber/getValue/@body/@statement.0/@value/@containedType.0"
+                  value="4"/>
+              <target xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/Digit/value/@containedType.0"
+                  name="value" staticProperty="#//@packages.0/Digit/value">
+                <target xsi:type="kermeta_language_behavior:CallVariable" staticType="#//@packages.0/Main/addDigit2roman/@ownedParameter.1/@containedType.0"
+                    name="d"/>
+              </target>
+            </condition>
+          </statement>
+        </body>
+      </ownedOperation>
+      <ownedOperation name="addLetters" type="#//@packages.0/Main/addLetters/@containedType.0"
+          upper="1">
+        <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Void"/>
+        <ownedParameter name="r" type="#//@packages.0/Main/addLetters/@ownedParameter.0/@containedType.0"
+            isOrdered="true" upper="1">
+          <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="#//@packages.0/RomanNumber"/>
+        </ownedParameter>
+        <ownedParameter name="times" type="#//@packages.0/Main/addLetters/@ownedParameter.1/@containedType.0"
+            isOrdered="true" upper="1">
+          <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Integer"/>
+        </ownedParameter>
+        <ownedParameter name="l" type="#//@packages.0/Main/addLetters/@ownedParameter.2/@containedType.0"
+            isOrdered="true" upper="1">
+          <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/String"/>
+        </ownedParameter>
+        <body xsi:type="kermeta_language_behavior:Block" staticType="#//@packages.0/ArabicNumber/setValue/@body/@statement.3/@containedType.0">
+          <statement xsi:type="kermeta_language_behavior:VariableDecl" staticType="#//@packages.0/Main/addLetters/@body/@statement.0/@containedType.0"
+              identifier="aLetter">
+            <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="#//@packages.0/Letter"/>
+            <initialization xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/Main/addLetters/@body/@statement.0/@initialization/@containedType.0"
+                name="new" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/language/structure/Class/new">
+              <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="#//@packages.0/Letter"/>
+              <target xsi:type="kermeta_language_behavior:TypeLiteral" staticType="#//@packages.0/ArabicNumber/toString/@body/@statement.0/@value/@target/@containedType.0">
+                <typeref name="Letter" type="#//@packages.0/Main/addLetters/@body/@statement.0/@initialization/@containedType.0"
+                    upper="1"/>
+              </target>
+            </initialization>
+            <type name="Letter" type="#//@packages.0/Main/addLetters/@body/@statement.0/@containedType.0"
+                isOrdered="true" upper="1"/>
+          </statement>
+          <statement xsi:type="kermeta_language_behavior:Assignment" staticType="#//@packages.0/Main/addLetters/@ownedParameter.2/@containedType.0">
+            <target xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/Letter/value/@containedType.0"
+                name="value" staticProperty="#//@packages.0/Letter/value">
+              <target xsi:type="kermeta_language_behavior:CallVariable" staticType="#//@packages.0/Main/addLetters/@body/@statement.0/@containedType.0"
+                  name="aLetter"/>
+            </target>
+            <value xsi:type="kermeta_language_behavior:CallVariable" staticType="#//@packages.0/Main/addLetters/@ownedParameter.2/@containedType.0"
+                name="l"/>
+          </statement>
+          <statement xsi:type="kermeta_language_behavior:Loop" staticType="#//@packages.0/ArabicNumber/setValue/@body/@statement.3/@containedType.0">
+            <initialization xsi:type="kermeta_language_behavior:VariableDecl" staticType="#//@packages.0/Main/addLetters/@body/@statement.2/@initialization/@containedType.0"
+                identifier="i">
+              <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Integer"/>
+              <initialization xsi:type="kermeta_language_behavior:IntegerLiteral"
+                  staticType="#//@packages.0/ArabicNumber/getValue/@body/@statement.0/@value/@containedType.0"/>
+              <type name="Integer" type="#//@packages.0/Main/addLetters/@body/@statement.2/@initialization/@containedType.0"
+                  isOrdered="true" upper="1"/>
+            </initialization>
+            <body xsi:type="kermeta_language_behavior:Block" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Integer/plus/@containedType.0">
+              <statement xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Collection/add/@containedType.0"
+                  name="add" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Collection/add">
+                <containedType xsi:type="kermeta_language_structure:FunctionType"
+                    left="#//@packages.0/Main/addLetters/@body/@statement.2/@body/@statement.0/@containedType.0/@containedType.0"
+                    right="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Collection/add/@containedType.0">
+                  <containedType xsi:type="kermeta_language_structure:ProductType"
+                      type="#//@packages.0/RomanNumber/content/@containedType.0"/>
+                </containedType>
+                <parameters xsi:type="kermeta_language_behavior:CallVariable" staticType="#//@packages.0/Main/addLetters/@body/@statement.0/@containedType.0"
+                    name="aLetter"/>
+                <target xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/Main/addLetters/@body/@statement.2/@body/@statement.0/@target/@containedType.0"
+                    name="content" staticProperty="#//@packages.0/RomanNumber/content">
+                  <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Sequence">
+                    <typeParamBinding variable="kermeta_language_structure:ObjectTypeVariable platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Sequence/G"
+                        type="#//@packages.0/RomanNumber/content/@containedType.0"/>
+                  </containedType>
+                  <target xsi:type="kermeta_language_behavior:CallVariable" staticType="#//@packages.0/Main/addLetters/@ownedParameter.0/@containedType.0"
+                      name="r"/>
+                </target>
+              </statement>
+              <statement xsi:type="kermeta_language_behavior:Assignment" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Integer/plus/@containedType.0">
+                <target xsi:type="kermeta_language_behavior:CallVariable" staticType="#//@packages.0/Main/addLetters/@body/@statement.2/@initialization/@containedType.0"
+                    name="i"/>
+                <value xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Integer/plus/@containedType.0"
+                    name="plus" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Integer/plus">
+                  <containedType xsi:type="kermeta_language_structure:FunctionType"
+                      left="#//@packages.0/Main/addLetters/@body/@statement.2/@body/@statement.1/@value/@containedType.0/@containedType.0"
+                      right="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Integer/plus/@containedType.0">
+                    <containedType xsi:type="kermeta_language_structure:ProductType"
+                        type="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Integer/plus/@ownedParameter.0/@containedType.0"/>
+                  </containedType>
+                  <parameters xsi:type="kermeta_language_behavior:IntegerLiteral"
+                      staticType="#//@packages.0/ArabicNumber/getValue/@body/@statement.0/@value/@containedType.0"
+                      value="1"/>
+                  <target xsi:type="kermeta_language_behavior:CallVariable" staticType="#//@packages.0/Main/addLetters/@body/@statement.2/@initialization/@containedType.0"
+                      name="i"/>
+                </value>
+              </statement>
+            </body>
+            <stopCondition xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Integer/isGreaterOrEqual/@containedType.0"
+                name="isGreaterOrEqual" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Integer/isGreaterOrEqual">
+              <containedType xsi:type="kermeta_language_structure:FunctionType" left="#//@packages.0/Main/addLetters/@body/@statement.2/@stopCondition/@containedType.0/@containedType.0"
+                  right="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Integer/isGreaterOrEqual/@containedType.0">
+                <containedType xsi:type="kermeta_language_structure:ProductType" type="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Object/@containedType.0"/>
+              </containedType>
+              <parameters xsi:type="kermeta_language_behavior:CallVariable" staticType="#//@packages.0/Main/addLetters/@ownedParameter.1/@containedType.0"
+                  name="times"/>
+              <target xsi:type="kermeta_language_behavior:CallVariable" staticType="#//@packages.0/Main/addLetters/@body/@statement.2/@initialization/@containedType.0"
+                  name="i"/>
+            </stopCondition>
+          </statement>
+        </body>
+      </ownedOperation>
+      <ownedOperation name="main" type="#//@packages.0/Main/main/@containedType.0"
+          isOrdered="true" upper="1">
+        <containedType xsi:type="kermeta_language_structure:VoidType"/>
+        <body xsi:type="kermeta_language_behavior:Block" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/io/StdIO/writeln/@containedType.0">
+          <statement xsi:type="kermeta_language_behavior:VariableDecl" staticType="#//@packages.0/Main/main/@body/@statement.0/@containedType.0"
+              identifier="a">
+            <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="#//@packages.0/ArabicNumber"/>
+            <initialization xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/Main/main/@body/@statement.0/@initialization/@containedType.0"
+                name="new" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/language/structure/Class/new">
+              <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="#//@packages.0/ArabicNumber"/>
+              <target xsi:type="kermeta_language_behavior:TypeLiteral" staticType="#//@packages.0/ArabicNumber/toString/@body/@statement.0/@value/@target/@containedType.0">
+                <typeref name="ArabicNumber" type="#//@packages.0/Main/main/@body/@statement.0/@initialization/@containedType.0"
+                    upper="1"/>
+              </target>
+            </initialization>
+            <type name="ArabicNumber" type="#//@packages.0/Main/main/@body/@statement.0/@containedType.0"
+                isOrdered="true" upper="1"/>
+          </statement>
+          <statement xsi:type="kermeta_language_behavior:VariableDecl" staticType="#//@packages.0/Main/main/@body/@statement.1/@containedType.0"
+              identifier="r">
+            <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="#//@packages.0/RomanNumber"/>
+            <initialization xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/Main/main/@body/@statement.1/@initialization/@containedType.0"
+                name="new" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/language/structure/Class/new">
+              <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="#//@packages.0/RomanNumber"/>
+              <target xsi:type="kermeta_language_behavior:TypeLiteral" staticType="#//@packages.0/ArabicNumber/toString/@body/@statement.0/@value/@target/@containedType.0">
+                <typeref name="RomanNumber" type="#//@packages.0/Main/main/@body/@statement.1/@initialization/@containedType.0"
+                    upper="1"/>
+              </target>
+            </initialization>
+            <type name="RomanNumber" type="#//@packages.0/Main/main/@body/@statement.1/@containedType.0"
+                isOrdered="true" upper="1"/>
+          </statement>
+          <statement xsi:type="kermeta_language_behavior:Loop" staticType="#//@packages.0/ArabicNumber/setValue/@body/@statement.3/@containedType.0">
+            <initialization xsi:type="kermeta_language_behavior:VariableDecl" staticType="#//@packages.0/Main/main/@body/@statement.2/@initialization/@containedType.0"
+                identifier="i">
+              <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Integer"/>
+              <initialization xsi:type="kermeta_language_behavior:IntegerLiteral"
+                  staticType="#//@packages.0/ArabicNumber/getValue/@body/@statement.0/@value/@containedType.0"/>
+              <type name="Integer" type="#//@packages.0/Main/main/@body/@statement.2/@initialization/@containedType.0"
+                  isOrdered="true" upper="1"/>
+            </initialization>
+            <body xsi:type="kermeta_language_behavior:Block" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Integer/plus/@containedType.0">
+              <statement xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/ArabicNumber/setValue/@containedType.0"
+                  name="setValue" staticOperation="#//@packages.0/ArabicNumber/setValue">
+                <containedType xsi:type="kermeta_language_structure:FunctionType"
+                    left="#//@packages.0/Main/main/@body/@statement.2/@body/@statement.0/@containedType.0/@containedType.0"
+                    right="#//@packages.0/ArabicNumber/setValue/@containedType.0">
+                  <containedType xsi:type="kermeta_language_structure:ProductType"
+                      type="#//@packages.0/ArabicNumber/setValue/@ownedParameter.0/@containedType.0"/>
+                </containedType>
+                <parameters xsi:type="kermeta_language_behavior:CallVariable" staticType="#//@packages.0/Main/main/@body/@statement.2/@initialization/@containedType.0"
+                    name="i"/>
+                <target xsi:type="kermeta_language_behavior:CallVariable" staticType="#//@packages.0/Main/main/@body/@statement.0/@containedType.0"
+                    name="a"/>
+              </statement>
+              <statement xsi:type="kermeta_language_behavior:Assignment" staticType="#//@packages.0/Main/arab2roman/@containedType.0">
+                <target xsi:type="kermeta_language_behavior:CallVariable" staticType="#//@packages.0/Main/main/@body/@statement.1/@containedType.0"
+                    name="r"/>
+                <value xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/Main/arab2roman/@containedType.0"
+                    name="arab2roman" staticOperation="#//@packages.0/Main/arab2roman">
+                  <containedType xsi:type="kermeta_language_structure:FunctionType"
+                      left="#//@packages.0/Main/main/@body/@statement.2/@body/@statement.1/@value/@containedType.0/@containedType.0"
+                      right="#//@packages.0/Main/arab2roman/@containedType.0">
+                    <containedType xsi:type="kermeta_language_structure:ProductType"
+                        type="#//@packages.0/Main/arab2roman/@ownedParameter.0/@containedType.0"/>
+                  </containedType>
+                  <parameters xsi:type="kermeta_language_behavior:CallVariable" staticType="#//@packages.0/Main/main/@body/@statement.0/@containedType.0"
+                      name="a"/>
+                </value>
+              </statement>
+              <statement xsi:type="kermeta_language_behavior:Conditional" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/io/StdIO/writeln/@containedType.0">
+                <thenBody xsi:type="kermeta_language_behavior:Block" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/io/StdIO/writeln/@containedType.0">
+                  <statement xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/io/StdIO/writeln/@containedType.0"
+                      name="writeln" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/io/StdIO/writeln">
+                    <containedType xsi:type="kermeta_language_structure:FunctionType"
+                        left="#//@packages.0/Main/main/@body/@statement.2/@body/@statement.2/@thenBody/@statement.0/@containedType.0/@containedType.0"
+                        right="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/io/StdIO/writeln/@containedType.0">
+                      <containedType xsi:type="kermeta_language_structure:ProductType"
+                          type="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/io/StdIO/writeln/@ownedParameter.0/@containedType.0"/>
+                    </containedType>
+                    <parameters xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/String/plus/@containedType.0"
+                        name="plus" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/String/plus">
+                      <containedType xsi:type="kermeta_language_structure:FunctionType"
+                          left="#//@packages.0/Main/main/@body/@statement.2/@body/@statement.2/@thenBody/@statement.0/@parameters.0/@containedType.0/@containedType.0"
+                          right="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/String/plus/@containedType.0">
+                        <containedType xsi:type="kermeta_language_structure:ProductType"
+                            type="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/String/plus/@ownedParameter.0/@containedType.0"/>
+                      </containedType>
+                      <parameters xsi:type="kermeta_language_behavior:CallFeature"
+                          staticType="#//@packages.0/ArabicNumber/toString/@containedType.0"
+                          name="toString" staticOperation="#//@packages.0/ArabicNumber/toString">
+                        <target xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/Main/roman2arab/@containedType.0"
+                            name="roman2arab" staticOperation="#//@packages.0/Main/roman2arab">
+                          <containedType xsi:type="kermeta_language_structure:FunctionType"
+                              left="#//@packages.0/Main/main/@body/@statement.2/@body/@statement.2/@thenBody/@statement.0/@parameters.0/@parameters.0/@target/@containedType.0/@containedType.0"
+                              right="#//@packages.0/Main/roman2arab/@containedType.0">
+                            <containedType xsi:type="kermeta_language_structure:ProductType"
+                                type="#//@packages.0/Main/roman2arab/@ownedParameter.0/@containedType.0"/>
+                          </containedType>
+                          <parameters xsi:type="kermeta_language_behavior:CallVariable"
+                              staticType="#//@packages.0/Main/main/@body/@statement.1/@containedType.0"
+                              name="r"/>
+                        </target>
+                      </parameters>
+                      <target xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/String/plus/@containedType.0"
+                          name="plus" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/String/plus">
+                        <containedType xsi:type="kermeta_language_structure:FunctionType"
+                            left="#//@packages.0/Main/main/@body/@statement.2/@body/@statement.2/@thenBody/@statement.0/@parameters.0/@target/@containedType.0/@containedType.0"
+                            right="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/String/plus/@containedType.0">
+                          <containedType xsi:type="kermeta_language_structure:ProductType"
+                              type="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/String/plus/@ownedParameter.0/@containedType.0"/>
+                        </containedType>
+                        <parameters xsi:type="kermeta_language_behavior:StringLiteral"
+                            staticType="#//@packages.0/Letter/getValue/@body/@statement.0/@condition/@parameters.0/@containedType.0"
+                            value="!="/>
+                        <target xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/String/plus/@containedType.0"
+                            name="plus" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/String/plus">
+                          <containedType xsi:type="kermeta_language_structure:FunctionType"
+                              left="#//@packages.0/Main/main/@body/@statement.2/@body/@statement.2/@thenBody/@statement.0/@parameters.0/@target/@target/@containedType.0/@containedType.0"
+                              right="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/String/plus/@containedType.0">
+                            <containedType xsi:type="kermeta_language_structure:ProductType"
+                                type="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/String/plus/@ownedParameter.0/@containedType.0"/>
+                          </containedType>
+                          <parameters xsi:type="kermeta_language_behavior:CallFeature"
+                              staticType="#//@packages.0/RomanNumber/toString/@containedType.0"
+                              name="toString" staticOperation="#//@packages.0/RomanNumber/toString">
+                            <target xsi:type="kermeta_language_behavior:CallVariable"
+                                staticType="#//@packages.0/Main/main/@body/@statement.1/@containedType.0"
+                                name="r"/>
+                          </parameters>
+                          <target xsi:type="kermeta_language_behavior:CallFeature"
+                              staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/String/plus/@containedType.0"
+                              name="plus" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/String/plus">
+                            <containedType xsi:type="kermeta_language_structure:FunctionType"
+                                left="#//@packages.0/Main/main/@body/@statement.2/@body/@statement.2/@thenBody/@statement.0/@parameters.0/@target/@target/@target/@containedType.0/@containedType.0"
+                                right="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/String/plus/@containedType.0">
+                              <containedType xsi:type="kermeta_language_structure:ProductType"
+                                  type="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/String/plus/@ownedParameter.0/@containedType.0"/>
+                            </containedType>
+                            <parameters xsi:type="kermeta_language_behavior:StringLiteral"
+                                staticType="#//@packages.0/Letter/getValue/@body/@statement.0/@condition/@parameters.0/@containedType.0"
+                                value=": "/>
+                            <target xsi:type="kermeta_language_behavior:CallFeature"
+                                staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Integer/toString/@containedType.0"
+                                name="toString" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Integer/toString">
+                              <target xsi:type="kermeta_language_behavior:CallVariable"
+                                  staticType="#//@packages.0/Main/main/@body/@statement.2/@initialization/@containedType.0"
+                                  name="i"/>
+                            </target>
+                          </target>
+                        </target>
+                      </target>
+                    </parameters>
+                    <target xsi:type="kermeta_language_behavior:CallVariable" staticType="#//@packages.0/Main/main/@body/@statement.2/@body/@statement.2/@thenBody/@statement.0/@target/@containedType.0"
+                        name="stdio">
+                      <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/io/StdIO"/>
+                    </target>
+                  </statement>
+                </thenBody>
+                <condition xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/language/structure/Boolean/@containedType.0"
+                    name="isNotEqual" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/language/structure/Object/isNotEqual">
+                  <containedType xsi:type="kermeta_language_structure:FunctionType"
+                      left="#//@packages.0/Main/main/@body/@statement.2/@body/@statement.2/@condition/@containedType.0/@containedType.0"
+                      right="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/language/structure/Boolean/@containedType.0">
+                    <containedType xsi:type="kermeta_language_structure:ProductType"
+                        type="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/language/structure/Object/isNotEqual/@ownedParameter.0/@containedType.0"/>
+                  </containedType>
+                  <parameters xsi:type="kermeta_language_behavior:CallVariable" staticType="#//@packages.0/Main/main/@body/@statement.2/@initialization/@containedType.0"
+                      name="i"/>
+                  <target xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/RomanNumber/getValue/@containedType.0"
+                      name="getValue" staticOperation="#//@packages.0/RomanNumber/getValue">
+                    <target xsi:type="kermeta_language_behavior:CallVariable" staticType="#//@packages.0/Main/main/@body/@statement.1/@containedType.0"
+                        name="r"/>
+                  </target>
+                </condition>
+              </statement>
+              <statement xsi:type="kermeta_language_behavior:Assignment" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Integer/plus/@containedType.0">
+                <target xsi:type="kermeta_language_behavior:CallVariable" staticType="#//@packages.0/Main/main/@body/@statement.2/@initialization/@containedType.0"
+                    name="i"/>
+                <value xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Integer/plus/@containedType.0"
+                    name="plus" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Integer/plus">
+                  <containedType xsi:type="kermeta_language_structure:FunctionType"
+                      left="#//@packages.0/Main/main/@body/@statement.2/@body/@statement.3/@value/@containedType.0/@containedType.0"
+                      right="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Integer/plus/@containedType.0">
+                    <containedType xsi:type="kermeta_language_structure:ProductType"
+                        type="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Integer/plus/@ownedParameter.0/@containedType.0"/>
+                  </containedType>
+                  <parameters xsi:type="kermeta_language_behavior:IntegerLiteral"
+                      staticType="#//@packages.0/ArabicNumber/getValue/@body/@statement.0/@value/@containedType.0"
+                      value="93"/>
+                  <target xsi:type="kermeta_language_behavior:CallVariable" staticType="#//@packages.0/Main/main/@body/@statement.2/@initialization/@containedType.0"
+                      name="i"/>
+                </value>
+              </statement>
+            </body>
+            <stopCondition xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Integer/isGreater/@containedType.0"
+                name="isGreater" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Integer/isGreater">
+              <containedType xsi:type="kermeta_language_structure:FunctionType" left="#//@packages.0/Main/main/@body/@statement.2/@stopCondition/@containedType.0/@containedType.0"
+                  right="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Integer/isGreater/@containedType.0">
+                <containedType xsi:type="kermeta_language_structure:ProductType" type="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/Object/@containedType.0"/>
+              </containedType>
+              <parameters xsi:type="kermeta_language_behavior:IntegerLiteral" staticType="#//@packages.0/ArabicNumber/getValue/@body/@statement.0/@value/@containedType.0"
+                  value="3999"/>
+              <target xsi:type="kermeta_language_behavior:CallVariable" staticType="#//@packages.0/Main/main/@body/@statement.2/@initialization/@containedType.0"
+                  name="i"/>
+            </stopCondition>
+          </statement>
+          <statement xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/io/StdIO/writeln/@containedType.0"
+              name="writeln" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/io/StdIO/writeln">
+            <containedType xsi:type="kermeta_language_structure:FunctionType" left="#//@packages.0/Main/main/@body/@statement.3/@containedType.0/@containedType.0"
+                right="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/io/StdIO/writeln/@containedType.0">
+              <containedType xsi:type="kermeta_language_structure:ProductType" type="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/io/StdIO/writeln/@ownedParameter.0/@containedType.0"/>
+            </containedType>
+            <parameters xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/String/plus/@containedType.0"
+                name="plus" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/String/plus">
+              <containedType xsi:type="kermeta_language_structure:FunctionType" left="#//@packages.0/Main/main/@body/@statement.3/@parameters.0/@containedType.0/@containedType.0"
+                  right="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/String/plus/@containedType.0">
+                <containedType xsi:type="kermeta_language_structure:ProductType" type="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/String/plus/@ownedParameter.0/@containedType.0"/>
+              </containedType>
+              <parameters xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/RomanNumber/toString/@containedType.0"
+                  name="toString" staticOperation="#//@packages.0/RomanNumber/toString">
+                <target xsi:type="kermeta_language_behavior:CallVariable" staticType="#//@packages.0/Main/main/@body/@statement.1/@containedType.0"
+                    name="r"/>
+              </parameters>
+              <target xsi:type="kermeta_language_behavior:CallFeature" staticType="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/String/plus/@containedType.0"
+                  name="plus" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/String/plus">
+                <containedType xsi:type="kermeta_language_structure:FunctionType"
+                    left="#//@packages.0/Main/main/@body/@statement.3/@parameters.0/@target/@containedType.0/@containedType.0"
+                    right="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/String/plus/@containedType.0">
+                  <containedType xsi:type="kermeta_language_structure:ProductType"
+                      type="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/standard/String/plus/@ownedParameter.0/@containedType.0"/>
+                </containedType>
+                <parameters xsi:type="kermeta_language_behavior:StringLiteral" staticType="#//@packages.0/Letter/getValue/@body/@statement.0/@condition/@parameters.0/@containedType.0"
+                    value="="/>
+                <target xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/ArabicNumber/toString/@containedType.0"
+                    name="toString" staticOperation="#//@packages.0/ArabicNumber/toString">
+                  <target xsi:type="kermeta_language_behavior:CallVariable" staticType="#//@packages.0/Main/main/@body/@statement.0/@containedType.0"
+                      name="a"/>
+                </target>
+              </target>
+            </parameters>
+            <target xsi:type="kermeta_language_behavior:CallVariable" staticType="#//@packages.0/Main/main/@body/@statement.2/@body/@statement.2/@thenBody/@statement.0/@target/@containedType.0"
+                name="stdio"/>
+          </statement>
+        </body>
+      </ownedOperation>
+    </ownedTypeDefinition>
+  </packages>
+  <requires uri="kermeta"/>
+  <usings qualifiedName="root_package"/>
+  <usings qualifiedName="kermeta::standard"/>
+  <usings qualifiedName="kermeta::utils"/>
+</kermeta_language_structure:ModelingUnit>

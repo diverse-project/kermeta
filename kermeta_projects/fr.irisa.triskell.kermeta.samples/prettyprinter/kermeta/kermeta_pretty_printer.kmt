@@ -1,0 +1,31 @@
+/* $Id:$ 
+ * Creation : April 16, 2009
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            vmahe
+ */
+@mainClass "kermeta::prettyprinter::Main"
+@mainOperation "main"
+
+package kermeta::prettyprinter;
+
+require "kermeta_print.kmt"
+
+class Main
+{
+	operation main(kmModel : kermeta::standard::String) : Void is do 
+		// loading the kermeta model
+		var repIn : kermeta::persistence::EMFRepository init kermeta::persistence::EMFRepository.new
+		var resIn : kermeta::persistence::EMFResource
+		resIn ?= repIn.getResource(kmModel)
+		var unit : kermeta::language::structure::ModelingUnit
+		unit ?= resIn.one
+		
+		// using the recursive print() functions added on Kermeta metamodel
+		stdio.writeln("------------------------------------------------------------------------------------------------------")
+		stdio.writeln("------  "+ kmModel + " -----")
+		stdio.writeln("------------------------------------------------------------------------------------------------------")
+		unit.print("")
+	end
+}

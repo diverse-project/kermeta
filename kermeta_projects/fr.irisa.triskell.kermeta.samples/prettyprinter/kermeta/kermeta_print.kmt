@@ -1,0 +1,92 @@
+/* $Id:$ 
+ * Creation : April 16, 2009
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            vmahe
+ */
+
+package kermeta::language::structure;
+
+require kermeta
+
+using kermeta::standard
+
+aspect class Object
+{
+	operation print(indent : String) : Void is do 
+		// empty, for kermeta elements which do not print
+	end
+}
+
+aspect class ModelingUnit
+{
+	method print(indent : String) : Void is do 
+		packages.each{ p |
+			p.print("")
+		}
+	end
+}
+
+aspect class Package
+{
+	method print(indent : String) : Void is do 
+		stdio.writeln(indent + "Package: "+ self.name)
+		self.nestedPackage.each{ np |
+			np.print(indent + "  ")
+		}
+		self.ownedTypeDefinition.each{ otd |
+			otd.print(indent + "  ")
+		}
+	end
+}
+
+aspect class ClassDefinition
+{
+	method print(indent : String) : Void is do 
+		stdio.writeln(indent + "ClassDefinition: "+ self.name)
+//		stdio.writeln(indent + " - contained types: ")
+//		self.containedType.each{ ct |
+//			ct.print(indent + "    ")
+//		}
+		self.ownedAttribute.each{ oa |
+			oa.print(indent + "  ")
+		}
+		self.ownedOperation.each{ oo |
+			oo.print(indent + "  ")
+		}
+	end
+}
+
+aspect class Class
+{
+	method print(indent : String) : Void is do 
+		stdio.writeln(indent + "Class: "+ self.name)
+	end
+}
+aspect class Property
+{
+	method print(indent : String) : Void is do 
+		stdio.writeln(indent + "Property: "+ self.name)
+		stdio.writeln(indent + "   - type : " + self.type.toString)
+	end
+}
+
+aspect class Operation
+{
+	method print(indent : String) : Void is do 
+		stdio.writeln(indent + "Operation: "+ self.name)
+		stdio.writeln(indent + "   - return type : " + self.type.toString)
+		self.ownedParameter.each{ op |
+			op.print(indent + "  ")
+		}
+	end
+}
+
+aspect class Parameter
+{
+	method print(indent : String) : Void is do 
+		stdio.writeln(indent + "Parameter: "+ self.name)
+		stdio.writeln(indent + "   - type : " + self.type.toString)
+	end
+}
