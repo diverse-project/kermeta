@@ -207,16 +207,16 @@ public class BundleManagementImpl implements BundleManagement {
 	}
 
 	
-	public long moveBundle(long bundleId, String remoteLocation) {
-		long remoteBundleId = this.duplicateBundle(bundleId, remoteLocation);
-		if (remoteBundleId > -1) {
+	public boolean moveBundle(long bundleId, String remoteLocation) {
+		boolean duplicateOK = this.duplicateBundle(bundleId, remoteLocation);
+		if (duplicateOK) {
 			this.uninstall(bundleId);
 		}
-		return remoteBundleId;
+		return duplicateOK;
 	}
 
 	
-	public long duplicateBundle(long bundleId, String remoteLocation) {
+	public boolean duplicateBundle(long bundleId, String remoteLocation) {
 		// TODO It must be better to test with many platform on different
 		// computers
 		if (bundleId > -1) {
@@ -229,7 +229,7 @@ public class BundleManagementImpl implements BundleManagement {
 			Long[] remoteBundleManagerIds = serviceManager.findServiceIds(
 					BundleManagement.class.getName(), filter, -1);
 			if (remoteBundleManagerIds.length == 0) {
-				return -1;
+				return false;
 			}
 			remoteManager = (BundleManagement)serviceManager.getService(remoteBundleManagerIds[0]);
 
@@ -304,9 +304,9 @@ public class BundleManagementImpl implements BundleManagement {
 
 			}
 			serviceManager.ungetService(remoteBundleManagerIds[0]);
-			return remoteBundleId;
+			return true;
 		}
-		return -1;
+		return false;
 	}
 
 	

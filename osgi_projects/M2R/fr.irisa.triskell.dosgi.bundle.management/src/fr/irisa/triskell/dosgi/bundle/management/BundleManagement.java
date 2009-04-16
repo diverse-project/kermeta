@@ -1,9 +1,13 @@
 package fr.irisa.triskell.dosgi.bundle.management;
 
-
+/**
+ * 
+ * @author Erwan Daubert
+ * @version 0.5
+ *
+ */
 public interface BundleManagement {
-	// TODO ALL javadocs
-	// TODO synchronized functions
+	// TODO synchronized functions ?
 
 	/**
 	 * This function allows you to start a bundle defined by this bundleId
@@ -59,18 +63,18 @@ public interface BundleManagement {
 	 * When you move a bundle into another platform, you move also services but the state of the services are not saved and move on the remote platform.<br />
 	 * The new bundleId is defined into the other platform where the bundle is moved.
 	 * @param bundleId the identifier of the bundle to move
-	 * @param remoteManager a {@link BundleManagement} on a remote host
-	 * @return the new bundleId of the bundle or -1
+	 * @param remoteLocation a {@link String} which describe the location of the other platform.
+	 * @return true if the move is correctly done, false else
 	 */
-	public long moveBundle(long bundleId, String remoteLocation);
+	public boolean moveBundle(long bundleId, String remoteLocation);
 	
 	/**
 	 * This function allows you to duplicate a bundle and move one instance into another platform
 	 * @param bundleId the identifier of the bundle to duplicate
-	 * @param remoteManager a {@link BundleManagement} on a remote host
-	 * @return the new bundleId of the instance of the bundle which was moved into another platform
+	 * @param remoteLocation a {@link String} which describe the location of the other platform.
+	 * @return true if the duplication is correctly done, false else
 	 */
-	public long duplicateBundle(long bundleId, String remoteLocation);
+	public boolean duplicateBundle(long bundleId, String remoteLocation);
 	
 	/**
 	 * This function allows you to find a bundle identify by his <code>Bundle-SymbolicName</code> and his <code>Bundle-Version</code>
@@ -87,7 +91,7 @@ public interface BundleManagement {
 	public Long[] findBundleIds();
 	
 	/**
-	 * This function allows you to find all bundle using a service define as clazz
+	 * This function allows you to find all bundles using a service define as clazz
 	 * @param clazz the class name of the service into the ServiceRegistry
 	 * @param service the object which is the service
 	 * @return an array which contains all bundleIds which identify the bundles which use this service.
@@ -95,7 +99,7 @@ public interface BundleManagement {
 	public Long[] getBundlesUsingService(String clazz, Object service);
 	
 	/**
-	 * This function allows you to find all bundle which depend of the export-package offers by the bundle identify by bundleId
+	 * This function allows you to find all bundles which depend of the export-package offers by the bundle identify by bundleId
 	 * @param bundleId the identifier of the bundle which offers packages
 	 * @return an array of the bundleIds if the bundles which depend of the export-package.
 	 */
@@ -123,8 +127,16 @@ public interface BundleManagement {
 	 */
 	public Long[] getFragmentBundles(long bundleId);
 	
+	/**
+	 * This function is sued to get the {@link ServiceManagement} linked with this <code>BundleManagement</code>
+	 * @return the <code>ServiceManagement</code> linked with this <code>BundleManagement</code>
+	 */
 	public ServiceManagement getServiceManager();
 
+	/**
+	 * This function is used to set the {@link ServiceManagement} linked with this <code>BundleManagement</code>
+	 * @param serviceManager the <code>ServiceManagement</code> linked with this <code>BundleManagement</code>
+	 */
 	public void setServiceManager(ServiceManagement serviceManager);
 	
 }

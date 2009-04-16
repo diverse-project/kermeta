@@ -1,6 +1,7 @@
 package fr.irisa.triskell.dosgi.bundle.management.impl;
 
-import java.util.Properties;
+import java.util.Hashtable;
+import java.util.Map;
 
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
@@ -21,7 +22,7 @@ public class ManagementActivator implements BundleActivator {
 		serviceManager = new ServiceManagementImpl(context);
 		
 		String remoteProperties = context.getProperty("remote-properties");
-		Properties properties = new Properties();
+		Map<String, Object> properties = new Hashtable<String, Object>();
 		if (remoteProperties != null) {
 			String[] remotePropertiesSplitted = remoteProperties.split(";");
 			for (String remoteProperty : remotePropertiesSplitted) {
