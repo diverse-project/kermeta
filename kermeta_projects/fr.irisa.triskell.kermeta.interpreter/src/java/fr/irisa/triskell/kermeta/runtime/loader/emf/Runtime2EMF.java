@@ -24,6 +24,7 @@ import org.apache.commons.logging.Log;
 import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.TreeIterator;
+import org.eclipse.emf.ecore.EAnnotation;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EDataType;
@@ -367,10 +368,13 @@ public class Runtime2EMF {
 					+ "\n   possible reason : the RuntimeObject has a weird type? Please check '"
 					+ unit.getMetaModelUri() + "'", null);
 		EStructuralFeature feature = null;
-		
+		internalLog.debug("  setting property of  "+ rObject + "; \t" +	eObject);
 		// Get all the Structural features of requested eObject
-		for (String prop_name : rObject.getProperties().keySet()) {
-									
+		// must sort the properties to make sure that if we have subset (ecore anotation) then the higher 
+		// level set must be processed first
+		java.util.List<String> sortedProperty = sortProperties(rObject.getProperties().keySet(), eObject);		
+		//for (String prop_name : rObject.getProperties().keySet()) {
+		for (String prop_name : sortedProperty) {
 			String eprop_name = prop_name;
 			// Special handling -> convert kermeta-Enumeration in ecore-EEnum
 			RuntimeObject property = (RuntimeObject) rObject.getProperties().get(prop_name);
@@ -417,13 +421,14 @@ public class Runtime2EMF {
 							((EList<Object>) eObject.eGet(feature)).add(p_o);
 						}
 					}
-					internalLog.debug("     "+ rObject + "; \n\t" +
+					if(colArr.size()>1 )
+						internalLog.debug("     "+ rObject + "; \n\t" +
 							eObject + "; \n\t" +
 							eObject.eClass().getName() + "."  + feature.getName() + 
 							"; num. of elts in feature : " + ((EList) eObject.eGet(feature)).size());					
 					if(feature.isOrdered() && colArr.size()>1){
 						this.propertiesToSort.add(new SortPropertyCommand(rObject, colArr, eObject, feature));
-					//	internalLog.debug("We will need to make sure that collection "+ eObject.eClass().getName() + "."  + feature.getName() + " is correctly ordered");
+						//internalLog.debug("We will need to make sure that collection "+ eObject.eClass().getName() + "."  + feature.getName() + " is correctly ordered");
 					}
 				}
 				else // EObject, EClass, EDataType
@@ -442,6 +447,37 @@ public class Runtime2EMF {
 		}
 	}
 
+	/** sort the properties according to the subsets annotation
+	 * a subset property will be after the more general property
+	 * this is for fixing bug #7660
+	 * @return
+	 */
+	private java.util.List<String> sortProperties(java.util.Set<String> unsortedPropertyNames, EObject eObject){
+		java.util.List<String> sortedProperty = new java.util.LinkedList<String>();		
+		for (String prop_name : unsortedPropertyNames){
+			//todo
+			// The feature corresponding to the name of the property
+			EStructuralFeature feature = eObject.eClass().getEStructuralFeature(prop_name);
+			EAnnotation subsetsAnnotation = feature.getEAnnotation("subsets");
+			if(subsetsAnnotation != null){
+				// must insert before the subsetting properties if already in the list
+				int insertionIndex = 0;
+				for(EObject eobj : subsetsAnnotation.getReferences()){
+					if (eobj instanceof ENamedElement){
+						ENamedElement namedElem = (ENamedElement)eobj;
+						int subsettingPropIndex = sortedProperty.indexOf(namedElem.getName());
+						if (subsettingPropIndex != -1 && subsettingPropIndex > insertionIndex) insertionIndex = subsettingPropIndex+1;
+					}
+				}
+				sortedProperty.add(insertionIndex,prop_name);
+			}
+			else{
+				// normally add at the beginning of the list
+				sortedProperty.add(0,prop_name);
+			}
+		}
+		return sortedProperty;
+	}
 	/**
 	 * A derivated version of getOrCreateObjectFromRuntimeObject adapted to the
 	 * creation of property (feature). Indeed, a property can be either an
