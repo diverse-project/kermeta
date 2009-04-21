@@ -30,7 +30,7 @@ class Main inherits TestCase
 		tr.printTestResult		
 	end
 
-	operation testLoadModels() is do
+	operation testLoadModel() is do
 		var modelURI : String init "platform:/plugin/org.kermeta.uml2.tests/test/models/bank.uml"
 		var repository : EMFRepository init EMFRepository.new
 		var resource : Resource init repository.getResource( modelURI )
@@ -44,6 +44,41 @@ class Main inherits TestCase
 		else
 			assertWithMsg(false, modelURI + " could not have been loaded.")
 		end
+	end
+	
+	operation testSaveAndReloadModel() is do
+		var modelURI : String init "platform:/plugin/org.kermeta.uml2.tests/test/models/bank.uml"
+		var repository : EMFRepository init EMFRepository.new
+		var resource : Resource init repository.getResource( modelURI )
+		if ( resource.contents.one.isInstanceOf(Model) ) then
+			assertWithMsg(true, modelURI + " has been correctly loaded.")
+			var model : Model
+			model ?= resource.contents.one
+			var p : uml::Package
+			p ?= model.packagedElement.one
+			assert( p.name.equals("bank") )
+		else
+			assertWithMsg(false, modelURI + " hasn't been loaded correctly.")
+		end
+		// this may fails due to bug #7660
+		var modelNewURI : String init "../models/output/bank.out.uml"
+		resource.saveWithNewURI(modelNewURI)
+		
+		// reload
+		var repository2 : EMFRepository init EMFRepository.new
+		var resource2 : Resource init repository2.getResource( modelNewURI )
+		if ( resource2.contents.one.isInstanceOf(Model) ) then
+			assertWithMsg(true, modelNewURI + " has been correctly loaded.")
+			var model : Model
+			model ?= resource2.contents.one
+			var p : uml::Package
+			p ?= model.packagedElement.one
+			assert( p.name.equals("bank") )
+		else
+			assertWithMsg(false, modelNewURI + " hasn't been loaded correctly.")
+		end
+		
+		
 	end
 
 }
