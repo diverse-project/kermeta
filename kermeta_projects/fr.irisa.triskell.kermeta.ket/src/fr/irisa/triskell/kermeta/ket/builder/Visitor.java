@@ -176,8 +176,11 @@ public class Visitor extends JETASTVisitor {
 					bf.append('\\').append('n');
 				else if (text.getText()[i] =='"')
 					bf.append('\\').append('"');
-				else if (text.getText()[i] =='\'')
-					bf.append('\\').append('\'');
+				
+				// Fixed bug #7675
+				/*else if (text.getText()[i] =='\'')
+					bf.append("\\").append('\'');*/
+				
 				else if (text.getText()[i] =='\t')
 					bf.append('\\').append('t');
 				else if (text.getText()[i] =='\r')
