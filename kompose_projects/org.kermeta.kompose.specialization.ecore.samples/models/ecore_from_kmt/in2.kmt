@@ -1,0 +1,14 @@
+/* $Id:$ 
+ * Creation : April 20, 2009
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            mclavreu
+ */
+package in2;
+
+require kermeta
+
+class A {
+	attribute name : kermeta::standard::String
+}

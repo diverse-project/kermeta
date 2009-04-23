@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmi:XMI xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore">
+  <ecore:EAnnotation source="ModelingUnit">
+    <details key="require" value="kermeta|"/>
+    <details key="using" value="in2|"/>
+  </ecore:EAnnotation>
+  <ecore:EPackage name="in2" nsURI="platform:/resource/org.kermeta.kompose.specialization.ecore.samples/models/ecore_from_kmt/in2.ecore#/"
+      nsPrefix="in2">
+    <eClassifiers xsi:type="ecore:EClass" name="A" eSuperTypes="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.ecore#/2/language/structure/Object">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EClass platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.ecore#/2/standard/String">
+        <eAnnotations source="kermeta">
+          <details key="isComposite" value="true"/>
+        </eAnnotations>
+      </eStructuralFeatures>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EDataType" name="_KermetaSpecialTypesAlias_" instanceClassName="java.lang.Object"/>
+  </ecore:EPackage>
+  <ecore:EAnnotation source="dependentResource"/>
+</xmi:XMI>
