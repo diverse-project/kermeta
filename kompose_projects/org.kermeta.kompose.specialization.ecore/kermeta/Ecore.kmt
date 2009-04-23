@@ -25,6 +25,14 @@ class EcoreComposer inherits kompose::Composer
    		self.saveModelByUri(model, uri, "http://www.eclipse.org/emf/2002/Ecore")
    end
    
+   method loadModel(path : String) : kompose::Mergeable is do
+    	var resource : kermeta::persistence::EMFResource
+       	resource ?= repository.getResource(path)
+        resource.load
+        self.resources.add(resource)
+        result ?= resource.instances.select{i|i.isKindOf(ecore::EPackage)}.first
+   end
+   
    method createContext(model : kompose::Mergeable) : kompose::Context is do
    		result := super(model)
    		result.classes.put("Package", EPackage)
@@ -97,7 +105,7 @@ class EGenericType inherits kompose::Mergeable {
 }
 
 @aspect "true"
-class EAnnotation{
+class EAnnotation inherits kompose::Mergeable {
 	method getSignature() : kompose::Signature is do
 		var s : kompose::StringSignature init 
 		kompose::StringSignature.new
