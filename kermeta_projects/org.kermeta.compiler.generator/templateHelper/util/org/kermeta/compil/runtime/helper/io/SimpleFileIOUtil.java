@@ -16,11 +16,13 @@
 package org.kermeta.compil.runtime.helper.io;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
+import java.io.OutputStreamWriter;
 
 import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.ResourcesPlugin;
@@ -46,8 +48,11 @@ public class SimpleFileIOUtil {
 		return file.isDirectory();
     }
 	
-	
 	public static void writeTextFile(java.lang.String filename, java.lang.String text) {
+		writeTextFileWithEncoding(filename, text, null);
+    }
+	
+	public static void writeTextFileWithEncoding(java.lang.String filename, java.lang.String text, java.lang.String encoding) {
 		
         try {
         	// Getting the file
@@ -66,9 +71,17 @@ public class SimpleFileIOUtil {
         		folder.mkdirs();
         	}
         	
-        	FileWriter fw = new FileWriter( filePath );
-            fw.write(text);
-            fw.close();
+        	BufferedWriter out = null;
+        	if( encoding!=null ) { // Write with a specific encoding
+        		out = new BufferedWriter(new OutputStreamWriter(
+					new FileOutputStream(filePath.replace("file://", "").replace("file:/", "")), encoding));
+        	} else { // Write with the default encoding
+        		out = new BufferedWriter(new OutputStreamWriter(
+    					new FileOutputStream(filePath.replace("file://", "").replace("file:/", ""))));
+        	}
+        	
+            out.write(text);
+            out.close();
             
             // Refresh the content of the folder that contains the created file
         	try {
