@@ -36,6 +36,15 @@ class FileIO
 	end
 	
 	/**
+	 * Writes a String in a text file by using a specific encoding
+	 */ 
+	operation writeTextFileWithEncoding(filename : String, text : String, encoding : String) : Void is do
+		if filename == void then raise FileNotFoundException.new end
+		@compiledJavaExtern "org.kermeta.compil.runtime.helper.io.SimpleFileIOUtil.writeTextFileWithEncoding(filename, text, encoding)"
+		extern fr::irisa::triskell::kermeta::runtime::io::SimpleFileIO.writeTextFileWithEncoding(filename, text, encoding)
+	end
+	
+	/**
 	 * Reads a text file
 	 */ 
 	operation readTextFile(filename : String) : String is do

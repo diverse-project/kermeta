@@ -16,11 +16,13 @@
 package fr.irisa.triskell.kermeta.runtime.io;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
+import java.io.OutputStreamWriter;
 
 import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.ResourcesPlugin;
@@ -76,11 +78,14 @@ public class SimpleFileIO {
     }
 	
 	
-	public static RuntimeObject writeTextFile(RuntimeObject filename, RuntimeObject text)
-    {
+	public static RuntimeObject writeTextFile(RuntimeObject filename, RuntimeObject text) {
+		writeTextFileWithEncoding(filename, text, null);
+        return filename.getFactory().getMemory().voidINSTANCE;
+    }
+	
+	public static RuntimeObject writeTextFileWithEncoding(RuntimeObject filename, RuntimeObject text, RuntimeObject encoding) {
 		
-        try
-        {
+        try {
         	/*
         	 * Getting the directory        	 
         	 */
@@ -103,9 +108,17 @@ public class SimpleFileIO {
         	if ( ! folder.exists() )
         		folder.mkdirs();
         	
-        	FileWriter fw = new FileWriter( filePath.replace("file://", "").replace("file:/", "") );
-            fw.write(String.getValue(text));
-            fw.close();
+        	BufferedWriter out = null;
+        	if( encoding!=null ) { // Write with a specific encoding
+        		out = new BufferedWriter(new OutputStreamWriter(
+					new FileOutputStream(filePath.replace("file://", "").replace("file:/", "")), String.getValue(encoding)));
+        	} else { // Write with the default encoding
+        		out = new BufferedWriter(new OutputStreamWriter(
+    					new FileOutputStream(filePath.replace("file://", "").replace("file:/", ""))));
+        	}
+        	
+            out.write(String.getValue(text));
+            out.close();
             
             // Refresh the content of the folder that contains the created file
         	try {
