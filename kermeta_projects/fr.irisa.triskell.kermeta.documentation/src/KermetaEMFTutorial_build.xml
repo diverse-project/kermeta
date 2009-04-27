@@ -18,6 +18,10 @@
 		<ant antfile="common_build.xml"
 		     target="OOo2dbk"/>
 	</target>
+	<target name="preparedbk">
+		<ant antfile="common_build.xml"
+		     target="preparedbk"/>
+	</target>
 	
 	<target name="html.single">
 		<ant antfile="common_build.xml"
