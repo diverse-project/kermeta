@@ -483,8 +483,8 @@ public class Runtime2EMF {
 						int subsettingPropIndex = sortedProperty.indexOf("eType");
 						if (subsettingPropIndex != -1 && subsettingPropIndex >= insertionIndex) insertionIndex = subsettingPropIndex+1;
 					}
-					else if(feature.getName().equals("eGenericSuperType")){
-						int subsettingPropIndex = sortedProperty.indexOf("eSuperType");
+					else if(feature.getName().equals("eGenericSuperTypes")){
+						int subsettingPropIndex = sortedProperty.indexOf("eSuperTypes");
 						if (subsettingPropIndex != -1 && subsettingPropIndex >= insertionIndex) insertionIndex = subsettingPropIndex+1;
 					}
 					else if(feature.getName().equals("eGenericExceptions")){
