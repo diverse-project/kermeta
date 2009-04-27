@@ -453,28 +453,48 @@ public class Runtime2EMF {
 	 * @return
 	 */
 	private java.util.List<String> sortProperties(java.util.Set<String> unsortedPropertyNames, EObject eObject){
+		
+		boolean isAnEcoreModel = unit.getMetaModelResource().getURI().toString().equals("http://www.eclipse.org/emf/2002/Ecore");
+		
 		java.util.List<String> sortedProperty = new java.util.LinkedList<String>();		
 		for (String prop_name : unsortedPropertyNames){
 			//todo
 			// The feature corresponding to the name of the property
 			EStructuralFeature feature = eObject.eClass().getEStructuralFeature(prop_name);
+			int insertionIndex = 0; // normally add at the beginning of the list
 			EAnnotation subsetsAnnotation = feature.getEAnnotation("subsets");
 			if(subsetsAnnotation != null){
 				// must insert before the subsetting properties if already in the list
-				int insertionIndex = 0;
+				
 				for(EObject eobj : subsetsAnnotation.getReferences()){
 					if (eobj instanceof ENamedElement){
 						ENamedElement namedElem = (ENamedElement)eobj;
 						int subsettingPropIndex = sortedProperty.indexOf(namedElem.getName());
-						if (subsettingPropIndex != -1 && subsettingPropIndex > insertionIndex) insertionIndex = subsettingPropIndex+1;
+						if (subsettingPropIndex != -1 && subsettingPropIndex >= insertionIndex) insertionIndex = subsettingPropIndex+1;
 					}
 				}
-				sortedProperty.add(insertionIndex,prop_name);
+				
 			}
 			else{
-				// normally add at the beginning of the list
-				sortedProperty.add(0,prop_name);
+				if(isAnEcoreModel){
+					// deal with the special eType and eGenericType, the generic contains more information that the eType
+					// so it must be saved after
+					if(feature.getName().equals("eGenericType")){
+						int subsettingPropIndex = sortedProperty.indexOf("eType");
+						if (subsettingPropIndex != -1 && subsettingPropIndex >= insertionIndex) insertionIndex = subsettingPropIndex+1;
+					}
+					else if(feature.getName().equals("eGenericSuperType")){
+						int subsettingPropIndex = sortedProperty.indexOf("eSuperType");
+						if (subsettingPropIndex != -1 && subsettingPropIndex >= insertionIndex) insertionIndex = subsettingPropIndex+1;
+					}
+					else if(feature.getName().equals("eGenericExceptions")){
+						int subsettingPropIndex = sortedProperty.indexOf("eExceptions");
+						if (subsettingPropIndex != -1 && subsettingPropIndex >= insertionIndex) insertionIndex = subsettingPropIndex+1;
+					}
+				}
 			}
+			// add at the specifyeid position (0 if no special case occur)
+			sortedProperty.add(insertionIndex,prop_name);
 		}
 		return sortedProperty;
 	}
