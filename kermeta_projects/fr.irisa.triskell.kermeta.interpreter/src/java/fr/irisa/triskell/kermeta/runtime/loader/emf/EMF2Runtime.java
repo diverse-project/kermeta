@@ -652,16 +652,17 @@ public class EMF2Runtime {
 	    {	// Find the property corresponding to the given feature
 	    	// Note : if it is not found, this method throws a KermetaRaisedException.
 	    	Property prop = getPropertyForEStructuralFeature((ClassDefinition) kclass.getTypeDefinition(), feature, eObject.eClass());
-	    	
-	    	setPropertyFromEStructuralFeature(feature, eObject, 
-	    			prop, rObject, kclass);
-	    	
-	    	if(feature instanceof EReference){
-	    		EReference ref = (EReference)feature;
-	    		if (ref.getEOpposite() == null && prop.getOpposite() != null){		    	
-		    		// need to manually set the opposite (not done by the normal case because not in the ecore)
-		    		setPropertyOppositeFromEStructuralFeature(feature, eObject, 
-		    				prop, rObject, kclass);
+
+	    	if(prop != null){ // in some situation prop may be null and we should ignore it. ex: EEnum.eTypeParameters as no translation in kermeta enumeration 		    	
+	    		setPropertyFromEStructuralFeature(feature, eObject, 
+		    			prop, rObject, kclass);	    		    	
+		    	if(feature instanceof EReference){
+		    		EReference ref = (EReference)feature;
+		    		if (ref.getEOpposite() == null && prop.getOpposite() != null){		    	
+			    		// need to manually set the opposite (not done by the normal case because not in the ecore)
+			    		setPropertyOppositeFromEStructuralFeature(feature, eObject, 
+			    				prop, rObject, kclass);
+			    	}
 		    	}
 	    	}
 	    }
