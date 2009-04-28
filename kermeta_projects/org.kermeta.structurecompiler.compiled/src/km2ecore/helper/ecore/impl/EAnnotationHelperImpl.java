@@ -29,6 +29,87 @@ import org.eclipse.emf.ecore.EClass;
  */
 public class EAnnotationHelperImpl extends ObjectImpl implements
 		EAnnotationHelper {
+	
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public java.lang.Boolean isFromAnEcoreMetamodel( ecore.EModelElement eModelElement ) {
+
+		java.lang.Boolean result = null;
+
+			//BIft:exists
+
+		java.lang.Boolean result_ft4 = null;
+
+			java.lang.Boolean test_ft4 = false;
+
+			
+		{
+
+			kermeta.standard.Iterator<ecore.EAnnotation> it_ft4 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil.<ecore.EAnnotation>convertAsOrderedSet(eModelElement.getEAnnotations()).iterator();
+			java.lang.Boolean idLoopCond_15 = false;
+			while( !idLoopCond_15 ) {
+			idLoopCond_15 = kermeta.standard.helper.BooleanWrapper.or(it_ft4.isOff(), org.kermeta.compil.runtime.helper.language.ObjectUtil.isNotEqualSwitcher(test_ft4, false));
+			if ( idLoopCond_15 ) {
+			} else {
+
+		java.lang.Boolean result_lambda_ft4 = null;
+		//BIle:func
+		ecore.EAnnotation a_lbdExp4 = it_ft4.next();
+
+			//BIft:exists
+
+		java.lang.Boolean result_ft5 = null;
+
+			java.lang.Boolean test_ft5 = false;
+
+			
+		{
+
+			kermeta.standard.Iterator<ecore.EStringToStringMapEntry> it_ft5 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil.<ecore.EStringToStringMapEntry>convertAsOrderedSet(a_lbdExp4.getDetails()).iterator();
+			java.lang.Boolean idLoopCond_16 = false;
+			while( !idLoopCond_16 ) {
+			idLoopCond_16 = kermeta.standard.helper.BooleanWrapper.or(it_ft5.isOff(), org.kermeta.compil.runtime.helper.language.ObjectUtil.isNotEqualSwitcher(test_ft5, false));
+			if ( idLoopCond_16 ) {
+			} else {
+
+		java.lang.Boolean result_lambda_ft5 = null;
+		//BIle:func
+		ecore.EStringToStringMapEntry d_lbdExp5 = it_ft5.next();
+
+			result_lambda_ft5 = kermeta.standard.helper.BooleanWrapper.and(kermeta.standard.helper.StringWrapper.equals(d_lbdExp5.getKey(), kermeta.standard.helper.StringWrapper.toString(km2ecore.helper.ecore.KermetaEAnnotationKey.getByName("ecore").getName())), kermeta.standard.helper.StringWrapper.equals(d_lbdExp5.getValue(), "true"));
+		//EIle:func
+
+			test_ft5 = kermeta.standard.helper.BooleanWrapper.or(test_ft5, result_lambda_ft5);
+		}
+			}
+		}
+
+
+			result_ft5 = test_ft5;
+		//EIft:exists
+		result_lambda_ft4 = result = kermeta.standard.helper.BooleanWrapper.and(kermeta.standard.helper.StringWrapper.equals(a_lbdExp4.getSource(), kermeta.standard.helper.StringWrapper.toString(km2ecore.helper.ecore.KermetaEAnnotationSource.getByName("kermeta").getName())), result_ft5);
+		//EIle:func
+
+			test_ft4 = kermeta.standard.helper.BooleanWrapper.or(test_ft4, result_lambda_ft4);
+		}
+			}
+		}
+
+
+			result_ft4 = test_ft4;
+
+		//CE
+		result = result_ft4;
+		//EIft:exists
+
+
+		return result;
+
+	}
+	
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

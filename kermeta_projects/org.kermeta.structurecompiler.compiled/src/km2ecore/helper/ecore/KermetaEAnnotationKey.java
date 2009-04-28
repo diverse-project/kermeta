@@ -72,7 +72,17 @@ public enum KermetaEAnnotationKey implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	DOCUMENTATION(4, "documentation", "documentation");
+	DOCUMENTATION(4, "documentation", "documentation"),
+	
+	/**
+	 * The '<em><b>Ecore</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #ECORE_VALUE
+	 * @generated
+	 * @ordered
+	 */
+	ECORE(5, "ecore", "ecore");
 
 	/**
 	 * The '<em><b>Is Abstract</b></em>' literal value.
@@ -148,6 +158,8 @@ public enum KermetaEAnnotationKey implements Enumerator {
 	 * @ordered
 	 */
 	public static final int DOCUMENTATION_VALUE = 4;
+	
+	public static final int ECORE_VALUE = 5;
 
 	/**
 	 * An array of all the '<em><b>Kermeta EAnnotation Key</b></em>' enumerators.
@@ -156,7 +168,7 @@ public enum KermetaEAnnotationKey implements Enumerator {
 	 * @generated
 	 */
 	private static final KermetaEAnnotationKey[] VALUES_ARRAY = new KermetaEAnnotationKey[] {
-			IS_ABSTRACT, ALIAS, SUPER_OPERATION, IS_READ_ONLY, DOCUMENTATION, };
+			IS_ABSTRACT, ALIAS, SUPER_OPERATION, IS_READ_ONLY, DOCUMENTATION, ECORE, };
 
 	/**
 	 * A public read-only list of all the '<em><b>Kermeta EAnnotation Key</b></em>' enumerators.
@@ -217,6 +229,8 @@ public enum KermetaEAnnotationKey implements Enumerator {
 			return IS_READ_ONLY;
 		case DOCUMENTATION_VALUE:
 			return DOCUMENTATION;
+		case ECORE_VALUE:
+			return ECORE;
 		}
 		return null;
 	}

@@ -1037,26 +1037,43 @@ public class ModelingUnitImpl extends TraceabilityImpl<EAnnotation> implements
 	 */
 	public void cleanEObject() {
 
-		java.lang.Boolean idIfCond_128 = false;
-		idIfCond_128 = kermeta.standard.helper.BooleanWrapper
-				.not(org.kermeta.compil.runtime.helper.language.ObjectUtil
-						.isVoidSwitcher(this
-								.getEClassifierByQualifiedName("ecore::EObject")));
+		java.lang.Boolean idIfCond_82 = false;
+		idIfCond_82 = kermeta.standard.helper.BooleanWrapper.not(org.kermeta.compil.runtime.helper.language.ObjectUtil.isVoidSwitcher(this.getEClassifierByQualifiedName("ecore::EObject")));
 
-		if (idIfCond_128) {
+		if( idIfCond_82 ) {
 
-			org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
-					.<ecore.EOperation> convertAsOrderedSet(
-							((ecore.EClass) org.kermeta.compil.runtime.helper.language.ObjectUtil
-									.asTypeSwitcher(
-											this
-													.getEClassifierByQualifiedName("ecore::EObject"),
-											org.kermeta.compil.runtime.ExecutionContext
-													.getInstance()
-													.getMetaClass(
-															"ecore.EClass")))
-									.getEOperations()).clear();
+		//BIft:each
+
+		
+	{
+
+		kermeta.standard.Iterator<ecore.EOperation> it_ft26 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil.<ecore.EOperation>convertAsOrderedSet(((ecore.EClass) org.kermeta.compil.runtime.helper.language.ObjectUtil.asTypeSwitcher(this.getEClassifierByQualifiedName("ecore::EObject"), org.kermeta.compil.runtime.ExecutionContext.getInstance().getMetaClass("ecore.EClass"))).getEOperations()).iterator();
+		java.lang.Boolean idLoopCond_83 = false;
+		while( !idLoopCond_83 ) {
+		idLoopCond_83 = it_ft26.isOff();
+		if ( idLoopCond_83 ) {
+		} else {
+
+		//BIle:func
+	ecore.EOperation op_lbdExp26 = it_ft26.next();
+
+		java.lang.Boolean idIfCond_84 = false;
+		idIfCond_84 = ((km2ecore.helper.ecore.EAnnotationHelper) org.kermeta.compil.runtime.helper.language.ClassUtil.newObject(km2ecore.helper.ecore.EcorePackage.eINSTANCE.getEAnnotationHelper())).isFromAnEcoreMetamodel(op_lbdExp26);
+
+		if( idIfCond_84 ) {
+
+		org.kermeta.compil.runtime.helper.basetypes.CollectionUtil.<ecore.EOperation>convertAsOrderedSet(((ecore.EClass) org.kermeta.compil.runtime.helper.language.ObjectUtil.asTypeSwitcher(this.getEClassifierByQualifiedName("ecore::EObject"), org.kermeta.compil.runtime.ExecutionContext.getInstance().getMetaClass("ecore.EClass"))).getEOperations()).remove(op_lbdExp26);
+	}
+
+	//EIle:func
+
+	}
 		}
+	}
+
+	//EIft:each
+
+	}
 
 	}
 

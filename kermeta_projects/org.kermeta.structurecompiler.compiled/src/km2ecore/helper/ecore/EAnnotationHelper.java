@@ -32,6 +32,13 @@ public interface EAnnotationHelper extends kermeta.language.structure.Object {
 	 * @generated
 	 */
 	void addAnnotationPropGetter(EModelElement eModelElement, String body);
+	
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public java.lang.Boolean isFromAnEcoreMetamodel( ecore.EModelElement eModelElement );
 
 	/**
 	 * <!-- begin-user-doc -->
