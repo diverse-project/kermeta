@@ -34,6 +34,7 @@ import org.eclipse.emf.ecore.ENamedElement;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.emf.ecore.impl.EEnumLiteralImpl;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 
@@ -490,6 +491,13 @@ public class Runtime2EMF {
 					else if(feature.getName().equals("eGenericExceptions")){
 						int subsettingPropIndex = sortedProperty.indexOf("eExceptions");
 						if (subsettingPropIndex != -1 && subsettingPropIndex >= insertionIndex) insertionIndex = subsettingPropIndex+1;
+					}
+					// deal with EEnumLiteralInstance, unsetting "instance" removes the other properties (name, literal and value)
+					else if(eObject instanceof EEnumLiteralImpl){
+						if(feature.getName().equals("name") || feature.getName().equals("value") || feature.getName().equals("literal")){
+							int subsettingPropIndex = sortedProperty.indexOf("instance");
+							if (subsettingPropIndex != -1 && subsettingPropIndex >= insertionIndex) insertionIndex = subsettingPropIndex+1;
+						}
 					}
 				}
 			}
