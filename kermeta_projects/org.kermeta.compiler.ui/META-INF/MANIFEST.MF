@@ -18,6 +18,7 @@ Require-Bundle: org.eclipse.ui,
  org.kermeta.simk,
  fr.irisa.triskell.traceability.model,
  org.kermeta.io.loader,
+ org.kermeta.compiler.common,
  org.apache.commons.logging;bundle-version="1.0.4",
  org.kermeta.structurecompiler.compiled
 Bundle-ActivationPolicy: lazy

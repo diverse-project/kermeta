@@ -91,7 +91,7 @@ public class Compiler extends org.kermeta.compiler.Generator {
 		this.monitor = monitor;
 		
 		initContext();
-		initCompilerProperties(ecorefile.getLocation().removeFileExtension().addFileExtension("compiler.properties").toString());
+		initCompilerProperties(ecorefile.getLocation().removeFileExtension().addFileExtension(KCompilerConstants.COMPILER_PROPERTIES_EXT).toString());
 	}
 
 	/**
@@ -109,7 +109,7 @@ public class Compiler extends org.kermeta.compiler.Generator {
 		this.monitor = monitor;
 		
 		initContext();
-		initCompilerProperties(ecorefile.getLocation().removeFileExtension().addFileExtension("compiler.properties").toString());
+		initCompilerProperties(ecorefile.getLocation().removeFileExtension().addFileExtension(KCompilerConstants.COMPILER_PROPERTIES_EXT).toString());
 	}
 
 	/**

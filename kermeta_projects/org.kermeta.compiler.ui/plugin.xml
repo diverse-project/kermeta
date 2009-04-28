@@ -87,6 +87,14 @@
                label="Generate Km merged for compilation (experimental)"
                menubarPath="org.eclipse.ui.articles.action.contribution.navigator.subMenu/org.kermeta.advanced.subsubmenu/kermetagroup1">
          </action>
+         <action
+               class="org.kermeta.compiler.ui.popup.actions.InitializePropertiesFile"
+               enablesFor="1"
+               icon="icons/etools_persp.gif"
+               id="org.kermeta.compiler.InitializePropertiesFile"
+               label="Generate the properties file for customizing the compilation"
+               menubarPath="org.eclipse.ui.articles.action.contribution.navigator.subMenu/org.kermeta.advanced.subsubmenu/kermetagroup1">
+         </action>
       </objectContribution>
    </extension>
    

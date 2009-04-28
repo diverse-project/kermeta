@@ -28,6 +28,9 @@ public final class KCompilerConstants {
 
 	public static final String REFINES_UC_EXT = "txt";
 	
+	/** Extension of the properties file of the compiler */
+    public static final String COMPILER_PROPERTIES_EXT = "compiler.properties";
+	
 	public static final String INPUT_FOLDER = "input";
 	
 	public static final String OUTPUT_FOLDER = "output";
@@ -67,22 +70,6 @@ public final class KCompilerConstants {
 	/** The name of the util directory in the generated code */
     public static final String UTIL_DIRECTORY = "util";
 	
-	
-	//From Persistence Mapping
-	/**		The constant name for managing a base class.		*/
-	public static final String _BASE_CLASS_NAME_ = "baseClassName";
-
-	/**		The constant name for managing a generated class.		*/
-	public static final String _GENERATED_CLASS_NAME_ = "generatedClassName";
-	
-	/**		The constant name for managing an uri.		*/
-	public static final String _URI_ = "uri";
-	
-	/**		The constant name for managing the file extension.		*/
-	public static final String _FILE_EXTENSION_ = "fileExtension";
-	
-	/**		The constant name for managing the factory.		*/
-	public static final String _FACTORY_CLASS_NAME = "factoryClassName";
 }
 
 
