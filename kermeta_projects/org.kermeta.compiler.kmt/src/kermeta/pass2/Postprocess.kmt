@@ -14,10 +14,12 @@ require "platform:/resource/org.kermeta.compiler.kmt/src/kermeta/helper/kermeta/
 require "platform:/resource/org.kermeta.compiler.kmt/src/kermeta/KM2EcoreContext.kmt"
 require "platform:/resource/org.kermeta.compiler.kmt/src/kermeta/helper/java/JavaHelper.kmt"
 require "platform:/resource/org.kermeta.compiler.kmt/src/kermeta/helper/simk/SimkHelper.kmt"
+require "platform:/resource/org.kermeta.compiler.kmt/src/kermeta/helper/ecore/EAnnotationHelper.kmt"
 
 using ecore
 using km2ecore
 using km2ecore::helper::java
+using km2ecore::helper::ecore
 using simk
 
 aspect class ModelingUnit {
@@ -103,9 +105,16 @@ aspect class ModelingUnit {
 		end
 	end
 	
+	/**
+	 * Remove the operations from the Ecore metamodel for the EClass ecore::EObject => avoid many conflicts
+	 */
 	operation cleanEObject() : Void is do
 		if not getEClassifierByQualifiedName("ecore::EObject").isVoid() then
-			getEClassifierByQualifiedName("ecore::EObject").asType(EClass).eOperations.clear()
+			getEClassifierByQualifiedName("ecore::EObject").asType(EClass).eOperations.each{ op |
+				if EAnnotationHelper.new().isFromAnEcoreMetamodel(op) then
+					getEClassifierByQualifiedName("ecore::EObject").asType(EClass).eOperations.remove(op)
+				end
+			}
 		end
 	end
 

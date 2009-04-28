@@ -107,6 +107,18 @@ class EAnnotationHelper {
 		result := getEmptyKermetaEAnnotation()
 	end
 
+	/**
+	 * Return true if the element is from an Ecore metamodel
+	 *
+	 * Value is true or false
+	 */
+	operation isFromAnEcoreMetamodel( eModelElement : EModelElement ) : Boolean is do
+		result := eModelElement.eAnnotations.exists{ a |
+			(a.source==KermetaEAnnotationSource.kermeta.name.toString())
+				and a.details.exists{ d | (d.key==KermetaEAnnotationKey.ecore.name.toString()) and (d.~value=="true") }
+		}
+	end
+
 }
 
 
@@ -125,4 +137,5 @@ enumeration KermetaEAnnotationKey {
 	superOperation;
 	isReadOnly;
 	documentation;
+	ecore;
 }
