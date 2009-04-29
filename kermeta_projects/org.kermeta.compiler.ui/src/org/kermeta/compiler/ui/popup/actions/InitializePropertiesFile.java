@@ -5,7 +5,11 @@
 * Copyright : IRISA / INRIA / Universite de Rennes 1
 * ----------------------------------------------------------------------------
 * Creation date : 12 dec. 07
-* Authors : Cyril Faucher <cfaucher@irisa.fr>
+* Authors : Cyril Faucher
+*
+* Description:
+* 	Generate a properties file for customizing the compilation process,
+* 	like the plugin_id, bundle_version or the unzipping of files to complement the compilation
 */
 
 package org.kermeta.compiler.ui.popup.actions;
@@ -37,7 +41,7 @@ public class InitializePropertiesFile implements IObjectActionDelegate {
 	protected IFile kmtfile;
 	
 	/**
-	 * Constructor for the action: InitializeTrekAllTextFiles.
+	 * Constructor for the action: InitializePropertiesFile.
 	 */
 	public InitializePropertiesFile() {
 		super();
