@@ -27,7 +27,7 @@ class Date {
 	 * Initialize a new Date and set the attribute time to the String value of the current time
 	 */
 	operation start() : Void is do
-		@compiledJavaExtern "externs.Date.start(this)"
+		@compiledJavaExtern "org.kermeta.language.mdk.externs.date.Date.start(this)"
         time ?= extern org::kermeta::language::mdk::externs::date::Date.start(self)
 	end
 
@@ -35,7 +35,7 @@ class Date {
 	 * Return the elapsed time between the start of self - the start of startDate
 	 */
 	operation getTimeDiff(startDate : Date) : Integer is do
-		@compiledJavaExtern "externs.Date.getTimeDiff(this, startDate)"
+		@compiledJavaExtern "org.kermeta.language.mdk.externs.date.Date.getTimeDiff(this, startDate)"
         result ?= extern org::kermeta::language::mdk::externs::date::Date.getTime(self, startDate)
 	end
 	
@@ -43,8 +43,16 @@ class Date {
 	 * Return the elapsed time since the last push, i.e.: the last myDate.start()
 	 */
 	operation getElapsedTime() : Integer is do
-		@compiledJavaExtern "externs.Date.getElapsedTime(this)"
+		@compiledJavaExtern "org.kermeta.language.mdk.externs.date.Date.getElapsedTime(this)"
         result ?= extern org::kermeta::language::mdk::externs::date::Date.getElapsedTime(self)
+	end
+	
+	/**
+	 * Return the current date as a String formated following the format parameter
+	 */
+	operation getCurrentDateAsString( format : String ) : String is do
+		@compiledJavaExtern "org.kermeta.language.mdk.externs.date.Date.getCurrentDateAsString(this, format)"
+        result ?= extern org::kermeta::language::mdk::externs::date::Date.getCurrentDateAsString(self, format)
 	end
 	
 }

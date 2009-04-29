@@ -14,6 +14,8 @@
 
 package org.kermeta.language.mdk.externs.date;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Stack;
 
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
@@ -69,6 +71,24 @@ public class Date {
         
         java.lang.Long long_ = new java.lang.Long(end.getTime()-start.getTime());
 		fr.irisa.triskell.kermeta.runtime.basetypes.Integer.setValue(result, new java.lang.Integer(long_.toString()));
+        return result;
+    }
+    
+    /**
+     * Return the current date as a String formated following the format parameter
+     * 
+     * @param self
+     * @param format
+     * @return
+     */
+    public static RuntimeObject getCurrentDateAsString(RuntimeObject self, RuntimeObject format){
+    	java.util.Date current_date = new java.util.Date();
+    	DateFormat simpleDF = new SimpleDateFormat(fr.irisa.triskell.kermeta.runtime.basetypes.String.getValue(format));
+    	    	
+    	//Create the resulting object
+        RuntimeObject result = self.getFactory().createObjectFromClassName("kermeta::standard::String");
+        
+		fr.irisa.triskell.kermeta.runtime.basetypes.String.setValue(result, simpleDF.format(current_date));
         return result;
     }
 		
