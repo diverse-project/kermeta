@@ -1,0 +1,262 @@
+/* $Id: EcoreHelper.kmt,v 1.15 2008-11-02 18:21:05 barais Exp $
+ * File : EcoreHelper.kmt
+ * License : EPL
+ * Copyright : IRISA / INRIA / Universite de Rennes 1
+ * ----------------------------------------------------------------------------
+ * Creation date : Sep 08, 2005
+ * Authors : 
+ *  Didier Vojtisek <dvojtise@irisa.fr>
+ *  Damien Pollet   <dpollet@irisa.fr>
+ * 
+ */
+//@mainClass "EcoreHelper::Main"
+//@mainOperation "main"
+ 
+
+package EcoreHelpers;  
+require "platform:/plugin/fr.irisa.triskell.kermeta.ecore/src/kermeta/ecore_behavior.kmt"
+//require "http://www.eclipse.org/emf/2002/Ecore"
+ 
+require "../helpers/QualifiedName.kmt"
+require "platform:/plugin/fr.irisa.triskell.traceability.model/model/kmt/Traceability.kmt"
+
+using kermeta::standard 
+using kermeta::exceptions
+using kermeta::persistence 
+//using qualifiedNames
+using ecore
+
+/** This class provides some helper methods to load/save Ecore models
+    Plus some other useful navigation methods
+ */
+class EcoreHelper
+{
+
+	
+	reference model: Resource
+	attribute __packages : Sequence<EPackage>
+	
+	property packages: Sequence<EPackage> 
+		getter is
+			do
+				if __packages.isVoid then
+					if model.isVoid then
+						var e: Exception init Exception.new
+						e.message := "can't access packages until model is set"
+						raise e
+					else
+						__packages := getPackages(model)
+					end
+				end
+				result := __packages
+			end
+
+	/**
+	 ** Use this to tell your Ecore Helper what model it's referring to.
+	 **/
+	operation setModel(model: Resource) is
+		do
+			self.model := model
+		end
+		
+	/**
+	 ** Pure function to extract package sequence from a resource
+	 **/
+	operation getPackages(model: Resource): Sequence<EPackage> is
+		do
+			result := Sequence<EPackage>.new
+			model.instances.each { e | if EPackage.isInstance(e) then var v : EPackage v?= e result.add(v) end}
+		end
+		
+	/** 
+	 ** Load and return a sequence of packages from a given model with a given repository
+	 **/
+    operation loadEcoreModel(repository : EMFRepository, modelUri : String) : Sequence<EPackage> is 
+    	do
+        	model := repository.createResource(modelUri, "http://www.eclipse.org/emf/2002/Ecore" )
+        	model.load
+        	result := getPackages(model)
+        end
+
+   /**
+    ** Load the packages of the given model
+    **/
+    operation loadMetamodel(modelUri : String) : EcoreHelper is
+        do
+        	loadEcoreModel( EMFRepository.new , modelUri)
+        	result := self
+        end
+
+	/** 
+	 ** retreives the qualified name of a given class 
+	 ** from the currently loaded metamodel
+	 **/
+	operation getClassifierQualifiedName(c : EClassifier) : String is 
+    	do
+    		if (c.ePackage != void) then
+    			result := getPackageQualifiedName(c.ePackage) + "::" + c.name			
+    		else
+    			result := c.name
+    		end
+    	end
+    	
+    /**
+     ** Returns the QualifiedName of the given class 
+     **/
+	operation getClassifierFQN(c : EClassifier) : qualifiedNames::QualifiedName is 
+    	do
+    		if (c.ePackage != void) then
+    			result := getPackageFQN(c.ePackage)
+    			if (result != void ) then // no need to continue there is an error the PAckage was not found
+    				result.append(c.name)
+    			end
+    		else
+    			result := qualifiedNames::QualifiedName.new.fromString(c.name)
+    		end
+    	end
+    	
+	/**
+	 ** Retuns the named ETypedElement from EClass context
+	 **/
+	operation getETypedElement(context: EClass, name : String) : ETypedElement 
+    	raises InvalidPathName,MetaModelNotLoaded is 
+		do
+		 	result := context.eAllStructuralFeatures.detect{e|e.name == name}
+		 	if result.isVoid then
+				result := context.eAllOperations.detect{e|e.name == name}
+			end
+		end
+		
+	/**
+	 ** Resolves a possibly relative or absolute type reference w.r.t. the current model.
+	 **/
+	operation findClassifierRelativeOrAbsolute(contextPackageName: qualifiedNames::QualifiedName, typeName: qualifiedNames::QualifiedName): EClassifier is
+		do 
+			// try relative first:
+		    result := getClassifierByFQN( contextPackageName.concat(typeName))
+		    if result.isVoid then // try absolute
+    		    result := getClassifierByFQN( typeName)
+		    end 
+		end
+		 
+	/**
+	 ** Navigates the model according to the path described by name and returns the classifier thus described
+	 **/
+	operation getClassifierByFQN(name : qualifiedNames::QualifiedName) : EClassifier is 
+    	do
+    	  	var packagePath  : qualifiedNames::QualifiedName init name.packageName
+    		var classifierName :String init name.typeName
+    		var pack : EPackage init packages.detect{p|p.name==(packagePath.first)}
+    		packagePath.remove(packagePath.first)
+    		 from var it : Iterator<String> init packagePath.iterator
+    		 until (it.isOff) loop	
+    		 	var s : String init it.next
+    			pack := pack.eSubpackages.detect{e|
+    			stdio.writeln(e.name)
+    			e.name == s}
+    		end
+    		if (pack.isVoid) then
+    		 	stdio.writeln("   can't find EClassifiers: " + name.toString)
+    		 	result := void
+    		else
+    			result := pack.eClassifiers.detect{e| e.name == classifierName }
+    		end
+    	end
+
+	/** 
+	 ** Retrieves the full qualified name of a package as a string
+	 **/
+	operation getPackageQualifiedName(p : EPackage) : String is 
+		do
+			result := getPackageFQN(p).toString 
+		end
+		
+	/**
+	 ** Gets the QualifiedName of  a package.
+	 **/
+	operation getPackageFQN(p : EPackage) : qualifiedNames::QualifiedName is 
+    	do
+    		if (p.eSuperPackage != void) then
+    			result := getPackageFQN(p.eSuperPackage)
+    			result.appendString( p.name)
+    		else
+    			result := qualifiedNames::QualifiedName.new.fromString(p.name)
+    		end
+    	end
+	
+	/** save an ECore model */
+    operation saveEcoreModel(repository : EMFRepository, m : EPackage, uri : String) is do
+	    var resource : Resource init repository.createResource(uri , "http://www.eclipse.org/emf/2002/Ecore")
+	    resource.instances.add(m)
+	    resource.save
+    end
+
+    /** 
+     ** Pure function to retreive a Class from a given package by its name 
+     **/
+    operation findClassByName(model : EPackage, className : String) : EClass is 
+        do
+    		result ?= model.eClassifiers.detect { ec | 
+    			ec.isInstanceOf(EClass) and 
+    			ec.name.equals(className) }
+        end
+    
+    /** 
+     ** Pure function to retreive a Package by its name  from the given package
+     **/
+    operation findPackageByName(model : Sequence<EPackage>, packageName : String) : EPackage is 
+        do
+    		result := model.detect { ec |
+    			ec.isInstanceOf(EPackage) and 
+    			ec.name.equals(packageName) }
+        end
+    
+    /** 
+     ** tells if this class has a parent in the given package 
+     **/
+    operation hasParentInPackage(aClass : EClass, pack : EPackage) : Boolean is 
+        do
+        	result := aClass.eSuperTypes.exists{ ec | pack.eClassifiers.exists { ec2 | ec == ec2} }
+        end
+    
+    /** add an annotation to the given model element
+     **  ensures that there is only one EAnnotation instance
+     **/
+    operation addAnnotation(aModelElement : EModelElement,
+                                            	source : String, 
+                                            	detailKey : String, 
+                                            	detailValue : String) : EAnnotation is 
+    	do
+    		var theAnnotation : EAnnotation init
+    			aModelElement.eAnnotations.detect{annot | annot.source.equals(source)}
+    		if theAnnotation.isVoid then 
+    			theAnnotation := EAnnotation.new
+    			theAnnotation.source := source
+    			aModelElement.eAnnotations.add(theAnnotation)
+    		end
+    		var detail : EStringToStringMapEntry init EStringToStringMapEntry.new
+    		detail.key := detailKey
+    		detail.~value := detailValue
+    		theAnnotation.details.add(detail)
+    		result := theAnnotation
+        end
+	
+	/**
+	 ** Returns the file name of the currently loaded model.
+	 **/
+	operation getEcoreFileName() : String is
+		do
+			result :=  model.uri
+		end
+        
+} 
+
+class InvalidPathName inherits Exception{
+}
+
+class InvalidContextName inherits Exception{
+}
+
+
+class MetaModelNotLoaded inherits Exception{
+}

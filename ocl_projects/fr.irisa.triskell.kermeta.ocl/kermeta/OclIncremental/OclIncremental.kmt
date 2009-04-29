@@ -1,0 +1,60 @@
+/* $Id:$ 
+ * Creation : February 9, 2009
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            mbelaid
+ */
+@mainClass "oclincremental::Main"
+@mainOperation "main"
+
+
+package oclincremental;
+
+
+require kermeta
+//require "platform:/plugin/fr.irisa.triskell.kermeta.ecore/src/kermeta/helpers/EcoreHelper.kmt"
+//require "platform:/resource/fr.irisa.triskell.kermeta.ocl/mmodel/OCLCST.ecore"
+
+require "TypeSystemMixin.kmt"
+
+require "oclMark.kmt"
+
+ 
+
+
+using kermeta::utils
+using kermeta::standard
+using kermeta::persistence
+using ocl::cst
+using EcoreHelpers
+using ocl2kmt
+
+class Main
+{
+	operation main() : Void is do 
+		 var repository : EMFRepository init EMFRepository.new
+ 			var resource : EMFResource															/* put here the name of the file*/ 
+ 			resource ?= repository.createResource("platform:/resource/fr.irisa.triskell.kermeta.ocl/xmi/2.xmi", "platform:/resource/fr.irisa.triskell.kermeta.ocl/mmodel/OCLCST.ecore")
+ 			resource.load
+ 			resource.each{e|e.asType(PackageDeclarationCS).marks := kermeta::standard::Set<MARKTYPE>.new}
+ 			resource.each{e|e.asType(PackageDeclarationCS).marks.add(MARKTYPE.UND)}
+ 			
+ 			var typemixin : TypeSystemMixin init TypeSystemMixin.new
+			
+			var ecorehelp : EcoreHelper init EcoreHelper.new
+ 			ecorehelp.loadMetamodel("platform:/resource/fr.irisa.triskell.kermeta.ocl/mmodel/company.ecore")
+			typemixin.setEcoreHelper(ecorehelp)
+			var context:TypeSystemMixin init typemixin			 			
+ 
+ 			resource.each{e|e.asType(PackageDeclarationCS).mark(context)}
+/* 		    resource.each{e|e.asType(PackageDeclarationCS).getEvents()}
+ 			resource.each{e|e.asType(PackageDeclarationCS).parents := kermeta::standard::Set<Integer>.new}
+  			resource.each{e|e.asType(PackageDeclarationCS).depth :=0}
+ 			resource.each{e|e.asType(PackageDeclarationCS).createGraph()}
+ 			stdio.writeln("\nEvents that may violate the constraint:")
+ 			//resource.each{e|e.asType(PackageDeclarationCS).events.each{ee|stdio.write("	") stdio.writeln(ee)}}
+ 			stdio.writeln("the other events have no impact in the evaluation of the OCL rules")
+*/	
+	end
+}

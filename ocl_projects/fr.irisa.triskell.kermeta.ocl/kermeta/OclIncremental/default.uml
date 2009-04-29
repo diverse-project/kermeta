@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<uml:Package xmi:version="2.1" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:uml="http://www.eclipse.org/uml2/2.1.0/UML" xmi:id="_DHMf0P3MEd2Ob89NjulzMA" name="Package">
+  <elementImport xmi:id="_DIrtkP3MEd2Ob89NjulzMA">
+    <importedElement xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
+  </elementImport>
+  <elementImport xmi:id="_DIrtkf3MEd2Ob89NjulzMA">
+    <importedElement xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+  </elementImport>
+  <elementImport xmi:id="_DIrtkv3MEd2Ob89NjulzMA">
+    <importedElement xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#UnlimitedNatural"/>
+  </elementImport>
+  <elementImport xmi:id="_DIrtk_3MEd2Ob89NjulzMA">
+    <importedElement xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+  </elementImport>
+  <elementImport xmi:id="_FVDegP3MEd2Ob89NjulzMA"/>
+  <elementImport xmi:id="_GU-qcP3MEd2Ob89NjulzMA"/>
+  <packagedElement xmi:type="uml:Class" xmi:id="_HFao4P3MEd2Ob89NjulzMA" name="A"/>
+  <packagedElement xmi:type="uml:Class" xmi:id="_LE-OsP3MEd2Ob89NjulzMA" name="B"/>
+  <packagedElement xmi:type="uml:Association" xmi:id="_NyRicP3MEd2Ob89NjulzMA" name="v" navigableOwnedEnd="Operation-lower">
+    <ownedEnd xmi:id="_NyRicf3MEd2Ob89NjulzMA" name="src" type="_LE-OsP3MEd2Ob89NjulzMA" association="_NyRicP3MEd2Ob89NjulzMA">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_NyRic_3MEd2Ob89NjulzMA" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_NyRicv3MEd2Ob89NjulzMA" value="1"/>
+    </ownedEnd>
+    <ownedEnd xmi:id="_NyRidP3MEd2Ob89NjulzMA" name="dst" type="_HFao4P3MEd2Ob89NjulzMA" aggregation="shared" association="_NyRicP3MEd2Ob89NjulzMA">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_NyRidv3MEd2Ob89NjulzMA" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_NyRidf3MEd2Ob89NjulzMA" value="1"/>
+    </ownedEnd>
+    <ownedEnd xmi:id="_EfBY8P3NEd2Ob89NjulzMA" type="_LE-OsP3MEd2Ob89NjulzMA" association="_NyRicP3MEd2Ob89NjulzMA"/>
+    <ownedEnd xmi:id="_Geum4P3NEd2Ob89NjulzMA" type="_LE-OsP3MEd2Ob89NjulzMA" association="_NyRicP3MEd2Ob89NjulzMA"/>
+    <ownedEnd xmi:id="_HAjhkP3NEd2Ob89NjulzMA" type="_NyRicP3MEd2Ob89NjulzMA" association="_NyRicP3MEd2Ob89NjulzMA"/>
+    <ownedEnd xmi:id="Operation-lower" name="lower" isDerived="true" association="_NyRicP3MEd2Ob89NjulzMA">
+      <ownedComment xmi:id="Operation-lower-_ownedComment.0" annotatedElement="Operation-lower">
+        <body>This information is derived from the return result for this Operation.</body>
+      </ownedComment>
+      <ownedComment xmi:id="Operation-lower-_ownedComment.1" annotatedElement="Operation-lower">
+        <body>Specifies the lower multiplicity of the return parameter, if present.</body>
+      </ownedComment>
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_METAMODELS/UML.metamodel.uml#Integer"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="Operation-lower-_upperValue" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="Operation-lower-_lowerValue"/>
+      <defaultValue xmi:type="uml:LiteralInteger" xmi:id="Operation-lower-_defaultValue" value="1"/>
+    </ownedEnd>
+    <memberEnd href="#_NyRicf3MEd2Ob89NjulzMA"/>
+    <memberEnd href="#_NyRidP3MEd2Ob89NjulzMA"/>
+    <memberEnd href="pathmap://UML_METAMODELS/UML.metamodel.uml#MultiplicityElement-lowerValue"/>
+    <memberEnd href="#_EfBY8P3NEd2Ob89NjulzMA"/>
+    <memberEnd href="#_Geum4P3NEd2Ob89NjulzMA"/>
+    <memberEnd href="#_HAjhkP3NEd2Ob89NjulzMA"/>
+    <memberEnd href="#Operation-lower"/>
+  </packagedElement>
+</uml:Package>
