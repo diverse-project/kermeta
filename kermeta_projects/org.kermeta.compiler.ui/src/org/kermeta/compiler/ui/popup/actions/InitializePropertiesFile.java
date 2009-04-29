@@ -1,6 +1,6 @@
-/*$Id: InitializeTrekAllLocalTextFiles.java,v 1.2 2008-01-29 08:27:13 cfaucher Exp $
-* Project : org.kermeta.compiler.trek.ui
-* File : 	InitializeTrekAllLocalTextFiles.java
+/*$Id: $
+* Project : org.kermeta.compiler.ui
+* File : 	InitializePropertiesFile.java
 * License : EPL
 * Copyright : IRISA / INRIA / Universite de Rennes 1
 * ----------------------------------------------------------------------------
