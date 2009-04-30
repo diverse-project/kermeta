@@ -1,0 +1,414 @@
+/* $Id: TypeSystemMixin.kmt,v 1.8 2008-11-02 18:21:05 barais Exp $
+ * Creation date: July 25, 2007
+ * License: EPL
+ * Copyright: IRISA/INRIA
+ * Authors: 
+ *          Mark Skipper
+ *          Olivier Barais
+ *          Didier Vojtisek
+ */
+
+package ocl2kmt;
+require kermeta
+//require "platform:/plugin/fr.irisa.triskell.kermeta.ecore/src/kermeta/helpers/EcoreHelper.kmt"
+require "EcoreHelper.kmt" 
+require "../helpers/QualifiedName.kmt"
+
+ 
+using kermeta::standard 
+using kermeta::standard
+using kermeta::utils
+using kermeta::exceptions
+
+/** A stack frame is used to hold the mappings of local variables to their 
+ ** type information -- expressed as a Ecore ETypedElement.
+ ** Note that the stack frames do not contain the "self" variable so
+ ** the whole frame can be popped when the variables go out of
+ ** context.
+ **/ 
+class StackFrame {
+
+	reference __visibleVariable : Hashtable<String,ecore::ETypedElement>
+	reference next: StackFrame
+	
+	operation visibleVariable(): Hashtable<String,ecore::ETypedElement> is
+		do
+			if __visibleVariable.isVoid then
+				__visibleVariable := Hashtable<String,ecore::ETypedElement>.new
+			end
+			result := __visibleVariable
+		end
+
+	operation add(variable: ecore::ETypedElement) is
+		do
+			visibleVariable.put(variable.name.toString, variable)
+		end
+		
+	/** lookup defers to the previous stack frame if not found, giving nested scopes **/
+	operation lookup(varName: String) : ecore::ETypedElement is
+		do
+			result := visibleVariable.getValue(varName)
+			if result.isVoid and next != void then
+				result := next.lookup(varName)
+			end
+		end
+		
+	operation setNext(newNext: StackFrame): StackFrame is
+		do
+			next := newNext
+			result := self
+		end
+}
+
+/** Var Stack provides an abstraction over a stack of local variables
+** in stack frames. It provides the pop, push and lookup functions.
+ **
+ **/
+class VarStack {
+
+	reference top: StackFrame
+	
+	operation push(): Void is
+		do
+			top := StackFrame.new.setNext(self.top)
+		end
+		
+	operation pop(): Void is
+		do
+			if top.isVoid then
+				stdio.writeln("Warning: pop on empty stack")
+			else
+    			top := top.next
+			end
+		end
+		
+	operation lookup(varName: String) : ecore::ETypedElement is
+		do
+			if top != void then
+				result := top.lookup(varName)
+			end
+		end
+	
+}
+
+/** TypeSystemMixin removes from the definition of ocl2kmtVisitor the
+ **  Implementation of the methods and other mechanisms necessary 
+ ** make the "pretty printer" smart enough to infer when to generate
+ ** implicit collect statements and when to use straight dot.
+ ** Also enables it to check atainst the inapprporiate use of some
+ ** collection operations on values that are not collections.
+ **/
+class TypeSystemMixin {
+
+	/** The name of the package from the "package xxxx" context part of the OCL file **/
+	reference contextPackageName : qualifiedNames::QualifiedName 
+	
+	/** the name of the class given in the "context C ..." part of the OCL declaration **/
+	reference contextClassifierFQN : qualifiedNames::QualifiedName
+	
+	/** This is a typed element that represents the current or "this" instance  **/
+	reference localFeature: ecore::ETypedElement
+	
+	attribute __context: VarStack
+	attribute __primitiveTypes: Hashtable<String, ecore::EDataType>
+	attribute __primitiveOperations : Hashtable<String, ecore::ETypedElement> 
+	
+	operation context(): VarStack is
+		do
+			if __context.isVoid then
+				__context := VarStack.new
+			end
+			result := __context
+		end
+
+	reference __ecoreHelper : EcoreHelpers::EcoreHelper
+	
+	operation setEcoreHelper(eh: EcoreHelpers::EcoreHelper) : Void is
+		do
+			__ecoreHelper:= eh
+		end
+		
+	operation xsetMetamodelURI(metamodelURI: String) is
+		do
+			stdio.writeln("Creating ecoreHelper for metamodel: " + metamodelURI +" --> Should probably be using setEcoreHelper")
+			__ecoreHelper := EcoreHelpers::EcoreHelper.new
+			__ecoreHelper.loadMetamodel(metamodelURI)  
+		end
+		
+	operation ecoreHelper(): EcoreHelpers::EcoreHelper is
+		do
+			if __ecoreHelper.isVoid then
+				var e : Exception init Exception.new
+				e.message := "Metamodel URI must be set before visiting"
+				raise e
+			else
+				result := __ecoreHelper
+			end
+		end
+
+    /** Mapping from primitve type names to their corresponding ETypedElement representations **/
+	operation primitiveTypes(): Hashtable<String, ecore::EDataType> is
+		do
+			if __primitiveTypes.isVoid then
+				__primitiveTypes := Hashtable<String, ecore::EDataType>.new 
+    			result := __primitiveTypes
+    			result.put("Integer", newType("Integer"))
+    			result.put("Real", newType("Real"))
+    			result.put("String", newType("String"))
+    			result.put("Boolean", newType("Boolean"))
+			end
+			result := __primitiveTypes
+		end
+		
+	operation isPrimitiveType(typeName: String) : Boolean is
+		do
+			result := primitiveTypes.containsKey(typeName)
+			if result then
+				stdio.writeln("[" + typeName+"] is a primitive type")
+			else
+				stdio.writeln("[" + typeName+"] is NOT a primitive type")
+			end
+		end
+		
+	/** Lookup table mapping operations on primitive types to a corresponding ETypedElement representation **/
+	operation primitiveOperations(): Hashtable<String, ecore::ETypedElement> is
+		do
+			if __primitiveOperations.isVoid then
+				__primitiveOperations :=  Hashtable<String, ecore::ETypedElement> .new
+				__primitiveOperations.put("String.size", createAttribute("String.size", lookupPrimitiveType("String"), 1,1,false))
+				__primitiveOperations.put("String.concat", createAttribute("String.size", lookupPrimitiveType("Integer"), 1,1,false))
+				__primitiveOperations.put("String.substring",createAttribute("String.substring", lookupPrimitiveType("String"), 1,1,false) )
+				__primitiveOperations.put("String.toInteger",createAttribute("String.size", lookupPrimitiveType("Integer"), 1,1,false) )
+				__primitiveOperations.put("String.toReal", createAttribute("String.size", lookupPrimitiveType("Real"), 1,1,false))
+			end
+			result  := __primitiveOperations
+		end
+		
+	operation getPrimitiveOperation(typeName: String, operationName: String ): ecore::ETypedElement is
+		do
+			result := primitiveOperations.getValue(typeName+"."+operationName)
+		end
+		
+	operation lookupPrimitiveType(typeName: String) : ecore::EDataType is
+		do
+			result := primitiveTypes.getValue(typeName)
+		end
+		
+	operation getLocalFeature() : ecore::ETypedElement is
+		do
+			if localFeature.isVoid then
+				stdio.writeln("Attempt to get lcoal feature before it has been set, reurning 'self' as default value")
+				setLocalFeature(getLocalVariable("self"))
+			end
+			result := localFeature
+		end
+		
+	operation getLocalFeatureIsMultiple(): Boolean is
+		do
+			result := getLocalFeature().many
+			stdio.writeln("Local feature [" +getLocalFeature.name +"] is multiple  is :" + result.toString)
+    	end
+    	
+	operation getLocalFeatureIsOrdered(): Boolean is
+		do
+			result := getLocalFeature().ordered
+    	end
+    	
+	operation setLocalFeature(feature: ecore::ETypedElement) is
+		do
+			stdio.writeln("Setting local feature to [" +feature.name + "] of type [" +  feature.eType.name + "]")
+			localFeature := feature
+		end
+	
+	operation stringLiteral(): ecore::ETypedElement is
+		do
+			result := simpleValue("String")
+		end
+		
+	operation simpleValue(typeName: String): ecore::ETypedElement is
+		do
+			//TODO, could make this a singleton or hash on type names like primitive types
+			result := createAttribute("simple value", lookupPrimitiveType(typeName), 1,1,false)
+		end
+		
+	/** Returns a typed element that corresponds to the attribute referenecd by the 
+	 ** named attribute of the provided classifier. This may be a type from the metamodel
+	 ** or one of our locally generated primitive type ETypedElements.
+	 **/
+	operation getContextFeature(type: ecore::EClassifier, name: String): ecore::ETypedElement is
+		do
+			stdio.writeln("Looking up feature ["+ name +"] in context [" +type.name + "]")
+			var localClass : ecore::EClass 
+			localClass ?= type
+			if localClass != void then
+    			result := ecoreHelper.getETypedElement(localClass, name)
+			else
+				if isPrimitiveType(type.name) then
+					result := getPrimitiveOperation(type.name, name)
+				else
+    				raise TypeError.new.setMessageReflexive("Can't look for feature '"+ name+"' in type: " + type.name +  type.toString + " which is not a class")
+				end
+			end
+		end
+	
+	operation getLocalFeatureTypeName(): String is
+		do
+			result := getLocalFeatureType().name
+		end
+		
+	operation getLocalFeatureType(): ecore::EClassifier is
+		do
+			result := getLocalFeature.eType
+		end
+		
+	/** called when a new "context ...." is met to set the local context classifier name  **/
+	operation setContextClassifierName(stringSequence: Sequence<String>) is
+		do
+			contextClassifierFQN := contextPackageName.concat(qualifiedNames::QualifiedName.new.fromSequence(stringSequence))
+			stdio.writeln("Set context classifier to [" + contextClassifierFQN.toString + "]")
+		//post:
+			if contextClassifierFQN.size == 0 then
+				var e : Exception init Exception.new
+				e.message := "Context classifier fqn is empty: something is wrong!"
+				raise e
+			end
+		end
+		
+	/**  called when a "package ..." is met to set the package name **/
+	operation  setContextPackageName(stringSequence: Sequence<String>) is
+		do
+			contextPackageName := qualifiedNames::QualifiedName.new.fromSequence(stringSequence)
+			stdio.writeln("Setting context package name [" + contextPackageName.toString + "]")
+		end
+		
+	/** returns the Ecore Eclassifier that corresponds to the current context classifier name and package **/
+	operation getContextClassifier(): ecore::EClass is
+		do
+			stdio.writeln("Looking up context classifier [" + contextClassifierFQN.toString + "]")
+			result ?= ecoreHelper.getClassifierByFQN(contextClassifierFQN)
+		//post:
+			if result.isVoid then
+				var e : Exception init Exception.new
+				e.message := "Can't find class " + contextClassifierFQN.toString + " in the ecore metamodel"
+				raise e
+			end
+			stdio.writeln("Found classifier [" + result.name + "]")
+		end
+		
+	/** When you add a stack frame, don't forget to add "self" **/
+	operation pushNewStackFrame() is
+		do
+			context.push()
+			context.top.add( createAttribute("self", getContextClassifier, 1, 1, false))
+		end
+		
+	operation popStackFrame() is
+		do
+			context.pop()
+		end
+		
+	/** search for a type in the metamodel using its fully qualified name **/
+	operation findType(typeName : qualifiedNames::QualifiedName): ecore::EClassifier is
+		do
+			stdio.writeln("Resolving type [" + typeName.toString + "]")
+			if isPrimitiveType(typeName.toString) then
+				result := lookupPrimitiveType(typeName.toString)
+    			stdio.writeln("Type [" + typeName.toString+ "] is a primitive type")
+			else
+				result := ecoreHelper.findClassifierRelativeOrAbsolute(contextPackageName, typeName)
+				if result != void then
+        			stdio.writeln("Type [" + typeName.toString + "] found in metamodel")
+				else
+					raise TypeError.new.setMessageReflexive("Unrecognised type: " + typeName.toString)
+				end
+			end
+		end
+		
+	/** add a local variable to the stack frame  with the EClassifier as its type **/
+	operation addLocalTypedVariable(name: String, type: ecore::EClassifier, lowerBound: Integer, upperBound: Integer, ordered: Boolean) is
+		do
+			context.top.add( createAttribute(name, type, lowerBound, upperBound, ordered))
+		end
+	
+	/** add a local variable to the stack frame  with the qualified name of its type as its type **/
+	operation addLocalVariable(name: String, typeName: qualifiedNames::QualifiedName, lowerBound: Integer, upperBound: Integer, ordered: Boolean) is
+		do
+			stdio.writeln("Adding variable [" + name + "] with a type called  [" + typeName.toString +"] lower bound: ["+lowerBound.toString+"] upper bound: ["+upperBound.toString+"]")
+			addLocalTypedVariable( name, findType(typeName), lowerBound, upperBound, ordered )
+		end
+		
+	/** creating a new ETypedElement you have to know the range and ordered properties, etc. **/
+	operation createAttribute(name: String, type: ecore::EClassifier, lowerBound: Integer, upperBound: Integer, ordered: Boolean) :ecore::EAttribute is
+		do
+			result := ecore::EAttribute.new
+			result.name := name
+			result.eType:= type
+			result.ordered := false
+			result.lowerBound:= lowerBound
+			result.upperBound:=upperBound
+			result.ordered := ordered
+		end
+			
+	operation newType(typeName: String): ecore::EDataType is
+		do
+			stdio.writeln("Creating new data type called: " + typeName )
+			result :=  ecore::EDataType.new 
+			result.name := typeName
+		end
+		
+	/** does this  potential feature name identify a feature in the current self object ? **/
+	operation contextDefinesFeature(featureName: String): Boolean is
+		do
+			result := (ecoreHelper.getETypedElement(getContextClassifier(), featureName) != void)
+		end
+		
+	/** is this potential feture name the name of a local variable in the stack frame? **/
+	operation featureIsLocalVariable(featureName: String): Boolean is
+		do
+			result := (getLocalVariable(featureName) != void)
+		end
+		
+	/** find and return the nmed local varile */
+	operation getLocalVariable(featureName: String): ecore::ETypedElement is
+		do
+			stdio.writeln("looking for variable ["+featureName+"] in stack frame")
+			if context.top != void then
+    			result := context.top.lookup(featureName)
+    		else
+    			stdio.writeln("===> Warning: Trying to look for variable ["+featureName+"] in uninitialised stack frame")
+			end
+			if result.isVoid then
+    			stdio.writeln("["+featureName+"] not found in local variables")
+			else
+    			stdio.writeln("["+featureName+"] is local variable of type ["+result.eType.name.toString+"]")
+			end
+		end
+		
+	/** Sigh, I don't know why this is here **/
+	operation getEcoreFileName() : String is
+		do
+			result := ecoreHelper.getEcoreFileName().replace("\\", "\\\\")  
+		end
+} 
+
+
+class TypeError inherits Exception {
+	operation initialize(typename: String, featureName: String): TypeError is
+		do
+			if message.isVoid then
+				message := ""
+			end
+			message := message + " Cant find [" + featureName + "] in [" + typename + "]"
+			result := self
+		end
+		
+	operation setMessageReflexive(s: String) :TypeError is
+		do
+			if message.isVoid then
+				message := ""
+			end
+			message := s + message
+			result:=self
+			
+		end
+}

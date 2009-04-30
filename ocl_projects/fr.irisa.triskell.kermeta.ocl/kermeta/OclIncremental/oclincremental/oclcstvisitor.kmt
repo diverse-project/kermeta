@@ -1,0 +1,447 @@
+package ocl;
+
+//require "platform:/resource/fr.irisa.triskell.kermeta.ocl/mmodel/OCLCST.ecore" 
+//require "oclMarking.kmt"
+require "oclViolEvents.kmt"
+
+ 
+using kermeta::standard   
+
+package cst
+{
+	aspect
+	abstract class CSTNode 
+	{
+		attribute depth : Integer
+		attribute parents : Set<Integer> 
+		operation createGraph() : Void is 
+
+		do end
+		operation printInd() : Void is 
+
+		do 
+		from var i:Integer init 0
+			until i>=self.depth*3-1
+			loop
+				if (self.parents.contains(i/3) and (i/3)*3==i) then
+					stdio.write("|")
+				else
+					if (i>=(self.depth-1)*3) then
+						if (i==(self.depth-1)*3) then
+							stdio.write("|")
+						else
+							stdio.write("_")
+						end
+					else
+						stdio.write(" ")
+					end
+				end
+				i:=i+1
+			end
+			stdio.write(" ")
+		end
+		operation printMark() : Void is 
+
+		do 
+			stdio.write(" [ ")
+			  self.mark.each {e | stdio.write(e.qualifiedName()) stdio.write(" ")}
+			stdio.writeln("]")
+		end
+		
+ 
+	}
+	aspect
+	class PackageDeclarationCS 
+	{ 
+
+		method createGraph() : Void from ocl::cst::CSTNode is
+		do
+			self.printInd()
+			stdio.writeln(self.pathNameCS.sequenceOfNames.first.toString)
+			self.contextDecls.each{e | e.depth:= self.depth + 1}
+			//self.contextDecls.each{e | e.parents:=self.parents}
+			self.contextDecls.each{e | e.parents:= Set<Integer>.new}
+			self.contextDecls.each{e | e.parents.add(depth)}
+			self.contextDecls.last.parents.remove(depth)
+			self.contextDecls.each{e | e.createGraph()}
+		end
+	}  
+	aspect
+	abstract class ContextDeclCS
+	{
+		method createGraph() : Void from ocl::cst::CSTNode is abstract 
+	} 
+	aspect
+	class PropertyContextCS 
+	{
+		
+		method createGraph() : Void from ocl::cst::ContextDeclCS is
+		do
+			self.printInd()
+			stdio.writeln(self.pathNameCS.sequenceOfNames.first.toString)
+			
+		end	}
+	aspect
+	class ClassifierContextDeclCS
+	{
+
+		method createGraph() : Void from ocl::cst::ContextDeclCS is
+		do
+			self.printInd()
+			stdio.writeln(self.pathNameCS.sequenceOfNames.first.toString)
+			self.invOrDefCS.depth:= self.depth + 1
+			self.invOrDefCS.parents:=self.parents
+			self.invOrDefCS.createGraph()
+		end	}
+	aspect
+	class OperationContextDeclCS 
+	{
+
+
+		method createGraph() : Void from ocl::cst::ContextDeclCS is
+			do end
+	}
+	aspect
+	class PrePostOrBodyDeclCS
+	{
+
+		method createGraph() : Void from ocl::cst::CSTNode is
+			do end
+	}
+
+	aspect
+	class OperationCS 
+	{
+
+
+		method createGraph() : Void from ocl::cst::CSTNode is
+			do end
+	}
+	aspect
+	abstract class InitOrDerValueCS
+{
+
+		method createGraph() : Void from ocl::cst::CSTNode is
+			abstract 
+	}
+	aspect
+	class DerValueCS 
+	{
+		method createGraph() : Void from ocl::cst::InitOrDerValueCS is
+			do end
+	}
+	aspect
+	class InitValueCS
+	{
+		method createGraph() : Void from ocl::cst::InitOrDerValueCS is
+			do end
+	}
+	aspect
+	abstract class InvOrDefCS
+	{
+		method createGraph() : Void from ocl::cst::CSTNode is
+			do end
+	}
+	aspect
+	class InvCS 
+	{
+		method createGraph() : Void from ocl::cst::InvOrDefCS is
+		do
+			self.printInd()
+			if ( self.simpleNameCS==void ) then
+				stdio.writeln("Invariant")
+			else
+				stdio.writeln(self.simpleNameCS.~value.toString())
+			end
+			self.expressionCS.depth:= self.depth + 1
+			self.expressionCS.parents:=self.parents
+			self.expressionCS.createGraph()
+			
+		end	
+	}
+	aspect
+	class DefCS 
+	{
+		method createGraph() : Void from ocl::cst::InvOrDefCS is
+			do end
+	}
+	aspect class DefExpressionCS
+	{
+
+		method createGraph() : Void from ocl::cst::CSTNode is
+			do end
+	}
+	aspect class PathNameCS
+	{
+	
+
+		method createGraph() : Void from ocl::cst::TypeCS is
+		do end
+	}
+	aspect class VariableExpCS
+	{
+		method createGraph() : Void from ocl::cst::OCLExpressionCS is do
+			self.printInd()
+			stdio.write(self.simpleNameCS.~value.toString)
+			self.printMark()
+		end
+	}
+	aspect class SimpleNameCS 
+	{
+		method createGraph() : Void from ocl::cst::OCLExpressionCS is
+			do end
+	}
+
+	 aspect
+	abstract class TypeCS
+	{
+		method createGraph() : Void from ocl::cst::OCLExpressionCS is
+		do end
+	}
+	aspect class PrimitiveTypeCS 
+	{
+		method createGraph() : Void from ocl::cst::SimpleNameCS is
+		do end
+	}
+	aspect class TupleTypeCS 
+	{
+
+		method createGraph() : Void from ocl::cst::TypeCS is
+		do end
+	}
+	aspect class CollectionTypeCS
+	{
+
+		method createGraph() : Void from ocl::cst::TypeCS is
+		do end
+	}
+
+	aspect
+	abstract  class OCLExpressionCS 
+	{
+		method createGraph() : Void from ocl::cst::CSTNode is
+		do end
+	}
+	aspect class LetExpCS
+	{
+
+		method createGraph() : Void from ocl::cst::OCLExpressionCS is
+		do end
+	}
+	aspect class IfExpCS 
+	{
+
+		method createGraph() : Void from ocl::cst::OCLExpressionCS is
+		do end
+	}
+	aspect class MessageExpCS
+	{
+
+		method createGraph() : Void from ocl::cst::OCLExpressionCS is
+			do end
+	}
+	aspect class OCLMessageArgCS
+	{
+
+		method createGraph() : Void from ocl::cst::CSTNode is
+			do end
+	}
+	aspect class VariableCS
+	{
+
+		method createGraph() : Void from ocl::cst::CSTNode is
+			do end
+	}
+	aspect
+	abstract  class LiteralExpCS
+	{
+		method createGraph() : Void from ocl::cst::OCLExpressionCS is
+			do end
+	} 
+	aspect class EnumLiteralExpCS 
+	{
+
+
+		method createGraph() : Void from ocl::cst::LiteralExpCS is
+			do end
+	}
+	aspect class CollectionLiteralExpCS 
+	{
+
+
+		method createGraph() : Void from ocl::cst::LiteralExpCS is
+			do end
+	}
+	aspect class TupleLiteralExpCS 
+	{
+
+
+		method createGraph() : Void from ocl::cst::LiteralExpCS is
+			do end
+	}
+	aspect class PrimitiveLiteralExpCS
+	{
+
+
+		method createGraph() : Void from ocl::cst::LiteralExpCS is
+		do end
+	}
+	aspect class IntegerLiteralExpCS
+	{
+		method createGraph() : Void from ocl::cst::PrimitiveLiteralExpCS is
+		do 
+			self.printInd()
+			stdio.write(self.integerSymbol.toString)			
+			self.printMark()
+		end
+	}
+	aspect class RealLiteralExpCS
+	{
+
+
+		method createGraph() : Void from ocl::cst::PrimitiveLiteralExpCS is
+		do end
+	}
+	aspect class StringLiteralExpCS
+	{
+
+
+		method createGraph() : Void from ocl::cst::PrimitiveLiteralExpCS is
+		do end
+	}
+	aspect class BooleanLiteralExpCS
+	{
+
+
+		method createGraph() : Void from ocl::cst::PrimitiveLiteralExpCS is
+		do end
+	}
+	aspect class NullLiteralExpCS
+	{
+
+
+		method createGraph() : Void from ocl::cst::LiteralExpCS is
+		do end
+	}
+	aspect class InvalidLiteralExpCS {
+
+
+		method createGraph() : Void from ocl::cst::LiteralExpCS is
+		do end
+	}
+	aspect class CollectionLiteralPartCS
+	{
+
+
+		method createGraph() : Void from ocl::cst::CSTNode is
+		do end
+	}
+	aspect class CollectionRangeCS
+	{
+
+
+		method createGraph() : Void from ocl::cst::CollectionLiteralPartCS is
+		do end
+	}
+	aspect class CallExpCS
+	{
+		method createGraph() : Void from ocl::cst::OCLExpressionCS is
+		do end
+	}
+	aspect class LoopExpCS
+	{
+
+
+		method createGraph() : Void from ocl::cst::CallExpCS is do
+			self.printInd()
+			stdio.write(self.simpleNameCS.~value.toString)
+			stdio.write("(")
+			stdio.write(self.variable1.name.toString())
+			if (variable2!=void) then
+					stdio.write(",")
+			 		stdio.write(self.variable2.name.toString())
+			end
+			stdio.write(")")
+			self.printMark()
+			self.source.depth := self.depth + 1
+			self.source.parents := Set<Integer>.new
+			self.source.parents.addAll(self.parents)
+			self.source.parents.add(depth)
+			self.source.createGraph()
+		 	self.body.depth := self.depth + 1
+		 	self.body.parents:=self.parents
+		 	self.body.createGraph()
+		 end
+
+	}
+/*	aspect class IteratorExpCS
+	{
+		method createGraph() : Void from ocl::cst::LoopExpCS is do
+		end	
+	}*/
+	aspect class IterateExpCS
+	{
+		method createGraph() : Void from ocl::cst::LoopExpCS is do
+			 
+			 end
+
+	}
+	aspect class FeatureCallExpCS
+	{
+		method createGraph() : Void from ocl::cst::CallExpCS is do
+			self.printInd()
+			stdio.write(self.simpleNameCS.~value.toString)
+			self.printMark()
+			self.source.depth : = self.depth + 1
+			self.source.parents := Set<Integer>.new
+			self.source.parents.addAll(self.parents)
+			self.source.parents.add(depth)
+			self.source.createGraph()
+			self.arguments.each{e | e.depth:= self.depth + 1}
+			self.arguments.each{e | e.parents:=self.parents}
+			self.arguments.each{e | e.createGraph()}
+		 end
+		
+	}
+
+	aspect class OperationCallExpCS 
+	{
+		method createGraph() : Void from ocl::cst::FeatureCallExpCS is do
+			self.printInd()
+			stdio.write(self.simpleNameCS.~value.toString)
+			self.printMark()
+			self.source.depth : = self.depth + 1
+			self.source.parents := Set<Integer>.new
+			self.source.parents.addAll(self.parents)
+			if (self.arguments.size().equals(0)) then
+			else self.source.parents.add(depth) end
+			self.source.createGraph()
+			self.arguments.each{e | e.depth:= self.depth + 1}
+			self.arguments.each{e | e.parents:=self.parents}
+			self.arguments.each{e | e.createGraph()}
+		end
+	}
+	aspect class IsMarkedPreCS 
+	{
+
+
+		method createGraph() : Void from ocl::cst::CSTNode is do
+			 
+			 end
+
+	}
+	aspect class StateExpCS 
+	{
+
+
+		method createGraph() : Void  is do
+			 
+			 end
+
+	}
+
+	
+
+}
+}
+
