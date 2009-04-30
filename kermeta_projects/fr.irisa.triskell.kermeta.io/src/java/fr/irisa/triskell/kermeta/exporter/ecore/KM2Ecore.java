@@ -219,8 +219,9 @@ abstract public class KM2Ecore extends KermetaOptimizedVisitor {
 		ecoreResource.getContents().add(newEAnnotation);
 		annotedModelElement.getEAnnotations().add(newEAnnotation);
 		// add the info in the Details map
-		if (key != null)
-			EcoreModelHelper.EAnnotation.addDetails(newEAnnotation, key, value);
+		if (key == null)
+			key = "documentation";
+		EcoreModelHelper.EAnnotation.addDetails(newEAnnotation, key, value);
 		
 		// try a direct link additionnaly to the detail map. 
 		if (referedEObject != null) 
