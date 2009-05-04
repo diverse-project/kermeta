@@ -1,4 +1,0 @@
-
-Plugin :
-=====
-Add an "Example" wizard which could unzip the "org.kermeta.uml2.samples" project.
