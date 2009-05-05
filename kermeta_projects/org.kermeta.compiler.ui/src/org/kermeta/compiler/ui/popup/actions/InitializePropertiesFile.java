@@ -89,6 +89,7 @@ public class InitializePropertiesFile implements IObjectActionDelegate {
 			if( !summary_file.exists() ) {
 				String str = CompilerProperties.PLUGIN_ID + " = " +
 				"\n" + CompilerProperties.COPYRIGHT_HEADER + " = " +
+				"\n" + CompilerProperties.REQUIRE_BUNDLE + " = " +
 				"\n" + CompilerProperties.BUNDLE_VERSION + " = 0.1.0" +
 				"\n" + CompilerProperties.MAIN_OPERATIONS + " = " +
 				"\n" + CompilerProperties.UNZIP_EXTERNS + " = " +
