@@ -1,0 +1,427 @@
+package ocl;
+
+//require "platform:/resource/fr.irisa.triskell.kermeta.ocl/mmodel/OCLCST.ecore" 
+require "EcoreHelper.kmt"
+require "oclMark.kmt"
+
+
+using kermeta::standard   
+using kermeta::persistence
+using ecore
+using EcoreHelpers
+/**  
+*******  ****    ******     ****
+   *    *    *   *     *   *    *
+   *    *    *   *      *  *    *
+   *    *    *   *     *   *    *
+   *     ****    ******     ****
+   
+   Add the context to each operation,and do the same instructions for
+ */
+
+class Event
+{
+	attribute qualifiedName:QualifiedName
+	attribute attOrRefName:String
+}
+package cst
+{
+	aspect
+	abstract class CSTNode 
+	{
+		attribute events : Set<String>
+		
+		operation getEvents() : Void is
+			
+		do end
+	}
+	
+	aspect
+	class PackageDeclarationCS 
+	{ 
+		method getEvents() : Void from ocl::cst::CSTNode is
+		do
+			self.events := Set<String>.new 
+			self.contextDecls.each{e | e.getEvents()}
+			self.contextDecls.each{e | self.events.addAll(e.events)}
+		end
+	}  
+	aspect
+	abstract class ContextDeclCS
+	{
+		method getEvents() : Void from ocl::cst::CSTNode is abstract 
+	} 
+	aspect
+	class PropertyContextCS 
+	{
+		
+		method getEvents() : Void from ocl::cst::ContextDeclCS is
+		do
+			stdio.writeln(self.pathNameCS.sequenceOfNames.first.toString)
+			//TODO
+		end	}
+	aspect
+	class ClassifierContextDeclCS
+	{
+
+		method getEvents() : Void from ocl::cst::ContextDeclCS is
+		do
+			self.pathNameCS.sequenceOfNames.each{e|stdio.writeln(e.toString())}
+			self.events := Set<String>.new
+			self.invOrDefCS.getEvents()
+			self.events.addAll(self.invOrDefCS.events)
+		end	}
+	aspect
+	class OperationContextDeclCS 
+	{
+		method getEvents() : Void from ocl::cst::ContextDeclCS is
+			do end
+	}
+	aspect
+	class PrePostOrBodyDeclCS
+	{
+		method getEvents() : Void from ocl::cst::CSTNode is
+			do end
+	}
+
+	aspect
+	class OperationCS 
+	{
+		method getEvents() : Void from ocl::cst::CSTNode is
+			do end
+	}
+	aspect
+	abstract class InitOrDerValueCS
+{
+		method getEvents() : Void from ocl::cst::CSTNode is
+			abstract 
+	}
+	aspect
+	class DerValueCS 
+	{
+		method getEvents() : Void from ocl::cst::InitOrDerValueCS is
+			do end
+	}
+	aspect
+	class InitValueCS
+	{
+		method getEvents() : Void from ocl::cst::InitOrDerValueCS is
+			do end
+	}
+	aspect
+	abstract class InvOrDefCS
+	{
+		method getEvents() : Void from ocl::cst::CSTNode is
+			do end
+	}
+	aspect
+	class InvCS 
+	{
+		method getEvents() : Void from ocl::cst::InvOrDefCS is
+		do
+			self.events := Set<String>.new
+			self.expressionCS.getEvents()
+			self.events.addAll(self.expressionCS.events)
+		end	
+	}
+	aspect
+	class DefCS 
+	{
+		method getEvents() : Void from ocl::cst::InvOrDefCS is
+			do end
+	}
+	aspect class DefExpressionCS
+	{
+
+		method getEvents() : Void from ocl::cst::CSTNode is
+			do end
+	}
+	aspect class PathNameCS
+	{
+	
+
+		method getEvents() : Void from ocl::cst::TypeCS is
+		do end
+	}
+	aspect class VariableExpCS
+	{
+		method getEvents() : Void from ocl::cst::OCLExpressionCS is do
+				self.events := Set<String>.new
+		end
+	}
+	
+	aspect class SimpleNameCS 
+	{
+		method getEvents() : Void from ocl::cst::OCLExpressionCS is
+			do end
+	}
+
+	 aspect
+	abstract class TypeCS
+	{
+		method getEvents() : Void from ocl::cst::OCLExpressionCS is
+		do end
+	}
+	aspect class PrimitiveTypeCS 
+	{
+		method getEvents() : Void from ocl::cst::SimpleNameCS is
+		do end
+	}
+	aspect class TupleTypeCS 
+	{
+
+		method getEvents() : Void from ocl::cst::TypeCS is
+		do end
+	}
+	aspect class CollectionTypeCS
+	{
+
+		method getEvents() : Void from ocl::cst::TypeCS is
+		do end
+	}
+
+	aspect
+	abstract  class OCLExpressionCS 
+	{
+		method getEvents() : Void from ocl::cst::CSTNode is
+		do end
+	}
+	aspect class LetExpCS
+	{
+
+		method getEvents() : Void from ocl::cst::OCLExpressionCS is
+		do end
+	}
+	aspect class IfExpCS 
+	{
+
+		method getEvents() : Void from ocl::cst::OCLExpressionCS is
+		do end
+	}
+	aspect class MessageExpCS
+	{
+
+		method getEvents() : Void from ocl::cst::OCLExpressionCS is
+			do end
+	}
+	aspect class OCLMessageArgCS
+	{
+
+		method getEvents() : Void from ocl::cst::CSTNode is
+			do end
+	}
+	aspect class VariableCS
+	{
+
+		method getEvents() : Void from ocl::cst::CSTNode is
+			do 
+			end
+	}
+	aspect
+	abstract  class LiteralExpCS
+	{
+		method getEvents() : Void from ocl::cst::OCLExpressionCS is
+			do end
+	} 
+	aspect class EnumLiteralExpCS 
+	{
+
+
+		method getEvents() : Void from ocl::cst::LiteralExpCS is
+			do end
+	}
+	aspect class CollectionLiteralExpCS 
+	{
+
+
+		method getEvents() : Void from ocl::cst::LiteralExpCS is
+			do end
+	}
+	aspect class TupleLiteralExpCS 
+	{
+
+
+		method getEvents() : Void from ocl::cst::LiteralExpCS is
+			do end
+	}
+	aspect class PrimitiveLiteralExpCS
+	{
+
+
+		method getEvents() : Void from ocl::cst::LiteralExpCS is
+		do end
+	}
+	aspect class IntegerLiteralExpCS
+	{
+		method getEvents() : Void from ocl::cst::PrimitiveLiteralExpCS is
+		do 
+			self.events := Set<String>.new
+		end
+	}
+	aspect class RealLiteralExpCS
+	{
+
+
+		method getEvents() : Void from ocl::cst::PrimitiveLiteralExpCS is
+		do end
+	}
+	aspect class StringLiteralExpCS
+	{
+
+
+		method getEvents() : Void from ocl::cst::PrimitiveLiteralExpCS is
+		do end
+	}
+	aspect class BooleanLiteralExpCS
+	{
+
+
+		method getEvents() : Void from ocl::cst::PrimitiveLiteralExpCS is
+		do end
+	}
+	aspect class NullLiteralExpCS
+	{
+
+
+		method getEvents() : Void from ocl::cst::LiteralExpCS is
+		do end
+	}
+	aspect class InvalidLiteralExpCS {
+
+
+		method getEvents() : Void from ocl::cst::LiteralExpCS is
+		do end
+	}
+	aspect class CollectionLiteralPartCS
+	{
+
+
+		method getEvents() : Void from ocl::cst::CSTNode is
+		do end
+	}
+	aspect class CollectionRangeCS
+	{
+
+
+		method getEvents() : Void from ocl::cst::CollectionLiteralPartCS is
+		do end
+	}
+	aspect class CallExpCS
+	{
+		method getEvents() : Void from ocl::cst::OCLExpressionCS is
+		do end
+	}
+	aspect class LoopExpCS
+	{
+
+
+		method getEvents() : Void from ocl::cst::CallExpCS is do
+			//if (self.simpleNameCS.~value == "forAll") then
+			//	if (self.mark.contains(MARKTYPE.UND)) then
+					self.events := Set<String>.new
+					self.source.getEvents()
+					self.body.getEvents()
+					self.events.addAll(self.source.events)
+					self.events.addAll(self.body.events)
+			//	end
+			//end 
+			//self.source.getEvents()
+		 	//self.body.getEvents()
+		end
+
+	}
+/*	aspect class IteratorExpCS
+	{
+		method getEvents() : Void from ocl::cst::LoopExpCS is do
+			self.events := Set<String>.new
+		end	
+	}
+	aspect class IterateExpCS
+	{
+		method getEvents() : Void from ocl::cst::LoopExpCS is do
+			 
+			 end
+
+	}*/
+	aspect class FeatureCallExpCS
+	{
+		method getEvents() : Void from ocl::cst::CallExpCS is do
+			self.events := Set<String>.new
+			self.source.getEvents()
+			self.arguments.each{e | e.getEvents()}
+			if (self.simpleNameCS.type == SimpleTypeEnum.identifier) then 
+				self.events.addAll(self.source.events)
+				//TODO
+				if (self.isAtt) then	
+					var str : String init "update "
+					str.append(self.simpleNameCS.~value)
+					self.events.add(str)
+				else
+					var str : String
+					self.marks.each{e| str := if (e==MARKTYPE.UPD) then "update " else if (e==MARKTYPE.INC) then "insert " else "delete " end end
+					str.append(self.simpleNameCS.~value)
+					self.events.add(str)}
+				end
+			end
+					//TODO other operations and, or, implies, <>, ...etc
+		end
+		
+	}
+
+	aspect class OperationCallExpCS 
+	{
+		method getEvents() : Void from ocl::cst::FeatureCallExpCS is do
+			self.events := Set<String>.new
+			self.source.getEvents()
+			self.arguments.each{e | e.getEvents()}
+			self.events.addAll(self.source.events)
+			self.arguments.each{e | self.events.addAll(e.events)}
+/*			if ((self.simpleNameCS.~value == ">") or (self.simpleNameCS.~value == ">=")
+			or ((self.simpleNameCS.~value == "<") or (self.simpleNameCS.~value == "<=")))  then		
+				self.events.addAll(self.source.events)
+				self.arguments.each{e | self.events.addAll(e.events)}
+			else
+					if (self.simpleNameCS.type == SimpleTypeEnum.identifier) then 
+						stdio.writeln(" /////////////////////" +self.simpleNameCS.type.qualifiedName())
+						self.events.addAll(self.source.events)
+						//TODO
+						if (self.isAtt) then	
+							var str : String init "update "
+							str.append(self.simpleNameCS.~value)
+							self.events.add(str)
+						else
+							var str : String
+							self.mark.each{e| str := if (e==MARKTYPE.UPD) then "update " else if (e==MARKTYPE.INC) then "insert " else "delete " end end
+												str.append(self.simpleNameCS.~value)
+												self.events.add(str)}
+						end
+					end
+					//TODO other operations and, or, implies, <>, ...etc
+			end*/
+		end
+
+	}
+	aspect class IsMarkedPreCS 
+	{
+
+
+		method getEvents() : Void from ocl::cst::CSTNode is do
+			 
+			 end
+
+	}
+	aspect class StateExpCS 
+	{
+
+
+		method getEvents() : Void  is do
+			 
+			 end
+
+	}
+
+	
+
+}
+}
+
