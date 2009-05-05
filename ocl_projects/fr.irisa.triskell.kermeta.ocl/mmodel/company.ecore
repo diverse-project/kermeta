@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<ecore:EPackage xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="company"
+    nsURI="http://company" nsPrefix="company">
+  <eSubpackages name="Business">
+    <eClassifiers xsi:type="ecore:EClass" name="Company" eSuperTypes="#//Personnel/Party">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="employee" upperBound="-1"
+          eType="#//Personnel/Person" containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="ceo" lowerBound="1" eType="#//Personnel/Person"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="owner" lowerBound="1"
+          eType="#//Personnel/Party" eOpposite="#//Personnel/Party/company"/>
+    </eClassifiers>
+  </eSubpackages>
+  <eSubpackages name="Personnel">
+    <eClassifiers xsi:type="ecore:EClass" name="Party">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1"
+          eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="company" upperBound="-1"
+          eType="#//Business/Company" containment="true" eOpposite="#//Business/Company/owner"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Person" eSuperTypes="#//Personnel/Party">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="forename" lowerBound="1"
+          eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="age" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eClassifiers>
+  </eSubpackages>
+</ecore:EPackage>
