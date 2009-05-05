@@ -5544,4 +5544,194 @@ s := "I am a string" <emphasis>// "I am a string" is a StringLiteral</emphasis><
       </tgroup>
     </informaltable>
   </appendix>
+  <appendix id="appendix_knowntags.link">
+    <title id="appendix_knowntags.title.link">Known Kermeta tags</title>
+
+    <para>This annex collect the use of known tags. 
+    They are generally used as an extension on Kermeta in these typically uses :</para>
+    <itemizedlist>
+    	<listitem><simpara>supporting Ecore compatibility,</simpara></listitem>
+    	<listitem><simpara>preparing a future language improvement,</simpara></listitem>
+    	<listitem><simpara>supporting a specific need that isn't part of the language core.</simpara></listitem>
+    </itemizedlist>
+    <note><para>TODO : finish this by looking into kermeta2ecore transformation</para></note>
+    <variablelist><title>Kown tags :</title>
+		<varlistentry><term><varname>aspect</varname></term>
+			<listitem>
+			<formalpara><title>Possible values</title>
+				<para>"true", case insensitive, any other value is considered as "false".
+				</para>
+			</formalpara>	
+			<formalpara><title>Context</title>
+				<para>Class
+				</para>
+			</formalpara>
+			<formalpara><title>Use description</title>
+				<para>Old way to indicate that a Class must be reopened as an aspect of another Class and 
+    		then merging its features. We now prefer to use the dedicated keyword.
+				</para>
+			</formalpara>
+			<formalpara><title>Use sample</title>
+				<para><programlisting language="kermeta">@aspect "true"
+class MyClas {
+// ...
+}</programlisting></para>
+			</formalpara>		
+			</listitem>
+		</varlistentry>
+		<varlistentry><term><varname>ecoreUri</varname></term>
+			<listitem>
+			<formalpara><title>Possible values</title>
+				<para>An nsURI.
+				</para>
+			</formalpara>	
+			<formalpara><title>Context</title>
+				<para>Package
+				</para>
+			</formalpara>
+			<formalpara><title>Use description</title>
+				<para>Indicates the nsUri for the given package when it is transformed in Ecore.
+				</para>
+			</formalpara>
+			<formalpara><title>Use sample</title>
+				<para><programlisting language="kermeta">@ecoreUri "http://myPackage/1.0/"
+package myPackage;
+</programlisting></para>
+			</formalpara>		
+			</listitem>
+		</varlistentry>
+		<varlistentry><term><varname>mainClass</varname></term>
+			<listitem>
+			<formalpara><title>Possible values</title>
+				<para>Qualified name of a class in the kermeta program.
+				</para>
+			</formalpara>	
+			<formalpara><title>Context</title>
+				<para>ModelingUnit
+				</para>
+			</formalpara>
+			<formalpara><title>Use description</title>
+				<para>Indicates a preferred class from which the run configuration should try to start the kermeta program.
+				This helps to create a default run configuration.
+				Must be used with the mainOperation tag.
+				</para>
+			</formalpara>
+			<formalpara><title>Use sample</title>
+				<para><programlisting language="kermeta">@mainClass "myPackage::MyMainClass"
+@mainOperation "main"
+
+package myPackage;
+
+require kermeta
+class MyMainClass
+{
+	operation main() : Void is do 
+		// TODO: implement 'main' operation
+	end
+}</programlisting></para>
+			</formalpara>		
+			</listitem>
+		</varlistentry>
+		<varlistentry><term><varname>mainOperation</varname></term>
+			<listitem>
+			<formalpara><title>Possible values</title>
+				<para>name of an operation in the main class.
+				</para>
+			</formalpara>	
+			<formalpara><title>Context</title>
+				<para>ModelingUnit
+				</para>
+			</formalpara>
+			<formalpara><title>Use description</title>
+				<para>Indicates a preferred operation from which the run configuration should try to start the kermeta program.
+				This helps to create a default run configuration.
+				Must be used with the mainClass tag. The operation must : either have no parameter, or have string parameters.
+				</para>
+			</formalpara>
+			<formalpara><title>Use sample</title>
+				<para><programlisting language="kermeta">@mainClass "myPackage::MyMainClass"
+@mainOperation "main"
+
+package myPackage;
+
+require kermeta
+class MyMainClass
+{
+	operation main() : Void is do 
+		// TODO: implement 'main' operation
+	end
+}</programlisting></para>
+			</formalpara>		
+			</listitem>
+		</varlistentry>
+	</variablelist>
+   
+  </appendix>
+
+  <appendix id="appendix_KermetaEcore.link">
+    <title id="appendix_KermetaEcore.title.link">Kermeta / Ecore mapping</title>
+
+	<para>Kermeta natively integrates Ecore defintions, however it uses an internal mapping in order to import ecore model as kermeta models.
+	In the other way round a kermeta model can be translated into a pure ecore model. (for example in the compiler)</para>
+    <para>This annex indicates how Kermeta models are translated into Ecore models and vice versa.</para>
+    <note><para>TODO : finish this by looking into kermeta2ecore transformation and the compiler specifications.</para></note>
+    <informaltable>
+      <tgroup cols="3">
+        <colspec colname="c1" colwidth="1*" />
+		<colspec colname="c2" colwidth="1*" />
+        <colspec colname="c3" colwidth="3*" />
+        <thead>
+          <row>
+            <entry align="left"><para>Kermeta concept</para></entry>
+            <entry align="left"><para>Ecore concept</para></entry>
+            <entry align="left"><para>Notes</para></entry>
+          </row>
+        </thead>
+
+        <tbody>
+          <row>
+            <entry><para>Class</para></entry>
+            <entry><para>EClass</para></entry>
+            <entry align="left"><para></para></entry>
+          </row>
+          <row>
+            <entry><para>Constraint (invariant)</para></entry>
+            <entry><para>EAnnotation(source="kermeta.inv") + DetailEntry</para></entry>
+            <entry align="left"><para></para></entry>
+          </row>
+          <row>
+            <entry><para>Constraint (precondition|postcondition)</para></entry>
+            <entry><para>EAnnotation(source="kermeta.pre"|"kermeta.post") + DetailEntry</para></entry>
+            <entry align="left"><para></para></entry>
+          </row>
+          <row>
+            <entry><para>Constraint (postcondition)</para></entry>
+            <entry><para>EAnnotation(source="") + DetailEntry</para></entry>
+            <entry align="left"><para></para></entry>
+          </row>
+          <row>
+            <entry><para>Operation</para></entry>
+            <entry><para>EOperation</para></entry>
+            <entry align="left"><para></para></entry>
+          </row>
+          <row>
+            <entry><para>Tag (general case)</para></entry>
+            <entry><para>EAnnotation(source="kermeta") + DetailEntry</para></entry>
+            <entry align="left"><para>Most Tags are translated into an EAnnotation with 
+            source="kermeta" and one DetailEntry with key=<replaceable>NameOfTheTag</replaceable> 
+            and value=<replaceable>ValueOfTheTag</replaceable>. 
+            If this is a /** */ comment, the name of the tag is "documentation".</para></entry>
+          </row>
+          <row>
+            <entry><para>Tag (applied on Constraint)</para></entry>
+            <entry><para>EAnnotation(source="kermeta.inv.doc") + DetailEntry</para></entry>
+            <entry align="left"><para>EAnnotation.references points to the EAnnotation 
+            representing the Constraints. DetailEntry with key=<replaceable>NameOfTheTag</replaceable> 
+            and value=<replaceable>ValueOfTheTag</replaceable>. 
+            If this is a /** */ comment, the name of the tag is "documentation".</para></entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </informaltable>
+  </appendix>
 </book>
