@@ -1,0 +1,22 @@
+/* $Id: $ 
+ * Creation : May 5, 2009
+ * Licence  : EPL 
+ * Copyright: INRIA / IRISA / University of Rennes 1, France
+ * Authors  : 
+ *            Cyril Faucher <cyril.faucher@inria.fr>
+ *            
+ */
+
+package kermeta::utils;
+
+require kermeta
+
+using kermeta::standard
+
+/**
+ * Implementation of Date
+ * At this time nothing: Date would be for dealing with day of the year, etc
+ */
+class Date {
+
+}
