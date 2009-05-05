@@ -3,7 +3,7 @@
  * Licence  : EPL 
  * Copyright:
  * Authors  : 
- *            mbelaid
+ *            Mohammed-Said Belaid
  */
 @mainClass "oclincremental::Main"
 @mainOperation "main"

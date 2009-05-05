@@ -285,7 +285,7 @@ package cst
 			v?= context.getValue("typemixin")
 			var s : QualifiedName
 			s?= context.getValue("qualifiedTypeName")
-			stdio.writeln("_______pass par la " + variableName)
+			stdio.writeln("_______pass par la " + variableName + s.toString)
 			v.addLocalVariable(variableName, s, 0, 1, false)// add to stack
 		end
 		

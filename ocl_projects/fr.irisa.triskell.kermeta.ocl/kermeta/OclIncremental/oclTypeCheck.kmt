@@ -1,0 +1,350 @@
+package ocl;
+
+require "platform:/resource/fr.irisa.triskell.kermeta.ocl/mmodel/OCLCST.ecore" 
+require "TypeSystemMixin.kmt"
+
+ 
+using kermeta::standard   
+using ocl2kmt
+package cst
+{
+	enumeration typeCheckTYPE { UND; UPD; INC; DEC; }
+	
+	aspect
+	abstract class CSTNode 
+	{
+		operation typeCheck(context:TypeSystemMixin) : Void is abstract 
+
+	}
+	aspect
+	class PackageDeclarationCS 
+	{ 
+		method typeCheck(context:TypeSystemMixin) : Void from ocl::cst::CSTNode is
+		do
+			stdio.write(">>> The current Package : " )
+			self.pathNameCS.sequenceOfNames.each{e|stdio.write(e)}
+			stdio.writeln("")
+			context.setContextPackageName(self.pathNameCS.sequenceOfNames)
+			self.contextDecls.each{e | e.typeCheck(context)}
+		end 
+	}  
+	aspect
+	abstract class ContextDeclCS
+	{
+		method typeCheck(context:TypeSystemMixin) : Void from ocl::cst::CSTNode is abstract 
+	} 
+	aspect
+	class PropertyContextCS 
+	{
+		method typeCheck(context:TypeSystemMixin) : Void from ocl::cst::ContextDeclCS is
+		do
+
+		end	}
+	aspect
+	class ClassifierContextDeclCS
+	{
+		method typeCheck(context:TypeSystemMixin) : Void from ocl::cst::ContextDeclCS is
+		do
+			stdio.write(">>> Context : " )
+			self.pathNameCS.sequenceOfNames.each{e|stdio.write(e+".")}
+			stdio.writeln("")
+			context.setContextClassifierName(self.pathNameCS.sequenceOfNames)
+			context.pushNewStackFrame()
+			self.invOrDefCS.typeCheck(context)
+			context.popStackFrame()
+
+		end	}
+	aspect
+	class OperationContextDeclCS 
+	{
+		method typeCheck(context:TypeSystemMixin) : Void from ocl::cst::ContextDeclCS is
+			do end
+	}
+	aspect
+	class PrePostOrBodyDeclCS
+	{
+		method typeCheck(context:TypeSystemMixin) : Void from ocl::cst::CSTNode is
+			do end
+	}
+
+	aspect
+	class OperationCS 
+	{
+		method typeCheck(context:TypeSystemMixin) : Void from ocl::cst::CSTNode is
+			do end
+	}
+	aspect
+	abstract class InitOrDerValueCS
+{
+		method typeCheck(context:TypeSystemMixin) : Void from ocl::cst::CSTNode is
+			abstract 
+	}
+	aspect
+	class DerValueCS 
+	{
+		method typeCheck(context:TypeSystemMixin) : Void from ocl::cst::InitOrDerValueCS is
+			do 
+			
+			end
+	}
+	aspect
+	class InitValueCS
+	{
+		method typeCheck(context:TypeSystemMixin) : Void from ocl::cst::InitOrDerValueCS is
+			do end
+	}
+	aspect
+	abstract class InvOrDefCS
+	{
+		method typeCheck(context:TypeSystemMixin) : Void from ocl::cst::CSTNode is abstract
+	}
+	aspect
+	class InvCS 
+	{
+		method typeCheck(context:TypeSystemMixin) : Void from ocl::cst::InvOrDefCS is
+		do
+			self.expressionCS.typeCheck(context)
+		end	
+	}
+	aspect
+	class DefCS 
+	{
+		method typeCheck(context:TypeSystemMixin) : Void from ocl::cst::InvOrDefCS is
+		do 
+			//TODO
+		end
+	}
+	aspect class DefExpressionCS
+	{
+		method typeCheck(context:TypeSystemMixin) : Void from ocl::cst::CSTNode is
+			do end
+	}
+	aspect class PathNameCS
+	{
+		method typeCheck(context:TypeSystemMixin) : Void from ocl::cst::TypeCS is
+		do end
+	}
+	aspect class VariableExpCS
+	{
+		method typeCheck(context:TypeSystemMixin) : Void from ocl::cst::OCLExpressionCS is do
+			var varName :String init self.simpleNameCS.~value
+			var className : Sequence<String> init Sequence<String>.new
+			className:=className.append(context.getLocalVariable(varName).eType.name.toString)
+			stdio.writeln(">>> Variable " + varName + " of type : " + className.first)
+			//context.setContextClassifierName(className)
+			//context.setLocalFeature(context.getContextFeature(context.getLocalFeatureType, className.first))
+			context.setLocalFeature(context.getLocalVariable(varName))
+		end
+	}
+	aspect class SimpleNameCS 
+	{
+		method typeCheck(context:TypeSystemMixin) : Void from ocl::cst::OCLExpressionCS is
+			do end
+	}
+
+	 aspect
+	abstract class TypeCS
+	{
+		method typeCheck(context:TypeSystemMixin) : Void from ocl::cst::OCLExpressionCS is abstract
+	}
+	aspect class PrimitiveTypeCS 
+	{
+		method typeCheck(context:TypeSystemMixin) : Void from ocl::cst::SimpleNameCS is
+		do end
+	}
+	aspect class TupleTypeCS 
+	{
+		method typeCheck(context:TypeSystemMixin) : Void from ocl::cst::TypeCS is
+		do end
+	}
+	aspect class CollectionTypeCS
+	{
+		method typeCheck(context:TypeSystemMixin) : Void from ocl::cst::TypeCS is
+		do end
+	}
+
+	aspect
+	abstract  class OCLExpressionCS 
+	{
+		method typeCheck(context:TypeSystemMixin) : Void from ocl::cst::CSTNode is
+		abstract
+	}
+	aspect class LetExpCS
+	{
+		method typeCheck(context:TypeSystemMixin) : Void from ocl::cst::OCLExpressionCS is
+		do end
+	}
+	aspect class IfExpCS 
+	{
+		method typeCheck(context:TypeSystemMixin) : Void from ocl::cst::OCLExpressionCS is
+		do end
+	}
+	aspect class MessageExpCS
+	{
+
+		method typeCheck(context:TypeSystemMixin) : Void from ocl::cst::OCLExpressionCS is
+			do end
+	}
+	aspect class OCLMessageArgCS
+	{
+		method typeCheck(context:TypeSystemMixin) : Void from ocl::cst::CSTNode is
+			do end
+	}
+	aspect class VariableCS
+	{
+		method typeCheck(context:TypeSystemMixin) : Void from ocl::cst::CSTNode is
+			do 
+				var variableName: String init self.name.toString
+				var qfdN : qualifiedNames::QualifiedName
+				if (self.typeCS.isVoid) then
+					// an implicit type
+					context.addLocalTypedVariable(variableName, context.getLocalFeatureType, 0, 1, false)// add to stack
+					stdio.write(">>> Variable (" + variableName + ") is of type : " + context.getLocalFeatureType.name.toString())
+				else
+					qfdN := qualifiedNames::QualifiedName.new.fromSequence(self.typeCS.asType(PathNameCS).sequenceOfNames.asSequence())
+					context.addLocalVariable(variableName, qfdN, 0, 1, false)// add to stack
+					stdio.writeln(">>> Variable (" + variableName + ") is of type : " + qfdN.toString)
+				end
+				
+			end
+	}
+	aspect
+	abstract  class LiteralExpCS
+	{
+		method typeCheck(context:TypeSystemMixin) : Void from ocl::cst::OCLExpressionCS is
+		abstract
+	} 
+	aspect class EnumLiteralExpCS 
+	{
+		method typeCheck(context:TypeSystemMixin) : Void from ocl::cst::LiteralExpCS is
+			do end
+	}
+	aspect class CollectionLiteralExpCS 
+	{
+		method typeCheck(context:TypeSystemMixin) : Void from ocl::cst::LiteralExpCS is
+			do end
+	}
+	aspect class TupleLiteralExpCS 
+	{
+		method typeCheck(context:TypeSystemMixin) : Void from ocl::cst::LiteralExpCS is
+			do end
+	}
+	aspect class PrimitiveLiteralExpCS
+	{
+		method typeCheck(context:TypeSystemMixin) : Void from ocl::cst::LiteralExpCS is
+		do end
+	}
+	aspect class IntegerLiteralExpCS
+	{
+		method typeCheck(context:TypeSystemMixin) : Void from ocl::cst::PrimitiveLiteralExpCS is
+		do 
+
+		end
+	}
+	aspect class RealLiteralExpCS
+	{
+		method typeCheck(context:TypeSystemMixin) : Void from ocl::cst::PrimitiveLiteralExpCS is
+		do end
+	}
+	aspect class StringLiteralExpCS
+	{
+		method typeCheck(context:TypeSystemMixin) : Void from ocl::cst::PrimitiveLiteralExpCS is
+		do end
+	}
+	aspect class BooleanLiteralExpCS
+	{
+		method typeCheck(context:TypeSystemMixin) : Void from ocl::cst::PrimitiveLiteralExpCS is
+		do end
+	}
+	aspect class NullLiteralExpCS
+	{
+		method typeCheck(context:TypeSystemMixin) : Void from ocl::cst::LiteralExpCS is
+		do end
+	}
+	aspect class InvalidLiteralExpCS
+	{
+		method typeCheck(context:TypeSystemMixin) : Void from ocl::cst::LiteralExpCS is
+		do end
+	}
+	aspect class CollectionLiteralPartCS
+	{
+
+
+		method typeCheck(context:TypeSystemMixin) : Void from ocl::cst::CSTNode is
+		do end
+	}
+	aspect class CollectionRangeCS
+	{
+		method typeCheck(context:TypeSystemMixin) : Void from ocl::cst::CollectionLiteralPartCS is
+		do end
+	}
+	aspect class CallExpCS
+	{
+		method typeCheck(context:TypeSystemMixin) : Void from ocl::cst::OCLExpressionCS is
+		do end
+	}
+	aspect class LoopExpCS
+	{
+		method typeCheck(context:TypeSystemMixin) : Void from ocl::cst::CallExpCS is do
+		 	
+		 end
+	}
+	aspect class IteratorExpCS
+	{
+		// only the collect operator can change the context type
+		method typeCheck(context:TypeSystemMixin) : Void from ocl::cst::LoopExpCS is do
+			self.source.typeCheck(context)
+			self.variable1.typeCheck(context)
+			if (self.variable2.isVoid) then 
+			else	
+				self.variable2.typeCheck(context)
+		 	end
+		 	self.body.typeCheck(context)
+		end	
+	}
+	aspect class IterateExpCS
+	{
+		// This operator change the context to the type of acc
+		method typeCheck(context:TypeSystemMixin) : Void from ocl::cst::LoopExpCS is do
+			 
+			 end
+
+	}
+	aspect class FeatureCallExpCS
+	{
+		attribute isAtt : Boolean
+		method typeCheck(context:TypeSystemMixin) : Void from ocl::cst::CallExpCS is do
+    		  var featureName : String init  self.simpleNameCS.~value
+    		  self.source.typeCheck(context)
+    		  context.setLocalFeature(context.getContextFeature(context.getLocalFeatureType, featureName))
+    		  isAtt := context.getLocalFeature.isInstanceOf(ecore::EAttribute)
+    		  stdio.writeln(">>> Context : " + context.getLocalFeatureTypeName)
+			  stdio.writeln(">>> " + featureName + " is " + if (isAtt) then "an attribute" else "not an attribute" end)
+		end
+	}
+
+	aspect class OperationCallExpCS 
+	{
+		method typeCheck(context:TypeSystemMixin) : Void from ocl::cst::FeatureCallExpCS is do
+			var contextTemp:TypeSystemMixin init TypeSystemMixin.clone(context)
+			stdio.writeln(">>> Operation : " + self.simpleNameCS.~value)
+			self.source.typeCheck(context)
+			self.arguments.each{e|e.typeCheck(contextTemp)}
+		end
+	}
+	aspect class IsMarkedPreCS 
+	{
+		method typeCheck(context:TypeSystemMixin) : Void from ocl::cst::CSTNode is do
+			 
+		end
+	}
+	aspect class StateExpCS 
+	{
+		method typeCheck(context:TypeSystemMixin) : Void  is do
+			 
+			 end
+	}
+
+}
+}
+
