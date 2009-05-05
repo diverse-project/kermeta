@@ -1,0 +1,3 @@
+The mapping used here contains lot of errors, for that I'll creat a new Kermeta file
+This program will type the OCL constraint,
+It must be done with a logic process, even if it is not complete.
