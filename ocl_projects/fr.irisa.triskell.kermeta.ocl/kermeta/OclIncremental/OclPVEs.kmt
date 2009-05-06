@@ -26,6 +26,11 @@ class Event
 {
 	attribute qualifiedName : qualifiedNames::QualifiedName
 	attribute eventType : EVENTTYPE
+	method toString():String is
+		do 
+			result:= qualifiedName.toString+"."+eventType.name.toString
+		end
+	
 }
 package cst
 {
@@ -69,7 +74,6 @@ package cst
 
 		method getEvents() : Void from ocl::cst::ContextDeclCS is
 		do
-			self.pathNameCS.sequenceOfNames.each{e|stdio.writeln(e.toString())}
 			self.events := Set<Event>.new
 			self.invOrDefCS.getEvents()
 			self.events.addAll(self.invOrDefCS.events)
@@ -149,7 +153,17 @@ package cst
 	aspect class VariableExpCS
 	{
 		method getEvents() : Void from ocl::cst::OCLExpressionCS is do
-				self.events := Set<Event>.new
+			var varName :String init self.simpleNameCS.~value
+			self.events := Set<Event>.new
+			var event : Event init Event.new
+			event.qualifiedName := self.qualifiedName
+			if (varName=="self") then
+				var eventType : EVENTTYPE
+				self.marks.each{e| eventType := if (e==MARKTYPE.UPD) then EVENTTYPE.UPD else if (e==MARKTYPE.INC) then EVENTTYPE.CRT else EVENTTYPE.DEL end end
+				event.eventType :=eventType
+				self.events.add(event)}
+    		end
+stdio.writeln("********" + qualifiedName.toString)
 		end
 	}
 	
@@ -346,15 +360,14 @@ package cst
 			self.events.addAll(self.source.events)
 			//TODO
 			var event : Event init Event.new
+			event.qualifiedName := self.qualifiedName
 			if (self.isAtt) then	
 				event.eventType := EVENTTYPE.UPD
-				event.qualifiedName := self.qualifiedName
 				self.events.add(event)
 			else
 				var eventType : EVENTTYPE
 				self.marks.each{e| eventType := if (e==MARKTYPE.UPD) then EVENTTYPE.UPD else if (e==MARKTYPE.INC) then EVENTTYPE.ADD else EVENTTYPE.SUB end end
 				event.eventType :=eventType
-				event.qualifiedName := self.qualifiedName
 				self.events.add(event)}
 			end
 		end
