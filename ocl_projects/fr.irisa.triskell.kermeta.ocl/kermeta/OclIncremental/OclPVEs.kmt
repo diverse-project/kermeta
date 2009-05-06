@@ -32,14 +32,18 @@ class Event
 		end
 	
 }
+
+class InvEvents inherits Set<Event>
+{
+	attribute invariantName:String	
+}
 package cst
 {
 	aspect
 	abstract class CSTNode 
 	{
-		attribute events : Set<Event>
-		attribute eventsInv : Set<Set<Event>>
-		attribute invariantName:String	
+		attribute events : InvEvents
+		attribute eventsInv : Set<InvEvents>
 		
 		operation getEvents() : Void is
 		do end
@@ -50,9 +54,9 @@ package cst
 	{ 
 		method getEvents() : Void from ocl::cst::CSTNode is
 		do
-			self.events := Set<Event>.new 
+			self.eventsInv := Set<InvEvents>.new 
 			self.contextDecls.each{e | e.getEvents()}
-			self.contextDecls.each{e | self.events.addAll(e.events)}
+			self.contextDecls.each{e | self.eventsInv.addAll(e.eventsInv)}
 		end
 	}  
 	aspect
@@ -66,7 +70,6 @@ package cst
 		
 		method getEvents() : Void from ocl::cst::ContextDeclCS is
 		do
-			stdio.writeln(self.pathNameCS.sequenceOfNames.first.toString)
 			//TODO
 		end	}
 	aspect
@@ -75,9 +78,9 @@ package cst
 
 		method getEvents() : Void from ocl::cst::ContextDeclCS is
 		do
-			self.events := Set<Event>.new
+			self.eventsInv := Set<InvEvents>.new
 			self.invOrDefCS.getEvents()
-			self.events.addAll(self.invOrDefCS.events)
+			self.eventsInv.add(self.invOrDefCS.events)
 		end	}
 	aspect
 	class OperationContextDeclCS 
@@ -127,10 +130,12 @@ package cst
 	{
 		method getEvents() : Void from ocl::cst::InvOrDefCS is
 		do
-			self.events := Set<Event>.new
+			self.events := InvEvents.new
+			self.eventsInv := Set<InvEvents>.new
 			self.expressionCS.getEvents()
 			self.events.addAll(self.expressionCS.events)
-			if (simpleNameCS.isVoid) then else end
+			self.events.invariantName := if (simpleNameCS.isVoid) then "unamed" else simpleNameCS.~value end
+			self.eventsInv.add(events)
 		end	
 	}
 	aspect
@@ -156,7 +161,7 @@ package cst
 	{
 		method getEvents() : Void from ocl::cst::OCLExpressionCS is do
 			var varName :String init self.simpleNameCS.~value
-			self.events := Set<Event>.new
+			self.events := InvEvents.new
 			var event : Event init Event.new
 			event.qualifiedName := self.qualifiedName
 			if (varName=="self") then
@@ -274,7 +279,7 @@ package cst
 	{
 		method getEvents() : Void from ocl::cst::PrimitiveLiteralExpCS is
 		do 
-			self.events := Set<Event>.new
+			self.events := InvEvents.new
 		end
 	}
 	aspect class RealLiteralExpCS
@@ -339,7 +344,7 @@ package cst
 	aspect class IteratorExpCS
 	{
 		method getEvents() : Void from ocl::cst::LoopExpCS is do
-			self.events := Set<Event>.new
+			self.events := InvEvents.new
 			self.source.getEvents()
 			self.body.getEvents()
 			self.events.addAll(self.source.events)
@@ -356,7 +361,7 @@ package cst
 	aspect class FeatureCallExpCS
 	{
 		method getEvents() : Void from ocl::cst::CallExpCS is do
-			self.events := Set<Event>.new
+			self.events := InvEvents.new
 			self.source.getEvents()
 			self.arguments.each{e | e.getEvents()}
 			self.events.addAll(self.source.events)
@@ -379,7 +384,7 @@ package cst
 	aspect class OperationCallExpCS 
 	{
 		method getEvents() : Void from ocl::cst::FeatureCallExpCS is do
-			self.events := Set<Event>.new
+			self.events := InvEvents.new
 			self.source.getEvents()
 			self.arguments.each{e | e.getEvents()}
 			self.events.addAll(self.source.events)

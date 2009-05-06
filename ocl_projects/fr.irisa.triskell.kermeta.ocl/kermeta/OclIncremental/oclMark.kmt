@@ -335,6 +335,7 @@ package cst
 		method mark() : Void from ocl::cst::CallExpCS is do
     		  var featureName : String init  self.simpleNameCS.~value
     		  self.source.marks := Set<MARKTYPE>.new
+    		  self.source.mark
     		  self.source.marks.addAll(self.marks)
     		  
 		 end
