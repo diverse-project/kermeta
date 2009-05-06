@@ -126,6 +126,9 @@ package cst
 	}
 	aspect class VariableExpCS
 	{
+		attribute contextPackageName : qualifiedNames::QualifiedName
+		attribute contextClassifier : qualifiedNames::QualifiedName
+
 		method typeCheck(context:TypeSystemMixin) : Void from ocl::cst::OCLExpressionCS is do
 			var varName :String init self.simpleNameCS.~value
 			var className : Sequence<String> init Sequence<String>.new
@@ -313,13 +316,18 @@ package cst
 	aspect class FeatureCallExpCS
 	{
 		attribute isAtt : Boolean
+		attribute contextPackageName : qualifiedNames::QualifiedName
+		attribute localFeature: ecore::EClassifier
 		method typeCheck(context:TypeSystemMixin) : Void from ocl::cst::CallExpCS is do
     		  var featureName : String init  self.simpleNameCS.~value
     		  self.source.typeCheck(context)
+    		  self.localFeature := context.getLocalFeatureType
     		  context.setLocalFeature(context.getContextFeature(context.getLocalFeatureType, featureName))
     		  isAtt := context.getLocalFeature.isInstanceOf(ecore::EAttribute)
     		  stdio.writeln(">>> Context : " + context.getLocalFeatureTypeName)
 			  stdio.writeln(">>> " + featureName + " is " + if (isAtt) then "an attribute" else "not an attribute" end)
+			  self.contextPackageName := context.contextPackageName
+			  //stdio.writeln(">>> " + contextPackageName.toString + "::" + localFeature.name)
 		end
 	}
 
