@@ -20,7 +20,7 @@ using EcoreHelpers
  */
 
 
-enumeration EVENTTYPE { CRT; DEL; ADD; SUB; UPD;}
+enumeration EVENTTYPE { CREAT; DELETE; ADD; SUB; UPDATE;}
 
 class Event
 {
@@ -80,7 +80,7 @@ package cst
 		do
 			self.eventsInv := Set<InvEvents>.new
 			self.invOrDefCS.getEvents()
-			self.eventsInv.add(self.invOrDefCS.events)
+			self.eventsInv:=self.invOrDefCS.eventsInv
 		end	}
 	aspect
 	class OperationContextDeclCS 
@@ -166,7 +166,7 @@ package cst
 			event.qualifiedName := self.qualifiedName
 			if (varName=="self") then
 				var eventType : EVENTTYPE
-				self.marks.each{e| eventType := if (e==MARKTYPE.UPD) then EVENTTYPE.UPD else if (e==MARKTYPE.INC) then EVENTTYPE.CRT else EVENTTYPE.DEL end end
+				self.marks.each{e| eventType := if (e==MARKTYPE.UPD) then EVENTTYPE.UPDATE else if (e==MARKTYPE.INC) then EVENTTYPE.CREAT else EVENTTYPE.DELETE end end
 				event.eventType :=eventType
 				self.events.add(event)}
     		end
@@ -369,13 +369,13 @@ package cst
 			var event : Event init Event.new
 			event.qualifiedName := self.qualifiedName
 			if (self.isAtt) then	
-				event.eventType := EVENTTYPE.UPD
+				event.eventType := EVENTTYPE.UPDATE
 				self.events.add(event)
 			else
 				var eventType : EVENTTYPE
-				self.marks.each{e| eventType := if (e==MARKTYPE.UPD) then EVENTTYPE.UPD else if (e==MARKTYPE.INC) then EVENTTYPE.ADD else EVENTTYPE.SUB end end
-				event.eventType :=eventType
-				self.events.add(event)}
+				self.marks.each{e| eventType := if (e==MARKTYPE.UPD) then EVENTTYPE.UPDATE else if (e==MARKTYPE.INC) then EVENTTYPE.ADD else EVENTTYPE.SUB end end
+				event.eventType := eventType
+				self.events.add(Event.clone(event))}
 			end
 		end
 		

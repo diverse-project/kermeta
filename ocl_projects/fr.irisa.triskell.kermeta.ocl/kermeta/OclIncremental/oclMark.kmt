@@ -337,7 +337,7 @@ package cst
     		  self.source.marks := Set<MARKTYPE>.new
     		  self.source.mark
     		  self.source.marks.addAll(self.marks)
-    		  
+    		  if not(isAtt) then self.source.marks.add(MARKTYPE.UPD) end
 		 end
 	}
 
