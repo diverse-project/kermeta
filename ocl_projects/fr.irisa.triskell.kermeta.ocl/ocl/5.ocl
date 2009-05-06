@@ -1,0 +1,8 @@
+package company
+ --  forALl with two variables
+context Business::Company inv:
+	self.employee->select( e : Personnel::Person | e.age > 45)->size()>0
+
+context Business::Company inv:
+	(self.employee->select( e : Personnel::Person | e.age > 45))->collect(e : Personnel::Person|e.age)->sum()>1000
+endpackage

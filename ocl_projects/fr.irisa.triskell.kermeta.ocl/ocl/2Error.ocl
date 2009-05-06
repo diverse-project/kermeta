@@ -1,0 +1,5 @@
+package company
+ --  forALl with two variables
+context Business::Company inv:
+	self.employee->forAll( e : Personnel::Person |e.agr > 45)
+endpackage
