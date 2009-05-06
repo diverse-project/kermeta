@@ -126,17 +126,25 @@ package cst
 	}
 	aspect class VariableExpCS
 	{
-		attribute contextPackageName : qualifiedNames::QualifiedName
-		attribute contextClassifier : qualifiedNames::QualifiedName
+		attribute qualifiedName : qualifiedNames::QualifiedName
 
 		method typeCheck(context:TypeSystemMixin) : Void from ocl::cst::OCLExpressionCS is do
 			var varName :String init self.simpleNameCS.~value
 			var className : Sequence<String> init Sequence<String>.new
+
 			className:=className.append(context.getLocalVariable(varName).eType.name.toString)
 			stdio.writeln(">>> Variable " + varName + " of type : " + className.first)
 			//context.setContextClassifierName(className)
 			//context.setLocalFeature(context.getContextFeature(context.getLocalFeatureType, className.first))
 			context.setLocalFeature(context.getLocalVariable(varName))
+   			var feature : String init context.getLocalFeatureTypeName
+			if (varName=="self") then
+				self.qualifiedName := context.contextPackageName.appendString(feature)
+			else
+				self.qualifiedName := context.contextPackageName
+			end
+			stdio.writeln(">>><<<<<  " + qualifiedName.toString)
+
 		end
 	}
 	aspect class SimpleNameCS 
@@ -320,14 +328,13 @@ package cst
 		method typeCheck(context:TypeSystemMixin) : Void from ocl::cst::CallExpCS is do
     		  var featureName : String init  self.simpleNameCS.~value
     		  self.source.typeCheck(context)
- 			  //stdio.writeln(">>><<< " + context.__ecoreHelper.getClassifierQualifiedName(context.getLocalFeatureType))
+    		  var feature : String init context.getLocalFeatureTypeName			  
+  			  //stdio.writeln(">>><<< " + context.__ecoreHelper.getClassifierQualifiedName(context.getLocalFeatureType))
      		  context.setLocalFeature(context.getContextFeature(context.getLocalFeatureType, featureName))
     		  isAtt := context.getLocalFeature.isInstanceOf(ecore::EAttribute)
     		  stdio.writeln(">>> Context : " + context.getLocalFeatureTypeName)
 			  stdio.writeln(">>> " + featureName + " is " + if (isAtt) then "an attribute" else "not an attribute" end)
-    		  var feature : String init context.getLocalFeatureTypeName
-			  if (isAtt) then feature :=  featureName end
-			  self.qualifiedName := context.contextPackageName.fromString(feature)
+ 			  self.qualifiedName := context.contextPackageName.appendString(feature).appendString(featureName)
 			  stdio.writeln(">>> " + qualifiedName.toString)
 		end
 	}
