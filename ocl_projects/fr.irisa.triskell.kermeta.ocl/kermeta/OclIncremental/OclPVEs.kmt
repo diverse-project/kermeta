@@ -25,7 +25,6 @@ enumeration EVENTTYPE { CRT; DEL; ADD; SUB; UPD;}
 class Event
 {
 	attribute qualifiedName : qualifiedNames::QualifiedName
-	attribute attOrRefName : String
 	attribute eventType : EVENTTYPE
 }
 package cst
@@ -33,7 +32,7 @@ package cst
 	aspect
 	abstract class CSTNode 
 	{
-		attribute events : Set<String>
+		attribute events : Set<Event>
 		
 		operation getEvents() : Void is
 			
@@ -45,7 +44,7 @@ package cst
 	{ 
 		method getEvents() : Void from ocl::cst::CSTNode is
 		do
-			self.events := Set<String>.new 
+			self.events := Set<Event>.new 
 			self.contextDecls.each{e | e.getEvents()}
 			self.contextDecls.each{e | self.events.addAll(e.events)}
 		end
@@ -71,7 +70,7 @@ package cst
 		method getEvents() : Void from ocl::cst::ContextDeclCS is
 		do
 			self.pathNameCS.sequenceOfNames.each{e|stdio.writeln(e.toString())}
-			self.events := Set<String>.new
+			self.events := Set<Event>.new
 			self.invOrDefCS.getEvents()
 			self.events.addAll(self.invOrDefCS.events)
 		end	}
@@ -123,7 +122,7 @@ package cst
 	{
 		method getEvents() : Void from ocl::cst::InvOrDefCS is
 		do
-			self.events := Set<String>.new
+			self.events := Set<Event>.new
 			self.expressionCS.getEvents()
 			self.events.addAll(self.expressionCS.events)
 		end	
@@ -150,7 +149,7 @@ package cst
 	aspect class VariableExpCS
 	{
 		method getEvents() : Void from ocl::cst::OCLExpressionCS is do
-				self.events := Set<String>.new
+				self.events := Set<Event>.new
 		end
 	}
 	
@@ -259,7 +258,7 @@ package cst
 	{
 		method getEvents() : Void from ocl::cst::PrimitiveLiteralExpCS is
 		do 
-			self.events := Set<String>.new
+			self.events := Set<Event>.new
 		end
 	}
 	aspect class RealLiteralExpCS
@@ -317,27 +316,18 @@ package cst
 	}
 	aspect class LoopExpCS
 	{
-
-
 		method getEvents() : Void from ocl::cst::CallExpCS is do
-			//if (self.simpleNameCS.~value == "forAll") then
-			//	if (self.mark.contains(MARKTYPE.UND)) then
-					self.events := Set<String>.new
-					self.source.getEvents()
-					self.body.getEvents()
-					self.events.addAll(self.source.events)
-					self.events.addAll(self.body.events)
-			//	end
-			//end 
-			//self.source.getEvents()
-		 	//self.body.getEvents()
 		end
 
 	}
-/*	aspect class IteratorExpCS
+	aspect class IteratorExpCS
 	{
 		method getEvents() : Void from ocl::cst::LoopExpCS is do
-			self.events := Set<String>.new
+			self.events := Set<Event>.new
+			self.source.getEvents()
+			self.body.getEvents()
+			self.events.addAll(self.source.events)
+			self.events.addAll(self.body.events)
 		end	
 	}
 	aspect class IterateExpCS
@@ -346,28 +336,27 @@ package cst
 			 
 			 end
 
-	}*/
+	}
 	aspect class FeatureCallExpCS
 	{
 		method getEvents() : Void from ocl::cst::CallExpCS is do
-			self.events := Set<String>.new
+			self.events := Set<Event>.new
 			self.source.getEvents()
 			self.arguments.each{e | e.getEvents()}
-			if (self.simpleNameCS.type == SimpleTypeEnum.identifier) then 
-				self.events.addAll(self.source.events)
-				//TODO
-				if (self.isAtt) then	
-					var str : String init "update "
-					str.append(self.simpleNameCS.~value)
-					self.events.add(str)
-				else
-					var str : String
-					self.marks.each{e| str := if (e==MARKTYPE.UPD) then "update " else if (e==MARKTYPE.INC) then "insert " else "delete " end end
-					str.append(self.simpleNameCS.~value)
-					self.events.add(str)}
-				end
+			self.events.addAll(self.source.events)
+			//TODO
+			var event : Event init Event.new
+			if (self.isAtt) then	
+				event.eventType := EVENTTYPE.UPD
+				event.qualifiedName := self.qualifiedName
+				self.events.add(event)
+			else
+				var eventType : EVENTTYPE
+				self.marks.each{e| eventType := if (e==MARKTYPE.UPD) then EVENTTYPE.UPD else if (e==MARKTYPE.INC) then EVENTTYPE.ADD else EVENTTYPE.SUB end end
+				event.eventType :=eventType
+				event.qualifiedName := self.qualifiedName
+				self.events.add(event)}
 			end
-					//TODO other operations and, or, implies, <>, ...etc
 		end
 		
 	}
@@ -375,33 +364,11 @@ package cst
 	aspect class OperationCallExpCS 
 	{
 		method getEvents() : Void from ocl::cst::FeatureCallExpCS is do
-			self.events := Set<String>.new
+			self.events := Set<Event>.new
 			self.source.getEvents()
 			self.arguments.each{e | e.getEvents()}
 			self.events.addAll(self.source.events)
 			self.arguments.each{e | self.events.addAll(e.events)}
-/*			if ((self.simpleNameCS.~value == ">") or (self.simpleNameCS.~value == ">=")
-			or ((self.simpleNameCS.~value == "<") or (self.simpleNameCS.~value == "<=")))  then		
-				self.events.addAll(self.source.events)
-				self.arguments.each{e | self.events.addAll(e.events)}
-			else
-					if (self.simpleNameCS.type == SimpleTypeEnum.identifier) then 
-						stdio.writeln(" /////////////////////" +self.simpleNameCS.type.qualifiedName())
-						self.events.addAll(self.source.events)
-						//TODO
-						if (self.isAtt) then	
-							var str : String init "update "
-							str.append(self.simpleNameCS.~value)
-							self.events.add(str)
-						else
-							var str : String
-							self.mark.each{e| str := if (e==MARKTYPE.UPD) then "update " else if (e==MARKTYPE.INC) then "insert " else "delete " end end
-												str.append(self.simpleNameCS.~value)
-												self.events.add(str)}
-						end
-					end
-					//TODO other operations and, or, implies, <>, ...etc
-			end*/
 		end
 
 	}
