@@ -44,6 +44,10 @@ class Main
  			resource.each{e|e.asType(PackageDeclarationCS).typeCheck(context)}
 			resource.each{e|e.asType(PackageDeclarationCS).mark()}
 			resource.each{e|e.asType(PackageDeclarationCS).getEvents()}
-			resource.each{e|e.asType(PackageDeclarationCS).events.each{s|stdio.writeln(">>>" + s.toString)}}
+			stdio.writeln("  ____________________________________________________")
+			stdio.writeln(" /")
+			resource.each{e|e.asType(PackageDeclarationCS).events.each{s|stdio.writeln("|   " + s.toString)}}
+			stdio.writeln(" \\____________________________________________________")
+
 	end
 }
