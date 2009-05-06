@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="ASCII"?>
-<ocl.cst:PackageDeclarationCS xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ocl.cst="http://www.eclipse.org/ocl/1.1.0/OCL/CST" endOffset="242">
+<ocl.cst:PackageDeclarationCS xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ocl.cst="http://www.eclipse.org/ocl/1.1.0/OCL/CST" endOffset="259">
   <pathNameCS startOffset="8" endOffset="14">
     <sequenceOfNames>company</sequenceOfNames>
   </pathNameCS>
@@ -66,23 +66,24 @@
       </expressionCS>
     </invOrDefCS>
   </contextDecls>
-  <contextDecls xsi:type="ocl.cst:ClassifierContextDeclCS" startOffset="187" endOffset="230">
+  <contextDecls xsi:type="ocl.cst:ClassifierContextDeclCS" startOffset="187" endOffset="247">
     <pathNameCS startOffset="195" endOffset="211">
       <sequenceOfNames>Personnel</sequenceOfNames>
       <sequenceOfNames>Person</sequenceOfNames>
     </pathNameCS>
-    <invOrDefCS xsi:type="ocl.cst:InvCS" startOffset="213" endOffset="230">
-      <expressionCS xsi:type="ocl.cst:OperationCallExpCS" startOffset="220" endOffset="230">
-        <source xsi:type="ocl.cst:FeatureCallExpCS" startOffset="220" endOffset="227" accessor="dot">
-          <source xsi:type="ocl.cst:VariableExpCS" startOffset="220" endOffset="223">
-            <simpleNameCS startOffset="220" endOffset="223" value="self" type="self"/>
-            <isMarkedPreCS startOffset="224" endOffset="224"/>
+    <invOrDefCS xsi:type="ocl.cst:InvCS" startOffset="213" endOffset="247">
+      <simpleNameCS startOffset="217" endOffset="232" value="notyoungEmployee"/>
+      <expressionCS xsi:type="ocl.cst:OperationCallExpCS" startOffset="237" endOffset="247">
+        <source xsi:type="ocl.cst:FeatureCallExpCS" startOffset="237" endOffset="244" accessor="dot">
+          <source xsi:type="ocl.cst:VariableExpCS" startOffset="237" endOffset="240">
+            <simpleNameCS startOffset="237" endOffset="240" value="self" type="self"/>
+            <isMarkedPreCS startOffset="241" endOffset="241"/>
           </source>
-          <simpleNameCS startOffset="225" endOffset="227" value="age"/>
-          <isMarkedPreCS startOffset="228" endOffset="228"/>
+          <simpleNameCS startOffset="242" endOffset="244" value="age"/>
+          <isMarkedPreCS startOffset="245" endOffset="245"/>
         </source>
-        <simpleNameCS startOffset="228" endOffset="228" value=">" type="String"/>
-        <arguments xsi:type="ocl.cst:IntegerLiteralExpCS" startOffset="229" endOffset="230" symbol="10" integerSymbol="10"/>
+        <simpleNameCS startOffset="245" endOffset="245" value=">" type="String"/>
+        <arguments xsi:type="ocl.cst:IntegerLiteralExpCS" startOffset="246" endOffset="247" symbol="18" integerSymbol="18"/>
         <isMarkedPreCS/>
       </expressionCS>
     </invOrDefCS>
