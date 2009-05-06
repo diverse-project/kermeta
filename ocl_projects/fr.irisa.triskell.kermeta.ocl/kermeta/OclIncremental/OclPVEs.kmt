@@ -3,7 +3,7 @@ package ocl;
 //require "platform:/resource/fr.irisa.triskell.kermeta.ocl/mmodel/OCLCST.ecore" 
 require "EcoreHelper.kmt"
 require "oclMark.kmt"
-
+require "../helpers/QualifiedName.kmt"
 
 using kermeta::standard   
 using kermeta::persistence
@@ -19,10 +19,14 @@ using EcoreHelpers
    Add the context to each operation,and do the same instructions for
  */
 
+
+enumeration EVENTTYPE { CRT; DEL; ADD; SUB; UPD;}
+
 class Event
 {
-	attribute qualifiedName:QualifiedName
-	attribute attOrRefName:String
+	attribute qualifiedName : qualifiedNames::QualifiedName
+	attribute attOrRefName : String
+	attribute eventType : EVENTTYPE
 }
 package cst
 {
