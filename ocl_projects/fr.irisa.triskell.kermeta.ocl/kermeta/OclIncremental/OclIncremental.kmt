@@ -17,6 +17,7 @@ require kermeta
 //require "platform:/resource/fr.irisa.triskell.kermeta.ocl/mmodel/OCLCST.ecore"
 require "TypeSystemMixin.kmt"
 require "oclMark.kmt"
+require "OclPVEs.kmt"
 
 using kermeta::utils
 using kermeta::standard
@@ -35,15 +36,14 @@ class Main
  			resource.load
  			resource.each{e|e.asType(PackageDeclarationCS).marks := kermeta::standard::Set<MARKTYPE>.new}
  			resource.each{e|e.asType(PackageDeclarationCS).marks.add(MARKTYPE.UND)}
- 			
- 			var typemixin : TypeSystemMixin init TypeSystemMixin.new
-			
+  			var typemixin : TypeSystemMixin init TypeSystemMixin.new
 			var ecorehelp : EcoreHelper init EcoreHelper.new
  			ecorehelp.loadMetamodel("platform:/resource/fr.irisa.triskell.kermeta.ocl/mmodel/company.ecore")
 			typemixin.setEcoreHelper(ecorehelp)
 			var context:TypeSystemMixin init typemixin			 			
- 
  			resource.each{e|e.asType(PackageDeclarationCS).typeCheck(context)}
-	
+			resource.each{e|e.asType(PackageDeclarationCS).mark()}
+			resource.each{e|e.asType(PackageDeclarationCS).getEvents()}
+			resource.each{e|e.asType(PackageDeclarationCS).events.each{s|stdio.writeln(">>>" + s.toString)}}
 	end
 }
