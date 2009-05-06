@@ -38,9 +38,10 @@ package cst
 	abstract class CSTNode 
 	{
 		attribute events : Set<Event>
+		attribute eventsInv : Set<Set<Event>>
+		attribute invariantName:String	
 		
 		operation getEvents() : Void is
-			
 		do end
 	}
 	
@@ -129,6 +130,7 @@ package cst
 			self.events := Set<Event>.new
 			self.expressionCS.getEvents()
 			self.events.addAll(self.expressionCS.events)
+			if (simpleNameCS.isVoid) then else end
 		end	
 	}
 	aspect
@@ -163,7 +165,7 @@ package cst
 				event.eventType :=eventType
 				self.events.add(event)}
     		end
-stdio.writeln("********" + qualifiedName.toString)
+
 		end
 	}
 	
