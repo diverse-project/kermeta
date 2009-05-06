@@ -316,18 +316,19 @@ package cst
 	aspect class FeatureCallExpCS
 	{
 		attribute isAtt : Boolean
-		attribute contextPackageName : qualifiedNames::QualifiedName
-		attribute localFeature: ecore::EClassifier
+		attribute qualifiedName : qualifiedNames::QualifiedName
 		method typeCheck(context:TypeSystemMixin) : Void from ocl::cst::CallExpCS is do
     		  var featureName : String init  self.simpleNameCS.~value
     		  self.source.typeCheck(context)
-    		  self.localFeature := context.getLocalFeatureType
-    		  context.setLocalFeature(context.getContextFeature(context.getLocalFeatureType, featureName))
+ 			  //stdio.writeln(">>><<< " + context.__ecoreHelper.getClassifierQualifiedName(context.getLocalFeatureType))
+     		  context.setLocalFeature(context.getContextFeature(context.getLocalFeatureType, featureName))
     		  isAtt := context.getLocalFeature.isInstanceOf(ecore::EAttribute)
     		  stdio.writeln(">>> Context : " + context.getLocalFeatureTypeName)
 			  stdio.writeln(">>> " + featureName + " is " + if (isAtt) then "an attribute" else "not an attribute" end)
-			  self.contextPackageName := context.contextPackageName
-			  //stdio.writeln(">>> " + contextPackageName.toString + "::" + localFeature.name)
+    		  var feature : String init context.getLocalFeatureTypeName
+			  if (isAtt) then feature :=  featureName end
+			  self.qualifiedName := context.contextPackageName.fromString(feature)
+			  stdio.writeln(">>> " + qualifiedName.toString)
 		end
 	}
 
