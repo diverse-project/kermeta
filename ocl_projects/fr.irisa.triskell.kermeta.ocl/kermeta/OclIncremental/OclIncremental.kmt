@@ -31,7 +31,7 @@ class Main
 	operation main() : Void is do 
 		 	var repository : EMFRepository init EMFRepository.new
  			var resource : EMFResource
- 			var	oclFileName : String init "4.xmi"
+ 			var	oclFileName : String init "5.xmi"
  			resource ?= repository.createResource("platform:/resource/fr.irisa.triskell.kermeta.ocl/xmi/"+ oclFileName, "platform:/resource/fr.irisa.triskell.kermeta.ocl/mmodel/OCLCST.ecore")
  			resource.load
  			resource.each{e|e.asType(PackageDeclarationCS).marks := kermeta::standard::Set<MARKTYPE>.new}
@@ -43,8 +43,8 @@ class Main
 			var context:TypeSystemMixin init typemixin			 			
  			resource.each{e|e.asType(PackageDeclarationCS).typeCheck(context)}
 			resource.each{e|e.asType(PackageDeclarationCS).mark()}
-			stdio.writeln("      ___________________")
-			stdio.writeln("  ___/ Violating Events  \\_____________________________")
+			stdio.writeln("      __________________")
+			stdio.writeln("  ___/ Violating Events \\_____________________________")
 			stdio.writeln(" /                                                    \\")
 			resource.each{e|e.asType(PackageDeclarationCS).getEvents()}
 			var str:String

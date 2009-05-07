@@ -22,7 +22,7 @@ class QualifiedName inherits Sequence<String>
 			else
 				result := __separator
 			end
-		end
+		end 
 	
 	operation fromSequence(stringSeq: Sequence<String>): QualifiedName is
 		do 
