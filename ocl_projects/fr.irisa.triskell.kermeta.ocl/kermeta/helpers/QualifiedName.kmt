@@ -12,7 +12,7 @@ using kermeta::standard
 
 class QualifiedName inherits Sequence<String>
 {
-	attribute __separator: String
+	attribute __separator: String 
 	attribute displayCache: String
 	
 	operation separator(): String is
