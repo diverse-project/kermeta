@@ -7,7 +7,7 @@
     <title>Kermeta language</title>
 
     <pubdate>Build date: @BUILD.DATE@</pubdate>
-    <pubdate>$Date$</pubdate>
+    <pubdate>$Date::                     $</pubdate>
 
     <author>
       <firstname>Zoé</firstname>
