@@ -1117,21 +1117,21 @@ end</programlisting>
         file is processed. In the following example, we define a class C which
         inherits from the A class previously defined.</para>
 
-        <programlisting><emphasis>// file : MyPackage-part1.kmt</emphasis>
-<emphasis role="strong">package</emphasis> subPackage1;
+        <programlisting language="kermeta">// file : MyPackage-part1.kmt
+package subPackage1;
 
-<emphasis role="strong">class</emphasis> A 
+class A 
 {
-<emphasis>// ...</emphasis>
+  // ...
 }</programlisting>
 
-        <programlisting><emphasis>// file : MyPackage-part2.kmt</emphasis>
-<emphasis role="strong">package</emphasis> MyPackage;
-<emphasis role="strong">require</emphasis> "MyPackage-part1.kmt"
+        <programlisting language="kermeta">// file : MyPackage-part2.kmt
+package MyPackage;
+require "MyPackage-part1.kmt"
 
-<emphasis role="strong">class</emphasis> C <emphasis role="strong">inherits</emphasis> subPackage1::A 
+class C inherits subPackage1::A 
 {
-<emphasis>// ...</emphasis>
+	// ...
 }</programlisting>
 
         <note><para>
@@ -1146,7 +1146,7 @@ end</programlisting>
       </section>
 
       <section>
-        <title>Accepted require statements</title>
+        <title>Accepted require content</title>
 
         <para>You can <literal>require</literal> different kind of
         entity</para>
@@ -1164,9 +1164,42 @@ end</programlisting>
         linkend="section_weaving.link">weaving</link> to dynamically weave
         behavior to the ecore, or roundtrip using the button action in the
         workbench (ecore-&gt;kmt-&gt;ecore) to statically add the behavior (as
-        EAnnotations) into the ecore file.</para>
-
-        <para>A variant of requiring an ecore file is to require <emphasis
+        EAnnotations) into the ecore file.</para>        
+        
+        
+        <warning><para>A special attention must be put when requiring resources. It is not allowed
+        to get several versions of the same class that comes from several required files. 
+        Kermeta cannot know which version it must use, so you'll get an error. </para>
+        <para>A typical error, is to require both an ecore file and the registered version of it. They represent two 
+        distinct resources in memory.</para><para>
+        A more clever error, is when the two versions are hidden inside an erroneous ecore file which uses 
+        several ways to access some metaclass and actually is not consistent... (ex: you find references to both http://www.eclipse.org/emf/2002/Ecore 
+        and platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore in the ecore file or one of the dependent files)
+        </para></warning>		
+		
+        <para>In order to use the seamless java import (still prototype in
+        v0.4.2), you can require a <emphasis role="strong">jar
+        file</emphasis>. It will automatically convert the java into a Kermeta
+        representation in order to be able to call java code as if it was
+        written in Kermeta. see <xref linkend="section_java_code.link" /> for
+        more details.</para>
+      
+      </section>
+	  <section>
+        <title>Supported protocols</title>
+        <para>Kermeta reuse some of the protocols provided by Eclipse.
+        </para>
+        <formalpara><title>Relative path</title><para>You can use a path relative to the 
+        	current file using the normal syntax (./ , ../, etc) </para></formalpara>
+        <formalpara><title>Eclipse workspace relative path</title><para>In eclipse, you can use a path 
+        	relative to the user's workspace. In that case the path looks like <literal>platform:/resource/<replaceable>your_project_name</replaceable>/<replaceable>path_to_the_file</replaceable></literal></para></formalpara>
+        <formalpara><title>Eclipse plugin relative path</title><para>In eclipse, you can use a path that search in 
+        the installed plugins. In that case the path looks like <literal>platform:/plugin/<replaceable>plugin_name</replaceable>/<replaceable>path_to_the_file</replaceable></literal></para></formalpara>
+        <formalpara><title>Eclipse workspace or plugin relative path</title><para>When deploying kermeta code, it is 
+        sometime interesting to search in both the user's workspace and in the plugins. In that case the path looks like <literal>platform:/lookup/<replaceable>plugin_or_project_name</replaceable>/<replaceable>path_to_the_file</replaceable></literal></para></formalpara>
+        <note><para>This platform:/lookup/ is available in Kermeta only, and only in the require statement.</para>
+        <para>Be careful, using the current version (Kermeta 1.3.1) since a deployed plugin using this protocol may be modified by the user's workspace content!</para></note>
+        <formalpara><title>Registered Ecore</title><para>A variant of requiring an ecore file is to require a <emphasis
         role="strong">registered EPackage</emphasis>. When Eclipse deploys an
         ecore model plugin, it also registers the EPackage using a unique
         identifier (nsuri) in order to retreive it quickly. In Kermeta you can
@@ -1179,27 +1212,8 @@ end</programlisting>
         metamodel, etc ...). <ulink
         url="http://www.kermeta.org/documents/ui_user_guide/">Kermeta user
         interface</ulink> provides a view that display all registered
-        EPackages and their nsuri.</para>
-        
-        
-        <warning><para>A special attention must be put when requiring resources. It is not allowed
-        to get several versions of the same class that comes from several required files. 
-        Kermeta cannot know which version it must use, so you'll get an error. </para>
-        <para>A typical error, is to require both an ecore file and the registered version of it. They represent two 
-        distinct resources in memory.</para><para>
-        A more clever error, is when the two versions are hidden inside an erroneous ecore file which uses 
-        several ways to access some metaclass and actually is not consistent... (ex: you find references to both http://www.eclipse.org/emf/2002/Ecore 
-        and platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore in the ecore file or one of the dependent files)
-        </para></warning>
-
-        <para>In order to use the seamless java import (still prototype in
-        v0.4.2), you can require a <emphasis role="strong">jar
-        file</emphasis>. It will automatically convert the java into a Kermeta
-        representation in order to be able to call java code as if it was
-        written in Kermeta. see <xref linkend="section_java_code.link" /> for
-        more details.</para>
+        EPackages and their nsuri.</para></formalpara>
       </section>
-
       <section>
         <title>Organizing code</title>
 
@@ -1236,7 +1250,7 @@ end</programlisting>
 
       <para>Declaring a variable:</para>
 
-      <programlisting><emphasis role="strong">var</emphasis> foo : String <emphasis>// This is a variable declaration</emphasis></programlisting>
+      <programlisting language="kermeta">var foo : String // This is a variable declaration</programlisting>
 
       <para>In the following example, we define 3 variables of type integer.
       The first is initialized with the "14" literal value, the second is
@@ -1246,16 +1260,13 @@ end</programlisting>
       linkend="section_properties.link" /> for more information on
       sets).</para>
 
-      <programlisting><emphasis role="strong">do</emphasis>
-    <emphasis role="strong">var</emphasis> v1 : Integer <emphasis
-          role="strong">init</emphasis> 14
-    <emphasis role="strong">var</emphasis> v2 : Integer <emphasis
-          role="strong">init</emphasis> 145 * v1
+      <programlisting  language="kermeta">do
+    var v1 : Integer init 14
+    var v2 : Integer init 145 * v1
 
-    <emphasis role="strong">var</emphasis> tab : Integer[0..*] <emphasis
-          role="strong">init</emphasis> kermeta::standard::OrderedSet&lt;Integer&gt;.new
+    var tab : Integer[0..*] init kermeta::standard::OrderedSet&lt;Integer&gt;.new
     v1 := v2/v1
-<emphasis role="strong">end</emphasis></programlisting>
+end</programlisting>
 
       <para>Be careful to the multiplicity, when you create a variable with
       multiplicity, you have to initialize it with a <link
@@ -1325,12 +1336,11 @@ end</programlisting>
           </tgroup>
         </informaltable>
 
-        <programlisting><emphasis>// Simple datatypes examples</emphasis>
-<emphasis role="strong">var</emphasis> myVar1 : Integer <emphasis
-            role="strong">init</emphasis> 10
-<emphasis role="strong">var</emphasis> myVar2 : Integer
-<emphasis role="strong">var</emphasis> myVar4 : String <emphasis role="strong">init</emphasis> "a new string value"
-<emphasis role="strong">var</emphasis> myVar5 : boolean</programlisting>
+        <programlisting  language="kermeta">// Simple datatypes examples
+var myVar1 : Integer init 10
+var myVar2 : Integer
+var myVar4 : String init "a new string value"
+var myVar5 : boolean</programlisting>
 
         <para>Kermeta also supports some other primitive types like Float and
         Character, but they currently don't have a surface syntax for their
@@ -1354,11 +1364,10 @@ var r : Real init "4.5".toReal
         <para>You can manipulate enumerated variables and literals with
         classical operators such as in the following example.</para>
 
-        <programlisting><emphasis role="strong">var</emphasis> mySize : Size
-<emphasis role="strong">if</emphasis> ( mySize == Size.small ) <emphasis
-            role="strong">then</emphasis> 
+        <programlisting language="kermeta">var mySize : Size
+if ( mySize == Size.small ) then 
     stdio.writeln("This is small !") 
-<emphasis role="strong">end</emphasis></programlisting>
+end</programlisting>
 
         <note><para>
            Enumeration is a concept of the same level as Class, they must both be defined in a package. 
@@ -5676,10 +5685,10 @@ class MyMainClass
     <para>This annex indicates how Kermeta models are translated into Ecore models and vice versa.</para>
     <note><para>TODO : finish this by looking into kermeta2ecore transformation and the compiler specifications.</para></note>
     <informaltable>
-      <tgroup cols="3">
-        <colspec colname="c1" colwidth="1*" />
-		<colspec colname="c2" colwidth="1*" />
-        <colspec colname="c3" colwidth="3*" />
+      <tgroup cols="3"  align="left">
+        <colspec colname="c1" colwidth="1*" align="left"/>
+		<colspec colname="c2" colwidth="1*" align="left"/>
+        <colspec colname="c3" colwidth="3*" align="left"/>
         <thead>
           <row>
             <entry align="left"><para>Kermeta concept</para></entry>
@@ -5688,36 +5697,36 @@ class MyMainClass
           </row>
         </thead>
 
-        <tbody>
+        <tbody  valign="top">
           <row>
             <entry><para>Class</para></entry>
             <entry><para>EClass</para></entry>
-            <entry align="left"><para></para></entry>
+            <entry><para></para></entry>
           </row>
           <row>
             <entry><para>Constraint (invariant)</para></entry>
             <entry><para>EAnnotation(source="kermeta.inv") + DetailEntry</para></entry>
-            <entry align="left"><para></para></entry>
+            <entry ><para></para></entry>
           </row>
           <row>
             <entry><para>Constraint (precondition|postcondition)</para></entry>
             <entry><para>EAnnotation(source="kermeta.pre"|"kermeta.post") + DetailEntry</para></entry>
-            <entry align="left"><para></para></entry>
+            <entry><para></para></entry>
           </row>
           <row>
             <entry><para>Constraint (postcondition)</para></entry>
             <entry><para>EAnnotation(source="") + DetailEntry</para></entry>
-            <entry align="left"><para></para></entry>
+            <entry><para></para></entry>
           </row>
           <row>
             <entry><para>Operation</para></entry>
             <entry><para>EOperation</para></entry>
-            <entry align="left"><para></para></entry>
+            <entry><para></para></entry>
           </row>
           <row>
             <entry><para>Tag (general case)</para></entry>
             <entry><para>EAnnotation(source="kermeta") + DetailEntry</para></entry>
-            <entry align="left"><para>Most Tags are translated into an EAnnotation with 
+            <entry><para>Most Tags are translated into an EAnnotation with 
             source="kermeta" and one DetailEntry with key=<replaceable>NameOfTheTag</replaceable> 
             and value=<replaceable>ValueOfTheTag</replaceable>. 
             If this is a /** */ comment, the name of the tag is "documentation".</para></entry>
@@ -5725,7 +5734,7 @@ class MyMainClass
           <row>
             <entry><para>Tag (applied on Constraint)</para></entry>
             <entry><para>EAnnotation(source="kermeta.inv.doc") + DetailEntry</para></entry>
-            <entry align="left"><para>EAnnotation.references points to the EAnnotation 
+            <entry><para>EAnnotation.references points to the EAnnotation 
             representing the Constraints. DetailEntry with key=<replaceable>NameOfTheTag</replaceable> 
             and value=<replaceable>ValueOfTheTag</replaceable>. 
             If this is a /** */ comment, the name of the tag is "documentation".</para></entry>
