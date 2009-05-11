@@ -17,7 +17,7 @@ import java.util.Map;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.URIConverter;
-import org.eclipse.emf.ecore.resource.impl.URIConverterImpl; // will need to switch to ExtendibleURIConverterImpl when will we definetly switch to eclipse 3.4 or above
+import org.eclipse.emf.ecore.resource.impl.ExtensibleURIConverterImpl;
 import org.kermeta.io.IoFactory;
 import org.kermeta.io.KermetaUnit;
 import org.kermeta.io.KermetaUnitRequire;
@@ -41,7 +41,7 @@ public class RequireResolver implements ILoadingAction {
 			Require require = null;
 			/*
 			 * 
-			 * Getting the require corresponfing to the URI.
+			 * Getting the require corresponding to the URI.
 			 * 
 			 */
 			for ( Require r : kermetaUnit.getModelingUnit().getRequires() )
@@ -103,18 +103,10 @@ public class RequireResolver implements ILoadingAction {
 				 * 
 				 */
 				if(! EMFRegistryHelper.isRegistered(uri)){
-					URIConverter converter = new URIConverterImpl();
-					if ( uri.startsWith("platform:/") ){
-						try{ // as we cannot use exist with previous eclipse version try to open and close the file, if an error occurs, then it probably don't exists ...
-							converter.createInputStream( emfURI ).close();
-						}
-						catch(Throwable t){
-							throw new IOException("The file " + uri + " does not exist.");
-						}
-						/* this code can work only with eclise 3.4
+					URIConverter converter = new ExtensibleURIConverterImpl();
+					if ( uri.startsWith("platform:/") ){						
 						if(! converter.exists(emfURI, null) ) 
-							throw new IOException("The file " + uri + " does not exist.");
-						*/						
+							throw new IOException("The file " + uri + " does not exist.");						
 					} else 
 						if ( ! uri.equals("kermeta")  && ! uri.equals("java_rt_jar"))
 							throw new IOException("The file " + uri + " does not exist.");
