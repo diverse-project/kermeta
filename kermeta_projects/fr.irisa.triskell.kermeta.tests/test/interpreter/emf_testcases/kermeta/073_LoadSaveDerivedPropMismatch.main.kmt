@@ -1,0 +1,94 @@
+/* $Id: 071_DynamicInstanceLoadSaveUsingRelativePath.main.kmt,v 1.4 2008-07-31 08:34:13 dvojtise Exp $ 
+ * Creation : June 11, 2008
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            dvojtise
+ * This suite tests how the load and the save behaves when the kermeta version is derived and the ecore used is concrete
+ * and vice versa
+ * this isn't a classical use case, since we have a copy of the metamodel which is slightly different from the metamodel used to serialise
+ */
+@mainClass "loadSaveDerivedPropMismatch::Main"
+@mainOperation "main"
+
+
+package loadSaveDerivedPropMismatch;
+
+
+require kermeta
+require "073_MMWithDerivedPropMismatch.kmt"
+
+using kermeta::standard
+using kermeta::persistence
+using kermeta::kunit
+using mmwithderivedproperties
+
+class Main inherits TestCase
+{
+	operation main() : Void is do
+    	var tr : TestRunner init TestRunner.new
+		tr.run(Main)
+		tr.printTestResult
+		
+		// test001LoadConcreteERefButDerivedKermetaProp
+		// test002SaveConcreteERefButDerivedKermetaProp
+		
+		stdio.writeln("end")
+    end
+    
+    
+    operation test001LoadConcreteERefButDerivedKermetaProp() : Void is
+    do
+    	var mmfileName : String init "platform:/resource/fr.irisa.triskell.kermeta.tests/test/interpreter/emf_testcases/metamodels/073_MMWithDerivedPropertiesMismatch.ecore"
+    	
+    	var repository : kermeta::persistence::EMFRepository	init kermeta::persistence::EMFRepository.new
+		repository.registerEcoreFile(mmfileName)
+    	var resource : Resource
+    	  	resource :=repository.getResource("../instances/073_WithDerivedPropInKermeta.xmi")    	
+       	
+       	//stdio.writeln("\n  model elements: "+resource.size.toString)
+       	
+       	// for each element in the resource check that the opposite are correctly navigable
+       	resource.each{e|     	
+       		// this is a single2singleSrc
+			var src1 : AWithDerivedPropInKermeta
+			src1 ?= e
+			assertFalseWithMsg(src1.aB.isVoid,"derived kermeta attribute wasn't set from concrete EReference")        
+			
+		}        
+    end
+    
+    operation test002SaveConcreteERefButDerivedKermetaProp() : Void is
+    do
+    	var mmfileName : String init "platform:/resource/fr.irisa.triskell.kermeta.tests/test/interpreter/emf_testcases/metamodels/073_MMWithDerivedPropertiesMismatch.ecore"
+    	var ofileName : String init "platform:/resource/fr.irisa.triskell.kermeta.tests/test/interpreter/emf_testcases/output/073_WithDerivedPropInKermeta.out.xmi"
+    	
+    	var repository : kermeta::persistence::EMFRepository	init kermeta::persistence::EMFRepository.new
+		repository.registerEcoreFile(mmfileName)
+    	var resource : Resource
+    	  	resource :=repository.createResource(ofileName, mmfileName)    	
+       	
+       	//stdio.writeln("\n  model elements: "+resource.size.toString)
+       	var a1 : AWithDerivedPropInKermeta init AWithDerivedPropInKermeta.new
+       	var b1 : BWithDerivedPropInKermeta init BWithDerivedPropInKermeta.new
+       	a1.aB := b1
+       	resource.add(a1)
+       	resource.saveWithNewURI(ofileName)
+       	
+       	var repository2 : kermeta::persistence::EMFRepository	init kermeta::persistence::EMFRepository.new
+		var resource2 : Resource
+    	  	resource2 :=repository.getResource(ofileName)   
+       	// for each element in the resource check that the opposite are correctly navigable
+       	resource2.each{e|     	
+       		// this is a single2singleSrc
+			var src1 : AWithDerivedPropInKermeta
+			src1 ?= e
+			assertFalseWithMsg(src1.aB.isVoid,"derived kermeta attribute wasn't correctly saved from concrete EReference")        
+			
+		}        
+    end
+
+    
+}
+
+

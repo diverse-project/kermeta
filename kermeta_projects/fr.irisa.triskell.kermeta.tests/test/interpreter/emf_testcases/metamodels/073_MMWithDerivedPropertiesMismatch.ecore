@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="mmwithderivedproperties"
+    nsURI="http://mmwithderivedproperties/1.0" nsPrefix="mmwithderivedproperties">
+  <eClassifiers xsi:type="ecore:EClass" name="AWithDerivedPropInKermeta">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="aB" eType="#//BWithDerivedPropInKermeta"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="BWithDerivedPropInKermeta"/>
+  <eClassifiers xsi:type="ecore:EClass" name="AWithDerivedRefInEcore">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="aB" eType="#//BWithDerivedRefInEcore"
+        derived="true" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="BWithDerivedRefInEcore"/>
+</ecore:EPackage>
