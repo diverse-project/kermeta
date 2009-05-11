@@ -104,8 +104,28 @@ public class RequireResolver implements ILoadingAction {
 				 */
 				if(! EMFRegistryHelper.isRegistered(uri)){
 					URIConverter converter = new ExtensibleURIConverterImpl();
-					if ( uri.startsWith("platform:/") ){						
-						if(! converter.exists(emfURI, null) ) 
+					if ( uri.startsWith("platform:/") ){
+						if ( uri.startsWith("platform:/lookup/") ){
+							// search in resource first, if not found, search in plugin
+							// DVK: a better version would be to take into account the global context, 
+							// and not search in the user workspace if we are running a file from a plugin
+							//  unfortunately this is impossible now, unless we correctly separate the interpreter context between executions
+							// try in workspace
+							String newUri = uri.replaceAll("platform:/lookup/", "platform:/resource/");
+							emfURI = URI.createURI( newUri );
+							emfURI = EcoreHelper.getCanonicalURI(emfURI);
+							if(! converter.exists(emfURI, null) ) {
+								newUri = uri.replaceAll("platform:/lookup/", "platform:/plugin/");
+								emfURI = URI.createURI( newUri );
+								emfURI = EcoreHelper.getCanonicalURI(emfURI);
+								if(! converter.exists(emfURI, null) ) {
+									throw new IOException("The file " + uri + " does not exist. \n(neither in resource, nor in plugin)");
+								}
+							}	
+							// ok no exception, completly switch to the new uri
+							uri = newUri;
+						}
+						else if(! converter.exists(emfURI, null) ) 
 							throw new IOException("The file " + uri + " does not exist.");						
 					} else 
 						if ( ! uri.equals("kermeta")  && ! uri.equals("java_rt_jar"))
