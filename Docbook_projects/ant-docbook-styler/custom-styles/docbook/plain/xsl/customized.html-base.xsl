@@ -8,6 +8,12 @@
                <!--  xmlns:xslthl="http://xslthl.sf.net"
                 exclude-result-prefixes="xslthl"> --> 
 
+<!-- not overwritten templates will be copied out  -->
+<xsl:template match="a/@*|img/@*|xslthl:number/@*|a|img|xslthl:number">
+  <xsl:copy>
+    <xsl:apply-templates select="@*|node()"/>
+  </xsl:copy>
+</xsl:template>
 <!-- common base for all html based presentations -->
            
 <!-- support for highlighting . see docbook/xsl/html/highlight.xsl for sample of coloration for html document-->
@@ -21,6 +27,9 @@
 <xsl:template match='xslthl:annotation'> 
   <b class="hl-keyword" style="color: darkred"><xsl:apply-templates/></b>
 </xsl:template>
+<xsl:template match='xslthl:specialoperation'> 
+  <i class="hl-keyword" ><xsl:apply-templates/></i>
+</xsl:template>
 
 <xsl:template match='xslthl:string'>
   <i style="color:blue" class="hl-string"><xsl:apply-templates/></i>
@@ -31,6 +40,5 @@
 <xsl:template match='xslthl:doccomment'>
   <i class="hl-comment" style="color: darkblue"><xsl:apply-templates/></i>
 </xsl:template>
-
 
 </xsl:stylesheet>

@@ -28,6 +28,12 @@
 	  	<xsl:attribute name="padding">5pt</xsl:attribute>
 	</xsl:attribute-set>
 
+<!-- not overwritten templates will be copied out  -->
+<xsl:template match="fo:inline/@*|xslthl:number/@*|fo:inline|xslthl:number">
+  <xsl:copy>
+    <xsl:apply-templates select="@*|node()"/>
+  </xsl:copy>
+</xsl:template> 
 
 <!-- support for highlighting -->
 <xsl:param name="highlight.source" select="1"/>
@@ -37,11 +43,14 @@
 <xsl:template match='xslthl:filekeyword'> 
   <fo:inline font-style="bold" color="darkred"><xsl:apply-templates/></fo:inline>
 </xsl:template>
+<xsl:template match='xslthl:specialoperation'> 
+  <fo:inline font-style="italic"><xsl:apply-templates/></fo:inline>
+</xsl:template>
 <xsl:template match='xslthl:annotation'> 
   <fo:inline font-style="italic" color="darkred"><xsl:apply-templates/></fo:inline>
 </xsl:template>
 <xsl:template match='xslthl:string'>
-  <fo:inline font-style="italic"><xsl:apply-templates/></fo:inline>
+  <fo:inline font-style="italic" color="blue"><xsl:apply-templates/></fo:inline>
 </xsl:template>
 <xsl:template match='xslthl:doccomment'>
   <fo:inline font-style="italic" color="darkblue"><xsl:apply-templates/></fo:inline>
@@ -49,5 +58,6 @@
 <xsl:template match='xslthl:comment'>
   <fo:inline font-style="italic" color="darkgreen"><xsl:apply-templates/></fo:inline>
 </xsl:template>
+
 
 </xsl:stylesheet>

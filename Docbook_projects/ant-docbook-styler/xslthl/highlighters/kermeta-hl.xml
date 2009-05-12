@@ -118,4 +118,11 @@ Michiel Hendriks <elmuerte at users.sourceforge.net>
 		<keyword>using</keyword>    
 		<style>filekeyword</style>
 	</highlighter>
+	<highlighter type="keywords">
+		<keyword>each</keyword>
+		<keyword>select</keyword>
+		<keyword>collect</keyword>
+		<keyword>new</keyword>    
+		<style>specialoperation</style>
+	</highlighter>
 </highlighters>
