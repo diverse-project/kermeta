@@ -11,6 +11,9 @@
 		<topic label="KerMeta user interface" href="build/eclipse.help/KerMeta-UI-UserGuide/index.html"> 
 			<link toc="build/eclipse.help/KerMeta-UI-UserGuide/toc.xml" />
 		</topic>
+		<topic label="Deploying KerMeta code" href="build/eclipse.help/KerMeta-Deploying-a-code/index.html"> 
+			<link toc="build/eclipse.help/KerMeta-Deploying-a-code/toc.xml" />
+		</topic>
   <anchor id="org.kermeta.KETAnchor"/>
 			
 		<topic label="Kermeta framework (generated doc)"
@@ -56,7 +59,8 @@
 		href="src/eclipse.help/developer_doc.html">			
 		<topic label="Contributing to kermeta (online)"
 			href="http://www.kermeta.org/community/dev/">
-		</topic>				
+		</topic>	
+					
 		<topic label="KerMeta references">
 			<topic label="KerMeta Interpreter and Java Framework reference" href="build/javadoc/KerMetaInterpreter/index.html"> 		
 			</topic>	
