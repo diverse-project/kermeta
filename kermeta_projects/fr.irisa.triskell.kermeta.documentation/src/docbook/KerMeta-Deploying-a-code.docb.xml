@@ -14,6 +14,10 @@
       <firstname>Didier</firstname>
       <surname>Vojtisek</surname>
     </author>
+    <author>
+      <firstname>Cyril</firstname>
+      <surname>Faucher</surname>
+    </author>
 
     <keywordset>
       <keyword>Kermeta</keyword>
@@ -468,7 +472,7 @@ public class EventManager__execute__Runner {
 						.getEventManager());
 						
 		// args[0] is the parameter filePath
-		// call the operation "execute" on an Event
+		// call the operation "execute" on an EventManager
 		anExec.execute(args[0]);
 
 	}
