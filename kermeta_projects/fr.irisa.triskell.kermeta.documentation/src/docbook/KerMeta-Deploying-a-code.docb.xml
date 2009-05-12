@@ -1,0 +1,446 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.4//EN"
+"http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
+<!-- $Id: KerMeta-MDK.docb.xml,v 1.5 2009-02-20 16:07:09 dvojtise Exp $ -->
+<book lang="en-US">
+  <bookinfo>
+    <title>Deploying Kermeta code</title>
+
+    <pubdate>Build date: @BUILD.DATE@</pubdate>
+
+    <pubdate>$Date:: 2009-05-11 11:53:53 #$</pubdate>
+
+    <author>
+      <firstname>Didier</firstname>
+      <surname>Vojtisek</surname>
+    </author>
+
+    <keywordset>
+      <keyword>Kermeta</keyword>
+
+      <keyword>metamodeling</keyword>
+
+      <keyword>language</keyword>
+    </keywordset>
+
+    <subtitle>How to use your Kermeta code in a product</subtitle>
+
+    <bibliomisc>Licence EPL</bibliomisc>
+
+    <abstract>
+      <para>This document presents various ways to deploy some code written with Kermeta in order to "hide" kermeta to the end users.</para>
+      <para>It covers the integration in an eclipse environment and deployment as a standalone application.</para>
+    </abstract>
+
+    <publisher>
+      <publishername>INRIA</publishername>
+
+      <address><state>France</state>
+<otheraddr><ulink url="http://www.inria.fr">http://www.inria.fr</ulink></otheraddr></address>
+    </publisher>
+  </bookinfo>
+
+  <preface id="preface.link">
+    <title id="preface.title.link">Preface<phrase
+    id="preface"></phrase></title>
+
+    <para>Kermeta is a Domain Specific Language dedicated to metamodel
+    engineering. It fills the gap let by MOF which defines only the structure
+    of meta-models, by adding a way to specify static semantic (similar to
+    OCL) and dynamic semantic (using operational semantic in the operation of
+    the metamodel). Kermeta uses the object-oriented paradigm like Java or
+    Eiffel.</para>
+    
+    <para>A MDK (Model Development Kit) is a set of Kermeta code that goes with a given
+    metamodel. Each of the MDKs provides functionalities dedicated to the metamodel
+    it applies to. (Ex: UML, Ecore, Traceability, yourDomainMetamodel, ...)</para>
+    
+    <para>In this document we will focus on Kermeta MDK. This MDK applies to 
+    Kermeta metamodel itself. Ie. it provides functionalities to manipulate Kermeta programs.</para>
+
+    
+
+    <important>
+      <para>Kermeta is an evolving software and despite that we put a lot of attention to this document, it may contain errors (more likely in the code samples). If you find any error or have some information that improves this document, please send it to us using the bug tracker in the forge: 
+
+      <ulink type="" url="http://gforge.inria.fr/tracker/?group_id=32">
+        <emphasis
+        role="strong">http://gforge.inria.fr/tracker/?group_id=32</emphasis>
+      </ulink>
+
+       or using the developer mailing list (kermeta-developers@lists.gforge.inria.fr) Last check: v1.3.0 
+    </para></important>
+
+    <tip><para>
+       The most update version of this document is available on line from 
+
+      <ulink type=""
+      url="http://www.kermeta.org/">http://www.kermeta.org</ulink>
+
+       . 
+    </para></tip>
+  </preface>
+
+  <chapter id="chapter_eclipse_basic.link">
+    <title id="chapter_eclipse_basic.title.link">Contributing to Eclipse user interface</title>
+    <para> Kermeta isn't dedicated to build user interface, however, you may embed your kermeta application 
+    in Eclipse user interface to make it simple to use for the end users. We present here some basic 
+    informations for those who which to build such user interface. For more details or for different integration in Eclipse, the 
+    reader should refer to the eclipse Platform Plug-in Developer Guide (available in the eclipse help or 
+    <ulink type="" url="http://help.eclipse.org/help32/index.jsp">http://help.eclipse.org/help32/index.jsp
+      </ulink>. 
+	</para>
+	<section  id="chapter_eclipse_popup_action.link">
+		<title   id="chapter_eclipse_popup_action.title.link">Contributing a popup action to eclipse</title>
+	    <para> This should be done from a valid plugin project.
+		</para>
+		<procedure>
+			
+			<step><para>Open the <filename>META-INF/MANIFEST.MF</filename> file.</para></step>
+			<step><para>Open the tab <literal>Extensions</literal>.</para></step>
+			<step><para>Click on <literal>Add</literal> and select the <literal>Extension wizards</literal> tab.</para></step>
+			<step><para>You'll follow the steps provided by the <literal>Popup Menu</literal> Wizard and give a meaninful name to your action.</para></step>			
+			<step performance="optional"><para>You can optionnally set the <literal>nameFilter</literal> wild card in order to restrict the popup to some file extesion only.</para></step>
+		</procedure>
+		<para>You now have a <filename>NewAction.java</filename> file that you can edit to perform the actions you wish, for example by calling kermeta interpreter like explained in <xref linkend="chapter_launching_interpreter.link"/>.</para>
+		<tip><para>Obviously, you can reuse this wizard on other kind of interface, for example to provide an <literal>Action set</literal> or an <literal>Help content</literal>.</para></tip>
+	</section>
+	<section  id="chapter_deploying_4_interpreter.link"><title>Deploying a plugin with Kermeta code for interpreted mode</title>
+	    <para> If you wish to deploy some kermeta code for your end users, you must take care of some rules :</para>
+	    <para>It must be put into a bundle (or eclipse plugin).
+	    To do so, the project containing the kermeta code must be a valid Eclipse plugin project.
+		</para>
+		<para>Make sure to deploy the kmt file in the distributes version. In the manifest.mf, in the Build tab, make sure that the files/folders you want to deploy are checked in the Build section. Otherwise, your plugin will work in development 
+		mode but will fail once deployed in your user platform. 
+		</para>
+	</section>
+	<section><title>Transforming a project into a plugin project</title>
+	    <para>There are some simple steps that you can follow to obtain a valid Eclipse plugin project.
+		</para>		
+		<section><title>Use the new Plugin project wizard</title>
+			<para>This is the simpliest approach.
+			</para>
+			<para>First, if your project already use the name of the plugin you want to create, rename it to another name.
+			</para>
+			<para>Then, use the New plugin project wizard from Eclipse.
+			<synopsis>File &gt; New  &gt; Project...  &gt; Plugin Project</synopsis>
+			Then, follow the wizard.
+			</para>
+			<para>If this plugin is a user interface for one of your metamodel, you should consider adding the postfix <literal>.ui</literal> to your 
+			project name.
+			</para>
+			<tip><para>Using this wizard, you can also create some template popup, action, help, etc as
+				in <xref linkend="chapter_eclipse_popup_action.link" />
+			</para></tip>
+		</section>
+		<section><title>Manually add the missing elements</title>
+			<para>You can achieve more or less the same result by adding some data in the following files.</para>
+			<para>Add the java and plugin nature to your project and the associated buildCommand For this add something similar in the 
+			<filename>.project</filename> file at the root of your eclipse project.</para>
+			<programlisting><![CDATA[<?xml version="1.0" encoding="UTF-8"?>]]></programlisting>
+			<programlisting language="xml" continuation="continues"><![CDATA[
+<projectDescription>
+	<name>your.plugin.name.ui</name>
+	<comment></comment>
+	<projects>
+	</projects>
+	<buildSpec>
+		<buildCommand>
+			<name>fr.irisa.triskell.kermeta.kpm.kpmBuilder</name>
+			<arguments>
+			</arguments>
+		</buildCommand>
+		<buildCommand>
+			<name>org.eclipse.jdt.core.javabuilder</name>
+			<arguments>
+			</arguments>
+		</buildCommand>
+		<buildCommand>
+			<name>org.eclipse.pde.ManifestBuilder</name>
+			<arguments>
+			</arguments>
+		</buildCommand>
+		<buildCommand>
+			<name>org.eclipse.pde.SchemaBuilder</name>
+			<arguments>
+			</arguments>
+		</buildCommand>
+	</buildSpec>
+	<natures>
+		<nature>org.eclipse.pde.PluginNature</nature>
+		<nature>org.eclipse.jdt.core.javanature</nature>
+	</natures>
+</projectDescription>
+]]></programlisting>
+			<tip><para>If you see the .project file, use the Navigator view that show all the files including the hidden ones.</para></tip>
+			<para>Add a <filename>.classpath</filename> file like:</para>
+			<programlisting><![CDATA[<?xml version="1.0" encoding="UTF-8"?>]]></programlisting>
+			<programlisting language="xml" continuation="continues"><![CDATA[
+<classpath>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.6"/>
+	<classpathentry kind="con" path="org.eclipse.pde.core.requiredPlugins"/>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>]]>
+			</programlisting>
+			<para>Add a <filename>META-INF/MANIFEST.MF</filename> file like:</para>
+			<programlisting>Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Your Plug-in
+Bundle-SymbolicName: your.plugin.name.ui
+Bundle-Version: 1.0.0
+Bundle-Activator: your.plugin.name.ui.Activator
+Require-Bundle: org.eclipse.ui,
+ org.eclipse.core.runtime
+Bundle-ActivationPolicy: lazy
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6</programlisting>
+		</section>
+	</section>
+  </chapter>
+  <chapter id="chapter_preparing_kermeta4launch.link">
+    <title id="chapter_preparing_kermeta4launch.title.link">Preparing a kermeta program for a launch</title>
+
+    <para> Here is some tips for preparing a kermeta program in order to be launched by a user interface.
+	</para>
+	<formalpara><title>Use String parameters</title> 
+		<para> The main operation that'll be started should take only String parameters.
+	</para></formalpara>
+	<formalpara><title>If the code must be interpreted, deploy the code in a plugin</title> 
+		<para> all the required kermeta code, kmt, km, ecore must be in a plugin as explained in <xref linkend="chapter_deploying_4_interpreter.link"/>. The only exception is a bout the registered Ecore, which follow EMF way for deploying the java code for the ecore file.
+	</para></formalpara>
+	<note><para>There are some ways to pass to the launched program something more complex 
+	that String, however this require a more coupled interaction and knownledge of the Interpreted or the Compiled code. If you need this, 
+	please ask on the user mailing list and explain you use case for further assistance. We'll be glad to guide you.</para>
+	</note>
+  </chapter>
+
+  <chapter id="chapter_launching_interpreter.link">
+    <title id="chapter_launching_interpreter.title.link">Launching a kermeta program in interpreted mode</title>
+     <para> Here is a typical code for starting a kermeta interpreter on a kermeta program.</para>
+	<note>
+	   <para> This sample is extracted from the kmLogo example which is distributed with Kermeta. You can retrieve this sample
+	    	by doing the following steps.
+		</para>
+		<synopsis>File &gt; new  &gt; Example...  &gt;  Kermeta samples  &gt; km Logo tutorial (plugins for the main workbench) </synopsis>
+		<para>The action file corresponding to this section are in </para>
+		<synopsis>fr.irisa.triskellkmlogo.ui/src/fr.irisa.triskell.kmlogo.ui.popup.actions</synopsis>
+	</note>
+	<programlisting language="java">
+package fr.irisa.triskell.kmlogo.ui.popup.actions;
+
+import java.util.Iterator;
+
+import org.eclipse.core.resources.IFile;
+import org.eclipse.jface.action.IAction;
+import org.eclipse.jface.viewers.ISelection;
+import org.eclipse.jface.viewers.StructuredSelection;
+import org.eclipse.ui.IActionDelegate;
+import org.eclipse.ui.IObjectActionDelegate;
+import org.eclipse.ui.IWorkbenchPart;
+
+import fr.irisa.triskell.eclipse.console.EclipseConsole;
+import fr.irisa.triskell.eclipse.console.IOConsole;
+import fr.irisa.triskell.eclipse.console.messages.ErrorMessage; 
+import fr.irisa.triskell.eclipse.console.messages.InfoMessage;
+import fr.irisa.triskell.eclipse.console.messages.OKMessage;
+import fr.irisa.triskell.eclipse.console.messages.ThrowableMessage;
+import fr.irisa.triskell.kmlogo.ui.RunLogoK;
+
+/**
+ * The action may take a long time, so the concrete action is embedded in a Runnable Thread
+ *
+ */
+public class RunLogo implements IObjectActionDelegate, Runnable {
+
+   protected StructuredSelection currentSelection;
+   protected IFile logoFile;
+    
+   public static final String LOGO_SIMULATOR_KERMETA_CODE = 
+      "platform:/plugin/fr.irisa.triskell.kmlogo.model/logo/5.Simulator/LogoSimulator.kmt"; <co id="kmt.path.co" linkends="kmt.path.callout"/>
+	
+   /**
+    * Constructor for Action1.
+    */
+   public RunLogo() {
+      super();
+   }
+	
+   public void run() {
+		
+      IOConsole console = new EclipseConsole("Logo Simulator"); <co id="eclipse.console.co" linkends="eclipse.console.callout"/>
+      console.println(new InfoMessage("Launching logo interpreter on file : " + logoFile.getLocation().toOSString() + "..."));
+		
+      try {			
+				
+         String file_uri = "file:/" + logoFile.getLocation().toOSString();
+		    
+         RunLogoK.run(file_uri, console);
+         
+         Interpreter interpreter = new Interpreter(LOGO_SIMULATOR_KERMETA_CODE, InterpreterMode.RUN, null);
+         interpreter.setStreams(console);		<co id="interpreter.stream.co" linkends="interpreter.stream.callout"/>
+         interpreter.setEntryPoint("kmLogo::Interpreter", "execute");<co id="interpreter.entrypoint.co" linkends="interpreter.entrypoint.callout"/>
+         String[] parameters = new String[1]; <co id="interpreter.parameter.co" linkends="interpreter.parameter.callout"/>
+         parameters[0] = file_uri;
+         interpreter.setParameters(parameters);
+			
+         // Add some URL to the classloader of the interpreter : needed if your code use some extra java classes (via extern for example)
+         // use a set for building the URL (in case some may fail due to malformed URL
+         // Note : URL must end with a / if this is a directory, if not, this is considered as a jar by the classloader
+         Set&lt;URL&gt; urlsSet = new LinkedHashSet&lt;URL&gt;();
+         // URL used when run in a runtimeworkbench, this allows to debug the plugin
+         safeAddURLAsString(urlsSet, "file://" + FileLocator.resolve(Platform.getBundle("fr.irisa.triskell.kmlogo.model").getEntry("/bin/")));
+         // add this plugin as a deployed plugin
+         Bundle bundle = org.eclipse.core.runtime.Platform.getBundle("fr.irisa.triskell.kmlogo.model");
+         if(bundle != null){
+            urlsSet.add(FileLocator.resolve(bundle.getEntry("/")));
+         }
+         // convert the set into an array
+         URL[] urls = new URL[urlsSet.size()];
+         int i = 0;
+         for (URL url : urlsSet) {
+            urls[i] = url;
+            i++;
+         }
+         URLClassLoader cl = new URLClassLoader(urls, interpreter.getClass().getClassLoader());
+         Thread.currentThread().setContextClassLoader(cl);
+			
+         interpreter.launch(); <co id="interpreter.launch.co" linkends="interpreter.launch.callout"/>
+			
+         console.println(new OKMessage("Execution terminated successfully."));
+			
+			
+      } catch (Throwable e) { <co id="interpreter.exception.co" linkends="interpreter.exception.callout"/>
+         console.println(new ErrorMessage("Logo runtime error : "));
+         console.println(new ThrowableMessage(e));	
+         e.printStackTrace();
+      }
+   }
+
+   /**
+    * @see IObjectActionDelegate#setActivePart(IAction, IWorkbenchPart)
+    */
+   public void setActivePart(IAction action, IWorkbenchPart targetPart) {
+   }
+
+   /**
+    * @see IActionDelegate#run(IAction)
+    * Create a new thread for this concrete action
+    */
+   public void run(IAction action) {
+      new Thread(this).start();
+   }
+
+   /**
+    * @see IActionDelegate#selectionChanged(IAction, ISelection)
+    * This allow to retrieve the file selected by the user when activating the popup
+    */
+   public void selectionChanged(IAction action, ISelection selection) {
+		
+      if (selection instanceof StructuredSelection)
+      {
+         // the selection should be a single file
+         currentSelection = (StructuredSelection)selection;
+         Iterator it = currentSelection.iterator();
+
+         while(it.hasNext()) {
+            logoFile = (IFile)it.next();
+         }
+      }
+   }
+   /**
+    * add a new URL to the set
+    * Doesn't fail if the URL is malformed, in that case, only a warning is raised, 
+    * @param urlsSet : set that will contain the URL built
+    * @param url : String of the URL to build
+    */
+   private static void safeAddURLAsString(Set&lt;URL&gt; urlsSet, String url){
+      try{
+         urlsSet.add(new URL(url));
+      } catch (MalformedURLException e) {
+         Activator.logWarningMessage(
+            "problem adding an entry of the classpath, "
+            + url + " cannot be added in classloader", e);
+      }
+   }
+
+}
+	</programlisting>
+	<calloutlist>
+		<callout arearefs="kmt.path.co" id="kmt.path.callout">
+			<para>Path to the kermeta program that will be run.
+			</para>
+		</callout>
+		<callout arearefs="eclipse.console.co" id="eclipse.console.callout">
+			<para>Kermeta stdio.writeln outputs must be redirected to an IOConsole. This EclipseConsole will print to the user console in eclipse.
+			</para><para>
+				The plugin <filename>fr.irisa.triskell.eclipse.util</filename> also provides so other console kind like <filename>LocalIOConsole</filename> that prints to the standard streams.
+			</para>
+		</callout>
+		<callout arearefs="interpreter.stream.co" id="interpreter.stream.callout">
+			<para>Tells the interpreter where the stdio will be written.
+			</para>
+		</callout>
+		<callout arearefs="interpreter.entrypoint.co" id="interpreter.entrypoint.callout">
+			<para>Indicates the main class and the operation that will be started.
+			</para>
+		</callout>
+		<callout arearefs="interpreter.parameter.co" id="interpreter.parameter.callout">
+			<para>Pass the String parameters to the interpreter. This must conforms to the expected parameters of the main operation specified as entry point.
+			</para>
+		</callout>
+		<callout arearefs="interpreter.launch.co" id="interpreter.launch.callout">
+			<para>Finally starts the interpreter and wait for the end of the kermeta program.
+			</para>
+			<note><para>In the Interpreter API, it exist some other way to start the program, for example <literal>launchAndWait()</literal> which doesn't release the 
+			interpreter memory at the end of the operation which is useful in some special applications. Feel free to ask question to the development team.
+			</para></note>
+		</callout>
+		<callout arearefs="interpreter.exception.co" id="interpreter.exception.callout">
+			<para>Use various means to tell the user that something wrong occurred. However, if you expect some exception 
+			and haven't catched them in the kermeta program (for example
+			when checking a model invariant, you may add here some code to report a better message to your users).  
+			</para>
+		</callout>
+	
+	</calloutlist>
+	
+  </chapter>
+  <chapter id="chapter_registering_ecore.link">
+    <title id="chapter_registering.title.link">Registering Ecore file</title>
+
+    <para>Usually, when deploying a code for a given metamodel, we deploy this metamodel in a EMF plugin that contains the generated java code
+    for this metamodel. When using this, Eclipse takes care of registering the EPackage in its registry.
+	</para>
+	<para>If for some reason you don't want to deploy the java version of the metamodel, you can also manually register it directly from an ecore file.</para>
+	<para>
+	In the graphical interface, this will be done by <synopsis>right click on the ecore file &gt; EPackage registration &gt; Register EPackae into repository</synopsis>.
+	</para>
+	<para>If you need to add an ecore file into the registry programmatically, you can do it in two ways:</para>
+	<itemizedlist>
+		<listitem><para> In kermeta, use the <methodname>registerEcoreFile</methodname>(<parameter>fileUri</parameter> : <type>String</type>) operation provided by
+			<classname>kermeta::persistence::EMFRepository</classname>
+		</para><programlisting language="kermeta">
+kermeta::persistence::EMFRepository.new.registerEcoreFile("MyMetamodel.ecore")		
+		</programlisting>
+		</listitem>
+		<listitem><para> In java, use the API provided by the <filename>org.eclipse.emf.ecoretools.registration</filename> 
+			plugin.
+		</para>
+		<programlisting language="java">
+import org.eclipse.emf.ecoretools.registration.EcoreRegistering;
+// ...
+EcoreRegistering.registerPackages(anEcoreIFile);
+		</programlisting>
+		<note><para>despite the name of this plugin, it is provided by kermeta team, this was an attempt to contribute to ecore tools project, but this contribution is still in the pipeline in Eclipse :-(</para></note>
+		</listitem>
+	
+	</itemizedlist>
+  </chapter>
+  <chapter id="chapter_launching_compiled_code.link">
+    <title id="chapter_launching_compiled.title.link">Launching a compiled kermeta program</title>
+
+    <para> TODO.
+	</para>
+
+  </chapter>
+</book>
