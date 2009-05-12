@@ -413,7 +413,7 @@ public class RunLogo implements IObjectActionDelegate, Runnable {
 	</para>
 	<para>If for some reason you don't want to deploy the java version of the metamodel, you can also manually register it directly from an ecore file.</para>
 	<para>
-	In the graphical interface, this will be done by <synopsis>right click on the ecore file &gt; EPackage registration &gt; Register EPackae into repository</synopsis>.
+	In the graphical interface, this will be done by <synopsis>right click on the ecore file &gt; EPackage registration &gt; Register EPackage into repository</synopsis>.
 	</para>
 	<para>If you need to add an ecore file into the registry programmatically, you can do it in two ways:</para>
 	<itemizedlist>
@@ -439,8 +439,43 @@ EcoreRegistering.registerPackages(anEcoreIFile);
   <chapter id="chapter_launching_compiled_code.link">
     <title id="chapter_launching_compiled.title.link">Launching a compiled kermeta program</title>
 
-    <para> TODO.
+    <para>For each operation having like parameters a sequence of String, a Java "main" method is generated at compilation time in a Java package denoted "runner". A Java package "runner" is generated for all Kermeta or Ecore packages. Thus this main is usable as a classical Java Main method.
 	</para>
+	<para>An example of Java Main Class for the operation: event::manager::EventManager::execute( filePath : String )</para>
+	<programlisting language="java">
+package event.manager.runner;
 
+import org.kermeta.compil.runtime.ExecutionContext;
+
+/**
+ * A Stub of a Java Application Runner for a Kermeta runnable operation
+ *
+ * @generated
+ */
+public class EventManager__execute__Runner {
+
+	/**
+	 * @generated
+	 * Main to run the execution
+	 */
+	public static void main(String[] args) {
+		
+		//Initialize the reflection
+		ExecutionContext.getInstance().lazyInitialize();
+
+		event.manager.EventManager anExec = (event.manager.EventManager) org.kermeta.compil.runtime.helper.language.ClassUtil
+				.newObject(event.manager.ManagerPackage.eINSTANCE
+						.getEventManager());
+						
+		// args[0] is the parameter filePath
+		// call the operation "execute" on an Event
+		anExec.execute(args[0]);
+
+	}
+
+}
+	</programlisting>
+	<para>If the Runner operation has not been generated at compilation time (parameters having types different of String), you should write the previous source code by the hand and adapt it following the operation.
+	</para>
   </chapter>
 </book>
