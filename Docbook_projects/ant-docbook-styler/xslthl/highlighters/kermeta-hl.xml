@@ -122,7 +122,21 @@ Michiel Hendriks <elmuerte at users.sourceforge.net>
 		<keyword>each</keyword>
 		<keyword>select</keyword>
 		<keyword>collect</keyword>
-		<keyword>new</keyword>    
+		<keyword>detect</keyword>
+		<keyword>excludes</keyword>
+		<keyword>excludesAll</keyword>
+		<keyword>exists</keyword>
+		<keyword>forAll</keyword>
+		<keyword>existsCpl</keyword>
+		<keyword>forAllCpl</keyword>
+		<keyword>includes</keyword>
+		<keyword>includesAll</keyword>
+		<keyword>one</keyword>
+		<keyword>collect</keyword>
+		<keyword>reject</keyword>   
+		<keyword>new</keyword>     
+		<keyword>oid</keyword>    
+		<keyword>clone</keyword> 
 		<style>specialoperation</style>
 	</highlighter>
 </highlighters>
