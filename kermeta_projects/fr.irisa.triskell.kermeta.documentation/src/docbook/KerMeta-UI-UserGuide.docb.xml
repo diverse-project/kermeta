@@ -356,10 +356,10 @@
     </section>
   </chapter>
 
-  <chapter>
-    <title>Execution</title>
+  <chapter id="chapter_interpreter.link">
+    <title>Interpreting a Kermeta code</title>
 
-    <para>Kermeta workbench allows to run your Kermeta code in several
+    <para>Kermeta workbench allows to interpret and run your Kermeta code in several
     ways.</para>
 
     <section>
@@ -670,6 +670,18 @@
     </section>
 
     
+  </chapter>
+	
+  <chapter  id="chapter_compiler.link">
+    <title>Compiling a kermeta code into java</title>
+
+    <para>The workbench allows you to transform you kermeta code into java code.</para>
+	<section><title>Calling the complier</title>
+		<para>TODO : mettre +/- le contenu de http://kermeta.org/community/dev/compilerCompilingIssues en faisant des sous sections</para>
+	</section>
+	<section><title>Running the compiled code (RunConfiguration) </title>
+		<para></para>
+	</section>
   </chapter>
 
   <chapter id="chapter_debugger.link">
@@ -987,9 +999,7 @@
           program.</para>
         </listitem>
       </itemizedlist>
-    </section>
-    
-    <figure>
+      <figure>
         <title>Km to Kmt transformation</title>
         <mediaobject>
           <imageobject>
@@ -997,6 +1007,7 @@
           </imageobject>
         </mediaobject>
       </figure>
+    </section>
 
     <section>
       <title>Traceability</title>
