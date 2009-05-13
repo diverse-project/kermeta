@@ -21,8 +21,10 @@ import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.jface.action.IAction;
+import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.StructuredSelection;
+import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.IActionDelegate;
 import org.eclipse.ui.IObjectActionDelegate;
 import org.eclipse.ui.IWorkbenchPart;
@@ -60,32 +62,44 @@ public class CompileEcoreAction implements IObjectActionDelegate {
 	 * @see IActionDelegate#run(IAction)
 	 */
 	public void run(IAction action) {
-		Job job = new Job("Kermeta Compiling Process") {
-			@Override
-			protected IStatus run(IProgressMonitor monitor) {
-	
-				/*************/
+		
+		Shell shell = new Shell();
+		
+		boolean isConfirmed = MessageDialog.openConfirm(
+			shell,
+			"KermetaCompiler Ecore2Java",
+			"This action skips the kmt2ecore compilation, the potential changes in your kmt sources will be not taking into account !");
+		
+		if ( isConfirmed ) {
 			
-				try {
-					if (ecorefile != null) {
-						Compiler compiler = new Compiler(ecorefile, new NullProgressMonitor());
-			
-						compiler.run();
-						internalLog.info("The compilation process is complete");
-					}		
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+			Job job = new Job("Kermeta Compiling Process") {
+				@Override
+				protected IStatus run(IProgressMonitor monitor) {
+		
+					/*************/
+				
+					try {
+						if (ecorefile != null) {
+							Compiler compiler = new Compiler(ecorefile, new NullProgressMonitor());
+				
+							compiler.run();
+							internalLog.info("The compilation process is complete");
+						}		
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+						
 					
-				
-				/*************/
-				
-				return Status.OK_STATUS;
-			}
-		};
-	
-		job.schedule();
+					/*************/
+					
+					return Status.OK_STATUS;
+				}
+			};
+		
+			job.schedule();
+		
+		}
 
 	}
 
