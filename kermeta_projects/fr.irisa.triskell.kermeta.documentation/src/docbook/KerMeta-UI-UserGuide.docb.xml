@@ -675,12 +675,65 @@
   <chapter  id="chapter_compiler.link">
     <title>Compiling a kermeta code into java</title>
 
-    <para>The workbench allows you to transform you kermeta code into java code.</para>
-	<section><title>Calling the complier</title>
-		<para>TODO : mettre +/- le contenu de http://kermeta.org/community/dev/compilerCompilingIssues en faisant des sous sections</para>
+    <para>The workbench allows you to transform you kermeta code into Java-EMF code.</para>
+    
+    <section><title>In a nutshell</title>
+		<para>The Kermeta compiler consists on a transformation from a kmt file to an Ecore file (step 1), finally the generation a plugin with the Java by using the EMF facilities (step 2).
+		The resulting Java may be used both in Eclipse Application or in Java Application (standalone) and is fully compatible with EMF. A listing of dependencies is available below.
+		The compiling process generates a set of files: *.km, *.traceability, *.ecore, *.simk, *.genmodel.
+		A configuration file may be added: *.compiler.properties (more info. below).
+		The 2nd step may be replayed by a right-click on the generated Ecore file.
+		</para>
 	</section>
+	
+    <section><title>Calling the complier</title>
+    	<section><title>Launching a compilation process</title>
+			<para>Right click on a kmt file: "Compile Kmt to EMF plugin (Experimental)", then an Eclipse plugin will be generated, after that you can try to run one generated main contained in runner Java package.</para>
+		</section>
+		<section><title>Customizing the plugin generation</title>
+			<para>You are able to add a "properties file" for customizing the plugin generation.
+			This file must be in the same folder than the main kmt file and respect the naming rule: {kmt_file_name_without_the_kmt_extension}.compiler.properties
+			This configuration file will be taking into account, when you are compiling from a kmt file or the generated ecore file, for this last case you are able to re-generate the plugin without redo kmt2{ecore, simk}
+			The available properties are listed below, every property is optional (the values are String without quote):
+			</para>
+			<itemizedlist>
+				<listitem><para>plugin_id = {name and id of the generated plugin}</para></listitem>
+				<listitem><para>copyright_header = {header include in each file}</para></listitem>
+				<listitem><para>require_bundles = {plugin dependencies if your program depends on external plugins} | String separated by comma</para></listitem>
+				<listitem><para>bundle_version = {version number of your plugin like 0.1.0 instead of the default 1.0.0}</para></listitem>
+				<listitem><para>main_operations = {operation qualifiedNames} | String separated by comma, e.g.: mypackage::MyClass::myMainOperation, mypackage::MyClass::myMainOperation2</para></listitem>
+				<listitem><para>unzip_externs = {zip file containing the externs required to the compiled source code} | String separated by comma, the String is composed of 2 parts separated by a ";", the first part is the location of the zip file, the second one is the folder in the generated plugin, ex.: platform:/resource/MyProject/util/externs.zip;src/java</para></listitem>
+				<listitem><para>enable_emf_load_initialization = {enable EMF-reflection load initialization for large model} | String equals to true or false</para></listitem>
+			</itemizedlist>
+		</section>
+	</section>
+
 	<section><title>Running the compiled code (RunConfiguration) </title>
-		<para></para>
+		<section><title>Running the compiled code inside Eclipse in development mode</title>
+			<para>Right-click on the generated class containing the Java Main method or you are able to create a "Java Run Configuration" pointing the Java Main method</para>
+		</section>
+		<section><title>Running the compiled code inside Eclipse in deployed mode</title>
+			<para>TODO</para>
+		</section>
+		<section><title>Running the compiled code outside Eclipse</title>
+			<para>Creating a standalone version of your compiled code, required libs:</para>
+			<itemizedlist>
+          		<listitem><para>classpathentry kind="lib" path="C:/eclipse-ganymede/eclipse/plugins/org.eclipse.emf.common_2.4.0.v200808251517.jar"</para></listitem>
+				<listitem><para>classpathentry kind="lib" path="C:/eclipse-ganymede/eclipse/plugins/org.eclipse.emf.ecore.xmi_2.4.1.v200808251517.jar"</para></listitem>
+				<listitem><para>classpathentry kind="lib" path="C:/eclipse-ganymede/eclipse/plugins/org.eclipse.emf.ecore_2.4.1.v200808251517.jar"</para></listitem>
+				<listitem><para>classpathentry kind="lib" path="C:/eclipse-ganymede/eclipse/plugins/org.eclipse.core.resources_3.4.0.v20080604-1400.jar"</para></listitem>
+				<listitem><para>classpathentry kind="lib" path="C:/eclipse-ganymede/eclipse/plugins/org.eclipse.core.runtime_3.4.0.v20080512.jar"</para></listitem>
+				<listitem><para>classpathentry kind="lib" path="C:/eclipse-ganymede/eclipse/plugins/org.eclipse.emf.codegen_2.4.0.v200808251517.jar"</para></listitem>
+				<listitem><para>classpathentry kind="lib" path="C:/eclipse-ganymede/eclipse/plugins/org.eclipse.emf.ecoretools.registration_1.0.0.jar"</para></listitem>
+				<listitem><para>classpathentry kind="lib" path="C:/eclipse-ganymede/eclipse/plugins/org.eclipse.equinox.registry_3.4.0.v20080516-0950.jar"</para></listitem>
+				<listitem><para>classpathentry kind="lib" path="C:/eclipse-ganymede/eclipse/plugins/fr.irisa.triskell.eclipse.util_1.2.0.jar"</para></listitem>
+				<listitem><para>classpathentry kind="lib" path="C:/eclipse-ganymede/eclipse/plugins/org.eclipse.equinox.common_3.4.0.v20080421-2006.jar"</para></listitem>
+				<listitem><para>classpathentry kind="lib" path="C:/eclipse-ganymede/eclipse/plugins/org.eclipse.core.jobs_3.4.0.v20080512.jar"</para></listitem>
+				<listitem><para>classpathentry kind="lib" path="C:/eclipse-ganymede/eclipse/plugins/fr.irisa.triskell.kermeta.model_1.2.0.jar"</para></listitem>
+				<listitem><para>classpathentry kind="lib" path="C:/eclipse-ganymede/eclipse/plugins/org.eclipse.osgi_3.4.0.v20080605-1900.jar"</para></listitem>
+			</itemizedlist>
+			<para>Note: this listing definition is in progress.</para>
+		</section>
 	</section>
   </chapter>
 
