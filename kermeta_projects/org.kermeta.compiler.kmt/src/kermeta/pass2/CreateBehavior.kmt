@@ -1426,7 +1426,8 @@ package behavior {
 						end
 					end
 					
-					if self.condition.isInstanceOf(SelfExpression) then
+					// Fixed bug #7838
+					if str_condition == "" then
 						str_condition := str_condition + "\n\t" + context.getIfConditionId() + " = " + self.condition.createBehaviorJava(context)
 					end					
 				end				
