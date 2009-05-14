@@ -45,17 +45,24 @@ public class RepositoryUtil {
 		Resource resource = PersistenceFactory.eINSTANCE.createEMFResource();
 		resource.setUri(uri);
 		resource.setMetaModelURI(mm_uri);
+		tryToRegisterEcoreFile(mm_uri);
 		self.getResources().add( resource );
 		return resource;
 	}
+	
+	public static void tryToRegisterEcoreFile(String ecoreFile_uri) {
+    	if( ecoreFile_uri.endsWith(".ecore") && URI.createURI(ecoreFile_uri).isFile() ) {
+    		registerEcoreFile(ecoreFile_uri);
+		}
+    }
 	
 	/**
 	 * 
 	 * @param mm_uri
 	 */
-	public static void registerEcoreFile(String mm_uri) {
+	public static void registerEcoreFile(String ecoreFile_uri) {
     	
-    	URI ecoreFileUri = URI.createURI(mm_uri);
+    	URI ecoreFileUri = URI.createURI(ecoreFile_uri);
     	try {
 			EcoreRegistering.registerPackages(ecoreFileUri);
 		} catch (NotValidEPackageURIException e) {
