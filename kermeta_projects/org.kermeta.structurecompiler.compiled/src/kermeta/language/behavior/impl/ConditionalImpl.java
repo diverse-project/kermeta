@@ -359,7 +359,7 @@ public class ConditionalImpl extends ExpressionImpl implements Conditional {
 	 */
 	public String createBehaviorJava(KM2EcoreContext context) {
 
-		java.lang.String result = null;
+		/*java.lang.String result = null;
 
 		super.createBehaviorJava(context);
 
@@ -590,7 +590,124 @@ public class ConditionalImpl extends ExpressionImpl implements Conditional {
 
 		context.getCondStack().pop();
 
+		return result;*/
+		
+		// Fixed bug #7838
+		java.lang.String result = null;
+
+			super.createBehaviorJava(context);
+
+			context.pushCondStack();
+
+			result = kermeta.standard.helper.StringWrapper.plus(kermeta.standard.helper.StringWrapper.plus("java.lang.Boolean ", context.getIfConditionId()), " = false;");
+
+			java.lang.String str_condition = "";
+
+			java.lang.Boolean idIfCond_661 = false;
+			idIfCond_661 = this.conditionIsCallFeatureThatCallsFunctionType();
+
+			if( idIfCond_661 ) {
+
+			context.getResultLastStatementStack().push(kermeta.standard.helper.StringWrapper.plus(kermeta.standard.helper.StringWrapper.plus(kermeta.standard.helper.StringWrapper.plus(context.getIfConditionId(), " = "), context.getTYPE_SEPARATOR()), "java.lang.Boolean"));
+
+			str_condition = kermeta.standard.helper.StringWrapper.plus(kermeta.standard.helper.StringWrapper.plus(str_condition, "\n"), this.getCondition().createBehaviorJava(context));
+
+			context.getResultLastStatementStack().pop();
+		}
+		 else {
+
+			java.lang.Boolean idIfCond_662 = false;
+			idIfCond_662 = kermeta.standard.helper.StringWrapper.equals(context.printFtSuffix(), "");
+
+			if( idIfCond_662 ) {
+
+			str_condition = kermeta.standard.helper.StringWrapper.plus(kermeta.standard.helper.StringWrapper.plus(kermeta.standard.helper.StringWrapper.plus(kermeta.standard.helper.StringWrapper.plus(str_condition, "\n\t"), context.getIfConditionId()), " = "), this.getCondition().createBehaviorJava(context));
+		}
+		 else {
+
+			java.lang.Boolean idIfCond_663 = false;
+			idIfCond_663 = kermeta.standard.helper.BooleanWrapper.or(kermeta.standard.helper.BooleanWrapper.or(org.kermeta.compil.runtime.helper.language.ObjectUtil.isInstanceOfSwitcher(this.getCondition(), org.kermeta.compil.runtime.ExecutionContext.getInstance().getMetaClass("kermeta.language.behavior.CallVariable")), org.kermeta.compil.runtime.helper.language.ObjectUtil.isInstanceOfSwitcher(this.getCondition(), org.kermeta.compil.runtime.ExecutionContext.getInstance().getMetaClass("kermeta.language.behavior.SelfExpression"))), org.kermeta.compil.runtime.helper.language.ObjectUtil.isInstanceOfSwitcher(this.getCondition(), org.kermeta.compil.runtime.ExecutionContext.getInstance().getMetaClass("kermeta.language.behavior.CallResult")));
+
+			if( idIfCond_663 ) {
+
+			kermeta.language.structure.Parameter ftParam = null;
+
+			java.lang.Boolean idIfCond_664 = false;
+			idIfCond_664 = org.kermeta.compil.runtime.helper.language.ObjectUtil.isInstanceOfSwitcher(this.getCondition(), org.kermeta.compil.runtime.ExecutionContext.getInstance().getMetaClass("kermeta.language.behavior.CallVariable"));
+
+			if( idIfCond_664 ) {
+
+			ftParam = ((kermeta.language.behavior.CallVariable) org.kermeta.compil.runtime.helper.language.ObjectUtil.asTypeSwitcher(this.getCondition(), org.kermeta.compil.runtime.ExecutionContext.getInstance().getMetaClass("kermeta.language.behavior.CallVariable"))).getFunctionTypeParameter();
+		}
+
+
+			java.lang.Boolean idIfCond_665 = false;
+			idIfCond_665 = kermeta.standard.helper.BooleanWrapper.not(org.kermeta.compil.runtime.helper.language.ObjectUtil.isVoidSwitcher(ftParam));
+
+			if( idIfCond_665 ) {
+
+			java.lang.Boolean idIfCond_666 = false;
+			idIfCond_666 = ftParam.isBooleanFunctionType(context);
+
+			if( idIfCond_666 ) {
+
+			context.getResultLastStatementStack().push(kermeta.standard.helper.StringWrapper.plus(kermeta.standard.helper.StringWrapper.plus(kermeta.standard.helper.StringWrapper.plus(context.getIfConditionId(), " = "), context.getTYPE_SEPARATOR()), "java.lang.Boolean"));
+
+			str_condition = kermeta.standard.helper.StringWrapper.plus(kermeta.standard.helper.StringWrapper.plus(str_condition, "\n"), this.getCondition().createBehaviorJava(context));
+
+			context.getResultLastStatementStack().pop();
+		}
+		 else {
+
+			str_condition = kermeta.standard.helper.StringWrapper.plus(kermeta.standard.helper.StringWrapper.plus(kermeta.standard.helper.StringWrapper.plus(kermeta.standard.helper.StringWrapper.plus(str_condition, "\n\t"), context.getIfConditionId()), " = "), this.getCondition().createBehaviorJava(context));
+		}
+
+		}
+
+		}
+
+
+			java.lang.Boolean idIfCond_667 = false;
+			idIfCond_667 = kermeta.standard.helper.StringWrapper.equals(str_condition, "");
+
+			if( idIfCond_667 ) {
+
+			str_condition = kermeta.standard.helper.StringWrapper.plus(kermeta.standard.helper.StringWrapper.plus(kermeta.standard.helper.StringWrapper.plus(kermeta.standard.helper.StringWrapper.plus(str_condition, "\n\t"), context.getIfConditionId()), " = "), this.getCondition().createBehaviorJava(context));
+		}
+
+		}
+
+		}
+
+
+			result = kermeta.standard.helper.StringWrapper.plus(result, str_condition);
+
+			result = kermeta.standard.helper.StringWrapper.plus(kermeta.standard.helper.StringWrapper.plus(kermeta.standard.helper.StringWrapper.plus(result, "\n\n\tif( "), context.getIfConditionId()), " ) ");
+
+			java.lang.Boolean idIfCond_668 = false;
+			idIfCond_668 = kermeta.standard.helper.BooleanWrapper.not(org.kermeta.compil.runtime.helper.language.ObjectUtil.isVoidSwitcher(this.getThenBody()));
+
+			if( idIfCond_668 ) {
+
+			result = kermeta.standard.helper.StringWrapper.plus(kermeta.standard.helper.StringWrapper.plus(result, this.getThenBody().createBehaviorJava(context)), "\n");
+		}
+
+
+			java.lang.Boolean idIfCond_669 = false;
+			idIfCond_669 = kermeta.standard.helper.BooleanWrapper.not(org.kermeta.compil.runtime.helper.language.ObjectUtil.isVoidSwitcher(this.getElseBody()));
+
+			if( idIfCond_669 ) {
+
+			result = kermeta.standard.helper.StringWrapper.plus(result, " else ");
+
+			result = kermeta.standard.helper.StringWrapper.plus(kermeta.standard.helper.StringWrapper.plus(result, this.getElseBody().createBehaviorJava(context)), "\n");
+		}
+
+
+			context.getCondStack().pop();
+
 		return result;
+
 
 	}
 
