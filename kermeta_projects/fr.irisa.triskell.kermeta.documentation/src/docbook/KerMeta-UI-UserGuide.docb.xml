@@ -8,11 +8,16 @@
     tasks</title>
 
     <pubdate>Build date: @BUILD.DATE@</pubdate>
-    <pubdate>$Date: 2008-11-15 09:15:55 $</pubdate>
-
+	<date>Revision: $Date:: 2009-05-11 11:53:53 #$</date>
     <author>
       <firstname>Didier Vojtisek, Francois Tanguy, Cyril Faucher</firstname>
     </author>
+    <mediaobject>
+        <imageobject>
+          <imagedata fileref="figures/FastKermeta.png" align="right" depth="25mm" format="PNG"
+          />
+        </imageobject>
+      </mediaobject> 
   </bookinfo>
 
   <chapter>
@@ -21,7 +26,7 @@
     <para>Kermeta is distributed with a workbench that
     provides many features.</para>
 
-    <para>In the bundle version 1.2.2 you have:</para>
+    <para>In the bundle version 1.3.0 you have:</para>
 
     <itemizedlist>
       <listitem>
@@ -224,21 +229,21 @@
          	This option is really useful when you work with kermeta aspects since it display the elements in your faile and the elements imported by aspect.  
       	</para> 
       </warning>
-
-      <figure>
-        <title>The outline in Kermeta Text Editor</title>
-
-        <mediaobject>
-          <imageobject>
-            <imagedata fileref="KerMeta-UI-UserGuide_figures/outlineSmall.png" />
-          </imageobject>
-        </mediaobject>
-      </figure>
+ 	  
       
       <para>
       	In addition, the elements are colored in order to help to identify where and how
       	an element is defined.
       </para>
+      <figure>
+        <title>The outline in Kermeta Text Editor</title>
+        <mediaobject>
+          <imageobject>
+            <imagedata fileref="KerMeta-UI-UserGuide_figures/outlineSmall.png" format="PNG" depth="550px"/>
+          </imageobject>
+        </mediaobject>
+      </figure>
+      
       <itemizedlist>
         <title>The following  meaning are assigned to the colors in this view :
         </title>
@@ -487,18 +492,25 @@
     <section>
       <title>Run the interpreter with a Java command line</title>
 
-      <para>The Interpreter provides different facades in order to run a
-      Kermeta program. The RunCommandLine class allows to pass the name of:
+      <para>You can run Kermeta interpreter from the command line. For this you need to run the java class
+      <classname>org.kermeta.interpreter.api.RunCommandLine</classname> which is available in <filename>fr.irisa.triskell.kermeta.interpreter</filename> 
+      plugin.
+      The RunCommandLine class allows to pass the name of:
       the Kermeta source file, and optionally the name of the class and the
       operation to run.</para>
-
+	  <note><para>The package org.kermeta.interpreter.api provides different facades in order to run a
+      Kermeta program with the interpreter from a java program. You can either have a look to the document
+      <ulink url="http://kermeta.org/documents/deployment_manual/">Deploying Kermeta code manual</ulink> 
+      or you may also have a look into class 
+      <classname>RunCommandLine</classname> to see how it was implemented.</para></note>
 	  <para>
-	  The interpreter command line is available in two bundle : directly within 
-	  eclipse, or using one of the standalone bundle.
+	  The interpreter command line is available in two main forms : as a set of eclipse plugin (it is available with all kermeta version deployed in Eclipse,
+	   or as a standalone jar (see <ulink url="http://gforge.inria.fr/frs/?group_id=32">Kermeta download page</ulink> for the various distributions).
 	  </para>
 	  
 	  <para>
-	  The standalone bundle is available in two forms : all in one jar, or only kermeta in the main jar
+	  The standalone bundle is available in two version : all in one jar (typically <filename>kermeta_standalone_full_1.3.0.jar</filename>),
+	   or only kermeta in the main jar (typically <filename>kermeta_standalone_no_thirdparty_in_main_jar.1.3.0.zip</filename>. In this second version, the thirdparty jar aren't included.
 	  </para>
 	  
 	  
@@ -506,76 +518,22 @@
 	  <para>Depending wether you use the standalone jars or the jar embedded in eclipse, the process
 	  will be more or less simple. The simpliest is to use the standalone version because you don't need
 	  to deal with the classpath.</para>
-	  
+	  <example><title>Simpliest use of the standalone version on the command line</title>
+        <programlisting language="tcl">java -jar kermeta_standalone.jar  -U ecore_mdk/add_observer.kmt -C pattern::AddObserver -O main<co id="standalone.sample.entry.co" linkends="standalone.sample.entry.callout"/> 
+         input_models/needs_observer.ecore output_models/ Compteur Afficheur<co id="standalone.sample.options.co" linkends="standalone.sample.options.callout"/> </programlisting>
+        <calloutlist>
+			<callout arearefs="standalone.sample.entry.co" id="standalone.sample.entry.callout">
+				<para>This sample launches the file <filename>add_observer.kmt</filename> and will start the operation
+				<methodname>main</methodname> of the class <classname>pattern::AddObserver</classname>.
+				</para>
+			</callout>
+			<callout arearefs="standalone.sample.options.co" id="standalone.sample.options.callout">
+				<para>This sample kermeta programs takes 4 strings as parameters.
+				</para>
+			</callout>
+		</calloutlist>
+        </example>
 	  <section>
-	  	<title>Run the eclipse version of the interpreter in eclipse</title>
-	      <para>In this section we focus on calling the interpreter embedded in an eclipse installation.</para>
-	      <para>From eclipse, you create a Java application LaunchConfiguration that will
-	      run the interpreter with your Kermeta file.</para>
-	      <figure id="refIllustration6">
-	        <title>Java run configuration main tab</title>
-	
-	        <mediaobject>
-	          <imageobject>
-	            <imagedata fileref="KerMeta-UI-UserGuide_figures/KerMeta_RunCommandLine1.png" />
-	          </imageobject>
-	        </mediaobject>
-	      </figure>
-	
-	      <para></para>
-	
-	      <para>Be careful, you must select "Include external jars when searching
-	      for a main class".</para>
-	
-	      <figure id="refIllustration7">
-	        <title>Java run configuration arguments</title>
-	
-	        <mediaobject>
-	          <imageobject>
-	            <imagedata fileref="KerMeta-UI-UserGuide_figures/KerMeta_RunCommandLine_arguments.png" />
-	          </imageobject>
-	        </mediaobject>
-	      </figure>
-	
-	      <para></para>
-	
-	      <para>The output level of interpreter traces can be set using a log4j
-	      configuration file. The concrete file to use is set by the java property
-	      "kermeta.log4j.configurationfile.name". A sample of log4j configuration
-	      file is located in the textEditor plugin.</para>
-	
-	      <para>Exemple add the following in the VM arguments box:
-	      -Dkermeta.log4j.configurationfile.name= "../../plugins/fr.irisa.triskell.kermeta.texteditor_0.0.4/kermeta_log4j_configuration.xml"</para>
-	
-	      <para>The classpath must be carefully set using the jar of Kermeta, the
-	      jar of Ecore and of emf.</para>
-	
-	      <figure id="refIllustration8">
-	        <title>Java run configuration classpath (using the interpreter jars in
-	        the texteditor)</title>
-	
-	        <mediaobject>
-	          <imageobject>
-	            <imagedata fileref="KerMeta-UI-UserGuide_figures/KerMeta_RunCommandLine_classpath.png" />
-	          </imageobject>
-	        </mediaobject>
-	      </figure>
-	
-	      <para></para>
-	
-	      <tip>
-	      	<para>
-	         	This RunCommandLine class or one of its sibling can also be used by any of your java programs.For more information please see the Javadoc reference of RunCommandLine.
-	        </para> 
-	      </tip>
-	
-	      <warning>
-	      	<para>
-	         	This method need to know precisely which jar you use. If you update any of the required plugins (kermeta, emf, ecore , ...) the directory containing the jar will change because eclipse use the version number as part of the directory name. You'll have to manually change to ant file in order to reflect the update.
-	        </para> 
-	      </warning>
-      </section>
-      <section>
         <title>Command line options</title>
 
         <para>The command line needs several options to run properly a kermeta
@@ -643,19 +601,38 @@
         <para>Other values on the command line will be passed as string to the
         operation</para>
 
-        <para>Exemple of arguments for a kermeta program:</para>
-
-        <programlisting>-P -U ../ModelEngineeringCourse/transfo/add_observer.kmt -C pattern_macros::Main -O main -K lib/framework.km ../models/needs_observer.ecore Compteur Afficheur </programlisting>
+        <example><title>Example of  a kermeta program called with the standalone version on the command line</title>
+        <programlisting language="tcl">java -jar kermeta_standalone.jar  -P -U ../ModelEngineeringCourse/transfo/add_observer.kmt -C pattern_macros::Main -O main<co id="sample.entry.co" linkends="sample.entry.callout"/> 
+        -K lib/framework.km<co id="k.option.co" linkends="k.option.callout"/> ../models/needs_observer.ecore Compteur Afficheur<co id="sample.options.co" linkends="sample.options.callout"/> </programlisting>
+        <calloutlist>
+			<callout arearefs="sample.entry.co" id="sample.entry.callout">
+				<para>This sample launches the file <filename>add_observer.kmt</filename> and will start the operation
+				<methodname>main</methodname> of the class <classname>pattern_macros::Main</classname>.
+				</para>
+			</callout>
+			<callout arearefs="k.option.co" id="k.option.callout">
+				<para>forces the interpreter to use a specific framework.km instead of the one inside the jar.
+				</para>
+			</callout>
+			<callout arearefs="sample.options.co" id="sample.options.callout">
+				<para>This sample kermeta programs takes 3 strings as parameters.
+				</para>
+			</callout>
+		</calloutlist>
+        </example>
+        
       </section>
 
       <section>
         <title>About the URI map</title>
 
         <para>When you run a kermeta program outside of Eclipse, the uri of
-        type platform:// are not correctly resolved.</para>
+        type platform:// are not resolved since this is the role of Eclipse to resolve them. So,
+        when running outiside of Eclipse, you need to help this resolution.</para>
+        <para>The resolution can be done using a map, whenever it find the key, it will replace it with the associated value.
+        Like that you can transform platform:/plugin/ into a physical location in your disk.</para>
 
-        <para>This option allow to specify a file that contains mapping to
-        help to resolve those uri.</para>
+        <para>With RunCommandLine.java, this is the option <option>-U</option> which allow to specify a file that contains the mapping.</para>
 
         <para>This uri map file uses the syntax of java properties
         files.</para>
@@ -663,11 +640,95 @@
         <para>Example of uri.map file which maps some platform:// urls into
         file:// urls</para>
 
-        <programlisting>#
-"platform:/plugin/fr.irisa.triskell.kermeta/"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"file:/C:/eclipse3.0.2/eclipse/plugins/fr.irisa.triskell.kermeta_0.0.16/"
-"platform:/resource/fr.irisa.triskell.kermeta/"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"file:/C:/eclipse3.0.2/eclipse/workspace/fr.irisa.triskell.kermeta/"</programlisting>
+        <programlisting language="tcl">#Typical uri.map file
+"platform:/plugin/"&nbsp;&nbsp;&nbsp;"file:/C:/eclipse3.4/eclipse/workspace_head/"
+"platform:/resource/"&nbsp;"file:/C:/eclipse3.4/eclipse/workspace_head/"
+"kconf:/loader/"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"file:/C:/eclipse3.4/eclipse/workspace_head/org.kermeta.io.loader/instances/" <co id="kconf.loader.co" linkends="kconf.loader.callout"/>
+</programlisting>
+		<calloutlist>
+			<callout arearefs="kconf.loader.co" id="kconf.loader.callout">
+				<para>This special uri is used by kermeta to retrieve the folder <filename>instances</filename> in the plugin <filename>org.kermeta.io.loader</filename>.
+				Kermeta intepreter cannot work correctly without it.
+				</para><para>Another easy way (not detailed here) would be to retrieve one of the standalone versions and run it from eclipse.
+				</para>
+			</callout>
+		</calloutlist>
+		<tip><para>With this map mechanism, you can also translate the platform uris into jar protocol. This protocol allows to search 
+		within a jar. for example, <filename>jar:file:/my.jar!/src/kermeta/framework.km</filename> opens the file <filename>my.jar</filename> and pick the file 
+		named <filename>framework.km</filename> into the subfolder <filename>src/kermeta</filename> in the jar.</para>
+		</tip>
       </section>
-    </section>
+	  
+	  <section >
+	  	<title>Run the eclipse version of the interpreter in eclipse</title>
+	      <para>In this section we focus on calling the interpreter embedded in an eclipse installation.</para>
+	      <note><para>This is quite an advanced use case recommanded only for people who understand how eclipse files are organized and can manually create a classpath to retreive the various jar in eclipse installation.</para></note>
+	      <para>From eclipse, you create a Java application LaunchConfiguration that will
+	      run the interpreter with your Kermeta file.</para>
+	      <figure id="refIllustration6">
+	        <title>Java run configuration main tab</title>
+	
+	        <mediaobject>
+	          <imageobject>
+	            <imagedata fileref="KerMeta-UI-UserGuide_figures/KerMeta_RunCommandLine1.png" />
+	          </imageobject>
+	        </mediaobject>
+	      </figure>
+	
+	      <para></para>
+	
+	      <para>Be careful, you must select "Include external jars when searching
+	      for a main class".</para>
+	
+	      <figure id="refIllustration7">
+	        <title>Java run configuration arguments</title>
+	
+	        <mediaobject>
+	          <imageobject>
+	            <imagedata fileref="KerMeta-UI-UserGuide_figures/KerMeta_RunCommandLine_arguments.png" />
+	          </imageobject>
+	        </mediaobject>
+	      </figure>
+	
+	      <para></para>
+	
+	      <para>The output level of interpreter traces can be set using a log4j
+	      configuration file. The concrete file to use is set by the java property
+	      "kermeta.log4j.configurationfile.name". A sample of log4j configuration
+	      file is located in the <filename>fr.irisa.triskell.kermeta.model</filename> plugin.</para>
+	
+	      <para>Exemple add the following in the VM arguments box:
+	      -Dkermeta.log4j.configurationfile.name= "../../plugins/fr.irisa.triskell.kermeta.model_1.3.0/kermeta_log4j_configuration.xml"</para>
+	
+	      <para>The classpath must be carefully set using the jar of Kermeta, the
+	      jar of Ecore and of emf.</para>
+	
+	      <figure id="refIllustration8">
+	        <title>Java run configuration classpath (using the interpreter jars in
+	        the texteditor)</title>
+	
+	        <mediaobject>
+	          <imageobject>
+	            <imagedata fileref="KerMeta-UI-UserGuide_figures/KerMeta_RunCommandLine_classpath.png" />
+	          </imageobject>
+	        </mediaobject>
+	      </figure>
+	
+	      <para></para>
+	
+	      <tip>
+	      	<para>
+	         	This RunCommandLine class or one of its sibling can also be used by any of your java programs.For more information please see the Javadoc reference of RunCommandLine.
+	        </para> 
+	      </tip>
+	
+	      <warning>
+	      	<para>
+	         	This method need to know precisely which jar you use. If you update any of the required plugins (kermeta, emf, ecore , ...) the directory containing the jar will change because eclipse use the version number as part of the directory name. You'll have to manually change to ant file in order to reflect the update.
+	        </para> 
+	      </warning>
+      </section>
+   </section>
 
     
   </chapter>
@@ -685,7 +746,7 @@
 		The 2nd step may be replayed by a right-click on the generated Ecore file.
 		</para>
 	</section>
-	
+ 	
     <section><title>Calling the complier</title>
     	<section><title>Launching a compilation process</title>
 			<para>Right click on a kmt file: "Compile Kmt to EMF plugin (Experimental)", then an Eclipse plugin will be generated, after that you can try to run one generated main contained in runner Java package.</para>
@@ -709,6 +770,7 @@
 	</section>
 
 	<section><title>Running the compiled code (RunConfiguration) </title>
+		<para></para>
 		<section><title>Running the compiled code inside Eclipse in development mode</title>
 			<para>Right-click on the generated class containing the Java Main method or you are able to create a "Java Run Configuration" pointing the Java Main method</para>
 		</section>
@@ -732,9 +794,10 @@
 				<listitem><para>classpathentry kind="lib" path="C:/eclipse-ganymede/eclipse/plugins/fr.irisa.triskell.kermeta.model_1.2.0.jar"</para></listitem>
 				<listitem><para>classpathentry kind="lib" path="C:/eclipse-ganymede/eclipse/plugins/org.eclipse.osgi_3.4.0.v20080605-1900.jar"</para></listitem>
 			</itemizedlist>
-			<para>Note: this listing definition is in progress.</para>
+			<note><para>This listing is in progress. Also the exact version of the plugins used may vary depending of your version of Keremta and Eclipse.</para></note>
 		</section>
 	</section>
+	
   </chapter>
 
   <chapter id="chapter_debugger.link">

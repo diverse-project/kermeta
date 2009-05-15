@@ -8,7 +8,7 @@
 
     <pubdate>Build date: @BUILD.DATE@</pubdate>
 
-    <pubdate>$Date:: 2009-05-11 11:53:53 #$</pubdate>
+    <date>$Date::                      $</date>
 
     <author>
       <firstname>Didier</firstname>
@@ -18,7 +18,12 @@
       <firstname>Cyril</firstname>
       <surname>Faucher</surname>
     </author>
-
+	<mediaobject>
+        <imageobject>
+          <imagedata fileref="figures/FastKermeta.png" align="right" depth="25mm" format="PNG"
+          />
+        </imageobject>
+    </mediaobject>
     <keywordset>
       <keyword>Kermeta</keyword>
 
