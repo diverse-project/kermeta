@@ -53,15 +53,21 @@
 	  <copyright/>                                       
       <abstract xsl:use-attribute-sets="titlepage.recto.abstract.style" />
 	  <pubdate/>
+	  <date/>
     </t:titlepage-content>
 	<t:titlepage-content t:side="verso">                  
-    <!--  <title/>
+    <!--   <title/>
       <subtitle/>                       
       <author/>
       <contrib/>
       <edition/>
 	  <pubdate/>
-	  <copyright/> -->                                       
+	  <copyright/>  -->                                
     </t:titlepage-content>
+
+	<!-- prevent from having a page break on the verso page -->
+    <t:titlepage-before t:side="verso">
+  	</t:titlepage-before>
+
   </t:titlepage>
 </t:templates>

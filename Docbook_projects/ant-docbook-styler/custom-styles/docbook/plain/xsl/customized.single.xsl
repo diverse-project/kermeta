@@ -6,6 +6,7 @@
                 exclude-result-prefixes="xslthl"> 
 
 <xsl:import href="@ant.docbook.styler.fileuri@/docbook/xsl/html/docbook.xsl" />
+<!--  <xsl:import href="@docbook.style.fileuri@/xsl/customized.titlepage.xsl"/> -->
 
 <!-- support for highlighting and other custom html. see docbook/xsl/html/highlight.xsl for sample of coloration for html document-->
 <xsl:include href="@ant.docbook.styler.fileuri@/custom-styles/docbook/plain/xsl/customized.html-base.xsl"/>
