@@ -57,5 +57,10 @@
       <genOperations ecoreOperation="kompose.ecore#//Composer/compose"/>
     </genClasses>
     <genClasses image="false" ecoreClass="kompose.ecore#//Mergeable"/>
+    <genClasses ecoreClass="kompose.ecore#//Concat">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kompose.ecore#//Concat/propertyNames"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference kompose.ecore#//Concat/target"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference kompose.ecore#//Concat/value"/>
+    </genClasses>
   </genPackages>
 </genmodel:GenModel>

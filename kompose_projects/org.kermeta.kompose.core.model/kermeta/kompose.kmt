@@ -157,8 +157,14 @@ aspect abstract class Composer {
 		self.logger.printInfo("OK")
 		
 		// save the result
-		self.logger.printInfo("Saving composed model...")
-		saveModel(cm, composedModelURI)
+		
+		if cm.isVoid() then
+			self.logger.printError("Saving composed model is impossible...")
+			self.logger.printError("See previous errors for explanations.")
+		else
+			self.logger.printInfo("Saving composed model...")
+			saveModel(cm, composedModelURI)
+		end
         self.logger.printInfo("OK")
         result := cm
         

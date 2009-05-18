@@ -7,10 +7,13 @@
 package kompose.provider;
 
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Iterator;
 import java.util.List;
 
 import kompose.Change;
+import kompose.Concat;
 import kompose.KomposeFactory;
 import kompose.KomposePackage;
 
@@ -18,7 +21,6 @@ import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
 
 import org.eclipse.emf.ecore.EStructuralFeature;
-
 import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
@@ -30,12 +32,12 @@ import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ViewerNotification;
 
 /**
- * This is the item provider adapter for a {@link kompose.Change} object.
+ * This is the item provider adapter for a {@link kompose.Concat} object.
  * <!-- begin-user-doc -->
  * <!-- end-user-doc -->
  * @generated
  */
-public class ChangeItemProvider
+public class ConcatItemProvider
 	extends ElementDirectiveItemProvider
 	implements
 		IEditingDomainItemProvider,
@@ -49,7 +51,7 @@ public class ChangeItemProvider
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ChangeItemProvider(AdapterFactory adapterFactory) {
+	public ConcatItemProvider(AdapterFactory adapterFactory) {
 		super(adapterFactory);
 	}
 
@@ -64,25 +66,25 @@ public class ChangeItemProvider
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
-			addPropertyNamePropertyDescriptor(object);
+			addPropertyNamesPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
 
 	/**
-	 * This adds a property descriptor for the Property Name feature.
+	 * This adds a property descriptor for the Property Names feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void addPropertyNamePropertyDescriptor(Object object) {
+	protected void addPropertyNamesPropertyDescriptor(Object object) {
 		itemPropertyDescriptors.add
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_Change_propertyName_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_Change_propertyName_feature", "_UI_Change_type"),
-				 KomposePackage.Literals.CHANGE__PROPERTY_NAME,
+				 getString("_UI_Concat_propertyNames_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_Concat_propertyNames_feature", "_UI_Concat_type"),
+				 KomposePackage.Literals.CONCAT__PROPERTY_NAMES,
 				 true,
 				 false,
 				 false,
@@ -103,8 +105,8 @@ public class ChangeItemProvider
 	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
-			childrenFeatures.add(KomposePackage.Literals.CHANGE__TARGET);
-			childrenFeatures.add(KomposePackage.Literals.CHANGE__VALUE);
+			childrenFeatures.add(KomposePackage.Literals.CONCAT__TARGET);
+			childrenFeatures.add(KomposePackage.Literals.CONCAT__VALUE);
 		}
 		return childrenFeatures;
 	}
@@ -123,6 +125,17 @@ public class ChangeItemProvider
 	}
 
 	/**
+	 * This returns Concat.gif.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Object getImage(Object object) {
+		return overlayImage(object, getResourceLocator().getImage("full/obj16/Concat"));
+	}
+
+	/**
 	 * This returns the label text for the adapted class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -130,10 +143,21 @@ public class ChangeItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((Change)object).getPropertyName();
+		String label = "";
+		List<String> names = new ArrayList<String>();
+		names = ((Concat)object).getPropertyNames();
+		if (names.size() != 0){
+			for (Iterator<String> iterator = names.iterator(); iterator.hasNext();) {
+				String str = (String) iterator.next();
+				label += str;
+				if (iterator.hasNext())
+					label += "+";
+			}
+		}
+		System.out.println(label);
 		return label == null || label.length() == 0 ?
-			getString("_UI_Change_type") :
-			getString("_UI_Change_type") + " " + label;
+				getString("_UI_Concat_type") :
+				getString("_UI_Concat_type") + " " + label;
 	}
 
 	/**
@@ -147,12 +171,12 @@ public class ChangeItemProvider
 	public void notifyChanged(Notification notification) {
 		updateChildren(notification);
 
-		switch (notification.getFeatureID(Change.class)) {
-			case KomposePackage.CHANGE__PROPERTY_NAME:
+		switch (notification.getFeatureID(Concat.class)) {
+			case KomposePackage.CONCAT__PROPERTY_NAMES:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
-			case KomposePackage.CHANGE__TARGET:
-			case KomposePackage.CHANGE__VALUE:
+			case KomposePackage.CONCAT__TARGET:
+			case KomposePackage.CONCAT__VALUE:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
@@ -172,72 +196,72 @@ public class ChangeItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
-				(KomposePackage.Literals.CHANGE__TARGET,
+				(KomposePackage.Literals.CONCAT__TARGET,
 				 KomposeFactory.eINSTANCE.createNameRef()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(KomposePackage.Literals.CHANGE__TARGET,
+				(KomposePackage.Literals.CONCAT__TARGET,
 				 KomposeFactory.eINSTANCE.createIDRef()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(KomposePackage.Literals.CHANGE__TARGET,
+				(KomposePackage.Literals.CONCAT__TARGET,
 				 KomposeFactory.eINSTANCE.createLiteral()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(KomposePackage.Literals.CHANGE__TARGET,
+				(KomposePackage.Literals.CONCAT__TARGET,
 				 KomposeFactory.eINSTANCE.createStringLiteral()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(KomposePackage.Literals.CHANGE__TARGET,
+				(KomposePackage.Literals.CONCAT__TARGET,
 				 KomposeFactory.eINSTANCE.createBooleanLiteral()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(KomposePackage.Literals.CHANGE__TARGET,
+				(KomposePackage.Literals.CONCAT__TARGET,
 				 KomposeFactory.eINSTANCE.createIntegerLiteral()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(KomposePackage.Literals.CHANGE__TARGET,
+				(KomposePackage.Literals.CONCAT__TARGET,
 				 KomposeFactory.eINSTANCE.createVoidLiteral()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(KomposePackage.Literals.CHANGE__VALUE,
+				(KomposePackage.Literals.CONCAT__VALUE,
 				 KomposeFactory.eINSTANCE.createNameRef()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(KomposePackage.Literals.CHANGE__VALUE,
+				(KomposePackage.Literals.CONCAT__VALUE,
 				 KomposeFactory.eINSTANCE.createIDRef()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(KomposePackage.Literals.CHANGE__VALUE,
+				(KomposePackage.Literals.CONCAT__VALUE,
 				 KomposeFactory.eINSTANCE.createLiteral()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(KomposePackage.Literals.CHANGE__VALUE,
+				(KomposePackage.Literals.CONCAT__VALUE,
 				 KomposeFactory.eINSTANCE.createStringLiteral()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(KomposePackage.Literals.CHANGE__VALUE,
+				(KomposePackage.Literals.CONCAT__VALUE,
 				 KomposeFactory.eINSTANCE.createBooleanLiteral()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(KomposePackage.Literals.CHANGE__VALUE,
+				(KomposePackage.Literals.CONCAT__VALUE,
 				 KomposeFactory.eINSTANCE.createIntegerLiteral()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(KomposePackage.Literals.CHANGE__VALUE,
+				(KomposePackage.Literals.CONCAT__VALUE,
 				 KomposeFactory.eINSTANCE.createVoidLiteral()));
 	}
 
@@ -253,8 +277,8 @@ public class ChangeItemProvider
 		Object childObject = child;
 
 		boolean qualify =
-			childFeature == KomposePackage.Literals.CHANGE__TARGET ||
-			childFeature == KomposePackage.Literals.CHANGE__VALUE;
+			childFeature == KomposePackage.Literals.CONCAT__TARGET ||
+			childFeature == KomposePackage.Literals.CONCAT__VALUE;
 
 		if (qualify) {
 			return getString

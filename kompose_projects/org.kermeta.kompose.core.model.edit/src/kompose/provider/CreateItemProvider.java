@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: CreateItemProvider.java,v 1.2 2009-01-22 20:27:01 mclavreu Exp $
+ * $Id$
  */
 package kompose.provider;
 

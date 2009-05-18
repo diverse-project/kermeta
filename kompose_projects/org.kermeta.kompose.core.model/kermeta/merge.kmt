@@ -9,7 +9,7 @@ package kompose;
 
 require kermeta
 require "http://www.kermeta.org/kompose"
-require "platform:/resource/fr.irisa.triskell.traceability.model/model/kmt/Traceability_Behavior.kmt"
+require "platform:/plugin/fr.irisa.triskell.traceability.model/model/kmt/Traceability_Behavior.kmt"
 
 using kermeta::language::structure
 using kermeta::standard
@@ -55,6 +55,7 @@ aspect abstract class Mergeable
 		}
 		/* Merging properties */
 		props.each{p|
+			ctx.logger.printDebug(self.toString)
 			var mergeable : Boolean init Mergeable.isSuperTypeOf(p.type)
 			var selfValue : Object init self.get(p)
 			var otherValue : Object init other.get(p)
@@ -167,7 +168,7 @@ aspect abstract class Mergeable
 				col ?= result.get(p)
 				if matching.size == 0 then
 					col.add(me)
-				else
+				/*else
 					matching.each{ me2 | 
 						if p.isComposite then
 							col.add(me.merge(me2, ctx))
@@ -175,7 +176,7 @@ aspect abstract class Mergeable
 							ctx.trace.addTrace(KTrace.new.newModelTrace(me,me2))
 							col.add(me)
 						end
-					}
+					}*/
 				end
 			end
 		}

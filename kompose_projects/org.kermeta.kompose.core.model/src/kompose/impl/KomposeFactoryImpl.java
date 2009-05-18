@@ -74,6 +74,7 @@ public class KomposeFactoryImpl extends EFactoryImpl implements KomposeFactory {
 			case KomposePackage.VOID_LITERAL: return createVoidLiteral();
 			case KomposePackage.CONTEXT: return createContext();
 			case KomposePackage.COMPOSER: return createComposer();
+			case KomposePackage.CONCAT: return createConcat();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -245,6 +246,16 @@ public class KomposeFactoryImpl extends EFactoryImpl implements KomposeFactory {
 	public Composer createComposer() {
 		ComposerImpl composer = new ComposerImpl();
 		return composer;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Concat createConcat() {
+		ConcatImpl concat = new ConcatImpl();
+		return concat;
 	}
 
 	/**

@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: KomposeItemProviderAdapterFactory.java,v 1.2 2009-01-22 20:27:00 mclavreu Exp $
+ * $Id$
  */
 package kompose.provider;
 
@@ -375,6 +375,29 @@ public class KomposeItemProviderAdapterFactory extends KomposeAdapterFactory imp
 	}
 
 	/**
+	 * This keeps track of the one adapter used for all {@link kompose.Concat} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected ConcatItemProvider concatItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link kompose.Concat}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createConcatAdapter() {
+		if (concatItemProvider == null) {
+			concatItemProvider = new ConcatItemProvider(this);
+		}
+
+		return concatItemProvider;
+	}
+
+	/**
 	 * This returns the root adapter factory that contains this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -486,6 +509,7 @@ public class KomposeItemProviderAdapterFactory extends KomposeAdapterFactory imp
 		if (voidLiteralItemProvider != null) voidLiteralItemProvider.dispose();
 		if (contextItemProvider != null) contextItemProvider.dispose();
 		if (composerItemProvider != null) composerItemProvider.dispose();
+		if (concatItemProvider != null) concatItemProvider.dispose();
 	}
 
 }

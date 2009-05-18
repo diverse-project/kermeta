@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: LiteralItemProvider.java,v 1.2 2009-01-22 20:27:00 mclavreu Exp $
+ * $Id$
  */
 package kompose.provider;
 

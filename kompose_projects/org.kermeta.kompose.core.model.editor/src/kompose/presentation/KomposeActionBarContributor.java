@@ -2,13 +2,12 @@
  * <copyright>
  * </copyright>
  *
- * $Id: KomposeActionBarContributor.java,v 1.2 2009-01-22 20:26:44 mclavreu Exp $
+ * $Id$
  */
 package kompose.presentation;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Iterator;
 
 import org.eclipse.emf.common.ui.viewer.IViewerProvider;
 

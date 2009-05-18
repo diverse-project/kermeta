@@ -11,6 +11,7 @@ import kompose.BooleanLiteral;
 import kompose.Change;
 import kompose.Composer;
 import kompose.CompositionDirective;
+import kompose.Concat;
 import kompose.Context;
 import kompose.Create;
 import kompose.ElementDirective;
@@ -169,6 +170,13 @@ public class KomposePackageImpl extends EPackageImpl implements KomposePackage {
 	 * @generated
 	 */
 	private EClass mergeableEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass concatEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -588,6 +596,42 @@ public class KomposePackageImpl extends EPackageImpl implements KomposePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getConcat() {
+		return concatEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getConcat_PropertyNames() {
+		return (EAttribute)concatEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getConcat_Target() {
+		return (EReference)concatEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getConcat_Value() {
+		return (EReference)concatEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EDataType getString() {
 		return stringEDataType;
 	}
@@ -692,6 +736,11 @@ public class KomposePackageImpl extends EPackageImpl implements KomposePackage {
 
 		mergeableEClass = createEClass(MERGEABLE);
 
+		concatEClass = createEClass(CONCAT);
+		createEAttribute(concatEClass, CONCAT__PROPERTY_NAMES);
+		createEReference(concatEClass, CONCAT__TARGET);
+		createEReference(concatEClass, CONCAT__VALUE);
+
 		// Create data types
 		stringEDataType = createEDataType(STRING);
 		booleanEDataType = createEDataType(BOOLEAN);
@@ -739,6 +788,7 @@ public class KomposePackageImpl extends EPackageImpl implements KomposePackage {
 		booleanLiteralEClass.getESuperTypes().add(this.getLiteral());
 		integerLiteralEClass.getESuperTypes().add(this.getLiteral());
 		voidLiteralEClass.getESuperTypes().add(this.getLiteral());
+		concatEClass.getESuperTypes().add(this.getElementDirective());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(elementDirectiveEClass, ElementDirective.class, "ElementDirective", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -798,6 +848,11 @@ public class KomposePackageImpl extends EPackageImpl implements KomposePackage {
 		addEOperation(composerEClass, this.getMergeable(), "compose", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(mergeableEClass, Mergeable.class, "Mergeable", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(concatEClass, Concat.class, "Concat", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getConcat_PropertyNames(), this.getString(), "propertyNames", null, 0, -1, Concat.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getConcat_Target(), this.getElementRef(), null, "target", null, 1, 1, Concat.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getConcat_Value(), this.getElementRef(), null, "value", null, 1, 1, Concat.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Initialize data types
 		initEDataType(stringEDataType, String.class, "String", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);

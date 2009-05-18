@@ -60,4 +60,12 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="metamodelName" eType="#//String"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Mergeable" abstract="true"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Concat" eSuperTypes="#//ElementDirective">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="propertyNames" upperBound="-1"
+        eType="#//String"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="target" lowerBound="1"
+        eType="#//ElementRef" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="value" lowerBound="1" eType="#//ElementRef"
+        containment="true"/>
+  </eClassifiers>
 </ecore:EPackage>

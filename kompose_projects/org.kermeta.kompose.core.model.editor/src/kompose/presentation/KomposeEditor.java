@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: KomposeEditor.java,v 1.2 2009-01-22 20:26:44 mclavreu Exp $
+ * $Id$
  */
 package kompose.presentation;
 
@@ -83,7 +83,6 @@ import org.eclipse.ui.IActionBars;
 import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.IEditorSite;
-import org.eclipse.ui.IFileEditorInput;
 import org.eclipse.ui.IPartListener;
 import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.ui.PartInitException;
@@ -154,8 +153,8 @@ import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
 import org.eclipse.emf.edit.ui.provider.UnwrappingSelectionProvider;
 
 import org.eclipse.emf.edit.ui.util.EditUIMarkerHelper;
-
 import org.eclipse.emf.edit.ui.util.EditUIUtil;
+
 import org.eclipse.emf.edit.ui.view.ExtendedPropertySheetPage;
 
 import kompose.provider.KomposeItemProviderAdapterFactory;
@@ -737,7 +736,7 @@ public class KomposeEditor
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
+			@Override
 	protected void firePropertyChange(int action) {
 		super.firePropertyChange(action);
 	}
@@ -1301,7 +1300,7 @@ public class KomposeEditor
 	 * @generated
 	 */
 	@SuppressWarnings("unchecked")
-		@Override
+	@Override
 	public Object getAdapter(Class key) {
 		if (key.equals(IContentOutlinePage.class)) {
 			return showOutlineView() ? getContentOutlinePage() : null;

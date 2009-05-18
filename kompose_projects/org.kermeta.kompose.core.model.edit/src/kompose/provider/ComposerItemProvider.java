@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ComposerItemProvider.java,v 1.4 2009-02-08 14:32:44 mclavreu Exp $
+ * $Id$
  */
 package kompose.provider;
 
@@ -280,6 +280,11 @@ public class ComposerItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
+				(KomposePackage.Literals.COMPOSER__PREDIRECTIVES_PM,
+				 KomposeFactory.eINSTANCE.createConcat()));
+
+		newChildDescriptors.add
+			(createChildParameter
 				(KomposePackage.Literals.COMPOSER__POSTDIRECTIVES,
 				 KomposeFactory.eINSTANCE.createRemove()));
 
@@ -300,6 +305,11 @@ public class ComposerItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
+				(KomposePackage.Literals.COMPOSER__POSTDIRECTIVES,
+				 KomposeFactory.eINSTANCE.createConcat()));
+
+		newChildDescriptors.add
+			(createChildParameter
 				(KomposePackage.Literals.COMPOSER__PREDIRECTIVES_AM,
 				 KomposeFactory.eINSTANCE.createRemove()));
 
@@ -317,6 +327,11 @@ public class ComposerItemProvider
 			(createChildParameter
 				(KomposePackage.Literals.COMPOSER__PREDIRECTIVES_AM,
 				 KomposeFactory.eINSTANCE.createSet()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(KomposePackage.Literals.COMPOSER__PREDIRECTIVES_AM,
+				 KomposeFactory.eINSTANCE.createConcat()));
 	}
 
 	/**

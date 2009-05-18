@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: KomposeEditorPlugin.java,v 1.2 2009-01-22 20:26:44 mclavreu Exp $
+ * $Id$
  */
 package kompose.presentation;
 

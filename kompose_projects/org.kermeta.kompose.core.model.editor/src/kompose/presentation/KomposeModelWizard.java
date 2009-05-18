@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: KomposeModelWizard.java,v 1.2 2009-01-22 20:26:44 mclavreu Exp $
+ * $Id$
  */
 package kompose.presentation;
 
@@ -12,13 +12,13 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.MissingResourceException;
 import java.util.StringTokenizer;
 
 import org.eclipse.emf.common.CommonPlugin;
+
 import org.eclipse.emf.common.util.URI;
 
 import org.eclipse.emf.ecore.EClass;
@@ -569,7 +569,7 @@ public class KomposeModelWizard extends Wizard implements INewWizard {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
+		@Override
 	public void addPages() {
 		// Create a page, set the title, and the initial model file name.
 		//

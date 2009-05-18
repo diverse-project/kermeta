@@ -700,6 +700,61 @@ public interface KomposePackage extends EPackage {
 	int MERGEABLE_FEATURE_COUNT = 0;
 
 	/**
+	 * The meta object id for the '{@link kompose.impl.ConcatImpl <em>Concat</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see kompose.impl.ConcatImpl
+	 * @see kompose.impl.KomposePackageImpl#getConcat()
+	 * @generated
+	 */
+	int CONCAT = 18;
+
+	/**
+	 * The feature id for the '<em><b>Context</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONCAT__CONTEXT = ELEMENT_DIRECTIVE__CONTEXT;
+
+	/**
+	 * The feature id for the '<em><b>Property Names</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONCAT__PROPERTY_NAMES = ELEMENT_DIRECTIVE_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Target</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONCAT__TARGET = ELEMENT_DIRECTIVE_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Value</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONCAT__VALUE = ELEMENT_DIRECTIVE_FEATURE_COUNT + 2;
+
+	/**
+	 * The number of structural features of the '<em>Concat</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONCAT_FEATURE_COUNT = ELEMENT_DIRECTIVE_FEATURE_COUNT + 3;
+
+	/**
 	 * The meta object id for the '<em>String</em>' data type.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -707,7 +762,7 @@ public interface KomposePackage extends EPackage {
 	 * @see kompose.impl.KomposePackageImpl#getString()
 	 * @generated
 	 */
-	int STRING = 18;
+	int STRING = 19;
 
 	/**
 	 * The meta object id for the '<em>Boolean</em>' data type.
@@ -717,7 +772,7 @@ public interface KomposePackage extends EPackage {
 	 * @see kompose.impl.KomposePackageImpl#getBoolean()
 	 * @generated
 	 */
-	int BOOLEAN = 19;
+	int BOOLEAN = 20;
 
 	/**
 	 * The meta object id for the '<em>Integer</em>' data type.
@@ -727,7 +782,7 @@ public interface KomposePackage extends EPackage {
 	 * @see kompose.impl.KomposePackageImpl#getInteger()
 	 * @generated
 	 */
-	int INTEGER = 20;
+	int INTEGER = 21;
 
 
 	/**
@@ -1109,6 +1164,49 @@ public interface KomposePackage extends EPackage {
 	EClass getMergeable();
 
 	/**
+	 * Returns the meta object for class '{@link kompose.Concat <em>Concat</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Concat</em>'.
+	 * @see kompose.Concat
+	 * @generated
+	 */
+	EClass getConcat();
+
+	/**
+	 * Returns the meta object for the attribute list '{@link kompose.Concat#getPropertyNames <em>Property Names</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute list '<em>Property Names</em>'.
+	 * @see kompose.Concat#getPropertyNames()
+	 * @see #getConcat()
+	 * @generated
+	 */
+	EAttribute getConcat_PropertyNames();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link kompose.Concat#getTarget <em>Target</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Target</em>'.
+	 * @see kompose.Concat#getTarget()
+	 * @see #getConcat()
+	 * @generated
+	 */
+	EReference getConcat_Target();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link kompose.Concat#getValue <em>Value</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Value</em>'.
+	 * @see kompose.Concat#getValue()
+	 * @see #getConcat()
+	 * @generated
+	 */
+	EReference getConcat_Value();
+
+	/**
 	 * Returns the meta object for data type '{@link java.lang.String <em>String</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1486,6 +1584,40 @@ public interface KomposePackage extends EPackage {
 		 * @generated
 		 */
 		EClass MERGEABLE = eINSTANCE.getMergeable();
+
+		/**
+		 * The meta object literal for the '{@link kompose.impl.ConcatImpl <em>Concat</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see kompose.impl.ConcatImpl
+		 * @see kompose.impl.KomposePackageImpl#getConcat()
+		 * @generated
+		 */
+		EClass CONCAT = eINSTANCE.getConcat();
+
+		/**
+		 * The meta object literal for the '<em><b>Property Names</b></em>' attribute list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute CONCAT__PROPERTY_NAMES = eINSTANCE.getConcat_PropertyNames();
+
+		/**
+		 * The meta object literal for the '<em><b>Target</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference CONCAT__TARGET = eINSTANCE.getConcat_Target();
+
+		/**
+		 * The meta object literal for the '<em><b>Value</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference CONCAT__VALUE = eINSTANCE.getConcat_Value();
 
 		/**
 		 * The meta object literal for the '<em>String</em>' data type.

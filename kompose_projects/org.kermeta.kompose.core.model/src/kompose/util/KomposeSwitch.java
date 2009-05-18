@@ -220,6 +220,14 @@ public class KomposeSwitch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case KomposePackage.CONCAT: {
+				Concat concat = (Concat)theEObject;
+				T result = caseConcat(concat);
+				if (result == null) result = caseElementDirective(concat);
+				if (result == null) result = caseCompositionDirective(concat);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			default: return defaultCase(theEObject);
 		}
 	}
@@ -491,6 +499,21 @@ public class KomposeSwitch<T> {
 	 * @generated
 	 */
 	public T caseMergeable(Mergeable object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Concat</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Concat</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseConcat(Concat object) {
 		return null;
 	}
 
