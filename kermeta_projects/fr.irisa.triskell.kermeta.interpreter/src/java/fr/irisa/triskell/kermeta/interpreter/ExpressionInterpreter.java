@@ -251,7 +251,17 @@ public class ExpressionInterpreter extends KermetaOptimizedVisitor {
 		interpreterContext.pushOperationCallFrame(ro_target, property, null, exp);
         interpreterContext.peekCallFrame().setCallValueResult(rhs_value);
         // Get the setter body
-        this.accept(property.getProperty().getSetterBody());
+        Expression setterBody = property.getProperty().getSetterBody();
+        if(setterBody == null){
+        	// must raise a not implemented exception
+        	throw KermetaRaisedException.createKermetaException("kermeta::exceptions::RuntimeError",
+            		"Cannot assign derived property " + property.getName() +" because its setter has no body. Maybe you forgot to provide a body to this derived property defined in Ecore ?",
+    				this,
+    				memory,
+    				exp,
+    				null);
+        }
+        else this.accept(setterBody);
         interpreterContext.popCallFrame();
 	}
 	
@@ -396,7 +406,7 @@ public class ExpressionInterpreter extends KermetaOptimizedVisitor {
 	    	else{
 	    		internalLog.error("INTERPRETER INTERNAL ERROR : derived property  " + property.getName() + " has no getter body");
 		        throw KermetaRaisedException.createKermetaException("kermeta::exceptions::RuntimeError",
-		        		"INTERPRETER INTERNAL ERROR : derived property  " + property.getName() + " has no getter body. Maybe you forgot to provide a body to this derived property defined in Ecore ?",
+		        		"Derived property  " + property.getName() + " has no getter body. Maybe you forgot to provide a body to this derived property defined in Ecore ?",
 						this,
 						memory,
 						property.getProperty(),
