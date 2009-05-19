@@ -45,6 +45,7 @@ aspect abstract class Summable<G> {
 
 	// Boolean becomes an EDataType in Ecore with java.lang.Boolean as instanceClassName
  @EMF_instanceClassName "java.lang.Boolean"
+ @EMF_defaultConstructor "new java.lang.Boolean(false)"
 aspect class Boolean inherits ValueType {
 }
 
@@ -53,17 +54,21 @@ aspect abstract class Numeric inherits Comparable, ValueType {
 }
 
  @EMF_instanceClassName "java.lang.Integer"
+ @EMF_defaultConstructor "new java.lang.Integer(0)"
 aspect class Integer inherits Numeric, Summable<Integer> {
 }
 
  @EMF_instanceClassName "java.lang.Double"
+ @EMF_defaultConstructor "new java.lang.Double(\"\")"
 aspect class Real inherits Numeric, Summable<Real> {
 }
 
  @EMF_instanceClassName "java.lang.Character"
+ @EMF_defaultConstructor "new java.lang.Character(' ')"
 aspect class Character inherits ValueType, Comparable {
 }
 
  @EMF_instanceClassName "java.lang.String"
+ @EMF_defaultConstructor "new java.lang.String()"
 aspect class String inherits ValueType, Comparable, Summable<String> {
 }
