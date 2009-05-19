@@ -89,14 +89,13 @@ public class DestFileWizardPage extends WizardPage implements Listener {
 	protected Composite linkedResourceComposite;
 
 	protected Group fileExistsGroup;
-	protected Group errorBehaviorGroup;
+	
 	protected Group deployGroup;
 
 	protected Button forbidFileExistRadio;
 
 	protected Button overwriteIfFileExistRadio;
 	
-	protected Button forceWriteEvenIfErrorCheck;
 	protected Button deployCheck;
 
 	// initial value stores
@@ -221,7 +220,7 @@ public class DestFileWizardPage extends WizardPage implements Listener {
 		resourceGroup.setAllowExistingResources(false);
 		initialPopulateContainerNameField();
 		createFileExistsBehaviorControls(topLevel);
-		createErrorBehaviorControls(topLevel);
+	
 		
 		createPostControls(topLevel);
 
@@ -288,30 +287,6 @@ public class DestFileWizardPage extends WizardPage implements Listener {
 
 	}
 
-	/**
-	 * @param parent
-	 */
-	protected void createErrorBehaviorControls(Composite parent) {
-		Font font = parent.getFont();
-		// Advanced group
-		errorBehaviorGroup = new Group(parent, SWT.NONE);
-		GridLayout layout = new GridLayout(2, false);
-		errorBehaviorGroup.setLayout(layout);
-		errorBehaviorGroup.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
-		errorBehaviorGroup.setFont(font);
-		errorBehaviorGroup.setText("Behavior if there are errors:");
-
-		Label label = new Label(errorBehaviorGroup, SWT.NULL);
-		label.setText("Write file even if there are errors ");
-		forceWriteEvenIfErrorCheck = new Button(errorBehaviorGroup, SWT.CHECK);
-		forceWriteEvenIfErrorCheck.addSelectionListener(new SelectionAdapter() {
-			public void widgetSelected(SelectionEvent e) {
-				Event trucEvent = new Event();
-				handleEvent(trucEvent);
-			}
-		});
-	}
-	
 	
 	/**
 	 * Creates a file resource given the file handle and contents.
