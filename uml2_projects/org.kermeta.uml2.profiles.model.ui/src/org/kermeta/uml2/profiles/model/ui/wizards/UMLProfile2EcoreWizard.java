@@ -3,12 +3,14 @@
  */
 package org.kermeta.uml2.profiles.model.ui.wizards;
 
+import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLClassLoader;
 import java.util.Iterator;
 import java.util.LinkedHashSet;
 import java.util.Set;
+import java.util.TreeSet;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.FileLocator;
@@ -61,6 +63,34 @@ public class UMLProfile2EcoreWizard extends Wizard {
 	 */
 	@Override
 	public boolean performFinish() {
+		String inputfile_uri = "file:/" + inputFile.getLocation().toOSString();
+        String outputfile_uri = "platform:/resource" +outputPage.getContainerFullPath()+ "/"+outputPage.getFileName();
+        
+        
+		Set<String> parameters = new TreeSet<String>();
+		parameters.add(inputfile_uri);
+		parameters.add(outputfile_uri);
+		parameters.add("true");
+		Set<String> requiredClassPathes = new TreeSet<String>();
+		try {
+			requiredClassPathes.add("file://" + FileLocator.resolve(Platform.getBundle("org.kermeta.uml2.profiles.model").getEntry("/bin/")));
+			Bundle bundle = org.eclipse.core.runtime.Platform.getBundle("org.kermeta.uml2.profiles.model");
+	         if(bundle != null){
+	        	 requiredClassPathes.add(FileLocator.resolve(bundle.getEntry("/")).toString());
+	         }
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		SimpleInterpretedJob job = new SimpleInterpretedJob("UML profile 2 ecore job", 
+				Activator.PLUGIN_ID, 
+				KERMETA_PROGRAM, 
+				"UMLProfileUtils::Main", 
+				"main", 
+				parameters,
+				requiredClassPathes);
+		job.schedule();
+		/*
 		IOConsole console = new EclipseConsole("UMLProfile 2 Ecore"); 
 	    console.println(new InfoMessage("Exporting Ecore "+ outputPage.getFileName() +" from file : " + inputFile.getName() + "..."));
 	    try {			
@@ -111,7 +141,7 @@ public class UMLProfile2EcoreWizard extends Wizard {
 	         e.printStackTrace();
 	         Activator.log(e);
 	      }
-
+*/
 	/*	SintaksPlugin.getDefault().getOptionManager().setSyntacticModel(outputPage.getSMdlText());
 		try {
 			IFile outputFile = outputPage.createNewFile();				
