@@ -20,7 +20,6 @@ import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.FileLocator;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
@@ -38,8 +37,6 @@ import org.osgi.framework.Constants;
 import fr.irisa.triskell.eclipse.console.EclipseConsole;
 import fr.irisa.triskell.eclipse.console.IOConsole;
 import fr.irisa.triskell.eclipse.console.messages.InfoMessage;
-import fr.irisa.triskell.kermeta.exceptions.NotRegisteredURIException;
-import fr.irisa.triskell.kermeta.exceptions.URIMalformedException;
 import fr.irisa.triskell.kermeta.interpreter.KermetaRaisedException;
 
 /**
@@ -81,7 +78,7 @@ public class SimpleInterpretedJob extends Job {
 	@Override
 	protected IStatus run(IProgressMonitor monitor) {
 		try{
-			IOConsole console = new EclipseConsole("Interpreted checker");
+			IOConsole console = new EclipseConsole("Kermeta Interpreter");
 			console.println(new InfoMessage("Launching " + kermeta_code + "..."));
 			for(String s : parameters) {
 				console.println(new InfoMessage("    " + s ));
@@ -95,13 +92,13 @@ public class SimpleInterpretedJob extends Job {
 			String[] parametersArray = this.parameters.toArray(new String[0]);
 			
 			interpreter.setParameters(parametersArray);
-			monitor.subTask("Running check");
+			monitor.subTask("Interpreter running");
 			updateContextClassLoader(interpreter);
 			interpreter.launch();
 			
 			//monitor.done();
 			//console.println(new OKMessage("Execution terminated successfully."));
-			return new Status(IStatus.OK, pluginId, "interpreter end");
+			return new Status(IStatus.OK, pluginId, "Interpreter end");
 		}
 		catch (KermetaRaisedException e){
 			catchedException = e;
