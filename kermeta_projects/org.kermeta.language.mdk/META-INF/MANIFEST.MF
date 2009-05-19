@@ -9,7 +9,6 @@ Require-Bundle: org.eclipse.core.runtime,
  fr.irisa.triskell.kermeta.interpreter;bundle-version="1.2.0"
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Bundle-ActivationPolicy: lazy
-Export-Package: org.kermeta.language.mdk,
- org.kermeta.language.mdk.externs.math,
+Export-Package: org.kermeta.language.mdk.externs.math,
  org.kermeta.language.mdk.externs.random,
  org.kermeta.language.mdk.externs.time
