@@ -136,7 +136,7 @@ public class EMFRegistryHelper {
 	}
 	
 	/**
-	 * Retreives the resource associated to the given URI in the registry
+	 * Retrieves the resource associated to the given URI in the registry
 	 * @param uri
 	 * @return
 	 */
