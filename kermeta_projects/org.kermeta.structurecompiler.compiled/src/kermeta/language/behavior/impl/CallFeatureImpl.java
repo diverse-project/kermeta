@@ -476,7 +476,608 @@ public class CallFeatureImpl extends CallExpressionImpl implements CallFeature {
 	 */
 	public String createBehaviorJava(KM2EcoreContext context) {
 
+
 		java.lang.String result = null;
+
+			super.createBehaviorJava(context);
+
+			result = "";
+
+			java.lang.Boolean ppCast = false;
+
+			java.lang.String cf_prop_suffix = "";
+
+			java.lang.Boolean idIfCond_500 = false;
+			idIfCond_500 = org.kermeta.compil.runtime.helper.language.ObjectUtil.isVoidSwitcher(this.getTarget());
+
+			if( idIfCond_500 ) {
+
+			this.setTarget(((kermeta.language.behavior.SelfExpression) org.kermeta.compil.runtime.helper.language.ClassUtil.newObject(kermeta.language.behavior.BehaviorPackage.eINSTANCE.getSelfExpression())));
+		}
+
+
+			kermeta.language.behavior.Expression tgt = this.getTarget();
+
+			java.lang.String fName = ((km2ecore.helper.java.IdentifierHelper) org.kermeta.compil.runtime.helper.language.ClassUtil.newObject(km2ecore.helper.java.JavaPackage.eINSTANCE.getIdentifierHelper())).getMangledIdentifier(this.getName(), context);
+
+			java.lang.String static_call = "";
+
+			java.lang.Boolean idIfCond_501 = false;
+			idIfCond_501 = this.isCallFeatureAsStaticOperation();
+
+			if( idIfCond_501 ) {
+
+			java.lang.Boolean idIfCond_502 = false;
+			idIfCond_502 = this.callsFunctionType();
+
+			if( idIfCond_502 ) {
+
+			context.getTasks_stack().push(context.getFUNCTION_TYPE_COMPILATION_TASK());
+
+			context.setAfterLbdExpActivation(false);
+
+			java.lang.String ft_str = this.createStringFromFunctionType(context);
+
+			context.getTasks_stack().pop();
+
+			result = ft_str;
+		}
+		 else {
+
+			java.lang.Boolean idIfCond_503 = false;
+			idIfCond_503 = this.fromUtil(context);
+
+			if( idIfCond_503 ) {
+
+			java.lang.Boolean idIfCond_504 = false;
+			idIfCond_504 = this.getStaticOperation().ownedByValueType();
+
+			if( idIfCond_504 ) {
+
+			static_call = this.getStaticOperation().getOptimizedStaticCall(context);
+
+			java.lang.Boolean idIfCond_505 = false;
+			idIfCond_505 = kermeta.standard.helper.StringWrapper.equals(static_call, "");
+
+			if( idIfCond_505 ) {
+
+			static_call = kermeta.standard.helper.StringWrapper.plus(kermeta.standard.helper.StringWrapper.plus(kermeta.standard.helper.StringWrapper.plus(kermeta.standard.helper.StringWrapper.plus(kermeta.standard.helper.StringWrapper.replace(((kermeta.language.structure.Package) org.kermeta.compil.runtime.helper.language.ObjectUtil.asTypeSwitcher(org.kermeta.compil.runtime.helper.language.ObjectUtil.containerSwitcher(this.getStaticOperation().getOwningClass()), org.kermeta.compil.runtime.ExecutionContext.getInstance().getMetaClass("kermeta.language.structure.Package"))).qualifiedName(), "::", "."), ".helper."), ((kermeta.language.structure.ClassDefinition) org.kermeta.compil.runtime.helper.language.ObjectUtil.asTypeSwitcher(org.kermeta.compil.runtime.helper.language.ObjectUtil.containerSwitcher(this.getStaticOperation()), org.kermeta.compil.runtime.ExecutionContext.getInstance().getMetaClass("kermeta.language.structure.ClassDefinition"))).getName()), "Wrapper."), fName);
+		}
+
+		}
+		 else {
+
+			static_call = this.getStaticOperation().getOptimizedStaticCall(context);
+
+			java.lang.Boolean idIfCond_506 = false;
+			idIfCond_506 = kermeta.standard.helper.StringWrapper.equals(static_call, "");
+
+			if( idIfCond_506 ) {
+
+			static_call = kermeta.standard.helper.StringWrapper.plus(kermeta.standard.helper.StringWrapper.plus(kermeta.standard.helper.StringWrapper.plus(kermeta.standard.helper.StringWrapper.plus("org.kermeta.compil.runtime.helper.language.", this.getStaticOperation().getOwningClass().getName()), "Util."), fName), "Switcher");
+		}
+
+
+			java.lang.Boolean idIfCond_507 = false;
+			idIfCond_507 = kermeta.standard.helper.StringWrapper.equals(fName, "asType");
+
+			if( idIfCond_507 ) {
+
+			ppCast = true;
+
+			static_call = kermeta.standard.helper.StringWrapper.plus(kermeta.standard.helper.StringWrapper.plus(kermeta.standard.helper.StringWrapper.plus("(", org.kermeta.compil.runtime.helper.basetypes.CollectionUtil.<kermeta.language.behavior.Expression>convertAsOrderedSet(this.getParameters()).first().createBehaviorJava(context)), ") "), static_call);
+		}
+
+		}
+
+		}
+		 else {
+
+			java.lang.Boolean idIfCond_508 = false;
+			idIfCond_508 = kermeta.standard.helper.BooleanWrapper.not(org.kermeta.compil.runtime.helper.language.ObjectUtil.isVoidSwitcher(tgt));
+
+			if( idIfCond_508 ) {
+
+			java.lang.Boolean idIfCond_509 = false;
+			idIfCond_509 = kermeta.standard.helper.BooleanWrapper.not(org.kermeta.compil.runtime.helper.language.ObjectUtil.isVoidSwitcher(tgt.getStaticType()));
+
+			if( idIfCond_509 ) {
+
+			java.lang.Boolean idIfCond_510 = false;
+			idIfCond_510 = tgt.getStaticType().isValueType();
+
+			if( idIfCond_510 ) {
+
+			static_call = kermeta.standard.helper.StringWrapper.plus(kermeta.standard.helper.StringWrapper.plus(kermeta.standard.helper.StringWrapper.plus("org.kermeta.compil.runtime.helper.basetypes.", tgt.getStaticType().getTypeName()), "Util."), fName);
+		}
+
+		}
+
+		}
+		 else {
+
+			java.lang.Boolean idIfCond_511 = false;
+			idIfCond_511 = kermeta.standard.helper.BooleanWrapper.and(this.getStaticOperation().getOwningClass().isMappedToJavaRawType(), kermeta.standard.helper.BooleanWrapper.not(org.kermeta.compil.runtime.helper.language.ObjectUtil.isVoidSwitcher(this.getStaticOperation().getBody())));
+
+			if( idIfCond_511 ) {
+
+			static_call = this.getStaticOperation().getOptimizedStaticCall(context);
+		}
+
+		}
+
+		}
+
+		}
+
+		}
+
+
+			java.lang.Boolean idIfCond_512 = false;
+			idIfCond_512 = kermeta.standard.helper.BooleanWrapper.and(kermeta.standard.helper.BooleanWrapper.and(kermeta.standard.helper.BooleanWrapper.and(kermeta.standard.helper.BooleanWrapper.and(kermeta.standard.helper.BooleanWrapper.and(kermeta.standard.helper.StringWrapper.equals(fName, "_new"), this.isFromClass()), kermeta.standard.helper.BooleanWrapper.not(org.kermeta.compil.runtime.helper.language.ObjectUtil.isInstanceOfSwitcher(tgt, org.kermeta.compil.runtime.ExecutionContext.getInstance().getMetaClass("kermeta.language.behavior.CallVariable")))), kermeta.standard.helper.BooleanWrapper.not(org.kermeta.compil.runtime.helper.language.ObjectUtil.isInstanceOfSwitcher(tgt, org.kermeta.compil.runtime.ExecutionContext.getInstance().getMetaClass("kermeta.language.behavior.CallFeature")))), kermeta.standard.helper.BooleanWrapper.not(org.kermeta.compil.runtime.helper.language.ObjectUtil.isInstanceOfSwitcher(tgt, org.kermeta.compil.runtime.ExecutionContext.getInstance().getMetaClass("kermeta.language.behavior.SelfExpression")))), kermeta.standard.helper.BooleanWrapper.not(org.kermeta.compil.runtime.helper.language.ObjectUtil.isInstanceOfSwitcher(tgt, org.kermeta.compil.runtime.ExecutionContext.getInstance().getMetaClass("kermeta.language.behavior.CallResult"))));
+
+			if( idIfCond_512 ) {
+
+			java.lang.String type_label = tgt.createBehaviorJava(context);
+
+			java.lang.Boolean idIfCond_513 = false;
+			idIfCond_513 = kermeta.standard.helper.BooleanWrapper.not(kermeta.standard.helper.StringWrapper.isValueType(type_label, context));
+
+			if( idIfCond_513 ) {
+
+			java.lang.String pojoType_label = "";
+
+			java.lang.Boolean idIfCond_514 = false;
+			idIfCond_514 = org.kermeta.compil.runtime.helper.language.ObjectUtil.isInstanceOfSwitcher(tgt.getStaticType(), org.kermeta.compil.runtime.ExecutionContext.getInstance().getMetaClass("kermeta.language.structure.ParameterizedType"));
+
+			if( idIfCond_514 ) {
+
+			pojoType_label = ((kermeta.language.structure.ParameterizedType) org.kermeta.compil.runtime.helper.language.ObjectUtil.asTypeSwitcher(tgt.getStaticType(), org.kermeta.compil.runtime.ExecutionContext.getInstance().getMetaClass("kermeta.language.structure.ParameterizedType"))).getTypeDefinition().getFinalJavaClassQN();
+		}
+
+
+			java.lang.Boolean idIfCond_515 = false;
+			idIfCond_515 = org.kermeta.compil.runtime.helper.language.ObjectUtil.isNotEqualSwitcher(pojoType_label, "");
+
+			if( idIfCond_515 ) {
+
+			result = kermeta.standard.helper.StringWrapper.plus(kermeta.standard.helper.StringWrapper.plus("new ", pojoType_label), "()");
+		}
+		 else {
+
+			java.lang.String class_label = ((km2ecore.helper.kermeta.CompilerHelperJava) org.kermeta.compil.runtime.helper.language.ClassUtil.newObject(km2ecore.helper.kermeta.KermetaPackage.eINSTANCE.getCompilerHelperJava())).ppEmfLikeGetEMF(type_label);
+
+			result = kermeta.standard.helper.StringWrapper.plus(kermeta.standard.helper.StringWrapper.plus(kermeta.standard.helper.StringWrapper.plus(kermeta.standard.helper.StringWrapper.plus(kermeta.standard.helper.StringWrapper.plus(kermeta.standard.helper.StringWrapper.plus(result, "(("), type_label), ") "), "org.kermeta.compil.runtime.helper.language.ClassUtil.newObject("), class_label), "))");
+		}
+
+		}
+		 else {
+
+			result = ((kermeta.language.structure.ParameterizedType) org.kermeta.compil.runtime.helper.language.ObjectUtil.asTypeSwitcher(tgt.getStaticType(), org.kermeta.compil.runtime.ExecutionContext.getInstance().getMetaClass("kermeta.language.structure.ParameterizedType"))).getTypeDefinition().getEMFDefaultConstructor();
+		}
+
+		}
+		 else {
+
+			java.lang.Boolean idIfCond_516 = false;
+			idIfCond_516 = kermeta.standard.helper.BooleanWrapper.not(org.kermeta.compil.runtime.helper.language.ObjectUtil.isVoidSwitcher(tgt));
+
+			if( idIfCond_516 ) {
+
+			java.lang.Boolean idIfCond_517 = false;
+			idIfCond_517 = kermeta.standard.helper.BooleanWrapper.not(tgt.callsFunctionType());
+
+			if( idIfCond_517 ) {
+
+			java.lang.Boolean idIfCond_518 = false;
+			idIfCond_518 = kermeta.standard.helper.BooleanWrapper.not(this.callsFunctionType());
+
+			if( idIfCond_518 ) {
+
+			java.lang.String tgt_staticType_str = "";
+
+			java.lang.Boolean idIfCond_519 = false;
+			idIfCond_519 = kermeta.standard.helper.BooleanWrapper.not(org.kermeta.compil.runtime.helper.language.ObjectUtil.isVoidSwitcher(tgt.getStaticType()));
+
+			if( idIfCond_519 ) {
+
+			tgt_staticType_str = org.kermeta.compil.runtime.helper.language.ObjectUtil.toStringSwitcher(tgt.getStaticType());
+		}
+
+
+			java.lang.Boolean idIfCond_520 = false;
+			idIfCond_520 = kermeta.standard.helper.BooleanWrapper.and(org.kermeta.compil.runtime.helper.language.ObjectUtil.isInstanceOfSwitcher(tgt, org.kermeta.compil.runtime.ExecutionContext.getInstance().getMetaClass("kermeta.language.behavior.TypeLiteral")), org.kermeta.compil.runtime.helper.language.ObjectUtil.isNotEqualSwitcher(tgt_staticType_str, "Enumeration"));
+
+			if( idIfCond_520 ) {
+
+			result = kermeta.standard.helper.StringWrapper.plus(kermeta.standard.helper.StringWrapper.plus(kermeta.standard.helper.StringWrapper.plus(result, "org.kermeta.compil.runtime.ExecutionContext.getInstance().getMetaClass(\""), tgt.createBehaviorJava(context)), "\")");
+		}
+		 else {
+
+			result = kermeta.standard.helper.StringWrapper.plus(result, tgt.createBehaviorJava(context));
+		}
+
+
+			java.lang.Boolean idIfCond_521 = false;
+			idIfCond_521 = kermeta.standard.helper.StringWrapper.equals(static_call, "");
+
+			if( idIfCond_521 ) {
+
+			result = kermeta.standard.helper.StringWrapper.plus(result, ".");
+		}
+
+		}
+		 else {
+
+			java.lang.Boolean idIfCond_522 = false;
+			idIfCond_522 = kermeta.standard.helper.BooleanWrapper.and(org.kermeta.compil.runtime.helper.language.ObjectUtil.isInstanceOfSwitcher(org.kermeta.compil.runtime.helper.language.ObjectUtil.containerSwitcher(this), org.kermeta.compil.runtime.ExecutionContext.getInstance().getMetaClass("kermeta.language.behavior.CallExpression")), kermeta.standard.helper.BooleanWrapper.not(org.kermeta.compil.runtime.helper.language.ObjectUtil.containerSwitcher(this).callsFunctionType()));
+
+			if( idIfCond_522 ) {
+
+			java.lang.String resultPrefix = "";
+
+			java.lang.Boolean idIfCond_523 = false;
+			idIfCond_523 = org.kermeta.compil.runtime.helper.language.ObjectUtil.isVoidSwitcher(this.getContainerAsTypeIn(org.kermeta.compil.runtime.ExecutionContext.getInstance().getMetaClass("kermeta.language.behavior.Assignment"), org.kermeta.compil.runtime.ExecutionContext.getInstance().getMetaClass("kermeta.language.behavior.Block")));
+
+			if( idIfCond_523 ) {
+
+			resultPrefix = context.getRETURN_EXPRESSION_TO_REPLACE_SPECIAL();
+		}
+
+
+			java.lang.Boolean idIfCond_524 = false;
+			idIfCond_524 = org.kermeta.compil.runtime.helper.language.ObjectUtil.isVoidSwitcher(this.getContainerAsTypeIn(org.kermeta.compil.runtime.ExecutionContext.getInstance().getMetaClass("kermeta.language.behavior.Assignment"), org.kermeta.compil.runtime.ExecutionContext.getInstance().getMetaClass("kermeta.language.structure.Constraint")));
+
+			if( idIfCond_524 ) {
+
+			resultPrefix = context.getRETURN_EXPRESSION_TO_REPLACE_SPECIAL();
+		}
+
+
+			java.lang.Boolean idIfCond_525 = false;
+			idIfCond_525 = org.kermeta.compil.runtime.helper.language.ObjectUtil.isVoidSwitcher(this.getContainerAsTypeIn(org.kermeta.compil.runtime.ExecutionContext.getInstance().getMetaClass("kermeta.language.behavior.Assignment"), org.kermeta.compil.runtime.ExecutionContext.getInstance().getMetaClass("kermeta.language.structure.Operation")));
+
+			if( idIfCond_525 ) {
+
+			resultPrefix = context.getRETURN_EXPRESSION_TO_REPLACE_SPECIAL();
+		}
+
+
+			java.lang.Boolean idIfCond_526 = false;
+			idIfCond_526 = kermeta.standard.helper.BooleanWrapper.not(this.isParameter());
+
+			if( idIfCond_526 ) {
+
+			result = kermeta.standard.helper.StringWrapper.plus(kermeta.standard.helper.StringWrapper.plus(kermeta.standard.helper.StringWrapper.plus(kermeta.standard.helper.StringWrapper.plus(result, resultPrefix), context.getPREVIOUS_STATEMENT_FT()), context.getRETURN_EXPRESSION_TO_REPLACE()), this.getCalledFtResult());
+		}
+		 else {
+
+			result = kermeta.standard.helper.StringWrapper.plus(kermeta.standard.helper.StringWrapper.plus(kermeta.standard.helper.StringWrapper.plus(result, resultPrefix), context.getPREVIOUS_STATEMENT_FT()), this.getCalledFtResult());
+		}
+
+		}
+
+		}
+
+		}
+		 else {
+
+			result = kermeta.standard.helper.StringWrapper.plus(tgt.createBehaviorJava(context), kermeta.standard.helper.StringWrapper.replace(result, context.getSELF_EXPRESSION_TO_REPLACE(), ((kermeta.language.behavior.CallFeature) org.kermeta.compil.runtime.helper.language.ObjectUtil.asTypeSwitcher(tgt, org.kermeta.compil.runtime.ExecutionContext.getInstance().getMetaClass("kermeta.language.behavior.CallFeature"))).getCalledFtResult()));
+		}
+
+		}
+
+
+			java.lang.Boolean idIfCond_527 = false;
+			idIfCond_527 = kermeta.standard.helper.StringWrapper.equals(static_call, "");
+
+			if( idIfCond_527 ) {
+
+			java.lang.Boolean idIfCond_528 = false;
+			idIfCond_528 = this.isCallFeatureAsStaticEnumLiteral();
+
+			if( idIfCond_528 ) {
+
+			result = kermeta.standard.helper.StringWrapper.plus(kermeta.standard.helper.StringWrapper.plus(kermeta.standard.helper.StringWrapper.plus(result, "getByName(\""), fName), "\")");
+		}
+		 else {
+
+			java.lang.Boolean idIfCond_529 = false;
+			idIfCond_529 = this.isCallFeatureAsStaticProperty();
+
+			if( idIfCond_529 ) {
+
+			java.lang.Boolean idIfCond_530 = false;
+			idIfCond_530 = kermeta.standard.helper.BooleanWrapper.and(org.kermeta.compil.runtime.helper.language.ObjectUtil.isNotEqualSwitcher(this.getStaticProperty().getUpper(), 1), kermeta.standard.helper.BooleanWrapper.not(this.isParameterMany()));
+
+			if( idIfCond_530 ) {
+
+			java.lang.String type_binding = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil.<kermeta.language.structure.TypeVariableBinding>convertAsOrderedSet(((kermeta.language.structure.Class) org.kermeta.compil.runtime.helper.language.ObjectUtil.asTypeSwitcher(this.getStaticType(), org.kermeta.compil.runtime.ExecutionContext.getInstance().getMetaClass("kermeta.language.structure.Class"))).getTypeParamBinding()).first().getType().createBehaviorJava(context);
+
+			java.lang.Boolean idIfCond_531 = false;
+			idIfCond_531 = kermeta.standard.helper.BooleanWrapper.and(kermeta.standard.helper.BooleanWrapper.not(this.getStaticProperty().getIsUnique()), kermeta.standard.helper.BooleanWrapper.not(this.getStaticProperty().getIsOrdered()));
+
+			if( idIfCond_531 ) {
+
+			result = kermeta.standard.helper.StringWrapper.plus(kermeta.standard.helper.StringWrapper.plus(kermeta.standard.helper.StringWrapper.plus(kermeta.standard.helper.StringWrapper.plus(context.getCOLLECTION_UTIL_CLASS(), ".<"), type_binding), ">convertAsBag("), result);
+		}
+
+
+			java.lang.Boolean idIfCond_532 = false;
+			idIfCond_532 = kermeta.standard.helper.BooleanWrapper.and(this.getStaticProperty().getIsUnique(), kermeta.standard.helper.BooleanWrapper.not(this.getStaticProperty().getIsOrdered()));
+
+			if( idIfCond_532 ) {
+
+			result = kermeta.standard.helper.StringWrapper.plus(kermeta.standard.helper.StringWrapper.plus(kermeta.standard.helper.StringWrapper.plus(kermeta.standard.helper.StringWrapper.plus(context.getCOLLECTION_UTIL_CLASS(), ".<"), type_binding), ">convertAsSet("), result);
+		}
+
+
+			java.lang.Boolean idIfCond_533 = false;
+			idIfCond_533 = kermeta.standard.helper.BooleanWrapper.and(this.getStaticProperty().getIsUnique(), this.getStaticProperty().getIsOrdered());
+
+			if( idIfCond_533 ) {
+
+			result = kermeta.standard.helper.StringWrapper.plus(kermeta.standard.helper.StringWrapper.plus(kermeta.standard.helper.StringWrapper.plus(kermeta.standard.helper.StringWrapper.plus(context.getCOLLECTION_UTIL_CLASS(), ".<"), type_binding), ">convertAsOrderedSet("), result);
+		}
+
+
+			java.lang.Boolean idIfCond_534 = false;
+			idIfCond_534 = kermeta.standard.helper.BooleanWrapper.and(kermeta.standard.helper.BooleanWrapper.not(this.getStaticProperty().getIsUnique()), this.getStaticProperty().getIsOrdered());
+
+			if( idIfCond_534 ) {
+
+			result = kermeta.standard.helper.StringWrapper.plus(kermeta.standard.helper.StringWrapper.plus(kermeta.standard.helper.StringWrapper.plus(kermeta.standard.helper.StringWrapper.plus(context.getCOLLECTION_UTIL_CLASS(), ".<"), type_binding), ">convertAsSequence("), result);
+		}
+
+
+			cf_prop_suffix = ")";
+		}
+
+
+			result = kermeta.standard.helper.StringWrapper.plus(kermeta.standard.helper.StringWrapper.plus(kermeta.standard.helper.StringWrapper.plus(result, this.printGetAccessor(context)), "()"), cf_prop_suffix);
+
+			cf_prop_suffix = "";
+		}
+		 else {
+
+			java.lang.Boolean idIfCond_535 = false;
+			idIfCond_535 = kermeta.standard.helper.BooleanWrapper.not(this.callsFunctionType());
+
+			if( idIfCond_535 ) {
+
+			java.lang.Boolean idIfCond_536 = false;
+			idIfCond_536 = kermeta.standard.helper.BooleanWrapper.and(org.kermeta.compil.runtime.helper.language.ObjectUtil.isNotEqualSwitcher(this.getStaticOperation().getUpper(), 1), kermeta.standard.helper.BooleanWrapper.not(this.isParameterMany()));
+
+			if( idIfCond_536 ) {
+
+			java.lang.String type_binding = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil.<kermeta.language.structure.TypeVariableBinding>convertAsOrderedSet(((kermeta.language.structure.Class) org.kermeta.compil.runtime.helper.language.ObjectUtil.asTypeSwitcher(this.getStaticType(), org.kermeta.compil.runtime.ExecutionContext.getInstance().getMetaClass("kermeta.language.structure.Class"))).getTypeParamBinding()).first().getType().createBehaviorJava(context);
+
+			java.lang.Boolean idIfCond_537 = false;
+			idIfCond_537 = kermeta.standard.helper.BooleanWrapper.and(kermeta.standard.helper.BooleanWrapper.not(this.getStaticOperation().getIsUnique()), kermeta.standard.helper.BooleanWrapper.not(this.getStaticOperation().getIsOrdered()));
+
+			if( idIfCond_537 ) {
+
+			result = kermeta.standard.helper.StringWrapper.plus(kermeta.standard.helper.StringWrapper.plus(kermeta.standard.helper.StringWrapper.plus(kermeta.standard.helper.StringWrapper.plus(context.getCOLLECTION_UTIL_CLASS(), ".<"), type_binding), ">convertAsBag("), result);
+		}
+
+
+			java.lang.Boolean idIfCond_538 = false;
+			idIfCond_538 = kermeta.standard.helper.BooleanWrapper.and(this.getStaticOperation().getIsUnique(), kermeta.standard.helper.BooleanWrapper.not(this.getStaticOperation().getIsOrdered()));
+
+			if( idIfCond_538 ) {
+
+			result = kermeta.standard.helper.StringWrapper.plus(kermeta.standard.helper.StringWrapper.plus(kermeta.standard.helper.StringWrapper.plus(kermeta.standard.helper.StringWrapper.plus(context.getCOLLECTION_UTIL_CLASS(), ".<"), type_binding), ">convertAsSet("), result);
+		}
+
+
+			java.lang.Boolean idIfCond_539 = false;
+			idIfCond_539 = kermeta.standard.helper.BooleanWrapper.and(this.getStaticOperation().getIsUnique(), this.getStaticOperation().getIsOrdered());
+
+			if( idIfCond_539 ) {
+
+			result = kermeta.standard.helper.StringWrapper.plus(kermeta.standard.helper.StringWrapper.plus(kermeta.standard.helper.StringWrapper.plus(kermeta.standard.helper.StringWrapper.plus(context.getCOLLECTION_UTIL_CLASS(), ".<"), type_binding), ">convertAsOrderedSet("), result);
+		}
+
+
+			java.lang.Boolean idIfCond_540 = false;
+			idIfCond_540 = kermeta.standard.helper.BooleanWrapper.and(kermeta.standard.helper.BooleanWrapper.not(this.getStaticOperation().getIsUnique()), this.getStaticOperation().getIsOrdered());
+
+			if( idIfCond_540 ) {
+
+			result = kermeta.standard.helper.StringWrapper.plus(kermeta.standard.helper.StringWrapper.plus(kermeta.standard.helper.StringWrapper.plus(kermeta.standard.helper.StringWrapper.plus(context.getCOLLECTION_UTIL_CLASS(), ".<"), type_binding), ">convertAsSequence("), result);
+		}
+
+
+			cf_prop_suffix = ")";
+		}
+
+
+			result = kermeta.standard.helper.StringWrapper.plus(result, this.getStaticOperation().getFinalName(context));
+		}
+		 else {
+
+			java.lang.Boolean idIfCond_541 = false;
+			idIfCond_541 = kermeta.standard.helper.BooleanWrapper.and(org.kermeta.compil.runtime.helper.language.ObjectUtil.isInstanceOfSwitcher(org.kermeta.compil.runtime.helper.language.ObjectUtil.containerSwitcher(this), org.kermeta.compil.runtime.ExecutionContext.getInstance().getMetaClass("kermeta.language.behavior.CallExpression")), kermeta.standard.helper.BooleanWrapper.not(org.kermeta.compil.runtime.helper.language.ObjectUtil.containerSwitcher(this).callsFunctionType()));
+
+			if( idIfCond_541 ) {
+
+			java.lang.Boolean idIfCond_542 = false;
+			idIfCond_542 = org.kermeta.compil.runtime.helper.language.ObjectUtil.isInstanceOfSwitcher(org.kermeta.compil.runtime.helper.language.ObjectUtil.containerSwitcher(this), org.kermeta.compil.runtime.ExecutionContext.getInstance().getMetaClass("kermeta.language.behavior.CallFeature"));
+
+			if( idIfCond_542 ) {
+
+			kermeta.language.behavior.CallFeature cf_ = ((kermeta.language.behavior.CallFeature) org.kermeta.compil.runtime.helper.language.ObjectUtil.asTypeSwitcher(org.kermeta.compil.runtime.helper.language.ObjectUtil.containerSwitcher(this), org.kermeta.compil.runtime.ExecutionContext.getInstance().getMetaClass("kermeta.language.behavior.CallFeature")));
+
+			java.lang.Boolean idIfCond_543 = false;
+			idIfCond_543 = kermeta.standard.helper.BooleanWrapper.not(org.kermeta.compil.runtime.helper.language.ObjectUtil.isVoidSwitcher(cf_.getStaticOperation()));
+
+			if( idIfCond_543 ) {
+
+			java.lang.Boolean idIfCond_544 = false;
+			idIfCond_544 = kermeta.standard.helper.BooleanWrapper.or(kermeta.standard.helper.BooleanWrapper.or(cf_.fromUtil(context), this.isParameter()), org.kermeta.compil.runtime.helper.language.ObjectUtil.isNotEqualSwitcher(cf_.getStaticOperation().getCompiledJavaExtern(), ""));
+
+			if( idIfCond_544 ) {
+		}
+		 else {
+
+			result = kermeta.standard.helper.StringWrapper.plus(result, ".");
+		}
+
+		}
+		 else {
+
+			java.lang.Boolean idIfCond_545 = false;
+			idIfCond_545 = kermeta.standard.helper.BooleanWrapper.not(org.kermeta.compil.runtime.helper.language.ObjectUtil.isVoidSwitcher(cf_.getStaticProperty()));
+
+			if( idIfCond_545 ) {
+
+			result = kermeta.standard.helper.StringWrapper.plus(result, ".");
+		}
+
+		}
+
+		}
+
+		}
+
+		}
+
+		}
+
+		}
+
+		}
+		 else {
+
+			java.lang.Boolean idIfCond_546 = false;
+			idIfCond_546 = kermeta.standard.helper.StringWrapper.contains(result, context.getRETURN_EXPRESSION_TO_REPLACE());
+
+			if( idIfCond_546 ) {
+
+			result = kermeta.standard.helper.StringWrapper.replace(result, context.getRETURN_EXPRESSION_TO_REPLACE(), kermeta.standard.helper.StringWrapper.plus(static_call, "("));
+		}
+		 else {
+
+			java.lang.String tmp_prefix = "";
+
+			//BIft:detect
+
+		kermeta.language.behavior.Expression result_ft140 = null;
+
+			kermeta.language.behavior.Expression elem_ft140 = null;
+
+			result_ft140 = null;
+
+			
+		{
+
+			kermeta.standard.Iterator<kermeta.language.behavior.Expression> it_ft140 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil.<kermeta.language.behavior.Expression>convertAsOrderedSet(this.getParameters()).iterator();
+			java.lang.Boolean idLoopCond_548 = false;
+			while( !idLoopCond_548 ) {
+			idLoopCond_548 = kermeta.standard.helper.BooleanWrapper.or(it_ft140.isOff(), org.kermeta.compil.runtime.helper.language.ObjectUtil.isNotEqualSwitcher(result_ft140, null));
+			if ( idLoopCond_548 ) {
+			} else {
+
+			elem_ft140 = it_ft140.next();
+
+			java.lang.Boolean idIfCond_549 = false;
+		//BIle:detector
+		kermeta.language.behavior.Expression p_lbdExp140 = elem_ft140;
+
+			idIfCond_549 = p_lbdExp140.callsFunctionType();
+		//EIle:detector
+
+
+			if( idIfCond_549 ) {
+
+			result_ft140 = elem_ft140;
+		}
+
+		}
+			}
+		}
+
+		//EIft:detect
+		java.lang.Boolean idIfCond_547 = false;
+			idIfCond_547 = kermeta.standard.helper.BooleanWrapper.not(org.kermeta.compil.runtime.helper.language.ObjectUtil.isVoidSwitcher(result_ft140));
+
+			if( idIfCond_547 ) {
+
+			tmp_prefix = context.getRETURN_EXPRESSION_TO_REPLACE();
+		}
+
+
+			result = kermeta.standard.helper.StringWrapper.plus(kermeta.standard.helper.StringWrapper.plus(kermeta.standard.helper.StringWrapper.plus(tmp_prefix, static_call), "("), result);
+		}
+
+
+			java.lang.Boolean idIfCond_550 = false;
+			idIfCond_550 = ppCast;
+
+			if( idIfCond_550 ) {
+
+			result = kermeta.standard.helper.StringWrapper.plus("(", result);
+		}
+
+		}
+
+
+			java.lang.Boolean idIfCond_551 = false;
+			idIfCond_551 = kermeta.standard.helper.BooleanWrapper.and(this.isCallFeatureAsStaticOperation(), kermeta.standard.helper.BooleanWrapper.not(this.callsFunctionType()));
+
+			if( idIfCond_551 ) {
+
+			java.lang.Boolean idIfCond_552 = false;
+			idIfCond_552 = kermeta.standard.helper.StringWrapper.equals(static_call, "");
+
+			if( idIfCond_552 ) {
+
+			result = kermeta.standard.helper.StringWrapper.plus(result, "(");
+		}
+		 else {
+
+			static_call = "";
+
+			java.lang.Boolean idIfCond_553 = false;
+			idIfCond_553 = kermeta.standard.helper.BooleanWrapper.and(kermeta.standard.helper.BooleanWrapper.not(org.kermeta.compil.runtime.helper.language.ObjectUtil.isVoidSwitcher(org.kermeta.compil.runtime.helper.basetypes.CollectionUtil.<kermeta.language.behavior.Expression>convertAsOrderedSet(this.getParameters()))), kermeta.standard.helper.IntegerWrapper.isGreater(org.kermeta.compil.runtime.helper.basetypes.CollectionUtil.<kermeta.language.behavior.Expression>convertAsOrderedSet(this.getParameters()).size(), 0));
+
+			if( idIfCond_553 ) {
+
+			result = kermeta.standard.helper.StringWrapper.plus(result, ", ");
+		}
+
+		}
+
+
+			this.setBeforeLambdaExpressionResult("");
+
+			result = kermeta.standard.helper.StringWrapper.plus(kermeta.standard.helper.StringWrapper.plus(kermeta.standard.helper.StringWrapper.plus(result, ((km2ecore.helper.kermeta.CompilerHelperJava) org.kermeta.compil.runtime.helper.language.ClassUtil.newObject(km2ecore.helper.kermeta.KermetaPackage.eINSTANCE.getCompilerHelperJava())).ppComaSeparatedNodes(org.kermeta.compil.runtime.helper.basetypes.CollectionUtil.<kermeta.language.behavior.Expression>convertAsOrderedSet(this.getParameters()), context)), ")"), cf_prop_suffix);
+
+			context.setBeforeLambdaExpressionResult(this.getBeforeLambdaExpressionResult());
+
+			this.setBeforeLambdaExpressionResult("");
+
+			java.lang.Boolean idIfCond_554 = false;
+			idIfCond_554 = ppCast;
+
+			if( idIfCond_554 ) {
+
+			result = kermeta.standard.helper.StringWrapper.plus(result, ")");
+
+			ppCast = false;
+		}
+
+		}
+
+		}
+
+
+			result = kermeta.standard.helper.StringWrapper.plus(result, this.endOfExpressionFixer());
+
+		return result;
+
+		
+		/*java.lang.String result = null;
 
 		super.createBehaviorJava(context);
 
@@ -1650,7 +2251,7 @@ public class CallFeatureImpl extends CallExpressionImpl implements CallFeature {
 		result = kermeta.standard.helper.StringWrapper.plus(result, this
 				.endOfExpressionFixer());
 
-		return result;
+		return result;*/
 
 	}
 

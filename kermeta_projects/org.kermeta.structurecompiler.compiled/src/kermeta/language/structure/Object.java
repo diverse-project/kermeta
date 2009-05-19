@@ -328,6 +328,8 @@ public interface Object extends EObject {
 	 * @generated
 	 */
 	String getEMFInstanceClassName();
+	
+	String getEMFDefaultConstructor();
 
 	/**
 	 * <!-- begin-user-doc -->

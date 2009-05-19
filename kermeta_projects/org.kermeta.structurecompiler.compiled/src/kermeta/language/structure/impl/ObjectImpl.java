@@ -1049,6 +1049,16 @@ public class ObjectImpl extends EObjectImpl implements
 		return result;
 
 	}
+	
+	public String getEMFDefaultConstructor() {
+
+		java.lang.String result = null;
+
+			result = this.getUniqueTagValue("EMF_defaultConstructor");
+
+		return result;
+
+	}
 
 	/**
 	 * <!-- begin-user-doc -->
