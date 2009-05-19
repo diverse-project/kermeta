@@ -19,7 +19,7 @@ require "ToEcore.kmt"
 require "../UMLUtils/UMLProfilesUtils.kmt"
 require "UMLProfile2EcoreTrace.kmt"   
 require "../UMLUtils/UMLQualifiedNameAspect.kmt"
-require "platform:/resource/org.kermeta.uml2.profiles.model/src/kmt/utils/EcoreGenericsHelper.kmt"
+require "platform:/lookup/fr.irisa.triskell.kermeta.ecore/src/kermeta/helpers/EcoreGenericsHelper.kmt"
 
 
 using ecore
@@ -181,7 +181,8 @@ reference st : EClass
 		trace.traceLog("Container is not void, trying to retreive it....")
 		var e:EObject init trace.getEcoreFromUMLQualName(self.container.asType(uml::Package).getQualifiedName)
 		trace.traceLog("container name: "+ e.asType(ecore::EPackage).name)
-		st.ePackage := e.asType(ecore::EPackage)
+		
+		e.asType(ecore::EPackage).eClassifiers.add(st)
 		
 		// removing the element from the bag of created objects...
 		trace.getCreatedEcoreObjectBag().remove(st)
@@ -239,8 +240,7 @@ end
 		if self.container.isKindOf(uml::Package) then
 			var e:EObject init trace.getEcoreFromUMLQualName(self.container.asType(uml::Package).getQualifiedName)
 			trace.traceLog("container name: "+ e.asType(ecore::EPackage).name)
-			cls.ePackage := e.asType(ecore::EPackage)
-			
+			e.asType(ecore::EPackage).eClassifiers.add(cls)
 			// removing the element from the bag of created objects...
 			trace.getCreatedEcoreObjectBag().remove(cls)	
 		else
@@ -296,7 +296,7 @@ aspect class Enumeration inherits ToEcore {
 		if self.container.isInstanceOf(uml::Package) then
 			var e:EObject init trace.getEcoreFromUMLQualName(self.container.asType(uml::Package).getQualifiedName)
 			trace.traceLog("container name: "+ e.asType(ecore::EPackage).name)
-			enum.ePackage := e.asType(ecore::EPackage)
+			e.asType(ecore::EPackage).eClassifiers.add(enum)
 			// removing the element from the bag of created objects...
 			trace.getCreatedEcoreObjectBag().remove(enum)
 		else
@@ -311,7 +311,8 @@ aspect class Enumeration inherits ToEcore {
 			
 			var e:EObject init trace.getEcoreFromUMLQualName(cont.container.asType(uml::Package).getQualifiedName)
 			trace.traceLog("container name: "+ e.asType(ecore::EPackage).name)
-			enum.ePackage := e.asType(ecore::EPackage)
+			e.asType(ecore::EPackage).eClassifiers.add(enum)
+			
 			// removing the element from the bag of created objects...
 			trace.getCreatedEcoreObjectBag().remove(enum)
 			
@@ -429,7 +430,7 @@ attribute edNQualifiedName : String
 		if self.container.isKindOf(uml::Package) then
 			var e:EObject init trace.getEcoreFromUMLQualName(self.container.asType(uml::Package).getQualifiedName)
 			trace.traceLog("container name: "+ e.asType(ecore::EPackage).name)
-			ed.ePackage := e.asType(ecore::EPackage)
+			e.asType(ecore::EPackage).eClassifiers.add(ed)
 			
 			// removing the element from the bag of created objects...
 			trace.getCreatedEcoreObjectBag().remove(ed)	
@@ -530,7 +531,7 @@ end
 		if self.container.isInstanceOf(uml::Package) then
 			var e:EObject init trace.getEcoreFromUMLQualName(self.container.asType(uml::Package).getQualifiedName)
 			trace.traceLog("container name: "+ e.asType(ecore::EPackage).name)
-			dt.ePackage := e.asType(ecore::EPackage)
+			e.asType(ecore::EPackage).eClassifiers.add(dt)
 			
 			// removing the element from the bag of created objects...
 			trace.getCreatedEcoreObjectBag().remove(dt)	
@@ -581,7 +582,8 @@ aspect class EnumerationLiteral inherits ToEcore {
 	
 	// setting the integer value for the enumeration literal
 	literal.~value := e.asType(ecore::EEnum).eLiterals.size
-	literal.eEnum := e.asType(ecore::EEnum)
+	e.asType(ecore::EEnum).eLiterals.add(literal)
+	
 	// removing the element from the bag of created objects...
 	trace.getCreatedEcoreObjectBag().remove(literal)	
 	trace.traceLog("Quitting EnumerationLiteral : Pass2")
@@ -695,12 +697,12 @@ end
 		if 	self.~class != void then
 			var e:ecore::EObject init trace.getEcoreFromUMLQualName(self.~class.asType(uml::Class).getQualifiedName)
 			trace.traceLog("Attribute qualified name " + self.~class.asType(uml::Class).getQualifiedName)
-			att.eContainingClass := e.asType(ecore::EClass)
+			e.asType(ecore::EClass).eAttributes.add(att)
 		else
 			if self.datatype != void then
 				var e:ecore::EObject init trace.getEcoreFromUMLQualName(self.datatype.asType(uml::DataType).getQualifiedName)
 				trace.traceLog("Attribute qualified name " + self.datatype.asType(uml::DataType).getQualifiedName)
-				att.eContainingClass := e.asType(ecore::EClass)
+				e.asType(ecore::EClass).eAttributes.add(att)
 			end
 		end
 		
@@ -845,15 +847,15 @@ end
 					if e.isVoid then
 						e := trace.getEcoreType(self.~class.asType(uml::Class).name)
 					end
-					ref.eContainingClass := e.asType(ecore::EClass)
+					e.asType(ecore::EClass).eReferences.add(ref)
 				else
 					if self.datatype != void then
 						var e:ecore::EObject init trace.getEcoreFromUMLQualName(self.datatype.asType(uml::DataType).getQualifiedName)
 						if e.isVoid then
 							e := trace.getEcoreType(self.~class.asType(uml::DataType).name)
 						end
-						trace.traceLog("reference qualified name " + self.datatype.asType(uml::DataType).getQualifiedName)
-						ref.eContainingClass := e.asType(ecore::EClass)
+						trace.traceLog("reference qualified name " + self.datatype.asType(uml::DataType).getQualifiedName)						
+						e.asType(ecore::EClass).eReferences.add(ref)
 					end
 				end
 			// removing the element from the bag of created objects...
