@@ -55,6 +55,18 @@ aspect class Object {
 	end
 	
 	/**
+	 * Get the defaultConstructor
+	 * 
+	 * For Value Types the default constructor are not in general TheType() like for Integer: Integer(0),
+	 * thus we cannot have at priori a predefined way for generating these constructors
+	 *
+	 * The value of the tag must be a Java Class Qualified Name, eg: java.lang.String
+	 */
+	operation getEMFDefaultConstructor() : String is do
+		result := getUniqueTagValue("EMF_defaultConstructor")
+	end
+	
+	/**
 	 * Get the EDataType_instanceClassName
 	 * 
 	 * This used to declare if the element is an EDataType in the Ecore model side

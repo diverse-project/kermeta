@@ -733,7 +733,8 @@ package behavior {
 					end
 					
 				else
-					result := "new " + type_label + "()"
+					// e.g.: new java.lang.Integer(0)
+					result := tgt.staticType.asType(ParameterizedType).typeDefinition.getEMFDefaultConstructor()
 				end
 			else
 				
