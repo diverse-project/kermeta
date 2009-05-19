@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.2"?>
+<plugin>
+
+   <extension
+         point="org.eclipse.ui.popupMenus">
+      <objectContribution
+            id="org.kermeta.uml2.profiles.model.ui.contribution1"
+            nameFilter="*.uml"
+            objectClass="org.eclipse.core.resources.IFile">
+         <menu
+               label="UML MDK"
+               path="additions"
+               id="org.kermeta.uml2.profiles.model.ui.menu1">
+            <separator
+                  name="group1">
+            </separator>
+         </menu>
+         <action
+               label="UML Profile 2 Ecore (Interpreted)"
+               class="org.kermeta.uml2.profiles.model.ui.popup.actions.UMLProfile2EcoreAction"
+               menubarPath="org.kermeta.uml2.profiles.model.ui.menu1/group1"
+               enablesFor="1"
+               id="org.kermeta.uml2.profiles.model.ui.newAction">
+         </action>
+      </objectContribution>
+   </extension>
+
+</plugin>
