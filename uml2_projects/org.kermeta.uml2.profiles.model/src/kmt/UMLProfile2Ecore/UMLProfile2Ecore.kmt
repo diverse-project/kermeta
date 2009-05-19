@@ -15,13 +15,13 @@ require kermeta
 require "platform:/plugin/org.kermeta.uml2.profiles.model/model/ecore/Ecore.profile.ecore"
 require "platform:/plugin/org.kermeta.uml2.profiles.model/model/ecore/Standard.profile.ecore"
 
-require "platform:/resource/org.kermeta.uml2.profiles.model/src/kmt/UMLUtils/UMLProfilesUtils.kmt"
-require "platform:/resource/org.kermeta.uml2.profiles.model/src/kmt/UMLProfile2Ecore/Profile.kmt"
-require "platform:/resource/org.kermeta.uml2.profiles.model/src/kmt/UMLProfile2Ecore/ToEcore.kmt"
-require "platform:/resource/org.kermeta.uml2.profiles.model/src/kmt/UMLProfile2Ecore/UMLProfile2EcoreTrace.kmt"
-require "platform:/resource/org.kermeta.uml2.profiles.model/src/kmt/utils/KLog.kmt"
-require "platform:/resource/org.kermeta.uml2.profiles.model/src/kmt/persistence/UMLResource.kmt"
-require "platform:/resource/org.kermeta.uml2.profiles.model/src/kmt/utils/EcorePP.kmt"
+require "platform:/lookup/org.kermeta.uml2.profiles.model/src/kmt/UMLUtils/UMLProfilesUtils.kmt"
+require "platform:/lookup/org.kermeta.uml2.profiles.model/src/kmt/UMLProfile2Ecore/Profile.kmt"
+require "platform:/lookup/org.kermeta.uml2.profiles.model/src/kmt/UMLProfile2Ecore/ToEcore.kmt"
+require "platform:/lookup/org.kermeta.uml2.profiles.model/src/kmt/UMLProfile2Ecore/UMLProfile2EcoreTrace.kmt"
+require "platform:/lookup/org.kermeta.uml2.profiles.model/src/kmt/utils/KLog.kmt"
+require "platform:/lookup/org.kermeta.uml2.profiles.model/src/kmt/persistence/UMLResource.kmt"
+require "platform:/lookup/org.kermeta.uml2.profiles.model/src/kmt/utils/EcorePP.kmt"
 
 // generated Ecore form the UML model via EMF to bootstrap MARTE.profile.uml loading for kermeta
 //require "platform:/resource/org.kermeta.uml2.profiles.model/model/ecore/MARTE_Library.ecore" 
@@ -39,14 +39,18 @@ class Main
 {
  
  	operation standaloneTestMain() : Void is do
-// 		main("platform:/resource/VOCS_CS_BR/MD_metamodels/SESAME_Profile.profile.uml", "platform:/resource/VOCS_CS_BR/Ecore/SESAME_Profile.ecore",true)
-// 		main("platform:/resource/VOCS_CS_BR/MD_metamodels/UML_Standard_Profile.MagicDraw_Profile.DSL_Customization.profile.uml", "platform:/resource/VOCS_CS_BR/Ecore/UML_MagicDraw_DSL_Profile.ecore",true)
-// 		main("platform:/resource/VOCS_CS_BR/MD_metamodels/UML_Standard_Profile.MagicDraw_Profile.profile.uml", "platform:/resource/VOCS_CS_BR/Ecore/UML_MagicDraw_Profile.ecore",true)
-//		main("platform:/resource/VOCS_CS_BR/MD_metamodels/UML_Standard_Profile.UML_Standard_Profile.profile.uml", "platform:/resource/VOCS_CS_BR/Ecore/UML_Standard_Profile.ecore",true)
- 		main("platform:/resource/VOCS_CS_BR/MD_metamodels/UML_Standard_Profile.Validation_Profile.profile.uml", "platform:/resource/VOCS_CS_BR/Ecore/UML_Validation_Profile.ecore",true)
+// 		profile2Ecore("platform:/resource/VOCS_CS_BR/MD_metamodels/SESAME_Profile.profile.uml", "platform:/resource/VOCS_CS_BR/Ecore/SESAME_Profile.ecore",true)
+// 		profile2Ecore("platform:/resource/VOCS_CS_BR/MD_metamodels/UML_Standard_Profile.MagicDraw_Profile.DSL_Customization.profile.uml", "platform:/resource/VOCS_CS_BR/Ecore/UML_MagicDraw_DSL_Profile.ecore",true)
+// 		profile2Ecore("platform:/resource/VOCS_CS_BR/MD_metamodels/UML_Standard_Profile.MagicDraw_Profile.profile.uml", "platform:/resource/VOCS_CS_BR/Ecore/UML_MagicDraw_Profile.ecore",true)
+//		profile2Ecore("platform:/resource/VOCS_CS_BR/MD_metamodels/UML_Standard_Profile.UML_Standard_Profile.profile.uml", "platform:/resource/VOCS_CS_BR/Ecore/UML_Standard_Profile.ecore",true)
+ 		profile2Ecore("platform:/resource/VOCS_CS_BR/MD_metamodels/UML_Standard_Profile.Validation_Profile.profile.uml", "platform:/resource/VOCS_CS_BR/Ecore/UML_Validation_Profile.ecore",true)
  	end
  	
-	operation main(input : String, output : String, isProfiled: Boolean) : Void is do 
+ 	operation main(input : String, output : String, isProfiled: String) : Void is do
+ 		var isProfiledBoolean : Boolean init isProfiled.equals("true")
+ 		profile2Ecore(input, output, isProfiledBoolean)
+ 	end
+	operation profile2Ecore(input : String, output : String, isProfiled: Boolean) : Void is do 
 	
 	// source model and metamodel
 	var srcModelURI: String init  input
