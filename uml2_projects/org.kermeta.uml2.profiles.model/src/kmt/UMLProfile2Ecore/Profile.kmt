@@ -697,12 +697,12 @@ end
 		if 	self.~class != void then
 			var e:ecore::EObject init trace.getEcoreFromUMLQualName(self.~class.asType(uml::Class).getQualifiedName)
 			trace.traceLog("Attribute qualified name " + self.~class.asType(uml::Class).getQualifiedName)
-			e.asType(ecore::EClass).eAttributes.add(att)
+			e.asType(ecore::EClass).eStructuralFeatures.add(att)
 		else
 			if self.datatype != void then
 				var e:ecore::EObject init trace.getEcoreFromUMLQualName(self.datatype.asType(uml::DataType).getQualifiedName)
 				trace.traceLog("Attribute qualified name " + self.datatype.asType(uml::DataType).getQualifiedName)
-				e.asType(ecore::EClass).eAttributes.add(att)
+				e.asType(ecore::EClass).eStructuralFeatures.add(att)
 			end
 		end
 		
@@ -847,7 +847,7 @@ end
 					if e.isVoid then
 						e := trace.getEcoreType(self.~class.asType(uml::Class).name)
 					end
-					e.asType(ecore::EClass).eReferences.add(ref)
+					e.asType(ecore::EClass).eStructuralFeatures.add(ref)
 				else
 					if self.datatype != void then
 						var e:ecore::EObject init trace.getEcoreFromUMLQualName(self.datatype.asType(uml::DataType).getQualifiedName)
@@ -855,7 +855,7 @@ end
 							e := trace.getEcoreType(self.~class.asType(uml::DataType).name)
 						end
 						trace.traceLog("reference qualified name " + self.datatype.asType(uml::DataType).getQualifiedName)						
-						e.asType(ecore::EClass).eReferences.add(ref)
+						e.asType(ecore::EClass).eStructuralFeatures.add(ref)
 					end
 				end
 			// removing the element from the bag of created objects...
