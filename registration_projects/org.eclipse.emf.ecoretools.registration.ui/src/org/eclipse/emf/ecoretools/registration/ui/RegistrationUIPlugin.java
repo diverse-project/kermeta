@@ -24,8 +24,7 @@ public class RegistrationUIPlugin extends AbstractUIPlugin {
 	// The shared instance
 	private static RegistrationUIPlugin plugin;
 	
-	/** cache of EcorePlugin.getEPackageNsURIToGenModelLocationMap(); */
-	private Map<String, URI> ePackageNsURIToGenModelLocationMapCache = null;
+	
 	private HashMap<String, String> ePackageNsURIPluginIDMapCache =  null;
 	
 	/**
@@ -61,12 +60,7 @@ public class RegistrationUIPlugin extends AbstractUIPlugin {
 		return plugin;
 	}
 
-	public Map<String,URI> getEPackageNsURIToGenModelLocationMap(){
-		if(ePackageNsURIToGenModelLocationMapCache == null){
-			ePackageNsURIToGenModelLocationMapCache = EcorePlugin.getEPackageNsURIToGenModelLocationMap();
-		}
-		return ePackageNsURIToGenModelLocationMapCache;
-	}
+	
 	private Map<String,String> getEPackageNsURIPluginIDMap(){
 		if(ePackageNsURIPluginIDMapCache == null){
 			ePackageNsURIPluginIDMapCache = new HashMap<String, String>();
@@ -78,7 +72,7 @@ public class RegistrationUIPlugin extends AbstractUIPlugin {
 		if(!getEPackageNsURIPluginIDMap().containsKey(ePackageNsURI)){
 			ResourceSet resourceSet = new ResourceSetImpl();
 			Resource resource;
-			URI urigenmodel = getEPackageNsURIToGenModelLocationMap().get(ePackageNsURI);
+			URI urigenmodel = EcorePlugin.getEPackageNsURIToGenModelLocationMap().get(ePackageNsURI);
 			registerExtension(ePackageNsURI,resourceSet);
 			String plugin_id;
 			try {
@@ -106,5 +100,9 @@ public class RegistrationUIPlugin extends AbstractUIPlugin {
 							new XMIResourceFactoryImpl());
 		}
 
+	}
+
+	public void resetCache() {
+		ePackageNsURIPluginIDMapCache = null;
 	}
 }

@@ -13,7 +13,6 @@
 
 package org.eclipse.emf.ecoretools.registration.view;
 
-import org.eclipse.emf.codegen.ecore.genmodel.GenModel;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 import org.eclipse.emf.ecoretools.registration.EMFRegistryHelper;

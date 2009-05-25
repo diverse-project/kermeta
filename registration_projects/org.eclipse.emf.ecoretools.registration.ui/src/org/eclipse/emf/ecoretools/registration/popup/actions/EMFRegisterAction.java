@@ -66,6 +66,7 @@ public class EMFRegisterAction implements IObjectActionDelegate {
 		if (selection instanceof StructuredSelection) {
 			// The selection could be a set of Ecore files
 			currentSelection = (StructuredSelection) selection;
+			@SuppressWarnings("unchecked")
 			Iterator it = currentSelection.iterator();
 
 			ecoreFiles.clear(); // remove the previous selection, else the old selected packages will be re-registered

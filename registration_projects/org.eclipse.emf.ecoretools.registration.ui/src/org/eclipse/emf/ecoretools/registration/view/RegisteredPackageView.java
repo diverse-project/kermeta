@@ -22,13 +22,13 @@ import org.eclipse.emf.ecoretools.registration.internal.NsURIComparator;
 import org.eclipse.emf.ecoretools.registration.internal.RegisteredPackageComparator;
 import org.eclipse.emf.ecoretools.registration.popup.actions.CopyNSURIAction;
 import org.eclipse.emf.ecoretools.registration.popup.actions.EcoreUnregisterPackageAction;
+import org.eclipse.emf.ecoretools.registration.ui.RegistrationUIPlugin;
 import org.eclipse.jface.action.Action;
 import org.eclipse.jface.action.IMenuListener;
 import org.eclipse.jface.action.IMenuManager;
 import org.eclipse.jface.action.IToolBarManager;
 import org.eclipse.jface.action.MenuManager;
 import org.eclipse.jface.action.Separator;
-import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.swt.SWT;
@@ -244,7 +244,8 @@ public class RegisteredPackageView extends ViewPart {
 	 * rebuild the view, also refresh its content from the ContentProvider
 	 *
 	 */
-	public void refresh(){		
+	public void refresh(){
+		RegistrationUIPlugin.getDefault().resetCache();
 		viewer.refresh();
 	}
 	
