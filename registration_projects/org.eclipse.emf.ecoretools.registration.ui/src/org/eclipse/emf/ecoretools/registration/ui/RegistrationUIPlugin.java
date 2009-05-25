@@ -9,6 +9,7 @@ import org.eclipse.emf.ecore.plugin.EcorePlugin;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
 
@@ -78,18 +79,32 @@ public class RegistrationUIPlugin extends AbstractUIPlugin {
 			ResourceSet resourceSet = new ResourceSetImpl();
 			Resource resource;
 			URI urigenmodel = getEPackageNsURIToGenModelLocationMap().get(ePackageNsURI);
+			registerExtension(ePackageNsURI,resourceSet);
+			String plugin_id;
 			try {
 				resource = resourceSet.getResource(urigenmodel, true);
+				GenModel genmodel = (GenModel) resource.getContents().get(0);				
+				plugin_id = genmodel.getModelPluginID();
 			} catch (Exception e) {
-				resource = resourceSet.createResource(urigenmodel);
+				plugin_id = "<genmodel = "+ urigenmodel +">";
 			}
-			GenModel genmodel = (GenModel) resource.getContents().get(0);
-			String plugin_id = genmodel.getModelPluginID();
+			
+			
 			
 			getEPackageNsURIPluginIDMap().put(ePackageNsURI, plugin_id);
 		}
 		String res = getEPackageNsURIPluginIDMap().get(ePackageNsURI);
 		if(res == null) res = "";
 		return res;
+	}
+	private void registerExtension(String uri, ResourceSet resourceSet) {
+		String[] fileNameSplit = uri.split("\\.");
+		String extension = fileNameSplit[fileNameSplit.length - 1];
+		if (extension.compareTo("uml") != 0) {
+			resourceSet.getResourceFactoryRegistry()
+					.getExtensionToFactoryMap().put(extension,
+							new XMIResourceFactoryImpl());
+		}
+
 	}
 }
