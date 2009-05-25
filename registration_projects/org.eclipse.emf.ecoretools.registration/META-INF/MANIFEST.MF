@@ -13,7 +13,7 @@ Require-Bundle: org.eclipse.ui,
 Bundle-ActivationPolicy: lazy
 Export-Package: org.eclipse.emf.ecoretools.registration,
  org.eclipse.emf.ecoretools.registration.exceptions,
- org.eclipse.emf.ecoretools.registration.internal;x-internal:=true
+ org.eclipse.emf.ecoretools.registration.internal;x-friends:="org.eclipse.emf.ecoretools.registration.ui"
 Bundle-Vendor: INRIA
 Bundle-ClassPath: .
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
