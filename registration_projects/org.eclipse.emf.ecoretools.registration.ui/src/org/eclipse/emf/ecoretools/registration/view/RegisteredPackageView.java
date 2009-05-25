@@ -113,7 +113,7 @@ public class RegisteredPackageView extends ViewPart {
 		column1.addSelectionListener( new PackageNsURIColumnSelectionListener(viewer) );
 		
 		TreeColumn column2 = new TreeColumn(viewer.getTree(), SWT.LEFT);
-		column2.setText("Package name");
+		column2.setText("EPackage name");
 		column2.setWidth(120);
 		column2.setResizable(true);
 		column2.addSelectionListener( new PackageNameColumnSelectionListener(viewer) );
@@ -122,6 +122,11 @@ public class RegisteredPackageView extends ViewPart {
 		column3.setText("Origin");
 		column3.setWidth(350);
 		column3.setResizable(true);
+		
+		TreeColumn column4 = new TreeColumn(viewer.getTree(), SWT.LEFT);
+		column4.setText("Status");
+		column4.setWidth(350);
+		column4.setResizable(true);
 	}
 	
 	/**

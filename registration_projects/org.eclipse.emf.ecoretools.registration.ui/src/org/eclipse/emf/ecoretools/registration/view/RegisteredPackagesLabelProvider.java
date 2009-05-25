@@ -13,11 +13,13 @@
 
 package org.eclipse.emf.ecoretools.registration.view;
 
+import org.eclipse.emf.codegen.ecore.genmodel.GenModel;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 import org.eclipse.emf.ecoretools.registration.EMFRegistryHelper;
 import org.eclipse.emf.ecoretools.registration.ui.RegistrationConstants;
 import org.eclipse.emf.ecoretools.registration.ui.RegistrationIcons;
+import org.eclipse.emf.ecoretools.registration.ui.RegistrationUIPlugin;
 import org.eclipse.jface.viewers.ITableLabelProvider;
 import org.eclipse.jface.viewers.LabelProvider;
 import org.eclipse.swt.graphics.Image;
@@ -42,9 +44,23 @@ public class RegisteredPackagesLabelProvider extends LabelProvider implements IT
 			if(obj != null){
 				if(EMFRegistryHelper.isDynamicallyRegistered( p.getNsURI() ) )
 				// if this is exactly an EPackage then this comes from a files, otherwise it comes from generated java
-					return "" + getText(p.eResource().getURI());
-				else 
-					return "generated java in plugin";
+					return getText(p.eResource().getURI());
+				else {
+					return RegistrationUIPlugin.getDefault().getPluginID(p.getNsURI());
+				}
+			}
+			return "";
+		case 3: //status column
+			if(obj != null){
+				if(EMFRegistryHelper.isDynamicallyRegistered( p.getNsURI() ) )
+				// if this is exactly an EPackage then this comes from a files, otherwise it comes from generated java
+					return "dynamically registered";
+				else if(EMFRegistryHelper.isRegistered(p.getNsURI())){
+					return "registered from a plugin";
+				}
+				else {
+					return "installed from a plugin but not registered";
+				}
 			}
 			return "";
 		default:

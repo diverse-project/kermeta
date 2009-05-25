@@ -1,5 +1,14 @@
 package org.eclipse.emf.ecoretools.registration.ui;
 
+import java.util.HashMap;
+import java.util.Map;
+
+import org.eclipse.emf.codegen.ecore.genmodel.GenModel;
+import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.plugin.EcorePlugin;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
 
@@ -13,6 +22,10 @@ public class RegistrationUIPlugin extends AbstractUIPlugin {
 
 	// The shared instance
 	private static RegistrationUIPlugin plugin;
+	
+	/** cache of EcorePlugin.getEPackageNsURIToGenModelLocationMap(); */
+	private Map<String, URI> ePackageNsURIToGenModelLocationMapCache = null;
+	private HashMap<String, String> ePackageNsURIPluginIDMapCache =  null;
 	
 	/**
 	 * The constructor
@@ -47,4 +60,36 @@ public class RegistrationUIPlugin extends AbstractUIPlugin {
 		return plugin;
 	}
 
+	public Map<String,URI> getEPackageNsURIToGenModelLocationMap(){
+		if(ePackageNsURIToGenModelLocationMapCache == null){
+			ePackageNsURIToGenModelLocationMapCache = EcorePlugin.getEPackageNsURIToGenModelLocationMap();
+		}
+		return ePackageNsURIToGenModelLocationMapCache;
+	}
+	private Map<String,String> getEPackageNsURIPluginIDMap(){
+		if(ePackageNsURIPluginIDMapCache == null){
+			ePackageNsURIPluginIDMapCache = new HashMap<String, String>();
+		}
+		return ePackageNsURIPluginIDMapCache;
+	}
+	
+	public String getPluginID(String ePackageNsURI ){
+		if(!getEPackageNsURIPluginIDMap().containsKey(ePackageNsURI)){
+			ResourceSet resourceSet = new ResourceSetImpl();
+			Resource resource;
+			URI urigenmodel = getEPackageNsURIToGenModelLocationMap().get(ePackageNsURI);
+			try {
+				resource = resourceSet.getResource(urigenmodel, true);
+			} catch (Exception e) {
+				resource = resourceSet.createResource(urigenmodel);
+			}
+			GenModel genmodel = (GenModel) resource.getContents().get(0);
+			String plugin_id = genmodel.getModelPluginID();
+			
+			getEPackageNsURIPluginIDMap().put(ePackageNsURI, plugin_id);
+		}
+		String res = getEPackageNsURIPluginIDMap().get(ePackageNsURI);
+		if(res == null) res = "";
+		return res;
+	}
 }

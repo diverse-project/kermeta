@@ -14,12 +14,17 @@
 package org.eclipse.emf.ecoretools.registration.view;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EPackage.Registry;
+import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecoretools.registration.EMFRegistryHelper;
+import org.eclipse.emf.ecoretools.registration.ui.RegistrationUIPlugin;
 import org.eclipse.jface.viewers.ITreeContentProvider;
 import org.eclipse.jface.viewers.Viewer;
 
@@ -93,6 +98,17 @@ public class RegisteredPackagesContentProvider implements ITreeContentProvider {
 				// add only root packages
 				if( getParent( obj )== null )
 					table.add( (EPackage) obj );
+			}
+		}
+		Map<String, URI> map = RegistrationUIPlugin.getDefault().getEPackageNsURIToGenModelLocationMap();
+		Iterator<String> iter2 = map.keySet().iterator();
+		ResourceSetImpl resourceSet = new ResourceSetImpl();
+		while (iter2.hasNext()) {
+			String uriKey = iter2.next();
+			EPackage epackageObject = resourceSet.getPackageRegistry().getEPackage(uriKey);
+			if( getParent( epackageObject )== null ){
+				if(!table.contains(epackageObject))
+					table.add( epackageObject );
 			}
 		}
 		return table.toArray();
