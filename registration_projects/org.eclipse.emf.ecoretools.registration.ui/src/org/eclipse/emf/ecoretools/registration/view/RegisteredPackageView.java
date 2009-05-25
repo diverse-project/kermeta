@@ -17,14 +17,18 @@ import java.util.Iterator;
 
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecoretools.registration.EMFRegistryHelper;
+import org.eclipse.emf.ecoretools.registration.icons.ButtonIcons;
 import org.eclipse.emf.ecoretools.registration.internal.NsURIComparator;
 import org.eclipse.emf.ecoretools.registration.internal.RegisteredPackageComparator;
 import org.eclipse.emf.ecoretools.registration.popup.actions.CopyNSURIAction;
 import org.eclipse.emf.ecoretools.registration.popup.actions.EcoreUnregisterPackageAction;
+import org.eclipse.jface.action.Action;
 import org.eclipse.jface.action.IMenuListener;
 import org.eclipse.jface.action.IMenuManager;
+import org.eclipse.jface.action.IToolBarManager;
 import org.eclipse.jface.action.MenuManager;
 import org.eclipse.jface.action.Separator;
+import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.swt.SWT;
@@ -56,6 +60,7 @@ public class RegisteredPackageView extends ViewPart {
 	// internal actions
 	private EcoreUnregisterPackageAction unregisterPackageAction;
 	private CopyNSURIAction copyNSURIAction;
+	private Action refreshViewAction;
 	
 	Clipboard clipboard;
 	
@@ -84,7 +89,7 @@ public class RegisteredPackageView extends ViewPart {
 		createContextMenu();
 			
 		createColumns(viewer);
-		viewer.setColumnProperties( new String[] {"Registered URI", "Package name", "Origin"} );
+		viewer.setColumnProperties( new String[] {"Registered NsURI", "EPackage name", "Origin", "Status"} );
 
 		viewer.getTree().setHeaderVisible(true);
 		viewer.getTree().setLinesVisible(false);		
@@ -97,6 +102,9 @@ public class RegisteredPackageView extends ViewPart {
 	    bars.setGlobalActionHandler(
 	    		ActionFactory.COPY.getId(), 
 	    		this.copyNSURIAction);
+	    
+
+		contributeToActionBars();
 	         
 	}
 
@@ -147,6 +155,16 @@ public class RegisteredPackageView extends ViewPart {
 		copyNSURIAction.setImageDescriptor(platformImages
 				.getImageDescriptor(ISharedImages.IMG_TOOL_COPY));
 		copyNSURIAction.setToolTipText("Copy NsURI");
+		
+		refreshViewAction = new Action() {
+			public void run() {				
+				refresh();
+			}
+		};
+		refreshViewAction.setText("Refresh view");
+		refreshViewAction.setToolTipText("Refresh the view");
+		refreshViewAction.setImageDescriptor(ButtonIcons.REFRESH_ICON);
+		
 	}
 	/**
 	 * used by createPartControl
@@ -183,6 +201,22 @@ public class RegisteredPackageView extends ViewPart {
 				IWorkbenchActionConstants.MB_ADDITIONS));
 	}
 	
+	private void contributeToActionBars() {
+		IActionBars bars = getViewSite().getActionBars();
+		fillLocalPullDown(bars.getMenuManager());
+		fillLocalToolBar(bars.getToolBarManager());
+	}
+	private void fillLocalPullDown(IMenuManager manager) {
+	//	manager.add(refreshViewAction);
+	//	manager.add(new Separator());
+		//manager.add(action2);
+	}
+	
+	
+	private void fillLocalToolBar(IToolBarManager manager) {
+		manager.add(refreshViewAction);
+	//	manager.add(action2);
+	}
 	/**
 	 * get the selection
 	 * @return a table of the URI selected
