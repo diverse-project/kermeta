@@ -589,6 +589,8 @@ public class KMTDocHTMLPrettyPrinter {//extends KM2KMTPrettyPrinter{
 		if (node.isIsDerived()) result.append("property ");
 		else if (node.isIsComposite()) result.append("attribute ");
 		else result.append("reference ");
+		if(node.isIsReadOnly()) result.append("readonly ");
+		
 		result.append("<strong class=nodename>" +KMTHelper.getMangledIdentifier(node.getName()) + "</strong>");
 		//result.append("<b>Property </b> " + KMTHelper.getMangledIdentifier(node.getName()));
 		result.append("</H1>") ;
@@ -604,7 +606,7 @@ public class KMTDocHTMLPrettyPrinter {//extends KM2KMTPrettyPrinter{
 		result.append("..");
 		result.append(node.getUpper() == -1 ? "*": node.getUpper());
 		result.append("]");
-		if(node.isIsReadOnly()) result.append("This feature is <b>readonly</b>\n");
+		if(node.isIsReadOnly()) result.append("\nThis feature is <b>readonly</b>\n");
 		if (node.getOpposite() != null) result.append("<H2>Opposite</H2>\t"+ KMTHelper.getMangledIdentifier(node.getOpposite().getName()));
 		String tags = ppTags(node.getTag());
 		if(tags.compareTo("")!=0){
