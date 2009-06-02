@@ -126,6 +126,21 @@ public class Interpreter {
 		calculateKermetaUnit(uri);
 	}
 	
+	/** this constructor allows to specify the console streams, 
+	 * so an error while loading the uri will be reported to the end user on the console
+	 * this is the recommanded constructor
+	 * @param uri
+	 * @param mode
+	 * @param options
+	 * @param console
+	 */
+	public Interpreter(String uri, InterpreterMode mode,
+			Map<String, Object> options, IOConsole console) {
+		this(mode, options);
+		this.setStreams(console);
+		calculateKermetaUnit(uri);
+	}
+
 	/**
 	 * Process a map of options to set up the configuration fields of this interpreter.
 	 * @param options A map of options which keys come from InterpreterOptions interface.
@@ -174,10 +189,22 @@ public class Interpreter {
 				_kermetaUnit.setTypeChecked(true);
 			}
 		} catch (NotRegisteredURIException e) {
+			if(_outputStream != null){ 
+				_outputStream.print(e.getMessage()+"/n");
+				_outputStream.flush();
+			}
 			e.printStackTrace();
 		} catch (URIMalformedException e) {
+			if(_outputStream != null){ 
+				_outputStream.print(e.getMessage()+"/n");
+				_outputStream.flush();
+			}
 			e.printStackTrace();
 		} catch (IOException e) {
+			if(_outputStream != null){ 
+				_outputStream.print(e.getMessage()+"/n");
+				_outputStream.flush();
+			}
 			e.printStackTrace();
 		}
 	}
