@@ -1,5 +1,5 @@
 /* $Id: SimpleFileIO.java,v 1.16 2008-11-19 16:45:26 cfaucher Exp $
- * Project: Kermeta (First iteration)
+ * Project: Kermeta 
  * File: SimpleFileIO.java
  * License: EPL
  * Copyright: IRISA / INRIA / Universite de Rennes 1
@@ -25,6 +25,7 @@ import java.io.IOException;
 import java.io.OutputStreamWriter;
 
 import org.eclipse.core.resources.IFolder;
+import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.NullProgressMonitor;
@@ -34,9 +35,15 @@ import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.emf.ecore.resource.impl.ExtensibleURIConverterImpl;
 
 import fr.irisa.triskell.eclipse.resources.ResourceHelper;
+import fr.irisa.triskell.kermeta.interpreter.KermetaRaisedException;
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
 import fr.irisa.triskell.kermeta.runtime.basetypes.String;
 
+
+/**
+ * Wrapper for FileIO
+ *
+ */
 public class SimpleFileIO {
 	
 	public static RuntimeObject fileExists(RuntimeObject filename)
@@ -77,13 +84,26 @@ public class SimpleFileIO {
 			return filename.getFactory().getMemory().falseINSTANCE;
     }
 	
-	
+	/**
+	 * static operation as called by kermeta extern fr::irisa::triskell::kermeta:runtime::io::SimpleFileIO.writeTextFile
+	 * @param filename
+	 * @param text
+	 * @return
+	 */
 	public static RuntimeObject writeTextFile(RuntimeObject filename, RuntimeObject text) {
 		writeTextFileWithEncoding(filename, text, null);
         return filename.getFactory().getMemory().voidINSTANCE;
     }
 	
+	/**
+	 * static operation as called by kermeta extern fr::irisa::triskell::kermeta:runtime::io::SimpleFileIO.writeTextFileWithEncoding
+	 * @param filename
+	 * @param text
+	 * @param encoding
+	 * @return
+	 */
 	public static RuntimeObject writeTextFileWithEncoding(RuntimeObject filename, RuntimeObject text, RuntimeObject encoding) {
+
 		
         try {
         	/*
@@ -97,12 +117,20 @@ public class SimpleFileIO {
         	if ( folderPath.startsWith("platform:/resource") ) {
         		java.lang.String platformFolderPath = folderPath.replace("platform:/resource", "");
         		IFolder folder = ResourcesPlugin.getWorkspace().getRoot().getFolder( new Path(platformFolderPath) );
+        		IProject project = folder.getProject();
+        		if(!project.exists()){
+        			throw KermetaRaisedException.createKermetaException("kermeta::exceptions::IOException",
+        	    			"Cannot write file because project '" + project.getName() + "' doesn't exist. (we can create intermediate folders but cannot create the project)",
+        	    			filename.getFactory().getMemory().getInterpreter().getBasicInterpreter(),
+        	    			filename.getFactory().getMemory(),
+        	    			null);
+        		}
         		folderPath = folder.getLocation().toString();
         		filePath = folderPath + filePath.substring(i);
         	}
         	       	
         	/*
-        	 * Checking for its existency
+        	 * Checking for its existence
         	 */
         	File folder = new File( folderPath.replace("file://", "").replace("file:/", "") );
         	if ( ! folder.exists() )
