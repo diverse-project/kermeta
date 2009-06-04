@@ -806,7 +806,7 @@ processor by defining 'disable.xsltproc' property.
 	<available classname="org.apache.xml.resolver.Resolver" property="ok:resolver.available" />
 		
 	<target name="advice-for-resolver-install" unless="ok:resolver.available">
-		<echo>In order to run xslt on docbook offline you must add the resolver into ant classpath</echo>
+		<echo>In order to run xslt on docbook offline you must add the resolver into ant classpath. (Ie. in the runconfiguration that launch Ant)</echo>
 		<echo>Resolver is here : ${ant.docbook.styler.dir}/ant-extensions/resolver.jar</echo>		    
 	</target>
   
