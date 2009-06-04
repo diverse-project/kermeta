@@ -12,7 +12,7 @@ package UMLProfileUtils;
 
 
 require kermeta
-require "platform:/resource/org.kermeta.uml2.profiles.model/src/kmt/persistence/UMLResource.kmt"
+require "platform:/lookup/org.kermeta.uml2.profiles.model/src/kmt/persistence/UMLResource.kmt"
 
 
 using kermeta::persistence

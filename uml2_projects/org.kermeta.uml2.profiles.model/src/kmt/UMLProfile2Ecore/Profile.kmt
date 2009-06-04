@@ -25,7 +25,6 @@ require "platform:/lookup/fr.irisa.triskell.kermeta.ecore/src/kermeta/helpers/Ec
 using ecore
 using kermeta::standard
 using kermeta::language::structure
-using kermeta::persistence
 using UMLProfileUtils
  
 

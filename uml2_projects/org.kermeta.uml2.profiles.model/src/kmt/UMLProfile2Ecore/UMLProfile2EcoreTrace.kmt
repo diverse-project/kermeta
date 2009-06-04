@@ -13,6 +13,7 @@ require kermeta
 
 require "platform:/plugin/org.kermeta.uml2.profiles.model/model/ecore/Ecore.profile.ecore"
 require "platform:/plugin/org.kermeta.uml2.profiles.model/model/ecore/Standard.profile.ecore"
+require "platform:/lookup/fr.irisa.triskell.kermeta.ecore/src/kermeta/persistence/EcoreResource.kmt"
 
 require "../utils/KLog.kmt"
 require "platform:/resource/org.kermeta.uml2.profiles.model/src/kmt/UMLUtils/EcoreQualifiedNameAspect.kmt"
@@ -79,8 +80,10 @@ operation initRep(rep: EMFRepository): Void is do
 	uml_resource := EMFResource.new 
 	ecore_resource := EMFResource.new
 	// We need to refer to the actual UML and Ecore element in the plugins (impossible to laod the necessary element via their their uri :( )  
-	uml_resource ?= tgt_store.getResource("platform:/plugin/org.eclipse.uml2.uml_2.1.1/model/UML.ecore") 
-	ecore_resource ?=  tgt_store.getResource("platform:/plugin/org.eclipse.emf.ecore_2.3.1/model/Ecore.ecore")
+	//uml_resource ?= tgt_store.getResource("platform:/plugin/org.eclipse.uml2.uml_2.1.1/model/UML.ecore") 
+	//ecore_resource ?=  tgt_store.getResource("platform:/plugin/org.eclipse.emf.ecore_2.3.1/model/Ecore.ecore")
+	uml_resource ?= tgt_store.getRegisteredEcoreResource("http://www.eclipse.org/uml2/2.1.0/UML") 
+	ecore_resource ?=  tgt_store.getRegisteredEcoreResource("http://www.eclipse.org/emf/2002/Ecore")
 	if hasLibrary then
 	log.print("There is a model library, loading it... ")
 		library_resource ?= tgt_store.getResource(library_name)

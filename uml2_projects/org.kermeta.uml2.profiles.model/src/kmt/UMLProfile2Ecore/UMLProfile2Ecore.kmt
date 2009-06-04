@@ -45,7 +45,9 @@ class Main
 //		profile2Ecore("platform:/resource/VOCS_CS_BR/MD_metamodels/UML_Standard_Profile.UML_Standard_Profile.profile.uml", "platform:/resource/VOCS_CS_BR/Ecore/UML_Standard_Profile.ecore",true)
 // 		profile2Ecore("platform:/resource/VOCS_CS_BR/MD_metamodels/UML_Standard_Profile.Validation_Profile.profile.uml", "platform:/resource/VOCS_CS_BR/Ecore/UML_Validation_Profile.ecore",true)
 	//profile2Ecore("platform:/resource/org.kermeta.uml2.profiles.model/model/uml/BasicClock.profile.uml", "platform:/resource/org.kermeta.uml2.profiles.model/model/uml/BasicClock.profile.ecore",true)
- 	profile2Ecore("platform:/resource/org.kermeta.uml2.profiles.model/model/uml/Standard.profile.uml", "platform:/resource/org.kermeta.uml2.profiles.model/model/uml/Standard.profile.ecore",true)
+ 	//profile2Ecore("platform:/resource/org.kermeta.uml2.profiles.model/model/uml/Standard.profile.uml", "platform:/resource/org.kermeta.uml2.profiles.model/model/uml/Standard.profile.ecore",true)
+ 	//profile2Ecore("platform:/resource/org.kermeta.uml2.profile.marte/model/uml/beta2/MARTE.profile.uml", "platform:/resource/org.kermeta.uml2.profile.marte/model/uml/beta2/MARTE.profile.ecore",true)
+ 	profile2Ecore("platform:/resource/org.kermeta.uml2.profile.marte/model/uml/beta1/MARTE_Library.library.uml", "platform:/resource/org.kermeta.uml2.profile.marte/model/uml/beta1/MARTE_Library.library.ecore",true)
  	end
  	
  	operation main(input : String, output : String, isProfiled: String) : Void is do
