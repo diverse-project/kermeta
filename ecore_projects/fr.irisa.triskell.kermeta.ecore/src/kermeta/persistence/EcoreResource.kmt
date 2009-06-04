@@ -1,0 +1,106 @@
+
+/* $Id: UMLResource.kmt,v 1.4 2009-02-04 18:34:52 cfaucher Exp $
+ * Creation date: February 11, 2008
+ * License: EPL
+ * Copyright:	IRISA/INRIA
+ * Authors:
+ *		Didier Vojtisek
+ */
+
+
+/**
+ * Aspect that adds support for UMLResource to Kermeta persistence package (in EMFRepository)
+ * It introduces the new Resource and the dedicated builder operation
+ */
+package kermeta::persistence;
+
+
+require kermeta
+require "http://www.eclipse.org/emf/2002/Ecore"
+
+using kermeta::standard
+using kermeta::exceptions
+
+/**
+ * Aspect that add Ecore specific load ability to EMFRepository
+ */
+aspect class EMFRepository
+{
+	/**
+	 * Create a new resource for an ecore model that is registered in EMF registry, 
+	 * It can only be loaded, You should not try to modify its content 
+	 */
+	operation createRegisteredEcoreResource(nsURI : String) : Resource is do
+		
+	    // make sure we can deal with UML units
+	    @compiledJavaExtern "org.kermeta.ecore.compil.runtime.helper.basetypes.Resource.addRegisteredEcoreRuntimeUnitFactory()"
+		extern org::kermeta::ecore::kermeta::runtime::basetypes::Resource.addRegisteredEcoreRuntimeUnitFactory()
+		var mm_uri : String init "http://www.eclipse.org/emf/2002/Ecore"
+		if(not resources.collect{r | r.uri}.contains(nsURI)) then
+			@compiledJavaExtern "org.kermeta.ecore.compil.runtime.helper.basetypes.RepositoryUtil.createResource(this, uri, mm_uri)"
+			result ?= extern org::kermeta::ecore::kermeta::runtime::basetypes::Repository.createResource(self, nsURI, mm_uri)
+		else
+			var e : ResourceCreateException init ResourceCreateException.new
+			e.message := "Trying to create a resource already existing at " + nsURI + ".\n"
+					+ "Remove existing resource from the repository first, or use \"getRegisteredEcoreResource\" operation."
+			raise e
+		end
+	end
+	/**
+	 * Create a new resource connected to 
+	 */
+	operation getRegisteredEcoreResource(nsURI : String) : Resource is do
+		
+	    @compiledJavaExtern "org.kermeta.compil.runtime.helper.basetypes.RepositoryUtil.initRepository(this)"
+		extern fr::irisa::triskell::kermeta::runtime::basetypes::Repository.initRepository(self)
+		
+		// try to retrieve an previously loaded resource
+		from var it : Iterator<Resource> init resources.iterator
+		until it.isOff
+		loop
+			var next : Resource init it.next
+			if (nsURI.equals(next.uri)) then
+				result := next
+			end
+		end
+		// If result is null then we create a new resource. With a null
+		// URI. we assume that the user calls "getResource" when he already has 
+		// a serialized model stored at the given URI 
+		// NOT TESTED YET!
+		if result == void then
+			//stdio.writeln("Warning : you haven't created a resource for the given uri <"+uri+"> in this Repository. Trying to create one. (you should consider using the createResource method first)")
+			result := self.createRegisteredEcoreResource(nsURI)
+			result.load()
+		end
+	end
+}
+
+/**
+ * Special resource that is able to load an ecore model from Eclipse Registry. You must use its NsURI in order to retrieve it in the registry.
+ * This resource is readonly and must not be changed.
+ */
+class RegisteredEcoreResource inherits EMFResource
+{
+	/** Loads a resource. Once loaded, you'll be able to query the resource for its instances.  
+	 * even if the metamodelURI was not set, (for example the registered packages are enough) after a succesful load
+	 * the attribute metamodelURI will be filled with the nsuri of the root package of the metamodel used to load this resource
+	 */
+	method load() : Void is do
+		self.clear		
+		
+		// make sure we can deal with UML units
+		@compiledJavaExtern "org.kermeta.ecore.compil.runtime.helper.basetypes.ResourceUtil.addRegisteredEcoreRuntimeUnitFactory()"
+		extern org::kermeta::ecore::kermeta::runtime::basetypes::Resource.addRegisteredEcoreRuntimeUnitFactory()
+		
+		@compiledJavaExtern "org.kermeta.compil.runtime.helper.persistence.Loader.load(this, getUri(), getMetaModelURI())"
+		extern fr::irisa::triskell::kermeta::runtime::basetypes::Resource.load(
+		    self, uri, metaModelURI, "ECORE"
+		)
+		// If load failed
+		if(self.size == 0) then
+			stdio.writeln("Resource load failed!")
+			var e : ResourceLoadException init ResourceLoadException.new
+			raise e
+		end
+	end
+}
