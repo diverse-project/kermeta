@@ -134,6 +134,11 @@ public class Runtime2EMF {
 	 * @param resource
 	 */
 	public void updateEMFModel(boolean saveWithNewURI) {
+		if(EMFRegistryHelper.isRegistered(resource.getURI())){
+			internalLog.info("Ignoring update registered Ecore resource " + resource.getURI() + " that cannot be modified");
+			
+			return;
+		}
 		// Get the RuntimeObjects from the return result of external call of
 		// save() method (in Kermeta side)
 		// Important : *On save process*, unit.getContentMap contains the
