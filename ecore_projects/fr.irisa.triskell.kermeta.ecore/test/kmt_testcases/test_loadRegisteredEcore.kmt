@@ -1,0 +1,43 @@
+/* $Id:$ 
+ * Creation : May 27, 2009
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            dvojtise
+ */
+@mainClass "persistence::Main"
+@mainOperation "main"
+
+
+package persistence;
+
+
+require kermeta
+require "platform:/lookup/fr.irisa.triskell.kermeta.ecore/src/kermeta/persistence/EcoreResource.kmt"
+
+
+using kermeta::persistence
+using ecore
+class Main
+{
+	operation main() : Void is do 
+		var rep : EMFRepository init EMFRepository.new
+		var res : Resource 
+		res := rep.getRegisteredEcoreResource("http://www.eclipse.org/emf/2002/Ecore")
+		stdio.writeln(res.size.toString + res.one.toString)
+		var p : ecore::EPackage
+		p ?= res.one 
+		p.eClassifiers.each{c| stdio.writeln(c.name)}
+		
+		
+		var newp : ecore::EPackage init EPackage.new
+		newp.name := "pname"
+		var newclass : EClass init EClass.new
+		newclass.name := "cname"
+		newp.eClassifiers.add(newclass)
+		newclass.eSuperTypes.add(p.eClassifiers.one.asType(ecore::EClass))
+		var res2 : Resource init rep.createResource("platform:/resource/fr.irisa.triskell.kermeta.ecore/test/kmt_testcases/ecore/my.ecore","http://www.eclipse.org/emf/2002/Ecore")
+		res2.add(newp)
+		res2.save
+	end
+}
