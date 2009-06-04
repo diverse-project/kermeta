@@ -46,7 +46,6 @@ import fr.irisa.triskell.kermeta.loader.expression.ExpressionParser;
 import fr.irisa.triskell.kermeta.loader.kmt.KMSymbolOperation;
 import fr.irisa.triskell.kermeta.loader.kmt.KMSymbolParameter;
 import fr.irisa.triskell.kermeta.loader.kmt.KMSymbolProperty;
-import fr.irisa.triskell.kermeta.modelhelper.ClassDefinitionHelper;
 
 /**
  * 
@@ -387,9 +386,10 @@ public class Ecore2KMPass3 extends Ecore2KMPass {
 		// node.getSource() == "http:///org/eclipse/emf/ecore/util/ExtendedMetaData"
 		// used in ecore files generated from xsd
 		else if(node.getSource().equals(KM2Ecore.ANNOTATION_EXTENDEDMETADATA)) {
-			String element = (String) node.getDetails().get(KM2Ecore.ANNOTATION_EXTENDEDMETADATA_KIND);
+			String elementkind = (String) node.getDetails().get(KM2Ecore.ANNOTATION_EXTENDEDMETADATA_KIND);
+			String elementname = (String) node.getDetails().get(KM2Ecore.ANNOTATION_EXTENDEDMETADATA_NAME);
 			EStructuralFeature prop = (EStructuralFeature)node.getEModelElement();
-			if (element != null && element.equals("element") && prop.isDerived()) {
+			if (elementkind != null && elementkind.equals("element") && prop.isDerived()) {
 				// this is a generated getter for special featuremap
 					//DVK this implementation is probably too simple regarding to EMF use of these annotation 
 					// but I have very few data about how it actually works ...
@@ -401,7 +401,7 @@ public class Ecore2KMPass3 extends Ecore2KMPass {
 				String groupId = (String) node.getDetails().get(KM2Ecore.ANNOTATION_EXTENDEDMETADATA_GROUP);
 				if(groupId != null){
 					// this property belong to a specific group
-					// retreive it and use it for this feature
+					// retrieve it and use it for this feature
 					EClass containerClass =(EClass)prop.eContainer();
 					Iterator<EAttribute> attIt = containerClass.getEAttributes().iterator();
 					while(attIt.hasNext()){
@@ -428,7 +428,7 @@ public class Ecore2KMPass3 extends Ecore2KMPass {
 				String body = //"kermeta::standard::OrderedSet<Docbook::BookType>.new"
 					"do result := " +collection+ "<" +typeName+ ">.new" +
 "			self." +group+ ".each{fme |"+ 
-"				if fme.eStructuralFeatureName == \"" +element+ "\" then"+ 
+"				if fme.eStructuralFeatureName == \"" +elementname+ "\" then"+ 
 "					var val : "+typeName+""+
 "					val ?= fme.~value"+
 "					result.add(val) "+

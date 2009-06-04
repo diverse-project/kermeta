@@ -940,7 +940,8 @@ public class KM2KMTPrettyPrinter extends KermetaOptimizedVisitor {
 			else {
 				result += getEmptyDerivedPropertyBody(node, "getter");
 			}
-			if (! node.isIsReadOnly()) {
+			// no setter for readonly or multiplicity > 1
+			if (! node.isIsReadOnly() && node.getUpper() == 1) {
 				result += "\n" + getPrefix() + "setter is ";
 				if (node.getSetterBody() != null) result += this.accept(node.getSetterBody());
 				else {

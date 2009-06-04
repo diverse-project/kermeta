@@ -333,7 +333,6 @@ public class KM2EcorePass2 extends KM2Ecore {
 		// Search the EParameter from previous pass 1, then set its type
 		EParameter newEParameter = getEObjectForParameter(node);
 		
-		EClassifier type = null; 
 		
 		///////////////////////////////////////////////////////////////////////////////////
 		// Return type (it can NOT be null)
@@ -507,7 +506,8 @@ public class KM2EcorePass2 extends KM2Ecore {
 			else
 				getterBody = propertyAccessor(node.getName(), "getter");
 			
-			if (! node.isIsReadOnly()) {
+			// no setter for derived property with multiplicity >1 or that are readonly
+			if (! node.isIsReadOnly() && node.getUpper() == 1) {
 				if (node.getSetterBody() != null)
 					setterBody = (String)new KM2KMTPrettyPrinter().accept(node.getSetterBody());
 				else
@@ -533,7 +533,7 @@ public class KM2EcorePass2 extends KM2Ecore {
 			else {
 				// Set the right part as the operation's type
 				
-				Type currentType = ((FunctionType) propType).getRight();
+				//Type currentType = ((FunctionType) propType).getRight();
 				
 //				if(currentType instanceof C)
 				
