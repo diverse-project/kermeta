@@ -37,8 +37,8 @@ import org.eclipse.emf.ecore.EPackage.Registry;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.URIConverter;
+import org.eclipse.emf.ecore.resource.impl.ExtensibleURIConverterImpl;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
-import org.eclipse.emf.ecore.resource.impl.URIConverterImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.xmi.XMLResource;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
@@ -143,7 +143,7 @@ public class EMFRuntimeUnit extends RuntimeUnit {
     {
     	URI u = URI.createURI(uri);
     	if (u.isRelative()) {
-    		URIConverter c = new URIConverterImpl();
+    		URIConverter c = new ExtensibleURIConverterImpl();
     		u = u.resolve(c.normalize(URI.createURI(rel_path)));    			
     	}
     	return u;
@@ -197,90 +197,100 @@ public class EMFRuntimeUnit extends RuntimeUnit {
 	    }
     	return msg;
 	}
-    
+    /**
+     * default way to load the EMF resource
+     * @return
+     * @throws IOException 
+     */
+	protected Resource loadEMFResource(EMFRuntimeUnit unit, RuntimeObject resRO) throws IOException{
+		XMLResource resource=null;
+		// the URI may need some normalisation before loading
+		String normalizedURI = Repository.normalizeUri(unit.getUriAsString(), 
+						resRO.getFactory().getMemory().getUnit(), 
+						resRO.getFactory().getMemory().getInterpreter());
+		// Get URI of the unit correpsonding to the model to be loaded
+		URI u = createURI(normalizedURI);
+		
+		// register the extension of this uri into EMF
+		registerEMFextensionToFactoryMap(normalizedURI);
+		// Special options for uri.map -> mapping platform:/... uris to os-dependent urls.
+		HashMap<String, Boolean> options = new HashMap<String, Boolean>();
+		// reuse the ResourceSet from the repository
+		ResourceSet resourceset = getOrCreateRepositoryResourceSetForResource(resRO);
+		
+		// deal with EPackage Registry : 
+		if(!metamodel_uri.equals("")){
+			// add the metamodel in the resourceSetRegistry in order to make it load correctly
+			Registry reg = resourceset.getPackageRegistry();
+			
+			Resource res = getMetaModelResource();
+			internalLog.debug("nb res for MM = "+findDependentResources(res).size());
+			Iterator<Resource> resListIt = findDependentResources(res).listIterator();
+			while(resListIt.hasNext()){
+				Resource mmRes = resListIt.next();
+				for ( EObject o : mmRes.getContents() ) {
+					if ( o instanceof EPackage ){
+						EMFRegistryHelper.safeRegisterPackages(reg, (EPackage) o);
+						// we also need to ensure that the future save will reuse the same resource, this ensure that we won't have ClassCast exception
+						// because the object have been created from 2 different MM resource
+						// so we store this metamodel resource in the interpreter memory
+						EMFRegistryHelper.safeRegisterPackages(getRuntimeMemory().interpreterEPackageRegistry, (EPackage) o);
+					}
+				}
+			}
+			
+		}
+		// If EMF Diagnostic is enabled
+    	if(ENABLE_EMF_DIAGNOSTIC)
+    	{
+	    	String msg = "EMF current URI_MAP entries :\n";
+	    	for (Object o : ExtensibleURIConverterImpl.URI_MAP.entrySet())
+	    		msg += "    "+o + "; \n";
+	    	InterpreterPlugin.internalLog.debug(msg);
+	    	//options.put(XMLResource.OPTION_EXTENDED_META_DATA, Boolean.TRUE);
+    		// allow to record unknwon feature
+    		options.put(XMLResource.OPTION_RECORD_UNKNOWN_FEATURE, Boolean.TRUE);
+    	}
+    	else
+    		options.put(XMLResource.NIL, Boolean.TRUE);
+    	
+    	
+    	// Try to get emf resource from resource RO
+    	resource = (XMLResource) resRO.getR2eEmfResource();
+    	
+    	// Try to create the resource specified by "u"
+    	if(resource == null)
+    		resource = 	(XMLResource)resourceset.createResource(u);
+		
+    	if(resource != null){
+			resource.load(options); 
+			if(metamodel_uri.equals("")){
+				// the model was correctly loaded even if the uri was not provided
+				// this mean that the metamodel is a registered package
+				// if we want to save this loaded resource (or save another resource relative to this one) 
+				// then we need to infer the metamodel nsuri
+				metamodel_uri = EcoreHelper.getMetaModelUriFromResource(resource);
+				// mmUri was not set, the load was able to infer it, update the RuntimeObject
+		        resRO.getProperties().put("metaModelURI",
+		        		fr.irisa.triskell.kermeta.runtime.basetypes.String.create(metamodel_uri, resRO.getFactory()));
+		        
+			}
+			
+		}
+		else
+			throwKermetaRaisedExceptionOnLoad(
+			"Not able to create a resource for URI: "+ u + "\n  failing on resource = 	(XMLResource)resourceset.createResource(u);  \n" + logEMFRegistryExtensionContent(), null);
+
+		return resource;
+	}
+	
 	public void monitoredLoad(RuntimeObject resRO, IProgressMonitor monitor){
 		String emf_msg = "";
     	EMFRuntimeUnit unit = this;
-    	XMLResource resource=null;
+    	Resource resource=null;
 		monitor.beginTask("Loading " + unit.getUriAsString(), IProgressMonitor.UNKNOWN);
 		try {
-			// the URI may need some normalisation before loading
-			String normalizedURI = Repository.normalizeUri(unit.getUriAsString(), 
-							resRO.getFactory().getMemory().getUnit(), 
-							resRO.getFactory().getMemory().getInterpreter());
-			// Get URI of the unit correpsonding to the model to be loaded
-			URI u = createURI(normalizedURI);
-			
-			// register the extension of this uri into EMF
-			registerEMFextensionToFactoryMap(normalizedURI);
-			// Special options for uri.map -> mapping platform:/... uris to os-dependent urls.
-			HashMap<String, Boolean> options = new HashMap<String, Boolean>();
-			// reuse the ResourceSet from the repository
-			ResourceSet resourceset = getOrCreateRepositoryResourceSetForResource(resRO);
-			
-			// deal with EPackage Registry
-			if(!metamodel_uri.equals("")){
-				// add the metamodel in the resourceSetRegistry in order to make it load correctly
-				Registry reg = resourceset.getPackageRegistry();
-				
-				Resource res = getMetaModelResource();
-				internalLog.debug("nb res for MM = "+findDependentResources(res).size());
-				Iterator<Resource> resListIt = findDependentResources(res).listIterator();
-				while(resListIt.hasNext()){
-					Resource mmRes = resListIt.next();
-					for ( EObject o : mmRes.getContents() ) {
-						if ( o instanceof EPackage ){
-							EMFRegistryHelper.safeRegisterPackages(reg, (EPackage) o);
-							// we also need to ensure that the future save will reuse the same resource, this ensure that we won't have ClassCast exception
-							// because the object have been created from 2 different MM resource
-							// so we store this metamodel resource in the interpreter memory
-							EMFRegistryHelper.safeRegisterPackages(getRuntimeMemory().interpreterEPackageRegistry, (EPackage) o);
-						}
-					}
-				}
-				
-			}
-			// If EMF Diagnostic is enabled
-	    	if(ENABLE_EMF_DIAGNOSTIC)
-	    	{
-		    	String msg = "EMF current URI_MAP entries :\n";
-		    	for (Object o : URIConverterImpl.URI_MAP.entrySet())
-		    		msg += "    "+o + "; \n";
-		    	InterpreterPlugin.internalLog.debug(msg);
-		    	//options.put(XMLResource.OPTION_EXTENDED_META_DATA, Boolean.TRUE);
-	    		// allow to record unknwon feature
-	    		options.put(XMLResource.OPTION_RECORD_UNKNOWN_FEATURE, Boolean.TRUE);
-	    	}
-	    	else
-	    		options.put(XMLResource.NIL, Boolean.TRUE);
-	    	
-	    	
-	    	// Try to get emf resource from resource RO
-	    	resource = (XMLResource) resRO.getR2eEmfResource();
-	    	
-	    	// Try to create the resource specified by "u"
-	    	if(resource == null)
-	    		resource = 	(XMLResource)resourceset.createResource(u);
-    		
-	    	if(resource != null){
-    			resource.load(options); 
-    			if(metamodel_uri.equals("")){
-    				// the model was correctly loaded even if the uri was not provided
-    				// this mean that the metamodel is a registered package
-    				// if we want to save this loaded resource (or save another resource relative to this one) 
-    				// then we need to infer the metamodel nsuri
-    				metamodel_uri = EcoreHelper.getMetaModelUriFromResource(resource);
-    				// mmUri was not set, the load was able to infer it, update the RuntimeObject
-    		        resRO.getProperties().put("metaModelURI",
-    		        		fr.irisa.triskell.kermeta.runtime.basetypes.String.create(metamodel_uri, resRO.getFactory()));
-    		        
-    			}
-    			
-    		}
-    		else
-    			throwKermetaRaisedExceptionOnLoad(
-    			"Not able to create a resource for URI: "+ u + "\n  failing on resource = 	(XMLResource)resourceset.createResource(u);  \n" + logEMFRegistryExtensionContent(), null);
-
+			resource = loadEMFResource(unit, resRO);
 			// Now, process the conversion of EMF model into Runtime representation so that kermeta can interprete it.
 	    	EMF2Runtime emf2Runtime = getEMF2Runtime(unit, resource);
 	    	emf2Runtime.monitor = monitor;
@@ -310,9 +320,11 @@ public class EMFRuntimeUnit extends RuntimeUnit {
 					internalLog.error("EMF error diagnostic: "+((Resource.Diagnostic)errorDiag).getMessage());
 				for (Object errorDiag : resource.getWarnings())
 					internalLog.error("EMF warning diagnostic: "+((Resource.Diagnostic)errorDiag).getMessage());
-				Map<EObject, ?> extensionmap = resource.getEObjectToExtensionMap();
-				for (Object o : extensionmap.entrySet())			
-					internalLog.error("EMF reports unknown feature: "+o + "; " + extensionmap.get(o));
+				if(resource instanceof XMLResource){
+				Map<EObject, ?> extensionmap = ((XMLResource) resource).getEObjectToExtensionMap();
+					for (Object o : extensionmap.entrySet())			
+						internalLog.error("EMF reports unknown feature: "+o + "; " + extensionmap.get(o));
+				}
 			}
 		}
 		monitor.done();
