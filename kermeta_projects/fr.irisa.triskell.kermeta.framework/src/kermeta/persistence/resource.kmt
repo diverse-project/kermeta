@@ -198,7 +198,7 @@ abstract class Resource inherits kermeta::standard::Set<Object>
 		
 	/**
 	 * Return a normalized version of the Uri of this resource
-	 * in order to prevent several loading of the same file because they have diffent path that leads to them, kermeta uses normalizedURI
+	 * in order to prevent several loading of the same file because they have different path that leads to them, kermeta uses normalizedURI
 	 * for some of its functions (eg. repository.getResource )
 	 * As EMF needs URI of the form platform:/resource or platform:/plugin, kermeta automatically
 	 * normalize the uri when loading or saving. This is especially true for file:/ uri or relative uri (./ or / ) 
