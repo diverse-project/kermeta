@@ -189,22 +189,10 @@ public class Interpreter {
 				_kermetaUnit.setTypeChecked(true);
 			}
 		} catch (NotRegisteredURIException e) {
-			if(_outputStream != null){ 
-				_outputStream.print(e.getMessage()+"/n");
-				_outputStream.flush();
-			}
 			e.printStackTrace();
 		} catch (URIMalformedException e) {
-			if(_outputStream != null){ 
-				_outputStream.print(e.getMessage()+"/n");
-				_outputStream.flush();
-			}
 			e.printStackTrace();
 		} catch (IOException e) {
-			if(_outputStream != null){ 
-				_outputStream.print(e.getMessage()+"/n");
-				_outputStream.flush();
-			}
 			e.printStackTrace();
 		}
 	}
