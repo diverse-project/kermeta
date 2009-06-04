@@ -134,7 +134,13 @@
 					This file contains an experimental transformation class that allows to produce the 
 					text of a dot file for producing a graphical representation of the ecore model. 
         		</simpara></listitem>
-      		</varlistentry>            		 
+      		</varlistentry>  
+      		<varlistentry>
+        		<term><emphasis role="strong"><filename role="strong">require "platform:/plugin/fr.irisa.triskell.kermeta.ecore/src/kermeta/persistence/EcoreResource.kmt"</filename></emphasis></term>
+        		<listitem><simpara>       			
+					This file adds some capabilities to the EMFRepository in order to support RegisteredEcoreResource. This kind of Resource allows to load an ecore model from Eclipse registry. Note that his resource is readonly, changes in this won't be saved. 
+        		</simpara></listitem>
+      		</varlistentry>          		 
 		</variablelist>
     </section>
     <section>
