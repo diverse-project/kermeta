@@ -25,6 +25,7 @@
   </extension>
   <extension
         id="kpmBuilder"
+        name="Kpm Builder"
         point="org.eclipse.core.resources.builders">
      <builder
            callOnEmptyDelta="false"
