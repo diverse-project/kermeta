@@ -1,0 +1,89 @@
+/* $Id:$ 
+ * Creation : June 3, 2009
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            dvojtise
+ */
+
+
+
+package Docbook;
+
+
+require kermeta
+require "platform:/lookup/org.kermeta.docbook/model/Docbook.kmt"
+require "../../ecore/DocbookPrinter.kmt"
+
+using kermeta::standard
+using kermeta::utils
+
+/** this aspect adds docbook standard syntax printing capability to this class
+ */
+aspect class DocumentRoot
+{
+	operation printDbk() : String is do 
+		var res : StringBuffer init StringBuffer.new
+		stdio.writeln("DocumentRoot.book.size="+self.book.size.toString)
+		/* self.book.each{ bk | 
+			res.append(bk.printDbk)
+		}
+		stdio.writeln("DocumentRoot.chapter.size="+self.chapter.size.toString)
+		self.book.each{ chap | 
+			res.append(chap.printDbk)
+		} */
+		stdio.writeln("DocumentRoot.mixed.size="+self.mixed.size.toString)
+		self.mixed.each{ mx | 
+			res.append(mx.printDbk)
+		}
+		result := res.toString
+	end
+}
+/** this aspect adds docbook standard syntax printing capability to this class
+ */
+aspect class BookType
+{
+	operation printDbk() : String is do 
+		var res : StringBuffer init StringBuffer.new
+		res.append("<book>")
+		/* stdio.writeln(self.book.size.toString)*/
+		self.chapter.each{ chap | 
+			res.append(chap.printDbk)
+		}
+		res.append("</book>\n")
+		result := res.toString
+	end
+}
+
+/** this aspect adds docbook standard syntax printing capability to this class
+ */
+aspect class ChapterType
+{
+	operation printDbk() : String is do 
+		var res : StringBuffer init StringBuffer.new
+		res.append("<chapter>")
+		/* stdio.writeln(self.book.size.toString)*/
+		res.append(title.printDbk)
+		res.append("</chapter>\n")
+		result := res.toString
+	end
+}
+
+/** this aspect adds docbook standard syntax printing capability to this class
+ */
+aspect class TitleType
+{
+	operation printDbk() : String is do 
+		var res : StringBuffer init StringBuffer.new
+		res.append("<title>")
+		self.mixed.each{ mx | 
+			res.append(mx.printDbk)
+		}
+		/* stdio.writeln(self.book.size.toString)*/
+		/*self.title.each{ tit | 
+			res.append(tit.printDbk)
+		}*/
+		res.append("</title>\n")
+		result := res.toString
+	end
+}

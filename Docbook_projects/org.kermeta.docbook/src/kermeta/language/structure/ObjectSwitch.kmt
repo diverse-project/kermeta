@@ -1,0 +1,64 @@
+/* $Id:$ 
+ * Creation : June 3, 2009
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            dvojtise
+ */
+
+
+package kermeta;
+
+
+require kermeta
+
+using kermeta::standard
+using kermeta::utils
+package language{
+	package structure {
+		/** this aspect adds a switch operation on object
+		 */
+		aspect class Object
+		{
+			/** given a boolean expression will run the asociated action
+			 * Warning: currently the order might not be enforced (hashtable !) so all boolean expression must be exclusive
+			 */ 
+			operation switch( expressionToActionMap : OrderedSet<ConditionalAction>) : Void is do 
+				var res : Boolean init  false
+				from var it : Iterator<ConditionalAction> init expressionToActionMap.iterator
+				until it.isOff or res
+				loop
+					stdio.writeln("trying conditionalAction ")
+			
+					res := it.next.conditionalRun(self) 
+				end
+			end
+		}
+	}
+}
+package utils {
+	class ConditionalAction{
+		reference condition : <Object -> Boolean>
+		reference action : <Object -> Void>
+		operation initialize(theCondition : <Object -> Boolean>, theAction : <Object -> Void>) : ConditionalAction is do
+			
+			self.condition := theCondition
+			self.action := theAction
+			result := self
+		end
+		
+		operation conditionalRun(anObject : Object) : Boolean is do
+			
+			// due to a kermeta bu, calling a function must be stored ina variable and not in a reference
+			var localCond : <Object -> Boolean> init condition
+			var localAction : <Object -> Void> init action
+			
+			if localCond(anObject) then
+				localAction(anObject)
+				result := true
+			else
+				result := false
+			end
+		end
+	}
+}

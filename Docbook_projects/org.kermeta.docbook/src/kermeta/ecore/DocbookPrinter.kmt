@@ -1,0 +1,50 @@
+/* $Id:$ 
+ * Creation : June 3, 2009
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            dvojtise
+ */
+
+
+
+package kermeta::ecore;
+
+
+require kermeta
+require "../Docbook/prettyprinters/DocbookPrinter.kmt"
+require "../language/structure/ObjectSwitch.kmt"
+using kermeta::standard
+using kermeta::utils
+
+aspect class EFeatureMapEntry
+{
+	operation printDbk() : String is do 
+		var res : String
+		var switchActionSet : OrderedSet<ConditionalAction> 
+			init OrderedSet<kermeta::utils::ConditionalAction>.new
+		//var 
+		switchActionSet.add(kermeta::utils::ConditionalAction.new.initialize(
+			function {o : Object |o.isInstanceOf(Docbook::BookType)}, 
+			function {o : Object |res := o.asType(Docbook::BookType).printDbk
+								  void}
+		))
+		switchActionSet.add(kermeta::utils::ConditionalAction.new.initialize(
+			function {o : Object |o.isInstanceOf(Docbook::ChapterType)}, 
+			function {o : Object |res := o.asType(Docbook::ChapterType).printDbk
+								  void}
+		))
+		switchActionSet.add(kermeta::utils::ConditionalAction.new.initialize(
+			function {o : Object |stdio.writeln("cond1") true}, 
+			function {o : Object |res := self.eStructuralFeatureName + " = " + o.toString
+								  void}
+		))
+		stdio.writeln("launching switch")
+		~value.switch(switchActionSet)
+						/*	{o|true}, 
+							{o|stdio.writeln(o.toString)}))*/
+		/*if ~value.isInstanceOf(Docbook::BookType) then
+		end */
+		result := res
+	end
+}

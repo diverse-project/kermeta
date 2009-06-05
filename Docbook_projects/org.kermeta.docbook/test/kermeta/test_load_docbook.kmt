@@ -1,0 +1,46 @@
+@mainClass "docbooktest::Main"
+@mainOperation "main"
+
+
+package docbooktest;
+
+
+require kermeta
+require "../../src/kermeta/Docbook/prettyprinters/DocbookPrinter.kmt"
+//require "../../model/Docbook.kmt"
+//require "http://www.kermeta.org/docbook/1_0//Docbook"
+
+using kermeta::standard
+using kermeta::persistence
+using Docbook
+
+class Main
+{
+	reference repository : EMFRepository
+	reference docbookMetamodel : String
+	
+    operation main() : Void is do 
+    	repository := EMFRepository.new
+    	docbookMetamodel := "platform:/plugin/org.kermeta.docbook/model/Docbook.ecore"
+    	stdio.writeln("begin")
+        var inputModel : Sequence<DocumentRoot> init loadDocbookModel(repository, 
+        							"../../model/xsd/sample_xml/KerMeta-Manual.docbook")
+        inputModel.each{ dRoot | 
+            stdio.writeln(dRoot.printDbk)
+        }
+        stdio.writeln("end")
+    end
+    
+    /** load a Docbook model */
+    operation loadDocbookModel(repository : EMFRepository, modelUri : String) : Sequence<DocumentRoot> is do
+    	var resource : Resource init repository.createResource(modelUri , docbookMetamodel)
+    	resource.load
+    	
+    	stdio.writeln("resource size="+resource.size.toString)
+    	
+    	// retreives only the DocumentRoot
+    	var pack : DocumentRoot
+    	result := resource.select { e | DocumentRoot.isInstance(e) }.collect{p | pack ?= p}
+    	
+    end
+}
