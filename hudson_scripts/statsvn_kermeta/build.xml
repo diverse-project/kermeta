@@ -1,0 +1,49 @@
+<!-- $Id: statsvn_build.xml,v 1.10 2008-08-01 10:24:29 dvojtise Exp $ -->
+<project name="Build StatSVN" default="all" basedir=".">
+	<description>
+       
+	</description>
+	
+	<property name="statsvn.jar" location="/udd/triskell/bin/multiplatform/statsvn-0.5.0/statsvn.jar"/>
+	<property name="notes.txt" location="/tmp/kermeta_build/src/plugins/fr.irisa.triskell.kermeta.site/scripts/html/report-notes.txt"/>
+	<property name="svn.log" location="/tmp/kermeta_build/statsvn/logfile.log"/>
+	<property name="output.dir" location="statsvn"/>
+        
+	
+	<target name="all">
+		<antcall target="stats"/>
+		<antcall target="patch_gforge_cvsweb_links"/>
+	</target>
+	<target name="dummy">
+	</target>
+	<target name="checkout_log">
+		<!-- <cvs output="${cvs.log}">
+			<commandline>
+				<argument line="log src"/>
+			</commandline>
+		</cvs> -->
+	</target>
+ 	<target name="stats"> 
+ 		<taskdef name="statsvn" classname="net.sf.statsvn.ant.StatSvnTask" classpath="${statsvn.jar}" />
+        <statcvs log="${svn.log}" 
+        	path="." 
+        	title="Kermeta"
+            outputDir="${output.dir}" 
+            notes="${notes.txt}" 
+            viewcvs="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/" 
+            exclude="**/*.xmi;**/*.km;**/*.ecore;**/*.uml;**/*.traceability;**/*.smap;**/*.genmodel;**/*.ecoredi;**/*.umldi;**/fr.irisa.triskell.kermeta.parser.gen.*/*;**/build/java/**;**/migrationv032_v040/ast/**;kermeta_projects/org.kermeta.framework.compiled/**"
+            tags="(V|v|KERMETA_V|Kermeta_v).*"/>
+    </target>
+    <target name="patch_gforge_cvsweb_links">
+        <replace dir="${output.dir}" >
+            <include name="**/*.html"/>
+            <replacetoken><![CDATA[" class="webrepository"]]></replacetoken>
+            <replacevalue><![CDATA[&amp;f=h&amp;cvsroot=kermeta" class="webrepository"]]></replacevalue>
+        </replace>
+    	<replace dir="${output.dir}" >
+            <include name="**/*.html"/>
+            <replacetoken><![CDATA[vnd.viewcvs-markup"]]></replacetoken>
+            <replacevalue><![CDATA[vnd.viewcvs-markup&amp;cvsroot=kermeta"]]></replacevalue>
+        </replace>
+    </target>
+</project>
