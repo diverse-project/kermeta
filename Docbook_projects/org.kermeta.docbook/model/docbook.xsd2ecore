@@ -1,0 +1,421 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd2ecore:XSD2EcoreMappingRoot xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsd2ecore="http://www.eclipse.org/emf/2002/XSD2Ecore" inputs="xsd/docbook.xsd#/"
+    outputs="Docbook.ecore#/" topToBottom="true">
+  <nested inputs="bundleentry://395/cache/www.w3.org/2001/XMLSchema.xsd#//NCName;XSDSimpleTypeDefinition=36"
+      outputs="http://www.eclipse.org/emf/2003/XMLType#//NCName"/>
+  <nested inputs="xsd/docbook.xsd#//emphasis;XSDElementDeclaration=28/XSDComplexTypeDefinition"
+      outputs="Docbook.ecore#//EmphasisType">
+    <nested inputs="xsd/docbook.xsd#//emphasis;XSDElementDeclaration=28/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle"
+        outputs="Docbook.ecore#//EmphasisType/emphasis"/>
+    <nested inputs="xsd/docbook.xsd#//emphasis;XSDElementDeclaration=28/XSDComplexTypeDefinition/XSDAttributeUse"
+        outputs="Docbook.ecore#//EmphasisType/role"/>
+  </nested>
+  <nested inputs="bundleentry://395/cache/www.w3.org/2001/XMLSchema.xsd#//anyURI;XSDSimpleTypeDefinition=25"
+      outputs="http://www.eclipse.org/emf/2003/XMLType#//AnyURI"/>
+  <nested inputs="xsd/docbook.xsd#//literal;XSDElementDeclaration=39/XSDComplexTypeDefinition"
+      outputs="Docbook.ecore#//LiteralType">
+    <nested inputs="xsd/docbook.xsd#//literal;XSDElementDeclaration=39/XSDComplexTypeDefinition/XSDAttributeUse"
+        outputs="Docbook.ecore#//LiteralType/moreinfo"/>
+  </nested>
+  <nested inputs="bundleentry://395/cache/www.w3.org/2001/MagicXMLSchema.xsd#//anySimpleType;XSDSimpleTypeDefinition=1"
+      outputs="http://www.eclipse.org/emf/2003/XMLType#//AnySimpleType"/>
+  <nested inputs="xsd/docbook.xsd#//ulink;XSDElementDeclaration=27/XSDComplexTypeDefinition"
+      outputs="Docbook.ecore#//UlinkType">
+    <nested inputs="xsd/docbook.xsd#//ulink;XSDElementDeclaration=27/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle"
+        outputs="Docbook.ecore#//UlinkType/emphasis"/>
+    <nested inputs="xsd/docbook.xsd#//ulink;XSDElementDeclaration=27/XSDComplexTypeDefinition/XSDAttributeUse"
+        outputs="Docbook.ecore#//UlinkType/type"/>
+    <nested inputs="xsd/docbook.xsd#//ulink;XSDElementDeclaration=27/XSDComplexTypeDefinition/XSDAttributeUse=1"
+        outputs="Docbook.ecore#//UlinkType/url"/>
+  </nested>
+  <nested inputs="xsd/docbook.xsd#//footnote;XSDElementDeclaration=25/XSDComplexTypeDefinition"
+      outputs="Docbook.ecore#//FootnoteType">
+    <nested inputs="xsd/docbook.xsd#//footnote;XSDElementDeclaration=25/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle"
+        outputs="Docbook.ecore#//FootnoteType/para"/>
+    <nested inputs="xsd/docbook.xsd#//footnote;XSDElementDeclaration=25/XSDComplexTypeDefinition/XSDAttributeUse"
+        outputs="Docbook.ecore#//FootnoteType/id"/>
+  </nested>
+  <nested inputs="bundleentry://395/cache/www.w3.org/2001/XMLSchema.xsd#//NMTOKEN;XSDSimpleTypeDefinition=33"
+      outputs="http://www.eclipse.org/emf/2003/XMLType#//NMTOKEN"/>
+  <nested inputs="xsd/docbook.xsd#//link;XSDElementDeclaration=26/XSDComplexTypeDefinition"
+      outputs="Docbook.ecore#//LinkType">
+    <nested inputs="xsd/docbook.xsd#//link;XSDElementDeclaration=26/XSDComplexTypeDefinition/XSDAttributeUse"
+        outputs="Docbook.ecore#//LinkType/linkend"/>
+  </nested>
+  <nested inputs="xsd/docbook.xsd#//para;XSDElementDeclaration=24/XSDComplexTypeDefinition"
+      outputs="Docbook.ecore#//ParaType">
+    <nested inputs="xsd/docbook.xsd#//para;XSDElementDeclaration=24/XSDComplexTypeDefinition/XSDParticle"
+        outputs="Docbook.ecore#//ParaType/group"/>
+    <nested inputs="xsd/docbook.xsd#//para;XSDElementDeclaration=24/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle"
+        outputs="Docbook.ecore#//ParaType/emphasis"/>
+    <nested inputs="xsd/docbook.xsd#//para;XSDElementDeclaration=24/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle=1"
+        outputs="Docbook.ecore#//ParaType/literal"/>
+    <nested inputs="xsd/docbook.xsd#//para;XSDElementDeclaration=24/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle=2"
+        outputs="Docbook.ecore#//ParaType/ulink"/>
+    <nested inputs="xsd/docbook.xsd#//para;XSDElementDeclaration=24/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle=3"
+        outputs="Docbook.ecore#//ParaType/footnote"/>
+    <nested inputs="xsd/docbook.xsd#//para;XSDElementDeclaration=24/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle=4"
+        outputs="Docbook.ecore#//ParaType/link"/>
+    <nested inputs="xsd/docbook.xsd#//para;XSDElementDeclaration=24/XSDComplexTypeDefinition/XSDAttributeUse"
+        outputs="Docbook.ecore#//ParaType/role"/>
+  </nested>
+  <nested inputs="xsd/docbook.xsd#//abstract;XSDElementDeclaration=10/XSDComplexTypeDefinition"
+      outputs="Docbook.ecore#//AbstractType">
+    <nested inputs="xsd/docbook.xsd#//abstract;XSDElementDeclaration=10/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle"
+        outputs="Docbook.ecore#//AbstractType/para"/>
+  </nested>
+  <nested inputs="xsd/docbook.xsd#//abstract;XSDElementDeclaration=10" outputs="Docbook.ecore#//DocumentRoot/abstract"/>
+  <nested inputs="xsd/docbook.xsd#//otheraddr;XSDElementDeclaration=15/XSDComplexTypeDefinition"
+      outputs="Docbook.ecore#//OtheraddrType">
+    <nested inputs="xsd/docbook.xsd#//otheraddr;XSDElementDeclaration=15/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle"
+        outputs="Docbook.ecore#//OtheraddrType/ulink"/>
+  </nested>
+  <nested inputs="xsd/docbook.xsd#//address;XSDElementDeclaration=13/XSDComplexTypeDefinition"
+      outputs="Docbook.ecore#//AddressType">
+    <nested inputs="xsd/docbook.xsd#//address;XSDElementDeclaration=13/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle"
+        outputs="Docbook.ecore#//AddressType/state"/>
+    <nested inputs="xsd/docbook.xsd#//address;XSDElementDeclaration=13/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle=1"
+        outputs="Docbook.ecore#//AddressType/otheraddr"/>
+    <nested inputs="xsd/docbook.xsd#//address;XSDElementDeclaration=13/XSDComplexTypeDefinition/XSDAttributeUse"
+        outputs="Docbook.ecore#//AddressType/format"/>
+  </nested>
+  <nested inputs="xsd/docbook.xsd#//address;XSDElementDeclaration=13" outputs="Docbook.ecore#//DocumentRoot/address"/>
+  <nested inputs="bundleentry://395/cache/www.w3.org/2001/XMLSchema.xsd#//string;XSDSimpleTypeDefinition=9"
+      outputs="http://www.eclipse.org/emf/2003/XMLType#//String"/>
+  <nested inputs="xsd/docbook.xsd#//author;XSDElementDeclaration=3/XSDComplexTypeDefinition"
+      outputs="Docbook.ecore#//AuthorType">
+    <nested inputs="xsd/docbook.xsd#//author;XSDElementDeclaration=3/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle"
+        outputs="Docbook.ecore#//AuthorType/firstname"/>
+  </nested>
+  <nested inputs="xsd/docbook.xsd#//author;XSDElementDeclaration=3" outputs="Docbook.ecore#//DocumentRoot/author"/>
+  <nested inputs="xsd/docbook.xsd#//bibliomisc;XSDElementDeclaration=5" outputs="Docbook.ecore#//DocumentRoot/bibliomisc"/>
+  <nested inputs="xsd/docbook.xsd#//phrase;XSDElementDeclaration=38/XSDComplexTypeDefinition"
+      outputs="Docbook.ecore#//PhraseType">
+    <nested inputs="xsd/docbook.xsd#//phrase;XSDElementDeclaration=38/XSDComplexTypeDefinition/XSDAttributeUse"
+        outputs="Docbook.ecore#//PhraseType/id"/>
+  </nested>
+  <nested inputs="xsd/docbook.xsd#//title;XSDElementDeclaration=23/XSDComplexTypeDefinition"
+      outputs="Docbook.ecore#//TitleType">
+    <nested inputs="xsd/docbook.xsd#//title;XSDElementDeclaration=23/XSDComplexTypeDefinition/XSDParticle"
+        outputs="Docbook.ecore#//TitleType/group"/>
+    <nested inputs="xsd/docbook.xsd#//title;XSDElementDeclaration=23/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle"
+        outputs="Docbook.ecore#//TitleType/emphasis"/>
+    <nested inputs="xsd/docbook.xsd#//title;XSDElementDeclaration=23/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle=1"
+        outputs="Docbook.ecore#//TitleType/phrase"/>
+  </nested>
+  <nested inputs="xsd/docbook.xsd#//keywordset;XSDElementDeclaration=7/XSDComplexTypeDefinition"
+      outputs="Docbook.ecore#//KeywordsetType">
+    <nested inputs="xsd/docbook.xsd#//keywordset;XSDElementDeclaration=7/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle"
+        outputs="Docbook.ecore#//KeywordsetType/keyword"/>
+  </nested>
+  <nested inputs="xsd/docbook.xsd#//publisher;XSDElementDeclaration=11/XSDComplexTypeDefinition"
+      outputs="Docbook.ecore#//PublisherType">
+    <nested inputs="xsd/docbook.xsd#//publisher;XSDElementDeclaration=11/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle"
+        outputs="Docbook.ecore#//PublisherType/publishername"/>
+    <nested inputs="xsd/docbook.xsd#//publisher;XSDElementDeclaration=11/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle=1"
+        outputs="Docbook.ecore#//PublisherType/address"/>
+  </nested>
+  <nested inputs="xsd/docbook.xsd#//confgroup;XSDElementDeclaration=16/XSDComplexTypeDefinition"
+      outputs="Docbook.ecore#//ConfgroupType">
+    <nested inputs="xsd/docbook.xsd#//confgroup;XSDElementDeclaration=16/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle"
+        outputs="Docbook.ecore#//ConfgroupType/conftitle"/>
+    <nested inputs="xsd/docbook.xsd#//confgroup;XSDElementDeclaration=16/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle=1"
+        outputs="Docbook.ecore#//ConfgroupType/confnum"/>
+    <nested inputs="xsd/docbook.xsd#//confgroup;XSDElementDeclaration=16/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle=2"
+        outputs="Docbook.ecore#//ConfgroupType/confsponsor"/>
+  </nested>
+  <nested inputs="xsd/docbook.xsd#//bookinfo;XSDElementDeclaration=1/XSDComplexTypeDefinition"
+      outputs="Docbook.ecore#//BookinfoType">
+    <nested inputs="xsd/docbook.xsd#//bookinfo;XSDElementDeclaration=1/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle"
+        outputs="Docbook.ecore#//BookinfoType/pubdate"/>
+    <nested inputs="xsd/docbook.xsd#//bookinfo;XSDElementDeclaration=1/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle=1"
+        outputs="Docbook.ecore#//BookinfoType/author"/>
+    <nested inputs="xsd/docbook.xsd#//bookinfo;XSDElementDeclaration=1/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle=2"
+        outputs="Docbook.ecore#//BookinfoType/title"/>
+    <nested inputs="xsd/docbook.xsd#//bookinfo;XSDElementDeclaration=1/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle=3"
+        outputs="Docbook.ecore#//BookinfoType/group"/>
+    <nested inputs="xsd/docbook.xsd#//bookinfo;XSDElementDeclaration=1/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle=3/XSDModelGroup/XSDParticle"
+        outputs="Docbook.ecore#//BookinfoType/bibliomisc"/>
+    <nested inputs="xsd/docbook.xsd#//bookinfo;XSDElementDeclaration=1/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle=3/XSDModelGroup/XSDParticle=1"
+        outputs="Docbook.ecore#//BookinfoType/date"/>
+    <nested inputs="xsd/docbook.xsd#//bookinfo;XSDElementDeclaration=1/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle=3/XSDModelGroup/XSDParticle=2"
+        outputs="Docbook.ecore#//BookinfoType/keywordset"/>
+    <nested inputs="xsd/docbook.xsd#//bookinfo;XSDElementDeclaration=1/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle=3/XSDModelGroup/XSDParticle=3"
+        outputs="Docbook.ecore#//BookinfoType/subtitle"/>
+    <nested inputs="xsd/docbook.xsd#//bookinfo;XSDElementDeclaration=1/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle=4"
+        outputs="Docbook.ecore#//BookinfoType/abstract"/>
+    <nested inputs="xsd/docbook.xsd#//bookinfo;XSDElementDeclaration=1/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle=5"
+        outputs="Docbook.ecore#//BookinfoType/publisher"/>
+    <nested inputs="xsd/docbook.xsd#//bookinfo;XSDElementDeclaration=1/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle=6"
+        outputs="Docbook.ecore#//BookinfoType/confgroup"/>
+  </nested>
+  <nested inputs="xsd/docbook.xsd#//important;XSDElementDeclaration=21/XSDComplexTypeDefinition"
+      outputs="Docbook.ecore#//ImportantType">
+    <nested inputs="xsd/docbook.xsd#//important;XSDElementDeclaration=21/XSDComplexTypeDefinition/XSDParticle"
+        outputs="Docbook.ecore#//ImportantType/group"/>
+    <nested inputs="xsd/docbook.xsd#//important;XSDElementDeclaration=21/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle"
+        outputs="Docbook.ecore#//ImportantType/emphasis"/>
+    <nested inputs="xsd/docbook.xsd#//important;XSDElementDeclaration=21/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle=1"
+        outputs="Docbook.ecore#//ImportantType/ulink"/>
+  </nested>
+  <nested inputs="xsd/docbook.xsd#//tip;XSDElementDeclaration=29/XSDComplexTypeDefinition"
+      outputs="Docbook.ecore#//TipType">
+    <nested inputs="xsd/docbook.xsd#//tip;XSDElementDeclaration=29/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle"
+        outputs="Docbook.ecore#//TipType/ulink"/>
+  </nested>
+  <nested inputs="xsd/docbook.xsd#//preface;XSDElementDeclaration=20/XSDComplexTypeDefinition"
+      outputs="Docbook.ecore#//PrefaceType">
+    <nested inputs="xsd/docbook.xsd#//preface;XSDElementDeclaration=20/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle"
+        outputs="Docbook.ecore#//PrefaceType/title"/>
+    <nested inputs="xsd/docbook.xsd#//preface;XSDElementDeclaration=20/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle=1"
+        outputs="Docbook.ecore#//PrefaceType/para"/>
+    <nested inputs="xsd/docbook.xsd#//preface;XSDElementDeclaration=20/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle=2"
+        outputs="Docbook.ecore#//PrefaceType/important"/>
+    <nested inputs="xsd/docbook.xsd#//preface;XSDElementDeclaration=20/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle=3"
+        outputs="Docbook.ecore#//PrefaceType/tip"/>
+  </nested>
+  <nested inputs="xsd/docbook.xsd#//note;XSDElementDeclaration=30/XSDComplexTypeDefinition"
+      outputs="Docbook.ecore#//NoteType">
+    <nested inputs="xsd/docbook.xsd#//note;XSDElementDeclaration=30/XSDComplexTypeDefinition/XSDParticle"
+        outputs="Docbook.ecore#//NoteType/group"/>
+    <nested inputs="xsd/docbook.xsd#//note;XSDElementDeclaration=30/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle"
+        outputs="Docbook.ecore#//NoteType/literal"/>
+    <nested inputs="xsd/docbook.xsd#//note;XSDElementDeclaration=30/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle=1"
+        outputs="Docbook.ecore#//NoteType/ulink"/>
+  </nested>
+  <nested inputs="xsd/docbook.xsd#//listitem;XSDElementDeclaration=41/XSDComplexTypeDefinition"
+      outputs="Docbook.ecore#//ListitemType">
+    <nested inputs="xsd/docbook.xsd#//listitem;XSDElementDeclaration=41/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle"
+        outputs="Docbook.ecore#//ListitemType/itemizedlist"/>
+    <nested inputs="xsd/docbook.xsd#//listitem;XSDElementDeclaration=41/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle=1"
+        outputs="Docbook.ecore#//ListitemType/para"/>
+  </nested>
+  <nested inputs="xsd/docbook.xsd#//itemizedlist;XSDElementDeclaration=40/XSDComplexTypeDefinition"
+      outputs="Docbook.ecore#//ItemizedlistType">
+    <nested inputs="xsd/docbook.xsd#//itemizedlist;XSDElementDeclaration=40/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle"
+        outputs="Docbook.ecore#//ItemizedlistType/listitem"/>
+  </nested>
+  <nested inputs="xsd/docbook.xsd#//imagedata;XSDElementDeclaration=50/XSDComplexTypeDefinition"
+      outputs="Docbook.ecore#//ImagedataType">
+    <nested inputs="xsd/docbook.xsd#//imagedata;XSDElementDeclaration=50/XSDComplexTypeDefinition/XSDAttributeUse"
+        outputs="Docbook.ecore#//ImagedataType/depth"/>
+    <nested inputs="xsd/docbook.xsd#//imagedata;XSDElementDeclaration=50/XSDComplexTypeDefinition/XSDAttributeUse=1"
+        outputs="Docbook.ecore#//ImagedataType/fileref"/>
+    <nested inputs="xsd/docbook.xsd#//imagedata;XSDElementDeclaration=50/XSDComplexTypeDefinition/XSDAttributeUse=2"
+        outputs="Docbook.ecore#//ImagedataType/width"/>
+  </nested>
+  <nested inputs="xsd/docbook.xsd#//imageobject;XSDElementDeclaration=49/XSDComplexTypeDefinition"
+      outputs="Docbook.ecore#//ImageobjectType">
+    <nested inputs="xsd/docbook.xsd#//imageobject;XSDElementDeclaration=49/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle"
+        outputs="Docbook.ecore#//ImageobjectType/imagedata"/>
+  </nested>
+  <nested inputs="xsd/docbook.xsd#//mediaobject;XSDElementDeclaration=48/XSDComplexTypeDefinition"
+      outputs="Docbook.ecore#//MediaobjectType">
+    <nested inputs="xsd/docbook.xsd#//mediaobject;XSDElementDeclaration=48/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle"
+        outputs="Docbook.ecore#//MediaobjectType/imageobject"/>
+  </nested>
+  <nested inputs="xsd/docbook.xsd#//programlisting;XSDElementDeclaration=42/XSDComplexTypeDefinition"
+      outputs="Docbook.ecore#//ProgramlistingType">
+    <nested inputs="xsd/docbook.xsd#//programlisting;XSDElementDeclaration=42/XSDComplexTypeDefinition/XSDParticle"
+        outputs="Docbook.ecore#//ProgramlistingType/group"/>
+    <nested inputs="xsd/docbook.xsd#//programlisting;XSDElementDeclaration=42/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle"
+        outputs="Docbook.ecore#//ProgramlistingType/emphasis"/>
+    <nested inputs="xsd/docbook.xsd#//programlisting;XSDElementDeclaration=42/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle=1"
+        outputs="Docbook.ecore#//ProgramlistingType/phrase"/>
+    <nested inputs="xsd/docbook.xsd#//programlisting;XSDElementDeclaration=42/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle=2"
+        outputs="Docbook.ecore#//ProgramlistingType/superscript"/>
+    <nested inputs="xsd/docbook.xsd#//programlisting;XSDElementDeclaration=42/XSDComplexTypeDefinition/XSDAttributeUse"
+        outputs="Docbook.ecore#//ProgramlistingType/format"/>
+  </nested>
+  <nested inputs="bundleentry://395/cache/www.w3.org/2001/XMLSchema.xsd#//integer;XSDSimpleTypeDefinition=40"
+      outputs="http://www.eclipse.org/emf/2003/XMLType#//Integer"/>
+  <nested inputs="xsd/docbook.xsd#//figure;XSDElementDeclaration=32/XSDComplexTypeDefinition"
+      outputs="Docbook.ecore#//FigureType">
+    <nested inputs="xsd/docbook.xsd#//figure;XSDElementDeclaration=32/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle"
+        outputs="Docbook.ecore#//FigureType/title"/>
+    <nested inputs="xsd/docbook.xsd#//figure;XSDElementDeclaration=32/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle=1"
+        outputs="Docbook.ecore#//FigureType/mediaobject"/>
+    <nested inputs="xsd/docbook.xsd#//figure;XSDElementDeclaration=32/XSDComplexTypeDefinition/XSDAttributeUse"
+        outputs="Docbook.ecore#//FigureType/float"/>
+    <nested inputs="xsd/docbook.xsd#//figure;XSDElementDeclaration=32/XSDComplexTypeDefinition/XSDAttributeUse=1"
+        outputs="Docbook.ecore#//FigureType/id"/>
+  </nested>
+  <nested inputs="xsd/docbook.xsd#//colspec;XSDElementDeclaration=45/XSDComplexTypeDefinition"
+      outputs="Docbook.ecore#//ColspecType">
+    <nested inputs="xsd/docbook.xsd#//colspec;XSDElementDeclaration=45/XSDComplexTypeDefinition/XSDAttributeUse"
+        outputs="Docbook.ecore#//ColspecType/colname"/>
+    <nested inputs="xsd/docbook.xsd#//colspec;XSDElementDeclaration=45/XSDComplexTypeDefinition/XSDAttributeUse=1"
+        outputs="Docbook.ecore#//ColspecType/colwidth"/>
+  </nested>
+  <nested inputs="xsd/docbook.xsd#//entry;XSDElementDeclaration=52/XSDComplexTypeDefinition"
+      outputs="Docbook.ecore#//EntryType">
+    <nested inputs="xsd/docbook.xsd#//entry;XSDElementDeclaration=52/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle"
+        outputs="Docbook.ecore#//EntryType/programlisting"/>
+    <nested inputs="xsd/docbook.xsd#//entry;XSDElementDeclaration=52/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle=1"
+        outputs="Docbook.ecore#//EntryType/mediaobject"/>
+    <nested inputs="xsd/docbook.xsd#//entry;XSDElementDeclaration=52/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle=2"
+        outputs="Docbook.ecore#//EntryType/para"/>
+    <nested inputs="xsd/docbook.xsd#//entry;XSDElementDeclaration=52/XSDComplexTypeDefinition/XSDAttributeUse"
+        outputs="Docbook.ecore#//EntryType/align"/>
+    <nested inputs="xsd/docbook.xsd#//entry;XSDElementDeclaration=52/XSDComplexTypeDefinition/XSDAttributeUse=1"
+        outputs="Docbook.ecore#//EntryType/morerows"/>
+    <nested inputs="xsd/docbook.xsd#//entry;XSDElementDeclaration=52/XSDComplexTypeDefinition/XSDAttributeUse=2"
+        outputs="Docbook.ecore#//EntryType/nameend"/>
+    <nested inputs="xsd/docbook.xsd#//entry;XSDElementDeclaration=52/XSDComplexTypeDefinition/XSDAttributeUse=3"
+        outputs="Docbook.ecore#//EntryType/namest"/>
+    <nested inputs="xsd/docbook.xsd#//entry;XSDElementDeclaration=52/XSDComplexTypeDefinition/XSDAttributeUse=4"
+        outputs="Docbook.ecore#//EntryType/valign"/>
+  </nested>
+  <nested inputs="xsd/docbook.xsd#//row;XSDElementDeclaration=51/XSDComplexTypeDefinition"
+      outputs="Docbook.ecore#//RowType">
+    <nested inputs="xsd/docbook.xsd#//row;XSDElementDeclaration=51/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle"
+        outputs="Docbook.ecore#//RowType/entry"/>
+  </nested>
+  <nested inputs="xsd/docbook.xsd#//thead;XSDElementDeclaration=46/XSDComplexTypeDefinition"
+      outputs="Docbook.ecore#//TheadType">
+    <nested inputs="xsd/docbook.xsd#//thead;XSDElementDeclaration=46/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle"
+        outputs="Docbook.ecore#//TheadType/row"/>
+  </nested>
+  <nested inputs="xsd/docbook.xsd#//tbody;XSDElementDeclaration=47/XSDComplexTypeDefinition"
+      outputs="Docbook.ecore#//TbodyType">
+    <nested inputs="xsd/docbook.xsd#//tbody;XSDElementDeclaration=47/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle"
+        outputs="Docbook.ecore#//TbodyType/row"/>
+  </nested>
+  <nested inputs="xsd/docbook.xsd#//tgroup;XSDElementDeclaration=44/XSDComplexTypeDefinition"
+      outputs="Docbook.ecore#//TgroupType">
+    <nested inputs="xsd/docbook.xsd#//tgroup;XSDElementDeclaration=44/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle"
+        outputs="Docbook.ecore#//TgroupType/colspec"/>
+    <nested inputs="xsd/docbook.xsd#//tgroup;XSDElementDeclaration=44/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle=1"
+        outputs="Docbook.ecore#//TgroupType/thead"/>
+    <nested inputs="xsd/docbook.xsd#//tgroup;XSDElementDeclaration=44/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle=2"
+        outputs="Docbook.ecore#//TgroupType/tbody"/>
+    <nested inputs="xsd/docbook.xsd#//tgroup;XSDElementDeclaration=44/XSDComplexTypeDefinition/XSDAttributeUse"
+        outputs="Docbook.ecore#//TgroupType/cols"/>
+  </nested>
+  <nested inputs="xsd/docbook.xsd#//informaltable;XSDElementDeclaration=33/XSDComplexTypeDefinition"
+      outputs="Docbook.ecore#//InformaltableType">
+    <nested inputs="xsd/docbook.xsd#//informaltable;XSDElementDeclaration=33/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle"
+        outputs="Docbook.ecore#//InformaltableType/tgroup"/>
+  </nested>
+  <nested inputs="xsd/docbook.xsd#//orderedlist;XSDElementDeclaration=34/XSDComplexTypeDefinition"
+      outputs="Docbook.ecore#//OrderedlistType">
+    <nested inputs="xsd/docbook.xsd#//orderedlist;XSDElementDeclaration=34/XSDComplexTypeDefinition/XSDAttributeUse"
+        outputs="Docbook.ecore#//OrderedlistType/continuation"/>
+    <nested inputs="xsd/docbook.xsd#//orderedlist;XSDElementDeclaration=34/XSDComplexTypeDefinition/XSDAttributeUse=1"
+        outputs="Docbook.ecore#//OrderedlistType/inheritnum"/>
+  </nested>
+  <nested inputs="xsd/docbook.xsd#//table;XSDElementDeclaration=35/XSDComplexTypeDefinition"
+      outputs="Docbook.ecore#//TableType">
+    <nested inputs="xsd/docbook.xsd#//table;XSDElementDeclaration=35/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle"
+        outputs="Docbook.ecore#//TableType/title"/>
+    <nested inputs="xsd/docbook.xsd#//table;XSDElementDeclaration=35/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle=1"
+        outputs="Docbook.ecore#//TableType/tgroup"/>
+    <nested inputs="xsd/docbook.xsd#//table;XSDElementDeclaration=35/XSDComplexTypeDefinition/XSDAttributeUse"
+        outputs="Docbook.ecore#//TableType/id"/>
+  </nested>
+  <nested inputs="xsd/docbook.xsd#//section;XSDElementDeclaration=31/XSDComplexTypeDefinition"
+      outputs="Docbook.ecore#//SectionType">
+    <nested inputs="xsd/docbook.xsd#//section;XSDElementDeclaration=31/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle"
+        outputs="Docbook.ecore#//SectionType/group"/>
+    <nested inputs="xsd/docbook.xsd#//section;XSDElementDeclaration=31/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle/XSDModelGroup/XSDParticle"
+        outputs="Docbook.ecore#//SectionType/itemizedlist"/>
+    <nested inputs="xsd/docbook.xsd#//section;XSDElementDeclaration=31/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle/XSDModelGroup/XSDParticle=1"
+        outputs="Docbook.ecore#//SectionType/mediaobject"/>
+    <nested inputs="xsd/docbook.xsd#//section;XSDElementDeclaration=31/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle/XSDModelGroup/XSDParticle=2"
+        outputs="Docbook.ecore#//SectionType/note"/>
+    <nested inputs="xsd/docbook.xsd#//section;XSDElementDeclaration=31/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle/XSDModelGroup/XSDParticle=3"
+        outputs="Docbook.ecore#//SectionType/para"/>
+    <nested inputs="xsd/docbook.xsd#//section;XSDElementDeclaration=31/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle/XSDModelGroup/XSDParticle=4"
+        outputs="Docbook.ecore#//SectionType/programlisting"/>
+    <nested inputs="xsd/docbook.xsd#//section;XSDElementDeclaration=31/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle/XSDModelGroup/XSDParticle=5"
+        outputs="Docbook.ecore#//SectionType/section"/>
+    <nested inputs="xsd/docbook.xsd#//section;XSDElementDeclaration=31/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle/XSDModelGroup/XSDParticle=6"
+        outputs="Docbook.ecore#//SectionType/title"/>
+    <nested inputs="xsd/docbook.xsd#//section;XSDElementDeclaration=31/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle/XSDModelGroup/XSDParticle=7"
+        outputs="Docbook.ecore#//SectionType/figure"/>
+    <nested inputs="xsd/docbook.xsd#//section;XSDElementDeclaration=31/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle/XSDModelGroup/XSDParticle=8"
+        outputs="Docbook.ecore#//SectionType/informaltable"/>
+    <nested inputs="xsd/docbook.xsd#//section;XSDElementDeclaration=31/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle/XSDModelGroup/XSDParticle=9"
+        outputs="Docbook.ecore#//SectionType/orderedlist"/>
+    <nested inputs="xsd/docbook.xsd#//section;XSDElementDeclaration=31/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle/XSDModelGroup/XSDParticle=10"
+        outputs="Docbook.ecore#//SectionType/table"/>
+    <nested inputs="xsd/docbook.xsd#//section;XSDElementDeclaration=31/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle/XSDModelGroup/XSDParticle=11"
+        outputs="Docbook.ecore#//SectionType/warning"/>
+    <nested inputs="xsd/docbook.xsd#//section;XSDElementDeclaration=31/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle=1/XSDModelGroup/XSDParticle"
+        outputs="Docbook.ecore#//SectionType/tip"/>
+    <nested inputs="xsd/docbook.xsd#//section;XSDElementDeclaration=31/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle=1/XSDModelGroup/XSDParticle=1"
+        outputs="Docbook.ecore#//SectionType/caution"/>
+  </nested>
+  <nested inputs="xsd/docbook.xsd#//chapter;XSDElementDeclaration=22/XSDComplexTypeDefinition"
+      outputs="Docbook.ecore#//ChapterType">
+    <nested inputs="xsd/docbook.xsd#//chapter;XSDElementDeclaration=22/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle"
+        outputs="Docbook.ecore#//ChapterType/title"/>
+    <nested inputs="xsd/docbook.xsd#//chapter;XSDElementDeclaration=22/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle=1"
+        outputs="Docbook.ecore#//ChapterType/para"/>
+    <nested inputs="xsd/docbook.xsd#//chapter;XSDElementDeclaration=22/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle=2"
+        outputs="Docbook.ecore#//ChapterType/note"/>
+    <nested inputs="xsd/docbook.xsd#//chapter;XSDElementDeclaration=22/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle=3"
+        outputs="Docbook.ecore#//ChapterType/section"/>
+  </nested>
+  <nested inputs="xsd/docbook.xsd#//book;XSDElementDeclaration/XSDComplexTypeDefinition"
+      outputs="Docbook.ecore#//BookType">
+    <nested inputs="xsd/docbook.xsd#//book;XSDElementDeclaration/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle"
+        outputs="Docbook.ecore#//BookType/bookinfo"/>
+    <nested inputs="xsd/docbook.xsd#//book;XSDElementDeclaration/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle=1"
+        outputs="Docbook.ecore#//BookType/preface"/>
+    <nested inputs="xsd/docbook.xsd#//book;XSDElementDeclaration/XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle=2"
+        outputs="Docbook.ecore#//BookType/chapter"/>
+    <nested inputs="xsd/docbook.xsd#//book;XSDElementDeclaration/XSDComplexTypeDefinition/XSDAttributeUse"
+        outputs="Docbook.ecore#//BookType/lang"/>
+  </nested>
+  <nested inputs="xsd/docbook.xsd#//book;XSDElementDeclaration" outputs="Docbook.ecore#//DocumentRoot/book"/>
+  <nested inputs="xsd/docbook.xsd#//bookinfo;XSDElementDeclaration=1" outputs="Docbook.ecore#//DocumentRoot/bookinfo"/>
+  <nested inputs="xsd/docbook.xsd#//caution;XSDElementDeclaration=37" outputs="Docbook.ecore#//DocumentRoot/caution"/>
+  <nested inputs="xsd/docbook.xsd#//chapter;XSDElementDeclaration=22" outputs="Docbook.ecore#//DocumentRoot/chapter"/>
+  <nested inputs="xsd/docbook.xsd#//colspec;XSDElementDeclaration=45" outputs="Docbook.ecore#//DocumentRoot/colspec"/>
+  <nested inputs="xsd/docbook.xsd#//confgroup;XSDElementDeclaration=16" outputs="Docbook.ecore#//DocumentRoot/confgroup"/>
+  <nested inputs="xsd/docbook.xsd#//confnum;XSDElementDeclaration=18" outputs="Docbook.ecore#//DocumentRoot/confnum"/>
+  <nested inputs="xsd/docbook.xsd#//confsponsor;XSDElementDeclaration=19" outputs="Docbook.ecore#//DocumentRoot/confsponsor"/>
+  <nested inputs="xsd/docbook.xsd#//conftitle;XSDElementDeclaration=17" outputs="Docbook.ecore#//DocumentRoot/conftitle"/>
+  <nested inputs="xsd/docbook.xsd#//date;XSDElementDeclaration=6" outputs="Docbook.ecore#//DocumentRoot/date"/>
+  <nested inputs="xsd/docbook.xsd#//emphasis;XSDElementDeclaration=28" outputs="Docbook.ecore#//DocumentRoot/emphasis"/>
+  <nested inputs="xsd/docbook.xsd#//entry;XSDElementDeclaration=52" outputs="Docbook.ecore#//DocumentRoot/entry"/>
+  <nested inputs="xsd/docbook.xsd#//figure;XSDElementDeclaration=32" outputs="Docbook.ecore#//DocumentRoot/figure"/>
+  <nested inputs="xsd/docbook.xsd#//firstname;XSDElementDeclaration=4" outputs="Docbook.ecore#//DocumentRoot/firstname"/>
+  <nested inputs="xsd/docbook.xsd#//footnote;XSDElementDeclaration=25" outputs="Docbook.ecore#//DocumentRoot/footnote"/>
+  <nested inputs="xsd/docbook.xsd#//imagedata;XSDElementDeclaration=50" outputs="Docbook.ecore#//DocumentRoot/imagedata"/>
+  <nested inputs="xsd/docbook.xsd#//imageobject;XSDElementDeclaration=49" outputs="Docbook.ecore#//DocumentRoot/imageobject"/>
+  <nested inputs="xsd/docbook.xsd#//important;XSDElementDeclaration=21" outputs="Docbook.ecore#//DocumentRoot/important"/>
+  <nested inputs="xsd/docbook.xsd#//informaltable;XSDElementDeclaration=33" outputs="Docbook.ecore#//DocumentRoot/informaltable"/>
+  <nested inputs="xsd/docbook.xsd#//itemizedlist;XSDElementDeclaration=40" outputs="Docbook.ecore#//DocumentRoot/itemizedlist"/>
+  <nested inputs="xsd/docbook.xsd#//keyword;XSDElementDeclaration=8" outputs="Docbook.ecore#//DocumentRoot/keyword"/>
+  <nested inputs="xsd/docbook.xsd#//keywordset;XSDElementDeclaration=7" outputs="Docbook.ecore#//DocumentRoot/keywordset"/>
+  <nested inputs="xsd/docbook.xsd#//link;XSDElementDeclaration=26" outputs="Docbook.ecore#//DocumentRoot/link"/>
+  <nested inputs="xsd/docbook.xsd#//listitem;XSDElementDeclaration=41" outputs="Docbook.ecore#//DocumentRoot/listitem"/>
+  <nested inputs="xsd/docbook.xsd#//literal;XSDElementDeclaration=39" outputs="Docbook.ecore#//DocumentRoot/literal"/>
+  <nested inputs="xsd/docbook.xsd#//mediaobject;XSDElementDeclaration=48" outputs="Docbook.ecore#//DocumentRoot/mediaobject"/>
+  <nested inputs="xsd/docbook.xsd#//note;XSDElementDeclaration=30" outputs="Docbook.ecore#//DocumentRoot/note"/>
+  <nested inputs="xsd/docbook.xsd#//orderedlist;XSDElementDeclaration=34" outputs="Docbook.ecore#//DocumentRoot/orderedlist"/>
+  <nested inputs="xsd/docbook.xsd#//otheraddr;XSDElementDeclaration=15" outputs="Docbook.ecore#//DocumentRoot/otheraddr"/>
+  <nested inputs="xsd/docbook.xsd#//para;XSDElementDeclaration=24" outputs="Docbook.ecore#//DocumentRoot/para"/>
+  <nested inputs="xsd/docbook.xsd#//phrase;XSDElementDeclaration=38" outputs="Docbook.ecore#//DocumentRoot/phrase"/>
+  <nested inputs="xsd/docbook.xsd#//preface;XSDElementDeclaration=20" outputs="Docbook.ecore#//DocumentRoot/preface"/>
+  <nested inputs="xsd/docbook.xsd#//programlisting;XSDElementDeclaration=42" outputs="Docbook.ecore#//DocumentRoot/programlisting"/>
+  <nested inputs="xsd/docbook.xsd#//pubdate;XSDElementDeclaration=2" outputs="Docbook.ecore#//DocumentRoot/pubdate"/>
+  <nested inputs="xsd/docbook.xsd#//publisher;XSDElementDeclaration=11" outputs="Docbook.ecore#//DocumentRoot/publisher"/>
+  <nested inputs="xsd/docbook.xsd#//publishername;XSDElementDeclaration=12" outputs="Docbook.ecore#//DocumentRoot/publishername"/>
+  <nested inputs="xsd/docbook.xsd#//row;XSDElementDeclaration=51" outputs="Docbook.ecore#//DocumentRoot/row"/>
+  <nested inputs="xsd/docbook.xsd#//section;XSDElementDeclaration=31" outputs="Docbook.ecore#//DocumentRoot/section"/>
+  <nested inputs="xsd/docbook.xsd#//state;XSDElementDeclaration=14" outputs="Docbook.ecore#//DocumentRoot/state"/>
+  <nested inputs="xsd/docbook.xsd#//subtitle;XSDElementDeclaration=9" outputs="Docbook.ecore#//DocumentRoot/subtitle"/>
+  <nested inputs="xsd/docbook.xsd#//superscript;XSDElementDeclaration=43" outputs="Docbook.ecore#//DocumentRoot/superscript"/>
+  <nested inputs="xsd/docbook.xsd#//table;XSDElementDeclaration=35" outputs="Docbook.ecore#//DocumentRoot/table"/>
+  <nested inputs="xsd/docbook.xsd#//tbody;XSDElementDeclaration=47" outputs="Docbook.ecore#//DocumentRoot/tbody"/>
+  <nested inputs="xsd/docbook.xsd#//tgroup;XSDElementDeclaration=44" outputs="Docbook.ecore#//DocumentRoot/tgroup"/>
+  <nested inputs="xsd/docbook.xsd#//thead;XSDElementDeclaration=46" outputs="Docbook.ecore#//DocumentRoot/thead"/>
+  <nested inputs="xsd/docbook.xsd#//tip;XSDElementDeclaration=29" outputs="Docbook.ecore#//DocumentRoot/tip"/>
+  <nested inputs="xsd/docbook.xsd#//title;XSDElementDeclaration=23" outputs="Docbook.ecore#//DocumentRoot/title"/>
+  <nested inputs="xsd/docbook.xsd#//ulink;XSDElementDeclaration=27" outputs="Docbook.ecore#//DocumentRoot/ulink"/>
+  <nested inputs="xsd/docbook.xsd#//warning;XSDElementDeclaration=36" outputs="Docbook.ecore#//DocumentRoot/warning"/>
+</xsd2ecore:XSD2EcoreMappingRoot>

@@ -1,0 +1,19 @@
+<project name="MetaCore" default="build_xsd" basedir=".">
+	
+	<description>
+        Build file for MetaCore
+    </description>
+
+	<!-- BUILD kermeta MODEL -->
+	<target name="build_xsd">
+		<echo> Generating xsd from instance sample</echo>
+		<java jar="../../Thirdparty/trang-20030619/trang.jar" fork="true">
+			<arg line="sample_xml/KerMeta-Manual.docb.xml docbook.xsd"/>
+		</java>
+
+		
+	</target>
+				
+
+	
+</project>
