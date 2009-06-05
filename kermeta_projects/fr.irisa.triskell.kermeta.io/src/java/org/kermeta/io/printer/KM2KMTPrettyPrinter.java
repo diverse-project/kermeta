@@ -487,6 +487,10 @@ public class KM2KMTPrettyPrinter extends KermetaOptimizedVisitor {
 
 		typedef = false;
 		String result = "";
+		
+		if (node.isIsAspect()) {
+			result += "aspect ";
+		}
 
 		result += ppTags(node);
 		
