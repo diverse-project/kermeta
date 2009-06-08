@@ -42,7 +42,7 @@
 		    <arg value="-title"/>			
 			<arg value="Kermeta"/> 	 			
 		    <arg value="-thread"/>			
-			<arg value="5"/>
+			<arg value="1"/>
 		    <arg value="-exclude"/>			
 			<arg value="**/*.xmi;**/*.km;**/*.ecore;**/*.uml;**/*.traceability;**/*.smap;**/*.genmodel;**/*.ecoredi;**/*.umldi;**/fr.irisa.triskell.kermeta.parser.gen.*/*;**/build/java/**;**/migrationv032_v040/ast/**;kermeta_projects/org.kermeta.framework.compiled/**"/>		
 		    <arg value="-output-dir"/>			
