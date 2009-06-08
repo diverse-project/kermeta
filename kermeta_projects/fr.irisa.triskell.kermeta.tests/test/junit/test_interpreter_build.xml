@@ -1,4 +1,4 @@
-<!-- $Id: test_interpreter_build.xml,v 1.24 2009-02-19 15:33:29 dvojtise Exp $ -->
+<!-- $Id$ -->
 <project name="run interpreter tests" default="all" basedir=".">
 
 	<description>
