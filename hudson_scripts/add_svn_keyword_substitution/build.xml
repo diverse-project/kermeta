@@ -1,0 +1,29 @@
+<!-- $Id: statsvn_build.xml,v 1.10 2008-08-01 10:24:29 dvojtise Exp $ -->
+<project name="fix the keyword substitution in SVN repositor" default="all" basedir=".">
+	<description>
+       
+	</description>
+
+	<target name="all">
+		<antcall target="fix_keyword_substitution"/>
+	</target>
+	<target name="fix_keyword_substitution">
+		<subant target="enforce_keyword_substitution_for_dir" genericantfile="build.xml">
+		      <dirset dir=".." includes="**"/>
+		</subant>
+		
+	</target>
+	<target name="enforce_keyword_substitution_for_dir">
+		
+		<echo>${basedir}</echo>
+		<apply executable="svn" parallel="false" >
+			<env key="SVN_SSH" path="/usr/bin/ssh -i /udd/dvojtise/.ssh/id_rsa_eclipse"/>			
+			<arg value="propset"/>
+			<arg value="svn:keywords"/>
+			<arg value="'Id Author Date'"/>
+			<fileset dir="." includes="*build.xml"/>
+		</apply>
+
+	</target>
+ 	
+</project>
