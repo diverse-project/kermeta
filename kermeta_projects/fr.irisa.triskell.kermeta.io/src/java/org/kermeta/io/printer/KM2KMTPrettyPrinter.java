@@ -620,16 +620,23 @@ public class KM2KMTPrettyPrinter extends KermetaOptimizedVisitor {
 	public Object visitConditional(Conditional node) {
 		String result = "if " + this.accept(node.getCondition()) + " then\n";
 		pushPrefix(); 
-		// Both type of ThenBody and ElseBody are "Block" (see also KMT2KMPrimitiveExpressionBuilder)
+		// Both type of ThenBody and ElseBody are generally "Block" (see also KMT2KMPrimitiveExpressionBuilder)
 		// And block textual syntax is already represented by "then..else..end"
 		alreadyPrefixed = false;
-		if (node.getThenBody() != null) 
-			result += this.ppCRSeparatedNode(((Block)node.getThenBody()).getStatement()) + "\n";
+		if (node.getThenBody() != null) {
+			if(node.getThenBody() instanceof Block)
+				result += this.ppCRSeparatedNode(((Block)node.getThenBody()).getStatement()) + "\n";
+			else
+				result += this.accept(node.getThenBody());
+		}
 		popPrefix();
 		if (node.getElseBody() != null) {
 			result += getPrefix() + "else\n";
 			pushPrefix();
-			result += this.ppCRSeparatedNode(((Block)node.getElseBody()).getStatement()) + "\n";
+			if(node.getThenBody() instanceof Block)
+				result += this.ppCRSeparatedNode(((Block)node.getElseBody()).getStatement()) + "\n";
+			else
+				result += this.accept(node.getElseBody());
 			popPrefix();
 		}
 		result += getPrefix() + "end";
