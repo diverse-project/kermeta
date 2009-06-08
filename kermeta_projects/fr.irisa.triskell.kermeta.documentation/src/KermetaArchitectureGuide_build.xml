@@ -1,4 +1,4 @@
-<!-- $Id: KermetaArchitectureGuide_build.xml,v 1.5 2008-01-29 15:17:21 dvojtise Exp $ -->
+<!-- $Id$ -->
 <project name="KermetaArchitectureGuide" default="all">
 	<!-- configuration properties -->		
 	<!-- project configuration -->
