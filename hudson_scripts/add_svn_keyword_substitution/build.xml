@@ -20,7 +20,7 @@
 			<env key="SVN_SSH" path="/usr/bin/ssh -i /udd/dvojtise/.ssh/kermeta_bot/id_rsa"/>			
 			<arg value="propset"/>
 			<arg value="svn:keywords"/>
-			<arg value="'Id Author Date'"/>
+			<arg value="Id Author Date"/>
 			<fileset dir="." includes="*build.xml"/>
 		</apply>
 		<apply executable="svn" parallel="false" >
