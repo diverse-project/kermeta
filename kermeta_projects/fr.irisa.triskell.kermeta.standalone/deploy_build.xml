@@ -1,4 +1,4 @@
-<!-- $Id: deploy_build.xml,v 1.4 2009-02-02 16:12:33 dvojtise Exp $ -->
+<!-- $Id$ -->
 <project name="kermeta_standalone" default="all" basedir=".">
         
     <description>
