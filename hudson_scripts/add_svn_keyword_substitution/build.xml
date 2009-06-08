@@ -1,4 +1,4 @@
-<!-- $Id: statsvn_build.xml,v 1.10 2008-08-01 10:24:29 dvojtise Exp $ -->
+<!-- $Id$ -->
 <project name="fix the keyword substitution in SVN repositor" default="all" basedir=".">
 	<description>
        
