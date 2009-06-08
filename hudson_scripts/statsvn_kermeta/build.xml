@@ -22,6 +22,11 @@
 				<argument line="log src"/>
 			</commandline>
 		</cvs> -->
+		<exec executable="svn" output="./logfile.log">
+		    <arg value="log"/>
+		    <arg value="-v"/>
+		    <arg value="--xml"/>
+		</exec>
 	</target>
  	<target name="stats"> 
  		<taskdef name="statsvn" classname="net.sf.statsvn.ant.StatSvnTask" classpath="${statsvn.jar}" />
