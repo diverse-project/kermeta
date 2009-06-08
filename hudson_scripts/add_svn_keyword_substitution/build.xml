@@ -3,6 +3,12 @@
 	<description>
        
 	</description>
+	
+
+	<patternset id="keyword.enable.sources">
+	    <include name="*build.xml"/>
+	    <include name="*.docb.xml"/>
+	</patternset>
 
 	<target name="all">
 		<antcall target="fix_keyword_substitution"/>
@@ -21,14 +27,18 @@
 			<arg value="propset"/>
 			<arg value="svn:keywords"/>
 			<arg value="Id Author Date"/>
-			<fileset dir="." includes="*build.xml"/>
+			<fileset dir=".">
+				<patternset refid="keyword.enable.sources"/>
+			</fileset>
 		</apply>
 		<apply executable="svn" parallel="false" >
 			<env key="SVN_SSH" path="/usr/bin/ssh -i /udd/dvojtise/.ssh/kermeta_bot/id_rsa"/>			
 			<arg value="commit"/>
 			<arg value="-m"/>
 			<arg value="'added keyword substition'"/>
-			<fileset dir="." includes="*build.xml"/>
+			<fileset dir="." >
+				<patternset refid="keyword.enable.sources"/>
+			</fileset>
 		</apply>
 
 	</target>
