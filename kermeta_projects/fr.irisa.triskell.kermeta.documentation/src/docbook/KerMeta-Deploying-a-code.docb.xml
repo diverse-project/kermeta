@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.4//EN"
 "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
-<!-- $Id: KerMeta-MDK.docb.xml,v 1.5 2009-02-20 16:07:09 dvojtise Exp $ -->
+<!-- $Id$ -->
 <book lang="en-US">
   <bookinfo>
     <title>Deploying Kermeta code</title>
