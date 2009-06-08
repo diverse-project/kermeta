@@ -24,6 +24,7 @@
 			</commandline>
 		</cvs> -->
 		<exec executable="svn" output="./logfile.log">
+			<env key="SVN_SSH" path="/usr/bin/ssh -i /udd/dvojtise/.ssh/id_rsa_eclipse"/>
 		    <arg value="log"/>
 		    <arg value="-v"/>
 		    <arg value="--xml"/>
