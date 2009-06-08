@@ -11,6 +11,7 @@
         
 	
 	<target name="all">
+		<antcall target="checkout_log"/>
 		<antcall target="stats"/>
 		<antcall target="patch_gforge_cvsweb_links"/>
 	</target>
