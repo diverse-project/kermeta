@@ -45,6 +45,7 @@
 			<arg value="**/*.xmi;**/*.km;**/*.ecore;**/*.uml;**/*.traceability;**/*.smap;**/*.genmodel;**/*.ecoredi;**/*.umldi;**/fr.irisa.triskell.kermeta.parser.gen.*/*;**/build/java/**;**/migrationv032_v040/ast/**;kermeta_projects/org.kermeta.framework.compiled/**"/>		
 		    <arg value="-output-dir"/>			
 			<arg value="${output.dir}"/>		
+			<arg value="${svn.log}"/>		
 			<arg value="../kermeta_projects"/>
 		</java>
 		    	
