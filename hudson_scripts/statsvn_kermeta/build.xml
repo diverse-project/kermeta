@@ -25,7 +25,7 @@
 	</target>
  	<target name="stats"> 
  		<taskdef name="statsvn" classname="net.sf.statsvn.ant.StatSvnTask" classpath="${statsvn.jar}" />
-        <statcvs log="${svn.log}" 
+        <statsvn log="${svn.log}" 
         	path="kermeta_projects" 
         	title="Kermeta"
             outputDir="${output.dir}" 
