@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.4//EN"
 "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
-<!-- $Id: Generator-UI-Guide.docb.xml,v 1.1 2007-12-21 14:14:58 cfaucher Exp $ -->
+<!-- $Id$ -->
 <book lang="en-US">
 	<bookinfo>
 	    <title>Generation of the Kermeta Compiler Documentation</title>
 		<pubdate>Build date: @BUILD.DATE@</pubdate>
-	    <pubdate>$Date: 2007-12-21 14:14:58 $</pubdate>
+	    <pubdate>$Date$</pubdate>
 	    <author>
 	      <firstname>Cyril</firstname>
 	      <surname>Faucher</surname>
