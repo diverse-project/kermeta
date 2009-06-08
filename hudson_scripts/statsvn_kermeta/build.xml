@@ -28,10 +28,28 @@
 		    <arg value="log"/>
 		    <arg value="-v"/>
 		    <arg value="--xml"/>
-			    <arg value="../kermeta_projects"/>
+			<arg value="../kermeta_projects"/>
 		</exec>
 	</target>
  	<target name="stats"> 
+		<java jar="${statsvn.jar}"
+    	           fork="true"
+    	           failonerror="true"
+    	           maxmemory="128m"
+    	           >
+		    <env key="SVN_SSH" path="/usr/bin/ssh -i /udd/dvojtise/.ssh/id_rsa_eclipse"/>
+			<arg value="-verbose"/> 			
+		    <arg value="-title"/>			
+			<arg value="Kermeta"/> 	
+		    <arg value="-exclude"/>			
+			<arg value="**/*.xmi;**/*.km;**/*.ecore;**/*.uml;**/*.traceability;**/*.smap;**/*.genmodel;**/*.ecoredi;**/*.umldi;**/fr.irisa.triskell.kermeta.parser.gen.*/*;**/build/java/**;**/migrationv032_v040/ast/**;kermeta_projects/org.kermeta.framework.compiled/**"/>		
+		    <arg value="-output-dir"/>			
+			<arg value="${output.dir}"/>		
+			<arg value="../kermeta_projects"/>
+		</java>
+		    	
+<!--		    	      -exclude **/src/urncore/**;**/src/grl/**;**/src/ucm/**;**/src/urn/**;**/src/seg/jUCMNav/model/ucm/** \
+		    	      -output-dir ./stats c:\eclipse\workspace\seg.jUCMNav\svn.log c:\eclipse\workspace\seg.jUCMNav
  		<taskdef name="statsvn" classname="net.sf.statsvn.ant.StatSvnTask" classpath="${statsvn.jar}" />
         <statsvn log="${svn.log}" 
         	path="../kermeta_projects" 
@@ -41,6 +59,7 @@
             viewcvs="http://gforge.inria.fr/plugins/scmcvs/cvsweb.php/" 
             exclude="**/*.xmi;**/*.km;**/*.ecore;**/*.uml;**/*.traceability;**/*.smap;**/*.genmodel;**/*.ecoredi;**/*.umldi;**/fr.irisa.triskell.kermeta.parser.gen.*/*;**/build/java/**;**/migrationv032_v040/ast/**;kermeta_projects/org.kermeta.framework.compiled/**"
             tags="(V|v|KERMETA_V|Kermeta_v).*"/>
+            -->
     </target>
     <target name="patch_gforge_cvsweb_links">
         <replace dir="${output.dir}" >
