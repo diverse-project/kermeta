@@ -22,7 +22,10 @@
 	<target name="enforce_keyword_substitution_for_dir">
 		
 		<echo>${basedir}</echo>
-		<apply executable="svn" parallel="true" >
+		<apply executable="svn" 
+			parallel="true" 
+			relative="true" 
+			skipemptyfilesets="true">
 			<env key="SVN_SSH" path="/usr/bin/ssh -i /udd/dvojtise/.ssh/kermeta_bot/id_rsa"/>			
 			<arg value="propset"/>
 			<arg value="svn:keywords"/>
@@ -31,7 +34,10 @@
 				<patternset refid="keyword.enable.sources"/>
 			</fileset>
 		</apply>
-		<apply executable="svn" parallel="true" >
+		<apply executable="svn" 
+			parallel="true"  
+			relative="true"
+			skipemptyfilesets="true" >
 			<env key="SVN_SSH" path="/usr/bin/ssh -i /udd/dvojtise/.ssh/kermeta_bot/id_rsa"/>			
 			<arg value="commit"/>
 			<arg value="-m"/>
