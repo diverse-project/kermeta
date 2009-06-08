@@ -1,4 +1,4 @@
-<!-- $Id: dist_n_deploy_build.xml,v 1.33 2008-06-05 14:17:03 ftanguy Exp $ -->
+<!-- $Id$ -->
 <project name="kermeta_framework" default="all" basedir=".">
 	
 	<description>
