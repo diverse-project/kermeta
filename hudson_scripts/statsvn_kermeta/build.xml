@@ -65,7 +65,8 @@
             -->
     </target>
     <target name="patch_gforge_cvsweb_links">
-        <replace dir="${output.dir}" >
+		<echo>Currently no patch</echo>
+   <!--     <replace dir="${output.dir}" >
             <include name="**/*.html"/>
             <replacetoken><![CDATA[" class="webrepository"]]></replacetoken>
             <replacevalue><![CDATA[&amp;f=h&amp;cvsroot=kermeta" class="webrepository"]]></replacevalue>
@@ -74,6 +75,6 @@
             <include name="**/*.html"/>
             <replacetoken><![CDATA[vnd.viewcvs-markup"]]></replacetoken>
             <replacevalue><![CDATA[vnd.viewcvs-markup&amp;cvsroot=kermeta"]]></replacevalue>
-        </replace>
+        </replace>-->
     </target>
 </project>
