@@ -6,7 +6,7 @@
 	
 	<property name="statsvn.jar" location="/udd/triskell/bin/multiplatform/statsvn-0.5.0/statsvn.jar"/>
 	<property name="notes.txt" location="/tmp/kermeta_build/src/plugins/fr.irisa.triskell.kermeta.site/scripts/html/report-notes.txt"/>
-	<property name="svn.log" location="/tmp/kermeta_build/statsvn/logfile.log"/>
+	<property name="svn.log" location="./logfile.log"/>
 	<property name="output.dir" location="statsvn"/>
         
 	
@@ -23,17 +23,18 @@
 				<argument line="log src"/>
 			</commandline>
 		</cvs> -->
-		<exec executable="svn" output="./logfile.log">
+		<exec executable="svn" output="${svn.log}">
 			<env key="SVN_SSH" path="/usr/bin/ssh -i /udd/dvojtise/.ssh/id_rsa_eclipse"/>
 		    <arg value="log"/>
 		    <arg value="-v"/>
 		    <arg value="--xml"/>
+			    <arg value="../kermeta_projects"/>
 		</exec>
 	</target>
  	<target name="stats"> 
  		<taskdef name="statsvn" classname="net.sf.statsvn.ant.StatSvnTask" classpath="${statsvn.jar}" />
         <statsvn log="${svn.log}" 
-        	path="kermeta_projects" 
+        	path="../kermeta_projects" 
         	title="Kermeta"
             outputDir="${output.dir}" 
             notes="${notes.txt}" 
