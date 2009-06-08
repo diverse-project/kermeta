@@ -1,4 +1,4 @@
-<!-- $Id: copy_build.xml,v 1.5 2008-03-05 13:44:35 dvojtise Exp $ -->
+<!-- $Id$ -->
 <project name="Copy_2_update_site" default="copy_2_update_site" basedir=".">
 	<description>
        

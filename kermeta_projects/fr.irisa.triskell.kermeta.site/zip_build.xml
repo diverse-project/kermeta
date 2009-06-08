@@ -1,4 +1,4 @@
-<!-- $Id: zip_build.xml,v 1.3 2008-07-24 09:36:46 dvojtise Exp $ -->
+<!-- $Id$ -->
 <project name="Copy_site_2_modelware" default="create_zip" basedir=".">
 	<description>
        
