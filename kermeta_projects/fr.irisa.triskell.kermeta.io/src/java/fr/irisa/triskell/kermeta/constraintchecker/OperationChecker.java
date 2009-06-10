@@ -200,7 +200,7 @@ public class OperationChecker extends AbstractChecker {
 						}
 					} else {
 						KermetaUnit distantUnit = KermetaUnitHelper.getKermetaUnitFromObject(op);
-						String message = "Operation " + operation.getName() + " is already implemented in the superclass " + op.getOwningClass().getName() + " in the file " + distantUnit.getUri() + ".";
+						String message = "Operation " + operation.getOwningClass().getName()+ "." +operation.getName() + " is already implemented in the superclass " + op.getOwningClass().getName() + " in the file " + distantUnit.getUri() + ".";
 						addProblem(ERROR, message, operation);
 					}
 											

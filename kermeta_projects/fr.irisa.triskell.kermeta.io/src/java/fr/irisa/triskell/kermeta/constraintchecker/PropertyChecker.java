@@ -325,7 +325,7 @@ public class PropertyChecker extends AbstractChecker {
 	 }
 	 
 	 /**
-	  * Checks if on the target object it exists a link that declares a multiplicity 1 for an agregation which is not this property
+	  * Checks if on the target object it exists a link that declares a multiplicity 1 for an aggregation which is not this property
 		then we have an error
 	  * @param property
 	  * @return
@@ -333,7 +333,7 @@ public class PropertyChecker extends AbstractChecker {
 	 private boolean checkAttributeIsUsable(){
 		 boolean result = true;
 		 if(property.isIsComposite()){
-			 // if on the target object it exists a link that declares a multiplicity 1 for an agregation which is not this property
+			 // if on the target object it exists a link that declares a multiplicity 1 for an aggregation which is not this property
 			 // then we have an error
 			 Type type = property.getType();
 			 if(type instanceof fr.irisa.triskell.kermeta.language.structure.Class){
