@@ -8,9 +8,10 @@
 	<property name="OOo.source.dir" location="${project.base.dir}/src/OOo"/>
 	<property name="docbook.source.dir" location="${project.base.dir}/src/docbook"/>
 	<property name="OOo.source.file" location="${OOo.source.dir}/${project.name}.sxw"/>
-	<property name="deployment.dest" location="T:\\www\\triskell\\softwares\\kermeta\\docs"/>
+	<property name="deployment.dest" location="t:\\www\\triskell\\softwares\\kermeta\\docs"/>
 		
-	
+    <!-- disable use of xsltproc in order to enable xslthl for programlisting coloration -->
+	<property name="disable.xsltproc" value="true"/>
 	
 	<!-- common configuration properties -->
 	<!-- tool location -->
@@ -59,22 +60,14 @@
 		<copy todir="${build.docbook.dir}/${project.name}">
 			<fileset file="${docbook.source.dir}/${project.name}.docb.xml"/>
 		</copy>
-		<mkdir dir="${build.docbook.dir}/${project.name}"/>
-    	<mkdir dir="${build.docbook.dir}/${project.name}/${project.name}_figures" />
-    	<mkdir dir="${build.docbook.dir}/${project.name}/figures" />
-		
 		<!-- copy the images -->		
-		<!--<copy todir="${build.docbook.dir}/${project.name}/figures">
-			<fileset dir="${OOo.source.dir}/figures"/>
-		</copy> -->
+		
 		<copy todir="${build.docbook.dir}/${project.name}/${project.name}_figures">
 			<fileset dir="${docbook.source.dir}/${project.name}_figures"/>
 		</copy>
-    <!--	<copy todir="${build.dir}/figures">
-    	    <fileset dir="${OOo.source.dir}/figures"/>
-    	</copy>-->	
-    	<mkdir dir="${build.dir}/figures"/>
-			
+    	<copy todir="${build.dir}/figures">
+    	    <fileset dir="${project.base.dir}/src/figures"/>
+    	</copy>	
 	</target>
 	<target name="prepare_index.xml">
 		<tstamp>
@@ -86,9 +79,7 @@
 					en particulier la possibilité d'ajouter un docbook file ? == merge ??-->
 		<filter token="BUILD.DATE" value="${TODAY_UK}"/>
 				
-		<!--<copy todir="${build.docbook.dir}/${project.name}">
-						<fileset file="${OOo.source.dir}/ooo2dbk.xml"/>
-		</copy>-->
+		
 		<copy file="${build.docbook.dir}/${project.name}/${project.name}.docb.xml" 
 			tofile="${build.docbook.dir}/${project.name}/index.xml"
 			filtering="true"
@@ -107,6 +98,9 @@
              <property name="docbook.resources.dir" location="${build.dir}/figures" />
              <property name="distribution.dir" location="${build.dir}/html.single/${project.name}" />
              <property name="build.dir" location="${build.docbook.dir}/${project.name}" />
+			 <property name="disable.xsltproc" value="true"/> 
+			 <!-- <property name="disable.saxon" value="true"/> --> 
+			 <!-- <property name="xslthl.config" value="file:///c:/docbook-xsl/highlighting/xslthl-config.xml"/> -->
         </ant>
 
         <available property="tmp:single.ok" file="${build.dir}/html.single/${project.name}/index.html" />
@@ -125,6 +119,8 @@
              <property name="docbook.resources.dir" location="${build.dir}/figures" />
              <property name="distribution.dir" location="${build.dir}/html.chunked/${project.name}" />
              <property name="build.dir" location="${build.docbook.dir}/${project.name}" />
+			 <property name="disable.xsltproc" value="true"/> 
+			 <!--<property name="disable.saxon" value="true"/>--> 
         </ant>
 
         <available property="tmp:chunked.ok" file="${build.dir}/html.chunked/${project.name}/index.html" />
@@ -142,6 +138,8 @@
              <property name="docbook.resources.dir" location="${build.dir}/figures" />
              <property name="distribution.dir" location="${build.dir}/html.help/${project.name}" />
              <property name="build.dir" location="${build.docbook.dir}/${project.name}" />
+			 <property name="disable.xsltproc" value="true"/> 
+			 <!--<property name="disable.saxon" value="true"/>--> 
         </ant>
 
         <available property="tmp:help.ok" file="${build.dir}/html.help/${project.name}/index.html" />
@@ -162,19 +160,24 @@
 			</copy>
 		<ant antfile="${ant.docbook.styler}" dir="${ant.docbook.styler.dir}" inheritall="false"
               target="eclipse.help">
-             <property name="docbook.xml.dir" location="${build.docbook.dir}/${project.name}" />
+            <property name="docbook.xml.dir" location="${build.docbook.dir}/${project.name}" />
             <property name="docbook.resources.dir" location="${build.dir}/figures" />
             <property name="distribution.dir" location="${build.dir}/eclipse.help/${project.name}" />
             <property name="build.dir" location="${build.docbook.dir}/${project.name}" />
+			<!--<property name="manual.name" location="${build.docbook.dir}/${project.name}" />-->
             <property name="docbook.eclipse.plugin.name" value="KerMeta documentation" />
             <property name="docbook.eclipse.plugin.id" value="fr.irisa.triskell.kermeta.documentation" />
             <property name="docbook.eclipse.plugin.provider" value="IRISA/INRIA" />
-			<property name="eclipse.html.base.dir" value="build/eclipse.help/${project.name}/"/>
+			<property name="eclipse.html.base.dir" location="${build.dir}/eclipse.help/${project.name}/"/>
+			<property name="to.html.dir.relative.path" value="build/eclipse.help/${project.name}/"/>
+			<property name="base.dir" value="${build.dir}/eclipse.help/${project.name}"/>
+			<property name="disable.xsltproc" value="true"/> 
         </ant>
 
-	  	<move todir="${build.dir}">
-	  	    <fileset dir="${build.dir}/eclipse.help/${project.name}/build"/>
-	  	</move>
+		<echo>${build.dir}/eclipse.help/${project.name}</echo>
+	  	<move todir="${build.dir}/eclipse.help/${project.name}">
+	  	    <fileset dir="${build.dir}/eclipse.help/${project.name}"/>
+	  	</move> 
 		<condition property="tmp:Eclipsehelp.ok" value="true">
 	        <and>
 	        	<available file="${build.dir}/eclipse.help/${project.name}/index.html" />	        	
@@ -208,6 +211,7 @@
 	             <property name="docbook.resources.dir" location="${build.docbook.dir}/${project.name}/figures" />
 	             <property name="distribution.dir" location="${build.dir}/pdf.fop/${project.name}" />
 	             <property name="build.dir" location="${build.docbook.dir}/${project.name}" />
+				 <property name="disable.xsltproc" value="true"/>
 	        </ant>
 	    	<!-- HACK: remove the copy from ${ant.docbook.styler.dir} directory -->
 	    	<delete dir="${ant.docbook.styler.dir}/figures" failonerror="false" quiet="true" /> 
@@ -239,7 +243,7 @@
 
 	</target>
 	<target name="dbkdeploy" description="generate all and copy documentation files to http://www.irisa.fr/triskell/prive/docs" 
-			depends="preparedbk, html.single, html.chunked, html.help, pdf.fop, eclipse.help">
+			depends="preparedbk, html.single, html.chunked, pdf.fop, eclipse.help">
 		  	<delete dir="${deployment.dest}\\html.single\\${project.name}" failonerror="false"/>
 		  	<delete dir="${deployment.dest}\\html.chunked\\${project.name}" failonerror="false"/>
 			<copy todir="${deployment.dest}\\html.chunked\\${project.name}">
