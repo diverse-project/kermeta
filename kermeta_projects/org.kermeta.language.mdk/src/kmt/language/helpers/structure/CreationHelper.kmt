@@ -1,0 +1,221 @@
+/* $Id: CreationHelper.kmt,v 1.1 2009-06-10 17:26:05 mclavreu Exp $ 
+ * Creation : May 20, 2009
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            Mickael Clavreul
+ */
+package kermeta::language::structure;
+
+
+require kermeta
+using kermeta::standard
+using kermeta::language::structure
+
+aspect class ClassDefinition {
+	/**
+	 * Creates a new ClassDefinition
+	 * 
+	 * @param name
+	 *            the name of the classDefinition
+	 * @param isAspect
+	 *            is the ClassDefinition an aspect or not
+	 * @param parent
+	 *            the parent of the ClassDefinition
+	 */
+	operation initialize(name : String, isAspect : Boolean, parent : ClassDefinition) : ClassDefinition is do
+		self.name := name
+		self.isAspect := isAspect
+		if not(parent.isVoid()) then
+			var p : Type init Class.new.initializeFromAClassDefinition(parent)
+			self.superType.add(p)
+			self.containedType.add(p)
+		end
+		result := self 
+	end
+	
+	/**
+	 * Gets an operation from the ClassDefinition
+	 * 
+	 * @param opName
+	 *            the name of the operation to look for
+	 */
+	operation getOperation(opName : String) : Set<Object> is do
+		var t : Set<Object> init Set<Object>.new
+		self.ownedOperation.each{o|
+			if o.name.equals(opName) then
+				t.add(o)
+			end
+		}
+		result := t
+	end
+	
+	/**
+	 * Gets a property from the ClassDefinition
+	 * 
+	 * @param pName
+	 *            the name of the property to look for
+	 */
+	operation getProperty(pName : String) : Object is do
+		var t : Set<Object> init Set<Object>.new
+		self.allAttribute.each{o|
+			if o.name.equals(pName) then
+				t.add(o)
+			end
+		}
+		result := t.one
+	end
+}
+
+aspect class Operation {
+	/**
+	 * Creates a new Operation
+	 * 
+	 * @param name
+	 *            the name of the Operation
+	 * @param returnType
+	 *            the type returned by the Operation
+	 * @param parent
+	 *            the parent of the Operation
+	 */
+	operation initialize(name : String, returnType : Type, parent : Operation) : Operation is do
+		self.name := name
+		self.superOperation := parent
+		var c : Class
+		self.containedType.add(returnType)
+		result := self
+	end
+}
+
+aspect class Require {
+	/**
+	 * Creates a new Require
+	 * 
+	 * @param uri
+	 *            uri of the Require
+	 */
+	operation initialize(uri : String) : Require is do
+		self.uri := uri
+		result := self
+	end
+}
+
+aspect class Class {
+	/**
+	 * Creates a new Class
+	 * 
+	 * @param cd
+	 *            the classDefinition this class refers to
+	 */
+	operation initializeFromAClassDefinition(cd : ClassDefinition) : Class is do
+		self.typeDefinition := cd
+		result := self
+	end
+}
+
+aspect class FunctionType {
+	/**
+	 * Creates a new FunctionType with left and right elements
+	 * 
+	 * @param left
+	 *            type of the left member
+	 * @param right
+	 *            type of the right member
+	 */
+	operation initialize(left : Type, right : Type) : FunctionType is do
+		self.initializeLeft(left)
+		self.initializeRight(right)
+		result := self
+	end
+	
+	/**
+	 * Creates a new FunctionType with left element only
+	 * 
+	 * @param left
+	 *            type of the left member
+	 */
+	operation initializeLeft(left : Type) : FunctionType is do
+		self.left := left
+		self.containedType.add(left)
+		result := self
+	end
+	
+	/**
+	 * Creates a new FunctionType with right element only
+	 * 
+	 * @param right
+	 *            type of the right member
+	 */
+	operation initializeRight(right : Type) : FunctionType is do
+		self.right := right
+		self.containedType.add(right)
+		result := self
+	end
+}
+
+aspect class ProductType {
+	/**
+	 * Creates a new ProductType
+	 * 
+	 * @param type
+	 *            type of the ProductType
+	 */
+	operation initialize(type : Type) : ProductType is do
+		self.type.add(type)
+		self.containedType.add(type)
+		result := self
+	end
+}
+
+aspect class Property {
+	/**
+	 * Test if the property is a collection
+	 * 
+	 * @return true
+	 *            if its lower or upper bounds are not 1 or 0
+	 */
+	operation isMany() : Boolean is do
+		result := false
+		if (self.lower > 1).orElse{e|self.upper != 1} then
+			result := true
+		end
+	end
+	
+	/**
+	 * Creates a new Property
+	 * 
+	 * @param name
+	 *            name of the Property
+	 * @param type
+	 *            type of the Property
+	 * @param lower
+	 *            lower multiplicity of the Property
+	 * @param upper
+	 *            upper multiplicity of the Property
+	 */
+	operation initialize(name : String, type : Type, lower : Integer, upper : Integer) : Property is do
+		self.name := name
+		self.type := type
+		self.containedType.add(type)
+		self.lower := lower
+		self.upper := upper
+		result := self
+	end
+}
+
+aspect class Package {
+
+	/**
+	 * Creates a new Package
+	 * 
+	 * @param name
+	 *            name of the Package
+	 * @param uri
+	 *            type of the Package
+	 */
+	operation initialize(name : String, uri : String) : Package is do
+		self.name := name
+		self.uri := uri
+		result := self
+	end
+}

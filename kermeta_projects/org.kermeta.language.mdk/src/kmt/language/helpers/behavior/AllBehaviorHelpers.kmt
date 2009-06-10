@@ -1,0 +1,12 @@
+/* $Id: AllBehaviorHelpers.kmt,v 1.1 2009-06-10 17:23:05 mclavreu Exp $
+ * Creation date: June 10, 2009
+ * License: EPL
+ * Copyright: IRISA/INRIA
+ * Authors:
+ *		Mickael Clavreul
+ */
+
+package kermeta::language;
+
+
+require "CreationHelper.kmt"

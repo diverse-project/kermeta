@@ -10,3 +10,4 @@ package kermeta::language;
 
 
 require "structure/AllStructureHelpers.kmt"
+require "behavior/AllBehaviorHelpers.kmt"

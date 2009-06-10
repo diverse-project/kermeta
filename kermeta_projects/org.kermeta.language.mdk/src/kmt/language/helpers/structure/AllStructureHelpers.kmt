@@ -1,4 +1,4 @@
-/* $Id: AllStructureHelpers.kmt,v 1.1 2008-12-09 14:26:05 dvojtise Exp $
+/* $Id: AllBehaviorHelpers.kmt,v 1.1 2008-12-09 14:26:05 dvojtise Exp $
  * Creation date: July 30, 2008
  * License: EPL
  * Copyright: IRISA/INRIA
@@ -11,3 +11,4 @@ package kermeta::language;
 
 require "ModelingUnitHelper.kmt"
 require "PackageHelper.kmt"
+require "CreationHelper.kmt"

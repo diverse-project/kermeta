@@ -1,0 +1,389 @@
+/* $Id: CreationHelper.kmt,v 1.1 2009-06-10 17:23:05 mclavreu Exp $ 
+ * Creation : May 20, 2009
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            Mickael Clavreul
+ */
+
+
+package kermeta::language::behavior;
+
+require kermeta
+require "../structure/CreationHelper.kmt"
+
+using kermeta::language::structure
+using kermeta::standard
+using kermeta::utils
+
+aspect class Block {
+	/**
+	 * Creates a new Block of expression
+	 * 
+	 * @param statements
+	 *            body of the block
+	 */
+	operation initialize(statements : Set<Expression>) : Block is do
+		self.statement.addAll(statements)
+		result := self
+	end
+	
+	/**
+	 * Creates a new Block of expression
+	 * 
+	 * @param statements
+	 *            body of the block
+	 */
+	operation initializeForASingleExpression(statement : Expression) : Block is do
+		self.statement.add(statement)
+		result := self
+	end
+}
+
+aspect class VariableDecl {
+	/**
+	 * Creates a new VariableDecl
+	 * 
+	 * @param identifier
+	 *            name of the variable
+	 * @param initialization
+	 *            expression that contains the initialization of the variable
+	 * @param type
+	 *            type of the variable
+	 */
+	operation initialize(identifier : String, initialization : Expression, type : Type) : VariableDecl is do
+		self.identifier := identifier
+		self.initialization := initialization
+		self.containedType.add(type)
+		self.type := TypeReference.new.initialize(type)
+		result := self
+	end
+}
+
+aspect class CallFeature {
+	
+	//Type.new
+	/**
+	 * Creates a new CallFeature to produce a <type>.new
+	 * 
+	 * @param name
+	 *            name of the property to be called
+	 * @param type
+	 *            Type on which the property is retrieved
+	 */
+	operation initializeForANew(name : String, type : Type) : CallFeature is do
+		self.initialize(name)
+		self.containedType.add(type)
+		var tl : TypeLiteral init TypeLiteral.new.initialize(type)
+		tl.typeref := TypeReference.new.initialize(type)
+		self.target := tl
+		result := self
+	end
+	
+	/**
+	 * Creates a new CallFeature to produce a .<name>
+	 * 
+	 * @param name
+	 *            name of the property to be called
+	 */
+	operation initialize(name : String) : CallFeature is do
+		self.name := name
+		result := self
+	end
+	
+	/**
+	 * Creates a new CallFeature to produce a <variable>.<name>
+	 * 
+	 * @param propertyName
+	 *            name of the property to be called
+	 * @param variableName
+	 *            name of the variable on which the property is to be called
+	 */
+	operation initializeWithACallVariable(propertyName : String, variableName : String) : CallFeature is do
+		self.initialize(propertyName)
+		self.target := CallVariable.new.initialize(variableName)
+		result := self
+	end
+	
+	// Creates an each
+	// i.e v.each{p|expr}
+	/**
+	 * Creates a new CallFeature to produce a target.each{variableName|expr}
+	 * 
+	 * @param target
+	 *            name of the element on which the property is to be called
+	 * @param targetType
+	 *            type of the element on which the property is to be called
+	 * @param expr
+	 *            expression to be executed in the body of the each expression
+	 * @param variableName
+	 *            name of the temporary variable used
+	 * @param typesFromFramework
+	 *            types from framework this CallFeature needs
+	 */
+	operation initializeForAnEach(target : Expression, targetType : Type, expr : Expression, variableName : String, typesFromFramework : Hashtable<String,ClassDefinition>) : CallFeature is do
+		var cl_caller : Class init Class.new.initializeFromAClassDefinition(typesFromFramework.getValue("kermeta::language::structure::Object"))
+		var ft_caller : FunctionType init FunctionType.new.initialize(targetType,cl_caller)
+		
+		//FunctionType variableName
+		var cl_var : Class init Class.new.initializeFromAClassDefinition(typesFromFramework.getValue("kermeta::language::structure::Object"))
+		var ft_var : FunctionType init FunctionType.new.initialize(targetType,cl_var)
+				
+		//FunctionType expr
+		var cl_expr : Class init Class.new.initializeFromAClassDefinition(typesFromFramework.getValue("kermeta::language::structure::Object")) 
+		var ft_expr : FunctionType init FunctionType.new.initializeRight(cl_expr)
+		
+		//ProductType expr
+		var pt_expr : ProductType init ProductType.new
+		pt_expr.type.add(targetType)
+		ft_expr.containedType.add(pt_expr)
+		
+		// Main FunctionType
+		var pt_each : ProductType init ProductType.new.initialize(ft_var)
+		var cl_each : Class init Class.new.initializeFromAClassDefinition(typesFromFramework.getValue("kermeta::language::structure::VoidType")) 
+		var ft_each : FunctionType init FunctionType.new.initialize(pt_each,cl_each) 
+		
+		// LambdaExpression
+		var lambda : LambdaExpression init LambdaExpression.new.initialize(ft_expr,expr,variableName)
+		
+		// Each
+		self.initialize("each")
+		self.containedType.add(ft_each)
+		self.parameters.add(lambda)
+		self.target := target
+		result := self
+	end
+	
+	/**
+	 * Creates a new CallFeature to produce a target.add(param)
+	 * 
+	 * @param target
+	 *            name of the element on which the property is to be called
+	 * @param param
+	 *            element that is added to the target
+	 * @param targetType
+	 *            type of the element on which the property is to be called
+	 * @param typesFromFramework
+	 *            types from framework this CallFeature needs
+	 */
+	operation initializeForAnAdd(target : CallExpression, param : String, targetType : Type, typesFromFramework : Hashtable<String,ClassDefinition>) : CallFeature is do
+		var cl_add : Class init Class.new.initializeFromAClassDefinition(typesFromFramework.getValue("kermeta::language::structure::VoidType"))
+		var pt_add : ProductType init ProductType.new.initialize(targetType)
+		var ft_add : FunctionType init FunctionType.new.initialize(pt_add,cl_add)
+		
+		// param
+		var cv : CallVariable init CallVariable.new.initialize(param)
+		// Add
+		self.initialize("add")
+		self.containedType.add(ft_add)
+		self.parameters.add(cv)
+		self.target := target
+		result := self
+	end
+	
+	/**
+	 * Creates a new CallFeature to produce a target.plus(param)
+	 * 
+	 * @param param
+	 *            element that is summed to the target
+	 * @param target
+	 *            name of the element on which the property is to be called
+	 * @param typesFromFramework
+	 *            types from framework this CallFeature needs
+	 */
+	operation initializeForAPlus(parameter : Expression, target : Expression, typesFromFramework : Hashtable<String,ClassDefinition>) : CallFeature is do
+		var cl_plus_ft : Class init Class.new.initializeFromAClassDefinition(typesFromFramework.getValue("kermeta::standard::String"))
+		var cl_plus_pt : Class init Class.new.initializeFromAClassDefinition(typesFromFramework.getValue("kermeta::standard::String"))
+		var pt_plus : ProductType init ProductType.new.initialize(cl_plus_pt)
+		var ft_plus : FunctionType init FunctionType.new.initialize(pt_plus,cl_plus_ft)
+		
+		self.initialize("plus")
+		self.containedType.add(ft_plus)
+		self.parameters.add(parameter)
+		self.target := target
+		result := self
+	end
+	
+	/**
+	 * Creates a new CallFeature to produce a propertyName.toString
+	 * 
+	 * @param propertyName
+	 *            element on which th toString method is called
+	 */
+	operation initializeForAToString(propertyName : String) : CallFeature is do
+		self.initialize("toString")
+		self.target := CallFeature.new.initialize(propertyName)
+		result := self
+	end
+	
+	/**
+	 * Creates a new CallFeature to produce a propertyName.isKindOf(type)
+	 *
+	 * @param propertyName
+	 *            element on which th isKindOf method is called
+	 * @param typeTest
+	 *            type to test through the isKindOf method
+	 * @param typesFromFramework
+	 *            types from framework this CallFeature needs
+	 */
+	operation initializeForAnIsKindOf(propertyName : String, typeTest : ClassDefinition, typesFromFramework : Hashtable<String,ClassDefinition>) : CallFeature is do
+		self.initialize("isKindOf")
+		var cl_tl : Class init Class.new.initializeFromAClassDefinition(typesFromFramework.getValue("kermeta::language::structure::Class"))
+		var cl_tr : Class init Class.new.initializeFromAClassDefinition(typeTest)
+		var cl_pt : Class init Class.new.initializeFromAClassDefinition(typesFromFramework.getValue("kermeta::language::structure::Class"))
+		var cl_ft : Class init Class.new.initializeFromAClassDefinition(typesFromFramework.getValue("kermeta::standard::Boolean"))
+		var pt : ProductType init ProductType.new.initialize(cl_pt)
+		var ft : FunctionType init FunctionType.new.initialize(pt, cl_ft)
+		var tl : TypeLiteral init TypeLiteral.new.initializeTypeRef(cl_tl,cl_tr)
+		
+		self.containedType.add(ft)
+		self.parameters.add(tl)
+		self.target := CallFeature.new.initialize(propertyName)
+		result := self
+	end
+}
+
+aspect class TypeReference {
+	/**
+	 * Creates a new TypeReference
+	 * 
+	 * @param type
+	 *            type of the TypeReference
+	 */
+	operation initialize(type : Type) : TypeReference is do
+		var c : Class
+		c ?= type
+		self.type := type
+		self.upper := 1
+		self.name := c.name
+		self.containedType.add(c)
+		result := self
+	end
+}
+
+aspect class TypeLiteral {
+	/**
+	 * Creates a new TypeLiteral
+	 * 
+	 * @param type
+	 *            type of the TypeLiteral
+	 */
+	operation initialize(type : Type) : TypeLiteral is do
+		result := self
+	end
+	
+	/**
+	 * Creates a new TypeLiteral with an associated TypeReference
+	 * 
+	 * @param type
+	 *            type of the TypeLiteral
+	 * @param type_ref
+	 *            type of the TypeReference
+	 */
+	operation initializeTypeRef(type : Type, type_ref : Type) : TypeLiteral is do
+		var tr : TypeReference init TypeReference.new.initialize(type_ref)
+		self.typeref := tr
+		self.containedType.add(type)
+		result := self
+	end
+}	
+
+aspect class Assignment {
+	/**
+	 * Creates a new Assignment
+	 * 
+	 * @param left
+	 *            left part of the assignment
+	 * @param right
+	 *            right part of the assignment
+	 * @param isCast
+	 *            indicates if the assignment is a cast or not
+	 */
+	operation initialize(left : CallExpression, right : Expression, isCast : Boolean) : Assignment is do
+		self.target := left
+		self.~value := right
+		self.isCast := isCast
+		result := self
+	end
+}
+
+aspect class CallVariable {
+	/**
+	 * Creates a CallVariable to a variable from the scope
+	 * 
+	 * @param name
+	 *            name of the variable to be called
+	 */
+	operation initialize(name : String) : CallVariable is do
+		self.name := name
+		result := self
+	end
+}
+
+aspect class StringLiteral {
+	/**
+	 * Creates a StringLiteral
+	 * 
+	 * @param val
+	 *            Value of the StringLiteral
+	 * @param type
+	 *            type of the StringLiteral
+	 */
+	operation initialize(val : String, type : Type) : StringLiteral is do
+		self.~value := val
+		self.containedType.add(type)
+		result := self
+	end
+}
+
+aspect class LambdaExpression {
+	/**
+	 * Creates a LambdaExpression
+	 * 
+	 * @param type
+	 *            type of the LambdaExpression
+	 * @param body
+	 *            body of the LambdaExpression
+	 * @param variableName
+	 *            Variable of the LambdaExpression
+	 */
+	operation initialize(type : Type, body : Expression, variableName : String) : LambdaExpression is do
+		self.parameters.add(LambdaParameter.new.initialize(variableName))
+		self.body := body
+		self.containedType.add(type)
+		result := self
+	end
+}
+
+aspect class LambdaParameter {
+	/**
+	 * Creates a LambdaParameter
+	 * 
+	 * @param name
+	 *            name of the LambdaParameter
+	 */
+	operation initialize(name : String) : LambdaParameter is do
+		self.name := name
+		result := self
+	end
+}
+
+aspect class Conditional {
+
+	/**
+	 * Creates a Conditional
+	 * 
+	 * @param bool_expr
+	 *            expression of the condition
+	 * @param then_body
+	 *            Expression to be executed if bool_expr returns true
+	 * @param else_body
+	 *            Expression to be executed if bool_expr returns false
+	 */
+	operation initialize(bool_expr : Expression, then_body : Expression, else_body : Expression) : Conditional is do
+		self.condition := bool_expr
+		self.thenBody := then_body
+		self.elseBody := else_body
+		result := self
+	end
+}
