@@ -35,8 +35,8 @@ public class GenerateOCL {
 	
 //	private static String project_path = workbench_path + "fr.irisa.triskell.kermeta.ocl/.bin/";
 	private static String project_path = workbench_path + "fr.irisa.triskell.kermeta.ocl/kermeta/transformations-dev/";
-//	private static String oclKmtPrinterKmtPath = project_path + "OCLKMTPrinter.km";
-	private static String oclKmtPrinterKmtPath = project_path + "OCLKMTPrinter.kmt";
+	private static String oclKmtPrinterKmtPath = project_path + "OCLKMTPrinter.km";
+//	private static String oclKmtPrinterKmtPath = project_path + "OCLKMTPrinter.kmt";
 	
 	/**
 	 * Runs the Kermeta OCL CST -> KMT pretty-printer and stores the resulting Kermeta code
@@ -58,15 +58,16 @@ public class GenerateOCL {
 	 */
 	public static void run(String inCstXmiPath, String modelEcorePath, String outKmtPath, IOConsole console ) {
 		console.println(new InfoMessage("running OCL2KMT Transformation \n from " + inCstXmiPath + "\n to " + outKmtPath + "\n against: " + modelEcorePath));
-		if ( getInterpreter() != null ) {
-			getInterpreter().setStreams(console);
+		Interpreter interpreter =  getInterpreter();
+		if ( interpreter != null ) {
+			interpreter.setStreams(console);
 			// This is the operation to call
-			getInterpreter().setEntryPoint("oclKMTPrinter::OCLKMTPrinter", "generateOCL");
+			interpreter.setEntryPoint("oclKMTPrinter::OCLKMTPrinter", "generateOCL");
 			// These are the parameters
 			String[] params = new String[] { inCstXmiPath, modelEcorePath, outKmtPath };
-			getInterpreter().setParameters(params);
+			interpreter.setParameters(params);
 			// And we launch the interpreter
-			getInterpreter().launch();
+			interpreter.launch();
 			console.println(new InfoMessage("file generated " + outKmtPath));		
 		}
 	}
@@ -75,15 +76,17 @@ public class GenerateOCL {
 		
 		if ( _interpreter == null || _interpreter.hasMemoryBeenFreed())
 			try {
-				KermetaUnit kermetaUnit = RunnerHelper.getKermetaUnitToExecute(oclKmtPrinterKmtPath, "platform:/resource/ocl/OCLKMTPrinter.km");
+				//KermetaUnit kermetaUnit = RunnerHelper.getKermetaUnitToExecute(oclKmtPrinterKmtPath, "platform:/resource/ocl/OCLKMTPrinter.km");
 				Map<String, Object> options = new HashMap<String, Object>();
 				options.put( InterpreterOptions.MERGE, false );
 				options.put( InterpreterOptions.CLEAN_AT_END, false);
-				_interpreter = new Interpreter(kermetaUnit.getUri(), InterpreterMode.RUN, options);
+				//				_interpreter = new Interpreter(kermetaUnit.getUri(), InterpreterMode.RUN, options);
+
+				_interpreter = new Interpreter(oclKmtPrinterKmtPath, InterpreterMode.RUN, options);
 			} catch (NotRegisteredURIException e) {
 			} catch (URIMalformedException e) {
-			} catch (IOException e) {
-			}
+			} //catch (IOException e) {
+			//}
 		return _interpreter;
 	}
 	
