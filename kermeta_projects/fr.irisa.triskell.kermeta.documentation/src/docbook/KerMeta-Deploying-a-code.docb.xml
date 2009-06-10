@@ -283,8 +283,6 @@ public class RunLogo implements IObjectActionDelegate, Runnable {
 				
          String file_uri = "file:/" + logoFile.getLocation().toOSString();
 		    
-         RunLogoK.run(file_uri, console);
-         
          Interpreter interpreter = new Interpreter(LOGO_SIMULATOR_KERMETA_CODE, InterpreterMode.RUN, null);
          interpreter.setStreams(console);		<co id="interpreter.stream.co" linkends="interpreter.stream.callout"/>
          interpreter.setEntryPoint("kmLogo::Interpreter", "execute");<co id="interpreter.entrypoint.co" linkends="interpreter.entrypoint.callout"/>
