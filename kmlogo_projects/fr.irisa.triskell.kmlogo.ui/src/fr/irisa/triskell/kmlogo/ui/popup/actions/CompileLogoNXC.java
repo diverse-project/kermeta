@@ -83,6 +83,7 @@ public class CompileLogoNXC implements IObjectActionDelegate, Runnable {
 		{
 			// the selection should be a single *.ecore file
 			currentSelection = (StructuredSelection)selection;
+			@SuppressWarnings("unchecked")
 			Iterator<IFile> it = currentSelection.iterator();
 
 			while(it.hasNext()) {

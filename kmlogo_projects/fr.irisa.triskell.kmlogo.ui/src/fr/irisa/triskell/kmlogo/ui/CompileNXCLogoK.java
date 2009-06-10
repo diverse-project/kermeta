@@ -48,7 +48,7 @@ public class CompileNXCLogoK {
 		interpreter.setEntryPoint("kmLogo::NXCCompiler", "compile");
 		
 		String api = null;
-		api = Platform.resolve(Platform.getPlugin("fr.irisa.triskell.kmlogo.model").getDescriptor().getInstallURL()).getFile() + "model/LogoNXC.nxc";
+		api = FileLocator.resolve(Platform.getBundle("fr.irisa.triskell.kmlogo.model").getEntry("/model/LogoNXC.nxc")).toString();
 
 		String[] parameters = new String[3];
 		parameters[0] = file;
@@ -61,7 +61,7 @@ public class CompileNXCLogoK {
 		// Note : URL must end with a / if this is a directory, if not, this is considered as a jar by the classloader
 		Set<URL> urlsSet = new LinkedHashSet<URL>();
 		// URL used when run in a runtimeworkbench, this allows to debug the plugin
-		safeAddURLAsString(urlsSet, "file://" + Platform.resolve(Platform.getPlugin("fr.irisa.triskell.kmlogo.model").getDescriptor().getInstallURL()).getFile() + "bin/");
+		safeAddURLAsString(urlsSet, "file://" + FileLocator.resolve(Platform.getBundle("fr.irisa.triskell.kmlogo.model").getEntry("/bin/")));;
 		// add this plugin as a deployed plugin
 		Bundle bundle = org.eclipse.core.runtime.Platform.getBundle("fr.irisa.triskell.kmlogo.model");
 		if(bundle != null){

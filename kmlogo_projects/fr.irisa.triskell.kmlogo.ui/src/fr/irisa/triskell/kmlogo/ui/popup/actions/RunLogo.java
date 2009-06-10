@@ -29,6 +29,10 @@ import fr.irisa.triskell.eclipse.console.messages.OKMessage;
 import fr.irisa.triskell.eclipse.console.messages.ThrowableMessage;
 import fr.irisa.triskell.kmlogo.ui.RunLogoK;
 
+/**
+ * The action may take a long time, so the concrete action is embedded in a Runnable Thread
+ *
+ */
 public class RunLogo implements IObjectActionDelegate, Runnable {
 
 	protected StructuredSelection currentSelection;
@@ -69,6 +73,7 @@ public class RunLogo implements IObjectActionDelegate, Runnable {
 
 	/**
 	 * @see IActionDelegate#run(IAction)
+	 * Create a new thread for this concrete action
 	 */
 	public void run(IAction action) {
 		new Thread(this).start();
@@ -76,13 +81,15 @@ public class RunLogo implements IObjectActionDelegate, Runnable {
 
 	/**
 	 * @see IActionDelegate#selectionChanged(IAction, ISelection)
+	 * This allow to retrieve the file selected by the user when activating the popup
 	 */
 	public void selectionChanged(IAction action, ISelection selection) {
 		
 		if (selection instanceof StructuredSelection)
 		{
-			// the se=lection should be a single *.ecore file
+			// the selection should be a single *.ecore file
 			currentSelection = (StructuredSelection)selection;
+			@SuppressWarnings("unchecked")
 			Iterator it = currentSelection.iterator();
 
 			while(it.hasNext()) {
