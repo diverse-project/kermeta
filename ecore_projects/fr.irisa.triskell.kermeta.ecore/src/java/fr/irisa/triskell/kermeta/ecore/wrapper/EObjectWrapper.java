@@ -5,7 +5,6 @@ package fr.irisa.triskell.kermeta.ecore.wrapper;
 import org.eclipse.emf.ecore.EObject;
 
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
-import fr.irisa.triskell.kermeta.runtime.loader.emf.EMFRuntimeUnit;
 import fr.irisa.triskell.kermeta.runtime.loader.emf.Runtime2EMF;
 
 public class EObjectWrapper {
