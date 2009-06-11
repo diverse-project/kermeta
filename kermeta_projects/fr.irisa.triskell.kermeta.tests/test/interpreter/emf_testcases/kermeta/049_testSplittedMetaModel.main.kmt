@@ -1,5 +1,5 @@
 @mainClass "testSplittedMetamodel::Main"
-@mainOperation "testmain"
+@mainOperation "main"
 
 /** test that we can load file that reference themselves (Ie, split into several files
  * and without having to use the kermeta nothion of resourceset*/
@@ -9,18 +9,32 @@ package testSplittedMetamodel;
 require kermeta
 require "../metamodels/049_simple_splittedMM1.ecore"
 using kermeta::persistence
+using kermeta::kunit
 using kermeta::standard
 
-class Main inherits kermeta::kunit::TestCase
+class Main inherits TestCase
 {
-    operation testmain() : Void is do 
-        var inputModel : Set<P1::C1> init loadClassModel
-        
-
-        
-        
+	operation main() : Void is do
+    	var tr : TestRunner init TestRunner.new
+		tr.run(Main)
+		tr.printTestResult
+		
+		// testLoadModel
+		// testSaveModel
+		
+		stdio.writeln("end")
+    end
+    
+    operation testLoadModel() : Void is do 
+        var inputModel : Set<P1::C1> init loadClassModel("platform:/resource/fr.irisa.triskell.kermeta.tests/test/interpreter/emf_testcases/instances/049_simplemodel_C1.xmi")
+ 
         //check that we have correctly loaded each of the 3 model elements
-        var c1 : P1::C1 
+       checkLoadedModel(inputModel)
+        stdio.write("End of simple splitted MM1\n")
+    end
+    
+    operation checkLoadedModel(inputModel : Set<P1::C1>) : Void is do
+    	var c1 : P1::C1 
  		c1 := inputModel.one
 		assertTrueWithMsg(c1 !=  void, "didn't find c1")
         var c2 : P2::C2 
@@ -29,16 +43,12 @@ class Main inherits kermeta::kunit::TestCase
         var c3 : P3::C3 
 		c3 := c2.aC3
 		assertTrueWithMsg(c3 !=  void, "didn't find c3")
-        stdio.write("End of simple splitted MM1\n")
-        
-      
     end
     
-    
-    operation loadClassModel() : Set<P1::C1> is do             
+    operation loadClassModel(fileName : String) : Set<P1::C1> is do             
    		var repository : EMFRepository init EMFRepository.new             
    		var resource : Resource init repository.createResource(
-   			"platform:/resource/fr.irisa.triskell.kermeta.tests/test/interpreter/emf_testcases/instances/049_simplemodel_C1.xmi",
+   			fileName,
    			"platform:/resource/fr.irisa.triskell.kermeta.tests/test/interpreter/emf_testcases/metamodels/049_simple_splittedMM1.ecore")
    		resource.load()      
    		/*var resource : Resource 
@@ -56,5 +66,35 @@ class Main inherits kermeta::kunit::TestCase
            		result.add(aC1)
            end
        	end
-   end   
+   	end  
+
+	/**
+	 * try to save a model using metaclasses defined in several ecore files wich 
+	 * are all accessible from one top level ecore file
+	 */	     
+   	operation testSaveModel() : Void is do 
+        var repository : EMFRepository init EMFRepository.new             
+   		var resource : Resource init repository.createResource(
+   			"platform:/resource/fr.irisa.triskell.kermeta.tests/test/interpreter/emf_testcases/instances/out/049_simplemodel_C1.xmi",
+   			"platform:/resource/fr.irisa.triskell.kermeta.tests/test/interpreter/emf_testcases/metamodels/049_simple_splittedMM1.ecore")
+   		 
+        //check that we have correctly loaded each of the 3 model elements
+        var c1 : P1::C1 init P1::C1.new
+        var c2 : P2::C2 init P2::C2.new
+		c1.aC2 := c2
+        var c3 : P3::C3 init P3::C3.new 
+		c2.aC3 := c3
+		
+        // save the model
+        resource.add(c1)
+        resource.save
+      
+      	// reload the saved file and check it
+      	var model : Set<P1::C1> init loadClassModel("platform:/resource/fr.irisa.triskell.kermeta.tests/test/interpreter/emf_testcases/instances/out/049_simplemodel_C1.xmi")
+ 
+        //check that we have correctly loaded each of the 3 model elements
+       	checkLoadedModel(model)
+      	
+    end
+    
 }
