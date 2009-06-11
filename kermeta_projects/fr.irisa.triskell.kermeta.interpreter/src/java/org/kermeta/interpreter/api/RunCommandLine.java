@@ -126,8 +126,8 @@ public class RunCommandLine {
 	    else{
 	    	// use current jar framework
 	    	URL jarURL = JarHelper.locateContainerJar(RunCommandLine.class);
-	    	internalLog.debug(" option -K NOT seen. Trying jar protocol with " + jarURL.toExternalForm());
 	    	if(jarURL != null && jarURL.toString().endsWith(".jar")){
+	    		internalLog.debug(" option -K NOT seen. Trying jar protocol with " + jarURL.toExternalForm());
 		    	kermetaStandardURI = "jar:" + jarURL.toExternalForm() + "!/src/kermeta/framework.km";
 	    	}
 	    	else{

@@ -19,6 +19,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Hashtable;
 import java.util.List;
+import java.util.Set;
 
 import org.apache.commons.logging.Log;
 import org.eclipse.emf.common.util.BasicEList;
@@ -39,6 +40,7 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 
 import fr.irisa.triskell.eclipse.emf.EMFRegistryHelper;
+import fr.irisa.triskell.eclipse.emf.ResourceHelper;
 import fr.irisa.triskell.kermeta.KmPackage;
 import fr.irisa.triskell.kermeta.interpreter.KermetaRaisedException;
 import fr.irisa.triskell.kermeta.language.structure.NamedElement;
@@ -812,7 +814,54 @@ public class Runtime2EMF {
 	 */
 	protected EClass getEClassFromFQualifiedName(String kqname, Resource res) {
 		EClass result = null;
+		result = getEClassFromFQualifiedNameInResource(kqname, res);
+		if(result != null) 
+			return result;
+	
+		// Not found : maybe the ecore is splitted in several files. Let's look in the other part of the ecore file ...
+		Set<Resource>resSet = ResourceHelper.findResourceDependencies(res);
+		for(Resource subRes : resSet){
+			if(subRes == null){
+				Set<Resource>resSet2 = ResourceHelper.findResourceDependencies(res);
+			}
+			result = getEClassFromFQualifiedName(kqname, subRes);
+			
+		}
+		// If it was still not found, maybe it is an Ecore Type? (like EEnum,
+		// EEnumeration literal....)
+		return result;
+	}
+	
+	protected EClass getEClassFromFQualifiedName(String kqname, Set<Resource> resSet) {
+		EClass result = null;
+		// search first in the current resources
+		for(Resource subRes : resSet){
+			result = getEClassFromFQualifiedName(kqname, subRes);
+			
+		}
+		
+		// Not found : maybe these ecore are splitted in several files. Let's look in the other part of the ecore file ...
+		// look into subresources
+		for(Resource subRes : resSet){
+			Set<Resource>subresSet =ResourceHelper.findResourceDependencies(subRes);
+			result = getEClassFromFQualifiedName(kqname, subresSet);	
+		}
+		
+		// If it was still not found, maybe it is an Ecore Type? (like EEnum,
+		// EEnumeration literal....)
+		return result;
+	}
+
+	/**
+	 * looks only in the given resource
+	 * @param kqname
+	 * @param res
+	 * @return
+	 */
+	protected EClass getEClassFromFQualifiedNameInResource(String kqname, Resource res) {
+		EClass result = null;
 		TreeIterator<?> it = res.getAllContents();
+		
 		// Is it a special converted kermeta type (which metamodel is NOT kermeta)
 		while (it.hasNext() && result == null) {
 			EObject obj = (EObject) it.next();
@@ -823,11 +872,10 @@ public class Runtime2EMF {
 				}
 			}
 		}
-		// If it was not found, maybe it is an Ecore Type? (like EEnum,
-		// EEnumeration literal....)
+		// not found in this resource
 		return result;
 	}
-
+	
 	protected EEnumLiteral getEEnumLiteralFromQualifiedNameInEnumeration(
 			String kqname, EEnum eenum) {
 		EEnumLiteral result = null;
