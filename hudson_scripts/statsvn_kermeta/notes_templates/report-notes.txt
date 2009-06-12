@@ -7,12 +7,15 @@ In order to be as relevant as possible, some files are ignored :
  **/*.uml <b>;</b>
  **/*.traceability <b>;</b>
  **/*.smap <b>;</b>
+ **/*.simk <b>;</b>
  **/*.genmodel <b>;</b> 
- **/*.ecoredi <b>;</b>
+ **/*.ecoredi <b>;</b> 
+ **/*.ecorediag <b>;</b>
  **/*.umldi <b>;</b> 
  **/fr.irisa.triskell.kermeta.parser.gen.*/* <b>;</b> 
  **/build/java/** <b>;</b>
  **/migrationv032_v040/ast/** <b>;</b>
- kermeta_projects/org.kermeta.framework.compiled/**
+ kermeta_projects/org.kermeta.framework.compiled/** <b>;</b>
+ **/statsvn_cache/**
  </span>
 </p>

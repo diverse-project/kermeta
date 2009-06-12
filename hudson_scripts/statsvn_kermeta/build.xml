@@ -4,6 +4,10 @@
        
 	</description>
 	
+	<!-- use this value if not provided by hudson -->
+	<property name="env.WORKSPACE" location="/local/hudson/home/jobs/statsvn_kermeta/workspace"/>
+		
+	
 	<property name="statsvn.jar" location="/udd/triskell/bin/multiplatform/statsvn-0.5.0/statsvn.jar"/>
 	<property name="notes.txt" location="./notes_templates/report-notes.txt"/>
 	<property name="svn.log" location="./logfile.log"/>
@@ -47,8 +51,12 @@
 			<arg value="1"/>
 			<arg value="-tags"/>			
 			<arg value="(V|v|KERMETA_V|Kermeta_v).*"/>
+			<arg value="-cache-dir"/>			
+			<arg value="statsvn_cache"/>
+			<arg value="-viewvc"/>			
+			<arg value="http://gforge.inria.fr/plugins/scmsvn/viewcvs.php/?root=kermeta"/>
 		    <arg value="-exclude"/>			
-			<arg value="**/*.xmi;**/*.km;**/*.ecore;**/*.uml;**/*.traceability;**/*.smap;**/*.genmodel;**/*.ecoredi;**/*.umldi;**/fr.irisa.triskell.kermeta.parser.gen.*/*;**/build/java/**;**/migrationv032_v040/ast/**;kermeta_projects/org.kermeta.framework.compiled/**"/>		
+			<arg value="**/*.xmi;**/*.km;**/*.ecore;**/*.uml;**/*.traceability;**/*.smap;**/*.simk;**/*.genmodel;**/*.ecoredi;**/*.ecorediag;**/*.umldi;**/fr.irisa.triskell.kermeta.parser.gen.*/*;**/build/java/**;**/migrationv032_v040/ast/**;kermeta_projects/org.kermeta.framework.compiled/**;**/statsvn_cache/**"/>		
 		    <arg value="-output-dir"/>			
 			<arg value="${output.dir}"/>		
 			<arg value="${svn.log}"/>		
