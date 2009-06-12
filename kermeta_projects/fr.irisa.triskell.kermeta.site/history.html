@@ -10,6 +10,46 @@ $Id: history.html,v 1.38 2008-10-02 15:36:30 dvojtise Exp $
 -->
 <!-- please follow the template ... -->
 <h1>History of Kermeta development</h1>
+<h2 class="Heading">Repository head </h2>
+<h3>New features</h3>
+<ul>
+	
+	<li>It is now possible to add an opposite to a reference or attribute by aspect and support model 
+		loading conformant to this specification 
+		(<a href="http://gforge.inria.fr/tracker/index.php?func=detail&aid=7637&group_id=32&atid=208">feature request #7637)</a>.  
+	</li>
+	<li>It is now possible to load a resource that comes from EMF EPackage registry in order to create ecore models that depends on the nsURI instead of a file. 
+		(<a href="http://gforge.inria.fr/tracker/index.php?func=detail&aid=7944&group_id=32&atid=208">feature request #7944)</a>.  
+	</li>
+</ul>
+<h3>Improved features</h3>
+<ul>
+	<li>Several compiler improvements : "Filter the main operations to limit the runners generation" (<a href="http://gforge.inria.fr/tracker/index.php?func=detail&aid=7578&group_id=32&atid=208">feature request #7578)</a>,
+	 "Add an action to create the *.compiler.properties file" (<a href="http://gforge.inria.fr/tracker/index.php?func=detail&aid=7584&group_id=32&atid=208">feature request #7584)</a>
+	 and "Enable to add operation to the EClass EObject by aspect"   (<a href="http://gforge.inria.fr/tracker/index.php?func=detail&aid=7740&group_id=32&atid=208">feature request #7740)</a>.
+	</li>
+		  	
+	<li>EPackage registration improvements :
+		now the EPackage registry view display all the declared nsURI, even those that haven't been loaded yet. It also displays the plugin name for those that comes from a plugin
+		(<a href="http://gforge.inria.fr/tracker/index.php?func=detail&aid=7884&group_id=32&atid=208">feature request #7884)</a> 
+		added a new action on Ecore : EPackage "re-"registration 
+		(<a href="http://gforge.inria.fr/tracker/index.php?func=detail&aid=7672&group_id=32&atid=208">feature request #7672)</a>.  
+	</li>
+	<li>FileIO improvement : Save text file with a specific encoding 
+		(<a href="http://gforge.inria.fr/tracker/index.php?func=detail&aid=7699&group_id=32&atid=208">feature request #7699)</a>.  
+	</li>
+	<li>Date improvement : Added an operation on Date for getting the current date 
+		(<a href="http://gforge.inria.fr/tracker/index.php?func=detail&aid=7742&group_id=32&atid=208">feature request #7742)</a>.  
+	</li>	
+</ul>
+<h3>Bug fixed</h3>
+<ul>
+	<li>#7632; <a href="http://gforge.inria.fr/tracker/index.php?func=detail&aid=7632&group_id=32&atid=205">[merger] doesn't select the appropriate attribute is aspectized.</a></li>
+	<li>#7660; <a href="http://gforge.inria.fr/tracker/index.php?func=detail&aid=7660&group_id=32&atid=205">Error when saving a uml model.</a></li>
+	<li>#7911; <a href="http://gforge.inria.fr/tracker/index.php?func=detail&aid=7911&group_id=32&atid=205">FileIO does not report the correct exception when the path is incorrect.</a></li>
+	<li>#7966; <a href="http://gforge.inria.fr/tracker/index.php?func=detail&aid=7966&group_id=32&atid=205">KM2KMT Generation failed with Conditional.</a></li>
+	<li>#8009; <a href="http://gforge.inria.fr/tracker/index.php?func=detail&aid=8009&group_id=32&atid=205">Error saving a model whose metamodel is splitted in several ecore files.</a></li>	
+</ul>
 <h2 class="Heading">V1.3.0 (09/03/2003)</h2>
 <h3>New features</h3>
 <ul>
