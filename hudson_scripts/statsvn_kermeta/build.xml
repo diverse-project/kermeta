@@ -5,7 +5,7 @@
 	</description>
 	
 	<property name="statsvn.jar" location="/udd/triskell/bin/multiplatform/statsvn-0.5.0/statsvn.jar"/>
-	<property name="notes.txt" location="/tmp/kermeta_build/src/plugins/fr.irisa.triskell.kermeta.site/scripts/html/report-notes.txt"/>
+	<property name="notes.txt" location="./notes_templates/report-notes.txt"/>
 	<property name="svn.log" location="./logfile.log"/>
 	<property name="output.dir" location="statsvn"/>
         
@@ -24,7 +24,7 @@
 			</commandline>
 		</cvs> -->
 		<exec executable="svn" output="${svn.log}">
-			<env key="SVN_SSH" path="/usr/bin/ssh -i /udd/dvojtise/.ssh/id_rsa_eclipse"/>
+			<env key="SVN_SSH" path="/usr/bin/ssh -i /udd/dvojtise/.ssh/kermeta_bot/id_rsa"/>
 		    <arg value="log"/>
 		    <arg value="-v"/>
 		    <arg value="--xml"/>
@@ -37,12 +37,16 @@
     	           failonerror="true"
     	           maxmemory="256m"
     	           >
-		    <env key="SVN_SSH" path="/usr/bin/ssh -i /udd/dvojtise/.ssh/id_rsa_eclipse"/>
+		    <env key="SVN_SSH" path="/usr/bin/ssh -i /udd/dvojtise/.ssh/kermeta_bot/id_rsa"/>
 			<arg value="-verbose"/> 			
 		    <arg value="-title"/>			
-			<arg value="Kermeta"/> 	 			
+			<arg value="Kermeta"/> 	
+			<arg value="-notes"/>			
+			<arg value="${notes.txt}"/> 			
 		    <arg value="-threads"/>			
 			<arg value="1"/>
+			<arg value="-tags"/>			
+			<arg value="(V|v|KERMETA_V|Kermeta_v).*"/>
 		    <arg value="-exclude"/>			
 			<arg value="**/*.xmi;**/*.km;**/*.ecore;**/*.uml;**/*.traceability;**/*.smap;**/*.genmodel;**/*.ecoredi;**/*.umldi;**/fr.irisa.triskell.kermeta.parser.gen.*/*;**/build/java/**;**/migrationv032_v040/ast/**;kermeta_projects/org.kermeta.framework.compiled/**"/>		
 		    <arg value="-output-dir"/>			
