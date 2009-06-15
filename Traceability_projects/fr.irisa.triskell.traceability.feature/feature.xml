@@ -2,7 +2,7 @@
 <feature
       id="fr.irisa.triskell.traceability"
       label="Kermeta MDK for Traceability"
-      version="1.3.0"
+      version="1.3.0.qualifier"
       provider-name="IRISA/INRIA">
    <install-handler/>
 
@@ -60,6 +60,11 @@ License (&quot;EPL&quot;).
       <import plugin="org.eclipse.jface.text"/>
       <import plugin="org.eclipse.ui.cheatsheets"/>
       <import feature="org.eclipse.emf" version="2.4.1" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.emf.ecore"/>
+      <import plugin="org.eclipse.emf.ecore.xmi"/>
+      <import plugin="org.eclipse.emf.edit"/>
+      <import plugin="org.eclipse.emf.edit.ui"/>
+      <import plugin="org.eclipse.ui.editors"/>
    </requires>
 
    <plugin

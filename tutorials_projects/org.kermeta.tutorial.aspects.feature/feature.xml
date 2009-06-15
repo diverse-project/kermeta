@@ -2,7 +2,7 @@
 <feature
       id="org.kermeta.tutorial.aspects"
       label="Kermeta tutorial on Aspect Programming"
-      version="1.3.0"
+      version="1.3.0.qualifier"
       provider-name="IRISA/INRIA">
 
    <description url="http://www.kermeta.org">
@@ -37,7 +37,7 @@ the terms of the EPL licence.
       <import plugin="org.eclipse.ui"/>
       <import plugin="org.eclipse.core.resources"/>
       <import plugin="org.eclipse.ui.ide"/>
-      <import feature="fr.irisa.triskell.kermeta.samples.fsm" version="1.3.0"/>
+      <import feature="fr.irisa.triskell.kermeta.samples.fsm" version="1.3.0" match="greaterOrEqual"/>
    </requires>
 
    <plugin
