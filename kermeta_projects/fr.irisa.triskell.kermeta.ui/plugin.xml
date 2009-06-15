@@ -163,6 +163,11 @@
              id="fr.irisa.triskell.kermeta.ui.views.kermetadoc"
              name="KermetaDoc">
        </view>
+       <view
+            category="fr.irisa.triskell.kermeta.view"
+             class="fr.irisa.triskell.kermeta.ui.views.ProblemDetailsView"
+            id="fr.irisa.triskell.kermeta.ui.views.problemdetailsview"
+            name="Problem details"/>
     </extension>
     <extension
           point="org.eclipse.ui.navigator.navigatorContent">
