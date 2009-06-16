@@ -261,72 +261,72 @@ public class ExecutionContext {
 	private static List<String> java_keywords = null;
 	
 	public static List<String> getJavaKeywords() {
-		
-		if( java_keywords!=null ) {
-			return java_keywords;
-		}
-		
-		java_keywords = new ArrayList<String>();
-		
-		java_keywords.add("abstract");
-		java_keywords.add("continue");
-		java_keywords.add("for");
-		java_keywords.add("new");
-		java_keywords.add("switch");
-		java_keywords.add("assert");
-		java_keywords.add("default");
-		java_keywords.add("goto");
-		java_keywords.add("package");
-		java_keywords.add("synchronized");
-		java_keywords.add("boolean");
-		java_keywords.add("do");
-		java_keywords.add("if");
-		java_keywords.add("private");
-		java_keywords.add("this");
-		java_keywords.add("break");
-		java_keywords.add("double");
-		java_keywords.add("implements");
-		java_keywords.add("protected");
-		java_keywords.add("throw");
-		java_keywords.add("byte");
-		java_keywords.add("else");
-		java_keywords.add("import");
-		java_keywords.add("public");
-		java_keywords.add("throws");
-		java_keywords.add("case");
-		java_keywords.add("enum");
-		java_keywords.add("instanceof");
-		java_keywords.add("return");
-		java_keywords.add("transient");
-		java_keywords.add("catch");
-		java_keywords.add("extends");
-		java_keywords.add("int");
-		java_keywords.add("short");
-		java_keywords.add("try");
-		java_keywords.add("char");
-		java_keywords.add("final");
-		java_keywords.add("interface");
-		java_keywords.add("static");
-		java_keywords.add("void");
-		java_keywords.add("class");
-		java_keywords.add("finally");
-		java_keywords.add("long");
-		java_keywords.add("strictfp");
-		java_keywords.add("volatile");
-		java_keywords.add("const");
-		java_keywords.add("float");
-		java_keywords.add("native");
-		java_keywords.add("super");
-		java_keywords.add("while");
-		
-		// To see
-		java_keywords.add("true");
-		java_keywords.add("false");
-		java_keywords.add("null");
-		
-		// Specific to Kermeta
-		java_keywords.add("result");
-		
+		synchronized (URI_PLATFORM_PLUGIN) {
+			if( java_keywords!=null ) {
+				return java_keywords;
+			}
+			
+			java_keywords = new ArrayList<String>();
+			
+			java_keywords.add("abstract");
+			java_keywords.add("continue");
+			java_keywords.add("for");
+			java_keywords.add("new");
+			java_keywords.add("switch");
+			java_keywords.add("assert");
+			java_keywords.add("default");
+			java_keywords.add("goto");
+			java_keywords.add("package");
+			java_keywords.add("synchronized");
+			java_keywords.add("boolean");
+			java_keywords.add("do");
+			java_keywords.add("if");
+			java_keywords.add("private");
+			java_keywords.add("this");
+			java_keywords.add("break");
+			java_keywords.add("double");
+			java_keywords.add("implements");
+			java_keywords.add("protected");
+			java_keywords.add("throw");
+			java_keywords.add("byte");
+			java_keywords.add("else");
+			java_keywords.add("import");
+			java_keywords.add("public");
+			java_keywords.add("throws");
+			java_keywords.add("case");
+			java_keywords.add("enum");
+			java_keywords.add("instanceof");
+			java_keywords.add("return");
+			java_keywords.add("transient");
+			java_keywords.add("catch");
+			java_keywords.add("extends");
+			java_keywords.add("int");
+			java_keywords.add("short");
+			java_keywords.add("try");
+			java_keywords.add("char");
+			java_keywords.add("final");
+			java_keywords.add("interface");
+			java_keywords.add("static");
+			java_keywords.add("void");
+			java_keywords.add("class");
+			java_keywords.add("finally");
+			java_keywords.add("long");
+			java_keywords.add("strictfp");
+			java_keywords.add("volatile");
+			java_keywords.add("const");
+			java_keywords.add("float");
+			java_keywords.add("native");
+			java_keywords.add("super");
+			java_keywords.add("while");
+			
+			// To see
+			java_keywords.add("true");
+			java_keywords.add("false");
+			java_keywords.add("null");
+			
+			// Specific to Kermeta
+			java_keywords.add("result");
+		}		
 		return java_keywords;
 	}
 
