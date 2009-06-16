@@ -64,7 +64,7 @@ public class Runtime2SCAAction implements IObjectActionDelegate {
 
 			// if you have an error here, maybe you need to export the package from the compiled version
 			String[] params = {file_uri,out};
-			Main__mainWithParameter__Runner.main_forDeployedVersion(params);
+			Main__mainWithParameter__Runner.main(params);
 			console.println(new OKMessage("done."));
 			
 			
