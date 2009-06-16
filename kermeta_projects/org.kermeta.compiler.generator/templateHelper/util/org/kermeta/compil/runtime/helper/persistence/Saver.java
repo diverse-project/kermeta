@@ -20,13 +20,10 @@ import java.util.List;
 import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.Enumerator;
-import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EFactory;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
-import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 
 
 /**
@@ -47,16 +44,15 @@ public class Saver extends SaverOrLoader {
 		
 		try {
 			Saver s = new Saver(metamodelURI);
-			s.normalizeRegistry(modelURI, metamodelURI);
+			
+			org.eclipse.emf.ecore.resource.Resource resource = s.normalizeRegistryAndCreateResource(modelURI, metamodelURI);
+			
 			List<EObject> instancesToSave = new ArrayList<EObject>();
 			for ( Object o : kermetaResource.getValues() ) {
 				if ( o instanceof EObject ) {
 					instancesToSave.add(s.clone((EObject) o));
 				}
 			}
-			
-			ResourceSet resourceSet = new ResourceSetImpl();
-			org.eclipse.emf.ecore.resource.Resource resource = resourceSet.createResource( URI.createURI(modelURI) );
 			
 			resource.getContents().addAll(instancesToSave);
 			
