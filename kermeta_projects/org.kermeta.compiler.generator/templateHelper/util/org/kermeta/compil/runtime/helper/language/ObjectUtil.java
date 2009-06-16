@@ -14,10 +14,10 @@ import kermeta.language.structure.Object;
 import kermeta.language.structure.ParameterizedType;
 import kermeta.language.structure.Property;
 import kermeta.language.structure.Type;
-import kermeta.standard.Collection;
 import kermeta.standard.Set;
 import kermeta.standard.StandardFactory;
 
+import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.Enumerator;
 import org.eclipse.emf.ecore.EObject;
@@ -237,13 +237,39 @@ public class ObjectUtil {
 		return feature;
 	}
 	
+	private static kermeta.language.structure.EnumerationLiteral getEnumerationLiteral(Enumerator theValue) {
+			
+		kermeta.language.structure.EnumerationLiteral anEnumerationLiteral = kermeta.language.structure.StructureFactory.eINSTANCE.createEnumerationLiteral();
+		anEnumerationLiteral.setName((java.lang.String) ((Enumerator) theValue).getName());
+			
+		// TODO
+		//anEnumerationLiteral.setEnumeration(value);
+			
+		return anEnumerationLiteral;
+	}
+	
 	public static kermeta.language.structure.Object get(kermeta.language.structure.Object o, Property p) {
 		
 		EStructuralFeature feature = retrieveFeature(o, p);
 		
 		if ( feature.isMany() ) {
-			EList value = (EList) o.eGet(feature);
-			Collection c = null;
+			EList<java.lang.Object> value = new BasicEList<java.lang.Object>();
+			
+			if( feature instanceof org.eclipse.emf.ecore.EAttribute
+					&& ((org.eclipse.emf.ecore.EAttribute) feature).getEAttributeType() instanceof org.eclipse.emf.ecore.EEnum) {
+				EList<java.lang.Object> value_ = (EList<java.lang.Object>) o.eGet(feature);
+				if( value_.size()>0 && value_.get(0) instanceof Enumerator ) {
+					
+					int index=0;
+					for(java.lang.Object obj_enum : value_) {
+						value.add(index, getEnumerationLiteral((Enumerator) obj_enum));
+						index++;
+					}
+				}
+			} else {
+				value = (EList<java.lang.Object>) o.eGet(feature);
+			}
+			
 			if ( feature.isOrdered() ) {
 				if ( feature.isUnique() ) {
 					return CollectionUtil.convertAsOrderedSet(value);
@@ -265,9 +291,7 @@ public class ObjectUtil {
 		if(feature instanceof org.eclipse.emf.ecore.EAttribute) {
 			if( ((org.eclipse.emf.ecore.EAttribute) feature).getEAttributeType() instanceof org.eclipse.emf.ecore.EEnum) {
 				if( theValue instanceof Enumerator ) {
-					kermeta.standard.String _String = StandardFactory.eINSTANCE.createString();
-					_String.setValue((java.lang.String) ((Enumerator) theValue).getLiteral());
-					return (kermeta.language.structure.Object) _String;
+					return getEnumerationLiteral((Enumerator) theValue);
 				}
 			}
 		}
@@ -315,6 +339,15 @@ public class ObjectUtil {
 					}
 				}
 			}
+			
+			// Yes that's very ugly ! but that's the best known way for getting a value having for type a EDataType out of the kermeta::language::structure::Object tree subClasses
+			// So if the value exists, but not a Type or ValueType known by Kermeta, we return a String representing the value
+			if(value_type==null && o.eGet(feature)!=null) {
+				kermeta.standard.String _String = StandardFactory.eINSTANCE.createString();
+				_String.setValue((java.lang.String) o.eGet(feature).toString());
+				value_type = (kermeta.language.structure.Object) _String;	
+			}
+			
 			return value_type;
 		}
 		
