@@ -46,18 +46,11 @@ public class Loader extends SaverOrLoader {
 		
 		Loader l = new Loader(metamodelURI);
 		l.normalizeRegistry(modelURI, metamodelURI);
+		//List<EObject> instances = new ArrayList<EObject>();
 		
 		ResourceSet rs = new ResourceSetImpl();
 		
-		URI uri = null;
-		org.eclipse.emf.ecore.resource.Resource resource = null;
-		try {
-			uri = URI.createURI(modelURI);
-			resource = rs.getResource( uri, true );
-		} catch (Exception e) {
-			uri = URI.createFileURI(modelURI);
-			resource = rs.getResource( uri, true );
-		}
+		org.eclipse.emf.ecore.resource.Resource resource = rs.getResource( URI.createURI(modelURI), true );
 		
 		/*** Maybe this source code could be used to improve performance
 		 * the first tries on the compiler itself are not concluant,
@@ -125,7 +118,6 @@ public class Loader extends SaverOrLoader {
 	 */
 	private void cloneEObject(EObject sourceObject, EObject targetObject) {
 		for ( EStructuralFeature sourceFeature : sourceObject.eClass().getEAllStructuralFeatures() ) {
-			
 			Object value = sourceObject.eGet(sourceFeature);
 			
 			EStructuralFeature targetFeature = getEStructuralFeature(targetObject.eClass(), sourceFeature.getName());
@@ -187,19 +179,11 @@ public class Loader extends SaverOrLoader {
 					EList sourceList = (EList) sourceObject.eGet(sourceFeature);
 					EList targetList = (EList) targetObject.eGet(targetFeature);
 					for ( Object o : sourceList ) {
-						if ( o instanceof EEnumLiteral ) {
-							Object realValue = createInstance((EEnumLiteral) o, this.getMetamodelURISpecialCompiler());
-							if( !targetFeature.isUnique() && targetList instanceof BasicEList ) {
-								((BasicEList) targetList).addUnique(realValue);
-							} else {
-								targetList.add(realValue);
-							}
-						} else if ( o instanceof EObject ) {
+						if ( o instanceof EObject ) {
 							EObject sourceListObject = (EObject) o;
 							EObject targetListObject = _instanceMapping.get(sourceListObject);
-							
 							if ( targetListObject == null ) {
-								targetListObject = createInstance(sourceListObject, getRootEPackage(sourceListObject.eClass().getEPackage()).getNsURI() + this.uri_suffix);//this.getMetamodelURISpecialCompiler());
+								targetListObject = createInstance(sourceListObject, this.getMetamodelURISpecialCompiler());
 								cloneEObject(sourceListObject, targetListObject);
 							}
 							
@@ -223,14 +207,7 @@ public class Loader extends SaverOrLoader {
 						} else {
 							
 							if( !targetFeature.isUnique() && targetList instanceof BasicEList ) {
-								
-								try {
-									((BasicEList) targetList).addUnique(o);
-								} catch (java.lang.RuntimeException re) {
-									System.err.println("Please to check..., maybe many extendedMetadata are missing: " + "sourceFeature: " + sourceFeature.getEContainingClass().getName() + "::" + sourceFeature.getName() + " - " + "targetFeature: " + targetFeature.getName());
-								}
-								
-								
+								((BasicEList) targetList).addUnique(o);
 							} else {
 								targetList.add(o);
 							}
@@ -243,21 +220,19 @@ public class Loader extends SaverOrLoader {
 			 * Datatypes handling.
 			 */
 			} else if ( value != null ) {
-				
-				if( !sourceFeature.isDerived() && sourceFeature.isChangeable() ) {
-					
-					Object realValue = value;
-					// Special case for Enumerator. Need to create an instance from the good factory.
-					if ( value instanceof Enumerator ) {
-						realValue = createInstance( (Enumerator) value, this.getMetamodelURISpecialCompiler());
-					} else if ( sourceObject instanceof EEnumLiteral ) {
-						if(value instanceof EEnumLiteral) {
-							realValue = createInstance( (EEnumLiteral) value, this.getMetamodelURISpecialCompiler());
-						} else {
-							realValue = value;
-						}
+				Object realValue = value;
+				// Special case for Enumerator. Need to create an instance from the good factory.
+				if ( value instanceof Enumerator ) {
+					realValue = createInstance( (Enumerator) value, this.getMetamodelURISpecialCompiler());
+				} else if ( sourceObject instanceof EEnumLiteral ) {
+					if(value instanceof EEnumLiteral) {
+						realValue = createInstance( (EEnumLiteral) value, this.getMetamodelURISpecialCompiler());
+					} else {
+						realValue = value;
 					}
+				}
 					
+				if( !sourceFeature.isDerived() && sourceFeature.isChangeable() ) {
 					targetObject.eSet(targetFeature, realValue);
 				}
 			}
@@ -271,14 +246,11 @@ public class Loader extends SaverOrLoader {
 	 * @return The structural feature which name matches the feature name argument or null if any.
 	 */
 	private EStructuralFeature getEStructuralFeature(EClass clazz, String featureName) {
-		for ( EStructuralFeature feature : clazz.getEAllStructuralFeatures() ) {
+		for ( EStructuralFeature feature : clazz.getEAllStructuralFeatures() )
 			// Pay attention to special keywords that have been prefixed with the '_' character.
 			// FIXME TODO We need use the dictionnary of Java Keywords CF: Holala Paco, this patch should be handled in another way...
-			if ( feature.getName().equals(featureName) || feature.getName().equals("_" + featureName) ) {
+			if ( feature.getName().equals(featureName) || feature.getName().equals("_" + featureName) )
 				return feature;
-			}
-		}
-
 		return null;
 	}
 	

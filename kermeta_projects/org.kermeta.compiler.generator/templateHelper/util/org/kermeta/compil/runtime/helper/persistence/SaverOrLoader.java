@@ -14,7 +14,6 @@
 package org.kermeta.compil.runtime.helper.persistence;
 
 import java.lang.reflect.Field;
-import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Hashtable;
@@ -26,7 +25,6 @@ import org.eclipse.core.runtime.IConfigurationElement;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.emf.codegen.util.CodeGenUtil;
 import org.eclipse.emf.common.util.Enumerator;
-import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EDataType;
@@ -37,8 +35,6 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EPackage.Registry;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.kermeta.compil.runtime.PersistenceMapping;
@@ -78,7 +74,7 @@ abstract public class SaverOrLoader {
 	 */
 	private String metamodelURISpecialCompiler;
 
-	public final String uri_suffix = "/kermeta_temp_uri";
+	private final String uri_suffix = "/kermeta_temp_uri";
 	
 	/**
 	 * @generated
@@ -96,7 +92,7 @@ abstract public class SaverOrLoader {
 	 */
 	public EPackage getRootEPackage(EPackage pack) {
 		if( pack.eContainer()!=null && pack.eContainer() instanceof EPackage ) {
-			pack = getRootEPackage((EPackage) pack.eContainer());
+			getRootEPackage((EPackage) pack.eContainer());
 		}
 		return pack;
 	}
@@ -111,7 +107,7 @@ abstract public class SaverOrLoader {
 		
 		EFactory factory = getTargetEFactory(target_root_epack, EcoreHelper.getQualifiedName(source_epack, "."));
 		
-		if( factory == null ) {
+		if(factory==null) {
 			String tmp_ns_uri = source_epack.getNsURI();
 			if( tmp_ns_uri.contains(uri_suffix) ) {
 				factory = Registry.INSTANCE.getEFactory(tmp_ns_uri.replace(uri_suffix, ""));
@@ -372,7 +368,6 @@ abstract public class SaverOrLoader {
 		EPackage _epack = null;
 		try {
 			
-			// The implementation of the plugin uml2 doest not use the same case Uml vs UML than in the metamodel uml2.ecore
 			if( str_pack.equals("org.eclipse.uml2.uml.UmlPackage") ) {
 				str_pack = "org.eclipse.uml2.uml.UMLPackage";
 			}
@@ -395,7 +390,7 @@ abstract public class SaverOrLoader {
 		try {
 			String creationMethodName = "create" + sourceObject.getClass().getSimpleName() + "FromString";
 			Method method = factory.getClass().getMethod(creationMethodName, new Class[] {EDataType.class, String.class});
-			Enumerator targetObject = (Enumerator) method.invoke(factory, new java.lang.Object[] {null, sourceObject.getLiteral()});
+			Enumerator targetObject = (Enumerator) method.invoke(factory, new Object[] {null, sourceObject.getLiteral()});
 			return targetObject;
 		} catch (Exception e) {
 			if( Registry.INSTANCE.getEPackage(metamodelURI).getClass() == org.eclipse.emf.ecore.impl.EPackageImpl.class ) {
@@ -449,101 +444,7 @@ abstract public class SaverOrLoader {
 			registerTheUri(_metamodelURI);
 		}
 		String fileExtension = getFileExtension(_modelURI);
-		
-		org.eclipse.emf.ecore.resource.impl.ResourceFactoryImpl resourceFactory = null;
-		
-		String str_clazz = getFactoryClass(fileExtension, _metamodelURI);
-
-		// If we cannot retrieve the dedicated ResourceFactory then the XMIResourceFactory will be used
-		if( str_clazz!=null ) {
-			
-			try {
-				Class<?> clazz = SaverOrLoader.class.getClassLoader().loadClass(str_clazz);
-				resourceFactory = (org.eclipse.emf.ecore.resource.impl.ResourceFactoryImpl) clazz.newInstance();
-			} catch (ClassNotFoundException e) {
-				resourceFactory = null;
-			} catch (IllegalAccessException e) {
-				resourceFactory = null;
-			} catch (InstantiationException e) {
-				resourceFactory = null;
-			} catch (IllegalArgumentException e) {
-				resourceFactory = null;
-			} catch (SecurityException e) {
-				resourceFactory = null;
-			}
-		}
-		
-		if( !Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().containsKey(fileExtension) ) {
-			if(resourceFactory==null) {
-				resourceFactory = new XMIResourceFactoryImpl();
-			}
-			Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(fileExtension, resourceFactory);
-		}
-	}
-	
-	/**
-	 * Normalize the registry and get a resource
-	 * Mainly used for the Saver
-	 * 
-	 * @generated
-	 * @param _modelURI
-	 * @param _metamodelURI
-	 * @return
-	 */
-	public org.eclipse.emf.ecore.resource.Resource normalizeRegistryAndCreateResource(String _modelURI, String _metamodelURI) {
-		
-		if( !Registry.INSTANCE.containsKey(_metamodelURI) ) {
-			registerTheUri(_metamodelURI);
-		}
-		
-		String fileExtension = getFileExtension(_modelURI);
-		
-		org.eclipse.emf.ecore.resource.Resource resource = null;
-		
-		String str_clazz = getFactoryClass(fileExtension, _metamodelURI);
-
-		if( str_clazz!=null ) {
-			
-			try {
-				Class<?> clazz = SaverOrLoader.class.getClassLoader().loadClass(str_clazz);
-				
-				org.eclipse.emf.ecore.resource.impl.ResourceFactoryImpl resourceFactory = (org.eclipse.emf.ecore.resource.impl.ResourceFactoryImpl) clazz.newInstance();
-				
-				Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(fileExtension, resourceFactory);
-				
-				Method method = resourceFactory.getClass().getMethod("createResource", new Class[] {org.eclipse.emf.common.util.URI.class});
-				
-		        resource = (org.eclipse.emf.ecore.resource.Resource) method.invoke(resourceFactory, new java.lang.Object[] {URI.createURI(_modelURI)});
-				
-			} catch (ClassNotFoundException e) {
-				resource = null;
-			} catch (IllegalAccessException e) {
-				resource = null;
-			} catch (InstantiationException e) {
-				resource = null;
-			} catch (IllegalArgumentException e) {
-				resource = null;
-			} catch (InvocationTargetException e) {
-				resource = null;
-			} catch (SecurityException e) {
-				resource = null;
-			} catch (NoSuchMethodException e) {
-				resource = null;
-			}
-		}
-		
-		// If we cannot retrieve the dedicated ResourceFactory then the XMIResourceFactory will be used
-		if( resource==null ) {
-		
-			if( !Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().containsKey(fileExtension) ) {
-				Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(fileExtension, new XMIResourceFactoryImpl());
-			}
-		
-			ResourceSet resourceSet = new ResourceSetImpl();
-			resource = resourceSet.createResource( URI.createURI(_modelURI) );
-		}
-		
-		return resource;
+		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(fileExtension, new XMIResourceFactoryImpl());
 	}
 	
 	/**
@@ -554,34 +455,6 @@ abstract public class SaverOrLoader {
 	public static String getFileExtension( String modelURI ) {
 		String[] seg_modelURI = modelURI.split("\\.");
 		return seg_modelURI[seg_modelURI.length-1];
-	}
-	
-	/**
-	 * Get the name of the ResourceFactory if exists, that following the extension of the given file (model) or the EFactory (selected via the metamodel's uri)
-	 * 
-	 * @generated
-	 * @param fileExtension
-	 * @param metamodelURI
-	 * @return
-	 */
-	private java.lang.String getFactoryClass(java.lang.String fileExtension, java.lang.String metamodelURI) {
-		String str_clazz = null;
-		
-		if( Platform.isRunning() ) {
-			IConfigurationElement element = getIConfigurationElementByExtension(fileExtension);
-		
-			if( element != null ) {
-				str_clazz = element.getAttribute("class");
-			}
-		}
-		
-		EFactory eFactory = Registry.INSTANCE.getEFactory(metamodelURI);
-		
-		if( str_clazz==null && eFactory!=null ) {
-			str_clazz = eFactory.getClass().getName().replace(".impl.", ".util.").replace("FactoryImpl", "ResourceFactoryImpl");
-		}
-		
-		return str_clazz;
 	}
 	
 	/**
@@ -630,16 +503,6 @@ abstract public class SaverOrLoader {
 		IConfigurationElement[] elements = Platform.getExtensionRegistry().getConfigurationElementsFor("org.eclipse.emf.ecore.generated_package");
 		for( IConfigurationElement currentElement : elements ) {
 			if ( currentElement.getAttribute("uri").equals( metamodelURI ) ) {
-				return currentElement;
-			}
-		}
-		return null;
-	}
-	
-	private static IConfigurationElement getIConfigurationElementByExtension(String extension) {
-		IConfigurationElement[] elements = Platform.getExtensionRegistry().getConfigurationElementsFor("org.eclipse.emf.ecore.extension_parser");
-		for( IConfigurationElement currentElement : elements ) {
-			if ( currentElement.getAttribute("type").equals( extension ) ) {
 				return currentElement;
 			}
 		}
