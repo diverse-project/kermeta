@@ -24,13 +24,19 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 
+import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.ResourcesPlugin;
+import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.IPath;
+import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.emf.ecore.resource.impl.ExtensibleURIConverterImpl;
+
+import fr.irisa.triskell.eclipse.resources.ResourceHelper;
 
 
 public class SimpleFileIOUtil {
@@ -84,14 +90,15 @@ public class SimpleFileIOUtil {
             out.close();
             
             // Refresh the content of the folder that contains the created file
-        	try {
-            	int i_folder = filename.lastIndexOf("/");
-            	if(i_folder == -1){
-            		// maybe this is a windows like path
-            		i_folder = filename.lastIndexOf("\\");
-            	}
-			} catch (Exception e) {
-				e.printStackTrace();
+            try {
+            	IPath wsLocation = ResourcesPlugin.getWorkspace().getRoot().getLocation();
+            	String wsRelativeFilename = filename.replaceAll("\\\\", "/").replaceFirst(wsLocation.toString(), "platform:/resource");
+            	IFile savedFile = ResourceHelper.getIFile(wsRelativeFilename, false);	
+            	if(savedFile != null)
+            		savedFile.getParent().refreshLocal(IFile.DEPTH_INFINITE, new NullProgressMonitor());
+			} catch (CoreException e1) {
+				// doesn't care if it doesn't work, this probably mean that this is outside of the workspace 
+				//e1.printStackTrace();
 			}
         }
         catch(IOException e) {
