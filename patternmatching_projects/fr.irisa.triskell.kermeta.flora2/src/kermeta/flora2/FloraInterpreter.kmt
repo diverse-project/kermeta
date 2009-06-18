@@ -10,7 +10,7 @@ package flora2;
 require kermeta
 
 //require "../../flora2/Flora2wVisitor.kmt"
-require "platform:/plugin/fr.irisa.triskell.kermeta.flora2/src/kermeta/flora2/visitor/Flora2SerializerVisitor.kmt"
+require "platform:/lookup/fr.irisa.triskell.kermeta.flora2/src/kermeta/flora2/visitor/Flora2SerializerVisitor.kmt"
   
  
 using kermeta::standard 

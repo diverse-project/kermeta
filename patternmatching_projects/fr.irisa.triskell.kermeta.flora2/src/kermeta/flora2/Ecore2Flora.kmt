@@ -1,6 +1,6 @@
 /* $Id: Ecore2Flora.kmt,v 1.5 2007-07-26 12:40:07 bmorin Exp $
  * Creation date: October 4, 2006
- * License:
+ * License: EPL
  * Copyright:
  * Authors:
  */
@@ -11,7 +11,7 @@ package kermeta::flora2;
 require kermeta
 
 require "http://www.eclipse.org/emf/2002/Ecore"
-require "platform:/plugin/fr.irisa.triskell.kermeta.flora2/src/kermeta/flora2/Ecore2FloraBasicElements.kmt"
+require "platform:/lookup/fr.irisa.triskell.kermeta.flora2/src/kermeta/flora2/Ecore2FloraBasicElements.kmt"
 //require "../../flora2/Flora2wVisitor.kmt"    
 using kermeta::standard 
    

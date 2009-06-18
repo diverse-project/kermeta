@@ -10,8 +10,8 @@
 package kermeta::flora2;
 
 //require "../../flora2/Flora2wVisitor.kmt"
-require "platform:/plugin/fr.irisa.triskell.kermeta.flora2/src/kermeta/flora2/Ecore2FloraBasicElements.kmt"
-require "platform:/plugin/fr.irisa.triskell.kermeta.flora2/src/kermeta/reflection/ReflectionHandler.kmt"
+require "platform:/lookup/fr.irisa.triskell.kermeta.flora2/src/kermeta/flora2/Ecore2FloraBasicElements.kmt"
+require "platform:/lookup/fr.irisa.triskell.kermeta.flora2/src/kermeta/reflection/ReflectionHandler.kmt"
 require kermeta  
       
 using kermeta::language::structure
@@ -74,7 +74,7 @@ class Model2Flora inherits Ecore2FloraBasicElements {
         if(not(pro.isDerived)) then
         if(pro.upper==1) then
         	var temp:Object
-        	temp?=obj.get(pro)
+        	temp:=obj.get(pro)
         	//stdio.writeln("adding: "+pro.name+"("+pro.type.toString+")")
         	if (temp!=void) then
 		        propertyInstances.add(temp)

@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Flora2 Plug-in
 Bundle-SymbolicName: fr.irisa.triskell.kermeta.flora2; singleton:=true
-Bundle-Version: 1.0.0
+Bundle-Version: 1.0.0.qualifier
 Bundle-Activator: fr.irisa.triskell.kermeta.flora2.Activator
 Bundle-Vendor: IRISA Triskell
 Bundle-Localization: plugin

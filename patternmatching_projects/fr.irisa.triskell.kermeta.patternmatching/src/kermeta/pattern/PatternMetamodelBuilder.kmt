@@ -8,7 +8,7 @@
 package kermeta::pattern;
 
 require kermeta
-require "platform:/resource/fr.irisa.triskell.kermeta.patternmatching/src/kermeta/pattern/ecoreClone2.kmt"
+require "platform:/lookup/fr.irisa.triskell.kermeta.patternmatching/src/kermeta/pattern/ecoreClone2.kmt"
   
 using kermeta::standard
 using kermeta::persistence

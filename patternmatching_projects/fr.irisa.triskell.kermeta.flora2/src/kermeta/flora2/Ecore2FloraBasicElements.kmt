@@ -8,7 +8,7 @@
 package kermeta::flora2;
 
 require "http://www.eclipse.org/emf/2002/Ecore"
-require "platform:/plugin/fr.irisa.triskell.kermeta.flora2/src/flora2/Flora2wVisitor.kmt"
+require "platform:/lookup/fr.irisa.triskell.kermeta.flora2/src/flora2/Flora2wVisitor.kmt"
  
 require kermeta
 

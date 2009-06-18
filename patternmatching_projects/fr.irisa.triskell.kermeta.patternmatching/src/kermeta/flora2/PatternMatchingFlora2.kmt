@@ -11,13 +11,13 @@ require kermeta
 
 require "platform:/resource/fr.irisa.triskell.kermeta.patternmatching/src/kermeta/pattern/PatternMatching.kmt"
 
-require "platform:/plugin/fr.irisa.triskell.kermeta.flora2/src/flora2/Flora2wVisitor.kmt"
-require "platform:/plugin/fr.irisa.triskell.kermeta.flora2/src/kermeta/flora2/FloraInterpreter.kmt"
-require "platform:/plugin/fr.irisa.triskell.kermeta.flora2/src/kermeta/flora2/Ecore2Flora.kmt"
-require "platform:/plugin/fr.irisa.triskell.kermeta.flora2/src/kermeta/flora2/Model2Flora.kmt"
-require "platform:/plugin/fr.irisa.triskell.kermeta.flora2/src/kermeta/flora2/visitor/Flora2SerializerVisitor.kmt"
+require "platform:/resource/fr.irisa.triskell.kermeta.flora2/src/flora2/Flora2wVisitor.kmt"
+require "platform:/lookup/fr.irisa.triskell.kermeta.flora2/src/kermeta/flora2/FloraInterpreter.kmt"
+require "platform:/lookup/fr.irisa.triskell.kermeta.flora2/src/kermeta/flora2/Ecore2Flora.kmt"
+require "platform:/lookup/fr.irisa.triskell.kermeta.flora2/src/kermeta/flora2/Model2Flora.kmt"
+require "platform:/lookup/fr.irisa.triskell.kermeta.flora2/src/kermeta/flora2/visitor/Flora2SerializerVisitor.kmt"
  
-require "platform:/resource/fr.irisa.triskell.kermeta.patternmatching/src/kermeta/flora2/ModelPattern2Flora.kmt"
+require "platform:/lookup/fr.irisa.triskell.kermeta.patternmatching/src/kermeta/flora2/ModelPattern2Flora.kmt"
 
  
 using ecore

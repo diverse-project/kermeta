@@ -10,9 +10,9 @@ package kermeta::flora2::pattern;
 require kermeta
 
 require "platform:/resource/fr.irisa.triskell.kermeta.patternmatching/src/kermeta/pattern/metamodel/PatternFramework.ecore"  
-require "platform:/plugin/fr.irisa.triskell.kermeta.flora2/src/flora2/Flora2wVisitor.kmt"
+require "platform:/lookup/fr.irisa.triskell.kermeta.flora2/src/flora2/Flora2wVisitor.kmt"
 
-require "platform:/plugin/fr.irisa.triskell.kermeta.flora2/src/kermeta/flora2/Model2Flora.kmt"
+require "platform:/lookup/fr.irisa.triskell.kermeta.flora2/src/kermeta/flora2/Model2Flora.kmt"
 
     
 using kermeta::standard  

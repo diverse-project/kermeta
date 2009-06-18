@@ -1,17 +1,14 @@
 /* $Id: Flora2SerializerVisitor.kmt,v 1.5 2008-02-19 14:27:19 bmorin Exp $
  * Creation date: October 5, 2006
- * License:
+ * License: EPL
  * Copyright:
  * Authors:
  */
-@mainClass "root_package::FloraVisitor"
-@mainOperation "main"
-
  
 package flora2::visitors;
 
 require kermeta
-require "platform:/plugin/fr.irisa.triskell.kermeta.flora2/src/flora2/Flora2wVisitor.kmt"  
+require "platform:/lookup/fr.irisa.triskell.kermeta.flora2/src/flora2/Flora2wVisitor.kmt"  
   
 using kermeta::language::structure
 using kermeta::standard

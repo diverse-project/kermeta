@@ -95,14 +95,12 @@ aspect class EPackage
 			var c : EClassifier
 			c ?= a.cloned
 			p.eClassifiers.add(c)
-			c.ePackage := p
 		}
 		self.eSubpackages.each{ a |
 			a.clone
 			var c : EPackage
 			c ?= a.cloned 
 			p.eSubpackages.add(c)
-			c.eSuperPackage := p
 		}
 	end
 	
@@ -146,14 +144,12 @@ aspect class EClass
 			var c : EOperation
 			c ?= a.cloned
 			p.eOperations.add(c)
-			c.eContainingClass := p
 		}
 		self.eStructuralFeatures.each{ a |
 			a.clone 
 			var c : EStructuralFeature
 			c ?= a.cloned
 			p.eStructuralFeatures.add(c)
-			c.eContainingClass := p	
 		}
 		//stdio.writeln(self.name+" "+self.toString+" -> "+p.name+" "+p.toString)	
 	end
@@ -259,8 +255,7 @@ aspect class EOperation
 			a.clone
 			var c : EParameter
 			c ?= a.cloned
-			p.eParameters.add(c)
-			c.eOperation := p	
+			p.eParameters.add(c)	
 		}
 	end
 	
@@ -319,7 +314,6 @@ aspect class EEnum
 			var c : EEnumLiteral
 			c ?= a.cloned
 			p.eLiterals.add(c)
-			c.eEnum := p
 		}
 	end
 }
