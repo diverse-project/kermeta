@@ -175,6 +175,22 @@ public void testvalid_030_requireEcoreUsingGenerics() throws Exception {
 testvalidFile("test/io/typechecher_tests/valid","030_requireEcoreUsingGenerics.kmt" );
 }
 
+public void testvalid_031_testGenericTypeAsReturnParameterAndSelf1() throws Exception {
+testvalidFile("test/io/typechecher_tests/valid","031_testGenericTypeAsReturnParameterAndSelf1.kmt" );
+}
+
+public void testvalid_031_testGenericTypeAsReturnParameterAndSelf2() throws Exception {
+testvalidFile("test/io/typechecher_tests/valid","031_testGenericTypeAsReturnParameterAndSelf2.kmt" );
+}
+
+public void testvalid_031_testGenericTypeAsReturnParameterAndSelf3() throws Exception {
+testvalidFile("test/io/typechecher_tests/valid","031_testGenericTypeAsReturnParameterAndSelf3.kmt" );
+}
+
+public void testvalid_031_testGenericTypeAsReturnParameterAndSelf4() throws Exception {
+testvalidFile("test/io/typechecher_tests/valid","031_testGenericTypeAsReturnParameterAndSelf4.kmt" );
+}
+
 public void testvalid_AliasAndFunctions() throws Exception {
 testvalidFile("test/io/typechecher_tests/valid","AliasAndFunctions.kmt" );
 }
