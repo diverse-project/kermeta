@@ -12,7 +12,7 @@ package root_package;
 
 
 require kermeta
-require "platform:/resource/SmartAdapters/program/PatternBuilder/MMPatternBuilder.kmt"
+require "platform:/lookup/org.kermeta.smartadapters/program/PatternBuilder/MMPatternBuilder.kmt"
  
 using kermeta::standard
 using org::smartadapters::utils

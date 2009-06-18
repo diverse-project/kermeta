@@ -8,7 +8,7 @@
 package org::kermeta::runtime::adapter;
 
 require kermeta
-require "platform:/resource/SmartAdapters/program/adapter/PlatformAdapter.kmt"
+require "platform:/lookup/org.kermeta.smartadapters/program/adapter/PlatformAdapter.kmt"
 
 using kermeta::standard
 using kermeta::persistence

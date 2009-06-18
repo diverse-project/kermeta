@@ -13,10 +13,10 @@
 
 package org;
 require kermeta
-require "platform:/resource/SmartAdapters/metamodel/generic/genericSmartAdapters.kmt"
+require "platform:/lookup/org.kermeta.smartadapters/metamodel/generic/genericSmartAdapters.kmt"
 //require "platform:/resource/SmartAdapters/metamodel/domain/metamodel@runtime.kmt"
 require "http://art"
-require "platform:/resource/SmartAdapters/metamodel/domain/metamodel@runtimePattern.ecore"
+require "platform:/lookup/org.kermeta.smartadapters/metamodel/domain/metamodel@runtimePattern.ecore"
 
 using kermeta::standard
 using kermeta::utils

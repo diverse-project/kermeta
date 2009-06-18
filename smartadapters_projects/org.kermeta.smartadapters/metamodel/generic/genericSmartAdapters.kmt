@@ -7,10 +7,10 @@
 
 package org;
 
-require "platform:/resource/SmartAdapters/metamodel/generic/genericSmartAdaptersBase.kmt"
-require "platform:/resource/SmartAdapters/program/weaving/converter.kmt"
+require "platform:/resource/org.kermeta.smartadapters/metamodel/generic/genericSmartAdaptersBase.kmt"
+require "platform:/resource/org.kermeta.smartadapters/program/weaving/converter.kmt"
 
-require "platform:/resource/SmartAdapters/program/weaving/aspectizedFramework.kmt"
+require "platform:/resource/org.kermeta.smartadapters/program/weaving/aspectizedFramework.kmt"
 
 using kermeta::standard
 using kermeta::utils

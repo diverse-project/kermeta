@@ -9,7 +9,7 @@ package weaver;
 
 require kermeta
 
-require "platform:/resource/SmartAdapters/metamodel/generic/genericSmartAdapters.kmt"
+require "platform:/resource/org.kermeta.smartadapters/metamodel/generic/genericSmartAdapters.kmt"
 require "platform:/plugin/fr.irisa.triskell.kermeta.ecore/src/kermeta/helpers/EcoreHelper.kmt"
 require "platform:/resource/fr.irisa.triskell.kermeta.patternmatching/src/kermeta/flora2/PatternMatchingFlora2.kmt"
 

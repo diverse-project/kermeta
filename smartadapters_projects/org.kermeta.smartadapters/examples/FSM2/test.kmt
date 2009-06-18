@@ -11,7 +11,7 @@
 package test;
 
 require kermeta
-require "platform:/resource/SmartAdapters/program/weaving/weaver4FSMs.kmt"
+require "platform:/lookup/org.kermeta.smartadapters/program/weaving/weaver4FSMs.kmt"
 
 using weaver
 using kermeta::standard

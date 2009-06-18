@@ -9,4 +9,4 @@ package weaver;
 
 //require "./weaver.kmt"
 require "./CustomWeaver.kmt"
-require "platform:/resource/SmartAdapters/metamodel/specific/runtime_AOM_Framework.kmt" 
+require "platform:/lookup/org.kermeta.smartadapters/metamodel/specific/runtime_AOM_Framework.kmt" 

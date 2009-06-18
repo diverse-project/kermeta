@@ -11,8 +11,8 @@ package test;
 require kermeta
 
 //Loading the SmartAdapter aspect weaver
-require "platform:/resource/SmartAdapters/program/weaving/weaver4Runtime.kmt"
-require "platform:/resource/Runtime2SCA/src/kermeta/runtime2XML/Runtime2SCA.kmt"
+require "platform:/lookup/org.kermeta.smartadapters/program/weaving/weaver4Runtime.kmt"
+require "platform:/lookup/org.kermeta.art.runtime2sca/src/kermeta/runtime2XML/Runtime2SCA.kmt"
 
 using kermeta::standard
 using kermeta::io

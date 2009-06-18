@@ -13,9 +13,9 @@
 
 package org;
 require kermeta
-require "platform:/resource/SmartAdapters/metamodel/generic/genericSmartAdapters.kmt"
-require "platform:/resource/SmartAdapters/metamodel/domain/FSMMM.ecore"
-require "platform:/resource/SmartAdapters/metamodel/domain/FSMMMPattern.ecore"
+require "platform:/lookup/org.kermeta.smartadapters/metamodel/generic/genericSmartAdapters.kmt"
+require "platform:/lookup/org.kermeta.smartadapters/metamodel/domain/FSMMM.ecore"
+require "platform:/lookup/org.kermeta.smartadapters/metamodel/domain/FSMMMPattern.ecore"
 
 using kermeta::standard
 using kermeta::utils

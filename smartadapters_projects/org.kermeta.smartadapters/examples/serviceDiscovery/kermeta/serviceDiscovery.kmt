@@ -12,11 +12,11 @@ package test;
 require kermeta
 
 //Loading the SmartAdapter aspect weaver
-require "platform:/resource/SmartAdapters/program/weaving/weaver4Runtime.kmt"
+require "platform:/lookup/org.kermeta.smartadapters/program/weaving/weaver4Runtime.kmt"
 
 //Loading the platform adapter (here, the service discovery example for the Fractal platform)
 //just change this require to adapt another platform and/or another application
-require "platform:/resource/SmartAdapters/program/adapter/ServiceDiscovery.kmt"
+require "platform:/lookup/org.kermeta.smartadapters/program/adapter/ServiceDiscovery.kmt"
 
 using kermeta::standard 
 using kermeta::io

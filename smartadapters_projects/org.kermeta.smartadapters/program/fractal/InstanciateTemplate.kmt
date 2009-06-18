@@ -12,7 +12,7 @@ package specialize;
 
 require kermeta
 require "platform:/plugin/fr.irisa.triskell.kermeta.ecore/src/kermeta/helpers/EcoreHelper.kmt"
-require "platform:/resource/SmartAdapters/program/fractal/fractal.kmt"
+require "platform:/lookup/org.kermeta.smartadapters/program/fractal/fractal.kmt"
 
 using kermeta::standard
 using kermeta::persistence

@@ -8,7 +8,7 @@
 package org::kermeta::runtime::adapter;
 
 require kermeta
-require "platform:/resource/SmartAdapters/program/adapter/FractalAdapter.kmt"
+require "platform:/lookup/org.kermeta.smartadapters/program/adapter/FractalAdapter.kmt"
 
 /**
  * This class aspectizes the FractalAdapter 

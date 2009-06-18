@@ -8,7 +8,7 @@
 package org::kermeta::runtime::adapter;
 
 require kermeta
-require "platform:/resource/SmartAdapters/metamodel/domain/metamodel@runtimeImpl.kmt"
+require "platform:/lookup/org.kermeta.smartadapters/metamodel/domain/metamodel@runtimeImpl.kmt"
 
 using kermeta::standard
 

@@ -1,7 +1,5 @@
 package org.kermeta.smartadapters;
 
-import org.eclipse.core.runtime.Plugin;
-
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;

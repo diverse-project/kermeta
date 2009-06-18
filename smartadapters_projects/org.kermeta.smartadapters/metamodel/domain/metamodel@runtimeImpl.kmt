@@ -11,9 +11,9 @@ package art;
 
 
 require kermeta
-require "platform:/resource/SmartAdapters/metamodel/domain/metamodel@runtime.kmt"
-require "platform:/resource/SmartAdapters/program/weaving/aspectizedFramework.kmt"
-require "platform:/resource/Runtime2SCA/src/kermeta/runtime2XML/Runtime2SCA.kmt"
+require "./metamodel@runtime.kmt"
+require "platform:/resource/org.kermeta.smartadapters/program/weaving/aspectizedFramework.kmt"
+require "platform:/resource/org.kermeta.art.runtime2sca/src/kermeta/runtime2XML/Runtime2SCA.kmt"
 
 //require "platform:/resource/SmartAdapters/program/weaving/weaver4Runtime.kmt"
 //using weaver
@@ -466,7 +466,7 @@ package instance{
 				var param : String init stdio.read("Invoke service(s): ")
 				stop := (param == "q" or param == "" or param == void)
 				if not stop then
-					var params : OrderedSet<String> init param.split(" ")
+					var params : Sequence<String> init param.split(" ")
 					params.each{p |
 						invoke(hash.getValue(p.toInteger))
 					}
