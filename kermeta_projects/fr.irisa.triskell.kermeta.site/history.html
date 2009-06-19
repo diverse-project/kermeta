@@ -21,6 +21,13 @@ $Id: history.html,v 1.38 2008-10-02 15:36:30 dvojtise Exp $
 	<li>It is now possible to load a resource that comes from EMF EPackage registry in order to create ecore models that depends on the nsURI instead of a file. 
 		(<a href="http://gforge.inria.fr/tracker/index.php?func=detail&aid=7944&group_id=32&atid=208">feature request #7944)</a>.  
 	</li>
+	<li>New action UMLprofile2ecore. It is now possible to transform a uml profile into an ecore for use with kermeta via a right click on the uml file
+		(<a href="http://gforge.inria.fr/tracker/index.php?func=detail&aid=7946&group_id=32&atid=208">feature request #7946)</a>.  
+	</li>
+	<li>Require can now use "platform:/lookup/" in addition to "platform:/plugin" and "platform:/resource". The current implemetation of
+	the lookup searches in resource (ie. workspace) first, then, if not found, searches in plugin.	 
+		(<a href="http://gforge.inria.fr/tracker/index.php?func=detail&aid=6568&group_id=32&atid=208">feature request #6568)
+		This greatly eases the development of kermeta code that is intended to be deployed in a plugin later.</li>
 </ul>
 <h3>Improved features</h3>
 <ul>
