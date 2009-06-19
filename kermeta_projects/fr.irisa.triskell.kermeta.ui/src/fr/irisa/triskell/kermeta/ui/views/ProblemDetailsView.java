@@ -41,6 +41,8 @@ import org.eclipse.ui.views.markers.MarkerItem;
  */
 public class ProblemDetailsView extends ViewPart {
 
+	final static public String ID = "fr.irisa.triskell.kermeta.ui.views.problemdetails";
+		
 	// book used to switch between viewers
 	private PageBook pagebook;
 	private TableViewer tableviewer;

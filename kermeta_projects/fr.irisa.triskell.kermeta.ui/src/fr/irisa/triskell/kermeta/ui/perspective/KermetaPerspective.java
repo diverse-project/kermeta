@@ -16,6 +16,7 @@ import org.eclipse.ui.IPerspectiveFactory;
 import org.eclipse.ui.console.IConsoleConstants;
 
 import fr.irisa.triskell.kermeta.ui.views.KermetadocView;
+import fr.irisa.triskell.kermeta.ui.views.ProblemDetailsView;
 
 /**
  * Implements the Kermeta perspective.
@@ -23,7 +24,7 @@ import fr.irisa.triskell.kermeta.ui.views.KermetadocView;
  */
 public class KermetaPerspective implements IPerspectiveFactory {
 
-    final static private String PORJECT_EXPLORER_VIEW_ID = "org.eclipse.ui.navigator.ProjectExplorer";
+    final static private String PROJECT_EXPLORER_VIEW_ID = "org.eclipse.ui.navigator.ProjectExplorer";
     
     /* (non-Javadoc)
      * @see org.eclipse.ui.IPerspectiveFactory#createInitialLayout(org.eclipse.ui.IPageLayout)
@@ -44,7 +45,7 @@ public class KermetaPerspective implements IPerspectiveFactory {
         layout.addNewWizardShortcut("org.eclipse.ui.wizards.new.file");*/
 	    
 	    // Add "show views"
-        layout.addShowViewShortcut( PORJECT_EXPLORER_VIEW_ID );
+        layout.addShowViewShortcut( PROJECT_EXPLORER_VIEW_ID );
         layout.addShowViewShortcut( IPageLayout.ID_RES_NAV );
         layout.addShowViewShortcut(IPageLayout.ID_OUTLINE);
         layout.addShowViewShortcut(IPageLayout.ID_PROP_SHEET);
@@ -62,7 +63,7 @@ public class KermetaPerspective implements IPerspectiveFactory {
      
         // place navigator and package explorer to the left (of editor area)
         IFolderLayout left = layout.createFolder("left", IPageLayout.LEFT, (float) 0.25, editorArea);
-        left.addView( PORJECT_EXPLORER_VIEW_ID );
+        left.addView( PROJECT_EXPLORER_VIEW_ID );
         left.addView(org.eclipse.jdt.ui.JavaUI.ID_PACKAGES);
         left.addView( IPageLayout.ID_RES_NAV );
         
@@ -72,6 +73,10 @@ public class KermetaPerspective implements IPerspectiveFactory {
         bottom.addView(IPageLayout.ID_PROP_SHEET);
         bottom.addView(IPageLayout.ID_PROBLEM_VIEW);
         bottom.addView( KermetadocView.ID );
+        bottom.addView( ProblemDetailsView.ID );
+        bottom.addView("org.eclipse.emf.ecoretools.registration.viewregisteredpackages");
+        
+        
         
         // outline view to right (of editor area)
         IFolderLayout right = layout.createFolder("right", IPageLayout.RIGHT, (float) 0.75, editorArea);
