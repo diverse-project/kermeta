@@ -11,8 +11,10 @@
 */
 package fr.irisa.triskell.kermeta.ui.views;
 
+import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IMarker;
 import org.eclipse.core.runtime.CoreException;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.jface.text.Document;
 import org.eclipse.jface.text.IMarkSelection;
@@ -27,12 +29,17 @@ import org.eclipse.swt.SWTError;
 import org.eclipse.swt.browser.Browser;
 import org.eclipse.swt.custom.StyledText;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.ui.IEditorPart;
+import org.eclipse.ui.IFileEditorInput;
 import org.eclipse.ui.ISelectionListener;
 import org.eclipse.ui.IWorkbenchPart;
+import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.model.WorkbenchLabelProvider;
 import org.eclipse.ui.part.PageBook;
 import org.eclipse.ui.part.ViewPart;
 import org.eclipse.ui.views.markers.MarkerItem;
+
+import fr.irisa.triskell.eclipse.resources.EclipseMarkerHelper;
 
 
 /**
@@ -80,8 +87,17 @@ public class ProblemDetailsView extends ViewPart {
 				showItems(ss.toArray());
 		}
 		if (selection instanceof ITextSelection) {
+			//sourcepart.getSite().
 			ITextSelection ts  = (ITextSelection) selection;
-			showText(ts.getText());
+			IEditorPart editor = PlatformUI.getWorkbench()
+				.getActiveWorkbenchWindow().getActivePage().getActiveEditor();
+			IFileEditorInput input = (IFileEditorInput) (editor.getEditorInput());
+			IFile file = input.getFile();
+			
+			// find Markers for the given selection
+			EList<IMarker> markers = EclipseMarkerHelper.findMarkersForTextSelection(file, ts);
+			showMarkersDetails(markers);
+
 		}
 		if (selection instanceof IMarkSelection) {
 			IMarkSelection ms = (IMarkSelection) selection;
@@ -99,6 +115,40 @@ public class ProblemDetailsView extends ViewPart {
 	private void showText(String text) {
 		textviewer.setDocument(new Document(text));
 		pagebook.showPage(textviewer.getControl());
+	}
+	
+	// used to not setText too often because it tends to emit a bip on the comuter !
+	protected String previousText = "";
+	private void showMarkersDetails(EList<IMarker> markers) {
+
+		String text = "";
+		for(IMarker marker : markers){
+		
+			try {
+				text += "<b>Type</b> = " + marker.getType() + "<br>\n";
+			} catch (CoreException e) {
+			}
+			text += "<b>Resource</b> = "  + marker.getResource()  + "<br>\n";
+			try {
+				for ( Object key  : marker.getAttributes().keySet()){
+	
+					text += "<b>"+key + "</b> = "  + marker.getAttribute(key.toString(), "")  + "<br>\n";
+				}
+			} catch (CoreException e) {
+			}
+		}
+
+		if(isUsingBrowserWidget){
+			if(!previousText.equals(text))
+				markerdetailBrowser.setText(text);			
+			pagebook.showPage(markerdetailBrowser);
+		}
+		else {
+			// fall back to the styled text
+			markerdetailStyledText.setText(text);
+			pagebook.showPage(markerdetailStyledText);
+		}
+		previousText = text;
 	}
 	
 	private void showMarkerDetails(MarkerItem markeritem) {
@@ -172,6 +222,8 @@ public class ProblemDetailsView extends ViewPart {
 			markerdetailStyledText.setEditable(false);
 		}
 		
+		
+		// add the listener in the selection service
 		getSite().getWorkbenchWindow().getSelectionService().addSelectionListener(listener);
 	}
 

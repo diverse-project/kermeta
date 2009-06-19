@@ -4,7 +4,7 @@
 * License : EPL
 * Copyright : IRISA / INRIA 
 * ----------------------------------------------------------------------------
-* Creation date : 13 août 08
+* Creation date : 13 aoï¿½t 08
 * Authors : 
 *      Didier Vojtisek <dvojtise@irisa.fr>
 */
@@ -17,6 +17,9 @@ import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IMarker;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.CoreException;
+import org.eclipse.emf.common.util.BasicEList;
+import org.eclipse.emf.common.util.EList;
+import org.eclipse.jface.text.ITextSelection;
 import org.eclipse.ui.texteditor.MarkerUtilities;
 
 
@@ -129,6 +132,33 @@ public class EclipseMarkerHelper {
     	return foundMarker;
     }
 
+    /**
+     * retrieves the Markers for the given text selection
+     * @param resource
+     * @param ts
+     * @return
+     * @throws CoreException
+     */
+    static public EList<IMarker> findMarkersForTextSelection( IResource resource, ITextSelection ts ) {
+    	
+    	EList<IMarker> founMarkers = new BasicEList<IMarker>();
+    	IMarker[] markers;
+		try {
+			markers = resource.findMarkers(getMarkerType(), false, IResource.DEPTH_ZERO);
+		
+	    	for (int index = 0; index < markers.length; index++ ) {
+	    		Integer markerCharStart = (Integer) markers[index].getAttribute(IMarker.CHAR_START);
+	    		Integer markerCharEnd = (Integer) markers[index].getAttribute(IMarker.CHAR_END);
+	    		
+	    		if(ts.getOffset() > markerCharStart && ts.getOffset()< markerCharEnd)
+	    			founMarkers.add(markers[index]);
+	    	}
+		} catch (CoreException e) {
+			e.printStackTrace();
+		}
+    	return founMarkers;
+    }
+    
     static public void removeMarker( IResource resource, String message ) {
 		try {
 			if ( (resource != null) && resource.exists() ) {
