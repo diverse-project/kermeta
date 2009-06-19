@@ -23,6 +23,7 @@ import org.kermeta.io.plugin.IOPlugin;
 import org.kermeta.kpm.IAction;
 import org.kermeta.kpm.KPMPlugin;
 
+import fr.irisa.triskell.eclipse.emf.EMFRegistryHelper;
 import fr.irisa.triskell.eclipse.resources.ResourceHelper;
 import fr.irisa.triskell.kermeta.kpm.Out;
 import fr.irisa.triskell.kermeta.kpm.Unit;
@@ -45,19 +46,43 @@ public class AddMarkers implements IAction {
 			 */
 			l = (List<Unit>) args.get("context");
 			
-			/*
-			 * 
-			 * First, add errors to requires if necessary.
-			 * 
-			 */
-			for ( Unit u : l ) {
-				KermetaUnit kermetaUnit = IOPlugin.getDefault().findKermetaUnit(u.getName());
-				if ( kermetaUnit != null )
-					addRequireErrors(kermetaUnit);
-			}
 			
 			for ( Unit u : l ) {
 				KermetaUnit kermetaUnit = IOPlugin.getDefault().findKermetaUnit(u.getName());
+				
+				/* 
+				 * First, add errors to requires if necessary. 
+				 * Ie. if this unit is erroneous, then notify the other units that 
+				 */
+				if ( kermetaUnit != null )
+					addRequireErrors(kermetaUnit);
+			
+				
+				/*
+				 * KPM doesn't deal with unit that comes from the EMF Registry and a plugin
+				 * So, need to deal with error that can come from them
+				 */
+				if ( kermetaUnit != null ){
+					for(KermetaUnitRequire unitRequire : kermetaUnit.getKermetaUnitRequires()){
+						KermetaUnit requiredUnit = unitRequire.getKermetaUnit();
+						if(requiredUnit.isErroneous()){
+							if(EMFRegistryHelper.isRegistered(requiredUnit.getUri()) &&
+									! EMFRegistryHelper.isDynamicallyRegistered(requiredUnit.getUri()) ){
+								addRequireErrors(requiredUnit);
+								//KermetaUnitRequire r = findRequire(requiredUnit, kermetaUnit);
+								/*if ( unitRequire != null ) {
+									String message = "Registered EPackage " + requiredUnit.getUri() + " contains errors.\n\n";
+									message = message + KermetaUnitHelper.getErrorsAsString( requiredUnit );
+									kermetaUnit.error( message, unitRequire );
+								}*/
+							}
+						}
+					}
+				}
+				
+				/* 
+				 * Mark the error of this file 
+				 */
 				if ( kermetaUnit != null ) {
 					IFile file = ResourceHelper.getIFile(u.getName());
 					if(file != null){
@@ -71,6 +96,8 @@ public class AddMarkers implements IAction {
 					// The kermeta unit has not been found.
 					// That is strange maybe should warn.
 				}
+				
+				
 				
 			}
 			
@@ -92,7 +119,7 @@ public class AddMarkers implements IAction {
 			for ( KermetaUnit importer : kermetaUnit.getImporters() ) {
 				KermetaUnitRequire r = findRequire(kermetaUnit, importer);
 				if ( r != null ) {
-					String message = "File " + kermetaUnit.getUri() + " contains errors.\n\n";
+					String message = "Resource " + kermetaUnit.getUri() + " contains errors.\n\n";
 					message = message + KermetaUnitHelper.getErrorsAsString( kermetaUnit );
 					importer.error( message, r.getRequire() );
 				}
@@ -103,7 +130,7 @@ public class AddMarkers implements IAction {
 			for ( KermetaUnit importer : kermetaUnit.getImporters() ) {
 				KermetaUnitRequire r = findRequire(kermetaUnit, importer);
 				if ( r != null ) {
-					String message = "File " + kermetaUnit.getUri() + " contains warnings.\n\n";
+					String message = "Resource " + kermetaUnit.getUri() + " contains warnings.\n\n";
 					message = message + KermetaUnitHelper.getWarningsAsString( kermetaUnit );
 					importer.warning( message, r.getRequire() );
 				}

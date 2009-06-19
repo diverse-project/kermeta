@@ -235,11 +235,7 @@ public class UnitItemProvider
 		String name = ((Unit)object).getName();
 		text = (name == null || name.length() == 0 ?
 						text :
-						text + " " + name);
-		String value = ((Unit)object).getName();
-		text = (value == null || value.length() == 0 ?
-				text :
-				text + " " + value);
+						text + " " + name);		
 		return text;
 	}
 
