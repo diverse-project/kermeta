@@ -131,8 +131,11 @@ public class ProblemDetailsView extends ViewPart {
 			text += "<b>Resource</b> = "  + marker.getResource()  + "<br>\n";
 			try {
 				for ( Object key  : marker.getAttributes().keySet()){
-	
-					text += "<b>"+key + "</b> = "  + marker.getAttribute(key.toString(), "")  + "<br>\n";
+					if("message".equals(key)){
+						text += "<b>"+key + "</b> = "  + marker.getAttribute(key.toString(), "").replaceAll("\n", "<br>")  + "<br>\n";
+					}
+					else
+						text += "<b>"+key + "</b> = "  + marker.getAttribute(key.toString(), "")  + "<br>\n";
 				}
 			} catch (CoreException e) {
 			}
