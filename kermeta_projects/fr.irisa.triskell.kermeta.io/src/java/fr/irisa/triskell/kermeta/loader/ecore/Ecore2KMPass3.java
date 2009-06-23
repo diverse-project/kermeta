@@ -402,6 +402,8 @@ public class Ecore2KMPass3 extends Ecore2KMPass {
 				if(groupId != null){
 					// this property belong to a specific group
 					// retrieve it and use it for this feature
+					// DVK: clean implementation would rather parse the groupId in order to guide the search
+					//		right now, it simply look in the current class for a possible match
 					EClass containerClass =(EClass)prop.eContainer();
 					Iterator<EAttribute> attIt = containerClass.getEAttributes().iterator();
 					while(attIt.hasNext()){
@@ -413,8 +415,8 @@ public class Ecore2KMPass3 extends Ecore2KMPass {
 								String attIsGroup = (String)currAnn.getDetails().get(KM2Ecore.ANNOTATION_EXTENDEDMETADATA_KIND);
 								if(attIsGroup != null && attIsGroup.equals("group")) {
 									// we have found a group
-									String possiblegroup = (String)currAnn.getDetails().get(KM2Ecore.ANNOTATION_EXTENDEDMETADATA_NAME);
-									if(groupId.equals(possiblegroup)){
+									String possiblegroup = (String)currAnn.getDetails().get(KM2Ecore.ANNOTATION_EXTENDEDMETADATA_NAME);									
+									if(groupId.equals(possiblegroup) || groupId.equals("#"+possiblegroup)){
 										// this is the good group, use the attribute name
 										group = att.getName();
 									}
@@ -424,21 +426,48 @@ public class Ecore2KMPass3 extends Ecore2KMPass {
 					}
 				}
 				
-				// let's writte the getter body using all those data
-				String body = //"kermeta::standard::OrderedSet<Docbook::BookType>.new"
-					"do result := " +collection+ "<" +typeName+ ">.new" +
-"			self." +group+ ".each{fme |"+ 
-"				if fme.eStructuralFeatureName == \"" +elementname+ "\" then"+ 
-"					var val : "+typeName+""+
-"					val ?= fme.~value"+
-"					result.add(val) "+
-"				end"+
-"			} end";
-				//body = "raise kermeta::exceptions::NotImplementedException.new ";
-				Expression exp = ExpressionParser.parse(context, kermetaUnit, body, monitor);
-				currentProperty.setGetterBody(exp);
-					// it seem that in this case the setter is a nonsense
-				currentProperty.setIsReadOnly( Boolean.valueOf(true));
+				// normal case : if has a multiplicity > 1
+				if(prop.getUpperBound() != 1 ){
+					// let's writte the getter body using all those data
+					String body = //"kermeta::standard::OrderedSet<Docbook::BookType>.new"
+						"do result := " +collection+ "<" +typeName+ ">.new" +
+	"			self." +group+ ".each{fme |"+ 
+	"				if fme.eStructuralFeatureName == \"" +elementname+ "\" then"+ 
+	"					var val : "+typeName+""+
+	"					val ?= fme.~value"+
+	"					result.add(val) "+
+	"				end"+
+	"			} end";
+					//body = "raise kermeta::exceptions::NotImplementedException.new ";
+					Expression exp = ExpressionParser.parse(context, kermetaUnit, body, monitor);
+					currentProperty.setGetterBody(exp);
+						// it seem that in this case the setter is a nonsense
+					currentProperty.setIsReadOnly( Boolean.valueOf(true));
+				}
+				else{
+					// special case where the property has a multiplicity = 1
+					// DVK: note: maybe we should deal with cases where 
+					// the FeatureMap has a multiplicity > 1 and the derived prop a multiplicity = 1 ?
+					String getterbody =
+						"do "+
+	"			if " + group + ".eStructuralFeatureName == \"" +elementname+ "\" then"+
+	"				result ?= "+group+".~value"+
+	"			end"+
+	"	end";
+					Expression exp = ExpressionParser.parse(context, kermetaUnit, getterbody, monitor);
+					currentProperty.setGetterBody(exp);
+					
+					if(!currentProperty.isIsReadOnly()){
+						String setterbody =
+							"do "+
+		"			"+group+" := ecore::EFeatureMapEntry.new"+
+		"			"+group+".eStructuralFeatureName := \"" +elementname+"\""+
+		"			"+group+".~value := value"+
+		"	end";
+						Expression expsetter = ExpressionParser.parse(context, kermetaUnit, setterbody, monitor);
+						currentProperty.setSetterBody(expsetter);
+					}
+				}				
 			}
 		}
 		return null;
