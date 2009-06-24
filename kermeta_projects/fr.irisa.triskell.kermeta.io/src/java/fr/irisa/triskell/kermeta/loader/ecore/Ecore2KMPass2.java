@@ -273,10 +273,19 @@ public class Ecore2KMPass2 extends Ecore2KMPass {
 						EcoreHelper.getQualifiedName((EDataType)node) + " (replaced by Object)", null);
 				//type = StdLibKermetaUnitHelper.get_ROOT_TYPE_ClassDefinition();// get kermeta::language::structure::Object 
 			}*/
+			
+			//
+			if(type == null){
+					// try to find the refered type by ExtentendedMetada
+				ENamedElement referedType = EcoreHelper.findReferedTypeFromExtendedMetadataBaseType(node);
+				if(referedType != null){				 
+					type = kermetaUnit.getTypeDefinitionByName(EcoreHelper.getQualifiedName(referedType), monitor);
+				}
+			}
 		}
 		
 		if ( type == null ) {
-			kermetaUnit.warning("The type " + type_name + " is not handled by Kermeta. It has been mapped to Object");
+			kermetaUnit.warning("The type " + type_name + " is not handled by Kermeta (used by "+node.getName()+"). It has been mapped to Object");
 			type = kermetaUnit.getTypeDefinitionByQualifiedName("kermeta::language::structure::Object", monitor);
 			Type t = createInstanceTypeForTypeDefinition(type);
 			result.setInstanceType(t);			

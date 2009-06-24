@@ -130,10 +130,7 @@ abstract public class KM2Ecore extends KermetaOptimizedVisitor {
     public final static String ANNOTATION_NESTED_DOC = ANNOTATION_INV + ".doc";
     public final static String ANNOTATION_TYPEPARAMETER = ANNOTATION + ".typeParameters";
     
-    public final static String ANNOTATION_EXTENDEDMETADATA = "http:///org/eclipse/emf/ecore/util/ExtendedMetaData";
-    public final static String ANNOTATION_EXTENDEDMETADATA_KIND = "kind";
-    public final static String ANNOTATION_EXTENDEDMETADATA_GROUP = "group";
-    public final static String ANNOTATION_EXTENDEDMETADATA_NAME = "name";
+    
     
     
     // Available static keys for the "kermeta" EAnnotation, along with the type of elements

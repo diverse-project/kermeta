@@ -385,9 +385,9 @@ public class Ecore2KMPass3 extends Ecore2KMPass {
 		}
 		// node.getSource() == "http:///org/eclipse/emf/ecore/util/ExtendedMetaData"
 		// used in ecore files generated from xsd
-		else if(node.getSource().equals(KM2Ecore.ANNOTATION_EXTENDEDMETADATA)) {
-			String elementkind = (String) node.getDetails().get(KM2Ecore.ANNOTATION_EXTENDEDMETADATA_KIND);
-			String elementname = (String) node.getDetails().get(KM2Ecore.ANNOTATION_EXTENDEDMETADATA_NAME);
+		else if(node.getSource().equals(EcoreHelper.ANNOTATION_EXTENDEDMETADATA)) {
+			String elementkind = (String) node.getDetails().get(EcoreHelper.ANNOTATION_EXTENDEDMETADATA_KIND);
+			String elementname = (String) node.getDetails().get(EcoreHelper.ANNOTATION_EXTENDEDMETADATA_NAME);
 			EStructuralFeature prop = (EStructuralFeature)node.getEModelElement();
 			if (elementkind != null && elementkind.equals("element") && prop.isDerived()) {
 				// this is a generated getter for special featuremap
@@ -398,7 +398,7 @@ public class Ecore2KMPass3 extends Ecore2KMPass {
 				String typeName = EcoreHelper.getQualifiedName(prop.getEType());
 				String collection = prop.isUnique() ? "kermeta::standard::OrderedSet" : "kermeta::standard::Sequence";
 				String group = "mixed";	// by default the group is the mixed
-				String groupId = (String) node.getDetails().get(KM2Ecore.ANNOTATION_EXTENDEDMETADATA_GROUP);
+				String groupId = (String) node.getDetails().get(EcoreHelper.ANNOTATION_EXTENDEDMETADATA_GROUP);
 				if(groupId != null){
 					// this property belong to a specific group
 					// retrieve it and use it for this feature
@@ -411,11 +411,11 @@ public class Ecore2KMPass3 extends Ecore2KMPass {
 						Iterator<EAnnotation> annIt = att.getEAnnotations().iterator();						
 						while(annIt.hasNext()){
 							EAnnotation currAnn = annIt.next();
-							if(currAnn.getSource().equals(KM2Ecore.ANNOTATION_EXTENDEDMETADATA)){
-								String attIsGroup = (String)currAnn.getDetails().get(KM2Ecore.ANNOTATION_EXTENDEDMETADATA_KIND);
+							if(currAnn.getSource().equals(EcoreHelper.ANNOTATION_EXTENDEDMETADATA)){
+								String attIsGroup = (String)currAnn.getDetails().get(EcoreHelper.ANNOTATION_EXTENDEDMETADATA_KIND);
 								if(attIsGroup != null && attIsGroup.equals("group")) {
 									// we have found a group
-									String possiblegroup = (String)currAnn.getDetails().get(KM2Ecore.ANNOTATION_EXTENDEDMETADATA_NAME);									
+									String possiblegroup = (String)currAnn.getDetails().get(EcoreHelper.ANNOTATION_EXTENDEDMETADATA_NAME);									
 									if(groupId.equals(possiblegroup) || groupId.equals("#"+possiblegroup)){
 										// this is the good group, use the attribute name
 										group = att.getName();
