@@ -189,9 +189,10 @@ public class EclipseConsole extends IOConsole {
 				((IOConsoleOutputStream)getOutputStream()).write(justifiedMsg.substring(end, justifiedMsg.length()));
 				monitor.done();
 			}
-			else
+			else{
 				changeColor(c);
 				((IOConsoleOutputStream)getOutputStream()).write(justifiedMsg);
+			}
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
