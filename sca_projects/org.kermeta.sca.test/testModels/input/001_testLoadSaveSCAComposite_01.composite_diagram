@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<notation:Diagram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.1/notation" xmlns:sca="http://www.osoa.org/xmlns/sca/1.0" xmi:id="_NcVWAFyzEd6tF_G0Qud4IA" type="Sca" name="001_testLoadSaveSCAComposite_01.composite_diagram" measurementUnit="Pixel">
+  <children xmi:type="notation:Node" xmi:id="_ONMyQFyzEd6tF_G0Qud4IA" type="1001">
+    <children xmi:type="notation:Node" xmi:id="_ONMyQ1yzEd6tF_G0Qud4IA" type="4008"/>
+    <children xmi:type="notation:Node" xmi:id="_ONWjQFyzEd6tF_G0Qud4IA" type="5001">
+      <styles xmi:type="notation:SortingStyle" xmi:id="_ONgUQFyzEd6tF_G0Qud4IA"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_ONgUQVyzEd6tF_G0Qud4IA"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_ONgUQlyzEd6tF_G0Qud4IA" type="5002">
+      <styles xmi:type="notation:SortingStyle" xmi:id="_ONgUQ1yzEd6tF_G0Qud4IA"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_ONgURFyzEd6tF_G0Qud4IA"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_ONgURVyzEd6tF_G0Qud4IA" type="5003">
+      <styles xmi:type="notation:SortingStyle" xmi:id="_ONgURlyzEd6tF_G0Qud4IA"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_ONgUR1yzEd6tF_G0Qud4IA"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_ONgUSFyzEd6tF_G0Qud4IA" type="5004">
+      <children xmi:type="notation:Node" xmi:id="_ZR_VYFyzEd6tF_G0Qud4IA" type="2030">
+        <children xmi:type="notation:Node" xmi:id="_ZR_VY1yzEd6tF_G0Qud4IA" type="4007"/>
+        <children xmi:type="notation:Node" xmi:id="_ZR_VZFyzEd6tF_G0Qud4IA" type="5009">
+          <styles xmi:type="notation:SortingStyle" xmi:id="_ZR_VZVyzEd6tF_G0Qud4IA"/>
+          <styles xmi:type="notation:FilteringStyle" xmi:id="_ZR_VZlyzEd6tF_G0Qud4IA"/>
+        </children>
+        <children xmi:type="notation:Node" xmi:id="_ZSIfUFyzEd6tF_G0Qud4IA" type="5010">
+          <children xmi:type="notation:Node" xmi:id="_GULuAGDZEd6FqbLbnH0pTQ" type="2066">
+            <styles xmi:type="notation:ShapeStyle" xmi:id="_GULuAWDZEd6FqbLbnH0pTQ"/>
+            <element xmi:type="sca:OSGiImplementation" href="001_testLoadSaveSCAComposite_01.composite#//@composite/@component.0/@implementationGroup.0"/>
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_GULuAmDZEd6FqbLbnH0pTQ"/>
+          </children>
+          <styles xmi:type="notation:SortingStyle" xmi:id="_ZSIfUVyzEd6tF_G0Qud4IA"/>
+          <styles xmi:type="notation:FilteringStyle" xmi:id="_ZSIfUlyzEd6tF_G0Qud4IA"/>
+        </children>
+        <children xmi:type="notation:Node" xmi:id="_ZSIfU1yzEd6tF_G0Qud4IA" type="5011">
+          <children xmi:type="notation:Node" xmi:id="_lQcEYFyzEd6tF_G0Qud4IA" type="2045">
+            <children xmi:type="notation:Node" xmi:id="_lQcEY1yzEd6tF_G0Qud4IA" type="4005"/>
+            <children xmi:type="notation:Node" xmi:id="_lQcEZFyzEd6tF_G0Qud4IA" type="5015">
+              <children xmi:type="notation:Node" xmi:id="_K3gIMGDZEd6FqbLbnH0pTQ" type="2046">
+                <styles xmi:type="notation:ShapeStyle" xmi:id="_K3gIMWDZEd6FqbLbnH0pTQ"/>
+                <element xmi:type="sca:JavaInterface" href="001_testLoadSaveSCAComposite_01.composite#//@composite/@component.0/@reference.0/@interfaceGroup.0"/>
+                <layoutConstraint xmi:type="notation:Bounds" xmi:id="_K3gIMmDZEd6FqbLbnH0pTQ"/>
+              </children>
+              <styles xmi:type="notation:SortingStyle" xmi:id="_lQcEZVyzEd6tF_G0Qud4IA"/>
+              <styles xmi:type="notation:FilteringStyle" xmi:id="_lQcEZlyzEd6tF_G0Qud4IA"/>
+            </children>
+            <children xmi:type="notation:Node" xmi:id="_lQcEZ1yzEd6tF_G0Qud4IA" type="5016">
+              <styles xmi:type="notation:SortingStyle" xmi:id="_lQcEaFyzEd6tF_G0Qud4IA"/>
+              <styles xmi:type="notation:FilteringStyle" xmi:id="_lQcEaVyzEd6tF_G0Qud4IA"/>
+            </children>
+            <styles xmi:type="notation:ShapeStyle" xmi:id="_lQcEYVyzEd6tF_G0Qud4IA"/>
+            <element xmi:type="sca:ComponentReference" href="001_testLoadSaveSCAComposite_01.composite#//@composite/@component.0/@reference.0"/>
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_lQcEYlyzEd6tF_G0Qud4IA"/>
+          </children>
+          <styles xmi:type="notation:SortingStyle" xmi:id="_ZSIfVFyzEd6tF_G0Qud4IA"/>
+          <styles xmi:type="notation:FilteringStyle" xmi:id="_ZSIfVVyzEd6tF_G0Qud4IA"/>
+        </children>
+        <children xmi:type="notation:Node" xmi:id="_ZSIfVlyzEd6tF_G0Qud4IA" type="5012">
+          <children xmi:type="notation:Node" xmi:id="_0nE3MFyzEd6tF_G0Qud4IA" type="2059">
+            <children xmi:type="notation:Node" xmi:id="_0nE3M1yzEd6tF_G0Qud4IA" type="4006"/>
+            <styles xmi:type="notation:ShapeStyle" xmi:id="_0nE3MVyzEd6tF_G0Qud4IA"/>
+            <element xmi:type="sca:PropertyValue" href="001_testLoadSaveSCAComposite_01.composite#//@composite/@component.0/@property.0"/>
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_0nE3MlyzEd6tF_G0Qud4IA"/>
+          </children>
+          <children xmi:type="notation:Node" xmi:id="_5z79oFyzEd6tF_G0Qud4IA" type="2059">
+            <children xmi:type="notation:Node" xmi:id="_5z79o1yzEd6tF_G0Qud4IA" type="4006"/>
+            <styles xmi:type="notation:ShapeStyle" xmi:id="_5z79oVyzEd6tF_G0Qud4IA"/>
+            <element xmi:type="sca:PropertyValue" href="001_testLoadSaveSCAComposite_01.composite#//@composite/@component.0/@property.1"/>
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_5z79olyzEd6tF_G0Qud4IA"/>
+          </children>
+          <styles xmi:type="notation:SortingStyle" xmi:id="_ZSIfV1yzEd6tF_G0Qud4IA"/>
+          <styles xmi:type="notation:FilteringStyle" xmi:id="_ZSIfWFyzEd6tF_G0Qud4IA"/>
+        </children>
+        <styles xmi:type="notation:ShapeStyle" xmi:id="_ZR_VYVyzEd6tF_G0Qud4IA"/>
+        <element xmi:type="sca:Component" href="001_testLoadSaveSCAComposite_01.composite#//@composite/@component.0"/>
+        <layoutConstraint xmi:type="notation:Bounds" xmi:id="_ZR_VYlyzEd6tF_G0Qud4IA" x="80" y="17"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_fE_10FyzEd6tF_G0Qud4IA" type="2030">
+        <children xmi:type="notation:Node" xmi:id="_fE_101yzEd6tF_G0Qud4IA" type="4007"/>
+        <children xmi:type="notation:Node" xmi:id="_fE_11FyzEd6tF_G0Qud4IA" type="5009">
+          <children xmi:type="notation:Node" xmi:id="_kHbN4FyzEd6tF_G0Qud4IA" type="2031">
+            <children xmi:type="notation:Node" xmi:id="_kHbN41yzEd6tF_G0Qud4IA" type="4004"/>
+            <children xmi:type="notation:Node" xmi:id="_kHbN5FyzEd6tF_G0Qud4IA" type="5013">
+              <children xmi:type="notation:Node" xmi:id="_Jl2TEGDZEd6FqbLbnH0pTQ" type="2032">
+                <styles xmi:type="notation:ShapeStyle" xmi:id="_Jl2TEWDZEd6FqbLbnH0pTQ"/>
+                <element xmi:type="sca:JavaInterface" href="001_testLoadSaveSCAComposite_01.composite#//@composite/@component.1/@service.0/@interfaceGroup.0"/>
+                <layoutConstraint xmi:type="notation:Bounds" xmi:id="_Jl2TEmDZEd6FqbLbnH0pTQ"/>
+              </children>
+              <styles xmi:type="notation:SortingStyle" xmi:id="_kHbN5VyzEd6tF_G0Qud4IA"/>
+              <styles xmi:type="notation:FilteringStyle" xmi:id="_kHbN5lyzEd6tF_G0Qud4IA"/>
+            </children>
+            <children xmi:type="notation:Node" xmi:id="_kHbN51yzEd6tF_G0Qud4IA" type="5014">
+              <styles xmi:type="notation:SortingStyle" xmi:id="_kHbN6FyzEd6tF_G0Qud4IA"/>
+              <styles xmi:type="notation:FilteringStyle" xmi:id="_kHbN6VyzEd6tF_G0Qud4IA"/>
+            </children>
+            <styles xmi:type="notation:ShapeStyle" xmi:id="_kHbN4VyzEd6tF_G0Qud4IA"/>
+            <element xmi:type="sca:ComponentService" href="001_testLoadSaveSCAComposite_01.composite#//@composite/@component.1/@service.0"/>
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_kHbN4lyzEd6tF_G0Qud4IA"/>
+          </children>
+          <styles xmi:type="notation:SortingStyle" xmi:id="_fE_11VyzEd6tF_G0Qud4IA"/>
+          <styles xmi:type="notation:FilteringStyle" xmi:id="_fE_11lyzEd6tF_G0Qud4IA"/>
+        </children>
+        <children xmi:type="notation:Node" xmi:id="_fE_111yzEd6tF_G0Qud4IA" type="5010">
+          <children xmi:type="notation:Node" xmi:id="_mqtwcGDZEd6FqbLbnH0pTQ" type="2066">
+            <styles xmi:type="notation:ShapeStyle" xmi:id="_mqtwcWDZEd6FqbLbnH0pTQ"/>
+            <element xmi:type="sca:OSGiImplementation" href="001_testLoadSaveSCAComposite_01.composite#//@composite/@component.1/@implementationGroup.0"/>
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_mqtwcmDZEd6FqbLbnH0pTQ"/>
+          </children>
+          <styles xmi:type="notation:SortingStyle" xmi:id="_fE_12FyzEd6tF_G0Qud4IA"/>
+          <styles xmi:type="notation:FilteringStyle" xmi:id="_fE_12VyzEd6tF_G0Qud4IA"/>
+        </children>
+        <children xmi:type="notation:Node" xmi:id="_fE_12lyzEd6tF_G0Qud4IA" type="5011">
+          <styles xmi:type="notation:SortingStyle" xmi:id="_fE_121yzEd6tF_G0Qud4IA"/>
+          <styles xmi:type="notation:FilteringStyle" xmi:id="_fE_13FyzEd6tF_G0Qud4IA"/>
+        </children>
+        <children xmi:type="notation:Node" xmi:id="_fE_13VyzEd6tF_G0Qud4IA" type="5012">
+          <styles xmi:type="notation:SortingStyle" xmi:id="_fE_13lyzEd6tF_G0Qud4IA"/>
+          <styles xmi:type="notation:FilteringStyle" xmi:id="_fE_131yzEd6tF_G0Qud4IA"/>
+        </children>
+        <styles xmi:type="notation:ShapeStyle" xmi:id="_fE_10VyzEd6tF_G0Qud4IA"/>
+        <element xmi:type="sca:Component" href="001_testLoadSaveSCAComposite_01.composite#//@composite/@component.1"/>
+        <layoutConstraint xmi:type="notation:Bounds" xmi:id="_fE_10lyzEd6tF_G0Qud4IA" x="400" y="58"/>
+      </children>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_ONgUSVyzEd6tF_G0Qud4IA"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_ONgUSlyzEd6tF_G0Qud4IA"/>
+    </children>
+    <styles xmi:type="notation:ShapeStyle" xmi:id="_ONMyQVyzEd6tF_G0Qud4IA"/>
+    <element xmi:type="sca:Composite" href="001_testLoadSaveSCAComposite_01.composite#//@composite"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_ONMyQlyzEd6tF_G0Qud4IA" width="686" height="466"/>
+  </children>
+  <styles xmi:type="notation:DiagramStyle" xmi:id="_NcVWAVyzEd6tF_G0Qud4IA"/>
+  <element xmi:type="sca:DocumentRoot" href="001_testLoadSaveSCAComposite_01.composite#/"/>
+  <edges xmi:type="notation:Edge" xmi:id="_m1mrYFyzEd6tF_G0Qud4IA" type="3003" source="_lQcEYFyzEd6tF_G0Qud4IA" target="_kHbN4FyzEd6tF_G0Qud4IA">
+    <styles xmi:type="notation:RoutingStyle" xmi:id="_m1mrYVyzEd6tF_G0Qud4IA" routing="Rectilinear" smoothness="Normal"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_m1mrYlyzEd6tF_G0Qud4IA"/>
+    <element xmi:type="sca:Wire" href="001_testLoadSaveSCAComposite_01.composite#//@composite/@wire.0"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_m1mrY1yzEd6tF_G0Qud4IA" points="[20, -2, -139, 4]$[144, -26, -15, -20]"/>
+  </edges>
+</notation:Diagram>

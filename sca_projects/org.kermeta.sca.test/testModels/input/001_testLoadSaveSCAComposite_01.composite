@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="ISO-8859-15"?>
+<sca:composite xmlns:sca="http://www.osoa.org/xmlns/sca/1.0" xmlns="http://www.osoa.org/xmlns/sca/1.0" name="composite01">
+  <sca:component name="component01">
+    <tuscany:implementation.osgi xmlns:tuscany="http://tuscany.apache.org/xmlns/sca/1.0"/>
+    <sca:reference name="reference01">
+      <sca:interface.java/>
+      <sca:binding.sca/>
+    </sca:reference>
+    <sca:property name="prop01" type="dddd"/>
+    <sca:property name="prop02"/>
+  </sca:component>
+  <sca:component name="component02">
+    <tuscany:implementation.osgi xmlns:tuscany="http://tuscany.apache.org/xmlns/sca/1.0"/>
+    <sca:service name="service01">
+      <sca:interface.java/>
+    </sca:service>
+  </sca:component>
+  <sca:wire source="component01/reference01" target="component02/service01"/>
+  <sca:service/>
+</sca:composite>

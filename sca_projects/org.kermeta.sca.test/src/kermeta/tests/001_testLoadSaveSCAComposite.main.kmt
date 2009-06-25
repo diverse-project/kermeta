@@ -1,0 +1,119 @@
+/* $Id:$ 
+ * Creation : June 19, 2009
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            dvojtise
+ */
+@mainClass "testLoadSaveSCAComposite::Main"
+@mainOperation "main"
+
+
+package testLoadSaveSCAComposite;
+
+
+require kermeta
+require "http://www.osoa.org/xmlns/sca/1.0"
+
+using kermeta::standard
+using kermeta::persistence
+using kermeta::kunit
+
+class Main inherits TestCase
+{
+	operation main() : Void is do 
+    	var tr : TestRunner init TestRunner.new
+		tr.run(Main)
+		tr.printTestResult
+		
+		// test001LoadConcreteERefButDerivedKermetaProp
+		// test002SaveConcreteERefButDerivedKermetaProp
+		
+		stdio.writeln("end")
+	end
+	
+	operation testLoadModel_01() : Void is do
+		var ifileName : String init "platform:/resource/org.kermeta.sca.test/testModels/input/001_testLoadSaveSCAComposite_01.composite"
+    	var repository : kermeta::persistence::EMFRepository	init kermeta::persistence::EMFRepository.new
+		var resource : Resource    	
+    	resource :=repository.getResource(ifileName)
+    	
+    	checkModel_01(resource)
+	end
+	
+	operation testLoadAndSaveModel_01() : Void is do
+		var ifileName : String init "platform:/resource/org.kermeta.sca.test/testModels/input/001_testLoadSaveSCAComposite_01.composite"
+    	var ofileName : String init "platform:/resource/org.kermeta.sca.test/testModels/input/001_testLoadSaveSCAComposite_01.testLoadAndSaveModel.composite"
+    	
+    	var repository : kermeta::persistence::EMFRepository	init kermeta::persistence::EMFRepository.new
+		var resource : Resource    	
+    	resource :=repository.getResource(ifileName)
+    	
+    	resource.uri := ofileName
+    	resource.save
+    	
+    	var repository2 : kermeta::persistence::EMFRepository	init kermeta::persistence::EMFRepository.new
+		var resource2 : Resource    	
+    	resource2 :=repository2.getResource(ofileName)
+    	
+    	checkModel_01(resource2)
+    	
+	end
+	
+	/**
+	 * Create a model_01 model using only the featuremap concrete attributes
+	 */
+	operation testCreateUsingFeatureMapAndSaveModel_01() : Void is do
+		fail("not implemented")
+	end
+	
+	/**
+	 * Create a model_01 model using the derived properties
+	 * this checks that these properies can be modified in order to have effects on the model
+	 */
+	operation testCreateUsingDerivedPropAndSaveModel_01() : Void is do
+		fail("not implemented")
+	end
+	
+	/**
+	 * Check the structure of model_01
+	 */
+	operation checkModel_01(res : Resource) : Void is do
+		
+		var docRoot : sca::DocumentRoot
+		docRoot ?= res.one
+		assertTrueWithMsg(not docRoot.isVoid, "No DocumentRoot found as root of model_01, root object is " + res.one.toString)
+		
+		// debug
+		stdio.writeln("DocumentRoot mixed content")		
+		docRoot.mixed.each{ efme | stdio.writeln("   "+efme.eStructuralFeatureName + "=" + efme.~value.toString)}
+			
+		var composite01 : sca::Composite
+		composite01 := docRoot.composite.detect{aComposite | aComposite.name == "composite01"}
+		assertTrueWithMsg(not composite01.isVoid, "composite01 not found")
+		
+		
+		var component01 : sca::Component
+		component01 := composite01.component.detect{aComponent | aComponent.name == "component01"}
+		assertTrueWithMsg(not component01.isVoid, "component01 not found")
+		
+		var ref01 : sca::ComponentReference
+		ref01 := component01.~reference.detect{ aRef | aRef.name == "reference01" }
+		assertTrueWithMsg(not ref01.isVoid, "reference01 not found " + component01.~reference.size.toString)
+		
+		var component02 : sca::Component
+		component02 := composite01.component.detect{aComponent | aComponent.name == "component02"}
+		assertTrueWithMsg(not component02.isVoid, "component02 not found")
+		
+		var service01 : sca::ComponentService
+		service01 := component02.service.detect{ aRef | aRef.name == "service01" }
+		assertTrueWithMsg(not service01.isVoid, "service01 not found")
+		
+		var wire01 : sca::Wire
+		wire01 := composite01.wire.detect{aWire | aWire.source2 == ref01 and aWire.target2 == service01}
+		assertTrueWithMsg(not wire01.isVoid, "wire connecting service01 and reference01 not found")
+		
+	end
+	
+	
+}

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmi:XMI xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore">
+  <ecore:EAnnotation source="ModelingUnit">
+    <details key="require" value="kermeta|http://www.osoa.org/xmlns/sca/1.0|"/>
+    <details key="using" value="testLoadSaveSCAComposite|kermeta::standard|kermeta::persistence|kermeta::kunit|"/>
+  </ecore:EAnnotation>
+  <ecore:EAnnotation source="kermeta">
+    <details key="mainClass" value="testLoadSaveSCAComposite::Main"/>
+  </ecore:EAnnotation>
+  <ecore:EAnnotation source="kermeta">
+    <details key="mainOperation" value="main"/>
+  </ecore:EAnnotation>
+  <ecore:EPackage name="testLoadSaveSCAComposite" nsURI="platform:/resource/org.kermeta.sca.test/src/kermeta/tests/001_testLoadSaveSCAComposite.main.ecore#/"
+      nsPrefix="testLoadSaveSCAComposite">
+    <eClassifiers xsi:type="ecore:EClass" name="Main" eSuperTypes="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.ecore#/2/kunit/TestCase">
+      <eOperations name="main">
+        <eAnnotations source="kermeta">
+          <details key="body" value="do&#xA;&#x9;var tr : kermeta::kunit::TestRunner init kermeta::kunit::TestRunner.new&#xA;&#x9;tr.run(testLoadSaveSCAComposite::Main)&#xA;&#x9;tr.printTestResult&#xA;&#x9;stdio.writeln(&quot;end&quot;)&#xA;end"/>
+        </eAnnotations>
+      </eOperations>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EDataType" name="_KermetaSpecialTypesAlias_" instanceClassName="java.lang.Object"/>
+  </ecore:EPackage>
+  <ecore:EAnnotation source="dependentResource" references="1.0.ecore#/0 1.0.ecore#/1 XMLType.ecore#/0 XMLType.ecore#/1 XMLType.ecore#/2 policy.ecore#/0 policy.ecore#/1 policy.ecore#/2 addressing.ecore#/0 addressing.ecore#/1 addressing.ecore#/2 wsdl-instance.ecore#/0 wsdl-instance.ecore#/1 wsdl-instance.ecore#/2"/>
+</xmi:XMI>
