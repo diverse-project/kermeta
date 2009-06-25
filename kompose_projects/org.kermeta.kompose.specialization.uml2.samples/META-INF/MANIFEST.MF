@@ -2,5 +2,5 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Kompose Specialization Samples for UML2
 Bundle-SymbolicName: org.kermeta.kompose.specialization.uml2.samples
-Bundle-Version: 0.0.1
+Bundle-Version: 0.1.0
 Bundle-Vendor: IRISA/INRIA & L3i, University of La Rochelle
