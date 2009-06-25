@@ -470,43 +470,50 @@ public class Runtime2EMF {
 			// The feature corresponding to the name of the property
 			EStructuralFeature feature = eObject.eClass().getEStructuralFeature(prop_name);
 			int insertionIndex = 0; // normally add at the beginning of the list
-			EAnnotation subsetsAnnotation = feature.getEAnnotation("subsets");
-			if(subsetsAnnotation != null){
-				// must insert before the subsetting properties if already in the list
-				
-				for(EObject eobj : subsetsAnnotation.getReferences()){
-					if (eobj instanceof ENamedElement){
-						ENamedElement namedElem = (ENamedElement)eobj;
-						int subsettingPropIndex = sortedProperty.indexOf(namedElem.getName());
-						if (subsettingPropIndex != -1 && subsettingPropIndex >= insertionIndex) insertionIndex = subsettingPropIndex+1;
-					}
-				}
-				
-			}
-			else{
-				if(isAnEcoreModel){
-					// deal with the special eType and eGenericType, the generic contains more information that the eType
-					// so it must be saved after
-					if(feature.getName().equals("eGenericType")){
-						int subsettingPropIndex = sortedProperty.indexOf("eType");
-						if (subsettingPropIndex != -1 && subsettingPropIndex >= insertionIndex) insertionIndex = subsettingPropIndex+1;
-					}
-					else if(feature.getName().equals("eGenericSuperTypes")){
-						int subsettingPropIndex = sortedProperty.indexOf("eSuperTypes");
-						if (subsettingPropIndex != -1 && subsettingPropIndex >= insertionIndex) insertionIndex = subsettingPropIndex+1;
-					}
-					else if(feature.getName().equals("eGenericExceptions")){
-						int subsettingPropIndex = sortedProperty.indexOf("eExceptions");
-						if (subsettingPropIndex != -1 && subsettingPropIndex >= insertionIndex) insertionIndex = subsettingPropIndex+1;
-					}
-					// deal with EEnumLiteralInstance, unsetting "instance" removes the other properties (name, literal and value)
-					else if(eObject instanceof EEnumLiteralImpl){
-						if(feature.getName().equals("name") || feature.getName().equals("value") || feature.getName().equals("literal")){
-							int subsettingPropIndex = sortedProperty.indexOf("instance");
+			//EAnnotation subsetsAnnotation = feature.getEAnnotation("subsets");
+			//EAnnotation subsetsAnnotation = null;
+			if( feature != null ) {
+				EAnnotation subsetsAnnotation = feature.getEAnnotation("subsets");
+			
+				if(subsetsAnnotation != null){
+					// must insert before the subsetting properties if already in the list
+					
+					for(EObject eobj : subsetsAnnotation.getReferences()){
+						if (eobj instanceof ENamedElement){
+							ENamedElement namedElem = (ENamedElement)eobj;
+							int subsettingPropIndex = sortedProperty.indexOf(namedElem.getName());
 							if (subsettingPropIndex != -1 && subsettingPropIndex >= insertionIndex) insertionIndex = subsettingPropIndex+1;
 						}
 					}
+					
 				}
+				else{
+					if(isAnEcoreModel){
+						// deal with the special eType and eGenericType, the generic contains more information that the eType
+						// so it must be saved after
+						if(feature.getName().equals("eGenericType")){
+							int subsettingPropIndex = sortedProperty.indexOf("eType");
+							if (subsettingPropIndex != -1 && subsettingPropIndex >= insertionIndex) insertionIndex = subsettingPropIndex+1;
+						}
+						else if(feature.getName().equals("eGenericSuperTypes")){
+							int subsettingPropIndex = sortedProperty.indexOf("eSuperTypes");
+							if (subsettingPropIndex != -1 && subsettingPropIndex >= insertionIndex) insertionIndex = subsettingPropIndex+1;
+						}
+						else if(feature.getName().equals("eGenericExceptions")){
+							int subsettingPropIndex = sortedProperty.indexOf("eExceptions");
+							if (subsettingPropIndex != -1 && subsettingPropIndex >= insertionIndex) insertionIndex = subsettingPropIndex+1;
+						}
+						// deal with EEnumLiteralInstance, unsetting "instance" removes the other properties (name, literal and value)
+						else if(eObject instanceof EEnumLiteralImpl){
+							if(feature.getName().equals("name") || feature.getName().equals("value") || feature.getName().equals("literal")){
+								int subsettingPropIndex = sortedProperty.indexOf("instance");
+								if (subsettingPropIndex != -1 && subsettingPropIndex >= insertionIndex) insertionIndex = subsettingPropIndex+1;
+							}
+						}
+					}
+				}
+			} else {
+				internalLog.error("A feature : " + prop_name + " doesn't exist in EClass "+eObject.eClass().getName() +", please check the method: sortProperties in Runtime2EMF.java");
 			}
 			// add at the specifyeid position (0 if no special case occur)
 			sortedProperty.add(insertionIndex,prop_name);
