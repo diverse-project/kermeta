@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<uml:Model xmi:version="2.1" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:uml="http://www.eclipse.org/uml2/2.1.0/UML" xmi:id="_qb8akM37EdqwVrslYOdUDA" name="Model">
+  <packagedElement xmi:type="uml:Package" xmi:id="_w8IxIM37EdqwVrslYOdUDA" name="user">
+    <packagedElement xmi:type="uml:Class" xmi:id="_7Tx_0GDREd6OOpp53nmtIg" name="User">
+      <ownedAttribute xmi:id="_8M6AMGDREd6OOpp53nmtIg" name="id" type="_-NZRQGDREd6OOpp53nmtIg"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_IyStwGFeEd6FQK6cpGPXzw" name="Group"/>
+    <packagedElement xmi:type="uml:Association" xmi:id="_KCLBSmFeEd6FQK6cpGPXzw" name="A_&lt;group>_&lt;user>" memberEnd="_KCLBS2FeEd6FQK6cpGPXzw _KCLBTmFeEd6FQK6cpGPXzw">
+      <ownedEnd xmi:id="_KCLBS2FeEd6FQK6cpGPXzw" name="group" type="_IyStwGFeEd6FQK6cpGPXzw" association="_KCLBSmFeEd6FQK6cpGPXzw">
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_KCLBTGFeEd6FQK6cpGPXzw" value="1"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_KCLBTWFeEd6FQK6cpGPXzw"/>
+      </ownedEnd>
+      <ownedEnd xmi:id="_KCLBTmFeEd6FQK6cpGPXzw" name="leader" type="_7Tx_0GDREd6OOpp53nmtIg" association="_KCLBSmFeEd6FQK6cpGPXzw">
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_KCLBT2FeEd6FQK6cpGPXzw" value="1"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_KCLBUGFeEd6FQK6cpGPXzw" value="1"/>
+      </ownedEnd>
+    </packagedElement>
+  </packagedElement>
+  <packagedElement xmi:type="uml:PrimitiveType" xmi:id="_-NWN8GDREd6OOpp53nmtIg" name="Boolean"/>
+  <packagedElement xmi:type="uml:PrimitiveType" xmi:id="_-NYqMGDREd6OOpp53nmtIg" name="Integer"/>
+  <packagedElement xmi:type="uml:PrimitiveType" xmi:id="_-NZRQGDREd6OOpp53nmtIg" name="String"/>
+  <packagedElement xmi:type="uml:PrimitiveType" xmi:id="_-NZRQWDREd6OOpp53nmtIg" name="UnlimitedNatural"/>
+</uml:Model>

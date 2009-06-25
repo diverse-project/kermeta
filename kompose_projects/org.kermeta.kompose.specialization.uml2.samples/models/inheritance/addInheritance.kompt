@@ -1,0 +1,30 @@
+/** author: Cyril Faucher - cyril.faucher(at)gmail.com - L3i, University of La Rochelle **/
+
+EXT "http://www.eclipse.org/uml2/2.1.0/UML"
+
+// Primary Model URI
+PM "platform:/resource/org.kermeta.kompose.specialization.uml2.samples/models/inheritance/Person.uml"
+
+// Aspect Model URI
+AM "platform:/resource/org.kermeta.kompose.specialization.uml2.samples/models/inheritance/User.uml" 
+
+// Composed Model URI
+CM "platform:/resource/org.kermeta.kompose.specialization.uml2.samples/models/inheritance/PersonAsUser.uml"
+
+// predirectives for primary model
+PMPre {
+}
+
+// predirectives for aspect model
+AMPre {
+	Model::user.name = "person"
+}
+
+// postdirectives
+Post {
+	// Create the generalization
+	create Generalization as $g
+	$g.general = Model::person::Person
+	// Set the generalization
+	Model::person::User.generalization + $g
+}

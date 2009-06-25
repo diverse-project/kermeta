@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="ASCII"?>
+<kompose:Composer xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:kompose="http://www.kermeta.org/kompose" primaryModelURI="platform:/resource/org.kermeta.kompose.specialization.uml2.samples/models/inheritance/Person.uml" aspectModelURI="platform:/resource/org.kermeta.kompose.specialization.uml2.samples/models/inheritance/User.uml" composedModelURI="platform:/resource/org.kermeta.kompose.specialization.uml2.samples/models/inheritance/PersonAsUser.uml" metamodelName="http://www.eclipse.org/uml2/2.1.0/UML">
+  <postdirectives xsi:type="kompose:Create" className="Generalization" identifier="g"/>
+  <postdirectives xsi:type="kompose:Set" propertyName="general">
+    <target xsi:type="kompose:IDRef" identifier="g"/>
+    <value xsi:type="kompose:NameRef" qname="Model::person::Person"/>
+  </postdirectives>
+  <postdirectives xsi:type="kompose:Add" propertyName="generalization">
+    <target xsi:type="kompose:NameRef" qname="Model::person::User"/>
+    <value xsi:type="kompose:IDRef" identifier="g"/>
+  </postdirectives>
+  <predirectivesAM xsi:type="kompose:Set" propertyName="name">
+    <target xsi:type="kompose:NameRef" qname="Model::user"/>
+    <value xsi:type="kompose:StringLiteral" value="person"/>
+  </predirectivesAM>
+</kompose:Composer>

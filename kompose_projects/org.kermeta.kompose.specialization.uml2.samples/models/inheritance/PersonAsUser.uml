@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<uml:Model xmi:version="2.1" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:uml="http://www.eclipse.org/uml2/2.1.0/UML" xmi:id="_a-fYcGFeEd6FQK6cpGPXzw" name="Model">
+  <packagedElement xmi:type="uml:PrimitiveType" xmi:id="_a-fYcWFeEd6FQK6cpGPXzw" name="UnlimitedNatural"/>
+  <packagedElement xmi:type="uml:PrimitiveType" xmi:id="_a-fYcmFeEd6FQK6cpGPXzw" name="Integer"/>
+  <packagedElement xmi:type="uml:Package" xmi:id="_a-fYc2FeEd6FQK6cpGPXzw" name="person">
+    <packagedElement xmi:type="uml:Association" xmi:id="_a-fYdGFeEd6FQK6cpGPXzw" name="A_&lt;group>_&lt;user>" memberEnd="_a-fYdWFeEd6FQK6cpGPXzw _a-fYeGFeEd6FQK6cpGPXzw">
+      <ownedEnd xmi:id="_a-fYdWFeEd6FQK6cpGPXzw" name="group" visibility="public" type="_a-fYh2FeEd6FQK6cpGPXzw" association="_a-fYdGFeEd6FQK6cpGPXzw">
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_a-fYdmFeEd6FQK6cpGPXzw" value="1"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_a-fYd2FeEd6FQK6cpGPXzw"/>
+      </ownedEnd>
+      <ownedEnd xmi:id="_a-fYeGFeEd6FQK6cpGPXzw" name="leader" visibility="public" type="_a-fYhGFeEd6FQK6cpGPXzw" association="_a-fYdGFeEd6FQK6cpGPXzw">
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_a-fYeWFeEd6FQK6cpGPXzw" value="1"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_a-fYemFeEd6FQK6cpGPXzw" value="1"/>
+      </ownedEnd>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Association" xmi:id="_a-fYe2FeEd6FQK6cpGPXzw" name="A_&lt;person>_&lt;group>" memberEnd="_a-fYfGFeEd6FQK6cpGPXzw _a-fYf2FeEd6FQK6cpGPXzw">
+      <ownedEnd xmi:id="_a-fYfGFeEd6FQK6cpGPXzw" name="members" visibility="public" type="_a-fYgmFeEd6FQK6cpGPXzw" association="_a-fYe2FeEd6FQK6cpGPXzw">
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_a-fYfWFeEd6FQK6cpGPXzw" value="*"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_a-fYfmFeEd6FQK6cpGPXzw" value="1"/>
+      </ownedEnd>
+      <ownedEnd xmi:id="_a-fYf2FeEd6FQK6cpGPXzw" name="group" visibility="public" type="_a-fYh2FeEd6FQK6cpGPXzw" association="_a-fYe2FeEd6FQK6cpGPXzw">
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_a-fYgGFeEd6FQK6cpGPXzw" value="1"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_a-fYgWFeEd6FQK6cpGPXzw"/>
+      </ownedEnd>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_a-fYgmFeEd6FQK6cpGPXzw" name="Person">
+      <ownedAttribute xmi:id="_a-fYg2FeEd6FQK6cpGPXzw" name="name" visibility="public" type="_a-fYiWFeEd6FQK6cpGPXzw"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_a-fYhGFeEd6FQK6cpGPXzw" name="User">
+      <generalization xmi:id="_a-fYhWFeEd6FQK6cpGPXzw" general="_a-fYgmFeEd6FQK6cpGPXzw"/>
+      <ownedAttribute xmi:id="_a-fYhmFeEd6FQK6cpGPXzw" name="id" visibility="public" type="_a-fYiWFeEd6FQK6cpGPXzw"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_a-fYh2FeEd6FQK6cpGPXzw" name="Group"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:PrimitiveType" xmi:id="_a-fYiGFeEd6FQK6cpGPXzw" name="Boolean"/>
+  <packagedElement xmi:type="uml:PrimitiveType" xmi:id="_a-fYiWFeEd6FQK6cpGPXzw" name="String"/>
+</uml:Model>
