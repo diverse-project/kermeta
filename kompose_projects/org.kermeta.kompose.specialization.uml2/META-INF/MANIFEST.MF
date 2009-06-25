@@ -1,0 +1,15 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Kompose Specialization Composition Plug-in (UML)
+Bundle-SymbolicName: org.kermeta.kompose.specialization.uml2;singleton:=true
+Bundle-Version: 0.1.0
+Bundle-Activator: org.kermeta.kompose.specialization.uml2.activator.Activator
+Bundle-Vendor: IRISA/INRIA & L3i, University of La Rochelle
+Require-Bundle: org.eclipse.ui,
+ org.eclipse.core.runtime,
+ org.eclipse.core.resources,
+ org.kermeta.kompose.core.model,
+ fr.irisa.triskell.kermeta.interpreter,
+ org.eclipse.core.expressions;bundle-version="3.4.0",
+ org.eclipse.uml2.uml;bundle-version="2.2.1"
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
