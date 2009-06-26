@@ -33,7 +33,7 @@ aspect class EEnum
 	 if not self.isVoid() then
 		stdio.writeln("Enumeration name : " + self.name)
 		stdio.writeln("Enumeration location : " + self.getQualifiedName)
-		stdio.writeln("Literals : ")
+		stdio.writeln("Literals (" + self.eLiterals.size.toString + "): ")
 		self.eLiterals.each{e| if not e.isVoid then
 								stdio.writeln("	" + e.name)
 								end }
@@ -47,7 +47,7 @@ aspect class EClass
 	 if not self.isVoid then
 		stdio.writeln("EClass name : " + self.name)
 		stdio.writeln("EClass location : " + self.getQualifiedName)
-		stdio.writeln("Attributes/Refs  : ")
+		stdio.writeln("Attributes/Refs (" + self.eStructuralFeatures.size.toString + "): ")
 		self.eStructuralFeatures.each{e| 
 			if not e.isVoid then
 				stdio.write("	" + e.name + " : ")
