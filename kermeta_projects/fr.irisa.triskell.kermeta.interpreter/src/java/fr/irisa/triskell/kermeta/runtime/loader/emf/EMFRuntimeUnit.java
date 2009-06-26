@@ -34,6 +34,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.EPackage.Registry;
+import org.eclipse.emf.ecore.EStructuralFeature.Setting;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.URIConverter;
@@ -970,6 +971,28 @@ public class EMFRuntimeUnit extends RuntimeUnit {
 		findDependentResources(result, resource);
 		return result;
 	}
+	
+	/**
+	 * returns the list of resources that are linked to the elements of this resources
+	 *  it doesn't returns the metamodel resources.
+	 * (this is because the getAllContents() on a resource set alos return the metamodel ...)
+	 * result includes the input resources
+	 * @return EList of Resource
+	 */
+	public EList<Resource> findDependentResources(EList<Resource> list, Resource resource)
+	{
+		
+		Map<EObject, java.util.Collection<Setting>> map = EcoreUtil.ExternalCrossReferencer.find(resource);
+		// extract the resources
+		for(EObject eobj : map.keySet()){
+			Resource res = eobj.eResource();
+			if(res!=  null && !list.contains(res)){
+				list.add(res);
+				findDependentResources(list,res);
+			}
+		}
+		return list;
+	}
 	/**
 	 * Adds the resource of the given EObject (using obj.eResource() call) to the
 	 * list <code>list</code>
@@ -983,7 +1006,7 @@ public class EMFRuntimeUnit extends RuntimeUnit {
 			list.add(obj.eResource());
 			internalLog.debug("Resource added : "+ obj.eResource().getURI());
     		// recursively add the resources
-			findDependentResources(list,obj.eResource());
+			findDependentResources2(list,obj.eResource());
     	}
 	}
 	/**
@@ -993,7 +1016,7 @@ public class EMFRuntimeUnit extends RuntimeUnit {
 	 * the given <code>resource</code> depends.
 	 * @param resource The emf resource that EMF2Runtime has to load. 
 	 */
-	protected void findDependentResources(EList<Resource> list, Resource resource)
+	protected void findDependentResources2(EList<Resource> list, Resource resource)
 	{
 		TreeIterator<EObject> treeIt = resource.getAllContents();
 		while(treeIt.hasNext())
