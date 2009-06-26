@@ -24,7 +24,7 @@ class Random {
 	
 		// if num==1 => result:=0
 		if num > 1 then
-			@compiledJavaExtern "externs.Random.nextId(this, num)"
+			@compiledJavaExtern "org.kermeta.language.mdk.externs.random.Random.nextId(this, num)"
         	result ?= extern org::kermeta::language::mdk::externs::random::Random.nextInteger(self, num)
         else
         	if num == 0 then
@@ -42,7 +42,7 @@ class Random {
 	operation getIntegerSequenceRandomly(sequenceSize : Integer) : Sequence<Integer> is do
 	
 		if sequenceSize > 1 then
-			@compiledJavaExtern "externs.Random.getIntegerSequenceRandomly(this, sequenceSize)"
+			@compiledJavaExtern "org.kermeta.language.mdk.externs.random.Random.getIntegerSequenceRandomly(this, sequenceSize)"
         	result ?= extern org::kermeta::language::mdk::externs::random::Random.getIntegerSequenceRandomly(self, sequenceSize)
         else
         	// Optimization: if size==1 => result is a collection with one element equals to 0
