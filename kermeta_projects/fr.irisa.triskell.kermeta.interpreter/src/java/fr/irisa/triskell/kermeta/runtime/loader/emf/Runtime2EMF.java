@@ -14,6 +14,8 @@
  */
 package fr.irisa.triskell.kermeta.runtime.loader.emf;
 
+import java.io.PrintWriter;
+import java.io.StringWriter;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -38,6 +40,8 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.impl.EEnumLiteralImpl;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.emf.ecore.util.FeatureMapUtil;
+import org.eclipse.emf.ecore.util.FeatureMap.Entry;
 
 import fr.irisa.triskell.eclipse.emf.EMFRegistryHelper;
 import fr.irisa.triskell.eclipse.emf.ResourceHelper;
@@ -107,6 +111,7 @@ public class Runtime2EMF {
 			kermeta_ecore_map.put("name", "name");
 			kermeta_ecore_map.put("tag", "eAnnotations");
 			kermeta_ecore_map.put("ownedLiteral", "eLiterals");
+			kermeta_ecore_map.put("kermeta::ecore::EFeatureMapEntry", "ecore::EFeatureMapEntry");
 		}
 		return kermeta_ecore_map;
 	}
@@ -248,43 +253,45 @@ public class Runtime2EMF {
 		    			this.unit.getRuntimeMemory(),
 		    			null);				
 			}
-			EObject emfObject = (EObject)rObject.getEmfObject();
-			if(emfObject != null){
-				if(emfObject.eResource() != null){
-					// has been registered in emf ? we cannot modify/update it !!!
-					// espacillay we should not update http://www.eclipse.org/emf/2002/Ecore
-					if(EMFRegistryHelper.isRegistered(emfObject.eResource().getURI())){
-						internalLog.info("Ignoring update of object " + ((EObject)rObject.getEmfObject()).eClass().getName() + " that comes from an ecore registered package: "+emfObject.eResource().getURI().toString());
-						return;
-					}
-					if("http://www.eclipse.org/emf/2002/Ecore".equals(emfObject.eResource().getURI().toString())){
-						// we really don't want to modify the metameta model we are working on ...
-						internalLog.info("     Ignoring update of Ecore internal object : "+((EObject)rObject.getEmfObject()).eClass().getName());
-						return; //platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.ecore
-					}
-					// normally we should not update/modify objects that comes from a plugin ? ...
-					/*if("platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km".equals(emfObject.eResource().getURI().toString())){
-						internalLog.debug("     Ignoring update of kermeta framework.km internal object : "+((EObject)rObject.getEmfObject()).eClass().getName());
-						return; //platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.ecore
-					}*/
-					/* DVK : this suppose that framework.ecore should be registered ...
-					if("platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.ecore".equals(emfObject.eResource().getURI().toString())){
-						internalLog.debug("     Ignoring update of kermeta framework internal object : "+((EObject)rObject.getEmfObject()).eClass().getName());
-						return; //platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.ecore
-					}*/
-				}
-				if(this.unit.associatedResource != fr.irisa.triskell.kermeta.runtime.language.Object.getContainingResource(rObject) ){
-					if(fr.irisa.triskell.kermeta.runtime.language.Object.getContainingResource(rObject) != rObject.getFactory().getMemory().voidINSTANCE){			
-						// Ignore RO that belong to another Resource, as the save call the updateEMFModel on each of the other resources
-						//  they are already updated by themselve 
-						RuntimeObject nameString = rObject.getProperties().get("name");
-						if(nameString != null) {
-							internalLog.info(" ignore update of Ecore internal object named : " + fr.irisa.triskell.kermeta.runtime.basetypes.String.getValue(nameString));
+			if(rObject.getEmfObject() instanceof EObject) { // it can be a BasicFeatureMap
+				EObject emfObject = (EObject)rObject.getEmfObject();
+				if(emfObject != null){
+					if(emfObject.eResource() != null){
+						// has been registered in emf ? we cannot modify/update it !!!
+						// espacillay we should not update http://www.eclipse.org/emf/2002/Ecore
+						if(EMFRegistryHelper.isRegistered(emfObject.eResource().getURI())){
+							internalLog.info("Ignoring update of object " + ((EObject)rObject.getEmfObject()).eClass().getName() + " that comes from an ecore registered package: "+emfObject.eResource().getURI().toString());
+							return;
 						}
-						else 
-							internalLog.info(" ignore update of Ecore internal object : ");
-						return;
-					}				
+						if("http://www.eclipse.org/emf/2002/Ecore".equals(emfObject.eResource().getURI().toString())){
+							// we really don't want to modify the metameta model we are working on ...
+							internalLog.info("     Ignoring update of Ecore internal object : "+((EObject)rObject.getEmfObject()).eClass().getName());
+							return; //platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.ecore
+						}
+						// normally we should not update/modify objects that comes from a plugin ? ...
+						/*if("platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km".equals(emfObject.eResource().getURI().toString())){
+							internalLog.debug("     Ignoring update of kermeta framework.km internal object : "+((EObject)rObject.getEmfObject()).eClass().getName());
+							return; //platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.ecore
+						}*/
+						/* DVK : this suppose that framework.ecore should be registered ...
+						if("platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.ecore".equals(emfObject.eResource().getURI().toString())){
+							internalLog.debug("     Ignoring update of kermeta framework internal object : "+((EObject)rObject.getEmfObject()).eClass().getName());
+							return; //platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.ecore
+						}*/
+					}
+					if(this.unit.associatedResource != fr.irisa.triskell.kermeta.runtime.language.Object.getContainingResource(rObject) ){
+						if(fr.irisa.triskell.kermeta.runtime.language.Object.getContainingResource(rObject) != rObject.getFactory().getMemory().voidINSTANCE){			
+							// Ignore RO that belong to another Resource, as the save call the updateEMFModel on each of the other resources
+							//  they are already updated by themselve 
+							RuntimeObject nameString = rObject.getProperties().get("name");
+							if(nameString != null) {
+								internalLog.info(" ignore update of Ecore internal object named : " + fr.irisa.triskell.kermeta.runtime.basetypes.String.getValue(nameString));
+							}
+							else 
+								internalLog.info(" ignore update of Ecore internal object : ");
+							return;
+						}				
+					}
 				}
 			}
 			////////////////////////////////////////////////////////
@@ -292,29 +299,33 @@ public class Runtime2EMF {
 			// resource between RO and associated emf object(s)
 			RuntimeObject resRO = fr.irisa.triskell.kermeta.runtime.language.Object.getContainingResource(rObject);
 			Resource refRes = fr.irisa.triskell.kermeta.runtime.basetypes.Resource.getEmfResource(resRO);
+			if(rObject.getEmfObject() instanceof EObject) { // it can be a BasicFeatureMap
+				EObject eObj = (EObject) rObject.getEmfObject();
+				if(eObj != null){
+					Resource res = eObj.eResource();
+					if(res != null) {
+						if(res != refRes) {
+							res.getContents().remove(eObj);
+						}
+					}
+				}
+				eObj = (EObject) rObject.getR2eEmfObject();
+				if(eObj != null){
+					Resource res = eObj.eResource();
+					if(res != null) {
+						if(res != refRes) {
+							res.getContents().remove(eObj);
+						}
+					}
+				}
+			}
 			
-			EObject eObj = (EObject) rObject.getEmfObject();
-			if(eObj != null){
-				Resource res = eObj.eResource();
-				if(res != null) {
-					if(res != refRes) {
-						res.getContents().remove(eObj);
-					}
-				}
-			}
-			eObj = (EObject) rObject.getR2eEmfObject();
-			if(eObj != null){
-				Resource res = eObj.eResource();
-				if(res != null) {
-					if(res != refRes) {
-						res.getContents().remove(eObj);
-					}
-				}
-			}
 			// END PATCH
 			////////////////////////////////////////////////////////
 			
-			
+			if(rObject == unit.getRuntimeMemory().voidINSTANCE){
+				internalLog.debug("trying to save a Void Object");
+			}
 			runtimeObjectsToUpdate.add(rObject);
 				
 				
@@ -323,7 +334,8 @@ public class Runtime2EMF {
 			{
 				// Get the RuntimeObject value of property given by prop_name
 				RuntimeObject property = (RuntimeObject) rObject.getProperties().get(prop_name);
-				fillRuntimeObjectToUpdateListWithProperty(property, rObject.toString() + "."+ prop_name);
+				if(property != unit.getRuntimeMemory().voidINSTANCE)
+					fillRuntimeObjectToUpdateListWithProperty(property, rObject.toString() + "."+ prop_name);
 			}
 		}
 	}
@@ -360,6 +372,25 @@ public class Runtime2EMF {
 	 * @param rObject
 	 */
 	protected void setEObjectPropertiesFromRuntimeObject( RuntimeObject rObject) {
+		
+		// Get the qualified name of this meta class
+		String metaclassQName = NamedElementHelper.getQualifiedName(
+				((fr.irisa.triskell.kermeta.language.structure.Class) rObject
+				.getMetaclass().getKCoreObject()).getTypeDefinition());
+		if("kermeta::ecore::EFeatureMapEntry".equals(metaclassQName)){
+			// special case of feature map
+			//createEFeatureMapEntryFromRuntimeObject(rObject);
+			EStructuralFeature structFeat;
+			String eStructuralFeatureName = fr.irisa.triskell.kermeta.runtime.basetypes.String.getValue(
+					rObject.getProperties().get("eStructuralFeatureName"));
+			
+			// retreive the object hold by the enty
+			RuntimeObject valueRO = rObject.getProperties().get("value");
+
+			// create the entry in the map
+			//Entry featureMapEntry = FeatureMapUtil.createEntry(structFeat,createEObjectFromRuntimeObject(valueRO));
+			return;
+		}
 		EObject eObject = createEObjectFromRuntimeObject(rObject);
 		if(eObject != null) 
 			if(eObject.equals(rObject.getKCoreObject()))
@@ -445,7 +476,19 @@ public class Runtime2EMF {
 					/*if(p_o instanceof EnumerationLiteral)
 						p_o = getOrCreatePropertyFromRuntimeObject(property, feature);*/
 					//EObject eObject2 = (EObject) p_o;
-					eObject.eSet(feature, p_o);	
+					try{
+						eObject.eSet(feature, p_o);
+					}
+					catch(Exception e){
+						StringWriter sw = new StringWriter();
+						getOrCreatePropertyFromRuntimeObject(property, feature);
+					    PrintWriter pw = new PrintWriter(sw);
+					    e.printStackTrace(pw);
+						unit.throwKermetaRaisedExceptionOnSave(
+									"Java problem setting : " + feature
+									+ "\n   on "	+ eObject + ";\n" + sw.toString(),
+									e);						
+					}
 					//internalLog.debug("    setting "+ eObject.eClass().getName() + "."  + feature.getName() + " = " + p_o.toString() + " on  "+ rObject.getProperties().toString());
 					if (p_o == null) {
 						internalLog.warn("    setting null to "+ eObject.eClass().getName() + "."  + feature.getName() + "");}
@@ -656,6 +699,11 @@ public class Runtime2EMF {
 			}
 		}
 		
+		if(result == null){
+			// let's try with ecore.ecore resource which is sometimes indirectly referenced
+			res = unit.loadMetaModelAsEcore("http://www.eclipse.org/emf/2002/Ecore");
+			result = createEObjectFromRuntimeObjectWithResource(rObject, res);
+		}
 		return result;
 		
 	}
@@ -691,6 +739,26 @@ public class Runtime2EMF {
 					}
 					else rObject.setR2eEmfObject(result);
 				}
+				if(kqname.equals("kermeta::ecore::EFeatureMapEntry")){
+					// special case of EFeatureMapEntry
+					//eclass = this.getEClassFromFQualifiedName("ecore::EFeatureMapEntry", p_resource);
+					// this is because some model may be dependent of ecore only for this reason
+					// retreive the EStructuralFeature
+					EStructuralFeature structFeat;
+					String eStructuralFeatureName = fr.irisa.triskell.kermeta.runtime.basetypes.String.getValue(
+							rObject.getProperties().get("eStructuralFeatureName"));
+					
+					// retreive the object hold by the enty
+					RuntimeObject valueRO = rObject.getProperties().get("value");
+
+					// create the entry in the map
+					//Entry featureMapEntry = FeatureMapUtil.createEntry(structFeat,createEObjectFromRuntimeObject(valueRO));
+					
+					
+					
+					//rObject.setR2eEmfObject(result);
+					 									
+				}
 			} 
 			else if( rObject.getEmfObject() != null){
 				// this object was loaded from a resoure 
@@ -702,15 +770,22 @@ public class Runtime2EMF {
 			else
 			{
 				EClass eclass = this.getEClassFromFQualifiedName(kqname, p_resource);
-				if(eclass == null && kqname.equals("ecore::EFeatureMapEntry")){
+				if(eclass == null && kqname.equals("kermeta::ecore::EFeatureMapEntry")){
 					// special case of EFeatureMapEntry
+					//eclass = this.getEClassFromFQualifiedName("ecore::EFeatureMapEntry", p_resource);
 					// this is because some model may be dependent of ecore only for this reason
 					// retreive the EStructuralFeature
 					EStructuralFeature structFeat;
-					// retreive the object
-					//result = FeatureMapUtil.createEntry(structFeat,);
+					String eStructuralFeatureName = fr.irisa.triskell.kermeta.runtime.basetypes.String.getValue(
+							rObject.getProperties().get("eStructuralFeatureName"));
+					//rObject.getContainer()
+					// retreive the object hold by the enty
+					RuntimeObject valueRO = rObject.getProperties().get("value");
+					//valueRO.getR2eEmfObject()
+					//FeatureMapUtil.
+					//result = FeatureMapUtil.createEntry(structFeat,createEObjectFromRuntimeObject(valueRO));
 					rObject.setR2eEmfObject(result);
-					// TODO DVK deal with FeatureMap when saving files
+					 									
 				}
 				else if (eclass == null){
 					// maybe the metaclass is not in this metamodel
@@ -726,7 +801,7 @@ public class Runtime2EMF {
 				}
 				else {
 					// this is an error, we haven't been able to create the object because we haven't retreived its metaclass
-				
+					eclass = eclass;
 				}
 				
 			}

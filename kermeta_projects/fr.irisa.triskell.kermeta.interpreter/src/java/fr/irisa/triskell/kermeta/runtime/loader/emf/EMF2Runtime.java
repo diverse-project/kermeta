@@ -50,6 +50,7 @@ import fr.irisa.triskell.kermeta.runtime.RuntimeObjectImpl;
 import fr.irisa.triskell.kermeta.runtime.basetypes.Collection;
 import fr.irisa.triskell.kermeta.runtime.basetypes.Repository;
 import fr.irisa.triskell.kermeta.runtime.factory.RuntimeObjectFactory;
+import fr.irisa.triskell.kermeta.runtime.language.ReflectiveCollection;
 import fr.irisa.triskell.kermeta.runtime.rohelper.RepositoryHelper;
 import fr.irisa.triskell.kermeta.typechecker.InheritanceSearch;
 
@@ -995,82 +996,119 @@ public class EMF2Runtime {
 	public RuntimeObject createRuntimeObjectForFeatureMap(EList objects, Type typeParam, EClassifier feature_type, RuntimeObject rObject, RuntimeObject roprop)
 	{
 	    RuntimeObject result = fr.irisa.triskell.kermeta.runtime.language.Object.get(rObject, roprop);
-	    // We create one by default 
-	    if (Collection.getArrayList(result) == null)
-	    { 
-	    	result.setPrimitiveType(RuntimeObject.COLLECTION_VALUE);
-	    	result.setJavaNativeObject(new ArrayList<Object>()); }
-	    
-	    // Transform the EObjects into RuntimeObject and add them in our collection
-	    for (Object fvalue : objects)
-	    {
-	    	RuntimeObject featureMapEntry = null;
-	        BasicFeatureMapEntry mapEntry= null;
-	        if(fvalue instanceof BasicFeatureMapEntry){
-	    		//internalLog.warn("The type of BasicFeatureMapEntry <"+fvalue+"> has not been handled yet. Replaced by Void.");
-	    		
-	    		//rovalue = rofactory.getMemory().voidINSTANCE;
-	    		mapEntry = (BasicFeatureMapEntry)fvalue;
-	    	//	mapEntry.getEStructuralFeature()
-	    	}
-	        else{
-	        	String errmsg = "FeatureMap contains something different from BasicFeatureMapEntry please contact kermeta developpers ...";	        
-	        	//e.printStackTrace();
-	        	unit.throwKermetaRaisedExceptionOnLoad(errmsg, null);
-	        }
-	        
-	        // create the FeatureMapEntry
-	        RuntimeObject ro_metaclass;
-	        String kermeta_metaclass_name = "kermeta::ecore::EFeatureMapEntry";
-	        if (this.type_cache.containsKey(kermeta_metaclass_name)) 
-	        	ro_metaclass = this.type_cache.get(kermeta_metaclass_name);
-	    	else
-	    	{	
-	    		Type ftype = this.getTypeFromName(kermeta_metaclass_name);
-	    		//fr.irisa.triskell.kermeta.language.structure.Class fclass = (fr.irisa.triskell.kermeta.language.structure.Class)ftype;
-	    		ro_metaclass = unit.getRuntimeMemory().getRuntimeObjectForFObject(ftype);
-	    		this.type_cache.put(kermeta_metaclass_name, ro_metaclass);
-	    	}
-		    // Define the RO-instance of the given EObject, with the above given RO-metaclass
-		    featureMapEntry = new RuntimeObjectImpl(unit.getRuntimeMemory().getROFactory(), ro_metaclass);
-	        // set its key using the feature name
-		    RuntimeObject rofeaturenameprop = RuntimeObjectHelper.getPropertyByName(featureMapEntry,"eStructuralFeatureName");
-		    RuntimeObject rofeaturename = fr.irisa.triskell.kermeta.runtime.basetypes.String.create(mapEntry.getEStructuralFeature().getName(), unit.getRuntimeMemory().getROFactory());
-			fr.irisa.triskell.kermeta.runtime.language.Object.set(featureMapEntry, rofeaturenameprop, rofeaturename);
-	        // set its value
-		    RuntimeObject rofeaturevalueprop = RuntimeObjectHelper.getPropertyByName(featureMapEntry,"value");
-		    Object entryvalue = mapEntry.getValue();
-		    rofeaturevalueprop = RuntimeObjectHelper.getPropertyByName(featureMapEntry,"value");
-		    //RuntimeObject rofeaturevalue = fr.irisa.triskell.kermeta.runtime.basetypes.String.create(mapEntry.getValue(), unit.getRuntimeMemory().getROFactory());
-			//fr.irisa.triskell.kermeta.runtime.language.Object.set(featureMapEntry, rofeaturevalueprop, rofeaturevalue);
+	    // is this a collection ?
+	    RuntimeObject propUpper = RuntimeObjectHelper.getPropertyByName(roprop,"upper");
+	    int upperVal = fr.irisa.triskell.kermeta.runtime.basetypes.Integer.getValue(
+	    		fr.irisa.triskell.kermeta.runtime.language.Object.get(roprop,propUpper));
 
-	        if (entryvalue instanceof EObject)
-	        	fr.irisa.triskell.kermeta.runtime.language.Object.set(featureMapEntry, rofeaturevalueprop, (RuntimeObject) this.runtime_objects_map.get(entryvalue));
-	        else if (mapEntry.getEStructuralFeature().getEType() instanceof EDataType)// it is a Datatype
-	        {
-	        	RuntimeObject roentryvalue = createRuntimeObjectForPrimitiveTypeValue(entryvalue, (EDataType)mapEntry.getEStructuralFeature().getEType());
-	        	fr.irisa.triskell.kermeta.runtime.language.Object.set(featureMapEntry, rofeaturevalueprop, 
-	        			roentryvalue);
-		        
-	        }
-	        if (entryvalue != null)
-	        {	// RuntimeObject ri = fr.irisa.triskell.kermeta.runtime.basetypes.Integer.create(i, memory.getROFactory());
+	    // usual case : this is a collection
+	    if(upperVal != 1){
+		    // We create one by default 
+		    if (Collection.getArrayList(result) == null)
+		    { 
+		    	result.setPrimitiveType(RuntimeObject.COLLECTION_VALUE);
+		    	result.setJavaNativeObject(new ArrayList<Object>()); }
+		    
+		    // Transform the EObjects into RuntimeObject and add them in our collection
+		    for (Object fvalue : objects)
+		    {
+		    	RuntimeObject featureMapEntry = createRuntimeObjectForFeatureMapEntry(fvalue);
+		    	// RuntimeObject ri = fr.irisa.triskell.kermeta.runtime.basetypes.Integer.create(i, memory.getROFactory());
 		        // ReflectiveSequence.addAt(result, ri, rovalue); i+=1;) |OR| ReflectiveCollection.add(result, rovalue);
 		        // NOTE 1 : FIXME : ReflectiveSequence.addAt and ReflectiveCollection.add handle differently and weirdly 
 		        // the containment of the added element. (see their code!). That's why we use the simple Collection.add method
 		        // NOTE 2 : sometimes createRuntimeObjectForPrimitiveTypeValue can return null if the "sfeature"
 		        // is not kermeta compliant, ex: the edatatype EJavaClass. We ignore it for the moment
 		        //rovalue.getData().put("emfObject", fvalue);
-		        Collection.add(result, featureMapEntry);
-	        }
+		        //Collection.add(result, featureMapEntry);
+		    	// DVK june 2009, try ReflectiveCollection again but filter multiplicity == 1
+		    	ReflectiveCollection.add(result, featureMapEntry);
+		        
+		    }
+		    rObject.getProperties().put((String)((RuntimeObject)roprop.getProperties().get("name")).getJavaNativeObject(), result);
+		    // FIXME : the set method handles the containment, but seems to be not appropriated for 
+		    // model instances. Containment is observed even if we simply use Collection.add to add instances
+		    // since result is still a reflective collection.
+		    //fr.irisa.triskell.kermeta.runtime.language.Object.set(rObject, roprop, result);
 	    }
-	    rObject.getProperties().put((String)((RuntimeObject)roprop.getProperties().get("name")).getJavaNativeObject(), result);
-	    // FIXME : the set method handles the containment, but seems to be not appropriated for 
-	    // model instances. Containment is observed even if we simply use Collection.add to add instances
-	    // since result is still a reflective collection.
-	    //fr.irisa.triskell.kermeta.runtime.language.Object.set(rObject, roprop, result);
+	    else{
+	    	// this is not a collection 
+	    	// even if FeatureMap is a list, the associated attribute has a multiplicity == 1
+	    	if(objects.size() > 1){
+				internalLog.warn(" strange, we have more than one FeatureMapEntry to put in a FeatureMap with a multiplicity == 1");
+	    		
+	    	}
+	    	if(objects.size() == 1){
+	    		RuntimeObject featureMapEntry = createRuntimeObjectForFeatureMapEntry(objects.get(0));
+	    		result = featureMapEntry;
+	    	}
+	    	
+	    }
 	    return result;
 	}
+	
+	/**
+	 * @param fvalue
+	 * @return
+	 */
+	public RuntimeObject createRuntimeObjectForFeatureMapEntry(Object fvalue){
+		RuntimeObject featureMapEntry = null;
+        BasicFeatureMapEntry mapEntry= null;
+        if(fvalue instanceof BasicFeatureMapEntry){
+    		//internalLog.warn("The type of BasicFeatureMapEntry <"+fvalue+"> has not been handled yet. Replaced by Void.");
+    		
+    		//rovalue = rofactory.getMemory().voidINSTANCE;
+    		mapEntry = (BasicFeatureMapEntry)fvalue;
+    	//	mapEntry.getEStructuralFeature()
+    	}
+        else{
+        	String errmsg = "FeatureMap contains something different from BasicFeatureMapEntry please contact kermeta developpers ...";	        
+        	//e.printStackTrace();
+        	unit.throwKermetaRaisedExceptionOnLoad(errmsg, null);
+        }
+        
+        // create the FeatureMapEntry
+        RuntimeObject ro_metaclass;
+        String kermeta_metaclass_name = "kermeta::ecore::EFeatureMapEntry";
+        if (this.type_cache.containsKey(kermeta_metaclass_name)) 
+        	ro_metaclass = this.type_cache.get(kermeta_metaclass_name);
+    	else
+    	{	
+    		Type ftype = this.getTypeFromName(kermeta_metaclass_name);
+    		//fr.irisa.triskell.kermeta.language.structure.Class fclass = (fr.irisa.triskell.kermeta.language.structure.Class)ftype;
+    		ro_metaclass = unit.getRuntimeMemory().getRuntimeObjectForFObject(ftype);
+    		this.type_cache.put(kermeta_metaclass_name, ro_metaclass);
+    	}
+	    // Define the RO-instance of the given EObject, with the above given RO-metaclass
+	    featureMapEntry = new RuntimeObjectImpl(unit.getRuntimeMemory().getROFactory(), ro_metaclass);
+        // set its key using the feature name
+	    RuntimeObject rofeaturenameprop = RuntimeObjectHelper.getPropertyByName(featureMapEntry,"eStructuralFeatureName");
+	    RuntimeObject rofeaturename = fr.irisa.triskell.kermeta.runtime.basetypes.String.create(mapEntry.getEStructuralFeature().getName(), unit.getRuntimeMemory().getROFactory());
+		fr.irisa.triskell.kermeta.runtime.language.Object.set(featureMapEntry, rofeaturenameprop, rofeaturename);
+        // set its value
+	    RuntimeObject rofeaturevalueprop = RuntimeObjectHelper.getPropertyByName(featureMapEntry,"value");
+	    Object entryvalue = mapEntry.getValue();
+	    rofeaturevalueprop = RuntimeObjectHelper.getPropertyByName(featureMapEntry,"value");
+	    //RuntimeObject rofeaturevalue = fr.irisa.triskell.kermeta.runtime.basetypes.String.create(mapEntry.getValue(), unit.getRuntimeMemory().getROFactory());
+		//fr.irisa.triskell.kermeta.runtime.language.Object.set(featureMapEntry, rofeaturevalueprop, rofeaturevalue);
+
+        if (entryvalue instanceof EObject)
+        	fr.irisa.triskell.kermeta.runtime.language.Object.set(featureMapEntry, rofeaturevalueprop, (RuntimeObject) this.runtime_objects_map.get(entryvalue));
+        else if (mapEntry.getEStructuralFeature().getEType() instanceof EDataType)// it is a Datatype
+        {
+        	RuntimeObject roentryvalue = createRuntimeObjectForPrimitiveTypeValue(entryvalue, (EDataType)mapEntry.getEStructuralFeature().getEType());
+        	fr.irisa.triskell.kermeta.runtime.language.Object.set(featureMapEntry, rofeaturevalueprop, 
+        			roentryvalue);
+	        
+        }
+        if(entryvalue ==  null){
+        	// I suppose that this should nt occur ?
+        	fr.irisa.triskell.kermeta.runtime.language.Object.set(featureMapEntry, rofeaturevalueprop, 
+        			unit.getRuntimeMemory().voidINSTANCE);
+        }
+        return featureMapEntry;
+	}
+	
 	
 	/**
 	 * Get or create (if it does not exist) the RuntimeObject for the given EClass, and put it 
