@@ -37,7 +37,8 @@ using UMLProfileUtils
  
 class Main 
 {
- 
+ 	reference log : UMLProfileUtils::KLogger
+ 	
  	operation standaloneTestMain() : Void is do
 // 		profile2Ecore("platform:/resource/VOCS_CS_BR/MD_metamodels/SESAME_Profile.profile.uml", "platform:/resource/VOCS_CS_BR/Ecore/SESAME_Profile.ecore",true)
 // 		profile2Ecore("platform:/resource/VOCS_CS_BR/MD_metamodels/UML_Standard_Profile.MagicDraw_Profile.DSL_Customization.profile.uml", "platform:/resource/VOCS_CS_BR/Ecore/UML_MagicDraw_DSL_Profile.ecore",true)
@@ -46,13 +47,57 @@ class Main
 // 		profile2Ecore("platform:/resource/VOCS_CS_BR/MD_metamodels/UML_Standard_Profile.Validation_Profile.profile.uml", "platform:/resource/VOCS_CS_BR/Ecore/UML_Validation_Profile.ecore",true)
 	//profile2Ecore("platform:/resource/org.kermeta.uml2.profiles.model/model/uml/BasicClock.profile.uml", "platform:/resource/org.kermeta.uml2.profiles.model/model/uml/BasicClock.profile.ecore",true)
  	//profile2Ecore("platform:/resource/org.kermeta.uml2.profiles.model/model/uml/Standard.profile.uml", "platform:/resource/org.kermeta.uml2.profiles.model/model/uml/Standard.profile.ecore",true)
- 	//profile2Ecore("platform:/resource/org.kermeta.uml2.profile.marte/model/uml/beta2/MARTE.profile.uml", "platform:/resource/org.kermeta.uml2.profile.marte/model/uml/beta2/MARTE.profile.ecore",true)
- 	profile2Ecore("platform:/resource/org.kermeta.uml2.profile.marte/model/uml/beta1/MARTE_Library.library.uml", "platform:/resource/org.kermeta.uml2.profile.marte/model/uml/beta1/MARTE_Library.library.ecore",true)
+ 	profile2Ecore("platform:/resource/org.kermeta.uml2.profile.marte/model/uml/beta1/MARTE.profile.uml", "platform:/resource/org.kermeta.uml2.profile.marte/model/uml/beta1/MARTE.profile.ecore",true)
+ 	//profile2Ecore("platform:/resource/org.kermeta.uml2.profile.marte/model/uml/beta1/MARTE_Library.library.uml", "platform:/resource/org.kermeta.uml2.profile.marte/model/uml/beta1/MARTE_Library.library.ecore",true)
+ 	//profile2Ecore("platform:/resource/org.kermeta.uml2.profile.marte/model/uml/SysML.profile.uml", "platform:/resource/org.kermeta.uml2.profile.marte/model/uml/SysML.profile.ecore",true)
  	end
  	
  	operation main(input : String, output : String, isProfiled: String) : Void is do
  		var isProfiledBoolean : Boolean init isProfiled.equals("true")
  		profile2Ecore(input, output, isProfiledBoolean)
+ 	end
+ 	operation profile2EcoreWithLibrary(input : String, output : String, isProfiled: Boolean, library : String) : Void is do
+ 		// source model and metamodel
+		var srcModelURI: String init  input
+		var srcMetamodelURI: String init "http://www.eclipse.org/uml2/2.1.0/UML"
+		
+		// target model and metamodel
+		var tgtModelURI: String init output
+		var tgtMetamodelURI: String init "http://www.eclipse.org/emf/2002/Ecore"
+		
+		var srcEmf_res : EMFResource
+		var srcUML_res : UMLResource
+		var tgtEmf_res: EMFResource
+		 
+		var util : UMLProfileUtils::LoadStoreMM
+		util := UMLProfileUtils::LoadStoreMM.new
+		
+		// initialize the logger
+		log := UMLProfileUtils::KLogger.new
+		log.enableLog(true) 
+		
+		// Load the UML profile
+		log.print("UML Profile loading...")
+		if isProfiled == true then
+			srcUML_res := util.loadUML(srcModelURI,srcMetamodelURI)
+		else 
+	   		srcEmf_res := util.load(srcModelURI,srcMetamodelURI)
+		end
+		log.print("UML profile loaded")
+			
+		log.print("============================================")
+		// Prepare the Ecore representation
+		var tgtEmf_store : EMFRepository init EMFRepository.new
+		tgtEmf_res ?= tgtEmf_store.createResource(tgtModelURI,tgtMetamodelURI)
+		var trace: UMLProfileUtils::UMLProfile2EcoreTrace init UMLProfileUtils::UMLProfile2EcoreTrace.new
+			trace.initializeLog(true)
+			trace.isLibNeeded(true)
+			trace.initLibrary(library)
+			trace.initRep(tgtEmf_store)
+			trace.initTables 
+		// call the real convertion	
+		convertProfile2Ecore(srcEmf_res, srcUML_res, tgtEmf_res, tgtModelURI, 
+					trace, util, isProfiled)
  	end
 	operation profile2Ecore(input : String, output : String, isProfiled: Boolean) : Void is do 
 	
@@ -71,7 +116,8 @@ class Main
 		var util : UMLProfileUtils::LoadStoreMM
 		util := UMLProfileUtils::LoadStoreMM.new
 		
-		var log : UMLProfileUtils::KLogger
+		
+		// initialize the logger
 		log := UMLProfileUtils::KLogger.new
 		log.enableLog(true) 
 		
@@ -95,15 +141,28 @@ class Main
 		srcEmf_res.contents.each { e | util.printMM(e,0)} */
 		    
 		// transforming the UML profile
-		do 
-			// initializing trace
-			var trace: UMLProfileUtils::UMLProfile2EcoreTrace init UMLProfileUtils::UMLProfile2EcoreTrace.new
-			trace.initializeLog(true)
-			trace.isLibNeeded(false)
-			//trace.initLibrary("platform:/resource/org.kermeta.uml2.profile.marte/model/ecore/UMLMARTE.ecore")
-			//trace.initLibrary("platform:/resource/org.kermeta.uml2.profile.marte/model/ecore/MARTE_Library.library.ecore")
-			trace.initRep(tgtEmf_store)
-			trace.initTables  
+		// initializing trace
+		var trace: UMLProfileUtils::UMLProfile2EcoreTrace init UMLProfileUtils::UMLProfile2EcoreTrace.new
+		trace.initializeLog(true)
+		trace.isLibNeeded(false)
+		trace.initRep(tgtEmf_store)
+		trace.initTables 
+		
+		// call the real convertion	
+		convertProfile2Ecore(srcEmf_res, srcUML_res, tgtEmf_res, tgtModelURI, 
+					trace, util, isProfiled)
+		
+	end
+	operation convertProfile2Ecore(
+					srcEmf_res : EMFResource,
+					srcUML_res : UMLResource,
+					tgtEmf_res: EMFResource,
+					tgtModelURI: String,
+					trace: UMLProfileUtils::UMLProfile2EcoreTrace,
+					util : UMLProfileUtils::LoadStoreMM,
+					isProfiled: Boolean) : Void is do
+		do
+			 
 			if isProfiled == true then
 				trace.initProfHelper(srcUML_res,srcUML_res)
 		

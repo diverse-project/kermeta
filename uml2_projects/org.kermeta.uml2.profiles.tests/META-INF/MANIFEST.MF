@@ -16,7 +16,8 @@ Require-Bundle: org.eclipse.ui,
  fr.irisa.triskell.kermeta.io,
  org.eclipse.emf.compare,
  org.eclipse.emf.compare.diff,
- org.kermeta.io.loader
+ org.kermeta.io.loader,
+ fr.irisa.triskell.kermeta.ecore;bundle-version="1.3.0"
 Export-Package: org.kermeta.uml2.profiles.tests;uses:="org.osgi.framework,org.eclipse.ui.plugin",
  org.kermeta.uml2.profiles.tests.helper,
  org.kermeta.uml2.profiles.tests.kmttestsuite;uses:="junit.framework,kermeta_interpreter.jutils",

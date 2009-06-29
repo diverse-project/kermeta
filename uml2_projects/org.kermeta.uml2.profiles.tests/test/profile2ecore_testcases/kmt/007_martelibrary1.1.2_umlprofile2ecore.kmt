@@ -1,0 +1,29 @@
+/* $Id: marte_test.kmt,v 1.1 2007/11/28 15:53:54 vmahe Exp $
+ * Creation date: November 28, 2007
+ * License:
+ * Copyright:
+ * Authors:
+ */
+@mainClass "umlprofile2ecore::MarteBeta1Profile"
+@mainOperation "main"
+
+
+package umlprofile2ecore;
+
+
+require kermeta
+require "platform:/lookup/org.kermeta.uml2.profiles.model/src/kmt/UMLProfile2Ecore/UMLProfile2Ecore.kmt"
+
+using kermeta::standard
+
+class MarteBeta1Profile
+{
+	operation main() : Void is do
+	
+		var input : String init  "platform:/resource/org.kermeta.uml2.profiles.tests/test/profile2ecore_testcases/input/marte_papyrus_1.1.2/MARTE_Library.library.uml"
+		var output : String init "platform:/resource/org.kermeta.uml2.profiles.tests/test/profile2ecore_testcases/output/marte_papyrus_1.1.2/MARTE_Library.library.ecore"
+		var isProfiled: Boolean init true
+		var uml2ecore : UMLProfileUtils::Main init UMLProfileUtils::Main.new
+		uml2ecore.profile2Ecore(input, output, isProfiled)
+	end
+}
