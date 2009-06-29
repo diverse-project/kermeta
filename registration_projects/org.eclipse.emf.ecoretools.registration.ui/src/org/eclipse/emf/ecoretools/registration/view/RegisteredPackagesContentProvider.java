@@ -33,21 +33,26 @@ import org.eclipse.jface.viewers.Viewer;
  */
 public class RegisteredPackagesContentProvider implements ITreeContentProvider {
 
-
-	/* (non-Javadoc)
-	 * @see org.eclipse.jface.viewers.IContentProvider#inputChanged(org.eclipse.jface.viewers.Viewer, java.lang.Object, java.lang.Object)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.eclipse.jface.viewers.IContentProvider#inputChanged(org.eclipse.jface
+	 * .viewers.Viewer, java.lang.Object, java.lang.Object)
 	 */
 	public void inputChanged(Viewer viewer, Object oldInput, Object newInput) {
 		// Nothing to do
-		
+
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.eclipse.jface.viewers.IContentProvider#dispose()
 	 */
 	public void dispose() {
 		// Nothing to do
-		
+
 	}
 
 	/**
@@ -55,65 +60,76 @@ public class RegisteredPackagesContentProvider implements ITreeContentProvider {
 	 */
 	public Object[] getChildren(Object arg0) {
 		EPackage p = (EPackage) arg0;
-		Set<String> uris = EMFRegistryHelper.getRegisteredChildren( p.getNsURI() );			
+		Set<String> uris = EMFRegistryHelper
+				.getRegisteredChildren(p.getNsURI());
 		List<EPackage> children = new ArrayList<EPackage>();
-		for ( String s : uris ) {
-			Object o = Registry.INSTANCE.get( s );
-			if ( o instanceof EPackage )
-				children.add( (EPackage) o );
+		for (String s : uris) {
+			Object o = Registry.INSTANCE.get(s);
+			if (o instanceof EPackage)
+				children.add((EPackage) o);
 		}
 		return children.toArray();
 	}
-	
-	
+
 	/**
-	 * tells if the given element has children 
+	 * tells if the given element has children
 	 */
 	public boolean hasChildren(Object arg0) {
 		EPackage p = (EPackage) arg0;
-		// a good guess about if we have children or not is if we have subpackages
-		// a better evaluation should get only valid children , ie. registered children as in getChildren method
-		return ! p.getESubpackages().isEmpty();
+		// a good guess about if we have children or not is if we have
+		// subpackages
+		// a better evaluation should get only valid children , ie. registered
+		// children as in getChildren method
+		return !p.getESubpackages().isEmpty();
 	}
+
 	public Object getParent(Object arg0) {
 		EPackage result = null;
 		EPackage p = (EPackage) arg0;
-		if ( p.eContainer() != null ) {
-			String nsURI = ((EPackage)p.eContainer()).getNsURI();
-			if(EMFRegistryHelper.isRegistered(nsURI)){
+		if (p.eContainer() != null) {
+			String nsURI = ((EPackage) p.eContainer()).getNsURI();
+			if (EMFRegistryHelper.isRegistered(nsURI)) {
 				result = (EPackage) p.eContainer();
 			}
 		}
 		return result;
 	}
+
 	/**
 	 * element for the Table from the registered instances
 	 */
-	public Object[] getElements(Object parent) {			
-		ArrayList<EPackage> table = new ArrayList<EPackage>(); 
-		for ( String uri : Registry.INSTANCE.keySet() ) {
-			Object obj = Registry.INSTANCE.get( uri );
-			if(obj instanceof EPackage) {
-				//EPackage p = (EPackage) obj;	
+	public Object[] getElements(Object parent) {
+		ArrayList<EPackage> table = new ArrayList<EPackage>();
+		for (String uri : Registry.INSTANCE.keySet()) {
+			Object obj = Registry.INSTANCE.get(uri);
+			if (obj instanceof EPackage) {
+				// EPackage p = (EPackage) obj;
 				// add only root packages
-				if( getParent( obj )== null )
-					table.add( (EPackage) obj );
+				if (getParent(obj) == null)
+					table.add((EPackage) obj);
 			}
 		}
-		Map<String, URI> map = EcorePlugin.getEPackageNsURIToGenModelLocationMap();
+		Map<String, URI> map = EcorePlugin
+				.getEPackageNsURIToGenModelLocationMap();
 		Iterator<String> iter2 = map.keySet().iterator();
 		ResourceSetImpl resourceSet = new ResourceSetImpl();
 		while (iter2.hasNext()) {
+
 			String uriKey = iter2.next();
-			EPackage epackageObject = resourceSet.getPackageRegistry().getEPackage(uriKey);
-			if( getParent( epackageObject )== null ){
-				if(!table.contains(epackageObject))
-					table.add( epackageObject );
+			try {
+
+				EPackage epackageObject = resourceSet.getPackageRegistry()
+						.getEPackage(uriKey);
+				if (getParent(epackageObject) == null) {
+					if (!table.contains(epackageObject))
+						table.add(epackageObject);
+				}
+			} catch (Exception e) {
+				
+				System.err.println(e.getCause());
 			}
 		}
 		return table.toArray();
 	}
 
 }
-
-
