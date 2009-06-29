@@ -33,6 +33,7 @@ import org.eclipse.emf.ecore.ENamedElement;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.EPackage.Registry;
 import org.eclipse.emf.ecore.EStructuralFeature.Setting;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -48,6 +49,7 @@ import org.kermeta.io.util2.ResourceSetManager;
 
 import fr.irisa.triskell.eclipse.ecore.EcoreHelper;
 import fr.irisa.triskell.eclipse.emf.EMFRegistryHelper;
+import fr.irisa.triskell.eclipse.resources.URIHelper;
 import fr.irisa.triskell.kermeta.interpreter.KermetaRaisedException;
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
 import fr.irisa.triskell.kermeta.runtime.basetypes.Collection;
@@ -225,8 +227,10 @@ public class EMFRuntimeUnit extends RuntimeUnit {
 			Registry reg = resourceset.getPackageRegistry();
 			
 			Resource res = getMetaModelResource();
-			internalLog.debug("nb res for MM = "+findDependentResources(res).size());
-			Iterator<Resource> resListIt = findDependentResources(res).listIterator();
+			// DVK, this call can be optimized since it is already computed by EMF2Runtime.loadunit(RuntimeObject)
+			EList<Resource> dependentResources = findDependentResources(res); 
+			internalLog.debug("nb res for MM = "+dependentResources.size());
+			Iterator<Resource> resListIt = dependentResources.listIterator();
 			while(resListIt.hasNext()){
 				Resource mmRes = resListIt.next();
 				for ( EObject o : mmRes.getContents() ) {
@@ -981,13 +985,33 @@ public class EMFRuntimeUnit extends RuntimeUnit {
 	 */
 	public EList<Resource> findDependentResources(EList<Resource> list, Resource resource)
 	{
+		String baseUriString = URIHelper.removeFileName(resource.getURI().toString().replaceAll("\\\\", "/"));
 		
+		Map<EObject, java.util.Collection<Setting>> unresolvedProxies = EcoreUtil.UnresolvedProxyCrossReferencer.find(resource);
+		for(EObject eobj : unresolvedProxies.keySet()){
+			URI proxyURI = ((InternalEObject)eobj).eProxyURI();
+			proxyURI.lastSegment();
+			URI newURI = URI.createURI(baseUriString+proxyURI.lastSegment());			
+			boolean alreadyKnown = false;
+			for(Resource r : list){
+				if(r.getURI().toString().equals(newURI.toString()))
+					alreadyKnown = true;
+			}
+			if(!alreadyKnown){
+				Resource temptativeResource = resource.getResourceSet().createResource(newURI);
+				resource.getResourceSet().getResources().add(temptativeResource);
+				list.add(temptativeResource);
+				internalLog.debug("Resource added : "+ temptativeResource.getURI());
+				findDependentResources(list,temptativeResource);
+			}
+		}
 		Map<EObject, java.util.Collection<Setting>> map = EcoreUtil.ExternalCrossReferencer.find(resource);
 		// extract the resources
 		for(EObject eobj : map.keySet()){
 			Resource res = eobj.eResource();
 			if(res!=  null && !list.contains(res)){
 				list.add(res);
+				internalLog.debug("Resource added : "+ eobj.eResource().getURI());
 				findDependentResources(list,res);
 			}
 		}

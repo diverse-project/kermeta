@@ -33,6 +33,7 @@ import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.impl.EStructuralFeatureImpl.BasicFeatureMapEntry;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.util.BasicFeatureMap;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.kermeta.model.KermetaModelHelper;
@@ -904,6 +905,7 @@ public class EMF2Runtime {
         	String errmsg = "";
         	// troubles in the auto resolve 
         	EObject obj = EcoreUtil.resolve(fvalue, resource.getResourceSet());
+        	
         	// fvalue.eResource can sometimes be null.
         	if(fvalue.eIsProxy() && obj.eIsProxy())
 			{   	// ie. was a proxy and the proxy was not resolved
@@ -911,6 +913,7 @@ public class EMF2Runtime {
 				errmsg = "Not able to resolve proxy for value: " + fvalue 
 					+ " for object: "+rObject +" for feature of type: "+feature.getEType();
 				errmsg += (objectURI!=null)?("\nTry to load the file containing this URI: "+objectURI):"";
+				EcoreUtil.resolve(fvalue, resource.getResourceSet());
 			}
 			else
 			{	// the feature destination was not in the main resource

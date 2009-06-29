@@ -92,6 +92,14 @@ public class JavaStaticCallInterpreter {
 					for (int index = 0; index < urls.length; index++) {
 						additionalInfo += "\t" + urls[index].toExternalForm() + "\n";
 					}
+					if(cl.getParent() instanceof URLClassLoader){
+						ucl= (URLClassLoader) cl.getParent();
+		        		urls = ucl.getURLs();
+		        		additionalInfo += "  Current URLs in the Parent URLClassLoader : \n";
+						for (int index = 0; index < urls.length; index++) {
+							additionalInfo += "  \t" + urls[index].toExternalForm() + "\n";
+						}
+					}
 	        	}
 	        	InterpreterPlugin.internalLog.error("ClassNotFoundException invoking "+ jmethodName + " on Class " +jclassName + " => Throwing KermetaRuntimeError !!!");
 				throw KermetaRaisedException.createKermetaException("kermeta::exceptions::RuntimeError",
