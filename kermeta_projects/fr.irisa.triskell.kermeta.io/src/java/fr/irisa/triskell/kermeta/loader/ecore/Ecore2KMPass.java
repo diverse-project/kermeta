@@ -167,9 +167,9 @@ public class Ecore2KMPass extends EcoreVisitor {
         }
         else
         {	
-        	throw new Error("INTERNAL ERROR : type should be a ClassDefinition, not a " + type.getClass().getName());}
+        	throw new Error("INTERNAL ERROR : type should be a ClassDefinition, not a " + type.getClass().getName());
+        }
     	
-        if (type==null) throw new KM2ECoreConversionException("Ecore2KM exception : instance type is null for '" + type.getName() + "'");
         return iType;
 	}
 	

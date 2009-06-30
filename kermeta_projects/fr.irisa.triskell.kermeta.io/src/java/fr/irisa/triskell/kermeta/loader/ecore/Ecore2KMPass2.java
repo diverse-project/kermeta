@@ -50,7 +50,6 @@ import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
 import fr.irisa.triskell.kermeta.language.structure.TypeVariable;
 import fr.irisa.triskell.kermeta.language.structure.TypeVariableBinding;
 import fr.irisa.triskell.kermeta.modelhelper.ClassDefinitionHelper;
-import fr.irisa.triskell.kermeta.modelhelper.NamedElementHelper;
 
 /**
  * 
@@ -287,6 +286,9 @@ public class Ecore2KMPass2 extends Ecore2KMPass {
 		if ( type == null ) {
 			kermetaUnit.warning("The type " + type_name + " is not handled by Kermeta (used by "+node.getName()+"). It has been mapped to Object");
 			type = kermetaUnit.getTypeDefinitionByQualifiedName("kermeta::language::structure::Object", monitor);
+			if(type == null)
+				throw new KM2ECoreConversionException("Ecore2KM exception : instance type is null for '" + type_name + "'");
+	        
 			Type t = createInstanceTypeForTypeDefinition(type);
 			result.setInstanceType(t);			
 		} else {
@@ -500,35 +502,50 @@ public class Ecore2KMPass2 extends Ecore2KMPass {
 		Type type = null;
 		type = createTypeForEClassifier( classfier, node );
 		
+		// if we have a mistmatch in the names then this means that we must resolve it at the operation or class level
+		if(		genericType != null &&
+				genericType.getETypeParameter() != null &&
+				!classfier.getName().equals(genericType.getETypeParameter().getName())){
+			if(currentOperation != null){
+				type = KermetaModelHelper.Operation.getTypeVariable(currentOperation, genericType.getETypeParameter().getName());
+				// If no type variable found, Let's have a look into the class definition.					 
+				if ( type == null )	
+					type = ClassDefinitionHelper.getTypeVariable(currentClassDefinition, genericType.getETypeParameter().getName() );
+			}
+			else{
+				// Let's have a look into the class definition.					 
+				type = ClassDefinitionHelper.getTypeVariable(currentClassDefinition, genericType.getETypeParameter().getName() );
+			}
+		}
+		
 		/*
-		 * 
+		 * NamedElementHelper.getQualifiedName(type)
 		 * If the type is EJavaObject, it may refer to a type variable.
 		 * Let's see that.
 		 * 
 		 */
-		if ( type instanceof PrimitiveType ) {
+		/* if ( type instanceof PrimitiveType ) {
 			PrimitiveType primitiveType = (PrimitiveType) type;
 			if ( (genericType != null) 
 					&& NamedElementHelper.getQualifiedName(primitiveType).equals("ecore::EJavaObject") 
 					&& genericType.getETypeParameter() != null ) {
-				/*
-				 * 
-				 * Let's see the type variables of the current operation.
-				 * 
-				 */
-				type = KermetaModelHelper.Operation.getTypeVariable(currentOperation, genericType.getETypeParameter().getName());
-				/*
-				 * 
-				 * If no type variable found, Let's have a look into the class definition.
-				 * 
-				 */
-				if ( type == null )	
+				// Let's see the type variables of the current operation.				
+				if(currentOperation != null){
+					type = KermetaModelHelper.Operation.getTypeVariable(currentOperation, genericType.getETypeParameter().getName());
+					//If no type variable found, Let's have a look into the class definition.					 
+					if ( type == null )	
+						type = ClassDefinitionHelper.getTypeVariable(currentClassDefinition, genericType.getETypeParameter().getName() );
+				}
+				else{
+					// Let's have a look into the class definition.
 					type = ClassDefinitionHelper.getTypeVariable(currentClassDefinition, genericType.getETypeParameter().getName() );
+				}
 				
 			}
 				
-		} else if ( type instanceof Class && (genericType != null) ) {
+		} else */ if ( type instanceof Class && (genericType != null) ) { // DVK: not sure if this is really used !? 
 			Class c = (Class) type;
+			
 			for ( int i=0; i<genericType.getETypeArguments().size(); i++ ) {
 				EGenericType gt = genericType.getETypeArguments().get(i);
 				Type kermetaTypeParameter = null;

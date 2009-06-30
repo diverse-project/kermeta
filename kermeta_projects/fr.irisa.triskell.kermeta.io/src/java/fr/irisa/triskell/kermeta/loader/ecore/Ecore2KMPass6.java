@@ -37,7 +37,7 @@ import fr.irisa.triskell.kermeta.language.structure.Parameter;
 import fr.irisa.triskell.kermeta.language.structure.Property;
 import fr.irisa.triskell.kermeta.language.structure.StructureFactory;
 import fr.irisa.triskell.kermeta.language.structure.Tag;
-import fr.irisa.triskell.kermeta.modelhelper.ClassDefinitionHelper;
+//import fr.irisa.triskell.kermeta.modelhelper.ClassDefinitionHelper;
 
 
 
