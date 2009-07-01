@@ -354,6 +354,12 @@ public class Compiler extends org.kermeta.compiler.Generator {
 		// Icons will be not generated, because the editor is not generated too
 		genModel.setCreationIcons(false);
 		
+		// Use of Java generics is enabled
+		genModel.setComplianceLevel(GenJDKLevel.JDK50_LITERAL);
+		genModel.setContainmentProxies(true);
+		genModel.setCodeFormatting(true);
+		
+		
 		//FIXME Compiler-DynamicTemplates-EMF
 		// Use of dynamic templates for avoiding an EMF bug in AdapterFactoryClass.javajet
 		// This bug occurs when a compiled Class is named EObject...
@@ -362,13 +368,18 @@ public class Compiler extends org.kermeta.compiler.Generator {
 		// and also set the 2 following parameters:
 		// - genModel.setDynamicTemplates(false);
 		// - genModel.setTemplateDirectory("");
-		genModel.setDynamicTemplates(true);
-		genModel.setTemplateDirectory("platform:/plugin/org.kermeta.compiler.generator.emftemplates/templates");
 		
-		// Use of Java generics is enabled
-		genModel.setComplianceLevel(GenJDKLevel.JDK50_LITERAL);
-		genModel.setContainmentProxies(true);
-		genModel.setCodeFormatting(true);
+		// Get the version number of EMF
+		String[] emf_version = genModel.getRuntimeVersion().getLiteral().split("\\.");
+		
+		// Since EMF2.5, the specific EMFTemplates are not required anymore
+		if( Integer.parseInt(emf_version[1]) >= 5 ) { // EMF2.5 or later
+			genModel.setRootExtendsClass("org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container");
+		} else {
+			genModel.setDynamicTemplates(true);
+			genModel.setTemplateDirectory("platform:/plugin/org.kermeta.compiler.generator.emftemplates/templates");
+		}
+		
 		
 		// IMPORTANT NOTE: we could use this hack, yes this is a hack from EMF,
 		// for using the java.util.List instead of EList, but
