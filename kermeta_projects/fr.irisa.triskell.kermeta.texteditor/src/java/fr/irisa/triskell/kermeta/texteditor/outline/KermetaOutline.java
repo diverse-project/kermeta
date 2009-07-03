@@ -370,8 +370,8 @@ public class KermetaOutline extends ContentOutlinePage implements InterestedObje
 		}
 	}
 		
-	private void process(List source, Set<Object> container, KermetaUnit kermetaUnit) {
-		for ( Message m : (List<Message>) source ) {
+	private void process(List<? extends Message> source, Set<Object> container, KermetaUnit kermetaUnit) {
+		for ( Message m :  source ) {
 			if ( m.getTarget() instanceof EObject )
 				addObjectToContainer((EObject) m.getTarget(), container);
 			else if ( m.getTarget() instanceof ASTNode ) {

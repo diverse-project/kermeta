@@ -30,10 +30,6 @@ import fr.irisa.triskell.kermeta.language.structure.Package;
 import fr.irisa.triskell.kermeta.language.structure.PrimitiveType;
 import fr.irisa.triskell.kermeta.language.structure.Property;
 import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
-import fr.irisa.triskell.kermeta.modelhelper.ClassDefinitionHelper;
-import fr.irisa.triskell.kermeta.typechecker.CallableOperation;
-import fr.irisa.triskell.kermeta.typechecker.CallableProperty;
-import fr.irisa.triskell.kermeta.typechecker.InheritanceSearch;
 import fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor;
 
 /**
