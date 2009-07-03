@@ -171,20 +171,20 @@ public class GetImageVisitor extends KermetaOptimizedVisitor {
 
 	    
 	    if(item.isPropertyLocal()){
-		    if (node.isIsComposite()) return KermetaIconsRed.PROPERTY_CONTAINED;
 			if (node.isIsDerived()) return KermetaIconsRed.PROPERTY_DERIVED;
+		    if (node.isIsComposite()) return KermetaIconsRed.PROPERTY_CONTAINED;
 			return KermetaIconsRed.PROPERTY;
 	    }
 	    else{
 	    	if (item.isPropertyInherited()) {
-		        if (node.isIsComposite()) return KermetaIconsYellow.PROPERTY_CONTAINED;
 	    		if (node.isIsDerived()) return KermetaIconsYellow.PROPERTY_DERIVED;
+		        if (node.isIsComposite()) return KermetaIconsYellow.PROPERTY_CONTAINED;
 	    		return KermetaIconsYellow.PROPERTY;
 	    	
 		    }
 	    	else {
-		    	if (node.isIsComposite()) return KermetaIconsBlue.PROPERTY_CONTAINED;
 		    	if (node.isIsDerived()) return KermetaIconsBlue.PROPERTY_DERIVED;
+		    	if (node.isIsComposite()) return KermetaIconsBlue.PROPERTY_CONTAINED;
 		    	return KermetaIconsBlue.PROPERTY;
 	    	}
 	    }
