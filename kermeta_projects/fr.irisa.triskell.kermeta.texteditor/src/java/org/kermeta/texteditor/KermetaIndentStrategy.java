@@ -19,9 +19,9 @@ import org.eclipse.jface.text.IDocument;
 public class KermetaIndentStrategy implements IAutoEditStrategy {
 
 	public void customizeDocumentCommand(IDocument document, DocumentCommand command) {		
-		if ( command.text.length() > 1 ) {
+		/*if ( command.text.length() > 1 ) {
 			int index = command.text.length();
-		}
+		} */
 	}
 
 }

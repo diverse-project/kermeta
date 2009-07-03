@@ -13,21 +13,14 @@
 package org.kermeta.texteditor.completion;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-import org.eclipse.emf.ecore.EPackage.Registry;
-import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.jface.text.ITextViewer;
-import org.eclipse.jface.text.contentassist.CompletionProposal;
 import org.eclipse.jface.text.contentassist.ICompletionProposal;
 import org.eclipse.jface.text.contentassist.IContentAssistProcessor;
 import org.eclipse.jface.text.contentassist.IContextInformation;
 import org.eclipse.jface.text.contentassist.IContextInformationValidator;
-import org.eclipse.swt.graphics.Image;
-
-import fr.irisa.triskell.kermeta.texteditor.icons.red.KermetaIconsRed;
 
 public class BlockContentAssistProcessor implements IContentAssistProcessor {
 	
