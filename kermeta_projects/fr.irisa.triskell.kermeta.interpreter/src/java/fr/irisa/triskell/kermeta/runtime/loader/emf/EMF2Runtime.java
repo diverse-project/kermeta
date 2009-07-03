@@ -33,9 +33,11 @@ import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.impl.EStructuralFeatureImpl.BasicFeatureMapEntry;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.util.BasicFeatureMap;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.kermeta.customidentity.CustomHashtable;
+import org.kermeta.customidentity.ReferenceComparer;
+import org.kermeta.log4j.util.LogConfigurationHelper;
 import org.kermeta.model.KermetaModelHelper;
 
 import fr.irisa.triskell.eclipse.ecore.EcoreHelper;
@@ -54,10 +56,6 @@ import fr.irisa.triskell.kermeta.runtime.factory.RuntimeObjectFactory;
 import fr.irisa.triskell.kermeta.runtime.language.ReflectiveCollection;
 import fr.irisa.triskell.kermeta.runtime.rohelper.RepositoryHelper;
 import fr.irisa.triskell.kermeta.typechecker.InheritanceSearch;
-
-import org.kermeta.customidentity.CustomHashtable;
-import org.kermeta.customidentity.ReferenceComparer;
-import org.kermeta.log4j.util.LogConfigurationHelper;
 
 /**
  * This class is used to transform an EMF model into a RuntimeObject representation,
@@ -692,16 +690,16 @@ public class EMF2Runtime {
     		RuntimeObject rovalue = null;
     		try
     		{
+    			if(fvalue instanceof BasicFeatureMap){
+    				Type ftype = getTypeFromEClassifier(feature_type);
+					// special case for FeatureMap
+					rovalue = createRuntimeObjectForFeatureMap((EList)fvalue, ftype, feature_type, rObject, roprop);
+					
+				}
     			// A feature with multiplicity
-    			if (fvalue instanceof EList)
-    			{
-    		    	Type ftype = getTypeFromEClassifier(feature_type);
-    				if(fvalue instanceof BasicFeatureMap){
-    					// special case for FeatureMap
-    					rovalue = createRuntimeObjectForFeatureMap((EList)fvalue, ftype, feature_type, rObject, roprop);
-    				}
-    				else // normal case
-    					rovalue = createRuntimeObjectForCollection((EList)fvalue, ftype, feature_type, rObject, roprop);
+    			else if (fvalue instanceof EList)
+    			{	Type ftype = getTypeFromEClassifier(feature_type);
+    		    	rovalue = createRuntimeObjectForCollection((EList)fvalue, ftype, feature_type, rObject, roprop);
     			}
     			else if (feature_type instanceof EEnum){
     				// special case of enumeration we must connect it to the enumartion definition instead of creating a RuntimeObject for it
@@ -1044,6 +1042,7 @@ public class EMF2Runtime {
 	    	if(objects.size() == 1){
 	    		RuntimeObject featureMapEntry = createRuntimeObjectForFeatureMapEntry(objects.get(0));
 	    		result = featureMapEntry;
+	    		fr.irisa.triskell.kermeta.runtime.language.Object.set(rObject, roprop, result);
 	    	}
 	    	
 	    }

@@ -450,9 +450,7 @@ public class Ecore2KMPass3 extends Ecore2KMPass {
 					// the FeatureMap has a multiplicity > 1 and the derived prop a multiplicity = 1 ?
 					String getterbody =
 						"do "+
-	"			if " + group + ".eStructuralFeatureName == \"" +elementname+ "\" then"+
-	"				result ?= "+group+".~value"+
-	"			end"+
+	"			result ?= "+group+".~value"+
 	"	end";
 					Expression exp = ExpressionParser.parse(context, kermetaUnit, getterbody, monitor);
 					currentProperty.setGetterBody(exp);
@@ -461,7 +459,8 @@ public class Ecore2KMPass3 extends Ecore2KMPass {
 						String setterbody =
 							"do "+
 		"			"+group+" := ecore::EFeatureMapEntry.new"+
-		"			"+group+".eStructuralFeatureName := \"" +elementname+"\""+
+		"			"+group+".eStructuralFeatureName := \"" +elementname+"\""+  // DVK : we may have trouble here because, it seems that this must be the logical name of the effective element
+			// for example : if it is a JavaInterface, set into interaface, then it must use the name in the ExtendedMetada.name associated to JavaInterface !?
 		"			"+group+".~value := value"+
 		"	end";
 						Expression expsetter = ExpressionParser.parse(context, kermetaUnit, setterbody, monitor);
