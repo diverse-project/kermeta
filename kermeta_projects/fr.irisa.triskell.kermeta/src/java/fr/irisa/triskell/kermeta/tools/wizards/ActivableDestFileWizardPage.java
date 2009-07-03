@@ -16,7 +16,6 @@ import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
-import org.eclipse.swt.graphics.Font;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
@@ -49,7 +48,6 @@ public class ActivableDestFileWizardPage extends DestFileWizardPage{
 	 * @param parent
 	 */
 	protected void createPreControls(Composite parent) {
-		Font font = parent.getFont();
         // Advanced group
         fileDestinationComposite = new Composite(parent, SWT.NONE);
         GridLayout layout = new GridLayout(2,false);

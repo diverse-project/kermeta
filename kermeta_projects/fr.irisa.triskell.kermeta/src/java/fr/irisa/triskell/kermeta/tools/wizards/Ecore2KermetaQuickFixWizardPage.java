@@ -53,7 +53,6 @@ public class Ecore2KermetaQuickFixWizardPage extends WizardPage implements Liste
     private Button isOperationEnabledCheckBox;
     private Composite container;
     
-	private static final int SIZING_CONTAINER_GROUP_HEIGHT = 250;
 	
 
 	
@@ -157,10 +156,7 @@ public class Ecore2KermetaQuickFixWizardPage extends WizardPage implements Liste
 	 */	
 	private void initialize() {
 
-		isEnableCheckBox.addSelectionListener(new SelectionListener() {
-			public void modifyText(ModifyEvent e) {
-				dialogChanged();
-			}
+		isEnableCheckBox.addSelectionListener(new SelectionListener() {			
 
 			public void widgetSelected(SelectionEvent e) {
 				dialogChanged();
@@ -185,10 +181,7 @@ public class Ecore2KermetaQuickFixWizardPage extends WizardPage implements Liste
 			}});
 
 	    isOpPropertyEnabledCheckBox.addSelectionListener(new SelectionListener() {
-			public void modifyText(ModifyEvent e) {
-				dialogChanged();
-			}
-
+			
 			public void widgetSelected(SelectionEvent e) {
 				dialogChanged();
 				

@@ -26,7 +26,7 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
-import org.eclipse.emf.ecore.resource.impl.URIConverterImpl;
+import org.eclipse.emf.ecore.resource.impl.ExtensibleURIConverterImpl;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.viewers.IStructuredSelection;
@@ -143,7 +143,7 @@ public class EcoreMerge2EcoreWizard extends Wizard {
 			// create a ResourceSet
 			resource_set = new ResourceSetImpl();
 			u = URI.createURI(file.getFullPath().toString());
-			u = new URIConverterImpl().normalize(u);
+			u = new ExtensibleURIConverterImpl().normalize(u);
 
 			Resource resource = resource_set.getResource(u, true);
 			for ( EObject o : resource.getContents() ) {
@@ -154,7 +154,7 @@ public class EcoreMerge2EcoreWizard extends Wizard {
 			
 		}
 		u = URI.createURI(ifile.getFullPath().toString());
-		u = new URIConverterImpl().normalize(u);
+		u = new ExtensibleURIConverterImpl().normalize(u);
 
 		Resource res = resource_set.createResource(u);
 		res.getContents().add(result);
@@ -233,7 +233,7 @@ public class EcoreMerge2EcoreWizard extends Wizard {
 				"traceability", new XMIResourceFactoryImpl());
 		trace_resource_set = new ResourceSetImpl();
 		URI u = URI.createURI(traceFile.getFullPath().toString());
-		u = new URIConverterImpl().normalize(u);
+		u = new ExtensibleURIConverterImpl().normalize(u);
 		// traceFile =
 		// ResourcesPlugin.getWorkspace().getRoot().getFile(traceFile.getFullPath().removeFileExtension().addFileExtension("traceability"));
 		trace_resource = trace_resource_set.createResource(u);
@@ -251,6 +251,7 @@ public class EcoreMerge2EcoreWizard extends Wizard {
 		this.workbench = workbench;
 		if (selection instanceof StructuredSelection) {
 			// the selection should be  multiples *.ecore files
+			@SuppressWarnings("unchecked")
 			Iterator it = selection.iterator();
 
 			while (it.hasNext()) {

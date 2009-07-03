@@ -30,7 +30,7 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
-import org.eclipse.emf.ecore.resource.impl.URIConverterImpl;
+import org.eclipse.emf.ecore.resource.impl.ExtensibleURIConverterImpl;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.viewers.IStructuredSelection;
@@ -41,6 +41,7 @@ import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkbenchWizard;
 import org.kermeta.io.KermetaUnit;
 import org.kermeta.io.loader.plugin.LoaderPlugin;
+import org.kermeta.loader.LoadingOptions;
 import org.kermeta.merger.Merger;
 
 import fr.irisa.triskell.eclipse.console.messages.ErrorMessage;
@@ -219,7 +220,7 @@ public class UnitExporterWizard extends Wizard {
 			IFile traceKmFile = ResourcesPlugin.getWorkspace().getRoot().getFile(
 							traceFile.getFullPath().addFileExtension("km"));
 			
-			KmExporter exporter = new KmExporter();
+			//KmExporter exporter = new KmExporter();
 			//exporter.export(unit.getTracer(), "./");
 			
 	//		unit.saveAsXMIModel(traceKmFile.getLocation().toOSString());
@@ -334,6 +335,8 @@ public class UnitExporterWizard extends Wizard {
         Ecore2KM.methodRenamePrefix = "op_";
         Ecore2KM.methodRenamePostfix = "";
         
+        options.put(LoadingOptions.ECORE_QuickFixEnabled, true);
+        
         
 		String inputFile_uri = "platform:/resource" + inputFile.getFullPath().toString();
 			
@@ -363,7 +366,7 @@ public class UnitExporterWizard extends Wizard {
 				"traceability", new XMIResourceFactoryImpl());
 		trace_resource_set = new ResourceSetImpl();
 		URI u = URI.createURI(traceFile.getFullPath().toString());
-		u = new URIConverterImpl().normalize(u);
+		u = new ExtensibleURIConverterImpl().normalize(u);
 		trace_resource = trace_resource_set.createResource(u);
 		tracer = new Tracer(trace_resource);
 	}
@@ -373,12 +376,13 @@ public class UnitExporterWizard extends Wizard {
 	 * from it.
 	 * 
 	 * @see IWorkbenchWizard#init(IWorkbench, IStructuredSelection)
-	 */
+	 */	
 	public void init(IWorkbench workbench, IStructuredSelection selection) {
 		this.selection = selection;
 		this.workbench = workbench;
 		if (selection instanceof StructuredSelection) {
 			// the selection should be a single *.km file
+			@SuppressWarnings("unchecked")
 			Iterator it = selection.iterator();
 			while (it.hasNext()) {
 				inputFile = (IFile) it.next();
