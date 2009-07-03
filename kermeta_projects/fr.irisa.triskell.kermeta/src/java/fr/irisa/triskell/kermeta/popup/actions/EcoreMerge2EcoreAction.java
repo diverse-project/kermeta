@@ -81,6 +81,7 @@ public class EcoreMerge2EcoreAction implements IObjectActionDelegate {
 			// the selection should be less 2 ecore files
 			currentSelection = (StructuredSelection) selection;
 			ecorefiles.clear();
+			@SuppressWarnings("unchecked")
 			Iterator it = currentSelection.iterator();
 
 			while (it.hasNext()) {

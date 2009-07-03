@@ -68,6 +68,7 @@ public class Ecore2KmAction implements IObjectActionDelegate {
 		{
 			// the se=lection should be a single *.ecore file
 			currentSelection = (StructuredSelection)selection;
+			@SuppressWarnings("unchecked")
 			Iterator it = currentSelection.iterator();
 
 			while(it.hasNext()) {

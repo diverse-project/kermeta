@@ -71,6 +71,7 @@ public class Km2kmtAction implements IObjectActionDelegate {
 		{
 			// the selection should be a single *.km file
 			currentSelection = (StructuredSelection)selection;
+			@SuppressWarnings("unchecked")
 			Iterator it = currentSelection.iterator();
 
 			while(it.hasNext()) {
