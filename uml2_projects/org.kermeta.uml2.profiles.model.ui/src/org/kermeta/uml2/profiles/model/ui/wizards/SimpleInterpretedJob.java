@@ -156,6 +156,7 @@ public class SimpleInterpretedJob extends Job {
 									URL binURL = requiredBundle.getEntry(outputdir+"/");
 									if(binURL != null) 
 										urlsSet.add(binURL);
+									safeAddURLAsString(urlsSet, requiredBundle.getLocation()+outputdir+"/");
 								}
 							} catch (Exception e) {
 								// TODO Auto-generated catch block
