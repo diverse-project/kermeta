@@ -643,5 +643,8 @@ aspect class Enumeration
 }
 
 aspect class FunctionType {
-	inv resultType is not right.isKindOf(ProductType)
+	/**
+	 * Right part of the FunctionType cannot be a ProductType
+	 */
+	inv resultType_must_not_be_a_ProductType is not right.isKindOf(ProductType)
 }
