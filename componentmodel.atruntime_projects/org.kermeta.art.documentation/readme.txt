@@ -1,4 +1,4 @@
-the toc.xml is both deployed via the primaryToc.xml 
+the toc.xml is both deployed in the kermeta MDK documentation 
 and via the anchor into the DiVA studio Guide
 
 this allows to have both a unified DiVA studio view 

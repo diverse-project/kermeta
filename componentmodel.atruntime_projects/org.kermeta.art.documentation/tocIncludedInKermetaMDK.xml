@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?NLS TYPE="org.eclipse.help.toc"?>
 
-<toc label="ComponentModel@Runtime">
+<toc label="ComponentModel@Runtime" link_to="../fr.irisa.triskell.kermeta.documentation/toc.xml#MDKs">
 	<topic label="ComponentModel@Runtime"  href="html/maintopic.html"> 
 		<topic label="Sub Topic" href="html/subtopic.html"/> 
 	</topic>

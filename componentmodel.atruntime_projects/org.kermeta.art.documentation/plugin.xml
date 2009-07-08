@@ -5,11 +5,13 @@
    <extension
          point="org.eclipse.help.toc">
       <toc
-            file="toc.xml">
+            file="tocIncludedInDiVAStudio.xml">
       </toc>
       <toc
-            file="primaryToc.xml"
-            primary="true">
+            file="tocIncludedInKermetaMDK.xml">
+      </toc>
+      <toc
+            file="toc.xml">
       </toc>
    </extension>
 
