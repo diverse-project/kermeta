@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/org.kermeta.art.model/src"
+    modelPluginID="org.kermeta.art.model" modelName="Metamodel@runtime" importerID="org.eclipse.emf.importer.ecore"
+    complianceLevel="5.0" copyrightFields="false">
+  <foreignModel>metamodel@runtime.ecore</foreignModel>
+  <genPackages prefix="Art" disposableProviderFactory="true" generateExampleClass="false"
+      ecorePackage="metamodel@runtime.ecore#/">
+    <genDataTypes ecoreDataType="metamodel@runtime.ecore#//String"/>
+    <genDataTypes ecoreDataType="metamodel@runtime.ecore#//Boolean"/>
+    <genDataTypes ecoreDataType="metamodel@runtime.ecore#//Integer"/>
+    <genClasses image="false" ecoreClass="metamodel@runtime.ecore#//NamedElement">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute metamodel@runtime.ecore#//NamedElement/name"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="metamodel@runtime.ecore#//ModelElement"/>
+    <genClasses ecoreClass="metamodel@runtime.ecore#//System">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference metamodel@runtime.ecore#//System/root"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference metamodel@runtime.ecore#//System/services"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference metamodel@runtime.ecore#//System/types"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference metamodel@runtime.ecore#//System/dataTypes"/>
+    </genClasses>
+    <genClasses ecoreClass="metamodel@runtime.ecore#//DataType"/>
+    <genClasses image="false" ecoreClass="metamodel@runtime.ecore#//TypedElement">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference metamodel@runtime.ecore#//TypedElement/type"/>
+    </genClasses>
+    <genClasses ecoreClass="metamodel@runtime.ecore#//AddElement"/>
+    <genClasses ecoreClass="metamodel@runtime.ecore#//RemoveElement"/>
+    <genClasses ecoreClass="metamodel@runtime.ecore#//UpdateElement"/>
+    <genClasses ecoreClass="metamodel@runtime.ecore#//CardinalityElement">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute metamodel@runtime.ecore#//CardinalityElement/lower"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute metamodel@runtime.ecore#//CardinalityElement/upper"/>
+    </genClasses>
+    <nestedGenPackages prefix="Instance" disposableProviderFactory="true" generateExampleClass="false"
+        ecorePackage="metamodel@runtime.ecore#//instance">
+      <genEnums typeSafeEnumCompatible="false" ecoreEnum="metamodel@runtime.ecore#//instance/InstanceState">
+        <genEnumLiterals ecoreEnumLiteral="metamodel@runtime.ecore#//instance/InstanceState/OFF"/>
+        <genEnumLiterals ecoreEnumLiteral="metamodel@runtime.ecore#//instance/InstanceState/ON"/>
+      </genEnums>
+      <genClasses image="false" ecoreClass="metamodel@runtime.ecore#//instance/ComponentInstance">
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference metamodel@runtime.ecore#//instance/ComponentInstance/type"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute metamodel@runtime.ecore#//instance/ComponentInstance/state"/>
+        <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference metamodel@runtime.ecore#//instance/ComponentInstance/superComponent"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference metamodel@runtime.ecore#//instance/ComponentInstance/attribute"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference metamodel@runtime.ecore#//instance/ComponentInstance/binding"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference metamodel@runtime.ecore#//instance/ComponentInstance/implem"/>
+      </genClasses>
+      <genClasses ecoreClass="metamodel@runtime.ecore#//instance/PrimitiveInstance"/>
+      <genClasses ecoreClass="metamodel@runtime.ecore#//instance/CompositeInstance">
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference metamodel@runtime.ecore#//instance/CompositeInstance/subComponent"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference metamodel@runtime.ecore#//instance/CompositeInstance/delegation"/>
+      </genClasses>
+      <genClasses ecoreClass="metamodel@runtime.ecore#//instance/ValuedAttribute">
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference metamodel@runtime.ecore#//instance/ValuedAttribute/attribute"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute metamodel@runtime.ecore#//instance/ValuedAttribute/value"/>
+      </genClasses>
+      <genClasses image="false" ecoreClass="metamodel@runtime.ecore#//instance/Binding">
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference metamodel@runtime.ecore#//instance/Binding/serverInstance"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute metamodel@runtime.ecore#//instance/Binding/id"/>
+      </genClasses>
+      <genClasses ecoreClass="metamodel@runtime.ecore#//instance/TransmissionBinding">
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference metamodel@runtime.ecore#//instance/TransmissionBinding/client"/>
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference metamodel@runtime.ecore#//instance/TransmissionBinding/server"/>
+      </genClasses>
+      <genClasses ecoreClass="metamodel@runtime.ecore#//instance/DelegationBinding">
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference metamodel@runtime.ecore#//instance/DelegationBinding/source"/>
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference metamodel@runtime.ecore#//instance/DelegationBinding/exported"/>
+      </genClasses>
+    </nestedGenPackages>
+    <nestedGenPackages prefix="Type" disposableProviderFactory="true" generateExampleClass="false"
+        ecorePackage="metamodel@runtime.ecore#//type">
+      <genEnums typeSafeEnumCompatible="false" ecoreEnum="metamodel@runtime.ecore#//type/PortRole">
+        <genEnumLiterals ecoreEnumLiteral="metamodel@runtime.ecore#//type/PortRole/client"/>
+        <genEnumLiterals ecoreEnumLiteral="metamodel@runtime.ecore#//type/PortRole/server"/>
+      </genEnums>
+      <genClasses image="false" ecoreClass="metamodel@runtime.ecore#//type/ComponentType">
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference metamodel@runtime.ecore#//type/ComponentType/port"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference metamodel@runtime.ecore#//type/ComponentType/attribute"/>
+      </genClasses>
+      <genClasses ecoreClass="metamodel@runtime.ecore#//type/PrimitiveType">
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference metamodel@runtime.ecore#//type/PrimitiveType/binding"/>
+      </genClasses>
+      <genClasses ecoreClass="metamodel@runtime.ecore#//type/CompositeType">
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference metamodel@runtime.ecore#//type/CompositeType/subTypes"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference metamodel@runtime.ecore#//type/CompositeType/delegation"/>
+      </genClasses>
+      <genClasses image="false" ecoreClass="metamodel@runtime.ecore#//type/Service">
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference metamodel@runtime.ecore#//type/Service/operation"/>
+      </genClasses>
+      <genClasses ecoreClass="metamodel@runtime.ecore#//type/Operation">
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference metamodel@runtime.ecore#//type/Operation/input"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference metamodel@runtime.ecore#//type/Operation/output"/>
+      </genClasses>
+      <genClasses ecoreClass="metamodel@runtime.ecore#//type/Parameter"/>
+      <genClasses ecoreClass="metamodel@runtime.ecore#//type/FunctionalService"/>
+      <genClasses ecoreClass="metamodel@runtime.ecore#//type/ControlService"/>
+      <genClasses ecoreClass="metamodel@runtime.ecore#//type/Port">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute metamodel@runtime.ecore#//type/Port/isOptional"/>
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference metamodel@runtime.ecore#//type/Port/service"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute metamodel@runtime.ecore#//type/Port/role"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference metamodel@runtime.ecore#//type/Port/implem"/>
+      </genClasses>
+      <genClasses ecoreClass="metamodel@runtime.ecore#//type/Attribute"/>
+    </nestedGenPackages>
+    <nestedGenPackages prefix="Implem" disposableProviderFactory="true" generateExampleClass="false"
+        ecorePackage="metamodel@runtime.ecore#//implem">
+      <genClasses image="false" ecoreClass="metamodel@runtime.ecore#//implem/ComponentImplementation"/>
+      <genClasses ecoreClass="metamodel@runtime.ecore#//implem/FractalComponent">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute metamodel@runtime.ecore#//implem/FractalComponent/controllerDesc"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute metamodel@runtime.ecore#//implem/FractalComponent/contentDesc"/>
+      </genClasses>
+      <genClasses ecoreClass="metamodel@runtime.ecore#//implem/OSGiComponent">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute metamodel@runtime.ecore#//implem/OSGiComponent/URL"/>
+      </genClasses>
+      <genClasses ecoreClass="metamodel@runtime.ecore#//implem/PortImplementation"/>
+      <genClasses ecoreClass="metamodel@runtime.ecore#//implem/OSGiPort">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute metamodel@runtime.ecore#//implem/OSGiPort/serviceId"/>
+      </genClasses>
+    </nestedGenPackages>
+  </genPackages>
+</genmodel:GenModel>
