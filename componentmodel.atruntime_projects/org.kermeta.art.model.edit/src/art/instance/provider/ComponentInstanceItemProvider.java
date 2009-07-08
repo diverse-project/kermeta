@@ -211,6 +211,11 @@ public class ComponentInstanceItemProvider
 			(createChildParameter
 				(InstancePackage.Literals.COMPONENT_INSTANCE__IMPLEM,
 				 ImplemFactory.eINSTANCE.createFractalComponent()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(InstancePackage.Literals.COMPONENT_INSTANCE__IMPLEM,
+				 ImplemFactory.eINSTANCE.createOSGiComponent()));
 	}
 
 	/**

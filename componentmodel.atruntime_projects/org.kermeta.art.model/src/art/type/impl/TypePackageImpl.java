@@ -381,6 +381,15 @@ public class TypePackageImpl extends EPackageImpl implements TypePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EReference getPort_Implem() {
+		return (EReference)portEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getAttribute() {
 		return attributeEClass;
 	}
@@ -450,6 +459,7 @@ public class TypePackageImpl extends EPackageImpl implements TypePackage {
 		createEAttribute(portEClass, PORT__IS_OPTIONAL);
 		createEReference(portEClass, PORT__SERVICE);
 		createEAttribute(portEClass, PORT__ROLE);
+		createEReference(portEClass, PORT__IMPLEM);
 
 		attributeEClass = createEClass(ATTRIBUTE);
 
@@ -483,6 +493,7 @@ public class TypePackageImpl extends EPackageImpl implements TypePackage {
 		// Obtain other dependent packages
 		ArtPackage theArtPackage = (ArtPackage)EPackage.Registry.INSTANCE.getEPackage(ArtPackage.eNS_URI);
 		InstancePackage theInstancePackage = (InstancePackage)EPackage.Registry.INSTANCE.getEPackage(InstancePackage.eNS_URI);
+		ImplemPackage theImplemPackage = (ImplemPackage)EPackage.Registry.INSTANCE.getEPackage(ImplemPackage.eNS_URI);
 
 		// Create type parameters
 
@@ -533,6 +544,7 @@ public class TypePackageImpl extends EPackageImpl implements TypePackage {
 		initEAttribute(getPort_IsOptional(), theArtPackage.getBoolean(), "isOptional", "true", 0, 1, Port.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getPort_Service(), this.getService(), null, "service", null, 1, 1, Port.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getPort_Role(), theArtPackage.getString(), "role", null, 1, 1, Port.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getPort_Implem(), theImplemPackage.getPortImplementation(), null, "implem", null, 0, 1, Port.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(attributeEClass, Attribute.class, "Attribute", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 

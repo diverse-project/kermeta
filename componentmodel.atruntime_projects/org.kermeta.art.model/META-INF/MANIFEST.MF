@@ -18,8 +18,9 @@ Export-Package: art,
  art.type,
  art.type.impl,
  art.type.util,
- art.util
+ art.util,
+ com.wutka.dtd
 Require-Bundle: org.eclipse.core.runtime,
- org.eclipse.emf.ecore;visibility:=reexport
+ org.eclipse.emf.ecore;visibility:=reexport,
+ org.kermeta.art.startup;bundle-version="1.0.0"
 Eclipse-LazyStart: true
-Bundle-ActivationPolicy: lazy

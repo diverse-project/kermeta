@@ -62,6 +62,9 @@ public class ImplemFactoryImpl extends EFactoryImpl implements ImplemFactory {
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
 			case ImplemPackage.FRACTAL_COMPONENT: return createFractalComponent();
+			case ImplemPackage.OS_GI_COMPONENT: return createOSGiComponent();
+			case ImplemPackage.PORT_IMPLEMENTATION: return createPortImplementation();
+			case ImplemPackage.OS_GI_PORT: return createOSGiPort();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -75,6 +78,36 @@ public class ImplemFactoryImpl extends EFactoryImpl implements ImplemFactory {
 	public FractalComponent createFractalComponent() {
 		FractalComponentImpl fractalComponent = new FractalComponentImpl();
 		return fractalComponent;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public OSGiComponent createOSGiComponent() {
+		OSGiComponentImpl osGiComponent = new OSGiComponentImpl();
+		return osGiComponent;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public PortImplementation createPortImplementation() {
+		PortImplementationImpl portImplementation = new PortImplementationImpl();
+		return portImplementation;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public OSGiPort createOSGiPort() {
+		OSGiPortImpl osGiPort = new OSGiPortImpl();
+		return osGiPort;
 	}
 
 	/**

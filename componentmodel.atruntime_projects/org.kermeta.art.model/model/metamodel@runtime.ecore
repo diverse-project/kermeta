@@ -115,6 +115,8 @@
           eType="#//type/Service"/>
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="role" lowerBound="1"
           eType="#//String"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="implem" eType="#//implem/PortImplementation"
+          containment="true"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="Attribute" eSuperTypes="#//TypedElement"/>
     <eClassifiers xsi:type="ecore:EEnum" name="PortRole">
@@ -127,6 +129,14 @@
     <eClassifiers xsi:type="ecore:EClass" name="FractalComponent" eSuperTypes="#//implem/ComponentImplementation">
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="controllerDesc" eType="#//String"/>
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="contentDesc" eType="#//String"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="OSGiComponent" eSuperTypes="#//implem/ComponentImplementation">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="URL" lowerBound="1" eType="#//String"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="PortImplementation"/>
+    <eClassifiers xsi:type="ecore:EClass" name="OSGiPort" eSuperTypes="#//implem/PortImplementation">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="serviceId" lowerBound="1"
+          eType="#//String"/>
     </eClassifiers>
   </eSubpackages>
 </ecore:EPackage>

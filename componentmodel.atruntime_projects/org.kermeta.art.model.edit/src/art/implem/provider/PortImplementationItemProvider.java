@@ -4,38 +4,40 @@
  *
  * $Id$
  */
-package art.type.provider;
+package art.implem.provider;
 
+
+import art.provider.MetamodelruntimeEditPlugin;
 
 import java.util.Collection;
 import java.util.List;
 
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
+
 import org.eclipse.emf.common.util.ResourceLocator;
+
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
 import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
-
-import art.provider.MetamodelruntimeEditPlugin;
-import art.type.ControlService;
+import org.eclipse.emf.edit.provider.ItemProviderAdapter;
 
 /**
- * This is the item provider adapter for a {@link art.type.ControlService} object.
+ * This is the item provider adapter for a {@link art.implem.PortImplementation} object.
  * <!-- begin-user-doc -->
  * <!-- end-user-doc -->
  * @generated
  */
-public class ControlServiceItemProvider
-	extends ServiceItemProvider
-	implements	
-		IEditingDomainItemProvider,	
-		IStructuredItemContentProvider,	
-		ITreeItemContentProvider,	
-		IItemLabelProvider,	
+public class PortImplementationItemProvider
+	extends ItemProviderAdapter
+	implements
+		IEditingDomainItemProvider,
+		IStructuredItemContentProvider,
+		ITreeItemContentProvider,
+		IItemLabelProvider,
 		IItemPropertySource {
 	/**
 	 * This constructs an instance from a factory and a notifier.
@@ -43,7 +45,7 @@ public class ControlServiceItemProvider
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ControlServiceItemProvider(AdapterFactory adapterFactory) {
+	public PortImplementationItemProvider(AdapterFactory adapterFactory) {
 		super(adapterFactory);
 	}
 
@@ -63,14 +65,14 @@ public class ControlServiceItemProvider
 	}
 
 	/**
-	 * This returns ControlService.gif.
+	 * This returns PortImplementation.gif.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
 	public Object getImage(Object object) {
-		return overlayImage(object, getResourceLocator().getImage("full/obj16/ControlService"));
+		return overlayImage(object, getResourceLocator().getImage("full/obj16/PortImplementation"));
 	}
 
 	/**
@@ -81,10 +83,7 @@ public class ControlServiceItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((ControlService)object).getName();
-		return label == null || label.length() == 0 ?
-			getString("_UI_ControlService_type") :
-			getString("_UI_ControlService_type") + " " + label;
+		return getString("_UI_PortImplementation_type");
 	}
 
 	/**
@@ -110,6 +109,17 @@ public class ControlServiceItemProvider
 	@Override
 	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
+	}
+
+	/**
+	 * Return the resource locator for this item provider's resources.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public ResourceLocator getResourceLocator() {
+		return MetamodelruntimeEditPlugin.INSTANCE;
 	}
 
 }

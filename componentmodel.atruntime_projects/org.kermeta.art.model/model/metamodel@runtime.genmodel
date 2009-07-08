@@ -5,7 +5,8 @@
     modelPluginID="org.kermeta.art.model" modelName="Metamodel@runtime" importerID="org.eclipse.emf.importer.ecore"
     complianceLevel="5.0" copyrightFields="false">
   <foreignModel>metamodel@runtime.ecore</foreignModel>
-  <genPackages prefix="Art" disposableProviderFactory="true" ecorePackage="metamodel@runtime.ecore#/">
+  <genPackages prefix="Art" disposableProviderFactory="true" generateExampleClass="false"
+      ecorePackage="metamodel@runtime.ecore#/">
     <genDataTypes ecoreDataType="metamodel@runtime.ecore#//String"/>
     <genDataTypes ecoreDataType="metamodel@runtime.ecore#//Boolean"/>
     <genDataTypes ecoreDataType="metamodel@runtime.ecore#//Integer"/>
@@ -30,7 +31,8 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute metamodel@runtime.ecore#//CardinalityElement/lower"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute metamodel@runtime.ecore#//CardinalityElement/upper"/>
     </genClasses>
-    <nestedGenPackages prefix="Instance" disposableProviderFactory="true" ecorePackage="metamodel@runtime.ecore#//instance">
+    <nestedGenPackages prefix="Instance" disposableProviderFactory="true" generateExampleClass="false"
+        ecorePackage="metamodel@runtime.ecore#//instance">
       <genEnums typeSafeEnumCompatible="false" ecoreEnum="metamodel@runtime.ecore#//instance/InstanceState">
         <genEnumLiterals ecoreEnumLiteral="metamodel@runtime.ecore#//instance/InstanceState/OFF"/>
         <genEnumLiterals ecoreEnumLiteral="metamodel@runtime.ecore#//instance/InstanceState/ON"/>
@@ -72,7 +74,8 @@
             ecoreFeature="ecore:EReference metamodel@runtime.ecore#//instance/DelegationBinding/exported"/>
       </genClasses>
     </nestedGenPackages>
-    <nestedGenPackages prefix="Type" disposableProviderFactory="true" ecorePackage="metamodel@runtime.ecore#//type">
+    <nestedGenPackages prefix="Type" disposableProviderFactory="true" generateExampleClass="false"
+        ecorePackage="metamodel@runtime.ecore#//type">
       <genEnums typeSafeEnumCompatible="false" ecoreEnum="metamodel@runtime.ecore#//type/PortRole">
         <genEnumLiterals ecoreEnumLiteral="metamodel@runtime.ecore#//type/PortRole/client"/>
         <genEnumLiterals ecoreEnumLiteral="metamodel@runtime.ecore#//type/PortRole/server"/>
@@ -104,14 +107,23 @@
         <genFeatures notify="false" createChild="false" propertySortChoices="true"
             ecoreFeature="ecore:EReference metamodel@runtime.ecore#//type/Port/service"/>
         <genFeatures createChild="false" ecoreFeature="ecore:EAttribute metamodel@runtime.ecore#//type/Port/role"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference metamodel@runtime.ecore#//type/Port/implem"/>
       </genClasses>
       <genClasses ecoreClass="metamodel@runtime.ecore#//type/Attribute"/>
     </nestedGenPackages>
-    <nestedGenPackages prefix="Implem" disposableProviderFactory="true" ecorePackage="metamodel@runtime.ecore#//implem">
+    <nestedGenPackages prefix="Implem" disposableProviderFactory="true" generateExampleClass="false"
+        ecorePackage="metamodel@runtime.ecore#//implem">
       <genClasses image="false" ecoreClass="metamodel@runtime.ecore#//implem/ComponentImplementation"/>
       <genClasses ecoreClass="metamodel@runtime.ecore#//implem/FractalComponent">
         <genFeatures createChild="false" ecoreFeature="ecore:EAttribute metamodel@runtime.ecore#//implem/FractalComponent/controllerDesc"/>
         <genFeatures createChild="false" ecoreFeature="ecore:EAttribute metamodel@runtime.ecore#//implem/FractalComponent/contentDesc"/>
+      </genClasses>
+      <genClasses ecoreClass="metamodel@runtime.ecore#//implem/OSGiComponent">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute metamodel@runtime.ecore#//implem/OSGiComponent/URL"/>
+      </genClasses>
+      <genClasses ecoreClass="metamodel@runtime.ecore#//implem/PortImplementation"/>
+      <genClasses ecoreClass="metamodel@runtime.ecore#//implem/OSGiPort">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute metamodel@runtime.ecore#//implem/OSGiPort/serviceId"/>
       </genClasses>
     </nestedGenPackages>
   </genPackages>

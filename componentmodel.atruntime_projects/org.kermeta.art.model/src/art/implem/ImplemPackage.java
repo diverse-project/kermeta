@@ -116,6 +116,82 @@ public interface ImplemPackage extends EPackage {
 
 
 	/**
+	 * The meta object id for the '{@link art.implem.impl.OSGiComponentImpl <em>OS Gi Component</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see art.implem.impl.OSGiComponentImpl
+	 * @see art.implem.impl.ImplemPackageImpl#getOSGiComponent()
+	 * @generated
+	 */
+	int OS_GI_COMPONENT = 2;
+
+	/**
+	 * The feature id for the '<em><b>URL</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OS_GI_COMPONENT__URL = COMPONENT_IMPLEMENTATION_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>OS Gi Component</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OS_GI_COMPONENT_FEATURE_COUNT = COMPONENT_IMPLEMENTATION_FEATURE_COUNT + 1;
+
+	/**
+	 * The meta object id for the '{@link art.implem.impl.PortImplementationImpl <em>Port Implementation</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see art.implem.impl.PortImplementationImpl
+	 * @see art.implem.impl.ImplemPackageImpl#getPortImplementation()
+	 * @generated
+	 */
+	int PORT_IMPLEMENTATION = 3;
+
+	/**
+	 * The number of structural features of the '<em>Port Implementation</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PORT_IMPLEMENTATION_FEATURE_COUNT = 0;
+
+	/**
+	 * The meta object id for the '{@link art.implem.impl.OSGiPortImpl <em>OS Gi Port</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see art.implem.impl.OSGiPortImpl
+	 * @see art.implem.impl.ImplemPackageImpl#getOSGiPort()
+	 * @generated
+	 */
+	int OS_GI_PORT = 4;
+
+	/**
+	 * The feature id for the '<em><b>Service Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OS_GI_PORT__SERVICE_ID = PORT_IMPLEMENTATION_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>OS Gi Port</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OS_GI_PORT_FEATURE_COUNT = PORT_IMPLEMENTATION_FEATURE_COUNT + 1;
+
+
+	/**
 	 * Returns the meta object for class '{@link art.implem.ComponentImplementation <em>Component Implementation</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -156,6 +232,58 @@ public interface ImplemPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getFractalComponent_ContentDesc();
+
+	/**
+	 * Returns the meta object for class '{@link art.implem.OSGiComponent <em>OS Gi Component</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>OS Gi Component</em>'.
+	 * @see art.implem.OSGiComponent
+	 * @generated
+	 */
+	EClass getOSGiComponent();
+
+	/**
+	 * Returns the meta object for the attribute '{@link art.implem.OSGiComponent#getURL <em>URL</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>URL</em>'.
+	 * @see art.implem.OSGiComponent#getURL()
+	 * @see #getOSGiComponent()
+	 * @generated
+	 */
+	EAttribute getOSGiComponent_URL();
+
+	/**
+	 * Returns the meta object for class '{@link art.implem.PortImplementation <em>Port Implementation</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Port Implementation</em>'.
+	 * @see art.implem.PortImplementation
+	 * @generated
+	 */
+	EClass getPortImplementation();
+
+	/**
+	 * Returns the meta object for class '{@link art.implem.OSGiPort <em>OS Gi Port</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>OS Gi Port</em>'.
+	 * @see art.implem.OSGiPort
+	 * @generated
+	 */
+	EClass getOSGiPort();
+
+	/**
+	 * Returns the meta object for the attribute '{@link art.implem.OSGiPort#getServiceId <em>Service Id</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Service Id</em>'.
+	 * @see art.implem.OSGiPort#getServiceId()
+	 * @see #getOSGiPort()
+	 * @generated
+	 */
+	EAttribute getOSGiPort_ServiceId();
 
 	/**
 	 * Returns the factory that creates the instances of the model.
@@ -214,6 +342,52 @@ public interface ImplemPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute FRACTAL_COMPONENT__CONTENT_DESC = eINSTANCE.getFractalComponent_ContentDesc();
+
+		/**
+		 * The meta object literal for the '{@link art.implem.impl.OSGiComponentImpl <em>OS Gi Component</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see art.implem.impl.OSGiComponentImpl
+		 * @see art.implem.impl.ImplemPackageImpl#getOSGiComponent()
+		 * @generated
+		 */
+		EClass OS_GI_COMPONENT = eINSTANCE.getOSGiComponent();
+
+		/**
+		 * The meta object literal for the '<em><b>URL</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute OS_GI_COMPONENT__URL = eINSTANCE.getOSGiComponent_URL();
+
+		/**
+		 * The meta object literal for the '{@link art.implem.impl.PortImplementationImpl <em>Port Implementation</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see art.implem.impl.PortImplementationImpl
+		 * @see art.implem.impl.ImplemPackageImpl#getPortImplementation()
+		 * @generated
+		 */
+		EClass PORT_IMPLEMENTATION = eINSTANCE.getPortImplementation();
+
+		/**
+		 * The meta object literal for the '{@link art.implem.impl.OSGiPortImpl <em>OS Gi Port</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see art.implem.impl.OSGiPortImpl
+		 * @see art.implem.impl.ImplemPackageImpl#getOSGiPort()
+		 * @generated
+		 */
+		EClass OS_GI_PORT = eINSTANCE.getOSGiPort();
+
+		/**
+		 * The meta object literal for the '<em><b>Service Id</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute OS_GI_PORT__SERVICE_ID = eINSTANCE.getOSGiPort_ServiceId();
 
 	}
 

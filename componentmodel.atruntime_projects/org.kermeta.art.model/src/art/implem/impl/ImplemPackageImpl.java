@@ -17,6 +17,9 @@ import art.implem.ComponentImplementation;
 import art.implem.FractalComponent;
 import art.implem.ImplemFactory;
 import art.implem.ImplemPackage;
+import art.implem.OSGiComponent;
+import art.implem.OSGiPort;
+import art.implem.PortImplementation;
 import art.instance.InstancePackage;
 import art.instance.impl.InstancePackageImpl;
 import art.type.TypePackage;
@@ -42,6 +45,27 @@ public class ImplemPackageImpl extends EPackageImpl implements ImplemPackage {
 	 * @generated
 	 */
 	private EClass fractalComponentEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass osGiComponentEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass portImplementationEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass osGiPortEClass = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -163,6 +187,51 @@ public class ImplemPackageImpl extends EPackageImpl implements ImplemPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getOSGiComponent() {
+		return osGiComponentEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getOSGiComponent_URL() {
+		return (EAttribute)osGiComponentEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getPortImplementation() {
+		return portImplementationEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getOSGiPort() {
+		return osGiPortEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getOSGiPort_ServiceId() {
+		return (EAttribute)osGiPortEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public ImplemFactory getImplemFactory() {
 		return (ImplemFactory)getEFactoryInstance();
 	}
@@ -191,6 +260,14 @@ public class ImplemPackageImpl extends EPackageImpl implements ImplemPackage {
 		fractalComponentEClass = createEClass(FRACTAL_COMPONENT);
 		createEAttribute(fractalComponentEClass, FRACTAL_COMPONENT__CONTROLLER_DESC);
 		createEAttribute(fractalComponentEClass, FRACTAL_COMPONENT__CONTENT_DESC);
+
+		osGiComponentEClass = createEClass(OS_GI_COMPONENT);
+		createEAttribute(osGiComponentEClass, OS_GI_COMPONENT__URL);
+
+		portImplementationEClass = createEClass(PORT_IMPLEMENTATION);
+
+		osGiPortEClass = createEClass(OS_GI_PORT);
+		createEAttribute(osGiPortEClass, OS_GI_PORT__SERVICE_ID);
 	}
 
 	/**
@@ -225,6 +302,8 @@ public class ImplemPackageImpl extends EPackageImpl implements ImplemPackage {
 
 		// Add supertypes to classes
 		fractalComponentEClass.getESuperTypes().add(this.getComponentImplementation());
+		osGiComponentEClass.getESuperTypes().add(this.getComponentImplementation());
+		osGiPortEClass.getESuperTypes().add(this.getPortImplementation());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(componentImplementationEClass, ComponentImplementation.class, "ComponentImplementation", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -232,6 +311,14 @@ public class ImplemPackageImpl extends EPackageImpl implements ImplemPackage {
 		initEClass(fractalComponentEClass, FractalComponent.class, "FractalComponent", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getFractalComponent_ControllerDesc(), theArtPackage.getString(), "controllerDesc", null, 0, 1, FractalComponent.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getFractalComponent_ContentDesc(), theArtPackage.getString(), "contentDesc", null, 0, 1, FractalComponent.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(osGiComponentEClass, OSGiComponent.class, "OSGiComponent", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getOSGiComponent_URL(), theArtPackage.getString(), "URL", null, 1, 1, OSGiComponent.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(portImplementationEClass, PortImplementation.class, "PortImplementation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(osGiPortEClass, OSGiPort.class, "OSGiPort", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getOSGiPort_ServiceId(), theArtPackage.getString(), "serviceId", null, 1, 1, OSGiPort.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 	}
 
 } //ImplemPackageImpl

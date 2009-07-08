@@ -99,6 +99,24 @@ import org.eclipse.ui.PartInitException;
  */
 public class ImplemModelWizard extends Wizard implements INewWizard {
 	/**
+	 * The supported extensions for created files.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public static final List<String> FILE_EXTENSIONS =
+		Collections.unmodifiableList(Arrays.asList(MetamodelruntimeEditorPlugin.INSTANCE.getString("_UI_ImplemEditorFilenameExtensions").split("\\s*,\\s*")));
+
+	/**
+	 * A formatted list of supported file extensions, suitable for display.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public static final String FORMATTED_FILE_EXTENSIONS =
+		MetamodelruntimeEditorPlugin.INSTANCE.getString("_UI_ImplemEditorFilenameExtensions").replaceAll("\\s*,\\s*", ", ");
+
+	/**
 	 * This caches an instance of the model package.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -318,21 +336,15 @@ public class ImplemModelWizard extends Wizard implements INewWizard {
 	@Override
 		protected boolean validatePage() {
 			if (super.validatePage()) {
-				// Make sure the file ends in ".implem".
-				//
-				String requiredExt = MetamodelruntimeEditorPlugin.INSTANCE.getString("_UI_ImplemEditorFilenameExtension");
-				String enteredExt = new Path(getFileName()).getFileExtension();
-				if (enteredExt == null || !enteredExt.equals(requiredExt)) {
-					setErrorMessage(MetamodelruntimeEditorPlugin.INSTANCE.getString("_WARN_FilenameExtension", new Object [] { requiredExt }));
+				String extension = new Path(getFileName()).getFileExtension();
+				if (extension == null || !FILE_EXTENSIONS.contains(extension)) {
+					String key = FILE_EXTENSIONS.size() > 1 ? "_WARN_FilenameExtensions" : "_WARN_FilenameExtension";
+					setErrorMessage(MetamodelruntimeEditorPlugin.INSTANCE.getString(key, new Object [] { FORMATTED_FILE_EXTENSIONS }));
 					return false;
 				}
-				else {
-					return true;
-				}
+				return true;
 			}
-			else {
-				return false;
-			}
+			return false;
 		}
 
 		/**
@@ -566,7 +578,7 @@ public class ImplemModelWizard extends Wizard implements INewWizard {
 		newFileCreationPage = new ImplemModelWizardNewFileCreationPage("Whatever", selection);
 		newFileCreationPage.setTitle(MetamodelruntimeEditorPlugin.INSTANCE.getString("_UI_ImplemModelWizard_label"));
 		newFileCreationPage.setDescription(MetamodelruntimeEditorPlugin.INSTANCE.getString("_UI_ImplemModelWizard_description"));
-		newFileCreationPage.setFileName(MetamodelruntimeEditorPlugin.INSTANCE.getString("_UI_ImplemEditorFilenameDefaultBase") + "." + MetamodelruntimeEditorPlugin.INSTANCE.getString("_UI_ImplemEditorFilenameExtension"));
+		newFileCreationPage.setFileName(MetamodelruntimeEditorPlugin.INSTANCE.getString("_UI_ImplemEditorFilenameDefaultBase") + "." + FILE_EXTENSIONS.get(0));
 		addPage(newFileCreationPage);
 
 		// Try and get the resource selection to determine a current directory for the file dialog.
@@ -593,7 +605,7 @@ public class ImplemModelWizard extends Wizard implements INewWizard {
 					// Make up a unique new name here.
 					//
 					String defaultModelBaseFilename = MetamodelruntimeEditorPlugin.INSTANCE.getString("_UI_ImplemEditorFilenameDefaultBase");
-					String defaultModelFilenameExtension = MetamodelruntimeEditorPlugin.INSTANCE.getString("_UI_ImplemEditorFilenameExtension");
+					String defaultModelFilenameExtension = FILE_EXTENSIONS.get(0);
 					String modelFilename = defaultModelBaseFilename + "." + defaultModelFilenameExtension;
 					for (int i = 1; ((IContainer)selectedResource).findMember(modelFilename) != null; ++i) {
 						modelFilename = defaultModelBaseFilename + i + "." + defaultModelFilenameExtension;

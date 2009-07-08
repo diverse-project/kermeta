@@ -30,5 +30,12 @@
        class = "art.type.TypePackage"
        genModel = "model/metamodel@runtime.genmodel" /> 
   </extension>
-
+  
+  <extension point="org.eclipse.emf.ecore.generated_package">
+    <package 
+       uri = "http://art/implem" 
+       class = "art.implem.ImplemPackage"
+       genModel = "model/metamodel@runtime.genmodel" /> 
+  </extension>
+  
 </plugin>
