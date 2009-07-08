@@ -1,0 +1,72 @@
+/* $Id:$ 
+ * Creation : June 25, 2009
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            bmorin
+ */
+@mainClass "root_package::Main"
+@mainOperation "main"
+
+
+package root_package;
+
+
+require kermeta
+require "platform:/resource/org.kermeta.art.sca2runtime/metamodel/sca.kmt"
+
+using kermeta::standard
+using kermeta::persistence
+
+using sca
+
+using art
+
+class Main
+{
+	operation main(scaModel : String, artModel : String) : Void is do
+			
+		//loading an SCA model	
+		var composite : Composite init loadSCAModel(scaModel)
+		var mapper : SCAtoART init SCAtoART.new
+		mapper.scaComposite := composite 
+
+		mapper.sca2art		
+		var system : System init mapper.artSystem
+		
+		system.root.subComponent.each{c |
+			stdio.writeln(c.name)
+			c.binding.each{b | 
+				stdio.writeln(b.toString)
+			}
+		}
+		
+		saveARTModel(system, artModel)
+	end
+	
+	operation loadSCAModel(modelUri : String) : Composite is
+	do
+		var repository : Repository init EMFRepository.new
+		var resource : Resource
+		var root : DocumentRoot
+		var composite : Composite
+				
+		resource := repository.createResource(modelUri, "http://www.osoa.org/xmlns/sca/1.0")
+		resource.load
+		
+		var elements : Set<Object> init resource.instances
+		
+		root := elements.select { e | DocumentRoot.isInstance(e) }.one.asType(DocumentRoot)
+       	composite := root.composite.one
+    	
+    	result := composite
+	end
+	
+	operation saveARTModel(system : System, modelUri : String) is
+	do
+    	var repository:EMFRepository init EMFRepository.new
+	    var resource : Resource init repository.createResource(modelUri , "http://art")
+	    resource.instances.add(system)
+	    resource.save
+	end
+}

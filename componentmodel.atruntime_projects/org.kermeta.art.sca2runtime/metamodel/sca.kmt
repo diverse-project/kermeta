@@ -1,0 +1,246 @@
+/* $Id:$ 
+ * Creation : June 25, 2009
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            bmorin
+ */
+
+
+package sca;
+
+
+require kermeta
+require "http://www.osoa.org/xmlns/sca/1.0"
+require "http://art"
+
+using kermeta::standard
+using kermeta::utils
+
+using sca
+
+using art
+using art::instance
+using art::type
+
+aspect class SCAtoART{
+	reference artSystem : System [1..1]
+	reference scaComposite : Composite [1..1]
+	
+	reference artTypes : PrimitiveType [0..*]
+	reference artServices : art::type::Service [0..*]
+	
+	operation sca2art() is
+	do
+		artSystem := System.new 
+		scaComposite.visit(self, artSystem)
+		artSystem.services.addAll(artServices)
+		
+		//artSystem.root := scaComposite.artComposite
+	end
+	
+	/**
+	 * Returns the type of the component by introspecting its 
+	 * provided and required ports
+	 */
+	operation getType(cpt : Component) : PrimitiveType is
+	do
+		var type : PrimitiveType
+		
+		type := artTypes.detect{t |
+			(t.port.select{p | p.role == "server"}.collect{p | p.name}.containsAll(cpt.service.collect{s | s.name}))
+			and (t.port.select{p | p.role == "client"}.collect{p | p.name}.containsAll(cpt.~reference.collect{s | s.name}))
+			and t.port.select{p | p.role == "server"}.size ==  cpt.service.size
+			and t.port.select{p | p.role == "client"}.size ==  cpt.~reference.size
+		}
+		
+		if type == void then
+			type := PrimitiveType.new
+			type.name := ""
+			cpt.service.each{s | 
+				var port : Port init Port.new
+				port.name := s.name
+				port.role := "server"
+				//port.service := getService(s.interfaceGroup.~value.asType(JavaInterface))
+				port.service := getService(s.interface.asType(JavaInterface))
+				//stdio.writeln(s.toString) 
+				//stdio.writeln(s.interface.toString)
+				type.port.add(port)
+				type.name := type.name+"!"+s.name
+				s.artPort := port
+			}
+			
+			cpt.~reference.each{r | 
+				var port : Port init Port.new
+				port.name := r.name
+				port.role := "client"
+				//port.service := getService(r.interfaceGroup.~value.asType(JavaInterface))
+				port.service := getService(r.interface.asType(JavaInterface))
+				if r.multiplicity == Multiplicity._01 or  r.multiplicity == Multiplicity._0N then
+					port.lower := 0
+					port.isOptional := true
+				else
+					port.lower := 1
+					port.isOptional := false
+				end
+				
+				if r.multiplicity == Multiplicity._01 or  r.multiplicity == Multiplicity._11 then
+					port.upper := 1
+				else
+					port.upper := -1
+				end
+				
+				type.port.add(port)
+				type.name := type.name+"?"+r.name
+				
+				r.artPort := port
+			}
+			artTypes.add(type)
+		end
+		
+		/*stdio.writeln("Type: "+type.toString)
+		type.port.each{p |
+			stdio.writeln("  -"+p.name+": "+p.role)
+		}*/
+		result := type
+	end
+	
+	operation getService(interface : JavaInterface) : art::type::Service is
+	do
+		stdio.writeln("getService("+interface.interface+")")
+		
+		var service : art::type::Service
+		service := artServices.detect{s | s.name == interface.interface}
+		
+		if service == void then
+			service := art::type::FunctionalService.new
+			service.name := interface.interface
+			artServices.add(service)
+		end
+	
+		result := service
+	end
+}
+
+aspect class Composite
+{
+	reference artComposite : CompositeInstance [1..1]
+	
+	operation visit(sca2art : SCAtoART, artSystem : System) is
+	do
+		artComposite := CompositeInstance.new
+		artSystem.root := artComposite
+		artComposite.name := self.name
+		self.component.each{c | 
+			stdio.writeln(c.name+": "+c.implementation.asType(JavaImplementation).~class)
+			c.visit(sca2art, artSystem)
+			artComposite.subComponent.add(c.artComponent)
+		}
+		/*self.service.each{s |
+			stdio.writeln(s.name) 
+			s.visit(sca2art, artSystem)
+		}
+		self.~reference.each{r | 
+			stdio.writeln(r.name)
+			r.visit(sca2art, artSystem)
+		}*/
+		self.wire.each{w | w.visit(sca2art, artSystem)}
+	end
+}
+
+aspect class Component
+{
+	reference artComponent : PrimitiveInstance [1..1]
+	
+	operation visit(sca2art : SCAtoART, artSystem : System) is
+	do
+		artComponent := PrimitiveInstance.new
+		artComponent.name := self.name
+		/*self.service.each{s |
+			stdio.writeln(s.name) 
+			s.visit(sca2art, artSystem)
+		}
+		self.~reference.each{r |
+			stdio.writeln(r.name) 
+			r.visit(sca2art, artSystem)
+		}*/
+		artComponent.type := sca2art.getType(self)
+		artSystem.types.add(sca2art.getType(self))
+	end
+}
+
+//TODO: promote => Delegation Binding
+aspect class Wire
+{
+	reference artBinding : TransmissionBinding [1..1]
+	
+	operation visit(sca2art : SCAtoART, artSystem : System) is
+	do
+		artBinding := TransmissionBinding.new 
+		artBinding.server := self.target2.artPort
+		artBinding.client := self.source2.artPort
+		artBinding.serverInstance := self.target2.container.asType(Component).artComponent
+		self.source2.container.asType(Component).artComponent.binding.add(artBinding)
+	end
+}
+
+/*aspect class Service
+{
+	reference artPort : Port [1..1]
+	
+	operation visit() is
+	do 
+	
+	end	
+}*/
+
+aspect class BaseService
+{
+	reference artPort : Port [1..1]
+	
+/*	operation visit(sca2art : SCAtoART, artSystem : System) is
+	do 
+		artPort := Port.new
+		artPort.role := "server"
+		//self.interface.asType(JavaInterface).visit(sca2art)
+		//artPort.service := self.interface.asType(JavaInterface).artService
+	end
+*/	
+}
+
+/*aspect class Reference
+{
+	reference artPort : Port [1..1]
+	
+	operation visit() is
+	do 
+	
+	end
+}*/
+
+aspect class BaseReference
+{
+	reference artPort : Port [1..1]
+	
+/*	operation visit(sca2art : SCAtoART, artSystem : System) is
+	do 
+		artPort := Port.new
+		artPort.role := "client"
+		//self.interface.asType(JavaInterface).visit(sca2art)
+		//artPort.service := self.interface.asType(JavaInterface).artService
+	end
+*/
+}
+
+aspect class JavaInterface
+{
+	reference artService : art::type::Service [1..1]
+	
+	operation visit(sca2art : SCAtoART, artSystem : System) is
+	do
+		stdio.writeln("JavaInterface: "+self.toString)
+		artService := art::type::FunctionalService.new
+		artService.name := self.interface
+		artSystem.services.add(artService)
+	end
+}
