@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="ASCII"?>
-<art:System xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:art="http://art/pattern/art" xmlns:implem="http://art/pattern/art/implem" xmlns:instance="http://art/pattern/art/instance" xsi:schemaLocation="http://art/pattern/art ../../../metamodel/domain/metamodel@runtimePattern.ecore#//art http://art/pattern/art/implem ../../../metamodel/domain/metamodel@runtimePattern.ecore#//art/implem http://art/pattern/art/instance ../../../metamodel/domain/metamodel@runtimePattern.ecore#//art/instance">
-  <root>
-    <subComponent xsi:type="instance:PrimitiveInstance" name="BT" state="ON">
-      <implem xsi:type="implem:FractalComponent" contentDesc="org.diva.example.servicediscovery.impl.Bluetooth"/>
-    </subComponent>
-  </root>
-</art:System>
