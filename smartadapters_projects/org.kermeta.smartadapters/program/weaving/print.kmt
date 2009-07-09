@@ -1,0 +1,130 @@
+/* $Id: print.kmt,v 1.4 2008/06/17 15:35:31 bmorin Exp $
+ * Creation date: February 21, 2008
+ * License:
+ * Copyright: IRISA / INRIA Rennes Bretagne Atlantique
+ * Authors: Brice Morin bmorin@irisa.fr
+ */
+
+package kermeta::language::structure;
+
+
+require kermeta
+using kermeta::utils
+using kermeta::standard
+
+aspect class Object
+{
+	operation printObject() : String is
+	do
+		var print : StringBuffer init StringBuffer.new 
+		print.append(self.toString).append("\n")
+		 
+		var attributes : Set<Property> init Set<Property>.new
+		attributes.addAll(self.getMetaClass.allAttributes)
+		if attributes.size > 0 then
+			print := print.append("- Attributes: \n")
+			attributes.each{p |
+				print := print.append(p.printProperty(self))
+			}
+		end	
+	
+		var references : Set<Property> init Set<Property>.new
+		references.addAll(self.getMetaClass.allReferences)
+		if references.size > 0 then
+			print := print.append("- References: \n")
+			references.each{p |
+				print := print.append(p.printProperty(self))
+			}
+		end 
+		result := print.toString
+	end
+	
+	operation checkAllInvariantsIte() : Void from Object is do
+		if(self!=void) then
+			var objects : Set<Object> init Set<Object>.new
+			var tempObjects : Set<Object> init Set<Object>.new
+			objects.add(self)
+			from  not objects.isEmpty
+			until objects.isEmpty
+			loop
+				objects.each{o |
+					o.checkInvariants
+					o.getMetaClass.allAttributes.each{a |
+						tempObjects.add(o.get(a))
+					}
+				}
+				objects.clear
+				objects.addAll(tempObjects)
+				tempObjects.clear
+			end
+		end
+	end	
+}
+
+aspect class Class
+{
+
+	operation allAttributes() : Set<Property> is
+	do
+		var properties : Set<Property> init Set<Property>.new
+		properties.addAll(self.ownedAttribute.select{p | p.isComposite})
+		self.allSuperClasses.each{s | properties.addAll(s.ownedAttribute.select{p | p.isComposite})}
+		result := properties 
+	end
+	
+	operation allReferences() : Set<Property> is
+	do
+		var properties : Set<Property> init Set<Property>.new
+		properties.addAll(self.ownedAttribute.select{p | not p.isComposite})
+		self.allSuperClasses.each{s | properties.addAll(s.ownedAttribute.select{p | not p.isComposite})}
+		result := properties
+	end
+	
+	operation allSuperClasses() : Set<Class> is
+	do
+		var allSuperClasses : Set<Class> init Set<Class>.new
+		var superClasses : Set<Class> init Set<Class>.new
+		superClasses.addAll(self.superClass) 
+		var temp : Set<Class> init Set<Class>.new
+		from  not superClasses.isEmpty
+		until superClasses.isEmpty
+		loop
+			allSuperClasses.addAll(superClasses)
+			temp.clear
+ 			superClasses.each{s |
+ 				temp.addAll(s.superClass)
+ 			}
+ 			superClasses.clear
+ 			superClasses.addAll(temp)
+		end
+		result := allSuperClasses
+	end
+}
+
+aspect class Property
+{
+	operation printProperty(o : Object) : String is
+	do
+		var coll : Collection<kermeta::language::structure::Object>
+		var print : StringBuffer init StringBuffer.new
+		if upper == 1 then
+			if o.get(self) != void then
+				print := print.append("\t").append(name).append(": ")
+				print := print.append(o.get(self).toString)
+				print := print.append("\n")
+			end
+		else
+			coll ?= o.get(self)
+			if coll != void then
+				if coll.size > 0 then
+					print := print.append("\t").append(name).append(": ")
+					coll.each{b | 
+						print := print.append(b.toString).append(" ")
+					}
+					print := print.append("\n")
+				end
+			end
+		end
+		result := print.toString
+	end
+}

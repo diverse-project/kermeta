@@ -1,0 +1,493 @@
+
+/* 
+ * Author: Brice Morin
+ * Creation date: 
+ * License: 
+ * Copyright: IRISA / INRIA Rennes Bretagne Atlantique
+ * Authors: Brice Morin bmorin@irisa.fr
+ */
+
+/*
+ * This file was automatically generated
+ */
+
+package org;
+require kermeta
+require "platform:/resource/org.kermeta.smartadapters/metamodel/generic/genericSmartAdapters.kmt"
+require "platform:/resource/org.kermeta.smartadapters/metamodel/domain/FSMMM.ecore"
+require "platform:/resource/org.kermeta.smartadapters/metamodel/domain/FSMMMPattern.ecore"
+
+using kermeta::standard
+using kermeta::utils
+using patternframework
+using org::smartadapters::core
+using org::smartadapters::extension
+using org::smartadapters::utils
+
+package smartadapters
+{
+	package core
+	{
+		aspect class Adapter 
+		{
+			/**
+			 * Associates concrete meta-classes from MM\' to concrete meta-classes from MM
+			 */
+			operation initConvert(): Void is do
+				converter := Converter.new
+				convert := Hashtable<kermeta::language::structure::Class,kermeta::language::structure::Class>.new
+				convert.put(pattern::FSM::State,FSM::State)
+				convert.put(pattern::FSM::Transition,FSM::Transition)
+				convert.put(pattern::FSM::Fsm,FSM::Fsm)
+				converter.initConverter(convert)
+			end
+		}
+		
+	package adaptations
+	{
+		 
+		/*
+		 * Adaptations dedicated to the manipulation
+		 * of FSM::State
+		 */
+		
+		/**
+		 * Creates a new FSM::State from scratch
+		 * This new element is handled by refering to newState
+		 */
+		class CreateState inherits createAdaptation
+		{
+			attribute newState : pattern::FSM::State
+					
+			method check(): Boolean is do
+				result := newState != void
+			end
+					
+			method execute(reverse : Boolean): Void is do
+				adapter.cloneAgain(newState, void, isUnique)					
+			end
+		}
+
+		/**
+		 * Creates a new FSM::State from an existing one
+		 * This cloned element is handled by refering to clonedState
+		 */
+		class CloneState inherits cloneAdaptation
+		{
+			reference StateToClone : pattern::FSM::State
+			attribute clonedState : pattern::FSM::State
+			
+			method check(): Boolean is do
+				result := StateToClone != void
+			end
+			
+			method execute(reverse : Boolean): Void is do
+				adapter.cloneAgain(clonedState, StateToClone, isUnique)
+			end					
+		}
+
+		/**
+		 * Sets any property of FSM::State
+		 * All the references expect StateToSet may be void
+		 */
+		class SetState inherits setAdaptation
+		{
+			reference StateToSet : pattern::FSM::State
+			reference refname : pattern::FSM::label
+			
+			method check(): Boolean is do
+				result := StateToSet != void
+			end
+			
+			method execute(reverse : Boolean): Void 
+			post correctlySettedState is do
+				var ad : Adapter init getAdapter
+				var tempStateToSet : FSM::State
+				tempStateToSet ?= ad.getRealObject(StateToSet,false)
+				var isCorrectlySetted : Boolean init true
+				var c : Collection<kermeta::language::structure::Object>
+				if refname != void then
+					isCorrectlySetted := isCorrectlySetted and tempStateToSet.name == ad.getRealObject(refname,false)
+				end
+				isCorrectlySetted
+			end
+			is do
+				var ad : Adapter init getAdapter
+				var tempState : FSM::State
+				tempState ?= ad.getRealObject(StateToSet,false)
+				
+				tempState.name ?= ad.setSingleProperty(refname, tempState.name)
+				
+				//Instantiating the reverse adaptation
+				if(reverse) then		
+					var unset : UnsetState 
+					if self.reverse == void then
+						unset := UnsetState.new
+						unset.reverse := self
+						self.reverse := unset
+					else
+						unset ?= self.reverse
+					end		
+					unset.StateToUnset := self.StateToSet
+					unset.refname := self.refname
+				end	
+			end			
+		}
+		
+		/**
+		 * Unsets any property of FSM::State
+		 * All the references expect StateToUnset may be void 
+		 */		
+		class UnsetState inherits unsetAdaptation
+		{
+			reference StateToUnset : pattern::FSM::State
+			reference refname : pattern::FSM::label
+			
+			method check(): Boolean is do
+				result := StateToUnset != void
+			end
+			
+			method execute(reverse : Boolean): Void 
+			post correctlyUnsettedState is do
+				var ad : Adapter init getAdapter
+				var tempStateToUnset : FSM::State
+				tempStateToUnset ?= ad.getRealObject(StateToUnset,false)
+				var isCorrectlyUnsetted : Boolean init true
+				var c : Collection<kermeta::language::structure::Object>
+				if refname != void then 
+				if not ad.notRemovable.contains(ad.getRealObject(refname,false)) then
+					isCorrectlyUnsetted := isCorrectlyUnsetted and tempStateToUnset.name == void
+				end end
+				isCorrectlyUnsetted
+			end
+			is do
+				var ad : Adapter init getAdapter
+				var tempState : FSM::State
+				tempState ?= ad.getRealObject(StateToUnset,false)
+				
+				tempState.name ?= ad.unsetSingleProperty(refname, tempState.name)
+				
+				//Instantiating the reverse adaptation
+				if reverse then
+					var ~set : SetState 
+					if self.reverse == void then
+						~set := SetState.new
+						~set.reverse := self
+						self.reverse := ~set
+					else
+						~set ?= self.reverse
+					end
+					~set.StateToSet := self.StateToUnset
+					~set.refname := self.refname
+				end
+			end
+		}
+		 
+		/*
+		 * Adaptations dedicated to the manipulation
+		 * of FSM::Transition
+		 */
+		
+		/**
+		 * Creates a new FSM::Transition from scratch
+		 * This new element is handled by refering to newTransition
+		 */
+		class CreateTransition inherits createAdaptation
+		{
+			attribute newTransition : pattern::FSM::Transition
+					
+			method check(): Boolean is do
+				result := newTransition != void
+			end
+					
+			method execute(reverse : Boolean): Void is do
+				adapter.cloneAgain(newTransition, void, isUnique)					
+			end
+		}
+
+		/**
+		 * Creates a new FSM::Transition from an existing one
+		 * This cloned element is handled by refering to clonedTransition
+		 */
+		class CloneTransition inherits cloneAdaptation
+		{
+			reference TransitionToClone : pattern::FSM::Transition
+			attribute clonedTransition : pattern::FSM::Transition
+			
+			method check(): Boolean is do
+				result := TransitionToClone != void
+			end
+			
+			method execute(reverse : Boolean): Void is do
+				adapter.cloneAgain(clonedTransition, TransitionToClone, isUnique)
+			end					
+		}
+
+		/**
+		 * Sets any property of FSM::Transition
+		 * All the references expect TransitionToSet may be void
+		 */
+		class SetTransition inherits setAdaptation
+		{
+			reference TransitionToSet : pattern::FSM::Transition
+			reference refsource : pattern::FSM::State
+			reference reftarget : pattern::FSM::State
+			
+			method check(): Boolean is do
+				result := TransitionToSet != void
+			end
+			
+			method execute(reverse : Boolean): Void 
+			post correctlySettedTransition is do
+				var ad : Adapter init getAdapter
+				var tempTransitionToSet : FSM::Transition
+				tempTransitionToSet ?= ad.getRealObject(TransitionToSet,false)
+				var isCorrectlySetted : Boolean init true
+				var c : Collection<kermeta::language::structure::Object>
+				if refsource != void then
+					isCorrectlySetted := isCorrectlySetted and tempTransitionToSet.source == ad.getRealObject(refsource,false)
+				end
+				if reftarget != void then
+					isCorrectlySetted := isCorrectlySetted and tempTransitionToSet.target == ad.getRealObject(reftarget,false)
+				end
+				isCorrectlySetted
+			end
+			is do
+				var ad : Adapter init getAdapter
+				var tempTransition : FSM::Transition
+				tempTransition ?= ad.getRealObject(TransitionToSet,false)
+				
+				tempTransition.source ?= ad.setSingleProperty(refsource, tempTransition.source)
+				tempTransition.target ?= ad.setSingleProperty(reftarget, tempTransition.target)
+				
+				//Instantiating the reverse adaptation
+				if(reverse) then		
+					var unset : UnsetTransition 
+					if self.reverse == void then
+						unset := UnsetTransition.new
+						unset.reverse := self
+						self.reverse := unset
+					else
+						unset ?= self.reverse
+					end		
+					unset.TransitionToUnset := self.TransitionToSet
+					unset.refsource := self.refsource
+					unset.reftarget := self.reftarget
+				end	
+			end			
+		}
+		
+		/**
+		 * Unsets any property of FSM::Transition
+		 * All the references expect TransitionToUnset may be void 
+		 */		
+		class UnsetTransition inherits unsetAdaptation
+		{
+			reference TransitionToUnset : pattern::FSM::Transition
+			reference refsource : pattern::FSM::State
+			reference reftarget : pattern::FSM::State
+			
+			method check(): Boolean is do
+				result := TransitionToUnset != void
+			end
+			
+			method execute(reverse : Boolean): Void 
+			post correctlyUnsettedTransition is do
+				var ad : Adapter init getAdapter
+				var tempTransitionToUnset : FSM::Transition
+				tempTransitionToUnset ?= ad.getRealObject(TransitionToUnset,false)
+				var isCorrectlyUnsetted : Boolean init true
+				var c : Collection<kermeta::language::structure::Object>
+				if refsource != void then 
+				if not ad.notRemovable.contains(ad.getRealObject(refsource,false)) then
+					isCorrectlyUnsetted := isCorrectlyUnsetted and tempTransitionToUnset.source == void
+				end end
+				if reftarget != void then 
+				if not ad.notRemovable.contains(ad.getRealObject(reftarget,false)) then
+					isCorrectlyUnsetted := isCorrectlyUnsetted and tempTransitionToUnset.target == void
+				end end
+				isCorrectlyUnsetted
+			end
+			is do
+				var ad : Adapter init getAdapter
+				var tempTransition : FSM::Transition
+				tempTransition ?= ad.getRealObject(TransitionToUnset,false)
+				
+				tempTransition.source ?= ad.unsetSingleProperty(refsource, tempTransition.source)
+				tempTransition.target ?= ad.unsetSingleProperty(reftarget, tempTransition.target)
+				
+				//Instantiating the reverse adaptation
+				if reverse then
+					var ~set : SetTransition 
+					if self.reverse == void then
+						~set := SetTransition.new
+						~set.reverse := self
+						self.reverse := ~set
+					else
+						~set ?= self.reverse
+					end
+					~set.TransitionToSet := self.TransitionToUnset
+					~set.refsource := self.refsource
+					~set.reftarget := self.reftarget
+				end
+			end
+		}
+		 
+		/*
+		 * Adaptations dedicated to the manipulation
+		 * of FSM::Fsm
+		 */
+		
+		/**
+		 * Creates a new FSM::Fsm from scratch
+		 * This new element is handled by refering to newFsm
+		 */
+		class CreateFsm inherits createAdaptation
+		{
+			attribute newFsm : pattern::FSM::Fsm
+					
+			method check(): Boolean is do
+				result := newFsm != void
+			end
+					
+			method execute(reverse : Boolean): Void is do
+				adapter.cloneAgain(newFsm, void, isUnique)					
+			end
+		}
+
+		/**
+		 * Creates a new FSM::Fsm from an existing one
+		 * This cloned element is handled by refering to clonedFsm
+		 */
+		class CloneFsm inherits cloneAdaptation
+		{
+			reference FsmToClone : pattern::FSM::Fsm
+			attribute clonedFsm : pattern::FSM::Fsm
+			
+			method check(): Boolean is do
+				result := FsmToClone != void
+			end
+			
+			method execute(reverse : Boolean): Void is do
+				adapter.cloneAgain(clonedFsm, FsmToClone, isUnique)
+			end					
+		}
+
+		/**
+		 * Sets any property of FSM::Fsm
+		 * All the references expect FsmToSet may be void
+		 */
+		class SetFsm inherits setAdaptation
+		{
+			reference FsmToSet : pattern::FSM::Fsm
+			reference refstates : pattern::FSM::State[0..*]
+			reference reftransitions : pattern::FSM::Transition[0..*]
+			
+			method check(): Boolean is do
+				result := FsmToSet != void
+			end
+			
+			method execute(reverse : Boolean): Void 
+			post correctlySettedFsm is do
+				var ad : Adapter init getAdapter
+				var tempFsmToSet : FSM::Fsm
+				tempFsmToSet ?= ad.getRealObject(FsmToSet,false)
+				var isCorrectlySetted : Boolean init true
+				var c : Collection<kermeta::language::structure::Object>
+				c ?= ad.getRealObject(refstates,true)
+				c.each{o | var p : FSM::State p?=o isCorrectlySetted := isCorrectlySetted and tempFsmToSet.states.contains(p)}
+				c ?= ad.getRealObject(reftransitions,true)
+				c.each{o | var p : FSM::Transition p?=o isCorrectlySetted := isCorrectlySetted and tempFsmToSet.transitions.contains(p)}
+				isCorrectlySetted
+			end
+			is do
+				var ad : Adapter init getAdapter
+				var tempFsm : FSM::Fsm
+				tempFsm ?= ad.getRealObject(FsmToSet,false)
+				
+				ad.setMultipleProperty(tempFsm.states,refstates)
+				ad.setMultipleProperty(tempFsm.transitions,reftransitions)
+				
+				//Instantiating the reverse adaptation
+				if(reverse) then		
+					var unset : UnsetFsm 
+					if self.reverse == void then
+						unset := UnsetFsm.new
+						unset.reverse := self
+						self.reverse := unset
+					else
+						unset ?= self.reverse
+					end		
+					unset.FsmToUnset := self.FsmToSet
+					unset.refstates.clear
+					unset.refstates.addAll(self.refstates)
+					unset.reftransitions.clear
+					unset.reftransitions.addAll(self.reftransitions)
+				end	
+			end			
+		}
+		
+		/**
+		 * Unsets any property of FSM::Fsm
+		 * All the references expect FsmToUnset may be void 
+		 */		
+		class UnsetFsm inherits unsetAdaptation
+		{
+			reference FsmToUnset : pattern::FSM::Fsm
+			reference refstates : pattern::FSM::State[0..*]
+			reference reftransitions : pattern::FSM::Transition[0..*]
+			
+			method check(): Boolean is do
+				result := FsmToUnset != void
+			end
+			
+			method execute(reverse : Boolean): Void 
+			post correctlyUnsettedFsm is do
+				var ad : Adapter init getAdapter
+				var tempFsmToUnset : FSM::Fsm
+				tempFsmToUnset ?= ad.getRealObject(FsmToUnset,false)
+				var isCorrectlyUnsetted : Boolean init true
+				var c : Collection<kermeta::language::structure::Object>
+				c ?= ad.getRealObject(refstates,true)
+				c.each{o | var p : FSM::State p?=o 
+					if not ad.notRemovable.contains(p) then
+						isCorrectlyUnsetted := isCorrectlyUnsetted and not tempFsmToUnset.states.contains(p)
+					end
+				}
+				c ?= ad.getRealObject(reftransitions,true)
+				c.each{o | var p : FSM::Transition p?=o 
+					if not ad.notRemovable.contains(p) then
+						isCorrectlyUnsetted := isCorrectlyUnsetted and not tempFsmToUnset.transitions.contains(p)
+					end
+				}
+				isCorrectlyUnsetted
+			end
+			is do
+				var ad : Adapter init getAdapter
+				var tempFsm : FSM::Fsm
+				tempFsm ?= ad.getRealObject(FsmToUnset,false)
+				
+				ad.unsetMultipleProperty(tempFsm.states,refstates)
+				ad.unsetMultipleProperty(tempFsm.transitions,reftransitions)
+				
+				//Instantiating the reverse adaptation
+				if reverse then
+					var ~set : SetFsm 
+					if self.reverse == void then
+						~set := SetFsm.new
+						~set.reverse := self
+						self.reverse := ~set
+					else
+						~set ?= self.reverse
+					end
+					~set.FsmToSet := self.FsmToUnset
+					~set.refstates.clear
+					~set.refstates.addAll(self.refstates)
+					~set.reftransitions.clear
+					~set.reftransitions.addAll(self.reftransitions)
+				end
+			end
+		}
+		 
+	}
+}}

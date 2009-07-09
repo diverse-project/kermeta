@@ -1,0 +1,169 @@
+/* $Id: aspectizedFramework.kmt,v 1.2 2008/06/24 14:38:55 bmorin Exp $
+ * Creation date: February 21, 2008
+ * License:
+ * Copyright: IRISA / INRIA Rennes Bretagne Atlantique
+ * Authors: Brice Morin bmorin@irisa.fr
+ */
+
+package kermeta;
+
+
+require kermeta
+using kermeta::utils
+using kermeta::standard
+
+package language
+{
+	package structure
+	{	
+		aspect class Object
+		{
+			operation printObject() : String is
+			do
+				var print : StringBuffer init StringBuffer.new 
+				print.append(self.toString).append("\n")
+				 
+				var attributes : Set<Property> init Set<Property>.new
+				attributes.addAll(self.getMetaClass.allAttributes)
+				if attributes.size > 0 then
+					print := print.append("- Attributes: \n")
+					attributes.each{p |
+						print := print.append(p.printProperty(self))
+					}
+				end	
+			
+				var references : Set<Property> init Set<Property>.new
+				references.addAll(self.getMetaClass.allReferences)
+				if references.size > 0 then
+					print := print.append("- References: \n")
+					references.each{p |
+						print := print.append(p.printProperty(self))
+					}
+				end 
+				result := print.toString
+			end
+			
+			operation checkAllInvariantsIte() : Void from Object is do
+				if(self!=void) then
+					var objects : Set<Object> init Set<Object>.new
+					var tempObjects : Set<Object> init Set<Object>.new
+					objects.add(self)
+					from  not objects.isEmpty
+					until objects.isEmpty
+					loop
+						objects.each{o |
+							o.checkInvariants
+							o.getMetaClass.allAttributes.each{a |
+								if (a.upper <= -1).orElse{b | a.upper > 1} then
+									var c : Collection<kermeta::language::structure::Object>
+									c ?= o.get(a)
+									if c != void then
+										tempObjects.addAll(c)
+									end
+								else
+									tempObjects.add(o.get(a))
+								end
+							}
+						}
+						objects.clear
+						objects.addAll(tempObjects)
+						tempObjects.clear
+					end
+				end
+			end	
+		}
+		
+		aspect class Class
+		{
+		
+			operation allAttributes() : Set<Property> is
+			do
+				var properties : Set<Property> init Set<Property>.new
+				properties.addAll(self.ownedAttribute.select{p | p.isComposite})
+				self.allSuperClasses.each{s | properties.addAll(s.ownedAttribute.select{p | p.isComposite})}
+				result := properties 
+			end
+			
+			operation allReferences() : Set<Property> is
+			do
+				var properties : Set<Property> init Set<Property>.new
+				properties.addAll(self.ownedAttribute.select{p | not p.isComposite})
+				self.allSuperClasses.each{s | properties.addAll(s.ownedAttribute.select{p | not p.isComposite})}
+				result := properties
+			end
+			
+			operation allSuperClasses() : Set<Class> is
+			do
+				var allSuperClasses : Set<Class> init Set<Class>.new
+				var superClasses : Set<Class> init Set<Class>.new
+				superClasses.addAll(self.superClass) 
+				var temp : Set<Class> init Set<Class>.new
+				from  not superClasses.isEmpty
+				until superClasses.isEmpty
+				loop
+					allSuperClasses.addAll(superClasses)
+					temp.clear
+		 			superClasses.each{s |
+		 				temp.addAll(s.superClass)
+		 				//stdio.errorln("   "+s.name)
+		 			}
+		 			superClasses.clear
+		 			superClasses.addAll(temp)
+				end
+				result := allSuperClasses
+			end
+		}
+		
+		aspect class Property
+		{
+			operation printProperty(o : Object) : String is
+			do
+				var coll : Collection<kermeta::language::structure::Object>
+				var print : StringBuffer init StringBuffer.new
+				if upper == 1 then
+					if o.get(self) != void then
+						print := print.append("\t").append(name).append(": ")
+						print := print.append(o.get(self).toString)
+						print := print.append("\n")
+					end
+				else
+					coll ?= o.get(self)
+					if coll != void then
+						if coll.size > 0 then
+							print := print.append("\t").append(name).append(": ")
+							coll.each{b | 
+								print := print.append(b.toString).append(" ")
+							}
+							print := print.append("\n")
+						end
+					end
+				end
+				result := print.toString
+			end
+		}
+	}
+}
+
+package standard
+{
+	aspect class String{
+		operation normalize(size : Integer) : String is
+		do
+			var res : String init String.new
+			var i : Integer
+			if self.size < size then
+				i := ((size - self.size)/2)+1 
+				i.times{ i |
+					res := res+" "
+				}
+				res := res + self + res
+			else
+				if size > 9 then
+					i := (size/2)-1
+					res := self.substring(0,i+1)+"//"+self.substring(self.size-i, self.size)
+				end
+			end
+			result := res.substring(0, size)
+		end
+		}
+}

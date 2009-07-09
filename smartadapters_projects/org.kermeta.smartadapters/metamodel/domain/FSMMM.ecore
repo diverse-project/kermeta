@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="ASCII"?>
+<xmi:XMI xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore">
+  <ecore:EAnnotation source="ModellingUnit">
+    <details key="require" value="http://www.eclipse.org/emf/2002/Ecore|platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/language/structure.ecore|platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/reflection/reflection.ecore|platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/persistence/resource.ecore|platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/collections.ecore|platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/language/behavior.ecore|platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/Standard.ecore|platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.ecore|platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/exceptions/exceptions.ecore|platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/language/reflective_collections.ecore|platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/kunit/kunit.ecore|platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/kunit/assert.ecore|platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/utils/hashtable.ecore|platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/utils/stack.ecore|platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/io/std_io.ecore|platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/io/file_io.ecore|platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/language/dynamic_expression.ecore|platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/java.ecore|platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/ecore/ecore_compatibility.ecore|platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/utils/StringBuffer.ecore|"/>
+  </ecore:EAnnotation>
+  <ecore:EPackage name="FSM" nsURI="platform:/resource/SmartAdapters/metamodel/domain/FSMMM.ecore#/FSM"
+      nsPrefix="FSM">
+    <eClassifiers xsi:type="ecore:EClass" name="State">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1"
+          eType="#/1/label">
+        <eAnnotations source="kermeta">
+          <details key="isComposite" value="true"/>
+        </eAnnotations>
+      </eStructuralFeatures>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Transition">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="source" lowerBound="1"
+          eType="#/1/State"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="target" lowerBound="1"
+          eType="#/1/State"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Fsm">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="states" lowerBound="1"
+          upperBound="-1" eType="#/1/State" containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="transitions" upperBound="-1"
+          eType="#/1/Transition" containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EDataType" name="label" instanceClassName="java.lang.String">
+      <eAnnotations source="kermeta">
+        <details key="alias" value="kermeta::standard::String"/>
+      </eAnnotations>
+    </eClassifiers>
+  </ecore:EPackage>
+</xmi:XMI>

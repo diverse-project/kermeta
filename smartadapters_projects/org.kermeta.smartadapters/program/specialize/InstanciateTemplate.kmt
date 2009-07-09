@@ -1,0 +1,74 @@
+/* $Id: InstanciateTemplate.kmt,v 1.5 2008/09/26 12:45:30 bmorin Exp $
+ * Creation date: August 27, 2007
+ * License:
+ * Copyright:
+ * Authors:
+ */
+@mainClass "specialize::Main"
+@mainOperation "main"
+
+
+package specialize;
+
+require kermeta
+require "platform:/plugin/fr.irisa.triskell.kermeta.ecore/src/kermeta/helpers/EcoreHelper.kmt"
+require "platform:/resource/org.kermeta.smartadapters/program/specialize/OptimizedAdaptationTemplate.kmt"
+
+using kermeta::standard
+using kermeta::persistence
+using kermeta::io
+using ecore
+
+class Main
+{
+	operation main() : Void is do
+		var domainMM : String init "platform:/resource/SmartAdapters/metamodel/domain/uml.ecore"
+		var domainMMPattern : String init "platform:/resource/SmartAdapters/metamodel/domain/umlPattern.ecore"
+		
+		var shortName : String init "runtime"
+		var file : String init "C:/work/dev/Kermeta/SmartAdapters/metamodel/specific/uml_AOM_Framework.kmt"
+	 
+	 	var ecore : String init "http://www.eclipse.org/emf/2002/Ecore"
+	 	var generator : AdaptationTemplate init AdaptationTemplate.new 
+		stdio.write("Generating framework...")
+		var handler : EcoreHelpers::EcoreHelper init EcoreHelpers::EcoreHelper.new   	  
+	    handler.initialize()
+		var repository : EMFRepository init EMFRepository.new
+		var inputMM : Set<Object> init loadModel(repository, domainMM, ecore)
+		
+		var mm : EPackage
+		mm?=inputMM.select{o | EPackage.isInstance(o)}.first
+		if mm != void  then
+			var classif : Set<EClassifier> init getAllNestedClassifiers(mm)	
+			var content : String init generator.generate(classif, domainMM, domainMMPattern, shortName, false)
+			stdio.writeln("OK!")
+			stdio.write("Saving...")
+			var fileWriter : FileIO init FileIO.new
+			fileWriter.writeTextFile(file,content)
+			stdio.write("OK!")
+		else
+			stdio.writeln("Kermeta-Error while loading metamodel")
+		end
+	end
+
+    operation loadModel(repository : EMFRepository, modelPath : String, metamodelPath : String) : Set<kermeta::standard::Object> is do                   
+   		var resource : Resource init repository.createResource(modelPath, metamodelPath)
+       	resource.load()
+        result := resource.instances
+    end	
+	
+    operation saveModel(obj : Set<Object>, uri : String, domainMM : String) is do
+    	var repository:EMFRepository init EMFRepository.new
+	    var resource : Resource init repository.createResource(uri , domainMM)
+	    obj.each{o | resource.instances.add(o)}
+	    resource.save
+    end		
+    
+    operation getAllNestedClassifiers(pack : EPackage) : Set<EClassifier> is do
+       var eclassifiers : Set<EClassifier> init Set<EClassifier>.new
+       eclassifiers.addAll(pack.eClassifiers)
+       pack.eSubpackages.each{ subpack | 
+                eclassifiers.addAll( getAllNestedClassifiers(subpack))}
+       result := eclassifiers
+    end	
+}

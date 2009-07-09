@@ -1,0 +1,255 @@
+/* $Id: weaver.kmt,v 1.23 2008/06/10 15:10:34 bmorin Exp $
+ * Creation date: July 17, 2007
+ * License:
+ * Copyright: IRISA / INRIA Rennes Bretagne Atlantique
+ * Authors: Brice Morin bmorin@irisa.fr
+ */
+
+package weaver;
+ 
+require kermeta
+
+//require "platform:/resource/SmartAdapters/program/weaving/print.kmt"
+require "platform:/resource/org.kermeta.smartadapters/metamodel/generic/genericSmartAdapters.kmt"
+require "platform:/plugin/fr.irisa.triskell.kermeta.ecore/src/kermeta/helpers/EcoreHelper.kmt"
+require "platform:/resource/fr.irisa.triskell.kermeta.patternmatching/src/kermeta/flora2/PatternMatchingFlora2.kmt"
+
+using kermeta::standard 
+using kermeta::utils
+using kermeta::persistence
+using patternframework
+using org::smartadapters::core
+using org::smartadapters::extension
+using kermeta::pattern
+using kermeta::pattern::flora2
+
+class Weaver
+{
+	attribute doWeave : Boolean
+	attribute doUnweave : Boolean
+	attribute doMatch : Boolean
+	attribute displayInfo : Boolean
+	
+	attribute matcher : PatternMatchingFlora2
+	attribute handler : EcoreHelpers::EcoreHelper
+	reference resourceModel : Resource
+	attribute repository : EMFRepository
+	reference modelElements : Set<Object>
+	
+	attribute inputMetamodel : Sequence<ecore::EPackage>
+	attribute inputPatternMetamodel : Sequence<ecore::EPackage>
+	
+	attribute adapter : Adapter
+	
+	operation initWeaver() is
+	do
+		if matcher == void then
+			matcher := PatternMatchingFlora2.new
+		end
+		if handler == void then
+			handler := EcoreHelpers::EcoreHelper.new   	  
+	    	handler.initialize()
+		end
+		if inputMetamodel == void then
+			inputMetamodel := Sequence<ecore::EPackage>.new 
+		end
+		if inputPatternMetamodel == void then
+			inputPatternMetamodel := Sequence<ecore::EPackage>.new
+		end
+		if repository == void then
+			repository := EMFRepository.new
+		end
+	end
+	
+	operation reset() is
+	do
+		//repository.resources.clear
+		matcher.interpreter.flush
+		//matcher.interpreter.finalize
+		//matcher := PatternMatchingFlora2.new
+	end
+		
+	operation loadMetamodel(domainMMUri : String) is
+	do
+		inputMetamodel.clear
+		inputMetamodel.addAll(handler.loadEcoreModel(repository,domainMMUri))
+		//handler.loadEcoreModel(EMFRepository.new,domainMMUri).each{p | inputMetamodel.add(p)}
+	end
+	
+	operation loadMetamodelPattern(domainMMPatternUri : String) is
+	do
+		inputPatternMetamodel.clear
+		inputPatternMetamodel.addAll(handler.loadEcoreModel(EMFRepository.new, domainMMPatternUri))
+		//handler.loadEcoreModel(EMFRepository.new, domainMMPatternUri).each{p | inputPatternMetamodel.add(p)}
+	end
+	
+	operation loadModel(baseModelUri : String, domainMMUri : String) is
+	do
+		resourceModel := repository.createResource(baseModelUri, domainMMUri)
+		resourceModel.load
+		modelElements := resourceModel.instances
+	end
+	
+	operation loadAdapter(adapterUri : String, adaptMMUri : String) is
+	do
+		var resourceAdapter : Resource init EMFRepository.new.createResource(adapterUri, adaptMMUri)
+		resourceAdapter.load
+		adapter ?= resourceAdapter.instances.one
+	end
+
+	operation saveModel(model : String, metamodel : String)is
+	do  	
+    	resourceModel.saveWithNewURI(model) 
+	end
+
+	operation finalizeWeaver() is
+	do
+		if matcher == void then
+			matcher.finalize
+		end
+	end
+
+	operation weaving(/*adaptMMUri : String, */domainMMUri : String, domainMMPatternUri : String) : Void is do 
+		/**
+		 * Derive the adapter, if needed
+		 */
+/*		var derivable : DerivableAdapter
+		derivable ?= adapter
+		if derivable != void then
+			var derivation : Derivation
+			var derivationPath : String init stdio.read("$>The adapter is derivable, please provide a derivation: ")
+			var inputDerivation:Set<Object> init loadModel2(repository, derivationPath, domainMMUri)
+			inputDerivation.each{o | 
+							var temp:Derivation
+							temp?=o
+							if(temp!=void) then
+								derivation:=temp
+							end
+						}
+			adapter := derivable.resolve(derivation)
+			inputAdapter.clear
+			inputAdapter.add(adapter)
+			saveModel2(inputAdapter, "./derivedAdapter.xmi", adaptMMUri)
+			adapter.adapt.each{a | stdio.writeln(a.toString)}
+		end*/
+
+		//adapter.checkAllInvariants
+		
+		if (adapter.adapt.size > 0) then
+			adapter.initClone
+			if (adapter.~aspect.template != void) then
+				/*---Pattern matching---*/
+				stdio.writeln("Searching base model elements matching the interface model...")
+				stdio.writeln("- The Metamodel and the model are transformed into a Prolog knowledge base")
+				stdio.writeln("- The inferface model (~pointcut) is tranformed into a Prolog query")
+				stdio.writeln("Better performance expected: ")
+				stdio.writeln("  - pre-generate the facts related to the metamodel")
+				stdio.writeln("  - pre-generate the query")
+				
+				stdio.writeln("  - Kermeta compiler:")
+				stdio.writeln("      - faster generation of the facts related to the model")
+				stdio.writeln("      - direct connection with InterProlog (Java-Prolog interface)")
+				stdio.writeln("  - Compile and embed most useful (and predictable) reconfiguration scripts")
+				stdio.writeln("")
+		        var iteBindings : Iterator<Hashtable<Object, Object>> 
+		        	init Iterator<Hashtable<Object, Object>>.new
+		        iteBindings := matcher.optimizedMatch(inputMetamodel, modelElements, adapter.~aspect.template, true, false, true)
+		        //stdio.writeln("") 
+		        //stdio.writeln("")
+		        //stdio.writeln("")                
+				
+                       	
+				/*---Applying the adapter to the base model---*/       
+				//var i : Integer init 0
+				var binding : Hashtable<Object, Object>			
+				var doAction : Boolean
+			 	adapter.setDisplayInfo(displayInfo)
+			 	//iterating on bindings
+				from iteBindings until iteBindings.isOff loop 
+					 doAction := false
+				     binding := iteBindings.next
+					 //i:=i+1
+					 //stdio.writeln("")
+					 //stdio.writeln("")
+					 //display current binding
+				     //stdio.writeln("Binding"+i.toString+":")
+				     //stdio.writeln("*******************************************")
+				     if displayInfo then
+					 	binding.keys.each{k | stdio.write("-------\n"+k.printObject+"bound to\n"+binding.getValue(k).printObject)}
+					 end
+					 //stdio.writeln("*******************************************")
+					 //stdio.writeln("")				 
+					 do
+						 doAction := doWeave //stdio.read("$>weave the aspect for this binding ? (y/n/default=any): ").toBoolean
+					 rescue (e : kermeta::exceptions::Exception)
+					 	doAction := doWeave
+					 end
+					 //weave the aspect for the current binding
+					 if doAction then
+					 	//stdio.writeln("----------------------------")
+					 	//stdio.writeln("#>weaving the aspect for binding"+i.toString+"...")
+					 	stdio.writeln("Weaving the graft model into the base model...")
+					 	stdio.writeln("  - contextualization of the interface model with the result of the Prolog query")
+					 	stdio.writeln("  - conversion MM' (interface/graft model) -> MM (base model)")
+					 	stdio.writeln("  - execution of the sequence of adaptations")
+						adapter.apply(binding/*, rootElement*/) //aspect weaving: do not require domain concepts
+					 	//stdio.writeln("#>weaving the aspect for binding"+i.toString+" done!")
+					 	//stdio.writeln("----------------------------")
+					 	//stdio.writeln("")
+					 	do
+					 		doAction := doUnweave //stdio.read("$>unweave the aspect for this binding ? (y/n/default=any): ").toBoolean
+					 	rescue (e : kermeta::exceptions::Exception)
+					 		doAction := doUnweave
+					 	end
+					 	//unweave the aspect for the current binding
+					 	/*if doAction then
+					 		stdio.writeln("----------------------------")
+					 		stdio.writeln("#>unweaving the aspect for binding"+i.toString+"...")
+					 		adapter.unweave/*(rootElement)*/
+					 	/*	stdio.writeln("#>unweaving the aspect for binding"+i.toString+" done!")
+					 		stdio.writeln("----------------------------")
+					 		stdio.writeln("")
+					 	end*/
+					 	if iteBindings.hasNext then
+					 		adapter.updateClones
+					 		if not doAction then //weaving + unweaving = no change
+						 		do
+						 			doAction := doMatch //stdio.read("$>execute pattern matching ? (y/n/default=any): ").toBoolean
+						 		rescue (e : kermeta::exceptions::Exception)
+						 			doAction := doMatch
+						 		end
+						 		//executing pattern matching again (the composition might have change the base model)
+						 		if doAction then
+						 			iteBindings := Iterator<Hashtable<Object, Object>>.new
+						 			iteBindings := matcher.optimizedMatch(inputMetamodel, modelElements, adapter.~aspect.template, true, false, true)
+						 			//i := 0
+						 		end
+							end
+						end
+					 end     
+				end	
+			end
+		else
+			var e:kermeta::exceptions::Exception init kermeta::exceptions::Exception.new
+			e.message:="WeavingException: Adapter contains no adaptation or at least one adaptation is not well typed"
+			raise e
+		end		
+	end
+	
+	operation initDefaultValues() : Void is
+	do
+		//stdio.writeln("Initializing default actions")
+		do
+			doWeave := true //stdio.read("$>default value for doWeave ? (true/false): ").toBoolean
+			doUnweave := false //stdio.read("$>default value for doUnweave ? (true/false): ").toBoolean
+			doMatch := false //stdio.read("$>default value for doMatch ? (true/false): ").toBoolean
+			displayInfo := true //stdio.read("$>display weaving info ? (y/n): ").toBoolean
+		rescue (e : kermeta::exceptions::Exception)
+			stdio.writeln("Cannot read the value")
+			stdio.writeln("Please try again (use yes/y/1/true and no/n/0/false)")
+			stdio.writeln("")
+			initDefaultValues
+		end
+		//stdio.writeln("")
+	end	
+}

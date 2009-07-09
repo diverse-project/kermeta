@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="ASCII"?>
+<extension:Derivation xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:extension="platform:/resource/SmartAdapters/metamodel/generic/genericSmartAdaptersBase.ecore#/org/smartadapters/extension" xsi:schemaLocation="platform:/resource/SmartAdapters/metamodel/generic/genericSmartAdaptersBase.ecore#/org/smartadapters/extension ../../metamodel/specific/FSM_AOM_Framework.ecore#//smartadapters/extension">
+  <elements>
+    <alternative href="DerivableAdapter.xmi#//@alternatives.0"/>
+    <selectedVariant href="DerivableAdapter.xmi#//@alternatives.0/@xor.0"/>
+  </elements>
+</extension:Derivation>

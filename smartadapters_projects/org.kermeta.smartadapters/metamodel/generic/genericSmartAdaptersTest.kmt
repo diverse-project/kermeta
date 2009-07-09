@@ -1,0 +1,572 @@
+/* $Id: genericSmartAdapters.kmt,v 1.29 2008/09/26 15:57:25 bmorin Exp $
+ * Creation date: July 17, 2007
+ * License:
+ * Copyright: IRISA / INRIA Rennes Bretagne Atlantique
+ * Authors: Brice Morin bmorin@irisa.fr
+ */
+
+package org;
+
+require "platform:/resource/org.kermeta.smartadapters/metamodel/generic/genericSmartAdaptersBase.kmt"
+require "platform:/resource/org.kermeta.smartadapters/program/weaving/converter.kmt"
+
+require "platform:/resource/org.kermeta.smartadapters/program/weaving/aspectizedFramework.kmt"
+
+using kermeta::standard
+using kermeta::utils
+using kermeta::persistence
+using kermeta::exceptions
+using patternframework
+using org::smartadapters::core
+using org::smartadapters::extension
+using org::smartadapters::utils
+
+package smartadapters
+{
+	package core
+	{	
+		aspect class Adaptation
+		{
+			reference reverse : Adaptation
+		
+			operation print() : String is
+			do
+				var o : Object
+				var print : String
+				var coll : Collection<kermeta::language::structure::Object>
+				print := String.new
+				getMetaClass().ownedAttribute.each{p |
+					print := print + "\t" + p.name + ": "
+					if p.upper == 1 then
+						o := get(p)
+						o := adapter.getRealObject(o,false)
+						print := print + o.toString + "\n"
+					else
+						coll ?= get(p)
+						coll.each{b | 
+							print := print + adapter.getRealObject(b,false).toString + " ("+ b.toString + ") "
+						}
+						print := print + "\n"
+					end
+					get(p).getMetaClass().ownedAttribute.each{pr | 
+						print := print + "\t\t - "+pr.name+" = "
+						if pr.upper == 1 then
+							print := print + adapter.getRealObject(o.get(pr),false).toString + " ("+ o.toString + ")" + "\n"
+						else
+							coll ?= o.get(pr)
+							coll.each{b | 
+								print := print + adapter.getRealObject(b, false).toString
+							}
+							print := print + "\n"
+						end
+					}
+				}
+				result := print
+			end
+			
+			/**
+			 * Return the adapter associated to the adaptation or to the reverse adaptation
+			 */
+			@EMF_renameAs "getAdapterSpecialCyril"
+			operation getAdapter() : Adapter 
+				post notVoid is result != void
+			is do
+				var ad : Adapter
+				ad := adapter
+				if ad == void then
+					ad := self.reverse.adapter
+				end
+				result := ad
+			end
+		}
+		
+		aspect class Adapter
+		{	
+			reference displayInfo : Boolean
+		
+			inv checkedAdapt is adapt.detect{a | not a.check} == void
+		
+			/**
+			key : aspect element
+			value : associated clone
+			*/
+			attribute clone : Hashtable<Object, Object>
+			attribute binding : Hashtable<Object, Object>
+			attribute cloned : Hashtable<Object, Object>
+			attribute convert : Hashtable<kermeta::language::structure::Class,kermeta::language::structure::Class>
+			//attribute converter : Converter
+			
+			/*
+			 * attributes for managing roll-back
+			 */
+			attribute notRemovable : Set<Object> //objects that cannot be removed
+			attribute removable : Set<Object> //objects that may be removed after weaving the aspect for a given binding
+			attribute removed : Set<Object> //objects that have been removed when unweaving the aspect for a given binding
+			
+			/**
+			 * This operation maps the concepts of MM' to the concepts of MM
+			 * The body of the operation will be generated when specializing the AOM framework
+			 * for a given domain 
+			 */
+			operation initConvert() : Void 
+				//post converterNotVoid is converter != void
+				is abstract
+			
+			/**
+			 * This operation applies the aspect directly on the pointcut.
+			 * It allows to see the result of the composition on a minimal model (~the pointcut)
+			 * It may help in reasoning, validating, etc the aspect.
+			 */
+			operation applyOnPointcut(b : Hashtable<Object, Object>)
+			is do
+				adapt.each{a |
+					a.execute(true)
+				}
+			end
+			
+			/**
+			 * This operation weaves the the aspect for the binding b
+			 * In other words, it executes all the adaptations of the composition protocol  
+			 */
+			operation apply(b : Hashtable<Object, Object>) 
+			is do
+				var i : Integer init 1
+				binding := b
+				removable.clear
+				removed.clear
+				adapt.each{a |
+					if displayInfo then
+						stdio.writeln("Adaptation "+i.toString)
+						stdio.writeln("------------")
+						stdio.writeln("#>weaving: "+a.getMetaClass.name+"...")
+					end
+					
+					a.execute(true)
+					
+					if displayInfo then
+						stdio.write(a.print)
+						stdio.writeln("#>weaving: done!")
+						stdio.writeln("")
+						i := i+1
+					end
+				}
+			end
+			
+			/**
+			 * This operation unweaves the previously woven aspect, for the current binding
+			 * In other words, it performs a roll back.
+			 */
+			operation unweave() 
+			is do
+/*				var i : Integer init 1
+				adapt.each{a | 
+					if(a.reverse != void) then
+						if displayInfo then
+							stdio.writeln("Reverse adaptation "+i.toString)
+							stdio.writeln("------------")
+							stdio.writeln("#>unweaving: "+a.getMetaClass.name+" (i.e., executing "+a.reverse.getMetaClass.name+")"+"...")
+						end
+						
+						a.reverse.execute(false)
+						
+						if displayInfo then
+							stdio.write(a.print)
+							stdio.writeln("#>unweaving: done!")
+							stdio.writeln("")
+							i := i+1
+						end
+					end
+				}
+*/			end
+
+			/**
+			 * This operation should be called before any other operation
+			 */
+			operation initAdapter() : Void is 
+			do
+				if (clone == void) then
+					clone := Hashtable<Object, Object>.new
+				else
+					clone.clear
+				end
+				if (convert == void) then
+					initConvert
+				end
+				if (cloned == void) then
+					cloned := Hashtable<Object, Object>.new
+				else
+					cloned.clear
+				end
+				if (notRemovable == void) then
+					notRemovable := Set<Object>.new
+				else
+					notRemovable.clear
+				end
+				if (removable == void) then
+					removable := Set<Object>.new
+				else
+					removable.clear
+				end
+				if (removed == void) then
+					removed := Set<Object>.new
+				else
+					removed.clear
+				end			
+			end		
+			
+			@EMF_renameAs "setDisplayInfoSpecialCyril"
+			operation setDisplayInfo(display : Boolean) is
+			do
+				displayInfo := display
+			end	
+				
+			/**
+			 *initClone must be called before the first binding
+			 */
+			operation initClone() is do
+				initAdapter
+				if (~aspect.structure != void) then
+					~aspect.structure.content.each{elt |
+						//if not convert.getValue(elt.getMetaClass()).isAbstract then //TODO: faire ce test ailleurs
+							var newCloned : Object init Object.clone(elt)//converter.getConverted(elt)
+							if (newCloned != void) then
+								clone.put(elt, newCloned)
+							end
+						/*else
+							raise Exception.new
+						end*/
+					}
+				end
+			end
+			
+			/**
+			updateClone must be called after every binding 
+			*/
+			operation updateClones() is do
+				if(~aspect.structure != void) then
+					~aspect.structure.content.each{o |
+						if (not(~aspect.persistent.contains(o))) then
+							//converter.deleteConverted(o)
+							var temp : Object init Object.clone(o)//converter.getConverted(o)
+							clone.put(o, temp)
+							removable.add(temp)
+						end
+					}
+				end
+				
+				/*
+				 * non removed removable objects become non removable
+				 */
+				removable.each{o |
+					var real : Object init getRealObject(o,false)
+					if not removed.contains(real) then
+						notRemovable.add(real)
+					end
+				}	
+			end
+			
+			operation cloneFromTemplate(handler : Object, realTemplate : Object) : Void is
+			do
+				var temp : Object init Object.clone(realTemplate)
+				cloned.put(realTemplate,temp)
+				clone.put(handler, temp)
+				removable.add(temp)
+			end
+			
+			operation cloneFromScratch(handler : Object) : Void is
+			do
+				//converter.deleteConverted(handler)
+				var temp : Object init Object.clone(handler)//converter.getConverted(handler)
+				clone.put(handler, temp)
+				removable.add(temp)
+			end
+			
+			/**
+			 * This operation determines whether the handler should be cloned, 
+			 * from scratch or from an existing element (template != void),
+			 * according to its unicity type:
+			 * 		- non_unique: the handler is systematically cloned
+			 *		- unique: the handler is cloned iff the real object associated 
+			 *		to the handler or to the template (!=void) has not been already cloned
+			 * 		- onDemand: cloned on demand
+			 */
+			operation cloneAgain(handler : Object, template : Object, type : uniqueType) : Void is do
+				var o : Object
+				if template != void then
+					o := getRealObject(template,false)
+				end
+			
+				if (type == uniqueType.non_unique) then
+					if o != void then //non unique from template
+						cloneFromTemplate(handler, o)
+					else
+						cloneFromScratch(handler)
+					end
+				else
+					if type == uniqueType.unique then
+						if o != void then //unique from template
+							if cloned.containsKey(o) then //real element already cloned
+								clone.put(handler,cloned.getValue(o))
+							else
+								cloneFromTemplate(handler,o)
+							end
+						else 
+							if not clone.containsKey(handler) then //unique from scratch
+								cloneFromScratch(handler)
+							end
+						end
+					else
+						if type == uniqueType.onDemand then
+							var update : Boolean
+							update := stdio.read("$>clone "+handler.toString+" (true/false) :").toBoolean
+							if update then
+								if o != void then //on demand from template
+									cloneFromTemplate(handler,o)
+								else //on demand from scratch
+									cloneFromScratch(handler)
+								end	
+							else
+								if o != void then
+									clone.put(handler,cloned.getValue(o))
+								end
+							end
+						else
+							
+						end
+					end 
+				end
+			end
+			
+			
+			/**
+			 * This reflective operation is called by domain-specific set* adaptations,
+			 * for all the multiple properties (upper > 1) 
+			 */
+			operation setMultipleProperty(prty : Object, o : Object) : Void is do
+				if(o != void) then
+					var coll : Collection<kermeta::language::structure::Object>
+					var collToSet : Collection<kermeta::language::structure::Object>
+					coll ?= o
+					collToSet ?= prty
+					if ((coll != void).andThen{v | (coll.size > 0)}.andThen{v | collToSet != void}) /*(coll != void and collToSet != void and coll.size > 0)*/ then
+						var realColl : Collection<kermeta::language::structure::Object>
+						realColl ?= getRealObject(o,true)
+						collToSet.addAll(realColl)
+					end
+				end
+			end
+
+			/**
+			 * This reflective operation is called by domain-specific set* adaptations,
+			 * for all the single properties (upper = 1) 
+			 */			
+			operation setSingleProperty(o : Object, old : Object) : Object is do
+				if(o != void) then					
+					result := getRealObject(o,false)
+				else
+					result := old
+				end
+			end
+
+			/**
+			 * This reflective operation is called by domain-specific unset* adaptations,
+			 * for all the single properties (upper = 1) 
+			 */
+			operation unsetSingleProperty(o : Object, old : Object) : Object is do
+				if(o != void) then
+					var e : Object init getRealObject(o,false)
+					if not notRemovable.contains(e) then
+						removed.add(e)
+						result := void
+					else
+						result := old
+					end
+				else
+					result := old
+				end
+			end
+
+			/**
+			 * This reflective operation is called by domain-specific unset* adaptations,
+			 * for all the multiple properties (upper > 1) 
+			 */
+			operation unsetMultipleProperty(prty : Object, o : Object) : Void is do
+				if((prty != void).andThen{v | o != void}) then
+					var coll : Collection<kermeta::language::structure::Object>
+					var collToSet : Collection<kermeta::language::structure::Object>
+					coll ?= o
+					collToSet ?= prty
+					if(coll != void and collToSet != void) then
+						var realColl : Collection<kermeta::language::structure::Object>
+						realColl ?= getRealObject(o,true)
+						realColl.each{e |
+							if not notRemovable.contains(e) then
+								collToSet.remove(e)
+								removed.add(e)
+							end
+						}
+					end
+				end
+			end			
+			
+			/**
+			 * Return the real object (instance of MM) associated to obj
+			 * e.g., it returns the base model element associated to an element from the pointcut
+			 * or returns a converted clone associated to a created element
+			 */		
+			operation getRealObject(obj : Object, isCollect:Boolean) : Object is do
+				if (isCollect) then
+					var col : Collection<kermeta::language::structure::Object>
+					col ?= obj
+					var res : Set<Object> init Set<Object>.new
+					col.each{o | res.add(getRealObject(o,false))}
+					result := res
+				else
+					var res : Object
+					var realObj : Object
+					realObj := binding.getValue(obj)
+					if (realObj != void) then //base model element
+							res := realObj
+					else
+						realObj := clone.getValue(obj)
+						if (realObj != void) then
+							if cloned.getValue(realObj) != void then
+								res := cloned.getValue(realObj)
+							else
+								res := realObj
+							end
+						else
+							var pObj : PObject
+							pObj ?= obj
+							if (pObj != void) then
+								res := obj//converter.getConverted(obj)
+							else
+								res := obj
+							end
+						end
+					end
+					if res.getMetaClass().isAbstract then//TODO
+						stdio.errorln("Cannot return abstract element")
+					else
+						result := res
+					end
+				end
+			end
+		}
+	}
+	
+	/**
+	 * This package contains all the concepts for variability
+	 * Note: the resolve operation does not work well because of a bug
+	 * in Kermeta involving reflection and enumerations...
+	 */
+	package extension
+	{
+		aspect class DerivableAdapter inherits Adapter
+		{
+			operation resolve(derivation:Derivation) : Adapter is do
+/*				stdio.writeln("Deriving the adapter according to "+derivation.toString)
+				var adapter : DerivableAdapter init DerivableAdapter.new
+				if(not constraints.exists{c | not c.check(derivation)}) then
+					adapter.~aspect := self.~aspect
+					adapt.each{a | adapter.addAdaptation(derivation,a)}
+					alternatives.each{a | adapter.addAlternative(derivation,a)}
+					if(adapter.isConcretizable) then
+						var concreteAdapter : Adapter init Adapter.new
+						if converter == void then
+							converter := Converter.new
+							converter.initConverter(Hashtable<kermeta::language::structure::Class,kermeta::language::structure::Class>.new)
+						end
+						converter.addEntry(adapter.getMetaClass,concreteAdapter.getMetaClass)
+						adapter.adapt.each{a | converter.addEntry(a.getMetaClass, a.getMetaClass)}
+						concreteAdapter ?= converter.getConverted(adapter) //Pb bug kermeta reflection enumeration...
+						result := concreteAdapter
+					else
+						result := adapter
+					end					
+				else
+					var e:NonApplicableDerivation init NonApplicableDerivation.new
+					e.message := "Derivation "+derivation.toString+" is not applicable to DerivableAdapter "+self.toString+". \n
+					Maybe the derivation is not well formed. \n
+					Please check that the derivation respects all the explicit and implicit constraints..."	
+					raise e
+				end
+*/
+			result := void
+			end
+			
+			operation addAdaptation(d : Derivation, a : Adaptation) is do
+				stdio.writeln("addAdaptation "+a.toString)
+				if(not(a.isOptional).orElse{v | d.selectedOptions.contains(a)}) then
+					adapt.add(a)
+				end
+			end
+			
+			operation addConjunction(d : Derivation, c : EntityConjunction) is do
+				stdio.writeln("addConjunction "+c.toString)
+				if(not(c.isOptional).orElse{v | d.selectedOptions.contains(c)}) then
+					c.~and.each{e |
+						var a:Adaptation
+						a?=e
+						if(a!=void) then
+							addAdaptation(d,a)
+						else
+							var alt:EntityAlternative
+							alt?=e
+							if(alt!=void) then
+								addAlternative(d,alt)
+							else
+								var conj:EntityConjunction
+								conj?=e
+								if(conj!=void) then
+									addConjunction(d,conj)
+								end
+							end
+						end
+					}
+				end
+			end
+			
+			operation addAlternative(d : Derivation, alt : EntityAlternative) is do
+				stdio.writeln("addAlternative "+alt.toString)
+				if(d.elements.exists{e | e.alternative==alt}) then
+					var v : AdapterElement 
+					var elt : DerivationElement
+					elt := d.elements.select{e | e.alternative==alt}.one
+					v := elt.selectedVariant
+					var a : Adaptation
+					a ?= v
+					if(a != void) then
+						addAdaptation(d,a)
+					else
+					   var altern : EntityAlternative
+					   altern ?= v
+					   if(altern != void) then
+					   		addAlternative(d,altern)
+					   else
+					   		var c:EntityConjunction
+					   		c ?= v
+					   		if(c != void) then
+					   			addConjunction(d,c)
+					   		end
+					   end
+					end
+				else
+					if(not(alt.isOptional).orElse{v | d.selectedOptions.contains(alt)}) then
+						self.alternatives.add(alt)
+					end
+				end
+			end
+
+			
+			operation isConcretizable() : Boolean is do
+				result:=(alternatives.size==0)
+			end			
+		}
+		
+		class NonApplicableDerivation inherits kermeta::exceptions::Exception {
+			
+		}		
+	}
+}
+
