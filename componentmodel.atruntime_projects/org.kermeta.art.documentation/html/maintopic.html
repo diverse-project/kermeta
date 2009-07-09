@@ -3,11 +3,38 @@
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
-	<title>Main Topic</title>
+	<title>Architecture Metamodel</title>
 </head>
 
 <body>
-<h1>Main Topic</h1>
-TODO describe the art metamodel, the user interface, the samples, the provided component services...
+<h1>Architecture Metamodel</h1>
+This document describes the Architecture Metamodel we use in DiVA. This metamodel and all the tools supporting this metamodel are open-source and are (to be) integrated in the DiVA Studio.
+
+<h2>Description</h2>
+The metamodel (main meta-classes) is illustrated in the Figure below. Details about this metamodel can be found in <a href="http://www.irisa.fr/triskell/publis/2008/Morin08e.pdf">K@RT: An Aspect-Oriented and Model-Oriented
+Framework for Dynamic Software Product Lines</a>
+<br/><br/>
+This core metamodel only contains the concepts and relationships we need to describe the architecture of a running system. This way, we can reduce the memory overhead caused by maintaining a model at runtime. It clearly separates the notion of component types and component instances.
+<br/>
+<img src="./fig/architectureMM.png" width="1024"></img>
+<br/>
+A component type contains some ports. Each port has a cardinality (upper and lower bounds) indicating if the port is optional (lowerBound = 0) or mandatory (lowerBound > 0). It also indicate if the port only allows single bindings (upperBound = 1) or multiple bindings (upperBound > 1). A port also declares a role (client or server) and is associated to a service. A service encapsulates some operations, defined by a name, a return type and some parameters. A service has a similar structure as Java interface.
+<br/>
+<br/>
+Component instances define the actual topology of a running system. A component has a type and a state (ON/OFF), specifying whether the component is started or stopped. It can be bound to other instances by a transmission binding, linking a provided service (server port) to a required service (client port). A composite instance can additionally declare sub-instances and delegation bindings. A delegation binding specifies that a service from a sub-component is exported by the composite instance.
+
+<h2>Tools supporting this Metamodel</h2>
+<h3>Graphical Editor</h3>
+At design-time, we use the open-source <a href="http://www.eclipse.org/stp/sca/">SCA (Software Component Architecture)</a> metamodel for the following reasons: the concepts offered by SCA are well aligned with the concepts we need in DiVA, it is supported by a strong consortium (IBM, Oracle, SAP, etc), it has an intuitive and easy to use graphical editor. This metamodel is mapped to our core metamodel via a model transformation written in <a href="http://www.kermeta.org">Kermeta</a>. SCA is included in DiVA Studio. 
+
+<h3>SCA to Architecture MM</h3>
+The transformation from SCA to the DiVA Architecture MM is realized by the <b>org.kermeta.art.sca2runtime</b> plugin.
+
+<h3>Architecture MM to SCA</h3>
+The transformation from the DiVA Architecture MM to SCA is realized by the <b>org.kermeta.art.runtime2sca</b> plugin.
+
+<h3>Invariant Checker</h3>
+The DiVA architecture MM is aspectized with Kermeta invariants in <b>eu.ict-diva.component.checker</b>. These invariants mainly check well formedness rules.
+
 </body>
 </html>
