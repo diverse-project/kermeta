@@ -1,0 +1,86 @@
+/* $Id:$ 
+ * Creation : July 9, 2009
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            bmorin
+ */
+@mainClass "root_package::Main"
+@mainOperation "main"
+
+
+
+package root_package;
+
+
+require kermeta
+require "platform:/resource/org.kermeta.art.art2spring/src/kermeta/art2spring.kmt"
+require "platform:/resource/org.kermeta.art.sca2runtime/metamodel/sca.kmt"
+
+
+using kermeta::persistence
+using kermeta::standard
+using kermeta::io
+
+using art2spring
+using art
+
+using sca
+
+class Main
+{
+	operation main(modelUri : String) : Void is do
+		/*var composite : Composite init loadSCAModel(modelUri)
+		var mapper : SCAtoART init SCAtoART.new
+		mapper.scaComposite := composite 
+
+		mapper.sca2art		
+		var system : System init mapper.artSystem*/
+	
+	 
+		var system : System init loadARTModel(modelUri)
+		var toSpring : ART2Spring init ART2Spring.new 
+		
+		var file : FileIO init FileIO.new
+		stdio.errorln(modelUri.substring(0,modelUri.size-3)+"xml")
+		
+		file.writeTextFile(modelUri.substring(0,modelUri.size-3)+"xml",toSpring.art2spring(system))
+		stdio.writeln(toSpring.art2spring(system))
+	end
+	
+	operation loadARTModel(modelUri : String) : System is
+	do
+		var repository : Repository init EMFRepository.new
+		var resource : Resource
+		var system : System
+		var composite : System
+				
+		resource := repository.createResource(modelUri, "http://art")
+		resource.load
+		
+		var elements : Set<Object> init resource.instances
+		
+		system := elements.select { e | System.isInstance(e) }.one.asType(System)
+       	
+    	
+    	result := system
+	end
+	
+	operation loadSCAModel(modelUri : String) : Composite is
+	do
+		var repository : Repository init EMFRepository.new
+		var resource : Resource
+		var root : DocumentRoot
+		var composite : Composite
+				
+		resource := repository.createResource(modelUri, "http://www.osoa.org/xmlns/sca/1.0")
+		resource.load
+		
+		var elements : Set<Object> init resource.instances
+		
+		root := elements.select { e | DocumentRoot.isInstance(e) }.one.asType(DocumentRoot)
+       	composite := root.composite.one
+    	
+    	result := composite
+	end
+}

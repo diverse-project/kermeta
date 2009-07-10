@@ -1,0 +1,52 @@
+package art2spring;
+require kermeta
+require "http://art"
+using kermeta::standard
+using kermeta::utils
+using art
+using art::type
+using art::instance
+using art::implem
+class ART2Spring{
+operation art2spring(system : System):String is do
+var _res: StringBuffer init StringBuffer.new
+_res.append("\n<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<beans xmlns=\"http://www.springframework.org/schema/beans\"\n\txmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\n\txmlns:osgi=\"http://www.springframework.org/schema/osgi\"\n\txsi:schemaLocation=\"http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/osgi http://www.springframework.org/schema/osgi/spring-osgi.xsd\">\n\n<!-- Generated factories, from component types -->\t\n")
+system.types.each{ t | 
+_res.append("\t<osgi:reference id=\"factory")
+_res.append(t.name)
+_res.append("\" interface=\"factoryint.Factory\"\n\tfilter=\"(Factory=")
+_res.append(t.name)
+_res.append(")\"/>\n")
+}
+_res.append("\t\n<!-- Generated components, from component instances -->\t\n")
+system.root.subComponent.each{ c | 
+_res.append("\t<bean name=\"")
+_res.append(c.name)
+_res.append("\" id=\"")
+_res.append(c.name)
+_res.append("\" class=\"")
+_res.append(c.implem.asType(OSGiComponent).implementingClass)
+_res.append("\" factory-bean=\"factory")
+_res.append(c.type.name)
+_res.append("\"  factory-method=\"createComponent\">\n")
+c.type.port.each{ p | 
+_res.append("")
+if p.role == "client" then
+_res.append("\t\t<property name=\"")
+_res.append(p.name)
+_res.append("\" ref=\"")
+if c.binding.exists{b | b.client == p} then
+_res.append(c.binding.detect{b | b.client == p}.serverInstance.name)
+else
+_res.append("null")
+end
+_res.append("\"></property>\n")
+end
+_res.append("")
+}
+_res.append("\t</bean>\n")
+}
+_res.append("</beans>")
+result := _res.toString
+end
+}

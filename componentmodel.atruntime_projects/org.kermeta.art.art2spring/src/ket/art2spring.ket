@@ -1,0 +1,32 @@
+<%@ket
+package="art2spring"
+require="http://art"
+using="art art::type art::instance art::implem"
+isAspectClass="false"
+class="ART2Spring"
+ismethod="false"operation="art2spring"
+parameters="system : System"
+%>
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:osgi="http://www.springframework.org/schema/osgi"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/osgi http://www.springframework.org/schema/osgi/spring-osgi.xsd">
+
+<!-- Generated factories, from component types -->	
+<%system.types.each{ t | %>
+	<osgi:reference id="factory<%=t.name%>" interface="factoryint.Factory"
+	filter="(Factory=<%=t.name%>)"/>
+<%}%>	
+	
+<!-- Generated components, from component instances -->	
+<%system.root.subComponent.each{ c | %>
+	<bean name="<%=c.name%>" id="<%=c.name%>" class="<%=c.implem.asType(OSGiComponent).implementingClass%>" factory-bean="factory<%=c.type.name%>"  factory-method="createComponent">
+	<%c.type.port.each{ p | %>
+		<%if p.role == "client" then%>
+		<property name="<%=p.name%>" ref="<%if c.binding.exists{b | b.client == p} then%><%=c.binding.detect{b | b.client == p}.serverInstance.name%><%else%>null<%end%>"></property>
+		<%end%>
+	<%}%>	
+	</bean>
+<%}%>
+</beans>
