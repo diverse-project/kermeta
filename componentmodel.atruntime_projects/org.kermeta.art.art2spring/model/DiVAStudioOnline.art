@@ -24,23 +24,23 @@
   <services xsi:type="type:FunctionalService" name="MMContext"/>
   <services xsi:type="type:FunctionalService" name="MMDSPL"/>
   <services xsi:type="type:FunctionalService" name="MMConfiguration"/>
-  <types xsi:type="type:PrimitiveType" name="&lt;void>">
+  <types xsi:type="type:PrimitiveType" name="ReasoningEngine">
     <port name="updateContext" service="//@services.0" role="server"/>
     <port name="loadDSPL" service="//@services.1" role="server"/>
     <port name="loadDSPL" lower="1" upper="-1" isOptional="false" service="//@services.1" role="client"/>
   </types>
-  <types xsi:type="type:PrimitiveType" name="&lt;void>">
+  <types xsi:type="type:PrimitiveType" name="AspectModelWeaver">
     <port name="loadDSPL" service="//@services.1" role="server"/>
     <port name="checkConfiguration" lower="1" upper="-1" isOptional="false" service="//@services.2" role="client"/>
     <port name="loadConfiguration" lower="1" upper="-1" isOptional="false" service="//@services.2" role="client"/>
   </types>
-  <types xsi:type="type:PrimitiveType" name="&lt;void>">
+  <types xsi:type="type:PrimitiveType" name="OnlineConfigurationChecker">
     <port name="checkConfiguration" service="//@services.2" role="server"/>
   </types>
-  <types xsi:type="type:PrimitiveType" name="&lt;void>">
+  <types xsi:type="type:PrimitiveType" name="BusinessConfigurationManager">
     <port name="loadConfiguration" service="//@services.2" role="server"/>
   </types>
-  <types xsi:type="type:PrimitiveType" name="&lt;void>">
+  <types xsi:type="type:PrimitiveType" name="ContextMonitoring">
     <port name="updateContext" lower="1" upper="-1" isOptional="false" service="//@services.0" role="client"/>
   </types>
 </art:System>

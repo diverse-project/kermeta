@@ -6,30 +6,30 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/osgi http://www.springframework.org/schema/osgi/spring-osgi.xsd">
 
 <!-- Generated factories, from component types -->	
-	<osgi:reference id="factory<void>" interface="factoryint.Factory"
-	filter="(Factory=<void>)"/>
-	<osgi:reference id="factory<void>" interface="factoryint.Factory"
-	filter="(Factory=<void>)"/>
-	<osgi:reference id="factory<void>" interface="factoryint.Factory"
-	filter="(Factory=<void>)"/>
-	<osgi:reference id="factory<void>" interface="factoryint.Factory"
-	filter="(Factory=<void>)"/>
-	<osgi:reference id="factory<void>" interface="factoryint.Factory"
-	filter="(Factory=<void>)"/>
+	<osgi:reference id="factoryReasoningEngine" interface="factoryint.Factory"
+	filter="(Factory=ReasoningEngine)"/>
+	<osgi:reference id="factoryAspectModelWeaver" interface="factoryint.Factory"
+	filter="(Factory=AspectModelWeaver)"/>
+	<osgi:reference id="factoryOnlineConfigurationChecker" interface="factoryint.Factory"
+	filter="(Factory=OnlineConfigurationChecker)"/>
+	<osgi:reference id="factoryBusinessConfigurationManager" interface="factoryint.Factory"
+	filter="(Factory=BusinessConfigurationManager)"/>
+	<osgi:reference id="factoryContextMonitoring" interface="factoryint.Factory"
+	filter="(Factory=ContextMonitoring)"/>
 	
 <!-- Generated components, from component instances -->	
-	<bean name="defaultReasoningEngine" id="defaultReasoningEngine" class="DefaultReasoningEngine" factory-bean="factory<void>"  factory-method="createComponent">
+	<bean name="defaultReasoningEngine" id="defaultReasoningEngine" class="DefaultReasoningEngine" factory-bean="factoryReasoningEngine"  factory-method="createComponent">
 		<property name="loadDSPL" ref="Smartadapters4diva"></property>
 	</bean>
-	<bean name="Smartadapters4diva" id="Smartadapters4diva" class="SmartAdapter4DiVA" factory-bean="factory<void>"  factory-method="createComponent">
+	<bean name="Smartadapters4diva" id="Smartadapters4diva" class="SmartAdapter4DiVA" factory-bean="factoryAspectModelWeaver"  factory-method="createComponent">
 		<property name="checkConfiguration" ref="StructuralInvariantChecker"></property>
 		<property name="loadConfiguration" ref="defaultBusinessConfigurationManager"></property>
 	</bean>
-	<bean name="StructuralInvariantChecker" id="StructuralInvariantChecker" class="StructuralInvariantChecker" factory-bean="factory<void>"  factory-method="createComponent">
+	<bean name="StructuralInvariantChecker" id="StructuralInvariantChecker" class="StructuralInvariantChecker" factory-bean="factoryOnlineConfigurationChecker"  factory-method="createComponent">
 	</bean>
-	<bean name="defaultBusinessConfigurationManager" id="defaultBusinessConfigurationManager" class="DefaultConfigurationManager" factory-bean="factory<void>"  factory-method="createComponent">
+	<bean name="defaultBusinessConfigurationManager" id="defaultBusinessConfigurationManager" class="DefaultConfigurationManager" factory-bean="factoryBusinessConfigurationManager"  factory-method="createComponent">
 	</bean>
-	<bean name="defaultContextMonitoring" id="defaultContextMonitoring" class="DefaultContextMonitoring" factory-bean="factory<void>"  factory-method="createComponent">
+	<bean name="defaultContextMonitoring" id="defaultContextMonitoring" class="DefaultContextMonitoring" factory-bean="factoryContextMonitoring"  factory-method="createComponent">
 		<property name="updateContext" ref="defaultReasoningEngine"></property>
 	</bean>
 </beans>
