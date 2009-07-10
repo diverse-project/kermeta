@@ -41,5 +41,7 @@ require "standard/java.kmt"
 
 require "ecore/ecore_compatibility.kmt"
 
+require "ecore/xmlType_compatibility.kmt"
+
 //require "utils/StringBuffer.kmt"
  

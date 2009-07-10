@@ -1,0 +1,27 @@
+/* $Id: ecore_compatibility.kmt,v 1.5 2008-08-21 15:48:24 cfaucher Exp $
+ * Creation date: Aug, 2007
+ * License: EPL
+ * Copyright: INRIA
+ * Authors: 
+ *		Didier Vojtisek
+ */
+
+/** 
+ * Contains the definition of a Kermeta classes used for compatibility with XMLType.ecore 
+ * 
+ */
+@uri "http://www.kermeta.org/kermeta/1_2_0//kermeta/xmltype"
+package kermeta::xmltype;
+require "../Standard.kmt"
+
+/**
+ * Kermeta representation of EMF type::QName from XMLType.ecore
+ * 
+ */
+class QName
+{
+	/**
+	 * internal value of this QName
+	 */
+	attribute localPart : kermeta::standard::String
+}
