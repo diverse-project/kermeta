@@ -126,13 +126,13 @@ public interface ImplemPackage extends EPackage {
 	int OS_GI_COMPONENT = 2;
 
 	/**
-	 * The feature id for the '<em><b>URL</b></em>' attribute.
+	 * The feature id for the '<em><b>Implementing Class</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int OS_GI_COMPONENT__URL = COMPONENT_IMPLEMENTATION_FEATURE_COUNT + 0;
+	int OS_GI_COMPONENT__IMPLEMENTING_CLASS = COMPONENT_IMPLEMENTATION_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of structural features of the '<em>OS Gi Component</em>' class.
@@ -244,15 +244,15 @@ public interface ImplemPackage extends EPackage {
 	EClass getOSGiComponent();
 
 	/**
-	 * Returns the meta object for the attribute '{@link art.implem.OSGiComponent#getURL <em>URL</em>}'.
+	 * Returns the meta object for the attribute '{@link art.implem.OSGiComponent#getImplementingClass <em>Implementing Class</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>URL</em>'.
-	 * @see art.implem.OSGiComponent#getURL()
+	 * @return the meta object for the attribute '<em>Implementing Class</em>'.
+	 * @see art.implem.OSGiComponent#getImplementingClass()
 	 * @see #getOSGiComponent()
 	 * @generated
 	 */
-	EAttribute getOSGiComponent_URL();
+	EAttribute getOSGiComponent_ImplementingClass();
 
 	/**
 	 * Returns the meta object for class '{@link art.implem.PortImplementation <em>Port Implementation</em>}'.
@@ -354,12 +354,12 @@ public interface ImplemPackage extends EPackage {
 		EClass OS_GI_COMPONENT = eINSTANCE.getOSGiComponent();
 
 		/**
-		 * The meta object literal for the '<em><b>URL</b></em>' attribute feature.
+		 * The meta object literal for the '<em><b>Implementing Class</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute OS_GI_COMPONENT__URL = eINSTANCE.getOSGiComponent_URL();
+		EAttribute OS_GI_COMPONENT__IMPLEMENTING_CLASS = eINSTANCE.getOSGiComponent_ImplementingClass();
 
 		/**
 		 * The meta object literal for the '{@link art.implem.impl.PortImplementationImpl <em>Port Implementation</em>}' class.

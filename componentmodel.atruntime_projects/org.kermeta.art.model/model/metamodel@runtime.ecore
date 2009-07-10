@@ -131,7 +131,8 @@
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="contentDesc" eType="#//String"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="OSGiComponent" eSuperTypes="#//implem/ComponentImplementation">
-      <eStructuralFeatures xsi:type="ecore:EAttribute" name="URL" lowerBound="1" eType="#//String"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="implementingClass" lowerBound="1"
+          eType="#//String"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="PortImplementation"/>
     <eClassifiers xsi:type="ecore:EClass" name="OSGiPort" eSuperTypes="#//implem/PortImplementation">

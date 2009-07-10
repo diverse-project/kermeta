@@ -16,7 +16,7 @@ import org.eclipse.emf.ecore.EObject;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link art.implem.OSGiComponent#getURL <em>URL</em>}</li>
+ *   <li>{@link art.implem.OSGiComponent#getImplementingClass <em>Implementing Class</em>}</li>
  * </ul>
  * </p>
  *
@@ -26,29 +26,29 @@ import org.eclipse.emf.ecore.EObject;
  */
 public interface OSGiComponent extends ComponentImplementation {
 	/**
-	 * Returns the value of the '<em><b>URL</b></em>' attribute.
+	 * Returns the value of the '<em><b>Implementing Class</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>URL</em>' attribute isn't clear,
+	 * If the meaning of the '<em>Implementing Class</em>' attribute isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>URL</em>' attribute.
-	 * @see #setURL(String)
-	 * @see art.implem.ImplemPackage#getOSGiComponent_URL()
+	 * @return the value of the '<em>Implementing Class</em>' attribute.
+	 * @see #setImplementingClass(String)
+	 * @see art.implem.ImplemPackage#getOSGiComponent_ImplementingClass()
 	 * @model dataType="art.String" required="true"
 	 * @generated
 	 */
-	String getURL();
+	String getImplementingClass();
 
 	/**
-	 * Sets the value of the '{@link art.implem.OSGiComponent#getURL <em>URL</em>}' attribute.
+	 * Sets the value of the '{@link art.implem.OSGiComponent#getImplementingClass <em>Implementing Class</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>URL</em>' attribute.
-	 * @see #getURL()
+	 * @param value the new value of the '<em>Implementing Class</em>' attribute.
+	 * @see #getImplementingClass()
 	 * @generated
 	 */
-	void setURL(String value);
+	void setImplementingClass(String value);
 
 } // OSGiComponent

@@ -196,7 +196,7 @@ public class ImplemPackageImpl extends EPackageImpl implements ImplemPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getOSGiComponent_URL() {
+	public EAttribute getOSGiComponent_ImplementingClass() {
 		return (EAttribute)osGiComponentEClass.getEStructuralFeatures().get(0);
 	}
 
@@ -262,7 +262,7 @@ public class ImplemPackageImpl extends EPackageImpl implements ImplemPackage {
 		createEAttribute(fractalComponentEClass, FRACTAL_COMPONENT__CONTENT_DESC);
 
 		osGiComponentEClass = createEClass(OS_GI_COMPONENT);
-		createEAttribute(osGiComponentEClass, OS_GI_COMPONENT__URL);
+		createEAttribute(osGiComponentEClass, OS_GI_COMPONENT__IMPLEMENTING_CLASS);
 
 		portImplementationEClass = createEClass(PORT_IMPLEMENTATION);
 
@@ -313,7 +313,7 @@ public class ImplemPackageImpl extends EPackageImpl implements ImplemPackage {
 		initEAttribute(getFractalComponent_ContentDesc(), theArtPackage.getString(), "contentDesc", null, 0, 1, FractalComponent.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(osGiComponentEClass, OSGiComponent.class, "OSGiComponent", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getOSGiComponent_URL(), theArtPackage.getString(), "URL", null, 1, 1, OSGiComponent.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getOSGiComponent_ImplementingClass(), theArtPackage.getString(), "implementingClass", null, 1, 1, OSGiComponent.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(portImplementationEClass, PortImplementation.class, "PortImplementation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 

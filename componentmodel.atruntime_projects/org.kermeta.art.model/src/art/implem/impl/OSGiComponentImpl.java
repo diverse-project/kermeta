@@ -23,7 +23,7 @@ import org.eclipse.emf.ecore.impl.EObjectImpl;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link art.implem.impl.OSGiComponentImpl#getURL <em>URL</em>}</li>
+ *   <li>{@link art.implem.impl.OSGiComponentImpl#getImplementingClass <em>Implementing Class</em>}</li>
  * </ul>
  * </p>
  *
@@ -31,24 +31,24 @@ import org.eclipse.emf.ecore.impl.EObjectImpl;
  */
 public class OSGiComponentImpl extends ComponentImplementationImpl implements OSGiComponent {
 	/**
-	 * The default value of the '{@link #getURL() <em>URL</em>}' attribute.
+	 * The default value of the '{@link #getImplementingClass() <em>Implementing Class</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getURL()
+	 * @see #getImplementingClass()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final String URL_EDEFAULT = null;
+	protected static final String IMPLEMENTING_CLASS_EDEFAULT = null;
 
 	/**
-	 * The cached value of the '{@link #getURL() <em>URL</em>}' attribute.
+	 * The cached value of the '{@link #getImplementingClass() <em>Implementing Class</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getURL()
+	 * @see #getImplementingClass()
 	 * @generated
 	 * @ordered
 	 */
-	protected String url = URL_EDEFAULT;
+	protected String implementingClass = IMPLEMENTING_CLASS_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -74,8 +74,8 @@ public class OSGiComponentImpl extends ComponentImplementationImpl implements OS
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public String getURL() {
-		return url;
+	public String getImplementingClass() {
+		return implementingClass;
 	}
 
 	/**
@@ -83,11 +83,11 @@ public class OSGiComponentImpl extends ComponentImplementationImpl implements OS
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setURL(String newURL) {
-		String oldURL = url;
-		url = newURL;
+	public void setImplementingClass(String newImplementingClass) {
+		String oldImplementingClass = implementingClass;
+		implementingClass = newImplementingClass;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ImplemPackage.OS_GI_COMPONENT__URL, oldURL, url));
+			eNotify(new ENotificationImpl(this, Notification.SET, ImplemPackage.OS_GI_COMPONENT__IMPLEMENTING_CLASS, oldImplementingClass, implementingClass));
 	}
 
 	/**
@@ -98,8 +98,8 @@ public class OSGiComponentImpl extends ComponentImplementationImpl implements OS
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case ImplemPackage.OS_GI_COMPONENT__URL:
-				return getURL();
+			case ImplemPackage.OS_GI_COMPONENT__IMPLEMENTING_CLASS:
+				return getImplementingClass();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -112,8 +112,8 @@ public class OSGiComponentImpl extends ComponentImplementationImpl implements OS
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case ImplemPackage.OS_GI_COMPONENT__URL:
-				setURL((String)newValue);
+			case ImplemPackage.OS_GI_COMPONENT__IMPLEMENTING_CLASS:
+				setImplementingClass((String)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -127,8 +127,8 @@ public class OSGiComponentImpl extends ComponentImplementationImpl implements OS
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case ImplemPackage.OS_GI_COMPONENT__URL:
-				setURL(URL_EDEFAULT);
+			case ImplemPackage.OS_GI_COMPONENT__IMPLEMENTING_CLASS:
+				setImplementingClass(IMPLEMENTING_CLASS_EDEFAULT);
 				return;
 		}
 		super.eUnset(featureID);
@@ -142,8 +142,8 @@ public class OSGiComponentImpl extends ComponentImplementationImpl implements OS
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case ImplemPackage.OS_GI_COMPONENT__URL:
-				return URL_EDEFAULT == null ? url != null : !URL_EDEFAULT.equals(url);
+			case ImplemPackage.OS_GI_COMPONENT__IMPLEMENTING_CLASS:
+				return IMPLEMENTING_CLASS_EDEFAULT == null ? implementingClass != null : !IMPLEMENTING_CLASS_EDEFAULT.equals(implementingClass);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -158,8 +158,8 @@ public class OSGiComponentImpl extends ComponentImplementationImpl implements OS
 		if (eIsProxy()) return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (URL: ");
-		result.append(url);
+		result.append(" (implementingClass: ");
+		result.append(implementingClass);
 		result.append(')');
 		return result.toString();
 	}

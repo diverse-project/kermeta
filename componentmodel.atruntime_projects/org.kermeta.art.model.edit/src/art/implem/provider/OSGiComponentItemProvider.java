@@ -66,25 +66,25 @@ public class OSGiComponentItemProvider
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
-			addURLPropertyDescriptor(object);
+			addImplementingClassPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
 
 	/**
-	 * This adds a property descriptor for the URL feature.
+	 * This adds a property descriptor for the Implementing Class feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void addURLPropertyDescriptor(Object object) {
+	protected void addImplementingClassPropertyDescriptor(Object object) {
 		itemPropertyDescriptors.add
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_OSGiComponent_URL_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_OSGiComponent_URL_feature", "_UI_OSGiComponent_type"),
-				 ImplemPackage.Literals.OS_GI_COMPONENT__URL,
+				 getString("_UI_OSGiComponent_implementingClass_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_OSGiComponent_implementingClass_feature", "_UI_OSGiComponent_type"),
+				 ImplemPackage.Literals.OS_GI_COMPONENT__IMPLEMENTING_CLASS,
 				 true,
 				 false,
 				 false,
@@ -112,7 +112,7 @@ public class OSGiComponentItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((OSGiComponent)object).getURL();
+		String label = ((OSGiComponent)object).getImplementingClass();
 		return label == null || label.length() == 0 ?
 			getString("_UI_OSGiComponent_type") :
 			getString("_UI_OSGiComponent_type") + " " + label;
@@ -130,7 +130,7 @@ public class OSGiComponentItemProvider
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(OSGiComponent.class)) {
-			case ImplemPackage.OS_GI_COMPONENT__URL:
+			case ImplemPackage.OS_GI_COMPONENT__IMPLEMENTING_CLASS:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 		}
