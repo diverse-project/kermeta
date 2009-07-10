@@ -18,10 +18,7 @@ require "../Standard.kmt"
  * Kermeta representation of EMF type::QName from XMLType.ecore
  * 
  */
-class QName
+class QName inherits kermeta::standard::String
 {
-	/**
-	 * internal value of this QName
-	 */
-	attribute localPart : kermeta::standard::String
+	
 }

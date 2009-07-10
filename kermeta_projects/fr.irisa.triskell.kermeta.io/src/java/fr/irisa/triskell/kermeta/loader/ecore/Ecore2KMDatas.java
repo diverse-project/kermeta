@@ -212,7 +212,8 @@ public class Ecore2KMDatas {
 		primitive_types_mapping.put("java.lang.Float", 	    "kermeta::standard::Real");
 		primitive_types_mapping.put("float", 	            "kermeta::standard::Real");
 		primitive_types_mapping.put("org.eclipse.emf.ecore.util.FeatureMap$Entry", 	"kermeta::ecore::EFeatureMapEntry");		
-	
+		primitive_types_mapping.put("javax.xml.namespace.QName", 	"kermeta::xmltype::QName");		
+
 	
 		value_types.add("kermeta::language::structure::String");
 		value_types.add("kermeta::language::structure::Boolean");

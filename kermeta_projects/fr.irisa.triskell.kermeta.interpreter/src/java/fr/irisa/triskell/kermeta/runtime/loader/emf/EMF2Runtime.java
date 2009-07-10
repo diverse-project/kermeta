@@ -535,7 +535,10 @@ public class EMF2Runtime {
     		internalLog.warn("TODO : The type of <"+fvalue+"> has not been handled yet. Replaced by null. ");
     		// create a runtimeObject that would be able to embedd a java class?
     		rovalue = rofactory.getMemory().voidINSTANCE;
-    	}    	
+    	}  
+    	else if (instance_classname.equals("javax.xml.namespace.QName")){
+    		rovalue = fr.irisa.triskell.kermeta.runtime.basetypes.String.create(fvalue!=null?fvalue.toString():"", rofactory);
+    	}
     	else // should never happen
     	{
     		internalLog.warn("The type of <"+fvalue+"> has not been handled yet("+instance_classname+"). Replaced by Void.");
