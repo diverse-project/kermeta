@@ -64,6 +64,7 @@ class Main
 	
 	operation saveARTModel(system : System, modelUri : String) is
 	do
+		stdio.writeln("saving ART model to "+modelUri)
     	var repository:EMFRepository init EMFRepository.new
 	    var resource : Resource init repository.createResource(modelUri , "http://art")
 	    resource.instances.add(system)

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="ISO-8859-15"?>
+<sca:composite xmlns:sca="http://www.osoa.org/xmlns/sca/1.0" name="DiVAStudioOnline">
+  <sca:component constrainingType="ReasoningEngine" name="defaultReasoningEngine">
+    <sca:implementation.java class="DefaultReasoningEngine"/>
+    <sca:service name="updateContext">
+      <sca:interface.java interface="MMContext"/>
+    </sca:service>
+    <sca:service name="loadDSPL">
+      <sca:interface.java interface="MMDSPL"/>
+    </sca:service>
+    <sca:reference name="loadDSPL">
+      <sca:interface.java interface="MMDSPL"/>
+    </sca:reference>
+  </sca:component>
+  <sca:component constrainingType="AspectModelWeaver" name="Smartadapters4diva">
+    <sca:implementation.java class="SmartAdapter4DiVA"/>
+    <sca:service name="loadDSPL">
+      <sca:interface.java interface="MMDSPL"/>
+    </sca:service>
+    <sca:reference name="checkConfiguration">
+      <sca:interface.java interface="MMConfiguration"/>
+    </sca:reference>
+    <sca:reference name="loadConfiguration">
+      <sca:interface.java interface="MMConfiguration"/>
+    </sca:reference>
+  </sca:component>
+  <sca:component constrainingType="OnlineConfigurationChecker" name="StructuralInvariantChecker">
+    <sca:implementation.java class="StructuralInvariantChecker"/>
+    <sca:service name="checkConfiguration">
+      <sca:interface.java interface="MMConfiguration"/>
+    </sca:service>
+  </sca:component>
+  <sca:component constrainingType="BusinessConfigurationManager" name="defaultBusinessConfigurationManager">
+    <sca:implementation.java class="DefaultConfigurationManager"/>
+    <sca:service name="loadConfiguration">
+      <sca:interface.java interface="MMConfiguration"/>
+    </sca:service>
+  </sca:component>
+  <sca:component constrainingType="ContextMonitoring" name="defaultContextMonitoring">
+    <sca:implementation.java class="DefaultContextMonitoring"/>
+    <sca:reference name="updateContext">
+      <sca:interface.java interface="MMContext"/>
+    </sca:reference>
+  </sca:component>
+  <sca:wire source="Smartadapters4diva/checkConfiguration" target="StructuralInvariantChecker/checkConfiguration"/>
+  <sca:wire source="Smartadapters4diva/loadConfiguration" target="defaultBusinessConfigurationManager/loadConfiguration"/>
+  <sca:wire source="defaultReasoningEngine/loadDSPL" target="Smartadapters4diva/loadDSPL"/>
+  <sca:wire source="defaultContextMonitoring/updateContext" target="defaultReasoningEngine/updateContext"/>
+</sca:composite>

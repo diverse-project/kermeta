@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<launchConfiguration type="org.kermeta.debug.runConfiguration">
+<stringAttribute key="fr.irisa.triskell.kermeta.launching.KM_ARGUMENTS" value="platform:/resource/org.kermeta.art.sca2runtime/model/DiVAStudioOnline_instance.composite platform:/resource/org.kermeta.art.sca2runtime/model/DiVAStudioOnline.art"/>
+<stringAttribute key="fr.irisa.triskell.kermeta.launching.KM_CLASSQNAME" value="root_package::Main"/>
+<stringAttribute key="fr.irisa.triskell.kermeta.launching.KM_FILENAME" value="\org.kermeta.art.sca2runtime\src\kermeta\test.kmt"/>
+<stringAttribute key="fr.irisa.triskell.kermeta.launching.KM_OPERATIONNAME" value="main"/>
+<stringAttribute key="fr.irisa.triskell.kermeta.launching.KM_PROJECTNAME" value="Runtime2SCA"/>
+<stringAttribute key="org.kermeta.debug.DEFAULT_PATH" value="/Runtime2SCA/src/kermeta/runtime2XML"/>
+<stringAttribute key="process_factory_id" value="org.kermeta.debug.processFactory"/>
+</launchConfiguration>
