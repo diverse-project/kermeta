@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<notation:Diagram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.1/notation" xmlns:sca="http://www.osoa.org/xmlns/sca/1.0" xmi:id="_sCSx8G02Ed6_t9AnsUDFKg" type="Sca" measurementUnit="Pixel">
+  <styles xmi:type="notation:DiagramStyle" xmi:id="_sCSx8W02Ed6_t9AnsUDFKg"/>
+  <element xmi:type="sca:DocumentRoot" href="DiVAStudioOnline_instance.composite#/"/>
+</notation:Diagram>

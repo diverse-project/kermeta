@@ -56,15 +56,19 @@ aspect class SCAtoART{
 		}
 		
 		if type != void then
-			if not (type.name == cpt.constrainingType.toString) then
+			if not (type.name == /*cpt.~property.detect{p| p.name == "Type"}.~value*/cpt.constrainingType) then
 				var e : kermeta::exceptions::Exception init kermeta::exceptions::Exception.new
 				e.message := "Error: two similar component types with different names: "+type.name+" VS "+cpt.constrainingType.toString 
 				raise e 
 			end
 		else
 			type := PrimitiveType.new
-			stdio.errorln(cpt.constrainingType.toString)
-			type.name := cpt.constrainingType.toString
+			
+			//type.name := cpt.~property.detect{p| p.name == "Type"}.~value
+			
+			
+			stdio.errorln(cpt.constrainingType)
+			type.name := cpt.constrainingType
 			//type.name := ""
 			cpt.service.each{s | 
 				var port : Port init Port.new
