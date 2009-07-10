@@ -12,7 +12,7 @@ Require-Bundle: org.eclipse.core.runtime,
  fr.irisa.triskell.kermeta.model,
  fr.irisa.triskell.kermeta.io,
  fr.irisa.triskell.kermeta.interpreter,
- org.junit;bundle-version="3.8.2"
+ org.junit;bundle-version="[3.8.2,4.0.0)"
 Bundle-ActivationPolicy: lazy
 Export-Package: com.declarativa.interprolog;
   uses:="javax.swing.tree,
