@@ -9,11 +9,11 @@
             uri="http://www.kermeta.org/kompose">
       </package>
    </extension>
-   <extension
+   <!--<extension
          point="org.eclipse.ui.startup">
       <startup
             class="kompose.startup.RegisterStartup">
       </startup>
-   </extension>
+   </extension>-->
 
 </plugin>
