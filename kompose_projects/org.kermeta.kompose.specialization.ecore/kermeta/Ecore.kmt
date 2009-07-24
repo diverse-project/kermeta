@@ -4,6 +4,7 @@
  * 
  * author: Freddy Munoz - fmunoz(at)irisa.fr - Triskell Team
  * author: Mickael Clavreul - mclavreu(at)irisa.fr - Triskell Team
+ * author: Cyril Faucher - cyril.faucher(at)gmail.com - L3i, University of La Rochelle
  * 
  */
 package ecore;
@@ -115,6 +116,19 @@ class EAnnotation inherits kompose::Mergeable {
 	
 	method getStringID() : kermeta::standard::String is do
 		result := source
+	end
+}
+
+aspect class EStringToStringMapEntry inherits kompose::Mergeable {
+	method getSignature() : kompose::Signature is do
+		var s : kompose::StringSignature init 
+		kompose::StringSignature.new
+		s.sign := self.key + "_sep_" + self.~value
+		result := s
+	end
+	
+	method getStringID() : kermeta::standard::String is do
+		result := self.key + "_sep_" + self.~value
 	end
 }
 
