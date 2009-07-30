@@ -60,6 +60,7 @@ dirUnit returns [Composer c = factory.createComposer();]
   }
   :
   'EXT' ext=STRING_LITERAL
+  ('MODE' mode=(UNION {c.setMode(Modes.UNION);} | INTER {c.setMode(Modes.INTERSECTION);}))?
   'PM' pm=STRING_LITERAL
   'AM' am=STRING_LITERAL
   'CM' cm=STRING_LITERAL
@@ -201,6 +202,8 @@ CREATE  : 'create';
 TRUE    : 'true';
 FALSE   : 'false';
 COMMA   : ',';
+UNION   : 'UNION';
+INTER   : 'INTERSECTION';
 
 STRING_LITERAL : '"' (ESC | ~('"'|'\\'))* '"' ;
 INT_LITERAL: (DIGIT)*;

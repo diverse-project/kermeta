@@ -1,4 +1,4 @@
-// $ANTLR 3.1.1 /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g 2009-07-30 11:03:57
+// $ANTLR 3.1.1 /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g 2009-07-30 15:20:28
 
 package org.kermeta.kompose.core.parser;
 
@@ -9,38 +9,41 @@ import java.util.List;
 import java.util.ArrayList;
 
 public class DirectivesLexer extends Lexer {
-    public static final int DOLLAR=10;
-    public static final int INT_LITERAL=17;
-    public static final int T__29=29;
-    public static final int T__28=28;
-    public static final int SingleLineComment=26;
-    public static final int CONCAT=13;
-    public static final int ESC=23;
-    public static final int COL_COL=20;
-    public static final int LCURLY=5;
-    public static final int PRE=21;
-    public static final int EQUALS=14;
-    public static final int MINUS=16;
-    public static final int ID=8;
+    public static final int DOLLAR=12;
+    public static final int INT_LITERAL=19;
+    public static final int CONCAT=15;
+    public static final int SingleLineComment=28;
+    public static final int ESC=25;
+    public static final int COL_COL=22;
+    public static final int INTER=6;
+    public static final int LCURLY=7;
+    public static final int PRE=23;
+    public static final int EQUALS=16;
+    public static final int MINUS=18;
+    public static final int ID=10;
     public static final int EOF=-1;
-    public static final int TRUE=18;
+    public static final int TRUE=20;
+    public static final int UNION=5;
     public static final int T__30=30;
-    public static final int AS=9;
+    public static final int AS=11;
     public static final int T__31=31;
-    public static final int CREATE=7;
+    public static final int CREATE=9;
     public static final int T__32=32;
     public static final int STRING_LITERAL=4;
     public static final int T__33=33;
-    public static final int WS=25;
+    public static final int WS=27;
     public static final int T__34=34;
-    public static final int COMMA=12;
-    public static final int RCURLY=6;
-    public static final int POST=22;
-    public static final int PLUS=15;
-    public static final int DIGIT=24;
-    public static final int DOT=11;
-    public static final int FALSE=19;
-    public static final int MultiLineComment=27;
+    public static final int T__35=35;
+    public static final int T__36=36;
+    public static final int T__37=37;
+    public static final int COMMA=14;
+    public static final int RCURLY=8;
+    public static final int POST=24;
+    public static final int PLUS=17;
+    public static final int DIGIT=26;
+    public static final int DOT=13;
+    public static final int FALSE=21;
+    public static final int MultiLineComment=29;
 
     // delegates
     // delegators
@@ -55,57 +58,15 @@ public class DirectivesLexer extends Lexer {
     }
     public String getGrammarFileName() { return "/home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g"; }
 
-    // $ANTLR start "T__28"
-    public final void mT__28() throws RecognitionException {
-        try {
-            int _type = T__28;
-            int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:11:7: ( 'EXT' )
-            // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:11:9: 'EXT'
-            {
-            match("EXT"); 
-
-
-            }
-
-            state.type = _type;
-            state.channel = _channel;
-        }
-        finally {
-        }
-    }
-    // $ANTLR end "T__28"
-
-    // $ANTLR start "T__29"
-    public final void mT__29() throws RecognitionException {
-        try {
-            int _type = T__29;
-            int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:12:7: ( 'PM' )
-            // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:12:9: 'PM'
-            {
-            match("PM"); 
-
-
-            }
-
-            state.type = _type;
-            state.channel = _channel;
-        }
-        finally {
-        }
-    }
-    // $ANTLR end "T__29"
-
     // $ANTLR start "T__30"
     public final void mT__30() throws RecognitionException {
         try {
             int _type = T__30;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:13:7: ( 'AM' )
-            // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:13:9: 'AM'
+            // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:11:7: ( 'EXT' )
+            // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:11:9: 'EXT'
             {
-            match("AM"); 
+            match("EXT"); 
 
 
             }
@@ -123,10 +84,10 @@ public class DirectivesLexer extends Lexer {
         try {
             int _type = T__31;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:14:7: ( 'CM' )
-            // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:14:9: 'CM'
+            // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:12:7: ( 'MODE' )
+            // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:12:9: 'MODE'
             {
-            match("CM"); 
+            match("MODE"); 
 
 
             }
@@ -144,10 +105,10 @@ public class DirectivesLexer extends Lexer {
         try {
             int _type = T__32;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:15:7: ( 'PMPre' )
-            // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:15:9: 'PMPre'
+            // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:13:7: ( 'PM' )
+            // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:13:9: 'PM'
             {
-            match("PMPre"); 
+            match("PM"); 
 
 
             }
@@ -165,10 +126,10 @@ public class DirectivesLexer extends Lexer {
         try {
             int _type = T__33;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:16:7: ( 'AMPre' )
-            // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:16:9: 'AMPre'
+            // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:14:7: ( 'AM' )
+            // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:14:9: 'AM'
             {
-            match("AMPre"); 
+            match("AM"); 
 
 
             }
@@ -186,10 +147,10 @@ public class DirectivesLexer extends Lexer {
         try {
             int _type = T__34;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:17:7: ( 'Post' )
-            // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:17:9: 'Post'
+            // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:15:7: ( 'CM' )
+            // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:15:9: 'CM'
             {
-            match("Post"); 
+            match("CM"); 
 
 
             }
@@ -202,13 +163,76 @@ public class DirectivesLexer extends Lexer {
     }
     // $ANTLR end "T__34"
 
+    // $ANTLR start "T__35"
+    public final void mT__35() throws RecognitionException {
+        try {
+            int _type = T__35;
+            int _channel = DEFAULT_TOKEN_CHANNEL;
+            // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:16:7: ( 'PMPre' )
+            // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:16:9: 'PMPre'
+            {
+            match("PMPre"); 
+
+
+            }
+
+            state.type = _type;
+            state.channel = _channel;
+        }
+        finally {
+        }
+    }
+    // $ANTLR end "T__35"
+
+    // $ANTLR start "T__36"
+    public final void mT__36() throws RecognitionException {
+        try {
+            int _type = T__36;
+            int _channel = DEFAULT_TOKEN_CHANNEL;
+            // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:17:7: ( 'AMPre' )
+            // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:17:9: 'AMPre'
+            {
+            match("AMPre"); 
+
+
+            }
+
+            state.type = _type;
+            state.channel = _channel;
+        }
+        finally {
+        }
+    }
+    // $ANTLR end "T__36"
+
+    // $ANTLR start "T__37"
+    public final void mT__37() throws RecognitionException {
+        try {
+            int _type = T__37;
+            int _channel = DEFAULT_TOKEN_CHANNEL;
+            // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:18:7: ( 'Post' )
+            // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:18:9: 'Post'
+            {
+            match("Post"); 
+
+
+            }
+
+            state.type = _type;
+            state.channel = _channel;
+        }
+        finally {
+        }
+    }
+    // $ANTLR end "T__37"
+
     // $ANTLR start "PRE"
     public final void mPRE() throws RecognitionException {
         try {
             int _type = PRE;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:189:9: ( 'pre' )
-            // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:189:11: 'pre'
+            // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:190:9: ( 'pre' )
+            // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:190:11: 'pre'
             {
             match("pre"); 
 
@@ -228,8 +252,8 @@ public class DirectivesLexer extends Lexer {
         try {
             int _type = POST;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:190:9: ( 'post' )
-            // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:190:11: 'post'
+            // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:191:9: ( 'post' )
+            // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:191:11: 'post'
             {
             match("post"); 
 
@@ -249,8 +273,8 @@ public class DirectivesLexer extends Lexer {
         try {
             int _type = DOT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:191:9: ( '.' )
-            // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:191:11: '.'
+            // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:192:9: ( '.' )
+            // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:192:11: '.'
             {
             match('.'); 
 
@@ -269,8 +293,8 @@ public class DirectivesLexer extends Lexer {
         try {
             int _type = LCURLY;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:192:9: ( '{' )
-            // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:192:11: '{'
+            // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:193:9: ( '{' )
+            // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:193:11: '{'
             {
             match('{'); 
 
@@ -289,8 +313,8 @@ public class DirectivesLexer extends Lexer {
         try {
             int _type = RCURLY;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:193:9: ( '}' )
-            // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:193:11: '}'
+            // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:194:9: ( '}' )
+            // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:194:11: '}'
             {
             match('}'); 
 
@@ -309,8 +333,8 @@ public class DirectivesLexer extends Lexer {
         try {
             int _type = PLUS;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:194:9: ( '+' )
-            // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:194:11: '+'
+            // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:195:9: ( '+' )
+            // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:195:11: '+'
             {
             match('+'); 
 
@@ -329,8 +353,8 @@ public class DirectivesLexer extends Lexer {
         try {
             int _type = MINUS;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:195:9: ( '-' )
-            // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:195:11: '-'
+            // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:196:9: ( '-' )
+            // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:196:11: '-'
             {
             match('-'); 
 
@@ -349,8 +373,8 @@ public class DirectivesLexer extends Lexer {
         try {
             int _type = CONCAT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:196:9: ( '+=' )
-            // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:196:11: '+='
+            // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:197:9: ( '+=' )
+            // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:197:11: '+='
             {
             match("+="); 
 
@@ -370,8 +394,8 @@ public class DirectivesLexer extends Lexer {
         try {
             int _type = EQUALS;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:197:9: ( '=' )
-            // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:197:11: '='
+            // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:198:9: ( '=' )
+            // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:198:11: '='
             {
             match('='); 
 
@@ -390,8 +414,8 @@ public class DirectivesLexer extends Lexer {
         try {
             int _type = DOLLAR;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:198:9: ( '$' )
-            // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:198:11: '$'
+            // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:199:9: ( '$' )
+            // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:199:11: '$'
             {
             match('$'); 
 
@@ -410,8 +434,8 @@ public class DirectivesLexer extends Lexer {
         try {
             int _type = COL_COL;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:199:9: ( '::' )
-            // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:199:11: '::'
+            // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:200:9: ( '::' )
+            // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:200:11: '::'
             {
             match("::"); 
 
@@ -431,8 +455,8 @@ public class DirectivesLexer extends Lexer {
         try {
             int _type = AS;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:200:9: ( 'as' )
-            // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:200:11: 'as'
+            // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:201:9: ( 'as' )
+            // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:201:11: 'as'
             {
             match("as"); 
 
@@ -452,8 +476,8 @@ public class DirectivesLexer extends Lexer {
         try {
             int _type = CREATE;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:201:9: ( 'create' )
-            // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:201:11: 'create'
+            // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:202:9: ( 'create' )
+            // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:202:11: 'create'
             {
             match("create"); 
 
@@ -473,8 +497,8 @@ public class DirectivesLexer extends Lexer {
         try {
             int _type = TRUE;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:202:9: ( 'true' )
-            // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:202:11: 'true'
+            // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:203:9: ( 'true' )
+            // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:203:11: 'true'
             {
             match("true"); 
 
@@ -494,8 +518,8 @@ public class DirectivesLexer extends Lexer {
         try {
             int _type = FALSE;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:203:9: ( 'false' )
-            // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:203:11: 'false'
+            // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:204:9: ( 'false' )
+            // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:204:11: 'false'
             {
             match("false"); 
 
@@ -515,8 +539,8 @@ public class DirectivesLexer extends Lexer {
         try {
             int _type = COMMA;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:204:9: ( ',' )
-            // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:204:11: ','
+            // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:205:9: ( ',' )
+            // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:205:11: ','
             {
             match(','); 
 
@@ -530,16 +554,58 @@ public class DirectivesLexer extends Lexer {
     }
     // $ANTLR end "COMMA"
 
+    // $ANTLR start "UNION"
+    public final void mUNION() throws RecognitionException {
+        try {
+            int _type = UNION;
+            int _channel = DEFAULT_TOKEN_CHANNEL;
+            // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:206:9: ( 'UNION' )
+            // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:206:11: 'UNION'
+            {
+            match("UNION"); 
+
+
+            }
+
+            state.type = _type;
+            state.channel = _channel;
+        }
+        finally {
+        }
+    }
+    // $ANTLR end "UNION"
+
+    // $ANTLR start "INTER"
+    public final void mINTER() throws RecognitionException {
+        try {
+            int _type = INTER;
+            int _channel = DEFAULT_TOKEN_CHANNEL;
+            // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:207:9: ( 'INTERSECTION' )
+            // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:207:11: 'INTERSECTION'
+            {
+            match("INTERSECTION"); 
+
+
+            }
+
+            state.type = _type;
+            state.channel = _channel;
+        }
+        finally {
+        }
+    }
+    // $ANTLR end "INTER"
+
     // $ANTLR start "STRING_LITERAL"
     public final void mSTRING_LITERAL() throws RecognitionException {
         try {
             int _type = STRING_LITERAL;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:206:16: ( '\"' ( ESC | ~ ( '\"' | '\\\\' ) )* '\"' )
-            // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:206:18: '\"' ( ESC | ~ ( '\"' | '\\\\' ) )* '\"'
+            // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:209:16: ( '\"' ( ESC | ~ ( '\"' | '\\\\' ) )* '\"' )
+            // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:209:18: '\"' ( ESC | ~ ( '\"' | '\\\\' ) )* '\"'
             {
             match('\"'); 
-            // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:206:22: ( ESC | ~ ( '\"' | '\\\\' ) )*
+            // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:209:22: ( ESC | ~ ( '\"' | '\\\\' ) )*
             loop1:
             do {
                 int alt1=3;
@@ -555,14 +621,14 @@ public class DirectivesLexer extends Lexer {
 
                 switch (alt1) {
             	case 1 :
-            	    // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:206:23: ESC
+            	    // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:209:23: ESC
             	    {
             	    mESC(); 
 
             	    }
             	    break;
             	case 2 :
-            	    // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:206:29: ~ ( '\"' | '\\\\' )
+            	    // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:209:29: ~ ( '\"' | '\\\\' )
             	    {
             	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='!')||(input.LA(1)>='#' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
             	        input.consume();
@@ -599,10 +665,10 @@ public class DirectivesLexer extends Lexer {
         try {
             int _type = INT_LITERAL;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:207:12: ( ( DIGIT )* )
-            // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:207:14: ( DIGIT )*
+            // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:210:12: ( ( DIGIT )* )
+            // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:210:14: ( DIGIT )*
             {
-            // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:207:14: ( DIGIT )*
+            // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:210:14: ( DIGIT )*
             loop2:
             do {
                 int alt2=2;
@@ -615,7 +681,7 @@ public class DirectivesLexer extends Lexer {
 
                 switch (alt2) {
             	case 1 :
-            	    // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:207:15: DIGIT
+            	    // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:210:15: DIGIT
             	    {
             	    mDIGIT(); 
 
@@ -643,10 +709,10 @@ public class DirectivesLexer extends Lexer {
         try {
             int _type = ID;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:208:4: ( ( '~' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | DIGIT )* )
-            // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:208:6: ( '~' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | DIGIT )*
+            // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:211:4: ( ( '~' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | DIGIT )* )
+            // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:211:6: ( '~' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | DIGIT )*
             {
-            // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:208:6: ( '~' )?
+            // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:211:6: ( '~' )?
             int alt3=2;
             int LA3_0 = input.LA(1);
 
@@ -655,7 +721,7 @@ public class DirectivesLexer extends Lexer {
             }
             switch (alt3) {
                 case 1 :
-                    // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:208:7: '~'
+                    // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:211:7: '~'
                     {
                     match('~'); 
 
@@ -673,7 +739,7 @@ public class DirectivesLexer extends Lexer {
                 recover(mse);
                 throw mse;}
 
-            // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:208:41: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | DIGIT )*
+            // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:211:41: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | DIGIT )*
             loop4:
             do {
                 int alt4=2;
@@ -722,11 +788,11 @@ public class DirectivesLexer extends Lexer {
         try {
             int _type = ESC;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:209:15: ( '\\\\' ( 't' | 'f' | 'r' | 'n' | '\"' | '\\'' | '\\\\' | ( DIGIT DIGIT DIGIT ) ) )
-            // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:209:17: '\\\\' ( 't' | 'f' | 'r' | 'n' | '\"' | '\\'' | '\\\\' | ( DIGIT DIGIT DIGIT ) )
+            // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:212:15: ( '\\\\' ( 't' | 'f' | 'r' | 'n' | '\"' | '\\'' | '\\\\' | ( DIGIT DIGIT DIGIT ) ) )
+            // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:212:17: '\\\\' ( 't' | 'f' | 'r' | 'n' | '\"' | '\\'' | '\\\\' | ( DIGIT DIGIT DIGIT ) )
             {
             match('\\'); 
-            // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:209:22: ( 't' | 'f' | 'r' | 'n' | '\"' | '\\'' | '\\\\' | ( DIGIT DIGIT DIGIT ) )
+            // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:212:22: ( 't' | 'f' | 'r' | 'n' | '\"' | '\\'' | '\\\\' | ( DIGIT DIGIT DIGIT ) )
             int alt5=8;
             switch ( input.LA(1) ) {
             case 't':
@@ -787,59 +853,59 @@ public class DirectivesLexer extends Lexer {
 
             switch (alt5) {
                 case 1 :
-                    // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:209:23: 't'
+                    // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:212:23: 't'
                     {
                     match('t'); 
 
                     }
                     break;
                 case 2 :
-                    // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:209:29: 'f'
+                    // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:212:29: 'f'
                     {
                     match('f'); 
 
                     }
                     break;
                 case 3 :
-                    // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:209:35: 'r'
+                    // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:212:35: 'r'
                     {
                     match('r'); 
 
                     }
                     break;
                 case 4 :
-                    // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:209:41: 'n'
+                    // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:212:41: 'n'
                     {
                     match('n'); 
 
                     }
                     break;
                 case 5 :
-                    // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:209:47: '\"'
+                    // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:212:47: '\"'
                     {
                     match('\"'); 
 
                     }
                     break;
                 case 6 :
-                    // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:209:53: '\\''
+                    // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:212:53: '\\''
                     {
                     match('\''); 
 
                     }
                     break;
                 case 7 :
-                    // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:209:60: '\\\\'
+                    // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:212:60: '\\\\'
                     {
                     match('\\'); 
 
                     }
                     break;
                 case 8 :
-                    // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:209:67: ( DIGIT DIGIT DIGIT )
+                    // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:212:67: ( DIGIT DIGIT DIGIT )
                     {
-                    // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:209:67: ( DIGIT DIGIT DIGIT )
-                    // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:209:68: DIGIT DIGIT DIGIT
+                    // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:212:67: ( DIGIT DIGIT DIGIT )
+                    // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:212:68: DIGIT DIGIT DIGIT
                     {
                     mDIGIT(); 
                     mDIGIT(); 
@@ -867,8 +933,8 @@ public class DirectivesLexer extends Lexer {
     // $ANTLR start "DIGIT"
     public final void mDIGIT() throws RecognitionException {
         try {
-            // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:210:16: ( '0' .. '9' )
-            // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:210:18: '0' .. '9'
+            // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:213:16: ( '0' .. '9' )
+            // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:213:18: '0' .. '9'
             {
             matchRange('0','9'); 
 
@@ -885,10 +951,10 @@ public class DirectivesLexer extends Lexer {
         try {
             int _type = WS;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:215:4: ( ( ' ' | '\\t' | '\\f' | '\\n' )+ )
-            // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:215:6: ( ' ' | '\\t' | '\\f' | '\\n' )+
+            // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:218:4: ( ( ' ' | '\\t' | '\\f' | '\\n' )+ )
+            // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:218:6: ( ' ' | '\\t' | '\\f' | '\\n' )+
             {
-            // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:215:6: ( ' ' | '\\t' | '\\f' | '\\n' )+
+            // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:218:6: ( ' ' | '\\t' | '\\f' | '\\n' )+
             int cnt6=0;
             loop6:
             do {
@@ -943,12 +1009,12 @@ public class DirectivesLexer extends Lexer {
         try {
             int _type = SingleLineComment;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:216:19: ( '//' (~ ( '\\n' | '\\r' ) )* ( '\\n' | '\\r' ( '\\n' )? )? )
-            // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:216:21: '//' (~ ( '\\n' | '\\r' ) )* ( '\\n' | '\\r' ( '\\n' )? )?
+            // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:219:19: ( '//' (~ ( '\\n' | '\\r' ) )* ( '\\n' | '\\r' ( '\\n' )? )? )
+            // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:219:21: '//' (~ ( '\\n' | '\\r' ) )* ( '\\n' | '\\r' ( '\\n' )? )?
             {
             match("//"); 
 
-            // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:216:26: (~ ( '\\n' | '\\r' ) )*
+            // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:219:26: (~ ( '\\n' | '\\r' ) )*
             loop7:
             do {
                 int alt7=2;
@@ -961,7 +1027,7 @@ public class DirectivesLexer extends Lexer {
 
                 switch (alt7) {
             	case 1 :
-            	    // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:216:27: ~ ( '\\n' | '\\r' )
+            	    // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:219:27: ~ ( '\\n' | '\\r' )
             	    {
             	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='\t')||(input.LA(1)>='\u000B' && input.LA(1)<='\f')||(input.LA(1)>='\u000E' && input.LA(1)<='\uFFFF') ) {
             	        input.consume();
@@ -981,7 +1047,7 @@ public class DirectivesLexer extends Lexer {
                 }
             } while (true);
 
-            // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:216:42: ( '\\n' | '\\r' ( '\\n' )? )?
+            // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:219:42: ( '\\n' | '\\r' ( '\\n' )? )?
             int alt9=3;
             int LA9_0 = input.LA(1);
 
@@ -993,17 +1059,17 @@ public class DirectivesLexer extends Lexer {
             }
             switch (alt9) {
                 case 1 :
-                    // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:216:43: '\\n'
+                    // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:219:43: '\\n'
                     {
                     match('\n'); 
 
                     }
                     break;
                 case 2 :
-                    // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:216:48: '\\r' ( '\\n' )?
+                    // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:219:48: '\\r' ( '\\n' )?
                     {
                     match('\r'); 
-                    // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:216:52: ( '\\n' )?
+                    // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:219:52: ( '\\n' )?
                     int alt8=2;
                     int LA8_0 = input.LA(1);
 
@@ -1012,7 +1078,7 @@ public class DirectivesLexer extends Lexer {
                     }
                     switch (alt8) {
                         case 1 :
-                            // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:216:53: '\\n'
+                            // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:219:53: '\\n'
                             {
                             match('\n'); 
 
@@ -1044,12 +1110,12 @@ public class DirectivesLexer extends Lexer {
         try {
             int _type = MultiLineComment;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:217:18: ( '/*' ( options {greedy=false; } : . )* '*/' )
-            // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:217:20: '/*' ( options {greedy=false; } : . )* '*/'
+            // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:220:18: ( '/*' ( options {greedy=false; } : . )* '*/' )
+            // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:220:20: '/*' ( options {greedy=false; } : . )* '*/'
             {
             match("/*"); 
 
-            // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:217:25: ( options {greedy=false; } : . )*
+            // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:220:25: ( options {greedy=false; } : . )*
             loop10:
             do {
                 int alt10=2;
@@ -1074,7 +1140,7 @@ public class DirectivesLexer extends Lexer {
 
                 switch (alt10) {
             	case 1 :
-            	    // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:217:53: .
+            	    // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:220:53: .
             	    {
             	    matchAny(); 
 
@@ -1101,215 +1167,236 @@ public class DirectivesLexer extends Lexer {
     // $ANTLR end "MultiLineComment"
 
     public void mTokens() throws RecognitionException {
-        // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:1:8: ( T__28 | T__29 | T__30 | T__31 | T__32 | T__33 | T__34 | PRE | POST | DOT | LCURLY | RCURLY | PLUS | MINUS | CONCAT | EQUALS | DOLLAR | COL_COL | AS | CREATE | TRUE | FALSE | COMMA | STRING_LITERAL | INT_LITERAL | ID | ESC | WS | SingleLineComment | MultiLineComment )
-        int alt11=30;
+        // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:1:8: ( T__30 | T__31 | T__32 | T__33 | T__34 | T__35 | T__36 | T__37 | PRE | POST | DOT | LCURLY | RCURLY | PLUS | MINUS | CONCAT | EQUALS | DOLLAR | COL_COL | AS | CREATE | TRUE | FALSE | COMMA | UNION | INTER | STRING_LITERAL | INT_LITERAL | ID | ESC | WS | SingleLineComment | MultiLineComment )
+        int alt11=33;
         alt11 = dfa11.predict(input);
         switch (alt11) {
             case 1 :
-                // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:1:10: T__28
-                {
-                mT__28(); 
-
-                }
-                break;
-            case 2 :
-                // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:1:16: T__29
-                {
-                mT__29(); 
-
-                }
-                break;
-            case 3 :
-                // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:1:22: T__30
+                // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:1:10: T__30
                 {
                 mT__30(); 
 
                 }
                 break;
-            case 4 :
-                // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:1:28: T__31
+            case 2 :
+                // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:1:16: T__31
                 {
                 mT__31(); 
 
                 }
                 break;
-            case 5 :
-                // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:1:34: T__32
+            case 3 :
+                // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:1:22: T__32
                 {
                 mT__32(); 
 
                 }
                 break;
-            case 6 :
-                // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:1:40: T__33
+            case 4 :
+                // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:1:28: T__33
                 {
                 mT__33(); 
 
                 }
                 break;
-            case 7 :
-                // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:1:46: T__34
+            case 5 :
+                // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:1:34: T__34
                 {
                 mT__34(); 
 
                 }
                 break;
+            case 6 :
+                // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:1:40: T__35
+                {
+                mT__35(); 
+
+                }
+                break;
+            case 7 :
+                // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:1:46: T__36
+                {
+                mT__36(); 
+
+                }
+                break;
             case 8 :
-                // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:1:52: PRE
+                // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:1:52: T__37
+                {
+                mT__37(); 
+
+                }
+                break;
+            case 9 :
+                // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:1:58: PRE
                 {
                 mPRE(); 
 
                 }
                 break;
-            case 9 :
-                // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:1:56: POST
+            case 10 :
+                // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:1:62: POST
                 {
                 mPOST(); 
 
                 }
                 break;
-            case 10 :
-                // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:1:61: DOT
+            case 11 :
+                // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:1:67: DOT
                 {
                 mDOT(); 
 
                 }
                 break;
-            case 11 :
-                // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:1:65: LCURLY
+            case 12 :
+                // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:1:71: LCURLY
                 {
                 mLCURLY(); 
 
                 }
                 break;
-            case 12 :
-                // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:1:72: RCURLY
+            case 13 :
+                // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:1:78: RCURLY
                 {
                 mRCURLY(); 
 
                 }
                 break;
-            case 13 :
-                // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:1:79: PLUS
+            case 14 :
+                // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:1:85: PLUS
                 {
                 mPLUS(); 
 
                 }
                 break;
-            case 14 :
-                // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:1:84: MINUS
+            case 15 :
+                // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:1:90: MINUS
                 {
                 mMINUS(); 
 
                 }
                 break;
-            case 15 :
-                // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:1:90: CONCAT
+            case 16 :
+                // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:1:96: CONCAT
                 {
                 mCONCAT(); 
 
                 }
                 break;
-            case 16 :
-                // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:1:97: EQUALS
+            case 17 :
+                // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:1:103: EQUALS
                 {
                 mEQUALS(); 
 
                 }
                 break;
-            case 17 :
-                // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:1:104: DOLLAR
+            case 18 :
+                // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:1:110: DOLLAR
                 {
                 mDOLLAR(); 
 
                 }
                 break;
-            case 18 :
-                // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:1:111: COL_COL
+            case 19 :
+                // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:1:117: COL_COL
                 {
                 mCOL_COL(); 
 
                 }
                 break;
-            case 19 :
-                // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:1:119: AS
+            case 20 :
+                // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:1:125: AS
                 {
                 mAS(); 
 
                 }
                 break;
-            case 20 :
-                // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:1:122: CREATE
+            case 21 :
+                // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:1:128: CREATE
                 {
                 mCREATE(); 
 
                 }
                 break;
-            case 21 :
-                // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:1:129: TRUE
+            case 22 :
+                // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:1:135: TRUE
                 {
                 mTRUE(); 
 
                 }
                 break;
-            case 22 :
-                // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:1:134: FALSE
+            case 23 :
+                // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:1:140: FALSE
                 {
                 mFALSE(); 
 
                 }
                 break;
-            case 23 :
-                // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:1:140: COMMA
+            case 24 :
+                // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:1:146: COMMA
                 {
                 mCOMMA(); 
 
                 }
                 break;
-            case 24 :
-                // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:1:146: STRING_LITERAL
+            case 25 :
+                // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:1:152: UNION
+                {
+                mUNION(); 
+
+                }
+                break;
+            case 26 :
+                // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:1:158: INTER
+                {
+                mINTER(); 
+
+                }
+                break;
+            case 27 :
+                // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:1:164: STRING_LITERAL
                 {
                 mSTRING_LITERAL(); 
 
                 }
                 break;
-            case 25 :
-                // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:1:161: INT_LITERAL
+            case 28 :
+                // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:1:179: INT_LITERAL
                 {
                 mINT_LITERAL(); 
 
                 }
                 break;
-            case 26 :
-                // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:1:173: ID
+            case 29 :
+                // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:1:191: ID
                 {
                 mID(); 
 
                 }
                 break;
-            case 27 :
-                // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:1:176: ESC
+            case 30 :
+                // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:1:194: ESC
                 {
                 mESC(); 
 
                 }
                 break;
-            case 28 :
-                // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:1:180: WS
+            case 31 :
+                // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:1:198: WS
                 {
                 mWS(); 
 
                 }
                 break;
-            case 29 :
-                // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:1:183: SingleLineComment
+            case 32 :
+                // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:1:201: SingleLineComment
                 {
                 mSingleLineComment(); 
 
                 }
                 break;
-            case 30 :
-                // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:1:201: MultiLineComment
+            case 33 :
+                // /home/mclavreu/Desktop/OpenEmbeDD-1.3-antlr2/workspace/org.kermeta.kompose.core.parser/src/org/kermeta/kompose/core/parser/Directives.g:1:219: MultiLineComment
                 {
                 mMultiLineComment(); 
 
@@ -1323,113 +1410,142 @@ public class DirectivesLexer extends Lexer {
 
     protected DFA11 dfa11 = new DFA11(this);
     static final String DFA11_eotS =
-        "\1\24\5\25\3\uffff\1\41\4\uffff\4\25\7\uffff\1\25\1\52\1\25\1\55"+
-        "\1\56\2\25\2\uffff\1\61\3\25\2\uffff\1\65\1\25\1\uffff\2\25\2\uffff"+
-        "\1\71\1\25\1\uffff\3\25\1\uffff\1\25\1\77\1\25\1\uffff\1\101\1\25"+
-        "\1\103\1\25\1\105\1\uffff\1\106\1\uffff\1\25\1\uffff\1\110\2\uffff"+
-        "\1\111\2\uffff";
+        "\1\27\6\30\3\uffff\1\45\4\uffff\4\30\1\uffff\2\30\6\uffff\2\30\1"+
+        "\61\1\30\1\64\1\65\2\30\2\uffff\1\70\5\30\2\uffff\1\76\2\30\1\uffff"+
+        "\2\30\2\uffff\1\103\1\30\1\uffff\5\30\1\uffff\1\112\1\30\1\114\1"+
+        "\30\1\uffff\1\116\1\30\1\120\3\30\1\uffff\1\124\1\uffff\1\125\1"+
+        "\uffff\1\30\1\uffff\1\127\1\130\1\30\2\uffff\1\132\2\uffff\1\30"+
+        "\1\uffff\5\30\1\141\1\uffff";
     static final String DFA11_eofS =
-        "\112\uffff";
+        "\142\uffff";
     static final String DFA11_minS =
-        "\1\11\1\130\3\115\1\157\3\uffff\1\75\4\uffff\1\163\2\162\1\141\6"+
-        "\uffff\1\52\1\124\1\60\1\163\2\60\1\145\1\163\2\uffff\1\60\1\145"+
-        "\1\165\1\154\2\uffff\1\60\1\162\1\uffff\1\164\1\162\2\uffff\1\60"+
-        "\1\164\1\uffff\1\141\1\145\1\163\1\uffff\1\145\1\60\1\145\1\uffff"+
-        "\1\60\1\164\1\60\1\145\1\60\1\uffff\1\60\1\uffff\1\145\1\uffff\1"+
-        "\60\2\uffff\1\60\2\uffff";
+        "\1\11\1\130\1\117\3\115\1\157\3\uffff\1\75\4\uffff\1\163\2\162\1"+
+        "\141\1\uffff\2\116\5\uffff\1\52\1\124\1\104\1\60\1\163\2\60\1\145"+
+        "\1\163\2\uffff\1\60\1\145\1\165\1\154\1\111\1\124\2\uffff\1\60\1"+
+        "\105\1\162\1\uffff\1\164\1\162\2\uffff\1\60\1\164\1\uffff\1\141"+
+        "\1\145\1\163\1\117\1\105\1\uffff\1\60\1\145\1\60\1\145\1\uffff\1"+
+        "\60\1\164\1\60\1\145\1\116\1\122\1\uffff\1\60\1\uffff\1\60\1\uffff"+
+        "\1\145\1\uffff\2\60\1\123\2\uffff\1\60\2\uffff\1\105\1\uffff\1\103"+
+        "\1\124\1\111\1\117\1\116\1\60\1\uffff";
     static final String DFA11_maxS =
-        "\1\176\1\130\1\157\2\115\1\162\3\uffff\1\75\4\uffff\1\163\2\162"+
-        "\1\141\6\uffff\1\57\1\124\1\172\1\163\2\172\1\145\1\163\2\uffff"+
-        "\1\172\1\145\1\165\1\154\2\uffff\1\172\1\162\1\uffff\1\164\1\162"+
-        "\2\uffff\1\172\1\164\1\uffff\1\141\1\145\1\163\1\uffff\1\145\1\172"+
-        "\1\145\1\uffff\1\172\1\164\1\172\1\145\1\172\1\uffff\1\172\1\uffff"+
-        "\1\145\1\uffff\1\172\2\uffff\1\172\2\uffff";
+        "\1\176\1\130\1\117\1\157\2\115\1\162\3\uffff\1\75\4\uffff\1\163"+
+        "\2\162\1\141\1\uffff\2\116\5\uffff\1\57\1\124\1\104\1\172\1\163"+
+        "\2\172\1\145\1\163\2\uffff\1\172\1\145\1\165\1\154\1\111\1\124\2"+
+        "\uffff\1\172\1\105\1\162\1\uffff\1\164\1\162\2\uffff\1\172\1\164"+
+        "\1\uffff\1\141\1\145\1\163\1\117\1\105\1\uffff\1\172\1\145\1\172"+
+        "\1\145\1\uffff\1\172\1\164\1\172\1\145\1\116\1\122\1\uffff\1\172"+
+        "\1\uffff\1\172\1\uffff\1\145\1\uffff\2\172\1\123\2\uffff\1\172\2"+
+        "\uffff\1\105\1\uffff\1\103\1\124\1\111\1\117\1\116\1\172\1\uffff";
     static final String DFA11_acceptS =
-        "\6\uffff\1\12\1\13\1\14\1\uffff\1\16\1\20\1\21\1\22\4\uffff\1\27"+
-        "\1\30\1\31\1\32\1\33\1\34\10\uffff\1\17\1\15\4\uffff\1\35\1\36\2"+
-        "\uffff\1\2\2\uffff\1\3\1\4\2\uffff\1\23\3\uffff\1\1\3\uffff\1\10"+
-        "\5\uffff\1\7\1\uffff\1\11\1\uffff\1\25\1\uffff\1\5\1\6\1\uffff\1"+
-        "\26\1\24";
+        "\7\uffff\1\13\1\14\1\15\1\uffff\1\17\1\21\1\22\1\23\4\uffff\1\30"+
+        "\2\uffff\1\33\1\34\1\35\1\36\1\37\11\uffff\1\20\1\16\6\uffff\1\40"+
+        "\1\41\3\uffff\1\3\2\uffff\1\4\1\5\2\uffff\1\24\5\uffff\1\1\4\uffff"+
+        "\1\11\6\uffff\1\2\1\uffff\1\10\1\uffff\1\12\1\uffff\1\26\3\uffff"+
+        "\1\6\1\7\1\uffff\1\27\1\31\1\uffff\1\25\6\uffff\1\32";
     static final String DFA11_specialS =
-        "\112\uffff}>";
+        "\142\uffff}>";
     static final String[] DFA11_transitionS = {
-            "\2\27\1\uffff\1\27\23\uffff\1\27\1\uffff\1\23\1\uffff\1\14\6"+
-            "\uffff\1\11\1\22\1\12\1\6\1\30\12\uffff\1\15\2\uffff\1\13\3"+
-            "\uffff\1\3\1\25\1\4\1\25\1\1\12\25\1\2\12\25\1\uffff\1\26\2"+
-            "\uffff\1\25\1\uffff\1\16\1\25\1\17\2\25\1\21\11\25\1\5\3\25"+
-            "\1\20\6\25\1\7\1\uffff\1\10\1\25",
-            "\1\31",
-            "\1\32\41\uffff\1\33",
+            "\2\32\1\uffff\1\32\23\uffff\1\32\1\uffff\1\26\1\uffff\1\15\6"+
+            "\uffff\1\12\1\23\1\13\1\7\1\33\12\uffff\1\16\2\uffff\1\14\3"+
+            "\uffff\1\4\1\30\1\5\1\30\1\1\3\30\1\25\3\30\1\2\2\30\1\3\4\30"+
+            "\1\24\5\30\1\uffff\1\31\2\uffff\1\30\1\uffff\1\17\1\30\1\20"+
+            "\2\30\1\22\11\30\1\6\3\30\1\21\6\30\1\10\1\uffff\1\11\1\30",
             "\1\34",
             "\1\35",
-            "\1\37\2\uffff\1\36",
-            "",
-            "",
-            "",
+            "\1\36\41\uffff\1\37",
             "\1\40",
+            "\1\41",
+            "\1\43\2\uffff\1\42",
             "",
             "",
             "",
-            "",
-            "\1\42",
-            "\1\43",
             "\1\44",
-            "\1\45",
             "",
             "",
             "",
             "",
-            "",
-            "",
-            "\1\47\4\uffff\1\46",
+            "\1\46",
+            "\1\47",
             "\1\50",
-            "\12\25\7\uffff\17\25\1\51\12\25\4\uffff\1\25\1\uffff\32\25",
+            "\1\51",
+            "",
+            "\1\52",
             "\1\53",
-            "\12\25\7\uffff\17\25\1\54\12\25\4\uffff\1\25\1\uffff\32\25",
-            "\12\25\7\uffff\32\25\4\uffff\1\25\1\uffff\32\25",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "\1\55\4\uffff\1\54",
+            "\1\56",
             "\1\57",
-            "\1\60",
-            "",
-            "",
-            "\12\25\7\uffff\32\25\4\uffff\1\25\1\uffff\32\25",
+            "\12\30\7\uffff\17\30\1\60\12\30\4\uffff\1\30\1\uffff\32\30",
             "\1\62",
-            "\1\63",
-            "\1\64",
-            "",
-            "",
-            "\12\25\7\uffff\32\25\4\uffff\1\25\1\uffff\32\25",
+            "\12\30\7\uffff\17\30\1\63\12\30\4\uffff\1\30\1\uffff\32\30",
+            "\12\30\7\uffff\32\30\4\uffff\1\30\1\uffff\32\30",
             "\1\66",
-            "",
             "\1\67",
-            "\1\70",
             "",
             "",
-            "\12\25\7\uffff\32\25\4\uffff\1\25\1\uffff\32\25",
+            "\12\30\7\uffff\32\30\4\uffff\1\30\1\uffff\32\30",
+            "\1\71",
             "\1\72",
-            "",
             "\1\73",
             "\1\74",
             "\1\75",
             "",
-            "\1\76",
-            "\12\25\7\uffff\32\25\4\uffff\1\25\1\uffff\32\25",
+            "",
+            "\12\30\7\uffff\32\30\4\uffff\1\30\1\uffff\32\30",
+            "\1\77",
             "\1\100",
             "",
-            "\12\25\7\uffff\32\25\4\uffff\1\25\1\uffff\32\25",
+            "\1\101",
             "\1\102",
-            "\12\25\7\uffff\32\25\4\uffff\1\25\1\uffff\32\25",
+            "",
+            "",
+            "\12\30\7\uffff\32\30\4\uffff\1\30\1\uffff\32\30",
             "\1\104",
-            "\12\25\7\uffff\32\25\4\uffff\1\25\1\uffff\32\25",
             "",
-            "\12\25\7\uffff\32\25\4\uffff\1\25\1\uffff\32\25",
-            "",
+            "\1\105",
+            "\1\106",
             "\1\107",
+            "\1\110",
+            "\1\111",
             "",
-            "\12\25\7\uffff\32\25\4\uffff\1\25\1\uffff\32\25",
+            "\12\30\7\uffff\32\30\4\uffff\1\30\1\uffff\32\30",
+            "\1\113",
+            "\12\30\7\uffff\32\30\4\uffff\1\30\1\uffff\32\30",
+            "\1\115",
+            "",
+            "\12\30\7\uffff\32\30\4\uffff\1\30\1\uffff\32\30",
+            "\1\117",
+            "\12\30\7\uffff\32\30\4\uffff\1\30\1\uffff\32\30",
+            "\1\121",
+            "\1\122",
+            "\1\123",
+            "",
+            "\12\30\7\uffff\32\30\4\uffff\1\30\1\uffff\32\30",
+            "",
+            "\12\30\7\uffff\32\30\4\uffff\1\30\1\uffff\32\30",
+            "",
+            "\1\126",
+            "",
+            "\12\30\7\uffff\32\30\4\uffff\1\30\1\uffff\32\30",
+            "\12\30\7\uffff\32\30\4\uffff\1\30\1\uffff\32\30",
+            "\1\131",
             "",
             "",
-            "\12\25\7\uffff\32\25\4\uffff\1\25\1\uffff\32\25",
+            "\12\30\7\uffff\32\30\4\uffff\1\30\1\uffff\32\30",
             "",
+            "",
+            "\1\133",
+            "",
+            "\1\134",
+            "\1\135",
+            "\1\136",
+            "\1\137",
+            "\1\140",
+            "\12\30\7\uffff\32\30\4\uffff\1\30\1\uffff\32\30",
             ""
     };
 
@@ -1463,7 +1579,7 @@ public class DirectivesLexer extends Lexer {
             this.transition = DFA11_transition;
         }
         public String getDescription() {
-            return "1:1: Tokens : ( T__28 | T__29 | T__30 | T__31 | T__32 | T__33 | T__34 | PRE | POST | DOT | LCURLY | RCURLY | PLUS | MINUS | CONCAT | EQUALS | DOLLAR | COL_COL | AS | CREATE | TRUE | FALSE | COMMA | STRING_LITERAL | INT_LITERAL | ID | ESC | WS | SingleLineComment | MultiLineComment );";
+            return "1:1: Tokens : ( T__30 | T__31 | T__32 | T__33 | T__34 | T__35 | T__36 | T__37 | PRE | POST | DOT | LCURLY | RCURLY | PLUS | MINUS | CONCAT | EQUALS | DOLLAR | COL_COL | AS | CREATE | TRUE | FALSE | COMMA | UNION | INTER | STRING_LITERAL | INT_LITERAL | ID | ESC | WS | SingleLineComment | MultiLineComment );";
         }
     }
  
