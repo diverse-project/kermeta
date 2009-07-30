@@ -48,7 +48,17 @@ emptyRule: int_rule
 MINUS : '-' {System.out.println("found MINUS -");};
 */
 
-dirUnit returns [Composer c = factory.createComposer()]:
+dirUnit returns [Composer c = factory.createComposer();]
+  @after{
+    c.setMetamodelName($ext.text.substring(1, $ext.text.length()-1));
+    c.setAspectModelURI($am.text.substring(1, $am.text.length()-1));
+    c.setPrimaryModelURI($pm.text.substring(1, $pm.text.length()-1));
+    c.setComposedModelURI($cm.text.substring(1, $cm.text.length()-1));
+    c.getPredirectivesPM().addAll(pmpre);
+    c.getPredirectivesAM().addAll(ampre);
+    c.getPostdirectives().addAll(post);
+  }
+  :
   'EXT' ext=STRING_LITERAL
   'PM' pm=STRING_LITERAL
   'AM' am=STRING_LITERAL
@@ -64,54 +74,116 @@ directives returns [ArrayList lst = new ArrayList()]:
 ;
 
 directive returns [ElementDirective c] :
-  (changeD {$c=$changeD.d;}| createD{$c=$createD.d;})
+  (concatD {$c=$concatD.d;} | createD{$c=$createD.d;} | changeD {$c=$changeD.d;})
 ;
 
-createD returns [Create d = factory.createCreate()]:
+createD returns [Create d = factory.createCreate()]
+  @after{
+	  d.setClassName($id.text);
+	  d.setIdentifier($var.text);
+  }
+  :
   CREATE id=ID AS DOLLAR var=ID
-{
-  d.setClassName(id.getText());
-  d.setIdentifier(var.getText()); 
-}
 ;
 
-changeD returns [Change d = null] :
-  ref=setD
+changeD returns [Change d = null]
+  @after{
+    d.setPropertyName($prop.text);
+    d.setTarget(ref);
+  }
+  :
+  ref=refObj DOT prop=ID 
+  (setD {$d=$setD.d;} | addD {$d=$addD.d;} | 
+  removeD {$d=$removeD.d;} )
+;
+
+concatD returns [Concat d = factory.createConcat()]
+  @init{
+    ArrayList<String> list = new ArrayList<String>();
+    StringLiteral ref = factory.createStringLiteral();
+  }
+  @after{
+    ref.setValue($target.text);
+    d.getPropertyNames().addAll(list);
+    d.setTarget(ref);
+  }
+  :
+  first=concat_property {list.add($first.text);} (COMMA property=concat_property {list.add($property.text);})* CONCAT target=concat_property
+;
+
+fragment concat_property returns [ElementRef ref = null]:
+  (nameRef DOT prop=ID) {$ref=$nameRef.ref;} | stringL {$ref=$stringL.ref;}
 ;
 
 setD returns [Set d = factory.createSet()]:
-  EQUALS ref=integerL {d.setValue(ref);}
+  EQUALS ref=refObj {d.setValue(ref);}
 ;
-/*returns [Set d = factory.createSet()]:
-	{
-	  ElementRef ref; 
-	}
-	  EQUALS ref=stringL
-	{
-	  d.setValue(ref);  
-	}
-;*/
 
-integerL returns [IntegerLiteral ref = factory.createIntegerLiteral()]:
-  //v=STRING_LITERAL
+addD returns [Add d = factory.createAdd()]:
+  PLUS ref=refObj {d.setValue(ref);}
+;
+
+removeD returns [Remove d = factory.createRemove()]:
+  MINUS ref=refObj {d.setValue(ref);}
+;
+
+refObj returns [ElementRef ref = null]:
+  nameRef {$ref=$nameRef.ref;} | idRef {$ref=$idRef.ref;} |
+  stringL {$ref=$stringL.ref;} | booleanL {$ref=$booleanL.ref;} | 
+  integerL {$ref=$integerL.ref;}
+;
+  
+nameRef returns [NameRef ref = factory.createNameRef()]
+  @after{
+    ref.setQname(qname);
+  }
+  :
+	  qname=qualifiedID
+;
+
+idRef returns [IDRef ref = factory.createIDRef()]
+  @after{
+    ref.setIdentifier($id.text);
+  }
+  :
+	  DOLLAR id=ID
+;
+
+stringL returns [StringLiteral ref = factory.createStringLiteral()]
+  @after{
+    ref.setValue($v.text.substring(1, $v.text.length()-1));
+  }
+  :
+    v=STRING_LITERAL
+;
+
+integerL returns [IntegerLiteral ref = factory.createIntegerLiteral()]
+  @after{
+    ref.setValue(Integer.parseInt($str.text));
+  }
+  :
   str=integer
-	{
-	  ref.setValue(Integer.parseInt($str.text));
-	  System.out.println(ref.getValue());
-	}
 ;
 
 integer returns [Integer str = null]: 
   (MINUS)? INT_LITERAL
 ;
 
-/*stringL returns [StringLiteral ref = factory.createStringLiteral()]: 
-  v=STRING_LITERAL
-	{
-	  ref.setValue(v.getText().substring(1, v.getText().length()-1)); 
-	}
-;*/
- 
+booleanL returns [BooleanLiteral ref = factory.createBooleanLiteral()]
+  @init{
+    boolean val = false;
+  }
+  @after{
+    ref.setValue(val);
+  }
+  :
+    (TRUE { val = true; }| FALSE)
+;
+
+qualifiedID returns [String val = ""]:
+  str1=ID {val+=$str1.text;} (COL_COL strn=ID {val+="::"+$strn.text;} )*
+;
+
 
 PRE     : 'pre';
 POST    : 'post';
@@ -120,6 +192,7 @@ LCURLY  : '{';
 RCURLY  : '}';
 PLUS    : '+';
 MINUS   : '-';
+CONCAT  : '+=';
 EQUALS  : '=';
 DOLLAR  : '$';
 COL_COL : '::';
@@ -127,6 +200,7 @@ AS      : 'as' ;
 CREATE  : 'create';
 TRUE    : 'true';
 FALSE   : 'false';
+COMMA   : ',';
 
 STRING_LITERAL : '"' (ESC | ~('"'|'\\'))* '"' ;
 INT_LITERAL: (DIGIT)*;

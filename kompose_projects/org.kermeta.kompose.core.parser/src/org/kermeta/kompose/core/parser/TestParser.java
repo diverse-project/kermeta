@@ -2,17 +2,17 @@ package org.kermeta.kompose.core.parser;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
-import java.io.FileInputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
 
+import org.antlr.runtime.ANTLRFileStream;
+import org.antlr.runtime.CommonTokenStream;
+import org.antlr.runtime.RecognitionException;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
-
-import antlr.*;
 
 import kompose.*;
 
@@ -27,18 +27,16 @@ public class TestParser {
 	 * @param args
 	 */
 	public static void main(String[] args) throws Exception {
-		 DirectiveLexer lexer = new DirectiveLexer(new FileInputStream(input));
-	     DirectiveParser parser = new DirectiveParser(lexer);
+		 DirectivesLexer lexer = new DirectivesLexer(new ANTLRFileStream(input));
+		 CommonTokenStream tokens = new CommonTokenStream(lexer);
+	     DirectivesParser parser = new DirectivesParser(tokens);
 	     Composer c = null;
 	     try {
 			c=parser.dirUnit();
 		} catch (RecognitionException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} catch (TokenStreamException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		} 
 	     //AST t = parser.getAST();
 	     //System.out.println(t.toStringTree());
 		

@@ -1,29 +1,33 @@
 package org.kermeta.kompose.core.parser;
 
+import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 
-import antlr.RecognitionException;
-import antlr.TokenStreamException;
+import org.antlr.runtime.ANTLRInputStream;
+import org.antlr.runtime.CommonTokenStream;
+import org.antlr.runtime.RecognitionException;
 
 import kompose.Composer;
 
 public class KomposeParser {
-		private DirectiveLexer lexer;
-		private DirectiveParser parser;
+		private DirectivesLexer lexer;
+		private DirectivesParser parser;
 		private String exception;
 	public KomposeParser(InputStream is){
-		this.lexer = new DirectiveLexer(is);
-		this.parser = new DirectiveParser(lexer);
+		try {
+			this.lexer = new DirectivesLexer(new ANTLRInputStream(is));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		CommonTokenStream tokens = new CommonTokenStream(lexer);
+		this.parser = new DirectivesParser(tokens);
 		this.exception = new String("");
 	}
 	public Composer dirUnit() {
 		try {
 			return this.parser.dirUnit();
 		} catch (RecognitionException e) {
-			this.exception = e.getMessage();
-			return null;
-		} catch (TokenStreamException e) {
 			this.exception = e.getMessage();
 			return null;
 		}
