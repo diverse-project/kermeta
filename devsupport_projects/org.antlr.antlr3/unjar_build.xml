@@ -12,6 +12,9 @@
 		<move todir="extracted_src">
 		    <fileset dir="antlr-3.1.3/runtime/Java/src/main/java/"/>
 		</move>
+		<move todir="original_lib">
+			<fileset file="antlr-3.1.3/lib/stringtemplate-3.2.jar"/>
+		</move>
 		<delete dir="antlr-3.1.3">
 		</delete>
 	</target>
