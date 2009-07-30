@@ -71,6 +71,7 @@ public class ComposerItemProvider
 			addAspectModelURIPropertyDescriptor(object);
 			addComposedModelURIPropertyDescriptor(object);
 			addMetamodelNamePropertyDescriptor(object);
+			addModePropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -164,6 +165,28 @@ public class ComposerItemProvider
 	}
 
 	/**
+	 * This adds a property descriptor for the Mode feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addModePropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_Composer_mode_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_Composer_mode_feature", "_UI_Composer_type"),
+				 KomposePackage.Literals.COMPOSER__MODE,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
 	 * This specifies how to implement {@link #getChildren} and is used to deduce an appropriate feature for an
 	 * {@link org.eclipse.emf.edit.command.AddCommand}, {@link org.eclipse.emf.edit.command.RemoveCommand} or
 	 * {@link org.eclipse.emf.edit.command.MoveCommand} in {@link #createCommand}.
@@ -236,6 +259,7 @@ public class ComposerItemProvider
 			case KomposePackage.COMPOSER__ASPECT_MODEL_URI:
 			case KomposePackage.COMPOSER__COMPOSED_MODEL_URI:
 			case KomposePackage.COMPOSER__METAMODEL_NAME:
+			case KomposePackage.COMPOSER__MODE:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 			case KomposePackage.COMPOSER__PREDIRECTIVES_PM:
