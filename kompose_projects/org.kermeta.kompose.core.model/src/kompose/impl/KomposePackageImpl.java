@@ -888,8 +888,8 @@ public class KomposePackageImpl extends EPackageImpl implements KomposePackage {
 
 		// Initialize enums and add enum literals
 		initEEnum(modesEEnum, Modes.class, "Modes");
-		addEEnumLiteral(modesEEnum, Modes.INTERSECTION);
 		addEEnumLiteral(modesEEnum, Modes.UNION);
+		addEEnumLiteral(modesEEnum, Modes.INTERSECTION);
 
 		// Initialize data types
 		initEDataType(stringEDataType, String.class, "String", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);

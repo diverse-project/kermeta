@@ -70,7 +70,7 @@
         containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="Modes">
-    <eLiterals name="INTERSECTION"/>
-    <eLiterals name="UNION" value="1"/>
+    <eLiterals name="UNION"/>
+    <eLiterals name="INTERSECTION" value="1"/>
   </eClassifiers>
 </ecore:EPackage>

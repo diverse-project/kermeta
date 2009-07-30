@@ -23,16 +23,6 @@ import org.eclipse.emf.common.util.Enumerator;
  */
 public enum Modes implements Enumerator {
 	/**
-	 * The '<em><b>INTERSECTION</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #INTERSECTION_VALUE
-	 * @generated
-	 * @ordered
-	 */
-	INTERSECTION(0, "INTERSECTION", "INTERSECTION"),
-
-	/**
 	 * The '<em><b>UNION</b></em>' literal object.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -40,22 +30,15 @@ public enum Modes implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	UNION(1, "UNION", "UNION");
-
-	/**
-	 * The '<em><b>INTERSECTION</b></em>' literal value.
+	UNION(0, "UNION", "UNION"), /**
+	 * The '<em><b>INTERSECTION</b></em>' literal object.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of '<em><b>INTERSECTION</b></em>' literal object isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
-	 * @see #INTERSECTION
-	 * @model
+	 * @see #INTERSECTION_VALUE
 	 * @generated
 	 * @ordered
 	 */
-	public static final int INTERSECTION_VALUE = 0;
+	INTERSECTION(1, "INTERSECTION", "INTERSECTION");
 
 	/**
 	 * The '<em><b>UNION</b></em>' literal value.
@@ -70,7 +53,22 @@ public enum Modes implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	public static final int UNION_VALUE = 1;
+	public static final int UNION_VALUE = 0;
+
+	/**
+	 * The '<em><b>INTERSECTION</b></em>' literal value.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of '<em><b>INTERSECTION</b></em>' literal object isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @see #INTERSECTION
+	 * @model
+	 * @generated
+	 * @ordered
+	 */
+	public static final int INTERSECTION_VALUE = 1;
 
 	/**
 	 * An array of all the '<em><b>Modes</b></em>' enumerators.
@@ -80,8 +78,8 @@ public enum Modes implements Enumerator {
 	 */
 	private static final Modes[] VALUES_ARRAY =
 		new Modes[] {
-			INTERSECTION,
 			UNION,
+			INTERSECTION,
 		};
 
 	/**
@@ -132,8 +130,8 @@ public enum Modes implements Enumerator {
 	 */
 	public static Modes get(int value) {
 		switch (value) {
-			case INTERSECTION_VALUE: return INTERSECTION;
 			case UNION_VALUE: return UNION;
+			case INTERSECTION_VALUE: return INTERSECTION;
 		}
 		return null;
 	}

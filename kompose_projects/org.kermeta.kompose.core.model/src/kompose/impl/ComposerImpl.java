@@ -167,7 +167,7 @@ public class ComposerImpl extends EObjectImpl implements Composer {
 	 * @generated
 	 * @ordered
 	 */
-	protected static final Modes MODE_EDEFAULT = Modes.INTERSECTION;
+	protected static final Modes MODE_EDEFAULT = Modes.UNION;
 
 	/**
 	 * The cached value of the '{@link #getMode() <em>Mode</em>}' attribute.

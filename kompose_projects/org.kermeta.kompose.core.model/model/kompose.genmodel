@@ -7,8 +7,8 @@
   <foreignModel>kompose.ecore</foreignModel>
   <genPackages prefix="Kompose" disposableProviderFactory="true" ecorePackage="kompose.ecore#/">
     <genEnums typeSafeEnumCompatible="false" ecoreEnum="kompose.ecore#//Modes">
-      <genEnumLiterals ecoreEnumLiteral="kompose.ecore#//Modes/INTERSECTION"/>
       <genEnumLiterals ecoreEnumLiteral="kompose.ecore#//Modes/UNION"/>
+      <genEnumLiterals ecoreEnumLiteral="kompose.ecore#//Modes/INTERSECTION"/>
     </genEnums>
     <genDataTypes ecoreDataType="kompose.ecore#//String"/>
     <genDataTypes ecoreDataType="kompose.ecore#//Boolean"/>

@@ -388,13 +388,13 @@
   <children xmi:type="notation:Node" xmi:id="_lZAxkHeOEd6yGJiQJ1p2bw" type="1005">
     <children xmi:type="notation:Node" xmi:id="_lZDN0HeOEd6yGJiQJ1p2bw" type="4010"/>
     <children xmi:type="notation:Node" xmi:id="_lZEb8HeOEd6yGJiQJ1p2bw" type="5008">
-      <children xmi:type="notation:Node" xmi:id="_mUEEkHeOEd6yGJiQJ1p2bw" type="2006">
-        <element xmi:type="ecore:EEnumLiteral" href="kompose.ecore#//Modes/INTERSECTION"/>
-        <layoutConstraint xmi:type="notation:Location" xmi:id="_mUEEkXeOEd6yGJiQJ1p2bw"/>
-      </children>
       <children xmi:type="notation:Node" xmi:id="_oEgHcHeOEd6yGJiQJ1p2bw" type="2006">
         <element xmi:type="ecore:EEnumLiteral" href="kompose.ecore#//Modes/UNION"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_oEgHcXeOEd6yGJiQJ1p2bw"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_x_eC4H0MEd64ec0Q2UsJgg" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="kompose.ecore#//Modes/INTERSECTION"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_x_eC4X0MEd64ec0Q2UsJgg"/>
       </children>
       <styles xmi:type="notation:DrawerStyle" xmi:id="_lZEb8XeOEd6yGJiQJ1p2bw"/>
       <styles xmi:type="notation:SortingStyle" xmi:id="_lZEb8neOEd6yGJiQJ1p2bw"/>
