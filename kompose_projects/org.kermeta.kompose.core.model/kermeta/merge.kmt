@@ -10,6 +10,7 @@ package kompose;
 require kermeta
 require "http://www.kermeta.org/kompose"
 require "platform:/plugin/fr.irisa.triskell.traceability.model/model/kmt/Traceability_Behavior.kmt"
+require "kompose.kmt"
 
 using kermeta::language::structure
 using kermeta::standard
@@ -43,7 +44,7 @@ aspect abstract class Mergeable
 	 * param ctx : context provided by a specialization
 	 * returns a merged element
 	 */
-	operation merge(other : Mergeable, ctx : MergeContext) : Mergeable
+	operation merge(other : Mergeable, ctx : MergeContext, composer : Composer) : Mergeable
 	pre same_type is self.getMetaClass == other.getMetaClass
 	is do
 		var type : Class init self.getMetaClass
@@ -79,13 +80,13 @@ aspect abstract class Mergeable
 								if me1.getSignature == me2.getSignature then
 									/* p is a relation */
 									if p.isComposite then
-										result.~set(p, me1.merge(me2, ctx))
+										result.~set(p, me1.merge(me2, ctx, composer))
 									else
 										ctx.trace.addTrace(KTrace.new.newModelTrace(me1,me2))
 										result.~set(p, me1)
 									end
-								else									
-									ctx.logger.printError("Elements signature do not match")
+								else
+									ctx.logger.printError("Elements signature do not match: m1="+me1.toString+"/m2="+me2.toString)
 								end
 							end
 						else
@@ -94,7 +95,9 @@ aspect abstract class Mergeable
 								result.~set(p, selfValue)
 							else
 								ctx.logger.printError("conflicting value for property " + p.name + " picking the first value")
-								result.~set(p, selfValue)
+								// look for method to resolve conflict into the specialization
+								result.~set(p,composer.resolveConflict(selfValue,otherValue,p))
+								//result.~set(p, selfValue)
 							end
 						end
 					end
@@ -112,7 +115,7 @@ aspect abstract class Mergeable
 						result.~set(p, selfValue)
 					else
 						ctx.trace.addTrace(KTrace.new.newModelTrace(self,other))
-						result := mergeCollections(self,other,result,p,ctx)
+						result := mergeCollections(self,other,result,p,ctx,composer)
 					end
 				end
 			end
@@ -128,7 +131,7 @@ aspect abstract class Mergeable
 	 * param ctx : context provided by a specialization
 	 * returns a merged collection
 	 */
-	operation mergeCollections(m1 : Mergeable, m2 : Mergeable, out : Mergeable, p : Property, ctx : MergeContext) : Mergeable is do
+	operation mergeCollections(m1 : Mergeable, m2 : Mergeable, out : Mergeable, p : Property, ctx : MergeContext, composer : Composer) : Mergeable is do
 		result := out
 		var ocol1 : Collection<Object> 	ocol1 ?= m1.get(p) 
 		var col1 : Collection<Mergeable> init Sequence<Mergeable>.new
@@ -147,12 +150,14 @@ aspect abstract class Mergeable
 				var matching : Collection<Mergeable> init me.getmatchingElements(col2)
 				var col : Collection<Object>
 				col ?= result.get(p)
-				if matching.size == 0 then					
-					col.add(me)
+				if (matching.size == 0) then
+					if not composer.mode.name.equals("INTERSECTION") then
+						col.add(me)
+					end
 				else
-					matching.each{ me2 | 
+					matching.each{ me2 |
 						if p.isComposite then
-							col.add(me.merge(me2, ctx))
+							col.add(me.merge(me2, ctx, composer))
 						else
 							ctx.trace.addTrace(KTrace.new.newModelTrace(me,me2))
 							col.add(me)
@@ -160,14 +165,16 @@ aspect abstract class Mergeable
 					}
 				end
 			end
-		}								
+		}
 		col2.each{ me | 
 			if not me.isVoid() then
 				var matching : Collection<Mergeable> init me.getmatchingElements(col1)
 				var col : Collection<Object>
 				col ?= result.get(p)
 				if matching.size == 0 then
-					col.add(me)
+					if not composer.mode.name.equals("INTERSECTION") then
+						col.add(me)
+					end
 				/*else
 					matching.each{ me2 | 
 						if p.isComposite then
@@ -370,7 +377,7 @@ class ModelElementComposer
 	 * param logger : KLogger object
 	 * returns a mergeable object
 	 */
-	operation compose(m1 : Mergeable, m2 : Mergeable, logger : KLogger, trace : TraceModel) : Mergeable is do
+	operation compose(m1 : Mergeable, m2 : Mergeable, logger : KLogger, trace : TraceModel, composer : Composer) : Mergeable is do
 		self.logger := logger
 		var ctx : MergeContext init MergeContext.new
 		self.logger.printDebug("compose merge.kmt : initialize")
@@ -389,7 +396,7 @@ class ModelElementComposer
 		self.logger.printDebug("compose merge.kmt : signatures "+(m1.getSignature==m2.getSignature).toString)
 		if m1.getSignature == m2.getSignature then
 			self.logger.printDebug("compose merge.kmt : merging")
-			result := m1.merge(m2, ctx)
+			result := m1.merge(m2, ctx, composer)
 			self.logger.printDebug("compose merge.kmt : fixReferences")
 			result := fixReferences(result, ctx)			
 		else

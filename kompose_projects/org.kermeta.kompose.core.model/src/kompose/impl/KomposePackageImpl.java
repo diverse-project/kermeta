@@ -23,6 +23,7 @@ import kompose.KomposeFactory;
 import kompose.KomposePackage;
 import kompose.Literal;
 import kompose.Mergeable;
+import kompose.Modes;
 import kompose.NameRef;
 import kompose.Remove;
 import kompose.Select;
@@ -33,6 +34,7 @@ import kompose.VoidLiteral;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EDataType;
+import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 
@@ -177,6 +179,13 @@ public class KomposePackageImpl extends EPackageImpl implements KomposePackage {
 	 * @generated
 	 */
 	private EClass concatEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EEnum modesEEnum = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -587,6 +596,15 @@ public class KomposePackageImpl extends EPackageImpl implements KomposePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getComposer_Mode() {
+		return (EAttribute)composerEClass.getEStructuralFeatures().get(7);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getMergeable() {
 		return mergeableEClass;
 	}
@@ -625,6 +643,15 @@ public class KomposePackageImpl extends EPackageImpl implements KomposePackage {
 	 */
 	public EReference getConcat_Value() {
 		return (EReference)concatEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EEnum getModes() {
+		return modesEEnum;
 	}
 
 	/**
@@ -733,6 +760,7 @@ public class KomposePackageImpl extends EPackageImpl implements KomposePackage {
 		createEAttribute(composerEClass, COMPOSER__COMPOSED_MODEL_URI);
 		createEReference(composerEClass, COMPOSER__PREDIRECTIVES_AM);
 		createEAttribute(composerEClass, COMPOSER__METAMODEL_NAME);
+		createEAttribute(composerEClass, COMPOSER__MODE);
 
 		mergeableEClass = createEClass(MERGEABLE);
 
@@ -740,6 +768,9 @@ public class KomposePackageImpl extends EPackageImpl implements KomposePackage {
 		createEAttribute(concatEClass, CONCAT__PROPERTY_NAMES);
 		createEReference(concatEClass, CONCAT__TARGET);
 		createEReference(concatEClass, CONCAT__VALUE);
+
+		// Create enums
+		modesEEnum = createEEnum(MODES);
 
 		// Create data types
 		stringEDataType = createEDataType(STRING);
@@ -844,6 +875,7 @@ public class KomposePackageImpl extends EPackageImpl implements KomposePackage {
 		initEAttribute(getComposer_ComposedModelURI(), this.getString(), "composedModelURI", null, 0, 1, Composer.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getComposer_PredirectivesAM(), this.getElementDirective(), null, "predirectivesAM", null, 0, -1, Composer.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getComposer_MetamodelName(), this.getString(), "metamodelName", null, 0, 1, Composer.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getComposer_Mode(), this.getModes(), "mode", null, 0, 1, Composer.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		addEOperation(composerEClass, this.getMergeable(), "compose", 0, 1, IS_UNIQUE, IS_ORDERED);
 
@@ -853,6 +885,11 @@ public class KomposePackageImpl extends EPackageImpl implements KomposePackage {
 		initEAttribute(getConcat_PropertyNames(), this.getString(), "propertyNames", null, 0, -1, Concat.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getConcat_Target(), this.getElementRef(), null, "target", null, 1, 1, Concat.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getConcat_Value(), this.getElementRef(), null, "value", null, 1, 1, Concat.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		// Initialize enums and add enum literals
+		initEEnum(modesEEnum, Modes.class, "Modes");
+		addEEnumLiteral(modesEEnum, Modes.INTERSECTION);
+		addEEnumLiteral(modesEEnum, Modes.UNION);
 
 		// Initialize data types
 		initEDataType(stringEDataType, String.class, "String", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);

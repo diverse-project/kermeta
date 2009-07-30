@@ -332,6 +332,10 @@
         <element xmi:type="ecore:EAttribute" href="kompose.ecore#//Composer/metamodelName"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_Tl6uxR0KEd6APoCTJcTR-g"/>
       </children>
+      <children xmi:type="notation:Node" xmi:id="_ia-TIHeOEd6yGJiQJ1p2bw" type="2001">
+        <element xmi:type="ecore:EAttribute" href="kompose.ecore#//Composer/mode"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_ia-TIXeOEd6yGJiQJ1p2bw"/>
+      </children>
       <styles xmi:type="notation:DrawerStyle" xmi:id="_Tl6Hsh0KEd6APoCTJcTR-g"/>
       <styles xmi:type="notation:SortingStyle" xmi:id="_Tl6Hsx0KEd6APoCTJcTR-g"/>
       <styles xmi:type="notation:FilteringStyle" xmi:id="_Tl6HtB0KEd6APoCTJcTR-g"/>
@@ -380,6 +384,25 @@
     <styles xmi:type="notation:ShapeStyle" xmi:id="_3eDpQR7XEd6AZpgmxjttMA" fontName="Sans" fontHeight="10" fillColor="13761016" lineColor="0"/>
     <element xmi:type="ecore:EClass" href="kompose.ecore#//Concat"/>
     <layoutConstraint xmi:type="notation:Bounds" xmi:id="_3eDpQh7XEd6AZpgmxjttMA" x="1041" y="189"/>
+  </children>
+  <children xmi:type="notation:Node" xmi:id="_lZAxkHeOEd6yGJiQJ1p2bw" type="1005">
+    <children xmi:type="notation:Node" xmi:id="_lZDN0HeOEd6yGJiQJ1p2bw" type="4010"/>
+    <children xmi:type="notation:Node" xmi:id="_lZEb8HeOEd6yGJiQJ1p2bw" type="5008">
+      <children xmi:type="notation:Node" xmi:id="_mUEEkHeOEd6yGJiQJ1p2bw" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="kompose.ecore#//Modes/INTERSECTION"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_mUEEkXeOEd6yGJiQJ1p2bw"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_oEgHcHeOEd6yGJiQJ1p2bw" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="kompose.ecore#//Modes/UNION"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_oEgHcXeOEd6yGJiQJ1p2bw"/>
+      </children>
+      <styles xmi:type="notation:DrawerStyle" xmi:id="_lZEb8XeOEd6yGJiQJ1p2bw"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_lZEb8neOEd6yGJiQJ1p2bw"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_lZEb83eOEd6yGJiQJ1p2bw"/>
+    </children>
+    <styles xmi:type="notation:ShapeStyle" xmi:id="_lZAxkXeOEd6yGJiQJ1p2bw" fontName="Sans" fontHeight="10" fillColor="13761016" lineColor="0"/>
+    <element xmi:type="ecore:EEnum" href="kompose.ecore#//Modes"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_lZAxkneOEd6yGJiQJ1p2bw" x="329" y="116"/>
   </children>
   <styles xmi:type="notation:DiagramStyle" xmi:id="_TlM9ER0KEd6APoCTJcTR-g"/>
   <element xmi:type="ecore:EPackage" href="kompose.ecore#/"/>

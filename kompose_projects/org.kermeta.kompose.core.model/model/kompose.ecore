@@ -58,6 +58,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="predirectivesAM" upperBound="-1"
         eType="#//ElementDirective" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="metamodelName" eType="#//String"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="mode" eType="#//Modes"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Mergeable" abstract="true"/>
   <eClassifiers xsi:type="ecore:EClass" name="Concat" eSuperTypes="#//ElementDirective">
@@ -67,5 +68,9 @@
         eType="#//ElementRef" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="value" lowerBound="1" eType="#//ElementRef"
         containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="Modes">
+    <eLiterals name="INTERSECTION"/>
+    <eLiterals name="UNION" value="1"/>
   </eClassifiers>
 </ecore:EPackage>

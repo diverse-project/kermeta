@@ -6,6 +6,10 @@
     complianceLevel="5.0" language="">
   <foreignModel>kompose.ecore</foreignModel>
   <genPackages prefix="Kompose" disposableProviderFactory="true" ecorePackage="kompose.ecore#/">
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="kompose.ecore#//Modes">
+      <genEnumLiterals ecoreEnumLiteral="kompose.ecore#//Modes/INTERSECTION"/>
+      <genEnumLiterals ecoreEnumLiteral="kompose.ecore#//Modes/UNION"/>
+    </genEnums>
     <genDataTypes ecoreDataType="kompose.ecore#//String"/>
     <genDataTypes ecoreDataType="kompose.ecore#//Boolean"/>
     <genDataTypes ecoreDataType="kompose.ecore#//Integer"/>
@@ -54,6 +58,7 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kompose.ecore#//Composer/composedModelURI"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference kompose.ecore#//Composer/predirectivesAM"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kompose.ecore#//Composer/metamodelName"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kompose.ecore#//Composer/mode"/>
       <genOperations ecoreOperation="kompose.ecore#//Composer/compose"/>
     </genClasses>
     <genClasses image="false" ecoreClass="kompose.ecore#//Mergeable"/>

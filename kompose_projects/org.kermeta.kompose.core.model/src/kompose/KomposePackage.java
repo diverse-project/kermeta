@@ -9,6 +9,7 @@ package kompose;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EDataType;
+import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 
@@ -672,13 +673,22 @@ public interface KomposePackage extends EPackage {
 	int COMPOSER__METAMODEL_NAME = 6;
 
 	/**
+	 * The feature id for the '<em><b>Mode</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMPOSER__MODE = 7;
+
+	/**
 	 * The number of structural features of the '<em>Composer</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int COMPOSER_FEATURE_COUNT = 7;
+	int COMPOSER_FEATURE_COUNT = 8;
 
 	/**
 	 * The meta object id for the '{@link kompose.impl.MergeableImpl <em>Mergeable</em>}' class.
@@ -755,6 +765,16 @@ public interface KomposePackage extends EPackage {
 	int CONCAT_FEATURE_COUNT = ELEMENT_DIRECTIVE_FEATURE_COUNT + 3;
 
 	/**
+	 * The meta object id for the '{@link kompose.Modes <em>Modes</em>}' enum.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see kompose.Modes
+	 * @see kompose.impl.KomposePackageImpl#getModes()
+	 * @generated
+	 */
+	int MODES = 19;
+
+	/**
 	 * The meta object id for the '<em>String</em>' data type.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -762,7 +782,7 @@ public interface KomposePackage extends EPackage {
 	 * @see kompose.impl.KomposePackageImpl#getString()
 	 * @generated
 	 */
-	int STRING = 19;
+	int STRING = 20;
 
 	/**
 	 * The meta object id for the '<em>Boolean</em>' data type.
@@ -772,7 +792,7 @@ public interface KomposePackage extends EPackage {
 	 * @see kompose.impl.KomposePackageImpl#getBoolean()
 	 * @generated
 	 */
-	int BOOLEAN = 20;
+	int BOOLEAN = 21;
 
 	/**
 	 * The meta object id for the '<em>Integer</em>' data type.
@@ -782,7 +802,7 @@ public interface KomposePackage extends EPackage {
 	 * @see kompose.impl.KomposePackageImpl#getInteger()
 	 * @generated
 	 */
-	int INTEGER = 21;
+	int INTEGER = 22;
 
 
 	/**
@@ -1154,6 +1174,17 @@ public interface KomposePackage extends EPackage {
 	EAttribute getComposer_MetamodelName();
 
 	/**
+	 * Returns the meta object for the attribute '{@link kompose.Composer#getMode <em>Mode</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Mode</em>'.
+	 * @see kompose.Composer#getMode()
+	 * @see #getComposer()
+	 * @generated
+	 */
+	EAttribute getComposer_Mode();
+
+	/**
 	 * Returns the meta object for class '{@link kompose.Mergeable <em>Mergeable</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1205,6 +1236,16 @@ public interface KomposePackage extends EPackage {
 	 * @generated
 	 */
 	EReference getConcat_Value();
+
+	/**
+	 * Returns the meta object for enum '{@link kompose.Modes <em>Modes</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for enum '<em>Modes</em>'.
+	 * @see kompose.Modes
+	 * @generated
+	 */
+	EEnum getModes();
 
 	/**
 	 * Returns the meta object for data type '{@link java.lang.String <em>String</em>}'.
@@ -1576,6 +1617,14 @@ public interface KomposePackage extends EPackage {
 		EAttribute COMPOSER__METAMODEL_NAME = eINSTANCE.getComposer_MetamodelName();
 
 		/**
+		 * The meta object literal for the '<em><b>Mode</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute COMPOSER__MODE = eINSTANCE.getComposer_Mode();
+
+		/**
 		 * The meta object literal for the '{@link kompose.impl.MergeableImpl <em>Mergeable</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -1618,6 +1667,16 @@ public interface KomposePackage extends EPackage {
 		 * @generated
 		 */
 		EReference CONCAT__VALUE = eINSTANCE.getConcat_Value();
+
+		/**
+		 * The meta object literal for the '{@link kompose.Modes <em>Modes</em>}' enum.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see kompose.Modes
+		 * @see kompose.impl.KomposePackageImpl#getModes()
+		 * @generated
+		 */
+		EEnum MODES = eINSTANCE.getModes();
 
 		/**
 		 * The meta object literal for the '<em>String</em>' data type.

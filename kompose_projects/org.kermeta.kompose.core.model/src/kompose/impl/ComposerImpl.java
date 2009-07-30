@@ -13,6 +13,7 @@ import kompose.ElementDirective;
 import kompose.KomposePackage;
 import kompose.Mergeable;
 
+import kompose.Modes;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 
@@ -41,6 +42,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *   <li>{@link kompose.impl.ComposerImpl#getComposedModelURI <em>Composed Model URI</em>}</li>
  *   <li>{@link kompose.impl.ComposerImpl#getPredirectivesAM <em>Predirectives AM</em>}</li>
  *   <li>{@link kompose.impl.ComposerImpl#getMetamodelName <em>Metamodel Name</em>}</li>
+ *   <li>{@link kompose.impl.ComposerImpl#getMode <em>Mode</em>}</li>
  * </ul>
  * </p>
  *
@@ -156,6 +158,26 @@ public class ComposerImpl extends EObjectImpl implements Composer {
 	 * @ordered
 	 */
 	protected String metamodelName = METAMODEL_NAME_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getMode() <em>Mode</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getMode()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final Modes MODE_EDEFAULT = Modes.INTERSECTION;
+
+	/**
+	 * The cached value of the '{@link #getMode() <em>Mode</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getMode()
+	 * @generated
+	 * @ordered
+	 */
+	protected Modes mode = MODE_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -301,6 +323,27 @@ public class ComposerImpl extends EObjectImpl implements Composer {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public Modes getMode() {
+		return mode;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setMode(Modes newMode) {
+		Modes oldMode = mode;
+		mode = newMode == null ? MODE_EDEFAULT : newMode;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, KomposePackage.COMPOSER__MODE, oldMode, mode));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public Mergeable compose() {
 		// TODO: implement this method
 		// Ensure that you remove @generated or mark it @generated NOT
@@ -347,6 +390,8 @@ public class ComposerImpl extends EObjectImpl implements Composer {
 				return getPredirectivesAM();
 			case KomposePackage.COMPOSER__METAMODEL_NAME:
 				return getMetamodelName();
+			case KomposePackage.COMPOSER__MODE:
+				return getMode();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -384,6 +429,9 @@ public class ComposerImpl extends EObjectImpl implements Composer {
 			case KomposePackage.COMPOSER__METAMODEL_NAME:
 				setMetamodelName((String)newValue);
 				return;
+			case KomposePackage.COMPOSER__MODE:
+				setMode((Modes)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -417,6 +465,9 @@ public class ComposerImpl extends EObjectImpl implements Composer {
 			case KomposePackage.COMPOSER__METAMODEL_NAME:
 				setMetamodelName(METAMODEL_NAME_EDEFAULT);
 				return;
+			case KomposePackage.COMPOSER__MODE:
+				setMode(MODE_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -443,6 +494,8 @@ public class ComposerImpl extends EObjectImpl implements Composer {
 				return predirectivesAM != null && !predirectivesAM.isEmpty();
 			case KomposePackage.COMPOSER__METAMODEL_NAME:
 				return METAMODEL_NAME_EDEFAULT == null ? metamodelName != null : !METAMODEL_NAME_EDEFAULT.equals(metamodelName);
+			case KomposePackage.COMPOSER__MODE:
+				return mode != MODE_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -465,6 +518,8 @@ public class ComposerImpl extends EObjectImpl implements Composer {
 		result.append(composedModelURI);
 		result.append(", metamodelName: ");
 		result.append(metamodelName);
+		result.append(", mode: ");
+		result.append(mode);
 		result.append(')');
 		return result.toString();
 	}

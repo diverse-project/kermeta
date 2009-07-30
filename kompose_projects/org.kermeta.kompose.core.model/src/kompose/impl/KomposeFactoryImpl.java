@@ -88,6 +88,8 @@ public class KomposeFactoryImpl extends EFactoryImpl implements KomposeFactory {
 	@Override
 	public Object createFromString(EDataType eDataType, String initialValue) {
 		switch (eDataType.getClassifierID()) {
+			case KomposePackage.MODES:
+				return createModesFromString(eDataType, initialValue);
 			case KomposePackage.STRING:
 				return createStringFromString(eDataType, initialValue);
 			case KomposePackage.BOOLEAN:
@@ -107,6 +109,8 @@ public class KomposeFactoryImpl extends EFactoryImpl implements KomposeFactory {
 	@Override
 	public String convertToString(EDataType eDataType, Object instanceValue) {
 		switch (eDataType.getClassifierID()) {
+			case KomposePackage.MODES:
+				return convertModesToString(eDataType, instanceValue);
 			case KomposePackage.STRING:
 				return convertStringToString(eDataType, instanceValue);
 			case KomposePackage.BOOLEAN:
@@ -256,6 +260,26 @@ public class KomposeFactoryImpl extends EFactoryImpl implements KomposeFactory {
 	public Concat createConcat() {
 		ConcatImpl concat = new ConcatImpl();
 		return concat;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Modes createModesFromString(EDataType eDataType, String initialValue) {
+		Modes result = Modes.get(initialValue);
+		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
+		return result;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String convertModesToString(EDataType eDataType, Object instanceValue) {
+		return instanceValue == null ? null : instanceValue.toString();
 	}
 
 	/**

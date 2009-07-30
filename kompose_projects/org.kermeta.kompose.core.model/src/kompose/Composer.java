@@ -25,6 +25,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link kompose.Composer#getComposedModelURI <em>Composed Model URI</em>}</li>
  *   <li>{@link kompose.Composer#getPredirectivesAM <em>Predirectives AM</em>}</li>
  *   <li>{@link kompose.Composer#getMetamodelName <em>Metamodel Name</em>}</li>
+ *   <li>{@link kompose.Composer#getMode <em>Mode</em>}</li>
  * </ul>
  * </p>
  *
@@ -184,6 +185,35 @@ public interface Composer extends EObject {
 	 * @generated
 	 */
 	void setMetamodelName(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Mode</b></em>' attribute.
+	 * The literals are from the enumeration {@link kompose.Modes}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Mode</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Mode</em>' attribute.
+	 * @see kompose.Modes
+	 * @see #setMode(Modes)
+	 * @see kompose.KomposePackage#getComposer_Mode()
+	 * @model
+	 * @generated
+	 */
+	Modes getMode();
+
+	/**
+	 * Sets the value of the '{@link kompose.Composer#getMode <em>Mode</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Mode</em>' attribute.
+	 * @see kompose.Modes
+	 * @see #getMode()
+	 * @generated
+	 */
+	void setMode(Modes value);
 
 	/**
 	 * <!-- begin-user-doc -->

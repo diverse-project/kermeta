@@ -47,7 +47,8 @@ class KomposeMain {
         result.logger.initialize
         result.logger.enableLog(logging)
         result.trace := TraceModel.new
-	end
+        result.mode := c.mode
+     end
 }
 
 /** 
@@ -125,6 +126,10 @@ aspect abstract class Composer {
 		}
 	end
 	
+	operation resolveConflict(selfValue : Object, otherValue : Object, prop : Object) : Object is do
+		result := selfValue
+	end
+	
 	/**
 	 * Global composition operation that realizes the whole process of composition
 	 * returns the root of the composed model
@@ -149,7 +154,7 @@ aspect abstract class Composer {
 		self.logger.printInfo("Composing models...")
 		var composer : ModelElementComposer init ModelElementComposer.new
 		composer.resources.addAll(self.resources)
-		cm := composer.compose(pm, am,self.logger,self.trace)
+		cm := composer.compose(pm, am,self.logger,self.trace, self)
 		
 		// execute post-directives
 		self.logger.printInfo("Executing postdirectives on composed model...")
@@ -157,7 +162,6 @@ aspect abstract class Composer {
 		self.logger.printInfo("OK")
 		
 		// save the result
-		
 		if cm.isVoid() then
 			self.logger.printError("Saving composed model is impossible...")
 			self.logger.printError("See previous errors for explanations.")
@@ -172,7 +176,6 @@ aspect abstract class Composer {
    		self.logger.printError("\n" + ex.toString)
    		self.logger.printInfo("composition aborded.")
 	end
-	
 }
 
 /** 
