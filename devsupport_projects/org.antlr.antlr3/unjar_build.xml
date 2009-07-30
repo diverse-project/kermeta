@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="org.antlr.antlr3_x" default="unjar" basedir=".">
+	
+	<target name="unjar" >
+		<tstamp>
+			<format property="TODAY_UK" pattern="d-MMMM-yyyy" locale="en"/>
+		</tstamp>
+		<filter token="BUILD.DATE" value="${TODAY_UK}"/>
+		<gunzip src="original_lib/antlr-3.1.3.tar.gz" dest="."/>
+		<untar src="antlr-3.1.3.tar" dest="."/>
+		<delete file="antlr-3.1.3.tar"/>
+		<move todir="extracted_src">
+		    <fileset dir="antlr-3.1.3/runtime/Java/src/main/java/"/>
+		</move>
+		<delete dir="antlr-3.1.3">
+		</delete>
+	</target>
+
+</project>
