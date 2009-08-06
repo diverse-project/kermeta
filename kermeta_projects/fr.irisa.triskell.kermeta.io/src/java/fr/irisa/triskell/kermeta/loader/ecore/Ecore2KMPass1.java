@@ -29,7 +29,9 @@ import org.eclipse.emf.ecore.EParameter;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.ETypeParameter;
+import org.eclipse.emf.ecore.EPackage.Registry;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecoretools.registration.EMFRegistryHelper;
 import org.kermeta.io.KermetaUnit;
 import org.kermeta.io.plugin.IOPlugin;
 import org.kermeta.model.KermetaModelHelper;
@@ -444,7 +446,19 @@ public class Ecore2KMPass1 extends Ecore2KMPass {
 		boolean external = o.eResource() != resource;
 		if ( external ) {
 			try {
-				KermetaUnit unitToImport = IOPlugin.getDefault().getKermetaUnit( o.eResource().getURI().toString() );
+				// get the uri of the containing resource for this object
+				String uri = o.eResource().getURI().toString(); // by default use the declared resource URI
+
+				// maybe it comes from a registered EPackage, if true, use it instead
+				if(o instanceof EClass){
+					EPackage pack = (EPackage) o.eContainer();
+					//EPackage.Registry.INSTANCE.getEPackage(pack.getNsURI())
+					if(EMFRegistryHelper.isRegistered(pack)){
+						uri = pack.getNsURI();
+					}
+				}
+				//EPackage.Registry.INSTANCE.containsKey((EPackage)o.eContainer())
+				KermetaUnit unitToImport = IOPlugin.getDefault().getKermetaUnit( uri );
 				if ( ! unitToImport.isFramework() ) {
 					kermetaUnit.getImportedKermetaUnits().add( unitToImport );
 					kermetaUnit.addRequire(unitToImport.getUri(), unitToImport);

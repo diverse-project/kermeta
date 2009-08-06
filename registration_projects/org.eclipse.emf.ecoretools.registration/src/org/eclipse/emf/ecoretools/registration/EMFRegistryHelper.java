@@ -55,6 +55,15 @@ public class EMFRegistryHelper {
 	}
 	
 	/**
+	 * checks if this specific instance of EPackage is in the registry
+	 * @param a EPackage
+	 * @return
+	 */
+	public static boolean isRegistered(EPackage pack){
+		return Registry.INSTANCE.containsValue(pack);
+	}
+	
+	/**
 	 * checks if this URI is in the registry due to a Register action on an Ecore file
 	 * ignores EPackage from generated java 
 	 * @param uri
