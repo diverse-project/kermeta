@@ -168,20 +168,10 @@ public class KermetaUnitStorerImpl extends EObjectImpl implements KermetaUnitSto
 				kermetaUnits.remove(kermetaUnit);
 				throw new NotRegisteredURIException(kermetaUnitURI);
 			} else {
-				Object o = Registry.INSTANCE.get( kermetaUnitURI );
-				if ( o instanceof Package )
-					kermetaUnit.setBuildingState( new KmBuildingState() );
-				else if ( o instanceof EPackage.Descriptor ) {
-					EPackage p = ((EPackage.Descriptor) o).getEPackage();
-					if ( p instanceof Package )
-						kermetaUnit.setBuildingState( new KmBuildingState() );
-					else
-						kermetaUnit.setBuildingState( new EcoreBuildingState() );
-				}
-				else if ( o instanceof EPackage ) {
+				EPackage p = Registry.INSTANCE.getEPackage(kermetaUnitURI);
+				if(p != null){
 					kermetaUnit.setBuildingState( new EcoreBuildingState() );
-				} else
-					kermetaUnit.error("Unknown Format. It is impossible to load this registered resource.");
+				}				
 				
 			}
 
