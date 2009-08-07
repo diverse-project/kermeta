@@ -60,7 +60,7 @@ public class EMFRegistryHelper {
 	 * @return
 	 */
 	public static boolean isDynamicallyRegistered(String uri){
-		EPackage pack = (EPackage)Registry.INSTANCE.get(uri);
+		EPackage pack = Registry.INSTANCE.getEPackage(uri);
 		if(pack == null) return false;
 		if(pack.getClass() == EPackageImpl.class){ // if this is exactly an EPackage then this comes from a files, otherwise it comes from generated java
 			return true;
@@ -74,16 +74,13 @@ public class EMFRegistryHelper {
 	 */
 	public static Set<String> getRegisteredChildren(String uri) {
 		HashSet<String> result = new HashSet<String>();
-		Object obj = Registry.INSTANCE.get( uri );
-		// get only valid children , ie. registered children
-		if(obj instanceof EPackage) {
-			EPackage p = (EPackage) obj;
-			Iterator<EPackage> subPackageIt = p.getESubpackages().iterator();
-			while(subPackageIt.hasNext()){
-				EPackage subPackage = subPackageIt.next();
-				if(EMFRegistryHelper.isRegistered(subPackage.getNsURI())){
-					result.add(subPackage.getNsURI());
-				}
+		
+		EPackage p = Registry.INSTANCE.getEPackage( uri );
+		Iterator<EPackage> subPackageIt = p.getESubpackages().iterator();
+		while(subPackageIt.hasNext()){
+			EPackage subPackage = subPackageIt.next();
+			if(EMFRegistryHelper.isRegistered(subPackage.getNsURI())){
+				result.add(subPackage.getNsURI());
 			}
 		}
 		return result;
@@ -96,18 +93,15 @@ public class EMFRegistryHelper {
 	 */
 	public static Set<String> getAllRegisteredChildren(String uri) {
 		HashSet<String> result = new HashSet<String>();
-		Object obj = Registry.INSTANCE.get( uri );
-		// get only valid children , ie. registered children
-		if(obj instanceof EPackage) {
-			EPackage p = (EPackage) obj;
-			Iterator<EPackage> subPackageIt = p.getESubpackages().iterator();
-			while(subPackageIt.hasNext()){
-				EPackage subPackage = subPackageIt.next();
-				if(EMFRegistryHelper.isRegistered(subPackage.getNsURI())){
-					result.add(subPackage.getNsURI());
-					// also add the granchildreen ...
-					result.addAll(getAllRegisteredChildren(subPackage.getNsURI()));
-				}
+		
+		EPackage p = Registry.INSTANCE.getEPackage( uri );
+		Iterator<EPackage> subPackageIt = p.getESubpackages().iterator();
+		while(subPackageIt.hasNext()){
+			EPackage subPackage = subPackageIt.next();
+			if(EMFRegistryHelper.isRegistered(subPackage.getNsURI())){
+				result.add(subPackage.getNsURI());
+				// also add the granchildreen ...
+				result.addAll(getAllRegisteredChildren(subPackage.getNsURI()));
 			}
 		}
 		return result;
