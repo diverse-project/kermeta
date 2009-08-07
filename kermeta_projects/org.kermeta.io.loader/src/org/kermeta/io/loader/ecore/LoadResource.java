@@ -33,7 +33,7 @@ public class LoadResource extends EcoreLoadingAction {
 		 * First check into the registry
 		 * 
 		 */
-		EPackage p = (EPackage) Registry.INSTANCE.get( datas.getKermetaUnit().getUri() );
+		EPackage p = Registry.INSTANCE.getEPackage( datas.getKermetaUnit().getUri() );
 		if ( p != null )
 			datas.contents.add(p);
 		else {
