@@ -65,7 +65,7 @@ public class AddMarkers implements IAction {
 				if ( kermetaUnit != null ){
 					for(KermetaUnitRequire unitRequire : kermetaUnit.getKermetaUnitRequires()){
 						KermetaUnit requiredUnit = unitRequire.getKermetaUnit();
-						if(requiredUnit.isErroneous()){
+						if(requiredUnit.isErroneous() || requiredUnit.isWarned()){
 							if(EMFRegistryHelper.isRegistered(requiredUnit.getUri()) &&
 									! EMFRegistryHelper.isDynamicallyRegistered(requiredUnit.getUri()) ){
 								addRequireErrors(requiredUnit);
@@ -76,8 +76,14 @@ public class AddMarkers implements IAction {
 									kermetaUnit.error( message, unitRequire );
 								}*/
 							}
-						}
+							// DVK: currently it also doesn't deal ecore files, maybe a better correction would be to tell kpm to chek the ecore files ? 
+							// must check the cpu overhead
+							if(requiredUnit.getUri().endsWith(".ecore")){
+								addRequireErrors(requiredUnit);
+							}
+						}						
 					}
+					
 				}
 				
 				/* 
