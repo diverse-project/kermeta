@@ -171,7 +171,9 @@ public class KermetaUnitStorerImpl extends EObjectImpl implements KermetaUnitSto
 				EPackage p = Registry.INSTANCE.getEPackage(kermetaUnitURI);
 				if(p != null){
 					kermetaUnit.setBuildingState( new EcoreBuildingState() );
-				}				
+				}
+				else
+					kermetaUnit.error("Unknown Format. It is impossible to load this registered resource.");				
 				
 			}
 
