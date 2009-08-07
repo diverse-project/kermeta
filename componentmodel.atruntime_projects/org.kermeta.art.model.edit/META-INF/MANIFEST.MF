@@ -15,4 +15,4 @@ Export-Package: art.implem.provider,
 Require-Bundle: org.eclipse.core.runtime,
  org.kermeta.art.model;visibility:=reexport,
  org.eclipse.emf.edit;visibility:=reexport
-Eclipse-LazyStart: true
+Bundle-ActivationPolicy: lazy
