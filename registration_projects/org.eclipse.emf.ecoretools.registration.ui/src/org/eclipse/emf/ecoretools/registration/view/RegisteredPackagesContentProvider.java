@@ -64,7 +64,7 @@ public class RegisteredPackagesContentProvider implements ITreeContentProvider {
 				.getRegisteredChildren(p.getNsURI());
 		List<EPackage> children = new ArrayList<EPackage>();
 		for (String s : uris) {
-			Object o = Registry.INSTANCE.get(s);
+			Object o = Registry.INSTANCE.getEPackage(s);
 			if (o instanceof EPackage)
 				children.add((EPackage) o);
 		}
