@@ -4,7 +4,7 @@ Bundle-Name: Flora2 Plug-in
 Bundle-SymbolicName: fr.irisa.triskell.kermeta.flora2; singleton:=true
 Bundle-Version: 1.0.0.qualifier
 Bundle-Activator: fr.irisa.triskell.kermeta.flora2.Activator
-Bundle-Vendor: IRISA Triskell
+Bundle-Vendor: IRISA/INRIA
 Bundle-Localization: plugin
 Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.emf.ecore,
