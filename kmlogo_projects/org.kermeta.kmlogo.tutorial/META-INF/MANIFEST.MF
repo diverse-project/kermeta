@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: KMLogo Tutorial Plug-in
 Bundle-SymbolicName: org.kermeta.kmlogo.tutorial; singleton:=true
-Bundle-Version: 1.3.0.qualifier
+Bundle-Version: 1.3.2
 Bundle-Activator: org.kermeta.kmlogo.tutorial.Activator
 Bundle-Vendor: IRISA/INRIA
 Require-Bundle: org.eclipse.ui,

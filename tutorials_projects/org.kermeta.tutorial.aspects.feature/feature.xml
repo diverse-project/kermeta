@@ -2,7 +2,7 @@
 <feature
       id="org.kermeta.tutorial.aspects"
       label="Kermeta tutorial on Aspect Programming"
-      version="1.3.0.qualifier"
+      version="1.3.2"
       provider-name="IRISA/INRIA">
 
    <description url="http://www.kermeta.org">
