@@ -6,6 +6,8 @@
 	
 	<!-- use this value if not provided by hudson -->
 	<property name="env.WORKSPACE" location="/local/hudson/home/jobs/statsvn_kermeta/workspace"/>
+	
+	<property name="ssh.privatekey" location="/udd/dvojtise/.ssh/kermeta_bot/id_rsa"/>
 		
 	
 	<property name="statsvn.jar" location="/udd/triskell/bin/multiplatform/statsvn-0.5.0/statsvn.jar"/>
@@ -28,7 +30,7 @@
 			</commandline>
 		</cvs> -->
 		<exec executable="svn" output="${svn.log}">
-			<env key="SVN_SSH" path="/usr/bin/ssh -i /udd/dvojtise/.ssh/kermeta_bot/id_rsa"/>
+			<env key="SVN_SSH" path="/usr/bin/ssh -i ${ssh.privatekey}"/>
 		    <arg value="log"/>
 		    <arg value="-v"/>
 		    <arg value="--xml"/>
@@ -41,7 +43,7 @@
     	           failonerror="true"
     	           maxmemory="256m"
     	           >
-		    <env key="SVN_SSH" path="/usr/bin/ssh -i /udd/dvojtise/.ssh/kermeta_bot/id_rsa"/>
+		    <env key="SVN_SSH" path="/usr/bin/ssh -i ${ssh.privatekey}"/>
 			<arg value="-verbose"/> 			
 		    <arg value="-title"/>			
 			<arg value="Kermeta"/> 	
@@ -76,8 +78,7 @@
             tags="(V|v|KERMETA_V|Kermeta_v).*"/>
             -->
     </target>
-    <target name="patch_gforge_cvsweb_links">
-		<echo>Currently no patch</echo>
+    <target name="patch_gforge_cvsweb_links">    	
    <!--     <replace dir="${output.dir}" >
             <include name="**/*.html"/>
             <replacetoken><![CDATA[" class="webrepository"]]></replacetoken>
@@ -89,4 +90,9 @@
             <replacevalue><![CDATA[vnd.viewcvs-markup&amp;cvsroot=kermeta"]]></replacevalue>
         </replace>-->
     </target>
+	
+	<target name="init_local_mirror_repository">
+	</target>
+	<target name="sync_local_mirror_repository">
+	</target>
 </project>
