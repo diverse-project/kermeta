@@ -230,10 +230,10 @@ public abstract class CtTryImpl extends CtStatementImpl implements CtTry {
 				setLabel((String)newValue);
 				return;
 			case CodePackage.CT_TRY__FINALIZER:
-				setFinalizer((CtBlock)newValue);
+				setFinalizer((spoon.reflect.code.CtBlock)newValue);
 				return;
 			case CodePackage.CT_TRY__BODY:
-				setBody((CtBlock)newValue);
+				setBody((spoon.reflect.code.CtBlock)newValue);
 				return;
 			case CodePackage.CT_TRY__CATCHERS:
 				getCatchers().clear();
@@ -266,10 +266,10 @@ public abstract class CtTryImpl extends CtStatementImpl implements CtTry {
 				setLabel(LABEL_EDEFAULT);
 				return;
 			case CodePackage.CT_TRY__FINALIZER:
-				setFinalizer((CtBlock)null);
+				setFinalizer((spoon.reflect.code.CtBlock)null);
 				return;
 			case CodePackage.CT_TRY__BODY:
-				setBody((CtBlock)null);
+				setBody((spoon.reflect.code.CtBlock)null);
 				return;
 			case CodePackage.CT_TRY__CATCHERS:
 				getCatchers().clear();

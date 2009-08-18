@@ -156,7 +156,7 @@ public abstract class CtDoImpl extends CtLoopImpl implements CtDo {
 				setBody((CtStatement)newValue);
 				return;
 			case CodePackage.CT_DO__LOOPING_EXPRESSION:
-				setLoopingExpression((CtExpression)newValue);
+				setLoopingExpression((spoon.reflect.code.CtExpression)newValue);
 				return;
 		}
 		eDynamicSet(featureID, newValue);
@@ -188,7 +188,7 @@ public abstract class CtDoImpl extends CtLoopImpl implements CtDo {
 				setBody((CtStatement)null);
 				return;
 			case CodePackage.CT_DO__LOOPING_EXPRESSION:
-				setLoopingExpression((CtExpression)null);
+				setLoopingExpression((spoon.reflect.code.CtExpression)null);
 				return;
 		}
 		eDynamicUnset(featureID);

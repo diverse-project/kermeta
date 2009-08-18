@@ -69,6 +69,7 @@ public class Java2XMIHelper {
 		env.setVerbose(true);
 		env.setDebug(true);
 
+		//env.getSourcePath().add("/home/barais/workspaces/runtime-New_configuration(1)/Test/src");
 		
 		 factory = new Factory(new  EMFFactory(resource),  env);
 		 //factory.Method().
@@ -102,8 +103,10 @@ public class Java2XMIHelper {
 
 	public static void main(String[] args) {
 		List<String> l =	new ArrayList<String>();
-		l.add("/home/barais/workspaces/workspace_spoon/SpoonInput/src/impl");
-		Java2XMIHelper.eInstance.processJavaFolder(l , "test.xmi");
+		//l.add("/home/barais/workspaces/runtime-New_configuration(1)/Test/testMOPCOM-I/original_xms_api");
+		l.add("/home/barais/workspaces/runtime-New_configuration(1)/Test/src/a");
+		//"/home/barais/workspaces/workspace_spoon/SpoonInput/src/impl");
+		Java2XMIHelper.eInstance.processJavaFolder(l , "/home/barais/workspaces/runtime-New_configuration(1)/Test/xms.java5");
 	}
 	
 

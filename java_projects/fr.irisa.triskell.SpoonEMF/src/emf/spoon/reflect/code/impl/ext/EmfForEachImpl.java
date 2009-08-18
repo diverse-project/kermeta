@@ -22,12 +22,12 @@ public class EmfForEachImpl extends CtForEachImpl {
 		
 	}
 	public void setExpression(CtExpression<?> expression) {
-		this.setExpression((emf.spoon.reflect.code.CtExpression)expression);
+		this.setExpression((spoon.reflect.code.CtExpression)expression);
 		
 	}
 
 	public void setVariable(CtLocalVariable<?> variable) {
-		this.setVariable((emf.spoon.reflect.code.CtLocalVariable)variable);
+		this.setVariable((spoon.reflect.code.CtLocalVariable)variable);
 		
 	}
 

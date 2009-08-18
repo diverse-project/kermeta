@@ -1,5 +1,6 @@
 package emf.spoon.reflect.code.impl.ext;
 
+import java.lang.annotation.Annotation;
 import java.util.Set;
 
 import spoon.reflect.code.CtCodeElement;
@@ -21,9 +22,8 @@ public class EmfIfImpl extends CtIfImpl {
 		
 	}
 
-
-	public void setCondition(CtExpression<Boolean> expression) {
-		this.setCondition((emf.spoon.reflect.code.CtExpression) expression);
+	public void setCondition(spoon.reflect.code.CtExpression expression) {
+		super.setCondition((spoon.reflect.code.CtExpression) expression);
 	}
 
 	public void setElseStatement(CtStatement elseStatement) {
@@ -61,15 +61,7 @@ public class EmfIfImpl extends CtIfImpl {
 		
 	}
 
-	public void insertBefore(CtStatement statement) {
-		// TODO Auto-generated method stub
-		
-	}
 
-	public void insertBefore(CtStatementList statements) {
-		// TODO Auto-generated method stub
-		
-	}
 
 	public Void S() {
 		// TODO Auto-generated method stub
@@ -110,4 +102,33 @@ public class EmfIfImpl extends CtIfImpl {
 		// TODO Auto-generated method stub
 		
 	}
+
+
+
+
+
+	public void insertBefore(CtStatementList<?> statements) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+
+
+	public void insertBefore(CtStatement statement) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void setCondition(emf.spoon.reflect.code.CtExpression value) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+
+
+
+
+
 }

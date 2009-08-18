@@ -156,7 +156,7 @@ public abstract class CtWhileImpl extends CtLoopImpl implements CtWhile {
 				setBody((CtStatement)newValue);
 				return;
 			case CodePackage.CT_WHILE__LOOPING_EXPRESSION:
-				setLoopingExpression((CtExpression)newValue);
+				setLoopingExpression((spoon.reflect.code.CtExpression)newValue);
 				return;
 		}
 		eDynamicSet(featureID, newValue);
@@ -188,7 +188,7 @@ public abstract class CtWhileImpl extends CtLoopImpl implements CtWhile {
 				setBody((CtStatement)null);
 				return;
 			case CodePackage.CT_WHILE__LOOPING_EXPRESSION:
-				setLoopingExpression((CtExpression)null);
+				setLoopingExpression((spoon.reflect.code.CtExpression)null);
 				return;
 		}
 		eDynamicUnset(featureID);

@@ -1,5 +1,6 @@
 package emf.spoon.reflect.code.impl.ext;
 
+import java.lang.annotation.Annotation;
 import java.util.Set;
 
 import spoon.reflect.code.CtCodeElement;
@@ -18,11 +19,11 @@ public class EmfThrowImpl extends CtThrowImpl {
 
 	public void accept(CtVisitor visitor) {
 		visitor.visitCtThrow(this);
-		
+		 
 	}
 
 	public void setThrownExpression(CtExpression<? extends Throwable> thrownExpression) {
-		this.setThrownExpression((emf.spoon.reflect.code.CtExpression) thrownExpression);
+		super.setThrownExpression((spoon.reflect.code.CtExpression) thrownExpression);
 		
 	}
 
@@ -100,4 +101,10 @@ public class EmfThrowImpl extends CtThrowImpl {
 		// TODO Auto-generated method stub
 		
 	}
+
+	public void setThrownExpression(emf.spoon.reflect.code.CtExpression value) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

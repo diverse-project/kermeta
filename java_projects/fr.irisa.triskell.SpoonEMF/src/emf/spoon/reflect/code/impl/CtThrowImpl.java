@@ -92,9 +92,9 @@ public abstract class CtThrowImpl extends CtCFlowBreakImpl implements CtThrow {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setThrownExpression(CtExpression newThrownExpression) {
+	public void setThrownExpression(spoon.reflect.code.CtExpression<? extends Throwable>  newThrownExpression) {
 		CtExpression oldThrownExpression = thrownExpression;
-		thrownExpression = newThrownExpression;
+		thrownExpression = (CtExpression) newThrownExpression;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, CodePackage.CT_THROW__THROWN_EXPRESSION, oldThrownExpression, thrownExpression));
 	}
@@ -149,7 +149,7 @@ public abstract class CtThrowImpl extends CtCFlowBreakImpl implements CtThrow {
 				setLabel((String)newValue);
 				return;
 			case CodePackage.CT_THROW__THROWN_EXPRESSION:
-				setThrownExpression((CtExpression)newValue);
+				setThrownExpression((spoon.reflect.code.CtExpression)newValue);
 				return;
 		}
 		eDynamicSet(featureID, newValue);
@@ -178,7 +178,7 @@ public abstract class CtThrowImpl extends CtCFlowBreakImpl implements CtThrow {
 				setLabel(LABEL_EDEFAULT);
 				return;
 			case CodePackage.CT_THROW__THROWN_EXPRESSION:
-				setThrownExpression((CtExpression)null);
+				setThrownExpression((spoon.reflect.code.CtExpression)null);
 				return;
 		}
 		eDynamicUnset(featureID);

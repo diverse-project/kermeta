@@ -24,13 +24,13 @@ public class EmfCatchImpl extends CtCatchImpl {
 	}
 
 	public void setBody(CtBlock body) {
-		this.setBody((emf.spoon.reflect.code.CtBlock) body);
+		setBody((emf.spoon.reflect.code.CtBlock) body);
 
 	}
 
-	public void setParameter(CtLocalVariable<? extends Throwable> parameter) {
-		this.setParameter((emf.spoon.reflect.code.CtLocalVariable) parameter);
-	}
+	public void setParameter(CtLocalVariable parameter) {
+		setParameter((emf.spoon.reflect.code.CtLocalVariable) parameter);
+	} 
 
 	public void replace(CtElement element) {
 		// TODO Auto-generated method stub

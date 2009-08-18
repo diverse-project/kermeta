@@ -217,7 +217,7 @@ public abstract class CtForImpl extends CtLoopImpl implements CtFor {
 				getForUpdate().addAll((Collection)newValue);
 				return;
 			case CodePackage.CT_FOR__EXPRESSION:
-				setExpression((CtExpression)newValue);
+				setExpression((spoon.reflect.code.CtExpression)newValue);
 				return;
 		}
 		eDynamicSet(featureID, newValue);
@@ -255,7 +255,7 @@ public abstract class CtForImpl extends CtLoopImpl implements CtFor {
 				getForUpdate().clear();
 				return;
 			case CodePackage.CT_FOR__EXPRESSION:
-				setExpression((CtExpression)null);
+				setExpression((spoon.reflect.code.CtExpression)null);
 				return;
 		}
 		eDynamicUnset(featureID);

@@ -25,7 +25,7 @@ public class EmfWhileImpl extends CtWhileImpl {
 	}
 
 	public void setLoopingExpression(CtExpression<Boolean> expression) {
-		this.setLoopingExpression(( emf.spoon.reflect.code.CtExpression)expression);
+		this.setLoopingExpression(( spoon.reflect.code.CtExpression)expression);
 	}
 	
 

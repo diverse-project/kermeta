@@ -153,9 +153,9 @@ public abstract class CtIfImpl extends CtStatementImpl implements CtIf {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setCondition(CtExpression newCondition) {
+	public void setCondition(spoon.reflect.code.CtExpression newCondition) {
 		CtExpression oldCondition = condition;
-		condition = newCondition;
+		condition = (CtExpression) newCondition;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, CodePackage.CT_IF__CONDITION, oldCondition, condition));
 	}
@@ -257,7 +257,7 @@ public abstract class CtIfImpl extends CtStatementImpl implements CtIf {
 				setThenStatement((CtStatement)newValue);
 				return;
 			case CodePackage.CT_IF__CONDITION:
-				setCondition((CtExpression)newValue);
+				setCondition((spoon.reflect.code.CtExpression)newValue);
 				return;
 			case CodePackage.CT_IF__ELSE_STATEMENT:
 				setElseStatement((CtStatement)newValue);
@@ -292,7 +292,7 @@ public abstract class CtIfImpl extends CtStatementImpl implements CtIf {
 				setThenStatement((CtStatement)null);
 				return;
 			case CodePackage.CT_IF__CONDITION:
-				setCondition((CtExpression)null);
+				setCondition((spoon.reflect.code.CtExpression)null);
 				return;
 			case CodePackage.CT_IF__ELSE_STATEMENT:
 				setElseStatement((CtStatement)null);

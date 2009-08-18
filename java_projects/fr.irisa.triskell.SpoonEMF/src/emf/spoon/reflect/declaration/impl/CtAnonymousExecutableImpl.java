@@ -265,7 +265,7 @@ public abstract class CtAnonymousExecutableImpl extends CtElementImpl implements
 				getModifiers().addAll((Collection)newValue);
 				return;
 			case DeclarationPackage.CT_ANONYMOUS_EXECUTABLE__BODY:
-				setBody((CtBlock)newValue);
+				setBody((spoon.reflect.code.CtBlock)newValue);
 				return;
 		}
 		eDynamicSet(featureID, newValue);
@@ -294,7 +294,7 @@ public abstract class CtAnonymousExecutableImpl extends CtElementImpl implements
 				getModifiers().clear();
 				return;
 			case DeclarationPackage.CT_ANONYMOUS_EXECUTABLE__BODY:
-				setBody((CtBlock)null);
+				setBody((spoon.reflect.code.CtBlock)null);
 				return;
 		}
 		eDynamicUnset(featureID);

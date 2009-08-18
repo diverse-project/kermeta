@@ -25,7 +25,7 @@ public class EmfSynchronizedImpl extends CtSynchronizedImpl {
 	}
 
 	public void setExpression(CtExpression<?> expression) {
-		this.setExpression((emf.spoon.reflect.code.CtExpression) block);
+		this.setExpression((spoon.reflect.code.CtExpression) block);
 
 	}
 

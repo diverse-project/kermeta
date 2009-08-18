@@ -29,7 +29,7 @@ public class EmfForImpl extends CtForImpl {
 	
 
 	public void setExpression(CtExpression<Boolean> expression) {
-		this.setExpression((emf.spoon.reflect.code.CtExpression) expression);
+		this.setExpression((spoon.reflect.code.CtExpression) expression);
 		
 	}
 

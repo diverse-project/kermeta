@@ -445,7 +445,7 @@ public abstract class CtTypeReferenceImpl<T> extends CtGenericElementReferenceIm
 				setSimpleName((String)newValue);
 				return;
 			case ReferencePackage.CT_TYPE_REFERENCE__DECLARING_TYPE:
-				setDeclaringType((CtTypeReference)newValue);
+				setDeclaringType((spoon.reflect.reference.CtTypeReference)newValue);
 				return;
 			case ReferencePackage.CT_TYPE_REFERENCE__PACKAGE:
 				setPackage((CtPackageReference)newValue);
@@ -476,7 +476,7 @@ public abstract class CtTypeReferenceImpl<T> extends CtGenericElementReferenceIm
 				setSimpleName(SIMPLE_NAME_EDEFAULT);
 				return;
 			case ReferencePackage.CT_TYPE_REFERENCE__DECLARING_TYPE:
-				setDeclaringType((CtTypeReference)null);
+				setDeclaringType((spoon.reflect.reference.CtTypeReference)null);
 				return;
 			case ReferencePackage.CT_TYPE_REFERENCE__PACKAGE:
 				setPackage((CtPackageReference)null);

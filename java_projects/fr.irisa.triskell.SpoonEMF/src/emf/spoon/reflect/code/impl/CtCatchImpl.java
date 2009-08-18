@@ -197,10 +197,10 @@ public abstract class CtCatchImpl extends CtCodeElementImpl implements CtCatch {
 				setParent((CtElement)newValue);
 				return;
 			case CodePackage.CT_CATCH__BODY:
-				setBody((CtBlock)newValue);
+				setBody((spoon.reflect.code.CtBlock)newValue);
 				return;
 			case CodePackage.CT_CATCH__PARAMETER:
-				setParameter((CtLocalVariable)newValue);
+				setParameter((spoon.reflect.code.CtLocalVariable)newValue);
 				return;
 		}
 		eDynamicSet(featureID, newValue);
@@ -226,10 +226,10 @@ public abstract class CtCatchImpl extends CtCodeElementImpl implements CtCatch {
 				setParent((CtElement)null);
 				return;
 			case CodePackage.CT_CATCH__BODY:
-				setBody((CtBlock)null);
+				setBody((spoon.reflect.code.CtBlock)null);
 				return;
 			case CodePackage.CT_CATCH__PARAMETER:
-				setParameter((CtLocalVariable)null);
+				setParameter((spoon.reflect.code.CtLocalVariable)null);
 				return;
 		}
 		eDynamicUnset(featureID);

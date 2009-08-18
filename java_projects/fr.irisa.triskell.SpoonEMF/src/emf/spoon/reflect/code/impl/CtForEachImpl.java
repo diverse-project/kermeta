@@ -209,10 +209,10 @@ public abstract class CtForEachImpl extends CtLoopImpl implements CtForEach {
 				setBody((CtStatement)newValue);
 				return;
 			case CodePackage.CT_FOR_EACH__EXPRESSION:
-				setExpression((CtExpression)newValue);
+				setExpression((spoon.reflect.code.CtExpression)newValue);
 				return;
 			case CodePackage.CT_FOR_EACH__VARIABLE:
-				setVariable((CtLocalVariable)newValue);
+				setVariable((spoon.reflect.code.CtLocalVariable)newValue);
 				return;
 		}
 		eDynamicSet(featureID, newValue);
@@ -244,10 +244,10 @@ public abstract class CtForEachImpl extends CtLoopImpl implements CtForEach {
 				setBody((CtStatement)null);
 				return;
 			case CodePackage.CT_FOR_EACH__EXPRESSION:
-				setExpression((CtExpression)null);
+				setExpression((spoon.reflect.code.CtExpression)null);
 				return;
 			case CodePackage.CT_FOR_EACH__VARIABLE:
-				setVariable((CtLocalVariable)null);
+				setVariable((spoon.reflect.code.CtLocalVariable)null);
 				return;
 		}
 		eDynamicUnset(featureID);

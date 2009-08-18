@@ -8,14 +8,17 @@ import java.util.Set;
 
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.EParameter;
+import org.eclipse.emf.ecore.util.EObjectWithInverseResolvingEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
-public class EmfSet implements  List, EList,Set,InternalEList {
+import emf.spoon.reflect.declaration.impl.ext.EmfConstructorImpl;
+import emf.spoon.reflect.declaration.impl.ext.EmfParameterImpl;
+
+public class EmfSet implements List, EList, Set, InternalEList {
 
 	private InternalEList value;
-	
-	
-	
+
 	public EmfSet(List value) {
 		super();
 		this.value = (InternalEList) value;
@@ -49,13 +52,28 @@ public class EmfSet implements  List, EList,Set,InternalEList {
 		//value.addUnique(object)
 		boolean res =true;
 //		System.err.println("size " +((org.eclipse.emf.common.notify.impl.NotifyingListImpl)value).size());
-		if (!value.contains(o)){
-			value.add(o);
-			return true;
-			
+		if (o instanceof EObjectWithInverseResolvingEList)
+			{org.eclipse.emf.ecore.util.EObjectWithInverseResolvingEList o1 = (EObjectWithInverseResolvingEList) value;;
+			o1.grow(20);
+			}
+		try{
+			if (o!=null){
+			//if (!value.contains(o)){
+				value.add(o);
+				return true;
+				
+			//}	
 		}
-		else
-			return false;
+		}catch(Exception e){
+			e.printStackTrace();
+			//value.add(o);
+			org.eclipse.emf.ecore.util.EObjectWithInverseResolvingEList o1 = (EObjectWithInverseResolvingEList) value;;
+			o1.grow(20);
+			//return true;
+			System.err.println(this.value.getClass());
+			System.err.println("toto " + o.toString() + " " + ((EmfParameterImpl)o).getParent() + "\n\t" +((EmfConstructorImpl)((EmfParameterImpl)o).getParent()).getDeclaringType());
+		}
+		return false;
 	}
 
 	public boolean remove(Object o) {
@@ -100,7 +118,7 @@ public class EmfSet implements  List, EList,Set,InternalEList {
 
 	public void add(int index, Object element) {
 		value.add(index, element);
-		
+
 	}
 
 	public Object remove(int index) {
@@ -155,11 +173,13 @@ public class EmfSet implements  List, EList,Set,InternalEList {
 		return value.basicListIterator(index);
 	}
 
-	public NotificationChain basicRemove(Object object, NotificationChain notifications) {
+	public NotificationChain basicRemove(Object object,
+			NotificationChain notifications) {
 		return value.basicRemove(object, notifications);
 	}
 
-	public NotificationChain basicAdd(Object object, NotificationChain notifications) {
+	public NotificationChain basicAdd(Object object,
+			NotificationChain notifications) {
 		return value.basicAdd(object, notifications);
 	}
 
@@ -168,7 +188,7 @@ public class EmfSet implements  List, EList,Set,InternalEList {
 	}
 
 	public void addUnique(int index, Object object) {
-		value.addUnique(index,  object);		
+		value.addUnique(index, object);
 	}
 
 	public Object setUnique(int index, Object object) {
@@ -181,7 +201,7 @@ public class EmfSet implements  List, EList,Set,InternalEList {
 	}
 
 	public boolean addAllUnique(int index, Collection collection) {
-		
+
 		return value.addAllUnique(index, collection);
 	}
 
@@ -194,7 +214,7 @@ public class EmfSet implements  List, EList,Set,InternalEList {
 	}
 
 	public int basicIndexOf(Object object) {
-		
+
 		return value.basicIndexOf(object);
 	}
 

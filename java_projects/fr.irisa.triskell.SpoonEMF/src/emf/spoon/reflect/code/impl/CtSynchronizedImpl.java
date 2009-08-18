@@ -202,10 +202,10 @@ public abstract class CtSynchronizedImpl extends CtStatementImpl implements CtSy
 				setLabel((String)newValue);
 				return;
 			case CodePackage.CT_SYNCHRONIZED__BLOCK:
-				setBlock((CtBlock)newValue);
+				setBlock((spoon.reflect.code.CtBlock)newValue);
 				return;
 			case CodePackage.CT_SYNCHRONIZED__EXPRESSION:
-				setExpression((CtExpression)newValue);
+				setExpression((spoon.reflect.code.CtExpression)newValue);
 				return;
 		}
 		eDynamicSet(featureID, newValue);
@@ -234,10 +234,10 @@ public abstract class CtSynchronizedImpl extends CtStatementImpl implements CtSy
 				setLabel(LABEL_EDEFAULT);
 				return;
 			case CodePackage.CT_SYNCHRONIZED__BLOCK:
-				setBlock((CtBlock)null);
+				setBlock((spoon.reflect.code.CtBlock)null);
 				return;
 			case CodePackage.CT_SYNCHRONIZED__EXPRESSION:
-				setExpression((CtExpression)null);
+				setExpression((spoon.reflect.code.CtExpression)null);
 				return;
 		}
 		eDynamicUnset(featureID);

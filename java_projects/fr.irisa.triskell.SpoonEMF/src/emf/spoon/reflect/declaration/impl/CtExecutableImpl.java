@@ -412,7 +412,7 @@ public abstract class CtExecutableImpl<T> extends CtGenericElementImpl implement
 				getParameters().addAll((Collection)newValue);
 				return;
 			case DeclarationPackage.CT_EXECUTABLE__BODY:
-				setBody((CtBlock)newValue);
+				setBody((spoon.reflect.code.CtBlock)newValue);
 				return;
 			case DeclarationPackage.CT_EXECUTABLE__THROWN_TYPES:
 				getThrownTypes().clear();
@@ -457,7 +457,7 @@ public abstract class CtExecutableImpl<T> extends CtGenericElementImpl implement
 				getParameters().clear();
 				return;
 			case DeclarationPackage.CT_EXECUTABLE__BODY:
-				setBody((CtBlock)null);
+				setBody((spoon.reflect.code.CtBlock)null);
 				return;
 			case DeclarationPackage.CT_EXECUTABLE__THROWN_TYPES:
 				getThrownTypes().clear();
