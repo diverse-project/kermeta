@@ -1,19 +1,18 @@
-/**
- * <copyright>
- * 
- * Copyright (c) 2006, 2007 IBM Corporation and others.
- * All rights reserved.   This program and the accompanying materials
+/*******************************************************************************
+ * Copyright (c) 2006, 2008 IBM Corporation and others.
+ * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   IBM - Initial API and implementation
  * 
  * </copyright>
  *
- * $Id: UtilitiesFactoryImpl.java,v 1.1 2008-08-07 06:35:18 dvojtise Exp $
- */
+ * $Id: UtilitiesFactoryImpl.java,v 1.6 2009/01/23 17:16:04 cdamus Exp $
+ * /
+ *******************************************************************************/
 package org.eclipse.ocl.utilities.impl;
 
 import org.eclipse.emf.ecore.EClass;
@@ -32,7 +31,10 @@ import org.eclipse.ocl.utilities.UtilitiesPackage;
  * <!-- end-user-doc -->
  * @generated
  */
-public class UtilitiesFactoryImpl extends EFactoryImpl implements UtilitiesFactory {
+public class UtilitiesFactoryImpl
+		extends EFactoryImpl
+		implements UtilitiesFactory {
+
 	/**
 	 * Creates the default factory implementation.
 	 * <!-- begin-user-doc -->
@@ -41,12 +43,12 @@ public class UtilitiesFactoryImpl extends EFactoryImpl implements UtilitiesFacto
 	 */
 	public static UtilitiesFactory init() {
 		try {
-			UtilitiesFactory theUtilitiesFactory = (UtilitiesFactory)EPackage.Registry.INSTANCE.getEFactory("http://www.eclipse.org/ocl/1.1.0/OCL/Utilities"); //$NON-NLS-1$ 
+			UtilitiesFactory theUtilitiesFactory = (UtilitiesFactory) EPackage.Registry.INSTANCE
+				.getEFactory("http://www.eclipse.org/ocl/1.1.0/OCL/Utilities"); //$NON-NLS-1$ 
 			if (theUtilitiesFactory != null) {
 				return theUtilitiesFactory;
 			}
-		}
-		catch (Exception exception) {
+		} catch (Exception exception) {
 			EcorePlugin.INSTANCE.log(exception);
 		}
 		return new UtilitiesFactoryImpl();
@@ -70,8 +72,9 @@ public class UtilitiesFactoryImpl extends EFactoryImpl implements UtilitiesFacto
 	@Override
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
-			default:
-				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier"); //$NON-NLS-1$ //$NON-NLS-2$
+			default :
+				throw new IllegalArgumentException(
+					"The class '" + eClass.getName() + "' is not a valid classifier"); //$NON-NLS-1$ //$NON-NLS-2$
 		}
 	}
 
@@ -81,7 +84,7 @@ public class UtilitiesFactoryImpl extends EFactoryImpl implements UtilitiesFacto
 	 * @generated
 	 */
 	public UtilitiesPackage getUtilitiesPackage() {
-		return (UtilitiesPackage)getEPackage();
+		return (UtilitiesPackage) getEPackage();
 	}
 
 	/**

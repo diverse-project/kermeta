@@ -1,7 +1,7 @@
 /**
  * <copyright>
  * 
- * Copyright (c) 2006, 2007 IBM Corporation and others.
+ * Copyright (c) 2006, 2008 IBM Corporation, Zeligsoft Inc., and others.
  * All rights reserved.   This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -9,10 +9,11 @@
  * 
  * Contributors:
  *   IBM - Initial API and implementation
+ *   Zeligsoft - Bugs 231435, 243976, 207365, 256040
  * 
  * </copyright>
  *
- * $Id: TypesPackage.java,v 1.1 2008-08-07 06:35:14 dvojtise Exp $
+ * $Id: TypesPackage.java,v 1.9 2008/11/30 22:11:38 cdamus Exp $
  */
 package org.eclipse.ocl.types;
 
@@ -36,8 +37,12 @@ import org.eclipse.ocl.utilities.UtilitiesPackage;
  * @see org.eclipse.ocl.types.TypesFactory
  * @model kind="package"
  * @generated
+ * @noimplement This interface is not intended to be implemented by clients.
+ * @noextend This interface is not intended to be extended by clients.
  */
-public interface TypesPackage extends EPackage {
+public interface TypesPackage
+		extends EPackage {
+
 	/**
 	 * The package name.
 	 * <!-- begin-user-doc -->
@@ -63,6 +68,15 @@ public interface TypesPackage extends EPackage {
 	String eNS_PREFIX = "ocl.types"; //$NON-NLS-1$
 
 	/**
+	 * The package content type ID.
+	 * <!-- begin-user-doc -->
+	 * @since 1.3
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	String eCONTENT_TYPE = "org.eclipse.ocl.ast"; //$NON-NLS-1$
+
+	/**
 	 * The singleton instance of the package.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -77,6 +91,7 @@ public interface TypesPackage extends EPackage {
 	 * @see org.eclipse.ocl.types.impl.AnyTypeImpl
 	 * @see org.eclipse.ocl.types.impl.TypesPackageImpl#getAnyType()
 	 * @generated
+	 * @noreference This field is not intended to be referenced by clients.
 	 */
 	int ANY_TYPE = 0;
 
@@ -86,6 +101,7 @@ public interface TypesPackage extends EPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
+	 * @noreference This field is not intended to be referenced by clients.
 	 */
 	int ANY_TYPE_FEATURE_COUNT = UtilitiesPackage.PREDEFINED_TYPE_FEATURE_COUNT + 0;
 
@@ -96,6 +112,7 @@ public interface TypesPackage extends EPackage {
 	 * @see org.eclipse.ocl.types.impl.CollectionTypeImpl
 	 * @see org.eclipse.ocl.types.impl.TypesPackageImpl#getCollectionType()
 	 * @generated
+	 * @noreference This field is not intended to be referenced by clients.
 	 */
 	int COLLECTION_TYPE = 2;
 
@@ -105,6 +122,7 @@ public interface TypesPackage extends EPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
+	 * @noreference This field is not intended to be referenced by clients.
 	 */
 	int COLLECTION_TYPE__START_POSITION = UtilitiesPackage.PREDEFINED_TYPE_FEATURE_COUNT + 0;
 
@@ -114,6 +132,7 @@ public interface TypesPackage extends EPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
+	 * @noreference This field is not intended to be referenced by clients.
 	 */
 	int COLLECTION_TYPE__END_POSITION = UtilitiesPackage.PREDEFINED_TYPE_FEATURE_COUNT + 1;
 
@@ -123,6 +142,7 @@ public interface TypesPackage extends EPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
+	 * @noreference This field is not intended to be referenced by clients.
 	 */
 	int COLLECTION_TYPE__TYPE_START_POSITION = UtilitiesPackage.PREDEFINED_TYPE_FEATURE_COUNT + 2;
 
@@ -132,6 +152,7 @@ public interface TypesPackage extends EPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
+	 * @noreference This field is not intended to be referenced by clients.
 	 */
 	int COLLECTION_TYPE__TYPE_END_POSITION = UtilitiesPackage.PREDEFINED_TYPE_FEATURE_COUNT + 3;
 
@@ -141,6 +162,7 @@ public interface TypesPackage extends EPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
+	 * @noreference This field is not intended to be referenced by clients.
 	 */
 	int COLLECTION_TYPE__ELEMENT_TYPE = UtilitiesPackage.PREDEFINED_TYPE_FEATURE_COUNT + 4;
 
@@ -150,6 +172,7 @@ public interface TypesPackage extends EPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
+	 * @noreference This field is not intended to be referenced by clients.
 	 */
 	int COLLECTION_TYPE__KIND = UtilitiesPackage.PREDEFINED_TYPE_FEATURE_COUNT + 5;
 
@@ -159,6 +182,7 @@ public interface TypesPackage extends EPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
+	 * @noreference This field is not intended to be referenced by clients.
 	 */
 	int COLLECTION_TYPE_FEATURE_COUNT = UtilitiesPackage.PREDEFINED_TYPE_FEATURE_COUNT + 6;
 
@@ -169,6 +193,7 @@ public interface TypesPackage extends EPackage {
 	 * @see org.eclipse.ocl.types.impl.BagTypeImpl
 	 * @see org.eclipse.ocl.types.impl.TypesPackageImpl#getBagType()
 	 * @generated
+	 * @noreference This field is not intended to be referenced by clients.
 	 */
 	int BAG_TYPE = 1;
 
@@ -178,6 +203,7 @@ public interface TypesPackage extends EPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
+	 * @noreference This field is not intended to be referenced by clients.
 	 */
 	int BAG_TYPE__START_POSITION = COLLECTION_TYPE__START_POSITION;
 
@@ -187,6 +213,7 @@ public interface TypesPackage extends EPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
+	 * @noreference This field is not intended to be referenced by clients.
 	 */
 	int BAG_TYPE__END_POSITION = COLLECTION_TYPE__END_POSITION;
 
@@ -196,6 +223,7 @@ public interface TypesPackage extends EPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
+	 * @noreference This field is not intended to be referenced by clients.
 	 */
 	int BAG_TYPE__TYPE_START_POSITION = COLLECTION_TYPE__TYPE_START_POSITION;
 
@@ -205,6 +233,7 @@ public interface TypesPackage extends EPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
+	 * @noreference This field is not intended to be referenced by clients.
 	 */
 	int BAG_TYPE__TYPE_END_POSITION = COLLECTION_TYPE__TYPE_END_POSITION;
 
@@ -214,6 +243,7 @@ public interface TypesPackage extends EPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
+	 * @noreference This field is not intended to be referenced by clients.
 	 */
 	int BAG_TYPE__ELEMENT_TYPE = COLLECTION_TYPE__ELEMENT_TYPE;
 
@@ -223,6 +253,7 @@ public interface TypesPackage extends EPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
+	 * @noreference This field is not intended to be referenced by clients.
 	 */
 	int BAG_TYPE__KIND = COLLECTION_TYPE__KIND;
 
@@ -232,6 +263,7 @@ public interface TypesPackage extends EPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
+	 * @noreference This field is not intended to be referenced by clients.
 	 */
 	int BAG_TYPE_FEATURE_COUNT = COLLECTION_TYPE_FEATURE_COUNT + 0;
 
@@ -242,6 +274,7 @@ public interface TypesPackage extends EPackage {
 	 * @see org.eclipse.ocl.types.impl.ElementTypeImpl
 	 * @see org.eclipse.ocl.types.impl.TypesPackageImpl#getElementType()
 	 * @generated
+	 * @noreference This field is not intended to be referenced by clients.
 	 */
 	int ELEMENT_TYPE = 3;
 
@@ -251,6 +284,7 @@ public interface TypesPackage extends EPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
+	 * @noreference This field is not intended to be referenced by clients.
 	 */
 	int ELEMENT_TYPE_FEATURE_COUNT = 0;
 
@@ -261,6 +295,7 @@ public interface TypesPackage extends EPackage {
 	 * @see org.eclipse.ocl.types.impl.InvalidTypeImpl
 	 * @see org.eclipse.ocl.types.impl.TypesPackageImpl#getInvalidType()
 	 * @generated
+	 * @noreference This field is not intended to be referenced by clients.
 	 */
 	int INVALID_TYPE = 4;
 
@@ -270,6 +305,7 @@ public interface TypesPackage extends EPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
+	 * @noreference This field is not intended to be referenced by clients.
 	 */
 	int INVALID_TYPE_FEATURE_COUNT = UtilitiesPackage.PREDEFINED_TYPE_FEATURE_COUNT + 0;
 
@@ -280,6 +316,7 @@ public interface TypesPackage extends EPackage {
 	 * @see org.eclipse.ocl.types.impl.MessageTypeImpl
 	 * @see org.eclipse.ocl.types.impl.TypesPackageImpl#getMessageType()
 	 * @generated
+	 * @noreference This field is not intended to be referenced by clients.
 	 */
 	int MESSAGE_TYPE = 5;
 
@@ -289,6 +326,7 @@ public interface TypesPackage extends EPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
+	 * @noreference This field is not intended to be referenced by clients.
 	 */
 	int MESSAGE_TYPE__REFERRED_OPERATION = UtilitiesPackage.PREDEFINED_TYPE_FEATURE_COUNT + 0;
 
@@ -298,6 +336,7 @@ public interface TypesPackage extends EPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
+	 * @noreference This field is not intended to be referenced by clients.
 	 */
 	int MESSAGE_TYPE__REFERRED_SIGNAL = UtilitiesPackage.PREDEFINED_TYPE_FEATURE_COUNT + 1;
 
@@ -307,6 +346,7 @@ public interface TypesPackage extends EPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
+	 * @noreference This field is not intended to be referenced by clients.
 	 */
 	int MESSAGE_TYPE_FEATURE_COUNT = UtilitiesPackage.PREDEFINED_TYPE_FEATURE_COUNT + 2;
 
@@ -317,6 +357,7 @@ public interface TypesPackage extends EPackage {
 	 * @see org.eclipse.ocl.types.impl.OrderedSetTypeImpl
 	 * @see org.eclipse.ocl.types.impl.TypesPackageImpl#getOrderedSetType()
 	 * @generated
+	 * @noreference This field is not intended to be referenced by clients.
 	 */
 	int ORDERED_SET_TYPE = 6;
 
@@ -326,6 +367,7 @@ public interface TypesPackage extends EPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
+	 * @noreference This field is not intended to be referenced by clients.
 	 */
 	int ORDERED_SET_TYPE__START_POSITION = COLLECTION_TYPE__START_POSITION;
 
@@ -335,6 +377,7 @@ public interface TypesPackage extends EPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
+	 * @noreference This field is not intended to be referenced by clients.
 	 */
 	int ORDERED_SET_TYPE__END_POSITION = COLLECTION_TYPE__END_POSITION;
 
@@ -344,6 +387,7 @@ public interface TypesPackage extends EPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
+	 * @noreference This field is not intended to be referenced by clients.
 	 */
 	int ORDERED_SET_TYPE__TYPE_START_POSITION = COLLECTION_TYPE__TYPE_START_POSITION;
 
@@ -353,6 +397,7 @@ public interface TypesPackage extends EPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
+	 * @noreference This field is not intended to be referenced by clients.
 	 */
 	int ORDERED_SET_TYPE__TYPE_END_POSITION = COLLECTION_TYPE__TYPE_END_POSITION;
 
@@ -362,6 +407,7 @@ public interface TypesPackage extends EPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
+	 * @noreference This field is not intended to be referenced by clients.
 	 */
 	int ORDERED_SET_TYPE__ELEMENT_TYPE = COLLECTION_TYPE__ELEMENT_TYPE;
 
@@ -371,6 +417,7 @@ public interface TypesPackage extends EPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
+	 * @noreference This field is not intended to be referenced by clients.
 	 */
 	int ORDERED_SET_TYPE__KIND = COLLECTION_TYPE__KIND;
 
@@ -380,6 +427,7 @@ public interface TypesPackage extends EPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
+	 * @noreference This field is not intended to be referenced by clients.
 	 */
 	int ORDERED_SET_TYPE_FEATURE_COUNT = COLLECTION_TYPE_FEATURE_COUNT + 0;
 
@@ -390,6 +438,7 @@ public interface TypesPackage extends EPackage {
 	 * @see org.eclipse.ocl.types.impl.PrimitiveTypeImpl
 	 * @see org.eclipse.ocl.types.impl.TypesPackageImpl#getPrimitiveType()
 	 * @generated
+	 * @noreference This field is not intended to be referenced by clients.
 	 */
 	int PRIMITIVE_TYPE = 7;
 
@@ -399,6 +448,7 @@ public interface TypesPackage extends EPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
+	 * @noreference This field is not intended to be referenced by clients.
 	 */
 	int PRIMITIVE_TYPE_FEATURE_COUNT = UtilitiesPackage.PREDEFINED_TYPE_FEATURE_COUNT + 0;
 
@@ -409,6 +459,7 @@ public interface TypesPackage extends EPackage {
 	 * @see org.eclipse.ocl.types.impl.SequenceTypeImpl
 	 * @see org.eclipse.ocl.types.impl.TypesPackageImpl#getSequenceType()
 	 * @generated
+	 * @noreference This field is not intended to be referenced by clients.
 	 */
 	int SEQUENCE_TYPE = 8;
 
@@ -418,6 +469,7 @@ public interface TypesPackage extends EPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
+	 * @noreference This field is not intended to be referenced by clients.
 	 */
 	int SEQUENCE_TYPE__START_POSITION = COLLECTION_TYPE__START_POSITION;
 
@@ -427,6 +479,7 @@ public interface TypesPackage extends EPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
+	 * @noreference This field is not intended to be referenced by clients.
 	 */
 	int SEQUENCE_TYPE__END_POSITION = COLLECTION_TYPE__END_POSITION;
 
@@ -436,6 +489,7 @@ public interface TypesPackage extends EPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
+	 * @noreference This field is not intended to be referenced by clients.
 	 */
 	int SEQUENCE_TYPE__TYPE_START_POSITION = COLLECTION_TYPE__TYPE_START_POSITION;
 
@@ -445,6 +499,7 @@ public interface TypesPackage extends EPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
+	 * @noreference This field is not intended to be referenced by clients.
 	 */
 	int SEQUENCE_TYPE__TYPE_END_POSITION = COLLECTION_TYPE__TYPE_END_POSITION;
 
@@ -454,6 +509,7 @@ public interface TypesPackage extends EPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
+	 * @noreference This field is not intended to be referenced by clients.
 	 */
 	int SEQUENCE_TYPE__ELEMENT_TYPE = COLLECTION_TYPE__ELEMENT_TYPE;
 
@@ -463,6 +519,7 @@ public interface TypesPackage extends EPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
+	 * @noreference This field is not intended to be referenced by clients.
 	 */
 	int SEQUENCE_TYPE__KIND = COLLECTION_TYPE__KIND;
 
@@ -472,6 +529,7 @@ public interface TypesPackage extends EPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
+	 * @noreference This field is not intended to be referenced by clients.
 	 */
 	int SEQUENCE_TYPE_FEATURE_COUNT = COLLECTION_TYPE_FEATURE_COUNT + 0;
 
@@ -482,6 +540,7 @@ public interface TypesPackage extends EPackage {
 	 * @see org.eclipse.ocl.types.impl.SetTypeImpl
 	 * @see org.eclipse.ocl.types.impl.TypesPackageImpl#getSetType()
 	 * @generated
+	 * @noreference This field is not intended to be referenced by clients.
 	 */
 	int SET_TYPE = 9;
 
@@ -491,6 +550,7 @@ public interface TypesPackage extends EPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
+	 * @noreference This field is not intended to be referenced by clients.
 	 */
 	int SET_TYPE__START_POSITION = COLLECTION_TYPE__START_POSITION;
 
@@ -500,6 +560,7 @@ public interface TypesPackage extends EPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
+	 * @noreference This field is not intended to be referenced by clients.
 	 */
 	int SET_TYPE__END_POSITION = COLLECTION_TYPE__END_POSITION;
 
@@ -509,6 +570,7 @@ public interface TypesPackage extends EPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
+	 * @noreference This field is not intended to be referenced by clients.
 	 */
 	int SET_TYPE__TYPE_START_POSITION = COLLECTION_TYPE__TYPE_START_POSITION;
 
@@ -518,6 +580,7 @@ public interface TypesPackage extends EPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
+	 * @noreference This field is not intended to be referenced by clients.
 	 */
 	int SET_TYPE__TYPE_END_POSITION = COLLECTION_TYPE__TYPE_END_POSITION;
 
@@ -527,6 +590,7 @@ public interface TypesPackage extends EPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
+	 * @noreference This field is not intended to be referenced by clients.
 	 */
 	int SET_TYPE__ELEMENT_TYPE = COLLECTION_TYPE__ELEMENT_TYPE;
 
@@ -536,6 +600,7 @@ public interface TypesPackage extends EPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
+	 * @noreference This field is not intended to be referenced by clients.
 	 */
 	int SET_TYPE__KIND = COLLECTION_TYPE__KIND;
 
@@ -545,6 +610,7 @@ public interface TypesPackage extends EPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
+	 * @noreference This field is not intended to be referenced by clients.
 	 */
 	int SET_TYPE_FEATURE_COUNT = COLLECTION_TYPE_FEATURE_COUNT + 0;
 
@@ -555,6 +621,7 @@ public interface TypesPackage extends EPackage {
 	 * @see org.eclipse.ocl.types.impl.TupleTypeImpl
 	 * @see org.eclipse.ocl.types.impl.TypesPackageImpl#getTupleType()
 	 * @generated
+	 * @noreference This field is not intended to be referenced by clients.
 	 */
 	int TUPLE_TYPE = 10;
 
@@ -564,6 +631,7 @@ public interface TypesPackage extends EPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
+	 * @noreference This field is not intended to be referenced by clients.
 	 */
 	int TUPLE_TYPE_FEATURE_COUNT = UtilitiesPackage.PREDEFINED_TYPE_FEATURE_COUNT + 0;
 
@@ -574,6 +642,7 @@ public interface TypesPackage extends EPackage {
 	 * @see org.eclipse.ocl.types.impl.TypeTypeImpl
 	 * @see org.eclipse.ocl.types.impl.TypesPackageImpl#getTypeType()
 	 * @generated
+	 * @noreference This field is not intended to be referenced by clients.
 	 */
 	int TYPE_TYPE = 11;
 
@@ -583,6 +652,7 @@ public interface TypesPackage extends EPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
+	 * @noreference This field is not intended to be referenced by clients.
 	 */
 	int TYPE_TYPE__REFERRED_TYPE = UtilitiesPackage.PREDEFINED_TYPE_FEATURE_COUNT + 0;
 
@@ -592,6 +662,7 @@ public interface TypesPackage extends EPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
+	 * @noreference This field is not intended to be referenced by clients.
 	 */
 	int TYPE_TYPE_FEATURE_COUNT = UtilitiesPackage.PREDEFINED_TYPE_FEATURE_COUNT + 1;
 
@@ -602,6 +673,7 @@ public interface TypesPackage extends EPackage {
 	 * @see org.eclipse.ocl.types.impl.VoidTypeImpl
 	 * @see org.eclipse.ocl.types.impl.TypesPackageImpl#getVoidType()
 	 * @generated
+	 * @noreference This field is not intended to be referenced by clients.
 	 */
 	int VOID_TYPE = 12;
 
@@ -611,9 +683,9 @@ public interface TypesPackage extends EPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
+	 * @noreference This field is not intended to be referenced by clients.
 	 */
 	int VOID_TYPE_FEATURE_COUNT = UtilitiesPackage.PREDEFINED_TYPE_FEATURE_COUNT + 0;
-
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.ocl.types.AnyType <em>Any Type</em>}'.
@@ -820,8 +892,11 @@ public interface TypesPackage extends EPackage {
 	 * </ul>
 	 * <!-- end-user-doc -->
 	 * @generated
+	 * @noimplement This interface is not intended to be implemented by clients.
+	 * @noextend This interface is not intended to be extended by clients.
 	 */
 	interface Literals {
+
 		/**
 		 * The meta object literal for the '{@link org.eclipse.ocl.types.impl.AnyTypeImpl <em>Any Type</em>}' class.
 		 * <!-- begin-user-doc -->
@@ -858,7 +933,8 @@ public interface TypesPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference COLLECTION_TYPE__ELEMENT_TYPE = eINSTANCE.getCollectionType_ElementType();
+		EReference COLLECTION_TYPE__ELEMENT_TYPE = eINSTANCE
+			.getCollectionType_ElementType();
 
 		/**
 		 * The meta object literal for the '<em><b>Kind</b></em>' attribute feature.
@@ -904,7 +980,8 @@ public interface TypesPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference MESSAGE_TYPE__REFERRED_OPERATION = eINSTANCE.getMessageType_ReferredOperation();
+		EReference MESSAGE_TYPE__REFERRED_OPERATION = eINSTANCE
+			.getMessageType_ReferredOperation();
 
 		/**
 		 * The meta object literal for the '<em><b>Referred Signal</b></em>' reference feature.
@@ -912,7 +989,8 @@ public interface TypesPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference MESSAGE_TYPE__REFERRED_SIGNAL = eINSTANCE.getMessageType_ReferredSignal();
+		EReference MESSAGE_TYPE__REFERRED_SIGNAL = eINSTANCE
+			.getMessageType_ReferredSignal();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.ocl.types.impl.OrderedSetTypeImpl <em>Ordered Set Type</em>}' class.
@@ -980,7 +1058,8 @@ public interface TypesPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference TYPE_TYPE__REFERRED_TYPE = eINSTANCE.getTypeType_ReferredType();
+		EReference TYPE_TYPE__REFERRED_TYPE = eINSTANCE
+			.getTypeType_ReferredType();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.ocl.types.impl.VoidTypeImpl <em>Void Type</em>}' class.

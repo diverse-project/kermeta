@@ -1,7 +1,7 @@
 /**
  * <copyright>
  *
- * Copyright (c) 2005, 2007 IBM Corporation and others.
+ * Copyright (c) 2005, 2009 IBM Corporation, Borland Software Corp., and others.
  * All rights reserved.   This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -9,10 +9,12 @@
  *
  * Contributors:
  *   IBM - Initial API and implementation
- *
+ *   E.D.Willink - Refactoring to support extensibility and flexible error handling 
+ *   Borland - Bug 265066
+ *   
  * </copyright>
  *
- * $Id: AbstractEnvironmentFactory.java,v 1.1 2008-08-07 06:35:17 dvojtise Exp $
+ * $Id: AbstractEnvironmentFactory.java,v 1.5 2009/03/11 13:04:28 cdamus Exp $
  */
 package org.eclipse.ocl;
 
@@ -21,8 +23,9 @@ import java.util.Map;
 import java.util.Set;
 
 import org.eclipse.ocl.expressions.Variable;
-import org.eclipse.ocl.internal.evaluation.EvaluationVisitorImpl;
 import org.eclipse.ocl.internal.evaluation.TracingEvaluationVisitor;
+import org.eclipse.ocl.util.Adaptable;
+import org.eclipse.ocl.util.TypeUtil;
 import org.eclipse.ocl.utilities.OCLFactory;
 import org.eclipse.ocl.utilities.UMLReflection;
 
@@ -58,7 +61,8 @@ import org.eclipse.ocl.utilities.UMLReflection;
  * @author Christian W. Damus (cdamus)
  */
 public abstract class AbstractEnvironmentFactory<PK, C, O, P, EL, PM, S, COA, SSA, CT, CLS, E>
-	implements EnvironmentFactory<PK, C, O, P, EL, PM, S, COA, SSA, CT, CLS, E> {
+	implements EnvironmentFactory<PK, C, O, P, EL, PM, S, COA, SSA, CT, CLS, E>,
+		Adaptable {
 
     private boolean traceEvaluation;
     
@@ -97,9 +101,7 @@ public abstract class AbstractEnvironmentFactory<PK, C, O, P, EL, PM, S, COA, SS
     createPackageContext(
             Environment<PK, C, O, P, EL, PM, S, COA, SSA, CT, CLS, E> parent,
             List<String> pathname) {
-        
-        PK contextPackage = lookupPackage(pathname);
-        
+		PK contextPackage = lookupPackage(pathname);        
         return (contextPackage == null)? null : createPackageContext(parent, contextPackage);
     }
 	
@@ -165,7 +167,7 @@ public abstract class AbstractEnvironmentFactory<PK, C, O, P, EL, PM, S, COA, SS
 			// ensure that we use the OCL primitive types wherever possible
 			Variable<C, PM> var = oclFactory.createVariable();
 			uml.setName(var, uml.getName(next));
-			uml.setType(var, uml.getOCLType(next));
+			uml.setType(var, TypeUtil.resolveType(result, uml.getOCLType(next)));
 			var.setRepresentedParameter(next);
 			
 			result.addElement(var.getName(), var, true);
@@ -253,4 +255,27 @@ public abstract class AbstractEnvironmentFactory<PK, C, O, P, EL, PM, S, COA, SS
     protected void setEvaluationTracingEnabled(boolean b) {
         traceEvaluation = b;
     }
+
+	/**
+	 * The abstract environment factory implementation is adaptable.  The
+	 * default implementation adapts to and interface actually implemented by
+	 * the receiver.
+	 * <p>
+	 * Subclasses may override or extend this implementation.
+	 * </p>
+	 * 
+	 * @since 1.2
+	 */
+	@SuppressWarnings("unchecked")
+	public <T> T getAdapter(Class<T> adapterType) {
+		T result;
+		
+		if (adapterType.isAssignableFrom(getClass())) {
+			result = (T) this;
+		} else {
+			result = null;
+		}
+		
+		return result;
+	}
 }

@@ -1,7 +1,7 @@
 /**
  * <copyright>
  * 
- * Copyright (c) 2006, 2007 IBM Corporation and others.
+ * Copyright (c) 2006, 2008 IBM Corporation, Zeligsoft Inc., and others.
  * All rights reserved.   This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -9,10 +9,11 @@
  * 
  * Contributors:
  *   IBM - Initial API and implementation
+ *   Zeligsoft - Bug 207365
  * 
  * </copyright>
  *
- * $Id: NavigationCallExp.java,v 1.1 2008-08-07 06:35:16 dvojtise Exp $
+ * $Id: NavigationCallExp.java,v 1.6 2008/11/30 22:11:38 cdamus Exp $
  */
 package org.eclipse.ocl.expressions;
 
@@ -34,8 +35,12 @@ import org.eclipse.emf.common.util.EList;
  * @see org.eclipse.ocl.expressions.ExpressionsPackage#getNavigationCallExp()
  * @model abstract="true"
  * @generated
+ * @noimplement This interface is not intended to be implemented by clients.
+ * @noextend This interface is not intended to be extended by clients.
  */
-public interface NavigationCallExp<C, P> extends FeatureCallExp<C> {
+public interface NavigationCallExp<C, P>
+		extends FeatureCallExp<C> {
+
 	/**
 	 * Returns the value of the '<em><b>Qualifier</b></em>' containment reference list.
 	 * The list contents are of type {@link org.eclipse.ocl.expressions.OCLExpression}&lt;C>.
@@ -47,7 +52,7 @@ public interface NavigationCallExp<C, P> extends FeatureCallExp<C> {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Qualifier</em>' containment reference list.
 	 * @see org.eclipse.ocl.expressions.ExpressionsPackage#getNavigationCallExp_Qualifier()
-	 * @model type="org.eclipse.ocl.expressions.OCLExpression" containment="true"
+	 * @model containment="true"
 	 * @generated
 	 */
 	EList<OCLExpression<C>> getQualifier();
@@ -63,7 +68,7 @@ public interface NavigationCallExp<C, P> extends FeatureCallExp<C> {
 	 * @return the value of the '<em>Navigation Source</em>' reference.
 	 * @see #setNavigationSource(Object)
 	 * @see org.eclipse.ocl.expressions.ExpressionsPackage#getNavigationCallExp_NavigationSource()
-	 * @model
+	 * @model kind="reference"
 	 * @generated
 	 */
 	P getNavigationSource();

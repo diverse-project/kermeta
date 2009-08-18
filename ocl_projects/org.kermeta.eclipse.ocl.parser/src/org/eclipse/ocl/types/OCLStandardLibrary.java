@@ -12,7 +12,7 @@
  *
  * </copyright>
  *
- * $Id: OCLStandardLibrary.java,v 1.1 2008-08-07 06:35:14 dvojtise Exp $
+ * $Id: OCLStandardLibrary.java,v 1.2 2007/05/17 17:06:22 cdamus Exp $
  */
 package org.eclipse.ocl.types;
 

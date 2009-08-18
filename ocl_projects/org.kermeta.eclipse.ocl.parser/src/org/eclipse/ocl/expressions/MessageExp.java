@@ -1,7 +1,7 @@
 /**
  * <copyright>
  * 
- * Copyright (c) 2006, 2007 IBM Corporation and others.
+ * Copyright (c) 2006, 2008 IBM Corporation, Zeligsoft Inc., and others.
  * All rights reserved.   This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -9,13 +9,16 @@
  * 
  * Contributors:
  *   IBM - Initial API and implementation
+ *   Zeligsoft - Bug 207365
  * 
  * </copyright>
  *
- * $Id: MessageExp.java,v 1.1 2008-08-07 06:35:15 dvojtise Exp $
+ * $Id: MessageExp.java,v 1.7 2008/11/30 22:11:38 cdamus Exp $
  */
 package org.eclipse.ocl.expressions;
 
+import java.util.Map;
+import org.eclipse.emf.common.util.DiagnosticChain;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.ocl.utilities.CallingASTNode;
 
@@ -37,8 +40,12 @@ import org.eclipse.ocl.utilities.CallingASTNode;
  * @see org.eclipse.ocl.expressions.ExpressionsPackage#getMessageExp()
  * @model
  * @generated
+ * @noimplement This interface is not intended to be implemented by clients.
+ * @noextend This interface is not intended to be extended by clients.
  */
-public interface MessageExp<C, COA, SSA> extends OCLExpression<C>, CallingASTNode {
+public interface MessageExp<C, COA, SSA>
+		extends OCLExpression<C>, CallingASTNode {
+
 	/**
 	 * Returns the value of the '<em><b>Target</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
@@ -76,7 +83,7 @@ public interface MessageExp<C, COA, SSA> extends OCLExpression<C>, CallingASTNod
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Argument</em>' containment reference list.
 	 * @see org.eclipse.ocl.expressions.ExpressionsPackage#getMessageExp_Argument()
-	 * @model type="org.eclipse.ocl.expressions.OCLExpression" containment="true"
+	 * @model containment="true"
 	 * @generated
 	 */
 	EList<OCLExpression<C>> getArgument();
@@ -92,7 +99,7 @@ public interface MessageExp<C, COA, SSA> extends OCLExpression<C>, CallingASTNod
 	 * @return the value of the '<em>Called Operation</em>' containment reference.
 	 * @see #setCalledOperation(Object)
 	 * @see org.eclipse.ocl.expressions.ExpressionsPackage#getMessageExp_CalledOperation()
-	 * @model containment="true"
+	 * @model kind="reference" containment="true"
 	 * @generated
 	 */
 	COA getCalledOperation();
@@ -118,7 +125,7 @@ public interface MessageExp<C, COA, SSA> extends OCLExpression<C>, CallingASTNod
 	 * @return the value of the '<em>Sent Signal</em>' containment reference.
 	 * @see #setSentSignal(Object)
 	 * @see org.eclipse.ocl.expressions.ExpressionsPackage#getMessageExp_SentSignal()
-	 * @model containment="true"
+	 * @model kind="reference" containment="true"
 	 * @generated
 	 */
 	SSA getSentSignal();
@@ -132,5 +139,83 @@ public interface MessageExp<C, COA, SSA> extends OCLExpression<C>, CallingASTNod
 	 * @generated
 	 */
 	void setSentSignal(SSA value);
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * calledOperation->notEmpty() implies
+	 * argument->forall (a | a.type.conformsTo
+	 * (self.calledOperation.operation.ownedParameter->
+	 * select( kind = ParameterDirectionKind::in )
+	 * ->at (argument->indexOf (a)).type))
+	 * @param diagnostics The chain of diagnostics to which problems are to be appended.
+	 * @param context The cache of context-specific information.
+	 * <!-- end-model-doc -->
+	 * @model
+	 * @generated
+	 */
+	boolean checkOperationArguments(DiagnosticChain diagnostics,
+			Map<Object, Object> context);
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * sentSignal->notEmpty() implies
+	 * argument->forall (a | a.type.conformsTo
+	 * (self.sentSignal.signal.ownedAttribute
+	 * ->at (argument->indexOf (a)).type))
+	 * @param diagnostics The chain of diagnostics to which problems are to be appended.
+	 * @param context The cache of context-specific information.
+	 * <!-- end-model-doc -->
+	 * @model
+	 * @generated
+	 */
+	boolean checkSignalArguments(DiagnosticChain diagnostics,
+			Map<Object, Object> context);
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * calledOperation->notEmpty() implies
+	 * target.type.allOperations()->includes(calledOperation.operation)
+	 * @param diagnostics The chain of diagnostics to which problems are to be appended.
+	 * @param context The cache of context-specific information.
+	 * <!-- end-model-doc -->
+	 * @model
+	 * @generated
+	 */
+	boolean checkTargetDefinesOperation(DiagnosticChain diagnostics,
+			Map<Object, Object> context);
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * calledOperation->size() + sentSignal->size() = 1
+	 * @param diagnostics The chain of diagnostics to which problems are to be appended.
+	 * @param context The cache of context-specific information.
+	 * <!-- end-model-doc -->
+	 * @model
+	 * @generated
+	 */
+	boolean checkHasOperationOrSignal(DiagnosticChain diagnostics,
+			Map<Object, Object> context);
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * not target.type.oclIsKindOf(CollectionType)
+	 * @param diagnostics The chain of diagnostics to which problems are to be appended.
+	 * @param context The cache of context-specific information.
+	 * <!-- end-model-doc -->
+	 * @model
+	 * @generated
+	 */
+	boolean checkTargetNotCollection(DiagnosticChain diagnostics,
+			Map<Object, Object> context);
 
 } // MessageExp

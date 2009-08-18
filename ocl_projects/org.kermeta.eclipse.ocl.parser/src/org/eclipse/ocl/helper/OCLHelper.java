@@ -1,7 +1,7 @@
 /**
  * <copyright>
  *
- * Copyright (c) 2004, 2007 IBM Corporation and others.
+ * Copyright (c) 2004, 2008 IBM Corporation and others.
  * All rights reserved.   This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -12,13 +12,14 @@
  *
  * </copyright>
  *
- * $Id: OCLHelper.java,v 1.1 2008-08-07 06:35:12 dvojtise Exp $
+ * $Id: OCLHelper.java,v 1.5 2008/04/17 19:38:15 cdamus Exp $
  */
 
 package org.eclipse.ocl.helper;
 
 import java.util.List;
 
+import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.ocl.Environment;
 import org.eclipse.ocl.OCL;
 import org.eclipse.ocl.ParserException;
@@ -35,6 +36,10 @@ import org.eclipse.ocl.expressions.OCLExpression;
  * An OCL helper is created by the {@link OCL#createOCLHelper()} factory method
  * and inherits the current context {@link Environment} of the {@link OCL} that
  * created it.
+ * </p><p>
+ * Since 1.2, the helper supplies {@linkplain #getProblems() diagnostics}
+ * indicating any problems encountered while parsing.  The diagnostics pertain
+ * always to the most recently executed parse operation.
  * </p>
  * <p>
  * <b>Note</b> that this interface is not intended to be implemented
@@ -169,6 +174,25 @@ public interface OCLHelper<C, O, P, CT> {
      * @return the OCL instance that created me
      */
     OCL<?, C, O, P, ?, ?, ?, ?, ?, CT, ?, ?> getOCL();
+    
+    /**
+     * Obtains the environment defining my current
+     * {@linkplain #getContextClassifier() classifier},
+     * {@linkplain #getContextOperation() operation}, or
+     * {@linkplain #getContextAttribute() attribute} context.  Accessing the
+     * environment is convenient for, e.g., adding variable definitions to
+     * insert global objects into the OCL context.
+     * 
+     * @return my current context environment, or <code>null</code> if I have
+     *    not yet been assigned a context
+     * 
+     * @see #setContext(Object)
+     * @see #setOperationContext(Object, Object)
+     * @see #setAttributeContext(Object, Object)
+     * 
+     * @since 1.2
+     */
+    Environment<?, C, O, P, ?, ?, ?, ?, ?, CT, ?, ?> getEnvironment();
     
 	/**
 	 * Queries whether I validate the expressions that I parse.  Validation
@@ -354,7 +378,8 @@ public interface OCLHelper<C, O, P, CT> {
      * appending to the end of the specified text in the context of this kind
      * of constraint.
      *
-     * @param constraintType the kind of constraint that is being composed
+     * @param constraintType the kind of constraint that is being composed,
+     *      or <code>null</code> to indicate completions for a query expression
      * @param txt a partial OCL expression for which to seek choices that
      *      could be appended to it
      * @return a list of {@link Choice}s, possibly empty.  The ordering of the
@@ -362,4 +387,14 @@ public interface OCLHelper<C, O, P, CT> {
      *      a choice
      */
     List<Choice> getSyntaxHelp(ConstraintKind constraintType, String txt);
+    
+    /**
+     * Obtains problems, if any, found in parsing the last OCL constraint or
+     * query expression.
+     * 
+     * @return parsing problems or <code>null</code> if all was OK
+     * 
+     * @since 1.2
+     */
+    Diagnostic getProblems();
 }

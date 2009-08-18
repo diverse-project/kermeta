@@ -1,7 +1,7 @@
 /**
  * <copyright>
  * 
- * Copyright (c) 2006, 2007 IBM Corporation and others.
+ * Copyright (c) 2006, 2009 IBM Corporation, Zeligsoft Inc., and others.
  * All rights reserved.   This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -9,17 +9,20 @@
  * 
  * Contributors:
  *   IBM - Initial API and implementation
+ *   Zeligsoft - Bug 207365
  * 
  * </copyright>
  *
- * $Id: CollectionLiteralExpImpl.java,v 1.1 2008-08-07 06:35:12 dvojtise Exp $
+ * $Id: CollectionLiteralExpImpl.java,v 1.8 2009/01/23 17:16:04 cdamus Exp $
  */
 package org.eclipse.ocl.expressions.impl;
 
 import java.util.Collection;
 
+import java.util.Map;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
+import org.eclipse.emf.common.util.DiagnosticChain;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
@@ -31,6 +34,7 @@ import org.eclipse.ocl.expressions.CollectionLiteralExp;
 import org.eclipse.ocl.expressions.CollectionLiteralPart;
 import org.eclipse.ocl.expressions.CollectionRange;
 import org.eclipse.ocl.expressions.ExpressionsPackage;
+import org.eclipse.ocl.expressions.operations.CollectionLiteralExpOperations;
 import org.eclipse.ocl.utilities.Visitor;
 
 /**
@@ -48,7 +52,10 @@ import org.eclipse.ocl.utilities.Visitor;
  *
  * @generated
  */
-public class CollectionLiteralExpImpl<C> extends LiteralExpImpl<C> implements CollectionLiteralExp<C> {
+public class CollectionLiteralExpImpl<C>
+		extends LiteralExpImpl<C>
+		implements CollectionLiteralExp<C> {
+
 	/**
 	 * The default value of the '{@link #getKind() <em>Kind</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -124,9 +131,12 @@ public class CollectionLiteralExpImpl<C> extends LiteralExpImpl<C> implements Co
 	 */
 	public void setKind(CollectionKind newKind) {
 		CollectionKind oldKind = kind;
-		kind = newKind == null ? KIND_EDEFAULT : newKind;
+		kind = newKind == null
+			? KIND_EDEFAULT
+			: newKind;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ExpressionsPackage.COLLECTION_LITERAL_EXP__KIND, oldKind, kind));
+			eNotify(new ENotificationImpl(this, Notification.SET,
+				ExpressionsPackage.COLLECTION_LITERAL_EXP__KIND, oldKind, kind));
 	}
 
 	/**
@@ -136,7 +146,9 @@ public class CollectionLiteralExpImpl<C> extends LiteralExpImpl<C> implements Co
 	 */
 	public EList<CollectionLiteralPart<C>> getPart() {
 		if (part == null) {
-			part = new EObjectContainmentEList<CollectionLiteralPart<C>>(CollectionLiteralPart.class, this, ExpressionsPackage.COLLECTION_LITERAL_EXP__PART);
+			part = new EObjectContainmentEList<CollectionLiteralPart<C>>(
+				CollectionLiteralPart.class, this,
+				ExpressionsPackage.COLLECTION_LITERAL_EXP__PART);
 		}
 		return part;
 	}
@@ -148,14 +160,14 @@ public class CollectionLiteralExpImpl<C> extends LiteralExpImpl<C> implements Co
 	 */
 	public boolean isSimpleRange() {
 		EList<CollectionLiteralPart<C>> partsList = getPart();
-		
+
 		int size = partsList.size();
 		if (size == 1) {
 			CollectionLiteralPart<C> part = partsList.get(0);
-			
+
 			return part instanceof CollectionRange;
 		}
-		
+
 		return false;
 	}
 
@@ -164,11 +176,68 @@ public class CollectionLiteralExpImpl<C> extends LiteralExpImpl<C> implements Co
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public boolean checkNoCollectionInstances(DiagnosticChain diagnostics,
+			Map<Object, Object> context) {
+		return CollectionLiteralExpOperations.checkNoCollectionInstances(this,
+			diagnostics, context);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean checkSetKind(DiagnosticChain diagnostics,
+			Map<Object, Object> context) {
+		return CollectionLiteralExpOperations.checkSetKind(this, diagnostics,
+			context);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean checkSequenceKind(DiagnosticChain diagnostics,
+			Map<Object, Object> context) {
+		return CollectionLiteralExpOperations.checkSequenceKind(this,
+			diagnostics, context);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean checkBagKind(DiagnosticChain diagnostics,
+			Map<Object, Object> context) {
+		return CollectionLiteralExpOperations.checkBagKind(this, diagnostics,
+			context);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean checkElementType(DiagnosticChain diagnostics,
+			Map<Object, Object> context) {
+		return CollectionLiteralExpOperations.checkElementType(this,
+			diagnostics, context);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
-	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+	public NotificationChain eInverseRemove(InternalEObject otherEnd,
+			int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case ExpressionsPackage.COLLECTION_LITERAL_EXP__PART:
-				return ((InternalEList<?>)getPart()).basicRemove(otherEnd, msgs);
+			case ExpressionsPackage.COLLECTION_LITERAL_EXP__PART :
+				return ((InternalEList<?>) getPart()).basicRemove(otherEnd,
+					msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -181,12 +250,12 @@ public class CollectionLiteralExpImpl<C> extends LiteralExpImpl<C> implements Co
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case ExpressionsPackage.COLLECTION_LITERAL_EXP__KIND:
+			case ExpressionsPackage.COLLECTION_LITERAL_EXP__KIND :
 				return getKind();
-			case ExpressionsPackage.COLLECTION_LITERAL_EXP__PART:
+			case ExpressionsPackage.COLLECTION_LITERAL_EXP__PART :
 				return getPart();
-			case ExpressionsPackage.COLLECTION_LITERAL_EXP__SIMPLE_RANGE:
-				return isSimpleRange() ? Boolean.TRUE : Boolean.FALSE;
+			case ExpressionsPackage.COLLECTION_LITERAL_EXP__SIMPLE_RANGE :
+				return isSimpleRange();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -200,12 +269,13 @@ public class CollectionLiteralExpImpl<C> extends LiteralExpImpl<C> implements Co
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case ExpressionsPackage.COLLECTION_LITERAL_EXP__KIND:
-				setKind((CollectionKind)newValue);
+			case ExpressionsPackage.COLLECTION_LITERAL_EXP__KIND :
+				setKind((CollectionKind) newValue);
 				return;
-			case ExpressionsPackage.COLLECTION_LITERAL_EXP__PART:
+			case ExpressionsPackage.COLLECTION_LITERAL_EXP__PART :
 				getPart().clear();
-				getPart().addAll((Collection<? extends CollectionLiteralPart<C>>)newValue);
+				getPart().addAll(
+					(Collection<? extends CollectionLiteralPart<C>>) newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -219,10 +289,10 @@ public class CollectionLiteralExpImpl<C> extends LiteralExpImpl<C> implements Co
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case ExpressionsPackage.COLLECTION_LITERAL_EXP__KIND:
+			case ExpressionsPackage.COLLECTION_LITERAL_EXP__KIND :
 				setKind(KIND_EDEFAULT);
 				return;
-			case ExpressionsPackage.COLLECTION_LITERAL_EXP__PART:
+			case ExpressionsPackage.COLLECTION_LITERAL_EXP__PART :
 				getPart().clear();
 				return;
 		}
@@ -237,11 +307,11 @@ public class CollectionLiteralExpImpl<C> extends LiteralExpImpl<C> implements Co
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case ExpressionsPackage.COLLECTION_LITERAL_EXP__KIND:
+			case ExpressionsPackage.COLLECTION_LITERAL_EXP__KIND :
 				return kind != KIND_EDEFAULT;
-			case ExpressionsPackage.COLLECTION_LITERAL_EXP__PART:
+			case ExpressionsPackage.COLLECTION_LITERAL_EXP__PART :
 				return part != null && !part.isEmpty();
-			case ExpressionsPackage.COLLECTION_LITERAL_EXP__SIMPLE_RANGE:
+			case ExpressionsPackage.COLLECTION_LITERAL_EXP__SIMPLE_RANGE :
 				return isSimpleRange() != SIMPLE_RANGE_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
@@ -261,8 +331,10 @@ public class CollectionLiteralExpImpl<C> extends LiteralExpImpl<C> implements Co
 	 * @generated NOT
 	 */
 	@Override
+	@SuppressWarnings("unchecked")
 	public <T, U extends Visitor<T, ?, ?, ?, ?, ?, ?, ?, ?, ?>> T accept(U v) {
-		return v.visitCollectionLiteralExp(this);
+		return ((Visitor<T, C, ?, ?, ?, ?, ?, ?, ?, ?>) v)
+			.visitCollectionLiteralExp(this);
 	}
 
 } //CollectionLiteralExpImpl

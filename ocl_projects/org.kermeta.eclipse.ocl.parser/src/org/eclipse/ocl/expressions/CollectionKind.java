@@ -1,7 +1,7 @@
 /**
  * <copyright>
  * 
- * Copyright (c) 2006, 2007 IBM Corporation and others.
+ * Copyright (c) 2006, 2008 IBM Corporation, Zeligsoft Inc., and others.
  * All rights reserved.   This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -9,10 +9,11 @@
  * 
  * Contributors:
  *   IBM - Initial API and implementation
+ *   Zeligsoft - Bug 207365
  * 
  * </copyright>
  *
- * $Id: CollectionKind.java,v 1.1 2008-08-07 06:35:15 dvojtise Exp $
+ * $Id: CollectionKind.java,v 1.6 2008/10/12 01:09:49 cdamus Exp $
  */
 package org.eclipse.ocl.expressions;
 
@@ -31,7 +32,8 @@ import org.eclipse.emf.common.util.Enumerator;
  * @model
  * @generated
  */
-public enum CollectionKind implements Enumerator {
+public enum CollectionKind
+		implements Enumerator {
 	//$NON-NLS-1$ //$NON-NLS-2$
 
 	/**
@@ -73,8 +75,8 @@ public enum CollectionKind implements Enumerator {
 	 * @ordered
 	 */
 	SEQUENCE_LITERAL(3, "Sequence", "Sequence"), //$NON-NLS-1$ //$NON-NLS-2$
-    
-    /**
+
+	/**
 	 * The '<em><b>Collection</b></em>' literal object.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -165,14 +167,9 @@ public enum CollectionKind implements Enumerator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private static final CollectionKind[] VALUES_ARRAY =
-		new CollectionKind[] {
-			SET_LITERAL,
-			ORDERED_SET_LITERAL,
-			BAG_LITERAL,
-			SEQUENCE_LITERAL,
-			COLLECTION_LITERAL,
-		};
+	private static final CollectionKind[] VALUES_ARRAY = new CollectionKind[]{
+		SET_LITERAL, ORDERED_SET_LITERAL, BAG_LITERAL, SEQUENCE_LITERAL,
+		COLLECTION_LITERAL,};
 
 	/**
 	 * A public read-only list of all the '<em><b>Collection Kind</b></em>' enumerators.
@@ -180,7 +177,8 @@ public enum CollectionKind implements Enumerator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final List<CollectionKind> VALUES = Collections.unmodifiableList(Arrays.asList(VALUES_ARRAY));
+	public static final List<CollectionKind> VALUES = Collections
+		.unmodifiableList(Arrays.asList(VALUES_ARRAY));
 
 	/**
 	 * Returns the '<em><b>Collection Kind</b></em>' literal with the specified literal value.
@@ -222,11 +220,16 @@ public enum CollectionKind implements Enumerator {
 	 */
 	public static CollectionKind get(int value) {
 		switch (value) {
-			case SET: return SET_LITERAL;
-			case ORDERED_SET: return ORDERED_SET_LITERAL;
-			case BAG: return BAG_LITERAL;
-			case SEQUENCE: return SEQUENCE_LITERAL;
-			case COLLECTION: return COLLECTION_LITERAL;
+			case SET :
+				return SET_LITERAL;
+			case ORDERED_SET :
+				return ORDERED_SET_LITERAL;
+			case BAG :
+				return BAG_LITERAL;
+			case SEQUENCE :
+				return SEQUENCE_LITERAL;
+			case COLLECTION :
+				return COLLECTION_LITERAL;
 		}
 		return null;
 	}
@@ -270,7 +273,7 @@ public enum CollectionKind implements Enumerator {
 	 * @generated
 	 */
 	public int getValue() {
-	  return value;
+		return value;
 	}
 
 	/**
@@ -279,7 +282,7 @@ public enum CollectionKind implements Enumerator {
 	 * @generated
 	 */
 	public String getName() {
-	  return name;
+		return name;
 	}
 
 	/**
@@ -288,7 +291,7 @@ public enum CollectionKind implements Enumerator {
 	 * @generated
 	 */
 	public String getLiteral() {
-	  return literal;
+		return literal;
 	}
 
 	/**
@@ -301,12 +304,16 @@ public enum CollectionKind implements Enumerator {
 	public String toString() {
 		return literal;
 	}
-	
+
 	public static CollectionKind getKind(boolean ordered, boolean unique) {
 		if (ordered) {
-			return unique? ORDERED_SET_LITERAL : SEQUENCE_LITERAL;
+			return unique
+				? ORDERED_SET_LITERAL
+				: SEQUENCE_LITERAL;
 		} else {
-			return unique? SET_LITERAL : BAG_LITERAL;
+			return unique
+				? SET_LITERAL
+				: BAG_LITERAL;
 		}
 	}
 } //CollectionKind

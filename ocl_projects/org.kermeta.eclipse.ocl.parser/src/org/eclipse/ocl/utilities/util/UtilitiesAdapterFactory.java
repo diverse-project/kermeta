@@ -1,19 +1,18 @@
-/**
- * <copyright>
- * 
- * Copyright (c) 2006, 2007 IBM Corporation and others.
- * All rights reserved.   This program and the accompanying materials
+/*******************************************************************************
+ * Copyright (c) 2006, 2008 IBM Corporation and others.
+ * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   IBM - Initial API and implementation
  * 
  * </copyright>
  *
- * $Id: UtilitiesAdapterFactory.java,v 1.1 2008-08-07 06:35:17 dvojtise Exp $
- */
+ * $Id: UtilitiesAdapterFactory.java,v 1.8 2009/01/23 17:16:04 cdamus Exp $
+ * /
+ *******************************************************************************/
 package org.eclipse.ocl.utilities.util;
 
 import org.eclipse.emf.common.notify.Adapter;
@@ -40,7 +39,9 @@ import org.eclipse.ocl.utilities.Visitor;
  * @see org.eclipse.ocl.utilities.UtilitiesPackage
  * @generated
  */
-public class UtilitiesAdapterFactory extends AdapterFactoryImpl {
+public class UtilitiesAdapterFactory
+		extends AdapterFactoryImpl {
+
 	/**
 	 * The cached model package.
 	 * <!-- begin-user-doc -->
@@ -75,56 +76,65 @@ public class UtilitiesAdapterFactory extends AdapterFactoryImpl {
 			return true;
 		}
 		if (object instanceof EObject) {
-			return ((EObject)object).eClass().getEPackage() == modelPackage;
+			return ((EObject) object).eClass().getEPackage() == modelPackage;
 		}
 		return false;
 	}
 
 	/**
-	 * The switch the delegates to the <code>createXXX</code> methods.
+	 * The switch that delegates to the <code>createXXX</code> methods.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected UtilitiesSwitch<Adapter> modelSwitch =
-		new UtilitiesSwitch<Adapter>() {
-			@Override
-			public Adapter caseASTNode(ASTNode object) {
-				return createASTNodeAdapter();
-			}
-			@Override
-			public Adapter caseCallingASTNode(CallingASTNode object) {
-				return createCallingASTNodeAdapter();
-			}
-			@Override
-			public Adapter caseTypedASTNode(TypedASTNode object) {
-				return createTypedASTNodeAdapter();
-			}
-			@Override
-			public Adapter caseVisitable(Visitable object) {
-				return createVisitableAdapter();
-			}
-			@Override
-			public <T, C, O, P, EL, PM, S, COA, SSA, CT> Adapter caseVisitor(Visitor<T, C, O, P, EL, PM, S, COA, SSA, CT> object) {
-				return createVisitorAdapter();
-			}
-			@Override
-			public <C> Adapter caseTypedElement(TypedElement<C> object) {
-				return createTypedElementAdapter();
-			}
-			@Override
-			public <C, PM> Adapter caseExpressionInOCL(ExpressionInOCL<C, PM> object) {
-				return createExpressionInOCLAdapter();
-			}
-			@Override
-			public <O> Adapter casePredefinedType(PredefinedType<O> object) {
-				return createPredefinedTypeAdapter();
-			}
-			@Override
-			public Adapter defaultCase(EObject object) {
-				return createEObjectAdapter();
-			}
-		};
+	protected UtilitiesSwitch<Adapter> modelSwitch = new UtilitiesSwitch<Adapter>() {
+
+		@Override
+		public Adapter caseASTNode(ASTNode object) {
+			return createASTNodeAdapter();
+		}
+
+		@Override
+		public Adapter caseCallingASTNode(CallingASTNode object) {
+			return createCallingASTNodeAdapter();
+		}
+
+		@Override
+		public Adapter caseTypedASTNode(TypedASTNode object) {
+			return createTypedASTNodeAdapter();
+		}
+
+		@Override
+		public Adapter caseVisitable(Visitable object) {
+			return createVisitableAdapter();
+		}
+
+		@Override
+		public <T, C, O, P, EL, PM, S, COA, SSA, CT> Adapter caseVisitor(
+				Visitor<T, C, O, P, EL, PM, S, COA, SSA, CT> object) {
+			return createVisitorAdapter();
+		}
+
+		@Override
+		public <C> Adapter caseTypedElement(TypedElement<C> object) {
+			return createTypedElementAdapter();
+		}
+
+		@Override
+		public <C, PM> Adapter caseExpressionInOCL(ExpressionInOCL<C, PM> object) {
+			return createExpressionInOCLAdapter();
+		}
+
+		@Override
+		public <O> Adapter casePredefinedType(PredefinedType<O> object) {
+			return createPredefinedTypeAdapter();
+		}
+
+		@Override
+		public Adapter defaultCase(EObject object) {
+			return createEObjectAdapter();
+		}
+	};
 
 	/**
 	 * Creates an adapter for the <code>target</code>.
@@ -136,9 +146,8 @@ public class UtilitiesAdapterFactory extends AdapterFactoryImpl {
 	 */
 	@Override
 	public Adapter createAdapter(Notifier target) {
-		return modelSwitch.doSwitch((EObject)target);
+		return modelSwitch.doSwitch((EObject) target);
 	}
-
 
 	/**
 	 * Creates a new adapter for an object of class '{@link org.eclipse.ocl.utilities.ASTNode <em>AST Node</em>}'.

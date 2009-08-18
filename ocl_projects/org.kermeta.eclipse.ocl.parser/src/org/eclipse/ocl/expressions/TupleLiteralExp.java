@@ -1,7 +1,7 @@
 /**
  * <copyright>
  * 
- * Copyright (c) 2006, 2007 IBM Corporation and others.
+ * Copyright (c) 2006, 2008 IBM Corporation, Zeligsoft Inc., and others.
  * All rights reserved.   This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -9,13 +9,16 @@
  * 
  * Contributors:
  *   IBM - Initial API and implementation
+ *   Zeligsoft - Bug 207365
  * 
  * </copyright>
  *
- * $Id: TupleLiteralExp.java,v 1.1 2008-08-07 06:35:16 dvojtise Exp $
+ * $Id: TupleLiteralExp.java,v 1.7 2008/11/30 22:11:38 cdamus Exp $
  */
 package org.eclipse.ocl.expressions;
 
+import java.util.Map;
+import org.eclipse.emf.common.util.DiagnosticChain;
 import org.eclipse.emf.common.util.EList;
 
 /**
@@ -33,8 +36,12 @@ import org.eclipse.emf.common.util.EList;
  * @see org.eclipse.ocl.expressions.ExpressionsPackage#getTupleLiteralExp()
  * @model
  * @generated
+ * @noimplement This interface is not intended to be implemented by clients.
+ * @noextend This interface is not intended to be extended by clients.
  */
-public interface TupleLiteralExp<C, P> extends LiteralExp<C> {
+public interface TupleLiteralExp<C, P>
+		extends LiteralExp<C> {
+
 	/**
 	 * Returns the value of the '<em><b>Part</b></em>' containment reference list.
 	 * The list contents are of type {@link org.eclipse.ocl.expressions.TupleLiteralPart}&lt;C, P>.
@@ -46,9 +53,42 @@ public interface TupleLiteralExp<C, P> extends LiteralExp<C> {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Part</em>' containment reference list.
 	 * @see org.eclipse.ocl.expressions.ExpressionsPackage#getTupleLiteralExp_Part()
-	 * @model type="org.eclipse.ocl.expressions.TupleLiteralPart" containment="true"
+	 * @model containment="true"
 	 * @generated
 	 */
 	EList<TupleLiteralPart<C, P>> getPart();
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * type.oclIsKindOf (TupleType)
+	 * and
+	 * part->forAll (tlep |
+	 * type.oclAsType (TupleType).allProperties()->exists (tp | tlep.attribute = tp))
+	 * and
+	 * part->size() = type.oclAsType (TupleType).allProperties()->size()
+	 * @param diagnostics The chain of diagnostics to which problems are to be appended.
+	 * @param context The cache of context-specific information.
+	 * <!-- end-model-doc -->
+	 * @model
+	 * @generated
+	 */
+	boolean checkTupleType(DiagnosticChain diagnostics,
+			Map<Object, Object> context);
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * part->isUnique (attribute.name)
+	 * @param diagnostics The chain of diagnostics to which problems are to be appended.
+	 * @param context The cache of context-specific information.
+	 * <!-- end-model-doc -->
+	 * @model
+	 * @generated
+	 */
+	boolean checkPartsUnique(DiagnosticChain diagnostics,
+			Map<Object, Object> context);
 
 } // TupleLiteralExp

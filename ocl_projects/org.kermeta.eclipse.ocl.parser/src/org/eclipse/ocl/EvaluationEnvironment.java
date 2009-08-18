@@ -12,7 +12,7 @@
  *
  * </copyright>
  *
- * $Id: EvaluationEnvironment.java,v 1.1 2008-08-07 06:35:17 dvojtise Exp $
+ * $Id: EvaluationEnvironment.java,v 1.4 2007/11/06 19:47:11 cdamus Exp $
  */
 
 package org.eclipse.ocl;
@@ -21,7 +21,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.eclipse.ocl.options.Customizable;
 import org.eclipse.ocl.types.TupleType;
+import org.eclipse.ocl.util.Adaptable;
+import org.eclipse.ocl.util.OCLUtil;
 import org.eclipse.ocl.util.Tuple;
 
 /**
@@ -32,6 +35,13 @@ import org.eclipse.ocl.util.Tuple;
  * <p>
  * See the {@link Environment} class for a description of the
  * generic type parameters of this class. 
+ * </p><p>
+ * As of the 1.2 release, evaluation environments are encouraged to implement
+ * the {@link Adaptable} interface to provide optional interfaces such as
+ * {@link Customizable} for specifying evaluation options.  Moreover, the
+ * ({@link AbstractEvaluationEnvironment}) class implements the <tt>Adaptable</tt>
+ * protocol.  Use the {@link OCLUtil#getAdapter(EvaluationEnvironment, Class)}
+ * method to obtain adapters for any evaluation environment instance.
  * </p>
  * 
  * @author Tim Klinger (tklinger)
@@ -215,4 +225,25 @@ public interface EvaluationEnvironment<C, O, P, CLS, E> {
      * @return the new tuple instance
      */
     Tuple<O, P> createTuple(C type, Map<P, Object> values);
+    
+    /**
+     * Optional {@linkplain Adaptable adapter interface} for evaluation
+     * environments that support additional enumeration evaluation capabilities. 
+     * 
+     * @author Christian W. Damus (cdamus)
+     * 
+     * @since 1.2
+     * 
+     * @see OCLUtil#getAdapter(EvaluationEnvironment, Class)
+     */
+    interface Enumerations<EL> {
+    	/**
+    	 * Obtains the Java-language value of the specified enumeration literal.
+    	 * Often, this is an instance of an EMF-generated enumeration type.
+    	 * 
+    	 * @param enumerationLiteral the enumeration literal model element
+    	 * @return the corresponding run-time instance
+    	 */
+    	Object getValue(EL enumerationLiteral);
+    }
 }

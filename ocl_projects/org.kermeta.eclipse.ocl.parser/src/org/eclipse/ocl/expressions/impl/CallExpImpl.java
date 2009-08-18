@@ -1,7 +1,7 @@
 /**
  * <copyright>
  * 
- * Copyright (c) 2006, 2007 IBM Corporation and others.
+ * Copyright (c) 2006, 2009 IBM Corporation, Zeligsoft Inc., and others.
  * All rights reserved.   This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -9,10 +9,11 @@
  * 
  * Contributors:
  *   IBM - Initial API and implementation
+ *   Zeligsoft - Bug 207365
  * 
  * </copyright>
  *
- * $Id: CallExpImpl.java,v 1.1 2008-08-07 06:35:12 dvojtise Exp $
+ * $Id: CallExpImpl.java,v 1.6 2009/01/23 17:16:03 cdamus Exp $
  */
 package org.eclipse.ocl.expressions.impl;
 
@@ -26,7 +27,6 @@ import org.eclipse.ocl.expressions.ExpressionsPackage;
 import org.eclipse.ocl.expressions.OCLExpression;
 import org.eclipse.ocl.utilities.CallingASTNode;
 import org.eclipse.ocl.utilities.UtilitiesPackage;
-
 
 /**
  * <!-- begin-user-doc -->
@@ -43,7 +43,10 @@ import org.eclipse.ocl.utilities.UtilitiesPackage;
  *
  * @generated
  */
-public abstract class CallExpImpl<C> extends OCLExpressionImpl<C> implements CallExp<C> {
+public abstract class CallExpImpl<C>
+		extends OCLExpressionImpl<C>
+		implements CallExp<C> {
+
 	/**
 	 * The default value of the '{@link #getPropertyStartPosition() <em>Property Start Position</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -131,7 +134,9 @@ public abstract class CallExpImpl<C> extends OCLExpressionImpl<C> implements Cal
 		int oldPropertyStartPosition = propertyStartPosition;
 		propertyStartPosition = newPropertyStartPosition;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ExpressionsPackage.CALL_EXP__PROPERTY_START_POSITION, oldPropertyStartPosition, propertyStartPosition));
+			eNotify(new ENotificationImpl(this, Notification.SET,
+				ExpressionsPackage.CALL_EXP__PROPERTY_START_POSITION,
+				oldPropertyStartPosition, propertyStartPosition));
 	}
 
 	/**
@@ -152,7 +157,9 @@ public abstract class CallExpImpl<C> extends OCLExpressionImpl<C> implements Cal
 		int oldPropertyEndPosition = propertyEndPosition;
 		propertyEndPosition = newPropertyEndPosition;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ExpressionsPackage.CALL_EXP__PROPERTY_END_POSITION, oldPropertyEndPosition, propertyEndPosition));
+			eNotify(new ENotificationImpl(this, Notification.SET,
+				ExpressionsPackage.CALL_EXP__PROPERTY_END_POSITION,
+				oldPropertyEndPosition, propertyEndPosition));
 	}
 
 	/**
@@ -169,12 +176,18 @@ public abstract class CallExpImpl<C> extends OCLExpressionImpl<C> implements Cal
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetSource(OCLExpression<C> newSource, NotificationChain msgs) {
+	public NotificationChain basicSetSource(OCLExpression<C> newSource,
+			NotificationChain msgs) {
 		OCLExpression<C> oldSource = source;
 		source = newSource;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, ExpressionsPackage.CALL_EXP__SOURCE, oldSource, newSource);
-			if (msgs == null) msgs = notification; else msgs.add(notification);
+			ENotificationImpl notification = new ENotificationImpl(this,
+				Notification.SET, ExpressionsPackage.CALL_EXP__SOURCE,
+				oldSource, newSource);
+			if (msgs == null)
+				msgs = notification;
+			else
+				msgs.add(notification);
 		}
 		return msgs;
 	}
@@ -188,14 +201,19 @@ public abstract class CallExpImpl<C> extends OCLExpressionImpl<C> implements Cal
 		if (newSource != source) {
 			NotificationChain msgs = null;
 			if (source != null)
-				msgs = ((InternalEObject)source).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - ExpressionsPackage.CALL_EXP__SOURCE, null, msgs);
+				msgs = ((InternalEObject) source).eInverseRemove(this,
+					EOPPOSITE_FEATURE_BASE
+						- ExpressionsPackage.CALL_EXP__SOURCE, null, msgs);
 			if (newSource != null)
-				msgs = ((InternalEObject)newSource).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - ExpressionsPackage.CALL_EXP__SOURCE, null, msgs);
+				msgs = ((InternalEObject) newSource).eInverseAdd(this,
+					EOPPOSITE_FEATURE_BASE
+						- ExpressionsPackage.CALL_EXP__SOURCE, null, msgs);
 			msgs = basicSetSource(newSource, msgs);
-			if (msgs != null) msgs.dispatch();
-		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ExpressionsPackage.CALL_EXP__SOURCE, newSource, newSource));
+			if (msgs != null)
+				msgs.dispatch();
+		} else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET,
+				ExpressionsPackage.CALL_EXP__SOURCE, newSource, newSource));
 	}
 
 	/**
@@ -204,9 +222,10 @@ public abstract class CallExpImpl<C> extends OCLExpressionImpl<C> implements Cal
 	 * @generated
 	 */
 	@Override
-	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+	public NotificationChain eInverseRemove(InternalEObject otherEnd,
+			int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case ExpressionsPackage.CALL_EXP__SOURCE:
+			case ExpressionsPackage.CALL_EXP__SOURCE :
 				return basicSetSource(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -220,11 +239,11 @@ public abstract class CallExpImpl<C> extends OCLExpressionImpl<C> implements Cal
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case ExpressionsPackage.CALL_EXP__PROPERTY_START_POSITION:
-				return new Integer(getPropertyStartPosition());
-			case ExpressionsPackage.CALL_EXP__PROPERTY_END_POSITION:
-				return new Integer(getPropertyEndPosition());
-			case ExpressionsPackage.CALL_EXP__SOURCE:
+			case ExpressionsPackage.CALL_EXP__PROPERTY_START_POSITION :
+				return getPropertyStartPosition();
+			case ExpressionsPackage.CALL_EXP__PROPERTY_END_POSITION :
+				return getPropertyEndPosition();
+			case ExpressionsPackage.CALL_EXP__SOURCE :
 				return getSource();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -239,14 +258,14 @@ public abstract class CallExpImpl<C> extends OCLExpressionImpl<C> implements Cal
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case ExpressionsPackage.CALL_EXP__PROPERTY_START_POSITION:
-				setPropertyStartPosition(((Integer)newValue).intValue());
+			case ExpressionsPackage.CALL_EXP__PROPERTY_START_POSITION :
+				setPropertyStartPosition((Integer) newValue);
 				return;
-			case ExpressionsPackage.CALL_EXP__PROPERTY_END_POSITION:
-				setPropertyEndPosition(((Integer)newValue).intValue());
+			case ExpressionsPackage.CALL_EXP__PROPERTY_END_POSITION :
+				setPropertyEndPosition((Integer) newValue);
 				return;
-			case ExpressionsPackage.CALL_EXP__SOURCE:
-				setSource((OCLExpression<C>)newValue);
+			case ExpressionsPackage.CALL_EXP__SOURCE :
+				setSource((OCLExpression<C>) newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -260,14 +279,14 @@ public abstract class CallExpImpl<C> extends OCLExpressionImpl<C> implements Cal
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case ExpressionsPackage.CALL_EXP__PROPERTY_START_POSITION:
+			case ExpressionsPackage.CALL_EXP__PROPERTY_START_POSITION :
 				setPropertyStartPosition(PROPERTY_START_POSITION_EDEFAULT);
 				return;
-			case ExpressionsPackage.CALL_EXP__PROPERTY_END_POSITION:
+			case ExpressionsPackage.CALL_EXP__PROPERTY_END_POSITION :
 				setPropertyEndPosition(PROPERTY_END_POSITION_EDEFAULT);
 				return;
-			case ExpressionsPackage.CALL_EXP__SOURCE:
-				setSource((OCLExpression<C>)null);
+			case ExpressionsPackage.CALL_EXP__SOURCE :
+				setSource((OCLExpression<C>) null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -281,11 +300,11 @@ public abstract class CallExpImpl<C> extends OCLExpressionImpl<C> implements Cal
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case ExpressionsPackage.CALL_EXP__PROPERTY_START_POSITION:
+			case ExpressionsPackage.CALL_EXP__PROPERTY_START_POSITION :
 				return propertyStartPosition != PROPERTY_START_POSITION_EDEFAULT;
-			case ExpressionsPackage.CALL_EXP__PROPERTY_END_POSITION:
+			case ExpressionsPackage.CALL_EXP__PROPERTY_END_POSITION :
 				return propertyEndPosition != PROPERTY_END_POSITION_EDEFAULT;
-			case ExpressionsPackage.CALL_EXP__SOURCE:
+			case ExpressionsPackage.CALL_EXP__SOURCE :
 				return source != null;
 		}
 		return super.eIsSet(featureID);
@@ -300,9 +319,12 @@ public abstract class CallExpImpl<C> extends OCLExpressionImpl<C> implements Cal
 	public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass) {
 		if (baseClass == CallingASTNode.class) {
 			switch (derivedFeatureID) {
-				case ExpressionsPackage.CALL_EXP__PROPERTY_START_POSITION: return UtilitiesPackage.CALLING_AST_NODE__PROPERTY_START_POSITION;
-				case ExpressionsPackage.CALL_EXP__PROPERTY_END_POSITION: return UtilitiesPackage.CALLING_AST_NODE__PROPERTY_END_POSITION;
-				default: return -1;
+				case ExpressionsPackage.CALL_EXP__PROPERTY_START_POSITION :
+					return UtilitiesPackage.CALLING_AST_NODE__PROPERTY_START_POSITION;
+				case ExpressionsPackage.CALL_EXP__PROPERTY_END_POSITION :
+					return UtilitiesPackage.CALLING_AST_NODE__PROPERTY_END_POSITION;
+				default :
+					return -1;
 			}
 		}
 		return super.eBaseStructuralFeatureID(derivedFeatureID, baseClass);
@@ -317,9 +339,12 @@ public abstract class CallExpImpl<C> extends OCLExpressionImpl<C> implements Cal
 	public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass) {
 		if (baseClass == CallingASTNode.class) {
 			switch (baseFeatureID) {
-				case UtilitiesPackage.CALLING_AST_NODE__PROPERTY_START_POSITION: return ExpressionsPackage.CALL_EXP__PROPERTY_START_POSITION;
-				case UtilitiesPackage.CALLING_AST_NODE__PROPERTY_END_POSITION: return ExpressionsPackage.CALL_EXP__PROPERTY_END_POSITION;
-				default: return -1;
+				case UtilitiesPackage.CALLING_AST_NODE__PROPERTY_START_POSITION :
+					return ExpressionsPackage.CALL_EXP__PROPERTY_START_POSITION;
+				case UtilitiesPackage.CALLING_AST_NODE__PROPERTY_END_POSITION :
+					return ExpressionsPackage.CALL_EXP__PROPERTY_END_POSITION;
+				default :
+					return -1;
 			}
 		}
 		return super.eDerivedStructuralFeatureID(baseFeatureID, baseClass);

@@ -12,12 +12,12 @@
  *
  * </copyright>
  *
- * $Id: UnicodeSupport.java,v 1.1 2008-08-07 06:35:17 dvojtise Exp $
+ * $Id: UnicodeSupport.java,v 1.3 2007/10/11 23:04:53 cdamus Exp $
  */
 package org.eclipse.ocl.util;
 
-//import com.ibm.icu.lang.UCharacter;
-//import com.ibm.icu.text.UTF16;
+import com.ibm.icu.lang.UCharacter;
+import com.ibm.icu.text.UTF16;
 
 /**
  * A proxy interface to isolate dependencies on the ICU4J library for
@@ -188,41 +188,48 @@ public abstract class UnicodeSupport {
 	 *
 	 * @author Christian W. Damus (cdamus)
 	 */
-/*	static final class ICU extends UnicodeSupport {
+	static final class ICU extends UnicodeSupport {
 		public ICU() {
 			// force attempt to access ICU4J API
 			UTF16.charAt(getClass().getName(), 1);
 		}
 		
-		int codePointAt0(StringBuffer buffer, int offset) {
+		@Override
+        int codePointAt0(StringBuffer buffer, int offset) {
 			return UTF16.charAt(buffer, offset);
 		}
 
-		int shiftCodePointOffsetBy0(String text, int offset, int shift) {
+		@Override
+        int shiftCodePointOffsetBy0(String text, int offset, int shift) {
 			return UTF16.moveCodePointOffset(text, offset, shift);
 		}
 
-		void setCodePointAt0(StringBuffer buffer, int offset, int codePoint) {
+		@Override
+        void setCodePointAt0(StringBuffer buffer, int offset, int codePoint) {
 			UTF16.setCharAt(buffer, offset, codePoint);
 		}
 
-		int toLowerCase0(int codePoint) {
+		@Override
+        int toLowerCase0(int codePoint) {
 			return UCharacter.toLowerCase(codePoint);
 		}
 
-		String toLowerCase0(String text) {
+		@Override
+        String toLowerCase0(String text) {
 			return UCharacter.toLowerCase(text);
 		}
 
-		int toUpperCase0(int codePoint) {
+		@Override
+        int toUpperCase0(int codePoint) {
 			return UCharacter.toUpperCase(codePoint);
 		}
 
-		String toUpperCase0(String text) {
+		@Override
+        String toUpperCase0(String text) {
 			return UCharacter.toUpperCase(text);
 		}
 	}
-*/	
+	
 	/**
 	 * Default implementation of the ICU stub interface, for deployments without
 	 * ICU4J.  This implementation just delegates to the relevant Java text APIs.
@@ -231,15 +238,18 @@ public abstract class UnicodeSupport {
 	 */
 	static final class Default extends UnicodeSupport {
 
-		int codePointAt0(StringBuffer buffer, int offset) {
+		@Override
+        int codePointAt0(StringBuffer buffer, int offset) {
 			return buffer.codePointAt(offset);
 		}
 
-		int shiftCodePointOffsetBy0(String text, int offset, int shift) {
+		@Override
+        int shiftCodePointOffsetBy0(String text, int offset, int shift) {
 			return text.offsetByCodePoints(offset, shift);
 		}
 
-		void setCodePointAt0(StringBuffer buffer, int offset, int codePoint) {
+		@Override
+        void setCodePointAt0(StringBuffer buffer, int offset, int codePoint) {
 			int existingCodePoint = buffer.codePointAt(offset);
 			int width = Character.charCount(existingCodePoint);
 			
@@ -249,19 +259,23 @@ public abstract class UnicodeSupport {
 					String.valueOf(Character.toChars(codePoint)));
 		}
 
-		int toLowerCase0(int codePoint) {
+		@Override
+        int toLowerCase0(int codePoint) {
 			return Character.toLowerCase(codePoint);
 		}
 
-		String toLowerCase0(String text) {
+		@Override
+        String toLowerCase0(String text) {
 			return text.toLowerCase();
 		}
 
-		int toUpperCase0(int codePoint) {
+		@Override
+        int toUpperCase0(int codePoint) {
 			return Character.toUpperCase(codePoint);
 		}
 
-		String toUpperCase0(String text) {
+		@Override
+        String toUpperCase0(String text) {
 			return text.toUpperCase();
 		}
 	}

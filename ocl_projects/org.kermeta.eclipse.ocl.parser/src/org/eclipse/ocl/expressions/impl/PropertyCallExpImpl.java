@@ -1,7 +1,7 @@
 /**
  * <copyright>
  * 
- * Copyright (c) 2006, 2007 IBM Corporation and others.
+ * Copyright (c) 2006, 2009 IBM Corporation, Zeligsoft Inc., and others.
  * All rights reserved.   This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -9,20 +9,24 @@
  * 
  * Contributors:
  *   IBM - Initial API and implementation
+ *   Zeligsoft - Bug 207365
  * 
  * </copyright>
  *
- * $Id: PropertyCallExpImpl.java,v 1.1 2008-08-07 06:35:12 dvojtise Exp $
+ * $Id: PropertyCallExpImpl.java,v 1.8 2009/01/23 17:16:04 cdamus Exp $
  */
 package org.eclipse.ocl.expressions.impl;
 
+import java.util.Map;
 import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.util.DiagnosticChain;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.ocl.expressions.ExpressionsPackage;
 import org.eclipse.ocl.expressions.PropertyCallExp;
+import org.eclipse.ocl.expressions.operations.PropertyCallExpOperations;
 import org.eclipse.ocl.utilities.Visitor;
 
 /**
@@ -38,7 +42,10 @@ import org.eclipse.ocl.utilities.Visitor;
  *
  * @generated
  */
-public class PropertyCallExpImpl<C, P> extends NavigationCallExpImpl<C, P> implements PropertyCallExp<C, P> {
+public class PropertyCallExpImpl<C, P>
+		extends NavigationCallExpImpl<C, P>
+		implements PropertyCallExp<C, P> {
+
 	/**
 	 * The cached value of the '{@link #getReferredProperty() <em>Referred Property</em>}' reference.
 	 * <!-- begin-user-doc -->
@@ -75,12 +82,16 @@ public class PropertyCallExpImpl<C, P> extends NavigationCallExpImpl<C, P> imple
 	 */
 	@SuppressWarnings("unchecked")
 	public P getReferredProperty() {
-		if (referredProperty != null && ((EObject)referredProperty).eIsProxy()) {
-			InternalEObject oldReferredProperty = (InternalEObject)referredProperty;
-			referredProperty = (P)eResolveProxy(oldReferredProperty);
+		if (referredProperty != null && ((EObject) referredProperty).eIsProxy()) {
+			InternalEObject oldReferredProperty = (InternalEObject) referredProperty;
+			referredProperty = (P) eResolveProxy(oldReferredProperty);
 			if (referredProperty != oldReferredProperty) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ExpressionsPackage.PROPERTY_CALL_EXP__REFERRED_PROPERTY, oldReferredProperty, referredProperty));
+					eNotify(new ENotificationImpl(
+						this,
+						Notification.RESOLVE,
+						ExpressionsPackage.PROPERTY_CALL_EXP__REFERRED_PROPERTY,
+						oldReferredProperty, referredProperty));
 			}
 		}
 		return referredProperty;
@@ -104,7 +115,20 @@ public class PropertyCallExpImpl<C, P> extends NavigationCallExpImpl<C, P> imple
 		P oldReferredProperty = referredProperty;
 		referredProperty = newReferredProperty;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ExpressionsPackage.PROPERTY_CALL_EXP__REFERRED_PROPERTY, oldReferredProperty, referredProperty));
+			eNotify(new ENotificationImpl(this, Notification.SET,
+				ExpressionsPackage.PROPERTY_CALL_EXP__REFERRED_PROPERTY,
+				oldReferredProperty, referredProperty));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean checkPropertyType(DiagnosticChain diagnostics,
+			Map<Object, Object> context) {
+		return PropertyCallExpOperations.checkPropertyType(this, diagnostics,
+			context);
 	}
 
 	/**
@@ -115,8 +139,9 @@ public class PropertyCallExpImpl<C, P> extends NavigationCallExpImpl<C, P> imple
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case ExpressionsPackage.PROPERTY_CALL_EXP__REFERRED_PROPERTY:
-				if (resolve) return getReferredProperty();
+			case ExpressionsPackage.PROPERTY_CALL_EXP__REFERRED_PROPERTY :
+				if (resolve)
+					return getReferredProperty();
 				return basicGetReferredProperty();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -131,8 +156,8 @@ public class PropertyCallExpImpl<C, P> extends NavigationCallExpImpl<C, P> imple
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case ExpressionsPackage.PROPERTY_CALL_EXP__REFERRED_PROPERTY:
-				setReferredProperty((P)newValue);
+			case ExpressionsPackage.PROPERTY_CALL_EXP__REFERRED_PROPERTY :
+				setReferredProperty((P) newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -146,8 +171,8 @@ public class PropertyCallExpImpl<C, P> extends NavigationCallExpImpl<C, P> imple
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case ExpressionsPackage.PROPERTY_CALL_EXP__REFERRED_PROPERTY:
-				setReferredProperty((P)null);
+			case ExpressionsPackage.PROPERTY_CALL_EXP__REFERRED_PROPERTY :
+				setReferredProperty((P) null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -161,7 +186,7 @@ public class PropertyCallExpImpl<C, P> extends NavigationCallExpImpl<C, P> imple
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case ExpressionsPackage.PROPERTY_CALL_EXP__REFERRED_PROPERTY:
+			case ExpressionsPackage.PROPERTY_CALL_EXP__REFERRED_PROPERTY :
 				return referredProperty != null;
 		}
 		return super.eIsSet(featureID);
@@ -171,8 +196,10 @@ public class PropertyCallExpImpl<C, P> extends NavigationCallExpImpl<C, P> imple
 	 * @generated NOT
 	 */
 	@Override
+	@SuppressWarnings("unchecked")
 	public <T, U extends Visitor<T, ?, ?, ?, ?, ?, ?, ?, ?, ?>> T accept(U v) {
-		return v.visitPropertyCallExp(this);
+		return ((Visitor<T, C, ?, P, ?, ?, ?, ?, ?, ?>) v)
+			.visitPropertyCallExp(this);
 	}
 
 } //PropertyCallExpImpl

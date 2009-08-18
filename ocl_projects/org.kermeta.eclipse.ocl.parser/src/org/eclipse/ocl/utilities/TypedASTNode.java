@@ -12,10 +12,9 @@
  * 
  * </copyright>
  *
- * $Id: TypedASTNode.java,v 1.1 2008-08-07 06:35:15 dvojtise Exp $
+ * $Id: TypedASTNode.java,v 1.5 2008/11/30 22:11:38 cdamus Exp $
  */
 package org.eclipse.ocl.utilities;
-
 
 /**
  * <!-- begin-user-doc -->
@@ -33,8 +32,12 @@ package org.eclipse.ocl.utilities;
  * @see org.eclipse.ocl.utilities.UtilitiesPackage#getTypedASTNode()
  * @model interface="true" abstract="true"
  * @generated
+ * @noimplement This interface is not intended to be implemented by clients.
+ * @noextend This interface is not intended to be extended by clients.
  */
-public interface TypedASTNode extends ASTNode {
+public interface TypedASTNode
+		extends ASTNode {
+
 	/**
 	 * Returns the value of the '<em><b>Type Start Position</b></em>' attribute.
 	 * The default value is <code>"-1"</code>.

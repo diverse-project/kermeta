@@ -1,7 +1,7 @@
 /**
  * <copyright>
  * 
- * Copyright (c) 2006, 2007 IBM Corporation and others.
+ * Copyright (c) 2006, 2009 IBM Corporation, Zeligsoft Inc., and others.
  * All rights reserved.   This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -9,10 +9,11 @@
  * 
  * Contributors:
  *   IBM - Initial API and implementation
+ *   Zeligsoft - Bug 207365
  * 
  * </copyright>
  *
- * $Id: AssociationClassCallExpImpl.java,v 1.1 2008-08-07 06:35:12 dvojtise Exp $
+ * $Id: AssociationClassCallExpImpl.java,v 1.7 2009/01/23 17:16:04 cdamus Exp $
  */
 package org.eclipse.ocl.expressions.impl;
 
@@ -38,7 +39,10 @@ import org.eclipse.ocl.utilities.Visitor;
  *
  * @generated
  */
-public class AssociationClassCallExpImpl<C, P> extends NavigationCallExpImpl<C, P> implements AssociationClassCallExp<C, P> {
+public class AssociationClassCallExpImpl<C, P>
+		extends NavigationCallExpImpl<C, P>
+		implements AssociationClassCallExp<C, P> {
+
 	/**
 	 * The cached value of the '{@link #getReferredAssociationClass() <em>Referred Association Class</em>}' reference.
 	 * <!-- begin-user-doc -->
@@ -75,12 +79,17 @@ public class AssociationClassCallExpImpl<C, P> extends NavigationCallExpImpl<C, 
 	 */
 	@SuppressWarnings("unchecked")
 	public C getReferredAssociationClass() {
-		if (referredAssociationClass != null && ((EObject)referredAssociationClass).eIsProxy()) {
-			InternalEObject oldReferredAssociationClass = (InternalEObject)referredAssociationClass;
-			referredAssociationClass = (C)eResolveProxy(oldReferredAssociationClass);
+		if (referredAssociationClass != null
+			&& ((EObject) referredAssociationClass).eIsProxy()) {
+			InternalEObject oldReferredAssociationClass = (InternalEObject) referredAssociationClass;
+			referredAssociationClass = (C) eResolveProxy(oldReferredAssociationClass);
 			if (referredAssociationClass != oldReferredAssociationClass) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ExpressionsPackage.ASSOCIATION_CLASS_CALL_EXP__REFERRED_ASSOCIATION_CLASS, oldReferredAssociationClass, referredAssociationClass));
+					eNotify(new ENotificationImpl(
+						this,
+						Notification.RESOLVE,
+						ExpressionsPackage.ASSOCIATION_CLASS_CALL_EXP__REFERRED_ASSOCIATION_CLASS,
+						oldReferredAssociationClass, referredAssociationClass));
 			}
 		}
 		return referredAssociationClass;
@@ -104,7 +113,11 @@ public class AssociationClassCallExpImpl<C, P> extends NavigationCallExpImpl<C, 
 		C oldReferredAssociationClass = referredAssociationClass;
 		referredAssociationClass = newReferredAssociationClass;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ExpressionsPackage.ASSOCIATION_CLASS_CALL_EXP__REFERRED_ASSOCIATION_CLASS, oldReferredAssociationClass, referredAssociationClass));
+			eNotify(new ENotificationImpl(
+				this,
+				Notification.SET,
+				ExpressionsPackage.ASSOCIATION_CLASS_CALL_EXP__REFERRED_ASSOCIATION_CLASS,
+				oldReferredAssociationClass, referredAssociationClass));
 	}
 
 	/**
@@ -115,8 +128,9 @@ public class AssociationClassCallExpImpl<C, P> extends NavigationCallExpImpl<C, 
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case ExpressionsPackage.ASSOCIATION_CLASS_CALL_EXP__REFERRED_ASSOCIATION_CLASS:
-				if (resolve) return getReferredAssociationClass();
+			case ExpressionsPackage.ASSOCIATION_CLASS_CALL_EXP__REFERRED_ASSOCIATION_CLASS :
+				if (resolve)
+					return getReferredAssociationClass();
 				return basicGetReferredAssociationClass();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -131,8 +145,8 @@ public class AssociationClassCallExpImpl<C, P> extends NavigationCallExpImpl<C, 
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case ExpressionsPackage.ASSOCIATION_CLASS_CALL_EXP__REFERRED_ASSOCIATION_CLASS:
-				setReferredAssociationClass((C)newValue);
+			case ExpressionsPackage.ASSOCIATION_CLASS_CALL_EXP__REFERRED_ASSOCIATION_CLASS :
+				setReferredAssociationClass((C) newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -146,8 +160,8 @@ public class AssociationClassCallExpImpl<C, P> extends NavigationCallExpImpl<C, 
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case ExpressionsPackage.ASSOCIATION_CLASS_CALL_EXP__REFERRED_ASSOCIATION_CLASS:
-				setReferredAssociationClass((C)null);
+			case ExpressionsPackage.ASSOCIATION_CLASS_CALL_EXP__REFERRED_ASSOCIATION_CLASS :
+				setReferredAssociationClass((C) null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -161,7 +175,7 @@ public class AssociationClassCallExpImpl<C, P> extends NavigationCallExpImpl<C, 
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case ExpressionsPackage.ASSOCIATION_CLASS_CALL_EXP__REFERRED_ASSOCIATION_CLASS:
+			case ExpressionsPackage.ASSOCIATION_CLASS_CALL_EXP__REFERRED_ASSOCIATION_CLASS :
 				return referredAssociationClass != null;
 		}
 		return super.eIsSet(featureID);
@@ -171,8 +185,10 @@ public class AssociationClassCallExpImpl<C, P> extends NavigationCallExpImpl<C, 
 	 * @generated NOT
 	 */
 	@Override
+	@SuppressWarnings("unchecked")
 	public <T, U extends Visitor<T, ?, ?, ?, ?, ?, ?, ?, ?, ?>> T accept(U v) {
-		return v.visitAssociationClassCallExp(this);
+		return ((Visitor<T, C, ?, P, ?, ?, ?, ?, ?, ?>) v)
+			.visitAssociationClassCallExp(this);
 	}
 
 } //AssociationClassCallExpImpl

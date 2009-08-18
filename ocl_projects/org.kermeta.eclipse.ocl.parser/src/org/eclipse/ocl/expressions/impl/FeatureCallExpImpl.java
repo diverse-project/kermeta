@@ -1,7 +1,7 @@
 /**
  * <copyright>
  * 
- * Copyright (c) 2006, 2007 IBM Corporation and others.
+ * Copyright (c) 2006, 2009 IBM Corporation, Zeligsoft Inc., and others.
  * All rights reserved.   This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -9,10 +9,11 @@
  * 
  * Contributors:
  *   IBM - Initial API and implementation
+ *   Zeligsoft - Bug 207365
  * 
  * </copyright>
  *
- * $Id: FeatureCallExpImpl.java,v 1.1 2008-08-07 06:35:11 dvojtise Exp $
+ * $Id: FeatureCallExpImpl.java,v 1.5 2009/01/23 17:16:04 cdamus Exp $
  */
 package org.eclipse.ocl.expressions.impl;
 
@@ -35,7 +36,10 @@ import org.eclipse.ocl.expressions.FeatureCallExp;
  *
  * @generated
  */
-public abstract class FeatureCallExpImpl<C> extends CallExpImpl<C> implements FeatureCallExp<C> {
+public abstract class FeatureCallExpImpl<C>
+		extends CallExpImpl<C>
+		implements FeatureCallExp<C> {
+
 	/**
 	 * The default value of the '{@link #isMarkedPre() <em>Marked Pre</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -91,9 +95,14 @@ public abstract class FeatureCallExpImpl<C> extends CallExpImpl<C> implements Fe
 	 */
 	public void setMarkedPre(boolean newMarkedPre) {
 		boolean oldMarkedPre = (eFlags & MARKED_PRE_EFLAG) != 0;
-		if (newMarkedPre) eFlags |= MARKED_PRE_EFLAG; else eFlags &= ~MARKED_PRE_EFLAG;
+		if (newMarkedPre)
+			eFlags |= MARKED_PRE_EFLAG;
+		else
+			eFlags &= ~MARKED_PRE_EFLAG;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ExpressionsPackage.FEATURE_CALL_EXP__MARKED_PRE, oldMarkedPre, newMarkedPre));
+			eNotify(new ENotificationImpl(this, Notification.SET,
+				ExpressionsPackage.FEATURE_CALL_EXP__MARKED_PRE, oldMarkedPre,
+				newMarkedPre));
 	}
 
 	/**
@@ -104,8 +113,8 @@ public abstract class FeatureCallExpImpl<C> extends CallExpImpl<C> implements Fe
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case ExpressionsPackage.FEATURE_CALL_EXP__MARKED_PRE:
-				return isMarkedPre() ? Boolean.TRUE : Boolean.FALSE;
+			case ExpressionsPackage.FEATURE_CALL_EXP__MARKED_PRE :
+				return isMarkedPre();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -118,8 +127,8 @@ public abstract class FeatureCallExpImpl<C> extends CallExpImpl<C> implements Fe
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case ExpressionsPackage.FEATURE_CALL_EXP__MARKED_PRE:
-				setMarkedPre(((Boolean)newValue).booleanValue());
+			case ExpressionsPackage.FEATURE_CALL_EXP__MARKED_PRE :
+				setMarkedPre((Boolean) newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -133,7 +142,7 @@ public abstract class FeatureCallExpImpl<C> extends CallExpImpl<C> implements Fe
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case ExpressionsPackage.FEATURE_CALL_EXP__MARKED_PRE:
+			case ExpressionsPackage.FEATURE_CALL_EXP__MARKED_PRE :
 				setMarkedPre(MARKED_PRE_EDEFAULT);
 				return;
 		}
@@ -148,7 +157,7 @@ public abstract class FeatureCallExpImpl<C> extends CallExpImpl<C> implements Fe
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case ExpressionsPackage.FEATURE_CALL_EXP__MARKED_PRE:
+			case ExpressionsPackage.FEATURE_CALL_EXP__MARKED_PRE :
 				return ((eFlags & MARKED_PRE_EFLAG) != 0) != MARKED_PRE_EDEFAULT;
 		}
 		return super.eIsSet(featureID);

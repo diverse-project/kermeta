@@ -1,7 +1,7 @@
 /**
  * <copyright>
  * 
- * Copyright (c) 2006, 2007 IBM Corporation and others.
+ * Copyright (c) 2006, 2008 IBM Corporation, Zeligsoft Inc., and others.
  * All rights reserved.   This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -9,18 +9,20 @@
  * 
  * Contributors:
  *   IBM - Initial API and implementation
+ *   Zeligsoft - Bug 207365
  * 
  * </copyright>
  *
- * $Id: CollectionType.java,v 1.1 2008-08-07 06:35:14 dvojtise Exp $
+ * $Id: CollectionType.java,v 1.7 2008/11/30 22:11:38 cdamus Exp $
  */
 package org.eclipse.ocl.types;
 
+import java.util.Map;
+import org.eclipse.emf.common.util.DiagnosticChain;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.ocl.expressions.CollectionKind;
 import org.eclipse.ocl.utilities.PredefinedType;
 import org.eclipse.ocl.utilities.TypedASTNode;
-
 
 /**
  * <!-- begin-user-doc -->
@@ -38,10 +40,14 @@ import org.eclipse.ocl.utilities.TypedASTNode;
  * @see org.eclipse.ocl.types.TypesPackage#getCollectionType()
  * @model
  * @generated
+ * @noimplement This interface is not intended to be implemented by clients.
+ * @noextend This interface is not intended to be extended by clients.
  */
-public interface CollectionType<C, O> extends PredefinedType<O>, TypedASTNode {
+public interface CollectionType<C, O>
+		extends PredefinedType<O>, TypedASTNode {
+
 	String SINGLETON_NAME = "Collection"; //$NON-NLS-1$
-    
+
 	/**
 	 * Returns the value of the '<em><b>Element Type</b></em>' reference.
 	 * <!-- begin-user-doc -->
@@ -53,7 +59,7 @@ public interface CollectionType<C, O> extends PredefinedType<O>, TypedASTNode {
 	 * @return the value of the '<em>Element Type</em>' reference.
 	 * @see #setElementType(Object)
 	 * @see org.eclipse.ocl.types.TypesPackage#getCollectionType_ElementType()
-	 * @model
+	 * @model kind="reference"
 	 * @generated
 	 */
 	C getElementType();
@@ -87,12 +93,40 @@ public interface CollectionType<C, O> extends PredefinedType<O>, TypedASTNode {
 
 	/**
 	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * self.name = 'Collection(' + self.elementType.name + ')'
+	 * @param diagnostics The chain of diagnostics to which problems are to be appended.
+	 * @param context The cache of context-specific information.
+	 * <!-- end-model-doc -->
+	 * @model
+	 * @generated
+	 */
+	boolean checkCollectionTypeName(DiagnosticChain diagnostics,
+			Map<Object, Object> context);
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * self->forAll(not oclIsInvalid())
+	 * @param diagnostics The chain of diagnostics to which problems are to be appended.
+	 * @param context The cache of context-specific information.
+	 * <!-- end-model-doc -->
+	 * @model
+	 * @generated
+	 */
+	boolean checkNoInvalidValues(DiagnosticChain diagnostics,
+			Map<Object, Object> context);
+
+	/**
+	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Iterators</em>' reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @model type="java.lang.Object"
+	 * @model
 	 * @generated
 	 */
 	EList<O> oclIterators();

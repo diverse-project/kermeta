@@ -1,7 +1,7 @@
 /**
  * <copyright>
  * 
- * Copyright (c) 2006, 2007 IBM Corporation and others.
+ * Copyright (c) 2006, 2008 IBM Corporation, Zeligsoft Inc., and others.
  * All rights reserved.   This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -9,14 +9,17 @@
  * 
  * Contributors:
  *   IBM - Initial API and implementation
+ *   Zeligsoft - Bug 207365
  * 
  * </copyright>
  *
- * $Id: MessageTypeImpl.java,v 1.1 2008-08-07 06:35:15 dvojtise Exp $
+ * $Id: MessageTypeImpl.java,v 1.7 2008/10/12 01:09:48 cdamus Exp $
  */
 package org.eclipse.ocl.types.impl;
 
+import java.util.Map;
 import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.util.DiagnosticChain;
 import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.ECollections;
 import org.eclipse.emf.common.util.EList;
@@ -28,7 +31,9 @@ import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.eclipse.ocl.Environment;
 import org.eclipse.ocl.types.MessageType;
 import org.eclipse.ocl.types.TypesPackage;
+import org.eclipse.ocl.types.operations.MessageTypeOperations;
 import org.eclipse.ocl.util.OCLStandardLibraryUtil;
+import org.eclipse.ocl.util.TypeUtil;
 import org.eclipse.ocl.utilities.UMLReflection;
 
 /**
@@ -45,7 +50,10 @@ import org.eclipse.ocl.utilities.UMLReflection;
  *
  * @generated
  */
-public class MessageTypeImpl<C, O, P> extends EObjectImpl implements MessageType<C, O, P> {
+public class MessageTypeImpl<C, O, P>
+		extends EObjectImpl
+		implements MessageType<C, O, P> {
+
 	/**
 	 * The cached value of the '{@link #getReferredOperation() <em>Referred Operation</em>}' reference.
 	 * <!-- begin-user-doc -->
@@ -67,8 +75,9 @@ public class MessageTypeImpl<C, O, P> extends EObjectImpl implements MessageType
 	protected C referredSignal;
 
 	private EList<O> operations;
+
 	private EList<P> properties;
-	
+
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -104,14 +113,47 @@ public class MessageTypeImpl<C, O, P> extends EObjectImpl implements MessageType
 	 */
 	public EList<O> oclOperations() {
 		if (operations == null) {
-			Environment<?, ?, O, ?, ?, ?, ?, ?, ?, ?, ?, ?> env =
-				Environment.Registry.INSTANCE.getEnvironmentFor(this);
-			
-			operations = new BasicEList<O>(
-					OCLStandardLibraryUtil.createMessageTypeOperations(env));
+			Environment<?, ?, O, ?, ?, ?, ?, ?, ?, ?, ?, ?> env = Environment.Registry.INSTANCE
+				.getEnvironmentFor(this);
+
+			operations = new BasicEList<O>(OCLStandardLibraryUtil
+				.createMessageTypeOperations(env));
 		}
-		
+
 		return operations;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean checkExclusiveSignature(DiagnosticChain diagnostics,
+			Map<Object, Object> context) {
+		return MessageTypeOperations.checkExclusiveSignature(this, diagnostics,
+			context);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean checkOperationParameters(DiagnosticChain diagnostics,
+			Map<Object, Object> context) {
+		return MessageTypeOperations.checkOperationParameters(this,
+			diagnostics, context);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean checkSignalAttributes(DiagnosticChain diagnostics,
+			Map<Object, Object> context) {
+		return MessageTypeOperations.checkSignalAttributes(this, diagnostics,
+			context);
 	}
 
 	/**
@@ -121,12 +163,15 @@ public class MessageTypeImpl<C, O, P> extends EObjectImpl implements MessageType
 	 */
 	@SuppressWarnings("unchecked")
 	public O getReferredOperation() {
-		if (referredOperation != null && ((EObject)referredOperation).eIsProxy()) {
-			InternalEObject oldReferredOperation = (InternalEObject)referredOperation;
-			referredOperation = (O)eResolveProxy(oldReferredOperation);
+		if (referredOperation != null
+			&& ((EObject) referredOperation).eIsProxy()) {
+			InternalEObject oldReferredOperation = (InternalEObject) referredOperation;
+			referredOperation = (O) eResolveProxy(oldReferredOperation);
 			if (referredOperation != oldReferredOperation) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, TypesPackage.MESSAGE_TYPE__REFERRED_OPERATION, oldReferredOperation, referredOperation));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE,
+						TypesPackage.MESSAGE_TYPE__REFERRED_OPERATION,
+						oldReferredOperation, referredOperation));
 			}
 		}
 		return referredOperation;
@@ -150,7 +195,9 @@ public class MessageTypeImpl<C, O, P> extends EObjectImpl implements MessageType
 		O oldReferredOperation = referredOperation;
 		referredOperation = newReferredOperation;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, TypesPackage.MESSAGE_TYPE__REFERRED_OPERATION, oldReferredOperation, referredOperation));
+			eNotify(new ENotificationImpl(this, Notification.SET,
+				TypesPackage.MESSAGE_TYPE__REFERRED_OPERATION,
+				oldReferredOperation, referredOperation));
 	}
 
 	/**
@@ -160,12 +207,14 @@ public class MessageTypeImpl<C, O, P> extends EObjectImpl implements MessageType
 	 */
 	@SuppressWarnings("unchecked")
 	public C getReferredSignal() {
-		if (referredSignal != null && ((EObject)referredSignal).eIsProxy()) {
-			InternalEObject oldReferredSignal = (InternalEObject)referredSignal;
-			referredSignal = (C)eResolveProxy(oldReferredSignal);
+		if (referredSignal != null && ((EObject) referredSignal).eIsProxy()) {
+			InternalEObject oldReferredSignal = (InternalEObject) referredSignal;
+			referredSignal = (C) eResolveProxy(oldReferredSignal);
 			if (referredSignal != oldReferredSignal) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, TypesPackage.MESSAGE_TYPE__REFERRED_SIGNAL, oldReferredSignal, referredSignal));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE,
+						TypesPackage.MESSAGE_TYPE__REFERRED_SIGNAL,
+						oldReferredSignal, referredSignal));
 			}
 		}
 		return referredSignal;
@@ -189,7 +238,9 @@ public class MessageTypeImpl<C, O, P> extends EObjectImpl implements MessageType
 		C oldReferredSignal = referredSignal;
 		referredSignal = newReferredSignal;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, TypesPackage.MESSAGE_TYPE__REFERRED_SIGNAL, oldReferredSignal, referredSignal));
+			eNotify(new ENotificationImpl(this, Notification.SET,
+				TypesPackage.MESSAGE_TYPE__REFERRED_SIGNAL, oldReferredSignal,
+				referredSignal));
 	}
 
 	/**
@@ -201,26 +252,30 @@ public class MessageTypeImpl<C, O, P> extends EObjectImpl implements MessageType
 	public EList<P> oclProperties() {
 		if (properties == null) {
 			properties = new BasicEList<P>();
-			
-			Environment<?, C, O, P, ?, ?, ?, ?, ?, ?, ?, ?> env =
-				Environment.Registry.INSTANCE.getEnvironmentFor(this);
-			
-            UMLReflection<?, C, O, P, ?, ?, ?, ?, ?, ?> uml = env.getUMLReflection();
+
+			Environment<?, C, O, P, ?, ?, ?, ?, ?, ?, ?, ?> env = Environment.Registry.INSTANCE
+				.getEnvironmentFor(this);
+
+			UMLReflection<?, C, O, P, ?, ?, ?, ?, ?, ?> uml = env
+				.getUMLReflection();
 
 			EList<?> typedElements;
 			if (getReferredOperation() != null) {
-				typedElements = new BasicEList(uml.getParameters(getReferredOperation()));
+				typedElements = new BasicEList(uml
+					.getParameters(getReferredOperation()));
 			} else if (getReferredSignal() != null) {
-				typedElements = new BasicEList(uml.getAttributes(getReferredSignal()));
+				typedElements = new BasicEList(uml
+					.getAttributes(getReferredSignal()));
 			} else {
 				typedElements = ECollections.EMPTY_ELIST;
 			}
-			
+
 			for (Object next : typedElements) {
-				properties.add(uml.createProperty(uml.getName(next), uml.getOCLType(next)));
+				properties.add(uml.createProperty(uml.getName(next), TypeUtil
+					.resolveType(env, uml.getOCLType(next))));
 			}
 		}
-		
+
 		return properties;
 	}
 
@@ -232,11 +287,13 @@ public class MessageTypeImpl<C, O, P> extends EObjectImpl implements MessageType
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case TypesPackage.MESSAGE_TYPE__REFERRED_OPERATION:
-				if (resolve) return getReferredOperation();
+			case TypesPackage.MESSAGE_TYPE__REFERRED_OPERATION :
+				if (resolve)
+					return getReferredOperation();
 				return basicGetReferredOperation();
-			case TypesPackage.MESSAGE_TYPE__REFERRED_SIGNAL:
-				if (resolve) return getReferredSignal();
+			case TypesPackage.MESSAGE_TYPE__REFERRED_SIGNAL :
+				if (resolve)
+					return getReferredSignal();
 				return basicGetReferredSignal();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -251,11 +308,11 @@ public class MessageTypeImpl<C, O, P> extends EObjectImpl implements MessageType
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case TypesPackage.MESSAGE_TYPE__REFERRED_OPERATION:
-				setReferredOperation((O)newValue);
+			case TypesPackage.MESSAGE_TYPE__REFERRED_OPERATION :
+				setReferredOperation((O) newValue);
 				return;
-			case TypesPackage.MESSAGE_TYPE__REFERRED_SIGNAL:
-				setReferredSignal((C)newValue);
+			case TypesPackage.MESSAGE_TYPE__REFERRED_SIGNAL :
+				setReferredSignal((C) newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -269,11 +326,11 @@ public class MessageTypeImpl<C, O, P> extends EObjectImpl implements MessageType
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case TypesPackage.MESSAGE_TYPE__REFERRED_OPERATION:
-				setReferredOperation((O)null);
+			case TypesPackage.MESSAGE_TYPE__REFERRED_OPERATION :
+				setReferredOperation((O) null);
 				return;
-			case TypesPackage.MESSAGE_TYPE__REFERRED_SIGNAL:
-				setReferredSignal((C)null);
+			case TypesPackage.MESSAGE_TYPE__REFERRED_SIGNAL :
+				setReferredSignal((C) null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -287,9 +344,9 @@ public class MessageTypeImpl<C, O, P> extends EObjectImpl implements MessageType
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case TypesPackage.MESSAGE_TYPE__REFERRED_OPERATION:
+			case TypesPackage.MESSAGE_TYPE__REFERRED_OPERATION :
 				return referredOperation != null;
-			case TypesPackage.MESSAGE_TYPE__REFERRED_SIGNAL:
+			case TypesPackage.MESSAGE_TYPE__REFERRED_SIGNAL :
 				return referredSignal != null;
 		}
 		return super.eIsSet(featureID);

@@ -1,7 +1,7 @@
 /**
  * <copyright>
  * 
- * Copyright (c) 2006, 2007 IBM Corporation and others.
+ * Copyright (c) 2006, 2009 IBM Corporation, Zeligsoft Inc., and others.
  * All rights reserved.   This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -9,16 +9,19 @@
  * 
  * Contributors:
  *   IBM - Initial API and implementation
+ *   Zeligsoft - Bug 207365
  * 
  * </copyright>
  *
- * $Id: TupleLiteralExpImpl.java,v 1.1 2008-08-07 06:35:12 dvojtise Exp $
+ * $Id: TupleLiteralExpImpl.java,v 1.8 2009/01/23 17:16:03 cdamus Exp $
  */
 package org.eclipse.ocl.expressions.impl;
 
 import java.util.Collection;
 
+import java.util.Map;
 import org.eclipse.emf.common.notify.NotificationChain;
+import org.eclipse.emf.common.util.DiagnosticChain;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
@@ -27,6 +30,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.ocl.expressions.ExpressionsPackage;
 import org.eclipse.ocl.expressions.TupleLiteralExp;
 import org.eclipse.ocl.expressions.TupleLiteralPart;
+import org.eclipse.ocl.expressions.operations.TupleLiteralExpOperations;
 import org.eclipse.ocl.utilities.Visitor;
 
 /**
@@ -42,7 +46,10 @@ import org.eclipse.ocl.utilities.Visitor;
  *
  * @generated
  */
-public class TupleLiteralExpImpl<C, P> extends LiteralExpImpl<C> implements TupleLiteralExp<C, P> {
+public class TupleLiteralExpImpl<C, P>
+		extends LiteralExpImpl<C>
+		implements TupleLiteralExp<C, P> {
+
 	/**
 	 * The cached value of the '{@link #getPart() <em>Part</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
@@ -79,7 +86,9 @@ public class TupleLiteralExpImpl<C, P> extends LiteralExpImpl<C> implements Tupl
 	 */
 	public EList<TupleLiteralPart<C, P>> getPart() {
 		if (part == null) {
-			part = new EObjectContainmentEList<TupleLiteralPart<C, P>>(TupleLiteralPart.class, this, ExpressionsPackage.TUPLE_LITERAL_EXP__PART);
+			part = new EObjectContainmentEList<TupleLiteralPart<C, P>>(
+				TupleLiteralPart.class, this,
+				ExpressionsPackage.TUPLE_LITERAL_EXP__PART);
 		}
 		return part;
 	}
@@ -89,11 +98,35 @@ public class TupleLiteralExpImpl<C, P> extends LiteralExpImpl<C> implements Tupl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public boolean checkTupleType(DiagnosticChain diagnostics,
+			Map<Object, Object> context) {
+		return TupleLiteralExpOperations.checkTupleType(this, diagnostics,
+			context);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean checkPartsUnique(DiagnosticChain diagnostics,
+			Map<Object, Object> context) {
+		return TupleLiteralExpOperations.checkPartsUnique(this, diagnostics,
+			context);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
-	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+	public NotificationChain eInverseRemove(InternalEObject otherEnd,
+			int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case ExpressionsPackage.TUPLE_LITERAL_EXP__PART:
-				return ((InternalEList<?>)getPart()).basicRemove(otherEnd, msgs);
+			case ExpressionsPackage.TUPLE_LITERAL_EXP__PART :
+				return ((InternalEList<?>) getPart()).basicRemove(otherEnd,
+					msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -106,7 +139,7 @@ public class TupleLiteralExpImpl<C, P> extends LiteralExpImpl<C> implements Tupl
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case ExpressionsPackage.TUPLE_LITERAL_EXP__PART:
+			case ExpressionsPackage.TUPLE_LITERAL_EXP__PART :
 				return getPart();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -121,9 +154,10 @@ public class TupleLiteralExpImpl<C, P> extends LiteralExpImpl<C> implements Tupl
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case ExpressionsPackage.TUPLE_LITERAL_EXP__PART:
+			case ExpressionsPackage.TUPLE_LITERAL_EXP__PART :
 				getPart().clear();
-				getPart().addAll((Collection<? extends TupleLiteralPart<C, P>>)newValue);
+				getPart().addAll(
+					(Collection<? extends TupleLiteralPart<C, P>>) newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -137,7 +171,7 @@ public class TupleLiteralExpImpl<C, P> extends LiteralExpImpl<C> implements Tupl
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case ExpressionsPackage.TUPLE_LITERAL_EXP__PART:
+			case ExpressionsPackage.TUPLE_LITERAL_EXP__PART :
 				getPart().clear();
 				return;
 		}
@@ -152,7 +186,7 @@ public class TupleLiteralExpImpl<C, P> extends LiteralExpImpl<C> implements Tupl
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case ExpressionsPackage.TUPLE_LITERAL_EXP__PART:
+			case ExpressionsPackage.TUPLE_LITERAL_EXP__PART :
 				return part != null && !part.isEmpty();
 		}
 		return super.eIsSet(featureID);
@@ -162,8 +196,10 @@ public class TupleLiteralExpImpl<C, P> extends LiteralExpImpl<C> implements Tupl
 	 * @generated NOT
 	 */
 	@Override
+	@SuppressWarnings("unchecked")
 	public <T, U extends Visitor<T, ?, ?, ?, ?, ?, ?, ?, ?, ?>> T accept(U v) {
-		return v.visitTupleLiteralExp(this);
+		return ((Visitor<T, C, ?, P, ?, ?, ?, ?, ?, ?>) v)
+			.visitTupleLiteralExp(this);
 	}
 
 } //TupleLiteralExpImpl

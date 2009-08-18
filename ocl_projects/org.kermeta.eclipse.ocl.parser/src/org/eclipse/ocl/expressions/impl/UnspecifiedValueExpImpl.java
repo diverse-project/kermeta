@@ -1,7 +1,7 @@
 /**
  * <copyright>
  * 
- * Copyright (c) 2006, 2007 IBM Corporation and others.
+ * Copyright (c) 2006, 2009 IBM Corporation, Zeligsoft Inc., and others.
  * All rights reserved.   This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -9,10 +9,11 @@
  * 
  * Contributors:
  *   IBM - Initial API and implementation
+ *   Zeligsoft - Bug 207365
  * 
  * </copyright>
  *
- * $Id: UnspecifiedValueExpImpl.java,v 1.1 2008-08-07 06:35:11 dvojtise Exp $
+ * $Id: UnspecifiedValueExpImpl.java,v 1.6 2009/01/23 17:16:04 cdamus Exp $
  */
 package org.eclipse.ocl.expressions.impl;
 
@@ -24,7 +25,6 @@ import org.eclipse.ocl.expressions.UnspecifiedValueExp;
 import org.eclipse.ocl.utilities.TypedASTNode;
 import org.eclipse.ocl.utilities.UtilitiesPackage;
 import org.eclipse.ocl.utilities.Visitor;
-
 
 /**
  * <!-- begin-user-doc -->
@@ -40,7 +40,10 @@ import org.eclipse.ocl.utilities.Visitor;
  *
  * @generated
  */
-public class UnspecifiedValueExpImpl<C> extends OCLExpressionImpl<C> implements UnspecifiedValueExp<C> {
+public class UnspecifiedValueExpImpl<C>
+		extends OCLExpressionImpl<C>
+		implements UnspecifiedValueExp<C> {
+
 	/**
 	 * The default value of the '{@link #getTypeStartPosition() <em>Type Start Position</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -118,7 +121,9 @@ public class UnspecifiedValueExpImpl<C> extends OCLExpressionImpl<C> implements 
 		int oldTypeStartPosition = typeStartPosition;
 		typeStartPosition = newTypeStartPosition;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ExpressionsPackage.UNSPECIFIED_VALUE_EXP__TYPE_START_POSITION, oldTypeStartPosition, typeStartPosition));
+			eNotify(new ENotificationImpl(this, Notification.SET,
+				ExpressionsPackage.UNSPECIFIED_VALUE_EXP__TYPE_START_POSITION,
+				oldTypeStartPosition, typeStartPosition));
 	}
 
 	/**
@@ -139,7 +144,9 @@ public class UnspecifiedValueExpImpl<C> extends OCLExpressionImpl<C> implements 
 		int oldTypeEndPosition = typeEndPosition;
 		typeEndPosition = newTypeEndPosition;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ExpressionsPackage.UNSPECIFIED_VALUE_EXP__TYPE_END_POSITION, oldTypeEndPosition, typeEndPosition));
+			eNotify(new ENotificationImpl(this, Notification.SET,
+				ExpressionsPackage.UNSPECIFIED_VALUE_EXP__TYPE_END_POSITION,
+				oldTypeEndPosition, typeEndPosition));
 	}
 
 	/**
@@ -150,10 +157,10 @@ public class UnspecifiedValueExpImpl<C> extends OCLExpressionImpl<C> implements 
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case ExpressionsPackage.UNSPECIFIED_VALUE_EXP__TYPE_START_POSITION:
-				return new Integer(getTypeStartPosition());
-			case ExpressionsPackage.UNSPECIFIED_VALUE_EXP__TYPE_END_POSITION:
-				return new Integer(getTypeEndPosition());
+			case ExpressionsPackage.UNSPECIFIED_VALUE_EXP__TYPE_START_POSITION :
+				return getTypeStartPosition();
+			case ExpressionsPackage.UNSPECIFIED_VALUE_EXP__TYPE_END_POSITION :
+				return getTypeEndPosition();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -166,11 +173,11 @@ public class UnspecifiedValueExpImpl<C> extends OCLExpressionImpl<C> implements 
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case ExpressionsPackage.UNSPECIFIED_VALUE_EXP__TYPE_START_POSITION:
-				setTypeStartPosition(((Integer)newValue).intValue());
+			case ExpressionsPackage.UNSPECIFIED_VALUE_EXP__TYPE_START_POSITION :
+				setTypeStartPosition((Integer) newValue);
 				return;
-			case ExpressionsPackage.UNSPECIFIED_VALUE_EXP__TYPE_END_POSITION:
-				setTypeEndPosition(((Integer)newValue).intValue());
+			case ExpressionsPackage.UNSPECIFIED_VALUE_EXP__TYPE_END_POSITION :
+				setTypeEndPosition((Integer) newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -184,10 +191,10 @@ public class UnspecifiedValueExpImpl<C> extends OCLExpressionImpl<C> implements 
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case ExpressionsPackage.UNSPECIFIED_VALUE_EXP__TYPE_START_POSITION:
+			case ExpressionsPackage.UNSPECIFIED_VALUE_EXP__TYPE_START_POSITION :
 				setTypeStartPosition(TYPE_START_POSITION_EDEFAULT);
 				return;
-			case ExpressionsPackage.UNSPECIFIED_VALUE_EXP__TYPE_END_POSITION:
+			case ExpressionsPackage.UNSPECIFIED_VALUE_EXP__TYPE_END_POSITION :
 				setTypeEndPosition(TYPE_END_POSITION_EDEFAULT);
 				return;
 		}
@@ -202,9 +209,9 @@ public class UnspecifiedValueExpImpl<C> extends OCLExpressionImpl<C> implements 
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case ExpressionsPackage.UNSPECIFIED_VALUE_EXP__TYPE_START_POSITION:
+			case ExpressionsPackage.UNSPECIFIED_VALUE_EXP__TYPE_START_POSITION :
 				return typeStartPosition != TYPE_START_POSITION_EDEFAULT;
-			case ExpressionsPackage.UNSPECIFIED_VALUE_EXP__TYPE_END_POSITION:
+			case ExpressionsPackage.UNSPECIFIED_VALUE_EXP__TYPE_END_POSITION :
 				return typeEndPosition != TYPE_END_POSITION_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
@@ -219,9 +226,12 @@ public class UnspecifiedValueExpImpl<C> extends OCLExpressionImpl<C> implements 
 	public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass) {
 		if (baseClass == TypedASTNode.class) {
 			switch (derivedFeatureID) {
-				case ExpressionsPackage.UNSPECIFIED_VALUE_EXP__TYPE_START_POSITION: return UtilitiesPackage.TYPED_AST_NODE__TYPE_START_POSITION;
-				case ExpressionsPackage.UNSPECIFIED_VALUE_EXP__TYPE_END_POSITION: return UtilitiesPackage.TYPED_AST_NODE__TYPE_END_POSITION;
-				default: return -1;
+				case ExpressionsPackage.UNSPECIFIED_VALUE_EXP__TYPE_START_POSITION :
+					return UtilitiesPackage.TYPED_AST_NODE__TYPE_START_POSITION;
+				case ExpressionsPackage.UNSPECIFIED_VALUE_EXP__TYPE_END_POSITION :
+					return UtilitiesPackage.TYPED_AST_NODE__TYPE_END_POSITION;
+				default :
+					return -1;
 			}
 		}
 		return super.eBaseStructuralFeatureID(derivedFeatureID, baseClass);
@@ -236,9 +246,12 @@ public class UnspecifiedValueExpImpl<C> extends OCLExpressionImpl<C> implements 
 	public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass) {
 		if (baseClass == TypedASTNode.class) {
 			switch (baseFeatureID) {
-				case UtilitiesPackage.TYPED_AST_NODE__TYPE_START_POSITION: return ExpressionsPackage.UNSPECIFIED_VALUE_EXP__TYPE_START_POSITION;
-				case UtilitiesPackage.TYPED_AST_NODE__TYPE_END_POSITION: return ExpressionsPackage.UNSPECIFIED_VALUE_EXP__TYPE_END_POSITION;
-				default: return -1;
+				case UtilitiesPackage.TYPED_AST_NODE__TYPE_START_POSITION :
+					return ExpressionsPackage.UNSPECIFIED_VALUE_EXP__TYPE_START_POSITION;
+				case UtilitiesPackage.TYPED_AST_NODE__TYPE_END_POSITION :
+					return ExpressionsPackage.UNSPECIFIED_VALUE_EXP__TYPE_END_POSITION;
+				default :
+					return -1;
 			}
 		}
 		return super.eDerivedStructuralFeatureID(baseFeatureID, baseClass);
@@ -251,7 +264,8 @@ public class UnspecifiedValueExpImpl<C> extends OCLExpressionImpl<C> implements 
 	 */
 	@Override
 	public String toString() {
-		if (eIsProxy()) return super.toString();
+		if (eIsProxy())
+			return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
 		result.append(" (typeStartPosition: "); //$NON-NLS-1$
@@ -266,8 +280,10 @@ public class UnspecifiedValueExpImpl<C> extends OCLExpressionImpl<C> implements 
 	 * @generated NOT
 	 */
 	@Override
+	@SuppressWarnings("unchecked")
 	public <T, U extends Visitor<T, ?, ?, ?, ?, ?, ?, ?, ?, ?>> T accept(U v) {
-		return v.visitUnspecifiedValueExp(this);
+		return ((Visitor<T, C, ?, ?, ?, ?, ?, ?, ?, ?>) v)
+			.visitUnspecifiedValueExp(this);
 	}
 
 } //UnspecifiedValueExpImpl

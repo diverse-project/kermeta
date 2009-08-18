@@ -1,7 +1,7 @@
 /**
  * <copyright>
  * 
- * Copyright (c) 2006, 2007 IBM Corporation and others.
+ * Copyright (c) 2006, 2009 IBM Corporation, Zeligsoft Inc., and others.
  * All rights reserved.   This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -9,21 +9,25 @@
  * 
  * Contributors:
  *   IBM - Initial API and implementation
+ *   Zeligsoft - Bug 207365
  * 
  * </copyright>
  *
- * $Id: IterateExpImpl.java,v 1.1 2008-08-07 06:35:12 dvojtise Exp $
+ * $Id: IterateExpImpl.java,v 1.8 2009/01/23 17:16:03 cdamus Exp $
  */
 package org.eclipse.ocl.expressions.impl;
 
+import java.util.Map;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
+import org.eclipse.emf.common.util.DiagnosticChain;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.ocl.expressions.ExpressionsPackage;
 import org.eclipse.ocl.expressions.IterateExp;
 import org.eclipse.ocl.expressions.Variable;
+import org.eclipse.ocl.expressions.operations.IterateExpOperations;
 import org.eclipse.ocl.utilities.Visitor;
 
 /**
@@ -39,7 +43,10 @@ import org.eclipse.ocl.utilities.Visitor;
  *
  * @generated
  */
-public class IterateExpImpl<C, PM> extends LoopExpImpl<C, PM> implements IterateExp<C, PM> {
+public class IterateExpImpl<C, PM>
+		extends LoopExpImpl<C, PM>
+		implements IterateExp<C, PM> {
+
 	/**
 	 * The cached value of the '{@link #getResult() <em>Result</em>}' containment reference.
 	 * <!-- begin-user-doc -->
@@ -83,12 +90,18 @@ public class IterateExpImpl<C, PM> extends LoopExpImpl<C, PM> implements Iterate
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetResult(Variable<C, PM> newResult, NotificationChain msgs) {
+	public NotificationChain basicSetResult(Variable<C, PM> newResult,
+			NotificationChain msgs) {
 		Variable<C, PM> oldResult = result;
 		result = newResult;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, ExpressionsPackage.ITERATE_EXP__RESULT, oldResult, newResult);
-			if (msgs == null) msgs = notification; else msgs.add(notification);
+			ENotificationImpl notification = new ENotificationImpl(this,
+				Notification.SET, ExpressionsPackage.ITERATE_EXP__RESULT,
+				oldResult, newResult);
+			if (msgs == null)
+				msgs = notification;
+			else
+				msgs.add(notification);
 		}
 		return msgs;
 	}
@@ -102,14 +115,50 @@ public class IterateExpImpl<C, PM> extends LoopExpImpl<C, PM> implements Iterate
 		if (newResult != result) {
 			NotificationChain msgs = null;
 			if (result != null)
-				msgs = ((InternalEObject)result).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - ExpressionsPackage.ITERATE_EXP__RESULT, null, msgs);
+				msgs = ((InternalEObject) result).eInverseRemove(this,
+					EOPPOSITE_FEATURE_BASE
+						- ExpressionsPackage.ITERATE_EXP__RESULT, null, msgs);
 			if (newResult != null)
-				msgs = ((InternalEObject)newResult).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - ExpressionsPackage.ITERATE_EXP__RESULT, null, msgs);
+				msgs = ((InternalEObject) newResult).eInverseAdd(this,
+					EOPPOSITE_FEATURE_BASE
+						- ExpressionsPackage.ITERATE_EXP__RESULT, null, msgs);
 			msgs = basicSetResult(newResult, msgs);
-			if (msgs != null) msgs.dispatch();
-		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ExpressionsPackage.ITERATE_EXP__RESULT, newResult, newResult));
+			if (msgs != null)
+				msgs.dispatch();
+		} else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET,
+				ExpressionsPackage.ITERATE_EXP__RESULT, newResult, newResult));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean checkIterateType(DiagnosticChain diagnostics,
+			Map<Object, Object> context) {
+		return IterateExpOperations
+			.checkIterateType(this, diagnostics, context);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean checkBodyType(DiagnosticChain diagnostics,
+			Map<Object, Object> context) {
+		return IterateExpOperations.checkBodyType(this, diagnostics, context);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean checkResultInit(DiagnosticChain diagnostics,
+			Map<Object, Object> context) {
+		return IterateExpOperations.checkResultInit(this, diagnostics, context);
 	}
 
 	/**
@@ -118,9 +167,10 @@ public class IterateExpImpl<C, PM> extends LoopExpImpl<C, PM> implements Iterate
 	 * @generated
 	 */
 	@Override
-	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+	public NotificationChain eInverseRemove(InternalEObject otherEnd,
+			int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case ExpressionsPackage.ITERATE_EXP__RESULT:
+			case ExpressionsPackage.ITERATE_EXP__RESULT :
 				return basicSetResult(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -134,7 +184,7 @@ public class IterateExpImpl<C, PM> extends LoopExpImpl<C, PM> implements Iterate
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case ExpressionsPackage.ITERATE_EXP__RESULT:
+			case ExpressionsPackage.ITERATE_EXP__RESULT :
 				return getResult();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -149,8 +199,8 @@ public class IterateExpImpl<C, PM> extends LoopExpImpl<C, PM> implements Iterate
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case ExpressionsPackage.ITERATE_EXP__RESULT:
-				setResult((Variable<C, PM>)newValue);
+			case ExpressionsPackage.ITERATE_EXP__RESULT :
+				setResult((Variable<C, PM>) newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -164,8 +214,8 @@ public class IterateExpImpl<C, PM> extends LoopExpImpl<C, PM> implements Iterate
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case ExpressionsPackage.ITERATE_EXP__RESULT:
-				setResult((Variable<C, PM>)null);
+			case ExpressionsPackage.ITERATE_EXP__RESULT :
+				setResult((Variable<C, PM>) null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -179,7 +229,7 @@ public class IterateExpImpl<C, PM> extends LoopExpImpl<C, PM> implements Iterate
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case ExpressionsPackage.ITERATE_EXP__RESULT:
+			case ExpressionsPackage.ITERATE_EXP__RESULT :
 				return result != null;
 		}
 		return super.eIsSet(featureID);
@@ -189,8 +239,10 @@ public class IterateExpImpl<C, PM> extends LoopExpImpl<C, PM> implements Iterate
 	 * @generated NOT
 	 */
 	@Override
+	@SuppressWarnings("unchecked")
 	public <T, U extends Visitor<T, ?, ?, ?, ?, ?, ?, ?, ?, ?>> T accept(U v) {
-		return v.visitIterateExp(this);
+		return ((Visitor<T, C, ?, ?, ?, PM, ?, ?, ?, ?>) v)
+			.visitIterateExp(this);
 	}
 
 } //IterateExpImpl

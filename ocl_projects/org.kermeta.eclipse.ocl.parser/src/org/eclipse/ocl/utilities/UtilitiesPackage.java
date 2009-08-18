@@ -1,7 +1,7 @@
 /**
  * <copyright>
  * 
- * Copyright (c) 2006, 2007 IBM Corporation and others.
+ * Copyright (c) 2006, 2008 IBM Corporation, Zeligsoft Inc., and others.
  * All rights reserved.   This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -9,10 +9,11 @@
  * 
  * Contributors:
  *   IBM - Initial API and implementation
+ *   Zeligsoft - Bugs 231435, 243976, 256040
  * 
  * </copyright>
  *
- * $Id: UtilitiesPackage.java,v 1.1 2008-08-07 06:35:15 dvojtise Exp $
+ * $Id: UtilitiesPackage.java,v 1.10 2008/11/30 22:11:38 cdamus Exp $
  */
 package org.eclipse.ocl.utilities;
 
@@ -35,8 +36,12 @@ import org.eclipse.emf.ecore.EReference;
  * @see org.eclipse.ocl.utilities.UtilitiesFactory
  * @model kind="package"
  * @generated
+ * @noimplement This interface is not intended to be implemented by clients.
+ * @noextend This interface is not intended to be extended by clients.
  */
-public interface UtilitiesPackage extends EPackage {
+public interface UtilitiesPackage
+		extends EPackage {
+
 	/**
 	 * The package name.
 	 * <!-- begin-user-doc -->
@@ -62,12 +67,22 @@ public interface UtilitiesPackage extends EPackage {
 	String eNS_PREFIX = "ocl.util"; //$NON-NLS-1$
 
 	/**
+	 * The package content type ID.
+	 * <!-- begin-user-doc -->
+	 * @since 1.3
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	String eCONTENT_TYPE = "org.eclipse.ocl.ast"; //$NON-NLS-1$
+
+	/**
 	 * The singleton instance of the package.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	UtilitiesPackage eINSTANCE = org.eclipse.ocl.utilities.impl.UtilitiesPackageImpl.init();
+	UtilitiesPackage eINSTANCE = org.eclipse.ocl.utilities.impl.UtilitiesPackageImpl
+		.init();
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.utilities.ASTNode <em>AST Node</em>}' class.
@@ -76,6 +91,7 @@ public interface UtilitiesPackage extends EPackage {
 	 * @see org.eclipse.ocl.utilities.ASTNode
 	 * @see org.eclipse.ocl.utilities.impl.UtilitiesPackageImpl#getASTNode()
 	 * @generated
+	 * @noreference This field is not intended to be referenced by clients.
 	 */
 	int AST_NODE = 0;
 
@@ -85,6 +101,7 @@ public interface UtilitiesPackage extends EPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
+	 * @noreference This field is not intended to be referenced by clients.
 	 */
 	int AST_NODE__START_POSITION = 0;
 
@@ -94,6 +111,7 @@ public interface UtilitiesPackage extends EPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
+	 * @noreference This field is not intended to be referenced by clients.
 	 */
 	int AST_NODE__END_POSITION = 1;
 
@@ -103,6 +121,7 @@ public interface UtilitiesPackage extends EPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
+	 * @noreference This field is not intended to be referenced by clients.
 	 */
 	int AST_NODE_FEATURE_COUNT = 2;
 
@@ -113,6 +132,7 @@ public interface UtilitiesPackage extends EPackage {
 	 * @see org.eclipse.ocl.utilities.CallingASTNode
 	 * @see org.eclipse.ocl.utilities.impl.UtilitiesPackageImpl#getCallingASTNode()
 	 * @generated
+	 * @noreference This field is not intended to be referenced by clients.
 	 */
 	int CALLING_AST_NODE = 1;
 
@@ -122,6 +142,7 @@ public interface UtilitiesPackage extends EPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
+	 * @noreference This field is not intended to be referenced by clients.
 	 */
 	int CALLING_AST_NODE__START_POSITION = AST_NODE__START_POSITION;
 
@@ -131,6 +152,7 @@ public interface UtilitiesPackage extends EPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
+	 * @noreference This field is not intended to be referenced by clients.
 	 */
 	int CALLING_AST_NODE__END_POSITION = AST_NODE__END_POSITION;
 
@@ -140,6 +162,7 @@ public interface UtilitiesPackage extends EPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
+	 * @noreference This field is not intended to be referenced by clients.
 	 */
 	int CALLING_AST_NODE__PROPERTY_START_POSITION = AST_NODE_FEATURE_COUNT + 0;
 
@@ -149,6 +172,7 @@ public interface UtilitiesPackage extends EPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
+	 * @noreference This field is not intended to be referenced by clients.
 	 */
 	int CALLING_AST_NODE__PROPERTY_END_POSITION = AST_NODE_FEATURE_COUNT + 1;
 
@@ -158,6 +182,7 @@ public interface UtilitiesPackage extends EPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
+	 * @noreference This field is not intended to be referenced by clients.
 	 */
 	int CALLING_AST_NODE_FEATURE_COUNT = AST_NODE_FEATURE_COUNT + 2;
 
@@ -168,6 +193,7 @@ public interface UtilitiesPackage extends EPackage {
 	 * @see org.eclipse.ocl.utilities.PredefinedType
 	 * @see org.eclipse.ocl.utilities.impl.UtilitiesPackageImpl#getPredefinedType()
 	 * @generated
+	 * @noreference This field is not intended to be referenced by clients.
 	 */
 	int PREDEFINED_TYPE = 7;
 
@@ -178,6 +204,7 @@ public interface UtilitiesPackage extends EPackage {
 	 * @see org.eclipse.ocl.utilities.TypedASTNode
 	 * @see org.eclipse.ocl.utilities.impl.UtilitiesPackageImpl#getTypedASTNode()
 	 * @generated
+	 * @noreference This field is not intended to be referenced by clients.
 	 */
 	int TYPED_AST_NODE = 2;
 
@@ -187,6 +214,7 @@ public interface UtilitiesPackage extends EPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
+	 * @noreference This field is not intended to be referenced by clients.
 	 */
 	int TYPED_AST_NODE__START_POSITION = AST_NODE__START_POSITION;
 
@@ -196,6 +224,7 @@ public interface UtilitiesPackage extends EPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
+	 * @noreference This field is not intended to be referenced by clients.
 	 */
 	int TYPED_AST_NODE__END_POSITION = AST_NODE__END_POSITION;
 
@@ -205,6 +234,7 @@ public interface UtilitiesPackage extends EPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
+	 * @noreference This field is not intended to be referenced by clients.
 	 */
 	int TYPED_AST_NODE__TYPE_START_POSITION = AST_NODE_FEATURE_COUNT + 0;
 
@@ -214,6 +244,7 @@ public interface UtilitiesPackage extends EPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
+	 * @noreference This field is not intended to be referenced by clients.
 	 */
 	int TYPED_AST_NODE__TYPE_END_POSITION = AST_NODE_FEATURE_COUNT + 1;
 
@@ -223,6 +254,7 @@ public interface UtilitiesPackage extends EPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
+	 * @noreference This field is not intended to be referenced by clients.
 	 */
 	int TYPED_AST_NODE_FEATURE_COUNT = AST_NODE_FEATURE_COUNT + 2;
 
@@ -233,6 +265,7 @@ public interface UtilitiesPackage extends EPackage {
 	 * @see org.eclipse.ocl.utilities.Visitable
 	 * @see org.eclipse.ocl.utilities.impl.UtilitiesPackageImpl#getVisitable()
 	 * @generated
+	 * @noreference This field is not intended to be referenced by clients.
 	 */
 	int VISITABLE = 3;
 
@@ -242,6 +275,7 @@ public interface UtilitiesPackage extends EPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
+	 * @noreference This field is not intended to be referenced by clients.
 	 */
 	int VISITABLE_FEATURE_COUNT = 0;
 
@@ -252,6 +286,7 @@ public interface UtilitiesPackage extends EPackage {
 	 * @see org.eclipse.ocl.utilities.TypedElement
 	 * @see org.eclipse.ocl.utilities.impl.UtilitiesPackageImpl#getTypedElement()
 	 * @generated
+	 * @noreference This field is not intended to be referenced by clients.
 	 */
 	int TYPED_ELEMENT = 5;
 
@@ -262,6 +297,7 @@ public interface UtilitiesPackage extends EPackage {
 	 * @see org.eclipse.ocl.utilities.Visitor
 	 * @see org.eclipse.ocl.utilities.impl.UtilitiesPackageImpl#getVisitor()
 	 * @generated
+	 * @noreference This field is not intended to be referenced by clients.
 	 */
 	int VISITOR = 4;
 
@@ -271,6 +307,7 @@ public interface UtilitiesPackage extends EPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
+	 * @noreference This field is not intended to be referenced by clients.
 	 */
 	int VISITOR_FEATURE_COUNT = 0;
 
@@ -280,6 +317,7 @@ public interface UtilitiesPackage extends EPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
+	 * @noreference This field is not intended to be referenced by clients.
 	 */
 	int TYPED_ELEMENT_FEATURE_COUNT = 0;
 
@@ -290,6 +328,7 @@ public interface UtilitiesPackage extends EPackage {
 	 * @see org.eclipse.ocl.utilities.ExpressionInOCL
 	 * @see org.eclipse.ocl.utilities.impl.UtilitiesPackageImpl#getExpressionInOCL()
 	 * @generated
+	 * @noreference This field is not intended to be referenced by clients.
 	 */
 	int EXPRESSION_IN_OCL = 6;
 
@@ -299,6 +338,7 @@ public interface UtilitiesPackage extends EPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
+	 * @noreference This field is not intended to be referenced by clients.
 	 */
 	int EXPRESSION_IN_OCL__BODY_EXPRESSION = VISITABLE_FEATURE_COUNT + 0;
 
@@ -308,6 +348,7 @@ public interface UtilitiesPackage extends EPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
+	 * @noreference This field is not intended to be referenced by clients.
 	 */
 	int EXPRESSION_IN_OCL__CONTEXT_VARIABLE = VISITABLE_FEATURE_COUNT + 1;
 
@@ -317,6 +358,7 @@ public interface UtilitiesPackage extends EPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
+	 * @noreference This field is not intended to be referenced by clients.
 	 */
 	int EXPRESSION_IN_OCL__RESULT_VARIABLE = VISITABLE_FEATURE_COUNT + 2;
 
@@ -326,6 +368,7 @@ public interface UtilitiesPackage extends EPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
+	 * @noreference This field is not intended to be referenced by clients.
 	 */
 	int EXPRESSION_IN_OCL__PARAMETER_VARIABLE = VISITABLE_FEATURE_COUNT + 3;
 
@@ -335,6 +378,7 @@ public interface UtilitiesPackage extends EPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
+	 * @noreference This field is not intended to be referenced by clients.
 	 */
 	int EXPRESSION_IN_OCL_FEATURE_COUNT = VISITABLE_FEATURE_COUNT + 4;
 
@@ -344,6 +388,7 @@ public interface UtilitiesPackage extends EPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
+	 * @noreference This field is not intended to be referenced by clients.
 	 */
 	int PREDEFINED_TYPE_FEATURE_COUNT = 0;
 
@@ -557,8 +602,11 @@ public interface UtilitiesPackage extends EPackage {
 	 * </ul>
 	 * <!-- end-user-doc -->
 	 * @generated
+	 * @noimplement This interface is not intended to be implemented by clients.
+	 * @noextend This interface is not intended to be extended by clients.
 	 */
 	interface Literals {
+
 		/**
 		 * The meta object literal for the '{@link org.eclipse.ocl.utilities.ASTNode <em>AST Node</em>}' class.
 		 * <!-- begin-user-doc -->
@@ -575,7 +623,8 @@ public interface UtilitiesPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute AST_NODE__START_POSITION = eINSTANCE.getASTNode_StartPosition();
+		EAttribute AST_NODE__START_POSITION = eINSTANCE
+			.getASTNode_StartPosition();
 
 		/**
 		 * The meta object literal for the '<em><b>End Position</b></em>' attribute feature.
@@ -601,7 +650,8 @@ public interface UtilitiesPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute CALLING_AST_NODE__PROPERTY_START_POSITION = eINSTANCE.getCallingASTNode_PropertyStartPosition();
+		EAttribute CALLING_AST_NODE__PROPERTY_START_POSITION = eINSTANCE
+			.getCallingASTNode_PropertyStartPosition();
 
 		/**
 		 * The meta object literal for the '<em><b>Property End Position</b></em>' attribute feature.
@@ -609,7 +659,8 @@ public interface UtilitiesPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute CALLING_AST_NODE__PROPERTY_END_POSITION = eINSTANCE.getCallingASTNode_PropertyEndPosition();
+		EAttribute CALLING_AST_NODE__PROPERTY_END_POSITION = eINSTANCE
+			.getCallingASTNode_PropertyEndPosition();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.ocl.utilities.PredefinedType <em>Predefined Type</em>}' class.
@@ -637,7 +688,8 @@ public interface UtilitiesPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute TYPED_AST_NODE__TYPE_START_POSITION = eINSTANCE.getTypedASTNode_TypeStartPosition();
+		EAttribute TYPED_AST_NODE__TYPE_START_POSITION = eINSTANCE
+			.getTypedASTNode_TypeStartPosition();
 
 		/**
 		 * The meta object literal for the '<em><b>Type End Position</b></em>' attribute feature.
@@ -645,7 +697,8 @@ public interface UtilitiesPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute TYPED_AST_NODE__TYPE_END_POSITION = eINSTANCE.getTypedASTNode_TypeEndPosition();
+		EAttribute TYPED_AST_NODE__TYPE_END_POSITION = eINSTANCE
+			.getTypedASTNode_TypeEndPosition();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.ocl.utilities.Visitable <em>Visitable</em>}' class.
@@ -693,7 +746,8 @@ public interface UtilitiesPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference EXPRESSION_IN_OCL__BODY_EXPRESSION = eINSTANCE.getExpressionInOCL_BodyExpression();
+		EReference EXPRESSION_IN_OCL__BODY_EXPRESSION = eINSTANCE
+			.getExpressionInOCL_BodyExpression();
 
 		/**
 		 * The meta object literal for the '<em><b>Context Variable</b></em>' containment reference feature.
@@ -701,7 +755,8 @@ public interface UtilitiesPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference EXPRESSION_IN_OCL__CONTEXT_VARIABLE = eINSTANCE.getExpressionInOCL_ContextVariable();
+		EReference EXPRESSION_IN_OCL__CONTEXT_VARIABLE = eINSTANCE
+			.getExpressionInOCL_ContextVariable();
 
 		/**
 		 * The meta object literal for the '<em><b>Result Variable</b></em>' containment reference feature.
@@ -709,7 +764,8 @@ public interface UtilitiesPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference EXPRESSION_IN_OCL__RESULT_VARIABLE = eINSTANCE.getExpressionInOCL_ResultVariable();
+		EReference EXPRESSION_IN_OCL__RESULT_VARIABLE = eINSTANCE
+			.getExpressionInOCL_ResultVariable();
 
 		/**
 		 * The meta object literal for the '<em><b>Parameter Variable</b></em>' containment reference list feature.
@@ -717,7 +773,8 @@ public interface UtilitiesPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference EXPRESSION_IN_OCL__PARAMETER_VARIABLE = eINSTANCE.getExpressionInOCL_ParameterVariable();
+		EReference EXPRESSION_IN_OCL__PARAMETER_VARIABLE = eINSTANCE
+			.getExpressionInOCL_ParameterVariable();
 
 	}
 

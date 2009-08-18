@@ -1,7 +1,7 @@
 /**
  * <copyright>
  * 
- * Copyright (c) 2006, 2007 IBM Corporation and others.
+ * Copyright (c) 2006, 2009 IBM Corporation, Zeligsoft Inc., and others.
  * All rights reserved.   This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -9,16 +9,19 @@
  * 
  * Contributors:
  *   IBM - Initial API and implementation
+ *   Zeligsoft - Bug 207365
  * 
  * </copyright>
  *
- * $Id: CollectionTypeImpl.java,v 1.1 2008-08-07 06:35:15 dvojtise Exp $
+ * $Id: CollectionTypeImpl.java,v 1.8 2009/01/23 17:16:04 cdamus Exp $
  */
 package org.eclipse.ocl.types.impl;
 
+import java.util.Map;
 import java.util.List;
 
 import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.util.DiagnosticChain;
 import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
@@ -34,7 +37,7 @@ import org.eclipse.ocl.types.OrderedSetType;
 import org.eclipse.ocl.types.SequenceType;
 import org.eclipse.ocl.types.SetType;
 import org.eclipse.ocl.types.TypesPackage;
-import org.eclipse.ocl.types.VoidType;
+import org.eclipse.ocl.types.operations.CollectionTypeOperations;
 import org.eclipse.ocl.util.OCLStandardLibraryUtil;
 import org.eclipse.ocl.utilities.ASTNode;
 import org.eclipse.ocl.utilities.PredefinedType;
@@ -59,7 +62,10 @@ import org.eclipse.ocl.utilities.UtilitiesPackage;
  *
  * @generated
  */
-public class CollectionTypeImpl<C, O> extends EObjectImpl implements CollectionType<C, O> {
+public class CollectionTypeImpl<C, O>
+		extends EObjectImpl
+		implements CollectionType<C, O> {
+
 	/**
 	 * The default value of the '{@link #getStartPosition() <em>Start Position</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -161,9 +167,11 @@ public class CollectionTypeImpl<C, O> extends EObjectImpl implements CollectionT
 	protected static final CollectionKind KIND_EDEFAULT = CollectionKind.SET_LITERAL;
 
 	private String name;
+
 	private EList<O> operations;
+
 	private EList<O> iterators;
-	
+
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -172,7 +180,7 @@ public class CollectionTypeImpl<C, O> extends EObjectImpl implements CollectionT
 	protected CollectionTypeImpl() {
 		super();
 	}
-	
+
 	protected CollectionTypeImpl(C elementType) {
 		this.elementType = elementType;
 	}
@@ -195,47 +203,45 @@ public class CollectionTypeImpl<C, O> extends EObjectImpl implements CollectionT
 	@SuppressWarnings("unchecked")
 	public String getName() {
 		if (name == null) {
-			Environment<?, ?, O, ?, ?, ?, ?, ?, ?, ?, ?, ?> env =
-				Environment.Registry.INSTANCE.getEnvironmentFor(this);
-			
+			Environment<?, ?, O, ?, ?, ?, ?, ?, ?, ?, ?, ?> env = Environment.Registry.INSTANCE
+				.getEnvironmentFor(this);
+
 			StringBuffer myName = new StringBuffer();
-			
+
 			switch (getKind()) {
-			case SET_LITERAL:
-				myName.append(SetType.SINGLETON_NAME);
-				break;
-			case ORDERED_SET_LITERAL:
-				myName.append(OrderedSetType.SINGLETON_NAME);
-				break;
-			case BAG_LITERAL:
-				myName.append(BagType.SINGLETON_NAME);
-				break;
-			case SEQUENCE_LITERAL:
-				myName.append(SequenceType.SINGLETON_NAME);
-				break;
-			default:
-				myName.append(CollectionType.SINGLETON_NAME);
-				break;
+				case SET_LITERAL :
+					myName.append(SetType.SINGLETON_NAME);
+					break;
+				case ORDERED_SET_LITERAL :
+					myName.append(OrderedSetType.SINGLETON_NAME);
+					break;
+				case BAG_LITERAL :
+					myName.append(BagType.SINGLETON_NAME);
+					break;
+				case SEQUENCE_LITERAL :
+					myName.append(SequenceType.SINGLETON_NAME);
+					break;
+				default :
+					myName.append(CollectionType.SINGLETON_NAME);
+					break;
 			}
-			
-            myName.append('(');
-            
+
+			myName.append('(');
+
 			C elementType = getElementType();
 			String elementTypeName;
-			if (elementType instanceof VoidType) {
-				elementTypeName = "T"; //$NON-NLS-1$
-			} else if (elementType instanceof PredefinedType) {
+			if (elementType instanceof PredefinedType) {
 				elementTypeName = ((PredefinedType<C>) elementType).getName();
 			} else {
 				elementTypeName = env.getUMLReflection().getName(elementType);
 			}
-			
+
 			myName.append(elementTypeName);
 			myName.append(')');
-			
+
 			name = myName.toString();
 		}
-		
+
 		return name;
 	}
 
@@ -246,33 +252,60 @@ public class CollectionTypeImpl<C, O> extends EObjectImpl implements CollectionT
 	 */
 	public EList<O> oclOperations() {
 		if (operations == null) {
-			Environment<?, ?, O, ?, ?, ?, ?, ?, ?, ?, ?, ?> env =
-				Environment.Registry.INSTANCE.getEnvironmentFor(this);
-			
+			Environment<?, ?, O, ?, ?, ?, ?, ?, ?, ?, ?, ?> env = Environment.Registry.INSTANCE
+				.getEnvironmentFor(this);
+
 			List<O> myOperations;
-			
+
 			switch (getKind()) {
-			case SET_LITERAL:
-				myOperations = OCLStandardLibraryUtil.createSetOperations(env);
-				break;
-			case ORDERED_SET_LITERAL:
-				myOperations = OCLStandardLibraryUtil.createOrderedSetOperations(env);
-				break;
-			case BAG_LITERAL:
-				myOperations = OCLStandardLibraryUtil.createBagOperations(env);
-				break;
-			case SEQUENCE_LITERAL:
-				myOperations = OCLStandardLibraryUtil.createSequenceOperations(env);
-				break;
-			default:
-				myOperations = OCLStandardLibraryUtil.createCollectionOperations(env);
-				break;
+				case SET_LITERAL :
+					myOperations = OCLStandardLibraryUtil
+						.createSetOperations(env);
+					break;
+				case ORDERED_SET_LITERAL :
+					myOperations = OCLStandardLibraryUtil
+						.createOrderedSetOperations(env);
+					break;
+				case BAG_LITERAL :
+					myOperations = OCLStandardLibraryUtil
+						.createBagOperations(env);
+					break;
+				case SEQUENCE_LITERAL :
+					myOperations = OCLStandardLibraryUtil
+						.createSequenceOperations(env);
+					break;
+				default :
+					myOperations = OCLStandardLibraryUtil
+						.createCollectionOperations(env);
+					break;
 			}
-			
+
 			operations = new BasicEList<O>(myOperations);
 		}
-		
+
 		return operations;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean checkCollectionTypeName(DiagnosticChain diagnostics,
+			Map<Object, Object> context) {
+		return CollectionTypeOperations.checkCollectionTypeName(this,
+			diagnostics, context);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean checkNoInvalidValues(DiagnosticChain diagnostics,
+			Map<Object, Object> context) {
+		return CollectionTypeOperations.checkNoInvalidValues(this, diagnostics,
+			context);
 	}
 
 	/**
@@ -293,7 +326,9 @@ public class CollectionTypeImpl<C, O> extends EObjectImpl implements CollectionT
 		int oldStartPosition = startPosition;
 		startPosition = newStartPosition;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, TypesPackage.COLLECTION_TYPE__START_POSITION, oldStartPosition, startPosition));
+			eNotify(new ENotificationImpl(this, Notification.SET,
+				TypesPackage.COLLECTION_TYPE__START_POSITION, oldStartPosition,
+				startPosition));
 	}
 
 	/**
@@ -314,7 +349,9 @@ public class CollectionTypeImpl<C, O> extends EObjectImpl implements CollectionT
 		int oldEndPosition = endPosition;
 		endPosition = newEndPosition;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, TypesPackage.COLLECTION_TYPE__END_POSITION, oldEndPosition, endPosition));
+			eNotify(new ENotificationImpl(this, Notification.SET,
+				TypesPackage.COLLECTION_TYPE__END_POSITION, oldEndPosition,
+				endPosition));
 	}
 
 	/**
@@ -335,7 +372,9 @@ public class CollectionTypeImpl<C, O> extends EObjectImpl implements CollectionT
 		int oldTypeStartPosition = typeStartPosition;
 		typeStartPosition = newTypeStartPosition;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, TypesPackage.COLLECTION_TYPE__TYPE_START_POSITION, oldTypeStartPosition, typeStartPosition));
+			eNotify(new ENotificationImpl(this, Notification.SET,
+				TypesPackage.COLLECTION_TYPE__TYPE_START_POSITION,
+				oldTypeStartPosition, typeStartPosition));
 	}
 
 	/**
@@ -356,7 +395,9 @@ public class CollectionTypeImpl<C, O> extends EObjectImpl implements CollectionT
 		int oldTypeEndPosition = typeEndPosition;
 		typeEndPosition = newTypeEndPosition;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, TypesPackage.COLLECTION_TYPE__TYPE_END_POSITION, oldTypeEndPosition, typeEndPosition));
+			eNotify(new ENotificationImpl(this, Notification.SET,
+				TypesPackage.COLLECTION_TYPE__TYPE_END_POSITION,
+				oldTypeEndPosition, typeEndPosition));
 	}
 
 	/**
@@ -366,12 +407,14 @@ public class CollectionTypeImpl<C, O> extends EObjectImpl implements CollectionT
 	 */
 	@SuppressWarnings("unchecked")
 	public C getElementType() {
-		if (elementType != null && ((EObject)elementType).eIsProxy()) {
-			InternalEObject oldElementType = (InternalEObject)elementType;
-			elementType = (C)eResolveProxy(oldElementType);
+		if (elementType != null && ((EObject) elementType).eIsProxy()) {
+			InternalEObject oldElementType = (InternalEObject) elementType;
+			elementType = (C) eResolveProxy(oldElementType);
 			if (elementType != oldElementType) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, TypesPackage.COLLECTION_TYPE__ELEMENT_TYPE, oldElementType, elementType));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE,
+						TypesPackage.COLLECTION_TYPE__ELEMENT_TYPE,
+						oldElementType, elementType));
 			}
 		}
 		return elementType;
@@ -395,7 +438,9 @@ public class CollectionTypeImpl<C, O> extends EObjectImpl implements CollectionT
 		C oldElementType = elementType;
 		elementType = newElementType;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, TypesPackage.COLLECTION_TYPE__ELEMENT_TYPE, oldElementType, elementType));
+			eNotify(new ENotificationImpl(this, Notification.SET,
+				TypesPackage.COLLECTION_TYPE__ELEMENT_TYPE, oldElementType,
+				elementType));
 	}
 
 	/**
@@ -414,32 +459,37 @@ public class CollectionTypeImpl<C, O> extends EObjectImpl implements CollectionT
 	 */
 	public EList<O> oclIterators() {
 		if (iterators == null) {
-			Environment<?, ?, O, ?, ?, ?, ?, ?, ?, ?, ?, ?> env =
-				Environment.Registry.INSTANCE.getEnvironmentFor(this);
-			
+			Environment<?, ?, O, ?, ?, ?, ?, ?, ?, ?, ?, ?> env = Environment.Registry.INSTANCE
+				.getEnvironmentFor(this);
+
 			List<O> myIterators;
-			
+
 			switch (getKind()) {
-			case SET_LITERAL:
-				myIterators = OCLStandardLibraryUtil.createSetIterators(env);
-				break;
-			case ORDERED_SET_LITERAL:
-				myIterators = OCLStandardLibraryUtil.createOrderedSetIterators(env);
-				break;
-			case BAG_LITERAL:
-				myIterators = OCLStandardLibraryUtil.createBagIterators(env);
-				break;
-			case SEQUENCE_LITERAL:
-				myIterators = OCLStandardLibraryUtil.createSequenceIterators(env);
-				break;
-			default:
-				myIterators = OCLStandardLibraryUtil.createCollectionIterators(env);
-				break;
+				case SET_LITERAL :
+					myIterators = OCLStandardLibraryUtil
+						.createSetIterators(env);
+					break;
+				case ORDERED_SET_LITERAL :
+					myIterators = OCLStandardLibraryUtil
+						.createOrderedSetIterators(env);
+					break;
+				case BAG_LITERAL :
+					myIterators = OCLStandardLibraryUtil
+						.createBagIterators(env);
+					break;
+				case SEQUENCE_LITERAL :
+					myIterators = OCLStandardLibraryUtil
+						.createSequenceIterators(env);
+					break;
+				default :
+					myIterators = OCLStandardLibraryUtil
+						.createCollectionIterators(env);
+					break;
 			}
-			
+
 			iterators = new BasicEList<O>(myIterators);
 		}
-		
+
 		return iterators;
 	}
 
@@ -451,18 +501,19 @@ public class CollectionTypeImpl<C, O> extends EObjectImpl implements CollectionT
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case TypesPackage.COLLECTION_TYPE__START_POSITION:
-				return new Integer(getStartPosition());
-			case TypesPackage.COLLECTION_TYPE__END_POSITION:
-				return new Integer(getEndPosition());
-			case TypesPackage.COLLECTION_TYPE__TYPE_START_POSITION:
-				return new Integer(getTypeStartPosition());
-			case TypesPackage.COLLECTION_TYPE__TYPE_END_POSITION:
-				return new Integer(getTypeEndPosition());
-			case TypesPackage.COLLECTION_TYPE__ELEMENT_TYPE:
-				if (resolve) return getElementType();
+			case TypesPackage.COLLECTION_TYPE__START_POSITION :
+				return getStartPosition();
+			case TypesPackage.COLLECTION_TYPE__END_POSITION :
+				return getEndPosition();
+			case TypesPackage.COLLECTION_TYPE__TYPE_START_POSITION :
+				return getTypeStartPosition();
+			case TypesPackage.COLLECTION_TYPE__TYPE_END_POSITION :
+				return getTypeEndPosition();
+			case TypesPackage.COLLECTION_TYPE__ELEMENT_TYPE :
+				if (resolve)
+					return getElementType();
 				return basicGetElementType();
-			case TypesPackage.COLLECTION_TYPE__KIND:
+			case TypesPackage.COLLECTION_TYPE__KIND :
 				return getKind();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -477,20 +528,20 @@ public class CollectionTypeImpl<C, O> extends EObjectImpl implements CollectionT
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case TypesPackage.COLLECTION_TYPE__START_POSITION:
-				setStartPosition(((Integer)newValue).intValue());
+			case TypesPackage.COLLECTION_TYPE__START_POSITION :
+				setStartPosition((Integer) newValue);
 				return;
-			case TypesPackage.COLLECTION_TYPE__END_POSITION:
-				setEndPosition(((Integer)newValue).intValue());
+			case TypesPackage.COLLECTION_TYPE__END_POSITION :
+				setEndPosition((Integer) newValue);
 				return;
-			case TypesPackage.COLLECTION_TYPE__TYPE_START_POSITION:
-				setTypeStartPosition(((Integer)newValue).intValue());
+			case TypesPackage.COLLECTION_TYPE__TYPE_START_POSITION :
+				setTypeStartPosition((Integer) newValue);
 				return;
-			case TypesPackage.COLLECTION_TYPE__TYPE_END_POSITION:
-				setTypeEndPosition(((Integer)newValue).intValue());
+			case TypesPackage.COLLECTION_TYPE__TYPE_END_POSITION :
+				setTypeEndPosition((Integer) newValue);
 				return;
-			case TypesPackage.COLLECTION_TYPE__ELEMENT_TYPE:
-				setElementType((C)newValue);
+			case TypesPackage.COLLECTION_TYPE__ELEMENT_TYPE :
+				setElementType((C) newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -504,20 +555,20 @@ public class CollectionTypeImpl<C, O> extends EObjectImpl implements CollectionT
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case TypesPackage.COLLECTION_TYPE__START_POSITION:
+			case TypesPackage.COLLECTION_TYPE__START_POSITION :
 				setStartPosition(START_POSITION_EDEFAULT);
 				return;
-			case TypesPackage.COLLECTION_TYPE__END_POSITION:
+			case TypesPackage.COLLECTION_TYPE__END_POSITION :
 				setEndPosition(END_POSITION_EDEFAULT);
 				return;
-			case TypesPackage.COLLECTION_TYPE__TYPE_START_POSITION:
+			case TypesPackage.COLLECTION_TYPE__TYPE_START_POSITION :
 				setTypeStartPosition(TYPE_START_POSITION_EDEFAULT);
 				return;
-			case TypesPackage.COLLECTION_TYPE__TYPE_END_POSITION:
+			case TypesPackage.COLLECTION_TYPE__TYPE_END_POSITION :
 				setTypeEndPosition(TYPE_END_POSITION_EDEFAULT);
 				return;
-			case TypesPackage.COLLECTION_TYPE__ELEMENT_TYPE:
-				setElementType((C)null);
+			case TypesPackage.COLLECTION_TYPE__ELEMENT_TYPE :
+				setElementType((C) null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -531,17 +582,17 @@ public class CollectionTypeImpl<C, O> extends EObjectImpl implements CollectionT
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case TypesPackage.COLLECTION_TYPE__START_POSITION:
+			case TypesPackage.COLLECTION_TYPE__START_POSITION :
 				return startPosition != START_POSITION_EDEFAULT;
-			case TypesPackage.COLLECTION_TYPE__END_POSITION:
+			case TypesPackage.COLLECTION_TYPE__END_POSITION :
 				return endPosition != END_POSITION_EDEFAULT;
-			case TypesPackage.COLLECTION_TYPE__TYPE_START_POSITION:
+			case TypesPackage.COLLECTION_TYPE__TYPE_START_POSITION :
 				return typeStartPosition != TYPE_START_POSITION_EDEFAULT;
-			case TypesPackage.COLLECTION_TYPE__TYPE_END_POSITION:
+			case TypesPackage.COLLECTION_TYPE__TYPE_END_POSITION :
 				return typeEndPosition != TYPE_END_POSITION_EDEFAULT;
-			case TypesPackage.COLLECTION_TYPE__ELEMENT_TYPE:
+			case TypesPackage.COLLECTION_TYPE__ELEMENT_TYPE :
 				return elementType != null;
-			case TypesPackage.COLLECTION_TYPE__KIND:
+			case TypesPackage.COLLECTION_TYPE__KIND :
 				return getKind() != KIND_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
@@ -556,16 +607,22 @@ public class CollectionTypeImpl<C, O> extends EObjectImpl implements CollectionT
 	public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass) {
 		if (baseClass == ASTNode.class) {
 			switch (derivedFeatureID) {
-				case TypesPackage.COLLECTION_TYPE__START_POSITION: return UtilitiesPackage.AST_NODE__START_POSITION;
-				case TypesPackage.COLLECTION_TYPE__END_POSITION: return UtilitiesPackage.AST_NODE__END_POSITION;
-				default: return -1;
+				case TypesPackage.COLLECTION_TYPE__START_POSITION :
+					return UtilitiesPackage.AST_NODE__START_POSITION;
+				case TypesPackage.COLLECTION_TYPE__END_POSITION :
+					return UtilitiesPackage.AST_NODE__END_POSITION;
+				default :
+					return -1;
 			}
 		}
 		if (baseClass == TypedASTNode.class) {
 			switch (derivedFeatureID) {
-				case TypesPackage.COLLECTION_TYPE__TYPE_START_POSITION: return UtilitiesPackage.TYPED_AST_NODE__TYPE_START_POSITION;
-				case TypesPackage.COLLECTION_TYPE__TYPE_END_POSITION: return UtilitiesPackage.TYPED_AST_NODE__TYPE_END_POSITION;
-				default: return -1;
+				case TypesPackage.COLLECTION_TYPE__TYPE_START_POSITION :
+					return UtilitiesPackage.TYPED_AST_NODE__TYPE_START_POSITION;
+				case TypesPackage.COLLECTION_TYPE__TYPE_END_POSITION :
+					return UtilitiesPackage.TYPED_AST_NODE__TYPE_END_POSITION;
+				default :
+					return -1;
 			}
 		}
 		return super.eBaseStructuralFeatureID(derivedFeatureID, baseClass);
@@ -580,16 +637,22 @@ public class CollectionTypeImpl<C, O> extends EObjectImpl implements CollectionT
 	public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass) {
 		if (baseClass == ASTNode.class) {
 			switch (baseFeatureID) {
-				case UtilitiesPackage.AST_NODE__START_POSITION: return TypesPackage.COLLECTION_TYPE__START_POSITION;
-				case UtilitiesPackage.AST_NODE__END_POSITION: return TypesPackage.COLLECTION_TYPE__END_POSITION;
-				default: return -1;
+				case UtilitiesPackage.AST_NODE__START_POSITION :
+					return TypesPackage.COLLECTION_TYPE__START_POSITION;
+				case UtilitiesPackage.AST_NODE__END_POSITION :
+					return TypesPackage.COLLECTION_TYPE__END_POSITION;
+				default :
+					return -1;
 			}
 		}
 		if (baseClass == TypedASTNode.class) {
 			switch (baseFeatureID) {
-				case UtilitiesPackage.TYPED_AST_NODE__TYPE_START_POSITION: return TypesPackage.COLLECTION_TYPE__TYPE_START_POSITION;
-				case UtilitiesPackage.TYPED_AST_NODE__TYPE_END_POSITION: return TypesPackage.COLLECTION_TYPE__TYPE_END_POSITION;
-				default: return -1;
+				case UtilitiesPackage.TYPED_AST_NODE__TYPE_START_POSITION :
+					return TypesPackage.COLLECTION_TYPE__TYPE_START_POSITION;
+				case UtilitiesPackage.TYPED_AST_NODE__TYPE_END_POSITION :
+					return TypesPackage.COLLECTION_TYPE__TYPE_END_POSITION;
+				default :
+					return -1;
 			}
 		}
 		return super.eDerivedStructuralFeatureID(baseFeatureID, baseClass);
@@ -602,7 +665,8 @@ public class CollectionTypeImpl<C, O> extends EObjectImpl implements CollectionT
 	 */
 	@Override
 	public String toString() {
-		if (eIsProxy()) return super.toString();
+		if (eIsProxy())
+			return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
 		result.append(" (startPosition: "); //$NON-NLS-1$

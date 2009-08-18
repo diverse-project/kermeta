@@ -1,19 +1,18 @@
-/**
- * <copyright>
- * 
- * Copyright (c) 2006, 2007 IBM Corporation and others.
- * All rights reserved.   This program and the accompanying materials
+/*******************************************************************************
+ * Copyright (c) 2006, 2008 IBM Corporation and others.
+ * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   IBM - Initial API and implementation
  * 
  * </copyright>
  *
- * $Id: UtilitiesSwitch.java,v 1.1 2008-08-07 06:35:17 dvojtise Exp $
- */
+ * $Id: UtilitiesSwitch.java,v 1.8 2009/01/23 17:16:04 cdamus Exp $
+ * /
+ *******************************************************************************/
 package org.eclipse.ocl.utilities.util;
 
 import java.util.List;
@@ -46,6 +45,7 @@ import org.eclipse.ocl.utilities.Visitor;
  * @generated
  */
 public class UtilitiesSwitch<T1> {
+
 	/**
 	 * The cached model package
 	 * <!-- begin-user-doc -->
@@ -87,13 +87,11 @@ public class UtilitiesSwitch<T1> {
 	protected T1 doSwitch(EClass theEClass, EObject theEObject) {
 		if (theEClass.eContainer() == modelPackage) {
 			return doSwitch(theEClass.getClassifierID(), theEObject);
-		}
-		else {
+		} else {
 			List<EClass> eSuperTypes = theEClass.getESuperTypes();
-			return
-				eSuperTypes.isEmpty() ?
-					defaultCase(theEObject) :
-					doSwitch(eSuperTypes.get(0), theEObject);
+			return eSuperTypes.isEmpty()
+				? defaultCase(theEObject)
+				: doSwitch(eSuperTypes.get(0), theEObject);
 		}
 	}
 
@@ -106,69 +104,81 @@ public class UtilitiesSwitch<T1> {
 	 */
 	protected T1 doSwitch(int classifierID, EObject theEObject) {
 		switch (classifierID) {
-			case UtilitiesPackage.AST_NODE: {
-				ASTNode astNode = (ASTNode)theEObject;
+			case UtilitiesPackage.AST_NODE : {
+				ASTNode astNode = (ASTNode) theEObject;
 				T1 result = caseASTNode(astNode);
-				if (result == null) result = defaultCase(theEObject);
+				if (result == null)
+					result = defaultCase(theEObject);
 				return result;
 			}
-			case UtilitiesPackage.CALLING_AST_NODE: {
-				CallingASTNode callingASTNode = (CallingASTNode)theEObject;
+			case UtilitiesPackage.CALLING_AST_NODE : {
+				CallingASTNode callingASTNode = (CallingASTNode) theEObject;
 				T1 result = caseCallingASTNode(callingASTNode);
-				if (result == null) result = caseASTNode(callingASTNode);
-				if (result == null) result = defaultCase(theEObject);
+				if (result == null)
+					result = caseASTNode(callingASTNode);
+				if (result == null)
+					result = defaultCase(theEObject);
 				return result;
 			}
-			case UtilitiesPackage.TYPED_AST_NODE: {
-				TypedASTNode typedASTNode = (TypedASTNode)theEObject;
+			case UtilitiesPackage.TYPED_AST_NODE : {
+				TypedASTNode typedASTNode = (TypedASTNode) theEObject;
 				T1 result = caseTypedASTNode(typedASTNode);
-				if (result == null) result = caseASTNode(typedASTNode);
-				if (result == null) result = defaultCase(theEObject);
+				if (result == null)
+					result = caseASTNode(typedASTNode);
+				if (result == null)
+					result = defaultCase(theEObject);
 				return result;
 			}
-			case UtilitiesPackage.VISITABLE: {
-				Visitable visitable = (Visitable)theEObject;
+			case UtilitiesPackage.VISITABLE : {
+				Visitable visitable = (Visitable) theEObject;
 				T1 result = caseVisitable(visitable);
-				if (result == null) result = defaultCase(theEObject);
+				if (result == null)
+					result = defaultCase(theEObject);
 				return result;
 			}
-			case UtilitiesPackage.VISITOR: {
-				@SuppressWarnings("unchecked") Visitor<?, ?, ?, ?, ?, ?, ?, ?, ?, ?> visitor = (Visitor<?, ?, ?, ?, ?, ?, ?, ?, ?, ?>)theEObject;
+			case UtilitiesPackage.VISITOR : {
+				Visitor<?, ?, ?, ?, ?, ?, ?, ?, ?, ?> visitor = (Visitor<?, ?, ?, ?, ?, ?, ?, ?, ?, ?>) theEObject;
 				T1 result = caseVisitor(visitor);
-				if (result == null) result = defaultCase(theEObject);
+				if (result == null)
+					result = defaultCase(theEObject);
 				return result;
 			}
-			case UtilitiesPackage.TYPED_ELEMENT: {
-				@SuppressWarnings("unchecked") TypedElement<?> typedElement = (TypedElement<?>)theEObject;
+			case UtilitiesPackage.TYPED_ELEMENT : {
+				TypedElement<?> typedElement = (TypedElement<?>) theEObject;
 				T1 result = caseTypedElement(typedElement);
-				if (result == null) result = defaultCase(theEObject);
+				if (result == null)
+					result = defaultCase(theEObject);
 				return result;
 			}
-			case UtilitiesPackage.EXPRESSION_IN_OCL: {
-				@SuppressWarnings("unchecked") ExpressionInOCL<?, ?> expressionInOCL = (ExpressionInOCL<?, ?>)theEObject;
+			case UtilitiesPackage.EXPRESSION_IN_OCL : {
+				ExpressionInOCL<?, ?> expressionInOCL = (ExpressionInOCL<?, ?>) theEObject;
 				T1 result = caseExpressionInOCL(expressionInOCL);
-				if (result == null) result = caseVisitable(expressionInOCL);
-				if (result == null) result = defaultCase(theEObject);
+				if (result == null)
+					result = caseVisitable(expressionInOCL);
+				if (result == null)
+					result = defaultCase(theEObject);
 				return result;
 			}
-			case UtilitiesPackage.PREDEFINED_TYPE: {
-				@SuppressWarnings("unchecked") PredefinedType<?> predefinedType = (PredefinedType<?>)theEObject;
+			case UtilitiesPackage.PREDEFINED_TYPE : {
+				PredefinedType<?> predefinedType = (PredefinedType<?>) theEObject;
 				T1 result = casePredefinedType(predefinedType);
-				if (result == null) result = defaultCase(theEObject);
+				if (result == null)
+					result = defaultCase(theEObject);
 				return result;
 			}
-			default: return defaultCase(theEObject);
+			default :
+				return defaultCase(theEObject);
 		}
 	}
 
 	/**
-	 * Returns the result of interpretting the object as an instance of '<em>AST Node</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>AST Node</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpretting the object as an instance of '<em>AST Node</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>AST Node</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
@@ -177,13 +187,13 @@ public class UtilitiesSwitch<T1> {
 	}
 
 	/**
-	 * Returns the result of interpretting the object as an instance of '<em>Calling AST Node</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Calling AST Node</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpretting the object as an instance of '<em>Calling AST Node</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Calling AST Node</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
@@ -192,13 +202,13 @@ public class UtilitiesSwitch<T1> {
 	}
 
 	/**
-	 * Returns the result of interpretting the object as an instance of '<em>Predefined Type</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Predefined Type</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpretting the object as an instance of '<em>Predefined Type</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Predefined Type</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
@@ -207,13 +217,13 @@ public class UtilitiesSwitch<T1> {
 	}
 
 	/**
-	 * Returns the result of interpretting the object as an instance of '<em>Typed AST Node</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Typed AST Node</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpretting the object as an instance of '<em>Typed AST Node</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Typed AST Node</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
@@ -222,13 +232,13 @@ public class UtilitiesSwitch<T1> {
 	}
 
 	/**
-	 * Returns the result of interpretting the object as an instance of '<em>Visitable</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Visitable</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpretting the object as an instance of '<em>Visitable</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Visitable</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
@@ -237,13 +247,13 @@ public class UtilitiesSwitch<T1> {
 	}
 
 	/**
-	 * Returns the result of interpretting the object as an instance of '<em>Typed Element</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Typed Element</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpretting the object as an instance of '<em>Typed Element</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Typed Element</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
@@ -252,28 +262,29 @@ public class UtilitiesSwitch<T1> {
 	}
 
 	/**
-	 * Returns the result of interpretting the object as an instance of '<em>Visitor</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Visitor</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpretting the object as an instance of '<em>Visitor</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Visitor</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public <T, C, O, P, EL, PM, S, COA, SSA, CT> T1 caseVisitor(Visitor<T, C, O, P, EL, PM, S, COA, SSA, CT> object) {
+	public <T, C, O, P, EL, PM, S, COA, SSA, CT> T1 caseVisitor(
+			Visitor<T, C, O, P, EL, PM, S, COA, SSA, CT> object) {
 		return null;
 	}
 
 	/**
-	 * Returns the result of interpretting the object as an instance of '<em>Expression In OCL</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Expression In OCL</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpretting the object as an instance of '<em>Expression In OCL</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Expression In OCL</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
@@ -282,13 +293,13 @@ public class UtilitiesSwitch<T1> {
 	}
 
 	/**
-	 * Returns the result of interpretting the object as an instance of '<em>EObject</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>EObject</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch, but this is the last case anyway.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpretting the object as an instance of '<em>EObject</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>EObject</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject)
 	 * @generated
 	 */

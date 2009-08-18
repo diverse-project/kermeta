@@ -1,7 +1,7 @@
 /**
  * <copyright>
  * 
- * Copyright (c) 2006, 2007 IBM Corporation and others.
+ * Copyright (c) 2006, 2008 IBM Corporation, Zeligsoft Inc., and others.
  * All rights reserved.   This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -9,13 +9,16 @@
  * 
  * Contributors:
  *   IBM - Initial API and implementation
+ *   Zeligsoft - Bug 207365
  * 
  * </copyright>
  *
- * $Id: TupleLiteralPart.java,v 1.1 2008-08-07 06:35:15 dvojtise Exp $
+ * $Id: TupleLiteralPart.java,v 1.7 2008/11/30 22:11:38 cdamus Exp $
  */
 package org.eclipse.ocl.expressions;
 
+import java.util.Map;
+import org.eclipse.emf.common.util.DiagnosticChain;
 import org.eclipse.ocl.utilities.TypedASTNode;
 import org.eclipse.ocl.utilities.TypedElement;
 import org.eclipse.ocl.utilities.Visitable;
@@ -36,8 +39,12 @@ import org.eclipse.ocl.utilities.Visitable;
  * @see org.eclipse.ocl.expressions.ExpressionsPackage#getTupleLiteralPart()
  * @model
  * @generated
+ * @noimplement This interface is not intended to be implemented by clients.
+ * @noextend This interface is not intended to be extended by clients.
  */
-public interface TupleLiteralPart<C, P> extends TypedElement<C>, Visitable, TypedASTNode {
+public interface TupleLiteralPart<C, P>
+		extends TypedElement<C>, Visitable, TypedASTNode {
+
 	/**
 	 * Returns the value of the '<em><b>Value</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
@@ -75,7 +82,7 @@ public interface TupleLiteralPart<C, P> extends TypedElement<C>, Visitable, Type
 	 * @return the value of the '<em>Attribute</em>' reference.
 	 * @see #setAttribute(Object)
 	 * @see org.eclipse.ocl.expressions.ExpressionsPackage#getTupleLiteralPart_Attribute()
-	 * @model
+	 * @model kind="reference"
 	 * @generated
 	 */
 	P getAttribute();
@@ -89,5 +96,19 @@ public interface TupleLiteralPart<C, P> extends TypedElement<C>, Visitable, Type
 	 * @generated
 	 */
 	void setAttribute(P value);
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * attribute.type = value.type
+	 * @param diagnostics The chain of diagnostics to which problems are to be appended.
+	 * @param context The cache of context-specific information.
+	 * <!-- end-model-doc -->
+	 * @model
+	 * @generated
+	 */
+	boolean checkValueType(DiagnosticChain diagnostics,
+			Map<Object, Object> context);
 
 } // TupleLiteralPart

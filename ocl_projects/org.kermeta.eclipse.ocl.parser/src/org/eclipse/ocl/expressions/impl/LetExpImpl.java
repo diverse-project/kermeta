@@ -1,7 +1,7 @@
 /**
  * <copyright>
  * 
- * Copyright (c) 2006, 2007 IBM Corporation and others.
+ * Copyright (c) 2006, 2009 IBM Corporation, Zeligsoft Inc., and others.
  * All rights reserved.   This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -9,15 +9,18 @@
  * 
  * Contributors:
  *   IBM - Initial API and implementation
+ *   Zeligsoft - Bug 207365
  * 
  * </copyright>
  *
- * $Id: LetExpImpl.java,v 1.1 2008-08-07 06:35:11 dvojtise Exp $
+ * $Id: LetExpImpl.java,v 1.8 2009/01/23 17:16:04 cdamus Exp $
  */
 package org.eclipse.ocl.expressions.impl;
 
+import java.util.Map;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
+import org.eclipse.emf.common.util.DiagnosticChain;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
@@ -25,6 +28,7 @@ import org.eclipse.ocl.expressions.ExpressionsPackage;
 import org.eclipse.ocl.expressions.LetExp;
 import org.eclipse.ocl.expressions.OCLExpression;
 import org.eclipse.ocl.expressions.Variable;
+import org.eclipse.ocl.expressions.operations.LetExpOperations;
 import org.eclipse.ocl.utilities.Visitor;
 
 /**
@@ -41,7 +45,10 @@ import org.eclipse.ocl.utilities.Visitor;
  *
  * @generated
  */
-public class LetExpImpl<C, PM> extends OCLExpressionImpl<C> implements LetExp<C, PM> {
+public class LetExpImpl<C, PM>
+		extends OCLExpressionImpl<C>
+		implements LetExp<C, PM> {
+
 	/**
 	 * The cached value of the '{@link #getIn() <em>In</em>}' containment reference.
 	 * <!-- begin-user-doc -->
@@ -95,12 +102,17 @@ public class LetExpImpl<C, PM> extends OCLExpressionImpl<C> implements LetExp<C,
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetIn(OCLExpression<C> newIn, NotificationChain msgs) {
+	public NotificationChain basicSetIn(OCLExpression<C> newIn,
+			NotificationChain msgs) {
 		OCLExpression<C> oldIn = in;
 		in = newIn;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, ExpressionsPackage.LET_EXP__IN, oldIn, newIn);
-			if (msgs == null) msgs = notification; else msgs.add(notification);
+			ENotificationImpl notification = new ENotificationImpl(this,
+				Notification.SET, ExpressionsPackage.LET_EXP__IN, oldIn, newIn);
+			if (msgs == null)
+				msgs = notification;
+			else
+				msgs.add(notification);
 		}
 		return msgs;
 	}
@@ -114,14 +126,19 @@ public class LetExpImpl<C, PM> extends OCLExpressionImpl<C> implements LetExp<C,
 		if (newIn != in) {
 			NotificationChain msgs = null;
 			if (in != null)
-				msgs = ((InternalEObject)in).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - ExpressionsPackage.LET_EXP__IN, null, msgs);
+				msgs = ((InternalEObject) in).eInverseRemove(this,
+					EOPPOSITE_FEATURE_BASE - ExpressionsPackage.LET_EXP__IN,
+					null, msgs);
 			if (newIn != null)
-				msgs = ((InternalEObject)newIn).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - ExpressionsPackage.LET_EXP__IN, null, msgs);
+				msgs = ((InternalEObject) newIn).eInverseAdd(this,
+					EOPPOSITE_FEATURE_BASE - ExpressionsPackage.LET_EXP__IN,
+					null, msgs);
 			msgs = basicSetIn(newIn, msgs);
-			if (msgs != null) msgs.dispatch();
-		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ExpressionsPackage.LET_EXP__IN, newIn, newIn));
+			if (msgs != null)
+				msgs.dispatch();
+		} else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET,
+				ExpressionsPackage.LET_EXP__IN, newIn, newIn));
 	}
 
 	/**
@@ -138,12 +155,18 @@ public class LetExpImpl<C, PM> extends OCLExpressionImpl<C> implements LetExp<C,
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetVariable(Variable<C, PM> newVariable, NotificationChain msgs) {
+	public NotificationChain basicSetVariable(Variable<C, PM> newVariable,
+			NotificationChain msgs) {
 		Variable<C, PM> oldVariable = variable;
 		variable = newVariable;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, ExpressionsPackage.LET_EXP__VARIABLE, oldVariable, newVariable);
-			if (msgs == null) msgs = notification; else msgs.add(notification);
+			ENotificationImpl notification = new ENotificationImpl(this,
+				Notification.SET, ExpressionsPackage.LET_EXP__VARIABLE,
+				oldVariable, newVariable);
+			if (msgs == null)
+				msgs = notification;
+			else
+				msgs.add(notification);
 		}
 		return msgs;
 	}
@@ -157,14 +180,29 @@ public class LetExpImpl<C, PM> extends OCLExpressionImpl<C> implements LetExp<C,
 		if (newVariable != variable) {
 			NotificationChain msgs = null;
 			if (variable != null)
-				msgs = ((InternalEObject)variable).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - ExpressionsPackage.LET_EXP__VARIABLE, null, msgs);
+				msgs = ((InternalEObject) variable).eInverseRemove(this,
+					EOPPOSITE_FEATURE_BASE
+						- ExpressionsPackage.LET_EXP__VARIABLE, null, msgs);
 			if (newVariable != null)
-				msgs = ((InternalEObject)newVariable).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - ExpressionsPackage.LET_EXP__VARIABLE, null, msgs);
+				msgs = ((InternalEObject) newVariable).eInverseAdd(this,
+					EOPPOSITE_FEATURE_BASE
+						- ExpressionsPackage.LET_EXP__VARIABLE, null, msgs);
 			msgs = basicSetVariable(newVariable, msgs);
-			if (msgs != null) msgs.dispatch();
-		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ExpressionsPackage.LET_EXP__VARIABLE, newVariable, newVariable));
+			if (msgs != null)
+				msgs.dispatch();
+		} else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET,
+				ExpressionsPackage.LET_EXP__VARIABLE, newVariable, newVariable));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean checkLetType(DiagnosticChain diagnostics,
+			Map<Object, Object> context) {
+		return LetExpOperations.checkLetType(this, diagnostics, context);
 	}
 
 	/**
@@ -173,11 +211,12 @@ public class LetExpImpl<C, PM> extends OCLExpressionImpl<C> implements LetExp<C,
 	 * @generated
 	 */
 	@Override
-	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+	public NotificationChain eInverseRemove(InternalEObject otherEnd,
+			int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case ExpressionsPackage.LET_EXP__IN:
+			case ExpressionsPackage.LET_EXP__IN :
 				return basicSetIn(null, msgs);
-			case ExpressionsPackage.LET_EXP__VARIABLE:
+			case ExpressionsPackage.LET_EXP__VARIABLE :
 				return basicSetVariable(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -191,9 +230,9 @@ public class LetExpImpl<C, PM> extends OCLExpressionImpl<C> implements LetExp<C,
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case ExpressionsPackage.LET_EXP__IN:
+			case ExpressionsPackage.LET_EXP__IN :
 				return getIn();
-			case ExpressionsPackage.LET_EXP__VARIABLE:
+			case ExpressionsPackage.LET_EXP__VARIABLE :
 				return getVariable();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -208,11 +247,11 @@ public class LetExpImpl<C, PM> extends OCLExpressionImpl<C> implements LetExp<C,
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case ExpressionsPackage.LET_EXP__IN:
-				setIn((OCLExpression<C>)newValue);
+			case ExpressionsPackage.LET_EXP__IN :
+				setIn((OCLExpression<C>) newValue);
 				return;
-			case ExpressionsPackage.LET_EXP__VARIABLE:
-				setVariable((Variable<C, PM>)newValue);
+			case ExpressionsPackage.LET_EXP__VARIABLE :
+				setVariable((Variable<C, PM>) newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -226,11 +265,11 @@ public class LetExpImpl<C, PM> extends OCLExpressionImpl<C> implements LetExp<C,
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case ExpressionsPackage.LET_EXP__IN:
-				setIn((OCLExpression<C>)null);
+			case ExpressionsPackage.LET_EXP__IN :
+				setIn((OCLExpression<C>) null);
 				return;
-			case ExpressionsPackage.LET_EXP__VARIABLE:
-				setVariable((Variable<C, PM>)null);
+			case ExpressionsPackage.LET_EXP__VARIABLE :
+				setVariable((Variable<C, PM>) null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -244,9 +283,9 @@ public class LetExpImpl<C, PM> extends OCLExpressionImpl<C> implements LetExp<C,
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case ExpressionsPackage.LET_EXP__IN:
+			case ExpressionsPackage.LET_EXP__IN :
 				return in != null;
-			case ExpressionsPackage.LET_EXP__VARIABLE:
+			case ExpressionsPackage.LET_EXP__VARIABLE :
 				return variable != null;
 		}
 		return super.eIsSet(featureID);
@@ -256,8 +295,9 @@ public class LetExpImpl<C, PM> extends OCLExpressionImpl<C> implements LetExp<C,
 	 * @generated NOT
 	 */
 	@Override
+	@SuppressWarnings("unchecked")
 	public <T, U extends Visitor<T, ?, ?, ?, ?, ?, ?, ?, ?, ?>> T accept(U v) {
-		return v.visitLetExp(this);
+		return ((Visitor<T, C, ?, ?, ?, PM, ?, ?, ?, ?>) v).visitLetExp(this);
 	}
 
 } //LetExpImpl

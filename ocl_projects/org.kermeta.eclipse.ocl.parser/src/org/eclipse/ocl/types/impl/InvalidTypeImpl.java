@@ -1,7 +1,7 @@
 /**
  * <copyright>
  * 
- * Copyright (c) 2006, 2007 IBM Corporation and others.
+ * Copyright (c) 2006, 2008 IBM Corporation, Zeligsoft Inc., and others.
  * All rights reserved.   This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -9,10 +9,11 @@
  * 
  * Contributors:
  *   IBM - Initial API and implementation
+ *   Zeligsoft - Bug 207365
  * 
  * </copyright>
  *
- * $Id: InvalidTypeImpl.java,v 1.1 2008-08-07 06:35:15 dvojtise Exp $
+ * $Id: InvalidTypeImpl.java,v 1.6 2008/11/24 00:21:31 cdamus Exp $
  */
 package org.eclipse.ocl.types.impl;
 
@@ -23,6 +24,8 @@ import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.eclipse.ocl.Environment;
 import org.eclipse.ocl.types.InvalidType;
 import org.eclipse.ocl.types.TypesPackage;
+
+//import org.eclipse.ocl.types.operations.InvalidTypeOperations;
 import org.eclipse.ocl.util.OCLStandardLibraryUtil;
 
 /**
@@ -34,9 +37,12 @@ import org.eclipse.ocl.util.OCLStandardLibraryUtil;
  *
  * @generated
  */
-public class InvalidTypeImpl<O> extends EObjectImpl implements InvalidType<O> {
+public class InvalidTypeImpl<O>
+		extends EObjectImpl
+		implements InvalidType<O> {
+
 	private EList<O> operations;
-	
+
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -72,13 +78,13 @@ public class InvalidTypeImpl<O> extends EObjectImpl implements InvalidType<O> {
 	 */
 	public EList<O> oclOperations() {
 		if (operations == null) {
-			Environment<?, ?, O, ?, ?, ?, ?, ?, ?, ?, ?, ?> env =
-				Environment.Registry.INSTANCE.getEnvironmentFor(this);
-			
-			operations = new BasicEList<O>(
-					OCLStandardLibraryUtil.createAnyTypeOperations(env));
+			Environment<?, ?, O, ?, ?, ?, ?, ?, ?, ?, ?, ?> env = Environment.Registry.INSTANCE
+				.getEnvironmentFor(this);
+
+			operations = new BasicEList<O>(OCLStandardLibraryUtil
+				.createAnyTypeOperations(env));
 		}
-		
+
 		return operations;
 	}
 

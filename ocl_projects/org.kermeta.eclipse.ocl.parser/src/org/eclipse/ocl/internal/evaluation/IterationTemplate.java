@@ -1,7 +1,7 @@
 /**
  * <copyright>
  *
- * Copyright (c) 2005, 2007 IBM Corporation and others.
+ * Copyright (c) 2005, 2009 IBM Corporation, Borland Software Corporation, and others.
  * All rights reserved.   This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -9,10 +9,11 @@
  *
  * Contributors:
  *   IBM - Initial API and implementation
+ *   Radek Dvorak - Bugs 261128, 265066
  *
  * </copyright>
  *
- * $Id: IterationTemplate.java,v 1.1 2008-08-07 06:35:14 dvojtise Exp $
+ * $Id: IterationTemplate.java,v 1.4 2009/03/11 13:04:28 cdamus Exp $
  */
 
 package org.eclipse.ocl.internal.evaluation;
@@ -27,7 +28,7 @@ import org.eclipse.ocl.expressions.OCLExpression;
 import org.eclipse.ocl.expressions.Variable;
 import org.eclipse.ocl.types.OCLStandardLibrary;
 
-class IterationTemplate<PK, C, O, P, EL, PM, S, COA, SSA, CT, CLS, E> {
+public class IterationTemplate<PK, C, O, P, EL, PM, S, COA, SSA, CT, CLS, E> {
 	
 	private EvaluationVisitor<PK, C, O, P, EL, PM, S, COA, SSA, CT, CLS, E> evalVisitor;
 	private EvaluationEnvironment<C, O, P, CLS, E> env;
@@ -77,35 +78,40 @@ class IterationTemplate<PK, C, O, P, EL, PM, S, COA, SSA, CT, CLS, E> {
 		// ocl iterator in the expression
 		int numIters = iterators.size();
 		Iterator<?>[] javaIters = new Iterator[numIters];
-		initializeIterators(iterators, javaIters, coll);
 
-		while (true) {
-			// evaluate the body of the expression in this environment
-			Object bodyVal = evalVisitor.visitExpression(body);
-	
-			// get the new result value
-			Object resultVal = evaluateResult(iterators, resultName, bodyVal);
+		try {
+			initializeIterators(iterators, javaIters, coll);
 			
-			// set the result variable in the environment with the result value
-			env.replace(resultName, resultVal);
-			
-			// find the next unfinished iterator
-			int curr = getNextUnfinishedIterator(javaIters);
-			
-			if (!moreToGo(curr, numIters)) {
-				// all iterators are finished and so are we:
+			while (true) {
+				// evaluate the body of the expression in this environment
+				Object bodyVal = evalVisitor.visitExpression(body);
 		
-				// remove the iterators from the environment
-				removeIterators(iterators);
+				// get the new result value
+				Object resultVal = evaluateResult(iterators, resultName, bodyVal);
+				
+				// set the result variable in the environment with the result value
+				env.replace(resultName, resultVal);
+				
+				// find the next unfinished iterator
+				int curr = getNextUnfinishedIterator(javaIters);
+				
+				if (!moreToGo(curr, numIters)) {
+					// all iterators are finished and so are we:
+					break;
+				}
 		
-				// return the result value
-				return env.getValueOf(resultName);
+				// more iteration to go:
+				// reset all iterators up to the current unfinished one
+				// and replace their assignments in the environment
+				advanceIterators(iterators, javaIters, coll, curr);
 			}
-	
-			// more iteration to go:
-			// reset all iterators up to the current unfinished one
-			// and replace their assignments in the environment
-			advanceIterators(iterators, javaIters, coll, curr);
+			
+			// return the result value
+			return env.getValueOf(resultName);
+			
+		} finally {
+			// remove the iterators from the environment			
+			removeIterators(iterators);
 		}
 	}
 		

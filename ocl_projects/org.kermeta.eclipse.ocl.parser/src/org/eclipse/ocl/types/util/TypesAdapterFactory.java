@@ -1,7 +1,7 @@
 /**
  * <copyright>
  * 
- * Copyright (c) 2006, 2007 IBM Corporation and others.
+ * Copyright (c) 2006, 2008 IBM Corporation, Zeligsoft Inc., and others.
  * All rights reserved.   This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -9,10 +9,11 @@
  * 
  * Contributors:
  *   IBM - Initial API and implementation
+ *   Zeligsoft - Bug 207365
  * 
  * </copyright>
  *
- * $Id: TypesAdapterFactory.java,v 1.1 2008-08-07 06:35:19 dvojtise Exp $
+ * $Id: TypesAdapterFactory.java,v 1.7 2008/10/12 01:09:50 cdamus Exp $
  */
 package org.eclipse.ocl.types.util;
 
@@ -40,7 +41,6 @@ import org.eclipse.ocl.utilities.ASTNode;
 import org.eclipse.ocl.utilities.PredefinedType;
 import org.eclipse.ocl.utilities.TypedASTNode;
 
-
 /**
  * <!-- begin-user-doc -->
  * The <b>Adapter Factory</b> for the model.
@@ -49,7 +49,9 @@ import org.eclipse.ocl.utilities.TypedASTNode;
  * @see org.eclipse.ocl.types.TypesPackage
  * @generated
  */
-public class TypesAdapterFactory extends AdapterFactoryImpl {
+public class TypesAdapterFactory
+		extends AdapterFactoryImpl {
+
 	/**
 	 * The cached model package.
 	 * <!-- begin-user-doc -->
@@ -84,88 +86,104 @@ public class TypesAdapterFactory extends AdapterFactoryImpl {
 			return true;
 		}
 		if (object instanceof EObject) {
-			return ((EObject)object).eClass().getEPackage() == modelPackage;
+			return ((EObject) object).eClass().getEPackage() == modelPackage;
 		}
 		return false;
 	}
 
 	/**
-	 * The switch the delegates to the <code>createXXX</code> methods.
+	 * The switch that delegates to the <code>createXXX</code> methods.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected TypesSwitch<Adapter> modelSwitch =
-		new TypesSwitch<Adapter>() {
-			@Override
-			public <O> Adapter caseAnyType(AnyType<O> object) {
-				return createAnyTypeAdapter();
-			}
-			@Override
-			public <C, O> Adapter caseBagType(BagType<C, O> object) {
-				return createBagTypeAdapter();
-			}
-			@Override
-			public <C, O> Adapter caseCollectionType(CollectionType<C, O> object) {
-				return createCollectionTypeAdapter();
-			}
-			@Override
-			public Adapter caseElementType(ElementType object) {
-				return createElementTypeAdapter();
-			}
-			@Override
-			public <O> Adapter caseInvalidType(InvalidType<O> object) {
-				return createInvalidTypeAdapter();
-			}
-			@Override
-			public <C, O, P> Adapter caseMessageType(MessageType<C, O, P> object) {
-				return createMessageTypeAdapter();
-			}
-			@Override
-			public <C, O> Adapter caseOrderedSetType(OrderedSetType<C, O> object) {
-				return createOrderedSetTypeAdapter();
-			}
-			@Override
-			public <O> Adapter casePrimitiveType(PrimitiveType<O> object) {
-				return createPrimitiveTypeAdapter();
-			}
-			@Override
-			public <C, O> Adapter caseSequenceType(SequenceType<C, O> object) {
-				return createSequenceTypeAdapter();
-			}
-			@Override
-			public <C, O> Adapter caseSetType(SetType<C, O> object) {
-				return createSetTypeAdapter();
-			}
-			@Override
-			public <O, P> Adapter caseTupleType(TupleType<O, P> object) {
-				return createTupleTypeAdapter();
-			}
-			@Override
-			public <C, O> Adapter caseTypeType(TypeType<C, O> object) {
-				return createTypeTypeAdapter();
-			}
-			@Override
-			public <O> Adapter caseVoidType(VoidType<O> object) {
-				return createVoidTypeAdapter();
-			}
-			@Override
-			public <O> Adapter casePredefinedType(PredefinedType<O> object) {
-				return createPredefinedTypeAdapter();
-			}
-			@Override
-			public Adapter caseASTNode(ASTNode object) {
-				return createASTNodeAdapter();
-			}
-			@Override
-			public Adapter caseTypedASTNode(TypedASTNode object) {
-				return createTypedASTNodeAdapter();
-			}
-			@Override
-			public Adapter defaultCase(EObject object) {
-				return createEObjectAdapter();
-			}
-		};
+	protected TypesSwitch<Adapter> modelSwitch = new TypesSwitch<Adapter>() {
+
+		@Override
+		public <O> Adapter caseAnyType(AnyType<O> object) {
+			return createAnyTypeAdapter();
+		}
+
+		@Override
+		public <C, O> Adapter caseBagType(BagType<C, O> object) {
+			return createBagTypeAdapter();
+		}
+
+		@Override
+		public <C, O> Adapter caseCollectionType(CollectionType<C, O> object) {
+			return createCollectionTypeAdapter();
+		}
+
+		@Override
+		public Adapter caseElementType(ElementType object) {
+			return createElementTypeAdapter();
+		}
+
+		@Override
+		public <O> Adapter caseInvalidType(InvalidType<O> object) {
+			return createInvalidTypeAdapter();
+		}
+
+		@Override
+		public <C, O, P> Adapter caseMessageType(MessageType<C, O, P> object) {
+			return createMessageTypeAdapter();
+		}
+
+		@Override
+		public <C, O> Adapter caseOrderedSetType(OrderedSetType<C, O> object) {
+			return createOrderedSetTypeAdapter();
+		}
+
+		@Override
+		public <O> Adapter casePrimitiveType(PrimitiveType<O> object) {
+			return createPrimitiveTypeAdapter();
+		}
+
+		@Override
+		public <C, O> Adapter caseSequenceType(SequenceType<C, O> object) {
+			return createSequenceTypeAdapter();
+		}
+
+		@Override
+		public <C, O> Adapter caseSetType(SetType<C, O> object) {
+			return createSetTypeAdapter();
+		}
+
+		@Override
+		public <O, P> Adapter caseTupleType(TupleType<O, P> object) {
+			return createTupleTypeAdapter();
+		}
+
+		@Override
+		public <C, O> Adapter caseTypeType(TypeType<C, O> object) {
+			return createTypeTypeAdapter();
+		}
+
+		@Override
+		public <O> Adapter caseVoidType(VoidType<O> object) {
+			return createVoidTypeAdapter();
+		}
+
+		@Override
+		public <O> Adapter casePredefinedType(PredefinedType<O> object) {
+			return createPredefinedTypeAdapter();
+		}
+
+		@Override
+		public Adapter caseASTNode(ASTNode object) {
+			return createASTNodeAdapter();
+		}
+
+		@Override
+		public Adapter caseTypedASTNode(TypedASTNode object) {
+			return createTypedASTNodeAdapter();
+		}
+
+		@Override
+		public Adapter defaultCase(EObject object) {
+			return createEObjectAdapter();
+		}
+	};
 
 	/**
 	 * Creates an adapter for the <code>target</code>.
@@ -177,9 +195,8 @@ public class TypesAdapterFactory extends AdapterFactoryImpl {
 	 */
 	@Override
 	public Adapter createAdapter(Notifier target) {
-		return modelSwitch.doSwitch((EObject)target);
+		return modelSwitch.doSwitch((EObject) target);
 	}
-
 
 	/**
 	 * Creates a new adapter for an object of class '{@link org.eclipse.ocl.types.AnyType <em>Any Type</em>}'.

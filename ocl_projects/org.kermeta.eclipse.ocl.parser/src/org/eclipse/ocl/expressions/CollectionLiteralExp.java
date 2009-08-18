@@ -1,7 +1,7 @@
 /**
  * <copyright>
  * 
- * Copyright (c) 2006, 2007 IBM Corporation and others.
+ * Copyright (c) 2006, 2008 IBM Corporation, Zeligsoft Inc., and others.
  * All rights reserved.   This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -9,13 +9,16 @@
  * 
  * Contributors:
  *   IBM - Initial API and implementation
+ *   Zeligsoft - Bug 207365
  * 
  * </copyright>
  *
- * $Id: CollectionLiteralExp.java,v 1.1 2008-08-07 06:35:15 dvojtise Exp $
+ * $Id: CollectionLiteralExp.java,v 1.7 2008/11/30 22:11:38 cdamus Exp $
  */
 package org.eclipse.ocl.expressions;
 
+import java.util.Map;
+import org.eclipse.emf.common.util.DiagnosticChain;
 import org.eclipse.emf.common.util.EList;
 
 /**
@@ -35,8 +38,12 @@ import org.eclipse.emf.common.util.EList;
  * @see org.eclipse.ocl.expressions.ExpressionsPackage#getCollectionLiteralExp()
  * @model
  * @generated
+ * @noimplement This interface is not intended to be implemented by clients.
+ * @noextend This interface is not intended to be extended by clients.
  */
-public interface CollectionLiteralExp<C> extends LiteralExp<C> {
+public interface CollectionLiteralExp<C>
+		extends LiteralExp<C> {
+
 	/**
 	 * Returns the value of the '<em><b>Kind</b></em>' attribute.
 	 * The literals are from the enumeration {@link org.eclipse.ocl.expressions.CollectionKind}.
@@ -77,7 +84,7 @@ public interface CollectionLiteralExp<C> extends LiteralExp<C> {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Part</em>' containment reference list.
 	 * @see org.eclipse.ocl.expressions.ExpressionsPackage#getCollectionLiteralExp_Part()
-	 * @model type="org.eclipse.ocl.expressions.CollectionLiteralPart" containment="true"
+	 * @model containment="true"
 	 * @generated
 	 */
 	EList<CollectionLiteralPart<C>> getPart();
@@ -96,5 +103,75 @@ public interface CollectionLiteralExp<C> extends LiteralExp<C> {
 	 * @generated
 	 */
 	boolean isSimpleRange();
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * kind <> CollectionKind::Collection
+	 * @param diagnostics The chain of diagnostics to which problems are to be appended.
+	 * @param context The cache of context-specific information.
+	 * <!-- end-model-doc -->
+	 * @model
+	 * @generated
+	 */
+	boolean checkNoCollectionInstances(DiagnosticChain diagnostics,
+			Map<Object, Object> context);
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * kind = CollectionKind::Set implies type.oclIsKindOf(SetType)
+	 * @param diagnostics The chain of diagnostics to which problems are to be appended.
+	 * @param context The cache of context-specific information.
+	 * <!-- end-model-doc -->
+	 * @model
+	 * @generated
+	 */
+	boolean checkSetKind(DiagnosticChain diagnostics,
+			Map<Object, Object> context);
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * kind = CollectionKind::Sequence implies type.oclIsKindOf(SequenceType)
+	 * @param diagnostics The chain of diagnostics to which problems are to be appended.
+	 * @param context The cache of context-specific information.
+	 * <!-- end-model-doc -->
+	 * @model
+	 * @generated
+	 */
+	boolean checkSequenceKind(DiagnosticChain diagnostics,
+			Map<Object, Object> context);
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * kind = CollectionKind::Bag implies type.oclIsKindOf(BagType)
+	 * @param diagnostics The chain of diagnostics to which problems are to be appended.
+	 * @param context The cache of context-specific information.
+	 * <!-- end-model-doc -->
+	 * @model
+	 * @generated
+	 */
+	boolean checkBagKind(DiagnosticChain diagnostics,
+			Map<Object, Object> context);
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * type.oclAsType(CollectionType).elementType = part->iterate(p; c : Classifier = OclVoid | c.commonSuperType(p.type))
+	 * @param diagnostics The chain of diagnostics to which problems are to be appended.
+	 * @param context The cache of context-specific information.
+	 * <!-- end-model-doc -->
+	 * @model
+	 * @generated
+	 */
+	boolean checkElementType(DiagnosticChain diagnostics,
+			Map<Object, Object> context);
 
 } // CollectionLiteralExp

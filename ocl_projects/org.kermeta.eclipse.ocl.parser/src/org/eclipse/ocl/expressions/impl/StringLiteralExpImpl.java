@@ -1,7 +1,7 @@
 /**
  * <copyright>
  * 
- * Copyright (c) 2006, 2007 IBM Corporation and others.
+ * Copyright (c) 2006, 2009 IBM Corporation, Zeligsoft Inc., and others.
  * All rights reserved.   This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -9,18 +9,22 @@
  * 
  * Contributors:
  *   IBM - Initial API and implementation
+ *   Zeligsoft - Bug 207365
  * 
  * </copyright>
  *
- * $Id: StringLiteralExpImpl.java,v 1.1 2008-08-07 06:35:12 dvojtise Exp $
+ * $Id: StringLiteralExpImpl.java,v 1.7 2009/01/23 17:16:03 cdamus Exp $
  */
 package org.eclipse.ocl.expressions.impl;
 
+import java.util.Map;
 import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.util.DiagnosticChain;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.ocl.expressions.ExpressionsPackage;
 import org.eclipse.ocl.expressions.StringLiteralExp;
+import org.eclipse.ocl.expressions.operations.StringLiteralExpOperations;
 import org.eclipse.ocl.utilities.Visitor;
 
 /**
@@ -36,7 +40,10 @@ import org.eclipse.ocl.utilities.Visitor;
  *
  * @generated
  */
-public class StringLiteralExpImpl<C> extends PrimitiveLiteralExpImpl<C> implements StringLiteralExp<C> {
+public class StringLiteralExpImpl<C>
+		extends PrimitiveLiteralExpImpl<C>
+		implements StringLiteralExp<C> {
+
 	/**
 	 * The default value of the '{@link #getStringSymbol() <em>String Symbol</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -94,7 +101,20 @@ public class StringLiteralExpImpl<C> extends PrimitiveLiteralExpImpl<C> implemen
 		String oldStringSymbol = stringSymbol;
 		stringSymbol = newStringSymbol;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ExpressionsPackage.STRING_LITERAL_EXP__STRING_SYMBOL, oldStringSymbol, stringSymbol));
+			eNotify(new ENotificationImpl(this, Notification.SET,
+				ExpressionsPackage.STRING_LITERAL_EXP__STRING_SYMBOL,
+				oldStringSymbol, stringSymbol));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean checkStringType(DiagnosticChain diagnostics,
+			Map<Object, Object> context) {
+		return StringLiteralExpOperations.checkStringType(this, diagnostics,
+			context);
 	}
 
 	/**
@@ -105,7 +125,7 @@ public class StringLiteralExpImpl<C> extends PrimitiveLiteralExpImpl<C> implemen
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case ExpressionsPackage.STRING_LITERAL_EXP__STRING_SYMBOL:
+			case ExpressionsPackage.STRING_LITERAL_EXP__STRING_SYMBOL :
 				return getStringSymbol();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -119,8 +139,8 @@ public class StringLiteralExpImpl<C> extends PrimitiveLiteralExpImpl<C> implemen
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case ExpressionsPackage.STRING_LITERAL_EXP__STRING_SYMBOL:
-				setStringSymbol((String)newValue);
+			case ExpressionsPackage.STRING_LITERAL_EXP__STRING_SYMBOL :
+				setStringSymbol((String) newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -134,7 +154,7 @@ public class StringLiteralExpImpl<C> extends PrimitiveLiteralExpImpl<C> implemen
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case ExpressionsPackage.STRING_LITERAL_EXP__STRING_SYMBOL:
+			case ExpressionsPackage.STRING_LITERAL_EXP__STRING_SYMBOL :
 				setStringSymbol(STRING_SYMBOL_EDEFAULT);
 				return;
 		}
@@ -149,8 +169,10 @@ public class StringLiteralExpImpl<C> extends PrimitiveLiteralExpImpl<C> implemen
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case ExpressionsPackage.STRING_LITERAL_EXP__STRING_SYMBOL:
-				return STRING_SYMBOL_EDEFAULT == null ? stringSymbol != null : !STRING_SYMBOL_EDEFAULT.equals(stringSymbol);
+			case ExpressionsPackage.STRING_LITERAL_EXP__STRING_SYMBOL :
+				return STRING_SYMBOL_EDEFAULT == null
+					? stringSymbol != null
+					: !STRING_SYMBOL_EDEFAULT.equals(stringSymbol);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -169,8 +191,10 @@ public class StringLiteralExpImpl<C> extends PrimitiveLiteralExpImpl<C> implemen
 	 * @generated NOT
 	 */
 	@Override
+	@SuppressWarnings("unchecked")
 	public <T, U extends Visitor<T, ?, ?, ?, ?, ?, ?, ?, ?, ?>> T accept(U v) {
-		return v.visitStringLiteralExp(this);
+		return ((Visitor<T, C, ?, ?, ?, ?, ?, ?, ?, ?>) v)
+			.visitStringLiteralExp(this);
 	}
 
 } //StringLiteralExpImpl

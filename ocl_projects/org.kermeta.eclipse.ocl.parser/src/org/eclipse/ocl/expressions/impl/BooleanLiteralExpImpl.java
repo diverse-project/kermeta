@@ -1,7 +1,7 @@
 /**
  * <copyright>
  * 
- * Copyright (c) 2006, 2007 IBM Corporation and others.
+ * Copyright (c) 2006, 2009 IBM Corporation, Zeligsoft Inc., and others.
  * All rights reserved.   This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -9,18 +9,22 @@
  * 
  * Contributors:
  *   IBM - Initial API and implementation
+ *   Zeligsoft - Bug 207365
  * 
  * </copyright>
  *
- * $Id: BooleanLiteralExpImpl.java,v 1.1 2008-08-07 06:35:12 dvojtise Exp $
+ * $Id: BooleanLiteralExpImpl.java,v 1.7 2009/01/23 17:16:03 cdamus Exp $
  */
 package org.eclipse.ocl.expressions.impl;
 
+import java.util.Map;
 import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.util.DiagnosticChain;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.ocl.expressions.BooleanLiteralExp;
 import org.eclipse.ocl.expressions.ExpressionsPackage;
+import org.eclipse.ocl.expressions.operations.BooleanLiteralExpOperations;
 import org.eclipse.ocl.utilities.Visitor;
 
 /**
@@ -36,7 +40,10 @@ import org.eclipse.ocl.utilities.Visitor;
  *
  * @generated
  */
-public class BooleanLiteralExpImpl<C> extends PrimitiveLiteralExpImpl<C> implements BooleanLiteralExp<C> {
+public class BooleanLiteralExpImpl<C>
+		extends PrimitiveLiteralExpImpl<C>
+		implements BooleanLiteralExp<C> {
+
 	/**
 	 * The default value of the '{@link #getBooleanSymbol() <em>Boolean Symbol</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -94,7 +101,20 @@ public class BooleanLiteralExpImpl<C> extends PrimitiveLiteralExpImpl<C> impleme
 		Boolean oldBooleanSymbol = booleanSymbol;
 		booleanSymbol = newBooleanSymbol;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ExpressionsPackage.BOOLEAN_LITERAL_EXP__BOOLEAN_SYMBOL, oldBooleanSymbol, booleanSymbol));
+			eNotify(new ENotificationImpl(this, Notification.SET,
+				ExpressionsPackage.BOOLEAN_LITERAL_EXP__BOOLEAN_SYMBOL,
+				oldBooleanSymbol, booleanSymbol));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean checkBooleanType(DiagnosticChain diagnostics,
+			Map<Object, Object> context) {
+		return BooleanLiteralExpOperations.checkBooleanType(this, diagnostics,
+			context);
 	}
 
 	/**
@@ -105,7 +125,7 @@ public class BooleanLiteralExpImpl<C> extends PrimitiveLiteralExpImpl<C> impleme
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case ExpressionsPackage.BOOLEAN_LITERAL_EXP__BOOLEAN_SYMBOL:
+			case ExpressionsPackage.BOOLEAN_LITERAL_EXP__BOOLEAN_SYMBOL :
 				return getBooleanSymbol();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -119,8 +139,8 @@ public class BooleanLiteralExpImpl<C> extends PrimitiveLiteralExpImpl<C> impleme
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case ExpressionsPackage.BOOLEAN_LITERAL_EXP__BOOLEAN_SYMBOL:
-				setBooleanSymbol((Boolean)newValue);
+			case ExpressionsPackage.BOOLEAN_LITERAL_EXP__BOOLEAN_SYMBOL :
+				setBooleanSymbol((Boolean) newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -134,7 +154,7 @@ public class BooleanLiteralExpImpl<C> extends PrimitiveLiteralExpImpl<C> impleme
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case ExpressionsPackage.BOOLEAN_LITERAL_EXP__BOOLEAN_SYMBOL:
+			case ExpressionsPackage.BOOLEAN_LITERAL_EXP__BOOLEAN_SYMBOL :
 				setBooleanSymbol(BOOLEAN_SYMBOL_EDEFAULT);
 				return;
 		}
@@ -149,8 +169,10 @@ public class BooleanLiteralExpImpl<C> extends PrimitiveLiteralExpImpl<C> impleme
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case ExpressionsPackage.BOOLEAN_LITERAL_EXP__BOOLEAN_SYMBOL:
-				return BOOLEAN_SYMBOL_EDEFAULT == null ? booleanSymbol != null : !BOOLEAN_SYMBOL_EDEFAULT.equals(booleanSymbol);
+			case ExpressionsPackage.BOOLEAN_LITERAL_EXP__BOOLEAN_SYMBOL :
+				return BOOLEAN_SYMBOL_EDEFAULT == null
+					? booleanSymbol != null
+					: !BOOLEAN_SYMBOL_EDEFAULT.equals(booleanSymbol);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -169,8 +191,10 @@ public class BooleanLiteralExpImpl<C> extends PrimitiveLiteralExpImpl<C> impleme
 	 * @generated NOT
 	 */
 	@Override
+	@SuppressWarnings("unchecked")
 	public <T, U extends Visitor<T, ?, ?, ?, ?, ?, ?, ?, ?, ?>> T accept(U v) {
-		return v.visitBooleanLiteralExp(this);
+		return ((Visitor<T, C, ?, ?, ?, ?, ?, ?, ?, ?>) v)
+			.visitBooleanLiteralExp(this);
 	}
 
 } //BooleanLiteralExpImpl

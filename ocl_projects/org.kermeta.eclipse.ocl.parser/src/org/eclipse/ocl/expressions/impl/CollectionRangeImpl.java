@@ -1,7 +1,7 @@
 /**
  * <copyright>
  * 
- * Copyright (c) 2006, 2007 IBM Corporation and others.
+ * Copyright (c) 2006, 2009 IBM Corporation, Zeligsoft Inc., and others.
  * All rights reserved.   This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -9,21 +9,25 @@
  * 
  * Contributors:
  *   IBM - Initial API and implementation
+ *   Zeligsoft - Bug 207365
  * 
  * </copyright>
  *
- * $Id: CollectionRangeImpl.java,v 1.1 2008-08-07 06:35:12 dvojtise Exp $
+ * $Id: CollectionRangeImpl.java,v 1.8 2009/01/23 17:16:04 cdamus Exp $
  */
 package org.eclipse.ocl.expressions.impl;
 
+import java.util.Map;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
+import org.eclipse.emf.common.util.DiagnosticChain;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.ocl.expressions.CollectionRange;
 import org.eclipse.ocl.expressions.ExpressionsPackage;
 import org.eclipse.ocl.expressions.OCLExpression;
+import org.eclipse.ocl.expressions.operations.CollectionRangeOperations;
 import org.eclipse.ocl.utilities.Visitor;
 
 /**
@@ -40,7 +44,10 @@ import org.eclipse.ocl.utilities.Visitor;
  *
  * @generated
  */
-public class CollectionRangeImpl<C> extends CollectionLiteralPartImpl<C> implements CollectionRange<C> {
+public class CollectionRangeImpl<C>
+		extends CollectionLiteralPartImpl<C>
+		implements CollectionRange<C> {
+
 	/**
 	 * The cached value of the '{@link #getFirst() <em>First</em>}' containment reference.
 	 * <!-- begin-user-doc -->
@@ -94,12 +101,18 @@ public class CollectionRangeImpl<C> extends CollectionLiteralPartImpl<C> impleme
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetFirst(OCLExpression<C> newFirst, NotificationChain msgs) {
+	public NotificationChain basicSetFirst(OCLExpression<C> newFirst,
+			NotificationChain msgs) {
 		OCLExpression<C> oldFirst = first;
 		first = newFirst;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, ExpressionsPackage.COLLECTION_RANGE__FIRST, oldFirst, newFirst);
-			if (msgs == null) msgs = notification; else msgs.add(notification);
+			ENotificationImpl notification = new ENotificationImpl(this,
+				Notification.SET, ExpressionsPackage.COLLECTION_RANGE__FIRST,
+				oldFirst, newFirst);
+			if (msgs == null)
+				msgs = notification;
+			else
+				msgs.add(notification);
 		}
 		return msgs;
 	}
@@ -113,14 +126,21 @@ public class CollectionRangeImpl<C> extends CollectionLiteralPartImpl<C> impleme
 		if (newFirst != first) {
 			NotificationChain msgs = null;
 			if (first != null)
-				msgs = ((InternalEObject)first).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - ExpressionsPackage.COLLECTION_RANGE__FIRST, null, msgs);
+				msgs = ((InternalEObject) first).eInverseRemove(this,
+					EOPPOSITE_FEATURE_BASE
+						- ExpressionsPackage.COLLECTION_RANGE__FIRST, null,
+					msgs);
 			if (newFirst != null)
-				msgs = ((InternalEObject)newFirst).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - ExpressionsPackage.COLLECTION_RANGE__FIRST, null, msgs);
+				msgs = ((InternalEObject) newFirst).eInverseAdd(this,
+					EOPPOSITE_FEATURE_BASE
+						- ExpressionsPackage.COLLECTION_RANGE__FIRST, null,
+					msgs);
 			msgs = basicSetFirst(newFirst, msgs);
-			if (msgs != null) msgs.dispatch();
-		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ExpressionsPackage.COLLECTION_RANGE__FIRST, newFirst, newFirst));
+			if (msgs != null)
+				msgs.dispatch();
+		} else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET,
+				ExpressionsPackage.COLLECTION_RANGE__FIRST, newFirst, newFirst));
 	}
 
 	/**
@@ -137,12 +157,18 @@ public class CollectionRangeImpl<C> extends CollectionLiteralPartImpl<C> impleme
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetLast(OCLExpression<C> newLast, NotificationChain msgs) {
+	public NotificationChain basicSetLast(OCLExpression<C> newLast,
+			NotificationChain msgs) {
 		OCLExpression<C> oldLast = last;
 		last = newLast;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, ExpressionsPackage.COLLECTION_RANGE__LAST, oldLast, newLast);
-			if (msgs == null) msgs = notification; else msgs.add(notification);
+			ENotificationImpl notification = new ENotificationImpl(this,
+				Notification.SET, ExpressionsPackage.COLLECTION_RANGE__LAST,
+				oldLast, newLast);
+			if (msgs == null)
+				msgs = notification;
+			else
+				msgs.add(notification);
 		}
 		return msgs;
 	}
@@ -156,23 +182,41 @@ public class CollectionRangeImpl<C> extends CollectionLiteralPartImpl<C> impleme
 		if (newLast != last) {
 			NotificationChain msgs = null;
 			if (last != null)
-				msgs = ((InternalEObject)last).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - ExpressionsPackage.COLLECTION_RANGE__LAST, null, msgs);
+				msgs = ((InternalEObject) last)
+					.eInverseRemove(this, EOPPOSITE_FEATURE_BASE
+						- ExpressionsPackage.COLLECTION_RANGE__LAST, null, msgs);
 			if (newLast != null)
-				msgs = ((InternalEObject)newLast).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - ExpressionsPackage.COLLECTION_RANGE__LAST, null, msgs);
+				msgs = ((InternalEObject) newLast)
+					.eInverseAdd(this, EOPPOSITE_FEATURE_BASE
+						- ExpressionsPackage.COLLECTION_RANGE__LAST, null, msgs);
 			msgs = basicSetLast(newLast, msgs);
-			if (msgs != null) msgs.dispatch();
-		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ExpressionsPackage.COLLECTION_RANGE__LAST, newLast, newLast));
+			if (msgs != null)
+				msgs.dispatch();
+		} else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET,
+				ExpressionsPackage.COLLECTION_RANGE__LAST, newLast, newLast));
 	}
 
-    /**
-     * @generated NOT
-     */
-    @Override
-    public <T, U extends Visitor<T, ?, ?, ?, ?, ?, ?, ?, ?, ?>> T accept(U v) {
-        return v.visitCollectionRange(this);
-    }
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean checkRangeType(DiagnosticChain diagnostics,
+			Map<Object, Object> context) {
+		return CollectionRangeOperations.checkRangeType(this, diagnostics,
+			context);
+	}
+
+	/**
+	 * @generated NOT
+	 */
+	@Override
+	@SuppressWarnings("unchecked")
+	public <T, U extends Visitor<T, ?, ?, ?, ?, ?, ?, ?, ?, ?>> T accept(U v) {
+		return ((Visitor<T, C, ?, ?, ?, ?, ?, ?, ?, ?>) v)
+			.visitCollectionRange(this);
+	}
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -180,11 +224,12 @@ public class CollectionRangeImpl<C> extends CollectionLiteralPartImpl<C> impleme
 	 * @generated
 	 */
 	@Override
-	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+	public NotificationChain eInverseRemove(InternalEObject otherEnd,
+			int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case ExpressionsPackage.COLLECTION_RANGE__FIRST:
+			case ExpressionsPackage.COLLECTION_RANGE__FIRST :
 				return basicSetFirst(null, msgs);
-			case ExpressionsPackage.COLLECTION_RANGE__LAST:
+			case ExpressionsPackage.COLLECTION_RANGE__LAST :
 				return basicSetLast(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -198,9 +243,9 @@ public class CollectionRangeImpl<C> extends CollectionLiteralPartImpl<C> impleme
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case ExpressionsPackage.COLLECTION_RANGE__FIRST:
+			case ExpressionsPackage.COLLECTION_RANGE__FIRST :
 				return getFirst();
-			case ExpressionsPackage.COLLECTION_RANGE__LAST:
+			case ExpressionsPackage.COLLECTION_RANGE__LAST :
 				return getLast();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -215,11 +260,11 @@ public class CollectionRangeImpl<C> extends CollectionLiteralPartImpl<C> impleme
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case ExpressionsPackage.COLLECTION_RANGE__FIRST:
-				setFirst((OCLExpression<C>)newValue);
+			case ExpressionsPackage.COLLECTION_RANGE__FIRST :
+				setFirst((OCLExpression<C>) newValue);
 				return;
-			case ExpressionsPackage.COLLECTION_RANGE__LAST:
-				setLast((OCLExpression<C>)newValue);
+			case ExpressionsPackage.COLLECTION_RANGE__LAST :
+				setLast((OCLExpression<C>) newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -233,11 +278,11 @@ public class CollectionRangeImpl<C> extends CollectionLiteralPartImpl<C> impleme
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case ExpressionsPackage.COLLECTION_RANGE__FIRST:
-				setFirst((OCLExpression<C>)null);
+			case ExpressionsPackage.COLLECTION_RANGE__FIRST :
+				setFirst((OCLExpression<C>) null);
 				return;
-			case ExpressionsPackage.COLLECTION_RANGE__LAST:
-				setLast((OCLExpression<C>)null);
+			case ExpressionsPackage.COLLECTION_RANGE__LAST :
+				setLast((OCLExpression<C>) null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -251,9 +296,9 @@ public class CollectionRangeImpl<C> extends CollectionLiteralPartImpl<C> impleme
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case ExpressionsPackage.COLLECTION_RANGE__FIRST:
+			case ExpressionsPackage.COLLECTION_RANGE__FIRST :
 				return first != null;
-			case ExpressionsPackage.COLLECTION_RANGE__LAST:
+			case ExpressionsPackage.COLLECTION_RANGE__LAST :
 				return last != null;
 		}
 		return super.eIsSet(featureID);

@@ -1,7 +1,7 @@
 /**
  * <copyright>
  * 
- * Copyright (c) 2006, 2007 IBM Corporation and others.
+ * Copyright (c) 2006, 2008 IBM Corporation, Zeligsoft Inc., and others.
  * All rights reserved.   This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -9,10 +9,11 @@
  * 
  * Contributors:
  *   IBM - Initial API and implementation
+ *   Zeligsoft - Bug 207365
  * 
  * </copyright>
  *
- * $Id: NavigationCallExpImpl.java,v 1.1 2008-08-07 06:35:11 dvojtise Exp $
+ * $Id: NavigationCallExpImpl.java,v 1.5 2008/10/12 01:09:49 cdamus Exp $
  */
 package org.eclipse.ocl.expressions.impl;
 
@@ -45,7 +46,10 @@ import org.eclipse.ocl.expressions.OCLExpression;
  *
  * @generated
  */
-public abstract class NavigationCallExpImpl<C, P> extends FeatureCallExpImpl<C> implements NavigationCallExp<C, P> {
+public abstract class NavigationCallExpImpl<C, P>
+		extends FeatureCallExpImpl<C>
+		implements NavigationCallExp<C, P> {
+
 	/**
 	 * The cached value of the '{@link #getQualifier() <em>Qualifier</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
@@ -92,7 +96,9 @@ public abstract class NavigationCallExpImpl<C, P> extends FeatureCallExpImpl<C> 
 	 */
 	public EList<OCLExpression<C>> getQualifier() {
 		if (qualifier == null) {
-			qualifier = new EObjectContainmentEList<OCLExpression<C>>(OCLExpression.class, this, ExpressionsPackage.NAVIGATION_CALL_EXP__QUALIFIER);
+			qualifier = new EObjectContainmentEList<OCLExpression<C>>(
+				OCLExpression.class, this,
+				ExpressionsPackage.NAVIGATION_CALL_EXP__QUALIFIER);
 		}
 		return qualifier;
 	}
@@ -104,12 +110,16 @@ public abstract class NavigationCallExpImpl<C, P> extends FeatureCallExpImpl<C> 
 	 */
 	@SuppressWarnings("unchecked")
 	public P getNavigationSource() {
-		if (navigationSource != null && ((EObject)navigationSource).eIsProxy()) {
-			InternalEObject oldNavigationSource = (InternalEObject)navigationSource;
-			navigationSource = (P)eResolveProxy(oldNavigationSource);
+		if (navigationSource != null && ((EObject) navigationSource).eIsProxy()) {
+			InternalEObject oldNavigationSource = (InternalEObject) navigationSource;
+			navigationSource = (P) eResolveProxy(oldNavigationSource);
 			if (navigationSource != oldNavigationSource) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ExpressionsPackage.NAVIGATION_CALL_EXP__NAVIGATION_SOURCE, oldNavigationSource, navigationSource));
+					eNotify(new ENotificationImpl(
+						this,
+						Notification.RESOLVE,
+						ExpressionsPackage.NAVIGATION_CALL_EXP__NAVIGATION_SOURCE,
+						oldNavigationSource, navigationSource));
 			}
 		}
 		return navigationSource;
@@ -133,7 +143,9 @@ public abstract class NavigationCallExpImpl<C, P> extends FeatureCallExpImpl<C> 
 		P oldNavigationSource = navigationSource;
 		navigationSource = newNavigationSource;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ExpressionsPackage.NAVIGATION_CALL_EXP__NAVIGATION_SOURCE, oldNavigationSource, navigationSource));
+			eNotify(new ENotificationImpl(this, Notification.SET,
+				ExpressionsPackage.NAVIGATION_CALL_EXP__NAVIGATION_SOURCE,
+				oldNavigationSource, navigationSource));
 	}
 
 	/**
@@ -142,10 +154,12 @@ public abstract class NavigationCallExpImpl<C, P> extends FeatureCallExpImpl<C> 
 	 * @generated
 	 */
 	@Override
-	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+	public NotificationChain eInverseRemove(InternalEObject otherEnd,
+			int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case ExpressionsPackage.NAVIGATION_CALL_EXP__QUALIFIER:
-				return ((InternalEList<?>)getQualifier()).basicRemove(otherEnd, msgs);
+			case ExpressionsPackage.NAVIGATION_CALL_EXP__QUALIFIER :
+				return ((InternalEList<?>) getQualifier()).basicRemove(
+					otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -158,10 +172,11 @@ public abstract class NavigationCallExpImpl<C, P> extends FeatureCallExpImpl<C> 
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case ExpressionsPackage.NAVIGATION_CALL_EXP__QUALIFIER:
+			case ExpressionsPackage.NAVIGATION_CALL_EXP__QUALIFIER :
 				return getQualifier();
-			case ExpressionsPackage.NAVIGATION_CALL_EXP__NAVIGATION_SOURCE:
-				if (resolve) return getNavigationSource();
+			case ExpressionsPackage.NAVIGATION_CALL_EXP__NAVIGATION_SOURCE :
+				if (resolve)
+					return getNavigationSource();
 				return basicGetNavigationSource();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -176,12 +191,13 @@ public abstract class NavigationCallExpImpl<C, P> extends FeatureCallExpImpl<C> 
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case ExpressionsPackage.NAVIGATION_CALL_EXP__QUALIFIER:
+			case ExpressionsPackage.NAVIGATION_CALL_EXP__QUALIFIER :
 				getQualifier().clear();
-				getQualifier().addAll((Collection<? extends OCLExpression<C>>)newValue);
+				getQualifier().addAll(
+					(Collection<? extends OCLExpression<C>>) newValue);
 				return;
-			case ExpressionsPackage.NAVIGATION_CALL_EXP__NAVIGATION_SOURCE:
-				setNavigationSource((P)newValue);
+			case ExpressionsPackage.NAVIGATION_CALL_EXP__NAVIGATION_SOURCE :
+				setNavigationSource((P) newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -195,11 +211,11 @@ public abstract class NavigationCallExpImpl<C, P> extends FeatureCallExpImpl<C> 
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case ExpressionsPackage.NAVIGATION_CALL_EXP__QUALIFIER:
+			case ExpressionsPackage.NAVIGATION_CALL_EXP__QUALIFIER :
 				getQualifier().clear();
 				return;
-			case ExpressionsPackage.NAVIGATION_CALL_EXP__NAVIGATION_SOURCE:
-				setNavigationSource((P)null);
+			case ExpressionsPackage.NAVIGATION_CALL_EXP__NAVIGATION_SOURCE :
+				setNavigationSource((P) null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -213,9 +229,9 @@ public abstract class NavigationCallExpImpl<C, P> extends FeatureCallExpImpl<C> 
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case ExpressionsPackage.NAVIGATION_CALL_EXP__QUALIFIER:
+			case ExpressionsPackage.NAVIGATION_CALL_EXP__QUALIFIER :
 				return qualifier != null && !qualifier.isEmpty();
-			case ExpressionsPackage.NAVIGATION_CALL_EXP__NAVIGATION_SOURCE:
+			case ExpressionsPackage.NAVIGATION_CALL_EXP__NAVIGATION_SOURCE :
 				return navigationSource != null;
 		}
 		return super.eIsSet(featureID);

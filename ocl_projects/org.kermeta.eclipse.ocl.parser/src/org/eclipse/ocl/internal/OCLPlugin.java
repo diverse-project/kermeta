@@ -1,25 +1,27 @@
 /**
  * <copyright>
- *
- * Copyright (c) 2006, 2007 IBM Corporation and others.
+ * 
+ * Copyright (c) 2006, 2008 IBM Corporation, Zeligsoft Inc., and others.
  * All rights reserved.   This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- *
+ * 
  * Contributors:
  *   IBM - Initial API and implementation
- *
+ *   Zeligsoft - Bugs 207365, 252000
+ *   E.D. Willink - Bug 252000
+ * 
  * </copyright>
  *
- * $Id: OCLPlugin.java,v 1.1 2008-08-07 06:35:15 dvojtise Exp $
+ * $Id: OCLPlugin.java,v 1.7 2008/11/24 00:22:39 cdamus Exp $
  */
 package org.eclipse.ocl.internal;
 
-import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.common.EMFPlugin;
+import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.common.util.ResourceLocator;
 import org.eclipse.ocl.Environment;
 import org.osgi.framework.BundleContext;
@@ -28,7 +30,7 @@ import org.osgi.framework.BundleContext;
  * The activator class controls the plug-in life cycle
  */
 public class OCLPlugin
-extends EMFPlugin {
+		extends EMFPlugin {
 
 	public static final String EMPTY_STRING = ""; //$NON-NLS-1$
 
@@ -43,12 +45,21 @@ extends EMFPlugin {
 	private static final String SEPARATOR_METHOD = "#"; //$NON-NLS-1$
 
 	private static final String PREFIX_CATCHING = "CAUGHT "; //$NON-NLS-1$
-	
+
 	//The shared instance.
-	private static OCLPlugin INSTANCE = new OCLPlugin();
+	public static OCLPlugin INSTANCE = new OCLPlugin();
 
 	//The shared Eclipse plug-in instance
 	private static Implementation plugin;
+
+	/**
+	 * In stand-alone use, whether all tracing is turned on.
+	 * This is compatible with the usage of 1.2 and earlier.
+	 * @since 1.3
+	 */
+	private static boolean traceAll = Boolean
+		.getBoolean("org.eclipse.ocl.debug"); //$NON-NLS-1$;
+
 	/**
 	 * The constructor.
 	 */
@@ -57,11 +68,13 @@ extends EMFPlugin {
 	}
 
 	public static String getPluginId() {
-		return (getPlugin() != null)? getPlugin().getBundle().getSymbolicName()
-				: "org.eclipse.ocl"; // last known bundle ID //$NON-NLS-1$
+		return (getPlugin() != null)
+			? getPlugin().getBundle().getSymbolicName()
+			: "org.eclipse.ocl"; // last known bundle ID //$NON-NLS-1$
 	}
 
 	// implements the inherited method
+	@Override
 	public ResourceLocator getPluginResourceLocator() {
 		return plugin;
 	}
@@ -82,13 +95,14 @@ extends EMFPlugin {
 		return INSTANCE;
 	}
 
-
 	/**
 	 * The definition of the Eclipse plug-in flavour of this EMF plug-in.
 	 * 
 	 * @author Christian W. Damus (cdamus)
 	 */
-	public static class Implementation extends EMFPlugin.EclipsePlugin {
+	public static class Implementation
+			extends EMFPlugin.EclipsePlugin {
+
 		/**
 		 * Initializes me with my Eclipse plug-in descriptor.
 		 */
@@ -99,17 +113,17 @@ extends EMFPlugin {
 			//
 			OCLPlugin.plugin = this;
 		}
-		
+
 		@Override
-		public void start(BundleContext context) throws Exception {
+		public void start(BundleContext context)
+				throws Exception {
 			super.start(context);
-			
-			/*EnvironmentRegistryImpl envreg =
-				((EnvironmentRegistryImpl) Environment.Registry.INSTANCE);
-			envreg.new RegistryReader(getInstance()).readRegistry();*/
+
+			EnvironmentRegistryImpl envreg = ((EnvironmentRegistryImpl) Environment.Registry.INSTANCE);
+			envreg.new RegistryReader(getInstance()).readRegistry();
 		}
 	}
-	
+
 	/**
 	 * Traces the catching of the specified throwable in the specified method of
 	 * the specified class.
@@ -123,21 +137,21 @@ extends EMFPlugin {
 	 *  
 	 */
 	public static void catching(Class<?> clazz, String methodName,
-		Throwable throwable) {
+			Throwable throwable) {
 		if (shouldTrace(OCLDebugOptions.EXCEPTIONS_CATCHING)) {
-			trace(PREFIX_CATCHING + throwable.getMessage()
-				+ SEPARATOR_SPACE + PARENTHESIS_OPEN + clazz.getName()
-				+ SEPARATOR_METHOD + methodName + PARENTHESIS_CLOSE);
+			trace(PREFIX_CATCHING + throwable.getMessage() + SEPARATOR_SPACE
+				+ PARENTHESIS_OPEN + clazz.getName() + SEPARATOR_METHOD
+				+ methodName + PARENTHESIS_CLOSE);
 			throwable.printStackTrace(System.err);
 		}
 	}
 
 	public static void throwing(Class<?> clazz, String methodName,
-		Throwable throwable) {
+			Throwable throwable) {
 		if (shouldTrace(OCLDebugOptions.EXCEPTIONS_THROWING)) {
-			trace(PREFIX_THROWING + throwable.getMessage()
-				+ SEPARATOR_SPACE + PARENTHESIS_OPEN + clazz.getName()
-				+ SEPARATOR_METHOD + methodName + PARENTHESIS_CLOSE);
+			trace(PREFIX_THROWING + throwable.getMessage() + SEPARATOR_SPACE
+				+ PARENTHESIS_OPEN + clazz.getName() + SEPARATOR_METHOD
+				+ methodName + PARENTHESIS_CLOSE);
 			throwable.printStackTrace(System.err);
 		}
 	}
@@ -146,28 +160,28 @@ extends EMFPlugin {
 		if (getPlugin() != null) {
 			if (getPlugin().isDebugging()) {
 				return Boolean.TRUE.toString().equalsIgnoreCase(
-						Platform.getDebugOption(option));
+					Platform.getDebugOption(option));
 			}
-			
+
 			return false;
 		}
-		
-		return Boolean.getBoolean("org.eclipse.ocl.debug"); //$NON-NLS-1$
+
+		return traceAll || Boolean.getBoolean(option);
 	}
-    
-    /**
-     * Emits the specified message to the trace log.  It is the caller's
-     * responsibility to ensure that the appropriate tracing option
-     * is enabled.
-     * 
-     * @param message a message
-     * 
-     * @see #shouldTrace(String)
-     */
-    public static void trace(String message) {
-        System.out.println("[OCL] " + message); //$NON-NLS-1$
-    }
-    
+
+	/**
+	 * Emits the specified message to the trace log.  It is the caller's
+	 * responsibility to ensure that the appropriate tracing option
+	 * is enabled.
+	 * 
+	 * @param message a message
+	 * 
+	 * @see #shouldTrace(String)
+	 */
+	public static void trace(String message) {
+		System.out.println("[OCL] " + message); //$NON-NLS-1$
+	}
+
 	/**
 	 * Generates an error log for the specified plug-in, with the specified
 	 * status code, message.
@@ -195,7 +209,7 @@ extends EMFPlugin {
 	 *  
 	 */
 	public static void error(int code, String message, Throwable throwable) {
-		log(IStatus.ERROR, code, message, throwable);
+		log(Diagnostic.ERROR, code, message, throwable);
 	}
 
 	/**
@@ -237,7 +251,7 @@ extends EMFPlugin {
 	 *  
 	 */
 	public static void info(int code, String message, Throwable throwable) {
-		log(IStatus.INFO, code, message, throwable);
+		log(Diagnostic.INFO, code, message, throwable);
 	}
 
 	/**
@@ -267,14 +281,15 @@ extends EMFPlugin {
 	 *  
 	 */
 	public static void warning(int code, String message, Throwable throwable) {
-		log(IStatus.WARNING, code, message, throwable);
+		log(Diagnostic.WARNING, code, message, throwable);
 	}
 
 	public static void log(int severity, int code, String message,
-		Throwable throwable) {
+			Throwable throwable) {
 		//
 		// Status ctor requires a non-null message
-		String msg = message == null ? "" //$NON-NLS-1$
+		String msg = message == null
+			? "" //$NON-NLS-1$
 			: message;
 
 		try {
@@ -286,22 +301,22 @@ extends EMFPlugin {
 				// not in the Eclipse environment
 				if (shouldTrace(OCLDebugOptions.DEBUG)) {
 					switch (code) {
-					case IStatus.WARNING:
-						System.err.print("WARNING "); //$NON-NLS-1$
-						break;
-					case IStatus.ERROR:
-					case IStatus.CANCEL:
-						System.err.print("ERROR "); //$NON-NLS-1$
-						break;
-					default:
-						// don't output INFO or OK messages
-						return;
+						case Diagnostic.WARNING :
+							System.err.print("WARNING "); //$NON-NLS-1$
+							break;
+						case Diagnostic.ERROR :
+						case Diagnostic.CANCEL :
+							System.err.print("ERROR "); //$NON-NLS-1$
+							break;
+						default :
+							// don't output INFO or OK messages
+							return;
 					}
-					
+
 					System.err.print(code);
 					System.err.print(": "); //$NON-NLS-1$
 					System.err.println(message);
-					
+
 					if (throwable != null) {
 						throwable.printStackTrace(System.err);
 					}

@@ -1,7 +1,7 @@
 /**
  * <copyright>
  * 
- * Copyright (c) 2006, 2007 IBM Corporation and others.
+ * Copyright (c) 2006, 2008 IBM Corporation, Zeligsoft Inc., and others.
  * All rights reserved.   This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -9,10 +9,11 @@
  * 
  * Contributors:
  *   IBM - Initial API and implementation
+ *   Zeligsoft - Bug 207365
  * 
  * </copyright>
  *
- * $Id: TypeTypeImpl.java,v 1.1 2008-08-07 06:35:15 dvojtise Exp $
+ * $Id: TypeTypeImpl.java,v 1.7 2008/11/24 00:21:26 cdamus Exp $
  */
 package org.eclipse.ocl.types.impl;
 
@@ -27,6 +28,8 @@ import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.eclipse.ocl.Environment;
 import org.eclipse.ocl.types.TypeType;
 import org.eclipse.ocl.types.TypesPackage;
+
+//import org.eclipse.ocl.types.operations.TypeTypeOperations;
 import org.eclipse.ocl.util.OCLStandardLibraryUtil;
 
 /**
@@ -42,7 +45,10 @@ import org.eclipse.ocl.util.OCLStandardLibraryUtil;
  *
  * @generated
  */
-public class TypeTypeImpl<C, O> extends EObjectImpl implements TypeType<C, O> {
+public class TypeTypeImpl<C, O>
+		extends EObjectImpl
+		implements TypeType<C, O> {
+
 	/**
 	 * The cached value of the '{@link #getReferredType() <em>Referred Type</em>}' reference.
 	 * <!-- begin-user-doc -->
@@ -54,8 +60,9 @@ public class TypeTypeImpl<C, O> extends EObjectImpl implements TypeType<C, O> {
 	protected C referredType;
 
 	private String name;
+
 	private EList<O> operations;
-	
+
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -68,7 +75,7 @@ public class TypeTypeImpl<C, O> extends EObjectImpl implements TypeType<C, O> {
 	protected TypeTypeImpl(C type) {
 		this.referredType = type;
 	}
-	
+
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -86,12 +93,12 @@ public class TypeTypeImpl<C, O> extends EObjectImpl implements TypeType<C, O> {
 	 */
 	public String getName() {
 		if (name == null) {
-			Environment<?, ?, O, ?, ?, ?, ?, ?, ?, ?, ?, ?> env =
-				Environment.Registry.INSTANCE.getEnvironmentFor(this);
-			
+			Environment<?, ?, O, ?, ?, ?, ?, ?, ?, ?, ?, ?> env = Environment.Registry.INSTANCE
+				.getEnvironmentFor(this);
+
 			name = env.getUMLReflection().getName(getReferredType());
 		}
-		
+
 		return name;
 	}
 
@@ -102,13 +109,13 @@ public class TypeTypeImpl<C, O> extends EObjectImpl implements TypeType<C, O> {
 	 */
 	public EList<O> oclOperations() {
 		if (operations == null) {
-			Environment<?, ?, O, ?, ?, ?, ?, ?, ?, ?, ?, ?> env =
-				Environment.Registry.INSTANCE.getEnvironmentFor(this);
-			
-			operations = new BasicEList<O>(
-					OCLStandardLibraryUtil.createTypeTypeOperations(env));
+			Environment<?, ?, O, ?, ?, ?, ?, ?, ?, ?, ?, ?> env = Environment.Registry.INSTANCE
+				.getEnvironmentFor(this);
+
+			operations = new BasicEList<O>(OCLStandardLibraryUtil
+				.createTypeTypeOperations(env));
 		}
-		
+
 		return operations;
 	}
 
@@ -119,12 +126,14 @@ public class TypeTypeImpl<C, O> extends EObjectImpl implements TypeType<C, O> {
 	 */
 	@SuppressWarnings("unchecked")
 	public C getReferredType() {
-		if (referredType != null && ((EObject)referredType).eIsProxy()) {
-			InternalEObject oldReferredType = (InternalEObject)referredType;
-			referredType = (C)eResolveProxy(oldReferredType);
+		if (referredType != null && ((EObject) referredType).eIsProxy()) {
+			InternalEObject oldReferredType = (InternalEObject) referredType;
+			referredType = (C) eResolveProxy(oldReferredType);
 			if (referredType != oldReferredType) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, TypesPackage.TYPE_TYPE__REFERRED_TYPE, oldReferredType, referredType));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE,
+						TypesPackage.TYPE_TYPE__REFERRED_TYPE, oldReferredType,
+						referredType));
 			}
 		}
 		return referredType;
@@ -141,17 +150,19 @@ public class TypeTypeImpl<C, O> extends EObjectImpl implements TypeType<C, O> {
 
 	/**
 	 * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    public void setReferredType(C newReferredType) {
+	public void setReferredType(C newReferredType) {
 		C oldReferredType = referredType;
 		referredType = newReferredType;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, TypesPackage.TYPE_TYPE__REFERRED_TYPE, oldReferredType, referredType));
+			eNotify(new ENotificationImpl(this, Notification.SET,
+				TypesPackage.TYPE_TYPE__REFERRED_TYPE, oldReferredType,
+				referredType));
 	}
 
-    /**
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -159,8 +170,9 @@ public class TypeTypeImpl<C, O> extends EObjectImpl implements TypeType<C, O> {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case TypesPackage.TYPE_TYPE__REFERRED_TYPE:
-				if (resolve) return getReferredType();
+			case TypesPackage.TYPE_TYPE__REFERRED_TYPE :
+				if (resolve)
+					return getReferredType();
 				return basicGetReferredType();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -168,36 +180,36 @@ public class TypeTypeImpl<C, O> extends EObjectImpl implements TypeType<C, O> {
 
 	/**
 	 * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @SuppressWarnings("unchecked")
-    @Override
-    public void eSet(int featureID, Object newValue) {
+	@SuppressWarnings("unchecked")
+	@Override
+	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case TypesPackage.TYPE_TYPE__REFERRED_TYPE:
-				setReferredType((C)newValue);
+			case TypesPackage.TYPE_TYPE__REFERRED_TYPE :
+				setReferredType((C) newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
 	}
 
-    /**
+	/**
 	 * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public void eUnset(int featureID) {
+	@Override
+	public void eUnset(int featureID) {
 		switch (featureID) {
-			case TypesPackage.TYPE_TYPE__REFERRED_TYPE:
-				setReferredType((C)null);
+			case TypesPackage.TYPE_TYPE__REFERRED_TYPE :
+				setReferredType((C) null);
 				return;
 		}
 		super.eUnset(featureID);
 	}
 
-    /**
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -205,7 +217,7 @@ public class TypeTypeImpl<C, O> extends EObjectImpl implements TypeType<C, O> {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case TypesPackage.TYPE_TYPE__REFERRED_TYPE:
+			case TypesPackage.TYPE_TYPE__REFERRED_TYPE :
 				return referredType != null;
 		}
 		return super.eIsSet(featureID);

@@ -1,7 +1,7 @@
 /**
  * <copyright> 
  *
- * Copyright (c) 2005, 2007 IBM Corporation and others.
+ * Copyright (c) 2005, 2008 IBM Corporation and others.
  * All rights reserved.   This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -9,10 +9,11 @@
  * 
  * Contributors: 
  *   IBM - Initial API and implementation
+ *   Adolfo Sánchez-Barbudo Herrera - 222581 generic collection type resolution
  *
  * </copyright>
  *
- * $Id: AbstractTypeResolver.java,v 1.1 2008-08-07 06:35:17 dvojtise Exp $
+ * $Id: AbstractTypeResolver.java,v 1.12 2008/04/24 23:37:20 cdamus Exp $
  */
 package org.eclipse.ocl;
 
@@ -28,11 +29,16 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.impl.ResourceImpl;
 import org.eclipse.ocl.expressions.CollectionKind;
 import org.eclipse.ocl.expressions.Variable;
+import org.eclipse.ocl.types.BagType;
 import org.eclipse.ocl.types.CollectionType;
 import org.eclipse.ocl.types.MessageType;
+import org.eclipse.ocl.types.OrderedSetType;
+import org.eclipse.ocl.types.SequenceType;
+import org.eclipse.ocl.types.SetType;
 import org.eclipse.ocl.types.TupleType;
 import org.eclipse.ocl.types.TypeType;
 import org.eclipse.ocl.types.util.TypesSwitch;
+import org.eclipse.ocl.util.ObjectUtil;
 import org.eclipse.ocl.util.TypeUtil;
 import org.eclipse.ocl.utilities.OCLFactory;
 import org.eclipse.ocl.utilities.TypedElement;
@@ -70,12 +76,24 @@ public abstract class AbstractTypeResolver<PK, C, O, P, PM>
     private final UMLReflection<PK, C, O, P, ?, PM, ?, ?, ?, ?> uml;
     
 	private Resource resource;
+	
+	// whether I should dispose my resource because I created it
+	private boolean shouldDisposeResource;
+	
 	private PK collectionPackage;
 	private PK tuplePackage;
 	private PK typePackage;
 	private PK messagePackage;
 	private PK additionalFeaturesPackage;
 	
+	private CollectionType<C, O> collection;
+	private SetType<C, O> set;
+	private OrderedSetType<C, O> orderedSet;
+	private BagType<C, O> bag;
+	private SequenceType<C, O> sequence;
+	private TypeType<C, O> oclType;
+	private MessageType<C, O, P> oclMessage;
+
 	/**
 	 * Initializes me with an environment.  I create my own resource for
      * persistence of model-based types.
@@ -106,7 +124,14 @@ public abstract class AbstractTypeResolver<PK, C, O, P, PM>
 	
 	// Documentation copied from the inherited specification
 	public C resolve(C type) {
-		return (type == null)? type : resolveSwitch.doSwitch((EObject) type);
+		C result = (type == null)? type : resolveSwitch.doSwitch((EObject) type);
+		
+		if ((result != null) && (result != type)) {
+		    // dispose the old type; it won't be used
+		    ObjectUtil.dispose(type);
+		}
+		
+		return result;
 	}
 	
     /**
@@ -121,6 +146,8 @@ public abstract class AbstractTypeResolver<PK, C, O, P, PM>
 	// Documentation copied from the inherited specification
 	public Resource getResource() {
 		if (resource == null) {
+		    // because we are creating the resource, we should dispose it
+		    shouldDisposeResource = true;
 			resource = createResource();
 		}
 		
@@ -181,13 +208,85 @@ public abstract class AbstractTypeResolver<PK, C, O, P, PM>
 			CollectionKind kind,
 			C elementType) {
 		
-		CollectionType<C, O> result = findCollectionType(kind, elementType);
+	    CollectionType<C, O> result;
+	    
+		if (elementType == getCollection().getElementType()) {
+			switch (kind) {
+				case SET_LITERAL :
+				    result = getSet();
+				    break;
+				case ORDERED_SET_LITERAL:
+				    result = getOrderedSet();
+                    break;
+				case SEQUENCE_LITERAL:
+				    result = getSequence();
+                    break;
+				case BAG_LITERAL:
+				    result = getBag();
+                    break;
+				default:
+				    result = getCollection();
+				    break;
+			}
+		} else {
+    		result = findCollectionType(kind, elementType);
+		}
 		
 		if (result == null) {
 			result = createCollectionType(kind, elementType);
 		}
 		
 		return result;
+	}
+	
+	@SuppressWarnings("unchecked")
+	private CollectionType<C, O> getCollection() {
+		if (collection == null) {
+			collection = (CollectionType<C, O>) getEnvironment().getOCLStandardLibrary()
+					.getCollection();
+		}
+		
+		return collection;
+	}
+	
+	@SuppressWarnings("unchecked")
+	private SetType<C, O> getSet() {
+		if (set == null) {
+			set = (SetType<C, O>) getEnvironment().getOCLStandardLibrary()
+					.getSet();
+		}
+		
+		return set;
+	}
+	
+	@SuppressWarnings("unchecked")
+	private OrderedSetType<C, O> getOrderedSet() {
+		if (orderedSet == null) {
+			orderedSet = (OrderedSetType<C, O>) getEnvironment().getOCLStandardLibrary()
+					.getOrderedSet();
+		}
+		
+		return orderedSet;
+	}
+	
+	@SuppressWarnings("unchecked")
+	private SequenceType<C, O> getSequence() {
+		if (sequence == null) {
+			sequence = (SequenceType<C, O>) getEnvironment().getOCLStandardLibrary()
+					.getSequence();
+		}
+		
+		return sequence;
+	}
+	
+	@SuppressWarnings("unchecked")
+	private BagType<C, O> getBag() {
+		if (bag == null) {
+			bag = (BagType<C, O>) getEnvironment().getOCLStandardLibrary()
+					.getBag();
+		}
+		
+		return bag;
 	}
 	
 	/**
@@ -324,6 +423,8 @@ public abstract class AbstractTypeResolver<PK, C, O, P, PM>
     				(TupleType<O, P>) next;
     			
     			if (type.oclProperties().size() == parts.size()) {
+    			    boolean match = true;
+    			    
     				for (TypedElement<C> part : parts) {
                         @SuppressWarnings("unchecked")
     					P property = env.lookupProperty((C) type, part.getName());
@@ -331,15 +432,18 @@ public abstract class AbstractTypeResolver<PK, C, O, P, PM>
     					if ((property == null) ||
     							(TypeUtil.getRelationship(
     									env,
-    									uml.getOCLType(property),
+    									resolve(uml.getOCLType(property)),
     									part.getType()) != UMLReflection.SAME_TYPE)) {
     						// this isn't the tuple type we're looking for
+    					    match = false;
     						break;
     					}
     				}
     				
-    				// this must be the tuple type we're looking for
-    				return type;
+    				if (match) {
+        				// this must be the tuple type we're looking for
+        				return type;
+    				}
     			}
             }
 		}
@@ -385,6 +489,11 @@ public abstract class AbstractTypeResolver<PK, C, O, P, PM>
 	
 	// Documentation copied from the inherited specification
 	public TypeType<C, O> resolveTypeType(C type) {
+		if (type == getOclType().getReferredType()) {
+			// this is the canonical OclType instance
+			return getOclType();
+		}
+		
 		TypeType<C, O> result = findTypeType(type);
 		
 		if (result == null) {
@@ -392,6 +501,16 @@ public abstract class AbstractTypeResolver<PK, C, O, P, PM>
 		}
 		
 		return result;
+	}
+	
+	@SuppressWarnings("unchecked")
+	private TypeType<C, O> getOclType() {
+		if (oclType == null) {
+			oclType = (TypeType<C, O>) getEnvironment().getOCLStandardLibrary()
+					.getOclType();
+		}
+		
+		return oclType;
 	}
 	
 	/**
@@ -477,6 +596,11 @@ public abstract class AbstractTypeResolver<PK, C, O, P, PM>
 	
 	// Documentation copied from the inherited specification
 	public MessageType<C, O, P> resolveOperationMessageType(O operation) {
+		if (operation == getOclMessage().getReferredOperation()) {
+			// this is the canonical OclMessage type
+			return getOclMessage();
+		}
+		
 		MessageType<C, O, P> result = findMessageType(operation);
 		
 		if (result == null) {
@@ -488,6 +612,11 @@ public abstract class AbstractTypeResolver<PK, C, O, P, PM>
 	
 	// Documentation copied from the inherited specification
 	public MessageType<C, O, P> resolveSignalMessageType(C signal) {
+		if (signal == getOclMessage().getReferredSignal()) {
+			// this is the canonical OclMessage type
+			return getOclMessage();
+		}
+		
 		MessageType<C, O, P> result = findMessageType(signal);
 		
 		if (result == null) {
@@ -495,6 +624,16 @@ public abstract class AbstractTypeResolver<PK, C, O, P, PM>
 		}
 		
 		return result;
+	}
+	
+	@SuppressWarnings("unchecked")
+	private MessageType<C, O, P> getOclMessage() {
+		if (oclMessage == null) {
+			oclMessage = (MessageType<C, O, P>) getEnvironment().getOCLStandardLibrary()
+					.getOclMessage();
+		}
+		
+		return oclMessage;
 	}
 	
 	/**
@@ -664,8 +803,8 @@ public abstract class AbstractTypeResolver<PK, C, O, P, PM>
 				if (!uml.getName(aparm).equals(uml.getName(bparm))
 						|| TypeUtil.getRelationship(
 								env,
-								uml.getOCLType(aparm),
-                                uml.getOCLType(bparm))
+								resolve(uml.getOCLType(aparm)),
+								resolve(uml.getOCLType(bparm)))
 							!= UMLReflection.SAME_TYPE) {
 					
 					return false;
@@ -719,7 +858,10 @@ public abstract class AbstractTypeResolver<PK, C, O, P, PM>
      * @return whether I have any additional features 
      */
     protected boolean hasAdditionalFeatures() {
-        return additionalFeaturesPackage != null;
+        // if I was loaded from an existing resource, I may not yet have looked
+        // for my additional-features package
+        return (additionalFeaturesPackage != null)
+            || (findAdditionalFeaturesPackage() != null);
     }
     
 	public List<P> getAdditionalAttributes(C owner) {
@@ -890,7 +1032,8 @@ public abstract class AbstractTypeResolver<PK, C, O, P, PM>
          * @param object a classifier
          * @return the same classifier
          */
-		public C defaultCase(EObject object) {
+		@Override
+        public C defaultCase(EObject object) {
 			return (C) object;
 		}
 		
@@ -911,4 +1054,25 @@ public abstract class AbstractTypeResolver<PK, C, O, P, PM>
 			return result;
 		}
 	}
+    
+    /**
+     * Disposes me by unloading my resource, if and only if I created it in
+     * the first place.  If I was loaded from an existing resource, then it is
+     * the client's responsibility to manage it.
+     * 
+     * @since 1.2
+     */
+    public void dispose() {
+        if (shouldDisposeResource && (resource != null)) {
+            if (resource.isLoaded()) {
+                resource.unload();
+            }
+            
+            if (resource.getResourceSet() != null) {
+                resource.getResourceSet().getResources().remove(resource);
+            }
+            
+            resource = null;
+        }
+    }
 }

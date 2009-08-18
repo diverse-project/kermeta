@@ -1,7 +1,7 @@
 /**
  * <copyright>
  * 
- * Copyright (c) 2006, 2007 IBM Corporation and others.
+ * Copyright (c) 2006, 2008 IBM Corporation, Zeligsoft Inc., and others.
  * All rights reserved.   This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -9,13 +9,16 @@
  * 
  * Contributors:
  *   IBM - Initial API and implementation
+ *   Zeligsoft - Bug 207365
  * 
  * </copyright>
  *
- * $Id: EnumLiteralExp.java,v 1.1 2008-08-07 06:35:16 dvojtise Exp $
+ * $Id: EnumLiteralExp.java,v 1.7 2008/11/30 22:11:38 cdamus Exp $
  */
 package org.eclipse.ocl.expressions;
 
+import java.util.Map;
+import org.eclipse.emf.common.util.DiagnosticChain;
 
 /**
  * <!-- begin-user-doc -->
@@ -32,8 +35,12 @@ package org.eclipse.ocl.expressions;
  * @see org.eclipse.ocl.expressions.ExpressionsPackage#getEnumLiteralExp()
  * @model
  * @generated
+ * @noimplement This interface is not intended to be implemented by clients.
+ * @noextend This interface is not intended to be extended by clients.
  */
-public interface EnumLiteralExp<C, EL> extends LiteralExp<C> {
+public interface EnumLiteralExp<C, EL>
+		extends LiteralExp<C> {
+
 	/**
 	 * Returns the value of the '<em><b>Referred Enum Literal</b></em>' reference.
 	 * <!-- begin-user-doc -->
@@ -45,7 +52,7 @@ public interface EnumLiteralExp<C, EL> extends LiteralExp<C> {
 	 * @return the value of the '<em>Referred Enum Literal</em>' reference.
 	 * @see #setReferredEnumLiteral(Object)
 	 * @see org.eclipse.ocl.expressions.ExpressionsPackage#getEnumLiteralExp_ReferredEnumLiteral()
-	 * @model
+	 * @model kind="reference"
 	 * @generated
 	 */
 	EL getReferredEnumLiteral();
@@ -59,5 +66,19 @@ public interface EnumLiteralExp<C, EL> extends LiteralExp<C> {
 	 * @generated
 	 */
 	void setReferredEnumLiteral(EL value);
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * self.type = referredEnumLiteral.enumeration
+	 * @param diagnostics The chain of diagnostics to which problems are to be appended.
+	 * @param context The cache of context-specific information.
+	 * <!-- end-model-doc -->
+	 * @model
+	 * @generated
+	 */
+	boolean checkEnumType(DiagnosticChain diagnostics,
+			Map<Object, Object> context);
 
 } // EnumLiteralExp

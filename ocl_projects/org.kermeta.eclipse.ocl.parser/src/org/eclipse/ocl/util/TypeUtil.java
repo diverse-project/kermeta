@@ -1,7 +1,7 @@
 /**
  * <copyright>
  *
- * Copyright (c) 2006, 2007 IBM Corporation and others.
+ * Copyright (c) 2006, 2008 IBM Corporation, Zeligsoft Inc., and others.
  * All rights reserved.   This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -9,46 +9,38 @@
  *
  * Contributors:
  *   IBM - Initial API and implementation
- *
+ *   E.D.Willink - Refactoring to support extensibility and flexible error handling
+ *   Zeligsoft - Bugs 244886, 245619, 233673, 179990, 242236
+ *   Stefan Schulze - Bug 245619
+ *   Adolfo Sánchez-Barbudo Herrera - Bug 233673
+ * 
  * </copyright>
  * 
- * $Id: TypeUtil.java,v 1.1 2008-08-07 06:35:17 dvojtise Exp $
+ * $Id: TypeUtil.java,v 1.16 2008/11/13 02:31:38 cdamus Exp $
  */
 package org.eclipse.ocl.util;
 
 import static org.eclipse.ocl.utilities.UMLReflection.SAME_TYPE;
 import static org.eclipse.ocl.utilities.UMLReflection.STRICT_SUBTYPE;
 import static org.eclipse.ocl.utilities.UMLReflection.STRICT_SUPERTYPE;
-import static org.eclipse.ocl.utilities.UMLReflection.SUBTYPE;
-import static org.eclipse.ocl.utilities.UMLReflection.UNRELATED_TYPE;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Iterator;
 import java.util.List;
 
-import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.ENamedElement;
 import org.eclipse.ocl.Environment;
 import org.eclipse.ocl.SemanticException;
+import org.eclipse.ocl.TypeChecker;
 import org.eclipse.ocl.expressions.CollectionKind;
-import org.eclipse.ocl.expressions.OCLExpression;
-import org.eclipse.ocl.expressions.TypeExp;
-import org.eclipse.ocl.expressions.UnspecifiedValueExp;
 import org.eclipse.ocl.expressions.Variable;
 import org.eclipse.ocl.internal.OCLPlugin;
 import org.eclipse.ocl.internal.l10n.OCLMessages;
-import org.eclipse.ocl.internal.parser.OCLParser;
 import org.eclipse.ocl.types.AnyType;
 import org.eclipse.ocl.types.CollectionType;
-import org.eclipse.ocl.types.MessageType;
 import org.eclipse.ocl.types.OCLStandardLibrary;
 import org.eclipse.ocl.types.PrimitiveType;
-import org.eclipse.ocl.types.TupleType;
 import org.eclipse.ocl.types.TypeType;
-import org.eclipse.ocl.utilities.OCLFactory;
-import org.eclipse.ocl.utilities.PredefinedType;
 import org.eclipse.ocl.utilities.TypedElement;
 import org.eclipse.ocl.utilities.UMLReflection;
 
@@ -62,7 +54,7 @@ import org.eclipse.ocl.utilities.UMLReflection;
  * @author Christian W. Damus (cdamus)
  */
 public class TypeUtil {
-	
+		
 	/**
 	 * Not instantiable
 	 */
@@ -87,7 +79,8 @@ public class TypeUtil {
 	}
 
 	/**
-	 * Finds an operation by signature in the specified classifier.
+	 * Finds the most specific (re)definition of an operation by signature in the
+	 * specified classifier.
 	 * 
      * @param env the OCL environment
 	 * @param owner the classifier to search
@@ -103,21 +96,7 @@ public class TypeUtil {
 			C owner, String name,
 			List<? extends TypedElement<C>> args) {
 
-		if (args == null) {
-			args = Collections.emptyList();
-		}
-
-        UMLReflection<PK, C, O, P, EL, PM, S, COA, SSA, CT> uml = env.getUMLReflection();
-		List<O> operations = getOperations(env, owner);
-		
-		for (O oper : operations) {
-			if (uml.getName(oper).equals(name) &&
-					matchArgs(env, owner, uml.getParameters(oper), args))
-				return oper;
-
-		}
-		
-		return null;
+		return getTypeCheckerAdapter(env).findOperationMatching(owner, name, args);
 	}
 
 	/**
@@ -137,20 +116,7 @@ public class TypeUtil {
 			C receiver, List<C> signals, String name,
 			List<? extends TypedElement<C>> args) {
 
-		if (args == null) {
-			args = Collections.emptyList();
-		}
-		
-        UMLReflection<PK, C, O, P, EL, PM, S, COA, SSA, CT> uml = env.getUMLReflection();
-
-        for (C signal : signals) {
-			if (uml.getName(signal).equals(name)
-					&& matchArgs(env, receiver, uml.getAttributes(signal), args)) {
-				return signal;
-			}
-		}
-		
-		return null;
+		return getTypeCheckerAdapter(env).findSignalMatching(receiver, signals, name, args);		
 	}
 	
 	/**
@@ -167,62 +133,45 @@ public class TypeUtil {
 	List<O> getOperations(
 			Environment<PK, C, O, P, EL, PM, S, COA, SSA, CT, CLS, E> env,
 			C owner) {
-		List<O> result;
 		
-        UMLReflection<PK, C, O, P, EL, PM, S, COA, SSA, CT> uml = env.getUMLReflection();
-
-		if (owner instanceof TypeType) {
-			@SuppressWarnings("unchecked")
-			TypeType<C, O> source = (TypeType<C, O>) owner;
-			result = new java.util.ArrayList<O>(source.oclOperations());
-			
-			// also include the static operations of the referred type
-			for (O o : getOperations(env, source.getReferredType())) {
-				if (uml.isStatic(o)) {
-					result.add(o);
-				}
-			}
-			
-			result = Collections.unmodifiableList(result);
-		} else {
-            if (owner instanceof PredefinedType) {
-    			@SuppressWarnings("unchecked")
-    			PredefinedType<O> source = (PredefinedType<O>) owner;
-    			result = new ArrayList<O>(source.oclOperations());
-    		} else {
-    			// it's a user type.  Try to convert it to an OCL standard type
-    			owner = uml.asOCLType(owner);
-    			
-    			if (owner instanceof PredefinedType) {
-    				@SuppressWarnings("unchecked")
-    				PredefinedType<O> pt = (PredefinedType<O>) owner;
-    				result = new ArrayList<O>(pt.oclOperations());
-    			} else {
-    				result = new ArrayList<O>();
-    				
-    				// Include both the AnyType operations (oclIsKindOf, etc)
-    				// and the operations of the class itself.
-    				
-    				@SuppressWarnings("unchecked")
-    				AnyType<O> oclAny = (AnyType<O>) env.getOCLStandardLibrary().getOclAny();
-    				
-    				result.addAll(uml.getOperations(owner));
-                    
-    				result.addAll(oclAny.oclOperations());
-    			}
-            }
-            
-            List<O> additionalOperations = env.getAdditionalOperations(owner);
-            if (additionalOperations != null && !additionalOperations.isEmpty()) {
-                result.addAll(additionalOperations);
-            }
-            
-            result = Collections.unmodifiableList(result);
-		}
-		
-		return result;
+		return getTypeCheckerAdapter(env).getOperations(owner);
 	}
 	
+	/**
+	 * Null-safe alternative to {@link ENamedElement#getName()}.
+	 * 
+	 * @param element a named element that may be <code>null</code>
+	 * @return the element's name, or <code>null</code> if the element is <code>null</code>
+	 */
+	private static <PK, C, O, P, EL, PM, S, COA, SSA, CT, CLS, E>
+	String getName(
+			Environment<PK, C, O, P, EL, PM, S, COA, SSA, CT, CLS, E> env,
+			Object element) {
+		return (element == null)? null : env.getUMLReflection().getName(element);
+	}
+
+	/**
+	 * Finds the most specific (re)definition of an attribute in the specified
+	 * classifier.
+	 * 
+     * @param env the OCL environment
+	 * @param owner the classifier to search
+	 * @param name the name of the operation
+	 * @param args a list of arguments to match against the operation signature,
+     *     as either expressions or variables
+	 * 
+	 * @return the matching operation, or <code>null</code> if not found
+	 * 
+	 * @since 1.3
+	 */
+	public static <PK, C, O, P, EL, PM, S, COA, SSA, CT, CLS, E>
+	P findAttribute(
+			Environment<PK, C, O, P, EL, PM, S, COA, SSA, CT, CLS, E> env,
+			C owner, String name) {
+
+		return getTypeCheckerAdapter(env).findAttribute(owner, name);
+	}
+		
     /**
      * Obtains all of the OCL attributes applicable to the specified owner type,
      * including any that were defined in the OCL environment as additional
@@ -232,45 +181,12 @@ public class TypeUtil {
      * @param owner the attribute owner type
      * 
      * @return an unmodifiable list of its attributes
-     */
+     */	
 	public static <PK, C, O, P, EL, PM, S, COA, SSA, CT, CLS, E>
 	List<P> getAttributes(
 			Environment<PK, C, O, P, EL, PM, S, COA, SSA, CT, CLS, E> env,
 			C owner) {
-		List<P> result;
-		
-        UMLReflection<PK, C, O, P, EL, PM, S, COA, SSA, CT> uml = env.getUMLReflection();
-
-		if (owner instanceof TypeType) {
-			@SuppressWarnings("unchecked")
-			TypeType<C, O> source = (TypeType<C, O>) owner;
-			result = new java.util.ArrayList<P>();
-			
-			// include the static properties of the referred type
-			for (P p : getAttributes(env, source.getReferredType())) {
-				if (uml.isStatic(p)) {
-					result.add(p);
-				}
-			}
-			
-			result = Collections.unmodifiableList(result);
-		} else {
-            if (!(owner instanceof PredefinedType)) { 
-                // it's a user type.  Try to convert it to an OCL standard type
-                owner = uml.asOCLType(owner);
-            }
-            
-			result = new java.util.ArrayList<P>(uml.getAttributes(owner));
-            
-            List<P> additionalProperties = env.getAdditionalAttributes(owner);
-            if (additionalProperties != null && !additionalProperties.isEmpty()) {
-                result.addAll(additionalProperties);
-            }
-            
-            result = Collections.unmodifiableList(result);
-		}
-		
-		return result;
+		return getTypeCheckerAdapter(env).getAttributes(owner);
 	}
 
 	/**
@@ -284,133 +200,16 @@ public class TypeUtil {
 	 * @param args a list of {@link OCLExpression}s or {@link Variable}s
 	 * 
 	 * @return true or false
+	 * 
+	 * @since 1.3
 	 */
-	private static <PK, C, O, P, EL, PM, S, COA, SSA, CT, CLS, E>
+	public static <PK, C, O, P, EL, PM, S, COA, SSA, CT, CLS, E>
 	boolean matchArgs(
 			Environment<PK, C, O, P, EL, PM, S, COA, SSA, CT, CLS, E> env,
 			C owner, List<?> paramsOrProperties,
 			List<? extends TypedElement<C>> args) {
-		int argsize;
-
-		if (args == null)
-			argsize = 0;
-		else
-			argsize = args.size();
-
-		if (paramsOrProperties.size() != argsize)
-			return false;
-		
-        UMLReflection<PK, C, O, P, EL, PM, S, COA, SSA, CT> uml = env.getUMLReflection();
-
-		int i = 0;
-		for (Object paramOrProperty : paramsOrProperties) {
-			TypedElement<C> arg = args.get(i++);
-			C argType = arg.getType();
-			C popType = uml.getOCLType(paramOrProperty);
-			
-			// handle parameters of type OclType
-			if (popType instanceof TypeType) {
-				if (arg instanceof TypeExp) {
-					continue;
-				}
-				return false;
-			}
-			
-			popType = resolveGenericType(env, owner, popType, argType);
-			
-			if (popType == env.getOCLStandardLibrary().getT()) {
-				// this is a collection operation, and the collection is empty
-				//   (element type is OclVoid).  Any argument matches in this
-				//   case, because any kind of element can be considered to not
-				//   be in an empty collection
-				continue;
-			}
-			
-			if ((getRelationship(env, argType, popType) & SUBTYPE) == 0) {
-				return false;
-			}
-		}
-		return true;
-	}
-
-    /**
-     * Resolves the generic type of an operation parameter (where it is
-     * <tt>T</tt> or <tt>T2</tt>) against the source type of the operation or
-     * the type of the actual argument, as appropriate.
-     * 
-     * @param env the OCL environment
-     * @param owner the operation source type
-     * @param paramType the operation parameter type
-     * @param argType the actual operation argument type
-     * 
-     * @return the resolved parameter type
-     */
-	@SuppressWarnings("unchecked")
-	private static <PK, C, O, P, EL, PM, S, COA, SSA, CT, CLS, E>
-	C resolveGenericType(
-			Environment<PK, C, O, P, EL, PM, S, COA, SSA, CT, CLS, E> env,
-			C owner, C paramType, C argType) {
-		
-		C result = paramType;
-		
-		OCLStandardLibrary<C> stdlib = env.getOCLStandardLibrary();
-		
-		if (result == stdlib.getT()) {
-			// substitute the owner type (or owner's element type in
-			//   the case of a collection)
-			result = owner;
-			if (result instanceof CollectionType) {
-				result = ((CollectionType<C, O>) result).getElementType();
-				
-				if (result == stdlib.getOclVoid()) {
-					// special case for empty collections, whose element type is OclVoid.
-					//   We want any argument to be accepted, and to solely determine
-					//   the element type of the resulting collection
-					result = stdlib.getT();
-				}
-			}
-		} else if (result instanceof CollectionType) {
-			// handle generic collection operation with parameter of
-			//    type <collectionKind>(T)
-			CollectionType<C, O> collType = (CollectionType<C, O>) result;
-			C elemType = collType.getElementType();
-			
-			if (elemType == stdlib.getT()) {
-				C ownerMatch = owner;
-				if (ownerMatch instanceof CollectionType) {
-					ownerMatch = ((CollectionType<C, O>) ownerMatch).getElementType();
-					
-					if (ownerMatch == stdlib.getOclVoid()) {
-						// special case for empty collections, whose element type is OclVoid.
-						//   We want any argument to be accepted, and to solely determine
-						//   the element type of the resulting collection
-						ownerMatch = stdlib.getT();
-					}
-				}
-				
-				result = resolveCollectionType(env, collType.getKind(), ownerMatch);
-			} else if (elemType == env.getOCLStandardLibrary().getT2()) {
-				// wildard to match any other collection type
-				C argMatch = argType;
-				if (argMatch instanceof CollectionType) {
-					argMatch = ((CollectionType<C, O>) argMatch)
-						.getElementType();
-					
-					if (argMatch == stdlib.getOclVoid()) {
-						// special case for empty collections, whose element type is OclVoid.
-						//   We want any argument to be accepted, and to solely determine
-						//   the element type of the resulting collection.  Note that we
-						//   want T, not T2, because it is our wildcard
-						argMatch = stdlib.getT();
-					}
-				}
-				
-				result = resolveCollectionType(env, collType.getKind(), argMatch);
-			}
-		}
-		
-		return result;
-	}
+		return getTypeCheckerAdapter(env).matchArgs(owner, paramsOrProperties, args);
+	}   
 	
     /**
      * Resolves the signature of a generic operation (where it has parameters of
@@ -428,21 +227,7 @@ public class TypeUtil {
 			Environment<PK, C, O, P, EL, PM, S, COA, SSA, CT, CLS, E> env,
 			C owner, O oper) {
 		
-        UMLReflection<PK, C, O, P, EL, PM, S, COA, SSA, CT> uml = env.getUMLReflection();
-
-		String name = uml.getName(oper);
-		List<String> paramNames = new java.util.ArrayList<String>();
-		List<C> paramTypes = new java.util.ArrayList<C>();
-		
-		for (PM param : uml.getParameters(oper)) {
-			paramNames.add(uml.getName(param));
-			paramTypes.add(resolveGenericType(env,
-				owner, uml.getOCLType(param), env.getOCLStandardLibrary().getT()));
-		}
-		
-		C resultType = getResultType(env, owner, oper);
-		
-		return uml.createOperation(name, resultType, paramNames, paramTypes);
+        return getTypeCheckerAdapter(env).resolveGenericSignature(owner, oper);
 	}
 	
 	/**
@@ -459,28 +244,12 @@ public class TypeUtil {
      *    collection type despite its declared multiplicity in the association
      *    class case
 	 */
-	@SuppressWarnings("unchecked")
 	public static <PK, C, O, P, EL, PM, S, COA, SSA, CT, CLS, E>
 	C getPropertyType(
 			Environment<PK, C, O, P, EL, PM, S, COA, SSA, CT, CLS, E> env,
 			C owner,
 			P property) {
-        UMLReflection<PK, C, O, P, EL, PM, S, COA, SSA, CT> uml = env.getUMLReflection();
-
-		C result = TypeUtil.resolveType(env, uml.getOCLType(property));
-		
-		if (uml.isAssociationClass(owner)
-				&& uml.getMemberEnds(owner).contains(property)) {
-			
-			// from the perspective of the association class, its ends have
-			//   multiplicity 1 regardless of their definition (which is from
-			//   the perspective of the classifiers at the ends)
-			if (result instanceof CollectionType) {
-				result = ((CollectionType<C, O>) result).getElementType();
-			}
-		}
-		
-		return result;
+       return getTypeCheckerAdapter(env).getPropertyType(owner, property);
 	}
 	
     /**
@@ -493,62 +262,114 @@ public class TypeUtil {
      * @param oper the operation
      * 
      * @return the operation's effect result type
+     * 
+     * @deprecated Use the {@link #getResultType(Object, Environment, Object, Object)}
+     *     method, instead
      */
+	@Deprecated
+    public static <PK, C, O, P, EL, PM, S, COA, SSA, CT, CLS, E>
+	C getResultType(Environment<PK, C, O, P, EL, PM, S, COA, SSA, CT, CLS, E> env,
+			C owner, O oper) {
+		return getResultType(null, env, owner, oper);
+	}
+	
+    /**
+     * Obtains the result type of the specified operation, which in the case
+     * of collection operations sometimes depends on the element type of the
+     * source collection.
+     * 
+     * @param problemObject the object which could have problems.
+     * @param env the OCL environment
+     * @param owner the type of the operation call source
+     * @param oper the operation
+     * 
+     * @return the operation's effect result type
+	 * @deprecated Use the {@link #getResultTypeObject, Environment, Object, Object, List}
+	 *             method, instead, which resolves generic operation signatures
+	 *             against actual arguments
+	 */
+	@Deprecated
+	@SuppressWarnings("unchecked")
 	public static <PK, C, O, P, EL, PM, S, COA, SSA, CT, CLS, E>
-	C getResultType(
+	C getResultType(Object problemObject,
 			Environment<PK, C, O, P, EL, PM, S, COA, SSA, CT, CLS, E> env,
 			C owner, O oper) {
-		
-        UMLReflection<PK, C, O, P, EL, PM, S, COA, SSA, CT> uml = env.getUMLReflection();
 
-		if (owner instanceof PredefinedType) {
-			int opcode = OCLStandardLibraryUtil.getOperationCode(uml.getName(oper));
-			
-			List<PM> parameters = uml.getParameters(oper);
-			List<OCLExpression<C>> args = new ArrayList<OCLExpression<C>>(
-					parameters.size());
-			
-			for (PM param : parameters) {
-				C paramType = uml.getOCLType(param);
-				
-				if (paramType instanceof TypeType) {
-					// need a TypeExp
-					TypeExp<C> exp = env.getOCLFactory().createTypeExp();
-					exp.setReferredType(env.getOCLStandardLibrary().getT());
-					uml.setType(exp, paramType);
-					args.add(exp);
+		UMLReflection<PK, C, O, P, EL, PM, S, COA, SSA, CT> uml = env.getUMLReflection();
+		OCLStandardLibrary<C> stdlib = env.getOCLStandardLibrary();
+		
+		List<PM> parameters = uml.getParameters(oper);
+		List<Variable<C, PM>> args = new ArrayList<Variable<C, PM>>(
+				parameters.size());
+
+		for (PM param : parameters) {
+			C paramType = resolveType(env, uml.getOCLType(param));
+
+			Variable<C, PM> var = env.getOCLFactory().createVariable();
+			if (paramType instanceof TypeType) {
+				// need the referred type
+				TypeType<C, O> typeType = (TypeType<C, O>) paramType;
+				if (typeType.getReferredType() == null) {
+					var.setType(stdlib.getT()); // case of oclAsType()
 				} else {
-					if (paramType instanceof CollectionType) {
-						@SuppressWarnings("unchecked")
-						CollectionType<C, O> ct = (CollectionType<C, O>) paramType;
-						
-						if (ct.getElementType() == env.getOCLStandardLibrary().getT2()) {
-							// special handling for the Collection(T2) parameter
-							//   of the product collection operation
-							paramType = resolveCollectionType(env,
-									ct.getKind(),
-									env.getOCLStandardLibrary().getT());
-						}
-					}
-					
-					// unspecified value expression will do
-					UnspecifiedValueExp<C> exp =
-						env.getOCLFactory().createUnspecifiedValueExp();
-					uml.setType(exp, paramType);
-					args.add(exp);
+					var.setType(typeType.getReferredType());
 				}
+			} else {
+				if (paramType instanceof CollectionType) {
+					CollectionType<C, O> ct = (CollectionType<C, O>) paramType;
+
+					if (ct.getElementType() == stdlib.getT2()) {
+						// special handling for the Collection(T2) parameter
+						// of the product collection operation
+						paramType = resolveCollectionType(env, ct.getKind(),
+							stdlib.getT());
+					}
+				}
+
+				var.setType(paramType);
 			}
-			
-			try {
-				return OCLStandardLibraryUtil.getResultTypeOf(
-					env, owner, opcode, args);
-			} catch (Exception e) {
-				// doesn't matter.  Just return the default
-			}
+			args.add(var);
 		}
 		
-		return uml.getOCLType(oper);
+        return getResultType(problemObject, env, owner, oper, args);
 	}
+	
+	/**
+	 * Obtains the effective result type of the specified operation, which may
+	 * or may not have parameters type by generic type variables. Many of the
+	 * OCL Standard Library operations are either generic themselves or defined
+	 * by generic types, so the return results depend on the argument and source
+	 * types.
+	 * 
+	 * @param problemObject
+	 *            the context object on which to report any problem that we may
+	 *            find in computing the result type. Usually this is some
+	 *            abstract or concrete syntax tree node
+     * @param env the OCL environment
+	 * @param owner
+	 *            the owner of the operation (type on which the operation is
+	 *            called)
+	 * @param operation
+	 *            the operation signature
+	 * @param args
+	 *            the arguments of the operation call, which are expressions or
+	 *            variables
+	 * @return the effective result type of the corresponding operation, or null
+	 *         after reporting a problem if any of the argument types do not
+	 *         correspond to the source type and/or expected parameter types of
+	 *         the operation
+	 * 
+	 * @since 1.3
+	 */
+    public static <PK, C, O, P, EL, PM, S, COA, SSA, CT, CLS, E>
+	C getResultType(Object problemObject,
+			Environment<PK, C, O, P, EL, PM, S, COA, SSA, CT, CLS, E> env,
+			C owner, O operation,
+			List<? extends TypedElement<C>> args) {
+    	
+		return getTypeCheckerAdapter(env).getResultType(problemObject, owner,
+			operation, args);
+    }
 	
     /**
      * Casts a value of one type as another type, if compatible.
@@ -561,8 +382,12 @@ public class TypeUtil {
      * 
      * @throws SemanticException if the cast fails (because the types are
      *    not conformant)
+     *    
+     * @deprecated Use the {@link #compatibleTypeMatch(Environment, Object, Object)}
+     *   method, instead, to check whether the cast is acceptable
      */
-	public static <PK, C, O, P, EL, PM, S, COA, SSA, CT, CLS, E>
+	@Deprecated
+    public static <PK, C, O, P, EL, PM, S, COA, SSA, CT, CLS, E>
 	boolean type1AsType2(
 			Environment<PK, C, O, P, EL, PM, S, COA, SSA, CT, CLS, E> env,
 			C type1, C type2) throws SemanticException {
@@ -575,8 +400,39 @@ public class TypeUtil {
 				OCLMessages.CastTypeMismatch_ERROR_,
 				getName(env, type1),
 				getName(env, type2));
-		OCLParser.ERR(message);
-		return false;
+		throw new SemanticException(message);
+	}
+
+	/**
+	 * Compare two types. Returns true if types are exactly equal, false otherwise.
+	 * 
+	 * @param env the OCL environment
+	 * @param type1 a type
+	 * @param type2 another type
+	 * @return true if the same type 
+ 	 */
+	public static <PK, C, O, P, EL, PM, S, COA, SSA, CT, CLS, E>
+	boolean exactTypeMatch(
+			Environment<PK, C, O, P, EL, PM, S, COA, SSA, CT, CLS, E> env,
+			C type1, C type2) {
+	
+		return getTypeCheckerAdapter(env).exactTypeMatch(type1, type2);
+	}
+
+	/**
+	 * Compare two types. Returns true if types are compatible, false otherwise.
+	 * 
+	 * @param env the OCL environment
+	 * @param type1 a type
+	 * @param type2 another type
+	 * @return true if the same type or type1 is a strict subtype of type2.
+ 	 */
+	public static <PK, C, O, P, EL, PM, S, COA, SSA, CT, CLS, E>
+	boolean compatibleTypeMatch(
+			Environment<PK, C, O, P, EL, PM, S, COA, SSA, CT, CLS, E> env,
+			C type1, C type2) {
+	
+		return getTypeCheckerAdapter(env).compatibleTypeMatch(type1, type2);
 	}
 
 	/**
@@ -591,8 +447,12 @@ public class TypeUtil {
      * 
      * @throws IllegalArgumentException if the types are not conformant one way
      *    or the other
+     *    
+     * @deprecated Use the {@link #getRelationship(Environment, Object, Object)}
+     *    method, instead.
 	 */
-	public static <PK, C, O, P, EL, PM, S, COA, SSA, CT, CLS, E>
+	@Deprecated
+    public static <PK, C, O, P, EL, PM, S, COA, SSA, CT, CLS, E>
 	int typeCompare(
 			Environment<PK, C, O, P, EL, PM, S, COA, SSA, CT, CLS, E> env,
 			C type1, C type2) {
@@ -617,7 +477,7 @@ public class TypeUtil {
 	
     /**
      * Checks whether two types are mutually comparable in the determination of
-     * the applicability {@literal =} and {@literal <>} operations.
+     * the applicability of {@literal =} and {@literal <>} operations.
      * 
      * @param env the OCL environment
      * @param type1 a type
@@ -625,8 +485,12 @@ public class TypeUtil {
      * @param opcode the operation code
      * 
      * @throws SemanticException if the types are not comparable
+     * 
+     * @deprecated Use the {@link #checkMutuallyComparable(Object, Environment, Object, Object, int)}
+     *    method, instead
      */
-	public static <PK, C, O, P, EL, PM, S, COA, SSA, CT, CLS, E>
+	@Deprecated
+    public static <PK, C, O, P, EL, PM, S, COA, SSA, CT, CLS, E>
 	void checkMutuallyComparable(
 			Environment<PK, C, O, P, EL, PM, S, COA, SSA, CT, CLS, E> env,
 			C type1, C type2,
@@ -639,9 +503,30 @@ public class TypeUtil {
 					OCLMessages.Noncomforming_ERROR_,
 					getName(env, type1),
 					OCLStandardLibraryUtil.getOperationName(opcode));
-				OCLParser.ERR(message);
+				throw new SemanticException(message);
 			}
 		}
+	}
+	
+    /**
+     * Checks whether two types are mutually comparable in the determination of
+     * the applicability of {@literal =} and {@literal <>} operations.
+     *
+     * @param problemObject the object which could have problems.
+     * @param env the OCL environment
+     * @param type1 a type
+     * @param type2 another type
+     * @param opcode the operation code
+     * 
+     * @return false if the types are not comparable
+     */
+	public static <PK, C, O, P, EL, PM, S, COA, SSA, CT, CLS, E>
+	boolean checkMutuallyComparable(Object problemObject,
+			Environment<PK, C, O, P, EL, PM, S, COA, SSA, CT, CLS, E> env,
+			C type1, C type2,
+			int opcode) {
+		
+		return getTypeCheckerAdapter(env).checkMutuallyComparable(problemObject, type1, type2, opcode);
 	}
 	
     /**
@@ -653,8 +538,9 @@ public class TypeUtil {
      * @param env the OCL environment
      * @param type1 a type
      * @param type2 another type
-     * @return the nature of their hierarchical relationship, as enumerated in
-     *     the {@link UMLReflection} interface
+     * @return the nature of their hierarchical relationship of
+     *     <tt>type1</tt> to <tt>type2</tt>, as enumerated in the
+     *     {@link UMLReflection} interface
      * 
      * @see UMLReflection#getRelationship(Object, Object)
      */
@@ -663,229 +549,8 @@ public class TypeUtil {
 			Environment<PK, C, O, P, EL, PM, S, COA, SSA, CT, CLS, E> env,
 			C type1, C type2) {
 		
-		// simplest case is when the types actually are the same
-		if (type1 == type2) {
-			return SAME_TYPE;
-		}
-		
-		OCLStandardLibrary<C> stdlib = env.getOCLStandardLibrary();
-		
-		// OclVoid makes for easy cases
-		if ((type1 == stdlib.getOclVoid()) && (type2 != stdlib.getInvalid())) {
-			return STRICT_SUBTYPE;
-		} else if ((type2 == stdlib.getOclVoid()) && (type1 != stdlib.getInvalid())) {
-			return STRICT_SUPERTYPE;
-		}
-		
-		// so does OclInvalid
-		if (type1 == stdlib.getInvalid()) {
-			return STRICT_SUBTYPE;
-		} else if (type2 == stdlib.getInvalid()) {
-			return STRICT_SUPERTYPE;
-		}
-		
-		// and so does OclAny, also
-		if (type1 == stdlib.getOclAny()) {
-			return (type2 instanceof CollectionType)? UNRELATED_TYPE : STRICT_SUPERTYPE;
-		} else if (type2 == stdlib.getOclAny()) {
-			return (type1 instanceof CollectionType)? UNRELATED_TYPE : STRICT_SUBTYPE;
-		}
-		
-		// handle primitive types
-		if (type1 instanceof PrimitiveType) {
-			if ((type1 == stdlib.getInteger())
-                    || (type1 == stdlib.getUnlimitedNatural())) {
-				if (type2 == stdlib.getReal()) {
-					return STRICT_SUBTYPE;
-				}
-			} else if (type1 == stdlib.getReal()) {
-				if ((type2 == stdlib.getInteger())
-                        || (type2 == stdlib.getUnlimitedNatural())) {
-					return STRICT_SUPERTYPE;
-				}
-			}
-			
-			return UNRELATED_TYPE;
-		} else if (type2 instanceof PrimitiveType) {
-			// tested all possible primitive type conformances in the other case
-			return UNRELATED_TYPE;
-		}
-		
-		// handle collection types
-		if (type1 instanceof CollectionType) {
-	        if (!(type2 instanceof CollectionType)) {
-	        	return UNRELATED_TYPE;
-	        }
-	        
-	        @SuppressWarnings("unchecked")
-	        CollectionType<C, O> first = (CollectionType<C, O>) type1;
-	        @SuppressWarnings("unchecked")
-	        CollectionType<C, O> other = (CollectionType<C, O>) type2;
-	        
-	        int kindRelationship = getRelationship(
-	        		first.getKind(),
-	        		other.getKind());
-	        
-	        if (kindRelationship == UNRELATED_TYPE) {
-	        	return kindRelationship;
-	        }
-
-	        int elementRelationship = getRelationship(
-	        	env,
-	        	first.getElementType(),
-	            other.getElementType());
-	        
-	        switch (kindRelationship) {
-	        case SAME_TYPE:
-	        	return elementRelationship;
-	        case STRICT_SUBTYPE:
-	        	switch (elementRelationship) {
-	        	case SAME_TYPE:
-	        	case STRICT_SUBTYPE:
-	        		return STRICT_SUBTYPE;
-	        	default:
-	        		return UNRELATED_TYPE;
-	        	}
-	        case STRICT_SUPERTYPE:
-	        	switch (elementRelationship) {
-	        	case SAME_TYPE:
-	        	case STRICT_SUPERTYPE:
-	        		return STRICT_SUPERTYPE;
-	        	default:
-	        		return UNRELATED_TYPE;
-	        	}
-	        default:
-	        	return UNRELATED_TYPE;
-	        }
-		}
-		
-		if (type1 instanceof MessageType && type2 == stdlib.getOclMessage()) {
-			return STRICT_SUBTYPE;
-		} else if (type2 instanceof MessageType && type1 == stdlib.getOclMessage()) {
-			return STRICT_SUPERTYPE;
-		}
-		
-		if (type1 instanceof TypeType && type2 == stdlib.getOclType()) {
-			return STRICT_SUBTYPE;
-		} else if (type2 instanceof TypeType && type1 == stdlib.getOclType()) {
-			return STRICT_SUPERTYPE;
-		}
-		
-        UMLReflection<PK, C, O, P, EL, PM, S, COA, SSA, CT> uml = env.getUMLReflection();
-
-		if (type1 instanceof TupleType || type2 instanceof TupleType) {
-			if (!((type1 instanceof TupleType) && (type2 instanceof TupleType))) {
-				return UNRELATED_TYPE;
-			}
-			
-			List<P> props1 = uml.getAttributes(type1);
-			List<P> props2 = uml.getAttributes(type2);
-			
-			if (props1.size() != props2.size()) {
-				return UNRELATED_TYPE;
-			}
-
-			int result = SAME_TYPE; // assume properties are the same.
-
-			Iterator<P> iter1 = props1.iterator();
-			while (iter1.hasNext()) {
-				P prop1 = iter1.next();
-				boolean found = false;
-				
-				Iterator<P> iter2 = props2.iterator();
-				while (iter2.hasNext()) {
-					P prop2 = iter2.next();
-					
-					if (uml.getName(prop1).equals(uml.getName(prop2))) {
-						/*
-						 * The feature types must conform in the same direction.
-						 */
-						int propResult = TypeUtil.getRelationship(
-								env,
-								uml.getOCLType(prop1),
-								uml.getOCLType(prop2));
-						
-						if (result == SAME_TYPE)
-							result = propResult;
-						else if (result != propResult) {
-							return UNRELATED_TYPE;
-						}
-						found = true;
-						break;
-					}
-				}
-				if (!found) {
-					return UNRELATED_TYPE;
-				}
-			}
-			
-			return result;
-		}
-
-		// exhausted the possibilities for pre-defined types
-		if (type1 instanceof PredefinedType || type2 instanceof PredefinedType) {
-			return UNRELATED_TYPE;
-		}
-		
-		// remaining case is pure model element types.  The environment must
-		//    handle this
-		
-		return uml.getRelationship(type1, type2);
+		return getTypeCheckerAdapter(env).getRelationship(type1, type2);
 	}
-    
-    /**
-     * Get-relationship helper comparing collection kinds.
-     */
-    static int getRelationship(CollectionKind kind1, CollectionKind kind2) {
-    	switch (kind1) {
-    	case BAG_LITERAL:
-    		switch (kind2) {
-    		case BAG_LITERAL:
-    			return SAME_TYPE;
-    		case COLLECTION_LITERAL:
-    			return STRICT_SUBTYPE;
-    		default:
-    			return UNRELATED_TYPE;
-    		}
-    	case SET_LITERAL:
-    		switch (kind2) {
-    		case SET_LITERAL:
-    			return SAME_TYPE;
-    		case ORDERED_SET_LITERAL:
-    			return STRICT_SUPERTYPE;
-    		case COLLECTION_LITERAL:
-    			return STRICT_SUBTYPE;
-    		default:
-    			return UNRELATED_TYPE;
-    		}
-	   	case ORDERED_SET_LITERAL:
-    		switch (kind2) {
-    		case ORDERED_SET_LITERAL:
-    			return SAME_TYPE;
-    		case SET_LITERAL:
-    		case COLLECTION_LITERAL:
-    			return STRICT_SUBTYPE;
-    		default:
-    			return UNRELATED_TYPE;
-    		}
-	   	case SEQUENCE_LITERAL:
-    		switch (kind2) {
-    		case SEQUENCE_LITERAL:
-    			return SAME_TYPE;
-    		case COLLECTION_LITERAL:
-    			return STRICT_SUBTYPE;
-    		default:
-    			return UNRELATED_TYPE;
-    		}
-	   	default:
-    		switch (kind2) {
-    		case COLLECTION_LITERAL:
-    			return SAME_TYPE;
-    		default:
-    			return STRICT_SUPERTYPE;
-    		}
-    	}
-    }
 
 	/**
 	 * Get the common supertype of two types.
@@ -895,201 +560,45 @@ public class TypeUtil {
 	 * 
 	 * @param type1 a type
 	 * @param type2 another type
-	 * @return their common supertype, if any
+	 * @return their common supertype, if any, null if the two types have no common supertype
      * 
      * @throws SemanticException if the two types have no common supertype
+     * 
+     * @deprecated Use the {@link #commonSuperType(Object, Environment, Object, Object)}
+     *     method, instead.
+	 */
+	@Deprecated
+    public static <PK, C, O, P, EL, PM, S, COA, SSA, CT, CLS, E>
+	C commonSuperType(
+			Environment<PK, C, O, P, EL, PM, S, COA, SSA, CT, CLS, E> env,
+			C type1, C type2) throws SemanticException {
+		
+		return commonSuperType(null, env, type1, type2);
+	}
+	
+	/**
+	 * Get the common supertype of two types.
+     * This operation accounts for the OCL Standard Library types, which the
+     * otherwise similar {@link UMLReflection#getCommonSuperType(Object, Object)}
+     * method does not.
+	 * 
+	 * @param problemObject the object which could have problems.
+	 * @param env the OCL environment
+	 * @param type1 a type
+	 * @param type2 another type
+	 * @return their common supertype, if any, null if the two types have no common supertype
      * 
      * @see UMLReflection#getCommonSuperType(Object, Object)
 	 */
 	public static <PK, C, O, P, EL, PM, S, COA, SSA, CT, CLS, E>
-	C commonSuperType(
+	C commonSuperType(Object problemObject,
 			Environment<PK, C, O, P, EL, PM, S, COA, SSA, CT, CLS, E> env,
-			C type1, C type2) throws SemanticException {
+			C type1, C type2) {
 	
-		if (ObjectUtil.equal(type1, type2)) {
-			return type2;
-		}
-		
-		OCLStandardLibrary<C> stdlib = env.getOCLStandardLibrary();
-		
-		// the generic type T represents the dynamic type against which we
-		//    are comparing
-		if (type1 == stdlib.getT()) {
-			return type2;
-		} else if (type2 == stdlib.getT()) {
-			return type1;
-		}
-		
-		if ((type1 == stdlib.getOclVoid()) || (type1 == stdlib.getInvalid()))
-			return type2;
-		if ((type2 == stdlib.getOclVoid()) || (type2 == stdlib.getInvalid()))
-			return type1;
-		
-		if (type1 == stdlib.getOclAny() && !(type2 instanceof CollectionType))
-			return type1;
-		if (type2 == stdlib.getOclAny() && !(type1 instanceof CollectionType))
-			return type2;
-	
-		if ((type1 == stdlib.getInteger() || type1 == stdlib.getUnlimitedNatural())
-                && type2 == stdlib.getReal())
-				return type2;
-        if ((type2 == stdlib.getInteger() || type2 == stdlib.getUnlimitedNatural())
-                && type1 == stdlib.getReal())
-				return type1;
-	
-		if (type1 instanceof CollectionType && type2 instanceof CollectionType) {
-	        @SuppressWarnings("unchecked")
-			CollectionType<C, O> ct1 = (CollectionType<C, O>) type1;
-			
-	        @SuppressWarnings("unchecked")
-	        CollectionType<C, O> ct2 = (CollectionType<C, O>) type2;
-	        
-	        CollectionKind commonKind = commonSuperType(ct1.getKind(), ct2.getKind());
-	        
-	        C resultElementType = commonSuperType(
-	        	env, ct1.getElementType(), ct2.getElementType());
-
-	        return resolveCollectionType(env, commonKind, resultElementType);
-		}
-	
-		if (type1 instanceof MessageType && type2 instanceof MessageType) {
-			return stdlib.getOclMessage();
-		}
-		
-		if (type1 instanceof TypeType && type2 instanceof TypeType) {
-			return stdlib.getOclType();
-		}
-		
-        UMLReflection<PK, C, O, P, EL, PM, S, COA, SSA, CT> uml = env.getUMLReflection();
-
-		if (type1 instanceof TupleType || type2 instanceof TupleType) {
-			if (!((type1 instanceof TupleType) && (type2 instanceof TupleType))) {
-				String message = OCLMessages.bind(
-					OCLMessages.TupleTypeMismatch_ERROR_,
-					getName(env, type1),
-					getName(env, type2));
-				OCLParser.ERR(message);
-			}
-			
-			List<P> props1 = uml.getAttributes(type1);
-			List<P> props2 = uml.getAttributes(type2);
-			
-			if (props1.size() != props2.size()) {
-				String message = OCLMessages.bind(
-						OCLMessages.TupleFieldNumMismatch_ERROR_,
-						getName(env, type1),
-						getName(env, type2));
-				OCLParser.ERR(message);
-			}
-
-			OCLFactory oclFactory = env.getOCLFactory();
-			
-			EList<Variable<C, PM>> tupleParts = new BasicEList<Variable<C, PM>>();
-
-			for (P prop1 : props1) {
-				boolean found = false;
-				
-				for (P prop2 : props2) {
-					if (uml.getName(prop1).equals(uml.getName(prop2))) {
-						C resultElementType = commonSuperType(
-							env, uml.getOCLType(prop1), uml.getOCLType(prop2));
-						
-						found = true;
-						
-						Variable<C, PM> var = oclFactory.createVariable();
-						uml.setName(var, getName(env, prop1));
-						uml.setType(var, resultElementType);
-						
-						tupleParts.add(var);
-						break;
-					}
-				}
-				if (!found) {
-					String message = OCLMessages.bind(
-							OCLMessages.TupleFieldNotFound_ERROR_,
-							new Object[] {
-									getName(env, type1),
-									getName(env, prop1),
-									getName(env, type2)});
-					OCLParser.ERR(message);
-				}
-			}
-			
-			return resolveTupleType(env, tupleParts);
-		}
-		
-		// exhausted the possibilities for pre-defined types
-		if (type1 instanceof PredefinedType || type2 instanceof PredefinedType) {
-			String message = OCLMessages.bind(OCLMessages.TypeMismatch_ERROR_,
-					getName(env, type1),
-					getName(env, type2));
-			OCLParser.ERR(message);
-		}
-		
-		// remaining case is pure model element types.  The environment must
-		//    handle this
-		
-		C result = uml.getCommonSuperType(type1, type2);
-	
-		if (result == null) {
-			String message = OCLMessages.bind(OCLMessages.TypeMismatch_ERROR_,
-					getName(env, type1),
-					getName(env, type2));
-			OCLParser.ERR(message);
-		}
-		
-		return result;
+		return getTypeCheckerAdapter(env).commonSuperType(problemObject, type1, type2);
 	}
-    
-    /**
-     * Common-supertype helper method for collection kinds
-     */
-    private static CollectionKind commonSuperType(
-    		CollectionKind kind1, CollectionKind kind2) {
-    	
-    	CollectionKind genericCollectionKind = CollectionKind.COLLECTION_LITERAL;
-    	
-    	switch (kind1) {
-    	case BAG_LITERAL:
-    	case SEQUENCE_LITERAL:
-    		if (kind2 == kind1) {
-	    		return kind1;
-    		}
-    		
-    		return genericCollectionKind;
-    	case SET_LITERAL:
-    		switch (kind2) {
-    		case ORDERED_SET_LITERAL:
-    		case SET_LITERAL:
-    			return kind1;
-    		default:
-       			return genericCollectionKind;
-    		}
-    	case ORDERED_SET_LITERAL:
-    		switch (kind2) {
-    		case ORDERED_SET_LITERAL:
-    		case SET_LITERAL:
-    			return kind2;
-    		default:
-       			return genericCollectionKind;
-    		}
-    	default:
-   			return genericCollectionKind;
-    	}
-    }
 	
-	/**
-	 * Null-safe alternative to {@link ENamedElement#getName()}.
-	 * 
-	 * @param element a named element that may be <code>null</code>
-	 * @return the element's name, or <code>null</code> if the element is <code>null</code>
-	 */
-	static <PK, C, O, P, EL, PM, S, COA, SSA, CT, CLS, E>
-	String getName(
-			Environment<PK, C, O, P, EL, PM, S, COA, SSA, CT, CLS, E> env,
-			Object element) {
-		return (element == null)? null : env.getUMLReflection().getName(element);
-	}
+
 
 	/**
 	 * Resolves the specified type against the model-based types defined by
@@ -1106,7 +615,7 @@ public class TypeUtil {
 			Environment<PK, C, O, P, EL, PM, S, COA, SSA, CT, CLS, E> env,
 			C type) {
 		
-		return env.getTypeResolver().resolve(type);
+	    return (type != null)? env.getTypeResolver().resolve(type) : type;
 	}
 	
     /**
@@ -1192,7 +701,6 @@ public class TypeUtil {
 	C resolveCollectionType(
 			Environment<PK, C, O, P, EL, PM, S, COA, SSA, CT, CLS, E> env,
 			CollectionKind kind, C elementType) {
-		
 		return (C) env.getTypeResolver().resolveCollectionType(kind, elementType);
 	}
 	
@@ -1215,7 +723,7 @@ public class TypeUtil {
 	}
 	
     /**
-     * Resolves a tupe-type against the tupe-types previously generated
+     * Resolves a tuple-type against the tuple-types previously generated
      * and persisted in the environment.
      * 
      * @param env the OCL environment
@@ -1263,5 +771,33 @@ public class TypeUtil {
 			Environment<PK, C, O, P, EL, PM, S, COA, SSA, CT, CLS, E> env,
 			C signal) {
 		return (C) env.getTypeResolver().resolveSignalMessageType(signal);
+	}
+	
+	/**
+	 * Queries whether the specified feature (operation or attribute), as
+	 * applied to a particular <tt>owner</tt> classifier, is defined by the
+	 * standard library or not (in which case it would, presumably, be
+	 * user-defined).
+	 * 
+	 * @param owner
+	 *            a classifier on which a feature is to be accessed
+	 * @param feature
+	 *            the feature to be accessed
+	 * 
+	 * @return whether the feature is defined by the standard library
+	 * 
+	 * @since 1.3
+	 */
+	public static <C> boolean isStandardLibraryFeature(
+			Environment<?, C, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?> env, C owner,
+			Object feature) {
+
+		return getTypeCheckerAdapter(env).isStandardLibraryFeature(owner,
+			feature);
+	}	
+		
+	@SuppressWarnings("unchecked")
+	private static  <C, O, P> TypeChecker<C, O, P> getTypeCheckerAdapter(Environment<?, C, O, P, ?, ?, ?, ?, ?, ?, ?, ?> env) {
+		return OCLUtil.getAdapter(env, TypeChecker.class);
 	}
 }

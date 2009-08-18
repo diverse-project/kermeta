@@ -1,7 +1,7 @@
 /**
  * <copyright>
  *
- * Copyright (c) 2005, 2007 IBM Corporation and others.
+ * Copyright (c) 2005, 2008 IBM Corporation and others.
  * All rights reserved.   This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -12,7 +12,7 @@
  *
  * </copyright>
  *
- * $Id: IterationTemplateCollect.java,v 1.1 2008-08-07 06:35:14 dvojtise Exp $
+ * $Id: IterationTemplateCollect.java,v 1.3 2008/03/26 21:17:25 cdamus Exp $
  */
 
 package org.eclipse.ocl.internal.evaluation;
@@ -23,6 +23,7 @@ import java.util.List;
 import org.eclipse.ocl.EvaluationEnvironment;
 import org.eclipse.ocl.EvaluationVisitor;
 import org.eclipse.ocl.expressions.Variable;
+import org.eclipse.ocl.util.CollectionUtil;
 
 /**
  *
@@ -41,7 +42,8 @@ public class IterationTemplateCollect<PK, C, O, P, EL, PM, S, COA, SSA, CT, CLS,
 				v);
 	}
 	
-	protected Object evaluateResult(List<Variable<C, PM>> iterators, String resultName, Object bodyVal) {
+	@Override
+    protected Object evaluateResult(List<Variable<C, PM>> iterators, String resultName, Object bodyVal) {
 		EvaluationEnvironment<C, O, P, CLS, E> env = getEvalEnvironment();
 		
 		@SuppressWarnings("unchecked")
@@ -56,7 +58,7 @@ public class IterationTemplateCollect<PK, C, O, P, EL, PM, S, COA, SSA, CT, CLS,
 		
 		if (bodyVal instanceof Collection) {
 			Collection<?> bodyColl = (Collection<?>) bodyVal;
-			currVal.addAll(bodyColl);
+			currVal.addAll(CollectionUtil.flatten(bodyColl));
 		}
 		else
 			currVal.add(bodyVal);

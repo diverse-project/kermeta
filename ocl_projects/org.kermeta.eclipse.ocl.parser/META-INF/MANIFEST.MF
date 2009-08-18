@@ -2,23 +2,29 @@ Manifest-Version: 1.0
 Ant-Version: Apache Ant 1.7.0
 Created-By: 1.5.0_10-b03 (Sun Microsystems Inc.)
 Bundle-Activator: org.eclipse.ocl.internal.OCLPlugin$Implementation
-Import-Package: lpg.lpgjavaruntime;version="[1.0.0,1.2.0)"
+Import-Package: lpg.lpgjavaruntime;version="[1.0.0,1.2.0)",com.ibm.icu.lang;version="[4.0.0,5.0.0)";resolution:=o
+ ptional,com.ibm.icu.text;version="[4.0.0,5.0.0)";resolution:=optional
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Export-Package: org.eclipse.ocl,
+ org.eclipse.ocl.cst,
+ org.eclipse.ocl.cst.impl,
+ org.eclipse.ocl.cst.util,
  org.eclipse.ocl.expressions,
  org.eclipse.ocl.expressions.impl,
+ org.eclipse.ocl.expressions.operations,
  org.eclipse.ocl.expressions.util,
  org.eclipse.ocl.helper,
  org.eclipse.ocl.internal,
- org.eclipse.ocl.internal.cst,
- org.eclipse.ocl.internal.cst.impl,
- org.eclipse.ocl.internal.cst.util,
  org.eclipse.ocl.internal.evaluation,
  org.eclipse.ocl.internal.helper,
  org.eclipse.ocl.internal.l10n,
- org.eclipse.ocl.internal.parser,
+ org.eclipse.ocl.lpg,
+ org.eclipse.ocl.options,
+ org.eclipse.ocl.parser,
+ org.eclipse.ocl.parser.backtracking,
  org.eclipse.ocl.types,
  org.eclipse.ocl.types.impl,
+ org.eclipse.ocl.types.operations,
  org.eclipse.ocl.types.util,
  org.eclipse.ocl.util,
  org.eclipse.ocl.utilities,

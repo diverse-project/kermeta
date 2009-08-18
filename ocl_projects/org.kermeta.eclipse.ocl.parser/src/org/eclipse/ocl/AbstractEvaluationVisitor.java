@@ -1,7 +1,7 @@
 /**
  * <copyright>
  *
- * Copyright (c) 2005, 2007 IBM Corporation and others.
+ * Copyright (c) 2005, 2009 IBM Corporation, Zeligsoft Inc., Borland Software Corp., and others.
  * All rights reserved.   This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -9,21 +9,25 @@
  *
  * Contributors:
  *   IBM - Initial API and implementation
+ *   Zeligsoft - Bugs 238050, 253252
+ *   Radek Dvorak - Bugs 261128, 265066
  *
  * </copyright>
  *
- * $Id: AbstractEvaluationVisitor.java,v 1.1 2008-08-07 06:35:18 dvojtise Exp $
+ * $Id: AbstractEvaluationVisitor.java,v 1.9 2009/03/11 13:04:28 cdamus Exp $
  */
 package org.eclipse.ocl;
 
 import java.util.Map;
 import java.util.Set;
 
-import org.eclipse.core.runtime.IStatus;
+import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.ocl.expressions.OCLExpression;
 import org.eclipse.ocl.internal.OCLPlugin;
 import org.eclipse.ocl.internal.OCLStatusCodes;
+import org.eclipse.ocl.internal.evaluation.NumberUtil;
 import org.eclipse.ocl.internal.l10n.OCLMessages;
+import org.eclipse.ocl.options.EvaluationOptions;
 import org.eclipse.ocl.types.InvalidType;
 import org.eclipse.ocl.types.OCLStandardLibrary;
 import org.eclipse.ocl.types.VoidType;
@@ -50,9 +54,6 @@ public abstract class AbstractEvaluationVisitor<PK, C, O, P, EL, PM, S, COA, SSA
 	extends AbstractVisitor<Object, C, O, P, EL, PM, S, COA, SSA, CT>
 	implements EvaluationVisitor<PK, C, O, P, EL, PM, S, COA, SSA, CT, CLS, E> {
 
-    // FIXME: Localize this (too late for PII cut-off for Europa)
-    private static String EvaluationFailed_ERROR_ = "Evaluation failed with an exception"; //$NON-NLS-1$
-    
     // stereotypes associated with boolean-valued constraints
 	private static Set<String> BOOLEAN_CONSTRAINTS;
 	
@@ -105,6 +106,28 @@ public abstract class AbstractEvaluationVisitor<PK, C, O, P, EL, PM, S, COA, SSA
         return visitor;
     }
 
+	/**
+	 * Sets the evaluation environment to be used by this visitor during
+	 * evaluation.
+	 * 
+	 * @param evaluationEnvironment
+	 *            non-null evaluation environment
+	 * @throws IllegalArgumentException
+	 *             if the passed <code>evaluationEnvironment</code> is
+	 *             <code>null</code>
+	 * 
+	 * @since 1.3
+	 */
+	protected void setEvaluationEnvironment(
+			EvaluationEnvironment<C, O, P, CLS, E> evaluationEnvironment) {
+		
+		if (evaluationEnvironment == null) {
+			throw new IllegalArgumentException("null evaluation environment"); //$NON-NLS-1$
+		}
+
+		this.evalEnv = evaluationEnvironment;
+	}
+    
     /**
      * Sets the visitor on which I perform nested
      * {@link Visitable#accept(org.eclipse.ocl.utilities.Visitor)} calls.
@@ -221,13 +244,16 @@ public abstract class AbstractEvaluationVisitor<PK, C, O, P, EL, PM, S, COA, SSA
 	public Object visitExpression(OCLExpression<C> expression) {
         try {
             return expression.accept(getVisitor());
+        } catch (EvaluationHaltedException e) {
+        	// evaluation stopped on demand, propagate further
+        	throw e;
         } catch (RuntimeException e) {
             String msg = e.getLocalizedMessage();
             if (msg == null) {
                 msg = OCLMessages.no_message;
             }
-            OCLPlugin.log(IStatus.ERROR, OCLStatusCodes.IGNORED_EXCEPTION_WARNING,
-                /*OCLMessages.*/EvaluationFailed_ERROR_, e);
+            OCLPlugin.log(Diagnostic.ERROR, OCLStatusCodes.IGNORED_EXCEPTION_WARNING,
+                OCLMessages.bind(OCLMessages.EvaluationFailed_ERROR_, msg), e);
             
             // failure to evaluate results in OclInvalid
             return getOclInvalid();
@@ -240,7 +266,8 @@ public abstract class AbstractEvaluationVisitor<PK, C, O, P, EL, PM, S, COA, SSA
 	 * constraint and returns the value of its body expression by delegation to
 	 * {@link #visitExpression(OCLExpression)}.
 	 */
-	public Object visitConstraint(CT constraint) {
+	@Override
+    public Object visitConstraint(CT constraint) {
 		OCLExpression<C> body = getSpecification(constraint).getBodyExpression();
 		boolean isBoolean = BOOLEAN_CONSTRAINTS.contains(
 				getEnvironment().getUMLReflection().getStereotype(constraint));
@@ -264,7 +291,8 @@ public abstract class AbstractEvaluationVisitor<PK, C, O, P, EL, PM, S, COA, SSA
         return getEnvironment().getUMLReflection().getSpecification(constraint);
     }
 	
-	public String toString() {
+	@Override
+    public String toString() {
 		StringBuffer result = new StringBuffer(super.toString());
 		result.append(" (evaluation environment: ");//$NON-NLS-1$
 		result.append(getEvaluationEnvironment());
@@ -312,7 +340,7 @@ public abstract class AbstractEvaluationVisitor<PK, C, O, P, EL, PM, S, COA, SSA
     	if (args.length > 0) {
     		int i = 0;
     		for (PM param : myEnv.getUMLReflection().getParameters(operation)) {
-    			nested.add(myEnv.getUMLReflection().getName(param), args[i]);
+    			nested.add(myEnv.getUMLReflection().getName(param), args[i++]);
     		}
     	}
     	
@@ -407,17 +435,23 @@ public abstract class AbstractEvaluationVisitor<PK, C, O, P, EL, PM, S, COA, SSA
 		// regardless of the source value, if the type is undefined, then so
 		//    is oclIsTypeOf
 		if (type == null) {
-			return null;
+		    return null;
 		}
 		
-		// the type of null is OclVoid
+		// the type of null is OclVoid, except that we aren't even allowed to
+		// ask if not lax-null-handling
 		if (value == null) {
-			return Boolean.valueOf(type instanceof VoidType);
+			return isLaxNullHandling()
+				? Boolean.valueOf(type instanceof VoidType)
+				: null;
 		}
-		
-		// the type of OclInvalid is Invalid
+
+		// the type of OclInvalid is Invalid, except that we aren't even allowed
+		// to ask if not lax-null-handling
 		if (value == stdlib.getOclInvalid()) {
-			return Boolean.valueOf(type instanceof InvalidType);
+			return isLaxNullHandling()
+				? Boolean.valueOf(type instanceof InvalidType)
+				: null;
 		}
 
 		return Boolean.valueOf(getEvaluationEnvironment().isTypeOf(value, type));
@@ -441,11 +475,71 @@ public abstract class AbstractEvaluationVisitor<PK, C, O, P, EL, PM, S, COA, SSA
 			return null;
 		}
 		
-		// OclVoid and Invalid conform to all classifiers
+		// OclVoid and Invalid conform to all classifiers but their instances
+		// aren't actually useful as any type but their own.  So, in case of lax
+		// null handling, return TRUE.  Otherwise, oclIsKindOf isn't even
+		// permitted, so return null to generate an OclInvalid down the line
 		if (isUndefined(value)) {
-			return Boolean.TRUE;
+			return isLaxNullHandling()
+				? Boolean.TRUE
+				: null;
 		}
 
 		return Boolean.valueOf(getEvaluationEnvironment().isKindOf(value, type));
+	}
+	
+    /**
+     * <p>
+     * Tests whether a given number can be safely coerced to <tt>Double</tt> or
+     * <tt>Integer</tt> without changing the value of the number.  Safe means 
+     * that coercing a number to <tt>Double</tt> or <tt>Integer</tt> and then
+     * coercing it back to the original type will result in the same value (no
+     * loss of precision).  This is trivial for types, which have a smaller
+     * domain then <tt>Integer</tt> or <tt>Double</tt>, but for
+     * example a <tt>Long</tt> number may not be safely coerced to
+     * <tt>Integer</tt>.
+     * </p><p>
+     * If the coercion is safe, the number will be returned as either
+     * <tt>Double</tt> or <tt>Integer</tt>, as appropriate to the original
+     * precision.  Otherwise the original number is returned. 
+     * </p>
+     * 
+     * @param number a number to coerce to <tt>Integer</tt> or <tt>Double</tt>
+     * @return the coerced number, or the original number, if coercion was not safe
+     * 
+     * @since 1.2
+     */
+	protected Number coerceNumber(Number number) {
+	    return NumberUtil.coerceNumber(number);
+	}
+    
+    /**
+     * <p>
+     * Coerces the given number to <tt>Double</tt> or <tt>Long</tt> precision,
+     * if possible.  Note that this is only impossible for <tt>BigDecimal</tt>
+     * or <tt>BigInteger</tt> values, respectively, that are out of range of
+     * their primitive counterparts.
+     * </p>
+     * 
+     * @param number a number to coerce to <tt>Long</tt> or <tt>Double</tt>
+     * @return the coerced number, or the original number, in case of overflow
+     * 
+     * @since 1.2
+     */
+    protected Number higherPrecisionNumber(Number number) {
+        return NumberUtil.higherPrecisionNumber(number);
+    }
+	
+	/**
+	 * Queries whether our evaluation environment has the option for
+	 * {@linkplain EvaluationOptions#LAX_NULL_HANDLING lax null handling}
+	 * enabled.
+	 * 
+	 * @since 1.3
+	 * @return whether lax null handling is enabled
+	 */
+	protected boolean isLaxNullHandling() {
+	    return EvaluationOptions.getValue(getEvaluationEnvironment(),
+	        EvaluationOptions.LAX_NULL_HANDLING);
 	}
 } //EvaluationVisitorImpl

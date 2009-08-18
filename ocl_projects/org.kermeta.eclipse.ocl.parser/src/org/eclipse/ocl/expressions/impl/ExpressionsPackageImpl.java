@@ -1,7 +1,7 @@
 /**
  * <copyright>
  * 
- * Copyright (c) 2006, 2007 IBM Corporation and others.
+ * Copyright (c) 2006, 2008 IBM Corporation, Zeligsoft Inc., and others.
  * All rights reserved.   This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -9,10 +9,11 @@
  * 
  * Contributors:
  *   IBM - Initial API and implementation
+ *   Zeligsoft - Bug 207365
  * 
  * </copyright>
  *
- * $Id: ExpressionsPackageImpl.java,v 1.1 2008-08-07 06:35:12 dvojtise Exp $
+ * $Id: ExpressionsPackageImpl.java,v 1.11 2009/05/26 20:06:35 aigdalov Exp $
  */
 package org.eclipse.ocl.expressions.impl;
 
@@ -20,11 +21,14 @@ import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EGenericType;
+import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.ETypeParameter;
+import org.eclipse.emf.ecore.EValidator;
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.ocl.Environment;
 import org.eclipse.ocl.expressions.AssociationClassCallExp;
 import org.eclipse.ocl.expressions.BooleanLiteralExp;
 import org.eclipse.ocl.expressions.CallExp;
@@ -63,14 +67,11 @@ import org.eclipse.ocl.expressions.UnlimitedNaturalLiteralExp;
 import org.eclipse.ocl.expressions.UnspecifiedValueExp;
 import org.eclipse.ocl.expressions.Variable;
 import org.eclipse.ocl.expressions.VariableExp;
+import org.eclipse.ocl.expressions.util.ExpressionsValidator;
 import org.eclipse.ocl.types.TypesPackage;
 import org.eclipse.ocl.types.impl.TypesPackageImpl;
 import org.eclipse.ocl.utilities.UtilitiesPackage;
 import org.eclipse.ocl.utilities.impl.UtilitiesPackageImpl;
-
-
-
-
 
 /**
  * <!-- begin-user-doc -->
@@ -78,7 +79,10 @@ import org.eclipse.ocl.utilities.impl.UtilitiesPackageImpl;
  * <!-- end-user-doc -->
  * @generated
  */
-public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsPackage {
+public class ExpressionsPackageImpl
+		extends EPackageImpl
+		implements ExpressionsPackage {
+
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -158,12 +162,12 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
 
 	/**
 	 * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    private EClass unlimitedNaturalLiteralExpEClass = null;
+	private EClass unlimitedNaturalLiteralExpEClass = null;
 
-    /**
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -336,22 +340,26 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
 	 * because EMF will not generate it.
 	 */
 	public static final EPackage OCL_ROOT_PACKAGE;
-	
+
 	static {
-        class OCLPackageImpl extends EPackageImpl {
+		class OCLPackageImpl
+				extends EPackageImpl {
+
+			@Override
 			protected Resource createResource(String uri) {
 				return super.createResource(uri);
 			}
 		}
-        
-        OCLPackageImpl oclPackage = new OCLPackageImpl();
-        oclPackage.setName("ocl"); //$NON-NLS-1$
-        oclPackage.setNsPrefix("ocl"); //$NON-NLS-1$
-        oclPackage.setNsURI("http://www.eclipse.org/OCL/1.1.0/OCL"); //$NON-NLS-1$
+
+		OCLPackageImpl oclPackage = new OCLPackageImpl();
+		oclPackage.setName("ocl"); //$NON-NLS-1$
+		oclPackage.setNsPrefix("ocl"); //$NON-NLS-1$
+		oclPackage.setNsURI(Environment.OCL_NAMESPACE_URI);
 		oclPackage.createResource(oclPackage.getNsURI());
-		
-        OCL_ROOT_PACKAGE = oclPackage;
-		EPackage.Registry.INSTANCE.put(OCL_ROOT_PACKAGE.getNsURI(), OCL_ROOT_PACKAGE);
+
+		OCL_ROOT_PACKAGE = oclPackage;
+		EPackage.Registry.INSTANCE.put(OCL_ROOT_PACKAGE.getNsURI(),
+			OCL_ROOT_PACKAGE);
 	}
 
 	/**
@@ -367,12 +375,10 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
 	 * @see org.eclipse.emf.ecore.EPackage.Registry
 	 * @see org.eclipse.ocl.expressions.ExpressionsPackage#eNS_URI
 	 * @see #init()
-	 * @generated NOT
+	 * @generated
 	 */
 	private ExpressionsPackageImpl() {
 		super(eNS_URI, ExpressionsFactory.eINSTANCE);
-		
-		OCL_ROOT_PACKAGE.getESubpackages().add(this);
 	}
 
 	/**
@@ -383,20 +389,10 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
 	private static boolean isInited = false;
 
 	/**
-	 * Creates, registers, and initializes the <b>Package</b> for this
-	 * model, and for any others upon which it depends.  Simple
-	 * dependencies are satisfied by calling this method on all
-	 * dependent packages before doing anything else.  This method drives
-	 * initialization for interdependent packages directly, in parallel
-	 * with this package, itself.
-	 * <p>Of this package and its interdependencies, all packages which
-	 * have not yet been registered by their URI values are first created
-	 * and registered.  The packages are then initialized in two steps:
-	 * meta-model objects for all of the packages are created before any
-	 * are initialized, since one package's meta-model objects may refer to
-	 * those of another.
-	 * <p>Invocation of this method will not affect any packages that have
-	 * already been initialized.
+	 * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
+	 * 
+	 * <p>This method is used to initialize {@link ExpressionsPackage#eINSTANCE} when that field is accessed.
+	 * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #eNS_URI
@@ -405,16 +401,27 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
 	 * @generated
 	 */
 	public static ExpressionsPackage init() {
-		if (isInited) return (ExpressionsPackage)EPackage.Registry.INSTANCE.getEPackage(ExpressionsPackage.eNS_URI);
+		if (isInited)
+			return (ExpressionsPackage) EPackage.Registry.INSTANCE
+				.getEPackage(ExpressionsPackage.eNS_URI);
 
 		// Obtain or create and register package
-		ExpressionsPackageImpl theExpressionsPackage = (ExpressionsPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(eNS_URI) instanceof ExpressionsPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(eNS_URI) : new ExpressionsPackageImpl());
+		ExpressionsPackageImpl theExpressionsPackage = (ExpressionsPackageImpl) (EPackage.Registry.INSTANCE
+			.get(eNS_URI) instanceof ExpressionsPackageImpl
+			? EPackage.Registry.INSTANCE.get(eNS_URI)
+			: new ExpressionsPackageImpl());
 
 		isInited = true;
 
 		// Obtain or create and register interdependencies
-		TypesPackageImpl theTypesPackage = (TypesPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(TypesPackage.eNS_URI) instanceof TypesPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(TypesPackage.eNS_URI) : TypesPackage.eINSTANCE);
-		UtilitiesPackageImpl theUtilitiesPackage = (UtilitiesPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(UtilitiesPackage.eNS_URI) instanceof UtilitiesPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(UtilitiesPackage.eNS_URI) : UtilitiesPackage.eINSTANCE);
+		TypesPackageImpl theTypesPackage = (TypesPackageImpl) (EPackage.Registry.INSTANCE
+			.getEPackage(TypesPackage.eNS_URI) instanceof TypesPackageImpl
+			? EPackage.Registry.INSTANCE.getEPackage(TypesPackage.eNS_URI)
+			: TypesPackage.eINSTANCE);
+		UtilitiesPackageImpl theUtilitiesPackage = (UtilitiesPackageImpl) (EPackage.Registry.INSTANCE
+			.getEPackage(UtilitiesPackage.eNS_URI) instanceof UtilitiesPackageImpl
+			? EPackage.Registry.INSTANCE.getEPackage(UtilitiesPackage.eNS_URI)
+			: UtilitiesPackage.eINSTANCE);
 
 		// Create package meta-data objects
 		theExpressionsPackage.createPackageContents();
@@ -426,9 +433,21 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
 		theTypesPackage.initializePackageContents();
 		theUtilitiesPackage.initializePackageContents();
 
+		// Register package validator
+		EValidator.Registry.INSTANCE.put(theExpressionsPackage,
+			new EValidator.Descriptor() {
+
+				public EValidator getEValidator() {
+					return ExpressionsValidator.INSTANCE;
+				}
+			});
+
 		// Mark meta-data to indicate it can't be changed
 		theExpressionsPackage.freeze();
 
+		// Update the registry and return the package
+		EPackage.Registry.INSTANCE.put(ExpressionsPackage.eNS_URI,
+			theExpressionsPackage);
 		return theExpressionsPackage;
 	}
 
@@ -447,7 +466,8 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
 	 * @generated
 	 */
 	public EReference getAssociationClassCallExp_ReferredAssociationClass() {
-		return (EReference)associationClassCallExpEClass.getEStructuralFeatures().get(0);
+		return (EReference) associationClassCallExpEClass
+			.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -465,7 +485,8 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
 	 * @generated
 	 */
 	public EAttribute getBooleanLiteralExp_BooleanSymbol() {
-		return (EAttribute)booleanLiteralExpEClass.getEStructuralFeatures().get(0);
+		return (EAttribute) booleanLiteralExpEClass.getEStructuralFeatures()
+			.get(0);
 	}
 
 	/**
@@ -483,7 +504,7 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
 	 * @generated
 	 */
 	public EReference getCallExp_Source() {
-		return (EReference)callExpEClass.getEStructuralFeatures().get(0);
+		return (EReference) callExpEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -501,7 +522,8 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
 	 * @generated
 	 */
 	public EReference getCollectionItem_Item() {
-		return (EReference)collectionItemEClass.getEStructuralFeatures().get(0);
+		return (EReference) collectionItemEClass.getEStructuralFeatures()
+			.get(0);
 	}
 
 	/**
@@ -519,7 +541,8 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
 	 * @generated
 	 */
 	public EAttribute getCollectionLiteralExp_Kind() {
-		return (EAttribute)collectionLiteralExpEClass.getEStructuralFeatures().get(0);
+		return (EAttribute) collectionLiteralExpEClass.getEStructuralFeatures()
+			.get(0);
 	}
 
 	/**
@@ -528,7 +551,8 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
 	 * @generated
 	 */
 	public EReference getCollectionLiteralExp_Part() {
-		return (EReference)collectionLiteralExpEClass.getEStructuralFeatures().get(1);
+		return (EReference) collectionLiteralExpEClass.getEStructuralFeatures()
+			.get(1);
 	}
 
 	/**
@@ -537,7 +561,8 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
 	 * @generated
 	 */
 	public EAttribute getCollectionLiteralExp_SimpleRange() {
-		return (EAttribute)collectionLiteralExpEClass.getEStructuralFeatures().get(2);
+		return (EAttribute) collectionLiteralExpEClass.getEStructuralFeatures()
+			.get(2);
 	}
 
 	/**
@@ -564,7 +589,8 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
 	 * @generated
 	 */
 	public EReference getCollectionRange_First() {
-		return (EReference)collectionRangeEClass.getEStructuralFeatures().get(0);
+		return (EReference) collectionRangeEClass.getEStructuralFeatures().get(
+			0);
 	}
 
 	/**
@@ -573,7 +599,8 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
 	 * @generated
 	 */
 	public EReference getCollectionRange_Last() {
-		return (EReference)collectionRangeEClass.getEStructuralFeatures().get(1);
+		return (EReference) collectionRangeEClass.getEStructuralFeatures().get(
+			1);
 	}
 
 	/**
@@ -591,7 +618,8 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
 	 * @generated
 	 */
 	public EReference getEnumLiteralExp_ReferredEnumLiteral() {
-		return (EReference)enumLiteralExpEClass.getEStructuralFeatures().get(0);
+		return (EReference) enumLiteralExpEClass.getEStructuralFeatures()
+			.get(0);
 	}
 
 	/**
@@ -609,7 +637,8 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
 	 * @generated
 	 */
 	public EAttribute getFeatureCallExp_MarkedPre() {
-		return (EAttribute)featureCallExpEClass.getEStructuralFeatures().get(0);
+		return (EAttribute) featureCallExpEClass.getEStructuralFeatures()
+			.get(0);
 	}
 
 	/**
@@ -627,7 +656,7 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
 	 * @generated
 	 */
 	public EReference getIfExp_Condition() {
-		return (EReference)ifExpEClass.getEStructuralFeatures().get(0);
+		return (EReference) ifExpEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -636,7 +665,7 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
 	 * @generated
 	 */
 	public EReference getIfExp_ThenExpression() {
-		return (EReference)ifExpEClass.getEStructuralFeatures().get(1);
+		return (EReference) ifExpEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -645,7 +674,7 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
 	 * @generated
 	 */
 	public EReference getIfExp_ElseExpression() {
-		return (EReference)ifExpEClass.getEStructuralFeatures().get(2);
+		return (EReference) ifExpEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -663,37 +692,40 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
 	 * @generated
 	 */
 	public EAttribute getIntegerLiteralExp_IntegerSymbol() {
-		return (EAttribute)integerLiteralExpEClass.getEStructuralFeatures().get(0);
+		return (EAttribute) integerLiteralExpEClass.getEStructuralFeatures()
+			.get(0);
 	}
 
 	/**
 	 * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    public EClass getUnlimitedNaturalLiteralExp() {
+	public EClass getUnlimitedNaturalLiteralExp() {
 		return unlimitedNaturalLiteralExpEClass;
 	}
 
-    /**
+	/**
 	 * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    public EAttribute getUnlimitedNaturalLiteralExp_IntegerSymbol() {
-		return (EAttribute)unlimitedNaturalLiteralExpEClass.getEStructuralFeatures().get(0);
+	public EAttribute getUnlimitedNaturalLiteralExp_IntegerSymbol() {
+		return (EAttribute) unlimitedNaturalLiteralExpEClass
+			.getEStructuralFeatures().get(0);
 	}
 
-    /**
+	/**
 	 * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    public EAttribute getUnlimitedNaturalLiteralExp_Unlimited() {
-		return (EAttribute)unlimitedNaturalLiteralExpEClass.getEStructuralFeatures().get(1);
+	public EAttribute getUnlimitedNaturalLiteralExp_Unlimited() {
+		return (EAttribute) unlimitedNaturalLiteralExpEClass
+			.getEStructuralFeatures().get(1);
 	}
 
-    /**
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -717,7 +749,7 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
 	 * @generated
 	 */
 	public EReference getIterateExp_Result() {
-		return (EReference)iterateExpEClass.getEStructuralFeatures().get(0);
+		return (EReference) iterateExpEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -744,7 +776,7 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
 	 * @generated
 	 */
 	public EReference getLetExp_In() {
-		return (EReference)letExpEClass.getEStructuralFeatures().get(0);
+		return (EReference) letExpEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -753,7 +785,7 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
 	 * @generated
 	 */
 	public EReference getLetExp_Variable() {
-		return (EReference)letExpEClass.getEStructuralFeatures().get(1);
+		return (EReference) letExpEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -780,7 +812,7 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
 	 * @generated
 	 */
 	public EReference getLoopExp_Body() {
-		return (EReference)loopExpEClass.getEStructuralFeatures().get(0);
+		return (EReference) loopExpEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -789,7 +821,7 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
 	 * @generated
 	 */
 	public EReference getLoopExp_Iterator() {
-		return (EReference)loopExpEClass.getEStructuralFeatures().get(1);
+		return (EReference) loopExpEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -807,7 +839,7 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
 	 * @generated
 	 */
 	public EReference getMessageExp_Target() {
-		return (EReference)messageExpEClass.getEStructuralFeatures().get(0);
+		return (EReference) messageExpEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -816,7 +848,7 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
 	 * @generated
 	 */
 	public EReference getMessageExp_Argument() {
-		return (EReference)messageExpEClass.getEStructuralFeatures().get(1);
+		return (EReference) messageExpEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -825,7 +857,7 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
 	 * @generated
 	 */
 	public EReference getMessageExp_CalledOperation() {
-		return (EReference)messageExpEClass.getEStructuralFeatures().get(2);
+		return (EReference) messageExpEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -834,7 +866,7 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
 	 * @generated
 	 */
 	public EReference getMessageExp_SentSignal() {
-		return (EReference)messageExpEClass.getEStructuralFeatures().get(3);
+		return (EReference) messageExpEClass.getEStructuralFeatures().get(3);
 	}
 
 	/**
@@ -852,7 +884,8 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
 	 * @generated
 	 */
 	public EReference getNavigationCallExp_Qualifier() {
-		return (EReference)navigationCallExpEClass.getEStructuralFeatures().get(0);
+		return (EReference) navigationCallExpEClass.getEStructuralFeatures()
+			.get(0);
 	}
 
 	/**
@@ -861,7 +894,8 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
 	 * @generated
 	 */
 	public EReference getNavigationCallExp_NavigationSource() {
-		return (EReference)navigationCallExpEClass.getEStructuralFeatures().get(1);
+		return (EReference) navigationCallExpEClass.getEStructuralFeatures()
+			.get(1);
 	}
 
 	/**
@@ -906,7 +940,8 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
 	 * @generated
 	 */
 	public EReference getOperationCallExp_Argument() {
-		return (EReference)operationCallExpEClass.getEStructuralFeatures().get(0);
+		return (EReference) operationCallExpEClass.getEStructuralFeatures()
+			.get(0);
 	}
 
 	/**
@@ -915,7 +950,8 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
 	 * @generated
 	 */
 	public EReference getOperationCallExp_ReferredOperation() {
-		return (EReference)operationCallExpEClass.getEStructuralFeatures().get(1);
+		return (EReference) operationCallExpEClass.getEStructuralFeatures()
+			.get(1);
 	}
 
 	/**
@@ -924,7 +960,8 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
 	 * @generated
 	 */
 	public EAttribute getOperationCallExp_OperationCode() {
-		return (EAttribute)operationCallExpEClass.getEStructuralFeatures().get(2);
+		return (EAttribute) operationCallExpEClass.getEStructuralFeatures()
+			.get(2);
 	}
 
 	/**
@@ -951,7 +988,8 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
 	 * @generated
 	 */
 	public EReference getPropertyCallExp_ReferredProperty() {
-		return (EReference)propertyCallExpEClass.getEStructuralFeatures().get(0);
+		return (EReference) propertyCallExpEClass.getEStructuralFeatures().get(
+			0);
 	}
 
 	/**
@@ -969,7 +1007,8 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
 	 * @generated
 	 */
 	public EAttribute getRealLiteralExp_RealSymbol() {
-		return (EAttribute)realLiteralExpEClass.getEStructuralFeatures().get(0);
+		return (EAttribute) realLiteralExpEClass.getEStructuralFeatures()
+			.get(0);
 	}
 
 	/**
@@ -987,7 +1026,7 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
 	 * @generated
 	 */
 	public EReference getStateExp_ReferredState() {
-		return (EReference)stateExpEClass.getEStructuralFeatures().get(0);
+		return (EReference) stateExpEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -1005,7 +1044,8 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
 	 * @generated
 	 */
 	public EAttribute getStringLiteralExp_StringSymbol() {
-		return (EAttribute)stringLiteralExpEClass.getEStructuralFeatures().get(0);
+		return (EAttribute) stringLiteralExpEClass.getEStructuralFeatures()
+			.get(0);
 	}
 
 	/**
@@ -1023,7 +1063,8 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
 	 * @generated
 	 */
 	public EReference getTupleLiteralExp_Part() {
-		return (EReference)tupleLiteralExpEClass.getEStructuralFeatures().get(0);
+		return (EReference) tupleLiteralExpEClass.getEStructuralFeatures().get(
+			0);
 	}
 
 	/**
@@ -1041,7 +1082,8 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
 	 * @generated
 	 */
 	public EReference getTupleLiteralPart_Value() {
-		return (EReference)tupleLiteralPartEClass.getEStructuralFeatures().get(0);
+		return (EReference) tupleLiteralPartEClass.getEStructuralFeatures()
+			.get(0);
 	}
 
 	/**
@@ -1050,7 +1092,8 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
 	 * @generated
 	 */
 	public EReference getTupleLiteralPart_Attribute() {
-		return (EReference)tupleLiteralPartEClass.getEStructuralFeatures().get(1);
+		return (EReference) tupleLiteralPartEClass.getEStructuralFeatures()
+			.get(1);
 	}
 
 	/**
@@ -1068,7 +1111,7 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
 	 * @generated
 	 */
 	public EReference getTypeExp_ReferredType() {
-		return (EReference)typeExpEClass.getEStructuralFeatures().get(0);
+		return (EReference) typeExpEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -1095,7 +1138,7 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
 	 * @generated
 	 */
 	public EReference getVariable_InitExpression() {
-		return (EReference)variableEClass.getEStructuralFeatures().get(0);
+		return (EReference) variableEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -1104,7 +1147,7 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
 	 * @generated
 	 */
 	public EReference getVariable_RepresentedParameter() {
-		return (EReference)variableEClass.getEStructuralFeatures().get(1);
+		return (EReference) variableEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -1122,7 +1165,7 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
 	 * @generated
 	 */
 	public EReference getVariableExp_ReferredVariable() {
-		return (EReference)variableExpEClass.getEStructuralFeatures().get(0);
+		return (EReference) variableExpEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -1140,7 +1183,7 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
 	 * @generated
 	 */
 	public ExpressionsFactory getExpressionsFactory() {
-		return (ExpressionsFactory)getEFactoryInstance();
+		return (ExpressionsFactory) getEFactoryInstance();
 	}
 
 	/**
@@ -1158,16 +1201,20 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
 	 * @generated
 	 */
 	public void createPackageContents() {
-		if (isCreated) return;
+		if (isCreated)
+			return;
 		isCreated = true;
 
 		// Create classes and their features
 		associationClassCallExpEClass = createEClass(ASSOCIATION_CLASS_CALL_EXP);
-		createEReference(associationClassCallExpEClass, ASSOCIATION_CLASS_CALL_EXP__REFERRED_ASSOCIATION_CLASS);
+		createEReference(associationClassCallExpEClass,
+			ASSOCIATION_CLASS_CALL_EXP__REFERRED_ASSOCIATION_CLASS);
 
 		navigationCallExpEClass = createEClass(NAVIGATION_CALL_EXP);
-		createEReference(navigationCallExpEClass, NAVIGATION_CALL_EXP__QUALIFIER);
-		createEReference(navigationCallExpEClass, NAVIGATION_CALL_EXP__NAVIGATION_SOURCE);
+		createEReference(navigationCallExpEClass,
+			NAVIGATION_CALL_EXP__QUALIFIER);
+		createEReference(navigationCallExpEClass,
+			NAVIGATION_CALL_EXP__NAVIGATION_SOURCE);
 
 		featureCallExpEClass = createEClass(FEATURE_CALL_EXP);
 		createEAttribute(featureCallExpEClass, FEATURE_CALL_EXP__MARKED_PRE);
@@ -1178,7 +1225,8 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
 		oclExpressionEClass = createEClass(OCL_EXPRESSION);
 
 		booleanLiteralExpEClass = createEClass(BOOLEAN_LITERAL_EXP);
-		createEAttribute(booleanLiteralExpEClass, BOOLEAN_LITERAL_EXP__BOOLEAN_SYMBOL);
+		createEAttribute(booleanLiteralExpEClass,
+			BOOLEAN_LITERAL_EXP__BOOLEAN_SYMBOL);
 
 		primitiveLiteralExpEClass = createEClass(PRIMITIVE_LITERAL_EXP);
 
@@ -1190,16 +1238,20 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
 		collectionLiteralPartEClass = createEClass(COLLECTION_LITERAL_PART);
 
 		collectionLiteralExpEClass = createEClass(COLLECTION_LITERAL_EXP);
-		createEAttribute(collectionLiteralExpEClass, COLLECTION_LITERAL_EXP__KIND);
-		createEReference(collectionLiteralExpEClass, COLLECTION_LITERAL_EXP__PART);
-		createEAttribute(collectionLiteralExpEClass, COLLECTION_LITERAL_EXP__SIMPLE_RANGE);
+		createEAttribute(collectionLiteralExpEClass,
+			COLLECTION_LITERAL_EXP__KIND);
+		createEReference(collectionLiteralExpEClass,
+			COLLECTION_LITERAL_EXP__PART);
+		createEAttribute(collectionLiteralExpEClass,
+			COLLECTION_LITERAL_EXP__SIMPLE_RANGE);
 
 		collectionRangeEClass = createEClass(COLLECTION_RANGE);
 		createEReference(collectionRangeEClass, COLLECTION_RANGE__FIRST);
 		createEReference(collectionRangeEClass, COLLECTION_RANGE__LAST);
 
 		enumLiteralExpEClass = createEClass(ENUM_LITERAL_EXP);
-		createEReference(enumLiteralExpEClass, ENUM_LITERAL_EXP__REFERRED_ENUM_LITERAL);
+		createEReference(enumLiteralExpEClass,
+			ENUM_LITERAL_EXP__REFERRED_ENUM_LITERAL);
 
 		ifExpEClass = createEClass(IF_EXP);
 		createEReference(ifExpEClass, IF_EXP__CONDITION);
@@ -1207,13 +1259,16 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
 		createEReference(ifExpEClass, IF_EXP__ELSE_EXPRESSION);
 
 		integerLiteralExpEClass = createEClass(INTEGER_LITERAL_EXP);
-		createEAttribute(integerLiteralExpEClass, INTEGER_LITERAL_EXP__INTEGER_SYMBOL);
+		createEAttribute(integerLiteralExpEClass,
+			INTEGER_LITERAL_EXP__INTEGER_SYMBOL);
 
 		numericLiteralExpEClass = createEClass(NUMERIC_LITERAL_EXP);
 
 		unlimitedNaturalLiteralExpEClass = createEClass(UNLIMITED_NATURAL_LITERAL_EXP);
-		createEAttribute(unlimitedNaturalLiteralExpEClass, UNLIMITED_NATURAL_LITERAL_EXP__INTEGER_SYMBOL);
-		createEAttribute(unlimitedNaturalLiteralExpEClass, UNLIMITED_NATURAL_LITERAL_EXP__UNLIMITED);
+		createEAttribute(unlimitedNaturalLiteralExpEClass,
+			UNLIMITED_NATURAL_LITERAL_EXP__INTEGER_SYMBOL);
+		createEAttribute(unlimitedNaturalLiteralExpEClass,
+			UNLIMITED_NATURAL_LITERAL_EXP__UNLIMITED);
 
 		invalidLiteralExpEClass = createEClass(INVALID_LITERAL_EXP);
 
@@ -1244,11 +1299,14 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
 
 		operationCallExpEClass = createEClass(OPERATION_CALL_EXP);
 		createEReference(operationCallExpEClass, OPERATION_CALL_EXP__ARGUMENT);
-		createEReference(operationCallExpEClass, OPERATION_CALL_EXP__REFERRED_OPERATION);
-		createEAttribute(operationCallExpEClass, OPERATION_CALL_EXP__OPERATION_CODE);
+		createEReference(operationCallExpEClass,
+			OPERATION_CALL_EXP__REFERRED_OPERATION);
+		createEAttribute(operationCallExpEClass,
+			OPERATION_CALL_EXP__OPERATION_CODE);
 
 		propertyCallExpEClass = createEClass(PROPERTY_CALL_EXP);
-		createEReference(propertyCallExpEClass, PROPERTY_CALL_EXP__REFERRED_PROPERTY);
+		createEReference(propertyCallExpEClass,
+			PROPERTY_CALL_EXP__REFERRED_PROPERTY);
 
 		realLiteralExpEClass = createEClass(REAL_LITERAL_EXP);
 		createEAttribute(realLiteralExpEClass, REAL_LITERAL_EXP__REAL_SYMBOL);
@@ -1257,7 +1315,8 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
 		createEReference(stateExpEClass, STATE_EXP__REFERRED_STATE);
 
 		stringLiteralExpEClass = createEClass(STRING_LITERAL_EXP);
-		createEAttribute(stringLiteralExpEClass, STRING_LITERAL_EXP__STRING_SYMBOL);
+		createEAttribute(stringLiteralExpEClass,
+			STRING_LITERAL_EXP__STRING_SYMBOL);
 
 		tupleLiteralExpEClass = createEClass(TUPLE_LITERAL_EXP);
 		createEReference(tupleLiteralExpEClass, TUPLE_LITERAL_EXP__PART);
@@ -1288,12 +1347,32 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
 	/**
 	 * Complete the initialization of the package and its meta-model.  This
 	 * method is guarded to have no affect on any invocation but its first.
+	 * <p>
+	 * The generated implementation is extended by adding me as a child of
+	 * the empty root <tt>OCL</tt> package.
+	 * </p>
+	 */
+	public void initializePackageContents() {
+		if (!isInitialized) {
+			// create my own resource first, before adding me to my parent
+			// package.  Otherwise, I will already be in a resource when
+			// createResource() is called, and it will not create a new one
+			initializePackageContentsGen();
+
+			OCL_ROOT_PACKAGE.getESubpackages().add(this);
+		}
+	}
+
+	/**
+	 * Complete the initialization of the package and its meta-model.  This
+	 * method is guarded to have no affect on any invocation but its first.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void initializePackageContents() {
-		if (isInitialized) return;
+	public void initializePackageContentsGen() {
+		if (isInitialized)
+			return;
 		isInitialized = true;
 
 		// Initialize package
@@ -1302,60 +1381,102 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
 		setNsURI(eNS_URI);
 
 		// Obtain other dependent packages
-		UtilitiesPackage theUtilitiesPackage = (UtilitiesPackage)EPackage.Registry.INSTANCE.getEPackage(UtilitiesPackage.eNS_URI);
+		UtilitiesPackage theUtilitiesPackage = (UtilitiesPackage) EPackage.Registry.INSTANCE
+			.getEPackage(UtilitiesPackage.eNS_URI);
 
 		// Create type parameters
-		ETypeParameter associationClassCallExpEClass_C = addETypeParameter(associationClassCallExpEClass, "C"); //$NON-NLS-1$
-		ETypeParameter associationClassCallExpEClass_P = addETypeParameter(associationClassCallExpEClass, "P"); //$NON-NLS-1$
-		ETypeParameter navigationCallExpEClass_C = addETypeParameter(navigationCallExpEClass, "C"); //$NON-NLS-1$
-		ETypeParameter navigationCallExpEClass_P = addETypeParameter(navigationCallExpEClass, "P"); //$NON-NLS-1$
-		ETypeParameter featureCallExpEClass_C = addETypeParameter(featureCallExpEClass, "C"); //$NON-NLS-1$
+		ETypeParameter associationClassCallExpEClass_C = addETypeParameter(
+			associationClassCallExpEClass, "C"); //$NON-NLS-1$
+		ETypeParameter associationClassCallExpEClass_P = addETypeParameter(
+			associationClassCallExpEClass, "P"); //$NON-NLS-1$
+		ETypeParameter navigationCallExpEClass_C = addETypeParameter(
+			navigationCallExpEClass, "C"); //$NON-NLS-1$
+		ETypeParameter navigationCallExpEClass_P = addETypeParameter(
+			navigationCallExpEClass, "P"); //$NON-NLS-1$
+		ETypeParameter featureCallExpEClass_C = addETypeParameter(
+			featureCallExpEClass, "C"); //$NON-NLS-1$
 		ETypeParameter callExpEClass_C = addETypeParameter(callExpEClass, "C"); //$NON-NLS-1$
-		ETypeParameter oclExpressionEClass_C = addETypeParameter(oclExpressionEClass, "C"); //$NON-NLS-1$
-		ETypeParameter booleanLiteralExpEClass_C = addETypeParameter(booleanLiteralExpEClass, "C"); //$NON-NLS-1$
-		ETypeParameter primitiveLiteralExpEClass_C = addETypeParameter(primitiveLiteralExpEClass, "C"); //$NON-NLS-1$
-		ETypeParameter literalExpEClass_C = addETypeParameter(literalExpEClass, "C"); //$NON-NLS-1$
-		ETypeParameter collectionItemEClass_C = addETypeParameter(collectionItemEClass, "C"); //$NON-NLS-1$
-		ETypeParameter collectionLiteralPartEClass_C = addETypeParameter(collectionLiteralPartEClass, "C"); //$NON-NLS-1$
-		ETypeParameter collectionLiteralExpEClass_C = addETypeParameter(collectionLiteralExpEClass, "C"); //$NON-NLS-1$
-		ETypeParameter collectionRangeEClass_C = addETypeParameter(collectionRangeEClass, "C"); //$NON-NLS-1$
-		ETypeParameter enumLiteralExpEClass_C = addETypeParameter(enumLiteralExpEClass, "C"); //$NON-NLS-1$
-		ETypeParameter enumLiteralExpEClass_EL = addETypeParameter(enumLiteralExpEClass, "EL"); //$NON-NLS-1$
+		ETypeParameter oclExpressionEClass_C = addETypeParameter(
+			oclExpressionEClass, "C"); //$NON-NLS-1$
+		ETypeParameter booleanLiteralExpEClass_C = addETypeParameter(
+			booleanLiteralExpEClass, "C"); //$NON-NLS-1$
+		ETypeParameter primitiveLiteralExpEClass_C = addETypeParameter(
+			primitiveLiteralExpEClass, "C"); //$NON-NLS-1$
+		ETypeParameter literalExpEClass_C = addETypeParameter(literalExpEClass,
+			"C"); //$NON-NLS-1$
+		ETypeParameter collectionItemEClass_C = addETypeParameter(
+			collectionItemEClass, "C"); //$NON-NLS-1$
+		ETypeParameter collectionLiteralPartEClass_C = addETypeParameter(
+			collectionLiteralPartEClass, "C"); //$NON-NLS-1$
+		ETypeParameter collectionLiteralExpEClass_C = addETypeParameter(
+			collectionLiteralExpEClass, "C"); //$NON-NLS-1$
+		ETypeParameter collectionRangeEClass_C = addETypeParameter(
+			collectionRangeEClass, "C"); //$NON-NLS-1$
+		ETypeParameter enumLiteralExpEClass_C = addETypeParameter(
+			enumLiteralExpEClass, "C"); //$NON-NLS-1$
+		ETypeParameter enumLiteralExpEClass_EL = addETypeParameter(
+			enumLiteralExpEClass, "EL"); //$NON-NLS-1$
 		ETypeParameter ifExpEClass_C = addETypeParameter(ifExpEClass, "C"); //$NON-NLS-1$
-		ETypeParameter integerLiteralExpEClass_C = addETypeParameter(integerLiteralExpEClass, "C"); //$NON-NLS-1$
-		ETypeParameter numericLiteralExpEClass_C = addETypeParameter(numericLiteralExpEClass, "C"); //$NON-NLS-1$
-		ETypeParameter unlimitedNaturalLiteralExpEClass_C = addETypeParameter(unlimitedNaturalLiteralExpEClass, "C"); //$NON-NLS-1$
-		ETypeParameter invalidLiteralExpEClass_C = addETypeParameter(invalidLiteralExpEClass, "C"); //$NON-NLS-1$
-		ETypeParameter iterateExpEClass_C = addETypeParameter(iterateExpEClass, "C"); //$NON-NLS-1$
-		ETypeParameter iterateExpEClass_PM = addETypeParameter(iterateExpEClass, "PM"); //$NON-NLS-1$
+		ETypeParameter integerLiteralExpEClass_C = addETypeParameter(
+			integerLiteralExpEClass, "C"); //$NON-NLS-1$
+		ETypeParameter numericLiteralExpEClass_C = addETypeParameter(
+			numericLiteralExpEClass, "C"); //$NON-NLS-1$
+		ETypeParameter unlimitedNaturalLiteralExpEClass_C = addETypeParameter(
+			unlimitedNaturalLiteralExpEClass, "C"); //$NON-NLS-1$
+		ETypeParameter invalidLiteralExpEClass_C = addETypeParameter(
+			invalidLiteralExpEClass, "C"); //$NON-NLS-1$
+		ETypeParameter iterateExpEClass_C = addETypeParameter(iterateExpEClass,
+			"C"); //$NON-NLS-1$
+		ETypeParameter iterateExpEClass_PM = addETypeParameter(
+			iterateExpEClass, "PM"); //$NON-NLS-1$
 		ETypeParameter loopExpEClass_C = addETypeParameter(loopExpEClass, "C"); //$NON-NLS-1$
 		ETypeParameter loopExpEClass_PM = addETypeParameter(loopExpEClass, "PM"); //$NON-NLS-1$
 		ETypeParameter variableEClass_C = addETypeParameter(variableEClass, "C"); //$NON-NLS-1$
-		ETypeParameter variableEClass_PM = addETypeParameter(variableEClass, "PM"); //$NON-NLS-1$
-		ETypeParameter iteratorExpEClass_C = addETypeParameter(iteratorExpEClass, "C"); //$NON-NLS-1$
-		ETypeParameter iteratorExpEClass_PM = addETypeParameter(iteratorExpEClass, "PM"); //$NON-NLS-1$
+		ETypeParameter variableEClass_PM = addETypeParameter(variableEClass,
+			"PM"); //$NON-NLS-1$
+		ETypeParameter iteratorExpEClass_C = addETypeParameter(
+			iteratorExpEClass, "C"); //$NON-NLS-1$
+		ETypeParameter iteratorExpEClass_PM = addETypeParameter(
+			iteratorExpEClass, "PM"); //$NON-NLS-1$
 		ETypeParameter letExpEClass_C = addETypeParameter(letExpEClass, "C"); //$NON-NLS-1$
 		ETypeParameter letExpEClass_PM = addETypeParameter(letExpEClass, "PM"); //$NON-NLS-1$
-		ETypeParameter messageExpEClass_C = addETypeParameter(messageExpEClass, "C"); //$NON-NLS-1$
-		ETypeParameter messageExpEClass_COA = addETypeParameter(messageExpEClass, "COA"); //$NON-NLS-1$
-		ETypeParameter messageExpEClass_SSA = addETypeParameter(messageExpEClass, "SSA"); //$NON-NLS-1$
-		ETypeParameter nullLiteralExpEClass_C = addETypeParameter(nullLiteralExpEClass, "C"); //$NON-NLS-1$
-		ETypeParameter operationCallExpEClass_C = addETypeParameter(operationCallExpEClass, "C"); //$NON-NLS-1$
-		ETypeParameter operationCallExpEClass_O = addETypeParameter(operationCallExpEClass, "O"); //$NON-NLS-1$
-		ETypeParameter propertyCallExpEClass_C = addETypeParameter(propertyCallExpEClass, "C"); //$NON-NLS-1$
-		ETypeParameter propertyCallExpEClass_P = addETypeParameter(propertyCallExpEClass, "P"); //$NON-NLS-1$
-		ETypeParameter realLiteralExpEClass_C = addETypeParameter(realLiteralExpEClass, "C"); //$NON-NLS-1$
+		ETypeParameter messageExpEClass_C = addETypeParameter(messageExpEClass,
+			"C"); //$NON-NLS-1$
+		ETypeParameter messageExpEClass_COA = addETypeParameter(
+			messageExpEClass, "COA"); //$NON-NLS-1$
+		ETypeParameter messageExpEClass_SSA = addETypeParameter(
+			messageExpEClass, "SSA"); //$NON-NLS-1$
+		ETypeParameter nullLiteralExpEClass_C = addETypeParameter(
+			nullLiteralExpEClass, "C"); //$NON-NLS-1$
+		ETypeParameter operationCallExpEClass_C = addETypeParameter(
+			operationCallExpEClass, "C"); //$NON-NLS-1$
+		ETypeParameter operationCallExpEClass_O = addETypeParameter(
+			operationCallExpEClass, "O"); //$NON-NLS-1$
+		ETypeParameter propertyCallExpEClass_C = addETypeParameter(
+			propertyCallExpEClass, "C"); //$NON-NLS-1$
+		ETypeParameter propertyCallExpEClass_P = addETypeParameter(
+			propertyCallExpEClass, "P"); //$NON-NLS-1$
+		ETypeParameter realLiteralExpEClass_C = addETypeParameter(
+			realLiteralExpEClass, "C"); //$NON-NLS-1$
 		ETypeParameter stateExpEClass_C = addETypeParameter(stateExpEClass, "C"); //$NON-NLS-1$
 		ETypeParameter stateExpEClass_S = addETypeParameter(stateExpEClass, "S"); //$NON-NLS-1$
-		ETypeParameter stringLiteralExpEClass_C = addETypeParameter(stringLiteralExpEClass, "C"); //$NON-NLS-1$
-		ETypeParameter tupleLiteralExpEClass_C = addETypeParameter(tupleLiteralExpEClass, "C"); //$NON-NLS-1$
-		ETypeParameter tupleLiteralExpEClass_P = addETypeParameter(tupleLiteralExpEClass, "P"); //$NON-NLS-1$
-		ETypeParameter tupleLiteralPartEClass_C = addETypeParameter(tupleLiteralPartEClass, "C"); //$NON-NLS-1$
-		ETypeParameter tupleLiteralPartEClass_P = addETypeParameter(tupleLiteralPartEClass, "P"); //$NON-NLS-1$
+		ETypeParameter stringLiteralExpEClass_C = addETypeParameter(
+			stringLiteralExpEClass, "C"); //$NON-NLS-1$
+		ETypeParameter tupleLiteralExpEClass_C = addETypeParameter(
+			tupleLiteralExpEClass, "C"); //$NON-NLS-1$
+		ETypeParameter tupleLiteralExpEClass_P = addETypeParameter(
+			tupleLiteralExpEClass, "P"); //$NON-NLS-1$
+		ETypeParameter tupleLiteralPartEClass_C = addETypeParameter(
+			tupleLiteralPartEClass, "C"); //$NON-NLS-1$
+		ETypeParameter tupleLiteralPartEClass_P = addETypeParameter(
+			tupleLiteralPartEClass, "P"); //$NON-NLS-1$
 		ETypeParameter typeExpEClass_C = addETypeParameter(typeExpEClass, "C"); //$NON-NLS-1$
-		ETypeParameter unspecifiedValueExpEClass_C = addETypeParameter(unspecifiedValueExpEClass, "C"); //$NON-NLS-1$
-		ETypeParameter variableExpEClass_C = addETypeParameter(variableExpEClass, "C"); //$NON-NLS-1$
-		ETypeParameter variableExpEClass_PM = addETypeParameter(variableExpEClass, "PM"); //$NON-NLS-1$
+		ETypeParameter unspecifiedValueExpEClass_C = addETypeParameter(
+			unspecifiedValueExpEClass, "C"); //$NON-NLS-1$
+		ETypeParameter variableExpEClass_C = addETypeParameter(
+			variableExpEClass, "C"); //$NON-NLS-1$
+		ETypeParameter variableExpEClass_PM = addETypeParameter(
+			variableExpEClass, "PM"); //$NON-NLS-1$
 
 		// Set bounds for type parameters
 
@@ -1530,201 +1651,884 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
 		variableExpEClass.getEGenericSuperTypes().add(g1);
 
 		// Initialize classes and features; add operations and parameters
-		initEClass(associationClassCallExpEClass, AssociationClassCallExp.class, "AssociationClassCallExp", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+		initEClass(
+			associationClassCallExpEClass,
+			AssociationClassCallExp.class,
+			"AssociationClassCallExp", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
 		g1 = createEGenericType(associationClassCallExpEClass_C);
-		initEReference(getAssociationClassCallExp_ReferredAssociationClass(), g1, null, "referredAssociationClass", null, 0, 1, AssociationClassCallExp.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+		initEReference(
+			getAssociationClassCallExp_ReferredAssociationClass(),
+			g1,
+			null,
+			"referredAssociationClass", null, 0, 1, AssociationClassCallExp.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
 
-		initEClass(navigationCallExpEClass, NavigationCallExp.class, "NavigationCallExp", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+		initEClass(
+			navigationCallExpEClass,
+			NavigationCallExp.class,
+			"NavigationCallExp", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
 		g1 = createEGenericType(this.getOCLExpression());
 		g2 = createEGenericType(navigationCallExpEClass_C);
 		g1.getETypeArguments().add(g2);
-		initEReference(getNavigationCallExp_Qualifier(), g1, null, "qualifier", null, 0, -1, NavigationCallExp.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+		initEReference(
+			getNavigationCallExp_Qualifier(),
+			g1,
+			null,
+			"qualifier", null, 0, -1, NavigationCallExp.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
 		g1 = createEGenericType(navigationCallExpEClass_P);
-		initEReference(getNavigationCallExp_NavigationSource(), g1, null, "navigationSource", null, 0, 1, NavigationCallExp.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+		initEReference(
+			getNavigationCallExp_NavigationSource(),
+			g1,
+			null,
+			"navigationSource", null, 0, 1, NavigationCallExp.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
 
-		initEClass(featureCallExpEClass, FeatureCallExp.class, "FeatureCallExp", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
-		initEAttribute(getFeatureCallExp_MarkedPre(), ecorePackage.getEBoolean(), "markedPre", null, 0, 1, FeatureCallExp.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+		initEClass(
+			featureCallExpEClass,
+			FeatureCallExp.class,
+			"FeatureCallExp", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+		initEAttribute(
+			getFeatureCallExp_MarkedPre(),
+			ecorePackage.getEBoolean(),
+			"markedPre", null, 0, 1, FeatureCallExp.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
 
-		initEClass(callExpEClass, CallExp.class, "CallExp", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+		initEClass(callExpEClass, CallExp.class,
+			"CallExp", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
 		g1 = createEGenericType(this.getOCLExpression());
 		g2 = createEGenericType(callExpEClass_C);
 		g1.getETypeArguments().add(g2);
-		initEReference(getCallExp_Source(), g1, null, "source", null, 0, 1, CallExp.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+		initEReference(
+			getCallExp_Source(),
+			g1,
+			null,
+			"source", null, 0, 1, CallExp.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
 
-		initEClass(oclExpressionEClass, OCLExpression.class, "OCLExpression", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+		initEClass(
+			oclExpressionEClass,
+			OCLExpression.class,
+			"OCLExpression", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
 
-		initEClass(booleanLiteralExpEClass, BooleanLiteralExp.class, "BooleanLiteralExp", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
-		initEAttribute(getBooleanLiteralExp_BooleanSymbol(), ecorePackage.getEBooleanObject(), "booleanSymbol", null, 0, 1, BooleanLiteralExp.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+		initEClass(
+			booleanLiteralExpEClass,
+			BooleanLiteralExp.class,
+			"BooleanLiteralExp", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+		initEAttribute(
+			getBooleanLiteralExp_BooleanSymbol(),
+			ecorePackage.getEBooleanObject(),
+			"booleanSymbol", null, 0, 1, BooleanLiteralExp.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
 
-		initEClass(primitiveLiteralExpEClass, PrimitiveLiteralExp.class, "PrimitiveLiteralExp", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+		EOperation op = addEOperation(booleanLiteralExpEClass, ecorePackage
+			.getEBoolean(), "checkBooleanType", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+		addEParameter(op, ecorePackage.getEDiagnosticChain(),
+			"diagnostics", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+		g1 = createEGenericType(ecorePackage.getEMap());
+		g2 = createEGenericType(ecorePackage.getEJavaObject());
+		g1.getETypeArguments().add(g2);
+		g2 = createEGenericType(ecorePackage.getEJavaObject());
+		g1.getETypeArguments().add(g2);
+		addEParameter(op, g1, "context", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
 
-		initEClass(literalExpEClass, LiteralExp.class, "LiteralExp", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+		initEClass(
+			primitiveLiteralExpEClass,
+			PrimitiveLiteralExp.class,
+			"PrimitiveLiteralExp", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
 
-		initEClass(collectionItemEClass, CollectionItem.class, "CollectionItem", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+		initEClass(
+			literalExpEClass,
+			LiteralExp.class,
+			"LiteralExp", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+
+		initEClass(
+			collectionItemEClass,
+			CollectionItem.class,
+			"CollectionItem", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
 		g1 = createEGenericType(this.getOCLExpression());
 		g2 = createEGenericType(collectionItemEClass_C);
 		g1.getETypeArguments().add(g2);
-		initEReference(getCollectionItem_Item(), g1, null, "item", null, 1, 1, CollectionItem.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+		initEReference(
+			getCollectionItem_Item(),
+			g1,
+			null,
+			"item", null, 1, 1, CollectionItem.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
 
-		initEClass(collectionLiteralPartEClass, CollectionLiteralPart.class, "CollectionLiteralPart", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+		op = addEOperation(collectionItemEClass, ecorePackage.getEBoolean(),
+			"checkItemType", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+		addEParameter(op, ecorePackage.getEDiagnosticChain(),
+			"diagnostics", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+		g1 = createEGenericType(ecorePackage.getEMap());
+		g2 = createEGenericType(ecorePackage.getEJavaObject());
+		g1.getETypeArguments().add(g2);
+		g2 = createEGenericType(ecorePackage.getEJavaObject());
+		g1.getETypeArguments().add(g2);
+		addEParameter(op, g1, "context", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
 
-		initEClass(collectionLiteralExpEClass, CollectionLiteralExp.class, "CollectionLiteralExp", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
-		initEAttribute(getCollectionLiteralExp_Kind(), this.getCollectionKind(), "kind", null, 0, 1, CollectionLiteralExp.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+		initEClass(
+			collectionLiteralPartEClass,
+			CollectionLiteralPart.class,
+			"CollectionLiteralPart", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+
+		initEClass(
+			collectionLiteralExpEClass,
+			CollectionLiteralExp.class,
+			"CollectionLiteralExp", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+		initEAttribute(
+			getCollectionLiteralExp_Kind(),
+			this.getCollectionKind(),
+			"kind", null, 0, 1, CollectionLiteralExp.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
 		g1 = createEGenericType(this.getCollectionLiteralPart());
 		g2 = createEGenericType(collectionLiteralExpEClass_C);
 		g1.getETypeArguments().add(g2);
-		initEReference(getCollectionLiteralExp_Part(), g1, null, "part", null, 0, -1, CollectionLiteralExp.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
-		initEAttribute(getCollectionLiteralExp_SimpleRange(), ecorePackage.getEBoolean(), "simpleRange", null, 0, 1, CollectionLiteralExp.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+		initEReference(
+			getCollectionLiteralExp_Part(),
+			g1,
+			null,
+			"part", null, 0, -1, CollectionLiteralExp.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+		initEAttribute(
+			getCollectionLiteralExp_SimpleRange(),
+			ecorePackage.getEBoolean(),
+			"simpleRange", null, 0, 1, CollectionLiteralExp.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
 
-		initEClass(collectionRangeEClass, CollectionRange.class, "CollectionRange", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+		op = addEOperation(collectionLiteralExpEClass, ecorePackage
+			.getEBoolean(),
+			"checkNoCollectionInstances", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+		addEParameter(op, ecorePackage.getEDiagnosticChain(),
+			"diagnostics", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+		g1 = createEGenericType(ecorePackage.getEMap());
+		g2 = createEGenericType(ecorePackage.getEJavaObject());
+		g1.getETypeArguments().add(g2);
+		g2 = createEGenericType(ecorePackage.getEJavaObject());
+		g1.getETypeArguments().add(g2);
+		addEParameter(op, g1, "context", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+
+		op = addEOperation(collectionLiteralExpEClass, ecorePackage
+			.getEBoolean(), "checkSetKind", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+		addEParameter(op, ecorePackage.getEDiagnosticChain(),
+			"diagnostics", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+		g1 = createEGenericType(ecorePackage.getEMap());
+		g2 = createEGenericType(ecorePackage.getEJavaObject());
+		g1.getETypeArguments().add(g2);
+		g2 = createEGenericType(ecorePackage.getEJavaObject());
+		g1.getETypeArguments().add(g2);
+		addEParameter(op, g1, "context", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+
+		op = addEOperation(collectionLiteralExpEClass, ecorePackage
+			.getEBoolean(), "checkSequenceKind", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+		addEParameter(op, ecorePackage.getEDiagnosticChain(),
+			"diagnostics", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+		g1 = createEGenericType(ecorePackage.getEMap());
+		g2 = createEGenericType(ecorePackage.getEJavaObject());
+		g1.getETypeArguments().add(g2);
+		g2 = createEGenericType(ecorePackage.getEJavaObject());
+		g1.getETypeArguments().add(g2);
+		addEParameter(op, g1, "context", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+
+		op = addEOperation(collectionLiteralExpEClass, ecorePackage
+			.getEBoolean(), "checkBagKind", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+		addEParameter(op, ecorePackage.getEDiagnosticChain(),
+			"diagnostics", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+		g1 = createEGenericType(ecorePackage.getEMap());
+		g2 = createEGenericType(ecorePackage.getEJavaObject());
+		g1.getETypeArguments().add(g2);
+		g2 = createEGenericType(ecorePackage.getEJavaObject());
+		g1.getETypeArguments().add(g2);
+		addEParameter(op, g1, "context", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+
+		op = addEOperation(collectionLiteralExpEClass, ecorePackage
+			.getEBoolean(), "checkElementType", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+		addEParameter(op, ecorePackage.getEDiagnosticChain(),
+			"diagnostics", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+		g1 = createEGenericType(ecorePackage.getEMap());
+		g2 = createEGenericType(ecorePackage.getEJavaObject());
+		g1.getETypeArguments().add(g2);
+		g2 = createEGenericType(ecorePackage.getEJavaObject());
+		g1.getETypeArguments().add(g2);
+		addEParameter(op, g1, "context", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+
+		initEClass(
+			collectionRangeEClass,
+			CollectionRange.class,
+			"CollectionRange", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
 		g1 = createEGenericType(this.getOCLExpression());
 		g2 = createEGenericType(collectionRangeEClass_C);
 		g1.getETypeArguments().add(g2);
-		initEReference(getCollectionRange_First(), g1, null, "first", null, 1, 1, CollectionRange.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+		initEReference(
+			getCollectionRange_First(),
+			g1,
+			null,
+			"first", null, 1, 1, CollectionRange.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
 		g1 = createEGenericType(this.getOCLExpression());
 		g2 = createEGenericType(collectionRangeEClass_C);
 		g1.getETypeArguments().add(g2);
-		initEReference(getCollectionRange_Last(), g1, null, "last", null, 1, 1, CollectionRange.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+		initEReference(
+			getCollectionRange_Last(),
+			g1,
+			null,
+			"last", null, 1, 1, CollectionRange.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
 
-		initEClass(enumLiteralExpEClass, EnumLiteralExp.class, "EnumLiteralExp", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+		op = addEOperation(collectionRangeEClass, ecorePackage.getEBoolean(),
+			"checkRangeType", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+		addEParameter(op, ecorePackage.getEDiagnosticChain(),
+			"diagnostics", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+		g1 = createEGenericType(ecorePackage.getEMap());
+		g2 = createEGenericType(ecorePackage.getEJavaObject());
+		g1.getETypeArguments().add(g2);
+		g2 = createEGenericType(ecorePackage.getEJavaObject());
+		g1.getETypeArguments().add(g2);
+		addEParameter(op, g1, "context", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+
+		initEClass(
+			enumLiteralExpEClass,
+			EnumLiteralExp.class,
+			"EnumLiteralExp", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
 		g1 = createEGenericType(enumLiteralExpEClass_EL);
-		initEReference(getEnumLiteralExp_ReferredEnumLiteral(), g1, null, "referredEnumLiteral", null, 0, 1, EnumLiteralExp.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+		initEReference(
+			getEnumLiteralExp_ReferredEnumLiteral(),
+			g1,
+			null,
+			"referredEnumLiteral", null, 0, 1, EnumLiteralExp.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
 
-		initEClass(ifExpEClass, IfExp.class, "IfExp", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+		op = addEOperation(enumLiteralExpEClass, ecorePackage.getEBoolean(),
+			"checkEnumType", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+		addEParameter(op, ecorePackage.getEDiagnosticChain(),
+			"diagnostics", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+		g1 = createEGenericType(ecorePackage.getEMap());
+		g2 = createEGenericType(ecorePackage.getEJavaObject());
+		g1.getETypeArguments().add(g2);
+		g2 = createEGenericType(ecorePackage.getEJavaObject());
+		g1.getETypeArguments().add(g2);
+		addEParameter(op, g1, "context", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+
+		initEClass(ifExpEClass, IfExp.class,
+			"IfExp", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
 		g1 = createEGenericType(this.getOCLExpression());
 		g2 = createEGenericType(ifExpEClass_C);
 		g1.getETypeArguments().add(g2);
-		initEReference(getIfExp_Condition(), g1, null, "condition", null, 0, 1, IfExp.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+		initEReference(
+			getIfExp_Condition(),
+			g1,
+			null,
+			"condition", null, 0, 1, IfExp.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
 		g1 = createEGenericType(this.getOCLExpression());
 		g2 = createEGenericType(ifExpEClass_C);
 		g1.getETypeArguments().add(g2);
-		initEReference(getIfExp_ThenExpression(), g1, null, "thenExpression", null, 0, 1, IfExp.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+		initEReference(
+			getIfExp_ThenExpression(),
+			g1,
+			null,
+			"thenExpression", null, 0, 1, IfExp.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
 		g1 = createEGenericType(this.getOCLExpression());
 		g2 = createEGenericType(ifExpEClass_C);
 		g1.getETypeArguments().add(g2);
-		initEReference(getIfExp_ElseExpression(), g1, null, "elseExpression", null, 0, 1, IfExp.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+		initEReference(
+			getIfExp_ElseExpression(),
+			g1,
+			null,
+			"elseExpression", null, 0, 1, IfExp.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
 
-		initEClass(integerLiteralExpEClass, IntegerLiteralExp.class, "IntegerLiteralExp", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
-		initEAttribute(getIntegerLiteralExp_IntegerSymbol(), ecorePackage.getEIntegerObject(), "integerSymbol", null, 0, 1, IntegerLiteralExp.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+		op = addEOperation(ifExpEClass, ecorePackage.getEBoolean(),
+			"checkBooleanCondition", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+		addEParameter(op, ecorePackage.getEDiagnosticChain(),
+			"diagnostics", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+		g1 = createEGenericType(ecorePackage.getEMap());
+		g2 = createEGenericType(ecorePackage.getEJavaObject());
+		g1.getETypeArguments().add(g2);
+		g2 = createEGenericType(ecorePackage.getEJavaObject());
+		g1.getETypeArguments().add(g2);
+		addEParameter(op, g1, "context", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
 
-		initEClass(numericLiteralExpEClass, NumericLiteralExp.class, "NumericLiteralExp", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+		op = addEOperation(ifExpEClass, ecorePackage.getEBoolean(),
+			"checkIfType", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+		addEParameter(op, ecorePackage.getEDiagnosticChain(),
+			"diagnostics", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+		g1 = createEGenericType(ecorePackage.getEMap());
+		g2 = createEGenericType(ecorePackage.getEJavaObject());
+		g1.getETypeArguments().add(g2);
+		g2 = createEGenericType(ecorePackage.getEJavaObject());
+		g1.getETypeArguments().add(g2);
+		addEParameter(op, g1, "context", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
 
-		initEClass(unlimitedNaturalLiteralExpEClass, UnlimitedNaturalLiteralExp.class, "UnlimitedNaturalLiteralExp", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
-		initEAttribute(getUnlimitedNaturalLiteralExp_IntegerSymbol(), ecorePackage.getEIntegerObject(), "integerSymbol", null, 0, 1, UnlimitedNaturalLiteralExp.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
-		initEAttribute(getUnlimitedNaturalLiteralExp_Unlimited(), ecorePackage.getEBoolean(), "unlimited", null, 1, 1, UnlimitedNaturalLiteralExp.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+		initEClass(
+			integerLiteralExpEClass,
+			IntegerLiteralExp.class,
+			"IntegerLiteralExp", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+		initEAttribute(
+			getIntegerLiteralExp_IntegerSymbol(),
+			ecorePackage.getEIntegerObject(),
+			"integerSymbol", null, 0, 1, IntegerLiteralExp.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
 
-		initEClass(invalidLiteralExpEClass, InvalidLiteralExp.class, "InvalidLiteralExp", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+		op = addEOperation(integerLiteralExpEClass, ecorePackage.getEBoolean(),
+			"checkIntegerType", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+		addEParameter(op, ecorePackage.getEDiagnosticChain(),
+			"diagnostics", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+		g1 = createEGenericType(ecorePackage.getEMap());
+		g2 = createEGenericType(ecorePackage.getEJavaObject());
+		g1.getETypeArguments().add(g2);
+		g2 = createEGenericType(ecorePackage.getEJavaObject());
+		g1.getETypeArguments().add(g2);
+		addEParameter(op, g1, "context", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
 
-		initEClass(iterateExpEClass, IterateExp.class, "IterateExp", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+		initEClass(
+			numericLiteralExpEClass,
+			NumericLiteralExp.class,
+			"NumericLiteralExp", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+
+		initEClass(
+			unlimitedNaturalLiteralExpEClass,
+			UnlimitedNaturalLiteralExp.class,
+			"UnlimitedNaturalLiteralExp", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+		initEAttribute(
+			getUnlimitedNaturalLiteralExp_IntegerSymbol(),
+			ecorePackage.getEIntegerObject(),
+			"integerSymbol", null, 0, 1, UnlimitedNaturalLiteralExp.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+		initEAttribute(
+			getUnlimitedNaturalLiteralExp_Unlimited(),
+			ecorePackage.getEBoolean(),
+			"unlimited", null, 1, 1, UnlimitedNaturalLiteralExp.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+
+		op = addEOperation(unlimitedNaturalLiteralExpEClass, ecorePackage
+			.getEBoolean(), "checkNaturalType", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+		addEParameter(op, ecorePackage.getEDiagnosticChain(),
+			"diagnostics", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+		g1 = createEGenericType(ecorePackage.getEMap());
+		g2 = createEGenericType(ecorePackage.getEJavaObject());
+		g1.getETypeArguments().add(g2);
+		g2 = createEGenericType(ecorePackage.getEJavaObject());
+		g1.getETypeArguments().add(g2);
+		addEParameter(op, g1, "context", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+
+		initEClass(
+			invalidLiteralExpEClass,
+			InvalidLiteralExp.class,
+			"InvalidLiteralExp", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+
+		initEClass(
+			iterateExpEClass,
+			IterateExp.class,
+			"IterateExp", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
 		g1 = createEGenericType(this.getVariable());
 		g2 = createEGenericType(iterateExpEClass_C);
 		g1.getETypeArguments().add(g2);
 		g2 = createEGenericType(iterateExpEClass_PM);
 		g1.getETypeArguments().add(g2);
-		initEReference(getIterateExp_Result(), g1, null, "result", null, 0, 1, IterateExp.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+		initEReference(
+			getIterateExp_Result(),
+			g1,
+			null,
+			"result", null, 0, 1, IterateExp.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
 
-		initEClass(loopExpEClass, LoopExp.class, "LoopExp", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+		op = addEOperation(iterateExpEClass, ecorePackage.getEBoolean(),
+			"checkIterateType", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+		addEParameter(op, ecorePackage.getEDiagnosticChain(),
+			"diagnostics", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+		g1 = createEGenericType(ecorePackage.getEMap());
+		g2 = createEGenericType(ecorePackage.getEJavaObject());
+		g1.getETypeArguments().add(g2);
+		g2 = createEGenericType(ecorePackage.getEJavaObject());
+		g1.getETypeArguments().add(g2);
+		addEParameter(op, g1, "context", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+
+		op = addEOperation(iterateExpEClass, ecorePackage.getEBoolean(),
+			"checkBodyType", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+		addEParameter(op, ecorePackage.getEDiagnosticChain(),
+			"diagnostics", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+		g1 = createEGenericType(ecorePackage.getEMap());
+		g2 = createEGenericType(ecorePackage.getEJavaObject());
+		g1.getETypeArguments().add(g2);
+		g2 = createEGenericType(ecorePackage.getEJavaObject());
+		g1.getETypeArguments().add(g2);
+		addEParameter(op, g1, "context", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+
+		op = addEOperation(iterateExpEClass, ecorePackage.getEBoolean(),
+			"checkResultInit", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+		addEParameter(op, ecorePackage.getEDiagnosticChain(),
+			"diagnostics", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+		g1 = createEGenericType(ecorePackage.getEMap());
+		g2 = createEGenericType(ecorePackage.getEJavaObject());
+		g1.getETypeArguments().add(g2);
+		g2 = createEGenericType(ecorePackage.getEJavaObject());
+		g1.getETypeArguments().add(g2);
+		addEParameter(op, g1, "context", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+
+		initEClass(loopExpEClass, LoopExp.class,
+			"LoopExp", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
 		g1 = createEGenericType(this.getOCLExpression());
 		g2 = createEGenericType(loopExpEClass_C);
 		g1.getETypeArguments().add(g2);
-		initEReference(getLoopExp_Body(), g1, null, "body", null, 0, 1, LoopExp.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+		initEReference(
+			getLoopExp_Body(),
+			g1,
+			null,
+			"body", null, 0, 1, LoopExp.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
 		g1 = createEGenericType(this.getVariable());
 		g2 = createEGenericType(loopExpEClass_C);
 		g1.getETypeArguments().add(g2);
 		g2 = createEGenericType(loopExpEClass_PM);
 		g1.getETypeArguments().add(g2);
-		initEReference(getLoopExp_Iterator(), g1, null, "iterator", null, 0, -1, LoopExp.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+		initEReference(
+			getLoopExp_Iterator(),
+			g1,
+			null,
+			"iterator", null, 0, -1, LoopExp.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
 
-		initEClass(variableEClass, Variable.class, "Variable", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+		op = addEOperation(loopExpEClass, ecorePackage.getEBoolean(),
+			"checkSourceCollection", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+		addEParameter(op, ecorePackage.getEDiagnosticChain(),
+			"diagnostics", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+		g1 = createEGenericType(ecorePackage.getEMap());
+		g2 = createEGenericType(ecorePackage.getEJavaObject());
+		g1.getETypeArguments().add(g2);
+		g2 = createEGenericType(ecorePackage.getEJavaObject());
+		g1.getETypeArguments().add(g2);
+		addEParameter(op, g1, "context", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+
+		op = addEOperation(loopExpEClass, ecorePackage.getEBoolean(),
+			"checkLoopVariableInit", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+		addEParameter(op, ecorePackage.getEDiagnosticChain(),
+			"diagnostics", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+		g1 = createEGenericType(ecorePackage.getEMap());
+		g2 = createEGenericType(ecorePackage.getEJavaObject());
+		g1.getETypeArguments().add(g2);
+		g2 = createEGenericType(ecorePackage.getEJavaObject());
+		g1.getETypeArguments().add(g2);
+		addEParameter(op, g1, "context", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+
+		op = addEOperation(loopExpEClass, ecorePackage.getEBoolean(),
+			"checkLoopVariableType", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+		addEParameter(op, ecorePackage.getEDiagnosticChain(),
+			"diagnostics", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+		g1 = createEGenericType(ecorePackage.getEMap());
+		g2 = createEGenericType(ecorePackage.getEJavaObject());
+		g1.getETypeArguments().add(g2);
+		g2 = createEGenericType(ecorePackage.getEJavaObject());
+		g1.getETypeArguments().add(g2);
+		addEParameter(op, g1, "context", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+
+		initEClass(
+			variableEClass,
+			Variable.class,
+			"Variable", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
 		g1 = createEGenericType(this.getOCLExpression());
 		g2 = createEGenericType(variableEClass_C);
 		g1.getETypeArguments().add(g2);
-		initEReference(getVariable_InitExpression(), g1, null, "initExpression", null, 0, 1, Variable.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+		initEReference(
+			getVariable_InitExpression(),
+			g1,
+			null,
+			"initExpression", null, 0, 1, Variable.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
 		g1 = createEGenericType(variableEClass_PM);
-		initEReference(getVariable_RepresentedParameter(), g1, null, "representedParameter", null, 0, 1, Variable.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+		initEReference(
+			getVariable_RepresentedParameter(),
+			g1,
+			null,
+			"representedParameter", null, 0, 1, Variable.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
 
-		initEClass(iteratorExpEClass, IteratorExp.class, "IteratorExp", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+		op = addEOperation(variableEClass, ecorePackage.getEBoolean(),
+			"checkInitType", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+		addEParameter(op, ecorePackage.getEDiagnosticChain(),
+			"diagnostics", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+		g1 = createEGenericType(ecorePackage.getEMap());
+		g2 = createEGenericType(ecorePackage.getEJavaObject());
+		g1.getETypeArguments().add(g2);
+		g2 = createEGenericType(ecorePackage.getEJavaObject());
+		g1.getETypeArguments().add(g2);
+		addEParameter(op, g1, "context", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
 
-		initEClass(letExpEClass, LetExp.class, "LetExp", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+		initEClass(
+			iteratorExpEClass,
+			IteratorExp.class,
+			"IteratorExp", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+
+		op = addEOperation(iteratorExpEClass, ecorePackage.getEBoolean(),
+			"checkBooleanType", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+		addEParameter(op, ecorePackage.getEDiagnosticChain(),
+			"diagnostics", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+		g1 = createEGenericType(ecorePackage.getEMap());
+		g2 = createEGenericType(ecorePackage.getEJavaObject());
+		g1.getETypeArguments().add(g2);
+		g2 = createEGenericType(ecorePackage.getEJavaObject());
+		g1.getETypeArguments().add(g2);
+		addEParameter(op, g1, "context", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+
+		op = addEOperation(iteratorExpEClass, ecorePackage.getEBoolean(),
+			"checkCollectType", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+		addEParameter(op, ecorePackage.getEDiagnosticChain(),
+			"diagnostics", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+		g1 = createEGenericType(ecorePackage.getEMap());
+		g2 = createEGenericType(ecorePackage.getEJavaObject());
+		g1.getETypeArguments().add(g2);
+		g2 = createEGenericType(ecorePackage.getEJavaObject());
+		g1.getETypeArguments().add(g2);
+		addEParameter(op, g1, "context", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+
+		op = addEOperation(iteratorExpEClass, ecorePackage.getEBoolean(),
+			"checkSelectRejectType", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+		addEParameter(op, ecorePackage.getEDiagnosticChain(),
+			"diagnostics", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+		g1 = createEGenericType(ecorePackage.getEMap());
+		g2 = createEGenericType(ecorePackage.getEJavaObject());
+		g1.getETypeArguments().add(g2);
+		g2 = createEGenericType(ecorePackage.getEJavaObject());
+		g1.getETypeArguments().add(g2);
+		addEParameter(op, g1, "context", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+
+		op = addEOperation(iteratorExpEClass, ecorePackage.getEBoolean(),
+			"checkBooleanBodyType", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+		addEParameter(op, ecorePackage.getEDiagnosticChain(),
+			"diagnostics", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+		g1 = createEGenericType(ecorePackage.getEMap());
+		g2 = createEGenericType(ecorePackage.getEJavaObject());
+		g1.getETypeArguments().add(g2);
+		g2 = createEGenericType(ecorePackage.getEJavaObject());
+		g1.getETypeArguments().add(g2);
+		addEParameter(op, g1, "context", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+
+		initEClass(letExpEClass, LetExp.class,
+			"LetExp", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
 		g1 = createEGenericType(this.getOCLExpression());
 		g2 = createEGenericType(letExpEClass_C);
 		g1.getETypeArguments().add(g2);
-		initEReference(getLetExp_In(), g1, null, "in", null, 0, 1, LetExp.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+		initEReference(
+			getLetExp_In(),
+			g1,
+			null,
+			"in", null, 0, 1, LetExp.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
 		g1 = createEGenericType(this.getVariable());
 		g2 = createEGenericType(letExpEClass_C);
 		g1.getETypeArguments().add(g2);
 		g2 = createEGenericType(letExpEClass_PM);
 		g1.getETypeArguments().add(g2);
-		initEReference(getLetExp_Variable(), g1, null, "variable", null, 0, 1, LetExp.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+		initEReference(
+			getLetExp_Variable(),
+			g1,
+			null,
+			"variable", null, 0, 1, LetExp.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
 
-		initEClass(messageExpEClass, MessageExp.class, "MessageExp", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+		op = addEOperation(letExpEClass, ecorePackage.getEBoolean(),
+			"checkLetType", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+		addEParameter(op, ecorePackage.getEDiagnosticChain(),
+			"diagnostics", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+		g1 = createEGenericType(ecorePackage.getEMap());
+		g2 = createEGenericType(ecorePackage.getEJavaObject());
+		g1.getETypeArguments().add(g2);
+		g2 = createEGenericType(ecorePackage.getEJavaObject());
+		g1.getETypeArguments().add(g2);
+		addEParameter(op, g1, "context", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+
+		initEClass(
+			messageExpEClass,
+			MessageExp.class,
+			"MessageExp", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
 		g1 = createEGenericType(this.getOCLExpression());
 		g2 = createEGenericType(messageExpEClass_C);
 		g1.getETypeArguments().add(g2);
-		initEReference(getMessageExp_Target(), g1, null, "target", null, 0, 1, MessageExp.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+		initEReference(
+			getMessageExp_Target(),
+			g1,
+			null,
+			"target", null, 0, 1, MessageExp.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
 		g1 = createEGenericType(this.getOCLExpression());
 		g2 = createEGenericType(messageExpEClass_C);
 		g1.getETypeArguments().add(g2);
-		initEReference(getMessageExp_Argument(), g1, null, "argument", null, 0, -1, MessageExp.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+		initEReference(
+			getMessageExp_Argument(),
+			g1,
+			null,
+			"argument", null, 0, -1, MessageExp.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
 		g1 = createEGenericType(messageExpEClass_COA);
-		initEReference(getMessageExp_CalledOperation(), g1, null, "calledOperation", null, 0, 1, MessageExp.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+		initEReference(
+			getMessageExp_CalledOperation(),
+			g1,
+			null,
+			"calledOperation", null, 0, 1, MessageExp.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
 		g1 = createEGenericType(messageExpEClass_SSA);
-		initEReference(getMessageExp_SentSignal(), g1, null, "sentSignal", null, 0, 1, MessageExp.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+		initEReference(
+			getMessageExp_SentSignal(),
+			g1,
+			null,
+			"sentSignal", null, 0, 1, MessageExp.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
 
-		initEClass(nullLiteralExpEClass, NullLiteralExp.class, "NullLiteralExp", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+		op = addEOperation(messageExpEClass, ecorePackage.getEBoolean(),
+			"checkOperationArguments", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+		addEParameter(op, ecorePackage.getEDiagnosticChain(),
+			"diagnostics", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+		g1 = createEGenericType(ecorePackage.getEMap());
+		g2 = createEGenericType(ecorePackage.getEJavaObject());
+		g1.getETypeArguments().add(g2);
+		g2 = createEGenericType(ecorePackage.getEJavaObject());
+		g1.getETypeArguments().add(g2);
+		addEParameter(op, g1, "context", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
 
-		initEClass(operationCallExpEClass, OperationCallExp.class, "OperationCallExp", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+		op = addEOperation(messageExpEClass, ecorePackage.getEBoolean(),
+			"checkSignalArguments", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+		addEParameter(op, ecorePackage.getEDiagnosticChain(),
+			"diagnostics", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+		g1 = createEGenericType(ecorePackage.getEMap());
+		g2 = createEGenericType(ecorePackage.getEJavaObject());
+		g1.getETypeArguments().add(g2);
+		g2 = createEGenericType(ecorePackage.getEJavaObject());
+		g1.getETypeArguments().add(g2);
+		addEParameter(op, g1, "context", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+
+		op = addEOperation(messageExpEClass, ecorePackage.getEBoolean(),
+			"checkTargetDefinesOperation", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+		addEParameter(op, ecorePackage.getEDiagnosticChain(),
+			"diagnostics", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+		g1 = createEGenericType(ecorePackage.getEMap());
+		g2 = createEGenericType(ecorePackage.getEJavaObject());
+		g1.getETypeArguments().add(g2);
+		g2 = createEGenericType(ecorePackage.getEJavaObject());
+		g1.getETypeArguments().add(g2);
+		addEParameter(op, g1, "context", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+
+		op = addEOperation(messageExpEClass, ecorePackage.getEBoolean(),
+			"checkHasOperationOrSignal", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+		addEParameter(op, ecorePackage.getEDiagnosticChain(),
+			"diagnostics", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+		g1 = createEGenericType(ecorePackage.getEMap());
+		g2 = createEGenericType(ecorePackage.getEJavaObject());
+		g1.getETypeArguments().add(g2);
+		g2 = createEGenericType(ecorePackage.getEJavaObject());
+		g1.getETypeArguments().add(g2);
+		addEParameter(op, g1, "context", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+
+		op = addEOperation(messageExpEClass, ecorePackage.getEBoolean(),
+			"checkTargetNotCollection", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+		addEParameter(op, ecorePackage.getEDiagnosticChain(),
+			"diagnostics", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+		g1 = createEGenericType(ecorePackage.getEMap());
+		g2 = createEGenericType(ecorePackage.getEJavaObject());
+		g1.getETypeArguments().add(g2);
+		g2 = createEGenericType(ecorePackage.getEJavaObject());
+		g1.getETypeArguments().add(g2);
+		addEParameter(op, g1, "context", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+
+		initEClass(
+			nullLiteralExpEClass,
+			NullLiteralExp.class,
+			"NullLiteralExp", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+
+		initEClass(
+			operationCallExpEClass,
+			OperationCallExp.class,
+			"OperationCallExp", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
 		g1 = createEGenericType(this.getOCLExpression());
 		g2 = createEGenericType(operationCallExpEClass_C);
 		g1.getETypeArguments().add(g2);
-		initEReference(getOperationCallExp_Argument(), g1, null, "argument", null, 0, -1, OperationCallExp.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+		initEReference(
+			getOperationCallExp_Argument(),
+			g1,
+			null,
+			"argument", null, 0, -1, OperationCallExp.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
 		g1 = createEGenericType(operationCallExpEClass_O);
-		initEReference(getOperationCallExp_ReferredOperation(), g1, null, "referredOperation", null, 0, 1, OperationCallExp.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
-		initEAttribute(getOperationCallExp_OperationCode(), ecorePackage.getEInt(), "operationCode", null, 0, 1, OperationCallExp.class, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+		initEReference(
+			getOperationCallExp_ReferredOperation(),
+			g1,
+			null,
+			"referredOperation", null, 0, 1, OperationCallExp.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+		initEAttribute(
+			getOperationCallExp_OperationCode(),
+			ecorePackage.getEInt(),
+			"operationCode", null, 0, 1, OperationCallExp.class, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
 
-		initEClass(propertyCallExpEClass, PropertyCallExp.class, "PropertyCallExp", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+		op = addEOperation(operationCallExpEClass, ecorePackage.getEBoolean(),
+			"checkArgumentsConform", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+		addEParameter(op, ecorePackage.getEDiagnosticChain(),
+			"diagnostics", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+		g1 = createEGenericType(ecorePackage.getEMap());
+		g2 = createEGenericType(ecorePackage.getEJavaObject());
+		g1.getETypeArguments().add(g2);
+		g2 = createEGenericType(ecorePackage.getEJavaObject());
+		g1.getETypeArguments().add(g2);
+		addEParameter(op, g1, "context", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+
+		op = addEOperation(operationCallExpEClass, ecorePackage.getEBoolean(),
+			"checkArgumentCount", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+		addEParameter(op, ecorePackage.getEDiagnosticChain(),
+			"diagnostics", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+		g1 = createEGenericType(ecorePackage.getEMap());
+		g2 = createEGenericType(ecorePackage.getEJavaObject());
+		g1.getETypeArguments().add(g2);
+		g2 = createEGenericType(ecorePackage.getEJavaObject());
+		g1.getETypeArguments().add(g2);
+		addEParameter(op, g1, "context", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+
+		initEClass(
+			propertyCallExpEClass,
+			PropertyCallExp.class,
+			"PropertyCallExp", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
 		g1 = createEGenericType(propertyCallExpEClass_P);
-		initEReference(getPropertyCallExp_ReferredProperty(), g1, null, "referredProperty", null, 0, 1, PropertyCallExp.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+		initEReference(
+			getPropertyCallExp_ReferredProperty(),
+			g1,
+			null,
+			"referredProperty", null, 0, 1, PropertyCallExp.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
 
-		initEClass(realLiteralExpEClass, RealLiteralExp.class, "RealLiteralExp", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
-		initEAttribute(getRealLiteralExp_RealSymbol(), ecorePackage.getEDoubleObject(), "realSymbol", null, 0, 1, RealLiteralExp.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+		op = addEOperation(propertyCallExpEClass, ecorePackage.getEBoolean(),
+			"checkPropertyType", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+		addEParameter(op, ecorePackage.getEDiagnosticChain(),
+			"diagnostics", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+		g1 = createEGenericType(ecorePackage.getEMap());
+		g2 = createEGenericType(ecorePackage.getEJavaObject());
+		g1.getETypeArguments().add(g2);
+		g2 = createEGenericType(ecorePackage.getEJavaObject());
+		g1.getETypeArguments().add(g2);
+		addEParameter(op, g1, "context", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
 
-		initEClass(stateExpEClass, StateExp.class, "StateExp", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+		initEClass(
+			realLiteralExpEClass,
+			RealLiteralExp.class,
+			"RealLiteralExp", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+		initEAttribute(
+			getRealLiteralExp_RealSymbol(),
+			ecorePackage.getEDoubleObject(),
+			"realSymbol", null, 0, 1, RealLiteralExp.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+
+		op = addEOperation(realLiteralExpEClass, ecorePackage.getEBoolean(),
+			"checkRealType", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+		addEParameter(op, ecorePackage.getEDiagnosticChain(),
+			"diagnostics", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+		g1 = createEGenericType(ecorePackage.getEMap());
+		g2 = createEGenericType(ecorePackage.getEJavaObject());
+		g1.getETypeArguments().add(g2);
+		g2 = createEGenericType(ecorePackage.getEJavaObject());
+		g1.getETypeArguments().add(g2);
+		addEParameter(op, g1, "context", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+
+		initEClass(
+			stateExpEClass,
+			StateExp.class,
+			"StateExp", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
 		g1 = createEGenericType(stateExpEClass_S);
-		initEReference(getStateExp_ReferredState(), g1, null, "referredState", null, 0, 1, StateExp.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+		initEReference(
+			getStateExp_ReferredState(),
+			g1,
+			null,
+			"referredState", null, 0, 1, StateExp.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
 
-		initEClass(stringLiteralExpEClass, StringLiteralExp.class, "StringLiteralExp", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
-		initEAttribute(getStringLiteralExp_StringSymbol(), ecorePackage.getEString(), "stringSymbol", null, 0, 1, StringLiteralExp.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+		initEClass(
+			stringLiteralExpEClass,
+			StringLiteralExp.class,
+			"StringLiteralExp", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+		initEAttribute(
+			getStringLiteralExp_StringSymbol(),
+			ecorePackage.getEString(),
+			"stringSymbol", null, 0, 1, StringLiteralExp.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
 
-		initEClass(tupleLiteralExpEClass, TupleLiteralExp.class, "TupleLiteralExp", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+		op = addEOperation(stringLiteralExpEClass, ecorePackage.getEBoolean(),
+			"checkStringType", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+		addEParameter(op, ecorePackage.getEDiagnosticChain(),
+			"diagnostics", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+		g1 = createEGenericType(ecorePackage.getEMap());
+		g2 = createEGenericType(ecorePackage.getEJavaObject());
+		g1.getETypeArguments().add(g2);
+		g2 = createEGenericType(ecorePackage.getEJavaObject());
+		g1.getETypeArguments().add(g2);
+		addEParameter(op, g1, "context", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+
+		initEClass(
+			tupleLiteralExpEClass,
+			TupleLiteralExp.class,
+			"TupleLiteralExp", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
 		g1 = createEGenericType(this.getTupleLiteralPart());
 		g2 = createEGenericType(tupleLiteralExpEClass_C);
 		g1.getETypeArguments().add(g2);
 		g2 = createEGenericType(tupleLiteralExpEClass_P);
 		g1.getETypeArguments().add(g2);
-		initEReference(getTupleLiteralExp_Part(), g1, null, "part", null, 0, -1, TupleLiteralExp.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+		initEReference(
+			getTupleLiteralExp_Part(),
+			g1,
+			null,
+			"part", null, 0, -1, TupleLiteralExp.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
 
-		initEClass(tupleLiteralPartEClass, TupleLiteralPart.class, "TupleLiteralPart", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+		op = addEOperation(tupleLiteralExpEClass, ecorePackage.getEBoolean(),
+			"checkTupleType", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+		addEParameter(op, ecorePackage.getEDiagnosticChain(),
+			"diagnostics", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+		g1 = createEGenericType(ecorePackage.getEMap());
+		g2 = createEGenericType(ecorePackage.getEJavaObject());
+		g1.getETypeArguments().add(g2);
+		g2 = createEGenericType(ecorePackage.getEJavaObject());
+		g1.getETypeArguments().add(g2);
+		addEParameter(op, g1, "context", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+
+		op = addEOperation(tupleLiteralExpEClass, ecorePackage.getEBoolean(),
+			"checkPartsUnique", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+		addEParameter(op, ecorePackage.getEDiagnosticChain(),
+			"diagnostics", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+		g1 = createEGenericType(ecorePackage.getEMap());
+		g2 = createEGenericType(ecorePackage.getEJavaObject());
+		g1.getETypeArguments().add(g2);
+		g2 = createEGenericType(ecorePackage.getEJavaObject());
+		g1.getETypeArguments().add(g2);
+		addEParameter(op, g1, "context", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+
+		initEClass(
+			tupleLiteralPartEClass,
+			TupleLiteralPart.class,
+			"TupleLiteralPart", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
 		g1 = createEGenericType(this.getOCLExpression());
 		g2 = createEGenericType(tupleLiteralPartEClass_C);
 		g1.getETypeArguments().add(g2);
-		initEReference(getTupleLiteralPart_Value(), g1, null, "value", null, 0, 1, TupleLiteralPart.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+		initEReference(
+			getTupleLiteralPart_Value(),
+			g1,
+			null,
+			"value", null, 0, 1, TupleLiteralPart.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
 		g1 = createEGenericType(tupleLiteralPartEClass_P);
-		initEReference(getTupleLiteralPart_Attribute(), g1, null, "attribute", null, 0, 1, TupleLiteralPart.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+		initEReference(
+			getTupleLiteralPart_Attribute(),
+			g1,
+			null,
+			"attribute", null, 0, 1, TupleLiteralPart.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
 
-		initEClass(typeExpEClass, TypeExp.class, "TypeExp", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+		op = addEOperation(tupleLiteralPartEClass, ecorePackage.getEBoolean(),
+			"checkValueType", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+		addEParameter(op, ecorePackage.getEDiagnosticChain(),
+			"diagnostics", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+		g1 = createEGenericType(ecorePackage.getEMap());
+		g2 = createEGenericType(ecorePackage.getEJavaObject());
+		g1.getETypeArguments().add(g2);
+		g2 = createEGenericType(ecorePackage.getEJavaObject());
+		g1.getETypeArguments().add(g2);
+		addEParameter(op, g1, "context", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+
+		initEClass(typeExpEClass, TypeExp.class,
+			"TypeExp", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
 		g1 = createEGenericType(typeExpEClass_C);
-		initEReference(getTypeExp_ReferredType(), g1, null, "referredType", null, 0, 1, TypeExp.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+		initEReference(
+			getTypeExp_ReferredType(),
+			g1,
+			null,
+			"referredType", null, 0, 1, TypeExp.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
 
-		initEClass(unspecifiedValueExpEClass, UnspecifiedValueExp.class, "UnspecifiedValueExp", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+		initEClass(
+			unspecifiedValueExpEClass,
+			UnspecifiedValueExp.class,
+			"UnspecifiedValueExp", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
 
-		initEClass(variableExpEClass, VariableExp.class, "VariableExp", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+		initEClass(
+			variableExpEClass,
+			VariableExp.class,
+			"VariableExp", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
 		g1 = createEGenericType(this.getVariable());
 		g2 = createEGenericType(variableExpEClass_C);
 		g1.getETypeArguments().add(g2);
 		g2 = createEGenericType(variableExpEClass_PM);
 		g1.getETypeArguments().add(g2);
-		initEReference(getVariableExp_ReferredVariable(), g1, null, "referredVariable", null, 0, 1, VariableExp.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+		initEReference(
+			getVariableExp_ReferredVariable(),
+			g1,
+			null,
+			"referredVariable", null, 0, 1, VariableExp.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+
+		op = addEOperation(variableExpEClass, ecorePackage.getEBoolean(),
+			"checkVarType", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+		addEParameter(op, ecorePackage.getEDiagnosticChain(),
+			"diagnostics", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+		g1 = createEGenericType(ecorePackage.getEMap());
+		g2 = createEGenericType(ecorePackage.getEJavaObject());
+		g1.getETypeArguments().add(g2);
+		g2 = createEGenericType(ecorePackage.getEJavaObject());
+		g1.getETypeArguments().add(g2);
+		addEParameter(op, g1, "context", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
 
 		// Initialize enums and add enum literals
 		initEEnum(collectionKindEEnum, CollectionKind.class, "CollectionKind"); //$NON-NLS-1$
@@ -1749,13 +2553,10 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
 	 * @generated
 	 */
 	protected void createExtendedMetaDataAnnotations() {
-		String source = "http:///org/eclipse/emf/ecore/util/ExtendedMetaData"; //$NON-NLS-1$		
-		addAnnotation
-		  (oclExpressionEClass, 
-		   source, 
-		   new String[] {
-			 "name", "OclExpression" //$NON-NLS-1$ //$NON-NLS-2$
-		   });
+		String source = "http:///org/eclipse/emf/ecore/util/ExtendedMetaData"; //$NON-NLS-1$	    
+		addAnnotation(oclExpressionEClass, source, new String[]{
+			"name", "OclExpression" //$NON-NLS-1$ //$NON-NLS-2$
+		});
 	}
 
 } //ExpressionsPackageImpl

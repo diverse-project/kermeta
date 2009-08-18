@@ -1,7 +1,7 @@
 /**
  * <copyright>
  * 
- * Copyright (c) 2006, 2007 IBM Corporation and others.
+ * Copyright (c) 2006, 2008 IBM Corporation, Zeligsoft Inc., and others.
  * All rights reserved.   This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -9,13 +9,16 @@
  * 
  * Contributors:
  *   IBM - Initial API and implementation
+ *   Zeligsoft - Bug 207365
  * 
  * </copyright>
  *
- * $Id: TupleTypeImpl.java,v 1.1 2008-08-07 06:35:15 dvojtise Exp $
+ * $Id: TupleTypeImpl.java,v 1.7 2008/10/12 01:09:48 cdamus Exp $
  */
 package org.eclipse.ocl.types.impl;
 
+import java.util.Map;
+import org.eclipse.emf.common.util.DiagnosticChain;
 import java.util.Iterator;
 
 import org.eclipse.emf.common.util.BasicEList;
@@ -25,7 +28,9 @@ import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.eclipse.ocl.Environment;
 import org.eclipse.ocl.types.TupleType;
 import org.eclipse.ocl.types.TypesPackage;
+import org.eclipse.ocl.types.operations.TupleTypeOperations;
 import org.eclipse.ocl.util.OCLStandardLibraryUtil;
+import org.eclipse.ocl.util.TypeUtil;
 import org.eclipse.ocl.utilities.UMLReflection;
 
 /**
@@ -37,12 +42,16 @@ import org.eclipse.ocl.utilities.UMLReflection;
  *
  * @generated
  */
-public class TupleTypeImpl<O, P> extends EObjectImpl implements TupleType<O, P> {
+public class TupleTypeImpl<O, P>
+		extends EObjectImpl
+		implements TupleType<O, P> {
+
 	private String name;
-	
+
 	private EList<O> operations;
+
 	private EList<P> properties;
-	
+
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -69,35 +78,36 @@ public class TupleTypeImpl<O, P> extends EObjectImpl implements TupleType<O, P> 
 	 */
 	public String getName() {
 		if (name == null) {
-			Environment<?, ?, O, P, ?, ?, ?, ?, ?, ?, ?, ?> env =
-				Environment.Registry.INSTANCE.getEnvironmentFor(this);
-			
-            UMLReflection<?, ?, O, P, ?, ?, ?, ?, ?, ?> uml = env.getUMLReflection();
+			Environment<?, Object, O, P, ?, ?, ?, ?, ?, ?, ?, ?> env = Environment.Registry.INSTANCE
+				.getEnvironmentFor(this);
+
+			UMLReflection<?, Object, O, P, ?, ?, ?, ?, ?, ?> uml = env
+				.getUMLReflection();
 
 			StringBuffer myName = new StringBuffer();
-			
-            myName.append(SINGLETON_NAME).append('(');
-            
+
+			myName.append(SINGLETON_NAME).append('(');
+
 			for (Iterator<P> iter = oclProperties().iterator(); iter.hasNext();) {
 				P next = iter.next();
-				
+
 				myName.append(uml.getName(next));
-				
-				Object type = uml.getOCLType(next);
+
+				Object type = TypeUtil.resolveType(env, uml.getOCLType(next));
 				if (type != null) {
 					myName.append(" : "); //$NON-NLS-1$
 					myName.append(uml.getName(type));
 				}
-				
+
 				if (iter.hasNext()) {
 					myName.append(", "); //$NON-NLS-1$
 				}
 			}
-            
-            myName.append(')');
-            name = myName.toString();
+
+			myName.append(')');
+			name = myName.toString();
 		}
-		
+
 		return name;
 	}
 
@@ -108,14 +118,47 @@ public class TupleTypeImpl<O, P> extends EObjectImpl implements TupleType<O, P> 
 	 */
 	public EList<O> oclOperations() {
 		if (operations == null) {
-			Environment<?, ?, O, ?, ?, ?, ?, ?, ?, ?, ?, ?> env =
-				Environment.Registry.INSTANCE.getEnvironmentFor(this);
-			
-			operations = new BasicEList<O>(
-					OCLStandardLibraryUtil.createAnyTypeOperations(env));
+			Environment<?, ?, O, ?, ?, ?, ?, ?, ?, ?, ?, ?> env = Environment.Registry.INSTANCE
+				.getEnvironmentFor(this);
+
+			operations = new BasicEList<O>(OCLStandardLibraryUtil
+				.createAnyTypeOperations(env));
 		}
-		
+
 		return operations;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean checkTupleTypeName(DiagnosticChain diagnostics,
+			Map<Object, Object> context) {
+		return TupleTypeOperations.checkTupleTypeName(this, diagnostics,
+			context);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean checkPartNamesUnique(DiagnosticChain diagnostics,
+			Map<Object, Object> context) {
+		return TupleTypeOperations.checkPartNamesUnique(this, diagnostics,
+			context);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean checkFeaturesOnlyProperties(DiagnosticChain diagnostics,
+			Map<Object, Object> context) {
+		return TupleTypeOperations.checkFeaturesOnlyProperties(this,
+			diagnostics, context);
 	}
 
 	/**
@@ -127,7 +170,7 @@ public class TupleTypeImpl<O, P> extends EObjectImpl implements TupleType<O, P> 
 		if (properties == null) {
 			properties = new BasicEList<P>();
 		}
-		
+
 		return properties;
 	}
 

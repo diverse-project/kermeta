@@ -1,7 +1,7 @@
 /**
  * <copyright>
  *
- * Copyright (c) 2002, 2007 IBM Corporation and others.
+ * Copyright (c) 2002, 2008 IBM Corporation and others.
  * All rights reserved.   This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -12,13 +12,14 @@
  *
  * </copyright>
  *
- * $Id: OCLHelperImpl.java,v 1.1 2008-08-07 06:35:17 dvojtise Exp $
+ * $Id: OCLHelperImpl.java,v 1.6 2008/04/17 19:38:15 cdamus Exp $
  */
 
 package org.eclipse.ocl.internal.helper;
 
 import java.util.List;
 
+import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.ocl.Environment;
 import org.eclipse.ocl.EnvironmentFactory;
@@ -31,6 +32,7 @@ import org.eclipse.ocl.helper.Choice;
 import org.eclipse.ocl.helper.ConstraintKind;
 import org.eclipse.ocl.helper.OCLHelper;
 import org.eclipse.ocl.internal.OCLPlugin;
+import org.eclipse.ocl.options.ParsingOptions;
 import org.eclipse.ocl.types.OCLStandardLibrary;
 import org.eclipse.ocl.utilities.ExpressionInOCL;
 import org.eclipse.ocl.utilities.OCLFactory;
@@ -47,15 +49,16 @@ class OCLHelperImpl<PK, C, O, P, EL, PM, S, COA, SSA, CT, CLS, E>
 	
 	private final EnvironmentFactory<PK, C, O, P, EL, PM, S, COA, SSA, CT, CLS, E>
 	environmentFactory;
-    private UMLReflection<PK, C, O, P, EL, PM, S, COA, SSA, CT> uml;
-    private OCLFactory oclFactory;
-	private Environment<PK, C, O, P, EL, PM, S, COA, SSA, CT, CLS, E>
-	env;
+    private final UMLReflection<PK, C, O, P, EL, PM, S, COA, SSA, CT> uml;
+    private final OCLFactory oclFactory;
+	private Environment<PK, C, O, P, EL, PM, S, COA, SSA, CT, CLS, E> env;
 
 	private OCLSyntaxHelper<PK, C, O, P, EL, PM, S, COA, SSA, CT, CLS, E> syntaxHelper;
 	
 	private boolean validating = true;
     private final OCL<PK, C, O, P, EL, PM, S, COA, SSA, CT, CLS, E> ocl;
+    
+    private Diagnostic problems;
     
 	/**
 	 * Initializes me with my environment.
@@ -70,7 +73,7 @@ class OCLHelperImpl<PK, C, O, P, EL, PM, S, COA, SSA, CT, CLS, E>
 		environmentFactory = ocl.getEnvironment().getFactory();
 	}
 	
-	protected Environment<PK, C, O, P, EL, PM, S, COA, SSA, CT, CLS, E>
+	public Environment<PK, C, O, P, EL, PM, S, COA, SSA, CT, CLS, E>
 	getEnvironment() {
 		return env == null? ocl.getEnvironment() : env;
 	}
@@ -154,6 +157,12 @@ class OCLHelperImpl<PK, C, O, P, EL, PM, S, COA, SSA, CT, CLS, E>
 	}
 
 	public List<Choice> getSyntaxHelp(ConstraintKind constraintType, String txt) {
+	    if (constraintType == null) {
+	        // query expressions cannot use post-condition constructs such
+	        // as @pre or oclIsNew(), so pretend an invariant constraint
+	        constraintType = ConstraintKind.INVARIANT;
+	    }
+	    
 		return createSyntaxHelper().getSyntaxHelp(constraintType, txt);
 	}
 
@@ -164,7 +173,7 @@ class OCLHelperImpl<PK, C, O, P, EL, PM, S, COA, SSA, CT, CLS, E>
             //    position information when parse fails
             try {
                 return HelperUtil.parseQuery(
-                    env, expression, validating, ocl.isParseTracingEnabled());
+                    this, expression, validating, ocl.isParseTracingEnabled());
             } catch (RuntimeException e) {
                 propagate(e, "createQuery"); //$NON-NLS-1$
             }
@@ -192,7 +201,7 @@ class OCLHelperImpl<PK, C, O, P, EL, PM, S, COA, SSA, CT, CLS, E>
             return createDerivedValueExpression(expression);
         case DEFINITION:
             return HelperUtil.parseDefExpression(
-                env, expression, validating, ocl.isParseTracingEnabled());
+                this, expression, validating, ocl.isParseTracingEnabled());
         default:
             return createInvariant(expression);
         }
@@ -204,7 +213,7 @@ class OCLHelperImpl<PK, C, O, P, EL, PM, S, COA, SSA, CT, CLS, E>
 			//    position information when parse fails
 			try {
 				return HelperUtil.parseInvariant(
-                    env, expression, validating, ocl.isParseTracingEnabled());
+                    this, expression, validating, ocl.isParseTracingEnabled());
 			} catch (RuntimeException e) {
 				propagate(e, "createInvariant"); //$NON-NLS-1$
 			}
@@ -219,7 +228,7 @@ class OCLHelperImpl<PK, C, O, P, EL, PM, S, COA, SSA, CT, CLS, E>
 			//    position information when parse fails
 			try {
 				return HelperUtil.parsePrecondition(
-                    env, expression, validating, ocl.isParseTracingEnabled());
+                    this, expression, validating, ocl.isParseTracingEnabled());
 			} catch (RuntimeException e) {
 				propagate(e, "createPrecondition"); //$NON-NLS-1$
 			}
@@ -234,7 +243,7 @@ class OCLHelperImpl<PK, C, O, P, EL, PM, S, COA, SSA, CT, CLS, E>
 			//    position information when parse fails
 			try {
 				return HelperUtil.parsePostcondition(
-                    env, expression, validating, ocl.isParseTracingEnabled());
+                    this, expression, validating, ocl.isParseTracingEnabled());
 			} catch (RuntimeException e) {
 				propagate(e, "createPostcondition"); //$NON-NLS-1$
 			}
@@ -249,7 +258,7 @@ class OCLHelperImpl<PK, C, O, P, EL, PM, S, COA, SSA, CT, CLS, E>
 			//    position information when parse fails
 			try {
 				return HelperUtil.parseBodyCondition(
-                    env, expression, validating, ocl.isParseTracingEnabled());
+                    this, expression, validating, ocl.isParseTracingEnabled());
 			} catch (RuntimeException e) {
 				propagate(e, "createBodyCondition"); //$NON-NLS-1$
 			}
@@ -264,7 +273,7 @@ class OCLHelperImpl<PK, C, O, P, EL, PM, S, COA, SSA, CT, CLS, E>
 			//    position information when parse fails
 			try {
 				return HelperUtil.parseInitialValueExpression(
-                    env, expression, validating, ocl.isParseTracingEnabled());
+                    this, expression, validating, ocl.isParseTracingEnabled());
 			} catch (RuntimeException e) {
 				propagate(e, "createInitialValueExpression"); //$NON-NLS-1$
 			}
@@ -279,7 +288,7 @@ class OCLHelperImpl<PK, C, O, P, EL, PM, S, COA, SSA, CT, CLS, E>
 			//    position information when parse fails
 			try {
 				return HelperUtil.parseDerivedValueExpression(
-                    env, expression, validating, ocl.isParseTracingEnabled());
+                    this, expression, validating, ocl.isParseTracingEnabled());
 			} catch (RuntimeException e) {
 				propagate(e, "createDerivedValueExpression"); //$NON-NLS-1$
 			}
@@ -326,9 +335,17 @@ class OCLHelperImpl<PK, C, O, P, EL, PM, S, COA, SSA, CT, CLS, E>
 	
 	EObject define(String defExpression) throws ParserException {
 		CT constraint = HelperUtil.parseDefExpression(
-            env, defExpression, validating, ocl.isParseTracingEnabled());
+            this, defExpression, validating, ocl.isParseTracingEnabled());
 		
-		return uml.getConstrainedElements(constraint).get(1);
+		List<EObject> constrainedElement = uml.getConstrainedElements(constraint);
+		EObject result = constrainedElement.get(1);
+		
+		if (!ParsingOptions.getValue(getEnvironment(), ParsingOptions.DEFINITION_CONSTRAINS_FEATURE)) {
+		    // remove it for good measure
+		    constrainedElement.remove(result);
+		}
+		
+		return result;
 	}
 
 	/**
@@ -401,5 +418,13 @@ class OCLHelperImpl<PK, C, O, P, EL, PM, S, COA, SSA, CT, CLS, E>
 					getEnvironment());
 		}
 		return syntaxHelper;
+	}
+	
+	public Diagnostic getProblems() {
+		return problems;
+	}
+	
+	void setProblems(Diagnostic problems) {
+		this.problems = problems;
 	}
 }

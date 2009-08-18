@@ -12,7 +12,7 @@
  *
  * </copyright>
  *
- * $Id: TypeResolver.java,v 1.1 2008-08-07 06:35:17 dvojtise Exp $
+ * $Id: TypeResolver.java,v 1.1 2007/01/25 18:24:37 cdamus Exp $
  */
 package org.eclipse.ocl;
 

@@ -1,7 +1,7 @@
 /**
  * <copyright>
  * 
- * Copyright (c) 2006, 2007 IBM Corporation and others.
+ * Copyright (c) 2006, 2009 IBM Corporation, Zeligsoft Inc., and others.
  * All rights reserved.   This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -9,21 +9,25 @@
  * 
  * Contributors:
  *   IBM - Initial API and implementation
+ *   Zeligsoft - Bug 207365
  * 
  * </copyright>
  *
- * $Id: CollectionItemImpl.java,v 1.1 2008-08-07 06:35:12 dvojtise Exp $
+ * $Id: CollectionItemImpl.java,v 1.8 2009/01/23 17:16:04 cdamus Exp $
  */
 package org.eclipse.ocl.expressions.impl;
 
+import java.util.Map;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
+import org.eclipse.emf.common.util.DiagnosticChain;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.ocl.expressions.CollectionItem;
 import org.eclipse.ocl.expressions.ExpressionsPackage;
 import org.eclipse.ocl.expressions.OCLExpression;
+import org.eclipse.ocl.expressions.operations.CollectionItemOperations;
 import org.eclipse.ocl.utilities.Visitor;
 
 /**
@@ -39,7 +43,10 @@ import org.eclipse.ocl.utilities.Visitor;
  *
  * @generated
  */
-public class CollectionItemImpl<C> extends CollectionLiteralPartImpl<C> implements CollectionItem<C> {
+public class CollectionItemImpl<C>
+		extends CollectionLiteralPartImpl<C>
+		implements CollectionItem<C> {
+
 	/**
 	 * The cached value of the '{@link #getItem() <em>Item</em>}' containment reference.
 	 * <!-- begin-user-doc -->
@@ -83,12 +90,18 @@ public class CollectionItemImpl<C> extends CollectionLiteralPartImpl<C> implemen
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetItem(OCLExpression<C> newItem, NotificationChain msgs) {
+	public NotificationChain basicSetItem(OCLExpression<C> newItem,
+			NotificationChain msgs) {
 		OCLExpression<C> oldItem = item;
 		item = newItem;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, ExpressionsPackage.COLLECTION_ITEM__ITEM, oldItem, newItem);
-			if (msgs == null) msgs = notification; else msgs.add(notification);
+			ENotificationImpl notification = new ENotificationImpl(this,
+				Notification.SET, ExpressionsPackage.COLLECTION_ITEM__ITEM,
+				oldItem, newItem);
+			if (msgs == null)
+				msgs = notification;
+			else
+				msgs.add(notification);
 		}
 		return msgs;
 	}
@@ -102,23 +115,41 @@ public class CollectionItemImpl<C> extends CollectionLiteralPartImpl<C> implemen
 		if (newItem != item) {
 			NotificationChain msgs = null;
 			if (item != null)
-				msgs = ((InternalEObject)item).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - ExpressionsPackage.COLLECTION_ITEM__ITEM, null, msgs);
+				msgs = ((InternalEObject) item).eInverseRemove(this,
+					EOPPOSITE_FEATURE_BASE
+						- ExpressionsPackage.COLLECTION_ITEM__ITEM, null, msgs);
 			if (newItem != null)
-				msgs = ((InternalEObject)newItem).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - ExpressionsPackage.COLLECTION_ITEM__ITEM, null, msgs);
+				msgs = ((InternalEObject) newItem).eInverseAdd(this,
+					EOPPOSITE_FEATURE_BASE
+						- ExpressionsPackage.COLLECTION_ITEM__ITEM, null, msgs);
 			msgs = basicSetItem(newItem, msgs);
-			if (msgs != null) msgs.dispatch();
-		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ExpressionsPackage.COLLECTION_ITEM__ITEM, newItem, newItem));
+			if (msgs != null)
+				msgs.dispatch();
+		} else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET,
+				ExpressionsPackage.COLLECTION_ITEM__ITEM, newItem, newItem));
 	}
 
-    /**
-     * @generated NOT
-     */
-    @Override
-    public <T, U extends Visitor<T, ?, ?, ?, ?, ?, ?, ?, ?, ?>> T accept(U v) {
-        return v.visitCollectionItem(this);
-    }
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean checkItemType(DiagnosticChain diagnostics,
+			Map<Object, Object> context) {
+		return CollectionItemOperations.checkItemType(this, diagnostics,
+			context);
+	}
+
+	/**
+	 * @generated NOT
+	 */
+	@Override
+	@SuppressWarnings("unchecked")
+	public <T, U extends Visitor<T, ?, ?, ?, ?, ?, ?, ?, ?, ?>> T accept(U v) {
+		return ((Visitor<T, C, ?, ?, ?, ?, ?, ?, ?, ?>) v)
+			.visitCollectionItem(this);
+	}
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -126,9 +157,10 @@ public class CollectionItemImpl<C> extends CollectionLiteralPartImpl<C> implemen
 	 * @generated
 	 */
 	@Override
-	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+	public NotificationChain eInverseRemove(InternalEObject otherEnd,
+			int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case ExpressionsPackage.COLLECTION_ITEM__ITEM:
+			case ExpressionsPackage.COLLECTION_ITEM__ITEM :
 				return basicSetItem(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -142,7 +174,7 @@ public class CollectionItemImpl<C> extends CollectionLiteralPartImpl<C> implemen
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case ExpressionsPackage.COLLECTION_ITEM__ITEM:
+			case ExpressionsPackage.COLLECTION_ITEM__ITEM :
 				return getItem();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -157,8 +189,8 @@ public class CollectionItemImpl<C> extends CollectionLiteralPartImpl<C> implemen
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case ExpressionsPackage.COLLECTION_ITEM__ITEM:
-				setItem((OCLExpression<C>)newValue);
+			case ExpressionsPackage.COLLECTION_ITEM__ITEM :
+				setItem((OCLExpression<C>) newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -172,8 +204,8 @@ public class CollectionItemImpl<C> extends CollectionLiteralPartImpl<C> implemen
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case ExpressionsPackage.COLLECTION_ITEM__ITEM:
-				setItem((OCLExpression<C>)null);
+			case ExpressionsPackage.COLLECTION_ITEM__ITEM :
+				setItem((OCLExpression<C>) null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -187,7 +219,7 @@ public class CollectionItemImpl<C> extends CollectionLiteralPartImpl<C> implemen
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case ExpressionsPackage.COLLECTION_ITEM__ITEM:
+			case ExpressionsPackage.COLLECTION_ITEM__ITEM :
 				return item != null;
 		}
 		return super.eIsSet(featureID);

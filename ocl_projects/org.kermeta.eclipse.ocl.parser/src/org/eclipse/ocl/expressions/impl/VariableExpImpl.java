@@ -1,7 +1,7 @@
 /**
  * <copyright>
  * 
- * Copyright (c) 2006, 2007 IBM Corporation and others.
+ * Copyright (c) 2006, 2009 IBM Corporation, Zeligsoft Inc., and others.
  * All rights reserved.   This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -9,20 +9,24 @@
  * 
  * Contributors:
  *   IBM - Initial API and implementation
+ *   Zeligsoft - Bug 207365
  * 
  * </copyright>
  *
- * $Id: VariableExpImpl.java,v 1.1 2008-08-07 06:35:12 dvojtise Exp $
+ * $Id: VariableExpImpl.java,v 1.8 2009/01/23 17:16:04 cdamus Exp $
  */
 package org.eclipse.ocl.expressions.impl;
 
+import java.util.Map;
 import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.util.DiagnosticChain;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.ocl.expressions.ExpressionsPackage;
 import org.eclipse.ocl.expressions.Variable;
 import org.eclipse.ocl.expressions.VariableExp;
+import org.eclipse.ocl.expressions.operations.VariableExpOperations;
 import org.eclipse.ocl.utilities.Visitor;
 
 /**
@@ -38,7 +42,10 @@ import org.eclipse.ocl.utilities.Visitor;
  *
  * @generated
  */
-public class VariableExpImpl<C, PM> extends OCLExpressionImpl<C> implements VariableExp<C, PM> {
+public class VariableExpImpl<C, PM>
+		extends OCLExpressionImpl<C>
+		implements VariableExp<C, PM> {
+
 	/**
 	 * The cached value of the '{@link #getReferredVariable() <em>Referred Variable</em>}' reference.
 	 * <!-- begin-user-doc -->
@@ -76,11 +83,13 @@ public class VariableExpImpl<C, PM> extends OCLExpressionImpl<C> implements Vari
 	@SuppressWarnings("unchecked")
 	public Variable<C, PM> getReferredVariable() {
 		if (referredVariable != null && referredVariable.eIsProxy()) {
-			InternalEObject oldReferredVariable = (InternalEObject)referredVariable;
-			referredVariable = (Variable<C, PM>)eResolveProxy(oldReferredVariable);
+			InternalEObject oldReferredVariable = (InternalEObject) referredVariable;
+			referredVariable = (Variable<C, PM>) eResolveProxy(oldReferredVariable);
 			if (referredVariable != oldReferredVariable) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ExpressionsPackage.VARIABLE_EXP__REFERRED_VARIABLE, oldReferredVariable, referredVariable));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE,
+						ExpressionsPackage.VARIABLE_EXP__REFERRED_VARIABLE,
+						oldReferredVariable, referredVariable));
 			}
 		}
 		return referredVariable;
@@ -104,7 +113,19 @@ public class VariableExpImpl<C, PM> extends OCLExpressionImpl<C> implements Vari
 		Variable<C, PM> oldReferredVariable = referredVariable;
 		referredVariable = newReferredVariable;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ExpressionsPackage.VARIABLE_EXP__REFERRED_VARIABLE, oldReferredVariable, referredVariable));
+			eNotify(new ENotificationImpl(this, Notification.SET,
+				ExpressionsPackage.VARIABLE_EXP__REFERRED_VARIABLE,
+				oldReferredVariable, referredVariable));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean checkVarType(DiagnosticChain diagnostics,
+			Map<Object, Object> context) {
+		return VariableExpOperations.checkVarType(this, diagnostics, context);
 	}
 
 	/**
@@ -115,8 +136,9 @@ public class VariableExpImpl<C, PM> extends OCLExpressionImpl<C> implements Vari
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case ExpressionsPackage.VARIABLE_EXP__REFERRED_VARIABLE:
-				if (resolve) return getReferredVariable();
+			case ExpressionsPackage.VARIABLE_EXP__REFERRED_VARIABLE :
+				if (resolve)
+					return getReferredVariable();
 				return basicGetReferredVariable();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -131,8 +153,8 @@ public class VariableExpImpl<C, PM> extends OCLExpressionImpl<C> implements Vari
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case ExpressionsPackage.VARIABLE_EXP__REFERRED_VARIABLE:
-				setReferredVariable((Variable<C, PM>)newValue);
+			case ExpressionsPackage.VARIABLE_EXP__REFERRED_VARIABLE :
+				setReferredVariable((Variable<C, PM>) newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -146,8 +168,8 @@ public class VariableExpImpl<C, PM> extends OCLExpressionImpl<C> implements Vari
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case ExpressionsPackage.VARIABLE_EXP__REFERRED_VARIABLE:
-				setReferredVariable((Variable<C, PM>)null);
+			case ExpressionsPackage.VARIABLE_EXP__REFERRED_VARIABLE :
+				setReferredVariable((Variable<C, PM>) null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -161,7 +183,7 @@ public class VariableExpImpl<C, PM> extends OCLExpressionImpl<C> implements Vari
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case ExpressionsPackage.VARIABLE_EXP__REFERRED_VARIABLE:
+			case ExpressionsPackage.VARIABLE_EXP__REFERRED_VARIABLE :
 				return referredVariable != null;
 		}
 		return super.eIsSet(featureID);
@@ -171,8 +193,10 @@ public class VariableExpImpl<C, PM> extends OCLExpressionImpl<C> implements Vari
 	 * @generated NOT
 	 */
 	@Override
+	@SuppressWarnings("unchecked")
 	public <T, U extends Visitor<T, ?, ?, ?, ?, ?, ?, ?, ?, ?>> T accept(U v) {
-		return v.visitVariableExp(this);
+		return ((Visitor<T, C, ?, ?, ?, PM, ?, ?, ?, ?>) v)
+			.visitVariableExp(this);
 	}
 
 } //VariableExpImpl

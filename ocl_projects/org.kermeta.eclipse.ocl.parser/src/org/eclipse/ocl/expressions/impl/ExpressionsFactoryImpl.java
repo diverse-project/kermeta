@@ -1,7 +1,7 @@
 /**
  * <copyright>
  * 
- * Copyright (c) 2006, 2007 IBM Corporation and others.
+ * Copyright (c) 2006, 2008 IBM Corporation, Zeligsoft Inc., and others.
  * All rights reserved.   This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -9,10 +9,11 @@
  * 
  * Contributors:
  *   IBM - Initial API and implementation
+ *   Zeligsoft - Bug 207365
  * 
  * </copyright>
  *
- * $Id: ExpressionsFactoryImpl.java,v 1.1 2008-08-07 06:35:11 dvojtise Exp $
+ * $Id: ExpressionsFactoryImpl.java,v 1.7 2008/10/12 01:09:49 cdamus Exp $
  */
 package org.eclipse.ocl.expressions.impl;
 
@@ -60,7 +61,10 @@ import org.eclipse.ocl.expressions.VariableExp;
  * <!-- end-user-doc -->
  * @generated
  */
-public class ExpressionsFactoryImpl extends EFactoryImpl implements ExpressionsFactory {
+public class ExpressionsFactoryImpl
+		extends EFactoryImpl
+		implements ExpressionsFactory {
+
 	/**
 	 * Creates the default factory implementation.
 	 * <!-- begin-user-doc -->
@@ -69,12 +73,12 @@ public class ExpressionsFactoryImpl extends EFactoryImpl implements ExpressionsF
 	 */
 	public static ExpressionsFactory init() {
 		try {
-			ExpressionsFactory theExpressionsFactory = (ExpressionsFactory)EPackage.Registry.INSTANCE.getEFactory("http://www.eclipse.org/ocl/1.1.0/OCL/Expressions"); //$NON-NLS-1$ 
+			ExpressionsFactory theExpressionsFactory = (ExpressionsFactory) EPackage.Registry.INSTANCE
+				.getEFactory("http://www.eclipse.org/ocl/1.1.0/OCL/Expressions"); //$NON-NLS-1$ 
 			if (theExpressionsFactory != null) {
 				return theExpressionsFactory;
 			}
-		}
-		catch (Exception exception) {
+		} catch (Exception exception) {
 			EcorePlugin.INSTANCE.log(exception);
 		}
 		return new ExpressionsFactoryImpl();
@@ -98,34 +102,61 @@ public class ExpressionsFactoryImpl extends EFactoryImpl implements ExpressionsF
 	@Override
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
-			case ExpressionsPackage.ASSOCIATION_CLASS_CALL_EXP: return createAssociationClassCallExp();
-			case ExpressionsPackage.BOOLEAN_LITERAL_EXP: return createBooleanLiteralExp();
-			case ExpressionsPackage.COLLECTION_ITEM: return createCollectionItem();
-			case ExpressionsPackage.COLLECTION_LITERAL_EXP: return createCollectionLiteralExp();
-			case ExpressionsPackage.COLLECTION_RANGE: return createCollectionRange();
-			case ExpressionsPackage.ENUM_LITERAL_EXP: return createEnumLiteralExp();
-			case ExpressionsPackage.IF_EXP: return createIfExp();
-			case ExpressionsPackage.INTEGER_LITERAL_EXP: return createIntegerLiteralExp();
-			case ExpressionsPackage.UNLIMITED_NATURAL_LITERAL_EXP: return createUnlimitedNaturalLiteralExp();
-			case ExpressionsPackage.INVALID_LITERAL_EXP: return createInvalidLiteralExp();
-			case ExpressionsPackage.ITERATE_EXP: return createIterateExp();
-			case ExpressionsPackage.VARIABLE: return createVariable();
-			case ExpressionsPackage.ITERATOR_EXP: return createIteratorExp();
-			case ExpressionsPackage.LET_EXP: return createLetExp();
-			case ExpressionsPackage.MESSAGE_EXP: return createMessageExp();
-			case ExpressionsPackage.NULL_LITERAL_EXP: return createNullLiteralExp();
-			case ExpressionsPackage.OPERATION_CALL_EXP: return createOperationCallExp();
-			case ExpressionsPackage.PROPERTY_CALL_EXP: return createPropertyCallExp();
-			case ExpressionsPackage.REAL_LITERAL_EXP: return createRealLiteralExp();
-			case ExpressionsPackage.STATE_EXP: return createStateExp();
-			case ExpressionsPackage.STRING_LITERAL_EXP: return createStringLiteralExp();
-			case ExpressionsPackage.TUPLE_LITERAL_EXP: return createTupleLiteralExp();
-			case ExpressionsPackage.TUPLE_LITERAL_PART: return createTupleLiteralPart();
-			case ExpressionsPackage.TYPE_EXP: return createTypeExp();
-			case ExpressionsPackage.UNSPECIFIED_VALUE_EXP: return createUnspecifiedValueExp();
-			case ExpressionsPackage.VARIABLE_EXP: return createVariableExp();
-			default:
-				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier"); //$NON-NLS-1$ //$NON-NLS-2$
+			case ExpressionsPackage.ASSOCIATION_CLASS_CALL_EXP :
+				return createAssociationClassCallExp();
+			case ExpressionsPackage.BOOLEAN_LITERAL_EXP :
+				return createBooleanLiteralExp();
+			case ExpressionsPackage.COLLECTION_ITEM :
+				return createCollectionItem();
+			case ExpressionsPackage.COLLECTION_LITERAL_EXP :
+				return createCollectionLiteralExp();
+			case ExpressionsPackage.COLLECTION_RANGE :
+				return createCollectionRange();
+			case ExpressionsPackage.ENUM_LITERAL_EXP :
+				return createEnumLiteralExp();
+			case ExpressionsPackage.IF_EXP :
+				return createIfExp();
+			case ExpressionsPackage.INTEGER_LITERAL_EXP :
+				return createIntegerLiteralExp();
+			case ExpressionsPackage.UNLIMITED_NATURAL_LITERAL_EXP :
+				return createUnlimitedNaturalLiteralExp();
+			case ExpressionsPackage.INVALID_LITERAL_EXP :
+				return createInvalidLiteralExp();
+			case ExpressionsPackage.ITERATE_EXP :
+				return createIterateExp();
+			case ExpressionsPackage.VARIABLE :
+				return createVariable();
+			case ExpressionsPackage.ITERATOR_EXP :
+				return createIteratorExp();
+			case ExpressionsPackage.LET_EXP :
+				return createLetExp();
+			case ExpressionsPackage.MESSAGE_EXP :
+				return createMessageExp();
+			case ExpressionsPackage.NULL_LITERAL_EXP :
+				return createNullLiteralExp();
+			case ExpressionsPackage.OPERATION_CALL_EXP :
+				return createOperationCallExp();
+			case ExpressionsPackage.PROPERTY_CALL_EXP :
+				return createPropertyCallExp();
+			case ExpressionsPackage.REAL_LITERAL_EXP :
+				return createRealLiteralExp();
+			case ExpressionsPackage.STATE_EXP :
+				return createStateExp();
+			case ExpressionsPackage.STRING_LITERAL_EXP :
+				return createStringLiteralExp();
+			case ExpressionsPackage.TUPLE_LITERAL_EXP :
+				return createTupleLiteralExp();
+			case ExpressionsPackage.TUPLE_LITERAL_PART :
+				return createTupleLiteralPart();
+			case ExpressionsPackage.TYPE_EXP :
+				return createTypeExp();
+			case ExpressionsPackage.UNSPECIFIED_VALUE_EXP :
+				return createUnspecifiedValueExp();
+			case ExpressionsPackage.VARIABLE_EXP :
+				return createVariableExp();
+			default :
+				throw new IllegalArgumentException(
+					"The class '" + eClass.getName() + "' is not a valid classifier"); //$NON-NLS-1$ //$NON-NLS-2$
 		}
 	}
 
@@ -137,10 +168,11 @@ public class ExpressionsFactoryImpl extends EFactoryImpl implements ExpressionsF
 	@Override
 	public Object createFromString(EDataType eDataType, String initialValue) {
 		switch (eDataType.getClassifierID()) {
-			case ExpressionsPackage.COLLECTION_KIND:
+			case ExpressionsPackage.COLLECTION_KIND :
 				return createCollectionKindFromString(eDataType, initialValue);
-			default:
-				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier"); //$NON-NLS-1$ //$NON-NLS-2$
+			default :
+				throw new IllegalArgumentException(
+					"The datatype '" + eDataType.getName() + "' is not a valid classifier"); //$NON-NLS-1$ //$NON-NLS-2$
 		}
 	}
 
@@ -152,10 +184,11 @@ public class ExpressionsFactoryImpl extends EFactoryImpl implements ExpressionsF
 	@Override
 	public String convertToString(EDataType eDataType, Object instanceValue) {
 		switch (eDataType.getClassifierID()) {
-			case ExpressionsPackage.COLLECTION_KIND:
+			case ExpressionsPackage.COLLECTION_KIND :
 				return convertCollectionKindToString(eDataType, instanceValue);
-			default:
-				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier"); //$NON-NLS-1$ //$NON-NLS-2$
+			default :
+				throw new IllegalArgumentException(
+					"The datatype '" + eDataType.getName() + "' is not a valid classifier"); //$NON-NLS-1$ //$NON-NLS-2$
 		}
 	}
 
@@ -241,15 +274,15 @@ public class ExpressionsFactoryImpl extends EFactoryImpl implements ExpressionsF
 
 	/**
 	 * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    public <C> UnlimitedNaturalLiteralExp<C> createUnlimitedNaturalLiteralExp() {
+	public <C> UnlimitedNaturalLiteralExp<C> createUnlimitedNaturalLiteralExp() {
 		UnlimitedNaturalLiteralExpImpl<C> unlimitedNaturalLiteralExp = new UnlimitedNaturalLiteralExpImpl<C>();
 		return unlimitedNaturalLiteralExp;
 	}
 
-    /**
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -424,9 +457,12 @@ public class ExpressionsFactoryImpl extends EFactoryImpl implements ExpressionsF
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public CollectionKind createCollectionKindFromString(EDataType eDataType, String initialValue) {
+	public CollectionKind createCollectionKindFromString(EDataType eDataType,
+			String initialValue) {
 		CollectionKind result = CollectionKind.get(initialValue);
-		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+		if (result == null)
+			throw new IllegalArgumentException(
+				"The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 		return result;
 	}
 
@@ -435,8 +471,11 @@ public class ExpressionsFactoryImpl extends EFactoryImpl implements ExpressionsF
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public String convertCollectionKindToString(EDataType eDataType, Object instanceValue) {
-		return instanceValue == null ? null : instanceValue.toString();
+	public String convertCollectionKindToString(EDataType eDataType,
+			Object instanceValue) {
+		return instanceValue == null
+			? null
+			: instanceValue.toString();
 	}
 
 	/**
@@ -445,7 +484,7 @@ public class ExpressionsFactoryImpl extends EFactoryImpl implements ExpressionsF
 	 * @generated
 	 */
 	public ExpressionsPackage getExpressionsPackage() {
-		return (ExpressionsPackage)getEPackage();
+		return (ExpressionsPackage) getEPackage();
 	}
 
 	/**

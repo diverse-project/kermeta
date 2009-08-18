@@ -12,7 +12,7 @@
  *
  * </copyright>
  *
- * $Id: Visitable.java,v 1.1 2008-08-07 06:35:15 dvojtise Exp $
+ * $Id: Visitable.java,v 1.4 2008/11/30 22:11:38 cdamus Exp $
  */
 package org.eclipse.ocl.utilities;
 
@@ -27,8 +27,12 @@ import org.eclipse.emf.ecore.EObject;
  * @see org.eclipse.ocl.utilities.UtilitiesPackage#getVisitable()
  * @model interface="true" abstract="true"
  * @generated
+ * @noimplement This interface is not intended to be implemented by clients.
+ * @noextend This interface is not intended to be extended by clients.
  */
-public interface Visitable extends EObject {
+public interface Visitable
+		extends EObject {
+
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

@@ -1,7 +1,7 @@
 /**
  * <copyright>
  * 
- * Copyright (c) 2006, 2007 IBM Corporation and others.
+ * Copyright (c) 2006, 2009 IBM Corporation, Zeligsoft Inc., and others.
  * All rights reserved.   This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -9,18 +9,22 @@
  * 
  * Contributors:
  *   IBM - Initial API and implementation
+ *   Zeligsoft - Bug 207365
  * 
  * </copyright>
  *
- * $Id: IntegerLiteralExpImpl.java,v 1.1 2008-08-07 06:35:11 dvojtise Exp $
+ * $Id: IntegerLiteralExpImpl.java,v 1.7 2009/01/23 17:16:04 cdamus Exp $
  */
 package org.eclipse.ocl.expressions.impl;
 
+import java.util.Map;
 import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.util.DiagnosticChain;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.ocl.expressions.ExpressionsPackage;
 import org.eclipse.ocl.expressions.IntegerLiteralExp;
+import org.eclipse.ocl.expressions.operations.IntegerLiteralExpOperations;
 import org.eclipse.ocl.utilities.Visitor;
 
 /**
@@ -36,7 +40,10 @@ import org.eclipse.ocl.utilities.Visitor;
  *
  * @generated
  */
-public class IntegerLiteralExpImpl<C> extends NumericLiteralExpImpl<C> implements IntegerLiteralExp<C> {
+public class IntegerLiteralExpImpl<C>
+		extends NumericLiteralExpImpl<C>
+		implements IntegerLiteralExp<C> {
+
 	/**
 	 * The default value of the '{@link #getIntegerSymbol() <em>Integer Symbol</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -94,7 +101,20 @@ public class IntegerLiteralExpImpl<C> extends NumericLiteralExpImpl<C> implement
 		Integer oldIntegerSymbol = integerSymbol;
 		integerSymbol = newIntegerSymbol;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ExpressionsPackage.INTEGER_LITERAL_EXP__INTEGER_SYMBOL, oldIntegerSymbol, integerSymbol));
+			eNotify(new ENotificationImpl(this, Notification.SET,
+				ExpressionsPackage.INTEGER_LITERAL_EXP__INTEGER_SYMBOL,
+				oldIntegerSymbol, integerSymbol));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean checkIntegerType(DiagnosticChain diagnostics,
+			Map<Object, Object> context) {
+		return IntegerLiteralExpOperations.checkIntegerType(this, diagnostics,
+			context);
 	}
 
 	/**
@@ -105,7 +125,7 @@ public class IntegerLiteralExpImpl<C> extends NumericLiteralExpImpl<C> implement
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case ExpressionsPackage.INTEGER_LITERAL_EXP__INTEGER_SYMBOL:
+			case ExpressionsPackage.INTEGER_LITERAL_EXP__INTEGER_SYMBOL :
 				return getIntegerSymbol();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -119,8 +139,8 @@ public class IntegerLiteralExpImpl<C> extends NumericLiteralExpImpl<C> implement
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case ExpressionsPackage.INTEGER_LITERAL_EXP__INTEGER_SYMBOL:
-				setIntegerSymbol((Integer)newValue);
+			case ExpressionsPackage.INTEGER_LITERAL_EXP__INTEGER_SYMBOL :
+				setIntegerSymbol((Integer) newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -134,7 +154,7 @@ public class IntegerLiteralExpImpl<C> extends NumericLiteralExpImpl<C> implement
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case ExpressionsPackage.INTEGER_LITERAL_EXP__INTEGER_SYMBOL:
+			case ExpressionsPackage.INTEGER_LITERAL_EXP__INTEGER_SYMBOL :
 				setIntegerSymbol(INTEGER_SYMBOL_EDEFAULT);
 				return;
 		}
@@ -149,8 +169,10 @@ public class IntegerLiteralExpImpl<C> extends NumericLiteralExpImpl<C> implement
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case ExpressionsPackage.INTEGER_LITERAL_EXP__INTEGER_SYMBOL:
-				return INTEGER_SYMBOL_EDEFAULT == null ? integerSymbol != null : !INTEGER_SYMBOL_EDEFAULT.equals(integerSymbol);
+			case ExpressionsPackage.INTEGER_LITERAL_EXP__INTEGER_SYMBOL :
+				return INTEGER_SYMBOL_EDEFAULT == null
+					? integerSymbol != null
+					: !INTEGER_SYMBOL_EDEFAULT.equals(integerSymbol);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -169,8 +191,10 @@ public class IntegerLiteralExpImpl<C> extends NumericLiteralExpImpl<C> implement
 	 * @generated NOT
 	 */
 	@Override
+	@SuppressWarnings("unchecked")
 	public <T, U extends Visitor<T, ?, ?, ?, ?, ?, ?, ?, ?, ?>> T accept(U v) {
-		return v.visitIntegerLiteralExp(this);
+		return ((Visitor<T, C, ?, ?, ?, ?, ?, ?, ?, ?>) v)
+			.visitIntegerLiteralExp(this);
 	}
 
 } //IntegerLiteralExpImpl

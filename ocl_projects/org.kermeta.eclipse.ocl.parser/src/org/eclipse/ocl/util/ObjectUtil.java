@@ -1,7 +1,7 @@
 /**
  * <copyright>
  *
- * Copyright (c) 2006, 2007 IBM Corporation and others.
+ * Copyright (c) 2006, 2008 IBM Corporation and others.
  * All rights reserved.   This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -12,12 +12,18 @@
  *
  * </copyright>
  *
- * $Id: ObjectUtil.java,v 1.1 2008-08-07 06:35:17 dvojtise Exp $
+ * $Id: ObjectUtil.java,v 1.4 2008/02/16 00:07:21 cdamus Exp $
  */
 package org.eclipse.ocl.util;
 
+import java.util.Collection;
+import java.util.Iterator;
+
 import org.eclipse.emf.common.util.Enumerator;
 import org.eclipse.emf.ecore.EEnumLiteral;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.ocl.internal.evaluation.NumberUtil;
 
 /**
  * Certain generic utility operations on objects.
@@ -39,27 +45,32 @@ public class ObjectUtil {
 	public static boolean equal(Object anObject, Object anotherObject) {
 		// if either value is undefined, the result is true just if both are
 		// undefined and false otherwise.
-		if (anObject == null || anotherObject == null)
-			return anObject == anotherObject;
+		if (anObject == null || anotherObject == null) {
+            return anObject == anotherObject;
+        }
 
 		// primitive types
 		if (isPrimitive(anObject) || isPrimitive(anotherObject)) {
-			if (anObject instanceof Integer && anotherObject instanceof Integer)
-				return ((Integer) anObject).intValue()
-					== ((Integer) anotherObject).intValue();
-			else if (anObject instanceof Integer && anotherObject instanceof Double)
-				return ((Integer) anObject).intValue()
-					== ((Double) anotherObject).doubleValue();
-			else if (anObject instanceof Double && anotherObject instanceof Integer)
-				return ((Double) anObject).doubleValue()
-					== ((Integer) anotherObject).intValue();
-			else if (anObject instanceof Double && anotherObject instanceof Double)
-				return ((Double) anObject).doubleValue()
-					== ((Double) anotherObject).doubleValue();
-			else if (anObject instanceof String && anotherObject instanceof String)
-				return anObject.equals(anotherObject);
-			else if (anObject instanceof Boolean && anotherObject instanceof Boolean)
-				return anObject.equals(anotherObject);
+		    if (anObject instanceof Integer) {
+		        anObject = NumberUtil.higherPrecisionNumber((Integer) anObject);
+		    }
+            if (anotherObject instanceof Integer) {
+                anotherObject = NumberUtil.higherPrecisionNumber((Integer) anotherObject);
+            }
+		    
+			if (anObject instanceof Long && anotherObject instanceof Long) {
+                return ((Long) anObject).longValue() == ((Long) anotherObject).longValue();
+            } else if (anObject instanceof Long && anotherObject instanceof Double) {
+                return ((Long) anObject).doubleValue() == ((Double) anotherObject).doubleValue();
+            } else if (anObject instanceof Double && anotherObject instanceof Long) {
+                return ((Double) anObject).doubleValue() == ((Long) anotherObject).doubleValue();
+            } else if (anObject instanceof Double && anotherObject instanceof Double) {
+                return ((Double) anObject).doubleValue() == ((Double) anotherObject).doubleValue();
+            } else if (anObject instanceof String && anotherObject instanceof String) {
+                return anObject.equals(anotherObject);
+            } else if (anObject instanceof Boolean && anotherObject instanceof Boolean) {
+                return ((Boolean) anObject).booleanValue() == ((Boolean) anotherObject).booleanValue();
+            };
 
 			// if the types are incompatible the result is false
 			return false;
@@ -92,14 +103,17 @@ public class ObjectUtil {
 
 		if (isPrimitive(anObject)) {
 			// equal double and integer should hash the same 
-			if (anObject instanceof Integer)
-				return 37 * ((Integer) anObject).intValue();
-			else if (anObject instanceof Double)
-				return 37 * ((Double) anObject).intValue();
-			else if (anObject instanceof String)
-				return anObject.hashCode();
-			else if (anObject instanceof Boolean)
-				return anObject.hashCode();
+			if (anObject instanceof Integer) {
+                return 37 * ((Integer) anObject).intValue();
+            } else if (anObject instanceof Long) {
+                return 37 * ((Long) anObject).intValue();
+            } else if (anObject instanceof Double) {
+                return 37 * ((Double) anObject).intValue();
+            } else if (anObject instanceof String) {
+                return anObject.hashCode();
+            } else if (anObject instanceof Boolean) {
+                return anObject.hashCode();
+            }
 
 			// shouldn't get here (there are no other OCL primitives)
 			return 0;
@@ -119,8 +133,32 @@ public class ObjectUtil {
      * @return whether it is an OCL primitive value
      */
 	public static boolean isPrimitive(Object o) {
-		return o instanceof Integer || o instanceof String
+		return o instanceof Integer || o instanceof Long || o instanceof String
 			|| o instanceof Boolean || o instanceof Double;
 	}
 
+	/**
+	 * Disposes of the specified <tt>object</tt>.  If, in particular, it is
+	 * an {@link EObject}, then it and all of its contents will have their
+	 * adapter-lists cleared.
+	 * 
+	 * @param object an object to dispose
+	 * 
+	 * @since 1.2
+	 */
+	public static void dispose(Object object) {
+	    if (object instanceof EObject) {
+	        EObject eObject = (EObject) object;
+	        
+            eObject.eAdapters().clear();
+            for (Iterator<EObject> iter = EcoreUtil.getAllContents(eObject,
+                false); iter.hasNext();) {
+                iter.next().eAdapters().clear();
+            }
+	    } else if (object instanceof Collection) {
+	        for (Object next : ((Collection<?>) object)) {
+	            dispose(next);
+	        }
+	    }
+	}
 }

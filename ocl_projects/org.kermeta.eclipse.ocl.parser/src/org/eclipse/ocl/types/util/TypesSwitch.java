@@ -1,7 +1,7 @@
 /**
  * <copyright>
  * 
- * Copyright (c) 2006, 2007 IBM Corporation and others.
+ * Copyright (c) 2006, 2008 IBM Corporation, Zeligsoft Inc., and others.
  * All rights reserved.   This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -9,10 +9,11 @@
  * 
  * Contributors:
  *   IBM - Initial API and implementation
+ *   Zeligsoft - Bug 207365
  * 
  * </copyright>
  *
- * $Id: TypesSwitch.java,v 1.1 2008-08-07 06:35:19 dvojtise Exp $
+ * $Id: TypesSwitch.java,v 1.6 2008/10/12 01:09:50 cdamus Exp $
  */
 package org.eclipse.ocl.types.util;
 
@@ -39,7 +40,6 @@ import org.eclipse.ocl.utilities.ASTNode;
 import org.eclipse.ocl.utilities.PredefinedType;
 import org.eclipse.ocl.utilities.TypedASTNode;
 
-
 /**
  * <!-- begin-user-doc -->
  * The <b>Switch</b> for the model's inheritance hierarchy.
@@ -54,6 +54,7 @@ import org.eclipse.ocl.utilities.TypedASTNode;
  * @generated
  */
 public class TypesSwitch<T> {
+
 	/**
 	 * The cached model package
 	 * <!-- begin-user-doc -->
@@ -95,35 +96,34 @@ public class TypesSwitch<T> {
 	protected T doSwitch(EClass theEClass, EObject theEObject) {
 		if (theEClass.eContainer() == modelPackage) {
 			return doSwitch(theEClass.getClassifierID(), theEObject);
-		}
-		else {
-            // account for multiple inheritance
-            T result = doSwitchSuperTypes(theEClass, theEObject);
-            
+		} else {
+			// account for multiple inheritance
+			T result = doSwitchSuperTypes(theEClass, theEObject);
+
 			if (result == null) {
-                result = defaultCase(theEObject);
-            }
-            
-            return result;
+				result = defaultCase(theEObject);
+			}
+
+			return result;
 		}
 	}
-    
-    protected T doSwitchSuperTypes(EClass theEClass, EObject theEObject) {
-        if (theEClass.eContainer() == modelPackage) {
-            return doSwitch(theEClass.getClassifierID(), theEObject);
-        }
-        
-        // account for multiple inheritance
-        for (EClass esuper : theEClass.getESuperTypes()) {
-            T result = doSwitchSuperTypes(esuper, theEObject);
-            
-            if (result != null) {
-                return result;
-            }
-        }
-        
-        return null;
-    }
+
+	protected T doSwitchSuperTypes(EClass theEClass, EObject theEObject) {
+		if (theEClass.eContainer() == modelPackage) {
+			return doSwitch(theEClass.getClassifierID(), theEObject);
+		}
+
+		// account for multiple inheritance
+		for (EClass esuper : theEClass.getESuperTypes()) {
+			T result = doSwitchSuperTypes(esuper, theEObject);
+
+			if (result != null) {
+				return result;
+			}
+		}
+
+		return null;
+	}
 
 	/**
 	 * Calls <code>caseXXX</code> for each class of the model until one returns a non null result; it yields that result.
@@ -134,122 +134,162 @@ public class TypesSwitch<T> {
 	 */
 	protected T doSwitch(int classifierID, EObject theEObject) {
 		switch (classifierID) {
-			case TypesPackage.ANY_TYPE: {
-				@SuppressWarnings("unchecked") AnyType<?> anyType = (AnyType<?>)theEObject;
+			case TypesPackage.ANY_TYPE : {
+				AnyType<?> anyType = (AnyType<?>) theEObject;
 				T result = caseAnyType(anyType);
-				if (result == null) result = casePredefinedType(anyType);
-				if (result == null) result = defaultCase(theEObject);
+				if (result == null)
+					result = casePredefinedType(anyType);
+				if (result == null)
+					result = defaultCase(theEObject);
 				return result;
 			}
-			case TypesPackage.BAG_TYPE: {
-				@SuppressWarnings("unchecked") BagType<?, ?> bagType = (BagType<?, ?>)theEObject;
+			case TypesPackage.BAG_TYPE : {
+				BagType<?, ?> bagType = (BagType<?, ?>) theEObject;
 				T result = caseBagType(bagType);
-				if (result == null) result = caseCollectionType(bagType);
-				if (result == null) result = casePredefinedType(bagType);
-				if (result == null) result = caseTypedASTNode(bagType);
-				if (result == null) result = caseASTNode(bagType);
-				if (result == null) result = defaultCase(theEObject);
+				if (result == null)
+					result = caseCollectionType(bagType);
+				if (result == null)
+					result = casePredefinedType(bagType);
+				if (result == null)
+					result = caseTypedASTNode(bagType);
+				if (result == null)
+					result = caseASTNode(bagType);
+				if (result == null)
+					result = defaultCase(theEObject);
 				return result;
 			}
-			case TypesPackage.COLLECTION_TYPE: {
-				@SuppressWarnings("unchecked") CollectionType<?, ?> collectionType = (CollectionType<?, ?>)theEObject;
+			case TypesPackage.COLLECTION_TYPE : {
+				CollectionType<?, ?> collectionType = (CollectionType<?, ?>) theEObject;
 				T result = caseCollectionType(collectionType);
-				if (result == null) result = casePredefinedType(collectionType);
-				if (result == null) result = caseTypedASTNode(collectionType);
-				if (result == null) result = caseASTNode(collectionType);
-				if (result == null) result = defaultCase(theEObject);
+				if (result == null)
+					result = casePredefinedType(collectionType);
+				if (result == null)
+					result = caseTypedASTNode(collectionType);
+				if (result == null)
+					result = caseASTNode(collectionType);
+				if (result == null)
+					result = defaultCase(theEObject);
 				return result;
 			}
-			case TypesPackage.ELEMENT_TYPE: {
-				ElementType elementType = (ElementType)theEObject;
+			case TypesPackage.ELEMENT_TYPE : {
+				ElementType elementType = (ElementType) theEObject;
 				T result = caseElementType(elementType);
-				if (result == null) result = defaultCase(theEObject);
+				if (result == null)
+					result = defaultCase(theEObject);
 				return result;
 			}
-			case TypesPackage.INVALID_TYPE: {
-				@SuppressWarnings("unchecked") InvalidType<?> invalidType = (InvalidType<?>)theEObject;
+			case TypesPackage.INVALID_TYPE : {
+				InvalidType<?> invalidType = (InvalidType<?>) theEObject;
 				T result = caseInvalidType(invalidType);
-				if (result == null) result = casePredefinedType(invalidType);
-				if (result == null) result = defaultCase(theEObject);
+				if (result == null)
+					result = casePredefinedType(invalidType);
+				if (result == null)
+					result = defaultCase(theEObject);
 				return result;
 			}
-			case TypesPackage.MESSAGE_TYPE: {
-				@SuppressWarnings("unchecked") MessageType<?, ?, ?> messageType = (MessageType<?, ?, ?>)theEObject;
+			case TypesPackage.MESSAGE_TYPE : {
+				MessageType<?, ?, ?> messageType = (MessageType<?, ?, ?>) theEObject;
 				T result = caseMessageType(messageType);
-				if (result == null) result = casePredefinedType(messageType);
-				if (result == null) result = defaultCase(theEObject);
+				if (result == null)
+					result = casePredefinedType(messageType);
+				if (result == null)
+					result = defaultCase(theEObject);
 				return result;
 			}
-			case TypesPackage.ORDERED_SET_TYPE: {
-				@SuppressWarnings("unchecked") OrderedSetType<?, ?> orderedSetType = (OrderedSetType<?, ?>)theEObject;
+			case TypesPackage.ORDERED_SET_TYPE : {
+				OrderedSetType<?, ?> orderedSetType = (OrderedSetType<?, ?>) theEObject;
 				T result = caseOrderedSetType(orderedSetType);
-				if (result == null) result = caseCollectionType(orderedSetType);
-				if (result == null) result = casePredefinedType(orderedSetType);
-				if (result == null) result = caseTypedASTNode(orderedSetType);
-				if (result == null) result = caseASTNode(orderedSetType);
-				if (result == null) result = defaultCase(theEObject);
+				if (result == null)
+					result = caseCollectionType(orderedSetType);
+				if (result == null)
+					result = casePredefinedType(orderedSetType);
+				if (result == null)
+					result = caseTypedASTNode(orderedSetType);
+				if (result == null)
+					result = caseASTNode(orderedSetType);
+				if (result == null)
+					result = defaultCase(theEObject);
 				return result;
 			}
-			case TypesPackage.PRIMITIVE_TYPE: {
-				@SuppressWarnings("unchecked") PrimitiveType<?> primitiveType = (PrimitiveType<?>)theEObject;
+			case TypesPackage.PRIMITIVE_TYPE : {
+				PrimitiveType<?> primitiveType = (PrimitiveType<?>) theEObject;
 				T result = casePrimitiveType(primitiveType);
-				if (result == null) result = casePredefinedType(primitiveType);
-				if (result == null) result = defaultCase(theEObject);
+				if (result == null)
+					result = casePredefinedType(primitiveType);
+				if (result == null)
+					result = defaultCase(theEObject);
 				return result;
 			}
-			case TypesPackage.SEQUENCE_TYPE: {
-				@SuppressWarnings("unchecked") SequenceType<?, ?> sequenceType = (SequenceType<?, ?>)theEObject;
+			case TypesPackage.SEQUENCE_TYPE : {
+				SequenceType<?, ?> sequenceType = (SequenceType<?, ?>) theEObject;
 				T result = caseSequenceType(sequenceType);
-				if (result == null) result = caseCollectionType(sequenceType);
-				if (result == null) result = casePredefinedType(sequenceType);
-				if (result == null) result = caseTypedASTNode(sequenceType);
-				if (result == null) result = caseASTNode(sequenceType);
-				if (result == null) result = defaultCase(theEObject);
+				if (result == null)
+					result = caseCollectionType(sequenceType);
+				if (result == null)
+					result = casePredefinedType(sequenceType);
+				if (result == null)
+					result = caseTypedASTNode(sequenceType);
+				if (result == null)
+					result = caseASTNode(sequenceType);
+				if (result == null)
+					result = defaultCase(theEObject);
 				return result;
 			}
-			case TypesPackage.SET_TYPE: {
-				@SuppressWarnings("unchecked") SetType<?, ?> setType = (SetType<?, ?>)theEObject;
+			case TypesPackage.SET_TYPE : {
+				SetType<?, ?> setType = (SetType<?, ?>) theEObject;
 				T result = caseSetType(setType);
-				if (result == null) result = caseCollectionType(setType);
-				if (result == null) result = casePredefinedType(setType);
-				if (result == null) result = caseTypedASTNode(setType);
-				if (result == null) result = caseASTNode(setType);
-				if (result == null) result = defaultCase(theEObject);
+				if (result == null)
+					result = caseCollectionType(setType);
+				if (result == null)
+					result = casePredefinedType(setType);
+				if (result == null)
+					result = caseTypedASTNode(setType);
+				if (result == null)
+					result = caseASTNode(setType);
+				if (result == null)
+					result = defaultCase(theEObject);
 				return result;
 			}
-			case TypesPackage.TUPLE_TYPE: {
-				@SuppressWarnings("unchecked") TupleType<?, ?> tupleType = (TupleType<?, ?>)theEObject;
+			case TypesPackage.TUPLE_TYPE : {
+				TupleType<?, ?> tupleType = (TupleType<?, ?>) theEObject;
 				T result = caseTupleType(tupleType);
-				if (result == null) result = casePredefinedType(tupleType);
-				if (result == null) result = defaultCase(theEObject);
+				if (result == null)
+					result = casePredefinedType(tupleType);
+				if (result == null)
+					result = defaultCase(theEObject);
 				return result;
 			}
-			case TypesPackage.TYPE_TYPE: {
-				@SuppressWarnings("unchecked") TypeType<?, ?> typeType = (TypeType<?, ?>)theEObject;
+			case TypesPackage.TYPE_TYPE : {
+				TypeType<?, ?> typeType = (TypeType<?, ?>) theEObject;
 				T result = caseTypeType(typeType);
-				if (result == null) result = casePredefinedType(typeType);
-				if (result == null) result = defaultCase(theEObject);
+				if (result == null)
+					result = casePredefinedType(typeType);
+				if (result == null)
+					result = defaultCase(theEObject);
 				return result;
 			}
-			case TypesPackage.VOID_TYPE: {
-				@SuppressWarnings("unchecked") VoidType<?> voidType = (VoidType<?>)theEObject;
+			case TypesPackage.VOID_TYPE : {
+				VoidType<?> voidType = (VoidType<?>) theEObject;
 				T result = caseVoidType(voidType);
-				if (result == null) result = casePredefinedType(voidType);
-				if (result == null) result = defaultCase(theEObject);
+				if (result == null)
+					result = casePredefinedType(voidType);
+				if (result == null)
+					result = defaultCase(theEObject);
 				return result;
 			}
-			default: return defaultCase(theEObject);
+			default :
+				return defaultCase(theEObject);
 		}
 	}
 
 	/**
-	 * Returns the result of interpretting the object as an instance of '<em>Any Type</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Any Type</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpretting the object as an instance of '<em>Any Type</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Any Type</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
@@ -258,13 +298,13 @@ public class TypesSwitch<T> {
 	}
 
 	/**
-	 * Returns the result of interpretting the object as an instance of '<em>Bag Type</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Bag Type</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpretting the object as an instance of '<em>Bag Type</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Bag Type</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
@@ -273,13 +313,13 @@ public class TypesSwitch<T> {
 	}
 
 	/**
-	 * Returns the result of interpretting the object as an instance of '<em>Collection Type</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Collection Type</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpretting the object as an instance of '<em>Collection Type</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Collection Type</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
@@ -288,13 +328,13 @@ public class TypesSwitch<T> {
 	}
 
 	/**
-	 * Returns the result of interpretting the object as an instance of '<em>Element Type</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Element Type</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpretting the object as an instance of '<em>Element Type</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Element Type</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
@@ -303,13 +343,13 @@ public class TypesSwitch<T> {
 	}
 
 	/**
-	 * Returns the result of interpretting the object as an instance of '<em>Invalid Type</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Invalid Type</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpretting the object as an instance of '<em>Invalid Type</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Invalid Type</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
@@ -318,13 +358,13 @@ public class TypesSwitch<T> {
 	}
 
 	/**
-	 * Returns the result of interpretting the object as an instance of '<em>Message Type</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Message Type</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpretting the object as an instance of '<em>Message Type</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Message Type</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
@@ -333,13 +373,13 @@ public class TypesSwitch<T> {
 	}
 
 	/**
-	 * Returns the result of interpretting the object as an instance of '<em>Ordered Set Type</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Ordered Set Type</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpretting the object as an instance of '<em>Ordered Set Type</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Ordered Set Type</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
@@ -348,13 +388,13 @@ public class TypesSwitch<T> {
 	}
 
 	/**
-	 * Returns the result of interpretting the object as an instance of '<em>Primitive Type</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Primitive Type</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpretting the object as an instance of '<em>Primitive Type</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Primitive Type</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
@@ -363,13 +403,13 @@ public class TypesSwitch<T> {
 	}
 
 	/**
-	 * Returns the result of interpretting the object as an instance of '<em>Sequence Type</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Sequence Type</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpretting the object as an instance of '<em>Sequence Type</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Sequence Type</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
@@ -378,13 +418,13 @@ public class TypesSwitch<T> {
 	}
 
 	/**
-	 * Returns the result of interpretting the object as an instance of '<em>Set Type</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Set Type</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpretting the object as an instance of '<em>Set Type</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Set Type</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
@@ -393,13 +433,13 @@ public class TypesSwitch<T> {
 	}
 
 	/**
-	 * Returns the result of interpretting the object as an instance of '<em>Tuple Type</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Tuple Type</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpretting the object as an instance of '<em>Tuple Type</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Tuple Type</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
@@ -408,13 +448,13 @@ public class TypesSwitch<T> {
 	}
 
 	/**
-	 * Returns the result of interpretting the object as an instance of '<em>Type Type</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Type Type</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpretting the object as an instance of '<em>Type Type</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Type Type</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
@@ -423,13 +463,13 @@ public class TypesSwitch<T> {
 	}
 
 	/**
-	 * Returns the result of interpretting the object as an instance of '<em>Void Type</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Void Type</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpretting the object as an instance of '<em>Void Type</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Void Type</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
@@ -438,13 +478,13 @@ public class TypesSwitch<T> {
 	}
 
 	/**
-	 * Returns the result of interpretting the object as an instance of '<em>Predefined Type</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Predefined Type</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpretting the object as an instance of '<em>Predefined Type</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Predefined Type</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
@@ -453,13 +493,13 @@ public class TypesSwitch<T> {
 	}
 
 	/**
-	 * Returns the result of interpretting the object as an instance of '<em>AST Node</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>AST Node</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpretting the object as an instance of '<em>AST Node</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>AST Node</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
@@ -468,13 +508,13 @@ public class TypesSwitch<T> {
 	}
 
 	/**
-	 * Returns the result of interpretting the object as an instance of '<em>Typed AST Node</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Typed AST Node</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpretting the object as an instance of '<em>Typed AST Node</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Typed AST Node</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
@@ -483,13 +523,13 @@ public class TypesSwitch<T> {
 	}
 
 	/**
-	 * Returns the result of interpretting the object as an instance of '<em>EObject</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>EObject</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch, but this is the last case anyway.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpretting the object as an instance of '<em>EObject</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>EObject</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject)
 	 * @generated
 	 */

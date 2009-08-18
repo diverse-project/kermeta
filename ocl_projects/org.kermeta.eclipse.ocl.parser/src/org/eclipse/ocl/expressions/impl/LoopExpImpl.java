@@ -1,7 +1,7 @@
 /**
  * <copyright>
  * 
- * Copyright (c) 2006, 2007 IBM Corporation and others.
+ * Copyright (c) 2006, 2008 IBM Corporation, Zeligsoft Inc., and others.
  * All rights reserved.   This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -9,17 +9,20 @@
  * 
  * Contributors:
  *   IBM - Initial API and implementation
+ *   Zeligsoft - Bug 207365
  * 
  * </copyright>
  *
- * $Id: LoopExpImpl.java,v 1.1 2008-08-07 06:35:12 dvojtise Exp $
+ * $Id: LoopExpImpl.java,v 1.8 2008/10/12 01:09:49 cdamus Exp $
  */
 package org.eclipse.ocl.expressions.impl;
 
 import java.util.Collection;
 
+import java.util.Map;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
+import org.eclipse.emf.common.util.DiagnosticChain;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
@@ -30,6 +33,7 @@ import org.eclipse.ocl.expressions.ExpressionsPackage;
 import org.eclipse.ocl.expressions.LoopExp;
 import org.eclipse.ocl.expressions.OCLExpression;
 import org.eclipse.ocl.expressions.Variable;
+import org.eclipse.ocl.expressions.operations.LoopExpOperations;
 
 /**
  * <!-- begin-user-doc -->
@@ -45,7 +49,10 @@ import org.eclipse.ocl.expressions.Variable;
  *
  * @generated
  */
-public abstract class LoopExpImpl<C, PM> extends CallExpImpl<C> implements LoopExp<C, PM> {
+public abstract class LoopExpImpl<C, PM>
+		extends CallExpImpl<C>
+		implements LoopExp<C, PM> {
+
 	/**
 	 * The cached value of the '{@link #getBody() <em>Body</em>}' containment reference.
 	 * <!-- begin-user-doc -->
@@ -99,12 +106,18 @@ public abstract class LoopExpImpl<C, PM> extends CallExpImpl<C> implements LoopE
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetBody(OCLExpression<C> newBody, NotificationChain msgs) {
+	public NotificationChain basicSetBody(OCLExpression<C> newBody,
+			NotificationChain msgs) {
 		OCLExpression<C> oldBody = body;
 		body = newBody;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, ExpressionsPackage.LOOP_EXP__BODY, oldBody, newBody);
-			if (msgs == null) msgs = notification; else msgs.add(notification);
+			ENotificationImpl notification = new ENotificationImpl(this,
+				Notification.SET, ExpressionsPackage.LOOP_EXP__BODY, oldBody,
+				newBody);
+			if (msgs == null)
+				msgs = notification;
+			else
+				msgs.add(notification);
 		}
 		return msgs;
 	}
@@ -118,14 +131,19 @@ public abstract class LoopExpImpl<C, PM> extends CallExpImpl<C> implements LoopE
 		if (newBody != body) {
 			NotificationChain msgs = null;
 			if (body != null)
-				msgs = ((InternalEObject)body).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - ExpressionsPackage.LOOP_EXP__BODY, null, msgs);
+				msgs = ((InternalEObject) body).eInverseRemove(this,
+					EOPPOSITE_FEATURE_BASE - ExpressionsPackage.LOOP_EXP__BODY,
+					null, msgs);
 			if (newBody != null)
-				msgs = ((InternalEObject)newBody).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - ExpressionsPackage.LOOP_EXP__BODY, null, msgs);
+				msgs = ((InternalEObject) newBody).eInverseAdd(this,
+					EOPPOSITE_FEATURE_BASE - ExpressionsPackage.LOOP_EXP__BODY,
+					null, msgs);
 			msgs = basicSetBody(newBody, msgs);
-			if (msgs != null) msgs.dispatch();
-		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ExpressionsPackage.LOOP_EXP__BODY, newBody, newBody));
+			if (msgs != null)
+				msgs.dispatch();
+		} else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET,
+				ExpressionsPackage.LOOP_EXP__BODY, newBody, newBody));
 	}
 
 	/**
@@ -135,7 +153,8 @@ public abstract class LoopExpImpl<C, PM> extends CallExpImpl<C> implements LoopE
 	 */
 	public EList<Variable<C, PM>> getIterator() {
 		if (iterator == null) {
-			iterator = new EObjectContainmentEList<Variable<C, PM>>(Variable.class, this, ExpressionsPackage.LOOP_EXP__ITERATOR);
+			iterator = new EObjectContainmentEList<Variable<C, PM>>(
+				Variable.class, this, ExpressionsPackage.LOOP_EXP__ITERATOR);
 		}
 		return iterator;
 	}
@@ -145,13 +164,48 @@ public abstract class LoopExpImpl<C, PM> extends CallExpImpl<C> implements LoopE
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public boolean checkSourceCollection(DiagnosticChain diagnostics,
+			Map<Object, Object> context) {
+		return LoopExpOperations.checkSourceCollection(this, diagnostics,
+			context);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean checkLoopVariableInit(DiagnosticChain diagnostics,
+			Map<Object, Object> context) {
+		return LoopExpOperations.checkLoopVariableInit(this, diagnostics,
+			context);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean checkLoopVariableType(DiagnosticChain diagnostics,
+			Map<Object, Object> context) {
+		return LoopExpOperations.checkLoopVariableType(this, diagnostics,
+			context);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
-	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+	public NotificationChain eInverseRemove(InternalEObject otherEnd,
+			int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case ExpressionsPackage.LOOP_EXP__BODY:
+			case ExpressionsPackage.LOOP_EXP__BODY :
 				return basicSetBody(null, msgs);
-			case ExpressionsPackage.LOOP_EXP__ITERATOR:
-				return ((InternalEList<?>)getIterator()).basicRemove(otherEnd, msgs);
+			case ExpressionsPackage.LOOP_EXP__ITERATOR :
+				return ((InternalEList<?>) getIterator()).basicRemove(otherEnd,
+					msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -164,9 +218,9 @@ public abstract class LoopExpImpl<C, PM> extends CallExpImpl<C> implements LoopE
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case ExpressionsPackage.LOOP_EXP__BODY:
+			case ExpressionsPackage.LOOP_EXP__BODY :
 				return getBody();
-			case ExpressionsPackage.LOOP_EXP__ITERATOR:
+			case ExpressionsPackage.LOOP_EXP__ITERATOR :
 				return getIterator();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -181,12 +235,13 @@ public abstract class LoopExpImpl<C, PM> extends CallExpImpl<C> implements LoopE
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case ExpressionsPackage.LOOP_EXP__BODY:
-				setBody((OCLExpression<C>)newValue);
+			case ExpressionsPackage.LOOP_EXP__BODY :
+				setBody((OCLExpression<C>) newValue);
 				return;
-			case ExpressionsPackage.LOOP_EXP__ITERATOR:
+			case ExpressionsPackage.LOOP_EXP__ITERATOR :
 				getIterator().clear();
-				getIterator().addAll((Collection<? extends Variable<C, PM>>)newValue);
+				getIterator().addAll(
+					(Collection<? extends Variable<C, PM>>) newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -200,10 +255,10 @@ public abstract class LoopExpImpl<C, PM> extends CallExpImpl<C> implements LoopE
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case ExpressionsPackage.LOOP_EXP__BODY:
-				setBody((OCLExpression<C>)null);
+			case ExpressionsPackage.LOOP_EXP__BODY :
+				setBody((OCLExpression<C>) null);
 				return;
-			case ExpressionsPackage.LOOP_EXP__ITERATOR:
+			case ExpressionsPackage.LOOP_EXP__ITERATOR :
 				getIterator().clear();
 				return;
 		}
@@ -218,9 +273,9 @@ public abstract class LoopExpImpl<C, PM> extends CallExpImpl<C> implements LoopE
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case ExpressionsPackage.LOOP_EXP__BODY:
+			case ExpressionsPackage.LOOP_EXP__BODY :
 				return body != null;
-			case ExpressionsPackage.LOOP_EXP__ITERATOR:
+			case ExpressionsPackage.LOOP_EXP__ITERATOR :
 				return iterator != null && !iterator.isEmpty();
 		}
 		return super.eIsSet(featureID);

@@ -1,7 +1,7 @@
 /**
  * <copyright>
  * 
- * Copyright (c) 2006, 2007 IBM Corporation and others.
+ * Copyright (c) 2006, 2008 IBM Corporation, Zeligsoft Inc., and others.
  * All rights reserved.   This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -9,13 +9,16 @@
  * 
  * Contributors:
  *   IBM - Initial API and implementation
+ *   Zeligsoft - Bug 207365
  * 
  * </copyright>
  *
- * $Id: OperationCallExp.java,v 1.1 2008-08-07 06:35:16 dvojtise Exp $
+ * $Id: OperationCallExp.java,v 1.7 2008/11/30 22:11:38 cdamus Exp $
  */
 package org.eclipse.ocl.expressions;
 
+import java.util.Map;
+import org.eclipse.emf.common.util.DiagnosticChain;
 import org.eclipse.emf.common.util.EList;
 
 /**
@@ -35,8 +38,12 @@ import org.eclipse.emf.common.util.EList;
  * @see org.eclipse.ocl.expressions.ExpressionsPackage#getOperationCallExp()
  * @model
  * @generated
+ * @noimplement This interface is not intended to be implemented by clients.
+ * @noextend This interface is not intended to be extended by clients.
  */
-public interface OperationCallExp<C, O> extends FeatureCallExp<C> {
+public interface OperationCallExp<C, O>
+		extends FeatureCallExp<C> {
+
 	/**
 	 * Returns the value of the '<em><b>Argument</b></em>' containment reference list.
 	 * The list contents are of type {@link org.eclipse.ocl.expressions.OCLExpression}&lt;C>.
@@ -48,7 +55,7 @@ public interface OperationCallExp<C, O> extends FeatureCallExp<C> {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Argument</em>' containment reference list.
 	 * @see org.eclipse.ocl.expressions.ExpressionsPackage#getOperationCallExp_Argument()
-	 * @model type="org.eclipse.ocl.expressions.OCLExpression" containment="true"
+	 * @model containment="true"
 	 * @generated
 	 */
 	EList<OCLExpression<C>> getArgument();
@@ -64,7 +71,7 @@ public interface OperationCallExp<C, O> extends FeatureCallExp<C> {
 	 * @return the value of the '<em>Referred Operation</em>' reference.
 	 * @see #setReferredOperation(Object)
 	 * @see org.eclipse.ocl.expressions.ExpressionsPackage#getOperationCallExp_ReferredOperation()
-	 * @model
+	 * @model kind="reference"
 	 * @generated
 	 */
 	O getReferredOperation();
@@ -104,5 +111,34 @@ public interface OperationCallExp<C, O> extends FeatureCallExp<C> {
 	 * @generated
 	 */
 	void setOperationCode(int value);
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * arguments->forall (a | a.type.conformsTo
+	 * (self.refParams->at (arguments->indexOf (a)).type))
+	 * @param diagnostics The chain of diagnostics to which problems are to be appended.
+	 * @param context The cache of context-specific information.
+	 * <!-- end-model-doc -->
+	 * @model
+	 * @generated
+	 */
+	boolean checkArgumentsConform(DiagnosticChain diagnostics,
+			Map<Object, Object> context);
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * arguments->size() = refParams->size()
+	 * @param diagnostics The chain of diagnostics to which problems are to be appended.
+	 * @param context The cache of context-specific information.
+	 * <!-- end-model-doc -->
+	 * @model
+	 * @generated
+	 */
+	boolean checkArgumentCount(DiagnosticChain diagnostics,
+			Map<Object, Object> context);
 
 } // OperationCallExp
