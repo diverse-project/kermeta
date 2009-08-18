@@ -4,7 +4,7 @@
     <metaclass href="http://www.kermeta.org/kmLogo#//ASM/Forward"/>
     <rule xsi:type="sts:Sequence" id="">
       <subRules xsi:type="sts:Terminal" id="" terminal="FORWARD"/>
-      <subRules xsi:type="sts:Adornment" terminal="tab"/>      
+      <subRules xsi:type="sts:Adornment" terminal="tab"/>
       <subRules xsi:type="sts:RuleRef" id="@Expression" ref="//@fragments.4">
         <features xsi:type="ecore:EReference" href="http://www.kermeta.org/kmLogo#//ASM/Forward/steps"/>
       </subRules>
@@ -298,7 +298,7 @@
           <rule xsi:type="sts:Sequence">
             <subRules xsi:type="sts:Terminal" terminal=":" lexicalSeparator="true"/>
             <subRules xsi:type="sts:PrimitiveValue">
-              <features xsi:type="ecore:EAttribute" href="http://www.kermeta.org/kmLogo#//ASM/ProcDeclaration/name"/>
+              <features xsi:type="ecore:EAttribute" href="http://www.kermeta.org/kmLogo#//ASM/Parameter/name"/>
             </subRules>
           </rule>
         </subRule>
