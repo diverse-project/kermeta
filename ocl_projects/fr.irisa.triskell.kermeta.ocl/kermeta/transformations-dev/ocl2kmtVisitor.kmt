@@ -9,13 +9,13 @@
  *          Didier Vojtisek
  */
 
- 
+  
 package ocl2kmt;
 require kermeta
 require "TypeSystemMixin.kmt"
-require "IOMixin.kmt"
+require "IOMixin.kmt" 
 
-
+ 
 require "../helpers/QualifiedName.kmt"
 require "OperatorPolicies.kmt"  
 require "IteratorPolicies.kmt" 

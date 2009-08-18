@@ -12,7 +12,7 @@ import org.eclipse.ocl.types.OCLStandardLibrary;
 import org.eclipse.ocl.utilities.OCLFactory;
 import org.eclipse.ocl.utilities.UMLReflection;
 
-public class MyEnvironement<PK, C, O, P, EL, PM, S, COA, SSA, CT, CLS, E> extends AbstractEnvironment<PK, C, O, P, EL, PM, S, COA, SSA, CT, CLS, E>{
+public class MyEnvironement<PK, C, O, P, EL, PM, S, COA, SSA, CT, CLS, E> extends  AbstractEnvironment<PK, C, O, P, EL, PM, S, COA, SSA, CT, CLS, E> implements Environment<PK, C, O, P, EL, PM, S, COA, SSA, CT, CLS, E>{
 
 	public P defineAttribute(C owner, Variable<C, PM> variable, CT constraint) {
 		// TODO Auto-generated method stub

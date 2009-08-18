@@ -7,12 +7,12 @@
  * Authors : 
  *  Didier Vojtisek <dvojtise@irisa.fr>
  *  Damien Pollet   <dpollet@irisa.fr>
- * 
+ *  
  */
 //@mainClass "EcoreHelper::Main"
 //@mainOperation "main"
  
- 
+  
 package EcoreHelpers;  
 require "platform:/plugin/fr.irisa.triskell.kermeta.ecore/src/kermeta/ecore_behavior.kmt"
 //require "http://www.eclipse.org/emf/2002/Ecore"

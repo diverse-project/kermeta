@@ -15,6 +15,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.eclipse.ocl.ParserException;
+import org.eclipse.ocl.parser.OCLAnalyzer;
 
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
 
@@ -47,11 +48,12 @@ public class TestOCLParser {
 		File oclSourceFile = new File(oclfileURI.toFileString());//new File(ocltextfile);
 		String oclSource =  getContents(oclSourceFile);
 		
+		
 		MyOCLParser parser = new MyOCLParser(oclSource);
 		//MyOCLParser parser = createParser(oclSource); //$NON-NLS-1$
 		EObject constraint = null;
 			//System.err.println(ocltext + " essai");
-			constraint = parser.parse();
+			constraint = parser.parseConcreteSyntax();
 			System.out.println(constraint.toString());
 		
 
@@ -199,17 +201,16 @@ public class TestOCLParser {
 	 
 	public static void main(String[] args) {
 		//String baseDir = "/udd/barais/runtime-New_configuration/fr.irisa.triskell.kermeta.ocl/";
-		String baseDir = "/home/mskipper/runtime-EclipseApplication/fr.irisa.triskell.kermeta.ocl/";
-		for (String fn: filenames){
-			String oclSourceFileName = baseDir + "ocl/" + fn + ".ocl";
-			String xmiOutputFileName = "ocl/" + fn + ".xmi";
+		/*String baseDir = "/home/mskipper/runtime-EclipseApplication/fr.irisa.triskell.kermeta.ocl/";
+		for (String fn: filenames){*/
+			String oclSourceFileName = "test/" + "1" + ".ocl";
+			String xmiOutputFileName = "test/" + "1" + ".xmi";
 			System.out.println("Processing: " + oclSourceFileName + " --> " + xmiOutputFileName  );
 			try {
 				run(oclSourceFileName, xmiOutputFileName);
 			} catch (ParserException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
-			}
 		}
 	}
 	

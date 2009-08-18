@@ -14,7 +14,7 @@ require kermeta
 require "EcoreHelper.kmt" 
 require "oclcstvisitor.kmt" 
 require "../helpers/QualifiedName.kmt"
-
+ 
 
 using kermeta::standard 
 using ocl::cst

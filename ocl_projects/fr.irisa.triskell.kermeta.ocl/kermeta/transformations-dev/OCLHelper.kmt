@@ -14,7 +14,7 @@
 
 
 package oclHelpers;
-     
+      
 require kermeta
 require "oclcstvisitor.kmt" 
  //require "platform:/plugin/fr.irisa.triskell.kermeta.ecore/src/kermeta/helpers/EcoreHelper.kmt"

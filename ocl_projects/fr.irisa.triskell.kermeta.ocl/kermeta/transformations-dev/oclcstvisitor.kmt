@@ -7,11 +7,11 @@ package cst
 	@aspect "true"
 	abstract class CSTNode inherits ocl::cst::visitors::Visitable
 	{
-
+ 
 		operation accept(visitor : cst::visitors::Visitor) : Void is
 			 visitor.visitCSTNode(self)
  
-	}
+	} 
 	@aspect "true"
 	class PackageDeclarationCS 
 	{ 

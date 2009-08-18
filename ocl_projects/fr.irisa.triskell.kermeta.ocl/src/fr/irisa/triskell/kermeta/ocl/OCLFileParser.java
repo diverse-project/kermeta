@@ -46,7 +46,7 @@ public class OCLFileParser {
 	public static void parseToXMIFile(String oclSourceText, URI outputXmiURI) throws ParserException {
 		MyOCLParser parser = new MyOCLParser(oclSourceText);
 		EObject constraint = null;
-		constraint = parser.parse();
+		constraint = parser.parseConcreteSyntax();
 		if (constraint != null) {
 			Resource resource = new XMIResourceFactoryImpl().createResource(outputXmiURI);
 			resource.getContents().add(constraint);

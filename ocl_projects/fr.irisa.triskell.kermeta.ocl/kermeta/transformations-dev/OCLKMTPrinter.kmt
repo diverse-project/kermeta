@@ -19,7 +19,7 @@ require "ocl2kmtVisitor.kmt"
 require "EcoreHelper.kmt"
 require "OCLHelper.kmt"  
 require "IOMixin.kmt"
- 
+  
 //require "Tools.kmt"    
 //require "../../../fr.irisa.triskell.kermeta.ecore/src/kermeta/helpers/EcoreHelper.kmt"
    
@@ -31,8 +31,8 @@ using ocl::cst
 using ocl2kmt
 //using EcoreHelpers
 using oclHelpers  
-
-class OCLKMTPrinter 
+  
+class OCLKMTPrinter  
 { 
 	attribute repository: EMFRepository
 	attribute parsedOclURI: String
@@ -47,11 +47,11 @@ class OCLKMTPrinter
     operation main(): Void is
 		do
 				//self.generateOCL("../../ocl/speedsDepTest.xmi", "../../ocl/speedsL1.ecore", "speedsDepTest.kmt")
-				self.generateOCL("platform:/resource/fr.irisa.triskell.kermeta.ocl.test/tests/sample/expected_xmi/23.xmi",
-				"platform:/resource/fr.irisa.triskell.kermeta.ocl.test/tests/sample/metamodel/sample.ecore",
-				"C:/Users/olivier/workspaces/runtime-New_configuration/fr.irisa.triskell.kermeta.ocl/test.kmt")//"platform:/resource/fr.irisa.triskell.kermeta.ocl.test/01.kmt")
+				self.generateOCL("platform:/resource/fr.irisa.triskell.kermeta.ocl/test/1.xmi",
+				"platform:/resource/fr.irisa.triskell.kermeta.ocl/test/ASMLogo.ecore",
+				"/tmp/test.kmt")//"platform:/resource/fr.irisa.triskell.kermeta.ocl.test/01.kmt")
 	    end
-	    
+	     
 	      
     /** generateOCL
      **  parsedOclURI: String <-- the xmi file containing the OCLCST model of the expression
@@ -67,7 +67,7 @@ class OCLKMTPrinter
 	     	metamodel.load()
 	     	ecoreHelper := EcoreHelpers::EcoreHelper.new
 	     	ecoreHelper.setModel(metamodel) 
-			oclHelper := OCLHelper.new
+			oclHelper := OCLHelper.new 
 		    preprocessor := DefinitionPreprocessor.new
 		    preprocessor.setEcoreHelper(ecoreHelper)
 		    stdio.writeln("======= Pass one ========")

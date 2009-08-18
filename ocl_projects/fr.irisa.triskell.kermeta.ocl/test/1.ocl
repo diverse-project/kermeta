@@ -1,0 +1,11 @@
+package kmLogo::ASM
+
+context ProcCall 
+inv apropriate_number_of_actual_parameters :
+	actualArgs->size() = declaration.args->size()
+	
+context ProcDeclaration 
+inv unique_names_for_formal_arguments :
+		args->forAll ( a1 | args->forAll ( a2 | a1.name = a2.name implies a1 = a2 ))
+
+endpackage

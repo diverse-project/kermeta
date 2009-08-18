@@ -15,8 +15,8 @@ package ocl2kmt;
 require "EcoreHelper.kmt" 
 require "TypeSystemMixin.kmt" 
 require "../helpers/QualifiedName.kmt"
-
-using EcoreHelpers  
+ 
+using EcoreHelpers   
 using ocl::cst 
 using kermeta::standard
 //using qualifiedNames 
