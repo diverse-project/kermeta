@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="ASCII"?>
-<ASM:Block xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ASM="http://kmLogo.ecore/ASM">
+<ASM:Block xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ASM="http://www.kermeta.org/kmLogo/ASM">
   <instructions xsi:type="ASM:ProcDeclaration" name="koch" procCall="//@instructions.1/@block/@instructions.0/@block/@instructions.1 //@instructions.0/@block/@instructions.0/@elsePart/@instructions.0 //@instructions.0/@block/@instructions.0/@elsePart/@instructions.2 //@instructions.0/@block/@instructions.0/@elsePart/@instructions.4">
     <args name="level"/>
     <args name="width"/>
