@@ -4,8 +4,9 @@
     <metaclass href="http://www.kermeta.org/kmLogo#//ASM/Forward"/>
     <rule xsi:type="sts:Sequence" id="">
       <subRules xsi:type="sts:Terminal" id="" terminal="FORWARD"/>
+      <subRules xsi:type="sts:Adornment" terminal="tab"/>      
       <subRules xsi:type="sts:RuleRef" id="@Expression" ref="//@fragments.4">
-        <features xsi:type="ecore:EReference" href="http://www.kermeta.org/kmLogo#//ASM/Back/steps"/>
+        <features xsi:type="ecore:EReference" href="http://www.kermeta.org/kmLogo#//ASM/Forward/steps"/>
       </subRules>
     </rule>
   </fragments>
@@ -23,7 +24,7 @@
     <metaclass href="http://www.kermeta.org/kmLogo#//ASM/Block"/>
     <rule xsi:type="sts:Iteration">
       <subRule xsi:type="sts:RuleRef" id="Instruction" ref="//@fragments.5"/>
-      <container xsi:type="ecore:EReference" href="http://www.kermeta.org/kmLogo#//ASM/Block/instructions"/>
+      <containers xsi:type="ecore:EReference" href="http://www.kermeta.org/kmLogo#//ASM/Block/instructions"/>
     </rule>
   </fragments>
   <fragments xsi:type="sts:Alternative" id="Expression">
@@ -240,7 +241,7 @@
       <subRules xsi:type="sts:Terminal" terminal="[" lexicalSeparator="true"/>
       <subRules xsi:type="sts:Iteration">
         <subRule xsi:type="sts:RuleRef" ref="//@fragments.5"/>
-        <container xsi:type="ecore:EReference" href="http://www.kermeta.org/kmLogo#//ASM/Block/instructions"/>
+        <containers xsi:type="ecore:EReference" href="http://www.kermeta.org/kmLogo#//ASM/Block/instructions"/>
       </subRules>
       <subRules xsi:type="sts:Terminal" terminal="]" lexicalSeparator="true"/>
     </rule>
@@ -301,7 +302,7 @@
             </subRules>
           </rule>
         </subRule>
-        <container xsi:type="ecore:EReference" href="http://www.kermeta.org/kmLogo#//ASM/ProcDeclaration/args"/>
+        <containers xsi:type="ecore:EReference" href="http://www.kermeta.org/kmLogo#//ASM/ProcDeclaration/args"/>
       </subRules>
       <subRules xsi:type="sts:RuleRef" ref="//@fragments.3">
         <features xsi:type="ecore:EReference" href="http://www.kermeta.org/kmLogo#//ASM/ProcDeclaration/block"/>
@@ -330,20 +331,20 @@
       <subRules xsi:type="sts:Terminal" terminal="(" lexicalSeparator="true"/>
       <subRules xsi:type="sts:Iteration" separator="//@fragments.19">
         <subRule xsi:type="sts:RuleRef" ref="//@fragments.4"/>
-        <container xsi:type="ecore:EReference" href="http://www.kermeta.org/kmLogo#//ASM/ProcCall/actualArgs"/>
+        <containers xsi:type="ecore:EReference" href="http://www.kermeta.org/kmLogo#//ASM/ProcCall/actualArgs"/>
       </subRules>
       <subRules xsi:type="sts:Terminal" terminal=")" lexicalSeparator="true"/>
     </rule>
   </fragments>
-  <fragments xsi:type="sts:Template" id="Clear">
+  <fragments xsi:type="sts:Template" id="PenUp">
     <metaclass href="http://www.kermeta.org/kmLogo#//ASM/PenUp"/>
     <rule xsi:type="sts:Terminal" terminal="PENUP"/>
   </fragments>
-  <fragments xsi:type="sts:Template" id="Clear">
+  <fragments xsi:type="sts:Template" id="PenDown">
     <metaclass href="http://www.kermeta.org/kmLogo#//ASM/PenDown"/>
     <rule xsi:type="sts:Terminal" terminal="PENDOWN"/>
   </fragments>
-  <fragments xsi:type="sts:Template" id="Forward">
+  <fragments xsi:type="sts:Template" id="Back">
     <metaclass href="http://www.kermeta.org/kmLogo#//ASM/Back"/>
     <rule xsi:type="sts:Sequence" id="">
       <subRules xsi:type="sts:Terminal" id="" terminal="BACK"/>
@@ -352,21 +353,21 @@
       </subRules>
     </rule>
   </fragments>
-  <fragments xsi:type="sts:Template" id="Forward">
+  <fragments xsi:type="sts:Template" id="Left">
     <metaclass href="http://www.kermeta.org/kmLogo#//ASM/Left"/>
     <rule xsi:type="sts:Sequence" id="">
       <subRules xsi:type="sts:Terminal" id="" terminal="LEFT"/>
       <subRules xsi:type="sts:RuleRef" id="@Expression" ref="//@fragments.4">
-        <features xsi:type="ecore:EReference" href="http://www.kermeta.org/kmLogo#//ASM/Back/steps"/>
+        <features xsi:type="ecore:EReference" href="http://www.kermeta.org/kmLogo#//ASM/Left/angle"/>
       </subRules>
     </rule>
   </fragments>
-  <fragments xsi:type="sts:Template" id="Forward">
+  <fragments xsi:type="sts:Template" id="Right">
     <metaclass href="http://www.kermeta.org/kmLogo#//ASM/Right"/>
     <rule xsi:type="sts:Sequence" id="">
       <subRules xsi:type="sts:Terminal" id="" terminal="RIGHT"/>
       <subRules xsi:type="sts:RuleRef" id="@Expression" ref="//@fragments.4">
-        <features xsi:type="ecore:EReference" href="http://www.kermeta.org/kmLogo#//ASM/Back/steps"/>
+        <features xsi:type="ecore:EReference" href="http://www.kermeta.org/kmLogo#//ASM/Right/angle"/>
       </subRules>
     </rule>
   </fragments>
