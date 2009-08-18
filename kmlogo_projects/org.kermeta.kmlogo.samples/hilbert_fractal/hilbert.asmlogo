@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="ASCII"?>
 <ASM:Block xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ASM="http://www.kermeta.org/kmLogo/ASM">
-  <instructions xsi:type="ASM:ProcDeclaration" name="lefthilbert" procCall="//@instructions.0/@block/@instructions.0/@thenPart/@instructions.4 //@instructions.0/@block/@instructions.0/@thenPart/@instructions.6 //@instructions.1/@block/@instructions.0/@thenPart/@instructions.1 //@instructions.1/@block/@instructions.0/@thenPart/@instructions.9 //@instructions.2/@block/@instructions.8">
+  <instructions xsi:type="ASM:ProcDeclaration" name="lefthilbert" procCall="//@instructions.0/@block/@instructions.0/@thenPart/@instructions.4 //@instructions.0/@block/@instructions.0/@thenPart/@instructions.6 //@instructions.1/@block/@instructions.0/@thenPart/@instructions.1 //@instructions.1/@block/@instructions.0/@thenPart/@instructions.9 //@instructions.2/@block/@instructions.7">
     <args name="level"/>
     <args name="size"/>
     <block>
@@ -132,7 +132,6 @@
     <args name="level"/>
     <args name="size"/>
     <block>
-      <instructions xsi:type="ASM:PenDown"/>
       <instructions xsi:type="ASM:Right">
         <angle xsi:type="ASM:Constant" integerValue="180"/>
       </instructions>

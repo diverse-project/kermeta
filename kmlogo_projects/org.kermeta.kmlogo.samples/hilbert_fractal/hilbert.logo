@@ -35,7 +35,7 @@ TO righthilbert :level :size
 END
 
 TO drawhilbert :level :size
-	PENDOWN
+	
 	RIGHT 180
 	FORWARD *(:size, *(:level, 2))
 	LEFT 90
