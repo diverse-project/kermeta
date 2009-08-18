@@ -647,4 +647,9 @@ public class KetParser implements JETParseEventListener2, IJETParser
     compilationUnit.accept(new TagValidationVisitor(compilationUnit));
     compilationUnit.accept(new TextTrimmingVisitor());
   }
+	public void handleEmbeddedExpression(String language, JETMark start,
+			JETMark stop) throws JETException {
+		// TODO Auto-generated method stub
+		
+	}
 }
