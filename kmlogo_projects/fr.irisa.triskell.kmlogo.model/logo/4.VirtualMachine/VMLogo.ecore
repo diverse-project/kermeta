@@ -14,8 +14,8 @@
           eType="#//VM/Point" containment="true"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="Point">
-      <eStructuralFeatures xsi:type="ecore:EAttribute" name="x" eType="#//VM/Integer"/>
-      <eStructuralFeatures xsi:type="ecore:EAttribute" name="y" eType="#//VM/Integer"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="x" eType="#//VM/Double"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="y" eType="#//VM/Double"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="Segment">
       <eStructuralFeatures xsi:type="ecore:EReference" name="origin" lowerBound="1"
@@ -25,5 +25,6 @@
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EDataType" name="Integer" instanceClassName="int"/>
     <eClassifiers xsi:type="ecore:EDataType" name="Boolean" instanceClassName="java.lang.Boolean"/>
+    <eClassifiers xsi:type="ecore:EDataType" name="Double" instanceClassName="double"/>
   </eSubpackages>
 </ecore:EPackage>

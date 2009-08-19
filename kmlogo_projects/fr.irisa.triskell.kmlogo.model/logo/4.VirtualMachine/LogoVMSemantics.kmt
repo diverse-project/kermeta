@@ -24,8 +24,8 @@ package VM {
 		operation reset() is do
 			math := Math::Math.new
 			position := Point.new
-			position.x := 0
-			position.y := 0
+			position.x := 0.toReal
+			position.y := 0.toReal
 			heading := 0
 			penUp := true
 			drawings.clear
@@ -40,7 +40,7 @@ package VM {
 			moveListener.each{l | l.turtleHasRotated() }
 		end
 	
-		operation move(dx : Integer, dy : Integer)  is do
+		operation move(dx : Real, dy : Real)  is do
 			var newPos : Point init position.getDelta(dx,dy)
 			var trace : Segment 
 			if penUp then
@@ -59,23 +59,24 @@ package VM {
 		    var radian : Real init math.toRadians(heading.toReal) 
 			move(scale(steps,math.sin(radian)), scale(steps,math.cos(radian)))
 		end
-		/*
-		* scale the "steps" by factor and round the result
+	   
+	   /**
+		* scale the "steps" by factor
 		*/
-		operation scale(steps : Integer, factor : Real) : Integer is do
-			result := ((steps.toReal * factor)).toInteger
+		operation scale(steps : Integer, factor : Real) : Real is do
+			result := steps.toReal * factor
 		end
 	}
 	
 	aspect class Point
 	{
-		operation getDelta(dx : Integer, dy : Integer) : Point is do
+		operation getDelta(dx : Real, dy : Real) : Point is do
 			result := Point.new
 			result.x := x + dx
 			result.y := y + dy			
 		end
 		method toString() : String is do
-			result := "[" + x.toString + "," + y.toString + "]"
+			result := "[" + x.toInteger.toString + "," + y.toInteger.toString + "]"
 		end
 	}
 	
