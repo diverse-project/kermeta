@@ -2,9 +2,9 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Linux Fragment
 Bundle-SymbolicName: fr.irisa.triskell.kmlogo.ui.linux.x86
-Bundle-Version: 1.3.0
+Bundle-Version: 1.3.2
 Bundle-Vendor: INRIA Bretagne Atlantique
 Fragment-Host: fr.irisa.triskell.kmlogo.ui;bundle-version="1.1.1"
 Eclipse-PlatformFilter: (& (osgi.os=linux) (osgi.arch=x86))
-Require-Bundle: org.openembedd.launchexec
+Require-Bundle: org.openembedd.launchexec;bundle-version="[1.0.0,2.0.0)"
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
