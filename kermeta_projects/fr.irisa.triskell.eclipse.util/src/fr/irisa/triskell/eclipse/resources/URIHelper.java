@@ -44,11 +44,17 @@ public class URIHelper {
 		}
 		return path;
 	}
-	
+	/**
+	 * return the uri without its last segment
+	 * if the uri doesn't have a last segment (ex: http://spoon ), returns the uri itself
+	 * @param uri
+	 * @return
+	 */
 	static public String removeFileName(String uri) {
 		URI u = URI.createURI(uri);
-		String path = u.toString().replace(u.lastSegment(), "");
-		return path;
+		if(u.lastSegment() != null)
+				return u.toString().replace(u.lastSegment(), "");
+		else return uri;
 	}
 		
 }
