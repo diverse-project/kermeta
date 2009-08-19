@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="ASCII"?>
+<ASM:Block xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ASM="http://www.kermeta.org/kmLogo/ASM">
+  <instructions xsi:type="ASM:ProcDeclaration" name="spiral" procCall="//@instructions.0/@block/@instructions.0/@thenPart/@instructions.2 //@instructions.3">
+    <args name="size"/>
+    <block>
+      <instructions xsi:type="ASM:If">
+        <condition xsi:type="ASM:Lower">
+          <lhs xsi:type="ASM:ParameterCall" parameter="//@instructions.0/@args.0"/>
+          <rhs xsi:type="ASM:Constant" integerValue="30"/>
+        </condition>
+        <thenPart>
+          <instructions xsi:type="ASM:Forward">
+            <steps xsi:type="ASM:ParameterCall" parameter="//@instructions.0/@args.0"/>
+          </instructions>
+          <instructions xsi:type="ASM:Right">
+            <angle xsi:type="ASM:Constant" integerValue="30"/>
+          </instructions>
+          <instructions xsi:type="ASM:ProcCall" declaration="//@instructions.0">
+            <actualArgs xsi:type="ASM:Div">
+              <lhs xsi:type="ASM:Mult">
+                <lhs xsi:type="ASM:ParameterCall" parameter="//@instructions.0/@args.0"/>
+                <rhs xsi:type="ASM:Constant" integerValue="110"/>
+              </lhs>
+              <rhs xsi:type="ASM:Constant" integerValue="100"/>
+            </actualArgs>
+          </instructions>
+        </thenPart>
+        <elsePart/>
+      </instructions>
+      <instructions xsi:type="ASM:Constant"/>
+    </block>
+  </instructions>
+  <instructions xsi:type="ASM:Clear"/>
+  <instructions xsi:type="ASM:PenDown"/>
+  <instructions xsi:type="ASM:ProcCall" declaration="//@instructions.0">
+    <actualArgs xsi:type="ASM:Constant" integerValue="10"/>
+  </instructions>
+  <instructions xsi:type="ASM:PenUp"/>
+</ASM:Block>

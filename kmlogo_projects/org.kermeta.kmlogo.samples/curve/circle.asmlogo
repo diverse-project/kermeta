@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="ASCII"?>
+<ASM:Block xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ASM="http://www.kermeta.org/kmLogo/ASM">
+  <instructions xsi:type="ASM:ProcDeclaration" name="circle" procCall="//@instructions.3">
+    <args name="ne"/>
+    <args name="size"/>
+    <block>
+      <instructions xsi:type="ASM:Repeat">
+        <condition xsi:type="ASM:ParameterCall" parameter="//@instructions.0/@args.0"/>
+        <block>
+          <instructions xsi:type="ASM:Right">
+            <angle xsi:type="ASM:Div">
+              <lhs xsi:type="ASM:Constant" integerValue="360"/>
+              <rhs xsi:type="ASM:ParameterCall" parameter="//@instructions.0/@args.0"/>
+            </angle>
+          </instructions>
+          <instructions xsi:type="ASM:Forward">
+            <steps xsi:type="ASM:ParameterCall" parameter="//@instructions.0/@args.1"/>
+          </instructions>
+        </block>
+      </instructions>
+    </block>
+  </instructions>
+  <instructions xsi:type="ASM:Clear"/>
+  <instructions xsi:type="ASM:PenDown"/>
+  <instructions xsi:type="ASM:ProcCall" declaration="//@instructions.0">
+    <actualArgs xsi:type="ASM:Constant" integerValue="36"/>
+    <actualArgs xsi:type="ASM:Constant" integerValue="20"/>
+  </instructions>
+  <instructions xsi:type="ASM:PenUp"/>
+</ASM:Block>
