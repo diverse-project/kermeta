@@ -1,0 +1,17 @@
+/* $Id:$ 
+ * Creation : August 18, 2009
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            dvojtise
+ */
+
+
+package kmLogo::listener;
+
+
+require kermeta
+class TurtleMoveListener
+{
+	operation turtleHasMoved() : Void is abstract
+}

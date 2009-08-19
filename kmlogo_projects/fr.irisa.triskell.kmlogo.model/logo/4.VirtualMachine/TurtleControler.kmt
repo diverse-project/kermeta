@@ -9,19 +9,22 @@ package kmLogo::controler;
 
 
 require kermeta
-require "VMLogo.ecore"
+require "LogoVMSemantics.kmt"
+//require "VMLogo.ecore"
 require "../3.JavaInterfaces/TurtleGUI.kmt"
+require "MoveListener.kmt"
 
 using kmLogo::gui
 using kmLogo::VM
 
-class TurtleControler
+class TurtleControler inherits kmLogo::listener::TurtleMoveListener
 {
 	attribute registeredGUI : TurtleGUI
 	reference turtleModel : Turtle
 	
 	operation initialize(model : Turtle) : TurtleControler is do
 		turtleModel := model
+		turtleModel.moveListener.add(self)		
 		// create a default GUI
 		var gui : TurtleGUI init TurtleGUI.new.initialize("My Turtle")
 		registeredGUI := gui
@@ -33,5 +36,10 @@ class TurtleControler
 			registeredGUI.drawLine(s.origin.x, s.origin.y, s.destination.x, s.destination.y)
 		}
 		registeredGUI.drawTurtle(turtleModel.position.x, turtleModel.position.y, turtleModel.heading.toReal, turtleModel.penUp)
+	end
+	
+	/** implement TurtleMoveListener operation */
+	method turtleHasMoved() : Void is do
+		modelChanged
 	end
 }

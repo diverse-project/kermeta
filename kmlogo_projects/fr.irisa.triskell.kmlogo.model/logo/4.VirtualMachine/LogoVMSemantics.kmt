@@ -5,6 +5,7 @@ require kermeta
 require "VMLogo.ecore"
 require "../3.JavaInterfaces/Math.kmt"
 require "TurtleControler.kmt"
+require "MoveListener.kmt"
 
 using kermeta::standard
 using kermeta::utils
@@ -18,6 +19,7 @@ package VM {
 	{
 	
 		attribute math : Math::Math 
+		reference moveListener : kmLogo::listener::TurtleMoveListener[0..*]
 
 		operation reset() is do
 			math := Math::Math.new
@@ -48,6 +50,7 @@ package VM {
 				drawings.add(trace)
 			end
 			position := newPos
+			moveListener.each{l | l.turtleHasMoved }
 		end
 			
 		operation forward(steps : Integer)  is do
