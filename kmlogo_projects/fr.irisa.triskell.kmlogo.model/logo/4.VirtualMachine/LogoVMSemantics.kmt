@@ -37,20 +37,22 @@ package VM {
 		
 		operation rotate(angle : Integer)  is do
 			heading := (heading + angle).mod(360)
+			moveListener.each{l | l.turtleHasRotated() }
 		end
 	
 		operation move(dx : Integer, dy : Integer)  is do
 			var newPos : Point init position.getDelta(dx,dy)
+			var trace : Segment 
 			if penUp then
 				stdio.writeln("Turtle move to "+ newPos.toString)
 			else
 				stdio.writeln("Turtle trace to "+ newPos.toString)
-				var trace : Segment init Segment.new
+				trace := Segment.new
 				trace.make(position,newPos)
 				drawings.add(trace)
 			end
 			position := newPos
-			moveListener.each{l | l.turtleHasMoved }
+			moveListener.each{l | l.turtleHasMoved(trace) }
 		end
 			
 		operation forward(steps : Integer)  is do

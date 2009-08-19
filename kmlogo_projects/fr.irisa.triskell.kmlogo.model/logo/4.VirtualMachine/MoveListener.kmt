@@ -11,7 +11,10 @@ package kmLogo::listener;
 
 
 require kermeta
+require "VMLogo.ecore"
+
 class TurtleMoveListener
 {
-	operation turtleHasMoved() : Void is abstract
+	operation turtleHasMoved(newSegment : kmLogo::VM::Segment) : Void is abstract
+	operation turtleHasRotated() : Void is abstract
 }

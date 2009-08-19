@@ -39,7 +39,15 @@ class TurtleControler inherits kmLogo::listener::TurtleMoveListener
 	end
 	
 	/** implement TurtleMoveListener operation */
-	method turtleHasMoved() : Void is do
-		modelChanged
+	method turtleHasMoved(newSegment : kmLogo::VM::Segment) : Void is do
+		if  not newSegment.isVoid then
+			// maybe it has simply moved but not traced something 
+			registeredGUI.drawLine(newSegment.origin.x, newSegment.origin.y, 
+							   newSegment.destination.x, newSegment.destination.y)
+        end					
+		registeredGUI.drawTurtle(turtleModel.position.x, turtleModel.position.y, turtleModel.heading.toReal, turtleModel.penUp)
+	end
+	method turtleHasRotated() : Void is do
+		registeredGUI.drawTurtle(turtleModel.position.x, turtleModel.position.y, turtleModel.heading.toReal, turtleModel.penUp)
 	end
 }
