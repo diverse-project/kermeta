@@ -30,7 +30,7 @@ Export-Package: org.eclipse.ocl,
  org.eclipse.ocl.utilities,
  org.eclipse.ocl.utilities.impl,
  org.eclipse.ocl.utilities.util
-Bundle-Version: 1.1.0.v200706201508
+Bundle-Version: 1.3.2
 Bundle-ActivationPolicy: lazy
 Bundle-Name: %Plugin.name
 Bundle-ClassPath: .

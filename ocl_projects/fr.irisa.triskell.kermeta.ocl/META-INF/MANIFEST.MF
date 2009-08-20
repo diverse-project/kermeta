@@ -48,3 +48,4 @@ Import-Package: org.eclipse.ocl,
  org.eclipse.ocl.utilities,
  org.eclipse.ocl.utilities.impl,
  org.eclipse.ocl.utilities.util
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
