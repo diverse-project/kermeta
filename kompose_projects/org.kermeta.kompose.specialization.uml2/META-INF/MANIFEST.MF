@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Kompose Specialization Composition Plug-in (UML)
 Bundle-SymbolicName: org.kermeta.kompose.specialization.uml2;singleton:=true
-Bundle-Version: 0.1.0
+Bundle-Version: 0.1.1
 Bundle-Activator: org.kermeta.kompose.specialization.uml2.activator.Activator
 Bundle-Vendor: IRISA/INRIA & L3i, University of La Rochelle
 Require-Bundle: org.eclipse.ui,

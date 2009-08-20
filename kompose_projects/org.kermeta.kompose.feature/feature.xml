@@ -2,7 +2,7 @@
 <feature
       id="org.kermeta.kompose.feature"
       label="Kompose"
-      version="0.0.4"
+      version="0.0.5"
       provider-name="IRISA/INRIA">
 
    <description url="http://www.kermeta.org/mdk/kompose">
@@ -149,23 +149,26 @@ Inc. in the United States, other countries, or both.
    </url>
 
    <requires>
-      <import plugin="org.eclipse.emf.ecore" version="2.4.1" match="greaterOrEqual"/>
-      <import plugin="org.eclipse.emf.ecore.xmi" version="2.4.1" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.ui"/>
       <import plugin="org.eclipse.core.runtime"/>
-      <import plugin="org.eclipse.emf.edit"/>
       <import plugin="org.eclipse.core.resources"/>
-      <import plugin="org.eclipse.emf.edit.ui"/>
+      <import plugin="org.eclipse.ui.console"/>
       <import plugin="org.eclipse.ui.ide"/>
+      <import plugin="org.eclipse.core.filesystem"/>
+      <import plugin="org.eclipse.emf.ecore.xmi" version="2.4.1" match="greaterOrEqual"/>
+      <import plugin="fr.irisa.triskell.kermeta.interpreter"/>
+      <import plugin="org.eclipse.emf.ecore" version="2.4.1" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.emf.edit"/>
+      <import plugin="org.eclipse.emf.edit.ui"/>
       <import plugin="org.eclipse.emf" version="2.4.0" match="greaterOrEqual"/>
       <import plugin="org.eclipse.emf.common" version="2.4.0" match="greaterOrEqual"/>
-      <import plugin="org.eclipse.ui"/>
-      <import plugin="fr.irisa.triskell.kermeta.interpreter"/>
       <import plugin="org.eclipse.pde.core"/>
       <import plugin="org.eclipse.jdt"/>
       <import plugin="org.eclipse.jdt.core"/>
-      <import plugin="org.eclipse.ui.console"/>
-      <import plugin="org.eclipse.core.filesystem"/>
-      <import plugin="org.antlr.antlr2"/>
+      <import plugin="fr.irisa.triskell.traceability.model" version="1.2.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.ui" version="3.4.0" match="greaterOrEqual"/>
+      <import plugin="org.antlr.antlr3" version="3.1.1" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.core.expressions" version="3.4.0" match="greaterOrEqual"/>
    </requires>
 
    <plugin

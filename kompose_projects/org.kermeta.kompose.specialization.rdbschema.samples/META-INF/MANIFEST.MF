@@ -2,4 +2,4 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Kompose RDBSchema Specialization Sample Models
 Bundle-SymbolicName: org.kermeta.kompose.specialization.rdbschema.samples
-Bundle-Version: 0.0.3.1
+Bundle-Version: 0.0.5
