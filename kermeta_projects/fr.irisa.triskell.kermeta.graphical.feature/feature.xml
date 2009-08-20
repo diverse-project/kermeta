@@ -2,7 +2,7 @@
 <feature
       id="fr.irisa.triskell.kermeta.graphical"
       label="Kermeta Graphical Editor"
-      version="1.3.0"
+      version="1.3.2"
       provider-name="IRISA/INRIA">
 
    <description url="http://www.kermeta.org/">
