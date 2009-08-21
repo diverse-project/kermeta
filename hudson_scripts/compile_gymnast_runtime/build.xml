@@ -35,7 +35,7 @@
 		<mkdir dir="${eclipse.build.dir}/plugins"/>
 		<mkdir dir="${eclipse.build.dir}/features"/>		
 		<copy todir="${eclipse.build.dir}/features">
-			<fileset dir="${env.WORKSPACE}/log4j_projects/*feature">
+			<fileset dir="${env.WORKSPACE}/emfatic_projects/*feature">
 				 <exclude name="**/CVS/**"/>
 			</fileset>
 		</copy>		
