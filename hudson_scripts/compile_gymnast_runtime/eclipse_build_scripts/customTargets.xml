@@ -64,6 +64,17 @@
 	<!-- Steps to do before setup -->
 	<!-- ===================================================================== -->
 	<target name="preSetup">
+		<eclipse.generateFeature
+							featureId="org.eclipse.gymnast.runtime.core.feature"
+							buildDirectory="${buildDirectory}"
+							baseLocation="${baseLocation}"
+							verify="false"
+							pluginPath="${pluginPath}"
+							configInfo="${configs}"
+							pluginList="org.eclipse.gymnast.runtime.core"
+							featureList="${featureList}"
+							includeLaunchers="false"
+						/>
 	</target>
 
 	<!-- ===================================================================== -->
