@@ -56,6 +56,9 @@
 		<get src="http://pamplemousse.irisa.fr:8080/job/compile_gymnast_runtime/lastSuccessfulBuild/artifact/src/I.TestBuild/org.eclipse.gymnast.runtime.core.feature-TestBuild.zip" 
 							dest="${eclipse.extension.location}/org.eclipse.gymnast.runtime.core.feature-TestBuild.zip"
 							usetimestamp="true"/>
+		<get src="http://pamplemousse.irisa.fr:8080/view/KermetaValidatedOnTheNewForge/job/compile_antlr2/lastSuccessfulBuild/artifact/src/I.TestBuild/org.antlr.antlr2.feature-TestBuild.zip" 
+									dest="${eclipse.extension.location}/org.antlr.antlr2.feature-TestBuild.zip"
+									usetimestamp="true"/>
 		<unzip dest="${eclipse.extension.location}">
 		    <fileset dir="${eclipse.extension.location}">
 		        <include name="**/*.zip"/>
