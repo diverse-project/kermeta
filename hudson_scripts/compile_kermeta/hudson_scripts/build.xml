@@ -43,6 +43,8 @@
 				 <exclude name="**/CVS/**"/>
 			</fileset>
 		</copy>
+		<ant antfile="${eclipse.build.dir}/plugins/org.antlr.antlr2/unjar_build.xml"
+			dir="${eclipse.build.dir}/plugins/org.antlr.antlr2"></ant>
 
 	</target>
 	<target name="getDependencies">	
