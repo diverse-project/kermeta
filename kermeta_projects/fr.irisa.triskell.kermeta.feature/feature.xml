@@ -181,12 +181,6 @@ GPL license.
          unpack="false"/>
 
    <plugin
-         id="org.kermeta.log4j.util"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"/>
-
-   <plugin
          id="org.eclipse.emf.ecoretools.registration"
          download-size="0"
          install-size="0"
