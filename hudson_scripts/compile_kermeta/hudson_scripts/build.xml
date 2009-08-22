@@ -50,10 +50,10 @@
 		<get src="http://pamplemousse.irisa.fr:8080/job/compile_traceability/lastSuccessfulBuild/artifact/src/I.TestBuild/fr.irisa.triskell.traceability-TestBuild.zip" 
 			dest="${eclipse.extension.location}/fr.irisa.triskell.traceability-TestBuild.zip"
 			usetimestamp="true"/>
-	<!--	<get src="http://pamplemousse.irisa.fr:8080/job/compile_log4j/lastSuccessfulBuild/artifact/src/I.TestBuild/org.kermeta.log4j-TestBuild.zip" 
+		<get src="http://pamplemousse.irisa.fr:8080/job/compile_log4j/lastSuccessfulBuild/artifact/src/I.TestBuild/org.kermeta.log4j-TestBuild.zip" 
 					dest="${eclipse.extension.location}/org.kermeta.log4j-TestBuild.zip"
 					usetimestamp="true"/>
-		<get src="http://pamplemousse.irisa.fr:8080/job/compile_gymnast_runtime/lastSuccessfulBuild/artifact/src/I.TestBuild/org.eclipse.gymnast.runtime.core.feature-TestBuild.zip" 
+	<!--	<get src="http://pamplemousse.irisa.fr:8080/job/compile_gymnast_runtime/lastSuccessfulBuild/artifact/src/I.TestBuild/org.eclipse.gymnast.runtime.core.feature-TestBuild.zip" 
 							dest="${eclipse.extension.location}/org.eclipse.gymnast.runtime.core.feature-TestBuild.zip"
 							usetimestamp="true"/>
 		<get src="http://pamplemousse.irisa.fr:8080/view/KermetaValidatedOnTheNewForge/job/compile_antlr2/lastSuccessfulBuild/artifact/src/I.TestBuild/org.antlr.antlr2.feature-TestBuild.zip" 
