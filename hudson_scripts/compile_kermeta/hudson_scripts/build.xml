@@ -30,6 +30,7 @@
 			<fileset dir="${env.WORKSPACE}/kermeta_projects">
 				 <exclude name="**/fr.irisa.triskell.kermeta.feature/**"/>
 				 <exclude name="**/fr.irisa.triskell.kermeta.ket/**"/>
+				 <exclude name="**/org.kermeta.log4j.util/**"/>
 				 <exclude name="**/org.kermeta.prototyper/**"/>
 				 <exclude name="**/org.kermeta.kpm.test.workbench/**"/>
 				 <exclude name="**/org.kermeta.compiler.tests/**"/>
