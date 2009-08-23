@@ -65,7 +65,9 @@
 		<get src="http://pamplemousse.irisa.fr:8080/view/KermetaValidatedOnTheNewForge/job/compile_registration/lastSuccessfulBuild/artifact/src/I.TestBuild/org.eclipse.emf.ecoretools.registration-TestBuild.zip" 
 											dest="${eclipse.extension.location}/org.eclipse.emf.ecoretools.registration-TestBuild.zip"
 											usetimestamp="true"/>
-     -->											
+     -->
+		<!-- make sure the unzip goes in a clean eclipse folder -->
+		<delete dir="${eclipse.extension.location}/eclipse" failonerror="false"/>											
 		<unzip dest="${eclipse.extension.location}">
 		    <fileset dir="${eclipse.extension.location}">
 		        <include name="**/*.zip"/>
