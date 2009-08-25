@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="ISO-8859-15"?>
+<sca:composite xmlns:sca="http://www.osoa.org/xmlns/sca/1.0" name="tutorial_type_diagram" targetNamespace="http://eclipse.org/tutorial/model/tutorial_type_diagram">
+  <sca:component constrainingType="eu.ict_diva.tutorial.osgi.type.Client" name="ClientImpl_1">
+    <sca:implementation.java class="tutorial.diva.impl.client.ClientImpl"/>
+    <sca:reference multiplicity="0..n" name="defaultHelloWorld">
+      <sca:interface.java interface="tutorial.diva.HelloWorld"/>
+    </sca:reference>
+    <sca:reference multiplicity="1..1" name="otherHelloWorlds">
+      <sca:interface.java interface="tutorial.diva.HelloWorld"/>
+    </sca:reference>
+  </sca:component>
+  <sca:component constrainingType="eu.ict_diva.tutorial.osgi.type.Client" name="ClientImpl_2">
+    <sca:implementation.java class="tutorial.diva.impl.client.ClientImpl"/>
+    <sca:reference multiplicity="0..n" name="defaultHelloWorld">
+      <sca:interface.java interface="tutorial.diva.HelloWorld"/>
+    </sca:reference>
+    <sca:reference multiplicity="1..1" name="otherHelloWorlds">
+      <sca:interface.java interface="tutorial.diva.HelloWorld"/>
+    </sca:reference>
+  </sca:component>
+  <sca:component constrainingType="eu.ict_diva.tutorial.osgi.type.Server" name="ServerImpl_1">
+    <sca:implementation.java class="tutorial.diva.impl.serveur.HelloWorldImpl1"/>
+    <sca:service name="helloWorld">
+      <sca:interface.java interface="tutorial.diva.HelloWorld"/>
+    </sca:service>
+    <sca:reference name="voiceHelloWorld">
+      <sca:interface.java interface="tutorial.diva.VoiceHelloWorld"/>
+    </sca:reference>
+  </sca:component>
+  <sca:component constrainingType="eu.ict_diva.tutorial.osgi.type.Server" name="ServerImpl_2">
+    <sca:implementation.java class="tutorial.diva.impl.serveur.HelloWorldImpl2"/>
+    <sca:service name="helloWorld">
+      <sca:interface.java interface="tutorial.diva.HelloWorld"/>
+    </sca:service>
+    <sca:reference name="voiceHelloWorld">
+      <sca:interface.java interface="tutorial.diva.VoiceHelloWorld"/>
+    </sca:reference>
+  </sca:component>
+  <sca:wire source="ClientImpl_1/defaultHelloWorld" target="ServerImpl_1/helloWorld"/>
+  <sca:wire source="ClientImpl_2/defaultHelloWorld" target="ServerImpl_1/helloWorld"/>
+  <sca:wire source="ClientImpl_1/otherHelloWorlds" target="ServerImpl_2/helloWorld"/>
+</sca:composite>

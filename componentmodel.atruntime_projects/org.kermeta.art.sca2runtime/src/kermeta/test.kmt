@@ -28,10 +28,12 @@ class Main
 			
 		//loading an SCA model	
 		var composite : Composite init loadSCAModel(scaModel)
+		composite.component.each{c | stdio.errorln(c.toString)}
+		
 		var mapper : SCAtoART init SCAtoART.new
 		mapper.scaComposite := composite 
-
 		mapper.sca2art		
+		
 		var system : System init mapper.artSystem
 		
 		system.root.subComponent.each{c |

@@ -56,7 +56,7 @@ aspect class SCAtoART{
 		}
 		
 		if type != void then
-			if not (type.name == /*cpt.~property.detect{p| p.name == "Type"}.~value*/cpt.constrainingType) then
+			if not (type.name == cpt.constrainingType) then
 				var e : kermeta::exceptions::Exception init kermeta::exceptions::Exception.new
 				e.message := "Error: two similar component types with different names: "+type.name+" VS "+cpt.constrainingType.toString 
 				raise e 
@@ -64,10 +64,7 @@ aspect class SCAtoART{
 		else
 			type := PrimitiveType.new
 			
-			//type.name := cpt.~property.detect{p| p.name == "Type"}.~value
-			
-			
-			stdio.errorln(cpt.constrainingType)
+			//stdio.errorln(cpt.constrainingType)
 			type.name := cpt.constrainingType
 			//type.name := ""
 			cpt.service.each{s | 
@@ -83,10 +80,14 @@ aspect class SCAtoART{
 			cpt.~reference.each{r | 
 				var port : Port init Port.new
 				port.name := r.name
-				stdio.errorln("port "+port.name)
+				//stdio.errorln("port "+port.name)
 				port.role := "client"
 				//port.service := getService(r.interfaceGroup.~value.asType(JavaInterface))
 				port.service := getService(r.interface.asType(JavaInterface))
+				
+				if r.multiplicity == void then
+					stdio.errorln("SCA multiplicities are not loaded... To be fixed by Didier ;-)")
+				end
 				if r.multiplicity == Multiplicity._01 or  r.multiplicity == Multiplicity._0N then
 					port.lower := 0
 					port.isOptional := true
@@ -118,7 +119,7 @@ aspect class SCAtoART{
 	
 	operation getService(interface : JavaInterface) : art::type::Service is
 	do
-		stdio.writeln("getService("+interface.interface+")")
+		//stdio.writeln("getService("+interface.interface+")")
 		
 		var service : art::type::Service
 		service := artServices.detect{s | s.name == interface.interface}
@@ -143,18 +144,10 @@ aspect class Composite
 		artSystem.root := artComposite
 		artComposite.name := self.name
 		self.component.each{c | 
-			stdio.writeln(c.name+": "+c.implementation.asType(JavaImplementation).~class)
+			//stdio.writeln(c.name+": "+c.implementation.asType(JavaImplementation).~class)
 			c.visit(sca2art, artSystem)
 			artComposite.subComponent.add(c.artComponent)
 		}
-		/*self.service.each{s |
-			stdio.writeln(s.name) 
-			s.visit(sca2art, artSystem)
-		}
-		self.~reference.each{r | 
-			stdio.writeln(r.name)
-			r.visit(sca2art, artSystem)
-		}*/
 		self.wire.each{w | w.visit(sca2art, artSystem)}
 	end
 }
@@ -165,6 +158,10 @@ aspect class Component
 	
 	operation visit(sca2art : SCAtoART, artSystem : System) is
 	do
+	/*	stdio.writeln("visit Component")
+		stdio.writeln("  artComponent.name: "+self.name)
+		stdio.writeln("  artComponent: "+self.toString)
+	*/
 		artComponent := PrimitiveInstance.new
 		artComponent.name := self.name
 		
@@ -172,16 +169,12 @@ aspect class Component
 		implem.implementingClass := self.implementation.asType(JavaImplementation).~class
 		artComponent.implem := implem
 		
-		/*self.service.each{s |
-			stdio.writeln(s.name) 
-			s.visit(sca2art, artSystem)
-		}
-		self.~reference.each{r |
-			stdio.writeln(r.name) 
-			r.visit(sca2art, artSystem)
-		}*/
 		artComponent.type := sca2art.getType(self)
 		artSystem.types.add(sca2art.getType(self))
+		
+	/*	stdio.writeln("  artComponent.type: "+artComponent.type.toString)
+		stdio.writeln("  artComponent: "+artComponent.toString)
+	*/
 	end
 }
 
@@ -192,60 +185,32 @@ aspect class Wire
 	
 	operation visit(sca2art : SCAtoART, artSystem : System) is
 	do
+	
+	/*	stdio.writeln("visit Wire")
+		stdio.writeln("  artBinding.server: "+self.target2.artPort.toString)
+		stdio.writeln("    artBinding.server.sca: "+self.target2.toString)
+		stdio.writeln("  artBinding.client: "+self.source2.artPort.toString)
+		stdio.writeln("    artBinding.client.sca: "+self.source2.toString)
+		stdio.writeln("  artBinding.serverInstance: "+self.target2.container.asType(Component).artComponent.toString)
+		stdio.writeln("  artBinding.clientInstance: "+self.source2.container.asType(Component).artComponent.toString)
+	*/
 		artBinding := TransmissionBinding.new 
-		artBinding.server := self.target2.artPort
-		artBinding.client := self.source2.artPort
+		artBinding.server := self.target2.container.asType(Component).artComponent.type.port.detect{p | p.role == "server" and p.name == self.target2.name}//self.target2.artPort
+		artBinding.client := self.source2.container.asType(Component).artComponent.type.port.detect{p | p.role == "client" and p.name == self.source2.name}//self.source2.artPort
 		artBinding.serverInstance := self.target2.container.asType(Component).artComponent
+		artBinding.id := self.target2.container.asType(Component).artComponent.name
 		self.source2.container.asType(Component).artComponent.binding.add(artBinding)
 	end
 }
 
-/*aspect class Service
-{
-	reference artPort : Port [1..1]
-	
-	operation visit() is
-	do 
-	
-	end	
-}*/
-
 aspect class BaseService
 {
-	reference artPort : Port [1..1]
-	
-/*	operation visit(sca2art : SCAtoART, artSystem : System) is
-	do 
-		artPort := Port.new
-		artPort.role := "server"
-		//self.interface.asType(JavaInterface).visit(sca2art)
-		//artPort.service := self.interface.asType(JavaInterface).artService
-	end
-*/	
+	reference artPort : Port [1..1]	
 }
-
-/*aspect class Reference
-{
-	reference artPort : Port [1..1]
-	
-	operation visit() is
-	do 
-	
-	end
-}*/
 
 aspect class BaseReference
 {
 	reference artPort : Port [1..1]
-	
-/*	operation visit(sca2art : SCAtoART, artSystem : System) is
-	do 
-		artPort := Port.new
-		artPort.role := "client"
-		//self.interface.asType(JavaInterface).visit(sca2art)
-		//artPort.service := self.interface.asType(JavaInterface).artService
-	end
-*/
 }
 
 aspect class JavaInterface
@@ -254,7 +219,7 @@ aspect class JavaInterface
 	
 	operation visit(sca2art : SCAtoART, artSystem : System) is
 	do
-		stdio.writeln("JavaInterface: "+self.toString)
+		//stdio.writeln("JavaInterface: "+self.toString)
 		artService := art::type::FunctionalService.new
 		artService.name := self.interface
 		artSystem.services.add(artService)
