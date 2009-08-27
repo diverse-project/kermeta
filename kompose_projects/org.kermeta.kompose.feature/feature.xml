@@ -274,4 +274,17 @@ Inc. in the United States, other countries, or both.
          version="0.0.0"
          unpack="false"/>
 
+   <plugin
+         id="org.kermeta.kompose.specialization.uml2"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.kermeta.kompose.specialization.uml2.samples"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"/>
+
 </feature>
