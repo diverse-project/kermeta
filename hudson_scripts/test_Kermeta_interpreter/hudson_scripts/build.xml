@@ -40,12 +40,7 @@
 			usetimestamp="true"/>
 		<get src="http://pamplemousse.irisa.fr:8080/job/compile_log4j/lastSuccessfulBuild/artifact/src/I.TestBuild/org.kermeta.log4j-TestBuild.zip" 
 					dest="${downloaded.dependencies.dir}/compile_log4j.zip"
-					usetimestamp="true"/>
-		<unzip dest="${eclipse.build.dir}">
-		    <fileset dir="${downloaded.dependencies.dir}">
-		        <include name="**/*.zip"/>
-		    </fileset>
-		</unzip>
+					usetimestamp="true"/>		
 		<chmod file="${env.WORKSPACE}/hudson_scripts/test_Kermeta_interpreter/hudson_scripts/test.sh" perm="a+x"/>
 	</target>
 
