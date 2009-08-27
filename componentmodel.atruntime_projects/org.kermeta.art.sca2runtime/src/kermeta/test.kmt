@@ -28,7 +28,7 @@ class Main
 			
 		//loading an SCA model	
 		var composite : Composite init loadSCAModel(scaModel)
-		composite.component.each{c | stdio.errorln(c.toString)}
+		//composite.component.each{c | stdio.errorln(c.toString)}
 		
 		var mapper : SCAtoART init SCAtoART.new
 		mapper.scaComposite := composite 
@@ -36,18 +36,19 @@ class Main
 		
 		var system : System init mapper.artSystem
 		
-		system.root.subComponent.each{c |
+		/*system.root.subComponent.each{c |
 			stdio.writeln(c.name)
 			c.binding.each{b | 
 				stdio.writeln(b.toString)
 			}
-		}
+		}*/
 		
 		saveARTModel(system, artModel)
 	end
 	
 	operation loadSCAModel(modelUri : String) : Composite is
 	do
+		stdio.writeln("Loading SCA model from "+modelUri)
 		var repository : Repository init EMFRepository.new
 		var resource : Resource
 		var root : DocumentRoot
@@ -66,9 +67,9 @@ class Main
 	
 	operation saveARTModel(system : System, modelUri : String) is
 	do
-		stdio.writeln("saving ART model to "+modelUri)
+		stdio.writeln("Saving ART model to "+modelUri)
     	var repository:EMFRepository init EMFRepository.new
-	    var resource : Resource init repository.createResource(modelUri , "http://art")
+	    var resource : Resource init repository.createResource(modelUri , "platform:/plugin/org.kermeta.art.model/model/metamodel@runtime.ecore"/*"http://art"*/)
 	    resource.instances.add(system)
 	    resource.save
 	end
