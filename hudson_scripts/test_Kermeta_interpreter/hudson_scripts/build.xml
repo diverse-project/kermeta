@@ -13,7 +13,7 @@
 	<property name="equinox.jar" location="${eclipse.home}/plugins/org.eclipse.equinox.launcher_1.0.101.R34x_v20080819.jar"/>
 	<property name="pde.build.script" location="${eclipse.home}/plugins/org.eclipse.pde.build_3.4.1.R34x_v20080805/scripts/build.xml"/>
 	<property name="eclipse.workspace.dir" location="${env.WORKSPACE}/eclipseworkspace"/>	
-	<property name="eclipse.build.dir" location="${env.WORKSPACE}/build"/>	
+	<property name="eclipse.build.dir" location="${env.WORKSPACE}/src"/>	
 	<property name="downloaded.dependencies.dir" location="${env.WORKSPACE}/downloaded.dependencies"/>
 	<!-- the build dropin folder, will contain the dependencies needed to build this test -->
 	<property name="build.eclipse.extension.location" location="${env.WORKSPACE}/build_extension_dropin"/>
