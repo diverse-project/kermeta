@@ -23,7 +23,7 @@
 	
 	<!-- calculate library.xml location , org.eclipse.test plugin must be unpacked-->
 	<path id="library-file.id">
-			    <fileset dir="src/plugins">
+			    <fileset dir="${env.WORKSPACE}/src/plugins">
 			        <include name="org.kermeta.eclipse.test_*/library.xml"/>
 			    </fileset>
 	</path>
