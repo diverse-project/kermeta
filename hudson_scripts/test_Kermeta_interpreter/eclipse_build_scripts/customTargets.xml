@@ -72,7 +72,7 @@
 							verify="false"
 							pluginPath="${pluginPath}"
 							configInfo="${configs}"
-							pluginList="fr.irisa.triskell.kermeta.tests"
+							pluginList="fr.irisa.triskell.kermeta.tests:org.kermeta.eclipse.test"
 							featureList="${featureList}"
 							includeLaunchers="false"
 						/>
