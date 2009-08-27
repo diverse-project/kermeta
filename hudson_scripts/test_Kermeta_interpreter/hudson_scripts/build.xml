@@ -60,8 +60,9 @@
 					<arg value="${pde.build.script}"/>
 					<arg value="-data"/>
 					<arg value="${eclipse.workspace.dir}"/>
+					<arg value="-DpluginPath=${build.eclipse.extension.location}"/>
 					<arg value="-Dorg.eclipse.equinox.p2.reconciler.dropins.directory=${build.eclipse.extension.location}"/>
-					<arg value="-Dbuilder=${env.WORKSPACE}/hudson_scripts/${hudson.task.name}/eclipse_build_scripts"/>
+					<arg value="-Dbuilder=${env.WORKSPACE}/hudson_scripts/${hudson.task.name}/eclipse_build_scripts"/>			
 				</java>
 	</target>
 	<target name="prepareBuildDependencies" depends="getDependencies">
