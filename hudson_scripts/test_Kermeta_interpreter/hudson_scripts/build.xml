@@ -104,7 +104,7 @@
 	</target>
 	<target name="test" depends="prepareDeployedVersion">	
 		<mkdir dir="${eclipse.workspace.dir}"/>
-		<ant target="core-test" antfile="${library-file}" dir="${eclipse.home}/eclipse">
+		<ant target="core-test" antfile="${library-file}" dir="${eclipse.home}/">
 					<property name="data-dir" value="${eclipse.workspace.dir}"/>
 					<property name="plugin-name" value="${testplugin.name}"/>
 					<property name="classname" 
