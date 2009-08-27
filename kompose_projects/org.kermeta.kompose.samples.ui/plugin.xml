@@ -26,5 +26,14 @@
             id="org.kermeta.kompose.samples.KomposeRDBSchemaSpecializationSampleWizard"
             name="RDBSchema Specialization Sample">
       </wizard>
+      <wizard
+            canFinishEarly="true"
+            category="org.eclipse.ui.Examples/org.kermeta.kompose.samplesCategory"
+            class="org.kermeta.kompose.samples.ui.KomposeSpecializationUML2SampleWizard"
+            hasPages="false"
+            icon="icons/newkermetafile.png"
+            id="org.kermeta.kompose.samples.KomposeUML2SpecializationSampleWizard"
+            name="UML2 Specialization Sample">
+      </wizard>
    </extension>
 </plugin>
