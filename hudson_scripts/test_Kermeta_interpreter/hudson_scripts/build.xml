@@ -25,10 +25,10 @@
 	</target>
 	<target name="getDependencies">	
 		<mkdir dir="${downloaded.dependencies.dir}"/>			
-		<get src="http://pamplemousse.irisa.fr:8080/job/compile_kermeta/lastSuccessfulBuild/artifact/src//*zip*/src.zip" 
+		<get src="http://pamplemousse.irisa.fr:8080/job/compile_kermeta/lastSuccessfulBuild/artifact/src/I.TestBuild/fr.irisa.triskell.kermeta-TestBuild.zip" 
 			dest="${downloaded.dependencies.dir}/compile_kermeta.zip"
 			usetimestamp="true"/>
-		<get src="http://pamplemousse.irisa.fr:8080/job/compile_log4j/lastSuccessfulBuild/artifact/src//*zip*/src.zip" 
+		<get src="http://pamplemousse.irisa.fr:8080/job/compile_log4j/lastSuccessfulBuild/artifact/src/I.TestBuild/org.kermeta.log4j-TestBuild.zip" 
 					dest="${downloaded.dependencies.dir}/compile_log4j.zip"
 					usetimestamp="true"/>
 		<unzip dest="${eclipse.build.dir}">
