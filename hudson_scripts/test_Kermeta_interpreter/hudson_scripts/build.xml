@@ -30,7 +30,7 @@
 	<property name="library-file" refid="library-file.id"/>
 	<echo message="library-file=${library-file}"/>
 	
-	<target name="all" depends="buildBinaries, test">
+	<target name="all" depends="buildBinaries">
 		
 	</target>
 	<target name="getDependencies">	
