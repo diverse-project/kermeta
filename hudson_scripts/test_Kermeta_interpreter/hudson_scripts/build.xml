@@ -1,7 +1,9 @@
-<project name="test_kermeta_interpreter" default="all">
+<project name="test_Kermeta_interpreter" default="all">
 	<!-- configuration properties -->		
 	<!-- project configuration -->
 	<property environment="env"/>
+	
+	<property name="hudson.task.name" value="test_Kermeta_interpreter"/>
 
 	<property name="env.WORKSPACE" location="."/>
 	<property name="prepare.Kermeta.sources.last.successfull.dir" location="${env.WORKSPACE}/../../prepare Kermeta sources/lastSuccessful/archive"/>
@@ -9,24 +11,79 @@
 	<property name="previousStep.dir" location="${env.WORKSPACE}/previousStep"/>
 	<property name="eclipse.home" location="/local/daily_build/eclipse3.4_with_topcased/eclipse"/>
 	<property name="equinox.jar" location="${eclipse.home}/plugins/org.eclipse.equinox.launcher_1.0.101.R34x_v20080819.jar"/>
-	<property name="eclipse.workspace.dir" location="${env.WORKSPACE}/eclipseworkspace"/>			
+	<property name="pde.build.script" location="${eclipse.home}/plugins/org.eclipse.pde.build_3.4.1.R34x_v20080805/scripts/build.xml"/>
+	<property name="eclipse.workspace.dir" location="${env.WORKSPACE}/eclipseworkspace"/>	
+	<property name="eclipse.build.dir" location="${env.WORKSPACE}/src"/>	
+	<property name="downloaded.dependencies.dir" location="${env.WORKSPACE}/downloaded.dependencies"/>
+	<!-- the build dropin folder, will contain the dependencies needed to build this test -->
+	<property name="build.eclipse.extension.location" location="${env.WORKSPACE}/build_extension_dropin"/>
+	<!-- the run dropin folder will contain both the dependencies and the test binaries -->
+	<property name="run.eclipse.extension.location" location="${env.WORKSPACE}/run_extension_dropin"/>			
 	
-	<target name="all" depends="getSources, test">
+	<target name="all" depends="buildBinaries, test">
 		
 	</target>
-	<target name="getSources">	
-		<mkdir dir="${previousStep.dir}"/>			
-		<get src="http://pamplemousse.irisa.fr:8080/job/compile_Kermeta_workbench/lastSuccessfulBuild/artifact/src//*zip*/src.zip" 
-			dest="${previousStep.dir}/compile_Kermeta_workbench.zip"
+	<target name="getDependencies">	
+		<mkdir dir="${downloaded.dependencies.dir}"/>			
+		<get src="http://pamplemousse.irisa.fr:8080/job/compile_kermeta/lastSuccessfulBuild/artifact/src//*zip*/src.zip" 
+			dest="${downloaded.dependencies.dir}/compile_kermeta.zip"
 			usetimestamp="true"/>
-		<unzip dest="${env.WORKSPACE}">
-		    <fileset dir="${previousStep.dir}">
+		<get src="http://pamplemousse.irisa.fr:8080/job/compile_log4j/lastSuccessfulBuild/artifact/src//*zip*/src.zip" 
+					dest="${downloaded.dependencies.dir}/compile_log4j.zip"
+					usetimestamp="true"/>
+		<unzip dest="${eclipse.build.dir}">
+		    <fileset dir="${downloaded.dependencies.dir}">
 		        <include name="**/*.zip"/>
 		    </fileset>
 		</unzip>
 		<chmod file="${env.WORKSPACE}/hudson_scripts/test_Kermeta_interpreter/hudson_scripts/test.sh" perm="a+x"/>
 	</target>
-	<target name="test" >	
+
+	<target name="organizeSources" >
+		<description>This task aims to prepare the sources in folder suitable for building. For ex. get them 
+		from the folder containing the check out (managed by hudson) and reorganize them for using eclipse 
+			build scripts if necessary</description>
+		<mkdir dir="${eclipse.build.dir}"/>	
+		<mkdir dir="${eclipse.build.dir}/plugins"/>
+		<mkdir dir="${eclipse.build.dir}/features"/>				
+	</target>
+	<target name="buildBinaries" depends="prepareBuildDependencies, organizeSources">
+			<description>This task aims to build the binaries specific to the test</description>
+		<java jar="${equinox.jar}"
+				           fork="true"
+				           failonerror="true"
+				           maxmemory="128m"
+				           >
+					<arg value="-application"/>
+					<arg value="org.eclipse.ant.core.antRunner"/>
+					<arg value="-buildfile"/>
+					<arg value="${pde.build.script}"/>
+					<arg value="-data"/>
+					<arg value="${eclipse.workspace.dir}"/>
+					<arg value="-Dbuilder=${env.WORKSPACE}/hudson_scripts/${hudson.task.name}/eclipse_build_scripts"/>
+				</java>
+	</target>
+	<target name="prepareBuildDependencies" depends="getDependencies">
+					<description>This task unzips the dependencies into the correct dropin folder</description>
+		<!-- clear the dropin folder just in case before unzipping -->
+		<delete dir="${build.eclipse.extension.location}"></delete>		
+		<unzip dest="${build.eclipse.extension.location}">
+				    <fileset dir="${downloaded.dependencies.dir}">
+				        <include name="**/*.zip"/>
+				    </fileset>
+		</unzip>				
+	</target>
+	<target name="prepareDeployedVersion" depends="getDependencies">
+				<description>This task gather all the binaries in a deployable version (a dropin folder) ready to run</description>
+		<!-- clear the dropin folder just in case before unzipping -->
+		<delete dir="${run.eclipse.extension.location}"></delete>		
+		<unzip dest="${run.eclipse.extension.location}">
+			    <fileset dir="${downloaded.dependencies.dir}">
+			        <include name="**/*.zip"/>
+			    </fileset>
+		</unzip>				
+	</target>
+	<target name="test" depends="prepareDeployedVersion">	
 		<mkdir dir="${eclipse.workspace.dir}"/>
 		<ant dir="${env.WORKSPACE}/src/plugins/fr.irisa.triskell.kermeta.tests/test/junit/" 
 			antfile="test_interpreter_build.xml">
