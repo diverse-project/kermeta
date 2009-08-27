@@ -64,6 +64,7 @@
 	<!-- Steps to do before setup -->
 	<!-- ===================================================================== -->
 	<target name="preSetup">
+		<echo> plugin path = ${pluginPath} </echo>
 		<eclipse.generateFeature
 							featureId="fr.irisa.triskell.kermeta.tests.feature"
 							buildDirectory="${buildDirectory}"
