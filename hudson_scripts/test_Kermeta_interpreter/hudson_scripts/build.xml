@@ -102,7 +102,7 @@
 		<!-- calculate plugin path, in some situation this may be simply the basedir
 			  here we suppose that the plugin is deployed (and unzipped/unpacked) in the plugins folder -->
 		<path id="plugin-path.id">
-		    <dirset dir="${run.eclipse.extension.location}/plugins">
+		    <dirset dir="${run.eclipse.extension.location}/eclipse/plugins">
 		        <include name="${testplugin.name}_*"/>
 		     </dirset>
 		</path>
