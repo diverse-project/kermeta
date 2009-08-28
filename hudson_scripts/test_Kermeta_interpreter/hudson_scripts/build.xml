@@ -134,6 +134,7 @@
 		<property name="test-output" value="${env.WORKSPACE}/test-output/TEST-${classname}.xml" />
 		<property name="junit-report-output" value="${env.WORKSPACE}/reports" />
 		<mkdir dir="${junit-report-output}"/>
+		<property name="timeout" value="7200000" />
 		
 		<!--default vm args-->
 		<property name="vmargs" value=" -Xms40m -Xmx256m"/>
