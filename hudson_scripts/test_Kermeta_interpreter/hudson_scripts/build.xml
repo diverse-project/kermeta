@@ -112,6 +112,7 @@
 		<antcall target="java-test">
 			<param name="data-dir" value="${eclipse.workspace.dir}"/>
 			<param name="plugin-name" value="${testplugin.name}"/>
+			<param name="dropin.plugins.dir" value="${run.eclipse.extension.location}/eclipse/plugins"/>
 			<param name="classname" value="kermeta_interpreter.test.InterpreterTestSuite"/>
 			<param name="application" value="org.kermeta.eclipse.test.coretestapplication"/>
 		</antcall>
@@ -151,7 +152,7 @@
 	            	<include name="org.eclipse.equinox.launcher_*.jar"/>
 	            	<include name="org.junit4_*/junit.jar"/>
 	          	</fileset>
-	    		<fileset dir="${dropin.dir}/plugins">
+	    		<fileset dir="${dropin.plugins.dir}">
 	            	<include name="*.jar"/>
 	          	</fileset>
 	        </classpath>
