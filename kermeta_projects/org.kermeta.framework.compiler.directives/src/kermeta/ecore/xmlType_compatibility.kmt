@@ -1,0 +1,18 @@
+/* $Id: $ 
+ * Creation : September 03, 2009
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            Cyril Faucher <cyril.faucher@gmail.com>
+ *
+ *	Contains the annotations dedicated to the compiling issue on ValueTypes
+ */
+
+package kermeta::xmltype;
+
+require kermeta
+
+ @EMF_instanceClassName "java.lang.String"
+ @EMF_defaultConstructor "new java.lang.String()"
+aspect class QName inherits kermeta::standard::String {
+}
