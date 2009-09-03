@@ -136,6 +136,7 @@ package structure {
 		
 		/**
 		 * FIXME CF Should be optimized via the context to avoid the re-creation everytime
+		 * the ValueTypes should be discovered at runtime
 		 */
 		operation isAddedValueType() : Boolean is do
 			result := false
@@ -144,7 +145,8 @@ package structure {
 					or qName == "kermeta::standard::Integer"
 					or qName == "kermeta::standard::Boolean"
 					or qName == "kermeta::standard::Character"
-					or qName == "kermeta::standard::Real" then
+					or qName == "kermeta::standard::Real"
+					or qName == "kermeta::xmltype::QName" then
 				result := true
 			end
 		end
