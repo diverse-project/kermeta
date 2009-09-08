@@ -1,9 +1,9 @@
 /* $Id:$ 
  * Creation : June 25, 2009
  * Licence  : EPL 
- * Copyright:
- * Authors  : 
- *            bmorin
+ * Copyright: INRIA, Centre Rennes - Bretagne Atlantique
+ * Authors  : Brice Morin 
+ *      
  */
 @mainClass "root_package::Main"
 @mainOperation "main"
