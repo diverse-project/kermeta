@@ -15,7 +15,6 @@ CM "platform:/resource/org.kermeta.kompose.specialization.ecore.samples/models/f
 PMPre {
 	// Removing specifities of compositeState to cope with the introduction of Region
 	statechart::CompositeState.eStructuralFeatures - statechart::CompositeState::states
-	statechart::CompositeState.eSuperTypes - statechart::State
 }
 
 // predirectives for aspect model
