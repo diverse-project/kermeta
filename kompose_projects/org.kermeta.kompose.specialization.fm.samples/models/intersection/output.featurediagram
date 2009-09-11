@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="ASCII"?>
+<featureDiagram:FeatureDiagram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:featureDiagram="http://www.kermeta.org/featureDiagram" root="//@features.0" name="B">
+  <features name="TB">
+    <outgoingEdge child="//@features.4" name="TAP"/>
+    <outgoingEdge child="//@features.1" name="TAU"/>
+    <outgoingEdge child="//@features.2" name="TBO"/>
+    <outgoingEdge child="//@features.3" name="TBC"/>
+    <operator xsi:type="featureDiagram:Or"/>
+  </features>
+  <features name="urbanTransport" incomingEdge="//@features.0/@outgoingEdge.1"/>
+  <features name="other" incomingEdge="//@features.0/@outgoingEdge.2"/>
+  <features name="car" incomingEdge="//@features.0/@outgoingEdge.3"/>
+  <features name="publicService" incomingEdge="//@features.0/@outgoingEdge.0"/>
+</featureDiagram:FeatureDiagram>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/org.kermeta.kompose.specialization.fm/src"
+    modelPluginID="org.kermeta.kompose.specialization.fm" modelName="FMModel" importerID="org.eclipse.emf.importer.ecore"
+    complianceLevel="5.0" copyrightFields="false">
+  <foreignModel>FMModel.ecore</foreignModel>
+  <genPackages prefix="FeatureDiagram" disposableProviderFactory="true" ecorePackage="FMModel.ecore#/">
+    <genDataTypes ecoreDataType="FMModel.ecore#//Boolean"/>
+    <genDataTypes ecoreDataType="FMModel.ecore#//String"/>
+    <genClasses ecoreClass="FMModel.ecore#//FeatureDiagram">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FMModel.ecore#//FeatureDiagram/graphTypeTree"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FMModel.ecore#//FeatureDiagram/features"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference FMModel.ecore#//FeatureDiagram/root"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FMModel.ecore#//FeatureDiagram/name"/>
+    </genClasses>
+    <genClasses ecoreClass="FMModel.ecore#//Feature">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FMModel.ecore#//Feature/name"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FMModel.ecore#//Feature/outgoingEdge"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference FMModel.ecore#//Feature/incomingEdge"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference FMModel.ecore#//Feature/owningFeatureDiagram"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FMModel.ecore#//Feature/operator"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FMModel.ecore#//Feature/selected"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FMModel.ecore#//Feature/optional"/>
+    </genClasses>
+    <genClasses ecoreClass="FMModel.ecore#//Edge">
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference FMModel.ecore#//Edge/parent"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference FMModel.ecore#//Edge/child"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FMModel.ecore#//Edge/name"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="FMModel.ecore#//Operator">
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference FMModel.ecore#//Operator/owningFeature"/>
+    </genClasses>
+    <genClasses ecoreClass="FMModel.ecore#//And"/>
+    <genClasses ecoreClass="FMModel.ecore#//Or"/>
+    <genClasses ecoreClass="FMModel.ecore#//Xor"/>
+  </genPackages>
+</genmodel:GenModel>

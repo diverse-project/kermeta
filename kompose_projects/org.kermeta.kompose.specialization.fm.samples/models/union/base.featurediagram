@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<featureDiagram:FeatureDiagram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:featureDiagram="http://www.kermeta.org/featureDiagram" root="//@features.0" name="B">
+  <features name="TB">
+    <outgoingEdge child="//@features.1" name="TBC"/>
+    <outgoingEdge child="//@features.2" name="TBO"/>
+    <operator xsi:type="featureDiagram:Xor"/>
+  </features>
+  <features name="car" incomingEdge="//@features.0/@outgoingEdge.0"/>
+  <features name="other" incomingEdge="//@features.0/@outgoingEdge.1"/>
+</featureDiagram:FeatureDiagram>

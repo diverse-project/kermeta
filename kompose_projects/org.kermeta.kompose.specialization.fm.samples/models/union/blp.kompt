@@ -1,0 +1,31 @@
+// Common Metamodel URI (for now, Kompose only works with models conforming to a single metamodel)
+// Available values are "http://www.eclipse.org/emf/2002/Ecore" and "http://www.kermeta.org/rdbschema.ecore" for now
+EXT "http://www.kermeta.org/featureDiagram"
+
+MODE UNION
+
+// Primary Model URI
+PM "platform:/resource/org.kermeta.kompose.specialization.fm.samples/models/base.featurediagram" 
+
+// Aspect Model URI
+AM "platform:/resource/org.kermeta.kompose.specialization.fm.samples/models/concern.featurediagram" 
+
+// Composed Model URI
+CM "platform:/resource/org.kermeta.kompose.specialization.fm.samples/models/output.featurediagram"
+
+// predirectives for primary model
+PMPre { 
+	
+}
+
+// predirectives for aspect model
+AMPre { 
+	// e.g. Rename package
+	
+}
+
+// postdirectives 
+Post { 
+	
+	(B::TB.operator == XOR) && (A::TB.operator == OR) -> B::TB.operator = A::TB.operator
+}

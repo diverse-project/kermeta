@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="featureDiagram"
+    nsURI="http://www.kermeta.org/featureDiagram" nsPrefix="featureDiagram">
+  <eAnnotations source="TextualConstraint"/>
+  <eClassifiers xsi:type="ecore:EClass" name="FeatureDiagram">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="graphTypeTree" lowerBound="1"
+        eType="#//Boolean" defaultValueLiteral="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="features" upperBound="-1"
+        eType="#//Feature" containment="true" eOpposite="#//Feature/owningFeatureDiagram"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="root" lowerBound="1" eType="#//Feature"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="#//String"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Feature">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="#//String"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="outgoingEdge" upperBound="-1"
+        eType="#//Edge" containment="true" eOpposite="#//Edge/parent"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="incomingEdge" eType="#//Edge"
+        eOpposite="#//Edge/child"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="owningFeatureDiagram" lowerBound="1"
+        eType="#//FeatureDiagram" eOpposite="#//FeatureDiagram/features"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="operator" eType="#//Operator"
+        containment="true" eOpposite="#//Operator/owningFeature"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="selected" lowerBound="1"
+        eType="#//Boolean" defaultValueLiteral="false"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="optional" lowerBound="1"
+        eType="#//Boolean" defaultValueLiteral="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Edge">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="parent" lowerBound="1"
+        eType="#//Feature" eOpposite="#//Feature/outgoingEdge"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="child" lowerBound="1" eType="#//Feature"
+        eOpposite="#//Feature/incomingEdge"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="#//String"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Operator" abstract="true">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="owningFeature" eType="#//Feature"
+        eOpposite="#//Feature/operator"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="And" eSuperTypes="#//Operator"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Or" eSuperTypes="#//Operator"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Xor" eSuperTypes="#//Operator"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="Boolean" instanceClassName="java.lang.Boolean"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="String" instanceClassName="java.lang.String"/>
+</ecore:EPackage>
