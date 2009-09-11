@@ -21,9 +21,7 @@ public class FilesGenerator {
 		PluginManifest manifest=new PluginManifest();
 		PluginXMLGenerator xmlgenerator=new PluginXMLGenerator();
 		ClassPathStatic classpath=new ClassPathStatic();
-		ModelEcore model=new ModelEcore();
-		RegisterStartupJava registerStart=new RegisterStartupJava();
-		
+		ModelEcore model=new ModelEcore();		
 		FileWriter outFile=new FileWriter(this.data.getActivatorDir());
 		outFile.write(activator.generate(this.data));
 		outFile.close();
@@ -58,10 +56,6 @@ public class FilesGenerator {
 		
 		outFile=new FileWriter(this.data.getModelDir());
 		outFile.write(model.generate(this.data));
-		outFile.close();
-		
-		outFile=new FileWriter(this.data.getStartupClass());
-		outFile.write(registerStart.generate(this.data));
 		outFile.close();
 	}
 }

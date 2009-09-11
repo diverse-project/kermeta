@@ -18,14 +18,16 @@ public class KomposePropertyTester extends PropertyTester {
 		BufferedReader br = null;
 		String composerDefinition = "";
 		String composerMetamodel = "";
-		String composerMetamodelTmp = "";
 		try {
 			br = new BufferedReader(new InputStreamReader(komposeModel.getContents()));
 			br.readLine();
 			composerDefinition = br.readLine();
-			composerMetamodelTmp = composerDefinition.substring(composerDefinition.indexOf("metamodelName"), composerDefinition.indexOf(">"));
-			composerMetamodel = composerMetamodelTmp.substring(composerMetamodelTmp.indexOf("=")+2, composerMetamodelTmp.lastIndexOf("\""));
-			System.out.println(composerMetamodel);
+			String[] chunks = composerDefinition.split(" ");
+			for (int i = 0; i < chunks.length; i++) {
+				if (chunks[i].startsWith("metamodel")){
+					composerMetamodel = chunks[i].substring(chunks[i].indexOf("=")+2, chunks[i].lastIndexOf("\""));
+				}
+			}
 		} catch (CoreException e) {
 			System.out.println("KOMPOSE-ERROR: Impossible to open selected file");
 			e.printStackTrace();

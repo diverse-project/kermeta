@@ -9,7 +9,7 @@ package kompose;
 
 
 require kermeta
-require "platform:/plugin/org.kermeta.kompose.core.model/kermeta/kompose.kmt"
+require "platform:/lookup/org.kermeta.kompose.core.model/kermeta/kompose.kmt"
 require "http://www.eclipse.org/emf/2002/Ecore"
 using ecore
 using kompose
