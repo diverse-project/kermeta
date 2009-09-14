@@ -16,8 +16,15 @@
 	<target name="all" depends="compile">
 		
 	</target>
-		
+	
+	<target name="cleanSources">
+		<description>Use this target to clean unecessary sources typically before rebuilding 
+			(because eclipse may have left some intermediate file like build.xml) or after a build to save disk space</description>
+		<delete dir="${eclipse.build.dir}/plugins"></delete>
+		<delete dir="${eclipse.build.dir}/features"></delete>
+	</target>
 	<target name="organizeSources">	
+		<antcall target="cleanSources"></antcall>
 		<mkdir dir="${eclipse.build.dir}"/>	
 		<mkdir dir="${eclipse.build.dir}/plugins"/>
 		<mkdir dir="${eclipse.build.dir}/features"/>		
