@@ -19,8 +19,7 @@ Require-Bundle: org.eclipse.ui,
  fr.irisa.triskell.kermeta.io,
  org.eclipse.ui.navigator,
  fr.irisa.triskell.kermeta.texteditor,
- org.kermeta.io.loader,
- org.kermeta.log4j.util
+ org.kermeta.io.loader
 Bundle-ActivationPolicy: lazy
 Bundle-Vendor: %providerName
 Export-Package: fr.irisa.triskell.kermeta.actions,
