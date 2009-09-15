@@ -10,6 +10,7 @@
 
 package org.kermeta.compiler.generator.helper.model;
 
+import java.util.Properties;
 
 public class Context {
 
@@ -20,19 +21,19 @@ public class Context {
 	private String uriEPackageInstance = null;
 	
 	/**
-	 * String containing the main operations specified by the user in the *.compiler.properties file
+	 * Properties specified by the user in the *.compiler.properties file
 	 */
-	private String mainOperations = null;
+	private Properties compilerPorperties = null;
 	
 	public Context () {
 		
 	}
 	
-	public Context (String kmFilePathForReflection, String uriEPackageInstance, String uriEPackageClass, String mainOperations ) {
+	public Context (String kmFilePathForReflection, String uriEPackageInstance, String uriEPackageClass, Properties compilerPorperties ) {
 		this.kmFilePathForReflection = kmFilePathForReflection;
 		this.uriEPackageInstance = uriEPackageInstance;
 		this.uriEPackageClass = uriEPackageClass;
-		this.mainOperations = mainOperations;
+		this.compilerPorperties = compilerPorperties;
 	}
 	
 	
@@ -63,12 +64,12 @@ public class Context {
 		this.uriEPackageInstance = uriEPackageInstance;
 	}
 
-	public String getMainOperations() {
-		return mainOperations;
+	public Properties getCompilerPorperties() {
+		return compilerPorperties;
 	}
 
-	public void setMainOperations(String mainOperations) {
-		this.mainOperations = mainOperations;
+	public void setCompilerPorperties(Properties compilerPorperties) {
+		this.compilerPorperties = compilerPorperties;
 	}
 
 }

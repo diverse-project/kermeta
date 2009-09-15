@@ -1,9 +1,9 @@
 <%@ jet package="org.eclipse.emf.codegen.ecore.templates.model" imports="" class="ClassPath" version="$Id: classpath.propertiesjet,v 1.2 2008-11-17 10:07:01 cfaucher Exp $" %>
+<%String classEntries = (String) argument;%>
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/J2SE-1.5"/>
 	<classpathentry kind="con" path="org.eclipse.pde.core.requiredPlugins"/>
-	<classpathentry kind="src" path="src"/>
-	<classpathentry kind="src" path="util"/>
+	<%= classEntries %>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

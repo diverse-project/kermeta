@@ -37,7 +37,9 @@ import org.eclipse.emf.codegen.ecore.genmodel.GenPackage;
 import org.eclipse.emf.codegen.jet.JETEmitter;
 import org.eclipse.emf.codegen.jet.JETException;
 import org.eclipse.emf.common.util.Monitor;
+import org.kermeta.compiler.common.CompilerProperties;
 import org.kermeta.compiler.common.KCompilerConstants;
+import org.kermeta.compiler.common.util.CreateFolder;
 import org.kermeta.compiler.common.util.UnzipFile;
 import org.kermeta.compiler.generator.helper.model.Context;
 import org.kermeta.compiler.generator.internal.GeneratorPlugin;
@@ -71,6 +73,7 @@ public class CompilerHelperGenerator extends AbstractGenerator {
 	
 	private static final String CLASS_PATH = "templateHelper/classpath.propertiesjet";
 
+	private String rootLocation = null;
 
 	/** The GenModel object */
 	private GenModel configuration;
@@ -78,6 +81,8 @@ public class CompilerHelperGenerator extends AbstractGenerator {
 	private Context context;
 	
 	private SIMKModel simkModel;
+	
+	private String runner_src_dir;
 	
 
 	/**
@@ -119,7 +124,21 @@ public class CompilerHelperGenerator extends AbstractGenerator {
 			
 			// Create the util folder
 			IPath util_folder_location = project.getFullPath().append("/" + KCompilerConstants.UTIL_DIRECTORY);
-			ResourcesPlugin.getWorkspace().getRoot().getFolder(util_folder_location).create(true, true, new NullProgressMonitor());
+			if( ! ResourcesPlugin.getWorkspace().getRoot().getFolder(util_folder_location).exists() ) {
+				ResourcesPlugin.getWorkspace().getRoot().getFolder(util_folder_location).create(true, true, new NullProgressMonitor());
+			}
+			
+			// Create the runner folder
+			runner_src_dir = this.context.getCompilerPorperties().getProperty(CompilerProperties.RUNNER_SRC_DIR, KCompilerConstants.RUNNER_DIRECTORY_DEFAULT);
+			if( !runner_src_dir.equals("") ) {
+				IPath runner_folder_location = project.getFullPath().append("/" + runner_src_dir);
+				if( ! ResourcesPlugin.getWorkspace().getRoot().getFolder(runner_folder_location).exists() ) {
+					ResourcesPlugin.getWorkspace().getRoot().getFolder(runner_folder_location).create(true, true, new NullProgressMonitor());
+				}
+			} else {
+				runner_src_dir = SOURCE_DIRECTORY;
+			}
+			
 			
 			generateBaseTypesUtil();
 			
@@ -192,17 +211,6 @@ public class CompilerHelperGenerator extends AbstractGenerator {
 				}
 			}
 	
-			String[] packagesUtils = { "helper", "runner" };
-			for (int i = 0; i < packagesUtils.length; i++) {
-				IPath pathPackage = pathProject.append(IPath.SEPARATOR
-						+ SOURCE_DIRECTORY + IPath.SEPARATOR + packagePath
-						+ IPath.SEPARATOR + packagesUtils[i]);
-				IFolder packagefolder = ResourcesPlugin.getWorkspace().getRoot()
-						.getFolder(pathPackage);
-				if (!(packagefolder.exists())) {
-					packagefolder.create(true, false, new NullProgressMonitor());
-				}
-			}
 		}
 
 		// create the config folder
@@ -288,9 +296,9 @@ public class CompilerHelperGenerator extends AbstractGenerator {
 	private void generateRunner(GenModel conf, SIMKModel simkConf, IPath projectPath)
 			throws JETException, CoreException {
 
-		// Look for the specified main opetations, if nothing found then all the potential runners are generated
+		// Looking for the specified main opetations, if nothing found then all the potential runners are generated
 		// Note: all the potential runners are generated in the Simk file then just the Ecore to Plugin generation must be replayed
-		String[] main_ops = this.context.getMainOperations().split(",");
+		String[] main_ops = this.context.getCompilerPorperties().getProperty(CompilerProperties.MAIN_OPERATIONS, "").split(",");
 		
 		List<String> main_ops_runner = new ArrayList<String>();
 		
@@ -309,16 +317,18 @@ public class CompilerHelperGenerator extends AbstractGenerator {
 				if( main_ops_runner.size()==0 ) {
 					bool_generate = true;
 				} else {
-					if( main_ops_runner.contains(sm.getSMContext().getFinalPackageQName().replace(".runner", "").replace(".", "__") + "__" + sm.getSMContext().getSMClass().getName()) ) {
+					if( main_ops_runner.contains(sm.getSMContext().getFinalPackageQName().replace("." + KCompilerConstants.RUNNER_JPACKAGE, "").replace(".", "__") + "__" + sm.getSMContext().getSMClass().getName()) ) {
 						bool_generate = true;
 					}
 				}
 				
 				if( bool_generate ) {
+					String finalFolder = IPath.SEPARATOR + runner_src_dir + IPath.SEPARATOR + sm.getSMContext().getFinalPackageQName().replace(".", "/");
+					CreateFolder.createFinalFolder(projectPath, finalFolder);
 				applyTemplate(
-						new Object[] {conf.getModelProjectDirectory(), ResourcesPlugin.getWorkspace().getRoot().getLocationURI().toString().replace("file:/", "file://"), sm},
+						new Object[] {conf.getModelProjectDirectory(), getRootLocation(), sm},
 						getTemplateURI(RUNNER_JAVA),
-						projectPath.append("/" + SOURCE_DIRECTORY + "/" + sm.getSMContext().getFinalPackageQName().replace(".", "/") + "/" + sm.getSMContext().getSMClass().getName() + ".java"),
+						projectPath.append(finalFolder + IPath.SEPARATOR + sm.getSMContext().getSMClass().getName() + "." + KCompilerConstants.JAVA_EXT),
 						configuration.isForceOverwrite());
 				}
 			}
@@ -326,6 +336,8 @@ public class CompilerHelperGenerator extends AbstractGenerator {
 		}
 
 	}
+	
+
 	
 	/**
 	 * 
@@ -337,10 +349,13 @@ public class CompilerHelperGenerator extends AbstractGenerator {
 	private void generateWrapper(SMContext _context, IPath projectPath)
 			throws JETException, CoreException {
 		
+			IPath path = projectPath.append(IPath.SEPARATOR + SOURCE_DIRECTORY + IPath.SEPARATOR + _context.getSMClass().getQualifiedName().replace(".", "/") + "." + KCompilerConstants.JAVA_EXT);
+			CreateFolder.createFinalFolder(path.removeLastSegments(1));
+		
 			applyTemplate(
 					_context,
 					getTemplateURI(WRAPPER_JAVA),
-					projectPath.append("/" + SOURCE_DIRECTORY + "/" + _context.getSMClass().getQualifiedName().replace(".", "/") + ".java"),
+					path,
 					configuration.isForceOverwrite());
 	}
 	
@@ -354,10 +369,13 @@ public class CompilerHelperGenerator extends AbstractGenerator {
 	private void generateSuper(SMContext _context, IPath projectPath)
 			throws JETException, CoreException {
 		
+			IPath path = projectPath.append("/" + SOURCE_DIRECTORY + "/" + _context.getSMClass().getQualifiedName().replace(".", "/") + "." + KCompilerConstants.JAVA_EXT);
+			CreateFolder.createFinalFolder(path.removeLastSegments(1));
+		
 			applyTemplate(
 					_context,
 					getTemplateURI(GENERIC_TEMPLATE_JAVA),
-					projectPath.append("/" + SOURCE_DIRECTORY + "/" + _context.getSMClass().getQualifiedName().replace(".", "/") + ".java"),
+					path,
 					configuration.isForceOverwrite());
 	}
 	
@@ -371,10 +389,13 @@ public class CompilerHelperGenerator extends AbstractGenerator {
 	private void generateInvariant(SMContext _context, IPath projectPath)
 			throws JETException, CoreException {
 
+			IPath path = projectPath.append("/" + SOURCE_DIRECTORY + "/" + _context.getSMClass().getQualifiedName().replace(".", "/") + "." + KCompilerConstants.JAVA_EXT);
+			CreateFolder.createFinalFolder(path.removeLastSegments(1));
+			
 			applyTemplate(
 					_context,
 					getTemplateURI(GENERIC_TEMPLATE_JAVA),
-					projectPath.append("/" + SOURCE_DIRECTORY + "/" + _context.getSMClass().getQualifiedName().replace(".", "/") + ".java"),
+					path,
 					configuration.isForceOverwrite());
 	}
 	
@@ -391,7 +412,7 @@ public class CompilerHelperGenerator extends AbstractGenerator {
 			applyTemplate(
 					context.getKmFilePathForReflection(),
 					getTemplateURI(EXECUTION_CONTEXT_JAVA),
-					projectPath.append("/" + KCompilerConstants.UTIL_DIRECTORY + "/org.kermeta.compil.runtime".replace(".", "/") + "/ExecutionContext.java"),
+					projectPath.append("/" + KCompilerConstants.UTIL_DIRECTORY + "/org.kermeta.compil.runtime".replace(".", "/") + "/ExecutionContext." + KCompilerConstants.JAVA_EXT),
 					configuration.isForceOverwrite());
 	}
 	
@@ -405,15 +426,29 @@ public class CompilerHelperGenerator extends AbstractGenerator {
 	applyTemplate(
 			args,
 			getTemplateURI(PERSISTENCE_MAPPING_JAVA),
-			projectPath.append("/" + KCompilerConstants.UTIL_DIRECTORY + "/org.kermeta.compil.runtime".replace(".", "/") + "/PersistenceMapping.java"),
+			projectPath.append("/" + KCompilerConstants.UTIL_DIRECTORY + "/org.kermeta.compil.runtime".replace(".", "/") + "/PersistenceMapping." + KCompilerConstants.JAVA_EXT),
 			configuration.isForceOverwrite());
 	}
 	
 	private void generateClassPath(IProject project, IPath projectPath)
 			throws JETException, CoreException {
-		applyTemplate(project, getTemplateURI(CLASS_PATH), projectPath
+		
+		String classEntries = "<classpathentry kind=\"src\" path=\"" + SOURCE_DIRECTORY + "\"/>\n";
+		
+		classEntries += addClassEntry(KCompilerConstants.UTIL_DIRECTORY);
+		classEntries += addClassEntry(runner_src_dir);
+		
+		applyTemplate(classEntries, getTemplateURI(CLASS_PATH), projectPath
 				.append("/" + ".classpath"),
 				true);
+	}
+	
+	private String addClassEntry(String src_folder) {
+		String str = "";
+		if( !src_folder.equals(SOURCE_DIRECTORY) ) {
+			str = "\t<classpathentry kind=\"src\" path=\"" + src_folder + "\"/>\n";
+		}
+		return str;
 	}
 
 	/**
@@ -439,6 +474,13 @@ public class CompilerHelperGenerator extends AbstractGenerator {
 		
 		UnzipFile.unzipFile(GeneratorPlugin.getDefault().getBundle().getEntry("baseTypesUtil.zip"), destination_folder_location);
 
+	}
+	
+	private String getRootLocation() {
+		if( rootLocation == null) {
+			rootLocation= ResourcesPlugin.getWorkspace().getRoot().getLocationURI().toString().replace("file:/", "file://");
+		}
+		return rootLocation;
 	}
 
 }

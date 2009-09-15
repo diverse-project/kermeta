@@ -16,6 +16,8 @@ public final class KCompilerConstants {
 	
 	public static final String KERMETA_CVS_VIEW_SUFFIX = "/?cvsroot=kermeta";
 	
+	public static final String JAVA_EXT = "java";
+	
 	public static final String SIMK_EXT = "simk";
 	
 	public static final String TREK_EXT = "trek";
@@ -69,6 +71,15 @@ public final class KCompilerConstants {
 	
 	/** The name of the util directory in the generated code */
     public static final String UTIL_DIRECTORY = "util";
+    
+    public static final String RUNNER_DIRECTORY_DEFAULT = "src-runner";
+    
+    public static final String RUNNER_JPACKAGE = "runner";
+    
+    public static final String HELPER_JPACKAGE = "helper";
+    
+    // used in the build.properties file
+	public final static String SOURCE = "source..";
 	
 }
 

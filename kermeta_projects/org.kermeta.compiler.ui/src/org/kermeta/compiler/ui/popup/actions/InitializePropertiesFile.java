@@ -31,7 +31,7 @@ import org.eclipse.ui.IActionDelegate;
 import org.eclipse.ui.IObjectActionDelegate;
 import org.eclipse.ui.IWorkbenchPart;
 import org.kermeta.compiler.common.KCompilerConstants;
-import org.kermeta.compiler.util.CompilerProperties;
+import org.kermeta.compiler.common.CompilerProperties;
 
 
 public class InitializePropertiesFile implements IObjectActionDelegate {
@@ -87,11 +87,16 @@ public class InitializePropertiesFile implements IObjectActionDelegate {
 			
 			IFile summary_file = ResourcesPlugin.getWorkspace().getRoot().getFile(path.removeFileExtension().addFileExtension(KCompilerConstants.COMPILER_PROPERTIES_EXT));
 			if( !summary_file.exists() ) {
-				String str = CompilerProperties.PLUGIN_ID + " = " +
+				String str = "### Kermeta Compiler Properties file ###\n" +
+				"# Note: You are able to re-generate the Java plugin without re-launch the whole compilation\n" +
+				"# In fact, a simple right-click on the Ecore file will re-generate the Java plugin\n" +
+				"# in taking into account the modifications done in this configuration file\n" +
+				"\n" + CompilerProperties.PLUGIN_ID + " = " +
 				"\n" + CompilerProperties.COPYRIGHT_HEADER + " = " +
 				"\n" + CompilerProperties.REQUIRE_BUNDLE + " = " +
 				"\n" + CompilerProperties.BUNDLE_VERSION + " = 0.1.0" +
 				"\n" + CompilerProperties.MAIN_OPERATIONS + " = " +
+				"\n" + CompilerProperties.RUNNER_SRC_DIR + " = " +
 				"\n" + CompilerProperties.UNZIP_EXTERNS + " = " +
 				"\n" + CompilerProperties.ENABLE_EMF_LOAD_INITIALIZATION + " = false";
 				
