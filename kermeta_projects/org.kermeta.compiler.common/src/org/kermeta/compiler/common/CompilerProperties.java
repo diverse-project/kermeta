@@ -1,4 +1,4 @@
-package org.kermeta.compiler.util;
+package org.kermeta.compiler.common;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -12,14 +12,16 @@ public class CompilerProperties {
 	
 	public final static Log internalLog = LogConfigurationHelper.getLogger("KermetaCompiler");
 	
+	// Used in the *.compiler.properties file
 	public final static String PLUGIN_ID = "plugin_id";
 	public final static String COPYRIGHT_HEADER = "copyright_header";
 	public final static String BUNDLE_VERSION = "bundle_version";
 	public final static String REQUIRE_BUNDLE = "require_bundles";
 	public final static String UNZIP_EXTERNS = "unzip_externs";
-	public final static String SOURCE = "source..";
 	public final static String ENABLE_EMF_LOAD_INITIALIZATION = "enable_emf_load_initialization";
 	public final static String MAIN_OPERATIONS = "main_operations";
+	public final static String RUNNER_SRC_DIR = "runner_src_dir";
+	//
 	
 	private String file_path;
 	
