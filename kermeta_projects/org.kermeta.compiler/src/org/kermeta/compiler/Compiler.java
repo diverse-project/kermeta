@@ -435,12 +435,21 @@ public class Compiler extends org.kermeta.compiler.Generator {
 		if(compilerProperties==null) {
 			compilerProperties = new Properties();
 			compilerProperties.setProperty(CompilerProperties.PLUGIN_ID, compiledPluginId);
+			compilerProperties.setProperty(CompilerProperties.RUNNER_SRC_DIR, KCompilerConstants.RUNNER_DIRECTORY_DEFAULT);
 		} else {
 			if( compilerProperties.containsKey(CompilerProperties.PLUGIN_ID)
 					&& !compilerProperties.getProperty(CompilerProperties.PLUGIN_ID).equals("") ) {
 				compiledPluginId = compilerProperties.getProperty(CompilerProperties.PLUGIN_ID);
 			} else {
 				compilerProperties.setProperty(CompilerProperties.PLUGIN_ID, compiledPluginId);
+			}
+			
+			if( (! compilerProperties.containsKey(CompilerProperties.RUNNER_SRC_DIR))
+					||
+				(compilerProperties.containsKey(CompilerProperties.RUNNER_SRC_DIR)
+					&& compilerProperties.getProperty(CompilerProperties.RUNNER_SRC_DIR).equals(""))
+					) {
+				compilerProperties.setProperty(CompilerProperties.RUNNER_SRC_DIR, KCompilerConstants.RUNNER_DIRECTORY_DEFAULT);
 			}
 		}
 	}

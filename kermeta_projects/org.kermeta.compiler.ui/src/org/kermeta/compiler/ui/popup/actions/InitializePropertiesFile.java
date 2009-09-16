@@ -96,7 +96,7 @@ public class InitializePropertiesFile implements IObjectActionDelegate {
 				"\n" + CompilerProperties.REQUIRE_BUNDLE + " = " +
 				"\n" + CompilerProperties.BUNDLE_VERSION + " = 0.1.0" +
 				"\n" + CompilerProperties.MAIN_OPERATIONS + " = " +
-				"\n" + CompilerProperties.RUNNER_SRC_DIR + " = " + KCompilerConstants.RUNNER_DIRECTORY_DEFAULT +
+				"\n" + CompilerProperties.RUNNER_SRC_DIR + " = " +
 				"\n" + CompilerProperties.UNZIP_EXTERNS + " = " +
 				"\n" + CompilerProperties.ENABLE_EMF_LOAD_INITIALIZATION + " = false";
 				

@@ -129,7 +129,7 @@ public class CompilerHelperGenerator extends AbstractGenerator {
 			}
 			
 			// Create the runner folder
-			runner_src_dir = this.context.getCompilerPorperties().getProperty(CompilerProperties.RUNNER_SRC_DIR, KCompilerConstants.RUNNER_DIRECTORY_DEFAULT);
+			runner_src_dir = this.context.getCompilerPorperties().getProperty(CompilerProperties.RUNNER_SRC_DIR, "");
 			if( !runner_src_dir.equals("") ) {
 				IPath runner_folder_location = project.getFullPath().append("/" + runner_src_dir);
 				if( ! ResourcesPlugin.getWorkspace().getRoot().getFolder(runner_folder_location).exists() ) {
