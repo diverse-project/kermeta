@@ -1,4 +1,4 @@
 Manifest-Version: 1.0
 Main-Class: org.kermeta.interpreter.api.RunCommandLine
-Class-Path: thirdparty/antlr.jar thirdparty/log4j.jar thirdparty/commons-logging.jar thirdparty/eclipse/core.runtime.jar thirdparty/eclipse/debug.core.jar thirdparty/eclipse/equinox.common.jar thirdparty/eclipse/osgi.jar thirdparty/eclipse/emf/common.jar thirdparty/eclipse/emf/ecore.jar thirdparty/eclipse/emf/ecore.xmi.jar
+Class-Path: thirdparty/antlr.jar thirdparty/log4j.jar thirdparty/commons-logging.jar thirdparty/eclipse/core.runtime.jar thirdparty/eclipse/debug.core.jar thirdparty/eclipse/equinox.common.jar thirdparty/eclipse/osgi.jar thirdparty/eclipse/emf/common.jar thirdparty/eclipse/emf/ecore.jar thirdparty/eclipse/emf/ecore.xmi.jar thirdparty/eclipse/emf/ecoretools.registration.jar
 
