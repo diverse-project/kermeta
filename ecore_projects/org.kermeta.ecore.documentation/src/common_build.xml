@@ -198,7 +198,8 @@
 			          unless="module.fop.present" />
 			
 			<!-- HACK: copy figures in the ${ant.docbook.styler.dir} directory : I don't know why the docbook.resources.dir doesn't work -->
-	    	<copy todir="${ant.docbook.styler.dir}/figures">
+	    	<mkdir dir="${build.docbook.dir}/${project.name}/figures"/>
+			<copy todir="${ant.docbook.styler.dir}/figures" failonerror="false">
 	    	    <fileset dir="${build.docbook.dir}/${project.name}/figures"/>
 	    	</copy>
 			<copy todir="${ant.docbook.styler.dir}/${project.name}_figures">
