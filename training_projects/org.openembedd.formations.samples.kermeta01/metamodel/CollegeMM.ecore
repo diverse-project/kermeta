@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="CollegeMM"
+    nsURI="http://org.openembedd.CollegeMM" nsPrefix="CollegeMM">
+  <eClassifiers xsi:type="ecore:EClass" name="Teacher">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="teache" lowerBound="1"
+        upperBound="-1" eType="#//Matter"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Student">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="birthDate" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDate"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="College">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="teatchers" upperBound="-1"
+        eType="#//Teacher" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="students" upperBound="-1"
+        eType="#//Student" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="matters" upperBound="-1"
+        eType="#//Matter" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="classrooms" upperBound="-1"
+        eType="#//ClassRoom" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="lessons" upperBound="-1"
+        eType="#//Lesson" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ClassRoom">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="location" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Matter">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="level" eType="#//Level"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="title" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Lesson">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="dateAndHour" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDate"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="duration" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBigInteger"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="teacher" lowerBound="1"
+        eType="#//Teacher"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="students" upperBound="-1"
+        eType="#//Student"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="matter" lowerBound="1"
+        eType="#//Matter"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="classroom" lowerBound="1"
+        eType="#//ClassRoom"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="Level">
+    <eLiterals name="beginner"/>
+    <eLiterals name="normal" value="1"/>
+    <eLiterals name="advanced" value="2"/>
+    <eLiterals name="expert" value="3"/>
+  </eClassifiers>
+</ecore:EPackage>

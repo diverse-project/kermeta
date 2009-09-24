@@ -1,0 +1,30 @@
+package my_package;
+
+require kermeta
+
+// sample code from the Kermeta Reference Manual
+class Queue<G>
+{
+     reference elements : oset G[*]
+
+     operation enqueue(e : G) : Void is do 
+         elements.add(e)
+     end
+     
+     operation dequeue() : G is do
+         result := elements.first
+         elements.removeAt(0)
+     end
+}
+class SortedQueue<C : kermeta::standard::Comparable> inherits Queue<C> 
+{
+     method enqueue(e : C) : Void is do
+         var i : kermeta::standard::Integer
+         from i := 0
+         until i == elements.size or e > elements.elementAt(i)
+         loop
+             i := i + 1
+         end
+         elements.addAt(i, e)
+     end
+}

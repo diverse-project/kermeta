@@ -1,0 +1,133 @@
+/* $Id: KermetaNewFileWizard.java,v 1.9
+ * Creation date: January 4, 2007
+ * License:		TODO
+ * Copyright:	INRIA
+ * Authors:		vmahe@irisa.fr
+ */
+
+@mainClass "my_package::SyntaxClass"
+@mainOperation "main"
+
+package my_package;
+
+require kermeta
+
+class SyntaxClass
+{
+    // composition attributes
+    attribute myAtt : X
+    // pointer-like attributes
+    reference myObj : X
+    
+    // affectation to an "attribute" deletes former container attribute
+    operation main() : Void is do
+    	// temporary variable declaration + initialization
+    	var v1 : SyntaxClass init SyntaxClass.new
+    	var v2 : SyntaxClass init SyntaxClass.new
+    	var anObj : X	// declaration without initialization
+    	anObj := X.new		// affectation with a new X object
+    	
+    	v1.myAtt := anObj
+    	// v& has an attribute
+    	stdio.writeln(v1.myAtt.toString)
+    	
+    	v2.myAtt := v1.myAtt	// transfert of  "anObj" from v1 to v2
+    	// v1 has loose its attribute (print <void>)
+    	stdio.writeln(v1.myAtt.toString)
+    end
+}
+class X
+{
+	method toString() : kermeta::standard::String is do
+		result := "I'm an X object"
+	end
+}
+class Rectangle
+{
+    attribute length : kermeta::standard::Integer
+    attribute width : kermeta::standard::Integer
+    
+    // read-only property derived from length & width
+    property surface : kermeta::standard::Integer
+        getter is do
+            result := length * width
+        end
+}
+class Cube
+{
+    attribute width : kermeta::standard::Integer
+    attribute surface : kermeta::standard::Integer
+    attribute volume : kermeta::standard::Integer
+    
+    // read-write property
+    property edge : kermeta::standard::Integer
+        getter is do
+            result := width
+        end
+        setter is do
+           width := edge
+           surface := edge * edge * 6
+           volume := edge * edge * edge
+        end
+}
+class OtherSyntax
+{
+	operation block() is
+		do
+			// my code : local variables are not visibles outside the block
+		end
+	
+	operation condition() is do
+		var boolCond : kermeta::language::structure::Boolean init true
+		// conditional block
+		if boolCond then
+			// block for true value of the condition
+		else
+			// block for false value of the condition
+		end
+		// conditional expression => affectation
+		var s : kermeta::standard::String
+		s := if boolCond then "its true !" else "its a joke ;-)" end
+	end
+	
+	operation looping() is do
+		from
+			var i : kermeta::standard::Integer init 0
+		until
+			i == 10
+		loop
+			/* code to be done 10 times
+			 .... */
+			i := i + 1	// don't forget increment the counter :-)
+		end
+	end
+	
+	operation raiseException() is do
+		raise kermeta::exceptions::Exception.new
+	end
+	operation handleException() is
+		do	// some code which raise an exception
+			self.raiseException
+		rescue (e : kermeta::exceptions::Exception)
+			// do something  if exception of Exception type has been raised in the "do" block
+		end
+}
+class ForComments
+{
+	// a "line" comment
+	
+	/* a multi line
+			comment */
+	
+	@descr    "a named annotation"
+	operation myAnnotatedMethod() is abstract
+	
+	/** anonymous multi line annotation */
+	reference anAnnotatedObject : kermeta::language::structure::Object
+	
+	operation main() is do
+		// put pointer on the references above to see their informations
+		myAnnotatedMethod
+		anAnnotatedObject
+	end
+}

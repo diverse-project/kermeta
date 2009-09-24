@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<uml:Model xmi:version="2.1" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:uml="http://www.eclipse.org/uml2/2.1.0/UML" xmi:id="_qb8akM37EdqwVrslYOdUDA">
+  <packagedElement xmi:type="uml:Package" xmi:id="_w8IxIM37EdqwVrslYOdUDA" name="myUmlModel">
+    <packagedElement xmi:type="uml:Class" xmi:id="_390akZwUEdu8MPxUfwt7mQ" name="Book">
+      <ownedAttribute xmi:id="_5apk8JwUEdu8MPxUfwt7mQ" name="title" type="_BJW9EJwVEdu8MPxUfwt7mQ"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_8iXj0JwUEdu8MPxUfwt7mQ" name="Author">
+      <ownedAttribute xmi:id="_D_Nv4JwVEdu8MPxUfwt7mQ" name="firstName" type="_BJW9EJwVEdu8MPxUfwt7mQ"/>
+      <ownedAttribute xmi:id="_Iy9LsJwVEdu8MPxUfwt7mQ" name="lastName" type="_BJW9EJwVEdu8MPxUfwt7mQ"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:DataType" xmi:id="_BJW9EJwVEdu8MPxUfwt7mQ" name="String"/>
+    <packagedElement xmi:type="uml:Association" xmi:id="_NJ590JwVEdu8MPxUfwt7mQ" name="bookAuthors" memberEnd="_NJ590ZwVEdu8MPxUfwt7mQ _NJ591JwVEdu8MPxUfwt7mQ" navigableOwnedEnd="_NJ590ZwVEdu8MPxUfwt7mQ _NJ591JwVEdu8MPxUfwt7mQ">
+      <ownedEnd xmi:id="_NJ590ZwVEdu8MPxUfwt7mQ" name="books" type="_390akZwUEdu8MPxUfwt7mQ" association="_NJ590JwVEdu8MPxUfwt7mQ">
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_NJ590pwVEdu8MPxUfwt7mQ" value="*"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_NJ5905wVEdu8MPxUfwt7mQ"/>
+      </ownedEnd>
+      <ownedEnd xmi:id="_NJ591JwVEdu8MPxUfwt7mQ" name="authors" type="_8iXj0JwUEdu8MPxUfwt7mQ" association="_NJ590JwVEdu8MPxUfwt7mQ">
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_NJ591ZwVEdu8MPxUfwt7mQ" value="*"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_NJ591pwVEdu8MPxUfwt7mQ"/>
+      </ownedEnd>
+    </packagedElement>
+  </packagedElement>
+</uml:Model>

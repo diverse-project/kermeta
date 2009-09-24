@@ -1,0 +1,32 @@
+/* $Id: lamba_expressions.kmt,v 1.1 2007-01-09 08:17:59 vmahe Exp $
+ * Creation date: January 8, 2007
+ * License:
+ * Copyright:
+ * Authors:
+ */
+@mainClass "my_package::Main"
+@mainOperation "main"
+
+
+package my_package;
+
+// TODO
+
+require kermeta
+using kermeta::standard
+
+class MyClass
+{
+    operation main() : Void is do 
+        var s1 : String init "abcd"
+        var s2 : String init "efgh"
+//        s1 := reverseFunc(s1 -> s1)
+        stdio.writeln(s1)
+    end
+	// function with one parameter
+	operation reverseFunc ( passedFunction : <String -> String> ) is
+		do /* ... */ end
+	// function with many parameters
+	operation otherFunction ( passedFunction : <[String, String] -> String> ) is
+		do /* ... */ end
+}

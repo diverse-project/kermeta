@@ -1,0 +1,16 @@
+/* $Id: KermetaNewFileWizard.java,v 1.9
+ * Creation date: January 4, 2007
+ * License:		TODO
+ * Copyright:	INRIA
+ * Authors:		vmahe@irisa.fr
+ */
+
+package root_package;
+require kermeta
+using kermeta::language::structure
+
+class X
+{
+	/** anonymous multi line annotation */
+	reference anAnnotatedObject : Object
+}

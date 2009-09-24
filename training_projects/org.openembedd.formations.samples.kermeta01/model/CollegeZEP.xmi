@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="ASCII"?>
+<CollegeMM:College xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:CollegeMM="http://org.openembedd.CollegeMM" xsi:schemaLocation="http://org.openembedd.CollegeMM ../metamodel/CollegeMM.ecore">
+  <students name="Untel"/>
+</CollegeMM:College>

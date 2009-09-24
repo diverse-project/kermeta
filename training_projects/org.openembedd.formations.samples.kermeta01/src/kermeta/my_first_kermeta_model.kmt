@@ -1,0 +1,34 @@
+package my_first_kermeta_model;
+
+require kermeta
+
+package my_package
+{
+	class A
+	{
+reference b : set B[0..*]
+
+	}
+	class B
+	{
+	}
+	class C inherits B
+	{
+	}
+	package my_subpackage
+	{
+class MyClass
+		{
+reference aProperty : Void
+
+			operation anOperation() : kermeta::standard::~Void is
+				do
+					//TODO: implement operation anOperation
+					raise kermeta::exceptions::NotImplementedException.new
+				end
+
+		}
+	}
+
+}
+

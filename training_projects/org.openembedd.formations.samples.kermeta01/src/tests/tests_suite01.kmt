@@ -1,0 +1,47 @@
+/* $Id: tests_suite01.kmt,v 1.1 2007-01-09 08:17:59 vmahe Exp $
+ * Creation date: January 3, 2007
+ * License:
+ * Copyright:
+ * Authors:
+ */
+@mainClass "my_package::subpackage::MyTestSuite"
+@mainOperation "runTests"
+
+package my_package::subpackage;
+
+require kermeta
+require "platform:/resource/org.openembedd.formations.samples.kermeta01/src/kermeta/my_first_kermeta_file.kmt"
+
+class MyTestSuite inherits kermeta::kunit::TestRunner
+{
+    operation runTests() : Void is do 
+		// Here, we run our first test case
+		run(FirstTestCase)
+		printTestResult
+    end
+}
+class FirstTestCase inherits kermeta::kunit::TestCase
+{
+	reference a : kermeta::standard::Integer
+	reference b : kermeta::standard::Integer
+	
+	method setUp() is do
+		a := 0
+		b := 1
+	end
+	
+	method tearDown() is do		// TODO
+	end
+    
+    // test methods name must begin with "test" to be processed
+    operation testSuccessDemo() is do
+    	assertTrueWithMsg(b > a, "The testSuccessDemo should demonstrate a test success")
+    end
+    operation testFailureDemo() is do
+    	assertTrueWithMsg(a > b, "The testFailureDemo should demonstrate a test failure")
+    end
+    operation testErrorDemo() is do
+    	var i : kermeta::standard::Integer init 1/0
+    	assertTrueWithMsg(a > (b/a), "The testErrorDemo should demonstrate a error interception")
+    end
+}

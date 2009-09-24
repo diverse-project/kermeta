@@ -1,0 +1,267 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<diagrams:Diagrams xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:di="http://www.topcased.org/DI/1.0" xmlns:diagrams="http://www.topcased.org/Diagrams/1.0" xmi:id="_qF9acOqvEdyabeMsV8_ctQ" activeDiagram="_qGcioOqvEdyabeMsV8_ctQ">
+  <model href="CollegeMM.ecore#/"/>
+  <diagrams xmi:id="_qGcioOqvEdyabeMsV8_ctQ" position="0,0" size="100,100" name="CollegeMM" viewport="53,0">
+    <property xmi:id="_qOtt0OqvEdyabeMsV8_ctQ" key="pageFormatName" value="A4"/>
+    <property xmi:id="_qOtt0eqvEdyabeMsV8_ctQ" key="diagramWidth" value="840"/>
+    <property xmi:id="_qOtt0uqvEdyabeMsV8_ctQ" key="diagramHeight" value="1188"/>
+    <property xmi:id="_qOtt0-qvEdyabeMsV8_ctQ" key="pageMarginName" value="Small Margin"/>
+    <property xmi:id="_qOtt1OqvEdyabeMsV8_ctQ" key="diagramTopMargin" value="20"/>
+    <property xmi:id="_qOtt1eqvEdyabeMsV8_ctQ" key="diagramBottomMargin" value="20"/>
+    <property xmi:id="_qOtt1uqvEdyabeMsV8_ctQ" key="diagramLeftMargin" value="20"/>
+    <property xmi:id="_qOtt1-qvEdyabeMsV8_ctQ" key="diagramRightMargin" value="20"/>
+    <property xmi:id="_qOtt2OqvEdyabeMsV8_ctQ" key="orientation" value="portrait"/>
+    <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_qGgNAOqvEdyabeMsV8_ctQ" presentation="org.topcased.modeler.ecore.ediagram">
+      <element href="CollegeMM.ecore#/"/>
+    </semanticModel>
+    <contained xsi:type="di:GraphNode" xmi:id="_slmssOqvEdyabeMsV8_ctQ" position="12,168" size="150,-1">
+      <anchorage xmi:id="_pfKqweqwEdyabeMsV8_ctQ" graphEdge="_pf31YOqwEdyabeMsV8_ctQ _rgoMMOqwEdyabeMsV8_ctQ _L83RMOq1EdymIbSDtCEDcQ"/>
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_slmsseqvEdyabeMsV8_ctQ" presentation="default">
+        <element href="CollegeMM.ecore#//Teacher"/>
+      </semanticModel>
+      <contained xsi:type="di:GraphNode" xmi:id="_slmssuqvEdyabeMsV8_ctQ">
+        <property xmi:id="_slmss-qvEdyabeMsV8_ctQ" key="eStructuralFeatureID" value="21"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_slmstOqvEdyabeMsV8_ctQ" presentation="default">
+          <element href="CollegeMM.ecore#//Teacher"/>
+        </semanticModel>
+        <contained xsi:type="di:GraphNode" xmi:id="_5Wyt8uq0EdymIbSDtCEDcQ" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_5Wyt8-q0EdymIbSDtCEDcQ" presentation="default">
+            <element href="CollegeMM.ecore#//Teacher/name"/>
+          </semanticModel>
+        </contained>
+      </contained>
+      <contained xsi:type="di:GraphNode" xmi:id="_slmsteqvEdyabeMsV8_ctQ">
+        <property xmi:id="_slmstuqvEdyabeMsV8_ctQ" key="eStructuralFeatureID" value="11"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_slmst-qvEdyabeMsV8_ctQ" presentation="default">
+          <element href="CollegeMM.ecore#//Teacher"/>
+        </semanticModel>
+      </contained>
+    </contained>
+    <contained xsi:type="di:GraphNode" xmi:id="_umwFEOqvEdyabeMsV8_ctQ" position="378,159" size="150,-1">
+      <anchorage xmi:id="_pt3OEOqwEdyabeMsV8_ctQ" graphEdge="_pt4cMOqwEdyabeMsV8_ctQ _r9w0IOqwEdyabeMsV8_ctQ"/>
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_umwFEeqvEdyabeMsV8_ctQ" presentation="default">
+        <element href="CollegeMM.ecore#//Student"/>
+      </semanticModel>
+      <contained xsi:type="di:GraphNode" xmi:id="_umwFEuqvEdyabeMsV8_ctQ">
+        <property xmi:id="_umwFE-qvEdyabeMsV8_ctQ" key="eStructuralFeatureID" value="21"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_umwFFOqvEdyabeMsV8_ctQ" presentation="default">
+          <element href="CollegeMM.ecore#//Student"/>
+        </semanticModel>
+        <contained xsi:type="di:GraphNode" xmi:id="_oOFgkOq0EdymIbSDtCEDcQ" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_oOFgkeq0EdymIbSDtCEDcQ" presentation="default">
+            <element href="CollegeMM.ecore#//Student/name"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode" xmi:id="_2UpOwOq4Edyzy72iykBVcQ" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_2UpOweq4Edyzy72iykBVcQ" presentation="default">
+            <element href="CollegeMM.ecore#//Student/birthDate"/>
+          </semanticModel>
+        </contained>
+      </contained>
+      <contained xsi:type="di:GraphNode" xmi:id="_umwFFeqvEdyabeMsV8_ctQ">
+        <property xmi:id="_umwFFuqvEdyabeMsV8_ctQ" key="eStructuralFeatureID" value="11"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_umwFF-qvEdyabeMsV8_ctQ" presentation="default">
+          <element href="CollegeMM.ecore#//Student"/>
+        </semanticModel>
+      </contained>
+    </contained>
+    <contained xsi:type="di:GraphNode" xmi:id="_w0RskOqvEdyabeMsV8_ctQ" position="299,34" size="150,-1">
+      <anchorage xmi:id="_pfKqwOqwEdyabeMsV8_ctQ" graphEdge="_pf31YOqwEdyabeMsV8_ctQ _pt4cMOqwEdyabeMsV8_ctQ _qKzBsOqwEdyabeMsV8_ctQ _qXidMOqwEdyabeMsV8_ctQ _5xTHcexbEdyUW6aEigLjwQ"/>
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_w0RskeqvEdyabeMsV8_ctQ" presentation="default">
+        <element href="CollegeMM.ecore#//College"/>
+      </semanticModel>
+      <contained xsi:type="di:GraphNode" xmi:id="_w0RskuqvEdyabeMsV8_ctQ">
+        <property xmi:id="_w0Rsk-qvEdyabeMsV8_ctQ" key="eStructuralFeatureID" value="21"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_w0RslOqvEdyabeMsV8_ctQ" presentation="default">
+          <element href="CollegeMM.ecore#//College"/>
+        </semanticModel>
+      </contained>
+      <contained xsi:type="di:GraphNode" xmi:id="_w0RsleqvEdyabeMsV8_ctQ">
+        <property xmi:id="_w0RsluqvEdyabeMsV8_ctQ" key="eStructuralFeatureID" value="11"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_w0Rsl-qvEdyabeMsV8_ctQ" presentation="default">
+          <element href="CollegeMM.ecore#//College"/>
+        </semanticModel>
+      </contained>
+    </contained>
+    <contained xsi:type="di:GraphNode" xmi:id="_zgFykOqvEdyabeMsV8_ctQ" position="535,168" size="150,-1">
+      <anchorage xmi:id="_qXhPEOqwEdyabeMsV8_ctQ" graphEdge="_qXidMOqwEdyabeMsV8_ctQ _sahooOqwEdyabeMsV8_ctQ"/>
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_zgFykeqvEdyabeMsV8_ctQ" presentation="default">
+        <element href="CollegeMM.ecore#//ClassRoom"/>
+      </semanticModel>
+      <contained xsi:type="di:GraphNode" xmi:id="_zgFykuqvEdyabeMsV8_ctQ">
+        <property xmi:id="_zgFyk-qvEdyabeMsV8_ctQ" key="eStructuralFeatureID" value="21"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_zgFylOqvEdyabeMsV8_ctQ" presentation="default">
+          <element href="CollegeMM.ecore#//ClassRoom"/>
+        </semanticModel>
+        <contained xsi:type="di:GraphNode" xmi:id="_2qEpAOq0EdymIbSDtCEDcQ" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_2qEpAeq0EdymIbSDtCEDcQ" presentation="default">
+            <element href="CollegeMM.ecore#//ClassRoom/location"/>
+          </semanticModel>
+        </contained>
+      </contained>
+      <contained xsi:type="di:GraphNode" xmi:id="_zgFyleqvEdyabeMsV8_ctQ">
+        <property xmi:id="_zgFyluqvEdyabeMsV8_ctQ" key="eStructuralFeatureID" value="11"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_zgFyl-qvEdyabeMsV8_ctQ" presentation="default">
+          <element href="CollegeMM.ecore#//ClassRoom"/>
+        </semanticModel>
+      </contained>
+    </contained>
+    <contained xsi:type="di:GraphNode" xmi:id="_2rfXkOqvEdyabeMsV8_ctQ" position="221,159" size="150,-1">
+      <anchorage xmi:id="_qKxMgOqwEdyabeMsV8_ctQ" graphEdge="_qKzBsOqwEdyabeMsV8_ctQ _sMQjIOqwEdyabeMsV8_ctQ _L83RMOq1EdymIbSDtCEDcQ"/>
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_2rfXkeqvEdyabeMsV8_ctQ" presentation="default">
+        <element href="CollegeMM.ecore#//Matter"/>
+      </semanticModel>
+      <contained xsi:type="di:GraphNode" xmi:id="_2rfXkuqvEdyabeMsV8_ctQ">
+        <property xmi:id="_2rfXk-qvEdyabeMsV8_ctQ" key="eStructuralFeatureID" value="21"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_2rfXlOqvEdyabeMsV8_ctQ" presentation="default">
+          <element href="CollegeMM.ecore#//Matter"/>
+        </semanticModel>
+        <contained xsi:type="di:GraphNode" xmi:id="_cfDqcuqwEdyabeMsV8_ctQ" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_cfDqc-qwEdyabeMsV8_ctQ" presentation="default">
+            <element href="CollegeMM.ecore#//Matter/level"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode" xmi:id="_gMm9cOq0EdymIbSDtCEDcQ" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_gMm9ceq0EdymIbSDtCEDcQ" presentation="default">
+            <element href="CollegeMM.ecore#//Matter/title"/>
+          </semanticModel>
+        </contained>
+      </contained>
+      <contained xsi:type="di:GraphNode" xmi:id="_2rfXleqvEdyabeMsV8_ctQ">
+        <property xmi:id="_2rfXluqvEdyabeMsV8_ctQ" key="eStructuralFeatureID" value="11"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_2rfXl-qvEdyabeMsV8_ctQ" presentation="default">
+          <element href="CollegeMM.ecore#//Matter"/>
+        </semanticModel>
+      </contained>
+    </contained>
+    <contained xsi:type="di:GraphNode" xmi:id="_5FTHkOqvEdyabeMsV8_ctQ" position="274,319" size="200,-1">
+      <anchorage xmi:id="_rgmXAOqwEdyabeMsV8_ctQ" graphEdge="_rgoMMOqwEdyabeMsV8_ctQ _r9w0IOqwEdyabeMsV8_ctQ _sMQjIOqwEdyabeMsV8_ctQ _sahooOqwEdyabeMsV8_ctQ _5xTHcexbEdyUW6aEigLjwQ"/>
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_5FTHkeqvEdyabeMsV8_ctQ" presentation="default">
+        <element href="CollegeMM.ecore#//Lesson"/>
+      </semanticModel>
+      <contained xsi:type="di:GraphNode" xmi:id="_5FTHkuqvEdyabeMsV8_ctQ">
+        <property xmi:id="_5FTHk-qvEdyabeMsV8_ctQ" key="eStructuralFeatureID" value="21"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_5FTHlOqvEdyabeMsV8_ctQ" presentation="default">
+          <element href="CollegeMM.ecore#//Lesson"/>
+        </semanticModel>
+        <contained xsi:type="di:GraphNode" xmi:id="_7FO_AOqvEdyabeMsV8_ctQ" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_7FO_AeqvEdyabeMsV8_ctQ" presentation="default">
+            <element href="CollegeMM.ecore#//Lesson/dateAndHour"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode" xmi:id="_A48qEOqwEdyabeMsV8_ctQ" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_A48qEeqwEdyabeMsV8_ctQ" presentation="default">
+            <element href="CollegeMM.ecore#//Lesson/duration"/>
+          </semanticModel>
+        </contained>
+      </contained>
+      <contained xsi:type="di:GraphNode" xmi:id="_5FTHleqvEdyabeMsV8_ctQ">
+        <property xmi:id="_5FTHluqvEdyabeMsV8_ctQ" key="eStructuralFeatureID" value="11"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_5FTHl-qvEdyabeMsV8_ctQ" presentation="default">
+          <element href="CollegeMM.ecore#//Lesson"/>
+        </semanticModel>
+      </contained>
+    </contained>
+    <contained xsi:type="di:GraphNode" xmi:id="_RWKqcOqwEdyabeMsV8_ctQ" position="17,281" size="150,-1">
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_RWLRgOqwEdyabeMsV8_ctQ" presentation="default">
+        <element href="CollegeMM.ecore#//Level"/>
+      </semanticModel>
+      <contained xsi:type="di:GraphNode" xmi:id="_RWLRgeqwEdyabeMsV8_ctQ">
+        <property xmi:id="_RWLRguqwEdyabeMsV8_ctQ" key="eStructuralFeatureID" value="9"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_RWLRg-qwEdyabeMsV8_ctQ" presentation="default">
+          <element href="CollegeMM.ecore#//Level"/>
+        </semanticModel>
+        <contained xsi:type="di:GraphNode" xmi:id="_SisvAOqwEdyabeMsV8_ctQ" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_SisvAeqwEdyabeMsV8_ctQ" presentation="default">
+            <element href="CollegeMM.ecore#//Level/beginner"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode" xmi:id="_VHCUAOqwEdyabeMsV8_ctQ" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_VHCUAeqwEdyabeMsV8_ctQ" presentation="default">
+            <element href="CollegeMM.ecore#//Level/normal"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode" xmi:id="_Xr-9AOqwEdyabeMsV8_ctQ" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_Xr-9AeqwEdyabeMsV8_ctQ" presentation="default">
+            <element href="CollegeMM.ecore#//Level/advanced"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode" xmi:id="_ZnyiYuqwEdyabeMsV8_ctQ" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_ZnzJcOqwEdyabeMsV8_ctQ" presentation="default">
+            <element href="CollegeMM.ecore#//Level/expert"/>
+          </semanticModel>
+        </contained>
+      </contained>
+    </contained>
+    <contained xsi:type="di:GraphEdge" xmi:id="_pf31YOqwEdyabeMsV8_ctQ" anchor="_pfKqwOqwEdyabeMsV8_ctQ _pfKqweqwEdyabeMsV8_ctQ">
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_pf31YeqwEdyabeMsV8_ctQ" presentation="default">
+        <element href="CollegeMM.ecore#//College/teatchers"/>
+      </semanticModel>
+      <contained xsi:type="di:EdgeObjectUV" xmi:id="_pf31YuqwEdyabeMsV8_ctQ" id="nameLabel" uDistance="42"/>
+      <contained xsi:type="di:EdgeObjectUV" xmi:id="_pf31Y-qwEdyabeMsV8_ctQ" id="cardinalityLabel" uDistance="20" vDistance="-20"/>
+    </contained>
+    <contained xsi:type="di:GraphEdge" xmi:id="_pt4cMOqwEdyabeMsV8_ctQ" anchor="_pfKqwOqwEdyabeMsV8_ctQ _pt3OEOqwEdyabeMsV8_ctQ">
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_pt4cMeqwEdyabeMsV8_ctQ" presentation="default">
+        <element href="CollegeMM.ecore#//College/students"/>
+      </semanticModel>
+      <contained xsi:type="di:EdgeObjectUV" xmi:id="_pt4cMuqwEdyabeMsV8_ctQ" id="nameLabel" uDistance="22" vDistance="12"/>
+      <contained xsi:type="di:EdgeObjectUV" xmi:id="_pt4cM-qwEdyabeMsV8_ctQ" id="cardinalityLabel" uDistance="4" vDistance="17"/>
+    </contained>
+    <contained xsi:type="di:GraphEdge" xmi:id="_qKzBsOqwEdyabeMsV8_ctQ" anchor="_pfKqwOqwEdyabeMsV8_ctQ _qKxMgOqwEdyabeMsV8_ctQ">
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_qKzBseqwEdyabeMsV8_ctQ" presentation="default">
+        <element href="CollegeMM.ecore#//College/matters"/>
+      </semanticModel>
+      <contained xsi:type="di:EdgeObjectUV" xmi:id="_qKzBsuqwEdyabeMsV8_ctQ" id="nameLabel" uDistance="31" vDistance="-5"/>
+      <contained xsi:type="di:EdgeObjectUV" xmi:id="_qKzBs-qwEdyabeMsV8_ctQ" id="cardinalityLabel" uDistance="8" vDistance="-16"/>
+    </contained>
+    <contained xsi:type="di:GraphEdge" xmi:id="_qXidMOqwEdyabeMsV8_ctQ" anchor="_pfKqwOqwEdyabeMsV8_ctQ _qXhPEOqwEdyabeMsV8_ctQ">
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_qXidMeqwEdyabeMsV8_ctQ" presentation="default">
+        <element href="CollegeMM.ecore#//College/classrooms"/>
+      </semanticModel>
+      <contained xsi:type="di:EdgeObjectUV" xmi:id="_qXidMuqwEdyabeMsV8_ctQ" id="nameLabel" uDistance="32" vDistance="1"/>
+      <contained xsi:type="di:EdgeObjectUV" xmi:id="_qXidM-qwEdyabeMsV8_ctQ" id="cardinalityLabel" uDistance="2" vDistance="15"/>
+    </contained>
+    <contained xsi:type="di:GraphEdge" xmi:id="_rgoMMOqwEdyabeMsV8_ctQ" anchor="_rgmXAOqwEdyabeMsV8_ctQ _pfKqweqwEdyabeMsV8_ctQ">
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_rgoMMeqwEdyabeMsV8_ctQ" presentation="default">
+        <element href="CollegeMM.ecore#//Lesson/teacher"/>
+      </semanticModel>
+      <contained xsi:type="di:EdgeObjectUV" xmi:id="_rgoMMuqwEdyabeMsV8_ctQ" id="nameLabel" uDistance="73" vDistance="5"/>
+      <contained xsi:type="di:EdgeObjectUV" xmi:id="_rgoMM-qwEdyabeMsV8_ctQ" id="cardinalityLabel" uDistance="49" vDistance="8"/>
+    </contained>
+    <contained xsi:type="di:GraphEdge" xmi:id="_r9w0IOqwEdyabeMsV8_ctQ" anchor="_rgmXAOqwEdyabeMsV8_ctQ _pt3OEOqwEdyabeMsV8_ctQ">
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_r9w0IeqwEdyabeMsV8_ctQ" presentation="default">
+        <element href="CollegeMM.ecore#//Lesson/students"/>
+      </semanticModel>
+      <contained xsi:type="di:EdgeObjectUV" xmi:id="_r9w0IuqwEdyabeMsV8_ctQ" id="nameLabel" uDistance="31"/>
+      <contained xsi:type="di:EdgeObjectUV" xmi:id="_r9w0I-qwEdyabeMsV8_ctQ" id="cardinalityLabel" uDistance="20" vDistance="-20"/>
+    </contained>
+    <contained xsi:type="di:GraphEdge" xmi:id="_sMQjIOqwEdyabeMsV8_ctQ" anchor="_rgmXAOqwEdyabeMsV8_ctQ _qKxMgOqwEdyabeMsV8_ctQ">
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_sMQjIeqwEdyabeMsV8_ctQ" presentation="default">
+        <element href="CollegeMM.ecore#//Lesson/matter"/>
+      </semanticModel>
+      <contained xsi:type="di:EdgeObjectUV" xmi:id="_sMQjIuqwEdyabeMsV8_ctQ" id="nameLabel" uDistance="40" vDistance="-4"/>
+      <contained xsi:type="di:EdgeObjectUV" xmi:id="_sMQjI-qwEdyabeMsV8_ctQ" id="cardinalityLabel" uDistance="20" vDistance="-20"/>
+    </contained>
+    <contained xsi:type="di:GraphEdge" xmi:id="_sahooOqwEdyabeMsV8_ctQ" anchor="_rgmXAOqwEdyabeMsV8_ctQ _qXhPEOqwEdyabeMsV8_ctQ">
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_sahooeqwEdyabeMsV8_ctQ" presentation="default">
+        <element href="CollegeMM.ecore#//Lesson/classroom"/>
+      </semanticModel>
+      <contained xsi:type="di:EdgeObjectUV" xmi:id="_sahoouqwEdyabeMsV8_ctQ" id="nameLabel" uDistance="54"/>
+      <contained xsi:type="di:EdgeObjectUV" xmi:id="_sahoo-qwEdyabeMsV8_ctQ" id="cardinalityLabel" uDistance="26"/>
+    </contained>
+    <contained xsi:type="di:GraphEdge" xmi:id="_L83RMOq1EdymIbSDtCEDcQ" anchor="_pfKqweqwEdyabeMsV8_ctQ _qKxMgOqwEdyabeMsV8_ctQ">
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_L83RMeq1EdymIbSDtCEDcQ" presentation="default">
+        <element href="CollegeMM.ecore#//Teacher/teache"/>
+      </semanticModel>
+      <contained xsi:type="di:EdgeObjectUV" xmi:id="_L83RMuq1EdymIbSDtCEDcQ" id="nameLabel" uDistance="10" vDistance="5"/>
+      <contained xsi:type="di:EdgeObjectUV" xmi:id="_L83RM-q1EdymIbSDtCEDcQ" id="cardinalityLabel" uDistance="20" vDistance="-8"/>
+    </contained>
+    <contained xsi:type="di:GraphEdge" xmi:id="_5xTHcexbEdyUW6aEigLjwQ" anchor="_pfKqwOqwEdyabeMsV8_ctQ _rgmXAOqwEdyabeMsV8_ctQ">
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_5xTHcuxbEdyUW6aEigLjwQ" presentation="default">
+        <element href="CollegeMM.ecore#//College/lessons"/>
+      </semanticModel>
+      <contained xsi:type="di:EdgeObjectUV" xmi:id="_5xTHc-xbEdyUW6aEigLjwQ" id="nameLabel" uDistance="181"/>
+      <contained xsi:type="di:EdgeObjectUV" xmi:id="_5xTHdOxbEdyUW6aEigLjwQ" id="cardinalityLabel" uDistance="163"/>
+    </contained>
+  </diagrams>
+</diagrams:Diagrams>

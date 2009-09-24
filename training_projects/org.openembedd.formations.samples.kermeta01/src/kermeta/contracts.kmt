@@ -1,0 +1,60 @@
+/* $Id: contracts.kmt,v 1.2 2008-03-10 16:49:03 vmahe Exp $
+ * Creation date: January 8, 2007
+ * License:
+ * Copyright:
+ * Authors:
+ */
+@mainClass "my_package::MyClass"
+@mainOperation "main"
+
+
+package my_package;
+
+
+require kermeta
+using kermeta::standard
+
+class StringTool
+{
+	reference stringTable : Collection<String>
+	
+	// an invariant constraint
+	inv noVoidTable is
+		do stringTable != void end
+	
+    // an operation with contracts
+    operation concatenate(first : String , second : String) : String
+    	pre noVoidInput is
+    		do first != void and second != void end
+	    
+	    post noVoidOutput is
+	    	do result != void end
+	    	
+	    is do	// operation body
+	    	result := first
+	    	result.append(second)
+	    end
+}
+class MyClass
+{
+    operation main() : Void is do 
+        // new tool : its stringTable must be initialized
+        var st1 : StringTool init StringTool.new
+        st1.stringTable := Set<String>.new
+        var s1 : String
+        var s2 : String
+        do 
+        	// void strings should raise exception
+        	st1.concatenate(s1, s2)
+        	rescue (err : kermeta::exceptions::ConstraintViolatedPre)
+       			stdio.writeln(" *** expected violation *** " + err.toString)
+        end
+        do
+        	// new tool without table
+        	var st2 : StringTool init StringTool.new
+        	st2.checkInvariants
+        	rescue (err : kermeta::exceptions::ConstraintViolatedInv)
+        		stdio.writeln(" *** expected violation *** " + err.toString)
+        end
+    end
+}

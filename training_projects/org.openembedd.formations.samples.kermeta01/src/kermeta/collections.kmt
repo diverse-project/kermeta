@@ -1,0 +1,31 @@
+/* $Id: collections.kmt,v 1.2 2008-03-10 16:49:03 vmahe Exp $
+ * Creation date: January 8, 2007
+ * License:
+ * Copyright:
+ * Authors:
+ */
+@mainClass "my_package::Collections"
+@mainOperation "main"
+
+
+package my_package;
+
+
+require kermeta
+using kermeta::standard
+using kermeta::language::structure
+class Collections
+{
+    operation main() : Void is do 
+		var myCol1 : set Integer[0..*]    init kermeta::standard::Set<Integer>.new
+		var myCol2 : oset String[0..*]    init kermeta::standard::OrderedSet<String>.new
+		var myCol3 : bag Boolean[0..*]    init kermeta::standard::Bag<Boolean>.new
+		var myCol4 : seq Package[0..*]    init kermeta::standard::Sequence<Package>.new
+		
+		// Fill in myCol1
+		myCol1.add(10)
+		myCol1.add(50)
+		
+		var myCol5 : Bag<Boolean>    init Bag<Boolean>.new
+	end
+}

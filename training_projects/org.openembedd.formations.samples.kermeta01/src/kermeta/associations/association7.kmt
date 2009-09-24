@@ -1,0 +1,24 @@
+/* $Id: KermetaNewFileWizard.java,v 1.9
+ * Creation date: January 5, 2007
+ * License:		TODO
+ * Copyright:	INRIA
+ * Authors:		vmahe@irisa.fr
+ */
+
+package my_package;
+
+require kermeta
+
+class A {
+   attribute sub : A[0..*]
+}
+
+class Usage {
+   operation main() is do
+      var a1 : A init A.new
+      var a2 : A init A.new
+      a1.sub.add(a2)
+      var a3 : A
+      a3 := a1.sub.first
+   end
+}

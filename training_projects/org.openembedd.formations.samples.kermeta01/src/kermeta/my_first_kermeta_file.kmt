@@ -1,0 +1,18 @@
+/* $Id: my_first_kermeta_file.kmt,v 1.2 2007-01-09 08:17:59 vmahe Exp $
+ * Creation date: January 3, 2007
+ * License:
+ * Copyright:
+ * Authors:
+ */
+@mainClass "my_package::my_subpackage::MyMainClass"
+@mainOperation "main_method"
+
+package my_package::my_subpackage;
+
+require kermeta
+class MyMainClass
+{
+    operation main_method() : Void is do 
+        stdio.writeln("My first Kermeta run :-)")
+    end
+}

@@ -1,0 +1,67 @@
+/* $Id: KermetaNewFileWizard.java,v 1.9
+ * Creation date: January 4, 2007
+ * License:		TODO
+ * Copyright:	INRIA
+ * Authors:		vmahe@irisa.fr
+ */
+
+@mainClass "model::Main"
+@mainOperation "main"
+
+package model;
+
+require kermeta
+
+// calling a plugged-in metamodel
+require  "platform:/plugin/org.eclipse.uml2.uml/model/UML.ecore"
+
+// calling a metamodel stored in the project
+require "../../metamodel/RDBMS.ecore"
+
+class Main
+{
+	reference umlModel : uml::Package
+	reference baseModel : rdbms::RDBMSModel
+	
+	operation initialize() is do
+		baseModel := rdbms::RDBMSModel.new
+	end
+	
+	operation loadUmlModel() is do
+    	var inputRepository : kermeta::persistence::EMFRepository init kermeta::persistence::EMFRepository.new
+    	var inputResource : kermeta::persistence::EMFResource
+    	inputResource ?= inputRepository.createResource("../../model/myUmlModel.uml",
+    										 "platform:/plugin/org.eclipse.uml2.uml/model/UML.ecore")
+    	inputResource.load()
+    	var pack : uml::Package
+    	pack ?= inputResource.instances.one
+    	umlModel ?= pack.packagedElement.one
+	end
+	
+    operation class2table() : Void is do 
+        umlModel.packagedElement.each{ element |
+        	if uml::Class.isInstance(element) then
+ 	        	var table : rdbms::Table
+	        	table := rdbms::Table.new
+	        	table.name := element.name
+	        	baseModel.table.add(table)
+        	end
+        }
+    end
+    
+    operation saveRdbmsModel() is do
+    	var outputRepository : kermeta::persistence::EMFRepository init kermeta::persistence::EMFRepository.new
+    	var outputResource : kermeta::persistence::EMFResource
+    	outputResource ?= outputRepository.createResource("../../model/myBaseModel.xmi",
+    														"../../metamodel/RDBMS.ecore")
+    	outputResource.instances.add(baseModel)
+    	outputResource.save()
+    end
+    
+    operation main() is do
+    	initialize
+    	loadUmlModel
+    	class2table
+    	saveRdbmsModel
+    end
+}

@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="ASCII"?>
+<RDBMS:RDBMSModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:RDBMS="platform:/resource/org.openembedd.formations.samples.kermeta01/metamodel/RDBMS.ecore">
+  <table name="Book"/>
+  <table name="Author"/>
+</RDBMS:RDBMSModel>

@@ -1,0 +1,40 @@
+package my_package;
+
+require kermeta
+
+abstract class AText
+{
+    operation addOp(textToAdd : kermeta::standard::String) is abstract
+}
+class LeftHand inherits AText
+{
+	reference text  : kermeta::standard::String
+	method addOp(textToAdd : kermeta::standard::String) is 
+		do
+			if text != void then
+				text.append(textToAdd)
+			else
+				text := void
+			end
+		end
+}
+class RightHand inherits AText
+{
+	reference text  : kermeta::standard::String
+	method addOp(textToAdd : kermeta::standard::String) is 
+		do
+			if text != void then
+				textToAdd.append(text)
+				text := textToAdd
+			else
+				text := void
+			end
+		end
+}
+class MyTextClass inherits LeftHand, RightHand
+{
+	method addOp(textToAdd : kermeta::standard::String) from LeftHand is 
+		do
+			super(textToAdd)
+		end
+}

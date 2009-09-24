@@ -1,0 +1,36 @@
+
+package CollegeMM;
+
+require kermeta
+require "platform:/resource/org.openembedd.formations.samples.kermeta01/metamodel/CollegeMM.ecore"
+
+aspect class Note {
+	attribute ~value : kermeta::standard::Real
+	// add the opposite for managing notes from students/matters
+	reference student : Student#notes
+	reference matter : Matter#notes
+}
+
+aspect class Notable {
+	operation average(notes : Note[0..*]) : kermeta::standard::Real is do
+		var total : kermeta::standard::Real
+		notes.each{ n | total := total + n.~value }
+		result := total / notes.size.toReal
+	end
+}
+
+aspect class Student inherits Notable {
+	reference notes : Note[0..*]#student
+	property averageNote : kermeta::standard::Real
+		getter is do
+			result := average(notes)
+		end
+}
+
+aspect class Matter inherits Notable {
+	reference notes : Note[0..*]#matter
+	property average : kermeta::standard::Real
+		getter is do
+			result := average(notes)
+		end
+}
