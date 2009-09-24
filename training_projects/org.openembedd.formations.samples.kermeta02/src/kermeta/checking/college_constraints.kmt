@@ -1,0 +1,41 @@
+/* $Id: college_constraints.kmt,v 1.1 2008-03-10 16:41:47 vmahe Exp $
+ * Creation date: March 7, 2008
+ * License:
+ * Copyright:
+ * Authors:
+ */
+@mainClass "CollegeMM::Verification"
+@mainOperation "main"
+
+package CollegeMM;
+
+require kermeta
+require "platform:/resource/org.openembedd.formations.samples.kermeta02/metamodel/CollegeMM.ecore"
+
+aspect class Lesson {
+	inv lessonHasTeacher is do
+		self.teacher != void
+	end
+	inv lessonHasStudents is do
+		self.students.size > 1
+	end
+	inv lessonHasMatter is do
+		self.matter != void
+	end
+	inv lessonHasClassroom is do
+		self.classroom != void
+	end
+}
+
+class Verification
+{
+	operation main() : Void is do 
+		var rep : kermeta::persistence::Repository init kermeta::persistence::EMFRepository.new
+		var res : kermeta::persistence::Resource init rep.getResource(
+			"platform:/resource/org.openembedd.formations.samples.kermeta02/model/MyCollege.xmi")
+//			"platform:/resource/org.openembedd.formations.samples.kermeta02/model/NotAGoodCollege.xmi")
+		var model : CollegeMM::College
+		model ?= res.one
+		model.checkAllInvariants
+	end
+}

@@ -1,0 +1,51 @@
+/* $Id: UmlBrowser.kmt,v 1.1 2009-02-18 10:53:11 vmahe Exp $ 
+ * Creation : January 30, 2009
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            vmahe
+ */
+
+package uml;
+
+require kermeta
+require "http://www.eclipse.org/uml2/2.1.0/UML"
+
+aspect class Element {
+	operation eachOwnedElement(func : <Element -> Element>) : Void is abstract
+}
+
+aspect class Model {
+   method eachOwnedElement(func : <Element -> Element>) : Void is do
+      self.packagedElement.each { o |
+         func(o)
+      }
+   end
+}
+
+aspect class Package {
+   method eachOwnedElement(func : <Element -> Element>) : Void is do
+      self.packagedElement.each { o |
+         func(o)
+      }
+   end
+}
+
+aspect class StateMachine {  
+   method eachOwnedElement(func : <Element -> Element>) : Void is do
+      self.region.each{ o |
+         func(o)
+      }
+   end
+}
+
+aspect class Region {
+   method eachOwnedElement(func : <Element -> Element>) : Void is do
+      self.subvertex.each{ o |
+         func(o)
+      }
+      self.transition.each{ o |
+         func(o)
+      }
+   end
+}

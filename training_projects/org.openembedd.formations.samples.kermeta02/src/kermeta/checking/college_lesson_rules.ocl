@@ -1,0 +1,15 @@
+MainModel : /org.openembedd.formations.samples.kermeta02/metamodel/CollegeMM.ecore
+
+context Lesson
+
+inv lessonHasTeacher:
+	self.teacher->notEmpty()
+
+inv lessonHasStudents:
+	self.students->size() > 1
+
+inv lessonHasMatter:
+	self.matter->notEmpty()
+
+inv lessonHasClassroom:
+	classroom->notEmpty()

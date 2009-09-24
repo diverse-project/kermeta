@@ -1,0 +1,68 @@
+/* $Id: fsm_simulator.kmt,v 1.1 2008-03-10 16:41:48 vmahe Exp $
+ * Creation date: March 10, 2008
+ * License:
+ * Copyright:
+ * Authors:
+ */
+@mainClass "fsm::Simulator"
+@mainOperation "main"
+
+package fsm;
+
+require kermeta
+require "http://www.kermeta.org/fsm"
+
+using kermeta::standard
+using kermeta::persistence
+
+aspect class State {
+	operation step(c : String) : String raises FSMException is do
+		var validTransitions : Collection<Transition>
+		validTransitions := outgoingTransition.select{ t | t.input.equals(c) }
+		
+		if validTransitions.empty then raise NoTransition.new end
+		if validTransitions.size > 1 then raise NonDeterminism.new end
+		
+		result := validTransitions.one.fire
+	end
+}
+aspect class Transition {
+	operation fire() : String raises FSMException is do
+		source.owningFSM.currentState := target
+		result := output
+		stdio.writeln(" --> "+result)
+	end
+}
+aspect class FSM
+{
+	operation run() : Void raises FSMException is do 
+		from var str : String init "init"
+		until str == "quit"
+		loop
+			if( str != "init") then
+				do
+					var res : String
+					res := self.currentState.step(str)
+				rescue (err : NoTransition)
+					stdio.writeln(err.toString)
+				rescue (err : NonDeterminism)
+					stdio.writeln(err.toString)
+				end
+			end
+			stdio.writeln("Current state: " + self.currentState.name)
+			str := stdio.read(" give me a string > ")
+		end
+	end
+}
+
+class Simulator {
+	operation main(modelFile : String) : Void is do
+		var rep : EMFRepository init EMFRepository.new
+		var res : Resource init rep.getResource(modelFile)
+		var model : FSM
+		model ?= res.one
+		model.currentState := model.initialState
+		model.run
+		stdio.writeln(" -----> exiting!")
+	end
+}

@@ -1,0 +1,76 @@
+/* $Id: Uml2FsmPass2.kmt,v 1.1 2009-02-18 10:53:11 vmahe Exp $ 
+ * Creation : January 30, 2009
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            vmahe
+ */
+
+package uml;
+
+require kermeta
+require "UmlBrowser.kmt"
+require "http://www.kermeta.org/fsm"
+
+// the main class in UML2 (all other classes derived from it)
+aspect class Element {
+   operation uml2fsmPass2() is abstract
+}
+
+aspect class Model {
+   method uml2fsmPass2() is do
+      self.eachOwnedElement{ p | p.uml2fsmPass2() } // browse
+   end
+}
+
+aspect class Package {
+   method uml2fsmPass2() is do
+      self.eachOwnedElement{ p | p.uml2fsmPass2() } // browse
+   end
+}
+
+aspect class StateMachine {
+   reference output : fsm::FSM
+   method uml2fsmPass2() is do
+      /* the region does not know directly its state machine
+         so we must pass it to the Pass2 method */
+      self.region.each{ r | r.outModel := self.output }
+      self.eachOwnedElement{ p | p.uml2fsmPass2() } // browse
+   end
+}
+
+aspect class Region {
+   reference outModel : fsm::FSM
+   method uml2fsmPass2() is do
+      self.subvertex.each{ sv |
+         sv.outModel := outModel
+         outModel.ownedState.add(sv.output)
+      }
+      self.eachOwnedElement{ p | p.uml2fsmPass2() } // browse
+   end
+}
+
+aspect class Vertex {
+   reference output : fsm::State
+   reference outModel : fsm::FSM
+   method uml2fsmPass2() is do
+      outModel.ownedState.add(output)
+      var pseudoState : uml::Pseudostate
+      pseudoState ?= self
+      if pseudoState != void then
+         if pseudoState.kind == 
+               uml::PseudostateKind.initial then
+            outModel.initialState := output
+         end
+      end
+      var finalState : uml::FinalState
+      finalState ?= self
+      if finalState != void then
+         outModel.finalState.add(output)
+      end
+   end
+}
+
+aspect class Transition {
+	// nothing to do as in FSM transitions are links
+}

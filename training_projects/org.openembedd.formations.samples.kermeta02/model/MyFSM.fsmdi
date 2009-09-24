@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<diagrams:Diagrams xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:di="http://www.topcased.org/DI/1.0" xmlns:diagrams="http://www.topcased.org/Diagrams/1.0" activeDiagram="//@diagrams.0">
+  <model href="MyFSM.fsm#_r3YiYO6tEdyZUrMSbnuw2Q"/>
+  <diagrams position="0,0" size="100,100" name="MyFSM" viewport="0,0">
+    <property key="pageFormatName" value="A4"/>
+    <property key="diagramWidth" value="840"/>
+    <property key="diagramHeight" value="1188"/>
+    <property key="pageMarginName" value="Small Margin"/>
+    <property key="diagramTopMargin" value="20"/>
+    <property key="diagramBottomMargin" value="20"/>
+    <property key="diagramLeftMargin" value="20"/>
+    <property key="diagramRightMargin" value="20"/>
+    <property key="orientation" value="portrait"/>
+    <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="fr.irisa.triskell.kermeta.samples.fsm.graphicalEditor.diagram">
+      <element href="MyFSM.fsm#_r3YiYO6tEdyZUrMSbnuw2Q"/>
+    </semanticModel>
+    <contained xsi:type="di:GraphNode" position="13,26" size="60,40">
+      <anchorage graphEdge="//@diagrams.0/@contained.6 //@diagrams.0/@contained.11"/>
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+        <element href="MyFSM.fsm#_ubrEEO6tEdyZUrMSbnuw2Q"/>
+      </semanticModel>
+    </contained>
+    <contained xsi:type="di:GraphNode" position="112,26" size="60,40">
+      <anchorage graphEdge="//@diagrams.0/@contained.6 //@diagrams.0/@contained.7"/>
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+        <element href="MyFSM.fsm#_vf46IO6tEdyZUrMSbnuw2Q"/>
+      </semanticModel>
+    </contained>
+    <contained xsi:type="di:GraphNode" position="218,26" size="60,40">
+      <anchorage graphEdge="//@diagrams.0/@contained.7 //@diagrams.0/@contained.8"/>
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+        <element href="MyFSM.fsm#_wOH5IO6tEdyZUrMSbnuw2Q"/>
+      </semanticModel>
+    </contained>
+    <contained xsi:type="di:GraphNode" position="323,26" size="60,40">
+      <anchorage graphEdge="//@diagrams.0/@contained.8 //@diagrams.0/@contained.9"/>
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+        <element href="MyFSM.fsm#_w51voO6tEdyZUrMSbnuw2Q"/>
+      </semanticModel>
+    </contained>
+    <contained xsi:type="di:GraphNode" position="426,26" size="60,40">
+      <anchorage graphEdge="//@diagrams.0/@contained.9 //@diagrams.0/@contained.10"/>
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+        <element href="MyFSM.fsm#_xh5OIO6tEdyZUrMSbnuw2Q"/>
+      </semanticModel>
+    </contained>
+    <contained xsi:type="di:GraphNode" position="540,26" size="60,40">
+      <anchorage graphEdge="//@diagrams.0/@contained.10 //@diagrams.0/@contained.11"/>
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+        <element href="MyFSM.fsm#_yabYoO6tEdyZUrMSbnuw2Q"/>
+      </semanticModel>
+    </contained>
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.0/@anchorage.0 //@diagrams.0/@contained.1/@anchorage.0">
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+        <element href="MyFSM.fsm#_1J-IEO6tEdyZUrMSbnuw2Q"/>
+      </semanticModel>
+      <contained xsi:type="di:EdgeObjectOffset" id="inputEdgeObject" offset="1,-12"/>
+    </contained>
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.1/@anchorage.0 //@diagrams.0/@contained.2/@anchorage.0">
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+        <element href="MyFSM.fsm#_1WEDUO6tEdyZUrMSbnuw2Q"/>
+      </semanticModel>
+      <contained xsi:type="di:EdgeObjectOffset" id="inputEdgeObject" offset="4,-10"/>
+    </contained>
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.2/@anchorage.0 //@diagrams.0/@contained.3/@anchorage.0">
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+        <element href="MyFSM.fsm#_1l7rUO6tEdyZUrMSbnuw2Q"/>
+      </semanticModel>
+      <contained xsi:type="di:EdgeObjectOffset" id="inputEdgeObject" offset="4,-12"/>
+    </contained>
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.3/@anchorage.0 //@diagrams.0/@contained.4/@anchorage.0">
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+        <element href="MyFSM.fsm#_1vPYUO6tEdyZUrMSbnuw2Q"/>
+      </semanticModel>
+      <contained xsi:type="di:EdgeObjectOffset" id="inputEdgeObject" offset="5,-12"/>
+    </contained>
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.4/@anchorage.0 //@diagrams.0/@contained.5/@anchorage.0">
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+        <element href="MyFSM.fsm#_1-MaUO6tEdyZUrMSbnuw2Q"/>
+      </semanticModel>
+      <contained xsi:type="di:EdgeObjectOffset" id="inputEdgeObject" offset="2,-13"/>
+    </contained>
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.5/@anchorage.0 //@diagrams.0/@contained.0/@anchorage.0">
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+        <element href="MyFSM.fsm#_2neA0O6tEdyZUrMSbnuw2Q"/>
+      </semanticModel>
+      <contained xsi:type="di:EdgeObjectOffset" id="inputEdgeObject" offset="-2,-10"/>
+      <waypoints>[0, 58, 612, 58]</waypoints>
+      <waypoints>[-612, 58, 0, 58]</waypoints>
+    </contained>
+  </diagrams>
+</diagrams:Diagrams>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="ASCII"?>
+<CollegeMM:College xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:CollegeMM="http://CollegeMM" xsi:schemaLocation="http://CollegeMM ../metamodel/CollegeMM.ecore">
+  <teatchers name="Kodherr" teache="//@matters.0 //@matters.3"/>
+  <teatchers name="Hecs-Perth" teache="//@matters.1 //@matters.2"/>
+  <students name="Dummy Bart" birthDate="1901-01-01T00:00:42.000+0009"/>
+  <students name="Mindy Joe" birthDate="1982-10-10T00:00:00.000+0100"/>
+  <students name="Sweety Mary" birthDate="1980-05-12T00:00:00.000+0200"/>
+  <matters title="Programming"/>
+  <matters level="advanced" title="Sofware Engineering"/>
+  <matters level="expert" title="Model Driven Engineering"/>
+  <matters level="normal" title="Object Oriented Programming"/>
+  <classrooms location="R2D2 room"/>
+  <classrooms location="C3P0 room"/>
+  <lessons dateAndHour="2008-03-05T14:00:00.000+0100" duration="2" teacher="//@teatchers.1" students="//@students.0 //@students.1 //@students.2" matter="//@matters.0" classroom="//@classrooms.0"/>
+</CollegeMM:College>

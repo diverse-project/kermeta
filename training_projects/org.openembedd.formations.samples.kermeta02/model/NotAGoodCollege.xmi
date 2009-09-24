@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="ASCII"?>
+<CollegeMM:College xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:CollegeMM="http://CollegeMM" xsi:schemaLocation="http://CollegeMM ../metamodel/CollegeMM.ecore">
+  <teatchers name="Dummy Momy" teache="//@matters.0 //@matters.1"/>
+  <students name="Grandpa" birthDate="1908-01-25T00:00:00.000+0009"/>
+  <matters title="Cooking"/>
+  <matters title="Weaving"/>
+  <lessons teacher="//@teatchers.0" students="//@students.0" matter="//@matters.0"/>
+</CollegeMM:College>

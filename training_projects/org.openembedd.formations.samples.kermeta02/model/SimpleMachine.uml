@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<uml:Model xmi:version="2.1" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:uml="http://www.eclipse.org/uml2/2.1.0/UML" xmi:id="idModel" name="SimpleMachineModel">
+  <packagedElement xmi:type="uml:Package" xmi:id="idPackage" name="SimpleMachinePackage">
+    <packagedElement xmi:type="uml:StateMachine" xmi:id="idStateMachine" name="SimpleMachineStateMachine">
+      <region xmi:id="idRegion" name="MainRegion">
+        <subvertex xmi:type="uml:Pseudostate" xmi:id="_Z66EcO6zEd2uOoxwyoteWA" name="Begin"/>
+        <subvertex xmi:type="uml:State" xmi:id="_cZdKgO6zEd2uOoxwyoteWA" name="One"/>
+        <subvertex xmi:type="uml:State" xmi:id="_fY7zYu6zEd2uOoxwyoteWA" name="Two"/>
+        <subvertex xmi:type="uml:State" xmi:id="_ijcnku6zEd2uOoxwyoteWA" name="Three"/>
+        <subvertex xmi:type="uml:FinalState" xmi:id="_kEAbYO6zEd2uOoxwyoteWA" name="FinalState1"/>
+        <transition xmi:id="_k0SBxO6zEd2uOoxwyoteWA" name="Start" target="_cZdKgO6zEd2uOoxwyoteWA" source="_Z66EcO6zEd2uOoxwyoteWA"/>
+        <transition xmi:id="_qsr_le6zEd2uOoxwyoteWA" name="Up" target="_fY7zYu6zEd2uOoxwyoteWA" source="_cZdKgO6zEd2uOoxwyoteWA"/>
+        <transition xmi:id="_tuQTJe6zEd2uOoxwyoteWA" name="Up" target="_ijcnku6zEd2uOoxwyoteWA" source="_fY7zYu6zEd2uOoxwyoteWA"/>
+        <transition xmi:id="_xHNzBO6zEd2uOoxwyoteWA" name="Reset" target="_cZdKgO6zEd2uOoxwyoteWA" source="_ijcnku6zEd2uOoxwyoteWA"/>
+        <transition xmi:id="_4VJZVO6zEd2uOoxwyoteWA" name="Down" target="_fY7zYu6zEd2uOoxwyoteWA" source="_ijcnku6zEd2uOoxwyoteWA"/>
+        <transition xmi:id="_69Ym5O6zEd2uOoxwyoteWA" name="Down" target="_cZdKgO6zEd2uOoxwyoteWA" source="_fY7zYu6zEd2uOoxwyoteWA"/>
+        <transition xmi:id="_96eqJO6zEd2uOoxwyoteWA" name="Stop" target="_kEAbYO6zEd2uOoxwyoteWA" source="_ijcnku6zEd2uOoxwyoteWA"/>
+      </region>
+    </packagedElement>
+  </packagedElement>
+</uml:Model>

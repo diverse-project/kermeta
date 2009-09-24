@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<fsm:FSM xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:fsm="http://www.kermeta.org/fsm" xmi:id="_r3YiYO6tEdyZUrMSbnuw2Q" initialState="_ubrEEO6tEdyZUrMSbnuw2Q">
+  <ownedState xmi:id="_ubrEEO6tEdyZUrMSbnuw2Q" name="1" incomingTransition="_2neA0O6tEdyZUrMSbnuw2Q">
+    <outgoingTransition xmi:id="_1J-IEO6tEdyZUrMSbnuw2Q" target="_vf46IO6tEdyZUrMSbnuw2Q" input="h" output="w"/>
+  </ownedState>
+  <ownedState xmi:id="_vf46IO6tEdyZUrMSbnuw2Q" name="2" incomingTransition="_1J-IEO6tEdyZUrMSbnuw2Q">
+    <outgoingTransition xmi:id="_1WEDUO6tEdyZUrMSbnuw2Q" target="_wOH5IO6tEdyZUrMSbnuw2Q" input="e" output="o"/>
+  </ownedState>
+  <ownedState xmi:id="_wOH5IO6tEdyZUrMSbnuw2Q" name="3" incomingTransition="_1WEDUO6tEdyZUrMSbnuw2Q">
+    <outgoingTransition xmi:id="_1l7rUO6tEdyZUrMSbnuw2Q" target="_w51voO6tEdyZUrMSbnuw2Q" input="l" output="r"/>
+  </ownedState>
+  <ownedState xmi:id="_w51voO6tEdyZUrMSbnuw2Q" name="4" incomingTransition="_1l7rUO6tEdyZUrMSbnuw2Q">
+    <outgoingTransition xmi:id="_1vPYUO6tEdyZUrMSbnuw2Q" target="_xh5OIO6tEdyZUrMSbnuw2Q" input="l" output="l"/>
+  </ownedState>
+  <ownedState xmi:id="_xh5OIO6tEdyZUrMSbnuw2Q" name="5" incomingTransition="_1vPYUO6tEdyZUrMSbnuw2Q">
+    <outgoingTransition xmi:id="_1-MaUO6tEdyZUrMSbnuw2Q" target="_yabYoO6tEdyZUrMSbnuw2Q" input="o" output="d"/>
+  </ownedState>
+  <ownedState xmi:id="_yabYoO6tEdyZUrMSbnuw2Q" name="6" incomingTransition="_1-MaUO6tEdyZUrMSbnuw2Q">
+    <outgoingTransition xmi:id="_2neA0O6tEdyZUrMSbnuw2Q" target="_ubrEEO6tEdyZUrMSbnuw2Q" input="!" output="!"/>
+  </ownedState>
+</fsm:FSM>
