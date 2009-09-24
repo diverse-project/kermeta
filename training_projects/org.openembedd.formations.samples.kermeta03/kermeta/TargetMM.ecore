@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="targetmm"
+    nsURI="http://targetmm/1.0" nsPrefix="targetmm">
+  <eClassifiers xsi:type="ecore:EClass" name="C4"/>
+  <eClassifiers xsi:type="ecore:EClass" name="C1">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="own" upperBound="-1" eType="#//C4"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="aSub" eType="#//C2" containment="true"
+        eOpposite="#//C2/myC1"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="parent" eType="#//C1"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="C2" eSuperTypes="#//C3">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="myC1" eType="#//C1" eOpposite="#//C1/aSub"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="C3">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="weight" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+  </eClassifiers>
+</ecore:EPackage>

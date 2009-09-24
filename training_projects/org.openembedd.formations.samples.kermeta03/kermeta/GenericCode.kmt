@@ -1,0 +1,27 @@
+/* $Id:$ 
+ * Creation : April 17, 2009
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            vmahe
+ */
+
+//// GenericCode.kmt ////
+package genericmm;
+
+require kermeta
+require "GenericMT.kmt"
+
+// we define a generic class typed with GenericMT
+class Code <MT : GenericMT>
+{
+ operation createNewCOne(name : kermeta::standard::String) : MT::COne is do 
+  // We are manipulating GenericMM elements
+  result := MT::COne.new
+  result.name := name
+
+  stdio.writeln("GenericCode.kmt ----------")
+  stdio.writeln("  createNewCOne() - instance = "
+       + result.toString + "\n")
+ end
+}

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kermeta_language_structure:ModelingUnit xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:kermeta_language_structure="http://www.kermeta.org/kermeta/1_2_0//kermeta/language/structure" referencedModelingUnits="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#/">
+  <packages name="targetmm">
+    <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="C2"
+        superType="#//@packages.0/C2/@containedType.0">
+      <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="#//@packages.0/C3"/>
+      <ownedAttribute name="myC1" type="#//@packages.0/C2/myC1/@containedType.0" upper="1"
+          opposite="#//@packages.0/C1/aSub">
+        <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="#//@packages.0/C1"/>
+      </ownedAttribute>
+    </ownedTypeDefinition>
+    <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="C1">
+      <ownedAttribute name="name" type="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/language/structure/String"
+          upper="1" isComposite="true">
+        <containedType xsi:type="kermeta_language_structure:VoidType"/>
+      </ownedAttribute>
+      <ownedAttribute name="aSub" type="#//@packages.0/C1/aSub/@containedType.0" upper="1"
+          opposite="#//@packages.0/C2/myC1" isComposite="true">
+        <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="#//@packages.0/C2"/>
+      </ownedAttribute>
+      <ownedAttribute name="parent" type="#//@packages.0/C1/parent/@containedType.0"
+          upper="1">
+        <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="#//@packages.0/C1"/>
+      </ownedAttribute>
+      <ownedAttribute name="own" type="#//@packages.0/C1/own/@containedType.0" upper="-1"
+          isComposite="true">
+        <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="#//@packages.0/C4"/>
+      </ownedAttribute>
+    </ownedTypeDefinition>
+    <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="C3">
+      <ownedAttribute name="weignt" type="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/language/structure/Integer"
+          upper="1">
+        <containedType xsi:type="kermeta_language_structure:VoidType"/>
+      </ownedAttribute>
+    </ownedTypeDefinition>
+    <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="C4"/>
+  </packages>
+  <requires uri="kermeta"/>
+  <usings qualifiedName="targetmm"/>
+</kermeta_language_structure:ModelingUnit>

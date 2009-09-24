@@ -1,0 +1,35 @@
+/* $Id:$ 
+ * Creation : April 17, 2009
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            vmahe
+ */
+
+//// UseOnTargetMM.kmt ////
+@mainClass "targetmm::Main"
+@mainOperation "main"
+
+package targetmm;
+
+require kermeta
+require "TargetMT.kmt"
+require "GenericCode.kmt"
+
+class Main
+{
+ operation main() : Void is do 
+  stdio.writeln("UseOnTargetMM.kmt ----------\n  main() - start\n")
+
+  // we use referent code through targeted modeltype
+  var code : genericmm::Code<targetmm::TargetMT>
+        init genericmm::Code<targetmm::TargetMT>.new
+
+  // we try to create a new C1 class using the generic code
+  var newClass : targetmm::C1 init code.createNewCOne("MyC1Class")
+
+  // we obtain an effective C1 class
+  stdio.writeln("UseOnTargetMM.kmt ----------")
+  stdio.writeln("  main() - newClass = " + newClass.toString)
+ end
+}

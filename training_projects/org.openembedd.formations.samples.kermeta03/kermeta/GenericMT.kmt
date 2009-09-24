@@ -1,0 +1,20 @@
+/* $Id:$ 
+ * Creation : April 17, 2009
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            vmahe
+ */
+
+//// GenericMT.kmt file ////
+// same root as the .km file
+package genericmm;
+
+require kermeta
+require "GenericMM.ecore"
+
+modeltype GenericMT
+{
+  COne,
+  CTwo
+}

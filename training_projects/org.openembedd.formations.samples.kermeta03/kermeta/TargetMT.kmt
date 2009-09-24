@@ -1,0 +1,21 @@
+/* $Id:$ 
+ * Creation : April 17, 2009
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            vmahe
+ */
+ 
+//// TargetMT.kmt file ////
+package targetmm;
+
+require kermeta
+require "TargetMM.ecore"
+
+// we aim for it to correspond
+// referent model type
+modeltype TargetMT
+{
+  C1,
+  C2
+}

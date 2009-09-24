@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kermeta_language_structure:ModelingUnit xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:kermeta_language_structure="http://www.kermeta.org/kermeta/1_2_0//kermeta/language/structure" referencedModelingUnits="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#/">
+  <packages name="genericmm">
+    <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="COne">
+      <ownedAttribute name="name" type="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/language/structure/String"
+          upper="1" isComposite="true">
+        <containedType xsi:type="kermeta_language_structure:VoidType"/>
+      </ownedAttribute>
+      <ownedAttribute name="aSub" type="#//@packages.0/COne/aSub/@containedType.0"
+          upper="1" isComposite="true">
+        <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="#//@packages.0/CTwo"/>
+      </ownedAttribute>
+    </ownedTypeDefinition>
+    <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="CTwo">
+      <ownedAttribute name="weight" type="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/framework.km#//@packages.0/language/structure/Integer"
+          upper="1">
+        <containedType xsi:type="kermeta_language_structure:VoidType"/>
+      </ownedAttribute>
+    </ownedTypeDefinition>
+  </packages>
+  <requires uri="kermeta"/>
+</kermeta_language_structure:ModelingUnit>
