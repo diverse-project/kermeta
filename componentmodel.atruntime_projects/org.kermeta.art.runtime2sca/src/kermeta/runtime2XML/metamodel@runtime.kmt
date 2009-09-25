@@ -1,0 +1,158 @@
+/* 
+ * Creation : June 12, 2008
+ * Licence  : EPL 
+ * Copyright: IRISA / INRIA Rennes
+ * Authors  : Brice Morin, Equipe-Projet INRIA Triskell
+ *            bmorin[at]irisa.fr
+ *
+ */
+
+package art;
+
+
+require kermeta
+require "http://art"
+
+using kermeta::standard
+
+package instance{
+
+	aspect class Binding
+	{
+		inv wellFormedBinding is
+		do
+			serverInstance != void
+		end 
+	}
+
+	aspect class TransmissionBinding
+	{
+		inv wellFormedTransmissionBinding is 
+		do
+			/*stdio.writeln("")
+			stdio.errorln("server: "+self.serverInstance.name)
+			stdio.errorln("client: "+self.container.asType(ComponentInstance).name)
+			stdio.writeln(client.name)
+			stdio.writeln(server.name)
+			stdio.writeln(client.role)
+			stdio.writeln(server.role)
+			stdio.writeln(client.service.name)
+			stdio.writeln(server.service.name)*/
+        	(client != void).andThen{b | server != void}.andThen{b | client.role != server.role}
+        		.andThen{b | client.service == server.service}
+	    end
+	}
+
+	aspect class DelegationBinding
+	{
+		inv wellFormedDelegationBinding is 
+		do
+	        (exported != void).andThen{b | source != void}.andThen{b | exported.role == source.role}
+	        	.andThen{b | exported.service == source.service}
+    	end
+	}
+	
+	aspect class ComponentInstance
+	{
+		inv mandatoryClientPortBound  is 
+		do
+			self.type.port.select{p | not p.isOptional and p.role == "client"}
+				.forAll{p |
+					self.binding.exists{b | 
+						b.client == p
+					}
+			}
+		end
+			
+		operation getOperation() : oset Operation[0..*]
+			is abstract
+				
+		property readonly ~operation : oset Operation [0..*]
+        getter is 
+        do
+        	result := getOperation
+        end
+        
+        property readonly operationAsString : seq String [0..*]
+        getter is
+        do
+        	result := void //self.~operation.collect{o | o.container.asType(Service).name+"_"+o.name}
+        end
+        
+        property readonly dependentComponents : ComponentInstance [0..*]
+        getter is 
+        do
+        	var res : Set<ComponentInstance> init Set<ComponentInstance>.new
+        	var composite : CompositeInstance init self.superComponent
+        	if composite != void then
+        		if self.isInstanceOf(CompositeInstance) then
+        			res.addAll(self.asType(CompositeInstance).subComponent)
+        		end
+        		res.addAll(composite.subComponent.select{c | c.binding.exists{b | b.serverInstance == self}})
+        		composite.subComponent.select{c | c.isInstanceOf(CompositeInstance)}
+        			.select{c | c.asType(CompositeInstance).delegation.exists{d | d.serverInstance == self}}
+        	end
+        end
+        
+        property readonly getAllBindings : TransmissionBinding[0..*]
+        getter is
+        do
+        	var res : OrderedSet<TransmissionBinding> init OrderedSet<TransmissionBinding>.new
+        	res.addAll(self.binding)
+        	if (self.isInstanceOf(CompositeInstance)) then
+        		self.asType(CompositeInstance).subComponent.each{sub |
+        			res.addAll(sub.getAllBindings)
+        		}
+        	end
+        	result := res
+       end
+	}
+	
+	aspect class PrimitiveInstance
+	{
+		method getOperation() : oset Operation[0..*] is
+		do
+			result := OrderedSet<Operation>.new 
+			self.type.port.select{ p | p.role == "server" }.collect{p | p.service}
+			.each{s | result.addAll(s.~operation)}    
+		end
+		
+	}
+	
+	aspect class CompositeInstance
+	{
+		inv completeDelegationBindings is 
+		do
+			self.type.port.select{p | not p.isOptional}.forAll{p |
+				self.delegation.exists{b |
+					self.subComponent.exists{sub |
+						b.exported == p 
+					}
+				}
+			}
+		end
+		
+		method getOperation() : oset Operation[0..*] is
+		do
+			result := OrderedSet<Operation>.new
+			self.delegation.collect{d | d.serverInstance}.each{c | result.addAll(c.~operation)}
+		end
+	}
+}
+
+package type
+{
+	aspect class Service
+	{
+		inv validService is 
+		do
+			true
+			/*do
+				kermeta::io::FileIO.new.readTextFile("C:/work/dev/diva/diva/src/"+self.name.replace(".", "/")+".java")
+				true
+			rescue (e : kermeta::exceptions::FileNotFoundException)
+				false
+			end*/
+		end
+	}
+}

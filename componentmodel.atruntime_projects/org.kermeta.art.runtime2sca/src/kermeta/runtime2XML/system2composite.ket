@@ -1,14 +1,15 @@
 <%@ket
 package="sca"
-require="platform:/resource/org.kermeta.smartadapters/metamodel/domain/metamodel@runtime.kmt"
+require="platform:/resource/org.kermeta.art.Runtime2SCA/src/kermeta/runtime2XML/metamodel@runtime.kmt"
 using="art art::instance art::type"
 class="SCA"
 parameters="system:System"
 %>
 
-<sca:composite xmlns:sca="http://www.osoa.org/xmlns/sca/1.0" xmlns:sample="http://sample" xmlns="http://www.osoa.org/xmlns/sca/1.0" name="<%=system.root.name%>" targetNamespace="http://sample">
+<sca:composite xmlns:sca="http://www.osoa.org/xmlns/sca/1.0" name="<%=system.root.name%>" targetNamespace="http://sample">
 <%system.root.subComponent.each{ sub |%>
-	<sca:component name="<%=sub.name%>">
+	<sca:component constrainingType="eu.diva.<%=sub.name%>" name="<%=sub.name%>">
+	<sca:implementation.java class="eu.diva.<%=sub.name%>.<%=sub.name%>Impl"/>
 	<%sub.type.port.select{p | p.role == "server"}.each{p |%>
 		<sca:service name="<%=p.name%>">
 			<sca:interface.java interface="<%=p.service.name%>"/>

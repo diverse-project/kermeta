@@ -1,6 +1,6 @@
 package sca;
 require kermeta
-require "platform:/resource/org.kermeta.smartadapters/metamodel/domain/metamodel@runtime.kmt"
+require "platform:/resource/org.kermeta.art.Runtime2SCA/src/kermeta/runtime2XML/metamodel@runtime.kmt"
 using kermeta::standard
 using kermeta::utils
 using art
@@ -9,17 +9,19 @@ using art::type
 class SCA{
 operation generate(system:System):String is do
 var _res: StringBuffer init StringBuffer.new
-_res.append("\n<sca:composite xmlns:sca=\"http://www.osoa.org/xmlns/sca/1.0\" xmlns:sample=\"http://sample\" xmlns=\"http://www.osoa.org/xmlns/sca/1.0\" name=\"")
+_res.append("\n<sca:composite xmlns:sca=\"http://www.osoa.org/xmlns/sca/1.0\" name=\"")
 _res.append(system.root.name)
 _res.append("\" targetNamespace=\"http://sample\">\n")
 system.root.subComponent.each{ sub |
-_res.append("\t<sca:component name=\"")
+_res.append("\t<sca:component constrainingType=\"eu.diva.")
 _res.append(sub.name)
-_res.append("\">\n")
-
-/*stdio.errorln(sub.name.toString)
-sub.type.port.each{p | stdio.errorln(p.name+": "+p.role)}
-*/
+_res.append("\" name=\"")
+_res.append(sub.name)
+_res.append("\">\n\t<sca:implementation.java class=\"eu.diva.")
+_res.append(sub.name)
+_res.append(".")
+_res.append(sub.name)
+_res.append("Impl\"/>\n")
 sub.type.port.select{p | p.role == "server"}.each{p |
 _res.append("\t\t<sca:service name=\"")
 _res.append(p.name)
