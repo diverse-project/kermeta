@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sca:composite xmlns:sca="http://www.osoa.org/xmlns/sca/1.0" name="tutorial_type_diagram" targetNamespace="http://sample">
+  <sca:component constrainingType="eu.diva.ClientImpl_1" name="ClientImpl_1">
+    <sca:implementation.java class="eu.diva.ClientImpl_1.ClientImpl_1Impl"/>
+    <sca:reference name="defaultHelloWorld"/>
+    <sca:reference name="otherHelloWorlds"/>
+  </sca:component>
+  <sca:component constrainingType="eu.diva.ClientImpl_2" name="ClientImpl_2">
+    <sca:implementation.java class="eu.diva.ClientImpl_2.ClientImpl_2Impl"/>
+    <sca:reference name="defaultHelloWorld"/>
+    <sca:reference name="otherHelloWorlds"/>
+  </sca:component>
+  <sca:component constrainingType="eu.diva.ServerImpl_1" name="ServerImpl_1">
+    <sca:implementation.java class="eu.diva.ServerImpl_1.ServerImpl_1Impl"/>
+    <sca:service name="helloWorld">
+      <sca:interface.java interface="tutorial.diva.HelloWorld"/>
+    </sca:service>
+    <sca:reference name="voiceHelloWorld"/>
+  </sca:component>
+  <sca:component constrainingType="eu.diva.ServerImpl_2" name="ServerImpl_2">
+    <sca:implementation.java class="eu.diva.ServerImpl_2.ServerImpl_2Impl"/>
+    <sca:service name="helloWorld">
+      <sca:interface.java interface="tutorial.diva.HelloWorld"/>
+    </sca:service>
+    <sca:reference name="voiceHelloWorld"/>
+  </sca:component>
+  <sca:wire source="ClientImpl_1/defaultHelloWorld" target="ServerImpl_1/helloWorld"/>
+  <sca:wire source="ClientImpl_1/otherHelloWorlds" target="ServerImpl_2/helloWorld"/>
+  <sca:wire source="ClientImpl_2/defaultHelloWorld" target="ServerImpl_1/helloWorld"/>
+</sca:composite>
