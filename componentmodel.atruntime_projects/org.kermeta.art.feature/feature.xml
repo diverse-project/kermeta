@@ -83,4 +83,18 @@
          version="0.0.0"
          unpack="false"/>
 
+   <plugin
+         id="fr.inria.galaxy.sca2osgiFactory"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="eu.ict_diva.architecture.transfo.deployer"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
 </feature>
