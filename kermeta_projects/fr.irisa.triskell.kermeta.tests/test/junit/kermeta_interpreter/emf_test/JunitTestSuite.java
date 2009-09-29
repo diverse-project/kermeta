@@ -53,24 +53,7 @@ public class JunitTestSuite extends TestSuite {
 		generatedCall();
     }
     
-    public JunitTestSuite(java.lang.Class<?> theClass)
-    {
-        super();
-        initialize();
-		generatedCall();
-    }
-    public JunitTestSuite(java.lang.Class<?> theClass, String bla)
-    {
-        super();
-        initialize();
-		generatedCall();
-    }    
-	public JunitTestSuite(String arg0) {
-		super();
-		initialize();
-
-		generatedCall();
-	}
+    
 	
 	private void generatedCall(){
 		// do not modify this comment
