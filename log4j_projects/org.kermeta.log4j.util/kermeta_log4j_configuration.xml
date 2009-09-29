@@ -95,6 +95,9 @@
 	<logger name="LoaderPlugin">
 		<level value="DEBUG"/> 
 	</logger>
+	<logger name="KPM">
+		<level value="DEBUG"/> 
+	</logger>
 	<logger name="KPMPlugin">
 		<level value="DEBUG"/> 
 	</logger>
