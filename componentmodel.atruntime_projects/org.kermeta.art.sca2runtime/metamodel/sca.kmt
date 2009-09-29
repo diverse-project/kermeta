@@ -88,7 +88,7 @@ aspect class SCAtoART{
 				port.service := getService(r.interface.asType(JavaInterface))
 				
 				if r.multiplicity == void then
-					stdio.errorln("SCA multiplicities are not loaded... To be fixed by Didier ;-)")
+					//stdio.errorln("SCA multiplicities are not loaded... To be fixed by Didier ;-)")
 				end
 				if r.multiplicity == Multiplicity._01 or  r.multiplicity == Multiplicity._0N then
 					port.lower := 0
