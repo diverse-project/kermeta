@@ -42,10 +42,7 @@ public class JunitTestSuite extends TestCase {
 
 	static private IOPlugin ioPlugin;
 	
-	public JunitTestSuite(String arg0) {
-		super(arg0);	
-		initialize();
-	}
+
 	
 	private void initialize() {
 
