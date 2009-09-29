@@ -18,8 +18,8 @@ import org.eclipse.emf.common.util.EList;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link kermeta.language.structure.ParameterizedType#getTypeParamBinding <em>Type Param Binding</em>}</li>
  *   <li>{@link kermeta.language.structure.ParameterizedType#getTypeDefinition <em>Type Definition</em>}</li>
+ *   <li>{@link kermeta.language.structure.ParameterizedType#getTypeParamBinding <em>Type Param Binding</em>}</li>
  *   <li>{@link kermeta.language.structure.ParameterizedType#getVirtualTypeBinding <em>Virtual Type Binding</em>}</li>
  * </ul>
  * </p>
@@ -31,24 +31,6 @@ import org.eclipse.emf.common.util.EList;
  * @generated
  */
 public interface ParameterizedType extends Type {
-	/**
-	 * Returns the value of the '<em><b>Type Param Binding</b></em>' containment reference list.
-	 * The list contents are of type {@link kermeta.language.structure.TypeVariableBinding}.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Type Param Binding</em>' containment reference list isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Type Param Binding</em>' containment reference list.
-	 * @see kermeta.language.structure.StructurePackage#getParameterizedType_TypeParamBinding()
-	 * @model containment="true" resolveProxies="true"
-	 *        annotation="kermeta ecore='true'"
-	 *        annotation="kermeta documentation='Bindings between type variables and provided types '"
-	 * @generated
-	 */
-	EList<TypeVariableBinding> getTypeParamBinding();
-
 	/**
 	 * Returns the value of the '<em><b>Type Definition</b></em>' reference.
 	 * <!-- begin-user-doc -->
@@ -76,6 +58,24 @@ public interface ParameterizedType extends Type {
 	 * @generated
 	 */
 	void setTypeDefinition(GenericTypeDefinition value);
+
+	/**
+	 * Returns the value of the '<em><b>Type Param Binding</b></em>' containment reference list.
+	 * The list contents are of type {@link kermeta.language.structure.TypeVariableBinding}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Type Param Binding</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Type Param Binding</em>' containment reference list.
+	 * @see kermeta.language.structure.StructurePackage#getParameterizedType_TypeParamBinding()
+	 * @model containment="true" resolveProxies="true"
+	 *        annotation="kermeta ecore='true'"
+	 *        annotation="kermeta documentation='Bindings between type variables and provided types '"
+	 * @generated
+	 */
+	EList<TypeVariableBinding> getTypeParamBinding();
 
 	/**
 	 * Returns the value of the '<em><b>Virtual Type Binding</b></em>' containment reference list.

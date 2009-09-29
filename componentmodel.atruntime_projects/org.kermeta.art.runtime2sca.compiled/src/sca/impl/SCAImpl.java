@@ -83,20 +83,24 @@ public class SCAImpl extends ObjectImpl implements SCA {
 
 					_res.append("\t<sca:component constrainingType=\"eu.diva.");
 
-					_res.append(sub_lbdExp95.getName());
+					_res.append(kermeta.standard.helper.StringWrapper
+							.cleanName(sub_lbdExp95.getName()));
 
 					_res.append("\" name=\"");
 
-					_res.append(sub_lbdExp95.getName());
+					_res.append(kermeta.standard.helper.StringWrapper
+							.cleanName(sub_lbdExp95.getName()));
 
 					_res
 							.append("\">\n\t<sca:implementation.java class=\"eu.diva.");
 
-					_res.append(sub_lbdExp95.getName());
+					_res.append(kermeta.standard.helper.StringWrapper
+							.cleanName(sub_lbdExp95.getName()));
 
 					_res.append(".");
 
-					_res.append(sub_lbdExp95.getName());
+					_res.append(kermeta.standard.helper.StringWrapper
+							.cleanName(sub_lbdExp95.getName()));
 
 					_res.append("Impl\"/>\n");
 

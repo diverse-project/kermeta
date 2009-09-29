@@ -75,6 +75,8 @@ public class StandardFactoryImpl extends EFactoryImpl implements
 	@Override
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
+		case StandardPackage.STRING:
+			return createString();
 		case StandardPackage.UNKNOWN_JAVA_OBJECT:
 			return createUnknownJavaObject();
 		case StandardPackage.VOID:
@@ -89,8 +91,6 @@ public class StandardFactoryImpl extends EFactoryImpl implements
 			return createReal();
 		case StandardPackage.CHARACTER:
 			return createCharacter();
-		case StandardPackage.STRING:
-			return createString();
 		case StandardPackage.SET:
 			return createSet();
 		case StandardPackage.BAG:
@@ -115,6 +115,8 @@ public class StandardFactoryImpl extends EFactoryImpl implements
 	@Override
 	public Object createFromString(EDataType eDataType, String initialValue) {
 		switch (eDataType.getClassifierID()) {
+		case StandardPackage.JAVA_STRING:
+			return createJavaStringFromString(eDataType, initialValue);
 		case StandardPackage.JAVA_BOOLEAN:
 			return createJavaBooleanFromString(eDataType, initialValue);
 		case StandardPackage.JAVA_NUMERIC:
@@ -125,8 +127,6 @@ public class StandardFactoryImpl extends EFactoryImpl implements
 			return createJavaRealFromString(eDataType, initialValue);
 		case StandardPackage.JAVA_CHARACTER:
 			return createJavaCharacterFromString(eDataType, initialValue);
-		case StandardPackage.JAVA_STRING:
-			return createJavaStringFromString(eDataType, initialValue);
 		case StandardPackage.UNLIMITED_NATURAL:
 			return createUnlimitedNaturalFromString(eDataType, initialValue);
 		case StandardPackage.OBJECT:
@@ -154,6 +154,8 @@ public class StandardFactoryImpl extends EFactoryImpl implements
 	@Override
 	public String convertToString(EDataType eDataType, Object instanceValue) {
 		switch (eDataType.getClassifierID()) {
+		case StandardPackage.JAVA_STRING:
+			return convertJavaStringToString(eDataType, instanceValue);
 		case StandardPackage.JAVA_BOOLEAN:
 			return convertJavaBooleanToString(eDataType, instanceValue);
 		case StandardPackage.JAVA_NUMERIC:
@@ -164,8 +166,6 @@ public class StandardFactoryImpl extends EFactoryImpl implements
 			return convertJavaRealToString(eDataType, instanceValue);
 		case StandardPackage.JAVA_CHARACTER:
 			return convertJavaCharacterToString(eDataType, instanceValue);
-		case StandardPackage.JAVA_STRING:
-			return convertJavaStringToString(eDataType, instanceValue);
 		case StandardPackage.UNLIMITED_NATURAL:
 			return convertUnlimitedNaturalToString(eDataType, instanceValue);
 		case StandardPackage.OBJECT:
@@ -183,6 +183,16 @@ public class StandardFactoryImpl extends EFactoryImpl implements
 			throw new IllegalArgumentException("The datatype '"
 					+ eDataType.getName() + "' is not a valid classifier");
 		}
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public kermeta.standard.String createString() {
+		StringImpl string = new StringImpl();
+		return string;
 	}
 
 	/**
@@ -260,16 +270,6 @@ public class StandardFactoryImpl extends EFactoryImpl implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public kermeta.standard.String createString() {
-		StringImpl string = new StringImpl();
-		return string;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public <G> Set<G> createSet() {
 		SetImpl<G> set = new SetImpl<G>();
 		return set;
@@ -313,6 +313,26 @@ public class StandardFactoryImpl extends EFactoryImpl implements
 	public <G> Iterator<G> createIterator() {
 		IteratorImpl<G> iterator = new IteratorImpl<G>();
 		return iterator;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String createJavaStringFromString(EDataType eDataType,
+			String initialValue) {
+		return (String) super.createFromString(eDataType, initialValue);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String convertJavaStringToString(EDataType eDataType,
+			Object instanceValue) {
+		return super.convertToString(eDataType, instanceValue);
 	}
 
 	/**
@@ -411,26 +431,6 @@ public class StandardFactoryImpl extends EFactoryImpl implements
 	 * @generated
 	 */
 	public String convertJavaCharacterToString(EDataType eDataType,
-			Object instanceValue) {
-		return super.convertToString(eDataType, instanceValue);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public String createJavaStringFromString(EDataType eDataType,
-			String initialValue) {
-		return (String) super.createFromString(eDataType, initialValue);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public String convertJavaStringToString(EDataType eDataType,
 			Object instanceValue) {
 		return super.convertToString(eDataType, instanceValue);
 	}

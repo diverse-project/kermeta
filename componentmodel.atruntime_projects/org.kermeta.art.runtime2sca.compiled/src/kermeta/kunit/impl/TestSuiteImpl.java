@@ -91,7 +91,7 @@ public class TestSuiteImpl extends TestImpl implements TestSuite {
 		//PreConditions Checking
 		{
 			if (org.kermeta.compil.runtime.ExecutionContext.getInstance()
-					.mustBeChecked("pre__3362103__testCaseClassIsATestCase")) {
+					.mustBeChecked("pre__6287198__testCaseClassIsATestCase")) {
 				java.lang.Boolean result_pre = false;
 
 				result_pre = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil

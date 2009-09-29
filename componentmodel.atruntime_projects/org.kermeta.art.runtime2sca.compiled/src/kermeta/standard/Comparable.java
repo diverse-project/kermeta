@@ -39,23 +39,23 @@ public interface Comparable extends kermeta.language.structure.Object {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @model dataType="kermeta.standard.JavaBoolean"
-	 *        annotation="kermeta RecopyInValueTypes='true'"
-	 *        annotation="kermeta documentation='/**\n\t * return true if self > other\n\t \052/'"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='\njava.lang.Boolean result = null;\n\n\tresult = kermeta.standard.helper.IntegerWrapper.isGreater(this.compareTo(other), 0);\n\nreturn result;\n'"
-	 * @generated
-	 */
-	Boolean isGreater(kermeta.language.structure.Object other);
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @model dataType="kermeta.standard.JavaBoolean"
 	 *        annotation="kermeta documentation='/**\n\t * return true if self <= other\n\t \052/'"
 	 *        annotation="kermeta RecopyInValueTypes='true'"
 	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='\njava.lang.Boolean result = null;\n\n\tresult = kermeta.standard.helper.IntegerWrapper.isLowerOrEqual(this.compareTo(other), 0);\n\nreturn result;\n'"
 	 * @generated
 	 */
 	Boolean isLowerOrEqual(kermeta.language.structure.Object other);
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model dataType="kermeta.standard.JavaBoolean"
+	 *        annotation="kermeta RecopyInValueTypes='true'"
+	 *        annotation="kermeta documentation='/**\n\t * return true if self > other\n\t \052/'"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='\njava.lang.Boolean result = null;\n\n\tresult = kermeta.standard.helper.IntegerWrapper.isGreater(this.compareTo(other), 0);\n\nreturn result;\n'"
+	 * @generated
+	 */
+	Boolean isGreater(kermeta.language.structure.Object other);
 
 	/**
 	 * <!-- begin-user-doc -->

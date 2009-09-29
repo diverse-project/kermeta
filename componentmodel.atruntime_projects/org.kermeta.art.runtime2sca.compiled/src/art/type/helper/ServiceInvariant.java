@@ -10,7 +10,7 @@ public class ServiceInvariant {
 	 *
 	 * @generated
 	 */
-	public static java.lang.Boolean checkInvariant_1081621__validService(
+	public static java.lang.Boolean checkInvariant_18986099__validService(
 
 	art.type.Service self
 

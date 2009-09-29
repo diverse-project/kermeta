@@ -10,7 +10,7 @@ public class TransmissionBindingInvariant {
 	 *
 	 * @generated
 	 */
-	public static java.lang.Boolean checkInvariant_4823066__wellFormedTransmissionBinding(
+	public static java.lang.Boolean checkInvariant_2013280__wellFormedTransmissionBinding(
 
 	art.instance.TransmissionBinding self
 

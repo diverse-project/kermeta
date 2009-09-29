@@ -494,6 +494,14 @@ public class StructurePackageImpl extends EPackageImpl implements
 				.getEPackage(KermetaPackage.eNS_URI) instanceof KermetaPackageImpl ? EPackage.Registry.INSTANCE
 				.getEPackage(KermetaPackage.eNS_URI)
 				: KermetaPackage.eINSTANCE);
+		StandardPackageImpl theStandardPackage = (StandardPackageImpl) (EPackage.Registry.INSTANCE
+				.getEPackage(StandardPackage.eNS_URI) instanceof StandardPackageImpl ? EPackage.Registry.INSTANCE
+				.getEPackage(StandardPackage.eNS_URI)
+				: StandardPackage.eINSTANCE);
+		XmltypePackageImpl theXmltypePackage = (XmltypePackageImpl) (EPackage.Registry.INSTANCE
+				.getEPackage(XmltypePackage.eNS_URI) instanceof XmltypePackageImpl ? EPackage.Registry.INSTANCE
+				.getEPackage(XmltypePackage.eNS_URI)
+				: XmltypePackage.eINSTANCE);
 		LanguagePackageImpl theLanguagePackage = (LanguagePackageImpl) (EPackage.Registry.INSTANCE
 				.getEPackage(LanguagePackage.eNS_URI) instanceof LanguagePackageImpl ? EPackage.Registry.INSTANCE
 				.getEPackage(LanguagePackage.eNS_URI)
@@ -502,18 +510,10 @@ public class StructurePackageImpl extends EPackageImpl implements
 				.getEPackage(BehaviorPackage.eNS_URI) instanceof BehaviorPackageImpl ? EPackage.Registry.INSTANCE
 				.getEPackage(BehaviorPackage.eNS_URI)
 				: BehaviorPackage.eINSTANCE);
-		XmltypePackageImpl theXmltypePackage = (XmltypePackageImpl) (EPackage.Registry.INSTANCE
-				.getEPackage(XmltypePackage.eNS_URI) instanceof XmltypePackageImpl ? EPackage.Registry.INSTANCE
-				.getEPackage(XmltypePackage.eNS_URI)
-				: XmltypePackage.eINSTANCE);
 		InterpreterPackageImpl theInterpreterPackage = (InterpreterPackageImpl) (EPackage.Registry.INSTANCE
 				.getEPackage(InterpreterPackage.eNS_URI) instanceof InterpreterPackageImpl ? EPackage.Registry.INSTANCE
 				.getEPackage(InterpreterPackage.eNS_URI)
 				: InterpreterPackage.eINSTANCE);
-		StandardPackageImpl theStandardPackage = (StandardPackageImpl) (EPackage.Registry.INSTANCE
-				.getEPackage(StandardPackage.eNS_URI) instanceof StandardPackageImpl ? EPackage.Registry.INSTANCE
-				.getEPackage(StandardPackage.eNS_URI)
-				: StandardPackage.eINSTANCE);
 		IoPackageImpl theIoPackage = (IoPackageImpl) (EPackage.Registry.INSTANCE
 				.getEPackage(IoPackage.eNS_URI) instanceof IoPackageImpl ? EPackage.Registry.INSTANCE
 				.getEPackage(IoPackage.eNS_URI)
@@ -538,14 +538,14 @@ public class StructurePackageImpl extends EPackageImpl implements
 				.getEPackage(EcorePackage.eNS_URI) instanceof EcorePackageImpl ? EPackage.Registry.INSTANCE
 				.getEPackage(EcorePackage.eNS_URI)
 				: EcorePackage.eINSTANCE);
-		Runtime2SCAPackageImpl theRuntime2SCAPackage = (Runtime2SCAPackageImpl) (EPackage.Registry.INSTANCE
-				.getEPackage(Runtime2SCAPackage.eNS_URI) instanceof Runtime2SCAPackageImpl ? EPackage.Registry.INSTANCE
-				.getEPackage(Runtime2SCAPackage.eNS_URI)
-				: Runtime2SCAPackage.eINSTANCE);
 		ScaPackageImpl theScaPackage = (ScaPackageImpl) (EPackage.Registry.INSTANCE
 				.getEPackage(ScaPackage.eNS_URI) instanceof ScaPackageImpl ? EPackage.Registry.INSTANCE
 				.getEPackage(ScaPackage.eNS_URI)
 				: ScaPackage.eINSTANCE);
+		Runtime2SCAPackageImpl theRuntime2SCAPackage = (Runtime2SCAPackageImpl) (EPackage.Registry.INSTANCE
+				.getEPackage(Runtime2SCAPackage.eNS_URI) instanceof Runtime2SCAPackageImpl ? EPackage.Registry.INSTANCE
+				.getEPackage(Runtime2SCAPackage.eNS_URI)
+				: Runtime2SCAPackage.eINSTANCE);
 		ArtPackageImpl theArtPackage = (ArtPackageImpl) (EPackage.Registry.INSTANCE
 				.getEPackage(ArtPackage.eNS_URI) instanceof ArtPackageImpl ? EPackage.Registry.INSTANCE
 				.getEPackage(ArtPackage.eNS_URI)
@@ -566,19 +566,19 @@ public class StructurePackageImpl extends EPackageImpl implements
 		// Create package meta-data objects
 		theStructurePackage.createPackageContents();
 		theKermetaPackage.createPackageContents();
+		theStandardPackage.createPackageContents();
+		theXmltypePackage.createPackageContents();
 		theLanguagePackage.createPackageContents();
 		theBehaviorPackage.createPackageContents();
-		theXmltypePackage.createPackageContents();
 		theInterpreterPackage.createPackageContents();
-		theStandardPackage.createPackageContents();
 		theIoPackage.createPackageContents();
 		theExceptionsPackage.createPackageContents();
 		thePersistencePackage.createPackageContents();
 		theKunitPackage.createPackageContents();
 		theUtilsPackage.createPackageContents();
 		theEcorePackage.createPackageContents();
-		theRuntime2SCAPackage.createPackageContents();
 		theScaPackage.createPackageContents();
+		theRuntime2SCAPackage.createPackageContents();
 		theArtPackage.createPackageContents();
 		theInstancePackage.createPackageContents();
 		theTypePackage.createPackageContents();
@@ -587,19 +587,19 @@ public class StructurePackageImpl extends EPackageImpl implements
 		// Initialize created meta-data
 		theStructurePackage.initializePackageContents();
 		theKermetaPackage.initializePackageContents();
+		theStandardPackage.initializePackageContents();
+		theXmltypePackage.initializePackageContents();
 		theLanguagePackage.initializePackageContents();
 		theBehaviorPackage.initializePackageContents();
-		theXmltypePackage.initializePackageContents();
 		theInterpreterPackage.initializePackageContents();
-		theStandardPackage.initializePackageContents();
 		theIoPackage.initializePackageContents();
 		theExceptionsPackage.initializePackageContents();
 		thePersistencePackage.initializePackageContents();
 		theKunitPackage.initializePackageContents();
 		theUtilsPackage.initializePackageContents();
 		theEcorePackage.initializePackageContents();
-		theRuntime2SCAPackage.initializePackageContents();
 		theScaPackage.initializePackageContents();
+		theRuntime2SCAPackage.initializePackageContents();
 		theArtPackage.initializePackageContents();
 		theInstancePackage.initializePackageContents();
 		theTypePackage.initializePackageContents();
@@ -1407,7 +1407,7 @@ public class StructurePackageImpl extends EPackageImpl implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getParameterizedType_TypeParamBinding() {
+	public EReference getParameterizedType_TypeDefinition() {
 		return (EReference) parameterizedTypeEClass.getEStructuralFeatures()
 				.get(0);
 	}
@@ -1417,7 +1417,7 @@ public class StructurePackageImpl extends EPackageImpl implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getParameterizedType_TypeDefinition() {
+	public EReference getParameterizedType_TypeParamBinding() {
 		return (EReference) parameterizedTypeEClass.getEStructuralFeatures()
 				.get(1);
 	}
@@ -1887,9 +1887,9 @@ public class StructurePackageImpl extends EPackageImpl implements
 
 		parameterizedTypeEClass = createEClass(PARAMETERIZED_TYPE);
 		createEReference(parameterizedTypeEClass,
-				PARAMETERIZED_TYPE__TYPE_PARAM_BINDING);
-		createEReference(parameterizedTypeEClass,
 				PARAMETERIZED_TYPE__TYPE_DEFINITION);
+		createEReference(parameterizedTypeEClass,
+				PARAMETERIZED_TYPE__TYPE_PARAM_BINDING);
 		createEReference(parameterizedTypeEClass,
 				PARAMETERIZED_TYPE__VIRTUAL_TYPE_BINDING);
 
@@ -2057,9 +2057,6 @@ public class StructurePackageImpl extends EPackageImpl implements
 				!IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES,
 				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		addEOperation(objectEClass, theStandardPackage.getJavaBoolean(),
-				"isVoid", 0, 1, IS_UNIQUE, IS_ORDERED);
-
 		EOperation op = addEOperation(objectEClass, theStandardPackage
 				.getJavaBoolean(), "isInstanceOf", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, this.getType(), "type", 0, 1, IS_UNIQUE, IS_ORDERED);
@@ -2067,13 +2064,22 @@ public class StructurePackageImpl extends EPackageImpl implements
 		addEOperation(objectEClass, this.getObject(), "container", 0, 1,
 				IS_UNIQUE, IS_ORDERED);
 
+		addEOperation(objectEClass, theStandardPackage.getJavaInteger(), "oid",
+				0, 1, IS_UNIQUE, IS_ORDERED);
+
+		addEOperation(objectEClass, this.getClass_(), "getMetaClass", 0, 1,
+				IS_UNIQUE, IS_ORDERED);
+
+		addEOperation(objectEClass, theStandardPackage.getJavaString(),
+				"toString", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		addEOperation(objectEClass, theStandardPackage.getJavaBoolean(),
+				"isVoid", 0, 1, IS_UNIQUE, IS_ORDERED);
+
 		op = addEOperation(objectEClass, theStandardPackage.getJavaBoolean(),
 				"equals", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, this.getObject(), "element", 0, 1, IS_UNIQUE,
 				IS_ORDERED);
-
-		addEOperation(objectEClass, this.getClass_(), "getMetaClass", 0, 1,
-				IS_UNIQUE, IS_ORDERED);
 
 		op = addEOperation(objectEClass, theStandardPackage.getJavaBoolean(),
 				"isNotEqual", 0, 1, IS_UNIQUE, IS_ORDERED);
@@ -2084,23 +2090,17 @@ public class StructurePackageImpl extends EPackageImpl implements
 				IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, this.getClass_(), "type", 0, 1, IS_UNIQUE, IS_ORDERED);
 
-		addEOperation(objectEClass, theStandardPackage.getJavaInteger(), "oid",
-				0, 1, IS_UNIQUE, IS_ORDERED);
-
-		addEOperation(objectEClass, theStandardPackage.getJavaString(),
-				"toString", 0, 1, IS_UNIQUE, IS_ORDERED);
-
 		op = addEOperation(objectEClass, theStandardPackage.getJavaBoolean(),
 				"isKindOf", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, this.getClass_(), "cl", 0, 1, IS_UNIQUE, IS_ORDERED);
 
-		op = addEOperation(objectEClass, this.getObject(), "get", 0, 1,
-				IS_UNIQUE, IS_ORDERED);
+		op = addEOperation(objectEClass, theStandardPackage.getJavaBoolean(),
+				"isSet", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, this.getProperty(), "property", 0, 1, IS_UNIQUE,
 				IS_ORDERED);
 
-		op = addEOperation(objectEClass, theStandardPackage.getJavaBoolean(),
-				"isSet", 0, 1, IS_UNIQUE, IS_ORDERED);
+		op = addEOperation(objectEClass, this.getObject(), "get", 0, 1,
+				IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, this.getProperty(), "property", 0, 1, IS_UNIQUE,
 				IS_ORDERED);
 
@@ -2600,15 +2600,15 @@ public class StructurePackageImpl extends EPackageImpl implements
 		initEClass(parameterizedTypeEClass, ParameterizedType.class,
 				"ParameterizedType", IS_ABSTRACT, !IS_INTERFACE,
 				IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getParameterizedType_TypeParamBinding(), this
-				.getTypeVariableBinding(), null, "typeParamBinding", null, 0,
-				-1, ParameterizedType.class, !IS_TRANSIENT, !IS_VOLATILE,
-				IS_CHANGEABLE, IS_COMPOSITE, IS_RESOLVE_PROXIES,
-				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getParameterizedType_TypeDefinition(), this
 				.getGenericTypeDefinition(), null, "typeDefinition", null, 1,
 				1, ParameterizedType.class, !IS_TRANSIENT, !IS_VOLATILE,
 				IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES,
+				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getParameterizedType_TypeParamBinding(), this
+				.getTypeVariableBinding(), null, "typeParamBinding", null, 0,
+				-1, ParameterizedType.class, !IS_TRANSIENT, !IS_VOLATILE,
+				IS_CHANGEABLE, IS_COMPOSITE, IS_RESOLVE_PROXIES,
 				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getParameterizedType_VirtualTypeBinding(), this
 				.getTypeVariableBinding(), null, "virtualTypeBinding", null, 0,
@@ -2792,93 +2792,93 @@ public class StructurePackageImpl extends EPackageImpl implements
 				new String[] {
 						"documentation",
 						"Object definition: all entities of Kermeta metamodel explicitly inherit from Object" });
-		addAnnotation(
-				objectEClass.getEOperations().get(0),
-				source,
-				new String[] { "documentation",
-						"/**\n\t * Returns a Boolean stating whether the Object is Void\n\t */" });
 		addAnnotation(objectEClass.getEOperations().get(0), source,
 				new String[] { "RecopyInValueTypes", "true" });
-		addAnnotation(objectEClass.getEOperations().get(1), source,
-				new String[] { "RecopyInValueTypes", "true" });
 		addAnnotation(
-				objectEClass.getEOperations().get(1),
+				objectEClass.getEOperations().get(0),
 				source,
 				new String[] {
 						"documentation",
 						"/**\n\t * Returns a Boolean stating whether the current Object conforms to given Type\n\t * This means: is this object an instance of this type, or is it an instance of its subtype \n\t */" });
 		addAnnotation(
-				objectEClass.getEOperations().get(2),
+				objectEClass.getEOperations().get(1),
 				source,
 				new String[] {
 						"documentation",
 						"/**\n\t * Returns the Object that contains current Object, void if the Object has\n\t * no container\n\t */" });
 		addAnnotation(
-				objectEClass.getEOperations().get(2),
+				objectEClass.getEOperations().get(1),
 				source,
 				new String[] {
 						"WrapperValueTypeReturnType",
 						"java.lang.String=kermeta.language.structure.Object java.lang.Boolean=kermeta.language.structure.Object java.lang.Integer=kermeta.language.structure.Object java.lang.Double=kermeta.language.structure.Object java.lang.Character=kermeta.language.structure.Object java.lang.Number=kermeta.language.structure.Object" });
+		addAnnotation(objectEClass.getEOperations().get(1), source,
+				new String[] { "RecopyInValueTypes", "true" });
 		addAnnotation(objectEClass.getEOperations().get(2), source,
 				new String[] { "RecopyInValueTypes", "true" });
-		addAnnotation(objectEClass.getEOperations().get(3), source,
-				new String[] { "RecopyInValueTypes", "true" });
+		addAnnotation(
+				objectEClass.getEOperations().get(2),
+				source,
+				new String[] { "documentation",
+						"/**\n\t * Returns the unique Oid of the Object\n\t */" });
 		addAnnotation(
 				objectEClass.getEOperations().get(3),
 				source,
 				new String[] {
 						"documentation",
-						"/**\n\t * semantic equality,\n\t * if you wish to test for object identity you need to use the method oid\n\t * ex: x.oid == y.oid\n\t * by default, (ie. if not overloaded), the equals method for class Object implements \n\t * the most discriminating possible equivalence relation on objects; that is, for any non-null \n\t * reference values x and y, this method returns true if and only if x and y refer to the same \n\t * object (x.oid == y.oid has the value true). \n\t *\n\t * note1: the operator == is mapped to this \n\t * note2: overloading this operation have some impact on the behavior on collection and hashtable that rely on it\n\t */" });
+						"/**\n\t * Returns the Class object that is the metaclass of current Object\n\t */" });
+		addAnnotation(objectEClass.getEOperations().get(3), source,
+				new String[] { "RecopyInValueTypes", "true" });
+		addAnnotation(objectEClass.getEOperations().get(4), source,
+				new String[] { "RecopyInValueTypes", "true" });
 		addAnnotation(
 				objectEClass.getEOperations().get(4),
 				source,
 				new String[] {
 						"documentation",
-						"/**\n\t * Returns the Class object that is the metaclass of current Object\n\t */" });
-		addAnnotation(objectEClass.getEOperations().get(4), source,
-				new String[] { "RecopyInValueTypes", "true" });
-		addAnnotation(objectEClass.getEOperations().get(5), source,
-				new String[] { "RecopyInValueTypes", "true" });
+						"/**\n \t * Implements Object.toString()\n \t * Returns a String of form [qn:oid] where \'qn\' is the qualified name of\n \t * the object type, and oid the unique ID of the object\n \t */" });
 		addAnnotation(
 				objectEClass.getEOperations().get(5),
 				source,
 				new String[] { "documentation",
-						"/**\n\t * See kermeta::language::structure::Object.equals(Object)\n\t */" });
+						"/**\n\t * Returns a Boolean stating whether the Object is Void\n\t */" });
+		addAnnotation(objectEClass.getEOperations().get(5), source,
+				new String[] { "RecopyInValueTypes", "true" });
+		addAnnotation(objectEClass.getEOperations().get(6), source,
+				new String[] { "RecopyInValueTypes", "true" });
 		addAnnotation(
 				objectEClass.getEOperations().get(6),
 				source,
 				new String[] {
 						"documentation",
-						"/**\n\t * Implementation of OCL like cast. It returns self if the object object conforms to the type given as parameter.\n\t */" });
-		addAnnotation(
-				objectEClass.getEOperations().get(6),
-				source,
-				new String[] {
-						"WrapperValueTypeReturnType",
-						"java.lang.String=kermeta.language.structure.Object java.lang.Boolean=kermeta.language.structure.Object java.lang.Integer=kermeta.language.structure.Object java.lang.Double=kermeta.language.structure.Object java.lang.Character=kermeta.language.structure.Object java.lang.Number=kermeta.language.structure.Object" });
-		addAnnotation(
-				objectEClass.getEOperations().get(6),
-				source,
-				new String[] {
-						"WrapperValueTypeSelfExpression",
-						"java.lang.String=kermeta.language.structure.Object java.lang.Boolean=kermeta.language.structure.Object java.lang.Integer=kermeta.language.structure.Object java.lang.Double=kermeta.language.structure.Object java.lang.Character=kermeta.language.structure.Object java.lang.Number=kermeta.language.structure.Object" });
-		addAnnotation(objectEClass.getEOperations().get(6), source,
-				new String[] { "RecopyInValueTypes", "true" });
+						"/**\n\t * semantic equality,\n\t * if you wish to test for object identity you need to use the method oid\n\t * ex: x.oid == y.oid\n\t * by default, (ie. if not overloaded), the equals method for class Object implements \n\t * the most discriminating possible equivalence relation on objects; that is, for any non-null \n\t * reference values x and y, this method returns true if and only if x and y refer to the same \n\t * object (x.oid == y.oid has the value true). \n\t *\n\t * note1: the operator == is mapped to this \n\t * note2: overloading this operation have some impact on the behavior on collection and hashtable that rely on it\n\t */" });
 		addAnnotation(objectEClass.getEOperations().get(7), source,
 				new String[] { "RecopyInValueTypes", "true" });
 		addAnnotation(
 				objectEClass.getEOperations().get(7),
 				source,
 				new String[] { "documentation",
-						"/**\n\t * Returns the unique Oid of the Object\n\t */" });
-		addAnnotation(objectEClass.getEOperations().get(8), source,
-				new String[] { "RecopyInValueTypes", "true" });
+						"/**\n\t * See kermeta::language::structure::Object.equals(Object)\n\t */" });
 		addAnnotation(
 				objectEClass.getEOperations().get(8),
 				source,
 				new String[] {
 						"documentation",
-						"/**\n \t * Implements Object.toString()\n \t * Returns a String of form [qn:oid] where \'qn\' is the qualified name of\n \t * the object type, and oid the unique ID of the object\n \t */" });
+						"/**\n\t * Implementation of OCL like cast. It returns self if the object object conforms to the type given as parameter.\n\t */" });
+		addAnnotation(
+				objectEClass.getEOperations().get(8),
+				source,
+				new String[] {
+						"WrapperValueTypeReturnType",
+						"java.lang.String=kermeta.language.structure.Object java.lang.Boolean=kermeta.language.structure.Object java.lang.Integer=kermeta.language.structure.Object java.lang.Double=kermeta.language.structure.Object java.lang.Character=kermeta.language.structure.Object java.lang.Number=kermeta.language.structure.Object" });
+		addAnnotation(
+				objectEClass.getEOperations().get(8),
+				source,
+				new String[] {
+						"WrapperValueTypeSelfExpression",
+						"java.lang.String=kermeta.language.structure.Object java.lang.Boolean=kermeta.language.structure.Object java.lang.Integer=kermeta.language.structure.Object java.lang.Double=kermeta.language.structure.Object java.lang.Character=kermeta.language.structure.Object java.lang.Number=kermeta.language.structure.Object" });
+		addAnnotation(objectEClass.getEOperations().get(8), source,
+				new String[] { "RecopyInValueTypes", "true" });
 		addAnnotation(
 				objectEClass.getEOperations().get(9),
 				source,
@@ -2891,24 +2891,24 @@ public class StructurePackageImpl extends EPackageImpl implements
 				objectEClass.getEOperations().get(10),
 				source,
 				new String[] {
-						"WrapperValueTypeReturnType",
-						"java.lang.String=kermeta.language.structure.Object java.lang.Boolean=kermeta.language.structure.Object java.lang.Integer=kermeta.language.structure.Object java.lang.Double=kermeta.language.structure.Object java.lang.Character=kermeta.language.structure.Object java.lang.Number=kermeta.language.structure.Object" });
+						"documentation",
+						"/**\n\t * True if the <code>~property</code> of the object has been set\n\t */" });
 		addAnnotation(objectEClass.getEOperations().get(10), source,
 				new String[] { "RecopyInValueTypes", "true" });
 		addAnnotation(
-				objectEClass.getEOperations().get(10),
+				objectEClass.getEOperations().get(11),
 				source,
 				new String[] {
-						"documentation",
-						"/** \n\t * Returns the instances of the given property for this Object.\n\t *\n\t * Example : \n\t * <pre>\n\t * class A { reference attr : String }\n\t * </pre>\n\t * Using A :\n\t * <pre>\n\t * operation getAProp() is do\n\t *    var a : A\n\t *    var s : String\n\t *    var the_attr : Property init self.getMetaClass.ownedAttribute.one\n\t *    s ?= a.get(the_attr)\n\t * end\n\t * </pre>\n\t * The user has to cast\n\t * the result of this method according to the type and the upper multiplicity\n\t * of this property. If upper multiplicity > 1, than the effective type of the \n\t * result is a Sequence<ThePropertyName>. Otherwise, the type corresponds to \n\t * the name of the given Property (i.e the type of the property instance).\n\t */" });
+						"WrapperValueTypeReturnType",
+						"java.lang.String=kermeta.language.structure.Object java.lang.Boolean=kermeta.language.structure.Object java.lang.Integer=kermeta.language.structure.Object java.lang.Double=kermeta.language.structure.Object java.lang.Character=kermeta.language.structure.Object java.lang.Number=kermeta.language.structure.Object" });
+		addAnnotation(objectEClass.getEOperations().get(11), source,
+				new String[] { "RecopyInValueTypes", "true" });
 		addAnnotation(
 				objectEClass.getEOperations().get(11),
 				source,
 				new String[] {
 						"documentation",
-						"/**\n\t * True if the <code>~property</code> of the object has been set\n\t */" });
-		addAnnotation(objectEClass.getEOperations().get(11), source,
-				new String[] { "RecopyInValueTypes", "true" });
+						"/** \n\t * Returns the instances of the given property for this Object.\n\t *\n\t * Example : \n\t * <pre>\n\t * class A { reference attr : String }\n\t * </pre>\n\t * Using A :\n\t * <pre>\n\t * operation getAProp() is do\n\t *    var a : A\n\t *    var s : String\n\t *    var the_attr : Property init self.getMetaClass.ownedAttribute.one\n\t *    s ?= a.get(the_attr)\n\t * end\n\t * </pre>\n\t * The user has to cast\n\t * the result of this method according to the type and the upper multiplicity\n\t * of this property. If upper multiplicity > 1, than the effective type of the \n\t * result is a Sequence<ThePropertyName>. Otherwise, the type corresponds to \n\t * the name of the given Property (i.e the type of the property instance).\n\t */" });
 		addAnnotation(objectEClass.getEOperations().get(12), source,
 				new String[] { "RecopyInValueTypes", "true" });
 		addAnnotation(
@@ -3554,15 +3554,15 @@ public class StructurePackageImpl extends EPackageImpl implements
 				source,
 				new String[] { "documentation",
 						"Abstraction for Parameterized types, namely, Class and ModelType" });
+		addAnnotation(getParameterizedType_TypeDefinition(), source,
+				new String[] { "ecore", "true" });
+		addAnnotation(getParameterizedType_TypeDefinition(), source,
+				new String[] { "documentation", "Definition of the Type" });
 		addAnnotation(getParameterizedType_TypeParamBinding(), source,
 				new String[] { "ecore", "true" });
 		addAnnotation(getParameterizedType_TypeParamBinding(), source,
 				new String[] { "documentation",
 						"Bindings between type variables and provided types " });
-		addAnnotation(getParameterizedType_TypeDefinition(), source,
-				new String[] { "ecore", "true" });
-		addAnnotation(getParameterizedType_TypeDefinition(), source,
-				new String[] { "documentation", "Definition of the Type" });
 		addAnnotation(getParameterizedType_VirtualTypeBinding(), source,
 				new String[] { "ecore", "true" });
 		addAnnotation(getParameterizedType_VirtualTypeBinding(), source,

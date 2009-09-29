@@ -220,21 +220,6 @@ public class ObjectImpl extends MinimalEObjectImpl.Container implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Boolean isVoid() {
-
-		java.lang.Boolean result = null;
-
-		result = false;
-
-		return result;
-
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public Boolean isInstanceOf(Type type) {
 
 		java.lang.Boolean result = null;
@@ -270,14 +255,14 @@ public class ObjectImpl extends MinimalEObjectImpl.Container implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Boolean equals(kermeta.language.structure.Object element) {
+	public Integer oid() {
 
-		java.lang.Boolean result = null;
+		java.lang.Integer result = null;
 
-		result = (java.lang.Boolean) org.kermeta.compil.runtime.helper.language.ObjectUtil
+		result = (java.lang.Integer) org.kermeta.compil.runtime.helper.language.ObjectUtil
 				.asTypeOrVoid(
 						org.kermeta.compil.runtime.helper.language.ObjectUtil
-								.equals(this, element), "java.lang.Boolean");
+								.getOID(this), "java.lang.Integer");
 
 		return result;
 
@@ -297,72 +282,6 @@ public class ObjectImpl extends MinimalEObjectImpl.Container implements
 						org.kermeta.compil.runtime.helper.language.ObjectUtil
 								.getMetaClass(this),
 						"kermeta.language.structure.Class");
-
-		return result;
-
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Boolean isNotEqual(kermeta.language.structure.Object element) {
-
-		java.lang.Boolean result = null;
-
-		result = kermeta.standard.helper.BooleanWrapper
-				.not(org.kermeta.compil.runtime.helper.language.ObjectUtil
-						.equalsSwitcher(this, element));
-
-		return result;
-
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public kermeta.language.structure.Object asType(
-			kermeta.language.structure.Class type) {
-
-		kermeta.language.structure.Object result = null;
-
-		java.lang.Boolean idIfCond_1 = false;
-		idIfCond_1 = org.kermeta.compil.runtime.helper.language.ObjectUtil
-				.isInstanceOfSwitcher(this, type);
-
-		if (idIfCond_1) {
-
-			result = this;
-		} else {
-
-			if (true)
-				throw new org.kermeta.compil.runtime.helper.error.KRuntimeError(
-						((kermeta.exceptions.TypeCastError) org.kermeta.compil.runtime.helper.language.ClassUtil
-								.newObject(kermeta.exceptions.ExceptionsPackage.eINSTANCE
-										.getTypeCastError())));
-
-		}
-
-		return result;
-
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Integer oid() {
-
-		java.lang.Integer result = null;
-
-		result = (java.lang.Integer) org.kermeta.compil.runtime.helper.language.ObjectUtil
-				.asTypeOrVoid(
-						org.kermeta.compil.runtime.helper.language.ObjectUtil
-								.getOID(this), "java.lang.Integer");
 
 		return result;
 
@@ -406,14 +325,11 @@ public class ObjectImpl extends MinimalEObjectImpl.Container implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Boolean isKindOf(kermeta.language.structure.Class cl) {
+	public Boolean isVoid() {
 
 		java.lang.Boolean result = null;
 
-		result = org.kermeta.compil.runtime.helper.language.ClassUtil
-				.equalsSwitcher(
-						org.kermeta.compil.runtime.helper.language.ObjectUtil
-								.getMetaClassSwitcher(this), cl);
+		result = false;
 
 		return result;
 
@@ -424,12 +340,80 @@ public class ObjectImpl extends MinimalEObjectImpl.Container implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public kermeta.language.structure.Object get(Property property) {
+	public Boolean equals(kermeta.language.structure.Object element) {
+
+		java.lang.Boolean result = null;
+
+		result = (java.lang.Boolean) org.kermeta.compil.runtime.helper.language.ObjectUtil
+				.asTypeOrVoid(
+						org.kermeta.compil.runtime.helper.language.ObjectUtil
+								.equals(this, element), "java.lang.Boolean");
+
+		return result;
+
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Boolean isNotEqual(kermeta.language.structure.Object element) {
+
+		java.lang.Boolean result = null;
+
+		result = kermeta.standard.helper.BooleanWrapper
+				.not(org.kermeta.compil.runtime.helper.language.ObjectUtil
+						.equalsSwitcher(this, element));
+
+		return result;
+
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public kermeta.language.structure.Object asType(
+			kermeta.language.structure.Class type) {
 
 		kermeta.language.structure.Object result = null;
 
-		result = org.kermeta.compil.runtime.helper.language.ObjectUtil.get(
-				this, property);
+		java.lang.Boolean idIfCond_244 = false;
+		idIfCond_244 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+				.isInstanceOfSwitcher(this, type);
+
+		if (idIfCond_244) {
+
+			result = this;
+		} else {
+
+			if (true)
+				throw new org.kermeta.compil.runtime.helper.error.KRuntimeError(
+						((kermeta.exceptions.TypeCastError) org.kermeta.compil.runtime.helper.language.ClassUtil
+								.newObject(kermeta.exceptions.ExceptionsPackage.eINSTANCE
+										.getTypeCastError())));
+
+		}
+
+		return result;
+
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Boolean isKindOf(kermeta.language.structure.Class cl) {
+
+		java.lang.Boolean result = null;
+
+		result = org.kermeta.compil.runtime.helper.language.ClassUtil
+				.equalsSwitcher(
+						org.kermeta.compil.runtime.helper.language.ObjectUtil
+								.getMetaClassSwitcher(this), cl);
 
 		return result;
 
@@ -458,13 +442,29 @@ public class ObjectImpl extends MinimalEObjectImpl.Container implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public kermeta.language.structure.Object get(Property property) {
+
+		kermeta.language.structure.Object result = null;
+
+		result = org.kermeta.compil.runtime.helper.language.ObjectUtil.get(
+				this, property);
+
+		return result;
+
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public void set(Property property, kermeta.language.structure.Object element) {
 
-		java.lang.Boolean idIfCond_2 = false;
-		idIfCond_2 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+		java.lang.Boolean idIfCond_245 = false;
+		idIfCond_245 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 				.isInstanceOfSwitcher(element, property.getType());
 
-		if (idIfCond_2) {
+		if (idIfCond_245) {
 
 			org.kermeta.compil.runtime.helper.language.ObjectUtil.set(this,
 					property, element);
@@ -476,34 +476,34 @@ public class ObjectImpl extends MinimalEObjectImpl.Container implements
 					.asTypeOrVoid(element,
 							"kermeta.language.structure.EnumerationLiteral");
 
-			java.lang.Boolean idIfCond_3 = false;
+			java.lang.Boolean idIfCond_246 = false;
 			//BIft:andThen
 
-			java.lang.Boolean result_ft1 = null;
+			java.lang.Boolean result_ft54 = null;
 
-			java.lang.Boolean idIfCond_4 = false;
-			idIfCond_4 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+			java.lang.Boolean idIfCond_247 = false;
+			idIfCond_247 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 					.isNotEqualSwitcher(v, null);
 
-			if (idIfCond_4) {
+			if (idIfCond_247) {
 
 				//BIle:right
-				/*This variable should be never used*/kermeta.language.structure.Object e_lbdExp1 = null;
+				/*This variable should be never used*/kermeta.language.structure.Object e_lbdExp54 = null;
 
-				result_ft1 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+				result_ft54 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 						.equalsSwitcher(property.getType(), v.getEnumeration());
 				//EIle:right
 
 			} else {
 
-				result_ft1 = false;
+				result_ft54 = false;
 			}
 
 			//CEC
-			idIfCond_3 = result_ft1;
+			idIfCond_246 = result_ft54;
 			//EIft:andThen
 
-			if (idIfCond_3) {
+			if (idIfCond_246) {
 
 				org.kermeta.compil.runtime.helper.language.ObjectUtil.set(this,
 						property, v);
@@ -593,98 +593,99 @@ public class ObjectImpl extends MinimalEObjectImpl.Container implements
 		kermeta.language.structure.ClassDefinition cd = org.kermeta.compil.runtime.helper.language.ObjectUtil
 				.getMetaClassSwitcher(this).getterClassDefinition();
 
-		java.lang.Boolean idIfCond_5 = false;
-		idIfCond_5 = kermeta.standard.helper.BooleanWrapper
+		java.lang.Boolean idIfCond_248 = false;
+		idIfCond_248 = kermeta.standard.helper.BooleanWrapper
 				.not(org.kermeta.compil.runtime.helper.language.ObjectUtil
 						.isVoidSwitcher(cd));
 
-		if (idIfCond_5) {
+		if (idIfCond_248) {
 
 			//BIft:each
 
 			{
 
-				kermeta.standard.Iterator<kermeta.language.structure.Property> it_ft2 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
+				kermeta.standard.Iterator<kermeta.language.structure.Property> it_ft55 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
 						.<kermeta.language.structure.Property> convertAsSet(
 								cd.getterAllAttribute()).iterator();
-				java.lang.Boolean idLoopCond_6 = false;
-				while (!idLoopCond_6) {
-					idLoopCond_6 = it_ft2.isOff();
-					if (idLoopCond_6) {
+				java.lang.Boolean idLoopCond_249 = false;
+				while (!idLoopCond_249) {
+					idLoopCond_249 = it_ft55.isOff();
+					if (idLoopCond_249) {
 					} else {
 
 						//BIle:func
-						kermeta.language.structure.Property p_lbdExp2 = it_ft2
+						kermeta.language.structure.Property p_lbdExp55 = it_ft55
 								.next();
 
 						//BIft:exists
 
-						java.lang.Boolean result_ft3 = null;
+						java.lang.Boolean result_ft56 = null;
 
-						java.lang.Boolean test_ft3 = false;
+						java.lang.Boolean test_ft56 = false;
 
 						{
 
-							kermeta.standard.Iterator<kermeta.language.structure.Tag> it_ft3 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
+							kermeta.standard.Iterator<kermeta.language.structure.Tag> it_ft56 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
 									.<kermeta.language.structure.Tag> convertAsOrderedSet(
-											p_lbdExp2.getTag()).iterator();
-							java.lang.Boolean idLoopCond_8 = false;
-							while (!idLoopCond_8) {
-								idLoopCond_8 = kermeta.standard.helper.BooleanWrapper
+											p_lbdExp55.getTag()).iterator();
+							java.lang.Boolean idLoopCond_251 = false;
+							while (!idLoopCond_251) {
+								idLoopCond_251 = kermeta.standard.helper.BooleanWrapper
 										.or(
-												it_ft3.isOff(),
+												it_ft56.isOff(),
 												org.kermeta.compil.runtime.helper.language.ObjectUtil
 														.isNotEqualSwitcher(
-																test_ft3, false));
-								if (idLoopCond_8) {
+																test_ft56,
+																false));
+								if (idLoopCond_251) {
 								} else {
 
-									java.lang.Boolean result_lambda_ft3 = null;
+									java.lang.Boolean result_lambda_ft56 = null;
 									//BIle:func
-									kermeta.language.structure.Tag t_lbdExp3 = it_ft3
+									kermeta.language.structure.Tag t_lbdExp56 = it_ft56
 											.next();
 
-									result_lambda_ft3 = kermeta.standard.helper.StringWrapper
-											.equals(t_lbdExp3.getName(),
+									result_lambda_ft56 = kermeta.standard.helper.StringWrapper
+											.equals(t_lbdExp56.getName(),
 													"ecore.isTransient");
 									//EIle:func
 
-									test_ft3 = kermeta.standard.helper.BooleanWrapper
-											.or(test_ft3, result_lambda_ft3);
+									test_ft56 = kermeta.standard.helper.BooleanWrapper
+											.or(test_ft56, result_lambda_ft56);
 								}
 							}
 						}
 
-						result_ft3 = test_ft3;
+						result_ft56 = test_ft56;
 						//EIft:exists
-						java.lang.Boolean idIfCond_7 = false;
-						idIfCond_7 = kermeta.standard.helper.BooleanWrapper
+						java.lang.Boolean idIfCond_250 = false;
+						idIfCond_250 = kermeta.standard.helper.BooleanWrapper
 								.and(kermeta.standard.helper.BooleanWrapper
-										.not(result_ft3),
+										.not(result_ft56),
 										kermeta.standard.helper.BooleanWrapper
-												.not(p_lbdExp2.getIsDerived()));
+												.not(p_lbdExp55.getIsDerived()));
 
-						if (idIfCond_7) {
+						if (idIfCond_250) {
 
 							kermeta.language.structure.Object v = org.kermeta.compil.runtime.helper.language.ObjectUtil
-									.getSwitcher(this, p_lbdExp2);
+									.getSwitcher(this, p_lbdExp55);
 
-							java.lang.Boolean idIfCond_9 = false;
+							java.lang.Boolean idIfCond_252 = false;
 							//BIft:andThen
 
-							java.lang.Boolean result_ft4 = null;
+							java.lang.Boolean result_ft57 = null;
 
-							java.lang.Boolean idIfCond_10 = false;
-							idIfCond_10 = kermeta.standard.helper.BooleanWrapper
+							java.lang.Boolean idIfCond_253 = false;
+							idIfCond_253 = kermeta.standard.helper.BooleanWrapper
 									.not(org.kermeta.compil.runtime.helper.language.ObjectUtil
 											.isVoidSwitcher(v));
 
-							if (idIfCond_10) {
+							if (idIfCond_253) {
 
 								//BIle:right
-								/*This variable should be never used*/kermeta.language.structure.Object f_lbdExp4 = null;
+								/*This variable should be never used*/kermeta.language.structure.Object f_lbdExp57 = null;
 
-								result_ft4 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+								result_ft57 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 										.isInstanceOfSwitcher(
 												v,
 												org.kermeta.compil.runtime.ExecutionContext
@@ -695,14 +696,14 @@ public class ObjectImpl extends MinimalEObjectImpl.Container implements
 
 							} else {
 
-								result_ft4 = false;
+								result_ft57 = false;
 							}
 
 							//CEC
-							idIfCond_9 = result_ft4;
+							idIfCond_252 = result_ft57;
 							//EIft:andThen
 
-							if (idIfCond_9) {
+							if (idIfCond_252) {
 
 								kermeta.standard.Collection<kermeta.language.structure.Object> c = ((kermeta.standard.Collection<kermeta.language.structure.Object>) org.kermeta.compil.runtime.helper.language.ObjectUtil
 										.asTypeSwitcher(
@@ -712,12 +713,12 @@ public class ObjectImpl extends MinimalEObjectImpl.Container implements
 														.getMetaClass(
 																"kermeta.standard.Collection<kermeta.language.structure.Object>")));
 
-								java.lang.Boolean idIfCond_11 = false;
-								idIfCond_11 = kermeta.standard.helper.BooleanWrapper
+								java.lang.Boolean idIfCond_254 = false;
+								idIfCond_254 = kermeta.standard.helper.BooleanWrapper
 										.and(
 												org.kermeta.compil.runtime.helper.language.ObjectUtil
 														.isNotEqualSwitcher(
-																p_lbdExp2
+																p_lbdExp55
 																		.getUpper(),
 																org.kermeta.compil.runtime.helper.language.ObjectUtil
 																		.convertAsObject(kermeta.standard.helper.IntegerWrapper
@@ -725,10 +726,10 @@ public class ObjectImpl extends MinimalEObjectImpl.Container implements
 												kermeta.standard.helper.IntegerWrapper
 														.isGreater(
 																c.size(),
-																p_lbdExp2
+																p_lbdExp55
 																		.getUpper()));
 
-								if (idIfCond_11) {
+								if (idIfCond_254) {
 
 									kermeta.exceptions.ConstraintViolatedInv e = ((kermeta.exceptions.ConstraintViolatedInv) org.kermeta.compil.runtime.helper.language.ClassUtil
 											.newObject(kermeta.exceptions.ExceptionsPackage.eINSTANCE
@@ -749,7 +750,7 @@ public class ObjectImpl extends MinimalEObjectImpl.Container implements
 																															cd
 																																	.getName()),
 																											"."),
-																							p_lbdExp2
+																							p_lbdExp55
 																									.getName()),
 																			" violated on "),
 															org.kermeta.compil.runtime.helper.language.ObjectUtil
@@ -761,11 +762,12 @@ public class ObjectImpl extends MinimalEObjectImpl.Container implements
 
 								}
 
-								java.lang.Boolean idIfCond_12 = false;
-								idIfCond_12 = kermeta.standard.helper.IntegerWrapper
-										.isLower(c.size(), p_lbdExp2.getLower());
+								java.lang.Boolean idIfCond_255 = false;
+								idIfCond_255 = kermeta.standard.helper.IntegerWrapper
+										.isLower(c.size(), p_lbdExp55
+												.getLower());
 
-								if (idIfCond_12) {
+								if (idIfCond_255) {
 
 									kermeta.exceptions.ConstraintViolatedInv e = ((kermeta.exceptions.ConstraintViolatedInv) org.kermeta.compil.runtime.helper.language.ClassUtil
 											.newObject(kermeta.exceptions.ExceptionsPackage.eINSTANCE
@@ -786,7 +788,7 @@ public class ObjectImpl extends MinimalEObjectImpl.Container implements
 																															cd
 																																	.getName()),
 																											"."),
-																							p_lbdExp2
+																							p_lbdExp55
 																									.getName()),
 																			" violated on "),
 															org.kermeta.compil.runtime.helper.language.ObjectUtil
@@ -800,16 +802,16 @@ public class ObjectImpl extends MinimalEObjectImpl.Container implements
 
 							} else {
 
-								java.lang.Boolean idIfCond_13 = false;
-								idIfCond_13 = kermeta.standard.helper.BooleanWrapper
+								java.lang.Boolean idIfCond_256 = false;
+								idIfCond_256 = kermeta.standard.helper.BooleanWrapper
 										.and(
 												kermeta.standard.helper.IntegerWrapper
-														.equals(p_lbdExp2
+														.equals(p_lbdExp55
 																.getLower(), 1),
 												org.kermeta.compil.runtime.helper.language.ObjectUtil
 														.isVoidSwitcher(v));
 
-								if (idIfCond_13) {
+								if (idIfCond_256) {
 
 									kermeta.exceptions.ConstraintViolatedInv e = ((kermeta.exceptions.ConstraintViolatedInv) org.kermeta.compil.runtime.helper.language.ClassUtil
 											.newObject(kermeta.exceptions.ExceptionsPackage.eINSTANCE
@@ -830,7 +832,7 @@ public class ObjectImpl extends MinimalEObjectImpl.Container implements
 																															cd
 																																	.getName()),
 																											"."),
-																							p_lbdExp2
+																							p_lbdExp55
 																									.getName()),
 																			" violated on "),
 															org.kermeta.compil.runtime.helper.language.ObjectUtil
@@ -910,11 +912,11 @@ public class ObjectImpl extends MinimalEObjectImpl.Container implements
 	 */
 	public void checkAllInvariants() {
 
-		java.lang.Boolean idIfCond_14 = false;
-		idIfCond_14 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+		java.lang.Boolean idIfCond_257 = false;
+		idIfCond_257 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 				.isNotEqualSwitcher(this, null);
 
-		if (idIfCond_14) {
+		if (idIfCond_257) {
 
 			org.kermeta.compil.runtime.helper.language.ObjectUtil
 					.checkInvariantsSwitcher(this);
@@ -932,93 +934,93 @@ public class ObjectImpl extends MinimalEObjectImpl.Container implements
 
 			{
 
-				kermeta.standard.Iterator<kermeta.language.structure.Property> it_ft5 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
+				kermeta.standard.Iterator<kermeta.language.structure.Property> it_ft58 = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil
 						.<kermeta.language.structure.Property> convertAsSet(
 								cd.getterAllAttribute()).iterator();
-				java.lang.Boolean idLoopCond_15 = false;
-				while (!idLoopCond_15) {
-					idLoopCond_15 = it_ft5.isOff();
-					if (idLoopCond_15) {
+				java.lang.Boolean idLoopCond_258 = false;
+				while (!idLoopCond_258) {
+					idLoopCond_258 = it_ft58.isOff();
+					if (idLoopCond_258) {
 					} else {
 
 						//BIle:func
-						kermeta.language.structure.Property prop_lbdExp5 = it_ft5
+						kermeta.language.structure.Property prop_lbdExp58 = it_ft58
 								.next();
 
-						java.lang.Boolean idIfCond_16 = false;
-						idIfCond_16 = kermeta.standard.helper.BooleanWrapper
-								.and(prop_lbdExp5.getIsComposite(),
+						java.lang.Boolean idIfCond_259 = false;
+						idIfCond_259 = kermeta.standard.helper.BooleanWrapper
+								.and(prop_lbdExp58.getIsComposite(),
 										kermeta.standard.helper.BooleanWrapper
-												.not(prop_lbdExp5
+												.not(prop_lbdExp58
 														.getIsDerived()));
 
-						if (idIfCond_16) {
+						if (idIfCond_259) {
 
-							java.lang.Boolean idIfCond_17 = false;
-							idIfCond_17 = kermeta.standard.helper.BooleanWrapper
+							java.lang.Boolean idIfCond_260 = false;
+							idIfCond_260 = kermeta.standard.helper.BooleanWrapper
 									.not(org.kermeta.compil.runtime.helper.language.ObjectUtil
 											.isVoidSwitcher(org.kermeta.compil.runtime.helper.language.ObjectUtil
 													.getSwitcher(this,
-															prop_lbdExp5)));
+															prop_lbdExp58)));
 
-							if (idIfCond_17) {
+							if (idIfCond_260) {
 
-								java.lang.Boolean idIfCond_18 = false;
+								java.lang.Boolean idIfCond_261 = false;
 								//BIft:exists
 
-								java.lang.Boolean result_ft6 = null;
+								java.lang.Boolean result_ft59 = null;
 
-								java.lang.Boolean test_ft6 = false;
+								java.lang.Boolean test_ft59 = false;
 
 								{
 
-									kermeta.standard.Iterator<kermeta.language.structure.Type> it_ft6 = ((kermeta.language.structure.ClassDefinition) org.kermeta.compil.runtime.helper.language.ObjectUtil
+									kermeta.standard.Iterator<kermeta.language.structure.Type> it_ft59 = ((kermeta.language.structure.ClassDefinition) org.kermeta.compil.runtime.helper.language.ObjectUtil
 											.asTypeSwitcher(
 													org.kermeta.compil.runtime.helper.language.ObjectUtil
 															.getMetaClassSwitcher(
 																	org.kermeta.compil.runtime.helper.language.ObjectUtil
 																			.getSwitcher(
 																					this,
-																					prop_lbdExp5))
+																					prop_lbdExp58))
 															.getTypeDefinition(),
 													org.kermeta.compil.runtime.ExecutionContext
 															.getInstance()
 															.getMetaClass(
 																	"kermeta.language.structure.ClassDefinition")))
 											.allSuperTypes().iterator();
-									java.lang.Boolean idLoopCond_19 = false;
-									while (!idLoopCond_19) {
-										idLoopCond_19 = kermeta.standard.helper.BooleanWrapper
+									java.lang.Boolean idLoopCond_262 = false;
+									while (!idLoopCond_262) {
+										idLoopCond_262 = kermeta.standard.helper.BooleanWrapper
 												.or(
-														it_ft6.isOff(),
+														it_ft59.isOff(),
 														org.kermeta.compil.runtime.helper.language.ObjectUtil
 																.isNotEqualSwitcher(
-																		test_ft6,
+																		test_ft59,
 																		false));
-										if (idLoopCond_19) {
+										if (idLoopCond_262) {
 										} else {
 
-											java.lang.Boolean result_lambda_ft6 = null;
+											java.lang.Boolean result_lambda_ft59 = null;
 											//BIle:func
-											kermeta.language.structure.Type t_lbdExp6 = it_ft6
+											kermeta.language.structure.Type t_lbdExp59 = it_ft59
 													.next();
 
-											java.lang.Boolean idIfCond_20 = false;
-											idIfCond_20 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+											java.lang.Boolean idIfCond_263 = false;
+											idIfCond_263 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 													.isInstanceOfSwitcher(
-															t_lbdExp6,
+															t_lbdExp59,
 															org.kermeta.compil.runtime.ExecutionContext
 																	.getInstance()
 																	.getMetaClass(
 																			"kermeta.language.structure.ParameterizedType"));
 
-											if (idIfCond_20) {
+											if (idIfCond_263) {
 
-												result_lambda_ft6 = kermeta.standard.helper.StringWrapper
+												result_lambda_ft59 = kermeta.standard.helper.StringWrapper
 														.equals(
 																((kermeta.language.structure.ParameterizedType) org.kermeta.compil.runtime.helper.language.ObjectUtil
 																		.asTypeSwitcher(
-																				t_lbdExp6,
+																				t_lbdExp59,
 																				org.kermeta.compil.runtime.ExecutionContext
 																						.getInstance()
 																						.getMetaClass(
@@ -1028,25 +1030,25 @@ public class ObjectImpl extends MinimalEObjectImpl.Container implements
 																"kermeta::standard::Collection");
 											} else {
 
-												result_lambda_ft6 = false;
+												result_lambda_ft59 = false;
 											}
 
 											//EIle:func
 
-											test_ft6 = kermeta.standard.helper.BooleanWrapper
-													.or(test_ft6,
-															result_lambda_ft6);
+											test_ft59 = kermeta.standard.helper.BooleanWrapper
+													.or(test_ft59,
+															result_lambda_ft59);
 										}
 									}
 								}
 
-								result_ft6 = test_ft6;
+								result_ft59 = test_ft59;
 
 								//CEC
-								idIfCond_18 = result_ft6;
+								idIfCond_261 = result_ft59;
 								//EIft:exists
 
-								if (idIfCond_18) {
+								if (idIfCond_261) {
 
 									kermeta.standard.Collection<kermeta.language.structure.Object> subObjInstances = null;
 
@@ -1054,27 +1056,27 @@ public class ObjectImpl extends MinimalEObjectImpl.Container implements
 											.asTypeOrVoid(
 													org.kermeta.compil.runtime.helper.language.ObjectUtil
 															.getSwitcher(this,
-																	prop_lbdExp5),
+																	prop_lbdExp58),
 													"kermeta.standard.Collection<kermeta.language.structure.Object>");
 
 									//BIft:each
 
 									{
 
-										kermeta.standard.Iterator<kermeta.language.structure.Object> it_ft7 = subObjInstances
+										kermeta.standard.Iterator<kermeta.language.structure.Object> it_ft60 = subObjInstances
 												.iterator();
-										java.lang.Boolean idLoopCond_21 = false;
-										while (!idLoopCond_21) {
-											idLoopCond_21 = it_ft7.isOff();
-											if (idLoopCond_21) {
+										java.lang.Boolean idLoopCond_264 = false;
+										while (!idLoopCond_264) {
+											idLoopCond_264 = it_ft60.isOff();
+											if (idLoopCond_264) {
 											} else {
 
 												//BIle:func
-												kermeta.language.structure.Object aSubObjInstances_lbdExp7 = it_ft7
+												kermeta.language.structure.Object aSubObjInstances_lbdExp60 = it_ft60
 														.next();
 
 												org.kermeta.compil.runtime.helper.language.ObjectUtil
-														.checkAllInvariantsSwitcher(aSubObjInstances_lbdExp7);
+														.checkAllInvariantsSwitcher(aSubObjInstances_lbdExp60);
 												//EIle:func
 
 											}
@@ -1088,7 +1090,7 @@ public class ObjectImpl extends MinimalEObjectImpl.Container implements
 									org.kermeta.compil.runtime.helper.language.ObjectUtil
 											.checkAllInvariantsSwitcher(org.kermeta.compil.runtime.helper.language.ObjectUtil
 													.getSwitcher(this,
-															prop_lbdExp5));
+															prop_lbdExp58));
 								}
 
 							}

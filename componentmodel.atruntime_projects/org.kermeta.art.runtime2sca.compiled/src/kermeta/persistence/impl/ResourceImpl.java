@@ -260,6 +260,33 @@ public abstract class ResourceImpl extends
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public void load() {
+
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String normalizedUri() {
+
+		java.lang.String result = null;
+
+		result = (java.lang.String) org.kermeta.compil.runtime.helper.language.ObjectUtil
+				.asTypeOrVoid(
+						org.kermeta.compil.runtime.helper.basetypes.RepositoryUtil
+								.normalizeUri(uri), "java.lang.String");
+
+		return result;
+
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public void save() {
 
 	}
@@ -654,38 +681,11 @@ public abstract class ResourceImpl extends
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void load() {
-
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public Resource instances() {
 
 		kermeta.persistence.Resource result = null;
 
 		result = this;
-
-		return result;
-
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public String normalizedUri() {
-
-		java.lang.String result = null;
-
-		result = (java.lang.String) org.kermeta.compil.runtime.helper.language.ObjectUtil
-				.asTypeOrVoid(
-						org.kermeta.compil.runtime.helper.basetypes.RepositoryUtil
-								.normalizeUri(uri), "java.lang.String");
 
 		return result;
 

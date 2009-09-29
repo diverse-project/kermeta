@@ -10,7 +10,7 @@ public class CompositeInstanceInvariant {
 	 *
 	 * @generated
 	 */
-	public static java.lang.Boolean checkInvariant_23638157__completeDelegationBindings(
+	public static java.lang.Boolean checkInvariant_21498961__completeDelegationBindings(
 
 	art.instance.CompositeInstance self
 

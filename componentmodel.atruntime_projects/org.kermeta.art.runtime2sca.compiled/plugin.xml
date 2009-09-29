@@ -20,6 +20,18 @@
 
    <extension point="org.eclipse.emf.ecore.generated_package">
       <package
+            uri="http://www.kermeta.org/kermeta/1_2_0//kermeta/standard/kermeta_temp_uri"
+            class="kermeta.standard.StandardPackage"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <package
+            uri="http://www.kermeta.org/kermeta/1_2_0//kermeta/xmltype/kermeta_temp_uri"
+            class="kermeta.xmltype.XmltypePackage"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <package
             uri="http://www.kermeta.org/kermeta/1_2_0//kermeta/language/kermeta_temp_uri"
             class="kermeta.language.LanguagePackage"/>
    </extension>
@@ -38,20 +50,8 @@
 
    <extension point="org.eclipse.emf.ecore.generated_package">
       <package
-            uri="http://www.kermeta.org/kermeta/1_2_0//kermeta/xmltype/kermeta_temp_uri"
-            class="kermeta.xmltype.XmltypePackage"/>
-   </extension>
-
-   <extension point="org.eclipse.emf.ecore.generated_package">
-      <package
             uri="http://www.kermeta.org/kermeta/1_2_0//kermeta/interpreter/kermeta_temp_uri"
             class="kermeta.interpreter.InterpreterPackage"/>
-   </extension>
-
-   <extension point="org.eclipse.emf.ecore.generated_package">
-      <package
-            uri="http://www.kermeta.org/kermeta/1_2_0//kermeta/standard/kermeta_temp_uri"
-            class="kermeta.standard.StandardPackage"/>
    </extension>
 
    <extension point="org.eclipse.emf.ecore.generated_package">
@@ -92,14 +92,14 @@
 
    <extension point="org.eclipse.emf.ecore.generated_package">
       <package
-            uri="http://www.kermeta.org/runtime2SCA/kermeta_temp_uri"
-            class="runtime2SCA.Runtime2SCAPackage"/>
+            uri="http://www.kermeta.org/sca/kermeta_temp_uri"
+            class="sca.ScaPackage"/>
    </extension>
 
    <extension point="org.eclipse.emf.ecore.generated_package">
       <package
-            uri="http://www.kermeta.org/sca/kermeta_temp_uri"
-            class="sca.ScaPackage"/>
+            uri="http://www.kermeta.org/runtime2SCA/kermeta_temp_uri"
+            class="runtime2SCA.Runtime2SCAPackage"/>
    </extension>
 
    <extension point="org.eclipse.emf.ecore.generated_package">

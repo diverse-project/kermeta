@@ -228,8 +228,8 @@ public abstract class TypeVariableImpl extends TypeContainerImpl implements
 
 		result = this.getName();
 
-		java.lang.Boolean idIfCond_38 = false;
-		idIfCond_38 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+		java.lang.Boolean idIfCond_281 = false;
+		idIfCond_281 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 				.isInstanceOfSwitcher(
 						org.kermeta.compil.runtime.helper.language.ObjectUtil
 								.containerSwitcher(elem),
@@ -238,26 +238,26 @@ public abstract class TypeVariableImpl extends TypeContainerImpl implements
 								.getMetaClass(
 										"kermeta.language.structure.NamedElement"));
 
-		if (idIfCond_38) {
+		if (idIfCond_281) {
 
 			elem = (kermeta.language.structure.NamedElement) org.kermeta.compil.runtime.helper.language.ObjectUtil
 					.asTypeOrVoid(
 							org.kermeta.compil.runtime.helper.language.ObjectUtil
 									.containerSwitcher(elem),
 							"kermeta.language.structure.NamedElement");
-			java.lang.Boolean idLoopCond_39 = false;
-			while (!idLoopCond_39) {
-				idLoopCond_39 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+			java.lang.Boolean idLoopCond_282 = false;
+			while (!idLoopCond_282) {
+				idLoopCond_282 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 						.equalsSwitcher(elem, null);
-				if (idLoopCond_39) {
+				if (idLoopCond_282) {
 				} else {
 
 					result = kermeta.standard.helper.StringWrapper.plus(
 							kermeta.standard.helper.StringWrapper.plus(elem
 									.getName(), "::"), result);
 
-					java.lang.Boolean idIfCond_40 = false;
-					idIfCond_40 = org.kermeta.compil.runtime.helper.language.ObjectUtil
+					java.lang.Boolean idIfCond_283 = false;
+					idIfCond_283 = org.kermeta.compil.runtime.helper.language.ObjectUtil
 							.isInstanceOfSwitcher(
 									org.kermeta.compil.runtime.helper.language.ObjectUtil
 											.containerSwitcher(elem),
@@ -266,7 +266,7 @@ public abstract class TypeVariableImpl extends TypeContainerImpl implements
 											.getMetaClass(
 													"kermeta.language.structure.NamedElement"));
 
-					if (idIfCond_40) {
+					if (idIfCond_283) {
 
 						elem = (kermeta.language.structure.NamedElement) org.kermeta.compil.runtime.helper.language.ObjectUtil
 								.asTypeOrVoid(

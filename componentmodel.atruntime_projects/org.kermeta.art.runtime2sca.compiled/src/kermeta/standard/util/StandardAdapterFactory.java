@@ -85,6 +85,11 @@ public class StandardAdapterFactory extends AdapterFactoryImpl {
 	 */
 	protected StandardSwitch<Adapter> modelSwitch = new StandardSwitch<Adapter>() {
 		@Override
+		public Adapter caseString(kermeta.standard.String object) {
+			return createStringAdapter();
+		}
+
+		@Override
 		public Adapter caseUnknownJavaObject(UnknownJavaObject object) {
 			return createUnknownJavaObjectAdapter();
 		}
@@ -132,11 +137,6 @@ public class StandardAdapterFactory extends AdapterFactoryImpl {
 		@Override
 		public Adapter caseCharacter(kermeta.standard.Character object) {
 			return createCharacterAdapter();
-		}
-
-		@Override
-		public Adapter caseString(kermeta.standard.String object) {
-			return createStringAdapter();
 		}
 
 		@Override
@@ -201,6 +201,20 @@ public class StandardAdapterFactory extends AdapterFactoryImpl {
 	@Override
 	public Adapter createAdapter(Notifier target) {
 		return modelSwitch.doSwitch((EObject) target);
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link kermeta.standard.String <em>String</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see kermeta.standard.String
+	 * @generated
+	 */
+	public Adapter createStringAdapter() {
+		return null;
 	}
 
 	/**
@@ -340,20 +354,6 @@ public class StandardAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createCharacterAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link kermeta.standard.String <em>String</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see kermeta.standard.String
-	 * @generated
-	 */
-	public Adapter createStringAdapter() {
 		return null;
 	}
 

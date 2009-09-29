@@ -64,11 +64,11 @@ public abstract class ComparableImpl extends ObjectImpl implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Boolean isGreater(kermeta.language.structure.Object other) {
+	public Boolean isLowerOrEqual(kermeta.language.structure.Object other) {
 
 		java.lang.Boolean result = null;
 
-		result = kermeta.standard.helper.IntegerWrapper.isGreater(this
+		result = kermeta.standard.helper.IntegerWrapper.isLowerOrEqual(this
 				.compareTo(other), 0);
 
 		return result;
@@ -80,11 +80,11 @@ public abstract class ComparableImpl extends ObjectImpl implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Boolean isLowerOrEqual(kermeta.language.structure.Object other) {
+	public Boolean isGreater(kermeta.language.structure.Object other) {
 
 		java.lang.Boolean result = null;
 
-		result = kermeta.standard.helper.IntegerWrapper.isLowerOrEqual(this
+		result = kermeta.standard.helper.IntegerWrapper.isGreater(this
 				.compareTo(other), 0);
 
 		return result;

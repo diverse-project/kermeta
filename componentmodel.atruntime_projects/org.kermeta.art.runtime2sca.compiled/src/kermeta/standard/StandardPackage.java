@@ -74,116 +74,6 @@ public interface StandardPackage extends EPackage {
 			.init();
 
 	/**
-	 * The meta object id for the '{@link kermeta.standard.impl.UnknownJavaObjectImpl <em>Unknown Java Object</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see kermeta.standard.impl.UnknownJavaObjectImpl
-	 * @see kermeta.standard.impl.StandardPackageImpl#getUnknownJavaObject()
-	 * @generated
-	 */
-	int UNKNOWN_JAVA_OBJECT = 0;
-
-	/**
-	 * The feature id for the '<em><b>Tag</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int UNKNOWN_JAVA_OBJECT__TAG = StructurePackage.OBJECT__TAG;
-
-	/**
-	 * The feature id for the '<em><b>Owned Tags</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int UNKNOWN_JAVA_OBJECT__OWNED_TAGS = StructurePackage.OBJECT__OWNED_TAGS;
-
-	/**
-	 * The feature id for the '<em><b>Oid</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int UNKNOWN_JAVA_OBJECT__OID = StructurePackage.OBJECT__OID;
-
-	/**
-	 * The feature id for the '<em><b>Internal Containing Resource</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int UNKNOWN_JAVA_OBJECT__INTERNAL_CONTAINING_RESOURCE = StructurePackage.OBJECT__INTERNAL_CONTAINING_RESOURCE;
-
-	/**
-	 * The number of structural features of the '<em>Unknown Java Object</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int UNKNOWN_JAVA_OBJECT_FEATURE_COUNT = StructurePackage.OBJECT_FEATURE_COUNT + 0;
-
-	/**
-	 * The meta object id for the '{@link kermeta.standard.impl.VoidImpl <em>Void</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see kermeta.standard.impl.VoidImpl
-	 * @see kermeta.standard.impl.StandardPackageImpl#getVoid()
-	 * @generated
-	 */
-	int VOID = 1;
-
-	/**
-	 * The feature id for the '<em><b>Tag</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int VOID__TAG = StructurePackage.OBJECT__TAG;
-
-	/**
-	 * The feature id for the '<em><b>Owned Tags</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int VOID__OWNED_TAGS = StructurePackage.OBJECT__OWNED_TAGS;
-
-	/**
-	 * The feature id for the '<em><b>Oid</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int VOID__OID = StructurePackage.OBJECT__OID;
-
-	/**
-	 * The feature id for the '<em><b>Internal Containing Resource</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int VOID__INTERNAL_CONTAINING_RESOURCE = StructurePackage.OBJECT__INTERNAL_CONTAINING_RESOURCE;
-
-	/**
-	 * The number of structural features of the '<em>Void</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int VOID_FEATURE_COUNT = StructurePackage.OBJECT_FEATURE_COUNT + 0;
-
-	/**
 	 * The meta object id for the '{@link kermeta.standard.impl.ValueTypeImpl <em>Value Type</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -191,7 +81,7 @@ public interface StandardPackage extends EPackage {
 	 * @see kermeta.standard.impl.StandardPackageImpl#getValueType()
 	 * @generated
 	 */
-	int VALUE_TYPE = 2;
+	int VALUE_TYPE = 3;
 
 	/**
 	 * The feature id for the '<em><b>Tag</b></em>' reference list.
@@ -248,6 +138,180 @@ public interface StandardPackage extends EPackage {
 	int VALUE_TYPE_FEATURE_COUNT = StructurePackage.OBJECT_FEATURE_COUNT + 1;
 
 	/**
+	 * The meta object id for the '{@link kermeta.standard.impl.StringImpl <em>String</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see kermeta.standard.impl.StringImpl
+	 * @see kermeta.standard.impl.StandardPackageImpl#getString()
+	 * @generated
+	 */
+	int STRING = 0;
+
+	/**
+	 * The feature id for the '<em><b>Tag</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STRING__TAG = VALUE_TYPE__TAG;
+
+	/**
+	 * The feature id for the '<em><b>Owned Tags</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STRING__OWNED_TAGS = VALUE_TYPE__OWNED_TAGS;
+
+	/**
+	 * The feature id for the '<em><b>Oid</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STRING__OID = VALUE_TYPE__OID;
+
+	/**
+	 * The feature id for the '<em><b>Internal Containing Resource</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STRING__INTERNAL_CONTAINING_RESOURCE = VALUE_TYPE__INTERNAL_CONTAINING_RESOURCE;
+
+	/**
+	 * The feature id for the '<em><b>Value</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STRING__VALUE = VALUE_TYPE__VALUE;
+
+	/**
+	 * The number of structural features of the '<em>String</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STRING_FEATURE_COUNT = VALUE_TYPE_FEATURE_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link kermeta.standard.impl.UnknownJavaObjectImpl <em>Unknown Java Object</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see kermeta.standard.impl.UnknownJavaObjectImpl
+	 * @see kermeta.standard.impl.StandardPackageImpl#getUnknownJavaObject()
+	 * @generated
+	 */
+	int UNKNOWN_JAVA_OBJECT = 1;
+
+	/**
+	 * The feature id for the '<em><b>Tag</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UNKNOWN_JAVA_OBJECT__TAG = StructurePackage.OBJECT__TAG;
+
+	/**
+	 * The feature id for the '<em><b>Owned Tags</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UNKNOWN_JAVA_OBJECT__OWNED_TAGS = StructurePackage.OBJECT__OWNED_TAGS;
+
+	/**
+	 * The feature id for the '<em><b>Oid</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UNKNOWN_JAVA_OBJECT__OID = StructurePackage.OBJECT__OID;
+
+	/**
+	 * The feature id for the '<em><b>Internal Containing Resource</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UNKNOWN_JAVA_OBJECT__INTERNAL_CONTAINING_RESOURCE = StructurePackage.OBJECT__INTERNAL_CONTAINING_RESOURCE;
+
+	/**
+	 * The number of structural features of the '<em>Unknown Java Object</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UNKNOWN_JAVA_OBJECT_FEATURE_COUNT = StructurePackage.OBJECT_FEATURE_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link kermeta.standard.impl.VoidImpl <em>Void</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see kermeta.standard.impl.VoidImpl
+	 * @see kermeta.standard.impl.StandardPackageImpl#getVoid()
+	 * @generated
+	 */
+	int VOID = 2;
+
+	/**
+	 * The feature id for the '<em><b>Tag</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VOID__TAG = StructurePackage.OBJECT__TAG;
+
+	/**
+	 * The feature id for the '<em><b>Owned Tags</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VOID__OWNED_TAGS = StructurePackage.OBJECT__OWNED_TAGS;
+
+	/**
+	 * The feature id for the '<em><b>Oid</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VOID__OID = StructurePackage.OBJECT__OID;
+
+	/**
+	 * The feature id for the '<em><b>Internal Containing Resource</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VOID__INTERNAL_CONTAINING_RESOURCE = StructurePackage.OBJECT__INTERNAL_CONTAINING_RESOURCE;
+
+	/**
+	 * The number of structural features of the '<em>Void</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VOID_FEATURE_COUNT = StructurePackage.OBJECT_FEATURE_COUNT + 0;
+
+	/**
 	 * The meta object id for the '{@link kermeta.standard.impl.ComparableImpl <em>Comparable</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -255,7 +319,7 @@ public interface StandardPackage extends EPackage {
 	 * @see kermeta.standard.impl.StandardPackageImpl#getComparable()
 	 * @generated
 	 */
-	int COMPARABLE = 3;
+	int COMPARABLE = 4;
 
 	/**
 	 * The feature id for the '<em><b>Tag</b></em>' reference list.
@@ -310,7 +374,7 @@ public interface StandardPackage extends EPackage {
 	 * @see kermeta.standard.impl.StandardPackageImpl#getSummable()
 	 * @generated
 	 */
-	int SUMMABLE = 4;
+	int SUMMABLE = 5;
 
 	/**
 	 * The feature id for the '<em><b>Tag</b></em>' reference list.
@@ -365,7 +429,7 @@ public interface StandardPackage extends EPackage {
 	 * @see kermeta.standard.impl.StandardPackageImpl#getNotComparableException()
 	 * @generated
 	 */
-	int NOT_COMPARABLE_EXCEPTION = 5;
+	int NOT_COMPARABLE_EXCEPTION = 6;
 
 	/**
 	 * The feature id for the '<em><b>Tag</b></em>' reference list.
@@ -447,7 +511,7 @@ public interface StandardPackage extends EPackage {
 	 * @see kermeta.standard.impl.StandardPackageImpl#getBoolean()
 	 * @generated
 	 */
-	int BOOLEAN = 6;
+	int BOOLEAN = 7;
 
 	/**
 	 * The feature id for the '<em><b>Tag</b></em>' reference list.
@@ -511,7 +575,7 @@ public interface StandardPackage extends EPackage {
 	 * @see kermeta.standard.impl.StandardPackageImpl#getInteger()
 	 * @generated
 	 */
-	int INTEGER = 7;
+	int INTEGER = 8;
 
 	/**
 	 * The feature id for the '<em><b>Tag</b></em>' reference list.
@@ -575,7 +639,7 @@ public interface StandardPackage extends EPackage {
 	 * @see kermeta.standard.impl.StandardPackageImpl#getReal()
 	 * @generated
 	 */
-	int REAL = 8;
+	int REAL = 9;
 
 	/**
 	 * The feature id for the '<em><b>Tag</b></em>' reference list.
@@ -639,7 +703,7 @@ public interface StandardPackage extends EPackage {
 	 * @see kermeta.standard.impl.StandardPackageImpl#getCharacter()
 	 * @generated
 	 */
-	int CHARACTER = 9;
+	int CHARACTER = 10;
 
 	/**
 	 * The feature id for the '<em><b>Tag</b></em>' reference list.
@@ -694,70 +758,6 @@ public interface StandardPackage extends EPackage {
 	 * @ordered
 	 */
 	int CHARACTER_FEATURE_COUNT = VALUE_TYPE_FEATURE_COUNT + 0;
-
-	/**
-	 * The meta object id for the '{@link kermeta.standard.impl.StringImpl <em>String</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see kermeta.standard.impl.StringImpl
-	 * @see kermeta.standard.impl.StandardPackageImpl#getString()
-	 * @generated
-	 */
-	int STRING = 10;
-
-	/**
-	 * The feature id for the '<em><b>Tag</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int STRING__TAG = VALUE_TYPE__TAG;
-
-	/**
-	 * The feature id for the '<em><b>Owned Tags</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int STRING__OWNED_TAGS = VALUE_TYPE__OWNED_TAGS;
-
-	/**
-	 * The feature id for the '<em><b>Oid</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int STRING__OID = VALUE_TYPE__OID;
-
-	/**
-	 * The feature id for the '<em><b>Internal Containing Resource</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int STRING__INTERNAL_CONTAINING_RESOURCE = VALUE_TYPE__INTERNAL_CONTAINING_RESOURCE;
-
-	/**
-	 * The feature id for the '<em><b>Value</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int STRING__VALUE = VALUE_TYPE__VALUE;
-
-	/**
-	 * The number of structural features of the '<em>String</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int STRING_FEATURE_COUNT = VALUE_TYPE_FEATURE_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link kermeta.standard.impl.CollectionImpl <em>Collection</em>}' class.
@@ -1217,6 +1217,16 @@ public interface StandardPackage extends EPackage {
 	int ITERATOR_FEATURE_COUNT = StructurePackage.OBJECT_FEATURE_COUNT + 2;
 
 	/**
+	 * The meta object id for the '<em>Java String</em>' data type.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see java.lang.String
+	 * @see kermeta.standard.impl.StandardPackageImpl#getJavaString()
+	 * @generated
+	 */
+	int JAVA_STRING = 18;
+
+	/**
 	 * The meta object id for the '<em>Java Boolean</em>' data type.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1224,7 +1234,7 @@ public interface StandardPackage extends EPackage {
 	 * @see kermeta.standard.impl.StandardPackageImpl#getJavaBoolean()
 	 * @generated
 	 */
-	int JAVA_BOOLEAN = 18;
+	int JAVA_BOOLEAN = 19;
 
 	/**
 	 * The meta object id for the '<em>Java Numeric</em>' data type.
@@ -1234,7 +1244,7 @@ public interface StandardPackage extends EPackage {
 	 * @see kermeta.standard.impl.StandardPackageImpl#getJavaNumeric()
 	 * @generated
 	 */
-	int JAVA_NUMERIC = 19;
+	int JAVA_NUMERIC = 20;
 
 	/**
 	 * The meta object id for the '<em>Java Integer</em>' data type.
@@ -1244,7 +1254,7 @@ public interface StandardPackage extends EPackage {
 	 * @see kermeta.standard.impl.StandardPackageImpl#getJavaInteger()
 	 * @generated
 	 */
-	int JAVA_INTEGER = 20;
+	int JAVA_INTEGER = 21;
 
 	/**
 	 * The meta object id for the '<em>Java Real</em>' data type.
@@ -1254,7 +1264,7 @@ public interface StandardPackage extends EPackage {
 	 * @see kermeta.standard.impl.StandardPackageImpl#getJavaReal()
 	 * @generated
 	 */
-	int JAVA_REAL = 21;
+	int JAVA_REAL = 22;
 
 	/**
 	 * The meta object id for the '<em>Java Character</em>' data type.
@@ -1264,17 +1274,7 @@ public interface StandardPackage extends EPackage {
 	 * @see kermeta.standard.impl.StandardPackageImpl#getJavaCharacter()
 	 * @generated
 	 */
-	int JAVA_CHARACTER = 22;
-
-	/**
-	 * The meta object id for the '<em>Java String</em>' data type.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see java.lang.String
-	 * @see kermeta.standard.impl.StandardPackageImpl#getJavaString()
-	 * @generated
-	 */
-	int JAVA_STRING = 23;
+	int JAVA_CHARACTER = 23;
 
 	/**
 	 * The meta object id for the '<em>Unlimited Natural</em>' data type.
@@ -1325,6 +1325,16 @@ public interface StandardPackage extends EPackage {
 	 * @generated
 	 */
 	int KERMETA_PROPERTY_ITERATOR_JAVA_ITERATOR = 28;
+
+	/**
+	 * Returns the meta object for class '{@link kermeta.standard.String <em>String</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>String</em>'.
+	 * @see kermeta.standard.String
+	 * @generated
+	 */
+	EClass getString();
 
 	/**
 	 * Returns the meta object for class '{@link kermeta.standard.UnknownJavaObject <em>Unknown Java Object</em>}'.
@@ -1438,16 +1448,6 @@ public interface StandardPackage extends EPackage {
 	EClass getCharacter();
 
 	/**
-	 * Returns the meta object for class '{@link kermeta.standard.String <em>String</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>String</em>'.
-	 * @see kermeta.standard.String
-	 * @generated
-	 */
-	EClass getString();
-
-	/**
 	 * Returns the meta object for class '{@link kermeta.standard.Collection <em>Collection</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1551,6 +1551,17 @@ public interface StandardPackage extends EPackage {
 	EReference getIterator_KermetaCollection();
 
 	/**
+	 * Returns the meta object for data type '{@link java.lang.String <em>Java String</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for data type '<em>Java String</em>'.
+	 * @see java.lang.String
+	 * @model instanceClass="java.lang.String"
+	 * @generated
+	 */
+	EDataType getJavaString();
+
+	/**
 	 * Returns the meta object for data type '{@link java.lang.Boolean <em>Java Boolean</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1604,17 +1615,6 @@ public interface StandardPackage extends EPackage {
 	 * @generated
 	 */
 	EDataType getJavaCharacter();
-
-	/**
-	 * Returns the meta object for data type '{@link java.lang.String <em>Java String</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for data type '<em>Java String</em>'.
-	 * @see java.lang.String
-	 * @model instanceClass="java.lang.String"
-	 * @generated
-	 */
-	EDataType getJavaString();
 
 	/**
 	 * Returns the meta object for data type '{@link java.lang.Integer <em>Unlimited Natural</em>}'.
@@ -1697,6 +1697,16 @@ public interface StandardPackage extends EPackage {
 	 * @generated
 	 */
 	interface Literals {
+		/**
+		 * The meta object literal for the '{@link kermeta.standard.impl.StringImpl <em>String</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see kermeta.standard.impl.StringImpl
+		 * @see kermeta.standard.impl.StandardPackageImpl#getString()
+		 * @generated
+		 */
+		EClass STRING = eINSTANCE.getString();
+
 		/**
 		 * The meta object literal for the '{@link kermeta.standard.impl.UnknownJavaObjectImpl <em>Unknown Java Object</em>}' class.
 		 * <!-- begin-user-doc -->
@@ -1806,16 +1816,6 @@ public interface StandardPackage extends EPackage {
 		EClass CHARACTER = eINSTANCE.getCharacter();
 
 		/**
-		 * The meta object literal for the '{@link kermeta.standard.impl.StringImpl <em>String</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see kermeta.standard.impl.StringImpl
-		 * @see kermeta.standard.impl.StandardPackageImpl#getString()
-		 * @generated
-		 */
-		EClass STRING = eINSTANCE.getString();
-
-		/**
 		 * The meta object literal for the '{@link kermeta.standard.impl.CollectionImpl <em>Collection</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -1912,6 +1912,16 @@ public interface StandardPackage extends EPackage {
 				.getIterator_KermetaCollection();
 
 		/**
+		 * The meta object literal for the '<em>Java String</em>' data type.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see java.lang.String
+		 * @see kermeta.standard.impl.StandardPackageImpl#getJavaString()
+		 * @generated
+		 */
+		EDataType JAVA_STRING = eINSTANCE.getJavaString();
+
+		/**
 		 * The meta object literal for the '<em>Java Boolean</em>' data type.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -1960,16 +1970,6 @@ public interface StandardPackage extends EPackage {
 		 * @generated
 		 */
 		EDataType JAVA_CHARACTER = eINSTANCE.getJavaCharacter();
-
-		/**
-		 * The meta object literal for the '<em>Java String</em>' data type.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see java.lang.String
-		 * @see kermeta.standard.impl.StandardPackageImpl#getJavaString()
-		 * @generated
-		 */
-		EDataType JAVA_STRING = eINSTANCE.getJavaString();
 
 		/**
 		 * The meta object literal for the '<em>Unlimited Natural</em>' data type.

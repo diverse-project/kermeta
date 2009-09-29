@@ -114,7 +114,7 @@ public abstract class TestImpl extends ObjectImpl implements Test {
 		//PreConditions Checking
 		{
 			if (org.kermeta.compil.runtime.ExecutionContext.getInstance()
-					.mustBeChecked("pre__18989226__paramNotVoid")) {
+					.mustBeChecked("pre__13719073__paramNotVoid")) {
 				java.lang.Boolean result_pre = false;
 
 				result_pre = org.kermeta.compil.runtime.helper.language.ObjectUtil
@@ -132,7 +132,7 @@ public abstract class TestImpl extends ObjectImpl implements Test {
 		//PostConditions Checking
 		{
 			if (org.kermeta.compil.runtime.ExecutionContext.getInstance()
-					.mustBeChecked("post__15719041__logNotVoid")) {
+					.mustBeChecked("post__23972715__logNotVoid")) {
 				java.lang.Boolean result_post = false;
 
 				result_post = org.kermeta.compil.runtime.helper.language.ObjectUtil

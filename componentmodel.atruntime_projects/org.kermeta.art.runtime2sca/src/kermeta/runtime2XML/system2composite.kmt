@@ -1,6 +1,7 @@
 package sca;
 require kermeta
 require "platform:/resource/org.kermeta.art.Runtime2SCA/src/kermeta/runtime2XML/metamodel@runtime.kmt"
+require "platform:/resource/org.kermeta.art.Runtime2SCA/src/kermeta/runtime2XML/stringHelper.kmt"
 using kermeta::standard
 using kermeta::utils
 using art
@@ -14,13 +15,13 @@ _res.append(system.root.name)
 _res.append("\" targetNamespace=\"http://sample\">\n")
 system.root.subComponent.each{ sub |
 _res.append("\t<sca:component constrainingType=\"eu.diva.")
-_res.append(sub.name)
+_res.append(sub.name.cleanName())
 _res.append("\" name=\"")
-_res.append(sub.name)
+_res.append(sub.name.cleanName())
 _res.append("\">\n\t<sca:implementation.java class=\"eu.diva.")
-_res.append(sub.name)
+_res.append(sub.name.cleanName())
 _res.append(".")
-_res.append(sub.name)
+_res.append(sub.name.cleanName())
 _res.append("Impl\"/>\n")
 sub.type.port.select{p | p.role == "server"}.each{p |
 _res.append("\t\t<sca:service name=\"")

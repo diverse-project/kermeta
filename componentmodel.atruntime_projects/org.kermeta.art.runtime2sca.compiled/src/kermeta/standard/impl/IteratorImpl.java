@@ -170,11 +170,11 @@ public class IteratorImpl<G> extends ObjectImpl implements Iterator<G> {
 
 		G result = null;
 
-		java.lang.Boolean idIfCond_289 = false;
-		idIfCond_289 = kermeta.standard.helper.BooleanWrapper.not(this
+		java.lang.Boolean idIfCond_222 = false;
+		idIfCond_222 = kermeta.standard.helper.BooleanWrapper.not(this
 				.hasNext());
 
-		if (idIfCond_289) {
+		if (idIfCond_222) {
 
 			if (true)
 				throw new org.kermeta.compil.runtime.helper.error.KRuntimeError(

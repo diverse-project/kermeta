@@ -35,8 +35,8 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link kermeta.language.structure.impl.ParameterizedTypeImpl#getTypeParamBinding <em>Type Param Binding</em>}</li>
  *   <li>{@link kermeta.language.structure.impl.ParameterizedTypeImpl#getTypeDefinition <em>Type Definition</em>}</li>
+ *   <li>{@link kermeta.language.structure.impl.ParameterizedTypeImpl#getTypeParamBinding <em>Type Param Binding</em>}</li>
  *   <li>{@link kermeta.language.structure.impl.ParameterizedTypeImpl#getVirtualTypeBinding <em>Virtual Type Binding</em>}</li>
  * </ul>
  * </p>
@@ -46,16 +46,6 @@ import org.eclipse.emf.ecore.util.InternalEList;
 public abstract class ParameterizedTypeImpl extends TypeImpl implements
 		ParameterizedType {
 	/**
-	 * The cached value of the '{@link #getTypeParamBinding() <em>Type Param Binding</em>}' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getTypeParamBinding()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<TypeVariableBinding> typeParamBinding;
-
-	/**
 	 * The cached value of the '{@link #getTypeDefinition() <em>Type Definition</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -64,6 +54,16 @@ public abstract class ParameterizedTypeImpl extends TypeImpl implements
 	 * @ordered
 	 */
 	protected GenericTypeDefinition typeDefinition;
+
+	/**
+	 * The cached value of the '{@link #getTypeParamBinding() <em>Type Param Binding</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getTypeParamBinding()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<TypeVariableBinding> typeParamBinding;
 
 	/**
 	 * The cached value of the '{@link #getVirtualTypeBinding() <em>Virtual Type Binding</em>}' containment reference list.
@@ -92,20 +92,6 @@ public abstract class ParameterizedTypeImpl extends TypeImpl implements
 	@Override
 	protected EClass eStaticClass() {
 		return StructurePackage.Literals.PARAMETERIZED_TYPE;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EList<TypeVariableBinding> getTypeParamBinding() {
-		if (typeParamBinding == null) {
-			typeParamBinding = new EObjectContainmentEList.Resolving<TypeVariableBinding>(
-					TypeVariableBinding.class, this,
-					StructurePackage.PARAMETERIZED_TYPE__TYPE_PARAM_BINDING);
-		}
-		return typeParamBinding;
 	}
 
 	/**
@@ -157,6 +143,20 @@ public abstract class ParameterizedTypeImpl extends TypeImpl implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<TypeVariableBinding> getTypeParamBinding() {
+		if (typeParamBinding == null) {
+			typeParamBinding = new EObjectContainmentEList.Resolving<TypeVariableBinding>(
+					TypeVariableBinding.class, this,
+					StructurePackage.PARAMETERIZED_TYPE__TYPE_PARAM_BINDING);
+		}
+		return typeParamBinding;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EList<TypeVariableBinding> getVirtualTypeBinding() {
 		if (virtualTypeBinding == null) {
 			virtualTypeBinding = new EObjectContainmentEList.Resolving<TypeVariableBinding>(
@@ -193,12 +193,12 @@ public abstract class ParameterizedTypeImpl extends TypeImpl implements
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-		case StructurePackage.PARAMETERIZED_TYPE__TYPE_PARAM_BINDING:
-			return getTypeParamBinding();
 		case StructurePackage.PARAMETERIZED_TYPE__TYPE_DEFINITION:
 			if (resolve)
 				return getTypeDefinition();
 			return basicGetTypeDefinition();
+		case StructurePackage.PARAMETERIZED_TYPE__TYPE_PARAM_BINDING:
+			return getTypeParamBinding();
 		case StructurePackage.PARAMETERIZED_TYPE__VIRTUAL_TYPE_BINDING:
 			return getVirtualTypeBinding();
 		}
@@ -214,13 +214,13 @@ public abstract class ParameterizedTypeImpl extends TypeImpl implements
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
+		case StructurePackage.PARAMETERIZED_TYPE__TYPE_DEFINITION:
+			setTypeDefinition((GenericTypeDefinition) newValue);
+			return;
 		case StructurePackage.PARAMETERIZED_TYPE__TYPE_PARAM_BINDING:
 			getTypeParamBinding().clear();
 			getTypeParamBinding().addAll(
 					(Collection<? extends TypeVariableBinding>) newValue);
-			return;
-		case StructurePackage.PARAMETERIZED_TYPE__TYPE_DEFINITION:
-			setTypeDefinition((GenericTypeDefinition) newValue);
 			return;
 		case StructurePackage.PARAMETERIZED_TYPE__VIRTUAL_TYPE_BINDING:
 			getVirtualTypeBinding().clear();
@@ -239,11 +239,11 @@ public abstract class ParameterizedTypeImpl extends TypeImpl implements
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-		case StructurePackage.PARAMETERIZED_TYPE__TYPE_PARAM_BINDING:
-			getTypeParamBinding().clear();
-			return;
 		case StructurePackage.PARAMETERIZED_TYPE__TYPE_DEFINITION:
 			setTypeDefinition((GenericTypeDefinition) null);
+			return;
+		case StructurePackage.PARAMETERIZED_TYPE__TYPE_PARAM_BINDING:
+			getTypeParamBinding().clear();
 			return;
 		case StructurePackage.PARAMETERIZED_TYPE__VIRTUAL_TYPE_BINDING:
 			getVirtualTypeBinding().clear();
@@ -260,10 +260,10 @@ public abstract class ParameterizedTypeImpl extends TypeImpl implements
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-		case StructurePackage.PARAMETERIZED_TYPE__TYPE_PARAM_BINDING:
-			return typeParamBinding != null && !typeParamBinding.isEmpty();
 		case StructurePackage.PARAMETERIZED_TYPE__TYPE_DEFINITION:
 			return typeDefinition != null;
+		case StructurePackage.PARAMETERIZED_TYPE__TYPE_PARAM_BINDING:
+			return typeParamBinding != null && !typeParamBinding.isEmpty();
 		case StructurePackage.PARAMETERIZED_TYPE__VIRTUAL_TYPE_BINDING:
 			return virtualTypeBinding != null && !virtualTypeBinding.isEmpty();
 		}

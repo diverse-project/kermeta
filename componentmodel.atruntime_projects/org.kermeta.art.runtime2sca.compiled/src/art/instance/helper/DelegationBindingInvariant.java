@@ -10,7 +10,7 @@ public class DelegationBindingInvariant {
 	 *
 	 * @generated
 	 */
-	public static java.lang.Boolean checkInvariant_27322271__wellFormedDelegationBinding(
+	public static java.lang.Boolean checkInvariant_14337398__wellFormedDelegationBinding(
 
 	art.instance.DelegationBinding self
 

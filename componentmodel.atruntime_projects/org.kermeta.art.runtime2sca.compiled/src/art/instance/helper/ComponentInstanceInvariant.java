@@ -10,7 +10,7 @@ public class ComponentInstanceInvariant {
 	 *
 	 * @generated
 	 */
-	public static java.lang.Boolean checkInvariant_13695096__mandatoryClientPortBound(
+	public static java.lang.Boolean checkInvariant_3826488__mandatoryClientPortBound(
 
 	art.instance.ComponentInstance self
 

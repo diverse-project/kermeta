@@ -333,22 +333,22 @@ public interface StructurePackage extends EPackage {
 	int PARAMETERIZED_TYPE__TYPE_CONTAINER = TYPE__TYPE_CONTAINER;
 
 	/**
-	 * The feature id for the '<em><b>Type Param Binding</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PARAMETERIZED_TYPE__TYPE_PARAM_BINDING = TYPE_FEATURE_COUNT + 0;
-
-	/**
 	 * The feature id for the '<em><b>Type Definition</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PARAMETERIZED_TYPE__TYPE_DEFINITION = TYPE_FEATURE_COUNT + 1;
+	int PARAMETERIZED_TYPE__TYPE_DEFINITION = TYPE_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Type Param Binding</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PARAMETERIZED_TYPE__TYPE_PARAM_BINDING = TYPE_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Virtual Type Binding</b></em>' containment reference list.
@@ -424,15 +424,6 @@ public interface StructurePackage extends EPackage {
 	int CLASS__TYPE_CONTAINER = PARAMETERIZED_TYPE__TYPE_CONTAINER;
 
 	/**
-	 * The feature id for the '<em><b>Type Param Binding</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CLASS__TYPE_PARAM_BINDING = PARAMETERIZED_TYPE__TYPE_PARAM_BINDING;
-
-	/**
 	 * The feature id for the '<em><b>Type Definition</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -440,6 +431,15 @@ public interface StructurePackage extends EPackage {
 	 * @ordered
 	 */
 	int CLASS__TYPE_DEFINITION = PARAMETERIZED_TYPE__TYPE_DEFINITION;
+
+	/**
+	 * The feature id for the '<em><b>Type Param Binding</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CLASS__TYPE_PARAM_BINDING = PARAMETERIZED_TYPE__TYPE_PARAM_BINDING;
 
 	/**
 	 * The feature id for the '<em><b>Virtual Type Binding</b></em>' containment reference list.
@@ -4416,17 +4416,6 @@ public interface StructurePackage extends EPackage {
 	EClass getParameterizedType();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link kermeta.language.structure.ParameterizedType#getTypeParamBinding <em>Type Param Binding</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Type Param Binding</em>'.
-	 * @see kermeta.language.structure.ParameterizedType#getTypeParamBinding()
-	 * @see #getParameterizedType()
-	 * @generated
-	 */
-	EReference getParameterizedType_TypeParamBinding();
-
-	/**
 	 * Returns the meta object for the reference '{@link kermeta.language.structure.ParameterizedType#getTypeDefinition <em>Type Definition</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4436,6 +4425,17 @@ public interface StructurePackage extends EPackage {
 	 * @generated
 	 */
 	EReference getParameterizedType_TypeDefinition();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link kermeta.language.structure.ParameterizedType#getTypeParamBinding <em>Type Param Binding</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Type Param Binding</em>'.
+	 * @see kermeta.language.structure.ParameterizedType#getTypeParamBinding()
+	 * @see #getParameterizedType()
+	 * @generated
+	 */
+	EReference getParameterizedType_TypeParamBinding();
 
 	/**
 	 * Returns the meta object for the containment reference list '{@link kermeta.language.structure.ParameterizedType#getVirtualTypeBinding <em>Virtual Type Binding</em>}'.
@@ -5606,15 +5606,6 @@ public interface StructurePackage extends EPackage {
 		EClass PARAMETERIZED_TYPE = eINSTANCE.getParameterizedType();
 
 		/**
-		 * The meta object literal for the '<em><b>Type Param Binding</b></em>' containment reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference PARAMETERIZED_TYPE__TYPE_PARAM_BINDING = eINSTANCE
-				.getParameterizedType_TypeParamBinding();
-
-		/**
 		 * The meta object literal for the '<em><b>Type Definition</b></em>' reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -5622,6 +5613,15 @@ public interface StructurePackage extends EPackage {
 		 */
 		EReference PARAMETERIZED_TYPE__TYPE_DEFINITION = eINSTANCE
 				.getParameterizedType_TypeDefinition();
+
+		/**
+		 * The meta object literal for the '<em><b>Type Param Binding</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference PARAMETERIZED_TYPE__TYPE_PARAM_BINDING = eINSTANCE
+				.getParameterizedType_TypeParamBinding();
 
 		/**
 		 * The meta object literal for the '<em><b>Virtual Type Binding</b></em>' containment reference list feature.

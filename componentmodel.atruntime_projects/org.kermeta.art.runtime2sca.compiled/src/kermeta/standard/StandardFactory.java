@@ -29,6 +29,15 @@ public interface StandardFactory extends EFactory {
 			.init();
 
 	/**
+	 * Returns a new object of class '<em>String</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>String</em>'.
+	 * @generated
+	 */
+	String createString();
+
+	/**
 	 * Returns a new object of class '<em>Unknown Java Object</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -90,15 +99,6 @@ public interface StandardFactory extends EFactory {
 	 * @generated
 	 */
 	Character createCharacter();
-
-	/**
-	 * Returns a new object of class '<em>String</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>String</em>'.
-	 * @generated
-	 */
-	String createString();
 
 	/**
 	 * Returns a new object of class '<em>Set</em>'.

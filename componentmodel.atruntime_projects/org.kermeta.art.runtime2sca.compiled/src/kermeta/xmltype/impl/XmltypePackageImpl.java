@@ -167,6 +167,10 @@ public class XmltypePackageImpl extends EPackageImpl implements XmltypePackage {
 				.getEPackage(KermetaPackage.eNS_URI) instanceof KermetaPackageImpl ? EPackage.Registry.INSTANCE
 				.getEPackage(KermetaPackage.eNS_URI)
 				: KermetaPackage.eINSTANCE);
+		StandardPackageImpl theStandardPackage = (StandardPackageImpl) (EPackage.Registry.INSTANCE
+				.getEPackage(StandardPackage.eNS_URI) instanceof StandardPackageImpl ? EPackage.Registry.INSTANCE
+				.getEPackage(StandardPackage.eNS_URI)
+				: StandardPackage.eINSTANCE);
 		LanguagePackageImpl theLanguagePackage = (LanguagePackageImpl) (EPackage.Registry.INSTANCE
 				.getEPackage(LanguagePackage.eNS_URI) instanceof LanguagePackageImpl ? EPackage.Registry.INSTANCE
 				.getEPackage(LanguagePackage.eNS_URI)
@@ -183,10 +187,6 @@ public class XmltypePackageImpl extends EPackageImpl implements XmltypePackage {
 				.getEPackage(InterpreterPackage.eNS_URI) instanceof InterpreterPackageImpl ? EPackage.Registry.INSTANCE
 				.getEPackage(InterpreterPackage.eNS_URI)
 				: InterpreterPackage.eINSTANCE);
-		StandardPackageImpl theStandardPackage = (StandardPackageImpl) (EPackage.Registry.INSTANCE
-				.getEPackage(StandardPackage.eNS_URI) instanceof StandardPackageImpl ? EPackage.Registry.INSTANCE
-				.getEPackage(StandardPackage.eNS_URI)
-				: StandardPackage.eINSTANCE);
 		IoPackageImpl theIoPackage = (IoPackageImpl) (EPackage.Registry.INSTANCE
 				.getEPackage(IoPackage.eNS_URI) instanceof IoPackageImpl ? EPackage.Registry.INSTANCE
 				.getEPackage(IoPackage.eNS_URI)
@@ -211,14 +211,14 @@ public class XmltypePackageImpl extends EPackageImpl implements XmltypePackage {
 				.getEPackage(EcorePackage.eNS_URI) instanceof EcorePackageImpl ? EPackage.Registry.INSTANCE
 				.getEPackage(EcorePackage.eNS_URI)
 				: EcorePackage.eINSTANCE);
-		Runtime2SCAPackageImpl theRuntime2SCAPackage = (Runtime2SCAPackageImpl) (EPackage.Registry.INSTANCE
-				.getEPackage(Runtime2SCAPackage.eNS_URI) instanceof Runtime2SCAPackageImpl ? EPackage.Registry.INSTANCE
-				.getEPackage(Runtime2SCAPackage.eNS_URI)
-				: Runtime2SCAPackage.eINSTANCE);
 		ScaPackageImpl theScaPackage = (ScaPackageImpl) (EPackage.Registry.INSTANCE
 				.getEPackage(ScaPackage.eNS_URI) instanceof ScaPackageImpl ? EPackage.Registry.INSTANCE
 				.getEPackage(ScaPackage.eNS_URI)
 				: ScaPackage.eINSTANCE);
+		Runtime2SCAPackageImpl theRuntime2SCAPackage = (Runtime2SCAPackageImpl) (EPackage.Registry.INSTANCE
+				.getEPackage(Runtime2SCAPackage.eNS_URI) instanceof Runtime2SCAPackageImpl ? EPackage.Registry.INSTANCE
+				.getEPackage(Runtime2SCAPackage.eNS_URI)
+				: Runtime2SCAPackage.eINSTANCE);
 		ArtPackageImpl theArtPackage = (ArtPackageImpl) (EPackage.Registry.INSTANCE
 				.getEPackage(ArtPackage.eNS_URI) instanceof ArtPackageImpl ? EPackage.Registry.INSTANCE
 				.getEPackage(ArtPackage.eNS_URI)
@@ -239,19 +239,19 @@ public class XmltypePackageImpl extends EPackageImpl implements XmltypePackage {
 		// Create package meta-data objects
 		theXmltypePackage.createPackageContents();
 		theKermetaPackage.createPackageContents();
+		theStandardPackage.createPackageContents();
 		theLanguagePackage.createPackageContents();
 		theStructurePackage.createPackageContents();
 		theBehaviorPackage.createPackageContents();
 		theInterpreterPackage.createPackageContents();
-		theStandardPackage.createPackageContents();
 		theIoPackage.createPackageContents();
 		theExceptionsPackage.createPackageContents();
 		thePersistencePackage.createPackageContents();
 		theKunitPackage.createPackageContents();
 		theUtilsPackage.createPackageContents();
 		theEcorePackage.createPackageContents();
-		theRuntime2SCAPackage.createPackageContents();
 		theScaPackage.createPackageContents();
+		theRuntime2SCAPackage.createPackageContents();
 		theArtPackage.createPackageContents();
 		theInstancePackage.createPackageContents();
 		theTypePackage.createPackageContents();
@@ -260,19 +260,19 @@ public class XmltypePackageImpl extends EPackageImpl implements XmltypePackage {
 		// Initialize created meta-data
 		theXmltypePackage.initializePackageContents();
 		theKermetaPackage.initializePackageContents();
+		theStandardPackage.initializePackageContents();
 		theLanguagePackage.initializePackageContents();
 		theStructurePackage.initializePackageContents();
 		theBehaviorPackage.initializePackageContents();
 		theInterpreterPackage.initializePackageContents();
-		theStandardPackage.initializePackageContents();
 		theIoPackage.initializePackageContents();
 		theExceptionsPackage.initializePackageContents();
 		thePersistencePackage.initializePackageContents();
 		theKunitPackage.initializePackageContents();
 		theUtilsPackage.initializePackageContents();
 		theEcorePackage.initializePackageContents();
-		theRuntime2SCAPackage.initializePackageContents();
 		theScaPackage.initializePackageContents();
+		theRuntime2SCAPackage.initializePackageContents();
 		theArtPackage.initializePackageContents();
 		theInstancePackage.initializePackageContents();
 		theTypePackage.initializePackageContents();

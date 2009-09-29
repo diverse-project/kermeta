@@ -157,7 +157,7 @@ public class TestRunnerImpl extends ObjectImpl implements TestRunner {
 		//PreConditions Checking
 		{
 			if (org.kermeta.compil.runtime.ExecutionContext.getInstance()
-					.mustBeChecked("pre__18535908__testNotVoid")) {
+					.mustBeChecked("pre__7521840__testNotVoid")) {
 				java.lang.Boolean result_pre = false;
 
 				result_pre = org.kermeta.compil.runtime.helper.language.ObjectUtil
@@ -182,7 +182,7 @@ public class TestRunnerImpl extends ObjectImpl implements TestRunner {
 		//PostConditions Checking
 		{
 			if (org.kermeta.compil.runtime.ExecutionContext.getInstance()
-					.mustBeChecked("post__13669192__logNotVoid")) {
+					.mustBeChecked("post__20035351__logNotVoid")) {
 				java.lang.Boolean result_post = false;
 
 				result_post = org.kermeta.compil.runtime.helper.language.ObjectUtil
@@ -403,7 +403,7 @@ public class TestRunnerImpl extends ObjectImpl implements TestRunner {
 		//PreConditions Checking
 		{
 			if (org.kermeta.compil.runtime.ExecutionContext.getInstance()
-					.mustBeChecked("pre__24472255__cIsATestCase")) {
+					.mustBeChecked("pre__15426384__cIsATestCase")) {
 				java.lang.Boolean result_pre = false;
 
 				result_pre = org.kermeta.compil.runtime.helper.basetypes.CollectionUtil

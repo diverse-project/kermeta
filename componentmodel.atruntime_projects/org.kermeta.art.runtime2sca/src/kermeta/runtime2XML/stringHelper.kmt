@@ -1,0 +1,24 @@
+/* $Id:$ 
+ * Creation : September 29, 2009
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            dvojtise
+ */
+
+
+package kermeta::standard;
+
+
+require kermeta
+aspect class String
+{
+	/**
+	 * Consider the String as a Name, and clean it if necessary
+	 * ie. returns the same string but without spaces
+	 */
+	operation cleanName() : String is do 
+		
+		result := self.replace(" ","")
+	end
+}

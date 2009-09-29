@@ -96,7 +96,7 @@ public interface Iterator<G> extends kermeta.language.structure.Object {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @model annotation="kermeta documentation='/**\n\t * Returns the next element of the iterator\n\t * Raises IteratorIsOff exception in case the iterator is on the last element \n\t \052/'"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='\nG result = null;\n\n\tjava.lang.Boolean idIfCond_289 = false;\n\tidIfCond_289 = kermeta.standard.helper.BooleanWrapper.not(this.hasNext());\n\n\tif( idIfCond_289 ) {\n\n\t\nif (true)\n\tthrow new org.kermeta.compil.runtime.helper.error.KRuntimeError( ((kermeta.exceptions.IteratorIsOff) org.kermeta.compil.runtime.helper.language.ClassUtil.newObject(kermeta.exceptions.ExceptionsPackage.eINSTANCE.getIteratorIsOff())) );\n\n}\n\n\n\tresult = (G) org.kermeta.compil.runtime.helper.language.ObjectUtil.asTypeOrVoid(org.kermeta.compil.runtime.helper.basetypes.IteratorUtil.next(this), \"G\");\n\nreturn result;\n'"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='\nG result = null;\n\n\tjava.lang.Boolean idIfCond_222 = false;\n\tidIfCond_222 = kermeta.standard.helper.BooleanWrapper.not(this.hasNext());\n\n\tif( idIfCond_222 ) {\n\n\t\nif (true)\n\tthrow new org.kermeta.compil.runtime.helper.error.KRuntimeError( ((kermeta.exceptions.IteratorIsOff) org.kermeta.compil.runtime.helper.language.ClassUtil.newObject(kermeta.exceptions.ExceptionsPackage.eINSTANCE.getIteratorIsOff())) );\n\n}\n\n\n\tresult = (G) org.kermeta.compil.runtime.helper.language.ObjectUtil.asTypeOrVoid(org.kermeta.compil.runtime.helper.basetypes.IteratorUtil.next(this), \"G\");\n\nreturn result;\n'"
 	 * @generated
 	 */
 	G next();
